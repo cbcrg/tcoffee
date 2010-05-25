@@ -1,0 +1,754 @@
+######################################################################
+#                                                                    #
+#               Architecture definition for HMMTOP                   #
+#                                                                    #
+#              Copyright (C) 2001, Gabor E. Tusnady                  #
+#                                                                    #
+######################################################################
+
+
+#Outside loop
+state { oloop.1
+	transition = oloop, oloop.1, otail.16-30
+	emission   = oloop
+	name       = "Outside globular long loop"
+	letter     = "O"
+	ends       = start, end
+}
+
+#outside tails
+state { otail.1
+	transition = otail.1, oloop.1, otail.2, otail.30
+	emission   = otail
+	name       = "Outside tail residue 1"
+	letter     = "o"
+	ends       = end
+}
+state { otail.2
+	transition = otail.2, oloop.1, otail.3, otail.29, otail.30
+	emission   = otail
+	name       = "Outside tail residue 2"
+	letter     = "o"
+	ends       = end
+
+}
+state { otail.3
+	transition = otail.3, oloop.1, otail.4, otail.28, otail.29
+	emission   = otail
+	name       = "Outside tail residue 3"
+	letter     = "o"
+	ends       = end
+}
+state { otail.4
+	transition = otail.4, oloop.1, otail.5, otail.27, otail.28
+	emission   = otail
+	name       = "Outside tail residue 4"
+	letter     = "o"
+	ends       = end
+}
+state { otail.5
+	transition = otail.5, oloop.1, otail.6, otail.26, otail.27
+	emission   = otail
+	name       = "Outside tail residue 5"
+	letter     = "o"
+	ends       = end
+}
+state { otail.6
+	transition = otail.6, oloop.1, otail.7, otail.25, otail.26
+	emission   = otail
+	name       = "Outside tail residue 6"
+	letter     = "o"
+	ends       = end
+}
+state { otail.7
+	transition = otail.7, oloop.1, otail.8, otail.24, otail.25
+	emission   = otail
+	name       = "Outside tail residue 7"
+	letter     = "o"
+	ends       = end
+}
+state { otail.8
+	transition = otail.8, oloop.1, otail.9, otail.23, otail.24
+	emission   = otail
+	name       = "Outside tail residue 8"
+	letter     = "o"
+	ends       = end
+}
+state { otail.9
+	transition = otail.9, oloop.1, otail.10, otail.22, otail.23
+	emission   = otail
+	name       = "Outside tail residue 9"
+	letter     = "o"
+	ends       = end
+}
+state { otail.10
+	transition = otail.10, oloop.1, otail.11, otail.21, otail.22
+	emission   = otail
+	name       = "Outside tail residue 10"
+	letter     = "o"
+	ends       = end
+}
+state { otail.11
+	transition = otail.11, oloop.1, otail.12, otail.20, otail.21
+	emission   = otail
+	name       = "Outside tail residue 11"
+	letter     = "o"
+	ends       = end
+}
+state { otail.12
+	transition = otail.12, oloop.1, otail.13, otail.19, otail.20
+	emission   = otail
+	name       = "Outside tail residue 12"
+	letter     = "o"
+	ends       = end
+}
+state { otail.13
+	transition = otail.13, oloop.1, otail.14, otail.18, otail.19
+	emission   = otail
+	name       = "Outside tail residue 13"
+	letter     = "o"
+	ends       = end
+}
+state { otail.14
+	transition = otail.14, oloop.1, otail.15, otail.17, otail.18
+	emission   = otail
+	name       = "Outside tail residue 14"
+	letter     = "o"
+	ends       = end
+}
+state { otail.15
+	transition = otail.15, oloop.1, otail.16, otail.17
+	emission   = otail
+	name       = "Outside tail residue 15"
+	letter     = "o"
+	ends       = end
+}
+state { otail.16
+	transition = theone, otail.17
+	emission   = otail
+	name       = "Outside tail residue 16"
+	letter     = "o"
+	ends       = start
+}
+state { otail.17
+	transition = theone, otail.18
+	emission   = otail
+	name       = "Outside tail residue 17"
+	letter     = "o"
+	ends       = start
+}
+state { otail.18
+	transition = theone, otail.19
+	emission   = otail
+	name       = "Outside tail residue 18"
+	letter     = "o"
+	ends       = start
+}
+state { otail.19
+	transition = theone, otail.20
+	emission   = otail
+	name       = "Outside tail residue 19"
+	letter     = "o"
+	ends       = start
+}
+state { otail.20
+	transition = theone, otail.21
+	emission   = otail
+	name       = "Outside tail residue 20"
+	letter     = "o"
+	ends       = start
+}
+state { otail.21
+	transition = theone, otail.22
+	emission   = otail
+	name       = "Outside tail residue 21"
+	letter     = "o"
+	ends       = start
+}
+state { otail.22
+	transition = theone, otail.23
+	emission   = otail
+	name       = "Outside tail residue 22"
+	letter     = "o"
+	ends       = start
+}
+state { otail.23
+	transition = theone, otail.24
+	emission   = otail
+	name       = "Outside tail residue 23"
+	letter     = "o"
+	ends       = start
+}
+state { otail.24
+	transition = theone, otail.25
+	emission   = otail
+	name       = "Outside tail residue 24"
+	letter     = "o"
+	ends       = start
+}
+state { otail.25
+	transition = theone, otail.26
+	emission   = otail
+	name       = "Outside tail residue 25"
+	letter     = "o"
+	ends       = start
+}
+state { otail.26
+	transition = theone, otail.27
+	emission   = otail
+	name       = "Outside tail residue 26"
+	letter     = "o"
+	ends       = start
+}
+state { otail.27
+	transition = theone, otail.28
+	emission   = otail
+	name       = "Outside tail residue 27"
+	letter     = "o"
+	ends       = start
+}
+state { otail.28
+	transition = theone, otail.29
+	emission   = otail
+	name       = "Outside tail residue 28"
+	letter     = "o"
+	ends       = start
+}
+state { otail.29
+	transition = theone, otail.30
+	emission   = otail
+	name       = "Outside tail residue 29"
+	letter     = "o"
+	ends       = start
+}
+state { otail.30
+	transition = theone, helixo.1
+	emission   = otail
+	name       = "Outside tail residue 30"
+	letter     = "o"
+	ends       = start
+}
+######################################################################
+
+#Inside loop
+state { iloop.1
+	transition = iloop, iloop.1, itail.16-30
+	emission   = iloop
+	name       = "Inside globular long loop"
+	letter     = "I"
+	ends       = start, end
+}
+#Inside tails
+state { itail.1
+	transition = itail.1, iloop.1, itail.2, itail.30
+	emission   = itail
+	name       = "Inside tail residue 1"
+	letter     = "i"
+	ends       = end
+}
+state { itail.2
+	transition = itail.2, iloop.1, itail.3, itail.29, itail.30
+	emission   = itail
+	name       = "Inside tail residue 2"
+	letter     = "i"
+	ends       = end
+}
+state { itail.3
+	transition = itail.3, iloop.1, itail.4, itail.28, itail.29
+	emission   = itail
+	name       = "Inside tail residue 3"
+	letter     = "i"
+	ends       = end
+}
+state { itail.4
+	transition = itail.4, iloop.1, itail.5, itail.27, itail.28
+	emission   = itail
+	name       = "Inside tail residue 4"
+	letter     = "i"
+	ends       = end
+}
+state { itail.5
+	transition = itail.5, iloop.1, itail.6, itail.26, itail.27
+	emission   = itail
+	name       = "Inside tail residue 5"
+	letter     = "i"
+	ends       = end
+}
+state { itail.6
+	transition = itail.6, iloop.1, itail.7, itail.25, itail.26
+	emission   = itail
+	name       = "Inside tail residue 6"
+	letter     = "i"
+	ends       = end
+}
+state { itail.7
+	transition = itail.7, iloop.1, itail.8, itail.24, itail.25
+	emission   = itail
+	name       = "Inside tail residue 7"
+	letter     = "i"
+	ends       = end
+}
+state { itail.8
+	transition = itail.8, iloop.1, itail.9, itail.23, itail.24
+	emission   = itail
+	name       = "Inside tail residue 8"
+	letter     = "i"
+	ends       = end
+}
+state { itail.9
+	transition = itail.9, iloop.1, itail.10, itail.22, itail.23
+	emission   = itail
+	name       = "Inside tail residue 9"
+	letter     = "i"
+	ends       = end
+}
+state { itail.10
+	transition = itail.10, iloop.1, itail.11, itail.21, itail.22
+	emission   = itail
+	name       = "Inside tail residue 10"
+	letter     = "i"
+	ends       = end
+}
+state { itail.11
+	transition = itail.11, iloop.1, itail.12, itail.20, itail.21
+	emission   = itail
+	name       = "Inside tail residue 11"
+	letter     = "i"
+	ends       = end
+}
+state { itail.12
+	transition = itail.12, iloop.1, itail.13, itail.19, itail.20
+	emission   = itail
+	name       = "Inside tail residue 12"
+	letter     = "i"
+	ends       = end
+}
+state { itail.13
+	transition = itail.13, iloop.1, itail.14, itail.18, itail.19
+	emission   = itail
+	name       = "Inside tail residue 13"
+	letter     = "i"
+	ends       = end
+}
+state { itail.14
+	transition = itail.14, iloop.1, itail.15, itail.17, itail.18
+	emission   = itail
+	name       = "Inside tail residue 14"
+	letter     = "i"
+	ends       = end
+}
+state { itail.15
+	transition = itail.15, iloop.1, itail.16, itail.17
+	emission   = itail
+	name       = "Inside tail residue 15"
+	letter     = "i"
+	ends       = end
+}
+state { itail.16
+	transition = theone, itail.17
+	emission   = itail
+	name       = "Inside tail residue 16"
+	letter     = "i"
+	ends       = start
+}
+state { itail.17
+	transition = theone, itail.18
+	emission   = itail
+	name       = "Inside tail residue 17"
+	letter     = "i"
+	ends       = start
+}
+state { itail.18
+	transition = theone, itail.19
+	emission   = itail
+	name       = "Inside tail residue 18"
+	letter     = "i"
+	ends       = start
+}
+state { itail.19
+	transition = theone, itail.20
+	emission   = itail
+	name       = "Inside tail residue 19"
+	letter     = "i"
+	ends       = start
+}
+state { itail.20
+	transition = theone, itail.21
+	emission   = itail
+	name       = "Inside tail residue 20"
+	letter     = "i"
+	ends       = start
+}
+state { itail.21
+	transition = theone, itail.22
+	emission   = itail
+	name       = "Inside tail residue 21"
+	letter     = "i"
+	ends       = start
+}
+state { itail.22
+	transition = theone, itail.23
+	emission   = itail
+	name       = "Inside tail residue 22"
+	letter     = "i"
+	ends       = start
+}
+state { itail.23
+	transition = theone, itail.24
+	emission   = itail
+	name       = "Inside tail residue 23"
+	letter     = "i"
+	ends       = start
+}
+state { itail.24
+	transition = theone, itail.25
+	emission   = itail
+	name       = "Inside tail residue 24"
+	letter     = "i"
+	ends       = start
+}
+state { itail.25
+	transition = theone, itail.26
+	emission   = itail
+	name       = "Inside tail residue 25"
+	letter     = "i"
+	ends       = start
+}
+state { itail.26
+	transition = theone, itail.27
+	emission   = itail
+	name       = "Inside tail residue 26"
+	letter     = "i"
+	ends       = start
+}
+state { itail.27
+	transition = theone, itail.28
+	emission   = itail
+	name       = "Inside tail residue 27"
+	letter     = "i"
+	ends       = start
+}
+state { itail.28
+	transition = theone, itail.29
+	emission   = itail
+	name       = "Inside tail residue 28"
+	letter     = "i"
+	ends       = start
+}
+state { itail.29
+	transition = theone, itail.30
+	emission   = itail
+	name       = "Inside tail residue 29"
+	letter     = "i"
+	ends       = start
+}
+state { itail.30
+	transition = theone, helixi.1
+	emission   = itail
+	name       = "Inside tail residue 30"
+	letter     = "i"
+	ends       = start
+}
+######################################################################
+#helixi
+state { helixi.1
+	transition = theone, helixi.2
+	emission   = helix
+	name       = "Helix residue (in->out) 1"
+	letter     = "H"
+}
+state { helixi.2
+	transition = theone, helixi.3
+	emission   = helix
+	name       = "Helix residue (in->out) 2"
+	letter     = "H"
+}
+state { helixi.3
+	transition = theone, helixi.4
+	emission   = helix
+	name       = "Helix residue (in->out) 3"
+	letter     = "H"
+}
+state { helixi.4
+	transition = theone, helixi.5
+	emission   = helix
+	name       = "Helix residue (in->out) 4"
+	letter     = "H"
+}
+state { helixi.5
+	transition = theone, helixi.6
+	emission   = helix
+	name       = "Helix residue (in->out) 5"
+	letter     = "H"
+}
+state { helixi.6
+	transition = theone, helixi.7
+	emission   = helix
+	name       = "Helix residue (in->out) 6"
+	letter     = "H"
+}
+state { helixi.7
+	transition = theone, helixi.8
+	emission   = helix
+	name       = "Helix residue (in->out) 7"
+	letter     = "H"
+}
+state { helixi.8
+	transition = theone, helixi.9
+	emission   = helix
+	name       = "Helix residue (in->out) 8"
+	letter     = "H"
+}
+state { helixi.9
+	transition = theone, helixi.10
+	emission   = helix
+	name       = "Helix residue (in->out) 9"
+	letter     = "H"
+}
+state { helixi.10
+	transition = theone, helixi.11
+	emission   = helix
+	name       = "Helix residue (in->out) 10"
+	letter     = "H"
+}
+state { helixi.11
+	transition = theone, helixi.12
+	emission   = helix
+	name       = "Helix residue (in->out) 11"
+	letter     = "H"
+}
+state { helixi.12
+	transition = theone, helixi.13
+	emission   = helix
+	name       = "Helix residue (in->out) 12"
+	letter     = "H"
+}
+state { helixi.13
+	transition = theone, helixi.14
+	emission   = helix
+	name       = "Helix residue (in->out) 1"
+	letter     = "H"
+}
+state { helixi.14
+	transition = theone, helixi.15
+	emission   = helix
+	name       = "Helix residue (in->out) 14"
+	letter     = "H"
+}
+state { helixi.15
+	transition = theone, helixi.16
+	emission   = helix
+	name       = "Helix residue (in->out) 15"
+	letter     = "H"
+}
+state { helixi.16
+	transition = theone, helixi.17
+	emission   = helix
+	name       = "Helix residue (in->out) 16"
+	letter     = "H"
+}
+state { helixi.17
+	transition = helix17, otail.1, helixi.18 
+	emission   = helix
+	name       = "Helix residue (in->out) 17"
+	letter     = "H"
+}
+state { helixi.18
+	transition = helix18, otail.1, helixi.19 
+	emission   = helix
+	name       = "Helix residue (in->out) 18"
+	letter     = "H"
+}
+state { helixi.19
+	transition = helix19, otail.1, helixi.20
+	emission   = helix
+	name       = "Helix residue (in->out) 19"
+	letter     = "H"
+}
+state { helixi.20
+	transition = helix20, otail.1, helixi.21 
+	emission   = helix
+	name       = "Helix residue (in->out) 20"
+	letter     = "H"
+}
+state { helixi.21
+	transition = helix21, otail.1, helixi.22
+	emission   = helix
+	name       = "Helix residue (in->out) 21"
+	letter     = "H"
+}
+state { helixi.22
+	transition = helix22, otail.1, helixi.23
+	emission   = helix
+	name       = "Helix residue (in->out) 22"
+	letter     = "H"
+}
+state { helixi.23
+	transition = helix23, otail.1, helixi.24
+	emission   = helix
+	name       = "Helix residue (in->out) 23"
+	letter     = "H"
+}
+state { helixi.24
+	transition = helix24, otail.1, helixi.25
+	emission   = helix
+	name       = "Helix residue (in->out) 24"
+	letter     = "H"
+}
+state { helixi.25
+	transition = theone, otail.1
+	emission   = helix
+	name       = "Helix residue (in->out) 25"
+	letter     = "H"
+}
+#helixo
+state { helixo.1
+	transition = theone, helixo.2
+	emission   = helix
+	name       = "Helix residue (out->in) 1"
+	letter     = "H"
+}
+state { helixo.2
+	transition = theone, helixo.3
+	emission   = helix
+	name       = "Helix residue (out->in) 2"
+	letter     = "H"
+}
+state { helixo.3
+	transition = theone, helixo.4
+	emission   = helix
+	name       = "Helix residue (out->in) 3"
+	letter     = "H"
+}
+state { helixo.4
+	transition = theone, helixo.5
+	emission   = helix
+	name       = "Helix residue (out->in) 4"
+	letter     = "H"
+}
+state { helixo.5
+	transition = theone, helixo.6
+	emission   = helix
+	name       = "Helix residue (out->in) 5"
+	letter     = "H"
+}
+state { helixo.6
+	transition = theone, helixo.7
+	emission   = helix
+	name       = "Helix residue (out->in) 6"
+	letter     = "H"
+}
+state { helixo.7
+	transition = theone, helixo.8
+	emission   = helix
+	name       = "Helix residue (out->in) 7"
+	letter     = "H"
+}
+state { helixo.8
+	transition = theone, helixo.9
+	emission   = helix
+	name       = "Helix residue (out->in) 8"
+	letter     = "H"
+}
+state { helixo.9
+	transition = theone, helixo.10
+	emission   = helix
+	name       = "Helix residue (out->in) 9"
+	letter     = "H"
+}
+state { helixo.10
+	transition = theone, helixo.11
+	emission   = helix
+	name       = "Helix residue (out->in) 10"
+	letter     = "H"
+}
+state { helixo.11
+	transition = theone, helixo.12
+	emission   = helix
+	name       = "Helix residue (out->in) 11"
+	letter     = "H"
+}
+state { helixo.12
+	transition = theone, helixo.13
+	emission   = helix
+	name       = "Helix residue (out->in) 12"
+	letter     = "H"
+}
+state { helixo.13
+	transition = theone, helixo.14
+	emission   = helix
+	name       = "Helix residue (out->in) 1"
+	letter     = "H"
+}
+state { helixo.14
+	transition = theone, helixo.15
+	emission   = helix
+	name       = "Helix residue (out->in) 14"
+	letter     = "H"
+}
+state { helixo.15
+	transition = theone, helixo.16
+	emission   = helix
+	name       = "Helix residue (out->in) 15"
+	letter     = "H"
+}
+state { helixo.16
+	transition = theone, helixo.17
+	emission   = helix
+	name       = "Helix residue (out->in) 16"
+	letter     = "H"
+}
+state { helixo.17
+	transition = helix17, itail.1, helixo.18 
+	emission   = helix
+	name       = "Helix residue (out->in) 17"
+	letter     = "H"
+}
+state { helixo.18
+	transition = helix18, itail.1, helixo.19 
+	emission   = helix
+	name       = "Helix residue (out->in) 18"
+	letter     = "H"
+}
+state { helixo.19
+	transition = helix19, itail.1, helixo.20
+	emission   = helix
+	name       = "Helix residue (out->in) 19"
+	letter     = "H"
+}
+state { helixo.20
+	transition = helix20, itail.1, helixo.21 
+	emission   = helix
+	name       = "Helix residue (out->in) 20"
+	letter     = "H"
+}
+state { helixo.21
+	transition = helix21, itail.1, helixo.22
+	emission   = helix
+	name       = "Helix residue (out->in) 21"
+	letter     = "H"
+}
+state { helixo.22
+	transition = helix22, itail.1, helixo.23
+	emission   = helix
+	name       = "Helix residue (out->in) 22"
+	letter     = "H"
+}
+state { helixo.23
+	transition = helix23, itail.1, helixo.24
+	emission   = helix
+	name       = "Helix residue (out->in) 23"
+	letter     = "H"
+}
+state { helixo.24
+	transition = helix24, itail.1, helixo.25
+	emission   = helix
+	name       = "Helix residue (out->in) 24"
+	letter     = "H"
+}
+state { helixo.25
+	transition = theone, itail.1
+	emission   = helix
+	name       = "Helix residue (out->in) 25"
+	letter     = "H"
+}
