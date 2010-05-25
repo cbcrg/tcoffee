@@ -1,0 +1,89 @@
+  ACADEMIC LICENCE AGREEMENT
+
+  © $INSTITUTE and $AUTHOR ( $DATE). 
+  All rights reserved.
+
+  This documents describes the licensing 
+  conditions of the $PROGRAM software (Otherwise 
+  indicated as the software in the rest of this 
+  document) from the Centre National de la Recherche 
+  Scientifique (Otherwise indicated as the OWNER
+  in the rest of this document).	
+
+  IMPORTANT NOTICE: This software and its associated 
+  documentation are the copyright works of the OWNER, 
+  which has responsibility for the OWNER intellectual 
+  property. Use of the software and documentation is 
+  governed by the terms of the Academic Licence Agreement 
+  set out below. You will not be able to install the software 
+  unless you first agree to those terms. If you accept 
+  the terms of the Licence Agreement, proceed with the 
+  installation of the software, otherwise abort it. 
+
+  The software and its associated documentation are 
+  made available on the following terms, free of charge 
+  to academic end-users and solely for the purposes of 
+  their own academic research. Commercial or other 
+  non-academic use is permitted on the terms of a Commercial 
+  Licence Agreement and subject to payment of  agreed charges. 
+  Commercial or other non-academic users are not 
+  permitted to download from this site, and should 
+  contact the author for details of access conditions.
+
+  The OWNER grants you a non-exclusive, non-transferable 
+  licence to use the software and its associated documentation 
+  for academic research purposes. You will not use them 
+  for any other purpose.
+
+  You will not sub-license, loan, hire, transfer or 
+  otherwise supply the software or its associated documentation 
+  or the access password to any other person.
+
+  You will not copy or post the software or its associated 
+  documentation to any other computer, computer network or 
+  server or broadcast it in any media. You will not copy the
+  software or its associated documentation except to the extent 
+  required for lawful use or back-up purposes.
+
+  You will not adapt, modify, merge, translate, reverse engineer, 
+  decompile or dissassemble the software, except to the extent 
+  permitted by applicable law.
+
+  You will hold the contents of the software and its associated 
+  documentation in confidence and not disclose any part of it to 
+  any other person without the prior written permission
+  of the OWNER.
+
+  In any reports or publications you make or contribute to based 
+  on your use of the software, you will acknowledge the contribution 
+  of the OWNER.
+
+  The software, its associated documentation and the copyright in them 
+  belong exclusively to the OWNER and all rights in them are reserved to 
+  the OWNER except as expressly provided in this Licence Agreement.
+
+  The software its associated documentation are supplied "AS IS" 
+  for experimental purposes and at your own risk. The OWNER makes no 
+  warranty and gives no undertaking as to the quality, merchantability 
+  or fitness for purpose of the software, its correspondence with any 
+  description, the OWNER's title to the software, that the software its 
+  associated documentation is free from error or defect, or has been 
+  developed with reasonable care or skill, or that its use will not 
+  infringe any copyright, patent, trade mark or other third party 
+  rights, and all terms implied by law are excluded to the fullest 
+  extent permitted by law.
+
+  The OWNER will have no liability to you, whether in contract, tort 
+  or otherwise, in relation to the use of the software or its associated 
+  documentation, for any loss or damage whether direct, indirect, special 
+  or consequential, except in the case of death or personal injury caused 
+  by the OWNER negligence, and all such liability is excluded to the greatest 
+  extent permitted by applicable law.
+
+  The licence granted under this Licence Agreement will terminate if you 
+  destroy the software. The OWNER reserves the right to terminate the licence 
+  in the event of a breach by you of any of the terms of this Licence Agreement. 
+  This Licence Agreement is governed by French law and subject to the jurisdiction 
+  of the French courts. 
+
+                                       

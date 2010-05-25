@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+use FileHandle;
+
+open (F, "$ARGV[0]");
+open (G, "$ARGV[1]");
+while (<F>){push (@l1, $_);}
+while (<G>){push (@l2, $_);}
+
+for ( $a=0; $a<=$#l1; $a++){print "$l1[$a]$l2[$a]";}
+	

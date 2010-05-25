@@ -1,0 +1,58 @@
+#type monitor
+#1 - Time: 66 sec.
+#2 - Number of typed character (correct or incorrect) : 101
+#3 - Number of mistyped target character              : 10
+#4 - Number of target character typed without error   : 84
+#5 - Number of target character typed w or wo error   : 91
+ERR -- space  1
+ERR -- c space 1
+ERR -- space { 1
+ERR -- ! e 1
+ERR -- ! space 1
+ERR -- i u 1
+ERR -- ! 2
+ERR -- i 1
+ERR -- ( / 1
+ERR -- (  1
+ERR -- space " 1
+ERR -- space 3
+ERR -- c 1
+ERR -- & 1
+ERR -- & % 1
+ERR -- ( 2
+PAS-- / 7
+PAS-- a 1
+PAS-- = 2
+PAS-- d 2
+PAS-- 2 1
+PAS-- y 4
+PAS-- 1 2
+PAS-- " 2
+PAS-- u 1
+PAS-- k 1
+PAS-- < 1
+PAS-- t 7
+PAS-- newline 5
+PAS-- e 6
+PAS-- > 2
+PAS-- v 3
+PAS-- s 4
+PAS-- b 2
+PAS-- G 1
+PAS-- $ 1
+PAS-- r 3
+PAS-- V 1
+PAS-- - 1
+PAS-- ; 1
+PAS-- f 1
+PAS-- i 1
+PAS-- A 1
+PAS-- n 2
+PAS-- { 1
+PAS-- # 2
+PAS-- m 1
+PAS-- space 10
+PAS-- l 1
+PAS-- p 1
+PAS-- ) 1
+PAS-- R 1

@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>Format Documentation</title>
+<style type="text/css">
+hh1 { border-bottom:4px double blue; padding-bottom:4px; margin:0px; }
+hh2 { border-top:1px solid blue; margin:0px; }
+p.info { border:1px solid grey; background-color:#FFFFE0; padding:4px; margin:0px; }
+body { font-family:Tahoma,Helvetica,sans-serif; }
+SPAN { font-family: courier new, courier-new, courier; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value1 {background: #FF0000}
+SPAN.value2 {background: #FF00FF}
+SPAN.value3 {background: #00FF00}
+SPAN.value4 {background: #FFFF00}
+SPAN.value5 {background: #7B7D7B}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style>
+</head>
+<body bgcolor="#FFFFFF" text="#000000">
+
+<table  width=100%>
+
+<TR><TD bgcolor=#3399FF><h2><a name="fasta"><font size="5" face="Arial" color="#FFFFE0">Fasta aln format</a></font></h2>
+
+<TR><TD bgcolor=#E1F5FF><font size="2" face="Arial">
+    Sequences in fasta_aln formatted files are preceded by a line
+    starting with &gt;.<br>
+    The first word on this line is the name of the sequence. The
+    rest of the line is a description of the sequence with the gap symbols (dashes,underscores or periods).</font>
+<p class="info"><code>
+&gt;1aboA<br>
+-NLFV-ALYDFVASGDNTLSITKGEKLRV-------LGYNHNG-------EWCEA--QTK<br>
+NGQGWVPSNYITPVN------<br>
+&gt;1ycsB<br>
+KGVIY-ALWDYEPQNDDELPMKEGDCMTI-------IHREDEDEI-----EWWWA--RLN<br>
+DKEGYVPRNLLGLYP------<br>
+&gt;1pht<br>
+-GYQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEIGWLNGYNETT<br>
+GERGDFPGTYVEYIGRKKISP<br>
+&gt;1vie<br>
+---------DRVRKKSG--AAWQGQIVGW---------YCTNLTP----EGYAVESEAHP<br>
+GSVQIYPVAALERIN------<br>
+&gt;1ihvA<br>
+------NFRVYYRDSRD--PVWKGPAKLL---------WKGEG-------AVVIQ---DN<br>
+SDIKVVPRRKAKIIRD-----<br>
+</code>
+</p>
+
+
+<TR><TD bgcolor=#3399FF><h2><a name="clustal"><font size="5" face="Arial" color="#FFFFE0">Clustal format</a></font></h2>
+<TR><TD bgcolor=#E1F5FF><font size="2" face="courier">
+Clustal format files contain the word clustal at the beginning:
+</font>
+<p class="info"><code>
+CLUSTAL W (1.82) multiple sequence alignment<br>
+<br>
+1aboA  &nbsp;&nbsp;-NLFV-ALYDFVASGDNTLSITKGEKLRV-------LGYNHNG-------EWCEA--QTK<br>
+1ycsB   &nbsp;&nbsp;KGVIY-ALWDYEPQNDDELPMKEGDCMTI-------IHREDEDEI-----EWWWA--RLN<br>
+1pht &nbsp;&nbsp;&nbsp;-GYQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEIGWLNGYNETT<br>
+1vie &nbsp;&nbsp;&nbsp;---------DRVRKKSG--AAWQGQIVGW---------YCTNLTP----EGYAVESEAHP<br>
+1ihvA  &nbsp;&nbsp;------NFRVYYRDSRD--PVWKGPAKLL---------WKGEG-------AVVIQ---DN<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+<br>
+1aboA&nbsp;&nbsp;NGQGWVPSNYITPVN------<br>
+1ycsB&nbsp;&nbsp;DKEGYVPRNLLGLYP------<br>
+1pht&nbsp;&nbsp;&nbsp;GERGDFPGTYVEYIGRKKISP<br>
+1vie&nbsp;&nbsp;&nbsp;GSVQIYPVAALERIN------<br>
+1ihvA&nbsp;&nbsp;SDIKVVPRRKAKIIRD-----<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp*<br>
+</code></p>
+
+<TR><TD bgcolor=#3399FF><h2><a name="msf"><font size="5" face="Arial" color="#FFFFE0">Msf format</a></font></h2>
+
+<TR><TD bgcolor=#E1F5FF><font size="2" face="Arial">
+    msf formatted multiple sequence files are most often
+    created when using programs of the GCG suite. msf files
+    include the sequence name and the sequence itself, which is
+    usually aligned with other sequences in the file. You can
+    specify a single sequence or many sequences within an msf
+    file.<BR>An example of part of an msf file, created using the GCG
+    multiple sequence alignment program:
+</font>
+<p class="info"><code>
+    !!AA_MULTIPLE_ALIGNMENT 1.0<br>
+    PileUp of: @hsp70.list<br>
+    <br>
+    Symbol comparison table: GenRunData:blosum62.cmp CompCheck:
+    6430<br>
+    <br>
+    GapWeight: 8<br>
+    GapLengthWeight: 2<br>
+
+    <br>
+    hsp70.msf MSF: 743 Type: P October 6, 1998 18:23 Check: 7784
+    ..<br>
+    <br>
+    Name: S11448 Len: 743 Check: 3635 Weight: 1.00<br>
+    Name: S06443 Len: 743 Check: 5861 Weight: 1.00<br>
+    Name: S29261 Len: 743 Check: 7748 Weight: 1.00<br>
+    <br>
+
+    //<br>
+    <br>
+    1 50<br>
+    S11448 ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~MTFD GAIGIDLGTT YSCVGVWQNE<br>
+    S06443 ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~MTFD GAIGIDLGTT YSCVGVWQNE<br>
+    S29261 ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~MG KIIGIDLGTT NSCVAIMDGT<br>
+</p>
+</code>
+
+<TR><TD bgcolor=#E1F5FF><font size="2" face="Arial">
+    Some of the hallmarks of a msf formatted sequence are the
+    same as a single sequence gcg format file:
+    <ul>
+        <li>Begins with the line (all uppercase)
+            !!NA_MULTIPLE_ALIGNMENT 1.0 for nucleic acid
+            sequences or !!AA_MULTIPLE_ALIGNMENT 1.0 for amino
+            acid sequences. Do not edit or delete the file type
+            if its present.(optional)</li>
+        <li>A description line which contains informative text
+            describing what is in the file. You can add this
+            information to the top of the MSF file using a text
+            editor.(optional)</li>
+        <li>A dividing line which contains the number of bases or
+            residues in the sequence, when the file was created,
+            and importantly, two dots (..) which act as a divider
+            between the descriptive information and the following
+            sequence information.(required)<br>
+            </li>
+
+    </ul>
+    msf files contain some other information as well:
+    <ul>
+        <li>Name/Weight: The name of each sequence included in
+            the alignment, as well as its length and checksum
+            (both non-editable) and weight (editable).(required) </li>
+        <li>Separating Line. Must include two slashes (//) to
+            divide the name/weight information from the sequence
+            alignment.(required) </li>
+        <li>Multiple Sequence Alignment. Each sequence named in
+            the above Name/Weight lines is included. The
+            alignment allows you to view the relationship among
+            sequences.<br>
+            </li>
+            </ul>
+
+    &nbsp;
+</font>
+</td></tr></TABLE>
+
+
+</TABLE>
+</body>
+</html>

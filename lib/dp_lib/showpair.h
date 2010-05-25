@@ -1,0 +1,1 @@
+int ** show_pair(int istart, int iend, int jstart, int jend, int *seqlen_array, char **seq_array, int dna_ktup, int dna_window, int dna_wind_gap, int dna_signif,int prot_ktup, int prot_window,int prot_wind_gap,int prot_signif, int nseqs,int dnaflag, int max_aa, int max_aln_length  );

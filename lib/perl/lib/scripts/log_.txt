@@ -1,0 +1,101 @@
+PASS -- #
+FAIL -- ! e
+FAIL -- ! space
+PASS -- !
+PASS -- space
+PASS -- /
+PASS -- u
+PASS -- s
+PASS -- r
+PASS -- /
+PASS -- b
+FAIL -- i u
+PASS -- i
+PASS -- n
+PASS -- /
+PASS -- e
+PASS -- n
+PASS -- v
+PASS -- space
+PASS -- p
+PASS -- e
+PASS -- r
+PASS -- l
+PASS -- newline
+PASS -- s
+PASS -- y
+PASS -- s
+PASS -- t
+PASS -- e
+PASS -- m
+PASS -- space
+PASS -- "
+PASS -- s
+PASS -- t
+PASS -- t
+PASS -- y
+FAIL -- space "
+FAIL -- space 
+PASS -- space
+FAIL -- c space
+PASS -- c
+PASS -- b
+PASS -- r
+PASS -- e
+PASS -- a
+PASS -- k
+PASS -- space
+PASS -- <
+PASS -- /
+PASS -- d
+PASS -- e
+PASS -- v
+PASS -- /
+PASS -- t
+PASS -- t
+PASS -- y
+PASS -- space
+PASS -- >
+PASS -- /
+PASS -- d
+PASS -- e
+PASS -- v
+PASS -- /
+PASS -- t
+PASS -- t
+PASS -- y
+PASS -- space
+PASS -- 2
+PASS -- >
+FAIL -- & %
+PASS -- &
+PASS -- 1
+PASS -- "
+PASS -- ;
+PASS -- newline
+PASS -- newline
+PASS -- i
+PASS -- f
+PASS -- space
+FAIL -- ( /
+FAIL -- ( 
+PASS -- (
+PASS -- $
+PASS -- #
+PASS -- A
+PASS -- R
+PASS -- G
+PASS -- V
+PASS -- =
+PASS -- =
+PASS -- -
+PASS -- 1
+PASS -- )
+PASS -- newline
+PASS -- space
+FAIL -- space {
+PASS -- space
+PASS -- {
+PASS -- newline
+PASS -- space
+PASS -- space

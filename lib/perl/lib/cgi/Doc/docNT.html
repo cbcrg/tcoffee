@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <title>Nucleotide Format Documentation</title>
+    <style type="text/css">
+        p.info { border:1px solid grey; background-color:#FFFFE0; padding:4px; margin:0px; }
+        body { font-family:Tahoma,Helvetica,sans-serif; }
+        .blabla { font-size:small; font-family:arial; }
+        h2 { font-size:x-large; font-family:arial; color:#FFFFE0}
+    </style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+    <table width="100%" summary="formats">
+        <tr><td bgcolor="#3399FF"><h2><a name="fasta">FASTA format</a></h2></td></tr>
+        <tr><td bgcolor="#E1F5FF"><span class="blabla">
+    Sequences in FASTA formatted files are preceded by a line starting with &gt;.<br>
+    The first word on this line is the name of the sequence. The rest of the line is a description of the sequence.<br>
+    The first character must be a digit or a letter. The remaining lines contain the sequence itself.<br>
+    Blank lines in a FASTA file are ignored, and so are spaces or other gap symbols (dashes, underscores, periods) in a sequence.</span>
+<p class="info"><code>
+&gt;D11467.1-6989_6916<br>
+GCAUCCAUGGCUGAAUGGUUAAAGCGCCCAACUCAUAAUUGGCGAACUCGCGGGUUCAAU<br>
+UCCUGCUGGAUGCA<br>
+&gt;AC092686.3-29631_29561<br>
+GCAUUGGUGGUUCAGUGGUAGAAUUCUCGCCUGCCACGCGGGAGGCCCGGGUUCGAUUCC<br>
+CGGCCAAUGCA<br>
+&gt;X53649.1-160_231<br>
+UGGGCUAUGGUGUAAUUGGCAGCACGACUGAUUCUGGUUCAGUUAGUCUAGGUUCGAGUC<br>
+CUGGUAGCCCAG<br>
+&gt;AE008874.1-15640_15730<br>
+GAAGAUCGUCGUCUCCGGUGAGGCGGCUGGACUUCAAAUCCAGUUGGGGCCGCCAGCGGU<br>
+CCCGGGCAGGUUCGACUCCUGUGAUCUUCCG<br>
+&gt;X02167.1-268_340<br>
+CUAAAUAUAUUUCAAUGGUUAGCAAAAUACGCUUGUGGUGCGUUAAAUCUAAGUUCGAUU<br>
+CUUAGUAUUUACC<br>
+</code>
+</p>
+        </td></tr>
+    </table>
+
+</body>
+</html>

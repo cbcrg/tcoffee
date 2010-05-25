@@ -1,0 +1,4 @@
+t_coffee -infile sproteases_small.aln -lib  charge_relay_lib.tc_lib  -score -output html
+t_coffee -profile=sample_aln1.fasta,sample_aln2.aln -outfile tacos	
+t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=profile_aln
+  t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair -outfile=profile_aln

@@ -1,0 +1,18 @@
+#! /usr/bin/env perl
+
+
+
+
+@file_list=@ARGV;
+@code=@ARGV;
+
+$n_code=$#file_list+1;
+$date{'oregon.txt'}=1859;
+$date{'missouri.txt'}=1821;
+$date{'alabama.txt'}=1819;
+$date{'northcarolina.txt'}=1783;
+
+while ($#file_list>=0)
+  {
+    $i=$#file_list;
+    $f=pop (@file_list);

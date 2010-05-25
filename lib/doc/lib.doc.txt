@@ -1,0 +1,16 @@
+Documentation for routine libs used by most programs (13/09)
+
+22/02/01: fixed html code in print_html/io_func.c
+06/10/00: Fixed the bug that prevented piping files
+	  Into the programs. In 		       [FIXED] (vfopen/util.c)
+06/10/00: UMR generated in A->len                      [FIXED] (realloc_alignment2/util_declare.c)
+06/10/00: freeing unallocated mem in CL->residue_index [FIXED] (free_constraint_list/util_declare.c)	
+06/10/00:               number display [n+1]...[n]     [FIXED] (output_Alignment_without_header/reformat.c)
+							       (output_color_format/io_func.c)
+							       (output_reliability_format/io_func.c)
+06/10/00: lecture du format SwissProt                  [FIXED] (reformat.c/is_swissprot_seq)
+06/10/00: probleme dans le calcul de la consistance    [FIXED] (evaluate.c/fast_coffee_evaluate_output)
+	  (Liisa Holm).
+
+
+

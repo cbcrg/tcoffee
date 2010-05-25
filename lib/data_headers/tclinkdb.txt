@@ -1,0 +1,329 @@
+PG t_coffee 4_TCOFFEE		TCOFFEE
+PG t_coffee type		sequence_multiple_aligner		
+PG t_coffee ADDRESS		http://www.tcoffee.org
+PG t_coffee language		C
+PG t_coffee language2		C
+PG t_coffee source		http://www.tcoffee.org/Packages/T-COFFEE_distribution.tar.gz
+PG t_coffee update_action	always
+PG t_coffee mode		tcoffee,mcoffee,rcoffee,expresso,3dcoffee
+
+     
+PG clustalw2 4_TCOFFEE		CLUSTALW2
+PG clustalw2 type		sequence_multiple_aligner		
+PG clustalw2 ADDRESS		http://www.clustal.org
+PG clustalw2 language		C++
+PG clustalw2 language2		CXX
+PG clustalw2 source		http://www.clustal.org/download/2.0.10/clustalw-2.0.10-src.tar.gz
+PG clustalw2 mode		mcoffee,rcoffee
+
+PG clustalw 4_TCOFFEE		CLUSTALW
+PG clustalw type		sequence_multiple_aligner		
+PG clustalw ADDRESS		http://www.clustal.org
+PG clustalw language		C
+PG clustalw language2		C
+PG clustalw source		http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/ClustalW/clustalw1.82.UNIX.tar.gz
+PG clustalw mode		mcoffee,rcoffee
+
+PG dialign-t 4_TCOFFEE		DIALIGNT		
+PG dialign-t type		sequence_multiple_aligner		
+PG dialign-t ADDRESS		http://dialign-tx.gobics.de/
+PG dialign-t DIR		/usr/share/dialign-tx/
+PG dialign-t language		C
+PG dialign-t language2		C
+PG dialign-t source		http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz	
+PG dialign-t mode		mcoffee
+PG dialign-t binary		dialign-t
+	 
+PG dialign-tx 4_TCOFFEE		DIALIGNTX		
+PG dialign-tx type		sequence_multiple_aligner		
+PG dialign-tx ADDRESS		http://dialign-tx.gobics.de/
+PG dialign-tx DIR		/usr/share/dialign-tx/
+PG dialign-tx language		C
+PG dialign-tx language2		C
+PG dialign-tx source		http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz	
+PG dialign-tx mode		mcoffee
+PG dialign-tx binary		dialign-tx
+
+PG poa 4_TCOFFEE		POA	
+PG poa type			sequence_multiple_aligner		
+PG poa ADDRESS			http://www.bioinformatics.ucla.edu/poa/	
+PG poa language			C
+PG poa language2		C
+PG poa source			http://downloads.sourceforge.net/poamsa/poaV2.tar.gz	
+PG poa DIR			/usr/share/
+PG poa FILE1			blosum80.mat
+PG poa mode			mcoffee
+PG poa binary			poa
+
+PG probcons 4_TCOFFEE		PROBCONS		
+PG probcons type		sequence_multiple_aligner		
+PG probcons ADDRESS		http://probcons.stanford.edu/
+PG probcons language2		CXX
+PG probcons language		C++
+PG probcons source		http://probcons.stanford.edu/probcons_v1_12.tar.gz
+PG probcons mode		mcoffee
+PG probcons binary		probcons
+
+PG mafft 4_TCOFFEE		MAFFT
+PG mafft type			sequence_multiple_aligner		
+PG mafft ADDRESS		http://align.bmr.kyushu-u.ac.jp/mafft/online/server/
+PG mafft language		C
+PG mafft language		C				
+PG mafft source			http://align.bmr.kyushu-u.ac.jp/mafft/software/mafft-6.603-with-extensions-src.tgz
+PG mafft windows		http://align.bmr.kyushu-u.ac.jp/mafft/software/mafft-6.603-mingw.tar
+PG mafft mode			mcoffee,rcoffee	
+PG mafft binary			mafft.tar.gz
+
+PG muscle 4_TCOFFEE		MUSCLE
+PG muscle type			sequence_multiple_aligner		
+PG muscle ADDRESS		http://www.drive5.com/muscle/
+PG muscle language		C++
+PG muscle language2		GPP
+PG muscle source		http://www.drive5.com/muscle/downloads3.7/muscle3.7_src.tar.gz
+PG muscle windows		http://www.drive5.com/muscle/downloads3.7/muscle3.7_win32.zip
+PG muscle linux			http://www.drive5.com/muscle/downloads3.7/muscle3.7_linux_ia32.tar.gz
+PG muscle mode			mcoffee,rcoffee	
+
+PG mus4 4_TCOFFEE		MUS4
+PG mus4 type			sequence_multiple_aligner		
+PG mus4 ADDRESS			http://www.drive5.com/muscle/
+PG mus4 language		C++
+PG mus4 language2		GPP
+PG mus4 source			http://www.drive5.com/muscle/muscle4.0_src.tar.gz
+PG mus4 mode			mcoffee,rcoffee	
+
+
+PG pcma 4_TCOFFEE		PCMA
+PG pcma type			sequence_multiple_aligner		
+PG pcma ADDRESS			ftp://iole.swmed.edu/pub/PCMA/
+PG pcma language		C
+PG pcma language2		C	
+PG pcma source			ftp://iole.swmed.edu/pub/PCMA/pcma.tar.gz
+PG pcma mode			mcoffee	
+     
+PG kalign 4_TCOFFEE		KALIGN
+PG kalign type			sequence_multiple_aligner		
+PG kalign ADDRESS		http://msa.cgb.ki.se
+PG kalign language		C
+PG kalign language2		C	
+PG kalign source		http://msa.cgb.ki.se/downloads/kalign/current.tar.gz
+PG kalign mode			mcoffee	
+
+
+PG amap 4_TCOFFEE		AMAP
+PG amap type			sequence_multiple_aligner		
+PG amap ADDRESS			http://bio.math.berkeley.edu/amap/
+PG amap language		C++
+PG amap language2		CXX	
+PG amap source			http://amap-align.googlecode.com/files/amap.2.0.tar.gz
+PG amap mode			mcoffee	    
+
+
+PG proda 4_TCOFFEE		PRODA
+PG proda type			sequence_multiple_aligner		
+PG proda ADDRESS		http://proda.stanford.edu
+PG proda language		C++
+PG proda language2		CXX	
+PG proda source			http://proda.stanford.edu/proda_1_0.tar.gz
+PG proda mode			mcoffee	    
+
+PG fsa 4_TCOFFEE		FSA
+PG fsa type			sequence_multiple_aligner		
+PG fsa ADDRESS			http://fsa.sourceforge.net/
+PG fsa language			C++
+PG fsa language2		CXX	
+PG fsa source			http://sourceforge.net/projects/fsa/files/fsa-1.15.3.tar.gz/download/
+PG fsa mode			mcoffee	    
+
+PG prank 4_TCOFFEE		PRANK
+PG prank type			sequence_multiple_aligner		
+PG prank ADDRESS		http://www.ebi.ac.uk/goldman-srv/prank/
+PG prank language		C++
+PG prank language2		CXX	
+PG prank source			http://www.ebi.ac.uk/goldman-srv/prank/src/prank/prank.src.100303.tgz
+PG prank mode			mcoffee	    
+
+PG sap 4_TCOFFEE		SAP
+PG sap type			structure_pairwise_aligner		
+PG sap ADDRESS			http://mathbio.nimr.mrc.ac.uk/wiki/Software
+PG sap language			C
+PG sap language2		C	
+PG sap source			http://mathbio.nimr.mrc.ac.uk/download/sap-1.1.1.tar.gz
+PG sap mode			expresso,3dcoffee
+
+PG TMalign 4_TCOFFEE		TMALIGN
+PG TMalign type			structure_pairwise_aligner		
+PG TMalign ADDRESS		http://zhang.bioinformatics.ku.edu/TM-align/TMalign.f
+PG TMalign language		Fortran
+PG TMalign language2		Fortran
+PG TMalign source		http://zhang.bioinformatics.ku.edu/TM-align/TMalign.f	
+PG TMalign linux		http://zhang.bioinformatics.ku.edu/TM-align/TMalign_32.gz				
+PG TMalign mode			expresso,3dcoffee	    
+
+
+PG mustang 4_TCOFFEE		MUSTANG
+PG mustang type			structure_pairwise_aligner		
+PG mustang ADDRESS		http://www.cs.mu.oz.au/~arun/mustang
+PG mustang language		C++
+PG mustang language2		CXX
+PG mustang source		http://ww2.cs.mu.oz.au/~arun/mustang/mustang_v3.2.1.tgz
+PG mustang mode			expresso,3dcoffee	    
+
+PG lsqman 4_TCOFFEE		LSQMAN
+PG lsqman type			structure_pairwise_aligner		
+PG lsqman ADDRESS		empty
+PG lsqman language		empty
+PG lsqman language2		empty
+PG lsqman source		empty
+PG lsqman update_action		never
+PG lsqman mode			expresso,3dcoffee	    
+
+PG align_pdb 4_TCOFFEE		ALIGN_PDB
+PG align_pdb type		structure_pairwise_aligner		
+PG align_pdb ADDRESS		empty
+PG align_pdb language		empty
+PG align_pdb language2		empty
+PG align_pdb source		empty
+PG align_pdb update_action	never
+PG align_pdb mode		expresso,3dcoffee	    
+
+
+PG fugueali 4_TCOFFEE		FUGUE
+PG fugueali type		structure_pairwise_aligner		
+PG fugueali ADDRESS		http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+PG fugueali language		empty
+PG fugueali language2		empty
+PG fugueali source		empty
+PG fugueali update_action	never
+PG fugueali mode		expresso,3dcoffee	    
+
+PG dalilite.pl 4_TCOFFEE	DALILITEc
+PG dalilite.pl type		structure_pairwise_aligner		
+PG dalilite.pl ADDRESS		built_in
+PG dalilite.pl ADDRESS2		http://www.ebi.ac.uk/Tools/webservices/services/dalilite
+PG dalilite.pl language		Perl
+PG dalilite.pl language2	Perl
+PG dalilite.pl source		empty
+PG dalilite.pl update_action	never
+PG dalilite.pl mode		expresso,3dcoffee	    
+
+PG probconsRNA 4_TCOFFEE	PROBCONSRNA		
+PG probconsRNA type		RNA_multiple_aligner		
+PG probconsRNA ADDRESS		http://probcons.stanford.edu/
+PG probconsRNA language		C++	
+PG probconsRNA language2	CXX	
+PG probconsRNA source		http://probcons.stanford.edu/probconsRNA.tar.gz
+PG probconsRNA mode		mcoffee,rcoffee	
+
+PG sfold 4_TCOFFEE		CONSAN		
+PG sfold type			RNA_pairwise_aligner		
+PG sfold ADDRESS		http://selab.janelia.org/software/consan/
+PG sfold language		empty
+PG sfold language2		empty
+PG sfold source			empty
+PG sfold update_action		never
+PG sfold mode			rcoffee
+
+PG RNAplfold 4_TCOFFEE		RNAPLFOLD
+PG RNAplfold type		RNA_secondarystructure_predictor
+PG RNAplfold ADDRESS		http://www.tbi.univie.ac.at/~ivo/RNA/
+PG RNAplfold language		C
+PG RNAplfold language2		C
+PG RNAplfold source		http://www.tbi.univie.ac.at/~ivo/RNA/ViennaRNA-1.7.2.tar.gz	
+PG RNAplfold mode		rcoffee, seq_reformat
+
+PG retree 4_TCOFFEE	PHYLIP
+PG retree type		RNA_secondarystructure_predictor
+PG retree ADDRESS	http://evolution.gs.washington.edu/phylip/
+PG retree language	C
+PG retree language2	C
+PG retree source	http://evolution.gs.washington.edu/phylip/download/phylip-3.69.tar.gz
+PG retree  mode		trmsd, seq_reformat
+
+
+
+PG hmmtop 4_TCOFFEE		HMMTOP
+PG hmmtop type			protein_secondarystructure_predictor
+PG hmmtop ADDRESS		www.enzim.hu/hmmtop/
+PG hmmtop language		C
+PG hmmtop language2		C
+PG hmmtop source		empty
+PG hmmtop update_action		never
+PG hmmtop mode			tcoffee
+
+PG gorIV 4_TCOFFEE		GOR4
+PG gorIV type			protein_secondarystructure_predictor
+PG gorIV ADDRESS		http://mig.jouy.inra.fr/logiciels/gorIV/
+PG gorIV language		C
+PG gorIV language2		C
+PG gorIV source			http://mig.jouy.inra.fr/logiciels/gorIV/GOR_IV.tar.gz
+PG gorIV update_action		never
+PG gorIV mode			tcoffee
+
+PG wublast.pl 4_TCOFFEE		EBIWUBLASTc
+PG wublast.pl type		protein_homology_predictor
+PG wublast.pl ADDRESS		built_in	
+PG wublast.pl ADDRESS2		http://www.ebi.ac.uk/Tools/webservices/services/wublast	
+PG wublast.pl language		Perl
+PG wublast.pl language2		Perl
+PG wublast.pl source		empty
+PG wublast.pl update_action	never
+PG wublast.pl mode		psicoffee,expresso,accurate
+
+PG blastpgp.pl 4_TCOFFEE	EBIBLASTPGPc
+PG blastpgp.pl type		protein_homology_predictor
+PG blastpgp.pl ADDRESS		built_in
+PG blastpgp.pl ADDRESS2		http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
+PG blastpgp.pl language		Perl
+PG blastpgp.pl language2	Perl
+PG blastpgp.pl source		empty
+PG blastpgp.pl update_action	never
+PG blastpgp.pl mode		psicoffee,expresso,accurate
+
+
+PG blastcl3 4_TCOFFEE		NCBIWEBBLAST
+PG blastcl3 type		protein_homology_predictor
+PG blastcl3 ADDRESS		ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
+PG blastcl3 language		C
+PG blastcl3 language2		C
+PG blastcl3 source		empty
+PG blastcl3 update_action	never
+PG blastcl3 mode		psicoffee,expresso,3dcoffee
+
+
+PG blastpgp 4_TCOFFEE		NCBIBLAST
+PG blastpgp type		protein_homology_predictor
+PG blastpgp ADDRESS		ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
+PG blastpgp language		C
+PG blastpgp language2		C
+PG blastpgp source		empty
+PG blastpgp update_action	never
+PG blastpgp mode		psicoffee,expresso,3dcoffee
+
+PG SOAP::Lite 4_TCOFFEE		SOAPLITE
+PG SOAP::Lite type		library
+PG SOAP::Lite ADDRESS		http://cpansearch.perl.org/src/MKUTTER/SOAP-Lite-0.710.08/Makefile.PL	
+PG SOAP::Lite language		Perl
+PG SOAP::Lite language2		Perl
+PG SOAP::Lite source		empty
+PG blastpgp update_action	never
+PG SOAP::Lite mode		none	   
+
+PG XML::Simple 4_TCOFFEE	XMLSIMPLE
+PG XML::Simple type		library
+PG XML::Simple ADDRESS		http://search.cpan.org/~grantm/XML-Simple-2.18/lib/XML/Simple.pm
+PG XML::Simple language		Perl
+PG XML::Simple language2	Perl
+PG XML::Simple source		empty
+PG XML::Simple mode		psicoffee,expresso,accurate
+
+
+
+MODE tcoffee  name tcoffee
+MODE rcoffee  name rcoffee
+MODE 3dcoffee name 3dcoffee
+MODE mcoffee  name mcoffee
+MODE expresso name expresso
+MODE trmsd    name trmsd
+MODE accurate name accurate
+MODE seq_reformat name seq_reformat

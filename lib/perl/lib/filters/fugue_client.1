@@ -1,0 +1,93 @@
+#!/usr/bin/env perl
+#
+# This program converts PDB-file into a list of Ca
+# If no chain is specified the first one only is taken
+# The Ca position always starts at 1
+#
+# The call syntax is:
+#        pdb2ca infile (chain) > outfile
+#
+
+
+
+# test command line arguments and open files:
+  
+  
+#Defaults
+  $np=0;
+  $n_para=$#ARGV;
+  $model=1;
+  $netaddress="http://www.expasy.ch/cgi-bin/get-pdb-entry.pl?";
+ 
+
+
+  foreach ($np=0; $np<=$n_para; $np++)
+    {        
+    $v=$ARGV[$np];
+    
+    if ( $v eq "-pdb")
+       {
+       $pdb_name= $ARGV[++$np];
+       }
+    elsif (  $v eq "-pep")
+       {
+       $pep_file= $ARGV[++$np];
+       }
+    }
+
+$pdb_name=`extract_from_pdb -get_fugue_name $pdb_name`;
+chop $pdb_name;
+
+if ( $pdb_name eq non_valid_pdb_name)
+  {
+    exit (EXIT_FAILURE)
+  }
+
+open (F, $pep_file);
+while (<F>)
+  {
+    if (/\>(.*)/)
+      {
+	$seq_name=$1;
+      }
+    else
+      {
+	chop $_;
+	$pep=$pep.$_;
+      }
+  }
+close (F);
+
+$tmp=$$.tmp_file;
+
+$command="wget \'http://www-cryst.bioc.cam.ac.uk/cgi-bin/cgiwrap/kenji/fugue/align.cgi?structure=$pdb_name&SEQUENCE=%3E$seq_name\%0D\%0A$pep\%0D\%0A&.submit=\' -O $tmp -o /dev/null";
+system $command;
+
+open (F, $tmp);
+while (<F>)
+  {
+    if ( /\.ali/)
+      {
+	/\<a href=\"(.*\.ali[^>]*)\"\>/;
+	$aln_url="http://www-cryst.bioc.cam.ac.uk$1";
+      }
+  }
+close (F);
+unlink $tmp;
+
+$command="wget $aln_url -O $tmp -o /dev/null";
+system $command;
+
+
+open (F, $tmp);
+while (<F>)
+  {
+    print $_;
+  }
+close (F);
+unlink $tmp;
+
+
+
+	  
+    

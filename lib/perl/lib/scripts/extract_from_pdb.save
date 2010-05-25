@@ -1,0 +1,700 @@
+#!/usr/bin/env perl
+#
+# This program converts PDB-file into a list of Ca
+# If no chain is specified the first one only is taken
+# The Ca position always starts at 1
+#
+# The call syntax is:
+#        pdb2ca infile (chain) > outfile
+#
+
+
+%onelett=('ALA','A',
+          'CYS','C',
+	  'ASP','D',
+	  'GLU','E',
+	  'PHE','F',
+	  'GLY','G',
+	  'HIS','H',
+	  'ILE','I',
+	  'LYS','K',
+	  'LEU','L',
+	  'MET','M',
+	  'MSE','M',
+	  'ASN','N',
+	  'PRO','P', 
+	  'GLN','Q',
+	  'ARG','R',
+	  'SER','S',
+	  'THR','T',
+	  'VAL','V',
+	  'TRP','W',
+	  'TYR','Y',
+	  'CSX','C',
+	  'XXX','x');
+# test command line arguments and open files:
+  
+  if($ARGV[0]=~/help/ ||$ARGV[0]=~/man/ || $ARGV[0]=~/HELP/ || $ARGV[0]=~/Man/ || $ARGV[0] eq "-h"  || $ARGV[0] eq "-H"  )
+        {die "SYNTAX: 	
+	Minimum:             [extract_from_pdb file] 
+			   OR 
+			     [... | extract_from_pdb]
+ 	Flags (Default setting is on the first line)
+	   -infile.....file...........[Flag can be omited]
+			              [File must be pdb or from this pgm]
+           -netfile...................[File will be fetch from the net using wget]
+                                      [wget must be installed]
+                                      [ftp://ftp.gnu.org/pub/gnu/wget/]
+           -netaddress................[Address used for the retrieving the netfile]
+                                      [http://www.expasy.ch/cgi-bin/get-pdb-entry.pl?]
+           -is_pdb_name...............[Returns 1 if the name is a PDB ID, 0 otherwise]
+                                      [Uses the netaddress to do so]
+	   -chain......FIRST..........[Extract the first chain only]
+		       A B C..........[Extract Several chains if needed]
+		       ALL............[Extract all the chains]				 
+	   -coor.......<start>..<end>.[Coordinates of the fragment to extract]
+			              [Omit end to include the Cter]
+           -num........absolute.......[absolute: relative to the seq] 
+                       file...........[file: relative to file]
+           -num_out....new............[new: start 1->L]
+                       old............[old: keep the file coordinates]
+	   -delete.....<start>..<end>.[Delete from residue start to residue end]
+	   -atom.......CA.............[Atoms to include, ALL for all of them]
+		       CA O N.........[Indicate several atoms if needed]
+	   -code.......3..............[Use the 1 letter code or the 3 letters code]
+	   -mode.......pdb............[Output something that looks like pdb]
+		       fasta..........[Output the sequences in fasta format]
+		       simple.........[Output a format easy to parse in C ]	   
+	   -seq_field..ATOM...........[Field used to extract the sequence]
+		       SEQRES.........[Use the complete sequence]
+	   -seq.......................[Equivalent to  -mode fasta]
+	   -model......1..............[Chosen Model in an NMR file]
+           -nodiagnostic..............[Switches Error Messages off]
+
+	 PROBLEMS: please contact cedric.notredame\@europe.com\n";
+	}
+
+#Defaults
+  $np=0;
+  $n_para=$#ARGV;
+  $model=1;
+  $netaddress="http://www.expasy.ch/cgi-bin/get-pdb-entry.pl?";
+ 
+
+
+  foreach ($np=0; $np<=$n_para; $np++)
+    {        
+    $value=$ARGV[$np];
+    
+    if  ($np==0 && !($value=~/^-.*/))
+       { 
+       $pdb_file= $ARGV[$np];
+       }
+    elsif ( !($value=~/^-.*/)){die;}
+    elsif ($value eq "-nodiagnostic"){$nodiagnostic=1;}
+    elsif ($value eq "-is_pdb_name")
+      {
+	$pdb_file= $ARGV[++$np];
+	$check_pdb_name=1;
+      }
+	
+    elsif ( $value eq "-infile")
+       {
+       $pdb_file= $ARGV[++$np];
+       }
+    elsif (  $value eq "-num")
+       {
+       $numbering= $ARGV[++$np];
+       }
+    elsif (  $value eq "-num_out")
+       {
+       $numbering_out= $ARGV[++$np];
+       }
+    elsif ($value eq "-netfile")
+      {
+	$netfile=1;
+	if ( !($ARGV[$np+1]=~/^-.*/)){$pdb_file= $ARGV[++$np];}
+      }
+    elsif ( $value eq "-netaddress")
+      {
+	$netadress=$ARGV[++$np];
+      }
+    elsif ( $value eq "-model")
+       {
+       $model= $ARGV[++$np];
+       }
+    elsif ($value eq "-seq_field" )
+       {
+       $seq_field= $ARGV[++$np];
+       }   
+    elsif ($value eq "-coor" )
+       {
+       $start= $ARGV[++$np];
+  
+       if (($ARGV[$np+1] eq "") ||($ARGV[$np+1]=~/^-.*/)){$end="*";} 
+       else {$end=   $ARGV[++$np];}     
+       $coor_set=1;
+       }
+    elsif ($value eq "-delete" )
+       {
+       $delete_start= $ARGV[++$np];
+       $delete_end= $ARGV[++$np];
+       $delete_set=1;
+       }
+    elsif  ($value eq "-code")
+       {
+       $code= $ARGV[++$np];
+       }
+    elsif ($value eq "-chain")
+       {
+       
+       $chosen_chain_set=1;
+       while (!($ARGV[$np+1] eq "") &&!($ARGV[$np+1]=~/^-.*/))
+	      {
+	      ++$np;
+	      $chain[$n_chain++]=  $ARGV[$np];
+	      $chain_list{$ARGV[$np]}=1;
+	      }           
+       }
+    elsif ($value eq "-atom")
+       {
+
+       while (!($ARGV[$np+1] eq "") && !($ARGV[$np+1]=~/^-.*/))
+	      {
+	      ++$np;
+	      $atom[$n_atom++]=  $ARGV[$np];
+	      $atom_list{$ARGV[$np]}=1;	      
+	      } 
+       
+       }
+    elsif ($value eq "-mode")
+       {
+       $MODE=$ARGV[++$np];;
+       }
+    elsif ($value eq "-seq")
+       {
+       $MODE="fasta";
+       }
+    
+    }
+ 
+  
+
+  if ( $pdb_file ne "" && !($netfile || $check_pdb_name))
+     {
+       unless (-T $pdb_file) {die "$pdb_file is not a valid input file\n"};  
+     }
+  else
+      {
+      $x++;
+      $tmp_file_name="tmp_file_for_extract_from_pdb$$_$x";
+      $tmp_file_list[$ntmp_file++]=$tmp_file_name;
+      
+      if ( $netfile || $check_pdb_name)
+	{
+
+
+
+	  @array=($pdb_file=~/(.)/g);
+	  if ( $#array>3)
+	    {
+	      $pdb_file=~/(^.{4})/;
+	    	    
+	      $pdb_file=$1;
+	      $chosen_chain_set=1;
+	      $chain[0]=$array[4];
+	      $n_chain=1;
+	      $chain_list{$array[4]}=1;
+	      print "-
+	    }
+	
+	  if ( $netfile)
+	    {
+	      system ( "wget -O$tmp_file_name -q $netaddress$pdb_file");
+	    }
+	  elsif ( $check_pdb_name)
+	    {
+	      system ( "wget -O$tmp_file_name -q $netaddress$pdb_file\_head");
+	     
+	    }
+	  
+	  if ($check_pdb_name)
+	    {
+	      $print_value=&file_is_pdb_header ( $tmp_file_name);
+	      &clean(@tmp_file_list);
+	      print "$print_value\n";
+	      exit (($print_value)?EXIT_SUCCESS:EXIT_FAILURE);
+	    }
+	  elsif ( $netfile)
+	    {
+	      if ( !&file_is_pdb ( $tmp_file_name))
+		{
+		  &clean(@tmp_file_list);
+		  exit (EXIT_FAILURE);
+		}
+	    }
+		  
+	}
+      
+      else 
+	{$pdb_file="stdin";
+         open ( TMP, ">$tmp_file_name");
+	 while (<STDIN>)
+	   {
+	     print TMP $_;
+	   }
+	 close (TMP);
+       }
+      $pdb_file="$tmp_file_name";
+    }
+
+  $pdb_name=$pdb_file;
+  $pdb_name=~s/\.[^\.]*$//;
+  $pdb_name=~s/.*\///;
+
+# Make the structure file that contains only one model
+$x++;
+$structure_file="tmp_file_for_extract_from_pdb$$_$x";
+$tmp_file_list[$ntmp_file++]=$structure_file;
+
+open (INFILE, "$pdb_file")   || die "can't open $pdb_file: $!\n"; 
+open (TMP, ">$structure_file");
+
+$print_model=1;
+$in_model=0;
+while ( <INFILE>)
+{
+    $line=$_;
+    if ($line =~/^MODEL\s*(\d*)/)
+    {
+	if ($1==$model)
+	{
+	    $in_model=1;
+	    $print_model=1;
+	    $is_nmr=1;
+	}
+	elsif ( $in_model==0)
+	{
+	    $print_model=0;
+	}
+	elsif ( $in_model==1)
+	{
+	    last;
+	}
+    }
+  if ($print_model){print TMP $line;}  
+
+}
+close (TMP);
+close (INFILE);
+
+ 
+	
+	
+
+#set the default
+  if ($numbering eq ""){$numbering="absolute";}
+  if ($numbering_out eq ""){$numbering_out="new";}
+
+  if ( $delete_set && $coor_set) {die "-delete and -coor are mutually exclusive, sorry\n";}
+  if ( $n_atom==0){$atom_list[$n_atom++]="CA";$atom_list{$atom_list[0]}=1;}
+  if ( $seq_field eq ""){$seq_field="ATOM";}
+  
+  if ( $MODE eq ""){$MODE="pdb";}
+  elsif ( $MODE eq "simple" && $code==0){$code=1;}
+
+  if ( $code==0){$code=3;}
+
+#prepare header
+open (INFILE, "$structure_file");
+if ( $MODE eq "raw_pdb" || $MODE eq "raw")
+  {
+    while (<INFILE>){print "$_";}
+    &clean(@tmp_file_list);
+    exit
+  }
+    
+
+if ( $MODE eq "pdb")
+    {
+    while (<INFILE>) 
+          {
+	  $line=$_;
+	  if    ($line =~ /^HEADER/){print "$line";}
+    
+	  elsif ($line =~ /^COMPND/){print "$line";}
+	  }
+    close (INFILE);
+    open(INFILE,"$structure_file");
+
+    print "REMARK This is not a pdb file but the output of the program extract_from_pdb\n";
+    print "REMARK This format is not meant to be used in place of the PDB format\n";
+    print "REMARK The header refers to the original entry\n";
+    print "REMARK The sequence from the original file has been taken in the field: $seq_field\n";
+    if ( $coor_set)
+       {
+       print "REMARK Partial chain: Start $start End $end\n";
+       }
+    if ( $is_nmr)
+       {
+       print "REMARK NMR structure: MODEL $model\n";
+       }
+    if ( $n_chain!=0)
+       {
+       print "REMARK chain(s): ";
+       foreach $a (@chain){print "$a ";}
+       print "\n";
+       }
+    if ( $n_atom!=0)
+       {
+       print "REMARK Contains Coordinates of: ";
+       foreach $a (@atom){print "$a ";}
+       print "\n";
+       }  
+    }
+
+
+#2 READ THE SEQUENCES IN THE SEQRES FIELD AND IN THE ATOM FIELD
+while (<INFILE>) 
+    {
+    $line=$_;
+    if ($line =~ /^SEQRES/)
+       {      
+       @field=/(\S*)\s*/g;
+       if ($onelett{$field[3]})
+          {
+	  $c="A";
+	  }
+       else 
+          {
+	  $c=$field[2];	
+	  }
+       
+       $l=$#field;
+       for ($a=0; $a<$#field ;)
+           {
+	   if (!$onelett{$field[$a]})
+	      {
+	      splice @field, $a, 1;
+	      }
+	   else
+
+	      {
+	      $a++;
+	      }
+	   }
+   
+       if ( $c ne $in_chain)
+          {
+	  $pdb_chain_list[$n_pdb_chains]=$c;
+	  $pdb_chain_len [$n_pdb_chains]=$len;
+	  $in_chain=$c;
+	  $n_pdb_chains++;
+	  }
+
+       for ( $a=0; $a<$#field;$a++){@{$complete_seq{$c}}->[$complete_seq_len{$c}++]=$field[$a];}  
+       }
+    elsif ( $line=~/^ATOM/ || ($line=~/^HETATM/ && $line=~/MSE/))
+       {
+        $AT_ID=substr($line,13,4);
+        $RES_ID=substr($line,17,3);
+        $CHAIN=substr($line,20,2);
+        $RES_NO=substr($line,22,4);
+        $TEMP=~s/\s//g;
+
+        $AT_ID=~s/\s//g;
+        $CHAIN=~s/\s//g;
+        $RES_ID=~s/\s//g;
+        $RES_NO=~s/\s//g;
+
+	
+
+	if ( $CHAIN eq ""){$CHAIN="A";}
+	
+	if ($coor_set && $numbering eq "file" && $AT_ID eq "CA")
+	  {
+	    
+	    if ( $RES_NO<=$start){$real_start{$CHAIN}++;}
+	    if ( $RES_NO<=$end){$real_end{$CHAIN}++;}
+	  }
+	elsif ($numbering eq "absolute")
+	  {
+	    $real_start{$CHAIN}=$start;
+	    $real_end{$CHAIN}=$end;
+	  }
+
+        $KEY="ALL";
+        if ( $CHAIN ne $in_atom_chain)
+          {
+	    
+	  $pdb_atom_chain_list[$n_pdb_atom_chains]=$c;
+	  $pdb_atom_chain_len [$n_pdb_atom_chains]=$len;
+	  $in_atom_chain=$c;
+	  $n_pdb_atom_chains++;
+	  }
+	if ( $AT_ID eq "CA")
+           {
+	   @{$atom_seq{$CHAIN}}->[$atom_seq_len{$CHAIN}++]=$RES_ID;	 
+	   }
+        }
+
+    }
+close (INFILE);
+
+#output the sequences
+#SEQRES LOOP
+
+#3-Chose the chains that will be used
+
+if ( $chosen_chain_set==0){$chain_list{FIRST}=1;$chain[$n_chain++]="FIRST";$chosen_chain_set=1;}
+
+if    ($chain_list{ALL}) 
+      {
+      @chain=@pdb_chain_list;
+      foreach $e (@chain){$chain_list {$e}=1;}
+      }
+elsif($chain_list{FIRST}==1)
+      {$chain[0]=$pdb_chain_list[0];$chain_list{$chain[0]}=1;$n_chain=1;}
+
+#reset 
+
+
+#4-WRITE OUT THE SEQUENCES
+open(INFILE,"$structure_file");
+foreach $c (@chain)
+	{
+	
+	
+
+	if    ( $seq_field eq "SEQRES"){@pdb_seq=@{$complete_seq{$c}};}
+	elsif ( $seq_field eq "ATOM")  {@pdb_seq=@{$atom_seq{$c}};}
+	
+	$full_length=$l=$#pdb_seq+1;
+		
+	if ( $real_end{$c}=="*"){$real_end{$c}=$full_length;}
+	if ( $coor_set)
+	   {	   
+
+	   if ( $real_end{$c} < $l){splice @pdb_seq, $real_end{$c}, $l;}
+	   if ( $real_start{$c} < $l){splice @pdb_seq, 0, $real_start{$c}-1;}	  	   
+	   $l=$#pdb_seq;
+	   }
+
+	elsif ( $delete_set)
+	   {
+	   splice @pdb_seq, $delete_start, $delete_end-$delete_start+1;
+	   $l=$#pdb_seq;
+	   }
+	
+	$new_fasta_name="$pdb_name";
+	if ( $n_pdb_chains>1){$new_fasta_name="$new_fasta_name\_$c";}
+	if ( $coor_set)
+	   {
+	   if ( $n_pdb_chains==0){$new_fasta_name="$new_fasta_name\_$c";}
+	   $new_fasta_name= $new_fasta_name."\_$start\_$end";
+	   }
+	   
+	if ( $MODE eq "pdb")
+	   {
+	   $nl=1;
+	   $n=0;
+	   
+	   foreach $res ( @pdb_seq)
+	      {
+	      if ( !$n)
+	         {
+		
+		 printf "SEQRES%4d%2s%5d  ", $nl, $c, $l;
+		 $nl++;
+		 }
+	     $res=~s/\s//g;
+	     
+	     if ($code==1){ printf "%3s ",$onelett{$res};}
+	     elsif  ($code==3){ printf "%3s ",$res};
+	     
+	     $n++;		  
+	     if ( $n==13){$n=0;print "\n";}
+	     }
+	  if ( $n!=0){print "\n"; $n=0;}
+	  }
+	elsif ( $MODE eq "simple")
+	  {
+	  print ">$new_fasta_name\n";
+	  foreach $res ( @pdb_seq)
+	      {
+	      print "$onelett{$res}";
+	      }
+	  print "\n";
+	  }
+	elsif ( $MODE eq "fasta")
+	  {
+	  $n=0;
+	  print ">$new_fasta_name\n";
+
+	  foreach $res ( @pdb_seq)
+	      {
+	      print "$onelett{$res}";
+              $n++;
+	      if ( $n==60){print "\n"; $n=0;}
+	      }
+	  print "\n"; 
+	  }
+       }
+
+if ( $MODE eq "fasta")
+  {
+    &clean(@tmp_file_list);
+    exit;
+  
+  }
+
+#WORK LOOP
+  
+  $charcount=0;
+  $inchain="BEGIN";
+  $n=0;
+  while (<INFILE>) 
+    {
+    $line=$_;
+     
+    if ($line =~ /^ATOM/ || ($line=~/^HETATM/ && $line=~/MSE/) )
+      {
+      
+      $AT_ID=substr($line,13,4);
+      $RES_ID=substr($line,17,3);
+      $CHAIN=substr($line,20,2);
+      $RES_NO=substr($line,22,4);
+      $X=substr($line,31,8);     
+      $Y=substr($line,39,8);
+      $Z=substr($line,47,8);
+      $TEMP=substr($line,60,6);
+   
+      $X=~s/\s//g;
+      $Y=~s/\s//g;
+      $Z=~s/\s//g;
+      $TEMP=~s/\s//g;
+
+      $AT_ID=~s/\s//g;
+      $CHAIN=~s/\s//g;
+      $RES_ID=~s/\s//g;
+      $RES_NO=~s/\s//g;
+      
+      $KEY="ALL";
+
+      
+      if ( $RES_NO ==0){$start_at_zero=1;}
+
+      $RES_NO+=$start_at_zero;    
+
+      if ( $CHAIN eq ""){$CHAIN = "A";}
+      if ( $current_chain ne $CHAIN)
+         {
+	 $current_chain=$CHAIN;
+	 $pos=$current_residue=0;
+	 $offset=($coor_set)?($real_start{$CHAIN}-1):0;
+	 if    ( $seq_field eq "SEQRES"){@ref_seq=@{$complete_seq{$CHAIN}};}
+	 elsif ( $seq_field eq "ATOM")  {@ref_seq=@{$atom_seq{$CHAIN}};}
+	 }
+      
+      if ($current_residue != $RES_NO)
+         {
+	 $current_residue=$RES_NO;
+	 if    ( $seq_field eq "SEQRES"){$pos=$current_residue;}
+	 elsif ( $seq_field eq "ATOM"){$pos++;}
+	 }
+      
+      		 
+      if ($n_atom==0 || $atom_list{$AT_ID}==1 || $atom_list{$KEY}==1)
+	 { 	
+	 if ( ($n_chain==0 || $chain_list{$CHAIN}) && ($coor_set==0 ||($pos>=$real_start{$CHAIN} && $pos<=$real_end{$CHAIN})) && ($delete_set==0 || $pos<$delete_start ||$pos>$delete_end ) )
+	       {
+	       $n++;
+	       $out_pos=$pos;
+	       
+	       if ( $delete_set)
+	          {
+		  if ( $out_pos< $delete_start){;}
+		  else {$offset=$delete_end-$delete_start;}
+		  }       
+	       
+	       if ( $numbering_out eq "new"){$out_pos-=$offset;}
+	       elsif ( $numbering_out eq "old"){$out_pos=$RES_NO;}
+	       
+	       if ( $ref_seq[$pos-1] ne $RES_ID)
+	              {$error=$error."\nERROR: Position $out_pos, $ref_seq[$pos-1] in SEQ $RES_ID in STRUCTURE" ;}
+       
+	       
+	       if ( $code==1){$RES_ID=$onelett{$RES_ID};}
+	       if ( $MODE eq "pdb")
+		  {
+		  printf "ATOM%7d%5s%4s%2s%4d    %8.3f%8.3f%8.3f  1.00 %6.2f\n",$n, $AT_ID,$RES_ID,$CHAIN,$out_pos, $X, $Y, $Z,$TEMP;		  
+		  }
+	       elsif ( $MODE eq "simple")
+	          {
+		  printf "ATOM %5s %4s %2s %4d    %8.3f %8.3f %8.3f\n",$AT_ID, $RES_ID,$CHAIN,$out_pos, $X, $Y, $Z,$TEMP;
+		  }
+	      }
+          }
+      }
+    }
+print "\n";
+close(INFILE);
+&clean(@tmp_file_list);
+#SUMMARIZE
+
+if ( $error ne "") 
+   {$error=$error."\nDiagnostic:    SEQRES and the residues in ATOM are probably Incompatible\n";
+    $error=$error.  "Recomendation: Rerun with '-fix 1' in order to ignore the SEQRES sequences\n";
+   }
+if (!$nodiagnostic){print STDERR $error;}
+
+#Clean after usage
+
+sub clean
+  {
+  my @fl=@_;
+  my $file;
+  
+  foreach $file ( @fl)
+    {
+      if ( -e $file){unlink($file);}
+    }
+}
+# Functions
+
+sub file_is_pdb
+  {
+    my @arg=@_;
+
+    if ( !-e $arg[0]){return 0;}
+    
+    open F, $arg[0];
+    
+    while ( <F>)
+      {
+	if (/^ATOM/)
+	  {
+	    close F;
+	    return 1;
+	  }
+      }
+    return 0;
+  }
+sub file_is_pdb_header
+  {
+    my @arg=@_;
+
+    if ( !-e $arg[0]){return 0;}
+    
+    open F, $arg[0];
+    
+    while ( <F>)
+      {
+	if (/^HEADER/)
+	  {
+	    close F;
+	    return 1;
+	  }
+      }
+    return 0;
+  }

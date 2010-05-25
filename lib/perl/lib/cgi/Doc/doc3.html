@@ -1,0 +1,222 @@
+<html>
+<head>
+<title>Format Documentation</title>
+<style type="text/css">
+hh1 { border-bottom:4px double blue; padding-bottom:4px; margin:0px; }
+hh2 { border-top:1px solid blue; margin:0px; }
+p.info { border:1px solid grey; background-color:#FFFFE0; padding:4px; margin:0px; }
+body { font-family:Tahoma,Helvetica,sans-serif; }
+SPAN { font-family: courier new, courier-new, courier; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value1 {background: #FF0000}
+SPAN.value2 {background: #FF00FF}
+SPAN.value3 {background: #00FF00}
+SPAN.value4 {background: #FFFF00}
+SPAN.value5 {background: #7B7D7B}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+<table width=100% summary="msa format">
+
+<TR><TD bgcolor=#3399FF><h2><a name="fasta"><font size="5" face="Arial" color="#FFFFE0">Fasta format</FONT></a></h2>
+
+<TR><TD bgcolor=#E1F5FF><font size="2" face="Arial">
+    Sequences in fasta formatted files are preceded by a line
+    starting with &gt;.<br>
+    The first word on this line is the name of the sequence. The
+    rest of the line is a description of the sequence.<br>The first
+    character must be a digit or a letter. The
+    remaining lines contain the sequence itself.<br>
+    Blank lines in a FASTA file are ignored, and so are spaces or
+    other gap symbols (dashes, underscores, periods) in a
+    sequence.
+</font>
+<p class="info"><code>
+&gt;1aboA<br>
+NLFVALYDFVASGDNTLSITKGEKLRVLGYNHNGEWCEAQTKNGQGWVPS<br>
+NYITPVN<br>
+&gt;1ycsB<br>
+KGVIYALWDYEPQNDDELPMKEGDCMTIIHREDEDEIEWWWARLNDKEGY<br>
+VPRNLLGLYP<br>
+&gt;1pht<br>
+GYQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEIG<br>
+WLNGYNETTGERGDFPGTYVEYIGRKKISP<br>
+&gt;1vie<br>
+DRVRKKSGAAWQGQIVGWYCTNLTPEGYAVESEAHPGSVQIYPVAALERI<br>
+N<br>
+&gt;1ihvA<br>
+NFRVYYRDSRDPVWKGPAKLLWKGEGAVVIQDNSDIKVVPRRKAKIIRD<br>
+</code>
+</p>
+
+
+<TR><TD bgcolor=#3399FF><h2><a name="clustal"><font size="5" face="Arial" color="#FFFFE0">Clustal format</FONT></a></h2>
+<TR><TD bgcolor=#E1F5FF><font size="2" face="Arial">
+Clustal format files contain the word clustal at the beginning:
+</font>
+<p class="info"><code>
+CLUSTAL W (1.82) multiple sequence alignment<br>
+<br>
+1aboA  &nbsp;&nbsp;-NLFV-ALYDFVASGDNTLSITKGEKLRV-------LGYNHNG-------EWCEA--QTK<br>
+1ycsB   &nbsp;&nbsp;KGVIY-ALWDYEPQNDDELPMKEGDCMTI-------IHREDEDEI-----EWWWA--RLN<br>
+1pht &nbsp;&nbsp;&nbsp;-GYQYRALYDYKKEREEDIDLHLGDILTVNKGSLVALGFSDGQEARPEEIGWLNGYNETT<br>
+1vie &nbsp;&nbsp;&nbsp;---------DRVRKKSG--AAWQGQIVGW---------YCTNLTP----EGYAVESEAHP<br>
+1ihvA  &nbsp;&nbsp;------NFRVYYRDSRD--PVWKGPAKLL---------WKGEG-------AVVIQ---DN<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+<br>
+1aboA&nbsp;&nbsp;NGQGWVPSNYITPVN------<br>
+1ycsB&nbsp;&nbsp;DKEGYVPRNLLGLYP------<br>
+1pht&nbsp;&nbsp;&nbsp;GERGDFPGTYVEYIGRKKISP<br>
+1vie&nbsp;&nbsp;&nbsp;GSVQIYPVAALERIN------<br>
+1ihvA&nbsp;&nbsp;SDIKVVPRRKAKIIRD-----<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+</code></p>
+
+<TR><TD bgcolor=#3399FF><h2><a name="msf"><font size="5" face="Arial" color="#FFFFE0">Msf format</FONT></a></h2>
+
+<TR><TD bgcolor=#E1F5FF><font size="2" face="Arial">
+    msf formatted multiple sequence files are most often
+    created when using programs of the GCG suite. msf files
+    include the sequence name and the sequence itself, which is
+    usually aligned with other sequences in the file. You can
+    specify a single sequence or many sequences within an msf
+    file.<BR>An example of part of an msf file, created using the GCG
+    multiple sequence alignment program:
+</font>
+<p class="info"><code>
+    !!AA_MULTIPLE_ALIGNMENT 1.0<br>
+    PileUp of: @hsp70.list<br>
+    <br>
+    Symbol comparison table: GenRunData:blosum62.cmp CompCheck:
+    6430<br>
+    <br>
+    GapWeight: 8<br>
+    GapLengthWeight: 2<br>
+
+    <br>
+    hsp70.msf MSF: 743 Type: P October 6, 1998 18:23 Check: 7784
+    ..<br>
+    <br>
+    Name: S11448 Len: 743 Check: 3635 Weight: 1.00<br>
+    Name: S06443 Len: 743 Check: 5861 Weight: 1.00<br>
+    Name: S29261 Len: 743 Check: 7748 Weight: 1.00<br>
+    <br>
+
+    //<br>
+    <br>
+    1 50<br>
+    S11448 ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~MTFD GAIGIDLGTT YSCVGVWQNE<br>
+    S06443 ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~MTFD GAIGIDLGTT YSCVGVWQNE<br>
+    S29261 ~~~~~~~~~~ ~~~~~~~~~~ ~~~~~~~~MG KIIGIDLGTT NSCVAIMDGT<br>
+</code>
+</p>
+
+<TR><TD bgcolor=#E1F5FF><font size="2" face="Arial">
+    Some of the hallmarks of a msf formatted sequence are the
+    same as a single sequence gcg format file:
+    <ul>
+        <li>Begins with the line (all uppercase)
+            !!NA_MULTIPLE_ALIGNMENT 1.0 for nucleic acid
+            sequences or !!AA_MULTIPLE_ALIGNMENT 1.0 for amino
+            acid sequences. Do not edit or delete the file type
+            if its present.(optional)</li>
+        <li>A description line which contains informative text
+            describing what is in the file. You can add this
+            information to the top of the MSF file using a text
+            editor.(optional)</li>
+        <li>A dividing line which contains the number of bases or
+            residues in the sequence, when the file was created,
+            and importantly, two dots (..) which act as a divider
+            between the descriptive information and the following
+            sequence information.(required)<br\>
+            </li>
+
+    </ul>
+    msf files contain some other information as well:
+    <ul>
+        <li>Name/Weight: The name of each sequence included in
+            the alignment, as well as its length and checksum
+            (both non-editable) and weight (editable).(required) </li>
+        <li>Separating Line. Must include two slashes (//) to
+            divide the name/weight information from the sequence
+            alignment.(required) </li>
+        <li>Multiple Sequence Alignment. Each sequence named in
+            the above Name/Weight lines is included. The
+            alignment allows you to view the relationship among
+            sequences.<br\>
+            </li>
+    </ul>
+
+    &nbsp;
+</font>
+
+<TR><TD bgcolor=#3399FF><h2><a name="pfam"><font size="5" face="Arial" color="#FFFFE0">Visualization of PFAM motifs on T-COFFEE alignments</FONT></a></h2>
+<TR><TD bgcolor=#E1F5FF>
+<p><BR/>
+<font size="3" face="Arial"><b>METHOD:</b></font><br>
+<font size="2" face="Arial">
+All sequences in the alignment will be searched <b>individually</b> for known PFAM 
+motifs using the program "hmmpfam". 
+<p>
+Every hit to a PFAM motif (E-value < 0.1) will be mapped onto the multiple 
+alignment from T-COFFEE using a unique color (green, red, yellow, blue, ...).
+<p>
+Such a hit corresponds to an alignment between the sequence and the PFAM motif 
+(see HMMOUT files that are also available on the T-COFFEE site), where 
+exactly and weekly conserved residues, as well as dominant residues of the 
+motif are indicated.
+<p>
+We map the information from this alignment (HMMOUT) onto the T-COFFEE 
+alignment in the following manner:
+<br>
+Exactly conserved residues between the sequence and the PFAM motif are colored 
+in a darker color than the weekly conserved ones. Residues that do not 
+support the alignment are not colored at all. Dominant residues in the PFAM 
+sequence are also boxed.
+<p>
+
+<font size="3" face="Arial"><b>INTERPRETATION:</b></font><br>
+Several conclusions can be drawn from such a presentation:
+<ul>
+<li>The position of PFAM motifs can be spotted directly on the alignment
+<li>PFAM motifs originated from multiple alignments themselves. One would 
+expect to find most of the dominant residues to be aligned in the same manner 
+in the T-COFFEE alignment if all sequences support this motif. This is thus a 
+(somewhat indirect) way to compare PFAM alignments and T-COFFEE alignments, 
+and regions where both alignments disagree should be investigated in more 
+detail. 
+<li>Sometimes, different PFAM motifs are found in the same T-COFFEE alignment, 
+or only some sequences match a motif (for the given E-value cut-off). This 
+again indicates regions of the alignment that should be scrutinized.
+</ul>
+<br>
+
+<TR><TD bgcolor=#3399FF><h2><a name="score"><font size="5" face="Arial" color="#FFFFE0">Consistency score</a></font></h2>
+<TR><TD bgcolor=#E1F5FF><font size="2" face="Arial">
+<p>
+The COFFEE score reflects the level of consistency between a multiple sequence alignment and a library containing pairwise alignments of the same sequences.<br>
+Ideally, the better its score, the more biologically relevant the multiple alignment.
+In the simplest scheme, the overall consistency score is equal to the number of pairs of residues present in the multiple alignments that are also found in the library, divided by the total number of pairs observed in the multiple sequence alignment. This measure gives an overall score between 0 and 1. The maximum value a multiple alignment can have depends on the library. For the optimal score to be 1, all the alignments in the library need to be compatible with one another (e.g. when all the pairwise alignments have been extracted from the same multiple sequence alignment or when the sequences are almost identical). 
+
+<TR><TD bgcolor=#3399FF><h2><a name="type"><font size="5" face="Arial" color="#FFFFE0">Residues Type</a></font></h2>
+<TR><TD bgcolor=#E1F5FF><font size="2" face="Arial">
+<p>
+<table cellpadding=0 cellspacing=0 border=0 bgcolor="#C0C0C0">
+<tr><td><table cellpadding=3 cellspacing=1 border=0>
+<TR><TD bgcolor="#FFFFE0">charged</TD><TD bgcolor="#FFFFE0"><span class=value1>KRDE</span></TD></TR>
+<TR><TD bgcolor="#FFFFE0">polar</TD><TD bgcolor="#FFFFE0"><span class=value2>NQST</span></TD></TR>
+<TR><TD bgcolor="#FFFFE0">aliphatic</TD><TD bgcolor="#FFFFE0"><span class=value3>ILMV</span></TD></TR>
+<TR><TD bgcolor="#FFFFE0">aromatic</TD><TD bgcolor="#FFFFE0"><span class=value4>FYW</span></TD></TR>
+<TR><TD bgcolor="#FFFFE0">others</TD><TD bgcolor="#FFFFE0"><span class=value5>APCGH</span></TD></TR>
+</TABLE>
+</td></tr></TABLE>
+
+
+</TABLE>
+</body>
+</html>

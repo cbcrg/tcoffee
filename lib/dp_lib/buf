@@ -1,0 +1,60 @@
+int ** evaluate_diagonals_cdna ( Alignment *A, int *ns, int **l_s, Constraint_list *CL,int maximise,int n_groups, char **group_list, int ktup)
+        {
+	  int a, b, c;
+	  int x, nx, y, ny, l1, nl1,l2, nd;
+	  int **diag;
+	  char *s1, *s2;
+	  int **dna_diag;
+	  int n_dna_diag;
+	 
+	  
+	 
+	  if ( ns[0]!=1 || ns[1]!=1)
+	    {
+	      fprintf ( stderr, "\nERROR 2 SEQUENCES ONLY [FATAL:%s", PROGRAM);
+	      crash ("");
+	    }
+	  n_dna_diag=(strlen ( A->seq_al[l_s[0][0]])+strlen ( A->seq_al[l_s[1][0]])-1);
+	  s1=vcalloc ( strlen ( A->seq_al[l_s[0][0]])+1, sizeof (char));
+	  s2=vcalloc ( strlen ( A->seq_al[l_s[1][0]])+1, sizeof (char));
+	  dna_diag=declare_int ( n_dna_diag+1, 2);
+	  for ( a=0; a<= n_dna_diag; a++)dna_diag[a][0]=a;
+
+	  nl1=strlen (A->seq_al[l_s[0][0]]);
+	  for (a=0; a< 3; a++)
+	    {
+	      s1=translate_dna_seq (A->seq_al[l_s[0][0]]+a, 0, 'x', s1);
+	      l1=strlen (s1);
+	      for ( b=0; b< 3; b++)
+		{
+		  s2=translate_dna_seq (A->seq_al[l_s[1][0]]+b, 0, 'x', s2);
+		  l2=strlen (s2);
+		  
+		  diag=evaluate_diagonals_for_two_sequences( s1, s2, maximise,NULL, 1);
+		  
+		  for (c=1; c<=(l1+l2-1); c++)
+		    { 
+		      x= (((l1-c)>0)? (l1-c):0)+1;
+		      y= (((l1-c)<0)?-(l1-c):0)+1;
+		      
+		      nx=3*x-2+a;
+		      ny=3*y-2+b;
+		      /*
+		      fprintf ( stderr, "[x=%d y=%d]->[nx=%d ny=%d][nl1=%d]->nd=%d\n", x, y,nx, ny, nl1,nl1+(ny-nx) );
+		      */
+		      nd=nl1+(ny-nx);
+
+		      dna_diag[nd][1]+=(diag[c][1]*diag[c][1]);
+		    }
+		  
+		  free_int (diag, -1);
+		}
+	    }
+	  sort_int (dna_diag+1, 2, 1,0, n_dna_diag-1);	  
+
+	  
+	  free (s1);
+	  free (s2);
+	  return dna_diag;
+	}
+	  

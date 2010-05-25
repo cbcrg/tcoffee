@@ -1,0 +1,653 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <stdarg.h>
+#include <string.h>
+
+#include "io_lib_header.h"
+#include "util_lib_header.h"
+#include "define_header.h"
+#include "dp_lib_header.h"
+
+static double mc_delta_matrix ( int ***mat1, int ***mat2, char **alp, int nch);
+static double delta_matrix ( int **mat1,int **mat2, char *alp);
+static double ***pavie_seq2pavie_fmat (Sequence *S,double *gop, double *gep, char **mat, char *idmat, int id_threshold, int sample_size, int nch  );
+static int **pavie_fmat2pavie_logodd_mat (double **fmat, char *alp);
+static double **pavie_aln2fmat(Alignment *A, double **fmat, char *idmat, int id_threshold, int ch, int nch);
+static int pavie_mat2pavie_id_mat ( int **mat,char *in_name, char *alp, char *ignore, char *force,int T, char *out_name);
+static double paviemat2gep ( int **mat, char *alp);
+static Alignment *align_pavie_sequences (char *seq0,char *seq1,char **mat,double *gop,double *gep,int nch);
+static int pavie_score (char *s0,int p0, char *s1,int p1,char **mat_file, double *gop, double *gep, int nch);
+char **seq2pavie_alp (Sequence *S, int nch);
+Sequence * seq2pavie_seq ( Sequence *S, int nch);
+FILE* output_pavie_aln (Alignment *A, int nch, FILE *fp);
+char **output_pavie_mat_list ( int ***current_mat, double *gep, char **alp, int nch,char *prefix,int cycle, char **mat_name);
+
+
+
+int **pavie_seq2pavie_aln(Sequence *S,char *mat)
+{
+  int a, b,c, nch=0;
+  char **mat_list;
+
+  double *gep, *gop;
+  Alignment *A;
+  char **alp;
+  char *pavie_idmat;
+  FILE *fp;
+  
+  
+  mat_list=declare_char (100, 100);
+  
+  if ( is_matrix (mat))
+    {
+      sprintf ( mat_list[nch++], "%s", mat);
+    }
+  else
+    {
+      fp=vfopen (mat,"r");
+      while ( (c=fgetc(fp))!=EOF)
+	{
+	  ungetc(c, fp);
+	  fscanf (fp, "%s\n",mat_list[nch++]);
+	}
+      vfclose (fp);
+    }
+  
+  alp=seq2pavie_alp (S, nch);
+  S=seq2pavie_seq (S, nch);
+  
+  gop=vcalloc (nch, sizeof (double));
+  gep=vcalloc (nch, sizeof (double));
+  for ( a=0; a< nch; a++)
+    {
+      int **m;
+      m=read_matrice (mat_list[a]);
+      gep[a]=(int)m['a'-'A']['a'-'A'];
+      free_int (m, -1);
+    }
+  
+  
+  pavie_idmat=vtmpnam(NULL);
+  pavie_mat2pavie_id_mat (NULL,"idmat", alp[0],"X","",1,pavie_idmat);
+  
+
+  for ( a=0; a< S->nseq-1; a++)
+    {
+      for ( b=a+1; b< S->nseq; b++)
+        {
+	A=align_pavie_sequences (S->seq[a],S->seq[b],mat_list,gop,gep,nch);
+	sprintf ( A->name[0], "%s", S->name[a]);
+	sprintf ( A->name[1], "%s", S->name[b]);
+	A->score=aln2sim(A,pavie_idmat);
+	fprintf ( stdout, "#############\nAlignment %s %s: %d %% ID SCORE %d \n", S->name[a], S->name[b], A->score, A->score_aln);
+	
+	output_pavie_aln (A,nch, stdout);
+	free_aln(A);
+        }
+    }
+  
+  return NULL;
+}
+
+
+int **pavie_seq2trained_pavie_mat(Sequence *S, char *param)
+{
+  double ***fmat;
+  int ***current_mat;
+  int ***previous_mat;
+  char **alp;
+
+  char **mat_file;
+  double d,delta_min=10;
+  double *gep;
+  double *gop;
+  
+  char ignore[100];
+  char force [100];
+  char pavie_idmat[100];
+  int id_threshold;
+  int sample_size;
+  char *b;
+  int a,n=0,nch=1;
+
+
+  if ((b=strstr(param,"THR")))sscanf ( b+3, "%d", &id_threshold);
+  else id_threshold=0;
+  
+  if ((b=strstr(param,"SAMPLE")))sscanf ( b+6, "%d", &sample_size);
+  else sample_size=0;
+  
+  if ((b=strstr(param,"CHANNEL")))sscanf ( b, "CHANNEL%d", &nch);
+  else sample_size=0;
+
+  /*Declare Arrays*/
+  gep=vcalloc (nch, sizeof (double));
+  gop=vcalloc (nch, sizeof (double));
+  mat_file=declare_char ( nch, 100);
+  current_mat =vcalloc ( nch, sizeof (double**));
+  previous_mat=vcalloc ( nch, sizeof (double**));
+  
+
+  sprintf (ignore, "X");
+  sprintf (force, "");
+  sprintf ( pavie_idmat, "pavie_idmat");
+  
+  alp=seq2pavie_alp (S, nch);
+  S=seq2pavie_seq (S, nch);
+ 
+  
+  
+  if (strstr (param,"idweight")) pavie_mat2pavie_id_mat (NULL,"idmat", alp[0],ignore,force,1,pavie_idmat);
+  else pavie_mat2pavie_id_mat (NULL,"idmat", alp[0],ignore,alp[0],0,pavie_idmat);
+  
+
+  for ( a=0; a<nch; a++)sprintf (mat_file[a], "idmat");
+  fmat=pavie_seq2pavie_fmat ( S,gop,gep,mat_file,pavie_idmat, id_threshold, sample_size, nch);
+    
+
+  for (a=0; a<nch; a++)
+    {
+      current_mat[a]=pavie_fmat2pavie_logodd_mat(fmat[a], alp[a]);
+      gep[a]=paviemat2gep(current_mat[a], alp[a]);
+    }
+  mat_file=output_pavie_mat_list ( current_mat,gep, alp, nch,"", n++, mat_file); 
+  
+  
+  
+  fprintf ( stdout, "\n");
+  previous_mat=vcalloc ( nch, sizeof (int**));
+  while ((d=mc_delta_matrix (previous_mat, current_mat, alp, nch))>delta_min)
+    {
+
+      fprintf ( stdout, "\nDelta=%d Mat: ",(int) d);
+      for (a=0; a<nch; a++)
+	{
+	  free_int (previous_mat[a], -1);
+	  previous_mat[a]=current_mat[a];
+	}
+      fprintf ( stdout, "\n");
+	
+      fmat=pavie_seq2pavie_fmat (S,gop,gep,mat_file, pavie_idmat, id_threshold, sample_size, nch);      
+      
+     
+      for (a=0; a< nch; a++)
+	{
+	  current_mat[a]=pavie_fmat2pavie_logodd_mat(fmat[a], alp[a]);
+	  gep[a]=paviemat2gep(current_mat[a], alp[a]);
+	  free_double (fmat[a], -1);
+	}
+      mat_file=output_pavie_mat_list ( current_mat,gep, alp, nch,"", n++, mat_file); 
+      vfree (fmat);
+      n++;
+    }
+  
+  fprintf ( stdout, "\nDelta=%d Mat: ",(int) d);
+  for (a=0; a<nch; a++)
+	{
+	  fprintf ( stdout, "%s ",mat_file[a]);
+	}
+  fprintf ( stdout, "\n");
+  
+  return current_mat[0];
+}
+
+double mc_delta_matrix ( int ***mat1, int ***mat2, char **alp, int nch)
+{
+  int a;
+  double delta=0;
+  if ( !mat1 || !mat2) return 100000;
+  for ( a=0; a< nch; a++)
+    delta+=delta_matrix (mat1[a], mat2[a], alp[a]);
+  return delta/nch;
+}
+      
+double delta_matrix ( int **mat1,int **mat2, char *alp)
+{
+  int ns;
+  double delta, v;
+  int a, b;
+  
+  if ( mat1==NULL || mat2==NULL) return 100000;
+  
+  ns=strlen (alp);
+  for (delta=0, a=0; a< ns; a++)
+    for ( b=0; b< ns; b++)
+      {
+	v=mat1[alp[a]-'A'][alp[b]-'A']-mat2[alp[a]-'A'][alp[b]-'A'];
+	delta+=v*v;
+      }
+  delta=sqrt(delta);
+  
+  return delta;
+}
+
+double ***pavie_seq2pavie_fmat (Sequence *S,double *gop, double *gep, char **mat, char *idmat, int id_threshold, int sample_size, int nch  )
+{
+  int a, b, chan;
+  double ***fmat=NULL;
+  Alignment *A;
+
+
+  fmat=vcalloc ( nch, sizeof (double **));
+  if (sample_size==0)
+    {
+      for ( a=0; a< S->nseq-1; a++)
+	{
+	  output_completion ( stderr,a+1,S->nseq,1);
+	  for ( b=a+1; b< S->nseq; b++)
+	    {
+
+	      A=align_pavie_sequences (S->seq[a],S->seq[b],mat,gop,gep,nch);
+		      
+	      for ( chan=0; chan< nch; chan++)
+		fmat[chan]=pavie_aln2fmat (A, fmat[chan], idmat, id_threshold, chan, nch);
+	      free_aln (A);
+	    }
+	}
+    }
+  else 
+    {
+      int tot=0, c;
+      static int **list;
+
+      if (!list)
+	{
+	  list=declare_int (sample_size+1, 2);
+	  vsrand(0);
+	  tot=0;
+	  while (tot<sample_size)
+	    {
+	      a=rand()%(S->nseq);b=rand()%(S->nseq);
+	      if ( a!=b)
+		{
+		  list[tot][0]=a;list[tot][1]=b;
+		  tot++;
+		}
+	    }
+	}
+      for (tot=0,c=0; c<sample_size; c++, tot++)
+	{
+	  a=list[c][0];b=list[c][1];
+	  A=align_pavie_sequences (S->seq[a],S->seq[b],mat,gop,gep,nch);
+	  for (chan=0; chan< nch; chan++)
+	    fmat[chan]=pavie_aln2fmat (A, fmat[chan], idmat, id_threshold,chan, nch);
+	  free_aln (A);
+	  output_completion ( stderr,tot,sample_size,1);
+	}
+    }
+  return fmat;
+}
+
+
+
+int **pavie_fmat2pavie_logodd_mat (double **fmat, char *alp)
+{
+  char s1, s2,S1, S2;
+  double r1, r2;
+  int **mat;
+  int a, b;
+  int ns;
+
+  ns=strlen (alp);
+  mat=declare_int (256, 256);
+  
+  for (a=0; a<ns; a++)
+    for (b=0; b<ns; b++)
+      {
+	s1=tolower(alp[a]);S1=toupper(alp[a]);
+	s2=tolower(alp[b]);S2=toupper(alp[b]);
+
+	
+
+	r1=(fmat[s1][s2]+1)/(fmat[s1][s1]+1);
+	r2=(fmat[s2][s1]+1)/(fmat[s2][s2]+1);
+	mat[s1-'A'][s2-'A']=(int)(((log(r1)+log(r2))/2)*PAVIE_MAT_FACTOR);
+	mat[S1-'A'][S2-'A']=(int)(((log(r1)+log(r2))/2)*PAVIE_MAT_FACTOR);
+	mat[S1-'A'][s2-'A']=(int)(((log(r1)+log(r2))/2)*PAVIE_MAT_FACTOR);
+	mat[s1-'A'][S2-'A']=(int)(((log(r1)+log(r2))/2)*PAVIE_MAT_FACTOR);
+	
+      }
+  return mat;
+}
+	
+double **pavie_aln2fmat(Alignment *A, double **fmat, char *idmat, int id_threshold, int ch, int nch)
+{
+  int a;
+  int c1, c2;
+  int w;
+  int l,start;
+  
+  l=(A->len_aln/nch);
+  start=l*ch;
+  A->len_aln=l;
+  A->seq_al[0]+=start;
+  A->seq_al[1]+=start;
+  
+
+
+  if ( fmat==NULL)fmat=declare_double(300, 300);
+  
+  w=aln2sim(A, idmat);
+    
+  if (w<id_threshold) 
+    {
+      A->len_aln*=nch;
+      A->seq_al[0]-=start;A->seq_al[1]-=start;
+      return fmat;
+    }
+  else
+    {
+      for ( a=0; a<A->len_aln; a++)
+	{
+	  c1=tolower(A->seq_al[0][a]);
+	  c2=tolower(A->seq_al[1][a]);
+	  fmat[c1][c2]+=w;
+	}
+      A->len_aln*=nch;
+      A->seq_al[0]-=start;A->seq_al[1]-=start;
+      
+      return fmat;
+    }
+}
+
+int pavie_mat2pavie_id_mat ( int **mat,char *in_name, char *alp, char *ignore, char *force,int T, char *out_name)
+{
+  int n1, n2, n3;
+  int s1, s2, S1, S2;
+  int a, b;
+  int **idmat;
+  
+  if      (mat==NULL && in_name==NULL) return 0;
+  else if (mat==NULL)
+    {
+      mat=read_matrice (in_name);
+    }
+  
+
+  idmat=declare_int ( 256, 256);
+  n1=strlen (alp);
+  n2=strlen (ignore);
+  n3=strlen (force);
+  
+  for (a=0; a< n1; a++)
+    for ( b=0; b<n1; b++)
+      {
+	s1=tolower(alp[a])-'A';S1=toupper(alp[a])-'A';
+	s2=tolower(alp[b])-'A';S2=toupper(alp[b])-'A';
+	idmat[s1][s2]=idmat[s1][S2]=idmat[S1][S2]=idmat[S1][s2]=(mat[s1][s2]>=T)?PAVIE_MAT_FACTOR:0;
+      }
+  for (a=0; a<n3; a++)
+    for (b=0; b<n1; b++)
+      {
+	s1=tolower(force[a])-'A';S1=toupper(force[a])-'A';
+	s2=tolower(alp[b])-'A';S2=toupper(alp[b])-'A';
+	idmat[s1][s2]=idmat[s1][S2]=idmat[S1][S2]=idmat[S1][s2]=PAVIE_MAT_FACTOR;
+      }
+
+  for (a=0; a<n2; a++)
+    for (b=0; b<n1; b++)
+      {
+	s1=tolower(ignore[a])-'A';S1=toupper(ignore[a])-'A';
+	s2=tolower(alp[b])-'A';S2=toupper(alp[b])-'A';
+	idmat[s1][s2]=idmat[s1][S2]=idmat[S1][S2]=idmat[S1][s2]=0;
+      }
+
+
+  
+
+  output_pavie_mat (idmat, out_name, 0, alp);
+  free_int (idmat, -1);
+  return 1;
+}
+double paviemat2gep ( int **mat, char *alp)
+{
+  int a, b, l;
+  int n=0;
+  double gep=0;
+  l=strlen ( alp);
+  
+  for (a=0; a<l-1; a++)
+    for ( b=a+1; b< l; b++)
+      {
+	gep+=mat[alp[a]-'A'][alp[b]-'A'];
+	n++;
+      }
+  gep/=n;
+ 
+  return gep;
+  
+}
+
+Alignment *align_pavie_sequences (char *seq0,char *seq1,char **mat,double *gop,double *gep,int nch)
+{
+  double **F; int **T;
+  Alignment *A;
+  int XL, YL, len;
+  int i, j, a, b, c;
+  double match, gap_inX, gap_inY, MXY=1, GX=2, GY=3;
+  
+  char *ax, *ay;
+  char *bufx, *bufy, *buf;
+  char *x, *y;
+  
+  
+  x=seq0;
+  y=seq1;
+  XL=strlen (x)/nch;
+  YL=strlen (y)/nch;
+  
+  
+  ax=vcalloc ( (YL+XL)*nch+1, sizeof (char));
+  ay=vcalloc ( (YL+XL)*nch+1, sizeof (char));
+  bufx=vcalloc ( (YL+XL)*nch+1, sizeof (char));
+  bufy=vcalloc ( (YL+XL)*nch+1, sizeof (char));
+  
+  F=declare_double (XL+2, YL+2);
+  T=declare_int (XL+2, YL+2);
+  
+ 
+  /*Fill stage*/
+  F[0][0] = 0;
+  for(i = 1; i <=XL; i++) 
+    {
+
+      F[i][0] = F[i-1][0]+pavie_score (x,i-1, NULL,GAP_CODE,mat, gop, gep, nch) /*CL->M[x[i-1]-'A'][gap]*/;
+      T[i][0] = GY;
+    }
+  
+  for(j = 1; j <= YL; j++) 
+    {
+      F[0][j] = F[0][j-1]+pavie_score (NULL,GAP_CODE,y, j-1,mat, gop, gep, nch)/*CL->M[y[j-1]-'A'][gap]*/;
+      T[0][j] = GX;
+    }
+
+  
+  for(i = 1; i <= XL; i++) 
+    {
+      for(j = 1; j <= YL; j++) 
+	{
+	  	  
+	  match  = F[i-1][j-1] + /*CL->M[x[i-1]-'A'][y[j-1]-'A']*/pavie_score (x,i-1,y, j-1,mat, gop, gep, nch);
+	  gap_inY= F[i-1][j] + /*CL->M[x[i-1]-'A'][gap]*/         pavie_score (x,i-1, NULL,GAP_CODE,mat, gop, gep, nch); 
+	  gap_inX= F[i][j-1] +  /*+ CL->M[y[j-1]-'A'][gap]*/      pavie_score (NULL,GAP_CODE,y, j-1,mat, gop, gep, nch);
+	
+	  if ( match >= gap_inY && match >=gap_inX){F[i][j]=match; T[i][j]=MXY;}
+	  else if ( gap_inX>=gap_inY){F[i][j]=gap_inX; T[i][j]=GX;}
+	  else {F[i][j]=gap_inY; T[i][j]=GY;}
+	}
+    }
+  /*Trace back stage*/
+  
+
+  i = XL; 
+  j = YL; 
+  len=0;
+  while(!(i==0 && j==0)) 
+    {
+      
+      if   (T[i][j]==MXY) 
+	{
+	  ax[len]=1;i--;
+	  ay[len]=1;j--;
+	}
+      else if ( T[i][j]==GY)
+	{
+	  ax[len]=1;i--;
+	  ay[len]='-';
+	}
+      else if ( T[i][j]==GX)
+	{
+	  ax[len]='-';
+	  ay[len]=1;j--;
+	}
+      len++;
+    }
+  
+  for (a=0; a<len; a++)
+    for (b=1; b<nch; b++)
+      {
+	ax[a+len*b]=ax[len];
+	ay[a+len*b]=ay[len];
+      }
+  len=len*nch;
+  ax[len]='\0';
+  ay[len]='\0';
+
+ 
+  sprintf ( bufx, "%s", ax);
+  sprintf ( bufy, "%s", ay);
+  
+  for (a=1;a<nch; a++)
+    {
+      strcat (ax, bufx);
+      strcat (ay, bufy);
+    }
+  
+  buf=ax;ax=invert_string (ax);vfree(buf);
+  buf=ay;ay=invert_string (ay);vfree(buf);
+  
+  
+  A=declare_aln2 (2,strlen(ax));
+  A->len_aln=strlen (ax);
+  for (a=0, b=0, c=0; a<A->len_aln; a++)
+    {
+      if (ax[a]==1)ax[a]=seq0[b++];
+      if (ay[a]==1)ay[a]=seq1[c++];
+    }
+  
+
+  A=declare_aln2 (2,strlen(ax));
+  sprintf ( A->seq_al[0], "%s", ax);
+  sprintf ( A->seq_al[1], "%s", ay);
+  A->len_aln=strlen (ax);
+  A->nseq=2;
+  A->score=A->score_aln=F[XL][YL];
+  vfree (ax); vfree(ay);vfree (bufx); vfree (bufy);free_double(F, -1); free_int (T, -1);
+  return A;
+} 
+
+
+int pavie_score (char *s0,int p0, char *s1,int p1,char **mat_file, double *gop, double *gep, int nch)
+  
+  {
+    static char *cmat;
+    static int  ***mat;
+    int l0, l1, c0, c1;
+    int a, score=0;
+    
+    if ( !cmat || !mat_file || !strm (cmat, mat_file[0]))
+      {
+	if ( !cmat)cmat=vcalloc ( 100, sizeof (char));
+	sprintf ( cmat, "%s", (mat_file)?mat_file[0]:"idmat");
+	if ( !mat)mat=vcalloc ( nch, sizeof (int**));
+	for ( a=0; a< nch; a++)
+	  {
+	    if ( mat[a])free_int (mat[a], -1);
+	    mat[a]=read_matrice ((mat_file)?mat_file[a]:"idmat");
+	    
+	  }
+      }
+    
+    l0=(s0)?strlen (s0)/nch:0;
+    l1=(s1)?strlen (s1)/nch:0;
+    for ( a=0; a< nch; a++)
+      {
+	c0=(s0)?s0[l0*a+p0]-'A':p0;
+	c1=(s1)?s1[l1*a+p1]-'A':p1;
+	score+=mat[a][c0][c1];
+      }
+    return score;
+  }
+Sequence * seq2pavie_seq ( Sequence *S, int nch)
+  {
+    char *buf;
+    int a, b;
+    
+    S->nseq/=nch;
+
+    for (b=0; b<S->nseq; b++)
+      {
+	
+	buf=vcalloc ((strlen (S->seq[b])*nch)+1, sizeof (char));
+	for ( a=0; a< nch; a++)
+	  {
+	    strcat (buf, S->seq[b+(S->nseq)*a]);
+	    vfree ( S->seq[b+(S->nseq)*a]);
+	  }
+	S->seq[b]=buf;
+      }
+    return S;
+  }
+char **seq2pavie_alp (Sequence *S, int nch)
+  {
+    int a, n;
+    char **alp;
+    
+    n=S->nseq/nch;
+    alp=vcalloc (nch, sizeof (char*));
+    for ( a=0; a< nch; a++)
+      {
+	alp[a]=array2alphabet (S->seq+n*a, n);
+      }
+    return alp;
+  }
+FILE *output_pavie_aln (Alignment *A, int nch, FILE *fp)
+{
+  int a, b, c, l, start, end;
+
+  l=A->len_aln/nch;
+  fprintf ( fp, "\nPAVIE MULTI CHANEL Alignment: N Channel %d\n\n", nch);
+  for ( a=0; a<A->nseq; a++)
+    {
+      for ( b=0; b<nch; b++)
+	{
+	  fprintf (fp, "%s  ", A->name[a]);
+	  start=l*b;end=start+l;
+	  for (c=start; c<end; c++)fprintf ( fp, "%c", A->seq_al[a][c]);
+	  fprintf (fp, "\n");
+	}
+      fprintf (fp, "\n");
+    }
+  return fp;
+}
+char **output_pavie_mat_list ( int ***current_mat, double *gep, char **alp, int nch,char *prefix,int cycle, char **mat_name)
+{
+  int a;
+  char mat_list_name[100];
+  FILE *fp;
+
+  
+  sprintf ( mat_list_name, "pavie_matrix_%s.cycle_%d.mat_list", prefix, cycle+1);
+  fp=vfopen ( mat_list_name, "w");
+  fprintf ( stderr, "\nOutput Pavie Matrix: %s", mat_list_name);
+  for ( a=0; a< nch; a++)
+    {
+      sprintf ( mat_name[a], "pavie_matrix_%s.ch_%d.cy_%d.pavie_mat", prefix,a+1, cycle+1);
+      fprintf ( stderr, "\n\tChannel %d Matrix: %s",a+1, mat_name[a]);
+      output_pavie_mat (current_mat[a],mat_name[a],gep[a], alp[a]);
+      fprintf ( fp, "%s\n", mat_name[a]);
+    }
+  vfclose (fp);
+  return mat_name;
+}

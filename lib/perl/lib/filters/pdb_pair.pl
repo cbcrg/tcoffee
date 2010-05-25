@@ -1,0 +1,69 @@
+#!/usr/bin/env perl
+#
+
+use Cwd;
+$HOME=$ENV{HOME};
+
+if ($ENV{TMP_4_TCOFFEE}){$tmp=$ENV{TMP_4_TCOFFEE};}
+else
+  {
+    $tmp="$HOME/.t_coffee/tmp/";
+   }
+
+
+$out="stdout";
+foreach $v(@ARGV){$cl.="$v ";}
+
+if ( $cl=~/\-pdbfile1=(\S+)/){$pdb1= $1;}
+if ( $cl=~/\-pdbfile2=(\S+)/){$pdb2= $1;}
+if ( $cl=~/\-outfile=(\S+)/){$out= $1;}
+
+if ( ! -e $pdb1)
+  {
+    print "COULD NOT READ PDB1 FILE |$pdb1| [FATAL:pdb_pair]\n";
+    exit (EXIT_FAILURE);
+  }
+elsif ( !-e $pdb2)
+  {
+    print "COULD NOT READ PDB2 FILE |$pdb2| [FATAL:pdb_pair]\n";
+    exit (EXIT_FAILURE);
+  }
+
+
+#Prepare the temporary directory
+$ini_dir=cwd();
+srand; 
+$rand=rand(1000000);
+$tmp_dir="$tmp/pdb_pair_dir_$$_R_$rand";
+
+`mkdir $tmp_dir`;
+`cp $pdb1 $tmp_dir/pdb1.pdb`;
+`cp $pdb2 $tmp_dir/pdb2.pep`;
+chdir $tmp_dir;
+#Compute the profile/pdb ALignment
+`t_coffee -other_pg extract_from_pdb -infile pdb1.pdb -seq >seq.pep`;
+`t_coffee -other_pg extract_from_pdb -infile pdb2.pdb -seq >>seq.pep`;
+`t_coffee seq.pep -quiet`;
+
+if ( !-e "seq.aln")
+  {
+    die "pdb_pair failed [FATAL:pdb_pair]\n";
+    exit (EXIT_FAILURE);
+  }
+chdir $ini_dir;
+
+
+if ($out eq "stdout")
+  {
+    open ( F,"$tmp_dir/seq.aln");
+    while (<F>){print $_;}
+    close (F);
+  }
+else
+  {
+    `cp $tmp_dir/seq.aln $out`;
+  }
+`rm $tmp_dir/*`;
+`rmdir $tmp_dir`;
+
+

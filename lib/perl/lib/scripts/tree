@@ -1,0 +1,486 @@
+#!/usr/bin/env perl
+
+#parameter initialization
+$unset="";
+$scoreT1=$scoreT2=$nseqT=$dp_limit=$unset;
+$DEBUG=0;
+@tl=();
+
+#Process the command  line
+if (!@ARGV)
+  {
+    print "t_coffee_dpa accepts every t_coffee_flag.\nType t_coffee to obtain a list\n";
+    print "Requires $TC_VERSION\n";
+    print "Requires ";
+    print "t_coffee_dpa specific flags:\n";
+    print "\t-dpa_master_aln....................Master alignment: provided OR computed\n";
+    print "\t-dpa_master_aln....................By default, Computed with t_coffee -very_fast\n";
+    print "\t-dpa_master_aln=<file>.............Use file, (must be an aln in Fasta or ClustalW\n";
+    print "\t-dpa_master_aln=<program>..........Compute aln with pg -infile=seq -outfile=aln`\n";
+    print "\t-dpa_max_nseq......................Maximum number of sequences in subgroups\n";
+    print "\t-dpa_min_score1....................Minimum Id for two sequences to be grouped in ref_aln\n";
+    print "\t-dpa_min_score2....................Minimum Id within a subgroup\n\n";
+    exit (0);
+  }
+foreach $arg (@ARGV)
+  {
+    $arg_list.=" $arg";
+  }
+
+
+#1 Extract the sequence parameters
+($seq0, $arg_list)=&extract_val_from_arg_list("^",$arg_list);
+($seq1, $arg_list)=&extract_val_from_arg_list("-seq",$arg_list, "SPLICE");
+($seq2, $arg_list)=&extract_val_from_arg_list("-in",$arg_list, "KEEP");
+($seq3, $arg_list)=&extract_val_from_arg_list("-infile",$arg_list, "SPLICE");
+($prf,  $arg_list)=&extract_val_from_arg_list("-profile",$arg_list, "SPLICE");
+$in_seq=$seq0." ".$seq1." ".$seq2." ".$seq3;
+$in_prf=(($prf ne $unset)?"$prf ":"");
+
+#5 Gather the name parameters
+($run_name, $arg_list)=&extract_val_from_arg_list("-run_name",$arg_list);
+($output,   $arg_list)=&extract_val_from_arg_list("-output",$arg_list);
+
+
+#2 Fit all the sequences into a single file
+&exit_dpa (($in_seq eq "" && $in_prf eq "")?1:0, "ERROR: You did not Provide any sequences. Use the -seq flag [FATAL: t_coffee_dpa]\n", EXIT_FAILURE);
+
+#get the suffix of the sequences
+if ($in_seq=~/\S+/)
+  {
+    $seq_in_type="seq";
+    $seq=&vtmpnam();
+    print STDERR "Gather all the sequences into a single file\n";	
+    `t_coffee $in_seq -convert -output fasta_seq -outfile=$seq -quiet=stdout`;
+    $in_seq=~/([\w-]+)/;
+    $suffix=$1;
+    
+  }
+elsif ($in_prf=~/\S+/)
+  {
+    $seq_in_type="profile"; 
+    $seq.= $in_prf;
+    $suffix=&vtmpnam();
+  }
+else
+  {
+    &exit_dpa (1, "ERROR: You did not Provide any sequences. Use the -seq flag [FATAL: t_coffee_dpa]\n", EXIT_FAILURE);
+  }
+if ( !$run_name){$run_name=$suffix;}
+		 
+
+
+   
+#4 Gather dpa parameters
+($dpa_master_aln, $arg_list)  =&extract_val_from_arg_list("-dpa_master_aln",$arg_list);
+$dpa_master_aln=~s/\s//g;
+($nseqT, $arg_list)           =&extract_val_from_arg_list("-dpa_max_nseq",$arg_list);
+#dpa_min_score1: min score for merging alignments in the fast alignment
+($scoreT1, $arg_list)         =&extract_val_from_arg_list("-dpa_min_score1",$arg_list);
+#dpa_min_score2: min score for merging alignments in the slow alignment
+($scoreT2, $arg_list)         =&extract_val_from_arg_list("-dpa_min_score2"    ,$arg_list);
+($dpa_limit, $arg_list)       =&extract_val_from_arg_list("-dpa_limit"        ,$arg_list);
+($dpa_delta_id, $arg_list)    =&extract_val_from_arg_list("-dpa_delta_id"        ,$arg_list);
+
+
+#6 Set to default values DPA parameters(if values unset)
+if ($scoreT1 eq $unset){$scoreT1=95;}
+if ($scoreT2 eq $unset){$scoreT2=30;}
+if ($nseqT eq $unset) {$nseqT=30;}
+if ($dpa_limit eq $unset) {$dpa_limit=0;}
+if ($dpa_delta_id eq $unset) {$dpa_delta_id=1;}
+if ($dpa_master_aln eq $unset) {$dpa_master_aln="t_coffee";}
+
+#1 make or use the master aln
+
+
+if (-e $dpa_master_aln==0)
+	{
+	  $dpa_master_aln_pg=$dpa_master_aln;
+	  $dpa_master_aln="$suffix."."guide_"."$dpa_master_aln";
+	  print STDERR "Compute a fast and approximate alignment [$dpa_master_aln] with $dpa_master_aln_pg";
+	  if ($dpa_master_aln_pg eq "t_coffee")
+	    {
+	      `t_coffee -seq $seq -special_mode quickaln -outfile $dpa_master_aln -quiet`;
+	    }
+	  else
+	    {
+	      `$dpa_master_aln_pg -infile=$seq -outfile=$dpa_master_aln`;
+	    }
+	  print STDERR "[DONE]\n";
+	}
+else
+	{
+	print STDERR "Load precomputed alignment: $dpa_master_aln\n";
+	}
+&exit_dpa (!(-e $dpa_master_aln), "Failed to produce the guide aln $dpa_master_aln\n[FATAL: t_coffee_dpa]\n", EXIT_FAILURE);
+
+$local_master_aln=&vtmpnam();
+`cp $dpa_master_aln $local_master_aln`;
+
+
+#1 get closely related groups
+if ( $scoreT1)
+  {
+    %gl=&get_groups($scoreT1,0,$local_master_aln, "aln"," ", "t_coffee"); 
+    $ng=$gl{'ng'};
+    print STDERR "\nSplit into $gl{'ng'} Groups at with at least $scoreT1\% identity";
+    &display_groups(-1,%gl);
+  }
+
+
+#2 align closely related groups
+$quiet="-quiet ";
+
+while (!%gl ||$ng>$nseqT)
+  {
+
+    %gl=&get_groups($scoreT2,$nseqT,$gl{'group_list'}, "collapsed_master"," ",$local_master_aln );
+    $previous_ng=$ng;
+    $ng=$gl{'ng'};
+    if ($previous_ng == $ng && $ng>($nseqT*$dpa_limit))
+      {
+	$scoreT2-=$dpa_delta_id;
+	print STDERR "\nLower the minimum percent id to $scoreT2\n";  
+      }
+    else
+      {
+	print STDERR "\nSplit into $gl{'ng'} Groups with a maximum of $nseqT sequences and a minimum of $scoreT2\% identity ";
+	for ( $a=0; $a<$ng; $a++)
+	  {
+	    &display_groups($a,%gl); 
+	    if ( $gl{$a}{'nseq'}>1)
+	    {
+		$b=$a+1;
+		print STDERR "[Start ...";
+		&align_groups ($gl{$a}{'list'}, $gl{$a}{'file'}, $arg_list, " $quiet ", "t_coffee");
+		print STDERR "Finished\]";
+	    }
+	}
+      }
+  }
+
+
+#reintegrate output flags before the final run   
+if ($run_name){;}
+else 
+  {
+    $run_name=$suffix;
+  }
+$arg_list.=" -run_name $run_name";
+
+
+align_groups ($gl{'group_list'},"default", $arg_list, " ","t_coffee"); 
+
+
+&clean_tmp_file (@tl);
+
+sub align_groups
+  {
+    my $list=@_[0];
+    my $outfile=@_[1];
+    my $arguments=@_[2];
+    my $extra_parameters=@_[3];
+    my $pg=@_[4];
+
+    
+    
+    $command="$pg -profile $list -outfile $outfile $arguments $extra_parameters";
+    
+#    if ( $DEBUG) {print "\n$command\n";}
+    
+    $status=system ($command);
+    &exit_dpa ($status, "Failed in Align_Groups:\n$command\n[FATAL: t_coffee_dpa]\n", EXIT_FAILURE);
+    return $outfile;
+  }
+    
+sub get_groups
+  {
+    my $scoreT=@_[0];
+    my $nseqT=@_[1];
+    my $seq=@_[2];
+    my $mode=@_[3];
+    my $extra_parameters=@_[4];
+    my $ref_aln=@_[5];
+    my %group_list;
+        
+    my $ng;
+    my @l, $s;
+    my $name;
+    my $outfile;
+    my $collapsed_aln;
+    
+		
+    $outfile=&vtmpnam();
+    if ( $mode eq "aln")
+      {
+	$command="t_coffee -infile=$seq -msa_mode=precomputed -very_fast -quiet=$outfile -evaluate_mode no -split -split_score_thres $scoreT -split_nseq_thres $nseqT  $extra_parameters ";
+      }
+    elsif ( $mode eq "collapsed_master")
+      {
+	
+	$collapsed_aln=aln2collapsed_aln ($ref_aln, $seq);
+	$command="t_coffee -infile=$collapsed_aln -msa_mode=precomputed -very_fast -quiet=$outfile -evaluate_mode no -split -split_score_thres $scoreT -split_nseq_thres $nseqT  $extra_parameters ";
+      }
+    else
+      {
+	$command="t_coffee -$mode=$seq -very_fast -quiet=$outfile -evaluate_mode no -split -split_score_thres $scoreT -split_nseq_thres $nseqT  $extra_parameters ";
+      }
+    $status=system ($command); 
+    &exit_dpa ($status, "Failed in Get_Groups:\n$command\n[FATAL: t_coffee_dpa]\n", EXIT_FAILURE);    
+    %group_list=&file2group_list($outfile);
+    return %group_list;
+  }
+
+
+sub file2group_list
+  {
+    my $outfile=@_[0];
+    my (%group_list,$list, $file, $new_file,$nseq, $ng,@namelist, $a, $n);
+ 
+    $group_list{'ng'}=$ng=0;
+    $group_list{'group_list'}="";
+        
+    open (F, $outfile);
+    while (<F>)
+      {
+	
+	if (/SPLIT_GROUP/)
+	  {
+	
+	    /Nseq (.*) ; Score/;
+	    $nseq=$1;
+	    /File (.*)/;
+	    $file=$1;
+	    /List (.*) ; File/;
+	    $list=$1;
+	    
+	    @namelist =($list=~/(\S+)/g);
+	    if ( $nseq ==1 && -e $namelist[0]){$new_file=$namelist[0];}
+	    else
+	      {
+	       $new_file=&vtmpnam($name);
+	       `mv $file $new_file`;
+	      }
+	    
+	    $group_list{$ng}{'file'}=$new_file;
+	    $group_list{'group_list'}.="  $group_list{$ng}{'file'} ";
+	    $group_list{$ng}{'nseq'}=$nseq;
+	    $group_list{$ng}{'list'}=$list;
+
+	    
+	    if (!$name_lu{$new_file}{'list'})
+	      {
+		$name_lu{$new_file}{'list'}.="(";
+		
+		foreach $n (@namelist)
+		  {
+		    
+		    if ( !$name_lu{$n}{'list'})
+		    {
+			$name_lu{$new_file}{'list'}.="$n,";
+			$name_lu{$new_file}{'nseq'}+=1;
+		    }
+		    else 
+		      {
+			$name_lu{$n}{'list'}=~s/\|/,/g;
+			$name_lu{$new_file}{'list'}.="$name_lu{$n}{'list'} |";
+			$name_lu{$new_file}{'nseq'}+=$name_lu{$n}{'nseq'}
+		    }		
+		  }
+		chop $name_lu{$new_file}{'list'};
+		$name_lu{$new_file}{'list'}.=")";
+	      }
+	    $ng++;
+	  }
+      }
+    $group_list{'ng'}=$ng;
+    close (F);
+    return %group_list;
+}
+
+sub display_groups
+  {
+    my ($g,%gl)=@_;
+    my ($a, $b, $start, $end);
+
+    if ( $g==-1){$start=0; $end=$gl{'ng'};}
+    else {$start=$g; $end=$g+1;}
+    
+    for ( $a=$start; $a<$end; $a++)
+     {
+       $b=$a+1;
+       if ($gl{$a}{'nseq'}>1)
+	 {
+	   print STDERR "\n\tRealign Group $b [File=$gl{$a}{'file'}][Nseq=$name_lu{$gl{$a}{'file'}}{'nseq'}] [$name_lu{$gl{$a}{'file'}}{'list'}]";
+	 }
+	else 
+	  {
+	   print STDERR "\n\tKeep    Group $b [File=$gl{$a}{'file'}][Nseq=$name_lu{$gl{$a}{'file'}}{'nseq'}] [$name_lu{$gl{$a}{'file'}}{'list'}]";
+	  }
+      }
+  }
+
+sub vtmpnam
+  {
+    my $prefix=@_[0];
+    my $tmp_file_name;
+
+    $prefix=($prefix)?$prefix:"dap_tmp";
+   
+    $tmp_count++;
+    $tmp_file_name="dpatmp$$"."$tmp_count";
+    $tl[$#tl+1]=$tmp_file_name;
+    return $tmp_file_name;
+  }
+sub group2name
+  {
+    my $f=@_[0];
+    my @name;
+  
+    @name=seqfile2seqname ($f);
+    $x=$#name+1;
+    $f=$name[0];
+    
+   return $f;
+  }
+sub seqfile2seqname
+  {
+  my $file=@_[0];
+  my (@tot_name, $s);
+  
+  @tot_name=`t_coffee -infile $file -convert -output name -outfile stdout`;
+  
+  foreach $s (@tot_name){$s=~s/\s//g;}
+  return @tot_name;
+}
+sub clean_tmp_file
+  {
+  my @fl=@_;
+  my $file;
+  my $f;
+  my @ext_list=("",".aln",".pep", ".dnd", ".tc_lib");
+  
+  
+  foreach $file ( @fl)
+    {
+      foreach $ext (@ext_list)
+	{
+	  $f=$file.$ext;
+	  if ( -e $f)
+	    {
+	      unlink($f);
+	      ;
+	    }
+	}
+    }
+}
+sub exit_dpa
+  {
+  my $condition=@_[0];
+  my $error_msg=@_[1];
+  my $exit_value=@_[2];
+  if ( $condition)
+    {
+      print "$error_msg\n";
+      exit ($exit_value);
+    }
+  else
+    {
+      return;
+    }
+  
+}
+sub extract_val_from_arg_list
+  {
+    my $arg=@_[0];
+    my $arg_list=@_[1];
+    my $keep_flag=@_[2];
+    my $val=$unset;
+    
+    #protect
+    $arg_list=~s/\s-/ \@/g;
+    $arg=~s/-/\@/g;
+    
+    #search
+    if ($arg eq "^")
+      {
+	$arg_list=~/^([^@]*)/;
+	$val=$1;
+      }
+    else
+      {$arg_list=~/$arg ([^@]*)/;$val=$1;}
+    
+    #remove the parsed sequence if needed
+    if (($val ne $unset) && $keep_flag ne "KEEP")
+      {
+	if ( $arg eq "^"){$arg_list=~s/$val/ /;}
+	else {$arg_list=~s/($arg [^@]*)/ /;}
+      }
+	
+    #unprotect
+    $arg_list=~s/\@/-/g;
+    $arg=~s/\@/-/g;
+    
+    return $val, $arg_list;
+  }
+sub trimfile
+  {
+    my $file=@_[0];
+    my $word=@_[1];
+    my $newfile;
+   
+    if ( !-e $file) {return $file;}
+    
+    $newfile=vtmpnam();
+    `grep $word $file > $newfile`;
+    return $newfile;
+  }
+    
+sub aln2collapsed_aln
+  {
+    my $ref_aln=@_[0];
+    my $prf_list=@_[1];
+    my ($newfile, @name, @prf, $p);
+   
+    
+    $newfile=vtmpnam ();
+    $prf_file=vtmpnam ();
+    
+    @prf=($prf_list=~/(\S+)/g);
+        
+    
+    
+    open (F, ">$prf_file");
+    foreach $p (@prf)
+      {
+	@name=expand_name ($p);
+	print F ">$p @name\n";
+      }
+    close (F);
+    
+    `seq_reformat -in $ref_aln -action +collapse_aln $prf_file -output clustalw > $newfile`;
+    return $newfile;
+  }
+
+sub expand_name 
+  {
+    my @name_list=@_;
+    my (@list, @sub_list, $s);
+    
+    foreach $s (@name_list)
+      {
+	if ( -e $s)
+	  {
+	    @sub_list=seqfile2seqname ($s);
+	    @list=(@list,expand_name(@sub_list));
+	  }
+	else
+	  {
+	    @list=(@list, $s);
+	  }
+      }
+    return @list;
+  }
+	       
+			  

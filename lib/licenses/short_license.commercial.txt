@@ -1,0 +1,19 @@
+© $INSTITUTE 
+and 
+$AUTHOR
+$DATE. 
+All rights reserved.
+NOTICE:                                                                                                                                     |
+  This file is an integral part of the 
+  $PROGRAM Software. 
+  Its content is protected and all 
+  the conditions mentioned in the licensing 
+  agreement of the software apply to this file.
+...............................................                                                                                      |
+  If you need some more information, or if you 
+  wish to obtain a full license, please contact: 
+  $EMAIL
+...............................................                                                                                                                                     |
+
+
+	

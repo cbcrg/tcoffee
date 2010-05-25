@@ -1,0 +1,4 @@
+#!/usr/bin/env perl
+
+$v=eval ($ARGV[0]);
+print "$v\n";

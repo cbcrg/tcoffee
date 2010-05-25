@@ -1,0 +1,3526 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <stdarg.h>
+#include <string.h>
+
+#include "io_lib_header.h"
+#include "util_lib_header.h"
+#include "define_header.h"
+#include "dp_lib_header.h"
+
+/*********************************************************************/
+/*                                                                   */
+/*                         PRODUCE IN LIST                           */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+
+	 
+Constraint_list *produce_list ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode)	
+    {
+    int b;
+    int n_aln;
+    Job_TC *heap,*job=NULL;
+    int n_elements_in, n_new_elements;
+    FILE *local_stderr;
+    
+    static char *aln_mode;
+    static char *out_mode;
+    /*OUT_MODE:
+              A->  alignment provided in a file
+	      L->  list      provided in a file
+	      aln-> alignment computed and provided in a file
+	      list->list      computed and provided in a file
+    */
+
+    if ( !aln_mode)aln_mode=vcalloc ( STRING, sizeof (char));
+    if ( !out_mode)out_mode=vcalloc ( STRING, sizeof (char));
+    
+    if ( CL==NULL)CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?vtmpfile():NULL, NULL);
+
+    local_stderr=(CL->local_stderr!=NULL)?CL->local_stderr:stderr;
+ 
+    CL->local_stderr=vfopen("/dev/null", "w");
+    job=method2job_list ( method,S,aln_mode, out_mode, weight, job);
+    n_elements_in=CL->ne;    
+    
+    /* Cf. parse method for possible out_mode flags*/
+    
+    n_aln=queue2n (job);
+    heap=job=queue2heap (job);
+    
+    b=0;
+    while (job)
+      {
+	local_stderr=output_completion ( local_stderr, b, n_aln+1,1, "Submit   Job");
+	job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",duplicate_constraint_list4lib_computation (CL),submit_lib_job, retrieve_lib_job, CL->multi_thread );	
+	job=submit_job (job);
+	job=job->c;
+	b++;
+      }
+    job=heap;
+    fprintf ( local_stderr, "\n");
+    
+    b=0;
+    while (job)
+      {
+	
+	local_stderr=output_completion ( local_stderr, b, n_aln+1,1, "Retrieve Job");
+	job=retrieve_job (job);	
+	CL=merge_constraint_list    ((job->io)->CL, CL, "add");
+	free_constraint_list4lib_computation ( (job->io)->CL);	
+	job=delete_job (job);
+	b++;
+      }
+    
+    n_new_elements=CL->ne - n_elements_in;
+    compact_list (CL, n_elements_in,n_new_elements, "best");
+    compact_list (CL, 0, CL->ne, "default");
+    CL->local_stderr=local_stderr;
+    
+    /*free_queue  (heap);*/
+    
+    return CL;
+    }
+
+
+Job_TC *retrieve_lib_job ( Job_TC *job)
+{
+  if ( job->status==EXIT_SUCCESS)
+    return job;    
+  return NULL;
+}
+
+Job_TC *submit_lib_job ( Job_TC *job)
+{
+  Job_param_TC *p;
+  Job_io_TC *io;
+
+  p=job->param;
+  io=job->io;
+  
+  if ( getenv4debug ("DEBUG_LIBRARY"))fprintf ( stderr, "\n[DEBUG_LIBRARY:produce_list] Instruction: %s\n", p->aln_c);
+  
+
+  if ( !strm4 (p->out_mode,"A","L","fA", "fL"))
+    {	
+      
+      seq_list2fasta_file( (io->CL)->S,p->seq_c,io->in);
+      my_system (p->aln_c);
+      if (!evaluate_sys_call_io (io->out,p->aln_c, "")) 
+	{
+	fprintf ( stderr, "\nFAILED TO EXECUTE:\n\t%s\n", p->aln_c);     
+	job->status=EXIT_FAILURE;
+	exit (EXIT_FAILURE);
+	return job;
+	}
+    }
+  
+  
+  if (strnm(p->out_mode, "aln",3) ||strm(p->out_mode, "A"))
+    io->CL=read_constraint_list (io->CL,io->out,"aln","disk",p->weight);
+  else if (strm2(p->out_mode, "lib","L"))
+    io->CL=read_constraint_list (io->CL,io->out,"lib","disk",p->weight);
+  else if ( strm (p->out_mode, "fL"))
+    {
+      io->CL= seq2list(io->CL,p->aln_c,p->seq_c, p->weight);
+      if (!io->CL)
+	{
+	  fprintf ( stderr, "\nFAILED TO EXECUTE:\n\t%s\n", p->aln_c); 
+	  job->status=EXIT_FAILURE;
+	}
+    }  
+return job;
+}
+
+Job_TC* method2job_list ( char *fname_in,Sequence *S,char *aln_mode, char *out_mode, char *weight,Job_TC *job)
+    {
+      int preset_method;  
+      static char *fname, *bufS, *bufA;
+      char *in,*out;
+      TC_method *method;
+    
+    /*A method can be:
+      1- a pre computed alignment out_mode=A
+      2- a precomputed Library    out_mode=L
+      3- a method producing an alignment out_mode=aln
+      4- a method producing an alignment out_mode=list
+      5- a function producing an alignment out_mode=faln
+      6- a function producing a library    out_mode=flist
+    */
+    
+    if ( !job)
+      {
+	job=vcalloc ( 1, sizeof (Job_TC));
+	job->jobid=-1;
+      }
+    
+    if ( !fname)
+      {
+	fname=vcalloc ( 1000, sizeof (char));
+	bufS=vcalloc ( 1000, sizeof (char));
+      }
+    
+    /*Make sure that fname is a method*/
+    
+    
+    sprintf(fname, "%s", fname_in);
+    
+    if ( fname[0]=='A' || fname[0]=='L')
+	{
+	  return print_lib_job(job,"out_mode=%c out=%s weight=%s",fname[0],fname+1, weight);
+	}    
+    else if ( fname[0]=='M' && is_in_pre_set_method_list (fname+1))
+	{	
+	preset_method=1;
+	fname++;
+	}
+    else if ( is_in_pre_set_method_list (fname))
+        {
+	preset_method=1;	
+	}
+    else 
+        {
+	  char buf[1000];	  
+	  if ( check_file_exists ( fname));
+	  else if (fname[0]=='M' && check_file_exists(fname+1));
+	  else
+	    {
+	      if ( getenv ( "METHODS_4_TCOFFEE")){sprintf (buf, "%s/%s",getenv ( "METHODS_4_TCOFFEE"), fname+1);}
+	      else sprintf (buf, "%s/%s",METHODS_4_TCOFFEE, fname);
+	      fprintf ( stderr, "\nHERE 2: %s", fname);
+	      if( check_file_exists(buf)){sprintf ( fname, "%s", buf);}
+	      else
+		{
+		  fprintf ( stderr, "\n%s is not a valid method [FATAL:%s]\n", fname, PROGRAM);
+		  exit (EXIT_FAILURE);
+		}
+	    }
+	}
+
+    method=method_file2TC_method(fname);
+    sprintf ( aln_mode, "%s", method->aln_mode);
+    sprintf ( out_mode, "%s", method->out_mode);
+    
+    if ( strcmp (aln_mode, "multiple")==0)
+      {
+	int d;
+	char buf[1000];
+	sprintf (bufS, "%d",S->nseq);
+	for (d=0; d< S->nseq; d++)
+	  {
+	    sprintf ( buf," %d",d);
+	    strcat ( bufS, buf);
+	  }
+	bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
+	if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
+	job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s param->aln_mode=%s param->out_mode=%s param->weight=%s", method, fname, bufA, bufS, in, out, aln_mode, out_mode, weight);	      
+	job=queue_cat (job, job->c);
+	vfree (bufA);
+      }
+    else if ( strstr(aln_mode, "pairwise"))
+      {
+	int do_mirror, do_self, x, y;
+	do_mirror=(strstr(aln_mode, "m_"))?1:0;
+	do_self=(strstr(aln_mode, "s_"))?1:0;
+	
+	for (x=0; x< S->nseq-(1-do_mirror); x++)
+	  for ( y=((do_mirror)?0:(x+1)); y< S->nseq; y++)
+	    {
+	      if ( x==y && !do_self);
+	      else
+		{
+		  sprintf (bufS, "2 %d %d",x,y);
+		  bufA=make_aln_command (method,in=vtmpnam(NULL),out=vtmpnam (NULL));
+		  
+		  if (strrchr(bufA, '>')==NULL)strcat (bufA, TO_NULL_DEVICE);
+		  
+		  job->c=print_lib_job (job->c, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s param->aln_mode=%s param->out_mode=%s param->weight=%s",method,fname,bufA, bufS, in, out, aln_mode, out_mode, weight);
+		  job=queue_cat (job, job->c);
+		  vfree (bufA);
+		}
+	    }
+      }
+    if ( preset_method==1)vremove (fname);   
+    return job;
+    }
+    
+int is_in_pre_set_method_list (char *fname)
+    {
+    FILE *fp;
+    static char *fname2;
+    char clustalw[LONG_STRING];
+    char lalign3  [LONG_STRING];
+
+
+
+    
+#ifndef     CLUSTALW_4_TCOFFEE
+    if ( strncmp ( fname, "clustalw", 8)!=0);
+    else if ( getenv ( "CLUSTALW_4_TCOFFEE")==NULL)crash ("CLUSTALW_4_TCOFFEE IS NOT DEFINED");
+    else  sprintf ( clustalw, "%s", (getenv ( "CLUSTALW_4_TCOFFEE")));
+#else
+    
+     if ( getenv ( "CLUSTALW_4_TCOFFEE")==NULL)sprintf ( clustalw, "%s", CLUSTALW_4_TCOFFEE);
+     else  sprintf ( clustalw, "%s", (getenv ( "CLUSTALW_4_TCOFFEE")));
+#endif
+
+
+#ifndef     LALIGN_4_TCOFFEE
+    if ( strncmp ( fname, "lalign3",7)!=0);
+    else if ( getenv ( "LALIGN_4_TCOFFEE")==NULL)crash ("LALIGN_4_TCOFFEE IS NOT DEFINED");
+    else  sprintf ( lalign3, "%s", (getenv ( "LALIGN_4_TCOFFEE")));
+#else
+    
+     if ( getenv ( "LALIGN_4_TCOFFEE")==NULL)sprintf (lalign3, "%s", LALIGN_4_TCOFFEE);
+     else sprintf ( lalign3, "%s", (getenv ( "LALIGN_4_TCOFFEE")));
+#endif
+
+     if (!fname2)fname2=vcalloc(1000, sizeof(char));
+     sprintf ( fname2, "%s", fname);
+     fname=vtmpnam (fname);
+
+    
+    /*IMPORTANT: METHODS MUST START WITH A LOWERCASE*/
+    /*1 INTERNAL METHODS*/
+   
+    if ( strm ( fname2, "fast_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE fast_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   S\n");
+	   
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "diag_fast_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE diag_fast_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   S\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "blast_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE blast_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   S\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "lalign_blast_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE lalign_blast_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   RS\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "exon_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n", fname2);
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strnm ( fname2, "xpair", 5))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n", fname2);
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+     else if ( strm ( fname2, "slow_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE slow_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+     else if ( strm (fname2,"lalign_len_pair"))
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE lalign_len_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp);
+	   return 1;    
+	}  
+    else if ( strm (fname2,"lalign_id_pair"))
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE lalign_id_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp);
+	   return 1;    
+	}  
+    else if ( strcmp (fname2, "lalign_rs_s_pair")==0)
+        {
+	  /*Should compute 20 aln*/
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE lalign_id_pair\n");
+	   fprintf ( fp, "ALN_MODE  s_pairwise\n");
+	   fprintf ( fp, "OUT_MODE  fL\n");
+	   fprintf ( fp, "IN_FLAG   no_name\n");
+	   fprintf ( fp, "OUT_FLAG  no_name\n");
+	   fclose (fp);
+	   return 1;    
+	}
+    else if ( strcmp (fname2, "lalign_rs_s_dna_pair")==0)
+        {
+	   fp=vfopen (fname, "w");
+	   /*should compute 40 aln*/
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE lalign_id_pair\n");
+	   fprintf ( fp, "ALN_MODE  s_pairwise\n");
+	   fprintf ( fp, "OUT_MODE  fL\n");
+	   fprintf ( fp, "IN_FLAG   no_name\n");
+	   fprintf ( fp, "OUT_FLAG  no_name\n");
+	   fclose (fp);
+	   return 1;    
+	  
+	   fclose (fp);
+	   return 1;    
+	}
+    
+    else if ( strm (fname2,"viterbi_pair"))
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE viterbi_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp);
+	   return 1;    
+	}
+    /*STRUCTURE SUPER-IMPOSITION*/
+    else if ( strm ( fname2, "align_pdb_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE align_pdb_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "align_pdb_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE align_pdb_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    
+    else if ( strm ( fname2, "lalign_pdb_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE lalign_pdb_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   P\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+     else if ( strm4 ( fname2, "custom1_align_pdb_pair", "custom2_align_pdb_pair","custom3_align_pdb_pair","custom4_align_pdb_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n", fname2);
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   P\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm4 ( fname2, "custom5_align_pdb_pair", "custom6_align_pdb_pair","custom7_align_pdb_pair","custom8_align_pdb_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n", fname2);
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   P\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm2 ( fname2, "custom9_align_pdb_pair", "custom10_align_pdb_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n", fname2);
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   P\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "mixed_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE mixed_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "seq_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE seq_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "fugue_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE fugue_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   P_S\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+     else if ( strm ( fname2, "lsqman_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE lsqman_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   P\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    
+    else if ( strm ( fname2, "non_fugue_sap_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE non_fugue_sap_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "non_sap_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE non_sap_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+     else if ( strm ( fname2, "non_fugue_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE non_fugue_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "seq_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE seq_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   S\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "sap_pair_rs"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE sap_pair_rs\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    else if ( strm ( fname2, "sap_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE sap_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   P\n");
+
+	   fclose (fp); 	   
+	   return 1;
+	   }
+     else if ( strm ( fname2, "thread_pair"))
+           {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE thread_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fprintf ( fp, "SEQ_TYPE   S_P\n");
+
+	   fclose (fp); 	   
+	   return 1;
+	   }
+    
+     else if ( strm ( fname2, "cdna_fast_pair") || strncmp ( fname2,"cdna_fast_pair",14)==0 )
+	   {
+	     /*cdna_fast_pair(fgop_fgep) fgop and fgep are turned into neg val later*/
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n", fname2);
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   } 
+    else if ( strm ( fname2, "cdna_cfast_pair"))
+	   {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE cdna_cfast_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	   } 
+    
+    else if ( strm ( fname2, "ifast_pair"))
+      {
+	    fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE ifast_pair\n");
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+      }
+     
+    /*2 EXTERNAL METHODS*/
+    
+    else if ( strm (fname2, "clustalw_pair")  )
+	{
+	  
+	    
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n",clustalw );
+	   fprintf ( fp, "ALN_MODE   pairwise\n");
+	   fprintf ( fp, "OUT_MODE   aln\n");
+	   fprintf ( fp, "IN_FLAG    %sINFILE=\n", CWF);
+	   fprintf ( fp, "OUT_FLAG   %sOUTFILE=\n",CWF);
+	   fprintf ( fp, "DEFAULT    %sOUTORDER=INPUT %sNEWTREE=core %salign\n",CWF,CWF,CWF);
+	   fclose (fp); 	   
+	   return 1;
+	}
+    
+     else if ( strm ( fname2, "clustalw_aln"))
+        {
+	    fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE clustalw_aln\n");
+	   fprintf ( fp, "ALN_MODE   multiple\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	}
+    else if ( strm ( fname2, "prrp_aln"))
+        {
+	    fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE prrp_aln\n");
+	   fprintf ( fp, "ALN_MODE   multiple\n");
+	   fprintf ( fp, "OUT_MODE   fL\n");
+	   fprintf ( fp, "IN_FLAG    no_name\n");
+	   fprintf ( fp, "OUT_FLAG   no_name\n");
+	   fclose (fp); 	   
+	   return 1;
+	}
+   
+    else  if ( strcmp (fname2, "praline_pair_perl")==0)
+	{
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE praline.perl\n");
+	   fprintf ( fp, "ALN_MODE pairwise\n");
+	   fprintf ( fp, "OUT_MODE aln\n");
+	   fprintf ( fp, "IN_FLAG   -in&\n");
+	   fprintf ( fp, "OUT_FLAG  -out&\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	   fclose (fp);
+	   
+	    return 1;
+	}
+    
+    else if ( strcmp (fname2, "praline_aln_perl")==0)
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE praline.perl\n");
+	   fprintf ( fp, "ALN_MODE multiple\n");
+	   fprintf ( fp, "OUT_MODE aln\n"); 
+	   fprintf ( fp, "IN_FLAG   -in&\n");
+	   fprintf ( fp, "OUT_FLAG  -out&\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	   fclose (fp);
+	   
+	    return 1;    
+	}
+    else if ( strcmp (fname2, "prrp_aln_perl")==0)
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE prrp.perl\n");
+	   fprintf ( fp, "ALN_MODE multiple\n");
+	   fprintf ( fp, "OUT_MODE aln\n"); 
+	   fprintf ( fp, "IN_FLAG   -in&\n");
+	   fprintf ( fp, "OUT_FLAG  -out&\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	   fclose (fp);
+	   
+	    return 1;    
+	}  
+    
+    else if ( strcmp (fname2, "prrp_pair_perl")==0)
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE prrp.perl\n");
+	   fprintf ( fp, "ALN_MODE pairwise\n");
+	   fprintf ( fp, "OUT_MODE aln\n"); 
+	   fprintf ( fp, "IN_FLAG   -in&\n");
+	   fprintf ( fp, "OUT_FLAG  -out&\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	   fclose (fp);
+	   
+	    return 1;    
+	} 
+    else if ( strcmp (fname2, "dialign2_aln_perl")==0)
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE dialign2.perl\n");
+	   fprintf ( fp, "ALN_MODE multiple\n");
+	   fprintf ( fp, "OUT_MODE aln\n");
+	   fprintf ( fp, "IN_FLAG   -in&\n");
+	   fprintf ( fp, "OUT_FLAG  -out&\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	   fclose (fp);
+	   
+	    return 1;    
+	}
+     else if ( strcmp (fname2, "dialign2_pair_perl")==0)
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE dialign2.perl\n");
+	   fprintf ( fp, "ALN_MODE pairwise\n");
+	   fprintf ( fp, "OUT_MODE aln\n");
+	   fprintf ( fp, "IN_FLAG   -in&\n");
+	   fprintf ( fp, "OUT_FLAG  -out&\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	   fclose (fp);
+	   
+	    return 1;    
+	}
+    else if ( strm2 (fname2, "lalign3_pair", "lalign3_rs_pair"))
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n",lalign3);
+	   fprintf ( fp, "ALN_MODE pairwise\n");
+	   fprintf ( fp, "OUT_MODE lib\n");
+	   fprintf ( fp, "IN_FLAG   no_name\n");
+	   fprintf ( fp, "OUT_FLAG  no_name\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	   fclose (fp);
+	   return 1;    
+	}  
+    else if ( strm (fname2,"lalign3_id_pair"))
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n", lalign3);
+	   fprintf ( fp, "ALN_MODE pairwise\n");
+	   fprintf ( fp, "OUT_MODE lib\n");
+	   fprintf ( fp, "PARAM no_name 0\n");
+	   fprintf ( fp, "PARAM no_name 1\n");
+	   fprintf ( fp, "IN_FLAG   no_name\n");
+	   fprintf ( fp, "OUT_FLAG  no_name\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	   fclose (fp);
+	   return 1;    
+	}  
+    else if ( strm (fname2,"lalign_id_m_pair"))
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE lalign_id_pair\n");
+	   fprintf ( fp, "ALN_MODE m_pairwise\n");
+	   fprintf ( fp, "OUT_MODE fL\n");
+	   fprintf ( fp, "IN_FLAG   no_name\n");
+	   fprintf ( fp, "OUT_FLAG  no_name\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	   fclose (fp);
+	   return 1;
+	}
+	 
+    else if ( strcmp (fname2, "lalign_s_pair")==0)
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE lalign_id_pair\n");
+	   fprintf ( fp, "ALN_MODE  s_pairwise\n");
+	   fprintf ( fp, "OUT_MODE  fL\n");
+	   fprintf ( fp, "IN_FLAG   no_name\n");
+	   fprintf ( fp, "OUT_FLAG  no_name\n");
+	   fclose (fp);
+	   return 1;    
+	}
+    else if ( strcmp (fname2, "lalign3_rs_s_pair")==0)
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n",lalign3);
+	   fprintf ( fp, "ALN_MODE  s_pairwise\n");
+	   fprintf ( fp, "OUT_MODE  lib\n");
+	   fprintf ( fp, "PARAM no_name -20\n");
+	   fprintf ( fp, "PARAM no_name   0\n");
+	   fprintf ( fp, "IN_FLAG   no_name\n");
+	   fprintf ( fp, "OUT_FLAG  no_name\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	  
+	   fclose (fp);
+	   return 1;    
+	}
+    else if ( strcmp (fname2, "lalign3_rs_s_dna_pair")==0)
+        {
+	   fp=vfopen (fname, "w");
+	   fprintf ( fp, "EXECUTABLE %s\n",lalign3);
+	   fprintf ( fp, "ALN_MODE  s_pairwise\n");
+	   fprintf ( fp, "OUT_MODE  lib\n");
+	   fprintf ( fp, "PARAM no_name  -40\n");
+	   fprintf ( fp, "PARAM no_name   0\n");
+	   fprintf ( fp, "IN_FLAG   no_name\n");
+	   fprintf ( fp, "OUT_FLAG  no_name\n");
+	   fprintf ( fp, "DEFAULT   \n");
+	  
+	   fclose (fp);
+	   return 1;    
+	}
+    else if ( strstr (fname2, "em0"))
+      {
+	char **list;
+	list=string2list2 ( fname2, "0");
+	
+	fp=vfopen (fname, "w");
+	fprintf ( fp, "EXECUTABLE tc_generic_method.pl\n");
+	fprintf ( fp, "ALN_MODE  %s\n", list[3]);
+	fprintf ( fp, "OUT_MODE  aln\n");
+	fprintf ( fp, "PARAM -method=%s\n",list[2]);
+	fprintf ( fp, "IN_FLAG -infile=\n");
+	fprintf ( fp, "OUT_FLAG -outfile=\n");
+	fclose (fp);
+	return 1;    
+      }
+    else
+        {	
+	  sprintf (fname, "%s",fname2);
+	  return 0;
+        }
+    }
+
+struct TC_method * method_file2TC_method( char *method)
+{
+  TC_method *m;
+  static char *subcommand;
+  static char *line;
+  char *p;
+  FILE *fp;
+  int c; 
+  
+  if (!line)
+    {
+      line=vcalloc (LONG_STRING+1, sizeof ( char));
+      subcommand=vcalloc ( LONG_STRING, sizeof (char));
+    }
+  m=vcalloc ( 1, sizeof (TC_method));
+  
+  fp=vfopen (method, "r");
+  while ( (c=fgetc (fp))!=EOF)
+    {
+      ungetc ( c, fp);
+      fgets ( line,LONG_STRING, fp);
+      substitute (line, "\n", "");
+
+      if ( line && (line[0]=='*' || line[0]=='#' || line[0] == '$'|| line[0]==' ' || line[0]=='\0' ))subcommand[0]='\0';
+      else if ( p=strstr (line, "EXECUTABLE" )) sscanf (p, "EXECUTABLE %s", m->executable);
+      else if ( p=strstr (line, "IN_FLAG"    )) sscanf (p, "IN_FLAG %s"   , m->in_flag);
+      else if ( p=strstr (line, "OUT_FLAG"   )) sscanf (p, "OUT_FLAG %s"  , m->out_flag);
+      else if ( p=strstr (line, "OUT_MODE"   )) sscanf (p, "OUT_MODE %s"  , m->out_mode);
+      else if ( p=strstr (line, "ALN_MODE"   )) sscanf (p, "ALN_MODE %s"  , m->aln_mode);
+      else if ( p=strstr (line, "SEQ_TYPE"   )) sscanf (p, "SEQ_TYPE %s"  , m->seq_type);
+      else if ( p=strstr (line, "PARAM"     ))
+	{
+	  sprintf (subcommand, " %s ", p+5);
+	  strcat ( m->param, subcommand);
+	}
+    }
+  vfclose ( fp);
+  return m;
+}
+
+char *make_aln_command(TC_method *m, char *seq, char *aln)
+    {
+      char *command;
+      char buf[1000];
+      sprintf ( buf, "%s %s%s %s%s %s", m->executable, m->in_flag, seq, m->out_flag,aln, m->param);
+      
+      command=vcalloc ( strlen (buf)+100, sizeof (char));
+      sprintf ( command, "%s", buf);
+      
+
+      command=substitute (command, "&bnsp", " ");
+      command=substitute (command, "no_name", "");
+
+      return command;
+    }
+	
+
+     
+     
+
+/*********************************************************************/
+/*                                                                   */
+/*                         WRITE IN LIST                             */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+
+       
+    
+int vread_clist ( Constraint_list *CL, int a, int b )
+    {
+    int x;
+    
+    if ( a>= CL->ne)return UNDEFINED_2;
+    else if (CL->fp)
+       {       
+       fseek (CL->fp, a*CL->el_size*CL->entry_len+b*CL->el_size, SEEK_SET);
+       fread (&x, CL->el_size, 1, CL->fp);
+       return x;
+       }
+    else if ( CL->L)
+       {
+       return (CL->L)[a][b];
+       }
+    else if (CL->M)
+       {
+       return (CL->M)[a][b];
+       }
+    else 
+       {
+       return UNDEFINED_2; 
+       
+       }
+    }
+int vwrite_clist ( Constraint_list *CL, int a, int b, CLIST_TYPE x)
+    {
+    
+    CL->seq_indexed=0;
+    CL->residue_indexed=0;
+    
+    if (CL->fp)
+       {
+       fseek (CL->fp, a*CL->el_size*CL->entry_len+b*CL->el_size, SEEK_SET);
+       fwrite(&x, CL->el_size, 1, CL->fp);
+       }
+    else if (!CL->M)
+       {
+	 if (a>=CL->max_L_len)
+          {
+	    if (!(CL->L))(CL->L)=declare_int (CL->chunk, CL->entry_len);
+	    else(CL->L)=realloc_int ( (CL->L), CL->max_L_len, CL->entry_len,CL->chunk, 0);
+	    CL->max_L_len+=CL->chunk;
+	  }
+
+       (CL->L)[a][b]=x;
+       }
+    return x;
+    }
+
+
+/*********************************************************************/
+/*                                                                   */
+/*                        INDEXING FUNCTIONS                         */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+
+Constraint_list *index_res_constraint_list ( Constraint_list *CL, int field)
+        {
+	/*
+	  function documentation: start
+	  Constraint_list *index_res_constraint_list ( Constraint_list *CL, int field)
+	  This function reorganises the content of the CL->L matrix, so that a single look up gives
+	  the constraints associated with any residue
+	  
+	  1-if CL->residue_indexed=1 return
+		 2-CL->residue_index[Seq X][Res Y of Seq X][0]=Z
+		 Z=Number of residues matching X(Y)*3+1
+		 CL->residue_index[Seq X][Res Y of Seq X][0]=Z
+		 CL->residue_index[Seq X][Res Y of Seq X][c+0]=seq W
+		 CL->residue_index[Seq X][Res Y of Seq X][c+1]=res V
+		 CL->residue_index[Seq X][Res Y of Seq X][c+2]=weight W(V) Vs X(Y)		 
+	  
+	  NOTE: Works All right with a sequence against itself
+	  NOTE: Any modification of CL->L should result in residue_indexed to be reset	  
+	  function documentation: end
+	*/
+	int a, b, s1, s2, r1, r2, w;
+
+
+       
+
+	if ( CL->residue_indexed && CL->residue_field==field);
+	else
+	   {
+	       if ( CL->residue_index)
+	          {
+		  for ( a=0; a< (CL->S)->nseq; a++)
+		      for ( b=0; b<= (CL->S)->len[a]; b++)
+		          {
+			      vfree(CL->residue_index[a][b]);
+			      CL->residue_index[a][b]=vcalloc (1, sizeof (int));
+			      CL->residue_index[a][b][0]=1;
+			  }    
+		  }
+	       else if ( !CL->residue_index)
+	          {
+		 
+
+		      CL->residue_index=vcalloc ( (CL->S)->nseq, sizeof (int**));
+		      for ( a=0; a< (CL->S)->nseq; a++)
+		          {
+			
+			      CL->residue_index[a]=vcalloc ( (CL->S)->len[a]+1, sizeof (int*));
+			      for ( b=0; b<= (CL->S)->len[a]; b++)
+				  {
+				  CL->residue_index[a][b]=vcalloc (1, sizeof (int));
+				  CL->residue_index[a][b][0]=1;
+				  }
+			  }
+		  }
+	       for (a=0;a<CL->ne; a++)
+	          {
+		  s1=vread_clist (CL, a, SEQ1);
+		  s2=vread_clist (CL, a, SEQ2);
+		  r1=vread_clist (CL, a, R1);
+		  r2=vread_clist (CL, a, R2);
+		  w=vread_clist (CL, a, field);
+		  
+		  
+		  CL->residue_index[s1][r1][0]+=3;
+		  CL->residue_index[s1][r1]=vrealloc ( CL->residue_index[s1][r1], CL->residue_index[s1][r1][0]*sizeof (int));
+		  CL->residue_index[s1][r1][CL->residue_index[s1][r1][0]-3]=s2;
+		  CL->residue_index[s1][r1][CL->residue_index[s1][r1][0]-2]=r2;
+		  CL->residue_index[s1][r1][CL->residue_index[s1][r1][0]-1]=w;
+
+		  CL->residue_index[s2][r2][0]+=3;
+		  CL->residue_index[s2][r2]=vrealloc ( CL->residue_index[s2][r2], CL->residue_index[s2][r2][0]*sizeof (int));
+		  CL->residue_index[s2][r2][CL->residue_index[s2][r2][0]-3]=s1;
+		  CL->residue_index[s2][r2][CL->residue_index[s2][r2][0]-2]=r1;
+		  CL->residue_index[s2][r2][CL->residue_index[s2][r2][0]-1]=w;
+		  
+		  }
+	   CL->residue_indexed=1;
+	   CL->residue_field=field;
+	   }
+	return CL;
+	}
+      
+Constraint_list *index_constraint_list ( Constraint_list *CL)
+        {
+	  /*
+	  Function Documentation: start
+	  Constraint_list *index_constraint_list ( Constraint_list *CL);
+	  Indexes a constraint list
+	     1-Checks the flag seq_indexed
+	     2-if flag set to 0
+	       CL->start_index[seq1][seq2] indicatse the first position for seq1 Vs seq2
+	       CL->end_index[seq1][seq3]   indicatse the last  position for seq1 Vs seq2
+	  Any modif to CL->L should cause the flag 1 to be set to 0;
+	  Function Documentation: end
+	*/
+	int a, csA, csB, sA, sB;
+
+
+	if ( CL->seq_indexed);
+	else
+	    {
+	    
+	    if ( CL->start_index!=NULL)free_int ( CL->start_index,-1);
+	    CL->start_index=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
+	    
+	    if ( CL->end_index!=NULL)free_int ( CL->end_index,-1);
+	    CL->end_index=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
+	    
+	    csA=vread_clist (CL, 0, SEQ1);
+	    csB=vread_clist (CL, 0, SEQ2);
+
+	    CL->start_index[csA][csB]=0;
+	    CL->start_index[csB][csA]=0;
+	    for ( a=1; a<CL->ne; a++)
+	        {
+		sA=vread_clist (CL, a, SEQ1);
+		sB=vread_clist (CL, a, SEQ2);
+		if (sA!=csA || sB!=csB)
+		   {
+		   CL->end_index[csA][csB]=a;
+		   CL->end_index[csB][csA]=a;
+		   csA=sA;
+		   csB=sB;
+		   CL->start_index[csA][csB]=a;
+		   CL->start_index[csB][csA]=a;
+		   }
+		}		
+	    CL->end_index[csB][csA]=CL->ne;
+	    CL->end_index[csA][csB]=CL->ne;
+	    CL->seq_indexed=1;
+	    }
+	return CL;
+	}
+	
+/*********************************************************************/
+/*                                                                   */
+/*                         LIST EXTENTION                            */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+Constraint_list *extend_list_pair (Constraint_list *CL,char *store_mode, int s1, int s2)
+        {
+	static Sequence *S;
+	Constraint_list *CLout;
+	/*
+	  function documentation: start
+	  Constraint_list *extend_list_pair (Constraint_list *CL,char *store_mode, int s1, int s2)
+	  This function takes a pair of sequences s1, s2 and perrforms the extention
+	  It returns the incoming list CL, with CL->L[s1][s2] now extended
+	  See main documentation for store_mode
+	  function documentation: end
+	*/
+
+	if ( S==NULL)S=declare_sequence ((CL->S)->min_len, (CL->S)->max_len,(CL->S)->nseq); 	
+	sprintf ( S->name[0], "%s",(CL->S)->name[s1]);
+	sprintf ( S->name[1],"%s",(CL->S)->name[s2]);
+	S->nseq=2;
+	
+	CLout=extend_list (CL, store_mode, CL->extend_clean_mode, CL->extend_compact_mode,CL->do_self, S);
+	return CLout;		
+	}
+Constraint_list *extend_list (Constraint_list *CLin, char *store_mode,char *clean_mode, char *compact_mode,int do_self, Sequence *DO_LIST)
+	{
+	int a, b, c, d, e, f;
+	int wA, wC,w, rA, rC, miscA, miscC, misc;
+	static int **posA;
+	static int **posC;
+	int start_ba, end_ba, start_bc, end_bc, start_ac, end_ac;
+	int len;
+	int lenA=0;
+	int lenC=0;
+	int *translation;
+	Constraint_list *CLout=NULL;
+
+
+	/*Do not extend if the List is a Matrix*/
+	if ( !CLin->L && CLin->M)
+	   {
+	   CLin->extend_jit=0;
+	   return CLin;
+	   }
+	
+	translation=vcalloc ( (CLin->S)->nseq, sizeof (int));
+	for ( a=0; a<(CLin->S)->nseq; a++)
+	    {
+	    translation[a]=name_is_in_list ((CLin->S)->name[a],DO_LIST->name, DO_LIST->nseq, 100);
+	    translation[a]++;/* set translation to -1+1=0 if seq not in list*/
+	    }
+	
+	CLout=declare_constraint_list (CLin->S, NULL,NULL,0, strm("disk", store_mode)?tmpfile():NULL, NULL);
+        	
+	for ( a=0; a<(CLin->S)->nseq-(1-do_self); a++)
+		{	        
+		fprintf (CLin->local_stderr, "\nSeq %3d: %5d", a+1,CLout->ne);
+		for ( c=a+(1-do_self); c<(CLin->S)->nseq; c++)
+			{
+			if ( translation[a] && translation[c])
+			       {			       
+			       get_bounds (CLin,a, c, &start_ac, &end_ac); 						      
+			       for ( d=start_ac; d<end_ac; d++)
+			           {
+				   for ( e=0; e< CLin->entry_len; e++)
+				       vwrite_clist(CLout,CLout->ne, e, vread_clist(CLin,d, e));
+			           CLout->ne++;
+				   }
+			       
+			       for ( b=0; b<(CLin->S)->nseq; b++)
+			           {
+				   len=strlen ( (CLin->S)->seq[b]);
+				   
+				   get_bounds (CLin,b, a, &start_ba, &end_ba);  
+				   posA=fill_pos_matrix (CLin,start_ba, end_ba, len, posA, &lenA,(b>a));
+				   
+				   if ((c!=b && a!=b) ||(do_self==1))
+				       {
+				   
+				       get_bounds (CLin, b, c, &start_bc, &end_bc);
+				       posC=fill_pos_matrix (CLin, start_bc, end_bc, len, posC, &lenC, (b>c));
+				       
+				       for (d=1; d<=len; d++)
+				           {
+					   if ( posA[d][1]==0 || posC[d][1]==0);
+					   else
+					       {
+					       for (e=2; e<=posA[d][1]+1; e+=(CLin->entry_len-4)) 
+						   for ( f=2; f<=posC[d][1]+1; f+=(CLin->entry_len-4))
+						       {
+						       wA   =posA[d][e+1];
+						       miscA=posA[d][e+2];
+
+						       wC   =posC[d][f+1];
+						       miscC=posC[d][f+2];
+
+						       rA=posA[d][e];
+						       rC=posC[d][f];
+						       
+						       w   =MIN(wA,wC);
+						       
+						       misc=MAX(miscA, miscC);
+						       
+						       vwrite_clist( CLout, CLout->ne, SEQ1, a);
+						       vwrite_clist( CLout, CLout->ne, SEQ2, c);
+						       vwrite_clist( CLout, CLout->ne, R1  ,rA);
+						       vwrite_clist( CLout, CLout->ne, R2  ,rC);
+						       vwrite_clist( CLout, CLout->ne, WE  , w);
+						       vwrite_clist( CLout, CLout->ne, CONS, 1);
+						       vwrite_clist( CLout, CLout->ne, MISC,misc);
+        					       CLout->ne++;
+						       }
+					       }
+					   }
+				       }
+				   }
+		
+			       CLout=compact_list (CLout,0,CLout->ne,"mirror_sum");
+			       CLout=clean ( clean_mode,CLout, 0, CLout->ne);
+			       }
+			}
+		}
+
+	
+	vfree (translation);
+	return CLout;
+	}
+void get_bounds (Constraint_list *CL, int s1, int s2, int *start, int *end)
+	{
+
+	CL=index_constraint_list (CL);
+	
+	if ( s1>s2)SWAP(s1, s2);
+	
+	start[0]=CL->start_index[s1][s2];
+	end  [0]=CL->end_index  [s1][s2];
+	}
+
+	
+int ** fill_pos_matrix (Constraint_list *CL, int beg, int end, int slen, int **pos, int *len, int mirrored)
+	{
+	int small_chunck;
+	int a, r1,r2;
+	
+
+	small_chunck=2*CL->entry_len;
+
+	if ( pos==NULL)
+		{
+		pos=declare_int (slen+1, small_chunck);
+		for ( a=0; a<=slen; a++)pos[a][0]=small_chunck;
+		len[0]=slen+1;
+		}
+	else if ( len[0]<=slen)
+		{
+		free_int ( pos, len[0]);
+		pos=declare_int (slen+1, small_chunck);
+		for ( a=0; a<=slen; a++)pos[a][0]=small_chunck;
+		len[0]=slen+1;
+		}
+	else
+		{
+		for ( a=0; a<=slen; a++)pos[a][1]=0;
+		}
+			
+			
+	
+	
+	for ( a=beg; a<end; a++)
+		{
+		
+		if (!mirrored)     {r1=vread_clist (CL, a, R1);r2=vread_clist (CL, a, R2);}
+		else if ( mirrored){r1=vread_clist (CL, a, R2);r2=vread_clist (CL, a, R1);}
+
+	       if ( ((pos[r1][1])+(CL->entry_len))>pos[r1][0])
+			{
+			pos[r1]=vrealloc (pos[r1], (pos[r1][0]+small_chunck)*sizeof (int));
+			pos[r1][0]+=small_chunck;
+			}
+		pos[r1][pos[r1][1]+2]=r2;
+		pos[r1][pos[r1][1]+3]=vread_clist(CL,a,WE);
+		pos[r1][pos[r1][1]+4]=vread_clist(CL,a,MISC);
+		pos[r1][1]+=(CL->entry_len-4);		
+		}
+	return pos;
+	}
+Constraint_list * evaluate_constraint_list_reference ( Constraint_list *CL)
+        {
+	    static CLIST_TYPE *entry;
+	    
+	    int a, b, c, s1, s2, r1, r2, w;
+	    int ***max_res;
+	    
+	    
+
+	    if ( CL->M)
+	      {
+		CL->max_value=CL->max_ext_value=20;
+		
+	      }
+	    else 
+	      {
+
+		CL->max_value=CL->max_ext_value=0;
+		max_res=vcalloc ( (CL->S)->nseq, sizeof (int**));
+			
+		for ( a=0; a< (CL->S)->nseq; a++)
+		  {
+		    max_res[a]=vcalloc ( strlen ((CL->S)->seq[a])+1, sizeof (int*));
+		    for ( b=0; b<=(CL->S)->len[a]; b++)
+		      {
+		      max_res[a][b]=vcalloc ( (CL->S)->nseq+1, sizeof (int));
+		      }
+		  }
+		
+		for ( a=0; a< CL->ne; a++)
+		  {
+		    
+		    entry=extract_entry ( entry, a, CL);
+		    s1=entry[SEQ1];
+		    s2=entry[SEQ2];
+		    r1=entry[R1];
+		    r2=entry[R2];
+		    w= entry[WE];
+		    
+		    if ( w==UNDEFINED || ( (CL->moca) && (CL->moca)->forbiden_residues  && ((CL->moca)->forbiden_residues[s1][r1]==UNDEFINED || (CL->moca)->forbiden_residues[s2][r2]==UNDEFINED)));
+		    else
+		      {
+			max_res[s1][r1][s2]+=w;
+			max_res[s2][r2][s1]+=w;
+			CL->max_value=MAX(w, CL->max_value);
+		      }
+		  }
+		
+		for ( a=0; a< (CL->S)->nseq; a++)
+		  for ( b=1; b<=(CL->S)->len[a]; b++)
+		    {
+		      for ( c=0; c< (CL->S)->nseq; c++)
+			{
+			  max_res[a][b][(CL->S)->nseq]+= max_res[a][b][c];
+			}
+		      CL->max_ext_value=MAX(max_res[a][b][c],CL->max_ext_value);
+		    }           
+		
+		for ( a=0; a< (CL->S)->nseq; a++)
+		  {
+		    for ( b=0; b<=(CL->S)->len[a]; b++)
+		      vfree ( max_res[a][b]);
+		    vfree (max_res[a]);
+		  }
+		CL->max_ext_value=MAX(1,CL->max_ext_value);
+		vfree ( max_res);
+	      }
+	    if (CL->normalise)
+	      {
+		CL->nomatch=(CL->nomatch*CL->normalise)/CL->max_ext_value;
+	      }
+	    
+	    return CL;
+	}
+			       
+/*********************************************************************/
+/*                                                                   */
+/*                         ENTRY MANIPULATION                        */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+Constraint_list * add_list_entry2list (Constraint_list *CL, int n_para, ...)
+	{
+	int a;
+	int *entry;
+	int field, val;
+	va_list ap;
+
+	if (n_para>LIST_N_FIELDS)
+	   {
+	       crash ("Too Many Fields in List [FATAL/add_list_entry2list]");
+	   }
+	
+	va_start (ap,n_para);
+	entry=vcalloc (CL->entry_len, sizeof (int));
+
+	for ( a=0; a<n_para; a++)
+	    {
+	    field=va_arg(ap, int);
+	    val  =va_arg(ap, CLIST_TYPE);
+	    entry[field]=val;
+	    }
+	va_end (ap);
+	add_entry2list(entry, CL);
+	vfree(entry);
+	return CL;
+	}
+
+Constraint_list *add_entry2list ( CLIST_TYPE *entry, Constraint_list *CL)
+	{
+	return insert_entry2list (entry, CL->ne++, CL);
+	}
+Constraint_list* insert_entry2list(CLIST_TYPE * entry, int pos, Constraint_list *CL)
+        {
+	int a;
+        for ( a=0; a< CL->entry_len; a++)
+	    vwrite_clist ( CL,pos, a,entry[a]);
+	return CL;
+	}
+CLIST_TYPE* extract_entry(CLIST_TYPE * entry, int pos, Constraint_list *CL)
+        {
+	int a;
+	
+	if ( entry==NULL)entry=vcalloc ( CL->entry_len, CL->el_size);
+	
+	for (a=0; a< CL->entry_len; a++)entry[a]=vread_clist(CL, pos, a);
+	return entry;
+	}
+
+	
+/*********************************************************************/
+/*                                                                   */
+/*                         SEARCH IN LIST (ARRAY AND FILE)           */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+FILE * compare_list (FILE *OUT, Constraint_list *CL1,Constraint_list *CL2)
+	{
+	int a;
+	float nw_score=0;
+	float w_score=0;
+	int **l;
+
+	CLIST_TYPE  *entry=NULL;
+	int p;
+
+	entry=vcalloc ( CL1->entry_len, CL1->el_size);
+	for ( a=0; a<CL1->ne; a++)
+		{
+		entry=extract_entry (entry,a,CL1);
+		if ((l=main_search_in_list_constraint (entry,&p,4,CL2))!=NULL)
+			{
+			vwrite_clist ( CL2, p,MISC, 1);
+			vwrite_clist ( CL1, a,MISC, 1);
+			nw_score++;
+			w_score+=l[0][WE];
+			}
+		}
+	fprintf ( OUT, "%-15s:%d pairs (Evaluated matrix), %d pairs in the other (%s)\n", CL2->list_name, CL2->ne, CL1->ne, CL1->list_name);
+        fprintf ( OUT, "%-15s:%d pairs\n", CL1->list_name, CL1->ne);
+        fprintf ( OUT, "Acurracy=%.2f%%\n", (nw_score/CL1->ne)*MAXID);
+        fprintf ( OUT, "Sensitiv=%.2f%%\n\n", (nw_score/CL2->ne)*MAXID);
+	return OUT;
+	}
+
+
+CLIST_TYPE **main_search_in_list_constraint ( int *key,int *p,int k_len,Constraint_list *CL)
+	{
+
+	CLIST_TYPE **l=NULL;
+	int start, end;
+		
+	CL=index_constraint_list (CL);
+	
+	start=CL->start_index[key[SEQ1]][key[SEQ2]];
+	end  =CL->end_index  [key[SEQ1]][key[SEQ2]];
+		
+	if ( CL->fp)
+		    {
+		    fseek(CL->fp, (long)start*CL->el_size*CL->entry_len, SEEK_SET);
+		    l=(int **)search_in_list_file (key,p,k_len,CL->fp, end-start,CL->el_size, CL->entry_len);  		   
+		    }
+	else if ( CL->L)
+		    {
+		    l=(int **)search_in_list_array (key,p,k_len,(void **)((CL->L)+start), end-start,CL->el_size, CL->entry_len);  
+		    }		
+	
+	return l;
+	}
+CLIST_TYPE return_max_constraint_list ( Constraint_list *CL, int field)
+        {
+	CLIST_TYPE max=0;
+	int a;
+	for ( a=0; a< CL->ne; a++)max=MAX( vread_clist(CL,a,field), max);
+	return max;
+	}
+	
+ /*********************************************************************/
+/*                                                                   */
+/*                                                                   */
+/*      LIST SORTING                                                 */
+/*                                                                   */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+Constraint_list *sort_constraint_list_inv (Constraint_list *CL, int start, int len)
+	{
+	CL=sort_constraint_list   (CL, start,len);
+	
+
+	CL=invert_constraint_list (CL, start,len);
+	if ( start+len==CL->ne)
+	    {	   
+	    while (vread_clist(CL,CL->ne-1, SEQ1)==-1)CL->ne--;
+	    }
+	
+
+	return CL;
+	}
+
+Constraint_list *invert_constraint_list (Constraint_list *CL, int start,int len)
+        {
+	int a, b, c;
+	CLIST_TYPE tp;
+	
+	
+	for ( a=start, b=start+len-1; a<=b; a++, b--)
+	    {
+	    for (c=0; c< CL->entry_len; c++)
+	        {
+		tp=vread_clist(CL, a, c);
+		vwrite_clist(CL,a, c, vread_clist(CL, b, c));
+		vwrite_clist(CL,b, c, tp);
+		}
+	    }
+	return CL;
+	}
+	
+Constraint_list * sort_constraint_list(Constraint_list *CL, int start, int len)
+        {
+
+	CL=sort_constraint_list_on_n_fields (CL, start, len, 0, CL->entry_len);
+
+	return CL;
+	}
+Constraint_list * sort_constraint_list_on_n_fields (Constraint_list *CL, int start, int len, int first_field, int n_fields)
+	{
+
+	if (CL->fp)
+	   {	   
+	   rewind( CL->fp);
+	   fseek      ( CL->fp, start*CL->el_size*CL->entry_len , SEEK_SET);
+	   hsort_list_file ( CL->fp,        len, CL->el_size, CL->entry_len,first_field,n_fields);
+	   }
+	else if ( CL->L)
+	   {
+	     hsort_list_array ((void**)(CL->L)+start, len, CL->el_size, CL->entry_len,first_field,n_fields);
+	   }
+	return CL;
+	}
+
+/*********************************************************************/
+/*                                                                   */
+/*                         LIST PARSING                              */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/	
+Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source)
+    {
+    int a, b;
+    Sequence *S;
+
+
+    if ((S=read_seq_in_n_list (fname, n_list,type,seq_source))==NULL)
+	{
+	fprintf ( stderr, "\nNO SEQUENCE WAS SPECIFIED[FATAL]\n");
+        exit(1);
+	}
+    else 
+      {
+	free_sequence (S,-1);
+      }
+   
+   /*CHECK IF THERE IS A MATRIX AND GET RID OF OTHER METHODS*/
+    for (b=0, a=0; a< n_list; a++)if (is_matrix(fname[a]) ||is_matrix(fname[a]+1) )b=a+1;
+
+    if ( b)
+       {
+	if ( b==1);
+	else sprintf ( fname[0], "%s", fname[b-1]);
+	n_list=1;
+
+        }   
+    
+    if (!CL)CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?tmpfile():NULL, NULL);    
+    CL->local_stderr=local_stderr;
+    fprintf ( CL->local_stderr,"\nREAD/MAKE LIBRARIES:[%d]\n",n_list );
+
+
+    CL=read_constraint_list (CL, fname[0], in_mode, mem_mode,weight_mode);
+    compact_list (CL, 0, CL->ne, "default");
+    for ( a=1; a< n_list; a++)
+        {	
+	CL=read_constraint_list (CL, fname[a], in_mode, mem_mode,weight_mode);	
+	compact_list (CL, 0, CL->ne, "default");
+	}
+    CL->local_stderr=local_stderr;
+    
+    CL=evaluate_constraint_list_reference (CL);
+    
+    return CL;
+    }
+Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *in_mode, char *mem_mode,char *weight_mode)
+        {
+	Sequence *SL=NULL, *TS=NULL;
+	int a;
+	Constraint_list *SUBCL=NULL;
+	static char *read_mode;
+	char *fname;
+
+
+
+	fname=in_fname;	
+	if ( !read_mode)read_mode=vcalloc ( STRING, sizeof (char));
+		
+	if ( in_mode)sprintf (read_mode, "%s", in_mode);     
+	else if ( fname[0]=='A'){sprintf ( read_mode, "aln");fname++;}
+	else if ( fname[0]=='L'){sprintf ( read_mode, "lib");fname++;}
+	else if ( fname[0]=='M'){sprintf ( read_mode, "method");fname++;}
+	else if ( fname[0]=='S'){sprintf ( read_mode, "sequence");return CL;}
+	else if ( fname[0]=='P'){sprintf ( read_mode, "pdb")     ;return CL;}
+	else if ( fname[0]=='R'){sprintf ( read_mode, "profile") ;return CL;}
+	else if ( fname[0]=='X'){sprintf ( read_mode, "matrix");++fname;}    
+	else if ( fname[0]=='W'){sprintf ( read_mode, "structure");fname++;}
+
+	else
+	         {
+		     fprintf ( stderr, "\nERROR: The descriptor %s could not be identified as a file or a method.[FATAL]\nIf it is a method file please indicate it with M%s\n", fname, fname);
+		     exit (1);
+		 }
+
+	fprintf (CL->local_stderr, "\n\t%s [%s]\n", fname, read_mode);
+	
+	
+	if (strm(read_mode, "binary"))
+	      {
+		fprintf ( stderr, "\nERROR: Library %s: binary mode is not any more supported [FATAL:%s]\n", fname,PROGRAM);
+		exit (EXIT_FAILURE);
+	      }
+	   else if ( strm2 (read_mode,"ascii","lib"))
+              {
+		SUBCL=read_constraint_list_file(NULL, fname);
+	      }
+	   else if (strm(read_mode, "method"))
+	      {
+		
+	      CL=produce_list ( CL, CL->S, fname,weight_mode,mem_mode);
+	      }
+	   else if (strm(read_mode, "matrix"))
+	      {
+	      CL->L=NULL;
+	      CL->extend_jit=0;
+	      CL->M=read_matrice ( fname);
+	      }
+	   else if ( strm ( read_mode, "structure"))
+		{
+		if ( CL->ne>0)
+			{
+			fprintf ( stderr, "\nERROR: Wstructure must come before Mmethod or Aaln [FATAL:%s]",PROGRAM);
+			exit (EXIT_FAILURE);
+			}
+		
+		if ( !(CL->STRUC_LIST))
+			{
+			CL->STRUC_LIST=declare_sequence (1,1,10000);
+			(CL->STRUC_LIST)->nseq=0;
+			}
+		SL=CL->STRUC_LIST;
+		
+		if ( check_file_exists(fname))
+			{
+			TS=main_read_seq ( fname);
+			for (a=0; a<TS->nseq; a++)sprintf (SL->name[SL->nseq++], "%s", TS->name[a]);
+			free_sequence (TS, TS->nseq);
+			}
+		else
+			{ 
+			sprintf (SL->name[SL->nseq++], "%s", fname);
+			}
+		}
+	   else if (strm (read_mode, "aln"))
+	      {
+		SUBCL=aln_file2constraint_list ( fname,SUBCL,weight_mode);
+	      }
+	   else 
+	      {
+		SUBCL=read_constraint_list_file(SUBCL, fname);
+	      }
+	
+	if (SUBCL)
+	  {
+	    CL=merge_constraint_list    (SUBCL, CL, "add");
+	    free_constraint_list_full (SUBCL);
+	  }
+	
+	return CL;
+	}
+
+#define is_seq_source(Symbol,Mode,SeqMode)            (Symbol==Mode && (SeqMode==NULL || strm (SeqMode, "ANY") || (SeqMode[0]!='_' && strchr (SeqMode,Symbol)) || (SeqMode[0]=='_' && !strchr (SeqMode,Symbol)))) 
+Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
+        {
+	int nseq=0;
+	int a, b;
+	Alignment *A;
+	char **sequences=NULL;
+	char **seq_name=NULL;
+	Sequence *S=NULL;
+	Sequence *S1;
+	char mode;
+
+	/*THE TYPE OF EACH FILE MUST BE INDICATED*/
+	/*SeqMode indicates the type of file that can be used as sequence sources*/
+	/*
+	  ANY: any mode
+	  SL: only sequences from Libraries and Sequences
+	  _A: anything BUT sequences from A(lignments)  
+	*/
+
+	if ( n==0)
+	   {
+	   fprintf ( stderr, "\nNO IN FILE [FATAL]\n");
+	   exit (1);
+	   }
+	else
+	   {	   
+	   for ( a=0; a< n ; a++)
+	       {
+	       static char *buf;
+	       char *lname;
+	       if (buf)vfree (buf);
+	       
+	       buf=name2type_name(fname[a]);mode=buf[0];lname=buf+1;
+	       
+	       if (is_seq_source ('A', mode, SeqMode))
+	          {
+
+		  A=main_read_aln (lname,NULL);
+		  S1=aln2seq(A);
+		  S1=seq2unique_name_seq (S1);
+		  if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nSequence Error in %s [FATAL]\n",lname); exit(1);} 
+		  free_aln (A);
+		  free_sequence (S1, S1->nseq);
+		  }
+	       else if ( is_seq_source ('R', mode, SeqMode))
+	          {
+		  A=declare_aln (NULL);
+		  A=main_read_aln (lname, A);
+		  S=add_prf2seq(A,S);
+		  free_aln (A);
+		  
+		  }
+	       else if (is_seq_source ('P', mode, SeqMode))
+	          {		  
+		  A=declare_aln (NULL);
+		  A=main_read_aln (lname, A);
+		  
+		  S1=get_pdb_sequence (lname);
+		  if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nSequence Error in %s [FATAL]\n",lname); exit(1);} 
+		  free_sequence (S1, S1->nseq);
+
+		  }
+	       else if ( mode=='M');
+	       else if ( mode=='X');
+	       else if ( mode=='W');
+	       else if (is_seq_source ('S', mode, SeqMode))
+	          {
+		  /*1 Try with my routines (read t_coffee and MSF)*/ 
+		 
+		  if ( (A=main_read_aln ( lname, NULL))!=NULL)  
+		     {
+		     
+		     S1=aln2seq(A);
+		     free_aln(A);
+		     }		  
+		  else
+		     { 
+		     S1=main_read_seq (lname);
+		     }
+		  
+		  for ( b=0; b< S1->nseq; b++)ungap(S1->seq[b]);
+		  S1=seq2unique_name_seq (S1);
+
+		  if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nSequence Error in %s [FATAL]\n",lname); exit(1);} 
+		  
+		  free_sequence (S1,S1->nseq);
+		  
+		  }
+	       else if (is_seq_source ('L', mode, SeqMode))
+                  {
+		  
+		    read_seq_in_list (lname,&nseq,&sequences,&seq_name);             
+		  
+		  S1=fill_sequence_struc ( nseq, sequences, seq_name);
+		  
+		  for ( b=0; b< S1->nseq; b++)sprintf ( S1->file[b], "%s", lname);
+		  nseq=0;free_char (sequences, -1); free_char ( seq_name, -1);
+		  sequences=NULL;
+		  seq_name=NULL;
+		  S1=seq2unique_name_seq (S1);
+
+                  if ((S=merge_seq( S1, S))==NULL){fprintf ( stderr, "\nSequence Error in %s [FATAL]\n",lname); exit(1);} 
+		  free_sequence(S1, S1->nseq);
+		  }
+
+	       else if ( !strchr ( "ALSMXPRW", mode))
+	          {
+		      fprintf ( stderr, "\nERROR: %s is neither a file nor a method [FATAL:%s]\n", lname, PROGRAM);
+		      crash ("");
+
+		  }
+	       }
+	   
+	   if ( type && type[0])sprintf ( S->type, "%s", type);
+	   else S=get_sequence_type (S);
+	   
+	   if ( strm (S->type, "PROTEIN_DNA"))
+	      {
+		  for ( a=0; a< S->nseq; a++)
+		      {
+			  if (strm ( get_string_type ( S->seq[a]), "DNA"));
+			  else if ( strm ( get_string_type ( S->seq[a]), "PROTEIN"))
+			      {
+				  S->seq[a]=thread_aa_seq_on_dna_seq (S->seq[a]);
+				  S->len[a]=strlen (S->seq[a]);
+				  S->max_len=MAX(S->max_len, S->len[a]);
+			      }
+		      }
+	      }
+			
+	   
+	   return S;
+	   }
+
+
+	return NULL;
+	}
+
+int read_cpu_in_list ( char *fname)
+        {
+	FILE *fp;
+	int c;
+	int cpu=0;
+
+	fp=vfopen ( fname, "r");
+	while ( (c=fgetc(fp))!='#');
+	while ( (c=fgetc(fp))!='C' && c!=EOF);
+	if ( c=='C')fscanf( fp, "PU %d\n", &cpu);
+	vfclose ( fp);
+	return cpu;
+	}
+
+
+Constraint_list * read_constraint_list_file(Constraint_list *CL, char *fname)
+        {
+	int a, c,e,n,z;
+	int seq_len, sn;
+	int s1, s2;
+	FILE *fp;
+	static char *name;
+	char *sequence;
+	static char *mat;
+	static char *dp_mode;
+	int max_nseq=0;
+	static int *sn_list;
+	static int line=2;
+	int list_nseq;
+	static CLIST_TYPE *entry;
+	Sequence *S;
+	Sequence *small_S;
+	int seq_1_to_n=0;
+	Alignment *B=NULL;
+	char *buf;
+	int lline;
+	char *stripped_file;
+
+
+	stripped_file=strip_file_from_comments ("!", fname);	
+	small_S=read_seq_in_n_list (&fname, 1,NULL, NULL); 
+	
+	if ( !CL)
+	  {
+	    CL=declare_constraint_list ( small_S,NULL, NULL, 0,NULL, NULL);  
+	    CL->S=small_S;
+	  }
+	
+	small_S=read_seq_in_n_list (&fname, 1, (CL->S)->type, NULL);
+	B=seq2aln (small_S, NULL, 1); 
+	B=fix_aln_seq  ( B, (CL->S));
+	if ( CL->S!=small_S)free_sequence (small_S, B->nseq);
+		
+	lline=measure_longest_line_in_file (fname)+1;
+
+	if ( !mat) mat=vcalloc (STRING, sizeof (char));
+	if ( !dp_mode) dp_mode=vcalloc (STRING, sizeof (char));
+	fp=vfopen (fname, "r");
+	while((c=fgetc(fp))!='#')if ( c=='\n')max_nseq++;
+	vfclose (fp);
+	
+	buf=vcalloc (lline, sizeof (char));	
+	sequence=vcalloc (lline, sizeof (char));
+	if ( !name)name=vcalloc ( 100, sizeof (char));
+	if ( !entry)entry=vcalloc ( CL->entry_len, CL->el_size);
+	if ( !sn_list)sn_list=vcalloc (max_nseq, sizeof (int));
+	else 
+	  {
+	    sn_list=vrealloc (sn_list, max_nseq*sizeof (int));
+	  }
+	S=CL->S;
+
+	seq_1_to_n=((fp=find_token_in_file (fname, NULL, "SEQ_1_TO_N"))!=NULL);
+	vfclose (fp);
+	if ( sn_list==NULL)sn_list=vcalloc (max_nseq, sizeof (int));
+
+	/*Read Constraint list*/
+	fp=vfopen(stripped_file,"r");
+	fscanf ( fp, "%d\n", &list_nseq);
+	for ( a=0; a<list_nseq; a++)
+		{
+		fscanf ( fp, "%s %d %s\n", name, &seq_len, sequence);
+		line++;
+	
+		lower_string (sequence);
+		
+		if ((sn=name_is_in_list (name,S->name, S->nseq, 100))==-1){continue;}
+		else
+			{
+			sn_list[a]=sn;
+			}
+		}
+	
+	while ( (c=fgetc(fp))!=EOF)
+	  {
+	    
+	    ungetc(c, fp);
+	    if ( c=='#')
+			{
+			fscanf ( fp, "#%d %d\n", &s1, &s2);line++;
+			/*Check If the sequence numbering is legal*/
+			if ( seq_1_to_n){s1--; s2--;}
+			
+			if (s1<0 || s2 <0)
+			  {
+			    fprintf (stderr, "ERROR: Wrong Sequence Numbering in %s [FATAL:%s]\n",fname, PROGRAM); 
+			    exit (EXIT_FAILURE);
+			  }
+
+
+			
+
+			s1=sn_list[s1];
+			s2=sn_list[s2];
+			
+			while (isdigit((c=fgetc(fp))))
+				{
+
+				for ( z=0; z<  CL->entry_len; z++)entry[z]=0;
+				ungetc(c, fp);				
+				n=0;
+				entry[n++]=s1;
+				entry[n++]=s2;
+				while ( (c=fgetc(fp))!='\n')
+				  {
+				   
+					if ( isspace (c));
+					else 
+						{
+						ungetc(c, fp);
+						fscanf ( fp, "%d", &entry[n]);
+						n++;
+						}
+					
+					if ( n>CL->entry_len)
+						{
+						fprintf ( stderr, "\nWARNING1:PARSING ERROR IN %s AT LINE %d: C=%c n=%d\n", fname,line, c,n);
+						for ( e=2; e<LIST_N_FIELDS; e++)
+							fprintf ( stderr, "%d ", entry[e]);
+					
+						exit (EXIT_FAILURE);
+						}
+					}
+				if (c=='\n')line++;
+				 
+				if ( n<=CONS)entry[CONS]=1;
+				
+				  
+				/*Check The legality of the entry*/
+				if ( n>0 && n<3)
+					{
+					fprintf ( stderr, "\nWARNING2:PARSING ERROR IN %s AT LINE %d: C=%c\n", fname,line-1, c);
+					for ( e=2; e<LIST_N_FIELDS; e++)
+						fprintf ( stderr, "%d ",entry[e]);
+					
+					exit (EXIT_FAILURE);
+					}
+				
+				entry[R1]=(B->seq_cache)?B->seq_cache[entry[SEQ1]][entry[R1]]:entry[R1];
+				entry[R2]=(B->seq_cache)?B->seq_cache[entry[SEQ2]][entry[R2]]:entry[R2];
+				
+				if ( entry[R1] && entry[R2])
+				  {
+				    if ( entry[R1]<=0 || entry[R1]>(CL->S)->len[s1])
+				      {
+					fprintf ( stderr, "\nERROR: Seq1=%d (len=%d, name=%s), Seq2=%d (len=%d, name=%s), Res1 %d, Res2 %d\n", entry[SEQ1]+1,(CL->S)->len[s1],(CL->S)->name[s1], entry[SEQ2]+1,(CL->S)->len[s2],(CL->S)->name[s2],entry[R1], entry[R2]);
+					fprintf ( stderr, "\nERROR: Library %s, line %d, Field 1: Bad residue numbering (%d)[FATAL:%s]\n", fname, line-1,entry[R1], PROGRAM);
+					exit (EXIT_FAILURE);
+				      }
+				    else if (entry[R2]<=0 || entry[R2]>(CL->S)->len[s2])
+				      {
+					fprintf ( stderr, "\nERROR: Seq1=%d (len=%d, name=%s), Seq2=%d (len=%d, name=%s), Res1 %d, Res2 %d\n", entry[SEQ1]+1,(CL->S)->len[s1],(CL->S)->name[s1], entry[SEQ2]+1,(CL->S)->len[s2],(CL->S)->name[s2],entry[R1], entry[R2]);
+					
+					fprintf ( stderr, "\nERROR: Seq1: %d, Seq2 %d, Res1 %d, Res2 %d\n", entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]);
+					fprintf ( stderr, "\nERROR: Library %s, line %d, Field 2: Bad residue numbering (%d)[FATAL:%s]\n", fname, line-1, entry[R2],PROGRAM);
+					exit (EXIT_FAILURE);
+				      }
+				    fscanf ( fp, "\n");
+				    if ( (entry[SEQ1]>entry[SEQ2])|| (entry[SEQ1]==entry[SEQ2] && entry[R1]>entry[R2]))
+				      {
+					SWAP(entry[SEQ1],entry[SEQ2]);
+					SWAP(entry[R1], entry[R2]);
+				      }
+				    
+				
+			
+				    for ( z=0; z< CL->entry_len; z++)vwrite_clist( CL,CL->ne, z, entry[z]);
+				    CL->ne++;
+				  }
+				}
+			 ungetc ( c, fp);
+			 
+			 }
+		else
+			{
+			fprintf ( stderr, "\nPARSING ERROR IN %s AT LINE %d: %c (read_constraint_list_file)", fname,line,c); 			
+			exit (1);
+			}
+		}
+	free_aln (B);
+	vfree(buf);
+	vfree(sequence);
+	vfclose (fp);	 
+	remove(stripped_file);
+	return CL;
+	} 
+	
+int read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name)
+	{
+	int a,c;
+	int seq_len, sn;
+
+	FILE *fp;
+	char name[1000];
+	char *sequence;	
+	static int max_nseq;
+	static int *sn_list;
+	int list_nseq;
+	int lline;
+	char *stripped_file;
+
+	stripped_file=strip_file_from_comments ("!", fname);
+	
+	lline=measure_longest_line_in_file (fname);
+	sequence=vcalloc (lline, sizeof (char)+1);
+	fp=vfopen (fname, "r");
+	while((c=fgetc(fp))!='#')if ( c=='\n')max_nseq++;
+	vfclose (fp);
+	
+	
+	
+	if ( seq_name[0]==NULL)
+		{
+		seq_name[0]= declare_char (max_nseq,0);
+		sequences[0]=declare_char (max_nseq,0);		
+		}
+	if ( sn_list==NULL)sn_list=vcalloc ( max_nseq, sizeof (int));
+	else sn_list=vrealloc (sn_list, max_nseq*sizeof (int));
+
+	fp=vfopen (stripped_file,"r");
+	if (fscanf ( fp, "%d\n", &list_nseq)!=1)return 0;
+	for ( a=0; a<list_nseq; a++)
+		{
+		fscanf ( fp, "%s %d %s\n", name, &seq_len, sequence);
+		lower_string (sequence);
+		
+		if ((sn=name_is_in_list (name, seq_name[0], nseq[0], 100))==-1)
+			{
+			seq_name[0][nseq[0]]=vcalloc (strlen (name)+1, sizeof (char));
+			sprintf (seq_name[0][nseq[0]], "%s", name);
+			sequences[0][nseq[0]]=vcalloc (strlen (sequence)+1, sizeof (char));
+			sprintf (sequences[0][nseq[0]], "%s", sequence);
+			sn_list[a]=nseq[0];
+			nseq[0]++;
+			}
+		else
+			{
+			sn_list[a]=sn;
+			}
+		}
+	vfclose (fp);
+	remove ( stripped_file);
+	vfree (sequence);
+	return 1;
+	}
+
+
+/*********************************************************************/
+/*                                                                   */
+/*                        EXTENDED LIST OUTPUT                       */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/	
+
+FILE * save_extended_constraint_list      (  Constraint_list *CL, char *mode, FILE *fp) 
+{
+  int a, b;
+  
+  if ( !fp)fp=stdout;
+  
+    
+  if ( strm ( mode, "lib"))fp=save_list_header (fp,CL);
+  
+  
+  for ( a=0; a< (CL->S)->nseq; a++)
+    {
+      for ( b=a; b<(CL->S)->nseq; b++)
+	{
+	  fprintf (CL->local_stderr, "\n\t%s %s",(CL->S)->name[a], (CL->S)->name[b] );
+	  if ( a==b && !CL->do_self)continue;
+	  fp=save_extended_constraint_list_pair(CL, mode, (CL->S)->name[a], (CL->S)->name[b], fp);
+	}
+    }
+  if ( strm ( mode, "lib"))fprintf (fp, "! SEQ_1_TO_N\n");
+  return fp;
+}
+  
+
+FILE * save_extended_constraint_list_pair (  Constraint_list *CL, char *mode, char* seq1, char * seq2,FILE *fp)
+      {
+	int a, b;
+	int s1, s2, score;
+	
+	s1=name_is_in_list (seq1,(CL->S)->name, (CL->S)->nseq, 100);
+	s2=name_is_in_list (seq2,(CL->S)->name, (CL->S)->nseq, 100);
+	
+	if ( s1==-1)
+	  {
+	    fprintf ( stderr, "Output Error: %s is not a sequence [FATAL:%s]\n", seq1, PROGRAM);
+	    crash ("");
+	  }
+	if ( s2==-1)
+	  {
+	    fprintf ( stderr, "Output Error: %s is not a sequence [FATAL:%s]\n", seq2, PROGRAM);
+	    crash ("");
+	  }
+
+	if ( strm (mode, "pair"))fprintf (fp, "# 1 2\n");
+	else if ( strm (mode, "lib"))fprintf (fp, "# %d %d\n", s1+1, s2+1);
+	
+	for ( a=0; a<(CL->S)->len[s1]; a++)
+		{
+		  for ( b=0; b<(CL->S)->len[s2]; b++)
+		    {
+		      if ( a>=b && s1==s2)continue;
+		      score=CL->evaluate_residue_pair (CL, s1,a+1, s2, b+1);
+		      if ( !score) continue;
+		      fprintf (fp, "%d %d %d\n", a+1, b+1, score);
+		      
+		    }		  
+		}
+	return fp;
+      }
+
+	
+/*********************************************************************/
+/*                                                                   */
+/*                         LIST OUTPUT                               */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/		
+
+FILE * save_constraint_list ( Constraint_list *CL,int start, int len, char *fname, FILE *fp,char *mode, Sequence *S)
+        {
+	int a, b;
+	static int* translation;
+
+	
+	
+	
+	if ( fp==NULL)
+	   {
+	   if ( translation!=NULL)vfree(translation);
+	   translation=vcalloc ( (CL->S)->nseq+1, sizeof (int));
+	   for ( b=0,a=0; a< (CL->S)->nseq; a++)
+	       {
+	       if ( name_is_in_list((CL->S)->name[a],S->name,S->nseq, 100)==-1)
+	          {
+		  (CL->S)->len[a]=-1;
+		  translation [a]=-1;
+		  }
+	       else 
+	          {
+		  translation[a]=b++;
+		  }
+	       }
+	   
+	   }
+	if (strm2(mode, "lib","ascii"))
+	   {
+	   if ( fp==NULL)fp=vfopen ( fname, "w");
+	   fp=save_list_header (fp,CL);
+	   fp=save_constraint_list_ascii(fp, CL, 0, CL->ne, translation);
+	   }
+	else if (strm(mode, "binary"))
+	   {
+	   if ( fp==NULL)fp=vfopen ( fname, "wb");
+	   fp=save_constraint_list_bin  (fp, CL, 0, CL->ne, translation);
+	   }
+	else
+	    {
+	    fprintf (stderr,"\nUNKOWN MODE FOR OUTPUT: %s [FATAL]\n",mode);
+	    crash ("");
+	    }
+	return fp;
+	}
+	    	    
+FILE * save_sub_list_header ( FILE *OUT, int n, char **name, Constraint_list *CL)
+        {
+  	int a,b;
+	int nseq=0;
+	
+	
+
+	for ( a=0; a<(CL->S)->nseq; a++)
+	  for ( b=0; b<n; b++)
+	    if (strm (name[b] ,  (CL->S)->name[a]))
+	      nseq+=((CL->S)->len[a]!=-1);
+		
+	fprintf ( OUT, "! TC_LIB_FORMAT_01\n%d\n",nseq);
+	for ( a=0; a<n; a++)
+	  for ( b=0; b<(CL->S)->nseq; b++)
+	    if (strm (name[a] ,  (CL->S)->name[b]))
+		if ((CL->S)->len[b]!=-1) fprintf ( OUT, "%s %d %s\n", (CL->S)->name[b], (CL->S)->len[b],(CL->S)->seq[b]);
+	
+	return OUT;			
+	}	   
+FILE * save_list_header ( FILE *OUT,Constraint_list *CL)
+	{	
+	int a;
+	int nseq=0;
+	
+	for ( a=0; a<(CL->S)->nseq; a++)nseq+=((CL->S)->len[a]!=-1);
+	
+
+	fprintf ( OUT, "! TC_LIB_FORMAT_01\n%d\n",nseq);
+	for ( a=0; a<(CL->S)->nseq; a++)
+		if ((CL->S)->len[a]!=-1) 
+		  {
+		    fprintf ( OUT, "%s %d %s\n", (CL->S)->name[a], (CL->S)->len[a],(CL->S)->seq[a]);
+		  }
+	return OUT;			
+	}	
+FILE *save_list_footer (FILE *OUT,Constraint_list *CL)
+      {
+	if ( CL->cpu)fprintf (OUT, "! CPU %d\n",get_time());
+	fprintf (OUT, "! SEQ_1_TO_N\n");
+	return OUT;
+      }
+   
+FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int len, int *translation)
+	{	
+	int a, b, s1, s2;
+        CLIST_TYPE x1, x2;
+
+	if (len==start && CL->cpu!=-1)
+	    {
+	    fprintf (OUT, "! CPU %d\n",get_time());
+	    return OUT;
+	    }
+	else
+	    {
+	    
+	    s1=translation[vread_clist(CL,start,SEQ1)];
+	    s2=translation[vread_clist(CL,start,SEQ2)];
+	   
+	    
+	    if ( s1!=-1 && s2!=-1)fprintf ( OUT, "#%d %d\n", s1+1, s2+1);
+	    for ( a=start; a<(len+start); a++)
+		   {
+		   x1=translation[vread_clist(CL,a,SEQ1)];
+		   x2=translation[vread_clist(CL,a,SEQ2)];
+		   if ( x1==-1 || x2==-1);
+		   else 
+		       {
+		       if ( x1!=s1 || x2!=s2)
+			  {
+			  s1=x1;
+			  s2=x2;
+			  fprintf ( OUT, "#%d %d\n", s1+1, s2+1);
+			  }
+		       for ( b=2; b<CL->entry_len; b++) fprintf ( OUT, "%5d ", vread_clist(CL, a, b));
+		       fprintf (OUT, "\n");
+		       }
+		   }
+	    }
+	return save_list_footer (OUT, CL);
+			
+	}
+FILE * save_constraint_list_bin ( FILE *OUT,Constraint_list *CL, int start,int len, int *translation)
+	{	
+	int a, b;
+
+	CLIST_TYPE x1, x2;
+	
+
+	if (len==start && CL->cpu!=-1)
+	    {
+	    
+	    return OUT;
+	    }
+	else
+	    {
+	    for ( a=start; a<(len+start); a++)
+		   {
+		   x1=translation[vread_clist(CL,a,SEQ1)];
+		   x2=translation[vread_clist(CL,a,SEQ2)];
+		   if ( x1==-1 || x2==-1);
+		   else 
+		       {
+		       for ( b=2; b<CL->entry_len; b++)
+		           {
+			   x1=vread_clist(CL,a,b);
+			   fwrite (&x1, CL->el_size, 1, OUT);
+			   }
+		       }
+		   }
+	    }
+	return OUT;			
+	}
+
+/*********************************************************************/
+/*                                                                   */
+/*                         LIST CONVERTION                           */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/		
+
+Constraint_list *aln_file2constraint_list (char *alname, Constraint_list *CL,char *weight_mode)
+        {
+	Alignment *A;
+	A=main_read_aln ( alname, NULL);
+	CL=aln2constraint_list (A, CL, weight_mode);
+	free_aln (A);
+	return CL;
+	}
+
+int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *weight_mode, int *weight)
+{
+  int *col;
+  int a,c, ref_weight;
+  
+  if ( !weight)weight=vcalloc (MAX(2,A->len_aln), sizeof (int));
+  
+  weight[0]=FORBIDEN;
+  if ( weight_mode==NULL || strcmp (weight_mode, "no")==0 || is_number (weight_mode))
+    {
+      
+      if (is_number (weight_mode))ref_weight=atoi(weight_mode);
+      else ref_weight=1;
+      weight[1]=ref_weight;
+      
+    }
+  else if ( strncmp ( weight_mode, "len",3)==0)
+    {
+      weight[1]=A->len_aln;
+    }
+  else if ( strnm ( weight_mode, "sim", 3))
+    {
+      ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-", weight_mode+3);
+      weight[1]=ref_weight;
+    }
+  else if ( strnm ( weight_mode, "subset", 6))
+    {
+      ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-",NULL);
+      weight[1]=ref_weight;
+    }
+  
+  else if ( strncmp (weight_mode, "winsim", 6)==0)
+    {
+      weight=get_seq_winsim ( A->seq_al[s1], A->seq_al[s2], "-", weight_mode+6, weight);
+    }
+  else if (  strncmp ( weight_mode, "cdna", 4)==0)
+    {
+      ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-", weight_mode+4);
+      col=vcalloc ( A->len_aln+1, sizeof (int));
+      if (A->cdna_cache)
+	for ( a=0; a<=A->len_aln; a++)col[a]=A->cdna_cache[0][a];
+      else
+	for ( a=0; a<=A->len_aln; a++)col[a]=1;
+      for ( c=0; c< A->len_aln; c++)weight[c]=ref_weight*col[c];
+      vfree (col);
+    }
+  else if ( strm ( weight_mode, "pdb"))
+    {
+      if ( !(A->CL) || !(A->CL)->T)
+	{
+	  fprintf ( stderr, "\nCould not find the PDB structure: [FATAL:%s]\n", PROGRAM);
+	  crash ("");
+	}
+    }
+  else
+    {
+      fprintf ( stderr, "\nERROR: Weight Mode %s is unknown [FATAL:%s]", weight_mode, PROGRAM);
+      crash ("");
+    }
+  return weight;
+}
+Constraint_list *aln2constraint_list      (Alignment *A, Constraint_list *CL,char *weight_mode)
+	{
+	Constraint_list *CLB=NULL;
+	int a, b, c,nres1, nres2;
+	int *weight=NULL;
+	int s1, s2;
+	int fixed_nres1, fixed_nres2;
+	int do_pdb=0;
+	int pdb_weight;
+	int set_misc;
+	char*alp=NULL;
+
+
+
+	if ( !A) return CL;	
+	
+	if ( !CL)
+	  {
+	    Sequence *S;
+	    S=aln2seq (A);
+	    CL=declare_constraint_list (S,NULL, NULL, 0,NULL, NULL);  
+	    CL->S=S;
+	  }
+	CLB=(Constraint_list *)A->CL;
+	
+	
+
+	do_pdb=strm ( weight_mode, "pdb");
+	if ( strnm(weight_mode, "subset", 6))alp=strchr(weight_mode, '_')+1;
+	
+	for ( a=0; a<A->nseq-1; a++)
+		
+		{
+		for (set_misc=0,b=a+1; b< A->nseq; b++)
+			{	
+			s1=name_is_in_list (A->name[a], (CL->S)->name, (CL->S)->nseq, 100);
+			s2=name_is_in_list (A->name[b], (CL->S)->name, (CL->S)->nseq, 100);
+			
+			if ( s1==-1 || s2==-1)
+			  {
+			    if ( getenv4debug ("DEBUG_LIBRARY"))fprintf ( stderr, "\n[DEBUG_LIBRARY:aln2constraint_list]Could use a pair of constraints");
+			  }
+			else if ( s1!=-1 && s2!=-1)
+			    {
+			      int use_pair;
+			      
+			      weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
+			      for (nres1=A->order[a][1], nres2=A->order[b][1], c=0; c< A->len_aln; c++)
+				{
+				nres1+=!is_gap(A->seq_al[a][c]);
+				nres2+=!is_gap(A->seq_al[b][c]);
+				
+				if ( strm ( weight_mode, "pdb"))
+				  {
+				     
+				      pdb_weight=MAX(0,(CLB->evaluate_residue_pair)(CLB,0, nres1,1,nres2));
+				  }
+				
+				use_pair=1;
+				use_pair=use_pair && !is_gap(A->seq_al[a][c]);
+				use_pair=use_pair && !is_gap(A->seq_al[b][c]);
+				use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
+				use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
+				use_pair=use_pair && !(do_pdb && pdb_weight==0);
+				if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
+				
+				/*if ( !is_gap(A->seq_al[a][c]) && !is_gap(A->seq_al[b][c]) && A->seq_al[b][c]!=UNDEFINED_RESIDUE && A->seq_al[a][c]!=UNDEFINED_RESIDUE && !(do_pdb && pdb_weight==0))*/
+				if (use_pair)
+					{
+					
+					  
+					  fixed_nres1=(!A->seq_cache)?nres1:A->seq_cache[s1][nres1];
+					  fixed_nres2=(!A->seq_cache)?nres2:A->seq_cache[s2][nres2];
+					  
+					  
+					  if ( fixed_nres1==-1 || fixed_nres2==-1)
+					    {
+					      fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[a], nres1,fixed_nres1 );
+					      fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[b], nres2,fixed_nres2 );
+					      
+					      exit(0);
+					    }
+					  
+					  if ( fixed_nres1 && fixed_nres2)
+					    {
+					     
+					      
+					      vwrite_clist (CL,CL->ne, SEQ1, (s1<s2)?s1:s2);
+					      vwrite_clist (CL,CL->ne, SEQ2, (s1<s2)?s2:s1);
+					      vwrite_clist (CL,CL->ne, R1,   (s1<s2)?fixed_nres1:fixed_nres2);
+					      vwrite_clist (CL,CL->ne, R2,   (s1<s2)?fixed_nres2:fixed_nres1);
+					      
+					      if (do_pdb)
+						{
+						  vwrite_clist (CL,CL->ne, WE,pdb_weight );
+						}
+					      else
+						{
+						  vwrite_clist (CL,CL->ne, WE, (weight[0]==FORBIDEN)?weight[1]:weight[c] );
+						}
+					      vwrite_clist (CL,CL->ne, CONS,1);
+					      if (!set_misc)
+						{
+						  vwrite_clist (CL,CL->ne, MISC,A->len_aln);
+						  set_misc=1;
+						}
+					      else 
+						{
+						  vwrite_clist (CL,CL->ne, MISC,0);
+						}
+					      CL->ne++;
+					    }
+					}
+				}
+			    }
+			}
+		}
+	vfree (weight);
+	if (A->A) return aln2constraint_list (A->A, CL, weight_mode);
+	else
+	  return CL;
+       } 
+double **list2mat (Constraint_list *CLin,int s1,int s2, double *min, double *max)
+        {
+	double ** mat;
+	int a, r1, r2;
+	int min_def=0;
+	Constraint_list *CL;
+	static Sequence *S;
+
+	
+	int row, column;
+	if ( S==NULL)S=declare_sequence ((CLin->S)->min_len, (CLin->S)->max_len,(CLin->S)->nseq); 	
+	sprintf ( S->name[0], "%s",(CLin->S)->name[s1]);
+	sprintf ( S->name[1],"%s",(CLin->S)->name[s2]);
+        S->nseq=2;
+	
+        row   =(CLin->S)->len[s1];
+	column=(CLin->S)->len[s2];
+	
+	if ( CLin->extend_jit)	
+	    CL=extend_list(CLin,"mem",CLin->extend_clean_mode, CLin->extend_compact_mode, CLin->do_self, S);
+	else
+	    CL=CLin;
+
+
+	min[0]=max[0];
+	mat=declare_double ( row, column);
+
+	for ( a=0; a<CL->ne; a++)
+	    {
+	    r1=vread_clist(CL,a,R1)-1;
+	    r2=vread_clist(CL,a,R2)-1;
+	    if ( vread_clist(CL,a,SEQ1)==s1 &&vread_clist(CL,a,SEQ2)==s2)
+		{
+		mat[r1][r2]=(double)vread_clist(CL,a,WE);
+		if (min_def==0)
+		   {
+		   min_def=1;
+		   min[0]=mat[r1][r2];
+		   max[0]=mat[r1][r2];
+		   }
+		else
+		   {
+		   min[0]=(min[0]<mat[r1][r2])?min[0]:mat[r1][r2];
+		   max[0]=(max[0]>mat[r1][r2])?max[0]:mat[r1][r2];
+		   }
+		}
+	    else if (vread_clist(CL,a,SEQ2)==s1 &&vread_clist(CL,a,SEQ1)==s2) 
+		{
+		mat[r2][r1]=(double)vread_clist(CL,a,WE);
+			if (min_def==0)
+		   {
+		   min_def=1;
+		   min[0]=mat[r2][r1];
+		   max[0]=mat[r2][r1];
+		   }
+		else
+		   {
+		   min[0]=(min[0]<mat[r2][r1])?min[0]:mat[r2][r1];
+		   max[0]=(max[0]>mat[r2][r1])?max[0]:mat[r2][r1];
+		   }
+		}
+	    }
+	return mat;
+	}
+
+Constraint_list * constraint_list2bin_file(Constraint_list *clist)
+        {
+	int a,b;
+	
+	clist->fp=tmpfile();
+	for ( a=0; a< clist->ne; a++)
+	    for ( b=0; b<clist->entry_len; b++)
+	        {
+		fwrite (&clist->L[a][b],clist->el_size, 1,clist->fp);
+		}
+	return clist;
+	}
+
+FILE * bin_file2constraint_list ( Constraint_list *CL, FILE *fp, char *name)
+        {
+	int a, b, s1, s2;
+	CLIST_TYPE *entry;
+	
+	if ( fp==NULL)fp=vfopen ( name, "w");
+	entry=vcalloc ( CL->entry_len, CL->el_size);
+	fprintf ( fp, "%d\n", (CL->S)->nseq);
+	for ( a=0; a< (CL->S)->nseq; a++)fprintf (fp, "%s %d %s\n", (CL->S)->name[a], (CL->S)->len[a], (CL->S)->seq[a]);
+	
+
+	rewind ( CL->fp);
+	fread(entry, CL->el_size, CL->entry_len, CL->fp);
+	s1=entry[SEQ1];
+	s2=entry[SEQ2];
+	fprintf (fp, "#%d %d\n", s1, s2);
+	for ( b=2; b< CL->entry_len; b++)fprintf (fp, "%5d ",entry[b]);
+	fprintf (fp, "\n");
+	for ( a=1; a< (CL->ne); a++)
+	    {
+	    fread(entry, CL->el_size, CL->entry_len, CL->fp);
+	    if ( entry[SEQ1]!=s1 || entry[SEQ2]!=s2)
+	       {
+	       s1=entry[SEQ1];
+	       s2=entry[SEQ2];
+	       fprintf (fp, "#%d %d\n", s1, s2);
+	       }
+	    for ( b=2; b< CL->entry_len; b++)fprintf (fp, "%5d ",entry[b]);
+	    fprintf (fp, "\n");
+	    }
+	fprintf (fp, "! CPU %d\n",get_time());
+	
+	return fp;
+	}
+int **list2residue_total_weight ( Constraint_list *CL)
+        {
+	  /*Returns 
+	    tot_weight[nseq][maxlen]
+	    where each residue is associated with the total of its weights in CL
+	    ####IMPORTANT
+            
+	          -the numbering of the residues  goes from 1 to L:
+	          -the numbering of the sequences goes from 0 to N-1:
+	  */
+
+	int **tot_weight;
+	int s1, s2, r1, r2, w, a;
+
+
+	tot_weight=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
+	for ( a=0; a<CL->ne; a++)
+	    {
+	    r1=vread_clist(CL,a,R1)-1;
+	    r2=vread_clist(CL,a,R2)-1;
+	    s1=vread_clist(CL,a,SEQ1);
+	    s2=vread_clist(CL,a,SEQ2);
+	    w=vread_clist(CL,a,WE);
+	    
+	    tot_weight[s1][r1]+=w;
+	    tot_weight[s2][r2]+=w;
+	    }
+	return tot_weight;
+	}
+
+int **list2residue_total_extended_weight ( Constraint_list *CL)
+        {
+	  /*Returns 
+	    tot_extended_weight[nseq][maxlen]
+	    where each residue is associated with the total of its weights in CL
+	    ####IMPORTANT
+            
+	          -the numbering of the residues  goes from 1 to L:
+	          -the numbering of the sequences goes from 0 to N-1:
+	  */
+
+	static int **tot_extended_weight;
+	int s1, s2, r1, r2, w;
+	
+	if (CL->residue_indexed && tot_extended_weight);
+	else
+	  {
+	    if (tot_extended_weight) free_int (tot_extended_weight, -1);
+	    if (CL->residue_indexed==0)index_res_constraint_list (CL,WE);
+	    
+
+	    tot_extended_weight=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
+	    
+	    for ( s1=0; s1< (CL->S)->nseq-1; s1++)
+	      for ( s2=s1+1; s2< (CL->S)->nseq; s2++)
+		for (r1=1; r1<=(CL->S)->len[s1]; r1++)
+		  for (r2=1; r2<=(CL->S)->len[s2]; r2++)
+		    {
+		      w=(CL->evaluate_residue_pair)( CL, s1, r1, s2, r2);
+		      tot_extended_weight[s1][r1]+=w;
+		      tot_extended_weight[s2][r2]+=w;
+		    }
+	  }
+	return tot_extended_weight;
+	}
+int **list2residue_partial_extended_weight ( Constraint_list *CL)
+        {
+	  /*Returns 
+	    tot_extended_weight[nseq][maxlen]
+	    where each residue is associated with the total of its weights in CL
+	    ####IMPORTANT
+            
+	          -the numbering of the residues  goes from 1 to L:
+	          -the numbering of the sequences goes from 0 to N-1:
+	  */
+
+	int **tot_extended_weight;
+	int s1, s2, r1, r2, w1, w2, a;
+
+
+	tot_extended_weight=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
+	for ( a=0; a<CL->ne; a++)
+	    {
+	    r1=vread_clist(CL,a,R1);
+	    r2=vread_clist(CL,a,R2);
+	    s1=vread_clist(CL,a,SEQ1);
+	    s2=vread_clist(CL,a,SEQ2);
+	    w1=(CL->evaluate_residue_pair)( CL, s1, r1, s2, r2);
+	    w2=(CL->evaluate_residue_pair)( CL, s2, r2, s1, r1);
+	    if ( w1!=w2)fprintf ( stderr, "*");
+
+	    tot_extended_weight[s1][r1]+=w1;
+	    tot_extended_weight[s2][r2]+=w2;
+	    }
+	return tot_extended_weight;
+	}
+  
+
+/*******************************************************************************************/
+/*                                                                                         */
+/*                                                                                         */
+/*                              clean functions                                            */
+/*                                                                                         */
+/*                                                                                         */
+/*                                                                                         */
+/*******************************************************************************************/
+Constraint_list *clean ( char *clean_mode,Constraint_list *CL,int start, int len)
+	{
+	
+	if ( strm ( clean_mode, "shadow"))   CL=clean_shadow (CL,start,len);	
+	else if ( strm5( clean_mode, "","NO","no","No","default"));
+ 	else	fprintf ( CL->local_stderr, "\nWARNING: The %s CLEANING MODE DOES NOT EXIST\n", clean_mode);
+	
+	return CL;
+	}
+
+
+Constraint_list * clean_shadow ( Constraint_list *CL, int start, int len)
+	{
+	int s1, s2, r1, a, b, end;
+	int max, min;
+		
+	s1=vread_clist (CL, start, SEQ1);
+	s2=vread_clist (CL, start, SEQ2);
+	r1=vread_clist (CL, start, R1);
+	
+	
+	for ( a=start; a<(start+len);)
+		{
+		
+		max=min=vread_clist (CL, a, WE);
+		while ( a<CL->ne && vread_clist (CL, a, SEQ1)==s1 && vread_clist (CL, a, SEQ2)==s2 && vread_clist (CL, a, R1)==r1)
+			{
+			max=(vread_clist (CL, a, WE)>max)?vread_clist (CL, a, WE):max;
+			min=(vread_clist (CL, a, WE)<min)?vread_clist (CL, a, WE):min;
+			a++;
+			}
+		end=a;
+		
+		if ((end-start)>1)
+			{
+			for ( b=start; b<end; b++)
+				if ( vread_clist (CL, b, WE)<max)vwrite_clist (CL, b, SEQ1,-1);
+			}
+		start=end;
+		if ( start<CL->ne)
+			{
+			s1=vread_clist (CL, start, SEQ1);
+			s2=vread_clist (CL, start, SEQ2);
+			r1=vread_clist (CL, start, R1);
+			}
+		}
+	CL=sort_constraint_list_inv (CL, start, (CL->ne-start));
+	CL=sort_constraint_list (CL,start,(CL->ne-start)  );	
+
+	return CL;
+	}
+/*********************************************************************/
+/*                                                                   */
+/*                         LIST FUNCTIONS                            */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/	
+Constraint_list *merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode)
+{
+  int a, s1, s2;
+  Sequence *S1, *S2;
+  int **name_index;
+  int **seq_index;
+  CLIST_TYPE *entry=NULL;
+  
+  if ( !ML)return SL;
+
+  S1=SL->S;S2=ML->S;
+  
+  name_index=index_seq_name(S1,S2);
+  seq_index=index_seq_res (S1,S2, name_index);
+  
+  for ( a=0; a< SL->ne; a++)
+    {
+      entry=extract_entry ( entry, a, SL);
+      
+      s1=entry[SEQ1]; s2=entry[SEQ2];
+ 
+      if ( S1==S2)
+	{
+	 add_entry2list(entry, ML);
+	}
+      else if (name_index[s1][0]==-1 || name_index[s2][0]==-1 || !seq_index[s1] || !seq_index[s2]);
+      else 
+	{
+	  entry[R1]=seq_index[s1][entry[R1]-1]+1;
+	  entry[R2]=seq_index[s2][entry[R2]-1]+1;
+	  
+	  entry[SEQ1]=name_index[s1][0];
+	  entry[SEQ2]=name_index[s2][0];
+	  if ( entry[R1]!=-1 && entry[R2]!=-1 && entry[SEQ1]!=entry[SEQ2])
+	    {
+	      add_entry2list(entry, ML);
+	    }
+	}
+    }
+  free_int (name_index, -1);
+  free_int ( seq_index, -1);
+  vfree ( entry);
+  return ML;
+}
+  
+Constraint_list *modify_weight( Constraint_list *CL,int start, int end,  char *modify_mode)
+        {
+	int a;
+	CLIST_TYPE x;
+	
+	if ( strm(modify_mode, "default"))return CL;
+	for ( a=start; a<end; a++)
+	    {
+	    x=vread_clist(CL, a, WE);
+	    
+	    if (strm2 (modify_mode,"sc_eq_cons", "we_eq_cons"))
+	        if(x!=UNDEFINED)
+		    vwrite_clist(CL, a, WE,  vread_clist(CL, a, CONS));
+	    
+	    if (strm2(modify_mode,"sc_eq_wePcons","sc_eq_consPwe"))
+	        if(x!=UNDEFINED)
+		     vwrite_clist(CL, a, WE, vread_clist(CL, a, CONS)*x);		
+	    }
+	return CL;
+	}
+	
+Constraint_list *compact_list (Constraint_list *CL, int start, int len, char *compact_mode)
+	{
+	int a;
+	int r1, r2, rr1, rr2, s1, rs1, s2, rs2, ra;
+	CLIST_TYPE x;
+	int debug_compact=0;
+
+	if (debug_compact)fprintf ( stderr, "\n[In: %d %s", CL->ne, compact_mode);
+
+	if ( len==0  || strm3(compact_mode, "no", "No", "NO"))return CL;
+	else if ( strm2(compact_mode,"mirror","mirror_sum"));
+	else if ( strm4(compact_mode, "default","shrink","shrink_best","shrink_worst"))
+	        {
+		
+		for ( a=start; a<(start+len) ; a++)
+		    {
+		    
+		    if ( vread_clist(CL, a, SEQ1)> vread_clist(CL, a, SEQ2) ||\
+		       ( vread_clist(CL, a, SEQ1)==vread_clist(CL, a, SEQ2) &&\
+			 vread_clist(CL, a, R1)  > vread_clist(CL, a, R2)     ))
+			
+			
+		        {
+			s1=vread_clist(CL, a, SEQ1);
+			s2=vread_clist(CL, a, SEQ2);
+			r1=vread_clist(CL, a, R1);
+			r2=vread_clist(CL, a, R2);
+			vwrite_clist(CL, a, SEQ1,s2);
+			vwrite_clist(CL, a, SEQ2,s1);
+			vwrite_clist(CL, a, R1,r2);
+			vwrite_clist(CL, a, R2,r1);
+			}
+		    }
+		}
+	
+
+	sort_constraint_list ( CL, start, len);
+	
+	rs1=vread_clist(CL, start, SEQ1);	
+	rs2=vread_clist(CL, start, SEQ2);
+	rr1=vread_clist(CL, start, R1);
+	rr2=vread_clist(CL, start, R2);
+	ra=start;
+
+	
+
+	if ( (rs1==rs2) && (rr1==rr2))vwrite_clist(CL, start, SEQ1,-1);		
+	for ( a=start+1; a<(start+len); a++)
+		{
+		s1=vread_clist(CL, a, SEQ1);
+		s2=vread_clist(CL, a, SEQ2);
+		r1=vread_clist(CL, a, R1);
+		r2=vread_clist(CL, a, R2);
+		
+		if ( (s1==s2) && (r1==r2))vwrite_clist(CL, a, SEQ1, -1);
+		else if ( s1==rs1 && s2==rs2 && r1==rr1 && r2==rr2)
+			{
+			x=vread_clist(CL, ra, WE);
+			if (strm ( compact_mode, "shrink"));
+			else if ( strm2 ( compact_mode, "default","mirror_sum"))    
+			    vwrite_clist(CL, ra, WE, vread_clist(CL, a, WE)+x);
+			else if (strm2 ( compact_mode,"best", "shrink_best"))
+			    vwrite_clist(CL, ra, WE,MAX(vread_clist(CL, a, WE), vread_clist(CL, a, WE)));
+			else if (strm2 ( compact_mode, "worst","shrink_worst"))
+			    vwrite_clist(CL, ra, WE,MIN(vread_clist(CL, a, WE), vread_clist(CL, a, WE)));
+		
+			if (  strm(compact_mode, "shrink"));
+			else
+			    {
+			    vwrite_clist(CL, ra, CONS, vread_clist(CL, ra, CONS)+ vread_clist(CL, a, CONS));
+			    vwrite_clist(CL, ra, MISC, vread_clist(CL, ra, MISC)+ vread_clist(CL, a, MISC));
+			    }
+			vwrite_clist(CL,a, SEQ1, -1);
+			
+			}
+		else
+			{
+			rs1=s1;
+			rs2=s2;
+			rr1=r1;
+			rr2=r2;
+			ra=a;
+			}
+		}
+	
+	
+	sort_constraint_list_inv(CL,0,CL->ne);
+	
+	sort_constraint_list    (CL,0,CL->ne);
+	
+	
+	if ( strm3 (compact_mode, "consPwe", "wePcons","cons"))
+		{
+		for ( a=start; a<(start+len); a++)
+			{
+			if ( strm2(compact_mode,"consPwe", "wePcons"))
+			    vwrite_clist(CL, a, WE, vread_clist(CL,a,WE)* vread_clist(CL,a,CONS));
+			else if  (strm (compact_mode, "cons"))
+			     vwrite_clist(CL, a, WE, vread_clist(CL,a,CONS));
+			}
+		}
+	if (debug_compact)fprintf ( stderr, "....OUT: %d]\n", CL->ne);	
+	return CL;
+	}
+
+
+Constraint_list *rescale_list_simple (Constraint_list *CL,int start, int len,int new_min, int new_max)
+	{
+	int a, min, max;
+	double x;
+	/*Rescales between 0 and max2
+	  Any value above max1 is set to max1 first and then to max2
+	*/
+
+
+
+	min=max=vread_clist ( CL,start, WE);
+	
+	for ( a=start; a<(start+len); a++)
+		{
+		x=(double)vread_clist ( CL,a, WE);
+		if ( x>max)max=(int)x;
+		if ( x< min)min=(int)x;
+		}
+	
+	fprintf ( CL->local_stderr, "\n[%d-%d]=>[%d-%d]", min, max, new_min, new_max);
+
+	for ( a=start; a<(start+len); a++)
+	    {
+	      
+	    x=vread_clist(CL,a, WE);
+	   
+	    if ((max-min)==0)x=100;
+	    else x=(((x-min)/(max-min))*new_max)+new_min;
+	    
+	    vwrite_clist(CL, a, WE,(CLIST_TYPE) x);
+	    }
+	return CL;
+	}
+Constraint_list *rescale_list (Constraint_list *CL,int start, int len,int max1, int max2)
+	{
+	int a, min_val, max_val;
+	CLIST_TYPE x;
+	
+	/*Rescales between 0 and max2
+	  Any value above max1 is set to max1 first and then to max2
+	*/
+
+
+	min_val=0;
+	max_val=max1;
+
+	
+	
+	for ( a=start; a<len; a++)
+		{
+		if (vread_clist ( CL,a, WE)>max1)vwrite_clist(CL, a, WE, max1);
+		}
+	
+	for ( a=start; a<len; a++)
+	    {
+	    x=vread_clist(CL,a, WE);
+	    vwrite_clist(CL, a, WE, (((x-min_val)*max2)/(max_val-min_val)));
+	    }
+	return CL;
+	}
+
+
+Constraint_list* filter_list (Constraint_list *CL, int start, int len,int T)
+	{
+	int a;
+	int field;
+	
+	if (T==0)return CL;
+	
+	field=WE;
+	if (T>0)field=WE;
+	else if ( T<0)
+		{
+		field=CONS;
+		T=-T;
+		}
+	
+	
+	for ( a=start; a<len; a++)
+	    if (vread_clist(CL, a, field)<=T)vwrite_clist(CL,a,SEQ1,-1);
+	
+	CL=sort_constraint_list_inv (CL, 0, CL->ne);
+	CL=sort_constraint_list     (CL, 0, CL->ne);
+	return CL;
+	}
+
+
+
+
+
+Constraint_list *undefine_list (Constraint_list *CL)
+      {
+      int a, b;
+      int undefined_flag;
+      
+      for ( a=0;a<CL->ne; a++)
+          {
+	  for ( b=0, undefined_flag=0; b< LIST_N_FIELDS; b++)
+	      {
+
+	      if ( vread_clist (CL, a, b)==UNDEFINED)undefined_flag=1;	  
+	      if ( undefined_flag)
+	          { 
+		  for ( b=0; b< LIST_N_FIELDS; b++)
+		      if ( b!=SEQ1 && b!=SEQ2 && b!=R1 && b!=R2)
+			  {
+			  vwrite_clist(CL, a, b, UNDEFINED);
+			  }
+		  }
+	      }
+	  }
+      return CL;
+      }
+
+/*********************************************************************/
+/*                                                                   */
+/*                        DEBUG CONSTRAINT_LIST                       */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/	  
+void check_seq_pair_in_list(Constraint_list *CLin,int seq1, int seq2)
+      {
+      int a, s1, s2, r1, r2;
+	   
+      for ( a=0; a< CLin->ne; a++)
+          {
+	  s1=vread_clist(CLin,a,SEQ1);
+	  s2=vread_clist(CLin,a,SEQ2);
+	  if ( s1==seq1 && s2==seq2)
+	     {
+	     r1=vread_clist(CLin,a,R1);
+	     r2=vread_clist(CLin,a,R2);
+	     fprintf ( stderr, "\n[%d][%d %d] [%d %d]",a,s1, r1, s2, r2);
+	     }
+	  }
+      }
+
+void print_CL_mem(Constraint_list *CL, char *function)
+     {
+      fprintf ( stderr,"%s\n", function);
+     if ( CL->fp==NULL && CL->L==NULL) fprintf ( stderr, "\n\tNOTHING");
+     if ( CL->fp)fprintf ( stderr, "\n\tFILE SET");
+     if ( CL->L)fprintf ( stderr, "\n\tMEM SET\n");
+     }
+
+int constraint_list_is_sorted ( Constraint_list *CL)
+     {
+     int a,b, x1, x2;
+     for ( a=0; a< CL->ne-1; a++)
+         {
+	 for ( b=0; b< CL->entry_len; b++)
+	     {
+	     x1=vread_clist( CL, a, b);
+	     x2=vread_clist( CL, a+1,b);
+	     if ( x1<x2)break;
+	     else if ( x1>x2)
+		 {
+		 fprintf ( stderr, "\n[%d][%d]=>%d\n[%d][%d]=>%d\n\n",a, b, x1, a+1, b, x2);
+		 return 0;
+		 }
+	     
+	     }
+	 }
+     return 1;
+     }
+/*********************************************************************/
+/*                                                                   */
+/*                        WEIGHT CONSTRAINT_LIST                     */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+
+Constraint_list *weight_constraint_list(Constraint_list * CL, char *seq_weight)
+
+    {
+      Weights *W;
+      
+      if ( CL->ne==0)return CL;
+      else if ( strm(seq_weight, "t_coffee")) W=compute_t_coffee_weight(CL);
+      else if (check_file_exists (seq_weight))
+	{
+	  W=read_seq_weight ((CL->S)->name, (CL->S)->nseq, seq_weight);
+	}
+      else 
+	{
+	  int a;
+	  W=declare_weights((CL->S)->nseq);
+	  sprintf ( W->mode, "no_seq_weight");
+	  for ( a=0; a<(CL->S)->nseq; a++)
+	    {
+	      sprintf ( W->seq_name[a], "%s", (CL->S)->name[a]);
+	      W->SEQ_W[a]=1;
+	    }
+	  CL->W=W;
+	  return CL;
+	}
+      
+      CL=re_weight_constraint_list (CL,W);
+      CL->W=W;
+      
+     
+      return CL;
+      
+      
+    }
+      
+
+
+Weights* compute_t_coffee_weight(Constraint_list * CL)
+    {
+      int a, b;
+      float p, d;
+      Weights *W;
+      int nseq;
+      
+
+      
+
+
+      if (!CL->L)return NULL;
+      
+      nseq=(CL->S)->nseq;
+      W=declare_weights(nseq);
+      sprintf ( W->mode, "t_coffee");
+      for ( a=0; a< nseq; a++)
+	 {
+	   sprintf ( W->seq_name[a], "%s", (CL->S)->name[a]);
+	   W->SEQ_W[a]=1;
+	 }
+     
+      
+      for (a=0; a< (CL->S)->nseq-1; a++)
+	for ( b=a+1; b< (CL->S)->nseq; b++)
+	  {
+	    if ( b==a){d=1;}
+	    else if ( !(CL->S)->len[b] || !(CL->S)->len[a])d=1;
+	    else
+	      {
+		d=((float)CL->similarity_matrix[a][b]/MAXID)*10;
+	      }
+	    p=pow(d,3);
+	    
+	    W->SEQ_W[a]+=p;
+	    W->SEQ_W[b]+=p;
+	    
+	  }
+      
+      for ( p=0,b=0; b< (CL->S)->nseq; b++)
+	   {
+	     if ((CL->S)->len[b]==0)W->SEQ_W[b]=0;
+	     else W->SEQ_W[b]=2/W->SEQ_W[b];
+	     p+=W->SEQ_W[b];
+	   }
+      for ( b=0; b< (CL->S)->nseq; b++)
+	{
+	  W->SEQ_W[b]=W->SEQ_W[b]*((float)W->nseq/p);
+	}
+      
+
+      return W;
+    }
+      
+Constraint_list *re_weight_constraint_list(Constraint_list * CL,Weights *W)
+    {
+      int a;
+      float w;
+      float *weight;
+      int sA, sB;
+
+
+
+      weight=W->SEQ_W;
+
+      if (!CL->L)return CL;
+ 
+      
+      
+      for ( a=0; a< CL->ne; a++)
+	   {
+	     sA=CL->L[a][SEQ1];
+	     sB=CL->L[a][SEQ2];
+	     
+	     w=MIN(weight[sA], weight[sB]);
+	     
+	     CL->L[a][WE]*=w;
+	   } 
+	 CL=evaluate_constraint_list_reference (CL);
+	 return CL;
+    }
+
+int ** update_constraint_list_similarity_matrix (Constraint_list *CL) 
+{
+  free_int ( CL->similarity_matrix,-1);CL->similarity_matrix=NULL;
+  free_int ( CL->distance_matrix,-1);CL->distance_matrix=NULL;
+  free_int ( CL->score_similarity_matrix,-1);CL->score_similarity_matrix=NULL;
+  return get_constraint_list_similarity_matrix (CL);
+}
+int ** get_constraint_list_similarity_matrix (Constraint_list *CL)
+{
+  /*Compute the distance matrix associated with the Constraint List and the sequences*/
+  /*Computation only occurs if the similiraty matrix is undefined : CL->similarity_matrix*/
+  /*Undefine  CL->similarity_matrix to force computation*/
+
+  int a, b;
+  Alignment *B;
+  Constraint_list *NCL;
+  float score;
+  int *ns;
+  int **l_s;
+  float id;
+  int max_name=0;
+  int  id_score;
+  static float **g_matrix;
+  float ref;
+  int n_coor;
+  
+  if ( CL->similarity_matrix){return CL->similarity_matrix;}
+  else
+    {
+
+      for ( max_name=0,a=0; a<  (CL->S)->nseq; a++)max_name=MAX(strlen ((CL->S)->name[a]), max_name);
+
+      CL->similarity_matrix=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
+      CL->distance_matrix=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
+      CL->score_similarity_matrix=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
+      
+    
+      NCL=duplicate_constraint_list_soft (CL);
+      B=seq2aln ( NCL->S, NULL, 1);
+      if ( CL->tree_aln)B=CL->tree_aln;
+      else B=seq2aln ( NCL->S, NULL, 1);
+      
+      if ( strm (NCL->tree_mode, "very_fast"))
+	{
+	  sprintf ( NCL->dp_mode, "very_fast_pair_wise");
+	  NCL->evaluate_residue_pair=evaluate_matrix_score;
+	     if ( strm ((CL->S)->type, "DNA"))
+	       {
+		 NCL->M=read_matrice ("idmat");
+		 NCL->gop=-10;
+		 NCL->gep=-1;
+		 CL->ktup=6;
+	       }
+	     else
+	       {
+		 NCL->M=read_matrice ("blosum62mt");
+		 NCL->gop=get_avg_matrix_mm (NCL->M, AA_ALPHABET)*10;
+		 NCL->gep=-1;
+		 CL->ktup=2;
+	       }
+	     NCL->use_fragments=1;
+	     CL->diagonal_threshold=6;
+	   }
+      
+      else if ( strm (NCL->tree_mode, "ktup"))
+	{
+	  
+	  sprintf ( NCL->dp_mode, "ktup_pair_wise");
+	}
+      else if (strm (NCL->tree_mode, "ktup2"))
+	{
+	  B=very_fast_aln (B, B->nseq,NULL);
+	  sprintf ( NCL->dp_mode, "precomputed_pair_wise");
+	}
+      else if (strm (NCL->tree_mode, "aln"))
+	{
+	  sprintf ( NCL->dp_mode, "precomputed_pair_wise");
+	}
+      
+      else if ( strm (NCL->tree_mode, "fast") )
+	   {
+	     sprintf ( NCL->dp_mode, "myers_miller_pair_wise");
+	     NCL->evaluate_residue_pair=evaluate_matrix_score;
+	     if ( strm ((CL->S)->type, "DNA"))
+	       {
+		 NCL->M=read_matrice ("idmat");
+		 NCL->gop=-10;
+		 NCL->gep=-1;
+	       }
+	     else
+	       {
+		 NCL->M=read_matrice ("blosum62mt");
+		 NCL->gop=get_avg_matrix_mm (NCL->M, AA_ALPHABET)*10;
+		 NCL->gep=-1;
+	       }
+	   }
+      else if ( strm (NCL->tree_mode, "geometric") );
+      else if (strm (NCL->tree_mode, "slow"));
+      else
+	{
+	  fprintf ( stderr, "\nError: %s is an unknown tree mode [FATAL:%s]", NCL->tree_mode,PROGRAM);
+	  crash ("");
+	}
+      
+	    
+
+      if ( strm (NCL->tree_mode, "geometric"))
+	{
+	  free_arrayN(g_matrix, 2);
+	  g_matrix=declare_float ((CL->S)->nseq, 3);
+	  n_coor=MIN(3,((CL->S)->nseq));
+
+	  for ( a=0; a<(CL->S)->nseq; a++)
+	    {
+	      for (b=0; b<n_coor; b++)
+		{
+		B=align_two_sequences ((CL->S)->seq[a], (CL->S)->seq[b], "pam250mt", -10, -1, "fasta_pair_wise");
+		g_matrix[a][b]=get_seq_sim ( B->seq_al[0], B->seq_al[1], "-", NULL);
+		free_aln(B);B=NULL;
+		}
+	    }
+	  ref=(float)sqrt((double)(10000*n_coor));
+	}
+      
+      
+      ns=vcalloc ( 2, sizeof(int));
+      l_s=declare_int ( 2, 1);
+      ns[0]=ns[1]=1;
+      l_s[0][0]=0;
+      l_s[1][0]=1;
+      fprintf ( (CL->local_stderr), "\nCOMPUTE PAIRWISE SIMILARITY [dp_mode: %s] [tree_mode: %s] \n", NCL->dp_mode, CL->tree_mode);	
+      
+      for (a=0; a< (CL->S)->nseq; a++)
+	for ( b=a; b< (CL->S)->nseq; b++)
+	  {
+	    if ( b==a){CL->similarity_matrix[a][b]=MAXID;}
+	    else
+	      {
+		l_s[0][0]=a;
+		l_s[1][0]=b;
+		if ( !strm(CL->tree_mode, "ktup2") && !strm(CL->tree_mode, "aln") && ! strm (CL->tree_mode, "geometric"))
+		     {
+		       ungap ( B->seq_al[a]);
+		       ungap ( B->seq_al[b]);
+		     }
+			
+		if ( strm (CL->tree_mode, "slow"))
+		  {
+		    B->score_aln=pair_wise (B, ns, l_s,NCL);
+		    id=get_seq_sim ( B->seq_al[a], B->seq_al[b], "-", NULL);
+		    
+		    if ( CL->L)
+		      {
+			score=(int)(((float)B->score_aln)/(B->len_aln*SCORE_K));
+			score=(int)(CL->L && CL->normalise)?((score*MAXID)/(CL->normalise)):(score);
+		      }
+		    else if ( CL->M)score=id;
+		  }
+		else	if ( strm2 (CL->tree_mode, "fast", "very_fast"))
+		  {
+		    B->score_aln=pair_wise (B, ns, l_s,NCL);
+		    id=get_seq_sim ( B->seq_al[a], B->seq_al[b], "-", NULL);
+		    score=(int)(id);
+		  }
+		else if ( strm (CL->tree_mode, "geometric"))
+		  {
+		    id=get_geometric_distance (g_matrix,n_coor, a, b, "euclidian");		    
+		    
+		    id=MAXID*(1-((id/ref)));	
+		    score=(int)(id);
+		  }
+		else
+		  {
+		    B->score_aln=pair_wise (B, ns, l_s,NCL);
+		    id=B->score_aln;
+		    score=id*SCORE_K;
+		  }
+		/*Sim mat*/
+		CL->similarity_matrix[a][b]=CL->similarity_matrix[b][a]=(int)(id);
+		/*Dist mat*/
+		CL->distance_matrix[a][b]=CL->distance_matrix[b][a]=MAXID-(int)(id);
+		/*Score mat*/
+		
+		
+		CL->score_similarity_matrix[a][b]=CL->score_similarity_matrix[b][a]=(int)score;
+		id_score=id;
+		
+		fprintf (CL->local_stderr, "\n\t%-*s %-*s identity=%3d%% score=%3d", max_name,(CL->S)->name[a], max_name,(CL->S)->name[b], id_score, (int)score);
+	       
+	      }
+	  }
+      vfree (ns);
+      free_int(l_s, -1);
+    }
+  free_constraint_list (NCL);
+  if (!CL->tree_aln)free_aln (B);
+  
+  return CL->similarity_matrix;
+}

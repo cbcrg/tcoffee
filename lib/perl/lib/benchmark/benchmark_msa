@@ -1,0 +1,195 @@
+#!/usr/bin/env perl
+#Version 1.01 (25/02/03)
+
+$pg="t_coffee";
+
+$list="";
+$HOME="/home/notredame/";
+$o="";
+$db="$HOME/db/proteins/";
+$hom39="$db/HOM39/";
+$prefab="$db/prefab4/";
+
+$tc_tmp="$HOME/.t_coffee/tmp";
+
+foreach $v (@ARGV)
+  {
+    $cl.=" $v";
+  }
+if ($cl=~/\-pg ([^-\s]*)/){$pg=$1;}
+
+if ($cl=~/\-list ([^-\s]*)/){$list=$1;}
+
+
+if ($cl=~/\-o ([^-\s]*)/){$o=$1;}
+if ($cl=~/\-bm ([^-\s]*)/){$bm=$1;}
+if ($cl=~/\-compare ([^-]*)/)
+  {@compare_list=($1=~/(\S+)/g);}
+
+if ($cl=~/\-para (.*)/){$arg=$1;}
+
+
+$val='$';
+if ( $o eq "")
+  {
+    $o="$pg.result";
+  }
+if ($list eq "")
+  {
+    &compare_lists(@compare_list);
+    exit (SUCCESS);
+  }
+print "\n$pg $list $o $arg\n";
+
+
+
+#1 Select the reference database
+
+if ( $bm eq "prefab")
+  {
+    $pep="$prefab/in/$val";
+    $aln="$tc_tmp/$val";
+    $ref="$prefab/ref/$val";
+    if ( $list eq ""){$list="$prefab/list"};
+  }
+elsif ( $bm eq "prefab_small")
+  {
+    $pep="$prefab/in_small/$val";
+    $aln="$tc_tmp/$val";
+    $ref="$prefab/ref/$val";
+    if ($list eq ""){$list="$prefab/list";}
+
+  }
+elsif ( $bm eq "hom39")
+  {
+    $pep="$hom39/data/$val.pep";
+    $aln="$tc_tmp/$val";
+    $ref="$hom39/data/$val.ref_aln";
+    if ($list eq ""){$list="$hom39/list";}
+  }
+else
+  {
+    die ("\n$bm is an Unkown Database [Provide db with -db]\n");
+  }
+#Make the computation command
+if ($pg eq "t_coffee" )
+      {
+	$command="t_coffee $pep -outfile $aln -output fasta_aln $arg";
+      }
+elsif ( $pg eq "muscle" )
+  {
+    $command="muscle -in $pep $arg > $aln";
+  }
+elsif ($pg eq "probcons")
+  {
+    $command="probcons $pep $arg > $aln";
+  }
+elsif ( $pg eq "mafft")
+  {
+    $command="mafft --localpair --maxiterate 1000 $pep > $aln";
+  }
+else
+  {
+    $command="$pg $pep -outfile $aln -output fasta_aln $arg";
+  }
+print "PG=$pg, COM=$command LIST=$list\n";
+
+`process_list.pl 'echo $command;$command' $list`;
+
+open (F, $list);
+while (<F>)
+  {
+    @list=($_=~/(\S+)/g);
+    push (@tc_list, @list[0]);
+  }
+close (F);
+
+if ( $bm eq "prefab" || $bm eq "prefab_small")
+  {
+    open (F, ">$o");
+    foreach $tc (@tc_list)
+      {
+	$a=$aln;
+	$a=~s/$val/$tc/;
+	$a=~s/\$//g;
+
+	$r=$ref;
+	$r=~s/$val/$tc/;
+	$r=~s/\$//g;
+	
+	$r2=`qscore -test $a -ref $r`;
+	$r2=~s/[;=]/ /g;
+	@field=($r2=~/(\S+)/g);
+	
+	print F "$tc $field[5]\n";
+	$tot+=$field[5];
+	$n++;
+      }
+    close (F);
+  }
+
+printf "SCORE: $pg %.3f\n", $tot/$n;
+if (@compare_list)
+  {
+    &compare_lists(@compare_list=($o, @compare_list));
+  }
+
+
+sub compare_lists
+  {
+    my @list=@_;
+    my $m, $tot, $n;
+    my @val;
+    my %result;
+
+
+    foreach $comp (@list)
+      {
+	$tot=0;$n=0;
+	open (F, $comp);
+	while (<F>)
+	  {
+	    $_=~/(\S+) (\S+)/;
+	    $tot+=$2;
+	    $n++;
+	  }
+	$tot/=$n;
+	printf "\nSCORE: $comp %.3f\n",$tot;	
+	close (F);
+      }
+    
+    
+    $m=shift (@list);
+    open (F, $m);
+    while (<F>)
+      {
+	$_=~/(\S+) (\S+)/;
+	$result{$1}=$2;
+	$result{$1}{'set'}=1;
+      }
+    close (F);
+    
+    $mindiff=0.05;
+    foreach $comp (@list)
+      {
+	open (F, "$comp");
+	$score=0;$n=0;
+
+	while ( <F>)
+	  {
+	    $_=~/(\S+) (\S+)/;
+	    
+	    $delta=$result{$1}-$2;
+	    if (!$result{$1}{'set'})
+	      {;}
+	    elsif ($delta>$mindiff)
+	      {$score++;$n++;}
+	    elsif ($delta<-$mindiff)
+	      {$score--;$n++;}
+	  }
+	close (F);
+	$score2=($n==0)?0:($score*100)/$n;
+	print "\COMPARISON: $m Vs $comp  $score $score2 \n";
+      }
+    }
+

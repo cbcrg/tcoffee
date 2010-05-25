@@ -1,0 +1,17 @@
+#!/usr/bin/env perl
+
+
+if (!-e $ARGV[0])
+  {
+    while (<STDIN>)
+      {
+	print "$ARGV[0]$_";
+      }
+  }
+else
+  {
+    open (F, "$ARGV[0]");
+    while (<F>)
+      {print "$ARGV[1]$_";}
+    close (F);
+  }

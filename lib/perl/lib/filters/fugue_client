@@ -1,0 +1,122 @@
+#!/usr/bin/env perl
+#
+#The fugue Client aligns a sequence and a structure, using either a fugue server, or a local installation of Fugue
+  
+#Defaults
+  $np=0;
+  $n_para=$#ARGV;
+  $model=1;
+
+foreach ($np=0; $np<=$n_para; $np++)
+    {        
+    $v=$ARGV[$np];
+    
+    if ( $v eq "-pdb")
+      {
+	$pdb_name= $ARGV[++$np];
+      }
+    elsif (  $v eq "-pep")
+      {
+	$pep_file= $ARGV[++$np];
+      }
+  }
+
+
+if ($ENV{"FUGUE_SERVER"} ne "LOCAL")
+  {
+    $pdb_name=`t_coffee -other_pg extract_from_pdb -get_fugue_name $pdb_name`;
+    chop $pdb_name;
+    
+    if ( $pdb_name=~/EXTRACT_FROM_PDB: NO RESULT/)
+      {
+	exit (EXIT_FAILURE)
+      }
+    open (F, $pep_file);
+    while (<F>)
+      {
+	if (/\>(.*)/)
+	  {
+	    $seq_name=$1;
+	    $seq_name=~s/\W//g;
+	  }
+	else
+	  {
+	    $_=~/(.*)/;
+	    $p=$1;
+	    $p=~s/\W//g;
+	    $pep=$pep.$p;
+	  }
+      }
+    close (F);
+    $tmp=$$.tmp_file;
+    $command="wget \'http://www-cryst.bioc.cam.ac.uk/cgi-bin/cgiwrap/kenji/fugue/align.cgi?structure=$pdb_name&SEQUENCE=%3E$seq_name\%0D\%0A$pep\%0D\%0A&.submit=\' -O $tmp -o /dev/null";
+    system $command;
+    
+    open (F, $tmp);
+    while (<F>)
+      {
+	if ( /\.ali/)
+	  {
+	    /\<a href=\"(.*\.ali[^>]*)\"\>/;
+	    $aln_url="http://www-cryst.bioc.cam.ac.uk$1";
+	  }
+      }
+    close (F);
+    unlink $tmp;
+
+    $command="wget $aln_url -O $tmp -o /dev/null";
+    system $command;
+    
+    
+    open (F, $tmp);
+    while (<F>)
+      {
+	s/^>P1;/>/;
+	s/\*//;
+	next if ( /structureX:/ );
+	next if ( /sequence:/ );
+	next if ( /^ *$/ );
+	print $_;
+      }
+    close (F);
+    unlink $tmp;
+  }
+elsif ( $ENV{"FUGUE_SERVER"} eq "LOCAL")
+  {
+    
+    $pdb_name = lc($pdb_name);
+    
+    $pdb_name=`export NO_REMOTE_PDB_DIR=1;export PDB_DIR=/Sequences/Pdb/PdbMirror;/usr/local/bin/t_coffee -other_pg extract_from_pdb -get_fugue_name $pdb_name`;
+    chop $pdb_name;
+    
+    if ( $pdb_name eq non_valid_pdb_name)
+      {
+	exit (EXIT_FAILURE)
+      }
+    $pdb_file = "$pdb_name.pdb";
+    $x = `export NO_REMOTE_PDB_DIR=1;export PDB_DIR=/Sequences/Pdb/PdbMirror;t_coffee -other_pg extract_from_pdb -netfile $pdb_name -mode raw > $pdb_file`;
+    if (not -e $pdb_file) {
+      $pdb_file = $pdb_name;
+      $pdb_file =~ s/.$/.pdb/;
+      if (not -e $pdb_file) {
+	exit (EXIT_FAILURE)
+      }
+    }
+    
+    # open (F, $tmp);
+    open (F, "/home/igs/Tools/T-COFFEE_web/Struct/fugue_align.sh $pep_file $pdb_file|");
+    while (<F>)
+      {
+	s/^>P1;/>/;
+	s/\*//;
+	next if ( /structureX:/ );
+	next if ( /sequence:/ );
+	next if ( /^ *$/ );
+	print $_;
+      }
+    close (F);
+    unlink $tmp;
+  }
+    
+	  
+    

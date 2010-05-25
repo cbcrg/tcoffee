@@ -1,0 +1,32 @@
+#!/usr/bin/env perl
+
+
+if (!-e $ARGV[0])
+  {
+    $file="tmp";
+    $tmp=1;
+    open (F, ">$file");
+    while (<STDIN>)
+      {
+	print F "$_";
+      }
+    $start=$ARGV[0];
+    $end =$ARGV[1];
+  }
+else
+  {
+    $file=$ARGV[0];
+    $start=$ARGV[1];
+    $end =$ARGV[2];
+  }
+
+$len=$end-$start+1;
+
+
+
+
+if ($len<=0 || $#ARGV==0)
+  {print "Error: use body file start_line end_line\n"; die;}
+
+system "cat $file | head -$end | tail -$len";
+if ($tmp){unlink $file;}

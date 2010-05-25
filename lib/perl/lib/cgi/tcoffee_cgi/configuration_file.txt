@@ -1,0 +1,395 @@
+######################################################################
+#Olivier POIROT, poirot [AT] igs.cnrs-mrs.fr, Labo IGS, UPR2589, CNRS#
+#Sebastien MORETTI, moretti.sebastien [AT] gmail.com, SIB            #
+#Cedric Notredame, cedric.notredame [AT ] europe.com, CRG            #
+#Configuration file for Tcoffee and other programs web interface     #
+######################################################################
+#mirrors:HOME, EBI and CNRS are hard coded
+#Otherwise MIRROR_NAME#MIRROR_ADDRESS#MIRROR_LOGO
+#Mirror_NAME can be any name
+#Mirror_ADDRESS: must be a valid http address (starting http:// or ftp://)
+#Mirror_LOGO: can either be a filename or a valid http address (with http:// or ftp://)
+mirrors::tcoffee.org:HOME::Suisse:Vital-IT::France:IGS::EMBL:EBI::MAXPLANK#http://toolkit.tuebingen.mpg.de/t_coffee#maxplank.gif::CORNELL#http://cbsuapps.tc.cornell.edu/t_coffee.aspx#cbsu.jpg::EMBNet-Spain#http://www.es.embnet.org/Services/MolBio/t-coffee/#EMBnetCNB.gif
+section::ALIGNMENT
+############################################################################################################
+############################################################################################################
+server::TCOFFEE::Regular::Computation of a Multiple Sequence Alignment::12824354,10964570
+############################################################################################################
+#config::email::mandatory
+paragraph_in::Description::Computes a <strong>multiple sequence alignment</strong> and the associated <strong>phylogenetic tree</strong>.<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+paragraph_in::Sequence Input
+paragraph_in::Action::<strong>Paste or upload</strong> your set of sequences in <strong><doc_>doc3.html fasta</doc_></strong> format and <strong>Press</strong> the SUBMIT button.
+parameter::-in::Upload File::upload::empty::empty::doc_txt:FASTA Sequences
+parameter::-in::Method::hidden::Mlalign_id_pair,Mfast_pair,Mslow_pair,Mclustalw_pair,Mproba_pair::Mproba_pair::empty
+parameter::-output::Alignment Format::hidden::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Output Format
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+sendto::ProtoGene@fasta_aln::MyHits@fasta_aln
+outfile::clustalw_aln,score_html
+############################################################################################################
+############################################################################################################
+server::TCOFFEE::Advanced::Computation of a Multiple Sequence Alignment::12824354,10964570
+############################################################################################################
+#config::email::mandatory
+paragraph_in::Description::Computes a <strong>multiple sequence alignment</strong> and the associated <strong>phylogenetic tree</strong>.<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+paragraph_in::Sequence Input
+paragraph_in::Action::<strong>Paste or upload</strong> your set of sequences in <strong><doc_>doc3.html fasta</doc_></strong> format.
+parameter::-in::Upload File::upload::empty::empty::doc_txt:FASTA Sequences
+paragraph_in::Alignment Computation
+paragraph_in::action::Tcoffee computes its alignments by combining a collection of smaller alignments named a <strong>Library</strong>. In this section you can select the methods you want to combine into the <strong>Tcoffee library</strong>. You can choose <strong>pairwise and multiple</strong> sequence alignment methods.
+parameter::-in::Pairwise Methods::checkbox_group::Mlalign_id_pair,Mfast_pair,Mslow_pair,Mclustalw_pair,Mproba_pair::Mproba_pair::doc_txt:Pairwise Alignment Methods will be used to make a pairwise alignment of all the possible pairs of sequences.\n- Lalign_pair: 10 best local alignments.\n- Slow_pair: accurate global alignment.\n- Fast_pair: fast heuristic global alignment.\n- ClustalW_pair: ClustalW pairwise alignment.\n- proba_pair: pairwise alignment with bi-phasic gap penalty adapted from probcons.
+#parameter::-in::Multiple Methods::checkbox_group::Mclustalw_msa::::doc_txt:Multiple Alignment Methods.\n- ClustalW_msa: clustalw multiple alignment.
+outfile::clustalw_aln,score_html
+paragraph_in::Output
+paragraph_in::action::Use this section to control the <strong>Output</strong> Format.
+parameter::-output::Alignment Format::checkbox_group::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Ouput Formats
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+parameter::-case::Case::popup_menu::upper,lower,keep::upper::doc_txt:Output case selection
+parameter::-seqnos::Residue Number::popup_menu::on,off::off::doc_txt:Print Residue Number
+parameter::-outorder::Order::popup_menu::input,aligned::aligned::doc_txt:output order
+sendto::ProtoGene@fasta_aln::MyHits@fasta_aln
+############################################################################################################
+############################################################################################################
+server::EXPRESSO(3DCoffee)::Regular::Multiple Sequence Alignment of Sequences and Structures (Replaces 3DCoffee)::16845081,15201059,15215345,10964570
+############################################################################################################
+config::executable::t_coffee
+#config::email::mandatory
+paragraph_in::Description::This server computes <strong>Structure</strong> based Multiple Sequence Alignments. You only need to provide the sequences. The server will automatically fetch the related structures and use them to guide the alignment.<br><br><strong>Structure based sequence alignments are potentially more accurate than simple sequence alignments</strong>.<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+#Defaults
+#How To Use the server
+paragraph_in::How To Use This Server ?
+paragraph_in::Description::<br><strong>1-Prepare</strong> your set of sequences in a <strong><doc_>doc3.html fasta</doc_></strong> (go back and use the advanced form to upload your own PDB structures)<br><strong>2-Press</strong> The  Submit Button<br>
+#Input Section
+paragraph_in::Input
+paragraph_in::Action::Cut and Paste or Upload your sequences in FASTA format
+parameter::-in::Your Sequence File::upload::empty::empty::doc_txt:Input Sequences in FASTA format.
+parameter::-evaluate_mode::empty::hidden::t_coffee_fast,t_coffee_non_extended,t_coffee_slow::t_coffee_slow::empty
+parameter::-output::Alignment Format::hidden::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Indicates the format used for the -outfile format
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+parameter::-in::empty::hidden::Mlalign_id_pair,Mslow_pair,Msap_pair,Mfugue_pair,Mproba_pair::Mproba_pair,Msap_pair::empty
+parameter::-template_file::totopeche::hidden::SCRIPT_webblast.pl::SCRIPT_webblast.pl@method#pdbid@database#expressopdb@blast_dir#blastexpresso::empty
+parameter::-tree::Phylo::hidden:: :: ::empty
+#Outfile Selection
+sendto::ProtoGene@fasta_aln::MyHits@fasta_aln
+outfile::clustalw_aln,score_html
+paragraph_out::How To Read the Results ?
+paragraph_out::Description::<br><strong>msf aln, clustal aln, fasta aln</strong>: MSAs in the suggested formats.<br><strong>score_html</strong>: Local MSA reliability using the <a href="http://www.igs.cnrs-mrs.fr/~cnotred/Publications/Pdf/core.pp.pdf">CORE</a> index. Red and orange portions are considered correctly aligned.<br><strong>score_ascii</strong>: Coded version of the score_html file.<br><strong>dnd file</strong>: Guide tree (Newick format).<strong> It's NOT a Phylogenetic Tree!</strong><br><strong>ph file</strong>: NJ Phylogenetic tree.<br><strong>template file</strong>: Displays the template found.
+############################################################################################################
+############################################################################################################
+server::EXPRESSO(3DCoffee)::Advanced::Multiple Sequence Alignment of Sequences and Structures (Replaces 3DCoffee)::16845081,15201059,15215345,10964570
+############################################################################################################
+config::executable::t_coffee
+#config::email::mandatory
+paragraph_in::Description::This server computes <strong>Structure</strong> based Multiple Sequence Alignments. You only need to provide the sequences. The server will automatically fetch the related structures and use them to guide the alignment.<br><br><strong>Structure based sequence alignments are potentially more accurate than simple sequence alignments</strong>.<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+paragraph_in::Sequence Input
+paragraph_in::Description::<br><strong>1-Prepare</strong> your set of sequences in a <strong><doc_>doc3.html fasta</doc_></strong> file.<br>
+parameter::-in::Your Sequence File::upload::empty::empty::doc_txt:Input Sequences in FASTA with structures named according to their PDB identifier.
+paragraph_in::Structure Input
+paragraph_in::Description::<br><strong>2-Upload</strong> your PDB structure if needed <strong>(Do NOT upload Confidential Data!)</strong><br>
+parameter::-in::PDB File::upload_pdb::empty::empty::doc_txt:Personal PDB File
+parameter::-in::PDB File::upload_pdb::empty::empty::doc_txt:Personal PDB File
+parameter::-in::PDB File::upload_pdb::empty::empty::doc_txt:Personal PDB File
+paragraph_in::Library Computation
+paragraph_in::Description::<strong>3-Select</strong> the methods you want to use to compute the library.<br>Tcoffee uses various sequence and structure alignment methods to compile a collection of alignments known as a <strong>Library</strong>. Use this section to select the methods.
+parameter::-in::Pairwise Sequence Alignment Methods::checkbox_group::Mlalign_id_pair,Mclustalw_pair,Mslow_pair,Mfast_pair,Mproba_pair::Mproba_pair::doc_txt:Pairwise Alignment Methods will be used to make a pairwise alignment of all the possible pairs of sequences.\n- Lalign_pair: 10 best local alignments.\n- Slow_pair: accurate global alignment.\n- Fast_pair: fast heuristic global alignment.\n- Clustalw_pair: ClustalW pairwise alignment.\n- proba_pair: pairwise alignment with bi-phasic gap penalty adapted from probcons.
+parameter::-in::Pairwise <strong>Structural</strong> Alignment Methods::checkbox_group::Msap_pair,Mfugue_pair::Msap_pair::doc_txt:Structure Alignment Methods will be used to make a pairwise alignment of all the appropriate pairs of sequences.\n- Sap_pair: Structure-Structure alignment.\n- Fugue_pair: Structure-Sequence Alignment.
+#parameter::-in::Multiple Alignment Methods::checkbox_group::Mclustalw_msa::empty::doc_txt:Multiple Alignment Methods For The Library Computation.
+parameter::-evaluate_mode::empty::hidden::t_coffee_fast,t_coffee_non_extended,t_coffee_slow::t_coffee_slow::empty
+paragraph_in::PDB Structure Selection
+paragraph_in::Description::<strong>4-Specify</strong> which PDB structure (template) should be associated with which each sequence. Check the box to automatically fetch the templates, or fill the box and specify the sequence/template association using the following format (specified template superseed the others):<br><code>  &gt;sequence_name1 _P_ PDBID<br>  &gt;sequence_name2 _P_ PDBID<br>...</code><br><br>
+parameter::-template_file::<strong>Specify</strong> your Template File::upload::empty::empty::doc_txt:Input PDB Templates
+parameter::-template_file::<strong>Automatically</strong> Fetch PDB Templates::checkbox_group::SCRIPT_webblast.pl@method#pdbid@database#expressopdb@blast_dir#blastexpresso::SCRIPT_webblast.pl@method#pdbid@database#expressopdb@blast_dir#blastexpresso::doc_txt:Check This Box To automatically Fetch Homologous Structures with BLAST
+paragraph_in::Output
+paragraph_in::Description::<strong>5-Select</strong> the <strong>Output</strong> Format.
+parameter::-output::Alignment Format::checkbox_group::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Ouput Formats
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+parameter::-case::Case::popup_menu::upper,lower,keep::upper::doc_txt:Output case selection
+parameter::-seqnos::Residue Number::popup_menu::on,off::off::doc_txt:Print Residue Number
+parameter::-outorder::Order::popup_menu::input,aligned::aligned::doc_txt:output order
+parameter::-tree::Phylo::hidden:: :: ::empty
+#Output section
+sendto::ProtoGene@fasta_aln::MyHits@fasta_aln
+outfile::clustalw_aln,score_html
+paragraph_out::How To Read the Results ?
+paragraph_out::Description::<br><strong>msf aln, clustal aln, fasta aln</strong>: MSAs in the suggested formats.<br><strong>score_html</strong>: Local MSA reliability using the <a href="http://www.igs.cnrs-mrs.fr/~cnotred/Publications/Pdf/core.pp.pdf">CORE</a> index. Red and orange portions are considered correctly aligned.<br><strong>score_ascii</strong>: Coded version of the score_html file.<br><strong>dnd file</strong>: Guide tree (Newick format).<strong> It's NOT a Phylogenetic Tree!</strong><br><strong>ph file</strong>: NJ Phylogenetic tree.<br><strong>template_list</strong>: Displays the template found.
+############################################################################################################
+############################################################################################################
+server::MCOFFEE::Regular::Combination of Multiple Sequence Alignment Methods::17526519,16556910,10964570
+############################################################################################################
+paragraph_in::Description::Computes a <strong>multiple sequence alignment</strong> and the associated <strong>phylogenetic tree</strong> by combining the output of several multiple sequence alignment packages (PCMA, Poa, Mafft, Muscle, T-Coffee, ClustalW, ProbCons, DialignTX). Go to the advanced form if you only want to use a subset of these methods.<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+paragraph_in::Sequence Input
+paragraph_in::Action::<strong>Paste or upload</strong> your set of sequences in <strong><doc_>doc3.html fasta</doc_></strong> format and <strong>Press</strong> the SUBMIT button.
+parameter::-in::Upload File::upload::empty::empty::doc_txt:FASTA Sequences
+parameter::-in::Method::hidden::empty::Mpcma_msa,Mpoa_msa,Mmafft_msa,Mmuscle_msa,Mclustalw_msa,Mprobcons_msa,Mdialigntx_msa,Mt_coffee_msa::empty
+parameter::-output::Alignment Format::hidden::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Output Formats
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+outfile::clustalw_aln,score_html
+sendto::ProtoGene@fasta_aln::MyHits@fasta_aln
+parameter::-tree::Phylo::hidden:: :: ::empty
+############################################################################################################
+############################################################################################################
+server::MCOFFEE::Advanced::Combination of Multiple Sequence Alignment Methods::17526519,16556910,10964570
+############################################################################################################
+paragraph_in::Description::Computes a <strong>multiple sequence alignment</strong> and the associated <strong>phylogenetic tree</strong> by combining the output of several multiple sequence alignment packages (PCMA, Poa, Mafft, Muscle, T-Coffee, ClustalW, ProbCons, DialignTX).<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+paragraph_in::Sequence Input
+paragraph_in::Action::<strong>Paste or upload</strong> your set of sequences in <strong><doc_>doc3.html fasta</doc_></strong> format.
+parameter::-in::Upload File::upload::empty::empty::doc_txt:FASTA Sequences
+paragraph_in::Alignment Computation
+paragraph_in::action::M-Coffee computes its alignments by combining a collection of Multiple Alignments named a <strong>Library</strong>. In this section you can select the methods you want to combine into the <strong>library</strong>. You can choose <strong>pairwise and multiple</strong> sequence alignment methods. The standard M-Coffee protocol only uses Multiple sequence alignment methods.
+parameter::-in::Pairwise Method::checkbox_group::Mlalign_id_pair,Mfast_pair,Mslow_pair,Mclustalw_pair,Mproba_pair,Mpcma_pair,Mpoa_pair,Mmafft_pair,Mmuscle_pair,Mprobcons_pair,Mdialigntx_pair::empty::doc_txt:Pairwise Alignment Methods will be used to make a pairwise alignment of all the possible pairs of sequences.\n- Lalign_pair: 10 best local alignments.\n- Slow_pair: accurate global alignment.\n- Fast_pair: fast heuristic global alignment.\n- ClustalW_pair: ClustalW pairwise alignment.\n- proba_pair: pairwise alignment with bi-phasic gap penalty adapted from probcons.
+parameter::-in::Multiple Methods::checkbox_group::Mpcma_msa,Mpoa_msa,Mmafft_msa,Mmuscle_msa,Mclustalw_msa,Mprobcons_msa,Mdialigntx_msa,Mt_coffee_msa::Mpcma_msa,Mpoa_msa,Mmafft_msa,Mmuscle_msa,Mclustalw_msa,Mprobcons_msa,Mdialigntx_msa,Mt_coffee_msa::doc_txt:Multiple Alignment Methods.
+outfile::clustalw_aln,score_html
+paragraph_in::Output
+paragraph_in::action::Use this section to control the <strong>Output</strong> Format.
+parameter::-output::Alignment Format::checkbox_group::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Output Formats
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+parameter::-case::Case::popup_menu::upper,lower,keep::upper::doc_txt:Output case selection
+parameter::-seqnos::Residue Number::popup_menu::on,off::off::doc_txt:Print Residue Number
+parameter::-outorder::Order::popup_menu::input,aligned::aligned::doc_txt:Output order
+parameter::-tree::Phylo::hidden:: :: ::empty
+sendto::ProtoGene@fasta_aln::MyHits@fasta_aln
+############################################################################################################
+############################################################################################################
+server::RCOFFEE::Regular::Multiple RNA Sequence Alignment::18483080,18420654,10964570
+############################################################################################################
+paragraph_in::Description::<strong>Multiple Sequence Alignment of Non-Coding RNA Sequences using <a href="http://www.tbi.univie.ac.at/~ivo/RNA/RNAplfold.html" target="_blank">RNAplfold</a> predicted secondary structures.</strong><br><br><strong>fast and approximate</strong> combines MSAs produced by <a href="http://probcons.stanford.edu/" target="_blank">ProbConsRNA</a>, <a href="http://www.drive5.com/muscle/" target="_blank">Muscle</a> and <a href="http://align.bmr.kyushu-u.ac.jp/mafft/online/server/" target="_blank">MAFFT</a> <font color="red">(50 seq. 1000 nuc.)</font>.<br><strong>slow and accurate </strong> combines <a href="http://selab.janelia.org/software/consan/" target="_blank">Consan</a> pairwise alignments <font color="red">(5 seq. 150 nuc.)</font>.<br><strong>rcoffee </strong>combines alignments generated with the bi-phasic gap penalty scheme of probcons.<br><br> Go to the <strong>advanced form</strong> if you want to combine a different selection of methods.
+paragraph_in::Sequence Input
+paragraph_in::Action::<strong>Paste or upload</strong> your set of sequences in <strong><doc_>docNT.html fasta</doc_></strong> format and <strong>Press</strong> the SUBMIT button.
+parameter::-in::Upload File::upload::docNT.html::empty::doc_txt:FASTA Sequences
+parameter::-special_mode::Alignment mode::popup_menu::rcoffee,rcoffee_fast_approximate,rcoffee_slow_accurate::rcoffee::doc_txt:Select the appropriate mode:\n- The Fast mode uses a combination of three MSA methods (Muscle, MAFFT, ProbConsRNA).\n- Slow uses R-Coffee/Consan and is more accurate but limited to 5 sequences 150 residues long.\n- rcoffee (the default) uses pairwise alignments generated by T-Coffee with proba_pair.\nThe three modes use RNAplfold secondary structure predictions.
+parameter::-output::Alignment Format::hidden::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Output Format
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+outfile::clustalw_aln,score_html
+parameter::-tree::Phylo::hidden:: :: ::empty
+parameter::-method_limits::Method Dependant Limits::hidden::consan_pair,5,150::consan_pair,5,150::empty
+############################################################################################################
+############################################################################################################
+server::RCOFFEE::Advanced::Multiple RNA Sequence Alignment::18483080,18420654,10964570
+############################################################################################################
+paragraph_in::Description::<strong>Multiple Sequence Alignment of Non-Coding RNA Sequences using <a href="http://www.tbi.univie.ac.at/~ivo/RNA/RNAplfold.html" target="_blank">RNAplfold</a> predicted secondary structures.</strong><br><br>The computation is made by combining all the selected methods.<br>Selecting consan_pair limits the computation <font color="red">(5 seq. 150 nuc.)</font>, otherwise the default limit applies <font color="red">(50 seq. 1000 nuc.)</font>.
+paragraph_in::Sequence Input
+paragraph_in::Action::<strong>Paste or upload</strong> your set of sequences in <strong><doc_>docNT.html fasta</doc_></strong> format.
+parameter::-in::Upload File::upload::docNT.html::empty::doc_txt:FASTA Sequences
+paragraph_in::Alignment Computation
+paragraph_in::action::R-Coffee computes its alignments by combining a collection of Pairwise and Multiple Alignments named a <strong>Library</strong>. In this section you can select the methods you want to combine into the <strong>library</strong>. You can choose <strong>pairwise and multiple</strong> sequence alignment methods.
+parameter::-method::Pairwise Methods::checkbox_group::lalign_id_pair,fast_pair,slow_pair,clustalw_pair,consan_pair,proba_pair::empty::doc_txt:Pairwise Alignment Methods will be used to make a pairwise alignment of all the possible pairs of sequences.\n- lalign_pair: 10 best local alignments.\n- fast_pair: fast heuristic global alignment.\n- slow_pair: accurate global alignment.\n- clustalw_pair: ClustalW pairwise alignment.\n- consan_pair: heuristic implementation of the Sankoff algorithm.\n- proba_pair: pairwise alignment with a bi-phasic gap penalty adapted from prob_cons.
+parameter::-method::Multiple Methods::checkbox_group::mafft_msa,muscle_msa,probconsRNA_msa::mafft_msa,muscle_msa,probconsRNA_msa::doc_txt:Multiple Alignment Methods.
+outfile::clustalw_aln,score_html
+paragraph_in::Output
+paragraph_in::action::Use this section to control the <strong>Output</strong> Format.
+parameter::-output::Alignment Format::checkbox_group::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Output Formats
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+parameter::-case::Case::popup_menu::upper,lower,keep::upper::doc_txt:Output case selection
+parameter::-seqnos::Residue Number::popup_menu::on,off::off::doc_txt:Print Residue Number
+parameter::-outorder::Order::popup_menu::input,aligned::aligned::doc_txt:Output order
+parameter::-tree::Phylo::hidden:: :: ::empty
+parameter::-special_mode::rcoffee::hidden:: :: ::empty
+parameter::-special_mode::Align RNA::hidden::rcoffee::rcoffee::empty
+parameter::-method_limits::Method Dependant Limits::hidden::consan_pair,5,150::consan_pair,5,150::empty
+############################################################################################################
+############################################################################################################
+server::COMBINE::Regular::Combination of Alternative Multiple Sequence Alignments Into One single Multiple Alignment Using TCoffee::12824354,10964570
+############################################################################################################
+#config::email::mandatory
+paragraph_in::Description::<strong>Combines</strong> two (or more) multiple sequence alignments into a single one. In the colored output, portions inconsistent between the combined alignments are in <strong><font color="blue">blue</font></strong>, consistent ones are <strong><font color="red">red</font></strong>. You need at least <strong>2</strong> alignments and the combination works even if the alignments do <strong>not</strong> contain exactly the same sequences.<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+paragraph_in::Alignments Input
+paragraph_in::Action::Upload each of the Multiple Sequence alignments you want to combine. The alignments must be in <strong><doc_>doc3.html fasta</doc_></strong> or <doc_>doc3.html clustal</doc_> format. You need at least two Alignments.
+parameter::-output::Alignment Format::hidden::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Indicates the format used for outputting the -outfile
+parameter::-in::Upload Alignment::upload::empty::empty::doc_txt:Multiple Sequence Alignment
+parameter::-in::Upload Alignment::upload::empty::empty::doc_txt:Multiple Sequence Alignment
+parameter::-in::Upload Alignment::upload::empty::empty::doc_txt:Multiple Sequence Alignment
+parameter::-evaluate_mode::empty::hidden::t_coffee_fast,t_coffee_non_extended,t_coffee_slow::t_coffee_slow::empty
+parameter::-maxnseq::Max number of sequences::hidden::50,100::80::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+sendto::ProtoGene@fasta_aln::MyHits@fasta_aln
+outfile::clustalw_aln,score_html
+############################################################################################################
+############################################################################################################
+server::COMBINE::Advanced::Combination of Alternative Multiple Sequence Alignments Into One single Multiple Alignment Using TCoffee::12824354,10964570
+############################################################################################################
+#config::email::mandatory
+paragraph_in::Description::<strong>Combines</strong> two (or more) multiple sequence alignments into a single one. In the colored output, portions inconsistent between the combined alignments are in <strong><font color="blue">blue</font></strong>, consistent ones are <strong><font color="red">red</font></strong>. You need at least <strong>2</strong> alignments and the combination works even if the alignments do <strong>not</strong> contain exactly the same sequences.<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+paragraph_in::Alignments Input
+paragraph_in::Action::Upload each of the Multiple Sequence alignments you want to combine. The alignments must be in <strong><doc_>doc3.html fasta</doc_></strong> or <doc_>doc3.html clustal</doc_> format. You need at least two alignments.
+parameter::-in::Upload Alignment::upload::empty::empty::doc_txt:Multiple Sequence Alignment
+parameter::-in::Upload Alignment::upload::empty::empty::doc_txt:Multiple Sequence Alignment
+parameter::-in::Upload Alignment::upload::empty::empty::doc_txt:Multiple Sequence Alignment
+parameter::-in::Upload Alignment::upload::empty::empty::doc_txt:Multiple Sequence Alignment
+parameter::-in::Upload Alignment::upload::empty::empty::doc_txt:Multiple Sequence Alignment
+parameter::-in::Upload Alignment::upload::empty::empty::doc_txt:Multiple Sequence Alignment
+parameter::-evaluate_mode::empty::hidden::t_coffee_fast,t_coffee_non_extended,t_coffee_slow::t_coffee_slow::empty
+outfile::clustalw_aln,score_html
+paragraph_in::Output
+paragraph_in::action::Use this section to control the <strong>Output</strong> Format.
+parameter::-output::Alignment Format::checkbox_group::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Output Formats
+parameter::-maxnseq::Max number of sequences::hidden::50,100::80::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+parameter::-case::Case::popup_menu::upper,lower,keep::upper::doc_txt:Output case selection
+parameter::-seqnos::Residue Number::popup_menu::on,off::off::doc_txt:Print Residue Number paragraph::Parameters
+parameter::-outorder::Order::popup_menu::input,aligned::aligned::doc_txt:Output order
+sendto::ProtoGene@fasta_aln::MyHits@fasta_aln
+section::EVALUATION
+############################################################################################################
+############################################################################################################
+server::CORE::Regular::Consistency based Evaluation of a Multiple Sequence Alignment Using the TCoffee CORE index::12824354,10964570
+############################################################################################################
+#config::email::mandatory
+paragraph_in::Description::<strong>Evaluates</strong> your Alignment and outputs a <strong>Colored</strong> version where unreliable portions are in <strong><font color="blue">blue</font></strong> and the reliable ones in <strong><font color="red">red</font></strong>. Your alignment must contain at least <strong>4</strong> Sequences.<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+paragraph_in::Alignment Input
+paragraph_in::Action::<strong>Paste or upload</strong> your Multiple Sequence Alignment in <strong><doc_>doc3.html clustal</doc_></strong> format and <strong>Press</strong> the SUBMIT button.
+parameter::-infile::Upload your Alignment::upload::empty::empty::doc_txt:Input Multiple Sequence Alignment.
+parameter::-in::Method::hidden::Mlalign_id_pair,Mclustalw_pair,Mfast_pair,Mslow_pair,Mproba_pair::Mlalign_id_pair,Mproba_pair::empty
+parameter::-output::Alignment Format::hidden::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Output Format
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+parameter::-score::empty::hidden::1::1::empty
+outfile::clustalw_aln,score_html
+############################################################################################################
+############################################################################################################
+server::CORE::Advanced::Consistency based Evaluation of a Multiple Sequence Alignment Using the TCoffee CORE index::12824354,10964570
+############################################################################################################
+#config::email::mandatory
+paragraph_in::Description::<strong>Evaluates</strong> your Alignment and outputs a <strong>Colored</strong> version where unreliable portions are in <strong><font color="blue">blue</font></strong> and the reliable ones in <strong><font color="red">red</font></strong>. Your alignment must contain at least <strong>4</strong> Sequences.<br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong><br><font color="#F4F4FF">Limitations: </font>Maximum length of sequences is <strong>_maxLseq_</strong>
+paragraph_in::Alignment Input
+paragraph_in::Action::<strong>Paste or upload</strong> your Multiple Sequence Alignment in <strong><doc_>doc3.html clustal</doc_></strong> format.
+parameter::-infile::Upload your Alignment::upload::empty::empty::doc_txt:Input Multiple Sequence Alignment.
+paragraph_in::Library Computation
+paragraph_in::Action::Your alignment is evaluated by comparison against a collection of alignments. This collection is named a <strong>Library</strong>. This section lets you control the <strong>computation</strong> of the library. Different libraries give different score results.
+parameter::-in::Pairwise Methods::checkbox_group::Mlalign_id_pair,Mclustalw_pair,Mfast_pair,Mslow_pair,Mproba_pair::Mlalign_id_pair,Mproba_pair::doc_txt:Pairwise Alignment Methods will be used to make a pairwise alignment of all the possible pairs of sequences.\n- Lalign_pair: 10 best local alignments.\n- Slow_pair: accurate global alignment.\n- Fast_pair: fast heuristic global alignment.\n- Clustalw_pair: ClustalW pairwise alignment.\n- Proba_pair: pairwise alignments with a bi-phasic gap penalty adapted from probcons.
+#parameter::-in::Multiple Methods::checkbox_group::Mclustalw_msa::empty::doc_txt:Multiple Alignment Methods.\n- Clustalw_msa: ClustalW multiple alignment.
+parameter::-score::empty::hidden::1::1::empty
+outfile::clustalw_aln,score_html
+paragraph_in::Output
+paragraph_in::action::Use this section to control the <strong>Output</strong> Format.
+outfile::clustalw_aln,score_html
+parameter::-output::Alignment Format::checkbox_group::clustalw_aln,gcg,msf_aln,pir_aln,fasta_aln,phylip,pir_seq,fasta_seq,score_html,score_pdf,score_ascii::clustalw_aln,fasta_aln,phylip,score_html,score_pdf::doc_txt:Output Formats
+parameter::-maxnseq::Max number of sequences::hidden::50,100::50::empty
+parameter::-maxlen::Max length::hidden::1000,2000::2000::empty
+parameter::-case::Case::popup_menu::upper,lower,keep::upper::doc_txt:Output case selection
+parameter::-seqnos::Residue Number::popup_menu::on,off::off::doc_txt:Print Residue Number paragraph::Parameters
+parameter::-outorder::Order::popup_menu::input,aligned::aligned::doc_txt:Output order
+############################################################################################################
+############################################################################################################
+server::iRMSD-APDB::Regular::Evaluation of a Multiple Sequence Alignment Using Structural Information::16873492,17032685,12855461
+############################################################################################################
+paragraph_in::Description::<strong>Evaluates your Multiple Sequence Alignment</strong> using <a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/19/suppl_1/i215">APDB</a>.
+#What is APDB ?
+paragraph_in::What is APDB?
+paragraph_in::Description::APDB estimates the proportion of columns correctly aligned in a pairwise or a multiple alignment of sequences with known structures. Sequences without a known structure can be included but will be ignored by the evaluation.
+#When to use it
+paragraph_in::When to Use This Server ?
+paragraph_in::Description::Use this server to identify the best multiple sequence alignment among several alternative alignments of the same sequences (for instance a T-Coffee, a ProbCons and a Muscle Alignment). Your alignment must include at least <strong>Two</strong> sequences with a known structure.
+#How to use it
+paragraph_in::How To Use This Server ?
+paragraph_in::Description::<br><strong>1-Prepare</strong> your set of sequences. The server supports CLUSTAL, FASTA and MSF <doc_>doc4.html formats</doc_>.<br><font color="red"><strong>2-Name the sequences whose structure you want to use with their PDB identifier: 1cjwA (A is the chain index)</strong></font>.<br><strong>3-Align your sequences</strong> with your favorite multiple alignment server.<br><strong>4-Cut and paste</strong> the resulting alignment in the window below.<br><strong>5-Run the server.</strong><br><br><strong>Note:</strong> Your can use sub-domains of sequences with known structures or close homologues.
+#What are the results
+paragraph_out::How To Read the Results ?
+paragraph_out::Description::<br><strong>APDB_RESULT</strong>: The average score indicating the proportion of residues correctly aligned in the APDB sense.<br><strong>score_html</strong>: A colorized alignment where each residue is coloured according to its local APDB score. Reliable positions are in orange and red, unreliable ones in green and blue.
+#Default Parameters
+config::executable::t_coffee
+#config::email::mandatory
+parameter::-other_pg::Apdb_call::hidden::empty::apdb::apdb::empty
+parameter::-apdb_outfile::out::hidden::empty::default::default::empty
+parameter::-outfile::outfile_call::hidden::empty::default::default::empty
+parameter::-io_format::format::hidden::empty::hsg3::hsg3::empty
+parameter::-output::output::hidden::empty::score_html::score_html::empty
+#Input Parameters
+paragraph_in::Input
+paragraph_in::Description::<br><strong>4-Paste Or Upload</strong> your alignment in the Window Below
+parameter::-aln::Your Alignment File::upload::empty::empty::doc_txt:Input a Multiple Sequence Alignment in FASTA with structures named according to their PDB identifier (Chain appended to the PDB).
+#Outfile Description
+outfile::score_html,APDB_RESULT_FORMAT_01
+############################################################################################################
+############################################################################################################
+server::iRMSD-APDB::Advanced::Evaluation of a Multiple Sequence Alignment Using Structural Information::16873492,17032685,12855461
+############################################################################################################
+paragraph_in::Description::<strong>Evaluates your Multiple Sequence Alignment</strong> using <a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/19/suppl_1/i215">APDB</a>.
+#What is APDB ?
+paragraph_in::What is APDB?
+paragraph_in::Description::APDB estimates the proportion of columns correctly aligned in a pairwise or a multiple alignment of sequences with known structures. Sequences without a known structure can be included but will be ignored by the evaluation.
+#When to use it
+paragraph_in::When to Use This Server ?
+paragraph_in::Description::Use this server to identify the best multiple sequence alignment among several alternative alignments of the same sequences (for instance a T-Coffee, a ProbCons and a Muscle Alignment). Your alignment must include at least <strong>Two</strong> sequences with a known structure.
+#How to use it
+paragraph_in::How To Use This Server ?
+paragraph_in::Description::<br><strong>1-Prepare</strong> your set of sequences. The server supports CLUSTAL, FASTA and MSF <doc_>doc4.html formats</doc_>.<br><font color="red"><strong>2-Name the sequences whose structure you want to use with their PDB identifier: 1cjwA (A is the chain index)</strong></font>.<br><strong>3-Align your sequences</strong> with your favorite multiple alignment server.<br><br><strong>Note:</strong>Your can use sub-domains of sequences with known structures or close homologues.
+#Default Parameters
+config::executable::t_coffee
+#config::email::mandatory
+parameter::-other_pg::apdb_call::hidden::empty::apdb::apdb::empty
+parameter::-apdb_outfile::out::hidden::empty::default::default::empty
+parameter::-outfile::outfile_call::hidden::empty::default::default::empty
+parameter::-io_format::format::hidden::empty::hsg3::hsg3::empty
+parameter::-output::output::hidden::empty::score_html::score_html::empty
+#Input Parameters
+paragraph_in::Input
+paragraph_in::Description::<br><strong>4-Paste Or Upload</strong> your alignment in the Window Below
+parameter::-aln::Your Alignment File::upload::empty::empty::doc_txt:Input a Multiple Sequence Alignment in FASTA with structures named according to their PDB identifier (Chain appended to the PDB).
+#Input Parameters
+paragraph_in::Srad,the Sphere Radius
+paragraph_in::Description::<br><strong>5-Set</strong> Srad, the Sphere radius (&Aring;ngstr&ouml;m).<br><br>APDB is a local method and the structural neighbourhood of each residue is used to estimate its alignment accuracy. This Neighbourhood is a sphere of radius Srad (in &Aring;ngstr&ouml;m). A sphere with a 10 &Aring;ngstr&ouml;m Radius contains between 20-40 amino acids.<br><br><center><strong>High Srad <=> More stringent measure</strong></center>
+parameter::-maximum_distance::Srad::popup_menu::10,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,1000::10::doc_txt:Set The sphere Radius
+#Input Parameters
+paragraph_in::T1, the Distance Threshold
+paragraph_in::Description::<br><strong>6-Set</strong> T1 (&Aring;ngstr&ouml;m) the Delta Threshold.<br><br>Within a sphere, each pair of aligned residues either agrees or disagrees with the central residues alignment. Pairs of aligned residues whose difference of distance (Delta) is lower than T1 are considered to be supportive, pairs of residues above T1 are considered unsupportive.<br><br><center><strong>Low T1 <=> More stringent measure.</strong></center>
+parameter::-md_threshold::T1::popup_menu::2.0,0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2,1.3,1.4,1.5, 1.6, 1.7,1.8,1.9,2.0,2.1,2.2,2.5::2.0::doc_txt:Set the T1 Threshold
+#Input Parameters
+paragraph_in::T2, The Neighbourhood Support
+paragraph_in::Description::<br><strong>7-Set</strong> T2 (%) The Neighbourhood Support Limit.<br><br>The final APDB score indicates the proportion of aligned residues correctly aligned from an APDB point of view. APDB considers that a pair of residues is correctly aligned if T2 percent of its neighbourhood is supportive (as defined above in the T1 section).<br><br><center><strong>High T2 <=> More stringent Measure.</strong></center>
+parameter::-similarity_threshold::T2::popup_menu::70,20,30,40,50,60,70,80,90,100::70::doc_txt:Set the T2 Threshold
+#What are the results
+paragraph_out::How To Read the Results ?
+paragraph_out::Description::<br><strong>APDB_RESULT</strong>: The average score indicating the proportion of residues correctly aligned in the APDB sense.<br><strong>score_html</strong>: A colorized alignment where each residue is coloured according to its local APDB score. The value is between 0 and 100%. Reliable positions are in orange and red, unreliable ones in green and blue.
+#Outfile Description
+outfile::score_html,APDB_RESULT_FORMAT_01
+section::PROCESSING
+############################################################################################################
+############################################################################################################
+server::PROTOGENE::Regular::Bona-Fide Back Translation of Protein Multiple Sequence Alignments::16845080
+############################################################################################################
+paragraph_in::Description::<strong style="font-size:14pt">Turning amino acid alignments into CDS nucleotide alignments.</strong><br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong>
+paragraph_in::Sequence Input
+paragraph_in::Action::<strong>1-Prepare</strong> your set of sequences in a <strong><doc_>docPROTOGENE.html fasta</doc_></strong> file.<br><strong>2-Copy or Upload</strong> your set of protein sequences.<br><strong>3-Enter</strong> a valid e-mail address.<br><strong>4-Click</strong> on the SUBMIT button.
+parameter::--msa::Upload File::upload::empty::empty::doc_txt:FASTA Sequences
+paragraph_in::Output options
+parameter::--revtrans::IUB-IUPAC depiction code::checkbox_group:: ::empty::doc_txt:If one of the query sequence returns no blast hit, no link to nucleotides, or no alignment with Exonerate,\nTHIS sequence is NOT returned in the result file; Unless you check on the box.\nThen THIS sequence will be back-translated with IUB (IUPAC) depiction code:\ne.g. A or G are replaced by R, A or G or C or T are replaced by N.
+parameter::--pep::Original protein(s)::hidden:: :: ::empty
+parameter::--giga::Always Use GigaBlaster::hidden:: :: ::empty
+#parameter::--tmp::Keep traces of fake intermediate files like fake xml from NCBI::hidden:: :: ::empty
+parameter::--lim::Limite number of input query sequences::hidden:: ::60::empty
+parameter::--hideBOJ::Hide ExoSet-BOJ output::hidden:: :: ::empty
+config::executable::ProtoGene.pl
+#config::email::mandatory
+paragraph_out::How To Read the Results ?
+paragraph_out::Description::<br><strong>fasta_CDS</strong>: CDS Alignment of your query.<br>&nbsp;&nbsp;If your query looks like this<br><strong><code>&gt;QueryName [Description]<br>sequence...</code></strong><br><br>&nbsp;&nbsp;then the cds will look like<br><strong><code>&gt;QueryName_G_TargetGbID _S_ AccBLASTpHit _DESC_ [Description] MATCHES_ON TargetDesc<br>CDS sequence...</code></strong><br><br><strong>fasta_CDS+Query</strong>: CDS alignment with query protein interleaved between matches.<br><br><strong>colored_fasta_CDS</strong>: CDS alignment with query protein interleaved between matches, colored (HTML/CSS)<br><br><strong>Rejected_seq</strong>: List of unprocessed query sequences (no blast hit, no nucleotide link, or cannot be aligned).<br><br><strong>LOG</strong>: Summary of blast hit(s), nucleotide link(s), and query-nucleotide alignment(s) status.
+############################################################################################################
+############################################################################################################
+server::PROTOGENE::Advanced::Bona-Fide Back Translation of Protein Multiple Sequence Alignments::16845080
+############################################################################################################
+paragraph_in::Description::<strong style="font-size:14pt">Turning amino acid alignments into CDS nucleotide alignments.</strong><br><br>Limitations: Maximum number of sequences is <strong>_maxNseq_</strong>
+paragraph_in::Sequence Input
+paragraph_in::Action::<strong>1-Prepare</strong> your set of sequences in a <strong><doc_>docPROTOGENE.html fasta</doc_></strong> file.<br><strong>2-Copy or Upload</strong> your set of protein sequences.<br><strong>3-Copy or Upload</strong> your set of templates.<br><strong>4-Enter</strong> a valid e-mail address.<br><strong>5-Click</strong> on the SUBMIT button.
+parameter::--msa::Upload File::upload::empty::empty::doc_txt:FASTA Sequences
+paragraph_in::Template Input
+paragraph_in::Action::Your template must have this format (nameX must NOT contain space character):<br><br><strong>&gt;name1_G_NAcc1 ...<br>&gt;name2_G_NAcc2 ...</strong><br>With NAccX = accession number or GI (from NCBI) of the nucleotidic target of your query nameX<br>Accession number must NOT be version number of NCBI<br><br>or<br><br><strong>&gt;name1_G_My_Seq<br>ACGT...<br>&gt;name2_G_My_Seq<br>CCGTA...</strong><br>You can provide your own nucleotidic sequences, below corresponding template line, with NAcc replaced by My_Seq
+parameter::--template::Upload Template File::upload::empty::empty::doc_txt:E.g.\n&gt;Y3584_VIBCH/1-393._G_NC_002506\nand/or\n&gt;Y3584_VIBCH/1-393._G_My_Seq\nTGGAGTATTAACAGAAAATTGATACCAAACGAACAAAGTTAA...
+paragraph_in::Output options
+parameter::--revtrans::IUB-IUPAC depiction code::checkbox_group:: ::empty::doc_txt:If one of the query sequence returns no blast hit, no link to nucleotides, or no alignment with Exonerate,\nTHIS sequence is NOT returned in the result file; Unless you check on the box.\nThen THIS sequence will be back-translated with IUB (IUPAC) depiction code:\ne.g. A or G are replaced by R, A or G or C or T are replaced by N.
+parameter::--pep::Original protein(s)::hidden:: :: ::empty
+parameter::--giga::Always Use GigaBlaster::hidden:: :: ::empty
+#parameter::--tmp::Keep traces of fake intermediate files like fake xml from NCBI::hidden:: :: ::empty
+parameter::--lim::Limite number of input query sequences::hidden:: ::60::empty
+parameter::--hideBOJ::Hide ExoSet-BOJ output::hidden:: :: ::empty
+config::executable::ProtoGene.pl
+#config::email::mandatory
+paragraph_out::How To Read the Results ?
+paragraph_out::Description::<br><strong>fasta_CDS</strong>: CDS Alignment of your query.<br>&nbsp;&nbsp;If your query looks like this<br><strong><code>&gt;QueryName [Description]<br>sequence...</code></strong><br><br>&nbsp;&nbsp;then the cds will look like<br><strong><code>&gt;QueryName_G_TargetGbID _S_ AccBLASTpHit _DESC_ [Description] MATCHES_ON TargetDesc<br>CDS sequence...</code></strong><br><br><strong>fasta_CDS+Query</strong>: CDS alignment with query protein interleaved between matches.<br><br><strong>colored_fasta_CDS</strong>: CDS alignment with query protein interleaved between matches, colored (HTML/CSS)<br><br><strong>Rejected_seq</strong>: List of unprocessed query sequences (no blast hit, no nucleotide link, or cannot be aligned).<br><br><strong>LOG</strong>: Summary of blast hit(s), nucleotide link(s), and query-nucleotide alignment(s) status.
+############################################################################################################
+mirrors::tcoffee.org:HOME::Suisse:Vital-IT::France:IGS::EMBL:EBI::MAXPLANK#http://toolkit.tuebingen.mpg.de/t_coffee#maxplank.gif::CORNELL#http://cbsuapps.tc.cornell.edu/t_coffee.aspx#cbsu.jpg::EMBNet-Spain#http://www.es.embnet.org/Services/MolBio/t-coffee/#EMBnetCNB.gif

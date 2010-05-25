@@ -1,0 +1,32 @@
+#!/usr/bin/env perl
+#Version 1.01 (25/02/03)
+
+
+$o="tmp_benchmark_msa";
+$list="";
+$HOME="/home/notredame/";
+
+	
+$db="$HOME/db/proteins/";
+$hom39="$db/HOM39/";
+$prefab="$db/prefab4/";
+
+$tc_tmp="$HOME/.t_coffee/tmp";
+
+foreach $v (@ARGV)
+  {
+    $cl.=" $v";
+  }
+if ($cl=~/\-range ([^-]*)/){$range=$1;}
+if ($cl=~/\-n ([^-\s]*)/){$n=$1;}
+if ($cl=~/\-list ([^-\s]*)/){$list=$1;}
+
+@val=($range=~/(\d+)/g);
+$low=$val[0]; $up=$val[1];
+
+
+`cat $list | awk '{print (\$3>$low && \$3<$up)?\$0:"NO"}'| grep -v NO | sort -nk4 | awk '{print \$1}' | head -$n >tmp`;
+
+open (F, "tmp");
+while (<F>){print "$_";}	
+close (F);

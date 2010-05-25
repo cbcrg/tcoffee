@@ -1,0 +1,180 @@
+#!/usr/bin/env perl
+#Version 1.01 (25/02/03)
+$upper_threshold=9;
+$lower_threshold=0;
+$char='-';
+$output="fasta_aln";
+$keep=0;
+
+foreach ($np=0; $np<=$#ARGV; $np++)
+    {
+    $value=$ARGV[$np];
+
+    if ($value eq "-infile")
+      {
+      $infile= $ARGV[++$np];
+      }
+    elsif ($value eq "-output")
+      {
+        $output= $ARGV[++$np];
+      }
+    elsif ($value eq "-lib")
+      {
+        $lib= $ARGV[++$np];
+      }
+    elsif ($value eq "-char")
+      {
+        $char= $ARGV[++$np];
+      }
+    elsif ($value eq "-upper_threshold")
+      {
+        $upper_threshold= $ARGV[++$np];
+      }
+     elsif ($value eq "-lower_threshold")
+      {
+        $lower_threshold= $ARGV[++$np];
+      }
+    elsif ($value eq "-scorefile")
+      {
+	$scorefile= $ARGV[++$np];
+      }
+    elsif ( $value eq "-sequence")
+      {
+	$sequence= $ARGV[++$np];
+      }
+    elsif ($value eq "-keep" )
+      {
+	$keep=1;
+      }
+    elsif ($value eq "-remove" ||$value eq "-change" )
+      {
+	$keep=0;
+      }
+    else
+      {
+	print "Requirements:\n";
+	print "\t-seq_reformat [cedric.notredame\@europe.com]\n";
+	print "\t-t_coffee     [cedric.notredame\@europe.com]\n";
+	print "Actions:\n";
+	print "Keep Residues whose score is lower_threshold<C<upper_threshold\n";
+	print "Computes the library and the score_ascii file if needed\n";\
+	print "uses them if provided by flag, or in the current dir\n";\
+
+	print "\n";
+	print "Usage:\n";
+	print "-keep                  [keep   res. between lower and upper]\n";
+	print "-remove                [remove res. between lower and upper]\n";
+	print "                       [-remove: default]\n";
+	print "-remove                [idem to -remove: changes the removed res into char]\n";
+	print "-infile <aln name>     [fasta, aln]\n";	
+	print "-lib    <lib name>     [<prefix>.tc_lib assumed]\n";
+	print "-scorefile<file name>  [<prefix>.score_ascii assumed]\n";
+	print "-char   <char>         [Replacement char, default:-])\n";
+	print "-upper_threshold <0-9> [default=9])\n";
+	print "-lower_threshold <0-9> [default=0])\n";
+	print "-sequence              [default=none,filters according to seq]\n";
+	print "                       [Cons to use the conscencus]\n";
+	print "-output                [default=fasta_aln]";
+	print "\n";
+	exit (1);
+      }
+  }
+$infile=~/([^.]*)\.[^.]*/;
+$suffix=$1;
+
+if (!$lib){$lib="$suffix.tc_lib";}    
+if (!$scorefile){$scorefile="$suffix.score_ascii";}
+
+if ( ! -e $lib  && ! -e $scorefile)
+  {
+    system ("t_coffee S$infile -out_lib=$lib -convert -outfile=no");
+  }
+
+if (! -e $scorefile)
+  {
+    system ("t_coffee -infile $infile  -in L$lib -output score_ascii -score -outfile $scorefile ");
+  }
+
+
+$tmp1=$$."1";
+$tmp2=$$."2";
+$tmp3=$$."3";
+
+if ( !$sequence)
+  {
+
+    
+    if (!$keep)
+      {
+	$conversion="[$lower_threshold-$upper_threshold]";	
+	system ("seq_reformat -in $infile -struc_in $scorefile -struc_in_f number_aln -action +convert '$conversion' '#$char'  -output $output");
+      }
+    elsif ( $keep)
+      {
+	$lower_threshold--;
+	$upper_threshold++;
+	$conversion="[0-$lower_threshold]";	
+	system ("seq_reformat -in $infile -struc_in $scorefile -struc_in_f number_aln -action +convert '$conversion' '#$char'  -output $output > $tmp1");
+	$conversion="[$upper_threshold-9]";
+	system ("seq_reformat -in $tmp1 -struc_in $scorefile -struc_in_f number_aln -action +convert '$conversion' '#$char'  -output $output");
+      }
+  }
+     	
+else
+  {
+    #extract Cons sequence
+    
+    open F, $scorefile;
+    while (<F>)
+      {
+	$file=$file.$_;
+      }
+    $file=~s/GOOD\n\*\n/GOOD\n*\nCons\n/;
+    close F;
+    open F, ">$tmp2";
+    print F $file;
+    close F;
+    system ("seq_reformat -in $tmp2 -input number_aln -action +keep_name +extract_seq $sequence -output $output > $tmp1");
+    
+    #filter Cons
+    if ( !$keep)
+      {
+	for ( $a=$lower_threshold; $a<=$upper_threshold; $a++)
+	  {
+	    
+	    system ("seq_reformat -in $tmp1 -action +convert 'x$a-'  -output fasta_aln > $tmp2");
+	    system ("mv $tmp2 $tmp1");
+	  }
+      }
+    elsif ( $keep)
+      {
+	for ( $a=0; $a<$lower_threshold;$a++)
+	  {
+	    system ("seq_reformat -in $tmp1 -action +convert 'x$a-'  -output fasta_aln > $tmp2");
+	    system ("mv $tmp2 $tmp1");
+	  } 
+	for ( $a=$upper_threshold+1; $a<=9;$a++)
+	  {
+	    system ("seq_reformat -in $tmp1 -action +convert 'x$a-'  -output fasta_aln > $tmp2");
+	    system ("mv $tmp2 $tmp1");
+	  }
+      }
+    
+    #remove flaged columns
+    system ("seq_reformat -in $infile -action +convert 'z-z' -output fasta_aln > $tmp2");
+    
+    system ("cat $tmp2 $tmp1 > $tmp3");
+    
+    system ("seq_reformat -in $tmp3 -action +rmgap_col $sequence -output fasta_aln > $tmp1");
+    system ("seq_reformat -in $tmp1 -action +convert 'x-$char' -output   fasta_aln > $tmp2");
+    system ("seq_reformat -in $tmp2 -action +convert 'z-'      -output   fasta_aln > $tmp3");
+ 
+    system ("seq_reformat -in $tmp3 -action +remove_seq $sequence -output $output ");
+        
+    unlink $tmp1, $tmp2, $tmp3;
+  }
+   
+    
+    
+	 
+	 
