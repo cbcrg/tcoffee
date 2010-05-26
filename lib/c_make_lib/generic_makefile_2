@@ -1,0 +1,211 @@
+
+
+#########################################################
+#							#
+#		GENERIC  				#
+#							#
+#							#
+#########################################################
+DATE=`date`
+VERSION=`$(PERL4MAKEFILE_LIB)/read_program_version.pl version_number.version`
+
+LIBRARY=$(PWD)/../../lib/
+HOME2=$(HOME)/Dropbox
+
+WEB_BASE=$(HOME2)/projects/server/html_server/public_html/
+WEB_UPDATE=$(HOME2)/projects/server/html_server/update/
+WEB_DISTRIBUTION=$(WEB_BASE)/Packages/
+WEB_BINARIES=$(WEB_DISTRIBUTION)/Binaries/$(OSNAME)
+WEB_DOC=$(WEB_BASE)/Documentation/
+WEB_DOCUMENTATION=$(WEB_BASE)/Documentation/$(EXECUTABLE)/
+WEB_HOMEPAGE=$(WEB_BASE)/Projects_home_page/$(EXECUTABLE)_home_page.html
+WEB_RESOURCES=$(WEB_BASE)/Resources/
+
+LOCAL_BASE=web_update/
+LOCAL_DISTRIBUTION=$(LOCAL_BASE)/Packages/
+LOCAL_BINARIES=$(LOCAL_DISTRIBUTION)/Binaries/$(OSNAME)
+LOCAL_DOC=$(LOCAL_BASE)/Documentation/
+LOCAL_DOCUMENTATION=$(LOCAL_BASE)/Documentation/$(EXECUTABLE)/
+LOCAL_PROJECT_HOMEPAGE=$(LOCAL_BASE)/Projects_home_page
+LOCAL_HOMEPAGE=$(LOCAL_BASE)/Projects_home_page/$(EXECUTABLE)_home_page.html
+LOCAL_RESOURCES=$(LOCAL_BASE)/Resources/
+
+
+DISTRIBUTION_FILE=$(PROGRAM)_distribution_$(VERSION)
+LATEST_DISTRIBUTION_FILE=$(PROGRAM)_distribution
+DISTRIBUTIONS=$(HOME2)/distributions/
+UNTARED_DISTRIBUTIONS=$(HOME2)/untared_distributions/
+LATEST_DISTRIBUTIONS= $(HOME2)/latest_distributions/
+IGS_DISTRIBUTIONS=/usr/people/cnotred/latest_distributions
+DISTRIB_DIR=$(HOME2)/distributions/$(PROGRAM)_distribution_$(VERSION)
+DISTRIB_DOC=$(DISTRIB_DIR)/doc
+
+
+TC_MAKEFILE=$(DISTRIB_DIR)/$(EXECUTABLE)_source/makefile1
+TC_MAKEFILE2=$(DISTRIB_DIR)/$(EXECUTABLE)_source/makefile
+INSTITUTE="Centro de Regulacio Genomica"
+EMAIL="cedric.notredame@europe.com"
+DISTRIBUTION_ADDRESS="www.tcoffee.org/Packages/"
+pg_makefile:
+	make -i CC=cc general_makefile
+
+
+general_distribution: 
+	-rm $(CODE_LIST);
+	#make empty
+	mkdir -p $(DISTRIB_DIR)
+	mkdir -p $(DISTRIB_DIR)/bin
+	mkdir -p $(DISTRIB_DOC)
+	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
+	mkdir -p $(DISTRIB_DIR)/reference_test
+	echo '' > $(DISTRIB_DIR)/install
+	mkdir -p $(WEB_BASE)
+	mkdir -p $(WEB_DISTRIBUTION)
+	mkdir -p $(WEB_BINARIES)
+	mkdir -p $(WEB_BASE)/Documentation	
+	mkdir -p $(WEB_BASE)/Documentation/$(EXECUTABLE)
+	mkdir -p $(WEB_BASE)/Projects_home_page/
+	mkdir -p $(WEB_RESOURCES)
+	make -i VERSION=$(VERSION) CC=cc code
+	make -i VERSION=$(VERSION) CC=cc pg_makefile
+	make -i VERSION=$(VERSION) CC=cc test
+	#make -i VERSION=$(VERSION) CC=cc doc
+	make -i VERSION=$(VERSION) CC=cc license
+	#make -i VERSION=$(VERSION) update_webpage
+library_distribution:
+	cd $(LIBRARY)/..
+	tar -cvf lib.tar $(LIBRARY)
+	gzip lib.tar 
+	mkdir $(DISTRIBUTIONS)
+	mv lib.tar.gz $(DISTRIBUTIONS)/lib_$(VERSION).tar.gz 
+update_webpage:
+	cp $(DISTRIB_DIR)/doc/* $(WEB_DOCUMENTATION)	
+	echo $(VERSION) > $(WEB_DISTRIBUTION)/$(PROGRAM).version
+	chmod u+x $(PERL4MAKEFILE_LIB)/update_webpage_version.pl
+	$(PERL4MAKEFILE_LIB)/update_webpage_version.pl $(WEB_HOMEPAGE) $(VERSION) >xxx
+	cp $(WEB_HOMEPAGE) $(WEB_HOMEPAGE).old 
+	cp xxx $(WEB_HOMEPAGE)
+	cp $(KO_LIB)/tclinkdb.txt $(WEB_RESOURCES)
+general_makefile:
+	echo MAKE THE MAKEFILE: $(TC_MAKEFILE)
+	echo ' ' > $(TC_MAKEFILE)
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '$(EXECUTABLE): ' 
+	$(PERL4MAKEFILE_LIB)/process_list.pl '$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) "@.o " ' $(CODE_LIST)  @
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\n'
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\t#DOLLAR(CC) #DOLLAR(CFLAGS) -o $(EXECUTABLE) '
+	$(PERL4MAKEFILE_LIB)/process_list.pl '$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) "@.o " ' $(CODE_LIST) @ 
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) ' -lm\n'
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\nall:  $(EXECUTABLE) TMalign\n'
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\nclean:\n\trm *.o\n'	
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\nTMalign:\n\t #DOLLAR(FCC) TMalign.f -o TMalign\n'	
+	$(PERL4MAKEFILE_LIB)/CCsed.script  $(TC_MAKEFILE) > $(TC_MAKEFILE2)	
+	rm $(TC_MAKEFILE)
+
+.PHONY: clean
+clean:
+	-rm *.o_$(OSNAME)
+	echo x > core
+	rm core
+empty:
+	-rm *.o_$(OSNAME)  
+	tar -cf old_c.tar *.c *.h
+	rm *.c 
+	rm *.h
+	echo x > core
+	rm core
+
+distribute: all
+	echo x > core
+	rm core
+	-rm *.o_$(OSNAME)
+c_code:
+
+	#make clean
+	#make CC="gcc-linux -O3" $(EXECUTABLE)
+	#cp $(EXECUTABLE) $(LINUX_WEB_BINARIES)
+	#mv $(EXECUTABLE) $(LINUX_WEB_BINARIES)/$(EXECUTABLE)_$(VERSION)
+	#rm $(USER_BIN)/$(EXECUTABLE)
+	echo $(OSNAME) Compilation
+	make clean
+	make CC="gcc -O3" $(EXECUTABLE)
+	cp $(EXECUTABLE) $(WEB_BINARIES)
+	cp $(EXECUTABLE) $(WEB_BINARIES)/$(EXECUTABLE)_$(VERSION)
+	make clean
+	cp *.c $(DISTRIB_DIR)/$(EXECUTABLE)_source
+	cp *.h $(DISTRIB_DIR)/$(EXECUTABLE)_source	
+	cp *.f $(DISTRIB_DIR)/$(EXECUTABLE)_source	
+	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >$(DISTRIB_DIR)/install
+	cp $(KO_LIB)/tclinkdb.txt $(DISTRIB_DIR)
+	chmod u+x $(DISTRIB_DIR)/install
+license:
+	$(PERL4MAKEFILE_LIB)/make_license.pl -file $(LICENSES)/academic_license.txt -email $(EMAIL) -type txt    -institute $(INSTITUTE) -author $(AUTHOR) -date "$(DATE)" -program $(PROGRAM) > $(DISTRIB_DIR)/license.txt
+	$(PERL4MAKEFILE_LIB)/make_license.pl -file $(LICENSES)/short_license.txt -email $(EMAIL) -type c      -institute $(INSTITUTE) -author $(AUTHOR) -date "$(DATE)" -program $(PROGRAM) > $(DISTRIB_DIR)/short_license.c
+	$(PERL4MAKEFILE_LIB)/make_license.pl -file $(LICENSES)/short_license.txt -email $(EMAIL)  -type perl   -institute $(INSTITUTE) -author $(AUTHOR) -date "$(DATE)" -program $(PROGRAM) > $(DISTRIB_DIR)/short_license.pl
+	ls -1 $(DISTRIB_DIR)/$(EXECUTABLE)_source/*.c > $(DISTRIB_DIR)/$(EXECUTABLE)_source/source_list
+	$(PERL4MAKEFILE_LIB)/process_list.pl '$(PERL4MAKEFILE_LIB)/append2file.pl @ $(DISTRIB_DIR)/short_license.c'    $(DISTRIB_DIR)/$(EXECUTABLE)_source/source_list @
+	ls -1 $(DISTRIB_DIR)/$(EXECUTABLE)_source/*.h > $(DISTRIB_DIR)/$(EXECUTABLE)_source/header_list
+	$(PERL4MAKEFILE_LIB)/process_list.pl '$(PERL4MAKEFILE_LIB)/append2file.pl @ $(DISTRIB_DIR)/short_license.c'    $(DISTRIB_DIR)/$(EXECUTABLE)_source/header_list  @
+	rm $(DISTRIB_DIR)/short_license.c	
+	rm $(DISTRIB_DIR)/short_license.pl
+
+#install:
+#	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt > install
+
+packing:
+	mkdir -p $(UNTARED_DISTRIBUTIONS)
+	mkdir -p $(DISTRIBUTIONS)
+	mkdir -p $(LATEST_DISTRIBUTIONS)
+	mkdir -p $(WEB_DISTRIBUTION)
+	mv $(DISTRIB_DIR) .
+	tar -cvf $(DISTRIBUTION_FILE).tar $(DISTRIBUTION_FILE)
+	gzip $(DISTRIBUTION_FILE).tar
+	mv $(DISTRIBUTION_FILE)        $(UNTARED_DISTRIBUTIONS)
+	cp $(DISTRIBUTION_FILE).tar.gz $(DISTRIBUTIONS)
+	cp $(DISTRIBUTION_FILE).tar.gz $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz
+	cp $(DISTRIBUTION_FILE).tar.gz $(WEB_DISTRIBUTION)/$(LATEST_DISTRIBUTION_FILE).tar.gz
+	cp $(DISTRIBUTION_FILE).tar.gz $(WEB_DISTRIBUTION)/
+	rm $(DISTRIBUTION_FILE).tar.gz
+	$(PERL4MAKEFILE_LIB)/change_program_version.pl version_number.version $(VERSION)
+
+web_update:
+	echo "Run Web Update: if standalone: VERSION=Version_X.xx"
+	rm -r $(LOCAL_VERSION)
+	mkdir $(LOCAL_BASE)
+	mkdir $(LOCAL_DISTRIBUTION);
+	mkdir -p $(LOCAL_BINARIES);
+	mkdir $(LOCAL_DOC);
+	mkdir $(LOCAL_DOCUMENTATION);
+	mkdir $(LOCAL_PROJECT_HOMEPAGE)
+	mkdir $(LOCAL_BASE)/Resources
+	cp $(WEB_DOCUMENTATION)/* $(LOCAL_DOCUMENTATION)	
+	cp $(WEB_DISTRIBUTION)/$(PROGRAM).version $(LOCAL_DISTRIBUTION)
+	cp $(WEB_HOMEPAGE) $(LOCAL_HOMEPAGE);
+	cp $(WEB_RESOURCES)/tclinkdb.txt $(LOCAL_RESOURCES)
+	cp $(WEB_DISTRIBUTION)/$(DISTRIBUTION_FILE).tar.gz $(LOCAL_DISTRIBUTION)/$(LATEST_DISTRIBUTION_FILE).tar.gz
+	cp $(WEB_DISTRIBUTION)/$(DISTRIBUTION_FILE).tar.gz $(LOCAL_DISTRIBUTION)
+	cp $(WEB_BINARIES)/$(EXECUTABLE) $(LOCAL_BINARIES)
+	cp $(WEB_BINARIES)/$(EXECUTABLE) $(LOCAL_BINARIES)/$(EXECUTABLE)_$(VERSION)
+	cd $(LOCAL_BASE) && tar -cvf update.tar * && gzip update.tar && mv update.tar.gz $(LATEST_DISTRIBUTIONS)
+	rm -r $(LOCAL_BASE)	
+post_update:
+	echo "start posting T-Coffee Update"
+	sftp_update.sh
+
+post_beta:
+	echo "start posting T-Coffee Beta"
+	sftp_beta.sh
+
+#########################################################
+#							#
+#		RULES    				#
+#							#
+#							#
+#########################################################
+
+
+.SUFFIXES: .o_$(OSNAME) .pl
+.c.o_$(OSNAME):
+	$(CC) $(CFLAGS) -c $*.c -o $*.o_$(OSNAME)
+.pl.pl:
+	cp $*.pl $*.pl
+
