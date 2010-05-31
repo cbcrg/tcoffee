@@ -66,7 +66,7 @@ distribution:
 	-rm *.c
 	-rm *.h
 	make -i VERSION=$(VERSION) CC=cc general_distribution
-	#make -i VERSION=$(VERSION) CC=cc examples
+	make -i VERSION=$(VERSION) CC=cc examples
 	#make -i VERSION=$(VERSION) CC=cc html
 	make -i VERSION=$(VERSION) CC=cc mcoffee		
 	make -i VERSION=$(VERSION) CC=cc packing
@@ -123,21 +123,23 @@ debug:  t_coffee
 	mv debug $(HOME2)/debug
 
 env: 
-	@echo 'Home            :' $(HOME) 
-	@echo 'Pwd             :' $(PWD)
-	@echo 'Version         :' $(VERSION) 
-	@echo 'OSNAME          :' $(OSNAME) 
-	@echo 'DISTRIB_DIR     :' $(DISTRIB_DIR)
-	@echo 'DISTRIB_DOC     :' $(DISTRIB_DOC)
-	@echo 'WEB_BASE        :' $(WEB_BASE)
-	@echo 'WEB_DISTRIBUTION:' $(WEB_DISTRIBUTION)
-	@echo 'WEB_BINARIES    :' $(WEB_BINARIES)
-	@echo 'WEB_RESOURCES   :' $(WEB_RESOURCES)
-	@echo 'EXECUTABLE      :' $(EXECUTABLE)
-	@echo 'USER_BIN        :' $(USER_BIN)
-	@echo 'DOCUMENTATION   :' $(DOCUMENTATION) 
-	@echo 'LIBRARY         :' $(LIBRARY)
-	@echo 'DISTRIBUTIONS   :' $(DISTRIBUTIONS)
+	@echo 'Home             :' $(HOME) 
+	@echo 'Pwd              :' $(PWD)
+	@echo 'Version          :' $(VERSION) 
+	@echo 'OSNAME           :' $(OSNAME) 
+	@echo 'DISTRIB_DIR      :' $(DISTRIB_DIR)
+	@echo 'DISTRIB_DOC      :' $(DISTRIB_DOC)
+	@echo 'WEB_BASE         :' $(WEB_BASE)
+	@echo 'WEB_DISTRIBUTION :' $(WEB_DISTRIBUTION)
+	@echo 'WEB_BINARIES     :' $(WEB_BINARIES)
+	@echo 'WEB_RESOURCES    :' $(WEB_RESOURCES)
+	@echo 'WEB_DOCUMENTATION:' $(WEB_DOCUMENTATION)
+	@echo 'WEB_HOMEPAGE     :' $(WEB_HOMEPAGE)
+	@echo 'EXECUTABLE       :' $(EXECUTABLE)
+	@echo 'USER_BIN         :' $(USER_BIN)
+	@echo 'DOCUMENTATION    :' $(DOCUMENTATION) 
+	@echo 'LIBRARY          :' $(LIBRARY)
+	@echo 'DISTRIBUTIONS    :' $(DISTRIBUTIONS)
 
 
 #########################################################
