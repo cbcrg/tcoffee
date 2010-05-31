@@ -1,0 +1,629 @@
+
+PROGRAM: T-COFFEE (Version_8.07)
+-full_log      	S	[0] 
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-template_mode 	S	[0] 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	Mclustalw2_msa	Mt_coffee_msa	Mpoa_msa	Mmuscle_msa	Mmafft_msa	Mdialignt_msa	Mpcma_msa	Mprobcons_msa
+-seq           	S	[1] 	sample_seq1.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-maxnseq       	D	[0] 	1000 
+-maxlen        	D	[0] 	-1 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	t_coffee
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-evaluate_mode 	S	[0] 	t_coffee_fast
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[0] 	0 
+-prot_max_sim  	D	[90] 	90 
+-prot_min_cov  	D	[0] 	0 
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-one2all       	S	[0] 
+-subset2all    	S	[0] 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[1] 	methods_relax_msa
+-n_core        	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	one
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+HERE: ************** clustalw2 is missing from your system. T-Coffee will make an attempt to install it.
+
+------- Installing Individual Package
+
+------- Install clustalw2
+
+------- Downloading/Installing clustalw2
+--2009-07-24 19:22:46--  http://www.clustal.org/download/2.0.10/clustalw-2.0.10-src.tar.gz
+Resolving www.clustal.org... 137.43.92.140
+Connecting to www.clustal.org|137.43.92.140|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 322599 (315K) [application/x-gzip]
+Saving to: `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/tmp/wget.tmp'
+
+     0K .......... .......... .......... .......... .......... 15%  144K 2s
+    50K .......... .......... .......... .......... .......... 31%  927K 1s
+   100K .......... .......... .......... .......... .......... 47%  892K 1s
+   150K .......... .......... .......... .......... .......... 63% 1007K 0s
+   200K .......... .......... .......... .......... .......... 79% 1005K 0s
+   250K .......... .......... .......... .......... .......... 95% 1.03M 0s
+   300K .......... .....                                      100% 4.41M=0.6s
+
+2009-07-24 19:22:47 (519 KB/s) - `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/tmp/wget.tmp' saved [322599/322599]
+
+
+------- unzipping/untaring clustalw-2.0.10-src
+    --- clustalw-2.0.10/
+    --- clustalw-2.0.10/README
+    --- clustalw-2.0.10/configure.ac
+    --- clustalw-2.0.10/aclocal.m4
+    --- clustalw-2.0.10/Makefile.am
+    --- clustalw-2.0.10/Makefile.in
+    --- clustalw-2.0.10/configure
+    --- clustalw-2.0.10/config.guess
+    --- clustalw-2.0.10/config.sub
+    --- clustalw-2.0.10/depcomp
+    --- clustalw-2.0.10/install-sh
+    --- clustalw-2.0.10/missing
+    --- clustalw-2.0.10/LICENSE
+    --- clustalw-2.0.10/clustalw_help
+    --- clustalw-2.0.10/m4/
+    --- clustalw-2.0.10/m4/Makefile.am
+    --- clustalw-2.0.10/m4/Makefile.in
+    --- clustalw-2.0.10/src/
+    --- clustalw-2.0.10/src/alignment/
+    --- clustalw-2.0.10/src/alignment/Alignment.cpp
+    --- clustalw-2.0.10/src/alignment/AlignmentOutput.cpp
+    --- clustalw-2.0.10/src/alignment/Alignment.h
+    --- clustalw-2.0.10/src/alignment/AlignmentOutput.h
+    --- clustalw-2.0.10/src/alignment/ObjectiveScore.cpp
+    --- clustalw-2.0.10/src/alignment/Sequence.cpp
+    --- clustalw-2.0.10/src/alignment/ObjectiveScore.h
+    --- clustalw-2.0.10/src/alignment/Sequence.h
+    --- clustalw-2.0.10/src/fileInput/
+    --- clustalw-2.0.10/src/fileInput/FileParser.h
+    --- clustalw-2.0.10/src/fileInput/EMBLFileParser.h
+    --- clustalw-2.0.10/src/fileInput/MSFFileParser.cpp
+    --- clustalw-2.0.10/src/fileInput/FileReader.cpp
+    --- clustalw-2.0.10/src/fileInput/PIRFileParser.cpp
+    --- clustalw-2.0.10/src/fileInput/MSFFileParser.h
+    --- clustalw-2.0.10/src/fileInput/FileReader.h
+    --- clustalw-2.0.10/src/fileInput/RSFFileParser.cpp
+    --- clustalw-2.0.10/src/fileInput/PIRFileParser.h
+    --- clustalw-2.0.10/src/fileInput/GDEFileParser.cpp
+    --- clustalw-2.0.10/src/fileInput/RSFFileParser.h
+    --- clustalw-2.0.10/src/fileInput/GDEFileParser.h
+    --- clustalw-2.0.10/src/fileInput/InFileStream.cpp
+    --- clustalw-2.0.10/src/fileInput/ClustalFileParser.cpp
+    --- clustalw-2.0.10/src/fileInput/PearsonFileParser.cpp
+    --- clustalw-2.0.10/src/fileInput/InFileStream.h
+    --- clustalw-2.0.10/src/fileInput/ClustalFileParser.h
+    --- clustalw-2.0.10/src/fileInput/PearsonFileParser.h
+    --- clustalw-2.0.10/src/fileInput/FileParser.cpp
+    --- clustalw-2.0.10/src/fileInput/EMBLFileParser.cpp
+    --- clustalw-2.0.10/src/general/
+    --- clustalw-2.0.10/src/general/ClustalWResources.h
+    --- clustalw-2.0.10/src/general/OutputFile.cpp
+    --- clustalw-2.0.10/src/general/VectorOutOfRange.h
+    --- clustalw-2.0.10/src/general/UserParameters.cpp
+    --- clustalw-2.0.10/src/general/SymMatrix.h
+    --- clustalw-2.0.10/src/general/Utility.cpp
+    --- clustalw-2.0.10/src/general/clustalw.h
+    --- clustalw-2.0.10/src/general/OutputFile.h
+    --- clustalw-2.0.10/src/general/param.h
+    --- clustalw-2.0.10/src/general/utils.h
+    --- clustalw-2.0.10/src/general/UserParameters.h
+    --- clustalw-2.0.10/src/general/SquareMat.h
+    --- clustalw-2.0.10/src/general/Utility.h
+    --- clustalw-2.0.10/src/general/SequenceNotFoundException.h
+    --- clustalw-2.0.10/src/general/InvalidCombination.cpp
+    --- clustalw-2.0.10/src/general/Array2D.h
+    --- clustalw-2.0.10/src/general/RandomAccessLList.h
+    --- clustalw-2.0.10/src/general/general.h
+    --- clustalw-2.0.10/src/general/debuglogObject.h
+    --- clustalw-2.0.10/src/general/statsObject.h
+    --- clustalw-2.0.10/src/general/userparams.h
+    --- clustalw-2.0.10/src/general/DebugLog.cpp
+    --- clustalw-2.0.10/src/general/ClustalWResources.cpp
+    --- clustalw-2.0.10/src/general/VectorUtility.h
+    --- clustalw-2.0.10/src/general/VectorOutOfRange.cpp
+    --- clustalw-2.0.10/src/general/SymMatrix.cpp
+    --- clustalw-2.0.10/src/general/DebugLog.h
+    --- clustalw-2.0.10/src/general/Stats.cpp
+    --- clustalw-2.0.10/src/general/Stats.h
+    --- clustalw-2.0.10/src/interface/
+    --- clustalw-2.0.10/src/interface/InteractiveMenu.cpp
+    --- clustalw-2.0.10/src/interface/CommandLineParser.cpp
+    --- clustalw-2.0.10/src/interface/InteractiveMenu.h
+    --- clustalw-2.0.10/src/interface/CommandLineParser.h
+    --- clustalw-2.0.10/src/multipleAlign/
+    --- clustalw-2.0.10/src/multipleAlign/Iteration.cpp
+    --- clustalw-2.0.10/src/multipleAlign/MSA.cpp
+    --- clustalw-2.0.10/src/multipleAlign/MyersMillerProfileAlign.cpp
+    --- clustalw-2.0.10/src/multipleAlign/ProfileBase.h
+    --- clustalw-2.0.10/src/multipleAlign/ProfileStandard.cpp
+    --- clustalw-2.0.10/src/multipleAlign/LowScoreSegProfile.h
+    --- clustalw-2.0.10/src/multipleAlign/Iteration.h
+    --- clustalw-2.0.10/src/multipleAlign/MSA.h
+    --- clustalw-2.0.10/src/multipleAlign/MyersMillerProfileAlign.h
+    --- clustalw-2.0.10/src/multipleAlign/ProfileStandard.h
+    --- clustalw-2.0.10/src/multipleAlign/ProfileWithSub.cpp
+    --- clustalw-2.0.10/src/multipleAlign/ProfileAlignAlgorithm.h
+    --- clustalw-2.0.10/src/multipleAlign/ProfileBase.cpp
+    --- clustalw-2.0.10/src/multipleAlign/ProfileWithSub.h
+    --- clustalw-2.0.10/src/multipleAlign/LowScoreSegProfile.cpp
+    --- clustalw-2.0.10/src/pairwise/
+    --- clustalw-2.0.10/src/pairwise/PairwiseAlignBase.h
+    --- clustalw-2.0.10/src/pairwise/FastPairwiseAlign.h
+    --- clustalw-2.0.10/src/pairwise/FullPairwiseAlign.cpp
+    --- clustalw-2.0.10/src/pairwise/FullPairwiseAlign.h
+    --- clustalw-2.0.10/src/pairwise/FastPairwiseAlign.cpp
+    --- clustalw-2.0.10/src/substitutionMatrix/
+    --- clustalw-2.0.10/src/substitutionMatrix/SubMatrix.cpp
+    --- clustalw-2.0.10/src/substitutionMatrix/SubMatrix.h
+    --- clustalw-2.0.10/src/substitutionMatrix/globalmatrix.h
+    --- clustalw-2.0.10/src/substitutionMatrix/matrices.h
+    --- clustalw-2.0.10/src/tree/
+    --- clustalw-2.0.10/src/tree/UPGMA/
+    --- clustalw-2.0.10/src/tree/UPGMA/RootedClusterTree.cpp
+    --- clustalw-2.0.10/src/tree/UPGMA/RootedGuideTree.h
+    --- clustalw-2.0.10/src/tree/UPGMA/UPGMAAlgorithm.cpp
+    --- clustalw-2.0.10/src/tree/UPGMA/RootedTreeOutput.h
+    --- clustalw-2.0.10/src/tree/UPGMA/RootedClusterTree.h
+    --- clustalw-2.0.10/src/tree/UPGMA/Node.cpp
+    --- clustalw-2.0.10/src/tree/UPGMA/UPGMAAlgorithm.h
+    --- clustalw-2.0.10/src/tree/UPGMA/upgmadata.h
+    --- clustalw-2.0.10/src/tree/UPGMA/Node.h
+    --- clustalw-2.0.10/src/tree/UPGMA/RootedGuideTree.cpp
+    --- clustalw-2.0.10/src/tree/UPGMA/RootedTreeOutput.cpp
+    --- clustalw-2.0.10/src/tree/Tree.cpp
+    --- clustalw-2.0.10/src/tree/ClusterTree.cpp
+    --- clustalw-2.0.10/src/tree/AlignmentSteps.h
+    --- clustalw-2.0.10/src/tree/Tree.h
+    --- clustalw-2.0.10/src/tree/ClusterTree.h
+    --- clustalw-2.0.10/src/tree/ClusterTreeAlgorithm.h
+    --- clustalw-2.0.10/src/tree/TreeInterface.cpp
+    --- clustalw-2.0.10/src/tree/UnRootedClusterTree.cpp
+    --- clustalw-2.0.10/src/tree/ClusterTreeOutput.cpp
+    --- clustalw-2.0.10/src/tree/TreeInterface.h
+    --- clustalw-2.0.10/src/tree/dayhoff.h
+    --- clustalw-2.0.10/src/tree/UnRootedClusterTree.h
+    --- clustalw-2.0.10/src/tree/RandomGenerator.cpp
+    --- clustalw-2.0.10/src/tree/NJTree.cpp
+    --- clustalw-2.0.10/src/tree/ClusterTreeOutput.h
+    --- clustalw-2.0.10/src/tree/RandomGenerator.h
+    --- clustalw-2.0.10/src/tree/NJTree.h
+    --- clustalw-2.0.10/src/tree/AlignmentSteps.cpp
+    --- clustalw-2.0.10/src/Makefile.am
+    --- clustalw-2.0.10/src/Makefile.in
+    --- clustalw-2.0.10/src/clustalw_version.h.in
+    --- clustalw-2.0.10/src/config.h.in
+    --- clustalw-2.0.10/src/Help.cpp
+    --- clustalw-2.0.10/src/Help.h
+    --- clustalw-2.0.10/src/Clustal.cpp
+    --- clustalw-2.0.10/src/Clustal.h
+    --- clustalw-2.0.10/src/clustalw_version.h
+    --- clustalw-2.0.10/src/main.cpp
+
+------- Compiling/Installing clustalw2
+    --- checking build system type... i686-pc-cygwin
+    --- checking host system type... i686-pc-cygwin
+    --- checking target system type... i686-pc-cygwin
+    --- building for cygwin
+    --- checking for a BSD-compatible install... /usr/bin/install -c
+    --- checking whether build environment is sane... yes
+    --- checking for a thread-safe mkdir -p... /usr/bin/mkdir -p
+    --- checking for gawk... gawk
+    --- checking whether make sets $(MAKE)... yes
+    --- checking whether make sets $(MAKE)... (cached) yes
+    --- checking for gcc... gcc
+    --- checking for C compiler default output file name... a.exe
+    --- checking whether the C compiler works... yes
+    --- checking whether we are cross compiling... no
+    --- checking for suffix of executables... .exe
+    --- checking for suffix of object files... o
+    --- checking whether we are using the GNU C compiler... yes
+    --- checking whether gcc accepts -g... yes
+    --- checking for gcc option to accept ISO C89... none needed
+    --- checking for style of include used by make... GNU
+    --- checking dependency style of gcc... gcc3
+    --- checking for g++... g++
+    --- checking whether we are using the GNU C++ compiler... yes
+    --- checking whether g++ accepts -g... yes
+    --- checking dependency style of g++... gcc3
+    --- checking for ranlib... ranlib
+    --- checking for a BSD-compatible install... /usr/bin/install -c
+    --- checking how to run the C preprocessor... gcc -E
+    --- checking for grep that handles long lines and -e... /usr/bin/grep
+    --- checking for egrep... /usr/bin/grep -E
+    --- checking for ANSI C header files... yes
+    --- checking for sys/types.h... yes
+    --- checking for sys/stat.h... yes
+    --- checking for stdlib.h... yes
+    --- checking for string.h... yes
+    --- checking for memory.h... yes
+    --- checking for strings.h... yes
+    --- checking for inttypes.h... yes
+    --- checking for stdint.h... yes
+    --- checking for unistd.h... yes
+    --- checking for stdbool.h that conforms to C99... yes
+    --- checking for _Bool... yes
+    --- checking for an ANSI C-conforming const... yes
+    --- checking for size_t... yes
+    --- checking for stdlib.h... (cached) yes
+    --- checking for GNU libc compatible malloc... yes
+    --- configure: creating ./config.status
+    --- config.status: creating Makefile
+    --- config.status: creating m4/Makefile
+    --- config.status: creating src/Makefile
+    --- config.status: creating src/clustalw_version.h
+    --- config.status: creating src/config.h
+    --- config.status: executing depfiles commands
+    --- make[1]: Entering directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10'
+    --- Making all in m4
+    --- make[2]: Entering directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10/m4'
+    --- make[2]: Nothing to be done for `all'.
+    --- make[2]: Leaving directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10/m4'
+    --- Making all in src
+    --- make[2]: Entering directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10/src'
+    --- make  all-recursive
+    --- make[3]: Entering directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10/src'
+    --- make[4]: Entering directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10/src'
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT FullPairwiseAlign.o -MD -MP -MF .deps/FullPairwiseAlign.Tpo -c -o FullPairwiseAlign.o `test -f './pairwise/FullPairwiseAlign.cpp' || echo './'`./pairwise/FullPairwiseAlign.cpp
+    --- mv -f .deps/FullPairwiseAlign.Tpo .deps/FullPairwiseAlign.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT FastPairwiseAlign.o -MD -MP -MF .deps/FastPairwiseAlign.Tpo -c -o FastPairwiseAlign.o `test -f './pairwise/FastPairwiseAlign.cpp' || echo './'`./pairwise/FastPairwiseAlign.cpp
+    --- mv -f .deps/FastPairwiseAlign.Tpo .deps/FastPairwiseAlign.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT MSFFileParser.o -MD -MP -MF .deps/MSFFileParser.Tpo -c -o MSFFileParser.o `test -f './fileInput/MSFFileParser.cpp' || echo './'`./fileInput/MSFFileParser.cpp
+    --- mv -f .deps/MSFFileParser.Tpo .deps/MSFFileParser.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT FileReader.o -MD -MP -MF .deps/FileReader.Tpo -c -o FileReader.o `test -f './fileInput/FileReader.cpp' || echo './'`./fileInput/FileReader.cpp
+    --- mv -f .deps/FileReader.Tpo .deps/FileReader.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT PIRFileParser.o -MD -MP -MF .deps/PIRFileParser.Tpo -c -o PIRFileParser.o `test -f './fileInput/PIRFileParser.cpp' || echo './'`./fileInput/PIRFileParser.cpp
+    --- mv -f .deps/PIRFileParser.Tpo .deps/PIRFileParser.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT RSFFileParser.o -MD -MP -MF .deps/RSFFileParser.Tpo -c -o RSFFileParser.o `test -f './fileInput/RSFFileParser.cpp' || echo './'`./fileInput/RSFFileParser.cpp
+    --- mv -f .deps/RSFFileParser.Tpo .deps/RSFFileParser.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT GDEFileParser.o -MD -MP -MF .deps/GDEFileParser.Tpo -c -o GDEFileParser.o `test -f './fileInput/GDEFileParser.cpp' || echo './'`./fileInput/GDEFileParser.cpp
+    --- mv -f .deps/GDEFileParser.Tpo .deps/GDEFileParser.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT InFileStream.o -MD -MP -MF .deps/InFileStream.Tpo -c -o InFileStream.o `test -f './fileInput/InFileStream.cpp' || echo './'`./fileInput/InFileStream.cpp
+    --- mv -f .deps/InFileStream.Tpo .deps/InFileStream.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT ClustalFileParser.o -MD -MP -MF .deps/ClustalFileParser.Tpo -c -o ClustalFileParser.o `test -f './fileInput/ClustalFileParser.cpp' || echo './'`./fileInput/ClustalFileParser.cpp
+    --- mv -f .deps/ClustalFileParser.Tpo .deps/ClustalFileParser.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT PearsonFileParser.o -MD -MP -MF .deps/PearsonFileParser.Tpo -c -o PearsonFileParser.o `test -f './fileInput/PearsonFileParser.cpp' || echo './'`./fileInput/PearsonFileParser.cpp
+    --- mv -f .deps/PearsonFileParser.Tpo .deps/PearsonFileParser.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT FileParser.o -MD -MP -MF .deps/FileParser.Tpo -c -o FileParser.o `test -f './fileInput/FileParser.cpp' || echo './'`./fileInput/FileParser.cpp
+    --- mv -f .deps/FileParser.Tpo .deps/FileParser.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT EMBLFileParser.o -MD -MP -MF .deps/EMBLFileParser.Tpo -c -o EMBLFileParser.o `test -f './fileInput/EMBLFileParser.cpp' || echo './'`./fileInput/EMBLFileParser.cpp
+    --- mv -f .deps/EMBLFileParser.Tpo .deps/EMBLFileParser.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT RootedClusterTree.o -MD -MP -MF .deps/RootedClusterTree.Tpo -c -o RootedClusterTree.o `test -f './tree/UPGMA/RootedClusterTree.cpp' || echo './'`./tree/UPGMA/RootedClusterTree.cpp
+    --- mv -f .deps/RootedClusterTree.Tpo .deps/RootedClusterTree.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT UPGMAAlgorithm.o -MD -MP -MF .deps/UPGMAAlgorithm.Tpo -c -o UPGMAAlgorithm.o `test -f './tree/UPGMA/UPGMAAlgorithm.cpp' || echo './'`./tree/UPGMA/UPGMAAlgorithm.cpp
+    --- mv -f .deps/UPGMAAlgorithm.Tpo .deps/UPGMAAlgorithm.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT Node.o -MD -MP -MF .deps/Node.Tpo -c -o Node.o `test -f './tree/UPGMA/Node.cpp' || echo './'`./tree/UPGMA/Node.cpp
+    --- mv -f .deps/Node.Tpo .deps/Node.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT RootedGuideTree.o -MD -MP -MF .deps/RootedGuideTree.Tpo -c -o RootedGuideTree.o `test -f './tree/UPGMA/RootedGuideTree.cpp' || echo './'`./tree/UPGMA/RootedGuideTree.cpp
+    --- mv -f .deps/RootedGuideTree.Tpo .deps/RootedGuideTree.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT RootedTreeOutput.o -MD -MP -MF .deps/RootedTreeOutput.Tpo -c -o RootedTreeOutput.o `test -f './tree/UPGMA/RootedTreeOutput.cpp' || echo './'`./tree/UPGMA/RootedTreeOutput.cpp
+    --- mv -f .deps/RootedTreeOutput.Tpo .deps/RootedTreeOutput.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT Tree.o -MD -MP -MF .deps/Tree.Tpo -c -o Tree.o `test -f './tree/Tree.cpp' || echo './'`./tree/Tree.cpp
+    --- mv -f .deps/Tree.Tpo .deps/Tree.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT ClusterTree.o -MD -MP -MF .deps/ClusterTree.Tpo -c -o ClusterTree.o `test -f './tree/ClusterTree.cpp' || echo './'`./tree/ClusterTree.cpp
+    --- mv -f .deps/ClusterTree.Tpo .deps/ClusterTree.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT TreeInterface.o -MD -MP -MF .deps/TreeInterface.Tpo -c -o TreeInterface.o `test -f './tree/TreeInterface.cpp' || echo './'`./tree/TreeInterface.cpp
+    --- mv -f .deps/TreeInterface.Tpo .deps/TreeInterface.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT UnRootedClusterTree.o -MD -MP -MF .deps/UnRootedClusterTree.Tpo -c -o UnRootedClusterTree.o `test -f './tree/UnRootedClusterTree.cpp' || echo './'`./tree/UnRootedClusterTree.cpp
+    --- mv -f .deps/UnRootedClusterTree.Tpo .deps/UnRootedClusterTree.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT ClusterTreeOutput.o -MD -MP -MF .deps/ClusterTreeOutput.Tpo -c -o ClusterTreeOutput.o `test -f './tree/ClusterTreeOutput.cpp' || echo './'`./tree/ClusterTreeOutput.cpp
+    --- mv -f .deps/ClusterTreeOutput.Tpo .deps/ClusterTreeOutput.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT RandomGenerator.o -MD -MP -MF .deps/RandomGenerator.Tpo -c -o RandomGenerator.o `test -f './tree/RandomGenerator.cpp' || echo './'`./tree/RandomGenerator.cpp
+    --- mv -f .deps/RandomGenerator.Tpo .deps/RandomGenerator.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT NJTree.o -MD -MP -MF .deps/NJTree.Tpo -c -o NJTree.o `test -f './tree/NJTree.cpp' || echo './'`./tree/NJTree.cpp
+    --- mv -f .deps/NJTree.Tpo .deps/NJTree.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT AlignmentSteps.o -MD -MP -MF .deps/AlignmentSteps.Tpo -c -o AlignmentSteps.o `test -f './tree/AlignmentSteps.cpp' || echo './'`./tree/AlignmentSteps.cpp
+    --- mv -f .deps/AlignmentSteps.Tpo .deps/AlignmentSteps.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT InteractiveMenu.o -MD -MP -MF .deps/InteractiveMenu.Tpo -c -o InteractiveMenu.o `test -f './interface/InteractiveMenu.cpp' || echo './'`./interface/InteractiveMenu.cpp
+    --- mv -f .deps/InteractiveMenu.Tpo .deps/InteractiveMenu.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT CommandLineParser.o -MD -MP -MF .deps/CommandLineParser.Tpo -c -o CommandLineParser.o `test -f './interface/CommandLineParser.cpp' || echo './'`./interface/CommandLineParser.cpp
+    --- mv -f .deps/CommandLineParser.Tpo .deps/CommandLineParser.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT SubMatrix.o -MD -MP -MF .deps/SubMatrix.Tpo -c -o SubMatrix.o `test -f './substitutionMatrix/SubMatrix.cpp' || echo './'`./substitutionMatrix/SubMatrix.cpp
+    --- mv -f .deps/SubMatrix.Tpo .deps/SubMatrix.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT Iteration.o -MD -MP -MF .deps/Iteration.Tpo -c -o Iteration.o `test -f './multipleAlign/Iteration.cpp' || echo './'`./multipleAlign/Iteration.cpp
+    --- mv -f .deps/Iteration.Tpo .deps/Iteration.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT MSA.o -MD -MP -MF .deps/MSA.Tpo -c -o MSA.o `test -f './multipleAlign/MSA.cpp' || echo './'`./multipleAlign/MSA.cpp
+    --- mv -f .deps/MSA.Tpo .deps/MSA.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT MyersMillerProfileAlign.o -MD -MP -MF .deps/MyersMillerProfileAlign.Tpo -c -o MyersMillerProfileAlign.o `test -f './multipleAlign/MyersMillerProfileAlign.cpp' || echo './'`./multipleAlign/MyersMillerProfileAlign.cpp
+    --- mv -f .deps/MyersMillerProfileAlign.Tpo .deps/MyersMillerProfileAlign.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT ProfileStandard.o -MD -MP -MF .deps/ProfileStandard.Tpo -c -o ProfileStandard.o `test -f './multipleAlign/ProfileStandard.cpp' || echo './'`./multipleAlign/ProfileStandard.cpp
+    --- mv -f .deps/ProfileStandard.Tpo .deps/ProfileStandard.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT ProfileWithSub.o -MD -MP -MF .deps/ProfileWithSub.Tpo -c -o ProfileWithSub.o `test -f './multipleAlign/ProfileWithSub.cpp' || echo './'`./multipleAlign/ProfileWithSub.cpp
+    --- mv -f .deps/ProfileWithSub.Tpo .deps/ProfileWithSub.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT ProfileBase.o -MD -MP -MF .deps/ProfileBase.Tpo -c -o ProfileBase.o `test -f './multipleAlign/ProfileBase.cpp' || echo './'`./multipleAlign/ProfileBase.cpp
+    --- mv -f .deps/ProfileBase.Tpo .deps/ProfileBase.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT LowScoreSegProfile.o -MD -MP -MF .deps/LowScoreSegProfile.Tpo -c -o LowScoreSegProfile.o `test -f './multipleAlign/LowScoreSegProfile.cpp' || echo './'`./multipleAlign/LowScoreSegProfile.cpp
+    --- mv -f .deps/LowScoreSegProfile.Tpo .deps/LowScoreSegProfile.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT OutputFile.o -MD -MP -MF .deps/OutputFile.Tpo -c -o OutputFile.o `test -f './general/OutputFile.cpp' || echo './'`./general/OutputFile.cpp
+    --- mv -f .deps/OutputFile.Tpo .deps/OutputFile.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT UserParameters.o -MD -MP -MF .deps/UserParameters.Tpo -c -o UserParameters.o `test -f './general/UserParameters.cpp' || echo './'`./general/UserParameters.cpp
+    --- mv -f .deps/UserParameters.Tpo .deps/UserParameters.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT Utility.o -MD -MP -MF .deps/Utility.Tpo -c -o Utility.o `test -f './general/Utility.cpp' || echo './'`./general/Utility.cpp
+    --- mv -f .deps/Utility.Tpo .deps/Utility.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT InvalidCombination.o -MD -MP -MF .deps/InvalidCombination.Tpo -c -o InvalidCombination.o `test -f './general/InvalidCombination.cpp' || echo './'`./general/InvalidCombination.cpp
+    --- mv -f .deps/InvalidCombination.Tpo .deps/InvalidCombination.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT DebugLog.o -MD -MP -MF .deps/DebugLog.Tpo -c -o DebugLog.o `test -f './general/DebugLog.cpp' || echo './'`./general/DebugLog.cpp
+    --- mv -f .deps/DebugLog.Tpo .deps/DebugLog.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT ClustalWResources.o -MD -MP -MF .deps/ClustalWResources.Tpo -c -o ClustalWResources.o `test -f './general/ClustalWResources.cpp' || echo './'`./general/ClustalWResources.cpp
+    --- mv -f .deps/ClustalWResources.Tpo .deps/ClustalWResources.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT VectorOutOfRange.o -MD -MP -MF .deps/VectorOutOfRange.Tpo -c -o VectorOutOfRange.o `test -f './general/VectorOutOfRange.cpp' || echo './'`./general/VectorOutOfRange.cpp
+    --- mv -f .deps/VectorOutOfRange.Tpo .deps/VectorOutOfRange.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT SymMatrix.o -MD -MP -MF .deps/SymMatrix.Tpo -c -o SymMatrix.o `test -f './general/SymMatrix.cpp' || echo './'`./general/SymMatrix.cpp
+    --- mv -f .deps/SymMatrix.Tpo .deps/SymMatrix.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT Stats.o -MD -MP -MF .deps/Stats.Tpo -c -o Stats.o `test -f './general/Stats.cpp' || echo './'`./general/Stats.cpp
+    --- mv -f .deps/Stats.Tpo .deps/Stats.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT Help.o -MD -MP -MF .deps/Help.Tpo -c -o Help.o `test -f './Help.cpp' || echo './'`./Help.cpp
+    --- mv -f .deps/Help.Tpo .deps/Help.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT Alignment.o -MD -MP -MF .deps/Alignment.Tpo -c -o Alignment.o `test -f './alignment/Alignment.cpp' || echo './'`./alignment/Alignment.cpp
+    --- mv -f .deps/Alignment.Tpo .deps/Alignment.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT AlignmentOutput.o -MD -MP -MF .deps/AlignmentOutput.Tpo -c -o AlignmentOutput.o `test -f './alignment/AlignmentOutput.cpp' || echo './'`./alignment/AlignmentOutput.cpp
+    --- mv -f .deps/AlignmentOutput.Tpo .deps/AlignmentOutput.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT ObjectiveScore.o -MD -MP -MF .deps/ObjectiveScore.Tpo -c -o ObjectiveScore.o `test -f './alignment/ObjectiveScore.cpp' || echo './'`./alignment/ObjectiveScore.cpp
+    --- mv -f .deps/ObjectiveScore.Tpo .deps/ObjectiveScore.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT Sequence.o -MD -MP -MF .deps/Sequence.Tpo -c -o Sequence.o `test -f './alignment/Sequence.cpp' || echo './'`./alignment/Sequence.cpp
+    --- mv -f .deps/Sequence.Tpo .deps/Sequence.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT Clustal.o -MD -MP -MF .deps/Clustal.Tpo -c -o Clustal.o `test -f './Clustal.cpp' || echo './'`./Clustal.cpp
+    --- mv -f .deps/Clustal.Tpo .deps/Clustal.Po
+    --- g++ -DHAVE_CONFIG_H -I. -I../    -g -O2 -MT main.o -MD -MP -MF .deps/main.Tpo -c -o main.o `test -f './main.cpp' || echo './'`./main.cpp
+    --- mv -f .deps/main.Tpo .deps/main.Po
+    --- g++  -g -O2   -o clustalw2.exe FullPairwiseAlign.o FastPairwiseAlign.o MSFFileParser.o FileReader.o PIRFileParser.o RSFFileParser.o GDEFileParser.o InFileStream.o ClustalFileParser.o PearsonFileParser.o FileParser.o EMBLFileParser.o RootedClusterTree.o UPGMAAlgorithm.o Node.o RootedGuideTree.o RootedTreeOutput.o Tree.o ClusterTree.o TreeInterface.o UnRootedClusterTree.o ClusterTreeOutput.o RandomGenerator.o NJTree.o AlignmentSteps.o InteractiveMenu.o CommandLineParser.o SubMatrix.o Iteration.o MSA.o MyersMillerProfileAlign.o ProfileStandard.o ProfileWithSub.o ProfileBase.o LowScoreSegProfile.o OutputFile.o UserParameters.o Utility.o InvalidCombination.o DebugLog.o ClustalWResources.o VectorOutOfRange.o SymMatrix.o Stats.o Help.o Alignment.o AlignmentOutput.o ObjectiveScore.o Sequence.o Clustal.o main.o  
+    --- make[4]: Leaving directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10/src'
+    --- make[3]: Leaving directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10/src'
+    --- make[2]: Leaving directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10/src'
+    --- make[2]: Entering directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10'
+    --- make[2]: Nothing to be done for `all-am'.
+    --- make[2]: Leaving directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10'
+    --- make[1]: Leaving directory `/home/notredame/projects/c.svn/trunk/t_coffee/src/check_distribution_dir/bin/download/distributions/clustalw2/clustalw-2.0.10'
+------- Finishing The installation
+
+*********************************************************************
+********              INSTALLATION SUMMARY          *****************
+*********************************************************************
+------- SUMMARY package Installation:
+*------        clustalw2   : installed 
+
+INPUT FILES
+	Input File (M) clustalw2_msa 
+	Input File (M) t_coffee_msa 
+	Input File (M) poa_msa 
+	Input File (M) muscle_msa 
+	Input File (M) mafft_msa 
+	Input File (M) dialignt_msa 
+	Input File (M) pcma_msa 
+	Input File (M) probcons_msa 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+
+COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
+
+	Seq: hmgb_chite
+	Seq: hmgl_trybr
+	Seq: hmgl_wheat
+	Seq: hmgt_mouse
+
+	Multi Core Mode: 2 processors:
+
+	--- Process Method/Library/Aln Mclustalw2_msa
+	--- Process Method/Library/Aln Mt_coffee_msa
+	xxx Retrieved Mt_coffee_msa
+	--- Process Method/Library/Aln Mpoa_msa
+	xxx Retrieved Mpoa_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	xxx Retrieved Mmuscle_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	xxx Retrieved Mmafft_msa
+	--- Process Method/Library/Aln Mdialignt_msa
+
+The Format of File: .TCtmp/44852040_1492_TCtmp was not recognized [SERIOUS:T-COFFEE]
+
+The Format of File: .TCtmp/44852040_1492_TCtmp was not recognized [SERIOUS:T-COFFEE]
+
+FAILED TO EXECUTE:mafft   --localpair --maxiterate 1000     .TCtmp/44852040_1493_TCtmp  >.TCtmp/44852040_1492_TCtmp         2>/dev/null   [SERIOUS:T-COFFEE]
+WARNING RECAPITULATION: 3 Warnings [PROGRAM: T-COFFEE]
+**WARNING:   1** 
+The Format of File: .TCtmp/44852040_1492_TCtmp was not recognized [SERIOUS:T-COFFEE]
+**WARNING:   2** 
+The Format of File: .TCtmp/44852040_1492_TCtmp was not recognized [SERIOUS:T-COFFEE]
+**WARNING:   3** 
+FAILED TO EXECUTE:mafft   --localpair --maxiterate 1000     .TCtmp/44852040_1493_TCtmp  >.TCtmp/44852040_1492_TCtmp         2>/dev/null   [SERIOUS:T-COFFEE]
+
+	xxx Retrieved Mdialignt_msa
+	--- Process Method/Library/Aln Mpcma_msa
+	xxx Retrieved Mpcma_msa
+	--- Process Method/Library/Aln Mprobcons_msa
+	xxx Retrieved Mprobcons_msa
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mprobcons_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [560]
+
+Library Relaxation: Multi_proc [2] 
+		[Submit   Job][TOT=  280][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][  1 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][  2 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][  3 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][  4 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][  5 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][  6 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][  7 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][  8 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][  9 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 10 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 11 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 12 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 13 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 14 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 15 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 16 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 17 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 18 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 19 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 20 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 21 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 22 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 23 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 24 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 25 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 26 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 27 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 28 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 29 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 30 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 31 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 32 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 33 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 34 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 35 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 36 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 37 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 38 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 39 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 40 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 41 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 42 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 43 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 44 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 45 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 46 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 47 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 48 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 49 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 50 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 51 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 52 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 53 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 54 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 55 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 56 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 57 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 58 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 59 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 60 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 61 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 62 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 63 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 64 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 65 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 67 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 68 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 69 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 70 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 71 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 72 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 73 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 74 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 75 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 76 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 77 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 78 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 79 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 80 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 81 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 82 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 83 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 84 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 85 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 86 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 87 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 88 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 89 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 90 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 91 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 92 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 93 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 94 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 95 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 96 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 97 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 98 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][ 99 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  280][100 %][ELAPSED TIME:    0 sec.]
+Total Relaxation: [560]--->[560] Entries
+
+	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
+
+
+WEIGHTED MODE:t_coffee
+
+	hmgb_chite 1.00
+	hmgl_trybr 0.97
+	hmgl_wheat 1.01
+	hmgt_mouse 1.01
+
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Score=  58][Len=   77][PID:5600]
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  85][Len=   79][PID:2184]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Score=  75][Len=   82][PID:4628][Forked]
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE Format=     newick Name= sample_seq1.dnd
+	#### File Type=        MSA Format=        aln Name= sample_seq1.aln
+	#### File Type=        MSA Format=       html Name= sample_seq1.html
+
+
+# TIP :See The Full Documentation on www.tcoffee.org
+# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
+# TIP 15:  -version to check for updates
+
+# Command Line: t_coffee sample_seq1.fasta -mode mcoffee  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 7.708 Mb, Max= 8.490 Mb
+# T-COFFEE CPU Usage: 578 millisec
+# Results Produced with T-COFFEE (Version_8.07)
+# T-COFFEE is available from http://www.tcoffee.org
+CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE: mcoffee ], CPU=0.56 sec, SCORE=83, Nseq=4, Len=82 
+
+hmgl_trybr      kkdsnapkramtsf-mffssdfrskhs----dls-ivemskaagaawkelgpeerkvyee
+hmgt_mouse      -----kpkrprsayniyvsesfqea-k----dds-aqgklklvneawknlspeekqayiq
+hmgb_chite      ---adkpkrplsay-mlwlnsaresikrenpdfk-vtevakkggelwr--glkdksewea
+hmgl_wheat      --dpnkpkrapsaf-fvfmgefreefkqknpknksvaavgkaagerwkslsesekapyva
+                      ***. ::: :    . :.  .    . .      *  .  *:  . .::  :  
+
+hmgl_trybr      maekdkerykrem---------
+hmgt_mouse      lakddrirydnemksweeqmae
+hmgb_chite      kaatakqnyiralqeyerng-g
+hmgl_wheat      kanklkgeynkaiaaynkgesa
+                 *   : .* . :         
+
+
+

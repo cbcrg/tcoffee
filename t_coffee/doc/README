@@ -1,0 +1,50 @@
+README for T-Coffee installation version 6.70 and higer
+
+UNIX/LINUX/Mac OSX
+
+T-Coffee requires gcc, g77, makefile, CPAN, an internet connection and your root password	
+	
+
+   1. Download and save the Package
+   2. gunzip t_coffee.tar.gz
+   3. tar -xvf t_coffee.tar
+   4. cd T-COFFEE_distribution_Version_X.XX
+   5. ./install
+
+This installation procedure is semi-interactive. It will prompt questions here and there. You can interrupt it any time and resume it later.
+
+
+The install procedure carries out three distinct tasks: Compilation of T-Coffee (C program), Compilation and Installation of SOAP::Lite (Perl Module), Download/Compilation and Installation of all the T-Coffee companion packages required for all possible T-Coffee flavors (tcoffee,expresso,3dcoffee,mcoffee,rcoffee). Except for T-Coffee, the installer will only install the packages that are NOT already on your computer. If you want a lighter or more specific installation, you can try any of the following:
+		
+
+   1. ./install tcoffee
+   2. ./install rcoffee
+   3. ./install expresso
+   4. ./install 3dcoffee
+   5. ./install 3dcoffee 
+
+
+While Installing SOAP::Lite, CPAN will ask you many questions: say Yes to all or type return to keep the default values. If everything went well, the procedure has created in the bin directory two executables: t_coffee and TMalign (Make sure these executables are on your $PATH!).
+
+
+If you have not managed to install SOAP::Lite, you can re-install it anytime (from anywhere) using steps 1-2
+
+If you cannot log as root, or if for some reason this procedure does not work, see with your system manager and/or go directly to the CPAN repository of SOAP::Lite. You will still be able to use the most basic functions of T-Coffee.
+
+
+	
+IMPORTANT: The purpose of SOAP::Lite is to allow T-Coffee the use of the EBI webservices such as webblast. BLAST brings many functionalities to T-Coffee and if you cannot install SOAP we suggest you go to the Installing BLAST for T-Coffee section of the Technical Doumentation (in the Installation section). There you will find alternative ways of using BLAST without SOAP. It is also in this document that you will find all the information required for a full installation of T-Coffee
+
+Microsoft Windows/Cygwin
+
+Install Cygwin
+
+    * Download The Installer (NOT Cygwin/X)
+    * Click on view to list ALL the packages
+    * Select: gcc-core, make, wget
+    * Optional: ssh, xemacs, nano
+    * Run mkpasswd in Cywin (as requested when you start cygwin)
+
+Install T-Coffee within Cygwin using the Unix procedure (see above)
+
+

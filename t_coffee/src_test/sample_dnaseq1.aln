@@ -1,0 +1,24 @@
+CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.20 sec, SCORE=37, Nseq=3, Len=189 
+
+seq1            GTGAACCTGCGGAAGGATCATTATCGAGTCCAATCCAGCTCATTTCTGGCTGTGCATTCA
+seq2            -TCATTTAGAGGAAGTAA-------AAGTCGTAACAAGG---TTTCCGTAGGTG----AA
+seq3            -TCATTTAGAGGAAGTAA-------AAGTCGTAACAAGG---TTTCCGTAGGTG----AA
+                 * *    * ***** *         ****  * * **    **** *   ***     *
+
+seq1            CTTGCACGCCGGGGCG-A-------GTTGGCTCTTG-AACT--TCTCACACCTGTGCACC
+seq2            CCTGCGG-AAGGATCATTATCGAAGAGCAACTCTTCATACACC-CTGTGAACTGTC-GTC
+seq3            CCTGCGG-AAGGATCATT-------ATTGAAACTTCTAAGTTTTAACACACCTGTGAACC
+                * ***     **  *                 ***   *          * ****    *
+
+seq1            TTCTCGTGC-----CTTCTCCGTCGTCGTC-----CT-T--TGTTGGGTGACTCCACCGC
+seq2            TTAGGACGCAATATAAACTCTAGTGTTGTC-----AA-T--GAAAGTGTTATACCATAAC
+seq3            TGTACATTCC----CTTCGGGGTCTTACACACAAACTCTAGTGTCGT--CTATGTATGTC
+                *       *        *       *   *        *      *         *   *
+
+seq1            -----TCGC
+seq2            A---AGCAT
+seq3            TAGTTATAT
+                         
+
+
+

@@ -1,0 +1,7091 @@
+%!PS-Adobe-2.0
+/Courier findfont
+9 scalefont
+setfont
+%%Pages: (atend)
+newpath
+%%Page:  1 1
+15 750 translate
+0 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+1 3 moveto
+(T) show
+7 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+8 3 moveto
+(-) show
+14 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+15 3 moveto
+(C) show
+21 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+22 3 moveto
+(O) show
+28 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+29 3 moveto
+(F) show
+35 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+36 3 moveto
+(F) show
+42 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+43 3 moveto
+(E) show
+49 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+50 3 moveto
+(E) show
+56 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+57 3 moveto
+(,) show
+63 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+64 3 moveto
+( ) show
+70 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+71 3 moveto
+(V) show
+77 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+78 3 moveto
+(e) show
+84 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+85 3 moveto
+(r) show
+91 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+92 3 moveto
+(s) show
+98 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+99 3 moveto
+(i) show
+105 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+106 3 moveto
+(o) show
+112 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+113 3 moveto
+(n) show
+119 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+120 3 moveto
+(_) show
+126 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+127 3 moveto
+(2) show
+133 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+134 3 moveto
+(.) show
+140 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+141 3 moveto
+(5) show
+147 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+148 3 moveto
+(6) show
+154 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+155 3 moveto
+(W) show
+161 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+162 3 moveto
+(e) show
+168 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+169 3 moveto
+(d) show
+175 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+176 3 moveto
+( ) show
+182 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+183 3 moveto
+(M) show
+189 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+190 3 moveto
+(a) show
+196 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+197 3 moveto
+(y) show
+203 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+204 3 moveto
+( ) show
+210 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+211 3 moveto
+(1) show
+217 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+218 3 moveto
+(8) show
+224 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+225 3 moveto
+( ) show
+231 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+232 3 moveto
+(2) show
+238 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+239 3 moveto
+(3) show
+245 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+246 3 moveto
+(:) show
+252 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+253 3 moveto
+(5) show
+259 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+260 3 moveto
+(5) show
+266 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+267 3 moveto
+(:) show
+273 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+274 3 moveto
+(4) show
+280 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+281 3 moveto
+(1) show
+287 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+288 3 moveto
+( ) show
+294 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+295 3 moveto
+(2) show
+301 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+302 3 moveto
+(0) show
+308 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+309 3 moveto
+(0) show
+315 0 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+316 3 moveto
+(5) show
+15 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -9 moveto
+(C) show
+22 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -9 moveto
+(e) show
+29 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -9 moveto
+(d) show
+36 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -9 moveto
+(r) show
+43 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -9 moveto
+(i) show
+50 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -9 moveto
+(c) show
+57 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -9 moveto
+( ) show
+64 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -9 moveto
+(N) show
+71 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -9 moveto
+(o) show
+78 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -9 moveto
+(t) show
+85 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -9 moveto
+(r) show
+92 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -9 moveto
+(e) show
+99 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -9 moveto
+(d) show
+106 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -9 moveto
+(a) show
+113 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -9 moveto
+(m) show
+120 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -9 moveto
+(e) show
+127 -12 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -9 moveto
+( ) show
+15 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -21 moveto
+(C) show
+22 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -21 moveto
+(P) show
+29 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -21 moveto
+(U) show
+36 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -21 moveto
+( ) show
+43 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -21 moveto
+(T) show
+50 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -21 moveto
+(I) show
+57 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -21 moveto
+(M) show
+64 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -21 moveto
+(E) show
+71 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -21 moveto
+(:) show
+78 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -21 moveto
+(0) show
+85 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -21 moveto
+( ) show
+92 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -21 moveto
+(s) show
+99 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -21 moveto
+(e) show
+106 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -21 moveto
+(c) show
+113 -24 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -21 moveto
+(.) show
+15 -36 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -33 moveto
+(S) show
+22 -36 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -33 moveto
+(C) show
+29 -36 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -33 moveto
+(O) show
+36 -36 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -33 moveto
+(R) show
+43 -36 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -33 moveto
+(E) show
+50 -36 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -33 moveto
+(=) show
+57 -36 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -33 moveto
+(3) show
+64 -36 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -33 moveto
+(1) show
+15 -48 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -45 moveto
+(*) show
+15 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -57 moveto
+( ) show
+22 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.4 0.4 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -57 moveto
+(B) show
+29 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -57 moveto
+(A) show
+36 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -57 moveto
+(D) show
+43 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -57 moveto
+( ) show
+50 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -57 moveto
+(A) show
+57 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -57 moveto
+(V) show
+64 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.6 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -57 moveto
+(G) show
+71 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.4 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -57 moveto
+( ) show
+78 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.2 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -57 moveto
+(G) show
+85 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -57 moveto
+(O) show
+92 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -57 moveto
+(O) show
+99 -60 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -57 moveto
+(D) show
+15 -72 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -69 moveto
+(*) show
+15 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -81 moveto
+(h) show
+22 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -81 moveto
+(m) show
+29 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -81 moveto
+(g) show
+36 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -81 moveto
+(b) show
+43 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -81 moveto
+(_) show
+50 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -81 moveto
+(c) show
+57 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -81 moveto
+(h) show
+64 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -81 moveto
+(i) show
+71 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -81 moveto
+(t) show
+78 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -81 moveto
+(e) show
+85 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -81 moveto
+( ) show
+92 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -81 moveto
+( ) show
+99 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -81 moveto
+( ) show
+106 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -81 moveto
+(:) show
+113 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -81 moveto
+( ) show
+120 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -81 moveto
+( ) show
+127 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -81 moveto
+(3) show
+134 -84 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -81 moveto
+(1) show
+15 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -93 moveto
+(h) show
+22 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -93 moveto
+(m) show
+29 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -93 moveto
+(g) show
+36 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -93 moveto
+(t) show
+43 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -93 moveto
+(_) show
+50 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -93 moveto
+(m) show
+57 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -93 moveto
+(o) show
+64 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -93 moveto
+(u) show
+71 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -93 moveto
+(s) show
+78 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -93 moveto
+(e) show
+85 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -93 moveto
+( ) show
+92 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -93 moveto
+( ) show
+99 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -93 moveto
+( ) show
+106 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -93 moveto
+(:) show
+113 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -93 moveto
+( ) show
+120 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -93 moveto
+( ) show
+127 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -93 moveto
+(2) show
+134 -96 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -93 moveto
+(9) show
+15 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -105 moveto
+(h) show
+22 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -105 moveto
+(m) show
+29 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -105 moveto
+(g) show
+36 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -105 moveto
+(l) show
+43 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -105 moveto
+(_) show
+50 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -105 moveto
+(w) show
+57 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -105 moveto
+(h) show
+64 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -105 moveto
+(e) show
+71 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -105 moveto
+(a) show
+78 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -105 moveto
+(t) show
+85 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -105 moveto
+( ) show
+92 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -105 moveto
+( ) show
+99 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -105 moveto
+( ) show
+106 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -105 moveto
+(:) show
+113 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -105 moveto
+( ) show
+120 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -105 moveto
+( ) show
+127 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -105 moveto
+(3) show
+134 -108 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -105 moveto
+(2) show
+15 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -117 moveto
+(h) show
+22 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -117 moveto
+(m) show
+29 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -117 moveto
+(g) show
+36 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -117 moveto
+(l) show
+43 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -117 moveto
+(_) show
+50 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -117 moveto
+(t) show
+57 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -117 moveto
+(r) show
+64 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -117 moveto
+(y) show
+71 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -117 moveto
+(b) show
+78 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -117 moveto
+(r) show
+85 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -117 moveto
+( ) show
+92 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -117 moveto
+( ) show
+99 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -117 moveto
+( ) show
+106 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -117 moveto
+(:) show
+113 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -117 moveto
+( ) show
+120 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -117 moveto
+( ) show
+127 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -117 moveto
+(3) show
+134 -120 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -117 moveto
+(1) show
+15 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -141 moveto
+(h) show
+22 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -141 moveto
+(m) show
+29 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -141 moveto
+(g) show
+36 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -141 moveto
+(b) show
+43 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -141 moveto
+(_) show
+50 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -141 moveto
+(c) show
+57 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -141 moveto
+(h) show
+64 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -141 moveto
+(i) show
+71 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -141 moveto
+(t) show
+78 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -141 moveto
+(e) show
+85 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -141 moveto
+( ) show
+92 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -141 moveto
+( ) show
+99 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -141 moveto
+( ) show
+106 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -141 moveto
+(-) show
+113 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -141 moveto
+(-) show
+120 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -141 moveto
+(-) show
+127 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -141 moveto
+(A) show
+134 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -141 moveto
+(D) show
+141 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -141 moveto
+(K) show
+148 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -141 moveto
+(P) show
+155 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -141 moveto
+(K) show
+162 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -141 moveto
+(R) show
+169 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -141 moveto
+(P) show
+176 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -141 moveto
+(L) show
+183 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -141 moveto
+(S) show
+190 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -141 moveto
+(A) show
+197 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -141 moveto
+(Y) show
+204 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -141 moveto
+(M) show
+211 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -141 moveto
+(L) show
+218 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -141 moveto
+(W) show
+225 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -141 moveto
+(L) show
+232 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -141 moveto
+(N) show
+239 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -141 moveto
+(S) show
+246 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -141 moveto
+(A) show
+253 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -141 moveto
+(R) show
+260 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -141 moveto
+(E) show
+267 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -141 moveto
+(S) show
+274 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -141 moveto
+(I) show
+281 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -141 moveto
+(K) show
+288 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -141 moveto
+(R) show
+295 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -141 moveto
+(E) show
+302 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -141 moveto
+(N) show
+309 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -141 moveto
+(P) show
+316 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -141 moveto
+(D) show
+323 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -141 moveto
+(F) show
+330 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -141 moveto
+(K) show
+337 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+338 -141 moveto
+(-) show
+344 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+345 -141 moveto
+(V) show
+351 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+352 -141 moveto
+(T) show
+358 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+359 -141 moveto
+(E) show
+365 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+366 -141 moveto
+(V) show
+372 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+373 -141 moveto
+(A) show
+379 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+380 -141 moveto
+(K) show
+386 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+387 -141 moveto
+(K) show
+393 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+394 -141 moveto
+(G) show
+400 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+401 -141 moveto
+(G) show
+407 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+408 -141 moveto
+(E) show
+414 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+415 -141 moveto
+(L) show
+421 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+422 -141 moveto
+(W) show
+428 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+429 -141 moveto
+(R) show
+435 -144 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+436 -141 moveto
+(G) show
+15 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -153 moveto
+(h) show
+22 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -153 moveto
+(m) show
+29 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -153 moveto
+(g) show
+36 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -153 moveto
+(t) show
+43 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -153 moveto
+(_) show
+50 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -153 moveto
+(m) show
+57 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -153 moveto
+(o) show
+64 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -153 moveto
+(u) show
+71 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -153 moveto
+(s) show
+78 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -153 moveto
+(e) show
+85 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -153 moveto
+( ) show
+92 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -153 moveto
+( ) show
+99 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -153 moveto
+( ) show
+106 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -153 moveto
+(-) show
+113 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -153 moveto
+(-) show
+120 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -153 moveto
+(-) show
+127 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -153 moveto
+(-) show
+134 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -153 moveto
+(-) show
+141 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -153 moveto
+(K) show
+148 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -153 moveto
+(P) show
+155 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -153 moveto
+(K) show
+162 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -153 moveto
+(R) show
+169 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -153 moveto
+(P) show
+176 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -153 moveto
+(R) show
+183 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -153 moveto
+(S) show
+190 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -153 moveto
+(A) show
+197 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -153 moveto
+(Y) show
+204 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -153 moveto
+(N) show
+211 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -153 moveto
+(I) show
+218 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -153 moveto
+(Y) show
+225 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -153 moveto
+(V) show
+232 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -153 moveto
+(S) show
+239 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -153 moveto
+(E) show
+246 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -153 moveto
+(S) show
+253 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -153 moveto
+(F) show
+260 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -153 moveto
+(Q) show
+267 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -153 moveto
+(E) show
+274 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -153 moveto
+(A) show
+281 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -153 moveto
+(K) show
+288 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -153 moveto
+(D) show
+295 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -153 moveto
+(D) show
+302 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -153 moveto
+(S) show
+309 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -153 moveto
+(A) show
+316 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -153 moveto
+(Q) show
+323 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -153 moveto
+(G) show
+330 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -153 moveto
+(K) show
+337 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+338 -153 moveto
+(-) show
+344 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+345 -153 moveto
+(-) show
+351 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+352 -153 moveto
+(-) show
+358 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+359 -153 moveto
+(-) show
+365 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+366 -153 moveto
+(-) show
+372 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.4 0.4 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+373 -153 moveto
+(L) show
+379 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+380 -153 moveto
+(K) show
+386 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+387 -153 moveto
+(L) show
+393 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+394 -153 moveto
+(V) show
+400 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+401 -153 moveto
+(N) show
+407 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+408 -153 moveto
+(E) show
+414 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+415 -153 moveto
+(A) show
+421 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+422 -153 moveto
+(W) show
+428 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+429 -153 moveto
+(K) show
+435 -156 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+436 -153 moveto
+(N) show
+15 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -165 moveto
+(h) show
+22 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -165 moveto
+(m) show
+29 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -165 moveto
+(g) show
+36 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -165 moveto
+(l) show
+43 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -165 moveto
+(_) show
+50 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -165 moveto
+(w) show
+57 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -165 moveto
+(h) show
+64 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -165 moveto
+(e) show
+71 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -165 moveto
+(a) show
+78 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -165 moveto
+(t) show
+85 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -165 moveto
+( ) show
+92 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -165 moveto
+( ) show
+99 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -165 moveto
+( ) show
+106 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -165 moveto
+(-) show
+113 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -165 moveto
+(-) show
+120 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -165 moveto
+(D) show
+127 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -165 moveto
+(P) show
+134 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -165 moveto
+(N) show
+141 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -165 moveto
+(K) show
+148 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -165 moveto
+(P) show
+155 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -165 moveto
+(K) show
+162 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -165 moveto
+(R) show
+169 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -165 moveto
+(A) show
+176 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -165 moveto
+(P) show
+183 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -165 moveto
+(S) show
+190 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -165 moveto
+(A) show
+197 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -165 moveto
+(F) show
+204 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -165 moveto
+(F) show
+211 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -165 moveto
+(V) show
+218 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -165 moveto
+(F) show
+225 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -165 moveto
+(M) show
+232 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -165 moveto
+(G) show
+239 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -165 moveto
+(E) show
+246 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -165 moveto
+(F) show
+253 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -165 moveto
+(R) show
+260 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -165 moveto
+(E) show
+267 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -165 moveto
+(E) show
+274 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -165 moveto
+(F) show
+281 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -165 moveto
+(K) show
+288 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -165 moveto
+(Q) show
+295 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -165 moveto
+(K) show
+302 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -165 moveto
+(N) show
+309 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -165 moveto
+(P) show
+316 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -165 moveto
+(K) show
+323 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -165 moveto
+(N) show
+330 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -165 moveto
+(K) show
+337 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+338 -165 moveto
+(S) show
+344 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+345 -165 moveto
+(V) show
+351 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+352 -165 moveto
+(A) show
+358 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+359 -165 moveto
+(A) show
+365 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+366 -165 moveto
+(V) show
+372 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+373 -165 moveto
+(G) show
+379 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+380 -165 moveto
+(K) show
+386 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+387 -165 moveto
+(A) show
+393 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+394 -165 moveto
+(A) show
+400 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+401 -165 moveto
+(G) show
+407 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+408 -165 moveto
+(E) show
+414 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+415 -165 moveto
+(R) show
+421 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+422 -165 moveto
+(W) show
+428 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+429 -165 moveto
+(K) show
+435 -168 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+436 -165 moveto
+(S) show
+15 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -177 moveto
+(h) show
+22 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -177 moveto
+(m) show
+29 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -177 moveto
+(g) show
+36 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -177 moveto
+(l) show
+43 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -177 moveto
+(_) show
+50 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -177 moveto
+(t) show
+57 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -177 moveto
+(r) show
+64 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -177 moveto
+(y) show
+71 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -177 moveto
+(b) show
+78 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -177 moveto
+(r) show
+85 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -177 moveto
+( ) show
+92 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -177 moveto
+( ) show
+99 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -177 moveto
+( ) show
+106 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -177 moveto
+(K) show
+113 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -177 moveto
+(K) show
+120 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -177 moveto
+(D) show
+127 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -177 moveto
+(S) show
+134 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -177 moveto
+(N) show
+141 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -177 moveto
+(A) show
+148 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -177 moveto
+(P) show
+155 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -177 moveto
+(K) show
+162 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -177 moveto
+(R) show
+169 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -177 moveto
+(A) show
+176 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -177 moveto
+(M) show
+183 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -177 moveto
+(T) show
+190 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -177 moveto
+(S) show
+197 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -177 moveto
+(F) show
+204 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -177 moveto
+(M) show
+211 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -177 moveto
+(F) show
+218 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -177 moveto
+(F) show
+225 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -177 moveto
+(S) show
+232 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -177 moveto
+(S) show
+239 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -177 moveto
+(D) show
+246 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -177 moveto
+(F) show
+253 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -177 moveto
+(R) show
+260 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -177 moveto
+(S) show
+267 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -177 moveto
+(K) show
+274 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -177 moveto
+(H) show
+281 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -177 moveto
+(S) show
+288 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -177 moveto
+(-) show
+295 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -177 moveto
+(-) show
+302 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -177 moveto
+(-) show
+309 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -177 moveto
+(-) show
+316 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -177 moveto
+(D) show
+323 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -177 moveto
+(-) show
+330 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.4 0.4 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -177 moveto
+(L) show
+337 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+338 -177 moveto
+(S) show
+344 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+345 -177 moveto
+(I) show
+351 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+352 -177 moveto
+(V) show
+358 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+359 -177 moveto
+(E) show
+365 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+366 -177 moveto
+(M) show
+372 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+373 -177 moveto
+(S) show
+379 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+380 -177 moveto
+(K) show
+386 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+387 -177 moveto
+(A) show
+393 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+394 -177 moveto
+(A) show
+400 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+401 -177 moveto
+(G) show
+407 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+408 -177 moveto
+(A) show
+414 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+415 -177 moveto
+(A) show
+421 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+422 -177 moveto
+(W) show
+428 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+429 -177 moveto
+(K) show
+435 -180 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+436 -177 moveto
+(E) show
+15 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -201 moveto
+(C) show
+22 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -201 moveto
+(o) show
+29 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -201 moveto
+(n) show
+36 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -201 moveto
+(s) show
+43 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -201 moveto
+( ) show
+50 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -201 moveto
+( ) show
+57 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -201 moveto
+( ) show
+64 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -201 moveto
+( ) show
+71 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -201 moveto
+( ) show
+78 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -201 moveto
+( ) show
+85 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -201 moveto
+( ) show
+92 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -201 moveto
+( ) show
+99 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -201 moveto
+( ) show
+106 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -201 moveto
+( ) show
+113 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -201 moveto
+( ) show
+120 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -201 moveto
+( ) show
+127 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -201 moveto
+( ) show
+134 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -201 moveto
+( ) show
+141 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -201 moveto
+( ) show
+148 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -201 moveto
+(*) show
+155 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -201 moveto
+(*) show
+162 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -201 moveto
+(*) show
+169 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -201 moveto
+(.) show
+176 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -201 moveto
+( ) show
+183 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -201 moveto
+(:) show
+190 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -201 moveto
+(:) show
+197 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -201 moveto
+(:) show
+204 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -201 moveto
+( ) show
+211 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.7 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -201 moveto
+(.) show
+218 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -201 moveto
+(:) show
+225 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -201 moveto
+( ) show
+232 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -201 moveto
+(.) show
+239 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -201 moveto
+(.) show
+246 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -201 moveto
+( ) show
+253 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -201 moveto
+( ) show
+260 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -201 moveto
+(.) show
+267 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -201 moveto
+(.) show
+274 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -201 moveto
+( ) show
+281 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -201 moveto
+(.) show
+288 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -201 moveto
+( ) show
+295 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -201 moveto
+( ) show
+302 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -201 moveto
+( ) show
+309 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -201 moveto
+( ) show
+316 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -201 moveto
+(.) show
+323 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -201 moveto
+( ) show
+330 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -201 moveto
+( ) show
+337 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+338 -201 moveto
+( ) show
+344 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+345 -201 moveto
+( ) show
+351 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+352 -201 moveto
+( ) show
+358 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+359 -201 moveto
+( ) show
+365 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+366 -201 moveto
+( ) show
+372 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+373 -201 moveto
+( ) show
+379 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+380 -201 moveto
+(*) show
+386 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+387 -201 moveto
+( ) show
+393 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+394 -201 moveto
+( ) show
+400 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+401 -201 moveto
+(.) show
+407 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+408 -201 moveto
+( ) show
+414 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+415 -201 moveto
+( ) show
+421 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+422 -201 moveto
+(*) show
+428 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+429 -201 moveto
+(:) show
+435 -204 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+436 -201 moveto
+( ) show
+15 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -237 moveto
+(h) show
+22 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -237 moveto
+(m) show
+29 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -237 moveto
+(g) show
+36 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -237 moveto
+(b) show
+43 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -237 moveto
+(_) show
+50 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -237 moveto
+(c) show
+57 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -237 moveto
+(h) show
+64 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -237 moveto
+(i) show
+71 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -237 moveto
+(t) show
+78 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -237 moveto
+(e) show
+85 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -237 moveto
+( ) show
+92 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -237 moveto
+( ) show
+99 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -237 moveto
+( ) show
+106 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -237 moveto
+(L) show
+113 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -237 moveto
+(K) show
+120 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -237 moveto
+(D) show
+127 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -237 moveto
+(-) show
+134 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -237 moveto
+(-) show
+141 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -237 moveto
+(K) show
+148 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -237 moveto
+(S) show
+155 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -237 moveto
+(E) show
+162 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -237 moveto
+(W) show
+169 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -237 moveto
+(E) show
+176 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -237 moveto
+(A) show
+183 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -237 moveto
+(K) show
+190 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -237 moveto
+(A) show
+197 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -237 moveto
+(A) show
+204 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -237 moveto
+(T) show
+211 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -237 moveto
+(A) show
+218 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -237 moveto
+(K) show
+225 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -237 moveto
+(Q) show
+232 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -237 moveto
+(N) show
+239 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -237 moveto
+(Y) show
+246 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -237 moveto
+(I) show
+253 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -237 moveto
+(R) show
+260 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -237 moveto
+(A) show
+267 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -237 moveto
+(L) show
+274 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -237 moveto
+(Q) show
+281 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -237 moveto
+(E) show
+288 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -237 moveto
+(Y) show
+295 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -237 moveto
+(E) show
+302 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -237 moveto
+(R) show
+309 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -237 moveto
+(N) show
+316 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -237 moveto
+(G) show
+323 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.4 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -237 moveto
+(G) show
+330 -240 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -237 moveto
+(-) show
+15 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -249 moveto
+(h) show
+22 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -249 moveto
+(m) show
+29 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -249 moveto
+(g) show
+36 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -249 moveto
+(t) show
+43 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -249 moveto
+(_) show
+50 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -249 moveto
+(m) show
+57 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -249 moveto
+(o) show
+64 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -249 moveto
+(u) show
+71 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -249 moveto
+(s) show
+78 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -249 moveto
+(e) show
+85 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -249 moveto
+( ) show
+92 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -249 moveto
+( ) show
+99 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -249 moveto
+( ) show
+106 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -249 moveto
+(L) show
+113 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -249 moveto
+(S) show
+120 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -249 moveto
+(P) show
+127 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -249 moveto
+(E) show
+134 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -249 moveto
+(E) show
+141 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -249 moveto
+(K) show
+148 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -249 moveto
+(Q) show
+155 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -249 moveto
+(A) show
+162 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -249 moveto
+(Y) show
+169 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -249 moveto
+(I) show
+176 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -249 moveto
+(Q) show
+183 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -249 moveto
+(L) show
+190 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -249 moveto
+(A) show
+197 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -249 moveto
+(K) show
+204 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -249 moveto
+(D) show
+211 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -249 moveto
+(D) show
+218 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -249 moveto
+(R) show
+225 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -249 moveto
+(I) show
+232 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -249 moveto
+(R) show
+239 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -249 moveto
+(Y) show
+246 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -249 moveto
+(D) show
+253 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -249 moveto
+(N) show
+260 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -249 moveto
+(E) show
+267 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -249 moveto
+(M) show
+274 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -249 moveto
+(K) show
+281 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -249 moveto
+(S) show
+288 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -249 moveto
+(W) show
+295 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -249 moveto
+(E) show
+302 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -249 moveto
+(E) show
+309 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -249 moveto
+(Q) show
+316 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -249 moveto
+(M) show
+323 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -249 moveto
+(A) show
+330 -252 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -249 moveto
+(E) show
+15 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -261 moveto
+(h) show
+22 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -261 moveto
+(m) show
+29 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -261 moveto
+(g) show
+36 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -261 moveto
+(l) show
+43 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -261 moveto
+(_) show
+50 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -261 moveto
+(w) show
+57 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -261 moveto
+(h) show
+64 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -261 moveto
+(e) show
+71 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -261 moveto
+(a) show
+78 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -261 moveto
+(t) show
+85 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -261 moveto
+( ) show
+92 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -261 moveto
+( ) show
+99 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -261 moveto
+( ) show
+106 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -261 moveto
+(L) show
+113 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -261 moveto
+(S) show
+120 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -261 moveto
+(E) show
+127 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -261 moveto
+(S) show
+134 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -261 moveto
+(E) show
+141 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -261 moveto
+(K) show
+148 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -261 moveto
+(A) show
+155 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -261 moveto
+(P) show
+162 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -261 moveto
+(Y) show
+169 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -261 moveto
+(V) show
+176 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -261 moveto
+(A) show
+183 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -261 moveto
+(K) show
+190 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -261 moveto
+(A) show
+197 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -261 moveto
+(N) show
+204 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -261 moveto
+(K) show
+211 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -261 moveto
+(L) show
+218 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -261 moveto
+(K) show
+225 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -261 moveto
+(G) show
+232 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -261 moveto
+(E) show
+239 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -261 moveto
+(Y) show
+246 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -261 moveto
+(N) show
+253 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -261 moveto
+(K) show
+260 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -261 moveto
+(A) show
+267 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -261 moveto
+(I) show
+274 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -261 moveto
+(A) show
+281 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -261 moveto
+(A) show
+288 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -261 moveto
+(Y) show
+295 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -261 moveto
+(N) show
+302 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -261 moveto
+(K) show
+309 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -261 moveto
+(G) show
+316 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -261 moveto
+(E) show
+323 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.4 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -261 moveto
+(S) show
+330 -264 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -261 moveto
+(A) show
+15 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -273 moveto
+(h) show
+22 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -273 moveto
+(m) show
+29 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -273 moveto
+(g) show
+36 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -273 moveto
+(l) show
+43 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -273 moveto
+(_) show
+50 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -273 moveto
+(t) show
+57 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -273 moveto
+(r) show
+64 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -273 moveto
+(y) show
+71 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -273 moveto
+(b) show
+78 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -273 moveto
+(r) show
+85 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -273 moveto
+( ) show
+92 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -273 moveto
+( ) show
+99 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -273 moveto
+( ) show
+106 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -273 moveto
+(L) show
+113 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -273 moveto
+(G) show
+120 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -273 moveto
+(P) show
+127 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -273 moveto
+(E) show
+134 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -273 moveto
+(E) show
+141 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -273 moveto
+(R) show
+148 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -273 moveto
+(K) show
+155 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -273 moveto
+(V) show
+162 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -273 moveto
+(Y) show
+169 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -273 moveto
+(E) show
+176 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -273 moveto
+(E) show
+183 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -273 moveto
+(M) show
+190 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -273 moveto
+(A) show
+197 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -273 moveto
+(E) show
+204 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -273 moveto
+(K) show
+211 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -273 moveto
+(D) show
+218 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -273 moveto
+(K) show
+225 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -273 moveto
+(E) show
+232 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -273 moveto
+(R) show
+239 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -273 moveto
+(Y) show
+246 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -273 moveto
+(K) show
+253 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -273 moveto
+(R) show
+260 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -273 moveto
+(E) show
+267 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -273 moveto
+(M) show
+274 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -273 moveto
+(-) show
+281 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -273 moveto
+(-) show
+288 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -273 moveto
+(-) show
+295 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -273 moveto
+(-) show
+302 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -273 moveto
+(-) show
+309 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -273 moveto
+(-) show
+316 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -273 moveto
+(-) show
+323 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -273 moveto
+(-) show
+330 -276 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -273 moveto
+(-) show
+15 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+16 -297 moveto
+(C) show
+22 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+23 -297 moveto
+(o) show
+29 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+30 -297 moveto
+(n) show
+36 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+37 -297 moveto
+(s) show
+43 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+44 -297 moveto
+( ) show
+50 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+51 -297 moveto
+( ) show
+57 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+58 -297 moveto
+( ) show
+64 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+65 -297 moveto
+( ) show
+71 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+72 -297 moveto
+( ) show
+78 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+79 -297 moveto
+( ) show
+85 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+86 -297 moveto
+( ) show
+92 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+93 -297 moveto
+( ) show
+99 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 1.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+100 -297 moveto
+( ) show
+106 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+107 -297 moveto
+(*) show
+113 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+114 -297 moveto
+( ) show
+120 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+121 -297 moveto
+( ) show
+127 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+128 -297 moveto
+( ) show
+134 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+135 -297 moveto
+( ) show
+141 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+142 -297 moveto
+(:) show
+148 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+149 -297 moveto
+( ) show
+155 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+156 -297 moveto
+( ) show
+162 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+163 -297 moveto
+(:) show
+169 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+170 -297 moveto
+( ) show
+176 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+177 -297 moveto
+( ) show
+183 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+184 -297 moveto
+( ) show
+190 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+191 -297 moveto
+(*) show
+197 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+198 -297 moveto
+( ) show
+204 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+205 -297 moveto
+( ) show
+211 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+212 -297 moveto
+( ) show
+218 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+219 -297 moveto
+(:) show
+225 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+226 -297 moveto
+( ) show
+232 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+233 -297 moveto
+(.) show
+239 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+240 -297 moveto
+(*) show
+246 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+247 -297 moveto
+( ) show
+253 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+254 -297 moveto
+(.) show
+260 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+261 -297 moveto
+( ) show
+267 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+268 -297 moveto
+(:) show
+274 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+275 -297 moveto
+( ) show
+281 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.6 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+282 -297 moveto
+( ) show
+288 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+289 -297 moveto
+( ) show
+295 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+296 -297 moveto
+( ) show
+302 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+0.8 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+303 -297 moveto
+( ) show
+309 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 1.0 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+310 -297 moveto
+( ) show
+316 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+317 -297 moveto
+( ) show
+323 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.6 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+324 -297 moveto
+( ) show
+330 -300 moveto
+0 12 rlineto
+7 0 rlineto
+0 -12 rlineto
+closepath
+1.0 0.9 0.0 setrgbcolor
+fill
+0.0 0.0 0.0 setrgbcolor
+331 -297 moveto
+( ) show
+showpage
+%%Pages:  1
+%%EOF%%

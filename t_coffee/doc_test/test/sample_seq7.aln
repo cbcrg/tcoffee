@@ -1,0 +1,270 @@
+CLUSTAL FORMAT for T-COFFEE Version_2.46, CPU=5.45 sec, SCORE=22, Nseq=5, Len=1871
+
+AURKB_ENST00000316199  MAQKE---------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    M-------------------------------------------------
+TRPM7_ENST00000313478  MSQKSWIESTLTKRECVYIIPSSKDPHRCLPGCQICQQLVRCFCGRLVKQ
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  HACFTASLAMKYSDVKLGDHFNQAIEEWSVEKHTEQSPTDAYGVINFQGG
+                                                                         
+
+AURKB_ENST00000316199  -NSYPWPYGRQTAPSGLSTLPQRVLR------------------KEPVTP
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------NNQKVVA--------VLL------------------QECLLP
+TRPM7_ENST00000313478  SHSYRAKYVRLSYDTKPEVILQLLLKEWQMELPKLVISVHGGMQKFELHP
+                                                                         
+
+AURKB_ENST00000316199  SALVLMSRSNVQPTAAPGQKVMENSSGTP------DILTRHFTIDDFEIG
+CDK2_ENST00000354056   -------------------------------------------MENFQKV
+CDK3_ENST00000293215   -------------------------------------------MDMFQKV
+LAK_ENST00000309610    SELRTLIQE-----------------------------------------
+TRPM7_ENST00000313478  RIKQLLGKGLIKAAVTTGAWILTGGVNTGVAKHVGDALKEHASRSSRKIC
+                                                                         
+
+AURKB_ENST00000316199  R----PLGKGKFGNVYLAREKKSHFIVALKVLFK----------------
+CDK2_ENST00000354056   E----KIGEGTYGVVYKARNKLTGEVVALKKI-R----------------
+CDK3_ENST00000293215   E----KIGEGTYGVVYKAKNRETGQLVALKKI-R----------------
+LAK_ENST00000309610    -----------------AKEMKWPF-VPEKWQYK----------------
+TRPM7_ENST00000313478  TIGIAPWGVIENRNDLVGRDVVAPYQTLLNPLSKLNVLNNLHSHFILVDD
+                                        .::      .  :   :                
+
+AURKB_ENST00000316199  SQIEKEGVEHQLRREIE---------------------------------
+CDK2_ENST00000354056   LDTETEGVPSTAIREIS---------------------------------
+CDK3_ENST00000293215   LDLEMEGVPSTAIREIS---------------------------------
+LAK_ENST00000309610    QAV---GPEDKTNLKDV---------------------------------
+TRPM7_ENST00000313478  GTVGKYGAEVRLRRELEKTINQQRIHARIGQGVPVVALIFEGGPNVILTV
+                             *       :                                   
+
+AURKB_ENST00000316199  -----------------------IQAHLHH--------------------
+CDK2_ENST00000354056   -----------------------LLKELNH--------------------
+CDK3_ENST00000293215   -----------------------LLKELKH--------------------
+LAK_ENST00000309610    -----------------------IGAGLQ---------------------
+TRPM7_ENST00000313478  LEYLQESPPVPVVVCEGTGRAADLLAYIHKQTEEGGNLPDAAEPDIISTI
+                                              :   ::                     
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  KKTFNFGQNEALHLFQTLMECMKRKELITVFHIGSDEHQDIDVAILTALL
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  KGTNASAFDQLILTLAWDRVDIAKNHVFVYGQQWLVGSLEQAMLDALVMD
+                                                                         
+
+AURKB_ENST00000316199  ---------------------PNILRLYNY--------------------
+CDK2_ENST00000354056   ---------------------PNIVKLLDV--------------------
+CDK3_ENST00000293215   ---------------------PNIVRLLDV--------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  RVAFVKLLIENGVSMHKFLTIPRLEELYNTKQGPTNPMLFHLVRDVKQGN
+                                                                         
+
+AURKB_ENST00000316199  --------------------------FYDRRRIYLILE------------
+CDK2_ENST00000354056   --------------------------IHTENKLYLVFE------------
+CDK3_ENST00000293215   --------------------------VHNERKLYLVFE------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  LPPGYKITLIDIGLVIEYLMGGTYRCTYTRKRFRLIYNSLGGNNRRSGRN
+                                                                         
+
+AURKB_ENST00000316199  ------------------------------------YAPRG-ELYKELQK
+CDK2_ENST00000354056   ------------------------------------FLHQDLKKFMDASA
+CDK3_ENST00000293215   ------------------------------------FLSQDLKKYMDSTP
+LAK_ENST00000309610    ------------------------------------------QLLASLRA
+TRPM7_ENST00000313478  TSSSTPQLRKSHESFGNRADKKEKMRHNHFIKTAQPYRPKI-DTVMEEGK
+                                                                 .   .   
+
+AURKB_ENST00000316199  -----------------------------SCTFDEQRTATIM-----EEL
+CDK2_ENST00000354056   -----------------------------LTGIPLPLIKSYL-----FQL
+CDK3_ENST00000293215   -----------------------------GSELPLHLIKSYL-----FQL
+LAK_ENST00000309610    -----------------------------SILARDCAAAAAI-----VFL
+TRPM7_ENST00000313478  KKRTKDEIVDIDDPETKRFPYPLNELLIWACLMKRQVMARFLWQHGEESM
+                                                                :       :
+
+AURKB_ENST00000316199  ADALMYCHGKKVIHRDIKPENLLLGLKGELKI--ADFG------------
+CDK2_ENST00000354056   LQGLAFCHSHRVLHRDLKPQNLLINTEGAIKL--ADFG------------
+CDK3_ENST00000293215   LQGVSFCHSHRVIHRDLKPQNLLINELGAIKL--ADFG------------
+LAK_ENST00000309610    VDRFLY------------------GLDVSGKL--LQVA------------
+TRPM7_ENST00000313478  AKALVACKIYRSMAYEAKQSDLVDDTSEELKQYSNDFGQLAVELLEQSFR
+                        . .                    .     *    :..            
+
+AURKB_ENST00000316199  ----------------WS--------------------------------
+CDK2_ENST00000354056   ----------------LA--------------------------------
+CDK3_ENST00000293215   ----------------LA--------------------------------
+LAK_ENST00000309610    ----------------KG--------------------------------
+TRPM7_ENST00000313478  QDETMAMKLLTYELKNWSNSTCLKLAVSSRLRPFVAHTCTQMLLSDMWMG
+                                        .                                
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   RA------------------------------------------------
+CDK3_ENST00000293215   RA------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  RLNMRKNSWYKVILSILVPPAILLLEYKTKAEMSHIPQSQDAHQMTMDDS
+                                                                         
+
+AURKB_ENST00000316199  -------------------------------------------------V
+CDK2_ENST00000354056   -------------------------------------------------F
+CDK3_ENST00000293215   -------------------------------------------------F
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  ENNFQNITEEIPMEVFKEVRILDSNEGKNEMEIQMKSKKLPITRKFYAFY
+                                                                         
+
+AURKB_ENST00000316199  HAPSLRRKTMCGTLDYLPPEMI----------------------------
+CDK2_ENST00000354056   GVPVRTYTHEV---------------------------------------
+CDK3_ENST00000293215   GVPLRTYTHEVVTLWYRAPEIL----------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  HAPIV--KFWFNTLAYLGFLMLYTFVVLVQMEQLPSVQEWIVIAYIFTYA
+                                                                         
+
+AURKB_ENST00000316199  ----------EG-RMHNEKVDLW---------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   ----------LGSKFYTTAVDIW---------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  IEKVREIFMSEA-GKVNQKIKVWFSDYFNISDTIAIISFFIGFGLRFGAK
+                                                                         
+
+AURKB_ENST00000316199  -------------------CIGVLC-----------------YELLVGN-
+CDK2_ENST00000354056   ----------------------------------------------TRR-
+CDK3_ENST00000293215   -------------------SIGCIF-----------------AEMVTRK-
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  WNFANAYDNHVFVAGRLIYCLNIIFWYVRLLDFLAVNQQAGPYVMMIGKM
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  VANMFYIVVIMALVLLSFGVPRKAILYPHEAPSWTLAKDIVFHPYWMIFG
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  EVYAYEIDVCANDSVIPQICGPGTWLTPFLQAVYLFVQYIIMVNLLIAFF
+                                                                         
+
+AURKB_ENST00000316199  ---------------------------------PPF--------------
+CDK2_ENST00000354056   ---------------------------------ALF--------------
+CDK3_ENST00000293215   ---------------------------------ALF--------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  NNVYLQVKAISNIVWKYQRYHFIMAYHEKPVLPPPLIILSHIVSLFCCIC
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  KRRKKDKTSDGPKLFLTEEDQKKLHDFEEQCVEMYFNEKDDKFHSGSEER
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  IRVTFERVEQMCIQIKEVGDRVNYIKRSLQSLDSQIGHLQDLSALTVDTL
+                                                                         
+
+AURKB_ENST00000316199  ----------ESASHNETYRRIV---------------------------
+CDK2_ENST00000354056   ----------PGDSEIDQLFRIF---------------------------
+CDK3_ENST00000293215   ----------PGDSEIDQLFRIF---------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  KTLTAQKASEASKVHNEITRELSISKHLAQNLIDDGPVRPSVWKKHGVVN
+                                                                         
+
+AURKB_ENST00000316199  -------------------------------------------KV-----
+CDK2_ENST00000354056   -------------------------------------------RT-----
+CDK3_ENST00000293215   -------------------------------------------RM-----
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  TLSSSLPQGDLESNNPFHCNILMKDDKDPQCNIFGQDLPAVPQRKEFNFP
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   -LGTPDEVVWPGVTSMPDYK------------------------------
+CDK3_ENST00000293215   -LGTPSEDTWPGVTQLPDYK------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  EAGSSSGALFPSAVSPPELRQRLHGVELLKIFNKNQKLGSSSTSIPHLSS
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   ---------PSFPKWARQ--------------------------------
+CDK3_ENST00000293215   ---------GSFPKWTRK--------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  PPTKFFVSTPSQPSCKSHLETGTKDQETVCSKATEGDNTEFGAFVGHRDS
+                                                                         
+
+AURKB_ENST00000316199  ------------------------------------DL-KFPASVPMGAQ
+CDK2_ENST00000354056   ------------------------------------DFSKVVPPLDEDGR
+CDK3_ENST00000293215   ------------------------------------GLEEIVPNLEPEGR
+LAK_ENST00000309610    -------------------------------------LHKLQPATPIAPQ
+TRPM7_ENST00000313478  MDLQRFKETSNKIKILSNNNTSENTLKRVSSLAGFTDCHR--TSIPVHSK
+                                                              .  .      :
+
+AURKB_ENST00000316199  D---------------------LISKLLRHNPSER---------------
+CDK2_ENST00000354056   S---------------------LLSQMLHYDPNKR---------------
+CDK3_ENST00000293215   D---------------------LLMQLLQYDPSQR---------------
+LAK_ENST00000309610    V---------------------VIRQ------------------------
+TRPM7_ENST00000313478  QAEKISRRPSTEDTHEVDSKAALIPDWLQDRPSNREMPSEEGTLNGLTSP
+                                             :: .                        
+
+AURKB_ENST00000316199  -------------------------LPLAQV-------------------
+CDK2_ENST00000354056   -------------------------ISAKAA-------------------
+CDK3_ENST00000293215   -------------------------ITAKTA-------------------
+LAK_ENST00000309610    ----------------------------ARI-------------------
+TRPM7_ENST00000313478  FKPAMDTNYYYSAVERNNLMRLSQSIPFTPVPPRGEPVTVYRLEESSPNI
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  LNNSMSSWSQLGLCAKIEFLSKEEMGGGLRRAVKVQCTWSEHDILKSGHL
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  YIIKSFLPEVVNTWSSIYKEDTVLHLCLREIQQQRAAQKLTFAFNQMKPK
+                                                                         
+
+AURKB_ENST00000316199  -----------------SAHPWVRA--------------NSRRVLPPSAL
+CDK2_ENST00000354056   -----------------LAHPFFQD--------------VTKPV--PHLR
+CDK3_ENST00000293215   -----------------LAHPYFSS---------------PEPS--PAAR
+LAK_ENST00000309610    -----------------SVNSGSHP--------------AKHSM------
+TRPM7_ENST00000313478  SIPYSPRFLEVFLLYCHSAGQWFAVEECMTGEFRKYNNNNGDEIIPTNTL
+                                         .                               
+
+AURKB_ENST00000316199  QSVA----------------------------------------------
+CDK2_ENST00000354056   L-------------------------------------------------
+CDK3_ENST00000293215   QYVLQRFRH-----------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  EEIMLAFSHWTYEYTRGELLVLDLQGVGENLTDPSVIKAEEKRSCDMVFG
+                                                                         
+
+AURKB_ENST00000316199  --------------------------------------------------
+CDK2_ENST00000354056   --------------------------------------------------
+CDK3_ENST00000293215   --------------------------------------------------
+LAK_ENST00000309610    --------------------------------------------------
+TRPM7_ENST00000313478  PANLGEDAIKNFRAKHHCNSCCRKLKLPDLKRNDYTPDKIIFPQDEPSDL
+                                                                         
+
+AURKB_ENST00000316199  ---------------------
+CDK2_ENST00000354056   ---------------------
+CDK3_ENST00000293215   ---------------------
+LAK_ENST00000309610    ---------------------
+TRPM7_ENST00000313478  NLQPGNSTKESESTNSVRLML
+                                            
+
+
+

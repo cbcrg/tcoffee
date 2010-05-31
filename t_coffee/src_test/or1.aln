@@ -1,0 +1,1954 @@
+CLUSTAL FORMAT for T-COFFEE Version_8.20 [http://www.tcoffee.org] [MODE:  ], CPU=2.47 sec, SCORE=0, Nseq=11, Len=8986 
+
+FBgn0226952     aaatctgatacttctgttgcaactgcaactgcatcgatgactcttttgatctctcttggc
+FBgn0157967     tatgccatagagcacaaagaatttttcgacttggttttcggttgttttccattattttag
+FBgn0206644     tttaaattggtattggaacgagtttgatgttttcccacgacaaaatgggcggcaatgcga
+FBgn0234113     ataattgtttatgcttggcattaaaatcgttacaaaacgaataaaacagcccggtcgcgt
+FBgn0105062     ataccattaccaaataccaaataccaaataccatagtttaaatatttatggacagtataa
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0074735     tcttctctggacatggttctcctatgccatagagcacaaagaatttttcgacttggtttt
+FBgn0029521     gaagccgtgcacaatccgaatggcaatctattttccctatttcaatagcgaattcaatga
+FBgn0098447     gcagtgttttatgcatattaattaattaaggcatttgcaagtcgaatctgatcagtttta
+FBgn0137587     cgcctagtacgcaactagagtaaatagatacccctcctgcctcacacctttccgagtctg
+FBgn0173958     aaaatctttttttcgtgcataagatgattaattgaactcaattaatttaattacatttat
+                                                                            
+
+FBgn0226952     tcttttgagctctgtttttggcaagttcttttcgtgtttggccataattttgtttttttt
+FBgn0157967     cagggcgcgttgacaaatggccttaaagagctgccagcaactgtgctataggagtgcctt
+FBgn0206644     gtaattgaatttctgtacaatgcaagcgtagcaagacttttaattagttccaactggcag
+FBgn0234113     tggttgttgaagttttttaagtttcgtacattaggattgactatttgctgaagagaggaa
+FBgn0105062     tacaccgtcctttcctttattattgttttaaaagctcaaaaactgtcttcacaacaacaa
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0074735     cggttgttttccattattttagcagggcgcgttgacaaatggccttaaagagctgccagc
+FBgn0029521     cacggaacagaacatcacggataatgcctccttagttgtttctgattagaattcgtttta
+FBgn0098447     aaagctgccggccaacccattaattagcaaattgcttaaatgccgctcagaggagcgaac
+FBgn0137587     agtctgagtctgggtctgggtctgggcctgggcctgacactcgcagctacattcacagca
+FBgn0173958     aaatataattatctattcttttattataataagaaatgtacattaattattttaaaaatg
+                                                                            
+
+FBgn0226952     tttggtatttttcattaacaataaatttgcataaagctcacgatttcgatattaacacag
+FBgn0157967     gatatgttacgagtagtacaaagtacccacaacgagtacgggtatgcggttaccctgtat
+FBgn0206644     ttggttaattaaaatcacaaagccacaaaactgatcgcatgcgcacacccaactacagcg
+FBgn0234113     gccgtgcaaaatccgaatgacaaacatcgataatctaacagggaacatcagatatagcct
+FBgn0105062     tatattaacaaaattatatttttttaagtgcaaatgcctactttgtttgagggacacagt
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0074735     aactgtgctataggagtgccttgatatgttacgagtagtacaaagtacccacaacgagta
+FBgn0029521     tttataataacaaaatcagtttaattcaaattccgtaagatataatgtctatggaaagta
+FBgn0098447     taagagccatcaagtatacgcagcgtgggttttttatattttatttttgcattcatggct
+FBgn0137587     tgaatgtgtgtgcgtgcgtgtgtgtgtgtgtgtgtgtacagaaaaaggtgaggccgtaaa
+FBgn0173958     aattataatatgtacttcattttgaaagaattcaatgatattaaaaataaggaacacctg
+                                                                            
+
+FBgn0226952     tttaatgaaaaatgttgcagaaaaaaaaaaaacccaaagcagaaacaaaaaaaaaaaaaa
+FBgn0157967     gtagtggaaatactgagaaggtagactcgctaaccgaagaggtcaccctccactgtattc
+FBgn0206644     ctgacgggaaagccaagcttatcgcgatctataaatactcgcatagtacgcaactagtgt
+FBgn0234113     ccttagaagtttctgattagaatatttttgtatgtaaaaaaaatgtaagttgattcaaat
+FBgn0105062     acaatcgcttcctaggcacaaaactgcagtctcctctacgtttttctaccactttggtgg
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0074735     cgagtacgggtacgggagtgcggttaccctgtatgcagtggaaatactgagaaggtagac
+FBgn0029521     aaatacactgtccttaaaatttaagtattatctgaaaagatcagaaactgtatttatacc
+FBgn0098447     gatcagatgaatgattcttttattctcgaactgaagaagctgctgatcacaaaattgcat
+FBgn0137587     ttaagtgccagcctccaaatgtcaaaacatatgccaagccgggaattcagtggctgtcga
+FBgn0173958     tttgcacgaattatacatcgacggatgccaacaaaataagagctagaatgccaaatttaa
+                                                                            
+
+FBgn0226952     aaacattaaattaaggtgaacccacgatatatgtttgccaagttgacgttacattaagta
+FBgn0157967     atctattcatcatttgcacacctttttcccatatatgtatgtgcattaatcgcatgtata
+FBgn0206644     atgctttatagcccccttccatgctcccctccgctccaatgggccacacaactttgtaaa
+FBgn0234113     agaataaatttaaatatttatggactgtaaacaacacaccgtccttcaaatttaagtatt
+FBgn0105062     catacagatacagcgagactgagggacttgaagagccagcatgacaggtgactgcttaca
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnttataatt
+FBgn0074735     tcgctaaccgaagaggtcaccctccactgtattcatctattcatcatttgcacacctttt
+FBgn0029521     atcttaagtttaacaaaattaaatatttttttaagtgcacatgccttctttgtttgaggg
+FBgn0098447     tctaatttaaacagaaaacatgaagtgactgatttaatgacttgtagttggatttttttg
+FBgn0137587     tagatagataaaagacagcaaaaaaataaaaaataaataaataaatagcaggcccacatg
+FBgn0173958     aatagcctaaacttattttgactacgaaactcgtgactatggtgggcgcttcgctttcaa
+                                                                            
+
+FBgn0226952     cgtacatttatctagaagtaacaaatgctaatgagttttaaagttgatcagagttttaaa
+FBgn0157967     attgctgtggattgtgcatattgattaattaaagcatttgcaagtcggatccaattgatt
+FBgn0206644     tgtgtgcacaagtctgagtttgagtctgggtctgggtctgggcctgggcctgacactcga
+FBgn0234113     gtttagaaagctcaaaaactgtccttacaacatcgcaatattaacaaaattatatttttt
+FBgn0105062     atttatttgcatattagtcggaaactgtgaaaggctaaaaggctgaacagccacagacct
+FBgn0188109     ataatgatctattcttttattatatcaggaattataaaaagaaatattattattttaaaa
+FBgn0074735     tcccatatacgtatgtgcattaatcgcatgtataattgctgtggattgtgcatattgatt
+FBgn0029521     acacggtacaatcgcttcctaggcacaaatctgcagtctcctctatgttttctaccactt
+FBgn0098447     ttgtattttttgaaaaatgtaaataacgaagaggttgcagctgagctttgaataaattta
+FBgn0137587     taataagaaccgctagcggacaatgaccatgactgaggcagtagcattcgcagttccagc
+FBgn0173958     agtcattttggatgttctcatgttgttctttcctgtcaagttttgtttagttagttttgt
+                                                                            
+
+FBgn0226952     tcgatttcaattgataggcataataagatggcaatggaaaaggaaagagaacgcattgga
+FBgn0157967     tgaatcgctggcctatcccattaattatcgtaaataccacgctgattgaagccgcgcttt
+FBgn0206644     gcagtctgtacataaatgtatataaatatatatgtgtgtgtgtgtgtgcatagaaaaagg
+FBgn0234113     taagtgcaaatgcctactttgtttgagggacacagtacaatcgcttcctaggcatataac
+FBgn0105062     taaagtggttaggcaaacagaagccgccaccggcaagaagagctaaactccattatgggt
+FBgn0188109     atgaattatatatgttcttcatttgaaagaattcaatgatattaaaaataagaacacctg
+FBgn0074735     aattaaagcatttgcaagtcggatccaattgatttgaatcgctggcctagcccattaatt
+FBgn0029521     tggtggcatacagatacagcgagactgagggacttgaagagccatcatgacaggtgactg
+FBgn0098447     ttgttcgattgatcaaataaacatatctttagtttatagcctgtatttgattttcccacg
+FBgn0137587     tccagttacagttgtagttacagttgcagttacttttcgacaagctgctgcgagctggct
+FBgn0173958     ttttattaacaataaatttcaattacgctcacgatttggacatcaacaaagttttcagcg
+                                                                            
+
+FBgn0226952     tatatgtatgtatgtacaataaaataaatattttgaagactttttagtacccaagtcgac
+FBgn0157967     cgaacagaggattcgccgcggggggcgtctcttttacacatattttgaaatatattttat
+FBgn0206644     tgaggccgtaaattaagtgccagcctccaaatgtcaaaacatatgccaaagtcggacacc
+FBgn0234113     tgcattctcctctaggtttttctaccactttggtggcatacagatacagcgagactgagg
+FBgn0105062     ttgtaaaagttcgattgtaaatatttgcgtaccaaagaaatggcataaaaagaactccag
+FBgn0188109     ttgcacgaattatacatcgacggatgccaacaaaataagagctagaatgccaaatttaaa
+FBgn0074735     atcgtaaataccacgctgattgaagccgcgctttcgaacagaggattcgccgcggggggc
+FBgn0029521     cttacaatttatttgcatattagtcggaaactgtgaaaggctaaaaggctgaacagccac
+FBgn0098447     atcccacggataccgaaaggggcggcaattgccatttaattgaatttctgtcaggccgga
+FBgn0137587     ggccgactgacgaatctggtaacagtaacagttcacagtggtgtcaggcaaaactggaaa
+FBgn0173958     gcacgaaacgaaaaaacaaagcagaaaaacggccacaaatggtgttaaatggtaatattg
+                                                                            
+
+FBgn0226952     aggaattccattgaatttttgaagacttctttcaaacattttgaaaattaattatttagc
+FBgn0157967     aggaagaaccactgcgatttcagattccagattccagaataaactcttgattcttggatc
+FBgn0206644     aagtcgggaattctgcgactgtcgatagataaaaaaaagtagcccacaaaaaataaataa
+FBgn0234113     gacttgaagagccagcatgacaggtgactgcttacaatttatttgcatattagtcggaaa
+FBgn0105062     gcgtagtgttcgagattccccagcagtgtgagagttacttcctttttgttcttacctaca
+FBgn0188109     atagcctaaacttattttgactacgaaactcgtgactatggtgggcgcttcgctttcaaa
+FBgn0074735     gtctcttttacacatattttgaaatatattttataagaagaaccactgcgatttcagatt
+FBgn0029521     agaccttaaagtggttaggcaaacagaagccgccatcggcaagaagagttaaactccatt
+FBgn0098447     ggcgggccaaagactttttaattagttttctcagttaattaaaatacttagcgaacaaag
+FBgn0137587     agaaaaaaaatcaaaaaagttgttgaataaaaataaatatgtttggaaatgaaaagcaaa
+FBgn0173958     aacatttttttcttcggattttgctctagttatcagaattttacacttgtatccgtgcac
+                                                                            
+
+FBgn0226952     tataatatattttggtaaactgtcgagaatagagtatttttcaatattttgattgcccac
+FBgn0157967     agttccggatcgaacaagttacgaattttcccacgacccaccatcgaaatgggcggcaat
+FBgn0206644     gtatataaaaagcaggcccacatgtaataagaaccgctagcggacaatgaccatgactga
+FBgn0234113     ctgtgaaaggctaaaaggctgaacagcctcagaccttaaagtggttaggcaaacagaagc
+FBgn0105062     tataatatttaaaaagaaatttataaataagtacgtgcgtcagcagaaatgattctttag
+FBgn0188109     gtcattttggatgtctcatgttgttcttcctgtcaagttttttttagttagttttgtttt
+FBgn0074735     ccagattccagaataaactcttgattcttggatcagttccggatcgaacaagttacgaat
+FBgn0029521     ttaggtttgtaaaagttcgattgtaaatatttgcgtaacaaagaaattgcatgaaaagaa
+FBgn0098447     accagatttagttccatacgcactgagggaaaaaaaaaaaataaatgaatgagaaatgaa
+FBgn0137587     attgttataaaattaatttagagaacgattcgcttgaatacttccttaggcttataaatt
+FBgn0173958     atatgtatgaacatatttgtagataggtttatgttttcggcaaattctactagagcgaaa
+                                                                            
+
+FBgn0226952     ttagactagtaatgatatatttttgtcctttattgaatgtttaatgttgggtttaaaata
+FBgn0157967     tgttcgctaattgaatttctataatttccagaggcgagccagagcccaaacccgatctac
+FBgn0206644     gacagcagcaaaagcagtagcagtcacagttccagttacagttgcagtaacagttgctgt
+FBgn0234113     cgccaccggcaagaagaggtgaactccattatgggtttgtaaaagttcgattgtaaatat
+FBgn0105062     atttgggtagaggcttcaaaaaaacacaattttatgacatctaaaatggcccttcatcca
+FBgn0188109     tattaacaataaatttcaattacgctcacgatttggatatcaacaaagttttcagcggca
+FBgn0074735     tttcccacgatccaccatcgaaatgggcggcaattgttggctaattgaatttctatcatt
+FBgn0029521     ctcgaggcgtagtgttcctgagattcccctgtagtgtgagagttatttcctttctgtacc
+FBgn0098447     ctagggtgaggccgtaactaaagcctgaaagccagcctccgaatgtcaaaggcatagact
+FBgn0137587     caaattaagctcaaatatttgatttgccaagtcactaactagagctgtataagcccataa
+FBgn0173958     gtagtcttatttttgaagttctatcagttcataaaataaataaaatagttaaataaaact
+                                                                            
+
+FBgn0226952     tttttgatttttgatacaaatttaagtttatttaactaactgaaatgctaactaactgtg
+FBgn0157967     agttttccataattagttttgcccagttaatttgaaatacttagccaaacagatcggtgc
+FBgn0206644     tacttttggccaagctgttgtaagccattaaatcgcacgcctaatagtccaacgaatctt
+FBgn0234113     ttgcgtagccaagaaatggcatgaaaagaactcgagtggtagtgttcgtgattccccaga
+FBgn0105062     ttcattaatttgaagaagaaataattattattttttatctactttttgtacatttgatat
+FBgn0188109     cgaaacgaaaaaacaaagcagaaaaacggccacaaatggtgttaaatggtaatattgaac
+FBgn0074735     tccataggcgagccagagccgaagcccgatctgcagttttccataattacttttgcccag
+FBgn0029521     taaaaagaaatttatttacataagcgtaaatggtattttagatatctggctaaagatttg
+FBgn0098447     tgtaccgcaccaaagtcgggaattgtcagtttctagataaacaaacgcaatgcacagcca
+FBgn0137587     tgcagtacgaactattgaggtagaacattttttctgtagagtccattgacatcttgactg
+FBgn0173958     aaacagaatactgtcttggaaatacatacaactgggtaattaaccatctaatttataaat
+                                                                            
+
+FBgn0226952     tgctcttacattagaattaaaaaaaaaaaacaaaatcgagtttacttacatcatttttaa
+FBgn0157967     aatggaagtgagtgcctggtgccgcctgttgcccccgtcgtacaaccagatttatctgtc
+FBgn0206644     gcagttgtccacagtggtgccacagaaattcaaacataatgcaaataatgcgccaagcgc
+FBgn0234113     agagtgagagttacttccttttctgcactcagctatttaaaaataaatttataaataagt
+FBgn0105062     ttataataatttatttattgaatcattgaaattataaatatgaatataaatggattcaat
+FBgn0188109     atttttttcttccgatttggctctagttatcagaattttacacttgtatccgtgcacata
+FBgn0074735     ttaattgaaatacttaggcaaacagatcggtgccatggaagtgagtgcctggtgccgcct
+FBgn0029521     gccctttaacccattcaaccaataaacaatttcgtgcataagatgattaattgaactcaa
+FBgn0098447     atgcaaaaaatcacttaattcaaaataaaaaataaaaacaaaaaaaatggttagaaaaaa
+FBgn0137587     aattgcaatatttgttaactaaaaaaaaaaaaaaaattagtaaaatgccaagtttgtttt
+FBgn0173958     tttagataaaatgtcaaattctggaatgagtaaagaaacaagtatttaaaacctacatta
+                                                                            
+
+FBgn0226952     ttcaaaacattcttacaggtctttctctcttcaatagacaattctcttcttcaaaaagga
+FBgn0157967     ggcatacgcaccagcagcatacagcagccttgccttcgccgtccgacagatggaagtcgg
+FBgn0206644     ttgacctaatgaaagaacttaatcaaaaaatagtaatagatatatcacacattcaatttt
+FBgn0234113     gcgtgcgtaagcagaaatggtactttagacttgggaaaaggcttaaagaaatacaatttt
+FBgn0105062     gttattaaataatgggcacctgtttgcacgaattatacatcgacggattctgtttccaac
+FBgn0188109     tgtatgaacatatttttagataggtttatgttttcggcaagttctactagagcgaaagta
+FBgn0074735     gttgcccccgtcgggcaacaaccagatttatctgtcggcatacgcaccagcagcatacag
+FBgn0029521     ttaaattaattatatctataaatatattgatctattcttttattttaactagaaatttat
+FBgn0098447     tatcagaaatcaacccacgacggcaagaaccgctagcggacaatgaccatgactgtttgg
+FBgn0137587     ataaacattttaatcatatttgttgagttggaatttatgattatcatcaatacacaaaac
+FBgn0173958     gtaatattaaaccgtggactgacaatgtcgatgatatatatgtatatacatatctaaaat
+                                                                            
+
+FBgn0226952     tattttttgcataagacaatttgaaaccgatttgaaaatgcccaaaaatattagatcttg
+FBgn0157967     gtcttggctttggcattcatacatatgaacactcgcacgagtatgactacgagtacgagt
+FBgn0206644     ccttagctgaaagtagtagtggcggaggtaaggcaagacttatataaataatgtccaacc
+FBgn0234113     gtgacatttgaatttattgcttaatgttattgagattaaataatgcatttagtaattagt
+FBgn0105062     ctttcaattatgccaataaaataagcgttaaaatgccaaatttaaaatagtcttacttat
+FBgn0188109     gtcttatttttgaagttctatcagttcataaaataaataaaatagttaaataaaactaaa
+FBgn0074735     cagcctttgccttcgccgtccgacagatggaagtcgggtcttggctttggcattcataca
+FBgn0029521     attaattattttaaaaaataataatgatgtgtacctaattttatatatcattattgaaat
+FBgn0098447     acggtttttcgtcggggctttgggccggggcttgcgtttgcggttcggagtggtaagtaa
+FBgn0137587     aattctataggtcactcgtcagaaagcagcataaatcttctgttctgtcatctaatcctg
+FBgn0173958     caagagagatggtattgtcgactcccccgactcagctagtagaaatccgatagcgatatt
+                                                                            
+
+FBgn0226952     gagttataatgcaaattcaaagacattattcgaacttgaaaataaagacatcaatttttg
+FBgn0157967     gcagcccctactgctctccgtggctgtggtgggactaaggtgaggccgtaaattaagtgc
+FBgn0206644     ctgataaaagaaaaatagtaattattttttattgatttactaatttataaatggtcgaca
+FBgn0234113     atgtattcacgaattatacatcgacggattctgtttccagcctttcaattatgccaacaa
+FBgn0105062     tttgacttaggaactcgtgacttcggtgggcgaatcggttcaaagtcattttggatgttc
+FBgn0188109     cagaatactgtctcggaaatacatacaactgggtaattaaccatctaatttataaatttt
+FBgn0074735     tatgaacactcgcacgagtatgactacgagtacgagtgcagcccctacttctctccgtgg
+FBgn0029521     caaataatgaatatctgtttgcacgaattatacatcgacggatgctgtcaattatgccaa
+FBgn0098447     gaccagcagtctggccagtggccactagcattaccgttagccatgacgaatagggggcac
+FBgn0137587     ctctcacctctgagcatcacccaccagtattatgatgtgcagagaaagagagagagagag
+FBgn0173958     tcataatgtttctggaaaatcgatagacactggtgaataaaatggagaaaattttaaaat
+                                                                            
+
+FBgn0226952     acataatcttaaaattatggttgattggaatacttttcctctccggtcactttttgttat
+FBgn0157967     cagcctccaaatgtcaaaacatatgccaaagtcgggaattgtgcgataaagaaacgcatt
+FBgn0206644     agatcagtgtcaatcttagtatttaatacgttaaaatagcaaaaaaaatcctggccaaaa
+FBgn0234113     aataagcgttaaaatgccaaattttaaatagctttacttattttgacttaaaaactcgtg
+FBgn0105062     tggtgtgtcttcgnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0188109     agataaaatgtcaaattctggaatgagtaaagaatcaagtatttaaaacctacatcagta
+FBgn0074735     ctgtggtgggactaaggtgaggccgtaaattaagtgccagcctccaaatgtcaaaacata
+FBgn0029521     caaaataagcgctagaatgccaaatttaaaatagcctaacttattttgactatgaaactc
+FBgn0098447     agtggttctcatgccacaaaaactataaatatttagaaattattaggcaagcttatttgg
+FBgn0137587     agacagagagagagagagacagagagagagagagagacagagagagagagaccgaccgag
+FBgn0173958     tgttcaaaagtgtggccatggcagttttgggggcgtggcaaaaaattttttgacaaatca
+                                                                            
+
+FBgn0226952     taaaaacgaggacatctctttatgtcgttgtcgacaaaatttatttgttattggtaataa
+FBgn0157967     catagaccagcaaggcagtagccagcagtcaccttctccagcagcagcggcagtggcagt
+FBgn0206644     ccttgtgaaaattgtgtacaaccttatggtaaattcgcatatgggacagcgacgttaaca
+FBgn0234113     acttcggtgggcgaatcggttcaaagtcatttcggatgttctggtgctgttctttcgtgt
+FBgn0105062     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0188109     atattaaaccgtggactgacaatgtcgatgatatatatgtatatacatatctaaaatcaa
+FBgn0074735     tgccaaagtcgggaattgtgcgataaagaaacgcattcatagaccagcaaggcagtagcc
+FBgn0029521     gtgactttggtgggcgaatcgcttcaaagtcatttcggatgttctggtgttgttttttcg
+FBgn0098447     aaatttagtttattccttttcaaaatattttatttgctacaatatcgtatattatatttt
+FBgn0137587     agagagggaaaaagaaaaaaaaagacagacagaaagagtagtattagtagtagtagcata
+FBgn0173958     atttcagatttccaaaactagaaaaaataagaaagaacatcaatcaatttttaaaagcgt
+                                                                            
+
+FBgn0226952     gaataactagctaaaacatgctggtacatgatttttactaattgtgttaccttaaaccta
+FBgn0157967     ggtagtggtagtggtagcccacggctgtaagaaccgctagcggacaatgaccatgactgc
+FBgn0206644     atagataagctgtctacttaagctccataaccactctcacgtcctggcaacgaatctgct
+FBgn0234113     caagtgatcatagttagtttcgtttcgtttttattaaccataaatttcaattacgctcac
+FBgn0105062     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0188109     gacagatggtattgtcgactcccccgactcagctagtagaaatccgatagcgatatttca
+FBgn0074735     agcagtcaccttctccagcagcagcggcagtggtagtggtagtggtagtggtagcccacg
+FBgn0029521     tgtcaggttgttatagttagtttggtttttattaacaataaatttcaattacgctcacga
+FBgn0098447     taataaaatagtacatttttatacaaaataatataatttatatatacaatttaatacaaa
+FBgn0137587     tttactgataagaaatatcaaccacctcgagctgtgattaatacagaaaactgtttagct
+FBgn0173958     gggcgtggcagttctgggcggtttgtgggcgttagagtggcaacatggctcaaccccgac
+                                                                            
+
+FBgn0226952     aattaatgaaatcgtgcgtaacttgtgaatggcctttaattatctagaaaatgcattcaa
+FBgn0157967     gactgcgactgcgactgcagtgggggcatgcagcaaaaccagcagtgggaccagtcgtaa
+FBgn0206644     aaggaggcgacgaagatggacatcgttcgatccctttagggtcagcatgcaggtccacag
+FBgn0234113     gatttggatatcaataatgttttcagcggcacgaaacgaaaaaacaaatcagtaaaaagg
+FBgn0105062     nnnnnnnnnnnnnnngttaataatagatttttttctttttattcttccggttttgctcta
+FBgn0188109     taatgtttctggaaaatcgatagacactggtgaataaaatgggaaaaattttaaaattgt
+FBgn0074735     gctgtaagaaccgctagcggacaatgaccatgactgcgactgcgactgtgactgcagtgg
+FBgn0029521     tttggatatcaacaaagttttcagcggcacgaaaagaacaaaaacaaagcagaaaaaagt
+FBgn0098447     gaaaaggagttttgaaaggagtctactcacgtaggtatttatgataagagaaaagaaaaa
+FBgn0137587     gactccagaaagcccaggcacaatgtcatactcaatttaaatgtcttaaaaggattaaag
+FBgn0173958     actagaataattattctcaacaaacttgcgttgcgtctatgtctctagaatctgtatgct
+                                                                            
+
+FBgn0226952     aatgttctatacaaagtgatattggaggccttaattaagctgttgaaattttgttttgtt
+FBgn0157967     gaccagcagtaaagtgttaccgttaaccatgacgagcgcacagtgggacaactgtgtagg
+FBgn0206644     gcaagcaaaatattacctgtttcagagtaaaagaaatgaacacatatatcatctactaac
+FBgn0234113     ccacaagtggtgttgaatgtgaatagtatatttttttttttagttttcttccggttttgc
+FBgn0105062     tttgctagaattttacactaaacaatttacaactaaacaacaaactggaaacaaatcttt
+FBgn0188109     tcaaaagtgtggccatggcagttttggggggcgtggcaaaaaattgtttgacaaatcaat
+FBgn0074735     gggcatgcagcaaaaccagcagtgggaccagtcgtaagaccagcagtaaagtgttaccgt
+FBgn0029521     ccacaaatgtggtgtaaagtggtaacattgaacatttttttcttccgattttctctagaa
+FBgn0098447     ataatcaagaaaatgcaaaagaggtactaggcattgatcttcttatttttaatatcttag
+FBgn0137587     tgcccagaatttatattagacatttcaaaccttatttattcctaattacctgaacctacc
+FBgn0173958     taatctcaaccttctagcttttatagttcctgagatctcgacgttaatatggacgaacag
+                                                                            
+
+FBgn0226952     ttgtaggtgggtctcatttactttgcattgttttcaattagttttaaatttctctattat
+FBgn0157967     gtgcgagccttgtacatctcccgtacaaggagatacaaaaacgaacggctaacatgaagt
+FBgn0206644     tgaaaatatcaacactatggtaaaagttgctagacaacagtagcagcatatcatatagta
+FBgn0234113     tctagttgtcagaattttacactaagcaccctaaactaagtaacaaactgaaaacaaatc
+FBgn0105062     aaaaaatacataaatcaataaatatcagcctccggatattaaaagatatgtcgaattttg
+FBgn0188109     ttcaaattttcaaaactagaaaaaataagaaagaacatcaatcaatttttaaaagcgtgg
+FBgn0074735     taaccatgacgagcgcacagtgggacaactgtgtagtgtgcgagccttgtacatctcccg
+FBgn0029521     tctttatgcttaatctcaaccttctagcttttatagtttctgagatcccgaccttcattt
+FBgn0098447     ttttatattatgaatttataaaacatatagaaaagaattaatcaatgaattaaaaatctg
+FBgn0137587     ctaaactccacggccccaaagcacccctgcacgtgccacttgtggcatacgggatcgaat
+FBgn0173958     aaagatggagagccggacagacggaaatggtcatatcgactcggctattgatcctgatcc
+                                                                            
+
+FBgn0226952     tagttttgcttggccactaatcaagtttgtttcgttggtcccccccctgttgccctcttt
+FBgn0157967     ctcacctagaaaaccttcatagagtccaacgagttgcatgccttgtggcatcaacttctt
+FBgn0206644     ataaaaataaaaaaactgaaaacaaaacgttgtaaaattaaaaacttaaagcctcatcgg
+FBgn0234113     ttttgaaaatacataaaactaagaaatttgtggtgagagcgttaagtaatgtcagcctcc
+FBgn0105062     gaataagcatacaagcacgttaatcaataatttaaaaggtatatcagtaatataaaaaac
+FBgn0188109     gcgtggcagttctgggcggtttgtgggcgttagagtggcaacatggctcaaccccgacac
+FBgn0074735     tacaaggagatacaaaaacgaacggccaacatgaagtctcccctagaaaacctccataga
+FBgn0029521     ggacgaacagacagatggagagacggacagacggaaatggtcagattgactcggctatta
+FBgn0098447     gttaagtacttaataaacccaacaaataaatagtaataatagcttttaataatttattgt
+FBgn0137587     tagcttaaaaggtcaatgcagttcatgtagaatataatttgtattgacattattatattt
+FBgn0173958     tatggtcggaaacgcatcctctaacctgttacatacttttcaacgaatctagtataccct
+                                                                            
+
+FBgn0226952     cgttctcggtttttatatatttttcccacgataaataggggcagtcgacatttgttttaa
+FBgn0157967     ggaaggcaactatgcgatcgttgcaccatcgacgccacctgaaatgggaatccccaccct
+FBgn0206644     acttcaaatatttctaataacatcagcgacacgatgaaggtattttattctcctgtccgg
+FBgn0234113     ggatatgaaaagatatgtcaaattccggaataagctaacaagcacgttgtatcaataatt
+FBgn0105062     tactggctgactcgaccatgacgatggtatacacgactggtatataaatataaaaacgga
+FBgn0188109     tagaataattattctcaacaaacttgcgttgcgtctatgtctctagaatctgtatgctta
+FBgn0074735     gtccaacgagttgcatggctttgcgatcgttgcaccatcgacgccacctgaaatgggaac
+FBgn0029521     atcctgatcctgtataaaaagtaggcaagaccagtaacgttactgttagctatgacgaac
+FBgn0098447     tccgagaattatgccatcaatttgtttatgtaatttatgtcataaaattactaatttaaa
+FBgn0137587     attatttataatggtgattacttttgtgttgactatatcgagtagtcactaaaattgtaa
+FBgn0173958     tttactcaacaagtaacaggtataaaaagtaggcaagaccagtaacgttacagttagcta
+                                                                            
+
+FBgn0226952     ttgaattttagttctgttaaagcaaagcgaagcttttaattatatttcgaatgggttttt
+FBgn0157967     atgtcaagtccctattaagaataattgctatggggagtgagcaaagaagagatatgatgg
+FBgn0206644     ccagattgagtcggttaccactttagttctattttagctgtgcatttgctaaatattaca
+FBgn0234113     taaaagttacatcagtaataggaaaaacttctggctgacaatgaccatgatggtttatac
+FBgn0105062     ggcggtaagaccataattgttacggttagctatgatgaacggcggggtgaaatttgtaaa
+FBgn0188109     atctcaaccttctagcttttatacttcctgagatctcgacgttaatatggacgaacagaa
+FBgn0074735     ccccaccctatgtcaagtccctattaagaataattgctatggggagtgagcaaagaagag
+FBgn0029521     agtctggtgaaattagtaaatataaacatatattaaagacatatatcccaataacattag
+FBgn0098447     tacctatattttaaaatatctcagcaaatataattatggcaactaatagagttcaataaa
+FBgn0137587     atacaaataatagttccctgatggatagaaatatgaaatggaaactaaataatattatat
+FBgn0173958     tgacgaacattgtggtgaaattagtaaatatacacatatatattaaatacgtatatctca
+                                                                            
+
+FBgn0226952     aattgaaatccgccaaacccgagcaccggttgtgtcgcccaaacaaacagaaactacata
+FBgn0157967     acggatatgttgtatgctttaatatttgaagtgaaaatgcatcaattcaaaagagtgttt
+FBgn0206644     acctattgcatttttaataaattttatattattaaattgaataaaatcaaccgatatatg
+FBgn0234113     gactagtatataagaataaaaaaaaacaagttggtaagaccagcagcgttacctttagct
+FBgn0105062     tatacatttacgaatacaaaaaatgaaaataaacgcaatgtgtttcttaattgttaacaa
+FBgn0188109     agatggagagccggacagacggaaatggtcatatcgactcggctattgctcctgatccta
+FBgn0074735     atatgatagatggatatgttgtatgctttaatatttgaagtgaaaatgcatcaattcaaa
+FBgn0029521     ggaatacaaaacattaatgaaaacttgatgtatttcttgttaaatacgaaaggataaccg
+FBgn0098447     tgggtaagcaagctgatagcctcgtctaattaaataataaaaatataaatagccatcgaa
+FBgn0137587     ctttcggaaatatttgatagacctattatcattatgatttttatttccaaatcatatttg
+FBgn0173958     ataacataaggaaatacaaaatattatagaaaacttgaaggaaataagcaaggataactg
+                                                                            
+
+FBgn0226952     aaacgcatgttctctaggcaattcatgcgagggaagaaatctgtgggatagatgatggcg
+FBgn0157967     ctcgaaaaagagtgtatggtgtggtgtatgtgtatgtggtttttgtcaaccactgtgccc
+FBgn0206644     tatatatatatctatatgaatatccaaaatctacaacatattcatatttgtcggaccaaa
+FBgn0234113     atgatgaacggtggggtgatatttgtaaatatacatttcaaacactttaacacattttgg
+FBgn0105062     aggataactgatagttatgcatgcttgcagtaggtgatatttatcaaaggcatatataca
+FBgn0188109     tggtcggaaacgcatcctctaacctgttacatataaagtgcaaataaatgagacccaaaa
+FBgn0074735     agagtgtttctcgaaaaagtgtgtattgtgtggtgtatgtgtatgtggtttttgtcaacc
+FBgn0029521     atagttatttatgctttcagtagaggacacttataaaatgcatatacaaataaatgagac
+FBgn0098447     cagccatttccgagccattaacatgataataaaatcacaatccagcccagcggagagaca
+FBgn0137587     ttgaattgataaatattagtaaaacataaatctttcagacttataatatttgtgaaacac
+FBgn0173958     atagttatttatgctttcagtacaggacatttataaaatgcaaataaatgagacctaaaa
+                                                                            
+
+FBgn0226952     aaatattgtaagtccaaggtaaggtctgcaggcagacaatgaccatgagatatgttgaga
+FBgn0157967     caaagctggagggcggagcgacgcggggagctgtgctccggtgctgcggtggtgctctgt
+FBgn0206644     ccaaacgtatgtatttgggtaagactggaaaagcatttgcaaaattgtattcggctaaca
+FBgn0234113     aattaagaaaaaataaaaaaaagtattataattccttattatcaagaaaatataacaagg
+FBgn0105062     taaataaatcctaaaaccaagtatatggaaacactgtgtattgtattgaataacatcata
+FBgn0188109     accaaataatgaacacattgtgtgttgcatgaataacttcatatgctaataacttaaatg
+FBgn0074735     actgtgcctccaaagctggagggcggagcgacgcggggagctgtgctccggtgcggcggt
+FBgn0029521     ccaaaaatcaaataatgaacacattgtgtattgcacgaaataacttcacatgctagtaac
+FBgn0098447     attaaagtgatgtggctaatgagaaaatgaatgggttattaaaattcataagtatttgta
+FBgn0137587     taagttagcttgatcatcgcgcatttctatttcatatagttattgctgactttgtgccag
+FBgn0173958     accaaataatgaacacattgtgtgttgcatgaataacttcatatgctagtaacttaaatg
+                                                                            
+
+FBgn0226952     gagttgagtgagcgcccgtagctagagaccacaaaaaaattttgagaacttgaagttctc
+FBgn0157967     tggcctacgtttagacgtttagacggacagacgcctcgggcgtataattaaatcattttc
+FBgn0206644     gcgatattggcccactgtgcaaaacaggtgcctggttgtcttgtcggtaggtgtggactt
+FBgn0234113     tgctagcagcaaggtgctaggtacgttttgcccaggtgcctcgtgggtttttagacagac
+FBgn0105062     tacttgtaacttaaatgtgtccaataataatcttgcaccaacgtgctaggtactttttgc
+FBgn0188109     tgcacaataataatcttgcaccaaggtgctaggcatgaggggtacgctttgccctgttgc
+FBgn0074735     ggtgctctgttggcctacgtttagacgtttagacggacagacgcctcgggcgtataatta
+FBgn0029521     ttaaatatcttaaatataataatcttgcaccaacgtgctaggcatgagtggtacgctttg
+FBgn0098447     tcattattggtccgtatatccagaaacgtacaatgacataccagtgagccaccgtgccac
+FBgn0137587     tgtgccaaacaggtgcctgcctgtcttgcagtaggtgtggactcggacccgcgcccgggg
+FBgn0173958     tgcacaataataatcttgcaccaaggtgctaggcatgaggggtacgcgaagccctggtgc
+                                                                            
+
+FBgn0226952     cttgtctaggcagacacacctcatggatgtggaaccactgtgcttggaaacaggtgtcgc
+FBgn0157967     caggcctcaccatgccgcaccatgccgcaccagagcagacccagagcaggcccaaacccg
+FBgn0206644     ggtcccgcaccccgggcgtataattaaatcatttgccataaagttttacttagccaagtt
+FBgn0234113     aatcgcctcgagcgtataattaaaccatttgctagccaaaccaacccgttttacctagcc
+FBgn0105062     ccaggtgctttgtgggcttttagacagacagtcacatcgagcgtataattaaaccatttg
+FBgn0188109     ttcgtgggtttttagacagacagtcgcctcaagcgtataattaaaccatttgctggccaa
+FBgn0074735     aatcattttccaggcctcaccatgccgcaccagagcagacccagagcaggcccaaacccg
+FBgn0029521     ccctggtgctttgtgggttattagacagacagtcgcctcgagcgtataattaaaccattt
+FBgn0098447     tgtcgccgtcttggacaggtgtggtgtgaagtttagaccaagtttagaccgacagacgcc
+FBgn0137587     cgcataattaaatcattcaccatgaagttttacttagccacgttttctgcgcggtgtgtg
+FBgn0173958     ttcgtgggtttttagacagacagtcgcctcgagcgtataattaaaccatttgctggccaa
+                                                                            
+
+FBgn0226952     atttgcctccagcctataattaaatcatttgtcgagcagtttgatttctcaggtagcata
+FBgn0157967     accgggcggtttcatttaaccaagtttatccgctgtccggggcgttaacgaaggcaacgc
+FBgn0206644     ttctgggcttgtgtcaactgctgctctaatgaagaccgacaaattaacattttatttata
+FBgn0234113     aagtttttccgtttttccgtttttccgtttacccgtggcactaaattatcttgtatttta
+FBgn0105062     ctagccaaaccaacccgttttacctagccaagtttttccgtttacccgtgacactaaatt
+FBgn0188109     accaacccgttttacctcgccaagttttccgcttacccgtggcaataaattatcttgtat
+FBgn0074735     accgggcggtttcatttaaccaagtttatccgctgtccggggcgttaacgaaggcaacgc
+FBgn0029521     gctagccgaaccaacccgtttcacctcgtcaagttttccgcttacccgtggcaataaatt
+FBgn0098447     cggggcgggtaattaaatcatttgccggccgtttcacttttggccaacttggcagcgggg
+FBgn0137587     tgttttaatgaagaccgacaaattaacgttttatttataaggtcaattagtcgagtctgg
+FBgn0173958     accaacccgttttacctcgccaagttttccgcttacccatggcaataaattatcttgtat
+                                                                            
+
+FBgn0226952     gctatccaatccaatgatagctctggggcgttaataaagactttcaaatttaatgtggaa
+FBgn0157967     aaattaaatggtatttatggcactaattaggcgattgagttttccaaaacttttcaactt
+FBgn0206644     aggccaattaggcgacacactcgaaaactaatttaaagcgtccacacccccataatatgt
+FBgn0234113     aagcctaattaggcgacaacagagtttcgttcaaagtttttctagccagccccccaaaca
+FBgn0105062     atcttgtgttttaaagtctaattaggcgacaacagagttttgttcaaagtttttctagcc
+FBgn0188109     tttaaagactaattaggcgacaacagagttttgttcaaagtttttctagccagcccacca
+FBgn0074735     aaattaaatggtatttatggcactaattaggcgattgagttttccaaaacttttcaactt
+FBgn0029521     atcttgtattttaaagactaattaggcgacaacagagttttgttcaaagtttttctagcc
+FBgn0098447     cgttaacaaaaaaatatcaagagaccaacaaattgtacttcttttttagaaaattaaaaa
+FBgn0137587     ttaagcgatttcttccactgtcccacactcccacactcacgcttcataaatgagatgcac
+FBgn0173958     tttaaagactaattaggcgacaacagagttttgttcaaagtttttccagccaacccacca
+                                                                            
+
+FBgn0226952     cttgcccaattagcctgttggatgagagctgtgaagtcaatcaagtcggtggtcagttgg
+FBgn0157967     gccaccccaattccagcgattgccggaagttcttttgacacccttttgtgaggtctactc
+FBgn0206644     ttgtcgtggatgcaagaaaatgtgaccgtctatgttcccagctgcttgcggccaatttca
+FBgn0234113     tttttaaatacacccaaatgggtaatcattcttagtttagatttcccagcactcaactca
+FBgn0105062     agcccccaaaacatttttaaatacacttaaatgggtaatcattcttagtctagatttccc
+FBgn0188109     aacatttttaaatacacttaaatgggtaatcattcttagtttaaatatcctcagtataaa
+FBgn0074735     gccaccccaattccagcgattgccggaagttcttttgacacccttttgtgaggtctactc
+FBgn0029521     agccctcgaaacatttttaaatacacttaaatgggtaatcattcttagtttaaatttccc
+FBgn0098447     aaaacctggccaattataagttttccaagtccttcacggaaaaggacacttaagataccc
+FBgn0137587     acaaaaatcgacctgggcagcggcggttggacgacaaagccttatcagtttcagctggca
+FBgn0173958     aacatttttaaatacacttaaatgggtaatcattcttagtttaaatatcctcagtataaa
+                                                                            
+
+FBgn0226952     gtcggtcagttgtcaacgaaATGTCTAAGCTTTTGGCAGTATGTCTAAGCAATTTGTGGA
+FBgn0157967     agacctcatttgggatcgaaATGTTCAAGCTACTGGGAGTCTCTCTCGCGGATTTGTGGA
+FBgn0206644     acgcttcagttggcatcgggATGTCCAAGCTGCTGGAGGCCTGTTTAGCTGATTTGTGGA
+FBgn0234113     gtaactcagtagagaacgaaATGTCAAAGCTAATCGAGGTGTTTCTGGGGAATCTGTGGA
+FBgn0105062     agcactcagtagagaacgaaATGTCAAAGCTAATCGAGGTGTTTTTGGGGAATCTGTGGA
+FBgn0188109     tttactcagtaaaggacgaaATGTCAAAGCTAATCGAGGTGTTTCTGGGTAATCTGTGGA
+FBgn0074735     agacctcatttgggatcgaaATGTTCAAGCTACTGGGAGTCTCTCTCGCGGATTTGTGGA
+FBgn0029521     agcactcagtaaaggacgaaATGTCAAAGCTAATCGAGGTGTTTCTGGGTAATCTGTGGA
+FBgn0098447     agccttcagtttcagtcgaaATGTCAAAGCTAATCGAGGTGTGTTTGAGGAATTTGTGGA
+FBgn0137587     ttggctcagttggcatcagcATGTCCAAGCTGCTGGAGGCGTGTCTGAGTAATTTGTGGG
+FBgn0173958     tttactcagtaaaggacgaaATGTCAAAGCTAATCGAGGTGTTTCTGGGTAATCTGTGGA
+                     *** *      *   ****  *****  * *  *  * * *     ** ***** 
+
+FBgn0226952     CCCAACGTTTCACCTTTGGCCGTATGGGTTTGGAGCTACGTCCTCCACGGAATAGTATGG
+FBgn0157967     CGCAACGCTTCACCTTTGCCCGCATGGGCATCGACCTGCAACCGATGTCGGCAACTGGTG
+FBgn0206644     CGCAACGTTTCACCTTTGCCCGCATGGGCCTGGAGCTGCAACCAGATCGCCAAGTGCTAC
+FBgn0234113     CGCAGCGTTTTACCTTCGCTCGGATGGGCTTGGATCTGCAGCCCGACAAAAAGGGCAAAG
+FBgn0105062     CGCAGCGGTTTACCTTCGCCCGAATGGGCTTGGATTTGCAGCCCGACAAAAAGGGCAAAG
+FBgn0188109     CGCAGCGTTTTACCTTCGCCCGAATGGGTTTGGATTTACAGCCTGATGAAAAGGGCAATG
+FBgn0074735     CGCAACGCTTCACCTTTGCCCGCATGGGCATCGACCTGCAACCGATGTCGGCAACTGGTG
+FBgn0029521     CGCAGCGTTTTACCTTCGCCCGAATGGGTTTGGATTTGCAGCCCGATAAAAAGGGCAATG
+FBgn0098447     CTCAGCGGGTCACCTTCGCCAGGATGGGCCTGGAGCTGCAGCCCGGCAAGGGTCAGCGAG
+FBgn0137587     TGCAGCGCTTCACCTTTGGCCTGATGGGCCTGGACCTGCGGCAGGACCGGAGGACGCTCC
+FBgn0173958     CGCAGCGTTTTACCTTCGCCCGAATGGGTTTGGATTTACAGCCTGATGAAAAGGGCAATG
+                  ** **  * ***** *     *****  * **  * *  *                  
+
+FBgn0226952     GCCGTATACTCTACTCTCCGTTCATTTATATCATCATGGTGGTGGCAACGAGTTTTGAAT
+FBgn0157967     ACGGTGCTCTGCGCCGCCCCGTTCTGTACGGTATTATGGTACTGGCCACCAGCTTCGAGC
+FBgn0206644     GCTCGTCGCTCACCTATTACGCCATGGTGCTTGCCACCAGCTTCGAGCTGTGCACCGTTT
+FBgn0234113     TTTTGCGATCTCCGCTTCTTTTTAGTATTATGTGTCTGACCACAGGCTTCGAGCTCTGCA
+FBgn0105062     TTTTGCGATCTCCGCTTCTTTATGGTATTATGTGTCTGACCACGGGCTTTGAGCTCTGCA
+FBgn0188109     TTTTGCGATCTCCGCTTCTTTATTGTATTATGTGTCTGACCACAAGCTTTGAGCTCTGTA
+FBgn0074735     ACGGGGCTCTGCGCAGCCCCGTCCTGTACGGTATTATGGTACTGGCCACCAGCTTCGAGC
+FBgn0029521     TTTTGCGATCTCCGCTTCTTTATTGTATTATGTGTCTGACAACAAGCTTTGAGCTCTGCA
+FBgn0098447     TCCTGCGATCTCCTCTCCTCTACGGCATCATGGTCCTTGCCACCAGTTTCGAACTCTGTA
+FBgn0137587     GCTCCCCAGTCACTTACCTCGTCATGATGCTGGCCACCAGCTTCGAGCTGTGCACCGTCT
+FBgn0173958     TTTTGCGATCTCCGCTTCTTTATTGTATTATGTGTCTGACCACAAGCTTTGAGCTCTGTA
+                                                                            
+
+FBgn0226952     TCTGCACCGTTTGTGCCTTTATAGTGGAACATCGTAGCGATATTGTACTCTGTTCGGAGG
+FBgn0157967     TGTGTACCGTCTGCGCTTTTATGGTGCACCACCGACACCAGATCGTGCTCTGCTCGGAGG
+FBgn0206644     GCGCCTTCATTGTGCTGCATCGCAGCGATATTGTGCTCTGCTCGGAGGCACTAATGCACG
+FBgn0234113     CCGTGTGCGCCTTTATGGTTCAACATCGCAACCAAATCGTGCTTTGTTCCGAGGCCCTGA
+FBgn0105062     CCGTGTGCGCCTTCATGGGCCAACATCGCAACCAAATCGTGCTTTTTTCCGAGGCCCTGA
+FBgn0188109     CCGTGTGCGCCTTTATGGTCCAAAATCGCAACCAAATCGTGCTTTTTTCCGAGGCCCTGA
+FBgn0074735     TGTGTACCGTCTGCGCCTTTATGGTGCACCATCGACACCAGATCGTGCTCTGCTCGGAGG
+FBgn0029521     CCGTGTGCGCCTTTATGGTCCAAAATCGCAACCAAATCGTGCTTTGTTCCGAGGCCCTGA
+FBgn0098447     CGGTGTGCGCCTTCATGGTGGAGCATCGAAATCAGATTGTTTTGTGTTCGGAGGCCCTGA
+FBgn0137587     GCGGTTTCATCGTGCAGCAGCGGCACGACATAGTGCTCTGCTCCGAGGCGCTGATGCATG
+FBgn0173958     CCGTGTGCGCCTTTATGGTCCAAAATCGCAACCAAATCGTGCTTTGTTCCGAGGCCCTGA
+                       *                                                    
+
+FBgn0226952     CCTTAATGCATGGCGTTCAGATGATTTCATCAATTTTGAAAATGACAATATTCGTTTATA
+FBgn0157967     CGCTGATGCACGGCCTTCAGATGATCTCTTCGCTGCTCAAGATGACCATCTTCCTGGTCA
+FBgn0206644     GTATCCAGATGATCTCCTCGCTACTGAAGATGACCATCTTTGTGTGCAAGTGCCCAGAGC
+FBgn0234113     TGCACGGGTTACAGATGGTCTCCTCGCTTCTGAAGATGGCTATATTCTTGGCCAAATCCC
+FBgn0105062     TGCACGGGTTACAGATGGTCTCCTCGCTACTGAAGATGACTATATTCTTGGCCAAATCCC
+FBgn0188109     TGCACGGGCTACAGATGGTCTCCTCGCTACTGAAGATGGCTATATTCTTGGCCAAATCCC
+FBgn0074735     CGCTGATGCACGGCCTTCAGATGATCTCTTCGCTGCTTAAGATGACCATCTTCCTGGTAA
+FBgn0029521     TGCACGGACTACAGATGGTCTCCTCGCTACTGAAGATGGCTATATTCTTGGCCAAATCTC
+FBgn0098447     TGCACGGTCTCCAGATGATTTCCTCGCTCCTCAAGATGGCCATCTTTTTGTTGAAGTCCC
+FBgn0137587     GCATCCAGATGGTCTCCTCGCTGCTGAAGATGATCATCTTTGTGTGCAAGGGCCGGGAGC
+FBgn0173958     TGCACGGGCTACAGATGGTCTCCTCGCTACTAAAGATGGCTATATTCTTGGCCAAATCCC
+                                                    *     *                 
+
+FBgn0226952     GGTCCCAAGGGCTAGTACAACTAATCGAATTGATAGAGCAACCATTTATCAAAGATAATG
+FBgn0157967     AGTCCGGCGACTTGATCTCGCTCATCCACCAGCTGCAGGAGCCCGTCCCCAGCCGAGTGG
+FBgn0206644     TGGTGTCTCTCATTGGCGCCCTGCAGGCGCCCTTTCGCCATTCCAACGCCAACGCAGCTG
+FBgn0234113     ACGACCTGATGGCCCTAATTCAACAGATACTGGCGCCTTTTGCGGGGGAAGATCTCGGGG
+FBgn0105062     ACGACCTGGTGCTTCTAATTCAACAGATAATGGCGCCCTTTACGGAGGAGGATCTTGGGG
+FBgn0188109     ACGACCTGGTGGCCCTAATTCAACAGATTCAGTCGCCTTTTAGGGAAGAGGATCTTGGGG
+FBgn0074735     AGTCCGGCGACTTGATCTCGCTCATCCACCAGCTGCAGGAGCCCGTCCCCAGCCGAGTGG
+FBgn0029521     ACGACCTGGTGGACCTAATTCAACAGATTCAGTCGCCTTTTACAGAGGAGGATCTTGTAG
+FBgn0098447     AGGACCTGGTAAGCCTGGTGCGGATGATTCAGGATCCGTTTCAGGGGGAGGACATCGGAC
+FBgn0137587     TGGTGTCTCTGATCGCCGCCATCCAGGCGCCTTTTCTGCGAGCAAACATCGAGGCAGCCG
+FBgn0173958     ACGACCTGGTGGCCCTAATTCAACAGATTCAGTCGCCTTTCAGGGAGGAGGATCTTGGGG
+                                                                            
+
+FBgn0226952     ATCGAGCAGCGGAAACTGAAGTGGAGCAGAATTTATGGCATTTGCAAAATCGTCGAGGAC
+FBgn0157967     TCCGTCGCGGCCAGCAGCTGGCAGCCATCTACTTCCTGATGTGCGCCGGGACGAGCGTTT
+FBgn0206644     AGCTTCGCATTTGGCAATTGCAGAATCGTCGCGGCCAGCTCTTCTCGGCCATATATTTCC
+FBgn0234113     ACACGGAGTGGAGATCGCAAAATCGGAGGGGCCAACTAATGGCTGCCGTTTACTTTATGA
+FBgn0105062     ATACCGAGTGGAGATCGCTAAATCGGAGGGGACAATTAATGGCTGCCATTTACTTTATGA
+FBgn0188109     GTAAGGAGTGGAGATCTCAAAATCGGAGGGGACAACTAATGGCTGCTATTTACTTTATGA
+FBgn0074735     TCCATCGCGGCCAGCAGCTGGCAGCCATCTACTTCCTGATGTGCGCCGGGACGAGCGTTT
+FBgn0029521     GTACAGAGTGGAGATCCCAAAATCAAAGGGGACAACTAATGGCTGCCATTTACTTTATGA
+FBgn0098447     TGGATCAGTGGAGAGTGCAGAACCGCAGAGGCCAGCTACTGGCAGCCGTTTATTTCATGA
+FBgn0137587     AGCTGCGAGTCTGGCGCGTGCAGAACCGTCGCGGCCAAATCTTCTCGGCCATCTACCTGC
+FBgn0173958     GTAAGGAGTGGAGATCTCAAAATCGGAGGGGACAACTAATGGCTGCCATTTACTTTATGA
+                                                                            
+
+FBgn0226952     AATTGTTGGCCTTCATCTATTTCATGATGTGTGCCGGCACCAGTGTTTCGTTCCTTCTGA
+FBgn0157967     CCTTCCTTCTGATGCCGCTGGCCCTGACCATGGTGCGGTTCCACCAAACGGACCGGTTCG
+FBgn0206644     TACTGTGTGCCGGCACCAGCGTCTCCTTTCTGCTAATGCCGCTCTCGTCAACCGCCCTGC
+FBgn0234113     TGTGTGCCGGCACGAGTGTGTCATTTCTGTTGATGCCAGTGGCTTTGACCATGCTTAAGT
+FBgn0105062     TGTGTGCCGGCACGAGTGTGTCATTTCTGTTGATGCCAGTGGCTTTGACCATGCTTAAGT
+FBgn0188109     TGTGTGCCGGCACGAGTGTGTCATTTCTGTTGATGCCAGTGGCTTTGACCATGCTTAAGT
+FBgn0074735     CCTTCCTTCTGATGCCGCTGGCCCTGACCATGGTGCGGTTCTACCAAACGGACCGGTTCG
+FBgn0029521     TGTGTGCCGGTACGAGTGTGTCATTTCTGTTGATGCCAGTGGCTTTGACCATGCTTAAGT
+FBgn0098447     TGTGTGCCGGGACGAGTGTATCCTTTTGGGTGATGCCTTTGGTGATGACCCTGCTGAGAT
+FBgn0137587     TGATGTGTGCTGGCACCAGCATCTCCTTCCTGGTCATGCCCGTCGCATCAACGGCTCTGA
+FBgn0173958     TGTGTGCCGGCACGAGTGTGTCTTTTCTGTTGATGCCAGTGGCTTTGACCATGCTTAAGT
+                                                                *           
+
+FBgn0226952     TGCCAGTGACCATGACCATGTGGCATTATTATAGCCATGGTTTATTTCAGCCGAGTAGTT
+FBgn0157967     AGCCTGTCAGCTCTTTTCGTGTGCTgtaagtgggaaagcaggggagagcatggccatcag
+FBgn0206644     ATTACTATCGAACTGGCCAGTTTGTGCCCGTAAGCTCGTTTCGTGTTGCgtaagtgacca
+FBgn0234113     ATCATTCCACTGGGGAATTCGCGCCTGTCAGCTCGTTCCGGGTGCTgtgagttatctttt
+FBgn0105062     ATCGTTCCACTGGGGAGTTCGCGCCTGTCAGCTCGTTCCGGGTGCTgtgagttatcttaa
+FBgn0188109     ATCATTCCACTGGGGAATTCGCGCCTGTCAGCTCTTTCCGTGTGCTgtgagtaatcttaa
+FBgn0074735     AGCCTGTCAGCTCTTTTCGTGTGCTgtaagtgggaaagcaggggagagcatggccatcag
+FBgn0029521     ACCATTCCACTGGGGAATTCGCGCCTGTCAGCTCGTTCCGGGTTCTgtgagtaatcttaa
+FBgn0098447     TCTACAACACGGGAGAGTTTATCCCAGTCAGCTCCTTTCGAGTGCTgtaagttcaggact
+FBgn0137587     TTTACTACAAATCCGGACAATTTGTGCCCGTCAGCTCGTTCCGGGTCGCgtaagtggcaa
+FBgn0173958     ATCATTCCACTGGGGAATTCGCGCCTGTCAGCTCTTTCCGTGTGCTgtgagtaatcttaa
+                                                                            
+
+FBgn0226952     CGTTTCGCGTTAGTCTGCCGTACGATGTAACTCAACCATATATCTATATATTGGATTGTT
+FBgn0157967     ctcagatctgagatatttgttcctccccagACTTCCCTACGATGTGACCCAGCCGCATAT
+FBgn0206644     tttttgaatcgcaattaatatataagtcaggggaagcgttaaggacgttttactttagaa
+FBgn0234113     gtccattcgcggattcgcgttatactactattttttaggttgacaatttcccttcgtttc
+FBgn0105062     ataagtatgaacatttgagtctatgggtggacttcgttgatggtttctatcagttgccag
+FBgn0188109     aaagtatgaacattttaattaattggtgcaatttggtataatgtcattttatagattgat
+FBgn0074735     ctcagatctgagatatttgttcctccccagACTTCCCTACGATGTGACCCAGCCGCATAT
+FBgn0029521     aaagtatgaacattttaatcaattggtgcactttggtatactgtcattttataagttgat
+FBgn0098447     ctttttcaaggacttcttcagcaacttagaataatatttgtttctttccagCCTACCCTA
+FBgn0137587     ttagcttttatgcacttcacacactggcagcaaagtagtctttgccatacttcgacctct
+FBgn0173958     aaagtatgaacattttaatcaattggtgcaatttggtataatgtcattttatagattgat
+                                                                            
+
+FBgn0226952     TCCTGATGATGTTCGTATTGACATTCTTTTGCTGTTCCACAACCGCTGTGGATACATTGT
+FBgn0157967     ATATGCCCTGGACTGCTGCCTGATGGGTTTTGTGCTGACGTTCTTTTGCTGCTCCACTAC
+FBgn0206644     ctatcactgtaaaatgatctaacatttccatctataccgatctttgctaagttatgaaga
+FBgn0234113     cagctcttttgtaatttcatgtaattatgtactaagatgcttttttcttctaatctcagA
+FBgn0105062     ctctttttttttttgtaattttttgtaattatgtactaagatacttttttcttctaatca
+FBgn0188109     cttttctataatttttcagctttttgtaattttatatatatatgtatgtactgagatact
+FBgn0074735     ATATGCCCTGGACTGCTGCCTGATGGGGTTTGTGCTGACGTTCTTTTGCTGCTCCACTAC
+FBgn0029521     catttctataaattacccgattttttgtaatatgaaattatgtactgagacacttttttg
+FBgn0098447     CGATGTCACGCAGCCCCACATCTACGCCCTGGACTGTGGCCTCATGGTGTTCGTCCTGAT
+FBgn0137587     acagctctctataggtatctaggaaaaaattagcttcgtccccttgtcaccaacaattta
+FBgn0173958     cttttctataattttccagctttttgtaattttatatatatatatatatatgtatgtact
+                                                                            
+
+FBgn0226952     ATGGTTGGTTTGTCTTTGGCCTAACTGCCCATTATCGTCGTTTGGGTGTGCATTTGGAGC
+FBgn0157967     GGGAGTGGACACACTATACGGCTGGTTTGCCGTGGCCCTGAGCTCCCACTACCGCCGGCT
+FBgn0206644     tgctgattcatgagtgtgcttatgattgaagtttgttttagcagctctatatagtgttct
+FBgn0234113     CTGCCATACGATGTGACTCAACCGCATGTTTACGCCATGGACTGCTGCTTGATGGTATTC
+FBgn0105062     cagCCTTCCATACGACGTGACTCAACCGCATGTTTACGCCATGGACTGCTGCTTAATGGT
+FBgn0188109     tttttgttcttatctcagACTTCCATACGATGTGACACAACCGCATGTTTACGCCATGGA
+FBgn0074735     GGGAGTGGACACACTATACGGCTGGTTTGCCGTGGCCCTGAGCTCCCACTACCGCCGGCT
+FBgn0029521     ttgttatctcagGCTTCCATACGATGTGACACAACCGCATGTTTATGCCATGGACTGCTG
+FBgn0098447     GTTCTTCTGCTGCTCCACCACAGGCGTGGACACCCTCTACGGATGGTGTGCCTTGGGCCT
+FBgn0137587     ttcttattctttaatattattattagatattgacagatttgcttattgctatgttatata
+FBgn0173958     gagatactttttttgttcttatctcagACTTCCATACGATGTGACACAACCGCATGTTTA
+                                                                            
+
+FBgn0226952     GGCTTGAGGATTTCCGTAGTGAGCATTTGAAACCGATTTTCCATGAACATGCCCATTTAC
+FBgn0157967     CACCACCCAGCTGCAGTTGCACTTGCCTCTATCGGACCCCTCCCGACCAGACCTGGGCCT
+FBgn0206644     gatcctctcaaataggaaagtaatattataattgtttcataaggattcagaactaagaaa
+FBgn0234113     GTGTTGAGTTTCTTCTGCTGCTCCACCACCGGAGTGGATACCTTATATGGATGGTGTGCT
+FBgn0105062     ATTTGTGTTAAGTTTCTTTTGCTGCTCCACCACCGGAGTTGATACCTTATATGGATGGTG
+FBgn0188109     CTGCTGCTTGATGGTATTTGTGTTAAGTTTCTTTTGCTGCTCCACCACTGGAGTGGATAC
+FBgn0074735     CACCACCCAGCTGCAGTTGCACTTGCCTCTATCCGACCCCTCCCGACCAGACCTGGGCCT
+FBgn0029521     CTTGATGGTATTTGTGTTAAGTTTTTTTTGCTGCTCCACCACCGGAGTGGATACCTTATA
+FBgn0098447     GAGCTCCCAATACCGTCGTCTGGGCCAGAAACTGAAGACCCTTTCCCAAAACCCAGATCC
+FBgn0137587     cgactgaatttaaaccgaaattatttacatttcttttgatttaagcatatgtaacataat
+FBgn0173958     CGCCATGGACTGCTGCTTGATGGTATTTGTGTTAAGTTTCTTTTGCTGCTCCACCACTGG
+                                                                            
+
+FBgn0226952     TTGGCCTGGTGCAACGCTTCAATTTGGCCTTTCGTGATATTGCCTTTGTCGAGGTACTCT
+FBgn0157967     GGGGCACCTGTTTGCCCAGCACGCTCGGCTCTTGGCTCTGGTCGATCGCTTCAATGCGGC
+FBgn0206644     aaatcgtctattgttgttgtttggccttatttaagtcaaatgaaggatagaaaagatttt
+FBgn0234113     TTGGGCTTGAGCTCCCAATACCGTCGCCTCGGTCAACAACTTAAGGGGATGCGCTCCTGC
+FBgn0105062     CGCTTTAGGCTTGAGTTCCCAATACCGCCGCCTCGGCCAACAACTTAAAAGGATACGCTC
+FBgn0188109     CTTATATGGATGGTGTGCTTTAGGCGTGAGTTCACAATACCGTCGCCTTGGTCAACAACT
+FBgn0074735     GGGGCACCTGTTTGCCCAGCACGCTCGGCTCCTGGCTCTGGTCGATCGCTTCAATGCGGC
+FBgn0029521     TGGATGGTGTGCTTTAGGCGTGAGTTTACAATACCGTCGCCTCGGTCAACAACTTAAAAG
+FBgn0098447     ATCTCGCAGCGATTTGGGATTGAGTGAACTATTCTCGGAACATGCTCGTCTGCTCAAGCT
+FBgn0137587     caaagggaagcaaaggctctaaaggataacaaatgtaaaggaggtttaataaattttttg
+FBgn0173958     AGTGGATACCTTATATGGATGGTGTGCTTTAGGCGTGAGTTCACAATACCGTCGCCTTGG
+                                                                            
+
+FBgn0226952     TAATCTGTGTGCTCTACTGTTCGGTTATCTGTCAGTATATAATGCCGCATGTAAATCAAA
+FBgn0157967     CTTCCGGGAAATCGCCTTCGTCGAAGTGCTGGTCATCTGCGTGCTCTACTGTTCCGTCAT
+FBgn0206644     agaagcttcacaaactaaataacttagttaatattttatcgtaatatagttaaattttga
+FBgn0234113     TTCAATCCACACCGTTCTGACTACGGATTAAGTGGTCTATTCGTCGAGCACGCTCGTCTG
+FBgn0105062     CTGCTTTAATCCATCTCGTTCTGACTTCGGATTAAGTGGTATTTTTGTCGAGCACGCTCG
+FBgn0188109     TAAAAGGATGACCTCCTGTTTCAATCCATCTCGGTCTGACTTCGGATTAAGTGGGATTTT
+FBgn0074735     CTTCCGGGAAATCGCCTTCGTCGAAGTGCTGGTCATCTGCGTGCTCTACTGTTCCGTCAT
+FBgn0029521     GATACCCTCCTGTTTCAATCCATCTCGGTCTGACTTTGGATTAAGTGGGATTTTTGTGGA
+FBgn0098447     GGTAGGATTCTTCAATGCCAGCTTCAAAGAGATTGCCTTCGTGGAGGTCCTGGTGATCTG
+FBgn0137587     gtgagcagattttgaagatggagatgtcatagggctaaagtaccaattgactactcaagc
+FBgn0173958     TCAACAACTTAAAAGGATGACCTCCTGCTTCAATCCATCTCGGTCTGACTTCGGATTAAG
+                                                                            
+
+FBgn0226952     ATTTCGCCTTTTTGGGTTTCTTTTCGATGGTGGTGACCACTCAATTATGTATCTATGGTT
+FBgn0157967     CTGCCAGTACATCATGCCGCACACGGACCAGAACATAGCCTTCCTCGGGTTCTTCTCGAT
+FBgn0206644     cttattattgacctataataagcctaaattatttggactcatatatattctaatttttcc
+FBgn0234113     CTTAAATTAGTGCAACAATTTAATTTATGTTTCATGGAGATAGCTTTTGTGGAGGTTGTA
+FBgn0105062     ACTGCTTAAATTAGTCCAATATTTTAATTCAACTTTTATGGAGATCGCTTTTGTGGAGGT
+FBgn0188109     TATTGAGCATGCTCGTCTGCTTAAATTAGTCCAACATTTTAATTCAAGTTTTATGGAGAT
+FBgn0074735     CTGCCAGTACATCATGCCGCACACGGACCAGAACATAGCCTTCCTCGGGTTCTTCTCGAT
+FBgn0029521     GCATGCTCGTCTGCTTAAAATAGTCCAACATTTTAATTATAGTTTTATGGAGATCGCATT
+FBgn0098447     TGTCCTGTACTGCTCGGTGATCTGCCAGTACATCATGCCGCATACGAACCAGAACTTTGC
+FBgn0137587     tgctagcagatttctgtagtatttatggacctacctaaccatttatcagaaaaaaaccgt
+FBgn0173958     TGGGATTTTTATTGAGCATGCTCGTCTGCTTAAATTAGTCCAACATTTTAATTCAAGTTT
+                                                                            
+
+FBgn0226952     TCGGTGCGGAGCAAGTGCGTCATGAGGCCGATCAGTTTGCCCTGAAATTGTATCAACAGT
+FBgn0157967     GGTGGTCACCACGCAGCTGTGCATCTATCTGTTTGGCGCCGAGCAGGTGCGTCTCGAGGC
+FBgn0206644     acaaattatgggaattgaaattatcaaaaattattaaaattataatccatatgtggaata
+FBgn0234113     ATAATCTGTGTGCTCTATTGTTCAGTAATTTGCCAGTATATAATGCCACACACCAACCAG
+FBgn0105062     TGTGGTAATCTGTGTGCTCTATTGTTCAGTAATTTGCCAGTATATAATGCCACACACCAA
+FBgn0188109     CGCATTTGTGGAGGTTGTTATAATCTGTGTACTCTACTGCTCAGTAATTTGCCAGTATAT
+FBgn0074735     GGTGGTCACCACGCAGCTGTGCATCTATCTCTTTGGCGCCGAGCAGGTGCGTCTCGAGGC
+FBgn0029521     TGTGGAGGTTGTTATAATCTGTGGACTCTATTGCTCAGTAATTTGTCAGTATATAATGCC
+FBgn0098447     CTTTCTGGGCTTCTACTCGATGGTGGTGACCACCCAGCTGTGCATTTATTTGTTTGGAGC
+FBgn0137587     cgactctggtatttagggacctactaaaagaacttttaaaatattgtcgggatacacttt
+FBgn0173958     TATGGAGATCGCATTTGTGGAGGTTGTTATAATCTGTGTACTCTACTGCTCAGTAATTTG
+                                                                            
+
+FBgn0226952     TACCTTGGCATAGCCTAAACGTCAAAGAGCGTCGTTTGCTCCTGCTGCCCATGCAAAGGG
+FBgn0157967     GGAGGGCTTCTCGAGACAGTTGTACCAGCTAGTGCCATGGCAAGGGCTCTCTCCGAACCA
+FBgn0206644     tattggaatttatattacccattattataggcacagtcttggtaaaaaggttatccataa
+FBgn0234113     AACTTCGCCTTCCTGGGTTTCTTTTCGATGGTAGTTACGACCCAGTTGTGCATCTATCTT
+FBgn0105062     CCAGAACTTCGCCTTTCTGGGTTTCTTTTCGATGGTAGTTACGACCCAGCTGTGCATCTA
+FBgn0188109     AATGCCACACACCAACCAAAACTTCGCCTTTCTGGGTTTCTTTTCGATGGTCGTTACCAC
+FBgn0074735     GGAGGGCTTCTCGAGACAGTTGTACCAGCTAGTGCCATGGCAAGGGCTCTCTCCGAACCA
+FBgn0029521     ACACACCAACCAAAACTTCGCCTTTCTGGGTTTCTTTTCATTGGTAGTTACCACACAGCT
+FBgn0098447     CGAGCAGGTGCGTCTGGAGGCCGAAGGATTCGCCAGGCAGCTGTACCAGGCGATGCCCTG
+FBgn0137587     gcggctgaaatatcgactatgatattcgggttttaaagcgatctgccgaaatgttactgg
+FBgn0173958     CCAGTATATAATGCCACACACCAACCAAAACTTCGCCTTTCTGGGTTTCTTTTCGATGGT
+                                                                            
+
+FBgn0226952     CCCAAAAGGAAACTATTCTTGGTGCTTACTTCTTTCTTTTGGGTAGGCCACTTCTAGTCT
+FBgn0157967     TAGGAGGCTCCTACTGCTGCCCCTGCAGCGGGCCCAGGGGGACATGGTGCTGGGCGCCTA
+FBgn0206644     tatatatactccaagatatactatatttctgcctggaatttaggagctcgaaaggttgtc
+FBgn0234113     TTTGGTGCCGAACAGGTCCGTTTGGAGGCTGAGCGATTTTCCAGGCTGCTATACGAAGTA
+FBgn0105062     TCTTTTCGGTGCCGAACAGGTCCGGTTGGAGGCTGAGCGATTTTCCGGGCTGCTATACGA
+FBgn0188109     ACAGCTGTGCATCTATCTTTTCGGTGCCGAACAGGTCCGTTTGGAGGCTGAGCGATTTTC
+FBgn0074735     TAGGAGGCTCCTACTGCTGCCCCTGCAGCGGGCCCAGGGGGACATGGTGCTGGGCGCCTA
+FBgn0029521     GTGCATCTATCTTTTCGGTGCCGAACAGGTCCGTTTGGAGGCTGAGCGATTTTCCCGGCT
+FBgn0098447     GCAAGGACTCGGACCAGTTCATCGGAGACTACTGCTGATTCCATTGCAACGCTCGCAGAA
+FBgn0137587     taatacttaggcactcagccaaactgcaaactgaactctcgactcaaatatttagggacc
+FBgn0173958     AGTTACCACACAGCTGTGCATCTATCTTTTCGGTGCCGAACAGGTCCGTTTAGAGGCTGA
+                                                                            
+
+FBgn0226952     GGgtaagattgctcaacactttagtctctctgactatcgtttgattaatcctaaactctt
+FBgn0157967     CTTCTTTGATCTGGGGAGGCCTCTACTCGTTTGGgtgagtaaaagatgtacgagtatgat
+FBgn0206644     catatgtggactctattcttctcacaaaatataagaatttatctgagctaacttattagg
+FBgn0234113     ATCCCTTGGCAAAACCTTCCTCCACAACACCGGAAGCTTTTCCTTTTTCCACTTGAGCGC
+FBgn0105062     AGTAATTCCTTGGCAAAACCTTTCTCCACAACACCGGAAGCTTTTCCTTTTTCCGCTTGA
+FBgn0188109     CTGGCTGCTATACGAAGTAATTCCTTGGCAAAACATTCCTCCACAACACTGGAAGCTCTT
+FBgn0074735     CTTCTTTGATCTGGGGAGGCCTCTACTCGTTTGGgtgagtaaaagatgtacatgtatgta
+FBgn0029521     GCTATACGAAGTAATTCCTTGGCAAAACCTTCCTCCTAAACACCGGAAACTTTTCCTTTT
+FBgn0098447     GGACACGGAACTGGGGGCCTATTTCTTTCAACTAGGAAGACCTCTTCTGGTTTGGgtgag
+FBgn0137587     caccaaaaaattaatcaaataaatattttgggacccacttatctttacagctcatatttc
+FBgn0173958     GCGATTTTCCTGGCTGCTATACGAAGTAATTCCTTGGCAAAACCTTCCTCCACAACACCG
+                                                                            
+
+FBgn0226952     attcttgtagATCTTTCGTACAGCCGGATCTTTTACCACTCTGCTGAATGCCCTAAGAGC
+FBgn0157967     gtatgagttcatccctgttgtaatgtgggtaaacagATCTTCAGGACAGCGGGCTCCTTT
+FBgn0206644     catagttttagtcaacagttaggtttcgattaggtaaaatcttattgcaattgatttaat
+FBgn0234113     GCCCAACGAGAAACTGTTCTAGGTGCTTATTTTTTCGAACTGGGCAGACCTCTTCTTGTT
+FBgn0105062     GCGCGCCCAGCGACAAACGGTTTTAGGTGCTTATTTTTTCGAACTGGGCAGACCTCTTCT
+FBgn0188109     CCTTTTTGCAATTGAGCGCGCCCAACGAGAAACTGTTCTCGGTGCTTATTTTTTCGAACG
+FBgn0074735     tgatgtatgaattcatccctgttgtaatgtgcgtaaacagATCTTCAGGACAGCGGGCTC
+FBgn0029521     TCCAATTGAGCGCGCCCAACGAGAAACTGTTCTCGGTGCTTATTTCTTCGAACTAGGCAG
+FBgn0098447     tattttatagcatttttatttatatttttagttattatatatattttttatatatttcat
+FBgn0137587     gactagcaaagctttcgcctataatacttaggcacctaaccaaactgcaaacgaaagtct
+FBgn0173958     GAAGCTTTTCCTTTTTCCAATTGAGCGCGCCCAACGAGAAACTGTTCTCGGTGCTTATTT
+                                                                            
+
+FBgn0226952     TCAATATGAAAAGGCATAAagttttattggttttttggatgtggatttttatttattata
+FBgn0157967     ACCACACTGCTCAATGCTCTCTATGCCAAGTATGAGACAATGCCGACAGCTTGAtgagag
+FBgn0206644     tatttaataattattgttgaattctatatggttcgaaatagttcaatgcaccgtttaagc
+FBgn0234113     TGGgttagtatactcttttccattgtattaacattttcactttgttttattcaaaaggtt
+FBgn0105062     TGTTTGGgtaagcatattatttttcatggtattaacattttaattttgttgttgagtttg
+FBgn0188109     GGGCAGACCTCTTCTTGTTTGGgtaagcacattccttaatgttgtattaatattttaata
+FBgn0074735     CTTTACCACACTGCTCAATGCTCTCTATGCCAAGTATGAGACTATGCCGACAGCTTGAtg
+FBgn0029521     ACCTCTTCTTGTTTGGgtaagcatattcctttttattgtattattattttaatttatttg
+FBgn0098447     tttattttatttttttttactagATTTTTAGAACAGCTGGCTCATTTACAACTCTACTAA
+FBgn0137587     agactcaaatatccactgacctcgagaattttggcaaaactgttagagacctaactatct
+FBgn0173958     TTTCGAACTGGGCAGACCTCTTCTTGTTTGGgtaagcacattccttaatgttgtattaat
+                                                                            
+
+FBgn0226952     tatatatttatttgtttaaaattacatttaacagctgtacacagaaatattatgaaaaaa
+FBgn0157967     gaggagcaccttcgaaaataatattcatatccgagtgttttcatttcgtttttatttagg
+FBgn0206644     tgtgcacccagttatagctcgcagctatctcatttatctagttaacgcagacagttgcac
+FBgn0234113     gttgatgatttactatctgatctatgtaattttaatctttttcgtaattatttaaagATA
+FBgn0105062     ttgttgtaaagtttgttggtttactatctgaaatatatattttgaattttttcattatta
+FBgn0188109     tattttattcaaaaagtttgttattttactaattgatcaatataaattaaatttgtttgt
+FBgn0074735     agagggggagcaccttcgaaaataatattcatatccgagtgtttttatttcgtttttatt
+FBgn0029521     attcaaaaagtttcttattttactaattgatcaatacaaataatttttttatattatttt
+FBgn0098447     ATGCTCTCTATGGCAAGTATGAAACTAACTAGtatttttggcggctattttggattaatt
+FBgn0137587     ttgcagctgagatttcgacactcagccgatctttcgcctgtaatacttaagcacctaaca
+FBgn0173958     attttaatttattttattcaaaaagtttgttattttactaattgatcaatataaattaaa
+                                                                            
+
+FBgn0226952     tcatattattcactcgtataaaatatatatacataagtatatatttaaattttttttctc
+FBgn0157967     tttaagattacatttaacagctgattggttttgtcgatttctcgcttttatgtacacaca
+FBgn0206644     ttgcgcacctgccgattacctcgatccatctcaacctttcctagGTTGCCCTATGATGTC
+FBgn0234113     TTTCGCACAGCAGGCTCTTTTACCACTCTGATGAACGCTCTCTACGCAAAATACGAAACG
+FBgn0105062     tttaaagATATTTCGCACAGCCGGCTCCTTTACGACATTGATGAACGCTCTCTACGCAAA
+FBgn0188109     attattttcttaaagATATTTCGCACAGCAGGCTCTTTTACAACTTTGATGAACGCTCTC
+FBgn0074735     taggtttaagattacatttaacagctgattggttttgtcgatttctcgcttttatgtaca
+FBgn0029521     ttaaagATATTTCGCACAGCAGGCTCTTTTACAACTTTGATGAACGCTCTCTACGCAAAA
+FBgn0098447     ttcattgttggaaggttttgaaaaaatttggtgaaatataaaatattgttttatataaat
+FBgn0137587     agactgcaaacagaagcctcgactctcctaatgagggacctaccaaaaattaaaaaaaat
+FBgn0173958     tttgtttgtattattttcttaaagATATTTCGCACAGCAGGCTCTTTTACAACTTTGATG
+                                                                            
+
+FBgn0226952     atcctttaaagataaactaaaatctagaattacaaaaaaaaaaagaaacatacacacatt
+FBgn0157967     cataataaaattatgctcaattagacaaaaaatacattacattagatacgcatataagat
+FBgn0206644     ACGCAGCCGGCTATCTATTTGCTGGACTGCTGCTTGATGGTGCTTGTGTTGACCTTCTTC
+FBgn0234113     CATTAAaaacaatatgttactcatatacctgaagtcaacctttatgggtcaatgaaggca
+FBgn0105062     ATACGAAACGCATTAAacacaatacgttggctcatataagtgaagtcagcctttatggat
+FBgn0188109     TACGCAAAATACGAAACGCATTAAaaacaatatgtttactgatatattgtatgtgaagtc
+FBgn0074735     cacacataataaaattatgctcaattagacaaaaaatacattacattagatacgcatata
+FBgn0029521     TACGAAACGCATTAAaaaacaaagtcaacatttatgactcaataaagtaatttattaaat
+FBgn0098447     tatggaatttttttgagaataaatatatgtctacttgtcttaaatatgtctaaaataata
+FBgn0137587     aaatagttagggacccatttatctttacagttgatatttcgactagcaaagctttcgcct
+FBgn0173958     AACGCTCTCTACGCAAAATACGAAACGCATTAAatacaatatgtttactgatatattgta
+                                                                            
+
+FBgn0226952     attattaatattattattattatttagtatatagaaaaactaaaaggaagctattgcaat
+FBgn0157967     atatagagatataaagtatagtagactaagggctaagattacgaattaacaacaggaatg
+FBgn0206644     TGCTGCTCCACCACCGGCGTGGACACACTCTACGGCTGGTTCGTCTTTAGCCTGACGGCA
+FBgn0234113     tttattaaatgaatatttgtgtactgtttttttttaatcatttttatttaggtgtaaaat
+FBgn0105062     aaataaaggcatttattaaatgaatatttatgtactattttttaaaaatcatttttattt
+FBgn0188109     aaaatttatgacttaataaagtactttattaaattagtatttgtgtactattttttaaat
+FBgn0074735     agatatatagagatataaagtatagtagactaagggctaagattacgaattaacaacagg
+FBgn0029521     tattatttgtgtactattttttaaatcaattttatttaggtattaaattacaattatcat
+FBgn0098447     gctacacttttcattaaaagttcaataaaaagagtgtatccagacacgtaaaaatgtaag
+FBgn0137587     ataatacttaaacccccagccaaactgcaaacagatctctcgactcaaatatttagggat
+FBgn0173958     tgtgaagtcaaaatttatgacttaataaagtactttattaaattagtatttgtgtactat
+                                                                            
+
+FBgn0226952     tgaacgctgaagaagaagaagagtggcgaagtgtggtgagtaaaggtgaatagtggtgaa
+FBgn0157967     atgcaggacaaacagacagacgtaaaacaaaaaaaaatataaagatacatttggattgga
+FBgn0206644     AACTATCGTCGGCTTGTGCTGCAGCTGCAGCGCGATCTAGGACAGGCTCCAGCTAGTCGG
+FBgn0234113     tacaattatcatctggttttatgtacacacacataataaaattatgcttaattagacaaa
+FBgn0105062     agtttaaaattacaattatcatatctgtttttatgtacacacacataataaaattatgct
+FBgn0188109     catttttatttaggtttaaaattacaattatcataactggttttatgtacaaacacataa
+FBgn0074735     aatgatgcaggacaaacagacagacgtaaaacaaaaaaaaatataaagatacatttagat
+FBgn0029521     atctggttttatgtacacacacataataaatttatgcttaattggacaaaaagaattaca
+FBgn0098447     ttccctctaaatattttactcttaatagatgtctctggatgccttcttataatatttaaa
+FBgn0137587     ctaaggaactctgccgaaatagtttgcggtcaacctatccttgcagctgagatttcgact
+FBgn0173958     tttttaaatcatttttatttaggtttaaaattacaattatcataactggttttatgtaca
+                                                                            
+
+FBgn0226952     gtcgagtcctgtggcttggtgagaatggtgaaatgggctatgcaatgaaatttgactcaa
+FBgn0157967     gaactgttgaggatgttgagtaggggtggcagtggcagtgatagtgatagtggtagtggc
+FBgn0206644     GAGCTGGAGCGTTACCTGGCTGAGCTTTTTAGACAACATGCCCAGCTGTTGGAGCTAGTG
+FBgn0234113     aacgaaacatttagatatatatatctatataatatatatatgcagtaaactacaggctaa
+FBgn0105062     taattagacaaaaaagaactacattataattgcgaataaatcattaagatatatatatct
+FBgn0188109     taaatttatgcttaattagacgaaaagaattacattatagttgcgtataaaatatatatt
+FBgn0074735     tgaagaactgttgaggatgctgagtaggggtggcagtgatagtggtagtggcatggaagg
+FBgn0029521     ttatagttgcgcataaaatatattttatatatatttatataaaaatgtaatatatatgta
+FBgn0098447     atttatttacactattctaaaaaatatataatattttattgcaattcttgtttcttattt
+FBgn0137587     gtgatacctagcttttctaagtcatctgccgaaacgttactggtaatacttaagcaccta
+FBgn0173958     aacacataataaatttatgcttaattagacgaaaagaattacattatagttgcgtataaa
+                                                                            
+
+FBgn0226952     gagttcgattggtgatcaattggtgtttgcttgtttttcttcttttcttttcttttcttt
+FBgn0157967     atggaatgaagcacaaaatttgagggatcttggggggctcttaagagtaagacgcgattg
+FBgn0206644     GCTCGCTTCGAGGTGGTCTTTCGGGACATTGCCTGCGTGGAGGTGCTCTTAATCTGCGTG
+FBgn0234113     ttttaaaatgtaacaaacagtgcgagattaaaagcagacagaccaaaaaaaaaacagaaa
+FBgn0105062     atataatatatatatatatatgtagtagactacaggctagttttaaaatttaacaaacag
+FBgn0188109     atatataaatgtatatatataaatatataatatatatgtagtagactacgggctaattta
+FBgn0074735     aagcacaaattttgagggattttggggggctcttaagagtaagacgcgattgatttgtgg
+FBgn0029521     gtagactacgggctaatttaaaaatttaacaaacattgcgagattaaaagcagacagaca
+FBgn0098447     aaattttgaacgatttttcttaccattttattttctccctatgtcagagaccctttttaa
+FBgn0137587     gccaaactgcaaactgaggtctcgactcaaatatttagggacctacataaagaactttac
+FBgn0173958     atatatattatatataaatgtatatatataaatatataatatatatgtagtagactacgg
+                                                                            
+
+FBgn0226952     ttctttcttttctcacaaaataaaataaataaaactaaatcagcagagtggggagggagg
+FBgn0157967     atttgtgggcggtgtgggcgtttttgcatttgcattcatctggaaataaaataaataaat
+FBgn0206644     CTCTACTGCTCCGTGATCTGTCAGTACATCATGCCGCACACCAACCAGAACTTTGCCTTT
+FBgn0234113     taaaatatgtacgagtatatgttacggtaaagtgcttgcatttgttgacatggaatttgg
+FBgn0105062     tgcgagattaaaagcagacagacaaaaaaaaacagaaataatatatgtttatgttatggt
+FBgn0188109     aaaatttaacaaacattgcgagattaaaagcagacagacaaaaaaaaacataaaaagtat
+FBgn0074735     gcagtgtgggggtttttgcatttgcattcatctggaaataaaataaataaatctaacagt
+FBgn0029521     aaaaaaaaactgaaaaagtatatgtatatgtattagataaagtgcttgcatttgttgaca
+FBgn0098447     aagcattcctcataaaaaaaaaccatttaacttgtttttatttcgtttttatttaggttt
+FBgn0137587     cgaaatagttgttagtatcctaccttaccttttaacagaattttcgcatgcagtgtgttt
+FBgn0173958     gctaatttaaaaatttaacaaacattgcgagattaaaagcagactgacaaaaaaaatata
+                                                                            
+
+FBgn0226952     tagggaaatgctgtttttctcttttggaagagggggatgagggcaagatgttgaataaag
+FBgn0157967     ctaacagtggagagaaatgaatatgattcgccggccggcgcactgcggcaccattgagtg
+FBgn0206644     CTCGGCTTCTTCTCGCTGGTGGTAAGCACACAGCTGTGCATTTATGGCTTCGGCGCCGAG
+FBgn0234113     ggtggctattacattttgttgtggcttgcatttatctcgatatataataaataaaactaa
+FBgn0105062     aaagtgcttgcatttgtggacatggagtggggtggctattacattttgttgcggcttgca
+FBgn0188109     atgtatatactatggtaaagtgcttgcatttgttgacatggaaattggggtggctattac
+FBgn0074735     ggagagaaatgaatatgattcgccggccggcgcactgcggcaccattgagtgcactgcac
+FBgn0029521     tggaaattggggtggctattttgttgtggcttgcgtttatctcgaaatataataaataaa
+FBgn0098447     aaaattacatttaacatttctcgttttatgtacacacacattgagcataaaattatgctc
+FBgn0137587     tttttttttttttttagttagcagaacttttagctgtaatgcttgagcgccttgctactg
+FBgn0173958     aaaagtatatgtatatactatggtaaagtgcttgcatttgttgacatgggaaattggggt
+                                                                            
+
+FBgn0226952     atgaagtattttgtatttttgtattttttgttgttgttgcgaatttgcttagcttagctg
+FBgn0157967     cactgcaccgcaccgcaccgcttagctgagggccagcagggggtccaggtcgagcgggtc
+FBgn0206644     CAGGTGCGTCATGAGGGTGAACAGTTTGCTCAGCGACTCTATCAGCTTGTGCCCTGGCAT
+FBgn0234113     caacggtaatcgaaagtttgggtgcttgctttttaggcttttcttttaggtttgacgctt
+FBgn0105062     tttatctcgatatataataaataaaactaacaacggtaatcgaaagtttgggtgctttct
+FBgn0188109     actttgttgtggtttgcattcatctcgaaatataataaataaaactaacaacggtattaa
+FBgn0074735     cgcaccgcaccgcttagctgagggccagcagggggtccaggtcgagcgggtccgacttgg
+FBgn0029521     tctaacaacggtattcgaaagtttgggttctggcttatagggttattctttttgacgctt
+FBgn0098447     aattagacaaaaaataattacattagatacgcgtatagaggcatacagagcacgccatgg
+FBgn0137587     cttactgaattcgtgattgtaatatttagggacctcccgcagatctttcgcctataatac
+FBgn0173958     ggctattacattttgttgtggtttgcattcatctcgaaatataataaataaaactaacaa
+                                                                            
+
+FBgn0226952     agggctaacaacggttcctgttccatttccaaatccgtgtctcctcgtgaatcctttgga
+FBgn0157967     cgacttgggactcgtcttcttccggtacttcttctgcagcttcgtcttggccagcttggt
+FBgn0206644     CAATTGACGCCACGTCAGCGCCGTCTGCTGCTGCTCCCGCTGCAACGTGCCCAGAAGGAG
+FBgn0234113     aactcagagctaataaaggttctatttcttgaggatcctggactttgggagctgcctttt
+FBgn0105062     ttttaggcttcttctttttgacgcttaactcagagctaataagggctctatgtcttgagg
+FBgn0188109     aaagtttgggtgcgtgctttttaggcttattctttttgacgcttaacttagagctaataa
+FBgn0074735     gactcgtcttcttccggtacttcttctgcagcttcgtcttggccagcttggtcttcgact
+FBgn0029521     aacttagagctagtaaaggctctatttcttgaggatcctggactttgggggccgtttttt
+FBgn0098447     tatatatactattcatccgatgtcgggacacctatagagtatatatcgagtagactactg
+FBgn0137587     ttaaacccctagccaaactgcaaacagatctctcgactcaaatatttaggtacctactta
+FBgn0173958     cggtattagaaaagtttgggtgcgtgctttttaggcttattctttttgacgcttaactta
+                                                                            
+
+FBgn0226952     tttactttcttcttatagttcttatgcagctttgtgcgattcaatttcgttttgatctta
+FBgn0157967     cttcgacttggaggtgaccttggcctggccaccaacttggcctggtctggccgactgctt
+FBgn0206644     ACCCAACTGGGCGCTTACTTCTTTGTGCTTGGTCGGCCCTTATTGGTGTGGgtgagtcgg
+FBgn0234113     tgcggtatttcttctgcagttttgtcttagacagtttcgactttattttcgaagaggttt
+FBgn0105062     atcctgcactttgggagccgcctttttgcggtatttcttttgcaactttgtcttcgacag
+FBgn0188109     aggctctatttcttgaggatcctggactttgggagcaggtttttttcggtatttcttctg
+FBgn0074735     tggaggtgaccttggcctggccaccaacttggcctggtctggccgactgcttcttgaggg
+FBgn0029521     ttcggtattttttttgcaactttgtattagacaatttcgactttattttcgaagaagttt
+FBgn0098447     gctaattttaagtattaacaatcgatgcgagacaagaagcagacagaacaaaaaaaaaaa
+FBgn0137587     tttatctttacagttgatatttcgactagcaaagctttcgcctataatacttaaaccccc
+FBgn0173958     gagctaataaaggctctatttcttgaggatcctggactttgagagcaggtttttttcggt
+                                                                            
+
+FBgn0226952     ctaggctgctgcggttgcttcttcatggccgcctcttccaatgccttctcgcgatccaac
+FBgn0157967     cttgagggccgcctcctcgagggccttttcccggtcgagcagctctagctgctcaaaaat
+FBgn0206644     tcctttgccagcaattgctgagcaattattaaatctgctttgtatttgtagATTTTTCGC
+FBgn0234113     tttcctcgaattcggtctttttcagctctttttccctgtctagctgctccaactgctcaa
+FBgn0105062     tttcgactttattttcgaagaagttttgccctcgaattcggtcttcttcagctctttttc
+FBgn0188109     caactttgtattagacaatttcgactttattttcgaagaagttttattatcaaattcggt
+FBgn0074735     ccgcctcctcgagggccttttcccggtcgagcagctccagctgctcaaagatgttcttcg
+FBgn0029521     tgttctcaaattcggtatttttcagctctttttccctgtccagctgctctaactgttcaa
+FBgn0098447     aaacacacactcttggattaatgaatgaattacgaatattttgtgggaagaaagtgaaga
+FBgn0137587     agccaaactgcaaacagatctctccactcaaatatttagggatctaaagaactctgccga
+FBgn0173958     atttcttctgcaactttgtattagacaatttcgactttattttcgaagaagttttattat
+                                                                            
+
+FBgn0226952     agttccagctgttcgaatatattctttggatgcggatgactgcgttgatcatttatcgat
+FBgn0157967     gttcttcggatggggatgtgtgctgggggcggtggcattcttggccgcataaaccaccac
+FBgn0206644     ACAGCAGGTTCATTTACCACGCTGCTAAATACGCTGCGCGCACAAAATTAGactttgttg
+FBgn0234113     atatgtttttgggatgcggatgtgaatgcggtgcagtggcatttttggctgcatagacca
+FBgn0105062     cctgtccagctgctccaactgttcaaatatgtttttgggatgcggatgtgagtgtggtgc
+FBgn0188109     ctttttcggctctttttccctgtccagctgctctaactgttcaaatatgtttttgggatg
+FBgn0074735     gatggggatgtgtgctgggggcggtggcattcttggccgcatagaccaccacgaactggg
+FBgn0029521     atatgtttttaggatgcggatgagagtgtggtacagaggcatttttggccgcatacacca
+FBgn0098447     aagatttggaagaaagacttgtgggggtgaactaaaagaaaacagaactctctttctttt
+FBgn0137587     aatagtttgcggtcaacctatccttgcaggtgagatttcgactctgatacctagcttttc
+FBgn0173958     caaattcggtctttttcggctctttttccctgtccagctgctctaactgttcaaatatgt
+                                                                            
+
+FBgn0226952     ggtggcttggtggcatttttgggtgcataaacaacaacgaattgcgagaaagccgaatcg
+FBgn0157967     gaactgggagaaagccgagtccgcaggtgtgttgatgtcggcaaagtcccggaagttggc
+FBgn0206644     ggaaaatctctaacattgtttttattgttctccaactaaatactcccacttatttctctt
+FBgn0234113     ccacaaattgcgaaaatgccgtatcagcgggcgtgttgatatcggcaaagtcgcggaaat
+FBgn0105062     agtggcatttttggctgcatagaccaccacaaactgcgaaaatgccgtatcagcgggtgt
+FBgn0188109     cggatgagagtgtggtgcagtggcatttttggccgcatagaccaccacaaattgcgaaaa
+FBgn0074735     agaaagccgagtccgcaggcgtgttgatgtcggcaaagtcccggaagttggcgaactgtt
+FBgn0029521     ccacaaattgcgaaaacgccgtatcggcgggcgtgttgatatcggcaaaatcgcgaaaat
+FBgn0098447     ttttgctttgtggtagcttgcattcatctcgaaataaaataaataaaatctaacagttgg
+FBgn0137587     taaaagtcatctgccgaaatgttactggtaatacttaggcactcagccaaactgcaaact
+FBgn0173958     ttttgggatgcggatgagagtgtggtgcagtggcatttttggccgcatagaccaccacaa
+                                                                            
+
+FBgn0226952     gctggcgtattaatatcagcaaaatcacggaaattggcaaattgctcctccggatatgta
+FBgn0157967     gaactgttcctcgggataggtgtacttttggacgaagccctcggtgggccgtccgtgtcc
+FBgn0206644     ggcttttggcttttctttaaatttggcactatgagcctgaaaaatatatttaaaatggcg
+FBgn0234113     tggcgaactgctcctctggatatgtgtacttctggacaaatccctcggatggacgaccgt
+FBgn0105062     gttgatatcggcaaaatcgcggaaatttgcgaactgctcctctggatatgtgtacttctg
+FBgn0188109     tgccgtatcagcgggcgtgttgatatcggcaaaatcgcgaaaattggcaaactgctcctc
+FBgn0074735     cctcgggataggtgtacttctggacgaagccctcggtgggccgtccgtgtccgttgttgg
+FBgn0029521     tagcgaactgctcctctggatacgtgtacttttgaacaaaaccctcagatggtcgaccgt
+FBgn0098447     aaaacgattgaaaagtcggaagcgagtcctttgaatttagctgagagccagaaggggctc
+FBgn0137587     gaactctcgactcaaatatttaggtacctaccaaaaaattaatagttagggacccactta
+FBgn0173958     attgcgaaaatgccgtatcagcgggcgtgttgatatcggcaaaatcgcgaaaattggcaa
+                                                                            
+
+FBgn0226952     tatttctgtatgaatccctcggttggacgaccatgaccattatttgccgcatccccgtat
+FBgn0157967     gttgttggcgtccccgtagatgtaatcgctgttgtcctccggatggtagggcatctcctc
+FBgn0206644     tggaaaatagaaaaggtttcttgcaatcgttataacatgatttcccttagcatttatggg
+FBgn0234113     gtccattgttggcgtctccatagatgtagtcgctgttatcttcggggtgatagggcattt
+FBgn0105062     cacaaatccttcggatggacgaccgtgtccattgttagcgtctccatagatgtaatcact
+FBgn0188109     tggatatgtgtacttttgtacaaatccctcggatggtcgaccgtgtccattgttagcgtc
+FBgn0074735     cgtccccgtagatgtaatcgctgttgtcctccggatggtagggcatctcctcctccgggt
+FBgn0029521     gtccattgttagcatctccatagatgtaatcactgttatcttcggggtgatagggcattt
+FBgn0098447     cagttccaggggatcctggagcgtcttcttggccgccaccttctttctgtacttcttctg
+FBgn0137587     tctttacagttgatatgtcgactagcaaagctttcgcctataatacttaaacccccagcc
+FBgn0173958     actgctcctctggatatgtgtacttttgtacaaatccctcggatggtcgaccgtgtccat
+                                                                            
+
+FBgn0226952     atgtaatcgctgttatcctctggatggtaaggcatttcctcttcgggatagaaagtgcca
+FBgn0157967     ctccgggtagaaggtgccacctctcagcactccaaagtccccgctccccaggatgctggc
+FBgn0206644     aaataattttattaaataatatgctacttttattatgtcaataagaactgatgcgcatca
+FBgn0234113     cctcctccggatagaaggttccacctctgagcacaccaaaatccccacttccaagtatac
+FBgn0105062     gttatcttcgggatgatagggcatttcctcctccggatagaaggttccacctctaaggac
+FBgn0188109     tccatagatgtaatcactgttatcttcggggtgatagggcatttcctcctccggatagaa
+FBgn0074735     agaaggtgccacctctcagcactccaaagtccccgctccccaggatgctggcatcgaagt
+FBgn0029521     cctcctccggatagaaggttccacctctaaggacaccaaaatccccacttccaagtatac
+FBgn0098447     cagcttcgtcttcgccagcttggtcttggccttcgagctggccttgctcttggccagctc
+FBgn0137587     aaactgcaaacagatctctcgactcaagaactttactgaaatagttagtaccctaccaag
+FBgn0173958     tgttagcgtctccaaagatgtaatcactgttatcttcggggtgatagggcatttcctcct
+                                                                            
+
+FBgn0226952     ccgcgcaggacaccaaaatcaccgctacccaaaatacttgtatcgaaggcacgttgctgt
+FBgn0157967     atcgaagttacgctgctgcggatgctgcggctgctgctggggatggggatggggatgtgg
+FBgn0206644     atattgtttgattataatctgcaaaaaagattttctaaaatgtatatgcctgttaattta
+FBgn0234113     tggcatcgaaagtccgctgatgtggtgctggctgttgttgttgggttgccaagagtggaa
+FBgn0105062     accaaaatccccgcttccaagtatactggcatcgaaagtccgctgctgagttgctggctg
+FBgn0188109     agttccacctctaaggacaccaaaatccccacttccaagtatactggcatcgaaagtccg
+FBgn0074735     tacgctgctgcggatgctgcggctgctgctggggatggggatgtggctggggctgcacct
+FBgn0029521     tggcatcgaaagtccgctgctgagttgctggctgttgctgttgagttgtcaagagcggaa
+FBgn0098447     ctgctccttctccttctccctgtccagtagctccagctgctcgaagatgttcttcggatg
+FBgn0137587     tttttaggagaactttcgcatgtgatctggtttttttttttttttttttaagaagttagc
+FBgn0173958     ccggatagaaggttccacccctaaggacaccaaaatccccacttccaagtatactggcat
+                                                                            
+
+FBgn0226952     tgatgttgcggatgttgatgcggatgtagatgctgttgctgatgctgctgctgctgtggt
+FBgn0157967     ctggggctgcacctgctgctgctgctgctgctgtccggggtgctgtccaggcgccaatag
+FBgn0206644     atttcaaaaagagattaaacagtccggcatttctaacatcttttattctaactataaaaa
+FBgn0234113     ggggcagggataatggagttgtttccgatacaggcgggccgtggccgaaatagggtctgg
+FBgn0105062     ttgttgttgagttgccaagagtggaaggggtagggataaaggagttgtttccgatacagg
+FBgn0188109     ctgctgagttgctggctgttgttgttgagttgacaagagtggaaggggtaaggataaagg
+FBgn0074735     gctgctgctgctgtccggggtgctgtccaggcgccaatagaggtaatgggagagacaggg
+FBgn0029521     ggggtaaggataaaggagttgtttccgatacaggcgggccgtgaccaaagtaaggtctgg
+FBgn0098447     tggatgggagtgcggtgctgtcgcgttcttcgccgcatagaccaccacgaactgcgagaa
+FBgn0137587     agaacttttggctgtaatgcttaagcgccttgctactgctaactaaattcgtgattgtaa
+FBgn0173958     cgaaagtccgctgctgagttgctggctgttgttgttgagttgacaagagcggaaggggta
+                                                                            
+
+FBgn0226952     gactgttgaccaggcaacaggccaggcaatggcaatgccaacgacaatggtgaattctct
+FBgn0157967     aggtaatgggagagacaggggtgtgctctccgagacggatccgtggccgtggctcactcc
+FBgn0206644     tagttatgccctcgagaaactacatttgttgagcagatgtctgtccagattttgtttaaa
+FBgn0234113     aatggcccaatggaggagcctcatggtagaatggtggataaaaattttgcgcagcctgcg
+FBgn0105062     cggaccgtgaccaaaatagggtctggagtggcccaatggaggagcctcatggtagaatgg
+FBgn0188109     agttgtctccgatacaggcgggccgtgtccaaaatagggtctggagtggcccagtggagg
+FBgn0074735     gtgtgctctccgagacggatccgtggccgtggctcactccaaaatagggccgcgagtgac
+FBgn0029521     aatggcccagtggaggagcctcatggtagaaaggtgggtagaaattttgggcagcctgcg
+FBgn0098447     ggccgagtcggccggcgtgtttatgtccgcaaagtccctgaagttggcgaactgctcctc
+FBgn0137587     tattttgggacctaccagcagatctttcgtctataatacttaaacccctagccaaactgc
+FBgn0173958     aggataaaggagttgtctccgatacaggcgtgccgtgtccaaaatagggtctggagtggc
+                                                                            
+
+FBgn0226952     ggtccgggtaaatagggacgtgaatgacccaatggtggtgcctcatgatagaatggtggg
+FBgn0157967     aaaataaggccgcgagtgacccagcggcggtgcctcatggtagaacgggggatagaagtt
+FBgn0206644     tacgtttttttaacaatcgttaaatgtatcgcatttttatttgggtaaactaacccacga
+FBgn0234113     tatgggaatccccaaccacttttgtatttggattggctatgggtcggaatggctcctccc
+FBgn0105062     tggataaaaattttgggcagcctgcgtatgggaatccccaactattttcgtatttggatt
+FBgn0188109     agcctcatggtagaaaggtgggtagaaattttgggcagcctgcgtatgagaatcgccaac
+FBgn0074735     ccagcggcggtgcctcatggtagaacgggggatagaagttctgggccgcttggctgtgcg
+FBgn0029521     tatgagaatcgccaacaatcttcgtatttggattagcaatgggccggaatggctcctcag
+FBgn0098447     aggatacgtgtacttctggatgaatccctcggagggacgaccgtgcccgttgtttgcgtc
+FBgn0137587     aaacagatctctcgactcaaatatttaggtacctacttatttatctttacagttgatatt
+FBgn0173958     ccagtggaggagcctcatggtagaaaggtgggtagaaattttgggcagcctgcgtatgag
+                                                                            
+
+FBgn0226952     tagaaattctgtgctgcctggctatgtgaatctccggtatcggcacgggatatcaccaat
+FBgn0157967     ctgggccgcttggctgtgcgaatcggcccccacatcggagcgtgccaccagcttcgtgtt
+FBgn0206644     gcttaaatactcctaaataattttatatttctcctatgccaagcttttaaaacttaaccc
+FBgn0234113     catcggcattttgttgagccgcggattgaaatttcctgggttgaactctaggatgaattc
+FBgn0105062     agcaatgggtcggaatggctcctccccatcggcattttgttgggctgcggattgaaattt
+FBgn0188109     aatcttcgtatttggattagcaatgggccggaatggctcctccccatcagcattttgttg
+FBgn0074735     aatcggcccccacatcggagcgggccaccagcttcgtgttcggattggcaatgggtcgga
+FBgn0029521     cattttgttggagtgcggattgaaattttctgggttgaactctaggatgaattctagctt
+FBgn0098447     accgtagatgtagtcgctgttgtcctccggatggtagggcatctcctcctccggatagaa
+FBgn0137587     tcgactagcaaagctttcgcctataatacttaaacccccagccaaactgcaaacagatct
+FBgn0173958     aatcgccaacaatcttcgtatttggattagtaatgggccggaatggctcctccccatcag
+                                                                            
+
+FBgn0226952     tgcggatgttgctgcggatgcacaagttgttgttgttgttggtggtggtgttgctgctgc
+FBgn0157967     cggattggcaatgggtcggaactgctcctgctccggctcctgctcctgccggatgggcgc
+FBgn0206644     gaatgaatcacttaatattgttgtacgcaattcgatattttgtttataatctttattatt
+FBgn0234113     tggtctggatttgtggctgaagttgcgttgtgggcgccatatggaagtgttgttcatgcg
+FBgn0105062     cctgggttgaattctgggatgtattctggtttgaatttgtggttgaagttgcgttgtggg
+FBgn0188109     ggctgcggattgaaattttctgggttgaactctaggatgaattctagcttgaatttgtgg
+FBgn0074735     actgctcctgctccggctcctgctcctgccggatgggcgcctggaactgtctgggctgca
+FBgn0029521     gaacttgtggctgaagatgcgttgtgggcggcatatgaaagtgttgttcatgtgacttta
+FBgn0098447     ggtgccgccgcgcagcaccccaaagtctccgctacccaagatactggcatcgaagttccg
+FBgn0137587     ctccactcaaatattgagggatctaaagaactctgccgaaatagtttgcggtcaacctat
+FBgn0173958     cattttgttgggctgcggattgaaattttctgggttgaactctaggatgaattctagctt
+                                                                            
+
+FBgn0226952     tgctgctgttgttgttgttgttgttgttgttgttgttgttgttgctgtggattcacaatc
+FBgn0157967     ctggaactgtctgggctgcagctgggtgctgggcggcatgtggaagtgctgctcctggga
+FBgn0206644     aaaattacaattaagagctggtttctcattttatgtacacacacaatacaaatacaaata
+FBgn0234113     attttagtacagtgattggcgaaaaatcatttggctccatcagcatgtcgctgtcctctt
+FBgn0105062     cggcatatggaagtgttgttcatgcgatttcaatacagtgattggcgaaaaatcatttgg
+FBgn0188109     ctgaagatgcgttgtgggcggcatatgaaagtgttgttcatgtgactttagtacagtgat
+FBgn0074735     gctgggtgctgggcggcatgtggaagtgctgctcctgggatcgcagcaccgtgatcgggg
+FBgn0029521     gtacagtgattggcgaaaaatcatttggctccatcaccatgtcgctttcctcttccggaa
+FBgn0098447     ttgctgctgctgttgctgatgcgcctgctgggcttgctgctgctgcgggatcgatggctg
+FBgn0137587     ccttgcaggtgagatttcgactctgatacctagcttttctaaaagtcatctgccgaaatg
+FBgn0173958     gaatttgtggctgaagatgcgttgtgggcggcatatgaaagtgttgttcatgtgacttta
+                                                                            
+
+FBgn0226952     ggtcgaaattgctcttgctcgggatcacttcgatctggaactcggccatgtaattgcgtt
+FBgn0157967     tcgcagcaccgtgatcggggtaaactcattcggctccatcagcatgtctccatcttcctc
+FBgn0206644     caattatgtttaattaaacaaaaaataattaagtaatcgatacgcatcataaaatacgat
+FBgn0234113     ccggaaattcgtctgaaaaagtggcaagaatcagtttgatttttttagtttattttcgtt
+FBgn0105062     ctccatcagcatgtcgctttcctcttccggaaattcgtctgaaaaatttcaaatgaggag
+FBgn0188109     tggcgaaaaatcatttggctccatcagcatgtcgccttcctcttccggaaattcgtctga
+FBgn0074735     taaactcattcggctccatcagcatgtctccatcttcctccgggaactcagctgcaatag
+FBgn0029521     attcgtctgaaaatttttaaataaagaggagaaagcaaaaattagtcgaagtaattactt
+FBgn0098447     ctgaggacccaggagcggcaggggcagggagaggggagtgctctccgagacaggaccatg
+FBgn0137587     ttactggtaatacttaagcacctagccaaactgcaaacagatctctcgactcaagaactt
+FBgn0173958     gtacagtgattggcgaaaaatcatttggctccatcagcatgtcgccttcctcttccggaa
+                                                                            
+
+FBgn0226952     gtcggcggcatatgaaaatgctgttcatgtgaacgcaacactgtgattggtgtaaagtca
+FBgn0157967     cgggaactcagctgcaatagaaaagagaaatcagctagagactcgactgcaaagaaaaga
+FBgn0206644     taaacacataaaaatacaaatacgaatacaaatacaaatacgaataggctacgtgctata
+FBgn0234113     tttgcaatgagcatacaaacttccaaattttgatttcggactttaatgtttaaaactaaa
+FBgn0105062     aaatcaaaaatctgttgaagaaatctacgtaaaaggttagaggcgctcggatccttaata
+FBgn0188109     aaaattttaaatgaagaggataatgcaaaaattagtcgaagtaatctacttaaagggtta
+FBgn0074735     aaaagagaaatcagctagagactcgactgcaaagaaaagacttcagtgcttcactgcttc
+FBgn0029521     aataggttaaagagactcggatccctaatattcgtagtcgagccaacttgtgggattctt
+FBgn0098447     gccgaagtaaggacgagagtggcccagtggtggggcctcgtggtagaagggcggatagaa
+FBgn0137587     tactgaaatagttagtaccctaccaagtttttagcatgtgatcttttttttttttttttt
+FBgn0173958     attcgtctgaaaaattttaaatgaagaggataatgcaaaaattagtcgaagtaatctact
+                         *                                                  
+
+FBgn0226952     ttcggttccatcaacatatcgctatcctcctcagggaattccgctgaaatgaaacaagtg
+FBgn0157967     cttcagtgcttcactgcttcagtacttcactgcttcagtgggttgggatgtggatgtgga
+FBgn0206644     attaagtacaattaacaattatgcaacacgaattgtgagacaagtaaactgatacaaaaa
+FBgn0234113     atgttttgattttagtttgaaatattttttaaattttcggccgtataatcgtacgtacaa
+FBgn0105062     ttcgcaagaggcccctctttaaagtagactgttagaatcgttactttaaatttgcaatcg
+FBgn0188109     aagagacccggatccttaaaatagactgtaagaatcgttactttgcattcgcctgtcgtt
+FBgn0074735     agtacttcactgcttcagtgggttgggatgtggatgtggtttttacggtggatgaatgtt
+FBgn0029521     agtcttagattgtcagaatcgttactttaaatttgcattcgcctttcgttaaggattttg
+FBgn0098447     gttctgggccgcctgggagtgcgagtcggcgtcggaggatctggccaggagcttggcgtt
+FBgn0137587     ttaagaagttagtagaacttttagctgtaatgcttgagtgccttgctactgctaactaaa
+FBgn0173958     taaagggttaaagagacccggatccttaaaatagactgtaagaatcgttactttgcattc
+                                                                            
+
+FBgn0226952     aaaaacaaaatgaacaacaaaaaacaaaaacatattcatcttgccacttgagagcgagtt
+FBgn0157967     ttgtacggtggatgaatggtggatgggccagcgccactcgagtctcgggagctttctgcc
+FBgn0206644     aattacaataataatagctataataattttaaaataataattataataataataagtaca
+FBgn0234113     ttttggctttttctgttaacataaaatctgaagacatgatgaccctgatggcgataatga
+FBgn0105062     gctgtcgctccggattttgttaactttttcttagtttttgcaatgagcatatgaaattcc
+FBgn0188109     aaggattttgttagcctacataattccaagttttaatttcggtctttaaggcaaggctgt
+FBgn0074735     ggatgggccagcgccactcgagtctcgggagctttctgcctgcggcggctttgagtggtg
+FBgn0029521     ttagcttttccttcgttttttgctatgagcatacataattcaaaattttaatttcggtcc
+FBgn0098447     cggattggcgatgggccggaactgctcctcctcgggatcctgctgctggctgggggactg
+FBgn0137587     ttcgtgattgtaatattcagggacctgatatttgggctttaaagcgatctgccgaaaagt
+FBgn0173958     gcctgtcgttaaggattttgttagcctacataattccaagttttaatttcggtctttaag
+                                                                            
+
+FBgn0226952     tcgagtggcccctcagcaactgccacataaagatacctccacaacatttgtgattttaat
+FBgn0157967     tgcggcggctttgagtggtgcgtggcggcgcagcggaagactcttaacgtctttgtatga
+FBgn0206644     cacaactaggggaacaattgcaaaccatacgtggtgtgaagtggaaggagggggaggagc
+FBgn0234113     tgtcggtgtagatgtgtatggagatgtccatgtagatggtttagtacaatggggcataag
+FBgn0105062     aaattttaatttcggtttttagggcaaggtcgttcaacactgcccgtattaggaaaagca
+FBgn0188109     cgggactgttatattcgttttaacatgttttaattttaatttgaaatattttttaaaact
+FBgn0074735     cgtggcggcgcagcggaagactcttaacgtctttgtatgatgtttgacatcaagtggtga
+FBgn0029521     ttaaggcaaggctgtcggaactgttatattcgttgcagaattaaaaaatcacatatccat
+FBgn0098447     gaactgcctgggctgggccctcggcaggatcgcggcctgctgatgctggtgagtctgggg
+FBgn0137587     tactggtaatacataggcacccaaccaaactacaaactgatttctcaaatatttagggac
+FBgn0173958     gcaaggctgtcgggactgttatattcgttttaacatgttttaattttaatttgaaatatt
+                                                                            
+
+FBgn0226952     gtgtatgatgtatggcatcatcaagagtgcctctgtgatggatcatcatcatcatcatca
+FBgn0157967     tgtttgacatcaagtggtgaaatgtgttgccgaacatgtgtttttggtccaccataacga
+FBgn0206644     ttgcagcaggcgtgcgcgcggggcaagtgtgcaaatatgtgaaagagttcggcgaaaaag
+FBgn0234113     cgttaaattgagcgtgtcgtgcttacaacaaaagccccgggtgtgtgctcactttatata
+FBgn0105062     tcaattaaaatatcgccaaaccatttcttattcaaataaaaatgttttagttttaattag
+FBgn0188109     ttcgnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0074735     aatgtgttgccgaacatgtgtttttggtccaccataacgatggctgaaactacgaaagag
+FBgn0029521     gactttttcaaacaaacatgtttttattttaatttgaaataatttttaaaactttcggcc
+FBgn0098447     ctgcagctgcgtagtcggtggcatgtggaagtgctgctcgtgggagcgcagcactgttat
+FBgn0137587     ctacaaaaaaattaatagttagggacccatttatctttacagttgatatttcgactacta
+FBgn0173958     tttaaaactttcggccgtatgatcgtatgtacaagtttggctggtttaaaccatattata
+                                                                            
+
+FBgn0226952     tcatcatcatcatcatgatgacaatgcgcagtcagagaaagtttttgtctgttttcagga
+FBgn0157967     tgactgaaactacgaaagaggctgacgcacaggctgaaaaggaaacgaaagtctttcgac
+FBgn0206644     tatctaaagttggaattttatctctgctcaaaataaatatataaaaaaaaccacaagatt
+FBgn0234113     tacatatttttatgtgtataaccatatcattgtgcgatcatcatgacatgagcaagtcta
+FBgn0105062     aaatattttttaaattttcggccgtataatctcgtatgtacaattttggctttttagcgg
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0074735     gctgacgctcaggctgaaaaggaaacgaaagtctttcgacactatttccggtcagatgaa
+FBgn0029521     gtatgatcgtatgtacaagtttggctggtttaactcatatgggctatgttgttaagataa
+FBgn0098447     tggcgaaaagtcattcggctccatcagcatgtcactgtcctcctccgggaactcaactgc
+FBgn0137587     aagctttcgcctataatacttaagcccccagccaaactgcaaacagatctctcgactcaa
+FBgn0173958     ttgttaagaataaaatttgaagacataatgaccctgatggcgatnnnnnnnnnnnnnnnn
+                                                                            
+
+FBgn0226952     tcgtaacacttgagaatataaatacatgcgatatatgta---------------------
+FBgn0157967     actatttccggtcaggtgaagacctttaagcacgatccttcaaaaagaaaataaaccaaa
+FBgn0206644     tcgcagctaaaactcgctcccagctggatgtgggcccagcctggcgtttagctcagtgcc
+FBgn0234113     tttagtcacttacaacaaaattgcacattgcggtcgtcgtcgttattgttttttccacgg
+FBgn0105062     acatgggctctgagcttatattgtttaaataaaatcttaagacacgatgaccctgatggc
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0074735     gacctttaagcacgagccttcaaaaagaaaataaaccaaaatcctgatcaatctgtttgt
+FBgn0029521     aatctgaagacataatgaccctgatggcgataatgatgtcggtgtagatgtttatggaga
+FBgn0098447     aagacacaaaaaaaaaagacagtttttaaaaagagaaatcaagggtgttcaataaaaatc
+FBgn0137587     gaactttactgaaatagttagtaccctaccaagtttttagcagaactttcgcatgtgatc
+FBgn0173958     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     atcctgatcaatct----------------------------------------------
+FBgn0206644     agcagcggctccagctccagatctttgcttattgtctttttcttgtacttcttttggagc
+FBgn0234113     ctcttctttaattttttttagttgtcagtctctcggttgtggctgattatatgtacgatt
+FBgn0105062     gataatgatgtcgatgtagatgtttatgcagatgtccgtgtagattgtttagtacaatgg
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0074735     ttcaatccaaacgatatc------------------------------------------
+FBgn0029521     tgtccatgtagatggtttagtacaatggggcataatcattaaattaagcgtgtcgtgctt
+FBgn0098447     atcaaccacttctggccgctgaaaaggcctcaaaaatactgtcaagaggctg--------
+FBgn0137587     tggtttttttttttttttttttttaagaagttagcagaatttttggctgtaatgcttaag
+FBgn0173958     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ttcgttttggatagcttggatttggatttgctgggctgttgcttcttgagcgccgcctcc
+FBgn0234113     gtatttgattgcgtcgtgggcgttggccgtataattaacacatcgttactgtttatgtgt
+FBgn0105062     ggcataagcgttaaattgagcgtgtcgtgcttgcaacaaaagccccgggtgtgtgttcac
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     aaaacataagtcccgggagtgtgttcattttacacgtatatacacatttatatgtacaat
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     cgccttgctactgctaactaagttcgtgattgtaatatttagggacctaccagcagatct
+FBgn0173958     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     tcgagcgccttctcgcgatctaggagctccagctgctcaaatatgttcttcggatgtgga
+FBgn0234113     gtgttgcaatgagcaacggagcgatc----------------------------------
+FBgn0105062     tttatacatacatatttttatgtgtataaccatatc------------------------
+FBgn0188109     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn----------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     acatgtaacatggagtaaggctgaaggctggcaac-------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     ttcgtctataatacttaaacacctaaccaaactgcaaaccgatctctcgactcaaatatt
+FBgn0173958     nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     tgggtgctcggcttggtcgcattcttggccgcatagacgaccacaaactgtgagaaggcc
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     taggtacctatcacaaaattaatagttagggacccatttatctttgcagttgatatttcg
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     gaatctgcgggcgtattaatatcagcaaaatcgcggaagttggcgaactgctcctcggga
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     actagcagatctttcgcctataatacttaaacacctaaccaaactgcaaacagatctctc
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     tacgtatatttctggatgaaagcctcgctgggacgaccatggccattgttggcatcccca
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     gactcaagaactttactgaaatagttagtaccctaccaagtttttagcagaactttcgca
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     taaatgtagtcgctgttgtcctctggatggtagggcatctcctcctccggatagaaggtg
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tgtgatctgtttttttttttttatgaagttagcagaacttttcgctgtaatgcttaagcg
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ccgccacgcaaaacaccaaaatcaccgctgcccagaatggctgcatcaaagccgcgctgc
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     ccttgctactgctaactaaattcatgattgtaatatttagggacctacctagcagatctg
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     tgctgctgctgctgggccggcgccaagagcggcagctgtagcggcgagttgtcgccggca
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tcgcctataatacttaaacacctaaccaaactgcaaaccgatctctcgactcaaatattt
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ggaccaacgggaccagcgggaccagcgaagtatggacgcgagtggcccaatggcggcgcc
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     aggtacctaccaaaaaataaatagttagggacccatttatctttacagttgataattcaa
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     tcatggtagaaaggcggatagaagttctgcgcagcctggctgtgcgaatccgcaccggga
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     ctagcaaagctttcgcctataatacttaaacccctagccaaactgcaaacagatctctcg
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ccgggcgttacatcggcccgcgagatcagctgtgtgttcggatttgcaatgggacggaac
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     actcaaatatttaggtacctaccaaaaaattaatagttagggacccatttatctttacag
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     tgttcctgctgcgctggcaccgctgctgacactgactgtaaggctgcctgaaagtggcga
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     ttgataattcgactagcaaagctttagccaatcatgcagctgagctgacttggctaaaat
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ctctgtgcgggcgtggcagcagctgcccgatgatgttgctgctgctgctgctgttgctgc
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     agcatttaatttcgccttgattaaaactcatatgcactcatctttaatttgttatcctct
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     tgctgatgcag-------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     gtgccttccttcgttgcttacttaatataaataaatggtacttaaaatatataaatagaa
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     acaaaatgctgatagtaactttcgacatattacattatacagacattgctcgtatttatc
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tcttattttcccttgcagCTTACCCTACGACGTCACAAATCCTGTAATTTATTTCCTTGA
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     CTGCTGTCTGATGGTGCCGGTGCTGACATTCTTCTGCTGCTCCACCACGGCCGTGGACAC
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     GCTCTATGGCTGGTTCGTCTTCGGTCTGACGGCCCATTATCGCCGCCTCGAACTGGAGCT
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     GCAGAGCGAACGTATGCAGTCGTCAGCTGGGAGAGACCTGGATCATAGGCTGGATCAGCT
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     GTTCAGGGAACATGCTCGACTGCTGGAGTTGGTGGCTCGATTTGAGACGGGCCTCCGGGA
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     CATTGCCTGTGTGGAGGTGCTGCTGATCTGTGTGCTCTACTGCTCGGTGATCTGCCAGTA
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     CATAATGCCGCACACGAATCAGAACATCGCCTTTCTCGGCTTCTTCTCGCTGGTGGTCAG
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     CTCGCAGCTATGTATTTATGGCTTCGGCGCTGAGCAGGTGCGTCAAGAGGGCCAGCAGTT
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     CGCCTATCAGCTCTACCAGCTGCTGCCTTGGCACGAGTGGTCGCCGCATCAGCGTCGGCT
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     CCTGCTGCTGCCGCTGCAGCGTGCCCAGAAGGAGACCAAACTGGCCGCCTACTTCTTCAT
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     GCTGGGCAGACCTCTGTTGGTGTGGgtgagttaccataaccgtagtaattgaatatagca
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     atgactaggcgctcctcatcttgtagATCTTTCGCACAGCCGGCTCCTTTACCACGCTAC
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     TCAATACGCTTCGTGCCAAAGACTAAggtttttgggagagaaataccaattagctaacta
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     gaatctagttgactttaaaaatctttaaattatgcatacgaaattaaacagtctcaaatt
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     acactcagatttgtgtatactcttttaattatatttaatttccatcgaacaattttcaat
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tttatatcacaaatttattttgattgcatagaattttgttaggttttcctacatttgttc
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     gcctattataataacaatattgtctatgtaggtatctatgcatgtgtgtatgtaggtaga
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     taggtatatctgtaggtgtgcatatacatgtgtaggtgtatatgtaagtacttatatgcg
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tgtgtaggtatgtatgaacatatgtatggaggtctgtaggtacctatgtatgtgtccata
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tacataggtgtgtatgtgtgtacgtaagtaagtatatatgcatgtacaaatgtatgcgta
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tatgtaagttcttagcatatacatatgtgtgtttgtatgtaggcatgtttgtatgtatat
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     cggtatgtacagtgtatgtatgaatgtactaggtatgtatgcatgtacatatgtttgtat
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     gtatgtaaatacgtatgtatgcatgtgttaatgtgtgtaggtacgtacatgtatacgtat
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     gtatgtatgcatgcaagcacttatgtatgtgtgtatcatgtgaatataaacaggccccaa
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     actacactcggacttaattaagtaagttttcataatttttatgttgaaacaatataatat
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     cgcatttcgtatttaattttcacctattgttactatatatatgcatgcttgcatgtatgt
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     acatatgtatgtacatacaaacttagaatttattaagagcacgcgctgatttcactcgac
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     ttgtcttttaattttcagcccttataacatttctttttaaatcccgcagaattttatttg
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     ttcctttatatgtatgtgtgtgtgtgtatgtatatgtgtgtatgtatgggtgtatgtatg
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     cgtgtgtgtgtatgtgtgtgtgagtgtgtgtgtaagtgtgtgtgtgagtgtatgtgtgtg
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tgtatgtgtgtatatatatttttatgtatttgatatgtttcgcctattatagctgtatac
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     agatgcatgtatgtatgtgtgcatgtacgtatgcacttagaatttattaagagtgcgcgc
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tggcgtctttcaattttcagctttgttgctaaatagcgcaaaactaggtttgttctctta
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tatatttcacttttttttactatacatgtatatactaaaaccattcgatttgaattataa
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tttatatgccctataagaagatatttctttttaaattgtatagaattttgtatggttttt
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     gacattttttgcctattatagctgtatgcagatgtatgtaagtatgtttatatgtatgca
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tgcatgtacttacaattttttaaaggcacgtgccagcatcactcgatttgtcattcaatc
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     ttcaatactttcaatactataatatcacatttctgtttcaattgcgtagaattttgttag
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     gtgtttaatatttttcacctattattatatataaatatgtatattgcaatttattaaaag
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     cacgtggcggctgcactttgtctccgccaaataattttcagctaattctagcgagagagg
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     aagcaggaatgggactctttgcgataattatatttaggcagctctatatattatcgataa
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     catttcgcaataagatttggcattcaaaacaaattatcttgtgtctgcgtaatgtgtgaa
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tgtattttttcttaaacttatcgaaatttcagctttatatcgaatattcaacggagctta
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     tctatttttaaaactatatttgtaataaatatattattgtatgcatttttattttgttat
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ------------------------------------------------------------
+FBgn0157967     ------------------------------------------------------------
+FBgn0206644     ------------------------------------------------------------
+FBgn0234113     ------------------------------------------------------------
+FBgn0105062     ------------------------------------------------------------
+FBgn0188109     ------------------------------------------------------------
+FBgn0074735     ------------------------------------------------------------
+FBgn0029521     ------------------------------------------------------------
+FBgn0098447     ------------------------------------------------------------
+FBgn0137587     taatttccgatttaacctccgcttccaaaaattaaaggaaaacattttcacacaaataga
+FBgn0173958     ------------------------------------------------------------
+                                                                            
+
+FBgn0226952     ----------------------------------------------
+FBgn0157967     ----------------------------------------------
+FBgn0206644     ----------------------------------------------
+FBgn0234113     ----------------------------------------------
+FBgn0105062     ----------------------------------------------
+FBgn0188109     ----------------------------------------------
+FBgn0074735     ----------------------------------------------
+FBgn0029521     ----------------------------------------------
+FBgn0098447     ----------------------------------------------
+FBgn0137587     aaaaataaactttgtattttttttttttaatttttattatttttat
+FBgn0173958     ----------------------------------------------
+                                                              
+
+
+

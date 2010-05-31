@@ -1,0 +1,40 @@
+CLUSTAL FORMAT for T-COFFEE Version_2.56, CPU=1.57 sec, SCORE=38, Nseq=7, Len=187 
+
+hmgb_chite      ---adkpkrplsay---------mlwlnsaresik----renpdfk-vtevakkgg----
+hmgl_wheat      --dpnkpkrapsaf---------fvfmgefreefk----qknpknksvaavgkaag----
+hmgt_mouse      -----kpkrprsay---------niyvsesfqeak----ddsaqgk-----lklvn----
+hmgl_trybr      kkdsnapkramtsf---------mffssdfrskhs----d-----lsivemskaag----
+seq_1cms        G---EVASVPLTNY--LDSQYFGKIYLGTPPQEFTVLFDTGSSDF-WVPSIYCKSNACKN
+seq_3app        A---ASGVATNTPTA-NDEEYITPVTIG--GTTLNLNFDTGSADL-WVFSTELPASQQSG
+seq_4ape        ----STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDL-WVFSSETTASEVDG
+                         . :            .  .      .                    .    
+
+hmgb_chite      ------------------------------------------------------------
+hmgl_wheat      ------------------------------------------------------------
+hmgt_mouse      ------------------------------------------------------------
+hmgl_trybr      ------------------------------------------------------------
+seq_1cms        HQRFDPRKSSTFQNLG-KPLSIHYGTGSM-Q-GILGYDTVTVSNIVDIQQTVGLSTQEPG
+seq_3app        HSVYNPSA--TGKELSGYTWSISYGDGSSAS-GNVFTDSVTVGGVTAHGQAVQAAQQISA
+seq_4ape        QTIYTPSKSTTAKLLSGATWSISYGDGSS-SSGDVYTDTVSVGGLTVTGQAVESAKKVSS
+                                                                            
+
+hmgb_chite      ----------------elwrgl--kdkseweakaata----kqnyiral-qeyerngg--
+hmgl_wheat      ----------------erwkslsesekapyvakankl----kgeynkai-aaynkgesa-
+hmgt_mouse      ----------------eawknlspeekqayiqlakdd----rirydnem-ksweeqmae-
+hmgl_trybr      ----------------aawkelgpeerkvyeemaekd----kerykrem-----------
+seq_1cms        DVFTYAEFDGILGMAYPSLASE---YSIPVFDNMMNRHLVAQDLFSVYMDRNGQESMLTL
+seq_3app        QFQQDTNNDGLLGLAFSSINTVQPQSQTTFFDTVK--SSLAQPLFAVALKH-QQPGVYDF
+seq_4ape        SFTEDSTIDGLLGLAFSTLNTVSPTQQKTFFDNAK--ASLDSPVFTADLGY-HAPGTYNF
+                                                            :   :           
+
+hmgb_chite      -------
+hmgl_wheat      -------
+hmgt_mouse      -------
+hmgl_trybr      -------
+seq_1cms        GAIDPSY
+seq_3app        GFIDSSK
+seq_4ape        GFIDTTA
+                       
+
+
+

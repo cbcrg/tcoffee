@@ -1,0 +1,2 @@
+t_coffee Rsample_aln1.fasta Rsample_aln2.aln -outfile tacos  
+t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_id_pair,Lsample_lib1.tc_lib -outfile=outaln  

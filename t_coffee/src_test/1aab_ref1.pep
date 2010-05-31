@@ -1,0 +1,12 @@
+>hmgl_trybr FAM1
+kkdsnaxxpkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykremmm
+>hmgt_mouse FAM1
+kpkrprsayniyvsesfqeakddsaxxxxxqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgb_chite FAM2
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgl_wheat FAM3
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa

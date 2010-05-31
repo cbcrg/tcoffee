@@ -1,0 +1,40 @@
+CLUSTAL FORMAT for T-COFFEE Version_2.56, CPU=3.18 sec, SCORE=14, Nseq=7, Len=183 
+
+hmgb_chite      ---adkpkrplsaym-------lwlnsares--------------------------ikr
+hmgl_wheat      --dpnkpkrapsaff-------vfmgefree--------------------------fkq
+hmgl_trybr      kkdsnapkramtsfm-------ffssdfrsk--------------------------hsd
+hmgt_mouse      -----kpkrprsayn-------iyvsesfqe--------------------------akd
+1cms            ---GEVASVPLTNYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQR
+3app            AASGVATNTPTAN--DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTELPASQQSGHSV
+4ape            -STGSATTTPIDS-LDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTI
+                      .. .            .  .                                  
+
+hmgb_chite      enpdfk----------------------------------vtevak--------------
+hmgl_wheat      knpknks---------------------------------vaavgk--------------
+hmgl_trybr      ls--------------------------------------ivemsk--------------
+hmgt_mouse      ds--------------------------------------aqgklk--------------
+1cms            FDPRKSSTFQNL-GKPLSIHYGTGSM-QGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFT
+3app            YNPS--ATGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQ
+4ape            YTPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTE
+                                                             :              
+
+hmgb_chite      ------kggelwrgl---kd--kseweakaat----akqnyiralq-eyerngg------
+hmgl_wheat      ------aagerwksl---sesekapyvakank----lkgeynkaia-aynkgesa-----
+hmgl_trybr      ------aagaawkel---gpeerkvyeemaek----dkerykrem---------------
+hmgt_mouse      ------lvneawknl---speekqayiqlakd----drirydnemk-sweeqmae-----
+1cms            YAEFDGILGMAYPSLAS---EYSIPVFDNMMNRHLVAQDLFSVYMDRNGQESMLTLGAID
+3app            DTNNDGLLGLAFSSINTVQPQSQTTFFDTV--KSSLAQPLFAVAL-KHQQPGVYDFGFID
+4ape            DSTIDGLLGLAFSTLNTVSPTQQKTFFDNA--KASLDSPVFTADL-GYHAPGTYNFGFID
+                        .  :  :                         :   :               
+
+hmgb_chite      ---
+hmgl_wheat      ---
+hmgl_trybr      ---
+hmgt_mouse      ---
+1cms            PSY
+3app            SSK
+4ape            TTA
+                   
+
+
+

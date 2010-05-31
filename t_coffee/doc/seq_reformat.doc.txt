@@ -1,0 +1,772 @@
+Documentation for seq_reformat (06/04/01)
+
+
+0-Recent modifications
+1-Program description
+2-Installation
+3-Flags
+4-Example
+	4.0  my format is listed but not recognized
+	4.1  reformating a clustalw alignment into a set of fasta sequences
+	4.2  coloring residues in a clustalw alignment
+	4.3  changing the default colors
+	4.4  Selectively turn some residues to upper case
+	4.5  Trim a set of sequences into a smaller set
+	4.6  Remove the less conserved positions in an msa
+	4.7  Remove_aa: randomly inserting gaps in an MSA
+	4.8  Comparing two phylogenetic trees
+	4.9  Pruning a tree
+	4.10 Computing a tree
+	4.11 Coding/Decoding Sequence Nmes (if your names are too long)
+	4.12 Highlighting residues in contact with a ligand in a PDB file
+	4.13 Measuring the distances between two groups of residues within a PDB structure
+5-Formats
+6-known bugs
+7-Author
+8-Licenses
+9-acknowledgements
+
+
+0-Recent modifications
+	09/10/04: Added 4.11
+	16/09/04: Added 4.8, 4.9
+	15/04/02: Added 4.6
+	04/04/02: modified the syntax of +trim and re-wrote 4.5
+	--------: Seq_reformat now respects the case of the sequences that go throught it
+	07/07/01: modified -action synthax: verbs star with a + and are follwed with args
+	07/07/01: added the reorder flag
+	07/07/01: added the extract_seq option 
+	06/04/01: added the trim option in the action list (see example 4.5)
+	06/10/00: added the following actions: lower[n], upper[n],convert[n] see Example 4.4 and 4.5
+	06/10/00: Changed the numbering ( n-1 ..... n)->(n+1........n)
+	20/09/00: Added the seqnos as action
+	15/09/00: Fixed bug that added extra space in the html display
+	15/09/00: Corrected a bug for the ps colors (io_func.c)
+	15/09/00: Added the clustalw-style consensus line in score_...
+	13/09/00: First public release.
+		
+1-Program description
+
+seq_reformat is a versatile tool for reformating sequences. It is partially redundent with readseq, but it 
+also allows you to carry out very specific tasks such as:
+	-alignmnent coloring ( in ps, pdf or html).
+	-DNA translation.
+	-Alignment editing.
+	-sequence trimming   ( removing close homologues).
+	-sequence reordering ( reordering a set of sequences).
+
+2-Installation
+unzip and untar the distribution, then source the instal file ( ./install)
+
+3-Flag
+to get a list of the existing flags, type:
+
+	seq_reformat
+
+A full description of the flags is not yet available.
+	
+
+4 Example 
+4.0 My format is listed but not recognized
+
+    Format recognition is not 100% full proof. Occasionnaly you will have to inform the program about the nature of the file you are trying to reformat:
+    -in_f msf_aln for intance
+
+
+4.1 reformating a clustalw alignment into a set of fasta sequences
+
+let us consider the following alignment:
+1aab_ref1.aln
+***********************SNIP*****************************************
+CLUSTAL W (1.75) multiple sequence alignment
+
+
+hmgb_chite      ---ADKPKRPLSAYMLWLNSARESIKRENPDFK-VTEVAKKGGELWRGLKD--KSEWEAK
+hmgl_wheat      --DPNKPKRAPSAFFVFMGEFREEFKQKNPKNKSVAAVGKAAGERWKSLSESEKAPYVAK
+hmgl_trybr      KKDSNAPKRAMTSFMFFSSDFRS----KHSDLS-IVEMSKAAGAAWKELGPEERKVYEEM
+hmgt_mouse      -----KPKRPRSAYNIYVSESFQ----EAKDDS-AQGKLKLVNEAWKNLSPEEKQAYIQL
+                      ***. ::: .: ..  .    :  . .      *  .  *: *    :  :   
+
+hmgb_chite      AATAKQNYIRALQEYERNGG-
+hmgl_wheat      ANKLKGEYNKAIAAYNKGESA
+hmgl_trybr      AEKDKERYKREM---------
+hmgt_mouse      AKDDRIRYDNEMKSWEEQMAE
+                *   : .* . :         
+***********************SNIP*****************************************
+
+if you want to reformat this alignment into a set of fasta sequences:
+
+
+	seq_reformat -in test1.aln -output fasta_seq
+
+this will send the fasta formated file to stdout.If you want to pre-specify the file name,
+	
+	seq_reformat -in test1.aln -output fasta_seq -out <filename>
+
+If you want to keep the gaps in the msa sequence
+	
+	seq_reformat -in test1.aln -output fasta_aln
+
+
+4.2 coloring residues in a clustalw alignment
+
+To color an alignment, two files are needed: the alignment (aln) and the cache (cache).
+The cache indicates the state of each residue in the alignment. It should either be in 
+clustal or in fasta format.
+
+In the course of this exemple, we will:
+	1-generate the cache from the alignment using -convert
+	2-generate the pdf file from the cache and the aln file
+
+
+Let us consider the following file:
+
+aln
+*************************SNIP**************************
+CLUSTAL FORMAT 
+
+B               CTGAGA-AGCCGC---CTGAGG--TCG
+C               TTAAGG-TCCAGA---TTGCGG--AGC
+D               CTTCGT-AGTCGT---TTAAGA--ca-
+A               CTCCGTgTCTAGGagtTTACGTggAGT
+                 *  *      *     *  *      
+*************************SNIP**************************
+
+The command
+	
+	seq_reformat -in=aln -output=clustalw_aln -out=cache -conv=Aa1,.--,#0 -action=+convert
+or
+	seq_reformat -in=aln -output=clustalw_aln -out=cache -action +convert Aa1,.-- +convert #0
+
+-conv indicates the filters for character conversion:
+	- will remain - 
+	A and a will be turned into 1
+	all the other symbols (#) will be turned into 0.
+
+-action +convert, indicates the actions that must be carried out on the alignment before it
+is output into cache.
+
+the folowing cache alignment is then obtained:
+
+*************************SNIP**************************
+CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, Len=27
+
+B               000101-100000---000100--000
+C               001100-000101---000000--100
+D               000000-100000---001101--01-
+A               000000000010010000100000100
+*************************SNIP**************************
+
+
+	seq_reformat -in=aln -output=fasta_seq -out=cache -conv=Aa1,--,#0 -action=+convert
+
+will produce the following file cache_seq
+*************************SNIP**************************
+>B
+000101100000000100000
+>C
+001100000101000000100
+>D
+00000010000000110101
+>A
+000000000010010000100000100
+*************************SNIP**************************
+
+where each residue has been replaced with a number.
+
+In the second step, we will produce a pdf, ps or html alignment where each nucleotide 
+is boxed with a color that depends on the cache file:
+
+	seq_reformat -in=test_dna4.aln -struc_in=cache -struc_in_f number_fasta -output=color_html -out=x.html
+
+will produce a colored version readable with netscape, 
+	
+	seq_reformat -in=test_dna4.aln -struc_in=cache -struc_in_f number_fasta -output=color_ps -out=x.ps
+
+will produce a colored version readable with ghostview
+	
+	seq_reformat -in=test_dna4.aln -struc_in=cache -struc_in_f number_fasta -output=color_pdf -out=x.pdf
+
+will produce a colored version readable with acroread, as long as ps2pdf is installed on your system.
+
+
+4.3 changing the default colors
+
+Colors are hard coded in the program, but if you wish, you can change them, simply create a file named 
+
+	seq_reformat.color
+
+
+*************************SNIP**************************
+test for seq_reformat color
+*
+0 #FFAA00 1 0.2 0
+*************************SNIP**************************
+
+indicates that the value 0 in the cache corresponds now to #FFAA00 in html, and in RGB 1,  0.2 and 0.
+The name of the file (seq_reformat.color) is defined in: programmes_define.h, COLOR_FILE. And can be changed 
+before compilation.
+
+By default, the file is searched in the current directory
+
+
+4.4 Selectively turn some residues to upper case
+
+Let us assume, the following aln:
+aln
+*************************SNIP**************************
+CLUSTAL FORMAT 
+
+B               CTGAGA-AGCCGC---CTGAGG--TCG
+C               TTAAGG-TCCAGA---TTGCGG--AGC
+D               CTTCGT-AGTCGT---TTAAGA--ca-
+A               CTCCGTgTCTAGGagtTTACGTggAGT
+                 *  *      *     *  *      
+*************************SNIP**************************
+
+and the following cache:
+cache_aln
+*************************SNIP**************************
+CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, Len=27
+
+B               000101-222222---000100--000
+C               001100-000101---000000--100
+D               000000-100000---001101--01-
+A               000000000010010000100000105
+*************************SNIP**************************
+
+To turn ALL the residues with a cache value lower or equal to 1 Lower case:
+
+seq_reformat -in aln -struc_in cache_aln -output clustalw_aln -action lower1
+
+will give the following output:
+*************************SNIP**************************
+CLUSTAL FORMAT for SEQ_REFORMAT Version_1.2, CPU=0.00 sec, SCORE=0, Nseq=4, Len=27
+
+B               ctgaga-AGCCGC---ctgagg--tcg
+C               ttaagg-tccaga---ttgcgg--agc
+D               cttcgt-agtcgt---ttaaga--ca-
+A               ctccgtgtctaggagtttacgtggagT
+                 *  *      *     *  *      
+*************************SNIP**************************
+
+
+lower1 indicates that all the residues with a score lower or equal to 2 will be turned
+to lower case. Note that residues not concerned will keep their original case (such
+as the last T in the last sequence).
+
+upper2 indicates that all the residues with a score higher or equal to 2 will be turned
+to upper case.
+
+
+4.5 Trim a set of sequences into a smaller set 
+	4.5.0 Various Trim Algorithms 
+	4.5.1 Usage
+	4.5.2 Examples
+	4.5.3 Algorithm
+	4.5.4 FAQS
+	4.5.5 TimTC2
+
+4.5.0 Trim
+      Several Trim algorithms are now available. We recommand the latest one, TrimTC2 (4.5.5) that trims a multiple sequence alignment using the topology of the associated tree.
+      
+4.5.1-Usage
+Given the file myseq.pep that contains N sequences, you may want to reduce that set of sequences to a smaller set just as meaningful.
+the trim action will make it possible:
+
+	seq_reformat -in myseq.pep -output fasta_seq -action +trim FLAG1_FLAG2_FLAG3_...<K_>
+
+	Flags:
+		aln.............measure the distances on myseq.aln (default id seq_reformat is fed an aln)
+		U<x=0-100>......Upper Id Bound, remove sequences with more than x% id with another seq in the set
+		L<x=0-100>......Lower Id Bound, remove sequences with less than x% id with any other seq in the set
+		n<x>............Keep x sequences from the original set
+		N<x=0-100>......Keep x% of the sequences in the original set
+		B...............Trim from the bottom (low id sequence) with N or n
+		K_<seq1:seq2..>.Keep a list of specified sequences
+		T...............Trim from the Top (high id sequences) with N or n
+		s...............Print statistics
+		t...............Print distance table
+
+There is a hierarchy in the way these flags are applied. It DOES NOT depend on the order they come with
+	1-The distant sequences are removed first
+	2-Then the closely related sequences
+	3-If N/n is set sequences are removed from the top (T) or the bottom (B) of sequence ID.
+
+4.5.2-Examples:
+
+	-Remove all the sequences with less than 50% id with the rest of the set, 
+		+trim seq_L50
+			L50: Lower id bound=50%
+
+	-Remove all the sequences that are more than 70% identical to others
+		+trim seq_U70
+			U50: Upper id bound=70%
+
+	-Keep 10  sequences by removing the most distantly related
+		+trim seq_n10_B
+			n10: keep 10 sequences
+			B: trim from the bottom id
+		
+ 	-Keep half the sequences (50%) by removing the most distantly related
+		+trim seq_N50_B
+			N50: 50% of the sequences
+			B: Trim from the bottom id
+		
+	-Keep half the sequences (50%) by removing the most closely related
+		+trim seq_N50_B
+			N50: 50% of the sequences
+			B: Trim from the to id
+		
+
+	-Remove sequences less than 30% similar to the set and more than 70% similar
+		+trim_U70_L30
+			L30:  Lower id bound=30%
+			U70:  Upper_id_bound=70%
+	
+	-Remove sequences less than 30% similar to the set and more than 70% similar, keep at least half the sequences
+		+trim_U70_L30_N50
+
+	
+	-print the table of distances
+		+trim T
+
+	-print the statistics
+		+trim S
+
+	-keep 10 sequences including some important sequences
+		+trim_Kseq1:seq2:seq3
+			K_seq1:seq2:seq3: will keep seq1, seq2, seq3
+		Please note that K must be the LAST FLAG	
+
+
+	And on and on and on
+
+	
+			
+
+
+4.5.3 Algorithm
+
+
+The trim algorithm works as follow:
+	
+	1-Computes all the pairwise alignments ( pam250, gop=-10, gep=-1) or use a multiple aln.
+	2-Measure the %id (number id/number matches) of each pair i,j: pwid (i,j)
+	3-if m is set: all the sequences with less than m% identity with ANY sequence in the set will be removed so that in the remaining set ALL the pairs of sequences have more than m % identity. The removal will stop uncompleted if the set becomes smaller than n.
+	4-Remove one of the two closest sequences until either n is reached or until all the sequences have less that % of similarity.
+	5-return the new set.
+	
+Please note that this algorithm is order dependant and may not give the same results if sequences are fed in a different order.
+
+
+4.5.4 FAQS
+	4.5.4.1 Using decimal %id.
+	
+		To use decimal percent id, multiply the value you want to use by 100:
+			U9050
+		Warning: Will not work for values lower than 1
+	
+	4.5.4.2 Displaying the name of removed sequences
+	
+		The name of the closets removed sequences can be displayed in the comment 
+		line of the PIR format:
+			 -output pir_seq or -output pir_aln
+		It can also be requested on screen with the p option in the command line:
+			+trim U30_p
+	
+
+4.5.5 TrimTC2
+      t_coffee -in <MSA> -action +trimTC2 N -output fasta_seq
+     
+4.6 Remove the less conserved positions in a MSA
+
+4.6.1 Overview
+
+      1-evaluate the level of conservation of each residue within its column and recode the alignment
+      2-replace with a gap every residue that has a conservation score below the threshold
+
+
+4.6.2 Evaluating the level of conservation within an alignment
+
+      1-copy this alignment and save it into the file my.aln
+
+*****************************************************SNIP**********************
+CLUSTAL FORMAT for T-COFFEE Version_1.38, CPU=10.63 sec, SCORE=68, Nseq=4, Len=81
+
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvak
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhs-----dlsivemskaagaawkelgpeerkvyeem
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpdfk-vtevakkggelwrglkd--kseweak
+hmgt_mouse      -----kpkrprsayniyvsesfqeakddsaqgk-----lklvneawknlspeekqayiql
+                      ***. ::: .: ..  .. .             *  .  *: *    :  :   
+
+hmgl_wheat      anklkgeynkaiaaynkgesa
+hmgl_trybr      aekdkerykrem---------
+hmgb_chite      aatakqnyiralqeyerngg-
+hmgt_mouse      akddrirydnemksweeqmae
+                *   : .* . :         
+*****************************************************SNIP**********************
+
+	
+	2-type
+	seq_reformat -in my.aln -action +evaluate -output clustalw_aln > my.aln.score
+	Note tha:
+	
+	-in my.aln.score, each residue X  is replaced with an index between 0 and 9
+	index=sum of positive substitution costs between X and other residues/score if every other residue is the same as X
+			
+	-Residues alone in a column are ignored.
+
+	-The default matrix is blosum62mt, but you can change it:
+	    seq_reformat -in my.aln -action +evaluate pam250mt -output clustalw_aln > my.aln.score
+	All the matrices in matrices.h are lega.
+
+4.6.3 Removing specifically some residues
+
+      we will now remove every residue with a score between 7 and 9 and replace it with an x		
+
+	       		seq_reformat -in my.aln -struc_in my.aln.score -struc_in_f number_aln -action +convert '[0-9]' #x -output clustalw_aln
+
+4.7   Remove_aa: randomly inserting gaps in an MSA
+4.7.1 Description
+remove_aa is an action (-action +remove_aa). Given a multiple alignment. it will insert gaps of varying size around a position of the MSA
+4.7.2 Parameters
+
+4.7.2.1 Recomended default
+	-action +remove_aa 0    3        1        1
+			   pos   max_len  Ncycles  random
+
+	Will make a series of deletioon of size 0-6, around a position randomly chosen
+	
+	hmgl_trybr      KKDSNAPKRAMTSFMFFSSDFRSKHS-----DLSIVEMSKAAGAAWKELGPEE*****~*
+	hmgt_mouse      K-----PKRPRSAYNIYVSESFQEAK-----DDSAQGKLKLVNEAWKNLSPEEKQA**~*
+	hmgb_chite      ---ADKPKRPLSAYMLWLNSARESIKRENP-DFKVTEVAKKGGELWRGL--KD*****~*
+	hmgl_wheat      D--PNKPKRAPSAFFVFMGEFREEFKQKNPKNKSVAAVGKAAGERWKSLSESEKAPYV~K
+	hmgl_wheat      ANKLKGEYNKAIAAYNKGESA
+
+        
+
+
+4.7.2.2 Effect of pos	
+	-action +remove_aa 10     3        1        0
+			   pos   max_len  Ncycles  random	 	
+	
+	Setting pos to 0, means that the remove_aa site will be chosen randomly, any other value will be used. Setting random to 0 means that the gap size will be fixed
+	
+	
+	hmgl_trybr      KKDSNAP***~**FMFFSSDFRSKHS-----DLSIVEMSKAAGAAWKELGPEERKVYEEM
+	hmgt_mouse      K-----P***~**YNIYVSESFQEAK-----DDSAQGKLKLVNEAWKNLSPEEKQAYIQL
+	hmgb_chite      ---ADKP***~**YMLWLNSARESIKRENP-DFKVTEVAKKGGELWRGL--KDKSEWEAK
+	hmgl_wheat      D--PNKP***~**FFVFMGEFREEFKQKNPKNKSVAAVGKAAGERWKSLSESEKAPYVAK
+                      *      : .: ..  .. .     : .     *  .  *: *  .::  :   
+
+	
+
+4.7.2.3 Effect of Ncycles	
+	-action +remove_aa 0     3        2        0
+			   pos   max_len  Ncycles  random	 	
+	Setting Ncycle to 2 , means that two sites will be chosen randomly one after the other (pos must be set to 0 if Ncycles is larger than 1)
+
+	CYCLE 1
+	hmgl_trybr      KKDSNAPKRAMTSFMFFSSDFRSKHS-----DLSIV***~**GAAWKELGPEERKVYEEM
+	hmgt_mouse      K-----PKRPRSAYNIYVSESFQEAK-----DDSAQ***~**NEAWKNLSPEEKQAYIQL
+	hmgb_chite      ---ADKPKRPLSAYMLWLNSARESIKRENP-DFKVT***~**GELWRGL--KDKSEWEAK
+	hmgl_wheat      D--PNKPKRAPSAFFVFMGEFREEFKQKNPKNKSVA***~**GERWKSLSESEKAPYVAK
+	                      ***. ::: .: ..  .. .     : .        .  *: *  .::  :   
+	
+
+	CYCLE 2
+	hmgl_trybr      KKDSNAPKRAMTSFMFFSSDFRSK***~**-DLSIVGAAWKELGPEERKVYEEMAEKDKE
+	hmgt_mouse      K-----PKRPRSAYNIYVSESFQE***~**-DDSAQNEAWKNLSPEEKQAYIQLAKDDRI
+	hmgb_chite      ---ADKPKRPLSAYMLWLNSARES***~**-DFKVTGELWRGL--KDKSEWEAKAATAKQ
+	hmgl_wheat      D--PNKPKRAPSAFFVFMGEFREE***~**KNKSVAGERWKSLSESEKAPYVAKANKLKG
+		              ***. ::: .: ..  ..       : .  .  *: *  .::  :   *   : 
+
+4.7.2.3 Effect of Random	
+	-action +remove_aa 0     3        1        1
+			   pos   max_len  Ncycles  random	 	
+	
+	Random, if set to 1, indicate that the maxlen value will now be chosen randomly between maxlen and 0, for the left and the right side of pos, and for each sequence. This results in gaps of variable length distributed around a central position. This is the most biologocally realistic mode.
+
+
+4.8 Comparing two phylogenetic trees
+	4.8.1 Usage
+	4.8.2 Example
+4.8.1 Usage
+	seq_reformat -in <tree1> -in2 <tree2> -action +tree_cmp -output newick|binary
+	tree1 and tree2 are in newik format
+4.8.2 Example
+
+File:tree1
+*****************************************************SNIP**********************
+(( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
+*****************************************************SNIP**********************	
+
+File:tree2
+*****************************************************SNIP**********************	
+(( E:0.50000, C:0.50000):0.00000,( A:0.00500, B:0.00500):0.99000, D:0.50000);
+*****************************************************SNIP**********************	
+
+seq_reformat -in tree1 -in2 tree2 -action +tree_cmp -output newick
+
+Output:
+*****************************************************SNIP**********************
+tree_cpm|T: 75 W: 71.43 L: 50.50
+tree_cpm|8 Nodes in T1 with 5 Sequences
+tree_cmp|T: ratio of identical nodes
+tree_cmp|W: ratio of identical nodes weighted with the min Nseq below node
+tree_cmp|L: average branch length similarity
+(( A:1.00000, C:1.00000):-2.00000,( D:1.00000, E:1.00000):-2.00000, B:1.00000);
+*****************************************************SNIP**********************
+-The comparison is made on the unrooted trees
+-Set the root as an extra taxon if you want to keep it
+T: Fraction of the branches conserved between the two trees
+W: Fraction of the branches conserved between the two trees. Each branch is weighted with the MIN(Number leaf left, Number leaf Right)
+L: Fraction of branch length difference between the two considered trees.
+
+The last portion of the output contains a tree where distances have been replaced by the number of leaf under the considered node
+Positive values (i.e. 2, 5) indicate a node common to both trees
+Negative values indicate a node found in tree1 but not in tree2
+The value itself is MIN(Leaf to the left, leaf to the right)
+The higher this value, the deeper the node.
+The tree can be extracted from the output by using:
+	cat outfile | grep -v "tree_cmp"
+
+4.9 Pruning a tree
+	4.9.1 Usage
+	4.9.2 Example
+4.9.1 Usage
+	Pruning removes leaves from an existing tree and recomputes distances so that no information is lost
+	seq_reformat -in <tree> -in2 <sequences> -action +tree_prune -output newik
+	will keep in <tree> the sequences in <sequences> and output the pruned tree in newik format.
+4.9.2 Example
+	
+File:tree
+*****************************************************SNIP**********************
+(( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
+*****************************************************SNIP**********************	
+
+
+File:sequences
+*****************************************************SNIP**********************	
+>A
+aaaaaaaaaaaa
+>B
+ccccccccccca
+>C
+ddddddddddda
+>D
+eeeeeeeeeeeb
+*****************************************************SNIP**********************	
+
+
+seq_reformat -in tree -in2 sequences -action +tree_prune -output newick
+
+Output:
+*****************************************************SNIP**********************
+(( A:0.50000, C:0.50000):0.00000, B:0.50000, D:0.99500);
+*****************************************************SNIP**********************
+
+4.10 Computing a tree
+	4.10.1 usage
+	4.10.2 example
+	4.10.3 algorithm
+        		
+4.10.1 usage	
+	seq_reformat -in <alignment> -action +tree_compute n mode -output newik
+	
+	alignment: in any format
+	n: a value betwwen 0 and 8. 
+		0 means that every alignment position will be used
+		8 means only very conserved positions will be used
+	mode: decides how the position conservation is computed. 
+	      pam250mt, blosum62mt and any of the matrices.h matrix
+	      categories: some estimation of the entropy
+4.10.2 example
+	seq_reformat -in <alignment> -action +tree_compute n mode -output newik
+
+File:alignment
+*****************************************************SNIP**********************
+CLUSTAL format
+
+A       aaaaaaaaaaaa
+B       ccccccccccca
+C       ddddddddddda
+D       eeeeeeeeeeeb
+E       fffffffffffb
+*****************************************************SNIP**********************
+
+	seq_reformat -in alignment -action +tree_compute 5 -output newick
+	
+Output
+*****************************************************SNIP**********************
+Computation of an NJ tree using conserved positions
+Limit:5 Columns:    1 Left:    2 Right    3 BL:0.99
+Limit:3 Columns:   11 Left:    1 Right    2 BL:0.50
+(( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
+*****************************************************SNIP**********************
+The tree is in stdout while the comments come to stderr
+Limit Indicates which limit has been used to extract the columns (the limit is automatically lowered if not enough columns are found in the MSA)
+Columns indicate how many columns have been used to compute the branch being considered
+Left indicates hao many leaf there are to the left or to the right of the branch
+BL is the Branch Length
+
+4.10.3 Algorithm
+	1-evaluate the MSA
+	2-Keep every colum that has a score >=limit
+	3-Make an NJ tree based on the chosen columns
+	4-Compute an NJ tree and root it
+	5-split the dataset according to the root
+	6-Do 1 to 7 on the left  node [Recursion]
+	7-Do 1 to 7 on the right node [Recursion]
+
+4.11 Recoding Sequences
+	4.11.1 usage
+	4.11.2 example
+
+4.11.1
+When the length of sequence names is a problem, these names can be recoded using the following chain of commands, that works on alignments, trees and sequences.
+The coded name will be of the form C<sequence index:1..N>
+A coded file is data structure independant and can be used for either trees, sequences or alignments
+
+4.11.2
+	A.Generate a code file
+	seq_reformat -in aln -output code_name > aln.code
+
+	B.code the alignment
+	seq_reformat -in aln -code aln.code > aln.coded
+
+	C.decode the alignment
+	seq_reformat -in aln -decode aln.code > aln.decoded
+
+4.12 Highlighting residues in contact with a ligand in a PDB file
+	4.11.1 Usage
+	4.11.2 Example 1: producing a colored HTML
+	4.12.3 Example 2: producing an upper/lower output
+	4.12.4 Example 3: producing a coded version
+	4.12.5 Removing the tags
+
+4.12.1 Usage
+	A-DATA
+	Your sequences must be provided via the -in flag, in any format
+	The name of the corresponding structures (struc file) must be provided via the -in2 flag, 
+	using a FASTA-like format where each line looks like that:
+		>name	_S_	TARGETPD	LIGAND1 [Chain]	LIGAND2 [Chain]
+	where:
+		name: name of the sequence in the -in flag
+		_S_ is a keyword that indicates you are now providing PDB information
+		TARGETPDB:
+			  1-PDB identifier, PDBID or PDBIDX where X is the chain number. (X=FIRST if omited).
+                            The corresponding PDB file will be fetched by extract_from_pdb, either from your
+                            own repository if the global variable PDB_DIR is set, or directly from rcsb.
+		          2-legal file_name (no path allowed) of a PDB file.
+		LIGAND1 [CHAIN]
+			  1-Name of a Ligand (HETATOM) in the previous PDB file, CHAIN must be specified
+                            LIGAND can be set to ALL
+	                    CHAIN can be set to ANY
+			  2-Name of the file containing the ligand (and only the ligand)
+	
+	B-Usage				
+	seq_reformat -in <seq_file> -in2 (struc file) -action +seq2contacts <Angstrom Dist> -output=<color_html,...>
+	
+	C-Output
+	Each residue receives an index that depends on the ligand it is close too:
+		0: residue not in contact with any ligand
+		1: residue in contact with ligand 1
+		2: residue in contact with ligand 2
+		9: residue in contact with more than 1 ligand
+
+	In the colored version, 
+		0: blue
+		1-8: green to orange
+		9: red brick
+	
+4.11.2 Example 1: producing a colored HTML
+	The files related to this example are in ligand.tar.gz. UNcompress them, go into ligand and run the examples
+	Command:
+	seq_reformat -in ATP.aln -in2 ATP.ligand -action +seq2contacts 5 -output=color_html
+	
+	will generate a file where residues less than 5A from the ligand are highlighted in color
+	result is in file:  ATP.4.11.2.mapped_aln
+	
+4.12.3 Example 2: producing an upper/lower output	
+	seq_reformat -in ATP.aln -in2 ATP.ligand -action +seq2contacts 5 +lower +upper '[1-9]' 
+	result is in file:  ATP.4.11.3.mapped_aln
+
+4.12.4 Example 3: producing a coded version
+	seq_reformat -in ATP.aln -in2 ATP.ligand -action +seq2contacts 5 -output=color_ascii
+	result is in file:  ATP.4.11.4.mapped_aln
+4.12.5 Removing the tags
+	seq_reformat -in ATP.aln -in2 ATP.ligand -action +seq2contacts 5 +lower +upper '[1-9]' +rm_tag
+	result is in file:  ATP.4.11.5.mapped_aln
+
+4.13 Measuring the distances between two groups of residues within a PDB structure	
+	4.13.1 usage
+4.13.1 Usage
+	seq_reformat -action +struc2contacts <Struc1><_R_(Residue1)_(Residue2) <Struc2><_R_(Residue1)_(Residue2) 0
+	will report the distances between list of residues in struc1 and list of residues in struc2
+		-struc1 and struc2 are valid PDB files
+		-Disatnce is measured between the closest atoms of two AA (as provided in stru files)
+	The command
+		seq_reformat -action +struc2contacts 1HCL.pdb 1HCL.pdb 0
+	Will report a full distance map
+	The command
+		seq_reformat -action +struc2contacts 1HCL.pdb_R_1 1HCL.pdb_R_6_12 0
+	Will report the distance between residue 1 vs 6 and 1 vs 12 of structure 1HCL
+
+	NOTE: avoid providing paths 
+		
+
+5.12.6 IMPORTANT NOTE
+	In all the previous examples, the order matters within the -action flag
+
+
+				
+	
+5-Formats
+	
+supported formats are:
+	clustalw
+	clustalw like ( i.e. interleaved alignment)
+	fasta (i.e. like fasta sequences, but using gaps to give all the sequences the same length).
+	pearson (id)
+	msf
+	newick (trees)
+
+Formats should be automatically recognised. If this fails, indicate the name of the format using the -in_f flag.
+Please contact me if you wish to see a new format added.
+
+	
+
+6-Known bugs
+
+	-the html poses problems with several browsers, including internet explorer
+	-It is impossible to print the html in color. For printing, generate your files in ps/pdf.
+	
+	
+7-Address, Citation
+
+This program is unpublished. If you wish to use it for academic purpose, an aknowlegement of the  kind seq_reformat: a sequence reformating tool, Cedric Notredame, Unpublished and the WWW address will be nice. For non-academic usage, a license with a small fee is required. Please get in touch with me.
+
+If you wish to get in touch with me:
+
+*******************************************
+Dr. Cedric Notredame, PhD.                        
+Structural and Genetic Information
+C.N.R.S UMR 1889
+31 Chemin Joseph Aiguier,
+13402 Marseille Cedex 20,
+France
+
+Email   :  cedric.notredame@europe.com
+WWW     :  http://igs-server.cnrs-mrs.fr/~cnotred/
+Tel.    :  +33 491 164 606
+Fax     :  +33 491 164 549
+*******************************************
+
+8-Licenses
+The program is free of charge for academic users. For non-academic usage, a license with a  small fee is required. Please get in touch with the author.
+
+9-Contributors
+Thanks to Marco Pagni (ISREC) and Liisa Holm (EBI) who have reported many, hem hem, 'features' :-)...
+

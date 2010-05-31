@@ -1,0 +1,31 @@
+CLUSTAL FORMAT for T-COFFEE Version_2.56, CPU=4.71 sec, SCORE=17, Nseq=7, Len=154 
+
+1cms_101_160    QTV----------------------GLSTQEP-------------GDVFTYAEFDG----
+1cms_29_149     FTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSSTFQNLGKPLSIHYGTGSMQG----
+1cms_1_59_139   QAI----------------------GATQNQY-------------GEFDIDCDNLSYMPT
+2apr_102_163    QTI----------------------ELAKREA-------------ASFAS-GPNDG----
+3app_100_160    QAV----------------------QAAQQIS-------------AQFQQDTNNDG----
+4ape_104_164    QAV----------------------ESAKKVS-------------SSFTEDSTIDG----
+4pep_99_158     QIF----------------------GLSETEP-------------GSFLYYAPFDG----
+                  .                                          .         .    
+
+1cms_101_160    ----ILGMAYPSLAS---E-YS---------I--PV-FDN--------------------
+1cms_29_149     ----ILGYDTVTVSNIVDI-QQ---------T--VG-LSTQEPGDVFTYAEFDGILGMAY
+1cms_1_59_139   VVFEINGKMYPLTPS---A-YTSQDQGFCTSG--FQ-SEN--------------------
+2apr_102_163    ----LLGLGFDTITT---VRGV---------K--TP-MDN--------------------
+3app_100_160    ----LLGLAFSSINTVQPQ-SQ---------T--TF-FDT--------------------
+4ape_104_164    ----LLGLAFSTLNT---V-SP---------TQQKTFFDN--------------------
+4pep_99_158     ----ILGLAYPSISA---S-GA---------T--PV-FDN--------------------
+                    : *                               ..                    
+
+1cms_101_160    ---MMNR------HLV----AQDLFSVYMDR--N
+1cms_29_149     PSLASEYSIPVFDNMM----NRHLVA--------
+1cms_1_59_139   ---HSQK------WILGDVFIREYYSVFDRA--N
+2apr_102_163    ---LISQ------GLI----SRPIFGVYLGKAKN
+3app_100_160    ---V--K------SSL----AQPLFAVALKH--Q
+4ape_104_164    ---A--K------ASL----DSPVFTADLGY--H
+4pep_99_158     ---LWDQ------GLV----SQDLFSVYLSS--N
+                               :                  
+
+
+

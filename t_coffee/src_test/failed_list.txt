@@ -1,0 +1,1 @@
+          t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60  

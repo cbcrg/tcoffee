@@ -1,0 +1,59 @@
+          t_coffee -update
+          t_coffee sample_seq1.fasta
+          t_coffee sample_dnaseq1.fasta -type=dna
+          t_coffee sample_seq1.fasta -mode mcoffee
+          t_coffee sample_seq1.fasta -mode expresso
+          t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair
+          t_coffee sample_rnaseq1.fasta -mode mrcoffee
+          t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair
+        t_coffee -other_pg irmsd -aln 3d_sample4.aln
+        t_coffee -other_pg trmsd -aln 3d_sample5.aln -template_file 3d_sample5.template_list
+          t_coffee -other_pg mocca sample_seq1.fasta
+          t_coffee
+          t_coffee -help
+          t_coffee -help -in
+          t_coffee sample_seq1.fasta
+          t_coffee Ssample_seq1.fasta
+          t_coffee -parameters=sample_param_file.param
+          t_coffee -infile=sample_aln1.aln -mode=evaluate
+          t_coffee -infile=sample_seq1.aln -in  Lsample_lib1.tc_lib -mode=evaluate
+          t_coffee -other_pg=seq_reformat
+          t_coffee -other_pg=unpack_all
+          t_coffee -other_pg=unpack_extract_from_pdb
+          t_coffee -infile=sample_seq1.fasta
+          t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_id_pair,Lsample_lib1.tc_lib -outfile=outaln
+          t_coffee sample_seq1.fasta -in=Xpam250mt  -gapopen=-10  -gapext=-1
+          t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=profile_aln
+          t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair -outfile=profile_aln
+          t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib
+          t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib
+          t_coffee sample_seq1.fasta -weight=1000 -out_lib=test.tc_lib
+          t_coffee sample_seq1.fasta -distance_matrix_mode=very_fast
+          t_coffee sample_seq1.fasta -quicktree
+          t_coffee sample_seq1.fasta -dp_mode myers_miller_pair_wise
+          t_coffee sample_seq2.fasta -multi_core jobs
+          t_coffee sample_seq2.fasta -multi_core jobs
+          t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair
+          t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template
+          t_coffee 3d_sample2.fasta -template_file SELF_P_
+          t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.mocca_lib -domain -start=100 -len=50
+          t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
+          t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60
+          t_coffee sample_seq1.fasta -output=clustalw,gcg, score_html
+          t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +lower -output clustalw
+          t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_ascii, score_html
+          t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii, score_html
+          t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html
+          t_coffee -other_pg seq_reformat -in 3d_sample4.aln -action +upper -output clustalw > 3d_sample4.cw_aln
+          t_coffee -other_pg apdb -aln 3d_sample4.aln
+          t_coffee  Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln
+         	 t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text
+          t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair
+          t_coffee -in Sseq.fas P2PTC Mfugue_pair
+          t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_
+          t_coffee -mode 3dcoffee -in Sseq.fas P2PTC
+          t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_
+          t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_file template_file6.template
+          t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.template -weight 1001 -out_lib test_lib7.tc_lib -lib_only
+          t_coffee -in Lmarna.tc_lib -outfile maran.test
+          t_coffee -in Asample_aln5.aln -outfile test.aln

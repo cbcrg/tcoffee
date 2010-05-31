@@ -1,0 +1,16 @@
+CLUSTAL FORMAT for T-COFFEE Version_2.37, CPU=0.07 sec, SCORE=0, Nseq=4, Len=81
+
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpdfk-vtevakkggelwrglk
+hmgt_mouse      -----kpkrprsayniyvsesfqeakddsaqgk-----lklvneawknls
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhs-----dlsivemskaagaawkelg
+                      ***. ::: .: ..  .. .             *  .  *: * 
+
+hmgb_chite      d--kseweakaatakqnyiralqeyerngg-
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+                   :  :   *   : .* . :         
+
+
+

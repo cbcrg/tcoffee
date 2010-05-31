@@ -1,0 +1,273 @@
+Documentation for aln_compare 
+	-(04/04/01)
+	-(08/10/00)
+	-(30/08/00)
+
+
+0-Recent modifications
+1-Program description
+2-Installation
+3-Flags
+4-Example
+	4.1 comparing two alignments
+	4.2 comparing some pairs of residues within two alignments
+	4.3 comparing every pair or every column...
+	4.4 output the conserved bits between two alignments
+5-Formats
+6-known bugs
+7-Author, citation
+
+
+
+
+0-Recent modifications
+	04/04/01: Added the -output_aln... flags to identify the conserved portions (see 4.4).
+	04/10/00: Fixed a bug that caused the similarity measure to include gapped positions
+	05/09/00: Made it possible for al1 and st to contain sequences in different order
+	05/09/00: read_aln the routine for reading clustalw-like aln is now more flexible, it does not require 
+		  a completly empty line after the heading stuff. 		 
+	31/08/00: Added reading of the msf format.
+	31/08/00: Fixed a bug that prevented usage of fasta_aln (reformat.c).
+	30/08/00: First public release.
+	
+1-Program description
+
+aln_compare is a program meant to compare two multiple sequence alignments.
+Given two alignments, it will compare the sequences and residues that are common between the two.
+It can also restrict the comparison to some of the residues and idicates which bit of the alignments are effectively conserved.
+If you wish to carry out more sophisticated comparisons, please use t_coffee.
+
+
+2-Installation
+unzip and untar the distribution, then source the instal file ( ./install)
+
+alias aln_compare='t_coffee -other_pg aln_compare'
+(add this last instruction to your .bashrc)
+
+3-Flag
+to get a list of the existing flags, type:
+
+	aln_compare
+A full description of the flags is not yet available.
+
+
+4 Example 
+
+4.1 comparing two alignments
+
+let us consider the two following alignments:
+	
+1aab_ref1.aln
+***********************SNIP*****************************************
+CLUSTAL W (1.75) multiple sequence alignment
+
+
+hmgb_chite      ---ADKPKRPLSAYMLWLNSARESIKRENPDFK-VTEVAKKGGELWRGLKD--KSEWEAK
+hmgl_wheat      --DPNKPKRAPSAFFVFMGEFREEFKQKNPKNKSVAAVGKAAGERWKSLSESEKAPYVAK
+hmgl_trybr      KKDSNAPKRAMTSFMFFSSDFRS----KHSDLS-IVEMSKAAGAAWKELGPEERKVYEEM
+hmgt_mouse      -----KPKRPRSAYNIYVSESFQ----EAKDDS-AQGKLKLVNEAWKNLSPEEKQAYIQL
+                      ***. ::: .: ..  .    :  . .      *  .  *: *    :  :   
+
+hmgb_chite      AATAKQNYIRALQEYERNGG-
+hmgl_wheat      ANKLKGEYNKAIAAYNKGESA
+hmgl_trybr      AEKDKERYKREM---------
+hmgt_mouse      AKDDRIRYDNEMKSWEEQMAE
+                *   : .* . :         
+***********************SNIP*****************************************
+and 
+
+1aab_ref1.ref_aln
+***********************SNIP*****************************************
+TEST ALN
+
+hmgl_trybr -KKDSNAPKRAMTSFMFFSS----DFRSKHSDLSI-VEMSKAAGAAWKEL
+hmgt_mouse ------KPKRPRSAYNIYVSESFQEAKDDSAQGKL-----KLVNEAWKNL
+hmgb_chite ----ADKPKRPLSAYMLWLNSARESIKRENPDFKV-TEVAKKGGELWRGL
+hmgl_wheat ---DPNKPKRAPSAFFVFMGEFREEFKQKNPKNKSVAAVGKAAGERWKSL
+
+hmgl_trybr GPEERKVYEEMAEKDKERYKREM---------
+hmgt_mouse SPEEKQAYIQLAKDDRIRYDNEMKSWEEQMAE
+hmgb_chite --KDKSEWEAKAATAKQNYIRALQEYERNGG-
+hmgl_wheat SESEKAPYVAKANKLKGEYNKAIAAYNKGESA
+***********************SNIP*****************************************
+
+Now type:
+
+	aln_compare -al1 1aab_ref1.aln -al2 1aab_ref1.ref_aln
+
+will produce the following output
+
+
+	seq1       seq2         Sim   [ALL]           Tot  
+	1aab_ref1     4          27    86.8 [100.0]   [  402]
+
+
+Sim   :Average similarity between all the sequences
+[ALL] :Similarity between the two alignments on every pair of the al1 alignment. The number in bracket indicates the percent of the pairs of residues involved. In practice, the program considers each pair of aligned residues in al1, and counts how many of these pairs are found identical in al2.
+TOT   :Number of pairs contained in the al1 multiple alignment. 
+
+Note that the comparison is not symetrical, and will not always give the same results if al1 and al2 are interverted. The reason is that al1 and al2 may not contain the same number of aligned pairs.
+If you are interested in comparing each pair of sequence, type:
+
+	aln_compare -al1 1aab_ref1.aln -al2 1aab_ref1.ref_aln -io_format htp
+
+	h: header
+	t: total
+	p: pair
+
+will give as an output:
+
+	*****************************************************
+	seq1       seq2         Sim   [ALL]           Tot  
+	1aab_ref1     4          27    86.8 [100.0]   [  402]
+	hmgb_chite hmgl_wheat    36    95.9 [100.0]   [   74]
+	hmgb_chite hmgl_trybr    21    90.3 [100.0]   [   62]
+	hmgb_chite hmgt_mouse    24    80.9 [100.0]   [   68]
+	hmgl_wheat hmgl_trybr    30    92.3 [100.0]   [   65]
+	hmgl_wheat hmgt_mouse    22    84.5 [100.0]   [   71]
+	hmgl_trybr hmgt_mouse    31    75.8 [100.0]   [   62]
+
+If you want to know the average identity of each sequence, type:
+
+	ln_compare -al1 1aab_ref1.aln -al2 1aab_ref1.ref_aln -io_format hs
+	
+	s:sequence
+
+	
+will give as an output:
+
+	*****************************************************
+	seq1       seq2         Sim   [ALL]           Tot  
+	hmgb_chite ..            27    89.2 [100.0]   [  204]
+	hmgl_wheat ..            29    91.0 [100.0]   [  210]
+	hmgl_trybr ..            27    86.2 [100.0]   [  189]
+	hmgt_mouse ..            25    80.6 [100.0]   [  201]
+
+
+
+4.2 comparing some pairs of residues within two alignments
+	 
+
+If we consider the two previous alignments, and the following 'cache alignment'
+
+cache
+***********************SNIP*****************************************
+CACHE
+
+hmgl_trybr -xxxxxxhhhhhhhhhhhhh----xxxxxxxxxxx-xxxxhhhhhhhhhh
+hmgt_mouse ------xhhhhhhhhhhhhhxxxxxxxxxxxxxxx-----hhhhhhhhhh
+hmgb_chite ----xxxhhhhhhhhhhhhhxxxxxxxxxxxxxxx-xxxxhhhhhhhhhh
+hmgl_wheat ---xxxxhhhhhhhhhhhhhxxxxxxxxxxxxxxxxxxxxhhhhhhhhhh
+
+hmgl_trybr xxxxhhhhhhhhhhhhhhhhhhh---------
+hmgt_mouse xxxxhhhhhhhhhhhhhhhhhhhxxxxxxxxx
+hmgb_chite --xxhhhhhhhhhhhhhhhhhhhxxxxxxxx-
+hmgl_wheat xxxxhhhhhhhhhhhhhhhhhhhxxxxxxxxx
+
+***********************SNIP*****************************************
+
+type the following instruction:
+	aln_compare -al1 1aab_ref1.ref_aln -al2 1aab_ref1.aln -st
+	cache aln -io_cat 3d_ali
+
+
+'-st cache aln' tells the program that the structure is in
+cache and formated as an alignment (you can use a fasta format in which
+case the structure is threaded onto al1, in this case replace aln with
+pep).
+
+'-io_cat 3d_ali' tells the program what are the pairs/columns that wil
+need to be taken into account. 3d_ali is a pre-set, and it is equivalent
+to:
+	-io_cat '[h][h]+[e][e]=[struc];[*][*]=[Tot]'
+
+The result is as follow:
+
+*********************************************************************
+seq1       seq2         Sim   [struc]         [tot]           Tot  
+1aab_ref1     4          27   100.0 [ 45.0]    86.8 [100.0]   [  402]
+
+
+45.0 indicates that 45.0 % of the residues belong to the core ( i.e. [h]vs[h] or [e]vs[e]). 100
+indicates that there is a perfect identity, in the core between the
+reference and the Cw aln.
+
+398 indicates the number of paired redsidues containe in al1.
+
+Note that the results may change when al1 and al2 are interverted. They
+may not contain the same number of pairs, column.... The structure is
+always threaded onto al1. 
+
+4.3 comparing every pair or every column
+
+if you want a column comparison, add the flag:
+
+	-compare_mode column 
+
+the default is -compare_mode sp
+
+sp means that the comparison will be made by comparing pairs of aligned residues, while column means the comparison will only take into account columns.
+
+4.4  output the conserved bits between two alignments
+
+Given two alignments you may want to identify the bits and pieces that are conserved:
+
+aln_compare -al1 aln1 -al2 aln2 -output_aln\ 
+	    -output_aln_modif 'x' -output_aln_format clustalw\ 
+	    -output_aln_threshold 60 -output_aln_file myfile
+
+'-output_aln' forces an output of al1 in '-output_aln_format' in the file '-output_aln_file'.
+In al1, residues whose sum of pair alignment is more than 60% similar to the equivalent in al2 will be replaced with upercases. The other residues will be replaced with '-output_aln_modif'.
+
+	-output_aln_modif    : any symbol or 'lower'
+	-output_aln_threshold: 0-100 (100 <=> column comparison).
+	-output_aln_format   : any format supported by seq_reformat
+	-output_aln_file     : any file name, stdout, stderr will be recognized.
+
+
+
+5-Formats
+
+supported formats are:
+	clustalw
+	clustalw like ( i.e. interleaved alignment)
+	fasta (i.e. like fasta sequences, but using gaps to give all the sequences the same length).
+	pearson (id)
+	msf
+
+For the structure, two formats only are supported: clustalw-like and fasta
+
+Formats are automatically recognised. Please contact me if you wish to see a new format added.
+
+	
+
+6-Known bugs
+
+
+	
+
+
+7-Address, Citation
+
+
+If you use this program for academic purposes, please cite:
+
+'T-Coffee, a novel method for multiple sequence alignments', Notredame, Higggins and Heringa, Journal of Molecular Biology, 302(1), pp205-217, 2000
+
+If you wish to get in touch with me:
+
+*******************************************
+Dr. Cedric Notredame, PhD.                        
+Structural and Genetic Information
+C.N.R.S UMR 1889
+31 Chemin Joseph Aiguier,
+13402 Marseille Cedex 20,
+France
+
+Email   :  cedric.notredame@europe.com
+WWW     :  http://igs-server.cnrs-mrs.fr/~cnotred/
+Tel.    :  +33 491 164 606
+Tel mob :  +33 661 312 531
+Fax     :  +33 491 164 549
+*******************************************
+

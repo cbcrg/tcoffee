@@ -1,0 +1,40 @@
+
+######### RUN_REPORT      START  ######
+######### PROGRAM_VERSION START  ######
+          T-COFFEE, Version_4.62
+######### PROGRAM_VERSION END    ######
+######### COMMAND_LINE    START  ######
+t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache_aln -struc_in_f number_aln -action +upper [1-2] 
+######### COMMAND_LINE    END    ######
+
+######### FILE: sample_aln7.aln        START  ######
+
+CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 sec, SCORE=0, Nseq=4, Len=28 
+
+A               CTCCGTGTCTAGGAGT-TTACGTGGAGT
+B               CTGAGA----AGCCGCCTGAGGTCG---
+D               CTTCGT----AGTCGT-TTAAGACA---
+C               -TTAAGGTCC---AGATTGCGGAGC---
+                 * ..        .*  * . *:     
+
+
+
+
+######### FILE: -other_pg        END    ######
+
+######### FILE: sample_aln7.cache_aln        START  ######
+
+CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 sec, SCORE=0, Nseq=4, Len=28 
+
+A               3133212131022021-11032122021
+B               312020----023323312022132---
+D               311321----021321-11002030---
+C               -110022133---020112322023---
+                                            
+
+
+
+
+######### FILE: -other_pg        END    ######
+
+######### RUN_REPORT END         ######

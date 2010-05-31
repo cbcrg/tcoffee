@@ -1,0 +1,44 @@
+
+######### RUN_REPORT      START  ######
+######### PROGRAM_VERSION START  ######
+          T-COFFEE, Version_8.75
+######### PROGRAM_VERSION END    ######
+######### COMMAND_LINE    START  ######t_coffee 1aab_ref1.pep 
+
+######### COMMAND_LINE    END    ######
+
+######### MESSAGES START    ######
+
+
+*************************************************************************************************
+*                        FULL TRACE BACK 7031                                    
+7031 -- ERROR: COREDUMP: T-COFFEE Version_8.75
+
+*************************************************************************************************
+
+
+*************************************************************************************************
+*                        WARNING LIST                                    
+7031 -- WARNING: 
+	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.75]
+
+
+*************************************************************************************************
+
+######### MESSAGES END    ######
+
+######### FILES START     ######
+************* Start_File: 1aab_ref1.pep  *************>hmgl_trybr FAM1
+kkdsnaxxpkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykremmm
+>hmgt_mouse FAM1
+kpkrprsayniyvsesfqeakddsaxxxxxqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgb_chite FAM2
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgl_wheat FAM3
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
+************* End_File: 1aab_ref1.pep  *************
+######### FILES END  ######

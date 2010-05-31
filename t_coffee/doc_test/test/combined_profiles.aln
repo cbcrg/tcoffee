@@ -1,0 +1,52 @@
+CLUSTAL FORMAT for T-COFFEE Version_2.56, CPU=1.65 sec, SCORE=47, Nseq=10, Len=187 
+
+hmgb_chite      ---adkpkr--plsaym---------------------------lwlnsaresi------
+hmgt_mouse      -----kpkr--prsayn---------------------------iyvsesfqea------
+hmgl_wheat      --dpnkpkr--apsaff---------------------------vfmgefreef------
+hmgl_trybr      kkdsnapkr--amtsfm---------------------------ffssdfrskh------
+1cms            -----gevasvpltnyldsqyfgkiylgtppqeftvlfdtgssdfwvpsiycksnacknh
+4pep            -------igdeplenyldteyfgtigigtpaqdftvifdtgssnlwvpsvycsslacsdh
+4ape            ----stgsatttpidslddayitpvqigtpaqtlnldfdtgssdlwvfssettasevdgq
+3app            ---aasgvatntptan-deeyitpvtig--gttlnlnfdtgsadlwvfstelpasqqsgh
+2apr            ---agvgtvpmtdygn-dieyygqvtigtpgkkfnldfdtgssdlwiastlctncg-sgq
+1cms_1          --------------------ytgslhwvpvtvqqywqftvds---vtisgvvvaceggcq
+                                                                .           
+
+hmgb_chite      krenpd-fk---------------------------------vtev--------------
+hmgt_mouse      kddsaq-gk---------------------------------------------------
+hmgl_wheat      kqknpk-nks--------------------------------vaav--------------
+hmgl_trybr      s------dls--------------------------------ivem--------------
+1cms            qrfdpr-ksstfqnlgkplsihygtg-smqgilgydtvtvsnivdiqqtvglstqepgdv
+4pep            nqfnpd-dsstfeatsqelsitygtg-smtgilgydtvqvggisdtnqifglsetepgsf
+4ape            tiytpsksttakllsgatwsisygdgssssgdvytdtvsvggltvtgqavesakkvsssf
+3app            svynp--satgkelsgytwsisygdgssasgnvftdsvtvggvtahgqavqaaqqisaqf
+2apr            tkydpn-qsstyqadgrtwsisygdgssasgilakdnvnlggllikgqtielakreaasf
+1cms_1          aildtg-tsklvgpssdilniqqaig-atqnqygefdidcdnlsymptvvfeingkmypl
+                                                                            
+
+hmgb_chite      ---------akkggelwrglkd--kseweakaata---kqnyiralqeyerng----g--
+hmgt_mouse      ---------lklvneawknlspeekqayiqlakdd---rirydnemksweeqm----ae-
+hmgl_wheat      ---------gkaagerwkslsesekapyvakankl---kgeynkaiaaynkge----sa-
+hmgl_trybr      ---------skaagaawkelgpeerkvyeemaekd---kerykrem--------------
+1cms            ftyaefdgilgmaypslasey---sipvfdnmmnrhlvaqdlfsvymdrngqe--smltl
+4pep            lyyapfdgilglaypsisasg---atpvfdnlwdqglvsqdlfsvylssnddsg-svvll
+4ape            tedstidgllglafstlntvsptqqktffdnakas--ldspvftadlgyhapg---tynf
+3app            qqdtnndgllglafssintvqpqsqttffdtvkss--laqplfavalkhqqpg---vydf
+2apr            asgpn-dgllglgfdtittvr--gvktpmdnlisqglisrpifgvylgkaknggggeyif
+1cms_1          tpsaytsqdqgfctsgfqsen------hsqkwilgdvfireyysvfdrannlvg----la
+                                                                            
+
+hmgb_chite      -------
+hmgt_mouse      -------
+hmgl_wheat      -------
+hmgl_trybr      -------
+1cms            gaidpsy
+4pep            ggidssy
+4ape            gfidtta
+3app            gfidssk
+2apr            ggydstk
+1cms_1          kai----
+                       
+
+
+

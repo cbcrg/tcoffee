@@ -1,0 +1,143 @@
+	
+Mocca	
+	-Mocca: prevent the computation  seq weights    [DONE 02/03/01]*
+	-Mocca: problem with nucleotide N (long streches)	
+	-Mocca: identify the seed sequence		[DONE: 2/11/00]
+	-Mocca: Toggle gap penalties			[DONE: 2/11/00]
+	-Mocca: Toggle Relative/absolute coordinates	[DONE: 2/11/00]
+	
+
+T-Coffee:	
+	
+MID TERM
+	-Make new format for library....................[    ]
+	-implement lalign...............................[DONE 03/01/02]
+	-profiles handling of T-Coffee..................[DONE]1.45
+	-alignment of a large number of sequences.......[    ]
+	-simplify the diagonal buisness.................[    ]	
+			
+URGENT(BUG)
+	-using -convert when parsing struc		[	      ]
+	
+
+T-Coffee Version 2.00
+		1. Integration with  structures
+		2. Double progressive alignment
+		3. Blast_pair
+		4. New documentation			
+
+SHORT TERM	
+	-Self normalize concistency score               [DONE         ]2.32
+	-prevent sequences entered via A or L flag      [DONE         ]2.32
+	-made sure constraints can be passed to dpa	[DONE	      ]2.32
+	-fixed serious prf bug (order control)		[DONE	      ]2.14
+	-fixed fugue_pair with the new extract_from_pdb [DONE         ]2.10
+	-Added the graph MSA mode			[DONE	      ]1.65
+	-Fixed a serious bug in the lib computation	[DONE	      ]1.65 
+	-Fixed MOCCA					[DONE	      ]1.64
+	-change the memory allocation datastructure	[DONE	      ]1.50
+	-make the do0uble progressive algorithm		[	      ]
+	-validate three new defaults: seq, struct, mixt [	      ]
+	-new output: list of conserved blocks		[	      ]
+	-sort the sequences when input=>no order dep    [DONE         ]1.46
+	-make sure lalign3d works fine			[DONE	      ]1.46
+	-check align_pdb and compare with sap		[	      ]
+	-implement the gene sequence algorithm		[	      ]
+	-make fast pair linear in memory		[             ]
+	-add an annotation field to the library format  [             ]
+	-weight methodscontributions (i.e. 3cdna_pair)..[             ]
+	-add verbose mode that outputs all files	[	      ]
+	-in the cdna alignment add a no match option    [	      ]
+	-in cdna aln output frame prediction		[	      ]
+	-check normalization                            [             ]	
+	-internalize align_pdb				[DONE	      ] 1.46
+	-implement the profile Vs profile stuff		[DONE	      ] 1.45
+	-make sure lalign works with profiles		[DONE	      ] 1.45	
+	-make dp_mode the default mode for tree/weights [DONE	      ] 1.45 ?
+	-save/retrieve temporary files in .tcoffee/buffe[DONE         ] 1.45	
+	-check for identical names			[DONE	      ] 1.45 
+	-Look for the methods in the .tcoffee dir	[DONE	      ] 1.43
+	-Use only the N best pairs of seq for maln	[DONE	      ] 1.43
+	-Make dist mat computation once only            [DONE	      ] 1.43
+	-add the -version flag				[DONE 16/01/03] 1.43
+	-added the thread_pair method (blast+sap)	[DONE 15/01/03] 1.43
+	-conservation of upper/lower case		[DONE 31/01/02] 1.38
+	-make the potential number of temp file infinite[DONE 18/09/01] 1.37.2
+	-make it possible to score aln with larger lib  [DONE 06/07/01] 1.37
+	-pb with -seq_to_align and name output in cw    [DONE 06/07/01] 1.37
+	-two tries to seq reconciliation (fast+slow)	[DONE 21/06/01] 1.36
+	-add a order mode for tree_mode			[DONE 20/06/01] 1.36
+	-fixed little but in t_coffee4cgi		[DONE 12/06/01] 1.35
+	-remove gaps in sequences at the end of read-seq[DONE 12/06/01] 1.35
+	-fix the bug for last line in param file        [DONE 06/06/01] 1.35
+	-fix pdb parsing pb with sap_pair		[DONE 27/04/01] 1.34	
+	-fix libraririe sequence reconciliqtion pb      [DONE 09/04/01] 1.34
+	-fix crashing problem on linux (infinite exit   [DONE 02/03/01]
+	-add function pointers to generic DP		[DONE 02/03/01]
+	-in aln_compare: output the conserved bits	[DONE	      ]	
+	-make sure clean is not default with matrix	[DONE 02/03/01]
+	-make it possible to align two profiles         [DONE 02/03/01]
+	-make the score output for prf aln		[DONE 02/03/01]
+	-make it possible to read SP with multiple ID   [DONE 02/03/01]
+	-clean the progressive_aln output		[DONE 02/03/01]
+	-add an extra computation of the weight (winsim)[DONE 26/02/01]
+	-add an extra method (slow_pair)		[DONE 26/02/01]
+	-Improve the diagonal selection.................[DONE 22/02/01]
+	-make the executable for MSDOS II ..............[DONE 05/03/01]
+	-clean the html output				[DONE 22/02/01]
+	-parametrize cdna_pair_wise.....................[DONE 22/01/01]
+	-fix the problem with -evaluate and -score......[DONE 22/01/01]
+	-problem when reading matrices with X<filename>.[DONE 22/01/01]
+	-make the executable for MSDOS	................[DONE 22/01/01]
+	-move scripts with pg  mocca,process_pdb........[DONE         ]
+	-check one sequence only for pw method..........[DONE  2/11/00]
+	-added the weights ( -seq_weights)..............[DONE 16/11/00]
+	-normalise the reported scores..................[DONE         ]	
+	-bug fixed in identifying the swissprot format  [DONE  2/11/00]
+	-make the new DALI scoring scheme ready.	[DONE 25/09/00]
+	-Clean memory leacks				[DONE 21/09/00]
+	-Add the -seqnos flag to the clor output	[DONE 20/09/00]
+	-make a clean msf output			[DONE 02/10/00]
+
+
+-Documentation
+	[ ]new method: lalign2_id_pair
+	[ ]new method: align_pdb
+	[ ]new method: lalign_pdb
+	[ ]new flag: -align_pdb_param_file 
+	[ ]new flag: -align_pdb_hasch_mode 
+	[ ]new flag  -cache
+	[ ]new_flag: -target_min_sim
+	[ ]new_flag: -target_max_sim
+	[ ]new_flag: -target_min_cov
+	[ ]new_flag: -method_log
+	[ ]new flag: max_n_pair->indicates how many pairs to use when profile vs profile
+	[ ]update seq_to_align ( now it is possible to give a list of sequences, max 200)
+	[ ]redocument cdna_fast_pair
+	[ ]document the order mode
+	[*]documentation for -t_coffee_defaults -dali_defaults, add a faq for the parameters
+	[*]Fix the problem with!SEQ_1_TO_N
+	[*]document the method files stuff (use the example file)	
+	[ ]new_flag	:-diag_threshold ( superseeds ndiag) works with fasta_pair_wise 
+	[ ]redocument   :-ndiag
+	[ ]new_flag	:-f_gop
+	[ ]new_flag	:-f_gep
+	[ ]new flag	:-evaluate_mode
+	[ ]new flag	:-seq_weight
+	[ ]new flag	:-outseqweight
+	[ ]new weight	:winsimN
+	[ ]new_flag:	-thread_pair
+	[*]new_flag:	-clean_aln;
+	[*]new_flag:	-clean_threshold;
+	[*]new_flag:	-clean_iteration;
+	[*]new_flag:	-clean_evaluate_mode
+
+-Modifications
+
+
+Release 1.42
+	-default evaluation: given two positions, the best max_n_pair pairs of sequences are used to give the match score.
+	this is is a heuristic that decreases by N the complexity.
+	-Pairwise distances for the tree and the weights are now only computed once.
+	-Lalign is now an internal method: lalign2list does not need to be any more part of the distribution.
+	

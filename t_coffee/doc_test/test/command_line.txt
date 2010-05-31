@@ -1,0 +1,120 @@
+t_coffee -update
+		t_coffee sample_seq1.fasta [**]
+t_coffee -in= Asample_aln1.aln,Asample_aln2.aln,Asample_aln3.aln -outfile=combined_aln.aln [**]
+t_coffee -infile=sample_aln1.aln -special_mode=evaluate [**]
+t_coffee 3d.fasta -special_mode=3dcoffee [*#]
+which wget [**]
+t_coffee -other_pg mocca sample_seq1.fasta [**]
+
+t_coffee sample_seq1.fasta [**] 
+t_coffee -other_pg mocca sample_seq1.fasta [**]
+	t_coffee sample_seq1.fasta
+
+t_coffee sample_seq1.fasta sample_seq2.fasta
+t_coffee sample_seq1.fasta,Ssample_aln2.aln
+
+t_coffee -in Asample_aln1_1.aln,Asample_aln1_2.aln -outfile=combined_aln.aln 
+
+t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=combined_profiles.aln
+t_coffee Ssample_seq1.fasta,Rsample_aln2.aln -outfile seqprofile_aln
+
+t_coffee  Rsample_profile1.aln,Rsample_profile2.aln -special_mode=3dcoffee -outfile=aligned_prf.aln
+
+t_coffee -in Ssample_seq1.fasta,Mfast_pair,Mlalign_id_pair [**]
+t_coffee sample_seq1.fasta -in=Mem0clustalw0pairwise [**]
+
+t_coffee -other_pg unpack_clustalw_method.tc_method [**]
+t_coffee -other_pg unpack_generic_method.tc_method [**]
+
+t_coffee sample_seq1.fasta -in=Mclustalw_method.tc_method [**]
+t_coffee sample_seq1.fasta -in=Mgeneric_method.tc_method [**]
+t_coffee -other_pg=unpack_tc_generic_method.pl [**]
+
+t_coffee -in=Asample_aln1_1.aln,Asample_aln1_2.aln -outfile=combined_aln.aln [**]
+
+t_coffee -in Asample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=sim_pam250mt [**]
+t_coffee -in=Asample_aln1.aln,Ltest_lib.tc_lib -outfile=outaln [**]
+
+t_coffee -in=Asample_aln1_1.aln,Asample_aln1_2.aln,Mfast_pair,Mlalign_id_pair -outfile=out_aln [**]
+
+t_coffee sample_seq1.fasta -type=PROTEIN [**]
+t_coffee sample_seq1.fasta -special_mode low_memory [**]
+t_coffee  sample_seq1.fasta -in=Mslow_pair,Mlalign_id_pair -tree_mode=slow -dp_mode=myers_miller_pair_wise [**]
+t_coffee sample_seq1.fasta -output=msf,fasta_aln [**]
+t_coffee sample_seq1.fasta -outfile=stdout -out_lib=stdout [**]
+cat sample_seq1.fasta | t_coffee -infile=stdin [**]
+t_coffee sample_seq1.fasta [**]
+cat sample_param_file.param  | t_coffee -parameters=stdin [**]
+echo -in=Ssample_seq1.fasta,Mclustalw_pair | t_coffee -parameters=stdin [**]
+t_coffee sample_seq1.fasta -run_name=guacamole [**]
+t_coffee Ssample_aln1.aln [**]
+t_coffee -infile=Ssample_aln1.aln [**]
+t_coffee -in=Ssample_aln1.aln,Mslow_pair,Mlalign_id_pair -outfile=outaln
+t_coffee sample_seq1.fasta -out_lib=sample_lib1.tc_lib -lib_only [**]
+t_coffee -in=Asample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only [**]
+ t_coffee -in=Asample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only -weight=1000 [**]
+t_coffee -in Lsample_lib1.tc_lib Lsample_lib2.tc_lib -lib_only -out_lib=sample_lib3.tc_lib [**]
+t_coffee Ssample_aln1.aln -outfile=outaln[**]
+t_coffee sample_seq1.fasta -output=score_ps [**]
+t_coffee sample_seq2.fasta -output=score_pdf [**]
+
+t_coffee sample_seq1.fasta -output=clustalw,score_html,score_ps,msf [**]
+t_coffee sample_aln1.aln -convert -output=gcg [**]
+
+t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln seq1 10 seq2 15 [**]
+
+t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln sample_lib4.tc_lib02 [**]
+t_coffee -in Asample_seq1.aln -weight=1000 -out_lib=sample_seq1.tc_lib -lib_only [**]
+t_coffee -in Ssample_seq1.fasta Lsample_seq1.tc_lib -outfile sample_seq1.aln [**]
+t_coffee sample_seq1.fasta -usetree=sample_tree.dnd [**]
+t_coffee sample_seq4.fasta -in Mcdna_fast_pair [**]
+t_coffee sample_seq4.fasta [**]
+t_coffee sample_seq1.fasta Rsample_aln2.aln -outfile tacos
+t_coffee Rsample_aln1.fasta Rsample_aln2.aln -outfile tacos
+t_coffee  Rsample_profile1.aln,Rsample_profile2.aln -special_mode=3dcoffee -outfile=aligne_prf.aln
+
+t_coffee sample_seq1.fasta -output=score_html [**]
+
+t_coffee -infile=sample_aln1_1.aln -in=Asample_aln1_2.aln -special_mode=evaluate [**]
+t_coffee [**]
+t_coffee -help [**]
+t_coffee -help -in
+
+t_coffee sample_seq1.fasta [**]
+t_coffee Ssample_seq1.fasta [**]
+t_coffee -parameters=sample_param_file.param[**]
+t_coffee -infile=sample_aln1.aln -special_mode=evaluate [**]
+
+t_coffee -infile=sample_seq1.aln -in  Lsample_lib1.tc_lib -special_mode=evaluate [**]
+t_coffee -other_pg=seq_reformat [**]
+t_coffee -other_pg=unpack_all [**]
+t_coffee -other_pg=unpack_extract_from_pdb [**]
+ 	
+t_coffee -other_pg=extract_from_pdb -help [**]
+t_coffee -infile=sample_seq1.fasta [**]
+t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_id_pair,Lsample_lib1.tc_lib -outfile=outaln[**]
+t_coffee sample_seq1.fasta -in=Xpam250mt  -gapopen=-10  -gapext=-1 [**]
+t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=profile_aln
+t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair -outfile=profile_aln
+
+t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib [**]
+t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib [**]
+t_coffee sample_seq1.fasta -weight=1000 -out_lib=test.tc_lib [**]
+
+t_coffee sample_seq1.fasta -tree_mode=very_fast [**]
+t_coffee sample_seq1.fasta -quicktree [**]
+t_coffee sample_seq1.fasta -dp_mode myers_miller_pair_wise [**]
+t_coffee -in=struc1.pdb,struc2.pdb,struc3.pdb,Msap_pair
+t_coffee -special_mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template
+t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.mocca_lib -domain -start=10 -len=50 [**]
+t_coffee -in sample_lib1.mocca_lib -domain -start=10 -len=60 [**]
+t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60 [##]
+t_coffee sample_seq1.fasta -output=clustalw,gcg, score_html [**]
+t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +lower -output clustalw [**]
+t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_ascii, score_html [**]
+
+t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii, score_html [**]
+t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html [**]
+
+
+
