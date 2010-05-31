@@ -92,7 +92,7 @@ mcoffee:
 	mkdir -p $(DISTRIB_DIR)/mcoffee
 	cp $(LIBRARY)/mcoffee/* $(DISTRIB_DIR)/mcoffee
 examples:	
-	mkdir $(DISTRIB_DIR)/example/
+	mkdir -p $(DISTRIB_DIR)/example/
 	cp $(PWD)/../../$(EXECUTABLE)/doc_test/data/*  $(DISTRIB_DIR)/example/
 html:
 	mkdir $(DISTRIB_DIR)/html/
@@ -139,8 +139,6 @@ env:
 	@echo 'LIBRARY         :' $(LIBRARY)
 	@echo 'DISTRIBUTIONS   :' $(DISTRIBUTIONS)
 
-mkdir: 
-	-rm -rf paolo
 
 #########################################################
 #							#
