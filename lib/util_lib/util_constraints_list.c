@@ -3718,7 +3718,6 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
   return CL;
   
 }		
-// relax constraint list for gene prediction
 
 Constraint_list * expand_constraint_list_4gp (Constraint_list *CL, int T)
 {
