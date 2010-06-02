@@ -3602,7 +3602,7 @@ int printf_system_direct  (char *string, ...)
   int r;
   
   cvsprintf (buf, string);
-  r=safe_system (buf);
+  r=system (buf);
   vfree(buf);
   return r;
 }
@@ -7009,7 +7009,7 @@ int my_mkdir ( char *dir_in)
 	    {
 	    
 	      char command [1000];
-	      printf_system_direct( command, "mkdir %s", dir);
+	      printf_system_direct("mkdir %s", dir);
 	      if ( access (dir, F_OK)==-1)
 		{
 		  myexit(fprintf_error ( stderr, "\nERROR: Could Not Create Directory %s [FATAL:%s]", dir, PROGRAM));		}

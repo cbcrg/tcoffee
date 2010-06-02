@@ -8,7 +8,7 @@
 
 /**
  * \brief Struct to save a diagonal
- * 
+ *
  */
 typedef struct
 {
@@ -30,7 +30,7 @@ Diagonal;
 
 /**
  * \brief Struct to save all informations of a profile.
- * 
+ *
  */
 typedef struct
 {
@@ -45,7 +45,7 @@ typedef struct
 	///weight of the sequence
 	int weight;
 	///saves the amount of allocated memory
-	int allocated_memory;	
+	int allocated_memory;
 	///the profile itself [alphabet_size][profile_length]
 	int **prf;
 	///number_of_sequences
@@ -55,7 +55,7 @@ Fastal_profile;
 
 /**
  * \brief Struct to save all parameters for fastal.
- * 
+ *
  */
 typedef struct
 {
@@ -207,7 +207,7 @@ int make_index_of_file(char *file_name, long **result);
 	void free_gotoh(Gotoh_param* method_arguments_p, int alphabet_size);
 	void fill_arguments_gotoh(Gotoh_param* method_arguments_p, int alphabet_size);
 	int prf_gotoh(Fastal_profile *profile1, Fastal_profile *profile2, FILE *edit_file_name, Gotoh_param *arguments, Fastal_param *param_set);
-			
+
 	//Sparse dynamic programming
 	void free_sparse(Sparse_dynamic_param* method_arguments_p);
 	void fill_arguments_sparse(Sparse_dynamic_param* method_arguments_p);
@@ -220,7 +220,7 @@ int make_index_of_file(char *file_name, long **result);
 	int ** diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fastal_profile *profile1, Fastal_profile *profile2, int *num_points, Fastal_param *param_set);
 	int seq_pair2blastz_diagonal(char *seq_file_name1, char *seq_file_name2, int **diagonals, int *dig_length, int l1, int l2, int is_dna);
 	int list2linked_pair_wise_fastal(Fastal_profile *prf1, Fastal_profile *prf2, Fastal_param *param_set, int **list, int n, FILE *edit_f, FILE *prof_f, int node_number);
-	
+
 //edit_files 2 alignment
 void edit2alignment(FILE *sequence_file, long *seq_positions, FILE *edit_file, long *edit_positions, int node_number, int number_of_sequences, char *aligned_sequence, int alignment_length, FILE *edit_seq_file, int offset, FILE* alignment_file);
 void edit_seq2aligned_seq(char *aligned_sequence, FILE *sequence_file, long sequence_position, FILE *alignment_file);
@@ -238,7 +238,7 @@ void initiate_profiles(Fastal_profile **profiles, Fastal_param *param_set);
 void free_fastal_profile(Fastal_profile *profile, int alphabet_size);
 double **resize_dyn_matrix(double **dyn_matrix, int old_length1, int old_length2, int length1, int length2);
 void free_dyn_matrix(int length1, double **dyn_matrix);
-void fill_parameters(int is_dna, Fastal_param *param_set, char *method, char *diag_method);
+void fill_parameters(int is_dna, Fastal_param *param_set, char *method, char *diag_method, char *mat);
 
 
 int seq_pair2diagonal_own(char *seq1, char *seq2, int **diagonals, int *dig_length, int l1, int l2, int is_dna, int word_length);
@@ -273,19 +273,19 @@ struct Fastal_arguments
 {
 // 	char *args[2];
 	//IO
-	
-	
+
+
 	char *sequence_file;
 	char *tree_file;
 	char *output_file;
 	int tree_out;
-	
+
 	char *method;
 	int is_dna;
 	double gop;
 	double gep;
-	
-	
+
+
 
 	char *diag_method;
 // 	Tree Computation
@@ -295,9 +295,10 @@ struct Fastal_arguments
 	char *tree_method;
 	int tree_param1;
 	int tree_param2;
-	
-	
+
+
 	//Scoring
+	char *mat;
 	int agreement_score;
 	int evaluate;
 	int score;

@@ -4147,14 +4147,14 @@ int kill_child_pid(int pid)
   
   cpid=getpid();
   
-  list=vcalloc ( 100000, sizeof (int));
+  list=vcalloc (MAX_N_PID, sizeof (int));
   
   while ((n=get_child_list (pid,list)))
     {
       kill_child_list (list);
     }
   
-  for (a=0; a<100000; a++)
+  for (a=0; a<MAX_N_PID; a++)
     {
       if ( list [a] && a!=cpid)
 	{
@@ -4172,7 +4172,7 @@ int kill_child_list (int *list)
 {
   int a;
   int cpid=getpid();
-  for (a=0; a<100000; a++)
+  for (a=0; a<MAX_N_PID; a++)
     {
       if (list[a]==1 && a!=cpid)
 	{
@@ -4198,7 +4198,9 @@ int get_child_list (int pid,int *clist)
 	{
 	  n+=get_child_list (atoi(list[a++][1]), clist);
 	}
+      free_arrayN ((void **)list, 3);
     }
+  
   if (!clist[pid]){clist[pid]=1; n++;}
   return n;
 }

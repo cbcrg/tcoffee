@@ -30,10 +30,10 @@
  * \section install_sec Installation
  *
  * \subsection step1 Step 1: Opening the box
- *  
+ *
  * etc...
  * \section fastal_sec Fastal
- * 
+ *
  * This program is a very fast aligner. It is capable of aligning huge sets of sequences because it keeps as much as necessary on hard disk.
  */
 
@@ -74,11 +74,11 @@ free_sparse(Sparse_dynamic_param* method_arguments_p)
 
 /**
  * \brief One run of sparse dynamic programming.
- * 
+ *
  * \param profiles The profiles.
  * \param param_set The fastal parameters.
  * \param method_arguments_p The method arguments.
- * \param is_dna Sequences are DNA (\a is_dna = 1) or protein. 
+ * \param is_dna Sequences are DNA (\a is_dna = 1) or protein.
  * \param edit_file The edit file.
  * \param prof_file the profile file.
  * \param number Number of the parent node.
@@ -93,7 +93,7 @@ sparse_dyn(Fastal_profile **profiles,
 		   FILE *prof_file,
 		   int number)
 {
-	printf("WHAT THE HELL ARE YOU DOING HERE?\n");
+// 	printf("WHAT THE HELL ARE YOU DOING HERE?\n");
 	Sparse_dynamic_param *arguments = (Sparse_dynamic_param*)method_arguments_p;
 // 	static char *file_name1 = vtmpnam(NULL);
 // 	static char *file_name2 = vtmpnam(NULL);
@@ -173,7 +173,7 @@ sparse_dyn(Fastal_profile **profiles,
 }
 
 
-int 
+int
 fastal_compare (const void * a, const void * b)
 {
 	return (*(int*)a - *(int*)b);
@@ -182,7 +182,7 @@ fastal_compare (const void * a, const void * b)
 
 /**
  * \brief Makes a sorted list out of diagonals.
- * 
+ *
  * \param diagonals A list of diagonals to use during dynamic programming.
  * \param num_diagonals Number of diagonals.
  * \param seq1 Sequence 1.
@@ -248,7 +248,7 @@ diagonals2int(int *diagonals,
 		diagy[i] = diags[i]-l1;
 		b = i;
 	}
-	
+
 	vfree(diags);
 	int tmpy_pos;
 	int tmpy_value;
@@ -300,9 +300,9 @@ diagonals2int(int *diagonals,
 		for (i = a; i <= b; ++i)
 		{
 			list[list_pos] = vcalloc(6, sizeof(int));
-			
+
 			list[list_pos][0] = ++diagx[i];
-			
+
 			list[list_pos][1] = ++diagy[i];
 			list[list_pos][3] = last_y[diagy[i]];
 			list[list_pos][4] = list_pos-1;
@@ -311,12 +311,12 @@ diagonals2int(int *diagonals,
 			last_y[tmpy_pos] = tmpy_value;
 			tmpy_value = list_pos;
 			tmpy_pos = diagy[i];
-			
+
 			++list_pos;
 		}
 		last_y[tmpy_pos] = tmpy_value;
 
-		
+
 		//lower border
 		if (list[list_pos-1][1] != l2)
 		{
@@ -324,7 +324,7 @@ diagonals2int(int *diagonals,
 			list[list_pos][0] = pos_x;
 			list[list_pos][1] = l2;
 			list[list_pos][3] = last_y[l2];
-			
+
 			list[list_pos][2] = -1000;
 			list[list_pos][4] = list_pos-1;
 			if (pos_x > l2)
@@ -333,13 +333,13 @@ diagonals2int(int *diagonals,
 				list[list_pos][5] = l2-pos_x;
 			last_y[l2] = list_pos;
 			++list_pos;
-			
+
 		}
 
 
 		if ((b >= 0) && (diagy[b] == l2))
 			--b;
-		
+
 		if ((a >0) && (diagx[a-1] == pos_x))
 			--a;
 	}
@@ -353,15 +353,15 @@ diagonals2int(int *diagonals,
 	}
 
 
-// 	right border	
+// 	right border
 	list[list_pos] = vcalloc(6, sizeof(int));
 	list[list_pos][0] = l1;
 	list[list_pos][1] = 0;
 	list[list_pos][3] = last_x[l1-1];
 	list[list_pos][2] = -1000;
 	++list_pos;
-	
-	
+
+
 
 	for (i = 1; i <= l2; ++i)
 	{
@@ -390,7 +390,7 @@ diagonals2int(int *diagonals,
 		}
 		++list_pos;
 	}
-	
+
 	list[list_pos - l2][2] = -1000;
 
 	*num_points = list_pos;
@@ -404,7 +404,7 @@ diagonals2int(int *diagonals,
 
 /**
  * \brief Makes a sorted list out of diagonals.
- * 
+ *
  * \param diagonals A list of diagonals to use during dynamic programming.
  * \param num_diagonals Number of diagonals.
  * \param seq1 Sequence 1.
@@ -420,7 +420,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 	int l1 = strlen(seq1);
 	int l2 = strlen(seq2);
 	int gep = param_set->gep;
-	
+
 	int current_size = l2+l1;
 
 	int **list = vcalloc(current_size, sizeof(int*));
@@ -441,7 +441,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 	int a = -1, b = -1;
 	for (i = 0; i < num_diagonals; ++i)
 	{
-		
+
 		if (diags[i] < l1)
 		{
 			diagx[i] = l1 - diags[i];
@@ -459,7 +459,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 		diagy[i] = diags[i]-l1;
 		b = i;
 	}
-	
+
 	vfree(diags);
 	int tmpy_pos;
 	int tmpy_value;
@@ -467,14 +467,14 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 	int *last_y = vcalloc(l2+1, sizeof(int));
 	int *last_x = vcalloc(l1+1, sizeof(int));
 	last_y[0] = 0;
-	
+
 	last_x[0] = 0;
 	list[0] = vcalloc(6, sizeof(int));
 
 	int list_pos = 1;
 	int dig_num = l1;
 	int tmp_l2 = l2 + 1;
-	
+
 	//left border
 	for (; list_pos < tmp_l2; ++list_pos)
 	{
@@ -488,7 +488,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 
 	int pos_x = 0;
 // 	int diags_old = l2;
-	
+
 // 	int tmp = l1;
 	int y;
 	int tmp_l1 = l1-1;
@@ -514,14 +514,14 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 		for (i = a; i <= b; ++i)
 		{
 			list[list_pos] = vcalloc(6, sizeof(int));
-			
+
 			list[list_pos][0] = ++diagx[i];
-			
+
 			list[list_pos][1] = ++diagy[i];
 			list[list_pos][3] = last_y[diagy[i]];
 			list[list_pos][4] = list_pos-1;
 			list[list_pos][5] = last_y[diagy[i]-1];
-			
+
 
 
 
@@ -548,18 +548,18 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 // 			{
 // 				gap_num += (profile1->prf[char_c][diagx[i]-1]/profile1->number_of_sequences) * (profile2->prf[char_c][diagy[i]-1]/profile2->number_of_sequences) * M[param_set->pos2char[char_c]-'A'][param_set->pos2char[char_c2]-'A'];
 // 			}
-// 			list[list_pos][2] = gap_num; 
+// 			list[list_pos][2] = gap_num;
 
-			
+
 			last_y[tmpy_pos] = tmpy_value;
 			tmpy_value = list_pos;
 			tmpy_pos = diagy[i];
-			
+
 			++list_pos;
 		}
 		last_y[tmpy_pos] = tmpy_value;
 
-		
+
 		//lower border
 		if (list[list_pos-1][1] != l2)
 		{
@@ -567,7 +567,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 			list[list_pos][0] = pos_x;
 			list[list_pos][1] = l2;
 			list[list_pos][3] = last_y[l2];
-			
+
 			list[list_pos][2] = -1000;
 			list[list_pos][4] = list_pos-1;
 			if (pos_x > l2)
@@ -576,13 +576,13 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 				list[list_pos][5] = l2-pos_x;
 			last_y[l2] = list_pos;
 			++list_pos;
-			
+
 		}
 
 
 		if ((b >= 0) && (diagy[b] == l2))
 			--b;
-		
+
 		if ((a >0) && (diagx[a-1] == pos_x))
 			--a;
 	}
@@ -596,15 +596,15 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 	}
 
 
-// 	right border	
+// 	right border
 	list[list_pos] = vcalloc(6, sizeof(int));
 	list[list_pos][0] = l1;
 	list[list_pos][1] = 0;
 	list[list_pos][3] = last_x[l1-1];
 	list[list_pos][2] = -1000;
 	++list_pos;
-	
-	
+
+
 
 	for (i = 1; i <= l2; ++i)
 	{
@@ -624,10 +624,10 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 			{
 				gap_num += profile1->prf[char_c][l1-1] + profile2->prf[char_c][i-1];
 			}
-			
+
 			gap_num /= num_seq;
-			
-			list[list_pos][2] = M[toupper(seq1[l1-1])-'A'][toupper(seq2[i-1])-'A'] * gap_num; 
+
+			list[list_pos][2] = M[toupper(seq1[l1-1])-'A'][toupper(seq2[i-1])-'A'] * gap_num;
 		}
 		else
 		{
@@ -643,7 +643,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 		}
 		++list_pos;
 	}
-	
+
 	list[list_pos - l2][2] = -1000;
 
 	*num_points = list_pos;
@@ -662,7 +662,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 	int l1 = strlen(seq1);
 	int l2 = strlen(seq2);
 	int gep = param_set->gep;
-	
+
 	int current_size = l2+l1;
 
 	int **list = vcalloc(current_size, sizeof(int*));
@@ -684,7 +684,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 	int a = -1, b = -1;
 	for (i = 0; i < num_diagonals; ++i)
 	{
-		
+
 		if (diags[i] < l1)
 		{
 			diagx[i] = l1 - diags[i];
@@ -702,7 +702,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 		diagy[i] = diags[i]-l1;
 		b = i;
 	}
-	
+
 	vfree(diags);
 	int tmpy_pos;
 	int tmpy_value;
@@ -710,14 +710,14 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 	int *last_y = vcalloc(l2+1, sizeof(int));
 	int *last_x = vcalloc(l1+1, sizeof(int));
 	last_y[0] = 0;
-	
+
 	last_x[0] = 0;
 	list[0] = vcalloc(6, sizeof(int));
 
 	int list_pos = 1;
 	int dig_num = l1;
 	int tmp_l2 = l2 + 1;
-	
+
 	//left border
 	for (; list_pos < tmp_l2; ++list_pos)
 	{
@@ -731,7 +731,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 
 	int pos_x = 0;
 // 	int diags_old = l2;
-	
+
 // 	int tmp = l1;
 	int y;
 	int tmp_l1 = l1-1;
@@ -757,9 +757,9 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 		for (i = a; i <= b; ++i)
 		{
 			list[list_pos] = vcalloc(6, sizeof(int));
-			
+
 			list[list_pos][0] = ++diagx[i];
-			
+
 			list[list_pos][1] = ++diagy[i];
 			list[list_pos][3] = last_y[diagy[i]];
 			list[list_pos][4] = list_pos-1;
@@ -770,23 +770,23 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 			for (char_c = 0; char_c < alphabet_size; ++char_c)
 			{
 				freq1 = (double)profile1->prf[char_c][diagx[i]-1] / profile1->number_of_sequences;
-				
+
 				freq2 = (double)profile2->prf[char_c][diagy[i]-1] / profile2->number_of_sequences;
 
 				tmp_score += ( freq1 - freq2) * (freq1 - freq2);
 			}
-			
+
 			list[list_pos][2] = 10 - sqrt(tmp_score);
 
 			last_y[tmpy_pos] = tmpy_value;
 			tmpy_value = list_pos;
 			tmpy_pos = diagy[i];
-			
+
 			++list_pos;
 		}
 		last_y[tmpy_pos] = tmpy_value;
 
-		
+
 		//lower border
 		if (list[list_pos-1][1] != l2)
 		{
@@ -794,7 +794,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 			list[list_pos][0] = pos_x;
 			list[list_pos][1] = l2;
 			list[list_pos][3] = last_y[l2];
-			
+
 			list[list_pos][2] = -1000;
 			list[list_pos][4] = list_pos-1;
 			if (pos_x > l2)
@@ -803,13 +803,13 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 				list[list_pos][5] = l2-pos_x;
 			last_y[l2] = list_pos;
 			++list_pos;
-			
+
 		}
 
 
 		if ((b >= 0) && (diagy[b] == l2))
 			--b;
-		
+
 		if ((a >0) && (diagx[a-1] == pos_x))
 			--a;
 	}
@@ -823,15 +823,15 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 	}
 
 
-// 	right border	
+// 	right border
 	list[list_pos] = vcalloc(6, sizeof(int));
 	list[list_pos][0] = l1;
 	list[list_pos][1] = 0;
 	list[list_pos][3] = last_x[l1-1];
 	list[list_pos][2] = -1000;
 	++list_pos;
-	
-	
+
+
 
 	for (i = 1; i <= l2; ++i)
 	{
@@ -870,7 +870,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 		}
 		++list_pos;
 	}
-	
+
 	list[list_pos - l2][2] = -1000;
 
 	*num_points = list_pos;
@@ -888,7 +888,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 	int l1 = strlen(seq1);
 	int l2 = strlen(seq2);
 	int gep = param_set->gep;
-	
+
 	int current_size = l2+l1;
 
 	int **list = vcalloc(current_size, sizeof(int*));
@@ -910,7 +910,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 	int a = -1, b = -1;
 	for (i = 0; i < num_diagonals; ++i)
 	{
-		
+
 		if (diags[i] < l1)
 		{
 			diagx[i] = l1 - diags[i];
@@ -928,7 +928,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 		diagy[i] = diags[i]-l1;
 		b = i;
 	}
-	
+
 	vfree(diags);
 	int tmpy_pos;
 	int tmpy_value;
@@ -936,14 +936,14 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 	int *last_y = vcalloc(l2+1, sizeof(int));
 	int *last_x = vcalloc(l1+1, sizeof(int));
 	last_y[0] = 0;
-	
+
 	last_x[0] = 0;
 	list[0] = vcalloc(6, sizeof(int));
 
 	int list_pos = 1;
 	int dig_num = l1;
 	int tmp_l2 = l2 + 1;
-	
+
 	//left border
 	for (; list_pos < tmp_l2; ++list_pos)
 	{
@@ -957,7 +957,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 
 	int pos_x = 0;
 // 	int diags_old = l2;
-	
+
 // 	int tmp = l1;
 	int y;
 	int tmp_l1 = l1-1;
@@ -983,9 +983,9 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 		for (i = a; i <= b; ++i)
 		{
 			list[list_pos] = vcalloc(6, sizeof(int));
-			
+
 			list[list_pos][0] = ++diagx[i];
-			
+
 			list[list_pos][1] = ++diagy[i];
 			list[list_pos][3] = last_y[diagy[i]];
 			list[list_pos][4] = list_pos-1;
@@ -996,23 +996,23 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 			for (char_c = 0; char_c < alphabet_size; ++char_c)
 			{
 				freq1 = (double)profile1->prf[char_c][diagx[i]-1] / profile1->number_of_sequences;
-				
+
 				freq2 = (double)profile2->prf[char_c][diagy[i]-1] / profile2->number_of_sequences;
 
 				tmp_score += freq1 * freq2;
 			}
-			
+
 			list[list_pos][2] = tmp_score * 10;
 
 			last_y[tmpy_pos] = tmpy_value;
 			tmpy_value = list_pos;
 			tmpy_pos = diagy[i];
-			
+
 			++list_pos;
 		}
 		last_y[tmpy_pos] = tmpy_value;
 
-		
+
 		//lower border
 		if (list[list_pos-1][1] != l2)
 		{
@@ -1020,7 +1020,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 			list[list_pos][0] = pos_x;
 			list[list_pos][1] = l2;
 			list[list_pos][3] = last_y[l2];
-			
+
 			list[list_pos][2] = -1000;
 			list[list_pos][4] = list_pos-1;
 			if (pos_x > l2)
@@ -1029,13 +1029,13 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 				list[list_pos][5] = l2-pos_x;
 			last_y[l2] = list_pos;
 			++list_pos;
-			
+
 		}
 
 
 		if ((b >= 0) && (diagy[b] == l2))
 			--b;
-		
+
 		if ((a >0) && (diagx[a-1] == pos_x))
 			--a;
 	}
@@ -1049,15 +1049,15 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 	}
 
 
-// 	right border	
+// 	right border
 	list[list_pos] = vcalloc(6, sizeof(int));
 	list[list_pos][0] = l1;
 	list[list_pos][1] = 0;
 	list[list_pos][3] = last_x[l1-1];
 	list[list_pos][2] = -1000;
 	++list_pos;
-	
-	
+
+
 
 	for (i = 1; i <= l2; ++i)
 	{
@@ -1096,7 +1096,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 		}
 		++list_pos;
 	}
-	
+
 	list[list_pos - l2][2] = -1000;
 
 	*num_points = list_pos;
@@ -1118,7 +1118,7 @@ combine_profiles2file(int **prf1,
 						char state)
 {
 	int alphabet_size = param_set->alphabet_size;
-	char *pos2aa = &(param_set->pos2char[0]);	
+	char *pos2aa = &(param_set->pos2char[0]);
 	int i;
 	int x = 0;
 	if (state == 'M')
@@ -1167,7 +1167,7 @@ combine_profiles2file(int **prf1,
 #define LIN(a,b,c) a[b*5+c]
 /**
  * Calculates a fast and sparse dynamic programming matrix
- * 
+ *
  * \param prf1 Profile of first sequence.
  * \param prf2 Profile of second sequence.
  * \param param_set The parameter for the alignment.
@@ -1199,14 +1199,14 @@ list2linked_pair_wise_fastal(Fastal_profile *prf1,
 	int ni=0, nj=0;
 	long score;
 	int nomatch = param_set->nomatch;
- 
+
 	l1=prf1->length;
 	l2=prf2->length;
 
 	al=declare_char (2,l1+l2+1);
 
 
-	
+
 	igop=param_set->gop;
 	gep=igep=param_set->gep;
 	if (n>max_size)
@@ -1226,7 +1226,7 @@ list2linked_pair_wise_fastal(Fastal_profile *prf1,
 			for (b=0; b<5; b++)
 				LIN(MI,a,b)=LIN(MJ,a,b)=LIN(MJ,a,b)=-1000000;
 	}
-  
+
 	for (a=0; a<n; a++)
 	{
 		i=list[a][0];
@@ -1291,7 +1291,7 @@ list2linked_pair_wise_fastal(Fastal_profile *prf1,
 			if ( LIN(MM,ij,0) >=LIN(MI,ij,0) && LIN(MM,ij,0)>=LIN(MJ,ij,0))LIN(MM,a,4)='m';
 			else if ( LIN(MI,ij,0) >= LIN(MJ,ij,0))LIN(MM,a,4)='i';
 			else LIN(MM,a,4)='j';
-	  
+
 		}
 		else
 		{
@@ -1333,9 +1333,9 @@ list2linked_pair_wise_fastal(Fastal_profile *prf1,
 				i--; LEN++;
 			}
 		}
-      
+
 // 		else if (l==0) {HERE ("L=0 i=%d j=%d",l, i, j);exit (0);}
-		else 
+		else
 		{
 			for (b=0; b<l; b++, LEN++)
 			{
@@ -1396,7 +1396,7 @@ list2linked_pair_wise_fastal(Fastal_profile *prf1,
 			}
 			else
 				++num;
-		} 
+		}
 		else if (al[1][b]==1)
 		{
 //			prf2->prf[param_set->alphabet_size-1] += prf1->num_sequences;
@@ -1412,13 +1412,13 @@ list2linked_pair_wise_fastal(Fastal_profile *prf1,
 				++num;
 		}
 	}
-	
+
 
 	fprintf(edit_f, "%c%i\n",statec[state], num);
 	num =1;
 	state = 1;
-	
-	
+
+
 	fprintf(edit_f,"*\n");
 	fprintf(prof_f,"*\n");
 	free_char (al, -1);
@@ -1433,7 +1433,7 @@ list2linked_pair_wise_fastal(Fastal_profile *prf1,
 
 /**
  * \brief Turns a profile into a consensus sequence.
- * 
+ *
  * The character with the highest number of occurences is used as consensus. Gaps are not included. For example: 10 '-' and one 'A' would give 'A' as consensus.
  * \param profile The profile.
  * \param file_name Name of the file to save the consensus sequence in.
@@ -1470,7 +1470,7 @@ profile2consensus(Fastal_profile *profile, Fastal_param *param_set)
 }
 
 
-int 
+int
 diag_compare (const void * a, const void * b)
 {
 	return (((Diagonal_counter*)b)->count - ((Diagonal_counter*)a)->count);
@@ -1591,7 +1591,7 @@ seq_pair2diagonal_own(char *seq1,
 
 	//counting diagonals
 	const int window_length = 14;
-	
+
 	Diagonal_counter *diag_index = vcalloc(l1+l2, sizeof(Diagonal_counter));
 	int num = l1+l2;
 	for (i = 0; i < num; ++i)
@@ -1610,7 +1610,7 @@ seq_pair2diagonal_own(char *seq1,
 			++(diag_index[i - word_index[index][j] + l1].count);
 		}
 	}
-	
+
 	z = -1;
 	int i2 = i-1;
 	int second_index = index;
@@ -1634,7 +1634,7 @@ seq_pair2diagonal_own(char *seq1,
 		second_index -= aa[(short)seq2[++z2]] * prod[0];
 		second_index *= ng;
 		second_index += aa[(short)seq2[++i2]];
-		
+
 		tmp = word_index[index];
 		for (j = 2; j < tmp[0]; ++j)
 		{
@@ -1670,7 +1670,7 @@ seq_pair2diagonal_own(char *seq1,
 			diags = vrealloc(diags, sizeof(int)*(*dig_length));
 		}
 
-		
+
 		y = diag_index[i].diagonal - l1;
 		if (y < 0)
 		{
@@ -1770,7 +1770,7 @@ seq_pair2diagonal_swift(char *seq1,
 	//counting diagonals
 	const int window_length = 14;
 	const int threshold = 12;
-	
+
 	Swift_diagonal *diag_index = vcalloc(l1+l2, sizeof(Swift_diagonal));
 	int num = l1+l2;
 	for (i = 0; i < num; ++i)
@@ -1792,7 +1792,7 @@ seq_pair2diagonal_swift(char *seq1,
 			++(diag_index[i - word_index[index][j] + l1].count);
 		}
 	}
-	
+
 	z = -1;
 	int tmp_index;
 	for (; i < l2; ++i)
@@ -1812,16 +1812,16 @@ seq_pair2diagonal_swift(char *seq1,
 					diag_index[tmp_index].start = i;
 					diag_index[tmp_index].end = i + word_length;
 				}
-				
+
 			}
 			else
 			{
 				++(diag_index[tmp_index].count);
 			}
 		}
-		
+
 	}
-	
+
 
 
 	// choose diagonals
@@ -1866,7 +1866,7 @@ seq_pair2diagonal_swift(char *seq1,
 
 /**
  * \brief Calculates the diagonals between two sequences.
- * 
+ *
  * Uses a k-tup index to choose diagonals.
  * \param seq_file1 File with sequence 1.
  * \param seq_file2 File with sequence 2.
@@ -1901,7 +1901,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 // 	}
 // 	char blast_command2[600];
 // 	sprintf(blast_command2, "less %s", out_file);
-	
+
 	if (is_dna)
 	{
 		sprintf(blast_command, "bl2seq -p blastn -i %s -j %s -D 1 -g F -o %s -S 1 -F F", seq_file_name1, seq_file_name2, out_file);
@@ -1918,8 +1918,8 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 	fgets(line, 300, diag_f);
 	fgets(line, 300, diag_f);
 	fgets(line, 300, diag_f);
-	
-	
+
+
 	char delims[] = "\t";
 	int length, pos_q, pos_d;
 	int current_pos = 0;
@@ -1947,7 +1947,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 			diags[current_pos++] = pos_d;
 			diags[current_pos++] = length;
 		}
-		
+
 	}
 	fclose(diag_f);
 	int round = 0;
@@ -1960,7 +1960,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 		}
 		else
 		{
-			sprintf(blast_command, "bl2seq -p blastp -i %s -j %s -D 1 -g F -o %s -F F -S 1 -e %i", seq_file_name1, seq_file_name2, out_file);
+		  sprintf(blast_command, "bl2seq -p blastp -i %s -j %s -D 1 -g F -o %s -F F -S 1 -e %i", seq_file_name1, seq_file_name2, out_file, e_threshold);
 		}
 		system(blast_command);
 		e_threshold *= 10;
@@ -2070,7 +2070,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 
 
 	vfree(diag);
-	
+
 	diagonals[0] = diags;
 	return current_pos/3;
 }
@@ -2092,7 +2092,7 @@ seq_pair2blat_diagonal(char *seq_file_name1,
 // 	char blast_command2[200];
 // 	char blast_command2[600];
 // 	sprintf(blast_command2, "less %s", out_file);
-	
+
 	if (is_dna)
 	{
 		sprintf(blast_command, "blat %s %s %s -out=blast8 -q=dna -t=dna -maxGap=0 >/dev/null 2>/dev/null", seq_file_name2, seq_file_name1, out_file);
@@ -2109,8 +2109,8 @@ seq_pair2blat_diagonal(char *seq_file_name1,
 // 	fgets(line, 300, diag_f);
 // 	fgets(line, 300, diag_f);
 // 	fgets(line, 300, diag_f);
-	
-	
+
+
 	char delims[] = "\t";
 	int length, pos_q, pos_d;
 	int current_pos = 0;
@@ -2214,7 +2214,7 @@ seq_pair2blat_diagonal(char *seq_file_name1,
 
 /**
  * \brief Calculates the diagonals between two sequences.
- * 
+ *
  * Uses blastz to calculate the diagonals.
  * \param seq_file1 File with sequence 1.
  * \param seq_file2 File with sequence 2.
@@ -2238,7 +2238,7 @@ seq_pair2blastz_diagonal(char *seq_file_name1,
 // 	char blast_command2[200];
 // 	char blast_command2[600];
 // 	sprintf(blast_command2, "less %s", out_file);
-	
+
 	if (is_dna)
 	{
 		sprintf(blast_command, "~/Download/blastz-source/blastz %s %s B=0 K=10000> %s", seq_file_name1, seq_file_name2, out_file);
@@ -2266,7 +2266,7 @@ seq_pair2blastz_diagonal(char *seq_file_name1,
 			{
 				if (line[0] == '}')
 					break;
-				
+
 				if (line[2] == 'l')
 				{
 					line_tmp = &line[4];
@@ -2403,11 +2403,11 @@ free_nw(Nw_param* method_arguments_p, int alphabet_size)
 
 /**
  * \brief One run of needleman-wunsch dynamic programming.
- * 
+ *
  * \param profiles The profiles.
  * \param param_set The fastal parameters.
  * \param method_arguments_p The method arguments.
- * \param is_dna Sequences are DNA (\a is_dna = 1) or protein. 
+ * \param is_dna Sequences are DNA (\a is_dna = 1) or protein.
  * \param edit_file The edit file.
  * \param prof_file the profile file.
  * \param number Number of the parent node.
@@ -2429,8 +2429,8 @@ nw_dyn(Fastal_profile **profiles, Fastal_param *param_set, void *method_argument
 
 
 /**
- * \brief This method takes a profile and turns it into a sumed up version. 
- * 
+ * \brief This method takes a profile and turns it into a sumed up version.
+ *
  * Required for NW-algorithm.
  * \param profile The profile to sum up.
  * \param sumup A field where the result will be stored.
@@ -2442,12 +2442,12 @@ sumup_profile(Fastal_profile *profile,
 			  int **sumup,
 			  Fastal_param *param_set)
 {
-	
+
 	char *pos2aa = &(param_set->pos2char[0]);
 	int alphabet_size = param_set->alphabet_size;
 	int **M = param_set->M;
 	int prof_length = profile->length;
-	
+
 	int i,j,k;
 
 	for (i = 0; i < prof_length; ++i)
@@ -2470,7 +2470,7 @@ sumup_profile(Fastal_profile *profile,
 
 /**
  * \brief Turns the dynamic programming matrix into a editfile and calculates the new profile.
- * 
+ *
  * Required for NW-algorithm.
  * \param prog_matrix The dynamic programming matrix.
  * \param prf1 The first profile.
@@ -2508,13 +2508,13 @@ nw_matrix2edit_file(double **prog_matrix,	//dynamic programming matrix
 		if ((*field_length)-alphabet_size < field_pos)
 		{
 			(*field_length) += ENLARGEMENT_PER_STEP;
-			
+
 			for (i = 0; i <alphabet_size+1; ++i)
 			{
 				prf_field[i] = vrealloc(prf_field[i], (*field_length)*sizeof(int));
 			}
 		}
-		
+
 		if (prog_matrix[n][m] == (prog_matrix[n+1][m] +gap_cost))
 		{
 			for (i = 0; i<alphabet_size; ++i)
@@ -2523,7 +2523,7 @@ nw_matrix2edit_file(double **prog_matrix,	//dynamic programming matrix
 			}
 			++n;
 			++ field_pos;
-			
+
 			if (last != 1)
 			{
 				fprintf(edit_f,"%c%i\n",sumc[last],sum[last]);
@@ -2534,7 +2534,7 @@ nw_matrix2edit_file(double **prog_matrix,	//dynamic programming matrix
 		}
 		else if (prog_matrix[n][m] == (prog_matrix[n][m+1] +gap_cost))
 		{
-			
+
 			for (i = 0; i<alphabet_size; ++i)
 			{
 				prf_field[i][field_pos] = prf2->prf[i][m];
@@ -2549,7 +2549,7 @@ nw_matrix2edit_file(double **prog_matrix,	//dynamic programming matrix
 			last = 2;
 			++sum[last];
 		}
-		else 
+		else
 		{
 			for (i = 0; i<alphabet_size; ++i)
 			{
@@ -2568,7 +2568,7 @@ nw_matrix2edit_file(double **prog_matrix,	//dynamic programming matrix
 		}
 	}
 	fprintf(edit_f,"%c%i\n",sumc[last],sum[last]);
-	
+
 	//gaps in prf2
 	last = 0;
 	while (n < prf1_length)
@@ -2583,7 +2583,7 @@ nw_matrix2edit_file(double **prog_matrix,	//dynamic programming matrix
 	}
 	if (last > 0)
 		fprintf(edit_f,"I%i\n",last);
-	
+
 	//gaps in prf1
 	last = 0;
 	while (m < prf2_length)
@@ -2626,7 +2626,7 @@ prf_nw(Fastal_profile *profile1,
 {
 	int alphabet_size = param_set->alphabet_size;
 	double gap_cost = param_set->gop;
-	
+
 	int i;
 	if (*sumup_length < profile1->length)
 	{
@@ -2637,8 +2637,8 @@ prf_nw(Fastal_profile *profile1,
 		*sumup_length = profile1->length;
 	}
 	sumup_prf = sumup_profile(profile1, sumup_prf, param_set);
-	
-	
+
+
 
 	int j,k;
 	int prof1_length = profile1->length;
@@ -2672,7 +2672,7 @@ prf_nw(Fastal_profile *profile1,
 			}
 			match_score /= (residue_pairs * sumup_prf[alphabet_size][i]);
 			prog_matrix[i][j] = MAX3(prog_matrix[i+1][j+1]+match_score, prog_matrix[i+1][j]+gap_cost, prog_matrix[i][j+1]+gap_cost);
-			
+
 			--j;
 		}
 		--i;
@@ -2763,7 +2763,8 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 					   int *field_length,
 					   Fastal_param *param_set)	//length of prf_field
 {
-	
+	double comp_num = log((double)prf1->number_of_sequences) + log((double)prf2->number_of_sequences);
+	int** M = param_set->M;
 	int alphabet_size = param_set->alphabet_size;
 	double gep = param_set -> gep;
 	fprintf(edit_f, "%i\n%i\n%i\n%i\n",prf1->prf_number, prf2->prf_number, prf1->is_leaf, prf2->is_leaf);
@@ -2778,14 +2779,14 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 	int prf2_length = prf2->length;
 	int current_mode = 0;
 	//determine start mode
-
+	char *pos2char = param_set->pos2char;
 	if (h_matrix[n][m] == m_matrix[n][m])
 	{
 		current_mode = 2;
 	}
 	else
 	{
-		
+
 		if (v_matrix[n][m] == m_matrix[n][m])
 		{
 			current_mode = 1;
@@ -2795,14 +2796,14 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 			current_mode = 0;
 		}
 	}
-
+// 	printf("%f %f %f - %i\n",h_matrix[n][m],v_matrix[n][m],m_matrix[n][m], current_mode);
 	while ((n < prf1_length) && (m < prf2_length))
 	{
 		//if necesarry allocate more memory for result
 		if ((*field_length)-alphabet_size < field_pos)
 		{
 			(*field_length) += ENLARGEMENT_PER_STEP;
-			
+
 			for (i = 0; i <alphabet_size+1; ++i)
 			{
 				prf_field[i] = vrealloc(prf_field[i], (*field_length)*sizeof(int));
@@ -2844,7 +2845,7 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 				}
 				++n;
 				++ field_pos;
-				
+
 				if (last != 1)
 				{
 					fprintf(edit_f,"%c%i\n",sumc[last],sum[last]);
@@ -2855,15 +2856,31 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 			}
 			else
 			{
-				if (m_matrix[n][m] == v_matrix[n][m])
+				double match_score = 0.0;
+				int char_c, char_c2;
+				for (char_c = 0; char_c < alphabet_size; ++char_c)
 				{
-					current_mode = 1;
-					continue;
+					for (char_c2 = 0; char_c2 < alphabet_size; ++char_c2)
+					{
+
+						if ((log(prf1->prf[char_c][n]) != -1) && ( log(prf2->prf[char_c2][m]) != -1))
+						{
+							match_score += exp(log((double)prf1->prf[char_c][n]) + log((double)prf2->prf[char_c2][m])-comp_num) * M[pos2char[char_c]-'A'][pos2char[char_c2]-'A'];
+						}
+					}
 				}
-				if (m_matrix[n][m] == h_matrix[n][m])
+				if (m_matrix[n+1][m+1] + match_score != m_matrix[n][m])
 				{
-					current_mode = 2;
-					continue;
+					if (m_matrix[n][m] == v_matrix[n][m])
+					{
+						current_mode = 1;
+						continue;
+					}
+					if (m_matrix[n][m] == h_matrix[n][m])
+					{
+						current_mode = 2;
+						continue;
+					}
 				}
 				for (i = 0; i<alphabet_size; ++i)
 				{
@@ -2881,16 +2898,16 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 				++sum[last];
 			}
 		}
-	
+
 	}
 	fprintf(edit_f,"%c%i\n",sumc[last],sum[last]);
-	
+
 	int needed = MAX(prf1_length -n, prf2_length -m);
 
 	if ((*field_length) - needed -10 < field_pos)
 	{
 		(*field_length) += needed +10;
-			
+
 		for (i = 0; i <alphabet_size+1; ++i)
 		{
 			prf_field[i] = vrealloc(prf_field[i], (*field_length)*sizeof(int));
@@ -2910,7 +2927,7 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 	}
 	if (last > 0)
 		fprintf(edit_f,"I%i\n",last);
-	
+
 	//gaps in prf1
 	last = 0;
 	while (m < prf2_length)
@@ -2931,7 +2948,7 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 }
 
 
-
+static int shit = 0;
 
 /**
  * \brief The gotoh dynamic programming algorithm.
@@ -2945,6 +2962,7 @@ prf_gotoh(Fastal_profile *profile1,
 		  Gotoh_param *arguments,
 		  Fastal_param *param_set)
 {
+// 	printf("%i\n",++shit);
 // printf("I AM HERE - again\n");
 	int **sumup_prf   = arguments->sumup_prf;
 	int *sumup_length = arguments->sumup_length;
@@ -2962,7 +2980,7 @@ prf_gotoh(Fastal_profile *profile1,
 	int j;
 	int prof1_length = profile1->length;
 	int prof2_length = profile2->length;
-	
+
 	int** M = param_set->M;
 	double match_score;
 	for (i = prof2_length; i >= 0; --i)
@@ -2971,14 +2989,14 @@ prf_gotoh(Fastal_profile *profile1,
 		v_matrix[prof1_length][i] = INF;
 		h_matrix[prof1_length][i] = m_matrix[prof1_length][i];
 	}
-	
+
 	m_matrix[prof1_length][prof2_length] = 0.0;
 	h_matrix[prof1_length][prof2_length] = INF;
 	v_matrix[prof1_length][prof2_length] = INF;
 	int l;
 	double comp_num = log((double)profile1->number_of_sequences) + log((double)profile2->number_of_sequences);
 	static double *log_test = NULL;
-	if (!log_test) 
+	if (!log_test)
 		log_test = vcalloc(alphabet_size, sizeof(double));
 // 	int k;
 	int **prf1 = profile1->prf;
@@ -3002,7 +3020,7 @@ prf_gotoh(Fastal_profile *profile1,
 	while (i >=0)
 	{
 		j = prof2_length-1;
-		
+
 		for (l = 0; l < alphabet_size; ++l)
 		{
 			if (prf1[l][i] > 0)
@@ -3057,7 +3075,7 @@ prf_gotoh(Fastal_profile *profile1,
 
 /**
  * \brief Writes the alignment into the profile file and the edit file.
- * 
+ *
  * \param profiles The two profiles to combine.
  * \param alignment The alinment information.
  * \param alignment The length of the alignment.
@@ -3076,17 +3094,17 @@ alignment2files(Fastal_profile **profiles,
 {
 	fprintf(edit_f, "%i\n%i\n%i\n%i\n",profiles[0]->prf_number, profiles[1]->prf_number, profiles[0]->is_leaf, profiles[1]->is_leaf);
 	fprintf(prof_f, "%i\n0\n%i\n1\n", node_number, alignment_length);
-	
+
 	int **prf1 = profiles[0]->prf;
 	int **prf2 = profiles[1]->prf;
 	int i = 0;
 	int pos = 0;
 	int pos1, pos2;
-	
+
 	char statec[] = {'M','D','I'};
 	int num = 0;
 	int state = 0;
-	
+
 	while (i < alignment_length)
 	{
 
@@ -3095,7 +3113,7 @@ alignment2files(Fastal_profile **profiles,
 		// match
 		if ((pos1 != -1) && (pos2 != -1))
 		{
-			
+
 			combine_profiles2file(prf1, prf2, pos1, pos2, param_set, prof_f, 'M');
 			if (state != 0)
 			{
@@ -3141,7 +3159,7 @@ alignment2files(Fastal_profile **profiles,
 
 	fprintf(edit_f,"*\n");
 	fprintf(prof_f,"*\n");
-	
+
 }
 
 
@@ -3149,7 +3167,7 @@ alignment2files(Fastal_profile **profiles,
 
 /**
  *	\brief Reads the sequence from a given position in a fasta file and turns it into a profile.
- * 
+ *
  * \param seq_file The file where the sequence is stored.
  * \param off_set The off_set from the beginning of the file to the position of the sequence name.
  * \param profile The profile where the sequence will be stored into.
@@ -3160,7 +3178,7 @@ file_pos2profile(FILE *seq_file,			//File with sequences
 				 long off_set,				//offset of sequence from the beginning of file point to the sequence name, not to the sequence itself
 				 Fastal_profile *profile,	//profile to save into
 				 int prf_number,			//number of the profile
-				 Fastal_param *param_set)			
+				 Fastal_param *param_set)
 {
 	int alphabet_size = param_set->alphabet_size;
 	profile->is_leaf = 1;
@@ -3171,7 +3189,7 @@ file_pos2profile(FILE *seq_file,			//File with sequences
 	profile->num_sequences = 1;
 	profile->prf_number = prf_number;
 	fseek (seq_file , off_set , SEEK_SET );
-	
+
 	fgets (line, LINE_LENGTH , seq_file);
 	int seq_length = 0;
 	int i, j, x;
@@ -3217,7 +3235,7 @@ file_pos2profile(FILE *seq_file,			//File with sequences
 
 /**
  * \brief Constructs index of fasta_file.
- * 
+ *
  * The index is of length n (n= number of sequences in the given multi fasta file.). In the order of appearance in the file the position of each sequence in the file is stored.
  * \param file_name The file with the sequences.
  * \param file_positions Array to save the positions in.
@@ -3252,7 +3270,7 @@ make_index_of_file(char *file_name, 		//file with sequences
 			if (line[0] == '>')
 			{
 				++num_of_sequences;
-				
+
 				if (num_of_sequences == mem_for_pos)
 				{
 					(*file_positions) = vrealloc((*file_positions),(ENLARGEMENT_PER_STEP+mem_for_pos) * sizeof(long));
@@ -3271,7 +3289,7 @@ make_index_of_file(char *file_name, 		//file with sequences
 
 /**
  * \brief Reads a profile from a profile file.
- * 
+ *
  * \param prof A Fastal_profile object to save the profile in.
  * \param profile_f file where the profile is stored.
  * \param position Position of the profile in \a profile_f.
@@ -3284,16 +3302,16 @@ profile_file2profile(Fastal_profile *prof,	//structure to save the profile in
 					 long position,			//position in profile_f where the profile is stored
 					 Fastal_param *param_set)
 {
-	
+
 	int alphabet_size = param_set->alphabet_size;
-			
+
 	int *aa2pos = &(param_set->char2pos[0]);
 
 
 	fseek(profile_f,position,SEEK_SET);
 	const int LINE_LENGTH = 500;
 	char line[500];
-	
+
 	fgets(line, LINE_LENGTH, profile_f);
 
 	prof->prf_number = atoi(line);
@@ -3316,7 +3334,7 @@ profile_file2profile(Fastal_profile *prof,	//structure to save the profile in
 	char delims[] = " ";
 	char *result = NULL;
 	char *result_num = NULL;
-	
+
 	int length = prof->length;
 
 	for (i = 0; i < length; ++i)
@@ -3325,7 +3343,7 @@ profile_file2profile(Fastal_profile *prof,	//structure to save the profile in
 			prof->prf[j][i] = 0;
 		fgets(line, LINE_LENGTH , profile_f);
 		result = strtok( line, delims );
-		
+
 		while( result != NULL)
 		{
 			result_num = &result[1];
@@ -3344,7 +3362,7 @@ profile_file2profile(Fastal_profile *prof,	//structure to save the profile in
  * \param file A File object (already opened) to write the profile to.
  * \param param_set The parameters for the fastal algorithm.
  */
-void 
+void
 profile2file(Fastal_profile *profile,	//the profile to save
 			 FILE* file,				//file to save in
 			 Fastal_param *param_set)
@@ -3354,10 +3372,10 @@ profile2file(Fastal_profile *profile,	//the profile to save
 	char *pos2aa = &(param_set->pos2char[0]);
 
 	fseek(file,0,SEEK_SET);
-	
+
 	fprintf(file,"%i\n", profile->prf_number);
 
-	
+
 	fprintf(file,"%i\n", profile->is_leaf);
 	fprintf(file,"%i\n", profile->length);
 	fprintf(file,"%i\n", profile->weight);
@@ -3403,22 +3421,22 @@ profile2file(Fastal_profile *profile,	//the profile to save
 // 			 Fastal_param *param_set)
 // {
 // 	int alphabet_size = param_set->alphabet_size;
-// 
+//
 // 	int *aa2pos =  &(param_set->char2pos[0]);
-// 
-// 
+//
+//
 // 	fseek(profile_f,0,SEEK_SET);
 // 	const int LINE_LENGTH = 500;
 // 	char line[500];
-// 	
+//
 // 	fgets(line, LINE_LENGTH, profile_f);
 // 	prof->prf_number = atoi(line);
 // 	fgets(line, LINE_LENGTH, profile_f);
 // 	prof->is_leaf = atoi(line);
-// 
+//
 // 	fgets(line, LINE_LENGTH, profile_f);
 // 	prof->length = atoi(line);
-// 	
+//
 // 	fgets(line, LINE_LENGTH, profile_f);
 // 	prof->weight = atoi(line);
 // 	int i,j;
@@ -3427,20 +3445,20 @@ profile2file(Fastal_profile *profile,	//the profile to save
 // 		{
 // 			prof->prf[i] = vrealloc(prof->prf[i],prof->length*sizeof(int));
 // 		}
-// 	
+//
 // 	char delims[] = " ";
 // 	char *result = NULL;
 // 	char *result_num = NULL;
-// 	
+//
 // 	int length = prof->length;
-// 
+//
 // 	for (i = 0; i < length; ++i)
 // 	{
 // 		for(j = 0; j<alphabet_size; ++j )
 // 			prof->prf[j][i] = 0;
 // 		fgets(line, LINE_LENGTH , profile_f);
 // 		result = strtok( line, delims );
-// 		
+//
 // 		while( result != NULL)
 // 		{
 // 			result_num = &result[1];
@@ -3457,12 +3475,12 @@ profile2file(Fastal_profile *profile,	//the profile to save
 
 /**
  * \brief Writes the sequence into the alignment_file.
- * 
+ *
  * \param aligned_sequence Pattern of aligned sequence.
  * \param sequence_file File with sequences.
  * \param sequence_position Positions of sequences in \a sequence_file.
  * \param alignment_file The file to write the sequence into.
- * 
+ *
 */
 void
 edit_seq2aligned_seq(char *aligned_sequence,	//pattern for aligned sequence
@@ -3481,7 +3499,7 @@ edit_seq2aligned_seq(char *aligned_sequence,	//pattern for aligned sequence
 	{
 		if (line[0] != '>')
 		{
-			
+
 			line[LINE_LENGTH-1] = '\n';
 			i = 0;
 			while ((line[i] != '\n') && (line[i] != '\0'))
@@ -3517,7 +3535,7 @@ edit_seq2aligned_seq(char *aligned_sequence,	//pattern for aligned sequence
 
 /**
  * \brief Recursive function to turn the edit_file into the alignment.
- * 
+ *
  * \param sequence_file File with all sequences.
  * \param sequence_position The array of sequence positions in \a sequence_file
  * \param edit_file File to safe the edit profiles in.
@@ -3554,17 +3572,17 @@ edit2alignment(FILE *sequence_file,		//sequence file
 	int is_leaf1 = atoi(line);
 	fgets(line, LINE_LENGTH , edit_file);
 	int is_leaf2 = atoi(line);
-	
+
 // 	static char seq_line[10];
 // 	printf("SO EINE VERDAMMTE SCHEISE ABER AUCH\n");
 	char x;
 	int number;
 	int pos = 0;
-	
+
 	//first child
 	while(fgets(line, LINE_LENGTH , edit_file)!=NULL)
 	{
-		
+
 		x = line[0];
 		if (x == '*')
 			break;
@@ -3611,12 +3629,12 @@ edit2alignment(FILE *sequence_file,		//sequence file
 		fprintf(edit_seq_file, "%s", aligned_sequence);
 		edit2alignment(sequence_file, seq_positions, edit_file, edit_positions, child1, number_of_sequences, aligned_sequence, alignment_length, edit_seq_file, offset, alignment_file);
 	}
-	
+
 	//second child
 	fseek(edit_seq_file, offset, SEEK_CUR);
 	fgets(aligned_sequence, alignment_length+3, edit_seq_file);
 	fseek(edit_seq_file, offset, SEEK_CUR);
-	
+
 	pos = 0;
 	fseek(edit_file, edit_positions[node_number-number_of_sequences], SEEK_SET);
 	while(fgets(line, LINE_LENGTH , edit_file)!=NULL)
@@ -3686,7 +3704,7 @@ edit2alignment(FILE *sequence_file,		//sequence file
 
 /**
  * \brief Writes a profile to a file.
- * 
+ *
  * \param sumup_prf The profile array, not a real profile.
  * \param length The length of the profile. The format can be seen in ./test.txt
  * \param file The FILE object to write the the profile into.
@@ -3695,7 +3713,7 @@ edit2alignment(FILE *sequence_file,		//sequence file
  */
 void
 write2file(int **sumup_prf,
-		   int length, 
+		   int length,
 		   FILE *file,
 		   int number,
 		   int num_sequences,
@@ -3705,7 +3723,7 @@ write2file(int **sumup_prf,
 	fprintf(file,"%i\n0\n%i\n1\n%i\n",number, length, num_sequences );
 	int i, j;
 	int alphabet_size = param_set->alphabet_size;
-	
+
 	i = 0;
 	int x = 0;
 	while (i < length)
@@ -3737,7 +3755,16 @@ int
 fastal_main(int argc,		//number of arguments
 			char **argv)	//arguments first = fastal, second = tree
 {
-
+// 	int ** test = read_matrice("pam250mt");
+// 	int z, z2 = 0;
+// 	char *shit = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+// 	for (z = 0; z < 26; ++z)
+// 	{
+// 		for (z2 = 0; z2 < 26; ++z2)
+// 			printf("'%c%c' => %i, ", shit[z], shit[z2], test[z][z2]);
+// 		printf("\n");
+// 	}
+// exit(0);
 	int i;
 // 	for (i = 0; i < argc; ++i)
 // 		printf("%s ", argv[i]);
@@ -3745,18 +3772,18 @@ fastal_main(int argc,		//number of arguments
 	//pointer to arguments
 	void * method_arguments_p;
 	int (*alignment_function)(Fastal_profile **profiles, Fastal_param *param_set, void *method_arguments_p, int is_dna, FILE *edit_file, FILE *prof_file, int number);
-	
+
 	struct Fastal_arguments arguments;
 
 	arg_parse (argc, argv, &arguments);
 
 	Fastal_param *param_set = vcalloc(1,sizeof(Fastal_param));
 
-	fill_parameters(arguments.is_dna, param_set, arguments.method, arguments.diag_method);
+	fill_parameters(arguments.is_dna, param_set, arguments.method, arguments.diag_method, arguments.mat);
 	param_set->gep = arguments.gep;
 	param_set->gop = arguments.gop;
 
-
+// 	printf("%s",arguments.mat);
 	if (arguments.evaluate)
 	{
 		printf("Calculate Sum of pairs Score\n");
@@ -3789,11 +3816,11 @@ fastal_main(int argc,		//number of arguments
 	long *file_positions = NULL;
 	long **tmp = &file_positions;
 	int number_of_sequences = make_index_of_file(arguments.sequence_file, tmp);
-	
+
 
 
 	//edit file management
-	
+
 // 	long current_edit_pos;
 	long *edit_positions = vcalloc(number_of_sequences,sizeof(long));
 
@@ -3831,7 +3858,7 @@ fastal_main(int argc,		//number of arguments
 		method_arguments_p = vcalloc(1,sizeof(Udisc_param));
 		fill_arguments_gotoh((Gotoh_param*)method_arguments_p, alphabet_size);
 		alignment_function = gotoh_dyn;
-		
+
 	}
 	else
 	{
@@ -3858,7 +3885,7 @@ fastal_main(int argc,		//number of arguments
 		{
 			compute_oligomer_distance_tree(arguments.sequence_file, param_set->char2pos, arguments.tree_file, arguments.tree_param2, arguments.tree_param1, param_set->alphabet_size);
 		}
-		
+
 		if (arguments.tree_only == 1)
 			return 0;
 	}
@@ -3884,8 +3911,8 @@ fastal_main(int argc,		//number of arguments
 
 
 	FILE *seq_file = fopen(arguments.sequence_file,"r");
-	FILE *edit_file = fopen(vtmpnam(NULL),"w+");
-
+// 	FILE *edit_file = fopen(vtmpnam(NULL),"w+");
+	FILE *edit_file = fopen("aha","w+");
 
 	printf("CONSTRUCT ALIGNMENT\n");
 	FILE *tree_file = fopen(arguments.tree_file,"r");
@@ -3952,7 +3979,7 @@ fastal_main(int argc,		//number of arguments
 
 	char *aligned_sequence = vcalloc(alignment_length+3, sizeof(char));
 
-	
+
 	long offset = ftell(edit_seq_file);
 	for (i = 0; i < alignment_length; ++i)
 	{
@@ -3974,15 +4001,15 @@ fastal_main(int argc,		//number of arguments
 
 		//set stuff for the next cycle
 // 		arguments.sequence_file	= tmp_out_file_name;
-		
-		
+
+
 // // 		//DEBUG
 // // 		char copy_command[500];
 // // 		sprintf(copy_command, "cp %s %s_%i", tmp_out_file_name, arguments.output_file, cycle);
 // // 		system(copy_command);
 // 		++cycle;
 // 	}
-	
+
 // 	printf("HERE_COPY\n");
 // 	char copy_command[2000];
 // 	sprintf(copy_command, "mv %s %s", tmp_out_file_name, arguments.output_file);
@@ -4045,7 +4072,7 @@ fastal_main(int argc,		//number of arguments
 
 /**
  * \brief Enlargement of the dynamic programming matrix in case it is to small.
- * 
+ *
  * \param dyn_matrix The dynamic programming matrix.
  * \param old_length1 Current size of dimension 1.
  * \param old_length2 Current size of dimension 2.
@@ -4082,7 +4109,7 @@ resize_dyn_matrix(double **dyn_matrix,	//the dynamic programming matrix
 
 /**
  * \brief Frees the memory of a dynamic programming matrix.
- * 
+ *
  * \param length1 Size of the first dimension of the matrix.
  * \param dyn_matrix The dynamic programming matrix.
  */
@@ -4100,7 +4127,7 @@ free_dyn_matrix(int length1,			//length of first dimension
 
 /**
  * \brief Initialises the profiles with basic values.
- * 
+ *
  * \param profiles Array of 3 profiles.
  * \param param_set The fastal parameters
  */
@@ -4129,7 +4156,7 @@ initiate_profiles(Fastal_profile **profiles,	//profiles pointer
 
 /**
  * \brief frees all memory occupied by the profile
- * 
+ *
  * \param profile The profile to free.
  * \param alphabet_size The alphabet_size.
  */
@@ -4151,12 +4178,13 @@ free_fastal_profile(Fastal_profile* profile, int alphabet_size)
  * \param method The method to use in Fastal.
 */
 void
-fill_parameters(int is_dna, Fastal_param *param_set, char *method, char *diag_method)
+fill_parameters(int is_dna, Fastal_param *param_set, char *method, char *diag_method, char *mat)
 {
 	sprintf(param_set->method,"%s",method);
 	sprintf(param_set->diag_method,"%s",diag_method);
 	int i;
-
+	printf("%s",mat);
+	param_set->M = read_matrice(mat);
 	if (is_dna)
 	{
 		param_set->alphabet_size = 4;
@@ -4182,7 +4210,6 @@ fill_parameters(int is_dna, Fastal_param *param_set, char *method, char *diag_me
 		param_set->char2pos['U'] = 3;
 		param_set->char2pos['W'] = 3;
 		param_set->char2pos['Y'] = 1;
-		param_set->M = read_matrice("dna_idmat");
 // 		param_set->M[0][3] = param_set->M[3][0] = -10;
 // 		param_set->M[1][2] = param_set->M[2][1] = -10;
 // 		param_set->M[0][1] = param_set->M[0][2] = param_set->M[1][0] = param_set->M[2][0] = -10;
@@ -4221,7 +4248,6 @@ fill_parameters(int is_dna, Fastal_param *param_set, char *method, char *diag_me
  		param_set->char2pos['X'] = 20;
 		param_set->char2pos['Y'] = 19;
 		param_set->char2pos['X'] = 20;
-		param_set->M = read_matrice("blosum62mt");
 	}
 }
 

@@ -619,7 +619,7 @@
 #define EBIWUBLASTc_language2 "Perl"
 #define EBIWUBLASTc_source "empty"
 #define EBIWUBLASTc_update_action "never"
-#define EBIWUBLASTc_mode "psicoffee,expresso,3dcoffee"
+#define EBIWUBLASTc_mode "psicoffee,expresso,accurate"
 #define EBIBLASTPGPc_4_TCOFFEE "blastpgp.pl"
 #define EBIBLASTPGPc_type "protein_homology_predictor"
 #define EBIBLASTPGPc_ADDRESS "built_in"
@@ -628,7 +628,7 @@
 #define EBIBLASTPGPc_language2 "Perl"
 #define EBIBLASTPGPc_source "empty"
 #define EBIBLASTPGPc_update_action "never"
-#define EBIBLASTPGPc_mode "psicoffee,expresso,3dcoffee"
+#define EBIBLASTPGPc_mode "psicoffee,expresso,accurate"
 #define NCBIWEBBLAST_4_TCOFFEE "blastcl3"
 #define NCBIWEBBLAST_type "protein_homology_predictor"
 #define NCBIWEBBLAST_ADDRESS "ftp://ftp.ncbi.nih.gov/blast/executables/LATEST"
@@ -651,14 +651,15 @@
 #define SOAPLITE_language "Perl"
 #define SOAPLITE_language2 "Perl"
 #define SOAPLITE_source "empty"
-#define SOAPLITE_mode "psicoffee,expresso,3dcoffee"
+#define NCBIBLAST_update_action "never"
+#define SOAPLITE_mode "none"
 #define XMLSIMPLE_4_TCOFFEE "XML::Simple"
 #define XMLSIMPLE_type "library"
 #define XMLSIMPLE_ADDRESS "http://search.cpan.org/~grantm/XML-Simple-2.18/lib/XML/Simple.pm"
 #define XMLSIMPLE_language "Perl"
 #define XMLSIMPLE_language2 "Perl"
 #define XMLSIMPLE_source "empty"
-#define XMLSIMPLE_mode "psicoffee,expresso,3dcoffee"
+#define XMLSIMPLE_mode "psicoffee,expresso,accurate"
 //TclinkdbEnd
 /*New Methods*/
 /********************************************/
@@ -714,8 +715,8 @@ The format is as follow:
 -------------------------------------------------------------------------------------------
 the RGB values are used for the post-script generation, the html code is used in html documents.
 */
-#define DATE "Tue May 18 20:01:25 CEST 2010"
+#define DATE "Tue May 25 12:53:21 CEST 2010"
 #define PROGRAM "T-COFFEE"
-#define VERSION "Version_8.77"
+#define VERSION "Version_8.79"
 #define AUTHOR "Cedric Notredame "
 #define DISTRIBUTION_ADDRESS "www.tcoffee.org/Packages/"

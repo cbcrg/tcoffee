@@ -32,6 +32,7 @@ calculate_sum_of_pairs_score_affine(char *alignment_file_name,
 									double gop,
 									double gep)
 {
+
 	const int LINE_LENGTH = 1000;
 	int number_of_sequences = 0;
 	FILE *alignment_file = fopen(alignment_file_name,"r");

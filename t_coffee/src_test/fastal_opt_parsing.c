@@ -30,7 +30,7 @@ void
 arg_parse (int argc, char **argv, struct Fastal_arguments *arguments)
 {
 // 	default values
-	
+
 	arguments->diag_method = "blast";
 	arguments->output_file = "out->aln";
 	arguments->tree_file = NULL;
@@ -38,6 +38,7 @@ arg_parse (int argc, char **argv, struct Fastal_arguments *arguments)
 	arguments->gop = -10;
 	arguments->method = "fast";
 	arguments->tree_method = "oligotree";
+	arguments->mat="dna_idmat";
 	arguments->tree_only = 0;
 	arguments->evaluate = 0;
 	arguments->score = 0;
@@ -49,22 +50,26 @@ arg_parse (int argc, char **argv, struct Fastal_arguments *arguments)
 	arguments->aln2test = NULL;
 	arguments->tree_out = 0;
 	arguments->gap_iterate = 0;
-	
-	
+
+
 	int i = 1;
 	char *param;
-	
+
 	for (i = 0; i < argc; ++i)
 	{
 		param = argv[i];
 		if ( ( !strcmp(param, "-d" )) || ( !strcmp(param, "--is_dna")))
 		{
 			arguments->is_dna = 1;
+			arguments->mat = "dna_idmat";
 		}
 		else if ( ( !strcmp(param, "-a" )) || ( !strcmp(param, "--is_aa")))
 		{
 			arguments->is_dna = 0;
+			arguments->mat = "blosum62mt";
+
 		}
+// 		printf("%s\n", arguments->mat);
 	}
 	if (arguments->is_dna)
 	{
@@ -76,8 +81,8 @@ arg_parse (int argc, char **argv, struct Fastal_arguments *arguments)
 		arguments->tree_param1 = 1;
 		arguments->tree_param2 = 10;
 	}
-	
-	
+
+
 	i = 1;
 	while (i < argc)
 	{
@@ -89,6 +94,10 @@ arg_parse (int argc, char **argv, struct Fastal_arguments *arguments)
 		else if ( ( !strcmp(param, "-t" )) || ( !strcmp(param, "--tree_file")))
 		{
 			arguments->tree_file = argv[++i];
+		}
+		else if ( !strcmp(param, "--mat"))
+		{
+			arguments->mat = argv[++i];
 		}
 		else if ( !strcmp(param, "--tree_method"))
 		{

@@ -1975,11 +1975,15 @@ int cl2pair_list_ecl ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int
 {
   int mode=5;
   
+
+
   if ( mode==1)return cl2pair_list_ecl_norm         (A, ns, ls, CL, list_in, n_in);
   else if ( mode==2)return cl2pair_list_ecl_raw     (A, ns, ls, CL, list_in, n_in);
   else if ( mode==3)return cl2pair_list_ecl_rawquad (A, ns, ls, CL, list_in, n_in);
   else if ( mode==4)return cl2pair_list_ecl_noext_raw (A, ns, ls, CL, list_in, n_in);
   else if ( mode==5)return cl2pair_list_ecl_pc     (A, ns, ls, CL, list_in, n_in);
+  else if ( mode==6)return cl2pair_list_ecl_ext_pc     (A, ns, ls, CL, list_in, n_in);
+  
 }
 int cl2pair_list_ecl_noext_raw ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
@@ -2626,6 +2630,114 @@ int cl2pair_list_ref( Alignment *A, int *ns, int **ls, Constraint_list *CL, int 
 
   return n[0];
   }
+
+/**
+ * Calculates scores for diagonal segments.
+ * 
+ * \param Alignment The sequences.
+ * \param ns Number of sequences in each group
+ * \param ls sequences in in groups (ls[0][x] sequences in group 1, ls[1][x] squences in group 2).
+ * \param CL the constraint list
+ * \param list_in the diagonals
+ * \param n_in number of sequences?
+ */
+int cl2pair_list_ecl_ext_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+{
+  int **list, **pos, **cache, **reallocT;
+  int  *sl2;
+  int si,a,b,n, l1, l2, p1, p2,s,r;
+  int t_s , t_r , t_w;
+  int t_s2, t_r2, t_w2;
+  int max_len,nseq, avg;
+  int tot=0;
+  int *stack,ss;
+  
+  if ( !A) return 0;
+  list=list_in[0];
+  n=n_in[0];
+  
+  pos=aln2pos_simple ( A,-1, ns, ls);
+  l1=strlen (A->seq_al[ls[0][0]]);
+  l2=strlen (A->seq_al[ls[1][0]]);
+  sl2=vcalloc ((CL->S)->nseq, sizeof (int));
+  for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
+  CL=index_res_constraint_list (CL, CL->weight_field);
+  max_len=(CL->S)->max_len;
+  nseq=(CL->S)->nseq;
+  
+  cache=declare_int ( nseq+1, max_len+1);
+  reallocT=declare_int (nseq+1, max_len+1);
+  stack=vcalloc ( 2*max_len*nseq, sizeof (int));
+  
+  for (p1=1; p1<=l1; p1++)
+    {
+      for (si=0;si<ns[0]; si++)
+	{
+	  ss=0;
+	  s=ls[0][si];r=pos[s][p1-1];
+	  s=name_is_in_list (A->name[s], (CL->S)->name, (CL->S)->nseq, 100);
+	  
+
+	  cache[s][r]=1;stack[ss++]=s;stack[ss++]=r;
+	  
+	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=3)
+	    {
+	      
+	      
+	      t_s=CL->residue_index[s][r][a];
+	      t_r=CL->residue_index[s][r][a+1];
+	      t_w=CL->residue_index[s][r][a+2];
+	      
+	      cache[t_s][t_r]=1;stack[ss++]=t_s;stack[ss++]=t_r;
+	      
+	      for (b=1; b<CL->residue_index[t_s][t_r][0];b+=3)
+		{
+		  t_s2=CL->residue_index[t_s][t_r][b];
+		  t_r2=CL->residue_index[t_s][t_r][b+1];
+		  t_w2=CL->residue_index[t_s][t_r][b+2];
+		  
+		  if (!cache[t_s2][t_r2])
+		    {
+		      tot++;
+		      
+		      cache[t_s2][t_r2]=1;stack[ss++]=t_s2;stack[ss++]=t_r2;
+		      if (!reallocT[s][r])reallocT[s][r]=CL->residue_index[s][r][0];
+		      CL->residue_index[s][r][0]+=3;
+		      CL->residue_index[s][r]=vrealloc ( CL->residue_index[s][r], CL->residue_index[s][r][0]*sizeof (int));
+		      CL->residue_index[s][r][CL->residue_index[s][r][0]-3]=t_s2;
+		      CL->residue_index[s][r][CL->residue_index[s][r][0]-2]=t_r2;
+		      CL->residue_index[s][r][CL->residue_index[s][r][0]-1]=MIN(t_w2,t_w);
+		      
+		      if (!reallocT[t_s2][t_r2])reallocT[t_s2][t_r2]=CL->residue_index[t_s2][t_r2][0];
+		      CL->residue_index[t_s2][t_r2][0]+=3;
+		      CL->residue_index[t_s2][t_r2]=vrealloc ( CL->residue_index[t_s2][t_r2], CL->residue_index[t_s2][t_r2][0]*sizeof (int));
+		      CL->residue_index[t_s2][t_r2][CL->residue_index[t_s2][t_r2][0]-3]=s;
+		      CL->residue_index[t_s2][t_r2][CL->residue_index[t_s2][t_r2][0]-2]=r;
+		      CL->residue_index[t_s2][t_r2][CL->residue_index[t_s2][t_r2][0]-1]=MIN(t_w2,t_w);
+		      
+		    }
+		}
+	      
+	    }
+	  for (a=0; a<ss;)
+	    cache[stack[a++]][stack[a++]]=0;
+	}
+    }
+
+  
+  
+
+  HERE ("TOT=%d", tot);
+  avg=cl2pair_list_ecl_pc (A, ns,ls, CL,list_in,n_in);
+  
+  for (s=0; s<=nseq; s++)
+    for (r=0; r<=max_len; r++)
+      if ( reallocT[s][r])CL->residue_index[s][r][0]=reallocT[s][r];
+  free_int (reallocT, -1);
+  free_int (cache, -1);
+  vfree (stack);
+  return avg;
+}
 
 int list2linked_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int **list, int n);
 int two_pass_linked_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)

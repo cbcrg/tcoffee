@@ -2322,7 +2322,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 
     nproc=get_nproc();
     
-    proclist=vcalloc (65536, sizeof (int));
+    proclist=vcalloc (MAX_N_PID, sizeof (int));
     tmp_list=vcalloc (n_list+1, sizeof (char*));
     for (a=0; a<n_list; a++)tmp_list[a]=vtmpnam(NULL);
     
@@ -4130,170 +4130,144 @@ Constraint_list *aln2constraint_list      (Alignment *A, Constraint_list *CL,cha
 	char*alp=NULL;
 	char *p, *s;
 	char weight_mode [100];
-
+	int *top_seq, *sindex;
+	int use_top=0;
+	
+	
 	sprintf ( weight_mode , "%s", (!in_weight_mode || strm (in_weight_mode, "default"))?"sim":in_weight_mode);
-	  
+	
 	if ( !A)
-		return CL;	
+	  return CL;	
 	
 	if ( !CL)
-	{
-		Sequence *S;
-		S=aln2seq (A);
-		CL=declare_constraint_list (S,NULL, NULL, 0,NULL, NULL);  
-		CL->S=S;
-	}
+	  {
+	    Sequence *S;
+	    S=aln2seq (A);
+	    CL=declare_constraint_list (S,NULL, NULL, 0,NULL, NULL);  
+	    CL->S=S;
+	  }
 	CLB=(Constraint_list *)A->CL;
-
-
+	
+	
 	do_pdb=(strstr ( weight_mode, "pdb"))?1:0;
 	if ( (p=strstr (weight_mode, "_subset_")))
-	{
-		alp=strchr (weight_mode, '_')+1;
-		p[0]='\0';
-	}
-
-
+	  {
+	    alp=strchr (weight_mode, '_')+1;
+	    p[0]='\0';
+	  }
+	
+	A=reorder_aln (A, (CL->S)->name, (CL->S)->nseq);
+	sindex=vcalloc (A->nseq, sizeof(int));
+	for (a=0; a<A->nseq; a++)sindex[a]=name_is_in_list (A->name[a], (CL->S)->name, (CL->S)->nseq, 100);
+	
+	
+	top_seq=vcalloc (A->len_aln, sizeof (int));
+	for (c=0; c<A->len_aln; c++)
+	  {
+	    for (a=0; a<A->nseq; a++)
+	      {
+		if (sindex[a]!=-1 && !is_gap(A->seq_al[sindex[a]][c])){top_seq[c]=sindex[a];a=A->nseq;}
+	      }
+	  }
+	
 	for ( a=0; a<A->nseq-1; a++)
-	{
-	for (set_misc=0,b=a+1; b< A->nseq; b++)
-		{	
-		s1=name_is_in_list (A->name[a], (CL->S)->name, (CL->S)->nseq, 100);
-		s2=name_is_in_list (A->name[b], (CL->S)->name, (CL->S)->nseq, 100);
-		
+	  {
+	    for (set_misc=0,b=a+1; b< A->nseq; b++)
+	      {	
+		s1=sindex[a];
+		s2=sindex[b];
 		if ( s1==-1 || s2==-1)
-		{
-			if ( getenv4debug ("DEBUG_LIBRARY"))
-				fprintf ( stderr, "\n[DEBUG_LIBRARY:aln2constraint_list]Could use a pair of constraints");
-		}
+		  {
+		    if ( getenv4debug ("DEBUG_LIBRARY"))
+		      fprintf ( stderr, "\n[DEBUG_LIBRARY:aln2constraint_list]Could use a pair of constraints");
+		  }
 		else if ( s1!=-1 && s2!=-1)
-		{
-			int use_pair;
-				
-			weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
-				
-			for (nres1=A->order[a][1], nres2=A->order[b][1], c=0; c< A->len_aln; c++)
-			{
-				int isgop1, isgop2;
-				
-				isgop1=is_gop(c, A->seq_al[a]);
-				isgop2=is_gop(c, A->seq_al[b]);
-				nres1+=!is_gap(A->seq_al[a][c]);
-				nres2+=!is_gap(A->seq_al[b][c]);
-				
-				if ( strm ( weight_mode, "pdb") && CLB)
-				{
-					
-					pdb_weight=MAX(0,(CLB->evaluate_residue_pair)(CLB,0, nres1,1,nres2));
-				}
-				use_pair=1;
-				use_pair=use_pair && !is_gap(A->seq_al[a][c]);
-				use_pair=use_pair && !is_gap(A->seq_al[b][c]);
-				use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
-				use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
-				use_pair=use_pair && !(do_pdb && pdb_weight==0);
-				use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
-					
-				if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
+		  {
+		    int use_pair;
+		    
+		    weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
+		    
+		    for (nres1=A->order[a][1], nres2=A->order[b][1], c=0; c< A->len_aln; c++)
+		      {
+			int isgop1, isgop2;
+			if (use_top && top_seq[c]!=a)continue; //make nr dataset for MSAs
 			
-			/*if ( !is_gap(A->seq_al[a][c]) && !is_gap(A->seq_al[b][c]) && A->seq_al[b][c]!=UNDEFINED_RESIDUE && A->seq_al[a][c]!=UNDEFINED_RESIDUE && !(do_pdb && pdb_weight==0))*/
-				if (use_pair)
-				{
-
-					fixed_nres1=(!A->seq_cache)?nres1:A->seq_cache[s1][nres1];
-					fixed_nres2=(!A->seq_cache)?nres2:A->seq_cache[s2][nres2];
-					
-					
-					if ( fixed_nres1==-1 || fixed_nres2==-1)
-					{
-						fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[a], nres1,fixed_nres1 );
+			isgop1=is_gop(c, A->seq_al[a]);
+			isgop2=is_gop(c, A->seq_al[b]);
+			nres1+=!is_gap(A->seq_al[a][c]);
+			nres2+=!is_gap(A->seq_al[b][c]);
+			
+			if ( strm ( weight_mode, "pdb") && CLB)
+			  {
+			    
+			    pdb_weight=MAX(0,(CLB->evaluate_residue_pair)(CLB,0, nres1,1,nres2));
+			  }
+			use_pair=1;
+			use_pair=use_pair && !is_gap(A->seq_al[a][c]);
+			use_pair=use_pair && !is_gap(A->seq_al[b][c]);
+			use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
+			use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
+			use_pair=use_pair && !(do_pdb && pdb_weight==0);
+			use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
+			
+			if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
+			if (use_pair)
+			  {
+			    
+			    fixed_nres1=(!A->seq_cache)?nres1:A->seq_cache[s1][nres1];
+			    fixed_nres2=(!A->seq_cache)?nres2:A->seq_cache[s2][nres2];
+			    
+			    if ( fixed_nres1==-1 || fixed_nres2==-1)
+			      {
+				fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[a], nres1,fixed_nres1 );
 						fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[b], nres2,fixed_nres2 );
-						
 						myexit(EXIT_FAILURE);
-					}
-					
-					if ( fixed_nres1 && fixed_nres2)
-					{
-						
-
-
-						/*
-					This code was uncommented to make profile2seq simpler
-					Must check how this affects other functions
-						
-						vwrite_clist (CL,CL->ne, SEQ1, (s1<s2)?s1:s2);
-						vwrite_clist (CL,CL->ne, SEQ2, (s1<s2)?s2:s1);
-						vwrite_clist (CL,CL->ne, R1,   (s1<s2)?fixed_nres1:fixed_nres2);
-						vwrite_clist (CL,CL->ne, R2,   (s1<s2)?fixed_nres2:fixed_nres1);
-						*/
-
-						vwrite_clist (CL,CL->ne, SEQ1, s1);
-						vwrite_clist (CL,CL->ne, SEQ2, s2);
-						vwrite_clist (CL,CL->ne, R1,fixed_nres1);
-						vwrite_clist (CL,CL->ne, R2,fixed_nres2);
-						
-						if (do_pdb)
-					{
-
-						vwrite_clist (CL,CL->ne, WE,(NORM_F/MAXID)*pdb_weight );
-					}
-						else
-					{
-						
-						vwrite_clist (CL,CL->ne, WE,(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]) );
-						
-					}
-						vwrite_clist (CL,CL->ne, CONS,1);
-						if (!set_misc)
-					{
-						vwrite_clist (CL,CL->ne, MISC,A->len_aln);
-						set_misc=1;
-					}
-						else 
-					{
-						vwrite_clist (CL,CL->ne, MISC,0);
-					}
-						CL->ne++;
-						/*
-						if (isgop1)
-					{
-
-						vwrite_clist (CL,CL->ne, SEQ1, s1);
-						vwrite_clist (CL,CL->ne, SEQ2, s1);
-						vwrite_clist (CL,CL->ne, R1,fixed_nres1);
-						vwrite_clist (CL,CL->ne, R2,fixed_nres1);
-						vwrite_clist (CL,CL->ne, WE, (weight[0]==FORBIDEN)?weight[1]:weight[c] );
-						vwrite_clist (CL,CL->ne, CONS,1);
-						CL->ne++;
-					}
-						if (isgop2)
-					{
-						
-						vwrite_clist (CL,CL->ne, SEQ1, s2);
-						vwrite_clist (CL,CL->ne, SEQ2, s2);
-						vwrite_clist (CL,CL->ne, R1,fixed_nres2);
-						vwrite_clist (CL,CL->ne, R2,fixed_nres2);
-						vwrite_clist (CL,CL->ne, WE, (weight[0]==FORBIDEN)?weight[1]:weight[c] );
-						vwrite_clist (CL,CL->ne, CONS,1);
-						CL->ne++;
-					}
-						*/
-						}
-						
-					}
-				}
-			}
-		}
-	}
-
+			      }
+			    
+			    if ( fixed_nres1 && fixed_nres2)
+			      {
+				vwrite_clist (CL,CL->ne, SEQ1, s1);
+				vwrite_clist (CL,CL->ne, SEQ2, s2);
+				vwrite_clist (CL,CL->ne, R1,fixed_nres1);
+				vwrite_clist (CL,CL->ne, R2,fixed_nres2);
+				
+				if (do_pdb)
+				  {
+				    
+				    vwrite_clist (CL,CL->ne, WE,(NORM_F/MAXID)*pdb_weight );
+				  }
+				else
+				  {
+				    
+				    vwrite_clist (CL,CL->ne, WE,(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]) );
+				  }
+				vwrite_clist (CL,CL->ne, CONS,1);
+				if (!set_misc)
+				  {
+				    vwrite_clist (CL,CL->ne, MISC,A->len_aln);
+				    set_misc=1;
+				  }
+				else 
+				  {
+				    vwrite_clist (CL,CL->ne, MISC,0);
+				  }
+				CL->ne++;
+			      }
+			  }
+		      }
+		  }
+	      }
+	  }
+	vfree (top_seq);
+	vfree (sindex);
 	vfree (weight);
 	if (A->A) 
-	{
-		return aln2constraint_list (A->A, CL, weight_mode);
-	}
+	  {
+	    return aln2constraint_list (A->A, CL, weight_mode);
+	  }
 	else
-	return CL;
-}
+	  return CL;
+	}
 
 double **list2mat (Constraint_list *CLin,int s1,int s2, double *min, double *max)
         {
