@@ -4561,7 +4561,7 @@ int get_nproc ()
       char *tmp;
       char string[100];
       tmp=vtmpnam (NULL);
-      printf_system_direct ("grep \"^processor\" /proc/cpuinfo | wc -l>%s::IGNORE_FAILURE::", tmp);
+      printf_system_direct ("grep \"^processor\" /proc/cpuinfo | wc -l>%s", tmp);
       sprintf ( string, "%s", file2string (tmp));
       chomp (string);
       nproc=atoi (string);
