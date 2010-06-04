@@ -8282,9 +8282,9 @@ void clean_exit ()
       else
 	{
 	  if (isdir(start->name))
-	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : Dir  %s mot removed (%d)\n", start->name, getpid());}
+	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : Dir  %s not removed (%d)\n", start->name, getpid());}
 	  else
-	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : File %s mot removed (%d)\n", start->name, getpid());}
+	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : File %s not removed (%d)\n", start->name, getpid());}
 	}
       b=start;
       start=start->next;
