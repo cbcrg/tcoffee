@@ -46,9 +46,6 @@ TC_MAKEFILE2=$(DISTRIB_DIR)/$(EXECUTABLE)_source/makefile
 INSTITUTE="Centro de Regulacio Genomica"
 EMAIL="cedric.notredame@europe.com"
 DISTRIBUTION_ADDRESS="www.tcoffee.org/Packages/"
-pg_makefile:
-	make -i CC=cc general_makefile
-
 
 general_distribution: 
 	-rm $(CODE_LIST);
@@ -67,7 +64,7 @@ general_distribution:
 	mkdir -p $(WEB_BASE)/Projects_home_page/
 	mkdir -p $(WEB_RESOURCES)
 	make -i VERSION=$(VERSION) CC=cc code
-	make -i VERSION=$(VERSION) CC=cc pg_makefile
+	make -i VERSION=$(VERSION) CC=cc general_makefile
 	make -i VERSION=$(VERSION) CC=cc test
 	make -i VERSION=$(VERSION) CC=cc doc
 	make -i VERSION=$(VERSION) CC=cc license
