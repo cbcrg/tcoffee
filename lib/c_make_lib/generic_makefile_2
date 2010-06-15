@@ -55,7 +55,7 @@ general_distribution:
 	mkdir -p $(DISTRIB_DOC)
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	mkdir -p $(DISTRIB_DIR)/reference_test
-	echo '' > $(DISTRIB_DIR)/install -tclinkdb=$(DISTRIB_DIR)/tclinkdb.txt -repo$(HOME2)/repo
+	echo '' > $(DISTRIB_DIR)/install
 	mkdir -p $(WEB_BASE)
 	mkdir -p $(WEB_DISTRIBUTION)
 	mkdir -p $(WEB_BINARIES)
