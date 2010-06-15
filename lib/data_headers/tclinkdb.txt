@@ -15,6 +15,7 @@ PG clustalw2 language		C++
 PG clustalw2 language2		CXX
 PG clustalw2 source		http://www.clustal.org/download/2.0.10/clustalw-2.0.10-src.tar.gz
 PG clustalw2 mode		mcoffee,rcoffee
+PG clustalw2 version	2.0.10
 
 PG clustalw 4_TCOFFEE		CLUSTALW
 PG clustalw type		sequence_multiple_aligner		
@@ -23,6 +24,7 @@ PG clustalw language		C
 PG clustalw language2		C
 PG clustalw source		http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/ClustalW/clustalw1.82.UNIX.tar.gz
 PG clustalw mode		mcoffee,rcoffee
+PG clustalw version		1.82
 
 PG dialign-t 4_TCOFFEE		DIALIGNT		
 PG dialign-t type		sequence_multiple_aligner		
@@ -33,6 +35,7 @@ PG dialign-t language2		C
 PG dialign-t source		http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz	
 PG dialign-t mode		mcoffee
 PG dialign-t binary		dialign-t
+PG dialign-t version	1.0.2
 	 
 PG dialign-tx 4_TCOFFEE		DIALIGNTX		
 PG dialign-tx type		sequence_multiple_aligner		
@@ -43,6 +46,7 @@ PG dialign-tx language2		C
 PG dialign-tx source		http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz	
 PG dialign-tx mode		mcoffee
 PG dialign-tx binary		dialign-tx
+PG dialign-tx version	1.0.2
 
 PG poa 4_TCOFFEE		POA	
 PG poa type			sequence_multiple_aligner		
@@ -54,6 +58,7 @@ PG poa DIR			/usr/share/
 PG poa FILE1			blosum80.mat
 PG poa mode			mcoffee
 PG poa binary			poa
+PG poa version			2.0
 
 PG probcons 4_TCOFFEE		PROBCONS		
 PG probcons type		sequence_multiple_aligner		
@@ -63,6 +68,7 @@ PG probcons language		C++
 PG probcons source		http://probcons.stanford.edu/probcons_v1_12.tar.gz
 PG probcons mode		mcoffee
 PG probcons binary		probcons
+PG probcons version		1.12
 
 PG mafft 4_TCOFFEE		MAFFT
 PG mafft type			sequence_multiple_aligner		
@@ -73,6 +79,7 @@ PG mafft source			http://align.bmr.kyushu-u.ac.jp/mafft/software/mafft-6.603-wit
 PG mafft windows		http://align.bmr.kyushu-u.ac.jp/mafft/software/mafft-6.603-mingw.tar
 PG mafft mode			mcoffee,rcoffee	
 PG mafft binary			mafft.tar.gz
+PG mafft version		6.603
 
 PG muscle 4_TCOFFEE		MUSCLE
 PG muscle type			sequence_multiple_aligner		
@@ -83,6 +90,7 @@ PG muscle source		http://www.drive5.com/muscle/downloads3.7/muscle3.7_src.tar.gz
 PG muscle windows		http://www.drive5.com/muscle/downloads3.7/muscle3.7_win32.zip
 PG muscle linux			http://www.drive5.com/muscle/downloads3.7/muscle3.7_linux_ia32.tar.gz
 PG muscle mode			mcoffee,rcoffee	
+PG muscle version		3.7
 
 PG mus4 4_TCOFFEE		MUS4
 PG mus4 type			sequence_multiple_aligner		
@@ -91,6 +99,7 @@ PG mus4 language		C++
 PG mus4 language2		GPP
 PG mus4 source			http://www.drive5.com/muscle/muscle4.0_src.tar.gz
 PG mus4 mode			mcoffee,rcoffee	
+PG mus4 version			4.0	
 
 
 PG pcma 4_TCOFFEE		PCMA
@@ -100,6 +109,7 @@ PG pcma language		C
 PG pcma language2		C	
 PG pcma source			ftp://iole.swmed.edu/pub/PCMA/pcma.tar.gz
 PG pcma mode			mcoffee	
+PG pcma version			1.0	
      
 PG kalign 4_TCOFFEE		KALIGN
 PG kalign type			sequence_multiple_aligner		
@@ -108,6 +118,7 @@ PG kalign language		C
 PG kalign language2		C	
 PG kalign source		http://msa.cgb.ki.se/downloads/kalign/current.tar.gz
 PG kalign mode			mcoffee	
+PG kalign version		1.0
 
 
 PG amap 4_TCOFFEE		AMAP
@@ -117,6 +128,7 @@ PG amap language		C++
 PG amap language2		CXX	
 PG amap source			http://amap-align.googlecode.com/files/amap.2.0.tar.gz
 PG amap mode			mcoffee	    
+PG amap version			2.0	    
 
 
 PG proda 4_TCOFFEE		PRODA
@@ -126,6 +138,7 @@ PG proda language		C++
 PG proda language2		CXX	
 PG proda source			http://proda.stanford.edu/proda_1_0.tar.gz
 PG proda mode			mcoffee	    
+PG proda version		1.0	    
 
 PG fsa 4_TCOFFEE		FSA
 PG fsa type			sequence_multiple_aligner		
@@ -134,6 +147,7 @@ PG fsa language			C++
 PG fsa language2		CXX	
 PG fsa source			http://sourceforge.net/projects/fsa/files/fsa-1.15.3.tar.gz/download/
 PG fsa mode			mcoffee	    
+PG fsa version			1.15.3	    
 
 PG prank 4_TCOFFEE		PRANK
 PG prank type			sequence_multiple_aligner		
@@ -142,6 +156,7 @@ PG prank language		C++
 PG prank language2		CXX	
 PG prank source			http://www.ebi.ac.uk/goldman-srv/prank/src/prank/prank.src.100303.tgz
 PG prank mode			mcoffee	    
+PG prank version		100303	    
 
 PG sap 4_TCOFFEE		SAP
 PG sap type			structure_pairwise_aligner		
@@ -150,6 +165,7 @@ PG sap language			C
 PG sap language2		C	
 PG sap source			http://mathbio.nimr.mrc.ac.uk/download/sap-1.1.1.tar.gz
 PG sap mode			expresso,3dcoffee
+PG sap version			1.1.1
 
 PG TMalign 4_TCOFFEE		TMALIGN
 PG TMalign type			structure_pairwise_aligner		
@@ -159,6 +175,7 @@ PG TMalign language2		Fortran
 PG TMalign source		http://zhang.bioinformatics.ku.edu/TM-align/TMalign.f	
 PG TMalign linux		http://zhang.bioinformatics.ku.edu/TM-align/TMalign_32.gz				
 PG TMalign mode			expresso,3dcoffee	    
+PG TMalign version		1.0	    
 
 
 PG mustang 4_TCOFFEE		MUSTANG
@@ -167,7 +184,8 @@ PG mustang ADDRESS		http://www.cs.mu.oz.au/~arun/mustang
 PG mustang language		C++
 PG mustang language2		CXX
 PG mustang source		http://ww2.cs.mu.oz.au/~arun/mustang/mustang_v3.2.1.tgz
-PG mustang mode			expresso,3dcoffee	    
+PG mustang mode			expresso,3dcoffee	  
+PG mustang version		3.2.1  
 
 PG lsqman 4_TCOFFEE		LSQMAN
 PG lsqman type			structure_pairwise_aligner		
@@ -214,6 +232,7 @@ PG probconsRNA language		C++
 PG probconsRNA language2	CXX	
 PG probconsRNA source		http://probcons.stanford.edu/probconsRNA.tar.gz
 PG probconsRNA mode		mcoffee,rcoffee	
+PG probconsRNA version		1.0	
 
 PG sfold 4_TCOFFEE		CONSAN		
 PG sfold type			RNA_pairwise_aligner		
@@ -231,6 +250,7 @@ PG RNAplfold language		C
 PG RNAplfold language2		C
 PG RNAplfold source		http://www.tbi.univie.ac.at/~ivo/RNA/ViennaRNA-1.7.2.tar.gz	
 PG RNAplfold mode		rcoffee, seq_reformat
+PG RNAplfold version		1.7.2
 
 PG retree 4_TCOFFEE	PHYLIP
 PG retree type		RNA_secondarystructure_predictor
@@ -239,7 +259,7 @@ PG retree language	C
 PG retree language2	C
 PG retree source	http://evolution.gs.washington.edu/phylip/download/phylip-3.69.tar.gz
 PG retree  mode		trmsd, seq_reformat
-
+PG retree  version	3.69
 
 
 PG hmmtop 4_TCOFFEE		HMMTOP
