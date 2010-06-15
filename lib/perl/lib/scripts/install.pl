@@ -24,6 +24,11 @@ our $ROOT=&get_root();
 our $CD=cwd();
 our $CDIR=$CD;
 our $HOME=$ENV{'HOME'};
+
+our $OSNAME=$ENV{'OSNAME'};
+our $OSARCH=$ENV{'OSARCH'};
+our $REPO_ROOT="";
+
 ###########   DEFINITIONS ##############################
 #
 #
@@ -80,9 +85,9 @@ if (($cl=~/-h/) ||($cl=~/-H/) )
     print "!!!!!!! ./install [optional:target] -exec=/foo/bar/       [address for the T-Coffee executable]\n";
     print "!!!!!!! ./install [optional:target] -dis=/foo/bar/        [Address where distributions should be stored]\n";
     print "!!!!!!! ./install [optional:target] -tclinkdb=foo|update  [file containing all the packages to be installed]\n";
-    print "!!!!!!! ./install [optional:target] -tclinkdb=foo|update  [file containing all the packages to be installed]\n";
     print "!!!!!!! ./install [optional:target] -clean                [clean everything]\n";
     print "!!!!!!! ./install [optional:target] -plugins              [plugins directory]\n";
+    print "!!!!!!! ./install [optional:target] -repo=/path/to/repo   [binaries repository root directory]\n";
     print "!!!!!!! mode:";
     foreach $m (keys(%MODE)){print "$m ";}
     print "\n";
@@ -122,8 +127,15 @@ if ( ($cl=~/-dis=\s*(\S+)/)){$DISTRIBUTIONS=$1;}
 if ( ($cl=~/-tclinkdb=\s*(\S+)/)){$tclinkdb=$1;}
 if ( ($cl=~/-proxy=\s*(\S+)/)){$proxy=$1;}
 if ( ($cl=~/-clean/)){$clean=1;}
+if ( ($cl=~/-repo=\s*(\S+)/)){ $REPO_ROOT=$1; }
 #automated update
 if ($tclinkdb){&update_tclinkdb ($tclinkdb);}
+
+
+if( $REPO_ROOT ne "" ) {
+	if( $OSNAME eq "" ) { print "You have specified the repository folder but the required \"OSNAME\" enviroment variable is missing. \n"; exit 1; } 
+	if( $OSARCH eq "" ) { print "You have specified the repository folder but the required \"OSARCH\" enviroment variable is missing. \n"; exit 1; } 
+}
 
 #Prepare the T-Coffee directory structure
 our $TCDIR=$ENV{DIR_4_TCOFFEE};
@@ -662,6 +674,13 @@ sub install_source_package
     my (@fl);
     if ( -e "$BIN/$pg" || -e "$BIN/$pg.exe"){return 1;}
     
+    #
+    # check if the module exists in the repository cache 
+    #
+	if( repo_load($pg) ) {
+		return 1;
+	}
+    
     if ($pg eq "t_coffee")  {return   &install_t_coffee ($pg);}
     elsif ($pg eq "TMalign"){return   &install_TMalign ($pg);}
     
@@ -745,7 +764,11 @@ sub install_source_package
       }
     print "\n------- Compiling/Installing $pg\n";
     `make clean $SILENT`;
-    #sap
+    
+    
+    #
+    # SAP module
+    #
     if ($pg eq "sap")
       {
 	if (-e "./configure")
@@ -762,6 +785,7 @@ sub install_source_package
 	    &flush_command ("make clean");
 	    &flush_command ("make");
 	    &check_cp ("./src/$pg", "$BIN");
+	    repo_store("./src/$pg");
 	  }
 	else
 	  {
@@ -769,29 +793,48 @@ sub install_source_package
 	    `rm *.o sap  sap.exe ./util/aa/*.o  ./util/wt/.o $SILENT`;
 	    &flush_command ("make $arguments sap");
 	    &check_cp ($pg, "$BIN");
+	    repo_store($pg);
 	  }
       }
+    
+    #
+    # CLUSTALW2 module
+    #
     elsif ($pg eq "clustalw2")
       {
 	&flush_command("./configure");
 	&flush_command("make $arguments");
 	&check_cp ("./src/$pg", "$BIN");
-	
+	repo_store("./src/$pg");
       }
+    
+    #
+    # FSA module
+    # 
     elsif ($pg eq "fsa")
       {
 	&flush_command("./configure --prefix=$BIN");
 	&flush_command("make $arguments");
 	&flush_command ("make install");
+
+	repo_store("fsa", "$BIN/bin");
 	`mv $BIN/bin/* $BIN`;
 	`rmdir $BIN/bin`;
       }
+    
+    #
+    # CLUSTALW module
+    #
     elsif ($pg eq "clustalw")
       {
 	&flush_command("make $arguments clustalw");
 	`$CP $pg $BIN $SILENT`;
+	repo_store($pg);
       }
     
+    #
+    # MAFFT module
+    #
     elsif ($pg eq "mafft")
       {
 	my $base=cwd();
@@ -811,11 +854,11 @@ sub install_source_package
 	&flush_command ("make $arguments");
 	&flush_command ("make install LIBDIR=../mafft/lib BINDIR=../mafft/bin");
 	
-	#put everything in mafft and copy the coompiled stuff in bin
+	#put everything in mafft and copy the compiled stuff in bin
 	chdir "$base";
 	if ($ROOT_INSTALL)
 	  {
-	    &root_run ("You Must be Roor to Install MAFFT\n", "mkdir /usr/local/mafft/;$CP mafft/lib/* /usr/local/mafft;$CP mafft/lib/mafft* /usr/local/bin ;$CP mafft/bin/mafft /usr/local/bin/; ");
+	    &root_run ("You Must be Root to Install MAFFT\n", "mkdir /usr/local/mafft/;$CP mafft/lib/* /usr/local/mafft;$CP mafft/lib/mafft* /usr/local/bin ;$CP mafft/bin/mafft /usr/local/bin/; ");
 	  }
 	else
 	  {
@@ -825,7 +868,13 @@ sub install_source_package
 	`tar -cvf mafft.tar mafft`;
 	`gzip mafft.tar`;
 	`mv mafft.tar.gz $BIN`;
+	
+	repo_store("mafft/bin/mafft", "mafft/lib/", "$BIN/mafft.tar.gz");
       }
+      
+    #
+    # DIALIGN-TX module
+    #
     elsif ( $pg eq "dialign-tx" ||$pg eq "dialign-t" )
       {
 	my $f;
@@ -841,12 +890,23 @@ sub install_source_package
 	&check_cp ("./source/$pg", "$BIN/dialign-t");
 	&check_cp ("./source/$pg", "$BIN/dialign-tx");
 	
+	repo_store("./source/$pg");
       }
+      
+    #
+    # POA module
+    #
     elsif ($pg eq "poa")
       {
 	&flush_command ("make $arguments poa");
 	&check_cp ("$pg", "$BIN");
+	repo_store("$pg");
       }
+     
+     
+    #
+    # PROBCONS module
+    #
     elsif ( $pg eq "probcons")
       {
 	&add_C_libraries("./ProbabilisticModel.h", "list", "cstring");
@@ -854,7 +914,12 @@ sub install_source_package
 	`rm *.exe $SILENT`;
 	&flush_command ("make $arguments probcons");
 	&check_cp("$pg", "$BIN/$pg");
+	repo_store("$pg");
       }
+      
+    #
+    # PROBCONS RNA module
+    #
     elsif ( $pg eq "probconsRNA")
       {
 	&add_C_libraries("./ProbabilisticModel.h", "list", "cstring");
@@ -862,8 +927,12 @@ sub install_source_package
 	`rm *.exe $SILENT`;
 	&flush_command ("make $arguments probcons");
 	&check_cp("probcons", "$BIN/$pg");
+	repo_store("$BIN/$pg");
       }
 
+	#
+	# MUSCLE module
+	#
     elsif (  $pg eq "muscle")
       {	
 	`rm *.o muscle muscle.exe $SILENT`;
@@ -879,13 +948,23 @@ sub install_source_package
 	  }
 	&flush_command ("make $arguments all");
 	&check_cp("$pg", "$BIN");
+	repo_store("$pg");	
       }
+      
+     #
+     # MUS4 module
+     #
      elsif (  $pg eq "mus4")
       {
 	`rm *.o muscle muscle.exe $SILENT`;
 	&flush_command ("mk");
 	&check_cp("$pg", "$BIN");
+	repo_store("$pg");	
       }
+      
+    #
+    # PCMA module
+    #
     elsif ( $pg eq "pcma")
       {
 	if ($OS eq "macosx")
@@ -894,20 +973,35 @@ sub install_source_package
 	  }
 	&flush_command ("make $arguments pcma");
 	&check_cp("$pg", "$BIN");
+	repo_store("$pg");	
       }
+      
+    #
+    # KALIGN module
+    #
     elsif ($pg eq "kalign")
       {
 	&flush_command ("./configure");
 	&flush_command("make $arguments");
 	&check_cp ("$pg",$BIN);
+	repo_store("$pg");	
       }
+      
+    #
+    # AMAP module
+    #
     elsif ( $pg eq "amap")
       {
 	&add_C_libraries("./Amap.cc", "iomanip", "cstring","climits");	
 	`make clean $SILENT`;
 	&flush_command ("make $arguments all");
 	&check_cp ("$pg", $BIN);
+	repo_store("$pg");	
       }
+      
+    #
+    # PRODA module
+    #
     elsif ( $pg eq "proda")
       {
 	&add_C_libraries("AlignedFragment.h", "vector", "iostream", "cstring","cstdlib");
@@ -915,12 +1009,22 @@ sub install_source_package
 	&add_C_libraries("Sequence.cc", "stdlib.h", "cstdio");	
 	&flush_command ("make $arguments all");
 	&check_cp ("$pg", $BIN);
+	repo_store("$pg");	
       }
+      
+    #
+    # PRANK module
+    #
     elsif ( $pg eq "prank")
       {
 	&flush_command ("make $arguments all");
 	&check_cp ("$pg", $BIN);
+	repo_store("$pg");	
       }
+      
+    #
+    # !!!! MUSTANG module
+    #
      elsif ( $pg eq "mustang")
       {
 	&flush_command ("rm ./bin/*");
@@ -929,8 +1033,12 @@ sub install_source_package
 	if ( $OS=~/windows/){&flush_command("cp ./bin/* $BIN/mustang.exe");}
 	else {&flush_command("cp ./bin/* $BIN/mustang");}
 	
+	repo_store("$BIN/mustang");
       }
 
+	#
+	# RNAplfold module
+	#
     elsif ( $pg eq "RNAplfold")
       {
 	&flush_command("./configure");
@@ -938,13 +1046,21 @@ sub install_source_package
 	&check_cp("./Progs/RNAplfold", "$BIN");
 	&check_cp("./Progs/RNAalifold", "$BIN");
 	&check_cp("./Progs/RNAfold", "$BIN");
+	
+	repo_store("./Progs/RNAplfold", "./Progs/RNAalifold", "./Progs/RNAfold");
       }
+      
+    #
+    # !!! RETREE module
+    #
     elsif ( $pg eq "retree")
       {
 	chdir "src";
 	&flush_command ("make $arguments all");
 	&flush_command ("make put");
 	system "cp ../exe/* $BIN";
+	
+	repo_store("retree", "../exe");
       }
 	
     chdir $CDIR;
@@ -1110,6 +1226,77 @@ sub check_cp
     `$CP $from $to`;
     return 1;
   }
+
+#  
+# Cache the specified package 
+#  
+# - path (mandatory): the source path to be cached 
+# - pg (optional): the package name
+# 
+sub repo_store 
+{
+   # check that all required data are available
+   if( $REPO_ROOT eq "" ) { return; }
+
+
+    # extract the package name from the specified path
+    my $pg =`basename $_[0]`;
+    chomp($pg);
+	
+    my $VER = $PG{$pg}{version};
+    my $CACHE = "$REPO_ROOT/$pg/$VER/$OSNAME-$OSARCH"; 
+    
+    print "~~~~~~~ Storing package: \"$pg\" to path: $CACHE\n";
+    
+    # clean the cache path if exists and create it again
+    `rm -rf $CACHE`;
+    `mkdir -p $CACHE`;
+    
+ 	for my $path (@_) {
+
+	    # check if it is a single file 
+	 	if( -f $path ) {
+	    	`cp $path $CACHE`;
+		}
+		# .. or a directory, in this case copy all the content 
+		elsif( -d $path ) {
+			opendir(IMD, $path);
+			my @thefiles= readdir(IMD);
+			closedir(IMD);
+			
+			for my $_file (@thefiles) {
+				if( $_file ne "." && $_file ne "..") {
+	    			`cp $path/$_file $CACHE`;
+				}
+			}
+		} 
+	}	   
+    
+	
+}   
+
+#
+# Retrieve a target object from the build binary repository
+# - pg (mandatory): a know target package name, it will be used to access to the $PG packages map
+#
+sub repo_load 
+{
+    my ($pg)=(@_);
+
+    # check that all required data are available
+    if( $REPO_ROOT eq "" ) { return 0; }
+
+    my $VER = $PG{$pg}{version};
+    my $CACHE = "$REPO_ROOT/$pg/$VER/$OSNAME-$OSARCH"; 
+    if( !-e "$CACHE/$pg" ) {
+    	return 0;
+    }
+    
+    print "~~~~~~~ Module \"$pg\" found on repository cache. Using copy on path: $CACHE\n";
+    `cp $CACHE/* $BIN`;
+    return 1;
+}
+
 sub check_file_list_exists 
   {
     my ($base, @flist)=(@_);
