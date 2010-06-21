@@ -2948,7 +2948,7 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 }
 
 
-static int shit = 0;
+
 
 /**
  * \brief The gotoh dynamic programming algorithm.
@@ -2962,7 +2962,7 @@ prf_gotoh(Fastal_profile *profile1,
 		  Gotoh_param *arguments,
 		  Fastal_param *param_set)
 {
-// 	printf("%i\n",++shit);
+
 // printf("I AM HERE - again\n");
 	int **sumup_prf   = arguments->sumup_prf;
 	int *sumup_length = arguments->sumup_length;
@@ -3506,13 +3506,13 @@ edit_seq2aligned_seq(char *aligned_sequence,	//pattern for aligned sequence
 			{
 				while (aligned_sequence[pos] == '-')
 				{
-// 					printf("SHIT\n");
+
 					fprintf(alignment_file,"-");
 					++pos;
 				}
 				if (line[i] != '-')
 				{
-// 					printf("SHIT\n");
+
 					fprintf(alignment_file,"%c",line[i]);
 					++pos;
 				}
@@ -3755,20 +3755,8 @@ int
 fastal_main(int argc,		//number of arguments
 			char **argv)	//arguments first = fastal, second = tree
 {
-// 	int ** test = read_matrice("pam250mt");
-// 	int z, z2 = 0;
-// 	char *shit = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-// 	for (z = 0; z < 26; ++z)
-// 	{
-// 		for (z2 = 0; z2 < 26; ++z2)
-// 			printf("'%c%c' => %i, ", shit[z], shit[z2], test[z][z2]);
-// 		printf("\n");
-// 	}
-// exit(0);
+
 	int i;
-// 	for (i = 0; i < argc; ++i)
-// 		printf("%s ", argv[i]);
-// 	printf("\n");
 	//pointer to arguments
 	void * method_arguments_p;
 	int (*alignment_function)(Fastal_profile **profiles, Fastal_param *param_set, void *method_arguments_p, int is_dna, FILE *edit_file, FILE *prof_file, int number);

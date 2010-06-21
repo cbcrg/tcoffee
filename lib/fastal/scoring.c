@@ -534,7 +534,7 @@ agreement_score(char *ref_file_name, char *aln_file_name)
 						if (line[0] == '>')
 							break;
 						fprintf(tmp_f, "%s", line);
-// 						printf("ARSCH!\n");
+
 						last_pos = ftell(aln_f);
 					}
 					++x;
