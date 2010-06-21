@@ -875,7 +875,7 @@ sub install_source_package
     #
     # DIALIGN-TX module
     #
-    elsif ( $pg eq "dialign-tx" ||$pg eq "dialign-t" )
+    elsif ( $pg eq "dialign-tx" || $pg eq "dialign-t" )
       {
 	my $f;
 	my $base=cwd();
@@ -890,7 +890,8 @@ sub install_source_package
 	&check_cp ("./source/$pg", "$BIN/dialign-t");
 	&check_cp ("./source/$pg", "$BIN/dialign-tx");
 	
-	repo_store("./source/$pg");
+	repo_store("./source/dialign-t");
+	repo_store("./source/dialign-tx");
       }
       
     #
@@ -938,7 +939,7 @@ sub install_source_package
 	`rm *.o muscle muscle.exe $SILENT`;
 	if ($OS eq "macosx" || $OS eq "linux")
 	  {
-	    &replace_line_in_file ("./makefile", "LDLIBS = -lm -static",  "LDLIBS = -lm");
+	    &replace_line_in_file ("./Makefile", "LDLIBS = -lm -static",  "LDLIBS = -lm");
 	  }
 	elsif ($OS eq "windows")
 	  {
@@ -1094,6 +1095,8 @@ sub install_TMalign
     `rm TMalign TMalign.exe $SILENT`;
     if ( $FC ne ""){&flush_command ("make -i $PG{Fortran}{arguments} TMalign");}
     &check_cp ($pg, $BIN);
+    repo_store($pg);
+
     if ( !-e "$BIN/$pg" && pg_has_binary_distrib ($pg))
       {
 	print "!!!!!!! Compilation of $pg impossible. Will try to install from binary\n";
