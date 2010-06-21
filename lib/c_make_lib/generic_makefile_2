@@ -7,7 +7,7 @@
 #							#
 #########################################################
 DATE=`date`
-VERSION=`$(PERL4MAKEFILE_LIB)/read_program_version.pl version_number.version`
+#VERSION=`$(PERL4MAKEFILE_LIB)/read_program_version.pl version_number.version`
 
 LIBRARY=$(PWD)/../../lib/
 HOME2=$(HOME)/Dropbox
@@ -162,7 +162,7 @@ packing:
 	cp $(DISTRIBUTION_FILE).tar.gz $(WEB_DISTRIBUTION)/$(LATEST_DISTRIBUTION_FILE).tar.gz
 	cp $(DISTRIBUTION_FILE).tar.gz $(WEB_DISTRIBUTION)/
 	rm $(DISTRIBUTION_FILE).tar.gz
-	$(PERL4MAKEFILE_LIB)/change_program_version.pl version_number.version $(VERSION)
+	#$(PERL4MAKEFILE_LIB)/change_program_version.pl version_number.version $(VERSION)
 
 web_update:
 	echo "Run Web Update: if standalone: VERSION=Version_X.xx"
