@@ -18,10 +18,8 @@ endif
 
 LIBRARY=$(PWD)/../../lib/
 
-ifndef SANDBOX
+ifndef HOME2
 HOME2=$(HOME)/Dropbox
-else
-HOME2=$SANDBOX
 endif
 
 WEB_BASE=$(HOME2)/projects/server/html_server/public_html/
