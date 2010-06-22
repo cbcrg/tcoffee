@@ -7,7 +7,14 @@
 #							#
 #########################################################
 DATE=`date`
-#VERSION=`$(PERL4MAKEFILE_LIB)/read_program_version.pl version_number.version`
+
+#
+# make version number condition so that it can specified 
+# using env variable otherwise it fallback on legacy mechanism
+#
+ifndef VERSION
+VERSION=`$(PERL4MAKEFILE_LIB)/read_program_version.pl version_number.version`
+endif
 
 LIBRARY=$(PWD)/../../lib/
 HOME2=$(HOME)/Dropbox

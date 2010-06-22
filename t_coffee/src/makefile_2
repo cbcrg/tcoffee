@@ -1,7 +1,17 @@
 PROGRAM="T-COFFEE"
 EXECUTABLE=t_coffee
 AUTHOR= "Cedric Notredame "
+
+#
+# make it possibile to define HOME2 externally using environment 
+# variable named 'SANDBOX', otherwise fallback on the defult mechanism 
+#
+ifndef SANDBOX
 HOME2=$(HOME)/Dropbox
+else
+HOME2=$SANDBOX
+endif
+
 HTML=private_html
 HTML_DOC=public_html/Documentation/$(EXECUTABLE)
 HTML_PUBLIC=$(HOME2)/public_html/
