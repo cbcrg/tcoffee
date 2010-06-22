@@ -17,7 +17,6 @@ VERSION=`$(PERL4MAKEFILE_LIB)/read_program_version.pl version_number.version`
 endif
 
 LIBRARY=$(PWD)/../../lib/
-HOME2=$(HOME)/Dropbox
 
 WEB_BASE=$(HOME2)/projects/server/html_server/public_html/
 WEB_UPDATE=$(HOME2)/projects/server/html_server/update/
