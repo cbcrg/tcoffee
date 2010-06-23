@@ -348,7 +348,8 @@ Ca_trace * simple_read_ca_trace (char *tp_name )
 	       
 	       T->seq[A->res_num-1]=res;
 
-	       if ( strm ( A->type, "CA")) T->ca[A->res_num-1]=A;
+	       if (( strm ( A->type, "CA")) || ( strm ( A->type, "C3'")))
+			   T->ca[A->res_num-1]=A;
 	       a++;
 	   }
 	T->n_atom=a;
@@ -360,6 +361,7 @@ Ca_trace * simple_read_ca_trace (char *tp_name )
 	    A=T->structure[a];
 
 	    if ( strm (A->type, "CA"))(T->peptide_chain[A->res_num-1])->CA=A;
+		if ( strm (A->type, "C3'"))(T->peptide_chain[A->res_num-1])->CA=A;
 	    if ( strm (A->type, "C"))(T->peptide_chain[A->res_num-1] )->C=A;
 	    if ( strm (A->type, "CB"))(T->peptide_chain[A->res_num-1])->CB=A;
 	    if ( strm (A->type, "N"))(T->peptide_chain[A->res_num-1] )->N=A;
