@@ -1,5 +1,5 @@
 
-T-COFFEE (Version_8.07,Cedric Notredame ,Fri Jul 24 17:39:10 WEST 2009 [http://www.tcoffee.org])
+T-COFFEE (Version_8.80,Cedric Notredame ,Mon Jun 21 11:49:11 CEST 2010 [http://www.tcoffee.org])
 
 ***********     MINIMUM SYNTAX        *****************
 seq_reformat -in <in_file> -output <out_format>
@@ -175,7 +175,7 @@ RNA analysis Post Processing___________________________________________________
      .......................html: color-code compensated mutations on aln
      .......................aln: mark compensated mutations on stockholm aln
      .......................usegap: do not ignore positions with gaps
-     +cmp_RNAfold.........compares the sec struc of in1 and in2 (computes them with alifold if missing)
+     +RNAfold_cmp.........compares the sec struc of in1 and in2 (computes them with alifold if missing)
 MSA Post Processing___________________________________________________
      +force_aln filename|seq1 res1 seq2 res2
      .....................Forces residue 1 of seq1 to be aligned with res2 of seq 2
@@ -186,7 +186,7 @@ MSA Post Processing___________________________________________________
      ....................._i min identity to seq
      ....................._C max cov on seq
      ....................._c min cov on seq
-     +trim[_aln_%%50_n111_N50_T_Fn_fS_pS_max_sim] [string2]
+     +trim[_aln_%%50_n111_N50_T_Fn_fS_pS_max_sim_P0_K0] [string2]
      ....................._<seq or aln>, aln is assumed
      ....................._%%<max/min_percent_similarity>
      ....................._max Or _min <keep sequences for which sim is the max or the min [Def: _max>
@@ -197,6 +197,8 @@ MSA Post Processing___________________________________________________
      ....................._Fn Keep only sequences that have AT LEAST ONE residue aligned
      ......................in the n first and n last columns. 
      ....................._O<min sim> Remove outlayers that have less than min average sim with other sequences
+     ....................._Kn Forces the n top sequences to be kept
+     ....................._P_ Print a summary in stderr
      .....................Keeping Sequences: Sequences provided via -in2 will be kept
      .....................Keeping Sequences: Sequences whose name contains <string> in field fS will be kept
      ....................._f<NAME|SEQ|COMMENT> designates a field
@@ -222,9 +224,9 @@ Tree Analysis___________________________________________________
      ......................N can be used to unresolve the trees with Depth N
      +treelist2lti.N.C.....Reports the average stability of each sequence neighborhood
      ......................Species can be selected via -in2 [Fasta file with Taxon names]
-     ......................OR the sequences observed in C26530055f the files are kept [Def: C=100]
-     +treelist2seq.C.......Reports the species observed in C26530055f the trees
-     +treelist2splits......List all the splits in a list of files
+     ......................OR the sequences observed in C% of the files are kept [Def: C=100]
+     +treelist2seq.C.......Reports the species observed in C% of the trees
+     +treelist2splits......List and counts all the splits in a list of trees
      ......................splits can be restricted to a list of sequences provided via -in2
      +treelist2dmat.......outputs a distance matrix for a list of trees
      +tree_compute n s....Computes a tree using the MSA provided with -in
@@ -308,7 +310,7 @@ Matrix Comparison___________________________________________________
 *********** OUTPUT FORMATS: sequence  ******************
      fasta_seq      fasta_seq1     gotoh_seq
      gor_seq        cache_id
-
+     tblastx_db1     tblastx_db2    tblastx_db3
 *********** OUTPUT FORMATS: weights ******************
      constraints    saga_pw_sd_weights  nseq
 

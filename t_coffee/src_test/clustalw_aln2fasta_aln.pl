@@ -1,10 +1,8 @@
 #!/usr/bin/env perl
-#This script reads an Interleaved MSA and Outputs a Fasta_msa
 
 use Env qw(HOST);
 use Env qw(HOME);
 use Env qw(USER);
-#Specific Files and Default Parameters
 
 
 $tmp=clean_cr ($ARGV[0]);
@@ -25,26 +23,21 @@ close (F);
 unlink($tmp);
 $file1=$file;
 
-#Protect # and @
 $file=~s/\#/_hash_symbol_/g;
 $file=~s/\@/_arobase_symbol_/g;
 
 
-#Remove annotation
 $file=~s/\n[\.:*\s]+\n/\n\n/g;
 
-#Remove White spaces before the sequence name
 $file=~s/\n[ \t\r\f]+(\b)/\n\1/g;
 
 
-#Remove Internal Blanks
 $file=~s/(\n\S+)(\s+)(\S)/\1_blank_\3/g;
 
 $file=~s/[ ]//g;
 $file=~s/_blank_/ /g;
 
 
-#Identify Double Blank lines
 
 $file =~s/\n\s*\n/#/g;
 
@@ -54,13 +47,11 @@ $file =~s/\n/@/g;
 
 
 
-#count nseq
 @blocks=split /\#/, $file;
 shift (@blocks);
 @s=split /\@/, $blocks[0];
 $nseq=$#s+1;
 
-#Merge all the sequences and split every Nseq
 
 
 $file=join '@', @blocks;
@@ -157,4 +148,4 @@ sub clean_cr
     close (OUT);
     return $tmp;
   }
-# Fri Jul 24 17:38:31 WEST 2009
+

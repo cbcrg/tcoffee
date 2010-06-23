@@ -15,6 +15,9 @@ void free_pair_wise();//Frees static memory in the pair_wise functions
 /*                                                                      */
 /*                                                                      */
 /************************************************************************/
+int *** duplicate_residue_index (int ***r);
+int *** declare_residue_index (Sequence *S);
+
 Constraint_list *free_constraint_list4lib_computation (Constraint_list *CL);
 Constraint_list *duplicate_constraint_list4lib_computation (Constraint_list *CL);
 Constraint_list * declare_constraint_list_simple ( Sequence *S);
@@ -142,6 +145,8 @@ void      ** declare_array     (int first, int second, size_t size);
 short     ** declare_short     ( int first, int second);
 char      ** declare_char      ( int first, int second);
 int       ** declare_int       ( int first, int second);
+int       ** declare_int2       ( int first, int *second, int delta);
+
 float     ** declare_float     ( int first, int second);
 double    ** declare_double    ( int first, int second);
 

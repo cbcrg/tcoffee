@@ -1,27 +1,13 @@
-#!/usr/bin/perl 
+#!/usr/bin/env perl
 
-# ======================================================================
-# WSBlastpgp Perl client.
-#
-# Requires SOAP::Lite. Tested with versions 0.60, 0.69 and 0.71.
-#
-# See:
-# http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
-# http://www.ebi.ac.uk/Tools/webservices/clients/blastpgp
-# http://www.ebi.ac.uk/Tools/webservices/tutorials/soaplite
-# ======================================================================
-# WSDL URL for service
 my $WSDL = 'http://www.ebi.ac.uk/Tools/webservices/wsdl/WSBlastpgp.wsdl';
 
-# Load libraries
 use SOAP::Lite;
 use Getopt::Long qw(:config no_ignore_case bundling);
 use File::Basename;
 
-# Set interval for checking status
 my $checkInterval = 15;
 
-# Process command-line options
 my %params=(
 	    'async' => '1', # Use async mode and simulate sync mode in client
 	    );
@@ -57,21 +43,17 @@ GetOptions(
     "trace"            => \$trace, # Show SOAP messages
     );
 
-# Get the script filename for use in usage messages
 my $scriptName = basename($0, ());
-# Print usage and exit if requested
 if($help) {
     &usage();
     exit(0);
 }
 
-# If required enable SOAP message trace
 if ($trace){
     print "Tracing active\n";
     SOAP::Lite->import(+trace => 'debug');
 }
 
-# Create the service interface, setting the fault handler to throw exceptions
 my $soap = SOAP::Lite
     ->service($WSDL)
     ->on_fault(sub {
@@ -87,7 +69,6 @@ my $soap = SOAP::Lite
     }
                );
 
-# Print usage if bad argument combination
 if( !($polljob || $status || $ids) &&
     !( (defined($ARGV[0]) && -f $ARGV[0]) || defined($sequence) )
     ) {
@@ -95,12 +76,10 @@ if( !($polljob || $status || $ids) &&
     &usage();
     exit(1);
 }
-# Poll job and get results
 elsif($polljob && defined($jobid)) {
     print "Getting results for job $jobid\n";
     getResults($jobid);
 }
-# Job status
 elsif($status && defined($jobid)) {
     print STDERR "Getting status for job $jobid\n";
     my $result = $soap->checkStatus($jobid);
@@ -109,12 +88,10 @@ elsif($status && defined($jobid)) {
 	print STDERR "To get results: $scriptName --polljob --jobid $jobid\n";
     }
 }  
-# Get hit ids for a result
 elsif($ids && defined($jobid)) {
     print STDERR "Getting ids from job $jobid\n";
     getIds($jobid);
 }
-# Submit a job
 else {
     if(-f $ARGV[0]) {	
 	$content={type=>'sequence', content=>read_file($ARGV[0])};	
@@ -152,7 +129,6 @@ else {
     }
 }
 
-# Get the Ids of the hits
 sub getIds($) {
     $jobid = shift;
     my $results = $soap->getIds($jobid);
@@ -161,7 +137,6 @@ sub getIds($) {
     }
 }
 
-# Client-side poll
 sub clientPoll($) {
     my $jobid = shift;
     my $result = 'PENDING';
@@ -177,7 +152,6 @@ sub clientPoll($) {
     }
 }
 
-# Get the results for a jobid
 sub getResults($) {
     $jobid = shift;
     # Check status, and wait if not finished
@@ -208,7 +182,6 @@ sub getResults($) {
     }
 }
 
-# Read a file
 sub read_file($) {
     my $filename = shift;
     open(FILE, $filename);
@@ -221,7 +194,6 @@ sub read_file($) {
     return $content;
 }
 
-# Write a result file
 sub write_file($$) {
     my ($tmp,$entity) = @_;
     print STDERR "Creating result file: ".$tmp."\n";
@@ -233,7 +205,6 @@ sub write_file($$) {
     return 1;
 }
 
-# Print program usage
 sub usage {
     print STDERR <<EOF
 Blastpgp
@@ -318,3 +289,4 @@ Asynchronous job:
 EOF
 ;
 }
+

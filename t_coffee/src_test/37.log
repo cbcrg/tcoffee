@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -11,20 +12,21 @@ PROGRAM: T-COFFEE (Version_8.07)
 -clean         	S	[0] 	no
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
--template_file 	S	[1] 	SELF_P_	template_file.template
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
--in            	S	[1] 	Msap_pair
--seq           	S	[1] 	3d_sample3.fasta
+-in            	S	[0] 
+-seq           	S	[0] 
 -aln           	S	[0] 
 -method_limits 	S	[0] 
--method        	S	[0] 
+-method        	S	[1] 	sap_pair
 -lib           	S	[0] 
 -profile       	S	[0] 
 -profile1      	S	[0] 
 -profile2      	S	[0] 
--pdb           	S	[0] 
+-pdb           	S	[1] 	struc1.pdb	struc2.pdb	struc3.pdb
 -relax_lib     	D	[0] 	1 
 -filter_lib    	D	[0] 	0 
 -shrink_lib    	D	[0] 	0 
@@ -148,53 +150,114 @@ PROGRAM: T-COFFEE (Version_8.07)
 
 INPUT FILES
 	Input File (M) sap_pair 
-	Input File (S) 3d_sample3.fasta  Format fasta_seq
+	Input File (P) struc1.pdb  Format pdb_struc
+	Input File (P) struc2.pdb  Format pdb_struc
+	Input File (P) struc3.pdb  Format pdb_struc
 
-Looking For Sequence Templates:
+INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
+  Input File struc1.pdb Seq 1CMS Length  298 type PROTEIN Struct Unchecked
+	PDB struc: Template=struc1.pdb, File=struc1.pdb
+  Input File struc2.pdb Seq 4APE Length  301 type PROTEIN Struct Unchecked
+	PDB struc: Template=struc2.pdb, File=struc2.pdb
+  Input File struc3.pdb Seq 3APP Length  298 type PROTEIN Struct Unchecked
+	PDB struc: Template=struc3.pdb, File=struc3.pdb
 
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
 
-WARNING: _P_ Template |seq_1cms| Could Not Be Found
+	Seq: 1CMS
+	Seq: 3APP
+	Seq: 4APE
+
+READ/MAKE LIBRARIES:[4]
+
+	sap_pair [method]
+
+	Multi Core Mode: 4 processors [subset]
+
+		[Submit   Job][TOT=    1][100 %][ELAPSED TIME:    0 sec.]
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1498]
+
+Library Relaxation:[1574] --->[1574]
 
 
-WARNING: _P_ Template |seq_4ape| Could Not Be Found
+WEIGHTED MODE:t_coffee
+
+	1CMS 1.03
+	3APP 0.97
+	4APE 0.99
 
 
-WARNING: _P_ Template |seq_3app| Could Not Be Found
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+HERE: ****ECLMODE4TC:5
+HERE: ****ECLMODE4TC:5
+
+	Group    4: [Group    2 (   1 seq)] with [Group    3 (   1 seq)]-->[Score=  71][Len=  326][PID:59306]HERE: ****ECLMODE4TC:5
+HERE: ****ECLMODE4TC:5
+
+	Group    5: [Group    1 (   1 seq)] with [Group    4 (   2 seq)]-->[Score=  78][Len=  330][PID:59306]
 
 
-WARNING: _P_ Template |hmgl_trybr| Could Not Be Found
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE Format=     newick Name= struc1.dnd
+	#### File Type=        MSA Format=        aln Name= struc1.aln
+	#### File Type=        MSA Format=       html Name= struc1.html
+	#### File Type= Template_List Format=  fasta_seq Name= struc1.template_file
+	#### File Type= Template PDB struc Format=        pdb Name= struc1.pdb
+	#### File Type= Template PDB struc Format=        pdb Name= struc3.pdb
+	#### File Type= Template PDB struc Format=        pdb Name= struc2.pdb
 
 
-WARNING: _P_ Template |hmgt_mouse| Could Not Be Found
+# TIP :See The Full Documentation on www.tcoffee.org
+# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
+# TIP 11:  -infile=<aln> -special_mode=evaluate to evaluate your own alignment
+
+# Command Line: t_coffee -pdb struc1.pdb struc2.pdb struc3.pdb -method sap_pair  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 20.261 Mb, Max= 21.364 Mb
+# T-COFFEE CPU Usage: 10 millisec
+# Results Produced with T-COFFEE (Version_8.80)
+# T-COFFEE is available from http://www.tcoffee.org
+CLUSTAL FORMAT for T-COFFEE Version_8.80 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=95, Nseq=3, Len=330 
+
+1CMS            EVASVPLTNYL-D-QYFGKIYLGTPPEFTVLFDTGSSD-WVPSIYCKSNA
+4APE            -TGSATTTPIDSLDAYITPVQIGTPQTLNLDFDTGSS-LWVFSSETTASE
+3APP            ASGVATNTPTA-NEEYITPVTIG-GT-LNLNFDTGSADL-VFSTELPASQ
+                  . .. *       *:  : :*    :.: *****:   * *    :. 
+
+1CMS            C-NHQRFDPRKSST-QNLGKPLSI-HYG-GSMQGILGYDTV-VSNIVDIQ
+4APE            -DGQTIYTPSKSTAKLLSGATWSI-SGD-GSSSGDVYTD-VSVGGLTVTG
+3APP            QS-HSVYNPSATG--KESGYTWSISYGDGS-ASGNVFTDSVT-GGVTAHG
+                   :  : *  :      * . **   . .  .* :  * *  ..:.   
+
+1CMS            QTVG-STQEPGDVFTYA-FDGILGMAYPSL-SE---YS-IPVFDNMMRHL
+4APE            QA-ESAKKVSSSFTE-STIDGLLGLAFS-LNTVSP-TQQKTF-DNAK-AS
+3APP            QAVQA-QQISAQFQQDTN-DGLLGLAFSSIN-VQPQSQ-TTFFDT-K-SS
+                *:     : ....   :  **:**:*:. :       .  .. *.     
+
+1CMS            VAQDLFSVY-DRNGQESMLTLG-IDPSYYTGSLHW-PV-TVQ-QYWQFTV
+4APE            LDSPVF-ADLGY-HAPGTYN-GFIDTTAYTGSI-YTAVSTKQ-GFWE-TS
+3APP            LAQPLFAVA-KH-QQPGVYDFGF-DSSKYTGSLTYT-V-DNSQGFWSFNV
+                : . :* .        .    *  *.: ****: :  *   .  :*. . 
+
+1CMS            -SVTISGVV-VACEGCQAILDTGTSK-VGPSSDILNIQQ-IGAT-QNQYG
+4APE            TGYAVGSGTFST--SIDGIADTGT-LLYLPATVVSAY-AQVSGAKSSSSV
+3APP            -SYTAGSQS-GD--GF-GIADTGTTLLLLD-SVVSQYYSQVS-A-QQDSN
+                 . : ..       .  .* ****       : :      :. : ...  
+
+1CMS            EFD-DCDNLSYMPTVV-EINGKMYPLTPS-YTSQD---QGFCTSG-QSEN
+4APE            G-YVFPCSA-TLPS-TFGVGSARIVIP-DYIDFGPIS-TGS-FGGIQSSA
+3APP            AGGYVF-CSTNLPDFSVSI-GYTATVPGSLIN-GPSGDGSTCLGG-QSNS
+                           :*     : .    :. .          .   .* **. 
+
+1CMS            HSQKWILGVFIREYYSVFDRNNLVGLAKAI
+4APE            GIGI-IFGDVALKAAFVFNGATTPTLGFAK
+3APP            GIGFSIFGIFLKSQYVVFDSGPQLGFAPQA
+                     *:* .  .   **:      :.   
 
 
-WARNING: _P_ Template |hmgb_chite| Could Not Be Found
-
-
-WARNING: _P_ Template |hmgl_wheat| Could Not Be Found
-]
-	Template Type: [template_file.template] Mode Or File: [template_file.template] [StartHERE: *****
-
-WARNING RECAPITULATION: 7 Warnings [PROGRAM: T-COFFEE]
-**WARNING:   1** 
-WARNING: _P_ Template |seq_1cms| Could Not Be Found
-
-**WARNING:   2** 
-WARNING: _P_ Template |seq_4ape| Could Not Be Found
-
-**WARNING:   3** 
-WARNING: _P_ Template |seq_3app| Could Not Be Found
-
-**WARNING:   4** 
-WARNING: _P_ Template |hmgl_trybr| Could Not Be Found
-
-**WARNING:   5** 
-WARNING: _P_ Template |hmgt_mouse| Could Not Be Found
-
-**WARNING:   6** 
-WARNING: _P_ Template |hmgb_chite| Could Not Be Found
-
-**WARNING:   7** 
-WARNING: _P_ Template |hmgl_wheat| Could Not Be Found
 

@@ -1,18 +1,13 @@
-#!/usr/bin/perl
-#
-#
-#date : 12/10/
+#!/usr/bin/env perl
 
 use Env qw(HOST);
 use Env qw(HOME);
 use Env qw(USER);
 
-###################################################################################################
                                                         
 use strict;                                             
 use warnings;
 use diagnostics;
-###################################################################################################
 
 my $in_hit_list, my $in_aln=0, my(%name_list)=(),my (%list)=(),my $n_seq=0; my $test=0;
 my($j)=0, my $n=0, my $nom, my $lg_query, my %vu=();
@@ -84,7 +79,6 @@ while (<>)
 
 my @numero=();
 
-## Si GAP A LA FIN DES SEQ
 for (my $a=0; $a<$n; $a++) #m
 {
     my $long=length($list{0}{'seq'});  
@@ -101,7 +95,6 @@ for (my $a=0; $a<$n; $a++) #m
 
 my %dejavu=();
 
-###SI DEUX FOIS "MEME" SEQ => Seq consensus 
 
 for (my $i=0; $i<=$#numero; $i++)
 {
@@ -142,7 +135,6 @@ for (my $i=0; $i<=$#numero; $i++)
 
 exit;
 
-#######################################################################################################################
 
 
 
@@ -153,4 +145,4 @@ exit;
 
 
 
-# Thu Jun  4 01:47:46 WEST 2009
+

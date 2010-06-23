@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -11,12 +12,13 @@ PROGRAM: T-COFFEE (Version_8.07)
 -clean         	S	[0] 	no
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
--template_file 	S	[0] 
+-template_file 	S	[1] 	SELF_P_
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
--profile_template_file	S	[0] 
--in            	S	[1] 	Mclustalw_pair	Mclustalw_msa	Mslow_pair
--seq           	S	[1] 	sample_seq1.fasta
+-profile_template_file	S	[1] 	SELF_P_
+-in            	S	[1] 	Msap_pair
+-seq           	S	[1] 	Rsample_profile1.aln	Rsample_profile2.aln
 -aln           	S	[0] 
 -method_limits 	S	[0] 
 -method        	S	[0] 
@@ -47,7 +49,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -distance_matrix_mode	S	[0] 	ktup
 -distance_matrix_sim_mode	S	[0] 	idmat_sim1
 -quicktree     	FL	[0] 	0
--outfile       	W_F	[1] 	clustal_text
+-outfile       	W_F	[1] 	aligned_prf.aln
 -maximise      	FL	[1] 	1
 -output        	S	[0] 	aln	html
 -infile        	R_F	[0] 
@@ -147,98 +149,83 @@ PROGRAM: T-COFFEE (Version_8.07)
 -exon_boundaries	S	[0] 
 
 INPUT FILES
-	Input File (M) clustalw_pair 
-	Input File (M) clustalw_msa 
-	Input File (M) slow_pair 
-	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) sap_pair 
+	Input File (R) sample_profile1.aln  Format clustal_aln
+	Input File (R) sample_profile2.aln  Format clustal_aln
 
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 59870 -- 
+WARNING: _P_ Template | sample_profile1.aln | Could Not Be Found
+
+
+pid 59870 -- 
+WARNING: _P_ Template | sample_profile2.aln | Could Not Be Found
+
+]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 59870 -- 
+WARNING: _P_ Template | sequence1 | Could Not Be Found
+
+
+pid 59870 -- 
+WARNING: _P_ Template | sequence2 | Could Not Be Found
+
+
+pid 59870 -- 
+WARNING: _P_ Template | sequence4 | Could Not Be Found
+
+]
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                     Seq sample_profile1.aln Length  183 type PROTEIN Struct Unchecked
+	Profile: Template=sample_profile1.aln, File=sample_profile1.aln
+  Input File                     Seq sample_profile2.aln Length  180 type PROTEIN Struct Unchecked
+	Profile: Template=sample_profile2.aln, File=sample_profile2.aln
 
 COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
 
-	Seq: hmgb_chite
-	Seq: hmgl_trybr
-	Seq: hmgl_wheat
-	Seq: hmgt_mouse
+	Seq: sample_profile1.aln
+	Seq: sample_profile2.aln
 
-READ/MAKE LIBRARIES:[4]
+READ/MAKE LIBRARIES:[3]
 
-	clustalw_pair [method]
+	sap_pair [method]
 
-	Multi Core Mode: 2 processors [subset]
+		[Submit   Job][TOT=    1][100 %][ELAPSED TIME:    0 sec.]t_coffee(59870) malloc: *** mmap(size=18446744065929068544) failed (error code=12)
+*** error: can't allocate region
+*** set a breakpoint in malloc_error_break to debug
 
-		[Submit   Job][TOT=    3][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    3][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    3][100 %][ELAPSED TIME:    0 sec.]
-	clustalw_msa [method]
-
-		[Submit   Job][TOT=    1][100 %][ELAPSED TIME:    0 sec.]
-
-	slow_pair [method]
-
-	Multi Core Mode: 2 processors [subset]
-
-		[Submit   Job][TOT=    3][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    3][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    3][100 %][ELAPSED TIME:    0 sec.]
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [504]
-
-Library Relaxation: Multi_proc [2] 
-		[Submit   Job][TOT=  252][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][  1 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][  2 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][  3 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][  4 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][  5 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][  6 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][  7 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][  8 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][  9 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 10 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 11 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 12 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 13 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 14 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 15 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 16 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 17 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 18 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 19 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 20 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 21 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 22 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 23 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 24 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 25 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 26 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 27 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 28 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 29 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 30 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 31 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 32 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 33 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 34 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 35 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 36 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 37 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 38 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 39 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 40 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 41 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 42 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 43 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 44 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 45 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 46 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 47 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 48 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 49 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 50 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 51 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 52 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 53 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 54 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 55 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 56 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 57 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 58 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 59 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 60 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 61 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 62 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 63 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 64 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 65 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 67 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 68 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 69 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 70 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 71 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 72 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 73 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 74 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 75 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 76 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 77 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 78 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 79 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 80 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 81 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 82 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 83 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 84 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 85 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 86 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 87 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 88 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 89 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 90 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 91 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 92 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 93 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 94 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 95 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 96 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 97 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 98 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][ 99 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  252][100 %][ELAPSED TIME:    0 sec.]
-Total Relaxation: [504]--->[504] Entries
-
-	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
+--ERROR: FAILED TO ALLOCATE REQUIRED MEMORY (vmalloc)
 
 
-WEIGHTED MODE:t_coffee
-
-	hmgb_chite 1.00
-	hmgl_trybr 0.97
-	hmgl_wheat 1.01
-	hmgt_mouse 1.01
-
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Score=  60][Len=   77][PID:3456]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  89][Len=   79][PID:4364]
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Score=  80][Len=   81][PID:3836][Forked]
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 59870                                    
+59870 -- ERROR: FAILED TO ALLOCATE REQUIRED MEMORY (vmalloc)
+59870 -- COM: t_coffee Rsample_profile1.aln Rsample_profile2.aln -mode 3dcoffee -outfile aligned_prf.aln 
+59870 -- STACK: 59869 -> 59870
+*************************************************************************************************
 
 
+*************************************************************************************************
+*                        WARNING LIST                                    
+59870 -- WARNING: 
+WARNING: _P_ Template | sample_profile1.aln | Could Not Be Found
 
-OUTPUT RESULTS
-	#### File Type= GUIDE_TREE Format=     newick Name= sample_seq1.dnd
-	#### File Type=        MSA Format=        aln Name= clustal_text
-	#### File Type=        MSA Format=       html Name= clustal_text.html
+59870 -- WARNING: 
+WARNING: _P_ Template | sample_profile2.aln | Could Not Be Found
 
+59870 -- WARNING: 
+WARNING: _P_ Template | sequence1 | Could Not Be Found
 
-# TIP :See The Full Documentation on www.tcoffee.org
-# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
-# TIP  6:  -special_mode=accurate The best we can do [slow]
+59870 -- WARNING: 
+WARNING: _P_ Template | sequence2 | Could Not Be Found
 
-# Command Line: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 7.941 Mb, Max= 8.721 Mb
-# T-COFFEE CPU Usage: 360 millisec
-# Results Produced with T-COFFEE (Version_8.07)
-# T-COFFEE is available from http://www.tcoffee.org
-CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.34 sec, SCORE=86, Nseq=4, Len=81 
+59870 -- WARNING: 
+WARNING: _P_ Template | sequence4 | Could Not Be Found
 
-hmgl_trybr      kkdsnapkramtsfmffssdfrskhs-----dlsivemskaagaawkelgpeerkvyeem
-hmgt_mouse      -----kpkrprsayniyvsesfqeakd----dsaqgkl-klvneawknlspeekqayiql
-hmgb_chite      ---adkpkrplsaymlwlnsaresikrenp-dfkvtevakkggelwrglk--dkseweak
-hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvak
-                      ***. ::: .: ..  .. .     :     : *  .  *: *   ::  :   
+*************************************************************************************************
 
-hmgl_trybr      aekdkerykrem---------
-hmgt_mouse      akddrirydnemksweeqmae
-hmgb_chite      aatakqnyiralqeyerngg-
-hmgl_wheat      anklkgeynkaiaaynkgesa
-                *   : .* . :         
-
-
-
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 59870 ppid 59869
+#CL: t_coffee Rsample_profile1.aln Rsample_profile2.aln -mode 3dcoffee -outfile aligned_prf.aln 

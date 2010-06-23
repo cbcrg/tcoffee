@@ -295,7 +295,7 @@ int ** evaluate_diagonals ( Alignment *A, int *ns, int **l_s, Constraint_list *C
 	
 
 
-	if      ( CL->L)
+	if      ( CL->residue_index)
 	  {
 	  tot_diag=evaluate_diagonals_with_clist ( A, ns, l_s, CL, maximise,n_groups,group_list, ktup);
 	  }
@@ -475,9 +475,7 @@ int ** evaluate_diagonals_with_clist ( Alignment *A, int *ns, int **l_s, Constra
     static int *entry;
     
 
-    if ( !entry)entry=vcalloc ( CL->entry_len, CL->el_size);
-    CL=index_constraint_list (CL);
-    
+    if ( !entry)entry=vcalloc ( CL->entry_len+1, CL->el_size);
     l1=strlen (A->seq_al[l_s[0][0]]);
     l2=strlen (A->seq_al[l_s[1][0]]);
 
@@ -497,28 +495,21 @@ int ** evaluate_diagonals_with_clist ( Alignment *A, int *ns, int **l_s, Constra
 	for (b=0; b<ns[1]; b++)
 	    {
 	    s2=A->order[l_s[1][b]][0];
-	    for (c=CL->start_index[s1][s2], d=0; c<CL->end_index[s1][s2];c++, d++)
-	        {
-		entry=extract_entry ( entry,c, CL);
-		if (s1==entry[SEQ1])
-		    {
-		    r1=code [s1][entry[R1]];
-		    r2=code [s2][entry[R2]];
-		    }
-		else if ( s2==entry[SEQ1])
-		    {
-		    r2=code [s2][entry[R1]];
-		    r1=code [s1][entry[R2]];
-		    }
-				
-		
-		diag[(r2-r1+l1)][1]+=(CL->get_dp_cost) ( A, pos, ns[0], l_s[0],r1-1, pos,ns[1], l_s[1], r2-1, CL);
-		
-		}			
+	    for (r1=1; r1<=(A->S)->len[s1]; r1++)
+	      {
+		int e;
+		for (e=1; e<CL->residue_index[s1][r1][0]; e+=ICHUNK)
+		  {
+		    if (CL->residue_index[s1][r1][e+SEQ2]==s2)
+		      {
+			r2=CL->residue_index[s1][r1][e+R2];
+			diag[(r2-r1+l1)][1]+=(CL->get_dp_cost) ( A, pos, ns[0], l_s[0],r1-1, pos,ns[1], l_s[1], r2-1, CL);
+		      }
+		  }			
+	      }
 	    }
 	}
     
-
     sort_int (diag+1, 2, 1,0, n_diag-1);
     
     free_int (code,-1);
@@ -1682,7 +1673,7 @@ Constraint_list * hasch2constraint_list (Sequence*S, Constraint_list *CL)
   int ktup=2;
   
   
-  entry=vcalloc ( CL->entry_len, sizeof (int));
+  entry=vcalloc ( CL->entry_len+1, sizeof (int));
 
   for (a=0; a<S->nseq; a++)
     {

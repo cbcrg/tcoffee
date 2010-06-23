@@ -1,1 +1,13 @@
+          t_coffee sample_seq1.fasta -mode expresso  
+          t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair  
+          t_coffee sample_rnaseq1.fasta -mode mrcoffee  
+          t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair  
+          t_coffee -infile=sample_seq1.aln -in  Lsample_lib1.tc_lib -mode=evaluate  
+          t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_id_pair,Lsample_lib1.tc_lib -outfile=outaln  
+          t_coffee sample_seq1.fasta -in=Xpam250mt  -gapopen=-10  -gapext=-1  
           t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60  
+          t_coffee  Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln  
+          t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair  
+          t_coffee -in Sseq.fas P2PTC Mfugue_pair  
+          t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_  
+          t_coffee -in Lmarna.tc_lib -outfile maran.test  

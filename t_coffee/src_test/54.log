@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,10 +13,11 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[1] 	SELF_P_
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
--in            	S	[1] 	Msap_pair	Sseq.fas	P2PTC
+-in            	S	[1] 	S2seqs.fas	Mfugue_pair
 -seq           	S	[0] 
 -aln           	S	[0] 
 -method_limits 	S	[0] 
@@ -147,7 +149,46 @@ PROGRAM: T-COFFEE (Version_8.07)
 -exon_boundaries	S	[0] 
 
 INPUT FILES
-	Input File (M) sap_pair 
-	Input File (S) seq.fas  Format fasta_seq
-	Input File (P) 2PTC.pdb  Format pdb_struc
-HERE: *****
+	Input File (S) 2seqs.fas  Format fasta_seq
+	Input File (M) fugue_pair 
+
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 60174 -- 
+WARNING: _P_ Template | seq | Could Not Be Found
+
+]
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File 2seqs.fas Seq 2PTCE Length  223 type PROTEIN Struct Unchecked
+	PDB struc: Template=2PTCE, File=2PTCE.pdb
+  Input File 2seqs.fas Seq seq   Length  241 type PROTEIN Struct Unchecked
+
+COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
+
+	Seq: 2PTCE
+	Seq: seq
+
+READ/MAKE LIBRARIES:[2]
+
+	fugue_pair [method]
+
+		[Submit   Job][TOT=    1][100 %][ELAPSED TIME:    0 sec.]
+
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 60174                                    
+60217 -- ERROR: Joy failed [FATAL:tc_generic_method.pl/fugueali]
+60217 -- COM: tc_generic_method.pl
+60217 -- STACK: 60174 -> 60217
+*************************************************************************************************
+
+
+*************************************************************************************************
+*                        WARNING LIST                                    
+60174 -- WARNING: 
+WARNING: _P_ Template | seq | Could Not Be Found
+
+*************************************************************************************************
+
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 60174 ppid 60173
+#CL: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_ 

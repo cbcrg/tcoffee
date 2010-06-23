@@ -186,7 +186,7 @@ int suboptimal_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
   
   id=idscore_pairseq(seqI,seqJ,-12, -1, CL->M, "idmat");
   
-  entry=vcalloc ( CL->entry_len, CL->el_size);
+  entry=vcalloc ( CL->entry_len+1, CL->el_size);
   entry[SEQ1]=s1;entry[SEQ2]=s2;
   
   thres=opt;
@@ -203,6 +203,7 @@ int suboptimal_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
 	      entry[R1]=i;entry[R2]=j;
 	      entry[WE]=id;
 	      entry[CONS]=1;
+	      
 	      add_entry2list (entry,A->CL);
 	    }
 	}
@@ -608,9 +609,9 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
    static float **transMat, **insProb, **matchProb, *initialDistribution, **transProb, **emitPairs, *emitSingle, ***TinsProb, *TmatchProb;
    static int TinsProb_ml, TmatchProb_ml;
    int i, j,I, J;
-   float *F, *B, *P;
-   float tot;
-   int l, s1, s2;
+   float *F, *B;
+   
+   int l;
    float thr=0.01;//ProbCons Default
    char *alphabet;
   
@@ -669,7 +670,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        
        for (i=0; i<l; i++)
 	 {
-	   char C1,c1, C2,c2;
+	   int C1,c1, C2,c2;
 	   c1=tolower(alphabet[i]);
 	   C1=toupper(alphabet[i]);
 	   emitSingle[c1]=s[i];
@@ -733,7 +734,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        
        for (i=0; i<l; i++)
 	 {
-	   char C1,c1, C2,c2;
+	   int C1,c1, C2,c2;
 	   c1=tolower(alphabet[i]);
 	   C1=toupper(alphabet[i]);
 	   emitSingle[c1]=s[i];
@@ -798,7 +799,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL)
 {
   int i, j, a, b, c,d, k, n,n1,n2, ij;
-  char c1, c2;
+  int  c1, c2;
   int I, J;
   int ***VA1,***VA2, *observed, index;
   char *ss1=NULL;
@@ -814,8 +815,8 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
       int s1, s2;
       int *nns, **nls;
       Alignment *NA1, *NA2;
-      char *sst1;
-      char *sst2;
+      int *sst1;
+      int *sst2;
 
       
       nns=vcalloc ( 2, sizeof (int));
@@ -1071,7 +1072,8 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
     }
 
   sort_int_inv (list, 3, 2, 0, list_n-1);
-  if (!entry)entry=vcalloc ( CL->entry_len, CL->el_size);
+  if (!entry)entry=vcalloc ( CL->entry_len+1, CL->el_size);
+ 
   list_n=MIN(list_n,(F*MIN(I,J)));
   for (i=0; i<list_n; i++)
     {
@@ -1103,7 +1105,7 @@ Constraint_list *ProbaMatrix2CL_old (Alignment *A, int *ns, int **ls, int NumMat
   s2=name_is_in_list (A->name[ls[1][0]], (CL->S)->name, (CL->S)->nseq, 100);
   
   totalProb = ComputeTotalProbability (I,J,NumMatrixTypes, NumInsertStates,forward, backward);
-  if (!entry)entry=vcalloc ( CL->entry_len, CL->el_size);
+  if (!entry)entry=vcalloc ( CL->entry_len+1, CL->el_size);
   ij = 0;
   thr=0.01;
 
@@ -1394,7 +1396,7 @@ int ProbabilisticModel (int NumMatrixTypes, int NumInsertStates,float *initDistr
 
 int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 {
-  char C1,c1, C2,c2;
+  int C1,c1, C2,c2;
   char *alphabet, *char_buf;
   char **al, **aln;
   int seq1Length, seq2Length, I, J;

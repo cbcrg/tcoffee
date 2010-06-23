@@ -95,8 +95,9 @@ sub plfold($$$)
     my ($id, $seq, $probtresh) = @_;
     my (@struct);# return
     my ($templ, $fhtmp, $fnametmp, $cmd, $ctr, $window_size);
-
-    $templ = $myname . "." . $id . ".pid-" . $$ . ".XXXXXX";
+    our $ntemp++;
+    
+    $templ = $myname . ".pid-" . $$ .$ntemp .".XXXXXX";
     ($fhtmp, $fnametmp) = tempfile($templ, UNLINK => 1); 
     print $fhtmp ">$id\n$seq\n";
 

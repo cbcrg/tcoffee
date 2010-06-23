@@ -672,8 +672,9 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
     }
   else if ( strm (mode, "single"))
     {
-      for (ax=0; ax<nl; ax++)
+      for (b=0,ax=0; ax<nl; ax++)
 	{
+	  
 	  Tree_sim *TS;
 	  int pstart, pend;
 	  
@@ -888,7 +889,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
   vfree(hit_matrix_file);
   vfree(hit_html_file);
 
-  myexit(EXIT_SUCCESS);
+  myexit(EXIT_SUCCESS);return NULL;
 }
 
 NT_node aln2std_tree(Alignment *A, int ipara1, int ipara2, char *mode)
@@ -4233,7 +4234,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
   char *main_buf;
   char *in=NULL,*in2=NULL, *out=NULL, order[100], filter[100];
   FILE *fp, *fp2;
-  char *def_param;
+  static char *def_param;
   char *cache=NULL;
   //+count_splits _NB_x_FILTER_<file>
   //_<file is a fasta file containing the list of species to keep>

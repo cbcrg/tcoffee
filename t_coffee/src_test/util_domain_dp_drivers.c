@@ -559,29 +559,29 @@ int get_starting_point ( Constraint_list *CL)
   
   seq=declare_int ( l, 2);
   
-  for ( a=0; a<CL->ne;a++)
-    {
-      entry=extract_entry (entry, a, CL);
-      
-      seq[entry[R1]][1]=entry[R1];
-      seq[entry[R2]][1]=entry[R2];
-      if ((CL->moca) && (CL->moca)->forbiden_residues && ((CL->moca)->forbiden_residues[0][entry[R1]]==UNDEFINED||(CL->moca)->forbiden_residues[0][entry[R2]]==UNDEFINED ))continue; 
-      else
-	{
-	seq[entry[R1]][0]+=entry[MISC];
-	seq[entry[R2]][0]+=entry[MISC];
-	}
-    }
-  
-  sort_int_inv ( seq, 2, 0, 0, l-1);
-  fprintf ( stderr, "\nStart=%d %d", seq[0][1], seq[0][0]);
-  start=seq[0][1];
-  CL=index_res_constraint_list (CL,WE); 
-  
-  free_int ( seq, -1);
-  return start;
   
   
+   while (entry=extract_entry (CL))
+     {
+       seq[entry[R1]][1]=entry[R1];
+       seq[entry[R2]][1]=entry[R2];
+       if ((CL->moca) && (CL->moca)->forbiden_residues && ((CL->moca)->forbiden_residues[0][entry[R1]]==UNDEFINED||(CL->moca)->forbiden_residues[0][entry[R2]]==UNDEFINED ))continue; 
+       else
+	 {
+	   seq[entry[R1]][0]+=entry[MISC];
+	   seq[entry[R2]][0]+=entry[MISC];
+	 }
+     }
+   
+   sort_int_inv ( seq, 2, 0, 0, l-1);
+   fprintf ( stderr, "\nStart=%d %d", seq[0][1], seq[0][0]);
+   start=seq[0][1];
+   
+   
+   free_int ( seq, -1);
+   return start;
+   
+   
 }
 
 
@@ -594,7 +594,7 @@ int * analyse_sequence ( Constraint_list *CL)
  int l;
  int max_len=200;
  
- CL=index_res_constraint_list ( CL, WE);  
+
  l=strlen (( CL->S)->seq[0]);
 
  for ( best_tw=UNDEFINED,start=0; start<l; start++)
@@ -607,11 +607,11 @@ int * analyse_sequence ( Constraint_list *CL)
 	  {
 	    n_dots=CL->residue_index[0][p+start+1][0];
 	    
-	    for ( a=1; a<n_dots; a+=3)
+	    for ( a=1; a<n_dots; a+=ICHUNK)
 	      {
 		
-		r=CL->residue_index[0][p+start+1][a+1];
-		w=CL->residue_index[0][p+start+1][a+2];
+		r=CL->residue_index[0][p+start+1][a+R2];
+		w=CL->residue_index[0][p+start+1][a+WE];
 
 		if (r<left || r>right)tw+=w;
 	      }

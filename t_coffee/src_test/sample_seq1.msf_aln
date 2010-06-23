@@ -2,25 +2,25 @@ PileUp
 
 
 
-   MSF:   81  Type: P    Check:  9271   .. 
+   MSF:   84  Type: P    Check:  4530   .. 
 
- Name: hmgl_trybr oo  Len:   81  Check:  6617  Weight:  1.000
- Name: hmgt_mouse oo  Len:   81  Check:  2199  Weight:  1.000
- Name: hmgb_chite oo  Len:   81  Check:  3564  Weight:  1.000
- Name: hmgl_wheat oo  Len:   81  Check:  6891  Weight:  1.000
+ Name: hmgl_trybr oo  Len:   84  Check:   242  Weight:  1.000
+ Name: hmgt_mouse oo  Len:   84  Check:  6600  Weight:  1.000
+ Name: hmgb_chite oo  Len:   84  Check:  7152  Weight:  1.000
+ Name: hmgl_wheat oo  Len:   84  Check:   536  Weight:  1.000
 
 //
 
 
 
-hmgl_trybr      KKDSNAPKRA MTSFMFFSSD FRSKHSDLSI VEMS.....K AAGAAWKELG PEERKVYEEM 
-hmgt_mouse      .....KPKRP RSAYNIYVSE SFQEAKDDSA QGKL.....K LVNEAWKNLS PEEKQAYIQL 
-hmgb_chite      ...ADKPKRP LSAYMLWLNS ARESIKRENP DFK.VTEVAK KGGELWRGL. .KDKSEWEAK 
-hmgl_wheat      ..DPNKPKRA PSAFFVFMGE FREEFKQKNP KNKSVAAVGK AAGERWKSLS ESEKAPYVAK 
+hmgl_trybr      KKDSNAPKRA MTSFMFFSSD FRSKHSDLSI VEM.S....K AAGAAWKELG 
+hmgt_mouse      .....KPKRP RSAYNIYVSE SFQEAKDDSA QGK.L....K LVNEAWKNLS 
+hmgb_chite      ...ADKPKRP LSAYMLWLNS ARESIKRENP DFK.VTEVAK KGGELWRGL. 
+hmgl_wheat      ..DPNKPKRA PSAFFVFMGE FREEFKQKNP KNKSVAAVGK AAGERWKSLS 
 
 
-hmgl_trybr      AEKDKERYKR EM........ .
-hmgt_mouse      AKDDRIRYDN EMKSWEEQMA E
-hmgb_chite      AATAKQNYIR ALQEYERNGG .
-hmgl_wheat      ANKLKGEYNK AIAAYNKGES A
+hmgl_trybr      PEERKVYEEM AEKDKERYKR EM........ ....
+hmgt_mouse      PEEKQAYIQL AKDDRIRYDN EM...KSWEE QMAE
+hmgb_chite      .KDKSEWEAK AATAKQNYIR ALQEYERNGG ....
+hmgl_wheat      ESEKAPYVAK ANKLKGEYNK AIAAYNKGES ...A
 

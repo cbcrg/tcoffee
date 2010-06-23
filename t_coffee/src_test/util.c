@@ -1677,23 +1677,20 @@ char* get_env_variable ( const char *var, int mode)
 void get_pwd ( char *name)
 	{
 	char *string;
-	char command[1000];
 	FILE *fp;
 	 
 
 	string=vtmpnam(NULL);
-	sprintf ( command, "pwd > %s", string);
-	system (command);
+	printf_system_direct ("pwd > %s", string);
+	
 	fp=vfopen ( string, "r");
 	fscanf ( fp, "%s",name);
 	vfclose (fp);
-	sprintf ( command, "rm %s", string);
-	my_system ( command);
+	printf_system_direct ("rm %s", string);
 	}
 int pg_is_installed ( char *pg)
         {
 	char *fname;
-	char command[1000];
 	FILE *fp;
 	int r=0;
 
@@ -1701,13 +1698,9 @@ int pg_is_installed ( char *pg)
 
 	fname= vtmpnam(NULL);
 	
-	sprintf ( command, "which %s > %s::IGNORE_FAILURE::", pg, fname);
+	printf_system_direct("which %s > %s", pg, fname);
 	
-	//use system otherwise any mssing package causes a core dump
-	system ( command);
-	
-	
-        if ((fp=find_token_in_file ( fname, NULL, "Command"))){r=1;vfclose(fp);}
+	if ((fp=find_token_in_file ( fname, NULL, "Command"))){r=1;vfclose(fp);}
 	 
 
 	return r;
@@ -1749,7 +1742,7 @@ int   perl_strstr ( char *string, char *pattern)
   char *tmp;
   FILE *fp;
   int r;
-  char command[10000];
+  
   char *string2;
 
   if (!string)  return 0;
@@ -1763,8 +1756,8 @@ int   perl_strstr ( char *string, char *pattern)
   string2=substitute (string2, ")", " ");
   string2=substitute (string2, "'", " ");
   tmp=vtmpnam(NULL);
-  sprintf (command, "perl -e '$s=\"%s\";$x=($s=~/%s/);$x=($x==1)?1:0;print $x;'>%s", string2, pattern,tmp);
-  system ( command);
+  printf_system_direct("perl -e '$s=\"%s\";$x=($s=~/%s/);$x=($x==1)?1:0;print $x;'>%s", string2, pattern,tmp);
+  
   if (check_file_exists(tmp))
     {
       fp=vfopen (tmp, "r");
@@ -1779,47 +1772,6 @@ int   perl_strstr ( char *string, char *pattern)
   vfree (string2);
   return r;
 }
-float grep_function ( char *pattern, char *file)
-	{
-	char command [1000];
-	int a, b, l;
-	char buf1[100];
-	char buf2[100];
-	FILE*fp;
-	char *s;
-	float f;
-	
-	
-
-	s=vtmpnam(NULL);
-	
-	sprintf ( command, "grep %s %s > %s::IGNORE_FAILURE::",pattern,file, s);
-	my_system ( command);
-	if ((fp=vfopen (s, "r"))==NULL )return 0;
-	else
-		{
-		fgets ( command, 900, fp);
-		l=strlen ( command);
-		while ( !isdigit (command[l]))l--;
-		a=0;
-		while ( isdigit (command[l]) || command[l]=='.')
-			{
-			buf1[a++]=command[l];
-			l--;
-			}
-		buf1[a]='\0';
-		l=strlen (buf1);
-		for ( a=0, b=l-1;a< l; a++, b--)
-			buf2[b]=buf1[a];
-		buf2[l]='\0';
-		
-		sscanf ( buf2, "%f", &f);
-		sprintf ( command,"rm %s", s);
-		my_system ( command); 
-		vfclose (fp);
-		return f;
-		}
-	}    
 
 void crash_if ( int val, char *s)
     {
@@ -3543,10 +3495,10 @@ int fprintf_fork  (FILE *fp, char *string, ...)
   static char *openF;
   static char *closeF;
   
-  char *pid_file;
+  
   FILE *flag;
-  struct flock fl;
-  int fd,a;
+  
+  
 
   char *buf;
  
@@ -3573,10 +3525,10 @@ int fprintf_fork  (FILE *fp, char *string, ...)
 int fprintf_fork2  (FILE *fp, char *string, ...)
 {
 
-  static char *openF;
-  static struct flock fl;
+ 
+ 
   char* buf;
-  int fd;
+ 
   cvsprintf (buf, string);
   fprintf ( fp, "%s", buf);
   vfree (buf);
@@ -3602,7 +3554,9 @@ int printf_system_direct  (char *string, ...)
   int r;
   
   cvsprintf (buf, string);
-  r=safe_system (buf);
+
+
+  r=system (buf);
   vfree(buf);
   return r;
 }
@@ -3640,7 +3594,7 @@ int my_system ( char *command0)
   static char ***unpacked_list;
   static int n_unpacked;
     
-    if (!unpacked_list)
+  if (!unpacked_list)
     {
       unpacked_list=declare_arrayN(3, sizeof (char), 3, 200,300);
     }
@@ -3663,6 +3617,7 @@ int my_system ( char *command0)
       command1=substitute (command1, ";", " ; ");
       
       list=string2list (command1);
+
       if ( !list) return EXIT_SUCCESS;
       is_command=1;
 
@@ -3680,7 +3635,9 @@ int my_system ( char *command0)
 	      else if ((c=name_is_in_list (list[a], unpacked_list[0], n_unpacked, 100))!=-1);
 	      else
 		{
+
 		  n_unpacked=unpack_perl_script (list[a], unpacked_list, n_unpacked);c=n_unpacked-1;
+		  
 		}
 	      //if non unpacked script check pg is installed:
 	   	      
@@ -3728,7 +3685,7 @@ int is_shellpid(int pid)
 }
 int is_rootpid()
 {
-  int r;
+
   if (debug_lock)
     {
       fprintf ( stderr,"\n\t------ check if %d isrootpid (util): %s->%d", getpid(),lock2name (getppid(),LLOCK), (lock(getppid(), LLOCK, LCHECK, NULL))?1:0);
@@ -3775,7 +3732,7 @@ char* lock(int pid,int type, int action,char *string, ...)
 {
   char *fname;
   
-  char *r;
+
 
   
   fname=lock2name (pid, type);
@@ -3798,9 +3755,7 @@ char* lock(int pid,int type, int action,char *string, ...)
       
       if (debug_lock)
 	{
-	  char com[10000];
-	  sprintf ( com, "mv %s %s.released", fname, fname);
-	  system (com);
+	  printf_system_direct ("mv %s %s.released", fname, fname);
 	}
       else if (file_exists (NULL, fname))
 	{
@@ -3812,7 +3767,7 @@ char* lock(int pid,int type, int action,char *string, ...)
   else if (action== LSET || action == LRESET)    
     {
       char *value;
-      char *r;
+ 
       if (string)
 	{
 	  cvsprintf (value,string);
@@ -3833,7 +3788,7 @@ char* lock(int pid,int type, int action,char *string, ...)
 }
 int check_process (const char *com,int pid,int r, int failure_handling)
 {
-  char *error;
+
   //If the child process has an error lock, copy that lock into the parent'lock
   //The error stack trace of the child gets passed to the parent
   if (debug_lock)fprintf (stderr, "\nEVAL_CALL ----- %d ->%s\n",pid, (r==EXIT_FAILURE)?"FAIL":"SUCCESS");
@@ -3877,7 +3832,7 @@ int safe_system (const char * com_in)
 {
     pid_t pid;
     int   status;
-    int return_value;
+
     int failure_handling;
     char *p;
     char command[1000];
@@ -3964,6 +3919,10 @@ int safe_system (const char * com_in)
       }
 } 
 
+
+
+
+
 static int **pidtable;
 static int pidtable_s;
 static int max_pid;
@@ -3999,14 +3958,14 @@ pid_t **declare_pidtable ()
 }
 pid_t set_pid (pid_t p)
 {
-  int cpid;
+
   
   if (!pidtable)declare_pidtable();
-  if ( p<=0) return;
+  if ( p<=0) return (pid_t)0;
   else if ( p>=max_pid)realloc_pidtable((int)p);
   pidtable[(int)p][0]=getpid();
   pidtable[(int)p][1]=1;
-}
+  return p;}
 pid_t vvfork (char *type)
 {
   pid_t p;
@@ -4069,7 +4028,7 @@ int    vwait_npid (int sub, int max, int min)
     
 pid_t  vwaitpid (pid_t p, int *status, int options)
 {
-  pid_t p2;
+
   
   p=waitpid (p, status, options);
     
@@ -4165,7 +4124,7 @@ int kill_child_pid(int pid)
 	  lock  (a, LWARNING,LRELEASE, " ");
 	}
     }
-  return;
+  return 1;
 }
 
 int kill_child_list (int *list)
@@ -4274,7 +4233,9 @@ int unpack_perl_script (char *name, char ***unpacked, int n)
 {
   int a=0;
   
+
   set_file2remove_extension(".pl", SET);
+  
   
   if ( name==NULL) unpack_all_perl_script (NULL);
   while ( !strm(PerlScriptName[a], "EndList") && !strm ( name, PerlScriptName[a]))
@@ -4321,16 +4282,16 @@ int unpack_perl_script (char *name, char ***unpacked, int n)
   else
     {
       FILE *fp;
-      char command[1000];
       sprintf ( unpacked[0][n], "%s", name);
       sprintf ( unpacked[1][n], "%s", vtmpnam(NULL));
       sprintf ( unpacked[2][n], "unpack");
       fp=vfopen (unpacked[1][n], "w");
       fprintf (fp, "%s\n%s\n", PERL_HEADER,PerlScriptFile[a]);            
       vfclose (fp);
-      sprintf ( command, "chmod u+x %s", unpacked[1][n]);
-      safe_system (command);
+      printf_system_direct ("chmod u+x %s", unpacked[1][n]);
+      
     }
+  
   set_file2remove_extension(".pl", UNSET);
   return ++n;
 }
@@ -4437,7 +4398,7 @@ char *get_tmp_4_tcoffee ()
       else if ( getenv ("TMP_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s", getenv("TMP_4_TCOFFEE"));
       else
 	{
-	  char command [1000];
+
 	  
 	  if ( strm (get_os(), "windows"))
 	    {
@@ -4565,7 +4526,7 @@ int get_nproc ()
       char *tmp;
       char string[100];
       tmp=vtmpnam (NULL);
-      printf_system ("grep \"^processor\" /proc/cpuinfo | wc -l>%s::IGNORE_FAILURE::", tmp);
+      printf_system_direct ("grep \"^processor\" /proc/cpuinfo | wc -l>%s", tmp);
       sprintf ( string, "%s", file2string (tmp));
       chomp (string);
       nproc=atoi (string);
@@ -4588,13 +4549,11 @@ char * get_os()
   if ( os[0])return os;
   else
     {
-      char *command;
       char *s;
 
-      command=vcalloc (100, sizeof (char));
       file=tmpnam (NULL);
-      sprintf ( command, "uname > %s", file);
-      system (command);
+      printf_system_direct ("uname > %s", file);
+
       s=file2string (file);
       lower_string (s);
       
@@ -4604,7 +4563,6 @@ char * get_os()
       else if ( strstr (s, "darwin"))sprintf ( os, "macosx");
       else sprintf (os, "linux");
       vfree (s);
-      vfree (command);
       vremove (file);
     }
   return os;
@@ -4618,9 +4576,9 @@ int cputenv (char *string, ...)
 {
   
 
-  size_t len ;
-  char *env;
-  char *file;
+
+
+
   char *s;
   char *s2;
   int r;
@@ -4742,7 +4700,7 @@ void printf_exit  (int exit_code, FILE *fp, char *string, ...)
   char *msg;
   
   cvsprintf (msg, string);
-  myexit(fprintf_error (fp, string));
+  myexit(fprintf_error (fp,msg));
   myexit (exit_code);
 }
 
@@ -5166,7 +5124,7 @@ char *get_proxy ()
 }
 int set_proxy (char *proxy)
 {
-  char *http;
+
   if (!proxy) return 0;
   
   cputenv ("HTTP_proxy_4_TCOFFEE=%s", proxy);
@@ -5246,7 +5204,7 @@ FILE* proxy_msg(FILE*fp)
   fprintf ( fp, "*         OR  %s/.t_coffee_env\n", get_dir_4_tcoffee());
   fprintf ( fp, "*************************************************************************************************\n");
   
-  return;
+  return fp;
 }
 FILE* email_msg(FILE*fp)
 {
@@ -5274,10 +5232,10 @@ FILE* email_msg(FILE*fp)
 
 void update_error_dir()
 {
-  char fdir[1000];
-  char *dir, *s;
-  char **list;
-  int a=0;
+
+
+  ;
+
   
   
 }
@@ -5285,13 +5243,13 @@ void update_error_dir()
 void dump_error_file()
 {
   char target[1000];
-  char fdir[1000];
-  char error[1000];
-  char warning[1000];
+
+
+
   char **list, *s;
   int a=0;
   FILE *fp;
-  char command[1000];
+
   
   sprintf ( target, "%s",getenv("ERRORFILE_4_TCOFFEE"));
   if ((fp=fopen (target, "w")))
@@ -5331,9 +5289,8 @@ void dump_error_file()
       fprintf ( fp, "\n######### FILES END  ######\n"); 
       fprintf ( fp, "\n######### ENVIRONEMENT  ######\n"); 
       fclose (fp);
-      sprintf ( command, "printenv >> %s", target);
-      system (command);
-      
+      printf_system_direct("printenv >> %s", target);
+            
       fprintf ( stderr, "\n#----- Dumped ErrorFile: %s\n",target);
     }
   else fprintf ( stderr, "\n#----- Could NOT Dumpe ErrorFile: %s -- Sorry \n", target);
@@ -5344,7 +5301,7 @@ void dump_error_file()
 
 FILE* error_msg(FILE*fp )
      {
-       if ( no_error_report)return;
+       if ( no_error_report)return fp;
 
        fprintf( fp,"\n\t******************************************************************");
        fprintf( fp, "\n\t* Abnormal Termination");
@@ -5550,7 +5507,6 @@ char *short_tmpnam_2(char *s)
 
 char *vremove2 (char *s)
 {
-  char command[1000];
   char list_file[1000];
   char ***list;
   int a;
@@ -5559,9 +5515,7 @@ char *vremove2 (char *s)
   //Remove filenames with a wildcard
   
   sprintf (list_file, "list_file_%d", (int)getpid());
-  sprintf (command, "ls -1 %s>%s 2>/dev/null", s, list_file);
-  safe_system (command);
-  
+  printf_system_direct("ls -1 %s>%s 2>/dev/null", s, list_file);
   list=file2list (list_file, " ");
  
   a=0;
@@ -5615,8 +5569,8 @@ int log_function ( char *fname)
   if ( file_exists (NULL,error_file))
     {
       
-      sprintf ( command, "cp %s %s", error_file, fname);
-      my_system ( command);
+      printf_system_direct ("cp %s %s", error_file, fname);
+
       fprintf( stderr,"\n\t******************************************************************");
       fprintf( stderr, "\n\t* Full Log of [%s, %s] in File [%s]",PROGRAM, VERSION, fname);
       fprintf( stderr, "\n\t******************************************************************\n");
@@ -5637,8 +5591,6 @@ FILE *NFP;/*Null file pointer: should only be open once*/
 static char *cache;
 char * prepare_cache ( const char *mode)
 {
-  char command[1000];
-
   cache =vcalloc ( 10000, sizeof(char));
   
   if (strm (mode, "use"))
@@ -5651,15 +5603,14 @@ char * prepare_cache ( const char *mode)
       
       cache=vtmpnam(cache);
       strcat (cache, "/");
-      sprintf ( command, "mkdir %s",cache);
-      my_system ( command);
+      printf_system_direct ("mkdir %s",cache);
+      
     }
   else if ( strm (mode, "update"))
     {
       cache=vtmpnam(cache);
       strcat (cache, "/");
-      sprintf ( command, "mkdir %s",cache);
-      my_system ( command);
+      printf_system_direct ("mkdir %s",cache);
     }
   else if ( strm (mode, "local"))
     {
@@ -5682,20 +5633,15 @@ char * get_cache_dir()
 
 void update_cache ()
 {
-  char command[1000];
   char old_cache[1000];
 
   sprintf ( old_cache, "%s", get_cache_dir());
   prepare_cache( "use");
-  sprintf ( command, "mv %s* %s",old_cache, get_cache_dir());
-  my_system (command);
-  sprintf ( command, "rmdir %s",old_cache);
-  my_system (command);
+  printf_system_direct ("mv %s* %s",old_cache, get_cache_dir());
+  printf_system_direct ("rmdir %s",old_cache);
 }
 void ignore_cache()
 {
-  char command[1000];
-
   if (getenv4debug ("DEBUG_TMP_FILE"))
     {
       fprintf ( stderr, "\n[DEBUG_TMP_FILE:%s] TEMPORARY CACHE HAS NOT Been Removed:\n\t%s\n", PROGRAM,get_cache_dir());
@@ -5703,8 +5649,7 @@ void ignore_cache()
   else
     {
 
-      sprintf ( command, "rm -r %s",get_cache_dir());
-      my_system (command);
+      printf_system_direct ("rm -r %s",get_cache_dir());
     }
   return;
   
@@ -6721,17 +6666,14 @@ int check_environement_variable_is_set ( char *variable, char *description, int 
 
 int url2file (char *address, char *out)
 {
-  char command[1000];
-  
-  
-  if      (check_program_is_installed ("wget",NULL, NULL,WGET_ADDRESS, IS_NOT_FATAL))sprintf (command, "wget %s -O%s >/dev/null 2>/dev/null", address, out);
-  else if (check_program_is_installed ("curl",NULL, NULL,CURL_ADDRESS, IS_NOT_FATAL))sprintf (command, "curl %s -o%s >/dev/null 2>/dev/null", address, out);
+   
+  if      (check_program_is_installed ("wget",NULL, NULL,WGET_ADDRESS, IS_NOT_FATAL))return printf_system( "wget %s -O%s >/dev/null 2>/dev/null", address, out);
+  else if (check_program_is_installed ("curl",NULL, NULL,CURL_ADDRESS, IS_NOT_FATAL))return printf_system("curl %s -o%s >/dev/null 2>/dev/null", address, out);
   else 
     {
       printf_exit (EXIT_FAILURE, stderr, "ERROR: Impossible to fectch external file: Neither wget nor curl is installed on your system [FATAL:%s]\n", PROGRAM);
       return EXIT_FAILURE;
     }
-  return safe_system (command);
 }
 
 int wget (char *address, char *out)
@@ -6776,7 +6718,7 @@ char *pg2path (char *pg)
   if ( !pg) return NULL;
   tmp=vtmpnam(NULL);
   
-  printf_system_direct("which %s>%s 2>/dev/null::IGNORE_FAILURE::", pg, tmp);
+  printf_system_direct("which %s>%s 2>/dev/null", pg, tmp);
   path=file2string (tmp);
   chomp (path);
   if (!file_exists (NULL,path) && !strstr (pg, ".exe"))
@@ -6942,7 +6884,9 @@ int isexec (char *file)
 {
   char *state;
   
+  
   state=ls_l(NULL,file);
+  
   if (state[0]==0) return 0;
   
   if ( state[0]=='d') return 0;
@@ -6956,7 +6900,6 @@ char *ls_l ( char *path,char *file)
 {
   char *tmpfile;
   static char *state;
-  char command[10000];
   FILE *fp;
   int a;
   
@@ -6967,11 +6910,9 @@ char *ls_l ( char *path,char *file)
       state=vcalloc (100, sizeof (char));
     }
   for (a=0;a<100; a++)state[a]=0;
-  if (!file)return state;
+  if (!file || !file_exists (path, file))return state;
+  printf_system_direct ("ls -l %s%s%s >%s 2>/dev/null",(path!=NULL)?path:"", (path!=NULL)?"/":"",file, tmpfile);
   
-  
-  sprintf ( command, "ls -l %s%s%s >%s 2>/dev/null", (path!=NULL)?path:"", (path!=NULL)?"/":"",file, tmpfile);
-  safe_system (command);
   fp=vfopen (tmpfile, "r");
   if (!fscanf ( fp, "%s", state))
     {
@@ -7009,7 +6950,7 @@ int my_mkdir ( char *dir_in)
 	    {
 	    
 	      char command [1000];
-	      printf_system_direct( command, "mkdir %s", dir);
+	      printf_system_direct("mkdir %s", dir);
 	      if ( access (dir, F_OK)==-1)
 		{
 		  myexit(fprintf_error ( stderr, "\nERROR: Could Not Create Directory %s [FATAL:%s]", dir, PROGRAM));		}
@@ -7068,17 +7009,15 @@ void create_file ( char *name)
 	}
 void delete_file ( char *fname)
 	{
-	char command[1000];
+
 	FILE * fp;
 	
 	fp=fopen ( fname, "w");
 	fprintf ( fp, "x");
     	fclose ( fp);
 	
-	sprintf ( command, "rm %s", fname);
-    	my_system ( command);
-    		
-    	}	
+	printf_system_direct ("rm %s", fname);
+	}	
 
 int util_rename ( char *from, char *to)
         {
@@ -8417,8 +8356,7 @@ char * bachup_env (char *mode,char *f)
   if (!f)f=file;
   if (strm (mode, "DUMP"))
     {
-      sprintf ( buf, "/usr/bin/env > %s", f);
-      system (buf);
+      printf_system_direct ("/usr/bin/env > %s", f);
       return EXIT_SUCCESS;
     }
   else if ( strm (mode,"RESTAURE") && file_exists (NULL,f))

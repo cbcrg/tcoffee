@@ -1,11 +1,7 @@
 #!/usr/bin/env perl
-#This script reads an Interleaved MSA and Outputs a Fasta_msa
-#if two sequences have the same name, the second one is renamed name_1 and so on
 use Env qw(HOST);
 use Env qw(HOME);
 use Env qw(USER);
-#Specific Files and Default Parameters
-# VersionTag  1.81
 
 $tmp="$ARGV[0].$$";
 open (IN, $ARGV[0]);
@@ -34,4 +30,4 @@ close (IN);
 close (OUT);
 unlink ($tmp);
 
-# Thu Jun  4 01:29:18 WEST 2009
+

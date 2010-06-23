@@ -35,6 +35,10 @@ Unpack Script wublast.pl
 
 Unpack Script blastpgp.pl
 
+Unpack Script ncbiblast_lwp.pl
+
+Unpack Script wublast_lwp.pl
+
 Unpack Script RNAplfold2tclib.pl
 
 Unpack Script fasta_seq2RNAplfold_templatefile.pl

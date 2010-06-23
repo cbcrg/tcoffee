@@ -36,40 +36,9 @@ Alignment * graph_aln (Alignment *A, Constraint_list *iCL, Sequence *S)
   CLIST_TYPE *entry=NULL;
   Constraint_list *CL;
   Seq=S;
-  
-  CL=duplicate_constraint_list (iCL);
-  for ( a=0; a<CL->ne; a++)
-    {
-      CL->L[a*CL->entry_len+WE]=CL->evaluate_residue_pair ( iCL, CL->L[a*CL->entry_len+SEQ1],CL->L[a+CL->entry_len+R1] ,CL->L[a*CL->entry_len+SEQ2],CL->L[a*CL->entry_len+R2]);
-     }
-   CL=sort_constraint_list_on_n_fields(CL, 0, CL->ne,WE,1);
-   G=aln2graph (A);
-
-   
-  Start=G[0][0];
-  start=0;
-  for (a=start; a<CL->ne; a++)
-    {
-      
-      cycle++;
-      entry=extract_entry(entry,a, CL);
-      fprintf ( stderr, "\r\tCompletion: [%5.2f%%]",(float)(a*100)/CL->ne);
-      G=add_constraint2graph_aln (G, entry[SEQ1], entry[R1]-1, entry[SEQ2],entry[R2]-1);
-    }
-   start=0;
-  for (a=start; a<CL->ne; a++)
-    {
-      
-      cycle++;
-      entry=extract_entry(entry,a, CL);
-      fprintf ( stderr, "\r\tCompletion: [%5.2f%%]",(float)(a*100)/CL->ne);
-      G=add_constraint2graph_aln (G, entry[SEQ1], entry[R1]-1, entry[SEQ2],entry[R2]-1);
-    }
-  
-  A=graph2aln (A,G[0][0], S);
-  
+  HERE ("Function graph_aln is deprecated");
   return A;
-
+  
 }
 
 void print_graph (CL_node *G, Sequence *S)

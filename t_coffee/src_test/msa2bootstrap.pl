@@ -5,7 +5,7 @@ $rseed= int(rand(100000))+1;
 
 if ( $#ARGV==-1)
   {
-    print "msa2bootstrap -i <input_file> -o <out_file> -input <seq|msa|matrix|tree> -n <N-Boostrap> -o <outtree> -tmode <nj|upgma|parsimony|ml> -dmode <kimura> -alignpg <t_coffee | muscle | clustalw> -rtree <file> -stype <prot|cdna|dna> -recompute -system <cygwin|unix>";
+    print "msa2bootstrap -i <input_file> -input <seq|msa|matrix|tree> -n <N-Boostrap> -o <outtree> -tmode <nj|upgma|parsimony|ml> -dmode <kimura> -alignpg <t_coffee | muscle | clustalw> -rtree <file> -stype <prot|cdna|dna> -recompute -system <cygwin|unix>";
     print "\n\t-i: input file, can be sequneces, msa, matrix, trees, type is specified via -input";
     print "\n\t-input: Type of input data";
     print "\n\t\tmsa: msa in fasta format";
@@ -145,7 +145,7 @@ if(($command=~/\-s (\d+)/))
   {
     $seed=$1;
   }
-print "-s=$seed";
+print "-s=$seed ";
 
 if(($command=~/\-run_name (\d+)/))
   {
@@ -156,7 +156,7 @@ else
     $msa=~/([^.]+)/;
     $suffix=$1;
   }
-print "-run_name=$suffix";
+print "-run_name=$suffix\n";
 
 
 if ( $input eq "seq")
@@ -266,7 +266,6 @@ if ( $input eq "msa")
 	    if ($n>1){print F "$seqboot_o\n$dmode\nM\nD\n$n\nY\n";}
 	    else {printf F "$seqboot_o\n$dmode\nY\n";}
 	    close (F);
-	    `cp $protdist_c pd_comm`;
 	    `protdist$exec_extension  < $protdist_c`;
 	    if ( -e "outfile"){ print "[OK]\n";}
 	    else { print "[FAILED]\n";&my_exit (EXIT_FAILURE);}
@@ -405,7 +404,7 @@ if ($n >1)
     print F "$nb_o\nY\n";
     close (F);
     `consense$exec_extension  < $con_c`;
-    if ( -e "outfile"){ print "[OK]\n";}
+    if ( -s "outtree"  > 0) { print "[OK]\n";}
     else { print "[FAILED]\n";&my_exit (EXIT_FAILURE);}
     `mv outtree $con_o`;
     unlink ("outfile");

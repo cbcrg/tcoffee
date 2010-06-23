@@ -821,7 +821,8 @@ int **index_seq_res      ( Sequence *S1, Sequence *S2, int **name_index)
 	  seq2=Profile->seq_al[name_index[a][1]];
 	}
       
-      len1=strlen (seq1);len2=strlen (seq2);
+      len1=(seq1)?strlen (seq1):0;
+      len2=(seq2)?strlen (seq2):0;
       index[a]=vcalloc (len2, sizeof(int));
 
       
@@ -4366,6 +4367,71 @@ char *    aln_column2string (Alignment *A, int p)
       }
     return s;
   }
+
+
+int **fix_seq_aln (Sequence *S, Alignment*A, int **cache)
+{
+  int s, b,i,nr;
+  
+  if (!cache)cache=vcalloc (S->nseq, sizeof (int*));
+  
+  for (s=0; s<A->nseq; s++)
+    {
+      if ((i=name_is_in_list (A->name[s], S->name, S->nseq, 100)==-1))continue;
+      for (nr=0,b=0; b<A->len_aln; b++)
+	{
+	  if (!is_gap(A->seq_al[s][b]))
+	    cache[i][++nr]=b+1;
+	}
+    }
+  return cache;
+}
+
+int **fix_seq_seq (Sequence *S0, Sequence *Sx)
+{
+  //Expresses seq1 in terms of s2
+  //sequences 0-N
+  //residues  1-N+1
+  int s0, r0,i;
+  int **index;
+
+  index=vcalloc ( S0->nseq, sizeof (int*));
+  for (s0=0; s0<S0->nseq; s0++)
+    {
+      int l=S0->len[s0];
+      index[s0]=vcalloc (l+1, sizeof (int));
+      i=index[s0][0]=name_is_in_list (S0->name[s0], Sx->name, Sx->nseq, 100);
+      if (i==-1);
+      else if (strm (S0->seq[s0], Sx->seq[i]))
+	{
+	  for (r0=1; r0<=l; r0++)
+	    {
+	      index [s0][r0]=r0;
+	    }
+	}
+      else
+	{
+	  int c;
+	  int nr0=0;
+	  int nr1=0;
+	  
+	  Alignment *B=align_two_sequences (S0->seq[s0],Sx->seq[i],(strm(S0->type, "PROTEIN"))?"blosum62mt":"idmat",-4,-1, "myers_miller_pair_wise");
+	  for (c=0; c<B->len_aln; c++)
+	    {
+	      
+	      int g0=is_gap(B->seq_al[0][c]);
+	      int g1=is_gap(B->seq_al[1][c]);
+	      nr0+=1-g0;
+	      nr1+=1-g1;
+	      if (!g0 && !g1)index[s0][nr0]=nr1;
+	    }
+	  if (aln2sim(B, "idmat")<20) add_warning (stderr,"Unreliable reconciliation for sequence %s. If it a PDB, check source file", S0->name[s0]);
+	  free_aln (B);B=NULL;
+	}
+    }
+  return index;
+}
+
 Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
         {
 	int a, b, c;
@@ -4385,7 +4451,8 @@ Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
 	
 
 	if ( S==NULL)return A;
-	
+	reorder_aln (A, S->name,S->nseq);
+	if (A->seq_cache)free_int (A->seq_cache, -1);
 	A->seq_cache=declare_int ( S->nseq, MAX((A->len_aln+1), S->max_len+1));
 	
 	for (a=0; a< S->nseq; a++)
@@ -5571,7 +5638,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   if (!is_pdb_file (P->template_file))
     {
 
-      add_warning(stderr, "\nWARNING: _P_ Template | %s | Could Not Be Found\n",p);
+      add_warning(stderr, "WARNING: _P_ Template | %s | Could Not Be Found\n",p);
       free_X_template (P);
       return NULL;
     }
@@ -5593,7 +5660,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 
   if ( PS==NULL)
     {
-      add_warning( stderr, "\nWARNING:  _P_  Template |%s| Could Not be Used for Sequence |%s|: Structure Not Found", P->template_name, name);
+      add_warning( stderr, "WARNING:  _P_  Template |%s| Could Not be Used for Sequence |%s|: Structure Not Found", P->template_name, name);
       free_X_template (P);P=NULL;
     }
   else
@@ -5613,14 +5680,14 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
      
       if (sim<=minsim)
 	{
-	  add_warning( stderr, "\nWARNING:  _P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_minsim=%d flag\n",P->template_name,name, sim, minsim, sim);
+	  add_warning( stderr, "WARNING:  _P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_minsim=%d flag\n",P->template_name,name, sim, minsim, sim);
 	  print_aln (A);
 	  free_X_template (P);
 	  P=NULL;
 	}
       else if ( cov<=mincov)
 	{
-	  add_warning( stderr, "\nWARNING:  _P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_mincov=%d flag\n", P->template_name,name, cov, mincov,cov);
+	  add_warning( stderr, "WARNING:  _P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_mincov=%d flag\n", P->template_name,name, cov, mincov,cov);
 	  print_aln (A);
 	  free_X_template (P);P=NULL;
 	}
@@ -5652,7 +5719,7 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
   if (!is_aln(R->template_name) && !is_seq (R->template_name))
     {
       
-      add_warning ( stderr, "\nWARNING: _R_ Template %s Could Not Be Found\n",R->template_name);
+      add_warning ( stderr, "WARNING: _R_ Template %s Could Not Be Found\n",R->template_name);
       free_X_template (R);
       return NULL;
     }
@@ -5701,7 +5768,7 @@ struct X_template *fill_T_template ( char *name,char *p, Sequence *S)
   if (!is_aln(T->template_name) && !is_seq (T->template_name))
     {
       
-      add_warning ( stderr, "\nWARNING: _T_ Template %s Could Not Be Found\n",T->template_name);
+      add_warning ( stderr, "WARNING: _T_ Template %s Could Not Be Found\n",T->template_name);
       free_X_template (T);
       return NULL;
     }
@@ -5724,7 +5791,7 @@ struct X_template *fill_U_template ( char *name,char *p, Sequence *S)
   
   if (!check_file_exists(U->template_name))
     {
-      add_warning ( stderr, "\nWARNING: _U_ Template %s Could Not Be Found\n",U->template_name);
+      add_warning ( stderr, "WARNING: _U_ Template %s Could Not Be Found\n",U->template_name);
       free_X_template (U);
       return NULL;
     }
@@ -5747,7 +5814,7 @@ struct X_template *fill_E_template ( char *name,char *p, Sequence *S)
   if (!is_aln(E->template_name) && !is_seq (E->template_name))
     {
       
-      add_warning ( stderr, "\nWARNING: _E_ Template %s Could Not Be Found\n",E->template_name);
+      add_warning ( stderr, "WARNING: _E_ Template %s Could Not Be Found\n",E->template_name);
       free_X_template (E);
       return NULL;
     }
@@ -9190,8 +9257,8 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
     {
       NT_node **T;
       Sequence *O;
-
-      sim=sim_array2dist_array ( sim, MAXID);
+      
+      sim=sim_array2dist_array ( NULL, MAXID);
       T=int_dist2nj_tree (sim, A->name, A->nseq, NULL);
       O=tree2seq (T[3][0], NULL);
       A=reorder_aln (A, O->name, O->nseq);
@@ -10717,7 +10784,8 @@ char * test_gene2prot (Constraint_list *CL, int s1)
 	   int  *is_coding;
 	   int *is_t4;
 	   char *codon;
-
+	   int s, r, s2, r2, w2;
+	   
 	   static int *entry;
 	   int tot=0;
 	   
@@ -10733,18 +10801,26 @@ char * test_gene2prot (Constraint_list *CL, int s1)
 	   
 
 	   potential=vcalloc (l+1, sizeof (int));
-	   CL=index_constraint_list ( CL);
-	   for (nal=0, a=0; a<(CL->S)->nseq; a++)
-	       for ( b=CL->start_index[s1][a]; b< CL->end_index[s1][a];b++)
-	           {
-		       entry=extract_entry(entry, b, CL);
-		       if ( entry[SEQ1]==s1)potential[entry[R1]-1]+=entry[WE];
-		       else if (  entry[SEQ2]==s1)potential[entry[R2]-1]+=entry[WE];
-		       tot+=entry[WE];
+	   
+	   for (nal=0, s=0; s<(CL->S)->nseq; s++)
+	     {
+	       for ( r=1; r<=(CL->S)->len[s]; r++)
+		 {
+		   for ( b=1; b<CL->residue_index[s1][r][0]; b++)
+		     {
+		       
+		       s2=CL->residue_index[s][r][b+SEQ2];
+		       r2=CL->residue_index[s][r][b+R2];
+		       w2=CL->residue_index[s][r][b+WE];
+		       if (s==s1)potential[r-1]+=w2;
+		       else if ( s2==s1)potential[r2-1]+=w2;
+		       tot+=w2;
 		       nal++;
-		   }
-
-
+		     }
+		 }
+	     }
+	   
+	   
 	   SPLICE_PENALTY=10000;
 	   FRAME_PENALTY=1000;
 

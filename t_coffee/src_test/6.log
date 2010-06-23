@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,6 +13,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[1] 	EXPRESSO
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
@@ -153,76 +155,39 @@ INPUT FILES
 Looking For Sequence Templates:
 
 	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
-	------ Fetch Templates [Multi Core Mode 2 CPUs]
-k 1
-k 1
-d 1
-s 1
-n 1
-a 1
-p 1
-k 1
-r 1
-a 1
-m 1
-t 1
-s 1
-f 1
-m 1
-f 1
-f 1
-s 1
-s 1
-d 1
-f 1
-r 1
-s 1
-k 1
-h 1
-s 1
-d 1
-l 1
-s 1
-i 1
-v 1
-e 1
-m 1
-s 1
-k 1
-a 1
-a 1
-g 1
-a 1
-a 1
-w 1
-k 1
-e 1
-l 1
-g 1
-p 1
-e 1
-e 1
-r 1
-k 1
-v 1
-y 1
-e 1
-e 1
-m 1
-a 1
-e 1
-k 1
-d 1
-k 1
-e 1
-r 1
-y 1
-k 1
-r 1
-e 1
-m 1
-	Process: >hmgb_chite _P_ 1QRVB [EBI/blast/pdb][READ CACHE]
-	Process: >hmgl_wheat _P_ 2YQIA [EBI/blast/pdb][READ CACHE]
-	Process: >hmgt_mouse _P_ 3FGHA [EBI/blast/pdb][READ CACHE]
-	Process: >hmgl_trybr _P_ 1LWMA [EBI/blast/pdb][READ CACHE]
-HERE: *****
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+58020 -- WARNING: Could Not Use EMAIL
+
+
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 58013                                    
+58020 -- ERROR: EMAIL
+58020 -- COM: tc_generic_method.pl
+58020 -- STACK: 58018 -> 58020
+*************************************************************************************************
+
+
+*************************************************************************************************
+*                        WARNING LIST                                    
+58020 -- WARNING: Could Not Use EMAIL
+*************************************************************************************************
+
+
+*************************************************************************************************
+*                        CONFIGURATION: Missing Email                                        
+*                                                                                               
+* This mode of T-Coffee uses the  EBI BLAST webservices. The EBI requires a valid E-mail     
+* address for this service to be used (check: www.ebi.ac.uk/Tools/webservices/).                
+*                                                                                               
+* To provide the email, add to the command line:*
+*                                                                                               
+*                  -email=<youremail>  *
+*To make it permanent:
+*                   export EMAIL_4_TCOFFEE=<your email>
+*Add this line to either:
+*             ~/.bashrc
+*         OR  /Users/cnotredame/.t_coffee/.t_coffee_env
+*************************************************************************************************
+
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 58013 ppid 58012
+#CL: t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair 

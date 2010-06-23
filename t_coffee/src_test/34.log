@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,6 +13,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[0] 
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
@@ -171,16 +173,14 @@ READ/MAKE LIBRARIES:[2]
 
 	proba_pair [method]
 
-	Multi Core Mode: 2 processors [subset]
+	Multi Core Mode: 4 processors [subset]
 
-		[Submit   Job][TOT=    7][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    7][ 28 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    7][ 42 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    7][ 57 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    7][ 71 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    7][ 85 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    7][100 %][ELAPSED TIME:    0 sec.]
+		[Submit   Job][TOT=    4][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    4][ 50 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    4][ 75 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    4][100 %][ELAPSED TIME:    0 sec.]
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [5743]
+	Library Total Size: [12350]
 
-Library Relaxation:[5743] --->[4649]
-
-	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
+Library Relaxation:[48662] --->[44325]
 
 
 WEIGHTED MODE:t_coffee
@@ -197,12 +197,22 @@ MAKE GUIDE TREE
 	[MODE=nj][DONE]
 
 PROGRESSIVE_ALIGNMENT [Tree Based]
+HERE: ****ECLMODE4TC:5
+HERE: ****ECLMODE4TC:5
 
-	Group    7: [Group    6 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  71][Len=  176][PID:4908]
-	Group    8: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Score=  63][Len=  179][PID:4908]
-	Group    9: [Group    3 (   1 seq)] with [Group    8 (   2 seq)]-->[Score=  65][Len=  184][PID:4908]
-	Group   10: [Group    9 (   3 seq)] with [Group    7 (   2 seq)]-->[Score=  67][Len=  184][PID:4908]
-	Group   11: [Group    2 (   1 seq)] with [Group   10 (   5 seq)]-->[Score=  22][Len=  208][PID:4908]
+	Group    7: [Group    6 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  38][Len=  176][PID:59286]HERE: ****ECLMODE4TC:5
+HERE: ****ECLMODE4TC:5
+
+	Group    8: [Group    5 (   1 seq)] with [Group    4 (   1 seq)]-->[Score=  53][Len=  179][PID:59286]HERE: ****ECLMODE4TC:5
+HERE: ****ECLMODE4TC:5
+
+	Group    9: [Group    8 (   2 seq)] with [Group    3 (   1 seq)]-->[Score=  37][Len=  184][PID:59286]HERE: ****ECLMODE4TC:5
+HERE: ****ECLMODE4TC:5
+
+	Group   10: [Group    9 (   3 seq)] with [Group    7 (   2 seq)]-->[Score=  43][Len=  184][PID:59286]HERE: ****ECLMODE4TC:5
+HERE: ****ECLMODE4TC:5
+
+	Group   11: [Group    2 (   1 seq)] with [Group   10 (   5 seq)]-->[Score=  16][Len=  204][PID:59286]
 
 
 
@@ -214,46 +224,54 @@ OUTPUT RESULTS
 
 # TIP :See The Full Documentation on www.tcoffee.org
 # TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
-# TIP  9:  -special_mode=dmcoffee to combine alternative msa methods on debian
+# TIP 11:  -infile=<aln> -special_mode=evaluate to evaluate your own alignment
 
 # Command Line: t_coffee sample_seq2.fasta -multi_core jobs  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 8.143 Mb, Max= 9.194 Mb
-# T-COFFEE CPU Usage: 375 millisec
-# Results Produced with T-COFFEE (Version_8.07)
+# T-COFFEE Memory Usage: Current= 18.121 Mb, Max= 20.443 Mb
+# T-COFFEE CPU Usage: 0 millisec
+# Results Produced with T-COFFEE (Version_8.80)
 # T-COFFEE is available from http://www.tcoffee.org
-CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.34 sec, SCORE=62, Nseq=6, Len=208 
+CLUSTAL FORMAT for T-COFFEE Version_8.80 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=40, Nseq=6, Len=204 
 
-1cms            G--EVASVPLTN------YLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNAC
-4ape            S---TGSATTTPID----SLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEV
-3app            A--ASGVATNTPTA-----NDEEYITPVTIGG--TTLNLNFDTGSADLWVFSTELPASQQ
-2apr            A--GVGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCT-NCG
-4pep            ----IGDEPLEN------YLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLAC
-1cms_1          YTGSLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLVGPSSD------
-                        .           *      : :.         :***::.:   *        
+1cms            --GEVASVPLTN------YLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWV
+4ape            --S-TGSATTTPID----SLDDAYITPVQIGTPAQTLNLDFDTGSSDLWV
+3app            --AASGVATNTPTA----N-DEEYITPVTIGG--TTLNLNFDTGSADLWV
+2apr            --AGVGTVPMTD-Y----GNDIEYYGQVTIGTPGKKFNLDFDTGSSDLWI
+4pep            ----IGDEPLEN------YLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWV
+1cms_1          YTGSLHWVPVTVQQYWQFTVDSVTISGVVVACEGGC-QAILDTGTSKLVG
+                        .           *      : :.         :***::.:  
 
-1cms            KNHQRFDPRKSSTF-QNLGKPLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEP
-4ape            DGQTIYTPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVS
-3app            SGHSVYNPSAT--GKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQIS
-2apr            SGQTKYDPNQSSTY-QADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREA
-4pep            SDHNQFNPDDSSTF-EATSQELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEP
-1cms_1          ---------------------------------------------ILNIQQAIGATQNQY
-                                                             :    * .  :    
+1cms            PSIYCKSNACKNHQRFDPRKSSTFQ-NLGKPLSIHYGTGS-MQGILGYDT
+4ape            FSSETTASEVDGQTIYTPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDT
+3app            FSTELPASQQSGHSVYNPSAT--GKELSGYTWSISYGDGSSASGNVFTDS
+2apr            ASTLCT-NCGSGQTKYDPNQSSTYQ-ADGRTWSISYGDGSSASGILAKDN
+4pep            PSVYCSSLACSDHNQFNPDDSSTFE-ATSQELSITYGTGS-MTGILGYDT
+1cms_1          PS------------------------------------------------
+                 *                                                
 
-1cms            GDVFTYAEFD--------GILGMAYPSLASEY-------SIPVFDNM-MNRHLV-----A
-4ape            SSFTEDSTID--------GLLGLAFSTLNTVSPTQ----QKTFFDNA---KASL-----D
-3app            AQFQQDTNND--------GLLGLAFSSINTVQPQS----QTTFFDTV---KSSL-----A
-2apr            ASFAS-GPND--------GLLGLGFDTITTVRG------VKTPMDNL-ISQGLI-----S
-4pep            GSFLYYAPFD--------GILGLAYPSISASG-------ATPVFDNL-WDQGLV-----S
-1cms_1          GEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTSQDQGFCTSGFQSENHSQKWILGDVFI
-                ...                : *  :    :           . ::.    :  :      
+1cms            VTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLAS
+4ape            VSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNT
+3app            VTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINT
+2apr            VNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFDTITT
+4pep            VQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISA
+1cms_1          ---SDILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPS
+                   ..:    * .  :    ...                : *  :    :
 
-1cms            QDLFSVYMDRNGQ--ESMLTLGAIDPSY
-4ape            SPVFTADLGY---HAPGTYNFGFIDTTA
-3app            QPLFAVALKH---QQPGVYDFGFIDSSK
-2apr            RPIFGVYLGKAKNGGGGEYIFGGYDSTK
-4pep            QDLFSVYLSSNDD-SGSVVLLGGIDSSY
-1cms_1          REYYSVFDR-----A---NNLVGLAKAI
-                   : .              :     : 
+1cms            -------EYSIPVFD-NMMNRHLVAQDLFS-VYMDRNGQE--SMLTLGAI
+4ape            VSP----TQQKTFFD-NA--KASLDSPVFT-ADLGYH---APGTYNFGFI
+3app            VQP----QSQTTFFD-TV--KSSLAQPLFA-VALKHQ---QPGVYDFGFI
+2apr            V------RGVKTPMD-NLISQGLISRPIFG-VYLGKAKNGGGGEYIFGGY
+4pep            -------SGATPVFD-NLWDQGLVSQDLFS-VYLSSNDDS-GSVVLLGGI
+1cms_1          AYTSQDQGFCTSGFQSENHSQKWILGDVFIREYYSVFDR-ANNLV---GL
+                           . ::     :  :   :*             .       
+
+1cms            DPSY
+4ape            DTTA
+3app            DSSK
+2apr            DSTK
+4pep            DSSY
+1cms_1          AKAI
+                  : 
 
 
 

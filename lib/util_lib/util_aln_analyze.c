@@ -5860,7 +5860,7 @@ int *   aln2predictive_positions_scan (Alignment *A, Alignment *B, char *mode, i
 	  {
 	    plist[nplist][1]=a;
 	    plist[nplist][2]=b;
-	    plist[nplist][3]=c;
+	    plist[nplist][3]=0;
 	    
 	    
 	    plist[nplist][0]=3;

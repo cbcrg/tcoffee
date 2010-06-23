@@ -33,7 +33,7 @@ int sub_aln2ecl_raw_score (Alignment *A, Constraint_list *CL, int ns, int *ls)
   A=reorder_aln (A, (CL->S)->name,(CL->S)->nseq);
   pos=aln2pos_simple ( A,A->nseq);
   
-  CL=index_res_constraint_list (CL, CL->weight_field);
+  
   
   for (p1=0; p1<A->len_aln; p1++)
     {
@@ -64,7 +64,7 @@ int aln2ecl_raw_score (Alignment *A, Constraint_list *CL)
   A=reorder_aln (A, (CL->S)->name,(CL->S)->nseq);
   pos=aln2pos_simple ( A,A->nseq);
   
-  CL=index_res_constraint_list (CL, CL->weight_field);
+
   
   for (p1=0; p1<A->len_aln; p1++)
     {
@@ -117,7 +117,7 @@ int sub_aln2sub_aln_score ( Alignment *A,Constraint_list *CL, const char *mode, 
   free_int (pos, -1);
    
   score=(int)(((float)score)/(A->len_aln*SCORE_K));
-  score=(int)(CL->L && CL->normalise)?((score*MAXID)/(CL->normalise)):(score);
+  score=(int)(CL->residue_index && CL->normalise)?((score*MAXID)/(CL->normalise)):(score);
   return (int)score;
 }
 int sub_aln2sub_aln_raw_score ( Alignment *A,Constraint_list *CL, const char *mode, int *ns, int **ls)
@@ -236,10 +236,7 @@ Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, co
      {
        return non_extended_t_coffee_evaluate_output ( IN,CL);
      }
-   else if ( strm5 ( mode, "tcoffee_heuristic","t_coffee_heuristic","heuristic_tcoffee","heuristic_t_coffee", "dali"))
-     {
-       return heuristic_coffee_evaluate_output ( IN,CL);
-     }
+   
    else if ( strm (mode, "sequences"))
      {
        return coffee_seq_evaluate_output ( IN,CL);
@@ -1042,103 +1039,7 @@ Alignment *coffee_seq_evaluate_output_old2 ( Alignment *IN, Constraint_list *CL)
 }
 
 
-Alignment * heuristic_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
-    {
-    int a,b, c,res, s, s1, s2, r1, r2;	
-    Alignment *OUT=NULL;
-    int **pos;
-    int max_score_r, score_r;
-    double score_col=0, score_aln=0;
-    int max_score_col, max_score_aln;
-    double *max_score_seq, *score_seq;
-    int **tot_extended_weight;
-    int **res_extended_weight;
-    int n_res_in_col;
 
-    /*
-      Residue x: sum of observed extended X.. /sum of possible X..
-    */
-
-    if ( !CL->evaluate_residue_pair){fprintf ( stderr, "\nWARNING: CL->evaluate_residue_pair Not set\nSet to: extend_residue_pair\n");CL->evaluate_residue_pair= extend_residue_pair; }
-	
-    OUT=copy_aln (IN, OUT);
-    pos=aln2pos_simple(IN, IN->nseq);
-
-
-    max_score_seq=vcalloc ( IN->nseq, sizeof (double));
-    score_seq=vcalloc ( IN->nseq, sizeof (double));
-    
-    tot_extended_weight=list2residue_partial_extended_weight(CL);
-    res_extended_weight=declare_int ((CL->S)->nseq, (CL->S)->max_len+1);
-         
-    for (a=0; a< IN->len_aln; a++)
-        {
-	    for ( b=0; b< IN->nseq-1; b++)
-		{
-		s1=IN->order[b][0];
-		r1=pos[b][a];
-		for ( c=b+1; c< IN->nseq; c++)
-		    {
-		    s2=IN->order[c][0];
-		    r2=pos[c][a];	
-		    if ( s1==s2 && !CL->do_self)continue;
-		    else if ( r1<=0 || r2<=0)   continue;		    
-		    else 
-		      {
-			if ( s1< s2)s=(CL->evaluate_residue_pair)( CL, s1, r1, s2, r2);
-			else        s=(CL->evaluate_residue_pair)( CL, s2, r2, s1, r1);
-			res_extended_weight[s1][r1]+=s;
-			res_extended_weight[s2][r2]+=s;
-		      }
-		    }
-		}
-	}
-        
-  
-    sprintf ( OUT->name[IN->nseq], "cons");
-    for ( max_score_aln=0,score_aln=0,a=0; a< IN->len_aln; a++)
-	{
-	OUT->seq_al[IN->nseq][a]=NO_COLOR_RESIDUE;
-	for ( n_res_in_col=0,b=0; b<IN->nseq; b++){n_res_in_col+=(pos[b][a]>0)?1:0;}
-	for ( max_score_col=0, score_col=0,b=0; b< IN->nseq; b++)
-	    {
-	    OUT->seq_al[b][a]=NO_COLOR_RESIDUE;
-	    s1=IN->order[b][0];
-	    r1=pos[b][a];
-	    if (r1<=0)continue;
-	    else
-	      {
-		max_score_r  =tot_extended_weight[s1][r1];
-		score_r=res_extended_weight[s1][r1];
-		res=(max_score_r==0 ||n_res_in_col<2 )?NO_COLOR_RESIDUE:((score_r*10)/max_score_r);
-		(OUT)->seq_al[b][a]=(res==NO_COLOR_RESIDUE)?res:(MIN(res, 9));
-		max_score_col+=max_score_r;
-		    score_col+=score_r;
-		max_score_seq[b]+=max_score_r;
-		    score_seq[b]+=score_r;
-		max_score_aln+=max_score_r;
-		    score_aln+=score_r;
-	      }
-	    res=(max_score_col==0 || n_res_in_col<2)?NO_COLOR_RESIDUE:((score_col*10)/max_score_col);	
-	    OUT->seq_al[IN->nseq][a]=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
-	    }
-	}
-    IN->score_aln=OUT->score_aln=MIN(100,((max_score_aln==0)?0:((score_aln*100)/max_score_aln)));
-    for ( a=0; a< OUT->nseq; a++)
-      {
-	OUT->score_seq[a]=MIN(100,((max_score_seq[a]==0)?0:((score_seq[a]*100)/max_score_seq[a])));
-      }
-
-    
-    vfree ( score_seq);
-    vfree ( max_score_seq);
-    
-    free_int (tot_extended_weight, -1);
-    free_int (res_extended_weight, -1);
-    free_int (pos, -1);
-    
-    return OUT;
-    }
 Alignment * non_extended_t_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     {
     int a,b, c,res, s1, s2, r1, r2;	
@@ -1156,7 +1057,7 @@ Alignment * non_extended_t_coffee_evaluate_output ( Alignment *IN,Constraint_lis
     int p;
     int max_score=0;
 
-    entry=vcalloc (CL->entry_len, CL->el_size);
+    entry=vcalloc (CL->entry_len+1, CL->el_size);
     if ( !CL->evaluate_residue_pair){fprintf ( stderr, "\nWARNING: CL->evaluate_residue_pair Not set\nSet to: extend_residue_pair\n");CL->evaluate_residue_pair= extend_residue_pair; }
 	
     OUT=copy_aln (IN, OUT);
@@ -1815,7 +1716,7 @@ int evaluate_tm_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, int 
     {
       st= vcalloc ((CL->S)->nseq, sizeof (char*));
       RF=atoigetenv ("TM_FACTOR_4_TCOFFEE");
-      if ( !F)F=10;
+      if ( !RF)RF=10;
     }
   
   if (!st[s1])st[s1]=seq2T_template_string((CL->S),s1);
@@ -1977,40 +1878,40 @@ int residue_pair_extended_list_quadruplet (Constraint_list *CL, int s1, int r1, 
 	      for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=vcalloc ( (CL->S)->len[a]+1, sizeof (int));
 	    }
 	  
-	  CL=index_res_constraint_list ( CL, field);	  
+
 	  hasch[s1][r1]=100000;
-	  for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	  for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	    {
-	      t_s=CL->residue_index[s1][r1][a];
-	      t_r=CL->residue_index[s1][r1][a+1];
-	      t_w=CL->residue_index[s1][r1][a+2];
+	      t_s=CL->residue_index[s1][r1][a+SEQ2];
+	      t_r=CL->residue_index[s1][r1][a+R2];
+	      t_w=CL->residue_index[s1][r1][a+WE];
 	      if ( CL->seq_for_quadruplet[t_s])
 		{
-		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=3)
+		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=ICHUNK)
 		    {
-		      q_s=CL->residue_index[t_s][t_r][b];		  
-		      q_r=CL->residue_index[t_s][t_r][b+1];
-		      q_w=CL->residue_index[t_s][t_r][b+2];
+		      q_s=CL->residue_index[t_s][t_r][b+SEQ2];		  
+		      q_r=CL->residue_index[t_s][t_r][b+R2];
+		      q_w=CL->residue_index[t_s][t_r][b+WE];
 		      if (CL-> seq_for_quadruplet[q_s])
-			  hasch[q_s][q_r]=MIN(q_w,t_w);
+			hasch[q_s][q_r]=MIN(q_w,t_w);
 		      
 		    }
 		}
 	    }
 	  
 	  
-	  for (a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	  for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	    {
-	      t_s=CL->residue_index[s2][r2][a];
-	      t_r=CL->residue_index[s2][r2][a+1];
-	      t_w=CL->residue_index[s2][r2][a+2];
+	      t_s=CL->residue_index[s2][r2][a+SEQ2];
+	      t_r=CL->residue_index[s2][r2][a+R2];
+	      t_w=CL->residue_index[s2][r2][a+WE];
 	      if ( CL->seq_for_quadruplet[t_s])
 		{
-		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=3)
+		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=ICHUNK)
 		    {
-		      q_s=CL->residue_index[t_s][t_r][b];		  
-		      q_r=CL->residue_index[t_s][t_r][b+1];	
-		      q_w=CL->residue_index[t_s][t_r][b+2];	
+		      q_s=CL->residue_index[t_s][t_r][b+SEQ2];		  
+		      q_r=CL->residue_index[t_s][t_r][b+R2];	
+		      q_w=CL->residue_index[t_s][t_r][b+WE];	
 		      if (hasch[q_s][q_r] && CL->seq_for_quadruplet[q_s])
 			score+=MIN(hasch[q_s][q_r],MIN(q_w,t_w));
 		    }
@@ -2019,17 +1920,17 @@ int residue_pair_extended_list_quadruplet (Constraint_list *CL, int s1, int r1, 
 	  
 	  score=(CL->normalise)?((score*CL->normalise)/CL->max_ext_value):score;
 	  
-	  for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	  for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	    {
-	      t_s=CL->residue_index[s1][r1][a];
-	      t_r=CL->residue_index[s1][r1][a+1];
-	      t_w=CL->residue_index[s1][r1][a+2];
+	      t_s=CL->residue_index[s1][r1][a+SEQ2];
+	      t_r=CL->residue_index[s1][r1][a+R2];
+	      t_w=CL->residue_index[s1][r1][a+WE];
 	      if ( CL->seq_for_quadruplet[t_s])
 		{
-		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=3)
+		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=ICHUNK)
 		    {
-		      q_s=CL->residue_index[t_s][t_r][b];		  
-		      q_r=CL->residue_index[t_s][t_r][b+1];		 
+		      q_s=CL->residue_index[t_s][t_r][b+SEQ2];		  
+		      q_r=CL->residue_index[t_s][t_r][b+R2];		 
 		      hasch[q_s][q_r]=0;
 		    }
 		}
@@ -2098,25 +1999,25 @@ int residue_pair_extended_list4rna ( Constraint_list *CL,Constraint_list *R, int
   n1=n2=0;
   
   list1[n1++]=r1;
-  for (a=1; a<R->residue_index[s1][r1][0]; a+=3)
+  for (a=1; a<R->residue_index[s1][r1][0]; a+=ICHUNK)
     {
-      list1[n1++]=R->residue_index[s1][r1][a+1];
+      list1[n1++]=R->residue_index[s1][r1][a+R2];
     }
   
 
   list2[n2++]=r2;
-  for (a=1; a<R->residue_index[s2][r2][0]; a+=3)
+  for (a=1; a<R->residue_index[s2][r2][0]; a+=ICHUNK)
     {
-      list2[n2++]=R->residue_index[s2][r2][a+1];
+      list2[n2++]=R->residue_index[s2][r2][a+R2];
     }
   
   
   score=residue_pair_extended_list ( CL, s1,list1[0], s2,list2[0]);
- 
+  
   for (score2=0,a=1; a<n1; a++)
     for ( b=1; b<n2; b++)
       score2=MAX(residue_pair_extended_list ( CL, s1,list1[a], s2,list2[b]), score2);
-
+  
   if ( n1==1 || n2==1);
   else score=MAX(score,score2);
   
@@ -2144,7 +2045,6 @@ int residue_pair_extended_list4rna_ref ( Constraint_list *CL, int s1, int r1, in
 	{
 	  R=read_constraint_list_file (R, list[a]);
 	}
-      R=index_res_constraint_list (R, CL->weight_field);
      
     }
 
@@ -2152,16 +2052,16 @@ int residue_pair_extended_list4rna_ref ( Constraint_list *CL, int s1, int r1, in
   n1=n2=0;
 
   list1[n1++]=r1;
-  for (a=1; a<R->residue_index[s1][r1][0]; a+=3)
+  for (a=1; a<R->residue_index[s1][r1][0]; a+=ICHUNK)
     {
-      list1[n1++]=R->residue_index[s1][r1][a+1];
+      list1[n1++]=R->residue_index[s1][r1][a+R2];
     }
   
 
   list2[n2++]=r2;
-  for (a=1; a<R->residue_index[s2][r2][0]; a+=3)
+  for (a=1; a<R->residue_index[s2][r2][0]; a+=ICHUNK)
     {
-      list2[n2++]=R->residue_index[s2][r2][a+1];
+      list2[n2++]=R->residue_index[s2][r2][a+R2];
     }
   
   
@@ -2209,7 +2109,8 @@ int residue_pair_extended_list_raw ( Constraint_list *CL, int s1, int r1, int s2
 	*/
 	
 	field=CL->weight_field;
-	
+	field=WE;
+
 	if ( r1<=0 || r2<=0)return 0;
 	if ( !hasch || max_len!=(CL->S)->max_len)
 	       {
@@ -2218,33 +2119,33 @@ int residue_pair_extended_list_raw ( Constraint_list *CL, int s1, int r1, int s2
 	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
 	       }
 	
-	CL=index_res_constraint_list ( CL, field);
+
 
 	/* Check matches for R1 in the indexed lib*/
 	hasch[s1][r1]=FORBIDEN;
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
-	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+2];
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
+	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];
 	  }
 
 	/*Check Matches for r1 <-> r2 in the indexed lib */
-	for (a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	  {
-	    t_s=CL->residue_index[s2][r2][a];
-	    t_r=CL->residue_index[s2][r2][a+1];
+	    t_s=CL->residue_index[s2][r2][a+SEQ2];
+	    t_r=CL->residue_index[s2][r2][a+R2];
 	    
 	    
 	    if (hasch[t_s][t_r])
 	      {
 		if (hasch[t_s][t_r]==FORBIDEN)
 		  {
-		    score+=CL->residue_index[s2][r2][a+2];
+		    score+=CL->residue_index[s2][r2][a+field];
 		  }
 		else 
 		  {
-		    delta=MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+2]);
+		    delta=MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+field]);
 		    score+=delta;
 		  }
 	      }
@@ -2285,6 +2186,7 @@ int residue_pair_extended_list_4gp ( Constraint_list *CL, int s1, int r1, int s2
 	*/
 	
 	field=CL->weight_field;
+	field=WE;
 	
 	if ( r1<=0 || r2<=0)return 0;
 	if ( !hasch || max_len!=(CL->S)->max_len)
@@ -2294,22 +2196,22 @@ int residue_pair_extended_list_4gp ( Constraint_list *CL, int s1, int r1, int s2
 	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
 	       }
 	
-	CL=index_res_constraint_list ( CL, field);
+
 
 	/* Check matches for R1 in the indexed lib*/
 	hasch[s1][r1]=FORBIDEN;
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
-	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+2];
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
+	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];
 	  }
 
 	/*Check Matches for r1 <-> r2 in the indexed lib */
-	for (a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	  {
-	    t_s=CL->residue_index[s2][r2][a];
-	    t_r=CL->residue_index[s2][r2][a+1];
+	    t_s=CL->residue_index[s2][r2][a+SEQ2];
+	    t_r=CL->residue_index[s2][r2][a+R2];
 	    
 	    
 	    if (hasch[t_s][t_r])
@@ -2320,8 +2222,7 @@ int residue_pair_extended_list_4gp ( Constraint_list *CL, int s1, int r1, int s2
 		  }
 		else 
 		  {
-		    //delta=((float)hasch[t_s][t_r]/NORM_F)*((float)CL->residue_index[s2][r2][a+2]/NORM_F);
-		    delta=MAX((((float)hasch[t_s][t_r]/NORM_F)),(((float)CL->residue_index[s2][r2][a+2]/NORM_F)));
+		    delta=MAX((((float)hasch[t_s][t_r]/NORM_F)),(((float)CL->residue_index[s2][r2][a+field]/NORM_F)));
 		    score+=delta;
 		  }
 	      }
@@ -2366,6 +2267,7 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	*/
 	
 	field=CL->weight_field;
+	field=WE;
 	
 	if ( r1<=0 || r2<=0)return 0;
 	if ( !hasch || max_len!=(CL->S)->max_len)
@@ -2375,22 +2277,22 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
 	       }
 	
-	CL=index_res_constraint_list ( CL, field);
+
 
 	/* Check matches for R1 in the indexed lib*/
 	hasch[s1][r1]=FORBIDEN;
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
-	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+2];
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
+	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];
 	  }
 
 	/*Check Matches for r1 <-> r2 in the indexed lib */
-	for (a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	  {
-	    t_s=CL->residue_index[s2][r2][a];
-	    t_r=CL->residue_index[s2][r2][a+1];
+	    t_s=CL->residue_index[s2][r2][a+SEQ2];
+	    t_r=CL->residue_index[s2][r2][a+R2];
 	    
 	    
 	    if (hasch[t_s][t_r])
@@ -2401,8 +2303,7 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 		  }
 		else 
 		  {
-		    //delta=((float)hasch[t_s][t_r]/NORM_F)*((float)CL->residue_index[s2][r2][a+2]/NORM_F);
-		    delta=MIN((((float)hasch[t_s][t_r]/NORM_F)),(((float)CL->residue_index[s2][r2][a+2]/NORM_F)));
+		    delta=MIN((((float)hasch[t_s][t_r]/NORM_F)),(((float)CL->residue_index[s2][r2][a+field]/NORM_F)));
 		    score+=delta;
 		  }
 	      }
@@ -2445,7 +2346,8 @@ int residue_pair_extended_list ( Constraint_list *CL, int s1, int r1, int s2, in
 	*/
 	
 	field=CL->weight_field;
-
+	field=WE;
+	
 	if ( r1<=0 || r2<=0)return 0;
 	if ( !hasch || max_len!=(CL->S)->max_len)
 	       {
@@ -2454,36 +2356,36 @@ int residue_pair_extended_list ( Constraint_list *CL, int s1, int r1, int s2, in
 	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
 	       }
 	
-	CL=index_res_constraint_list ( CL, field);
+
 
 	/* Check matches for R1 in the indexed lib*/
 	hasch[s1][r1]=FORBIDEN;
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
-	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+2];
-	    max_score+=CL->residue_index[s1][r1][a+2];
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
+	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];
+	    max_score+=CL->residue_index[s1][r1][a+field];
 	  }
 
 	/*Check Matches for r1 <-> r2 in the indexed lib */
-	for (a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	  {
-	    t_s=CL->residue_index[s2][r2][a];
-	    t_r=CL->residue_index[s2][r2][a+1];
+	    t_s=CL->residue_index[s2][r2][a+SEQ2];
+	    t_r=CL->residue_index[s2][r2][a+R2];
 	    
 	    
 	    if (hasch[t_s][t_r])
 	      {
 		if (hasch[t_s][t_r]==FORBIDEN)
 		  {
-		    score+=CL->residue_index[s2][r2][a+2];
-		    max_score+=CL->residue_index[s2][r2][a+2];
+		    score+=CL->residue_index[s2][r2][a+field];
+		    max_score+=CL->residue_index[s2][r2][a+field];
 		  }
 		else 
 		  {
 		    double delta;
-		    delta=MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+2]);
+		    delta=MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+field]);
 		    
 		    score+=delta;
 		    max_score-=hasch[t_s][t_r];
@@ -2493,7 +2395,7 @@ int residue_pair_extended_list ( Constraint_list *CL, int s1, int r1, int s2, in
 	      }
 	    else
 	      {
-		max_score+=CL->residue_index[s2][r2][a+2];
+		max_score+=CL->residue_index[s2][r2][a+field];
 	      }
 	  }
 
@@ -2517,94 +2419,16 @@ int ** clean_residue_pair_hasch (int s1, int r1, int s2, int r2,int **hasch, Con
     int a, t_s, t_r;
     if ( !hasch) return hasch;
     
-    for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+    for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
       {
-	t_s=CL->residue_index[s1][r1][a];
-	t_r=CL->residue_index[s1][r1][a+1];
+	t_s=CL->residue_index[s1][r1][a+SEQ2];
+	t_r=CL->residue_index[s1][r1][a+R2];
 	hasch[t_s][t_r]=0;	      
       }
     hasch[s1][r1]=hasch[s2][r2]=0;
     return hasch;
   }
-int residue_pair_extended_list_old ( Constraint_list *CL, int s1, int r1, int s2, int r2 )
-        {
-	double score=0;  
-	
-	int a, t_s, t_r;
-	static int **hasch;
-	static int max_len;
-	
-	int field;
-	/*
-	  function documentation: start
 
-	  int residue_pair_extended_list ( Constraint_list *CL, int s1, int r1, int s2, int r2);
-	  
-	  Computes the extended score for aligning residue seq1(r1) Vs seq2(r2)
-	  Computes: matrix_score
-	            non extended score
-		    extended score
-
-	  The extended score depends on the function index_res_constraint_list.
-	  This function can compare a sequence with itself.
-	  
-	  Associated functions: See util constraint list, list extention functions.
-	  
-	  function documentation: end
-	*/
-
-
-
-	field=CL->weight_field;
-
-	if ( r1<=0 || r2<=0)return 0;
-	if ( !hasch || max_len!=(CL->S)->max_len)
-	       {
-	       max_len=(CL->S)->max_len;
-	       if ( hasch) free_int ( hasch, -1);
-	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
-	       }
-	
-	CL=index_res_constraint_list ( CL, field);
-	
-	hasch[s1][r1]=100000;
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
-	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
-	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+2];		
-	  }
-	
-	
-	for (a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
-	  {
-	    t_s=CL->residue_index[s2][r2][a];
-	    t_r=CL->residue_index[s2][r2][a+1];
-	    if (hasch[t_s][t_r])
-	      {
-		if (field==WE)
-		  {
-		    
-		    score+=MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+2]);
-		  }
-	      }
-	  }
-
-	
-	score=(CL->normalise)?((score*CL->normalise)/CL->max_ext_value):score;
-	
-	
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
-	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
-	    hasch[t_s][t_r]=0;	      
-	  }
-	hasch[s1][r1]=hasch[s2][r2]=0;
-	
-	
-	return (int)(score*SCORE_K);
-	}
 int residue_pair_test_function ( Constraint_list *CL, int s1, int r1, int s2, int r2 )
         {
 	  double score=0;
@@ -2647,25 +2471,25 @@ int residue_pair_test_function ( Constraint_list *CL, int s1, int r1, int s2, in
 	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
 	       }
 	
-	CL=index_res_constraint_list ( CL, field);
+
 	
 	hasch[s1][r1]=1000;
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
-	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+2];		
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
+	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];		
 	  }
 	
 	
-	for (a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	  {
-	    t_s=CL->residue_index[s2][r2][a];
-	    t_r=CL->residue_index[s2][r2][a+1];
+	    t_s=CL->residue_index[s2][r2][a+SEQ2];
+	    t_r=CL->residue_index[s2][r2][a+R2];
 	    if (hasch[t_s][t_r])
 	      {
 		cons1=hasch[t_s][t_r];
-		cons2=CL->residue_index[s2][r2][a+2];
+		cons2=CL->residue_index[s2][r2][a+field];
 		score +=MIN(cons1,cons2);
 	      }
 	  }
@@ -2673,15 +2497,15 @@ int residue_pair_test_function ( Constraint_list *CL, int s1, int r1, int s2, in
 	
 	score=(CL->normalise)?((score*CL->normalise)/CL->max_ext_value):score;
 	
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
 	    hasch[t_s][t_r]=0;	      
 	  }
 	hasch[s1][r1]=hasch[s2][r2]=0;
 
-
+	
 	return (int)(score*SCORE_K);
 	}
 
@@ -2714,7 +2538,8 @@ int residue_pair_relative_extended_list ( Constraint_list *CL, int s1, int r1, i
 
 
 	field=CL->weight_field;
-
+	field=WE;
+	
 	if ( r1<=0 || r2<=0)return 0;
 	if ( !hasch || max_len!=(CL->S)->max_len)
 	       {
@@ -2723,36 +2548,36 @@ int residue_pair_relative_extended_list ( Constraint_list *CL, int s1, int r1, i
 	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
 	       }
 	
-	CL=index_res_constraint_list ( CL, field);
+
 	
 	hasch[s1][r1]=100000;
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
-	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+2];		
-	    total_score+=CL->residue_index[s1][r1][a+2];
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
+	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];		
+	    total_score+=CL->residue_index[s1][r1][a+field];
 	  }
 	
 	
-	for (a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	  {
-	    t_s=CL->residue_index[s2][r2][a];
-	    t_r=CL->residue_index[s2][r2][a+1];
-	    total_score+=CL->residue_index[s1][r1][a+2];
+	    t_s=CL->residue_index[s2][r2][a+SEQ2];
+	    t_r=CL->residue_index[s2][r2][a+R2];
+	    total_score+=CL->residue_index[s1][r1][a+field];
 	    if (hasch[t_s][t_r])
 	      {
-		if (field==WE){score+=2*MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+2]);}
+		if (field==WE){score+=2*MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+field]);}
 	      }
 	  }
 	
 	score=((CL->normalise*score)/total_score);
 	
 	
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
 	    hasch[t_s][t_r]=0;	      
 	  }
 	hasch[s1][r1]=hasch[s2][r2]=0;
@@ -2778,19 +2603,19 @@ int residue_pair_extended_list_g_coffee_quadruplet ( Constraint_list *CL, int s1
 	      for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=vcalloc ( (CL->S)->len[a]+1, sizeof (int));
 	    }
 	  
-	  CL=index_res_constraint_list ( CL, field);	  
+
 	  hasch[s1][r1]=100000;
-	  for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	  for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	    {
-	      t_s=CL->residue_index[s1][r1][a];
-	      t_r=CL->residue_index[s1][r1][a+1];
-	      t_w=CL->residue_index[s1][r1][a+2];
+	      t_s=CL->residue_index[s1][r1][a+SEQ2];
+	      t_r=CL->residue_index[s1][r1][a+R2];
+	      t_w=CL->residue_index[s1][r1][a+field];
 	      if ( CL->seq_for_quadruplet[t_s])
 		{
-		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=3)
+		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=ICHUNK)
 		    {
-		      q_s=CL->residue_index[t_s][t_r][b];		  
-		      q_r=CL->residue_index[t_s][t_r][b+1];		 
+		      q_s=CL->residue_index[t_s][t_r][b+SEQ2];		  
+		      q_r=CL->residue_index[t_s][t_r][b+R2];		 
 		      if (CL-> seq_for_quadruplet[q_s])
 			{
 			  
@@ -2801,18 +2626,18 @@ int residue_pair_extended_list_g_coffee_quadruplet ( Constraint_list *CL, int s1
 	    }
 	  
 	  
-	  for (s=0,score=0,a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	  for (s=0,score=0,a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	    {
-	      t_s=CL->residue_index[s2][r2][a];
-	      t_r=CL->residue_index[s2][r2][a+1];
-	      t_w=CL->residue_index[s2][r2][a+2];
+	      t_s=CL->residue_index[s2][r2][a+SEQ2];
+	      t_r=CL->residue_index[s2][r2][a+R2];
+	      t_w=CL->residue_index[s2][r2][a+field];
 	      if ( CL->seq_for_quadruplet[t_s])
 		{
-		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=3)
+		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=ICHUNK)
 		    {
-		      q_s=CL->residue_index[t_s][t_r][b];		  
-		      q_r=CL->residue_index[t_s][t_r][b+1];	
-		      q_w=CL->residue_index[t_s][t_r][b+2];	
+		      q_s=CL->residue_index[t_s][t_r][b+SEQ2];		  
+		      q_r=CL->residue_index[t_s][t_r][b+R2];	
+		      q_w=CL->residue_index[t_s][t_r][b+field];	
 		      if (hasch[q_s][q_r] && CL->seq_for_quadruplet[q_s])
 			s=MIN(hasch[q_s][q_r],MIN(CL->residue_index[t_s][t_r][b+2],q_w));
 		      score=MAX(score, s);
@@ -2820,17 +2645,17 @@ int residue_pair_extended_list_g_coffee_quadruplet ( Constraint_list *CL, int s1
 		}
 	    }
 	  
-	  for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	  for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	    {
-	      t_s=CL->residue_index[s1][r1][a];
-	      t_r=CL->residue_index[s1][r1][a+1];
-	      t_w=CL->residue_index[s1][r1][a+2];
+	      t_s=CL->residue_index[s1][r1][a+SEQ2];
+	      t_r=CL->residue_index[s1][r1][a+R2];
+	      t_w=CL->residue_index[s1][r1][a+field];
 	      if ( CL->seq_for_quadruplet[t_s])
 		{
-		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=3)
+		  for ( b=1; b<CL->residue_index[t_s][t_r][0]; b+=ICHUNK)
 		    {
-		      q_s=CL->residue_index[t_s][t_r][b];		  
-		      q_r=CL->residue_index[t_s][t_r][b+1];		 
+		      q_s=CL->residue_index[t_s][t_r][b+SEQ2];		  
+		      q_r=CL->residue_index[t_s][t_r][b+R2];		 
 		      hasch[q_s][q_r]=0;
 		    }
 		}
@@ -2872,35 +2697,35 @@ int residue_pair_extended_list_g_coffee ( Constraint_list *CL, int s1, int r1, i
 	       for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=vcalloc ( (CL->S)->len[a]+1, sizeof (int));
 	       }
 	
-	CL=index_res_constraint_list ( CL, field);
+
 	
 	hasch[s1][r1]=100000;
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
-	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+2];		
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
+	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];		
 	  }
 	
 	
-	for (s=0, score=0,a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	for (s=0, score=0,a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	  {
-	    t_s=CL->residue_index[s2][r2][a];
-	    t_r=CL->residue_index[s2][r2][a+1];
+	    t_s=CL->residue_index[s2][r2][a+SEQ2];
+	    t_r=CL->residue_index[s2][r2][a+R2];
 
 	    if (hasch[t_s][t_r])
 	      {
 		if (field==WE)
-		  {s=MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+2]);
+		  {s=MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+WE]);
 		   score=MAX(s,score);
 		  }
 	      }
 	  }
 	
-	for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	  {
-	    t_s=CL->residue_index[s1][r1][a];
-	    t_r=CL->residue_index[s1][r1][a+1];
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
 	    hasch[t_s][t_r]=0;	      
 	  }
 	hasch[s1][r1]=hasch[s2][r2]=0;
@@ -2944,7 +2769,7 @@ int extend_residue_pair ( Constraint_list *CL, int s1, int r1, int s2, int r2)
 	field=CL->weight_field;
 
 	if ( r1<=0 || r2<=0)return 0;
-	else if ( !CL->L && CL->M)
+	else if ( !CL->residue_index && CL->M)
 	   {
 	    return evaluate_matrix_score (CL, s1,r1, s2, r2);	
 	   }
@@ -2968,32 +2793,32 @@ int extend_residue_pair ( Constraint_list *CL, int s1, int r1, int s2, int r2)
 	       for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=vcalloc ( (CL->S)->len[a]+1, sizeof (int));
 	       }
 	
-	   CL=index_res_constraint_list ( CL, field);
+
 	
 	   hasch[s1][r1]=100000;
-	   for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	   for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	        {
-		t_s=CL->residue_index[s1][r1][a];
-		t_r=CL->residue_index[s1][r1][a+1];
-		hasch[t_s][t_r]=CL->residue_index[s1][r1][a+2];		
+		t_s=CL->residue_index[s1][r1][a+SEQ2];
+		t_r=CL->residue_index[s1][r1][a+R2];
+		hasch[t_s][t_r]=CL->residue_index[s1][r1][a+WE];		
 		}
 	
 	
-	   for (a=1; a< CL->residue_index[s2][r2][0]; a+=3) 
+	   for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	       {
-	       t_s=CL->residue_index[s2][r2][a];
-	       t_r=CL->residue_index[s2][r2][a+1];
+	       t_s=CL->residue_index[s2][r2][a+SEQ2];
+	       t_r=CL->residue_index[s2][r2][a+R2];
 	       if (hasch[t_s][t_r])
 		   {
-		   if (field==WE)score+=MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+2] );
+		   if (field==WE)score+=MIN(hasch[t_s][t_r],CL->residue_index[s2][r2][a+WE] );
 
 		   }
 	       }
 	   score=(CL->normalise)?((score*CL->normalise)/CL->max_ext_value):score;
-	   for (a=1; a< CL->residue_index[s1][r1][0]; a+=3)
+	   for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	       {
-	       t_s=CL->residue_index[s1][r1][a];
-	       t_r=CL->residue_index[s1][r1][a+1];
+	       t_s=CL->residue_index[s1][r1][a+SEQ2];
+	       t_r=CL->residue_index[s1][r1][a+R2];
 	       hasch[t_s][t_r]=0;	      
 	       }
 	   hasch[s1][r1]=hasch[s2][r2]=0;
@@ -3173,7 +2998,7 @@ int get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**po
 
 	if (A==NULL)return 0;
 	
-	if (MODE!=2 || MODE==0  || (!CL->L && CL->M) || (!CL->L && CL->T)|| ns1==1 || ns2==1)
+	if (MODE!=2 || MODE==0  || (!CL->residue_index && CL->M) || (!CL->residue_index && CL->T)|| ns1==1 || ns2==1)
 	  score=slow_get_dp_cost ( A, pos1, ns1, list1,col1, pos2, ns2, list2, col2, CL);
 	else if (MODE==1 || MODE==2)
 	  score=fast_get_dp_cost ( A, pos1, ns1, list1,col1, pos2, ns2, list2, col2, CL);
@@ -3378,7 +3203,7 @@ int fast_get_dp_cost_quadruplet ( Alignment *A, int**pos1, int ns1, int*list1, i
 	      col2=buf_col;
 	    }
 	  
-	CL=index_res_constraint_list ( CL, WE);
+
 	if ( !hasch1)
 	    {
 	    
@@ -3400,16 +3225,16 @@ int fast_get_dp_cost_quadruplet ( Alignment *A, int**pos1, int ns1, int*list1, i
 		else
 		   {	
 		   is_in_col1[s1][r1]=1;
-		   for (b=1; b< CL->residue_index[s1][r1][0]; b+=3)
+		   for (b=1; b< CL->residue_index[s1][r1][0]; b+=ICHUNK)
 		           {
-			   t_s=CL->residue_index[s1][r1][b];
-			   t_r=CL->residue_index[s1][r1][b+1];
-			   t_w=CL->residue_index[s1][r1][b+2];
-			   for ( c=1; c< CL->residue_index[t_s][t_r][0]; c+=3)
+			   t_s=CL->residue_index[s1][r1][b+SEQ2];
+			   t_r=CL->residue_index[s1][r1][b+R2];
+			   t_w=CL->residue_index[s1][r1][b+WE];
+			   for ( c=1; c< CL->residue_index[t_s][t_r][0]; c+=ICHUNK)
 			     {
-			       q_s=CL->residue_index[t_s][t_r][c];
-			       q_r=CL->residue_index[t_s][t_r][c+1];
-			       q_w=CL->residue_index[t_s][t_r][c+2];
+			       q_s=CL->residue_index[t_s][t_r][c+SEQ2];
+			       q_r=CL->residue_index[t_s][t_r][c+R2];
+			       q_w=CL->residue_index[t_s][t_r][c+WE];
 			       hasch1[q_s][q_r]+=MIN(q_w, t_w);
 			       n_hasch1[q_s][q_r]++;
 			     }
@@ -3427,16 +3252,16 @@ int fast_get_dp_cost_quadruplet ( Alignment *A, int**pos1, int ns1, int*list1, i
 		else
 		   {
 		   is_in_col2[s2][r2]=1;
-		   for (b=1; b< CL->residue_index[s2][r2][0]; b+=3)
+		   for (b=1; b< CL->residue_index[s2][r2][0]; b+=ICHUNK)
 		           {
-			   t_s=CL->residue_index[s2][r2][b];
-			   t_r=CL->residue_index[s2][r2][b+1];
-			   t_w=CL->residue_index[s2][r2][b+2];
-			   for ( c=1; c< CL->residue_index[t_s][t_r][0]; c+=3)
+			   t_s=CL->residue_index[s2][r2][b+SEQ2];
+			   t_r=CL->residue_index[s2][r2][b+R2];
+			   t_w=CL->residue_index[s2][r2][b+WE];
+			   for ( c=1; c< CL->residue_index[t_s][t_r][0]; c+=ICHUNK)
 			     {
-			       q_s=CL->residue_index[t_s][t_r][c];
-			       q_r=CL->residue_index[t_s][t_r][c+1];
-			       q_w=CL->residue_index[t_s][t_r][c+2];
+			       q_s=CL->residue_index[t_s][t_r][c+SEQ2];
+			       q_r=CL->residue_index[t_s][t_r][c+R2];
+			       q_w=CL->residue_index[t_s][t_r][c+WE];
 			       hasch2[q_s][q_r]+=MIN(t_w, q_w);
 			       n_hasch2[q_s][q_r]++;
 			     }
@@ -3454,15 +3279,15 @@ int fast_get_dp_cost_quadruplet ( Alignment *A, int**pos1, int ns1, int*list1, i
 	    if (r2<0);
 	    else
 	      {
-		for (b=1; b< CL->residue_index[s2][r2][0]; b+=3)
+		for (b=1; b< CL->residue_index[s2][r2][0]; b+=ICHUNK)
 		  {
-		    t_s=CL->residue_index[s2][r2][b];
-		    t_r=CL->residue_index[s2][r2][b+1];
+		    t_s=CL->residue_index[s2][r2][b+SEQ2];
+		    t_r=CL->residue_index[s2][r2][b+R2];
 
-		    for ( c=1; c< CL->residue_index[t_s][t_r][0]; c+=3)
+		    for ( c=1; c< CL->residue_index[t_s][t_r][0]; c+=ICHUNK)
 		      {
-			q_s=CL->residue_index[t_s][t_r][c];
-			q_r=CL->residue_index[t_s][t_r][c+1];
+			q_s=CL->residue_index[t_s][t_r][c+SEQ2];
+			q_r=CL->residue_index[t_s][t_r][c+R2];
 			if ( hasch2[q_s][q_r] && hasch1[q_s][q_r]&& !(is_in_col1[q_s][q_r] || is_in_col2[q_s][q_r]))
 			  {
 			    score+=MIN(hasch2[q_s][q_r]*(n_hasch1[q_s][q_r]),hasch1[q_s][q_r]*(n_hasch2[q_s][q_r]));
@@ -3496,14 +3321,14 @@ int fast_get_dp_cost_quadruplet ( Alignment *A, int**pos1, int ns1, int*list1, i
 	      {
 		is_in_col1[s1][r1]=0;
 		hasch1[s1][r1]=0;
-		for (b=1; b< CL->residue_index[s1][r1][0]; b+=3)
+		for (b=1; b< CL->residue_index[s1][r1][0]; b+=ICHUNK)
 		  {
-		    t_s=CL->residue_index[s1][r1][b];
-		    t_r=CL->residue_index[s1][r1][b+1];
-		    for ( c=1; c< CL->residue_index[t_s][t_r][0]; c+=3)
+		    t_s=CL->residue_index[s1][r1][b+SEQ2];
+		    t_r=CL->residue_index[s1][r1][b+R2];
+		    for ( c=1; c< CL->residue_index[t_s][t_r][0]; c+=ICHUNK)
 		      {
-			q_s=CL->residue_index[t_s][t_r][c];
-			q_r=CL->residue_index[t_s][t_r][c+1];
+			q_s=CL->residue_index[t_s][t_r][c+SEQ2];
+			q_r=CL->residue_index[t_s][t_r][c+R2];
 			hasch1[q_s][q_r]=0;
 			n_hasch1[q_s][q_r]=0;
 		      }
@@ -3541,7 +3366,7 @@ int fast_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, in
 
 
 	    
-	CL=index_res_constraint_list ( CL, WE);
+
 	if ( !hasch1)
 	    {
 	    
@@ -3563,11 +3388,11 @@ int fast_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, in
 		else
 		   {	
 		   is_in_col1[s1][r1]=1;
-		   for (b=1; b< CL->residue_index[s1][r1][0]; b+=3)
+		   for (b=1; b< CL->residue_index[s1][r1][0]; b+=ICHUNK)
 		           {
-			   t_s=CL->residue_index[s1][r1][b];
-			   t_r=CL->residue_index[s1][r1][b+1];			   
-			   hasch1[t_s][t_r]+=CL->residue_index[s1][r1][b+2];
+			   t_s=CL->residue_index[s1][r1][b+SEQ2];
+			   t_r=CL->residue_index[s1][r1][b+R2];			   
+			   hasch1[t_s][t_r]+=CL->residue_index[s1][r1][b+WE];
 			   n_hasch1[t_s][t_r]++;
 			   }
 		   }
@@ -3584,12 +3409,12 @@ int fast_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, in
 		else
 		   {
 		   is_in_col2[s2][r2]=1;
-		   for (b=1; b< CL->residue_index[s2][r2][0]; b+=3)
+		   for (b=1; b< CL->residue_index[s2][r2][0]; b+=ICHUNK)
 		           {
-			   t_s=CL->residue_index[s2][r2][b];
-			   t_r=CL->residue_index[s2][r2][b+1];
+			   t_s=CL->residue_index[s2][r2][b+SEQ2];
+			   t_r=CL->residue_index[s2][r2][b+R2];
 
-			   hasch2[t_s][t_r]+=CL->residue_index[s2][r2][b+2];
+			   hasch2[t_s][t_r]+=CL->residue_index[s2][r2][b+WE];
 			   n_hasch2[t_s][t_r]++;
 			   }
 		   }
@@ -3607,10 +3432,10 @@ int fast_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, in
 		    if (r2<0);
 		    else
 		        {
-			for (b=1; b< CL->residue_index[s2][r2][0]; b+=3)
+			for (b=1; b< CL->residue_index[s2][r2][0]; b+=ICHUNK)
 			    {
-			    t_s=CL->residue_index[s2][r2][b];
-			    t_r=CL->residue_index[s2][r2][b+1];
+			    t_s=CL->residue_index[s2][r2][b+SEQ2];
+			    t_r=CL->residue_index[s2][r2][b+R2];
 			    
 			    if ( hasch2[t_s][t_r] && hasch1[t_s][t_r]&& !(is_in_col1[t_s][t_r] || is_in_col2[t_s][t_r]))
 			        {
@@ -3644,10 +3469,10 @@ int fast_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, in
 		        {
 			is_in_col1[s1][r1]=0;
 			hasch1[s1][r1]=0;
-			for (b=1; b< CL->residue_index[s1][r1][0]; b+=3)
+			for (b=1; b< CL->residue_index[s1][r1][0]; b+=ICHUNK)
 			    {
-			    t_s=CL->residue_index[s1][r1][b];
-			    t_r=CL->residue_index[s1][r1][b+1];
+			    t_s=CL->residue_index[s1][r1][b+SEQ2];
+			    t_r=CL->residue_index[s1][r1][b+R2];
 			    
 			    hasch1[t_s][t_r]=0;
 			    n_hasch1[t_s][t_r]=0;
@@ -3666,10 +3491,10 @@ int fast_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, in
 		    if (r1<0);
 		    else
 		        {
-			for (b=1; b< CL->residue_index[s1][r1][0]; b+=3)
+			for (b=1; b< CL->residue_index[s1][r1][0]; b+=ICHUNK)
 			    {
-			    t_s=CL->residue_index[s1][r1][b];
-			    t_r=CL->residue_index[s1][r1][b+1];
+			    t_s=CL->residue_index[s1][r1][b+SEQ2];
+			    t_r=CL->residue_index[s1][r1][b+R2];
 			    
 			    if ( hasch1[t_s][t_r] && hasch2[t_s][t_r]&& !(is_in_col2[t_s][t_r] || is_in_col1[t_s][t_r]))
 			        {
@@ -3703,10 +3528,10 @@ int fast_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, in
 		        {
 			is_in_col2[s2][r2]=0;
 			hasch1[s2][r2]=0;
-			for (b=1; b< CL->residue_index[s2][r2][0]; b+=3)
+			for (b=1; b< CL->residue_index[s2][r2][0]; b+=ICHUNK)
 			    {
-			    t_s=CL->residue_index[s2][r2][b];
-			    t_r=CL->residue_index[s2][r2][b+1];
+			    t_s=CL->residue_index[s2][r2][b+SEQ2];
+			    t_r=CL->residue_index[s2][r2][b+R2];
 			    
 			    hasch2[t_s][t_r]=0;
 			    n_hasch2[t_s][t_r]=0;
@@ -3805,33 +3630,6 @@ int fast_get_dp_cost_2 ( Alignment *A, int**pos1, int ns1, int*list1, int col1, 
 	return (int)score;
 	} 
 
-int fast_get_dp_cost_3 ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
-{
-  static int last_tag;
-  static Constraint_list *NCL;
-  int score;
-
-  if ( ns1==1 && ns2==1)
-    {
-      return slow_get_dp_cost( A,pos1, ns1,list1, col1, pos2, ns2, list2, col2,CL);
-    }
- 
-  if ( last_tag !=A->random_tag)
-    {
-      int *ns, **ls;
-      
-      last_tag=A->random_tag;
-      ns=vcalloc (2, sizeof (int));ns[0]=ns1; ns[1]=ns2;
-      ls=vcalloc (2, sizeof (int*));ls[0]=list1; ls[1]=list2;
-      
-      NCL=progressive_index_res_constraint_list ( A, ns, ls, CL);
-      vfree (ls); vfree (ns);
-    }
-  score=residue_pair_extended_list ( NCL,list1[0],col1, list2[0], col2);
-  score=(CL->normalise)?((score*CL->normalise)/CL->max_ext_value):score;
-  score=(score-SCORE_K*CL->nomatch);
-  return score;
-}
 
 
 
@@ -4780,11 +4578,7 @@ Constraint_list * choose_extension_mode ( char *extend_mode, Constraint_list *CL
       CL->evaluate_residue_pair=residue_pair_extended_list;
       CL->get_dp_cost      =fast_get_dp_cost;
     }
-  else if ( strm ( extend_mode, "test_triplet") && !CL->M)
-    {
-      CL->evaluate_residue_pair=residue_pair_extended_list;
-      CL->get_dp_cost      =fast_get_dp_cost_3;
-    }
+ 
   else if ( strm ( extend_mode, "very_fast_triplet") && !CL->M)
     {
       CL->evaluate_residue_pair=residue_pair_extended_list;

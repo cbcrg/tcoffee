@@ -1,5 +1,6 @@
 #!/usr/bin/env perl
 use Cwd;
+use Env;
 use File::Path;
 use FileHandle;
 use strict;
@@ -59,19 +60,18 @@ if (($cl=~/-h/) ||($cl=~/-H/) )
 	print "!!!!!!!       ./install $m\n";
       }
     
-    print "!!!!!!! ./install [target:package|mode|] [-update|-force|-no_question|-path=dir|-dis=dir|-no_root|-tclinkdb=file] [CC=|FCC=|CXX=|CFLAGS=|CXXFLAGS=]\n";
+    print "!!!!!!! ./install [target:package|mode|] [-update|-force|-exec=dir|-dis=dir|-root|-tclinkdb=file|-] [CC=|FCC=|CXX=|CFLAGS=|CXXFLAGS=]\n";
     print "!!!!!!! ./install clean    [removes all executables]\n";
     print "!!!!!!! ./install [optional:target] -update               [updates package already installed]\n";
     print "!!!!!!! ./install [optional:target] -force                [Forces recompilation over everything]\n";
-    print "!!!!!!! ./install [optional:target] -no_question          [Do everything without question]\n";
-    print "!!!!!!! ./install [optional:target] -root                 [Never ask the root password]\n";
-    print "!!!!!!! ./install [optional:target] -path=/foo/bar/       [Final address for the distribution dir]\n";
-    print "!!!!!!! ./install [optional:target] -dis=/foo/bar/        [Address where executables should be installed]\n";
+    
+    print "!!!!!!! ./install [optional:target] -root                 [You are running as root]\n";
+    print "!!!!!!! ./install [optional:target] -exec=/foo/bar/       [address for the T-Coffee executable]\n";
+    print "!!!!!!! ./install [optional:target] -dis=/foo/bar/        [Address where distributions should be stored]\n";
     print "!!!!!!! ./install [optional:target] -tclinkdb=foo|update  [file containing all the packages to be installed]\n";
     print "!!!!!!! ./install [optional:target] -tclinkdb=foo|update  [file containing all the packages to be installed]\n";
     print "!!!!!!! ./install [optional:target] -clean                [clean everything]\n";
-    
-    print "!!!!!!! ./install install   [-path=/your/install/dir] [/usr/local/bin]\n";
+    print "!!!!!!! ./install [optional:target] -plugins              [plugins directory]\n";
     print "!!!!!!! mode:";
     foreach $m (keys(%MODE)){print "$m ";}
     print "\n";
@@ -104,7 +104,7 @@ if ( ($cl=~/-binaries/)){$BINARIES_ONLY=1;}
 if ( ($cl=~/-force/)){$force=1;$default_update_action="update"}
 if ( ($cl=~/-exec=\s*(\S+)/)){$INSTALL_DIR=$1;}
 if ( ($cl=~/-plugins=\s*(\S+)/)){$PLUGINS_DIR=$1;}
-if ( ($cl=~/-distributions=\s*(\S+)/)){$DISTRIBUTIONS=$1;}
+if ( ($cl=~/-dis=\s*(\S+)/)){$DISTRIBUTIONS=$1;}
 
 if ( ($cl=~/-tclinkdb=\s*(\S+)/)){$tclinkdb=$1;}
 if ( ($cl=~/-proxy=\s*(\S+)/)){$proxy=$1;}
@@ -280,6 +280,8 @@ print "*********************************************************************\n";
 print "********              INSTALLATION SUMMARY          *****************\n";
 print "*********************************************************************\n";
 print "------- SUMMARY package Installation:\n";
+print "-------   Executable Installed in: $PLUGINS_DIR\n";
+
 foreach my $pg (keys(%PG))
   {
     if ( $PG{$pg}{install})
@@ -289,13 +291,15 @@ foreach my $pg (keys(%PG))
 	elsif  ( $PG{$pg}{new} &&  $PG{$pg}{old})                     {print "*------        $PG{$pg}{dname}: updated $bin_status\n"  ; $PG{$pg}{status}=1;} 
 	elsif  (!$PG{$pg}{new} &&  $PG{$pg}{old} && !$PG{$pg}{update}){print "*------        $PG{$pg}{dname}: previous\n" ; $PG{$pg}{status}=1;}
 	elsif  (!$PG{$pg}{new} &&  $PG{$pg}{old} &&  $PG{$pg}{update}){print "*------        $PG{$pg}{dname}: failed update (previous installation available)\n";$PG{$pg}{status}=0;}
-	else                                                          {print "*------        $PG{$pg}{dname}: failed installation";$PG{$pg}{status}=0;}
+	else                                                          {print "*------        $PG{$pg}{dname}: failed installation\n";$PG{$pg}{status}=0;}
       }
   }
+my $failure;
 
 if ( !$PG{$target}){print "*------ SUMMARY mode Installation:\n";}
 foreach my $m (keys(%MODE))
   {
+  
     if ( $target eq "all" || $target eq $m)
       {
 	my $succesful=1;
@@ -314,16 +318,39 @@ foreach my $m (keys(%MODE))
 	  }
 	else
 	  {
+	    $failure++;
 	    $MODE{$m}{status}=0;
 	    print "*!!!!!!       MODE $MODE{$m}{dname} UNSUCCESFULY installed\n";
 	  }
       }
   }
 
+    
+      
 if ($clean==1 && ($BASE=~/install4tcoffee/) ){print "*------ Clean Installation Directory: $BASE\n";`rm -rf $BASE`;}
 foreach my $pg (keys(%PG)){if ($PG{$pg}{install} && $PG{$pg}{status}==0){exit ($EXIT_FAILURE);}}
-exit ($EXIT_SUCCESS);  
 
+if ($failure)
+  {
+    print "*********************************************************************\n";
+    print "********     SOME PACKAGES FAILED TO INSTALL        *****************\n";
+    print "*********************************************************************\n";
+    print "\nSome of the reported failures may be due to connectivity problems";
+    print "\nRerun the installation and the installer will specifically try to install the missing packages";
+    print "\nIf this Fails, go to the original website and install the package manually";
+  }
+
+print "*********************************************************************\n";
+print "********              FINALIZE YOUR INSTALLATION    *****************\n";
+print "*********************************************************************\n";
+print "------- Your executables are in:\n"; 
+print "-------       $PLUGINS_DIR:\n";
+print "------- Add this directory to your path with the following command:\n";
+print "-------       export PATH=$PLUGINS_DIR:\$PATH\n";
+print "------- Make this permanent by adding this line to the file:\n";
+print "-------       $HOME/.bashrc\n";
+exit ($EXIT_SUCCESS);  
+  
 sub get_CXX_compiler
   {
     my $c=@_[0];
@@ -342,7 +369,7 @@ sub get_C_compiler
 sub get_F_compiler
   {
     my ($c)=@_[0];
-    my @clist=("f77", "g77", "gfortran", "ifort");
+    my @clist=("f77", "g77","g95", "gfortran", "ifort");
     return get_compil ($c, @clist);
   } 
        
@@ -435,9 +462,10 @@ sub url2file
 sub pg_is_installed
   {
     my ($p, $dir)=(@_);
-    my ($r,$m);
+    my ($r,$m, $ret);
     my ($supported, $language, $compil);
     
+  
     if ( $PG{$p})
       {
 	$language=$PG{$p}{language2};
@@ -446,22 +474,23 @@ sub pg_is_installed
     
     if ( $compil eq "CPAN")
       {
-	if ( system ("perl -M$p -e 1")==$EXIT_SUCCESS){return 1;}
-	else {return 0;}
+	if ( system ("perl -M$p -e 1")==$EXIT_SUCCESS){$ret=1;}
+	else {$ret=0;}
       }
     elsif ($dir)
       {
-	if (-e "$dir/$p" || -e "$dir/$p\.exe"){return 1;}
-	else {return 0;}
+	if (-e "$dir/$p" || -e "$dir/$p\.exe"){$ret=1;}
+	else {$ret=0;}
       }
-    elsif (-e "$PLUGINS_DIR/$p" || -e "$PLUGINS_DIR/$p.exe"){return 1;}
+    elsif (-e "$PLUGINS_DIR/$p" || -e "$PLUGINS_DIR/$p.exe"){$ret=1;}
     else
       {
 	$r=`which $p 2>/dev/null`;
-	if ($r eq ""){return 0;}
-	else {return 1;}
+	if ($r eq ""){$ret=0;}
+	else {$ret=1;}
       }
-    return 0;
+   
+    return $ret;
   }
 sub install
   {
@@ -589,15 +618,15 @@ sub install_source_package
     
     if (($download =~/tgz/))
       {
-	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tgz)/);
+	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tgz).*/);
       }
     elsif (($download=~/tar\.gz/))
       {
-	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar\.gz)/);
+	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar\.gz).*/);
       }
     elsif (($download=~/tar/))
       {
-	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar)/);
+	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar).*/);
       }
     else
       {
@@ -619,6 +648,7 @@ sub install_source_package
       {
 	&check_rm ($wget_tmp);
 	print "\n------- Downloading/Installing $pg\n";
+	
 	if (!-e $distrib && &url2file ("$download", "$wget_tmp")==$EXIT_SUCCESS)
 	  {
 	    
@@ -653,16 +683,40 @@ sub install_source_package
 	  }
       }
     if (-d $main_dir)
-	  {chdir $main_dir;}
-    
+	  
+      {
+	chdir $main_dir;}
+    else
+      {
+	print "Error: $main_dir does not exist";
+      }
     print "\n------- Compiling/Installing $pg\n";
     `make clean $SILENT`;
     #sap
     if ($pg eq "sap")
       {
-	`rm *.o sap  sap.exe ./util/aa/*.o  ./util/wt/.o $SILENT`;
-	&flush_command ("make $arguments sap");
-	&check_cp ($pg, "$BIN");
+	if (-e "./configure")
+	  {
+	    #new sap distribution
+	    if ($OS eq "macosx")
+	      {
+		&replace_line_in_file ("./src/galloc.h", "malloc.h",  "");
+		&replace_line_in_file ("./src/pdbprot.h", "malloc.h", "");
+		&replace_line_in_file ("./src/pdbprot.c", "malloc.h", "");
+	      }
+	    
+	    &flush_command ("./configure");
+	    &flush_command ("make clean");
+	    &flush_command ("make");
+	    &check_cp ("./src/$pg", "$BIN");
+	  }
+	else
+	  {
+	    #old style distribution
+	    `rm *.o sap  sap.exe ./util/aa/*.o  ./util/wt/.o $SILENT`;
+	    &flush_command ("make $arguments sap");
+	    &check_cp ($pg, "$BIN");
+	  }
       }
     elsif ($pg eq "clustalw2")
       {
@@ -670,6 +724,14 @@ sub install_source_package
 	&flush_command("make $arguments");
 	&check_cp ("./src/$pg", "$BIN");
 	
+      }
+    elsif ($pg eq "fsa")
+      {
+	&flush_command("./configure --prefix=$BIN");
+	&flush_command("make $arguments");
+	&flush_command ("make install");
+	`mv $BIN/bin/* $BIN`;
+	`rmdir $BIN/bin`;
       }
     elsif ($pg eq "clustalw")
       {
@@ -711,17 +773,21 @@ sub install_source_package
 	`gzip mafft.tar`;
 	`mv mafft.tar.gz $BIN`;
       }
-    elsif ( $pg eq "dialign-tx")
+    elsif ( $pg eq "dialign-tx" ||$pg eq "dialign-t" )
       {
 	my $f;
 	my $base=cwd();
 
 	chdir "./source";
+	if ($OS eq "macosx"){&flush_command ("cp makefile.MAC_OS makefile");}
+
 	&flush_command (" make CPPFLAGS='-O3 -funroll-loops' all");
 	
 	chdir "..";
 	&check_cp ("./source/$pg", "$BIN");
 	&check_cp ("./source/$pg", "$BIN/dialign-t");
+	&check_cp ("./source/$pg", "$BIN/dialign-tx");
+	
       }
     elsif ($pg eq "poa")
       {
@@ -730,25 +796,49 @@ sub install_source_package
       }
     elsif ( $pg eq "probcons")
       {
+	&add_C_libraries("./ProbabilisticModel.h", "list", "cstring");
+	
 	`rm *.exe $SILENT`;
 	&flush_command ("make $arguments probcons");
 	&check_cp("$pg", "$BIN/$pg");
       }
-    elsif ( $pg eq "probcons" || $pg eq "probconsRNA")
+    elsif ( $pg eq "probconsRNA")
       {
+	&add_C_libraries("./ProbabilisticModel.h", "list", "cstring");
+	&add_C_libraries("./Main.cc", "iomanip", "cstring","climits");
 	`rm *.exe $SILENT`;
 	&flush_command ("make $arguments probcons");
 	&check_cp("probcons", "$BIN/$pg");
       }
 
     elsif (  $pg eq "muscle")
+      {	
+	`rm *.o muscle muscle.exe $SILENT`;
+	if ($OS eq "macosx" || $OS eq "linux")
+	  {
+	    &replace_line_in_file ("./makefile", "LDLIBS = -lm -static",  "LDLIBS = -lm");
+	  }
+	elsif ($OS eq "windows")
+	  {
+	    &replace_line_in_file ("./intmath.cpp",  "double log2e",      "double cedric_log");
+	    &replace_line_in_file ("./intmath.cpp",  "double log2",       "double log_notuse");
+	    &replace_line_in_file ("./intmath.cpp",  "double cedric_log", "double log2e");
+	  }
+	&flush_command ("make $arguments all");
+	&check_cp("$pg", "$BIN");
+      }
+     elsif (  $pg eq "mus4")
       {
 	`rm *.o muscle muscle.exe $SILENT`;
-	&flush_command ("make $arguments all");
+	&flush_command ("mk");
 	&check_cp("$pg", "$BIN");
       }
     elsif ( $pg eq "pcma")
       {
+	if ($OS eq "macosx")
+	  {
+	    &replace_line_in_file ("./alcomp2.c", "malloc.h",  "");
+	  }
 	&flush_command ("make $arguments pcma");
 	&check_cp("$pg", "$BIN");
       }
@@ -760,13 +850,16 @@ sub install_source_package
       }
     elsif ( $pg eq "amap")
       {
-	chdir "align";
+	&add_C_libraries("./Amap.cc", "iomanip", "cstring","climits");	
 	`make clean $SILENT`;
 	&flush_command ("make $arguments all");
 	&check_cp ("$pg", $BIN);
       }
     elsif ( $pg eq "proda")
       {
+	&add_C_libraries("AlignedFragment.h", "vector", "iostream", "cstring","cstdlib");
+	&add_C_libraries("Main.cc", "vector", "climits");	
+	&add_C_libraries("Sequence.cc", "stdlib.h", "cstdio");	
 	&flush_command ("make $arguments all");
 	&check_cp ("$pg", $BIN);
       }
@@ -775,18 +868,32 @@ sub install_source_package
 	&flush_command ("make $arguments all");
 	&check_cp ("$pg", $BIN);
       }
-    elsif ( $pg eq "mustang")
+     elsif ( $pg eq "mustang")
       {
+	&flush_command ("rm ./bin/*");
 	&flush_command ("make $arguments all");
-	if ( $OS=~/windows/){&check_cp("./bin/MUSTANG_v.3", "$BIN/mustang.exe");}
-	else {&check_cp("./bin/MUSTANG_v.3", "$BIN/mustang");}
+
+	if ( $OS=~/windows/){&flush_command("cp ./bin/* $BIN/mustang.exe");}
+	else {&flush_command("cp ./bin/* $BIN/mustang");}
+	
       }
+
     elsif ( $pg eq "RNAplfold")
       {
 	&flush_command("./configure");
 	&flush_command ("make $arguments all");
 	&check_cp("./Progs/RNAplfold", "$BIN");
+	&check_cp("./Progs/RNAalifold", "$BIN");
+	&check_cp("./Progs/RNAfold", "$BIN");
       }
+    elsif ( $pg eq "retree")
+      {
+	chdir "src";
+	&flush_command ("make $arguments all");
+	&flush_command ("make put");
+	system "cp ../exe/* $BIN";
+      }
+	
     chdir $CDIR;
     return &pg_is_installed ($pg, $BIN);
   }
@@ -912,7 +1019,10 @@ sub add_dir
     
     if (!-e $dir && !-d $dir)
       {
-	return mkpath ($dir);
+	my @l;
+	umask (0000);
+	@l=mkpath ($dir,{mode => 0777});
+	
       }
     else
       {
@@ -1133,7 +1243,7 @@ sub update_tclinkdb
 
 sub initialize_PG
   {
-    
+
 $PG{"t_coffee"}{"4_TCOFFEE"}="TCOFFEE";
 $PG{"t_coffee"}{"type"}="sequence_multiple_aligner";
 $PG{"t_coffee"}{"ADDRESS"}="http://www.tcoffee.org";
@@ -1162,7 +1272,7 @@ $PG{"dialign-t"}{"ADDRESS"}="http://dialign-tx.gobics.de/";
 $PG{"dialign-t"}{"DIR"}="/usr/share/dialign-tx/";
 $PG{"dialign-t"}{"language"}="C";
 $PG{"dialign-t"}{"language2"}="C";
-$PG{"dialign-t"}{"source"}="http://dialign-tx.gobics.de/DIALIGN-TX_1.0.1.tar.gz";
+$PG{"dialign-t"}{"source"}="http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz";
 $PG{"dialign-t"}{"mode"}="mcoffee";
 $PG{"dialign-t"}{"binary"}="dialign-t";
 $PG{"dialign-tx"}{"4_TCOFFEE"}="DIALIGNTX";
@@ -1171,7 +1281,7 @@ $PG{"dialign-tx"}{"ADDRESS"}="http://dialign-tx.gobics.de/";
 $PG{"dialign-tx"}{"DIR"}="/usr/share/dialign-tx/";
 $PG{"dialign-tx"}{"language"}="C";
 $PG{"dialign-tx"}{"language2"}="C";
-$PG{"dialign-tx"}{"source"}="http://dialign-tx.gobics.de/DIALIGN-TX_1.0.1.tar.gz";
+$PG{"dialign-tx"}{"source"}="http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz";
 $PG{"dialign-tx"}{"mode"}="mcoffee";
 $PG{"dialign-tx"}{"binary"}="dialign-tx";
 $PG{"poa"}{"4_TCOFFEE"}="POA";
@@ -1206,10 +1316,17 @@ $PG{"muscle"}{"type"}="sequence_multiple_aligner";
 $PG{"muscle"}{"ADDRESS"}="http://www.drive5.com/muscle/";
 $PG{"muscle"}{"language"}="C++";
 $PG{"muscle"}{"language2"}="GPP";
-$PG{"muscle"}{"source"}="http://www.drive5.com/muscle/downloads3.6/muscle3.6_src.tar.gz";
-$PG{"muscle"}{"windows"}="http://www.drive5.com/muscle/downloads3.6/muscle3.6_win32.zip";
-$PG{"muscle"}{"linux"}="http://www.drive5.com/muscle/downloads3.6/muscle3.6_linux_ia32.tar.gz";
+$PG{"muscle"}{"source"}="http://www.drive5.com/muscle/downloads3.7/muscle3.7_src.tar.gz";
+$PG{"muscle"}{"windows"}="http://www.drive5.com/muscle/downloads3.7/muscle3.7_win32.zip";
+$PG{"muscle"}{"linux"}="http://www.drive5.com/muscle/downloads3.7/muscle3.7_linux_ia32.tar.gz";
 $PG{"muscle"}{"mode"}="mcoffee,rcoffee";
+$PG{"mus4"}{"4_TCOFFEE"}="MUS4";
+$PG{"mus4"}{"type"}="sequence_multiple_aligner";
+$PG{"mus4"}{"ADDRESS"}="http://www.drive5.com/muscle/";
+$PG{"mus4"}{"language"}="C++";
+$PG{"mus4"}{"language2"}="GPP";
+$PG{"mus4"}{"source"}="http://www.drive5.com/muscle/muscle4.0_src.tar.gz";
+$PG{"mus4"}{"mode"}="mcoffee,rcoffee";
 $PG{"pcma"}{"4_TCOFFEE"}="PCMA";
 $PG{"pcma"}{"type"}="sequence_multiple_aligner";
 $PG{"pcma"}{"ADDRESS"}="ftp://iole.swmed.edu/pub/PCMA/";
@@ -1229,7 +1346,7 @@ $PG{"amap"}{"type"}="sequence_multiple_aligner";
 $PG{"amap"}{"ADDRESS"}="http://bio.math.berkeley.edu/amap/";
 $PG{"amap"}{"language"}="C++";
 $PG{"amap"}{"language2"}="CXX";
-$PG{"amap"}{"source"}="http://baboon.math.berkeley.edu/amap/download/amap.2.2.tar.gz";
+$PG{"amap"}{"source"}="http://amap-align.googlecode.com/files/amap.2.0.tar.gz";
 $PG{"amap"}{"mode"}="mcoffee";
 $PG{"proda"}{"4_TCOFFEE"}="PRODA";
 $PG{"proda"}{"type"}="sequence_multiple_aligner";
@@ -1238,19 +1355,26 @@ $PG{"proda"}{"language"}="C++";
 $PG{"proda"}{"language2"}="CXX";
 $PG{"proda"}{"source"}="http://proda.stanford.edu/proda_1_0.tar.gz";
 $PG{"proda"}{"mode"}="mcoffee";
+$PG{"fsa"}{"4_TCOFFEE"}="FSA";
+$PG{"fsa"}{"type"}="sequence_multiple_aligner";
+$PG{"fsa"}{"ADDRESS"}="http://fsa.sourceforge.net/";
+$PG{"fsa"}{"language"}="C++";
+$PG{"fsa"}{"language2"}="CXX";
+$PG{"fsa"}{"source"}="http://sourceforge.net/projects/fsa/files/fsa-1.15.3.tar.gz/download/";
+$PG{"fsa"}{"mode"}="mcoffee";
 $PG{"prank"}{"4_TCOFFEE"}="PRANK";
 $PG{"prank"}{"type"}="sequence_multiple_aligner";
 $PG{"prank"}{"ADDRESS"}="http://www.ebi.ac.uk/goldman-srv/prank/";
 $PG{"prank"}{"language"}="C++";
 $PG{"prank"}{"language2"}="CXX";
-$PG{"prank"}{"source"}="http://www.ebi.ac.uk/goldman-srv/prank/src/old/prank.src.081202.tgz";
+$PG{"prank"}{"source"}="http://www.ebi.ac.uk/goldman-srv/prank/src/prank/prank.src.100303.tgz";
 $PG{"prank"}{"mode"}="mcoffee";
 $PG{"sap"}{"4_TCOFFEE"}="SAP";
 $PG{"sap"}{"type"}="structure_pairwise_aligner";
 $PG{"sap"}{"ADDRESS"}="http://mathbio.nimr.mrc.ac.uk/wiki/Software";
 $PG{"sap"}{"language"}="C";
 $PG{"sap"}{"language2"}="C";
-$PG{"sap"}{"source"}="http://www.tcoffee.org/Packages/sap_distribution_TCC_0.6.tar.gz";
+$PG{"sap"}{"source"}="http://mathbio.nimr.mrc.ac.uk/download/sap-1.1.1.tar.gz";
 $PG{"sap"}{"mode"}="expresso,3dcoffee";
 $PG{"TMalign"}{"4_TCOFFEE"}="TMALIGN";
 $PG{"TMalign"}{"type"}="structure_pairwise_aligner";
@@ -1265,7 +1389,7 @@ $PG{"mustang"}{"type"}="structure_pairwise_aligner";
 $PG{"mustang"}{"ADDRESS"}="http://www.cs.mu.oz.au/~arun/mustang";
 $PG{"mustang"}{"language"}="C++";
 $PG{"mustang"}{"language2"}="CXX";
-$PG{"mustang"}{"source"}="http://www.cs.mu.oz.au/~arun/mustang/mustang_v.3.tgz";
+$PG{"mustang"}{"source"}="http://ww2.cs.mu.oz.au/~arun/mustang/mustang_v3.2.1.tgz";
 $PG{"mustang"}{"mode"}="expresso,3dcoffee";
 $PG{"lsqman"}{"4_TCOFFEE"}="LSQMAN";
 $PG{"lsqman"}{"type"}="structure_pairwise_aligner";
@@ -1321,7 +1445,14 @@ $PG{"RNAplfold"}{"ADDRESS"}="http://www.tbi.univie.ac.at/~ivo/RNA/";
 $PG{"RNAplfold"}{"language"}="C";
 $PG{"RNAplfold"}{"language2"}="C";
 $PG{"RNAplfold"}{"source"}="http://www.tbi.univie.ac.at/~ivo/RNA/ViennaRNA-1.7.2.tar.gz";
-$PG{"RNAplfold"}{"mode"}="rcoffee";
+$PG{"RNAplfold"}{"mode"}="rcoffee,";
+$PG{"retree"}{"4_TCOFFEE"}="PHYLIP";
+$PG{"retree"}{"type"}="RNA_secondarystructure_predictor";
+$PG{"retree"}{"ADDRESS"}="http://evolution.gs.washington.edu/phylip/";
+$PG{"retree"}{"language"}="C";
+$PG{"retree"}{"language2"}="C";
+$PG{"retree"}{"source"}="http://evolution.gs.washington.edu/phylip/download/phylip-3.69.tar.gz";
+$PG{"retree"}{"mode"}="trmsd,";
 $PG{"hmmtop"}{"4_TCOFFEE"}="HMMTOP";
 $PG{"hmmtop"}{"type"}="protein_secondarystructure_predictor";
 $PG{"hmmtop"}{"ADDRESS"}="www.enzim.hu/hmmtop/";
@@ -1346,7 +1477,7 @@ $PG{"wublast.pl"}{"language"}="Perl";
 $PG{"wublast.pl"}{"language2"}="Perl";
 $PG{"wublast.pl"}{"source"}="empty";
 $PG{"wublast.pl"}{"update_action"}="never";
-$PG{"wublast.pl"}{"mode"}="psicoffee,expresso,3dcoffee";
+$PG{"wublast.pl"}{"mode"}="psicoffee,expresso,accurate";
 $PG{"blastpgp.pl"}{"4_TCOFFEE"}="EBIBLASTPGPc";
 $PG{"blastpgp.pl"}{"type"}="protein_homology_predictor";
 $PG{"blastpgp.pl"}{"ADDRESS"}="built_in";
@@ -1355,7 +1486,7 @@ $PG{"blastpgp.pl"}{"language"}="Perl";
 $PG{"blastpgp.pl"}{"language2"}="Perl";
 $PG{"blastpgp.pl"}{"source"}="empty";
 $PG{"blastpgp.pl"}{"update_action"}="never";
-$PG{"blastpgp.pl"}{"mode"}="psicoffee,expresso,3dcoffee";
+$PG{"blastpgp.pl"}{"mode"}="psicoffee,expresso,accurate";
 $PG{"blastcl3"}{"4_TCOFFEE"}="NCBIWEBBLAST";
 $PG{"blastcl3"}{"type"}="protein_homology_predictor";
 $PG{"blastcl3"}{"ADDRESS"}="ftp://ftp.ncbi.nih.gov/blast/executables/LATEST";
@@ -1378,12 +1509,23 @@ $PG{"SOAP::Lite"}{"ADDRESS"}="http://cpansearch.perl.org/src/MKUTTER/SOAP-Lite-0
 $PG{"SOAP::Lite"}{"language"}="Perl";
 $PG{"SOAP::Lite"}{"language2"}="Perl";
 $PG{"SOAP::Lite"}{"source"}="empty";
-$PG{"SOAP::Lite"}{"mode"}="psicoffee,expresso,3dcoffee";
+$PG{"blastpgp"}{"update_action"}="never";
+$PG{"SOAP::Lite"}{"mode"}="none";
+$PG{"XML::Simple"}{"4_TCOFFEE"}="XMLSIMPLE";
+$PG{"XML::Simple"}{"type"}="library";
+$PG{"XML::Simple"}{"ADDRESS"}="http://search.cpan.org/~grantm/XML-Simple-2.18/lib/XML/Simple.pm";
+$PG{"XML::Simple"}{"language"}="Perl";
+$PG{"XML::Simple"}{"language2"}="Perl";
+$PG{"XML::Simple"}{"source"}="empty";
+$PG{"XML::Simple"}{"mode"}="psicoffee,expresso,accurate";
 $MODE{"tcoffee"}{"name"}="tcoffee";
 $MODE{"rcoffee"}{"name"}="rcoffee";
 $MODE{"3dcoffee"}{"name"}="3dcoffee";
 $MODE{"mcoffee"}{"name"}="mcoffee";
 $MODE{"expresso"}{"name"}="expresso";
+$MODE{"trmsd"}{"name"}="trmsd";
+$MODE{"accurate"}{"name"}="accurate";
+$MODE{"seq_reformat"}{"name"}="seq_reformat";
 
 
 $PG{C}{compiler}="gcc";
@@ -1491,4 +1633,57 @@ sub env_file2putenv
     return $n;
   }
 
+sub replace_line_in_file
+  {
+    my ($file, $wordin, $wordout)=@_;
+    my $O=new FileHandle;
+    my $I=new FileHandle;
+    my $l;
+    if (!-e $file){return;}
+    
+    system ("mv $file $file.old");
+    open ($O, ">$file");
+    open ($I, "$file.old");
+    while (<$I>)
+      {
+	$l=$_;
+	if (!($l=~/$wordin/)){print $O "$l";}
+	elsif ( $wordout ne ""){$l=~s/$wordin/$wordout/g;print $O "$l";}
+      }
+    close ($O);
+    close ($I);
+    return;
+  }
+
+sub add_C_libraries
+  {
+   my ($file,$first,@list)=@_;
+   
+    my $O=new FileHandle;
+    my $I=new FileHandle;
+    my ($l,$anchor);
+    if (!-e $file){return;}
+   
+    $anchor="#include <$first>";
+	 
+    system ("mv $file $file.old");
+    open ($O, ">$file");
+    open ($I, "$file.old");
+    while (<$I>)
+      {
+	$l=$_;
+	print $O "$l";
+	if (!($l=~/$anchor/))
+	   {
+	    
+	    foreach my $lib (@list)
+	       {
+                  print $O "#include <$lib>\n";
+	       }
+           }
+      }
+    close ($O);
+    close ($I);
+    return;
+    }
 

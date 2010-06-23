@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,10 +13,11 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[0] 
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
--in            	S	[1] 	Asample_aln5.aln
+-in            	S	[1] 	Lmarna.tc_lib
 -seq           	S	[0] 
 -aln           	S	[0] 
 -method_limits 	S	[0] 
@@ -47,7 +49,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -distance_matrix_mode	S	[0] 	ktup
 -distance_matrix_sim_mode	S	[0] 	idmat_sim1
 -quicktree     	FL	[0] 	0
--outfile       	W_F	[1] 	test.aln
+-outfile       	W_F	[1] 	maran.test
 -maximise      	FL	[1] 	1
 -output        	S	[0] 	aln	html
 -infile        	R_F	[0] 
@@ -147,339 +149,61 @@ PROGRAM: T-COFFEE (Version_8.07)
 -exon_boundaries	S	[0] 
 
 INPUT FILES
-	Input File (A) sample_aln5.aln  Format clustal_aln
+	Input File (L) marna.tc_lib 
 
-INPUT SEQUENCES: 12 SEQUENCES  [PROTEIN]
-  Input File sample_aln5.aln Seq s22 Length  113 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s23 Length  113 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s24 Length  764 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s25 Length  395 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s26 Length  382 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s27 Length  154 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s28 Length  201 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s29 Length  113 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s30 Length  100 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s31 Length   93 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s32 Length  120 type PROTEIN Struct Unchecked
-  Input File sample_aln5.aln Seq s33 Length  104 type PROTEIN Struct Unchecked
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File marna.tc_lib Seq seq1F Length   74 type RNA Struct Unchecked
+  Input File marna.tc_lib Seq seq2F Length   72 type RNA Struct Unchecked
+  Input File marna.tc_lib Seq seq3F Length   73 type RNA Struct Unchecked
+  Input File marna.tc_lib Seq seq4F Length   74 type RNA Struct Unchecked
+  Input File marna.tc_lib Seq seq5F Length   67 type RNA Struct Unchecked
 
 COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
 
-	Seq: s22
-	Seq: s23
-	Seq: s24
-	Seq: s25
-	Seq: s26
-	Seq: s27
-	Seq: s28
-	Seq: s29
-	Seq: s30
-	Seq: s31
-	Seq: s32
-	Seq: s33
+	Seq: seq1F
+	Seq: seq2F
+	Seq: seq3F
+	Seq: seq4F
+	Seq: seq5F
 
 READ/MAKE LIBRARIES:[1]
 
-	sample_aln5.aln [aln]
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [6910]
-
-Library Relaxation: Multi_proc [2] 
-		[Submit   Job][TOT= 3455][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][  1 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][  2 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][  3 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][  4 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][  5 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][  6 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][  7 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][  8 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][  9 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 10 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 11 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 12 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 13 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 14 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 15 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 16 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 17 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 18 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 19 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 20 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 21 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 22 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 23 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 24 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 25 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 26 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 27 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 28 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 29 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 30 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 31 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 32 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 33 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 34 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 35 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 36 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 37 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 38 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 39 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 40 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 41 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 42 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 43 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 44 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 45 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 46 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 47 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 48 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 49 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 50 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 51 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 52 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 53 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 54 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 55 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 56 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 57 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 58 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 59 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 60 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 61 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 62 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 63 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 64 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 65 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 67 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 68 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 69 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 70 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 71 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 72 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 73 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 74 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 75 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 76 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 77 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 78 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 79 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 80 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 81 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 82 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 83 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 84 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 85 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 86 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 87 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 88 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 89 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 90 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 91 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 92 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 93 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 94 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 95 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 96 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 97 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 98 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][ 99 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT= 3455][100 %][ELAPSED TIME:    0 sec.]
-Total Relaxation: [6910]--->[6909] Entries
-
-	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
+	marna.tc_lib [lib]
 
 
-WEIGHTED MODE:t_coffee
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 60888                                    
+60888 -- ERROR: COREDUMP: T-COFFEE Version_8.80
+*************************************************************************************************
 
-	s22 1.01
-	s23 1.00
-	s24 1.01
-	s25 0.97
-	s26 0.98
-	s27 1.01
-	s28 0.97
-	s29 1.01
-	s30 1.01
-	s31 0.98
-	s32 1.03
-	s33 1.03
-
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-
-	Group   13: [Group    8 (   1 seq)] with [Group    6 (   1 seq)]-->[Score=  68][Len=  158][PID:3708]
-	Group   14: [Group   13 (   2 seq)] with [Group    1 (   1 seq)]-->[Score=  43][Len=  169][PID:3708]
-	Group   15: [Group    5 (   1 seq)] with [Group    2 (   1 seq)]-->[Score=  20][Len=  410][PID:3708]
-	Group   16: [Group   10 (   1 seq)] with [Group    7 (   1 seq)]-->[Score=  43][Len=  203][PID:3708]
-	Group   17: [Group   16 (   2 seq)] with [Group   15 (   2 seq)]-->[Score=  46][Len=  417][PID:3708]
-	Group   18: [Group   17 (   4 seq)] with [Group   14 (   3 seq)]-->[Score=  34][Len=  427][PID:3708]
-	Group   19: [Group   12 (   1 seq)] with [Group    4 (   1 seq)]-->[Score=  23][Len=  403][PID:3708]
-	Group   20: [Group   19 (   2 seq)] with [Group   18 (   7 seq)]-->[Score=  86][Len=  442][PID:3708]
-	Group   23: [Group   22 (   3 seq)] with [Group   20 (   9 seq)]-->[Score=  19][Len= 1020][PID:5536][Forked]
+	******************************************************************
+	* Abnormal Termination
+	* Job NOT Completed:[T-COFFEE, Version_8.80]
+	* Please CHECK:                                       
+	* 	-1 The format of your Input Files                 
+	* 	-2 The parameters                                 
+	* 	-3 The use of special characters in sequence names:
+	* 		 (@, |, %...)
+	* 	-4 The Online Doc (http://www.tcoffee.org)                   
+	* 	-5 Send the file:
+	*
+	*	    t_coffee.ErrorReport 
+	* to:
+	* 		cedric.notredame@europe.com
+	* If you run T-Coffee over the WEB:
+	* 	Windows Cut and Paste is sometimes erratic and
+	* 	it can loose carriage returns. If you suspect this,
+	* 	try to cut and paste through an intermediate application
+	* 	(word pad) and inspect the results
 
 
+	* CONFIDENTIALITY:
+	* 	The File t_coffee.ErrorReport may contain your personnal DATA
+	* 	Remove ALL confidential DATA from this file BEFORE sending it
+	******************************************************************
+# Command Line: t_coffee -in Lmarna.tc_lib -outfile maran.test  [PROGRAM:T-COFFEE]
 
-OUTPUT RESULTS
-	#### File Type= GUIDE_TREE Format=     newick Name= sample_aln5.dnd
-	#### File Type=        MSA Format=        aln Name= test.aln
-	#### File Type=        MSA Format=       html Name= test.aln.html
+#----- Dumped ErrorFile: t_coffee.ErrorReport
 
-
-# TIP :See The Full Documentation on www.tcoffee.org
-# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
-# TIP  2:  Change the Width of your MSA with the environement variable ALN_LINE_LENGTH (all formats)
-
-# Command Line: t_coffee -in Asample_aln5.aln -outfile test.aln  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 8.045 Mb, Max= 9.444 Mb
-# T-COFFEE CPU Usage: 595 millisec
-# Results Produced with T-COFFEE (Version_8.07)
-# T-COFFEE is available from http://www.tcoffee.org
-CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.47 sec, SCORE=97, Nseq=12, Len=1020 
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             ------------------------------------------------------------
-s25             LPVDKYPVLKDQPAEVLFREN---NPTVLECIIEGNDQGVKYSWKKDGKSYNWQ-EHNAA
-s26             --RSYGPVFEEQPAHTLFPEGSAEEKVTLTCRA-RANPPATYRWKMNGTELKMGPDSRYR
-s27             ------------------------------------------------------------
-s28             MTTQAPTFTQPLQSVVVLEGSTATFEAHISGFPVPEVSWFRDGQVISTSTLPGVQISFSD
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             WN----------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             ------------------------------------------------------------
-s25             LRKDEGSLVFLRPQ-ASDEGHYQCFAETPAGVASSRVISFRKTYLIASPAKTH-EKTPIE
-s26             LV--AGDLVISNPVKAKDAGSYQCVATNARGTVVSREASLRFGFLQEFSAEERDPVKITE
-s27             ------------------------------------------------------------
-s28             GR----------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             ------------------------------------------------------------
-s25             GRPFQLDCVLPNAYPKPLITWKK---RLSGADPNADVTDFDRRITAG-PDGNLYFTIVTK
-s26             GWGVMFTCSPPPHYPALSYRWLLNEFPN--------FIPADGRRFVSQTTGNLYIAKTEA
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------ARVDQT----PRSVTKET
-s23             -----------------------------------------GDQVEQS----PSALSLHE
-s24             ----------------------------------------RVLQVDIV----PSQGEISV
-s25             EDVSDIYKYVCTAKNAAVDEEVVLVEYEIKGVTKDNSGYKGEPVPQYV----SKDMMAKA
-s26             SDLGN--YSCFATSHIDFITKSVFSKFSQLSLAAED-ARQYAPSIKAK----FPADTYAL
-s27             -ISGMSGRKASGSSPTSPINANKVENEDAFLEEVAEEKPHVKPYFTKT----ILDMEVVE
-s28             -AKLTIPAVTKANSGRYSLKATNGSGQATSTAELLVKAETAPPNFVQR----LQSMTVRQ
-s29             -------------------------------GSSGSSGTDVSSWIVYPSG--KVYVAAVR
-s30             ----------------------------------MHHHHHHSSRILTK----PRSMTVYE
-s31             ----------------------------------------LKPKILTA----SRKIKIKA
-s32             ----------------------------------IHGKESCDVQLYIKR---QSEHSILA
-s33             ----------------------------------MNSNNKRAPYWTNTEKMEKRLHAVPA
-                                                                            
-
-s22             G-ESLTINCVLRDASY--ALGSTCWYRKKSGEGNE---ESI--S------K-GGRYVET-
-s23             G-TDSALRCNFT---T--TMRSVQWFRQN-SRGSL---ISL--FYLASGTKENGRLKSA-
-s24             G-ESKFFLCQVA---GDAKDKDISWFSPN-----G---EKL--S------PNQQRISVV-
-s25             G-DVTMIYCMYG---S-NPMGYPNYFKNG-----K---DVN--G------NPEDRITRHN
-s26             TGQMVTLECFAF---G-NPVPQIKWRKLD-----GSQTSKW--L------S---------
-s27             G-SAARFDCKVE---G-YPDPEVMWFKDD-----N---PVK--E------S--RHFQID-
-s28             G-SQVRLQVRVT---G-IPTPVVKFYRDG-----A---EIQ--S------S--LDFQIS-
-s29             L-ERVVLTCELC---R--PWAEVRWTKDG-----E---EVV--E------S--PALLLQK
-s30             G-ESARFSCDTD---G-EPVPTVTWLRKG-----Q---VLS--T------S--ARHQVT-
-s31             G-FTHNLEVDFI---G-APDPTATWTVGDSG---A---ALA--P----------ELLVD-
-s32             G-DPFELECPVK---YCANRPHVTWCKLNGTT--C---VKL--E----------DRQTS-
-s33             A-NTVKFRCPAG---G-NPMPTMRWLKNG-----K---EFKQEH------R--IGGYKV-
-                      :                 :                                   
-
-s22             -V-NSG-SKSFSLRINDLTVEDGGTYRCGLGVA-G--GYCDY-ALCSSRYAECGDGTAVT
-s23             -FDSER-ARYSTLHIRDAQLEDSGTYFCAAEASSGSWQLIFGSGTQLTVMPVT-------
-s24             -WND-D--DSSTLTIYNANIDDAGIYKCVVTAEDG--TQSEA-TVNVKIFQKLMFK-NAP
-s25             RTS------GKRLLFKTTLPEDEGVYTCEVDNGVG--KPQKH-SLKLTVVSAPKYEQKPE
-s26             --S------EPLLHIQNVDFEDEGTYECEAENIK---GRDTY-QGRIIIHAQPDWLDVI-
-s27             -YDEEG---NCSLTISEVCGDDDAKYTCKAVNS-L--GEATC-TAELLVETMGKEGEGEG
-s28             -QEG-D---LYSLLIAEAYPEDSGTYSVNATNS-V--GRATS-TAELLVQGETREEF---
-s29             EDT------VRRLVLPAVQLEDSGEYLCEID-------DESA-SFTVTVTEPPVRI-IYS
-s30             -TTK-Y---KSTFEISSVQASDEGNYSVVVENS-E--GKQEA-EFTLTIQK---------
-s31             -AKS-S---TTSIFFPSAKRADSGNYKLKVKNE-L--GEDEA-IFEVIVQ----------
-s32             -WKEEKNISFFILHFEPVLPNDNGSYRCSANFQSN--LIESH-STTLYVTDVKHHHHHHH
-s33             -RNQ-H---WSLIMESV-VPSDKGNYTCVVENE-Y--GSINH-TYHLDVV----------
-                            :        * . *                                  
-
-s22             VN----------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             TPQEFKEG--EDAVIVCDVVSSLPPTIIWKHKGRDV-ILKKDVRFIVLSNNYLQIRGIKK
-s25             KVIVVKQG--QDVTIPCKVTGLPAPNVVWSHNAKPL-S---GGRATVT-DSGLVIKGVKN
-s26             --TDTEADIGSDLRWSCVASGKPRPAVRWLRDGQPLAS---QNRIEVS-GGELRFSKLVL
-s27             EGEEDEEEEEE-------------------------------------------------
-s28             ------------------------------------------------------------
-s29             GPSSG-------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             H-----------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             TDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIVPSQGEISVGESKFFLCQVAGDAKDK
-s25             GDKGYYGCRATN--EHGDKYFETLVQVN--------------------------------
-s26             EDSGMYQCVAEN--KHG-TVYASAELTVQA------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             DISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIYNANIDDAGIYKCVVTAEDGTQSEATV
-s25             ------------------------------------------------------------
-s26             ------------------------------------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             NVKIFQKLMFKNAPTPQEFKEGEDAVIVCDVVSSLPPTIIWKHKGRDVILKKDVRFIVLS
-s25             ------------------------------------------------------------
-s26             ------------------------------------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             NNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIVPSQGEISVGESKFF
-s25             ------------------------------------------------------------
-s26             ------------------------------------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             LCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIYNANIDDAGIYKCVVT
-s25             ------------------------------------------------------------
-s26             ------------------------------------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             AEDGTQSEATVNVKIFQKLMFKNAPTPQEFKEGEDAVIVCDVVSSLPPTIIWKHKGRDVI
-s25             ------------------------------------------------------------
-s26             ------------------------------------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             LKKDVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVIVRVLQVDIVPSQ
-s25             ------------------------------------------------------------
-s26             ------------------------------------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             GEISVGESKFFLCQVAGDAKDKDISWFSPNGEKLSPNQQRISVVWNDDDSSTLTIYNANI
-s25             ------------------------------------------------------------
-s26             ------------------------------------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             DDAGIYKCVVTAEDGTQSEATVNVKIFQKLMFKNAPTPQEFKEGEDAVIVCDVVSSLPPT
-s25             ------------------------------------------------------------
-s26             ------------------------------------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-s22             ------------------------------------------------------------
-s23             ------------------------------------------------------------
-s24             IIWKHKGRDVILKKDVRFIVLSNNYLQIRGIKKTDEGTYRCEGRILARGEINFKDIQVIV
-s25             ------------------------------------------------------------
-s26             ------------------------------------------------------------
-s27             ------------------------------------------------------------
-s28             ------------------------------------------------------------
-s29             ------------------------------------------------------------
-s30             ------------------------------------------------------------
-s31             ------------------------------------------------------------
-s32             ------------------------------------------------------------
-s33             ------------------------------------------------------------
-                                                                            
-
-
-
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 60888 ppid 60887
+#CL: t_coffee -in Lmarna.tc_lib -outfile maran.test 

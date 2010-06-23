@@ -1,12 +1,12 @@
->hmgl_trybr FAM1
-kkdsnaxxpkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
-vyeemaekdkerykremmm
->hmgt_mouse FAM1
-kpkrprsayniyvsesfqeakddsaxxxxxqgklklvneawknlspeekqayiql
+>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
 akddrirydnemksweeqmae
->hmgb_chite FAM2
+>hmgb_chite
 adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
 weakaatakqnyiralqeyerngg
->hmgl_wheat FAM3
+>hmgl_wheat
 dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
 ekapyvakanklkgeynkaiaaynkgesa

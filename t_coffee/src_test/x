@@ -1,14 +1,12 @@
-==1208== Memcheck, a memory error detector
-==1208== Copyright (C) 2002-2009, and GNU GPL'd, by Julian Seward et al.
-==1208== Using Valgrind-3.5.0 and LibVEX; rerun with -h for copyright info
-==1208== Command: t_coffee 3d.fasta -mode expresso
-==1208== 
+==15378== Memcheck, a memory error detector
+==15378== Copyright (C) 2002-2009, and GNU GPL'd, by Julian Seward et al.
+==15378== Using Valgrind-3.5.0 and LibVEX; rerun with -h for copyright info
+==15378== Command: t_coffee 1aab_ref1.pep
+==15378== 
+==15378== Warning: ignored attempt to set SIGKILL handler in sigaction();
+==15378==          the SIGKILL signal is uncatchable
 
-WARNING: The Home directory was set to /home/cnotredame
-WARNING RECAPITULATION: 1 Warning  [PROGRAM: T-COFFEE]
-**WARNING:   1** WARNING: The Home directory was set to /home/cnotredame
-
-PROGRAM: T-COFFEE (Version_8.75)
+PROGRAM: T-COFFEE (Version_8.82)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
@@ -21,13 +19,13 @@ PROGRAM: T-COFFEE (Version_8.75)
 -clean         	S	[0] 	no
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
--template_file 	S	[1] 	EXPRESSO
+-template_file 	S	[0] 
 -setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
--profile_template_file	S	[1] 	EXPRESSO
--in            	S	[1] 	Msap_pair
--seq           	S	[1] 	3d.fasta
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[1] 	1aab_ref1.pep
 -aln           	S	[0] 
 -method_limits 	S	[0] 
 -method        	S	[0] 
@@ -158,1182 +156,549 @@ PROGRAM: T-COFFEE (Version_8.75)
 -exon_boundaries	S	[0] 
 
 INPUT FILES
-	Input File (M) sap_pair 
-	Input File (S) 3d.fasta  Format fasta_seq
+	Input File (S) 1aab_ref1.pep  Format fasta_seq
+	Input File (M) proba_pair 
 
-Looking For Sequence Templates:
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File 1aab_ref1.pep Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File 1aab_ref1.pep Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+  Input File 1aab_ref1.pep Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File 1aab_ref1.pep Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
 
-	Template Type: [EXPRESSO] Mode Or File: [EXPRESSO] [Start
-	------ Fetch Templates [Multi Core Mode 2 CPUs]
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 1
-==1208==    at 0x5B2AFE: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x4b8 is not stack'd, malloc'd or (recently) free'd
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53bb880 is 0 bytes inside a block of size 78 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53bb880 is 0 bytes inside a block of size 78 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 1
-==1208==    at 0x5B2AFE: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x4b8 is not stack'd, malloc'd or (recently) free'd
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53c0ac0 is 0 bytes inside a block of size 78 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53c0ac0 is 0 bytes inside a block of size 78 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 1
-==1208==    at 0x5B2AFE: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x4b8 is not stack'd, malloc'd or (recently) free'd
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==  Address 0x53c1180 is 0 bytes inside a block of size 48 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==  Address 0x53c1180 is 0 bytes inside a block of size 48 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Use of uninitialised value of size 4
-==1208==    at 0x5AE5A6: _itoa_word (in /lib/libc-2.11.1.so)
-==1208==    by 0x5B2087: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5AE5AE: _itoa_word (in /lib/libc-2.11.1.so)
-==1208==    by 0x5B2087: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5B014D: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5B0171: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==  Address 0x53bbf40 is 0 bytes inside a block of size 48 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==  Address 0x53bbf40 is 0 bytes inside a block of size 48 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Use of uninitialised value of size 4
-==1208==    at 0x5AE5A6: _itoa_word (in /lib/libc-2.11.1.so)
-==1208==    by 0x5B2087: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5AE5AE: _itoa_word (in /lib/libc-2.11.1.so)
-==1208==    by 0x5B2087: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5B014D: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5B0171: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C961D: error_exit (util.c:7854)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53c5d00 is 0 bytes inside a block of size 78 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53c5d00 is 0 bytes inside a block of size 78 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C005C: myexit (util.c:4439)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==  Address 0x53c63c0 is 0 bytes inside a block of size 48 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==  Address 0x53c63c0 is 0 bytes inside a block of size 48 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Use of uninitialised value of size 4
-==1208==    at 0x5AE5A6: _itoa_word (in /lib/libc-2.11.1.so)
-==1208==    by 0x5B2087: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5AE5AE: _itoa_word (in /lib/libc-2.11.1.so)
-==1208==    by 0x5B2087: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5B014D: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5B0171: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80C0069: myexit (util.c:4442)
-==1208==    by 0x80C9633: error_exit (util.c:7856)
-==1208==    by 0x59AB27: ??? (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80BE940: vfork (util.c:3924)
-==1208==    by 0x8093388: seq2template_seq (aln_convertion_util.c:5190)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208== 
-==1208== 
-==1208== HEAP SUMMARY:
-==1208==     in use at exit: 10,569,754 bytes in 116,724 blocks
-==1208==   total heap usage: 129,201 allocs, 12,482 frees, 14,304,107 bytes allocated
-==1208== 
-==1208== 
-==1208== HEAP SUMMARY:
-==1208==     in use at exit: 10,569,478 bytes in 116,720 blocks
-==1208==   total heap usage: 129,194 allocs, 12,479 frees, 14,283,399 bytes allocated
-==1208== 
-==1208== 
-==1208== HEAP SUMMARY:
-==1208==     in use at exit: 10,570,030 bytes in 116,728 blocks
-==1208==   total heap usage: 129,208 allocs, 12,485 frees, 14,324,815 bytes allocated
-==1208== 
-==1208== LEAK SUMMARY:
-==1208==    definitely lost: 13,615 bytes in 31 blocks
-==1208==    indirectly lost: 1,833 bytes in 10 blocks
-==1208==      possibly lost: 10,553,630 bytes in 116,677 blocks
-==1208==    still reachable: 400 bytes in 2 blocks
-==1208==         suppressed: 0 bytes in 0 blocks
-==1208== Rerun with --leak-check=full to see details of leaked memory
-==1208== 
-==1208== For counts of detected and suppressed errors, rerun with: -v
-==1208== Use --track-origins=yes to see where uninitialised values come from
-==1208== ERROR SUMMARY: 29 errors from 15 contexts (suppressed: 13 from 8)
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80BE2E3: shift_lock (util.c:3731)
-==1208==    by 0x80BE51B: check_process (util.c:3789)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE2E3: shift_lock (util.c:3731)
-==1208==    by 0x80BE51B: check_process (util.c:3789)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80BE2E3: shift_lock (util.c:3731)
-==1208==    by 0x80BE51B: check_process (util.c:3789)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x401c8e8 is 0 bytes inside a block of size 93 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE2E3: shift_lock (util.c:3731)
-==1208==    by 0x80BE51B: check_process (util.c:3789)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80BE2E3: shift_lock (util.c:3731)
-==1208==    by 0x80BEAF5: kill_child_pid (util.c:3988)
-==1208==    by 0x80C964F: clean_exit (util.c:7868)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==  Address 0x53c5f50 is 0 bytes inside a block of size 137 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80BE2E3: shift_lock (util.c:3731)
-==1208==    by 0x80BEAF5: kill_child_pid (util.c:3988)
-==1208==    by 0x80C964F: clean_exit (util.c:7868)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53c7510 is 0 bytes inside a block of size 137 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53c7510 is 0 bytes inside a block of size 137 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Use of uninitialised value of size 4
-==1208==    at 0x5AE5A6: _itoa_word (in /lib/libc-2.11.1.so)
-==1208==    by 0x5B2087: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5AE5AE: _itoa_word (in /lib/libc-2.11.1.so)
-==1208==    by 0x5B2087: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5B014D: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Conditional jump or move depends on uninitialised value(s)
-==1208==    at 0x5B0171: vfprintf (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE3D4: lock (util.c:3751)
-==1208==    by 0x80C96BB: clean_exit (util.c:7873)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid read of size 4
-==1208==    at 0x80AC64D: vfree (util_declare.c:1376)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C9769: clean_exit (util.c:7882)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53c7c10 is 0 bytes inside a block of size 94 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C9769: clean_exit (util.c:7882)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-==1208== Invalid free() / delete / delete[]
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE396: lock (util.c:3751)
-==1208==    by 0x80C9769: clean_exit (util.c:7882)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208==  Address 0x53c7c10 is 0 bytes inside a block of size 94 free'd
-==1208==    at 0x40057F6: free (vg_replace_malloc.c:325)
-==1208==    by 0x80AC662: vfree (util_declare.c:1379)
-==1208==    by 0x80BE383: lock (util.c:3749)
-==1208==    by 0x80C9769: clean_exit (util.c:7882)
-==1208==    by 0x59E09E: exit (in /lib/libc-2.11.1.so)
-==1208==    by 0x80BE527: check_process (util.c:3790)
-==1208==    by 0x80BEA22: vwait (util.c:3966)
-==1208==    by 0x80BE966: vwait_npid (util.c:3935)
-==1208==    by 0x80934DB: seq2template_seq (aln_convertion_util.c:5216)
-==1208==    by 0x8092328: seq2template_seq (aln_convertion_util.c:5023)
-==1208==    by 0x8185C10: batch_main (t_coffee.c:3976)
-==1208==    by 0x817D7DF: main (t_coffee.c:79)
-==1208== 
-ERROR: COREDUMP T-COFFEE [1235 1208]
-FAILED
-STACK: 136288899 Parent: 1208 Process:1235 67111072
-ERROR: COREDUMP T-COFFEE [1236 1208]
-FAILED
-STACK: 136288899 Parent: 1208 Process:1236 67111072
-ERROR: COREDUMP T-COFFEE [1237 1208]
-FAILED
-STACK: 136288899 Parent: 1208 Process:1237 67111072
-STACK: 136288899 Parent: 14876 Process:1208 67111072
+COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
+
+	Seq: hmgb_chite
+	Seq: hmgl_trybr
+	Seq: hmgl_wheat
+	Seq: hmgt_mouse
+
+READ/MAKE LIBRARIES:[2]
+
+	proba_pair [method]
+
+	Multi Core Mode: 4 processors [subset]
+
+		[Submit   Job][TOT=    2][  0 %][ELAPSED TIME:    0 sec.]==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EE88: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EE88: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378==  Address 0x64723490 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EE9B: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EE9B: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378==  Address 0x64723494 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Conditional jump or move depends on uninitialised value(s)
+==15378==    at 0x804EEAE: entry2index (util_constraints_list.c:1759)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Conditional jump or move depends on uninitialised value(s)
+==15378==    at 0x804EEC2: entry2index (util_constraints_list.c:1760)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EEDC: entry2index (util_constraints_list.c:1764)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EEDC: entry2index (util_constraints_list.c:1764)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378==  Address 0x6472347c is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EEED: entry2index (util_constraints_list.c:1765)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EEED: entry2index (util_constraints_list.c:1765)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378==  Address 0x64723480 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EEFB: entry2index (util_constraints_list.c:1766)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EEFB: entry2index (util_constraints_list.c:1766)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378==  Address 0x64723490 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EF0C: entry2index (util_constraints_list.c:1767)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EF0C: entry2index (util_constraints_list.c:1767)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378==  Address 0x64723494 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EE88: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EE88: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==  Address 0x64723490 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EE9B: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EE9B: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==  Address 0x64723494 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Conditional jump or move depends on uninitialised value(s)
+==15378==    at 0x804EEAE: entry2index (util_constraints_list.c:1759)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378== 
+==15378== Conditional jump or move depends on uninitialised value(s)
+==15378==    at 0x804EEC2: entry2index (util_constraints_list.c:1760)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EEDC: entry2index (util_constraints_list.c:1764)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EEDC: entry2index (util_constraints_list.c:1764)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==  Address 0x6472347c is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EEED: entry2index (util_constraints_list.c:1765)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EEED: entry2index (util_constraints_list.c:1765)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==  Address 0x64723480 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EEFB: entry2index (util_constraints_list.c:1766)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EEFB: entry2index (util_constraints_list.c:1766)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==  Address 0x64723490 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EF0C: entry2index (util_constraints_list.c:1767)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EF0C: entry2index (util_constraints_list.c:1767)
+==15378==    by 0x804EFD1: entry2index (util_constraints_list.c:1774)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==  Address 0x64723494 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+HERE: ERRROR
+==15378== 
+==15378== HEAP SUMMARY:
+==15378==     in use at exit: 6,895,167 bytes in 22,851 blocks
+==15378==   total heap usage: 36,381 allocs, 13,530 frees, 11,165,830 bytes allocated
+==15378== 
+==15378== LEAK SUMMARY:
+==15378==    definitely lost: 22,426 bytes in 67 blocks
+==15378==    indirectly lost: 24,741 bytes in 391 blocks
+==15378==      possibly lost: 6,847,648 bytes in 22,392 blocks
+==15378==    still reachable: 352 bytes in 1 blocks
+==15378==         suppressed: 0 bytes in 0 blocks
+==15378== Rerun with --leak-check=full to see details of leaked memory
+==15378== 
+==15378== For counts of detected and suppressed errors, rerun with: -v
+==15378== Use --track-origins=yes to see where uninitialised values come from
+==15378== ERROR SUMMARY: 28 errors from 28 contexts (suppressed: 13 from 8)
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EE88: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EE88: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378==  Address 0x710b15a0 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== 
+==15378== HEAP SUMMARY:
+==15378==     in use at exit: 12,125,260 bytes in 123,150 blocks
+==15378==   total heap usage: 136,752 allocs, 13,602 frees, 16,415,293 bytes allocated
+==15378== 
+==15378== Use of uninitialised value of size 4
+==15378==    at 0x804EE88: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378== 
+==15378== Invalid read of size 4
+==15378==    at 0x804EE88: entry2index (util_constraints_list.c:1758)
+==15378==    by 0x804EE63: get_entry_index (util_constraints_list.c:1751)
+==15378==    by 0x804ED7D: add_entry2list2 (util_constraints_list.c:1734)
+==15378==    by 0x804EC98: add_entry2list (util_constraints_list.c:1710)
+==15378==    by 0x812B350: ProbaMatrix2CL (util_dp_suboptimal_nw.c:1086)
+==15378==    by 0x812A176: proba_pair_wise (util_dp_suboptimal_nw.c:793)
+==15378==    by 0x8147C6A: pair_wise (util_dp_drivers.c:4163)
+==15378==    by 0x8140996: fast_pair (util_dp_drivers.c:1915)
+==15378==    by 0x813B745: seq2list (util_dp_drivers.c:223)
+==15378==    by 0x804AC7C: submit_lib_job (util_constraints_list.c:603)
+==15378==    by 0x8063519: submit_job (util_job_handling.c:290)
+==15378==    by 0x8049CD5: fork_subset_produce_list (util_constraints_list.c:150)
+==15378==  Address 0x70f226f0 is not stack'd, malloc'd or (recently) free'd
+==15378== 
+==15378== 
+==15378== HEAP SUMMARY:
+==15378==     in use at exit: 12,075,089 bytes in 122,655 blocks
+==15378==   total heap usage: 136,138 allocs, 13,483 frees, 16,368,370 bytes allocated
+==15378== 
+==15378== LEAK SUMMARY:
+==15378==    definitely lost: 22,426 bytes in 67 blocks
+==15378==    indirectly lost: 24,720 bytes in 391 blocks
+==15378==      possibly lost: 12,077,762 bytes in 122,691 blocks
+==15378==    still reachable: 352 bytes in 1 blocks
+==15378==         suppressed: 0 bytes in 0 blocks
+==15378== Rerun with --leak-check=full to see details of leaked memory
+==15378== 
+==15378== For counts of detected and suppressed errors, rerun with: -v
+==15378== Use --track-origins=yes to see where uninitialised values come from
+==15378== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 13 from 8)
+
+
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 15378                                    
+15384 -- ERROR: COREDUMP: T-COFFEE Version_8.82
+*************************************************************************************************
 
 	******************************************************************
-	* Job NOT Completed:[T-COFFEE, Version_8.75]
+	* Abnormal Termination
+	* Job NOT Completed:[T-COFFEE, Version_8.82]
 	* Please CHECK:                                       
 	* 	-1 The format of your Input Files                 
 	* 	-2 The parameters                                 
 	* 	-3 The use of special characters in sequence names:
 	* 		 (@, |, %...)
 	* 	-4 The Online Doc (http://www.tcoffee.org)                   
+	* 	-5 Send the file:
+	*
+	*	    t_coffee.ErrorReport 
+	* to:
+	* 		cedric.notredame@europe.com
 	* If you run T-Coffee over the WEB:
 	* 	Windows Cut and Paste is sometimes erratic and
 	* 	it can loose carriage returns. If you suspect this,
@@ -1342,46 +707,38 @@ STACK: 136288899 Parent: 14876 Process:1208 67111072
 
 
 	* CONFIDENTIALITY:
+	* 	The File t_coffee.ErrorReport may contain your personnal DATA
 	* 	Remove ALL confidential DATA from this file BEFORE sending it
 	******************************************************************
-# Command Line: t_coffee 3d.fasta -mode expresso  [PROGRAM:T-COFFEE]
+# Command Line: t_coffee 1aab_ref1.pep  [PROGRAM:T-COFFEE]
 
-# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE]
-==1208== LEAK SUMMARY:
-==1208==    definitely lost: 13,615 bytes in 31 blocks
-==1208==    indirectly lost: 1,833 bytes in 10 blocks
-==1208==      possibly lost: 10,553,906 bytes in 116,681 blocks
-==1208==    still reachable: 400 bytes in 2 blocks
-==1208==         suppressed: 0 bytes in 0 blocks
-==1208== Rerun with --leak-check=full to see details of leaked memory
-==1208== 
-==1208== For counts of detected and suppressed errors, rerun with: -v
-==1208== Use --track-origins=yes to see where uninitialised values come from
-==1208== ERROR SUMMARY: 29 errors from 15 contexts (suppressed: 13 from 8)
-==1208== 
-==1208== HEAP SUMMARY:
-==1208==     in use at exit: 10,569,626 bytes in 116,727 blocks
-==1208==   total heap usage: 129,228 allocs, 12,506 frees, 14,330,863 bytes allocated
-==1208== 
-==1208== LEAK SUMMARY:
-==1208==    definitely lost: 13,615 bytes in 31 blocks
-==1208==    indirectly lost: 1,833 bytes in 10 blocks
-==1208==      possibly lost: 10,554,182 bytes in 116,685 blocks
-==1208==    still reachable: 400 bytes in 2 blocks
-==1208==         suppressed: 0 bytes in 0 blocks
-==1208== Rerun with --leak-check=full to see details of leaked memory
-==1208== 
-==1208== For counts of detected and suppressed errors, rerun with: -v
-==1208== Use --track-origins=yes to see where uninitialised values come from
-==1208== ERROR SUMMARY: 29 errors from 15 contexts (suppressed: 13 from 8)
-==1208== LEAK SUMMARY:
-==1208==    definitely lost: 13,615 bytes in 31 blocks
-==1208==    indirectly lost: 1,833 bytes in 10 blocks
-==1208==      possibly lost: 10,554,130 bytes in 116,685 blocks
-==1208==    still reachable: 48 bytes in 1 blocks
-==1208==         suppressed: 0 bytes in 0 blocks
-==1208== Rerun with --leak-check=full to see details of leaked memory
-==1208== 
-==1208== For counts of detected and suppressed errors, rerun with: -v
-==1208== Use --track-origins=yes to see where uninitialised values come from
-==1208== ERROR SUMMARY: 28 errors from 11 contexts (suppressed: 13 from 8)
+#----- Dumped ErrorFile: t_coffee.ErrorReport
+
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 15378 ppid 11541
+#CL: t_coffee 1aab_ref1.pep 
+==15378== LEAK SUMMARY:
+==15378==    definitely lost: 22,426 bytes in 67 blocks
+==15378==    indirectly lost: 24,768 bytes in 392 blocks
+==15378==      possibly lost: 12,027,543 bytes in 122,195 blocks
+==15378==    still reachable: 352 bytes in 1 blocks
+==15378==         suppressed: 0 bytes in 0 blocks
+==15378== Rerun with --leak-check=full to see details of leaked memory
+==15378== 
+==15378== For counts of detected and suppressed errors, rerun with: -v
+==15378== Use --track-origins=yes to see where uninitialised values come from
+==15378== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 13 from 8)
+==15378== 
+==15378== HEAP SUMMARY:
+==15378==     in use at exit: 11,385,452 bytes in 116,914 blocks
+==15378==   total heap usage: 130,230 allocs, 13,316 frees, 15,694,906 bytes allocated
+==15378== 
+==15378== LEAK SUMMARY:
+==15378==    definitely lost: 422,628 bytes in 69 blocks
+==15378==    indirectly lost: 3,071 bytes in 19 blocks
+==15378==      possibly lost: 10,959,401 bytes in 116,825 blocks
+==15378==    still reachable: 352 bytes in 1 blocks
+==15378==         suppressed: 0 bytes in 0 blocks
+==15378== Rerun with --leak-check=full to see details of leaked memory
+==15378== 
+==15378== For counts of detected and suppressed errors, rerun with: -v
+==15378== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 13 from 8)

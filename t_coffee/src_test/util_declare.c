@@ -8,7 +8,6 @@
 #include <math.h>
 #include <stdarg.h>
 
-
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"
@@ -26,6 +25,46 @@ void free_pair_wise()
 /*                                                                      */
 /*                                                                      */
 /************************************************************************/ 
+int *** duplicate_residue_index (int ***r)
+{
+  int a,b,c;
+  int d1,d2,d3;
+  
+  int ***nr;
+
+  d1=read_array_size_new(r);
+  nr=vcalloc ( d1, sizeof (int**));
+  for (a=0; a<d1; a++)
+    {
+      d2=read_array_size_new (r[a]);
+      nr[a]=vcalloc ( d2, sizeof (int*));
+      for (b=0; b<d2; b++)
+	{
+	  d3=read_array_size_new (r[a][b]);
+	  for (c=0; c<d3; c++)nr[a][b][c]=r[a][b][c];
+	}
+    }
+  return nr;
+}
+int *** declare_residue_index (Sequence *S)
+{
+  int ***r;
+  int a,b,c;
+  
+  if ( !S)return NULL;
+  r=vcalloc ( S->nseq, sizeof (int**));
+  for ( a=0; a<S->nseq; a++)
+    {
+      r[a]=vcalloc (S->len[a]+1, sizeof (int*));
+      for ( b=0; b<=S->len[a]; b++)
+	{
+	  r[a][b]=vcalloc ( 1, sizeof (int));
+	  r[a][b][0]=1;
+	}
+    }
+  return r;
+}
+
 Constraint_list * declare_constraint_list_simple ( Sequence *S)
 {
   return declare_constraint_list (S, NULL, NULL, 0, NULL, NULL);
@@ -48,20 +87,29 @@ Constraint_list * declare_constraint_list ( Sequence *S, char *name, int *L, int
 	}
     CL->cpu=1;
     CL->fp=fp;
-    CL->L=L;
+    if (L)
+      {
+	HERE ("The USE of L is now Deprecated with Constraint Lists");
+	exit (0);
+      }
     CL->ne=ne;
     CL->entry_len=LIST_N_FIELDS;
     CL->el_size=sizeof (CLIST_TYPE);
     CL->matrices_list=declare_char(20,20);
     
-    CL->chunk=500;
+    
     CL->weight_field=WE;
     if ( S)CL->seq_for_quadruplet=vcalloc ( S->nseq, sizeof (int));
     CL->Prot_Blast=vcalloc ( 1, sizeof ( Blast_param));
     CL->DNA_Blast=vcalloc ( 1, sizeof ( Blast_param));
     CL->Pdb_Blast=vcalloc ( 1, sizeof ( Blast_param));
     CL->TC=vcalloc (1, sizeof (TC_param));
-  
+    
+    //New data structure
+    CL->residue_index=declare_residue_index (S);
+    
+
+    
     return CL;
     }
 
@@ -69,7 +117,7 @@ Constraint_list *free_constraint_list4lib_computation (Constraint_list *CL)
 {
   if (!CL)return NULL;
   
-  vfree (CL->L);
+  free_arrayN(CL->residue_index, 3);
   free_int (CL->M, -1);
   
   vfree (CL);
@@ -82,13 +130,11 @@ Constraint_list *duplicate_constraint_list4lib_computation (Constraint_list *CL)
   SCL[0]=CL[0];
   SCL->S=CL->S;
   SCL->RunName=CL->RunName;
-  SCL->L=NULL;
+  
   SCL->max_L_len=0;
   SCL->M=NULL;
   SCL->ne=0;
-  SCL->residue_indexed=0;
-  SCL->residue_index=NULL;
-  
+    
   return SCL;
 }
 Constraint_list *duplicate_constraint_list_soft (Constraint_list *CL)
@@ -149,10 +195,9 @@ Constraint_list *copy_constraint_list (Constraint_list *CL, int mode)
       
       if ( mode==HARD_COPY)
 	{
-	  for ( a=0; a< CL->ne; a++)
-	    for ( b=0; b< CL->entry_len; b++)	vwrite_clist(NCL, a, b, vread_clist(CL, a, b));
+	  NCL->residue_index=duplicate_residue_index (NCL->residue_index);
 	}
-      else NCL->L=CL->L;
+      else NCL->residue_index=CL->residue_index;
       
     
      if ( mode==HARD_COPY)
@@ -322,14 +367,13 @@ Sequence *free_constraint_list (Constraint_list *CL)
       {
 
 	pCL=CL->pCL;
-	CL->L=NULL;
+	CL->residue_index=NULL;
 
 	if ( CL->M                      ==pCL->M                       )CL->M=NULL;
 	
 	if (CL->start_index             ==pCL->start_index             )CL->start_index=NULL;
 	if (CL->end_index             ==pCL->end_index                 )CL->end_index=NULL;
-	if (CL->residue_index           ==pCL->residue_index           )CL->residue_index=NULL;
-
+	
 	if ( CL->fp                     ==pCL->fp                      )CL->fp=NULL;
 	if ( CL->matrices_list          ==pCL->matrices_list           )CL->matrices_list=NULL;
 
@@ -355,7 +399,8 @@ Sequence *free_constraint_list (Constraint_list *CL)
 
 
     
-    if ( CL->L)vfree (CL->L);
+    if ( CL->residue_index)free_arrayN(CL->residue_index, 3);
+    
     if ( CL->M)free_int (CL->M, -1);
     if ( CL->fp)vfclose (CL->fp);
     if ( CL->matrices_list)free_char(CL->matrices_list,-1);
@@ -364,16 +409,7 @@ Sequence *free_constraint_list (Constraint_list *CL)
     if ( CL->start_index)free_int ( CL->start_index,-1);
     if ( CL->end_index)free_int ( CL->end_index,-1);
     
-    if ( CL->residue_index)
-      {
-	for ( a=0; a< (CL->S)->nseq; a++)
-	  {
-	    for ( b=0; b<=(CL->S)->len[a]; b++)
-	      vfree(CL->residue_index[a][b]);
-	    vfree (CL->residue_index[a]);
-	  }
-	vfree(CL->residue_index);
-      }
+    
        
     
     if ( CL->STRUC_LIST)free_sequence ( CL->STRUC_LIST, (CL->STRUC_LIST)->nseq);
@@ -1265,8 +1301,9 @@ void * vmalloc ( size_t size)
 	    return NULL; /*crash ("\n0 bytes in vmalloc\n");*/
 	else
 	    {
-	    x= malloc (size + 2*sizeof (Memcontrol));
-	    
+	      
+	      x= malloc (size + 2*sizeof (Memcontrol));
+	      //x=dlmalloc (size + 2*sizeof (Memcontrol));
 	    if ( x==NULL)
 		{
 		  printf_exit (EXIT_FAILURE,stderr, "\nFAILED TO ALLOCATE REQUIRED MEMORY (vmalloc)\n");
@@ -1592,6 +1629,21 @@ type**  function (int first, int second)\
   {\
     return (type **)declare_arrayN (2,sizeof(type), first, second);\
    }
+
+int **declare_int2 (int f, int *s, int d)
+{
+  int **r;
+  int a;
+  r=vcalloc ( f, sizeof (int*));
+  for (a=0; a<f; a++)
+    r[a]=vcalloc (s[a]+d, sizeof (int));
+  return r;
+}
+
+      
+
+  
+
 DECLARE_ARRAY(short,write_size_short,read_size_short,declare_short)
 DECLARE_ARRAY(char,write_size_char,read_size_char,declare_char)
 DECLARE_ARRAY(int,write_size_int,read_size_int,declare_int)

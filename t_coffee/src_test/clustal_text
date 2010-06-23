@@ -1,16 +1,16 @@
-CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.36 sec, SCORE=86, Nseq=4, Len=81 
+CLUSTAL FORMAT for T-COFFEE Version_8.80 [http://www.tcoffee.org] [MODE:  ], CPU=0.02 sec, SCORE=80, Nseq=4, Len=81 
 
-hmgl_trybr      kkdsnapkramtsfmffssdfrskhs-----dlsivemskaagaawkelgpeerkvyeem
-hmgt_mouse      -----kpkrprsayniyvsesfqeakd----dsaqgkl-klvneawknlspeekqayiql
-hmgb_chite      ---adkpkrplsaymlwlnsaresikrenp-dfkvtevakkggelwrglk--dkseweak
-hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvak
-                      ***. ::: .: ..  .. .     :     : *  .  *: *   ::  :   
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhs-----dlsivemskaagaawkelg
+hmgt_mouse      -----kpkrprsayniyvsesfqeakd----dsaqgkl-klvneawknls
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenp-dfkvtevakkggelwrglk
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+                      ***. ::: .: ..  .. .     :     : *  .  *: * 
 
-hmgl_trybr      aekdkerykrem---------
-hmgt_mouse      akddrirydnemksweeqmae
-hmgb_chite      aatakqnyiralqeyerngg-
-hmgl_wheat      anklkgeynkaiaaynkgesa
-                *   : .* . :         
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgb_chite      --dkseweakaatakqnyiralqeyerngg-
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+                  ::  :   *   : .* . :         
 
 
 

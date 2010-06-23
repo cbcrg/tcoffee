@@ -196,13 +196,13 @@ int sim_pair_wise_lalign (Alignment *in_A, int *in_ns, int **in_l_s,Constraint_l
 
   pos=aln2pos_simple (Aln,-1, ns, l_s);
   
-  seqc0=(int*)sim_vcalloc (maxl,sizeof (int));
-  A=(int*)sim_vcalloc (maxl,sizeof (int));
+  seqc0=(int*)sim_vcalloc (maxl+1,sizeof (int));
+  A=(int*)sim_vcalloc (maxl+1,sizeof (int));
   for ( a=0; a<maxl; a++){seqc0[a]=A[a]=a;}
   A[M+1]='\0';
 
-  seqc1=(int*)sim_vcalloc (maxl,sizeof (int));
-  B=(int*)sim_vcalloc (maxl,sizeof (int));
+  seqc1=(int*)sim_vcalloc (maxl+1,sizeof (int));
+  B=(int*)sim_vcalloc (maxl+1,sizeof (int));
   for ( a=0; a<maxl; a++){seqc1[a]=B[a]=a;}
   B[N+1]='\0';
   

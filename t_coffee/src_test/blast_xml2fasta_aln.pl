@@ -1,11 +1,6 @@
 #!/usr/bin/env perl
 use Env;
-#(C) Cedric Notredame 2005
-#This script is meant to easily adapt any external method within the T-Coffee framework
-#tc_generic_method -infile=<infile> -outfile=<outfile> -method=<method> -param=<parameters>
-#it is gradually being expanded to also gather templates
 
-#Initialization
 
 $tmp_dir="";
 $init_dir="";
@@ -80,11 +75,6 @@ sub file2string
 
 
 
-####################################################
-#
-#        XML Parsing
-#
-####################################################
 sub tag2value 
   {
     
@@ -445,4 +435,4 @@ sub xml2tag_list
 
 
 
-# Thu Jun  4 01:47:46 WEST 2009
+

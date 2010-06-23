@@ -1004,7 +1004,7 @@ char **struc2nb (char *name,char *seq, char *comment, float Threshold, char *ato
 short **seq2nb (char *seq, char *pdb, float Threshold, char *atom)
 {
   char *struc_file;
-  char *struc_name;
+ 
   Ca_trace *T;
   Atom *A1, *A2;
   int a, b;
@@ -1015,7 +1015,7 @@ short **seq2nb (char *seq, char *pdb, float Threshold, char *atom)
 
   // get a clean pdb file
   struc_file=vtmpnam (NULL);
-  if ( check_file_exists (struc_file) && is_simple_pdb_file(struc_name))
+  if ( check_file_exists (struc_file) && is_simple_pdb_file(struc_file))
     {
       sprintf (command, "cp %s %s", pdb, struc_file);
     }

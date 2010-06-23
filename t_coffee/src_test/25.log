@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,6 +13,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[0] 
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
@@ -168,70 +170,40 @@ READ/MAKE LIBRARIES:[1]
 
 	pam250mt [matrix]
 
-MANUAL PENALTIES: gapopen=-10 gapext=-1
 
-	Library Total Size: [0]
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 59208                                    
+59208 -- ERROR: COREDUMP: T-COFFEE Version_8.80
+*************************************************************************************************
 
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Score=   0][Len=  137][PID:1144]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=   0][Len=  152][PID:4468]
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Score=   0][Len=  288][PID:5900][Forked]
-
-
-
-OUTPUT RESULTS
-	#### File Type= GUIDE_TREE Format=     newick Name= sample_seq1.dnd
-	#### File Type=        MSA Format=        aln Name= sample_seq1.aln
-	#### File Type=        MSA Format=       html Name= sample_seq1.html
-
-
-# TIP :See The Full Documentation on www.tcoffee.org
-# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
-# TIP 21:  -other_pg unpack_all will unpack all the perl scripts within t_coffee
-
-# Command Line: t_coffee sample_seq1.fasta -in=Xpam250mt -gapopen=-10 -gapext=-1  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 8.304 Mb, Max= 9.342 Mb
-# T-COFFEE CPU Usage: 313 millisec
-# Results Produced with T-COFFEE (Version_8.07)
-# T-COFFEE is available from http://www.tcoffee.org
-CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.30 sec, SCORE=-297, Nseq=4, Len=288 
-
-hmgl_trybr      ------------------------------------------------------------
-hmgt_mouse      kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiqlakddrirydn
-hmgb_chite      ------------------------------------------------------------
-hmgl_wheat      ------------------------------------------------------------
-                                                                            
-
-hmgl_trybr      ----------kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
-hmgt_mouse      emksweeqmae-------------------------------------------------
-hmgb_chite      ------------------------------------------------------------
-hmgl_wheat      ------------------------------------------------------------
-                                                                            
-
-hmgl_trybr      vyeemaekdkerykrem-------------------------------------------
-hmgt_mouse      ------------------------------------------------------------
-hmgb_chite      ----------------adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrg
-hmgl_wheat      ------------------------------------------------------------
-                                                                            
-
-hmgl_trybr      ------------------------------------------------------------
-hmgt_mouse      ------------------------------------------------------------
-hmgb_chite      lkdkseweakaatakqnyiralqeyerngg------------------------------
-hmgl_wheat      -----------------------------dpnkpkrapsaffvfmgefreefkqknpknk
-                                                                            
-
-hmgl_trybr      ------------------------------------------------
-hmgt_mouse      ------------------------------------------------
-hmgb_chite      ------------------------------------------------
-hmgl_wheat      svaavgkaagerwkslsesekapyvakanklkgeynkaiaaynkgesa
-                                                                
+	******************************************************************
+	* Abnormal Termination
+	* Job NOT Completed:[T-COFFEE, Version_8.80]
+	* Please CHECK:                                       
+	* 	-1 The format of your Input Files                 
+	* 	-2 The parameters                                 
+	* 	-3 The use of special characters in sequence names:
+	* 		 (@, |, %...)
+	* 	-4 The Online Doc (http://www.tcoffee.org)                   
+	* 	-5 Send the file:
+	*
+	*	    t_coffee.ErrorReport 
+	* to:
+	* 		cedric.notredame@europe.com
+	* If you run T-Coffee over the WEB:
+	* 	Windows Cut and Paste is sometimes erratic and
+	* 	it can loose carriage returns. If you suspect this,
+	* 	try to cut and paste through an intermediate application
+	* 	(word pad) and inspect the results
 
 
+	* CONFIDENTIALITY:
+	* 	The File t_coffee.ErrorReport may contain your personnal DATA
+	* 	Remove ALL confidential DATA from this file BEFORE sending it
+	******************************************************************
+# Command Line: t_coffee sample_seq1.fasta -in Xpam250mt -gapopen -10 -gapext -1  [PROGRAM:T-COFFEE]
 
+#----- Dumped ErrorFile: t_coffee.ErrorReport
+
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 59208 ppid 59207
+#CL: t_coffee sample_seq1.fasta -in Xpam250mt -gapopen -10 -gapext -1 

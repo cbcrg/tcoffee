@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,6 +13,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[1] 	RCOFFEE
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
@@ -154,27 +156,118 @@ INPUT FILES
 Looking For Sequence Templates:
 
 	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
-	------ Fetch Templates [Multi Core Mode 2 CPUs]
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+	Process: >AC097725.2-33800_33915 _F_ AC_97725.2-338___33915.rfold
+	Process: >AL023594.2-7651_7766 _F_ AL_23594.2-7651_7766.rfold
 	Process: >AC068303.10-12902_12788 _F_ AC_683_3.1_-129_2_12788.rfold
 	Process: >X15934.1-3_121 _F_ X15934.1-3_121.rfold
-	Process: >AC097725.2-33800_33915 _F_ AC_97725.2-338___33915.rfold
 	Process: >AC000104.1-17376_17496 _F_ AC___1_4.1-17376_17496.rfold
-	Process: >AL023594.2-7651_7766 _F_ AL_23594.2-7651_7766.rfold
-
-	------ Fetch Templates [Multi Core Mode 2 CPUs]
-
-
-WARNING: Could not Run  to find templates[T-COFFEE]
 ]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
 
-Impossible to find RCOFFEE Templates
-Check that your blast server is properly installed [See documentation][FATAL:T-COFFEE]
+COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
 
-WARNING RECAPITULATION: 2 Warnings [PROGRAM: T-COFFEE]
-**WARNING:   1** 
-WARNING: Could not Run  to find templates[T-COFFEE]
+	Seq: AC000104.1-17376_17496
+	Seq: AC068303.10-12902_12788
+	Seq: AC097725.2-33800_33915
+	Seq: AL023594.2-7651_7766
+	Seq: X15934.1-3_121
 
-**WARNING:   2** 
-Impossible to find RCOFFEE Templates
-Check that your blast server is properly installed [See documentation][FATAL:T-COFFEE]
+READ/MAKE LIBRARIES:[3]
 
+	lalign_id_pair [method]
+
+	Multi Core Mode: 4 processors [subset]
+
+		[Submit   Job][TOT=    3][  0 %][ELAPSED TIME:    0 sec.]HERE: TOP=1
+HERE: TOP=1
+		[Submit   Job][TOT=    3][ 66 %][ELAPSED TIME:    0 sec.]HERE: TOP=1
+		[Submit   Job][TOT=    3][100 %][ELAPSED TIME:    0 sec.]HERE: TOP=1
+HERE: TOP=1
+HERE: TOP=1
+HERE: TOP=1
+HERE: TOP=1
+HERE: TOP=1
+HERE: TOP=1
+
+	slow_pair [method]
+
+	Multi Core Mode: 4 processors [subset]
+
+		[Submit   Job][TOT=    3][  0 %][ELAPSED TIME:    0 sec.]HERE: TOP=1
+HERE: TOP=1
+HERE: TOP=1
+		[Submit   Job][TOT=    3][ 66 %][ELAPSED TIME:    0 sec.]HERE: TOP=1
+HERE: TOP=1
+		[Submit   Job][TOT=    3][100 %][ELAPSED TIME:    0 sec.]HERE: TOP=1
+HERE: TOP=1
+HERE: TOP=1
+HERE: TOP=1
+HERE: TOP=1
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [3145]
+
+
+WEIGHTED MODE:t_coffee
+
+	 AC000104.1-17376_17496 0.94
+	AC068303.10-12902_12788 1.02
+	 AC097725.2-33800_33915 0.98
+	   AL023594.2-7651_7766 1.11
+	         X15934.1-3_121 0.94
+
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+
+
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 58200                                    
+58200 -- ERROR: COREDUMP: T-COFFEE Version_8.80
+*************************************************************************************************
+
+	******************************************************************
+	* Abnormal Termination
+	* Job NOT Completed:[T-COFFEE, Version_8.80]
+	* Please CHECK:                                       
+	* 	-1 The format of your Input Files                 
+	* 	-2 The parameters                                 
+	* 	-3 The use of special characters in sequence names:
+	* 		 (@, |, %...)
+	* 	-4 The Online Doc (http://www.tcoffee.org)                   
+	* 	-5 Send the file:
+	*
+	*	    t_coffee.ErrorReport 
+	* to:
+	* 		cedric.notredame@europe.com
+	* If you run T-Coffee over the WEB:
+	* 	Windows Cut and Paste is sometimes erratic and
+	* 	it can loose carriage returns. If you suspect this,
+	* 	try to cut and paste through an intermediate application
+	* 	(word pad) and inspect the results
+
+
+	* CONFIDENTIALITY:
+	* 	The File t_coffee.ErrorReport may contain your personnal DATA
+	* 	Remove ALL confidential DATA from this file BEFORE sending it
+	******************************************************************
+# Command Line: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair  [PROGRAM:T-COFFEE]
+
+#----- Dumped ErrorFile: t_coffee.ErrorReport
+
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 58200 ppid 58199
+#CL: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair 

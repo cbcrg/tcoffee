@@ -3687,7 +3687,7 @@ get_cl_param(\
 			   else if ( is_lib (list_file[a]))nn['L']++;
 			   else if ( is_method (list_file[a]))nn['M']++;
 			   else
-			     add_warning ( CL->local_stderr, "\nWARNING: File %s was not properly tag. Potential ambiguity\n",list_file[a]);
+			     add_warning (stderr, "\nWARNING: File %s was not properly tagged. Potential ambiguity\n",list_file[a]);
 			 }
 		     }
 
@@ -3894,6 +3894,7 @@ get_cl_param(\
 	       if (   !use_tree && check_file_exists (tree_file))vremove (tree_file);
 	       else if ( !use_tree || (use_tree && strm (use_tree, "default")));
 	       else sprintf ( tree_file, "%s", use_tree);
+	       
 
 /*******************************************************************************************************/
 /*                                                                                                     */
@@ -3903,14 +3904,15 @@ get_cl_param(\
 
 	       set_methods_limits (method_limits,n_method_limits,list_file, n_list, &maxnseq, &maxlen);
 	       /*Set Global Values*/
-
+	     
 
 
 /*START*/
 
 	       /*1 READ THE SEQUENCES*/
+	       
 	       S=read_seq_in_n_list   (list_file, n_list, type,seq_source);
-
+	       
 	       if ( check_type)
 		 {
 		   if (!strm (S->type, get_array_type (S->nseq, S->seq)))
@@ -3919,7 +3921,7 @@ get_cl_param(\
 		       myexit (EXIT_FAILURE);
 		     }
 		 }
-
+	       
 	       if (S->nseq<=1 && !do_domain)
 		 {
 		   printf_exit (EXIT_FAILURE,stderr, "\nERROR: Your Dataset Contains %d Sequence. For multiple alignments you need at least 2 sequences[FATAL:%s]", S->nseq,PROGRAM);
@@ -3946,20 +3948,10 @@ get_cl_param(\
 
 		  }
 
-	       if (dpa)
-	          {
-		    list_file=list_file2dpa_list_file (list_file,&n_list,maxnseq,S);
-		    S=read_seq_in_n_list   (list_file, n_list, type,seq_source);
-		  }
-	       else if ( maxnseq!=-1 && S->nseq>maxnseq)
-		 {
-		      fprintf ( stderr, "\nTOO MANY SEQUENCES [N=%d][MAX=%d][FATAL:%s]\n", S->nseq,maxnseq, PROGRAM);
-		      myexit (EXIT_FAILURE);
-
-		  }
+	      
 
 
-
+	    
 	       S=seq2template_seq(S, "SELF_S_",F);
 	       /* Get the Templates*/
 	       if ( n_template_file)
@@ -4020,10 +4012,12 @@ get_cl_param(\
 			 }
 		     }
 		 }
-
+	       
 	       S=seq2template_type (S);
+	      
 	       le=display_sequences_names   ( S, le, check_pdb_status, TEMPLATES);
-
+	        
+		 
 
 
 
@@ -4036,7 +4030,7 @@ get_cl_param(\
 		   free_sequence(S, S->nseq);
 		   return 1;
 		 }
-
+	      
 
 	       /*Reorder the sequences*/
 	       new_order=duplicate_char (S->name, -1, -1);
@@ -4046,12 +4040,12 @@ get_cl_param(\
 	       S=reorder_seq(S,new_order,S->nseq);
 	       free_char (new_order, -1);
 
-
+	       
 
 	       /*3 PREPARE THE CONSTRAINT LIST*/
 
 	       CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?tmpfile():NULL, NULL);
-	     
+	      
 	       sprintf ( CL->method_evaluate_mode, "%s", method_evaluate_mode);
 	     
 	       (CL->TC)->use_seqan=use_seqan;
@@ -4135,6 +4129,7 @@ get_cl_param(\
 
 	       CL->lalign_n_top=lalign_n_top;
 	       sprintf ( CL->multi_thread, "%s", multi_core);
+	       
 	       sprintf ( CL->lib_list, "%s", lib_list);
 	       sprintf (CL->rna_lib, "%s", rna_lib);
 /* Important: This is where the library is compiled!!!!*/
@@ -4157,16 +4152,8 @@ get_cl_param(\
 		 }
 	       if ( CL->M)clean_aln=0;
 
-	       if ( is_number (weight))
-		 {
-		   int weight_value;
-		   weight_value=atoi(weight);
-		   for (a=0; a<CL->ne; a++)
-		     {
-		       vwrite_clist(CL, a, WE, weight_value);
-		     }
-		 }
-
+	       if ( is_number (weight))set_weight4constraint_list (CL, atoi(weight));
+	       
 	       free_pair_wise ();//Free ststic memory allocated in some of the pairwise functions
 
 
@@ -4197,10 +4184,10 @@ get_cl_param(\
 	       CL->do_self=do_self;
 	       sprintf (CL->extend_clean_mode,   "%s", clean_mode);
 	       sprintf (CL->extend_compact_mode, "%s", compact_mode);
-	       if ( CL->extend_jit && CL->extend_threshold !=0)filter_list (CL,0, CL->ne, CL->extend_threshold);
+	       if ( CL->extend_jit && CL->extend_threshold !=0)filter_constraint_list (CL,WE,CL->extend_threshold);
 	       CL->pw_parameters_set=1;
-
-
+	       
+	       
 
 	       CL->nomatch=nomatch;
 	       set_int_variable ("nomatch", nomatch);
@@ -4250,7 +4237,10 @@ get_cl_param(\
 	       CL=choose_extension_mode (extend_mode, CL);
 	       CL->max_n_pair=max_n_pair;
 
-	      processed_lib=0;
+	       processed_lib=0;
+	       //use the L, vener touch it again
+	       
+
 	      if (CL->ne>0 && out_lib[0]!='\0' && !strm (out_lib, "no"))
 	         {
 
@@ -4276,29 +4266,24 @@ get_cl_param(\
 		   CL->local_stderr=display_output_filename (le, "TCLIB","tc_lib_format_01",out_lib, CHECK);
 		 }
 
-	      /*
-		check for the connectivity of the constraint list
-	      if ( !constraint_list_is_connected (CL))
-		{
-		  add_warning ( stderr, "ERROR: unconnected sequences in the constraint_list [FATAL:%s]\n", PROGRAM);
-		  myexit (EXIT_FAILURE);
-		}
-	      */
+	      
 	      if ( lib_only)return EXIT_SUCCESS;
 
 
 	      if (!processed_lib)
 		{
 		   if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
+		   if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
 		   for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
 		   for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 		}
 
+	      CL=evaluate_constraint_list_reference (CL);
 	      sprintf ( CL->distance_matrix_mode, "%s", distance_matrix_mode);
 	      sprintf ( CL->distance_matrix_sim_mode, "%s", distance_matrix_sim_mode);
-
+	      
 	      sprintf ( CL->tree_mode, "%s", tree_mode);
-	      //Re-estim�ate the distance matrix with consistency//
+	      //Re-estimate the distance matrix with consistency//
 	       if ( strm ("cscore", distance_matrix_mode))
 		 {
 		   CL->DM=cl2distance_matrix ( CL,NOALN,distance_matrix_mode, distance_matrix_sim_mode,1);
@@ -4311,7 +4296,7 @@ get_cl_param(\
 		  CL->DM=cl2distance_matrix (CL, NOALN, NULL, NULL,0);
 
 		  CL=weight_constraint_list(CL, seq_weight);
-
+		  
 		  if (output_seq_weights (CL->W, outseqweight))
 		    CL->local_stderr=display_output_filename( CL->local_stderr,"WEIGHT","tc_weight",outseqweight, CHECK);
 		  le=display_weights(CL->W, le);
@@ -5035,17 +5020,6 @@ char *get_rmcoffee_defaults(char *buf, char *type)
 
      return buf;
    }
-char *get_rmcoffee_defaults_old(char *buf, char *type)
-   {
-
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
-
-     check_program_is_installed (RNAPLFOLD_4_TCOFFEE,NULL, NULL,RNAPLFOLD_ADDRESS, INSTALL_OR_DIE);
-     buf=strcat (buf,"-in Mprobcons_msa Mmafft_msa Mmuscle_msa -dp_mode myers_miller_pair_wise -extend_mode rna2 -template_file RCOFFEE -transform dna2rna -check_type -type DNA -relax_lib 0");
-     /*buf=strcat (buf,"-in ");*/
-
-     return buf;
-   }
 
 //    if (NO_METHODS_IN_CL)buf=strcat (buf,"-in Mbest_pair4prot -template_file BLAST -template_file EXPRESSO  ");
    char *get_best4RNA_defaults(char *buf, char *type)
@@ -5067,17 +5041,6 @@ char *get_rcoffee_defaults(char *buf, char *type)
 
      check_program_is_installed (RNAPLFOLD_4_TCOFFEE,NULL, NULL,RNAPLFOLD_ADDRESS, INSTALL_OR_DIE);
      buf=strcat (buf," -extend_mode rna2 -template_file RCOFFEE -transform dna2rna -check_type -type DNA -relax_lib 0");
-     /*buf=strcat (buf,"-in ");*/
-
-     return buf;
-   }
-char *get_rcoffee_defaults_old(char *buf, char *type)
-   {
-
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
-
-     check_program_is_installed (RNAPLFOLD_4_TCOFFEE,NULL, NULL,RNAPLFOLD_ADDRESS, INSTALL_OR_DIE);
-     buf=strcat (buf,"-dp_mode myers_miller_pair_wise -extend_mode rna2 -template_file RCOFFEE -transform dna2rna -check_type -type DNA -relax_lib 0");
      /*buf=strcat (buf,"-in ");*/
 
      return buf;

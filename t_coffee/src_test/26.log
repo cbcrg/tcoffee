@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,6 +13,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[0] 
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
@@ -170,13 +172,9 @@ READ/MAKE LIBRARIES:[3]
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [324]
+	Library Total Size: [648]
 
-Library Relaxation: Multi_proc [2] 
-		[Submit   Job][TOT=  162][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][  1 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][  2 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][  3 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][  4 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][  5 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][  6 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][  7 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][  8 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][  9 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 10 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 11 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 12 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 13 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 14 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 15 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 16 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 17 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 18 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 19 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 20 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 21 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 22 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 23 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 24 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 25 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 26 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 27 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 28 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 29 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 30 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 31 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 32 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 33 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 34 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 35 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 36 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 37 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 38 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 39 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 40 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 41 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 42 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 43 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 44 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 45 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 46 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 47 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 48 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 49 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 50 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 51 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 52 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 53 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 54 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 55 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 56 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 57 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 58 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 59 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 60 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 61 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 62 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 63 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 64 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 65 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 67 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 68 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 69 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 70 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 71 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 72 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 73 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 74 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 75 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 76 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 77 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 78 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 79 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 80 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 81 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 82 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 83 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 84 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 85 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 86 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 87 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 88 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 89 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 90 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 91 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 92 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 93 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 94 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 95 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 96 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 97 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 98 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][ 99 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  162][100 %][ELAPSED TIME:    0 sec.]
-Total Relaxation: [324]--->[241] Entries
-
-	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
+Library Relaxation:[648] --->[482]
 
 
 WEIGHTED MODE:t_coffee
@@ -188,13 +186,17 @@ WEIGHTED MODE:t_coffee
 MAKE GUIDE TREE 
 	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
 PROGRESSIVE_ALIGNMENT [Tree Based]
+HERE: ****ECLMODE4TC:5
+HERE: ****ECLMODE4TC:5
 
-	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  23][Len=  184][PID:1932]
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  23][Len=  184][PID:59214]
 
 
 
 OUTPUT RESULTS
-	#### File Type= GUIDE_TREE Format=     newick Name= sample_aln1_1.dnd | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
+pid 59214 -- 
+	#### File Type= GUIDE_TREE Format=     newick Name= sample_aln1_1.dnd | NOT PRODUCED [WARNING:T-COFFEE:Version_8.80]
+
 
 	#### File Type=        MSA Format=        aln Name= profile_aln
 	#### File Type=        MSA Format=       html Name= profile_aln.html
@@ -204,62 +206,70 @@ OUTPUT RESULTS
 
 # TIP :See The Full Documentation on www.tcoffee.org
 # TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
-# TIP 11:  -infile=<aln> -special_mode=evaluate to evaluate your own alignment
+# TIP  2:  Change the Width of your MSA with the environement variable ALN_LINE_LENGTH (all formats)
 
-# Command Line: t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=profile_aln  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 9.223 Mb, Max= 10.794 Mb
-# T-COFFEE CPU Usage: 390 millisec
-# Results Produced with T-COFFEE (Version_8.07)
+# Command Line: t_coffee -profile sample_aln1.aln sample_aln2.aln -outfile profile_aln  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 18.553 Mb, Max= 20.721 Mb
+# T-COFFEE CPU Usage: 40 millisec
+# Results Produced with T-COFFEE (Version_8.80)
 # T-COFFEE is available from http://www.tcoffee.org
-CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.34 sec, SCORE=53, Nseq=10, Len=184 
 
-hmgb_chite      ---ad-------------------------------------------------------
-hmgt_mouse      ------------------------------------------------------------
-hmgl_wheat      --dpn-------------------------------------------------------
-hmgl_trybr      kkdsn-------------------------------------------------------
-1cms            --GEVASVPLTNYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRF
-4pep            ----IGDEPLENYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQF
-4ape            -STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIY
-3app            AASGVATNTPTAN-DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTELPASQQSGHSVY
-2apr            AGVGTVPMTDYGN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTNCG-SGQTKY
-1cms_1          -----------------YTGSLHWVPVTVQQYWQFTVDS---VTISGVVVACEGGCQAIL
-                                                                            
 
-hmgb_chite      kpkrplsayml------------------------------wlnsaresikrenpdfk-v
-hmgt_mouse      kpkrprsayni------------------------------yvsesfqeakddsaqgk--
-hmgl_wheat      kpkrapsaffv------------------------------fmgefreefkqknpknksv
-hmgl_trybr      apkramtsfmf------------------------------fssdfrskhs-----dlsi
-1cms            DPR-KSSTFQNLGKPLSIHYGTG-SMQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTY
-4pep            NPD-DSSTFEATSQELSITYGTG-SMTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYY
-4ape            TPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTED
-3app            NP--SATGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQD
-2apr            DPN-QSSTYQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASG
-1cms_1          DTG-TSKLVGPSSDILNIQQAIG-ATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPS
-                 .    .                                                     
+*************************************************************************************************
+*                        WARNING LIST                                    
+59214 -- WARNING: 
+	#### File Type= GUIDE_TREE Format=     newick Name= sample_aln1_1.dnd | NOT PRODUCED [WARNING:T-COFFEE:Version_8.80]
 
-hmgb_chite      tevakkggelwrglkd--kseweakaata------------------kqnyiralqeyer
-hmgt_mouse      ---lklvneawknlspeekqayiqlakdd------------------rirydnemkswee
-hmgl_wheat      aavgkaagerwkslsesekapyvakankl------------------kgeynkaiaaynk
-hmgl_trybr      vemskaagaawkelgpeerkvyeemaekd------------------kerykrem-----
-1cms            AEFDGILGMAYPSLASEY---SIPVFDNMMNRHLVAQDLFSVYMDRNGQE--SMLTLGAI
-4pep            APFDGILGLAYPSISASG---ATPVFDNLWDQGLVSQDLFSVYLSSNDDSG-SVVLLGGI
-4ape            STIDGLLGLAFSTLNTVSPTQQKTFFDNAKAS--LDSPVFTADLGYHAPG---TYNFGFI
-3app            TNNDGLLGLAFSSINTVQPQSQTTFFDTVKSS--LAQPLFAVALKHQQPG---VYDFGFI
-2apr            PN-DGLLGLGFDTITTVR--GVKTPMDNLISQGLISRPIFGVYLGKAKNGGGGEYIFGGY
-1cms_1          AYTSQDQGFCTSGFQSEN------HSQKWILGDVFIREYYSVFDRANNLVG----LAKAI
-                       .     :                                              
+*************************************************************************************************
+CLUSTAL FORMAT for T-COFFEE Version_8.80 [http://www.tcoffee.org] [MODE:  ], CPU=0.02 sec, SCORE=52, Nseq=10, Len=184 
 
-hmgb_chite      ngg-
-hmgt_mouse      qmae
-hmgl_wheat      gesa
-hmgl_trybr      ----
-1cms            DPSY
-4pep            DSSY
-4ape            DTTA
-3app            DSSK
-2apr            DSTK
-1cms_1          ----
-                    
+hmgb_chite      ---ad---------------------------------------------
+hmgt_mouse      --------------------------------------------------
+hmgl_wheat      --dpn---------------------------------------------
+hmgl_trybr      kkdsn---------------------------------------------
+1cms            --GEVASVPLTNYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCK
+4pep            ----IGDEPLENYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCS
+4ape            -STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETT
+3app            AASGVATNTPTAN-DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTELP
+2apr            AGVGTVPMTDYGN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCT
+1cms_1          -----------------YTGSLHWVPVTVQQYWQFTVDS---VTISGVVV
+                                                                  
+
+hmgb_chite      ----------kpkrplsayml-----------------------------
+hmgt_mouse      ----------kpkrprsayni-----------------------------
+hmgl_wheat      ----------kpkrapsaffv-----------------------------
+hmgl_trybr      ----------apkramtsfmf-----------------------------
+1cms            SNACKNHQRFDPR-KSSTFQNLGKPLSIHYGTG-SMQGILGYDTVTVSNI
+4pep            SLACSDHNQFNPD-DSSTFEATSQELSITYGTG-SMTGILGYDTVQVGGI
+4ape            ASEVDGQTIYTPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGL
+3app            ASQQSGHSVYNP--SATGKELSGYTWSISYGDGSSASGNVFTDSVTVGGV
+2apr            NCG-SGQTKYDPN-QSSTYQADGRTWSISYGDGSSASGILAKDNVNLGGL
+1cms_1          ACEGGCQAILDTG-TSKLVGPSSDILNIQQAIG-ATQNQYGEFDIDCDNL
+                           .    .                                 
+
+hmgb_chite      -wlnsaresikrenpdfk-vtevakkggelwrglkd--kseweakaat--
+hmgt_mouse      -yvsesfqeakddsaqgk-----lklvneawknlspeekqayiqlakd--
+hmgl_wheat      -fmgefreefkqknpknksvaavgkaagerwkslsesekapyvakank--
+hmgl_trybr      -fssdfrskhs-----dlsivemskaagaawkelgpeerkvyeemaek--
+1cms            VDIQQTVGLSTQEPGDVFTYAEFDGILGMAYPSLASEY---SIPVFDNMM
+4pep            SDTNQIFGLSETEPGSFLYYAPFDGILGLAYPSISASG---ATPVFDNLW
+4ape            TVTGQAVESAKKVSSSFTEDSTIDGLLGLAFSTLNTVSPTQQKTFFDNAK
+3app            TAHGQAVQAAQQISAQFQQDTNNDGLLGLAFSSINTVQPQSQTTFFDTVK
+2apr            LIKGQTIELAKREAASFASGPN-DGLLGLGFDTITTVR--GVKTPMDNLI
+1cms_1          SYMPTVVFEINGKMYPLTPSAYTSQDQGFCTSGFQSEN------HSQKWI
+                                           .     :                
+
+hmgb_chite      ----------------akqnyiralqeyerngg-
+hmgt_mouse      ----------------drirydnemksweeqmae
+hmgl_wheat      ----------------lkgeynkaiaaynkgesa
+hmgl_trybr      ----------------dkerykrem---------
+1cms            NRHLVAQDLFSVYMDRNGQE--SMLTLGAIDPSY
+4pep            DQGLVSQDLFSVYLSSNDDSG-SVVLLGGIDSSY
+4ape            AS--LDSPVFTADLGYHAPG---TYNFGFIDTTA
+3app            SS--LAQPLFAVALKHQQPG---VYDFGFIDSSK
+2apr            SQGLISRPIFGVYLGKAKNGGGGEYIFGGYDSTK
+1cms_1          LGDVFIREYYSVFDRANNLVG----LAKAI----
+                                                  
 
 
 

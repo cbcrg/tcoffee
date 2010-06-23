@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,6 +13,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[0] 
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
@@ -142,7 +144,45 @@ PROGRAM: T-COFFEE (Version_8.07)
 -overaln_target	D	[0] 	0 
 -overaln_P1    	D	[0] 	0 
 -overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
+-overaln_P3    
+
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 59103                                    
+59103 -- ERROR: COREDUMP: T-COFFEE Version_8.80
+*************************************************************************************************
+
+	******************************************************************
+	* Abnormal Termination
+	* Job NOT Completed:[T-COFFEE, Version_8.80]
+	* Please CHECK:                                       
+	* 	-1 The format of your Input Files                 
+	* 	-2 The parameters                                 
+	* 	-3 The use of special characters in sequence names:
+	* 		 (@, |, %...)
+	* 	-4 The Online Doc (http://www.tcoffee.org)                   
+	* 	-5 Send the file:
+	*
+	*	    t_coffee.ErrorReport 
+	* to:
+	* 		cedric.notredame@europe.com
+	* If you run T-Coffee over the WEB:
+	* 	Windows Cut and Paste is sometimes erratic and
+	* 	it can loose carriage returns. If you suspect this,
+	* 	try to cut and paste through an intermediate application
+	* 	(word pad) and inspect the results
+
+
+	* CONFIDENTIALITY:
+	* 	The File t_coffee.ErrorReport may contain your personnal DATA
+	* 	Remove ALL confidential DATA from this file BEFORE sending it
+	******************************************************************
+# Command Line: t_coffee -infile sample_seq1.aln -in Lsample_lib1.tc_lib -mode evaluate  [PROGRAM:T-COFFEE]
+
+#----- Dumped ErrorFile: t_coffee.ErrorReport
+
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 59103 ppid 59102
+#CL: t_coffee -infile sample_seq1.aln -in Lsample_lib1.tc_lib -mode evaluate 
+	D	[0] 	0 
 -overaln_P4    	D	[0] 	0 
 -exon_boundaries	S	[0] 
 
@@ -166,40 +206,3 @@ COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity 
 READ/MAKE LIBRARIES:[2]
 
 	sample_lib1.tc_lib [lib]
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [396]
-
-Library Relaxation: Multi_proc [2] 
-		[Submit   Job][TOT=  198][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][  1 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][  2 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][  3 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][  4 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][  5 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][  6 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][  7 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][  8 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][  9 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 10 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 11 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 12 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 13 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 14 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 15 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 16 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 17 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 18 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 19 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 20 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 21 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 22 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 23 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 24 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 25 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 26 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 27 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 28 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 29 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 30 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 31 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 32 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 33 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 34 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 35 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 36 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 37 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 38 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 39 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 40 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 41 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 42 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 43 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 44 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 45 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 46 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 47 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 48 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 49 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 50 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 51 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 52 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 53 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 54 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 55 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 56 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 57 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 58 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 59 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 60 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 61 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 62 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 63 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 64 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 65 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 67 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 68 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 69 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 70 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 71 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 72 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 73 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 74 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 75 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 76 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 77 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 78 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 79 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 80 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 81 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 82 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 83 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 84 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 85 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 86 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 87 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 88 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 89 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 90 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 91 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 92 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 93 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 94 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 95 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 96 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 97 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 98 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][ 99 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  198][100 %][ELAPSED TIME:    0 sec.]
-Total Relaxation: [396]--->[396] Entries
-
-	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
-
-
-WEIGHTED MODE:t_coffee
-
-	hmgb_chite 1.00
-	hmgl_trybr 0.97
-	hmgl_wheat 1.01
-	hmgt_mouse 1.01
-
-
-
-OUTPUT RESULTS
-	#### File Type= GUIDE_TREE Format=     newick Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
-
-	#### File Type=        MSA Format= score_ascii Name= sample_seq1.score_ascii
-	#### File Type=        MSA Format=       html Name= sample_seq1.html
-
-
-# TIP :See The Full Documentation on www.tcoffee.org
-# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
-# TIP  4:  -special_mode=expresso to fetch your structures automatically
-
-# Command Line: t_coffee -infile=sample_seq1.aln -in Lsample_lib1.tc_lib -mode=evaluate  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 7.535 Mb, Max= 8.319 Mb
-# T-COFFEE CPU Usage: 468 millisec
-# Results Produced with T-COFFEE (Version_8.07)
-# T-COFFEE is available from http://www.tcoffee.org

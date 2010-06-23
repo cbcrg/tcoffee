@@ -487,5 +487,6 @@ sub extract_val_from_arg_list
     
     return $val, $arg_list;
   }
-$program="T-COFFEE (Version_7.90)";\n
+$program="T-COFFEE (Version_8.79)";
+
 

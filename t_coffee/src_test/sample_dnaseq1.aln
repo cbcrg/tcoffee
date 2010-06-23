@@ -1,24 +1,24 @@
-CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.20 sec, SCORE=37, Nseq=3, Len=189 
+CLUSTAL FORMAT for T-COFFEE Version_8.80 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=36, Nseq=3, Len=192 
 
-seq1            GTGAACCTGCGGAAGGATCATTATCGAGTCCAATCCAGCTCATTTCTGGCTGTGCATTCA
-seq2            -TCATTTAGAGGAAGTAA-------AAGTCGTAACAAGG---TTTCCGTAGGTG----AA
-seq3            -TCATTTAGAGGAAGTAA-------AAGTCGTAACAAGG---TTTCCGTAGGTG----AA
-                 * *    * ***** *         ****  * * **    **** *   ***     *
+seq1            GTGAACCTGCGGAAGGATCATTATCGAGTCCAATCCAGCTCATTTCTGGC
+seq2            -TCATTTAGAGGAAGTAA-------AAGTCGTAACAAGG---TTTCCGTA
+seq3            -TCATTTAGAGGAAGTAA-------AAGTCGTAACAAGG---TTTCCGTA
+                 * *    * ***** *         ****  * * **    **** *  
 
-seq1            CTTGCACGCCGGGGCG-A-------GTTGGCTCTTG-AACT--TCTCACACCTGTGCACC
-seq2            CCTGCGG-AAGGATCATTATCGAAGAGCAACTCTTCATACACC-CTGTGAACTGTC-GTC
-seq3            CCTGCGG-AAGGATCATT-------ATTGAAACTTCTAAGTTTTAACACACCTGTGAACC
-                * ***     **  *                 ***   *          * ****    *
+seq1            TGTGCATTCACTTGCACGCCGGGGCG-AGTTGGCTCTTG-AACTTC--TC
+seq2            GGTG----AACCTGCGG-AAGGATCATTATCGAA-GAG-CAACTCTTCAT
+seq3            GGTG----AACCTGCGG-AAGGATCATTATTGAAACTTCTAAGTTTTAAC
+                 ***     ** ***     **  *    * *        ** *      
 
-seq1            TTCTCGTGC-----CTTCTCCGTCGTCGTC-----CT-T--TGTTGGGTGACTCCACCGC
-seq2            TTAGGACGCAATATAAACTCTAGTGTTGTC-----AA-T--GAAAGTGTTATACCATAAC
-seq3            TGTACATTCC----CTTCGGGGTCTTACACACAAACTCTAGTGTCGT--CTATGTATGTC
-                *       *        *       *   *        *      *         *   *
+seq1            ACAC-CTGTGCAC------CTTCTCGTG-CCTTCTCCGTCG---------
+seq2            ACACCCTGTGAACTGTCGTCTTAGGACG-CAA-------------TATAA
+seq3            ACAC-CTGTGAAC------CTGTACATTCCCTTCGGGGTCTTACACACAA
+                **** ***** **      **        *                    
 
-seq1            -----TCGC
-seq2            A---AGCAT
-seq3            TAGTTATAT
-                         
+seq1            ---------TCGTCCTTTGTTGGGTGACTCCACCGCT--CGC
+seq2            ACTCTAGTGTTGTCAATGAAAGTGTTATACCATAACAAGCAT
+seq3            ACTCTAGTGTCGTCTATGTATGT--------CTAGTT-ATAT
+                         * ***  *    *                    
 
 
 

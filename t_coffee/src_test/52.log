@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,10 +13,11 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[0] 
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
--in            	S	[1] 	Sseq.fas	P2PTC	Mfugue_pair
+-in            	S	[1] 	Ssample_seq5.fasta	Pstruc4.pdb	Mfugue_pair
 -seq           	S	[0] 
 -aln           	S	[0] 
 -method_limits 	S	[0] 
@@ -147,7 +149,37 @@ PROGRAM: T-COFFEE (Version_8.07)
 -exon_boundaries	S	[0] 
 
 INPUT FILES
-	Input File (S) seq.fas  Format fasta_seq
-	Input File (P) 2PTC.pdb  Format pdb_struc
+	Input File (S) sample_seq5.fasta  Format fasta_seq
+	Input File (P) struc4.pdb  Format pdb_struc
 	Input File (M) fugue_pair 
-HERE: *****
+
+INPUT SEQUENCES: 3 SEQUENCES  [PROTEIN]
+  Input File sample_seq5.fasta Seq pep1 Length  162 type PROTEIN Struct Unchecked
+  Input File sample_seq5.fasta Seq pep2 Length  164 type PROTEIN Struct Unchecked
+  Input File struc4.pdb Seq 1BO4 Length  137 type PROTEIN Struct Unchecked
+	PDB struc: Template=struc4.pdb, File=struc4.pdb
+
+COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
+
+	Seq: 1BO4
+	Seq: pep1
+	Seq: pep2
+
+READ/MAKE LIBRARIES:[3]
+
+	fugue_pair [method]
+
+	 Information: Method thread_pair cannot be applied to [pep1 vs pep2]. Use proba_pair instead
+	Multi Core Mode: 4 processors [subset]
+
+		[Submit   Job][TOT=    1][100 %][ELAPSED TIME:    0 sec.]
+
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 60049                                    
+60087 -- ERROR: Joy failed [FATAL:tc_generic_method.pl/fugueali]
+60087 -- COM: tc_generic_method.pl
+60087 -- STACK: 60074 -> 60087
+*************************************************************************************************
+
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 60049 ppid 60048
+#CL: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair 

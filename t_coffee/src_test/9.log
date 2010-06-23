@@ -36,6 +36,7 @@ PROGRAM: irmsd
 -blast_server  	W_F	[0] 	EBI
 -pdb_db        	W_F	[0] 	pdb
 -protein_db    	W_F	[0] 	uniprot
+-gapped        	D	[0] 	0 
 
 INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
   Input File 3d_sample4.aln Seq 12asA Length  327 type PROTEIN Struct Unchecked
@@ -43,4 +44,41 @@ INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
 
 Looking For Sequence Templates:
 
-	Template Type: [PDB struc] Mode Or File: [_SELF_P_] [StartHERE: *****
+	Template Type: [PDB struc] Mode Or File: [_SELF_P_] [Start]
+APDB_RESULT_FORMAT_02
+
+
+#PAIRWISE: 1atiA Vs 12asA
+	PAIRWISE EVALUATED:  76.38 %    [1atiA Vs 12asA] 
+	PAIRWISE APDB:       59.79 %    [1atiA Vs 12asA] 
+	PAIRWISE iRMSD:       0.99 Angs [1atiA Vs 12asA]
+	PAIRWISE NiRMSD:      1.29 Angs [1atiA Vs 12asA] [97 pos]
+	RAPDB PAIRS PAIRWISE N_NONEMPTY_PAIRS 97 N_MAXIMUM_PAIRS 127
+
+#AVERAGE For Sequence 12asA
+	AVERAGE  EVALUATED:  76.38 %    [12asA]
+	AVERAGE  APDB:       59.79 %    [12asA]
+	AVERAGE  iRMSD:       0.99 Angs [12asA]
+	AVERAGE  NiRMS:       1.29 Angs [12asA]
+
+#AVERAGE For Sequence 1atiA
+	AVERAGE  EVALUATED:  76.38 %    [1atiA]
+	AVERAGE  APDB:       59.79 %    [1atiA]
+	AVERAGE  iRMSD:       0.99 Angs [1atiA]
+	AVERAGE  NiRMS:       1.29 Angs [1atiA]
+
+#TOTAL for the Full MSA
+	TOTAL     EVALUATED:  76.38 %  
+	TOTAL     APDB:       59.79 %  
+	TOTAL     iRMSD:       0.99 Angs
+	TOTAL     NiRMSD:      1.29 Angs
+
+# EVALUATED: Fraction of Pairwise Columns Evaluated
+# APDB:      Fraction of Correct Columns according to APDB
+# iRMDS:     Average iRMSD over all evaluated columns
+# NiRMDS:    iRMSD*MIN(L1,L2)/Number Evaluated Columns
+# Main Parameter: -maximum_distance 10.00 Angstrom
+# Undefined values are set to -1 and indicate LOW Alignment Quality
+# Results Produced with T-COFFEE (Version_8.80)
+# T-COFFEE is available from http://www.tcoffee.org
+

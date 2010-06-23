@@ -1772,48 +1772,6 @@ int   perl_strstr ( char *string, char *pattern)
   vfree (string2);
   return r;
 }
-float grep_function ( char *pattern, char *file)
-	{
-
-	int a, b, l;
-	char buf1[100];
-	char buf2[100];
-	FILE*fp;
-	char *s;
-	float f;
-	
-	
-
-	s=vtmpnam(NULL);
-	
-	printf_system_direct("grep %s %s > %s",pattern,file, s);
-	
-	if ((fp=vfopen (s, "r"))==NULL )return 0;
-	else
-		{
-		  char command[1000];
-		  fgets ( command, 900, fp);
-		  l=strlen ( command);
-		  while ( !isdigit (command[l]))l--;
-		  a=0;
-		  while ( isdigit (command[l]) || command[l]=='.')
-		    {
-		      buf1[a++]=command[l];
-		      l--;
-		    }
-		  buf1[a]='\0';
-		  l=strlen (buf1);
-		  for ( a=0, b=l-1;a< l; a++, b--)
-		    buf2[b]=buf1[a];
-		  buf2[l]='\0';
-		  
-		  sscanf ( buf2, "%f", &f);
-		  printf_system_direct("rm %s", s);
-		  
-		  vfclose (fp);
-		  return f;
-		}
-	}    
 
 void crash_if ( int val, char *s)
     {
@@ -3537,10 +3495,10 @@ int fprintf_fork  (FILE *fp, char *string, ...)
   static char *openF;
   static char *closeF;
   
-  char *pid_file;
+  
   FILE *flag;
-  struct flock fl;
-  int fd,a;
+  
+  
 
   char *buf;
  
@@ -3567,10 +3525,10 @@ int fprintf_fork  (FILE *fp, char *string, ...)
 int fprintf_fork2  (FILE *fp, char *string, ...)
 {
 
-  static char *openF;
-  static struct flock fl;
+ 
+ 
   char* buf;
-  int fd;
+ 
   cvsprintf (buf, string);
   fprintf ( fp, "%s", buf);
   vfree (buf);
@@ -3596,6 +3554,8 @@ int printf_system_direct  (char *string, ...)
   int r;
   
   cvsprintf (buf, string);
+
+
   r=system (buf);
   vfree(buf);
   return r;
@@ -3634,7 +3594,7 @@ int my_system ( char *command0)
   static char ***unpacked_list;
   static int n_unpacked;
     
-    if (!unpacked_list)
+  if (!unpacked_list)
     {
       unpacked_list=declare_arrayN(3, sizeof (char), 3, 200,300);
     }
@@ -3657,6 +3617,7 @@ int my_system ( char *command0)
       command1=substitute (command1, ";", " ; ");
       
       list=string2list (command1);
+
       if ( !list) return EXIT_SUCCESS;
       is_command=1;
 
@@ -3674,7 +3635,9 @@ int my_system ( char *command0)
 	      else if ((c=name_is_in_list (list[a], unpacked_list[0], n_unpacked, 100))!=-1);
 	      else
 		{
+
 		  n_unpacked=unpack_perl_script (list[a], unpacked_list, n_unpacked);c=n_unpacked-1;
+		  
 		}
 	      //if non unpacked script check pg is installed:
 	   	      
@@ -3722,7 +3685,7 @@ int is_shellpid(int pid)
 }
 int is_rootpid()
 {
-  int r;
+
   if (debug_lock)
     {
       fprintf ( stderr,"\n\t------ check if %d isrootpid (util): %s->%d", getpid(),lock2name (getppid(),LLOCK), (lock(getppid(), LLOCK, LCHECK, NULL))?1:0);
@@ -3769,7 +3732,7 @@ char* lock(int pid,int type, int action,char *string, ...)
 {
   char *fname;
   
-  char *r;
+
 
   
   fname=lock2name (pid, type);
@@ -3804,7 +3767,7 @@ char* lock(int pid,int type, int action,char *string, ...)
   else if (action== LSET || action == LRESET)    
     {
       char *value;
-      char *r;
+ 
       if (string)
 	{
 	  cvsprintf (value,string);
@@ -3825,7 +3788,7 @@ char* lock(int pid,int type, int action,char *string, ...)
 }
 int check_process (const char *com,int pid,int r, int failure_handling)
 {
-  char *error;
+
   //If the child process has an error lock, copy that lock into the parent'lock
   //The error stack trace of the child gets passed to the parent
   if (debug_lock)fprintf (stderr, "\nEVAL_CALL ----- %d ->%s\n",pid, (r==EXIT_FAILURE)?"FAIL":"SUCCESS");
@@ -3869,7 +3832,7 @@ int safe_system (const char * com_in)
 {
     pid_t pid;
     int   status;
-    int return_value;
+
     int failure_handling;
     char *p;
     char command[1000];
@@ -3995,14 +3958,14 @@ pid_t **declare_pidtable ()
 }
 pid_t set_pid (pid_t p)
 {
-  int cpid;
+
   
   if (!pidtable)declare_pidtable();
-  if ( p<=0) return;
+  if ( p<=0) return (pid_t)0;
   else if ( p>=max_pid)realloc_pidtable((int)p);
   pidtable[(int)p][0]=getpid();
   pidtable[(int)p][1]=1;
-}
+  return p;}
 pid_t vvfork (char *type)
 {
   pid_t p;
@@ -4065,7 +4028,7 @@ int    vwait_npid (int sub, int max, int min)
     
 pid_t  vwaitpid (pid_t p, int *status, int options)
 {
-  pid_t p2;
+
   
   p=waitpid (p, status, options);
     
@@ -4161,7 +4124,7 @@ int kill_child_pid(int pid)
 	  lock  (a, LWARNING,LRELEASE, " ");
 	}
     }
-  return;
+  return 1;
 }
 
 int kill_child_list (int *list)
@@ -4270,7 +4233,9 @@ int unpack_perl_script (char *name, char ***unpacked, int n)
 {
   int a=0;
   
+
   set_file2remove_extension(".pl", SET);
+  
   
   if ( name==NULL) unpack_all_perl_script (NULL);
   while ( !strm(PerlScriptName[a], "EndList") && !strm ( name, PerlScriptName[a]))
@@ -4317,7 +4282,6 @@ int unpack_perl_script (char *name, char ***unpacked, int n)
   else
     {
       FILE *fp;
-     
       sprintf ( unpacked[0][n], "%s", name);
       sprintf ( unpacked[1][n], "%s", vtmpnam(NULL));
       sprintf ( unpacked[2][n], "unpack");
@@ -4327,6 +4291,7 @@ int unpack_perl_script (char *name, char ***unpacked, int n)
       printf_system_direct ("chmod u+x %s", unpacked[1][n]);
       
     }
+  
   set_file2remove_extension(".pl", UNSET);
   return ++n;
 }
@@ -4433,7 +4398,7 @@ char *get_tmp_4_tcoffee ()
       else if ( getenv ("TMP_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s", getenv("TMP_4_TCOFFEE"));
       else
 	{
-	  char command [1000];
+
 	  
 	  if ( strm (get_os(), "windows"))
 	    {
@@ -4611,9 +4576,9 @@ int cputenv (char *string, ...)
 {
   
 
-  size_t len ;
-  char *env;
-  char *file;
+
+
+
   char *s;
   char *s2;
   int r;
@@ -4735,7 +4700,7 @@ void printf_exit  (int exit_code, FILE *fp, char *string, ...)
   char *msg;
   
   cvsprintf (msg, string);
-  myexit(fprintf_error (fp, string));
+  myexit(fprintf_error (fp,msg));
   myexit (exit_code);
 }
 
@@ -5159,7 +5124,7 @@ char *get_proxy ()
 }
 int set_proxy (char *proxy)
 {
-  char *http;
+
   if (!proxy) return 0;
   
   cputenv ("HTTP_proxy_4_TCOFFEE=%s", proxy);
@@ -5239,7 +5204,7 @@ FILE* proxy_msg(FILE*fp)
   fprintf ( fp, "*         OR  %s/.t_coffee_env\n", get_dir_4_tcoffee());
   fprintf ( fp, "*************************************************************************************************\n");
   
-  return;
+  return fp;
 }
 FILE* email_msg(FILE*fp)
 {
@@ -5267,10 +5232,10 @@ FILE* email_msg(FILE*fp)
 
 void update_error_dir()
 {
-  char fdir[1000];
-  char *dir, *s;
-  char **list;
-  int a=0;
+
+
+  ;
+
   
   
 }
@@ -5278,13 +5243,13 @@ void update_error_dir()
 void dump_error_file()
 {
   char target[1000];
-  char fdir[1000];
-  char error[1000];
-  char warning[1000];
+
+
+
   char **list, *s;
   int a=0;
   FILE *fp;
-  char command[1000];
+
   
   sprintf ( target, "%s",getenv("ERRORFILE_4_TCOFFEE"));
   if ((fp=fopen (target, "w")))
@@ -5324,7 +5289,7 @@ void dump_error_file()
       fprintf ( fp, "\n######### FILES END  ######\n"); 
       fprintf ( fp, "\n######### ENVIRONEMENT  ######\n"); 
       fclose (fp);
-      printf_system_direct( command, "printenv >> %s", target);
+      printf_system_direct("printenv >> %s", target);
             
       fprintf ( stderr, "\n#----- Dumped ErrorFile: %s\n",target);
     }
@@ -5336,7 +5301,7 @@ void dump_error_file()
 
 FILE* error_msg(FILE*fp )
      {
-       if ( no_error_report)return;
+       if ( no_error_report)return fp;
 
        fprintf( fp,"\n\t******************************************************************");
        fprintf( fp, "\n\t* Abnormal Termination");
@@ -5515,7 +5480,7 @@ char *short_tmpnam_2(char *s)
   static int file;
   char buf[VERY_LONG_STRING];
   static char root2[VERY_LONG_STRING]; 
-  static char *tmpdir;
+
   static int name_size;
   
   if ( !root || !s)
@@ -5599,7 +5564,7 @@ char *vremove (char *s)
 }
 int log_function ( char *fname)
 {
-  char command[1000];
+
   
   if ( file_exists (NULL,error_file))
     {
@@ -5995,14 +5960,14 @@ int get_cl_param (int argc, char **argv, FILE **fp,char *para_name, int *set_fla
 	   for ( a=1; a< argc; a++)
 	       {
 	       if ( is_parameter ( argv[a]))
-		 
+		 {
 		 if (strstr (argv[a], "help"))myexit (EXIT_SUCCESS);
 		 else if ( name_is_in_list ( argv[a], parameter_list, number_of_parameters, STRING)==-1)
 		      {
 			myexit(fprintf_error ( stderr, "\n%s IS NOT A PARAMETER  OF %s [FATAL/%s %s]\n",argv[a], argv[0], argv[0], VERSION));
 		      
 		      }
-		  
+		 }
 		     
 	       }
 	 
@@ -6724,7 +6689,7 @@ int curl (char *address, char *out)
 
 int simple_check_internet_connection (char *ref_site)
 {
-  char *test,command[1000];
+  char *test;
   int n, internet=0;
   
   test=vtmpnam (NULL);
@@ -6746,9 +6711,9 @@ int check_internet_connection  (int mode)
 char *pg2path (char *pg)
 {
   char *path;
-  char *p;
+  
   char *tmp;
-  FILE *fp;
+ 
     
   if ( !pg) return NULL;
   tmp=vtmpnam(NULL);
@@ -6769,7 +6734,7 @@ char *pg2path (char *pg)
 
 int check_program_is_installed ( char *program_name, char *path_variable, char *path_variable_name, char *where2getit, int fatal)
   {
-   char command[LONG_STRING];
+   
    static char *path;
    
 
@@ -6919,7 +6884,9 @@ int isexec (char *file)
 {
   char *state;
   
+  
   state=ls_l(NULL,file);
+  
   if (state[0]==0) return 0;
   
   if ( state[0]=='d') return 0;
@@ -6933,7 +6900,6 @@ char *ls_l ( char *path,char *file)
 {
   char *tmpfile;
   static char *state;
-  char command[10000];
   FILE *fp;
   int a;
   
@@ -6944,10 +6910,8 @@ char *ls_l ( char *path,char *file)
       state=vcalloc (100, sizeof (char));
     }
   for (a=0;a<100; a++)state[a]=0;
-  if (!file)return state;
-  
-  
-  printf_system_direct ( command, "ls -l %s%s%s >%s 2>/dev/null", (path!=NULL)?path:"", (path!=NULL)?"/":"",file, tmpfile);
+  if (!file || !file_exists (path, file))return state;
+  printf_system_direct ("ls -l %s%s%s >%s 2>/dev/null",(path!=NULL)?path:"", (path!=NULL)?"/":"",file, tmpfile);
   
   fp=vfopen (tmpfile, "r");
   if (!fscanf ( fp, "%s", state))
@@ -6985,7 +6949,7 @@ int my_mkdir ( char *dir_in)
 	  if (access(dir, F_OK)==-1)
 	    {
 	    
-	      char command [1000];
+
 	      printf_system_direct("mkdir %s", dir);
 	      if ( access (dir, F_OK)==-1)
 		{
@@ -7009,7 +6973,7 @@ int filename_is_special (char *fname)
 
 char* check_file_exists ( char *fname_in)
 	{
-	FILE *fp;
+	
 	static char *fname1;
 	static char *fname2;
 	
@@ -8019,9 +7983,9 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   char buf[1000];
   char **out_argv;
   int a, stdi,c;
-  FILE *fp;
-  char *env_file;
-  char parent[100];
+
+
+
   
 
  
@@ -8175,7 +8139,7 @@ void clean_exit ()
 {
   Tmpname *b;
   char *tmp;
-  static int done;
+
   Tmpname *start;
   int debug;
 
@@ -8304,7 +8268,7 @@ int string_putenv ( char *s)
   
   p=s;
   n=0;
-  while ( p=strstr (p, "-setenv"))
+  while ( (p=strstr (p, "-setenv")))
     {
       if (sscanf (p, "-setenv %s %s", v1,v2)==2)
 	{

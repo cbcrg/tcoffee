@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -12,11 +13,12 @@ PROGRAM: T-COFFEE (Version_8.07)
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
 -template_file 	S	[0] 
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
--in            	S	[0] 
--seq           	S	[1] 	sample_seq1.fasta
+-in            	S	[1] 	Lsample_lib3.tc_lib	Mlalign_rs_s_pair
+-seq           	S	[0] 
 -aln           	S	[0] 
 -method_limits 	S	[0] 
 -method        	S	[0] 
@@ -49,7 +51,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -quicktree     	FL	[0] 	0
 -outfile       	W_F	[0] 	default
 -maximise      	FL	[1] 	1
--output        	S	[1] 	clustalw	gcg	score_html
+-output        	S	[0] 	aln	html
 -infile        	R_F	[0] 
 -matrix        	S	[0] 	default
 -tg_mode       	D	[0] 	1 
@@ -73,9 +75,9 @@ PROGRAM: T-COFFEE (Version_8.07)
 -seq_weight    	S	[0] 	t_coffee
 -align         	FL	[1] 	1
 -mocca         	FL	[0] 	0
--domain        	FL	[0] 	0
--start         	D	[0] 	0 
--len           	D	[0] 	0 
+-domain        	FL	[1] 	1
+-start         	D	[100] 	100 
+-len           	D	[60] 	60 
 -scale         	D	[0] 	0 
 -mocca_interactive	FL	[0] 	0
 -method_evaluate_mode	S	[0] 	default
@@ -146,18 +148,31 @@ PROGRAM: T-COFFEE (Version_8.07)
 -overaln_P4    	D	[0] 	0 
 -exon_boundaries	S	[0] 
 
+ERROR: Mlalign_rs_s_pair not recognised [FATAL:T-COFFEE]
 INPUT FILES
-	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) proba_pair 
+	Input File (L) sample_lib3.tc_lib 
+	Input File (M) lalign_rs_s_pair 
 
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_lib3.tc_lib Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_lib3.tc_lib Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_lib3.tc_lib Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_lib3.tc_lib Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_lib3.tc_lib Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_lib3.tc_lib Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_lib3.tc_lib Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_lib3.tc_lib Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_lib3.tc_lib Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_lib3.tc_lib Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 
 COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
 
+	Seq: 1cms
+	Seq: 1cms_1
+	Seq: 2apr
+	Seq: 3app
+	Seq: 4ape
+	Seq: 4pep
 	Seq: hmgb_chite
 	Seq: hmgl_trybr
 	Seq: hmgl_wheat
@@ -165,70 +180,42 @@ COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity 
 
 READ/MAKE LIBRARIES:[2]
 
-	proba_pair [method]
-
-	Multi Core Mode: 2 processors [subset]
-
-		[Submit   Job][TOT=    3][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    3][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    3][100 %][ELAPSED TIME:    0 sec.]
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [887]
-
-Library Relaxation: Multi_proc [2] 
-		[Submit   Job][TOT=  443][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][  1 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][  2 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][  3 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][  4 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][  5 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][  6 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][  7 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][  8 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][  9 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 10 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 11 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 12 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 13 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 14 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 15 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 16 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 17 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 18 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 19 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 20 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 21 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 22 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 23 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 24 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 25 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 26 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 27 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 28 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 29 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 30 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 31 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 32 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 33 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 34 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 35 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 36 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 37 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 38 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 39 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 40 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 41 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 42 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 43 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 44 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 45 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 46 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 47 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 48 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 49 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 50 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 51 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 52 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 53 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 54 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 55 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 56 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 57 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 58 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 59 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 60 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 61 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 62 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 63 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 64 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 65 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 67 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 68 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 69 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 70 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 71 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 72 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 73 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 74 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 75 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 76 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 77 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 78 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 79 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 80 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 81 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 82 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 83 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 84 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 85 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 86 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 87 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 88 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 89 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 90 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 91 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 92 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 93 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 94 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 95 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 96 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 97 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 98 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][ 99 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  443][100 %][ELAPSED TIME:    0 sec.]
-Total Relaxation: [887]--->[762] Entries
-
-	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
+	sample_lib3.tc_lib [lib]
 
 
-WEIGHTED MODE:t_coffee
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 59784                                    
+59784 -- ERROR: COREDUMP: T-COFFEE Version_8.80
+*************************************************************************************************
 
-	hmgb_chite 1.00
-	hmgl_trybr 0.97
-	hmgl_wheat 1.01
-	hmgt_mouse 1.01
-
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Score=  71][Len=   76][PID:3260]
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  78][Len=   79][PID:3792]
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Score=  74][Len=   81][PID:4720][Forked]
-
-
-
-OUTPUT RESULTS
-	#### File Type= GUIDE_TREE Format=     newick Name= sample_seq1.dnd
-	#### File Type=        MSA Format=   clustalw Name= sample_seq1.clustalw
-	#### File Type=        MSA Format=        msf Name= sample_seq1.msf
-	#### File Type=        MSA Format= score_html Name= sample_seq1.score_html
-
-
-# TIP :See The Full Documentation on www.tcoffee.org
-# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
-# TIP 14:  All the latest versions on www.tcoffee.org
-
-# Command Line: t_coffee sample_seq1.fasta -output=clustalw,gcg, score_html  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 7.858 Mb, Max= 8.651 Mb
-# T-COFFEE CPU Usage: 329 millisec
-# Results Produced with T-COFFEE (Version_8.07)
-# T-COFFEE is available from http://www.tcoffee.org
-CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.30 sec, SCORE=82, Nseq=4, Len=81 
-
-hmgl_trybr      kkdsnapkramtsfmffssdfrskhs----d-lsivemskaagaawkelgpeerkvyeem
-hmgt_mouse      -----kpkrprsayniyvsesfqeak----d-dsaqgklklvneawknlspeekqayiql
-hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk--dkseweak
-hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvak
-                      ***. ::: .: ..  .. .    .  .     *  .  *: *   ::  :   
-
-hmgl_trybr      aekdkerykre---------m
-hmgt_mouse      akddrirydnemksweeqmae
-hmgb_chite      aatakqnyiralqeye-rngg
-hmgl_wheat      anklkgeynkaiaaynkgesa
-                *   : .* .           
+	******************************************************************
+	* Abnormal Termination
+	* Job NOT Completed:[T-COFFEE, Version_8.80]
+	* Please CHECK:                                       
+	* 	-1 The format of your Input Files                 
+	* 	-2 The parameters                                 
+	* 	-3 The use of special characters in sequence names:
+	* 		 (@, |, %...)
+	* 	-4 The Online Doc (http://www.tcoffee.org)                   
+	* 	-5 Send the file:
+	*
+	*	    t_coffee.ErrorReport 
+	* to:
+	* 		cedric.notredame@europe.com
+	* If you run T-Coffee over the WEB:
+	* 	Windows Cut and Paste is sometimes erratic and
+	* 	it can loose carriage returns. If you suspect this,
+	* 	try to cut and paste through an intermediate application
+	* 	(word pad) and inspect the results
 
 
+	* CONFIDENTIALITY:
+	* 	The File t_coffee.ErrorReport may contain your personnal DATA
+	* 	Remove ALL confidential DATA from this file BEFORE sending it
+	******************************************************************
+# Command Line: t_coffee -in Lsample_lib3.tc_lib Mlalign_rs_s_pair -domain -start 100 -len 60  [PROGRAM:T-COFFEE]
 
+#----- Dumped ErrorFile: t_coffee.ErrorReport
+
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 59784 ppid 59783
+#CL: t_coffee -in Lsample_lib3.tc_lib Mlalign_rs_s_pair -domain -start 100 -len 60 

@@ -1352,7 +1352,7 @@ int list2nodup_list ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int 
 }
 int** cl2sorted_diagonals   ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 {
-  if ( CL && CL->L)return cl2sorted_diagonals_cs   ( A, ns, ls, CL);
+  if ( CL && CL->residue_index)return cl2sorted_diagonals_cs   ( A, ns, ls, CL);
   else return cl2sorted_diagonals_mat   ( A, ns, ls, CL);
 }
 
@@ -1543,7 +1543,6 @@ int** cl2sorted_diagonals_cs   ( Alignment *A, int *ns, int **ls, Constraint_lis
   
   
 
-  CL=index_res_constraint_list (CL, CL->weight_field);
   ndiag=l1+l2;
   diag=declare_int (ndiag+3, 2);
   
@@ -1597,7 +1596,7 @@ int** cl2sorted_diagonals_cs_old2   ( Alignment *A, int *ns, int **ls, Constrain
   sl2=vcalloc ((CL->S)->nseq, sizeof (int));
   
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
-  CL=index_res_constraint_list (CL, CL->weight_field);
+  
   ndiag=l1+l2;
   diag=declare_int (ndiag+3, 2);
   
@@ -1609,11 +1608,11 @@ int** cl2sorted_diagonals_cs_old2   ( Alignment *A, int *ns, int **ls, Constrain
 	  s=ls [0][si];
 	  r=pos[s][p1-1];
 	  
-	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=3)
+	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
 	    {
 	      
-	      t_s=CL->residue_index[s][r][a];
-	      t_r=CL->residue_index[s][r][a+1];
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
 	      
 	      if (sl2[t_s])
 		{
@@ -1653,11 +1652,11 @@ int cl2list_borders   (Alignment *A, int *ns, int **ls, Constraint_list *CL, int
   int **pos;
   if (!A)return 0;
   
-//   printf("ICH BIN HIER\n");
+
   if ( list_in[0] && list_in[0][0]==0)
-	  return read_array_size (list, sizeof (int*));
+	  return read_array_size (list_in[0], sizeof (int*));
   
-//   printf("UND HIER IRGENDWIE AUCH\n");
+
   
   list=list_in[0];
   n=n_in[0];
@@ -1799,7 +1798,7 @@ int cl2pair_list_diag_mat ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 int cl2pair_list_diag_cl ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add );	  
 int cl2pair_list_diag ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add )
 {
-  if (CL->L)return cl2pair_list_diag_cl (A, ns, ls, CL, list_in, n_in, add);
+  if (CL->residue_index)return cl2pair_list_diag_cl (A, ns, ls, CL, list_in, n_in, add);
   else return cl2pair_list_diag_mat (A, ns, ls, CL, list_in, n_in, add);
 }
 int cl2pair_list_diag_mat ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add )
@@ -1975,15 +1974,15 @@ int cl2pair_list_ecl ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int
 {
   int mode=5;
   
-
-
+  if (atoigetenv ("ECLMODE4TC")){HERE ("****ECLMODE4TC:%d",mode=atoigetenv ("ECLMODE4TC"));}
+  
   if ( mode==1)return cl2pair_list_ecl_norm         (A, ns, ls, CL, list_in, n_in);
   else if ( mode==2)return cl2pair_list_ecl_raw     (A, ns, ls, CL, list_in, n_in);
   else if ( mode==3)return cl2pair_list_ecl_rawquad (A, ns, ls, CL, list_in, n_in);
   else if ( mode==4)return cl2pair_list_ecl_noext_raw (A, ns, ls, CL, list_in, n_in);
   else if ( mode==5)return cl2pair_list_ecl_pc     (A, ns, ls, CL, list_in, n_in);
   else if ( mode==6)return cl2pair_list_ecl_ext_pc     (A, ns, ls, CL, list_in, n_in);
-  
+  else if ( mode==7)return cl2pair_list_ecl_pc_prf     (A, ns, ls, CL, list_in, n_in);
 }
 int cl2pair_list_ecl_noext_raw ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
@@ -2021,7 +2020,7 @@ int cl2pair_list_ecl_noext_raw ( Alignment *A, int *ns, int **ls, Constraint_lis
   
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
  
-  CL=index_res_constraint_list (CL, CL->weight_field);
+
   
   used=declare_int (l2+1,2);
   used_list=vcalloc (l2+1, sizeof (int));
@@ -2032,9 +2031,12 @@ int cl2pair_list_ecl_noext_raw ( Alignment *A, int *ns, int **ls, Constraint_lis
       for (nused=0,si=0;p1>0 && si<ns[0]; si++)
 	{
 	  s=ls [0][si];r=pos[s][p1-1];
-	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=3)
+	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
 	    {
-	      t_s2=CL->residue_index[s][r][a];t_r2=CL->residue_index[s][r][a+1];t_w2=CL->residue_index[s][r][a+2];
+	      t_s2=CL->residue_index[s][r][a+SEQ2];
+	      t_r2=CL->residue_index[s][r][a+R2];
+	      t_w2=CL->residue_index[s][r][a+WE];
+	      
 	      if (sl2[t_s2])
 		{
 		  p2=inv_pos[t_s2][t_r2];
@@ -2123,7 +2125,7 @@ int cl2pair_list_ecl_raw ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
   
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
   
-  CL=index_res_constraint_list (CL, CL->weight_field);
+
   
   used=declare_int (l2+1,2);
   used_list=vcalloc (l2+1, sizeof (int));
@@ -2134,15 +2136,20 @@ int cl2pair_list_ecl_raw ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
       for (tot=0,nused=0,si=0;p1>0 && si<ns[0]; si++)
 	{
 	  s=ls [0][si];r=pos[s][p1-1];
-	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=3)
+	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
 	    {
-	      t_s=CL->residue_index[s][r][a];t_r=CL->residue_index[s][r][a+1];t_w=CL->residue_index[s][r][a+2];
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
 	      for (b=0; b<CL->residue_index[t_s][t_r][0];)
 		{
 		  if (b==0){t_s2=t_s;t_r2=t_r;t_w2=t_w;b++;}
 		  else 
 		    { 
-		      t_s2=CL->residue_index[t_s][t_r][b];t_r2=CL->residue_index[t_s][t_r][b+1];t_w2=CL->residue_index[t_s][t_r][b+2];b+=3;
+		      t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
+		      t_r2=CL->residue_index[t_s][t_r][b+R2];
+		      t_w2=CL->residue_index[t_s][t_r][b+WE];
+		      b+=ICHUNK;
 		    }
 		  
 		  if (sl2[t_s2])
@@ -2231,6 +2238,136 @@ int cl2pair_list_ecl_raw ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
  * \param list_in the diagonals
  * \param n_in number of sequences?
  */
+
+int cl2pair_list_ecl_pc_prf ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+{
+  int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2, n;
+  int a, b, l1, l2;
+  int **pos,**list;
+  int max_n;
+
+  int nused;
+  int *used_list;
+  int *sl2, **inv_pos;
+
+  int **nr;
+
+
+  float nscore, score, tot, filter, avg=0, new=0;
+  float **used;
+
+ 
+  if ( !A) return 0;
+  list=list_in[0];
+  n=n_in[0];
+  max_n=read_array_size (list, sizeof (int*));
+
+  pos=aln2pos_simple ( A,-1, ns, ls);
+  inv_pos=vcalloc ((CL->S)->nseq, sizeof (int*));
+  for (a=0; a<ns[1]; a++)inv_pos[ls[1][a]] =seq2inv_pos(A->seq_al[ls[1][a]]);
+
+  l1=strlen (A->seq_al[ls[0][0]]);
+  l2=strlen (A->seq_al[ls[1][0]]);
+  sl2=vcalloc ((CL->S)->nseq, sizeof (int));
+  nr=declare_int (2, MAX(l1,l2)+1);
+
+  for (a=0; a<l1;a++)
+    for (b=0; b<ns[0]; b++)
+      if (!is_gap(A->seq_al[ls[0][b]][a]))nr[0][a+1]++;
+  for (a=0; a<l2;a++)
+    for (b=0; b<ns[1]; b++)
+      if (!is_gap(A->seq_al[ls[1][b]][a]))nr[1][a+1]++;
+  
+  for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
+  
+    
+  used=declare_float (l2+1,2);
+  used_list=vcalloc (l2+1, sizeof (int));
+  nused=0;
+  
+  for (p1=0; p1<=l1; p1++)
+    {
+      
+      for (tot=0,nused=0,si=0;p1>0 && si<ns[0]; si++)
+	{
+	  s=ls [0][si];r=pos[s][p1-1];
+	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
+	    {
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
+	      for (b=0; b<CL->residue_index[t_s][t_r][0];)
+		{
+		  if (b==0){t_s2=t_s;t_r2=t_r;t_w2=t_w;b++;}
+		  else 
+		    { 
+		      t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
+		      t_r2=CL->residue_index[t_s][t_r][b+R2];
+		      t_w2=CL->residue_index[t_s][t_r][b+WE];
+		      b+=ICHUNK;
+		    }
+		  
+		  if (sl2[t_s2])
+		    {
+		      p2=inv_pos[t_s2][t_r2];
+		      //score=((float)t_w/(float)NORM_F)*((float)t_w2/(float)NORM_F);
+		      score=MIN(((float)t_w/(float)NORM_F),((float)t_w2/(float)NORM_F));
+		      
+		      if (!used[p2][1] && score>0)
+			{
+			  used_list[nused++]=p2;
+			}
+		      
+		      tot+=score;
+		      used[p2][0]+=score;
+		      used[p2][1]++;
+		    }
+		}
+	    }
+	}
+      //FILTER: Keep in the graph the edges where (p1->p2/(Sum (P1->x))>0.01
+      filter=0.01;
+      
+      for (a=0; a<nused; a++)
+	{
+	  
+	  p2=used_list[a];
+	  nscore=used[p2][0]/tot; //Normalized score used for filtering
+	  score =used[p2][0];
+		  
+	  used[p2][0]=used[p2][1]=0;
+	  if (n==max_n)
+	    {
+	      max_n+=10000;list=vrealloc (list, max_n*sizeof (int*));
+	    }
+	  if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
+	    {
+	      if (!list[n])
+			  list[n]=vcalloc (7, sizeof (int));
+	      
+	      list[n][0]=p1;
+	      list[n][1]=p2;
+	      list[n][3]=(l1-(p1))+(p2);
+	      score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
+	      list[n][2]=(int)((float)score*(float)NORM_F);
+	      avg+=(int)((float)score*(float)NORM_F);
+	      new++;
+	      n++;
+	    }
+	}
+    }
+  free_float (used, -1);
+  vfree (used_list);
+  free_int (inv_pos, -1);
+  free_int (pos, -1);
+  vfree (sl2);
+  free_int (nr, -1);
+
+  n_in[0]=n;
+  list_in[0]=list;
+  if (new)avg/=new;
+  return avg;
+}
 int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
   int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2, n;
@@ -2272,8 +2409,7 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
   
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
   
-  CL=index_res_constraint_list (CL, CL->weight_field);
-  
+    
   used=declare_float (l2+1,2);
   used_list=vcalloc (l2+1, sizeof (int));
   nused=0;
@@ -2284,15 +2420,20 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
       for (tot=0,nused=0,si=0;p1>0 && si<ns[0]; si++)
 	{
 	  s=ls [0][si];r=pos[s][p1-1];
-	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=3)
+	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
 	    {
-	      t_s=CL->residue_index[s][r][a];t_r=CL->residue_index[s][r][a+1];t_w=CL->residue_index[s][r][a+2];
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
 	      for (b=0; b<CL->residue_index[t_s][t_r][0];)
 		{
 		  if (b==0){t_s2=t_s;t_r2=t_r;t_w2=t_w;b++;}
 		  else 
 		    { 
-		      t_s2=CL->residue_index[t_s][t_r][b];t_r2=CL->residue_index[t_s][t_r][b+1];t_w2=CL->residue_index[t_s][t_r][b+2];b+=3;
+		      t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
+		      t_r2=CL->residue_index[t_s][t_r][b+R2];
+		      t_w2=CL->residue_index[t_s][t_r][b+WE];
+		      b+=ICHUNK;
 		    }
 		  
 		  if (sl2[t_s2])
@@ -2357,7 +2498,6 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
   return avg;
 }
 
-
 int cl2pair_list_ecl_rawquad ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
   int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2,t_s3, t_r3, t_w3, n,n2;
@@ -2392,7 +2532,6 @@ int cl2pair_list_ecl_rawquad ( Alignment *A, int *ns, int **ls, Constraint_list 
   
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
  
-  CL=index_res_constraint_list (CL, CL->weight_field);
   
   used=declare_int (l2+1,2);
   used_list=vcalloc (l2+1, sizeof (int));
@@ -2404,15 +2543,20 @@ int cl2pair_list_ecl_rawquad ( Alignment *A, int *ns, int **ls, Constraint_list 
       for (nused=0,si=0;p1>0 && si<ns[0]; si++)
 	{
 	  s=ls [0][si];r=pos[s][p1-1];
-	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=3)
+	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
 	    {
-	      t_s=CL->residue_index[s][r][a];t_r=CL->residue_index[s][r][a+1];t_w=CL->residue_index[s][r][a+2];
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
 	      for (b=0; b<CL->residue_index[t_s][t_r][0];)
 		{
 		  if (b==0){t_s2=t_s;t_r2=t_r;t_w2=t_w;b++;}
 		  else 
 		    { 
-		      t_s2=CL->residue_index[t_s][t_r][b];t_r2=CL->residue_index[t_s][t_r][b+1];t_w2=CL->residue_index[t_s][t_r][b+2];b+=3;
+		      t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
+		      t_r2=CL->residue_index[t_s][t_r][b+R2];
+		      t_w2=CL->residue_index[t_s][t_r][b+WE];
+		      b+=ICHUNK;
 		    }
 		  if (sl2[t_s2])
 		    {
@@ -2421,7 +2565,10 @@ int cl2pair_list_ecl_rawquad ( Alignment *A, int *ns, int **ls, Constraint_list 
 			  if (c==0){t_s3=t_s2;t_r3=t_r2;t_w3=t_w2;c++;}
 			  else 
 			    { 
-			      t_s3=CL->residue_index[t_s2][t_r2][c];t_r3=CL->residue_index[t_s2][t_r2][c+1];t_w3=CL->residue_index[t_s2][t_r2][c+2];c+=3;
+			      t_s3=CL->residue_index[t_s2][t_r2][c+SEQ2];
+			      t_r3=CL->residue_index[t_s2][t_r2][c+R2];
+			      t_w3=CL->residue_index[t_s2][t_r2][c+WE];
+			      c+=ICHUNK;
 			    }
 			  
 			  if (sl2[t_s3])
@@ -2508,7 +2655,6 @@ int cl2pair_list_ecl_norm ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
  
-  CL=index_res_constraint_list (CL, CL->weight_field);
   
   used=vcalloc (l2+1, sizeof (int));
   used_list=vcalloc (l2+1, sizeof (int));
@@ -2523,17 +2669,21 @@ int cl2pair_list_ecl_norm ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 	  s=ls [0][si];
 	  r=pos[s][p1-1];
 	  
-	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=3)
+	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
 	    {
 	      
-	      t_s=CL->residue_index[s][r][a];
-	      t_r=CL->residue_index[s][r][a+1];
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
 	      
 	      for (b=0; b<CL->residue_index[t_s][t_r][0];)
 		{
 		  int t_s2, t_r2;
 		  if (b==0){t_s2=t_s;t_r2=t_r;b++;}
-		  else { t_s2=CL->residue_index[t_s][t_r][b];t_r2=CL->residue_index[t_s][t_r][b+1];b+=3;}
+		  else { 
+		    t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
+		    t_r2=CL->residue_index[t_s][t_r][b+R2];
+		    b+=ICHUNK;
+		  }
 		  
 		  if (sl2[t_s2])
 		    {
@@ -2650,7 +2800,7 @@ int cl2pair_list_ecl_ext_pc ( Alignment *A, int *ns, int **ls, Constraint_list *
   int t_s2, t_r2, t_w2;
   int max_len,nseq, avg;
   int tot=0;
-  int *stack,ss;
+  
   
   if ( !A) return 0;
   list=list_in[0];
@@ -2661,70 +2811,159 @@ int cl2pair_list_ecl_ext_pc ( Alignment *A, int *ns, int **ls, Constraint_list *
   l2=strlen (A->seq_al[ls[1][0]]);
   sl2=vcalloc ((CL->S)->nseq, sizeof (int));
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
-  CL=index_res_constraint_list (CL, CL->weight_field);
+  
   max_len=(CL->S)->max_len;
   nseq=(CL->S)->nseq;
   
   cache=declare_int ( nseq+1, max_len+1);
   reallocT=declare_int (nseq+1, max_len+1);
-  stack=vcalloc ( 2*max_len*nseq, sizeof (int));
   
   for (p1=1; p1<=l1; p1++)
     {
       for (si=0;si<ns[0]; si++)
 	{
-	  ss=0;
 	  s=ls[0][si];r=pos[s][p1-1];
 	  s=name_is_in_list (A->name[s], (CL->S)->name, (CL->S)->nseq, 100);
-	  
-
-	  cache[s][r]=1;stack[ss++]=s;stack[ss++]=r;
-	  
-	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=3)
+	  if (r<=0)continue;
+	  cache[s][r]=1;
+	  for (a=1;a<CL->residue_index[s][r][0];a+=ICHUNK)
 	    {
 	      
 	      
-	      t_s=CL->residue_index[s][r][a];
-	      t_r=CL->residue_index[s][r][a+1];
-	      t_w=CL->residue_index[s][r][a+2];
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
 	      
-	      cache[t_s][t_r]=1;stack[ss++]=t_s;stack[ss++]=t_r;
+	      cache[t_s][t_r]=1;
+	    }
+	  for (a=1;a<CL->residue_index[s][r][0];a+=ICHUNK)
+	    {
 	      
-	      for (b=1; b<CL->residue_index[t_s][t_r][0];b+=3)
+	      
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
+	      
+	      for (b=1; b<CL->residue_index[t_s][t_r][0];b+=ICHUNK)
 		{
-		  t_s2=CL->residue_index[t_s][t_r][b];
-		  t_r2=CL->residue_index[t_s][t_r][b+1];
-		  t_w2=CL->residue_index[t_s][t_r][b+2];
+		  t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
+		  t_r2=CL->residue_index[t_s][t_r][b+R2];
+		  t_w2=CL->residue_index[t_s][t_r][b+WE];
 		  
 		  if (!cache[t_s2][t_r2])
 		    {
 		      tot++;
-		      
-		      cache[t_s2][t_r2]=1;stack[ss++]=t_s2;stack[ss++]=t_r2;
+		      int ni;
+		      cache[t_s2][t_r2]=1;
 		      if (!reallocT[s][r])reallocT[s][r]=CL->residue_index[s][r][0];
-		      CL->residue_index[s][r][0]+=3;
+		      ni=CL->residue_index[s][r][0];
+		      CL->residue_index[s][r][0]+=ICHUNK;
+		      
 		      CL->residue_index[s][r]=vrealloc ( CL->residue_index[s][r], CL->residue_index[s][r][0]*sizeof (int));
-		      CL->residue_index[s][r][CL->residue_index[s][r][0]-3]=t_s2;
-		      CL->residue_index[s][r][CL->residue_index[s][r][0]-2]=t_r2;
-		      CL->residue_index[s][r][CL->residue_index[s][r][0]-1]=MIN(t_w2,t_w);
+		      CL->residue_index[s][r][ni+SEQ2]=t_s2;
+		      CL->residue_index[s][r][ni+R2]=t_r2;
+		      CL->residue_index[s][r][ni+WE]=MIN(t_w2,t_w);
 		      
 		      if (!reallocT[t_s2][t_r2])reallocT[t_s2][t_r2]=CL->residue_index[t_s2][t_r2][0];
-		      CL->residue_index[t_s2][t_r2][0]+=3;
+		      ni=CL->residue_index[t_s2][t_r2][0];
+		      CL->residue_index[t_s2][t_r2][0]+=ICHUNK;
 		      CL->residue_index[t_s2][t_r2]=vrealloc ( CL->residue_index[t_s2][t_r2], CL->residue_index[t_s2][t_r2][0]*sizeof (int));
-		      CL->residue_index[t_s2][t_r2][CL->residue_index[t_s2][t_r2][0]-3]=s;
-		      CL->residue_index[t_s2][t_r2][CL->residue_index[t_s2][t_r2][0]-2]=r;
-		      CL->residue_index[t_s2][t_r2][CL->residue_index[t_s2][t_r2][0]-1]=MIN(t_w2,t_w);
+		      CL->residue_index[t_s2][t_r2][ni+SEQ2]=s;
+		      CL->residue_index[t_s2][t_r2][ni+R2]=r;
+		      CL->residue_index[t_s2][t_r2][ni+WE]=MIN(t_w2,t_w);
 		      
 		    }
 		}
 	      
 	    }
-	  for (a=0; a<ss;)
-	    cache[stack[a++]][stack[a++]]=0;
+
+	  cache[s][r]=0;
+	  for (a=1;a<CL->residue_index[s][r][0];a+=ICHUNK)
+	    {
+	      
+	      
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
+	      
+	      cache[t_s][t_r]=0;
+	    }
 	}
     }
 
-  
+  for (p1=1; p1<=l2; p1++)
+    {
+      for (si=0;si<ns[1]; si++)
+	{
+	  s=ls[1][si];r=pos[s][p1-1];
+	  s=name_is_in_list (A->name[s], (CL->S)->name, (CL->S)->nseq, 100);
+	  if (r<=0)continue;
+	  cache[s][r]=1;
+	  for (a=1;a<CL->residue_index[s][r][0];a+=ICHUNK)
+	    {
+	      
+	      
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
+	      
+	      cache[t_s][t_r]=1;
+	    }
+	  for (a=1;a<CL->residue_index[s][r][0];a+=ICHUNK)
+	    {
+	      
+	      
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
+	      
+	      for (b=1; b<CL->residue_index[t_s][t_r][0];b+=ICHUNK)
+		{
+		  t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
+		  t_r2=CL->residue_index[t_s][t_r][b+R2];
+		  t_w2=CL->residue_index[t_s][t_r][b+WE];
+		  
+		  if (!cache[t_s2][t_r2])
+		    {
+		      tot++;
+		      int ni;
+		      
+		      cache[t_s2][t_r2]=1;
+		      if (!reallocT[s][r])reallocT[s][r]=CL->residue_index[s][r][0];
+		      ni=CL->residue_index[s][r][0];
+		      CL->residue_index[s][r][0]+=ICHUNK;
+		      CL->residue_index[s][r]=vrealloc ( CL->residue_index[s][r], CL->residue_index[s][r][0]*sizeof (int));
+		      CL->residue_index[s][r][ni+SEQ2]=t_s2;
+		      CL->residue_index[s][r][ni +R2]=t_r2;
+		      CL->residue_index[s][r][ni+WE]=MIN(t_w2,t_w);
+		      
+		      if (!reallocT[t_s2][t_r2])reallocT[t_s2][t_r2]=CL->residue_index[t_s2][t_r2][0];
+		      ni=CL->residue_index[t_s2][t_r2][0];
+		      CL->residue_index[t_s2][t_r2][0]+=ICHUNK;
+		      CL->residue_index[t_s2][t_r2]=vrealloc ( CL->residue_index[t_s2][t_r2], CL->residue_index[t_s2][t_r2][0]*sizeof (int));
+		      CL->residue_index[t_s2][t_r2][ni+SEQ2]=s;
+		      CL->residue_index[t_s2][t_r2][ni+R2]=r;
+		      CL->residue_index[t_s2][t_r2][ni+WE]=MIN(t_w2,t_w);
+		      
+		    }
+		}
+	      
+	    }
+
+	  cache[s][r]=0;
+	  for (a=1;a<CL->residue_index[s][r][0];a+=ICHUNK)
+	    {
+	      
+	      
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+R2];
+	      t_w=CL->residue_index[s][r][a+WE];
+	      
+	      cache[t_s][t_r]=0;
+	    }
+	}
+    }
+
   
 
   HERE ("TOT=%d", tot);
@@ -2735,7 +2974,6 @@ int cl2pair_list_ecl_ext_pc ( Alignment *A, int *ns, int **ls, Constraint_list *
       if ( reallocT[s][r])CL->residue_index[s][r][0]=reallocT[s][r];
   free_int (reallocT, -1);
   free_int (cache, -1);
-  vfree (stack);
   return avg;
 }
 

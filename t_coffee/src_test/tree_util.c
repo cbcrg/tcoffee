@@ -672,8 +672,9 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
     }
   else if ( strm (mode, "single"))
     {
-      for (ax=0; ax<nl; ax++)
+      for (b=0,ax=0; ax<nl; ax++)
 	{
+	  
 	  Tree_sim *TS;
 	  int pstart, pend;
 	  
@@ -1476,17 +1477,15 @@ NT_node similarities_file2tree (char *mat)
 NT_node compute_cw_tree (Alignment *A)
 {
   char *tmp1, *tmp2, tmp3[1000];
-  char command[1000];
   
   tmp1=vtmpnam (NULL);
   tmp2=vtmpnam (NULL);
 
   sprintf ( tmp3, "%s.ph", tmp1);
   output_clustal_aln (tmp1, A);
-  sprintf ( command, "clustalw -infile=%s -tree -newtree=%s %s ", tmp1,tmp3, TO_NULL_DEVICE);
-  my_system ( command);
-  sprintf ( command, "mv %s %s", tmp3, tmp2);
-  my_system ( command);
+  printf_system ("clustalw -infile=%s -tree -newtree=%s %s ", tmp1,tmp3, TO_NULL_DEVICE);
+  printf_system("mv %s %s", tmp3, tmp2);
+  
   return main_read_tree(tmp2);
 }
 
@@ -1565,9 +1564,7 @@ Alignment * filter_aln4tree (Alignment *A, int n,int fraction_gap,char *mode)
   char *ungaped_aln_file;
   char *scored_aln_file;
   char *filtered_aln_file;
-  char command[1000];
-
-  
+    
   aln_file=vtmpnam(NULL);
   ungaped_aln_file=vtmpnam (NULL);
   scored_aln_file=vtmpnam (NULL);
@@ -1578,16 +1575,16 @@ Alignment * filter_aln4tree (Alignment *A, int n,int fraction_gap,char *mode)
 
   output_clustal_aln (aln_file, A);
   /* 1: remove columns with too many gaps*/
-  sprintf ( command, "t_coffee -other_pg seq_reformat -in %s -action +rm_gap %d -output clustalw > %s", aln_file,fraction_gap, ungaped_aln_file);
-  my_system ( command);
+  printf_system ("t_coffee -other_pg seq_reformat -in %s -action +rm_gap %d -output clustalw > %s", aln_file,fraction_gap, ungaped_aln_file);
+  
   /* 2: evaluate the alignment*/
   
-  sprintf ( command, "t_coffee -other_pg seq_reformat -in %s -action +evaluate %s -output clustalw > %s", ungaped_aln_file,(mode)?mode:"categories", scored_aln_file);
-  my_system ( command);
+  printf_system ("t_coffee -other_pg seq_reformat -in %s -action +evaluate %s -output clustalw > %s", ungaped_aln_file,(mode)?mode:"categories", scored_aln_file);
+ 
   
   /*3 extract the high scoring columns*/
-  sprintf ( command, "t_coffee -other_pg seq_reformat -in %s -struc_in %s -struc_in_f number_aln -action +use_cons +keep '[%d-8]' +rm_gap -output clustalw > %s", ungaped_aln_file, scored_aln_file,n, filtered_aln_file);
-  my_system ( command);
+  printf_system("t_coffee -other_pg seq_reformat -in %s -struc_in %s -struc_in_f number_aln -action +use_cons +keep '[%d-8]' +rm_gap -output clustalw > %s", ungaped_aln_file, scored_aln_file,n, filtered_aln_file);
+ 
   
   free_aln (A);
   
@@ -4510,8 +4507,7 @@ int treelist2splits( Sequence *S, Sequence *TS)
     }
   
   vfclose (fp);
-  printf_system ("cp %s split_file::IGORE_FAILURE::", split_file);
-  
+  printf_system ("cp %s split_file::IGNORE_FAILURE::", split_file);
   printf_system ( "cat %s | grep 1| sort > %s::IGNORE_FAILURE::", split_file, sorted_split_file);
   
   fp=vfopen (sorted_split_file, "r");

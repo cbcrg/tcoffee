@@ -258,6 +258,9 @@ struct X_template * seq_has_template ( Sequence *S, int n, char *type);
 /******************************************************************************/
 
 char *aln_column2string (Alignment *A, int p);
+int **fix_seq_aln (Sequence *S, Alignment*A, int **cache);
+int **fix_seq_seq ( Sequence *S1, Sequence *S2);
+
 Alignment * fix_aln_seq  ( Alignment *A, Sequence *S);
 Alignment * rotate_aln ( Alignment *A, char *name);
 Alignment * invert_aln ( Alignment *A);

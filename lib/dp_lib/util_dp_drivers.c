@@ -18,232 +18,111 @@ char *split_nodes_idmax (Alignment *A, NT_node P, int max_id, char *list);
 /*                                                                */
 /*                                                                */
 /******************************************************************/
-
-
-Constraint_list *profile2list     (Job_TC *job, int nprf)
-{
-  int *seqlist, *cache1, *cache2;
-
-  static CLIST_TYPE *entry;
-  Alignment *A1, *A2, *A;
-  int a, b, c;
-  Constraint_list *SCL, *SCL2;
-  static int *L;
-  static int max_L_len;
-  int  max, n_pairs;
-  int **score, n, s1, s2, si, r1, r2;
-  char *seqlistb;
-  int debug=0;
-  int cons, cons_thres, max_n_pairs, tot_n_pairs;
-  int *cons_table;
-  Constraint_list *CL;
-  char *command;
-  char *seq;
-  char *weight;
-  TC_method *M;
-  int *iA1, *iA2;
-  static char *buf1;
-
-  if ( !buf1) buf1=vcalloc (1000, sizeof (char));
-
-  /*initialize the structure*/
-  CL=(job->io)->CL;
-  M=(job->param)->TCM;
-  command=M->executable;
-  weight=M->weight;
-  seq=(job->param)->seq_c;
-
-  debug=(getenv("DEBUG_TCOFFEE_profile2list")!=NULL)?1:0;
-
-
-  if ( debug)print_mem_usage (stderr, "IN");
-  seqlistb=vcalloc (10, sizeof (char));
-
-  seqlist=string2num_list (seq)+1;
-
-
-
-  if (!entry)entry=vcalloc (CL->entry_len, sizeof (int));
-  entry[SEQ1]=seqlist[1];
-  entry[SEQ2]=seqlist[2];
-
-
-  A1=seq2profile(CL->S, seqlist[1]);
-  A2=seq2profile(CL->S, seqlist[2]);
-
-  SCL=copy_constraint_list ( CL, SOFT_COPY);
-
-  SCL->L=L;SCL->max_L_len=max_L_len;
-  SCL->fp=NULL;
-  SCL->M=NULL;
-  SCL->ne=0;
-
-  SCL2=copy_constraint_list ( CL, SOFT_COPY);
-  SCL2->L=L;SCL2->max_L_len=max_L_len;
-  SCL2->fp=NULL;
-  SCL2->M=NULL;
-  SCL2->ne=0;
-  /*Merge Sequences*/
-
-  SCL->S=merge_seq (A1->S, NULL  );
-  SCL->S=merge_seq (A2->S, SCL->S);
-
-  /*1: Compare the two profiles and identify the N master pairs*/
-  n=(A1->nseq*A2->nseq);
-  max=(nprf==0 ||method_uses_structure (M))?n:MIN(nprf,n);
-
-  if ( max<n)
-    {
-      vsrand(0);
-      A=align_two_aln (A1, A2, "blosum62mt",-4,-1, "myers_miller_pair_wise");
-      score=declare_int ( A1->nseq*A2->nseq,3);
-
-      for (n=0,a=0; a<A1->nseq; a++)
-	for ( b=0; b<A2->nseq; b++,n++)
-	  {
-	    score[n][0]=a;
-	    score[n][1]=b;
-	    score[n][2]=(int)get_seq_fsim ( A->seq_al[a], A->seq_al[b+A1->nseq], "-", NOGROUP, NOMATRIX, AVERAGE_POSITIONS);
-	  }
-      free_aln (A);
-      sort_int_inv (score,3,2,0, n-1);
-    }
-  else
-    {
-      score=declare_int (n,3);
-      for (n=0,a=0; a<A1->nseq; a++)
-	for ( b=0; b<A2->nseq; b++,n++)
-	  {
-	    score[n][0]=a;
-	    score[n][1]=b;
-	  }
-    }
-
-  iA1=get_name_index (A1->name,A1->nseq, (SCL->S)->name, (SCL->S)->nseq);
-  iA2=get_name_index (A2->name,A2->nseq, (SCL->S)->name, (SCL->S)->nseq);
-
-  /*submit the N pairs*/
-  for ( n_pairs=1,a=0; a<max; a++)
-    {
-      s1=score[a][0];s2=score[a][1];
-      sprintf ( buf1, "2 %d %d", iA1[s1], iA2[s2]);
-
-      job=print_lib_job (job, "param->seq_c=%s",buf1);
-
-      /*2: Compute the pairewise library*/
-      (job->io)->CL=SCL;
-
-      SCL=seq2list (job);
-      /*Unwind the pointer counter:*/job->np--;
-
-      if (debug)fprintf ( stderr, "\n\tProfile aln %s %s %s [(%d,%d):%d %%id]", (SCL->S)->name[iA1[s1]],(SCL->S)->name[iA2[s2]], command, score[a][0], score[a][1],score[a][2]);
-
-
-      /*3: Update the main library with the pairwise library*/
-      cache1=seq2inv_pos (A1->seq_al[s1]);
-      cache2=seq2inv_pos (A2->seq_al[s2]);
-
-
-      if (debug)fprintf ( stderr, " =>%d pairs", SCL->ne);
-      n_pairs+=(SCL->ne>0)?1:0;
-      for (c=0; c< SCL->ne; c++)
-	    {
-	      si=vread_clist (SCL, c, SEQ1);
-	      r1=vread_clist(SCL, c, (si==iA1[s1])?R1:R2);
-	      r2=vread_clist(SCL, c, (si==iA1[s1])?R2:R1);
-
-	      entry[R1]=cache1[r1];
-	      entry[R2]=cache2[r2];
-
-	      entry[WE]=vread_clist(SCL,c,WE);
-	      entry[CONS]=1;
-	      add_entry2list(entry, SCL2);
-	    }
-
-      SCL->ne=0;
-      vfree ( cache1);vfree ( cache2);
-      compact_list (SCL2, 0, SCL2->ne, "default");
-      if (debug)fprintf ( stderr, " =>%d pairs", SCL2->ne);
-
-    }
-
-  free_sequence (SCL->S,-1);
-  vfree (iA1); vfree (iA2);
-
-  if (debug)fprintf ( stderr, "\nNPairs=%d", n_pairs);
-
-
-  compact_list (SCL2, 0, SCL2->ne, "default");
-  /*get the concistency distribution*/
-  cons_table=vcalloc ( 101, sizeof (int));
-  for (c=0; c< SCL2->ne; c++)
-    {
-      entry[R1]=vread_clist(SCL2,c,R1);
-      entry[R2]=vread_clist(SCL2,c,R2);
-      entry[WE]=vread_clist(SCL2,c,WE);
-      entry[CONS]=vread_clist(SCL2,c,CONS);
-      cons=(entry[CONS]*100)/n_pairs;
-      cons_table[cons]++;
-    }
-
-  /*Identify the threshold*/
-  max_n_pairs=(int)((float)(MIN(A1->len_aln, A2->len_aln)*2));
-
-  for (cons_thres=0,tot_n_pairs=0,c=100; c>=0; c--)
-    {
-
-      tot_n_pairs+=cons_table[c];
-      if ( tot_n_pairs>=max_n_pairs){cons_thres=c;c=-1;}
-    }
-  vfree (cons_table);
-
-  /*Produce the library*/
-  for (c=0; c< SCL2->ne; c++)
-    {
-      entry[R1]=vread_clist(SCL2,c,R1);
-      entry[R2]=vread_clist(SCL2,c,R2);
-      entry[WE]=vread_clist(SCL2,c,WE);
-      entry[CONS]=vread_clist(SCL2,c,CONS);
-      entry[WE]/=entry[CONS];
-      cons=(entry[CONS]*100)/n_pairs;
-
-
-      if (cons>=cons_thres)add_entry2list(entry, CL);
-    }
-
-  if ( !seq2R_template_profile (CL->S,seqlist[1]))free_aln (A1);
-  if ( !seq2R_template_profile (CL->S,seqlist[2]))free_aln (A2);
-
-  vfree(seqlistb);
-  vfree(seqlist-1)  ;
-  vfree (SCL->L);free_constraint_list ( SCL);
-
-
-  if (debug)print_mem_usage (stderr, "BEF FREE SCL2");
-  vfree(SCL2->L);free_constraint_list ( SCL2);
-
-  if (debug)
-    {
-
-      fprintf ( stderr, "\nCL->ne=%d", CL->ne);
-      print_mem_usage (stderr, "OUT");
-    }
-
-  (job->io)->CL=CL;
-  return CL;
-}
-
 int method_uses_structure(TC_method *M)
 {
   if ( strchr (M->seq_type, 'P'))return 1;
   else return 0;
 }
-int method_uses_profile(TC_method *M)
+Constraint_list *profile2list     (Job_TC *job, int nprf)
 {
-  if ( strchr (M->seq_type, 'R'))return 1;
-  else return 0;
-}
+  int a,b, s1, s2, r1, r2,w2;
+  Constraint_list *CL, *RCL;
+  Sequence *S;
+  Alignment *A1, *A2;
+  int *iA1, *iA2;
+  TC_method *M;
+  int ***RI, ***NRI;
+  Sequence *RS;
+  int Rne;
+  
+  int *seqlist;
+  int **cache;
+  static int *entry;
 
+  
+  if (!entry)entry=vcalloc ( ICHUNK+3, sizeof (int));
+  
+  CL=(job->io)->CL;
+  //1- buffer CL
+  
+  RS=CL->S;
+  RI=CL->residue_index;
+  Rne=CL->ne;
+  M=(job->param)->TCM;
+  
+  
+   
+  
+  
+  
+  //Index
+  seqlist=string2num_list ((job->param)->seq_c)+1;
+  A1=seq2profile(CL->S, seqlist[1]);
+  A2=seq2profile(CL->S, seqlist[2]);
+   
+  S=merge_seq (A1->S, NULL  );
+  S=merge_seq (A2->S, S);
+      
+  iA1=get_name_index (A1->name,A1->nseq, S->name, S->nseq);
+  iA2=get_name_index (A2->name,A2->nseq, S->name, S->nseq);
+  cache=vcalloc ( S->nseq, sizeof (int*));
+  for (a=0; a<A1->nseq; a++)cache[iA1[a]]=seq2inv_pos (A1->seq_al[a]);
+  for (a=0; a<A2->nseq; a++)cache[iA2[a]]=seq2inv_pos (A2->seq_al[a]);
+
+  //Declare local CL
+  CL->S=S;
+  CL->residue_index=declare_residue_index(S);
+  CL->ne=0;
+  
+  //Compute lib
+   for (a=0; a<A1->nseq; a++)
+     for ( b=0; b<A2->nseq; b++)
+       {
+	 char buf[1000];
+	 sprintf ( buf, "2 %d %d",iA1[a], iA2[b]);
+	 job=print_lib_job (job, "param->seq_c=%s", buf);
+	 CL=seq2list (job);
+       }
+   
+   //restaure CL;
+   CL->S=RS;
+   NRI=CL->residue_index;
+   CL->residue_index=RI;
+   CL->ne=Rne;
+   
+
+  
+   //incorporate new lib
+   entry[SEQ1]=seqlist[1];
+   entry[SEQ2]=seqlist[2];
+   for (a=0; a<A1->nseq; a++)
+     {
+       s1=iA1[a];
+       
+       for (r1=1; r1<=S->len[s1];r1++)
+	 {
+	   for (b=1; b<NRI[s1][r1][0]; b+=ICHUNK)
+	     {
+	       int s2=NRI[s1][r1][b+SEQ2];
+	       int r2=NRI[s1][r1][b+R2];
+	       int w2=NRI[s1][r1][b+WE];
+	       
+	       entry[R1]=cache[s1][r1];
+	       entry[R2]=cache[s2][r2];
+	       entry[WE]=w2;
+	       entry[CONS]=1;
+	       entry[MISC]=1;
+	       add_entry2list (entry,CL);
+	     }
+	 }
+     }
+   
+   free_int (cache, -1);
+   free_arrayN (NRI, 3);
+   vfree (entry);
+   free_sequence (S, S->nseq);
+   return (job->io)->CL=CL;
+}
 
 Constraint_list *seq2list     ( Job_TC *job)
     {
@@ -276,6 +155,8 @@ Constraint_list *seq2list     ( Job_TC *job)
 
       CL=(job->io)->CL;
       seq=(job->param)->seq_c;
+
+
 
       S=(CL)?CL->S:NULL;
       STL=(CL)?CL->STRUC_LIST:NULL;
@@ -348,7 +229,7 @@ Constraint_list *seq2list     ( Job_TC *job)
 	}
 	else if ( strm ( mode, "best_pair4rna"))
 	{
-		RCL=best_pair4rna (job);
+	  RCL=best_pair4rna (job);
 	}
       else if ( strm ( mode, "exon2_pair"))
 	{
@@ -506,7 +387,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 
               if ( strm ( mode, "fast_pair"))
                 {
-		  PW_CL->L=NULL;
+		  PW_CL->residue_index=NULL;
 
                   PW_CL->get_dp_cost=slow_get_dp_cost;
                   PW_CL->evaluate_residue_pair=evaluate_matrix_score;
@@ -515,7 +396,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    }
 	else if ( strm2 ( mode,"diag_fast_pair","idiag_fast_pair"))
 	    {
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->maximise=1;
 	      PW_CL->TG_MODE=1;
 	      PW_CL->S=CL->S;
@@ -534,7 +415,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    }
 	else if ( strm ( mode,"blast_pair"))
 	    {
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->maximise=1;
 	      PW_CL->TG_MODE=1;
 
@@ -547,7 +428,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    }
 	else if ( strm ( mode,"lalign_blast_pair"))
 	    {
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->maximise=1;
 	      PW_CL->TG_MODE=1;
 
@@ -565,7 +446,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->TG_MODE=1;
 	      PW_CL->use_fragments=0;
 	      sprintf (PW_CL->dp_mode, "viterbi_pair_wise");
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -578,7 +459,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      sprintf (PW_CL->dp_mode, "glocal_pair_wise");
 	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
 
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -595,7 +476,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    PW_CL->maximise=1;
 	    PW_CL->TG_MODE=1;
 	    PW_CL->use_fragments=0;
-	    PW_CL->L=NULL;
+	    PW_CL->residue_index=NULL;
 	    PW_CL->get_dp_cost=cw_profile_get_dp_cost;
 	    PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	    PW_CL->extend_jit=0;
@@ -620,7 +501,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 		}
 	      else if ( strm ("slow_pair", mode) )
 		{
-		  PW_CL->L=NULL;
+		  PW_CL->residue_index=NULL;
 		  PW_CL->get_dp_cost=cw_profile_get_dp_cost;
 		  PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 		  PW_CL->extend_jit=0;
@@ -634,7 +515,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->use_fragments=0;
 	      sprintf (PW_CL->dp_mode, "subop1_pair_wise");
 	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -646,7 +527,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->use_fragments=0;
 	      sprintf (PW_CL->dp_mode, "biphasic_pair_wise");
 	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=cw_profile_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -659,7 +540,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->use_fragments=0;
 	      sprintf (PW_CL->dp_mode, "proba_pair_wise");
 	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -673,7 +554,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->use_fragments=0;
 	      sprintf (PW_CL->dp_mode, "gotoh_pair_wise_lgp");
 	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_diaa_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -685,7 +566,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->use_fragments=0;
 	      sprintf (PW_CL->dp_mode, "gotoh_pair_wise_lgp");
 	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -698,7 +579,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->use_fragments=0;
 	      sprintf (PW_CL->dp_mode, "myers_miller_pair_wise");
 	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_tm_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -711,7 +592,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->use_fragments=0;
 	      sprintf (PW_CL->dp_mode, "gotoh_pair_wise_lgp");
 	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_monoaa_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -724,7 +605,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	      PW_CL->use_fragments=0;
 	      sprintf (PW_CL->dp_mode, "subop2_pair_wise");
 	      sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->get_dp_cost=slow_get_dp_cost;
 	      PW_CL->evaluate_residue_pair=evaluate_matrix_score;
 	      PW_CL->extend_jit=0;
@@ -739,7 +620,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    PW_CL->use_fragments=0;
 	    sprintf (PW_CL->dp_mode, "myers_miller_pair_wise");
 	    sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	    PW_CL->L=NULL;
+	    PW_CL->residue_index=NULL;
 
 	    for ( a=0; a<60; a++)
 	      {
@@ -760,7 +641,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    PW_CL->use_fragments=0;
 	    sprintf (PW_CL->dp_mode, "myers_miller_pair_wise");
 	    sprintf (PW_CL->matrix_for_aa_group,"%s", group_mat);
-	    PW_CL->L=NULL;
+	    PW_CL->residue_index=NULL;
 
 	    for ( a=0; a<60; a++)
 	      {
@@ -781,7 +662,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	    PW_CL->use_fragments=0;
 	    sprintf (PW_CL->dp_mode, "myers_miller_pair_wise");
 	    sprintf (PW_CL->matrix_for_aa_group, "%s",group_mat);
-	    PW_CL->L=NULL;
+	    PW_CL->residue_index=NULL;
 
 	    for ( a=0; a<60; a++)
 	      {
@@ -795,7 +676,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	  }
 	else if ( strm ( mode , "lalign_len_pair"))
 	  {
-	    PW_CL->L=NULL;
+	    PW_CL->residue_index=NULL;
 	    PW_CL->maximise=1;
 	    PW_CL->TG_MODE=1;
 	    PW_CL->use_fragments=0;
@@ -808,7 +689,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	  }
 	else if ( strm ( mode , "lalign_id_pair"))
 	  {
-	    PW_CL->L=NULL;
+	    PW_CL->residue_index=NULL;
 	    PW_CL->maximise=1;
 	    PW_CL->TG_MODE=1;
 	    PW_CL->use_fragments=0;
@@ -821,7 +702,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	  }
       	else if ( strm ( mode , "tm_lalign_id_pair"))
 	  {
-	    PW_CL->L=NULL;
+	    PW_CL->residue_index=NULL;
 	    PW_CL->maximise=1;
 	    PW_CL->TG_MODE=1;
 	    PW_CL->use_fragments=0;
@@ -835,7 +716,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 /*CDNA*/
 	else if ( strm ( mode, "cdna_cfast_pair"))
 	    {
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->maximise=1;
 	      PW_CL->TG_MODE=1;
 	      PW_CL->S=CL->S;
@@ -854,7 +735,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 	else if ( strm ( mode, "cdna_fast_pair") ||  strncmp (mode,"cdna_fast_pair",14)==0)
 	    {
 
-	      PW_CL->L=NULL;
+	      PW_CL->residue_index=NULL;
 	      PW_CL->maximise=1;
 	      PW_CL->TG_MODE=1;
 	      PW_CL->use_fragments=0;
@@ -1568,9 +1449,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 
 	    /*check_program_is_installed ( "sap"                   ,SAP_4_TCOFFEE, "SAP_4_TCOFFEE",MAIL, IS_FATAL);*/
 
-
-
-
+	    
 	    atoi(strtok (seq,SEPARATORS));
 	    s1=atoi(strtok (NULL,SEPARATORS));
 	    s2=atoi(strtok (NULL,SEPARATORS));
@@ -1578,7 +1457,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    template1=seq2T_value(CL->S,s1, "template_name", "_P_");
 	    template2=seq2T_value(CL->S,s2, "template_name", "_P_");
 
-
+	    
 	    if (!template1 || !template2) return CL;
 
 
@@ -1622,7 +1501,6 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		tmp_pdb2=normalize_pdb_file(seq2P_template_file(CL->S,s2),(CL->S)->seq[s2], vtmpnam (NULL));
 		sprintf ( full_name, "%s%s", get_cache_dir (), tmp_name);
 		printf_system ("%s %s %s >%s 2>/dev/null",program,tmp_pdb1,tmp_pdb2, full_name);
-		
 		if ( !check_file_exists (full_name) || !is_sap_file(full_name))
 		  {
 		    add_warning ( stderr, "WARNING: SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
@@ -1644,12 +1522,14 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    while ((buf=vfgets (buf, fp)))
 	      {
 
-		if ( !strstr (buf, "eighted"))
+		if ( !strstr (buf, "eighted") && !strstr (buf, "RMSd"))
 		  {
 		    remove_charset (buf, "!alnum");
 		    r1=buf[0];
 		    r2=buf[strlen(buf)-1];
 		  }
+		else
+		  continue;
 
 		sim+=(r1==r2)?1:0;
 		if ( tot>max_struc_len)
@@ -1657,7 +1537,6 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		    sap_seq1=vrealloc ( sap_seq1, sizeof(char)*max_struc_len);
 		    sap_seq2=vrealloc ( sap_seq2, sizeof(char)*max_struc_len);
 		  }
-
 		sap_seq1[tot]=r1;
 		sap_seq2[tot]=r2;
 		tot++;
@@ -1688,16 +1567,19 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    fprintf (fp, "%s %d %s\n", (CL->S)->name[s1],(int)strlen (sap_seq2), sap_seq2);
 	    fprintf (fp, "#1 2\n");
 
+
+
+	    //HERE ("\n%s\n%s\n%s\n\n%s\n%s\n%s", (CL->S)->name[s1],(CL->S)->seq[s1], sap_seq1, (CL->S)->name[s2],(CL->S)->seq[s2], sap_seq2);exit (0); 
 	    for ( a=0; a< tot; a++)
 	      {
-
 		fprintf (fp, "%d %d %d 1 0\n", a+1, a+1, score);
-
 	      }
+	    
 	    fprintf (fp, "! CPU 0\n");
 	    fprintf (fp, "! SEQ_1_TO_N\n");
 	    vfclose (fp);
-	    CL=read_constraint_list_file(CL,sap_lib);
+	    
+	    CL=fast_read_constraint_list_file(CL,sap_lib);
 	    vremove (sap_lib);
 
 	    vfree ( string1);vfree ( string2);vfree ( string3);vfree ( string4);vfree ( string5);
@@ -1861,20 +1743,6 @@ Constraint_list * best_pair4rna(Job_TC *job)
 
 	return RCL;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Constraint_list * best_pair4prot      (Job_TC *job)
 {
@@ -2078,6 +1946,9 @@ Alignment * align_two_aln ( Alignment *A1, Alignment  *A2, char *in_matrix, int 
 
 	if (!matrix)matrix=vcalloc ( 100, sizeof (char));
 	if (!align_mode)align_mode=vcalloc ( 100, sizeof (char));
+	
+
+
 	sprintf ( matrix, "%s", in_matrix);
 	sprintf ( align_mode, "%s", in_align_mode);
 
@@ -2348,7 +2219,7 @@ Alignment *recompute_local_aln (Alignment *A, Sequence *S,Constraint_list *CL, i
     B=stack_progressive_nol_aln_with_seq_coor(CL,0,0,S,coor,A->nseq);
     A=copy_aln ( B, A);
 
-    CL=compact_list (CL, 0,CL->ne, "shrink");
+    CL=compact_list (CL,"best");
     free_Alignment(B);
     return A;
     }
@@ -2685,76 +2556,6 @@ int get_best_group ( int **used, Constraint_list *CL)
 }
 
 
-char ** list_file2dpa_list_file (char **list, int *len,int maxnseq, Sequence *S)
-{
-  char **nlist, **profile_list;
-  int nl, l, a, np, has_lib;
-  char *seq, *profile;
-  Alignment *A, *F;
-
-
-  nlist=declare_char (read_array_size_new ((void *)list), read_array_size_new ((void *)list[0]));
-  nl=0;
-
-  profile_list=declare_char (read_array_size_new ((void *)list), read_array_size_new ((void *)list[0]));
-  np=0;
-
-  l=len[0];
-  for (a=0; a<l; a++)if (list[a][0]!='S')sprintf ( nlist[nl++], "%s", list[a]);
-
-  profile=vtmpnam (NULL);
-  seq=vtmpnam (NULL);
-
-
-  output_fasta_seq (seq, A=seq2aln (S,NULL,RM_GAP));
-  free_aln (A); A=NULL;
-  printf_system ( "t_coffee -seq %s -msa_mode groups -outfile=%s -maxnseq=0 -in Xblosum62mt -dp_mode gotoh_pair_wise_lgp -dpa_maxnseq=%d", seq, profile, maxnseq);
-
-  if ( !check_file_exists(profile))
-  {
-    char command[10000];
-    sprintf( command,"t_coffee -seq %s -msa_mode groups -outfile=%s -quiet=xxtest -in Xblosum62mt -distance_matrix_mode ktup -dpa_maxnseq=%d -maxnseq=0", seq, profile, maxnseq);
-    printf_exit ( EXIT_FAILURE,stderr, "Attempt to switch to DPA failed: Could not run\n%s\n[FATAL:%s]\n", command, PROGRAM);
-  }
-  F=A=input_conc_aln (profile, NULL);
-
-  while (A)
-    {
-      char *file;
-      FILE *fp;
-
-      file=vtmpnam (NULL);
-      fp=vfopen (file, "w");
-      for (a=0; a<A->nseq; a++)fprintf ( fp, ">%s %s\n%s\n", A->name[a],A->seq_comment[a], A->seq_al[a]);
-      vfclose (fp);
-
-      sprintf (profile_list[np++], "%s", file);
-      A=A->A;
-    }
-  free_aln (F);
-
-  for (has_lib=0,a=0; a<l; a++)
-    {
-      if ( list[a][0]=='A' || list[a][0]=='L')
-	has_lib=1;
-    }
-
-  if ( has_lib==1)
-    nlist=reindex_constraint_list ( profile_list, np, nlist, &nl, S);
-
-  for (a=0; a<np; a++)
-    {
-      sprintf (nlist[nl++], "R%s", profile_list[a]);
-    }
-  for (a=0; a< nl; a++)
-    {
-      sprintf (list[a], "%s", nlist[a]);
-    }
-  len[0]=nl;
-  free_char (profile_list, -1);
-  free_char (nlist, -1);
-  return list;
-}
 
 Alignment * seq2aln_group (Alignment *A, int N, Constraint_list *CL)
 {

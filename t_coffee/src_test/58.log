@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -11,11 +12,12 @@ PROGRAM: T-COFFEE (Version_8.07)
 -clean         	S	[0] 	no
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
--template_file 	S	[0] 
+-template_file 	S	[1] 	template_file7.template
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
--in            	S	[1] 	Lmarna.tc_lib
+-in            	S	[1] 	Msap_pair	Ssample_seq7.fasta
 -seq           	S	[0] 
 -aln           	S	[0] 
 -method_limits 	S	[0] 
@@ -28,9 +30,9 @@ PROGRAM: T-COFFEE (Version_8.07)
 -relax_lib     	D	[0] 	1 
 -filter_lib    	D	[0] 	0 
 -shrink_lib    	D	[0] 	0 
--out_lib       	W_F	[0] 	no
+-out_lib       	W_F	[1] 	test_lib7.tc_lib
 -out_lib_mode  	S	[0] 	primary
--lib_only      	D	[0] 	0 
+-lib_only      	D	[1] 	1 
 -outseqweight  	W_F	[0] 	no
 -dpa           	FL	[0] 	0
 -seq_source    	S	[0] 	ANY
@@ -47,7 +49,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -distance_matrix_mode	S	[0] 	ktup
 -distance_matrix_sim_mode	S	[0] 	idmat_sim1
 -quicktree     	FL	[0] 	0
--outfile       	W_F	[1] 	maran.test
+-outfile       	W_F	[0] 	default
 -maximise      	FL	[1] 	1
 -output        	S	[0] 	aln	html
 -infile        	R_F	[0] 
@@ -69,7 +71,7 @@ PROGRAM: T-COFFEE (Version_8.07)
 -cpu           	D	[0] 	0 
 -maxnseq       	D	[0] 	1000 
 -maxlen        	D	[0] 	-1 
--weight        	S	[0] 	default
+-weight        	S	[1] 	1001
 -seq_weight    	S	[0] 	t_coffee
 -align         	FL	[1] 	1
 -mocca         	FL	[0] 	0
@@ -147,89 +149,38 @@ PROGRAM: T-COFFEE (Version_8.07)
 -exon_boundaries	S	[0] 
 
 INPUT FILES
-	Input File (L) marna.tc_lib 
+	Input File (M) sap_pair 
+	Input File (S) sample_seq7.fasta  Format fasta_seq
 
-INPUT SEQUENCES: 5 SEQUENCES  [RNA]
-  Input File marna.tc_lib Seq seq1F Length   74 type RNA Struct Unchecked
-  Input File marna.tc_lib Seq seq2F Length   72 type RNA Struct Unchecked
-  Input File marna.tc_lib Seq seq3F Length   73 type RNA Struct Unchecked
-  Input File marna.tc_lib Seq seq4F Length   74 type RNA Struct Unchecked
-  Input File marna.tc_lib Seq seq5F Length   67 type RNA Struct Unchecked
+Looking For Sequence Templates:
+
+	Template Type: [template_file7.template] Mode Or File: [template_file7.template] [Start]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq7.fasta Seq 32125A1 Length  212 type PROTEIN Struct Unchecked
+	PDB struc: Template=struc5.pdb, File=/var/tmp/447260689_178_TCtmp
+  Input File sample_seq7.fasta Seq 72912A  Length  180 type PROTEIN Struct Unchecked
+	PDB struc: Template=struc8.pdb, File=/var/tmp/447260689_184_TCtmp
+  Input File sample_seq7.fasta Seq 65640A1 Length  254 type PROTEIN Struct Unchecked
+	PDB struc: Template=struc6.pdb, File=/var/tmp/447260689_188_TCtmp
+  Input File sample_seq7.fasta Seq 79251A  Length  165 type PROTEIN Struct Unchecked
+	PDB struc: Template=struc7.pdb, File=/var/tmp/447260689_192_TCtmp
 
 COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
 
-	Seq: seq1F
-	Seq: seq2F
-	Seq: seq3F
-	Seq: seq4F
-	Seq: seq5F
+	Seq: 32125A1
+	Seq: 65640A1
+	Seq: 72912A
+	Seq: 79251A
 
-READ/MAKE LIBRARIES:[1]
+READ/MAKE LIBRARIES:[2]
 
-	marna.tc_lib [lib]
+	sap_pair [method]
 
+	Multi Core Mode: 4 processors [subset]
+
+		[Submit   Job][TOT=    2][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=    2][100 %][ELAPSED TIME:    0 sec.]
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [686]
+	Library Total Size: [2044]
 
-Library Relaxation: Multi_proc [2] 
-		[Submit   Job][TOT=  343][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][  1 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][  2 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][  3 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][  4 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][  5 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][  6 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][  7 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][  8 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][  9 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 10 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 11 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 12 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 13 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 14 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 15 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 16 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 17 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 18 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 19 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 20 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 21 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 22 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 23 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 24 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 25 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 26 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 27 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 28 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 29 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 30 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 31 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 32 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 33 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 34 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 35 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 36 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 37 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 38 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 39 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 40 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 41 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 42 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 43 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 44 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 45 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 46 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 47 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 48 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 49 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 50 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 51 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 52 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 53 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 54 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 55 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 56 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 57 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 58 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 59 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 60 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 61 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 62 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 63 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 64 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 65 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 66 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 67 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 68 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 69 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 70 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 71 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 72 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 73 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 74 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 75 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 76 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 77 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 78 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 79 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 80 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 81 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 82 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 83 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 84 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 85 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 86 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 87 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 88 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 89 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 90 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 91 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 92 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 93 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 94 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 95 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 96 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 97 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 98 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][ 99 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=  343][100 %][ELAPSED TIME:    0 sec.]
-Total Relaxation: [686]--->[686] Entries
-
-	#### File Type=     WEIGHT Format=  tc_weight Name= no | NOT PRODUCED [WARNING:T-COFFEE:Version_8.07]
-
-
-WEIGHTED MODE:t_coffee
-
-	seq1F 0.98
-	seq2F 1.02
-	seq3F 0.94
-	seq4F 1.01
-	seq5F 1.05
-
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  71][Len=   77][PID:4304]
-	Group    7: [Group    4 (   1 seq)] with [Group    6 (   2 seq)]-->[Score=  73][Len=   77][PID:4304]
-	Group    8: [Group    7 (   3 seq)] with [Group    2 (   1 seq)]-->[Score=  75][Len=   77][PID:4304]
-	Group    9: [Group    5 (   1 seq)] with [Group    8 (   4 seq)]-->[Score=  66][Len=   77][PID:4304]
-
-
-
-OUTPUT RESULTS
-	#### File Type= GUIDE_TREE Format=     newick Name= marna.dnd
-	#### File Type=        MSA Format=        aln Name= maran.test
-	#### File Type=        MSA Format=       html Name= maran.test.html
-
-
-# TIP :See The Full Documentation on www.tcoffee.org
-# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
-# TIP  4:  -special_mode=expresso to fetch your structures automatically
-
-# Command Line: t_coffee -in Lmarna.tc_lib -outfile maran.test  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 7.244 Mb, Max= 8.296 Mb
-# T-COFFEE CPU Usage: 328 millisec
-# Results Produced with T-COFFEE (Version_8.07)
-# T-COFFEE is available from http://www.tcoffee.org
-CLUSTAL FORMAT for T-COFFEE Version_8.07 [http://www.tcoffee.org] [MODE:  ], CPU=0.31 sec, SCORE=78, Nseq=5, Len=77 
-
-seq1F           gcgcccguagcucaauu-ggauagagcguuugacuacggaucaaaagguu--agggguuc
-seq2F           gcggaaguaguucag-u-ggu-agaacaccaccuugccaaggugggggucgcggg--uuc
-seq3F           -ggcccguagcucagacugg-gagagcgccgcccuugcaaggcggaggccccggg--uuc
-seq4F           gggcuauuagcucag-gugguuagagcgcaccccugauaagggugaggucccugg--uuc
-seq5F           guugauguagcuuaa--ccc--aaagcaaggcacugaaaaugccuagau--gagu--cuc
-                       *** * *        * * *       *    *      *      *    **
-
-seq1F           gacuccucucgggcgcg
-seq2F           gaaucccgucuuccgcu
-seq3F           aaaucccggugggucca
-seq4F           aaguccaggauggccca
-seq5F           cca-acuc-cauaaaca
-                     *         * 
-
-
-
+	#### File Type=      TCLIB Format= tc_lib_format_01 Name= test_lib7.tc_lib

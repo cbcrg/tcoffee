@@ -1,17 +1,47 @@
 #!/usr/bin/env perl
-
 $VersionTag =                                                                                                                                   2.43;
-$SILENT=" >/dev/null 2>/dev/null";
-$EXIT_SUCCESS=0;
-$EXIT_FAILURE=1;
-$INTERNET=-1;
-
-
-
-
-
+use Env;
 use FileHandle;
-use Env qw(HOME);
+use Cwd;
+use File::Path;
+use Sys::Hostname;
+our $PIDCHILD;
+our $ERROR_DONE;
+our @TMPFILE_LIST;
+our $EXIT_FAILURE=1;
+our $EXIT_SUCCESS=0;
+
+our $REFDIR=getcwd;
+our $EXIT_SUCCESS=0;
+our $EXIT_FAILURE=1;
+
+our $PROGRAM="extract_from_pdb";
+our $CL=$PROGRAM;
+
+our $CLEAN_EXIT_STARTED;
+our $debug_lock=$ENV{"DEBUG_LOCK"};
+our $LOCKDIR=$ENV{"LOCKDIR_4_TCOFFEE"};
+if (!$LOCKDIR){$LOCKDIR=getcwd();}
+our $ERRORDIR=$ENV{"ERRORDIR_4_TCOFFEE"};
+our $ERRORFILE=$ENV{"ERRORFILE_4_TCOFFEE"};
+&set_lock ($$);
+if (isshellpid(getppid())){lock4tc(getppid(), "LLOCK", "LSET", "$$\n");}
+      
+our $SILENT=" >/dev/null 2>/dev/null";
+our $INTERNET=-1;
+
+
+
+
+
+
+our $BLAST_MAX_NRUNS=2;
+our $EXIT_SUCCESS=0;
+our $EXIT_FAILURE=1;
+our $CONFIGURATION=-1;
+our $REF_EMAIL="";
+our $PROGRAM="extract_from_pdb";
+
 
 my %onelett_prot=&fill_onelett_prot();
 my %threelett_prot=&fill_threelett_prot();
@@ -358,23 +388,23 @@ $no_remote_pdb_dir=1;
 $tmp_pdb_file=get_pdb_file ($local_pdb_file);
 
 if ( !-e $tmp_pdb_file || $tmp_pdb_file eq "")
-{
+  {
     $local_pdb_file=$pdb_file;
     ($local_pdb_file, $suffix_chain)=&pdb_name2name_and_chain($local_pdb_file);
 
     if ($local_pdb_file)
-{
+      {
 	if ( $debug){print STDERR "\nSplit $pdb_file into $local_pdb_file and $suffix_chain \n";}
 	$tmp_pdb_file=get_pdb_file ($local_pdb_file);
 	if ( $tmp_pdb_file ne "")
-{
+	  {
 	    @c_chain=();
 	    @c_chain=($suffix_chain);
 	    %hc_chain=();
 	    $hc_chain{$suffix_chain}=1;
-}
-}
-}
+	  }
+      }
+  }
 
 $no_remote_pdb_dir=$mem;
 if ($no_remote_pdb_dir==0)
@@ -410,9 +440,9 @@ if ( !-e $tmp_pdb_file || $tmp_pdb_file eq "")
 }
 	else
 {
-	
-	    print "\nEXTRACT_FROM_PDB: NO RESULT for $pdb_file [FATAL:EXTRACT_FROM_PDB Version $VersionTag]\n";
-	    &myexit ($EXIT_FAILURE);	
+  
+	    print "\nEXTRACT_FROM_PDB: NO RESULT for $pdb_file\n";
+	    &myexit ($EXIT_SUCCESS);	
 }
 }
 
@@ -420,14 +450,15 @@ if ( !-e $tmp_pdb_file || $tmp_pdb_file eq "")
 
 
 %molecule_type=&pdbfile2chaintype($tmp_pdb_file);
+if ( $debug){print STDERR "\n\tSequence Type determined\n";}
 
 $pdb_id=&get_pdb_id ($tmp_pdb_file);
+if ( $debug){print STDERR "\n\tID: $pdb_id (for $tmp_pdb_file)\n";}
 
 if ( $pdb_id eq ""){$pdb_id=$force_name;}
 
 @f_chain=&get_chain_list ($tmp_pdb_file);
-
-
+if ( $debug){print STDERR "\n\tChain_list:@f_chain\n";}
 
 if ( $get_pdb_chains)
 {
@@ -455,43 +486,54 @@ elsif ( $is_pdb_name)
     printf "1\n";
     &myexit ($EXIT_SUCCESS);
 }
-  
+
+
 
 $structure_file=vtmpnam();
 
+if ( $debug){print STDERR "\n\tCheck_point #1: $tmp_pdb_file  $structure_file\n";}
 
 $INFILE=vfopen ("$tmp_pdb_file", "r"); 
 $TMP=vfopen ("$structure_file", "w");
 
 $print_model=1;
 $in_model=0;
+
+if ( $debug){print STDERR "\n\tCheck_point #2\n";}
 while ( <$INFILE>)
 {
+  my $first_model=0;
   $line=$_;
-  if ($line =~/^MODEL\s*(\d*)/)
-{
-	if ($1==$model)
-{
-	    $in_model=1;
-	    $print_model=1;
-	    $is_nmr=1;
-}
-	elsif ( $in_model==0)
-{
-	    $print_model=0;
-}
-	elsif ( $in_model==1)
-{
-	    last;
-}
-}
-  if ($print_model){print $TMP $line;}  
 
+  if ( !$first_model && ($line =~/^MODEL\s*(\d*)/))
+    {
+      $first_model=$1;
+      if ($model==1){$model=$first_model;}
+    }
+  
+  if (($line =~/^MODEL\s*(\d*)/))
+    {
+      if ($1==$model)
+	{
+	  $in_model=1;
+	  $print_model=1;
+	  $is_nmr=1;
+	}
+      elsif ( $in_model==0)
+	{
+	  $print_model=0;
+	}
+      elsif ( $in_model==1)
+	{
+	  last;
+	}
+    }
+  if ($print_model){print $TMP $line;}  
 }
 close ($TMP);
 close ($INFILE);
 
-	
+if ( $debug){print STDERR "\n\tCheck_point #3\n";}	
 
   if ($numbering eq ""){$numbering="absolute";}
   if ($numbering_out eq ""){$numbering_out="new";}
@@ -619,8 +661,7 @@ while (<$INFILE>)
 {
 
 		@field=/(\S*)\s*/g;
-	
-	
+
 		$c= substr($_,11,1);
 
 		
@@ -712,6 +753,7 @@ close ($INFILE);
 $INFILE=vfopen ($structure_file, "r");
 foreach $c (@c_chain)
 {
+
 	if    ( $seq_field eq "SEQRES"){@pdb_seq=@{$complete_seq{$c}};}
 	elsif ( $seq_field eq "ATOM")  {@pdb_seq=@{$atom_seq{$c}};}
 	
@@ -750,7 +792,7 @@ foreach $c (@c_chain)
 		if ( !$n)
 		{
 		
-		 printf "SEQRES  %2d %1s %4d  ", $nl,$c, $l;
+		 printf "SEQRES %3d %1s %4d  ", $nl,$c, $l;
 		 $nl++;
 	}
 	     $res=~s/\s//g;
@@ -1002,19 +1044,20 @@ sub get_pdb_id
 {
     my $header_file=@_[0];
     my $id;
+    my $F= new FileHandle;
     
-
+    
     $F=vfopen ("$header_file", "r");
 
     while ( <$F>)
-{
-	
+      {
 	if ( /HEADER/)
-{
+	  {
+	    if ($debug){print "$_";}
 	    $id=substr($_,62,4 );
 	    return $id;
-}
-}
+	  }
+      }
     close ($F);
     
     return "";
@@ -1068,26 +1111,26 @@ sub get_chain_list
 
 
 	if (/SEQRES\s+\d+\s+(\S+)/)
-{
+	  {
 	    $chain = substr($_,11,1);$chain=~s/\s//g;if ( $chain eq ""){$chain=" ";}
-	   
-	    
-	    if ($chain && !$hasch{$chain}){$hasch{$chain}=1;push @chain_list, $chain;}
-}
+	    if (!$hasch{$chain}){$hasch{$chain}=1;push @chain_list, $chain;}
+	  }
 	if (/^ATOM/ || /^HETATM/)
-{
+	  {
 	    $chain = substr($_,21,1); $chain=~s/\s//g;if ( $chain eq ""){$chain=" ";}
-	    if ($chain && !$hasch{$chain}){$hasch{$chain}=1;push @chain_list, $chain;}
-}
-}
-    
-   
-    close ($F);
-    if (!@chain_list)
-{
-	@chain_list=("A");
-}
-    return @chain_list;
+	    if (!$hasch{$chain}){$hasch{$chain}=1;push @chain_list, $chain;}
+	  }
+      }
+
+
+close ($F);
+if (!@chain_list)
+  {
+    @chain_list=("A");
+  }
+
+
+return @chain_list;
 }
 
 sub token_is_in_list
@@ -1346,58 +1389,63 @@ sub get_pdb_file0
 	else{&debug_print ( "\n\tNot in Cache Dir");}
 }
 
-    if (!$no_remote_pdb_dir) 
-{
-
-	my $return_value="";
-	if ( &remote_is_pdb_name ($pdb_file, $netaddress)==1)
-{
-	    &debug_print ("\n*******************************************************\nTry Remote Access for $pdb_file");
-	    $tmp_pdb_file=vtmpnam();
-	    $netcommand=$netaddress;
-	    $netcommand=~s/%%/$pdb_file/g;
-	    &url2file("$netcommand", "$tmp_pdb_file.$netcompression");
-	    &debug_print("\nREMOTE: $netcommand\n");
-	   
-	    $compressed_tmp_file_name="$tmp_pdb_file.$netcompression";
-	    
-	    if ($netcompression && -B $compressed_tmp_file_name)
-{
-		my $r;
-		&debug_print ("\n\tFile Found Remotely");
-		if (($r=safe_system ( "$netcompression_pg $compressed_tmp_file_name")!=$EXIT_SUCCESS) && $attempts<5)
-{
-		    &debug_print ("\n\tProper Download Failed Try again");
-		    unlink $compressed_tmp_file_name;
-		    print "\nFailed to Download $compressed_tmp_file_name. New Attempt $attempt/5\n";
-		    return &get_pdb_file0($pdb_file, $attempt+1);
-}
-		elsif ($r== $EXIT_SUCCESS)
-{
-		    &debug_print ("\n\tProper Download Succeeded ");
-		    $return_value=$tmp_pdb_file;
-}
-		else
-{
-		    &debug_print ("\n\tProper Download Failed ");
-		    &debug_print ("\nFile Not Found Remotely");
-		    unlink $compressed_tmp_file_name;
-}
-}
+if (!$no_remote_pdb_dir) 
+  {
+    my $value=remote_is_pdb_name ($pdb_file, $netaddress);
+    
+    my $return_value="";
+    if ( &remote_is_pdb_name ($pdb_file, $netaddress)==1)
+      {
+	
+	&debug_print ("\n*******************************************************\nTry Remote Access for $pdb_file");
+	$tmp_pdb_file=vtmpnam();
+	$netcommand=$netaddress;
+	$netcommand=~s/%%/$pdb_file/g;
+	&url2file("$netcommand", "$tmp_pdb_file.$netcompression");
+	&debug_print("\nREMOTE: $netcommand\n");
+	
+	$compressed_tmp_file_name="$tmp_pdb_file.$netcompression";
+	
+	if ($netcompression && -B $compressed_tmp_file_name)
+	  {
+	    my $r;
+	    &debug_print ("\n\tFile Found Remotely");
+	    if (($r=safe_system ( "$netcompression_pg $compressed_tmp_file_name")!=$EXIT_SUCCESS) && $attempts<5)
+	      {
+		&debug_print ("\n\tProper Download Failed Try again");
+		unlink $compressed_tmp_file_name;
+		print "\nFailed to Download $compressed_tmp_file_name. New Attempt $attempt/5\n";
+		return &get_pdb_file0($pdb_file, $attempt+1);
+	      }
+	    elsif ($r== $EXIT_SUCCESS)
+	      {
+		&debug_print ("\n\tProper Download Succeeded ");
+		$return_value=$tmp_pdb_file;
+	      }
 	    else
-{
+	      {
+		&debug_print ("\n\tProper Download Failed ");
 		&debug_print ("\nFile Not Found Remotely");
 		unlink $compressed_tmp_file_name;
-}
-	    if ($cache ne "no" && $cache ne "update" && -e $return_value)
-{
-		`cp $return_value $cache/$pdb_file.pdb`;
-}
-}
-	&debug_print ("\nRemote Download Finished");
-	return $return_value;
-}
-    return "";
+	      }
+	  }
+	else
+	  {
+
+	    &debug_print ("\nFile Not Found Remotely");
+	    unlink $compressed_tmp_file_name;
+	  }
+	#Update cache if required
+	if ($cache ne "no" && $cache ne "update" && -e $return_value)
+	  {
+	    `cp $return_value $cache/$pdb_file.pdb`;
+	    #`t_coffee -other_pg clean_cache.pl -file $pdb_file.pdb -dir $cache`;
+	  }
+      }
+    &debug_print ("\nRemote Download Finished");
+    return $return_value;
+  }
+return "";
 }
 
 sub check_pdb_file4compression 
@@ -1425,69 +1473,18 @@ sub check_pdb_file4compression
     
 }
 
-sub vtmpnam
-{
-    my $tmp_file_name;
-    $tmp_name_counter++;
-    $tmp_file_name="tmp_file_for_extract_from_pdb$$.$tmp_name_counter";
-    $tmp_file_list[$ntmp_file++]=$tmp_file_name;
-    if ( -e $tmp_file_name) {return &vtmpnam ();}
-    else {return $tmp_file_name;}
-}
+
 
 
 
     
 
 
-sub safe_system 
-{
-  my $com=@_[0];
-  my $pid;
-  my $status;
-  if ($com eq ""){return 1;}
-  if (($pid = fork ()) < 0){return (-1);}
-  if ($pid == 0)
-{
-      exec ($com);
-}
-  else
-{
-	$PIDCHILD=$pid;
-}
-  
-  waitpid ($pid,WTERMSIG);
-  return $?; #contains the status of the exit
-}
-END {
-  kill ($PIDCHILD);
-  clean(@tmp_file_list);
-}
-sub myexit
-{
-    my $exit_status=@_[0];
-    
-    &clean(@tmp_file_list);
-    exit ( $exit_status);
-}
 
-sub clean
-{
-  my @fl=@_;
-  my $file;
-  
 
-   if ( $debug){print STDERR "remove $#fl files\n";}
 
-  foreach $file ( @fl)
-{
-      if (-e $file)
-{
-	  if ( $debug){print STDERR "\n$file [NOT DELETED]";}
-	  else{unlink ($file);} 
-}
-}
-}
+
+
 sub vfopen 
 {
     my $file=@_[0];
@@ -1499,7 +1496,7 @@ sub vfopen
     $tmp=$file;
 	
     
-    if ( $mode eq "r" && !-e $file){ die "Cannot open file $file [FATAL: EXTRACT_FROM_PDB]\n";}
+    if ( $mode eq "r" && !-e $file){ myexit(flush_error ("Cannot open file $file"));}
     elsif ($mode eq "w"){$tmp=">$file";}
     elsif ($mode eq "a"){$tmp=">>$file";}
     
@@ -1522,84 +1519,33 @@ sub is_aa
     
     if ( $onelett{$molecule_type{$chain}}->{$aa} eq 'X' || !$onelett{$molecule_type{$chain}}->{$aa} ){return '';}
     else
-{
+      {
 	$one=$onelett{$molecule_type{$chain}}->{$aa};
 
 	$three=$threelett{$molecule_type{$chain}}->{$one};
 	
 
 	return $three;
-}
+      }
+  }
 
-}
-sub pg_is_installed
-{
-    my @ml=@_;
-    my $r, $p, $m;
-    my $supported=0;
-    
-    my $p=shift (@ml);
-    $r=`which $p 2>/dev/null`;
-    if ($r eq ""){return 0;}
-    else {return 1;}
-}
-sub check_pg_is_installed
-{
-    my @ml=@_;
-    my $r=&pg_is_installed (@ml);
-    if (!$r)
-{
-	print STDERR "\nProgram $p Supported but Not Installed on your system [FATAL:tc_generic_method]\n";
-	myexit ($EXIT_FAILURE);
-}
-    else
-{
-	return 1;
-}
-}
+
+
+
 
 sub url2file
 {
     my ($address, $out, $wget_arg, $curl_arg)=(@_);
     my ($pg, $flag, $r, $arg, $count);
     
-    if ( $INTERNET==-1)
-{
-	$INTERNET=1;
-	$INTERNET=&check_internet_connection();
-}
-    if ($INTERNET==0){exit($EXIT_FAILURE);}
-   
+    if (!$CONFIGURATION){&check_configuration ("wget", "INTERNET", "gzip");$CONFIGURATION=1;}
+    
     if (&pg_is_installed ("wget"))   {$pg="wget"; $flag="-O";$arg=$wget_arg;}
     elsif (&pg_is_installed ("curl")){$pg="curl"; $flag="-o";$arg=$curl_arg;}
-    else
-{
-	print stderr "ERROR: neither curl nor wget are installed. Imnpossible to tectch remote file [FATAL]\n";
-	exit ($EXIT_FAILURE);
-}
-   
-    $r=safe_system ("$pg $flag$out $address >/dev/null 2>/dev/null");
-    if ($r!=$EXIT_SUCCESS)
-{
-	unlink $file;
-}
-    return $r;
+    return safe_system ("$pg $flag$out $address >/dev/null 2>/dev/null");
+
 }
 
-
-
-sub check_internet_connection
-{
-    my $internet;
-    
-    if ( -e "x"){unlink ("x");}
-    url2file("www.google.com", "x");
-    
-    if ( !-e "x" || -s "x" < 10){$internet=0;}
-    else {$internet=1;}
-    if (-e "x"){unlink "x";}
-    return $internet;
-}
 
 
 
@@ -1625,7 +1571,7 @@ sub pdbfile2chaintype
 		elsif (length ($r)==3){$ct{$C}="P";}
 		else 
 		  {
-		    print "ERROR: Could not read RES_ID field in file $file [FATAL:extract_from_pdb]\n";die;
+		    myexit(flush_error("ERROR: Could not read RES_ID field in file $file"));
 		  }
 	      }
 	  }
@@ -5213,7 +5159,477 @@ sub fill_onelett_prot
 
 'ASN','N');
 } 
+
+
+sub file2head
+      {
+	my $file = shift;
+	my $size = shift;
+	my $f= new FileHandle;
+	my $line;
+	open ($f,$file);
+	read ($f,$line, $size);
+	close ($f);
+	return $line;
+      }
+sub file2tail
+      {
+	my $file = shift;
+	my $size = shift;
+	my $f= new FileHandle;
+	my $line;
+	
+	open ($f,$file);
+	seek ($f,$size*-1, 2);
+	read ($f,$line, $size);
+	close ($f);
+	return $line;
+      }
+
+
+sub vtmpnam
+      {
+	my $r=rand(100000);
+	my $f="file.$r.$$";
+	while (-e $f)
+	  {
+	    $f=vtmpnam();
+	  }
+	push (@TMPFILE_LIST, $f);
+	return $f;
+      }
+
+sub myexit
+  {
+    my $code=@_[0];
+    if ($CLEAN_EXIT_STARTED==1){return;}
+    else {$CLEAN_EXIT_STARTED=1;}
+    ### ONLY BARE EXIT
+    exit ($code);
+  }
+sub set_error_lock
+    {
+      my $name = shift;
+      my $pid=$$;
+
+      
+      &lock4tc ($$,"LERROR", "LSET", "$$ -- ERROR: $name $PROGRAM\n");
+      return;
+    }
+sub set_lock
+  {
+    my $pid=shift;
+    my $msg= shift;
+    my $p=getppid();
+    &lock4tc ($pid,"LLOCK","LRESET","$p$msg\n");
+  }
+sub unset_lock
+   {
+     
+    my $pid=shift;
+    &lock4tc ($pid,"LLOCK","LRELEASE","");
+  }
+sub shift_lock
+  {
+    my $from=shift;
+    my $to=shift;
+    my $from_type=shift;
+    my $to_type=shift;
+    my $action=shift;
+    my $msg;
+    
+    if (!&lock4tc($from, $from_type, "LCHECK", "")){return 0;}
+    $msg=&lock4tc ($from, $from_type, "LREAD", "");
+    &lock4tc ($from, $from_type,"LRELEASE", $msg);
+    &lock4tc ($to, $to_type, $action, $msg);
+    return;
+  }
+sub isshellpid
+  {
+    my $p=shift;
+    if (!lock4tc ($p, "LLOCK", "LCHECK")){return 0;}
+    else
+      {
+	my $c=lock4tc($p, "LLOCK", "LREAD");
+	if ( $c=~/-SHELL-/){return 1;}
+      }
+    return 0;
+  }
+sub isrootpid
+  {
+    if(lock4tc (getppid(), "LLOCK", "LCHECK")){return 0;}
+    else {return 1;}
+  }
+sub lock4tc
+	{
+	  my ($pid,$type,$action,$value)=@_;
+	  my $fname;
+	  my $host=hostname;
 	  
+	  if ($type eq "LLOCK"){$fname="$LOCKDIR/.$pid.$host.lock4tcoffee";}
+	  elsif ( $type eq "LERROR"){ $fname="$LOCKDIR/.$pid.$host.error4tcoffee";}
+	  elsif ( $type eq "LWARNING"){ $fname="$LOCKDIR/.$pid.$host.warning4tcoffee";}
+	  
+	  if ($debug_lock)
+	    {
+	      print STDERR "\n\t---lock4tc(tcg): $action => $fname =>$value (RD: $LOCKDIR)\n";
+	    }
+
+	  if    ($action eq "LCHECK") {return -e $fname;}
+	  elsif ($action eq "LREAD"){return file2string($fname);}
+	  elsif ($action eq "LSET") {return string2file ($value, $fname, ">>");}
+	  elsif ($action eq "LRESET") {return string2file ($value, $fname, ">");}
+	  elsif ($action eq "LRELEASE") 
+	    {
+	      if ( $debug_lock)
+		{
+		  my $g=new FileHandle;
+		  open ($g, ">>$fname");
+		  print $g "\nDestroyed by $$\n";
+		  close ($g);
+		  safe_system ("mv $fname $fname.old");
+		}
+	      else
+		{
+		  unlink ($fname);
+		}
+	    }
+	  return "";
+	}
+	
+sub file2string
+	{
+	  my $file=@_[0];
+	  my $f=new FileHandle;
+	  my $r;
+	  open ($f, "$file");
+	  while (<$f>){$r.=$_;}
+	  close ($f);
+	  return $r;
+	}
+sub string2file 
+    {
+    my ($s,$file,$mode)=@_;
+    my $f=new FileHandle;
+    
+    open ($f, "$mode$file");
+    print $f  "$s";
+    close ($f);
+  }
+
+BEGIN
+    {
+      srand;
+    
+      $SIG{'SIGUP'}='signal_cleanup';
+      $SIG{'SIGINT'}='signal_cleanup';
+      $SIG{'SIGQUIT'}='signal_cleanup';
+      $SIG{'SIGILL'}='signal_cleanup';
+      $SIG{'SIGTRAP'}='signal_cleanup';
+      $SIG{'SIGABRT'}='signal_cleanup';
+      $SIG{'SIGEMT'}='signal_cleanup';
+      $SIG{'SIGFPE'}='signal_cleanup';
+      
+      $SIG{'SIGKILL'}='signal_cleanup';
+      $SIG{'SIGPIPE'}='signal_cleanup';
+      $SIG{'SIGSTOP'}='signal_cleanup';
+      $SIG{'SIGTTIN'}='signal_cleanup';
+      $SIG{'SIGXFSZ'}='signal_cleanup';
+      $SIG{'SIGINFO'}='signal_cleanup';
+      
+      $SIG{'SIGBUS'}='signal_cleanup';
+      $SIG{'SIGALRM'}='signal_cleanup';
+      $SIG{'SIGTSTP'}='signal_cleanup';
+      $SIG{'SIGTTOU'}='signal_cleanup';
+      $SIG{'SIGVTALRM'}='signal_cleanup';
+      $SIG{'SIGUSR1'}='signal_cleanup';
+
+
+      $SIG{'SIGSEGV'}='signal_cleanup';
+      $SIG{'SIGTERM'}='signal_cleanup';
+      $SIG{'SIGCONT'}='signal_cleanup';
+      $SIG{'SIGIO'}='signal_cleanup';
+      $SIG{'SIGPROF'}='signal_cleanup';
+      $SIG{'SIGUSR2'}='signal_cleanup';
+
+      $SIG{'SIGSYS'}='signal_cleanup';
+      $SIG{'SIGURG'}='signal_cleanup';
+      $SIG{'SIGCHLD'}='signal_cleanup';
+      $SIG{'SIGXCPU'}='signal_cleanup';
+      $SIG{'SIGWINCH'}='signal_cleanup';
+      
+      $SIG{'INT'}='signal_cleanup';
+      $SIG{'TERM'}='signal_cleanup';
+      $SIG{'KILL'}='signal_cleanup';
+      $SIG{'QUIT'}='signal_cleanup';
+      
+      our $debug_lock=$ENV{"DEBUG_LOCK"};
+      
+      
+      
+      
+      foreach my $a (@ARGV){$CL.=" $a";}
+      if ( $debug_lock ){print STDERR "\n\n\n********** START PG: $PROGRAM *************\n";}
+      if ( $debug_lock ){print STDERR "\n\n\n**********(tcg) LOCKDIR: $LOCKDIR $$ *************\n";}
+      if ( $debug_lock ){print STDERR "\n --- $$ -- $CL\n";}
+      
+	     
+      
+      
+    }
+sub flush_error
+  {
+    my $msg=shift;
+    return add_error ($EXIT_FAILURE,$$, $$,getppid(), $msg, $CL);
+  }
+sub add_error 
+  {
+    my $code=shift;
+    my $rpid=shift;
+    my $pid=shift;
+    my $ppid=shift;
+    my $type=shift;
+    my $com=shift;
+    
+    $ERROR_DONE=1;
+    lock4tc ($rpid, "LERROR","LSET","$pid -- ERROR: $type\n");
+    lock4tc ($$, "LERROR","LSET", "$pid -- COM: $com\n");
+    lock4tc ($$, "LERROR","LSET", "$pid -- STACK: $ppid -> $pid\n");
+   
+    return $code;
+  }
+sub add_warning 
+  {
+    my $rpid=shift;
+    my $pid =shift;
+    my $command=shift;
+    my $msg="$$ -- WARNING: $command\n";
+    print STDERR "$msg";
+    lock4tc ($$, "LWARNING", "LSET", $msg);
+  }
+
+sub signal_cleanup
+  {
+    print dtderr "\n**** $$ (tcg) was killed\n";
+    &cleanup;
+    exit ($EXIT_FAILURE);
+  }
+sub clean_dir
+  {
+    my $dir=@_[0];
+    if ( !-d $dir){return ;}
+    elsif (!($dir=~/tmp/)){return ;}#safety check 1
+    elsif (($dir=~/\*/)){return ;}#safety check 2
+    else
+      {
+	`rm -rf $dir`;
+      }
+    return;
+  }
+sub cleanup
+  {
+    #print stderr "\n----tc: $$ Kills $PIDCHILD\n";
+    #kill (SIGTERM,$PIDCHILD);
+    my $p=getppid();
+    $CLEAN_EXIT_STARTED=1;
+    
+    
+    
+    if (&lock4tc($$,"LERROR", "LCHECK", ""))
+      {
+	my $ppid=getppid();
+	if (!$ERROR_DONE) 
+	  {
+	    &lock4tc($$,"LERROR", "LSET", "$$ -- STACK: $p -> $$\n");
+	    &lock4tc($$,"LERROR", "LSET", "$$ -- COM: $CL\n");
+	  }
+      }
+    my $warning=&lock4tc($$, "LWARNING", "LREAD", "");
+    my $error=&lock4tc($$,  "LERROR", "LREAD", "");
+    #release error and warning lock if root
+    
+    if (isrootpid() && ($warning || $error) )
+      {
+	
+	print STDERR "**************** Summary *************\n$error\n$warning\n";
+
+	&lock4tc($$,"LERROR","RELEASE","");
+	&lock4tc($$,"LWARNING","RELEASE","");
+      } 
+    
+    
+    foreach my $f (@TMPFILE_LIST)
+      {
+	if (-e $f){unlink ($f);} 
+      }
+    foreach my $d (@TMPDIR_LIST)
+      {
+	clean_dir ($d);
+      }
+    #No More Lock Release
+    #&lock4tc($$,"LLOCK","LRELEASE",""); #release lock 
+
+    if ( $debug_lock ){print STDERR "\n\n\n********** END PG: $PROGRAM ($$) *************\n";}
+    if ( $debug_lock ){print STDERR "\n\n\n**********(tcg) LOCKDIR: $LOCKDIR $$ *************\n";}
+  }
+END 
+  {
+    
+    &cleanup();
+  }
+   
+
+sub safe_system 
+{
+  my $com=shift;
+  my $ntry=shift;
+  my $ctry=shift;
+  my $pid;
+  my $status;
+  my $ppid=getppid();
+  if ($com eq ""){return 1;}
+  
+  
+
+  if (($pid = fork ()) < 0){return (-1);}
+  if ($pid == 0)
+    {
+      set_lock($$, " -SHELL- $com (tcg)");
+      exec ($com);
+    }
+  else
+    {
+      lock4tc ($$, "LLOCK", "LSET", "$pid\n");#update parent
+      $PIDCHILD=$pid;
+    }
+  if ($debug_lock){printf STDERR "\n\t .... safe_system (fasta_seq2hmm)  p: $$ c: $pid COM: $com\n";}
+
+  waitpid ($pid,WTERMSIG);
+
+  shift_lock ($pid,$$, "LWARNING","LWARNING", "LSET");
+
+  if ($? == $EXIT_FAILURE || lock4tc($pid, "LERROR", "LCHECK", ""))
+    {
+      if ($ntry && $ctry <$ntry)
+	{
+	  add_warning ($$,$$,"$com failed [retry: $ctry]");
+	  lock4tc ($pid, "LRELEASE", "LERROR", "");
+	  return safe_system ($com, $ntry, ++$ctry);
+	}
+      elsif ($ntry == -1)
+	{
+	  if (!shift_lock ($pid, $$, "LERROR", "LWARNING", "LSET"))
+	    {
+	      add_warning ($$,$$,"$com failed");
+	    }
+	  else
+	    {
+	      lock4tc ($pid, "LRELEASE", "LERROR", "");
+	    }
+	  return $?;}
+      else
+	{
+	  if (!shift_lock ($pid,$$, "LERROR","LERROR", "LSET"))
+	    {
+	      myexit(add_error ($EXIT_FAILURE,$$,$pid,getppid(), "UNSPECIFIED system", $com));
+	    }
+	}
+    }
+  return $?;
+}
+
+sub check_configuration 
+    {
+      my @l=@_;
+      my $v;
+      foreach my $p (@l)
+	{
+	  
+	  if   ( $p eq "EMAIL")
+	    { 
+	      if ( !($EMAIL=~/@/))
+		{
+		add_warning($$,$$,"Could Not Use EMAIL");
+		myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"EMAIL","$CL"));
+	      }
+	    }
+	  elsif( $p eq "INTERNET")
+	    {
+	      if ( !&check_internet_connection())
+		{
+		  myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"INTERNET","$CL"));
+		}
+	    }
+	  elsif( $p eq "wget")
+	    {
+	      if (!&pg_is_installed ("wget") && !&pg_is_installed ("curl"))
+		{
+		  myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"PG_NOT_INSTALLED:wget","$CL"));
+		}
+	    }
+	  elsif( !(&pg_is_installed ($p)))
+	    {
+	      myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"PG_NOT_INSTALLED:$p","$CL"));
+	    }
+	}
+      return 1;
+    }
+sub pg_is_installed
+  {
+    my @ml=@_;
+    my $r, $p, $m;
+    my $supported=0;
+    
+    my $p=shift (@ml);
+    if ($p=~/::/)
+      {
+	if (safe_system ("perl -M$p -e 1")==$EXIT_SUCCESS){return 1;}
+	else {return 0;}
+      }
+    else
+      {
+	$r=`which $p 2>/dev/null`;
+	if ($r eq ""){return 0;}
+	else {return 1;}
+      }
+  }
+
+
+
+sub check_internet_connection
+  {
+    my $internet;
+    my $tmp;
+    &check_configuration ( "wget"); 
+    
+    $tmp=&vtmpnam ();
+    
+    if     (&pg_is_installed    ("wget")){`wget www.google.com -O$tmp >/dev/null 2>/dev/null`;}
+    elsif  (&pg_is_installed    ("curl")){`curl www.google.com -o$tmp >/dev/null 2>/dev/null`;}
+    
+    if ( !-e $tmp || -s $tmp < 10){$internet=0;}
+    else {$internet=1;}
+    if (-e $tmp){unlink $tmp;}
+
+    return $internet;
+  }
+sub check_pg_is_installed
+  {
+    my @ml=@_;
+    my $r=&pg_is_installed (@ml);
+    if (!$r && $p=~/::/)
+      {
+	print STDERR "\nYou Must Install the perl package $p on your system.\nRUN:\n\tsudo perl -MCPAN -e 'install $pg'\n";
+      }
+    elsif (!$r)
+      {
+	myexit(flush_error("\nProgram $p Supported but Not Installed on your system"));
+      }
+    else
+      {
+	return 1;
+      }
+  }
 
 
 

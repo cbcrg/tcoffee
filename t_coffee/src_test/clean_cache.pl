@@ -1,7 +1,6 @@
 #!/usr/bin/env perl
 use Env;
 use Cwd;
-#(C) Cedric Notredame 2005
 @suffix=("tmp", "temp", "cache", "t_coffee", "core", "tcoffee");
 
 if ($#ARGV==-1)
@@ -83,7 +82,6 @@ if ( !($dir=~/^\//))
     $base=cwd();
     $dir="$base/$dir";
   }
-#security: only accept to do the cleanning if the dir name contains the following words:
 
 $proceed=0;
 foreach $s (@suffix)
@@ -303,3 +301,4 @@ sub vtmpnam
     if ( -e $tmp_file_name) {return &vtmpnam ();}
     else {return $tmp_file_name;}
   }
+

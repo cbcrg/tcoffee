@@ -726,11 +726,8 @@ int seq_reformat ( int argc, char **in_argv)
 
 		  CL=D_ST->CL;
 		  
-		  entry=vcalloc ( LIST_N_FIELDS, sizeof (int));
-		  
-		  for (a=0; a<CL->ne; a++)
+		  while ((entry=extract_entry (CL)))
 		    {
-		      entry=extract_entry (entry, a, CL);
 		      if ( D_ST->S)(D_ST->S)->seq[entry[SEQ1]][entry[R1]-1]=entry[WE];
 		    }
 		  thread_seq_struc2aln (D_ST->A, D_ST->S);
@@ -838,7 +835,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 		
 	else if ( strm (in_format, "treefile_list"))
 	  {
-	    int z;
+
 	    D->S=get_tree_file_list(in_file);
 	    D->A=seq2aln(D->S, D->A,NO_PAD);
 	  }
@@ -849,7 +846,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	  }
 	else if ( strm (in_format, "fasta_tree"))
 	  {
-	    int z;
+
 	    D->S=get_fasta_tree (in_file, NULL);
 	    D->A=seq2aln(D->S, D->A,NO_PAD);
 	   
@@ -857,11 +854,11 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	else if ( strm (in_format, "tree_list") || strm (in_format, "treelist"))
 	  {
 	    char **line;
-	    FILE *seq,*dnd;
+	    FILE *seq;
 	    int n=0;
 	    char *seq_file;
 	    FILE *fp;
-	    Sequence *T;
+
 	    seq_file=vtmpnam(NULL);
 	    seq=vfopen (seq_file, "w");
 	    line=file2lines (in_file);
@@ -1082,8 +1079,8 @@ Sequence  * read_alifold (char *file)
   substitute (S->seq[1], " ", "\0");
   substitute (S->seq[1], ".", STOCKHOLM_STRING);
   S->seq[1][l]='\0';
-  sprintf (S->name[0], "cons", file);
-  sprintf (S->name[1], "#=GC SS_cons", file);
+  sprintf (S->name[0], "cons");
+  sprintf (S->name[1], "#=GC SS_cons");
   return S;
 }
 
@@ -1150,7 +1147,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        Sequence *S=NULL;
        Sequence *IN_SEQ;
  
-       
+      
        if ( !name)return NULL;
        else if (!check_file_exists(name))
 	 {
@@ -1167,9 +1164,9 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        
        if      ((format && strm(format, "saga_aln" )) ||strm(format, "clustal_aln")||strm(format, "t_coffee_aln" ) )
 	 {
-
+	
 	   read_aln ( name, A);
-
+	
 	 }
        else if (format && strm (format, "conc_aln"))A=input_conc_aln (name,NULL);
        else if (format &&strm(format, "msf_aln"  ))read_msf_aln ( name, A);
@@ -2547,7 +2544,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		}
 	else if ( strstr (out_format, "overaln"))
 		{
-		  Alignment *EB=NULL;
+		
 		  char *s, mode[100];
 		  OveralnP *F;
 		  int eb=0;
@@ -2629,7 +2626,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  }
 	else if ( strm ( out_format, "fasta_seq") ||strm ( out_format, "list")||strm ( out_format, "file_list"))
 	  {
-		  int z;
+
 		if (!D1)return 1;
 		output_fasta_seq (out_file,D1->A);
 		}
@@ -2765,7 +2762,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	else if ( strm (out_format, "sexons"))
 	  {
 	    Alignment *A;
-	    Sequence *S;
+
 	    //exons come in upper case
 	    //output alternate amino acids in upper/lower case
 	    //amino acid has the case of its first nucleotide
@@ -4208,7 +4205,7 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
     char *sub;
     int disk=0;
     int coor=0;
-    char *test;
+
     
        
     buffer=vcalloc (1000, sizeof (char)); 
@@ -4717,6 +4714,7 @@ void read_aln (char *file_name, Alignment *A)
   
 
   tmp_name=vtmpnam (NULL);
+  
   if (printf_system ( "clustalw_aln2fasta_aln.pl %s > %s",file_name, tmp_name)!=EXIT_SUCCESS)
     {
       printf_exit ( EXIT_FAILURE, stderr, "Could Not Read File %s [FATAL:%s]\n", file_name, PROGRAM);
@@ -4758,9 +4756,9 @@ void read_stockholm_aln (char *file_name, Alignment *A)
 Alignment* read_blast_aln ( char *file_name, Alignment *A)
 {
   char *tmp_name;
-  Sequence *S;
+
   int type;
-  int a;
+
   
   if ( !(type=is_blast_file (file_name)))
     {
@@ -6306,7 +6304,6 @@ void output_constraints ( char *fname, char *mode,Alignment *A)
 	       
 	       CL=declare_constraint_list ( A->S, NULL, NULL, 0, NULL, NULL);
 	       CL=aln2constraint_list (A,CL, mode);
-	       compact_list (CL, 0, CL->ne, "default");
 	       fp=save_constraint_list ( CL, 0, CL->ne,fname, NULL, "lib",A->S);
 	       vfclose (fp);
 	       free_constraint_list (CL);
@@ -6323,7 +6320,6 @@ void output_constraints ( char *fname, char *mode,Alignment *A)
 	    
 	
 	    CL=A->CL;
-	    compact_list (CL, 0, CL->ne, "default");
 	    fp=save_sub_list_header (vfopen(fname, "w"),2, name_list,CL);
 	    fp=save_extended_constraint_list_pair (CL, "pair",name_list[0],name_list[1],fp);
 	    fp=save_list_footer (fp, CL);
@@ -6332,13 +6328,11 @@ void output_constraints ( char *fname, char *mode,Alignment *A)
 	else if ( strm2 (mode, "extended_lib","extended_cosmetic"))
 	  {
 	    CL=A->CL;
-	    compact_list (CL, 0, CL->ne, "default");
 	    fp=save_extended_constraint_list ( CL,mode+9, vfopen(fname, "w"));
 	  }
 	else 
 	   {
 	       CL=(Constraint_list *)A->CL;
-	       compact_list (CL, 0, CL->ne, "default");
 	       fp=save_constraint_list ( CL, 0, CL->ne,fname, NULL, "lib",A->S);
 	   }
 	vfclose ( fp);
@@ -7069,7 +7063,7 @@ void output_lalign_header( char *name, Alignment *A)
 void output_stockholm_aln (char *file, Alignment *A, Alignment *ST)
 {
   FILE *fp;
-  int a,b,l;
+  int a,b;
     
   for (a=0; a<A->nseq; a++)
     for (b=0; b<A->len_aln; b++)
@@ -9025,7 +9019,7 @@ Sequence *dnaseq2geneseq (Sequence *S, int **w)
 char *dna2gene (char *dna, int *w)
 {
   int a, b, c, ns,l,od;
-  int I1, I2, I3, START, END, NCE, NCS;
+  int I1, I2, I3, START, NCE, NCS;
   int C1, S1_1, S2_1, S3_1, S4_1,NC1;
   int C2, S1_2, S2_2, S3_2, S4_2,NC2;
   int C3, S1_3, S2_3, S3_3, S4_3,NC3;
@@ -9049,7 +9043,7 @@ char *dna2gene (char *dna, int *w)
   int frameshift_symbol='F';
   char *out_dna;
   int max=0;
-  int gl=0;
+
   char *three_dna;
 
   three_dna=translate_dna_seq_on3frame (dna, 'x', NULL);
@@ -9532,7 +9526,7 @@ char * translate_dna_seq ( char *dna_seq, int frame, char stop, char *prot)
 	   
 	   for ( b=0,a=0+frame; a< l; a+=3,b++)
 	     {
-	       char x;
+
 	       prot[b]=translate_dna_codon (buf+a, stop);
 	     }
 	   vfree (buf);
@@ -9709,7 +9703,7 @@ char * back_translate_dna_codon ( char aa, int deterministic)
 int translate_dna_codon ( char *sequence, char stop)
         {
 	char seq[4];
-	int a,b;
+	int b;
 	int upper;
 	int ret;
 	
@@ -10132,8 +10126,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   w=atoi (action_list[1]);
 	   if ( D1->CL)
 	     {
-	     for (l=0; l<(D1->CL)->ne; l++)
-	       (D1->CL)->L[l*CL->entry_len+WE]=w;
+	       int s1, s2,r1,r2;
+	       Sequence *S=(D1->CL)->S;
+	       int ***r=(D1->CL)->residue_index;
+	       
+	       for (s1=0; s1<S->nseq; s1++)
+		 for (r1=1; r1<=S->len[s1]; r1++)
+		   for (b=1; b<r[s1][r1][0]; b+=3)
+		     {
+		       r[s1][r1][b+2]=w;
+		     }
 	     }
 	 }
        else if ( strm (action, "struc2nb"))
@@ -10955,7 +10957,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       D1->A=mark_exon_boundaries (D1->A, D2->A);
 	       eb=1;
 	     }
-	   else if ( get_string_variable ("exon_boundaries"))
+	   else if ( (s=get_string_variable ("exon_boundaries")))
 	     {
 	      Sequence *S;
 	      Alignment *EB;
@@ -10998,9 +11000,9 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   Alignment *SA;
 	   Sequence *SS;
-	   
-	   SS=aln2seq(SA);
 	   SA=copy_aln (D1->A, NULL);
+	   SS=aln2seq(SA);
+	   
 	   thread_seq_struc2aln (SA, SS);
 	   D1->A=unalign_aln (D1->A,SA, ATOI_ACTION(1));
 	   D1->S=aln2seq ( D1->A);
@@ -11341,7 +11343,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 			 else if ( strm (mod, "lower"))A->seq_al[i][pos]=tolower(A->seq_al[i][pos]);
 			 else A->seq_al[i][pos]=mod[0];
 		       }
-		      else fprintf(stderr, "\nWARNING: Could not find Sequence %s", action_list[a]);
+		      else fprintf(stderr, "\nWARNING: Could not find Sequence %s", action_list[1]);
 		  }
 		vfclose (fp);
 	      }

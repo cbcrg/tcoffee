@@ -1,16 +1,16 @@
 CLUSTAL W (1.83) multiple sequence alignment
 
-hmgl_trybr      kkdsnapkramtsfmffssdfrskhs----d-lsivemskaagaawkelgpeerkvyeem
-hmgt_mouse      -----kpkrprsayniyvsesfqeak----d-dsaqgklklvneawknlspeekqayiql
-hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk--dkseweak
-hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvak
-                      ***. ::: .: ..  .. .    .  .     *  .  *: *   ::  :   
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhsd-----lsivemskaagaawkelg
+hmgt_mouse      -----kpkrprsayniyvsesfqeakd-----dsaqgklklvneawknls
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpdf-kvtevakkggelwrglk
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+                      ***. ::: .: ..  .. .       .     *  .  *: * 
 
-hmgl_trybr      aekdkerykre---------m
-hmgt_mouse      akddrirydnemksweeqmae
-hmgb_chite      aatakqnyiralqeye-rngg
-hmgl_wheat      anklkgeynkaiaaynkgesa
-                *   : .* .           
+hmgl_trybr      peerkvyeemaekdkerykre---------m
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgb_chite      --dkseweakaatakqnyiralqeyer-ngg
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+                  ::  :   *   : .* .           
 
 
 

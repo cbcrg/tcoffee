@@ -6,7 +6,7 @@ $ENV{'CACHE_4_TCOFFEE'}=$cache;
 
 #defaults
 
-$data="$HOME/Dropbox/projects/c.svn/trunk/t_coffee/doc_test/data/";
+$data="$HOME/Dropbox/projects/c/t_coffee/doc_test/data/";
 $archive="$HOME/untared_distributions/";
 $package="T-COFFEE";
 $source="t_coffee_source";

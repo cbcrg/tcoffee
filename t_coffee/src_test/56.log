@@ -1,6 +1,7 @@
 
-PROGRAM: T-COFFEE (Version_8.07)
+PROGRAM: T-COFFEE (Version_8.80)
 -full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
 -run_name      	S	[0] 
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
@@ -11,12 +12,13 @@ PROGRAM: T-COFFEE (Version_8.07)
 -clean         	S	[0] 	no
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
--template_file 	S	[1] 	template_file6.template
+-template_file 	S	[1] 	SELF_P_	SELF_P_
+-setenv        	S	[0] 	0
 -template_mode 	S	[0] 
 -remove_template_file	D	[0] 	0 
--profile_template_file	S	[0] 
--in            	S	[1] 	Mfast_pair	Msap_pair	Mfugue_pair
--seq           	S	[1] 	sample_seq6.fasta
+-profile_template_file	S	[1] 	SELF_P_
+-in            	S	[1] 	Msap_pair	S2seqs.fas
+-seq           	S	[0] 
 -aln           	S	[0] 
 -method_limits 	S	[0] 
 -method        	S	[0] 
@@ -147,11 +149,116 @@ PROGRAM: T-COFFEE (Version_8.07)
 -exon_boundaries	S	[0] 
 
 INPUT FILES
-	Input File (M) fast_pair 
 	Input File (M) sap_pair 
-	Input File (M) fugue_pair 
-	Input File (S) sample_seq6.fasta  Format fasta_seq
+	Input File (S) 2seqs.fas  Format fasta_seq
 
 Looking For Sequence Templates:
 
-	Template Type: [template_file6.template] Mode Or File: [template_file6.template] [StartHERE: *****
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 60267 -- 
+WARNING: _P_ Template | seq | Could Not Be Found
+
+]
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 60267 -- 
+WARNING: _P_ Template | seq | Could Not Be Found
+
+]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File 2seqs.fas Seq 2PTCE Length  223 type PROTEIN Struct Unchecked
+	PDB struc: Template=2PTCE, File=2PTCE.pdb
+  Input File 2seqs.fas Seq seq   Length  241 type PROTEIN Struct Unchecked
+
+COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
+
+	Seq: 2PTCE
+	Seq: seq
+
+READ/MAKE LIBRARIES:[2]
+
+	sap_pair [method]
+
+	 Information: Method sap_pair cannot be applied to [2PTCE vs seq]. Use proba_pair instead
+		[Submit   Job][TOT=    1][100 %][ELAPSED TIME:    0 sec.]
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [780]
+
+Library Relaxation:[780] --->[634]
+
+
+WEIGHTED MODE:t_coffee
+
+	2PTCE 1.00
+	  seq 1.00
+
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+HERE: ****ECLMODE4TC:5
+HERE: ****ECLMODE4TC:5
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  85][Len=  242][PID:60267]
+
+
+
+OUTPUT RESULTS
+pid 60267 -- 
+	#### File Type= GUIDE_TREE Format=     newick Name= 2seqs.dnd | NOT PRODUCED [WARNING:T-COFFEE:Version_8.80]
+
+
+	#### File Type=        MSA Format=        aln Name= 2seqs.aln
+	#### File Type=        MSA Format=       html Name= 2seqs.html
+
+
+# TIP :See The Full Documentation on www.tcoffee.org
+# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
+# TIP 12:  -other_pg seq_reformat to access seq_reformat
+
+# Command Line: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 19.370 Mb, Max= 27.764 Mb
+# T-COFFEE CPU Usage: 80 millisec
+# Results Produced with T-COFFEE (Version_8.80)
+# T-COFFEE is available from http://www.tcoffee.org
+
+
+*************************************************************************************************
+*                        WARNING LIST                                    
+60267 -- WARNING: 
+WARNING: _P_ Template | seq | Could Not Be Found
+
+60267 -- WARNING: 
+WARNING: _P_ Template | seq | Could Not Be Found
+
+60267 -- WARNING: 
+	#### File Type= GUIDE_TREE Format=     newick Name= 2seqs.dnd | NOT PRODUCED [WARNING:T-COFFEE:Version_8.80]
+
+*************************************************************************************************
+CLUSTAL FORMAT for T-COFFEE Version_8.80 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.08 sec, SCORE=92, Nseq=2, Len=242 
+
+2PTCE           IVGGYTCGANTVPYQVSLN--SGYHFCGGSLINSQWVVSAAHCYKS--GI
+seq             IVGGQECKDGECPWQALLINEENEGFCGGTILSEFYILTAAHCLYQAKRF
+                ****  *  .  *:*. *   ..  ****:::.. ::::****  .   :
+
+2PTCE           QVRLGEDNINVVEGNEQFISASKSIVHPSYNSNTLNNDIMLIKLKSAASL
+seq             KVRVGDRNTEQEEGGEAVHEVEVVIKHNRFTKETYDFDIAVLRLKTPITF
+                :**:*: * :  **.* . ...  * *  :..:* : ** :::**:. ::
+
+2PTCE           NSRVASISLPTSCASAGT-----QCLISGWGNTKSSGTSYPDVLKCLKAP
+seq             RMNVAPACLPERDWAESTLMTQKTGIVSGFGRTHEKGRQS-TRLKMLEVP
+                . .**. .**    : .*       ::**:*.*:..* .    ** *:.*
+
+2PTCE           ILSDSSCKSAYPGQITSNMFCAGYLEGGKDSCQGDSGGPVVCSGK----L
+seq             YVDRNSCKLSSSFIITQNMFCAGYDTKQEDACQGDSGGPHVTRFKDTYFV
+                 :. .*** : .  **.*******    :*:******** *   *    :
+
+2PTCE           QGIVSWGSGCAQKNKPGVYTKVCNYVSWIKQTIAS------N
+seq             TGIVSWGEGCARKGKYGIYTKVTAFLKWIDRSMKTRGLPKAK
+                 ******.***:*.* *:****  ::.**.::: :      :
+
+
+

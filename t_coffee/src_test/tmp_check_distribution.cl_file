@@ -32,6 +32,7 @@
           t_coffee sample_seq1.fasta -quicktree
           t_coffee sample_seq1.fasta -dp_mode myers_miller_pair_wise
           t_coffee sample_seq2.fasta -multi_core jobs
+          t_coffee sample_seq2.fasta -multi_core no
           t_coffee sample_seq2.fasta -multi_core jobs
           t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair
           t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template

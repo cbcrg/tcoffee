@@ -42,7 +42,8 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
   Job_TC *job=NULL;
   FILE *local_stderr;
   int njob;
- 
+  
+  
   store_seq_type (S->type);
   if ( CL==NULL)CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?vtmpfile():NULL, NULL);
   local_stderr=(CL->local_stderr!=NULL)?CL->local_stderr:stderr;
@@ -51,6 +52,7 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
   job=queue2heap(method2job_list ( method,S,weight, CL->lib_list,CL->DM, CL));
   njob=queue2n(job)+1;
   
+   
   if ( get_nproc()==1 || njob==1)return  nfork_produce_list (CL, S, method, weight, mem_mode,job, local_stderr);
   else if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,local_stderr);
   else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, local_stderr);
@@ -78,7 +80,6 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
   int a,b;
   Job_TC *heap,*end,*start, ***jl;
   TC_method *M;
-  int n_elements_in, n_new_elements;
   char **pid_tmpfile;
   int   *pid_list;
   int pid,npid, njob;
@@ -105,10 +106,10 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
       return CL;
     }
   
-  job=queue2heap (job_list2multi_thread_job_list (job, CL->multi_thread, CL));
+  job=queue2heap (job);
   heap=job;
   njob=queue2n (job);
-  n_elements_in=CL->ne;
+ 
   M=(job->param)->TCM;
   if (M)M->PW_CL=method2pw_cl ( M, CL);
   pid_tmpfile=vcalloc (MAX(njob,get_nproc())+1, sizeof (char*));
@@ -132,9 +133,10 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	{
 	  FILE *fp;
 	  int done, todo, t;
-	  
+	  freeze_constraint_list (CL);//record the current state, so as not to dump everything
 	  initiate_vtmpnam(NULL);
-	  fp=vfopen (pid_tmpfile[a],"a");
+	  vfclose(vfopen (pid_tmpfile[a],"w"));
+	  
 	  todo=0;
 	  while (job!=end){todo++;job=job->c;}
 	  job=start;
@@ -143,16 +145,15 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	  while (job!=end)
 	    {
 	      if (a==0)output_completion ( local_stderr,done,todo,1, "Submit   Job");
-	      job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",duplicate_constraint_list4lib_computation (CL),submit_lib_job, retrieve_lib_job, CL->multi_thread );	
+	      job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",CL,submit_lib_job, retrieve_lib_job, CL->multi_thread );	
 	      
 	      job=submit_job (job);
 	      retrieve_job (job);
-	      t=((job->io)->CL)->ne*((job->io)->CL)->entry_len;
-	      for (b=0; b<t; b++)fprintf ( fp, "%d ", ((job->io)->CL)->L[b]);
+	      
 	      job=job->c;
 	      done++;
 	    }
-	  vfclose (fp);
+	  dump_constraint_list (CL, pid_tmpfile[a], "a");
 	  myexit (EXIT_SUCCESS);
 	}
       else
@@ -163,12 +164,13 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	  a++;
 	}
     }
- 
+  
   //wait for all processes to finish
   for (a=0; a<npid; a++)
     {
       pid=vwait(NULL);
-      CL=read_constraint_list_raw_file (CL,pid_tmpfile[pid_list[pid]]);
+      
+      CL=undump_constraint_list (CL, pid_tmpfile[pid_list[pid]]);
       remove(pid_tmpfile[pid_list[pid]]);
     }
   
@@ -177,9 +179,6 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
   
   job=heap;
   while (job)	job=delete_job (job);
-  n_new_elements=CL->ne - n_elements_in;
-  compact_list (CL, n_elements_in,n_new_elements, "best");
-  compact_list (CL, 0, CL->ne, "default");
   CL->local_stderr=local_stderr;
   free_queue  (heap);
   return CL;
@@ -192,7 +191,7 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
   int a,b;
   Job_TC *heap;
   TC_method *M;
-  int n_elements_in, n_new_elements;
+  
   char **pid_tmpfile;
   int   *pid_list;
   int pid,npid, njob;
@@ -219,12 +218,12 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
     }
   
   
-  job=queue2heap (job_list2multi_thread_job_list (job, CL->multi_thread, CL));
+  job=queue2heap (job);
   
   heap=job;
   M=(job->param)->TCM;
   if (M)M->PW_CL=method2pw_cl ( M, CL);
-  n_elements_in=CL->ne;    
+
   
   /* Cf. parse method for possible out_mode flags*/
   
@@ -267,10 +266,10 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 		initiate_vtmpnam(NULL);
 		while (job && cseq==job2first_seq(job))
 		  {
-		    job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",duplicate_constraint_list4lib_computation (CL),submit_lib_job, retrieve_lib_job, CL->multi_thread );	
+		    job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",CL,submit_lib_job, retrieve_lib_job, CL->multi_thread );	
 		    job=submit_job (job);
 		    retrieve_job (job);
-		    constraint_list2raw_file ((job->io)->CL,pid_tmpfile[npid], "a");
+		    dump_constraint_list ((job->io)->CL,pid_tmpfile[npid], "a");
 		    job=job->c;
 		  }
 		myexit (EXIT_SUCCESS);
@@ -291,7 +290,7 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 			local_stderr=output_completion ( local_stderr,npid,nlines,1, "Processed   Job");
 			pid=vwait(NULL);
 			index=pid_list[pid];
-			CL=read_constraint_list_raw_file (CL,pid_tmpfile[index]);
+			CL=undump_constraint_list (CL,pid_tmpfile[index]);
 			remove (pid_tmpfile[index]);
 			submited--;
 		      }
@@ -310,16 +309,13 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
       local_stderr=output_completion ( local_stderr,npid-(submited-a),nlines,1, "Processed   Job");
       pid=vwait(NULL);
       index=pid_list[pid];
-      CL=read_constraint_list_raw_file (CL,pid_tmpfile[index]);
+      CL=undump_constraint_list(CL,pid_tmpfile[index]);
       remove (pid_tmpfile[index]);
     }
   
   vfree (pid_list);
   vfree (pid_tmpfile);
   
-  n_new_elements=CL->ne - n_elements_in;
-  compact_list (CL, n_elements_in,n_new_elements, "best");
-  compact_list (CL, 0, CL->ne, "default");
   CL->local_stderr=local_stderr;
   
   free_queue  (heap);
@@ -333,7 +329,7 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
       int a,b, n;
       Job_TC *heap;
       TC_method *M;
-      int n_elements_in, n_new_elements;
+      
       int *pid_list;
       char **pid_tmpfile;
       int pid,npid, njob;
@@ -358,12 +354,12 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
       }
 
       
-    job=queue2heap (job_list2multi_thread_job_list (job, CL->multi_thread, CL));
+      job=queue2heap (job);
     
     heap=job;
     M=(job->param)->TCM;
     if (M)M->PW_CL=method2pw_cl ( M, CL);
-    n_elements_in=CL->ne;    
+
     
     /* Cf. parse method for possible out_mode flags*/
     
@@ -376,7 +372,7 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
     submited=0;
     while (job)
       {
-	job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",duplicate_constraint_list4lib_computation (CL),submit_lib_job, retrieve_lib_job, CL->multi_thread );	
+	job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",CL,submit_lib_job, retrieve_lib_job, CL->multi_thread );	
 	pid_tmpfile[npid]=vtmpnam(NULL);
 	pid=vvfork (NULL);
 	if ( pid==0)
@@ -384,7 +380,7 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	    initiate_vtmpnam (NULL);
 	    job=submit_job (job);
 	    retrieve_job (job);
-	    constraint_list2raw_file ((job->io)->CL,pid_tmpfile[npid], "w");
+	    dump_constraint_list ((job->io)->CL,pid_tmpfile[npid], "w");
 	    myexit (EXIT_SUCCESS);
 	  }
 	else 
@@ -403,7 +399,7 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 		  local_stderr=output_completion ( local_stderr,npid,njob,1, "Processed   Job");
 		  pid=vwait(NULL);
 		  index=pid_list[pid];
-		  CL=read_constraint_list_raw_file (CL,pid_tmpfile[index]);
+		  CL=undump_constraint_list (CL,pid_tmpfile[index]);
 		  remove (pid_tmpfile[index]);
 		  submited--;
 		}
@@ -417,15 +413,12 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	local_stderr=output_completion ( local_stderr,npid-a, npid,1, "Processed   Job");
 	pid=vwait(NULL);
 	index=pid_list[pid];
-	CL=read_constraint_list_raw_file (CL,pid_tmpfile[index]);
+	CL=undump_constraint_list (CL,pid_tmpfile[index]);
 	remove (pid_tmpfile[index]);
       }
     vfree (pid_list);
     vfree (pid_tmpfile);
     
-    n_new_elements=CL->ne - n_elements_in;
-    compact_list (CL, n_elements_in,n_new_elements, "best");
-    compact_list (CL, 0, CL->ne, "default");
     CL->local_stderr=local_stderr;
     
     free_queue  (heap);
@@ -434,61 +427,48 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
     }
 Constraint_list *nfork_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, FILE *local_stderr)
     {
-    int b;
-    int n_aln;
-    Job_TC *heap;
-    TC_method *M;
-    int n_elements_in, n_new_elements;
-        
-    
-    /*OUT_MODE:
-              A->  alignment provided in a file
-	      L->  list      provided in a file
-	      aln-> alignment computed and provided in a file
-	      list->list      computed and provided in a file
-    */
-    
-    
-    if ( job->jobid==-1)
-      {
-	M=(job->param)->TCM;
-	fprintf (local_stderr, "\n\tMethod %s: No Suitable Sequences [Type: %s]\n", method,M->seq_type); 
-	return CL;
-      }
-
-    
-    job=queue2heap (job_list2multi_thread_job_list (job, CL->multi_thread, CL));
-    
-    heap=job;
-    n_aln=queue2n (job);
-    M=(job->param)->TCM;
-
-    if (M)M->PW_CL=method2pw_cl ( M, CL);
-
-   
-    n_elements_in=CL->ne;    
-    
-    
-    /* Cf. parse method for possible out_mode flags*/
-    
-   
-       
-    b=0;
-
+      int n_aln;
+      Job_TC *heap;
+      TC_method *M;
+      int n_elements_in, n_new_elements;
+      int b;
+      
+      /*OUT_MODE:
+	A->  alignment provided in a file
+	L->  list      provided in a file
+	aln-> alignment computed and provided in a file
+	list->list      computed and provided in a file
+      */
+      
+      
+      if ( job->jobid==-1)
+	{
+	  M=(job->param)->TCM;
+	  fprintf (local_stderr, "\n\tMethod %s: No Suitable Sequences [Type: %s]\n", method,M->seq_type); 
+	  return CL;
+	}
+      
+      
+      job=queue2heap (job);
+      
+      
+      heap=job;
+      n_aln=queue2n (job);
+      M=(job->param)->TCM;
+      
+      if (M)M->PW_CL=method2pw_cl ( M, CL);
+      n_elements_in=CL->ne;    
+      
+      b=0;
     while (job)
       {
 	local_stderr=output_completion ( local_stderr, b, n_aln+1,1, "Submit   Job");
-	job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",duplicate_constraint_list4lib_computation (CL),submit_lib_job, retrieve_lib_job, CL->multi_thread );	
+	job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",CL,submit_lib_job, retrieve_lib_job, CL->multi_thread );	
 	
-
 	job=submit_job (job);
-
 	if (retrieve_job (job))	
 	  {
-	    
 	    CL=merge_constraint_list    ((job->io)->CL, CL, "default");
-	    free_constraint_list4lib_computation ( (job->io)->CL);	
-	    
 	  }
 	job=job->c;
 	b++;
@@ -497,79 +477,16 @@ Constraint_list *nfork_produce_list   ( Constraint_list *CL, Sequence *S, char *
     fprintf ( local_stderr, "\n");
     
     while (job)	job=delete_job (job);
-  
-    n_new_elements=CL->ne - n_elements_in;
-    compact_list (CL, n_elements_in,n_new_elements, "best");
-    compact_list (CL, 0, CL->ne, "default");
+    
+    
     CL->local_stderr=local_stderr;
     
     free_queue  (heap);
-    
     return CL;
     }
 
 
-Job_TC *job_list2multi_thread_job_list (Job_TC* ojob, char *mt, Constraint_list *CL)
-{
-  FILE *fp=NULL;
-  int mtv, n, nj;
-  char *met_file, *seq_file, *lib_file, *lib_list;
-  char common[1000], command[1000], T_file[100];
-  Job_TC *njob, *heap;
-  TC_method *TCM;
- 
-  
-  mtv=(mt==NULL)?0:atoi (mt);
-  if ( !mtv || mtv==1)return ojob;
-  
-  HERE ("***"); myexit (0);
-  heap=ojob;
-  nj=(queue2n(ojob)/mtv)+1;
-  nj=(nj==0)?1:nj;
-  
-  met_file=vtmpnam (NULL);  
-  TC_method2method_file ((ojob->param)->TCM,met_file=vtmpnam (NULL));  
-  
-  TCM=method_file2TC_method (method_name2method_file ("tc2"));
-  sprintf (T_file,"%s",(CL->S)->template_file);
-  
-  HERE ("2");
 
-  seq_file=vtmpnam (NULL);
-  sprintf ( common, "%s -in M%s S%s -lib_only ", TCM->executable, met_file, seq_file);
-  if ( T_file[0] && check_file_exists (T_file))
-    {
-      strcat (common, " -template_file ");strcat (common, T_file); strcat ( common , " ");
-    }
-
-  njob=vcalloc ( 1, sizeof (Job_TC));
-  njob->jobid=-1;
-  n=0;
-
-  HERE ("3");
-
-  while ( ojob && n<nj)
-    {
-      if (n==0)
-	{
-	  lib_file=vtmpnam ( NULL);
-	  lib_list=vtmpnam ( NULL);
-	  fp=vfopen (lib_list, "w");
-	  sprintf ( command, "%s -out_lib=%s -lib_list=%s -quiet", common, lib_file, lib_list);
-	  njob->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s io->in=%s io->out=%s",TCM, "tc2", command,seq_file, lib_file);
-	  
-	  njob=queue_cat (njob, njob->c);
-	}
-
-      fprintf ( fp, "%s\n", (ojob->param)->seq_c);
-      ojob=ojob->c;
-      if ( (++n)==nj){vfclose (fp);n=0;}
-    }
-  HERE ("4");
-  if (fp && n)vfclose (fp);
-  free_queue  (heap);
-  return njob;
-}
 
 
 
@@ -670,7 +587,6 @@ Job_TC *submit_lib_job ( Job_TC *job)
     }
   else if (strm4 (M->out_mode,"A", "L", "aln", "lib"))
     {	
-
       seq_list2in_file ( M, (io->CL)->S, p->seq_c, io->in);
       printf_system ("%s ::IGNORE_FAILURE::", p->aln_c);
       add_method_output2method_log (NULL,NULL, NULL, NULL, io->out);
@@ -683,6 +599,7 @@ Job_TC *submit_lib_job ( Job_TC *job)
     }
   else if ( strm2 (M->out_mode, "fA", "fL"))
     {
+      
       io->CL= seq2list(job);
       if (!io->CL)
 	{
@@ -1337,685 +1254,156 @@ char *make_aln_command(TC_method *m, char *seq, char *aln)
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-
-
-int dump_constraint_list (Constraint_list *CL)
+Constraint_list *  unfreeze_constraint_list (Constraint_list *CL)
 {
-  int *L;
-  int a, b;
-  if (!CL->L) return 0;
-  L=CL->L;
-  CL->L=NULL;
-  CL->fp=tmpfile ();
-  
-  for ( a=0; a<CL->ne; a++)
-    for (b=0; b<CL->entry_len; b++)
-      vwrite_clist (CL, a, b, L[a*CL->entry_len+b]);
-  
-  vfree (CL->L); CL->L=NULL;
-  return 1;
+  free_int (CL->freeze, -1);
+  CL->freeze=NULL;
+}
+Constraint_list *  freeze_constraint_list (Constraint_list *CL)
+{
+  int a, b, d=0;
+  Sequence *S=CL->S;
+  int **freeze=declare_int2 (S->nseq, S->len, 1);
+  CL=unfreeze_constraint_list (CL);
+  for ( a=0; a<S->nseq; a++)
+    for ( b=1; b<=S->len[a]; b++)
+      {
+	d+=CL->residue_index[a][b][0];
+	freeze[a][b]=CL->residue_index[a][b][0];
+      }
+  CL->freeze=freeze;
+  return CL;
 }
 
-int vread_clist ( Constraint_list *CL, int a, int b )
+Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file)
+{
+  int *entry;
+  FILE *fp;
+  int a, b, c,e,tot;
+  
+  if (!CL)return CL;
+  entry=vcalloc ( CL->entry_len+1, sizeof (int));
+  fp=vfopen (file, "r");
+  b=0;c=0;tot=0;
+  while ((fscanf (fp, "%d ", &e))!=EOF)
     {
-    int x;
-    
-    if ( a>= CL->ne)
-      {
-	return UNDEFINED_2;
-	
-      }
-    else if (CL->fp)
-       {       
-	 
-	 fseek (CL->fp, a*CL->el_size*CL->entry_len+b*CL->el_size, SEEK_SET);
-	 fread (&x, CL->el_size, 1, CL->fp);
-	 
-	 return x;
-       }
-    else if ( CL->L)
-       {
-	 return CL->L[a*CL->entry_len+b];
-       }
-    else if (CL->M)
-       {
-       return (CL->M)[a][b];
-       }
-    else 
-       {
-       return UNDEFINED_2; 
-       
-       }
-    return UNDEFINED_2;
-    }
-int vwrite_clist ( Constraint_list *CL, int a, int b, CLIST_TYPE x)
-    {
-
-      CL->seq_indexed=0;
-      CL->residue_indexed=0;
-
-
-      if (CL->fp)
+      entry [b++]=e;
+      if (b==CL->entry_len)
 	{
-	  fseek (CL->fp, a*CL->el_size*CL->entry_len+b*CL->el_size, SEEK_SET);
-	  fwrite(&x, CL->el_size, 1, CL->fp);
+	  b=0;
+	  int nl;
+	  CL=add_entry2list2 (entry, CL);
+	  //dump does not make the entries symetrical
+	  //It reads in EXACTLY what was dumped
 	}
-      else if (!CL->M)
+    }
+
+  vfclose (fp);
+  return CL;
+}
+
+int safe_dump_constraint_list (Constraint_list *CL,char *file, char *mode, Sequence *RS)
+{
+  Sequence *S;
+  int **cache=NULL;
+  FILE *fp;
+  static int *entry;
+  int b,c,s1, r1, s2, r2;
+  int d=0;
+  if (!CL || !CL->S || CL->ne==0)return;
+  S=CL->S;
+  if (RS)cache=fix_seq_seq (S, RS);
+  if (!entry)entry=vcalloc (CL->entry_len+1, sizeof (int));
+  
+  fp=vfopen (file, mode);
+  for (s1=0; s1<S->nseq; s1++)
+    {
+      if (cache && cache[s1][0]==-1)continue;
+      for (r1=1; r1<=S->len[s1]; r1++)
 	{
-	  int i,l;
+	  entry[SEQ1]=(cache)?cache[s1][0]:s1;
+	  entry[R1]=(cache)?cache[s1][r1]:r1;
+	  if (entry[R1]<=0)continue;
 	  
-	  
-	  i=a*CL->entry_len+b;
-	  if (CL->L)
-	    {
-	      Memcontrol *p;
-	      p=(Memcontrol *)CL->L;
-	      p-=2;
-	      l=(int)p[0].size/p[0].size_element;
-	      //read_size_int (CL->L,sizeof (int));
-	    }
-	  else 
-	    {
-	      l=CL->chunk;
-	      (CL->L)=vcalloc (l,sizeof (int));
-	    }
-	  
-	  if (l<=i)
-	    {
-	      l+=CL->chunk;
-	      (CL->L)=vrealloc ( (CL->L),l*sizeof (int));
-	    }
-	  (CL->L)[i]=x;
-#ifdef gagaga
-	  if (((a*CL->entry_len)+b)>=(CL->entry_len*CL->max_L_len))
-	    {
+	  b=(CL->freeze)?CL->freeze[s1][r1]:1;
+	  for (;b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	    {	
+	      s2=CL->residue_index[s1][r1][b+SEQ2];
+	      r2=CL->residue_index[s1][r1][b+R2];
 	      
-	      if (!(CL->L))
-		{
-		  (CL->L)=vcalloc ((CL->chunk+a)*CL->entry_len+b, sizeof (int));
-		}
+	      entry[SEQ2]=(cache)?cache[s2][0]:s2;
+	      if ( entry[SEQ2]==-1)continue;
 	      else
 		{
-		  CL->max_L_len+=CL->chunk;
-		  (CL->L)=vrealloc ( (CL->L),CL->entry_len*sizeof (int)*CL->max_L_len+b);
+		  entry[R2]=(cache)?cache[s2][r2]:r2;
+		  if (entry[R2]<=0)continue;
+		  else
+		    {
+		      d++;
+		      entry[WE]=CL->residue_index[s1][r1][b+WE];
+		      entry[CONS]=CL->residue_index[s1][r1][b+CONS];
+		      entry[MISC]=CL->residue_index[s1][r1][b+MISC];
+		      
+		      for (c=0; c<CL->entry_len; c++)fprintf ( fp, "%d ", entry[c]);
+		    }
 		}
-	    }
-	  
-	    (CL->L)[i]=x;
-#endif
-       }
-    return x;
+	    }			
+	}		
     }
-
-
-/*********************************************************************/
-/*                                                                   */
-/*                        INDEXING FUNCTIONS                         */
-/*                                                                   */
-/*                                                                   */
-/*********************************************************************/
-
-Constraint_list *index_res_constraint_list ( Constraint_list *CL, int field)
-        {
-	/*
-	  function documentation: start
-	  Constraint_list *index_res_constraint_list ( Constraint_list *CL, int field)
-	  This function reorganises the content of the CL->L matrix, so that a single look up gives
-	  the constraints associated with any residue
-	  
-	  1-if CL->residue_indexed=1 return
-		 2-CL->residue_index[Seq X][Res Y of Seq X][0]=Z
-		 Z=Number of residues matching X(Y)*3+1
-		 CL->residue_index[Seq X][Res Y of Seq X][0]=Z
-		 CL->residue_index[Seq X][Res Y of Seq X][c+0]=seq W
-		 CL->residue_index[Seq X][Res Y of Seq X][c+1]=res V
-		 CL->residue_index[Seq X][Res Y of Seq X][c+2]=weight W(V) Vs X(Y)		 
-	  
-	  NOTE: Works All right with a sequence against itself
-	  NOTE: Any modification of CL->L should result in residue_indexed to be reset	  
-	  function documentation: end
-	*/
-	int a, b, s1, s2, r1, r2, w;
-
-
-
-
-
-	  
-
-	if ( CL->residue_indexed && CL->residue_field==field);
-	else
-	   {
-
-	     if ( CL->residue_index)
-	          {
-		    for ( a=0; a< (CL->S)->nseq; a++)
-		      for ( b=0; b<= (CL->S)->len[a]; b++)
-		          {
-			      vfree(CL->residue_index[a][b]);
-			      CL->residue_index[a][b]=vcalloc_nomemset (1, sizeof (int));
-			      CL->residue_index[a][b][0]=1;
-			  }    
-		  }
-	       else if ( !CL->residue_index)
-	          {
-		 
-
-		    CL->residue_index=vcalloc_nomemset ( (CL->S)->nseq, sizeof (int**));
-		    for ( a=0; a< (CL->S)->nseq; a++)
-		          {
-			
-			    CL->residue_index[a]=vcalloc_nomemset ( ((CL->S)->len[a]+1), sizeof (int*));
-			      for ( b=0; b<= (CL->S)->len[a]; b++)
-				  {
-				    CL->residue_index[a][b]=vcalloc_nomemset (1,sizeof (int));
-				  CL->residue_index[a][b][0]=1;
-				  }
-			  }
-		  }
-	       for (a=0;a<CL->ne; a++)
-	          {
-		    
-		  s1=vread_clist (CL, a, SEQ1);
-		  s2=vread_clist (CL, a, SEQ2);
-		  r1=vread_clist (CL, a, R1);
-		  r2=vread_clist (CL, a, R2);
-		  w=vread_clist (CL, a, field);
-		  
-	
-		  CL->residue_index[s1][r1][0]+=3;
-		  CL->residue_index[s1][r1]=vrealloc ( CL->residue_index[s1][r1], CL->residue_index[s1][r1][0]*sizeof (int));
-		  CL->residue_index[s1][r1][CL->residue_index[s1][r1][0]-3]=s2;
-		  CL->residue_index[s1][r1][CL->residue_index[s1][r1][0]-2]=r2;
-		  CL->residue_index[s1][r1][CL->residue_index[s1][r1][0]-1]=w;
-
-		  CL->residue_index[s2][r2][0]+=3;
-		  CL->residue_index[s2][r2]=vrealloc ( CL->residue_index[s2][r2], CL->residue_index[s2][r2][0]*sizeof (int));
-		  CL->residue_index[s2][r2][CL->residue_index[s2][r2][0]-3]=s1;
-		  CL->residue_index[s2][r2][CL->residue_index[s2][r2][0]-2]=r1;
-		  CL->residue_index[s2][r2][CL->residue_index[s2][r2][0]-1]=w;
-		  
-		  }
-	   CL->residue_indexed=1;
-	   CL->residue_field=field;
-	   }
-	return CL;
-	}
-      
-Constraint_list *index_constraint_list ( Constraint_list *CL)
-        {
-	  /*
-	  Function Documentation: start
-	  Constraint_list *index_constraint_list ( Constraint_list *CL);
-	  Indexes a constraint list
-	     1-Checks the flag seq_indexed
-	     2-if flag set to 0
-	       CL->start_index[seq1][seq2] indicatse the first position for seq1 Vs seq2
-	       CL->end_index[seq1][seq3]   indicatse the last  position for seq1 Vs seq2
-	  Any modif to CL->L should cause the flag 1 to be set to 0;
-	  Function Documentation: end
-	*/
-	int a, csA, csB, sA, sB;
-
-
-	if ( CL->seq_indexed);
-	else
-	    {
-	    if ( CL->start_index!=NULL)free_int ( CL->start_index,-1);
-	    CL->start_index=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
-	    
-	    if ( CL->end_index!=NULL)free_int ( CL->end_index,-1);
-	    CL->end_index=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
-	    
-	    csA=vread_clist (CL, 0, SEQ1);
-	    csB=vread_clist (CL, 0, SEQ2);
-
-	    CL->start_index[csA][csB]=0;
-	    CL->start_index[csB][csA]=0;
-	    for ( a=1; a<CL->ne; a++)
-	        {
-		sA=vread_clist (CL, a, SEQ1);
-		sB=vread_clist (CL, a, SEQ2);
-		if (sA!=csA || sB!=csB)
-		   {
-		   CL->end_index[csA][csB]=a;
-		   CL->end_index[csB][csA]=a;
-		   csA=sA;
-		   csB=sB;
-		   CL->start_index[csA][csB]=a;
-		   CL->start_index[csB][csA]=a;
-		   }
-		}		
-	    CL->end_index[csB][csA]=CL->ne;
-	    CL->end_index[csA][csB]=CL->ne;
-	    CL->seq_indexed=1;
-	    }
-	return CL;
-	}
-
-
-char ** reindex_constraint_list (char **profile, int np,char **list, int *inL, Sequence *S)
-{
-  int a, nl=0, l;
-  int ***cache, **index, *entry;
-  char **nlist, **cons, *nlib_name;
-  Sequence *NS;
-  Alignment **P, *A;
-  Constraint_list *CL, *NCL;
+  vfclose (fp);
   
-
-  l=inL[0];
-  /*1: Pre-Process the profiles*/
-  cache=vcalloc (np, sizeof (int**));
-  cons=vcalloc  (np, sizeof (char*));
-  P=vcalloc (np, sizeof (Alignment *));
-
-  for ( a=0; a< np; a++)
-    {
-      int e,b,c, **ca;
-      A=P[a]=main_read_aln (profile[a], NULL);
-      
-      ca=cache[a]=declare_int (A->nseq, A->len_aln+1);
-      cons[a]=aln2cons_seq_mat ( A, "blosum62mt");
-      for (b=0;b<A->nseq; b++)
-	{
-	  for (e=0,c=0; c<A->len_aln; c++)
-	    {
-	      if (is_gap(A->seq_al[b][c]));
-	      else ca[b][++e]=c+1;
-	    }
-	}
-    }
-
-  /*2: Index The Sequences*/
-  index=declare_int (S->nseq,2);
-  for (a=0; a<S->nseq; a++)index[a][0]=index[a][1]=-1;
-  for (a=0; a< S->nseq; a++)
-    {
-      char *name;
-      int p, b;
-      name=S->name[a];
-      for (b=0; b< np; b++)
-	{
-	  if ((p=name_is_in_list(name, (P[b])->name, (P[b])->nseq, MAXNAMES))!=-1) 
-	    {
-	      index[a][0]=b;
-	      index[a][1]=p;
-	    }
-	}
-    }
-
-  /*3: Read the primary Library*/
-  
-  nlist=declare_char (read_array_size_new ((void *)list), read_array_size_new ((void *)list[0]));
-  for (nl=0,a=0; a< l; a++)
-    if ( list[a][0]=='L' || list[a][0]=='A')
-      nlist[nl++]=list[a];
-  
-  CL=declare_constraint_list ( S,NULL, NULL, 0,NULL, NULL);
-  CL=read_n_constraint_list (nlist,nl,NULL,NULL,"sim",S->type,stdout, CL, "S");   
-  vfree (nlist);
-  
-  NS=fill_sequence_struc (np, cons, profile);
-  NCL=declare_constraint_list ( NS,NULL, NULL, 0,NULL, NULL);
-  entry=vcalloc ( CL->entry_len, CL->el_size);
-  for (a=0; a<CL->ne; a++)
-    {
-      int s1, s2, r1, r2, ps1, ps2, pps1, pps2;
-
-      entry=extract_entry (entry, a, CL);
-      s1=entry[SEQ1]; s2=entry[SEQ2];
-      r1=entry[R1]; r2=entry[R2];
-      ps1=index[s1][0];ps2=index[s2][0];
-      pps1=index[s1][1];pps2=index[s2][1];
-
-      if (ps1==ps2 || ps1==-1 || ps2==-1)continue;
-      entry[SEQ1]=ps1;
-      entry[SEQ2]=ps2;
-    
-      entry[R1]=cache[ps1][pps1][r1];
-      entry[R2]=cache[ps2][pps2][r2];
-    
-      add_entry2list (entry, NCL);
-      
-    }
-
-  compact_list (NCL, 0, NCL->ne, "default");
-  nlib_name=vtmpnam(NULL);
-  vfclose(save_constraint_list ( NCL, 0, NCL->ne,nlib_name, NULL, "lib",NCL->S));
-  
-  
-  nlist=declare_char (read_array_size_new ((void *)list), read_array_size_new ((void *)list[0]));
-  for (nl=0,a=0; a< l; a++)
-    if ( list[a][0]!='L' && list[a][0]!='A')
-      sprintf (nlist[nl++], "%s",list[a]);
-  sprintf (nlist[nl++], "L%s", nlib_name);
-  
-  free_arrayN ((void *)cache, 3);
-  free_arrayN ((void *)cons, 2);
-  free_arrayN ((void *)index, 2);
+  free_int (cache, -1);
   vfree (entry);
-  for (a=0;a<np; a++)free_aln (P[a]);
-  vfree (P);
-  free_constraint_list_full (CL);
-  free_constraint_list_full (NCL);
-  
-  inL[0]=nl;
-  return nlist;
+  return d;
 }
-  
 
-Constraint_list * progressive_index_res_constraint_list ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
+int dump_constraint_list (Constraint_list *CL, char *file, char *mode)
 {
-  int **index_seq;
-  int **index_res;  
-  static Constraint_list *NCL;
-  
-  int a, b, c, d,s,l, max_len;
-  int s1, s2, r1, r2;
-  int *L, *NL;
-  char *seq;
-  Sequence *S, *NS;
-
-
-  
-  if ( NCL==NULL)
-    {
-      NCL=duplicate_constraint_list (CL);
-    }
-  
-  S=CL->S;
-  NS=NCL->S;
-  
-  L=CL->L;
-  NL=NCL->L;
-  
-  
-  
-  if (NCL->residue_index)
-    {
-      free_arrayN((void*)NCL->residue_index, 3);
-      NCL->residue_index=NULL;
-    }
-
-  for ( a=0; a< S->nseq; a++)
-    {
-      sprintf ( NS->seq[a], "%s", S->seq[a]);
-      NS->len[a]=strlen (S->seq[a]);
-    }
-  
-  
-  for ( a=0; a<2; a++)
-    {
-      s=A->order[ls[a][0]][0];
-      vfree (NS->seq[s]);
-      NS->seq[s]=sub_aln2cons_seq_mat (A, ns[a], ls[a], "blosum62mt");
-      NS->len[s]=strlen (NS->seq[s]);
-    }
-  for ( max_len=0, a=0; a<S->nseq; a++)max_len=MAX(max_len, S->len[a]);
-  index_seq=declare_int ( NS->nseq, max_len+1);
-  index_res=declare_int ( NS->nseq, max_len+1);
-  
-
-  for ( a=0; a< 2; a++)
-    {
-      for (b=0; b< ns[a]; b++)
-	{
-	  s=A->order[ls[a][b]][0];
-	  seq=A->seq_al[ls[a][b]];
-	  l=strlen (seq);
-
-	  for ( d=0, c=0; c<l; c++)
-	    {
-	      if ( !is_gap(seq[c]))
-		{
-		  d++;
-		  
-		  index_res[s][d]=c+1;
-		  index_seq[s][d]=A->order[ls[a][0]][0];
-		}
-	    }
-	}
-    }
-
-  for ( a=0; a< CL->ne; a++)
-    {
-      s1=L[a*CL->entry_len+SEQ1];
-      s2=L[a*CL->entry_len+SEQ2];
-      r1=L[a*CL->entry_len+R1];
-      r2=L[a*CL->entry_len+R2];
-      
-      if ( index_res[s1][r1])
-	{
-	  NL[a*CL->entry_len+SEQ1]=index_seq[s1][r1];
-	  NL[a*CL->entry_len+R1]=index_res[s1][r1];
-	}
-      else
-	{
-	  NL[a*CL->entry_len+SEQ1]=s1;
-	  NL[a*CL->entry_len+R1]=r1;
-	}
-      
-      if ( index_res[s2][r2])
-	{
-	  NL[a*CL->entry_len+SEQ2]=index_seq[s2][r2];
-	  NL[a*CL->entry_len+R2]=index_res[s2][r2];
-	}
-      else
-	{
-	  NL[a*CL->entry_len+SEQ2]=s2;
-	  NL[a*CL->entry_len+R2]=r2;
-	}
-    }
-
-  NCL->ne=CL->ne;
-  NCL->residue_indexed=0;
-  
-  NCL=compact_list (NCL, 0, NCL->ne, "best");
-  
-  NCL=index_res_constraint_list (NCL, WE);
-  
-  free_int ( index_res, -1); free_int (index_seq, -1);
-  
-  return NCL;
+  return safe_dump_constraint_list (CL, file, mode, NULL);
 }
+
+int display_constraint_list (Constraint_list *CL, FILE *fp, char *tag)
+{
+  Sequence *S=CL->S;		
+  int b,c,l,s1,r1,s2,r2,w2,n;
+  
+  n=0;
+  for (s1=0; s1<S->nseq; s1++)
+    {
+      int l=S->len[s1];	
+      
+      for (r1=1; r1<=l; r1++)
+	{
+	  for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	    {	
+	      s2=CL->residue_index[s1][r1][b+SEQ2];
+	      r2=CL->residue_index[s1][r1][b+R2];
+	      w2=CL->residue_index[s1][r1][b+WE];
+	      fprintf ( fp, "%s -- %5d -- %5d %5d %5d %5d --> %5d", tag, ++n, s1, s2, r1, r2, w2);
+	    }
+	}			
+    }		
+}
+
+
+
 /*********************************************************************/
 /*                                                                   */
 /*                         LIST EXTENTION                            */
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-Constraint_list *extend_list_pair (Constraint_list *CL,char *store_mode, int s1, int s2)
-        {
-	static Sequence *S;
-	Constraint_list *CLout;
-	/*
-	  function documentation: start
-	  Constraint_list *extend_list_pair (Constraint_list *CL,char *store_mode, int s1, int s2)
-	  This function takes a pair of sequences s1, s2 and perrforms the extention
-	  It returns the incoming list CL, with CL->L[s1][s2] now extended
-	  See main documentation for store_mode
-	  function documentation: end
-	*/
-
-	if ( S==NULL)S=declare_sequence ((CL->S)->min_len, (CL->S)->max_len,(CL->S)->nseq); 	
-	sprintf ( S->name[0], "%s",(CL->S)->name[s1]);
-	sprintf ( S->name[1],"%s",(CL->S)->name[s2]);
-	S->nseq=2;
-	
-	CLout=extend_list (CL, store_mode, CL->extend_clean_mode, CL->extend_compact_mode,CL->do_self, S);
-	return CLout;		
-	}
-Constraint_list *extend_list (Constraint_list *CLin, char *store_mode,char *clean_mode, char *compact_mode,int do_self, Sequence *DO_LIST)
-	{
-	int a, b, c, d, e, f;
-	int wA, wC,w, rA, rC, miscA, miscC, misc;
-	static int **posA;
-	static int **posC;
-	int start_ba, end_ba, start_bc, end_bc, start_ac, end_ac;
-	int len;
-	int lenA=0;
-	int lenC=0;
-	int *translation;
-	Constraint_list *CLout=NULL;
 
 
-	/*Do not extend if the List is a Matrix*/
-	if ( !CLin->L && CLin->M)
-	   {
-	   CLin->extend_jit=0;
-	   return CLin;
-	   }
-	
-	translation=vcalloc ( (CLin->S)->nseq, sizeof (int));
-	for ( a=0; a<(CLin->S)->nseq; a++)
-	    {
-	    translation[a]=name_is_in_list ((CLin->S)->name[a],DO_LIST->name, DO_LIST->nseq, 100);
-	    translation[a]++;/* set translation to -1+1=0 if seq not in list*/
-	    }
-	
-	CLout=declare_constraint_list (CLin->S, NULL,NULL,0, strm("disk", store_mode)?tmpfile():NULL, NULL);
-        	
-	for ( a=0; a<(CLin->S)->nseq-(1-do_self); a++)
-		{	        
-		fprintf (CLin->local_stderr, "\nSeq %3d: %5d", a+1,CLout->ne);
-		for ( c=a+(1-do_self); c<(CLin->S)->nseq; c++)
-			{
-			if ( translation[a] && translation[c])
-			       {			       
-			       get_bounds (CLin,a, c, &start_ac, &end_ac); 						      
-			       for ( d=start_ac; d<end_ac; d++)
-			           {
-				   for ( e=0; e< CLin->entry_len; e++)
-				       vwrite_clist(CLout,CLout->ne, e, vread_clist(CLin,d, e));
-			           CLout->ne++;
-				   }
-			       
-			       for ( b=0; b<(CLin->S)->nseq; b++)
-			           {
-				   len=strlen ( (CLin->S)->seq[b]);
-				   
-				   get_bounds (CLin,b, a, &start_ba, &end_ba);  
-				   posA=fill_pos_matrix (CLin,start_ba, end_ba, len, posA, &lenA,(b>a));
-				   
-				   if ((c!=b && a!=b) ||(do_self==1))
-				       {
-				   
-				       get_bounds (CLin, b, c, &start_bc, &end_bc);
-				       posC=fill_pos_matrix (CLin, start_bc, end_bc, len, posC, &lenC, (b>c));
-				       
-				       for (d=1; d<=len; d++)
-				           {
-					   if ( posA[d][1]==0 || posC[d][1]==0);
-					   else
-					       {
-					       for (e=2; e<=posA[d][1]+1; e+=(CLin->entry_len-4)) 
-						   for ( f=2; f<=posC[d][1]+1; f+=(CLin->entry_len-4))
-						       {
-						       wA   =posA[d][e+1];
-						       miscA=posA[d][e+2];
 
-						       wC   =posC[d][f+1];
-						       miscC=posC[d][f+2];
 
-						       rA=posA[d][e];
-						       rC=posC[d][f];
-						       
-						       w   =MIN(wA,wC);
-						       
-						       misc=MAX(miscA, miscC);
-						       
-						       vwrite_clist( CLout, CLout->ne, SEQ1, a);
-						       vwrite_clist( CLout, CLout->ne, SEQ2, c);
-						       vwrite_clist( CLout, CLout->ne, R1  ,rA);
-						       vwrite_clist( CLout, CLout->ne, R2  ,rC);
-						       vwrite_clist( CLout, CLout->ne, WE  , w);
-						       vwrite_clist( CLout, CLout->ne, CONS, 1);
-						       vwrite_clist( CLout, CLout->ne, MISC,misc);
-        					       CLout->ne++;
-						       }
-					       }
-					   }
-				       }
-				   }
-		
-			       CLout=compact_list (CLout,0,CLout->ne,"mirror_sum");
-			       CLout=clean ( clean_mode,CLout, 0, CLout->ne);
-			       }
-			}
-		}
 
-	
-	vfree (translation);
-	return CLout;
-	}
-void get_bounds (Constraint_list *CL, int s1, int s2, int *start, int *end)
-	{
-
-	CL=index_constraint_list (CL);
-	
-	if ( s1>s2)SWAP(s1, s2);
-	
-	start[0]=CL->start_index[s1][s2];
-	end  [0]=CL->end_index  [s1][s2];
-	}
-
-	
-int ** fill_pos_matrix (Constraint_list *CL, int beg, int end, int slen, int **pos, int *len, int mirrored)
-	{
-	int small_chunck;
-	int a, r1,r2;
-	
-
-	small_chunck=2*CL->entry_len;
-
-	if ( pos==NULL)
-		{
-		pos=declare_int (slen+1, small_chunck);
-		for ( a=0; a<=slen; a++)pos[a][0]=small_chunck;
-		len[0]=slen+1;
-		}
-	else if ( len[0]<=slen)
-		{
-		free_int ( pos, len[0]);
-		pos=declare_int (slen+1, small_chunck);
-		for ( a=0; a<=slen; a++)pos[a][0]=small_chunck;
-		len[0]=slen+1;
-		}
-	else
-		{
-		for ( a=0; a<=slen; a++)pos[a][1]=0;
-		}
-			
-			
-	
-	
-	for ( a=beg; a<end; a++)
-		{
-		
-		if (!mirrored)     {r1=vread_clist (CL, a, R1);r2=vread_clist (CL, a, R2);}
-		else if ( mirrored){r1=vread_clist (CL, a, R2);r2=vread_clist (CL, a, R1);}
-
-	       if ( ((pos[r1][1])+(CL->entry_len))>pos[r1][0])
-			{
-			pos[r1]=vrealloc (pos[r1], (pos[r1][0]+small_chunck)*sizeof (int));
-			pos[r1][0]+=small_chunck;
-			}
-		pos[r1][pos[r1][1]+2]=r2;
-		pos[r1][pos[r1][1]+3]=vread_clist(CL,a,WE);
-		pos[r1][pos[r1][1]+4]=vread_clist(CL,a,MISC);
-		pos[r1][1]+=(CL->entry_len-4);		
-		}
-	return pos;
-	}
 Constraint_list * evaluate_constraint_list_reference ( Constraint_list *CL)
         {
 	    static CLIST_TYPE *entry;
-	    int a, b, c, s1, s2, r1, r2, w;
+	    int a, b, c, s1, s2, r1, r2;
 	    int ***max_res;
 	    
-	    
-
 	    if ( CL->M)
 	      {
 		CL->max_value=CL->max_ext_value=20;
@@ -2023,6 +1411,8 @@ Constraint_list * evaluate_constraint_list_reference ( Constraint_list *CL)
 	      }
 	    else 
 	      {
+		Sequence *S=CL->S;
+		
 
 		CL->max_value=CL->max_ext_value=0;
 		max_res=vcalloc ( (CL->S)->nseq, sizeof (int**));
@@ -2036,21 +1426,25 @@ Constraint_list * evaluate_constraint_list_reference ( Constraint_list *CL)
 		      }
 		  }
 		
-		for ( a=0; a< CL->ne; a++)
+  
+		for (s1=0; s1<S->nseq; s1++)
 		  {
-		    entry=extract_entry ( entry, a, CL);
-		    s1=entry[SEQ1];
-		    s2=entry[SEQ2];
-		    r1=entry[R1];
-		    r2=entry[R2];
-		    w= entry[WE];
-		    if ( w==UNDEFINED || ( (CL->moca) && (CL->moca)->forbiden_residues  && ((CL->moca)->forbiden_residues[s1][r1]==UNDEFINED || (CL->moca)->forbiden_residues[s2][r2]==UNDEFINED)));
-		    else
+		    for ( r1=1; r1<=S->len[s1]; r1++)
 		      {
 			
-			max_res[s1][r1][s2]+=w;
-			max_res[s2][r2][s1]+=w;
-			CL->max_value=MAX(w, CL->max_value);
+			for (a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+			  {
+			    int s2=CL->residue_index[s1][r1][a+SEQ2];
+			    int r2=CL->residue_index[s1][r1][a+R2];
+			    int w2=CL->residue_index[s1][r1][a+WE];
+			    if ( w2==UNDEFINED || ( (CL->moca) && (CL->moca)->forbiden_residues  && ((CL->moca)->forbiden_residues[s1][r1]==UNDEFINED || (CL->moca)->forbiden_residues[s2][r2]==UNDEFINED)));
+			    else
+			      {
+				max_res[s1][r1][s2]+=w2;
+				max_res[s2][r2][s1]+=w2;
+				CL->max_value=MAX(w2, CL->max_value);
+			      }
+			  }
 		      }
 		  }
 		
@@ -2082,7 +1476,7 @@ Constraint_list * evaluate_constraint_list_reference ( Constraint_list *CL)
 	    
 	    return CL;
 	}
-			       
+
 /*********************************************************************/
 /*                                                                   */
 /*                         ENTRY MANIPULATION                        */
@@ -2102,7 +1496,7 @@ Constraint_list * add_list_entry2list (Constraint_list *CL, int n_para, ...)
 	   }
 	
 	va_start (ap,n_para);
-	entry=vcalloc (CL->entry_len, sizeof (int));
+	entry=vcalloc (CL->entry_len+1, sizeof (int));
 
 	for ( a=0; a<n_para; a++)
 	    {
@@ -2116,95 +1510,404 @@ Constraint_list * add_list_entry2list (Constraint_list *CL, int n_para, ...)
 	return CL;
 	}
 
-Constraint_list *add_entry2list ( CLIST_TYPE *entry, Constraint_list *CL)
-	{
-	  return insert_entry2list (entry, CL->ne++, CL);
-	}
-Constraint_list* insert_entry2list(CLIST_TYPE * entry, int pos, Constraint_list *CL)
-        {
-	int a;
-	for ( a=0; a< CL->entry_len; a++)
-	    vwrite_clist ( CL,pos, a,entry[a]);
-	return CL;
-	}
-CLIST_TYPE* extract_entry(CLIST_TYPE * entry, int pos, Constraint_list *CL)
-        {
-	int a;
-	
-	if ( entry==NULL)entry=vcalloc ( CL->entry_len, CL->el_size);
-	
-	for (a=0; a< CL->entry_len; a++)entry[a]=vread_clist(CL, pos, a);
-	return entry;
-	}
+int next_entry (Constraint_list *CL, int *s, int*r, int *l);
+int next_entry (Constraint_list *CL, int *s, int*r,int *l)
+{
+  Sequence *S=CL->S;
+  
+  if (s[0]>=S->nseq)return 0;
+  else if (r[0]>(CL->S)->len[s[0]])
+    {
+      r[0]=1;
+      l[0]=1;
+      s[0]++;
+      return -1;
+    }
+  else if ( l[0]>=CL->residue_index[s[0]][r[0]][0])
+    {
+      r[0]++;
+      l[0]=1;
+      return -1;
+    }
+  else
+    {
+      
+      l[0]+=ICHUNK;
+      return 1;
+    }
+}
 
-	
+int *extract_entry (Constraint_list *CL)
+{
+  static int s=0;
+  static int r=1;
+  static int l=1;
+  static int *entry;
+  int v;
+  
+  if (!entry)entry=vcalloc (100, sizeof (int));
+  if ( !CL){s=1;r=1;l=1;}
+  
+  
+  while ((v=next_entry (CL, &s, &r, &l)))
+    {
+      if (v==1)
+	{
+	  
+	  entry[SEQ1]=s;
+	  entry[R1]=r;
+	  entry[SEQ2]=CL->residue_index[s][r][l-ICHUNK+SEQ2];
+	  entry[R2]=  CL->residue_index[s][r][l-ICHUNK+R2];
+	  entry[WE]=  CL->residue_index[s][r][l-ICHUNK+WE];
+	  entry[CONS]=CL->residue_index[s][r][l-ICHUNK+CONS];
+	  entry[MISC]=CL->residue_index[s][r][l-ICHUNK+MISC];
+	  
+	  return entry;
+	}
+    }
+  s=0; r=1; l=1;
+  return NULL;
+}
+int *extract_entry_old (Constraint_list *CL)
+{
+
+  static int r;
+  static int s;
+  static int l=1;
+  static int *entry;
+  if (!entry)entry=vcalloc (ICHUNK+3, sizeof (int));
+  
+  if ( CL==NULL){r=0;s=0;l=1;return NULL;}
+  
+
+  if (s>=(CL->S)->nseq){return extract_entry (NULL);}
+
+  HERE ("-- %d %d %d (L=%d) ",s,r,l, (CL->S)->len[s]);
+  if (r>(CL->S)->len[s])
+    {
+      s++;
+      r=1;
+      l=1;
+      return extract_entry (CL);
+    }
+  else if (l>=CL->residue_index[r][s][0])
+    {
+      l=1;
+      r++;
+      return extract_entry (CL);
+    }
+  else
+    {
+      entry[SEQ1]=s;
+      entry[R1]=r;
+      memcpy (entry+2, CL->residue_index[r][s]+l+2,ICHUNK*sizeof (int));
+      entry[INDEX]=l;
+      l+=ICHUNK;
+      return entry;
+    }
+}
+    
+int CLisCompacted (Constraint_list *CL, char *t)
+{
+  int s1, r1, s2, r2,ps2,pr2,b,c;
+  Sequence *S=CL->S;
+  
+  for (s1=0; s1<S->nseq; s1++)
+    for (r1=1; r1<=S->len[s1]; r1++)
+      {
+	for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	  {
+	    s2=CL->residue_index[s1][r1][b+SEQ2];
+	    r2=CL->residue_index[s1][r1][b+R2];
+	    
+	    if (b>1)
+	      {
+		if (s2==ps2 && r2==pr2)
+		  {
+		    
+		    HERE ("%s -- NOT COMPACTED",t);
+		    exit(0);
+		  }
+		else if ( s2<=ps2 && r2<pr2)
+		  {
+		    HERE ("%s -- NOT SORTED",t);
+		    fprintf ( stderr, "\n");
+		    for (c=1; c<CL->residue_index[s1][r1][0]; c++)
+		      {
+			fprintf (stderr, "%5d ",CL->residue_index[s1][r1][c]);
+		      }
+		    
+		    exit(0);
+		  }
+	      }
+	    ps2=s2;
+	    pr2=r2;
+	  }
+      }
+  return 1;
+}
+	       
+int checkCL (Constraint_list *CL, char *t)
+{
+  int fail=0;
+  int a, b;
+  
+  for (a=0; a<(CL->S)->nseq; a++)
+    for (b=1; b<=(CL->S)->len[a]; b++)
+      {
+	HERE ("%s %4d ==> %d",t,CL->residue_index[a][b][0], CL->residue_index[a][b][0]%ICHUNK);
+      }
+  
+
+  if (!CL){HERE ("CL is Not declared");fail=1;}
+  else if ( !CL->S){HERE ("S is not declared in CL");fail=1;}
+  else if ( !CL->residue_index){HERE ("residue index is not declared");fail=1;}
+  else if (read_array_size_new (CL->residue_index)!=(CL->S)->nseq){HERE ("CL not well declared (S)");fail=1;}
+  else 
+    {
+      for (a=0; a<(CL->S)->nseq; a++)
+	{
+	  int s=(CL->S)->len[a]+1;
+	  int j=read_array_size_new (CL->residue_index[a]);
+	  if (s!=j)fail=1;
+	  
+	}
+      if (fail)
+	{
+	  for (a=0; a<(CL->S)->nseq; a++)
+	    {
+	      int s=(CL->S)->len[a]+1;
+	      int j=read_array_size_new (CL->residue_index[a]);
+	      if (s!=j)fail=1;
+	      HERE ("\t %s %d %d",(CL->S)->name[a], s-1,j);
+	    }
+	}
+    
+      if ( fail)
+	{
+	  HERE ("******** CHECKED CL: %s ******", t);
+	  exit (0);
+	}
+    }
+  return 1;
+}
+    
+
+Constraint_list *add_entry2list( CLIST_TYPE *entry, Constraint_list *CL)
+	{
+	 
+	  int s1=entry[SEQ1];
+	  int s2=entry[SEQ2];
+	  int r1=entry[R1];
+	  int r2=entry[R2];
+	  
+	  if (entry[INDEX])return add_entry2list2(entry, CL);
+	  
+	  entry[SEQ1]=s2;
+	  entry[SEQ2]=s1;
+	  entry[R1]=r2;
+	  entry[R2]=r1;
+	  add_entry2list2 (entry, CL);
+	   
+	  entry[SEQ1]=s1;
+	  entry[SEQ2]=s2;
+	  entry[R1]=r1;
+	  entry[R2]=r2;
+	  add_entry2list2 (entry, CL);
+	  return CL;
+	}
+	    
+int get_entry_index (int *entry, Constraint_list *CL);
+Constraint_list *insert_entry (CLIST_TYPE *entry, Constraint_list *CL, int i);
+Constraint_list *update_entry (CLIST_TYPE *entry, Constraint_list *CL, int i);
+Constraint_list *reset_entry (CLIST_TYPE *entry, Constraint_list *CL, int i);
+Constraint_list *remove_entry (CLIST_TYPE *entry, Constraint_list *CL, int i);
+Constraint_list *add_entry2list2 (CLIST_TYPE *entry, Constraint_list *CL)
+{
+  int s2=entry[SEQ2];
+  int r2=entry[R2];
+  int i=CL->residue_index[entry[SEQ1]][entry[R1]][0];
+  if (entry[INDEX]){return reset_entry (entry, CL, entry[INDEX]); }
+  else if (i==1){insert_entry (entry, CL,1);}
+  else
+    {
+      i=get_entry_index(entry,CL);
+      if (i<0)insert_entry (entry,CL,-i);
+      else update_entry (entry, CL, i);
+    }
+  return CL;
+}
+
+
+
+int get_entry_index (int *entry, Constraint_list *CL)
+{
+  int s1=entry[SEQ1];
+  int r1=entry[R1];
+  int s2=entry[SEQ2];
+  int r2=entry[R2];
+  int *r= CL->residue_index[s1][r1];
+  int delta=(r[0]-1)/ICHUNK;
+  return entry2index (s2,r2,r, delta/2, 1);
+}
+int entry2index (int s2,int r2, int *r, int i, int delta, int dir)
+{
+  
+  i=i+(delta*dir*ICHUNK);
+  
+  if (s2==r[i+SEQ2] && r2==r[i+R2]) return i;
+  else if ( i==1) return -1;
+  else if ( i==r[0]) return -r[0];
+  else 
+    {
+      int ps2, pr2, ns2,nr2,p,n;
+      ps2=r[i-ICHUNK+SEQ2];
+      pr2=r[i-ICHUNK+R2];
+      ns2=r[i+SEQ2];
+      nr2=r[i+R2];
+      
+      p=(s2>ps2 || (s2==ps2 && r2>pr2))?1:0;
+      n=(s2<ns2 || (s2==ns2 && r2<pr2))?1:0;
+      
+      if ( p && n) return -i;
+      else if (delta==0){HERE ("ERRROR"); exit (0);}
+      else if (p) return entry2index (s2, r2, r, i, delta/2, 1);
+      else if (n) return entry2index (s2, r2, r, i, delta/2, -1);
+    }
+}
+
+int get_entry_index_ref (int *entry, Constraint_list *CL)
+{
+  int s1=entry[SEQ1];
+  int r1=entry[R1];
+  int s2=entry[SEQ2];
+  int r2=entry[R2];
+  int *r=CL->residue_index[s1][r1];
+  int i,cs2,cr2;
+  
+  for (i=1; i<r[0]; i+=ICHUNK)
+    {
+      cs2=r[i+SEQ2];
+      cr2=r[i+R2];
+      
+      if ( cs2==s2 && cr2==r2)return i;
+      else if (s2<=cs2 && r2<cr2)return -i;
+    }
+  return r[0]*-1;
+}
+
+Constraint_list *remove_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
+{
+  //insert entry right after i;
+  static char *buf;
+  static int bsize;
+  int *from, *to;
+  int *r=CL->residue_index[entry[SEQ1]][entry[R1]];
+  int s;
+
+  i+=ICHUNK;
+  s=r[0]-i;
+  if (bsize<s){vfree(buf); bsize=s;buf=vcalloc (bsize,sizeof (int));}
+  memcpy(buf,r+i, s*sizeof (int));
+  memcpy(r+i-ICHUNK, buf, s*sizeof (int));
+  r[0]-=ICHUNK;
+  r=vrealloc(r,r[0]*sizeof (int));
+  CL->ne--;
+  return CL;
+}
+
+Constraint_list *insert_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
+{
+  //insert entry right after i;
+  static char *buf;
+  static int bsize;
+  int a, *from, *to;
+  int *r=CL->residue_index[entry[SEQ1]][entry[R1]];
+  int s;
+  //inserts a new entry between i-1 and i
+  
+  r=vrealloc (r, (r[0]+ICHUNK)*sizeof (int));
+  CL->residue_index[entry[SEQ1]][entry[R1]]=r;
+  CL->ne++;
+  
+  s=r[0]-i;
+  if (bsize<s){vfree(buf); bsize=s;buf=vcalloc (bsize,sizeof (int));}
+  if (s)memcpy(buf,r+i, s*sizeof (int));
+  if (s)memcpy(r+i+ICHUNK, buf, s*sizeof (int));
+  memcpy (r+i, entry, ICHUNK*sizeof (int));
+  r[0]+=ICHUNK;
+  return CL;
+}
+Constraint_list *reset_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
+{
+  
+   int *r=CL->residue_index[entry[SEQ1]][entry[R1]];
+   memcpy (r+i, entry, ICHUNK*sizeof (int));
+   return CL;
+}   
+Constraint_list *update_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
+{
+   int s1=entry[SEQ1];
+   int s2=entry[SEQ2];
+   int r1=entry[R1];
+   int r2=entry[R2];
+   
+   CL->residue_index[s1][r1][i+SEQ2]=entry[SEQ2];
+   CL->residue_index[s1][r1][i+R2]  =entry[R2];
+   CL->residue_index[s1][r1][i+WE]  =MAX(entry[WE],CL->residue_index[s1][r1][i+WE]);
+   CL->residue_index[s1][r1][i+CONS]+=entry[CONS];
+   CL->residue_index[s1][r1][i+MISC]=entry[MISC];
+   return CL;
+}
+  
 /*********************************************************************/
 /*                                                                   */
 /*                         SEARCH IN LIST (ARRAY AND FILE)           */
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-FILE * compare_list (FILE *OUT, Constraint_list *CL1,Constraint_list *CL2)
-	{
-	int a;
-	float nw_score=0;
-	float w_score=0;
-	int *l;
 
-	CLIST_TYPE  *entry=NULL;
-	int p;
-	
-	entry_len=CL1->entry_len;
-	qsort ( (void *)CL1->L, CL1->ne, CL1->entry_len*sizeof (int), compare_constraint_list_entry);
-	qsort ( (void *)CL2->L, CL2->ne, CL2->entry_len*sizeof (int), compare_constraint_list_entry);
-	
-	entry=vcalloc ( CL1->entry_len, CL1->el_size);
-	for ( a=0; a<CL1->ne; a++)
-		{
-		entry=extract_entry (entry,a,CL1);
-		if ((l=main_search_in_list_constraint (entry,&p,4,CL2))!=NULL)
-			{
-			vwrite_clist ( CL2, p,MISC, 1);
-			vwrite_clist ( CL1, a,MISC, 1);
-			nw_score++;
-			w_score+=l[WE];
-			}
-		}
-	fprintf ( OUT, "%-15s:%d pairs (Evaluated matrix), %d pairs in the other (%s)\n", CL2->list_name, CL2->ne, CL1->ne, CL1->list_name);
-        fprintf ( OUT, "%-15s:%d pairs\n", CL1->list_name, CL1->ne);
-        fprintf ( OUT, "Acurracy=%.2f%%\n", (nw_score/CL1->ne)*MAXID);
-        fprintf ( OUT, "Sensitiv=%.2f%%\n\n", (nw_score/CL2->ne)*MAXID);
-	return OUT;
-	}
 
 
 CLIST_TYPE *main_search_in_list_constraint ( int *key,int *p,int k_len,Constraint_list *CL)
+{
+  
+  
+  static CLIST_TYPE *l=NULL;
+  int a, s1, s2, r1, r2, ni;
+  
+  if (!l)l=vcalloc (CL->entry_len+1, sizeof (int));
+  for (a=0; a<CL->entry_len; a++)l[a]=key[a];
+  
+  l[INDEX]=1;
+  
+  s1=key[SEQ1];
+  r1=key[R1];
+  s2=key[SEQ2];
+  r2=key[R2];
+  ni=CL->residue_index[s1][r1][0];
+  for (a=1; a<ni; a+=ICHUNK)
+    {
+      if (CL->residue_index[s1][r1][a+SEQ2]==s2 && CL->residue_index[s1][r1][a+R2]==r2)
 	{
-	  
-	
-	  CLIST_TYPE *l=NULL;
-	  int start, end;
-
-	  CL=index_constraint_list (CL);
-	  
-	  start=CL->start_index[key[SEQ1]][key[SEQ2]];
-	  end  =CL->end_index  [key[SEQ1]][key[SEQ2]];
-	  
-	
-	  	  
-	  entry_len=CL->entry_len;
-	  l=bsearch (key, (CL->L)+(start*CL->entry_len), (end-start), sizeof (int)*CL->entry_len,  compare_constraint_list_entry4bsearch);
-	  p[0]=CL->L-l;
+	  l[SEQ1]=s1;
+	  l[R1]=r1;
+	  l[SEQ2]=s2;
+	  l[R2]=r2;
+	  l[WE]=CL->residue_index[s1][r1][a+WE];
+	  l[INDEX]=a;
 	  return l;
 	}
+    }
+  return NULL;
+}
+
 CLIST_TYPE return_max_constraint_list ( Constraint_list *CL, int field)
-        {
-	CLIST_TYPE max=0;
-	int a;
-	for ( a=0; a< CL->ne; a++)max=MAX( vread_clist(CL,a,field), max);
-	return max;
-	}
-	
+{
+  return constraint_list2max (CL);
+  }
+
+
  /*********************************************************************/
 /*                                                                   */
 /*                                                                   */
@@ -2215,17 +1918,8 @@ CLIST_TYPE return_max_constraint_list ( Constraint_list *CL, int field)
 /*********************************************************************/
 Constraint_list *sort_constraint_list_inv (Constraint_list *CL, int start, int len)
 	{
-	CL=sort_constraint_list   (CL, start,len);
-	
-
-	CL=invert_constraint_list (CL, start,len);
-	if ( start+len==CL->ne)
-	    {	   
-	    while (vread_clist(CL,CL->ne-1, SEQ1)==-1)CL->ne--;
-	    }
-	
-
-	return CL;
+	  return sort_constraint_list (CL, start, len);
+	  return CL;
 	}
 
 Constraint_list *invert_constraint_list (Constraint_list *CL, int start,int len)
@@ -2233,49 +1927,34 @@ Constraint_list *invert_constraint_list (Constraint_list *CL, int start,int len)
 	int a, b, c;
 	CLIST_TYPE tp;
 	
-	
-	for ( a=start, b=start+len-1; a<=b; a++, b--)
-	    {
-	    for (c=0; c< CL->entry_len; c++)
-	        {
-		tp=vread_clist(CL, a, c);
-		vwrite_clist(CL,a, c, vread_clist(CL, b, c));
-		vwrite_clist(CL,b, c, tp);
-		}
-	    }
 	return CL;
 	}
 	
 Constraint_list * sort_constraint_list(Constraint_list *CL, int start, int len)
         {
-
-	CL=sort_constraint_list_on_n_fields (CL, start, len, 0, CL->entry_len);
-
-	return CL;
-	}
-
-Constraint_list * sort_constraint_list_on_n_fields (Constraint_list *CL, int start, int len, int first_field, int n_fields)
-	{
-	  entry_len=CL->entry_len;
 	  
-	  if (CL->fp)
-	    {	   
-	      rewind( CL->fp);
-	      fseek      ( CL->fp, start*CL->el_size*CL->entry_len , SEEK_SET);
-	      hsort_list_file ( CL->fp,        len, CL->el_size, CL->entry_len,first_field,n_fields);
-	    }
-	  else if ( CL->L)
+	  int max=0;
+	  Sequence *S=CL->S;		
+	  int b,l,s1,r1,s2,r2,w2;
+	  for (s1=0; s1<S->nseq; s1++)
 	    {
-	      qsort ( (void *)CL->L, CL->ne, CL->entry_len*sizeof (int), compare_constraint_list_entry);
-	      //hsort_list_array ((void**)(CL->L)+start, len, CL->el_size, CL->entry_len,first_field,n_fields);
-	    }
+	      for (r1=1; r1<=S->len[s1]; r1++)
+		{	
+		  int nE=(CL->residue_index[s1][r1][0]-1)/ICHUNK;
+		  int sizE=sizeof(int)*ICHUNK;
+		  int *start=CL->residue_index[s1][r1]+1;
+		  qsort ((void*)start,nE,sizE,compare_constraint_list_entry);
+		}			
+	    }				
 	  return CL;
 	}
+
+
 int compare_constraint_list_entry4bsearch ( const void*vx, const void*vy)
 {
   int a;
   const int *x=vx, *y=vy;
-  for (a=SEQ1; a<=R2; a++)
+  for (a=0; a<3; a++)
     {
       if (x[a]<y[a])return -1;
       else if (x[a]>y[a]) return 1;
@@ -2286,8 +1965,7 @@ int compare_constraint_list_entry ( const void*vx, const void*vy)
 {
   int a;
   const int *x=vx, *y=vy;
-  
-  for (a=SEQ1; a<=WE; a++)
+  for (a=0; a<ICHUNK; a++)
     {
       if (x[a]<y[a])return -1;
       else if (x[a]>y[a]) return 1;
@@ -2350,7 +2028,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 
     if (CL->ne)
       {
-	constraint_list2raw_file(CL,tmp_list[n_list], "w");
+	dump_constraint_list(CL,tmp_list[n_list], "w");
 	CL->ne=0;
       }
 
@@ -2368,7 +2046,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 	    CL->local_stderr=vfopen("/dev/null", "w");
 	    in=CL->ne;
 	    CL=read_constraint_list (CL, fname[a], in_mode, mem_mode,weight_mode);	
-	    if (CL->ne>in)constraint_list2raw_file (CL,tmp_list[a], "w");
+	    if (CL->ne>in)dump_constraint_list(CL,tmp_list[a], "w");
 	    myexit (EXIT_SUCCESS);
 	  }
 	else
@@ -2383,8 +2061,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 		fprintf (local_stderr, "\n\txxx Retrieved %s",fname[a]);
 		if (tmp_list[b] && check_file_exists (tmp_list[b]))
 		  {
-		    CL=read_constraint_list_raw_file (CL,tmp_list[b]);
-		    compact_list (CL, 0, CL->ne, (strm (weight_mode, "cons")?"cons":"default"));
+		    CL=undump_constraint_list(CL,tmp_list[b]);
 		  }
 		ns--;
 	      }
@@ -2399,8 +2076,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 	fprintf (local_stderr, "\n\txxx Retrieved %s",fname[a]);
 	if (tmp_list[a] && check_file_exists (tmp_list[a]))
 	  {
-	    CL=read_constraint_list_raw_file (CL,tmp_list[a]);
-	    compact_list (CL, 0, CL->ne, (strm (weight_mode, "cons")?"cons":"default"));
+	    CL=undump_constraint_list (CL,tmp_list[a]);
 	  }
 	ns--;
       }
@@ -2408,12 +2084,11 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
     
     if (tmp_list[n_list] && check_file_exists (tmp_list[n_list]))
 	  {
-	    CL=read_constraint_list_raw_file (CL,tmp_list[n_list]);
-	    compact_list (CL, 0, CL->ne, (strm (weight_mode, "cons")?"cons":"default"));
+	    CL=undump_constraint_list(CL,tmp_list[n_list]);
 	  }
     
     CL->local_stderr=local_stderr;
-    CL=evaluate_constraint_list_reference (CL);
+    
     vfree (proclist);
     vfree (tmp_list);
     return CL;
@@ -2450,17 +2125,11 @@ Constraint_list* nfork_read_n_constraint_list(char **fname,int n_list, char *in_
     fprintf ( CL->local_stderr,"\nREAD/MAKE LIBRARIES:[%d]\n",n_list );
 
     CL=read_constraint_list (CL, fname[0], in_mode, mem_mode,weight_mode);
-    compact_list (CL, 0, CL->ne, "default");
     for ( a=1; a< n_list; a++)
         {	
 	CL=read_constraint_list (CL, fname[a], in_mode, mem_mode,weight_mode);	
-	if (strm (weight_mode, "cons"))compact_list (CL, 0, CL->ne, "cons");
-	else
-	  compact_list (CL, 0, CL->ne, "default");
 	}
     CL->local_stderr=local_stderr;
-    
-    CL=evaluate_constraint_list_reference (CL);
     
     return CL;
     }
@@ -2471,7 +2140,7 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 	Constraint_list *SUBCL=NULL;
 	static char *read_mode;
 	char *fname;
-	 
+	
 	fname=in_fname;	
 	if ( !read_mode)read_mode=vcalloc ( STRING, sizeof (char));
 	
@@ -2485,13 +2154,12 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 	else if ( fname[0]=='R'){sprintf ( read_mode, "profile") ;return CL;}
 	else if ( fname[0]=='X'){sprintf ( read_mode, "matrix");++fname;}    
 	else if ( fname[0]=='W'){sprintf ( read_mode, "structure");fname++;}
-
 	else
-	         {
-		     fprintf ( stderr, "\nERROR: The descriptor %s could not be identified as a file or a method.[FATAL]\nIf it is a method file please indicate it with M%s\n", fname, fname);
-		     myexit (EXIT_SUCCESS);
-		 }
-
+	  {
+	    fprintf ( stderr, "\nERROR: The descriptor %s could not be identified as a file or a method.[FATAL]\nIf it is a method file please indicate it with M%s\n", fname, fname);
+	    myexit (EXIT_SUCCESS);
+	  }
+	
 	fprintf (CL->local_stderr, "\n\t%s [%s]\n", fname, read_mode);
 	
 	
@@ -2505,64 +2173,65 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 	    free_char (l,-1);
 	  }
 	else if (strm(read_mode, "binary"))
-	      {
-		fprintf ( stderr, "\nERROR: Library %s: binary mode is not any more supported [FATAL:%s]\n", fname,PROGRAM);
-		myexit (EXIT_FAILURE);
-	      }
+	  {
+	    fprintf ( stderr, "\nERROR: Library %s: binary mode is not any more supported [FATAL:%s]\n", fname,PROGRAM);
+	    myexit (EXIT_FAILURE);
+	  }
 	else if ( strm (fname, "make_test_lib"))
 	  {
 	    CL=make_test_lib (CL);
 	  }
 	else if ( strm2 (read_mode,"ascii","lib"))
-              {
-
-		SUBCL=read_constraint_list_file(NULL, fname);
-
-	      }
-	   else if (strm(read_mode, "method"))
+	  {
+	    
+	    SUBCL=read_constraint_list_file(NULL, fname);
+	    
+	  }
+	else if (strm(read_mode, "method"))
+	  {
+	    CL=produce_list ( CL, CL->S, fname,weight_mode,mem_mode);
+	  }
+	else if (strm(read_mode, "matrix"))
+	  {
+	    CL->residue_index=NULL;
+	    CL->extend_jit=0;
+	    CL->M=read_matrice ( fname);
+	  }
+	else if ( strm ( read_mode, "structure"))
+	  {
+	    if ( CL->ne>0)
 	      {
-		CL=produce_list ( CL, CL->S, fname,weight_mode,mem_mode);
+		fprintf ( stderr, "\nERROR: Wstructure must come before Mmethod or Aaln [FATAL:%s]",PROGRAM);
+		myexit (EXIT_FAILURE);
 	      }
-	   else if (strm(read_mode, "matrix"))
+	    
+	    if ( !(CL->STRUC_LIST))
 	      {
-	      CL->L=NULL;
-	      CL->extend_jit=0;
-	      CL->M=read_matrice ( fname);
+		CL->STRUC_LIST=declare_sequence (1,1,10000);
+		(CL->STRUC_LIST)->nseq=0;
 	      }
-	   else if ( strm ( read_mode, "structure"))
-		{
-		if ( CL->ne>0)
-			{
-			fprintf ( stderr, "\nERROR: Wstructure must come before Mmethod or Aaln [FATAL:%s]",PROGRAM);
-			myexit (EXIT_FAILURE);
-			}
-		
-		if ( !(CL->STRUC_LIST))
-			{
-			CL->STRUC_LIST=declare_sequence (1,1,10000);
-			(CL->STRUC_LIST)->nseq=0;
-			}
-		SL=CL->STRUC_LIST;
-		
-		if ( check_file_exists(fname))
-			{
-			TS=main_read_seq ( fname);
-			for (a=0; a<TS->nseq; a++)sprintf (SL->name[SL->nseq++], "%s", TS->name[a]);
-			free_sequence (TS, TS->nseq);
-			}
-		else
-			{ 
-			sprintf (SL->name[SL->nseq++], "%s", fname);
-			}
-		}
-	   else if (strm (read_mode, "aln"))
+	    SL=CL->STRUC_LIST;
+	    
+	    if ( check_file_exists(fname))
 	      {
-		SUBCL=aln_file2constraint_list ( fname,SUBCL,weight_mode);
+		TS=main_read_seq ( fname);
+		for (a=0; a<TS->nseq; a++)sprintf (SL->name[SL->nseq++], "%s", TS->name[a]);
+		free_sequence (TS, TS->nseq);
 	      }
-	   else 
-	      {
-		SUBCL=read_constraint_list_file(SUBCL, fname);
+	    else
+	      { 
+		sprintf (SL->name[SL->nseq++], "%s", fname);
 	      }
+	  }
+	else if (strm (read_mode, "aln"))
+	  {
+	    CL=aln_file2constraint_list ( fname,CL,weight_mode);
+	  }
+	else 
+	  {
+	    SUBCL=read_constraint_list_file(SUBCL, fname);
+	  }
+	
 	
 	if (SUBCL)
 	  {
@@ -2607,13 +2276,15 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 	       char *lname;
 	       if (buf)vfree (buf);
 	       	
+
 	       buf=name2type_name(fname[a]);mode=buf[0];lname=buf+1;
 	      
 	       if (is_seq_source ('A', mode, SeqMode))
 	          {
 		  
-
+		    
 		  A=main_read_aln (lname,NULL);
+		  
 		  S1=aln2seq(A);
 		  S1=seq2unique_name_seq (S1);
 		  if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);} 
@@ -2716,7 +2387,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 	   return S;
 	   }
 
-	  
+	
 	
 	return NULL;
 	}
@@ -2742,8 +2413,8 @@ char * expand_constraint_list_file ( char *file)
   char **list;
   static char *buf;
 
-  if ( !grep_function ( "'+BLOCK+'", file))return file;
-
+  if (!token_is_in_file (file,"+BLOCK+"))return file;
+  
   new_file=vtmpnam (NULL);
   IN=vfopen ( file,"r");
   OUT=vfopen (new_file, "w");
@@ -2777,6 +2448,9 @@ Constraint_list * make_test_lib(Constraint_list *CL)
 {
   int a, b, c, l1;
   Sequence *S;
+  int *entry;
+
+  entry=vcalloc (CL->entry_len+1, sizeof (int));
   HERE ("cncn: making artificial lib");//Keep this warning alive
   S=CL->S;
  
@@ -2786,16 +2460,17 @@ Constraint_list * make_test_lib(Constraint_list *CL)
       fprintf ( stderr, "[%d-%d]", a, CL->ne);
       for ( b=a+1; b< S->nseq; b++)
 	{
+
 	  l1=MIN(S->len[a], S->len[b]);
 	  l1=MIN(10, l1);
 	  for (c=0; c<l1; c++)
 	    {
-	      vwrite_clist( CL,CL->ne,0,a);
-	      vwrite_clist( CL,CL->ne,1,b);
-	      vwrite_clist( CL,CL->ne,2,c+1);
-	      vwrite_clist( CL,CL->ne,3,c+1);
-	      vwrite_clist( CL,CL->ne,4,100);
-	      CL->ne++;
+	      entry[SEQ1]=a;
+	      entry[SEQ1]=b;
+	      entry[R1]=c+1;
+	      entry[R2]=c+1;
+	      entry[WE]=100;
+	      add_entry2list (entry, CL);
 	    }
 	}
     }
@@ -2803,7 +2478,7 @@ Constraint_list * make_test_lib(Constraint_list *CL)
 }
 Constraint_list * read_constraint_list_file(Constraint_list *CL, char *fname)
         {
-	int a, c,e,n,z;
+	  int a, c,e,n,z,i;
 	int seq_len, sn;
 	int s1, s2;
 	FILE *fp;
@@ -2825,13 +2500,18 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *fname)
 	char *stripped_file1;
 	char *stripped_file;
 
-
+	return fast_read_constraint_list_file (CL, fname);
+	
 
 	stripped_file1=strip_file_from_comments ("!", fname);
 	stripped_file=expand_constraint_list_file (stripped_file1);
 	small_S=read_seq_in_n_list (&fname, 1,NULL, NULL); 
 	
-	if ( !CL)
+	 for (i=0; i<small_S->nseq; i++)
+	    HERE ("%s %s", small_S->name[i], small_S->seq[i]);
+	
+	 exit (0);
+	 if ( !CL)
 	  {
 	    CL=declare_constraint_list ( small_S,NULL, NULL, 0,NULL, NULL);  
 	    CL->S=small_S;
@@ -2856,7 +2536,7 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *fname)
 	buf=vcalloc (lline, sizeof (char));	
 	sequence=vcalloc (lline, sizeof (char));
 	if ( !name)name=vcalloc ( 100, sizeof (char));
-	if ( !entry)entry=vcalloc ( CL->entry_len, CL->el_size);
+	if ( !entry)entry=vcalloc ( CL->entry_len+1, CL->el_size);
 	if ( !sn_list)sn_list=vcalloc (max_nseq, sizeof (int));
 	else 
 	  {
@@ -2975,9 +2655,7 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *fname)
 					SWAP(entry[SEQ1],entry[SEQ2]);
 					SWAP(entry[R1], entry[R2]);
 				      }
-				  
-				    for ( z=0; z< CL->entry_len; z++)vwrite_clist( CL,CL->ne, z, entry[z]);
-				    
+				    add_entry2list (entry, CL);
 				    CL->ne++;
 				  }
 				}
@@ -3005,122 +2683,71 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *fname)
 	return CL;
 	} 
 
-Constraint_list * read_constraint_list_raw_file(Constraint_list *CL, char *fname)
-{
-  FILE *fp;
-  int n=0, v;
-  static int *entry;
 
-  if ( !entry)entry=vcalloc (CL->entry_len, sizeof (int));
-  fp=vfopen (fname, "r");
-  
-  while (fscanf (fp, "%d ", &v)==1)
-    {
-      if (n==CL->entry_len)
-	{
-	  add_entry2list (entry, CL);
-	  n=0;
-	}
-      entry[n++]=v;
-    }
-   if (n==CL->entry_len)
-	{
-	  add_entry2list (entry, CL);
-	  n=0;
-	}
-   vfclose (fp);
-   return CL;
-}
 	   
 Constraint_list * fast_read_constraint_list_file(Constraint_list *CL, char *in_fname)
         {
 	  Sequence *NS;
-	  int **index;
-	  int *list=NULL;
-	  int c;
+	  int **index, *entry;
+	  int c,line=0,s1, s2, r1, r2, misc, cons,x,we;
 	  FILE *fp;
-	  CLIST_TYPE *entry=NULL;
-	  char *buf=NULL, *buf2;
+	  char *buf=NULL;
 	  char *fname;
-	  int i;
-	  
-
+	  int error=0;
+	  int keepNS=0;
 	  
 	  fname=expand_constraint_list_file (in_fname);
-	  
+	  NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
 	  if (!CL)
 	    {
-	      return read_constraint_list_file (CL,fname);
+	      CL=declare_constraint_list_simple(NS);
+	      keepNS=1;
 	    }
+	  index=fix_seq_seq (NS, CL->S);
+	  entry=vcalloc ( CL->entry_len+1, sizeof (int));
 	  
-	  entry=vcalloc (sizeof (int), CL->entry_len);
-	  NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
-	  index=index_seq_name(NS,CL->S);
-	  
-
-	  /*Read Constraint list*/
 	  fp=vfopen(fname,"r");
-	  i=0;
-	  while (i<=NS->nseq)
-	    {
-	      buf=vfgets ( buf, fp);
-	      if (buf[0]!='!')i++;
-	    }
+	  while ((c=fgetc(fp))!='#' && c!=EOF){line+=(c=='\n')?1:0;}
 	  
-	  while ( (c=fgetc (fp))!='#' && c!=EOF);
-	  if (c==EOF)
-	    {
-	      vfclose (fp);
-	      vfree (list);
-	      free_sequence (NS,-1);
-	      vfree (entry);
-	      vfree (buf);
-	      add_warning (stderr, "Warning: incomplete library [%s]",PROGRAM); 
-	      return CL;
-	    }
 	  ungetc (c, fp);
-	  
-	  
-
-	  while ((buf2=vfgets ( buf, fp))!=NULL)
+	  while ((buf=vfgets ( buf, fp))!=NULL)
 	    {
-	      if (buf2[0]=='!')continue;
-	      buf=buf2;
-	      
-	      list=string2num_list2 (buf, " #\n");
-	      
-	      if (buf[0]=='#')
+	      line++;
+	      if (buf[0]=='!')continue;
+	      else if (buf[0]=='#')
 		{
-		  sscanf ( buf, "#%d %d", &entry[SEQ1], &entry[SEQ2]);
-		  entry[SEQ1]=index[entry[SEQ1]-1][0];
-		  entry[SEQ2]=index[entry[SEQ2]-1][0];
-		  
+		  sscanf ( buf, "#%d %d", &s1, &s2);
+	      	  s1--; s2--;
+		  if (s1>NS->nseq || s2>NS->nseq)error=1;
 		}
 	      else
 		{
-		  sscanf (buf, "%d %d %d %d %d", &entry[R1], &entry[R2], &entry[WE], &entry[CONS], &entry[MISC]);
+		  cons=misc=r1=r2=we=0;
+		  x=sscanf (buf, "%d %d %d %d %d",&r1,&r2,&we,&cons,&misc);
 		  
-		  
-		  
-		  
-		  
-		  
-		  if ( (entry[SEQ1]>entry[SEQ2])|| (entry[SEQ1]==entry[SEQ2] && entry[R1]>entry[R2]))
+		  if (r1>NS->len[s1] || r2>NS->len[s2] || x<3)error=1;
+		  else
 		    {
-		      SWAP(entry[SEQ1],entry[SEQ2]);SWAP(entry[R1], entry[R2]);
+		  
+		      entry[SEQ1]=index[s1][0];
+		      entry[SEQ2]=index[s2][0];
+		      entry[R1]=index[s1][r1];
+		      entry[R2]=index[s2][r2];
+		      entry[WE]=we;
+		      entry[CONS]=cons;
+		      entry[MISC]=misc;
+		      if (entry[SEQ1]>-1 && entry[SEQ2]>-1 && entry[R1]>0 && entry[R2]>0 && entry[WE]>0)  
+			add_entry2list (entry, CL);
 		    }
-		  add_entry2list (entry, CL);
 		}
+	      if (error)printf_exit (EXIT_FAILURE,stderr,"Parsing Error [L:%d F:%s S:%s]",line,in_fname,buf);
 	    }
 	  vfclose (fp);
 	  
-	  
-	  
-	  vfree (list);
-	  free_sequence (NS,-1);
+	  if (!keepNS)free_sequence (NS,-1);
 	  vfree (entry);
 	  vfree (buf);
-	  
+	  free_int (index, -1);
 	  return CL;
 	} 	
   
@@ -3195,7 +2822,7 @@ int read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_n
 FILE * save_extended_constraint_list      (  Constraint_list *CL, char *mode, FILE *fp) 
 {
   int a, b;
-  
+  if (!CL || !CL->S || CL->residue_index)return fp;
   if ( !fp)fp=stdout;
   
     
@@ -3332,8 +2959,6 @@ FILE * save_constraint_list ( Constraint_list *CL,int start, int len, char *fnam
 	static int* translation;
 
 	
-	
-	
 	if ( fp==NULL)
 	   {
 	   if ( translation!=NULL)vfree(translation);
@@ -3358,11 +2983,7 @@ FILE * save_constraint_list ( Constraint_list *CL,int start, int len, char *fnam
 	   fp=save_list_header (fp,CL);
 	   fp=save_constraint_list_ascii(fp, CL, 0, CL->ne, translation);
 	   }
-	else if (strm(mode, "binary"))
-	   {
-	   if ( fp==NULL)fp=vfopen ( fname, "wb");
-	   fp=save_constraint_list_bin  (fp, CL, 0, CL->ne, translation);
-	   }
+	
 	else
 	    {
 	      
@@ -3415,31 +3036,10 @@ FILE *save_list_footer (FILE *OUT,Constraint_list *CL)
 	fprintf (OUT, "! SEQ_1_TO_N\n");
 	return OUT;
       }
-int constraint_list2raw_file ( Constraint_list *CL, char *fname, char *mode)
-{
-  FILE *fp;
-  if ( !CL || !CL->ne || !fname){return 0;}
-  
-  fp=vfopen (fname,mode);
-  fp=save_raw_constraint_list (fp, CL, 0, CL->ne, NULL);
-  vfclose (fp);
-  return CL->ne;
-  }
-FILE * save_raw_constraint_list   ( FILE *fp,Constraint_list *CL, int start,int len, int *translation)
-{
-  int a, b;
-  for ( b=0; b<CL->entry_len*CL->ne; b++)
-    {
-      fprintf ( fp, "%d ", CL->L[b]);
-    }
 
-  fprintf (fp, "\n");
-  return fp;
-}
 FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int len, int *translation)
 	{	
-	int a, b, s1, s2;
-        CLIST_TYPE x1, x2;
+	  int a, b, s1, s2, r1, r2, w2,x1, x2;
 
 	if (len==start && CL->cpu!=-1)
 	    {
@@ -3448,64 +3048,69 @@ FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int
 	    }
 	else
 	    {
-	    
-	    s1=translation[vread_clist(CL,start,SEQ1)];
-	    s2=translation[vread_clist(CL,start,SEQ2)];
-	   
-	
-	    if ( s1!=-1 && s2!=-1)fprintf ( OUT, "#%d %d\n", s1+1, s2+1);
-	    for ( a=start; a<(len+start); a++)
-		   {
-		   x1=translation[vread_clist(CL,a,SEQ1)];
-		   x2=translation[vread_clist(CL,a,SEQ2)];
-		   if ( x1==-1 || x2==-1);
-		   else 
-		       {
-		       if ( x1!=s1 || x2!=s2)
-			  {
-			  s1=x1;
-			  s2=x2;
-			  fprintf ( OUT, "#%d %d\n", s1+1, s2+1);
-			  }
-		       for ( b=2; b<CL->entry_len; b++) fprintf ( OUT, "%5d ", vread_clist(CL, a, b));
-		       fprintf (OUT, "\n");
-		       }
-		   }
+	      Sequence *S=CL->S;
+	      int ***cacheI=vcalloc (S->nseq, sizeof (int**));
+	      int **cacheR=vcalloc (S->nseq, sizeof (int*));
+	      int *tot=vcalloc ( S->nseq, sizeof (int));
+	      int *max=vcalloc ( S->nseq, sizeof (int));
+	      for (a=0;a<S->nseq; a++)
+		{
+		  cacheI[a]=vcalloc (S->len[a], sizeof (int*));
+		  cacheR[a]=vcalloc (S->len[a], sizeof (int));
+		}
+	      for (a=0; a<S->nseq; a++)max[a]=S->len[a];
+	      
+	      for (s1=0; s1<S->nseq; s1++)
+		{
+		  for (r1=1; r1<=S->len[s1]; r1++)
+		    {
+		      for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+			{
+			  
+			  s2=CL->residue_index[s1][r1][b+SEQ2];
+			  if (tot[s2]>=max[s2])
+			    {
+			      max[s2]+=100;
+			      cacheI[s2]=vrealloc (cacheI[s2], max[s2]*sizeof (int*));
+			      cacheR[s2]=vrealloc (cacheR[s2], max[s2]*sizeof (int*));
+			    }
+			  
+			  cacheI[s2][tot[s2]]=CL->residue_index[s1][r1]+b;
+			  cacheR[s2][tot[s2]]=r1;
+			  tot[s2]++;
+			}
+		    }
+		  
+		  for (s2=0;s2<S->nseq; s2++)
+		    {
+		      int x1=translation[s1];
+		      int x2=translation[s2];
+		      if (tot[s2] && x1!=-1 && x2!=-1 && x1<x2)
+			{
+			  fprintf ( OUT, "#%d %d\n", x1+1, x2+1);
+			  for ( r2=0; r2<tot[s2];r2++)
+			    {
+			      int *v=cacheI[s2][r2];
+			      fprintf (OUT, "%5d %5d %5d %5d %5d\n",cacheR[s2][r2], v[R2], v[WE], v[CONS], v[MISC]);
+			    }
+			}
+		      tot[s2]=0;
+		    }
+		}	      
+	      for (a=0; a<S->nseq; a++)
+		{
+		  vfree (cacheI[a]);
+		  vfree (cacheR[a]);
+		}
+	      vfree (cacheI); vfree (cacheR);
+	      vfree (tot);
+	      vfree (max);
 	    }
+	
 	return save_list_footer (OUT, CL);
 			
 	}
-FILE * save_constraint_list_bin ( FILE *OUT,Constraint_list *CL, int start,int len, int *translation)
-	{	
-	int a, b;
 
-	CLIST_TYPE x1, x2;
-	
-
-	if (len==start && CL->cpu!=-1)
-	    {
-	    
-	    return OUT;
-	    }
-	else
-	    {
-	    for ( a=start; a<(len+start); a++)
-		   {
-		   x1=translation[vread_clist(CL,a,SEQ1)];
-		   x2=translation[vread_clist(CL,a,SEQ2)];
-		   if ( x1==-1 || x2==-1);
-		   else 
-		       {
-		       for ( b=2; b<CL->entry_len; b++)
-		           {
-			   x1=vread_clist(CL,a,b);
-			   fwrite (&x1, CL->el_size, 1, OUT);
-			   }
-		       }
-		   }
-	    }
-	return OUT;			
-	}
 
 /*********************************************************************/
 /*                                                                   */
@@ -3513,60 +3118,95 @@ FILE * save_constraint_list_bin ( FILE *OUT,Constraint_list *CL, int start,int l
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/		
-Constraint_list * filter_constraint_list (Constraint_list *CL, int field, int T)
+
+
+
+Constraint_list * extend_constraint_list ( Constraint_list *CL)
 {
-  int a,b,c;
-  if (!CL || !CL->L)return CL;
-  for (a=0, b=0; a<CL->ne; a++)
+  Sequence *S;
+  int **cache;
+  int tot=0;
+  char *tmp;
+  FILE *fp;
+  int a,e,b,c;
+  int s1, r1, s2, r2,w2, s3, r3, w3;
+  
+  static int *entry;
+  if (!CL || !CL->residue_index || !CL->S)return CL;
+  S=CL->S;
+    
+  tmp=vtmpnam (NULL);
+  fp=vfopen (tmp, "w");
+  cache=declare_int (S->nseq, S->max_len+1);
+  if (!entry)entry=vcalloc ( CL->entry_len+1, sizeof (int));
+  for (s1=0; s1< S->nseq; s1++)
     {
-      if (CL->L[a*CL->entry_len+field]<T);
-      else
+      for ( r1=1; r1<=S->len[s1]; r1++)
 	{
-	  for (c=0; c<CL->entry_len; c++)CL->L[b*CL->entry_len+c]=CL->L[a*CL->entry_len+c];
-	  b++;
+	  
+	  cache[s1][r1]=1;
+	  entry[SEQ1]=s1;
+	  entry[R1]=r1;
+	  
+	  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+	    {
+	 
+	      s2=CL->residue_index[s1][r1][a+SEQ2];
+	      r2=CL->residue_index[s1][r1][a+R2];
+	      w2=CL->residue_index[s1][r1][a+WE];
+	      cache[s2][r2]=w2;
+	    }
+	 
+	  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+	    {
+	      s2=CL->residue_index[s1][r1][a+SEQ2];
+	      r2=CL->residue_index[s1][r1][a+R2];
+	      w2=CL->residue_index[s1][r1][a+WE];
+	    
+	      for (b=1; b<CL->residue_index[s2][r2][0]; b+=ICHUNK)
+		{
+		 s3=CL->residue_index[s2][r2][b+SEQ2];
+		 r3=CL->residue_index[s2][r2][b+R2];
+		 w3=CL->residue_index[s2][r2][b+WE]; 
+		
+		 if (!cache[s3][r3] && s3>s1)
+		   {
+		     entry[SEQ2]=s3;
+		     entry[R2]=r3;
+		     entry[WE]=MIN(w2, w3);
+		     tot++;c++;
+		     for (e=0; e<CL->entry_len; e++)fprintf ( fp, "%d ", entry[e]);
+		   }
+		}
+	    }
+	  cache[s1][r1]=0;
+	  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+	    {
+	      s2=CL->residue_index[s1][r1][a+SEQ2];
+	      r2=CL->residue_index[s1][r1][a+R2];
+	      cache[s2][r2]=0;
+	    }
 	}
     }
-  CL->ne=b;
-  CL->residue_indexed=0;
+  vfclose (fp);
+  CL=undump_constraint_list(CL, tmp);
+  free_int (cache, -1);
   return CL;
 }
-int constraint_list_is_connected ( Constraint_list *CL)
-{
-  int a, b, c, s1, s2;
-  int *connexions;
-  int rv =1;
-  Sequence*S;
 
-  if (!CL->ne) return 1;
-  
-  S=CL->S;
-  
-  connexions=vcalloc ((CL->S)->nseq+1, sizeof (int));
-  for ( a=0; a< CL->ne; a++)
-    {
-      s1=CL->L[a*CL->entry_len+SEQ1];
-      s2=CL->L[a*CL->entry_len+SEQ2];
-      connexions[s1]++;
-      connexions[s2]++;
-    }
-  for (a=0; a<S->nseq; a++)
-    {
-      if (!connexions[a])
-	{
-	  add_warning ( stderr, "ERROR: Sequence %s is not connected\n", (CL->S)->name[a]);
-	  rv=0;
-	}
-    }
-  return rv;
-}
 Constraint_list * nfork_relax_constraint_list (Constraint_list *CL);
 Constraint_list * fork_relax_constraint_list (Constraint_list *CL);
 Constraint_list * relax_constraint_list (Constraint_list *CL)
 {
+  
+  if (!CL || !CL->S || !CL->residue_index) return CL;
+  
+  
   if ( get_nproc()==1)return  nfork_relax_constraint_list (CL);
   else if (strstr ( CL->multi_thread, "relax"))return fork_relax_constraint_list (CL);
   else return nfork_relax_constraint_list (CL);
 }
+
 
 Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
 {
@@ -3579,8 +3219,11 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
   int * pid_list;
   int in;
 
+  return nfork_relax_constraint_list (CL);
+  
+#ifdef ladygaga  
   in=CL->ne;
-  if (!CL || !CL->L)return CL;
+  if (!CL || !CL->residue_index)return CL;
 
   fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d] ", get_nproc());
   
@@ -3663,61 +3306,61 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
   CL->ne=n;
   
   fprintf ( CL->local_stderr, "\nTotal Relaxation: [%d]--->[%d] Entries\n",in, CL->ne); 
-  CL->residue_indexed=0;
-  return CL;
   
+  return CL;
+#endif  
 }		
   
 Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 {
-  int a, s1, s2, r1, r2;
-  int max, score, n;
-  int thr;
+  int s1, r1, s2, r2, a;
+  Sequence *S=CL->S;
+  char *tmp;
+  FILE *fp;
+  int thr=10;
+  int nne;
   
-  if (!CL || !CL->L)return CL;
-
+  tmp=vtmpnam(NULL);
+  if (!CL || !CL->residue_index)return CL;
+  
   fprintf ( CL->local_stderr, "\nLibrary Relaxation:[%d] ", CL->ne);
-  for (max=0,a=0; a<CL->ne; a++)
+  nne=CL->ne;
+  
+  fp=vfopen (tmp, "w");
+  for (s1=0; s1< S->nseq; s1++)
     {
-      
-      s1=CL->L[a*CL->entry_len+SEQ1];
-      s2=CL->L[a*CL->entry_len+SEQ2];
-
-      r1=CL->L[a*CL->entry_len+R1];
-      r2=CL->L[a*CL->entry_len+R2];
-      
-      score=residue_pair_extended_list_pc (CL,s1, r1,s2, r2);
-      //HERE ("%d %d",  CL->L[a*CL->entry_len+WE],score);
-      CL->L[a*CL->entry_len+WE]=score;
-       
-    }
-
-  thr=10;
-    
-  for (n=0,a=0; a< CL->ne; a++)
-    {
-      score=CL->L[a*CL->entry_len+WE];
-      
-      if (score<=thr);
-      else
+      for ( r1=1; r1<=S->len[s1]; r1++)
 	{
-	  CL->L[n*CL->entry_len+SEQ1]=CL->L[a*CL->entry_len+SEQ1];
-	  CL->L[n*CL->entry_len+SEQ2]=CL->L[a*CL->entry_len+SEQ2];
-	  CL->L[n*CL->entry_len+R1]=CL->L[a*CL->entry_len+R1];
-	  CL->L[n*CL->entry_len+R2]=CL->L[a*CL->entry_len+R2];
-	  CL->L[n*CL->entry_len+WE]=score;
-	  n++;
+	  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+	    {
+	      s2=CL->residue_index[s1][r1][a+SEQ2];
+	      r2=CL->residue_index[s1][r1][a+R2];
+	      fprintf (fp, "%d ",residue_pair_extended_list_pc (CL,s1, r1,s2, r2));
+	    }
 	}
-      
     }
-  CL->L=vrealloc (CL->L, n*CL->entry_len*sizeof (int));
-  CL->ne=n;
+  vfclose (fp);
+  fp=vfopen (tmp, "r");
   
+  for (s1=0; s1< S->nseq; s1++)
+    {
+      for ( r1=1; r1<=S->len[s1]; r1++)
+	{
+	  
+	  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+	    {
+	      
+	      fscanf (fp, "%d ", &CL->residue_index[s1][r1][a+WE]);
+	    }
+	}
+    }
+  vfclose (fp);
+  filter_constraint_list (CL,WE,thr);
   fprintf ( CL->local_stderr, "--->[%d]\n", CL->ne); 
-  CL->residue_indexed=0;
   return CL;
-  
-}		
+}
+
+	  
 // relax constraint list for gene prediction
 
 Constraint_list * expand_constraint_list_4gp (Constraint_list *CL, int T)
@@ -3728,60 +3371,51 @@ Constraint_list * expand_constraint_list_4gp (Constraint_list *CL, int T)
   int n=0;
   int s1, s2, r1, r2,a,b,c,d,w;
   Sequence *S;
+  int *entry;
 
-  CL=index_res_constraint_list (CL,WE);
+  entry=vcalloc (CL->entry_len+1, sizeof (int));
+  
   S=CL->S;
-  L=vcalloc (max*CL->entry_len, sizeof (int));
   for (a=0; a<S->nseq; a++)//loop sequences
     {
-      for (b=0; b<S->len[a];b++)
+      for (b=1; b<=S->len[a];b++)
 	{
-	  for (c=1; c<CL->residue_index[a][b][0]-3;c+=3)
+	  for (c=1; c<CL->residue_index[a][b][0];c+=ICHUNK)
 	    {
 	      
 	      
 	      s2=a;
 	      r2=b;
-	      s1=CL->residue_index[a][b][c];;
-	      r1=CL->residue_index[a][b][c+1];
+	      s1=CL->residue_index[a][b][c+SEQ2];;
+	      r1=CL->residue_index[a][b][c+R2];
 	      w=residue_pair_extended_list_4gp (CL,s1, r1,s2, r2);
 	      if (w>T)
 		{
-		  if ( n>=max){max+=chunck; L=vrealloc (L, max*CL->entry_len*sizeof (int));}
-		  L[n*CL->entry_len+SEQ2]=s2;
-		  L[n*CL->entry_len+R2  ]=r2;
-		  L[n*CL->entry_len+SEQ1]=s1;
-		  L[n*CL->entry_len+R1  ]=r1;
-		  L[n*CL->entry_len+WE  ]=w;
-		  n++;
+		  entry[SEQ2]=s2;
+		  entry[SEQ1]=s1;
+		  entry[R1]=r2;
+		  entry[R2]=r1;
+		  entry[WE]=w;
+		  add_entry2list (entry, CL);
 		}
-	      for (d=c+3; d<CL->residue_index[a][b][0]; d+=3)
+	      for (d=c+3; d<CL->residue_index[a][b][0]; d+=ICHUNK)
 		{
 		  s2=CL->residue_index[a][b][d];
 		  r2=CL->residue_index[a][b][d+1];
 		  w=residue_pair_extended_list_4gp (CL,s1, r1,s2, r2);
 		  if (w>T)
 		    {
-		      if ( n>=max){max+=chunck; L=vrealloc (L, max*CL->entry_len*sizeof (int));}
-		      L[n*CL->entry_len+SEQ1]=s1;
-		      L[n*CL->entry_len+SEQ2]=s2;
-		      L[n*CL->entry_len+R1]=r1;
-		      L[n*CL->entry_len+R2]=r2;
-		      L[n*CL->entry_len+WE]=w;
-		      n++;
+		      entry[SEQ2]=s2;
+		      entry[SEQ1]=s1;
+		      entry[R1]=r2;
+		      entry[R2]=r1;
+		      entry[WE]=w;
 		    }
 		}
 	    }
 	}
     }
-  vfree (CL->L);
-  CL->L=L;
-  CL->residue_indexed=0;
-  CL->ne=n;
-
-  CL=compact_list (CL, 0,n, "best");
-  CL->residue_indexed=0;
-  
+  vfree (entry);
   return CL;
 }
 
@@ -3806,9 +3440,14 @@ Constraint_list * fork_relax_constraint_list_4gp (Constraint_list *CL)
   int * pid_list;
   int in;
 
+  return nfork_relax_constraint_list_4gp(CL);
+  
+#ifdef ladygaga
+
   in=CL->ne;
   if (!CL || !CL->L)return CL;
 
+  
   
   if ((chunk=CL->ne/get_nproc())==0)chunk=get_nproc();
   
@@ -3887,99 +3526,155 @@ Constraint_list * fork_relax_constraint_list_4gp (Constraint_list *CL)
  
   CL->L=vrealloc (CL->L, n*CL->entry_len*sizeof (int));
   CL->ne=n;
-  
-  CL->residue_indexed=0;
-  return CL;
-  
+s  return CL;
+#endif  
 }		
-  
-Constraint_list * nfork_relax_constraint_list_4gp (Constraint_list *CL)
+  Constraint_list * nfork_relax_constraint_list_4gp (Constraint_list *CL)
 {
-  int a, s1, s2, r1, r2;
-  int max, score, n;
-  int thr;
-  int tot;
+  int thr=10;
+  int s,r,a,t_s,t_r,l;
+  static int *entry;
+  Sequence *S=CL->S;
+  char *tmp;
+  FILE *fp;
+  int th=0;
   
+  tmp=vtmpnam(NULL);
+  entry=vcalloc (CL->entry_len, sizeof (int));
+  
+  if (!CL || !CL->residue_index)return CL;
 
-  
- 
-  if (!CL || !CL->L)return CL;
-  
- 
-   
-  for (max=0,a=0; a<CL->ne; a++)
+  fp=vfopen (tmp, "w");
+  for (s=0; s< S->nseq; s++)
     {
-      
-      s1=CL->L[a*CL->entry_len+SEQ1];
-      s2=CL->L[a*CL->entry_len+SEQ2];
-
-      r1=CL->L[a*CL->entry_len+R1];
-      r2=CL->L[a*CL->entry_len+R2];
-      
-      score=residue_pair_extended_list_4gp (CL,s1, r1,s2, r2);
-      
-      //HERE ("%d %d",  CL->L[a*CL->entry_len+WE],score);
-      CL->L[a*CL->entry_len+WE]=score;
-       
-    }
-
-  thr=0;
-    
-  for (tot=0,n=0,a=0; a< CL->ne; a++)
-    {
-      score=CL->L[a*CL->entry_len+WE];
-      if (score<=thr);
-      else
+      for ( r=1; r<=S->len[s]; r++)
 	{
-	  CL->L[n*CL->entry_len+SEQ1]=CL->L[a*CL->entry_len+SEQ1];
-	  CL->L[n*CL->entry_len+SEQ2]=CL->L[a*CL->entry_len+SEQ2];
-	  CL->L[n*CL->entry_len+R1]=CL->L[a*CL->entry_len+R1];
-	  CL->L[n*CL->entry_len+R2]=CL->L[a*CL->entry_len+R2];
-	  CL->L[n*CL->entry_len+WE]=score;
-	  n++;
+	  entry[SEQ1]=s;
+	  entry[R1]=r;
+	  
+	  for ( a=1; a<CL->residue_index[s][r][0]; a+=ICHUNK)
+	    {
+	 
+	      t_s=CL->residue_index[s][r][a+SEQ2];
+	      t_r=CL->residue_index[s][r][a+WE];
+	      fprintf (fp, "%d ",residue_pair_extended_list_4gp (CL,s, r,t_s, t_r));
+	    }
 	}
-      
     }
-  CL->L=vrealloc (CL->L, n*CL->entry_len*sizeof (int));
-  CL->ne=n;
-
-  CL->residue_indexed=0;
-  return CL;
+  vfclose (fp);
+  fp=vfopen (tmp, "r");
   
+  for (s=0; s< S->nseq; s++)
+    {
+      for ( r=1; r<=S->len[s]; r++)
+	{
+	  entry[SEQ1]=s;
+	  entry[R1]=r;
+	  
+	  for ( a=1; a<CL->residue_index[s][r][0]; a+=ICHUNK)
+	    {
+	      fscanf (fp, "%d ", &CL->residue_index[s][r][a+WE]);
+	    }
+	}
+    }
+  vfree (entry);
+  vfclose (fp);
+  return filter_constraint_list (CL,WE,th);
+}
+
+int constraint_list2max  ( Constraint_list *CL)
+{
+  int max=0;
+  Sequence *S=CL->S;		
+  int b,l,s1,r1,s2,r2,w2;
+  for (s1=0; s1<S->nseq; s1++)
+    {
+      for (r1=1; r1<=S->len[s1]; r1++)
+	{						
+	  for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	    {				
+	      s2=CL->residue_index[s1][r1][b+SEQ2];
+	      r2=CL->residue_index[s1][r1][b+R2];
+	      w2=CL->residue_index[s1][r1][b+WE];
+	      max=MAX(w2,max);
+	    }
+	}			
+    }				
+  return max;
 }		
+int constraint_list2ne  ( Constraint_list *CL)
+{
+  int max=0;
+  Sequence *S;
+  int b,l,s1,r1,s2,r2,w2;
+  if (!CL || !CL->residue_index || !CL->S)return 0;
+  
+  S=CL->S;		
+  for (s1=0; s1<S->nseq; s1++)
+    {
+      for (r1=1; r1<=S->len[s1]; r1++)
+	{
+	  max+=CL->residue_index[s1][r1][0]-1;
+	}			
+    }				
+  return max/ICHUNK;
+}
 int constraint_list2avg ( Constraint_list *CL)
 {
-  int a;
-  long tot=0;
-  for (a=0; a<CL->ne; a++)tot+= CL->L[a*CL->entry_len+WE];
-  return (tot)/(CL->ne);
-}
-int constraint_list2fraction_covered ( Constraint_list *CL)
-{
-  int a;
-  long tot=0, tot2=0;
-  int **w;
-  w=declare_int ((CL->S)->nseq+2, (CL->S)->max_len+10);
-  for (a=0; a<(CL->S)->nseq; a++)tot+=strlen ((CL->S)->seq[a]);
-  
-  for (a=0; a<CL->ne; a++)
+ 
+  int max=0, n=0;
+  Sequence *S=CL->S;		
+  int b,l,s1,r1,s2,r2,w2;
+  for (s1=0; s1<S->nseq; s1++)
     {
-      int s1, s2,r1, r2;
-      s1=CL->L[a*CL->entry_len+SEQ1];
-      s2=CL->L[a*CL->entry_len+SEQ2];
-      r1=CL->L[a*CL->entry_len+R1];
-      r2=CL->L[a*CL->entry_len+R2];
-      
-      if (!w[s1][r1]){tot2++; w[s1][r1]=1;}
-      if (!w[s2][r2]){tot2++; w[s2][r2]=1;}
-    }
-  free_int (w,-1);
-  tot=(tot2*100)/tot;
-  tot=tot*constraint_list2avg (CL);
-  return tot;
+      for (r1=1; r1<=S->len[s1]; r1++)
+	{
+	  for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	    {				
+	      s2=CL->residue_index[s1][r1][b+SEQ2];
+	      r2=CL->residue_index[s1][r1][b+R2];
+	      w2=CL->residue_index[s1][r1][b+WE];
+	      max+=w2;
+	      n++;
+	    } 
+	} 
+    }				
+  return (n==0)?0:max/n;
 }
 
-
+ 
+Constraint_list * filter_constraint_list (Constraint_list *CL,int field, int T)
+{
+  int s1,r1,b,c,d;
+  Sequence *S;
+  static int *buf;
+  static int bs;
+  
+  if (!CL || !CL->residue_index || !CL->S)return CL;
+  S=CL->S;
+  CL->ne=0;
+  for (s1=0; s1<S->nseq; s1++)
+    {
+      for ( r1=1; r1<=S->len[s1]; r1++)
+	{
+	  int *r=CL->residue_index[s1][r1];
+	  for (d=1,b=1; b<r[0]; b+=ICHUNK)
+	    {
+	      if (r[b+field]>T)
+		{
+		  if (d!=b)for (c=0; c<ICHUNK; c++){r[d+c]=r[b+c];}
+		  d+=ICHUNK;
+		  CL->ne++;
+		}
+	    }
+	  r[0]=d;
+	  CL->residue_index[s1][r1]=vrealloc (r, d*sizeof(int));;
+	}
+    }
+  
+  return CL;
+}
+	      
 Constraint_list * shrink_constraint_list (Constraint_list *CL)
 {
   int a, b, n, tot;
@@ -3987,6 +3682,8 @@ Constraint_list * shrink_constraint_list (Constraint_list *CL)
   Alignment *A, *B;
   int *ns, **ls;
 
+  if (!CL || !CL->S || !CL->residue_index) return CL;
+  
   ns=vcalloc (2, sizeof (int));
   ls=declare_int ((CL->S)->nseq, 2);
   
@@ -4014,8 +3711,6 @@ Constraint_list * shrink_constraint_list (Constraint_list *CL)
 	B->len_aln=strlen (B->seq_al[0]);
 	CL2=aln2constraint_list (B, CL2, "sim");
       }
-  vfree(CL->L);
-  CL->L=CL2->L;
   CL->ne=CL2->ne;
   return CL;
 }
@@ -4093,13 +3788,7 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
       for ( c=0; c< A->len_aln; c++)weight[c]=ref_weight*col[c];
       vfree (col);
     }
-  else if ( strm ( weight_mode, "pdb"))
-    {
-      if ( !(A->CL) || !(A->CL)->T)
-	{
-	  myexit(fprintf ( stderr, "\nCould not find the PDB structure"));
-	}
-    }
+
   else if ( strm (weight_mode, "overaln"))
     {
       ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-","idmat");
@@ -4115,272 +3804,143 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 }
 
 
-
-
-Constraint_list *aln2constraint_list      (Alignment *A, Constraint_list *CL,char *in_weight_mode)
+Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char *in_weight_mode)
 	{
-	Constraint_list *CLB=NULL;
-	int a, b, c,nres1, nres2;
-	int *weight=NULL;
-	int s1, s2;
-	int fixed_nres1, fixed_nres2;
-	int do_pdb=0;
-	int pdb_weight=0;
-	int set_misc;
-	char*alp=NULL;
-	char *p, *s;
-	char weight_mode [100];
-	int *top_seq, *sindex;
-	int use_top=0;
-	
-	
-	sprintf ( weight_mode , "%s", (!in_weight_mode || strm (in_weight_mode, "default"))?"sim":in_weight_mode);
-	
-	if ( !A)
-	  return CL;	
-	
-	if ( !CL)
-	  {
-	    Sequence *S;
-	    S=aln2seq (A);
-	    CL=declare_constraint_list (S,NULL, NULL, 0,NULL, NULL);  
-	    CL->S=S;
-	  }
-	CLB=(Constraint_list *)A->CL;
-	
-	
-	do_pdb=(strstr ( weight_mode, "pdb"))?1:0;
-	if ( (p=strstr (weight_mode, "_subset_")))
-	  {
-	    alp=strchr (weight_mode, '_')+1;
-	    p[0]='\0';
-	  }
-	
-	A=reorder_aln (A, (CL->S)->name, (CL->S)->nseq);
-	sindex=vcalloc (A->nseq, sizeof(int));
-	for (a=0; a<A->nseq; a++)sindex[a]=name_is_in_list (A->name[a], (CL->S)->name, (CL->S)->nseq, 100);
-	
-	
-	top_seq=vcalloc (A->len_aln, sizeof (int));
-	for (c=0; c<A->len_aln; c++)
-	  {
-	    for (a=0; a<A->nseq; a++)
-	      {
-		if (sindex[a]!=-1 && !is_gap(A->seq_al[sindex[a]][c])){top_seq[c]=sindex[a];a=A->nseq;}
-	      }
-	  }
-	
-	for ( a=0; a<A->nseq-1; a++)
-	  {
-	    for (set_misc=0,b=a+1; b< A->nseq; b++)
-	      {	
-		s1=sindex[a];
-		s2=sindex[b];
-		if ( s1==-1 || s2==-1)
-		  {
-		    if ( getenv4debug ("DEBUG_LIBRARY"))
-		      fprintf ( stderr, "\n[DEBUG_LIBRARY:aln2constraint_list]Could use a pair of constraints");
-		  }
-		else if ( s1!=-1 && s2!=-1)
-		  {
-		    int use_pair;
-		    
-		    weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
-		    
-		    for (nres1=A->order[a][1], nres2=A->order[b][1], c=0; c< A->len_aln; c++)
-		      {
-			int isgop1, isgop2;
-			if (use_top && top_seq[c]!=a)continue; //make nr dataset for MSAs
-			
-			isgop1=is_gop(c, A->seq_al[a]);
-			isgop2=is_gop(c, A->seq_al[b]);
-			nres1+=!is_gap(A->seq_al[a][c]);
-			nres2+=!is_gap(A->seq_al[b][c]);
-			
-			if ( strm ( weight_mode, "pdb") && CLB)
-			  {
-			    
-			    pdb_weight=MAX(0,(CLB->evaluate_residue_pair)(CLB,0, nres1,1,nres2));
-			  }
-			use_pair=1;
-			use_pair=use_pair && !is_gap(A->seq_al[a][c]);
-			use_pair=use_pair && !is_gap(A->seq_al[b][c]);
-			use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
-			use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
-			use_pair=use_pair && !(do_pdb && pdb_weight==0);
-			use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
-			
-			if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
-			if (use_pair)
-			  {
-			    
-			    fixed_nres1=(!A->seq_cache)?nres1:A->seq_cache[s1][nres1];
-			    fixed_nres2=(!A->seq_cache)?nres2:A->seq_cache[s2][nres2];
-			    
-			    if ( fixed_nres1==-1 || fixed_nres2==-1)
-			      {
-				fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[a], nres1,fixed_nres1 );
-						fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[b], nres2,fixed_nres2 );
-						myexit(EXIT_FAILURE);
-			      }
-			    
-			    if ( fixed_nres1 && fixed_nres2)
-			      {
-				vwrite_clist (CL,CL->ne, SEQ1, s1);
-				vwrite_clist (CL,CL->ne, SEQ2, s2);
-				vwrite_clist (CL,CL->ne, R1,fixed_nres1);
-				vwrite_clist (CL,CL->ne, R2,fixed_nres2);
-				
-				if (do_pdb)
-				  {
-				    
-				    vwrite_clist (CL,CL->ne, WE,(NORM_F/MAXID)*pdb_weight );
-				  }
-				else
-				  {
-				    
-				    vwrite_clist (CL,CL->ne, WE,(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]) );
-				  }
-				vwrite_clist (CL,CL->ne, CONS,1);
-				if (!set_misc)
-				  {
-				    vwrite_clist (CL,CL->ne, MISC,A->len_aln);
-				    set_misc=1;
-				  }
-				else 
-				  {
-				    vwrite_clist (CL,CL->ne, MISC,0);
-				  }
-				CL->ne++;
-			      }
-			  }
+	  int a, b, c,nres1, nres2;
+	  int *weight=NULL;
+	  int s1, s2;
+	  int fixed_nres1, fixed_nres2;
+	  int do_pdb=0;
+	  int pdb_weight=0;
+	  int set_misc;
+	  char*alp=NULL;
+	  char *p, *s;
+	  char weight_mode [100];
+	  int *cache;
+	  int top=0;
+	  int *entry;
+	  
+	  entry=vcalloc (CL->entry_len+1, sizeof (int));
+	  
+	  if ( atoigetenv ("TOP4TC")){HERE ("TOP=1");top=1;}
+	  
+	  sprintf ( weight_mode , "%s", (!in_weight_mode || strm (in_weight_mode, "default"))?"sim":in_weight_mode);
+	  
+	  if ( !A)return CL;	
+	  A=fix_aln_seq (A, (CL->S));
+	  
+	  if ( !CL)
+	    {
+	      Sequence *S;
+	      S=aln2seq (A);
+	      CL=declare_constraint_list (S,NULL, NULL, 0,NULL, NULL);  
+	      CL->S=S;
+	    }
+	  
+	  cache=vcalloc (A->len_aln, sizeof (int));
+	  
+	  if ( (p=strstr (weight_mode, "_subset_")))
+	    {
+	      alp=strchr (weight_mode, '_')+1;
+	      p[0]='\0';
+	    }
+	  
+	  
+	  for ( a=0; a<A->nseq-1; a++)
+	    {
+	      s1=name_is_in_list (A->name[a], (CL->S)->name, (CL->S)->nseq, 100);
+	      for (set_misc=0,b=a+1; b< A->nseq; b++)
+		{	
+		  s2=name_is_in_list (A->name[b], (CL->S)->name, (CL->S)->nseq, 100);
+		  
+		  if ( s1==-1 || s2==-1)
+		    {
+		      if ( getenv4debug ("DEBUG_LIBRARY"))
+			fprintf ( stderr, "\n[DEBUG_LIBRARY:aln2constraint_list]Could use a pair of constraints");
+		    }
+		  else if ( s1!=-1 && s2!=-1)
+		    {
+		      int use_pair;
+		      
+		      weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
+		      
+		      for (nres1=A->order[a][1], nres2=A->order[b][1], c=0; c< A->len_aln; c++)
+			{
+			  int isgop1, isgop2;
+			  int isgap1, isgap2;
+			  
+			  isgop1=is_gop(c, A->seq_al[a]);
+			  isgop2=is_gop(c, A->seq_al[b]);
+			  isgap1=is_gap(A->seq_al[a][c]);
+			  isgap2=is_gap(A->seq_al[b][c]);
+			  nres1+=!isgap1;
+			  nres2+=!isgap2;
+			  
+			  if (cache[c]==-1 && top)continue;
+			  if (!isgap1)cache[c]=1;
+			  if (cache[c] && b==A->nseq-1)cache[c]=-1;
+			  
+			  use_pair=1;
+			  use_pair=use_pair && !is_gap(A->seq_al[a][c]);
+			  use_pair=use_pair && !is_gap(A->seq_al[b][c]);
+			  use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
+			  use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
+			  use_pair=use_pair && !(do_pdb && pdb_weight==0);
+			  use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
+			  
+			  if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
+			  
+			  /*if ( !is_gap(A->seq_al[a][c]) && !is_gap(A->seq_al[b][c]) && A->seq_al[b][c]!=UNDEFINED_RESIDUE && A->seq_al[a][c]!=UNDEFINED_RESIDUE && !(do_pdb && pdb_weight==0))*/
+			  if (use_pair)
+			    {
+			      
+			      fixed_nres1=(!A->seq_cache)?nres1:A->seq_cache[s1][nres1];
+			      fixed_nres2=(!A->seq_cache)?nres2:A->seq_cache[s2][nres2];
+			      
+			      
+			      if ( fixed_nres1==-1 || fixed_nres2==-1)
+				{
+				  fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[a], nres1,fixed_nres1 );
+				  fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[b], nres2,fixed_nres2 );
+				  
+				  myexit(EXIT_FAILURE);
+				}
+			      
+			      if ( fixed_nres1 && fixed_nres2)
+				{
+				  
+				  entry[SEQ1]=s1;
+				  entry[SEQ2]=s2;
+				  entry[R1]=nres1;
+				  entry[R2]=nres2;
+				  if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
+				  else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
+				  add_entry2list (entry, CL);
+				}
+			      
+			    }
 		      }
 		  }
 	      }
 	  }
-	vfree (top_seq);
-	vfree (sindex);
+	vfree (entry);
+	vfree (cache);
 	vfree (weight);
 	if (A->A) 
 	  {
 	    return aln2constraint_list (A->A, CL, weight_mode);
 	  }
 	else
-	  return CL;
+	  {
+	    return CL;
+	  }
 	}
 
-double **list2mat (Constraint_list *CLin,int s1,int s2, double *min, double *max)
-        {
-	double ** mat;
-	int a, r1, r2;
-	int min_def=0;
-	Constraint_list *CL;
-	static Sequence *S;
-
-	
-	int row, column;
-	if ( S==NULL)S=declare_sequence ((CLin->S)->min_len, (CLin->S)->max_len,(CLin->S)->nseq); 	
-	sprintf ( S->name[0], "%s",(CLin->S)->name[s1]);
-	sprintf ( S->name[1],"%s",(CLin->S)->name[s2]);
-        S->nseq=2;
-	
-        row   =(CLin->S)->len[s1];
-	column=(CLin->S)->len[s2];
-	
-	if ( CLin->extend_jit)	
-	    CL=extend_list(CLin,"mem",CLin->extend_clean_mode, CLin->extend_compact_mode, CLin->do_self, S);
-	else
-	    CL=CLin;
 
 
-	min[0]=max[0];
-	mat=declare_double ( row, column);
 
-	for ( a=0; a<CL->ne; a++)
-	    {
-	    r1=vread_clist(CL,a,R1)-1;
-	    r2=vread_clist(CL,a,R2)-1;
-	    if ( vread_clist(CL,a,SEQ1)==s1 &&vread_clist(CL,a,SEQ2)==s2)
-		{
-		mat[r1][r2]=(double)vread_clist(CL,a,WE);
-		if (min_def==0)
-		   {
-		   min_def=1;
-		   min[0]=mat[r1][r2];
-		   max[0]=mat[r1][r2];
-		   }
-		else
-		   {
-		   min[0]=(min[0]<mat[r1][r2])?min[0]:mat[r1][r2];
-		   max[0]=(max[0]>mat[r1][r2])?max[0]:mat[r1][r2];
-		   }
-		}
-	    else if (vread_clist(CL,a,SEQ2)==s1 &&vread_clist(CL,a,SEQ1)==s2) 
-		{
-		mat[r2][r1]=(double)vread_clist(CL,a,WE);
-			if (min_def==0)
-		   {
-		   min_def=1;
-		   min[0]=mat[r2][r1];
-		   max[0]=mat[r2][r1];
-		   }
-		else
-		   {
-		   min[0]=(min[0]<mat[r2][r1])?min[0]:mat[r2][r1];
-		   max[0]=(max[0]>mat[r2][r1])?max[0]:mat[r2][r1];
-		   }
-		}
-	    }
-	return mat;
-	}
 
-Constraint_list * constraint_list2bin_file(Constraint_list *clist)
-        {
-	int a,b;
-	
-	clist->fp=tmpfile();
-	for ( a=0; a< clist->ne; a++)
-	    for ( b=0; b<clist->entry_len; b++)
-	        {
-		fwrite (&clist->L[a*clist->entry_len+b],clist->el_size, 1,clist->fp);
-		}
-	return clist;
-	}
 
-FILE * bin_file2constraint_list ( Constraint_list *CL, FILE *fp, char *name)
-        {
-	int a, b, s1, s2;
-	CLIST_TYPE *entry;
-	
-	if ( fp==NULL)fp=vfopen ( name, "w");
-	entry=vcalloc ( CL->entry_len, CL->el_size);
-	fprintf ( fp, "%d\n", (CL->S)->nseq);
-	for ( a=0; a< (CL->S)->nseq; a++)fprintf (fp, "%s %d %s\n", (CL->S)->name[a], (CL->S)->len[a], (CL->S)->seq[a]);
-	
-
-	rewind ( CL->fp);
-	fread(entry, CL->el_size, CL->entry_len, CL->fp);
-	s1=entry[SEQ1];
-	s2=entry[SEQ2];
-	fprintf (fp, "#%d %d\n", s1, s2);
-	for ( b=2; b< CL->entry_len; b++)fprintf (fp, "%5d ",entry[b]);
-	fprintf (fp, "\n");
-	for ( a=1; a< (CL->ne); a++)
-	    {
-	    fread(entry, CL->el_size, CL->entry_len, CL->fp);
-	    if ( entry[SEQ1]!=s1 || entry[SEQ2]!=s2)
-	       {
-	       s1=entry[SEQ1];
-	       s2=entry[SEQ2];
-	       fprintf (fp, "#%d %d\n", s1, s2);
-	       }
-	    for ( b=2; b< CL->entry_len; b++)fprintf (fp, "%5d ",entry[b]);
-	    fprintf (fp, "\n");
-	    }
-	fprintf (fp, "! CPU %d\n",get_time());
-	
-	return fp;
-	}
 int **list2residue_total_weight ( Constraint_list *CL)
         {
 	  /*Returns 
@@ -4393,20 +3953,29 @@ int **list2residue_total_weight ( Constraint_list *CL)
 	  */
 
 	int **tot_weight;
-	int s1, s2, r1, r2, w, a, b;
+	
+	int max=0;
+	Sequence *S=CL->S;		
+	int a,b,s1,r1,s2,r2,w2;
 
 
-	tot_weight=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
-	for ( a=0; a<CL->ne; a++)
-	    {
-	    r1=vread_clist(CL,a,R1)-1;
-	    r2=vread_clist(CL,a,R2)-1;
-	    s1=vread_clist(CL,a,SEQ1);
-	    s2=vread_clist(CL,a,SEQ2);
-	    w=vread_clist(CL,a,WE);
-	    tot_weight[s1][r1]+=w;
-	    tot_weight[s2][r2]+=w;
-	    }
+	if ( !CL || !CL->S || (CL->S)->nseq==0)return NULL;
+	S=CL->S;
+	tot_weight=declare_int2 (S->nseq, S->len, 1);
+	for (s1=0; s1<S->nseq; s1++)
+	  {
+	    for (r1=1; r1<=S->len[s1]; r1++)
+	      {						
+		for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+		  {				
+		    s2=CL->residue_index[s1][r1][b+SEQ2];
+		    r2=CL->residue_index[s1][r1][b+R2];
+		    w2=CL->residue_index[s1][r1][b+WE];
+		    tot_weight[s1][r1]+=w2;
+		    tot_weight[s2][r2]+=w2;
+		  }
+	      }			
+	  }	
 	for (a=0; a<(CL->S)->nseq; a++)
 	  for (b=0; b<(CL->S)->len[a]; b++)
 	    tot_weight[a][b]/=(CL->S)->nseq;
@@ -4414,133 +3983,9 @@ int **list2residue_total_weight ( Constraint_list *CL)
 	return tot_weight;
 	}
 
-int **list2residue_total_extended_weight ( Constraint_list *CL)
-        {
-	  /*Returns 
-	    tot_extended_weight[nseq][maxlen]
-	    where each residue is associated with the total of its weights in CL
-	    ####IMPORTANT
-            
-	          -the numbering of the residues  goes from 1 to L:
-	          -the numbering of the sequences goes from 0 to N-1:
-	  */
-
-	static int **tot_extended_weight;
-	int s1, s2, r1, r2, w;
-	
-	if (CL->residue_indexed && tot_extended_weight);
-	else
-	  {
-	    if (tot_extended_weight) free_int (tot_extended_weight, -1);
-	    if (CL->residue_indexed==0)index_res_constraint_list (CL,WE);
-	    
-
-	    tot_extended_weight=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
-	    
-	    for ( s1=0; s1< (CL->S)->nseq-1; s1++)
-	      for ( s2=s1+1; s2< (CL->S)->nseq; s2++)
-		for (r1=1; r1<=(CL->S)->len[s1]; r1++)
-		  for (r2=1; r2<=(CL->S)->len[s2]; r2++)
-		    {
-		      w=(CL->evaluate_residue_pair)( CL, s1, r1, s2, r2);
-		      tot_extended_weight[s1][r1]+=w;
-		      tot_extended_weight[s2][r2]+=w;
-		    }
-	  }
-	return tot_extended_weight;
-	}
-int **list2residue_partial_extended_weight ( Constraint_list *CL)
-        {
-	  /*Returns 
-	    tot_extended_weight[nseq][maxlen]
-	    where each residue is associated with the total of its weights in CL
-	    ####IMPORTANT
-            
-	          -the numbering of the residues  goes from 1 to L:
-	          -the numbering of the sequences goes from 0 to N-1:
-	  */
-
-	int **tot_extended_weight;
-	int s1, s2, r1, r2, w1, w2, a;
 
 
-	tot_extended_weight=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
-	for ( a=0; a<CL->ne; a++)
-	    {
-	    r1=vread_clist(CL,a,R1);
-	    r2=vread_clist(CL,a,R2);
-	    s1=vread_clist(CL,a,SEQ1);
-	    s2=vread_clist(CL,a,SEQ2);
-	    w1=(CL->evaluate_residue_pair)( CL, s1, r1, s2, r2);
-	    w2=(CL->evaluate_residue_pair)( CL, s2, r2, s1, r1);
-	    if ( w1!=w2)fprintf ( stderr, "*");
 
-	    tot_extended_weight[s1][r1]+=w1;
-	    tot_extended_weight[s2][r2]+=w2;
-	    }
-	return tot_extended_weight;
-	}
-  
-
-/*******************************************************************************************/
-/*                                                                                         */
-/*                                                                                         */
-/*                              clean functions                                            */
-/*                                                                                         */
-/*                                                                                         */
-/*                                                                                         */
-/*******************************************************************************************/
-Constraint_list *clean ( char *clean_mode,Constraint_list *CL,int start, int len)
-	{
-	
-	if ( strm ( clean_mode, "shadow"))   CL=clean_shadow (CL,start,len);	
-	else if ( strm5( clean_mode, "","NO","no","No","default"));
- 	else	add_warning ( CL->local_stderr, "\nWARNING: The %s CLEANING MODE DOES NOT EXIST\n", clean_mode);
-	
-	return CL;
-	}
-
-
-Constraint_list * clean_shadow ( Constraint_list *CL, int start, int len)
-	{
-	int s1, s2, r1, a, b, end;
-	int max, min;
-		
-	s1=vread_clist (CL, start, SEQ1);
-	s2=vread_clist (CL, start, SEQ2);
-	r1=vread_clist (CL, start, R1);
-	
-	
-	for ( a=start; a<(start+len);)
-		{
-		
-		max=min=vread_clist (CL, a, WE);
-		while ( a<CL->ne && vread_clist (CL, a, SEQ1)==s1 && vread_clist (CL, a, SEQ2)==s2 && vread_clist (CL, a, R1)==r1)
-			{
-			max=(vread_clist (CL, a, WE)>max)?vread_clist (CL, a, WE):max;
-			min=(vread_clist (CL, a, WE)<min)?vread_clist (CL, a, WE):min;
-			a++;
-			}
-		end=a;
-		
-		if ((end-start)>1)
-			{
-			for ( b=start; b<end; b++)
-				if ( vread_clist (CL, b, WE)<max)vwrite_clist (CL, b, SEQ1,-1);
-			}
-		start=end;
-		if ( start<CL->ne)
-			{
-			s1=vread_clist (CL, start, SEQ1);
-			s2=vread_clist (CL, start, SEQ2);
-			r1=vread_clist (CL, start, R1);
-			}
-		}
-	CL=sort_constraint_list_inv (CL, start, (CL->ne-start));
-	CL=sort_constraint_list (CL,start,(CL->ne-start)  );	
-
-	return CL;
-	}
 /*********************************************************************/
 /*                                                                   */
 /*                         LIST FUNCTIONS                            */
@@ -4559,6 +4004,7 @@ Constraint_list *merge_constraint_list   ( Constraint_list *SL, Constraint_list 
     {
       return SL;
     }
+  else if ( SL==ML) return SL;
   else if ( SL->S == ML->S)
     {
       return fast_merge_constraint_list (SL, ML, mode);
@@ -4572,331 +4018,103 @@ Constraint_list *merge_constraint_list   ( Constraint_list *SL, Constraint_list 
 Constraint_list *fast_merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode)
 {
   int l;
+  static char *tmp;
 
-  l=ML->ne+SL->ne;
-
-  ML->max_L_len=l;
-  ML->seq_indexed=0;
-  ML->residue_indexed=0;
-  if (ML->ne==0 || !ML->L)ML->L=vcalloc (l*ML->entry_len, sizeof (int));
-  else ML->L=vrealloc (ML->L, sizeof (int)*l*ML->entry_len);
-  
-  memcpy (ML->L+(ML->ne*ML->entry_len), SL->L, SL->ne*sizeof (int)*SL->entry_len);
- 
-  ML->ne+=SL->ne;
-  return ML;
-  
+  if ( !tmp)tmp=vtmpnam (NULL);
+  dump_constraint_list (SL, tmp, "w");
+  return undump_constraint_list (ML, tmp);
 }
 
 Constraint_list *slow_merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode)
 {
-  int a, s1, s2;
-  Sequence *S1, *S2;
-  int **name_index;
-  int **seq_index;
-  CLIST_TYPE *entry=NULL;
-
-  if ( !ML)return SL;
+  static char *tmp;
+  if (!tmp)tmp=tmpnam(NULL);
+  safe_dump_constraint_list(SL,tmp,"w", ML->S);
+  return undump_constraint_list (ML, tmp);
+}
+Constraint_list *compact_list (Constraint_list *CL,char *compact_mode)
+{
+  //list must be sorted before hand
+  int ws=0;
+  int **W=NULL;
+  Sequence *S=CL->S;
+  int s1, s2, r1, r2, w2,b,cp, ps2, pr2;
+  char mode [100];
   
-  S1=SL->S;S2=ML->S;
+  if ( strm (compact_mode, "default"))sprintf ( mode, "best");
+  else sprintf ( mode, "%s",compact_mode);
   
-  name_index=index_seq_name(S1,S2);
-  
-  seq_index=index_seq_res (S1,S2, name_index);
-  
-  for ( a=0; a< SL->ne; a++)
+  CL=sort_constraint_list (CL, -1,-1);
+  for (s1=0; s1<S->nseq; s1++)
     {
-      
-      entry=extract_entry ( entry, a, SL);
-      //HERE ("BEF: %d %d %d %d", entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]); 
-      s1=entry[SEQ1]; s2=entry[SEQ2];
- 
-      if ( S1==S2)
+      for (r1=1; r1<=S->len[s1]; r1++)
 	{
-	 add_entry2list(entry, ML);
-	}
-      else if (name_index[s1][0]==-1 || name_index[s2][0]==-1 || !seq_index[s1] || !seq_index[s2]);
-      else 
-	{
-	  int r1, r2;
-	  r1=seq_index[s1][entry[R1]-1];
-	  r2=seq_index[s2][entry[R2]-1];
-	
-	  entry[SEQ1]=name_index[s1][0];
-	  entry[SEQ2]=name_index[s2][0];
-	  if ( r1!=-1 && r2!=-1 && entry[SEQ1]!=entry[SEQ2])
-	    {
-	      entry[R1]=r1+1; entry[R2]=r2+1;
-	      add_entry2list(entry, ML);
+	  int ni=CL->residue_index[s1][r1][0];
+	  if (ws<ni){free_int (W, -1); ws=ni;W=declare_int (ws, 2);}
+	  pr2=ps2=-1;
+	  
+	  for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	    {				
+	      s2=CL->residue_index[s1][r1][b+SEQ2];
+	      r2=CL->residue_index[s1][r1][b+R2];
+	      w2=CL->residue_index[s1][r1][b+WE];
+	      if (s2==ps2 && r2==pr2)
+		{
+		  W[cp+WE][0]=MAX(W[cp+WE][0],w2);
+		  W[cp+WE][1]=MIN(W[cp+WE][1],w2);
+		  W[cp+MISC][0]+=CL->residue_index[s1][r1][b+MISC];
+		  W[cp+CONS][0]+=CL->residue_index[s1][r1][b+CONS];
+		  
+		  W[b+WE][0]=-1;
+		  W[b+WE][1]=-1;
+		}
+	      else
+		{
+		  cp=b;
+		  W[cp+WE][0]=w2;
+		  W[cp+WE][1]=w2;
+		  W[cp+MISC][0]=CL->residue_index[s1][r1][b+MISC];
+		  W[cp+CONS][0]=CL->residue_index[s1][r1][b+CONS];
+		}
+	      pr2=r2;
+	      ps2=s2;
 	    }
-	  //HERE ("AFT: %d %d %d %d", entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]); 
+	  for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	    {
+	      CL->residue_index[s1][r1][b+WE]=(strm(mode, "best")==1)?W[b+WE][0]:W[b+WE][1];
+	      CL->residue_index[s1][r1][b+MISC]=W[b+MISC][0];
+	      CL->residue_index[s1][r1][b+CONS]=W[b+CONS][0];
+	    }
 	}
     }
-  free_int (name_index, -1);
-  free_int ( seq_index, -1);
-  vfree ( entry);
-  return ML;
-}
   
-Constraint_list *modify_weight( Constraint_list *CL,int start, int end,  char *modify_mode)
-        {
-	int a;
-	CLIST_TYPE x;
-	
-	if ( strm(modify_mode, "default"))return CL;
-	for ( a=start; a<end; a++)
-	    {
-	    x=vread_clist(CL, a, WE);
-	    
-	    if (strm2 (modify_mode,"sc_eq_cons", "we_eq_cons"))
-	        if(x!=UNDEFINED)
-		    vwrite_clist(CL, a, WE,  vread_clist(CL, a, CONS));
-	    
-	    if (strm2(modify_mode,"sc_eq_wePcons","sc_eq_consPwe"))
-	        if(x!=UNDEFINED)
-		     vwrite_clist(CL, a, WE, vread_clist(CL, a, CONS)*x);		
-	    }
-	return CL;
-	}
-	
-Constraint_list *compact_list (Constraint_list *CL, int start, int len, char *compact_mode)
-	{
-	int a;
-	int r1, r2, rr1, rr2, s1, rs1, s2, rs2, ra;
-	CLIST_TYPE x;
-	int debug_compact=0;
-
-	if (debug_compact)fprintf ( stderr, "\n[In: %d %s start=%d len=%d", CL->ne, compact_mode, start, len);
-
-	if ( len==0  || strm3(compact_mode, "no", "No", "NO"))return CL;
-	else if ( strm2(compact_mode,"mirror","mirror_sum"));
-	else if ( strm4(compact_mode, "default","shrink","shrink_best","shrink_worst"))
-	        {
-		
-		for ( a=start; a<(start+len) ; a++)
-		    {
-		    
-		    if ( vread_clist(CL, a, SEQ1)> vread_clist(CL, a, SEQ2) ||\
-		       ( vread_clist(CL, a, SEQ1)==vread_clist(CL, a, SEQ2) &&\
-			 vread_clist(CL, a, R1)  > vread_clist(CL, a, R2)     ))
-			
-			
-		        {
-			s1=vread_clist(CL, a, SEQ1);
-			s2=vread_clist(CL, a, SEQ2);
-			r1=vread_clist(CL, a, R1);
-			r2=vread_clist(CL, a, R2);
-			vwrite_clist(CL, a, SEQ1,s2);
-			vwrite_clist(CL, a, SEQ2,s1);
-			vwrite_clist(CL, a, R1,r2);
-			vwrite_clist(CL, a, R2,r1);
-			}
-		    }
-		}
-	
-	if (debug_compact)fprintf ( stderr, "\n[2: %d %s start=%d len=%d", CL->ne, compact_mode, start, len);
-
-	sort_constraint_list ( CL, start, len);
-	
-	rs1=vread_clist(CL, start, SEQ1);	
-	rs2=vread_clist(CL, start, SEQ2);
-	rr1=vread_clist(CL, start, R1);
-	rr2=vread_clist(CL, start, R2);
-	ra=start;
-
-	if (debug_compact)fprintf ( stderr, "\n[3: %d %s start=%d len=%d", CL->ne, compact_mode, start, len);
+  CL=filter_constraint_list (CL,WE,0);
+  
+  return CL;
+  
+}
 
 
-	if ( (rs1==rs2) && (rr1==rr2))vwrite_clist(CL, start, SEQ1,-1);		
-	for ( a=start+1; a<(start+len); a++)
-		{
-		s1=vread_clist(CL, a, SEQ1);
-		s2=vread_clist(CL, a, SEQ2);
-		r1=vread_clist(CL, a, R1);
-		r2=vread_clist(CL, a, R2);
-		
-		//if ( (s1==s2) && (r1==r2))vwrite_clist(CL, a, SEQ1, -1);
-		if ( s1==rs1 && s2==rs2 && r1==rr1 && r2==rr2)
-			{
-			x=vread_clist(CL, ra, WE);
-			if (strm ( compact_mode, "shrink"));
-			else if (strm( compact_mode,"default"))//default is set to best
-			  vwrite_clist(CL, ra, WE,MAX(vread_clist(CL, a, WE),x));
-			else if ( strm ( compact_mode,"mirror_sum"))    
-			  vwrite_clist(CL, ra, WE, vread_clist(CL, a, WE)+x);
-			else if (strm2 ( compact_mode,"best", "shrink_best"))
-			  vwrite_clist(CL, ra, WE,MAX(vread_clist(CL, a, WE),x));
-			else if (strm2 ( compact_mode, "worst","shrink_worst"))
-			  vwrite_clist(CL, ra, WE,MIN(vread_clist(CL, a, WE), vread_clist(CL, a, WE)));
-		
-			if (  strm(compact_mode, "shrink"));
-			else
-			    {
-			    vwrite_clist(CL, ra, CONS, vread_clist(CL, ra, CONS)+ vread_clist(CL, a, CONS));
-			    vwrite_clist(CL, ra, MISC, vread_clist(CL, ra, MISC)+ vread_clist(CL, a, MISC));
-			    }
-			vwrite_clist(CL,a, SEQ1, -1);
-			
-			}
-		else
-			{
-			rs1=s1;
-			rs2=s2;
-			rr1=r1;
-			rr2=r2;
-			ra=a;
-			}
-		}
-	
-	
-	sort_constraint_list_inv(CL,0,CL->ne);
-	
-	sort_constraint_list    (CL,0,CL->ne);
-	
-	
-	if ( strm3 (compact_mode, "consPwe", "wePcons","cons"))
-		{
-		for ( a=start; a<(start+len); a++)
-			{
-			if ( strm2(compact_mode,"consPwe", "wePcons"))
-			    vwrite_clist(CL, a, WE, vread_clist(CL,a,WE)* vread_clist(CL,a,CONS));
-			else if  (strm (compact_mode, "cons"))
-			     vwrite_clist(CL, a, WE, vread_clist(CL,a,CONS)*100);
-			}
-		}
-	if (debug_compact)fprintf ( stderr, "....OUT: %d]\n", CL->ne);	
-	return CL;
-	}
-
-
-Constraint_list *rescale_list_simple (Constraint_list *CL,int start, int len,int new_min, int new_max)
-	{
-	int a, min, max;
-	double x;
-	/*Rescales between 0 and max2
-	  Any value above max1 is set to max1 first and then to max2
-	*/
-
-
-
-	min=max=vread_clist ( CL,start, WE);
-	
-	for ( a=start; a<(start+len); a++)
-		{
-		x=(double)vread_clist ( CL,a, WE);
-		if ( x>max)max=(int)x;
-		if ( x< min)min=(int)x;
-		}
-	
-	fprintf ( CL->local_stderr, "\n[%d-%d]=>[%d-%d]", min, max, new_min, new_max);
-
-	for ( a=start; a<(start+len); a++)
-	    {
-	      
-	    x=vread_clist(CL,a, WE);
-	   
-	    if ((max-min)==0)x=100;
-	    else x=(((x-min)/(max-min))*new_max)+new_min;
-	    
-	    vwrite_clist(CL, a, WE,(CLIST_TYPE) x);
-	    }
-	return CL;
-	}
-Constraint_list *rescale_list (Constraint_list *CL,int start, int len,int max1, int max2)
-	{
-	int a, min_val, max_val;
-	CLIST_TYPE x;
-	
-	/*Rescales between 0 and max2
-	  Any value above max1 is set to max1 first and then to max2
-	*/
-
-
-	min_val=0;
-	max_val=max1;
-
-	
-	
-	for ( a=start; a<len; a++)
-		{
-		if (vread_clist ( CL,a, WE)>max1)vwrite_clist(CL, a, WE, max1);
-		}
-	
-	for ( a=start; a<len; a++)
-	    {
-	    x=vread_clist(CL,a, WE);
-	    vwrite_clist(CL, a, WE, (((x-min_val)*max2)/(max_val-min_val)));
-	    }
-	return CL;
-	}
-
-
-Constraint_list* filter_list (Constraint_list *CL, int start, int len,int T)
-	{
-	int a;
-	int field;
-	
-	if (T==0)return CL;
-	
-	field=WE;
-	if (T>0)field=WE;
-	else if ( T<0)
-		{
-		field=CONS;
-		T=-T;
-		}
-	
-	
-	for ( a=start; a<len; a++)
-	    if (vread_clist(CL, a, field)<=T)vwrite_clist(CL,a,SEQ1,-1);
-	
-	CL=sort_constraint_list_inv (CL, 0, CL->ne);
-	CL=sort_constraint_list     (CL, 0, CL->ne);
-	return CL;
-	}
-
-
-
-
-
-Constraint_list *undefine_list (Constraint_list *CL)
-      {
-      int a, b;
-      int undefined_flag;
-      
-      for ( a=0;a<CL->ne; a++)
-          {
-	  for ( b=0, undefined_flag=0; b< LIST_N_FIELDS; b++)
-	      {
-
-	      if ( vread_clist (CL, a, b)==UNDEFINED)undefined_flag=1;	  
-	      if ( undefined_flag)
-	          { 
-		  for ( b=0; b< LIST_N_FIELDS; b++)
-		      if ( b!=SEQ1 && b!=SEQ2 && b!=R1 && b!=R2)
-			  {
-			  vwrite_clist(CL, a, b, UNDEFINED);
-			  }
-		  }
-	      }
-	  }
-      return CL;
-      }
 
 int ** seq2defined_residues ( Sequence *S, Constraint_list *CL)
 {
   int **seq_count;
-  int *entry=NULL;
-  int a;
+  int s1,r1,s2,r2,l,a,b;
   
   seq_count=declare_int (S->nseq, S->max_len+1);
-  for (a=0; a< CL->ne; a++)
-      {
-	entry=extract_entry(entry, a, CL);
-	seq_count[entry[SEQ1]][entry[R1]]++;
-	seq_count[entry[SEQ2]][entry[R2]]++;
-      }
-  vfree (entry);
+  for (s1=0; s1<S->nseq; s1++)
+    {
+      for ( r1=1; r1<=S->len[s1]; r1++)
+	{
+	  for (a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+	    {
+	      int s2=CL->residue_index[s1][r1][a+SEQ2];
+	      int r2=CL->residue_index[s1][r1][a+R2];
+	      seq_count[s1][r1]++;
+	      seq_count[s2][r2]++;
+	    }
+	}
+    }
   return seq_count;
 }
 
@@ -4930,87 +4148,15 @@ int ** aln2defined_residues ( Alignment *A, Constraint_list *CL)
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/	  
-void check_seq_pair_in_list(Constraint_list *CLin,int seq1, int seq2)
-      {
-      int a, s1, s2, r1, r2;
-	   
-      for ( a=0; a< CLin->ne; a++)
-          {
-	  s1=vread_clist(CLin,a,SEQ1);
-	  s2=vread_clist(CLin,a,SEQ2);
-	  if ( s1==seq1 && s2==seq2)
-	     {
-	     r1=vread_clist(CLin,a,R1);
-	     r2=vread_clist(CLin,a,R2);
-	     fprintf ( stderr, "\n[%d][%d %d] [%d %d]",a,s1, r1, s2, r2);
-	     }
-	  }
-      }
 
-void print_CL_mem(Constraint_list *CL, char *function)
-     {
-      fprintf ( stderr,"%s\n", function);
-     if ( CL->fp==NULL && CL->L==NULL) fprintf ( stderr, "\n\tNOTHING");
-     if ( CL->fp)fprintf ( stderr, "\n\tFILE SET");
-     if ( CL->L)fprintf ( stderr, "\n\tMEM SET\n");
-     }
 
-int constraint_list_is_sorted ( Constraint_list *CL)
-     {
-     int a,b, x1, x2;
-     for ( a=0; a< CL->ne-1; a++)
-         {
-	 for ( b=0; b< CL->entry_len; b++)
-	     {
-	     x1=vread_clist( CL, a, b);
-	     x2=vread_clist( CL, a+1,b);
-	     if ( x1<x2)break;
-	     else if ( x1>x2)
-		 {
-		 fprintf ( stderr, "\n[%d][%d]=>%d\n[%d][%d]=>%d\n\n",a, b, x1, a+1, b, x2);
-		 return 0;
-		 }
-	     
-	     }
-	 }
-     return 1;
-     }
 /*********************************************************************/
 /*                                                                   */
 /*                        PRUNE CONSTRAINT_LIST                     */
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-char * list2prune_list_old ( Sequence *S, int **sm)
-{
-  int a, b, i;
-  char *aln, *seq, *file;
-  FILE *fp;
-  Sequence *subS;
-  Alignment *A;
-  
-  aln=vtmpnam (NULL);
-  seq=vtmpnam (NULL);
-  file=vtmpnam (NULL);
-  
-  output_fasta_seq (seq, A=seq2aln (S,NULL,RM_GAP));
-  free_aln (A);
-  
-  printf_system ( "t_coffee %s -in Xblosum62mt -outfile=%s -msa_mode iterative_tree_aln", seq, aln);
-  printf_system  ( "t_coffee -other_pg seq_reformat -in %s -action +trim _aln_n5 -output fasta_seq > %s",aln, seq );
-  subS=main_read_seq ( seq);
 
-  fp=vfopen (file, "w");
-  for ( a=0; a< subS->nseq; a++)
-    {
-      i=name_is_in_list (subS->name[a], S->name, S->nseq, 100);
-      if ( i==-1) continue;
-      for ( b=0; b<S->nseq; b++)
-	if (i!=b)fprintf ( fp, "\n2 %d %d",i, b);
-    }
-  vfclose (fp);
-  return file;
-}
 
 char * list2prune_list ( Sequence *S, int **sm)
 {
@@ -5026,7 +4172,7 @@ char * list2prune_list ( Sequence *S, int **sm)
   if (get_string_variable("prune_lib_mode"))
     ns=atoi(get_string_variable("prune_lib_mode"));
   
-  HERE ("NS=%d", ns);
+
   if (ns==0)ns=n;
   else if (ns<0)ns=-(n*ns)/100;
   else if (ns>=n)ns=n;
@@ -5086,54 +4232,7 @@ char * list2prune_list ( Sequence *S, int **sm)
 }
   
 
-char * list2prune_list_old3 ( Sequence *S, int **sm)
-{
-  int **keep;
-  int a,b,c,n,s1,s2, tot, nseq;
 
-  char *file;
-  FILE *fp;
-  nseq=S->nseq;
-  
-  keep=declare_int (nseq, nseq);
-
-  for (a=0; a< nseq; a++)
-    for (b=a+1; b< nseq; b++)
-      {
-	int bc=0,bsim=0;
-	s1=sm[a][b];
-	for (c=0; c< nseq; c++)
-	  {
-	    if ( c==a || c==b) continue;
-	    s2=MIN(sm[a][c], sm[c][b]);
-	    
-	    if (s2>s1 && s2>bsim)
-	      {
-		bsim=s2;
-		bc=c;
-	      }
-	  }
-	if ( bsim) 
-	  {
-	    keep[a][bc]=1;
-	    keep[bc][a]=1;
-	    keep[b][bc]=1;
-	    keep[bc][b]=1;
-	  }
-      }
-
-  file=vtmpnam (NULL);
-  fp=vfopen (file, "w");
-  
-  for (n=0,tot=0,a=0; a< nseq; a++)
-    for ( b=a+1; b< nseq; b++)
-      {
-	if (keep[a][b])
-	  fprintf (fp, "\n 2 %d %d", a, b);
-      }
-  vfclose (fp);
-  return file;
-}
   
 /*********************************************************************/
 /*                                                                   */
@@ -5147,8 +4246,10 @@ Constraint_list *weight_constraint_list(Constraint_list * CL, char *seq_weight)
     {
       Weights *W;
      
-      if ( CL->ne==0)return CL;
-      else if ( strm(seq_weight, "t_coffee")) W=compute_t_coffee_weight(CL);
+
+
+      if ( CL->ne==0){return CL;}
+      else if ( strm(seq_weight, "t_coffee")) {W=compute_t_coffee_weight(CL);}
       else if (check_file_exists (seq_weight))
 	{
 	  W=read_seq_weight ((CL->S)->name, (CL->S)->nseq, seq_weight);
@@ -5166,7 +4267,6 @@ Constraint_list *weight_constraint_list(Constraint_list * CL, char *seq_weight)
 	  CL->W=W;
 	  return CL;
 	}
-     
       CL=re_weight_constraint_list (CL,W);
      
       CL->W=W;
@@ -5186,12 +4286,6 @@ Weights* compute_t_coffee_weight(Constraint_list * CL)
       Weights *W;
       int nseq;
       
-
-      
-
-
-      if (!CL->L)return NULL;
-      
       nseq=(CL->S)->nseq;
       W=declare_weights(nseq);
       sprintf ( W->mode, "t_coffee");
@@ -5200,7 +4294,6 @@ Weights* compute_t_coffee_weight(Constraint_list * CL)
 	   sprintf ( W->seq_name[a], "%s", (CL->S)->name[a]);
 	   W->SEQ_W[a]=1;
 	 }
-     
       
       for (a=0; a< (CL->S)->nseq-1; a++)
 	for ( b=a+1; b< (CL->S)->nseq; b++)
@@ -5232,31 +4325,50 @@ Weights* compute_t_coffee_weight(Constraint_list * CL)
       
       return W;
     }
-      
+
+Constraint_list *set_weight4constraint_list(Constraint_list * CL,int w)
+    {
+      int a, s, r;
+      Sequence *S;
+
+      if ( !CL || !CL->S || !CL->residue_index)return CL;
+      S=CL->S;
+      for (s=0; s<S->nseq; s++)
+	{
+	  for ( r=1; r<=S->len[s]; r++)
+	    {
+	      for (a=1; a<CL->residue_index[s][r][0]; a+=ICHUNK)
+		{
+		  CL->residue_index[s][r][a+WE]*=w;
+		}
+	    }
+	}
+      CL=evaluate_constraint_list_reference (CL);
+      return CL;
+    }  
 Constraint_list *re_weight_constraint_list(Constraint_list * CL,Weights *W)
     {
-      int a;
+     
       float w;
       float *weight;
       int sA, sB;
-
-
+      int s,r,a,b;
+      Sequence *S=CL->S;
+      
 
       weight=W->SEQ_W;
-
-      if (!CL->L)return CL;
- 
       
-      
-      for ( a=0; a< CL->ne; a++)
-	   {
-	     sA=CL->L[a*CL->entry_len+SEQ1];
-	     sB=CL->L[a*CL->entry_len+SEQ2];
-	     
-	     w=MIN(weight[sA], weight[sB]);
-	     
-	     CL->L[a*CL->entry_len+WE]*=w;
-	   } 
+      for (s=0; s<S->nseq; s++)
+	{
+	  for ( r=1; r<=S->len[s]; r++)
+	    {
+	      for (a=1; a<CL->residue_index[s][r][0]; a+=ICHUNK)
+		{
+		  int t_s=CL->residue_index[s][r][a];
+		  CL->residue_index[s][r][a+WE]*=MIN(weight[s], weight[t_s]);
+		}
+	    }
+	}
       CL=evaluate_constraint_list_reference (CL);
       return CL;
     }
@@ -5411,7 +4523,7 @@ Distance_matrix *seq2distance_matrix (Constraint_list *CL, Alignment *A,char *mo
 	   }
       else if ( strm (mode, "cscore"))
 	{
-	  if (!CL || !CL->L || CL->ne==0)
+	  if (!CL || !CL->residue_index || CL->ne==0)
 	    return seq2distance_matrix (CL, A,"idscore",sim_mode, print);
 	}
       else if ( strm (mode, "geometric") );
@@ -5477,15 +4589,15 @@ Distance_matrix *seq2distance_matrix (Constraint_list *CL, Alignment *A,char *mo
 		    B->score_aln=pair_wise (B, ns, l_s,NCL);
 		    		    
 		    id=get_seq_sim ( B->seq_al[a], B->seq_al[b], "-", sim_mode);
-		    if ( CL->L)
+		    if ( CL->residue_index)
 		      {
 			score=(int)(((float)B->score_aln)/(B->len_aln*SCORE_K));
-			score=(int)(CL->L && CL->normalise)?((score*MAXID)/(CL->normalise)):(score);
+			score=(int)(CL->normalise)?((score*MAXID)/(CL->normalise)):(score);
 		      }
 		    else if ( CL->M)score=id;
 		    
 		    
-		    if ( score>MAXID)score=(CL->L)?sub_aln2sub_aln_score (B, CL, CL->evaluate_mode, ns, l_s):id;
+		    if ( score>MAXID)score=(CL->residue_index)?sub_aln2sub_aln_score (B, CL, CL->evaluate_mode, ns, l_s):id;
 		     
 		  }
 		else if ( strm2 (mode,"fast", "very_fast"))
@@ -5635,7 +4747,6 @@ Constraint_list *read_rna_lib ( Sequence *S, char *fname)
       if (list[a])R=fast_read_constraint_list_file (R, list[a]);
     }
 
-  R=index_res_constraint_list (R,WE);
   
   return R;
 }
@@ -5643,49 +4754,58 @@ Constraint_list *read_rna_lib ( Sequence *S, char *fname)
 Constraint_list * rna_lib_extension ( Constraint_list *CL, Constraint_list *R)
 {
   CLIST_TYPE  *entry=NULL;
-  int a,b,c,n1,n2, ne,s1, s2, r1, r2,w;
-  int list1[100], list2[100];
+  int a,b,c,d,e,n1,n2, ne,s1,r1,s2,r2,w2;
+  int *list1;
+  int *list2;
+  Sequence *S=CL->S;
+  static char *tmp;
+  FILE *fp;
   
+  list1=vcalloc ( 100, sizeof (int));
+  list2=vcalloc ( 100, sizeof (int));
   
-  entry=vcalloc ( CL->entry_len, CL->el_size);
-  ne=CL->ne;
-  
-
-  for ( a=0; a<ne; a++)
+  if (!tmp) tmp=vtmpnam (NULL);
+  fp=vfopen (tmp, "w");
+  entry=vcalloc ( 100, sizeof (int));
+  for (s1=0; s1<S->nseq; s1++)
     {
-
-      
-      extract_entry (entry, a, CL);
-      s1=entry[SEQ1];
-      s2=entry[SEQ2];
-      r1=entry[R1];
-      r2=entry[R2];
-      w=entry[WE];
-      
-      n1=n2=0;
-      list1[n1++]=r1;
-      for (b=1; b<R->residue_index[s1][r1][0]; b+=3)
+      for (r1=1; r1<=S->len[s1]; r1++)
 	{
-	  list1[n1++]=R->residue_index[s1][r1][b+1];
-	}
-      list2[n2++]=r2;
-      for (b=1; b<R->residue_index[s2][r2][0]; b+=3)
-	{
-	  list2[n2++]=R->residue_index[s2][r2][b+1];
-	}
-        
-      for (b=1; b<n1; b++)
-	for (c=1; c<n2; c++)
-	{
-
-	  
-	  entry[R1]=list1[b];
-	  entry[R2]=list2[c];
-	  add_entry2list ( entry,CL);
+	  entry[SEQ1]=s1;
+	  for (c=1; c<CL->residue_index[s1][r1][0]; c+=ICHUNK)
+	    {				
+	      s2=CL->residue_index[s1][r1][c+SEQ2];
+	      r2=CL->residue_index[s1][r1][c+R2];
+	      w2=CL->residue_index[s1][r1][c+WE];
+	      entry[SEQ2]=s2;
+	      entry[WE]=w2;
+	      	      
+	      n1=n2=0;
+	      list1[n1++]=r1;
+	      for (b=1; b<R->residue_index[s1][r1][0]; b+=ICHUNK)
+		{
+		  list1[n1++]=R->residue_index[s1][r1][b+R2];
+		}
+	      list2[n2++]=r2;
+	      
+	      for (b=1; b<R->residue_index[s2][r2][0]; b+=ICHUNK)
+		{
+		  list2[n2++]=R->residue_index[s2][r2][b+R2];
+		}
+	      
+	      for (b=1; b<n1; b++)
+		for (d=1; d<n2; d++)
+		  {
+		    entry[R1]=list1[b];
+		    entry[R2]=list2[c];
+		    for (e=0; e<CL->entry_len; e++) fprintf (fp, "%d ", entry[e]);
+		  }
+	    }
 	}
     }
   
-  return CL;
+  vfclose (fp);
+  return undump_constraint_list (CL,tmp);
 }
 
 char *** produce_method_file ( char *method)
@@ -7069,3 +6189,4 @@ char *** produce_method_file ( char *method)
   return list;
 }
   
+

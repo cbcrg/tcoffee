@@ -1,17 +1,44 @@
 #!/usr/bin/env perl
 use Env;
-
-$BLAST_MAX_NRUNS=2;
-$EXIT_SUCCESS=0;
-$EXIT_FAILURE=1;
-
+use FileHandle;
 use Cwd;
+use File::Path;
+use Sys::Hostname;
+
+our $PIDCHILD;
+our $ERROR_DONE;
+our @TMPFILE_LIST;
+our $EXIT_FAILURE=1;
+our $EXIT_SUCCESS=0;
+
+our $REFDIR=getcwd;
+our $EXIT_SUCCESS=0;
+our $EXIT_FAILURE=1;
+
+our $PROGRAM="tc_generic_method.pl";
+our $CL=$PROGRAM;
+
+our $CLEAN_EXIT_STARTED;
+our $debug_lock=$ENV{"DEBUG_LOCK"};
+our $LOCKDIR=$ENV{"LOCKDIR_4_TCOFFEE"};
+if (!$LOCKDIR){$LOCKDIR=getcwd();}
+our $ERRORDIR=$ENV{"ERRORDIR_4_TCOFFEE"};
+our $ERRORFILE=$ENV{"ERRORFILE_4_TCOFFEE"};
+&set_lock ($$);
+if (isshellpid(getppid())){lock4tc(getppid(), "LLOCK", "LSET", "$$\n");}
+      
+
+
+
+
+our $BLAST_MAX_NRUNS=2;
+our $COMMAND;
+our $PIDCHILD;
+
 $REF_EMAIL="";
-
-
 $tmp_dir="";
 $init_dir="";
-$program="tc_generic_method.pl";
+
 
 $test=0;
 if ($test==1)
@@ -26,6 +53,7 @@ if ($test==1)
   }
 
 foreach $v(@ARGV){$cl.="$v ";}
+$COMMAND=$cl;
 ($mode)=&my_get_opt ( $cl, "-mode=",1,0);
 
 ($A)=(&my_get_opt ( $cl, "-name1=",0,0));
@@ -74,7 +102,14 @@ if ($mode eq "seq_msa")
   {
     &seq2msa($mode,&my_get_opt ( $cl, "-infile=",1,1, "-method=",1,2, "-param=",0,0, "-outfile=",1,0));
   }
-
+elsif ( $mode eq "tblastx_msa")
+  {
+    &seq2tblastx_lib ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-outfile=",1,0));
+  }
+elsif ( $mode eq "tblastpx_msa")
+  {
+    &seq2tblastpx_lib ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-outfile=",1,0));
+  }
 elsif ( $mode eq "thread_pair")
   {
     &seq2thread_pair($mode,&my_get_opt ( $cl, "-infile=",1,1, "-pdbfile1=",1,1, "-method=",1,2,"-param=",0,0, "-outfile=",1,0, ));
@@ -97,6 +132,7 @@ elsif ( $mode eq "pdb_template")
   }
 elsif ( $mode eq "profile_template")
   {
+    
     &psiblast2profile_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0));
   }
 elsif ( $mode eq "psiprofile_template")
@@ -109,11 +145,11 @@ elsif ( $mode eq "RNA_template")
   }
 elsif ( $mode eq "tm_template")
   {
-    &seq2tm_template ($mode,&my_get_opt ( $cl, "-infile=",1,1,"-arch=",1,1,"-psv=",1,1, "-outfile=",1,0,));
+    &seq2tm_template ($mode, "", &my_get_opt ( $cl, "-infile=",1,1,"-arch=",1,1,"-psv=",1,1, "-outfile=",1,0,));
   }
 elsif ( $mode eq "psitm_template")
   {
-    &seq2tm_template ($mode,&my_get_opt ( $cl, "-infile=",1,1,"-arch=",1,1,"-psv=",1,1, "-outfile=",1,0,));
+    &seq2tm_template ($mode,&my_get_opt ( $cl, "-database=",1,0, "-infile=",1,1, "-arch=",1,1,"-psv=",1,1, "-outfile=",1,0,));
   }
 elsif ( $mode eq "ssp_template")
   {
@@ -123,18 +159,22 @@ elsif ( $mode eq "psissp_template")
   {
     &seq2ssp_template ($mode,&my_get_opt ( $cl, "-infile=",1,1,"-seq=",1,1,"-obs=",1,1, "-outfile=",1,0));
   }
+
 elsif ( $mode eq "rna_pair")
 {
     &seq2rna_pair($mode,&my_get_opt ( $cl, "-pdbfile1=",1,1, "-pdbfile2=",1,1, "-method=",1,2,"-param=",0,0, "-outfile=",1,0, ));
-}elsif ( $mode eq "calc_rna_template")
+}
+elsif ( $mode eq "calc_rna_template")
 {
     &calc_rna_template($mode,&my_get_opt ( $cl, "-infile=",1,1,"-pdbfile=",1,1, "-outfile=",1,0));
 }
 else
   {
-    print STDERR "$mode is an unknown mode of tc_generic_method.pl [FATAL]\n";
+    myexit(flush_error( "$mode is an unknown mode of tc_generic_method.pl"));
   }
 myexit ($EXIT_SUCCESS);
+
+
 sub seq2ssp_template
   {
   my ($mode, $infile,$gor_seq,$gor_obs,$outfile)=@_;
@@ -166,7 +206,7 @@ sub seq2ssp_template
     
       if ( !-e $lib_name)
 	{
-	  print STDERR ("GORIV failed to compute the secondary structure of $s{$seq}{name} [FATAL:$mode/$method/$program]\n");
+	  myexit(flush_error("GORIV failed to compute the secondary structure of $s{$seq}{name}"));
 	  myexit ($EXIT_FAILURE);
 	}
       else
@@ -182,7 +222,7 @@ sub seq2ssp_template
 
 sub seq2tm_template
   {
-  my ($mode, $infile,$arch,$psv,$outfile)=@_;
+  my ($mode, $db, $infile,$arch,$psv,$outfile)=@_;
   my %s, %h;
   my $result;
   my (@profiles);
@@ -207,11 +247,11 @@ sub seq2tm_template
 	}
       elsif ( $mode eq "psitm_template")
 	{
-	  &seq2msa_tm_prediction ($s{$seq}{name},$s{$seq}{seq},"seqfile", $lib_name,$arch, $psv);
+	  &seq2msa_tm_prediction ($s{$seq}{name},$s{$seq}{seq}, $db, "seqfile", $lib_name,$arch, $psv);
 	}
       if ( !-e $lib_name)
 	{
-	  print STDERR ("RNAplfold failed to compute the secondary structure of $s{$seq}{name} [FATAL:$mode/$method/$program]\n");
+	  myexit(flush_error("RNAplfold failed to compute the secondary structure of $s{$seq}{name}"));
 	  myexit ($EXIT_FAILURE);
 	}
       else
@@ -249,7 +289,7 @@ sub seq2RNA_template
       
       if ( !-e $lib_name)
 	{
-	  print STDERR ("RNAplfold failed to compute the secondary structure of $s{$seq}{name} [FATAL:$mode/$method/$program]\n");
+	 myexit(flush_error("RNAplfold failed to compute the secondary structure of $s{$seq}{name}"));
 	  myexit ($EXIT_FAILURE);
 	}
       else
@@ -268,7 +308,7 @@ sub psiblast2profile_template
   my ($mode, $infile, $db, $method, $outfile)=@_;
   my %s, %h, ;
   my ($result,$psiblast_output,$profile_name,@profiles);
-  
+  my $trim=0;
   &set_temporary_dir ("set",$infile,"seq.pep");
   %s=read_fasta_seq ("seq.pep");
   open (R, ">result.aln");
@@ -288,7 +328,7 @@ sub psiblast2profile_template
 	  $profile_name="$s{$seq}{name}.prf";
 	  $profile_name=&clean_file_name ($profile_name);
 	  unshift (@profiles, $profile_name);
-	  output_profile ($profile_name, %profile);
+	  output_profile ($profile_name, \%profile, $trim);
 	  print stdout "\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$SERVER/blast/$db][$CACHE_STATUS]\n";
 	  print R ">$s{$seq}{name} _R_ $profile_name\n";
 	}
@@ -313,8 +353,9 @@ sub blast2pdb_template
       open (F, ">seqfile");
       print (F ">$A\n$s{$seq}{seq}\n");
       close (F);
-      
+     
       $blast_output=&run_blast ($s{$seq}{name},$method, $db, "seqfile","outfile");
+     
       %p=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$blast_output);
       unlink ($blast_output);
       if ($p{n}>1)
@@ -451,12 +492,12 @@ sub seq2thread_pair
 	if (!$ENV{HOMS_PATH}){$ENV{HOMS_PATH}="DUMMY";}
 	
 	`joy struc.pdb >x 2>x`;
-	&check_file("struc.tem", "Joy failed [FATAL:$program/$method]");
+	&check_file("struc.tem", "Joy failed [FATAL:$PROGRAM/$method]");
 	`melody -t struc.tem >x 2>x`;
-	&check_file("struc.tem", "Melody failed [FATAL:$program/$method]");
+	&check_file("struc.tem", "Melody failed [FATAL:$PROGRAM/$method]");
 	`fugueali -seq seq.pep -prf struc.fug -print > tmp_result.aln`;
 	
-	&check_file("tmp_result.aln", "Fugue failed [FATAL:$program/$method]");
+	&check_file("tmp_result.aln", "Fugue failed [FATAL:$PROGRAM/$method]");
 	&safe_system ("t_coffee -other_pg seq_reformat -in tmp_result.aln -output fasta_aln >result.aln");
       }
     elsif ( $method eq "t_coffee")
@@ -483,7 +524,7 @@ sub seq2pdbid_pair
       {return $outfile;}
     else
       {
-	if ($method eq "dalilite")
+	if ($method eq "daliweb")
 	  {
 	    $pdbfile1=~/(....)(.)/;
 	    $id1=$1; $c1=$2;
@@ -555,6 +596,42 @@ sub seq2pdb_pair
     if ($method eq "t_coffee")
       {
 	&safe_system ("t_coffee -in Ppdb1.pdb Ppdb2.pdb -quiet -outfile=result.aln");
+      }
+    elsif ( $method eq "DaliLite")
+      {
+	if ( &safe_system ("DaliLite -pairwise pdb1.pdb pdb2.pdb >tmp1")==$EXIT_SUCCESS)
+	  {
+	     my ($seq1, $seq2);
+	     $seq1=$seq2="";
+		    
+	     open (F, "tmp1");
+	     while (<F>)
+	       {
+		 $l=$_;
+		 if ( $l=~/Query\s+(\S+)/)
+		   {
+		     $seq1.=$1;
+		   }
+		 elsif ( $l=~/Sbjct\s+(\S+)/)
+		   {
+		     $seq2.=$1;
+		   }
+	       }
+	     close (F);
+	     unlink ("tmp1");
+	     if ($seq1 ne "" && $seq2 ne "")
+	       {
+		 my $output3=">$A\n$seq1\n>$B\n$seq2\n";
+		 $output3=~s/\./-/g;
+		 open (F, ">result.aln");
+		 print F "$output3";
+		 close (F);
+	       }
+	   }
+	else
+	  {
+	    print "ERROR: DalLite failed to align the considered structures[tc_generic_method.pl]\n";
+	  }    
       }
     elsif ( $method eq "TMalign")
       {
@@ -639,18 +716,49 @@ sub pg_is_installed
     my $supported=0;
     
     my $p=shift (@ml);
-    $r=`which $p 2>/dev/null`;
-    if ($r eq ""){return 0;}
-    else {return 1;}
+    if ($p=~/::/)
+      {
+	if (safe_system ("perl -M$p -e 1")==$EXIT_SUCCESS){return 1;}
+	else {return 0;}
+      }
+    else
+      {
+	$r=`which $p 2>/dev/null`;
+	if ($r eq ""){return 0;}
+	else {return 1;}
+      }
+  }
+
+
+
+sub check_internet_connection
+  {
+    my $internet;
+    my $tmp;
+    &check_configuration ( "wget"); 
+    
+    $tmp=&vtmpnam ();
+    
+    if     (&pg_is_installed    ("wget")){`wget www.google.com -O$tmp >/dev/null 2>/dev/null`;}
+    elsif  (&pg_is_installed    ("curl")){`curl www.google.com -o$tmp >/dev/null 2>/dev/null`;}
+    
+    if ( !-e $tmp || -s $tmp < 10){$internet=0;}
+    else {$internet=1;}
+    if (-e $tmp){unlink $tmp;}
+
+    return $internet;
   }
 sub check_pg_is_installed
   {
     my @ml=@_;
     my $r=&pg_is_installed (@ml);
-    if (!$r)
+    if (!$r && $p=~/::/)
       {
-	print STDERR "\nProgram $p Supported but Not Installed on your system [FATAL:tc_generic_method]\n";
-	myexit ($EXIT_FAILURE);
+	print STDERR "\nYou Must Install the perl package $p on your system.\nRUN:\n\tsudo perl -MCPAN -e 'install $pg'\n";
+      }
+    elsif (!$r)
+      {
+	myexit(flush_error("\nProgram $p Supported but Not Installed on your system"));
       }
     else
       {
@@ -661,7 +769,7 @@ sub set_temporary_dir
   {
     my @list=@_;
     my $dir_mode, $a, $mode, $method;
-
+  
     $dir_mode=shift (@list);
 
     
@@ -670,12 +778,12 @@ sub set_temporary_dir
 	$initial_dir=cwd();
 	if ( !$tmp_dir)
 	  {
-	    srand;
 	    $rand=rand (100000);
-	    $tmp_dir="$TMPDIR/tmp4tcoffee_profile_pair_dir_$$_P_$rand";
+	    $tmp_dir="$TMPDIR/tmp4tcoffee_profile_pair_dir_$$\_P_$rand";
 	  }
-	if ( !-d $tm_dir)
+	if ( !-d $tmp_dir)
 	  {
+	    push (@TMPDIR_LIST, $tmp_dir);
 	    `mkdir $tmp_dir`;
 	  }
 	
@@ -692,7 +800,7 @@ sub set_temporary_dir
 	
 	if (!-e $list[0])
 	  {
-	    print STDERR ("Program $method failed to produce $list[1] [FATAL:$mode/$method/$program]\n");
+	   myexit(flush_error("Program $method failed to produce $list[1]" ));
 	    myexit ($EXIT_FAILURE);
 	  }
 	else
@@ -717,25 +825,9 @@ sub set_temporary_dir
 	  }
       }
   }
-sub clean_dir
-  {
-    my $dir=@_[0];
-    if ( !-d $dir){return ;}
-    elsif (!($dir=~/tmp/)){return ;}#safety check 1
-    elsif (($dir=~/\*/)){return ;}#safety check 2
-    else
-      {
-	`rm -rf $dir`;
-      }
-    return;
-  }
 
-sub myexit
-  {
-    my $code=@_[0];
-    &clean_dir ($tmp_dir);
-    exit ($code);
-  }
+
+
 
 sub my_get_opt
   {
@@ -764,18 +856,18 @@ sub my_get_opt
 	if ($optional==0){;}
 	elsif ( $optional==1 && $argv eq "")
 	  {
-	    print STDERR "ERROR: Option $option must be set [FATAL:$program/$mode/$method]\n";
+	    myexit(flush_error( "ERROR: Option $option must be set"));
 	    myexit ($EXIT_FAILURE);
 	  }
 	if ($status==0){;}
 	elsif ($status ==1 && $argv ne "" && !-e $argv)
 	  {
-	    print STDERR "ERROR: File $argv must exist [FATAL:$program/$mode/$method]\n";
+	    myexit(flush_error( "File $argv must exist"));
 	    myexit ($EXIT_FAILURE);
 	  }
 	elsif ( $status==2 && $argv ne "" && &check_pg_is_installed ($argv)==0)
 	  {
-	    print STDERR "ERROR: $argv is not installed [FATAL:$program/$mode/$method]\n";
+	    myexit(flush_error( " $argv is not installed"));
 	    myexit ($EXIT_FAILURE);
 	  }
       }
@@ -789,8 +881,7 @@ sub check_file
 
     if ( !-e $file)
       {
-	print "\n$msg\n";
-	myexit ($EXIT_FAILURE);
+	myexit(flush_error("$msg"));
       }
     }
 sub hhalign
@@ -1024,19 +1115,20 @@ sub my_get_opt
 	if ($optional==0){;}
 	elsif ( $optional==1 && $argv eq "")
 	  {
-	    print STDERR "ERROR: Option $option must be set [FATAL:$program/$mode/$method]\n";
-	    myexit ($EXIT_FAILURE);
+
+	    myexit(flush_error("Option $option must be set"));
+	   
 	  }
 	if ($status==0){;}
 	elsif ($status ==1 && $argv ne "" && !-e $argv)
 	  {
-	    print STDERR "ERROR: File $argv must exist [FATAL:$program/$mode/$method]\n";
-	    myexit ($EXIT_FAILURE);
+	     myexit(flush_error("File $argv must exist"));
+	   
 	  }
 	elsif ( $status==2 && $argv ne "" && &check_pg_is_installed ($argv)==0)
 	  {
-	    print STDERR "ERROR: $argv is not installed [FATAL:$program/$mode/$method]\n";
-	    myexit ($EXIT_FAILURE);
+	    myexit(flush_error("$argv is not installed"));
+	   
 	  }
       }
 
@@ -1092,6 +1184,24 @@ sub set_blast_type
       }
     return $BLAST_TYPE;
   }
+sub is_valid_blast_xml
+    {
+      my $file=shift;
+      my $line;
+      
+      
+      if ( !-e $file) {return 0;}
+      $line=&file2tail ($file,100);
+      if ( $line=~/<\/EBIApplicationResult/ || $line=~/<\/NCBI_BlastOutput/){return 1;}
+      return 0;
+    }
+sub file2blast_flavor
+      {
+	my $file=shift;
+	if (&file_contains ($file,"EBIApplicationResult",100)){return "EBI";}
+	elsif (&file_contains ($file,"EBIApplicationResult",100)){return "NCBI";}
+	else {return "UNKNOWN";}
+      }
 sub blast_xml2profile 
   {
     my ($name,$seq,$maxid, $minid, $mincov, $file)=(@_);
@@ -1103,16 +1213,213 @@ sub blast_xml2profile
     elsif ($BLAST_TYPE eq "NCBI" || &file_contains ($file,"NCBI_BlastOutput",100)){%p=ncbi_blast_xml2profile(@_);}
     else 
       {
-	print "************ ERROR: Blast Returned an unknown XML Format **********************";
-	myexit ($EXIT_FAILURE);
+	myexit(add_error ( $$,$$,getppid(), "BLAST_FAILURE::unkown XML",$CL));
       }
     for ($a=0; $a<$p{n}; $a++)
       {
 	my $name=$p{$a}{name};
 	$p{$name}{seq}=$p{$a}{seq};
+	$p{$name}{index}=$a;
       }
     return %p;
   }
+sub ncbi_tblastx_xml2lib_file 
+  {
+    my  ($outlib,$string)=(@_);
+    my ($L,$l, $a,$b,$c,$d,$i,$nhits,@identifyerL);
+    my (%ITERATION);
+      
+    open (F, ">>$outlib");
+    
+    $seq=~s/[^a-zA-Z]//g;
+    $L=length ($seq);
+    
+    %ITERATION=xml2tag_list ($string, "Iteration");
+    for ($i=0; $i<$ITERATION{n};$i++)
+      {
+	my ($qindex, $qlen, %hit, $string);
+	$string=$ITERATION{$i}{body};
+
+	$qindex=xmltag2value($string,"Iteration_iter-num");
+	$qlen  =xmltag2value($string,"Iteration_query-len");
+	%hit=&xml2tag_list  ($string, "Hit");
+
+	for ($a=0; $a<$hit{n}; $a++)
+	  {
+	    my ($string);
+	    $string=$hit{$a}{body};
+	 
+	    $hindex=xmltag2value($string,"Hit_accession")+1;
+	    if ($hindex<=$qindex){next;}
+	    else  {print F  "# $qindex $hindex\n";}
+		   
+	   
+	    $hlen=xmltag2value  ($string,"Hit_len");
+	    %HSP=&xml2tag_list  ($string, "Hsp");
+	   
+	    for ($b=0; $b<$HSP{n}; $b++)
+	      {
+		my ($string, $qs,$qe,$qf,$hs,$he,$hf,$s, $d, $e);
+		$string=$HSP{$b}{body};
+	
+		$qs=xmltag2value  ($string,"Hsp_query-from");
+		$qe=xmltag2value  ($string,"Hsp_query-to");
+		$qf=xmltag2value  ($string,"Hsp_query-frame");
+
+		$hs=xmltag2value  ($string,"Hsp_hit-from");
+		$he=xmltag2value  ($string,"Hsp_hit-to");
+		$hf=xmltag2value  ($string,"Hsp_hit-frame");
+		
+		$s=xmltag2value  ($string,"Hsp_identity");
+		$l=xmltag2value  ($string,"Hsp_align-len");
+		$s=int(($s*100)/$l);
+		
+		if ($qf>0)
+		  {$rqs=$qs; $rqe=$qe;}
+		else
+		  {
+		    $rqe=($qlen-$qs)+1;
+		    $rqs=($qlen-$qe)+1;
+		  }
+		
+		if ($hf>0)
+		  {$rhs=$hs; $rhe=$he;}
+		else
+		  {
+		    $rhe=($hlen-$hs)+1;
+		    $rhs=($hlen-$he)+1;
+		  }
+		for ($d=0,$e=$rqs; $e<$rqe; $e++,$d++)
+		  {
+		    my ($r1,$r2);
+		    $r1=$e;
+		    $r2=$rhs+$d;
+		    print F " $r1 $r2 $s 0\n";
+		  }
+	      }
+	  }
+      }
+    print F "! SEQ_1_TO_N\n";
+    
+    close (F);
+    return %lib;
+  }
+
+sub ncbi_tblastpx_xml2lib_file 
+  {
+    my  ($outlib,$string,%s)=(@_);
+    my ($L,$l, $a,$b,$c,$d,$i,$nhits,@identifyerL);
+    my (%ITERATION,%hdes, %qdes);
+      
+    open (F, ">>$outlib");
+    
+    $seq=~s/[^a-zA-Z]//g;
+    $L=length ($seq);
+    
+    %ITERATION=xml2tag_list ($string, "Iteration");
+    for ($i=0; $i<$ITERATION{n};$i++)
+      {
+	my ($qindex, $qlen, %hit, $string);
+	$string=$ITERATION{$i}{body};
+
+	$qdef=xmltag2value($string,"Iteration_query-def");
+	%qdes=&tblastpx_name2description($qdef,%s);
+	$qlen  =xmltag2value($string,"Iteration_query-len");
+	%hit=&xml2tag_list  ($string, "Hit");
+
+	for ($a=0; $a<$hit{n}; $a++)
+	  {
+	    my ($string);
+	    $string=$hit{$a}{body};
+	    $hdef=xmltag2value($string,"Hit_def");
+	    %hdes=&tblastpx_name2description($hdef,%s);
+	    if ($hdes{index}<=$qdes{index}){next;}
+	    else  {print F  "# $qdes{index} $hdes{index}\n";}
+		   
+	   
+	    $hlen=xmltag2value  ($string,"Hit_len");
+	    %HSP=&xml2tag_list  ($string, "Hsp");
+	   
+	    for ($b=0; $b<$HSP{n}; $b++)
+	      {
+		my ($string, $l,$qs,$qe,$qf,$hs,$he,$hf,$s, $d, $e, @s1, @s2);
+		$string=$HSP{$b}{body};
+	
+		$qs=xmltag2value  ($string,"Hsp_query-from");
+		$qe=xmltag2value  ($string,"Hsp_query-to");
+		$qf=$qdes{frame};
+		$qseq=xmltag2value  ($string,"Hsp_qseq");
+		
+		$hs=xmltag2value  ($string,"Hsp_hit-from");
+		$he=xmltag2value  ($string,"Hsp_hit-to");
+		$hf=$hdes{frame};
+		$hseq=xmltag2value  ($string,"Hsp_hseq");
+		
+		$s=xmltag2value  ($string,"Hsp_identity");
+		$l=xmltag2value  ($string,"Hsp_align-len");
+		$s=int(($s*100)/$l);
+		@s1=tblastpx_hsp2coordinates($qseq,$qs,$qe,%qdes);
+		@s2=tblastpx_hsp2coordinates($hseq,$hs,$he,%hdes);
+		
+		
+		for ($f=0; $f<=$#s1; $f++)
+		  {
+		    if ($s1[$f]==-1 || $s2[$f]==-1){next;}
+		    else 
+		      {
+			print F " $s1[$f] $s2[$f] $s 0\n";
+		      }
+		  }
+	      }
+	  }
+      }
+    print F "! SEQ_1_TO_N\n";
+    
+    close (F);
+    return %lib;
+  }
+sub tblastpx_hsp2coordinates
+  {
+    my ($seq, $s, $e, %des)=@_;
+    my @list;
+    my @sa;
+    my @gap=(-1,-1,-1);
+    
+    $s=$des{start}+3*($s-1);
+  
+    if ($des{strand} eq "d"){;}
+    else {$s=($des{length}-$s)+1;}
+    
+    foreach $c (split (//,$seq))
+      {
+	if ( $c eq '-'){push (@list,@gap);}
+	elsif ($des{strand} eq "d")
+	  {
+	    push(@list,$s++,$s++,$s++);
+	  }
+	else
+	  {
+	    push(@list, $s--,$s--,$s--);
+	  }
+      }
+    return @list;
+  }
+
+sub tblastpx_name2description
+  {
+    my ($name, %s)=@_;
+    my @at=split("__", $name);
+    my %des;
+
+    $des{name}=$at[0];
+    $des{strand}=$at[1];
+    
+    $des{start}=$at[2];
+    $des{end}=$at[3];
+    $des{length}=$at[4];
+    $des{index}=$s{$at[0]}{order}+1;
+    return %des;
+  }  
 sub ncbi_blast_xml2profile 
   {
     my ($name,$seq,$maxid, $minid, $mincov, $string)=(@_);
@@ -1169,7 +1476,6 @@ sub ncbi_blast_xml2profile
 		$Hend=$HEND{$e}{body};
 	
 		$coverage=(($end-$start)*100)/$L;
-
 	
 		if ($identity>$maxid || $identity<$minid || $coverage<$mincov){next;}
 		@lr1=(split (//,$qs));
@@ -1219,6 +1525,7 @@ sub ncbi_blast_xml2profile
 	$profile{$n}{definition}=$definitionL[$a];
 	$profile{$n}{identifyer}=$identifyerL[$a];
 	$profile{$n}{comment}=$comment[$a];
+
 	for ($b=0; $b<$L; $b++)
 	  {
 	    if ($p[$a][$b])
@@ -1300,7 +1607,13 @@ sub ebi_blast_xml2profile
 		  }
 	      }
 	  
-	    
+	    $Qseq[$nhits]=$qs;
+	    $Hseq[$nhits]=$ms;
+	    $QstartL[$nhits]=$start;
+	    $HstartL[$nhits]=$Hstart;
+	    $identityL[$nhits]=$identity;
+	    $endL[$nhits]=$end;
+	    $definitionL[$nhits]=$definition;
 	    $identifyerL[$nhits]=$identifyer;
 	    $comment[$nhits]="$ldb|$identifyer [Eval=$expectation][id=$identity%][start=$startM end=$endM]";
 	    $nhits++;
@@ -1317,9 +1630,15 @@ sub ebi_blast_xml2profile
 	$n=$a+1;
 	$profile{$n}{name}="$name\_$a";
 	$profile{$n}{seq}="";
+	$profile{$n}{Qseq}=$Qseq[$a];
+	$profile{$n}{Hseq}=$Hseq[$a];
+	$profile{$n}{Qstart}=$QstartL[$a];
+	$profile{$n}{Hstart}=$HstartL[$a];
+	$profile{$n}{identity}=$identityL[$a];
+	$profile{$n}{definition}=$definitionL[$a];	
 	$profile{$n}{identifyer}=$identifyerL[$a];
-	
 	$profile{$n}{comment}=$comment[$a];
+
 	for ($b=0; $b<$L; $b++)
 	  {
 	    if ($p[$a][$b])
@@ -1338,14 +1657,27 @@ sub ebi_blast_xml2profile
   }
 sub output_profile
   {
-    my ($name,%profile)=(@_);
+    my ($outfile,$profileR, $trim)=(@_);
     my ($a);
-    open (P, ">$name");
+    my %profile=%$profileR;
+    my $P= new FileHandle;
+    my $tmp=vtmpnam();
+    
+    open ($P, ">$tmp");
     for ($a=0; $a<$profile{n}; $a++)
       {
-	print P ">$profile{$a}{name} $profile{$a}{comment}\n$profile{$a}{seq}\n";
+	print $P ">$profile{$a}{name} $profile{$a}{comment}\n$profile{$a}{seq}\n";
       }
-    close (P);
+    close ($P);
+
+    if ( $trim)
+      {
+	&safe_system ("t_coffee -other_pg seq_reformat -in $tmp -action +trim _aln_%%$trim\_K1 -output fasta_aln -out $outfile");
+      }
+    else
+      {
+	&safe_system ("mv $tmp $outfile");
+      }
     return;
   }
 sub blast_xml2hit_list
@@ -1353,6 +1685,14 @@ sub blast_xml2hit_list
     my $string=(@_[0]);
     return &xml2tag_list ($string, "hit");
   }
+sub xmltag2value
+  {
+    my ($string_in, $tag)=@_;
+    my %TAG;
+    %TAG=xml2tag_list ($string_in, $tag);
+    return $TAG{0}{body};
+  }
+      
 sub xml2tag_list  
   {
     my ($string_in,$tag)=@_;
@@ -1439,237 +1779,111 @@ sub seq2gor_prediction
   }
 sub seq2msa_tm_prediction 
   {
-    my ($name, $seq,$infile, $outfile, $arch, $psv)=(@_);
+    my ($name, $seq, $db, $infile, $outfile, $arch, $psv)=(@_);
     my (%p,%gseq,%R, $blast_output, %s, $l);
+    my $R2=new FileHandle;
+    my $db="uniprot";
+    my $method="psitm";
+    my $SERVER="EBI";
     
-    $blast_output=&run_blast ($name,"blastp", "uniprot", $infile, "outfile");
+    $blast_output=&run_blast ($name,"blastp", $db, $infile, "outfile");
     
-    
-    %p=blast_xml2profile($name,$seq,$maxid, $minid,$mincov,$blast_output);
-    
-    
-    open (F, ">tm_input");
-    for ($a=0; $a<$p{n}; $a++)
+    if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER))
       {
-	my $s;
-	
-	$s=$p{$a}{seq};
-	$s=uc($s);
-	print F ">$p{$a}{name}\n$s\n";
-	#print stdout ">$p{$a}{name}\n$s\n";
+	print "\tPSITM: USE Cache\n";
+	return $outfile;
       }
-    close (F);
-    print "\tPSITM: kept  $p{n} Homologues for Sequence $p{0}{name}\n";
-    &safe_system ("t_coffee -other_pg fasta_seq2hmmtop_fasta.pl -in=tm_input -out=tm_output -arch=$arch -psv=$psv");
-    unlink ("tm_input");
-    %gs=read_fasta_seq("tm_output");
-    foreach $s (keys(%gs))
+    else
       {
-	my (@list, $seq, @plist, @pseq, $L, $PL);
+	$CACHE_STATUS="COMPUTE CACHE";
+	%p=blast_xml2profile($name,$seq,$maxid, $minid,$mincov,$blast_output);
 	
 	
-	#Prediction
-	$seq=$gs{$s}{seq};
-	$seq=uc($seq);
-	$L=length($seq);
-	@list=split //, $seq;
-	
-	#Original Profile Sequence
-	$pseq=$p{$s}{seq};
-	$pseq=uc($pseq);
-	$PL=length($pseq);
-	@plist=split //, $pseq;
-	
-	for ($c=0,$b=0; $b<$PL; $b++)
+	open (F, ">tm_input");
+	for (my $a=0; $a<$p{n}; $a++)
 	  {
-	    my $r=$plist[$b];
-	    if($r ne "-" && $r ne "X")
-	      {
-		$r=$plist[$b]=$list[$c++];
-	      }
+	    my $s;
+	    
+	    $s=$p{$a}{seq};
+	    $s=uc($s);
+	    print F ">$p{$a}{name}\n$s\n";
+	    #print stdout ">$p{$a}{name}\n$s\n";
 	  }
-	
-	if ($c!=$L)
-	  {
-	    print "ERROR: Could Not Thread the Prediction Back [FATAL:tc_generic_method.pl]\n";
-	    myexit ($EXIT_FAILURE);
-	  }
-	for ($b=0;$b<$PL; $b++)
-	  {
-	    my $r=$plist[$b];
-	    if ( $r ne "-" && $r ne "X")
-	      {
-		$R{$b}{$r}++;
-	     }
-	  }
+	close (F);
+	print "\tPSITM: kept  $p{n} Homologues for Sequence $p{0}{name}\n";
+	&safe_system ("t_coffee -other_pg fasta_seq2hmmtop_fasta.pl -in=tm_input -out=$outfile -output=cons -cov=70 -trim=95 -arch=$arch -psv=$psv");
+	unlink ("tm_input");
+	&cache_file("SET",$infile,$name,$method,$db,$outfile,$SERVER);
+	return;
       }
-    $L=length ($p{0}{seq});
-    open (R2, ">$outfile");
-    print R2 ">$name\n";
-    
-    for ($a=0; $a<$L; $a++)
-      {
-	
-	my ($v,$v_max,$r,$r_max, @rl);
-	
-	$v=$v_max=0;
-	@rl=keys (%{$R{$a}});
-	foreach $r (@rl)
-	  {
-
-	    $v=$R{$a}{$r};
-	    if ($v>=$v_max)
-	      {
-		$v_max=$v;
-		$r_max=$r;
-	      }
-	  }
-	print R2 "$r_max";
-      }
-    print R2 "\n";
-    close (R2);
-    return;
   }
+
+
 sub seq2msa_gor_prediction 
   {
     my ($name, $seq,$infile, $outfile, $gor_seq, $gor_obs)=(@_);
     my (%p,%gseq,%R, $blast_output, %s, $l);
-    
+    my $R2=new FileHandle;
+    my $db="uniprot";
+    my $method="psigor";
+    my $SERVER="EBI";
     
     $blast_output=&run_blast ($name,"blastp", "uniprot", $infile, "outfile");
-    %p=blast_xml2profile($name,$seq,$maxid, $minid,$mincov,$blast_output);
     
-    open (F, ">gor_input");
-    for ($a=0; $a<$p{n}; $a++)
+    if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER))
       {
-	my $s;
-	
-	$s=$p{$a}{seq};
-	$s=~s/\-//g;
-	$s=~s/X//g;
-	
-	$s=uc($s);
-	print F ">$p{$a}{name}\n$s\n";
+	print "\tPSIGOR: USE Cache\n";
+	return $outfile;
       }
-    close (F);
-    print "\tPSIGOR: kept  $p{n} Homologues for Sequence $p{0}{name}\n";
-    
-    `gorIV -prd gor_input -seq $gor_seq -obs $gor_obs > gor_tmp`;
-    unlink ("gor_input");
-    
-    open (GR, ">gor_output");
-    open (OG, "gor_tmp");
-    
-    while (<OG>)
+    else
       {
+	$CACHE_STATUS="COMPUTE CACHE";
+	%p=blast_xml2profile($name,$seq,$maxid, $minid,$mincov,$blast_output);
 	
-	my $l;
-	$l=$_;
 	
-	if ($l=~/\>/){print GR "$l";}
-	elsif ( $l=~/Predicted Sec. Struct./)
+	open (F, ">gor_input");
+	for (my $a=0; $a<$p{n}; $a++)
 	  {
-	    $l=~s/Predicted Sec. Struct\.//;
-	    print GR "$l";
-	  }
-      }
-    close (GR);
-    close (OG);
-    
-
-    %gs=read_fasta_seq("gor_output");
-     foreach $s (keys(%gs))
-      {
-	my (@list, $seq, @plist, @pseq, $L, $PL);
-	
-	
-	#Prediction
-	$seq=$gs{$s}{seq};
-	$seq=uc($seq);
-	$L=length($seq);
-	@list=split //, $seq;
-	
-	#Original Profile Sequence
-	$pseq=$p{$s}{seq};
-	$pseq=uc($pseq);
-	$PL=length($pseq);
-	@plist=split //, $pseq;
-	
-	$tseq="";
-	for ($c=0,$b=0; $b<$PL; $b++)
-	  {
-	    my $r=$plist[$b];
-	    if($r ne "-" && $r ne "X")
-	      {
-		$r=$plist[$b]=$list[$c++];
-	      }
-	    $tseq.=$r;
-	  }
-	
-	if ($c!=$L)
-	  {
-	    print "ERROR: Could Not Thread the Prediction Back [FATAL:tc_generic_method.pl]\n";
-	    print "SEQ:$seq\nPSEQ:$pseq\nTSEQ:$tseq";
+	    my $s;
 	    
-	    myexit ($EXIT_FAILURE);
+	    $s=$p{$a}{seq};
+	    $s=uc($s);
+	    print F ">$p{$a}{name}\n$s\n";
+	    #print stdout ">$p{$a}{name}\n$s\n";
 	  }
-	for ($b=0;$b<$PL; $b++)
-	  {
-	    my $r=$plist[$b];
-	    if ( $r ne "-" && $r ne "X")
-	      {
-		$R{$b}{$r}++;
-	     }
-	  }
+	close (F);
+	print "\tGORTM: kept  $p{n} Homologues for Sequence $p{0}{name}\n";
+	&safe_system ("t_coffee -other_pg fasta_seq2hmmtop_fasta.pl -in=gor_input -out=$outfile -output=cons -cov=70 -trim=95 -gor_seq=$gor_seq -gor_obs=$gor_obs -mode=gor");
+	unlink ("tm_input");
+	&cache_file("SET",$infile,$name,$method,$db,$outfile,$SERVER);
+	return;
       }
-   
-    $L=length ($p{0}{seq});
-    open (R2, ">$outfile");
-    print R2 ">$name\n";
-    
-    for ($a=0; $a<$L; $a++)
-      {
-	
-	my ($v,$v_max,$r,$r_max, @rl);
-	
-	$v=$v_max=0;
-	@rl=keys (%{$R{$a}});
-	foreach $r (@rl)
-	  {
-
-	    $v=$R{$a}{$r};
-	    if ($v>=$v_max)
-	      {
-		$v_max=$v;
-		$r_max=$r;
-	      }
-	  }
-	print R2 "$r_max";
-      }
-    print R2 "\n";
-    close (R2);
-    return;
   }
+
+
 
 sub run_blast
   {
-    my ($name, $method, $db,$infile, $outfile, $run)=(@_);
+    my ($name, $method, $db, $infile, $outfile, $run)=(@_);
     if (!$run){$run=1;}
     
     
-    if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER)){return $outfile;}
+    if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER) && is_valid_blast_xml ($outfile))
+      {return $outfile;}
     else
       {
-	
-	if ( $SERVER eq "EBI")
+	$CACHE_STATUS="COMPUTE CACHE";
+	if ( $SERVER eq "EBI_SOAP")
 	  {
+	    &check_configuration ("EMAIL","SOAP::Light","INTERNET");
+	    
 	    $cl_method=$method;
 	    if ($cl_method =~/wu/)
 	      {
 		$cl_method=~s/wu//;
 		if ( $cl_method eq "psiblast")
 		  {
-		    print STDERR "\n***************WARNING: PSI BLAST cannot be used with the NCBI BLAST Client. Use server=EBI Or server=LOCAL. blastp will be used instead***********\n";
+		    add_warning($$,$$,"PSI BLAST cannot be used with the wuBLAST Client. Use server=EBI Or server=LOCAL. blastp will be used instead");
 		    $cl_method="blastp";
 		  }
 		
@@ -1687,14 +1901,49 @@ sub run_blast
 		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
 	      }
 	  }
+	elsif ($SERVER eq "EBI_REST" || $SERVER eq "EBI")
+	  {
+	   
+	    $cl_method=$method;
+	    &check_configuration("EMAIL","XML::Simple", "INTERNET");
+	    if ($db eq "uniprot"){$db1="uniprotkb";}
+	    else {$db1=$db;}
+	    
+
+	    if ($cl_method =~/wu/)
+	      {
+		$cl_method=~s/wu//;
+		if ( $cl_method eq "psiblast")
+		  {
+		    $cl_method="blastp";
+		  }
+		
+		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null 2>/dev/null";
+		&safe_system ( $command,5);
+		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
+		elsif (-e "$outfile.xml.xml"){`mv $outfile.xml.xml $outfile`;}
+	      }
+	    else
+	      {
+		if ( $cl_method =~/psiblast/){$cl_method ="blastp -j5";}
+		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null 2>/dev/null";
+		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null";
+		&safe_system ( $command,5);
+		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
+		elsif (-e "$outfile.xml.xml"){`mv $outfile.xml.xml $outfile`;} 
+		
+	      }
+	    
+	 }
 	elsif ($SERVER eq "NCBI")
 	  {
+	    &check_configuration ("blastcl3","INTERNET");
 	    if ($db eq "uniprot"){$cl_db="nr";}
 	    else {$cl_db=$db;}
 	    
 	    if ( $method eq "psiblast")
 	      {
-		print STDERR "\n***************WARNING: PSI BLAST cannot be used with the NCBI BLAST Client. Use server=EBI Or server=LOCAL. blastp will be used instead***********\n";
+		add_warning($$,$$,"PSI BLAST cannot be used with the NCBI BLAST Client. Use server=EBI Or server=LOCAL. blastp will be used instead");
 		$cl_method="blastp";
 	      }
 	    else
@@ -1702,25 +1951,26 @@ sub run_blast
 		$cl_method=$method;
 	      }
 	    $command="blastcl3 -p $cl_method -d $cl_db -i $infile -o $outfile -m 7";
-	    &mysystem ($command);
+	    &safe_system ($command);
 	  }
 	elsif ($SERVER =~/CLIENT_(.*)/)
 	  {
 	    my $client=$1;
 	    $command="$client -p $method -d $db -i $infile -o $outfile -m 7";
-	    &mysystem ($command);
+	    &safe_system ($command);
 	  }
 	elsif ( $SERVER eq "LOCAL_blastall")
 	  {
+	    &check_configuration ("blastall");
 	    if ($method eq "blastp")
 	      {
 		$command="blastall -d $db -i $infile -o $outfile -m7 -p blastp";
 	      }
-	    &mysystem ($command);
+	    &safe_system ($command);
 	  }
 	elsif ( $SERVER eq "LOCAL")
 	  {
-
+	    
 	    if ($ENV{"BLAST_DB_DIR"})
 	      {
 		$x=$ENV{"BLAST_DB_DIR"};
@@ -1733,60 +1983,55 @@ sub run_blast
 	    
 	    if ($method eq "blastp")
 	      {
+		&check_configuration("blastpgp");
 		$command="blastpgp -d $cl_db -i $infile -o $outfile -m7 -j1";
 	      }
 	    elsif ($method eq "psiblast")
 	      {
+		&check_configuration("blastpgp");
 		$command="blastpgp -d $cl_db -i $infile -o $outfile -m7 -j5";
 	      }
-		elsif ($method eq "blastn")
-		{
-			$command="blastall -p blastn -d $cl_db -i $infile -o $outfile -m7 -W6";
-		}	
-	    &mysystem ($command);
+	    elsif ($method eq "blastn")
+	      {
+		&check_configuration("blastall");
+		$command="blastall -p blastn -d $cl_db -i $infile -o $outfile -m7 -W6";
+	      }	
+	    &safe_system ($command);
 	  }
 	else
 	  {
-	    print ("*************** ERROR: $SERVER is an Unknown Server***********");
+	    
+	    myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::UnknownServer",$CL));
 	  }
 	
-	if ( !-e $outfile)
+	if ( !-e $outfile || !&is_valid_blast_xml($outfile))
 	  {
+	    
+	    if ( -e $outfile)
+	      {
+		add_warning ($$,$$,"Corrupted Blast Output (Run $run)");
+		unlink($outfile);
+	      }
 	    
 	    if ( $run==$BLAST_MAX_NRUNS)
 	      {
-		print STDERR "COM: $command\n";
-		print STDERR ("BLAST failed against $name [FATAL:$mode/$method/$program]\n");
-		if  ( $SERVER eq "EBI" && !($method=~/wu/))
-		  {
-		    print STDERR ("Try WuBlast instead");
-		    return run_blast ($name,"wublastp", $db,$infile, $outfile);
-		  }
+	
+		myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::UnknownReason", "$command"));
 	      }
 	    else
 	      {
-		print STDERR "(Blast for $name failed  [$command][Attempt $run/$BLAST_MAX_NRUNS] [Try again]\n";
+	
+		add_warning ($$,$$,"Blast for $name failed (Run: $run)");
+		
 		return run_blast ($name, $method, $db,$infile, $outfile, $run+1);
 	      }
 	  }
-
+	
 	&cache_file("SET",$infile,$name,$method,$db,$outfile,$SERVER);
 	return $outfile;
       }
   }
-sub mysystem 
-  {
-    my $command=@_[0];
-    my $count=0;
-    my $r;
-    
-    while (($r=&safe_system($command))!=$EXIT_SUCCESS && $count<5)
-      {
-	print "\nCOMMAND $command Failed. Will try again\n";
-	$count++;
-      }
-    return $r;
-  }
+
 sub cache_file
   {
     my ($cache_mode,$infile,$name,$method,$db, $outfile,$server)=(@_);
@@ -1880,7 +2125,7 @@ sub url2file
       }
     else
       {
-	print stderr "ERROR: neither curl nor wget are installed. Imnpossible to fectch remote file [FATAL]\n";
+	myexit(flus_error("neither curl nor wget are installed. Imnpossible to fectch remote file"));
 	exit ($EXIT_FAILURE);
       }
   }
@@ -1906,30 +2151,6 @@ sub fasta_file1_eq_fasta_file2
     return 1;
   }
 	
-sub safe_system 
-{
-  my $com=@_[0];
-  my $pid;
-  my $status;
-  if ($com eq ""){return 1;}
-
-
-  if (($pid = fork ()) < 0){return (-1);}
-  if ($pid == 0)
-    {
-      exec ($com);
-    }
-  else
-      {
-	$PIDCHILD=$pid;
-      }
-  
-  waitpid ($pid,WTERMSIG);
-  return $?; #contains the status of the exit
-}
-END {
-  kill ($PIDCHILD);
-}
 
 
 sub read_template_file
@@ -1974,13 +2195,12 @@ sub calc_rna_template
 		$pdb_chain = $pdb_template_h{$seq};
 		$lib_name="$s{$seq}{name}.rfold";
 		$lib_name=&clean_file_name ($lib_name);
-		safe_system ("t_coffee -other_pg RNAplfold2tclib.pl -in=seqfile -out=$lib_name");
 		
  		safe_system ("secondary_struc.py seqfile $CACHE$pdb_chain  $lib_name");
 		
 		if ( !-e $lib_name)
 		{
-			print STDERR ("RNAplfold failed to compute the secondary structure of $s{$seq}{name} [FATAL:$mode/$method/$program]\n");
+		myexit(flush_error("RNAplfold failed to compute the secondary structure of $s{$seq}{name}"));
 			myexit ($EXIT_FAILURE);
 		}
 		else
@@ -1998,7 +2218,7 @@ sub calc_rna_template
 
 sub seq2rna_pair{
 	my ($mode, $pdbfile1, $pdbfile2, $method, $param, $outfile)=@_;
-
+	
 	if ($method eq "runsara.py")
 	{
 		open(TMP,"<$pdbfile1");
@@ -2013,10 +2233,10 @@ sub seq2rna_pair{
 			}
 			$count += 1;
 		}
-	
-		my $y = length($line);
 
+		
 		$chain1 = substr($line,length($line)-3,1);
+
 		close TMP;
 		open(TMP,"<$pdbfile2");
 		my $count = 0;
@@ -2031,10 +2251,11 @@ sub seq2rna_pair{
 		}
 		$chain2 = substr($line,length($line)-3,1);
 		close TMP;
-		
-		
-		system("runsara.py $pdbfile1 $chain1 $pdbfile2 $chain2 -s -o tmp >/dev/null 2>/dev/null");
-		open(TMP,"<tmp") or die "cannot open the sara tmp file:$!\n";
+
+		$tmp_file=&vtmpnam();
+	
+		safe_system("runsara.py $pdbfile1 $chain1 $pdbfile2 $chain2 -s -o $tmp_file --limitation 5000 > /dev/null 2> /dev/null") == 0 or die "sara did not work $!\n";
+		open(TMP,"<$tmp_file") or die "cannot open the sara tmp file:$!\n";
 		open(OUT,">$outfile") or die "cannot open the $outfile file:$!\n";
 
 		my $switch = 0;
@@ -2061,6 +2282,550 @@ sub seq2rna_pair{
 		}
 		close TMP; 
 		close OUT;
+		unlink($tmp_file);
 	}
-}$program="T-COFFEE (Version_8.07)";\n
+}
+
+sub seq2tblastx_lib
+  {
+    my ($mode, $infile, $outfile)=@_;
+    my (%s, $method,$nseq);
+
+    $method=$mode;
+    &set_temporary_dir ("set",$infile,"infile");
+    %s=read_fasta_seq("infile");
+    
+    
+    foreach $seq (keys(%s))
+      {
+	$slist[$s{$seq}{order}]=$s{$seq}{seq};
+	$sname[$s{$seq}{order}]=$s{$seq}{name};
+	$slen[$s{$seq}{order}]=length ($s{$seq}{seq});
+      }
+    $nseq=$#sname+1;
+    open (F, ">outfile");
+    print F "! TC_LIB_FORMAT_01\n";
+    print F "$nseq\n";
+    for ($a=0; $a<$nseq;$a++)
+      {
+	print F "$sname[$a] $slen[$a]  $slist[$a]\n"
+      }
+    close (F);
+    `formatdb -i infile -p F`;
+
+    `blastall -p tblastx -i infile -d infile -m 7 -S1>blast.output`;
+    
+    ncbi_tblastx_xml2lib_file ("outfile", file2string ("blast.output"));
+    &set_temporary_dir ("unset",$mode, $method, "outfile",$outfile);
+    myexit ($EXIT_SUCCESS);
+    }
+sub seq2tblastpx_lib
+  {
+    my ($mode, $infile, $outfile)=@_;
+    my (%s, $method,$nseq);
+    $method=$mode;
+    &set_temporary_dir ("set",$infile,"infile");
+    %s=read_fasta_seq("infile");
+    
+    foreach $seq (keys(%s))
+      {
+	$slist[$s{$seq}{order}]=$s{$seq}{seq};
+	$sname[$s{$seq}{order}]=$s{$seq}{name};
+	$slen[$s{$seq}{order}]=length ($s{$seq}{seq});
+      }
+    $nseq=$#sname+1;
+    open (F, ">outfile");
+    print F "! TC_LIB_FORMAT_01\n";
+    print F "$nseq\n";
+    for ($a=0; $a<$nseq;$a++)
+      {
+	print F "$sname[$a] $slen[$a]  $slist[$a]\n"
+      }
+    close (F);
+    `printenv > /home/notredame/tmp/ce`;
+    `t_coffee -other_pg seq_reformat -in infile -output tblastx_db1 > tblastxdb`;
+    `formatdb -i tblastxdb -p T`;
+    `blastall -p blastp -i tblastxdb -d tblastxdb -m7 >blast.output`;
+    ncbi_tblastpx_xml2lib_file ("outfile", file2string ("blast.output"), %s);
+    &set_temporary_dir ("unset",$mode, $method, "outfile",$outfile);
+    myexit ($EXIT_SUCCESS);
+    }
+
+
+    
+
+
+
+sub file2head
+      {
+	my $file = shift;
+	my $size = shift;
+	my $f= new FileHandle;
+	my $line;
+	open ($f,$file);
+	read ($f,$line, $size);
+	close ($f);
+	return $line;
+      }
+sub file2tail
+      {
+	my $file = shift;
+	my $size = shift;
+	my $f= new FileHandle;
+	my $line;
+	
+	open ($f,$file);
+	seek ($f,$size*-1, 2);
+	read ($f,$line, $size);
+	close ($f);
+	return $line;
+      }
+
+
+sub vtmpnam
+      {
+	my $r=rand(100000);
+	my $f="file.$r.$$";
+	while (-e $f)
+	  {
+	    $f=vtmpnam();
+	  }
+	push (@TMPFILE_LIST, $f);
+	return $f;
+      }
+
+sub myexit
+  {
+    my $code=@_[0];
+    if ($CLEAN_EXIT_STARTED==1){return;}
+    else {$CLEAN_EXIT_STARTED=1;}
+    ### ONLY BARE EXIT
+    exit ($code);
+  }
+sub set_error_lock
+    {
+      my $name = shift;
+      my $pid=$$;
+
+      
+      &lock4tc ($$,"LERROR", "LSET", "$$ -- ERROR: $name $PROGRAM\n");
+      return;
+    }
+sub set_lock
+  {
+    my $pid=shift;
+    my $msg= shift;
+    my $p=getppid();
+    &lock4tc ($pid,"LLOCK","LRESET","$p$msg\n");
+  }
+sub unset_lock
+   {
+     
+    my $pid=shift;
+    &lock4tc ($pid,"LLOCK","LRELEASE","");
+  }
+sub shift_lock
+  {
+    my $from=shift;
+    my $to=shift;
+    my $from_type=shift;
+    my $to_type=shift;
+    my $action=shift;
+    my $msg;
+    
+    if (!&lock4tc($from, $from_type, "LCHECK", "")){return 0;}
+    $msg=&lock4tc ($from, $from_type, "LREAD", "");
+    &lock4tc ($from, $from_type,"LRELEASE", $msg);
+    &lock4tc ($to, $to_type, $action, $msg);
+    return;
+  }
+sub isshellpid
+  {
+    my $p=shift;
+    if (!lock4tc ($p, "LLOCK", "LCHECK")){return 0;}
+    else
+      {
+	my $c=lock4tc($p, "LLOCK", "LREAD");
+	if ( $c=~/-SHELL-/){return 1;}
+      }
+    return 0;
+  }
+sub isrootpid
+  {
+    if(lock4tc (getppid(), "LLOCK", "LCHECK")){return 0;}
+    else {return 1;}
+  }
+sub lock4tc
+	{
+	  my ($pid,$type,$action,$value)=@_;
+	  my $fname;
+	  my $host=hostname;
+	  
+	  if ($type eq "LLOCK"){$fname="$LOCKDIR/.$pid.$host.lock4tcoffee";}
+	  elsif ( $type eq "LERROR"){ $fname="$LOCKDIR/.$pid.$host.error4tcoffee";}
+	  elsif ( $type eq "LWARNING"){ $fname="$LOCKDIR/.$pid.$host.warning4tcoffee";}
+	  
+	  if ($debug_lock)
+	    {
+	      print STDERR "\n\t---lock4tc(tcg): $action => $fname =>$value (RD: $LOCKDIR)\n";
+	    }
+
+	  if    ($action eq "LCHECK") {return -e $fname;}
+	  elsif ($action eq "LREAD"){return file2string($fname);}
+	  elsif ($action eq "LSET") {return string2file ($value, $fname, ">>");}
+	  elsif ($action eq "LRESET") {return string2file ($value, $fname, ">");}
+	  elsif ($action eq "LRELEASE") 
+	    {
+	      if ( $debug_lock)
+		{
+		  my $g=new FileHandle;
+		  open ($g, ">>$fname");
+		  print $g "\nDestroyed by $$\n";
+		  close ($g);
+		  safe_system ("mv $fname $fname.old");
+		}
+	      else
+		{
+		  unlink ($fname);
+		}
+	    }
+	  return "";
+	}
+	
+sub file2string
+	{
+	  my $file=@_[0];
+	  my $f=new FileHandle;
+	  my $r;
+	  open ($f, "$file");
+	  while (<$f>){$r.=$_;}
+	  close ($f);
+	  return $r;
+	}
+sub string2file 
+    {
+    my ($s,$file,$mode)=@_;
+    my $f=new FileHandle;
+    
+    open ($f, "$mode$file");
+    print $f  "$s";
+    close ($f);
+  }
+
+BEGIN
+    {
+      srand;
+    
+      $SIG{'SIGUP'}='signal_cleanup';
+      $SIG{'SIGINT'}='signal_cleanup';
+      $SIG{'SIGQUIT'}='signal_cleanup';
+      $SIG{'SIGILL'}='signal_cleanup';
+      $SIG{'SIGTRAP'}='signal_cleanup';
+      $SIG{'SIGABRT'}='signal_cleanup';
+      $SIG{'SIGEMT'}='signal_cleanup';
+      $SIG{'SIGFPE'}='signal_cleanup';
+      
+      $SIG{'SIGKILL'}='signal_cleanup';
+      $SIG{'SIGPIPE'}='signal_cleanup';
+      $SIG{'SIGSTOP'}='signal_cleanup';
+      $SIG{'SIGTTIN'}='signal_cleanup';
+      $SIG{'SIGXFSZ'}='signal_cleanup';
+      $SIG{'SIGINFO'}='signal_cleanup';
+      
+      $SIG{'SIGBUS'}='signal_cleanup';
+      $SIG{'SIGALRM'}='signal_cleanup';
+      $SIG{'SIGTSTP'}='signal_cleanup';
+      $SIG{'SIGTTOU'}='signal_cleanup';
+      $SIG{'SIGVTALRM'}='signal_cleanup';
+      $SIG{'SIGUSR1'}='signal_cleanup';
+
+
+      $SIG{'SIGSEGV'}='signal_cleanup';
+      $SIG{'SIGTERM'}='signal_cleanup';
+      $SIG{'SIGCONT'}='signal_cleanup';
+      $SIG{'SIGIO'}='signal_cleanup';
+      $SIG{'SIGPROF'}='signal_cleanup';
+      $SIG{'SIGUSR2'}='signal_cleanup';
+
+      $SIG{'SIGSYS'}='signal_cleanup';
+      $SIG{'SIGURG'}='signal_cleanup';
+      $SIG{'SIGCHLD'}='signal_cleanup';
+      $SIG{'SIGXCPU'}='signal_cleanup';
+      $SIG{'SIGWINCH'}='signal_cleanup';
+      
+      $SIG{'INT'}='signal_cleanup';
+      $SIG{'TERM'}='signal_cleanup';
+      $SIG{'KILL'}='signal_cleanup';
+      $SIG{'QUIT'}='signal_cleanup';
+      
+      our $debug_lock=$ENV{"DEBUG_LOCK"};
+      
+      
+      
+      
+      foreach my $a (@ARGV){$CL.=" $a";}
+      if ( $debug_lock ){print STDERR "\n\n\n********** START PG: $PROGRAM *************\n";}
+      if ( $debug_lock ){print STDERR "\n\n\n**********(tcg) LOCKDIR: $LOCKDIR $$ *************\n";}
+      if ( $debug_lock ){print STDERR "\n --- $$ -- $CL\n";}
+      
+	     
+      
+      
+    }
+sub flush_error
+  {
+    my $msg=shift;
+    return add_error ($EXIT_FAILURE,$$, $$,getppid(), $msg, $CL);
+  }
+sub add_error 
+  {
+    my $code=shift;
+    my $rpid=shift;
+    my $pid=shift;
+    my $ppid=shift;
+    my $type=shift;
+    my $com=shift;
+    
+    $ERROR_DONE=1;
+    lock4tc ($rpid, "LERROR","LSET","$pid -- ERROR: $type\n");
+    lock4tc ($$, "LERROR","LSET", "$pid -- COM: $com\n");
+    lock4tc ($$, "LERROR","LSET", "$pid -- STACK: $ppid -> $pid\n");
+   
+    return $code;
+  }
+sub add_warning 
+  {
+    my $rpid=shift;
+    my $pid =shift;
+    my $command=shift;
+    my $msg="$$ -- WARNING: $command\n";
+    print STDERR "$msg";
+    lock4tc ($$, "LWARNING", "LSET", $msg);
+  }
+
+sub signal_cleanup
+  {
+    print dtderr "\n**** $$ (tcg) was killed\n";
+    &cleanup;
+    exit ($EXIT_FAILURE);
+  }
+sub clean_dir
+  {
+    my $dir=@_[0];
+    if ( !-d $dir){return ;}
+    elsif (!($dir=~/tmp/)){return ;}#safety check 1
+    elsif (($dir=~/\*/)){return ;}#safety check 2
+    else
+      {
+	`rm -rf $dir`;
+      }
+    return;
+  }
+sub cleanup
+  {
+    #print stderr "\n----tc: $$ Kills $PIDCHILD\n";
+    #kill (SIGTERM,$PIDCHILD);
+    my $p=getppid();
+    $CLEAN_EXIT_STARTED=1;
+    
+    
+    
+    if (&lock4tc($$,"LERROR", "LCHECK", ""))
+      {
+	my $ppid=getppid();
+	if (!$ERROR_DONE) 
+	  {
+	    &lock4tc($$,"LERROR", "LSET", "$$ -- STACK: $p -> $$\n");
+	    &lock4tc($$,"LERROR", "LSET", "$$ -- COM: $CL\n");
+	  }
+      }
+    my $warning=&lock4tc($$, "LWARNING", "LREAD", "");
+    my $error=&lock4tc($$,  "LERROR", "LREAD", "");
+    #release error and warning lock if root
+    
+    if (isrootpid() && ($warning || $error) )
+      {
+	
+	print STDERR "**************** Summary *************\n$error\n$warning\n";
+
+	&lock4tc($$,"LERROR","RELEASE","");
+	&lock4tc($$,"LWARNING","RELEASE","");
+      } 
+    
+    
+    foreach my $f (@TMPFILE_LIST)
+      {
+	if (-e $f){unlink ($f);} 
+      }
+    foreach my $d (@TMPDIR_LIST)
+      {
+	clean_dir ($d);
+      }
+    #No More Lock Release
+    #&lock4tc($$,"LLOCK","LRELEASE",""); #release lock 
+
+    if ( $debug_lock ){print STDERR "\n\n\n********** END PG: $PROGRAM ($$) *************\n";}
+    if ( $debug_lock ){print STDERR "\n\n\n**********(tcg) LOCKDIR: $LOCKDIR $$ *************\n";}
+  }
+END 
+  {
+    
+    &cleanup();
+  }
+   
+
+sub safe_system 
+{
+  my $com=shift;
+  my $ntry=shift;
+  my $ctry=shift;
+  my $pid;
+  my $status;
+  my $ppid=getppid();
+  if ($com eq ""){return 1;}
+  
+  
+
+  if (($pid = fork ()) < 0){return (-1);}
+  if ($pid == 0)
+    {
+      set_lock($$, " -SHELL- $com (tcg)");
+      exec ($com);
+    }
+  else
+    {
+      lock4tc ($$, "LLOCK", "LSET", "$pid\n");#update parent
+      $PIDCHILD=$pid;
+    }
+  if ($debug_lock){printf STDERR "\n\t .... safe_system (fasta_seq2hmm)  p: $$ c: $pid COM: $com\n";}
+
+  waitpid ($pid,WTERMSIG);
+
+  shift_lock ($pid,$$, "LWARNING","LWARNING", "LSET");
+
+  if ($? == $EXIT_FAILURE || lock4tc($pid, "LERROR", "LCHECK", ""))
+    {
+      if ($ntry && $ctry <$ntry)
+	{
+	  add_warning ($$,$$,"$com failed [retry: $ctry]");
+	  lock4tc ($pid, "LRELEASE", "LERROR", "");
+	  return safe_system ($com, $ntry, ++$ctry);
+	}
+      elsif ($ntry == -1)
+	{
+	  if (!shift_lock ($pid, $$, "LERROR", "LWARNING", "LSET"))
+	    {
+	      add_warning ($$,$$,"$com failed");
+	    }
+	  else
+	    {
+	      lock4tc ($pid, "LRELEASE", "LERROR", "");
+	    }
+	  return $?;}
+      else
+	{
+	  if (!shift_lock ($pid,$$, "LERROR","LERROR", "LSET"))
+	    {
+	      myexit(add_error ($EXIT_FAILURE,$$,$pid,getppid(), "UNSPECIFIED system", $com));
+	    }
+	}
+    }
+  return $?;
+}
+
+sub check_configuration 
+    {
+      my @l=@_;
+      my $v;
+      foreach my $p (@l)
+	{
+	  
+	  if   ( $p eq "EMAIL")
+	    { 
+	      if ( !($EMAIL=~/@/))
+		{
+		add_warning($$,$$,"Could Not Use EMAIL");
+		myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"EMAIL","$CL"));
+	      }
+	    }
+	  elsif( $p eq "INTERNET")
+	    {
+	      if ( !&check_internet_connection())
+		{
+		  myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"INTERNET","$CL"));
+		}
+	    }
+	  elsif( $p eq "wget")
+	    {
+	      if (!&pg_is_installed ("wget") && !&pg_is_installed ("curl"))
+		{
+		  myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"PG_NOT_INSTALLED:wget","$CL"));
+		}
+	    }
+	  elsif( !(&pg_is_installed ($p)))
+	    {
+	      myexit(add_error ($EXIT_FAILURE,$$,$$,getppid(),"PG_NOT_INSTALLED:$p","$CL"));
+	    }
+	}
+      return 1;
+    }
+sub pg_is_installed
+  {
+    my @ml=@_;
+    my $r, $p, $m;
+    my $supported=0;
+    
+    my $p=shift (@ml);
+    if ($p=~/::/)
+      {
+	if (safe_system ("perl -M$p -e 1")==$EXIT_SUCCESS){return 1;}
+	else {return 0;}
+      }
+    else
+      {
+	$r=`which $p 2>/dev/null`;
+	if ($r eq ""){return 0;}
+	else {return 1;}
+      }
+  }
+
+
+
+sub check_internet_connection
+  {
+    my $internet;
+    my $tmp;
+    &check_configuration ( "wget"); 
+    
+    $tmp=&vtmpnam ();
+    
+    if     (&pg_is_installed    ("wget")){`wget www.google.com -O$tmp >/dev/null 2>/dev/null`;}
+    elsif  (&pg_is_installed    ("curl")){`curl www.google.com -o$tmp >/dev/null 2>/dev/null`;}
+    
+    if ( !-e $tmp || -s $tmp < 10){$internet=0;}
+    else {$internet=1;}
+    if (-e $tmp){unlink $tmp;}
+
+    return $internet;
+  }
+sub check_pg_is_installed
+  {
+    my @ml=@_;
+    my $r=&pg_is_installed (@ml);
+    if (!$r && $p=~/::/)
+      {
+	print STDERR "\nYou Must Install the perl package $p on your system.\nRUN:\n\tsudo perl -MCPAN -e 'install $pg'\n";
+      }
+    elsif (!$r)
+      {
+	myexit(flush_error("\nProgram $p Supported but Not Installed on your system"));
+      }
+    else
+      {
+	return 1;
+      }
+  }
+
+$program="T-COFFEE (Version_8.79)";
+
 

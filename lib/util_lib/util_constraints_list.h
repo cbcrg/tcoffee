@@ -1,10 +1,15 @@
-#define SEQ1 0
-#define SEQ2 1
-#define R1 2
-#define R2 3
-#define WE 4
-#define CONS 5
-#define MISC 6
+
+#define SEQ2 0
+#define R2   1
+#define WE   2
+#define CONS 3
+#define MISC 4
+#define SEQ1 5
+#define R1   6
+#define INDEX 7
+
+#define ICHUNK 5
+
 #define LIST_N_FIELDS 7
 #define CLIST_TYPE int
 
@@ -200,7 +205,7 @@ struct Constraint_list
       
       /*DATA*/
       FILE *fp;           /*File used for i/o if disk being used*/
-      int *L;            /*Array used for storing Lib if mem being used*/
+      //int *L;            /*Array used for storing Lib if mem being used*/
       int **M;            /*substitution matrix*/
       char rna_lib[FILENAMELEN+1];  /*name of a file containing the RNA libraries*/
       
@@ -320,6 +325,7 @@ struct Constraint_list
       /*It is automatically recomputed when L residue_indexed is set to 0*/
       int residue_indexed;
       int ***residue_index;
+      int ** freeze;
       int residue_field;	
 
       /*Index of the pairs of sequences within L*/
@@ -399,9 +405,14 @@ int TC_method2method_file( struct TC_method*, char *fname );
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-int dump_constraint_list (Constraint_list *CL);
-int vread_clist ( Constraint_list *CL, int a, int b );
-int vwrite_clist ( Constraint_list *CL, int a, int b, CLIST_TYPE x);
+Constraint_list *  unfreeze_constraint_list (Constraint_list *CL);
+Constraint_list *  freeze_constraint_list (Constraint_list *CL);
+Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file);
+int   dump_constraint_list (Constraint_list *CL, char *file,char *mode);
+int   safe_dump_constraint_list (Constraint_list *CL, char *file,char *mode, Sequence *RS);
+int display_constraint_list (Constraint_list *CL, FILE *fp, char *tag);
+
+
 Constraint_list *index_constraint_list ( Constraint_list *CL);
 Constraint_list *index_res_constraint_list ( Constraint_list *CL, int field);
 Constraint_list * progressive_index_res_constraint_list ( Alignment *A, int *ns, int **ls, Constraint_list *CL);
@@ -414,9 +425,12 @@ char ** reindex_constraint_list (char **profile, int np,char **list, int *inL, S
 /*********************************************************************/
 Constraint_list * add_list_entry2list (Constraint_list *CL, int n_para, ...);
 Constraint_list * evaluate_constraint_list_reference ( Constraint_list *CL);
+
+int CLisCompacted (Constraint_list *CL, char *t);
+int checkCL( Constraint_list *CL, char *t);
 Constraint_list *add_entry2list ( CLIST_TYPE *entry, Constraint_list *CL);
-Constraint_list *insert_entry2list ( CLIST_TYPE *entry, int pos,Constraint_list *CL);
-CLIST_TYPE* extract_entry(CLIST_TYPE * entry, int pos, Constraint_list *CL);
+Constraint_list *add_entry2list2 ( CLIST_TYPE *entry, Constraint_list *CL);
+int *extract_entry (Constraint_list *CL);
 /*********************************************************************/
 /*                                                                   */
 /*                         LIST EXTENTION                            */
@@ -494,9 +508,12 @@ FILE * save_constraint_list_bin   ( FILE *OUT,Constraint_list *CL, int start,int
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/		
+Constraint_list * shrink_constraint_list_indexed (Constraint_list *CL, int T);
 Constraint_list * shrink_constraint_list (Constraint_list *CL);
+Constraint_list * extend_constraint_list ( Constraint_list *CL);
 Constraint_list * relax_constraint_list (Constraint_list *CL);
 Constraint_list * relax_constraint_list_4gp (Constraint_list *CL);
+
 Constraint_list * expand_constraint_list_4gp (Constraint_list *CL, int T);
 
 Constraint_list * filter_constraint_list (Constraint_list *CL, int field, int T);
@@ -535,7 +552,7 @@ Constraint_list * clean_shadow ( Constraint_list *CL, int start, int len);
 Constraint_list *merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode);
 CLIST_TYPE return_max_constraint_list ( Constraint_list *CL, int field);
 Constraint_list *modify_weight( Constraint_list *CL,int start, int end,  char *modify_mode);
-Constraint_list *compact_list (Constraint_list *CL, int start, int len, char *compact_mode);
+Constraint_list *compact_list (Constraint_list *CL, char *compact_mode);
 Constraint_list *rescale_list_simple (Constraint_list *CL,int start, int len,int new_min, int new_max);
 Constraint_list *rescale_list (Constraint_list *CL,int start, int len,int max1, int max2);
 Constraint_list* filter_list (Constraint_list *CL, int start, int len,int T);
@@ -570,7 +587,7 @@ char * list2prune_list (Sequence *S, int **sm);
 Constraint_list *weight_constraint_list(Constraint_list * CL, char *seq_weight);
 Weights* compute_t_coffee_weight(Constraint_list * CL);
 Constraint_list *re_weight_constraint_list(Constraint_list * CL,Weights *W);
-
+Constraint_list *set_weight4constraint_list(Constraint_list * CL,int w);
 
 Distance_matrix *cl2distance_matrix (Constraint_list *CL, Alignment *A,  char *mode, char *sim_mode, int print);
 Distance_matrix *seq2distance_matrix (Constraint_list *CL, Alignment *A,  char *mode, char *sim_mode, int print);
