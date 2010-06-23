@@ -3688,7 +3688,9 @@ int is_rootpid()
 
   if (debug_lock)
     {
-      fprintf ( stderr,"\n\t------ check if %d isrootpid (util): %s->%d", getpid(),lock2name (getppid(),LLOCK), (lock(getppid(), LLOCK, LCHECK, NULL))?1:0);
+      char *f;
+      fprintf ( stderr,"\n\t------ check if %d isrootpid (util): %s->%d", getpid(),f=lock2name (getppid(),LLOCK), (lock(getppid(), LLOCK, LCHECK, NULL))?1:0);
+      vfree (f);
     }
 		
   
@@ -3715,11 +3717,10 @@ int shift_lock ( int from, int to, int from_type,int to_type, int action)
 
 char*lock2name (int pid, int type)
 {
-  static char *fname;
+  char *fname;
   char host[1024];
   gethostname(host, 1023);
   
-  vfree (fname);
   fname=vcalloc (strlen(host)+strlen (get_lockdir_4_tcoffee())+1000, sizeof (char));
   if (type == LLOCK)sprintf (fname, "%s/.%d.%s.lock4tcoffee",get_lockdir_4_tcoffee(), pid,host);
   else if ( type == LERROR) sprintf (fname, "%s/.%d.%s.error4tcoffee", get_lockdir_4_tcoffee(),pid,host); 
@@ -3731,7 +3732,7 @@ char*lock2name (int pid, int type)
 char* lock(int pid,int type, int action,char *string, ...)
 {
   char *fname;
-  
+  char *r;
 
 
   
@@ -3744,11 +3745,11 @@ char* lock(int pid,int type, int action,char *string, ...)
   
   if (action == LREAD)
     {
-      return file2string (fname);
+      r=file2string (fname);
     }
   else if ( action == LCHECK)
     {
-      return (file_exists (NULL,fname))?"x":NULL;
+      r=(file_exists (NULL,fname))?"x":NULL;
     }
   else if (action== LRELEASE) 
     {
@@ -3762,6 +3763,7 @@ char* lock(int pid,int type, int action,char *string, ...)
 	  vremove (fname);
 	//safe_remove (fname);return NULL;
 	}
+      r=" ";
     }
   else if ( clean_exit_started) return NULL; //NO MORE LOCK SETTING during EXIT Phase
   else if (action== LSET || action == LRESET)    
@@ -3779,11 +3781,11 @@ char* lock(int pid,int type, int action,char *string, ...)
 	}
       string2file (fname, (action==LSET)?"a":"w", value);
       vfree (value);
-      return " ";
+      r= " ";
     }
   else myexit(fprintf_error ( stderr, "ERROR: Unknown action for LOCK"));
-  
-  return NULL;
+  vfree (fname);
+  return r;
     
 }
 int check_process (const char *com,int pid,int r, int failure_handling)
@@ -4159,7 +4161,7 @@ int get_child_list (int pid,int *clist)
 	}
       free_arrayN ((void **)list, 3);
     }
-  
+  vfree (lockf);
   if (!clist[pid]){clist[pid]=1; n++;}
   return n;
 }

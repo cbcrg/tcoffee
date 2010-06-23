@@ -1982,7 +1982,7 @@ int cl2pair_list_ecl ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int
   else if ( mode==4)return cl2pair_list_ecl_noext_raw (A, ns, ls, CL, list_in, n_in);
   else if ( mode==5)return cl2pair_list_ecl_pc     (A, ns, ls, CL, list_in, n_in);
   else if ( mode==6)return cl2pair_list_ecl_ext_pc     (A, ns, ls, CL, list_in, n_in);
-  else if ( mode==7)return cl2pair_list_ecl_pc_prf     (A, ns, ls, CL, list_in, n_in);
+  
 }
 int cl2pair_list_ecl_noext_raw ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
@@ -2239,135 +2239,9 @@ int cl2pair_list_ecl_raw ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
  * \param n_in number of sequences?
  */
 
-int cl2pair_list_ecl_pc_prf ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
-{
-  int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2, n;
-  int a, b, l1, l2;
-  int **pos,**list;
-  int max_n;
-
-  int nused;
-  int *used_list;
-  int *sl2, **inv_pos;
-
-  int **nr;
 
 
-  float nscore, score, tot, filter, avg=0, new=0;
-  float **used;
 
- 
-  if ( !A) return 0;
-  list=list_in[0];
-  n=n_in[0];
-  max_n=read_array_size (list, sizeof (int*));
-
-  pos=aln2pos_simple ( A,-1, ns, ls);
-  inv_pos=vcalloc ((CL->S)->nseq, sizeof (int*));
-  for (a=0; a<ns[1]; a++)inv_pos[ls[1][a]] =seq2inv_pos(A->seq_al[ls[1][a]]);
-
-  l1=strlen (A->seq_al[ls[0][0]]);
-  l2=strlen (A->seq_al[ls[1][0]]);
-  sl2=vcalloc ((CL->S)->nseq, sizeof (int));
-  nr=declare_int (2, MAX(l1,l2)+1);
-
-  for (a=0; a<l1;a++)
-    for (b=0; b<ns[0]; b++)
-      if (!is_gap(A->seq_al[ls[0][b]][a]))nr[0][a+1]++;
-  for (a=0; a<l2;a++)
-    for (b=0; b<ns[1]; b++)
-      if (!is_gap(A->seq_al[ls[1][b]][a]))nr[1][a+1]++;
-  
-  for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
-  
-    
-  used=declare_float (l2+1,2);
-  used_list=vcalloc (l2+1, sizeof (int));
-  nused=0;
-  
-  for (p1=0; p1<=l1; p1++)
-    {
-      
-      for (tot=0,nused=0,si=0;p1>0 && si<ns[0]; si++)
-	{
-	  s=ls [0][si];r=pos[s][p1-1];
-	  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
-	    {
-	      t_s=CL->residue_index[s][r][a+SEQ2];
-	      t_r=CL->residue_index[s][r][a+R2];
-	      t_w=CL->residue_index[s][r][a+WE];
-	      for (b=0; b<CL->residue_index[t_s][t_r][0];)
-		{
-		  if (b==0){t_s2=t_s;t_r2=t_r;t_w2=t_w;b++;}
-		  else 
-		    { 
-		      t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
-		      t_r2=CL->residue_index[t_s][t_r][b+R2];
-		      t_w2=CL->residue_index[t_s][t_r][b+WE];
-		      b+=ICHUNK;
-		    }
-		  
-		  if (sl2[t_s2])
-		    {
-		      p2=inv_pos[t_s2][t_r2];
-		      //score=((float)t_w/(float)NORM_F)*((float)t_w2/(float)NORM_F);
-		      score=MIN(((float)t_w/(float)NORM_F),((float)t_w2/(float)NORM_F));
-		      
-		      if (!used[p2][1] && score>0)
-			{
-			  used_list[nused++]=p2;
-			}
-		      
-		      tot+=score;
-		      used[p2][0]+=score;
-		      used[p2][1]++;
-		    }
-		}
-	    }
-	}
-      //FILTER: Keep in the graph the edges where (p1->p2/(Sum (P1->x))>0.01
-      filter=0.01;
-      
-      for (a=0; a<nused; a++)
-	{
-	  
-	  p2=used_list[a];
-	  nscore=used[p2][0]/tot; //Normalized score used for filtering
-	  score =used[p2][0];
-		  
-	  used[p2][0]=used[p2][1]=0;
-	  if (n==max_n)
-	    {
-	      max_n+=10000;list=vrealloc (list, max_n*sizeof (int*));
-	    }
-	  if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
-	    {
-	      if (!list[n])
-			  list[n]=vcalloc (7, sizeof (int));
-	      
-	      list[n][0]=p1;
-	      list[n][1]=p2;
-	      list[n][3]=(l1-(p1))+(p2);
-	      score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
-	      list[n][2]=(int)((float)score*(float)NORM_F);
-	      avg+=(int)((float)score*(float)NORM_F);
-	      new++;
-	      n++;
-	    }
-	}
-    }
-  free_float (used, -1);
-  vfree (used_list);
-  free_int (inv_pos, -1);
-  free_int (pos, -1);
-  vfree (sl2);
-  free_int (nr, -1);
-
-  n_in[0]=n;
-  list_in[0]=list;
-  if (new)avg/=new;
-  return avg;
-}
 int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
   int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2, n;

@@ -1691,7 +1691,6 @@ int checkCL (Constraint_list *CL, char *t)
     }
   return 1;
 }
-    
 
 Constraint_list *add_entry2list( CLIST_TYPE *entry, Constraint_list *CL)
 	{
@@ -3188,8 +3187,7 @@ Constraint_list * extend_constraint_list ( Constraint_list *CL)
 	{
 	  
 	  cache[s1][r1]=1;
-	  entry[SEQ1]=s1;
-	  entry[R1]=r1;
+	  
 	  
 	  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
 	    {
@@ -3212,12 +3210,23 @@ Constraint_list * extend_constraint_list ( Constraint_list *CL)
 		 r3=CL->residue_index[s2][r2][b+R2];
 		 w3=CL->residue_index[s2][r2][b+WE]; 
 		
-		 if (!cache[s3][r3] && s3>s1)
+		 if (!cache[s3][r3] )//&& s3>s1)
 		   {
+		     int ts,tr;
+
+		     entry[SEQ1]=s1;
+		     entry[R1]=r1;
 		     entry[SEQ2]=s3;
 		     entry[R2]=r3;
 		     entry[WE]=MIN(w2, w3);
+		     entry [CONS]=1;
 		     tot++;c++;
+		     for (e=0; e<CL->entry_len; e++)fprintf ( fp, "%d ", entry[e]);
+		     
+		     entry[SEQ1]=s3;
+		     entry[R1]=r3;
+		     entry[SEQ2]=s1;
+		     entry[R2]=r1;
 		     for (e=0; e<CL->entry_len; e++)fprintf ( fp, "%d ", entry[e]);
 		   }
 		}
@@ -3630,6 +3639,36 @@ int constraint_list2ne  ( Constraint_list *CL)
     }				
   return max/ICHUNK;
 }
+float constraint_list2connectivity (Constraint_list *CL)
+{
+  float **mat;
+  float tot=0;
+  float ntot=0;
+  int s1, s2,r1,b;
+  Sequence *S=CL->S;
+  
+  mat=declare_float (S->nseq, S->nseq);
+  for (s1=0; s1<S->nseq; s1++)
+    for ( r1=1;r1<=S->len[s1]; r1++)
+      {
+	for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	  {
+	    mat[s1][CL->residue_index[s1][r1][b+SEQ2]]++;
+	  }
+      }
+  for (s1=0; s1<S->nseq; s1++)
+    for ( s2=0; s2<S->nseq; s2++)
+      {
+	if ( s1==s2)continue;
+	mat[s1][s2]*=(float)2;
+	mat[s1][s2]/=(float)(S->len[s1]+S->len[s2]);
+	tot+=mat[s1][s2];
+	ntot++;
+      }
+  free_float (mat, -1);
+  tot=(float)tot/(float)(ntot);
+  return tot;
+}
 int constraint_list2avg ( Constraint_list *CL)
 {
  
@@ -3685,7 +3724,8 @@ Constraint_list * filter_constraint_list (Constraint_list *CL,int field, int T)
   
   return CL;
 }
-	      
+	
+
 Constraint_list * shrink_constraint_list (Constraint_list *CL)
 {
   int a, b, n, tot;
@@ -3833,7 +3873,7 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 	  
 	  entry=vcalloc (CL->entry_len+1, sizeof (int));
 	  
-	  if ( atoigetenv ("TOP4TC")){HERE ("TOP=1");top=1;}
+	  //if ( atoigetenv ("TOP4TC")){HERE ("TOP=1");top=1;}
 	  
 	  sprintf ( weight_mode , "%s", (!in_weight_mode || strm (in_weight_mode, "default"))?"sim":in_weight_mode);
 	  
@@ -3924,6 +3964,7 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 				  entry[SEQ2]=s2;
 				  entry[R1]=nres1;
 				  entry[R2]=nres2;
+				  entry[CONS]=1;
 				  if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
 				  else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
 				  add_entry2list (entry, CL);
