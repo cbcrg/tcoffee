@@ -501,7 +501,7 @@ sub url2file
 	exit ($EXIT_FAILURE);
       }
     
-    if     (&pg_is_installed    ("wget")){$pg="wget"; $flag="-O";$arg=$wget_arg;}
+    if     (&pg_is_installed    ("wget")){$pg="wget"; $flag="-O";$arg="--tries=2 --connect-timeout=10 $wget_arg";}
     elsif  (&pg_is_installed    ("curl")){$pg="curl"; $flag="-o";$arg=$curl_arg;}
     else
       {
