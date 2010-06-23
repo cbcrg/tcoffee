@@ -25,7 +25,18 @@ PG clustalw language2		C
 PG clustalw source		http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/ClustalW/clustalw1.82.UNIX.tar.gz
 PG clustalw mode		mcoffee,rcoffee
 PG clustalw version		1.82
- 
+
+PG dialign-t 4_TCOFFEE		DIALIGNT		
+PG dialign-t type		sequence_multiple_aligner		
+PG dialign-t ADDRESS		http://dialign-tx.gobics.de/
+PG dialign-t DIR		/usr/share/dialign-tx/
+PG dialign-t language		C
+PG dialign-t language2		C
+PG dialign-t source		http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz	
+PG dialign-t mode		mcoffee
+PG dialign-t binary		dialign-t
+PG dialign-t version	1.0.2
+	 
 PG dialign-tx 4_TCOFFEE		DIALIGNTX		
 PG dialign-tx type		sequence_multiple_aligner		
 PG dialign-tx ADDRESS		http://dialign-tx.gobics.de/
