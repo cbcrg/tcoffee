@@ -875,7 +875,7 @@ sub install_source_package
     #
     # DIALIGN-TX module
     #
-    elsif ( $pg eq "dialign-tx" || $pg eq "dialign-t" )
+    elsif ( $pg eq "dialign-tx" )
       {
 	my $f;
 	my $base=cwd();
@@ -887,11 +887,11 @@ sub install_source_package
 	
 	chdir "..";
 	&check_cp ("./source/$pg", "$BIN");
+	# create also a copy named 'dialign-t' for backward compatibility with tcoffee
 	&check_cp ("./source/$pg", "$BIN/dialign-t");
-	&check_cp ("./source/$pg", "$BIN/dialign-tx");
 	
-	repo_store("./source/dialign-t");
-	repo_store("./source/dialign-tx");
+	# cache both version dialign-tx and dialign-t
+	repo_store("./source/dialign-tx", "$BIN/dialign-t");
       }
       
     #
@@ -958,7 +958,7 @@ sub install_source_package
      elsif (  $pg eq "mus4")
       {
 	`rm *.o muscle muscle.exe $SILENT`;
-	&flush_command ("mk");
+	&flush_command ("./mk");
 	&check_cp("$pg", "$BIN");
 	repo_store("$pg");	
       }
@@ -1292,6 +1292,7 @@ sub repo_load
     my $VER = $PG{$pg}{version};
     my $CACHE = "$REPO_ROOT/$pg/$VER/$OSNAME-$OSARCH"; 
     if( !-e "$CACHE/$pg" ) {
+   	 	print "~~~~~~~ Module \"$pg\" NOT found on repository cache.\n";
     	return 0;
     }
     
@@ -1528,15 +1529,6 @@ $PG{"clustalw"}{"language"}="C";
 $PG{"clustalw"}{"language2"}="C";
 $PG{"clustalw"}{"source"}="http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/ClustalW/clustalw1.82.UNIX.tar.gz";
 $PG{"clustalw"}{"mode"}="mcoffee,rcoffee";
-$PG{"dialign-t"}{"4_TCOFFEE"}="DIALIGNT";
-$PG{"dialign-t"}{"type"}="sequence_multiple_aligner";
-$PG{"dialign-t"}{"ADDRESS"}="http://dialign-tx.gobics.de/";
-$PG{"dialign-t"}{"DIR"}="/usr/share/dialign-tx/";
-$PG{"dialign-t"}{"language"}="C";
-$PG{"dialign-t"}{"language2"}="C";
-$PG{"dialign-t"}{"source"}="http://dialign-tx.gobics.de/DIALIGN-TX_1.0.1.tar.gz";
-$PG{"dialign-t"}{"mode"}="mcoffee";
-$PG{"dialign-t"}{"binary"}="dialign-t";
 $PG{"dialign-tx"}{"4_TCOFFEE"}="DIALIGNTX";
 $PG{"dialign-tx"}{"type"}="sequence_multiple_aligner";
 $PG{"dialign-tx"}{"ADDRESS"}="http://dialign-tx.gobics.de/";
