@@ -887,12 +887,27 @@ sub install_source_package
 	
 	chdir "..";
 	&check_cp ("./source/$pg", "$BIN");
-	# create also a copy named 'dialign-t' for backward compatibility with tcoffee
-	&check_cp ("./source/$pg", "$BIN/dialign-t");
-	
-	# cache both version dialign-tx and dialign-t
-	repo_store("./source/dialign-tx", "$BIN/dialign-t");
+	repo_store("./source/$pg");
       }
+      
+    #
+    # DIALIGN-T module 
+    # (is the same as dialign-tx, but it is mantained for backward name compatibility with tcoffee)
+    #
+    elsif ( $pg eq "dialign-t" )
+      {
+	my $f;
+	my $base=cwd();
+
+	chdir "./source";
+	if ($OS eq "macosx"){&flush_command ("cp makefile.MAC_OS makefile");}
+
+	&flush_command (" make CPPFLAGS='-O3 -funroll-loops' all");
+	
+	chdir "..";
+	&check_cp ("./source/dialign-tx", "$BIN/dialign-t");
+	repo_store("$BIN/dialign-t");	
+      }      
       
     #
     # POA module
@@ -1529,6 +1544,15 @@ $PG{"clustalw"}{"language"}="C";
 $PG{"clustalw"}{"language2"}="C";
 $PG{"clustalw"}{"source"}="http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/ClustalW/clustalw1.82.UNIX.tar.gz";
 $PG{"clustalw"}{"mode"}="mcoffee,rcoffee";
+$PG{"dialign-t"}{"4_TCOFFEE"}="DIALIGNT";
+$PG{"dialign-t"}{"type"}="sequence_multiple_aligner";
+$PG{"dialign-t"}{"ADDRESS"}="http://dialign-tx.gobics.de/";
+$PG{"dialign-t"}{"DIR"}="/usr/share/dialign-tx/";
+$PG{"dialign-t"}{"language"}="C";
+$PG{"dialign-t"}{"language2"}="C";
+$PG{"dialign-t"}{"source"}="http://dialign-tx.gobics.de/DIALIGN-TX_1.0.1.tar.gz";
+$PG{"dialign-t"}{"mode"}="mcoffee";
+$PG{"dialign-t"}{"binary"}="dialign-t";
 $PG{"dialign-tx"}{"4_TCOFFEE"}="DIALIGNTX";
 $PG{"dialign-tx"}{"type"}="sequence_multiple_aligner";
 $PG{"dialign-tx"}{"ADDRESS"}="http://dialign-tx.gobics.de/";
