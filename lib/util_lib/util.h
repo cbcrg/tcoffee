@@ -461,7 +461,7 @@ int   shift_lock (int from, int to, int from_type,int to_type, int action);
 char *lock2name (int pid, int type);
 char *lock (int pid, int type, int action, char *value, ...);
 int check_process (const char *com,int pid,int r, int failure_handling);
-
+int assert_pid (pid_t p);
 pid_t **declare_pidtable ();
 pid_t set_pid (pid_t p);
 pid_t vvfork(char *mode);

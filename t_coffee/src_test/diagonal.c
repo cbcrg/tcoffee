@@ -84,7 +84,7 @@ extend_diagonals(Diagonal *diagonals, int *num_diagonal, int l1, int l2)
 					diagonals[first].end_exp = max(diagonals[first].end_exp, diff);
 					diagonals[next].front_exp = max(diagonals[next].front_exp, diff);
 	// 				if (diagonals[next].x - diagonals[next].front_exp < 0)
-	// 					printf("SHIT1\n");
+	
 					while (diagonals[++first].x == -1);
 				}
 				else
@@ -104,7 +104,7 @@ extend_diagonals(Diagonal *diagonals, int *num_diagonal, int l1, int l2)
 				diagonals[next].end_exp = max(diagonals[next].end_exp, diff);
 	// 			++num_segments;
 	// 			if (diagonals[first].x - diagonals[first].front_exp < 0)
-	// 				printf("SHIT2\n");
+	
 				while (diagonals[++first].x == -1);
 			}
 		} else

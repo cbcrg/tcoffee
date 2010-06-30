@@ -85,7 +85,7 @@ del_gap_from_profile(Fastal_profile *prf, int alphabet_size, int *gap_list, int 
 	while (gap_pos < prf_length)
 	{
 // 		printf("PRF1: %i %i %i %i\n", prf_in[0][gap_pos], prf_in[1][gap_pos], prf_in[2][gap_pos], prf_in[3][gap_pos]);
-// 		printf("HALLO ARSCH!\n");
+
 		not_gap = 0;
 		for (i = 0; i < alphabet_size; ++i)
 		{

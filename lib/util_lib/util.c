@@ -3926,33 +3926,20 @@ int safe_system (const char * com_in)
 
 
 static int **pidtable;
-static int pidtable_s;
-static int max_pid;
-pid_t **realloc_pidtable (int value);
-pid_t **realloc_pidtable (int value)
+int assert_pid (pid_t p)
 {
-  int a;
-  int new_max;
-
-  new_max=value+10000;
-  
-  pidtable=vrealloc (pidtable, sizeof (pid_t*)*(new_max));
-  for (a=max_pid; a<new_max; a++)
-    pidtable[a]=vcalloc (2, sizeof (pid_t));
-  max_pid=new_max;
-  return pidtable;
+  if ( p>= MAX_N_PID || p<0)
+    {
+      printf_exit (EXIT_FAILURE, stderr, "MAX_N_PID exceded -- Recompile changing the value of MAX_N_PID (current: %d Requested: %d)", MAX_N_PID, p);
+    }
+  return 1;
 }
-
-  
 pid_t **declare_pidtable ()
 {
   int a;
-  if (!max_pid)max_pid=40000;
   
-  pidtable_s=MAX_N_PID;
-  
-  pidtable=vcalloc (pidtable_s, sizeof (pid_t*));
-  for (a=0; a< pidtable_s; a++)
+  pidtable=vcalloc (MAX_N_PID, sizeof (pid_t*));
+  for (a=0; a<MAX_N_PID; a++)
     {
       pidtable[a]=vcalloc (2, sizeof (pid_t));
     }
@@ -3961,10 +3948,9 @@ pid_t **declare_pidtable ()
 pid_t set_pid (pid_t p)
 {
 
-  
+  assert_pid (p);
   if (!pidtable)declare_pidtable();
   if ( p<=0) return (pid_t)0;
-  else if ( p>=max_pid)realloc_pidtable((int)p);
   pidtable[(int)p][0]=getpid();
   pidtable[(int)p][1]=1;
   return p;}
@@ -4027,14 +4013,19 @@ int    vwait_npid (int sub, int max, int min)
   else{;}
   return sub;
 }
-    
+
+      
 pid_t  vwaitpid (pid_t p, int *status, int options)
 {
 
   
   p=waitpid (p, status, options);
     
-  if (pidtable)pidtable[(int)p][0]=pidtable[(int)p][1]=0;
+  if (pidtable)
+    {
+      assert_pid (p);
+      pidtable[(int)p][0]=pidtable[(int)p][1]=0;
+    }
   return p;
 }
 pid_t vwait (pid_t *p)
@@ -4054,51 +4045,7 @@ pid_t vwait (pid_t *p)
   return p2;
 }
 
-#ifdef keepdoinstuff
-int * pid2cpid (int pid)
-{
-  sprintf (tmp, "/var/tmp/%d.plist");
-  
-  fprintf (com, "ps -f > %s", tmp);
-  fp=vfopen (tmp, "r");
-  list=file2string(tmp);
-  
-  for (a=2; a< atoi (list[0]); a++)
-    {
-      max=MAX(atoi(list[a][1]), max);
-      max=MAX(atoi(list[a][2]), max);
-    }
-  child= vcalloc ( max+2, sizeof (int));
-  parent=vcalloc ( max+2, sizeof (int));
-  child[max+1]=parent[max+1]=-1;
-  
-  for (a=2; a< atoi (list[0]); a++)
-    {
-      p=atoi(list[a][1]);
-      c=atoi(list[a][2]);
-      parent[p]=c;
-    }
-  child [pid]=1;
-  while ( pid2cpid2(parent, child));
-  child[pid]=0;
-  return child;
-}
 
-int pid2cpid2 (int *parent, int *child)
-{
-  int a=0, n=0;
-  while ( parent[a]!=-1)
-    {
-      
-      if (parent[a] && child[a] && !child[parent[a]])
-	{
-	  child [parent[a]]=1;
-	  n++;
-	}
-    }
-  return n;
-}
-#endif
 int get_child_list (int pid,int *clist);
 int kill_child_list (int *list);
 int kill_child_pid(int pid)
@@ -4107,7 +4054,6 @@ int kill_child_pid(int pid)
   int n,a, cpid;
   
   cpid=getpid();
-  
   list=vcalloc (MAX_N_PID, sizeof (int));
   
   while ((n=get_child_list (pid,list)))
@@ -4150,10 +4096,12 @@ int get_child_list (int pid,int *clist)
   int a;
   int n=0;
   
+  assert_pid (pid);
   lockf=lock2name (pid, LLOCK);
   if ( lockf && file_exists (NULL,lockf)) 
     {
       list=file2list (lockf, "\n");
+      
       a=1;
       while (list && list[a])
 	{
@@ -4162,6 +4110,7 @@ int get_child_list (int pid,int *clist)
       free_arrayN ((void **)list, 3);
     }
   vfree (lockf);
+  
   if (!clist[pid]){clist[pid]=1; n++;}
   return n;
 }
@@ -4181,7 +4130,7 @@ int kill_child_pid_pld()
       int a;
       pid_t cpid;
       cpid=getpid();
-      for (a=0; a<pidtable_s; a++)
+      for (a=0; a<MAX_N_PID; a++)
 	{
 	  if (pidtable[a][1] && pidtable[a][0]==cpid )
 	    {

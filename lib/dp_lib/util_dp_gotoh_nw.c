@@ -2904,6 +2904,9 @@ int linked_pair_wise ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL)
   int *ns, **ls;
   int mode=1;//1:ecl, 0:ref
 
+  if ( !CL->residue_index)return myers_miller_pair_wise (A, nsi,lsi,CL);
+  
+
   ns=vcalloc (2, sizeof (int));
   ns[0]=nsi[1]; ns[1]=nsi[0];
   

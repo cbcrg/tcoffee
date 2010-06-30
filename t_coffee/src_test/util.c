@@ -3688,7 +3688,9 @@ int is_rootpid()
 
   if (debug_lock)
     {
-      fprintf ( stderr,"\n\t------ check if %d isrootpid (util): %s->%d", getpid(),lock2name (getppid(),LLOCK), (lock(getppid(), LLOCK, LCHECK, NULL))?1:0);
+      char *f;
+      fprintf ( stderr,"\n\t------ check if %d isrootpid (util): %s->%d", getpid(),f=lock2name (getppid(),LLOCK), (lock(getppid(), LLOCK, LCHECK, NULL))?1:0);
+      vfree (f);
     }
 		
   
@@ -3715,11 +3717,10 @@ int shift_lock ( int from, int to, int from_type,int to_type, int action)
 
 char*lock2name (int pid, int type)
 {
-  static char *fname;
+  char *fname;
   char host[1024];
   gethostname(host, 1023);
   
-  vfree (fname);
   fname=vcalloc (strlen(host)+strlen (get_lockdir_4_tcoffee())+1000, sizeof (char));
   if (type == LLOCK)sprintf (fname, "%s/.%d.%s.lock4tcoffee",get_lockdir_4_tcoffee(), pid,host);
   else if ( type == LERROR) sprintf (fname, "%s/.%d.%s.error4tcoffee", get_lockdir_4_tcoffee(),pid,host); 
@@ -3731,7 +3732,7 @@ char*lock2name (int pid, int type)
 char* lock(int pid,int type, int action,char *string, ...)
 {
   char *fname;
-  
+  char *r;
 
 
   
@@ -3744,11 +3745,11 @@ char* lock(int pid,int type, int action,char *string, ...)
   
   if (action == LREAD)
     {
-      return file2string (fname);
+      r=file2string (fname);
     }
   else if ( action == LCHECK)
     {
-      return (file_exists (NULL,fname))?"x":NULL;
+      r=(file_exists (NULL,fname))?"x":NULL;
     }
   else if (action== LRELEASE) 
     {
@@ -3762,6 +3763,7 @@ char* lock(int pid,int type, int action,char *string, ...)
 	  vremove (fname);
 	//safe_remove (fname);return NULL;
 	}
+      r=" ";
     }
   else if ( clean_exit_started) return NULL; //NO MORE LOCK SETTING during EXIT Phase
   else if (action== LSET || action == LRESET)    
@@ -3779,11 +3781,11 @@ char* lock(int pid,int type, int action,char *string, ...)
 	}
       string2file (fname, (action==LSET)?"a":"w", value);
       vfree (value);
-      return " ";
+      r= " ";
     }
   else myexit(fprintf_error ( stderr, "ERROR: Unknown action for LOCK"));
-  
-  return NULL;
+  vfree (fname);
+  return r;
     
 }
 int check_process (const char *com,int pid,int r, int failure_handling)
@@ -4159,7 +4161,7 @@ int get_child_list (int pid,int *clist)
 	}
       free_arrayN ((void **)list, 3);
     }
-  
+  vfree (lockf);
   if (!clist[pid]){clist[pid]=1; n++;}
   return n;
 }
@@ -5480,7 +5482,7 @@ char *short_tmpnam_2(char *s)
   static int file;
   char buf[VERY_LONG_STRING];
   static char root2[VERY_LONG_STRING]; 
-  static char *tmpdir;
+
   static int name_size;
   
   if ( !root || !s)
@@ -5564,7 +5566,7 @@ char *vremove (char *s)
 }
 int log_function ( char *fname)
 {
-  char command[1000];
+
   
   if ( file_exists (NULL,error_file))
     {
@@ -5960,14 +5962,14 @@ int get_cl_param (int argc, char **argv, FILE **fp,char *para_name, int *set_fla
 	   for ( a=1; a< argc; a++)
 	       {
 	       if ( is_parameter ( argv[a]))
-		 
+		 {
 		 if (strstr (argv[a], "help"))myexit (EXIT_SUCCESS);
 		 else if ( name_is_in_list ( argv[a], parameter_list, number_of_parameters, STRING)==-1)
 		      {
 			myexit(fprintf_error ( stderr, "\n%s IS NOT A PARAMETER  OF %s [FATAL/%s %s]\n",argv[a], argv[0], argv[0], VERSION));
 		      
 		      }
-		  
+		 }
 		     
 	       }
 	 
@@ -6689,7 +6691,7 @@ int curl (char *address, char *out)
 
 int simple_check_internet_connection (char *ref_site)
 {
-  char *test,command[1000];
+  char *test;
   int n, internet=0;
   
   test=vtmpnam (NULL);
@@ -6711,9 +6713,9 @@ int check_internet_connection  (int mode)
 char *pg2path (char *pg)
 {
   char *path;
-  char *p;
+  
   char *tmp;
-  FILE *fp;
+ 
     
   if ( !pg) return NULL;
   tmp=vtmpnam(NULL);
@@ -6734,7 +6736,7 @@ char *pg2path (char *pg)
 
 int check_program_is_installed ( char *program_name, char *path_variable, char *path_variable_name, char *where2getit, int fatal)
   {
-   char command[LONG_STRING];
+   
    static char *path;
    
 
@@ -6949,7 +6951,7 @@ int my_mkdir ( char *dir_in)
 	  if (access(dir, F_OK)==-1)
 	    {
 	    
-	      char command [1000];
+
 	      printf_system_direct("mkdir %s", dir);
 	      if ( access (dir, F_OK)==-1)
 		{
@@ -6973,7 +6975,7 @@ int filename_is_special (char *fname)
 
 char* check_file_exists ( char *fname_in)
 	{
-	FILE *fp;
+	
 	static char *fname1;
 	static char *fname2;
 	
@@ -7983,9 +7985,9 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   char buf[1000];
   char **out_argv;
   int a, stdi,c;
-  FILE *fp;
-  char *env_file;
-  char parent[100];
+
+
+
   
 
  
@@ -8139,7 +8141,7 @@ void clean_exit ()
 {
   Tmpname *b;
   char *tmp;
-  static int done;
+
   Tmpname *start;
   int debug;
 
@@ -8268,7 +8270,7 @@ int string_putenv ( char *s)
   
   p=s;
   n=0;
-  while ( p=strstr (p, "-setenv"))
+  while ( (p=strstr (p, "-setenv")))
     {
       if (sscanf (p, "-setenv %s %s", v1,v2)==2)
 	{

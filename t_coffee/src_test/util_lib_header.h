@@ -1339,6 +1339,8 @@ Constraint_list * expand_constraint_list_4gp (Constraint_list *CL, int T);
 Constraint_list * filter_constraint_list (Constraint_list *CL, int field, int T);
 int constraint_list_is_connected ( Constraint_list *CL);
 int constraint_list2avg ( Constraint_list *CL);
+float constraint_list2connectivity ( Constraint_list *CL);
+
 int constraint_list2fraction_covered ( Constraint_list *CL);
 
 int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *weight_mode, int *weight);

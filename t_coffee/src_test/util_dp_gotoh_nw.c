@@ -2238,6 +2238,10 @@ int cl2pair_list_ecl_raw ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
  * \param list_in the diagonals
  * \param n_in number of sequences?
  */
+
+
+
+
 int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
   int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2, n;
@@ -2367,7 +2371,6 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
   if (new)avg/=new;
   return avg;
 }
-
 
 int cl2pair_list_ecl_rawquad ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {

@@ -815,8 +815,8 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
       int s1, s2;
       int *nns, **nls;
       Alignment *NA1, *NA2;
-      int *sst1;
-      int *sst2;
+      char *sst1;
+      char *sst2;
 
       
       nns=vcalloc ( 2, sizeof (int));

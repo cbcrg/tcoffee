@@ -11,7 +11,7 @@
 #define TMP_MAX_KEEP  10
 #define CACHE_MAX_SIZE  2000
 #define CACHE_MAX_KEEP  180
-#define MAX_N_PID       100000
+#define MAX_N_PID       260000
 //Importnat Values Affecting the Program Behavior
 #define SCORE_K          10
 #define NORM_F           1000
