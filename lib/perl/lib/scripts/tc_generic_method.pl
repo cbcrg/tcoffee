@@ -1195,7 +1195,7 @@ sub is_valid_blast_xml
       
       if ( !-e $file) {return 0;}
       $line=&file2tail ($file,100);
-      if ( $line=~/<\/EBIApplicationResult/ || $line=~/<\/NCBI_BlastOutput/){return 1;}
+      if ( $line=~/<\/EBIApplicationResult/ || $line=~/<\/NCBI_BlastOutput/ || $line=~/<\/BlastOutput/ ){return 1;}
       return 0;
     }
 sub file2blast_flavor
