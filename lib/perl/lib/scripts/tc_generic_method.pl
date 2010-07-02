@@ -2137,8 +2137,8 @@ sub fasta_file1_eq_fasta_file2
     my ($f1, $f2)=@_;
     my (%s1, %s2);
     my @names;
-    %s1=read_fasta_seq (%f1);
-    %s2=read_fasta_seq (%f2);
+    %s1=read_fasta_seq ($f1);
+    %s2=read_fasta_seq ($f2);
 
     @names=(keys (%s1));
     
