@@ -3483,7 +3483,7 @@ if(1)\
     int n;					\
     char buf2[2];				\
     va_start (ap,string);			\
-    n=vsnprintf (buf2,1, string, ap)+2;		\
+    n=vsnprintf (buf2,1, string, ap)+3;		\
     va_end (ap);				\
     va_start (ap, string);			\
     buf=vcalloc (n, sizeof (char));		\
