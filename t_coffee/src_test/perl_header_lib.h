@@ -1938,8 +1938,8 @@ neither curl nor wget are installed. Imnpossible t\
 o fectch remote file\"));\n	exit ($EXIT_FAILURE);\\
 n      }\n  }\nsub fasta_file1_eq_fasta_file2\n  {\
 \n    my ($f1, $f2)=@_;\n    my (%s1, %s2);\n    m\
-y @names;\n    %s1=read_fasta_seq (%f1);\n    %s2=\
-read_fasta_seq (%f2);\n\n    @names=(keys (%s1));\\
+y @names;\n    %s1=read_fasta_seq ($f1);\n    %s2=\
+read_fasta_seq ($f2);\n\n    @names=(keys (%s1));\\
 n    \n    foreach $n (keys(%s1))\n      {\n	if ($\
 s1{$n}{seq} ne $s2{$n}{seq}){return 0;}\n      } \\
 n    \n    foreach $n (keys(%s2))\n      {\n	if ($\
@@ -2264,7 +2264,7 @@ tem.\\nRUN:\\n\\tsudo perl -MCPAN -e 'install $pg'\
 (flush_error(\"\\nProgram $p Supported but Not Ins\
 talled on your system\"));\n      }\n    else\n   \
    {\n	return 1;\n      }\n  }\n\n$program=\"T-COF\
-FEE (Version_8.79)\";\n\n","*TC_METHOD_FORMAT_01\n\
+FEE (Version_8.90)\";\n\n","*TC_METHOD_FORMAT_01\n\
 ******************generic_method.tc_method********\
 *****\n*\n*       Incorporating new methods in T-C\
 offee\n*       Cedric Notredame 26/08/08\n*\n*****\

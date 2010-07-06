@@ -1926,8 +1926,8 @@ sub run_blast
 	    else
 	      {
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp -j5";}
-		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null 2>/dev/null";
-		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null";
+		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile";
+		system ($command);
 		&safe_system ( $command,5);
 		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
 		elsif (-e "$outfile.xml.xml"){`mv $outfile.xml.xml $outfile`;} 

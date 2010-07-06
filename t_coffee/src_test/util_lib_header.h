@@ -461,7 +461,7 @@ int   shift_lock (int from, int to, int from_type,int to_type, int action);
 char *lock2name (int pid, int type);
 char *lock (int pid, int type, int action, char *value, ...);
 int check_process (const char *com,int pid,int r, int failure_handling);
-
+int assert_pid (pid_t p);
 pid_t **declare_pidtable ();
 pid_t set_pid (pid_t p);
 pid_t vvfork(char *mode);
@@ -1692,6 +1692,7 @@ struct X_template * seq_has_template ( Sequence *S, int n, char *type);
 char *aln_column2string (Alignment *A, int p);
 int **fix_seq_aln (Sequence *S, Alignment*A, int **cache);
 int **fix_seq_seq ( Sequence *S1, Sequence *S2);
+int **fix_aln_seq_new (Alignment *S1, Sequence *S2);
 
 Alignment * fix_aln_seq  ( Alignment *A, Sequence *S);
 Alignment * rotate_aln ( Alignment *A, char *name);

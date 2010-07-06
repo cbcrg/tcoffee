@@ -4431,7 +4431,16 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
     }
   return index;
 }
-
+int **fix_aln_seq_new (Alignment *A, Sequence *Sx)
+{
+  Sequence *S;
+  int **f;
+  
+  S=aln2seq (A);
+  f=fix_seq_seq(S, Sx);
+  free_sequence (S, S->nseq);
+  return f;
+}
 Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
         {
 	int a, b, c;

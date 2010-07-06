@@ -11,7 +11,7 @@
 #define TMP_MAX_KEEP  10
 #define CACHE_MAX_SIZE  2000
 #define CACHE_MAX_KEEP  180
-#define MAX_N_PID       100000
+#define MAX_N_PID       260000
 //Importnat Values Affecting the Program Behavior
 #define SCORE_K          10
 #define NORM_F           1000
@@ -736,8 +736,8 @@ The format is as follow:
 -------------------------------------------------------------------------------------------
 the RGB values are used for the post-script generation, the html code is used in html documents.
 */
-#define DATE "Wed Jun 23 18:44:45 CEST 2010"
+#define DATE "Fri Jul 2 01:30:11 CEST 2010"
 #define PROGRAM "T-COFFEE"
-#define VERSION "Version_8.83"
+#define VERSION "Version_8.91"
 #define AUTHOR "Cedric Notredame "
 #define DISTRIBUTION_ADDRESS "www.tcoffee.org/Packages/"

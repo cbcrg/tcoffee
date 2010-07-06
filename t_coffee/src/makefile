@@ -14,7 +14,7 @@ HTML_PUBLIC=$(HOME2)/public_html/
 #							#
 #########################################################
 
-CC=gcc -g
+CC=gcc -O3
 
 
 SOURCE_DIR=$(PWD)/../../$(EXECUTABLE)/lib

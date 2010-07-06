@@ -1146,7 +1146,6 @@ Constraint_list * pdbid_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 
 		  sprintf ( F->name[0],"%s", (CL->S)->name[s1]);
 		  sprintf ( F->name[1],"%s", (CL->S)->name[s2]);
-		  F=fix_aln_seq (F, CL->S);
 		  CL=aln2constraint_list (F, CL, "sim");
 		}
 	      free_aln (F);
@@ -1213,7 +1212,6 @@ Constraint_list * pdb_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 
 	      sprintf ( F->name[0],"%s", (CL->S)->name[s1]);
 	      sprintf ( F->name[1],"%s", (CL->S)->name[s2]);
-	      F=fix_aln_seq (F, CL->S);
 	      CL=aln2constraint_list (F, CL, "sim");
 	    }
 
@@ -1344,7 +1342,6 @@ Constraint_list* thread_pair2 ( TC_method *M, int s1, int s2, Constraint_list *C
       {
     	sprintf ( F->name[0],"%s", (CL->S)->name[s1]);
 	sprintf ( F->name[1],"%s", (CL->S)->name[s2]);
-	F=fix_aln_seq (F, CL->S);
 	CL=aln2constraint_list (F, CL, "sim");
       }
 
@@ -1418,12 +1415,6 @@ Constraint_list * lsqman_pair ( char *in_seq, Constraint_list *CL)
 	 /*sprintf ( F->name[0],"%s", (CL->S)->name[s1]);
 	 sprintf ( F->name[1],"%s", (CL->S)->name[s2]);
 	 */
-	 F=fix_aln_seq (F, CL->S);
-
-
-
-
-
 	 CL=aln2constraint_list (F, CL, "100");
 	 free_aln (F);
 	 return CL;
@@ -1579,7 +1570,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    fprintf (fp, "! SEQ_1_TO_N\n");
 	    vfclose (fp);
 	    
-	    CL=fast_read_constraint_list_file(CL,sap_lib);
+	    CL=read_constraint_list_file(CL,sap_lib);
 	    vremove (sap_lib);
 
 	    vfree ( string1);vfree ( string2);vfree ( string3);vfree ( string4);vfree ( string5);
@@ -1643,7 +1634,6 @@ Constraint_list *rna_pair (TC_method *M ,
 	{
 		sprintf ( F->name[0],"%s", (CL->S)->name[s1]);
 		sprintf ( F->name[1],"%s", (CL->S)->name[s2]);
-		F=fix_aln_seq (F, CL->S);
 		CL=aln2constraint_list (F, CL, "sim");
 	}
 

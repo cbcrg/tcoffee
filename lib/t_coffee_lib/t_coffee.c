@@ -2438,9 +2438,9 @@ get_cl_param(\
 			    /*TYPE*/      "D"              ,\
 			    /*OPTIONAL?*/ OPTIONAL         ,\
 			    /*MAX Nval*/  1                ,\
-			    /*DOC*/       "Minimum similarity between a sequence and its PDB target" ,\
+			    /*DOC*/       "Minimum similarity between a sequence and its BLAST relatives" ,\
 			    /*Parameter*/ &prot_min_sim          ,\
-			    /*Def 1*/     "0"             ,\
+			    /*Def 1*/     "40"             ,\
 			    /*Def 2*/     "20"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
@@ -2476,7 +2476,7 @@ get_cl_param(\
 			    /*MAX Nval*/  1                ,\
 			    /*DOC*/       "Minimum coverage of a sequence by its BLAST relatives" ,\
 			    /*Parameter*/ &prot_min_cov          ,\
-			    /*Def 1*/     "0"             ,\
+			    /*Def 1*/     "40"             ,\
 			    /*Def 2*/     "0"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \

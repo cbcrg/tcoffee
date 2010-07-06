@@ -154,6 +154,7 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	      done++;
 	    }
 	  dump_constraint_list (CL, pid_tmpfile[a], "a");
+	  freeze_constraint_list (CL);
 	  myexit (EXIT_SUCCESS);
 	}
       else
@@ -1264,7 +1265,7 @@ Constraint_list *  freeze_constraint_list (Constraint_list *CL)
   int a, b, d=0;
   Sequence *S=CL->S;
   int **freeze=declare_int2 (S->nseq, S->len, 1);
-  CL=unfreeze_constraint_list (CL);
+  
   for ( a=0; a<S->nseq; a++)
     for ( b=1; b<=S->len[a]; b++)
       {
@@ -2518,216 +2519,8 @@ Constraint_list * make_test_lib(Constraint_list *CL)
     }
   return CL;
 }
-Constraint_list * read_constraint_list_file(Constraint_list *CL, char *fname)
-        {
-	  int a, c,e,n,z,i;
-	int seq_len, sn;
-	int s1, s2;
-	FILE *fp;
-	static char *name;
-	char *sequence;
-	static char *mat;
-	static char *dp_mode;
-	int max_nseq=0;
-	static int *sn_list;
-	static int line=2;
-	int list_nseq;
-	static CLIST_TYPE *entry;
-	Sequence *S;
-	Sequence *small_S;
-	int seq_1_to_n=0;
-	Alignment *B=NULL;
-	char *buf;
-	int lline;
-	char *stripped_file1;
-	char *stripped_file;
-
-	return fast_read_constraint_list_file (CL, fname);
-	
-
-	stripped_file1=strip_file_from_comments ("!", fname);
-	stripped_file=expand_constraint_list_file (stripped_file1);
-	small_S=read_seq_in_n_list (&fname, 1,NULL, NULL); 
-	
-	 for (i=0; i<small_S->nseq; i++)
-	    HERE ("%s %s", small_S->name[i], small_S->seq[i]);
-	
-	 exit (0);
-	 if ( !CL)
-	  {
-	    CL=declare_constraint_list ( small_S,NULL, NULL, 0,NULL, NULL);  
-	    CL->S=small_S;
-	  }
-
-	small_S=read_seq_in_n_list (&fname, 1, (CL->S)->type, NULL);
-	
-	B=seq2aln (small_S, NULL, 1); 
-	B=fix_aln_seq  ( B, (CL->S));
-	
-	if ( CL->S!=small_S)free_sequence (small_S, B->nseq);
-		
-	lline=measure_longest_line_in_file (fname)+1;
-		
-	if ( !mat) mat=vcalloc (STRING, sizeof (char));
-	if ( !dp_mode) dp_mode=vcalloc (STRING, sizeof (char));
-	fp=vfopen (fname, "r");
-	while((c=fgetc(fp))!='#' && c!=EOF)if ( c=='\n')max_nseq++;
-	vfclose (fp);
-	
-	
-	buf=vcalloc (lline, sizeof (char));	
-	sequence=vcalloc (lline, sizeof (char));
-	if ( !name)name=vcalloc ( 100, sizeof (char));
-	if ( !entry)entry=vcalloc ( CL->entry_len+1, CL->el_size);
-	if ( !sn_list)sn_list=vcalloc (max_nseq, sizeof (int));
-	else 
-	  {
-	    sn_list=vrealloc (sn_list, max_nseq*sizeof (int));
-	  }
-	S=CL->S;
-
-	seq_1_to_n=((fp=find_token_in_file (fname, NULL, "SEQ_1_TO_N"))!=NULL);
-	vfclose (fp);
-	if ( sn_list==NULL)sn_list=vcalloc (max_nseq, sizeof (int));
-	
-	/*Read Constraint list*/
-	fp=vfopen(stripped_file,"r");
-	fscanf ( fp, "%d\n", &list_nseq);
-	for ( a=0; a<list_nseq; a++)
-		{
-		fscanf ( fp, "%s %d %s\n", name, &seq_len, sequence);
-		line++;
-		lower_string (sequence);
-		
-		if ((sn=name_is_in_list (name,S->name, S->nseq, 100))==-1){continue;}
-		else
-		  {
-		    sn_list[a]=sn;
-		  }
-		}
-	c=0;
-	
-	while (c!=EOF && (c=fgetc(fp))!=EOF)
-	  {
-	    
-	    ungetc(c, fp);
-	    
-	    if ( c=='#')
-			{
-			  fscanf ( fp, "#%d %d\n", &s1, &s2);line++;
-			/*Check If the sequence numbering is legal*/
-			if ( seq_1_to_n){s1--; s2--;}
-			
-			if (s1<0 || s2 <0)
-			  {
-			    
-			    myexit(fprintf_error (stderr, "ERROR: Wrong Sequence Numbering in %s\n",fname));
-			  }
-			
-
-			
-			s1=sn_list[s1];
-			s2=sn_list[s2];
-
-			while (isdigit((c=fgetc(fp))))
-				{
-
-				for ( z=0; z<  CL->entry_len; z++)entry[z]=0;
-				ungetc(c, fp);				
-				n=0;
-				entry[n++]=s1;
-				entry[n++]=s2;
-				while ( (c=fgetc(fp))!='\n')
-				  {
-				   
-					if ( isspace (c));
-					else 
-						{
-						ungetc(c, fp);
-						fscanf ( fp, "%d", &entry[n]);
-						n++;
-						}
-					
-					if ( n>CL->entry_len)
-						{
-						add_warning ( stderr, "\nWARNING:PARSING ERROR #1 (Too many Fields) IN %s AT LINE %d: C=%c n=%d\n", fname,line, c,n);
-						for ( e=2; e<LIST_N_FIELDS; e++)
-							fprintf ( stderr, "%d ", entry[e]);
-					
-						myexit (EXIT_FAILURE);
-						}
-					}
-				if (c=='\n')line++;
-				 
-				if ( n<=CONS)entry[CONS]=1;
-				
-				  
-				/*Check The legality of the entry*/
-				if ( n>0 && n<3)
-					{
-					add_warning ( stderr, "\nWARNING:PARSING ERROR #2 IN %s (Not enough Fields) AT LINE %d: C=%c\n", fname,line-1, c);
-					for ( e=2; e<LIST_N_FIELDS; e++)
-						fprintf ( stderr, "%d ",entry[e]);
-					
-					myexit (EXIT_FAILURE);
-					}
-				
-				entry[R1]=(B->seq_cache)?B->seq_cache[entry[SEQ1]][entry[R1]]:entry[R1];
-				entry[R2]=(B->seq_cache)?B->seq_cache[entry[SEQ2]][entry[R2]]:entry[R2];
-				
-				if ( entry[R1] && entry[R2])
-				  {
-				    if ( entry[R1]<=0 || entry[R1]>(CL->S)->len[s1])
-				      {
-					fprintf ( stderr, "\nERROR: Seq1=%d (len=%d, name=%s), Seq2=%d (len=%d, name=%s), Res1 %d, Res2 %d\n", entry[SEQ1]+1,(CL->S)->len[s1],(CL->S)->name[s1], entry[SEQ2]+1,(CL->S)->len[s2],(CL->S)->name[s2],entry[R1], entry[R2]);
-					fprintf ( stderr, "\nERROR: Library %s, line %d, Field 1: Bad residue numbering (%d)[FATAL:%s]\n", fname, line-1,entry[R1], PROGRAM);
-					myexit (EXIT_FAILURE);
-				      }
-				    else if (entry[R2]<=0 || entry[R2]>(CL->S)->len[s2])
-				      {
-					fprintf ( stderr, "\nERROR: Seq1=%d (len=%d, name=%s), Seq2=%d (len=%d, name=%s), Res1 %d, Res2 %d\n", entry[SEQ1]+1,(CL->S)->len[s1],(CL->S)->name[s1], entry[SEQ2]+1,(CL->S)->len[s2],(CL->S)->name[s2],entry[R1], entry[R2]);
-					
-					fprintf ( stderr, "\nERROR: Seq1: %d, Seq2 %d, Res1 %d, Res2 %d\n", entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]);
-					fprintf ( stderr, "\nERROR: Library %s, line %d, Field 2: Bad residue numbering (%d)[FATAL:%s]\n", fname, line-1, entry[R2],PROGRAM);
-					myexit (EXIT_FAILURE);
-				      }
-				    fscanf ( fp, "\n");
-				    if ( (entry[SEQ1]>entry[SEQ2])|| (entry[SEQ1]==entry[SEQ2] && entry[R1]>entry[R2]))
-				      {
-					SWAP(entry[SEQ1],entry[SEQ2]);
-					SWAP(entry[R1], entry[R2]);
-				      }
-				    add_entry2list (entry, CL);
-				    CL->ne++;
-				  }
-				}
-			 ungetc ( c, fp);
-			 
-			 }
-	    else if ( c=='!' || c=='C' || c=='\n' || c=='\r'){while ((c=fgetc(fp))!='\n' && c!=EOF && c!='\r');}
-	    else
-	      {
-		fprintf ( stderr, "\n\n PARSING ERROR 3 IN %s AT LINE %d: [%c] \n[read_constraint_list_file]", fname,line,c); 			
-		while ((c=fgetc(fp))!='\n' && c!=EOF)fprintf ( stderr, "%c", c);
-		fprintf ( stderr, "\n");
-		printf_system ( "cp %s faulty_library.tc_lib", fname);
-		myexit (EXIT_FAILURE);
-	      }
-	    if ( c==EOF)ungetc(c, fp);
-	  }
-	
-	free_aln (B);
-	vfree(buf);
-	vfree(sequence);
-	vfclose (fp);	 
-	remove(stripped_file);
-	
-	return CL;
-	} 
-
-
-	   
-Constraint_list * fast_read_constraint_list_file(Constraint_list *CL, char *in_fname)
+  
+Constraint_list * read_constraint_list_file(Constraint_list *CL, char *in_fname)
         {
 	  Sequence *NS;
 	  int **index, *entry;
@@ -3857,7 +3650,7 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 
 Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char *in_weight_mode)
 	{
-	  int a, b, c,nres1, nres2;
+	  int a, b, c;
 	  int *weight=NULL;
 	  int s1, s2;
 	  int fixed_nres1, fixed_nres2;
@@ -3870,7 +3663,7 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 	  int *cache;
 	  int top=0;
 	  int *entry;
-	  
+	  int **fixed;
 	  entry=vcalloc (CL->entry_len+1, sizeof (int));
 	  
 	  //if ( atoigetenv ("TOP4TC")){HERE ("TOP=1");top=1;}
@@ -3878,7 +3671,7 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 	  sprintf ( weight_mode , "%s", (!in_weight_mode || strm (in_weight_mode, "default"))?"sim":in_weight_mode);
 	  
 	  if ( !A)return CL;	
-	  A=fix_aln_seq (A, (CL->S));
+	  fixed=fix_aln_seq_new (A, (CL->S));
 	  
 	  if ( !CL)
 	    {
@@ -3896,88 +3689,61 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 	      p[0]='\0';
 	    }
 	  
-	  
 	  for ( a=0; a<A->nseq-1; a++)
 	    {
-	      s1=name_is_in_list (A->name[a], (CL->S)->name, (CL->S)->nseq, 100);
+	      if ((s1=fixed[a][0])==-1)continue;
 	      for (set_misc=0,b=a+1; b< A->nseq; b++)
 		{	
-		  s2=name_is_in_list (A->name[b], (CL->S)->name, (CL->S)->nseq, 100);
+		  int use_pair;
+		  int nres1=0;
+		  int nres2=0;
+		  if ((s2=fixed[b][0])==-1)continue;
+		  weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
 		  
-		  if ( s1==-1 || s2==-1)
+		  for (c=0; c< A->len_aln; c++)
 		    {
-		      if ( getenv4debug ("DEBUG_LIBRARY"))
-			fprintf ( stderr, "\n[DEBUG_LIBRARY:aln2constraint_list]Could use a pair of constraints");
-		    }
-		  else if ( s1!=-1 && s2!=-1)
-		    {
-		      int use_pair;
+		      int isgap1, isgap2;
+		      isgap1=is_gap(A->seq_al[a][c]);
+		      isgap2=is_gap(A->seq_al[b][c]);
+		      nres1+=!isgap1;
+		      nres2+=!isgap2;
+			  
+		      if (cache[c]==-1 && top)continue;
+		      if (!isgap1)cache[c]=1;
+		      if (cache[c] && b==A->nseq-1)cache[c]=-1;
 		      
-		      weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
+		      use_pair=1;
+		      use_pair=use_pair && !is_gap(A->seq_al[a][c]);
+		      use_pair=use_pair && !is_gap(A->seq_al[b][c]);
+		      use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
+		      use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
+		      use_pair=use_pair && !(do_pdb && pdb_weight==0);
+		      use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
 		      
-		      for (nres1=A->order[a][1], nres2=A->order[b][1], c=0; c< A->len_aln; c++)
+		      if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
+		      
+		      if (use_pair)
 			{
-			  int isgop1, isgop2;
-			  int isgap1, isgap2;
+			 
+			  if ((fixed_nres1=fixed[a][nres1])<0)continue;
+			  if ((fixed_nres2=fixed[b][nres2])<0)continue;
 			  
-			  isgop1=is_gop(c, A->seq_al[a]);
-			  isgop2=is_gop(c, A->seq_al[b]);
-			  isgap1=is_gap(A->seq_al[a][c]);
-			  isgap2=is_gap(A->seq_al[b][c]);
-			  nres1+=!isgap1;
-			  nres2+=!isgap2;
-			  
-			  if (cache[c]==-1 && top)continue;
-			  if (!isgap1)cache[c]=1;
-			  if (cache[c] && b==A->nseq-1)cache[c]=-1;
-			  
-			  use_pair=1;
-			  use_pair=use_pair && !is_gap(A->seq_al[a][c]);
-			  use_pair=use_pair && !is_gap(A->seq_al[b][c]);
-			  use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
-			  use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
-			  use_pair=use_pair && !(do_pdb && pdb_weight==0);
-			  use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
-			  
-			  if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
-			  
-			  /*if ( !is_gap(A->seq_al[a][c]) && !is_gap(A->seq_al[b][c]) && A->seq_al[b][c]!=UNDEFINED_RESIDUE && A->seq_al[a][c]!=UNDEFINED_RESIDUE && !(do_pdb && pdb_weight==0))*/
-			  if (use_pair)
-			    {
-			      
-			      fixed_nres1=(!A->seq_cache)?nres1:A->seq_cache[s1][nres1];
-			      fixed_nres2=(!A->seq_cache)?nres2:A->seq_cache[s2][nres2];
-			      
-			      
-			      if ( fixed_nres1==-1 || fixed_nres2==-1)
-				{
-				  fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[a], nres1,fixed_nres1 );
-				  fprintf ( stderr, "\nPB: Sequence %s, Residue %d : Cache=%d",A->name[b], nres2,fixed_nres2 );
-				  
-				  myexit(EXIT_FAILURE);
-				}
-			      
-			      if ( fixed_nres1 && fixed_nres2)
-				{
-				  
-				  entry[SEQ1]=s1;
-				  entry[SEQ2]=s2;
-				  entry[R1]=nres1;
-				  entry[R2]=nres2;
-				  entry[CONS]=1;
-				  if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
-				  else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
-				  add_entry2list (entry, CL);
-				}
-			      
-			    }
-		      }
-		  }
-	      }
-	  }
+			  entry[SEQ1]=s1;
+			  entry[SEQ2]=s2;
+			  entry[R1]=fixed_nres1;
+			  entry[R2]=fixed_nres2;
+			  entry[CONS]=1;
+			  if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
+			  else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
+			  add_entry2list (entry, CL);
+			}
+		    }
+		}
+	    }
 	vfree (entry);
 	vfree (cache);
 	vfree (weight);
+	free_int (fixed, -1);
 	if (A->A) 
 	  {
 	    return aln2constraint_list (A->A, CL, weight_mode);
@@ -4796,7 +4562,7 @@ Constraint_list *read_rna_lib ( Sequence *S, char *fname)
   for (a=0; a< n; a++)
     {
 
-      if (list[a])R=fast_read_constraint_list_file (R, list[a]);
+      if (list[a])R=read_constraint_list_file (R, list[a]);
     }
 
   

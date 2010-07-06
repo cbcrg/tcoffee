@@ -22,6 +22,11 @@ our $ROOT=&get_root();
 our $CD=cwd();
 our $CDIR=$CD;
 our $HOME=$ENV{'HOME'};
+
+our $OSNAME=$ENV{'OSNAME'};
+our $OSARCH=$ENV{'OSARCH'};
+our $REPO_ROOT="";
+
 our $CXX="g++";
 our $CXXFLAGS="";
 
@@ -69,9 +74,9 @@ if (($cl=~/-h/) ||($cl=~/-H/) )
     print "!!!!!!! ./install [optional:target] -exec=/foo/bar/       [address for the T-Coffee executable]\n";
     print "!!!!!!! ./install [optional:target] -dis=/foo/bar/        [Address where distributions should be stored]\n";
     print "!!!!!!! ./install [optional:target] -tclinkdb=foo|update  [file containing all the packages to be installed]\n";
-    print "!!!!!!! ./install [optional:target] -tclinkdb=foo|update  [file containing all the packages to be installed]\n";
     print "!!!!!!! ./install [optional:target] -clean                [clean everything]\n";
     print "!!!!!!! ./install [optional:target] -plugins              [plugins directory]\n";
+    print "!!!!!!! ./install [optional:target] -repo=/path/to/repo   [binaries repository root directory]\n";
     print "!!!!!!! mode:";
     foreach $m (keys(%MODE)){print "$m ";}
     print "\n";
@@ -109,7 +114,14 @@ if ( ($cl=~/-dis=\s*(\S+)/)){$DISTRIBUTIONS=$1;}
 if ( ($cl=~/-tclinkdb=\s*(\S+)/)){$tclinkdb=$1;}
 if ( ($cl=~/-proxy=\s*(\S+)/)){$proxy=$1;}
 if ( ($cl=~/-clean/)){$clean=1;}
+if ( ($cl=~/-repo=\s*(\S+)/)){ $REPO_ROOT=$1; }
 if ($tclinkdb){&update_tclinkdb ($tclinkdb);}
+
+
+if( $REPO_ROOT ne "" ) {
+	if( $OSNAME eq "" ) { print "You have specified the repository folder but the required \"OSNAME\" enviroment variable is missing. \n"; exit 1; } 
+	if( $OSARCH eq "" ) { print "You have specified the repository folder but the required \"OSARCH\" enviroment variable is missing. \n"; exit 1; } 
+}
 
 our $TCDIR=$ENV{DIR_4_TCOFFEE};
 our $TCCACHE=$ENV{CACHE_4_TCOFFEE};
@@ -445,7 +457,7 @@ sub url2file
 	exit ($EXIT_FAILURE);
       }
     
-    if     (&pg_is_installed    ("wget")){$pg="wget"; $flag="-O";$arg=$wget_arg;}
+    if     (&pg_is_installed    ("wget")){$pg="wget"; $flag="-O";$arg="--tries=2 --connect-timeout=10 $wget_arg";}
     elsif  (&pg_is_installed    ("curl")){$pg="curl"; $flag="-o";$arg=$curl_arg;}
     else
       {
@@ -609,6 +621,13 @@ sub install_source_package
     my (@fl);
     if ( -e "$BIN/$pg" || -e "$BIN/$pg.exe"){return 1;}
     
+    #
+    # check if the module exists in the repository cache 
+    #
+	if( repo_load($pg) ) {
+		return 1;
+	}
+    
     if ($pg eq "t_coffee")  {return   &install_t_coffee ($pg);}
     elsif ($pg eq "TMalign"){return   &install_TMalign ($pg);}
     
@@ -692,7 +711,11 @@ sub install_source_package
       }
     print "\n------- Compiling/Installing $pg\n";
     `make clean $SILENT`;
-    #sap
+    
+    
+    #
+    # SAP module
+    #
     if ($pg eq "sap")
       {
 	if (-e "./configure")
@@ -709,6 +732,7 @@ sub install_source_package
 	    &flush_command ("make clean");
 	    &flush_command ("make");
 	    &check_cp ("./src/$pg", "$BIN");
+	    repo_store("./src/$pg");
 	  }
 	else
 	  {
@@ -716,29 +740,48 @@ sub install_source_package
 	    `rm *.o sap  sap.exe ./util/aa/*.o  ./util/wt/.o $SILENT`;
 	    &flush_command ("make $arguments sap");
 	    &check_cp ($pg, "$BIN");
+	    repo_store($pg);
 	  }
       }
+    
+    #
+    # CLUSTALW2 module
+    #
     elsif ($pg eq "clustalw2")
       {
 	&flush_command("./configure");
 	&flush_command("make $arguments");
 	&check_cp ("./src/$pg", "$BIN");
-	
+	repo_store("./src/$pg");
       }
+    
+    #
+    # FSA module
+    # 
     elsif ($pg eq "fsa")
       {
 	&flush_command("./configure --prefix=$BIN");
 	&flush_command("make $arguments");
 	&flush_command ("make install");
+
+	repo_store("fsa", "$BIN/bin");
 	`mv $BIN/bin/* $BIN`;
 	`rmdir $BIN/bin`;
       }
+    
+    #
+    # CLUSTALW module
+    #
     elsif ($pg eq "clustalw")
       {
 	&flush_command("make $arguments clustalw");
 	`$CP $pg $BIN $SILENT`;
+	repo_store($pg);
       }
     
+    #
+    # MAFFT module
+    #
     elsif ($pg eq "mafft")
       {
 	my $base=cwd();
@@ -758,11 +801,11 @@ sub install_source_package
 	&flush_command ("make $arguments");
 	&flush_command ("make install LIBDIR=../mafft/lib BINDIR=../mafft/bin");
 	
-	#put everything in mafft and copy the coompiled stuff in bin
+	#put everything in mafft and copy the compiled stuff in bin
 	chdir "$base";
 	if ($ROOT_INSTALL)
 	  {
-	    &root_run ("You Must be Roor to Install MAFFT\n", "mkdir /usr/local/mafft/;$CP mafft/lib/* /usr/local/mafft;$CP mafft/lib/mafft* /usr/local/bin ;$CP mafft/bin/mafft /usr/local/bin/; ");
+	    &root_run ("You Must be Root to Install MAFFT\n", "mkdir /usr/local/mafft/;$CP mafft/lib/* /usr/local/mafft;$CP mafft/lib/mafft* /usr/local/bin ;$CP mafft/bin/mafft /usr/local/bin/; ");
 	  }
 	else
 	  {
@@ -772,8 +815,14 @@ sub install_source_package
 	`tar -cvf mafft.tar mafft`;
 	`gzip mafft.tar`;
 	`mv mafft.tar.gz $BIN`;
+	
+	repo_store("mafft/bin/mafft", "mafft/lib/", "$BIN/mafft.tar.gz");
       }
-    elsif ( $pg eq "dialign-tx" ||$pg eq "dialign-t" )
+      
+    #
+    # DIALIGN-TX module
+    #
+    elsif ( $pg eq "dialign-tx" )
       {
 	my $f;
 	my $base=cwd();
@@ -785,15 +834,42 @@ sub install_source_package
 	
 	chdir "..";
 	&check_cp ("./source/$pg", "$BIN");
-	&check_cp ("./source/$pg", "$BIN/dialign-t");
-	&check_cp ("./source/$pg", "$BIN/dialign-tx");
-	
+	repo_store("./source/$pg");
       }
+      
+    #
+    # DIALIGN-T module 
+    # (is the same as dialign-tx, but it is mantained for backward name compatibility with tcoffee)
+    #
+    elsif ( $pg eq "dialign-t" )
+      {
+	my $f;
+	my $base=cwd();
+
+	chdir "./source";
+	if ($OS eq "macosx"){&flush_command ("cp makefile.MAC_OS makefile");}
+
+	&flush_command (" make CPPFLAGS='-O3 -funroll-loops' all");
+	
+	chdir "..";
+	&check_cp ("./source/dialign-tx", "$BIN/dialign-t");
+	repo_store("$BIN/dialign-t");	
+      }      
+      
+    #
+    # POA module
+    #
     elsif ($pg eq "poa")
       {
 	&flush_command ("make $arguments poa");
 	&check_cp ("$pg", "$BIN");
+	repo_store("$pg");
       }
+     
+     
+    #
+    # PROBCONS module
+    #
     elsif ( $pg eq "probcons")
       {
 	&add_C_libraries("./ProbabilisticModel.h", "list", "cstring");
@@ -801,7 +877,12 @@ sub install_source_package
 	`rm *.exe $SILENT`;
 	&flush_command ("make $arguments probcons");
 	&check_cp("$pg", "$BIN/$pg");
+	repo_store("$pg");
       }
+      
+    #
+    # PROBCONS RNA module
+    #
     elsif ( $pg eq "probconsRNA")
       {
 	&add_C_libraries("./ProbabilisticModel.h", "list", "cstring");
@@ -809,14 +890,18 @@ sub install_source_package
 	`rm *.exe $SILENT`;
 	&flush_command ("make $arguments probcons");
 	&check_cp("probcons", "$BIN/$pg");
+	repo_store("$BIN/$pg");
       }
 
+	#
+	# MUSCLE module
+	#
     elsif (  $pg eq "muscle")
       {	
 	`rm *.o muscle muscle.exe $SILENT`;
 	if ($OS eq "macosx" || $OS eq "linux")
 	  {
-	    &replace_line_in_file ("./makefile", "LDLIBS = -lm -static",  "LDLIBS = -lm");
+	    &replace_line_in_file ("./Makefile", "LDLIBS = -lm -static",  "LDLIBS = -lm");
 	  }
 	elsif ($OS eq "windows")
 	  {
@@ -826,13 +911,23 @@ sub install_source_package
 	  }
 	&flush_command ("make $arguments all");
 	&check_cp("$pg", "$BIN");
+	repo_store("$pg");	
       }
+      
+     #
+     # MUS4 module
+     #
      elsif (  $pg eq "mus4")
       {
 	`rm *.o muscle muscle.exe $SILENT`;
-	&flush_command ("mk");
+	&flush_command ("./mk");
 	&check_cp("$pg", "$BIN");
+	repo_store("$pg");	
       }
+      
+    #
+    # PCMA module
+    #
     elsif ( $pg eq "pcma")
       {
 	if ($OS eq "macosx")
@@ -841,20 +936,35 @@ sub install_source_package
 	  }
 	&flush_command ("make $arguments pcma");
 	&check_cp("$pg", "$BIN");
+	repo_store("$pg");	
       }
+      
+    #
+    # KALIGN module
+    #
     elsif ($pg eq "kalign")
       {
 	&flush_command ("./configure");
 	&flush_command("make $arguments");
 	&check_cp ("$pg",$BIN);
+	repo_store("$pg");	
       }
+      
+    #
+    # AMAP module
+    #
     elsif ( $pg eq "amap")
       {
 	&add_C_libraries("./Amap.cc", "iomanip", "cstring","climits");	
 	`make clean $SILENT`;
 	&flush_command ("make $arguments all");
 	&check_cp ("$pg", $BIN);
+	repo_store("$pg");	
       }
+      
+    #
+    # PRODA module
+    #
     elsif ( $pg eq "proda")
       {
 	&add_C_libraries("AlignedFragment.h", "vector", "iostream", "cstring","cstdlib");
@@ -862,12 +972,22 @@ sub install_source_package
 	&add_C_libraries("Sequence.cc", "stdlib.h", "cstdio");	
 	&flush_command ("make $arguments all");
 	&check_cp ("$pg", $BIN);
+	repo_store("$pg");	
       }
+      
+    #
+    # PRANK module
+    #
     elsif ( $pg eq "prank")
       {
 	&flush_command ("make $arguments all");
 	&check_cp ("$pg", $BIN);
+	repo_store("$pg");	
       }
+      
+    #
+    # !!!! MUSTANG module
+    #
      elsif ( $pg eq "mustang")
       {
 	&flush_command ("rm ./bin/*");
@@ -876,8 +996,12 @@ sub install_source_package
 	if ( $OS=~/windows/){&flush_command("cp ./bin/* $BIN/mustang.exe");}
 	else {&flush_command("cp ./bin/* $BIN/mustang");}
 	
+	repo_store("$BIN/mustang");
       }
 
+	#
+	# RNAplfold module
+	#
     elsif ( $pg eq "RNAplfold")
       {
 	&flush_command("./configure");
@@ -885,13 +1009,21 @@ sub install_source_package
 	&check_cp("./Progs/RNAplfold", "$BIN");
 	&check_cp("./Progs/RNAalifold", "$BIN");
 	&check_cp("./Progs/RNAfold", "$BIN");
+	
+	repo_store("./Progs/RNAplfold", "./Progs/RNAalifold", "./Progs/RNAfold");
       }
+      
+    #
+    # !!! RETREE module
+    #
     elsif ( $pg eq "retree")
       {
 	chdir "src";
 	&flush_command ("make $arguments all");
 	&flush_command ("make put");
 	system "cp ../exe/* $BIN";
+	
+	repo_store("retree", "../exe");
       }
 	
     chdir $CDIR;
@@ -925,6 +1057,8 @@ sub install_TMalign
     `rm TMalign TMalign.exe $SILENT`;
     if ( $FC ne ""){&flush_command ("make -i $PG{Fortran}{arguments} TMalign");}
     &check_cp ($pg, $BIN);
+    repo_store($pg);
+
     if ( !-e "$BIN/$pg" && pg_has_binary_distrib ($pg))
       {
 	print "!!!!!!! Compilation of $pg impossible. Will try to install from binary\n";
@@ -1048,6 +1182,68 @@ sub check_cp
     `$CP $from $to`;
     return 1;
   }
+
+sub repo_store 
+{
+   # check that all required data are available
+   if( $REPO_ROOT eq "" ) { return; }
+
+
+    # extract the package name from the specified path
+    my $pg =`basename $_[0]`;
+    chomp($pg);
+	
+    my $VER = $PG{$pg}{version};
+    my $CACHE = "$REPO_ROOT/$pg/$VER/$OSNAME-$OSARCH"; 
+    
+    print "~~~~~~~ Storing package: \"$pg\" to path: $CACHE\n";
+    
+    # clean the cache path if exists and create it again
+    `rm -rf $CACHE`;
+    `mkdir -p $CACHE`;
+    
+ 	for my $path (@_) {
+
+	    # check if it is a single file 
+	 	if( -f $path ) {
+	    	`cp $path $CACHE`;
+		}
+		# .. or a directory, in this case copy all the content 
+		elsif( -d $path ) {
+			opendir(IMD, $path);
+			my @thefiles= readdir(IMD);
+			closedir(IMD);
+			
+			for my $_file (@thefiles) {
+				if( $_file ne "." && $_file ne "..") {
+	    			`cp $path/$_file $CACHE`;
+				}
+			}
+		} 
+	}	   
+    
+	
+}   
+
+sub repo_load 
+{
+    my ($pg)=(@_);
+
+    # check that all required data are available
+    if( $REPO_ROOT eq "" ) { return 0; }
+
+    my $VER = $PG{$pg}{version};
+    my $CACHE = "$REPO_ROOT/$pg/$VER/$OSNAME-$OSARCH"; 
+    if( !-e "$CACHE/$pg" ) {
+   	 	print "~~~~~~~ Module \"$pg\" NOT found on repository cache.\n";
+    	return 0;
+    }
+    
+    print "~~~~~~~ Module \"$pg\" found on repository cache. Using copy on path: $CACHE\n";
+    `cp $CACHE/* $BIN`;
+    return 1;
+}
+
 sub check_file_list_exists 
   {
     my ($base, @flist)=(@_);
@@ -1259,6 +1455,7 @@ $PG{"clustalw2"}{"language"}="C++";
 $PG{"clustalw2"}{"language2"}="CXX";
 $PG{"clustalw2"}{"source"}="http://www.clustal.org/download/2.0.10/clustalw-2.0.10-src.tar.gz";
 $PG{"clustalw2"}{"mode"}="mcoffee,rcoffee";
+$PG{"clustalw2"}{"version"}="2.0.10";
 $PG{"clustalw"}{"4_TCOFFEE"}="CLUSTALW";
 $PG{"clustalw"}{"type"}="sequence_multiple_aligner";
 $PG{"clustalw"}{"ADDRESS"}="http://www.clustal.org";
@@ -1266,6 +1463,7 @@ $PG{"clustalw"}{"language"}="C";
 $PG{"clustalw"}{"language2"}="C";
 $PG{"clustalw"}{"source"}="http://www.clustal.org/download/1.X/ftp-igbmc.u-strasbg.fr/pub/ClustalW/clustalw1.82.UNIX.tar.gz";
 $PG{"clustalw"}{"mode"}="mcoffee,rcoffee";
+$PG{"clustalw"}{"version"}="1.82";
 $PG{"dialign-t"}{"4_TCOFFEE"}="DIALIGNT";
 $PG{"dialign-t"}{"type"}="sequence_multiple_aligner";
 $PG{"dialign-t"}{"ADDRESS"}="http://dialign-tx.gobics.de/";
@@ -1275,6 +1473,7 @@ $PG{"dialign-t"}{"language2"}="C";
 $PG{"dialign-t"}{"source"}="http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz";
 $PG{"dialign-t"}{"mode"}="mcoffee";
 $PG{"dialign-t"}{"binary"}="dialign-t";
+$PG{"dialign-t"}{"version"}="1.0.2";
 $PG{"dialign-tx"}{"4_TCOFFEE"}="DIALIGNTX";
 $PG{"dialign-tx"}{"type"}="sequence_multiple_aligner";
 $PG{"dialign-tx"}{"ADDRESS"}="http://dialign-tx.gobics.de/";
@@ -1284,6 +1483,7 @@ $PG{"dialign-tx"}{"language2"}="C";
 $PG{"dialign-tx"}{"source"}="http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz";
 $PG{"dialign-tx"}{"mode"}="mcoffee";
 $PG{"dialign-tx"}{"binary"}="dialign-tx";
+$PG{"dialign-tx"}{"version"}="1.0.2";
 $PG{"poa"}{"4_TCOFFEE"}="POA";
 $PG{"poa"}{"type"}="sequence_multiple_aligner";
 $PG{"poa"}{"ADDRESS"}="http://www.bioinformatics.ucla.edu/poa/";
@@ -1294,6 +1494,7 @@ $PG{"poa"}{"DIR"}="/usr/share/";
 $PG{"poa"}{"FILE1"}="blosum80.mat";
 $PG{"poa"}{"mode"}="mcoffee";
 $PG{"poa"}{"binary"}="poa";
+$PG{"poa"}{"version"}="2.0";
 $PG{"probcons"}{"4_TCOFFEE"}="PROBCONS";
 $PG{"probcons"}{"type"}="sequence_multiple_aligner";
 $PG{"probcons"}{"ADDRESS"}="http://probcons.stanford.edu/";
@@ -1302,6 +1503,7 @@ $PG{"probcons"}{"language"}="C++";
 $PG{"probcons"}{"source"}="http://probcons.stanford.edu/probcons_v1_12.tar.gz";
 $PG{"probcons"}{"mode"}="mcoffee";
 $PG{"probcons"}{"binary"}="probcons";
+$PG{"probcons"}{"version"}="1.12";
 $PG{"mafft"}{"4_TCOFFEE"}="MAFFT";
 $PG{"mafft"}{"type"}="sequence_multiple_aligner";
 $PG{"mafft"}{"ADDRESS"}="http://align.bmr.kyushu-u.ac.jp/mafft/online/server/";
@@ -1311,6 +1513,7 @@ $PG{"mafft"}{"source"}="http://align.bmr.kyushu-u.ac.jp/mafft/software/mafft-6.6
 $PG{"mafft"}{"windows"}="http://align.bmr.kyushu-u.ac.jp/mafft/software/mafft-6.603-mingw.tar";
 $PG{"mafft"}{"mode"}="mcoffee,rcoffee";
 $PG{"mafft"}{"binary"}="mafft.tar.gz";
+$PG{"mafft"}{"version"}="6.603";
 $PG{"muscle"}{"4_TCOFFEE"}="MUSCLE";
 $PG{"muscle"}{"type"}="sequence_multiple_aligner";
 $PG{"muscle"}{"ADDRESS"}="http://www.drive5.com/muscle/";
@@ -1320,6 +1523,7 @@ $PG{"muscle"}{"source"}="http://www.drive5.com/muscle/downloads3.7/muscle3.7_src
 $PG{"muscle"}{"windows"}="http://www.drive5.com/muscle/downloads3.7/muscle3.7_win32.zip";
 $PG{"muscle"}{"linux"}="http://www.drive5.com/muscle/downloads3.7/muscle3.7_linux_ia32.tar.gz";
 $PG{"muscle"}{"mode"}="mcoffee,rcoffee";
+$PG{"muscle"}{"version"}="3.7";
 $PG{"mus4"}{"4_TCOFFEE"}="MUS4";
 $PG{"mus4"}{"type"}="sequence_multiple_aligner";
 $PG{"mus4"}{"ADDRESS"}="http://www.drive5.com/muscle/";
@@ -1327,6 +1531,7 @@ $PG{"mus4"}{"language"}="C++";
 $PG{"mus4"}{"language2"}="GPP";
 $PG{"mus4"}{"source"}="http://www.drive5.com/muscle/muscle4.0_src.tar.gz";
 $PG{"mus4"}{"mode"}="mcoffee,rcoffee";
+$PG{"mus4"}{"version"}="4.0";
 $PG{"pcma"}{"4_TCOFFEE"}="PCMA";
 $PG{"pcma"}{"type"}="sequence_multiple_aligner";
 $PG{"pcma"}{"ADDRESS"}="ftp://iole.swmed.edu/pub/PCMA/";
@@ -1334,6 +1539,7 @@ $PG{"pcma"}{"language"}="C";
 $PG{"pcma"}{"language2"}="C";
 $PG{"pcma"}{"source"}="ftp://iole.swmed.edu/pub/PCMA/pcma.tar.gz";
 $PG{"pcma"}{"mode"}="mcoffee";
+$PG{"pcma"}{"version"}="1.0";
 $PG{"kalign"}{"4_TCOFFEE"}="KALIGN";
 $PG{"kalign"}{"type"}="sequence_multiple_aligner";
 $PG{"kalign"}{"ADDRESS"}="http://msa.cgb.ki.se";
@@ -1341,6 +1547,7 @@ $PG{"kalign"}{"language"}="C";
 $PG{"kalign"}{"language2"}="C";
 $PG{"kalign"}{"source"}="http://msa.cgb.ki.se/downloads/kalign/current.tar.gz";
 $PG{"kalign"}{"mode"}="mcoffee";
+$PG{"kalign"}{"version"}="1.0";
 $PG{"amap"}{"4_TCOFFEE"}="AMAP";
 $PG{"amap"}{"type"}="sequence_multiple_aligner";
 $PG{"amap"}{"ADDRESS"}="http://bio.math.berkeley.edu/amap/";
@@ -1348,6 +1555,7 @@ $PG{"amap"}{"language"}="C++";
 $PG{"amap"}{"language2"}="CXX";
 $PG{"amap"}{"source"}="http://amap-align.googlecode.com/files/amap.2.0.tar.gz";
 $PG{"amap"}{"mode"}="mcoffee";
+$PG{"amap"}{"version"}="2.0";
 $PG{"proda"}{"4_TCOFFEE"}="PRODA";
 $PG{"proda"}{"type"}="sequence_multiple_aligner";
 $PG{"proda"}{"ADDRESS"}="http://proda.stanford.edu";
@@ -1355,6 +1563,7 @@ $PG{"proda"}{"language"}="C++";
 $PG{"proda"}{"language2"}="CXX";
 $PG{"proda"}{"source"}="http://proda.stanford.edu/proda_1_0.tar.gz";
 $PG{"proda"}{"mode"}="mcoffee";
+$PG{"proda"}{"version"}="1.0";
 $PG{"fsa"}{"4_TCOFFEE"}="FSA";
 $PG{"fsa"}{"type"}="sequence_multiple_aligner";
 $PG{"fsa"}{"ADDRESS"}="http://fsa.sourceforge.net/";
@@ -1362,6 +1571,7 @@ $PG{"fsa"}{"language"}="C++";
 $PG{"fsa"}{"language2"}="CXX";
 $PG{"fsa"}{"source"}="http://sourceforge.net/projects/fsa/files/fsa-1.15.3.tar.gz/download/";
 $PG{"fsa"}{"mode"}="mcoffee";
+$PG{"fsa"}{"version"}="1.15.3";
 $PG{"prank"}{"4_TCOFFEE"}="PRANK";
 $PG{"prank"}{"type"}="sequence_multiple_aligner";
 $PG{"prank"}{"ADDRESS"}="http://www.ebi.ac.uk/goldman-srv/prank/";
@@ -1369,6 +1579,7 @@ $PG{"prank"}{"language"}="C++";
 $PG{"prank"}{"language2"}="CXX";
 $PG{"prank"}{"source"}="http://www.ebi.ac.uk/goldman-srv/prank/src/prank/prank.src.100303.tgz";
 $PG{"prank"}{"mode"}="mcoffee";
+$PG{"prank"}{"version"}="100303";
 $PG{"sap"}{"4_TCOFFEE"}="SAP";
 $PG{"sap"}{"type"}="structure_pairwise_aligner";
 $PG{"sap"}{"ADDRESS"}="http://mathbio.nimr.mrc.ac.uk/wiki/Software";
@@ -1376,6 +1587,7 @@ $PG{"sap"}{"language"}="C";
 $PG{"sap"}{"language2"}="C";
 $PG{"sap"}{"source"}="http://mathbio.nimr.mrc.ac.uk/download/sap-1.1.1.tar.gz";
 $PG{"sap"}{"mode"}="expresso,3dcoffee";
+$PG{"sap"}{"version"}="1.1.1";
 $PG{"TMalign"}{"4_TCOFFEE"}="TMALIGN";
 $PG{"TMalign"}{"type"}="structure_pairwise_aligner";
 $PG{"TMalign"}{"ADDRESS"}="http://zhang.bioinformatics.ku.edu/TM-align/TMalign.f";
@@ -1384,6 +1596,7 @@ $PG{"TMalign"}{"language2"}="Fortran";
 $PG{"TMalign"}{"source"}="http://zhang.bioinformatics.ku.edu/TM-align/TMalign.f";
 $PG{"TMalign"}{"linux"}="http://zhang.bioinformatics.ku.edu/TM-align/TMalign_32.gz";
 $PG{"TMalign"}{"mode"}="expresso,3dcoffee";
+$PG{"TMalign"}{"version"}="1.0";
 $PG{"mustang"}{"4_TCOFFEE"}="MUSTANG";
 $PG{"mustang"}{"type"}="structure_pairwise_aligner";
 $PG{"mustang"}{"ADDRESS"}="http://www.cs.mu.oz.au/~arun/mustang";
@@ -1391,6 +1604,7 @@ $PG{"mustang"}{"language"}="C++";
 $PG{"mustang"}{"language2"}="CXX";
 $PG{"mustang"}{"source"}="http://ww2.cs.mu.oz.au/~arun/mustang/mustang_v3.2.1.tgz";
 $PG{"mustang"}{"mode"}="expresso,3dcoffee";
+$PG{"mustang"}{"version"}="3.2.1";
 $PG{"lsqman"}{"4_TCOFFEE"}="LSQMAN";
 $PG{"lsqman"}{"type"}="structure_pairwise_aligner";
 $PG{"lsqman"}{"ADDRESS"}="empty";
@@ -1431,6 +1645,7 @@ $PG{"probconsRNA"}{"language"}="C++";
 $PG{"probconsRNA"}{"language2"}="CXX";
 $PG{"probconsRNA"}{"source"}="http://probcons.stanford.edu/probconsRNA.tar.gz";
 $PG{"probconsRNA"}{"mode"}="mcoffee,rcoffee";
+$PG{"probconsRNA"}{"version"}="1.0";
 $PG{"sfold"}{"4_TCOFFEE"}="CONSAN";
 $PG{"sfold"}{"type"}="RNA_pairwise_aligner";
 $PG{"sfold"}{"ADDRESS"}="http://selab.janelia.org/software/consan/";
@@ -1446,6 +1661,7 @@ $PG{"RNAplfold"}{"language"}="C";
 $PG{"RNAplfold"}{"language2"}="C";
 $PG{"RNAplfold"}{"source"}="http://www.tbi.univie.ac.at/~ivo/RNA/ViennaRNA-1.7.2.tar.gz";
 $PG{"RNAplfold"}{"mode"}="rcoffee,";
+$PG{"RNAplfold"}{"version"}="1.7.2";
 $PG{"retree"}{"4_TCOFFEE"}="PHYLIP";
 $PG{"retree"}{"type"}="RNA_secondarystructure_predictor";
 $PG{"retree"}{"ADDRESS"}="http://evolution.gs.washington.edu/phylip/";
@@ -1453,6 +1669,7 @@ $PG{"retree"}{"language"}="C";
 $PG{"retree"}{"language2"}="C";
 $PG{"retree"}{"source"}="http://evolution.gs.washington.edu/phylip/download/phylip-3.69.tar.gz";
 $PG{"retree"}{"mode"}="trmsd,";
+$PG{"retree"}{"version"}="3.69";
 $PG{"hmmtop"}{"4_TCOFFEE"}="HMMTOP";
 $PG{"hmmtop"}{"type"}="protein_secondarystructure_predictor";
 $PG{"hmmtop"}{"ADDRESS"}="www.enzim.hu/hmmtop/";

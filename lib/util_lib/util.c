@@ -3811,7 +3811,7 @@ int check_process (const char *com,int pid,int r, int failure_handling)
       //Reconstruct missing errorlock
       lock (getpid(), LERROR,LSET,"%d -- ERROR: UNSPECIFIED UNSPECIFIED\n",pid);
       lock (getpid(), LERROR,LSET,"%d -- COM: %s\n",pid,com);
-      lock (getpid(), LERROR, LSET,"%d -- STACK: %d -> %d\n",getpid(), pid);
+      lock (getpid(), LERROR, LSET,"%d -- STACK: %d -> %d\n",pid,getpid(), pid);
     }
   //lock is now ready. Shall we use it?
 
@@ -4031,7 +4031,7 @@ pid_t  vwaitpid (pid_t p, int *status, int options)
 pid_t vwait (pid_t *p)
 {
   pid_t p2;
-  int rv;
+  int rv=0;
   int handle_failure;
   
   if (atoigetenv("RETURN_ON_FAILURE"))handle_failure=RETURN_ON_FAILURE;
@@ -4039,7 +4039,7 @@ pid_t vwait (pid_t *p)
     
   
   p2=wait (&rv);
-  rv=check_process("forked::T-Coffee", p2, rv,handle_failure);
+  if (p2!=-1)rv=check_process("forked::T-Coffee", p2, rv,handle_failure);
   if ( p) p[0]=rv;
   
   return p2;
@@ -4097,6 +4097,17 @@ int get_child_list (int pid,int *clist)
   int n=0;
   
   assert_pid (pid);
+  clist[pid]++;
+  if (clist[pid]>1)
+    {
+      
+      char host[1024];
+      gethostname(host, 1023);
+      HERE ("**** Corrupted Lock System **** Forced Exit ****");
+      printf_system_direct( "rm %s/.*%s.lock4tcoffee", get_lockdir_4_tcoffee(),host);
+      exit (EXIT_FAILURE);
+    }
+	
   lockf=lock2name (pid, LLOCK);
   if ( lockf && file_exists (NULL,lockf)) 
     {
