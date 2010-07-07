@@ -6,7 +6,14 @@
 #							#
 #							#
 #########################################################
+
+#
+# make the 'date' variable configurable from the caller
+# otherwise fallback on the default behaviour 
+# 
+ifndef DATE
 DATE=`date`
+endif
 
 #
 # make version number condition so that it can specified 
