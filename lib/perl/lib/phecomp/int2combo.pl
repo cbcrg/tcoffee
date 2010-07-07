@@ -25,15 +25,6 @@ foreach my $c (split (/\-+/,join(" ", @ARGV)))
       {
 	($d,$A)=seq2model ($d,$A);
       }
-    elsif ($c=~/filter/)
-      {
-
-	($d,$A)=seq2data ($d,$A);
-      } 
-    elsif ($c=~/filter/)
-      {
-	($d,$A)=seq2data ($d,$A);
-      } 
     elsif ($c=~/decode/)
       {
 	($d,$A)=decode ($d,$A);

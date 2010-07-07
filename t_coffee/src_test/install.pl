@@ -1196,7 +1196,7 @@ sub repo_store
     my $VER = $PG{$pg}{version};
     my $CACHE = "$REPO_ROOT/$pg/$VER/$OSNAME-$OSARCH"; 
     
-    print "~~~~~~~ Storing package: \"$pg\" to path: $CACHE\n";
+    print "-------- Storing package: \"$pg\" to path: $CACHE\n";
     
     # clean the cache path if exists and create it again
     `rm -rf $CACHE`;
@@ -1235,11 +1235,11 @@ sub repo_load
     my $VER = $PG{$pg}{version};
     my $CACHE = "$REPO_ROOT/$pg/$VER/$OSNAME-$OSARCH"; 
     if( !-e "$CACHE/$pg" ) {
-   	 	print "~~~~~~~ Module \"$pg\" NOT found on repository cache.\n";
+   	 	print "-------- Module \"$pg\" NOT found on repository cache.\n";
     	return 0;
     }
     
-    print "~~~~~~~ Module \"$pg\" found on repository cache. Using copy on path: $CACHE\n";
+    print "-------- Module \"$pg\" found on repository cache. Using copy on path: $CACHE\n";
     `cp $CACHE/* $BIN`;
     return 1;
 }

@@ -1192,7 +1192,7 @@ sub is_valid_blast_xml
       
       if ( !-e $file) {return 0;}
       $line=&file2tail ($file,100);
-      if ( $line=~/<\/EBIApplicationResult/ || $line=~/<\/NCBI_BlastOutput/){return 1;}
+      if ( $line=~/<\/EBIApplicationResult/ || $line=~/<\/NCBI_BlastOutput/ || $line=~/<\/BlastOutput/ ){return 1;}
       return 0;
     }
 sub file2blast_flavor
@@ -1926,8 +1926,8 @@ sub run_blast
 	    else
 	      {
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp -j5";}
-		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile";
-		system ($command);
+		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null 2>/dev/null";
+		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null";
 		&safe_system ( $command,5);
 		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
 		elsif (-e "$outfile.xml.xml"){`mv $outfile.xml.xml $outfile`;} 
@@ -2134,8 +2134,8 @@ sub fasta_file1_eq_fasta_file2
     my ($f1, $f2)=@_;
     my (%s1, %s2);
     my @names;
-    %s1=read_fasta_seq (%f1);
-    %s2=read_fasta_seq (%f2);
+    %s1=read_fasta_seq ($f1);
+    %s2=read_fasta_seq ($f2);
 
     @names=(keys (%s1));
     
@@ -2826,6 +2826,6 @@ sub check_pg_is_installed
       }
   }
 
-$program="T-COFFEE (Version_8.79)";
+$program="T-COFFEE (Version_8.92)";
 
 

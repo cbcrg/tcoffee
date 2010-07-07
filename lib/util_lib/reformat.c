@@ -341,6 +341,9 @@ int seq_reformat ( int argc, char **in_argv)
 	
 		fprintf ( stdout, "\n     +tree_prune..........Prune the tree -in using the sequences provided via -in2");
 		fprintf ( stdout, "\n     +tree_cmp............Compares the tree -in and the tree -in2");
+		fprintf ( stdout, "\n     +tree_cmp_list......Compares the tree -in and the tree_list -in2");
+		fprintf ( stdout, "\n     .....................Sets the support as boostrap value in the -in tree");
+		
 		fprintf ( stdout, "\n     .....................-in and -in2 can contain different taxons");
 		fprintf ( stdout, "\n     +tree_scan.P1..P2.....scans alignment <-in> with tree <-in2>)");
 		fprintf ( stdout, "\n     ......................+tree_scan help to get P1 information");
@@ -10310,6 +10313,15 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm(action, "treelist2dmat"))
 	 {
 	   treelist2dmat (D1->S);
+	 }
+       else if ( strm(action, "tree2node") )
+	 {
+	   print_node_list ( D1->T);
+	   myexit (EXIT_SUCCESS);
+	 }
+       else if ( strm(action, "tree_cmp_list") )
+	 {
+	   D1->T=main_compare_trees_list ( D1->T, D2->S, stdout);	  
 	 }
        else if ( strm(action, "tree_cmp") || strm (action, "tree_compare"))
 	 {
