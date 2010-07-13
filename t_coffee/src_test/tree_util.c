@@ -1096,7 +1096,59 @@ Tree_sim* tree_cmp( NT_node T1, NT_node T2)
   vfree (TS2);
   return TS1;
 }
+int print_node_list (NT_node T, Sequence *RS)
+{
+  NT_node *L;
+  Sequence *S;
+  int *nlseq2;
+  
+  S=tree2seq(T, NULL);
+  L=tree2node_list (T, NULL);
+  if (!RS)RS=S;
+  
+  nlseq2=vcalloc ( RS->nseq, sizeof (int));
+  while (L[0])
+    {
+      int d,b;
+      d=MIN(((L[0])->nseq), (S->nseq-(L[0])->nseq));
+      fprintf ( stdout, "Bootstrap: %5.2f Depth: %5d Splits: ", (L[0])->bootstrap, d);
+      
+      for (b=0; b<RS->nseq; b++)nlseq2[b]='-';
+      for (b=0; b<S->nseq; b++)
+	{
+	  int p;
+	  p=name_is_in_list (S->name[b], RS->name, RS->nseq, 100);
+	  if (p!=-1)nlseq2[p]=(L[0])->lseq2[b]+'0';
+	}
+      for (b=0; b<RS->nseq; b++) fprintf ( stdout, "%c", nlseq2[b]);
+      fprintf (stdout, "\n");
+      L++;
+    }
+  return 1;
+}
+NT_node main_compare_trees_list ( NT_node RT, Sequence *S, FILE *fp)
+{
+  Tree_sim *T;
+  NT_node *TL;
+  Sequence *RS;
+  int a;
 
+  T=vcalloc (1, sizeof (Tree_sim));
+  RS=tree2seq(RT, NULL);
+
+  TL=read_tree_list (S);
+
+  reset_boot_tree (RT,0.0001);
+  for (a=0; a<S->nseq; a++)
+    {
+      TL[a]=prune_tree(TL[a],RS);
+      TL[a]=recode_tree (TL[a],RS);
+      new_compare_trees (RT, TL[a], RS->nseq,T);
+    }
+  
+  vfree (T);
+  return RT;
+}  
 NT_node main_compare_trees ( NT_node T1, NT_node T2, FILE *fp)
 {
   Tree_sim *T;
@@ -1146,6 +1198,7 @@ int new_compare_trees ( NT_node T1, NT_node T2, int nseq, Tree_sim *TS)
 	  TS->uw++;
 	  TS->w+=w;
 	  TS->d+=MIN(t1, t2);
+	  T1->bootstrap++;
 	  //T1->dist=T1->nseq;
 	}
       else
@@ -1645,12 +1698,10 @@ NT_node aln2tree (Alignment *A)
 NT_node realloc_tree ( NT_node R, int n)
 {
   if ( !R)return R;
-  if ( !R->leaf) 
-    {
-      R->right=realloc_tree (R->right,n);
-      R->left=realloc_tree (R->left,n);
-      R->bot=realloc_tree (R->bot,n);
-    }
+  R->right=realloc_tree (R->right,n);
+  R->left=realloc_tree (R->left,n);
+  R->bot=realloc_tree (R->bot,n);
+
   R->lseq=vrealloc (R->lseq, n*sizeof (int));
   R->lseq2=vrealloc (R->lseq2, n*sizeof (int));
   return R;
@@ -1659,15 +1710,11 @@ NT_node realloc_tree ( NT_node R, int n)
 NT_node reset_boot_tree ( NT_node R, int n)
 {
   if ( !R)return R;
-  if ( !R->leaf) 
-    {
-      
-      R->right=reset_boot_tree (R->right,n);
-      R->left=reset_boot_tree (R->left,n);
-      R->bot=reset_boot_tree (R->bot,n);
-    }
+  R->right=reset_boot_tree (R->right,n);
+  R->left=reset_boot_tree (R->left,n);
+  R->bot=reset_boot_tree (R->bot,n);
   R->bootstrap=(float)n;
-  	    
+  
   return R;
 }
 NT_node tree_dist2normalized_tree_dist ( NT_node R, float max)
@@ -1684,13 +1731,10 @@ NT_node tree_dist2normalized_tree_dist ( NT_node R, float max)
 NT_node reset_dist_tree ( NT_node R, float n)
 {
   if ( !R)return R;
-  if ( !R->leaf) 
-    {
-      
-      R->right=reset_dist_tree (R->right,n);
-      R->left=reset_dist_tree (R->left,n);
-      R->bot=reset_dist_tree (R->bot,n);
-    }
+  R->right=reset_dist_tree (R->right,n);
+  R->left=reset_dist_tree (R->left,n);
+  R->bot=reset_dist_tree (R->bot,n);
+  
   if (R->parent && !(R->parent)->parent && !(R->parent)->bot)R->dist=n/2;
   else R->dist=n;
 
@@ -1708,16 +1752,9 @@ NT_node* free_treelist (NT_node *L)
 NT_node free_tree ( NT_node R)
 {
   if ( !R)return R;
-  
-  
-    
-  if ( R->leaf!=1) 
-    {
-      R->right=free_tree (R->right);
-      R->left=free_tree (R->left);
-      R->bot=free_tree (R->bot);
-    }
-  
+  R->right=free_tree (R->right);
+  R->left=free_tree (R->left);
+  R->bot=free_tree (R->bot);
   free_tree_node (R);
   return R;
 }
@@ -3596,6 +3633,7 @@ NT_node new_get_node (NT_node T, FILE *fp)
     {
       --n;
       scan_name_and_dist (fp, T->name, &T->dist);
+      if (T->name && T->name [0])T->bootstrap=atof (T->name);
       return new_get_node (T->parent, fp);
     }
   else if ( c==',')
@@ -3638,7 +3676,7 @@ int scan_name_and_dist ( FILE *fp, char *name, float *dist)
       name[a++]=c;
     }
   name [a]='\0';
-
+  
   if ( c!=':')
     {
       ungetc (c, fp);
@@ -3655,6 +3693,7 @@ int scan_name_and_dist ( FILE *fp, char *name, float *dist)
   number[a]='\0';
   
   dist[0]=atof (number);
+  
   return 2;
 }
 NT_node new_insert_node (NT_node T)
@@ -3864,9 +3903,10 @@ float tree2tot_dist ( NT_node T, int mode)
   if ( !T->parent);
   else if  ((T->isseq && mode !=BOOTSTRAP) || !T->isseq) 
     {
-      t+=T->dist;
+      if ( mode == BOOTSTRAP && T->bootstrap!=0)t+=T->bootstrap;
+      else t+=T->dist;
     }
-  
+
   t+=tree2tot_dist(T->right, mode);
   t+=tree2tot_dist(T->left, mode);
   return t;
@@ -3915,14 +3955,16 @@ NT_node tree2node (char *name, NT_node T)
   }
   
 }
+static int ni;
 NT_node * tree2node_list (NT_node T, NT_node *L)
 {
-  if (!T) return NULL;
-  if (!L) L=vcalloc (T->node+1, sizeof (NT_node));
   
+  
+  if (!T) return NULL;
+  if (!L) {ni=0;L=vcalloc (tree2nnode(T)+1, sizeof (NT_node));}
   tree2node_list (T->left, L);
   tree2node_list (T->right, L);
-  L[T->index]=T;
+  L[ni++]=T;
   return L;
 }
   

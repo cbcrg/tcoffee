@@ -3729,6 +3729,13 @@ char*lock2name (int pid, int type)
   return fname;
 }
 
+int release_all_locks (int pid)
+{
+  lock (pid, LLOCK, LRELEASE, NULL);
+  lock (pid, LERROR, LRELEASE, NULL);
+  lock (pid, LWARNING, LRELEASE, NULL);
+  return 1;
+}
 char* lock(int pid,int type, int action,char *string, ...)
 {
   char *fname;
@@ -3984,8 +3991,8 @@ pid_t vvfork (char *type)
 	}
       else
 	{
+	  release_all_locks (getpid());
 	  lock (getpid(), LLOCK, LSET, "%d%s\n", getppid(), (type)?type:"");//Create lock for the fork
-	  
 	  if (debug_lock)fprintf ( stderr, "\nFORKED (util): p=%d child=%d\n", getppid(), getpid());
 	  
 	  return 0;
@@ -4103,8 +4110,8 @@ int get_child_list (int pid,int *clist)
       
       char host[1024];
       gethostname(host, 1023);
-      HERE ("**** Corrupted Lock System **** Forced Exit ****");
-      printf_system_direct( "rm %s/.*%s.lock4tcoffee", get_lockdir_4_tcoffee(),host);
+      fprintf (stderr,"WARNING: **** Corrupted Lock System ****");
+      for (a=0; a<MAX_N_PID; a++)release_all_locks (a);
       exit (EXIT_FAILURE);
     }
 	

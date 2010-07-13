@@ -195,7 +195,16 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....................seq=cons: measure positions on the full aln");
 		fprintf ( stdout, "\n     +cat_aln.............Concatenates the alignments input via -in and -in2");
 		fprintf ( stdout, "\n     +cat_aln.............-if no -in2, -in is expected to be a list of alignments to concatenate");
+		fprintf ( stdout, "\n     +orthologous_cat..<mode>: mode=voronoi or nothing");
+		fprintf ( stdout, "\n     ......................-in: sequences from different species");
+		fprintf ( stdout, "\n     ..................... -in2: list of species in fasta");
+		fprintf ( stdout, "\n     ..................... sequence must be named: <species>_<genename>");
+		fprintf ( stdout, "\n     ..................... all paralogues will be concatenated");
 		
+		fprintf ( stdout, "\n     +aln2replicate N name");
+		fprintf ( stdout, "\n     ..................... Generates N replicates in Fasta");
+		fprintf ( stdout, "\n     ..................... Voronoi weights can be used");
+				
 		fprintf ( stdout, "\n     +msalist2cat_pwaln.min..max");
 		fprintf ( stdout, "\n     .....................extract all pw projections and conctaenates those\n");
 		fprintf ( stdout, "\n     .....................where id>=min and id<=max\n");
@@ -350,6 +359,10 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     ......................+aln2tree help to get P2 information");
 		
 		fprintf ( stdout, "\n     .....................-in and -in2 can contain different taxons");
+		fprintf ( stdout, "\n     +tree2node.......... Reports the node list along with the split");
+		fprintf ( stdout, "\n     ..................... splits can be described with the seq order ");
+		fprintf ( stdout, "\n     ..................... provided via -in3=<sequence> ");
+		
 		fprintf ( stdout, "\n     +treelist2groups.N....count all topologies within a list of trees");
 		fprintf ( stdout, "\n     .....................-in is in fasta format with each name being a newick file");
 		fprintf ( stdout, "\n     .....................-in2 can be a list of sequences used to trim the trees");
@@ -10150,7 +10163,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   myexit (EXIT_SUCCESS);
 	 }
-      
+       
      
       
        else if ( strm(action, "seq2contacts"))
@@ -10316,7 +10329,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
        else if ( strm(action, "tree2node") )
 	 {
-	   print_node_list ( D1->T);
+	   print_node_list ( D1->T,(DST)?DST->S:NULL);
 	   myexit (EXIT_SUCCESS);
 	 }
        else if ( strm(action, "tree_cmp_list") )
@@ -10515,7 +10528,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 
 	   ungap_aln_n (D1->A, (n_actions==1)?100:atoi(action_list[1]));
-	   free_sequence ( D1->S, (D1->S)->nseq);
+	   //free_sequence ( D1->S, (D1->S)->nseq);
 	   D1->S=aln2seq ( D1->A);
 	   (D1->A)->S=D1->S;
 	 }
@@ -10616,6 +10629,15 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       D1->S=aln2seq (D1->A);
 	     }
 	 }
+       else if ( strm (action, "aln2replicate"))
+	 {
+	   aln2N_replicate (D1->A, ACTION(1), ACTION(2));
+	 }
+       else if ( strm (action, "paralogous_cat"))
+	 {
+	   D1->A=orthologous_concatenate_aln (D1->A,D2->S, ACTION (1));
+	 }
+       
        else if ( strm (action, "cat_aln"))
 	 {
 	   /*D1->A=aln_cat ( D1->A, D2 ->A);*/
@@ -11501,6 +11523,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   vfree(count_table);
 	   myexit(EXIT_SUCCESS);
 	 }
+       else if ( strm (action, "species_weight"))
+	 {
+	   seq_weight2species_weight (D1->A, D2->S);
+	   exit (0);
+	 }
+       else if ( strm (action, "aln2voronoi"))
+	 {
+	   aln2voronoi_weights (D1->A);
+	   
+	 }
        else if ( strm (action, "msa_weight"))
 	 {
 	   int random_value;
@@ -11762,6 +11794,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   fprintf ( stderr, "\nWARNING: ACTION %s UNKNOWN and IGNORED\n", action);
 	 }
+     
      }
 
 

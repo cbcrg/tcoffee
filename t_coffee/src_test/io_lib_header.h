@@ -566,7 +566,10 @@ struct Alignment
                      /*Only defined if used */
 
 
-   
+/*Weight*/   
+      float *col_weight;
+      float *seq_weight;
+      float **res_weight;
 /*Score*/
     int *  score_seq;
     int ** score_res;
@@ -915,8 +918,10 @@ int main_compare_splits (NT_node T1, NT_node T2, char *mode, FILE *fp);
 Tree_sim * tree_cmp( NT_node T1, NT_node T2);
 NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree);
 
-
+int print_node_list (NT_node T, Sequence *S);
 NT_node main_compare_trees ( NT_node T1, NT_node T2, FILE *fp);
+NT_node main_compare_trees_list ( NT_node T1, Sequence *S, FILE *fp);
+
 float compare_trees ( NT_node T1, NT_node T2, int nseq, int mode);
 float search_node ( NT_node B, NT_node T, int nseq, int mode);
 float evaluate_node_similarity ( NT_node B, NT_node T, int nseq, int mode);

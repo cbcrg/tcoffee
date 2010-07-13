@@ -1096,19 +1096,32 @@ Tree_sim* tree_cmp( NT_node T1, NT_node T2)
   vfree (TS2);
   return TS1;
 }
-int print_node_list (NT_node T)
+int print_node_list (NT_node T, Sequence *RS)
 {
   NT_node *L;
   Sequence *S;
-
+  int *nlseq2;
+  
   S=tree2seq(T, NULL);
   L=tree2node_list (T, NULL);
+  if (!RS)RS=S;
   
+  nlseq2=vcalloc ( RS->nseq, sizeof (int));
   while (L[0])
     {
-      int d;
+      int d,b;
       d=MIN(((L[0])->nseq), (S->nseq-(L[0])->nseq));
-      fprintf ( stdout, "Bootstrap: %.2f Nseq: %d Depth: %d\n", (L[0])->bootstrap,(L[0])->nseq, d);
+      fprintf ( stdout, "Bootstrap: %5.2f Depth: %5d Splits: ", (L[0])->bootstrap, d);
+      
+      for (b=0; b<RS->nseq; b++)nlseq2[b]='-';
+      for (b=0; b<S->nseq; b++)
+	{
+	  int p;
+	  p=name_is_in_list (S->name[b], RS->name, RS->nseq, 100);
+	  if (p!=-1)nlseq2[p]=(L[0])->lseq2[b]+'0';
+	}
+      for (b=0; b<RS->nseq; b++) fprintf ( stdout, "%c", nlseq2[b]);
+      fprintf (stdout, "\n");
       L++;
     }
   return 1;

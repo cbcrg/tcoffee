@@ -1,14 +1,39 @@
+>kinases Alignment Replicate #1
+>kinases Alignment Replicate #2
+>kinases Alignment Replicate #3
+>kinases Alignment Replicate #4
+>kinases Alignment Replicate #5
+>kinases Alignment Replicate #6
+>kinases Alignment Replicate #7
+>kinases Alignment Replicate #8
+>kinases Alignment Replicate #9
+>kinases Alignment Replicate #10
+ap 100 +aln2replicate 10 kinases
+==22143== 
+==22143== Warning: ignored attempt to set SIGKILL handler in sigaction();
+==22143==          the SIGKILL signal is uncatchable
 
-hmgl_trybr(6-67) hmgt_mouse(1-62) hmgb_chite(3-66) hmgl_wheat(4-70) 
+Voronoi Weights: Species Lb ---> 102.00
 
-hmgl_trybr    apkramtsfmffssdfrskh-----sdlsivemskaagaawkelgpeerkvyeemaekdk
-hmgt_mouse    kpkrprsayniyvsesfqeakd-----dsaqgklklvneawknlspeekqayiqlakddr
-hmgb_chite    kpkrplsaymlwlnsaresikrenp-dfkvtevakkggelwrglk--dkseweakaatak
-hmgl_wheat    kpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvakanklk
-               ***. ::: .: ..  ..         .     *  .  *: *   ::  :   *   :
+Voronoi Weights: Species Li ---> 83.18
 
-hmgl_trybr    erykrem
-hmgt_mouse    irydnem
-hmgb_chite    qnyiral
-hmgl_wheat    geynkai
-               .* . :
+Voronoi Weights: Species Lm ---> 84.64
+
+Voronoi Weights: Species Tb ---> 92.24
+
+Voronoi Weights: Species Tc ---> 87.89
+==22143== 
+==22143== HEAP SUMMARY:
+==22143==     in use at exit: 11,753,156 bytes in 10,502 blocks
+==22143==   total heap usage: 66,827 allocs, 56,325 frees, 69,706,410 bytes allocated
+==22143== 
+==22143== LEAK SUMMARY:
+==22143==    definitely lost: 12,819 bytes in 55 blocks
+==22143==    indirectly lost: 470,220 bytes in 255 blocks
+==22143==      possibly lost: 11,270,117 bytes in 10,192 blocks
+==22143==    still reachable: 0 bytes in 0 blocks
+==22143==         suppressed: 0 bytes in 0 blocks
+==22143== Rerun with --leak-check=full to see details of leaked memory
+==22143== 
+==22143== For counts of detected and suppressed errors, rerun with: -v
+==22143== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 13 from 8)

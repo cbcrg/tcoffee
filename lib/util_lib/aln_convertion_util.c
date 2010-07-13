@@ -6665,6 +6665,117 @@ char * extract_defined_seq ( char *in, int in_of, int in_start, int *aa_def, int
     
      return out;
      }
+
+Alignment * aln2N_replicate (Alignment *A,char *nn, char *name)
+{
+  int a, n;
+  char *fname;
+
+  fname=vcalloc (100, sizeof (char));
+  if (nn)n=atoi(nn);
+  else n=100;
+  if (!name){name=vcalloc (100, sizeof (char)); sprintf (name, "replicate");}
+  
+  
+  for (a=0; a< n;a++)
+    {
+      FILE *fp;
+      sprintf (fname, "%s.%d.rep",name, a+1);
+      fp=vfopen (fname, "w");
+      
+      vfclose(aln2replicate (A, fp));
+      fprintf ( stdout, ">%s Alignment Replicate #%d\n",fname, a+1); 
+    }
+  myexit (EXIT_SUCCESS);
+}
+FILE *aln2replicate (Alignment *A, FILE *fp)
+{
+  int a, b;
+  int *p;
+  float tot=0;
+  float corr;
+  if (A->col_weight)for (a=0; a<A->len_aln; a++)tot+=A->col_weight[a];
+  else tot=A->len_aln;
+  
+  p=vcalloc (A->len_aln, sizeof (int));
+  corr=(float)A->len_aln/tot;
+  
+  for (a=0; a<A->len_aln; a++)
+    {
+      int x;
+      x=rand()%(int)tot;
+      
+      p[a]=(int)(x*corr);
+    }
+  
+  for (a=0; a<A->nseq; a++)
+    {
+      fprintf ( fp, ">%s\n", A->name[a]);
+      //for (b=0;b<A->len_aln; b++)fprintf ( stdout, "%d ", (int)p[b]);
+      for (b=0;b<A->len_aln; b++)fprintf ( fp, "%c", A->seq_al[a][p[b]]);
+      fprintf ( fp, "\n");
+    }
+
+  vfree (p);
+  return fp;
+}
+    
+Alignment * orthologous_concatenate_aln (Alignment *A, Sequence *S, char *mode)
+{
+  Alignment *C;
+  char **name, *cname;
+  int nname=0;
+  int a, b,c, i;
+  
+  if (mode && strm (mode, "voronoi"))seq_weight2species_weight (A, S);
+  
+  
+  cname=vcalloc ( 100, sizeof (char));
+  name=declare_char (A->nseq, 100);
+  for (a=0; a<A->nseq; a++)
+    {
+      char *p=strstr (A->name[a], "_");
+      if (!p)
+	{
+	  fprintf ( stderr, "\nWARNING: Seq %s could not bne included.", A->name[a]);
+	}
+      p+=1;
+      if ( name_is_in_list (p, name,nname, 100)==-1)
+	{
+	  sprintf ( name[nname++], "%s", p);
+	}
+    }
+ 
+  C=declare_aln2 (nname, (A->len_aln*S->nseq)+1);
+  free_char (C->name,-1); C->name=name;
+  C->nseq=nname;
+  C->col_weight=vcalloc ( A->len_aln*S->nseq, sizeof(float));
+  
+  C->len_aln=0;
+    for (a=0; a<S->nseq; a++)
+    {
+      for (b=0; b<C->nseq; b++)
+	{
+	  sprintf (cname, "%s_%s", S->name[a],C->name[b]);
+	  if ((i=name_is_in_list (cname, A->name, A->nseq, 100))==-1)
+	    {
+	      char *s=generate_null (A->len_aln);
+	      strcat (C->seq_al[b], s);
+	      vfree (s);
+	    }
+	  else
+	    strcat (C->seq_al[b], A->seq_al[i]);
+	}
+      for (c=C->len_aln, b=0;b<A->len_aln;b++, c++)  
+	{
+	  C->col_weight[c]=(S->W)->SEQ_W[a];
+	}
+      C->len_aln+=A->len_aln;
+    }
+  return C;
+}
+	      
+
 Alignment * concatenate_aln ( Alignment *A1, Alignment *A2, char *spacer)
 {
   Alignment *A;
@@ -10146,6 +10257,71 @@ Alignment* seq2subseq1( Alignment *A, Sequence *S,int use_aln, int percent,int m
      
      return NA;
    }   
+Sequence  * seq_weight2species_weight (Alignment *A, Sequence *S)
+{
+  float *wsp;
+  float *wseq;
+  int a,b;
+  
+  S->W=declare_weights(S->nseq);
+  if (!A->S || !(A->S)->W)aln2voronoi_weights (A);
+  
+  wseq=((A->S)->W)->SEQ_W;
+  wsp=(S->W)->SEQ_W;
+  for ( a=0; a< S->nseq; a++)
+    {
+      for (b=0; b<A->nseq; b++)
+	if ( strstr (A->name[b], S->name[a]))wsp[a]+=wseq[b];
+    }
+  for (a=0; a<S->nseq; a++)
+    fprintf ( stderr, "\nVoronoi Weights: Species %s ---> %.2f\n", S->name[a], wsp[a]);
+  return S;
+}
+Alignment * aln2voronoi_weights (Alignment *A)
+{
+  int a, b, c;
+  float t=0;
+  int **tab;
+  float *w;
+  
+  tab=declare_int (256, A->nseq+1);
+  if (A->S)free_sequence (A->S, (A->S)->nseq);
+  A->S=aln2seq(A);
+  (A->S)->W=declare_weights (A->nseq);
+  w=((A->S)->W)->SEQ_W;
+ 
+  for (a=0; a<A->len_aln; a++)
+    {
+      for ( b=0; b<A->nseq; b++)
+	{
+	  c= A->seq_al[b][a];
+	  if (!is_gap(c))
+	    {
+	      c=tolower(c);
+	      tab[c][++tab[c][0]]=b;
+	    }
+	}
+      for (c=0; c<256; c++)
+	{
+	  if (tab[c][0])
+	    {
+	      for (b=1; b<=tab[c][0]; b++)
+		{
+		  w[tab[c][b]]+=(float)1/(float)tab[c][0];
+		  t+=(float)1/(float)tab[c][0];
+		}
+	    }
+	  tab[c][0]=0;
+	}
+    }
+  for (a=0; a<A->nseq; a++)
+    {
+      w[a]=(w[a]/t)*A->nseq;
+    }
+  
+  return A;
+}
+	    
 float ** get_weight ( Alignment *A, Sequence *S, char *mode)
 {
  char *aln_name;

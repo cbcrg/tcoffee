@@ -1,9 +1,13 @@
 #!/usr/bin/env perl
-
+# -filter field <field name> contains|equals|min|max value
+# -bin
 use HTTP::Date;
 use strict;
 use FileHandle;
 srand();
+my $TAG=0;
+my $BIN=0;
+
 my $index;
 my $SHIFT=4;
 my $LOG_ZERO=-999999999;
@@ -12,14 +16,55 @@ my $HEADER;
 my $d={};
 my $M={};
 my $A={};
+my %WEIGHT;
 my $file=shift (@ARGV);
+my $cl=join(" ", @ARGV);
+my @commands=split (/\-+/,$cl);
+
 $d=parse_data ($file);
-foreach my $c (split (/\-+/,join(" ", @ARGV)))
+
+foreach my $c (@commands)
   {
+    
+    run_instruction ($d, $A, $c);
+  }
+die;
+sub run_instruction
+  {
+    my $d=shift;
+    my $A=shift;
+    my $c=shift;
+    
     $A=string2hash ($c,$A);
-    if ($c=~/filter/)
+    if ($c=~/tag/)
       {
-	($d,$A)=filter_data ($d,$A);
+	$d=tag($d, $A);
+      }
+    elsif ($c=~/untag/)
+      {
+	$d=untag ($d,$A);
+      }
+    
+    elsif ($c=~/filter/)
+      {
+	$d=filter_data ($d,$A);
+      }
+
+    elsif ($c=~/unbin/)
+      {
+	$d=unbin ($d,$A);
+      }
+    elsif ($c=~/bin/)
+      {
+	$d=data2bin ($d,$A);
+      }
+    elsif ($c=~/period/)
+      {
+	$d=data2period ($d,$A);
+      }
+    elsif ($c=~/logodd/)
+      {
+	data2log_odd ($d, $A);
       }
     elsif ($c=~/seq2model/)
       {
@@ -29,9 +74,9 @@ foreach my $c (split (/\-+/,join(" ", @ARGV)))
       {
 	($d,$A)=decode ($d,$A);
       }
-    elsif ($c=~/outdata/)
+    elsif ($c=~/out/)
       {
-	display_data ($A->{modelR}, $A->{outdata});
+	display_data ($d, $A->{outdata});
       }
     elsif ($c=~/outmodel/)
       {
@@ -41,9 +86,9 @@ foreach my $c (split (/\-+/,join(" ", @ARGV)))
       {
 	test_bw_trainning();
       }
+    return;
   }
 
-die;
 #test_bw_trainning ();
 
 my $d={};
@@ -91,27 +136,23 @@ sub display_data
     my $file=shift;
     my $F= new FileHandle;
     
-    if (!$file){$F=0;}
+    if (!$file){open ($F, ">-");}
     else {open ($F, ">$file");}
-    
+   
     print $F "$HEADER";
     foreach my $c (sort ({$a<=>$b}keys(%$d)))
       {
 	foreach my $i (sort {$a<=>$b}keys (%{$d->{$c}}))
 	  {
-	    if ($F){print $F "#d;CAGE;$c;";}
-	    else {print "#d;CAGE;$c;";}
+	    print $F "#d;";
 	    foreach my $k (sort (keys (%{$d->{$c}{$i}})))
 	      {
-		
-		if ($F){print $F "$k;${$d->{$c}{$i}}";}
-		else {print $F "$k;${$d->{$c}{$i}}";}
+		print $F "$k;$d->{$c}{$i}{$k};";
 	      }
-	    if ($F){print "\n";}
-	    else {print $F "\n";}
+	    print $F "\n";
 	  }
       }
-    if ($file){close ($F);}
+    close ($F);
   }
 
 sub parse_data
@@ -120,13 +161,13 @@ sub parse_data
     my $data={};
     
     my $F=new FileHandle;
-    my $lineN;
+    my $linen;
     open($F, $file);
     
     while (<$F>)
       {
 	my $line=$_;
-	my $LineN++;
+	$linen++;
 	
 	if ( $line=~/#d/)
 	  {
@@ -141,27 +182,49 @@ sub parse_data
 		$L->{$key}=$value;
 		
 	      }
-	    $L->{LineN}=$LineN;
-	    
+	    $L->{linen}=$linen;
+	    $L->{period}="1";
 	    if ($L->{Type})
 	      {
 		my $c=$L->{CAGE};
 		my $ch=$L->{Channel};
 		my $t=$L->{StartT};
 	
-		foreach my $k (%$L)
+		foreach my $k (keys(%$L))
 		  {
+
 		    $data->{$c}{$t}{$k}=$L->{$k};
 		  }
 	      }
 	  }
-	else {$HEADER-=$line;}
+	else
+	  {
+	    if ( $line=~/Weight/ && $line=~/ANIMALS DATA/)
+	      {
+		$line=~/.*;(\d+);Weight;([.\d]+)/;
+		my $c=$1;
+		my $w=$2;
+		if (!$WEIGHT{$c}{start})
+		  {$WEIGHT{$c}{start}=$w;}
+		else {$WEIGHT{$c}{end}=$w;}
+		$WEIGHT{$c}{max}=($WEIGHT{$c}{max}<$w)?$w:$WEIGHT{$c}{max};
+	      }
+	    $HEADER.=$line;
+	  }
       }
+    
+    foreach my $c (keys (%WEIGHT))
+      {
+	$WEIGHT{$c}{delta}=(($WEIGHT{$c}{end}-$WEIGHT{$c}{start})*100)/$WEIGHT{$c}{start};
+      }
+    
     #reformat/annotate fields fields
+    $data=&channel2correct_channel ($data);
     $data=&data2overlap($data);
     $data=&channel2Nature($data);
-    $data=&channel2correct_channel ($data);
-    #$data=&filter_overlap ($data,1);
+   
+    $data=&filter_overlap ($data,1);
+    
     return $data;
   }
 
@@ -181,9 +244,9 @@ sub channel2correct_channel
       my $d=shift;
       my ($tot, $n);
 
-      foreach my $c (sort(keys (%$d)))
+      foreach my $c (keys (%$d))
 	{
-	  foreach my $t (sort(keys (%{$d->{$c}})))
+	  foreach my $t (keys (%{$d->{$c}}))
 	    {
 	      my $Name=$d->{$c}{$t}{Name};
 	      my $Channel=$d->{$c}{$t}{Channel};
@@ -199,13 +262,13 @@ sub channel2correct_channel
 	      elsif ($i==4){$d->{$c}{$t}{Caption}="Food 2";}
 	      else
 		{
-		  print "\n*** ERROR: unknown index for the Intake\n";
+		  print STDERR "\n*** ERROR: unknown index for the Intake\n";
 		}
 	      if ($Caption ne $d->{$c}{$t}{Caption}){$tot++;}
 	      $n++;
 	    }
 	}
-      print "\nclean_data: relabled $tot values out of $n\n";
+      print STDERR "\nclean_data: relabled $tot values out of $n\n";
       return $d;
     }
 
@@ -263,39 +326,253 @@ sub channel2Nature
 	  }
 	return $d;
       }
+sub unbin
+  {
+    my $d=shift;
+    foreach my $c (keys (%$d))
+      {
+	foreach my $t (keys (%{$d->{$c}}))
+	  {
+	    delete ($d->{$c}{$t}{bin});
+	  }
+      }
+    $BIN=0;
+    return $d;
+  }
+sub untag
+  {
+    my $d=shift;
+    foreach my $c (keys (%$d))
+      {
+	foreach my $t (keys (%{$d->{$c}}))
+	  {
+	    delete ($d->{$c}{$t}{tag});
+	  }
+      }
+    $TAG=0;
+    return $d;
+  }
+
+sub tag
+  {
+    my $d=shift;
+    my $A=shift;
+    
+    my $field=$A->{field};
+    my $min=$A->{min};
+    my $max=$A->{max};
+    my $contains=$A->{contains};
+    my $equals=$A->{equals};
+    my $tot=0;
+    my $n=0;
+    my $defined;
+    
+    my $fl=data2field_list ($d);
+    foreach my $c (sort(keys (%$d)))
+      {
+	foreach my $t (sort(keys (%{$d->{$c}})))
+	  {
+	    my $mark=0;
+	    my $v=$d->{$c}{$t}{$field};
+	    if (defined ($d->{$c}{$t}{$field})){$defined++;}
+	    if (defined ($A->{contains}) && $v=~$contains){$mark=1;}
+	    elsif (defined ($A->{equals}) && $v eq $equals){$mark=1;}
+	    elsif (defined ($A->{min}) && defined ($A->{max})   && $v>$min && $v<$max){$mark=1;}
+	    elsif (defined ($A->{min}) && $v>$min){$mark=1;}
+	     elsif (defined ($A->{max}) && $v<$max){$mark=1;}
+	     
+	     if (!$TAG){$d->{$c}{$t}{tag}=$mark;}
+	     elsif ($TAG)
+	       {
+		 $d->{$c}{$t}{tag}=($d->{$c}{$t}{tag} && $mark)?1:0;
+	       }
+	   }
+       }
+    
+    
+    delete ($A->{field});
+    delete ($A->{min});
+    delete ($A->{max});
+    delete ($A->{contains});
+    delete ($A->{equals});
+    
+    $TAG=1;
+    return $d;
+  }
 sub filter_data
    {
      my $d=shift;
      my $A=shift;
-     
-     my $field=$A->{field};
-     my $min=$A->{min};
-     my $max=$A->{max};
-     
+     my $action=$A->{action};
      
      my $tot=0;
      my $n=0;
+     my $defined;
      
-     #foreach my $c ( keys (%$A)){print "$c : $A->{$c}\n";}die;
-     
+     if (!$action){$action="keep";}
      foreach my $c (sort(keys (%$d)))
        {
 	 foreach my $t (sort(keys (%{$d->{$c}})))
 	   {
 	     $n++;
-	     my $mark=0;
-	     
-	     if (defined ($A->{matches}) && $c=~$A->{matches}){$mark=1;}
-	     elsif (defined ($A->{equals}) && $c eq $A->{equals}){$mark=1;}
-	     elsif ( defined ($A->{min})   && $d->{$c}{$t}{$field}>=$min && $d->{$c}{$t}{$field}<=$max ){$mark=1;}
-	     
+	     my $mark=$d->{$c}{$t}{tag};
 	     if    ($mark==1 && $action eq "rm"){delete($d->{$c}{$t}); $tot++;}
 	     elsif ($mark==0 && $action eq "keep"){delete($d->{$c}{$t}); $tot++;}
 	   }
        }
-     print "\nFiltering: Removed $tot values out of $n (Min=$min Max=$max)\n";
-     return $d;
-    }
+     print STDERR "\nFiltering: Removed $tot values out of $n\n";
+     return untag ($d);
+   }
+sub data2period_list
+  {
+    my $d=shift;
+    my $pl={};
+    
+    foreach my $c (sort(keys (%$d)))
+      {
+	foreach my $t (sort(keys (%{$d->{$c}})))
+	  {
+	    if( exists ( $d->{$c}{$t}{period}))
+	      {
+		$pl->{$d->{$c}{$t}{period}}=1;
+	      }
+	  }
+      }
+    return $pl;
+  }
+sub data2period
+  {
+    my $d=shift;
+    my $A=shift;
+
+    my $n=$A->{period};
+    my ($a,$b, $start, $end, @list, $delta);
+    my $time={};
+    
+    $start=$end=-1;
+    
+    foreach my $c (sort(keys (%$d)))
+      {
+	foreach my $t (sort(keys (%{$d->{$c}})))
+	  {
+	    
+	    my $cstart=$d->{$c}{$t}{StartT};
+	    my $cend=$d->{$c}{$t}{EndT};
+	    
+	    if ($start==-1 || $start>$cstart){$start=$cstart;}
+	    if ($end==-1    || $end<$cend){$end=$cend;}
+	  }
+      }
+    if (!$n){$n="week";}
+    if ($n eq "hour"){$delta=3600;}
+    elsif ($n eq "day"){$delta=3600*24;}
+    elsif ($n eq "week"){$delta=3600*24*7;}
+    elsif ($n eq "month"){$delta=3600*24*31;}
+    elsif ($n eq "year"){$delta=3600*24*365;}
+    elsif ($n eq "full"){$delta=$end-$start;}
+    else {$delta=($end-$start)/$n;}
+    
+    
+    for ($b=1,$a=$start; $a<$end; $b++)
+      {
+	for (my $c=0; $c<$delta; $c++, $a++)
+	  {
+
+	    $time->{$a}=$b;
+	  }
+      }
+    foreach my $c (sort(keys (%$d)))
+      {
+	foreach my $t (sort(keys (%{$d->{$c}})))
+	  {
+	    $d->{$c}{$t}{period}=$time->{$t};
+	  }
+      }
+    delete($A->{period});
+    return $d;
+  }
+
+sub data2bin
+  {
+    my $S=shift;
+    my $A=shift;
+    
+    my $field=$A->{field};
+    my $nbin=$A->{nbin};
+    my $delta=$A->{delta};
+    my $name=$A->{name};
+    my $action=$A->{action};
+    if ($delta eq "auto")
+      {
+	my($min,$max)=datafield2minmax($S,$field);
+	my $delta=($max-$min)/$nbin;
+	print STDERR "$max - $min\n";
+      }
+    if (!$field){$field="Value";}
+    if (!$nbin){$nbin=1;}
+    if (!$delta){$delta=0.02;}
+    if (!$name) 
+      {
+	$BIN++;
+	$name="BIN$BIN";
+      }
+    foreach my $c (keys(%$S))
+      {
+	foreach my $i (keys (%{$S->{$c}}))
+	  {
+	    if (!defined ($S->{$c}{$i}{tag}) ||(defined ($S->{$c}{$i}{tag} && $S->{$c}{$i}{tag}==1)))
+	      {
+		if    ($action eq "food")
+		  {
+		    if ( $S->{$c}{$i}{Nature}=~/food/){$S->{$c}{$i}{bin}="food";}
+		    elsif ( $S->{$c}{$i}{Nature}=~/drink/){$S->{$c}{$i}{bin}="drink";}
+		  }
+		elsif ($nbin==1)
+		  {
+		    $S->{$c}{$i}{bin}=$S->{$c}{$i}{Nature};
+		  }
+		else
+		  {
+		    my $bin=int($S->{$c}{$i}{$field}/$delta);
+		    if ( $bin<0){$bin=0;}
+		    else
+		      {
+			$bin=($bin>=$nbin)?$nbin:$bin+1;
+		      }
+		    
+		    $S->{$c}{$i}{bin}="$name"."_"."$bin";
+		  }
+	      }
+	  }
+      }
+    delete ($A->{field});
+    delete ($A->{nbin});
+    delete ($A->{delta});
+    delete ($A->{name});
+    delete ($A->{action});
+    
+    return untag($S);
+  }
+sub data2field_list
+  {
+    my $d=shift;
+    my $list={};
+    foreach my $c (sort(keys (%$d)))
+       {
+	 
+	 foreach my $t (keys (%{$d->{$c}}))
+	   { 
+	     foreach my $f (keys(%{$d->{$c}{$t}}))
+	       {
+		 if (!exists($list->{$f}))
+		   {
+		     $list->{$f}=1;
+		   }
+	       }
+	   }
+       }
+    return $list;
+  }
 sub filter_overlap
     {
       
@@ -312,23 +589,11 @@ sub filter_overlap
 	      if ( $d->{$c}{$t}{Collision} && $d->{$c}{$t}{Collision}>$T){delete ($d->{$c}{$t});$tot++;}
 	    }
 	}
-      print "\nCollisions: Removed $tot values out of $n (T: $T)\n";
+      print STDERR "\nCollisions: Removed $tot values out of $n (T: $T)\n";
       return $d;
     }
     
-sub display_data 
-    {
-      my $d=shift;
-      
-      foreach my $c (sort(keys (%$d)))
-	{
-	  foreach my $t (sort(keys (%{$d->{$c}})))
-	    {
-	      
-	      print "$c - $t - $d->{$c}{$t}{Channel} -  $d->{$c}{$t}{Value}\n";
-	    }
-	}
-    }
+
     
 sub parse_header
   {
@@ -425,7 +690,7 @@ sub data2overlap
 	      
 	    }
 	}
-      print "\nOverlap: $tot values out of $n\n";
+      print STDERR "\nOverlap: $tot values out of $n\n";
       return $d;
     }
 sub data2string 
@@ -444,6 +709,108 @@ sub data2string
 	}
     }
 sub data2log_odd 
+  {
+    my $d=shift;
+    my $A=shift;
+    my $period=data2period_list ($d);
+    
+    foreach my $p (sort ({$a<=>$b}keys (%$period)))
+      {
+	print "-- $p--\n";
+	$A->{period}=$p;
+	$A->{name}="$p";
+	data2log_odd_period ($d, $A);
+      }
+    die;
+  }
+sub data2log_odd_period
+  {
+    my $d=shift;
+    my $A=shift;
+    my $tot={};
+    my $chc={};
+    my $M={};
+
+    
+    foreach my $c (sort(keys (%$d)))
+      {
+	my ($ch, $pendt);
+	foreach my $t (sort(keys (%{$d->{$c}})))
+	  {
+	    my $period=$d->{$c}{$t}{period};
+	    if ($period ne $A->{period}){next;}
+	    my $cch=$d->{$c}{$t}{bin};
+	    $M->{$c}{$cch}{$cch }{count}{tot}++;
+	    if ($ch)
+	      {
+		$M->{$c}{$ch}{$cch}{count}{transition}++;
+		$M->{$c}{$ch}{$cch}{count}{interval}+=$d->{$c}{$t}{StartT}-$pendt;
+		#$M->{"total"}{$ch}{$cch}{count}{transitions}++;
+		#$M->{"total"}{$ch}{$cch}{count}{interval}+=$d->{$c}{$t}{StartT}-$pendt;
+	      }
+	    $tot->{$c}++;
+	    $ch=$cch;
+	    $pendt=$d->{$c}{$t}{EndT};
+	  }
+      }
+   # foreach my $c ( sort({$a<=>$b}keys (%$chc)))
+#      {
+#	print "\n-- CAGE: $c\n";
+#	foreach my $ch (keys (%{$chc->{$c}}))
+#	  {
+#	    print "CHANNEL: $ch : $chc->{$c}{$ch}{count}{tot}\n";
+#	  }
+#      }
+    
+
+    foreach my $c (keys (%$M))
+      {
+	foreach my $b1 (keys (%{$M->{$c}}))
+	  {
+	    foreach my $b2 (keys (%{$M->{$c}{$b1}}))
+	      {
+		my ($count0,$count1, $count2);
+		if ( $tot->{$c}==0){next;}
+		$count0=$M->{$c}{$b1}{$b2}{count}{transition};
+		$count0/=$tot->{$c};
+		
+		$count1=$M->{$c}{$b1}{$b1}{count}{tot};
+		$count1/=$tot->{$c};
+		$count2=$M->{$c}{$b2}{$b2}{count}{tot};
+		$count2/=$tot->{$c};
+		$M->{$c}{$b1}{$b2}{logodd}{value}=(($count1*$count2)==0)?0:log (($count0)/($count1*$count2));
+	      }
+	  }
+      }
+    
+    print "Period:$A->{period}\n"; 
+    display_log_odd($M);
+    
+    return $M;
+  }
+sub display_log_odd
+  {
+    my $M=shift;
+    
+    foreach my $c (sort ({$a<=>$b}keys (%$M)))
+      {
+	print "Cage: $c Delta: $WEIGHT{$c}{delta}\n";
+	
+	foreach my $b1 (keys (%{$M->{$c}}))
+	  {
+	    #printf "\t%10s: %d\n", $b1, $M->{$c}{$b1}{$b1}{count}{tot};
+	  }
+	foreach my $b1 (keys (%{$M->{$c}}))
+	  {
+	    foreach my $b2 (keys (%{$M->{$c}{$b1}}))
+	      {
+		printf "\t%10s -- %10s : %6.3f (%d)\n",$b1,$b2,$M->{$c}{$b1}{$b2}{logodd}{value},$M->{$c}{$b1}{$b2}{count}{transition};
+	      }
+	  }
+      }
+    return $M;
+  }
+sub data2log_odd_old
     {
       my $d=shift;
       my $Cage=shift;
@@ -536,46 +903,6 @@ sub interval2count
       return $tot;
     }
 
-sub data2intervals
-    {
-      my $d=shift;
-      my $n=shift;
-      
-      my ($a, $start, $end, @list, $delta);
-      
-      $start=$end=-1;
-      
-      foreach my $c (sort(keys (%$d)))
-	{
-	  foreach my $t (sort(keys (%{$d->{$c}})))
-	    {
-
-	      my $StartT=$d->{$c}{$t}{StartT};
-	      my $EndT=$d->{$c}{$t}{EndT};
-	      
-	      if ($start==-1 || $start>$StartT){$start=$StartT;}
-	      if ($end==-1    || $end<$EndT){$end=$EndT;}
-	    }
-	}
-      
-      if ($n eq "hour"){$delta=3600;}
-      elsif ($n eq "day"){$delta=3600*24;}
-      elsif ($n eq "week"){$delta=3600*24*7;}
-      elsif ($n eq "month"){$delta=3600*24*31;}
-      elsif ($n eq "year"){$delta=3600*24*365;}
-      elsif ($n eq "full"){return ($start, $end);}
-      else {$delta=($end-$start)/$n;}
-      
-      for ($a=$start; $a<$end; $a+=$delta)
-	{
-	  push (@list, $a);
-	}
-      push (@list, $a);
-      
-
-      
-      return @list;
-    }
 
 sub data2index
   {
@@ -600,44 +927,7 @@ sub data2index
     return $nd;
   }
 	    
-sub data2bin 
-  {
-    my $S=shift;
-    my $field=shift;
-    my $nbin=shift;
-    my $delta=shift;
 
-    
-
-    my $count={};
-    
-    if (!$delta)
-      {
-	my($min,$max)=datafield2minmax($S,$field);
-	my $delta=($max-$min)/$nbin;
-	print "$max - $min\n";
-      }
-    else
-      {
-	$delta=0.02;
-      }
-    
-    foreach my $c (keys(%$S))
-      {
-	foreach my $i (keys (%{$S->{$c}}))
-	  {
-	    my $v=$S->{$c}{$i}{$field};
-	    if ( $v<0){;}
-	    else {
-	      my $bin=int($S->{$c}{$i}{$field}/$delta)+1;
-	      if ($bin>$nbin){$bin=$nbin;}
-	      elsif ($bin<-$nbin){$bin=$nbin*-1;}
-	      $S->{$c}{$i}{bin}=$bin;
-	    }
-	  }
-      }
-    return $S;
-  }
 
 sub datafield2minmax
   {

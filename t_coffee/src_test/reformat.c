@@ -341,12 +341,19 @@ int seq_reformat ( int argc, char **in_argv)
 	
 		fprintf ( stdout, "\n     +tree_prune..........Prune the tree -in using the sequences provided via -in2");
 		fprintf ( stdout, "\n     +tree_cmp............Compares the tree -in and the tree -in2");
+		fprintf ( stdout, "\n     +tree_cmp_list......Compares the tree -in and the tree_list -in2");
+		fprintf ( stdout, "\n     .....................Sets the support as boostrap value in the -in tree");
+		
 		fprintf ( stdout, "\n     .....................-in and -in2 can contain different taxons");
 		fprintf ( stdout, "\n     +tree_scan.P1..P2.....scans alignment <-in> with tree <-in2>)");
 		fprintf ( stdout, "\n     ......................+tree_scan help to get P1 information");
 		fprintf ( stdout, "\n     ......................+aln2tree help to get P2 information");
 		
 		fprintf ( stdout, "\n     .....................-in and -in2 can contain different taxons");
+		fprintf ( stdout, "\n     +tree2node.......... Reports the node list along with the split");
+		fprintf ( stdout, "\n     ..................... splits can be described with the seq order ");
+		fprintf ( stdout, "\n     ..................... provided via -in3=<sequence> ");
+		
 		fprintf ( stdout, "\n     +treelist2groups.N....count all topologies within a list of trees");
 		fprintf ( stdout, "\n     .....................-in is in fasta format with each name being a newick file");
 		fprintf ( stdout, "\n     .....................-in2 can be a list of sequences used to trim the trees");
@@ -10147,7 +10154,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   myexit (EXIT_SUCCESS);
 	 }
-      
+       
      
       
        else if ( strm(action, "seq2contacts"))
@@ -10310,6 +10317,15 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm(action, "treelist2dmat"))
 	 {
 	   treelist2dmat (D1->S);
+	 }
+       else if ( strm(action, "tree2node") )
+	 {
+	   print_node_list ( D1->T,(DST)?DST->S:NULL);
+	   myexit (EXIT_SUCCESS);
+	 }
+       else if ( strm(action, "tree_cmp_list") )
+	 {
+	   D1->T=main_compare_trees_list ( D1->T, D2->S, stdout);	  
 	 }
        else if ( strm(action, "tree_cmp") || strm (action, "tree_compare"))
 	 {
@@ -10503,7 +10519,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 
 	   ungap_aln_n (D1->A, (n_actions==1)?100:atoi(action_list[1]));
-	   free_sequence ( D1->S, (D1->S)->nseq);
+	   //free_sequence ( D1->S, (D1->S)->nseq);
 	   D1->S=aln2seq ( D1->A);
 	   (D1->A)->S=D1->S;
 	 }
@@ -10604,6 +10620,15 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       D1->S=aln2seq (D1->A);
 	     }
 	 }
+       else if ( strm (action, "aln2replicate"))
+	 {
+	   aln2N_replicate (D1->A, ACTION(1), ACTION(2));
+	 }
+       else if ( strm (action, "voronoi_cat"))
+	 {
+	   D1->A=voronoi_concatenate_aln (D1->A,D2->S);
+	 }
+       
        else if ( strm (action, "cat_aln"))
 	 {
 	   /*D1->A=aln_cat ( D1->A, D2 ->A);*/
@@ -11489,6 +11514,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   vfree(count_table);
 	   myexit(EXIT_SUCCESS);
 	 }
+       else if ( strm (action, "species_weight"))
+	 {
+	   seq_weight2species_weight (D1->A, D2->S);
+	   exit (0);
+	 }
+       else if ( strm (action, "aln2voronoi"))
+	 {
+	   aln2voronoi_weights (D1->A);
+	   
+	 }
        else if ( strm (action, "msa_weight"))
 	 {
 	   int random_value;
@@ -11750,6 +11785,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   fprintf ( stderr, "\nWARNING: ACTION %s UNKNOWN and IGNORED\n", action);
 	 }
+     
      }
 
 

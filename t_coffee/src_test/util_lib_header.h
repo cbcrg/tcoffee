@@ -459,6 +459,7 @@ int   is_rootpid();
 int is_shellpid(int pid);
 int   shift_lock (int from, int to, int from_type,int to_type, int action);
 char *lock2name (int pid, int type);
+int release_all_locks (int pid);
 char *lock (int pid, int type, int action, char *value, ...);
 int check_process (const char *com,int pid,int r, int failure_handling);
 int assert_pid (pid_t p);
@@ -1717,6 +1718,11 @@ Alignment * concatenate_aln ( Alignment *A, Alignment *B, char *sep);
 char * extract_defined_seq ( char *in, int in_of, int in_start, int *aa_def, int dir, int *out_start, char *out_seq);
 int verify_aln ( Alignment *A, Sequence *S, char * error);
 Alignment * remove_end (Alignment *A);
+Alignment * voronoi_concatenate_aln (Alignment *A, Sequence *S);
+Alignment * aln2N_replicate (Alignment *A, char *nn, char *name);
+FILE *aln2replicate (Alignment *A, FILE *fp);
+
+Alignment * voronoi_concatenate_aln (Alignment *A, Sequence *S);
 
 Alignment *adjust_est_aln ( Alignment *PW, Alignment *M, int s);
 Alignment * rename_seq_in_aln (Alignment *A, char ***list);
@@ -1802,6 +1808,8 @@ Alignment * trimseq( Alignment *A, Sequence *S, char *mode);
 Alignment *simple_trimseq (Alignment *A,Alignment*K, char *mode, char *seq);
 Alignment *sim_filter (Alignment *A, char *in_mode, char *seq_list);
 
+Sequence  * seq_weight2species_weight (Alignment *A, Sequence *S);
+Alignment * aln2voronoi_weights (Alignment *A);
 float ** get_weight ( Alignment *A, Sequence *S, char *mode);
 float **seq2pwsim (	   Alignment *A, Sequence *S, char *mode);
 Alignment * trimseq( Alignment *A, Sequence *S,char *mode);

@@ -191,7 +191,10 @@ struct Alignment
                      /*Only defined if used */
 
 
-   
+/*Weight*/   
+      float *col_weight;
+      float *seq_weight;
+      float **res_weight;
 /*Score*/
     int *  score_seq;
     int ** score_res;
