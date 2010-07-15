@@ -44,7 +44,10 @@ sub run_instruction
       {
 	$d=untag ($d,$A);
       }
-    
+     elsif ($c=~/zfilter/)
+      {
+	$d=zfilter_data ($d,$A);
+      }
     elsif ($c=~/filter/)
       {
 	$d=filter_data ($d,$A);
@@ -65,6 +68,10 @@ sub run_instruction
     elsif ($c=~/logodd/)
       {
 	data2log_odd ($d, $A);
+      }
+    elsif ($c=~/stat/)
+      {
+	data2stat($d, $A);
       }
     elsif ($c=~/seq2model/)
       {
@@ -89,9 +96,9 @@ sub run_instruction
     return;
   }
 
-#test_bw_trainning ();
+  #test_bw_trainning ();
 
-my $d={};
+  my $d={};
 $d=&parse_data ($ARGV[0], $d,0,0.01);
 
 $d=filter_data ($d, "Nature", "char", "keep", "food");
@@ -215,7 +222,7 @@ sub parse_data
     
     foreach my $c (keys (%WEIGHT))
       {
-	$WEIGHT{$c}{delta}=(($WEIGHT{$c}{end}-$WEIGHT{$c}{start})*100)/$WEIGHT{$c}{start};
+	if ($WEIGHT{$c}{start}){	$WEIGHT{$c}{delta}=(($WEIGHT{$c}{end}-$WEIGHT{$c}{start})*100)/$WEIGHT{$c}{start};}
       }
     
     #reformat/annotate fields fields
@@ -399,6 +406,77 @@ sub tag
     $TAG=1;
     return $d;
   }
+
+
+sub zfilter_data
+    {
+      my $d=shift;
+      my $A=shift;
+      my $zf=$A->{filter};
+      my ($removed, $n);
+      my $stat={};
+      
+      if (!$zf){$zf=3;}
+      
+      my $nl=data2nature_list ($d);
+      foreach my $nature (keys(%$nl))
+	{
+	  ($stat->{$nature}{Duration}{avg}, $stat->{$nature}{Duration}{sd})=data2avg_sd($d,$nature,"Duration");
+	  ($stat->{$nature}{Value}{avg}, $stat->{$nature}{Value}{sd})=data2avg_sd($d,$nature,"Value");
+	
+	  #print "$nature D: $stat->{$nature}{Duration}{avg}, $stat->{$nature}{Duration}{sd} V: $stat->{$nature}{Value}{avg}, $stat->{$nature}{Value}{sd}\n";
+	}
+      
+      foreach my $c (keys (%$d))
+       {
+	 foreach my $t (keys (%{$d->{$c}}))
+	   {
+	     
+	     my $nature=$d->{$c}{$t}{Nature};
+	     my $value=$d->{$c}{$t}{Value};
+	     my $duration=$d->{$c}{$t}{Duration};
+	     
+	     my $z1=abs (($value-$stat->{$nature}{Value}{avg})/$stat->{$nature}{Value}{sd});
+	     my $z2=abs (($duration-$stat->{$nature}{Duration}{avg})/$stat->{$nature}{Duration}{sd});
+	     
+	     if ( $z1>$zf || $z2>$zf)
+	       {
+		 $removed++;
+		 delete($d->{$c}{$t});
+	       }
+	     $n++;
+	   }
+       }
+      print STDERR "\nZ-Score Filtering: removed $removed values out of $n (Filter Z=$zf)\n";
+      
+    }
+sub data2avg_sd 
+    {
+      my $d=shift;
+      my $nature=shift;
+      my $field=shift;
+      my ($Sx, $Sx2,$avg,$sd, $n);
+      
+      foreach my $c (keys (%$d))
+	{
+	  foreach my $t (keys (%{$d->{$c}}))
+	    {
+	      if ($d->{$c}{$t}{Nature} eq $nature)
+		{
+		  
+		  my $v=$d->{$c}{$t}{$field};
+		  $Sx+=$v;
+		  $Sx2+=$v*$v;
+		  $n++;
+		}
+	    }
+	}
+      $avg=$Sx/$n;
+      $sd=sqrt(($Sx2/$n)-($avg*$avg));
+
+      return ($avg, $sd);
+    }
+
 sub filter_data
    {
      my $d=shift;
@@ -423,6 +501,23 @@ sub filter_data
      print STDERR "\nFiltering: Removed $tot values out of $n\n";
      return untag ($d);
    }
+sub data2nature_list
+  {
+    my $d=shift;
+    my $pl={};
+    
+    foreach my $c (sort(keys (%$d)))
+      {
+	foreach my $t (sort(keys (%{$d->{$c}})))
+	  {
+	    if( exists ( $d->{$c}{$t}{Nature}))
+	      {
+		$pl->{$d->{$c}{$t}{Nature}}=1;
+	      }
+	  }
+      }
+    return $pl;
+  }
 sub data2period_list
   {
     my $d=shift;
@@ -467,6 +562,7 @@ sub data2period
     if ($n eq "hour"){$delta=3600;}
     elsif ($n eq "day"){$delta=3600*24;}
     elsif ($n eq "week"){$delta=3600*24*7;}
+    elsif ($n eq "twoweek"){$delta=3600*24*7*2;}
     elsif ($n eq "month"){$delta=3600*24*31;}
     elsif ($n eq "year"){$delta=3600*24*365;}
     elsif ($n eq "full"){$delta=$end-$start;}
@@ -708,6 +804,70 @@ sub data2string
 	    }
 	}
     }
+sub data2stat 
+  {
+    my $d=shift;
+    my $A=shift;
+    my $period=data2period_list ($d);
+    
+    foreach my $p (sort ({$a<=>$b}keys (%$period)))
+      {
+	print "-- $p--\n";
+	$A->{period}=$p;
+	$A->{name}="$p";
+	data2display_period_stat ($d, $A);
+      }
+    die;
+  }
+sub data2display_period_stat
+  {
+     my $d=shift;
+     my $A=shift;
+     my $S={};
+     my $mintime=-1;
+     my $maxtime=-1;
+     my $duration;
+     my $tot=0;
+    foreach my $c (sort(keys (%$d)))
+      {
+	my ($ch, $pendt);
+	foreach my $t (sort(keys (%{$d->{$c}})))
+	  {
+	    my $period=$d->{$c}{$t}{period};
+	    if ($period ne $A->{period}){next;}
+	    my $ch=$d->{$c}{$t}{bin};
+	    if ($mintime==-1){$mintime=$t;}
+	    if ($maxtime==-1){$maxtime=$t;}
+	    $mintime=($t<$mintime)?$t:$mintime;
+	    $maxtime=($t>$maxtime)?$t:$maxtime;
+	    $tot++;
+	    $S->{$c}{$ch}{count}++;
+	    $S->{$c}{$ch}{duration}+=$d->{$c}{$t}{Duration};
+	    $S->{$c}{$ch}{value}+=$d->{$c}{$t}{Value};
+	    #printf "%10s --> %6.2f  %6.2f\n", $ch,$d->{$c}{$t}{Duration},$d->{$c}{$t}{Value}; 
+	  }
+      }
+     $duration=$maxtime-$mintime;
+     my $tt=sec2time($duration);
+     print "--- Period -- $A->{period} : "; 
+     print "Duration: $duration sec. ($tt). N Records: $tot\n";
+     foreach my $c (sort ({$a<=>$b}keys (%$S)))
+       {
+	 printf "Cage: $c\n";
+	 foreach my $ch (sort (keys(%{$S->{$c}})))
+	   {
+	     my $count=$S->{$c}{$ch}{count};
+	     printf "\tChannel: %8s", $ch;
+	     foreach my $f (sort (keys(%{$S->{$c}{$ch}})))
+	       {
+		 if ($f ne "count"){$S->{$c}{$ch}{$f}/=$count;}
+		 printf "- %8s: %6.2f ",$f,$S->{$c}{$ch}{$f};
+	       }
+	     print "\n";
+	   }
+       }
+     return;
+   }
 sub data2log_odd 
   {
     my $d=shift;
@@ -748,11 +908,13 @@ sub data2log_odd_period
 		#$M->{"total"}{$ch}{$cch}{count}{transitions}++;
 		#$M->{"total"}{$ch}{$cch}{count}{interval}+=$d->{$c}{$t}{StartT}-$pendt;
 	      }
+	    
 	    $tot->{$c}++;
 	    $ch=$cch;
 	    $pendt=$d->{$c}{$t}{EndT};
 	  }
       }
+    
    # foreach my $c ( sort({$a<=>$b}keys (%$chc)))
 #      {
 #	print "\n-- CAGE: $c\n";
@@ -778,7 +940,8 @@ sub data2log_odd_period
 		$count1/=$tot->{$c};
 		$count2=$M->{$c}{$b2}{$b2}{count}{tot};
 		$count2/=$tot->{$c};
-		$M->{$c}{$b1}{$b2}{logodd}{value}=(($count1*$count2)==0)?0:log (($count0)/($count1*$count2));
+		$M->{$c}{$b1}{$b2}{logodd}{value}=(($count1*$count2)==0 || $count0==0)?0:log (($count0)/($count1*$count2));
+		$M->{$c}{$b1}{$b2}{count}{fulltot}=$tot->{$c};
 	      }
 	  }
       }
@@ -802,9 +965,12 @@ sub display_log_odd
 	  }
 	foreach my $b1 (keys (%{$M->{$c}}))
 	  {
+	    my $b1C=$M->{$c}{$b1}{$b1}{count}{tot};
 	    foreach my $b2 (keys (%{$M->{$c}{$b1}}))
 	      {
-		printf "\t%10s -- %10s : %6.3f (%d)\n",$b1,$b2,$M->{$c}{$b1}{$b2}{logodd}{value},$M->{$c}{$b1}{$b2}{count}{transition};
+		my $b2C=$M->{$c}{$b2}{$b2}{count}{tot};
+			  
+		printf "\tCAGE: %2d Delta: %6.2f %10s -- %10s : %6.3f (Count: %5d)(FC: %5d)($b1: $b1C, $b2: $b2C)\n",$c,$WEIGHT{$c}{delta}, $b1,$b2,$M->{$c}{$b1}{$b2}{logodd}{value},$M->{$c}{$b1}{$b2}{count}{transition},$M->{$c}{$b1}{$b2}{count}{fulltot};
 	      }
 	  }
       }
@@ -1978,3 +2144,48 @@ sub string2hash
     shift @l;
     return array2hash (\@l, $h);
   }
+sub sec2time
+    {
+      my $t=shift;
+      my $minute=60;
+      my $hour=60*$minute;
+      my $day=24*$hour;
+      my $week=7*$day;
+      my $month=24*$day;
+      my $year=12*$month;
+      
+      my ($y, $m, $w, $d, $h, $min, $l,$date, $min);
+      
+      $y=int($t/$year);
+      $l=$t%$year;
+      $t=$l;
+
+      $m=int($t/$month);
+      $l=$t%$month;
+      $t=$l;
+
+      $w=int($t/$week);
+      $l=$t%$week;
+      $t=$l;
+      
+      $d=int($t/$day);
+      $l=$t%$day;
+      $t=$l;
+
+      $h=int($t/$hour);
+      $l=$t%$hour;
+      $t=$l;
+
+      $min=int($t/$minute);
+      $l=$t%$minute;
+      $t=$l;
+
+      if ($y){$date="$y year(s) ";}
+      if ($m){$date.="$m month(s) ";}
+      if ($w){$date.="$w week(s) ";}
+      if ($d){$date.="$d days(s) ";}
+      if ($h){$date.="$h hour(s) ";}
+      if ($min){$date.="$min minute(s) ";}
+      if ($t){$date.="$t second(s)";}
+      return $date;
+    }
