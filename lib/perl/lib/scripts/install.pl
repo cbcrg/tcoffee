@@ -29,6 +29,15 @@ our $OSNAME=$ENV{'OSNAME'};
 our $OSARCH=$ENV{'OSARCH'};
 our $REPO_ROOT="";
 
+our $TCDIR;
+our $TCCACHE;
+our $TCTMP;
+our $TCM;
+our $TCMETHODS;
+our $TCPLUGINS;
+our $PLUGINS_DIR="";
+our $INSTALL_DIR="";
+
 ###########   DEFINITIONS ##############################
 #
 #
@@ -87,6 +96,7 @@ if (($cl=~/-h/) ||($cl=~/-H/) )
     print "!!!!!!! ./install [optional:target] -tclinkdb=foo|update  [file containing all the packages to be installed]\n";
     print "!!!!!!! ./install [optional:target] -clean                [clean everything]\n";
     print "!!!!!!! ./install [optional:target] -plugins              [plugins directory]\n";
+    print "!!!!!!! ./install [optional:target] -tcdir=/foor/bar      [base path where T-Coffee will be installed]\n";
     print "!!!!!!! ./install [optional:target] -repo=/path/to/repo   [binaries repository root directory]\n";
     print "!!!!!!! mode:";
     foreach $m (keys(%MODE)){print "$m ";}
@@ -128,6 +138,7 @@ if ( ($cl=~/-tclinkdb=\s*(\S+)/)){$tclinkdb=$1;}
 if ( ($cl=~/-proxy=\s*(\S+)/)){$proxy=$1;}
 if ( ($cl=~/-clean/)){$clean=1;}
 if ( ($cl=~/-repo=\s*(\S+)/)){ $REPO_ROOT=$1; }
+if ( ($cl=~/-tcdir=\s*(\S+)/)){ $TCDIR=$1; }
 #automated update
 if ($tclinkdb){&update_tclinkdb ($tclinkdb);}
 
@@ -138,16 +149,9 @@ if( $REPO_ROOT ne "" ) {
 }
 
 #Prepare the T-Coffee directory structure
-our $TCDIR=$ENV{DIR_4_TCOFFEE};
-our $TCCACHE=$ENV{CACHE_4_TCOFFEE};
-our $TCTMP=$ENV{CACHE_4_TCOFFEE};
-our $TCM=$ENV{MCOFFEE_4_TCOFFEE};
-our $TCMETHODS=$ENV{METHODS_4_TCOFFEE};
-our $TCPLUGINS=$ENV{PLUGINS_4_TCOFFEE};
-our $PLUGINS_DIR="";
-our $INSTALL_DIR="";
 
-&add_dir ($TCDIR="$HOME/.t_coffee");
+if(!$TCDIR) { $TCDIR="$HOME/.t_coffee"; }
+&add_dir ($TCDIR);
 &add_dir ($TCCACHE="$TCDIR/cache");
 &add_dir ($TCTMP="$CDIR/tmp");
 &add_dir ($TCM="$TCDIR/mcoffee");
