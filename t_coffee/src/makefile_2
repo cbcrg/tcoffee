@@ -5,7 +5,7 @@ AUTHOR= "Cedric Notredame "
 #
 # make it possibile to define HOME2 externally using environment 
 # variable named 'SANDBOX', otherwise fallback on the defult mechanism 
-##
+#
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
