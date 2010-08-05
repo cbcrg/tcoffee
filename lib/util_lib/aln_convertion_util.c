@@ -326,8 +326,8 @@ int **    alifold_list2cov_list (Alignment *A, int **list)
 	      if (is_neutral (r1, r2))neutral++;
 	      if (is_neutral (rr1, rr2))neutral++;
 	      if (r1!=rr1 && r2!=rr2)comp++;
+	      occupancy++;
 	    }
-	  occupancy++;
 	}
       watson=(watson*100)/(occupancy*2);
       comp=(comp*100)/occupancy;
