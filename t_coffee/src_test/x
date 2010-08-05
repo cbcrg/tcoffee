@@ -1,39 +1,781 @@
->kinases Alignment Replicate #1
->kinases Alignment Replicate #2
->kinases Alignment Replicate #3
->kinases Alignment Replicate #4
->kinases Alignment Replicate #5
->kinases Alignment Replicate #6
->kinases Alignment Replicate #7
->kinases Alignment Replicate #8
->kinases Alignment Replicate #9
->kinases Alignment Replicate #10
-ap 100 +aln2replicate 10 kinases
-==22143== 
-==22143== Warning: ignored attempt to set SIGKILL handler in sigaction();
-==22143==          the SIGKILL signal is uncatchable
+	Process: >X02167.1-268_340 _F_ X_2167.1-268_34_.rfold
+	Process: >AE008874.1-15640_15730 _F_ AE__8874.1-1564__1573_.rfold
+	Process: >D11467.1-6989_6916 _F_ D11467.1-6989_6916.rfold
+	Process: >X53649.1-160_231 _F_ X53649.1-16__231.rfold
+	Process: >AC092686.3-29631_29561 _F_ AC_92686.3-29631_29561.rfold
+CLUSTAL FORMAT for T-COFFEE Version_8.92 [http://www.tcoffee.org] [MODE: rcoffee ], CPU=4.97 sec, SCORE=48, Nseq=5, Len=92 
 
-Voronoi Weights: Species Lb ---> 102.00
+D11467.1-6989_6916      GCAU--CCAUGGCUG-----AAUGGUUAAAGCGCC-----CAACUCAUAA
+AC092686.3-29631_29561  GCAU--UGGUGGUUC------AGUGGUAGAAUUC-----UCGCCUG-CCA
+X53649.1-160_231        UGGG--CUAUGGUGU-----AAUUGGCAGCACGA-----CUGAUUC-UGG
+AE008874.1-15640_15730  GAAGAUCGUCGUCUCCGGUGAGGCGGCUGGACUUCAAAUCCAGUUG-GGG
+X02167.1-268_340        CUAA--AUAUAUUUC-----AAUGGUUAGCAAAAU----ACGCUUG-UGG
+                                                *                   *     
 
-Voronoi Weights: Species Li ---> 83.18
+D11467.1-6989_6916      -UUGGCGAACUCG----CGGGUUCAAUUCCUGCUGG-AUGCA
+AC092686.3-29631_29561  -CGCGGGAGGC-----CCGGGUUCGAUUCCCGGCCA-AUGCA
+X53649.1-160_231        -UUCAGUUAGU-----CUAGGUUCGAGUCCUGGUAG-CCCAG
+AE008874.1-15640_15730  CCGCCAGCGGUCCCGGGCAGGUUCGACUCCUGUGAUCUUCCG
+X02167.1-268_340        -UGCGUUAAAUC-----UAAGUUCGAUUCUUAGUAU-UUACC
+                                            **** * **             
 
-Voronoi Weights: Species Lm ---> 84.64
 
-Voronoi Weights: Species Tb ---> 92.24
 
-Voronoi Weights: Species Tc ---> 87.89
-==22143== 
-==22143== HEAP SUMMARY:
-==22143==     in use at exit: 11,753,156 bytes in 10,502 blocks
-==22143==   total heap usage: 66,827 allocs, 56,325 frees, 69,706,410 bytes allocated
-==22143== 
-==22143== LEAK SUMMARY:
-==22143==    definitely lost: 12,819 bytes in 55 blocks
-==22143==    indirectly lost: 470,220 bytes in 255 blocks
-==22143==      possibly lost: 11,270,117 bytes in 10,192 blocks
-==22143==    still reachable: 0 bytes in 0 blocks
-==22143==         suppressed: 0 bytes in 0 blocks
-==22143== Rerun with --leak-check=full to see details of leaked memory
-==22143== 
-==22143== For counts of detected and suppressed errors, rerun with: -v
-==22143== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 13 from 8)
+y      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[1] 	dna2rna
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-maxnseq       	D	[0] 	1000 
+-maxlen        	D	[0] 	-1 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	t_coffee
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-evaluate_mode 	S	[0] 	t_coffee_fast
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_min_cov  	D	[40] 	40 
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-one2all       	S	[0] 
+-subset2all    	S	[0] 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[1] 	no
+-n_core        	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	one
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+
+INPUT FILES
+	Input File (S) r.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File r.fasta                Seq D11467.1-6989_6916     Length   74 type RNA Struct Unchecked
+	RNA Fold: Template=D11467.1-6989_6916.rfold, File=D11467.1-6989_6916.rfold
+  Input File r.fasta                Seq AC092686.3-29631_29561 Length   71 type RNA Struct Unchecked
+	RNA Fold: Template=AC_92686.3-29631_29561.rfold, File=AC_92686.3-29631_29561.rfold
+  Input File r.fasta                Seq X53649.1-160_231       Length   72 type RNA Struct Unchecked
+	RNA Fold: Template=X53649.1-16__231.rfold, File=X53649.1-16__231.rfold
+  Input File r.fasta                Seq AE008874.1-15640_15730 Length   91 type RNA Struct Unchecked
+	RNA Fold: Template=AE__8874.1-1564__1573_.rfold, File=AE__8874.1-1564__1573_.rfold
+  Input File r.fasta                Seq X02167.1-268_340       Length   73 type RNA Struct Unchecked
+	RNA Fold: Template=X_2167.1-268_34_.rfold, File=X_2167.1-268_34_.rfold
+
+COMPUTE PAIRWISE SIMILARITY [dp_mode: ] [distance_matrix_mode: ktup][Similarity Measure: idmat_sim1] 
+
+	Seq: AC092686.3-29631_29561
+	Seq: AE008874.1-15640_15730
+	Seq: D11467.1-6989_6916
+	Seq: X02167.1-268_340
+	Seq: X53649.1-160_231
+
+READ/MAKE LIBRARIES:[2]
+
+	proba_pair [method]
+
+		[Submit   Job][TOT=   10][  0 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=   10][ 20 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=   10][ 30 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=   10][ 40 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=   10][ 50 %][ELAPSED TIME:    0 sec.]		[Submit   Job][TOT=   10][ 60 %][ELAPSED TIME:    1 sec.]		[Submit   Job][TOT=   10][ 70 %][ELAPSED TIME:    1 sec.]		[Submit   Job][TOT=   10][ 80 %][ELAPSED TIME:    1 sec.]		[Submit   Job][TOT=   10][ 90 %][ELAPSED TIME:    1 sec.]		[Submit   Job][TOT=   10][100 %][ELAPSED TIME:    1 sec.]
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4596]
+
+
+WEIGHTED MODE:t_coffee
+
+	AC092686.3-29631_29561 0.97
+	AE008874.1-15640_15730 1.03
+	    D11467.1-6989_6916 1.00
+	      X02167.1-268_340 1.01
+	      X53649.1-160_231 0.99
+
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+==21200== Invalid read of size 4
+==21200==    at 0x8057E2F: rna_lib_extension (util_constraints_list.c:4618)
+==21200==    by 0x815E621: residue_pair_extended_list4rna2 (evaluate.c:1982)
+==21200==    by 0x815C607: initialize_scoring_scheme (evaluate.c:1405)
+==21200==    by 0x8145FFC: local_tree_aln (util_dp_drivers.c:3158)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x69bb2d4 is 4 bytes after a block of size 440 alloc'd
+==21200==    at 0x4005BDC: malloc (vg_replace_malloc.c:195)
+==21200==    by 0x80A6F89: vmalloc (util_declare.c:1305)
+==21200==    by 0x80A706B: sub_vcalloc (util_declare.c:1341)
+==21200==    by 0x80A701C: vcalloc (util_declare.c:1329)
+==21200==    by 0x8057BE3: rna_lib_extension (util_constraints_list.c:4583)
+==21200==    by 0x815E621: residue_pair_extended_list4rna2 (evaluate.c:1982)
+==21200==    by 0x815C607: initialize_scoring_scheme (evaluate.c:1405)
+==21200==    by 0x8145FFC: local_tree_aln (util_dp_drivers.c:3158)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7A7: residue_pair_extended_list4rna (evaluate.c:2015)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x81648E4: slow_get_dp_cost (evaluate.c:3690)
+==21200==    by 0x8157EA0: sub_aln2sub_aln_score (evaluate.c:116)
+==21200==    by 0x8157DF4: node2sub_aln_score (evaluate.c:100)
+==21200==    by 0x8146578: rec_local_tree_aln (util_dp_drivers.c:3254)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815FC1F: clean_residue_pair_hasch (evaluate.c:2426)
+==21200==    by 0x815FAF9: residue_pair_extended_list (evaluate.c:2403)
+==21200==    by 0x815E7A7: residue_pair_extended_list4rna (evaluate.c:2015)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x81648E4: slow_get_dp_cost (evaluate.c:3690)
+==21200==    by 0x8157EA0: sub_aln2sub_aln_score (evaluate.c:116)
+==21200==    by 0x8157DF4: node2sub_aln_score (evaluate.c:100)
+==21200==    by 0x8146578: rec_local_tree_aln (util_dp_drivers.c:3254)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7FB: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x81648E4: slow_get_dp_cost (evaluate.c:3690)
+==21200==    by 0x8157EA0: sub_aln2sub_aln_score (evaluate.c:116)
+==21200==    by 0x8157DF4: node2sub_aln_score (evaluate.c:100)
+==21200==    by 0x8146578: rec_local_tree_aln (util_dp_drivers.c:3254)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815FC1F: clean_residue_pair_hasch (evaluate.c:2426)
+==21200==    by 0x815FAF9: residue_pair_extended_list (evaluate.c:2403)
+==21200==    by 0x815E7FB: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x81648E4: slow_get_dp_cost (evaluate.c:3690)
+==21200==    by 0x8157EA0: sub_aln2sub_aln_score (evaluate.c:116)
+==21200==    by 0x8157DF4: node2sub_aln_score (evaluate.c:100)
+==21200==    by 0x8146578: rec_local_tree_aln (util_dp_drivers.c:3254)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E835: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x81648E4: slow_get_dp_cost (evaluate.c:3690)
+==21200==    by 0x8157EA0: sub_aln2sub_aln_score (evaluate.c:116)
+==21200==    by 0x8157DF4: node2sub_aln_score (evaluate.c:100)
+==21200==    by 0x8146578: rec_local_tree_aln (util_dp_drivers.c:3254)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815FC1F: clean_residue_pair_hasch (evaluate.c:2426)
+==21200==    by 0x815FAF9: residue_pair_extended_list (evaluate.c:2403)
+==21200==    by 0x815E835: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x81648E4: slow_get_dp_cost (evaluate.c:3690)
+==21200==    by 0x8157EA0: sub_aln2sub_aln_score (evaluate.c:116)
+==21200==    by 0x8157DF4: node2sub_aln_score (evaluate.c:100)
+==21200==    by 0x8146578: rec_local_tree_aln (util_dp_drivers.c:3254)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+
+	Group    6: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Score=  32][Len=   91][PID:21200]
+	Group    7: [Group    5 (   1 seq)] with [Group    6 (   2 seq)]-->[Score=  37][Len=   91][PID:21200]
+	Group    8: [Group    4 (   1 seq)] with [Group    3 (   1 seq)]-->[Score=  54][Len=   75][PID:21200]==21200== Invalid read of size 4
+==21200==    at 0x8123622: cl2pair_list_ecl_pc (util_dp_gotoh_nw.c:2315)
+==21200==    by 0x812232B: cl2pair_list_ecl (util_dp_gotoh_nw.c:1983)
+==21200==    by 0x811FC68: cl2pair_list (util_dp_gotoh_nw.c:1277)
+==21200==    by 0x8126131: linked_pair_wise (util_dp_gotoh_nw.c:2920)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6b030f8 is not stack'd, malloc'd or (recently) free'd
+==21200== 
+==21200== Use of uninitialised value of size 4
+==21200==    at 0x812366C: cl2pair_list_ecl_pc (util_dp_gotoh_nw.c:2319)
+==21200==    by 0x812232B: cl2pair_list_ecl (util_dp_gotoh_nw.c:1983)
+==21200==    by 0x811FC68: cl2pair_list (util_dp_gotoh_nw.c:1277)
+==21200==    by 0x8126131: linked_pair_wise (util_dp_gotoh_nw.c:2920)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200== 
+==21200== Use of uninitialised value of size 4
+==21200==    at 0x81236BE: cl2pair_list_ecl_pc (util_dp_gotoh_nw.c:2325)
+==21200==    by 0x812232B: cl2pair_list_ecl (util_dp_gotoh_nw.c:1983)
+==21200==    by 0x811FC68: cl2pair_list (util_dp_gotoh_nw.c:1277)
+==21200==    by 0x8126131: linked_pair_wise (util_dp_gotoh_nw.c:2920)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200== 
+==21200== Use of uninitialised value of size 4
+==21200==    at 0x81236C9: cl2pair_list_ecl_pc (util_dp_gotoh_nw.c:2325)
+==21200==    by 0x812232B: cl2pair_list_ecl (util_dp_gotoh_nw.c:1983)
+==21200==    by 0x811FC68: cl2pair_list (util_dp_gotoh_nw.c:1277)
+==21200==    by 0x8126131: linked_pair_wise (util_dp_gotoh_nw.c:2920)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200== 
+==21200== Use of uninitialised value of size 4
+==21200==    at 0x81236DB: cl2pair_list_ecl_pc (util_dp_gotoh_nw.c:2326)
+==21200==    by 0x812232B: cl2pair_list_ecl (util_dp_gotoh_nw.c:1983)
+==21200==    by 0x811FC68: cl2pair_list (util_dp_gotoh_nw.c:1277)
+==21200==    by 0x8126131: linked_pair_wise (util_dp_gotoh_nw.c:2920)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x814620C: local_tree_aln (util_dp_drivers.c:3188)
+==21200==    by 0x8145C86: tree_aln (util_dp_drivers.c:3095)
+==21200==    by 0x8182F16: batch_main (t_coffee.c:4447)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200== 
+
+	Group    9: [Group    8 (   2 seq)] with [Group    7 (   3 seq)]-->[Score=  38][Len=   92][PID:21200]
+
+==21200== Invalid read of size 4
+==21200==    at 0x8055A36: seq2defined_residues (util_constraints_list.c:3932)
+==21200==    by 0x8055AD1: aln2defined_residues (util_constraints_list.c:3948)
+==21200==    by 0x8159B75: fast_coffee_evaluate_output (evaluate.c:629)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6b58d98 is not stack'd, malloc'd or (recently) free'd
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x8055A3B: seq2defined_residues (util_constraints_list.c:3932)
+==21200==    by 0x8055AD1: aln2defined_residues (util_constraints_list.c:3948)
+==21200==    by 0x8159B75: fast_coffee_evaluate_output (evaluate.c:629)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6b58d98 is not stack'd, malloc'd or (recently) free'd
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7A7: residue_pair_extended_list4rna (evaluate.c:2015)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159CAF: fast_coffee_evaluate_output (evaluate.c:653)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7A7: residue_pair_extended_list4rna (evaluate.c:2015)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159C7D: fast_coffee_evaluate_output (evaluate.c:652)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7FB: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159C7D: fast_coffee_evaluate_output (evaluate.c:652)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E835: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159C7D: fast_coffee_evaluate_output (evaluate.c:652)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7FB: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159CAF: fast_coffee_evaluate_output (evaluate.c:653)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E835: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159CAF: fast_coffee_evaluate_output (evaluate.c:653)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7A7: residue_pair_extended_list4rna (evaluate.c:2015)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159F7D: fast_coffee_evaluate_output (evaluate.c:692)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7A7: residue_pair_extended_list4rna (evaluate.c:2015)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159F4B: fast_coffee_evaluate_output (evaluate.c:691)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7FB: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159F4B: fast_coffee_evaluate_output (evaluate.c:691)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E835: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159F4B: fast_coffee_evaluate_output (evaluate.c:691)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E7FB: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159F7D: fast_coffee_evaluate_output (evaluate.c:692)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+==21200== Invalid write of size 4
+==21200==    at 0x815F807: residue_pair_extended_list (evaluate.c:2367)
+==21200==    by 0x815E835: residue_pair_extended_list4rna (evaluate.c:2019)
+==21200==    by 0x815E651: residue_pair_extended_list4rna2 (evaluate.c:1986)
+==21200==    by 0x8159F7D: fast_coffee_evaluate_output (evaluate.c:692)
+==21200==    by 0x81585FE: main_coffee_evaluate_output2 (evaluate.c:228)
+==21200==    by 0x8158371: main_coffee_evaluate_output (evaluate.c:196)
+==21200==    by 0x8183925: batch_main (t_coffee.c:4614)
+==21200==    by 0x8178987: main (t_coffee.c:79)
+==21200==  Address 0x6a1fd00 is 16 bytes inside a block of size 68 free'd
+==21200==    at 0x40057F6: free (vg_replace_malloc.c:325)
+==21200==    by 0x80A720A: vfree (util_declare.c:1418)
+==21200==    by 0x80A749D: free_arrayN (util_declare.c:1505)
+==21200==    by 0x80A74E1: free_arrayN (util_declare.c:1510)
+==21200==    by 0x80A84F0: free_int (util_declare.c:1851)
+==21200==    by 0x811FBBB: cl2pair_list (util_dp_gotoh_nw.c:1268)
+==21200==    by 0x81261A3: linked_pair_wise (util_dp_gotoh_nw.c:2923)
+==21200==    by 0x81493DE: pair_wise (util_dp_drivers.c:4153)
+==21200==    by 0x81492BE: profile_pair_wise (util_dp_drivers.c:4121)
+==21200==    by 0x814650E: rec_local_tree_aln (util_dp_drivers.c:3252)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200==    by 0x81464B4: rec_local_tree_aln (util_dp_drivers.c:3248)
+==21200== 
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE Format=     newick Name= r.dnd
+	#### File Type=        MSA Format=        aln Name= r.aln
+	#### File Type=        MSA Format=       html Name= r.html
+	#### File Type= Template_List Format=  fasta_seq Name= r_rfold1.template_list
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= AC_92686.3-29631_29561.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= AE__8874.1-1564__1573_.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= D11467.1-6989_6916.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= X_2167.1-268_34_.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= X53649.1-16__231.rfold
+
+
+# TIP :See The Full Documentation on www.tcoffee.org
+# TIP  1:  Get the most accurate protein alignments with: t_coffee <yourseq> -special_mode accurate [Slow]
+# TIP  6:  -special_mode=accurate The best we can do [slow]
+
+# Command Line: t_coffee r.fasta -mode rcoffee -multi_core no  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 17.986 Mb, Max= 19.373 Mb
+# T-COFFEE CPU Usage: 5160 millisec
+# Results Produced with T-COFFEE (Version_8.92)
+# T-COFFEE is available from http://www.tcoffee.org
+==21200== 
+==21200== HEAP SUMMARY:
+==21200==     in use at exit: 19,899,965 bytes in 278,264 blocks
+==21200==   total heap usage: 330,866 allocs, 52,602 frees, 31,014,616 bytes allocated
+==21200== 
+==21200== LEAK SUMMARY:
+==21200==    definitely lost: 1,162,851 bytes in 232 blocks
+==21200==    indirectly lost: 3,891,147 bytes in 10,918 blocks
+==21200==      possibly lost: 14,845,615 bytes in 267,113 blocks
+==21200==    still reachable: 352 bytes in 1 blocks
+==21200==         suppressed: 0 bytes in 0 blocks
+==21200== Rerun with --leak-check=full to see details of leaked memory
+==21200== 
+==21200== For counts of detected and suppressed errors, rerun with: -v
+==21200== Use --track-origins=yes to see where uninitialised values come from
+==21200== ERROR SUMMARY: 178 errors from 26 contexts (suppressed: 13 from 8)

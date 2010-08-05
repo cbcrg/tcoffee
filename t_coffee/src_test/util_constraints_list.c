@@ -4615,7 +4615,7 @@ Constraint_list * rna_lib_extension ( Constraint_list *CL, Constraint_list *R)
 		for (d=1; d<n2; d++)
 		  {
 		    entry[R1]=list1[b];
-		    entry[R2]=list2[c];
+		    entry[R2]=list2[d];
 		    for (e=0; e<CL->entry_len; e++) fprintf (fp, "%d ", entry[e]);
 		  }
 	    }

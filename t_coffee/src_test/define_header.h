@@ -736,8 +736,8 @@ The format is as follow:
 -------------------------------------------------------------------------------------------
 the RGB values are used for the post-script generation, the html code is used in html documents.
 */
-#define DATE "Fri Jul 2 01:30:11 CEST 2010"
+#define DATE "Thu Aug 5 14:05:42 CEST 2010"
 #define PROGRAM "T-COFFEE"
-#define VERSION "Version_8.91"
+#define VERSION "Version_8.92"
 #define AUTHOR "Cedric Notredame "
 #define DISTRIBUTION_ADDRESS "www.tcoffee.org/Packages/"

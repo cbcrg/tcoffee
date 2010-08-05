@@ -6684,7 +6684,7 @@ Alignment * aln2N_replicate (Alignment *A,char *nn, char *name)
       fp=vfopen (fname, "w");
       
       vfclose(aln2replicate (A, fp));
-      fprintf ( stdout, ">%s Alignment Replicate #%d\n",name, a+1); 
+      fprintf ( stdout, ">%s Alignment Replicate #%d\n",fname, a+1); 
     }
   myexit (EXIT_SUCCESS);
 }
@@ -6720,14 +6720,14 @@ FILE *aln2replicate (Alignment *A, FILE *fp)
   return fp;
 }
     
-Alignment * voronoi_concatenate_aln (Alignment *A, Sequence *S)
+Alignment * orthologous_concatenate_aln (Alignment *A, Sequence *S, char *mode)
 {
   Alignment *C;
   char **name, *cname;
   int nname=0;
   int a, b,c, i;
   
-  seq_weight2species_weight (A, S);
+  if (mode && strm (mode, "voronoi"))seq_weight2species_weight (A, S);
   
   
   cname=vcalloc ( 100, sizeof (char));

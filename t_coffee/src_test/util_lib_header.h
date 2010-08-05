@@ -1718,7 +1718,7 @@ Alignment * concatenate_aln ( Alignment *A, Alignment *B, char *sep);
 char * extract_defined_seq ( char *in, int in_of, int in_start, int *aa_def, int dir, int *out_start, char *out_seq);
 int verify_aln ( Alignment *A, Sequence *S, char * error);
 Alignment * remove_end (Alignment *A);
-Alignment * voronoi_concatenate_aln (Alignment *A, Sequence *S);
+Alignment * orthologous_concatenate_aln (Alignment *A, Sequence *S, char *mode);
 Alignment * aln2N_replicate (Alignment *A, char *nn, char *name);
 FILE *aln2replicate (Alignment *A, FILE *fp);
 

@@ -195,7 +195,16 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....................seq=cons: measure positions on the full aln");
 		fprintf ( stdout, "\n     +cat_aln.............Concatenates the alignments input via -in and -in2");
 		fprintf ( stdout, "\n     +cat_aln.............-if no -in2, -in is expected to be a list of alignments to concatenate");
+		fprintf ( stdout, "\n     +orthologous_cat..<mode>: mode=voronoi or nothing");
+		fprintf ( stdout, "\n     ......................-in: sequences from different species");
+		fprintf ( stdout, "\n     ..................... -in2: list of species in fasta");
+		fprintf ( stdout, "\n     ..................... sequence must be named: <species>_<genename>");
+		fprintf ( stdout, "\n     ..................... all paralogues will be concatenated");
 		
+		fprintf ( stdout, "\n     +aln2replicate N name");
+		fprintf ( stdout, "\n     ..................... Generates N replicates in Fasta");
+		fprintf ( stdout, "\n     ..................... Voronoi weights can be used");
+				
 		fprintf ( stdout, "\n     +msalist2cat_pwaln.min..max");
 		fprintf ( stdout, "\n     .....................extract all pw projections and conctaenates those\n");
 		fprintf ( stdout, "\n     .....................where id>=min and id<=max\n");
@@ -10624,9 +10633,9 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   aln2N_replicate (D1->A, ACTION(1), ACTION(2));
 	 }
-       else if ( strm (action, "voronoi_cat"))
+       else if ( strm (action, "paralogous_cat"))
 	 {
-	   D1->A=voronoi_concatenate_aln (D1->A,D2->S);
+	   D1->A=orthologous_concatenate_aln (D1->A,D2->S, ACTION (1));
 	 }
        
        else if ( strm (action, "cat_aln"))

@@ -860,6 +860,7 @@ sub data2display_period_stat
 	     printf "\tChannel: %8s", $ch;
 	     foreach my $f (sort (keys(%{$S->{$c}{$ch}})))
 	       {
+		 if ($f ne "count"){printf "- tot %8s: %6.2f ",$f,$S->{$c}{$ch}{$f};}
 		 if ($f ne "count"){$S->{$c}{$ch}{$f}/=$count;}
 		 printf "- %8s: %6.2f ",$f,$S->{$c}{$ch}{$f};
 	       }
