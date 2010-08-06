@@ -8006,8 +8006,8 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
 
   if (!getenv ("UPDATED_ENV_4_TCOFFEE"))
     {
-      //1-set the envirnement variables;
-      file_putenv ("/usr/local/t_coffee/.t_coffee_env");//make sure child processes do not upate env
+      //1-set the environment variables;
+      file_putenv ("/usr/local/t_coffee/.t_coffee_env");//make sure child processes do not update env
       sprintf (buf, "%s/.t_coffee/.t_coffee_env", getenv ("HOME"));
       file_putenv (buf);
       file_putenv ("./.t_coffee_env");

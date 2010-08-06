@@ -364,13 +364,13 @@ foreach my $m (keys(%MODE))
 	if ( $succesful)
 	  {
 	    $MODE{$m}{status}=1;
-	    print "*------       MODE $MODE{$m}{dname} SUCCESFULY installed\n";
+	    print "*------       MODE $MODE{$m}{dname} SUCCESSFULLY installed\n";
 	  }
 	else
 	  {
 	    $failure++;
 	    $MODE{$m}{status}=0;
-	    print "*!!!!!!       MODE $MODE{$m}{dname} UNSUCCESFULY installed\n";
+	    print "*!!!!!!       MODE $MODE{$m}{dname} UNSUCCESSFULLY installed\n";
 	  }
       }
   }
