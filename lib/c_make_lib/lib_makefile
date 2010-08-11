@@ -6,10 +6,46 @@
 #							#
 #########################################################
 
+#
+# Base path for library folders  
+#
+ifndef LIB_DIR
+LIB_DIR=$(PWD)/../../lib
+endif 
+
+#
+# Use current date as default if nothing is specified
+#
+ifndef DATE 
+DATE=`date`
+endif 
+
+#
+# Default program name 
+#
+ifndef PROGRAM
+PROGRAM="T-COFFEE"
+endif 
+
+#
+# (nothing to explain here :))
+#
+ifndef AUTHOR
+AUTHOR= "Cedric Notredame "
+endif
+
+#
+# Web path where T-Coffee distribution are published
+#
+ifndef DISTRIBUTION_ADDRESS
+DISTRIBUTION_ADDRESS="www.tcoffee.org/Packages"
+endif
+
+
+
 #LIST OF C LIBRARIES
 #TC_LIB_DIR MUST BE defined in BAshrc
-LIB_DIR=$(PWD)/../../lib
-# LIB_DIR=$(HOME)/projects/c.svn/trunk/lib/
+
 CODE_LIST=$(LIB_DIR)/compilation/code_list
 PERL_LIB_DIR=$(LIB_DIR)/perl/lib
 IO_LIB=$(LIB_DIR)/io_lib
