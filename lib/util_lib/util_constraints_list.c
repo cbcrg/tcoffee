@@ -1300,6 +1300,7 @@ Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file)
     }
 
   vfclose (fp);
+  remove(file);
   return CL;
 }
 
