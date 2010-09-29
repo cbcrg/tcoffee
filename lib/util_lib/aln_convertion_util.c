@@ -4629,7 +4629,7 @@ Sequence * add_sequence ( Sequence *IN, Sequence *OUT, int i)
 
 	 if ( getenv4debug("DEBUG_RECONCILIATION"))fprintf ( stderr,"[DEBUG_RECONCILIATION:add_sequence]\n%s\n%s\n", IN->seq[i], OUT->seq[s]);
 	 
-	 add_warning (stderr, "WARNING: DISCREPANCY:%s in [%s] and  [%s]\n", IN->name[i], IN->file[i], OUT->file[s]);
+	 add_warning (stderr, "DISCREPANCY:%s in [%s] and  [%s]\n", IN->name[i], IN->file[i], OUT->file[s]);
 	 
 	 
        if (((buf=build_consensus(IN->seq[i], OUT->seq[s],"cfasta_pair_wise" ))!=NULL)||((buf=build_consensus(IN->seq[i], OUT->seq[s],"myers_miller_pair_wise" ))!=NULL))
@@ -5317,7 +5317,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       else 
 	{
 	  
-	  add_warning (stderr, "\nWARNING: Could not Run %s to find templates[%s](Forked mode)\n",command, PROGRAM);
+	  add_warning (stderr, "Could not Run %s to find templates[%s](Forked mode)\n",command, PROGRAM);
 	  return NULL;
 	}
   
@@ -5384,7 +5384,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       else 
 	{
 	  
-	  add_warning (stderr, "\nWARNING: Could not Run %s to find templates[%s](unforked mode)\n",command, PROGRAM);
+	  add_warning (stderr, "Could not Run %s to find templates[%s](unforked mode)\n",command, PROGRAM);
 	  return NULL;
 	}
       
@@ -5583,7 +5583,7 @@ struct X_template *fill_F_template ( char *name,char *p, Sequence *S)
   sprintf (F->template_format , "TCOFFEE_LIBRARY");
   if (!F || !check_file_exists (F->template_name))
     {
-      fprintf ( stderr, "\nWARNING: Could Not Fill _F_ (Fold) template for sequence |%s|", name);
+      fprintf ( stderr, "Could Not Fill _F_ (Fold) template for sequence |%s|", name);
       free_X_template (F);
       return NULL;
     }
@@ -5611,7 +5611,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   
   if (!P)
     {
-      //fprintf ( stderr, "\nWARNING: Could Not Fill _P_ template for sequence |%s|", name);
+      //fprintf ( stderr, "Could Not Fill _P_ template for sequence |%s|", name);
       free_X_template (P);
       return NULL;
     }
@@ -5652,7 +5652,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   if (!is_pdb_file (P->template_file))
     {
 
-      add_warning(stderr, "WARNING: _P_ Template | %s | Could Not Be Found\n",p);
+      add_warning(stderr, "_P_ Template | %s | Could Not Be Found\n",p);
       free_X_template (P);
       return NULL;
     }
@@ -5674,7 +5674,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 
   if ( PS==NULL)
     {
-      add_warning( stderr, "WARNING:  _P_  Template |%s| Could Not be Used for Sequence |%s|: Structure Not Found", P->template_name, name);
+      add_warning( stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Structure Not Found", P->template_name, name);
       free_X_template (P);P=NULL;
     }
   else
@@ -5694,7 +5694,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
      
       if (sim<=minsim)
 	{
-	  add_warning( stderr, "WARNING:  _P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_minsim=%d flag\n",P->template_name,name, sim, minsim, sim);
+	  add_warning( stderr, "_P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]");          add_warning( stderr, "If you want to include this sequence in anycase, please use the -pdb_minsim=%d flag",P->template_name,name, sim, minsim, sim);
 	  print_aln (A);
 	  free_X_template (P);
 	  P=NULL;

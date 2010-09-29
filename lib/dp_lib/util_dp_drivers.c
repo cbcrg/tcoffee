@@ -1491,10 +1491,10 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		tmp_pdb1=normalize_pdb_file(seq2P_template_file(CL->S,s1),(CL->S)->seq[s1], vtmpnam (NULL));
 		tmp_pdb2=normalize_pdb_file(seq2P_template_file(CL->S,s2),(CL->S)->seq[s2], vtmpnam (NULL));
 		sprintf ( full_name, "%s%s", get_cache_dir (), tmp_name);
-		printf_system ("%s %s %s >%s 2>/dev/null",program,tmp_pdb1,tmp_pdb2, full_name);
+		printf_system ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,tmp_pdb1,tmp_pdb2, full_name);
 		if ( !check_file_exists (full_name) || !is_sap_file(full_name))
 		  {
-		    add_warning ( stderr, "WARNING: SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
+		    add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
 		    if ( check_file_exists (full_name))add2file2remove_list (full_name);
 		    return CL;
 		  }
