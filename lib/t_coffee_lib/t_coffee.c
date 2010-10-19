@@ -4634,7 +4634,7 @@ get_cl_param(\
 
 		      fprintf (le, "\n\nOUTPUT RESULTS");
 		      le=display_output_filename (le, "GUIDE_TREE","newick", tree_file, CHECK);
-
+		      
 		      for ( a=0; a< n_out_aln_format; a++)
 			le=display_output_filename( le,"MSA",out_aln_format[a], tot_out_aln[a], CHECK);
 		      if (CL->ne>0 && out_lib[0]!='\0' && !strm (out_lib, "no"))

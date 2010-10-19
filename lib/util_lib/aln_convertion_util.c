@@ -5616,8 +5616,8 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   int sim, cov, i;
   char *buf;
   
-  
-  P=fill_X_template ( name, p, "_P_");  
+ 
+  P=fill_X_template ( name, p, "_P_");
   sprintf (P->template_format , "pdb");
   
   if (!P)
@@ -5660,6 +5660,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   }
  
   /*Check the PDB FILE EXISTS*/
+  
   if (!is_pdb_file (P->template_file))
     {
 
@@ -5712,7 +5713,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 	}
       else if ( cov<=mincov)
 	{
-	  add_warning( stderr, "WARNING:  _P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_mincov=%d flag\n", P->template_name,name, cov, mincov,cov);
+	  add_warning( stderr, "WARNING:  _P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_min_cov=%d flag\n", P->template_name,name, cov, mincov,cov);
 	  print_aln (A);
 	  free_X_template (P);P=NULL;
 	}
