@@ -121,9 +121,11 @@ test:
 	chmod u+x $(DISTRIB_DIR)/bin/test.pl
 	#echo "./bin/test.pl" >>$(DISTRIB_DIR)/install 
 	#echo "./bin/t_coffee -update" >>$(DISTRIB_DIR)/install 
+
 doc_test:
-	check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.doc
-	check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.doc
+	$(PWD)/../../lib/perl/lib/debug/check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.doc -data $(PWD)/../doc_test/data/
+	$(PWD)/../../lib/perl/lib/debug/check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.doc -data $(PWD)/../doc_test/data/
+
 debug:  t_coffee
 	rm -r debug
 	mkdir debug
