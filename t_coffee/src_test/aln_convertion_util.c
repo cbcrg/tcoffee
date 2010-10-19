@@ -326,9 +326,14 @@ int **    alifold_list2cov_list (Alignment *A, int **list)
 	      if (is_neutral (r1, r2))neutral++;
 	      if (is_neutral (rr1, rr2))neutral++;
 	      if (r1!=rr1 && r2!=rr2)comp++;
+	      occupancy++;
 	    }
-	  occupancy++;
 	}
+      if (occupancy==0)
+        {
+	  a++;
+          continue;
+        }
       watson=(watson*100)/(occupancy*2);
       comp=(comp*100)/occupancy;
       neutral=(neutral*100)/(occupancy*2);
@@ -3957,6 +3962,9 @@ int  seq_list2fasta_file( Sequence *S,  char *list, char *file, char *outmode)
 	      }
 	    else
 	      {
+		int **list2;
+		int max;
+		
 		l=strlen (list);
 		if ( l>blen)
 		  {
@@ -3966,12 +3974,20 @@ int  seq_list2fasta_file( Sequence *S,  char *list, char *file, char *outmode)
 		    blen=l;
 		  }
 		n=atoi(strtok (list,SEPARATORS));
+		
+		list2=declare_int (n, 2);
+		max=n*1000;
+		for ( a=0; a<n; a++)
+		  {
+		    list2[a][0]=atoi(strtok (NULL, SEPARATORS));
+		    list2[a][1]=rand()%max;
+		  }
+		if ( atoigetenv ("HoT_4_TCOFFEE"))sort_int ( list2,2, 1, 0, n-1);
 		for ( a=0; a< n; a++)
 		  {
-		    s=atoi(strtok (NULL, SEPARATORS));
-		    
-		    if (outmode && strm (outmode, "aln"))fprintf ( fp, ">%s %s\n%s\n", decode_name (S->name[s], CODE), S->name[a],S->seq[s]);
-		    else fprintf ( fp, ">%s %s\n%s\n", S->name[a], S->name[a],S->seq[s]);
+		    int i=list2[a][0];
+		    if (outmode && strm (outmode, "aln"))fprintf ( fp, ">%s %s\n%s\n", decode_name (S->name[i], CODE), S->name[a],S->seq[i]);
+		    else fprintf ( fp, ">%s %s\n%s\n", S->name[a], S->name[a],S->seq[i]);
 		  }
 	      }
 	    vfclose (fp);
@@ -4624,7 +4640,7 @@ Sequence * add_sequence ( Sequence *IN, Sequence *OUT, int i)
 
 	 if ( getenv4debug("DEBUG_RECONCILIATION"))fprintf ( stderr,"[DEBUG_RECONCILIATION:add_sequence]\n%s\n%s\n", IN->seq[i], OUT->seq[s]);
 	 
-	 add_warning (stderr, "WARNING: DISCREPANCY:%s in [%s] and  [%s]\n", IN->name[i], IN->file[i], OUT->file[s]);
+	 add_warning (stderr, "DISCREPANCY:%s in [%s] and  [%s]\n", IN->name[i], IN->file[i], OUT->file[s]);
 	 
 	 
        if (((buf=build_consensus(IN->seq[i], OUT->seq[s],"cfasta_pair_wise" ))!=NULL)||((buf=build_consensus(IN->seq[i], OUT->seq[s],"myers_miller_pair_wise" ))!=NULL))
@@ -5312,7 +5328,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       else 
 	{
 	  
-	  add_warning (stderr, "\nWARNING: Could not Run %s to find templates[%s](Forked mode)\n",command, PROGRAM);
+	  add_warning (stderr, "Could not Run %s to find templates[%s](Forked mode)\n",command, PROGRAM);
 	  return NULL;
 	}
   
@@ -5379,7 +5395,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       else 
 	{
 	  
-	  add_warning (stderr, "\nWARNING: Could not Run %s to find templates[%s](unforked mode)\n",command, PROGRAM);
+	  add_warning (stderr, "Could not Run %s to find templates[%s](unforked mode)\n",command, PROGRAM);
 	  return NULL;
 	}
       
@@ -5578,7 +5594,7 @@ struct X_template *fill_F_template ( char *name,char *p, Sequence *S)
   sprintf (F->template_format , "TCOFFEE_LIBRARY");
   if (!F || !check_file_exists (F->template_name))
     {
-      fprintf ( stderr, "\nWARNING: Could Not Fill _F_ (Fold) template for sequence |%s|", name);
+      fprintf ( stderr, "Could Not Fill _F_ (Fold) template for sequence |%s|", name);
       free_X_template (F);
       return NULL;
     }
@@ -5606,7 +5622,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   
   if (!P)
     {
-      //fprintf ( stderr, "\nWARNING: Could Not Fill _P_ template for sequence |%s|", name);
+      //fprintf ( stderr, "Could Not Fill _P_ template for sequence |%s|", name);
       free_X_template (P);
       return NULL;
     }
@@ -5647,7 +5663,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   if (!is_pdb_file (P->template_file))
     {
 
-      add_warning(stderr, "WARNING: _P_ Template | %s | Could Not Be Found\n",p);
+      add_warning(stderr, "_P_ Template | %s | Could Not Be Found\n",p);
       free_X_template (P);
       return NULL;
     }
@@ -5669,7 +5685,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 
   if ( PS==NULL)
     {
-      add_warning( stderr, "WARNING:  _P_  Template |%s| Could Not be Used for Sequence |%s|: Structure Not Found", P->template_name, name);
+      add_warning( stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Structure Not Found", P->template_name, name);
       free_X_template (P);P=NULL;
     }
   else
@@ -5689,7 +5705,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
      
       if (sim<=minsim)
 	{
-	  add_warning( stderr, "WARNING:  _P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_minsim=%d flag\n",P->template_name,name, sim, minsim, sim);
+	  add_warning( stderr, "_P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]");          add_warning( stderr, "If you want to include this sequence in anycase, please use the -pdb_minsim=%d flag",P->template_name,name, sim, minsim, sim);
 	  print_aln (A);
 	  free_X_template (P);
 	  P=NULL;
@@ -6013,7 +6029,7 @@ char ** name2random_subset (char **in_name, int n_in, int n_out)
   max=n_in*10000;
   out_name=declare_char (n_out,MAXNAMES+1 );
   list=declare_int (n_in, 2);
-    
+  
   for (a=0; a<n_in; a++)
       {
 	list[a][0]=a;
@@ -6021,8 +6037,10 @@ char ** name2random_subset (char **in_name, int n_in, int n_out)
       }
   sort_int ( list,2, 1, 0, n_in-1);
   
-  for ( a=0; a<n_out; a++)
+  for ( a=0; a<n_in; a++)
+  {
     sprintf ( out_name[a], "%s", in_name[list[a][0]]);
+  }
   free_int (list, -1);
   return out_name;
 }

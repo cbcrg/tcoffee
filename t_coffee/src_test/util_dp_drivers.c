@@ -1491,10 +1491,10 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		tmp_pdb1=normalize_pdb_file(seq2P_template_file(CL->S,s1),(CL->S)->seq[s1], vtmpnam (NULL));
 		tmp_pdb2=normalize_pdb_file(seq2P_template_file(CL->S,s2),(CL->S)->seq[s2], vtmpnam (NULL));
 		sprintf ( full_name, "%s%s", get_cache_dir (), tmp_name);
-		printf_system ("%s %s %s >%s 2>/dev/null",program,tmp_pdb1,tmp_pdb2, full_name);
+		printf_system ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,tmp_pdb1,tmp_pdb2, full_name);
 		if ( !check_file_exists (full_name) || !is_sap_file(full_name))
 		  {
-		    add_warning ( stderr, "WARNING: SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
+		    add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
 		    if ( check_file_exists (full_name))add2file2remove_list (full_name);
 		    return CL;
 		  }
@@ -3092,6 +3092,8 @@ else fp=stderr;
 static NT_node* SNL;
 NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_list *CL)
 {
+  int a;
+  
   if ( strm ((CL->TC)->use_seqan, "NO"))return local_tree_aln (LT, RT, A, nseq, CL);
   else return seqan_tree_aln (LT, RT, A, nseq, CL);
 }
@@ -3143,7 +3145,7 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
   else P=r->parent;
 
   fprintf ( CL->local_stderr, "\nPROGRESSIVE_ALIGNMENT [Tree Based]\n");
-
+  for ( a=0; a<nseq; a++)fprintf (CL->local_stderr,"Group %4d: %s\n",a+1, A->name[a]);
   //1: make sure the Alignment and the Sequences are labeled the same way
   if (CL->translation)vfree (CL->translation);
   CL->translation=vcalloc ( (CL->S)->nseq, sizeof (int));

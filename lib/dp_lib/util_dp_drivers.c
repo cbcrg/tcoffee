@@ -3092,6 +3092,8 @@ else fp=stderr;
 static NT_node* SNL;
 NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_list *CL)
 {
+  int a;
+  
   if ( strm ((CL->TC)->use_seqan, "NO"))return local_tree_aln (LT, RT, A, nseq, CL);
   else return seqan_tree_aln (LT, RT, A, nseq, CL);
 }
@@ -3143,7 +3145,7 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
   else P=r->parent;
 
   fprintf ( CL->local_stderr, "\nPROGRESSIVE_ALIGNMENT [Tree Based]\n");
-
+  for ( a=0; a<nseq; a++)fprintf (CL->local_stderr,"Group %4d: %s\n",a+1, A->name[a]);
   //1: make sure the Alignment and the Sequences are labeled the same way
   if (CL->translation)vfree (CL->translation);
   CL->translation=vcalloc ( (CL->S)->nseq, sizeof (int));

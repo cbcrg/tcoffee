@@ -10606,6 +10606,20 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     {
 	       D1->A=reorder_aln ( D1->A, NULL, (D1->A)->nseq);
 	     }
+	   else if (n_actions==2 && strm (action_list[1], "invert"))
+	     {
+	       char **nname;
+	       int z, y;
+	      
+	       nname=declare_char ((D1->A)->nseq, 100);
+	       for ( z=0,y=(D1->A)->nseq-1; z<(D1->A)->nseq; z++, y--)
+		 {
+		   sprintf (nname[z], "%s",(D1->A)->name[y]);
+		 }
+
+	       D1->A=reorder_aln ( D1->A, nname, (D1->A)->nseq);
+	       free_char (nname, -1);
+	     }
 	   else if (n_actions==2 && strm (action_list[1], "scramble"))
 	     {
 	       D1->A=aln2scramble_seq(D1->A);
@@ -11893,7 +11907,7 @@ void aln2mat (Sequence *S)
   int a, aa1, aa3;
   int s1, s2, p;
   Alignment *A;
-  
+  int **mat;
   int **m;
   int *c;
   int naa=0;
@@ -11902,8 +11916,12 @@ void aln2mat (Sequence *S)
   int *alp;
   int tot,u;
   double observed, expected, f_diaa1, f_diaa2, v;
-  
+  char *balp;
 
+  balp=vcalloc ( 256, sizeof (char));
+  for (a=0; a<strlen (BLAST_AA_ALPHABET); a++)balp[BLAST_AA_ALPHABET[a]]=a;
+  
+  mat=declare_int (256, 256);
   alp=vcalloc (256, sizeof (int));
   for (a=0; a<26; a++)alp[a+'a']=1;
   alp['b']=0;
@@ -11964,12 +11982,14 @@ void aln2mat (Sequence *S)
 		else if (observed<Delta)v=-100;
 		else 
 		  {
-		    v=log(observed/expected)*10;
+		    v=log(observed/expected)/(log(2)/2);
 		  }
 	    // if (tot>0)fprintf ( stdout, "TEST C=%d expected=%.4f observed=%.4f v=%.4f [%d %d %d][%d] tot=%d\n", count, (float)expected, (float)observed, (float) v, c[aa1][aa2], c[aa3][aa4], count, m[aa1][aa2][aa3][aa4], tot);
-		fprintf ( stdout, "%c %c %d %d\n", aa1+'a', aa3+'a', (int)v, m[aa1][aa3]+ m[aa3][aa1]);
+		//fprintf ( stdout, "%c %c %d %d\n", aa1+'A', aa3+'A', (int)v, m[aa1][aa3]+ m[aa3][aa1]);
+		mat[aa1][aa3]=(int)v;
 	      }
 	  }
+  output_blast_mat (mat, "stdout");
   myexit (EXIT_SUCCESS);
 }	    
 	
@@ -12160,7 +12180,7 @@ int ** read_blast_matrix ( char *mat_name)
 
 int output_blast_mat (int **mat, char *fname)
 {
-  return output_mat(mat, fname, BLAST_AA_ALPHABET, 'A');
+  return output_mat(mat, fname, BLAST_AA_ALPHABET, 'a');
   
 }
 		      
@@ -12177,8 +12197,8 @@ int output_mat (int **mat, char *fname, char *alp, int offset)
   sprintf ( aa, "%s",alp);
   lower_string (aa);
   if (!(fp=vfopen (fname, "w")))return 0;
-  fprintf (fp,"# BLAST_MATRIX FORMAT\n#ALPHABET=%s\n",alp);
-  for (a=0; a< naa; a++)fprintf ( fp, "%3c ", toupper(aa[a]));
+  fprintf (fp,"# BLAST_MATRIX FORMAT\n#ALPHABET=%s\n  ",alp);
+  for (a=0; a< naa; a++)fprintf ( fp, "%5c ", toupper(aa[a]));
   fprintf (fp,"\n");
   for (a=0; a< naa; a++)
     {
@@ -12186,7 +12206,10 @@ int output_mat (int **mat, char *fname, char *alp, int offset)
       fprintf (fp, "%c", toupper(aa[a]));
       for ( b=0; b< naa; b++)
 	{
-	  fprintf (fp, " %5d", mat[aa[a]-offset][aa[b]-offset]);
+	  if (aa[a]!='*' && aa[b]!='*')
+	    fprintf (fp, " %5d", mat[aa[a]-offset][aa[b]-offset]);
+	  else 
+	    fprintf (fp, " %5d", 0);
 	}
       fprintf ( fp, "\n");
     }

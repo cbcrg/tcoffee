@@ -1367,7 +1367,7 @@ FILE_format* vfopen_html ( char *name)
 
       fprintf(fhtml->fp,"<html>\n<style>\n");
      
-      fprintf(fhtml->fp,"SPAN { font-family: courier new, courier-new, courier; font-weight: bold; font-size: %dpt;}\n", fhtml->font);
+      fprintf(fhtml->fp,"SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: %dpt;}\n", fhtml->font);
       fprintf(fhtml->fp,"SPAN { line-height:100%%}\n");
       fprintf(fhtml->fp,"SPAN {	white-space: pre}\n");
       

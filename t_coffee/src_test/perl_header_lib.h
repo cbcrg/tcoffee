@@ -4305,4006 +4305,4008 @@ ASE/Resources/tclinkdb.txt\";\nour $OS=get_os();\n\
 our $ROOT=&get_root();\nour $CD=cwd();\nour $CDIR=\
 $CD;\nour $HOME=$ENV{'HOME'};\n\nour $OSNAME=$ENV{\
 'OSNAME'};\nour $OSARCH=$ENV{'OSARCH'};\nour $REPO\
-_ROOT=\"\";\n\nour $CXX=\"g++\";\nour $CXXFLAGS=\"\
-\";\n\nour $CPP=\"g++\";\nour $CPPFLAGS=\"\";\n\no\
-ur $CC=\"gcc\";\nour $CFLAGS=\"\";\n\nour $FC=\"f7\
-7\";\nour $FFLAGS=\"\";\n\nmy $install=\"all\";\nm\
-y $default_update_action=\"no_update\";\nmy @requi\
-red_applications=(\"wget_OR_curl\");\nmy @smode=(\\
-"all\", \"clean\", \"install\");\n\n&initialize_PG\
-();\n\nmy $cl=join( \" \", @ARGV);\nif ($#ARGV==-1\
- || ($cl=~/-h/) ||($cl=~/-H/) )\n  {\n     print \\
-"\\n!!!!!!! ./install  t_coffee             --> in\
-stalls t_coffee only\";\n     print \"\\n!!!!!!! .\
-/install  all                  --> installs all th\
-e modes [mcoffee, expresso, psicoffee,rcoffee..]\"\
-;\n     print \"\\n!!!!!!! ./install  [mcoffee|rco\
-ffee|..] --> installs the specified mode\";\n     \
-print \"\\n!!!!!!! ./install  -h                  \
- --> print usage\\n\\n\";\n     if ( $#ARGV==-1){e\
-xit ($EXIT_FAILURE);}\n   }\n     \nif (($cl=~/-h/\
-) ||($cl=~/-H/) )\n  {\n    my $m;\n    print \"\\\
-n\\n!!!!!!! advanced mode\\n\";\n    foreach $m ((\
-keys (%MODE)),@smode)\n      {\n	print \"!!!!!!!  \
-     ./install $m\\n\";\n      }\n    \n    print \
-\"!!!!!!! ./install [target:package|mode|] [-updat\
-e|-force|-exec=dir|-dis=dir|-root|-tclinkdb=file|-\
-] [CC=|FCC=|CXX=|CFLAGS=|CXXFLAGS=]\\n\";\n    pri\
-nt \"!!!!!!! ./install clean    [removes all execu\
-tables]\\n\";\n    print \"!!!!!!! ./install [opti\
-onal:target] -update               [updates packag\
-e already installed]\\n\";\n    print \"!!!!!!! ./\
-install [optional:target] -force                [F\
-orces recompilation over everything]\\n\";\n    \n\
-    print \"!!!!!!! ./install [optional:target] -r\
-oot                 [You are running as root]\\n\"\
-;\n    print \"!!!!!!! ./install [optional:target]\
- -exec=/foo/bar/       [address for the T-Coffee e\
-xecutable]\\n\";\n    print \"!!!!!!! ./install [o\
-ptional:target] -dis=/foo/bar/        [Address whe\
-re distributions should be stored]\\n\";\n    prin\
-t \"!!!!!!! ./install [optional:target] -tclinkdb=\
-foo|update  [file containing all the packages to b\
-e installed]\\n\";\n    print \"!!!!!!! ./install \
-[optional:target] -clean                [clean eve\
-rything]\\n\";\n    print \"!!!!!!! ./install [opt\
-ional:target] -plugins              [plugins direc\
-tory]\\n\";\n    print \"!!!!!!! ./install [option\
-al:target] -repo=/path/to/repo   [binaries reposit\
-ory root directory]\\n\";\n    print \"!!!!!!! mod\
-e:\";\n    foreach $m (keys(%MODE)){print \"$m \";\
-}\n    print \"\\n\";\n    print \"!!!!!!! Package\
-s:\";\n    foreach $m (keys (%PG)){print \"$m \";}\
-\n    print \"\\n\";\n    \n    print \"\\n\\n\";\\
-n    exit ($EXIT_FAILURE);\n  }\n\n\n\nmy (@argl)=\
-($cl=~/(\\S+=[^=]+)\\s\\w+=/g);\npush (@argl, ($cl\
-=~/(\\S+=[^=]+\\S)\\s*$/g));\n\nforeach $a (@argl)\
-\n  {\n    if ( ($cl=~/CXX=(.*)/)){$CXX=$1;}\n    \
-if ( ($cl=~/-CC=(.*)/    )){$CC=$1;}\n    if ( ($c\
-l=~/-FC=(.*)/    )){$FC=$1;}\n    if ( ($cl=~/-CFL\
-AGS=(.*)/)){$CFLAGS=$1;}\n    if ( ($cl=~/-CXXFLAG\
-S=(.*)/)){$CXXFLAGS=$1;}\n  }\nour ($ROOT_INSTALL,\
- $NO_QUESTION, $default_update_action,$BINARIES_ON\
-LY,$force, $default_update_action, $INSTALL_DIR, $\
-PLUGINS_DIR, $DISTRIBUTIONS,$tclinkdb, $proxy, $cl\
-ean);\nif ( ($cl=~/-root/)){$ROOT_INSTALL=1;}\nif \
-( ($cl=~/-no_question/)){$NO_QUESTION=1;}\nif ( ($\
-cl=~/-update/)){$default_update_action=\"update\";\
-}\nif ( ($cl=~/-binaries/)){$BINARIES_ONLY=1;}\nif\
- ( ($cl=~/-force/)){$force=1;$default_update_actio\
-n=\"update\"}\nif ( ($cl=~/-exec=\\s*(\\S+)/)){$IN\
-STALL_DIR=$1;}\nif ( ($cl=~/-plugins=\\s*(\\S+)/))\
-{$PLUGINS_DIR=$1;}\nif ( ($cl=~/-dis=\\s*(\\S+)/))\
-{$DISTRIBUTIONS=$1;}\n\nif ( ($cl=~/-tclinkdb=\\s*\
-(\\S+)/)){$tclinkdb=$1;}\nif ( ($cl=~/-proxy=\\s*(\
-\\S+)/)){$proxy=$1;}\nif ( ($cl=~/-clean/)){$clean\
-=1;}\nif ( ($cl=~/-repo=\\s*(\\S+)/)){ $REPO_ROOT=\
-$1; }\nif ($tclinkdb){&update_tclinkdb ($tclinkdb)\
-;}\n\n\nif( $REPO_ROOT ne \"\" ) {\n	if( $OSNAME e\
-q \"\" ) { print \"You have specified the reposito\
-ry folder but the required \\\"OSNAME\\\" envirome\
-nt variable is missing. \\n\"; exit 1; } \n	if( $O\
-SARCH eq \"\" ) { print \"You have specified the r\
-epository folder but the required \\\"OSARCH\\\" e\
-nviroment variable is missing. \\n\"; exit 1; } \n\
-}\n\nour $TCDIR=$ENV{DIR_4_TCOFFEE};\nour $TCCACHE\
-=$ENV{CACHE_4_TCOFFEE};\nour $TCTMP=$ENV{CACHE_4_T\
-COFFEE};\nour $TCM=$ENV{MCOFFEE_4_TCOFFEE};\nour $\
-TCMETHODS=$ENV{METHODS_4_TCOFFEE};\nour $TCPLUGINS\
-=$ENV{PLUGINS_4_TCOFFEE};\nour $PLUGINS_DIR=\"\";\\
-nour $INSTALL_DIR=\"\";\n\n&add_dir ($TCDIR=\"$HOM\
-E/.t_coffee\");\n&add_dir ($TCCACHE=\"$TCDIR/cache\
-\");\n&add_dir ($TCTMP=\"$CDIR/tmp\");\n&add_dir (\
-$TCM=\"$TCDIR/mcoffee\");\n&add_dir ($TCMETHODS=\"\
-$TCDIR/methods\");\n&add_dir ($TCPLUGINS=\"$TCDIR/\
-plugins/$OS\");\n\n\nour $BASE=\"$CD/bin\";\nour $\
-BIN=\"$BASE/binaries/$OS\";\nour $DOWNLOAD_DIR=\"$\
-BASE/download\";\nour $DOWNLOAD_FILE=\"$DOWNLOAD_D\
-IR/files\";\nour $TMP=\"$BASE/tmp\";\n\n&add_dir($\
-BASE);\n&add_dir($BIN);\n&add_dir($DOWNLOAD_DIR);\\
-n&add_dir($DOWNLOAD_FILE);\nif (!$DISTRIBUTIONS){$\
-DISTRIBUTIONS=\"$DOWNLOAD_DIR/distributions\";}\n&\
-add_dir ($DISTRIBUTIONS);\n&add_dir ($TMP);\n\n\ni\
-f    (!$PLUGINS_DIR && !$ROOT_INSTALL){$PLUGINS_DI\
-R=$TCPLUGINS;}\nelsif (!$PLUGINS_DIR &&  $ROOT_INS\
-TALL){$PLUGINS_DIR=\"/usr/local/bin/\";}\n\nif    \
-(!$INSTALL_DIR && !$ROOT_INSTALL){$INSTALL_DIR=\"$\
-HOME/bin/\";mkpath ($INSTALL_DIR);}\nelsif (!$INST\
-ALL_DIR &&  $ROOT_INSTALL){$INSTALL_DIR=\"/usr/loc\
-al/bin/\";}\n\nif (-d \"mcoffee\"){`cp mcoffee/* $\
-TCM`;}\n\n\nour $ENV_FILE=\"$TCDIR/t_coffee_env\";\
-\n&env_file2putenv ($ENV_FILE);\n&set_proxy($proxy\
-);\nmy ($target, $p, $r);\n$target=$p;\n\nforeach \
-$p (  ((keys (%PG)),(keys(%MODE)),(@smode)) )\n  {\
-\n    if ($ARGV[0] eq $p && $target eq \"\"){$targ\
-et=$p;}\n  }\nif ($target eq \"\"){exit ($EXIT_FAI\
-LURE);}\n\n\nforeach $r (@required_applications)\n\
-  {\n    my @app_list;\n    my $i;\n    $i=0;\n   \
- \n    @app_list=split (/_OR_/, $r);\n    foreach \
-my $pg (@app_list)\n      {\n	$i+=&pg_is_installed\
- ($pg);\n      }\n    if ($i==0)\n      {\n      p\
-rint \"One of the following packages must be insta\
-lled to proceed: \";\n      foreach my $pg (@app_l\
-ist)\n	{\n	  print (\"$pg \");\n	}\n      die;\n  \
-  }\n  }\n\n\n\n\n\n\n&sign_license_ni();\n\n\n$PG\
-{C}{compiler}=get_C_compiler($CC);\n$PG{Fortran}{c\
-ompiler}=get_F_compiler($FC);\n$PG{CXX}{compiler}=\
-$PG{CPP}{compiler}=$PG{GPP}{compiler}=get_CXX_comp\
-iler($CXX);\nif ($CXXFLAGS){$PG{CPP}{options}=$PG{\
-GPP}{options}=$PG{CXX}{options}=$CXXFLAGS;}\nif ($\
-CFLAGS){$PG{C}{options}=$CFLAGS;}\nforeach my $c (\
-keys(%PG))\n  {\n    my $arguments;\n    if ($PG{$\
-c}{compiler})\n      {\n	$arguments=\"$PG{$c}{comp\
-iler_flag}=$PG{$c}{compiler} \";\n	if ($PG{$c}{opt\
-ions})\n	  {\n	    $arguments.=\"$PG{$c}{options_f\
-lag}=$PG{$c}{options} \";\n	  }\n	$PG{$c}{argument\
-s}=$arguments;\n      }\n  }\n\nif ($PG{$target}){\
-$PG{$target}{install}=1;}\nelse\n  {\n    foreach \
-my $pg (keys(%PG))\n      {\n	if ( $target eq \"al\
-l\" || ($PG{$pg}{mode}=~/$target/))\n	  {\n	    $P\
-G{$pg} {install}=1;\n	  }\n      }\n  }\n\nforeach\
- my $pg (keys(%PG))\n  {\n    if (!$PG{$pg}{update\
-_action}){$PG{$pg}{update_action}=$default_update_\
-action;}\n    elsif ($PG{$pg}{update_action} eq \"\
-never\"){$PG{$pg}{install}=0;}\n    if ( $force &&\
- $PG{$pg}{install})\n      {\n	`rm $BIN/$pg $BIN/$\
-pg.exe $SILENT`;\n      }\n    if ($PG{$pg}{update\
-_action} eq \"update\" && $PG{$pg}{install}){$PG{$\
-pg}{update}=1;}\n  }\n\nif (($target=~/clean/))\n \
- {\n    print \"------- cleaning executables -----\
-\\n\";\n    `rm bin/* $SILENT`;\n    exit ($EXIT_S\
-UCCESS);\n  }\n\nif ( !$PG{$target}){print \"-----\
--- Installing T-Coffee Modes\\n\";}\n\nforeach my \
-$m (keys(%MODE))\n  {\n    if ( $target eq \"all\"\
- || $target eq $m)\n      {\n	print \"\\n------- T\
-he installer will now install the $m components $M\
-ODE{$m}{description}\\n\";\n	foreach my $pg (keys(\
-%PG))\n	  {\n	    if ( $PG{$pg}{mode} =~/$m/ && $P\
-G{$pg}{install})\n	      {\n		if ($PG{$pg}{touched\
-}){print \"------- $PG{$pg}{dname}: already proces\
-sed\\n\";}\n		else {$PG{$pg}{success}=&install_pg(\
-$pg);$PG{$pg}{touched}=1;}\n	      }\n	  }\n      \
-}\n  }\n\nif ( $PG{$target}){print \"------- Insta\
-lling Individual Package\\n\";}\nforeach my $pg (k\
-eys (%PG))\n  {\n    \n    if ( $PG{$pg}{install} \
-&& !$PG{$pg}{touched})\n      {\n	print \"\\n-----\
--- Install $pg\\n\";\n	$PG{$pg}{success}=&install_\
-pg($pg);$PG{$pg}{touched}=1;\n      }\n  }\nprint \
-\"------- Finishing The installation\\n\";\nmy $fi\
-nal_report=&install ($INSTALL_DIR);\n\nprint \"\\n\
-\";\nprint \"*************************************\
-********************************\\n\";\nprint \"**\
-******              INSTALLATION SUMMARY          \
-*****************\\n\";\nprint \"*****************\
+_ROOT=\"\";\n\nour $TCDIR;\nour $TCCACHE;\nour $TC\
+TMP;\nour $TCM;\nour $TCMETHODS;\nour $TCPLUGINS;\\
+nour $PLUGINS_DIR=\"\";\nour $INSTALL_DIR=\"\";\n\\
+nour $CXX=\"g++\";\nour $CXXFLAGS=\"\";\n\nour $CP\
+P=\"g++\";\nour $CPPFLAGS=\"\";\n\nour $CC=\"gcc\"\
+;\nour $CFLAGS=\"\";\n\nour $FC=\"f77\";\nour $FFL\
+AGS=\"\";\n\nmy $install=\"all\";\nmy $default_upd\
+ate_action=\"no_update\";\nmy @required_applicatio\
+ns=(\"wget_OR_curl\");\nmy @smode=(\"all\", \"clea\
+n\", \"install\");\n\n&initialize_PG();\n\nmy $cl=\
+join( \" \", @ARGV);\nif ($#ARGV==-1 || ($cl=~/-h/\
+) ||($cl=~/-H/) )\n  {\n     print \"\\n!!!!!!! ./\
+install  t_coffee             --> installs t_coffe\
+e only\";\n     print \"\\n!!!!!!! ./install  all \
+                 --> installs all the modes [mcoff\
+ee, expresso, psicoffee,rcoffee..]\";\n     print \
+\"\\n!!!!!!! ./install  [mcoffee|rcoffee|..] --> i\
+nstalls the specified mode\";\n     print \"\\n!!!\
+!!!! ./install  -h                   --> print usa\
+ge\\n\\n\";\n     if ( $#ARGV==-1){exit ($EXIT_FAI\
+LURE);}\n   }\n     \nif (($cl=~/-h/) ||($cl=~/-H/\
+) )\n  {\n    my $m;\n    print \"\\n\\n!!!!!!! ad\
+vanced mode\\n\";\n    foreach $m ((keys (%MODE)),\
+@smode)\n      {\n	print \"!!!!!!!       ./install\
+ $m\\n\";\n      }\n    \n    print \"!!!!!!! ./in\
+stall [target:package|mode|] [-update|-force|-exec\
+=dir|-dis=dir|-root|-tclinkdb=file|-] [CC=|FCC=|CX\
+X=|CFLAGS=|CXXFLAGS=]\\n\";\n    print \"!!!!!!! .\
+/install clean    [removes all executables]\\n\";\\
+n    print \"!!!!!!! ./install [optional:target] -\
+update               [updates package already inst\
+alled]\\n\";\n    print \"!!!!!!! ./install [optio\
+nal:target] -force                [Forces recompil\
+ation over everything]\\n\";\n    \n    print \"!!\
+!!!!! ./install [optional:target] -root           \
+      [You are running as root]\\n\";\n    print \\
+"!!!!!!! ./install [optional:target] -exec=/foo/ba\
+r/       [address for the T-Coffee executable]\\n\\
+";\n    print \"!!!!!!! ./install [optional:target\
+] -dis=/foo/bar/        [Address where distributio\
+ns should be stored]\\n\";\n    print \"!!!!!!! ./\
+install [optional:target] -tclinkdb=foo|update  [f\
+ile containing all the packages to be installed]\\\
+n\";\n    print \"!!!!!!! ./install [optional:targ\
+et] -clean                [clean everything]\\n\";\
+\n    print \"!!!!!!! ./install [optional:target] \
+-plugins              [plugins directory]\\n\";\n \
+   print \"!!!!!!! ./install [optional:target] -tc\
+dir=/foor/bar      [base path where T-Coffee will \
+be installed]\\n\";\n    print \"!!!!!!! ./install\
+ [optional:target] -repo=/path/to/repo   [binaries\
+ repository root directory]\\n\";\n    print \"!!!\
+!!!! mode:\";\n    foreach $m (keys(%MODE)){print \
+\"$m \";}\n    print \"\\n\";\n    print \"!!!!!!!\
+ Packages:\";\n    foreach $m (keys (%PG)){print \\
+"$m \";}\n    print \"\\n\";\n    \n    print \"\\\
+n\\n\";\n    exit ($EXIT_FAILURE);\n  }\n\n\n\nmy \
+(@argl)=($cl=~/(\\S+=[^=]+)\\s\\w+=/g);\npush (@ar\
+gl, ($cl=~/(\\S+=[^=]+\\S)\\s*$/g));\n\nforeach $a\
+ (@argl)\n  {\n    if ( ($cl=~/CXX=(.*)/)){$CXX=$1\
+;}\n    if ( ($cl=~/-CC=(.*)/    )){$CC=$1;}\n    \
+if ( ($cl=~/-FC=(.*)/    )){$FC=$1;}\n    if ( ($c\
+l=~/-CFLAGS=(.*)/)){$CFLAGS=$1;}\n    if ( ($cl=~/\
+-CXXFLAGS=(.*)/)){$CXXFLAGS=$1;}\n  }\nour ($ROOT_\
+INSTALL, $NO_QUESTION, $default_update_action,$BIN\
+ARIES_ONLY,$force, $default_update_action, $INSTAL\
+L_DIR, $PLUGINS_DIR, $DISTRIBUTIONS,$tclinkdb, $pr\
+oxy, $clean);\nif ( ($cl=~/-root/)){$ROOT_INSTALL=\
+1;}\nif ( ($cl=~/-no_question/)){$NO_QUESTION=1;}\\
+nif ( ($cl=~/-update/)){$default_update_action=\"u\
+pdate\";}\nif ( ($cl=~/-binaries/)){$BINARIES_ONLY\
+=1;}\nif ( ($cl=~/-force/)){$force=1;$default_upda\
+te_action=\"update\"}\nif ( ($cl=~/-exec=\\s*(\\S+\
+)/)){$INSTALL_DIR=$1;}\nif ( ($cl=~/-plugins=\\s*(\
+\\S+)/)){$PLUGINS_DIR=$1;}\nif ( ($cl=~/-dis=\\s*(\
+\\S+)/)){$DISTRIBUTIONS=$1;}\n\nif ( ($cl=~/-tclin\
+kdb=\\s*(\\S+)/)){$tclinkdb=$1;}\nif ( ($cl=~/-pro\
+xy=\\s*(\\S+)/)){$proxy=$1;}\nif ( ($cl=~/-clean/)\
+){$clean=1;}\nif ( ($cl=~/-repo=\\s*(\\S+)/)){ $RE\
+PO_ROOT=$1; }\nif ( ($cl=~/-tcdir=\\s*(\\S+)/)){ $\
+TCDIR=$1; }\nif ($tclinkdb){&update_tclinkdb ($tcl\
+inkdb);}\n\n\nif( $REPO_ROOT ne \"\" ) {\n	if( $OS\
+NAME eq \"\" ) { print \"You have specified the re\
+pository folder but the required \\\"OSNAME\\\" en\
+viroment variable is missing. \\n\"; exit 1; } \n	\
+if( $OSARCH eq \"\" ) { print \"You have specified\
+ the repository folder but the required \\\"OSARCH\
+\\\" enviroment variable is missing. \\n\"; exit 1\
+; } \n}\n\n\nif(!$TCDIR) { $TCDIR=\"$HOME/.t_coffe\
+e\"; }\n&add_dir ($TCDIR);\n&add_dir ($TCCACHE=\"$\
+TCDIR/cache\");\n&add_dir ($TCTMP=\"$CDIR/tmp\");\\
+n&add_dir ($TCM=\"$TCDIR/mcoffee\");\n&add_dir ($T\
+CMETHODS=\"$TCDIR/methods\");\n&add_dir ($TCPLUGIN\
+S=\"$TCDIR/plugins/$OS\");\n\n\nour $BASE=\"$CD/bi\
+n\";\nour $BIN=\"$BASE/binaries/$OS\";\nour $DOWNL\
+OAD_DIR=\"$BASE/download\";\nour $DOWNLOAD_FILE=\"\
+$DOWNLOAD_DIR/files\";\nour $TMP=\"$BASE/tmp\";\n\\
+n&add_dir($BASE);\n&add_dir($BIN);\n&add_dir($DOWN\
+LOAD_DIR);\n&add_dir($DOWNLOAD_FILE);\nif (!$DISTR\
+IBUTIONS){$DISTRIBUTIONS=\"$DOWNLOAD_DIR/distribut\
+ions\";}\n&add_dir ($DISTRIBUTIONS);\n&add_dir ($T\
+MP);\n\n\nif    (!$PLUGINS_DIR && !$ROOT_INSTALL){\
+$PLUGINS_DIR=$TCPLUGINS;}\nelsif (!$PLUGINS_DIR &&\
+  $ROOT_INSTALL){$PLUGINS_DIR=\"/usr/local/bin/\";\
+}\n\nif    (!$INSTALL_DIR && !$ROOT_INSTALL){$INST\
+ALL_DIR=\"$HOME/bin/\";mkpath ($INSTALL_DIR);}\nel\
+sif (!$INSTALL_DIR &&  $ROOT_INSTALL){$INSTALL_DIR\
+=\"/usr/local/bin/\";}\n\nif (-d \"mcoffee\"){`cp \
+mcoffee/* $TCM`;}\n\n\nour $ENV_FILE=\"$TCDIR/t_co\
+ffee_env\";\n&env_file2putenv ($ENV_FILE);\n&set_p\
+roxy($proxy);\nmy ($target, $p, $r);\n$target=$p;\\
+n\nforeach $p (  ((keys (%PG)),(keys(%MODE)),(@smo\
+de)) )\n  {\n    if ($ARGV[0] eq $p && $target eq \
+\"\"){$target=$p;}\n  }\nif ($target eq \"\"){exit\
+ ($EXIT_FAILURE);}\n\n\nforeach $r (@required_appl\
+ications)\n  {\n    my @app_list;\n    my $i;\n   \
+ $i=0;\n    \n    @app_list=split (/_OR_/, $r);\n \
+   foreach my $pg (@app_list)\n      {\n	$i+=&pg_i\
+s_installed ($pg);\n      }\n    if ($i==0)\n     \
+ {\n      print \"One of the following packages mu\
+st be installed to proceed: \";\n      foreach my \
+$pg (@app_list)\n	{\n	  print (\"$pg \");\n	}\n   \
+   die;\n    }\n  }\n\n\n\n\n\n\n&sign_license_ni(\
+);\n\n\n$PG{C}{compiler}=get_C_compiler($CC);\n$PG\
+{Fortran}{compiler}=get_F_compiler($FC);\n$PG{CXX}\
+{compiler}=$PG{CPP}{compiler}=$PG{GPP}{compiler}=g\
+et_CXX_compiler($CXX);\nif ($CXXFLAGS){$PG{CPP}{op\
+tions}=$PG{GPP}{options}=$PG{CXX}{options}=$CXXFLA\
+GS;}\nif ($CFLAGS){$PG{C}{options}=$CFLAGS;}\nfore\
+ach my $c (keys(%PG))\n  {\n    my $arguments;\n  \
+  if ($PG{$c}{compiler})\n      {\n	$arguments=\"$\
+PG{$c}{compiler_flag}=$PG{$c}{compiler} \";\n	if (\
+$PG{$c}{options})\n	  {\n	    $arguments.=\"$PG{$c\
+}{options_flag}=$PG{$c}{options} \";\n	  }\n	$PG{$\
+c}{arguments}=$arguments;\n      }\n  }\n\nif ($PG\
+{$target}){$PG{$target}{install}=1;}\nelse\n  {\n \
+   foreach my $pg (keys(%PG))\n      {\n	if ( $tar\
+get eq \"all\" || ($PG{$pg}{mode}=~/$target/))\n	 \
+ {\n	    $PG{$pg} {install}=1;\n	  }\n      }\n  }\
+\n\nforeach my $pg (keys(%PG))\n  {\n    if (!$PG{\
+$pg}{update_action}){$PG{$pg}{update_action}=$defa\
+ult_update_action;}\n    elsif ($PG{$pg}{update_ac\
+tion} eq \"never\"){$PG{$pg}{install}=0;}\n    if \
+( $force && $PG{$pg}{install})\n      {\n	`rm $BIN\
+/$pg $BIN/$pg.exe $SILENT`;\n      }\n    if ($PG{\
+$pg}{update_action} eq \"update\" && $PG{$pg}{inst\
+all}){$PG{$pg}{update}=1;}\n  }\n\nif (($target=~/\
+clean/))\n  {\n    print \"------- cleaning execut\
+ables -----\\n\";\n    `rm bin/* $SILENT`;\n    ex\
+it ($EXIT_SUCCESS);\n  }\n\nif ( !$PG{$target}){pr\
+int \"------- Installing T-Coffee Modes\\n\";}\n\n\
+foreach my $m (keys(%MODE))\n  {\n    if ( $target\
+ eq \"all\" || $target eq $m)\n      {\n	print \"\\
+\n------- The installer will now install the $m co\
+mponents $MODE{$m}{description}\\n\";\n	foreach my\
+ $pg (keys(%PG))\n	  {\n	    if ( $PG{$pg}{mode} =\
+~/$m/ && $PG{$pg}{install})\n	      {\n		if ($PG{$\
+pg}{touched}){print \"------- $PG{$pg}{dname}: alr\
+eady processed\\n\";}\n		else {$PG{$pg}{success}=&\
+install_pg($pg);$PG{$pg}{touched}=1;}\n	      }\n	\
+  }\n      }\n  }\n\nif ( $PG{$target}){print \"--\
+----- Installing Individual Package\\n\";}\nforeac\
+h my $pg (keys (%PG))\n  {\n    \n    if ( $PG{$pg\
+}{install} && !$PG{$pg}{touched})\n      {\n	print\
+ \"\\n------- Install $pg\\n\";\n	$PG{$pg}{success\
+}=&install_pg($pg);$PG{$pg}{touched}=1;\n      }\n\
+  }\nprint \"------- Finishing The installation\\n\
+\";\nmy $final_report=&install ($INSTALL_DIR);\n\n\
+print \"\\n\";\nprint \"**************************\
+*******************************************\\n\";\\
+nprint \"********              INSTALLATION SUMMAR\
+Y          *****************\\n\";\nprint \"******\
 **************************************************\
-**\\n\";\nprint \"------- SUMMARY package Installa\
-tion:\\n\";\nprint \"-------   Executable Installe\
-d in: $PLUGINS_DIR\\n\";\n\nforeach my $pg (keys(%\
-PG))\n  {\n    if ( $PG{$pg}{install})\n      {\n	\
-my $bin_status=($PG{$pg}{from_binary} && $PG{$pg}{\
-success})?\"[from binary]\":\"\";\n	if     ( $PG{$\
-pg}{new} && !$PG{$pg}{old})                     {p\
-rint \"*------        $PG{$pg}{dname}: installed $\
-bin_status\\n\"; $PG{$pg}{status}=1;}\n	elsif  ( $\
-PG{$pg}{new} &&  $PG{$pg}{old})                   \
-  {print \"*------        $PG{$pg}{dname}: updated\
- $bin_status\\n\"  ; $PG{$pg}{status}=1;} \n	elsif\
-  (!$PG{$pg}{new} &&  $PG{$pg}{old} && !$PG{$pg}{u\
-pdate}){print \"*------        $PG{$pg}{dname}: pr\
-evious\\n\" ; $PG{$pg}{status}=1;}\n	elsif  (!$PG{\
-$pg}{new} &&  $PG{$pg}{old} &&  $PG{$pg}{update}){\
-print \"*------        $PG{$pg}{dname}: failed upd\
-ate (previous installation available)\\n\";$PG{$pg\
-}{status}=0;}\n	else                              \
-                            {print \"*------      \
-  $PG{$pg}{dname}: failed installation\\n\";$PG{$p\
-g}{status}=0;}\n      }\n  }\nmy $failure;\n\nif (\
- !$PG{$target}){print \"*------ SUMMARY mode Insta\
-llation:\\n\";}\nforeach my $m (keys(%MODE))\n  {\\
-n  \n    if ( $target eq \"all\" || $target eq $m)\
-\n      {\n	my $succesful=1;\n	foreach my $pg (key\
-s(%PG))\n	  {\n	    if (($PG{$pg}{mode}=~/$m/) && \
-$PG{$pg}{install} && $PG{$pg}{status}==0)\n	      \
-{\n		$succesful=0;\n		print \"*!!!!!!       $PG{$p\
-g}{dname}: Missing\\n\";\n	      }\n	  }\n	if ( $s\
-uccesful)\n	  {\n	    $MODE{$m}{status}=1;\n	    p\
-rint \"*------       MODE $MODE{$m}{dname} SUCCESF\
-ULY installed\\n\";\n	  }\n	else\n	  {\n	    $fail\
-ure++;\n	    $MODE{$m}{status}=0;\n	    print \"*!\
-!!!!!       MODE $MODE{$m}{dname} UNSUCCESFULY ins\
-talled\\n\";\n	  }\n      }\n  }\n\n    \n      \n\
-if ($clean==1 && ($BASE=~/install4tcoffee/) ){prin\
-t \"*------ Clean Installation Directory: $BASE\\n\
-\";`rm -rf $BASE`;}\nforeach my $pg (keys(%PG)){if\
- ($PG{$pg}{install} && $PG{$pg}{status}==0){exit (\
-$EXIT_FAILURE);}}\n\nif ($failure)\n  {\n    print\
- \"***********************************************\
-**********************\\n\";\n    print \"********\
-     SOME PACKAGES FAILED TO INSTALL        ******\
-***********\\n\";\n    print \"*******************\
+*************\\n\";\nprint \"------- SUMMARY packa\
+ge Installation:\\n\";\nprint \"-------   Executab\
+le Installed in: $PLUGINS_DIR\\n\";\n\nforeach my \
+$pg (keys(%PG))\n  {\n    if ( $PG{$pg}{install})\\
+n      {\n	my $bin_status=($PG{$pg}{from_binary} &\
+& $PG{$pg}{success})?\"[from binary]\":\"\";\n	if \
+    ( $PG{$pg}{new} && !$PG{$pg}{old})            \
+         {print \"*------        $PG{$pg}{dname}: \
+installed $bin_status\\n\"; $PG{$pg}{status}=1;}\n\
+	elsif  ( $PG{$pg}{new} &&  $PG{$pg}{old})        \
+             {print \"*------        $PG{$pg}{dnam\
+e}: updated $bin_status\\n\"  ; $PG{$pg}{status}=1\
+;} \n	elsif  (!$PG{$pg}{new} &&  $PG{$pg}{old} && \
+!$PG{$pg}{update}){print \"*------        $PG{$pg}\
+{dname}: previous\\n\" ; $PG{$pg}{status}=1;}\n	el\
+sif  (!$PG{$pg}{new} &&  $PG{$pg}{old} &&  $PG{$pg\
+}{update}){print \"*------        $PG{$pg}{dname}:\
+ failed update (previous installation available)\\\
+n\";$PG{$pg}{status}=0;}\n	else                   \
+                                       {print \"*-\
+-----        $PG{$pg}{dname}: failed installation\\
+\n\";$PG{$pg}{status}=0;}\n      }\n  }\nmy $failu\
+re;\n\nif ( !$PG{$target}){print \"*------ SUMMARY\
+ mode Installation:\\n\";}\nforeach my $m (keys(%M\
+ODE))\n  {\n  \n    if ( $target eq \"all\" || $ta\
+rget eq $m)\n      {\n	my $succesful=1;\n	foreach \
+my $pg (keys(%PG))\n	  {\n	    if (($PG{$pg}{mode}\
+=~/$m/) && $PG{$pg}{install} && $PG{$pg}{status}==\
+0)\n	      {\n		$succesful=0;\n		print \"*!!!!!!  \
+     $PG{$pg}{dname}: Missing\\n\";\n	      }\n	  \
+}\n	if ( $succesful)\n	  {\n	    $MODE{$m}{status}\
+=1;\n	    print \"*------       MODE $MODE{$m}{dna\
+me} SUCCESSFULLY installed\\n\";\n	  }\n	else\n	  \
+{\n	    $failure++;\n	    $MODE{$m}{status}=0;\n	 \
+   print \"*!!!!!!       MODE $MODE{$m}{dname} UNS\
+UCCESSFULLY installed\\n\";\n	  }\n      }\n  }\n\\
+n    \n      \nif ($clean==1 && ($BASE=~/install4t\
+coffee/) ){print \"*------ Clean Installation Dire\
+ctory: $BASE\\n\";`rm -rf $BASE`;}\nforeach my $pg\
+ (keys(%PG)){if ($PG{$pg}{install} && $PG{$pg}{sta\
+tus}==0){exit ($EXIT_FAILURE);}}\n\nif ($failure)\\
+n  {\n    print \"********************************\
+*************************************\\n\";\n    p\
+rint \"********     SOME PACKAGES FAILED TO INSTAL\
+L        *****************\\n\";\n    print \"****\
 **************************************************\
-\\n\";\n    print \"\\nSome of the reported failur\
-es may be due to connectivity problems\";\n    pri\
-nt \"\\nRerun the installation and the installer w\
-ill specifically try to install the missing packag\
-es\";\n    print \"\\nIf this Fails, go to the ori\
-ginal website and install the package manually\";\\
-n  }\n\nprint \"**********************************\
-***********************************\\n\";\nprint \\
-"********              FINALIZE YOUR INSTALLATION \
-   *****************\\n\";\nprint \"**************\
+***************\\n\";\n    print \"\\nSome of the \
+reported failures may be due to connectivity probl\
+ems\";\n    print \"\\nRerun the installation and \
+the installer will specifically try to install the\
+ missing packages\";\n    print \"\\nIf this Fails\
+, go to the original website and install the packa\
+ge manually\";\n  }\n\nprint \"*******************\
 **************************************************\
-*****\\n\";\nprint \"------- Your executables are \
-in:\\n\"; \nprint \"-------       $PLUGINS_DIR:\\n\
-\";\nprint \"------- Add this directory to your pa\
-th with the following command:\\n\";\nprint \"----\
----       export PATH=$PLUGINS_DIR:\\$PATH\\n\";\n\
-print \"------- Make this permanent by adding this\
- line to the file:\\n\";\nprint \"-------       $H\
-OME/.bashrc\\n\";\nexit ($EXIT_SUCCESS);  \n  \nsu\
-b get_CXX_compiler\n  {\n    my $c=@_[0];\n    my \
-(@clist)=(\"g++\");\n    \n    return get_compil (\
-$c, @clist);\n }\nsub get_C_compiler\n  {\n    my \
-$c=@_[0];\n    my (@clist)=(\"gcc\", \"cc\", \"icc\
-\");\n    \n    return get_compil ($c, @clist);\n \
-}\n\nsub get_F_compiler\n  {\n    my ($c)=@_[0];\n\
-    my @clist=(\"f77\", \"g77\",\"g95\", \"gfortra\
-n\", \"ifort\");\n    return get_compil ($c, @clis\
-t);\n  } \n       \nsub get_compil\n  {\n    my ($\
-fav,@clist)=(@_);\n    \n    #return the first com\
-piler found installed in the system. Check first t\
-he favorite\n    foreach my $c ($fav,@clist)\n    \
-  {\n	if  (&pg_is_installed ($c)){return $c;}\n   \
-   }\n    return \"\";\n  }\nsub exit_if_pg_not_in\
-stalled\n  {\n    my (@arg)=(@_);\n    \n    forea\
-ch my $p (@arg)\n      {\n	if ( !&pg_is_installed \
-($p))\n	  {\n	    print \"!!!!!!!! The $p utility \
-must be installed for this installation to proceed\
- [FATAL]\\n\";\n	    die;\n	  }\n      }\n    retu\
-rn 1;\n  }\nsub set_proxy\n  {\n    my ($proxy)=(@\
-_);\n    my (@list,$p);\n    \n    @list= (\"HTTP_\
-proxy\", \"http_proxy\", \"HTTP_PROXY\", \"ALL_pro\
-xy\", \"all_proxy\",\"HTTP_proxy_4_TCOFFEE\",\"htt\
-p_proxy_4_TCOFFEE\");\n    \n    if (!$proxy)\n   \
-   {\n	foreach my $p (@list)\n	  {\n	    if ( ($EN\
-V_SET{$p}) || $ENV{$p}){$proxy=$ENV{$p};}\n	  }\n \
-     }\n    foreach my $p(@list){$ENV{$p}=$proxy;}\
-\n  }\n	\nsub check_internet_connection\n  {\n    \
-my $internet;\n    \n    if ( -e \"x\"){unlink (\"\
-x\");}\n    if     (&pg_is_installed    (\"wget\")\
-){`wget www.google.com -Ox >/dev/null 2>/dev/null`\
-;}\n    elsif  (&pg_is_installed    (\"curl\")){`c\
-url www.google.com -ox >/dev/null 2>/dev/null`;}\n\
-    else\n      {\n	printf stderr \"\\nERROR: No p\
-g for remote file fetching [wget or curl][FATAL]\\\
-n\";\n	exit ($EXIT_FAILURE);\n      }\n    \n    i\
-f ( !-e \"x\" || -s \"x\" < 10){$internet=0;}\n   \
- else {$internet=1;}\n    if (-e \"x\"){unlink \"x\
-\";}\n    return $internet;\n  }\nsub url2file\n  \
-{\n    my ($cmd, $file,$wget_arg, $curl_arg)=(@_);\
-\n    my ($exit,$flag, $pg, $arg);\n    \n    if (\
-$INTERNET || check_internet_connection ()){$INTERN\
-ET=1;}\n    else\n      {\n	print STDERR \"ERROR: \
-No Internet Connection [FATAL:install.pl]\\n\";\n	\
-exit ($EXIT_FAILURE);\n      }\n    \n    if     (\
-&pg_is_installed    (\"wget\")){$pg=\"wget\"; $fla\
-g=\"-O\";$arg=\"--tries=2 --connect-timeout=10 $wg\
-et_arg\";}\n    elsif  (&pg_is_installed    (\"cur\
-l\")){$pg=\"curl\"; $flag=\"-o\";$arg=$curl_arg;}\\
-n    else\n      {\n	printf stderr \"\\nERROR: No \
-pg for remote file fetching [wget or curl][FATAL]\\
-\n\";\n	exit ($EXIT_FAILURE);\n      }\n    \n    \
-\n    if (-e $file){unlink($file);}\n    $exit=sys\
-tem \"$pg $cmd $flag$file $arg\";\n    return $exi\
-t;\n  }\n\nsub pg_is_installed\n  {\n    my ($p, $\
-dir)=(@_);\n    my ($r,$m, $ret);\n    my ($suppor\
-ted, $language, $compil);\n    \n  \n    if ( $PG{\
-$p})\n      {\n	$language=$PG{$p}{language2};\n	$c\
-ompil=$PG{$language}{compiler};\n      }\n    \n  \
-  if ( $compil eq \"CPAN\")\n      {\n	if ( system\
- (\"perl -M$p -e 1\")==$EXIT_SUCCESS){$ret=1;}\n	e\
-lse {$ret=0;}\n      }\n    elsif ($dir)\n      {\\
-n	if (-e \"$dir/$p\" || -e \"$dir/$p\\.exe\"){$ret\
-=1;}\n	else {$ret=0;}\n      }\n    elsif (-e \"$P\
-LUGINS_DIR/$p\" || -e \"$PLUGINS_DIR/$p.exe\"){$re\
-t=1;}\n    else\n      {\n	$r=`which $p 2>/dev/nul\
-l`;\n	if ($r eq \"\"){$ret=0;}\n	else {$ret=1;}\n \
-     }\n   \n    return $ret;\n  }\nsub install\n \
- {\n    my ($new_bin)=(@_);\n    my ($copied, $rep\
-ort);\n\n    \n    if (!$ROOT_INSTALL)\n      {\n	\
-\n	if (-e \"$BIN/t_coffee\"){`$CP $BIN/t_coffee $I\
-NSTALL_DIR`};\n	`cp $BIN/* $PLUGINS_DIR`;\n	$copie\
-d=1;\n      }\n    else\n      {\n	$copied=&root_r\
-un (\"You must be root to finalize the installatio\
-n\", \"$CP $BIN/* $INSTALL_DIR $SILENT\");\n      \
-}\n    \n     \n  if ( !$copied)\n    {\n      $re\
-port=\"*!!!!!! Installation unsuccesful. The execu\
-tables have been left in $BASE/bin\\n\";\n    }\n \
- elsif ( $copied && $ROOT)\n    {\n      $report=\\
-"*------ Installation succesful. Your executables \
-have been copied in $new_bin and are on your PATH\\
-\n\";\n    }\n  elsif ( $copied && !$ROOT)\n    {\\
-n      $report= \"*!!!!!! T-Coffee and associated \
-packages have been copied in: $new_bin\\n\";\n    \
-  $report.=\"*!!!!!! This address is NOT in your P\
-ATH sytem variable\\n\";\n      $report.=\"*!!!!!!\
- You can do so by adding the following line in you\
-r ~/.bashrc file:\\n\";\n      $report.=\"*!!!!!! \
-export PATH=$new_bin:\\$PATH\\n\";\n    }\n  retur\
-n $report;\n}\n\nsub sign_license_ni\n  {\n    my \
-$F=new FileHandle;\n    open ($F, \"license.txt\")\
-;\n    while (<$F>)\n      {\n	print \"$_\";\n    \
-  }\n    close ($F);\n    \n    return;\n  }\n\nsu\
-b install_pg\n  {\n    my ($pg)=(@_);\n    my ($re\
-port, $previous, $language, $compiler, $return);\n\
-    \n    if (!$PG{$pg}{install}){return 1;}\n    \
-\n    $previous=&pg_is_installed ($pg);\n    \n   \
- if ($PG{$pg}{update_action} eq \"no_update\" && $\
-previous)\n      {\n	$PG{$pg}{old}=1;\n	$PG{$pg}{n\
-ew}=0;\n	$return=1;\n      }\n    else\n      {\n	\
-$PG{$pg}{old}=$previous;\n	\n	if ($PG{$pg} {langua\
-ge2} eq \"Perl\"){&install_perl_package ($pg);}\n	\
-elsif ($BINARIES_ONLY && &install_binary_package (\
-$pg)){$PG{$pg}{from_binary}=1;}\n	elsif (&install_\
-source_package ($pg)){;}\n	else \n	  {\n	    \n	  \
-  if (!&supported_os($OS))\n	      {\n		print \"!!\
-!!!!!! $pg compilation failed, binary unsupported \
-for $OS\\n\"; \n	      }\n	    elsif (!($PG{$pg}{f\
-rom_binary}=&install_binary_package ($pg)))\n	    \
-  {\n		print \"!!!!!!!! $pg compilation and  binar\
-y installation failed\\n\";\n	      }\n	  }\n	$PG{\
-$pg}{new}=$return=&pg_is_installed ($pg,$BIN);\n  \
-    }\n\n    \n    return $return;\n  }\nsub insta\
-ll_perl_package\n  {\n    my ($pg)=(@_);\n    my (\
-$report, $language, $compiler);\n    \n    $langua\
-ge=$PG{$pg} {language2};\n    $compiler=$PG{$langu\
-age}{compiler};\n    \n    if (!&pg_is_installed (\
-$pg))\n      {\n	if ( $OS eq \"windows\"){`perl -M\
-$compiler -e 'install $pg'`;}\n	elsif ( $ROOT eq \\
-"sudo\"){system (\"sudo perl -M$compiler -e 'insta\
-ll $pg'\");}\n	else {system (\"su root -c perl -M$\
-compiler -e 'install $pg'\");}\n      }\n    retur\
-n &pg_is_installed ($pg);\n  }\n\n\n\nsub install_\
-source_package\n  {\n    my ($pg)=(@_);\n    my ($\
-report, $download, $arguments, $language, $address\
-, $name, $ext, $main_dir, $distrib);\n    my $wget\
-_tmp=\"$TMP/wget.tmp\";\n    my (@fl);\n    if ( -\
-e \"$BIN/$pg\" || -e \"$BIN/$pg.exe\"){return 1;}\\
-n    \n    #\n    # check if the module exists in \
-the repository cache \n    #\n	if( repo_load($pg) \
-) {\n		return 1;\n	}\n    \n    if ($pg eq \"t_cof\
-fee\")  {return   &install_t_coffee ($pg);}\n    e\
-lsif ($pg eq \"TMalign\"){return   &install_TMalig\
-n ($pg);}\n    \n    chdir $DISTRIBUTIONS;\n    \n\
-    $download=$PG{$pg}{source};\n    \n    if (($d\
-ownload =~/tgz/))\n      {\n	($address,$name,$ext)\
-=($download=~/(.+\\/)([^\\/]+)(\\.tgz).*/);\n     \
- }\n    elsif (($download=~/tar\\.gz/))\n      {\n\
-	($address,$name,$ext)=($download=~/(.+\\/)([^\\/]\
-+)(\\.tar\\.gz).*/);\n      }\n    elsif (($downlo\
-ad=~/tar/))\n      {\n	($address,$name,$ext)=($dow\
-nload=~/(.+\\/)([^\\/]+)(\\.tar).*/);\n      }\n  \
-  else\n      {\n	($address,$name)=($download=~/(.\
-+\\/)([^\\/]+)/);\n	$ext=\"\";\n      }\n    $dist\
-rib=\"$name$ext\";\n    \n    if ( !-d $pg){mkdir \
-$pg;}\n    chdir $pg;\n   \n    #get the distribut\
-ion if available\n    if ( -e \"$DOWNLOAD_DIR/$dis\
-trib\")\n      {\n	`$CP $DOWNLOAD_DIR/$distrib .`;\
-\n      }\n    #UNTAR and Prepare everything\n    \
-if (!-e \"$name.tar\" && !-e \"$name\")\n      {\n\
-	&check_rm ($wget_tmp);\n	print \"\\n------- Downl\
-oading/Installing $pg\\n\";\n	\n	if (!-e $distrib \
-&& &url2file (\"$download\", \"$wget_tmp\")==$EXIT\
-_SUCCESS)\n	  {\n	    \n	    `mv $wget_tmp $distri\
-b`;\n	    `$CP $distrib $DOWNLOAD_DIR/`;\n	  }\n\n\
-	if (!-e $distrib)\n	  {\n	    print \"!!!!!!! Dow\
-nload of $pg distribution failed\\n\";\n	    print\
- \"!!!!!!! Check Address: $PG{$pg}{source}\\n\";\n\
-	    return 0;\n	  }\n	print \"\\n------- unzippin\
-g/untaring $name\\n\";\n	if (($ext =~/z/))\n	  { \\
-n	    &flush_command (\"gunzip $name$ext\");\n	   \
- \n	  }\n	if (($ext =~/tar/) || ($ext =~/tgz/))\n	\
-  {\n	    &flush_command(\"tar -xvf $name.tar\");\\
-n	  }\n      }\n    #Guess and enter the distribut\
-ion directory\n    @fl=ls($p);\n    foreach my $f \
-(@fl)\n      {\n	if (-d $f)\n	  {\n	    $main_dir=\
-$f;\n	  }\n      }\n    if (-d $main_dir)\n	  \n  \
-    {\n	chdir $main_dir;}\n    else\n      {\n	pri\
-nt \"Error: $main_dir does not exist\";\n      }\n\
-    print \"\\n------- Compiling/Installing $pg\\n\
-\";\n    `make clean $SILENT`;\n    \n    \n    #\\
-n    # SAP module\n    #\n    if ($pg eq \"sap\")\\
-n      {\n	if (-e \"./configure\")\n	  {\n	    #ne\
-w sap distribution\n	    if ($OS eq \"macosx\")\n	\
-      {\n		&replace_line_in_file (\"./src/galloc.h\
-\", \"malloc.h\",  \"\");\n		&replace_line_in_file\
- (\"./src/pdbprot.h\", \"malloc.h\", \"\");\n		&re\
-place_line_in_file (\"./src/pdbprot.c\", \"malloc.\
-h\", \"\");\n	      }\n	    \n	    &flush_command \
-(\"./configure\");\n	    &flush_command (\"make cl\
-ean\");\n	    &flush_command (\"make\");\n	    &ch\
-eck_cp (\"./src/$pg\", \"$BIN\");\n	    repo_store\
-(\"./src/$pg\");\n	  }\n	else\n	  {\n	    #old sty\
-le distribution\n	    `rm *.o sap  sap.exe ./util/\
-aa/*.o  ./util/wt/.o $SILENT`;\n	    &flush_comman\
-d (\"make $arguments sap\");\n	    &check_cp ($pg,\
- \"$BIN\");\n	    repo_store($pg);\n	  }\n      }\\
-n    \n    #\n    # CLUSTALW2 module\n    #\n    e\
-lsif ($pg eq \"clustalw2\")\n      {\n	&flush_comm\
-and(\"./configure\");\n	&flush_command(\"make $arg\
-uments\");\n	&check_cp (\"./src/$pg\", \"$BIN\");\\
-n	repo_store(\"./src/$pg\");\n      }\n    \n    #\
-\n    # FSA module\n    # \n    elsif ($pg eq \"fs\
-a\")\n      {\n	&flush_command(\"./configure --pre\
-fix=$BIN\");\n	&flush_command(\"make $arguments\")\
-;\n	&flush_command (\"make install\");\n\n	repo_st\
-ore(\"fsa\", \"$BIN/bin\");\n	`mv $BIN/bin/* $BIN`\
-;\n	`rmdir $BIN/bin`;\n      }\n    \n    #\n    #\
- CLUSTALW module\n    #\n    elsif ($pg eq \"clust\
-alw\")\n      {\n	&flush_command(\"make $arguments\
- clustalw\");\n	`$CP $pg $BIN $SILENT`;\n	repo_sto\
-re($pg);\n      }\n    \n    #\n    # MAFFT module\
-\n    #\n    elsif ($pg eq \"mafft\")\n      {\n	m\
-y $base=cwd();\n	my $c;\n	\n	#compile core\n	mkpat\
-h (\"./mafft/bin\");\n	mkpath (\"./mafft/lib\");\n\
-	chdir \"$base/core\";\n	`make clean $SILENT`;\n	&\
-flush_command (\"make $arguments\");\n	&flush_comm\
-and (\"make install LIBDIR=../mafft/lib BINDIR=../\
-mafft/bin\");\n	\n	#compile extension\n	chdir \"$b\
-ase/extensions\";\n	`make clean $SILENT`;\n	&flush\
-_command (\"make $arguments\");\n	&flush_command (\
-\"make install LIBDIR=../mafft/lib BINDIR=../mafft\
-/bin\");\n	\n	#put everything in mafft and copy th\
-e compiled stuff in bin\n	chdir \"$base\";\n	if ($\
-ROOT_INSTALL)\n	  {\n	    &root_run (\"You Must be\
- Root to Install MAFFT\\n\", \"mkdir /usr/local/ma\
-fft/;$CP mafft/lib/* /usr/local/mafft;$CP mafft/li\
-b/mafft* /usr/local/bin ;$CP mafft/bin/mafft /usr/\
-local/bin/; \");\n	  }\n	else\n	  {\n	    `$CP maf\
-ft/lib/*  $BIN`;\n	    `$CP mafft/bin/mafft  $BIN`\
-;\n	  }\n	`tar -cvf mafft.tar mafft`;\n	`gzip maff\
-t.tar`;\n	`mv mafft.tar.gz $BIN`;\n	\n	repo_store(\
-\"mafft/bin/mafft\", \"mafft/lib/\", \"$BIN/mafft.\
-tar.gz\");\n      }\n      \n    #\n    # DIALIGN-\
-TX module\n    #\n    elsif ( $pg eq \"dialign-tx\\
-" )\n      {\n	my $f;\n	my $base=cwd();\n\n	chdir \
-\"./source\";\n	if ($OS eq \"macosx\"){&flush_comm\
-and (\"cp makefile.MAC_OS makefile\");}\n\n	&flush\
-_command (\" make CPPFLAGS='-O3 -funroll-loops' al\
-l\");\n	\n	chdir \"..\";\n	&check_cp (\"./source/$\
-pg\", \"$BIN\");\n	repo_store(\"./source/$pg\");\n\
-      }\n      \n    #\n    # DIALIGN-T module \n \
-   # (is the same as dialign-tx, but it is mantain\
-ed for backward name compatibility with tcoffee)\n\
-    #\n    elsif ( $pg eq \"dialign-t\" )\n      {\
-\n	my $f;\n	my $base=cwd();\n\n	chdir \"./source\"\
-;\n	if ($OS eq \"macosx\"){&flush_command (\"cp ma\
-kefile.MAC_OS makefile\");}\n\n	&flush_command (\"\
- make CPPFLAGS='-O3 -funroll-loops' all\");\n	\n	c\
-hdir \"..\";\n	&check_cp (\"./source/dialign-tx\",\
- \"$BIN/dialign-t\");\n	repo_store(\"$BIN/dialign-\
-t\");	\n      }      \n      \n    #\n    # POA mo\
-dule\n    #\n    elsif ($pg eq \"poa\")\n      {\n\
-	&flush_command (\"make $arguments poa\");\n	&chec\
-k_cp (\"$pg\", \"$BIN\");\n	repo_store(\"$pg\");\n\
-      }\n     \n     \n    #\n    # PROBCONS modul\
-e\n    #\n    elsif ( $pg eq \"probcons\")\n      \
-{\n	&add_C_libraries(\"./ProbabilisticModel.h\", \\
-"list\", \"cstring\");\n	\n	`rm *.exe $SILENT`;\n	\
-&flush_command (\"make $arguments probcons\");\n	&\
-check_cp(\"$pg\", \"$BIN/$pg\");\n	repo_store(\"$p\
-g\");\n      }\n      \n    #\n    # PROBCONS RNA \
-module\n    #\n    elsif ( $pg eq \"probconsRNA\")\
-\n      {\n	&add_C_libraries(\"./ProbabilisticMode\
-l.h\", \"list\", \"cstring\");\n	&add_C_libraries(\
-\"./Main.cc\", \"iomanip\", \"cstring\",\"climits\\
-");\n	`rm *.exe $SILENT`;\n	&flush_command (\"make\
- $arguments probcons\");\n	&check_cp(\"probcons\",\
- \"$BIN/$pg\");\n	repo_store(\"$BIN/$pg\");\n     \
- }\n\n	#\n	# MUSCLE module\n	#\n    elsif (  $pg e\
-q \"muscle\")\n      {	\n	`rm *.o muscle muscle.ex\
-e $SILENT`;\n	if ($OS eq \"macosx\" || $OS eq \"li\
-nux\")\n	  {\n	    &replace_line_in_file (\"./Make\
-file\", \"LDLIBS = -lm -static\",  \"LDLIBS = -lm\\
-");\n	  }\n	elsif ($OS eq \"windows\")\n	  {\n	   \
- &replace_line_in_file (\"./intmath.cpp\",  \"doub\
-le log2e\",      \"double cedric_log\");\n	    &re\
-place_line_in_file (\"./intmath.cpp\",  \"double l\
-og2\",       \"double log_notuse\");\n	    &replac\
-e_line_in_file (\"./intmath.cpp\",  \"double cedri\
-c_log\", \"double log2e\");\n	  }\n	&flush_command\
- (\"make $arguments all\");\n	&check_cp(\"$pg\", \\
-"$BIN\");\n	repo_store(\"$pg\");	\n      }\n      \
-\n     #\n     # MUS4 module\n     #\n     elsif (\
-  $pg eq \"mus4\")\n      {\n	`rm *.o muscle muscl\
-e.exe $SILENT`;\n	&flush_command (\"./mk\");\n	&ch\
-eck_cp(\"$pg\", \"$BIN\");\n	repo_store(\"$pg\");	\
-\n      }\n      \n    #\n    # PCMA module\n    #\
-\n    elsif ( $pg eq \"pcma\")\n      {\n	if ($OS \
-eq \"macosx\")\n	  {\n	    &replace_line_in_file (\
-\"./alcomp2.c\", \"malloc.h\",  \"\");\n	  }\n	&fl\
-ush_command (\"make $arguments pcma\");\n	&check_c\
-p(\"$pg\", \"$BIN\");\n	repo_store(\"$pg\");	\n   \
-   }\n      \n    #\n    # KALIGN module\n    #\n \
-   elsif ($pg eq \"kalign\")\n      {\n	&flush_com\
-mand (\"./configure\");\n	&flush_command(\"make $a\
-rguments\");\n	&check_cp (\"$pg\",$BIN);\n	repo_st\
-ore(\"$pg\");	\n      }\n      \n    #\n    # AMAP\
- module\n    #\n    elsif ( $pg eq \"amap\")\n    \
-  {\n	&add_C_libraries(\"./Amap.cc\", \"iomanip\",\
- \"cstring\",\"climits\");	\n	`make clean $SILENT`\
-;\n	&flush_command (\"make $arguments all\");\n	&c\
-heck_cp (\"$pg\", $BIN);\n	repo_store(\"$pg\");	\n\
-      }\n      \n    #\n    # PRODA module\n    #\\
-n    elsif ( $pg eq \"proda\")\n      {\n	&add_C_l\
-ibraries(\"AlignedFragment.h\", \"vector\", \"iost\
-ream\", \"cstring\",\"cstdlib\");\n	&add_C_librari\
-es(\"Main.cc\", \"vector\", \"climits\");	\n	&add_\
-C_libraries(\"Sequence.cc\", \"stdlib.h\", \"cstdi\
-o\");	\n	&flush_command (\"make $arguments all\");\
-\n	&check_cp (\"$pg\", $BIN);\n	repo_store(\"$pg\"\
-);	\n      }\n      \n    #\n    # PRANK module\n \
-   #\n    elsif ( $pg eq \"prank\")\n      {\n	&fl\
-ush_command (\"make $arguments all\");\n	&check_cp\
- (\"$pg\", $BIN);\n	repo_store(\"$pg\");	\n      }\
-\n      \n    #\n    # !!!! MUSTANG module\n    #\\
-n     elsif ( $pg eq \"mustang\")\n      {\n	&flus\
-h_command (\"rm ./bin/*\");\n	&flush_command (\"ma\
-ke $arguments all\");\n\n	if ( $OS=~/windows/){&fl\
-ush_command(\"cp ./bin/* $BIN/mustang.exe\");}\n	e\
-lse {&flush_command(\"cp ./bin/* $BIN/mustang\");}\
-\n	\n	repo_store(\"$BIN/mustang\");\n      }\n\n	#\
-\n	# RNAplfold module\n	#\n    elsif ( $pg eq \"RN\
-Aplfold\")\n      {\n	&flush_command(\"./configure\
-\");\n	&flush_command (\"make $arguments all\");\n\
-	&check_cp(\"./Progs/RNAplfold\", \"$BIN\");\n	&ch\
-eck_cp(\"./Progs/RNAalifold\", \"$BIN\");\n	&check\
-_cp(\"./Progs/RNAfold\", \"$BIN\");\n	\n	repo_stor\
-e(\"./Progs/RNAplfold\", \"./Progs/RNAalifold\", \\
-"./Progs/RNAfold\");\n      }\n      \n    #\n    \
-# !!! RETREE module\n    #\n    elsif ( $pg eq \"r\
-etree\")\n      {\n	chdir \"src\";\n	&flush_comman\
-d (\"make $arguments all\");\n	&flush_command (\"m\
-ake put\");\n	system \"cp ../exe/* $BIN\";\n	\n	re\
-po_store(\"retree\", \"../exe\");\n      }\n	\n   \
- chdir $CDIR;\n    return &pg_is_installed ($pg, $\
-BIN);\n  }\n\nsub install_t_coffee\n  {\n    my ($\
-pg)=(@_);\n    my ($report,$cflags, $arguments, $l\
-anguage, $compiler) ;\n    #1-Install T-Coffee\n  \
-  chdir \"t_coffee_source\";\n    &flush_command (\
-\"make clean\");\n    print \"\\n------- Compiling\
- T-Coffee\\n\";\n    $language=$PG{$pg} {language2\
-};\n    $arguments=$PG{$language}{arguments};\n   \
- if (!($arguments =~/CFLAGS/)){$arguments .= \" CF\
-LAGS=-O2 \";}\n\n    if ( $CC ne \"\"){&flush_comm\
-and (\"make -i $arguments t_coffee\");}\n    &chec\
-k_cp ($pg, $BIN);\n    \n    chdir $CDIR;\n    ret\
-urn &pg_is_installed ($pg, $BIN);\n  }\nsub instal\
-l_TMalign\n  {\n    my ($pg)=(@_);\n    my $report\
-;\n    chdir \"t_coffee_source\";\n    print \"\\n\
-------- Compiling TMalign\\n\";\n    `rm TMalign T\
-Malign.exe $SILENT`;\n    if ( $FC ne \"\"){&flush\
-_command (\"make -i $PG{Fortran}{arguments} TMalig\
-n\");}\n    &check_cp ($pg, $BIN);\n    repo_store\
-($pg);\n\n    if ( !-e \"$BIN/$pg\" && pg_has_bina\
-ry_distrib ($pg))\n      {\n	print \"!!!!!!! Compi\
-lation of $pg impossible. Will try to install from\
- binary\\n\";\n	return &install_binary_package ($p\
-g);\n      }\n    chdir $CDIR;\n    return &pg_is_\
-installed ($pg, $BIN);\n  }\n\nsub pg_has_binary_d\
-istrib\n  {\n    my ($pg)=(@_);\n    if ($PG{$pg}{\
-windows}){return 1;}\n    elsif ($PG{$pg}{osx}){re\
-turn 1;}\n    elsif ($PG{$pg}{linux}){return 1;}\n\
-    return 0;\n  }\nsub install_binary_package\n  \
-{\n    my ($pg)=(@_);\n    my ($base,$report,$name\
-, $download, $arguments, $language, $dir);\n    my\
- $isdir;\n    &input_os();\n    \n    if (!&suppor\
-ted_os($OS)){return 0;}\n    if ( $PG{$pg}{binary}\
-){$name=$PG{$pg}{binary};}\n    else \n      {\n	$\
-name=$pg;\n	if ( $OS eq \"windows\"){$name.=\".exe\
-\";}\n      }\n    \n    $download=\"$WEB_BASE/Pac\
-kages/Binaries/$OS/$name\";\n    \n    $base=cwd()\
-;\n    chdir $TMP;\n    \n    if (!-e $name)\n    \
-  {\n	`rm x $SILENT`;\n	if ( url2file(\"$download\\
-",\"x\")==$EXIT_SUCCESS)\n	  {\n	    `mv x $name`;\
-\n	  }\n      }\n    \n    if (!-e $name)\n      {\
-\n	print \"!!!!!!! $PG{$pg}{dname}: Download of $p\
-g binary failed\\n\";\n	print \"!!!!!!! $PG{$pg}{d\
-name}: Check Address: $download\\n\";\n	return 0;\\
-n      }\n    print \"\\n------- Installing $pg\\n\
-\";\n    \n    if ($name =~/tar\\.gz/)\n      {\n	\
-`gunzip  $name`;\n	`tar -xvf $pg.tar`;\n	chdir $pg\
-;\n	if ( $pg eq \"mafft\")\n	  {\n	    if ($ROOT_I\
-NSTALL)\n	      {\n		&root_run (\"You Must be Roor\
- to Install MAFFT\\n\", \"$CP mafft/bin/* /usr/loc\
-al/mafft;mkdir /usr/local/mafft/; $CP mafft/lib/* \
-/usr/local/bin/\");\n	      }\n	    else\n	      {\
-\n		`$CP $TMP/$pg/bin/* $BIN $SILENT`;\n		`$CP $TM\
-P/$pg/lib/* $BIN $SILENT`;\n	      }\n	  }\n	else\\
-n	  {\n	    if (-e \"$TMP/$pg/data\"){`$CP $TMP/$p\
-g/data/* $TCM $SILENT`;}\n	    if (!($pg=~/\\*/)){\
-`rm -rf $pg`;}\n	  }\n      }\n    else\n      {\n\
-	&check_cp (\"$pg\", \"$BIN\");\n	`chmod u+x $BIN/\
-$pg`; \n	unlink ($pg);\n      }\n    chdir $base;\\
-n    $PG{$pg}{from_binary}=1;\n    return &pg_is_i\
-nstalled ($pg, $BIN);\n  }\n\nsub add_dir \n  {\n \
-   my $dir=@_[0];\n    \n    if (!-e $dir && !-d $\
-dir)\n      {\n	my @l;\n	umask (0000);\n	@l=mkpath\
- ($dir,{mode => 0777});\n	\n      }\n    else\n   \
-   {\n	return 0;\n      }\n  }\nsub check_rm \n  {\
-\n    my ($file)=(@_);\n    \n    if ( -e $file)\n\
-      {\n	return unlink($file);\n      }\n    retu\
-rn 0;\n  }\nsub check_cp\n  {\n    my ($from, $to)\
-=(@_);\n    if ( !-e $from && -e \"$from\\.exe\"){\
-$from=\"$from\\.exe\";}\n    if ( !-e $from){retur\
-n 0;}\n        \n    `$CP $from $to`;\n    return \
-1;\n  }\n\nsub repo_store \n{\n   # check that all\
- required data are available\n   if( $REPO_ROOT eq\
- \"\" ) { return; }\n\n\n    # extract the package\
- name from the specified path\n    my $pg =`basena\
-me $_[0]`;\n    chomp($pg);\n	\n    my $VER = $PG{\
-$pg}{version};\n    my $CACHE = \"$REPO_ROOT/$pg/$\
-VER/$OSNAME-$OSARCH\"; \n    \n    print \"-------\
-- Storing package: \\\"$pg\\\" to path: $CACHE\\n\\
-";\n    \n    # clean the cache path if exists and\
- create it again\n    `rm -rf $CACHE`;\n    `mkdir\
- -p $CACHE`;\n    \n 	for my $path (@_) {\n\n	    \
-# check if it is a single file \n	 	if( -f $path )\
- {\n	    	`cp $path $CACHE`;\n		}\n		# .. or a dir\
-ectory, in this case copy all the content \n		elsi\
-f( -d $path ) {\n			opendir(IMD, $path);\n			my @t\
-hefiles= readdir(IMD);\n			closedir(IMD);\n			\n		\
-	for my $_file (@thefiles) {\n				if( $_file ne \"\
-.\" && $_file ne \"..\") {\n	    			`cp $path/$_fi\
-le $CACHE`;\n				}\n			}\n		} \n	}	   \n    \n	\n}\
-   \n\nsub repo_load \n{\n    my ($pg)=(@_);\n\n  \
-  # check that all required data are available\n  \
-  if( $REPO_ROOT eq \"\" ) { return 0; }\n\n    my\
- $VER = $PG{$pg}{version};\n    my $CACHE = \"$REP\
-O_ROOT/$pg/$VER/$OSNAME-$OSARCH\"; \n    if( !-e \\
-"$CACHE/$pg\" ) {\n   	 	print \"-------- Module \\
-\\"$pg\\\" NOT found on repository cache.\\n\";\n \
-   	return 0;\n    }\n    \n    print \"-------- M\
-odule \\\"$pg\\\" found on repository cache. Using\
- copy on path: $CACHE\\n\";\n    `cp $CACHE/* $BIN\
-`;\n    return 1;\n}\n\nsub check_file_list_exists\
- \n  {\n    my ($base, @flist)=(@_);\n    my $f;\n\
-\n    foreach $f (@flist)\n      {\n	if ( !-e \"$b\
-ase/$f\"){return 0;}\n      }\n    return 1;\n  }\\
-nsub ls\n  {\n    my $f=@_[0];\n    my @fl;\n    c\
-homp(@fl=`ls -1 $f`);\n    return @fl;\n  }\nsub f\
-lush_command\n  {\n    my $command=@_[0];\n    my \
-$F=new FileHandle;\n    open ($F, \"$command|\");\\
-n    while (<$F>){print \"    --- $_\";}\n    clos\
-e ($F);\n  }    \n\nsub input_installation_directo\
-ry\n  {\n    my $dir=@_[0];\n    my $new;\n    \n \
-   print \"------- The current installation direct\
-ory is: [$dir]\\n\";\n    print \"??????? Return t\
-o keep the default or new value:\";\n   \n    if (\
-$NO_QUESTION==0)\n      {\n	chomp ($new=<stdin>);\\
-n	while ( $new ne \"\" && !input_yes (\"You have e\
-ntered $new. Is this correct? ([y]/n):\"))\n	  {\n\
-	    print \"???????New installation directory:\";\
-\n	    chomp ($new=<stdin>);\n	  }\n	$dir=($new eq\
- \"\")?$dir:$new;\n	$dir=~s/\\/$//;\n      }\n    \
-\n    if ( -d $dir){return $dir;}\n    elsif (&roo\
-t_run (\"You must be root to create $dir\",\"mkdir\
- $dir\")==$EXIT_SUCCESS){return $dir;}\n    else\n\
-      {\n	print \"!!!!!!! $dir could not be create\
-d\\n\";\n	if ( $NO_QUESTION)\n	  {\n	    return \"\
-\";\n	  }\n	elsif ( &input_yes (\"??????? Do you w\
-ant to provide a new directory([y]/n)?:\"))\n	  {\\
-n	    return input_installation_directory ($dir);\\
-n	  }\n	else\n	  {\n	    return \"\";\n	  }\n     \
- }\n    \n  }\nsub input_yes\n  {\n    my $questio\
-n =@_[0];\n    my $answer;\n\n    if ($NO_QUESTION\
-==1){return 1;}\n    \n    if ($question eq \"\"){\
-$question=\"??????? Do you wish to proceed ([y]/n)\
-?:\";}\n    print $question;\n    chomp($answer=lc\
-(<STDIN>));\n    if (($answer=~/^y/) || $answer eq\
- \"\"){return 1;}\n    elsif ( ($answer=~/^n/)){re\
-turn 0;}\n    else\n      {\n	return input_yes($qu\
-estion);\n      }\n  }\nsub root_run\n  {\n    my \
-($txt, $cmd)=(@_);\n    \n    if ( system ($cmd)==\
-$EXIT_SUCCESS){return $EXIT_SUCCESS;}\n    else \n\
-      {\n	print \"------- $txt\\n\";\n	if ( $ROOT \
-eq \"sudo\"){return system (\"sudo $cmd\");}\n	els\
-e {return system (\"su root -c \\\"$cmd\\\"\");}\n\
-      }\n  }\nsub get_root\n  {\n    if (&pg_is_in\
-stalled (\"sudo\")){return \"sudo\";}\n    else {r\
-eturn \"su\";}\n  }\n\nsub get_os\n  {\n    my $ra\
-w_os=`uname`;\n    my $os;\n\n    $raw_os=lc ($raw\
-_os);\n    \n    if ($raw_os =~/cygwin/){$os=\"win\
-dows\";}\n    elsif ($raw_os =~/linux/){$os=\"linu\
-x\";}\n    elsif ($raw_os =~/osx/){$os=\"macosx\";\
-}\n    elsif ($raw_os =~/darwin/){$os=\"macosx\";}\
-\n    else\n      {\n	$os=$raw_os;\n      }\n    r\
-eturn $os;\n  }\nsub input_os\n  {\n    my $answer\
-;\n    if ($OS) {return $OS;}\n    \n    print \"?\
-?????? which os do you use: [w]indows, [l]inux, [m\
-]acosx:?\";\n    $answer=lc(<STDIN>);\n\n    if ((\
-$answer=~/^m/)){$OS=\"macosx\";}\n    elsif ( ($an\
-swer=~/^w/)){$OS=\"windows\";}\n    elsif ( ($answ\
-er=~/^linux/)){$OS=\"linux\";}\n    \n    else\n  \
-    {\n	return &input_os();\n      }\n    return $\
-OS;\n  }\n\nsub supported_os\n  {\n    my ($os)=(@\
-_[0]);\n    return $SUPPORTED_OS{$os};\n  }\n    \\
-n    \n\n\nsub update_tclinkdb \n  {\n    my $file\
- =@_[0];\n    my $name;\n    my $F=new FileHandle;\
-\n    my ($download, $address, $name, $l, $db);\n \
-   \n    if ( $file eq \"update\"){$file=$TCLINKDB\
-_ADDRESS;}\n    \n    if ( $file =~/http:\\/\\// |\
-| $file =~/ftp:\\/\\//)\n      {\n	($address, $nam\
-e)=($download=~/(.*)\\/([^\\/]+)$/);\n	`rm x $SILE\
-NT`;\n	if (&url2file ($file,\"x\")==$EXIT_SUCCESS)\
-\n	  {\n	    print \"------- Susscessful upload of\
- $name\";\n	    `mv x $name`;\n	    $file=$name;\n\
-	  }\n      }\n    open ($F, \"$file\");\n    whil\
-e (<$F>)\n      {\n	my $l=$_;\n	if (($l =~/^\\/\\/\
-/) || ($db=~/^#/)){;}\n	elsif ( !($l =~/\\w/)){;}\\
-n	else\n	  {\n	    my @v=split (/\\s+/, $l);\n	   \
- if ( $l=~/^MODE/)\n	      {\n		$MODE{$v[1]}{$v[2]\
-}=$v[3];\n	      }\n	    elsif ($l=~/^PG/)\n	     \
- {\n		$PG{$v[1]}{$v[2]}=$v[3];\n	      }\n	  }\n  \
-    }\n    close ($F);\n    &post_process_PG();\n \
-   return;\n  }\n\n\n\nsub initialize_PG\n  {\n\n$\
-PG{\"t_coffee\"}{\"4_TCOFFEE\"}=\"TCOFFEE\";\n$PG{\
-\"t_coffee\"}{\"type\"}=\"sequence_multiple_aligne\
-r\";\n$PG{\"t_coffee\"}{\"ADDRESS\"}=\"http://www.\
-tcoffee.org\";\n$PG{\"t_coffee\"}{\"language\"}=\"\
-C\";\n$PG{\"t_coffee\"}{\"language2\"}=\"C\";\n$PG\
-{\"t_coffee\"}{\"source\"}=\"http://www.tcoffee.or\
-g/Packages/T-COFFEE_distribution.tar.gz\";\n$PG{\"\
-t_coffee\"}{\"update_action\"}=\"always\";\n$PG{\"\
-t_coffee\"}{\"mode\"}=\"tcoffee,mcoffee,rcoffee,ex\
-presso,3dcoffee\";\n$PG{\"clustalw2\"}{\"4_TCOFFEE\
-\"}=\"CLUSTALW2\";\n$PG{\"clustalw2\"}{\"type\"}=\\
-"sequence_multiple_aligner\";\n$PG{\"clustalw2\"}{\
-\"ADDRESS\"}=\"http://www.clustal.org\";\n$PG{\"cl\
-ustalw2\"}{\"language\"}=\"C++\";\n$PG{\"clustalw2\
-\"}{\"language2\"}=\"CXX\";\n$PG{\"clustalw2\"}{\"\
-source\"}=\"http://www.clustal.org/download/2.0.10\
-/clustalw-2.0.10-src.tar.gz\";\n$PG{\"clustalw2\"}\
-{\"mode\"}=\"mcoffee,rcoffee\";\n$PG{\"clustalw2\"\
-}{\"version\"}=\"2.0.10\";\n$PG{\"clustalw\"}{\"4_\
-TCOFFEE\"}=\"CLUSTALW\";\n$PG{\"clustalw\"}{\"type\
-\"}=\"sequence_multiple_aligner\";\n$PG{\"clustalw\
-\"}{\"ADDRESS\"}=\"http://www.clustal.org\";\n$PG{\
-\"clustalw\"}{\"language\"}=\"C\";\n$PG{\"clustalw\
-\"}{\"language2\"}=\"C\";\n$PG{\"clustalw\"}{\"sou\
-rce\"}=\"http://www.clustal.org/download/1.X/ftp-i\
-gbmc.u-strasbg.fr/pub/ClustalW/clustalw1.82.UNIX.t\
-ar.gz\";\n$PG{\"clustalw\"}{\"mode\"}=\"mcoffee,rc\
-offee\";\n$PG{\"clustalw\"}{\"version\"}=\"1.82\";\
-\n$PG{\"dialign-t\"}{\"4_TCOFFEE\"}=\"DIALIGNT\";\\
-n$PG{\"dialign-t\"}{\"type\"}=\"sequence_multiple_\
-aligner\";\n$PG{\"dialign-t\"}{\"ADDRESS\"}=\"http\
-://dialign-tx.gobics.de/\";\n$PG{\"dialign-t\"}{\"\
-DIR\"}=\"/usr/share/dialign-tx/\";\n$PG{\"dialign-\
-t\"}{\"language\"}=\"C\";\n$PG{\"dialign-t\"}{\"la\
-nguage2\"}=\"C\";\n$PG{\"dialign-t\"}{\"source\"}=\
-\"http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar\
-.gz\";\n$PG{\"dialign-t\"}{\"mode\"}=\"mcoffee\";\\
-n$PG{\"dialign-t\"}{\"binary\"}=\"dialign-t\";\n$P\
-G{\"dialign-t\"}{\"version\"}=\"1.0.2\";\n$PG{\"di\
-align-tx\"}{\"4_TCOFFEE\"}=\"DIALIGNTX\";\n$PG{\"d\
-ialign-tx\"}{\"type\"}=\"sequence_multiple_aligner\
-\";\n$PG{\"dialign-tx\"}{\"ADDRESS\"}=\"http://dia\
-lign-tx.gobics.de/\";\n$PG{\"dialign-tx\"}{\"DIR\"\
-}=\"/usr/share/dialign-tx/\";\n$PG{\"dialign-tx\"}\
-{\"language\"}=\"C\";\n$PG{\"dialign-tx\"}{\"langu\
-age2\"}=\"C\";\n$PG{\"dialign-tx\"}{\"source\"}=\"\
-http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.g\
-z\";\n$PG{\"dialign-tx\"}{\"mode\"}=\"mcoffee\";\n\
-$PG{\"dialign-tx\"}{\"binary\"}=\"dialign-tx\";\n$\
-PG{\"dialign-tx\"}{\"version\"}=\"1.0.2\";\n$PG{\"\
-poa\"}{\"4_TCOFFEE\"}=\"POA\";\n$PG{\"poa\"}{\"typ\
-e\"}=\"sequence_multiple_aligner\";\n$PG{\"poa\"}{\
-\"ADDRESS\"}=\"http://www.bioinformatics.ucla.edu/\
-poa/\";\n$PG{\"poa\"}{\"language\"}=\"C\";\n$PG{\"\
-poa\"}{\"language2\"}=\"C\";\n$PG{\"poa\"}{\"sourc\
-e\"}=\"http://downloads.sourceforge.net/poamsa/poa\
-V2.tar.gz\";\n$PG{\"poa\"}{\"DIR\"}=\"/usr/share/\\
-";\n$PG{\"poa\"}{\"FILE1\"}=\"blosum80.mat\";\n$PG\
-{\"poa\"}{\"mode\"}=\"mcoffee\";\n$PG{\"poa\"}{\"b\
-inary\"}=\"poa\";\n$PG{\"poa\"}{\"version\"}=\"2.0\
-\";\n$PG{\"probcons\"}{\"4_TCOFFEE\"}=\"PROBCONS\"\
-;\n$PG{\"probcons\"}{\"type\"}=\"sequence_multiple\
-_aligner\";\n$PG{\"probcons\"}{\"ADDRESS\"}=\"http\
-://probcons.stanford.edu/\";\n$PG{\"probcons\"}{\"\
-language2\"}=\"CXX\";\n$PG{\"probcons\"}{\"languag\
-e\"}=\"C++\";\n$PG{\"probcons\"}{\"source\"}=\"htt\
-p://probcons.stanford.edu/probcons_v1_12.tar.gz\";\
-\n$PG{\"probcons\"}{\"mode\"}=\"mcoffee\";\n$PG{\"\
-probcons\"}{\"binary\"}=\"probcons\";\n$PG{\"probc\
-ons\"}{\"version\"}=\"1.12\";\n$PG{\"mafft\"}{\"4_\
-TCOFFEE\"}=\"MAFFT\";\n$PG{\"mafft\"}{\"type\"}=\"\
-sequence_multiple_aligner\";\n$PG{\"mafft\"}{\"ADD\
-RESS\"}=\"http://align.bmr.kyushu-u.ac.jp/mafft/on\
-line/server/\";\n$PG{\"mafft\"}{\"language\"}=\"C\\
-";\n$PG{\"mafft\"}{\"language\"}=\"C\";\n$PG{\"maf\
-ft\"}{\"source\"}=\"http://align.bmr.kyushu-u.ac.j\
-p/mafft/software/mafft-6.603-with-extensions-src.t\
-gz\";\n$PG{\"mafft\"}{\"windows\"}=\"http://align.\
-bmr.kyushu-u.ac.jp/mafft/software/mafft-6.603-ming\
-w.tar\";\n$PG{\"mafft\"}{\"mode\"}=\"mcoffee,rcoff\
-ee\";\n$PG{\"mafft\"}{\"binary\"}=\"mafft.tar.gz\"\
-;\n$PG{\"mafft\"}{\"version\"}=\"6.603\";\n$PG{\"m\
-uscle\"}{\"4_TCOFFEE\"}=\"MUSCLE\";\n$PG{\"muscle\\
-"}{\"type\"}=\"sequence_multiple_aligner\";\n$PG{\\
-"muscle\"}{\"ADDRESS\"}=\"http://www.drive5.com/mu\
-scle/\";\n$PG{\"muscle\"}{\"language\"}=\"C++\";\n\
-$PG{\"muscle\"}{\"language2\"}=\"GPP\";\n$PG{\"mus\
-cle\"}{\"source\"}=\"http://www.drive5.com/muscle/\
-downloads3.7/muscle3.7_src.tar.gz\";\n$PG{\"muscle\
-\"}{\"windows\"}=\"http://www.drive5.com/muscle/do\
-wnloads3.7/muscle3.7_win32.zip\";\n$PG{\"muscle\"}\
-{\"linux\"}=\"http://www.drive5.com/muscle/downloa\
-ds3.7/muscle3.7_linux_ia32.tar.gz\";\n$PG{\"muscle\
-\"}{\"mode\"}=\"mcoffee,rcoffee\";\n$PG{\"muscle\"\
-}{\"version\"}=\"3.7\";\n$PG{\"mus4\"}{\"4_TCOFFEE\
-\"}=\"MUS4\";\n$PG{\"mus4\"}{\"type\"}=\"sequence_\
-multiple_aligner\";\n$PG{\"mus4\"}{\"ADDRESS\"}=\"\
-http://www.drive5.com/muscle/\";\n$PG{\"mus4\"}{\"\
-language\"}=\"C++\";\n$PG{\"mus4\"}{\"language2\"}\
-=\"GPP\";\n$PG{\"mus4\"}{\"source\"}=\"http://www.\
-drive5.com/muscle/muscle4.0_src.tar.gz\";\n$PG{\"m\
-us4\"}{\"mode\"}=\"mcoffee,rcoffee\";\n$PG{\"mus4\\
-"}{\"version\"}=\"4.0\";\n$PG{\"pcma\"}{\"4_TCOFFE\
-E\"}=\"PCMA\";\n$PG{\"pcma\"}{\"type\"}=\"sequence\
-_multiple_aligner\";\n$PG{\"pcma\"}{\"ADDRESS\"}=\\
-"ftp://iole.swmed.edu/pub/PCMA/\";\n$PG{\"pcma\"}{\
-\"language\"}=\"C\";\n$PG{\"pcma\"}{\"language2\"}\
-=\"C\";\n$PG{\"pcma\"}{\"source\"}=\"ftp://iole.sw\
-med.edu/pub/PCMA/pcma.tar.gz\";\n$PG{\"pcma\"}{\"m\
-ode\"}=\"mcoffee\";\n$PG{\"pcma\"}{\"version\"}=\"\
-1.0\";\n$PG{\"kalign\"}{\"4_TCOFFEE\"}=\"KALIGN\";\
-\n$PG{\"kalign\"}{\"type\"}=\"sequence_multiple_al\
-igner\";\n$PG{\"kalign\"}{\"ADDRESS\"}=\"http://ms\
-a.cgb.ki.se\";\n$PG{\"kalign\"}{\"language\"}=\"C\\
-";\n$PG{\"kalign\"}{\"language2\"}=\"C\";\n$PG{\"k\
-align\"}{\"source\"}=\"http://msa.cgb.ki.se/downlo\
-ads/kalign/current.tar.gz\";\n$PG{\"kalign\"}{\"mo\
-de\"}=\"mcoffee\";\n$PG{\"kalign\"}{\"version\"}=\\
-"1.0\";\n$PG{\"amap\"}{\"4_TCOFFEE\"}=\"AMAP\";\n$\
-PG{\"amap\"}{\"type\"}=\"sequence_multiple_aligner\
-\";\n$PG{\"amap\"}{\"ADDRESS\"}=\"http://bio.math.\
-berkeley.edu/amap/\";\n$PG{\"amap\"}{\"language\"}\
-=\"C++\";\n$PG{\"amap\"}{\"language2\"}=\"CXX\";\n\
-$PG{\"amap\"}{\"source\"}=\"http://amap-align.goog\
-lecode.com/files/amap.2.0.tar.gz\";\n$PG{\"amap\"}\
-{\"mode\"}=\"mcoffee\";\n$PG{\"amap\"}{\"version\"\
-}=\"2.0\";\n$PG{\"proda\"}{\"4_TCOFFEE\"}=\"PRODA\\
-";\n$PG{\"proda\"}{\"type\"}=\"sequence_multiple_a\
-ligner\";\n$PG{\"proda\"}{\"ADDRESS\"}=\"http://pr\
-oda.stanford.edu\";\n$PG{\"proda\"}{\"language\"}=\
-\"C++\";\n$PG{\"proda\"}{\"language2\"}=\"CXX\";\n\
-$PG{\"proda\"}{\"source\"}=\"http://proda.stanford\
-.edu/proda_1_0.tar.gz\";\n$PG{\"proda\"}{\"mode\"}\
-=\"mcoffee\";\n$PG{\"proda\"}{\"version\"}=\"1.0\"\
-;\n$PG{\"fsa\"}{\"4_TCOFFEE\"}=\"FSA\";\n$PG{\"fsa\
+\\n\";\nprint \"********              FINALIZE YOU\
+R INSTALLATION    *****************\\n\";\nprint \\
+"*************************************************\
+********************\\n\";\nprint \"------- Your e\
+xecutables are in:\\n\"; \nprint \"-------       $\
+PLUGINS_DIR:\\n\";\nprint \"------- Add this direc\
+tory to your path with the following command:\\n\"\
+;\nprint \"-------       export PATH=$PLUGINS_DIR:\
+\\$PATH\\n\";\nprint \"------- Make this permanent\
+ by adding this line to the file:\\n\";\nprint \"-\
+------       $HOME/.bashrc\\n\";\nexit ($EXIT_SUCC\
+ESS);  \n  \nsub get_CXX_compiler\n  {\n    my $c=\
+@_[0];\n    my (@clist)=(\"g++\");\n    \n    retu\
+rn get_compil ($c, @clist);\n }\nsub get_C_compile\
+r\n  {\n    my $c=@_[0];\n    my (@clist)=(\"gcc\"\
+, \"cc\", \"icc\");\n    \n    return get_compil (\
+$c, @clist);\n }\n\nsub get_F_compiler\n  {\n    m\
+y ($c)=@_[0];\n    my @clist=(\"f77\", \"g77\",\"g\
+95\", \"gfortran\", \"ifort\");\n    return get_co\
+mpil ($c, @clist);\n  } \n       \nsub get_compil\\
+n  {\n    my ($fav,@clist)=(@_);\n    \n    #retur\
+n the first compiler found installed in the system\
+. Check first the favorite\n    foreach my $c ($fa\
+v,@clist)\n      {\n	if  (&pg_is_installed ($c)){r\
+eturn $c;}\n      }\n    return \"\";\n  }\nsub ex\
+it_if_pg_not_installed\n  {\n    my (@arg)=(@_);\n\
+    \n    foreach my $p (@arg)\n      {\n	if ( !&p\
+g_is_installed ($p))\n	  {\n	    print \"!!!!!!!! \
+The $p utility must be installed for this installa\
+tion to proceed [FATAL]\\n\";\n	    die;\n	  }\n  \
+    }\n    return 1;\n  }\nsub set_proxy\n  {\n   \
+ my ($proxy)=(@_);\n    my (@list,$p);\n    \n    \
+@list= (\"HTTP_proxy\", \"http_proxy\", \"HTTP_PRO\
+XY\", \"ALL_proxy\", \"all_proxy\",\"HTTP_proxy_4_\
+TCOFFEE\",\"http_proxy_4_TCOFFEE\");\n    \n    if\
+ (!$proxy)\n      {\n	foreach my $p (@list)\n	  {\\
+n	    if ( ($ENV_SET{$p}) || $ENV{$p}){$proxy=$ENV\
+{$p};}\n	  }\n      }\n    foreach my $p(@list){$E\
+NV{$p}=$proxy;}\n  }\n	\nsub check_internet_connec\
+tion\n  {\n    my $internet;\n    \n    if ( -e \"\
+x\"){unlink (\"x\");}\n    if     (&pg_is_installe\
+d    (\"wget\")){`wget www.google.com -Ox >/dev/nu\
+ll 2>/dev/null`;}\n    elsif  (&pg_is_installed   \
+ (\"curl\")){`curl www.google.com -ox >/dev/null 2\
+>/dev/null`;}\n    else\n      {\n	printf stderr \\
+"\\nERROR: No pg for remote file fetching [wget or\
+ curl][FATAL]\\n\";\n	exit ($EXIT_FAILURE);\n     \
+ }\n    \n    if ( !-e \"x\" || -s \"x\" < 10){$in\
+ternet=0;}\n    else {$internet=1;}\n    if (-e \"\
+x\"){unlink \"x\";}\n    return $internet;\n  }\ns\
+ub url2file\n  {\n    my ($cmd, $file,$wget_arg, $\
+curl_arg)=(@_);\n    my ($exit,$flag, $pg, $arg);\\
+n    \n    if ($INTERNET || check_internet_connect\
+ion ()){$INTERNET=1;}\n    else\n      {\n	print S\
+TDERR \"ERROR: No Internet Connection [FATAL:insta\
+ll.pl]\\n\";\n	exit ($EXIT_FAILURE);\n      }\n   \
+ \n    if     (&pg_is_installed    (\"wget\")){$pg\
+=\"wget\"; $flag=\"-O\";$arg=\"--tries=2 --connect\
+-timeout=10 $wget_arg\";}\n    elsif  (&pg_is_inst\
+alled    (\"curl\")){$pg=\"curl\"; $flag=\"-o\";$a\
+rg=$curl_arg;}\n    else\n      {\n	printf stderr \
+\"\\nERROR: No pg for remote file fetching [wget o\
+r curl][FATAL]\\n\";\n	exit ($EXIT_FAILURE);\n    \
+  }\n    \n    \n    if (-e $file){unlink($file);}\
+\n    $exit=system \"$pg $cmd $flag$file $arg\";\n\
+    return $exit;\n  }\n\nsub pg_is_installed\n  {\
+\n    my ($p, $dir)=(@_);\n    my ($r,$m, $ret);\n\
+    my ($supported, $language, $compil);\n    \n  \
+\n    if ( $PG{$p})\n      {\n	$language=$PG{$p}{l\
+anguage2};\n	$compil=$PG{$language}{compiler};\n  \
+    }\n    \n    if ( $compil eq \"CPAN\")\n      \
+{\n	if ( system (\"perl -M$p -e 1\")==$EXIT_SUCCES\
+S){$ret=1;}\n	else {$ret=0;}\n      }\n    elsif (\
+$dir)\n      {\n	if (-e \"$dir/$p\" || -e \"$dir/$\
+p\\.exe\"){$ret=1;}\n	else {$ret=0;}\n      }\n   \
+ elsif (-e \"$PLUGINS_DIR/$p\" || -e \"$PLUGINS_DI\
+R/$p.exe\"){$ret=1;}\n    else\n      {\n	$r=`whic\
+h $p 2>/dev/null`;\n	if ($r eq \"\"){$ret=0;}\n	el\
+se {$ret=1;}\n      }\n   \n    return $ret;\n  }\\
+nsub install\n  {\n    my ($new_bin)=(@_);\n    my\
+ ($copied, $report);\n\n    \n    if (!$ROOT_INSTA\
+LL)\n      {\n	\n	if (-e \"$BIN/t_coffee\"){`$CP $\
+BIN/t_coffee $INSTALL_DIR`};\n	`cp $BIN/* $PLUGINS\
+_DIR`;\n	$copied=1;\n      }\n    else\n      {\n	\
+$copied=&root_run (\"You must be root to finalize \
+the installation\", \"$CP $BIN/* $INSTALL_DIR $SIL\
+ENT\");\n      }\n    \n     \n  if ( !$copied)\n \
+   {\n      $report=\"*!!!!!! Installation unsucce\
+sful. The executables have been left in $BASE/bin\\
+\n\";\n    }\n  elsif ( $copied && $ROOT)\n    {\n\
+      $report=\"*------ Installation succesful. Yo\
+ur executables have been copied in $new_bin and ar\
+e on your PATH\\n\";\n    }\n  elsif ( $copied && \
+!$ROOT)\n    {\n      $report= \"*!!!!!! T-Coffee \
+and associated packages have been copied in: $new_\
+bin\\n\";\n      $report.=\"*!!!!!! This address i\
+s NOT in your PATH sytem variable\\n\";\n      $re\
+port.=\"*!!!!!! You can do so by adding the follow\
+ing line in your ~/.bashrc file:\\n\";\n      $rep\
+ort.=\"*!!!!!! export PATH=$new_bin:\\$PATH\\n\";\\
+n    }\n  return $report;\n}\n\nsub sign_license_n\
+i\n  {\n    my $F=new FileHandle;\n    open ($F, \\
+"license.txt\");\n    while (<$F>)\n      {\n	prin\
+t \"$_\";\n      }\n    close ($F);\n    \n    ret\
+urn;\n  }\n\nsub install_pg\n  {\n    my ($pg)=(@_\
+);\n    my ($report, $previous, $language, $compil\
+er, $return);\n    \n    if (!$PG{$pg}{install}){r\
+eturn 1;}\n    \n    $previous=&pg_is_installed ($\
+pg);\n    \n    if ($PG{$pg}{update_action} eq \"n\
+o_update\" && $previous)\n      {\n	$PG{$pg}{old}=\
+1;\n	$PG{$pg}{new}=0;\n	$return=1;\n      }\n    e\
+lse\n      {\n	$PG{$pg}{old}=$previous;\n	\n	if ($\
+PG{$pg} {language2} eq \"Perl\"){&install_perl_pac\
+kage ($pg);}\n	elsif ($BINARIES_ONLY && &install_b\
+inary_package ($pg)){$PG{$pg}{from_binary}=1;}\n	e\
+lsif (&install_source_package ($pg)){;}\n	else \n	\
+  {\n	    \n	    if (!&supported_os($OS))\n	      \
+{\n		print \"!!!!!!!! $pg compilation failed, bina\
+ry unsupported for $OS\\n\"; \n	      }\n	    elsi\
+f (!($PG{$pg}{from_binary}=&install_binary_package\
+ ($pg)))\n	      {\n		print \"!!!!!!!! $pg compila\
+tion and  binary installation failed\\n\";\n	     \
+ }\n	  }\n	$PG{$pg}{new}=$return=&pg_is_installed \
+($pg,$BIN);\n      }\n\n    \n    return $return;\\
+n  }\nsub install_perl_package\n  {\n    my ($pg)=\
+(@_);\n    my ($report, $language, $compiler);\n  \
+  \n    $language=$PG{$pg} {language2};\n    $comp\
+iler=$PG{$language}{compiler};\n    \n    if (!&pg\
+_is_installed ($pg))\n      {\n	if ( $OS eq \"wind\
+ows\"){`perl -M$compiler -e 'install $pg'`;}\n	els\
+if ( $ROOT eq \"sudo\"){system (\"sudo perl -M$com\
+piler -e 'install $pg'\");}\n	else {system (\"su r\
+oot -c perl -M$compiler -e 'install $pg'\");}\n   \
+   }\n    return &pg_is_installed ($pg);\n  }\n\n\\
+n\nsub install_source_package\n  {\n    my ($pg)=(\
+@_);\n    my ($report, $download, $arguments, $lan\
+guage, $address, $name, $ext, $main_dir, $distrib)\
+;\n    my $wget_tmp=\"$TMP/wget.tmp\";\n    my (@f\
+l);\n    if ( -e \"$BIN/$pg\" || -e \"$BIN/$pg.exe\
+\"){return 1;}\n    \n    #\n    # check if the mo\
+dule exists in the repository cache \n    #\n	if( \
+repo_load($pg) ) {\n		return 1;\n	}\n    \n    if \
+($pg eq \"t_coffee\")  {return   &install_t_coffee\
+ ($pg);}\n    elsif ($pg eq \"TMalign\"){return   \
+&install_TMalign ($pg);}\n    \n    chdir $DISTRIB\
+UTIONS;\n    \n    $download=$PG{$pg}{source};\n  \
+  \n    if (($download =~/tgz/))\n      {\n	($addr\
+ess,$name,$ext)=($download=~/(.+\\/)([^\\/]+)(\\.t\
+gz).*/);\n      }\n    elsif (($download=~/tar\\.g\
+z/))\n      {\n	($address,$name,$ext)=($download=~\
+/(.+\\/)([^\\/]+)(\\.tar\\.gz).*/);\n      }\n    \
+elsif (($download=~/tar/))\n      {\n	($address,$n\
+ame,$ext)=($download=~/(.+\\/)([^\\/]+)(\\.tar).*/\
+);\n      }\n    else\n      {\n	($address,$name)=\
+($download=~/(.+\\/)([^\\/]+)/);\n	$ext=\"\";\n   \
+   }\n    $distrib=\"$name$ext\";\n    \n    if ( \
+!-d $pg){mkdir $pg;}\n    chdir $pg;\n   \n    #ge\
+t the distribution if available\n    if ( -e \"$DO\
+WNLOAD_DIR/$distrib\")\n      {\n	`$CP $DOWNLOAD_D\
+IR/$distrib .`;\n      }\n    #UNTAR and Prepare e\
+verything\n    if (!-e \"$name.tar\" && !-e \"$nam\
+e\")\n      {\n	&check_rm ($wget_tmp);\n	print \"\\
+\n------- Downloading/Installing $pg\\n\";\n	\n	if\
+ (!-e $distrib && &url2file (\"$download\", \"$wge\
+t_tmp\")==$EXIT_SUCCESS)\n	  {\n	    \n	    `mv $w\
+get_tmp $distrib`;\n	    `$CP $distrib $DOWNLOAD_D\
+IR/`;\n	  }\n\n	if (!-e $distrib)\n	  {\n	    prin\
+t \"!!!!!!! Download of $pg distribution failed\\n\
+\";\n	    print \"!!!!!!! Check Address: $PG{$pg}{\
+source}\\n\";\n	    return 0;\n	  }\n	print \"\\n-\
+------ unzipping/untaring $name\\n\";\n	if (($ext \
+=~/z/))\n	  { \n	    &flush_command (\"gunzip $nam\
+e$ext\");\n	    \n	  }\n	if (($ext =~/tar/) || ($e\
+xt =~/tgz/))\n	  {\n	    &flush_command(\"tar -xvf\
+ $name.tar\");\n	  }\n      }\n    #Guess and ente\
+r the distribution directory\n    @fl=ls($p);\n   \
+ foreach my $f (@fl)\n      {\n	if (-d $f)\n	  {\n\
+	    $main_dir=$f;\n	  }\n      }\n    if (-d $mai\
+n_dir)\n	  \n      {\n	chdir $main_dir;}\n    else\
+\n      {\n	print \"Error: $main_dir does not exis\
+t\";\n      }\n    print \"\\n------- Compiling/In\
+stalling $pg\\n\";\n    `make clean $SILENT`;\n   \
+ \n    \n    #\n    # SAP module\n    #\n    if ($\
+pg eq \"sap\")\n      {\n	if (-e \"./configure\")\\
+n	  {\n	    #new sap distribution\n	    if ($OS eq\
+ \"macosx\")\n	      {\n		&replace_line_in_file (\\
+"./src/galloc.h\", \"malloc.h\",  \"\");\n		&repla\
+ce_line_in_file (\"./src/pdbprot.h\", \"malloc.h\"\
+, \"\");\n		&replace_line_in_file (\"./src/pdbprot\
+.c\", \"malloc.h\", \"\");\n	      }\n	    \n	    \
+&flush_command (\"./configure\");\n	    &flush_com\
+mand (\"make clean\");\n	    &flush_command (\"mak\
+e\");\n	    &check_cp (\"./src/$pg\", \"$BIN\");\n\
+	    repo_store(\"./src/$pg\");\n	  }\n	else\n	  {\
+\n	    #old style distribution\n	    `rm *.o sap  \
+sap.exe ./util/aa/*.o  ./util/wt/.o $SILENT`;\n	  \
+  &flush_command (\"make $arguments sap\");\n	    \
+&check_cp ($pg, \"$BIN\");\n	    repo_store($pg);\\
+n	  }\n      }\n    \n    #\n    # CLUSTALW2 modul\
+e\n    #\n    elsif ($pg eq \"clustalw2\")\n      \
+{\n	&flush_command(\"./configure\");\n	&flush_comm\
+and(\"make $arguments\");\n	&check_cp (\"./src/$pg\
+\", \"$BIN\");\n	repo_store(\"./src/$pg\");\n     \
+ }\n    \n    #\n    # FSA module\n    # \n    els\
+if ($pg eq \"fsa\")\n      {\n	&flush_command(\"./\
+configure --prefix=$BIN\");\n	&flush_command(\"mak\
+e $arguments\");\n	&flush_command (\"make install\\
+");\n\n	repo_store(\"fsa\", \"$BIN/bin\");\n	`mv $\
+BIN/bin/* $BIN`;\n	`rmdir $BIN/bin`;\n      }\n   \
+ \n    #\n    # CLUSTALW module\n    #\n    elsif \
+($pg eq \"clustalw\")\n      {\n	&flush_command(\"\
+make $arguments clustalw\");\n	`$CP $pg $BIN $SILE\
+NT`;\n	repo_store($pg);\n      }\n    \n    #\n   \
+ # MAFFT module\n    #\n    elsif ($pg eq \"mafft\\
+")\n      {\n	my $base=cwd();\n	my $c;\n	\n	#compi\
+le core\n	mkpath (\"./mafft/bin\");\n	mkpath (\"./\
+mafft/lib\");\n	chdir \"$base/core\";\n	`make clea\
+n $SILENT`;\n	&flush_command (\"make $arguments\")\
+;\n	&flush_command (\"make install LIBDIR=../mafft\
+/lib BINDIR=../mafft/bin\");\n	\n	#compile extensi\
+on\n	chdir \"$base/extensions\";\n	`make clean $SI\
+LENT`;\n	&flush_command (\"make $arguments\");\n	&\
+flush_command (\"make install LIBDIR=../mafft/lib \
+BINDIR=../mafft/bin\");\n	\n	#put everything in ma\
+fft and copy the compiled stuff in bin\n	chdir \"$\
+base\";\n	if ($ROOT_INSTALL)\n	  {\n	    &root_run\
+ (\"You Must be Root to Install MAFFT\\n\", \"mkdi\
+r /usr/local/mafft/;$CP mafft/lib/* /usr/local/maf\
+ft;$CP mafft/lib/mafft* /usr/local/bin ;$CP mafft/\
+bin/mafft /usr/local/bin/; \");\n	  }\n	else\n	  {\
+\n	    `$CP mafft/lib/*  $BIN`;\n	    `$CP mafft/b\
+in/mafft  $BIN`;\n	  }\n	`tar -cvf mafft.tar mafft\
+`;\n	`gzip mafft.tar`;\n	`mv mafft.tar.gz $BIN`;\n\
+	\n	repo_store(\"mafft/bin/mafft\", \"mafft/lib/\"\
+, \"$BIN/mafft.tar.gz\");\n      }\n      \n    #\\
+n    # DIALIGN-TX module\n    #\n    elsif ( $pg e\
+q \"dialign-tx\" )\n      {\n	my $f;\n	my $base=cw\
+d();\n\n	chdir \"./source\";\n	if ($OS eq \"macosx\
+\"){&flush_command (\"cp makefile.MAC_OS makefile\\
+");}\n\n	&flush_command (\" make CPPFLAGS='-O3 -fu\
+nroll-loops' all\");\n	\n	chdir \"..\";\n	&check_c\
+p (\"./source/$pg\", \"$BIN\");\n	repo_store(\"./s\
+ource/$pg\");\n      }\n      \n    #\n    # DIALI\
+GN-T module \n    # (is the same as dialign-tx, bu\
+t it is mantained for backward name compatibility \
+with tcoffee)\n    #\n    elsif ( $pg eq \"dialign\
+-t\" )\n      {\n	my $f;\n	my $base=cwd();\n\n	chd\
+ir \"./source\";\n	if ($OS eq \"macosx\"){&flush_c\
+ommand (\"cp makefile.MAC_OS makefile\");}\n\n	&fl\
+ush_command (\" make CPPFLAGS='-O3 -funroll-loops'\
+ all\");\n	\n	chdir \"..\";\n	&check_cp (\"./sourc\
+e/dialign-tx\", \"$BIN/dialign-t\");\n	repo_store(\
+\"$BIN/dialign-t\");	\n      }      \n      \n    \
+#\n    # POA module\n    #\n    elsif ($pg eq \"po\
+a\")\n      {\n	&flush_command (\"make $arguments \
+poa\");\n	&check_cp (\"$pg\", \"$BIN\");\n	repo_st\
+ore(\"$pg\");\n      }\n     \n     \n    #\n    #\
+ PROBCONS module\n    #\n    elsif ( $pg eq \"prob\
+cons\")\n      {\n	&add_C_libraries(\"./Probabilis\
+ticModel.h\", \"list\", \"cstring\");\n	\n	`rm *.e\
+xe $SILENT`;\n	&flush_command (\"make $arguments p\
+robcons\");\n	&check_cp(\"$pg\", \"$BIN/$pg\");\n	\
+repo_store(\"$pg\");\n      }\n      \n    #\n    \
+# PROBCONS RNA module\n    #\n    elsif ( $pg eq \\
+"probconsRNA\")\n      {\n	&add_C_libraries(\"./Pr\
+obabilisticModel.h\", \"list\", \"cstring\");\n	&a\
+dd_C_libraries(\"./Main.cc\", \"iomanip\", \"cstri\
+ng\",\"climits\");\n	`rm *.exe $SILENT`;\n	&flush_\
+command (\"make $arguments probcons\");\n	&check_c\
+p(\"probcons\", \"$BIN/$pg\");\n	repo_store(\"$BIN\
+/$pg\");\n      }\n\n	#\n	# MUSCLE module\n	#\n   \
+ elsif (  $pg eq \"muscle\")\n      {	\n	`rm *.o m\
+uscle muscle.exe $SILENT`;\n	if ($OS eq \"macosx\"\
+ || $OS eq \"linux\")\n	  {\n	    &replace_line_in\
+_file (\"./Makefile\", \"LDLIBS = -lm -static\",  \
+\"LDLIBS = -lm\");\n	  }\n	elsif ($OS eq \"windows\
+\")\n	  {\n	    &replace_line_in_file (\"./intmath\
+.cpp\",  \"double log2e\",      \"double cedric_lo\
+g\");\n	    &replace_line_in_file (\"./intmath.cpp\
+\",  \"double log2\",       \"double log_notuse\")\
+;\n	    &replace_line_in_file (\"./intmath.cpp\", \
+ \"double cedric_log\", \"double log2e\");\n	  }\n\
+	&flush_command (\"make $arguments all\");\n	&chec\
+k_cp(\"$pg\", \"$BIN\");\n	repo_store(\"$pg\");	\n\
+      }\n      \n     #\n     # MUS4 module\n     \
+#\n     elsif (  $pg eq \"mus4\")\n      {\n	`rm *\
+.o muscle muscle.exe $SILENT`;\n	&flush_command (\\
+"./mk\");\n	&check_cp(\"$pg\", \"$BIN\");\n	repo_s\
+tore(\"$pg\");	\n      }\n      \n    #\n    # PCM\
+A module\n    #\n    elsif ( $pg eq \"pcma\")\n   \
+   {\n	if ($OS eq \"macosx\")\n	  {\n	    &replace\
+_line_in_file (\"./alcomp2.c\", \"malloc.h\",  \"\\
+");\n	  }\n	&flush_command (\"make $arguments pcma\
+\");\n	&check_cp(\"$pg\", \"$BIN\");\n	repo_store(\
+\"$pg\");	\n      }\n      \n    #\n    # KALIGN m\
+odule\n    #\n    elsif ($pg eq \"kalign\")\n     \
+ {\n	&flush_command (\"./configure\");\n	&flush_co\
+mmand(\"make $arguments\");\n	&check_cp (\"$pg\",$\
+BIN);\n	repo_store(\"$pg\");	\n      }\n      \n  \
+  #\n    # AMAP module\n    #\n    elsif ( $pg eq \
+\"amap\")\n      {\n	&add_C_libraries(\"./Amap.cc\\
+", \"iomanip\", \"cstring\",\"climits\");	\n	`make\
+ clean $SILENT`;\n	&flush_command (\"make $argumen\
+ts all\");\n	&check_cp (\"$pg\", $BIN);\n	repo_sto\
+re(\"$pg\");	\n      }\n      \n    #\n    # PRODA\
+ module\n    #\n    elsif ( $pg eq \"proda\")\n   \
+   {\n	&add_C_libraries(\"AlignedFragment.h\", \"v\
+ector\", \"iostream\", \"cstring\",\"cstdlib\");\n\
+	&add_C_libraries(\"Main.cc\", \"vector\", \"climi\
+ts\");	\n	&add_C_libraries(\"Sequence.cc\", \"stdl\
+ib.h\", \"cstdio\");	\n	&flush_command (\"make $ar\
+guments all\");\n	&check_cp (\"$pg\", $BIN);\n	rep\
+o_store(\"$pg\");	\n      }\n      \n    #\n    # \
+PRANK module\n    #\n    elsif ( $pg eq \"prank\")\
+\n      {\n	&flush_command (\"make $arguments all\\
+");\n	&check_cp (\"$pg\", $BIN);\n	repo_store(\"$p\
+g\");	\n      }\n      \n    #\n    # !!!! MUSTANG\
+ module\n    #\n     elsif ( $pg eq \"mustang\")\n\
+      {\n	&flush_command (\"rm ./bin/*\");\n	&flus\
+h_command (\"make $arguments all\");\n\n	if ( $OS=\
+~/windows/){&flush_command(\"cp ./bin/* $BIN/musta\
+ng.exe\");}\n	else {&flush_command(\"cp ./bin/* $B\
+IN/mustang\");}\n	\n	repo_store(\"$BIN/mustang\");\
+\n      }\n\n	#\n	# RNAplfold module\n	#\n    elsi\
+f ( $pg eq \"RNAplfold\")\n      {\n	&flush_comman\
+d(\"./configure\");\n	&flush_command (\"make $argu\
+ments all\");\n	&check_cp(\"./Progs/RNAplfold\", \\
+"$BIN\");\n	&check_cp(\"./Progs/RNAalifold\", \"$B\
+IN\");\n	&check_cp(\"./Progs/RNAfold\", \"$BIN\");\
+\n	\n	repo_store(\"./Progs/RNAplfold\", \"./Progs/\
+RNAalifold\", \"./Progs/RNAfold\");\n      }\n    \
+  \n    #\n    # !!! RETREE module\n    #\n    els\
+if ( $pg eq \"retree\")\n      {\n	chdir \"src\";\\
+n	&flush_command (\"make $arguments all\");\n	&flu\
+sh_command (\"make put\");\n	system \"cp ../exe/* \
+$BIN\";\n	\n	repo_store(\"retree\", \"../exe\");\n\
+      }\n	\n    chdir $CDIR;\n    return &pg_is_in\
+stalled ($pg, $BIN);\n  }\n\nsub install_t_coffee\\
+n  {\n    my ($pg)=(@_);\n    my ($report,$cflags,\
+ $arguments, $language, $compiler) ;\n    #1-Insta\
+ll T-Coffee\n    chdir \"t_coffee_source\";\n    &\
+flush_command (\"make clean\");\n    print \"\\n--\
+----- Compiling T-Coffee\\n\";\n    $language=$PG{\
+$pg} {language2};\n    $arguments=$PG{$language}{a\
+rguments};\n    if (!($arguments =~/CFLAGS/)){$arg\
+uments .= \" CFLAGS=-O2 \";}\n\n    if ( $CC ne \"\
+\"){&flush_command (\"make -i $arguments t_coffee\\
+");}\n    &check_cp ($pg, $BIN);\n    \n    chdir \
+$CDIR;\n    return &pg_is_installed ($pg, $BIN);\n\
+  }\nsub install_TMalign\n  {\n    my ($pg)=(@_);\\
+n    my $report;\n    chdir \"t_coffee_source\";\n\
+    print \"\\n------- Compiling TMalign\\n\";\n  \
+  `rm TMalign TMalign.exe $SILENT`;\n    if ( $FC \
+ne \"\"){&flush_command (\"make -i $PG{Fortran}{ar\
+guments} TMalign\");}\n    &check_cp ($pg, $BIN);\\
+n    repo_store($pg);\n\n    if ( !-e \"$BIN/$pg\"\
+ && pg_has_binary_distrib ($pg))\n      {\n	print \
+\"!!!!!!! Compilation of $pg impossible. Will try \
+to install from binary\\n\";\n	return &install_bin\
+ary_package ($pg);\n      }\n    chdir $CDIR;\n   \
+ return &pg_is_installed ($pg, $BIN);\n  }\n\nsub \
+pg_has_binary_distrib\n  {\n    my ($pg)=(@_);\n  \
+  if ($PG{$pg}{windows}){return 1;}\n    elsif ($P\
+G{$pg}{osx}){return 1;}\n    elsif ($PG{$pg}{linux\
+}){return 1;}\n    return 0;\n  }\nsub install_bin\
+ary_package\n  {\n    my ($pg)=(@_);\n    my ($bas\
+e,$report,$name, $download, $arguments, $language,\
+ $dir);\n    my $isdir;\n    &input_os();\n    \n \
+   if (!&supported_os($OS)){return 0;}\n    if ( $\
+PG{$pg}{binary}){$name=$PG{$pg}{binary};}\n    els\
+e \n      {\n	$name=$pg;\n	if ( $OS eq \"windows\"\
+){$name.=\".exe\";}\n      }\n    \n    $download=\
+\"$WEB_BASE/Packages/Binaries/$OS/$name\";\n    \n\
+    $base=cwd();\n    chdir $TMP;\n    \n    if (!\
+-e $name)\n      {\n	`rm x $SILENT`;\n	if ( url2fi\
+le(\"$download\",\"x\")==$EXIT_SUCCESS)\n	  {\n	  \
+  `mv x $name`;\n	  }\n      }\n    \n    if (!-e \
+$name)\n      {\n	print \"!!!!!!! $PG{$pg}{dname}:\
+ Download of $pg binary failed\\n\";\n	print \"!!!\
+!!!! $PG{$pg}{dname}: Check Address: $download\\n\\
+";\n	return 0;\n      }\n    print \"\\n------- In\
+stalling $pg\\n\";\n    \n    if ($name =~/tar\\.g\
+z/)\n      {\n	`gunzip  $name`;\n	`tar -xvf $pg.ta\
+r`;\n	chdir $pg;\n	if ( $pg eq \"mafft\")\n	  {\n	\
+    if ($ROOT_INSTALL)\n	      {\n		&root_run (\"Y\
+ou Must be Roor to Install MAFFT\\n\", \"$CP mafft\
+/bin/* /usr/local/mafft;mkdir /usr/local/mafft/; $\
+CP mafft/lib/* /usr/local/bin/\");\n	      }\n	   \
+ else\n	      {\n		`$CP $TMP/$pg/bin/* $BIN $SILEN\
+T`;\n		`$CP $TMP/$pg/lib/* $BIN $SILENT`;\n	      \
+}\n	  }\n	else\n	  {\n	    if (-e \"$TMP/$pg/data\\
+"){`$CP $TMP/$pg/data/* $TCM $SILENT`;}\n	    if (\
+!($pg=~/\\*/)){`rm -rf $pg`;}\n	  }\n      }\n    \
+else\n      {\n	&check_cp (\"$pg\", \"$BIN\");\n	`\
+chmod u+x $BIN/$pg`; \n	unlink ($pg);\n      }\n  \
+  chdir $base;\n    $PG{$pg}{from_binary}=1;\n    \
+return &pg_is_installed ($pg, $BIN);\n  }\n\nsub a\
+dd_dir \n  {\n    my $dir=@_[0];\n    \n    if (!-\
+e $dir && !-d $dir)\n      {\n	my @l;\n	umask (000\
+0);\n	@l=mkpath ($dir,{mode => 0777});\n	\n      }\
+\n    else\n      {\n	return 0;\n      }\n  }\nsub\
+ check_rm \n  {\n    my ($file)=(@_);\n    \n    i\
+f ( -e $file)\n      {\n	return unlink($file);\n  \
+    }\n    return 0;\n  }\nsub check_cp\n  {\n    \
+my ($from, $to)=(@_);\n    if ( !-e $from && -e \"\
+$from\\.exe\"){$from=\"$from\\.exe\";}\n    if ( !\
+-e $from){return 0;}\n        \n    `$CP $from $to\
+`;\n    return 1;\n  }\n\nsub repo_store \n{\n   #\
+ check that all required data are available\n   if\
+( $REPO_ROOT eq \"\" ) { return; }\n\n\n    # extr\
+act the package name from the specified path\n    \
+my $pg =`basename $_[0]`;\n    chomp($pg);\n	\n   \
+ my $VER = $PG{$pg}{version};\n    my $CACHE = \"$\
+REPO_ROOT/$pg/$VER/$OSNAME-$OSARCH\"; \n    \n    \
+print \"-------- Storing package: \\\"$pg\\\" to p\
+ath: $CACHE\\n\";\n    \n    # clean the cache pat\
+h if exists and create it again\n    `rm -rf $CACH\
+E`;\n    `mkdir -p $CACHE`;\n    \n 	for my $path \
+(@_) {\n\n	    # check if it is a single file \n	 \
+	if( -f $path ) {\n	    	`cp $path $CACHE`;\n		}\n\
+		# .. or a directory, in this case copy all the c\
+ontent \n		elsif( -d $path ) {\n			opendir(IMD, $p\
+ath);\n			my @thefiles= readdir(IMD);\n			closedir\
+(IMD);\n			\n			for my $_file (@thefiles) {\n				i\
+f( $_file ne \".\" && $_file ne \"..\") {\n	    		\
+	`cp $path/$_file $CACHE`;\n				}\n			}\n		} \n	}	\
+   \n    \n	\n}   \n\nsub repo_load \n{\n    my ($\
+pg)=(@_);\n\n    # check that all required data ar\
+e available\n    if( $REPO_ROOT eq \"\" ) { return\
+ 0; }\n\n    my $VER = $PG{$pg}{version};\n    my \
+$CACHE = \"$REPO_ROOT/$pg/$VER/$OSNAME-$OSARCH\"; \
+\n    if( !-e \"$CACHE/$pg\" ) {\n   	 	print \"--\
+------ Module \\\"$pg\\\" NOT found on repository \
+cache.\\n\";\n    	return 0;\n    }\n    \n    pri\
+nt \"-------- Module \\\"$pg\\\" found on reposito\
+ry cache. Using copy on path: $CACHE\\n\";\n    `c\
+p $CACHE/* $BIN`;\n    return 1;\n}\n\nsub check_f\
+ile_list_exists \n  {\n    my ($base, @flist)=(@_)\
+;\n    my $f;\n\n    foreach $f (@flist)\n      {\\
+n	if ( !-e \"$base/$f\"){return 0;}\n      }\n    \
+return 1;\n  }\nsub ls\n  {\n    my $f=@_[0];\n   \
+ my @fl;\n    chomp(@fl=`ls -1 $f`);\n    return @\
+fl;\n  }\nsub flush_command\n  {\n    my $command=\
+@_[0];\n    my $F=new FileHandle;\n    open ($F, \\
+"$command|\");\n    while (<$F>){print \"    --- $\
+_\";}\n    close ($F);\n  }    \n\nsub input_insta\
+llation_directory\n  {\n    my $dir=@_[0];\n    my\
+ $new;\n    \n    print \"------- The current inst\
+allation directory is: [$dir]\\n\";\n    print \"?\
+?????? Return to keep the default or new value:\";\
+\n   \n    if ($NO_QUESTION==0)\n      {\n	chomp (\
+$new=<stdin>);\n	while ( $new ne \"\" && !input_ye\
+s (\"You have entered $new. Is this correct? ([y]/\
+n):\"))\n	  {\n	    print \"???????New installatio\
+n directory:\";\n	    chomp ($new=<stdin>);\n	  }\\
+n	$dir=($new eq \"\")?$dir:$new;\n	$dir=~s/\\/$//;\
+\n      }\n    \n    if ( -d $dir){return $dir;}\n\
+    elsif (&root_run (\"You must be root to create\
+ $dir\",\"mkdir $dir\")==$EXIT_SUCCESS){return $di\
+r;}\n    else\n      {\n	print \"!!!!!!! $dir coul\
+d not be created\\n\";\n	if ( $NO_QUESTION)\n	  {\\
+n	    return \"\";\n	  }\n	elsif ( &input_yes (\"?\
+?????? Do you want to provide a new directory([y]/\
+n)?:\"))\n	  {\n	    return input_installation_dir\
+ectory ($dir);\n	  }\n	else\n	  {\n	    return \"\\
+";\n	  }\n      }\n    \n  }\nsub input_yes\n  {\n\
+    my $question =@_[0];\n    my $answer;\n\n    i\
+f ($NO_QUESTION==1){return 1;}\n    \n    if ($que\
+stion eq \"\"){$question=\"??????? Do you wish to \
+proceed ([y]/n)?:\";}\n    print $question;\n    c\
+homp($answer=lc(<STDIN>));\n    if (($answer=~/^y/\
+) || $answer eq \"\"){return 1;}\n    elsif ( ($an\
+swer=~/^n/)){return 0;}\n    else\n      {\n	retur\
+n input_yes($question);\n      }\n  }\nsub root_ru\
+n\n  {\n    my ($txt, $cmd)=(@_);\n    \n    if ( \
+system ($cmd)==$EXIT_SUCCESS){return $EXIT_SUCCESS\
+;}\n    else \n      {\n	print \"------- $txt\\n\"\
+;\n	if ( $ROOT eq \"sudo\"){return system (\"sudo \
+$cmd\");}\n	else {return system (\"su root -c \\\"\
+$cmd\\\"\");}\n      }\n  }\nsub get_root\n  {\n  \
+  if (&pg_is_installed (\"sudo\")){return \"sudo\"\
+;}\n    else {return \"su\";}\n  }\n\nsub get_os\n\
+  {\n    my $raw_os=`uname`;\n    my $os;\n\n    $\
+raw_os=lc ($raw_os);\n    \n    if ($raw_os =~/cyg\
+win/){$os=\"windows\";}\n    elsif ($raw_os =~/lin\
+ux/){$os=\"linux\";}\n    elsif ($raw_os =~/osx/){\
+$os=\"macosx\";}\n    elsif ($raw_os =~/darwin/){$\
+os=\"macosx\";}\n    else\n      {\n	$os=$raw_os;\\
+n      }\n    return $os;\n  }\nsub input_os\n  {\\
+n    my $answer;\n    if ($OS) {return $OS;}\n    \
+\n    print \"??????? which os do you use: [w]indo\
+ws, [l]inux, [m]acosx:?\";\n    $answer=lc(<STDIN>\
+);\n\n    if (($answer=~/^m/)){$OS=\"macosx\";}\n \
+   elsif ( ($answer=~/^w/)){$OS=\"windows\";}\n   \
+ elsif ( ($answer=~/^linux/)){$OS=\"linux\";}\n   \
+ \n    else\n      {\n	return &input_os();\n      \
+}\n    return $OS;\n  }\n\nsub supported_os\n  {\n\
+    my ($os)=(@_[0]);\n    return $SUPPORTED_OS{$o\
+s};\n  }\n    \n    \n\n\nsub update_tclinkdb \n  \
+{\n    my $file =@_[0];\n    my $name;\n    my $F=\
+new FileHandle;\n    my ($download, $address, $nam\
+e, $l, $db);\n    \n    if ( $file eq \"update\"){\
+$file=$TCLINKDB_ADDRESS;}\n    \n    if ( $file =~\
+/http:\\/\\// || $file =~/ftp:\\/\\//)\n      {\n	\
+($address, $name)=($download=~/(.*)\\/([^\\/]+)$/)\
+;\n	`rm x $SILENT`;\n	if (&url2file ($file,\"x\")=\
+=$EXIT_SUCCESS)\n	  {\n	    print \"------- Sussce\
+ssful upload of $name\";\n	    `mv x $name`;\n	   \
+ $file=$name;\n	  }\n      }\n    open ($F, \"$fil\
+e\");\n    while (<$F>)\n      {\n	my $l=$_;\n	if \
+(($l =~/^\\/\\//) || ($db=~/^#/)){;}\n	elsif ( !($\
+l =~/\\w/)){;}\n	else\n	  {\n	    my @v=split (/\\\
+s+/, $l);\n	    if ( $l=~/^MODE/)\n	      {\n		$MO\
+DE{$v[1]}{$v[2]}=$v[3];\n	      }\n	    elsif ($l=\
+~/^PG/)\n	      {\n		$PG{$v[1]}{$v[2]}=$v[3];\n	  \
+    }\n	  }\n      }\n    close ($F);\n    &post_p\
+rocess_PG();\n    return;\n  }\n\n\n\nsub initiali\
+ze_PG\n  {\n\n$PG{\"t_coffee\"}{\"4_TCOFFEE\"}=\"T\
+COFFEE\";\n$PG{\"t_coffee\"}{\"type\"}=\"sequence_\
+multiple_aligner\";\n$PG{\"t_coffee\"}{\"ADDRESS\"\
+}=\"http://www.tcoffee.org\";\n$PG{\"t_coffee\"}{\\
+"language\"}=\"C\";\n$PG{\"t_coffee\"}{\"language2\
+\"}=\"C\";\n$PG{\"t_coffee\"}{\"source\"}=\"http:/\
+/www.tcoffee.org/Packages/T-COFFEE_distribution.ta\
+r.gz\";\n$PG{\"t_coffee\"}{\"update_action\"}=\"al\
+ways\";\n$PG{\"t_coffee\"}{\"mode\"}=\"tcoffee,mco\
+ffee,rcoffee,expresso,3dcoffee\";\n$PG{\"clustalw2\
+\"}{\"4_TCOFFEE\"}=\"CLUSTALW2\";\n$PG{\"clustalw2\
 \"}{\"type\"}=\"sequence_multiple_aligner\";\n$PG{\
-\"fsa\"}{\"ADDRESS\"}=\"http://fsa.sourceforge.net\
-/\";\n$PG{\"fsa\"}{\"language\"}=\"C++\";\n$PG{\"f\
-sa\"}{\"language2\"}=\"CXX\";\n$PG{\"fsa\"}{\"sour\
-ce\"}=\"http://sourceforge.net/projects/fsa/files/\
-fsa-1.15.3.tar.gz/download/\";\n$PG{\"fsa\"}{\"mod\
-e\"}=\"mcoffee\";\n$PG{\"fsa\"}{\"version\"}=\"1.1\
-5.3\";\n$PG{\"prank\"}{\"4_TCOFFEE\"}=\"PRANK\";\n\
-$PG{\"prank\"}{\"type\"}=\"sequence_multiple_align\
-er\";\n$PG{\"prank\"}{\"ADDRESS\"}=\"http://www.eb\
-i.ac.uk/goldman-srv/prank/\";\n$PG{\"prank\"}{\"la\
-nguage\"}=\"C++\";\n$PG{\"prank\"}{\"language2\"}=\
-\"CXX\";\n$PG{\"prank\"}{\"source\"}=\"http://www.\
-ebi.ac.uk/goldman-srv/prank/src/prank/prank.src.10\
-0303.tgz\";\n$PG{\"prank\"}{\"mode\"}=\"mcoffee\";\
-\n$PG{\"prank\"}{\"version\"}=\"100303\";\n$PG{\"s\
-ap\"}{\"4_TCOFFEE\"}=\"SAP\";\n$PG{\"sap\"}{\"type\
-\"}=\"structure_pairwise_aligner\";\n$PG{\"sap\"}{\
-\"ADDRESS\"}=\"http://mathbio.nimr.mrc.ac.uk/wiki/\
-Software\";\n$PG{\"sap\"}{\"language\"}=\"C\";\n$P\
-G{\"sap\"}{\"language2\"}=\"C\";\n$PG{\"sap\"}{\"s\
-ource\"}=\"http://mathbio.nimr.mrc.ac.uk/download/\
-sap-1.1.1.tar.gz\";\n$PG{\"sap\"}{\"mode\"}=\"expr\
-esso,3dcoffee\";\n$PG{\"sap\"}{\"version\"}=\"1.1.\
-1\";\n$PG{\"TMalign\"}{\"4_TCOFFEE\"}=\"TMALIGN\";\
-\n$PG{\"TMalign\"}{\"type\"}=\"structure_pairwise_\
-aligner\";\n$PG{\"TMalign\"}{\"ADDRESS\"}=\"http:/\
-/zhang.bioinformatics.ku.edu/TM-align/TMalign.f\";\
-\n$PG{\"TMalign\"}{\"language\"}=\"Fortran\";\n$PG\
-{\"TMalign\"}{\"language2\"}=\"Fortran\";\n$PG{\"T\
-Malign\"}{\"source\"}=\"http://zhang.bioinformatic\
-s.ku.edu/TM-align/TMalign.f\";\n$PG{\"TMalign\"}{\\
-"linux\"}=\"http://zhang.bioinformatics.ku.edu/TM-\
-align/TMalign_32.gz\";\n$PG{\"TMalign\"}{\"mode\"}\
-=\"expresso,3dcoffee\";\n$PG{\"TMalign\"}{\"versio\
-n\"}=\"1.0\";\n$PG{\"mustang\"}{\"4_TCOFFEE\"}=\"M\
-USTANG\";\n$PG{\"mustang\"}{\"type\"}=\"structure_\
-pairwise_aligner\";\n$PG{\"mustang\"}{\"ADDRESS\"}\
-=\"http://www.cs.mu.oz.au/~arun/mustang\";\n$PG{\"\
-mustang\"}{\"language\"}=\"C++\";\n$PG{\"mustang\"\
-}{\"language2\"}=\"CXX\";\n$PG{\"mustang\"}{\"sour\
-ce\"}=\"http://ww2.cs.mu.oz.au/~arun/mustang/musta\
-ng_v3.2.1.tgz\";\n$PG{\"mustang\"}{\"mode\"}=\"exp\
-resso,3dcoffee\";\n$PG{\"mustang\"}{\"version\"}=\\
-"3.2.1\";\n$PG{\"lsqman\"}{\"4_TCOFFEE\"}=\"LSQMAN\
-\";\n$PG{\"lsqman\"}{\"type\"}=\"structure_pairwis\
-e_aligner\";\n$PG{\"lsqman\"}{\"ADDRESS\"}=\"empty\
-\";\n$PG{\"lsqman\"}{\"language\"}=\"empty\";\n$PG\
-{\"lsqman\"}{\"language2\"}=\"empty\";\n$PG{\"lsqm\
-an\"}{\"source\"}=\"empty\";\n$PG{\"lsqman\"}{\"up\
-date_action\"}=\"never\";\n$PG{\"lsqman\"}{\"mode\\
-"}=\"expresso,3dcoffee\";\n$PG{\"align_pdb\"}{\"4_\
-TCOFFEE\"}=\"ALIGN_PDB\";\n$PG{\"align_pdb\"}{\"ty\
-pe\"}=\"structure_pairwise_aligner\";\n$PG{\"align\
-_pdb\"}{\"ADDRESS\"}=\"empty\";\n$PG{\"align_pdb\"\
-}{\"language\"}=\"empty\";\n$PG{\"align_pdb\"}{\"l\
-anguage2\"}=\"empty\";\n$PG{\"align_pdb\"}{\"sourc\
-e\"}=\"empty\";\n$PG{\"align_pdb\"}{\"update_actio\
-n\"}=\"never\";\n$PG{\"align_pdb\"}{\"mode\"}=\"ex\
-presso,3dcoffee\";\n$PG{\"fugueali\"}{\"4_TCOFFEE\\
-"}=\"FUGUE\";\n$PG{\"fugueali\"}{\"type\"}=\"struc\
-ture_pairwise_aligner\";\n$PG{\"fugueali\"}{\"ADDR\
-ESS\"}=\"http://www-cryst.bioc.cam.ac.uk/fugue/dow\
-nload.html\";\n$PG{\"fugueali\"}{\"language\"}=\"e\
-mpty\";\n$PG{\"fugueali\"}{\"language2\"}=\"empty\\
-";\n$PG{\"fugueali\"}{\"source\"}=\"empty\";\n$PG{\
-\"fugueali\"}{\"update_action\"}=\"never\";\n$PG{\\
-"fugueali\"}{\"mode\"}=\"expresso,3dcoffee\";\n$PG\
-{\"dalilite.pl\"}{\"4_TCOFFEE\"}=\"DALILITEc\";\n$\
-PG{\"dalilite.pl\"}{\"type\"}=\"structure_pairwise\
-_aligner\";\n$PG{\"dalilite.pl\"}{\"ADDRESS\"}=\"b\
-uilt_in\";\n$PG{\"dalilite.pl\"}{\"ADDRESS2\"}=\"h\
-ttp://www.ebi.ac.uk/Tools/webservices/services/dal\
-ilite\";\n$PG{\"dalilite.pl\"}{\"language\"}=\"Per\
-l\";\n$PG{\"dalilite.pl\"}{\"language2\"}=\"Perl\"\
-;\n$PG{\"dalilite.pl\"}{\"source\"}=\"empty\";\n$P\
-G{\"dalilite.pl\"}{\"update_action\"}=\"never\";\n\
-$PG{\"dalilite.pl\"}{\"mode\"}=\"expresso,3dcoffee\
-\";\n$PG{\"probconsRNA\"}{\"4_TCOFFEE\"}=\"PROBCON\
-SRNA\";\n$PG{\"probconsRNA\"}{\"type\"}=\"RNA_mult\
-iple_aligner\";\n$PG{\"probconsRNA\"}{\"ADDRESS\"}\
-=\"http://probcons.stanford.edu/\";\n$PG{\"probcon\
-sRNA\"}{\"language\"}=\"C++\";\n$PG{\"probconsRNA\\
-"}{\"language2\"}=\"CXX\";\n$PG{\"probconsRNA\"}{\\
-"source\"}=\"http://probcons.stanford.edu/probcons\
-RNA.tar.gz\";\n$PG{\"probconsRNA\"}{\"mode\"}=\"mc\
-offee,rcoffee\";\n$PG{\"probconsRNA\"}{\"version\"\
-}=\"1.0\";\n$PG{\"sfold\"}{\"4_TCOFFEE\"}=\"CONSAN\
-\";\n$PG{\"sfold\"}{\"type\"}=\"RNA_pairwise_align\
-er\";\n$PG{\"sfold\"}{\"ADDRESS\"}=\"http://selab.\
-janelia.org/software/consan/\";\n$PG{\"sfold\"}{\"\
-language\"}=\"empty\";\n$PG{\"sfold\"}{\"language2\
-\"}=\"empty\";\n$PG{\"sfold\"}{\"source\"}=\"empty\
-\";\n$PG{\"sfold\"}{\"update_action\"}=\"never\";\\
-n$PG{\"sfold\"}{\"mode\"}=\"rcoffee\";\n$PG{\"RNAp\
-lfold\"}{\"4_TCOFFEE\"}=\"RNAPLFOLD\";\n$PG{\"RNAp\
-lfold\"}{\"type\"}=\"RNA_secondarystructure_predic\
-tor\";\n$PG{\"RNAplfold\"}{\"ADDRESS\"}=\"http://w\
-ww.tbi.univie.ac.at/~ivo/RNA/\";\n$PG{\"RNAplfold\\
-"}{\"language\"}=\"C\";\n$PG{\"RNAplfold\"}{\"lang\
-uage2\"}=\"C\";\n$PG{\"RNAplfold\"}{\"source\"}=\"\
-http://www.tbi.univie.ac.at/~ivo/RNA/ViennaRNA-1.7\
-.2.tar.gz\";\n$PG{\"RNAplfold\"}{\"mode\"}=\"rcoff\
-ee,\";\n$PG{\"RNAplfold\"}{\"version\"}=\"1.7.2\";\
-\n$PG{\"retree\"}{\"4_TCOFFEE\"}=\"PHYLIP\";\n$PG{\
-\"retree\"}{\"type\"}=\"RNA_secondarystructure_pre\
-dictor\";\n$PG{\"retree\"}{\"ADDRESS\"}=\"http://e\
-volution.gs.washington.edu/phylip/\";\n$PG{\"retre\
-e\"}{\"language\"}=\"C\";\n$PG{\"retree\"}{\"langu\
-age2\"}=\"C\";\n$PG{\"retree\"}{\"source\"}=\"http\
-://evolution.gs.washington.edu/phylip/download/phy\
-lip-3.69.tar.gz\";\n$PG{\"retree\"}{\"mode\"}=\"tr\
-msd,\";\n$PG{\"retree\"}{\"version\"}=\"3.69\";\n$\
-PG{\"hmmtop\"}{\"4_TCOFFEE\"}=\"HMMTOP\";\n$PG{\"h\
-mmtop\"}{\"type\"}=\"protein_secondarystructure_pr\
-edictor\";\n$PG{\"hmmtop\"}{\"ADDRESS\"}=\"www.enz\
-im.hu/hmmtop/\";\n$PG{\"hmmtop\"}{\"language\"}=\"\
-C\";\n$PG{\"hmmtop\"}{\"language2\"}=\"C\";\n$PG{\\
-"hmmtop\"}{\"source\"}=\"empty\";\n$PG{\"hmmtop\"}\
-{\"update_action\"}=\"never\";\n$PG{\"hmmtop\"}{\"\
-mode\"}=\"tcoffee\";\n$PG{\"gorIV\"}{\"4_TCOFFEE\"\
-}=\"GOR4\";\n$PG{\"gorIV\"}{\"type\"}=\"protein_se\
-condarystructure_predictor\";\n$PG{\"gorIV\"}{\"AD\
-DRESS\"}=\"http://mig.jouy.inra.fr/logiciels/gorIV\
-/\";\n$PG{\"gorIV\"}{\"language\"}=\"C\";\n$PG{\"g\
-orIV\"}{\"language2\"}=\"C\";\n$PG{\"gorIV\"}{\"so\
-urce\"}=\"http://mig.jouy.inra.fr/logiciels/gorIV/\
-GOR_IV.tar.gz\";\n$PG{\"gorIV\"}{\"update_action\"\
-}=\"never\";\n$PG{\"gorIV\"}{\"mode\"}=\"tcoffee\"\
-;\n$PG{\"wublast.pl\"}{\"4_TCOFFEE\"}=\"EBIWUBLAST\
-c\";\n$PG{\"wublast.pl\"}{\"type\"}=\"protein_homo\
-logy_predictor\";\n$PG{\"wublast.pl\"}{\"ADDRESS\"\
-}=\"built_in\";\n$PG{\"wublast.pl\"}{\"ADDRESS2\"}\
-=\"http://www.ebi.ac.uk/Tools/webservices/services\
-/wublast\";\n$PG{\"wublast.pl\"}{\"language\"}=\"P\
-erl\";\n$PG{\"wublast.pl\"}{\"language2\"}=\"Perl\\
-";\n$PG{\"wublast.pl\"}{\"source\"}=\"empty\";\n$P\
-G{\"wublast.pl\"}{\"update_action\"}=\"never\";\n$\
-PG{\"wublast.pl\"}{\"mode\"}=\"psicoffee,expresso,\
-accurate\";\n$PG{\"blastpgp.pl\"}{\"4_TCOFFEE\"}=\\
-"EBIBLASTPGPc\";\n$PG{\"blastpgp.pl\"}{\"type\"}=\\
-"protein_homology_predictor\";\n$PG{\"blastpgp.pl\\
-"}{\"ADDRESS\"}=\"built_in\";\n$PG{\"blastpgp.pl\"\
+\"clustalw2\"}{\"ADDRESS\"}=\"http://www.clustal.o\
+rg\";\n$PG{\"clustalw2\"}{\"language\"}=\"C++\";\n\
+$PG{\"clustalw2\"}{\"language2\"}=\"CXX\";\n$PG{\"\
+clustalw2\"}{\"source\"}=\"http://www.clustal.org/\
+download/2.0.10/clustalw-2.0.10-src.tar.gz\";\n$PG\
+{\"clustalw2\"}{\"mode\"}=\"mcoffee,rcoffee\";\n$P\
+G{\"clustalw2\"}{\"version\"}=\"2.0.10\";\n$PG{\"c\
+lustalw\"}{\"4_TCOFFEE\"}=\"CLUSTALW\";\n$PG{\"clu\
+stalw\"}{\"type\"}=\"sequence_multiple_aligner\";\\
+n$PG{\"clustalw\"}{\"ADDRESS\"}=\"http://www.clust\
+al.org\";\n$PG{\"clustalw\"}{\"language\"}=\"C\";\\
+n$PG{\"clustalw\"}{\"language2\"}=\"C\";\n$PG{\"cl\
+ustalw\"}{\"source\"}=\"http://www.clustal.org/dow\
+nload/1.X/ftp-igbmc.u-strasbg.fr/pub/ClustalW/clus\
+talw1.82.UNIX.tar.gz\";\n$PG{\"clustalw\"}{\"mode\\
+"}=\"mcoffee,rcoffee\";\n$PG{\"clustalw\"}{\"versi\
+on\"}=\"1.82\";\n$PG{\"dialign-t\"}{\"4_TCOFFEE\"}\
+=\"DIALIGNT\";\n$PG{\"dialign-t\"}{\"type\"}=\"seq\
+uence_multiple_aligner\";\n$PG{\"dialign-t\"}{\"AD\
+DRESS\"}=\"http://dialign-tx.gobics.de/\";\n$PG{\"\
+dialign-t\"}{\"DIR\"}=\"/usr/share/dialign-tx/\";\\
+n$PG{\"dialign-t\"}{\"language\"}=\"C\";\n$PG{\"di\
+align-t\"}{\"language2\"}=\"C\";\n$PG{\"dialign-t\\
+"}{\"source\"}=\"http://dialign-tx.gobics.de/DIALI\
+GN-TX_1.0.2.tar.gz\";\n$PG{\"dialign-t\"}{\"mode\"\
+}=\"mcoffee\";\n$PG{\"dialign-t\"}{\"binary\"}=\"d\
+ialign-t\";\n$PG{\"dialign-t\"}{\"version\"}=\"1.0\
+.2\";\n$PG{\"dialign-tx\"}{\"4_TCOFFEE\"}=\"DIALIG\
+NTX\";\n$PG{\"dialign-tx\"}{\"type\"}=\"sequence_m\
+ultiple_aligner\";\n$PG{\"dialign-tx\"}{\"ADDRESS\\
+"}=\"http://dialign-tx.gobics.de/\";\n$PG{\"dialig\
+n-tx\"}{\"DIR\"}=\"/usr/share/dialign-tx/\";\n$PG{\
+\"dialign-tx\"}{\"language\"}=\"C\";\n$PG{\"dialig\
+n-tx\"}{\"language2\"}=\"C\";\n$PG{\"dialign-tx\"}\
+{\"source\"}=\"http://dialign-tx.gobics.de/DIALIGN\
+-TX_1.0.2.tar.gz\";\n$PG{\"dialign-tx\"}{\"mode\"}\
+=\"mcoffee\";\n$PG{\"dialign-tx\"}{\"binary\"}=\"d\
+ialign-tx\";\n$PG{\"dialign-tx\"}{\"version\"}=\"1\
+.0.2\";\n$PG{\"poa\"}{\"4_TCOFFEE\"}=\"POA\";\n$PG\
+{\"poa\"}{\"type\"}=\"sequence_multiple_aligner\";\
+\n$PG{\"poa\"}{\"ADDRESS\"}=\"http://www.bioinform\
+atics.ucla.edu/poa/\";\n$PG{\"poa\"}{\"language\"}\
+=\"C\";\n$PG{\"poa\"}{\"language2\"}=\"C\";\n$PG{\\
+"poa\"}{\"source\"}=\"http://downloads.sourceforge\
+.net/poamsa/poaV2.tar.gz\";\n$PG{\"poa\"}{\"DIR\"}\
+=\"/usr/share/\";\n$PG{\"poa\"}{\"FILE1\"}=\"blosu\
+m80.mat\";\n$PG{\"poa\"}{\"mode\"}=\"mcoffee\";\n$\
+PG{\"poa\"}{\"binary\"}=\"poa\";\n$PG{\"poa\"}{\"v\
+ersion\"}=\"2.0\";\n$PG{\"probcons\"}{\"4_TCOFFEE\\
+"}=\"PROBCONS\";\n$PG{\"probcons\"}{\"type\"}=\"se\
+quence_multiple_aligner\";\n$PG{\"probcons\"}{\"AD\
+DRESS\"}=\"http://probcons.stanford.edu/\";\n$PG{\\
+"probcons\"}{\"language2\"}=\"CXX\";\n$PG{\"probco\
+ns\"}{\"language\"}=\"C++\";\n$PG{\"probcons\"}{\"\
+source\"}=\"http://probcons.stanford.edu/probcons_\
+v1_12.tar.gz\";\n$PG{\"probcons\"}{\"mode\"}=\"mco\
+ffee\";\n$PG{\"probcons\"}{\"binary\"}=\"probcons\\
+";\n$PG{\"probcons\"}{\"version\"}=\"1.12\";\n$PG{\
+\"mafft\"}{\"4_TCOFFEE\"}=\"MAFFT\";\n$PG{\"mafft\\
+"}{\"type\"}=\"sequence_multiple_aligner\";\n$PG{\\
+"mafft\"}{\"ADDRESS\"}=\"http://align.bmr.kyushu-u\
+.ac.jp/mafft/online/server/\";\n$PG{\"mafft\"}{\"l\
+anguage\"}=\"C\";\n$PG{\"mafft\"}{\"language\"}=\"\
+C\";\n$PG{\"mafft\"}{\"source\"}=\"http://align.bm\
+r.kyushu-u.ac.jp/mafft/software/mafft-6.603-with-e\
+xtensions-src.tgz\";\n$PG{\"mafft\"}{\"windows\"}=\
+\"http://align.bmr.kyushu-u.ac.jp/mafft/software/m\
+afft-6.603-mingw.tar\";\n$PG{\"mafft\"}{\"mode\"}=\
+\"mcoffee,rcoffee\";\n$PG{\"mafft\"}{\"binary\"}=\\
+"mafft.tar.gz\";\n$PG{\"mafft\"}{\"version\"}=\"6.\
+603\";\n$PG{\"muscle\"}{\"4_TCOFFEE\"}=\"MUSCLE\";\
+\n$PG{\"muscle\"}{\"type\"}=\"sequence_multiple_al\
+igner\";\n$PG{\"muscle\"}{\"ADDRESS\"}=\"http://ww\
+w.drive5.com/muscle/\";\n$PG{\"muscle\"}{\"languag\
+e\"}=\"C++\";\n$PG{\"muscle\"}{\"language2\"}=\"GP\
+P\";\n$PG{\"muscle\"}{\"source\"}=\"http://www.dri\
+ve5.com/muscle/downloads3.7/muscle3.7_src.tar.gz\"\
+;\n$PG{\"muscle\"}{\"windows\"}=\"http://www.drive\
+5.com/muscle/downloads3.7/muscle3.7_win32.zip\";\n\
+$PG{\"muscle\"}{\"linux\"}=\"http://www.drive5.com\
+/muscle/downloads3.7/muscle3.7_linux_ia32.tar.gz\"\
+;\n$PG{\"muscle\"}{\"mode\"}=\"mcoffee,rcoffee\";\\
+n$PG{\"muscle\"}{\"version\"}=\"3.7\";\n$PG{\"mus4\
+\"}{\"4_TCOFFEE\"}=\"MUS4\";\n$PG{\"mus4\"}{\"type\
+\"}=\"sequence_multiple_aligner\";\n$PG{\"mus4\"}{\
+\"ADDRESS\"}=\"http://www.drive5.com/muscle/\";\n$\
+PG{\"mus4\"}{\"language\"}=\"C++\";\n$PG{\"mus4\"}\
+{\"language2\"}=\"GPP\";\n$PG{\"mus4\"}{\"source\"\
+}=\"http://www.drive5.com/muscle/muscle4.0_src.tar\
+.gz\";\n$PG{\"mus4\"}{\"mode\"}=\"mcoffee,rcoffee\\
+";\n$PG{\"mus4\"}{\"version\"}=\"4.0\";\n$PG{\"pcm\
+a\"}{\"4_TCOFFEE\"}=\"PCMA\";\n$PG{\"pcma\"}{\"typ\
+e\"}=\"sequence_multiple_aligner\";\n$PG{\"pcma\"}\
+{\"ADDRESS\"}=\"ftp://iole.swmed.edu/pub/PCMA/\";\\
+n$PG{\"pcma\"}{\"language\"}=\"C\";\n$PG{\"pcma\"}\
+{\"language2\"}=\"C\";\n$PG{\"pcma\"}{\"source\"}=\
+\"ftp://iole.swmed.edu/pub/PCMA/pcma.tar.gz\";\n$P\
+G{\"pcma\"}{\"mode\"}=\"mcoffee\";\n$PG{\"pcma\"}{\
+\"version\"}=\"1.0\";\n$PG{\"kalign\"}{\"4_TCOFFEE\
+\"}=\"KALIGN\";\n$PG{\"kalign\"}{\"type\"}=\"seque\
+nce_multiple_aligner\";\n$PG{\"kalign\"}{\"ADDRESS\
+\"}=\"http://msa.cgb.ki.se\";\n$PG{\"kalign\"}{\"l\
+anguage\"}=\"C\";\n$PG{\"kalign\"}{\"language2\"}=\
+\"C\";\n$PG{\"kalign\"}{\"source\"}=\"http://msa.c\
+gb.ki.se/downloads/kalign/current.tar.gz\";\n$PG{\\
+"kalign\"}{\"mode\"}=\"mcoffee\";\n$PG{\"kalign\"}\
+{\"version\"}=\"1.0\";\n$PG{\"amap\"}{\"4_TCOFFEE\\
+"}=\"AMAP\";\n$PG{\"amap\"}{\"type\"}=\"sequence_m\
+ultiple_aligner\";\n$PG{\"amap\"}{\"ADDRESS\"}=\"h\
+ttp://bio.math.berkeley.edu/amap/\";\n$PG{\"amap\"\
+}{\"language\"}=\"C++\";\n$PG{\"amap\"}{\"language\
+2\"}=\"CXX\";\n$PG{\"amap\"}{\"source\"}=\"http://\
+amap-align.googlecode.com/files/amap.2.0.tar.gz\";\
+\n$PG{\"amap\"}{\"mode\"}=\"mcoffee\";\n$PG{\"amap\
+\"}{\"version\"}=\"2.0\";\n$PG{\"proda\"}{\"4_TCOF\
+FEE\"}=\"PRODA\";\n$PG{\"proda\"}{\"type\"}=\"sequ\
+ence_multiple_aligner\";\n$PG{\"proda\"}{\"ADDRESS\
+\"}=\"http://proda.stanford.edu\";\n$PG{\"proda\"}\
+{\"language\"}=\"C++\";\n$PG{\"proda\"}{\"language\
+2\"}=\"CXX\";\n$PG{\"proda\"}{\"source\"}=\"http:/\
+/proda.stanford.edu/proda_1_0.tar.gz\";\n$PG{\"pro\
+da\"}{\"mode\"}=\"mcoffee\";\n$PG{\"proda\"}{\"ver\
+sion\"}=\"1.0\";\n$PG{\"fsa\"}{\"4_TCOFFEE\"}=\"FS\
+A\";\n$PG{\"fsa\"}{\"type\"}=\"sequence_multiple_a\
+ligner\";\n$PG{\"fsa\"}{\"ADDRESS\"}=\"http://fsa.\
+sourceforge.net/\";\n$PG{\"fsa\"}{\"language\"}=\"\
+C++\";\n$PG{\"fsa\"}{\"language2\"}=\"CXX\";\n$PG{\
+\"fsa\"}{\"source\"}=\"http://sourceforge.net/proj\
+ects/fsa/files/fsa-1.15.3.tar.gz/download/\";\n$PG\
+{\"fsa\"}{\"mode\"}=\"mcoffee\";\n$PG{\"fsa\"}{\"v\
+ersion\"}=\"1.15.3\";\n$PG{\"prank\"}{\"4_TCOFFEE\\
+"}=\"PRANK\";\n$PG{\"prank\"}{\"type\"}=\"sequence\
+_multiple_aligner\";\n$PG{\"prank\"}{\"ADDRESS\"}=\
+\"http://www.ebi.ac.uk/goldman-srv/prank/\";\n$PG{\
+\"prank\"}{\"language\"}=\"C++\";\n$PG{\"prank\"}{\
+\"language2\"}=\"CXX\";\n$PG{\"prank\"}{\"source\"\
+}=\"http://www.ebi.ac.uk/goldman-srv/prank/src/pra\
+nk/prank.src.100303.tgz\";\n$PG{\"prank\"}{\"mode\\
+"}=\"mcoffee\";\n$PG{\"prank\"}{\"version\"}=\"100\
+303\";\n$PG{\"sap\"}{\"4_TCOFFEE\"}=\"SAP\";\n$PG{\
+\"sap\"}{\"type\"}=\"structure_pairwise_aligner\";\
+\n$PG{\"sap\"}{\"ADDRESS\"}=\"http://mathbio.nimr.\
+mrc.ac.uk/wiki/Software\";\n$PG{\"sap\"}{\"languag\
+e\"}=\"C\";\n$PG{\"sap\"}{\"language2\"}=\"C\";\n$\
+PG{\"sap\"}{\"source\"}=\"http://mathbio.nimr.mrc.\
+ac.uk/download/sap-1.1.1.tar.gz\";\n$PG{\"sap\"}{\\
+"mode\"}=\"expresso,3dcoffee\";\n$PG{\"sap\"}{\"ve\
+rsion\"}=\"1.1.1\";\n$PG{\"TMalign\"}{\"4_TCOFFEE\\
+"}=\"TMALIGN\";\n$PG{\"TMalign\"}{\"type\"}=\"stru\
+cture_pairwise_aligner\";\n$PG{\"TMalign\"}{\"ADDR\
+ESS\"}=\"http://zhang.bioinformatics.ku.edu/TM-ali\
+gn/TMalign.f\";\n$PG{\"TMalign\"}{\"language\"}=\"\
+Fortran\";\n$PG{\"TMalign\"}{\"language2\"}=\"Fort\
+ran\";\n$PG{\"TMalign\"}{\"source\"}=\"http://zhan\
+g.bioinformatics.ku.edu/TM-align/TMalign.f\";\n$PG\
+{\"TMalign\"}{\"linux\"}=\"http://zhang.bioinforma\
+tics.ku.edu/TM-align/TMalign_32.gz\";\n$PG{\"TMali\
+gn\"}{\"mode\"}=\"expresso,3dcoffee\";\n$PG{\"TMal\
+ign\"}{\"version\"}=\"1.0\";\n$PG{\"mustang\"}{\"4\
+_TCOFFEE\"}=\"MUSTANG\";\n$PG{\"mustang\"}{\"type\\
+"}=\"structure_pairwise_aligner\";\n$PG{\"mustang\\
+"}{\"ADDRESS\"}=\"http://www.cs.mu.oz.au/~arun/mus\
+tang\";\n$PG{\"mustang\"}{\"language\"}=\"C++\";\n\
+$PG{\"mustang\"}{\"language2\"}=\"CXX\";\n$PG{\"mu\
+stang\"}{\"source\"}=\"http://ww2.cs.mu.oz.au/~aru\
+n/mustang/mustang_v3.2.1.tgz\";\n$PG{\"mustang\"}{\
+\"mode\"}=\"expresso,3dcoffee\";\n$PG{\"mustang\"}\
+{\"version\"}=\"3.2.1\";\n$PG{\"lsqman\"}{\"4_TCOF\
+FEE\"}=\"LSQMAN\";\n$PG{\"lsqman\"}{\"type\"}=\"st\
+ructure_pairwise_aligner\";\n$PG{\"lsqman\"}{\"ADD\
+RESS\"}=\"empty\";\n$PG{\"lsqman\"}{\"language\"}=\
+\"empty\";\n$PG{\"lsqman\"}{\"language2\"}=\"empty\
+\";\n$PG{\"lsqman\"}{\"source\"}=\"empty\";\n$PG{\\
+"lsqman\"}{\"update_action\"}=\"never\";\n$PG{\"ls\
+qman\"}{\"mode\"}=\"expresso,3dcoffee\";\n$PG{\"al\
+ign_pdb\"}{\"4_TCOFFEE\"}=\"ALIGN_PDB\";\n$PG{\"al\
+ign_pdb\"}{\"type\"}=\"structure_pairwise_aligner\\
+";\n$PG{\"align_pdb\"}{\"ADDRESS\"}=\"empty\";\n$P\
+G{\"align_pdb\"}{\"language\"}=\"empty\";\n$PG{\"a\
+lign_pdb\"}{\"language2\"}=\"empty\";\n$PG{\"align\
+_pdb\"}{\"source\"}=\"empty\";\n$PG{\"align_pdb\"}\
+{\"update_action\"}=\"never\";\n$PG{\"align_pdb\"}\
+{\"mode\"}=\"expresso,3dcoffee\";\n$PG{\"fugueali\\
+"}{\"4_TCOFFEE\"}=\"FUGUE\";\n$PG{\"fugueali\"}{\"\
+type\"}=\"structure_pairwise_aligner\";\n$PG{\"fug\
+ueali\"}{\"ADDRESS\"}=\"http://www-cryst.bioc.cam.\
+ac.uk/fugue/download.html\";\n$PG{\"fugueali\"}{\"\
+language\"}=\"empty\";\n$PG{\"fugueali\"}{\"langua\
+ge2\"}=\"empty\";\n$PG{\"fugueali\"}{\"source\"}=\\
+"empty\";\n$PG{\"fugueali\"}{\"update_action\"}=\"\
+never\";\n$PG{\"fugueali\"}{\"mode\"}=\"expresso,3\
+dcoffee\";\n$PG{\"dalilite.pl\"}{\"4_TCOFFEE\"}=\"\
+DALILITEc\";\n$PG{\"dalilite.pl\"}{\"type\"}=\"str\
+ucture_pairwise_aligner\";\n$PG{\"dalilite.pl\"}{\\
+"ADDRESS\"}=\"built_in\";\n$PG{\"dalilite.pl\"}{\"\
+ADDRESS2\"}=\"http://www.ebi.ac.uk/Tools/webservic\
+es/services/dalilite\";\n$PG{\"dalilite.pl\"}{\"la\
+nguage\"}=\"Perl\";\n$PG{\"dalilite.pl\"}{\"langua\
+ge2\"}=\"Perl\";\n$PG{\"dalilite.pl\"}{\"source\"}\
+=\"empty\";\n$PG{\"dalilite.pl\"}{\"update_action\\
+"}=\"never\";\n$PG{\"dalilite.pl\"}{\"mode\"}=\"ex\
+presso,3dcoffee\";\n$PG{\"probconsRNA\"}{\"4_TCOFF\
+EE\"}=\"PROBCONSRNA\";\n$PG{\"probconsRNA\"}{\"typ\
+e\"}=\"RNA_multiple_aligner\";\n$PG{\"probconsRNA\\
+"}{\"ADDRESS\"}=\"http://probcons.stanford.edu/\";\
+\n$PG{\"probconsRNA\"}{\"language\"}=\"C++\";\n$PG\
+{\"probconsRNA\"}{\"language2\"}=\"CXX\";\n$PG{\"p\
+robconsRNA\"}{\"source\"}=\"http://probcons.stanfo\
+rd.edu/probconsRNA.tar.gz\";\n$PG{\"probconsRNA\"}\
+{\"mode\"}=\"mcoffee,rcoffee\";\n$PG{\"probconsRNA\
+\"}{\"version\"}=\"1.0\";\n$PG{\"sfold\"}{\"4_TCOF\
+FEE\"}=\"CONSAN\";\n$PG{\"sfold\"}{\"type\"}=\"RNA\
+_pairwise_aligner\";\n$PG{\"sfold\"}{\"ADDRESS\"}=\
+\"http://selab.janelia.org/software/consan/\";\n$P\
+G{\"sfold\"}{\"language\"}=\"empty\";\n$PG{\"sfold\
+\"}{\"language2\"}=\"empty\";\n$PG{\"sfold\"}{\"so\
+urce\"}=\"empty\";\n$PG{\"sfold\"}{\"update_action\
+\"}=\"never\";\n$PG{\"sfold\"}{\"mode\"}=\"rcoffee\
+\";\n$PG{\"RNAplfold\"}{\"4_TCOFFEE\"}=\"RNAPLFOLD\
+\";\n$PG{\"RNAplfold\"}{\"type\"}=\"RNA_secondarys\
+tructure_predictor\";\n$PG{\"RNAplfold\"}{\"ADDRES\
+S\"}=\"http://www.tbi.univie.ac.at/~ivo/RNA/\";\n$\
+PG{\"RNAplfold\"}{\"language\"}=\"C\";\n$PG{\"RNAp\
+lfold\"}{\"language2\"}=\"C\";\n$PG{\"RNAplfold\"}\
+{\"source\"}=\"http://www.tbi.univie.ac.at/~ivo/RN\
+A/ViennaRNA-1.7.2.tar.gz\";\n$PG{\"RNAplfold\"}{\"\
+mode\"}=\"rcoffee,\";\n$PG{\"RNAplfold\"}{\"versio\
+n\"}=\"1.7.2\";\n$PG{\"retree\"}{\"4_TCOFFEE\"}=\"\
+PHYLIP\";\n$PG{\"retree\"}{\"type\"}=\"RNA_seconda\
+rystructure_predictor\";\n$PG{\"retree\"}{\"ADDRES\
+S\"}=\"http://evolution.gs.washington.edu/phylip/\\
+";\n$PG{\"retree\"}{\"language\"}=\"C\";\n$PG{\"re\
+tree\"}{\"language2\"}=\"C\";\n$PG{\"retree\"}{\"s\
+ource\"}=\"http://evolution.gs.washington.edu/phyl\
+ip/download/phylip-3.69.tar.gz\";\n$PG{\"retree\"}\
+{\"mode\"}=\"trmsd,\";\n$PG{\"retree\"}{\"version\\
+"}=\"3.69\";\n$PG{\"hmmtop\"}{\"4_TCOFFEE\"}=\"HMM\
+TOP\";\n$PG{\"hmmtop\"}{\"type\"}=\"protein_second\
+arystructure_predictor\";\n$PG{\"hmmtop\"}{\"ADDRE\
+SS\"}=\"www.enzim.hu/hmmtop/\";\n$PG{\"hmmtop\"}{\\
+"language\"}=\"C\";\n$PG{\"hmmtop\"}{\"language2\"\
+}=\"C\";\n$PG{\"hmmtop\"}{\"source\"}=\"empty\";\n\
+$PG{\"hmmtop\"}{\"update_action\"}=\"never\";\n$PG\
+{\"hmmtop\"}{\"mode\"}=\"tcoffee\";\n$PG{\"gorIV\"\
+}{\"4_TCOFFEE\"}=\"GOR4\";\n$PG{\"gorIV\"}{\"type\\
+"}=\"protein_secondarystructure_predictor\";\n$PG{\
+\"gorIV\"}{\"ADDRESS\"}=\"http://mig.jouy.inra.fr/\
+logiciels/gorIV/\";\n$PG{\"gorIV\"}{\"language\"}=\
+\"C\";\n$PG{\"gorIV\"}{\"language2\"}=\"C\";\n$PG{\
+\"gorIV\"}{\"source\"}=\"http://mig.jouy.inra.fr/l\
+ogiciels/gorIV/GOR_IV.tar.gz\";\n$PG{\"gorIV\"}{\"\
+update_action\"}=\"never\";\n$PG{\"gorIV\"}{\"mode\
+\"}=\"tcoffee\";\n$PG{\"wublast.pl\"}{\"4_TCOFFEE\\
+"}=\"EBIWUBLASTc\";\n$PG{\"wublast.pl\"}{\"type\"}\
+=\"protein_homology_predictor\";\n$PG{\"wublast.pl\
+\"}{\"ADDRESS\"}=\"built_in\";\n$PG{\"wublast.pl\"\
 }{\"ADDRESS2\"}=\"http://www.ebi.ac.uk/Tools/webse\
-rvices/services/blastpgp\";\n$PG{\"blastpgp.pl\"}{\
-\"language\"}=\"Perl\";\n$PG{\"blastpgp.pl\"}{\"la\
-nguage2\"}=\"Perl\";\n$PG{\"blastpgp.pl\"}{\"sourc\
-e\"}=\"empty\";\n$PG{\"blastpgp.pl\"}{\"update_act\
-ion\"}=\"never\";\n$PG{\"blastpgp.pl\"}{\"mode\"}=\
-\"psicoffee,expresso,accurate\";\n$PG{\"blastcl3\"\
-}{\"4_TCOFFEE\"}=\"NCBIWEBBLAST\";\n$PG{\"blastcl3\
+rvices/services/wublast\";\n$PG{\"wublast.pl\"}{\"\
+language\"}=\"Perl\";\n$PG{\"wublast.pl\"}{\"langu\
+age2\"}=\"Perl\";\n$PG{\"wublast.pl\"}{\"source\"}\
+=\"empty\";\n$PG{\"wublast.pl\"}{\"update_action\"\
+}=\"never\";\n$PG{\"wublast.pl\"}{\"mode\"}=\"psic\
+offee,expresso,accurate\";\n$PG{\"blastpgp.pl\"}{\\
+"4_TCOFFEE\"}=\"EBIBLASTPGPc\";\n$PG{\"blastpgp.pl\
 \"}{\"type\"}=\"protein_homology_predictor\";\n$PG\
-{\"blastcl3\"}{\"ADDRESS\"}=\"ftp://ftp.ncbi.nih.g\
-ov/blast/executables/LATEST\";\n$PG{\"blastcl3\"}{\
-\"language\"}=\"C\";\n$PG{\"blastcl3\"}{\"language\
-2\"}=\"C\";\n$PG{\"blastcl3\"}{\"source\"}=\"empty\
-\";\n$PG{\"blastcl3\"}{\"update_action\"}=\"never\\
-";\n$PG{\"blastcl3\"}{\"mode\"}=\"psicoffee,expres\
-so,3dcoffee\";\n$PG{\"blastpgp\"}{\"4_TCOFFEE\"}=\\
-"NCBIBLAST\";\n$PG{\"blastpgp\"}{\"type\"}=\"prote\
-in_homology_predictor\";\n$PG{\"blastpgp\"}{\"ADDR\
-ESS\"}=\"ftp://ftp.ncbi.nih.gov/blast/executables/\
-LATEST\";\n$PG{\"blastpgp\"}{\"language\"}=\"C\";\\
-n$PG{\"blastpgp\"}{\"language2\"}=\"C\";\n$PG{\"bl\
-astpgp\"}{\"source\"}=\"empty\";\n$PG{\"blastpgp\"\
-}{\"update_action\"}=\"never\";\n$PG{\"blastpgp\"}\
-{\"mode\"}=\"psicoffee,expresso,3dcoffee\";\n$PG{\\
-"SOAP::Lite\"}{\"4_TCOFFEE\"}=\"SOAPLITE\";\n$PG{\\
-"SOAP::Lite\"}{\"type\"}=\"library\";\n$PG{\"SOAP:\
-:Lite\"}{\"ADDRESS\"}=\"http://cpansearch.perl.org\
-/src/MKUTTER/SOAP-Lite-0.710.08/Makefile.PL\";\n$P\
-G{\"SOAP::Lite\"}{\"language\"}=\"Perl\";\n$PG{\"S\
-OAP::Lite\"}{\"language2\"}=\"Perl\";\n$PG{\"SOAP:\
-:Lite\"}{\"source\"}=\"empty\";\n$PG{\"blastpgp\"}\
-{\"update_action\"}=\"never\";\n$PG{\"SOAP::Lite\"\
-}{\"mode\"}=\"none\";\n$PG{\"XML::Simple\"}{\"4_TC\
-OFFEE\"}=\"XMLSIMPLE\";\n$PG{\"XML::Simple\"}{\"ty\
-pe\"}=\"library\";\n$PG{\"XML::Simple\"}{\"ADDRESS\
-\"}=\"http://search.cpan.org/~grantm/XML-Simple-2.\
-18/lib/XML/Simple.pm\";\n$PG{\"XML::Simple\"}{\"la\
-nguage\"}=\"Perl\";\n$PG{\"XML::Simple\"}{\"langua\
-ge2\"}=\"Perl\";\n$PG{\"XML::Simple\"}{\"source\"}\
-=\"empty\";\n$PG{\"XML::Simple\"}{\"mode\"}=\"psic\
-offee,expresso,accurate\";\n$MODE{\"tcoffee\"}{\"n\
-ame\"}=\"tcoffee\";\n$MODE{\"rcoffee\"}{\"name\"}=\
-\"rcoffee\";\n$MODE{\"3dcoffee\"}{\"name\"}=\"3dco\
-ffee\";\n$MODE{\"mcoffee\"}{\"name\"}=\"mcoffee\";\
-\n$MODE{\"expresso\"}{\"name\"}=\"expresso\";\n$MO\
-DE{\"trmsd\"}{\"name\"}=\"trmsd\";\n$MODE{\"accura\
-te\"}{\"name\"}=\"accurate\";\n$MODE{\"seq_reforma\
-t\"}{\"name\"}=\"seq_reformat\";\n\n\n$PG{C}{compi\
-ler}=\"gcc\";\n$PG{C}{compiler_flag}=\"CC\";\n$PG{\
-C}{options}=\"\";\n$PG{C}{options_flag}=\"CFLAGS\"\
-;\n$PG{C}{type}=\"compiler\";\n\n$PG{\"CXX\"}{comp\
-iler}=\"g++\";\n$PG{\"CXX\"}{compiler_flag}=\"CXX\\
-";\n$PG{\"CXX\"}{options}=\"\";\n$PG{\"CXX\"}{opti\
-ons_flag}=\"CXXFLAGS\";\n$PG{CXX}{type}=\"compiler\
-\";\n\n$PG{\"CPP\"}{compiler}=\"g++\";\n$PG{\"CPP\\
-"}{compiler_flag}=\"CPP\";\n$PG{\"CPP\"}{options}=\
-\"\";\n$PG{\"CPP\"}{options_flag}=\"CPPFLAGS\";\n$\
-PG{CPP}{type}=\"compiler\";\n\n$PG{\"GPP\"}{compil\
-er}=\"g++\";\n$PG{\"GPP\"}{compiler_flag}=\"GPP\";\
-\n$PG{\"GPP\"}{options}=\"\";\n$PG{\"GPP\"}{option\
-s_flag}=\"CFLAGS\";\n$PG{GPP}{type}=\"compiler\";\\
-n\n$PG{Fortran}{compiler}=\"g77\";\n$PG{Fortran}{c\
-ompiler_flag}=\"FCC\";\n$PG{Fortran}{type}=\"compi\
-ler\";\n\n$PG{Perl}{compiler}=\"CPAN\";\n$PG{Perl}\
-{type}=\"compiler\";\n\n$SUPPORTED_OS{macox}=\"Mac\
-intosh\";\n$SUPPORTED_OS{linux}=\"Linux\";\n$SUPPO\
-RTED_OS{windows}=\"Cygwin\";\n\n\n\n$MODE{t_coffee\
-}{description}=\" for regular multiple sequence al\
-ignments\";\n$MODE{rcoffee} {description}=\" for R\
-NA multiple sequence alignments\";\n\n$MODE{psicof\
-fee} {description}=\" for Homology Extended multip\
-le sequence alignments\";\n$MODE{expresso}{descrip\
-tion}=\" for very accurate structure based multipl\
-e sequence alignments\";\n$MODE{\"3dcoffee\"}{desc\
-ription}=\" for multiple structure alignments\";\n\
-$MODE{mcoffee} {description}=\" for combining alte\
-rnative multiple sequence alignment packages\\n---\
----- into a unique meta-package. The installer wil\
-l upload several MSA packages and compile them\\n\\
-n\";\n\n\n&post_process_PG();\nreturn;\n}\n\nsub p\
-ost_process_PG\n  {\n    my $p;\n    \n    %PG=&na\
-me2dname (%PG);\n    %MODE=&name2dname(%MODE);\n  \
-  foreach $p (keys(%PG)){if ( $PG{$p}{type} eq \"c\
-ompiler\"){$PG{$p}{update_action}=\"never\";}}\n  \
-  \n  }\n\nsub name2dname\n  {\n    my (%L)=(@_);\\
-n    my ($l, $ml);\n    \n    foreach my $pg (keys\
-(%L))\n      {\n	$l=length ($pg);\n	if ( $l>$ml){$\
-ml=$l;}\n      }\n    $ml+=1;\n    foreach my $pg \
-(keys(%L))\n      {\n	my $name;\n	$l=$ml-length ($\
-pg);\n	$name=$pg;\n	for ( $b=0; $b<$l; $b++)\n	  {\
-\n	    $name .=\" \";\n	  }\n	$L{$pg}{dname}=$name\
-;\n      }\n    return %L;\n  }\n\nsub env_file2pu\
-tenv\n  {\n    my $f=@_[0];\n    my $F=new FileHan\
-dle;\n    my $n;\n    \n    open ($F, \"$f\");\n  \
-  while (<$F>)\n      {\n	my $line=$_;\n	my($var, \
-$value)=($_=~/(\\S+)\\=(\\S*)/);\n	$ENV{$var}=$val\
-ue;\n	$ENV_SET{$var}=1;\n	$n++;\n      }\n    clos\
-e ($F);\n    return $n;\n  }\n\nsub replace_line_i\
-n_file\n  {\n    my ($file, $wordin, $wordout)=@_;\
-\n    my $O=new FileHandle;\n    my $I=new FileHan\
-dle;\n    my $l;\n    if (!-e $file){return;}\n   \
- \n    system (\"mv $file $file.old\");\n    open \
-($O, \">$file\");\n    open ($I, \"$file.old\");\n\
-    while (<$I>)\n      {\n	$l=$_;\n	if (!($l=~/$w\
-ordin/)){print $O \"$l\";}\n	elsif ( $wordout ne \\
-"\"){$l=~s/$wordin/$wordout/g;print $O \"$l\";}\n \
-     }\n    close ($O);\n    close ($I);\n    retu\
-rn;\n  }\n\nsub add_C_libraries\n  {\n   my ($file\
-,$first,@list)=@_;\n   \n    my $O=new FileHandle;\
-\n    my $I=new FileHandle;\n    my ($l,$anchor);\\
-n    if (!-e $file){return;}\n   \n    $anchor=\"#\
-include <$first>\";\n	 \n    system (\"mv $file $f\
-ile.old\");\n    open ($O, \">$file\");\n    open \
-($I, \"$file.old\");\n    while (<$I>)\n      {\n	\
-$l=$_;\n	print $O \"$l\";\n	if (!($l=~/$anchor/))\\
-n	   {\n	    \n	    foreach my $lib (@list)\n	    \
-   {\n                  print $O \"#include <$lib>\
-\\n\";\n	       }\n           }\n      }\n    clos\
-e ($O);\n    close ($I);\n    return;\n    }\n","u\
-se Env;\nuse Cwd;\n@suffix=(\"tmp\", \"temp\", \"c\
-ache\", \"t_coffee\", \"core\", \"tcoffee\");\n\ni\
-f ($#ARGV==-1)\n  {\n    print \"clean_cache.pl -f\
-ile <file to add in -dir> -dir=<dir> -size=<value \
-in Mb>\\n0: unlimited -1 always.\\nWill only clean\
- directories matching:[\";\n    foreach $k(@suffix\
-){print \"*$k* \";}\n    print \"]\\n\";\n    exit\
- (EXIT_FAILURE);\n  }\n\n$cl=join (\" \",@ARGV);\n\
-if (($cl=~/\\-no_action/))\n  {\n    exit (EXIT_SU\
-CCESS);\n  }\n\nif (($cl=~/\\-debug/))\n  {\n    $\
-DEBUG=1;\n  }\nelse\n  {\n    $DEBUG=0;\n  }\n\nif\
- (($cl=~/\\-dir=(\\S+)/))\n  {\n    $dir=$1;\n  }\\
-nelse\n  {\n    $dir=\"./\";\n  }\n\nif ($cl=~/\\-\
-file=(\\S+)/)\n  {\n    $file=$1;\n  }\nelse\n  {\\
-n    $file=0;\n  }\n\nif ($cl=~/\\-size=(\\S+)/)\n\
-  {\n    $max_size=$1;\n  }\nelse\n  {\n    $max_s\
-ize=0;#unlimited\n  }\nif ($cl=~/\\-force/)\n  {\n\
-    $force=1;\n  }\nelse\n  {\n    $force=0;\n  }\\
-n\nif ($cl=~/\\-age=(\\S+)/)\n  {\n    $max_age=$1\
-;\n  }\nelse\n  {\n    $max_age=0;#unlimited\n  }\\
-n\n$max_size*=1000000;\nif ( ! -d $dir)\n  {\n    \
-print STDERR \"\\nCannot process $dir: does not ex\
-ist \\n\";\n    exit (EXIT_FAILURE);\n  }\n\nif ( \
-!($dir=~/^\\//))\n  {\n    $base=cwd();\n    $dir=\
-\"$base/$dir\";\n  }\n\n$proceed=0;\nforeach $s (@\
-suffix)\n  {\n    \n    if (($dir=~/$s/)){$proceed\
-=1;}\n    $s=uc ($s);\n    if (($dir=~/$s/)){$proc\
-eed=1;}\n  }\nif ( $proceed==0)\n  {\n    print ST\
-DERR \"Clean_cache.pl can only clean directories w\
-hose absolute path name contains the following str\
-ings:\";\n    foreach $w (@suffix) {print STDERR \\
-"$w \";$w=lc($w); print STDERR \"$w \";}\n    prin\
-t STDERR \"\\nCannot process $dir\\n\";\n    exit \
-(EXIT_FAILURE);\n  }\n\n$name_file=\"$dir/name_fil\
-e.txt\";\n$size_file=\"$dir/size_file.txt\";\nif (\
- $force){&create_ref_file ($dir,$name_file,$size_f\
-ile);}\nif ($file){&add_file ($dir, $name_file, $s\
-ize_file, $file);}\n&clean_dir ($dir, $name_file, \
-$size_file, $max_size,$max_age);\nexit (EXIT_SUCCE\
-SS);\n\nsub clean_dir \n  {\n    my ($dir, $name_f\
-ile, $size_file, $max_size, $max_age)=@_;\n    my \
-($tot_size, $size, $f, $s);\n\n  \n    $tot_size=&\
-get_tot_size ($dir, $name_file, $size_file);\n\n  \
-  if ( $tot_size<=$max_size){return ;}\n    else {\
-$max_size/=2;}\n    \n    #recreate the name file \
-in case some temprary files have not been properly\
- registered\n    &create_ref_file ($dir, $name_fil\
-e, $size_file, $max_age);\n  \n    $new_name_file=\
-&vtmpnam();\n    open (R, \"$name_file\");\n    op\
-en (W, \">$new_name_file\");\n    while (<R>)\n   \
-   {\n	my $line=$_;\n	\n	($f, $s)=($line=~/(\\S+) \
-(\\S+)/);\n	if ( !($f=~/\\S/)){next;}\n	\n	elsif (\
-$max_size && $tot_size>=$max_size && !($f=~/name_f\
-ile/))\n	  {\n	    remove ( \"$dir/$f\");\n	    $t\
-ot_size-=$s;\n	  }\n	elsif ( $max_age && -M(\"$dir\
-/$f\")>=$max_age)\n	  {\n	    remove ( \"$dir/$f\"\
-);\n	    $tot_size-=$s;\n	  }\n	else\n	  {\n	    p\
-rint W \"$f $s\\n\";\n	  }\n      }\n    close (R)\
-;\n    close (W);\n    open (F, \">$size_file\");\\
-n    print F \"$tot_size\";\n    if ( -e $new_name\
-_file){`mv $new_name_file $name_file`;}\n    close\
- (F);\n  }\nsub get_tot_size\n  {\n    my ($dir, $\
-name_file, $size_file)=@_;\n    my $size;\n    \n \
-   if ( !-d $dir){return 0;}\n    if ( !-e $name_f\
-ile)\n      {\n	\n	&create_ref_file ($dir, $name_f\
-ile, $size_file);\n      }\n    open (F, \"$size_f\
-ile\");\n    $size=<F>;\n    close (F);\n    chomp\
- ($size);\n    return $size;\n  }\nsub size \n  {\\
-n    my $f=@_[0];\n\n    if ( !-d $f){return -s($f\
-);}\n    else {return &dir2size($f);}\n  }\nsub di\
-r2size\n  {\n    my $d=@_[0];\n    my ($s, $f);\n \
-   \n    if ( !-d $d) {return 0;}\n    \n    forea\
-ch $f (&dir2list ($d))\n      {\n	if ( -d $f){$s+=\
-&dir2size (\"$d/$f\");}\n	else {$s+= -s \"$dir/$f\\
-";}\n      }\n    return $s;\n  }\n\nsub remove \n\
-  {\n    my $file=@_[0];\n    my ($f);\n    \n    \
-debug_print( \"--- $file ---\\n\");\n    if (($fil\
-e eq \".\") || ($file eq \"..\") || ($file=~/\\*/)\
-){return EXIT_FAILURE;}\n    elsif ( !-d $file)\n \
-     {\n	debug_print (\"unlink $file\\n\");\n	if (\
--e $file){unlink ($file);}\n      }\n    elsif ( -\
-d $file)\n      {\n	debug_print (\"++++++++ $file \
-+++++++\\n\");\n	foreach $f (&dir2list($file))\n	 \
- {\n	    &remove (\"$file/$f\");\n	  }\n	debug_pri\
-nt (\"rmdir $file\\n\");\n	rmdir $file;\n      }\n\
-    else\n      {\n	debug_print (\"????????? $file\
- ????????\\n\");\n      }\n    return EXIT_SUCCESS\
-;\n  }\n\nsub dir2list\n  {\n    my $dir=@_[0];\n \
-   my (@list1, @list2,@list3, $l);\n\n    opendir \
-(DIR,$dir);\n    @list1=readdir (DIR);\n    closed\
-ir (DIR);\n    \n    foreach $l (@list1)\n      {\\
-n	if ( $l ne \".\" && $l ne \"..\"){@list2=(@list2\
-, $l);}\n      }\n    @list3 = sort { (-M \"$dir/$\
-list2[$b]\") <=> (-M \"$dir/$list2[$a]\")} @list2;\
-\n    return @list3;\n    \n  }\n\nsub debug_print\
-\n  {\n    \n    if ($DEBUG==1){print @_;}\n    \n\
-  }\nsub create_ref_file\n  {\n    my ($dir,$name_\
-file,$size_file)=@_;\n    my ($f, $s, $tot_size, @\
-l);\n    \n    if ( !-d $dir){return;}\n    \n    \
-@l=&dir2list ($dir);\n    open (F, \">$name_file\"\
-);\n    foreach $f (@l)\n      {\n	$s=&size(\"$dir\
-/$f\");\n	$tot_size+=$s;\n	print F \"$f $s\\n\";\n\
-      }\n    &myecho ($tot_size, \">$size_file\");\
-\n    close (F);\n  }\nsub add_file \n  {\n    my \
-($dir,$name_file,$size_file,$file)=@_;\n    my ($s\
-, $tot_size);\n    \n    if ( !-d $dir)   {return;\
-}\n    if ( !-e \"$dir/$file\" ) {return;}\n    if\
- ( !-e $name_file){&create_ref_file ($dir,$name_fi\
-le,$size_file);}\n					    \n    $s=&size(\"$dir/$\
-file\");\n    open (F, \">>$name_file\");\n    pri\
-nt F \"$file\\n\";\n    close (F);\n\n    $tot_siz\
-e=&get_tot_size ($dir,$name_file,$size_file);\n   \
- $tot_size+=$s;\n    &myecho ($tot_size, \">$size_\
-file\");\n    \n  }\n	\nsub myecho\n  {\n    my ($\
-string, $file)=@_;\n    open (ECHO, $file) || die;\
-\n    print ECHO \"$string\";\n    close (ECHO);\n\
-  }\n    \n		\n	\nsub vtmpnam\n  {\n    my $tmp_fi\
-le_name;\n    $tmp_name_counter++;\n    $tmp_file_\
-name=\"tmp_file_for_clean_cache_pdb$$.$tmp_name_co\
-unter\";\n    $tmp_file_list[$ntmp_file++]=$tmp_fi\
-le_name;\n    if ( -e $tmp_file_name) {return &vtm\
-pnam ();}\n    else {return $tmp_file_name;}\n  }\\
-n","\n$t_coffee=\"t_coffee\";\n\nforeach $value ( \
-@ARGV)\n  {\n    $seq_file=$seq_file.\" \".$value;\
-\n  }\n\n$name=$ARGV[0];\n$name=~s/\\.[^\\.]*$//;\\
-n$lib_name=\"$name.mocca_lib\";\n$type=`t_coffee $\
-seq_file -get_type -quiet`;\nchop ($type);\n\nif (\
- $type eq \"PROTEIN\"){$lib_mode=\"lalign_rs_s_pai\
-r -lalign_n_top 20\";}\nelsif ( $type eq\"DNA\"){$\
-lib_mode=\"lalign_rs_s_dna_pair -lalign_n_top 40\"\
-;}\n\nif ( !(-e $lib_name))\n  {\n	  \n  $command=\
-\"$t_coffee -mocca -seq_weight=no -cosmetic_penalt\
-y=0 -mocca_interactive -in $lib_mode -out_lib $lib\
-_name -infile $seq_file\";\n  \n  }\nelsif ( (-e $\
-lib_name))\n  {\n  $command=\"$t_coffee -mocca -se\
-q_weight=no -cosmetic_penalty=0 -mocca_interactive\
- -in $lib_name -infile $seq_file\";\n  \n  }\n\nsy\
-stem ($command);\n\nexit;\n\n","my $WSDL = 'http:/\
-/www.ebi.ac.uk/Tools/webservices/wsdl/WSDaliLite.w\
-sdl';\n\nuse SOAP::Lite;\nuse Data::Dumper;\nuse G\
-etopt::Long qw(:config no_ignore_case bundling);\n\
-use File::Basename;\n\nmy $checkInterval = 5;\n\nm\
-y %params=(\n	    'async' => '1', # Use async mode\
- and simulate sync mode in client\n	    );\nGetOpt\
-ions(\n    'pdb1=s'     => \\$params{'sequence1'},\
-\n    'chainid1=s' => \\$params{'chainid1'},\n    \
-'pdb2=s'     => \\$params{'sequence2'},\n    'chai\
-nid2=s' => \\$params{'chainid2'},\n    \"help|h\"	\
- => \\$help, # Usage info\n    \"async|a\"	 => \\$\
-async, # Asynchronous submission\n    \"polljob\"	\
- => \\$polljob, # Get results\n    \"status\"	 => \
-\\$status, # Get status\n    \"jobid|j=s\"  => \\$\
-jobid, # JobId\n    \"email|S=s\"  => \\$params{em\
-ail}, # E-mail address\n    \"trace\"      => \\$t\
-race, # SOAP messages\n    \"sequence=s\" => \\$se\
-quence, # Input PDB\n    );\n\nmy $scriptName = ba\
-sename($0, ());\nif($help) {\n    &usage();\n    e\
-xit(0);\n}\n\nif($trace) {\n    print \"Tracing ac\
-tive\\n\";\n    SOAP::Lite->import(+trace => 'debu\
-g');\n}\n\nmy $soap = SOAP::Lite\n    ->service($W\
-SDL)\n    ->on_fault(sub {\n        my $soap = shi\
-ft;\n        my $res = shift;\n        # Throw an \
-exception for all faults\n        if(ref($res) eq \
-'') {\n            die($res);\n        } else {\n \
-           die($res->faultstring);\n        }\n   \
-     return new SOAP::SOM;\n    }\n               \
-);\n\nif( !($polljob || $status) &&\n    !( define\
-d($params{'sequence1'}) && defined($params{'sequen\
-ce2'}) )\n    ) {\n    print STDERR 'Error: bad op\
-tion combination', \"\\n\";\n    &usage();\n    ex\
-it(1);\n}\nelsif($polljob && defined($jobid)) {\n \
-   print \"Getting results for job $jobid\\n\";\n \
-   getResults($jobid);\n}\nelsif($status && define\
-d($jobid)) {\n    print STDERR \"Getting status fo\
-r job $jobid\\n\";\n    my $result = $soap->checkS\
-tatus($jobid);\n    print STDOUT \"$result\", \"\\\
-n\";\n    if($result eq 'DONE') {\n	print STDERR \\
-"To get results: $scriptName --polljob --jobid $jo\
-bid\\n\";\n    }\n}\nelse {\n    if(-f $params{'se\
-quence1'}) {\n	$params{'sequence1'} = read_file($p\
-arams{'sequence1'});\n    }\n    if(-f $params{'se\
-quence2'}) {\n	$params{'sequence2'} = read_file($p\
-arams{'sequence2'});\n    }\n\n    my $jobid;\n   \
- my $paramsData = SOAP::Data->name('params')->type\
-(map=>\\%params);\n    # For SOAP::Lite 0.60 and e\
-arlier parameters are passed directly\n    if($SOA\
-P::Lite::VERSION eq '0.60' || $SOAP::Lite::VERSION\
- =~ /0\\.[1-5]/) {\n        $jobid = $soap->runDal\
-iLite($paramsData);\n    }\n    # For SOAP::Lite 0\
-.69 and later parameter handling is different, so \
-pass\n    # undef's for templated params, and then\
- pass the formatted args.\n    else {\n        $jo\
-bid = $soap->runDaliLite(undef,\n				     $paramsD\
-ata);\n    }\n\n    if (defined($async)) {\n	print\
- STDOUT $jobid, \"\\n\";\n        print STDERR \"T\
-o check status: $scriptName --status --jobid $jobi\
-d\\n\";\n    } else { # Synchronous mode\n        \
-print STDERR \"JobId: $jobid\\n\";\n        sleep \
-1;\n        getResults($jobid);\n    }\n}\n\nsub c\
-lientPoll($) {\n    my $jobid = shift;\n    my $re\
-sult = 'PENDING';\n    # Check status and wait if \
-not finished\n    #print STDERR \"Checking status:\
- $jobid\\n\";\n    while($result eq 'RUNNING' || $\
-result eq 'PENDING') {\n        $result = $soap->c\
-heckStatus($jobid);\n        print STDERR \"$resul\
-t\\n\";\n        if($result eq 'RUNNING' || $resul\
-t eq 'PENDING') {\n            # Wait before polli\
-ng again.\n            sleep $checkInterval;\n    \
-    }\n    }\n}\n\nsub getResults($) {\n    $jobid\
- = shift;\n    # Check status, and wait if not fin\
-ished\n    clientPoll($jobid);\n    # Use JobId if\
- output file name is not defined\n    unless(defin\
-ed($outfile)) {\n        $outfile=$jobid;\n    }\n\
-    # Get list of data types\n    my $resultTypes \
-= $soap->getResults($jobid);\n    # Get the data a\
-nd write it to a file\n    if(defined($outformat))\
- { # Specified data type\n        my $selResultTyp\
-e;\n        foreach my $resultType (@$resultTypes)\
- {\n            if($resultType->{type} eq $outform\
-at) {\n                $selResultType = $resultTyp\
-e;\n            }\n        }\n        $res=$soap->\
-poll($jobid, $selResultType->{type});\n        wri\
-te_file($outfile.'.'.$selResultType->{ext}, $res);\
-\n    } else { # Data types available\n        # W\
-rite a file for each output type\n        for my $\
-resultType (@$resultTypes){\n            #print \"\
-Getting $resultType->{type}\\n\";\n            $re\
-s=$soap->poll($jobid, $resultType->{type});\n     \
-       write_file($outfile.'.'.$resultType->{ext},\
- $res);\n        }\n    }\n}\n\nsub read_file($) {\
-\n    my $filename = shift;\n    open(FILE, $filen\
-ame);\n    my $content;\n    my $buffer;\n    whil\
-e(sysread(FILE, $buffer, 1024)) {\n	$content.= $bu\
-ffer;\n    }\n    close(FILE);\n    return $conten\
-t;\n}\n\nsub write_file($$) {\n    my ($tmp,$entit\
-y) = @_;\n    print STDERR \"Creating result file:\
- \".$tmp.\"\\n\";\n    unless(open (FILE, \">$tmp\\
-")) {\n	return 0;\n    }\n    syswrite(FILE, $enti\
-ty);\n    close (FILE);\n    return 1;\n}\n\nsub u\
-sage {\n    print STDERR <<EOF\nDaliLite\n========\
-\n\nPairwise comparison of protein structures\n\n[\
-Required]\n\n  --pdb1                : str  : PDB \
-ID for structure 1\n  --pdb2                : str \
- : PDB ID for structure 2\n\n[Optional]\n\n  --cha\
-in1              : str  : Chain identifer in struc\
-ture 1\n  --chain2              : str  : Chain ide\
-ntifer in structure 2\n\n[General]\n\n  -h, --help\
-            :      : prints this help text\n  -S, \
---email           : str  : user email address\n  -\
-a, --async           :      : asynchronous submiss\
-ion\n      --status          :      : poll for the\
- status of a job\n      --polljob         :      :\
- poll for the results of a job\n  -j, --jobid     \
-      : str  : jobid for an asynchronous job\n  -O\
-, --outfile         : str  : file name for results\
- (default is jobid)\n      --trace	        :      \
-: show SOAP messages being interchanged \n\nSynchr\
-onous job:\n\n  The results/errors are returned as\
- soon as the job is finished.\n  Usage: $scriptNam\
-e --email <your\\@email> [options] pdbFile [--outf\
-ile string]\n  Returns: saves the results to disk\\
-n\nAsynchronous job:\n\n  Use this if you want to \
-retrieve the results at a later time. The results \
-\n  are stored for up to 24 hours. \n  The asynchr\
-onous submission mode is recommended when users ar\
-e submitting \n  batch jobs or large database sear\
-ches	\n  Usage: $scriptName --email <your\\@email>\
- --async [options] pdbFile\n  Returns: jobid\n\n  \
-Use the jobid to query for the status of the job. \
-\n  Usage: $scriptName --status --jobid <jobId>\n \
- Returns: string indicating the status of the job:\
-\n    DONE - job has finished\n    RUNNING - job i\
-s running\n    NOT_FOUND - job cannot be found\n  \
-  ERROR - the jobs has encountered an error\n\n  W\
-hen done, use the jobid to retrieve the status of \
-the job. \n  Usage: $scriptName --polljob --jobid \
-<jobId> [--outfile string]\n\n[Help]\n\n  For more\
- detailed help information refer to\n  http://www.\
-ebi.ac.uk/DaliLite/\nEOF\n;\n}\n","my $WSDL = 'htt\
-p://www.ebi.ac.uk/Tools/webservices/wsdl/WSWUBlast\
-.wsdl';\n\nuse strict;\nuse SOAP::Lite;\nuse Getop\
-t::Long qw(:config no_ignore_case bundling);\nuse \
-File::Basename;\n\nmy $checkInterval = 15;\n\nmy $\
-numOpts = scalar(@ARGV);\nmy ($outfile, $outformat\
-, $help, $async, $polljob, $status, $ids, $jobid, \
-$trace, $sequence);\nmy %params= ( # Defaults\n	  \
-    'async' => 1, # Force into async mode\n	      \
-'exp' => 10.0, # E-value threshold\n	      'numal'\
- => 50, # Maximum number of alignments\n	      'sc\
-ores' => 100, # Maximum number of scores\n        \
-    );\nGetOptions( # Map the options into variabl\
-es\n    \"program|p=s\"     => \\$params{program},\
- # BLAST program\n    \"database|D=s\"    => \\$pa\
-rams{database}, # Search database\n    \"matrix|m=\
-s\"      => \\$params{matrix}, # Scoring matrix\n \
-   \"exp|E=f\"         => \\$params{exp}, # E-valu\
-e threshold\n    \"echofilter|e\"    => \\$params{\
-echofilter}, # Display filtered sequence\n    \"fi\
-lter|f=s\"      => \\$params{filter}, # Low comple\
-xity filter name\n    \"alignments|b=i\"  => \\$pa\
-rams{numal}, # Number of alignments\n    \"scores|\
-s=i\"      => \\$params{scores}, # Number of score\
-s\n    \"sensitivity|S=s\" => \\$params{sensitivit\
-y}, # Search sensitivity\n    \"sort|t=s\"	      =\
-> \\$params{sort}, # Sort hits by...\n    \"stats|\
-T=s\"       => \\$params{stats}, # Scoring statist\
-ic to use\n    \"strand|d=s\"      => \\$params{st\
-rand}, # Strand to use in DNA vs. DNA search\n    \
-\"topcombon|c=i\"   => \\$params{topcombon}, # Con\
-sistent sets of HSPs\n    \"outfile=s\"       => \\
-\$outfile, # Output file\n    \"outformat|o=s\"   \
-=> \\$outformat, # Output format\n    \"help|h\"	 \
-     => \\$help, # Usage info\n    \"async|a\"	   \
-   => \\$async, # Asynchronous mode\n    \"polljob\
-\"	      => \\$polljob, # Get results\n    \"statu\
-s\"	      => \\$status, # Get job status\n    \"id\
-s\"             => \\$ids, # Get ids from result\n\
-    \"jobid|j=s\"       => \\$jobid, # JobId\n    \
-\"email=s\"         => \\$params{email}, # E-mail \
-address\n    \"trace\"           => \\$trace, # SO\
-AP trace\n    \"sequence=s\"      => \\$sequence, \
-# Query sequence\n    );\n\nmy $scriptName = basen\
-ame($0, ());\nif($help || $numOpts == 0) {\n    &u\
-sage();\n    exit(0);\n}\n\nif($trace){\n    print\
- STDERR \"Tracing active\\n\";\n    SOAP::Lite->im\
-port(+trace => 'debug');\n}\n\nmy $soap = SOAP::Li\
-te\n    ->service($WSDL)\n    ->proxy('http://loca\
-lhost/',\n    #proxy => ['http' => 'http://your.pr\
-oxy.server/'], # HTTP proxy\n    timeout => 600, #\
- HTTP connection timeout\n    )\n    ->on_fault(su\
-b { # SOAP fault handler\n        my $soap = shift\
-;\n        my $res = shift;\n        # Throw an ex\
-ception for all faults\n        if(ref($res) eq ''\
-) {\n            die($res);\n        } else {\n   \
-         die($res->faultstring);\n        }\n     \
-   return new SOAP::SOM;\n    }\n               );\
-\n\nif( !($polljob || $status || $ids) &&\n    !( \
-defined($ARGV[0]) || defined($sequence) )\n    ) {\
-\n    print STDERR 'Error: bad option combination'\
-, \"\\n\";\n    &usage();\n    exit(1);\n}\nelsif(\
-$polljob && defined($jobid)) {\n    print \"Gettin\
-g results for job $jobid\\n\";\n    getResults($jo\
-bid);\n}\nelsif($status && defined($jobid)) {\n   \
- print STDERR \"Getting status for job $jobid\\n\"\
-;\n    my $result = $soap->checkStatus($jobid);\n \
-   print STDOUT \"$result\\n\";\n    if($result eq\
- 'DONE') {\n	print STDERR \"To get results: $scrip\
-tName --polljob --jobid $jobid\\n\";\n    }\n}  \n\
-elsif($ids && defined($jobid)) {\n    print STDERR\
- \"Getting ids from job $jobid\\n\";\n    getIds($\
-jobid);\n}\nelse {\n    # Prepare input data\n    \
-my $content;\n    my (@contents) = ();\n    if(-f \
-$ARGV[0] || $ARGV[0] eq '-') {	\n	$content={type=>\
-'sequence',content=>read_file($ARGV[0])};	\n    }\\
-n    if($sequence) {	\n	if(-f $sequence || $sequen\
-ce eq '-') {	\n	    $content={type=>'sequence',con\
-tent=>read_file($ARGV[0])};	\n	} else {\n	    $con\
-tent={type=>'sequence',content=>$sequence};\n	}\n \
-   }\n    push @contents, $content;\n\n    # Submi\
-t the job\n    my $paramsData = SOAP::Data->name('\
-params')->type(map=>\\%params);\n    my $contentDa\
-ta = SOAP::Data->name('content')->value(\\@content\
-s);\n    # For SOAP::Lite 0.60 and earlier paramet\
-ers are passed directly\n    if($SOAP::Lite::VERSI\
-ON eq '0.60' || $SOAP::Lite::VERSION =~ /0\\.[1-5]\
-/) {\n        $jobid = $soap->runWUBlast($paramsDa\
-ta, $contentData);\n    }\n    # For SOAP::Lite 0.\
-69 and later parameter handling is different, so p\
-ass\n    # undef's for templated params, and then \
-pass the formatted args.\n    else {\n        $job\
-id = $soap->runWUBlast(undef, undef,\n				   $para\
-msData, $contentData);\n    }\n\n    # Asynchronou\
-s mode: output jobid and exit.\n    if (defined($a\
-sync)) {\n	print STDOUT $jobid, \"\\n\";\n        \
-print STDERR \"To check status: $scriptName --stat\
-us --jobid $jobid\\n\";\n    }\n    # Synchronous \
-mode: try to get results\n    else {\n        prin\
-t STDERR \"JobId: $jobid\\n\";\n        sleep 1;\n\
-        getResults($jobid);\n    }\n}\n\nsub getId\
-s($) {\n    my $jobid = shift;\n    my $results = \
-$soap->getIds($jobid);\n    for my $result (@$resu\
-lts){\n	print \"$result\\n\";\n    }\n}\n\nsub cli\
-entPoll($) {\n    my $jobid = shift;\n    my $resu\
-lt = 'PENDING';\n    # Check status and wait if no\
-t finished\n    while($result eq 'RUNNING' || $res\
-ult eq 'PENDING') {\n        $result = $soap->chec\
-kStatus($jobid);\n        print STDERR \"$result\\\
-n\";\n        if($result eq 'RUNNING' || $result e\
-q 'PENDING') {\n            # Wait before polling \
-again.\n            sleep $checkInterval;\n       \
- }\n    }\n}\n\nsub getResults($) {\n    my $jobid\
- = shift;\n    my $res;\n    # Check status, and w\
-ait if not finished\n    clientPoll($jobid);\n    \
-# Use JobId if output file name is not defined\n  \
-  unless(defined($outfile)) {\n        $outfile=$j\
-obid;\n    }\n    # Get list of data types\n    my\
- $resultTypes = $soap->getResults($jobid);\n    # \
-Get the data and write it to a file\n    if(define\
-d($outformat)) { # Specified data type\n	if($outfo\
-rmat eq 'xml') {$outformat = 'toolxml';}\n	if($out\
-format eq 'txt') {$outformat = 'tooloutput';}\n   \
-     my $selResultType;\n        foreach my $resul\
-tType (@$resultTypes) {\n            if($resultTyp\
-e->{type} eq $outformat) {\n                $selRe\
-sultType = $resultType;\n            }\n        }\\
-n        $res=$soap->poll($jobid, $selResultType->\
-{type});\n	if($outfile eq '-') {\n	     write_file\
-($outfile, $res);\n	} else {\n	    write_file($out\
-file.'.'.$selResultType->{ext}, $res);\n	}\n    } \
-else { # Data types available\n        # Write a f\
-ile for each output type\n        for my $resultTy\
-pe (@$resultTypes){\n            #print STDERR \"G\
-etting $resultType->{type}\\n\";\n            $res\
-=$soap->poll($jobid, $resultType->{type});\n	    i\
-f($outfile eq '-') {\n		write_file($outfile, $res)\
-;\n	    } else {\n		write_file($outfile.'.'.$resul\
-tType->{ext}, $res);\n	    }\n        }\n    }\n}\\
-n\nsub read_file($) {\n    my $filename = shift;\n\
-    my ($content, $buffer);\n    if($filename eq '\
--') {\n	while(sysread(STDIN, $buffer, 1024)) {\n	 \
-   $content .= $buffer;\n	}\n    }\n    else { # F\
-ile\n	open(FILE, $filename) or die \"Error: unable\
- to open input file\";\n	while(sysread(FILE, $buff\
-er, 1024)) {\n	    $content .= $buffer;\n	}\n	clos\
-e(FILE);\n    }\n    return $content;\n}\n\nsub wr\
-ite_file($$) {\n    my ($filename, $data) = @_;\n \
-   print STDERR 'Creating result file: ' . $filena\
-me . \"\\n\";\n    if($filename eq '-') {\n	print \
-STDOUT $data;\n    }\n    else {\n	open(FILE, \">$\
-filename\") or die \"Error: unable to open output \
-file\";\n	syswrite(FILE, $data);\n	close(FILE);\n \
-   }\n}\n\nsub usage {\n    print STDERR <<EOF\nWU\
--BLAST\n========\n\nRapid sequence database search\
- programs utilizing the BLAST algorithm.\n   \n[Re\
-quired]\n\n      --email       : str  : user email\
- address \n  -p, --program	    : str  : BLAST prog\
-ram to use: blastn, blastp, blastx, \n            \
-                 tblastn or tblastx\n  -D, --datab\
-ase    : str  : database to search\n  seqFile     \
-      : file : query sequence data file (\"-\" for\
- STDIN)\n\n[Optional]\n\n  -m, --matrix	    : str \
- : scoring matrix\n  -E, --exp	    : real : 0<E<= \
-1000. Statistical significance threshold\n        \
-                     for reporting database sequen\
-ce matches.\n  -e, --echofilter  :      : display \
-the filtered query sequence in the output\n  -f, -\
--filter	    : str  : activates filtering of the qu\
-ery sequence\n  -b, --alignments  : int  : number \
-of alignments to be reported\n  -s, --scores	    :\
- int  : number of scores to be reported\n  -S, --s\
-ensitivity : str  :\n  -t, --sort	    : str  :\n  \
--T, --stats       : str  :\n  -d, --strand      : \
-str  : DNA strand to search with in DNA vs. DNA se\
-arches \n  -c, --topcombon   :      :\n\n[General]\
-	\n\n  -h, --help       :      : prints this help \
-text\n  -a, --async      :      : forces to make a\
-n asynchronous query\n      --status     :      : \
-poll for the status of a job\n      --polljob    :\
-      : poll for the results of a job\n  -j, --job\
-id      : str  : jobid that was returned when an a\
-synchronous job \n                            was \
-submitted.\n  -O, --outfile    : str  : name of th\
-e file results should be written to \n            \
-                (default is based on the jobid; \"\
--\" for STDOUT)\n  -o, --outformat  : str  : txt o\
-r xml output (no file is written)\n      --trace	 \
-  :      : show SOAP messages being interchanged \\
-n\nSynchronous job:\n\n  The results/errors are re\
-turned as soon as the job is finished.\n  Usage: $\
-scriptName --email <your\\@email> [options...] seq\
-File\n  Returns: saves the results to disk\n\nAsyn\
-chronous job:\n\n  Use this if you want to retriev\
-e the results at a later time. The results \n  are\
- stored for up to 24 hours. \n  The asynchronous s\
-ubmission mode is recommended when users are submi\
-tting \n  batch jobs or large database searches	\n\
-  Usage: $scriptName --async --email <your\\@email\
-> [options...] seqFile\n  Returns : jobid\n\n  Use\
- the jobid to query for the status of the job. \n \
- Usage: $scriptName --status --jobid <jobId>\n  Re\
-turns : string indicating the status of the job:\n\
-    DONE - job has finished\n    RUNNING - job is \
-running\n    NOT_FOUND - job cannot be found\n    \
-ERROR - the jobs has encountered an error\n\n  Whe\
-n done, use the jobid to retrieve the status of th\
-e job. \n  Usage: $scriptName --polljob --jobid <j\
-obId> [--outfile string]\n  Returns: saves the res\
-ults to disk\n\n[Help]\n\nFor more detailed help i\
-nformation refer to \nhttp://www.ebi.ac.uk/blast2/\
-WU-Blast2_Help_frame.html\n \nEOF\n;\n}\n","\nmy $\
-WSDL = 'http://www.ebi.ac.uk/Tools/webservices/wsd\
-l/WSBlastpgp.wsdl';\n\nuse SOAP::Lite;\nuse Getopt\
-::Long qw(:config no_ignore_case bundling);\nuse F\
-ile::Basename;\n\nmy $checkInterval = 15;\n\nmy %p\
-arams=(\n	    'async' => '1', # Use async mode and\
- simulate sync mode in client\n	    );\nGetOptions\
-(\n    \"mode=s\"           => \\$params{mode}, # \
-Search mode: PSI-Blast or PHI-Blast\n    \"databas\
-e|d=s\"     => \\$params{database}, # Database to \
-search\n    \"matrix|M=s\"       => \\$params{matr\
-ix},# Scoring maxtrix\n    \"exp|e=f\"          =>\
- \\$params{exp}, # E-value\n    \"expmulti|h=f\"  \
-   => \\$params{expmulti}, # E-value\n    \"filter\
-|F=s\"       => \\$params{filter}, # Low complexit\
-y filter\n    \"dropoff|X=i\"      => \\$params{dr\
-opoff}, # Dropoff score\n    \"finaldropoff|Z=i\" \
-=> \\$params{finaldropoff}, # Final dropoff score\\
-n    \"scores|v=i\"       => \\$params{scores}, # \
-Max number of scores\n    \"align=i\"          => \
-\\$params{align}, # Alignment view\n    \"startreg\
-ion|S=i\"  => \\$params{startregion}, # Start of r\
-egion in query\n    \"endregion|H=i\"    => \\$par\
-ams{endregion}, # End of region in query\n    \"ma\
-xpasses|j=i\"    => \\$params{maxpasses}, # Number\
- of PSI iterations\n    \"opengap|G=i\"      => \\\
-$params{opengap}, # Gap open penalty\n    \"extend\
-gap|E=i\"    => \\$params{extendgap}, # Gap extens\
-ion penalty\n    \"pattern=s\"        => \\$params\
-{pattern}, # PHI-BLAST pattern\n    \"usagemode|p=\
-s\"    => \\$params{usagemode}, # PHI-BLAST progra\
-m\n    \"appxml=s\"         => \\$params{appxml}, \
-# Application XML\n    \"sequence=s\"       => \\$\
-sequence, # Query sequence\n    \"help\"	       =>\
- \\$help, # Usage info\n    \"polljob\"	       => \
-\\$polljob, # Get results\n    \"status\"	       =\
-> \\$status, # Get status\n    \"ids\"      	     \
-  => \\$ids, # Get ids from result\n    \"jobid=s\\
-"          => \\$jobid, # JobId\n    \"outfile=s\"\
-        => \\$outfile, # Output filename\n    \"ou\
-tformat|o=s\"    => \\$outformat, # Output file fo\
-rmat\n    \"async|a\"	       => \\$async, # Async \
-submission\n    \"email=s\"          => \\$params{\
-email}, # User e-mail address\n    \"trace\"      \
-      => \\$trace, # Show SOAP messages\n    );\n\\
-nmy $scriptName = basename($0, ());\nif($help) {\n\
-    &usage();\n    exit(0);\n}\n\nif ($trace){\n  \
-  print \"Tracing active\\n\";\n    SOAP::Lite->im\
-port(+trace => 'debug');\n}\n\nmy $soap = SOAP::Li\
-te\n    ->service($WSDL)\n    ->on_fault(sub {\n  \
-      my $soap = shift;\n        my $res = shift;\\
-n        # Throw an exception for all faults\n    \
-    if(ref($res) eq '') {\n            die($res);\\
-n        } else {\n            die($res->faultstri\
-ng);\n        }\n        return new SOAP::SOM;\n  \
-  }\n               );\n\nif( !($polljob || $statu\
-s || $ids) &&\n    !( (defined($ARGV[0]) && -f $AR\
-GV[0]) || defined($sequence) )\n    ) {\n    print\
- STDERR 'Error: bad option combination', \"\\n\";\\
-n    &usage();\n    exit(1);\n}\nelsif($polljob &&\
- defined($jobid)) {\n    print \"Getting results f\
-or job $jobid\\n\";\n    getResults($jobid);\n}\ne\
-lsif($status && defined($jobid)) {\n    print STDE\
-RR \"Getting status for job $jobid\\n\";\n    my $\
-result = $soap->checkStatus($jobid);\n    print ST\
-DOUT $result, \"\\n\";\n    if($result eq 'DONE') \
-{\n	print STDERR \"To get results: $scriptName --p\
-olljob --jobid $jobid\\n\";\n    }\n}  \nelsif($id\
-s && defined($jobid)) {\n    print STDERR \"Gettin\
-g ids from job $jobid\\n\";\n    getIds($jobid);\n\
-}\nelse {\n    if(-f $ARGV[0]) {	\n	$content={type\
-=>'sequence', content=>read_file($ARGV[0])};	\n   \
- }\n    if($sequence) {	\n	if(-f $sequence) {\n	  \
-  $content={type=>'sequence', content=>read_file($\
-sequence)};	\n	} else {\n	    $content={type=>'seq\
-uence', content=>$sequence};\n	}\n    }\n    push \
-@content, $content;\n\n    my $jobid;\n    my $par\
-amsData = SOAP::Data->name('params')->type(map=>\\\
-%params);\n    my $contentData = SOAP::Data->name(\
-'content')->value(\\@content);\n    # For SOAP::Li\
-te 0.60 and earlier parameters are passed directly\
-\n    if($SOAP::Lite::VERSION eq '0.60' || $SOAP::\
-Lite::VERSION =~ /0\\.[1-5]/) {\n        $jobid = \
-$soap->runBlastpgp($paramsData, $contentData);\n  \
-  }\n    # For SOAP::Lite 0.69 and later parameter\
- handling is different, so pass\n    # undef's for\
- templated params, and then pass the formatted arg\
-s.\n    else {\n        $jobid = $soap->runBlastpg\
-p(undef, undef,\n				    $paramsData, $contentData\
-);\n    }\n\n    if (defined($async)) {\n	print ST\
-DOUT $jobid, \"\\n\";\n        print STDERR \"To c\
-heck status: $scriptName --status --jobid $jobid\\\
-n\";\n    } else { # Synchronous mode\n        pri\
-nt STDERR \"JobId: $jobid\\n\";\n        sleep 1;\\
-n        getResults($jobid);\n    }\n}\n\nsub getI\
-ds($) {\n    $jobid = shift;\n    my $results = $s\
-oap->getIds($jobid);\n    for $result (@$results){\
-\n	print \"$result\\n\";\n    }\n}\n\nsub clientPo\
-ll($) {\n    my $jobid = shift;\n    my $result = \
-'PENDING';\n    # Check status and wait if not fin\
-ished\n    #print STDERR \"Checking status: $jobid\
-\\n\";\n    while($result eq 'RUNNING' || $result \
-eq 'PENDING') {\n        $result = $soap->checkSta\
-tus($jobid);\n        print STDERR \"$result\\n\";\
-\n        if($result eq 'RUNNING' || $result eq 'P\
-ENDING') {\n            # Wait before polling agai\
-n.\n            sleep $checkInterval;\n        }\n\
-    }\n}\n\nsub getResults($) {\n    $jobid = shif\
-t;\n    # Check status, and wait if not finished\n\
-    clientPoll($jobid);\n    # Use JobId if output\
- file name is not defined\n    unless(defined($out\
-file)) {\n        $outfile=$jobid;\n    }\n    # G\
-et list of data types\n    my $resultTypes = $soap\
-->getResults($jobid);\n    # Get the data and writ\
-e it to a file\n    if(defined($outformat)) { # Sp\
-ecified data type\n        my $selResultType;\n   \
-     foreach my $resultType (@$resultTypes) {\n   \
-         if($resultType->{type} eq $outformat) {\n\
-                $selResultType = $resultType;\n   \
-         }\n        }\n        $res=$soap->poll($j\
-obid, $selResultType->{type});\n        write_file\
-($outfile.'.'.$selResultType->{ext}, $res);\n    }\
- else { # Data types available\n        # Write a \
-file for each output type\n        for my $resultT\
-ype (@$resultTypes){\n            #print \"Getting\
- $resultType->{type}\\n\";\n            $res=$soap\
-->poll($jobid, $resultType->{type});\n            \
-write_file($outfile.'.'.$resultType->{ext}, $res);\
-\n        }\n    }\n}\n\nsub read_file($) {\n    m\
-y $filename = shift;\n    open(FILE, $filename);\n\
-    my $content;\n    my $buffer;\n    while(sysre\
-ad(FILE, $buffer, 1024)) {\n	$content.= $buffer;\n\
-    }\n    close(FILE);  \n    return $content;\n}\
-\n\nsub write_file($$) {\n    my ($tmp,$entity) = \
-@_;\n    print STDERR \"Creating result file: \".$\
-tmp.\"\\n\";\n    unless(open (FILE, \">$tmp\")) {\
-\n	return 0;\n    }\n    syswrite(FILE, $entity);\\
-n    close (FILE);\n    return 1;\n}\n\nsub usage \
-{\n    print STDERR <<EOF\nBlastpgp\n========\n   \
-\nThe blastpgp program implements the PSI-BLAST an\
-d PHI-BLAST variations\nof NCBI BLAST.\n\nFor more\
- detailed help information refer to\nhttp://www.eb\
-i.ac.uk/blastpgp/blastpsi_help_frame.html\n \nBlas\
-tpgp specific options:\n\n[Required]\n\n      --mo\
-de            : str  : search mode to use: PSI-Bla\
-st or PHI-Blast\n  -d, --database        : str  : \
-protein database to search\n  seqFile             \
-  : file : query sequence\n\n[Optional]\n\n  -M, -\
--matrix          : str  : scoring matrix\n  -e, --\
-exp             : real : Expectation value\n  -h, \
---expmulti        : real : threshold (multipass mo\
-del)\n  -F, --filter          : str  : filter quer\
-y sequence with SEG [T,F]\n  -m, --align          \
- : int  : alignment view option:\n                \
-                 0 - pairwise, 1 - M/S identities,\
-\n                                 2 - M/S non-ide\
-ntities, 3 - Flat identities,\n                   \
-              4 - Flat non-identities\n  -G, --ope\
-ngap         : int  : cost to open a gap\n  -E, --\
-extendgap       : int  : cost to extend a gap\n  -\
-g, --gapalign        : str  : Gapped [T,F]\n  -v, \
---scores          : int  : number of scores to be \
-reported\n  -j, --maxpasses       : int  : number \
-of iterations\n  -X, --dropoff         : int  : Dr\
-opoff score\n  -Z, --finaldropoff    : int  : Drop\
-off for final alignment\n  -S, --startregion     :\
- int  : Start of required region in query\n  -H, -\
--endregion       : int  : End of required region i\
-n query\n  -k, --pattern         : str  : Hit File\
- (PHI-BLAST only)\n  -p, --usagemode       : str  \
-: Program option (PHI-BLAST only):\n              \
-                   blastpgp, patseedp, seedp\n\n[G\
-eneral]\n\n      --help            :      : prints\
- this help text\n  -a, --async           :      : \
-forces to make an asynchronous query\n      --stat\
-us          :      : poll for the status of a job\\
-n      --polljob         :      : poll for the res\
-ults of a job\n      --jobid           : str  : jo\
-bid of an asynchronous job\n      --ids           \
-  :      : get hit identifiers for result \n  -O, \
---outfile         : str  : name of the file result\
-s should be written to\n                          \
-       (default is based on the jobid)\n  -o, --ou\
-tformat       : str  : txt or xml output (no file \
-is written)\n      --trace           :      : show\
- SOAP messages being interchanged\n\nSynchronous j\
-ob:\n\n  The results/errors are returned as soon a\
-s the job is finished.\n  Usage: blastpgp.pl --ema\
-il <your@email> [options...] seqfile\n  Returns: s\
-aves the results to disk\n\nAsynchronous job:\n\n \
- Use this if you want to retrieve the results at a\
- later time. The results\n  are stored for up to 2\
-4 hours.\n  The asynchronous submission mode is re\
-commended when users are submitting\n  batch jobs \
-or large database searches\n  Usage: blastpgp.pl -\
--email <your@email> --async [options...] seqFile\n\
-  Returns: jobid\n\n  Use the jobid to query for t\
-he status of the job.\n  Usage: blastpgp.pl --stat\
-us --jobid <jobId>\n  Returns: string indicating t\
-he status of the job\n    DONE - job has finished\\
-n    RUNNING - job is running\n    NOT_FOUND - job\
- cannot be found\n    ERROR - the jobs has encount\
-ered an error\n\n  When done, use the jobid to ret\
-rieve the results of the job.\n  Usage: blastpgp.p\
-l --polljob --jobid <jobId> [--outfile <fileName>]\
-\n  Returns: saves the results to disk\nEOF\n;\n}\\
-n","\n=head1 NAME\n\nncbiblast_lwp.pl\n\n=head1 DE\
-SCRIPTION\n\nNCBI BLAST REST web service Perl clie\
-nt using L<LWP>.\n\nTested with:\n\n=over\n\n=item\
- *\nL<LWP> 5.79, L<XML::Simple> 2.12 and Perl 5.8.\
-3\n\n=item *\nL<LWP> 5.805, L<XML::Simple> 2.14 an\
-d Perl 5.8.7\n\n=item *\nL<LWP> 5.820, L<XML::Simp\
-le> 2.18 and Perl 5.10.0 (Ubuntu 9.04)\n\n=back\n\\
-nFor further information see:\n\n=over\n\n=item *\\
-nL<http://www.ebi.ac.uk/Tools/webservices/services\
-/sss/ncbi_blast_rest>\n\n=item *\nL<http://www.ebi\
-.ac.uk/Tools/webservices/tutorials/perl>\n\n=back\\
-n\n=head1 VERSION\n\n$Id: ncbiblast_lwp.pl 1317 20\
-09-09-03 15:44:11Z hpm $\n\n=cut\n\nuse strict;\nu\
-se warnings;\n\nuse English;\nuse LWP;\nuse XML::S\
-imple;\nuse Getopt::Long qw(:config no_ignore_case\
- bundling);\nuse File::Basename;\nuse Data::Dumper\
-;\n\nmy $baseUrl = 'http://www.ebi.ac.uk/Tools/ser\
-vices/rest/ncbiblast';\n\nmy $checkInterval = 3;\n\
-\nmy $outputLevel = 1;\n\nmy $numOpts = scalar(@AR\
-GV);\nmy %params = ( 'debugLevel' => 0 );\n\nmy %t\
-ool_params = ();\nGetOptions(\n\n	# Tool specific \
-options\n	'program|p=s'  => \\$tool_params{'progra\
-m'},   # blastp, blastn, blastx, etc.\n	'database|\
-D=s' => \\$params{'database'},       # Database(s)\
- to search\n	'matrix|m=s'   => \\$tool_params{'mat\
-rix'},    # Scoring martix to use\n	'exp|E=f'     \
- => \\$tool_params{'exp'},       # E-value thresho\
-ld\n	'filter|f=s'   => \\$tool_params{'filter'},  \
-  # Low complexity filter\n	'align|A=i'    => \\$t\
-ool_params{'align'},     # Pairwise alignment form\
-at\n	'scores|s=i'   => \\$tool_params{'scores'},  \
-  # Number of scores\n	'alignments|n=i' => \\$tool\
-_params{'alignments'},   # Number of alignments\n	\
-'dropoff|d=i'    => \\$tool_params{'dropoff'},    \
-  # Dropoff score\n	'match_scores=s' => \\$tool_pa\
-rams{'match_scores'}, # Match/missmatch scores\n	'\
-match|u=i'      => \\$params{'match'},            \
- # Match score\n	'mismatch|v=i'   => \\$params{'mi\
-smatch'},          # Mismatch score\n	'gapopen|o=i\
-'    => \\$tool_params{'gapopen'},      # Open gap\
- penalty\n	'gapext|x=i'     => \\$tool_params{'gap\
-ext'},       # Gap extension penality\n	'gapalign|\
-g'     => \\$tool_params{'gapalign'},     # Optimi\
-se gap alignments\n	'stype=s' => \\$tool_params{'s\
-type'},    # Sequence type\n	'seqrange=s' => \\$to\
-ol_params{'seqrange'},    # Query subsequence\n	's\
-equence=s' => \\$params{'sequence'},         # Que\
-ry sequence\n	'multifasta' => \\$params{'multifast\
-a'},       # Multiple fasta input\n\n	# Compatabil\
-ity options, old command-line\n	'numal|n=i'     =>\
- \\$params{'numal'},        # Number of alignments\
-\n	'opengap|o=i'   => \\$params{'opengap'},      #\
- Open gap penalty\n	'extendgap|x=i' => \\$params{'\
-extendgap'},    # Gap extension penality\n	\n	# Ge\
-neric options\n	'email=s'       => \\$params{'emai\
-l'},          # User e-mail address\n	'title=s'   \
-    => \\$params{'title'},          # Job title\n	\
-'outfile=s'     => \\$params{'outfile'},        # \
-Output file name\n	'outformat=s'   => \\$params{'o\
-utformat'},      # Output file type\n	'jobid=s'   \
-    => \\$params{'jobid'},          # JobId\n	'hel\
-p|h'        => \\$params{'help'},           # Usag\
-e help\n	'async'         => \\$params{'async'},   \
-       # Asynchronous submission\n	'polljob'      \
- => \\$params{'polljob'},        # Get results\n	'\
-resultTypes'   => \\$params{'resultTypes'},    # G\
-et result types\n	'status'        => \\$params{'st\
-atus'},         # Get status\n	'params'        => \
-\\$params{'params'},         # List input paramete\
-rs\n	'paramDetail=s' => \\$params{'paramDetail'}, \
-   # Get details for parameter\n	'quiet'         =\
-> \\$params{'quiet'},          # Decrease output l\
-evel\n	'verbose'       => \\$params{'verbose'},   \
-     # Increase output level\n	'debugLevel=i'  => \
-\\$params{'debugLevel'},     # Debug output level\\
-n	'baseUrl=s'     => \\$baseUrl,                  \
-# Base URL for service.\n);\nif ( $params{'verbose\
-'} ) { $outputLevel++ }\nif ( $params{'$quiet'} ) \
- { $outputLevel-- }\n\n&print_debug_message( 'MAIN\
-', 'LWP::VERSION: ' . $LWP::VERSION,\n	1 );\n\n&pr\
-int_debug_message( 'MAIN', \"params:\\n\" . Dumper\
-( \\%params ),           11 );\n&print_debug_messa\
-ge( 'MAIN', \"tool_params:\\n\" . Dumper( \\%tool_\
-params ), 11 );\n\nmy $scriptName = basename( $0, \
-() );\n\nif ( $params{'help'} || $numOpts == 0 ) {\
-\n	&usage();\n	exit(0);\n}\n\n&print_debug_message\
-( 'MAIN', 'baseUrl: ' . $baseUrl, 1 );\n\nif (\n	!\
-(\n		   $params{'polljob'}\n		|| $params{'resultTy\
-pes'}\n		|| $params{'status'}\n		|| $params{'param\
-s'}\n		|| $params{'paramDetail'}\n	)\n	&& !( defin\
-ed( $ARGV[0] ) || defined( $params{'sequence'} ) )\
-\n  )\n{\n\n	# Bad argument combination, so print \
-error message and usage\n	print STDERR 'Error: bad\
- option combination', \"\\n\";\n	&usage();\n	exit(\
-1);\n}\n\nelsif ( $params{'params'} ) {\n	&print_t\
-ool_params();\n}\n\nelsif ( $params{'paramDetail'}\
- ) {\n	&print_param_details( $params{'paramDetail'\
-} );\n}\n\nelsif ( $params{'status'} && defined( $\
-params{'jobid'} ) ) {\n	&print_job_status( $params\
-{'jobid'} );\n}\n\nelsif ( $params{'resultTypes'} \
-&& defined( $params{'jobid'} ) ) {\n	&print_result\
-_types( $params{'jobid'} );\n}\n\nelsif ( $params{\
-'polljob'} && defined( $params{'jobid'} ) ) {\n	&g\
-et_results( $params{'jobid'} );\n}\n\nelse {\n\n	#\
- Multiple input sequence mode, assume fasta format\
-.\n	if ( $params{'multifasta'} ) {\n		&multi_submi\
-t_job();\n	}\n\n	# Entry identifier list file.\n	e\
-lsif (( defined( $params{'sequence'} ) && $params{\
-'sequence'} =~ m/^\\@/ )\n		|| ( defined( $ARGV[0]\
- ) && $ARGV[0] =~ m/^\\@/ ) )\n	{\n		my $list_file\
-name = $params{'sequence'} || $ARGV[0];\n		$list_f\
-ilename =~ s/^\\@//;\n		&list_file_submit_job($lis\
-t_filename);\n	}\n\n	# Default: single sequence/id\
-entifier.\n	else {\n\n		# Load the sequence data a\
-nd submit.\n		&submit_job( &load_data() );\n	}\n}\\
-n\n=head1 FUNCTIONS\n\n=cut\n\n\n=head2 rest_reque\
-st()\n\nPerform a REST request.\n\n  my $response_\
-str = &rest_request($url);\n\n=cut\n\nsub rest_req\
-uest {\n	print_debug_message( 'rest_request', 'Beg\
-in', 11 );\n	my $requestUrl = shift;\n	print_debug\
-_message( 'rest_request', 'URL: ' . $requestUrl, 1\
-1 );\n\n	# Create a user agent\n	my $ua = LWP::Use\
-rAgent->new();\n	'$Revision: 1317 $' =~ m/(\\d+)/;\
-\n	$ua->agent(\"EBI-Sample-Client/$1 ($scriptName;\
- $OSNAME) \" . $ua->agent());\n	$ua->env_proxy;\n\\
-n	# Perform the request\n	my $response = $ua->get(\
-$requestUrl);\n	print_debug_message( 'rest_request\
-', 'HTTP status: ' . $response->code,\n		11 );\n\n\
-	# Check for HTTP error codes\n	if ( $response->is\
-_error ) {\n		$response->content() =~ m/<h1>([^<]+\
-)<\\/h1>/;\n		die 'http status: ' . $response->cod\
-e . ' ' . $response->message . '  ' . $1;\n	}\n	pr\
-int_debug_message( 'rest_request', 'End', 11 );\n\\
-n	# Return the response data\n	return $response->c\
-ontent();\n}\n\n=head2 rest_get_parameters()\n\nGe\
-t list of tool parameter names.\n\n  my (@param_li\
-st) = &rest_get_parameters();\n\n=cut\n\nsub rest_\
-get_parameters {\n	print_debug_message( 'rest_get_\
-parameters', 'Begin', 1 );\n	my $url              \
-  = $baseUrl . '/parameters/';\n	my $param_list_xm\
-l_str = rest_request($url);\n	my $param_list_xml  \
-   = XMLin($param_list_xml_str);\n	my (@param_list\
-)       = @{ $param_list_xml->{'id'} };\n	print_de\
-bug_message( 'rest_get_parameters', 'End', 1 );\n	\
-return (@param_list);\n}\n\n=head2 rest_get_parame\
-ter_details()\n\nGet details of a tool parameter.\\
-n\n  my $paramDetail = &rest_get_parameter_details\
-($param_name);\n\n=cut\n\nsub rest_get_parameter_d\
-etails {\n	print_debug_message( 'rest_get_paramete\
-r_details', 'Begin', 1 );\n	my $parameterId = shif\
-t;\n	print_debug_message( 'rest_get_parameter_deta\
-ils',\n		'parameterId: ' . $parameterId, 1 );\n	my\
- $url                  = $baseUrl . '/parameterdet\
-ails/' . $parameterId;\n	my $param_detail_xml_str \
-= rest_request($url);\n	my $param_detail_xml     =\
- XMLin($param_detail_xml_str);\n	print_debug_messa\
-ge( 'rest_get_parameter_details', 'End', 1 );\n	re\
-turn ($param_detail_xml);\n}\n\n=head2 rest_run()\\
-n\nSubmit a job.\n\n  my $job_id = &rest_run($emai\
-l, $title, \\%params );\n\n=cut\n\nsub rest_run {\\
-n	print_debug_message( 'rest_run', 'Begin', 1 );\n\
-	my $email  = shift;\n	my $title  = shift;\n	my $p\
-arams = shift;\n	print_debug_message( 'rest_run', \
-'email: ' . $email, 1 );\n	if ( defined($title) ) \
-{\n		print_debug_message( 'rest_run', 'title: ' . \
-$title, 1 );\n	}\n	print_debug_message( 'rest_run'\
-, 'params: ' . Dumper($params), 1 );\n\n	# User ag\
-ent to perform http requests\n	my $ua = LWP::UserA\
-gent->new();\n	$ua->env_proxy;\n\n	# Clean up para\
-meters\n	my (%tmp_params) = %{$params};\n	$tmp_par\
-ams{'email'} = $email;\n	$tmp_params{'title'} = $t\
-itle;\n	foreach my $param_name ( keys(%tmp_params)\
- ) {\n		if ( !defined( $tmp_params{$param_name} ) \
-) {\n			delete $tmp_params{$param_name};\n		}\n	}\\
-n\n	# Submit the job as a POST\n	my $url = $baseUr\
-l . '/run';\n	my $response = $ua->post( $url, \\%t\
-mp_params );\n	print_debug_message( 'rest_run', 'H\
-TTP status: ' . $response->code, 11 );\n	print_deb\
-ug_message( 'rest_run',\n		'request: ' . $response\
-->request()->content(), 11 );\n\n	# Check for HTTP\
- error codes\n	if ( $response->is_error ) {\n		$re\
-sponse->content() =~ m/<h1>([^<]+)<\\/h1>/;\n		die\
- 'http status: ' . $response->code . ' ' . $respon\
-se->message . '  ' . $1;\n	}\n\n	# The job id is r\
-eturned\n	my $job_id = $response->content();\n	pri\
-nt_debug_message( 'rest_run', 'End', 1 );\n	return\
- $job_id;\n}\n\n=head2 rest_get_status()\n\nCheck \
-the status of a job.\n\n  my $status = &rest_get_s\
-tatus($job_id);\n\n=cut\n\nsub rest_get_status {\n\
-	print_debug_message( 'rest_get_status', 'Begin', \
-1 );\n	my $job_id = shift;\n	print_debug_message( \
-'rest_get_status', 'jobid: ' . $job_id, 2 );\n	my \
-$status_str = 'UNKNOWN';\n	my $url        = $baseU\
-rl . '/status/' . $job_id;\n	$status_str = &rest_r\
-equest($url);\n	print_debug_message( 'rest_get_sta\
-tus', 'status_str: ' . $status_str, 2 );\n	print_d\
-ebug_message( 'rest_get_status', 'End', 1 );\n	ret\
-urn $status_str;\n}\n\n=head2 rest_get_result_type\
-s()\n\nGet list of result types for finished job.\\
-n\n  my (@result_types) = &rest_get_result_types($\
-job_id);\n\n=cut\n\nsub rest_get_result_types {\n	\
-print_debug_message( 'rest_get_result_types', 'Beg\
-in', 1 );\n	my $job_id = shift;\n	print_debug_mess\
-age( 'rest_get_result_types', 'jobid: ' . $job_id,\
- 2 );\n	my (@resultTypes);\n	my $url              \
-        = $baseUrl . '/resulttypes/' . $job_id;\n	\
-my $result_type_list_xml_str = &rest_request($url)\
-;\n	my $result_type_list_xml     = XMLin($result_t\
-ype_list_xml_str);\n	(@resultTypes) = @{ $result_t\
-ype_list_xml->{'type'} };\n	print_debug_message( '\
-rest_get_result_types',\n		scalar(@resultTypes) . \
-' result types', 2 );\n	print_debug_message( 'rest\
-_get_result_types', 'End', 1 );\n	return (@resultT\
-ypes);\n}\n\n=head2 rest_get_result()\n\nGet resul\
-t data of a specified type for a finished job.\n\n\
-  my $result = rest_get_result($job_id, $result_ty\
-pe);\n\n=cut\n\nsub rest_get_result {\n	print_debu\
-g_message( 'rest_get_result', 'Begin', 1 );\n	my $\
-job_id = shift;\n	my $type   = shift;\n	print_debu\
-g_message( 'rest_get_result', 'jobid: ' . $job_id,\
- 1 );\n	print_debug_message( 'rest_get_result', 't\
-ype: ' . $type,    1 );\n	my $url    = $baseUrl . \
-'/result/' . $job_id . '/' . $type;\n	my $result =\
- &rest_request($url);\n	print_debug_message( 'rest\
-_get_result', length($result) . ' characters',\n		\
-1 );\n	print_debug_message( 'rest_get_result', 'En\
-d', 1 );\n	return $result;\n}\n\n\n=head2 print_de\
-bug_message()\n\nPrint debug message at specified \
-debug level.\n\n  &print_debug_message($method_nam\
-e, $message, $level);\n\n=cut\n\nsub print_debug_m\
-essage {\n	my $function_name = shift;\n	my $messag\
-e       = shift;\n	my $level         = shift;\n	if\
- ( $level <= $params{'debugLevel'} ) {\n		print ST\
-DERR '[', $function_name, '()] ', $message, \"\\n\\
-";\n	}\n}\n\n=head2 print_tool_params()\n\nPrint l\
-ist of tool parameters.\n\n  &print_tool_params();\
-\n\n=cut\n\nsub print_tool_params {\n	print_debug_\
-message( 'print_tool_params', 'Begin', 1 );\n	my (\
-@param_list) = &rest_get_parameters();\n	foreach m\
-y $param ( sort(@param_list) ) {\n		print $param, \
-\"\\n\";\n	}\n	print_debug_message( 'print_tool_pa\
-rams', 'End', 1 );\n}\n\n=head2 print_param_detail\
-s()\n\nPrint details of a tool parameter.\n\n  &pr\
-int_param_details($param_name);\n\n=cut\n\nsub pri\
-nt_param_details {\n	print_debug_message( 'print_p\
-aram_details', 'Begin', 1 );\n	my $paramName = shi\
-ft;\n	print_debug_message( 'print_param_details', \
-'paramName: ' . $paramName, 2 );\n	my $paramDetail\
- = &rest_get_parameter_details($paramName);\n	prin\
-t $paramDetail->{'name'}, \"\\t\", $paramDetail->{\
-'type'}, \"\\n\";\n	print $paramDetail->{'descript\
-ion'}, \"\\n\";\n	foreach my $value ( @{ $paramDet\
-ail->{'values'}->{'value'} } ) {\n		print $value->\
-{'value'};\n		if ( $value->{'defaultValue'} eq 'tr\
-ue' ) {\n			print \"\\t\", 'default';\n		}\n		prin\
-t \"\\n\";\n		print \"\\t\", $value->{'label'}, \"\
-\\n\";\n	}\n	print_debug_message( 'print_param_det\
-ails', 'End', 1 );\n}\n\n=head2 print_job_status()\
-\n\nPrint status of a job.\n\n  &print_job_status(\
-$job_id);\n\n=cut\n\nsub print_job_status {\n	prin\
-t_debug_message( 'print_job_status', 'Begin', 1 );\
-\n	my $jobid = shift;\n	print_debug_message( 'prin\
-t_job_status', 'jobid: ' . $jobid, 1 );\n	if ( $ou\
-tputLevel > 0 ) {\n		print STDERR 'Getting status \
-for job ', $jobid, \"\\n\";\n	}\n	my $result = &re\
-st_get_status($jobid);\n	print \"$result\\n\";\n	i\
-f ( $result eq 'FINISHED' && $outputLevel > 0 ) {\\
-n		print STDERR \"To get results: $scriptName --po\
-lljob --jobid \" . $jobid\n		  . \"\\n\";\n	}\n	pr\
-int_debug_message( 'print_job_status', 'End', 1 );\
-\n}\n\n=head2 print_result_types()\n\nPrint availa\
-ble result types for a job.\n\n  &print_result_typ\
-es($job_id);\n\n=cut\n\nsub print_result_types {\n\
-	print_debug_message( 'result_types', 'Begin', 1 )\
-;\n	my $jobid = shift;\n	print_debug_message( 'res\
-ult_types', 'jobid: ' . $jobid, 1 );\n	if ( $outpu\
-tLevel > 0 ) {\n		print STDERR 'Getting result typ\
-es for job ', $jobid, \"\\n\";\n	}\n	my $status = \
-&rest_get_status($jobid);\n	if ( $status eq 'PENDI\
-NG' || $status eq 'RUNNING' ) {\n		print STDERR 'E\
-rror: Job status is ', $status,\n		  '. To get res\
-ult types the job must be finished.', \"\\n\";\n	}\
-\n	else {\n		my (@resultTypes) = &rest_get_result_\
-types($jobid);\n		if ( $outputLevel > 0 ) {\n			pr\
-int STDOUT 'Available result types:', \"\\n\";\n		\
-}\n		foreach my $resultType (@resultTypes) {\n			p\
-rint STDOUT $resultType->{'identifier'}, \"\\n\";\\
-n			if ( defined( $resultType->{'label'} ) ) {\n		\
-		print STDOUT \"\\t\", $resultType->{'label'}, \"\
-\\n\";\n			}\n			if ( defined( $resultType->{'desc\
-ription'} ) ) {\n				print STDOUT \"\\t\", $result\
-Type->{'description'}, \"\\n\";\n			}\n			if ( def\
-ined( $resultType->{'mediaType'} ) ) {\n				print \
-STDOUT \"\\t\", $resultType->{'mediaType'}, \"\\n\\
-";\n			}\n			if ( defined( $resultType->{'fileSuff\
-ix'} ) ) {\n				print STDOUT \"\\t\", $resultType-\
->{'fileSuffix'}, \"\\n\";\n			}\n		}\n		if ( $stat\
-us eq 'FINISHED' && $outputLevel > 0 ) {\n			print\
- STDERR \"\\n\", 'To get results:', \"\\n\",\n			 \
- \"  $scriptName --polljob --jobid \" . $params{'j\
-obid'} . \"\\n\",\n			  \"  $scriptName --polljob \
---outformat <type> --jobid \"\n			  . $params{'job\
-id'} . \"\\n\";\n		}\n	}\n	print_debug_message( 'r\
-esult_types', 'End', 1 );\n}\n\n=head2 submit_job(\
-)\n\nSubmit a job to the service.\n\n  &submit_job\
-($seq);\n\n=cut\n\nsub submit_job {\n	print_debug_\
-message( 'submit_job', 'Begin', 1 );\n\n	# Set inp\
-ut sequence\n	$tool_params{'sequence'} = shift;\n\\
-n	# Load parameters\n	&load_params();\n\n	# Submit\
- the job\n	my $jobid = &rest_run( $params{'email'}\
-, $params{'title'}, \\%tool_params );\n\n	# Simula\
-te sync/async mode\n	if ( defined( $params{'async'\
-} ) ) {\n		print STDOUT $jobid, \"\\n\";\n		if ( $\
-outputLevel > 0 ) {\n			print STDERR\n			  \"To ch\
-eck status: $scriptName --status --jobid $jobid\\n\
-\";\n		}\n	}\n	else {\n		if ( $outputLevel > 0 ) {\
-\n			print STDERR \"JobId: $jobid\\n\";\n		}\n		sl\
-eep 1;\n		&get_results($jobid);\n	}\n	print_debug_\
-message( 'submit_job', 'End', 1 );\n}\n\n=head2 mu\
-lti_submit_job()\n\nSubmit multiple jobs assuming \
-input is a collection of fasta formatted sequences\
-.\n\n  &multi_submit_job();\n\n=cut\n\nsub multi_s\
-ubmit_job {\n	print_debug_message( 'multi_submit_j\
-ob', 'Begin', 1 );\n	my $jobIdForFilename = 1;\n	$\
-jobIdForFilename = 0 if ( defined( $params{'outfil\
-e'} ) );\n	my (@filename_list) = ();\n\n	# Query s\
-equence\n	if ( defined( $ARGV[0] ) ) {    # Bare o\
-ption\n		if ( -f $ARGV[0] || $ARGV[0] eq '-' ) {  \
-  # File\n			push( @filename_list, $ARGV[0] );\n		\
-}\n	}\n	if ( $params{'sequence'} ) {              \
-     # Via --sequence\n		if ( -f $params{'sequence\
-'} || $params{'sequence'} eq '-' ) {    # File\n		\
-	push( @filename_list, $params{'sequence'} );\n		}\
-\n	}\n\n	$/ = '>';\n	foreach my $filename (@filena\
-me_list) {\n		open( my $INFILE, '<', $filename )\n\
-		  or die \"Error: unable to open file $filename \
-($!)\";\n		while (<$INFILE>) {\n			my $seq = $_;\n\
-			$seq =~ s/>$//;\n			if ( $seq =~ m/(\\S+)/ ) {\\
-n				print STDERR \"Submitting job for: $1\\n\"\n	\
-			  if ( $outputLevel > 0 );\n				$seq = '>' . $s\
-eq;\n				&print_debug_message( 'multi_submit_job',\
- $seq, 11 );\n				&submit_job($seq);\n				$params{\
-'outfile'} = undef if ( $jobIdForFilename == 1 );\\
-n			}\n		}\n		close $INFILE;\n	}\n	print_debug_mes\
-sage( 'multi_submit_job', 'End', 1 );\n}\n\n=head2\
- list_file_submit_job()\n\nSubmit multiple jobs us\
-ing a file containing a list of entry identifiers \
-as \ninput.\n\n  &list_file_submit_job($list_filen\
-ame)\n\n=cut\n\nsub list_file_submit_job {\n	my $f\
-ilename         = shift;\n	my $jobIdForFilename = \
-1;\n	$jobIdForFilename = 0 if ( defined( $params{'\
-outfile'} ) );\n\n	# Iterate over identifiers, sub\
-mitting each job\n	open( my $LISTFILE, '<', $filen\
-ame )\n	  or die 'Error: unable to open file ' . $\
-filename . ' (' . $! . ')';\n	while (<$LISTFILE>) \
-{\n		my $line = $_;\n		chomp($line);\n		if ( $line\
- ne '' ) {\n			&print_debug_message( 'list_file_su\
-bmit_job', 'line: ' . $line, 2 );\n			if ( $line =\
-~ m/\\w:\\w/ ) {    # Check this is an identifier\\
-n				print STDERR \"Submitting job for: $line\\n\"\
-\n				  if ( $outputLevel > 0 );\n				&submit_job(\
-$line);\n			}\n			else {\n				print STDERR\n\"Warn\
-ing: line \\\"$line\\\" is not recognised as an id\
-entifier\\n\";\n			}\n		}\n		$params{'outfile'} = \
-undef if ( $jobIdForFilename == 1 );\n	}\n	close $\
-LISTFILE;\n}\n\n=head2 load_data()\n\nLoad sequenc\
-e data from file or option specified on the comman\
-d-line.\n\n  &load_data();\n\n=cut\n\nsub load_dat\
-a {\n	print_debug_message( 'load_data', 'Begin', 1\
- );\n	my $retSeq;\n\n	# Query sequence\n	if ( defi\
-ned( $ARGV[0] ) ) {    # Bare option\n		if ( -f $A\
-RGV[0] || $ARGV[0] eq '-' ) {    # File\n			$retSe\
-q = &read_file( $ARGV[0] );\n		}\n		else {        \
-                             # DB:ID or sequence\n\
-			$retSeq = $ARGV[0];\n		}\n	}\n	if ( $params{'se\
-quence'} ) {                   # Via --sequence\n	\
-	if ( -f $params{'sequence'} || $params{'sequence'\
-} eq '-' ) {    # File\n			$retSeq = &read_file( $\
-params{'sequence'} );\n		}\n		else {    # DB:ID or\
- sequence\n			$retSeq = $params{'sequence'};\n		}\\
-n	}\n	print_debug_message( 'load_data', 'End', 1 )\
-;\n	return $retSeq;\n}\n\n=head2 load_params()\n\n\
-Load job parameters from command-line options.\n\n\
-  &load_params();\n\n=cut\n\nsub load_params {\n	p\
-rint_debug_message( 'load_params', 'Begin', 1 );\n\
-\n	# Database(s) to search\n	my (@dbList) = split \
-/[ ,]/, $params{'database'};\n	$tool_params{'datab\
-ase'} = \\@dbList;\n\n	# Match/missmatch\n	if ( $p\
-arams{'match'} && $params{'missmatch'} ) {\n		$too\
-l_params{'match_scores'} =\n		  $params{'match'} .\
- ',' . $params{'missmatch'};\n	}\n	\n	# Compatabil\
-ity options, old command-line\n	if(!$tool_params{'\
-alignments'} && $params{'numal'}) {\n		$tool_param\
-s{'alignments'} = $params{'numal'};\n	}\n	if(!$too\
-l_params{'gapopen'} && $params{'opengap'}) {\n		$t\
-ool_params{'gapopen'} = $params{'opengap'};\n	}\n	\
-if(!$tool_params{'gapext'} && $params{'extendgap'}\
-) {\n		$tool_params{'gapext'} = $params{'extendgap\
-'};\n	}\n\n	print_debug_message( 'load_params', 'E\
-nd', 1 );\n}\n\n=head2 client_poll()\n\nClient-sid\
-e job polling.\n\n  &client_poll($job_id);\n\n=cut\
-\n\nsub client_poll {\n	print_debug_message( 'clie\
-nt_poll', 'Begin', 1 );\n	my $jobid  = shift;\n	my\
- $status = 'PENDING';\n\n	my $errorCount = 0;\n	wh\
-ile ($status eq 'RUNNING'\n		|| $status eq 'PENDIN\
-G'\n		|| ( $status eq 'ERROR' && $errorCount < 2 )\
- )\n	{\n		$status = rest_get_status($jobid);\n		pr\
-int STDERR \"$status\\n\" if ( $outputLevel > 0 );\
-\n		if ( $status eq 'ERROR' ) {\n			$errorCount++;\
-\n		}\n		elsif ( $errorCount > 0 ) {\n			$errorCou\
-nt--;\n		}\n		if (   $status eq 'RUNNING'\n			|| $\
-status eq 'PENDING'\n			|| $status eq 'ERROR' )\n	\
-	{\n\n			# Wait before polling again.\n			sleep $c\
-heckInterval;\n		}\n	}\n	print_debug_message( 'cli\
-ent_poll', 'End', 1 );\n	return $status;\n}\n\n=he\
-ad2 get_results()\n\nGet the results for a job ide\
-ntifier.\n\n  &get_results($job_id);\n\n=cut\n\nsu\
-b get_results {\n	print_debug_message( 'get_result\
-s', 'Begin', 1 );\n	my $jobid = shift;\n	print_deb\
-ug_message( 'get_results', 'jobid: ' . $jobid, 1 )\
-;\n\n	# Verbose\n	if ( $outputLevel > 1 ) {\n		pri\
-nt 'Getting results for job ', $jobid, \"\\n\";\n	\
-}\n\n	# Check status, and wait if not finished\n	c\
-lient_poll($jobid);\n\n	# Use JobId if output file\
- name is not defined\n	unless ( defined( $params{'\
-outfile'} ) ) {\n		$params{'outfile'} = $jobid;\n	\
-}\n\n	# Get list of data types\n	my (@resultTypes)\
- = rest_get_result_types($jobid);\n\n	# Get the da\
-ta and write it to a file\n	if ( defined( $params{\
-'outformat'} ) ) {    # Specified data type\n		my \
-$selResultType;\n		foreach my $resultType (@result\
-Types) {\n			if ( $resultType->{'identifier'} eq $\
-params{'outformat'} ) {\n				$selResultType = $res\
-ultType;\n			}\n		}\n		if ( defined($selResultType\
-) ) {\n			my $result =\n			  rest_get_result( $job\
-id, $selResultType->{'identifier'} );\n			if ( $pa\
-rams{'outfile'} eq '-' ) {\n				write_file( $param\
-s{'outfile'}, $result );\n			}\n			else {\n				wri\
-te_file(\n					$params{'outfile'} . '.'\n					  . \
-$selResultType->{'identifier'} . '.'\n					  . $se\
-lResultType->{'fileSuffix'},\n					$result\n				);\
-\n			}\n		}\n		else {\n			die 'Error: unknown resu\
-lt format \"' . $params{'outformat'} . '\"';\n		}\\
-n	}\n	else {    # Data types available\n		      # \
-Write a file for each output type\n		for my $resul\
-tType (@resultTypes) {\n			if ( $outputLevel > 1 )\
- {\n				print STDERR 'Getting ', $resultType->{'id\
-entifier'}, \"\\n\";\n			}\n			my $result = rest_g\
-et_result( $jobid, $resultType->{'identifier'} );\\
-n			if ( $params{'outfile'} eq '-' ) {\n				write_\
-file( $params{'outfile'}, $result );\n			}\n			els\
-e {\n				write_file(\n					$params{'outfile'} . '.\
-'\n					  . $resultType->{'identifier'} . '.'\n			\
-		  . $resultType->{'fileSuffix'},\n					$result\n\
-				);\n			}\n		}\n	}\n	print_debug_message( 'get_\
-results', 'End', 1 );\n}\n\n=head2 read_file()\n\n\
-Read a file into a scalar. The special filename '-\
-' can be used to read from \nstandard input (STDIN\
-).\n\n  my $data = &read_file($filename);\n\n=cut\\
-n\nsub read_file {\n	print_debug_message( 'read_fi\
-le', 'Begin', 1 );\n	my $filename = shift;\n	print\
-_debug_message( 'read_file', 'filename: ' . $filen\
-ame, 2 );\n	my ( $content, $buffer );\n	if ( $file\
-name eq '-' ) {\n		while ( sysread( STDIN, $buffer\
-, 1024 ) ) {\n			$content .= $buffer;\n		}\n	}\n	e\
-lse {    # File\n		open( my $FILE, '<', $filename \
-)\n		  or die \"Error: unable to open input file $\
-filename ($!)\";\n		while ( sysread( $FILE, $buffe\
-r, 1024 ) ) {\n			$content .= $buffer;\n		}\n		clo\
-se($FILE);\n	}\n	print_debug_message( 'read_file',\
- 'End', 1 );\n	return $content;\n}\n\n=head2 write\
-_file()\n\nWrite data to a file. The special filen\
-ame '-' can be used to write to \nstandard output \
-(STDOUT).\n\n  &write_file($filename, $data);\n\n=\
-cut\n\nsub write_file {\n	print_debug_message( 'wr\
-ite_file', 'Begin', 1 );\n	my ( $filename, $data )\
- = @_;\n	print_debug_message( 'write_file', 'filen\
-ame: ' . $filename, 2 );\n	if ( $outputLevel > 0 )\
- {\n		print STDERR 'Creating result file: ' . $fil\
-ename . \"\\n\";\n	}\n	if ( $filename eq '-' ) {\n\
-		print STDOUT $data;\n	}\n	else {\n		open( my $FI\
-LE, '>', $filename )\n		  or die \"Error: unable t\
-o open output file $filename ($!)\";\n		syswrite( \
-$FILE, $data );\n		close($FILE);\n	}\n	print_debug\
-_message( 'write_file', 'End', 1 );\n}\n\n=head2 u\
-sage()\n\nPrint program usage message.\n\n  &usage\
-();\n\n=cut\n\nsub usage {\n	print STDERR <<EOF\nN\
-CBI BLAST\n==========\n   \nRapid sequence databas\
-e search programs utilizing the BLAST algorithm\n \
-   \n[Required]\n\n  -p, --program      : str  : B\
-LAST program to use, see --paramDetail program\n  \
--D, --database     : str  : database(s) to search,\
- space separated. See\n                           \
-   --paramDetail database\n      --stype        : \
-str  : query sequence type, see --paramDetail styp\
-e\n  seqFile            : file : query sequence (\\
-"-\" for STDIN, \\@filename for\n                 \
-             identifier list file)\n\n[Optional]\n\
-\n  -m, --matrix       : str  : scoring matrix, se\
-e --paramDetail matrix\n  -e, --exp          : rea\
-l : 0<E<= 1000. Statistical significance threshold\
- \n                              for reporting dat\
-abase sequence matches.\n  -f, --filter       :   \
-   : filter the query sequence for low complexity \
-\n                              regions, see --par\
-amDetail filter\n  -A, --align        : int  : pai\
-rwise alignment format, see --paramDetail align\n \
- -s, --scores       : int  : number of scores to b\
-e reported\n  -n, --alignments   : int  : number o\
-f alignments to report\n  -u, --match        : int\
-  : Match score (BLASTN only)\n  -v, --mismatch   \
-  : int  : Mismatch score (BLASTN only)\n  -o, --g\
-apopen      : int  : Gap open penalty\n  -x, --gap\
-ext       : int  : Gap extension penalty\n  -d, --\
-dropoff      : int  : Drop-off\n  -g, --gapalign  \
-   :      : Optimise gapped alignments\n      --se\
-qrange     : str  : region within input to use as \
-query\n      --multifasta   :      : treat input a\
-s a set of fasta formatted sequences\n\n[General]\\
-n\n  -h, --help        :      : prints this help t\
-ext\n      --async       :      : forces to make a\
-n asynchronous query\n      --email       : str  :\
- e-mail address\n      --title       : str  : titl\
-e for job\n      --status      :      : get job st\
-atus\n      --resultTypes :      : get available r\
-esult types for job\n      --polljob     :      : \
-poll for the status of a job\n      --jobid       \
-: str  : jobid that was returned when an asynchron\
-ous job \n                             was submitt\
-ed.\n      --outfile     : str  : file name for re\
-sults (default is jobid;\n                        \
-     \"-\" for STDOUT)\n      --outformat   : str \
- : result format to retrieve\n      --params      \
-:      : list input parameters\n      --paramDetai\
-l : str  : display details for input parameter\n  \
-    --quiet       :      : decrease output\n      \
---verbose     :      : increase output\n      --tr\
-ace       :      : show SOAP messages being interc\
-hanged \n   \nSynchronous job:\n\n  The results/er\
-rors are returned as soon as the job is finished.\\
-n  Usage: $scriptName --email <your\\@email> [opti\
-ons...] seqFile\n  Returns: results as an attachme\
-nt\n\nAsynchronous job:\n\n  Use this if you want \
-to retrieve the results at a later time. The resul\
-ts \n  are stored for up to 24 hours. 	\n  Usage: \
-$scriptName --async --email <your\\@email> [option\
+{\"blastpgp.pl\"}{\"ADDRESS\"}=\"built_in\";\n$PG{\
+\"blastpgp.pl\"}{\"ADDRESS2\"}=\"http://www.ebi.ac\
+.uk/Tools/webservices/services/blastpgp\";\n$PG{\"\
+blastpgp.pl\"}{\"language\"}=\"Perl\";\n$PG{\"blas\
+tpgp.pl\"}{\"language2\"}=\"Perl\";\n$PG{\"blastpg\
+p.pl\"}{\"source\"}=\"empty\";\n$PG{\"blastpgp.pl\\
+"}{\"update_action\"}=\"never\";\n$PG{\"blastpgp.p\
+l\"}{\"mode\"}=\"psicoffee,expresso,accurate\";\n$\
+PG{\"blastcl3\"}{\"4_TCOFFEE\"}=\"NCBIWEBBLAST\";\\
+n$PG{\"blastcl3\"}{\"type\"}=\"protein_homology_pr\
+edictor\";\n$PG{\"blastcl3\"}{\"ADDRESS\"}=\"ftp:/\
+/ftp.ncbi.nih.gov/blast/executables/LATEST\";\n$PG\
+{\"blastcl3\"}{\"language\"}=\"C\";\n$PG{\"blastcl\
+3\"}{\"language2\"}=\"C\";\n$PG{\"blastcl3\"}{\"so\
+urce\"}=\"empty\";\n$PG{\"blastcl3\"}{\"update_act\
+ion\"}=\"never\";\n$PG{\"blastcl3\"}{\"mode\"}=\"p\
+sicoffee,expresso,3dcoffee\";\n$PG{\"blastpgp\"}{\\
+"4_TCOFFEE\"}=\"NCBIBLAST\";\n$PG{\"blastpgp\"}{\"\
+type\"}=\"protein_homology_predictor\";\n$PG{\"bla\
+stpgp\"}{\"ADDRESS\"}=\"ftp://ftp.ncbi.nih.gov/bla\
+st/executables/LATEST\";\n$PG{\"blastpgp\"}{\"lang\
+uage\"}=\"C\";\n$PG{\"blastpgp\"}{\"language2\"}=\\
+"C\";\n$PG{\"blastpgp\"}{\"source\"}=\"empty\";\n$\
+PG{\"blastpgp\"}{\"update_action\"}=\"never\";\n$P\
+G{\"blastpgp\"}{\"mode\"}=\"psicoffee,expresso,3dc\
+offee\";\n$PG{\"SOAP::Lite\"}{\"4_TCOFFEE\"}=\"SOA\
+PLITE\";\n$PG{\"SOAP::Lite\"}{\"type\"}=\"library\\
+";\n$PG{\"SOAP::Lite\"}{\"ADDRESS\"}=\"http://cpan\
+search.perl.org/src/MKUTTER/SOAP-Lite-0.710.08/Mak\
+efile.PL\";\n$PG{\"SOAP::Lite\"}{\"language\"}=\"P\
+erl\";\n$PG{\"SOAP::Lite\"}{\"language2\"}=\"Perl\\
+";\n$PG{\"SOAP::Lite\"}{\"source\"}=\"empty\";\n$P\
+G{\"blastpgp\"}{\"update_action\"}=\"never\";\n$PG\
+{\"SOAP::Lite\"}{\"mode\"}=\"none\";\n$PG{\"XML::S\
+imple\"}{\"4_TCOFFEE\"}=\"XMLSIMPLE\";\n$PG{\"XML:\
+:Simple\"}{\"type\"}=\"library\";\n$PG{\"XML::Simp\
+le\"}{\"ADDRESS\"}=\"http://search.cpan.org/~grant\
+m/XML-Simple-2.18/lib/XML/Simple.pm\";\n$PG{\"XML:\
+:Simple\"}{\"language\"}=\"Perl\";\n$PG{\"XML::Sim\
+ple\"}{\"language2\"}=\"Perl\";\n$PG{\"XML::Simple\
+\"}{\"source\"}=\"empty\";\n$PG{\"XML::Simple\"}{\\
+"mode\"}=\"psicoffee,expresso,accurate\";\n$MODE{\\
+"tcoffee\"}{\"name\"}=\"tcoffee\";\n$MODE{\"rcoffe\
+e\"}{\"name\"}=\"rcoffee\";\n$MODE{\"3dcoffee\"}{\\
+"name\"}=\"3dcoffee\";\n$MODE{\"mcoffee\"}{\"name\\
+"}=\"mcoffee\";\n$MODE{\"expresso\"}{\"name\"}=\"e\
+xpresso\";\n$MODE{\"trmsd\"}{\"name\"}=\"trmsd\";\\
+n$MODE{\"accurate\"}{\"name\"}=\"accurate\";\n$MOD\
+E{\"seq_reformat\"}{\"name\"}=\"seq_reformat\";\n\\
+n\n$PG{C}{compiler}=\"gcc\";\n$PG{C}{compiler_flag\
+}=\"CC\";\n$PG{C}{options}=\"\";\n$PG{C}{options_f\
+lag}=\"CFLAGS\";\n$PG{C}{type}=\"compiler\";\n\n$P\
+G{\"CXX\"}{compiler}=\"g++\";\n$PG{\"CXX\"}{compil\
+er_flag}=\"CXX\";\n$PG{\"CXX\"}{options}=\"\";\n$P\
+G{\"CXX\"}{options_flag}=\"CXXFLAGS\";\n$PG{CXX}{t\
+ype}=\"compiler\";\n\n$PG{\"CPP\"}{compiler}=\"g++\
+\";\n$PG{\"CPP\"}{compiler_flag}=\"CPP\";\n$PG{\"C\
+PP\"}{options}=\"\";\n$PG{\"CPP\"}{options_flag}=\\
+"CPPFLAGS\";\n$PG{CPP}{type}=\"compiler\";\n\n$PG{\
+\"GPP\"}{compiler}=\"g++\";\n$PG{\"GPP\"}{compiler\
+_flag}=\"GPP\";\n$PG{\"GPP\"}{options}=\"\";\n$PG{\
+\"GPP\"}{options_flag}=\"CFLAGS\";\n$PG{GPP}{type}\
+=\"compiler\";\n\n$PG{Fortran}{compiler}=\"g77\";\\
+n$PG{Fortran}{compiler_flag}=\"FCC\";\n$PG{Fortran\
+}{type}=\"compiler\";\n\n$PG{Perl}{compiler}=\"CPA\
+N\";\n$PG{Perl}{type}=\"compiler\";\n\n$SUPPORTED_\
+OS{macox}=\"Macintosh\";\n$SUPPORTED_OS{linux}=\"L\
+inux\";\n$SUPPORTED_OS{windows}=\"Cygwin\";\n\n\n\\
+n$MODE{t_coffee}{description}=\" for regular multi\
+ple sequence alignments\";\n$MODE{rcoffee} {descri\
+ption}=\" for RNA multiple sequence alignments\";\\
+n\n$MODE{psicoffee} {description}=\" for Homology \
+Extended multiple sequence alignments\";\n$MODE{ex\
+presso}{description}=\" for very accurate structur\
+e based multiple sequence alignments\";\n$MODE{\"3\
+dcoffee\"}{description}=\" for multiple structure \
+alignments\";\n$MODE{mcoffee} {description}=\" for\
+ combining alternative multiple sequence alignment\
+ packages\\n------- into a unique meta-package. Th\
+e installer will upload several MSA packages and c\
+ompile them\\n\n\";\n\n\n&post_process_PG();\nretu\
+rn;\n}\n\nsub post_process_PG\n  {\n    my $p;\n  \
+  \n    %PG=&name2dname (%PG);\n    %MODE=&name2dn\
+ame(%MODE);\n    foreach $p (keys(%PG)){if ( $PG{$\
+p}{type} eq \"compiler\"){$PG{$p}{update_action}=\\
+"never\";}}\n    \n  }\n\nsub name2dname\n  {\n   \
+ my (%L)=(@_);\n    my ($l, $ml);\n    \n    forea\
+ch my $pg (keys(%L))\n      {\n	$l=length ($pg);\n\
+	if ( $l>$ml){$ml=$l;}\n      }\n    $ml+=1;\n    \
+foreach my $pg (keys(%L))\n      {\n	my $name;\n	$\
+l=$ml-length ($pg);\n	$name=$pg;\n	for ( $b=0; $b<\
+$l; $b++)\n	  {\n	    $name .=\" \";\n	  }\n	$L{$p\
+g}{dname}=$name;\n      }\n    return %L;\n  }\n\n\
+sub env_file2putenv\n  {\n    my $f=@_[0];\n    my\
+ $F=new FileHandle;\n    my $n;\n    \n    open ($\
+F, \"$f\");\n    while (<$F>)\n      {\n	my $line=\
+$_;\n	my($var, $value)=($_=~/(\\S+)\\=(\\S*)/);\n	\
+$ENV{$var}=$value;\n	$ENV_SET{$var}=1;\n	$n++;\n  \
+    }\n    close ($F);\n    return $n;\n  }\n\nsub\
+ replace_line_in_file\n  {\n    my ($file, $wordin\
+, $wordout)=@_;\n    my $O=new FileHandle;\n    my\
+ $I=new FileHandle;\n    my $l;\n    if (!-e $file\
+){return;}\n    \n    system (\"mv $file $file.old\
+\");\n    open ($O, \">$file\");\n    open ($I, \"\
+$file.old\");\n    while (<$I>)\n      {\n	$l=$_;\\
+n	if (!($l=~/$wordin/)){print $O \"$l\";}\n	elsif \
+( $wordout ne \"\"){$l=~s/$wordin/$wordout/g;print\
+ $O \"$l\";}\n      }\n    close ($O);\n    close \
+($I);\n    return;\n  }\n\nsub add_C_libraries\n  \
+{\n   my ($file,$first,@list)=@_;\n   \n    my $O=\
+new FileHandle;\n    my $I=new FileHandle;\n    my\
+ ($l,$anchor);\n    if (!-e $file){return;}\n   \n\
+    $anchor=\"#include <$first>\";\n	 \n    system\
+ (\"mv $file $file.old\");\n    open ($O, \">$file\
+\");\n    open ($I, \"$file.old\");\n    while (<$\
+I>)\n      {\n	$l=$_;\n	print $O \"$l\";\n	if (!($\
+l=~/$anchor/))\n	   {\n	    \n	    foreach my $lib\
+ (@list)\n	       {\n                  print $O \"\
+#include <$lib>\\n\";\n	       }\n           }\n  \
+    }\n    close ($O);\n    close ($I);\n    retur\
+n;\n    }\n","use Env;\nuse Cwd;\n@suffix=(\"tmp\"\
+, \"temp\", \"cache\", \"t_coffee\", \"core\", \"t\
+coffee\");\n\nif ($#ARGV==-1)\n  {\n    print \"cl\
+ean_cache.pl -file <file to add in -dir> -dir=<dir\
+> -size=<value in Mb>\\n0: unlimited -1 always.\\n\
+Will only clean directories matching:[\";\n    for\
+each $k(@suffix){print \"*$k* \";}\n    print \"]\\
+\n\";\n    exit (EXIT_FAILURE);\n  }\n\n$cl=join (\
+\" \",@ARGV);\nif (($cl=~/\\-no_action/))\n  {\n  \
+  exit (EXIT_SUCCESS);\n  }\n\nif (($cl=~/\\-debug\
+/))\n  {\n    $DEBUG=1;\n  }\nelse\n  {\n    $DEBU\
+G=0;\n  }\n\nif (($cl=~/\\-dir=(\\S+)/))\n  {\n   \
+ $dir=$1;\n  }\nelse\n  {\n    $dir=\"./\";\n  }\n\
+\nif ($cl=~/\\-file=(\\S+)/)\n  {\n    $file=$1;\n\
+  }\nelse\n  {\n    $file=0;\n  }\n\nif ($cl=~/\\-\
+size=(\\S+)/)\n  {\n    $max_size=$1;\n  }\nelse\n\
+  {\n    $max_size=0;#unlimited\n  }\nif ($cl=~/\\\
+-force/)\n  {\n    $force=1;\n  }\nelse\n  {\n    \
+$force=0;\n  }\n\nif ($cl=~/\\-age=(\\S+)/)\n  {\n\
+    $max_age=$1;\n  }\nelse\n  {\n    $max_age=0;#\
+unlimited\n  }\n\n$max_size*=1000000;\nif ( ! -d $\
+dir)\n  {\n    print STDERR \"\\nCannot process $d\
+ir: does not exist \\n\";\n    exit (EXIT_FAILURE)\
+;\n  }\n\nif ( !($dir=~/^\\//))\n  {\n    $base=cw\
+d();\n    $dir=\"$base/$dir\";\n  }\n\n$proceed=0;\
+\nforeach $s (@suffix)\n  {\n    \n    if (($dir=~\
+/$s/)){$proceed=1;}\n    $s=uc ($s);\n    if (($di\
+r=~/$s/)){$proceed=1;}\n  }\nif ( $proceed==0)\n  \
+{\n    print STDERR \"Clean_cache.pl can only clea\
+n directories whose absolute path name contains th\
+e following strings:\";\n    foreach $w (@suffix) \
+{print STDERR \"$w \";$w=lc($w); print STDERR \"$w\
+ \";}\n    print STDERR \"\\nCannot process $dir\\\
+n\";\n    exit (EXIT_FAILURE);\n  }\n\n$name_file=\
+\"$dir/name_file.txt\";\n$size_file=\"$dir/size_fi\
+le.txt\";\nif ( $force){&create_ref_file ($dir,$na\
+me_file,$size_file);}\nif ($file){&add_file ($dir,\
+ $name_file, $size_file, $file);}\n&clean_dir ($di\
+r, $name_file, $size_file, $max_size,$max_age);\ne\
+xit (EXIT_SUCCESS);\n\nsub clean_dir \n  {\n    my\
+ ($dir, $name_file, $size_file, $max_size, $max_ag\
+e)=@_;\n    my ($tot_size, $size, $f, $s);\n\n  \n\
+    $tot_size=&get_tot_size ($dir, $name_file, $si\
+ze_file);\n\n    if ( $tot_size<=$max_size){return\
+ ;}\n    else {$max_size/=2;}\n    \n    #recreate\
+ the name file in case some temprary files have no\
+t been properly registered\n    &create_ref_file (\
+$dir, $name_file, $size_file, $max_age);\n  \n    \
+$new_name_file=&vtmpnam();\n    open (R, \"$name_f\
+ile\");\n    open (W, \">$new_name_file\");\n    w\
+hile (<R>)\n      {\n	my $line=$_;\n	\n	($f, $s)=(\
+$line=~/(\\S+) (\\S+)/);\n	if ( !($f=~/\\S/)){next\
+;}\n	\n	elsif ($max_size && $tot_size>=$max_size &\
+& !($f=~/name_file/))\n	  {\n	    remove ( \"$dir/\
+$f\");\n	    $tot_size-=$s;\n	  }\n	elsif ( $max_a\
+ge && -M(\"$dir/$f\")>=$max_age)\n	  {\n	    remov\
+e ( \"$dir/$f\");\n	    $tot_size-=$s;\n	  }\n	els\
+e\n	  {\n	    print W \"$f $s\\n\";\n	  }\n      }\
+\n    close (R);\n    close (W);\n    open (F, \">\
+$size_file\");\n    print F \"$tot_size\";\n    if\
+ ( -e $new_name_file){`mv $new_name_file $name_fil\
+e`;}\n    close (F);\n  }\nsub get_tot_size\n  {\n\
+    my ($dir, $name_file, $size_file)=@_;\n    my \
+$size;\n    \n    if ( !-d $dir){return 0;}\n    i\
+f ( !-e $name_file)\n      {\n	\n	&create_ref_file\
+ ($dir, $name_file, $size_file);\n      }\n    ope\
+n (F, \"$size_file\");\n    $size=<F>;\n    close \
+(F);\n    chomp ($size);\n    return $size;\n  }\n\
+sub size \n  {\n    my $f=@_[0];\n\n    if ( !-d $\
+f){return -s($f);}\n    else {return &dir2size($f)\
+;}\n  }\nsub dir2size\n  {\n    my $d=@_[0];\n    \
+my ($s, $f);\n    \n    if ( !-d $d) {return 0;}\n\
+    \n    foreach $f (&dir2list ($d))\n      {\n	i\
+f ( -d $f){$s+=&dir2size (\"$d/$f\");}\n	else {$s+\
+= -s \"$dir/$f\";}\n      }\n    return $s;\n  }\n\
+\nsub remove \n  {\n    my $file=@_[0];\n    my ($\
+f);\n    \n    debug_print( \"--- $file ---\\n\");\
+\n    if (($file eq \".\") || ($file eq \"..\") ||\
+ ($file=~/\\*/)){return EXIT_FAILURE;}\n    elsif \
+( !-d $file)\n      {\n	debug_print (\"unlink $fil\
+e\\n\");\n	if (-e $file){unlink ($file);}\n      }\
+\n    elsif ( -d $file)\n      {\n	debug_print (\"\
+++++++++ $file +++++++\\n\");\n	foreach $f (&dir2l\
+ist($file))\n	  {\n	    &remove (\"$file/$f\");\n	\
+  }\n	debug_print (\"rmdir $file\\n\");\n	rmdir $f\
+ile;\n      }\n    else\n      {\n	debug_print (\"\
+????????? $file ????????\\n\");\n      }\n    retu\
+rn EXIT_SUCCESS;\n  }\n\nsub dir2list\n  {\n    my\
+ $dir=@_[0];\n    my (@list1, @list2,@list3, $l);\\
+n\n    opendir (DIR,$dir);\n    @list1=readdir (DI\
+R);\n    closedir (DIR);\n    \n    foreach $l (@l\
+ist1)\n      {\n	if ( $l ne \".\" && $l ne \"..\")\
+{@list2=(@list2, $l);}\n      }\n    @list3 = sort\
+ { (-M \"$dir/$list2[$b]\") <=> (-M \"$dir/$list2[\
+$a]\")} @list2;\n    return @list3;\n    \n  }\n\n\
+sub debug_print\n  {\n    \n    if ($DEBUG==1){pri\
+nt @_;}\n    \n  }\nsub create_ref_file\n  {\n    \
+my ($dir,$name_file,$size_file)=@_;\n    my ($f, $\
+s, $tot_size, @l);\n    \n    if ( !-d $dir){retur\
+n;}\n    \n    @l=&dir2list ($dir);\n    open (F, \
+\">$name_file\");\n    foreach $f (@l)\n      {\n	\
+$s=&size(\"$dir/$f\");\n	$tot_size+=$s;\n	print F \
+\"$f $s\\n\";\n      }\n    &myecho ($tot_size, \"\
+>$size_file\");\n    close (F);\n  }\nsub add_file\
+ \n  {\n    my ($dir,$name_file,$size_file,$file)=\
+@_;\n    my ($s, $tot_size);\n    \n    if ( !-d $\
+dir)   {return;}\n    if ( !-e \"$dir/$file\" ) {r\
+eturn;}\n    if ( !-e $name_file){&create_ref_file\
+ ($dir,$name_file,$size_file);}\n					    \n    $s\
+=&size(\"$dir/$file\");\n    open (F, \">>$name_fi\
+le\");\n    print F \"$file\\n\";\n    close (F);\\
+n\n    $tot_size=&get_tot_size ($dir,$name_file,$s\
+ize_file);\n    $tot_size+=$s;\n    &myecho ($tot_\
+size, \">$size_file\");\n    \n  }\n	\nsub myecho\\
+n  {\n    my ($string, $file)=@_;\n    open (ECHO,\
+ $file) || die;\n    print ECHO \"$string\";\n    \
+close (ECHO);\n  }\n    \n		\n	\nsub vtmpnam\n  {\\
+n    my $tmp_file_name;\n    $tmp_name_counter++;\\
+n    $tmp_file_name=\"tmp_file_for_clean_cache_pdb\
+$$.$tmp_name_counter\";\n    $tmp_file_list[$ntmp_\
+file++]=$tmp_file_name;\n    if ( -e $tmp_file_nam\
+e) {return &vtmpnam ();}\n    else {return $tmp_fi\
+le_name;}\n  }\n","\n$t_coffee=\"t_coffee\";\n\nfo\
+reach $value ( @ARGV)\n  {\n    $seq_file=$seq_fil\
+e.\" \".$value;\n  }\n\n$name=$ARGV[0];\n$name=~s/\
+\\.[^\\.]*$//;\n$lib_name=\"$name.mocca_lib\";\n$t\
+ype=`t_coffee $seq_file -get_type -quiet`;\nchop (\
+$type);\n\nif ( $type eq \"PROTEIN\"){$lib_mode=\"\
+lalign_rs_s_pair -lalign_n_top 20\";}\nelsif ( $ty\
+pe eq\"DNA\"){$lib_mode=\"lalign_rs_s_dna_pair -la\
+lign_n_top 40\";}\n\nif ( !(-e $lib_name))\n  {\n	\
+  \n  $command=\"$t_coffee -mocca -seq_weight=no -\
+cosmetic_penalty=0 -mocca_interactive -in $lib_mod\
+e -out_lib $lib_name -infile $seq_file\";\n  \n  }\
+\nelsif ( (-e $lib_name))\n  {\n  $command=\"$t_co\
+ffee -mocca -seq_weight=no -cosmetic_penalty=0 -mo\
+cca_interactive -in $lib_name -infile $seq_file\";\
+\n  \n  }\n\nsystem ($command);\n\nexit;\n\n","my \
+$WSDL = 'http://www.ebi.ac.uk/Tools/webservices/ws\
+dl/WSDaliLite.wsdl';\n\nuse SOAP::Lite;\nuse Data:\
+:Dumper;\nuse Getopt::Long qw(:config no_ignore_ca\
+se bundling);\nuse File::Basename;\n\nmy $checkInt\
+erval = 5;\n\nmy %params=(\n	    'async' => '1', #\
+ Use async mode and simulate sync mode in client\n\
+	    );\nGetOptions(\n    'pdb1=s'     => \\$param\
+s{'sequence1'},\n    'chainid1=s' => \\$params{'ch\
+ainid1'},\n    'pdb2=s'     => \\$params{'sequence\
+2'},\n    'chainid2=s' => \\$params{'chainid2'},\n\
+    \"help|h\"	 => \\$help, # Usage info\n    \"as\
+ync|a\"	 => \\$async, # Asynchronous submission\n \
+   \"polljob\"	 => \\$polljob, # Get results\n    \
+\"status\"	 => \\$status, # Get status\n    \"jobi\
+d|j=s\"  => \\$jobid, # JobId\n    \"email|S=s\"  \
+=> \\$params{email}, # E-mail address\n    \"trace\
+\"      => \\$trace, # SOAP messages\n    \"sequen\
+ce=s\" => \\$sequence, # Input PDB\n    );\n\nmy $\
+scriptName = basename($0, ());\nif($help) {\n    &\
+usage();\n    exit(0);\n}\n\nif($trace) {\n    pri\
+nt \"Tracing active\\n\";\n    SOAP::Lite->import(\
++trace => 'debug');\n}\n\nmy $soap = SOAP::Lite\n \
+   ->service($WSDL)\n    ->on_fault(sub {\n       \
+ my $soap = shift;\n        my $res = shift;\n    \
+    # Throw an exception for all faults\n        i\
+f(ref($res) eq '') {\n            die($res);\n    \
+    } else {\n            die($res->faultstring);\\
+n        }\n        return new SOAP::SOM;\n    }\n\
+               );\n\nif( !($polljob || $status) &&\
+\n    !( defined($params{'sequence1'}) && defined(\
+$params{'sequence2'}) )\n    ) {\n    print STDERR\
+ 'Error: bad option combination', \"\\n\";\n    &u\
+sage();\n    exit(1);\n}\nelsif($polljob && define\
+d($jobid)) {\n    print \"Getting results for job \
+$jobid\\n\";\n    getResults($jobid);\n}\nelsif($s\
+tatus && defined($jobid)) {\n    print STDERR \"Ge\
+tting status for job $jobid\\n\";\n    my $result \
+= $soap->checkStatus($jobid);\n    print STDOUT \"\
+$result\", \"\\n\";\n    if($result eq 'DONE') {\n\
+	print STDERR \"To get results: $scriptName --poll\
+job --jobid $jobid\\n\";\n    }\n}\nelse {\n    if\
+(-f $params{'sequence1'}) {\n	$params{'sequence1'}\
+ = read_file($params{'sequence1'});\n    }\n    if\
+(-f $params{'sequence2'}) {\n	$params{'sequence2'}\
+ = read_file($params{'sequence2'});\n    }\n\n    \
+my $jobid;\n    my $paramsData = SOAP::Data->name(\
+'params')->type(map=>\\%params);\n    # For SOAP::\
+Lite 0.60 and earlier parameters are passed direct\
+ly\n    if($SOAP::Lite::VERSION eq '0.60' || $SOAP\
+::Lite::VERSION =~ /0\\.[1-5]/) {\n        $jobid \
+= $soap->runDaliLite($paramsData);\n    }\n    # F\
+or SOAP::Lite 0.69 and later parameter handling is\
+ different, so pass\n    # undef's for templated p\
+arams, and then pass the formatted args.\n    else\
+ {\n        $jobid = $soap->runDaliLite(undef,\n		\
+		     $paramsData);\n    }\n\n    if (defined($as\
+ync)) {\n	print STDOUT $jobid, \"\\n\";\n        p\
+rint STDERR \"To check status: $scriptName --statu\
+s --jobid $jobid\\n\";\n    } else { # Synchronous\
+ mode\n        print STDERR \"JobId: $jobid\\n\";\\
+n        sleep 1;\n        getResults($jobid);\n  \
+  }\n}\n\nsub clientPoll($) {\n    my $jobid = shi\
+ft;\n    my $result = 'PENDING';\n    # Check stat\
+us and wait if not finished\n    #print STDERR \"C\
+hecking status: $jobid\\n\";\n    while($result eq\
+ 'RUNNING' || $result eq 'PENDING') {\n        $re\
+sult = $soap->checkStatus($jobid);\n        print \
+STDERR \"$result\\n\";\n        if($result eq 'RUN\
+NING' || $result eq 'PENDING') {\n            # Wa\
+it before polling again.\n            sleep $check\
+Interval;\n        }\n    }\n}\n\nsub getResults($\
+) {\n    $jobid = shift;\n    # Check status, and \
+wait if not finished\n    clientPoll($jobid);\n   \
+ # Use JobId if output file name is not defined\n \
+   unless(defined($outfile)) {\n        $outfile=$\
+jobid;\n    }\n    # Get list of data types\n    m\
+y $resultTypes = $soap->getResults($jobid);\n    #\
+ Get the data and write it to a file\n    if(defin\
+ed($outformat)) { # Specified data type\n        m\
+y $selResultType;\n        foreach my $resultType \
+(@$resultTypes) {\n            if($resultType->{ty\
+pe} eq $outformat) {\n                $selResultTy\
+pe = $resultType;\n            }\n        }\n     \
+   $res=$soap->poll($jobid, $selResultType->{type}\
+);\n        write_file($outfile.'.'.$selResultType\
+->{ext}, $res);\n    } else { # Data types availab\
+le\n        # Write a file for each output type\n \
+       for my $resultType (@$resultTypes){\n      \
+      #print \"Getting $resultType->{type}\\n\";\n\
+            $res=$soap->poll($jobid, $resultType->\
+{type});\n            write_file($outfile.'.'.$res\
+ultType->{ext}, $res);\n        }\n    }\n}\n\nsub\
+ read_file($) {\n    my $filename = shift;\n    op\
+en(FILE, $filename);\n    my $content;\n    my $bu\
+ffer;\n    while(sysread(FILE, $buffer, 1024)) {\n\
+	$content.= $buffer;\n    }\n    close(FILE);\n   \
+ return $content;\n}\n\nsub write_file($$) {\n    \
+my ($tmp,$entity) = @_;\n    print STDERR \"Creati\
+ng result file: \".$tmp.\"\\n\";\n    unless(open \
+(FILE, \">$tmp\")) {\n	return 0;\n    }\n    syswr\
+ite(FILE, $entity);\n    close (FILE);\n    return\
+ 1;\n}\n\nsub usage {\n    print STDERR <<EOF\nDal\
+iLite\n========\n\nPairwise comparison of protein \
+structures\n\n[Required]\n\n  --pdb1              \
+  : str  : PDB ID for structure 1\n  --pdb2       \
+         : str  : PDB ID for structure 2\n\n[Optio\
+nal]\n\n  --chain1              : str  : Chain ide\
+ntifer in structure 1\n  --chain2              : s\
+tr  : Chain identifer in structure 2\n\n[General]\\
+n\n  -h, --help            :      : prints this he\
+lp text\n  -S, --email           : str  : user ema\
+il address\n  -a, --async           :      : async\
+hronous submission\n      --status          :     \
+ : poll for the status of a job\n      --polljob  \
+       :      : poll for the results of a job\n  -\
+j, --jobid           : str  : jobid for an asynchr\
+onous job\n  -O, --outfile         : str  : file n\
+ame for results (default is jobid)\n      --trace	\
+        :      : show SOAP messages being intercha\
+nged \n\nSynchronous job:\n\n  The results/errors \
+are returned as soon as the job is finished.\n  Us\
+age: $scriptName --email <your\\@email> [options] \
+pdbFile [--outfile string]\n  Returns: saves the r\
+esults to disk\n\nAsynchronous job:\n\n  Use this \
+if you want to retrieve the results at a later tim\
+e. The results \n  are stored for up to 24 hours. \
+\n  The asynchronous submission mode is recommende\
+d when users are submitting \n  batch jobs or larg\
+e database searches	\n  Usage: $scriptName --email\
+ <your\\@email> --async [options] pdbFile\n  Retur\
+ns: jobid\n\n  Use the jobid to query for the stat\
+us of the job. \n  Usage: $scriptName --status --j\
+obid <jobId>\n  Returns: string indicating the sta\
+tus of the job:\n    DONE - job has finished\n    \
+RUNNING - job is running\n    NOT_FOUND - job cann\
+ot be found\n    ERROR - the jobs has encountered \
+an error\n\n  When done, use the jobid to retrieve\
+ the status of the job. \n  Usage: $scriptName --p\
+olljob --jobid <jobId> [--outfile string]\n\n[Help\
+]\n\n  For more detailed help information refer to\
+\n  http://www.ebi.ac.uk/DaliLite/\nEOF\n;\n}\n","\
+my $WSDL = 'http://www.ebi.ac.uk/Tools/webservices\
+/wsdl/WSWUBlast.wsdl';\n\nuse strict;\nuse SOAP::L\
+ite;\nuse Getopt::Long qw(:config no_ignore_case b\
+undling);\nuse File::Basename;\n\nmy $checkInterva\
+l = 15;\n\nmy $numOpts = scalar(@ARGV);\nmy ($outf\
+ile, $outformat, $help, $async, $polljob, $status,\
+ $ids, $jobid, $trace, $sequence);\nmy %params= ( \
+# Defaults\n	      'async' => 1, # Force into asyn\
+c mode\n	      'exp' => 10.0, # E-value threshold\\
+n	      'numal' => 50, # Maximum number of alignme\
+nts\n	      'scores' => 100, # Maximum number of s\
+cores\n            );\nGetOptions( # Map the optio\
+ns into variables\n    \"program|p=s\"     => \\$p\
+arams{program}, # BLAST program\n    \"database|D=\
+s\"    => \\$params{database}, # Search database\n\
+    \"matrix|m=s\"      => \\$params{matrix}, # Sc\
+oring matrix\n    \"exp|E=f\"         => \\$params\
+{exp}, # E-value threshold\n    \"echofilter|e\"  \
+  => \\$params{echofilter}, # Display filtered seq\
+uence\n    \"filter|f=s\"      => \\$params{filter\
+}, # Low complexity filter name\n    \"alignments|\
+b=i\"  => \\$params{numal}, # Number of alignments\
+\n    \"scores|s=i\"      => \\$params{scores}, # \
+Number of scores\n    \"sensitivity|S=s\" => \\$pa\
+rams{sensitivity}, # Search sensitivity\n    \"sor\
+t|t=s\"	      => \\$params{sort}, # Sort hits by..\
+.\n    \"stats|T=s\"       => \\$params{stats}, # \
+Scoring statistic to use\n    \"strand|d=s\"      \
+=> \\$params{strand}, # Strand to use in DNA vs. D\
+NA search\n    \"topcombon|c=i\"   => \\$params{to\
+pcombon}, # Consistent sets of HSPs\n    \"outfile\
+=s\"       => \\$outfile, # Output file\n    \"out\
+format|o=s\"   => \\$outformat, # Output format\n \
+   \"help|h\"	      => \\$help, # Usage info\n    \
+\"async|a\"	      => \\$async, # Asynchronous mode\
+\n    \"polljob\"	      => \\$polljob, # Get resul\
+ts\n    \"status\"	      => \\$status, # Get job s\
+tatus\n    \"ids\"             => \\$ids, # Get id\
+s from result\n    \"jobid|j=s\"       => \\$jobid\
+, # JobId\n    \"email=s\"         => \\$params{em\
+ail}, # E-mail address\n    \"trace\"           =>\
+ \\$trace, # SOAP trace\n    \"sequence=s\"      =\
+> \\$sequence, # Query sequence\n    );\n\nmy $scr\
+iptName = basename($0, ());\nif($help || $numOpts \
+== 0) {\n    &usage();\n    exit(0);\n}\n\nif($tra\
+ce){\n    print STDERR \"Tracing active\\n\";\n   \
+ SOAP::Lite->import(+trace => 'debug');\n}\n\nmy $\
+soap = SOAP::Lite\n    ->service($WSDL)\n    ->pro\
+xy('http://localhost/',\n    #proxy => ['http' => \
+'http://your.proxy.server/'], # HTTP proxy\n    ti\
+meout => 600, # HTTP connection timeout\n    )\n  \
+  ->on_fault(sub { # SOAP fault handler\n        m\
+y $soap = shift;\n        my $res = shift;\n      \
+  # Throw an exception for all faults\n        if(\
+ref($res) eq '') {\n            die($res);\n      \
+  } else {\n            die($res->faultstring);\n \
+       }\n        return new SOAP::SOM;\n    }\n  \
+             );\n\nif( !($polljob || $status || $i\
+ds) &&\n    !( defined($ARGV[0]) || defined($seque\
+nce) )\n    ) {\n    print STDERR 'Error: bad opti\
+on combination', \"\\n\";\n    &usage();\n    exit\
+(1);\n}\nelsif($polljob && defined($jobid)) {\n   \
+ print \"Getting results for job $jobid\\n\";\n   \
+ getResults($jobid);\n}\nelsif($status && defined(\
+$jobid)) {\n    print STDERR \"Getting status for \
+job $jobid\\n\";\n    my $result = $soap->checkSta\
+tus($jobid);\n    print STDOUT \"$result\\n\";\n  \
+  if($result eq 'DONE') {\n	print STDERR \"To get \
+results: $scriptName --polljob --jobid $jobid\\n\"\
+;\n    }\n}  \nelsif($ids && defined($jobid)) {\n \
+   print STDERR \"Getting ids from job $jobid\\n\"\
+;\n    getIds($jobid);\n}\nelse {\n    # Prepare i\
+nput data\n    my $content;\n    my (@contents) = \
+();\n    if(-f $ARGV[0] || $ARGV[0] eq '-') {	\n	$\
+content={type=>'sequence',content=>read_file($ARGV\
+[0])};	\n    }\n    if($sequence) {	\n	if(-f $sequ\
+ence || $sequence eq '-') {	\n	    $content={type=\
+>'sequence',content=>read_file($ARGV[0])};	\n	} el\
+se {\n	    $content={type=>'sequence',content=>$se\
+quence};\n	}\n    }\n    push @contents, $content;\
+\n\n    # Submit the job\n    my $paramsData = SOA\
+P::Data->name('params')->type(map=>\\%params);\n  \
+  my $contentData = SOAP::Data->name('content')->v\
+alue(\\@contents);\n    # For SOAP::Lite 0.60 and \
+earlier parameters are passed directly\n    if($SO\
+AP::Lite::VERSION eq '0.60' || $SOAP::Lite::VERSIO\
+N =~ /0\\.[1-5]/) {\n        $jobid = $soap->runWU\
+Blast($paramsData, $contentData);\n    }\n    # Fo\
+r SOAP::Lite 0.69 and later parameter handling is \
+different, so pass\n    # undef's for templated pa\
+rams, and then pass the formatted args.\n    else \
+{\n        $jobid = $soap->runWUBlast(undef, undef\
+,\n				   $paramsData, $contentData);\n    }\n\n  \
+  # Asynchronous mode: output jobid and exit.\n   \
+ if (defined($async)) {\n	print STDOUT $jobid, \"\\
+\n\";\n        print STDERR \"To check status: $sc\
+riptName --status --jobid $jobid\\n\";\n    }\n   \
+ # Synchronous mode: try to get results\n    else \
+{\n        print STDERR \"JobId: $jobid\\n\";\n   \
+     sleep 1;\n        getResults($jobid);\n    }\\
+n}\n\nsub getIds($) {\n    my $jobid = shift;\n   \
+ my $results = $soap->getIds($jobid);\n    for my \
+$result (@$results){\n	print \"$result\\n\";\n    \
+}\n}\n\nsub clientPoll($) {\n    my $jobid = shift\
+;\n    my $result = 'PENDING';\n    # Check status\
+ and wait if not finished\n    while($result eq 'R\
+UNNING' || $result eq 'PENDING') {\n        $resul\
+t = $soap->checkStatus($jobid);\n        print STD\
+ERR \"$result\\n\";\n        if($result eq 'RUNNIN\
+G' || $result eq 'PENDING') {\n            # Wait \
+before polling again.\n            sleep $checkInt\
+erval;\n        }\n    }\n}\n\nsub getResults($) {\
+\n    my $jobid = shift;\n    my $res;\n    # Chec\
+k status, and wait if not finished\n    clientPoll\
+($jobid);\n    # Use JobId if output file name is \
+not defined\n    unless(defined($outfile)) {\n    \
+    $outfile=$jobid;\n    }\n    # Get list of dat\
+a types\n    my $resultTypes = $soap->getResults($\
+jobid);\n    # Get the data and write it to a file\
+\n    if(defined($outformat)) { # Specified data t\
+ype\n	if($outformat eq 'xml') {$outformat = 'toolx\
+ml';}\n	if($outformat eq 'txt') {$outformat = 'too\
+loutput';}\n        my $selResultType;\n        fo\
+reach my $resultType (@$resultTypes) {\n          \
+  if($resultType->{type} eq $outformat) {\n       \
+         $selResultType = $resultType;\n          \
+  }\n        }\n        $res=$soap->poll($jobid, $\
+selResultType->{type});\n	if($outfile eq '-') {\n	\
+     write_file($outfile, $res);\n	} else {\n	    \
+write_file($outfile.'.'.$selResultType->{ext}, $re\
+s);\n	}\n    } else { # Data types available\n    \
+    # Write a file for each output type\n        f\
+or my $resultType (@$resultTypes){\n            #p\
+rint STDERR \"Getting $resultType->{type}\\n\";\n \
+           $res=$soap->poll($jobid, $resultType->{\
+type});\n	    if($outfile eq '-') {\n		write_file(\
+$outfile, $res);\n	    } else {\n		write_file($out\
+file.'.'.$resultType->{ext}, $res);\n	    }\n     \
+   }\n    }\n}\n\nsub read_file($) {\n    my $file\
+name = shift;\n    my ($content, $buffer);\n    if\
+($filename eq '-') {\n	while(sysread(STDIN, $buffe\
+r, 1024)) {\n	    $content .= $buffer;\n	}\n    }\\
+n    else { # File\n	open(FILE, $filename) or die \
+\"Error: unable to open input file\";\n	while(sysr\
+ead(FILE, $buffer, 1024)) {\n	    $content .= $buf\
+fer;\n	}\n	close(FILE);\n    }\n    return $conten\
+t;\n}\n\nsub write_file($$) {\n    my ($filename, \
+$data) = @_;\n    print STDERR 'Creating result fi\
+le: ' . $filename . \"\\n\";\n    if($filename eq \
+'-') {\n	print STDOUT $data;\n    }\n    else {\n	\
+open(FILE, \">$filename\") or die \"Error: unable \
+to open output file\";\n	syswrite(FILE, $data);\n	\
+close(FILE);\n    }\n}\n\nsub usage {\n    print S\
+TDERR <<EOF\nWU-BLAST\n========\n\nRapid sequence \
+database search programs utilizing the BLAST algor\
+ithm.\n   \n[Required]\n\n      --email       : st\
+r  : user email address \n  -p, --program	    : st\
+r  : BLAST program to use: blastn, blastp, blastx,\
+ \n                             tblastn or tblastx\
+\n  -D, --database    : str  : database to search\\
+n  seqFile           : file : query sequence data \
+file (\"-\" for STDIN)\n\n[Optional]\n\n  -m, --ma\
+trix	    : str  : scoring matrix\n  -E, --exp	    \
+: real : 0<E<= 1000. Statistical significance thre\
+shold\n                             for reporting \
+database sequence matches.\n  -e, --echofilter  : \
+     : display the filtered query sequence in the \
+output\n  -f, --filter	    : str  : activates filt\
+ering of the query sequence\n  -b, --alignments  :\
+ int  : number of alignments to be reported\n  -s,\
+ --scores	    : int  : number of scores to be repo\
+rted\n  -S, --sensitivity : str  :\n  -t, --sort	 \
+   : str  :\n  -T, --stats       : str  :\n  -d, -\
+-strand      : str  : DNA strand to search with in\
+ DNA vs. DNA searches \n  -c, --topcombon   :     \
+ :\n\n[General]	\n\n  -h, --help       :      : pr\
+ints this help text\n  -a, --async      :      : f\
+orces to make an asynchronous query\n      --statu\
+s     :      : poll for the status of a job\n     \
+ --polljob    :      : poll for the results of a j\
+ob\n  -j, --jobid      : str  : jobid that was ret\
+urned when an asynchronous job \n                 \
+           was submitted.\n  -O, --outfile    : st\
+r  : name of the file results should be written to\
+ \n                            (default is based o\
+n the jobid; \"-\" for STDOUT)\n  -o, --outformat \
+ : str  : txt or xml output (no file is written)\n\
+      --trace	   :      : show SOAP messages being\
+ interchanged \n\nSynchronous job:\n\n  The result\
+s/errors are returned as soon as the job is finish\
+ed.\n  Usage: $scriptName --email <your\\@email> [\
+options...] seqFile\n  Returns: saves the results \
+to disk\n\nAsynchronous job:\n\n  Use this if you \
+want to retrieve the results at a later time. The \
+results \n  are stored for up to 24 hours. \n  The\
+ asynchronous submission mode is recommended when \
+users are submitting \n  batch jobs or large datab\
+ase searches	\n  Usage: $scriptName --async --emai\
+l <your\\@email> [options...] seqFile\n  Returns :\
+ jobid\n\n  Use the jobid to query for the status \
+of the job. \n  Usage: $scriptName --status --jobi\
+d <jobId>\n  Returns : string indicating the statu\
+s of the job:\n    DONE - job has finished\n    RU\
+NNING - job is running\n    NOT_FOUND - job cannot\
+ be found\n    ERROR - the jobs has encountered an\
+ error\n\n  When done, use the jobid to retrieve t\
+he status of the job. \n  Usage: $scriptName --pol\
+ljob --jobid <jobId> [--outfile string]\n  Returns\
+: saves the results to disk\n\n[Help]\n\nFor more \
+detailed help information refer to \nhttp://www.eb\
+i.ac.uk/blast2/WU-Blast2_Help_frame.html\n \nEOF\n\
+;\n}\n","\nmy $WSDL = 'http://www.ebi.ac.uk/Tools/\
+webservices/wsdl/WSBlastpgp.wsdl';\n\nuse SOAP::Li\
+te;\nuse Getopt::Long qw(:config no_ignore_case bu\
+ndling);\nuse File::Basename;\n\nmy $checkInterval\
+ = 15;\n\nmy %params=(\n	    'async' => '1', # Use\
+ async mode and simulate sync mode in client\n	   \
+ );\nGetOptions(\n    \"mode=s\"           => \\$p\
+arams{mode}, # Search mode: PSI-Blast or PHI-Blast\
+\n    \"database|d=s\"     => \\$params{database},\
+ # Database to search\n    \"matrix|M=s\"       =>\
+ \\$params{matrix},# Scoring maxtrix\n    \"exp|e=\
+f\"          => \\$params{exp}, # E-value\n    \"e\
+xpmulti|h=f\"     => \\$params{expmulti}, # E-valu\
+e\n    \"filter|F=s\"       => \\$params{filter}, \
+# Low complexity filter\n    \"dropoff|X=i\"      \
+=> \\$params{dropoff}, # Dropoff score\n    \"fina\
+ldropoff|Z=i\" => \\$params{finaldropoff}, # Final\
+ dropoff score\n    \"scores|v=i\"       => \\$par\
+ams{scores}, # Max number of scores\n    \"align=i\
+\"          => \\$params{align}, # Alignment view\\
+n    \"startregion|S=i\"  => \\$params{startregion\
+}, # Start of region in query\n    \"endregion|H=i\
+\"    => \\$params{endregion}, # End of region in \
+query\n    \"maxpasses|j=i\"    => \\$params{maxpa\
+sses}, # Number of PSI iterations\n    \"opengap|G\
+=i\"      => \\$params{opengap}, # Gap open penalt\
+y\n    \"extendgap|E=i\"    => \\$params{extendgap\
+}, # Gap extension penalty\n    \"pattern=s\"     \
+   => \\$params{pattern}, # PHI-BLAST pattern\n   \
+ \"usagemode|p=s\"    => \\$params{usagemode}, # P\
+HI-BLAST program\n    \"appxml=s\"         => \\$p\
+arams{appxml}, # Application XML\n    \"sequence=s\
+\"       => \\$sequence, # Query sequence\n    \"h\
+elp\"	       => \\$help, # Usage info\n    \"pollj\
+ob\"	       => \\$polljob, # Get results\n    \"st\
+atus\"	       => \\$status, # Get status\n    \"id\
+s\"      	       => \\$ids, # Get ids from result\\
+n    \"jobid=s\"          => \\$jobid, # JobId\n  \
+  \"outfile=s\"        => \\$outfile, # Output fil\
+ename\n    \"outformat|o=s\"    => \\$outformat, #\
+ Output file format\n    \"async|a\"	       => \\$\
+async, # Async submission\n    \"email=s\"        \
+  => \\$params{email}, # User e-mail address\n    \
+\"trace\"            => \\$trace, # Show SOAP mess\
+ages\n    );\n\nmy $scriptName = basename($0, ());\
+\nif($help) {\n    &usage();\n    exit(0);\n}\n\ni\
+f ($trace){\n    print \"Tracing active\\n\";\n   \
+ SOAP::Lite->import(+trace => 'debug');\n}\n\nmy $\
+soap = SOAP::Lite\n    ->service($WSDL)\n    ->on_\
+fault(sub {\n        my $soap = shift;\n        my\
+ $res = shift;\n        # Throw an exception for a\
+ll faults\n        if(ref($res) eq '') {\n        \
+    die($res);\n        } else {\n            die(\
+$res->faultstring);\n        }\n        return new\
+ SOAP::SOM;\n    }\n               );\n\nif( !($po\
+lljob || $status || $ids) &&\n    !( (defined($ARG\
+V[0]) && -f $ARGV[0]) || defined($sequence) )\n   \
+ ) {\n    print STDERR 'Error: bad option combinat\
+ion', \"\\n\";\n    &usage();\n    exit(1);\n}\nel\
+sif($polljob && defined($jobid)) {\n    print \"Ge\
+tting results for job $jobid\\n\";\n    getResults\
+($jobid);\n}\nelsif($status && defined($jobid)) {\\
+n    print STDERR \"Getting status for job $jobid\\
+\n\";\n    my $result = $soap->checkStatus($jobid)\
+;\n    print STDOUT $result, \"\\n\";\n    if($res\
+ult eq 'DONE') {\n	print STDERR \"To get results: \
+$scriptName --polljob --jobid $jobid\\n\";\n    }\\
+n}  \nelsif($ids && defined($jobid)) {\n    print \
+STDERR \"Getting ids from job $jobid\\n\";\n    ge\
+tIds($jobid);\n}\nelse {\n    if(-f $ARGV[0]) {	\n\
+	$content={type=>'sequence', content=>read_file($A\
+RGV[0])};	\n    }\n    if($sequence) {	\n	if(-f $s\
+equence) {\n	    $content={type=>'sequence', conte\
+nt=>read_file($sequence)};	\n	} else {\n	    $cont\
+ent={type=>'sequence', content=>$sequence};\n	}\n \
+   }\n    push @content, $content;\n\n    my $jobi\
+d;\n    my $paramsData = SOAP::Data->name('params'\
+)->type(map=>\\%params);\n    my $contentData = SO\
+AP::Data->name('content')->value(\\@content);\n   \
+ # For SOAP::Lite 0.60 and earlier parameters are \
+passed directly\n    if($SOAP::Lite::VERSION eq '0\
+.60' || $SOAP::Lite::VERSION =~ /0\\.[1-5]/) {\n  \
+      $jobid = $soap->runBlastpgp($paramsData, $co\
+ntentData);\n    }\n    # For SOAP::Lite 0.69 and \
+later parameter handling is different, so pass\n  \
+  # undef's for templated params, and then pass th\
+e formatted args.\n    else {\n        $jobid = $s\
+oap->runBlastpgp(undef, undef,\n				    $paramsDat\
+a, $contentData);\n    }\n\n    if (defined($async\
+)) {\n	print STDOUT $jobid, \"\\n\";\n        prin\
+t STDERR \"To check status: $scriptName --status -\
+-jobid $jobid\\n\";\n    } else { # Synchronous mo\
+de\n        print STDERR \"JobId: $jobid\\n\";\n  \
+      sleep 1;\n        getResults($jobid);\n    }\
+\n}\n\nsub getIds($) {\n    $jobid = shift;\n    m\
+y $results = $soap->getIds($jobid);\n    for $resu\
+lt (@$results){\n	print \"$result\\n\";\n    }\n}\\
+n\nsub clientPoll($) {\n    my $jobid = shift;\n  \
+  my $result = 'PENDING';\n    # Check status and \
+wait if not finished\n    #print STDERR \"Checking\
+ status: $jobid\\n\";\n    while($result eq 'RUNNI\
+NG' || $result eq 'PENDING') {\n        $result = \
+$soap->checkStatus($jobid);\n        print STDERR \
+\"$result\\n\";\n        if($result eq 'RUNNING' |\
+| $result eq 'PENDING') {\n            # Wait befo\
+re polling again.\n            sleep $checkInterva\
+l;\n        }\n    }\n}\n\nsub getResults($) {\n  \
+  $jobid = shift;\n    # Check status, and wait if\
+ not finished\n    clientPoll($jobid);\n    # Use \
+JobId if output file name is not defined\n    unle\
+ss(defined($outfile)) {\n        $outfile=$jobid;\\
+n    }\n    # Get list of data types\n    my $resu\
+ltTypes = $soap->getResults($jobid);\n    # Get th\
+e data and write it to a file\n    if(defined($out\
+format)) { # Specified data type\n        my $selR\
+esultType;\n        foreach my $resultType (@$resu\
+ltTypes) {\n            if($resultType->{type} eq \
+$outformat) {\n                $selResultType = $r\
+esultType;\n            }\n        }\n        $res\
+=$soap->poll($jobid, $selResultType->{type});\n   \
+     write_file($outfile.'.'.$selResultType->{ext}\
+, $res);\n    } else { # Data types available\n   \
+     # Write a file for each output type\n        \
+for my $resultType (@$resultTypes){\n            #\
+print \"Getting $resultType->{type}\\n\";\n       \
+     $res=$soap->poll($jobid, $resultType->{type})\
+;\n            write_file($outfile.'.'.$resultType\
+->{ext}, $res);\n        }\n    }\n}\n\nsub read_f\
+ile($) {\n    my $filename = shift;\n    open(FILE\
+, $filename);\n    my $content;\n    my $buffer;\n\
+    while(sysread(FILE, $buffer, 1024)) {\n	$conte\
+nt.= $buffer;\n    }\n    close(FILE);  \n    retu\
+rn $content;\n}\n\nsub write_file($$) {\n    my ($\
+tmp,$entity) = @_;\n    print STDERR \"Creating re\
+sult file: \".$tmp.\"\\n\";\n    unless(open (FILE\
+, \">$tmp\")) {\n	return 0;\n    }\n    syswrite(F\
+ILE, $entity);\n    close (FILE);\n    return 1;\n\
+}\n\nsub usage {\n    print STDERR <<EOF\nBlastpgp\
+\n========\n   \nThe blastpgp program implements t\
+he PSI-BLAST and PHI-BLAST variations\nof NCBI BLA\
+ST.\n\nFor more detailed help information refer to\
+\nhttp://www.ebi.ac.uk/blastpgp/blastpsi_help_fram\
+e.html\n \nBlastpgp specific options:\n\n[Required\
+]\n\n      --mode            : str  : search mode \
+to use: PSI-Blast or PHI-Blast\n  -d, --database  \
+      : str  : protein database to search\n  seqFi\
+le               : file : query sequence\n\n[Optio\
+nal]\n\n  -M, --matrix          : str  : scoring m\
+atrix\n  -e, --exp             : real : Expectatio\
+n value\n  -h, --expmulti        : real : threshol\
+d (multipass model)\n  -F, --filter          : str\
+  : filter query sequence with SEG [T,F]\n  -m, --\
+align           : int  : alignment view option:\n \
+                                0 - pairwise, 1 - \
+M/S identities,\n                                 \
+2 - M/S non-identities, 3 - Flat identities,\n    \
+                             4 - Flat non-identiti\
+es\n  -G, --opengap         : int  : cost to open \
+a gap\n  -E, --extendgap       : int  : cost to ex\
+tend a gap\n  -g, --gapalign        : str  : Gappe\
+d [T,F]\n  -v, --scores          : int  : number o\
+f scores to be reported\n  -j, --maxpasses       :\
+ int  : number of iterations\n  -X, --dropoff     \
+    : int  : Dropoff score\n  -Z, --finaldropoff  \
+  : int  : Dropoff for final alignment\n  -S, --st\
+artregion     : int  : Start of required region in\
+ query\n  -H, --endregion       : int  : End of re\
+quired region in query\n  -k, --pattern         : \
+str  : Hit File (PHI-BLAST only)\n  -p, --usagemod\
+e       : str  : Program option (PHI-BLAST only):\\
+n                                 blastpgp, patsee\
+dp, seedp\n\n[General]\n\n      --help            \
+:      : prints this help text\n  -a, --async     \
+      :      : forces to make an asynchronous quer\
+y\n      --status          :      : poll for the s\
+tatus of a job\n      --polljob         :      : p\
+oll for the results of a job\n      --jobid       \
+    : str  : jobid of an asynchronous job\n      -\
+-ids             :      : get hit identifiers for \
+result \n  -O, --outfile         : str  : name of \
+the file results should be written to\n           \
+                      (default is based on the job\
+id)\n  -o, --outformat       : str  : txt or xml o\
+utput (no file is written)\n      --trace         \
+  :      : show SOAP messages being interchanged\n\
+\nSynchronous job:\n\n  The results/errors are ret\
+urned as soon as the job is finished.\n  Usage: bl\
+astpgp.pl --email <your@email> [options...] seqfil\
+e\n  Returns: saves the results to disk\n\nAsynchr\
+onous job:\n\n  Use this if you want to retrieve t\
+he results at a later time. The results\n  are sto\
+red for up to 24 hours.\n  The asynchronous submis\
+sion mode is recommended when users are submitting\
+\n  batch jobs or large database searches\n  Usage\
+: blastpgp.pl --email <your@email> --async [option\
 s...] seqFile\n  Returns: jobid\n\n  Use the jobid\
- to query for the status of the job. If the job is\
- finished, \n  it also returns the results/errors.\
-\n  Usage: $scriptName --polljob --jobid <jobId> [\
---outfile string]\n  Returns: string indicating th\
-e status of the job and if applicable, results \n \
- as an attachment.\n\nFurther information:\n\n  ht\
-tp://www.ebi.ac.uk/Tools/webservices/services/sss/\
-ncbi_blast_rest\n  http://www.ebi.ac.uk/Tools/webs\
-ervices/tutorials/perl\n\nSupport/Feedback:\n\n  h\
-ttp://www.ebi.ac.uk/support/\nEOF\n}\n\n=head1 FEE\
-DBACK/SUPPORT\n\nPlease contact us at L<http://www\
-.ebi.ac.uk/support/> if you have any \nfeedback, s\
-uggestions or issues with the service or this clie\
-nt.\n\n=cut\n","\n=head1 NAME\n\nwublast_lwp.pl\n\\
-n=head1 DESCRIPTION\n\nWU-BLAST REST web service P\
-erl client using L<LWP>.\n\nTested with:\n\n=over\\
-n\n=item *\nL<LWP> 5.79, L<XML::Simple> 2.12 and P\
-erl 5.8.3\n\n=item *\nL<LWP> 5.805, L<XML::Simple>\
- 2.14 and Perl 5.8.7\n\n=item *\nL<LWP> 5.820, L<X\
-ML::Simple> 2.18 and Perl 5.10.0 (Ubuntu 9.04)\n\n\
-=back\n\nFor further information see:\n\n=over\n\n\
-=item *\nL<http://www.ebi.ac.uk/Tools/webservices/\
-services/sss/wu_blast_rest>\n\n=item *\nL<http://w\
-ww.ebi.ac.uk/Tools/webservices/tutorials/perl>\n\n\
-=back\n\n=head1 VERSION\n\n$Id: wublast_lwp.pl 131\
-7 2009-09-03 15:44:11Z hpm $\n\n=cut\n\nuse strict\
-;\nuse warnings;\n\nuse English;\nuse LWP;\nuse XM\
-L::Simple;\nuse Getopt::Long qw(:config no_ignore_\
-case bundling);\nuse File::Basename;\nuse Data::Du\
-mper;\n\nmy $baseUrl = 'http://www.ebi.ac.uk/Tools\
-/services/rest/wublast';\n\nmy $checkInterval = 3;\
-\n\nmy $outputLevel = 1;\n\nmy $numOpts = scalar(@\
-ARGV);\nmy %params = ( 'debugLevel' => 0 );\n\nmy \
-%tool_params = ();\nGetOptions(\n\n	# Tool specifi\
-c options\n	'program|p=s'     => \\$tool_params{'p\
-rogram'},      # BLAST program\n	'database|D=s'   \
- => \\$params{'database'},     # Search database\n\
-	'matrix|m=s'      => \\$tool_params{'matrix'},   \
-    # Scoring matrix\n	'exp|E=f'         => \\$too\
-l_params{'exp'},          # E-value threshold\n	'v\
-iewfilter|e'    => \\$tool_params{'viewfilter'},  \
- # Display filtered sequence\n	'filter|f=s'      =\
-> \\$tool_params{'filter'},       # Low complexity\
- filter name\n	'alignments|n=i'  => \\$tool_params\
-{'alignments'},   # Number of alignments\n	'scores\
-|s=i'      => \\$tool_params{'scores'},       # Nu\
-mber of scores\n	'sensitivity|S=s' => \\$tool_para\
-ms{'sensitivity'},  # Search sensitivity\n	'sort|t\
-=s'        => \\$tool_params{'sort'},         # So\
-rt hits by...\n	'stats|T=s'       => \\$tool_param\
-s{'stats'},        # Scoring statistic to use\n	's\
-trand|d=s'      => \\$tool_params{'strand'},      \
- # Strand to use\n	'topcombon|c=i'   => \\$tool_pa\
-rams{'topcombon'},    # Consistent sets of HSPs\n	\
-'align|A=i'       => \\$tool_params{'align'},   # \
-Pairwise alignment format\n	'stype=s' => \\$tool_p\
-arams{'stype'},    # Sequence type 'protein' or 'd\
-na'\n	'sequence=s' => \\$params{'sequence'},      \
-   # Query sequence file or DB:ID\n	'multifasta' =\
-> \\$params{'multifasta'},       # Multiple fasta \
-input\n\n	# Compatability options, old command-lin\
-e.\n	'echofilter|e'    => \\$params{'echofilter'},\
-   # Display filtered sequence\n	'b=i'  => \\$para\
-ms{'numal'},        # Number of alignments\n	'appx\
-ml=s'        => \\$params{'appxml'},       # Appli\
-cation XML\n\n	# Generic options\n	'email=s'      \
- => \\$params{'email'},          # User e-mail add\
-ress\n	'title=s'       => \\$params{'title'},     \
-     # Job title\n	'outfile=s'     => \\$params{'o\
-utfile'},        # Output file name\n	'outformat=s\
-'   => \\$params{'outformat'},      # Output file \
-type\n	'jobid=s'       => \\$params{'jobid'},     \
-     # JobId\n	'help|h'        => \\$params{'help'\
-},           # Usage help\n	'async'         => \\$\
-params{'async'},          # Asynchronous submissio\
-n\n	'polljob'       => \\$params{'polljob'},      \
-  # Get results\n	'resultTypes'   => \\$params{'re\
-sultTypes'},    # Get result types\n	'status'     \
-   => \\$params{'status'},         # Get status\n	\
-'params'        => \\$params{'params'},         # \
-List input parameters\n	'paramDetail=s' => \\$para\
-ms{'paramDetail'},    # Get details for parameter\\
-n	'quiet'         => \\$params{'quiet'},          \
-# Decrease output level\n	'verbose'       => \\$pa\
-rams{'verbose'},        # Increase output level\n	\
-'debugLevel=i'  => \\$params{'debugLevel'},     # \
-Debug output level\n	'baseUrl=s'     => \\$baseUrl\
-,                  # Base URL for service.\n);\nif\
- ( $params{'verbose'} ) { $outputLevel++ }\nif ( $\
-params{'$quiet'} )  { $outputLevel-- }\n\n&print_d\
-ebug_message( 'MAIN', 'LWP::VERSION: ' . $LWP::VER\
-SION,\n	1 );\n\n&print_debug_message( 'MAIN', \"pa\
-rams:\\n\" . Dumper( \\%params ),           11 );\\
-n&print_debug_message( 'MAIN', \"tool_params:\\n\"\
- . Dumper( \\%tool_params ), 11 );\n\nmy $scriptNa\
-me = basename( $0, () );\n\nif ( $params{'help'} |\
-| $numOpts == 0 ) {\n	&usage();\n	exit(0);\n}\n\n&\
-print_debug_message( 'MAIN', 'baseUrl: ' . $baseUr\
-l, 1 );\n\nif (\n	!(\n		   $params{'polljob'}\n		|\
-| $params{'resultTypes'}\n		|| $params{'status'}\n\
-		|| $params{'params'}\n		|| $params{'paramDetail'\
-}\n	)\n	&& !( defined( $ARGV[0] ) || defined( $par\
-ams{'sequence'} ) )\n  )\n{\n\n	# Bad argument com\
-bination, so print error message and usage\n	print\
- STDERR 'Error: bad option combination', \"\\n\";\\
-n	&usage();\n	exit(1);\n}\n\nelsif ( $params{'para\
-ms'} ) {\n	&print_tool_params();\n}\n\nelsif ( $pa\
-rams{'paramDetail'} ) {\n	&print_param_details( $p\
-arams{'paramDetail'} );\n}\n\nelsif ( $params{'sta\
-tus'} && defined( $params{'jobid'} ) ) {\n	&print_\
-job_status( $params{'jobid'} );\n}\n\nelsif ( $par\
-ams{'resultTypes'} && defined( $params{'jobid'} ) \
-) {\n	&print_result_types( $params{'jobid'} );\n}\\
-n\nelsif ( $params{'polljob'} && defined( $params{\
-'jobid'} ) ) {\n	&get_results( $params{'jobid'} );\
-\n}\n\nelse {\n\n	# Multiple input sequence mode, \
-assume fasta format.\n	if ( $params{'multifasta'} \
-) {\n		&multi_submit_job();\n	}\n\n	# Entry identi\
-fier list file.\n	elsif (( defined( $params{'seque\
-nce'} ) && $params{'sequence'} =~ m/^\\@/ )\n		|| \
-( defined( $ARGV[0] ) && $ARGV[0] =~ m/^\\@/ ) )\n\
-	{\n		my $list_filename = $params{'sequence'} || $\
-ARGV[0];\n		$list_filename =~ s/^\\@//;\n		&list_f\
-ile_submit_job($list_filename);\n	}\n\n	# Default:\
- single sequence/identifier.\n	else {\n\n		# Load \
-the sequence data and submit.\n		&submit_job( &loa\
-d_data() );\n	}\n}\n\n=head1 FUNCTIONS\n\n=cut\n\n\
-\n=head2 rest_request()\n\nPerform a REST request.\
-\n\n  my $response_str = &rest_request($url);\n\n=\
-cut\n\nsub rest_request {\n	print_debug_message( '\
-rest_request', 'Begin', 11 );\n	my $requestUrl = s\
-hift;\n	print_debug_message( 'rest_request', 'URL:\
- ' . $requestUrl, 11 );\n\n	# Create a user agent\\
-n	my $ua = LWP::UserAgent->new();\n	'$Revision: 13\
-17 $' =~ m/(\\d+)/;\n	$ua->agent(\"EBI-Sample-Clie\
-nt/$1 ($scriptName; $OSNAME) \" . $ua->agent());\n\
-	$ua->env_proxy;\n\n	# Perform the request\n	my $r\
-esponse = $ua->get($requestUrl);\n	print_debug_mes\
-sage( 'rest_request', 'HTTP status: ' . $response-\
->code,\n		11 );\n\n	# Check for HTTP error codes\n\
-	if ( $response->is_error ) {\n		$response->conten\
-t() =~ m/<h1>([^<]+)<\\/h1>/;\n		die 'http status:\
- ' . $response->code . ' ' . $response->message . \
-'  ' . $1;\n	}\n	print_debug_message( 'rest_reques\
-t', 'End', 11 );\n\n	# Return the response data\n	\
-return $response->content();\n}\n\n=head2 rest_get\
-_parameters()\n\nGet list of tool parameter names.\
-\n\n  my (@param_list) = &rest_get_parameters();\n\
-\n=cut\n\nsub rest_get_parameters {\n	print_debug_\
-message( 'rest_get_parameters', 'Begin', 1 );\n	my\
- $url                = $baseUrl . '/parameters/';\\
-n	my $param_list_xml_str = rest_request($url);\n	m\
-y $param_list_xml     = XMLin($param_list_xml_str)\
-;\n	my (@param_list)       = @{ $param_list_xml->{\
-'id'} };\n	print_debug_message( 'rest_get_paramete\
-rs', 'End', 1 );\n	return (@param_list);\n}\n\n=he\
-ad2 rest_get_parameter_details()\n\nGet details of\
- a tool parameter.\n\n  my $paramDetail = &rest_ge\
-t_parameter_details($param_name);\n\n=cut\n\nsub r\
-est_get_parameter_details {\n	print_debug_message(\
- 'rest_get_parameter_details', 'Begin', 1 );\n	my \
-$parameterId = shift;\n	print_debug_message( 'rest\
-_get_parameter_details',\n		'parameterId: ' . $par\
-ameterId, 1 );\n	my $url                  = $baseU\
-rl . '/parameterdetails/' . $parameterId;\n	my $pa\
-ram_detail_xml_str = rest_request($url);\n	my $par\
-am_detail_xml     = XMLin($param_detail_xml_str);\\
-n	print_debug_message( 'rest_get_parameter_details\
-', 'End', 1 );\n	return ($param_detail_xml);\n}\n\\
-n=head2 rest_run()\n\nSubmit a job.\n\n  my $job_i\
-d = &rest_run($email, $title, \\%params );\n\n=cut\
-\n\nsub rest_run {\n	print_debug_message( 'rest_ru\
-n', 'Begin', 1 );\n	my $email  = shift;\n	my $titl\
-e  = shift;\n	my $params = shift;\n	print_debug_me\
-ssage( 'rest_run', 'email: ' . $email, 1 );\n	if (\
- defined($title) ) {\n		print_debug_message( 'rest\
-_run', 'title: ' . $title, 1 );\n	}\n	print_debug_\
-message( 'rest_run', 'params: ' . Dumper($params),\
- 1 );\n\n	# User agent to perform http requests\n	\
-my $ua = LWP::UserAgent->new();\n	$ua->env_proxy;\\
-n\n	# Clean up parameters\n	my (%tmp_params) = %{$\
-params};\n	$tmp_params{'email'} = $email;\n	$tmp_p\
-arams{'title'} = $title;\n	foreach my $param_name \
-( keys(%tmp_params) ) {\n		if ( !defined( $tmp_par\
-ams{$param_name} ) ) {\n			delete $tmp_params{$par\
-am_name};\n		}\n	}\n\n	# Submit the job as a POST\\
-n	my $url = $baseUrl . '/run';\n	my $response = $u\
-a->post( $url, \\%tmp_params );\n	print_debug_mess\
-age( 'rest_run', 'HTTP status: ' . $response->code\
-, 11 );\n	print_debug_message( 'rest_run',\n		'req\
-uest: ' . $response->request()->content(), 11 );\n\
-\n	# Check for HTTP error codes\n	if ( $response->\
-is_error ) {\n		$response->content() =~ m/<h1>([^<\
-]+)<\\/h1>/;\n		die 'http status: ' . $response->c\
-ode . ' ' . $response->message . '  ' . $1;\n	}\n\\
-n	# The job id is returned\n	my $job_id = $respons\
-e->content();\n	print_debug_message( 'rest_run', '\
-End', 1 );\n	return $job_id;\n}\n\n=head2 rest_get\
-_status()\n\nCheck the status of a job.\n\n  my $s\
-tatus = &rest_get_status($job_id);\n\n=cut\n\nsub \
-rest_get_status {\n	print_debug_message( 'rest_get\
-_status', 'Begin', 1 );\n	my $job_id = shift;\n	pr\
-int_debug_message( 'rest_get_status', 'jobid: ' . \
-$job_id, 2 );\n	my $status_str = 'UNKNOWN';\n	my $\
-url        = $baseUrl . '/status/' . $job_id;\n	$s\
-tatus_str = &rest_request($url);\n	print_debug_mes\
-sage( 'rest_get_status', 'status_str: ' . $status_\
-str, 2 );\n	print_debug_message( 'rest_get_status'\
-, 'End', 1 );\n	return $status_str;\n}\n\n=head2 r\
-est_get_result_types()\n\nGet list of result types\
- for finished job.\n\n  my (@result_types) = &rest\
-_get_result_types($job_id);\n\n=cut\n\nsub rest_ge\
-t_result_types {\n	print_debug_message( 'rest_get_\
-result_types', 'Begin', 1 );\n	my $job_id = shift;\
-\n	print_debug_message( 'rest_get_result_types', '\
-jobid: ' . $job_id, 2 );\n	my (@resultTypes);\n	my\
- $url                      = $baseUrl . '/resultty\
-pes/' . $job_id;\n	my $result_type_list_xml_str = \
-&rest_request($url);\n	my $result_type_list_xml   \
-  = XMLin($result_type_list_xml_str);\n	(@resultTy\
-pes) = @{ $result_type_list_xml->{'type'} };\n	pri\
-nt_debug_message( 'rest_get_result_types',\n		scal\
-ar(@resultTypes) . ' result types', 2 );\n	print_d\
-ebug_message( 'rest_get_result_types', 'End', 1 );\
-\n	return (@resultTypes);\n}\n\n=head2 rest_get_re\
-sult()\n\nGet result data of a specified type for \
-a finished job.\n\n  my $result = rest_get_result(\
-$job_id, $result_type);\n\n=cut\n\nsub rest_get_re\
-sult {\n	print_debug_message( 'rest_get_result', '\
-Begin', 1 );\n	my $job_id = shift;\n	my $type   = \
-shift;\n	print_debug_message( 'rest_get_result', '\
-jobid: ' . $job_id, 1 );\n	print_debug_message( 'r\
-est_get_result', 'type: ' . $type,    1 );\n	my $u\
-rl    = $baseUrl . '/result/' . $job_id . '/' . $t\
-ype;\n	my $result = &rest_request($url);\n	print_d\
-ebug_message( 'rest_get_result', length($result) .\
- ' characters',\n		1 );\n	print_debug_message( 're\
-st_get_result', 'End', 1 );\n	return $result;\n}\n\
-\n\n=head2 print_debug_message()\n\nPrint debug me\
-ssage at specified debug level.\n\n  &print_debug_\
-message($method_name, $message, $level);\n\n=cut\n\
-\nsub print_debug_message {\n	my $function_name = \
-shift;\n	my $message       = shift;\n	my $level   \
-      = shift;\n	if ( $level <= $params{'debugLeve\
-l'} ) {\n		print STDERR '[', $function_name, '()] \
-', $message, \"\\n\";\n	}\n}\n\n=head2 print_tool_\
-params()\n\nPrint list of tool parameters.\n\n  &p\
-rint_tool_params();\n\n=cut\n\nsub print_tool_para\
-ms {\n	print_debug_message( 'print_tool_params', '\
-Begin', 1 );\n	my (@param_list) = &rest_get_parame\
-ters();\n	foreach my $param ( sort(@param_list) ) \
-{\n		print $param, \"\\n\";\n	}\n	print_debug_mess\
-age( 'print_tool_params', 'End', 1 );\n}\n\n=head2\
- print_param_details()\n\nPrint details of a tool \
-parameter.\n\n  &print_param_details($param_name);\
-\n\n=cut\n\nsub print_param_details {\n	print_debu\
-g_message( 'print_param_details', 'Begin', 1 );\n	\
-my $paramName = shift;\n	print_debug_message( 'pri\
-nt_param_details', 'paramName: ' . $paramName, 2 )\
-;\n	my $paramDetail = &rest_get_parameter_details(\
-$paramName);\n	print $paramDetail->{'name'}, \"\\t\
-\", $paramDetail->{'type'}, \"\\n\";\n	print $para\
-mDetail->{'description'}, \"\\n\";\n	foreach my $v\
-alue ( @{ $paramDetail->{'values'}->{'value'} } ) \
-{\n		print $value->{'value'};\n		if ( $value->{'de\
-faultValue'} eq 'true' ) {\n			print \"\\t\", 'def\
-ault';\n		}\n		print \"\\n\";\n		print \"\\t\", $v\
-alue->{'label'}, \"\\n\";\n	}\n	print_debug_messag\
-e( 'print_param_details', 'End', 1 );\n}\n\n=head2\
- print_job_status()\n\nPrint status of a job.\n\n \
- &print_job_status($job_id);\n\n=cut\n\nsub print_\
-job_status {\n	print_debug_message( 'print_job_sta\
-tus', 'Begin', 1 );\n	my $jobid = shift;\n	print_d\
-ebug_message( 'print_job_status', 'jobid: ' . $job\
-id, 1 );\n	if ( $outputLevel > 0 ) {\n		print STDE\
-RR 'Getting status for job ', $jobid, \"\\n\";\n	}\
-\n	my $result = &rest_get_status($jobid);\n	print \
-\"$result\\n\";\n	if ( $result eq 'FINISHED' && $o\
-utputLevel > 0 ) {\n		print STDERR \"To get result\
-s: $scriptName --polljob --jobid \" . $jobid\n		  \
-. \"\\n\";\n	}\n	print_debug_message( 'print_job_s\
-tatus', 'End', 1 );\n}\n\n=head2 print_result_type\
-s()\n\nPrint available result types for a job.\n\n\
-  &print_result_types($job_id);\n\n=cut\n\nsub pri\
-nt_result_types {\n	print_debug_message( 'result_t\
-ypes', 'Begin', 1 );\n	my $jobid = shift;\n	print_\
-debug_message( 'result_types', 'jobid: ' . $jobid,\
- 1 );\n	if ( $outputLevel > 0 ) {\n		print STDERR \
-'Getting result types for job ', $jobid, \"\\n\";\\
-n	}\n	my $status = &rest_get_status($jobid);\n	if \
-( $status eq 'PENDING' || $status eq 'RUNNING' ) {\
-\n		print STDERR 'Error: Job status is ', $status,\
-\n		  '. To get result types the job must be finis\
-hed.', \"\\n\";\n	}\n	else {\n		my (@resultTypes) \
-= &rest_get_result_types($jobid);\n		if ( $outputL\
-evel > 0 ) {\n			print STDOUT 'Available result ty\
-pes:', \"\\n\";\n		}\n		foreach my $resultType (@r\
-esultTypes) {\n			print STDOUT $resultType->{'iden\
-tifier'}, \"\\n\";\n			if ( defined( $resultType->\
-{'label'} ) ) {\n				print STDOUT \"\\t\", $result\
-Type->{'label'}, \"\\n\";\n			}\n			if ( defined( \
-$resultType->{'description'} ) ) {\n				print STDO\
-UT \"\\t\", $resultType->{'description'}, \"\\n\";\
-\n			}\n			if ( defined( $resultType->{'mediaType'\
-} ) ) {\n				print STDOUT \"\\t\", $resultType->{'\
-mediaType'}, \"\\n\";\n			}\n			if ( defined( $res\
-ultType->{'fileSuffix'} ) ) {\n				print STDOUT \"\
-\\t\", $resultType->{'fileSuffix'}, \"\\n\";\n			}\
-\n		}\n		if ( $status eq 'FINISHED' && $outputLeve\
-l > 0 ) {\n			print STDERR \"\\n\", 'To get result\
-s:', \"\\n\",\n			  \"  $scriptName --polljob --jo\
-bid \" . $params{'jobid'} . \"\\n\",\n			  \"  $sc\
-riptName --polljob --outformat <type> --jobid \"\n\
-			  . $params{'jobid'} . \"\\n\";\n		}\n	}\n	prin\
-t_debug_message( 'result_types', 'End', 1 );\n}\n\\
-n=head2 submit_job()\n\nSubmit a job to the servic\
-e.\n\n  &submit_job($seq);\n\n=cut\n\nsub submit_j\
-ob {\n	print_debug_message( 'submit_job', 'Begin',\
- 1 );\n\n	# Set input sequence\n	$tool_params{'seq\
-uence'} = shift;\n\n	# Load parameters\n	&load_par\
-ams();\n\n	# Submit the job\n	my $jobid = &rest_ru\
-n( $params{'email'}, $params{'title'}, \\%tool_par\
-ams );\n\n	# Simulate sync/async mode\n	if ( defin\
-ed( $params{'async'} ) ) {\n		print STDOUT $jobid,\
- \"\\n\";\n		if ( $outputLevel > 0 ) {\n			print S\
-TDERR\n			  \"To check status: $scriptName --statu\
-s --jobid $jobid\\n\";\n		}\n	}\n	else {\n		if ( $\
-outputLevel > 0 ) {\n			print STDERR \"JobId: $job\
-id\\n\";\n		}\n		sleep 1;\n		&get_results($jobid);\
-\n	}\n	print_debug_message( 'submit_job', 'End', 1\
- );\n}\n\n=head2 multi_submit_job()\n\nSubmit mult\
-iple jobs assuming input is a collection of fasta \
-formatted sequences.\n\n  &multi_submit_job();\n\n\
-=cut\n\nsub multi_submit_job {\n	print_debug_messa\
-ge( 'multi_submit_job', 'Begin', 1 );\n	my $jobIdF\
-orFilename = 1;\n	$jobIdForFilename = 0 if ( defin\
-ed( $params{'outfile'} ) );\n	my (@filename_list) \
-= ();\n\n	# Query sequence\n	if ( defined( $ARGV[0\
-] ) ) {    # Bare option\n		if ( -f $ARGV[0] || $A\
-RGV[0] eq '-' ) {    # File\n			push( @filename_li\
-st, $ARGV[0] );\n		}\n	}\n	if ( $params{'sequence'\
-} ) {                   # Via --sequence\n		if ( -\
-f $params{'sequence'} || $params{'sequence'} eq '-\
-' ) {    # File\n			push( @filename_list, $params{\
-'sequence'} );\n		}\n	}\n\n	$/ = '>';\n	foreach my\
- $filename (@filename_list) {\n		open( my $INFILE,\
- '<', $filename )\n		  or die \"Error: unable to o\
-pen file $filename ($!)\";\n		while (<$INFILE>) {\\
-n			my $seq = $_;\n			$seq =~ s/>$//;\n			if ( $se\
-q =~ m/(\\S+)/ ) {\n				print STDERR \"Submitting \
-job for: $1\\n\"\n				  if ( $outputLevel > 0 );\n\
-				$seq = '>' . $seq;\n				&print_debug_message( \
-'multi_submit_job', $seq, 11 );\n				&submit_job($\
-seq);\n				$params{'outfile'} = undef if ( $jobIdF\
-orFilename == 1 );\n			}\n		}\n		close $INFILE;\n	\
-}\n	print_debug_message( 'multi_submit_job', 'End'\
-, 1 );\n}\n\n=head2 list_file_submit_job()\n\nSubm\
-it multiple jobs using a file containing a list of\
- entry identifiers as \ninput.\n\n  &list_file_sub\
-mit_job($list_filename)\n\n=cut\n\nsub list_file_s\
-ubmit_job {\n	my $filename         = shift;\n	my $\
-jobIdForFilename = 1;\n	$jobIdForFilename = 0 if (\
- defined( $params{'outfile'} ) );\n\n	# Iterate ov\
-er identifiers, submitting each job\n	open( my $LI\
-STFILE, '<', $filename )\n	  or die 'Error: unable\
- to open file ' . $filename . ' (' . $! . ')';\n	w\
-hile (<$LISTFILE>) {\n		my $line = $_;\n		chomp($l\
-ine);\n		if ( $line ne '' ) {\n			&print_debug_mes\
-sage( 'list_file_submit_job', 'line: ' . $line, 2 \
-);\n			if ( $line =~ m/\\w:\\w/ ) {    # Check thi\
-s is an identifier\n				print STDERR \"Submitting \
-job for: $line\\n\"\n				  if ( $outputLevel > 0 )\
-;\n				&submit_job($line);\n			}\n			else {\n				p\
-rint STDERR\n\"Warning: line \\\"$line\\\" is not \
-recognised as an identifier\\n\";\n			}\n		}\n		$p\
-arams{'outfile'} = undef if ( $jobIdForFilename ==\
- 1 );\n	}\n	close $LISTFILE;\n}\n\n=head2 load_dat\
-a()\n\nLoad sequence data from file or option spec\
-ified on the command-line.\n\n  &load_data();\n\n=\
-cut\n\nsub load_data {\n	print_debug_message( 'loa\
-d_data', 'Begin', 1 );\n	my $retSeq;\n\n	# Query s\
-equence\n	if ( defined( $ARGV[0] ) ) {    # Bare o\
-ption\n		if ( -f $ARGV[0] || $ARGV[0] eq '-' ) {  \
-  # File\n			$retSeq = &read_file( $ARGV[0] );\n		\
-}\n		else {                                     # \
-DB:ID or sequence\n			$retSeq = $ARGV[0];\n		}\n	}\
-\n	if ( $params{'sequence'} ) {                   \
-# Via --sequence\n		if ( -f $params{'sequence'} ||\
- $params{'sequence'} eq '-' ) {    # File\n			$ret\
-Seq = &read_file( $params{'sequence'} );\n		}\n		e\
-lse {    # DB:ID or sequence\n			$retSeq = $params\
-{'sequence'};\n		}\n	}\n	print_debug_message( 'loa\
-d_data', 'End', 1 );\n	return $retSeq;\n}\n\n=head\
-2 load_params()\n\nLoad job parameters from comman\
-d-line options.\n\n  &load_params();\n\n=cut\n\nsu\
-b load_params {\n	print_debug_message( 'load_param\
-s', 'Begin', 1 );\n\n	# Database(s) to search\n	my\
- (@dbList) = split /[ ,]/, $params{'database'};\n	\
-$tool_params{'database'} = \\@dbList;\n\n	# Compat\
-ability options, old command-line.\n	if(!$tool_par\
-ams{'viewfilter'} && $params{'echofilter'}) {\n		$\
-tool_params{'viewfilter'} = 'true';\n	}\n	if(!$too\
-l_params{'alignments'} && $params{'numal'}) {\n		$\
-tool_params{'alignments'} = $params{'numal'};\n	}\\
-n	# TODO: set alignment format option to get NCBI \
-BLAST XML.\n	if($params{'appxml'}) {\n		$tool_para\
-ms{'align'} = '';\n	}\n\n	print_debug_message( 'lo\
-ad_params', 'End', 1 );\n}\n\n=head2 client_poll()\
-\n\nClient-side job polling.\n\n  &client_poll($jo\
-b_id);\n\n=cut\n\nsub client_poll {\n	print_debug_\
-message( 'client_poll', 'Begin', 1 );\n	my $jobid \
- = shift;\n	my $status = 'PENDING';\n\n	my $errorC\
-ount = 0;\n	while ($status eq 'RUNNING'\n		|| $sta\
-tus eq 'PENDING'\n		|| ( $status eq 'ERROR' && $er\
-rorCount < 2 ) )\n	{\n		$status = rest_get_status(\
-$jobid);\n		print STDERR \"$status\\n\" if ( $outp\
-utLevel > 0 );\n		if ( $status eq 'ERROR' ) {\n			\
-$errorCount++;\n		}\n		elsif ( $errorCount > 0 ) {\
-\n			$errorCount--;\n		}\n		if (   $status eq 'RUN\
-NING'\n			|| $status eq 'PENDING'\n			|| $status e\
-q 'ERROR' )\n		{\n\n			# Wait before polling again\
-.\n			sleep $checkInterval;\n		}\n	}\n	print_debug\
-_message( 'client_poll', 'End', 1 );\n	return $sta\
-tus;\n}\n\n=head2 get_results()\n\nGet the results\
- for a job identifier.\n\n  &get_results($job_id);\
-\n\n=cut\n\nsub get_results {\n	print_debug_messag\
-e( 'get_results', 'Begin', 1 );\n	my $jobid = shif\
-t;\n	print_debug_message( 'get_results', 'jobid: '\
- . $jobid, 1 );\n\n	# Verbose\n	if ( $outputLevel \
-> 1 ) {\n		print 'Getting results for job ', $jobi\
-d, \"\\n\";\n	}\n\n	# Check status, and wait if no\
-t finished\n	client_poll($jobid);\n\n	# Use JobId \
-if output file name is not defined\n	unless ( defi\
-ned( $params{'outfile'} ) ) {\n		$params{'outfile'\
-} = $jobid;\n	}\n\n	# Get list of data types\n	my \
-(@resultTypes) = rest_get_result_types($jobid);\n\\
-n	# Get the data and write it to a file\n	if ( def\
-ined( $params{'outformat'} ) ) {    # Specified da\
-ta type\n		my $selResultType;\n		foreach my $resul\
-tType (@resultTypes) {\n			if ( $resultType->{'ide\
-ntifier'} eq $params{'outformat'} ) {\n				$selRes\
-ultType = $resultType;\n			}\n		}\n		if ( defined(\
-$selResultType) ) {\n			my $result =\n			  rest_ge\
-t_result( $jobid, $selResultType->{'identifier'} )\
-;\n			if ( $params{'outfile'} eq '-' ) {\n				writ\
-e_file( $params{'outfile'}, $result );\n			}\n			e\
-lse {\n				write_file(\n					$params{'outfile'} . \
-'.'\n					  . $selResultType->{'identifier'} . '.'\
-\n					  . $selResultType->{'fileSuffix'},\n					$\
-result\n				);\n			}\n		}\n		else {\n			die 'Error\
-: unknown result format \"' . $params{'outformat'}\
- . '\"';\n		}\n	}\n	else {    # Data types availab\
-le\n		      # Write a file for each output type\n	\
-	for my $resultType (@resultTypes) {\n			if ( $out\
-putLevel > 1 ) {\n				print STDERR 'Getting ', $re\
-sultType->{'identifier'}, \"\\n\";\n			}\n			my $r\
-esult = rest_get_result( $jobid, $resultType->{'id\
-entifier'} );\n			if ( $params{'outfile'} eq '-' )\
- {\n				write_file( $params{'outfile'}, $result );\
-\n			}\n			else {\n				write_file(\n					$params{'\
-outfile'} . '.'\n					  . $resultType->{'identifie\
-r'} . '.'\n					  . $resultType->{'fileSuffix'},\n\
-					$result\n				);\n			}\n		}\n	}\n	print_debug_\
-message( 'get_results', 'End', 1 );\n}\n\n=head2 r\
-ead_file()\n\nRead a file into a scalar. The speci\
-al filename '-' can be used to read from \nstandar\
-d input (STDIN).\n\n  my $data = &read_file($filen\
-ame);\n\n=cut\n\nsub read_file {\n	print_debug_mes\
-sage( 'read_file', 'Begin', 1 );\n	my $filename = \
-shift;\n	print_debug_message( 'read_file', 'filena\
-me: ' . $filename, 2 );\n	my ( $content, $buffer )\
-;\n	if ( $filename eq '-' ) {\n		while ( sysread( \
-STDIN, $buffer, 1024 ) ) {\n			$content .= $buffer\
-;\n		}\n	}\n	else {    # File\n		open( my $FILE, '\
-<', $filename )\n		  or die \"Error: unable to ope\
-n input file $filename ($!)\";\n		while ( sysread(\
- $FILE, $buffer, 1024 ) ) {\n			$content .= $buffe\
-r;\n		}\n		close($FILE);\n	}\n	print_debug_message\
-( 'read_file', 'End', 1 );\n	return $content;\n}\n\
-\n=head2 write_file()\n\nWrite data to a file. The\
- special filename '-' can be used to write to \nst\
-andard output (STDOUT).\n\n  &write_file($filename\
-, $data);\n\n=cut\n\nsub write_file {\n	print_debu\
-g_message( 'write_file', 'Begin', 1 );\n	my ( $fil\
-ename, $data ) = @_;\n	print_debug_message( 'write\
-_file', 'filename: ' . $filename, 2 );\n	if ( $out\
-putLevel > 0 ) {\n		print STDERR 'Creating result \
-file: ' . $filename . \"\\n\";\n	}\n	if ( $filenam\
-e eq '-' ) {\n		print STDOUT $data;\n	}\n	else {\n\
-		open( my $FILE, '>', $filename )\n		  or die \"E\
-rror: unable to open output file $filename ($!)\";\
-\n		syswrite( $FILE, $data );\n		close($FILE);\n	}\
-\n	print_debug_message( 'write_file', 'End', 1 );\\
-n}\n\n=head2 usage()\n\nPrint program usage messag\
-e.\n\n  &usage();\n\n=cut\n\nsub usage {\n	print S\
-TDERR <<EOF\nWU-BLAST\n========\n   \nRapid sequen\
-ce database search programs utilizing the BLAST al\
-gorithm\n    \n[Required]\n\n  -p, --program      \
-: str  : BLAST program to use, see --paramDetail p\
-rogram\n  -D, --database     : str  : database(s) \
-to search, space separated. See\n                 \
-             --paramDetail database\n      --stype\
-        : str  : query sequence type, see --paramD\
-etail stype\n  seqFile            : file : query s\
-equence (\"-\" for STDIN, \\@filename for\n       \
-                       identifier list file)\n\n[O\
-ptional]\n\n  -m, --matrix       : str  : scoring \
-matrix, see --paramDetail matrix\n  -e, --exp     \
-     : real : 0<E<= 1000. Statistical significance\
- threshold \n                              for rep\
-orting database sequence matches.\n  -e, --viewfil\
-ter   :      : display the filtered query sequence\
-\n  -f, --filter       : str  : filter the query s\
-equence for low complexity \n                     \
-         regions, see --paramDetail filter\n  -A, \
---align        : int  : pairwise alignment format,\
- see --paramDetail align\n  -s, --scores       : i\
-nt  : number of scores to be reported\n  -b, --ali\
-gnments   : int  : number of alignments to report\\
-n  -S, --sensitivity  : str  : sensitivity of the \
-search, \n                              see --para\
-mDetail sensitivity\n  -t, --sort	     : str  : so\
-rt order for hits, see --paramDetail sort\n  -T, -\
--stats        : str  : statistical model, see --pa\
-ramDetail stats\n  -d, --strand       : str  : DNA\
- strand to search with,\n                         \
-     see --paramDetail strand\n  -c, --topcombon  \
-  : str  : consistent sets of HSPs\n      --multif\
-asta   :      : treat input as a set of fasta form\
-atted sequences\n\n[General]\n\n  -h, --help      \
-  :      : prints this help text\n      --async   \
-    :      : forces to make an asynchronous query\\
-n      --email       : str  : e-mail address\n    \
-  --title       : str  : title for job\n      --st\
-atus      :      : get job status\n      --resultT\
-ypes :      : get available result types for job\n\
-      --polljob     :      : poll for the status o\
-f a job\n      --jobid       : str  : jobid that w\
-as returned when an asynchronous job \n           \
-                  was submitted.\n      --outfile \
-    : str  : file name for results (default is job\
-id;\n                             \"-\" for STDOUT\
-)\n      --outformat   : str  : result format to r\
-etrieve\n      --params      :      : list input p\
-arameters\n      --paramDetail : str  : display de\
-tails for input parameter\n      --quiet       :  \
-    : decrease output\n      --verbose     :      \
-: increase output\n      --trace       :      : sh\
-ow SOAP messages being interchanged \n   \nSynchro\
-nous job:\n\n  The results/errors are returned as \
-soon as the job is finished.\n  Usage: $scriptName\
- --email <your\\@email> [options...] seqFile\n  Re\
-turns: results as an attachment\n\nAsynchronous jo\
-b:\n\n  Use this if you want to retrieve the resul\
-ts at a later time. The results \n  are stored for\
- up to 24 hours. 	\n  Usage: $scriptName --async -\
--email <your\\@email> [options...] seqFile\n  Retu\
-rns: jobid\n\n  Use the jobid to query for the sta\
-tus of the job. If the job is finished, \n  it als\
-o returns the results/errors.\n  Usage: $scriptNam\
-e --polljob --jobid <jobId> [--outfile string]\n  \
-Returns: string indicating the status of the job a\
-nd if applicable, results \n  as an attachment.\n\\
-nFurther information:\n\n  http://www.ebi.ac.uk/To\
-ols/webservices/services/sss/wu_blast_rest\n  http\
-://www.ebi.ac.uk/Tools/webservices/tutorials/perl\\
-n\nSupport/Feedback:\n\n  http://www.ebi.ac.uk/sup\
-port/\nEOF\n}\n\n=head1 FEEDBACK/SUPPORT\n\nPlease\
- contact us at L<http://www.ebi.ac.uk/support/> if\
- you have any \nfeedback, suggestions or issues wi\
-th the service or this client.\n\n=cut\n","\n\n\nm\
-y $PROBTRESH = 0.3;# base pairs below this prob th\
-reshold will be ignored\nmy $WEIGHT = 100.0; # flo\
-at!!\nmy $NUCALPH = \"ACGTUNRYMKSWHBVD\";\nuse var\
-s qw($NUCALPH $WEIGHT);\n\nmy $myname = basename($\
-0);\n\nuse strict;\nuse warnings;\n\nuse File::Bas\
-ename;\nuse Getopt::Long;\nuse File::Glob ':glob';\
-\nuse File::Spec;\nuse File::Temp qw/ tempfile tem\
-pdir /;\n\n\n\n\nsub tcoffeelib_header($;$)\n{\n  \
-  my ($nseq, $fd) = @_;\n    if (! defined($fd)) {\
-\n        $fd = *STDOUT;\n    }\n    printf $fd \"\
-! TC_LIB_FORMAT_01\\n\";\n    printf $fd \"%d\\n\"\
-, $nseq;\n}\n\n\nsub tcoffeelib_header_addseq($$;$\
-)\n{\n    my ($id, $seq, $fd) = @_;\n    if (! def\
+ to query for the status of the job.\n  Usage: bla\
+stpgp.pl --status --jobid <jobId>\n  Returns: stri\
+ng indicating the status of the job\n    DONE - jo\
+b has finished\n    RUNNING - job is running\n    \
+NOT_FOUND - job cannot be found\n    ERROR - the j\
+obs has encountered an error\n\n  When done, use t\
+he jobid to retrieve the results of the job.\n  Us\
+age: blastpgp.pl --polljob --jobid <jobId> [--outf\
+ile <fileName>]\n  Returns: saves the results to d\
+isk\nEOF\n;\n}\n","\n=head1 NAME\n\nncbiblast_lwp.\
+pl\n\n=head1 DESCRIPTION\n\nNCBI BLAST REST web se\
+rvice Perl client using L<LWP>.\n\nTested with:\n\\
+n=over\n\n=item *\nL<LWP> 5.79, L<XML::Simple> 2.1\
+2 and Perl 5.8.3\n\n=item *\nL<LWP> 5.805, L<XML::\
+Simple> 2.14 and Perl 5.8.7\n\n=item *\nL<LWP> 5.8\
+20, L<XML::Simple> 2.18 and Perl 5.10.0 (Ubuntu 9.\
+04)\n\n=back\n\nFor further information see:\n\n=o\
+ver\n\n=item *\nL<http://www.ebi.ac.uk/Tools/webse\
+rvices/services/sss/ncbi_blast_rest>\n\n=item *\nL\
+<http://www.ebi.ac.uk/Tools/webservices/tutorials/\
+perl>\n\n=back\n\n=head1 VERSION\n\n$Id: ncbiblast\
+_lwp.pl 1317 2009-09-03 15:44:11Z hpm $\n\n=cut\n\\
+nuse strict;\nuse warnings;\n\nuse English;\nuse L\
+WP;\nuse XML::Simple;\nuse Getopt::Long qw(:config\
+ no_ignore_case bundling);\nuse File::Basename;\nu\
+se Data::Dumper;\n\nmy $baseUrl = 'http://www.ebi.\
+ac.uk/Tools/services/rest/ncbiblast';\n\nmy $check\
+Interval = 3;\n\nmy $outputLevel = 1;\n\nmy $numOp\
+ts = scalar(@ARGV);\nmy %params = ( 'debugLevel' =\
+> 0 );\n\nmy %tool_params = ();\nGetOptions(\n\n	#\
+ Tool specific options\n	'program|p=s'  => \\$tool\
+_params{'program'},   # blastp, blastn, blastx, et\
+c.\n	'database|D=s' => \\$params{'database'},     \
+  # Database(s) to search\n	'matrix|m=s'   => \\$t\
+ool_params{'matrix'},    # Scoring martix to use\n\
+	'exp|E=f'      => \\$tool_params{'exp'},       # \
+E-value threshold\n	'filter|f=s'   => \\$tool_para\
+ms{'filter'},    # Low complexity filter\n	'align|\
+A=i'    => \\$tool_params{'align'},     # Pairwise\
+ alignment format\n	'scores|s=i'   => \\$tool_para\
+ms{'scores'},    # Number of scores\n	'alignments|\
+n=i' => \\$tool_params{'alignments'},   # Number o\
+f alignments\n	'dropoff|d=i'    => \\$tool_params{\
+'dropoff'},      # Dropoff score\n	'match_scores=s\
+' => \\$tool_params{'match_scores'}, # Match/missm\
+atch scores\n	'match|u=i'      => \\$params{'match\
+'},             # Match score\n	'mismatch|v=i'   =\
+> \\$params{'mismatch'},          # Mismatch score\
+\n	'gapopen|o=i'    => \\$tool_params{'gapopen'}, \
+     # Open gap penalty\n	'gapext|x=i'     => \\$t\
+ool_params{'gapext'},       # Gap extension penali\
+ty\n	'gapalign|g'     => \\$tool_params{'gapalign'\
+},     # Optimise gap alignments\n	'stype=s' => \\\
+$tool_params{'stype'},    # Sequence type\n	'seqra\
+nge=s' => \\$tool_params{'seqrange'},    # Query s\
+ubsequence\n	'sequence=s' => \\$params{'sequence'}\
+,         # Query sequence\n	'multifasta' => \\$pa\
+rams{'multifasta'},       # Multiple fasta input\n\
+\n	# Compatability options, old command-line\n	'nu\
+mal|n=i'     => \\$params{'numal'},        # Numbe\
+r of alignments\n	'opengap|o=i'   => \\$params{'op\
+engap'},      # Open gap penalty\n	'extendgap|x=i'\
+ => \\$params{'extendgap'},    # Gap extension pen\
+ality\n	\n	# Generic options\n	'email=s'       => \
+\\$params{'email'},          # User e-mail address\
+\n	'title=s'       => \\$params{'title'},         \
+ # Job title\n	'outfile=s'     => \\$params{'outfi\
+le'},        # Output file name\n	'outformat=s'   \
+=> \\$params{'outformat'},      # Output file type\
+\n	'jobid=s'       => \\$params{'jobid'},         \
+ # JobId\n	'help|h'        => \\$params{'help'},  \
+         # Usage help\n	'async'         => \\$para\
+ms{'async'},          # Asynchronous submission\n	\
+'polljob'       => \\$params{'polljob'},        # \
+Get results\n	'resultTypes'   => \\$params{'result\
+Types'},    # Get result types\n	'status'        =\
+> \\$params{'status'},         # Get status\n	'par\
+ams'        => \\$params{'params'},         # List\
+ input parameters\n	'paramDetail=s' => \\$params{'\
+paramDetail'},    # Get details for parameter\n	'q\
+uiet'         => \\$params{'quiet'},          # De\
+crease output level\n	'verbose'       => \\$params\
+{'verbose'},        # Increase output level\n	'deb\
+ugLevel=i'  => \\$params{'debugLevel'},     # Debu\
+g output level\n	'baseUrl=s'     => \\$baseUrl,   \
+               # Base URL for service.\n);\nif ( $\
+params{'verbose'} ) { $outputLevel++ }\nif ( $para\
+ms{'$quiet'} )  { $outputLevel-- }\n\n&print_debug\
+_message( 'MAIN', 'LWP::VERSION: ' . $LWP::VERSION\
+,\n	1 );\n\n&print_debug_message( 'MAIN', \"params\
+:\\n\" . Dumper( \\%params ),           11 );\n&pr\
+int_debug_message( 'MAIN', \"tool_params:\\n\" . D\
+umper( \\%tool_params ), 11 );\n\nmy $scriptName =\
+ basename( $0, () );\n\nif ( $params{'help'} || $n\
+umOpts == 0 ) {\n	&usage();\n	exit(0);\n}\n\n&prin\
+t_debug_message( 'MAIN', 'baseUrl: ' . $baseUrl, 1\
+ );\n\nif (\n	!(\n		   $params{'polljob'}\n		|| $p\
+arams{'resultTypes'}\n		|| $params{'status'}\n		||\
+ $params{'params'}\n		|| $params{'paramDetail'}\n	\
+)\n	&& !( defined( $ARGV[0] ) || defined( $params{\
+'sequence'} ) )\n  )\n{\n\n	# Bad argument combina\
+tion, so print error message and usage\n	print STD\
+ERR 'Error: bad option combination', \"\\n\";\n	&u\
+sage();\n	exit(1);\n}\n\nelsif ( $params{'params'}\
+ ) {\n	&print_tool_params();\n}\n\nelsif ( $params\
+{'paramDetail'} ) {\n	&print_param_details( $param\
+s{'paramDetail'} );\n}\n\nelsif ( $params{'status'\
+} && defined( $params{'jobid'} ) ) {\n	&print_job_\
+status( $params{'jobid'} );\n}\n\nelsif ( $params{\
+'resultTypes'} && defined( $params{'jobid'} ) ) {\\
+n	&print_result_types( $params{'jobid'} );\n}\n\ne\
+lsif ( $params{'polljob'} && defined( $params{'job\
+id'} ) ) {\n	&get_results( $params{'jobid'} );\n}\\
+n\nelse {\n\n	# Multiple input sequence mode, assu\
+me fasta format.\n	if ( $params{'multifasta'} ) {\\
+n		&multi_submit_job();\n	}\n\n	# Entry identifier\
+ list file.\n	elsif (( defined( $params{'sequence'\
+} ) && $params{'sequence'} =~ m/^\\@/ )\n		|| ( de\
+fined( $ARGV[0] ) && $ARGV[0] =~ m/^\\@/ ) )\n	{\n\
+		my $list_filename = $params{'sequence'} || $ARGV\
+[0];\n		$list_filename =~ s/^\\@//;\n		&list_file_\
+submit_job($list_filename);\n	}\n\n	# Default: sin\
+gle sequence/identifier.\n	else {\n\n		# Load the \
+sequence data and submit.\n		&submit_job( &load_da\
+ta() );\n	}\n}\n\n=head1 FUNCTIONS\n\n=cut\n\n\n=h\
+ead2 rest_request()\n\nPerform a REST request.\n\n\
+  my $response_str = &rest_request($url);\n\n=cut\\
+n\nsub rest_request {\n	print_debug_message( 'rest\
+_request', 'Begin', 11 );\n	my $requestUrl = shift\
+;\n	print_debug_message( 'rest_request', 'URL: ' .\
+ $requestUrl, 11 );\n\n	# Create a user agent\n	my\
+ $ua = LWP::UserAgent->new();\n	'$Revision: 1317 $\
+' =~ m/(\\d+)/;\n	$ua->agent(\"EBI-Sample-Client/$\
+1 ($scriptName; $OSNAME) \" . $ua->agent());\n	$ua\
+->env_proxy;\n\n	# Perform the request\n	my $respo\
+nse = $ua->get($requestUrl);\n	print_debug_message\
+( 'rest_request', 'HTTP status: ' . $response->cod\
+e,\n		11 );\n\n	# Check for HTTP error codes\n	if \
+( $response->is_error ) {\n		$response->content() \
+=~ m/<h1>([^<]+)<\\/h1>/;\n		die 'http status: ' .\
+ $response->code . ' ' . $response->message . '  '\
+ . $1;\n	}\n	print_debug_message( 'rest_request', \
+'End', 11 );\n\n	# Return the response data\n	retu\
+rn $response->content();\n}\n\n=head2 rest_get_par\
+ameters()\n\nGet list of tool parameter names.\n\n\
+  my (@param_list) = &rest_get_parameters();\n\n=c\
+ut\n\nsub rest_get_parameters {\n	print_debug_mess\
+age( 'rest_get_parameters', 'Begin', 1 );\n	my $ur\
+l                = $baseUrl . '/parameters/';\n	my\
+ $param_list_xml_str = rest_request($url);\n	my $p\
+aram_list_xml     = XMLin($param_list_xml_str);\n	\
+my (@param_list)       = @{ $param_list_xml->{'id'\
+} };\n	print_debug_message( 'rest_get_parameters',\
+ 'End', 1 );\n	return (@param_list);\n}\n\n=head2 \
+rest_get_parameter_details()\n\nGet details of a t\
+ool parameter.\n\n  my $paramDetail = &rest_get_pa\
+rameter_details($param_name);\n\n=cut\n\nsub rest_\
+get_parameter_details {\n	print_debug_message( 're\
+st_get_parameter_details', 'Begin', 1 );\n	my $par\
+ameterId = shift;\n	print_debug_message( 'rest_get\
+_parameter_details',\n		'parameterId: ' . $paramet\
+erId, 1 );\n	my $url                  = $baseUrl .\
+ '/parameterdetails/' . $parameterId;\n	my $param_\
+detail_xml_str = rest_request($url);\n	my $param_d\
+etail_xml     = XMLin($param_detail_xml_str);\n	pr\
+int_debug_message( 'rest_get_parameter_details', '\
+End', 1 );\n	return ($param_detail_xml);\n}\n\n=he\
+ad2 rest_run()\n\nSubmit a job.\n\n  my $job_id = \
+&rest_run($email, $title, \\%params );\n\n=cut\n\n\
+sub rest_run {\n	print_debug_message( 'rest_run', \
+'Begin', 1 );\n	my $email  = shift;\n	my $title  =\
+ shift;\n	my $params = shift;\n	print_debug_messag\
+e( 'rest_run', 'email: ' . $email, 1 );\n	if ( def\
+ined($title) ) {\n		print_debug_message( 'rest_run\
+', 'title: ' . $title, 1 );\n	}\n	print_debug_mess\
+age( 'rest_run', 'params: ' . Dumper($params), 1 )\
+;\n\n	# User agent to perform http requests\n	my $\
+ua = LWP::UserAgent->new();\n	$ua->env_proxy;\n\n	\
+# Clean up parameters\n	my (%tmp_params) = %{$para\
+ms};\n	$tmp_params{'email'} = $email;\n	$tmp_param\
+s{'title'} = $title;\n	foreach my $param_name ( ke\
+ys(%tmp_params) ) {\n		if ( !defined( $tmp_params{\
+$param_name} ) ) {\n			delete $tmp_params{$param_n\
+ame};\n		}\n	}\n\n	# Submit the job as a POST\n	my\
+ $url = $baseUrl . '/run';\n	my $response = $ua->p\
+ost( $url, \\%tmp_params );\n	print_debug_message(\
+ 'rest_run', 'HTTP status: ' . $response->code, 11\
+ );\n	print_debug_message( 'rest_run',\n		'request\
+: ' . $response->request()->content(), 11 );\n\n	#\
+ Check for HTTP error codes\n	if ( $response->is_e\
+rror ) {\n		$response->content() =~ m/<h1>([^<]+)<\
+\\/h1>/;\n		die 'http status: ' . $response->code \
+. ' ' . $response->message . '  ' . $1;\n	}\n\n	# \
+The job id is returned\n	my $job_id = $response->c\
+ontent();\n	print_debug_message( 'rest_run', 'End'\
+, 1 );\n	return $job_id;\n}\n\n=head2 rest_get_sta\
+tus()\n\nCheck the status of a job.\n\n  my $statu\
+s = &rest_get_status($job_id);\n\n=cut\n\nsub rest\
+_get_status {\n	print_debug_message( 'rest_get_sta\
+tus', 'Begin', 1 );\n	my $job_id = shift;\n	print_\
+debug_message( 'rest_get_status', 'jobid: ' . $job\
+_id, 2 );\n	my $status_str = 'UNKNOWN';\n	my $url \
+       = $baseUrl . '/status/' . $job_id;\n	$statu\
+s_str = &rest_request($url);\n	print_debug_message\
+( 'rest_get_status', 'status_str: ' . $status_str,\
+ 2 );\n	print_debug_message( 'rest_get_status', 'E\
+nd', 1 );\n	return $status_str;\n}\n\n=head2 rest_\
+get_result_types()\n\nGet list of result types for\
+ finished job.\n\n  my (@result_types) = &rest_get\
+_result_types($job_id);\n\n=cut\n\nsub rest_get_re\
+sult_types {\n	print_debug_message( 'rest_get_resu\
+lt_types', 'Begin', 1 );\n	my $job_id = shift;\n	p\
+rint_debug_message( 'rest_get_result_types', 'jobi\
+d: ' . $job_id, 2 );\n	my (@resultTypes);\n	my $ur\
+l                      = $baseUrl . '/resulttypes/\
+' . $job_id;\n	my $result_type_list_xml_str = &res\
+t_request($url);\n	my $result_type_list_xml     = \
+XMLin($result_type_list_xml_str);\n	(@resultTypes)\
+ = @{ $result_type_list_xml->{'type'} };\n	print_d\
+ebug_message( 'rest_get_result_types',\n		scalar(@\
+resultTypes) . ' result types', 2 );\n	print_debug\
+_message( 'rest_get_result_types', 'End', 1 );\n	r\
+eturn (@resultTypes);\n}\n\n=head2 rest_get_result\
+()\n\nGet result data of a specified type for a fi\
+nished job.\n\n  my $result = rest_get_result($job\
+_id, $result_type);\n\n=cut\n\nsub rest_get_result\
+ {\n	print_debug_message( 'rest_get_result', 'Begi\
+n', 1 );\n	my $job_id = shift;\n	my $type   = shif\
+t;\n	print_debug_message( 'rest_get_result', 'jobi\
+d: ' . $job_id, 1 );\n	print_debug_message( 'rest_\
+get_result', 'type: ' . $type,    1 );\n	my $url  \
+  = $baseUrl . '/result/' . $job_id . '/' . $type;\
+\n	my $result = &rest_request($url);\n	print_debug\
+_message( 'rest_get_result', length($result) . ' c\
+haracters',\n		1 );\n	print_debug_message( 'rest_g\
+et_result', 'End', 1 );\n	return $result;\n}\n\n\n\
+=head2 print_debug_message()\n\nPrint debug messag\
+e at specified debug level.\n\n  &print_debug_mess\
+age($method_name, $message, $level);\n\n=cut\n\nsu\
+b print_debug_message {\n	my $function_name = shif\
+t;\n	my $message       = shift;\n	my $level       \
+  = shift;\n	if ( $level <= $params{'debugLevel'} \
+) {\n		print STDERR '[', $function_name, '()] ', $\
+message, \"\\n\";\n	}\n}\n\n=head2 print_tool_para\
+ms()\n\nPrint list of tool parameters.\n\n  &print\
+_tool_params();\n\n=cut\n\nsub print_tool_params {\
+\n	print_debug_message( 'print_tool_params', 'Begi\
+n', 1 );\n	my (@param_list) = &rest_get_parameters\
+();\n	foreach my $param ( sort(@param_list) ) {\n	\
+	print $param, \"\\n\";\n	}\n	print_debug_message(\
+ 'print_tool_params', 'End', 1 );\n}\n\n=head2 pri\
+nt_param_details()\n\nPrint details of a tool para\
+meter.\n\n  &print_param_details($param_name);\n\n\
+=cut\n\nsub print_param_details {\n	print_debug_me\
+ssage( 'print_param_details', 'Begin', 1 );\n	my $\
+paramName = shift;\n	print_debug_message( 'print_p\
+aram_details', 'paramName: ' . $paramName, 2 );\n	\
+my $paramDetail = &rest_get_parameter_details($par\
+amName);\n	print $paramDetail->{'name'}, \"\\t\", \
+$paramDetail->{'type'}, \"\\n\";\n	print $paramDet\
+ail->{'description'}, \"\\n\";\n	foreach my $value\
+ ( @{ $paramDetail->{'values'}->{'value'} } ) {\n	\
+	print $value->{'value'};\n		if ( $value->{'defaul\
+tValue'} eq 'true' ) {\n			print \"\\t\", 'default\
+';\n		}\n		print \"\\n\";\n		print \"\\t\", $value\
+->{'label'}, \"\\n\";\n	}\n	print_debug_message( '\
+print_param_details', 'End', 1 );\n}\n\n=head2 pri\
+nt_job_status()\n\nPrint status of a job.\n\n  &pr\
+int_job_status($job_id);\n\n=cut\n\nsub print_job_\
+status {\n	print_debug_message( 'print_job_status'\
+, 'Begin', 1 );\n	my $jobid = shift;\n	print_debug\
+_message( 'print_job_status', 'jobid: ' . $jobid, \
+1 );\n	if ( $outputLevel > 0 ) {\n		print STDERR '\
+Getting status for job ', $jobid, \"\\n\";\n	}\n	m\
+y $result = &rest_get_status($jobid);\n	print \"$r\
+esult\\n\";\n	if ( $result eq 'FINISHED' && $outpu\
+tLevel > 0 ) {\n		print STDERR \"To get results: $\
+scriptName --polljob --jobid \" . $jobid\n		  . \"\
+\\n\";\n	}\n	print_debug_message( 'print_job_statu\
+s', 'End', 1 );\n}\n\n=head2 print_result_types()\\
+n\nPrint available result types for a job.\n\n  &p\
+rint_result_types($job_id);\n\n=cut\n\nsub print_r\
+esult_types {\n	print_debug_message( 'result_types\
+', 'Begin', 1 );\n	my $jobid = shift;\n	print_debu\
+g_message( 'result_types', 'jobid: ' . $jobid, 1 )\
+;\n	if ( $outputLevel > 0 ) {\n		print STDERR 'Get\
+ting result types for job ', $jobid, \"\\n\";\n	}\\
+n	my $status = &rest_get_status($jobid);\n	if ( $s\
+tatus eq 'PENDING' || $status eq 'RUNNING' ) {\n		\
+print STDERR 'Error: Job status is ', $status,\n		\
+  '. To get result types the job must be finished.\
+', \"\\n\";\n	}\n	else {\n		my (@resultTypes) = &r\
+est_get_result_types($jobid);\n		if ( $outputLevel\
+ > 0 ) {\n			print STDOUT 'Available result types:\
+', \"\\n\";\n		}\n		foreach my $resultType (@resul\
+tTypes) {\n			print STDOUT $resultType->{'identifi\
+er'}, \"\\n\";\n			if ( defined( $resultType->{'la\
+bel'} ) ) {\n				print STDOUT \"\\t\", $resultType\
+->{'label'}, \"\\n\";\n			}\n			if ( defined( $res\
+ultType->{'description'} ) ) {\n				print STDOUT \\
+"\\t\", $resultType->{'description'}, \"\\n\";\n		\
+	}\n			if ( defined( $resultType->{'mediaType'} ) \
+) {\n				print STDOUT \"\\t\", $resultType->{'medi\
+aType'}, \"\\n\";\n			}\n			if ( defined( $resultT\
+ype->{'fileSuffix'} ) ) {\n				print STDOUT \"\\t\\
+", $resultType->{'fileSuffix'}, \"\\n\";\n			}\n		\
+}\n		if ( $status eq 'FINISHED' && $outputLevel > \
+0 ) {\n			print STDERR \"\\n\", 'To get results:',\
+ \"\\n\",\n			  \"  $scriptName --polljob --jobid \
+\" . $params{'jobid'} . \"\\n\",\n			  \"  $script\
+Name --polljob --outformat <type> --jobid \"\n			 \
+ . $params{'jobid'} . \"\\n\";\n		}\n	}\n	print_de\
+bug_message( 'result_types', 'End', 1 );\n}\n\n=he\
+ad2 submit_job()\n\nSubmit a job to the service.\n\
+\n  &submit_job($seq);\n\n=cut\n\nsub submit_job {\
+\n	print_debug_message( 'submit_job', 'Begin', 1 )\
+;\n\n	# Set input sequence\n	$tool_params{'sequenc\
+e'} = shift;\n\n	# Load parameters\n	&load_params(\
+);\n\n	# Submit the job\n	my $jobid = &rest_run( $\
+params{'email'}, $params{'title'}, \\%tool_params \
+);\n\n	# Simulate sync/async mode\n	if ( defined( \
+$params{'async'} ) ) {\n		print STDOUT $jobid, \"\\
+\n\";\n		if ( $outputLevel > 0 ) {\n			print STDER\
+R\n			  \"To check status: $scriptName --status --\
+jobid $jobid\\n\";\n		}\n	}\n	else {\n		if ( $outp\
+utLevel > 0 ) {\n			print STDERR \"JobId: $jobid\\\
+n\";\n		}\n		sleep 1;\n		&get_results($jobid);\n	}\
+\n	print_debug_message( 'submit_job', 'End', 1 );\\
+n}\n\n=head2 multi_submit_job()\n\nSubmit multiple\
+ jobs assuming input is a collection of fasta form\
+atted sequences.\n\n  &multi_submit_job();\n\n=cut\
+\n\nsub multi_submit_job {\n	print_debug_message( \
+'multi_submit_job', 'Begin', 1 );\n	my $jobIdForFi\
+lename = 1;\n	$jobIdForFilename = 0 if ( defined( \
+$params{'outfile'} ) );\n	my (@filename_list) = ()\
+;\n\n	# Query sequence\n	if ( defined( $ARGV[0] ) \
+) {    # Bare option\n		if ( -f $ARGV[0] || $ARGV[\
+0] eq '-' ) {    # File\n			push( @filename_list, \
+$ARGV[0] );\n		}\n	}\n	if ( $params{'sequence'} ) \
+{                   # Via --sequence\n		if ( -f $p\
+arams{'sequence'} || $params{'sequence'} eq '-' ) \
+{    # File\n			push( @filename_list, $params{'seq\
+uence'} );\n		}\n	}\n\n	$/ = '>';\n	foreach my $fi\
+lename (@filename_list) {\n		open( my $INFILE, '<'\
+, $filename )\n		  or die \"Error: unable to open \
+file $filename ($!)\";\n		while (<$INFILE>) {\n			\
+my $seq = $_;\n			$seq =~ s/>$//;\n			if ( $seq =~\
+ m/(\\S+)/ ) {\n				print STDERR \"Submitting job \
+for: $1\\n\"\n				  if ( $outputLevel > 0 );\n				\
+$seq = '>' . $seq;\n				&print_debug_message( 'mul\
+ti_submit_job', $seq, 11 );\n				&submit_job($seq)\
+;\n				$params{'outfile'} = undef if ( $jobIdForFi\
+lename == 1 );\n			}\n		}\n		close $INFILE;\n	}\n	\
+print_debug_message( 'multi_submit_job', 'End', 1 \
+);\n}\n\n=head2 list_file_submit_job()\n\nSubmit m\
+ultiple jobs using a file containing a list of ent\
+ry identifiers as \ninput.\n\n  &list_file_submit_\
+job($list_filename)\n\n=cut\n\nsub list_file_submi\
+t_job {\n	my $filename         = shift;\n	my $jobI\
+dForFilename = 1;\n	$jobIdForFilename = 0 if ( def\
+ined( $params{'outfile'} ) );\n\n	# Iterate over i\
+dentifiers, submitting each job\n	open( my $LISTFI\
+LE, '<', $filename )\n	  or die 'Error: unable to \
+open file ' . $filename . ' (' . $! . ')';\n	while\
+ (<$LISTFILE>) {\n		my $line = $_;\n		chomp($line)\
+;\n		if ( $line ne '' ) {\n			&print_debug_message\
+( 'list_file_submit_job', 'line: ' . $line, 2 );\n\
+			if ( $line =~ m/\\w:\\w/ ) {    # Check this is\
+ an identifier\n				print STDERR \"Submitting job \
+for: $line\\n\"\n				  if ( $outputLevel > 0 );\n	\
+			&submit_job($line);\n			}\n			else {\n				print\
+ STDERR\n\"Warning: line \\\"$line\\\" is not reco\
+gnised as an identifier\\n\";\n			}\n		}\n		$param\
+s{'outfile'} = undef if ( $jobIdForFilename == 1 )\
+;\n	}\n	close $LISTFILE;\n}\n\n=head2 load_data()\\
+n\nLoad sequence data from file or option specifie\
+d on the command-line.\n\n  &load_data();\n\n=cut\\
+n\nsub load_data {\n	print_debug_message( 'load_da\
+ta', 'Begin', 1 );\n	my $retSeq;\n\n	# Query seque\
+nce\n	if ( defined( $ARGV[0] ) ) {    # Bare optio\
+n\n		if ( -f $ARGV[0] || $ARGV[0] eq '-' ) {    # \
+File\n			$retSeq = &read_file( $ARGV[0] );\n		}\n	\
+	else {                                     # DB:I\
+D or sequence\n			$retSeq = $ARGV[0];\n		}\n	}\n	i\
+f ( $params{'sequence'} ) {                   # Vi\
+a --sequence\n		if ( -f $params{'sequence'} || $pa\
+rams{'sequence'} eq '-' ) {    # File\n			$retSeq \
+= &read_file( $params{'sequence'} );\n		}\n		else \
+{    # DB:ID or sequence\n			$retSeq = $params{'se\
+quence'};\n		}\n	}\n	print_debug_message( 'load_da\
+ta', 'End', 1 );\n	return $retSeq;\n}\n\n=head2 lo\
+ad_params()\n\nLoad job parameters from command-li\
+ne options.\n\n  &load_params();\n\n=cut\n\nsub lo\
+ad_params {\n	print_debug_message( 'load_params', \
+'Begin', 1 );\n\n	# Database(s) to search\n	my (@d\
+bList) = split /[ ,]/, $params{'database'};\n	$too\
+l_params{'database'} = \\@dbList;\n\n	# Match/miss\
+match\n	if ( $params{'match'} && $params{'missmatc\
+h'} ) {\n		$tool_params{'match_scores'} =\n		  $pa\
+rams{'match'} . ',' . $params{'missmatch'};\n	}\n	\
+\n	# Compatability options, old command-line\n	if(\
+!$tool_params{'alignments'} && $params{'numal'}) {\
+\n		$tool_params{'alignments'} = $params{'numal'};\
+\n	}\n	if(!$tool_params{'gapopen'} && $params{'ope\
+ngap'}) {\n		$tool_params{'gapopen'} = $params{'op\
+engap'};\n	}\n	if(!$tool_params{'gapext'} && $para\
+ms{'extendgap'}) {\n		$tool_params{'gapext'} = $pa\
+rams{'extendgap'};\n	}\n\n	print_debug_message( 'l\
+oad_params', 'End', 1 );\n}\n\n=head2 client_poll(\
+)\n\nClient-side job polling.\n\n  &client_poll($j\
+ob_id);\n\n=cut\n\nsub client_poll {\n	print_debug\
+_message( 'client_poll', 'Begin', 1 );\n	my $jobid\
+  = shift;\n	my $status = 'PENDING';\n\n	my $error\
+Count = 0;\n	while ($status eq 'RUNNING'\n		|| $st\
+atus eq 'PENDING'\n		|| ( $status eq 'ERROR' && $e\
+rrorCount < 2 ) )\n	{\n		$status = rest_get_status\
+($jobid);\n		print STDERR \"$status\\n\" if ( $out\
+putLevel > 0 );\n		if ( $status eq 'ERROR' ) {\n		\
+	$errorCount++;\n		}\n		elsif ( $errorCount > 0 ) \
+{\n			$errorCount--;\n		}\n		if (   $status eq 'RU\
+NNING'\n			|| $status eq 'PENDING'\n			|| $status \
+eq 'ERROR' )\n		{\n\n			# Wait before polling agai\
+n.\n			sleep $checkInterval;\n		}\n	}\n	print_debu\
+g_message( 'client_poll', 'End', 1 );\n	return $st\
+atus;\n}\n\n=head2 get_results()\n\nGet the result\
+s for a job identifier.\n\n  &get_results($job_id)\
+;\n\n=cut\n\nsub get_results {\n	print_debug_messa\
+ge( 'get_results', 'Begin', 1 );\n	my $jobid = shi\
+ft;\n	print_debug_message( 'get_results', 'jobid: \
+' . $jobid, 1 );\n\n	# Verbose\n	if ( $outputLevel\
+ > 1 ) {\n		print 'Getting results for job ', $job\
+id, \"\\n\";\n	}\n\n	# Check status, and wait if n\
+ot finished\n	client_poll($jobid);\n\n	# Use JobId\
+ if output file name is not defined\n	unless ( def\
+ined( $params{'outfile'} ) ) {\n		$params{'outfile\
+'} = $jobid;\n	}\n\n	# Get list of data types\n	my\
+ (@resultTypes) = rest_get_result_types($jobid);\n\
+\n	# Get the data and write it to a file\n	if ( de\
+fined( $params{'outformat'} ) ) {    # Specified d\
+ata type\n		my $selResultType;\n		foreach my $resu\
+ltType (@resultTypes) {\n			if ( $resultType->{'id\
+entifier'} eq $params{'outformat'} ) {\n				$selRe\
+sultType = $resultType;\n			}\n		}\n		if ( defined\
+($selResultType) ) {\n			my $result =\n			  rest_g\
+et_result( $jobid, $selResultType->{'identifier'} \
+);\n			if ( $params{'outfile'} eq '-' ) {\n				wri\
+te_file( $params{'outfile'}, $result );\n			}\n			\
+else {\n				write_file(\n					$params{'outfile'} .\
+ '.'\n					  . $selResultType->{'identifier'} . '.\
+'\n					  . $selResultType->{'fileSuffix'},\n					\
+$result\n				);\n			}\n		}\n		else {\n			die 'Erro\
+r: unknown result format \"' . $params{'outformat'\
+} . '\"';\n		}\n	}\n	else {    # Data types availa\
+ble\n		      # Write a file for each output type\n\
+		for my $resultType (@resultTypes) {\n			if ( $ou\
+tputLevel > 1 ) {\n				print STDERR 'Getting ', $r\
+esultType->{'identifier'}, \"\\n\";\n			}\n			my $\
+result = rest_get_result( $jobid, $resultType->{'i\
+dentifier'} );\n			if ( $params{'outfile'} eq '-' \
+) {\n				write_file( $params{'outfile'}, $result )\
+;\n			}\n			else {\n				write_file(\n					$params{\
+'outfile'} . '.'\n					  . $resultType->{'identifi\
+er'} . '.'\n					  . $resultType->{'fileSuffix'},\\
+n					$result\n				);\n			}\n		}\n	}\n	print_debug\
+_message( 'get_results', 'End', 1 );\n}\n\n=head2 \
+read_file()\n\nRead a file into a scalar. The spec\
+ial filename '-' can be used to read from \nstanda\
+rd input (STDIN).\n\n  my $data = &read_file($file\
+name);\n\n=cut\n\nsub read_file {\n	print_debug_me\
+ssage( 'read_file', 'Begin', 1 );\n	my $filename =\
+ shift;\n	print_debug_message( 'read_file', 'filen\
+ame: ' . $filename, 2 );\n	my ( $content, $buffer \
+);\n	if ( $filename eq '-' ) {\n		while ( sysread(\
+ STDIN, $buffer, 1024 ) ) {\n			$content .= $buffe\
+r;\n		}\n	}\n	else {    # File\n		open( my $FILE, \
+'<', $filename )\n		  or die \"Error: unable to op\
+en input file $filename ($!)\";\n		while ( sysread\
+( $FILE, $buffer, 1024 ) ) {\n			$content .= $buff\
+er;\n		}\n		close($FILE);\n	}\n	print_debug_messag\
+e( 'read_file', 'End', 1 );\n	return $content;\n}\\
+n\n=head2 write_file()\n\nWrite data to a file. Th\
+e special filename '-' can be used to write to \ns\
+tandard output (STDOUT).\n\n  &write_file($filenam\
+e, $data);\n\n=cut\n\nsub write_file {\n	print_deb\
+ug_message( 'write_file', 'Begin', 1 );\n	my ( $fi\
+lename, $data ) = @_;\n	print_debug_message( 'writ\
+e_file', 'filename: ' . $filename, 2 );\n	if ( $ou\
+tputLevel > 0 ) {\n		print STDERR 'Creating result\
+ file: ' . $filename . \"\\n\";\n	}\n	if ( $filena\
+me eq '-' ) {\n		print STDOUT $data;\n	}\n	else {\\
+n		open( my $FILE, '>', $filename )\n		  or die \"\
+Error: unable to open output file $filename ($!)\"\
+;\n		syswrite( $FILE, $data );\n		close($FILE);\n	\
+}\n	print_debug_message( 'write_file', 'End', 1 );\
+\n}\n\n=head2 usage()\n\nPrint program usage messa\
+ge.\n\n  &usage();\n\n=cut\n\nsub usage {\n	print \
+STDERR <<EOF\nNCBI BLAST\n==========\n   \nRapid s\
+equence database search programs utilizing the BLA\
+ST algorithm\n    \n[Required]\n\n  -p, --program \
+     : str  : BLAST program to use, see --paramDet\
+ail program\n  -D, --database     : str  : databas\
+e(s) to search, space separated. See\n            \
+                  --paramDetail database\n      --\
+stype        : str  : query sequence type, see --p\
+aramDetail stype\n  seqFile            : file : qu\
+ery sequence (\"-\" for STDIN, \\@filename for\n  \
+                            identifier list file)\\
+n\n[Optional]\n\n  -m, --matrix       : str  : sco\
+ring matrix, see --paramDetail matrix\n  -e, --exp\
+          : real : 0<E<= 1000. Statistical signifi\
+cance threshold \n                              fo\
+r reporting database sequence matches.\n  -f, --fi\
+lter       :      : filter the query sequence for \
+low complexity \n                              reg\
+ions, see --paramDetail filter\n  -A, --align     \
+   : int  : pairwise alignment format, see --param\
+Detail align\n  -s, --scores       : int  : number\
+ of scores to be reported\n  -n, --alignments   : \
+int  : number of alignments to report\n  -u, --mat\
+ch        : int  : Match score (BLASTN only)\n  -v\
+, --mismatch     : int  : Mismatch score (BLASTN o\
+nly)\n  -o, --gapopen      : int  : Gap open penal\
+ty\n  -x, --gapext       : int  : Gap extension pe\
+nalty\n  -d, --dropoff      : int  : Drop-off\n  -\
+g, --gapalign     :      : Optimise gapped alignme\
+nts\n      --seqrange     : str  : region within i\
+nput to use as query\n      --multifasta   :      \
+: treat input as a set of fasta formatted sequence\
+s\n\n[General]\n\n  -h, --help        :      : pri\
+nts this help text\n      --async       :      : f\
+orces to make an asynchronous query\n      --email\
+       : str  : e-mail address\n      --title     \
+  : str  : title for job\n      --status      :   \
+   : get job status\n      --resultTypes :      : \
+get available result types for job\n      --polljo\
+b     :      : poll for the status of a job\n     \
+ --jobid       : str  : jobid that was returned wh\
+en an asynchronous job \n                         \
+    was submitted.\n      --outfile     : str  : f\
+ile name for results (default is jobid;\n         \
+                    \"-\" for STDOUT)\n      --out\
+format   : str  : result format to retrieve\n     \
+ --params      :      : list input parameters\n   \
+   --paramDetail : str  : display details for inpu\
+t parameter\n      --quiet       :      : decrease\
+ output\n      --verbose     :      : increase out\
+put\n      --trace       :      : show SOAP messag\
+es being interchanged \n   \nSynchronous job:\n\n \
+ The results/errors are returned as soon as the jo\
+b is finished.\n  Usage: $scriptName --email <your\
+\\@email> [options...] seqFile\n  Returns: results\
+ as an attachment\n\nAsynchronous job:\n\n  Use th\
+is if you want to retrieve the results at a later \
+time. The results \n  are stored for up to 24 hour\
+s. 	\n  Usage: $scriptName --async --email <your\\\
+@email> [options...] seqFile\n  Returns: jobid\n\n\
+  Use the jobid to query for the status of the job\
+. If the job is finished, \n  it also returns the \
+results/errors.\n  Usage: $scriptName --polljob --\
+jobid <jobId> [--outfile string]\n  Returns: strin\
+g indicating the status of the job and if applicab\
+le, results \n  as an attachment.\n\nFurther infor\
+mation:\n\n  http://www.ebi.ac.uk/Tools/webservice\
+s/services/sss/ncbi_blast_rest\n  http://www.ebi.a\
+c.uk/Tools/webservices/tutorials/perl\n\nSupport/F\
+eedback:\n\n  http://www.ebi.ac.uk/support/\nEOF\n\
+}\n\n=head1 FEEDBACK/SUPPORT\n\nPlease contact us \
+at L<http://www.ebi.ac.uk/support/> if you have an\
+y \nfeedback, suggestions or issues with the servi\
+ce or this client.\n\n=cut\n","\n=head1 NAME\n\nwu\
+blast_lwp.pl\n\n=head1 DESCRIPTION\n\nWU-BLAST RES\
+T web service Perl client using L<LWP>.\n\nTested \
+with:\n\n=over\n\n=item *\nL<LWP> 5.79, L<XML::Sim\
+ple> 2.12 and Perl 5.8.3\n\n=item *\nL<LWP> 5.805,\
+ L<XML::Simple> 2.14 and Perl 5.8.7\n\n=item *\nL<\
+LWP> 5.820, L<XML::Simple> 2.18 and Perl 5.10.0 (U\
+buntu 9.04)\n\n=back\n\nFor further information se\
+e:\n\n=over\n\n=item *\nL<http://www.ebi.ac.uk/Too\
+ls/webservices/services/sss/wu_blast_rest>\n\n=ite\
+m *\nL<http://www.ebi.ac.uk/Tools/webservices/tuto\
+rials/perl>\n\n=back\n\n=head1 VERSION\n\n$Id: wub\
+last_lwp.pl 1317 2009-09-03 15:44:11Z hpm $\n\n=cu\
+t\n\nuse strict;\nuse warnings;\n\nuse English;\nu\
+se LWP;\nuse XML::Simple;\nuse Getopt::Long qw(:co\
+nfig no_ignore_case bundling);\nuse File::Basename\
+;\nuse Data::Dumper;\n\nmy $baseUrl = 'http://www.\
+ebi.ac.uk/Tools/services/rest/wublast';\n\nmy $che\
+ckInterval = 3;\n\nmy $outputLevel = 1;\n\nmy $num\
+Opts = scalar(@ARGV);\nmy %params = ( 'debugLevel'\
+ => 0 );\n\nmy %tool_params = ();\nGetOptions(\n\n\
+	# Tool specific options\n	'program|p=s'     => \\\
+$tool_params{'program'},      # BLAST program\n	'd\
+atabase|D=s'    => \\$params{'database'},     # Se\
+arch database\n	'matrix|m=s'      => \\$tool_param\
+s{'matrix'},       # Scoring matrix\n	'exp|E=f'   \
+      => \\$tool_params{'exp'},          # E-value\
+ threshold\n	'viewfilter|e'    => \\$tool_params{'\
+viewfilter'},   # Display filtered sequence\n	'fil\
+ter|f=s'      => \\$tool_params{'filter'},       #\
+ Low complexity filter name\n	'alignments|n=i'  =>\
+ \\$tool_params{'alignments'},   # Number of align\
+ments\n	'scores|s=i'      => \\$tool_params{'score\
+s'},       # Number of scores\n	'sensitivity|S=s' \
+=> \\$tool_params{'sensitivity'},  # Search sensit\
+ivity\n	'sort|t=s'        => \\$tool_params{'sort'\
+},         # Sort hits by...\n	'stats|T=s'       =\
+> \\$tool_params{'stats'},        # Scoring statis\
+tic to use\n	'strand|d=s'      => \\$tool_params{'\
+strand'},       # Strand to use\n	'topcombon|c=i' \
+  => \\$tool_params{'topcombon'},    # Consistent \
+sets of HSPs\n	'align|A=i'       => \\$tool_params\
+{'align'},   # Pairwise alignment format\n	'stype=\
+s' => \\$tool_params{'stype'},    # Sequence type \
+'protein' or 'dna'\n	'sequence=s' => \\$params{'se\
+quence'},         # Query sequence file or DB:ID\n\
+	'multifasta' => \\$params{'multifasta'},       # \
+Multiple fasta input\n\n	# Compatability options, \
+old command-line.\n	'echofilter|e'    => \\$params\
+{'echofilter'},   # Display filtered sequence\n	'b\
+=i'  => \\$params{'numal'},        # Number of ali\
+gnments\n	'appxml=s'        => \\$params{'appxml'}\
+,       # Application XML\n\n	# Generic options\n	\
+'email=s'       => \\$params{'email'},          # \
+User e-mail address\n	'title=s'       => \\$params\
+{'title'},          # Job title\n	'outfile=s'     \
+=> \\$params{'outfile'},        # Output file name\
+\n	'outformat=s'   => \\$params{'outformat'},     \
+ # Output file type\n	'jobid=s'       => \\$params\
+{'jobid'},          # JobId\n	'help|h'        => \\
+\$params{'help'},           # Usage help\n	'async'\
+         => \\$params{'async'},          # Asynchr\
+onous submission\n	'polljob'       => \\$params{'p\
+olljob'},        # Get results\n	'resultTypes'   =\
+> \\$params{'resultTypes'},    # Get result types\\
+n	'status'        => \\$params{'status'},         \
+# Get status\n	'params'        => \\$params{'param\
+s'},         # List input parameters\n	'paramDetai\
+l=s' => \\$params{'paramDetail'},    # Get details\
+ for parameter\n	'quiet'         => \\$params{'qui\
+et'},          # Decrease output level\n	'verbose'\
+       => \\$params{'verbose'},        # Increase \
+output level\n	'debugLevel=i'  => \\$params{'debug\
+Level'},     # Debug output level\n	'baseUrl=s'   \
+  => \\$baseUrl,                  # Base URL for s\
+ervice.\n);\nif ( $params{'verbose'} ) { $outputLe\
+vel++ }\nif ( $params{'$quiet'} )  { $outputLevel-\
+- }\n\n&print_debug_message( 'MAIN', 'LWP::VERSION\
+: ' . $LWP::VERSION,\n	1 );\n\n&print_debug_messag\
+e( 'MAIN', \"params:\\n\" . Dumper( \\%params ),  \
+         11 );\n&print_debug_message( 'MAIN', \"to\
+ol_params:\\n\" . Dumper( \\%tool_params ), 11 );\\
+n\nmy $scriptName = basename( $0, () );\n\nif ( $p\
+arams{'help'} || $numOpts == 0 ) {\n	&usage();\n	e\
+xit(0);\n}\n\n&print_debug_message( 'MAIN', 'baseU\
+rl: ' . $baseUrl, 1 );\n\nif (\n	!(\n		   $params{\
+'polljob'}\n		|| $params{'resultTypes'}\n		|| $par\
+ams{'status'}\n		|| $params{'params'}\n		|| $param\
+s{'paramDetail'}\n	)\n	&& !( defined( $ARGV[0] ) |\
+| defined( $params{'sequence'} ) )\n  )\n{\n\n	# B\
+ad argument combination, so print error message an\
+d usage\n	print STDERR 'Error: bad option combinat\
+ion', \"\\n\";\n	&usage();\n	exit(1);\n}\n\nelsif \
+( $params{'params'} ) {\n	&print_tool_params();\n}\
+\n\nelsif ( $params{'paramDetail'} ) {\n	&print_pa\
+ram_details( $params{'paramDetail'} );\n}\n\nelsif\
+ ( $params{'status'} && defined( $params{'jobid'} \
+) ) {\n	&print_job_status( $params{'jobid'} );\n}\\
+n\nelsif ( $params{'resultTypes'} && defined( $par\
+ams{'jobid'} ) ) {\n	&print_result_types( $params{\
+'jobid'} );\n}\n\nelsif ( $params{'polljob'} && de\
+fined( $params{'jobid'} ) ) {\n	&get_results( $par\
+ams{'jobid'} );\n}\n\nelse {\n\n	# Multiple input \
+sequence mode, assume fasta format.\n	if ( $params\
+{'multifasta'} ) {\n		&multi_submit_job();\n	}\n\n\
+	# Entry identifier list file.\n	elsif (( defined(\
+ $params{'sequence'} ) && $params{'sequence'} =~ m\
+/^\\@/ )\n		|| ( defined( $ARGV[0] ) && $ARGV[0] =\
+~ m/^\\@/ ) )\n	{\n		my $list_filename = $params{'\
+sequence'} || $ARGV[0];\n		$list_filename =~ s/^\\\
+@//;\n		&list_file_submit_job($list_filename);\n	}\
+\n\n	# Default: single sequence/identifier.\n	else\
+ {\n\n		# Load the sequence data and submit.\n		&s\
+ubmit_job( &load_data() );\n	}\n}\n\n=head1 FUNCTI\
+ONS\n\n=cut\n\n\n=head2 rest_request()\n\nPerform \
+a REST request.\n\n  my $response_str = &rest_requ\
+est($url);\n\n=cut\n\nsub rest_request {\n	print_d\
+ebug_message( 'rest_request', 'Begin', 11 );\n	my \
+$requestUrl = shift;\n	print_debug_message( 'rest_\
+request', 'URL: ' . $requestUrl, 11 );\n\n	# Creat\
+e a user agent\n	my $ua = LWP::UserAgent->new();\n\
+	'$Revision: 1317 $' =~ m/(\\d+)/;\n	$ua->agent(\"\
+EBI-Sample-Client/$1 ($scriptName; $OSNAME) \" . $\
+ua->agent());\n	$ua->env_proxy;\n\n	# Perform the \
+request\n	my $response = $ua->get($requestUrl);\n	\
+print_debug_message( 'rest_request', 'HTTP status:\
+ ' . $response->code,\n		11 );\n\n	# Check for HTT\
+P error codes\n	if ( $response->is_error ) {\n		$r\
+esponse->content() =~ m/<h1>([^<]+)<\\/h1>/;\n		di\
+e 'http status: ' . $response->code . ' ' . $respo\
+nse->message . '  ' . $1;\n	}\n	print_debug_messag\
+e( 'rest_request', 'End', 11 );\n\n	# Return the r\
+esponse data\n	return $response->content();\n}\n\n\
+=head2 rest_get_parameters()\n\nGet list of tool p\
+arameter names.\n\n  my (@param_list) = &rest_get_\
+parameters();\n\n=cut\n\nsub rest_get_parameters {\
+\n	print_debug_message( 'rest_get_parameters', 'Be\
+gin', 1 );\n	my $url                = $baseUrl . '\
+/parameters/';\n	my $param_list_xml_str = rest_req\
+uest($url);\n	my $param_list_xml     = XMLin($para\
+m_list_xml_str);\n	my (@param_list)       = @{ $pa\
+ram_list_xml->{'id'} };\n	print_debug_message( 're\
+st_get_parameters', 'End', 1 );\n	return (@param_l\
+ist);\n}\n\n=head2 rest_get_parameter_details()\n\\
+nGet details of a tool parameter.\n\n  my $paramDe\
+tail = &rest_get_parameter_details($param_name);\n\
+\n=cut\n\nsub rest_get_parameter_details {\n	print\
+_debug_message( 'rest_get_parameter_details', 'Beg\
+in', 1 );\n	my $parameterId = shift;\n	print_debug\
+_message( 'rest_get_parameter_details',\n		'parame\
+terId: ' . $parameterId, 1 );\n	my $url           \
+       = $baseUrl . '/parameterdetails/' . $parame\
+terId;\n	my $param_detail_xml_str = rest_request($\
+url);\n	my $param_detail_xml     = XMLin($param_de\
+tail_xml_str);\n	print_debug_message( 'rest_get_pa\
+rameter_details', 'End', 1 );\n	return ($param_det\
+ail_xml);\n}\n\n=head2 rest_run()\n\nSubmit a job.\
+\n\n  my $job_id = &rest_run($email, $title, \\%pa\
+rams );\n\n=cut\n\nsub rest_run {\n	print_debug_me\
+ssage( 'rest_run', 'Begin', 1 );\n	my $email  = sh\
+ift;\n	my $title  = shift;\n	my $params = shift;\n\
+	print_debug_message( 'rest_run', 'email: ' . $ema\
+il, 1 );\n	if ( defined($title) ) {\n		print_debug\
+_message( 'rest_run', 'title: ' . $title, 1 );\n	}\
+\n	print_debug_message( 'rest_run', 'params: ' . D\
+umper($params), 1 );\n\n	# User agent to perform h\
+ttp requests\n	my $ua = LWP::UserAgent->new();\n	$\
+ua->env_proxy;\n\n	# Clean up parameters\n	my (%tm\
+p_params) = %{$params};\n	$tmp_params{'email'} = $\
+email;\n	$tmp_params{'title'} = $title;\n	foreach \
+my $param_name ( keys(%tmp_params) ) {\n		if ( !de\
+fined( $tmp_params{$param_name} ) ) {\n			delete $\
+tmp_params{$param_name};\n		}\n	}\n\n	# Submit the\
+ job as a POST\n	my $url = $baseUrl . '/run';\n	my\
+ $response = $ua->post( $url, \\%tmp_params );\n	p\
+rint_debug_message( 'rest_run', 'HTTP status: ' . \
+$response->code, 11 );\n	print_debug_message( 'res\
+t_run',\n		'request: ' . $response->request()->con\
+tent(), 11 );\n\n	# Check for HTTP error codes\n	i\
+f ( $response->is_error ) {\n		$response->content(\
+) =~ m/<h1>([^<]+)<\\/h1>/;\n		die 'http status: '\
+ . $response->code . ' ' . $response->message . ' \
+ ' . $1;\n	}\n\n	# The job id is returned\n	my $jo\
+b_id = $response->content();\n	print_debug_message\
+( 'rest_run', 'End', 1 );\n	return $job_id;\n}\n\n\
+=head2 rest_get_status()\n\nCheck the status of a \
+job.\n\n  my $status = &rest_get_status($job_id);\\
+n\n=cut\n\nsub rest_get_status {\n	print_debug_mes\
+sage( 'rest_get_status', 'Begin', 1 );\n	my $job_i\
+d = shift;\n	print_debug_message( 'rest_get_status\
+', 'jobid: ' . $job_id, 2 );\n	my $status_str = 'U\
+NKNOWN';\n	my $url        = $baseUrl . '/status/' \
+. $job_id;\n	$status_str = &rest_request($url);\n	\
+print_debug_message( 'rest_get_status', 'status_st\
+r: ' . $status_str, 2 );\n	print_debug_message( 'r\
+est_get_status', 'End', 1 );\n	return $status_str;\
+\n}\n\n=head2 rest_get_result_types()\n\nGet list \
+of result types for finished job.\n\n  my (@result\
+_types) = &rest_get_result_types($job_id);\n\n=cut\
+\n\nsub rest_get_result_types {\n	print_debug_mess\
+age( 'rest_get_result_types', 'Begin', 1 );\n	my $\
+job_id = shift;\n	print_debug_message( 'rest_get_r\
+esult_types', 'jobid: ' . $job_id, 2 );\n	my (@res\
+ultTypes);\n	my $url                      = $baseU\
+rl . '/resulttypes/' . $job_id;\n	my $result_type_\
+list_xml_str = &rest_request($url);\n	my $result_t\
+ype_list_xml     = XMLin($result_type_list_xml_str\
+);\n	(@resultTypes) = @{ $result_type_list_xml->{'\
+type'} };\n	print_debug_message( 'rest_get_result_\
+types',\n		scalar(@resultTypes) . ' result types',\
+ 2 );\n	print_debug_message( 'rest_get_result_type\
+s', 'End', 1 );\n	return (@resultTypes);\n}\n\n=he\
+ad2 rest_get_result()\n\nGet result data of a spec\
+ified type for a finished job.\n\n  my $result = r\
+est_get_result($job_id, $result_type);\n\n=cut\n\n\
+sub rest_get_result {\n	print_debug_message( 'rest\
+_get_result', 'Begin', 1 );\n	my $job_id = shift;\\
+n	my $type   = shift;\n	print_debug_message( 'rest\
+_get_result', 'jobid: ' . $job_id, 1 );\n	print_de\
+bug_message( 'rest_get_result', 'type: ' . $type, \
+   1 );\n	my $url    = $baseUrl . '/result/' . $jo\
+b_id . '/' . $type;\n	my $result = &rest_request($\
+url);\n	print_debug_message( 'rest_get_result', le\
+ngth($result) . ' characters',\n		1 );\n	print_deb\
+ug_message( 'rest_get_result', 'End', 1 );\n	retur\
+n $result;\n}\n\n\n=head2 print_debug_message()\n\\
+nPrint debug message at specified debug level.\n\n\
+  &print_debug_message($method_name, $message, $le\
+vel);\n\n=cut\n\nsub print_debug_message {\n	my $f\
+unction_name = shift;\n	my $message       = shift;\
+\n	my $level         = shift;\n	if ( $level <= $pa\
+rams{'debugLevel'} ) {\n		print STDERR '[', $funct\
+ion_name, '()] ', $message, \"\\n\";\n	}\n}\n\n=he\
+ad2 print_tool_params()\n\nPrint list of tool para\
+meters.\n\n  &print_tool_params();\n\n=cut\n\nsub \
+print_tool_params {\n	print_debug_message( 'print_\
+tool_params', 'Begin', 1 );\n	my (@param_list) = &\
+rest_get_parameters();\n	foreach my $param ( sort(\
+@param_list) ) {\n		print $param, \"\\n\";\n	}\n	p\
+rint_debug_message( 'print_tool_params', 'End', 1 \
+);\n}\n\n=head2 print_param_details()\n\nPrint det\
+ails of a tool parameter.\n\n  &print_param_detail\
+s($param_name);\n\n=cut\n\nsub print_param_details\
+ {\n	print_debug_message( 'print_param_details', '\
+Begin', 1 );\n	my $paramName = shift;\n	print_debu\
+g_message( 'print_param_details', 'paramName: ' . \
+$paramName, 2 );\n	my $paramDetail = &rest_get_par\
+ameter_details($paramName);\n	print $paramDetail->\
+{'name'}, \"\\t\", $paramDetail->{'type'}, \"\\n\"\
+;\n	print $paramDetail->{'description'}, \"\\n\";\\
+n	foreach my $value ( @{ $paramDetail->{'values'}-\
+>{'value'} } ) {\n		print $value->{'value'};\n		if\
+ ( $value->{'defaultValue'} eq 'true' ) {\n			prin\
+t \"\\t\", 'default';\n		}\n		print \"\\n\";\n		pr\
+int \"\\t\", $value->{'label'}, \"\\n\";\n	}\n	pri\
+nt_debug_message( 'print_param_details', 'End', 1 \
+);\n}\n\n=head2 print_job_status()\n\nPrint status\
+ of a job.\n\n  &print_job_status($job_id);\n\n=cu\
+t\n\nsub print_job_status {\n	print_debug_message(\
+ 'print_job_status', 'Begin', 1 );\n	my $jobid = s\
+hift;\n	print_debug_message( 'print_job_status', '\
+jobid: ' . $jobid, 1 );\n	if ( $outputLevel > 0 ) \
+{\n		print STDERR 'Getting status for job ', $jobi\
+d, \"\\n\";\n	}\n	my $result = &rest_get_status($j\
+obid);\n	print \"$result\\n\";\n	if ( $result eq '\
+FINISHED' && $outputLevel > 0 ) {\n		print STDERR \
+\"To get results: $scriptName --polljob --jobid \"\
+ . $jobid\n		  . \"\\n\";\n	}\n	print_debug_messag\
+e( 'print_job_status', 'End', 1 );\n}\n\n=head2 pr\
+int_result_types()\n\nPrint available result types\
+ for a job.\n\n  &print_result_types($job_id);\n\n\
+=cut\n\nsub print_result_types {\n	print_debug_mes\
+sage( 'result_types', 'Begin', 1 );\n	my $jobid = \
+shift;\n	print_debug_message( 'result_types', 'job\
+id: ' . $jobid, 1 );\n	if ( $outputLevel > 0 ) {\n\
+		print STDERR 'Getting result types for job ', $j\
+obid, \"\\n\";\n	}\n	my $status = &rest_get_status\
+($jobid);\n	if ( $status eq 'PENDING' || $status e\
+q 'RUNNING' ) {\n		print STDERR 'Error: Job status\
+ is ', $status,\n		  '. To get result types the jo\
+b must be finished.', \"\\n\";\n	}\n	else {\n		my \
+(@resultTypes) = &rest_get_result_types($jobid);\n\
+		if ( $outputLevel > 0 ) {\n			print STDOUT 'Avai\
+lable result types:', \"\\n\";\n		}\n		foreach my \
+$resultType (@resultTypes) {\n			print STDOUT $res\
+ultType->{'identifier'}, \"\\n\";\n			if ( defined\
+( $resultType->{'label'} ) ) {\n				print STDOUT \\
+"\\t\", $resultType->{'label'}, \"\\n\";\n			}\n		\
+	if ( defined( $resultType->{'description'} ) ) {\\
+n				print STDOUT \"\\t\", $resultType->{'descript\
+ion'}, \"\\n\";\n			}\n			if ( defined( $resultTyp\
+e->{'mediaType'} ) ) {\n				print STDOUT \"\\t\", \
+$resultType->{'mediaType'}, \"\\n\";\n			}\n			if \
+( defined( $resultType->{'fileSuffix'} ) ) {\n				\
+print STDOUT \"\\t\", $resultType->{'fileSuffix'},\
+ \"\\n\";\n			}\n		}\n		if ( $status eq 'FINISHED'\
+ && $outputLevel > 0 ) {\n			print STDERR \"\\n\",\
+ 'To get results:', \"\\n\",\n			  \"  $scriptName\
+ --polljob --jobid \" . $params{'jobid'} . \"\\n\"\
+,\n			  \"  $scriptName --polljob --outformat <typ\
+e> --jobid \"\n			  . $params{'jobid'} . \"\\n\";\\
+n		}\n	}\n	print_debug_message( 'result_types', 'E\
+nd', 1 );\n}\n\n=head2 submit_job()\n\nSubmit a jo\
+b to the service.\n\n  &submit_job($seq);\n\n=cut\\
+n\nsub submit_job {\n	print_debug_message( 'submit\
+_job', 'Begin', 1 );\n\n	# Set input sequence\n	$t\
+ool_params{'sequence'} = shift;\n\n	# Load paramet\
+ers\n	&load_params();\n\n	# Submit the job\n	my $j\
+obid = &rest_run( $params{'email'}, $params{'title\
+'}, \\%tool_params );\n\n	# Simulate sync/async mo\
+de\n	if ( defined( $params{'async'} ) ) {\n		print\
+ STDOUT $jobid, \"\\n\";\n		if ( $outputLevel > 0 \
+) {\n			print STDERR\n			  \"To check status: $scr\
+iptName --status --jobid $jobid\\n\";\n		}\n	}\n	e\
+lse {\n		if ( $outputLevel > 0 ) {\n			print STDER\
+R \"JobId: $jobid\\n\";\n		}\n		sleep 1;\n		&get_r\
+esults($jobid);\n	}\n	print_debug_message( 'submit\
+_job', 'End', 1 );\n}\n\n=head2 multi_submit_job()\
+\n\nSubmit multiple jobs assuming input is a colle\
+ction of fasta formatted sequences.\n\n  &multi_su\
+bmit_job();\n\n=cut\n\nsub multi_submit_job {\n	pr\
+int_debug_message( 'multi_submit_job', 'Begin', 1 \
+);\n	my $jobIdForFilename = 1;\n	$jobIdForFilename\
+ = 0 if ( defined( $params{'outfile'} ) );\n	my (@\
+filename_list) = ();\n\n	# Query sequence\n	if ( d\
+efined( $ARGV[0] ) ) {    # Bare option\n		if ( -f\
+ $ARGV[0] || $ARGV[0] eq '-' ) {    # File\n			pus\
+h( @filename_list, $ARGV[0] );\n		}\n	}\n	if ( $pa\
+rams{'sequence'} ) {                   # Via --seq\
+uence\n		if ( -f $params{'sequence'} || $params{'s\
+equence'} eq '-' ) {    # File\n			push( @filename\
+_list, $params{'sequence'} );\n		}\n	}\n\n	$/ = '>\
+';\n	foreach my $filename (@filename_list) {\n		op\
+en( my $INFILE, '<', $filename )\n		  or die \"Err\
+or: unable to open file $filename ($!)\";\n		while\
+ (<$INFILE>) {\n			my $seq = $_;\n			$seq =~ s/>$/\
+/;\n			if ( $seq =~ m/(\\S+)/ ) {\n				print STDER\
+R \"Submitting job for: $1\\n\"\n				  if ( $outpu\
+tLevel > 0 );\n				$seq = '>' . $seq;\n				&print_\
+debug_message( 'multi_submit_job', $seq, 11 );\n		\
+		&submit_job($seq);\n				$params{'outfile'} = und\
+ef if ( $jobIdForFilename == 1 );\n			}\n		}\n		cl\
+ose $INFILE;\n	}\n	print_debug_message( 'multi_sub\
+mit_job', 'End', 1 );\n}\n\n=head2 list_file_submi\
+t_job()\n\nSubmit multiple jobs using a file conta\
+ining a list of entry identifiers as \ninput.\n\n \
+ &list_file_submit_job($list_filename)\n\n=cut\n\n\
+sub list_file_submit_job {\n	my $filename         \
+= shift;\n	my $jobIdForFilename = 1;\n	$jobIdForFi\
+lename = 0 if ( defined( $params{'outfile'} ) );\n\
+\n	# Iterate over identifiers, submitting each job\
+\n	open( my $LISTFILE, '<', $filename )\n	  or die\
+ 'Error: unable to open file ' . $filename . ' (' \
+. $! . ')';\n	while (<$LISTFILE>) {\n		my $line = \
+$_;\n		chomp($line);\n		if ( $line ne '' ) {\n			&\
+print_debug_message( 'list_file_submit_job', 'line\
+: ' . $line, 2 );\n			if ( $line =~ m/\\w:\\w/ ) {\
+    # Check this is an identifier\n				print STDER\
+R \"Submitting job for: $line\\n\"\n				  if ( $ou\
+tputLevel > 0 );\n				&submit_job($line);\n			}\n	\
+		else {\n				print STDERR\n\"Warning: line \\\"$l\
+ine\\\" is not recognised as an identifier\\n\";\n\
+			}\n		}\n		$params{'outfile'} = undef if ( $jobI\
+dForFilename == 1 );\n	}\n	close $LISTFILE;\n}\n\n\
+=head2 load_data()\n\nLoad sequence data from file\
+ or option specified on the command-line.\n\n  &lo\
+ad_data();\n\n=cut\n\nsub load_data {\n	print_debu\
+g_message( 'load_data', 'Begin', 1 );\n	my $retSeq\
+;\n\n	# Query sequence\n	if ( defined( $ARGV[0] ) \
+) {    # Bare option\n		if ( -f $ARGV[0] || $ARGV[\
+0] eq '-' ) {    # File\n			$retSeq = &read_file( \
+$ARGV[0] );\n		}\n		else {                        \
+             # DB:ID or sequence\n			$retSeq = $AR\
+GV[0];\n		}\n	}\n	if ( $params{'sequence'} ) {    \
+               # Via --sequence\n		if ( -f $params\
+{'sequence'} || $params{'sequence'} eq '-' ) {    \
+# File\n			$retSeq = &read_file( $params{'sequence\
+'} );\n		}\n		else {    # DB:ID or sequence\n			$r\
+etSeq = $params{'sequence'};\n		}\n	}\n	print_debu\
+g_message( 'load_data', 'End', 1 );\n	return $retS\
+eq;\n}\n\n=head2 load_params()\n\nLoad job paramet\
+ers from command-line options.\n\n  &load_params()\
+;\n\n=cut\n\nsub load_params {\n	print_debug_messa\
+ge( 'load_params', 'Begin', 1 );\n\n	# Database(s)\
+ to search\n	my (@dbList) = split /[ ,]/, $params{\
+'database'};\n	$tool_params{'database'} = \\@dbLis\
+t;\n\n	# Compatability options, old command-line.\\
+n	if(!$tool_params{'viewfilter'} && $params{'echof\
+ilter'}) {\n		$tool_params{'viewfilter'} = 'true';\
+\n	}\n	if(!$tool_params{'alignments'} && $params{'\
+numal'}) {\n		$tool_params{'alignments'} = $params\
+{'numal'};\n	}\n	# TODO: set alignment format opti\
+on to get NCBI BLAST XML.\n	if($params{'appxml'}) \
+{\n		$tool_params{'align'} = '';\n	}\n\n	print_deb\
+ug_message( 'load_params', 'End', 1 );\n}\n\n=head\
+2 client_poll()\n\nClient-side job polling.\n\n  &\
+client_poll($job_id);\n\n=cut\n\nsub client_poll {\
+\n	print_debug_message( 'client_poll', 'Begin', 1 \
+);\n	my $jobid  = shift;\n	my $status = 'PENDING';\
+\n\n	my $errorCount = 0;\n	while ($status eq 'RUNN\
+ING'\n		|| $status eq 'PENDING'\n		|| ( $status eq\
+ 'ERROR' && $errorCount < 2 ) )\n	{\n		$status = r\
+est_get_status($jobid);\n		print STDERR \"$status\\
+\n\" if ( $outputLevel > 0 );\n		if ( $status eq '\
+ERROR' ) {\n			$errorCount++;\n		}\n		elsif ( $err\
+orCount > 0 ) {\n			$errorCount--;\n		}\n		if (   \
+$status eq 'RUNNING'\n			|| $status eq 'PENDING'\n\
+			|| $status eq 'ERROR' )\n		{\n\n			# Wait befor\
+e polling again.\n			sleep $checkInterval;\n		}\n	\
+}\n	print_debug_message( 'client_poll', 'End', 1 )\
+;\n	return $status;\n}\n\n=head2 get_results()\n\n\
+Get the results for a job identifier.\n\n  &get_re\
+sults($job_id);\n\n=cut\n\nsub get_results {\n	pri\
+nt_debug_message( 'get_results', 'Begin', 1 );\n	m\
+y $jobid = shift;\n	print_debug_message( 'get_resu\
+lts', 'jobid: ' . $jobid, 1 );\n\n	# Verbose\n	if \
+( $outputLevel > 1 ) {\n		print 'Getting results f\
+or job ', $jobid, \"\\n\";\n	}\n\n	# Check status,\
+ and wait if not finished\n	client_poll($jobid);\n\
+\n	# Use JobId if output file name is not defined\\
+n	unless ( defined( $params{'outfile'} ) ) {\n		$p\
+arams{'outfile'} = $jobid;\n	}\n\n	# Get list of d\
+ata types\n	my (@resultTypes) = rest_get_result_ty\
+pes($jobid);\n\n	# Get the data and write it to a \
+file\n	if ( defined( $params{'outformat'} ) ) {   \
+ # Specified data type\n		my $selResultType;\n		fo\
+reach my $resultType (@resultTypes) {\n			if ( $re\
+sultType->{'identifier'} eq $params{'outformat'} )\
+ {\n				$selResultType = $resultType;\n			}\n		}\n\
+		if ( defined($selResultType) ) {\n			my $result \
+=\n			  rest_get_result( $jobid, $selResultType->{\
+'identifier'} );\n			if ( $params{'outfile'} eq '-\
+' ) {\n				write_file( $params{'outfile'}, $result\
+ );\n			}\n			else {\n				write_file(\n					$param\
+s{'outfile'} . '.'\n					  . $selResultType->{'ide\
+ntifier'} . '.'\n					  . $selResultType->{'fileSu\
+ffix'},\n					$result\n				);\n			}\n		}\n		else {\
+\n			die 'Error: unknown result format \"' . $para\
+ms{'outformat'} . '\"';\n		}\n	}\n	else {    # Dat\
+a types available\n		      # Write a file for each\
+ output type\n		for my $resultType (@resultTypes) \
+{\n			if ( $outputLevel > 1 ) {\n				print STDERR \
+'Getting ', $resultType->{'identifier'}, \"\\n\";\\
+n			}\n			my $result = rest_get_result( $jobid, $r\
+esultType->{'identifier'} );\n			if ( $params{'out\
+file'} eq '-' ) {\n				write_file( $params{'outfil\
+e'}, $result );\n			}\n			else {\n				write_file(\\
+n					$params{'outfile'} . '.'\n					  . $resultTy\
+pe->{'identifier'} . '.'\n					  . $resultType->{'\
+fileSuffix'},\n					$result\n				);\n			}\n		}\n	}\
+\n	print_debug_message( 'get_results', 'End', 1 );\
+\n}\n\n=head2 read_file()\n\nRead a file into a sc\
+alar. The special filename '-' can be used to read\
+ from \nstandard input (STDIN).\n\n  my $data = &r\
+ead_file($filename);\n\n=cut\n\nsub read_file {\n	\
+print_debug_message( 'read_file', 'Begin', 1 );\n	\
+my $filename = shift;\n	print_debug_message( 'read\
+_file', 'filename: ' . $filename, 2 );\n	my ( $con\
+tent, $buffer );\n	if ( $filename eq '-' ) {\n		wh\
+ile ( sysread( STDIN, $buffer, 1024 ) ) {\n			$con\
+tent .= $buffer;\n		}\n	}\n	else {    # File\n		op\
+en( my $FILE, '<', $filename )\n		  or die \"Error\
+: unable to open input file $filename ($!)\";\n		w\
+hile ( sysread( $FILE, $buffer, 1024 ) ) {\n			$co\
+ntent .= $buffer;\n		}\n		close($FILE);\n	}\n	prin\
+t_debug_message( 'read_file', 'End', 1 );\n	return\
+ $content;\n}\n\n=head2 write_file()\n\nWrite data\
+ to a file. The special filename '-' can be used t\
+o write to \nstandard output (STDOUT).\n\n  &write\
+_file($filename, $data);\n\n=cut\n\nsub write_file\
+ {\n	print_debug_message( 'write_file', 'Begin', 1\
+ );\n	my ( $filename, $data ) = @_;\n	print_debug_\
+message( 'write_file', 'filename: ' . $filename, 2\
+ );\n	if ( $outputLevel > 0 ) {\n		print STDERR 'C\
+reating result file: ' . $filename . \"\\n\";\n	}\\
+n	if ( $filename eq '-' ) {\n		print STDOUT $data;\
+\n	}\n	else {\n		open( my $FILE, '>', $filename )\\
+n		  or die \"Error: unable to open output file $f\
+ilename ($!)\";\n		syswrite( $FILE, $data );\n		cl\
+ose($FILE);\n	}\n	print_debug_message( 'write_file\
+', 'End', 1 );\n}\n\n=head2 usage()\n\nPrint progr\
+am usage message.\n\n  &usage();\n\n=cut\n\nsub us\
+age {\n	print STDERR <<EOF\nWU-BLAST\n========\n  \
+ \nRapid sequence database search programs utilizi\
+ng the BLAST algorithm\n    \n[Required]\n\n  -p, \
+--program      : str  : BLAST program to use, see \
+--paramDetail program\n  -D, --database     : str \
+ : database(s) to search, space separated. See\n  \
+                            --paramDetail database\
+\n      --stype        : str  : query sequence typ\
+e, see --paramDetail stype\n  seqFile            :\
+ file : query sequence (\"-\" for STDIN, \\@filena\
+me for\n                              identifier l\
+ist file)\n\n[Optional]\n\n  -m, --matrix       : \
+str  : scoring matrix, see --paramDetail matrix\n \
+ -e, --exp          : real : 0<E<= 1000. Statistic\
+al significance threshold \n                      \
+        for reporting database sequence matches.\n\
+  -e, --viewfilter   :      : display the filtered\
+ query sequence\n  -f, --filter       : str  : fil\
+ter the query sequence for low complexity \n      \
+                        regions, see --paramDetail\
+ filter\n  -A, --align        : int  : pairwise al\
+ignment format, see --paramDetail align\n  -s, --s\
+cores       : int  : number of scores to be report\
+ed\n  -b, --alignments   : int  : number of alignm\
+ents to report\n  -S, --sensitivity  : str  : sens\
+itivity of the search, \n                         \
+     see --paramDetail sensitivity\n  -t, --sort	 \
+    : str  : sort order for hits, see --paramDetai\
+l sort\n  -T, --stats        : str  : statistical \
+model, see --paramDetail stats\n  -d, --strand    \
+   : str  : DNA strand to search with,\n          \
+                    see --paramDetail strand\n  -c\
+, --topcombon    : str  : consistent sets of HSPs\\
+n      --multifasta   :      : treat input as a se\
+t of fasta formatted sequences\n\n[General]\n\n  -\
+h, --help        :      : prints this help text\n \
+     --async       :      : forces to make an asyn\
+chronous query\n      --email       : str  : e-mai\
+l address\n      --title       : str  : title for \
+job\n      --status      :      : get job status\n\
+      --resultTypes :      : get available result \
+types for job\n      --polljob     :      : poll f\
+or the status of a job\n      --jobid       : str \
+ : jobid that was returned when an asynchronous jo\
+b \n                             was submitted.\n \
+     --outfile     : str  : file name for results \
+(default is jobid;\n                             \\
+"-\" for STDOUT)\n      --outformat   : str  : res\
+ult format to retrieve\n      --params      :     \
+ : list input parameters\n      --paramDetail : st\
+r  : display details for input parameter\n      --\
+quiet       :      : decrease output\n      --verb\
+ose     :      : increase output\n      --trace   \
+    :      : show SOAP messages being interchanged\
+ \n   \nSynchronous job:\n\n  The results/errors a\
+re returned as soon as the job is finished.\n  Usa\
+ge: $scriptName --email <your\\@email> [options...\
+] seqFile\n  Returns: results as an attachment\n\n\
+Asynchronous job:\n\n  Use this if you want to ret\
+rieve the results at a later time. The results \n \
+ are stored for up to 24 hours. 	\n  Usage: $scrip\
+tName --async --email <your\\@email> [options...] \
+seqFile\n  Returns: jobid\n\n  Use the jobid to qu\
+ery for the status of the job. If the job is finis\
+hed, \n  it also returns the results/errors.\n  Us\
+age: $scriptName --polljob --jobid <jobId> [--outf\
+ile string]\n  Returns: string indicating the stat\
+us of the job and if applicable, results \n  as an\
+ attachment.\n\nFurther information:\n\n  http://w\
+ww.ebi.ac.uk/Tools/webservices/services/sss/wu_bla\
+st_rest\n  http://www.ebi.ac.uk/Tools/webservices/\
+tutorials/perl\n\nSupport/Feedback:\n\n  http://ww\
+w.ebi.ac.uk/support/\nEOF\n}\n\n=head1 FEEDBACK/SU\
+PPORT\n\nPlease contact us at L<http://www.ebi.ac.\
+uk/support/> if you have any \nfeedback, suggestio\
+ns or issues with the service or this client.\n\n=\
+cut\n","\n\n\nmy $PROBTRESH = 0.3;# base pairs bel\
+ow this prob threshold will be ignored\nmy $WEIGHT\
+ = 100.0; # float!!\nmy $NUCALPH = \"ACGTUNRYMKSWH\
+BVD\";\nuse vars qw($NUCALPH $WEIGHT);\n\nmy $myna\
+me = basename($0);\n\nuse strict;\nuse warnings;\n\
+\nuse File::Basename;\nuse Getopt::Long;\nuse File\
+::Glob ':glob';\nuse File::Spec;\nuse File::Temp q\
+w/ tempfile tempdir /;\n\n\n\n\nsub tcoffeelib_hea\
+der($;$)\n{\n    my ($nseq, $fd) = @_;\n    if (! \
+defined($fd)) {\n        $fd = *STDOUT;\n    }\n  \
+  printf $fd \"! TC_LIB_FORMAT_01\\n\";\n    print\
+f $fd \"%d\\n\", $nseq;\n}\n\n\nsub tcoffeelib_hea\
+der_addseq($$;$)\n{\n    my ($id, $seq, $fd) = @_;\
+\n    if (! defined($fd)) {\n        $fd = *STDOUT\
+;\n    }\n    printf $fd \"%s %d %s\\n\", $id, len\
+gth($seq), $seq;\n}\n\n\nsub tcoffeelib_comment($;\
+$)\n{\n    my ($comment, $fd) = @_;\n    if (! def\
 ined($fd)) {\n        $fd = *STDOUT;\n    }\n    p\
-rintf $fd \"%s %d %s\\n\", $id, length($seq), $seq\
-;\n}\n\n\nsub tcoffeelib_comment($;$)\n{\n    my (\
-$comment, $fd) = @_;\n    if (! defined($fd)) {\n \
-       $fd = *STDOUT;\n    }\n    printf $fd \"!\"\
- . $comment . \"\\n\";\n}\n\n\nsub tcoffeelib_stru\
-ct($$$;$)\n{\n    my ($nseq, $len, $bpm, $fd) = @_\
-;\n\n    if (! defined($fd)) {\n        $fd = *STD\
-OUT;\n    }\n\n    # output basepair indices with \
-fixed weight\n    printf $fd \"#%d %d\\n\", $nseq,\
- $nseq;\n    # output basepairs (only once) and wi\
-th unit-offset\n    for (my $i=0; $i<$len; $i++) {\
-\n        for (my $j=$i+1; $j<$len; $j++) {\n     \
-       if (! defined($bpm->[$i][$j])) {\n         \
-       print STDERR \"ERROR: \\$bpm->[$i][$j] unde\
-fined\\n\";\n            }\n            if ($bpm->\
-[$i][$j]>0) {\n                print $fd $i+1;\n  \
-              print $fd \" \";\n                pr\
-int $fd $j+1;\n                print $fd \" \" . $\
-bpm->[$i][$j] . \"\\n\";\n            }\n        }\
-\n    }\n}\n\n\nsub tcoffeelib_footer(;$)\n{\n    \
-my ($fd) = @_;\n    if (! defined($fd)) {\n       \
- $fd = *STDOUT;\n    }\n    print $fd \"! SEQ_1_TO\
-_N\\n\";\n}\n\n\n    \nsub plfold($$$)\n{    \n   \
- my ($id, $seq, $probtresh) = @_;\n    my (@struct\
-);# return\n    my ($templ, $fhtmp, $fnametmp, $cm\
-d, $ctr, $window_size);\n    our $ntemp++;\n    \n\
-    $templ = $myname . \".pid-\" . $$ .$ntemp .\".\
-XXXXXX\";\n    ($fhtmp, $fnametmp) = tempfile($tem\
-pl, UNLINK => 1); \n    print $fhtmp \">$id\\n$seq\
-\\n\";\n\n    # --- init basepair array\n    #\n  \
-  for (my $i=0; $i<length($seq); $i++) {\n        \
-for (my $j=$i+1; $j<length($seq); $j++) {\n       \
-     $struct[$i][$j]=0;\n        }\n    }\n\n\n   \
- # --- call rnaplfold and drop a readme\n    #\n  \
-  $window_size=(length($seq)<70)?length($seq):70;\\
-n    $cmd = \"RNAplfold -W $window_size < $fnametm\
-p >/dev/null\";\n    system($cmd);\n    \n    if (\
-$? != 0) {\n        printf STDERR \"ERROR: RNAplfo\
-ld ($cmd) exited with error status %d\\n\", $? >> \
-8;\n        return;\n    }\n    #unlink($fnametmp)\
-;\n    my $fps = sprintf(\"%s_dp.ps\", $id); # che\
-ck long name\n    \n    if (! -s $fps) {\n      {\\
-n\n	$fps = sprintf(\"%s_dp.ps\", substr($id,0,12))\
-; # check short name\n 	if (! -s $fps)\n	  {\n	   \
- die(\"couldn't find expected file $fps\\n\");\n	 \
-   return;\n	  }\n      }\n    }\n\n    \n    # --\
-- read base pairs from created postscript\n    #\n\
-    open(FH, $fps);\n    while (my $line = <FH>) {\
-\n        my ($nti, $ntj, $prob);\n        chomp($\
-line);        \n        # line: bp bp sqrt-prob ub\
-ox\n        my @match = ($line =~ m/^([0-9]+) +([0\
--9]+) +([0-9\\.]+) +ubox$/);\n        if (scalar(@\
-match)) {\n            $nti=$1;\n            $ntj=\
-$2;\n            $prob=$3*$3;# prob stored as squa\
-re root\n\n            if ($prob>$probtresh) {\n  \
-              #printf STDERR \"\\$struct[$nti][$nt\
-j] sqrtprob=$3 prob=$prob > $probtresh\\n\";\n    \
-            $struct[$nti-1][$ntj-1] = $WEIGHT\n   \
-         }\n            # store with zero-offset\n\
-        }\n    }\n    close(FH);\n\n    # remove o\
-r gzi postscript\n    #\n    unlink($fps);\n    #\\
-n    # or gzip\n    #$cmd = \"gzip -qf $fps\";\n  \
-  #system($cmd);\n    #if ($? != 0) {\n    #    pr\
-intf STDERR \"ERROR: gzip ($cmd) exited with error\
- status %d\\n\", $? >> 8;\n    #}\n\n    return \\\
-@struct;\n}\n\n\n\n\n\nsub rnaseqfmt($)\n{\n    my\
- ($seq) = @_;\n    # remove gaps\n    $seq =~ s/-/\
-/g;\n    # uppercase RNA\n    $seq = uc($seq);\n  \
-  # T -> U\n    $seq =~ s/T/U/g;\n    # check for \
-invalid charaters\n    $_ = $seq;\n    s/[^$NUCALP\
-H]//g;\n    return $_;\n}\n\n\n\n\nsub usage(;$)\n\
-{    \n    my ($errmsg) = @_;\n    if ($errmsg) {\\
-n        print STDERR \"ERROR: $errmsg\\n\";\n    \
-}\n    print STDERR << \"EOF\";\n$myname:\n Create\
-s a T-Coffee RNA structure library from RNAplfold \
-prediction.\n See FIXME:citation\nUsage:\n $myname\
- -in seq_file -out tcoffee_lib\nEOF\n    exit(1);\\
-n}\n\nsub read_fasta_seq \n  {\n    my $f=$_[0];\n\
-    my %hseq;\n    my (@seq, @com, @name);\n    my\
- ($a, $s,$nseq);\n\n    open (F, $f);\n    while (\
-<F>)\n      {\n	$s.=$_;\n      }\n    close (F);\n\
-\n    \n    @name=($s=~/>(\\S*).*\\n[^>]*/g);\n   \
- \n    @seq =($s=~/>.*.*\\n([^>]*)/g);\n    @com =\
-($s=~/>(\\S*)(.*)\\n([^>]*)/g);\n\n\n    $nseq=$#n\
-ame+1;\n  \n    for ($a=0; $a<$nseq; $a++)\n      \
-{\n	my $n=$name[$a];\n	my $s;\n	$hseq{$n}{name}=$n\
-;\n	$s=$seq[$a];$s=~s/\\s//g;\n	\n	$hseq{$n}{seq}=\
-$s;\n	$hseq{$n}{com}=$com[$a];\n      }\n    retur\
-n %hseq;\n  }\n\n\n\n\n\n\n\nmy $fmsq = \"\";\nmy \
-$flib = \"\";\nmy %OPTS;\nmy %seq;\nmy ($id, $nseq\
-, $i);\nmy @nl;\n\nGetOptions(\"in=s\" => \\$fmsq,\
- \"out=s\" => \\$flib);\n\nif (! -s $fmsq) {\n    \
-usage(\"empty or non-existant file \\\"$fmsq\\\"\"\
-)\n}\nif (length($flib)==0) {\n    usage(\"empty o\
-ut-filename\")\n}\n\n\n\n\n\n\n%seq=read_fasta_seq\
-($fmsq);\n\n\n@nl=keys(%seq);\n\n$nseq=$#nl+1;\nop\
-en FD_LIB, \">$flib\" or die \"can't open $flib!\"\
-;\ntcoffeelib_header($nseq, *FD_LIB);\nforeach $id\
- (keys (%seq))\n  {\n    my ($seq, $fmtseq);\n    \
-\n    $seq = $seq{$id}{seq};\n    \n    $fmtseq = \
-rnaseqfmt($seq);# check here, formatting for foldi\
-ng important later\n    if (length($seq)!=length($\
-fmtseq)) {\n        print STDERR \"ERROR: invalid \
-sequence $id is not an RNA sequence. read seq is: \
-$seq\\n\";\n        exit\n      }\n   \n    tcoffe\
-elib_header_addseq($id, uc($seq), *FD_LIB);\n  }\n\
-tcoffeelib_comment(\"generated by $myname on \" . \
-localtime(), *FD_LIB);\n\n\n\n$i=0;\nforeach $id (\
-keys (%seq))\n  {\n    my ($cleanid, $seq, $bpm);\\
-n    $seq=$seq{$id}{seq};\n    $cleanid = $id;\n  \
-  $cleanid =~ s,[/ ],_,g;# needed for rnaplfold\n \
-   $seq = rnaseqfmt($seq);\n    \n    $bpm = plfol\
-d($cleanid, rnaseqfmt($seq), $PROBTRESH);       \n\
-    \n    tcoffeelib_struct($i+1, length($seq), $b\
-pm, *FD_LIB);\n    $i++;\n}\n\n\ntcoffeelib_footer\
-(*FD_LIB);\nclose FD_LIB;\nexit (0);\n\n","\n\n\n\\
-n\n$cmd=join ' ', @ARGV;\nif ($cmd=~/-infile=(\\S+\
-)/){ $seqfile=$1;}\nif ($cmd=~/-outfile=(\\S+)/){ \
-$libfile=$1;}\n\n\n\n%s=read_fasta_seq ($seqfile);\
-\n\nopen (F, \">$libfile\");\nforeach $name (keys \
-(%s))\n  {\n    my $tclib=\"$name.RNAplfold_tclib\\
-";\n    print (F \">$name _F_ $tclib\\n\");\n    s\
-eq2RNAplfold2tclib ($name, $s{$name}{seq}, $tclib)\
-;\n  }\nclose (F);\nexit (EXIT_SUCCESS);\n\nsub se\
-q2RNAplfold2tclib\n  {\n    my ($name, $seq, $tcli\
-b)=@_;\n    my ($tmp);\n    $n++;\n    $tmp=\"tmp4\
-seq2RNAplfold_tclib.$$.$n.pep\";\n    open (RF, \"\
->$tmp\");\n    print (RF \">$name\\n$seq\\n\");\n \
-   close (RF);\n    \n    system \"t_coffee -other\
-_pg RNAplfold2tclib.pl -in=$tmp -out=$tclib\";\n  \
-  \n    unlink ($tmp);\n    return $tclib;\n  }\n \
-   \n    \nsub read_fasta_seq \n  {\n    my $f=@_[\
-0];\n    my %hseq;\n    my (@seq, @com, @name);\n \
-   my ($a, $s,$nseq);\n\n    open (F, $f);\n    wh\
-ile (<F>)\n      {\n	$s.=$_;\n      }\n    close (\
-F);\n\n    \n    @name=($s=~/>(\\S*).*\\n[^>]*/g);\
-\n    \n    @seq =($s=~/>.*.*\\n([^>]*)/g);\n    @\
-com =($s=~/>\\S*(.*)\\n([^>]*)/g);\n\n    \n    $n\
-seq=$#name+1;\n    \n    for ($a=0; $a<$nseq; $a++\
-)\n      {\n	my $n=$name[$a];\n	$hseq{$n}{name}=$n\
-;\n	$hseq{$n}{seq}=$seq[$a];\n	$hseq{$n}{com}=$com\
-[$a];\n      }\n    return %hseq;\n  }\n","use Get\
-opt::Long;\nuse File::Path;\nuse Env;\nuse FileHan\
-dle;\nuse Cwd;\nuse Sys::Hostname;\nour $PIDCHILD;\
-\nour $ERROR_DONE;\nour @TMPFILE_LIST;\nour $EXIT_\
-FAILURE=1;\nour $EXIT_SUCCESS=0;\n\nour $REFDIR=ge\
-tcwd;\nour $EXIT_SUCCESS=0;\nour $EXIT_FAILURE=1;\\
-n\nour $PROGRAM=\"tc_generic_method.pl\";\nour $CL\
-=$PROGRAM;\n\nour $CLEAN_EXIT_STARTED;\nour $debug\
-_lock=$ENV{\"DEBUG_LOCK\"};\nour $LOCKDIR=$ENV{\"L\
-OCKDIR_4_TCOFFEE\"};\nif (!$LOCKDIR){$LOCKDIR=getc\
-wd();}\nour $ERRORDIR=$ENV{\"ERRORDIR_4_TCOFFEE\"}\
-;\nour $ERRORFILE=$ENV{\"ERRORFILE_4_TCOFFEE\"};\n\
-&set_lock ($$);\nif (isshellpid(getppid())){lock4t\
-c(getppid(), \"LLOCK\", \"LSET\", \"$$\\n\");}\n  \
-    \nour $print;\nmy ($fmsq1, $fmsq2, $output, $o\
-utfile, $arch, $psv, $hmmtop_home, $trim, $cov, $s\
-ample, $mode, $gor_home, $gor_seq, $gor_obs);\n\nG\
-etOptions(\"-in=s\" => \\$fmsq1,\"-output=s\" =>\\\
-$output ,\"-out=s\" => \\$outfile, \"-arch=s\" => \
-\\$arch,\"-psv=s\" => \\$psv, \"-hmmtop_home=s\", \
-\\$hmmtop_home,\"-trim=s\" =>\\$trim ,\"-print=s\"\
- =>\\$print,\"-cov=s\" =>\\$cov , \"-sample=s\" =>\
-\\$sample, \"-mode=s\" =>\\$mode, \"-gor_home=s\"=\
->\\$gor_home, \"-gor_seq=s\"=>\\$gor_seq,\"-gor_ob\
-s=s\"=>\\$gor_obs);\n\n\nif (!$mode){$mode = \"hmm\
-top\"}\nelsif ($mode eq \"hmmtop\"){;}\nelsif ($mo\
-de eq \"gor\"){;}\nelse {myexit(flush_error (\"-mo\
-de=$mode is unknown\"));}\n\n\nour $HOME=$ENV{\"HO\
-ME\"};\nour $MCOFFEE=($ENV{\"MCOFFEE_4_TCOFFEE\"})\
-?$ENV{\"MCOFFEE_4_TCOFFEE\"}:\"$HOME/.t_coffee/mco\
-ffee\";\n\nif ($mode eq \"hmmtop\")\n  {\n    chec\
-k_configuration (\"hmmtop\");\n    if (-e $arch){$\
-ENV{'HMMTOP_ARCH'}=$arch;}\n    elsif (-e $ENV{HMM\
-TOP_ARCH}){$arch=$ENV{HMMTOP_ARCH};}\n    elsif (-\
-e \"$MCOFFEE/hmmtop.arch\"){$arch=$ENV{'HMMTOP_ARC\
-H'}=\"$MCOFFEE/hmmtop.arch\";}\n    elsif (-e \"$h\
-mmtop_home/hmmtop.arc\"){$arch=$ENV{'HMMTOP_ARCH'}\
-=\"$hmmtop_home/hmmtop.arc\";}\n    else {myexit(f\
-lush_error ( \"Could not find ARCH file for hmmtop\
-\"));}\n    \n    \n    if (-e $psv){$ENV{'HMMTOP_\
-PSV'}=$psv;}\n    elsif (-e $ENV{HMMTOP_PSV}){$psv\
-=$ENV{HMMTOP_PSV};}\n    elsif (-e \"$MCOFFEE/hmmt\
-op.psv\"){$psv=$ENV{'HMMTOP_PSV'}=\"$MCOFFEE/hmmto\
-p.psv\";}\n    elsif (-e \"$hmmtop_home/hmmtop.psv\
-\"){$psv=$ENV{'HMMTOP_PSV'}=\"$hmmtop_home/hmmtop.\
-psv\";}\n    else {myexit(flush_error ( \"Could no\
-t find PSV file for hmmtop\"));}\n  }\nelsif ($mod\
-e eq \"gor\")\n  {\n    our $GOR_SEQ;\n    our $GO\
-R_OBS;\n    \n    check_configuration (\"gorIV\");\
-\n    if (-e $gor_seq){$GOR_SEQ=$gor_seq;}\n    el\
-sif (-e $ENV{GOR_SEQ}){$GOR_SEQ=$ENV{GOR_SEQ};}\n \
-   elsif (-e \"$MCOFFEE/New_KS.267.seq\"){$GOR_SEQ\
-=\"$MCOFFEE/New_KS.267.seq\";}\n    elsif (-e \"$g\
-or_home/New_KS.267.seq\"){$GOR_SEQ=\"$gor_home/New\
-_KS.267.seq\";}\n    else {myexit(flush_error ( \"\
-Could not find SEQ file for gor\"));}\n\n    if (-\
-e $gor_obs){$GOR_OBS=$gor_obs;}\n    elsif (-e $EN\
-V{GOR_OBS}){$GOR_OBS=$ENV{GOR_OBS};}\n    elsif (-\
-e \"$MCOFFEE/New_KS.267.obs\"){$GOR_OBS=\"$MCOFFEE\
-/New_KS.267.obs\";}\n    elsif (-e \"$gor_home/New\
-_KS.267.obs\"){$GOR_OBS=\"$gor_home/New_KS.267.obs\
-\";}\n    else {myexit(flush_error ( \"Could not f\
-ind OBS file for gor\"));}\n  }\n\n\nif ( ! -e $fm\
-sq1){myexit(flush_error (\"Could Not Read Input fi\
-le $fmsq1\"));}\n\n\nmy $fmsq2=vtmpnam();\nmy $fms\
-q3=vtmpnam();\nmy $tmpfile=vtmpnam();\nmy $predfil\
-e=vtmpnam();\n\nif ($trim){$trim_action=\" +trim _\
-aln_%%$trim\\_K1 \";}\nif ($cov) {$cov_action= \" \
-+sim_filter _aln_c$cov \";}\n&safe_system(\"t_coff\
-ee -other_pg seq_reformat -in $fmsq1 -action +conv\
-ert 'BOUJXZ-' $cov_action $trim_action -output fas\
-ta_aln -out $fmsq2\");\nmy (%pred, %seq, %predA);\\
-n\n\n%seq=read_fasta_seq($fmsq2);\n%seq=fasta2samp\
-le(\\%seq, $sample);\n\nif (1==2 && $mode eq \"hmm\
-top\" && $output eq \"cons\")\n  {\n    fasta2hmmt\
-op_cons($outfile,\\%seq);\n  }\nelse\n  {\n    %pr\
-ed=fasta2pred(\\%seq, $mode);\n    %predA=pred2aln\
- (\\%pred, \\%seq);\n    \n    \n    if (!$output \
-|| $output eq \"prediction\"){output_fasta_seq (\\\
-%predA, $outfile);}\n    elsif ($output eq \"color\
-_html\"){pred2color (\\%pred,\\%seq, $outfile);}\n\
-    elsif ($output eq \"cons\"){pred2cons($outfile\
-,\\%predA);}\n    else {flush_error (\"$output is \
-an unknown output mode\");}\n  }\n\nsub fasta2samp\
-le\n  {\n    my $SR=shift;\n    my $it=shift;\n   \
- my %S=%$SR;\n    \n    my $seq=index2seq_name (\\\
-%S, 1);\n    my $l=length($S{$seq}{seq});\n    my \
-@sl=keys(%S);\n    my $nseq=$#sl+1;\n    my $index\
-=$nseq;\n  \n    if (!$sample) {return %S;}\n    f\
-or (my $a=0; $a<$it; $a++)\n      {\n	my $newseq=\\
-"\";\n	my $nname=\"$seq\\_sampled_$index\";\n	for \
-(my $p=0; $p<$l; $p++)\n	  {\n	    my $i=int(rand(\
-$nseq));\n	    \n	    my $name = $sl[$i];\n	    my\
- $seq=$S{$name}{seq};\n	    my $r=substr ($seq, $p\
-, 1);\n	    $newseq.=$r;\n	  }\n	$S{$nname}{name}=\
-$nname;\n	$S{$nname}{seq}=$newseq;\n	$S{$nname}{co\
-m}=\"sampled\";\n	$S{$nname}{index}=++$index;\n   \
-   }\n    return %S;\n  }\n	      \nsub fasta2pred\
-\n  {\n    my $s=shift;\n    my $mode=shift;\n\n  \
-  if ( $mode eq \"hmmtop\"){return fasta2hmmtop_pr\
-ed($s);}\n    elsif ($mode eq \"gor\"){return fast\
-a2gor_pred ($s);}\n  }\nsub fasta2hmmtop_cons\n  {\
-\n    my $outfile=shift;\n    my $SR=shift;\n    \\
-n    my $o = new FileHandle;\n    my $i = new File\
-Handle;\n    my $tmp_in =vtmpnam();\n    my $tmp_o\
-ut=vtmpnam();\n    my %seq=%$SR;\n    my %pred;\n \
-   my $N=keys(%seq);\n    \n    output_fasta_seq (\
-\\%seq,$tmp_in, \"seq\");\n    `hmmtop -pi=mpred -\
-if=$tmp_in -sf=FAS -pl 2>/dev/null >$tmp_out`;\n  \
-  open ($o, \">$outfile\");\n    open ($i, \"$tmp_\
-out\");\n    while (<$i>)\n      {\n	my $l=$_;\n	i\
-f (($l=~/>HP\\:\\s+(\\d+)\\s+(.*)/)){my $line=\">$\
-2 NSEQ: $N\\n\";print $o \"$line\";}\n	elsif ( ($l\
-=~/.*pred(.*)/))  {my $line=\"$1\\n\";print $o \"$\
-line\";}\n      }\n    close ($o);\n    close ($i)\
-;\n    return read_fasta_seq($tmp);\n  }\nsub fast\
-a2hmmtop_pred\n  {\n    my $SR=shift;\n    my $o =\
- new FileHandle;\n    my $i = new FileHandle;\n   \
- my $tmp    =vtmpnam();\n    my $tmp_in =vtmpnam()\
-;\n    my $tmp_out=vtmpnam();\n    my %seq=%$SR;\n\
-    my %pred;\n    \n\n    output_fasta_seq (\\%se\
-q,$tmp_in, \"seq\");\n    `hmmtop -if=$tmp_in -sf=\
-FAS -pl 2>/dev/null >$tmp_out`;\n    open ($o, \">\
-$tmp\");\n    open ($i, \"$tmp_out\");\n    while \
-(<$i>)\n      {\n	my $l=$_;\n	if (($l=~/>HP\\:\\s+\
-(\\d+)\\s+(.*)/)){my $line=\">$2\\n\";print $o \"$\
-line\";}\n	elsif ( ($l=~/.*pred(.*)/))  {my $line=\
-\"$1\\n\";print $o \"$line\";}\n      }\n    close\
- ($o);\n    close ($i);\n    return read_fasta_seq\
-($tmp);\n  }\n    \n	\n	\n	    \n	\n	\n\n	\nsub fa\
-sta2gor_pred\n  {\n    my $SR=shift;\n    my $o = \
-new FileHandle;\n    my $i = new FileHandle;\n    \
-my $tmp    =vtmpnam();\n    my $tmp_in =vtmpnam();\
+rintf $fd \"!\" . $comment . \"\\n\";\n}\n\n\nsub \
+tcoffeelib_struct($$$;$)\n{\n    my ($nseq, $len, \
+$bpm, $fd) = @_;\n\n    if (! defined($fd)) {\n   \
+     $fd = *STDOUT;\n    }\n\n    # output basepai\
+r indices with fixed weight\n    printf $fd \"#%d \
+%d\\n\", $nseq, $nseq;\n    # output basepairs (on\
+ly once) and with unit-offset\n    for (my $i=0; $\
+i<$len; $i++) {\n        for (my $j=$i+1; $j<$len;\
+ $j++) {\n            if (! defined($bpm->[$i][$j]\
+)) {\n                print STDERR \"ERROR: \\$bpm\
+->[$i][$j] undefined\\n\";\n            }\n       \
+     if ($bpm->[$i][$j]>0) {\n                prin\
+t $fd $i+1;\n                print $fd \" \";\n   \
+             print $fd $j+1;\n                prin\
+t $fd \" \" . $bpm->[$i][$j] . \"\\n\";\n         \
+   }\n        }\n    }\n}\n\n\nsub tcoffeelib_foot\
+er(;$)\n{\n    my ($fd) = @_;\n    if (! defined($\
+fd)) {\n        $fd = *STDOUT;\n    }\n    print $\
+fd \"! SEQ_1_TO_N\\n\";\n}\n\n\n    \nsub plfold($\
+$$)\n{    \n    my ($id, $seq, $probtresh) = @_;\n\
+    my (@struct);# return\n    my ($templ, $fhtmp,\
+ $fnametmp, $cmd, $ctr, $window_size);\n    our $n\
+temp++;\n    \n    $templ = $myname . \".pid-\" . \
+$$ .$ntemp .\".XXXXXX\";\n    ($fhtmp, $fnametmp) \
+= tempfile($templ, UNLINK => 1); \n    print $fhtm\
+p \">$id\\n$seq\\n\";\n\n    # --- init basepair a\
+rray\n    #\n    for (my $i=0; $i<length($seq); $i\
+++) {\n        for (my $j=$i+1; $j<length($seq); $\
+j++) {\n            $struct[$i][$j]=0;\n        }\\
+n    }\n\n\n    # --- call rnaplfold and drop a re\
+adme\n    #\n    $window_size=(length($seq)<70)?le\
+ngth($seq):70;\n    $cmd = \"RNAplfold -W $window_\
+size < $fnametmp >/dev/null\";\n    system($cmd);\\
+n    \n    if ($? != 0) {\n        printf STDERR \\
+"ERROR: RNAplfold ($cmd) exited with error status \
+%d\\n\", $? >> 8;\n        return;\n    }\n    #un\
+link($fnametmp);\n    my $fps = sprintf(\"%s_dp.ps\
+\", $id); # check long name\n    \n    if (! -s $f\
+ps) {\n      {\n\n	$fps = sprintf(\"%s_dp.ps\", su\
+bstr($id,0,12)); # check short name\n 	if (! -s $f\
+ps)\n	  {\n	    die(\"couldn't find expected file \
+$fps\\n\");\n	    return;\n	  }\n      }\n    }\n\\
+n    \n    # --- read base pairs from created post\
+script\n    #\n    open(FH, $fps);\n    while (my \
+$line = <FH>) {\n        my ($nti, $ntj, $prob);\n\
+        chomp($line);        \n        # line: bp \
+bp sqrt-prob ubox\n        my @match = ($line =~ m\
+/^([0-9]+) +([0-9]+) +([0-9\\.]+) +ubox$/);\n     \
+   if (scalar(@match)) {\n            $nti=$1;\n  \
+          $ntj=$2;\n            $prob=$3*$3;# prob\
+ stored as square root\n\n            if ($prob>$p\
+robtresh) {\n                #printf STDERR \"\\$s\
+truct[$nti][$ntj] sqrtprob=$3 prob=$prob > $probtr\
+esh\\n\";\n                $struct[$nti-1][$ntj-1]\
+ = $WEIGHT\n            }\n            # store wit\
+h zero-offset\n        }\n    }\n    close(FH);\n\\
+n    # remove or gzi postscript\n    #\n    unlink\
+($fps);\n    #\n    # or gzip\n    #$cmd = \"gzip \
+-qf $fps\";\n    #system($cmd);\n    #if ($? != 0)\
+ {\n    #    printf STDERR \"ERROR: gzip ($cmd) ex\
+ited with error status %d\\n\", $? >> 8;\n    #}\n\
+\n    return \\@struct;\n}\n\n\n\n\n\nsub rnaseqfm\
+t($)\n{\n    my ($seq) = @_;\n    # remove gaps\n \
+   $seq =~ s/-//g;\n    # uppercase RNA\n    $seq \
+= uc($seq);\n    # T -> U\n    $seq =~ s/T/U/g;\n \
+   # check for invalid charaters\n    $_ = $seq;\n\
+    s/[^$NUCALPH]//g;\n    return $_;\n}\n\n\n\n\n\
+sub usage(;$)\n{    \n    my ($errmsg) = @_;\n    \
+if ($errmsg) {\n        print STDERR \"ERROR: $err\
+msg\\n\";\n    }\n    print STDERR << \"EOF\";\n$m\
+yname:\n Creates a T-Coffee RNA structure library \
+from RNAplfold prediction.\n See FIXME:citation\nU\
+sage:\n $myname -in seq_file -out tcoffee_lib\nEOF\
+\n    exit(1);\n}\n\nsub read_fasta_seq \n  {\n   \
+ my $f=$_[0];\n    my %hseq;\n    my (@seq, @com, \
+@name);\n    my ($a, $s,$nseq);\n\n    open (F, $f\
+);\n    while (<F>)\n      {\n	$s.=$_;\n      }\n \
+   close (F);\n\n    \n    @name=($s=~/>(\\S*).*\\\
+n[^>]*/g);\n    \n    @seq =($s=~/>.*.*\\n([^>]*)/\
+g);\n    @com =($s=~/>(\\S*)(.*)\\n([^>]*)/g);\n\n\
+\n    $nseq=$#name+1;\n  \n    for ($a=0; $a<$nseq\
+; $a++)\n      {\n	my $n=$name[$a];\n	my $s;\n	$hs\
+eq{$n}{name}=$n;\n	$s=$seq[$a];$s=~s/\\s//g;\n	\n	\
+$hseq{$n}{seq}=$s;\n	$hseq{$n}{com}=$com[$a];\n   \
+   }\n    return %hseq;\n  }\n\n\n\n\n\n\n\nmy $fm\
+sq = \"\";\nmy $flib = \"\";\nmy %OPTS;\nmy %seq;\\
+nmy ($id, $nseq, $i);\nmy @nl;\n\nGetOptions(\"in=\
+s\" => \\$fmsq, \"out=s\" => \\$flib);\n\nif (! -s\
+ $fmsq) {\n    usage(\"empty or non-existant file \
+\\\"$fmsq\\\"\")\n}\nif (length($flib)==0) {\n    \
+usage(\"empty out-filename\")\n}\n\n\n\n\n\n\n%seq\
+=read_fasta_seq($fmsq);\n\n\n@nl=keys(%seq);\n\n$n\
+seq=$#nl+1;\nopen FD_LIB, \">$flib\" or die \"can'\
+t open $flib!\";\ntcoffeelib_header($nseq, *FD_LIB\
+);\nforeach $id (keys (%seq))\n  {\n    my ($seq, \
+$fmtseq);\n    \n    $seq = $seq{$id}{seq};\n    \\
+n    $fmtseq = rnaseqfmt($seq);# check here, forma\
+tting for folding important later\n    if (length(\
+$seq)!=length($fmtseq)) {\n        print STDERR \"\
+ERROR: invalid sequence $id is not an RNA sequence\
+. read seq is: $seq\\n\";\n        exit\n      }\n\
+   \n    tcoffeelib_header_addseq($id, uc($seq), *\
+FD_LIB);\n  }\ntcoffeelib_comment(\"generated by $\
+myname on \" . localtime(), *FD_LIB);\n\n\n\n$i=0;\
+\nforeach $id (keys (%seq))\n  {\n    my ($cleanid\
+, $seq, $bpm);\n    $seq=$seq{$id}{seq};\n    $cle\
+anid = $id;\n    $cleanid =~ s,[/ ],_,g;# needed f\
+or rnaplfold\n    $seq = rnaseqfmt($seq);\n    \n \
+   $bpm = plfold($cleanid, rnaseqfmt($seq), $PROBT\
+RESH);       \n    \n    tcoffeelib_struct($i+1, l\
+ength($seq), $bpm, *FD_LIB);\n    $i++;\n}\n\n\ntc\
+offeelib_footer(*FD_LIB);\nclose FD_LIB;\nexit (0)\
+;\n\n","\n\n\n\n\n$cmd=join ' ', @ARGV;\nif ($cmd=\
+~/-infile=(\\S+)/){ $seqfile=$1;}\nif ($cmd=~/-out\
+file=(\\S+)/){ $libfile=$1;}\n\n\n\n%s=read_fasta_\
+seq ($seqfile);\n\nopen (F, \">$libfile\");\nforea\
+ch $name (keys (%s))\n  {\n    my $tclib=\"$name.R\
+NAplfold_tclib\";\n    print (F \">$name _F_ $tcli\
+b\\n\");\n    seq2RNAplfold2tclib ($name, $s{$name\
+}{seq}, $tclib);\n  }\nclose (F);\nexit (EXIT_SUCC\
+ESS);\n\nsub seq2RNAplfold2tclib\n  {\n    my ($na\
+me, $seq, $tclib)=@_;\n    my ($tmp);\n    $n++;\n\
+    $tmp=\"tmp4seq2RNAplfold_tclib.$$.$n.pep\";\n \
+   open (RF, \">$tmp\");\n    print (RF \">$name\\\
+n$seq\\n\");\n    close (RF);\n    \n    system \"\
+t_coffee -other_pg RNAplfold2tclib.pl -in=$tmp -ou\
+t=$tclib\";\n    \n    unlink ($tmp);\n    return \
+$tclib;\n  }\n    \n    \nsub read_fasta_seq \n  {\
+\n    my $f=@_[0];\n    my %hseq;\n    my (@seq, @\
+com, @name);\n    my ($a, $s,$nseq);\n\n    open (\
+F, $f);\n    while (<F>)\n      {\n	$s.=$_;\n     \
+ }\n    close (F);\n\n    \n    @name=($s=~/>(\\S*\
+).*\\n[^>]*/g);\n    \n    @seq =($s=~/>.*.*\\n([^\
+>]*)/g);\n    @com =($s=~/>\\S*(.*)\\n([^>]*)/g);\\
+n\n    \n    $nseq=$#name+1;\n    \n    for ($a=0;\
+ $a<$nseq; $a++)\n      {\n	my $n=$name[$a];\n	$hs\
+eq{$n}{name}=$n;\n	$hseq{$n}{seq}=$seq[$a];\n	$hse\
+q{$n}{com}=$com[$a];\n      }\n    return %hseq;\n\
+  }\n","use Getopt::Long;\nuse File::Path;\nuse En\
+v;\nuse FileHandle;\nuse Cwd;\nuse Sys::Hostname;\\
+nour $PIDCHILD;\nour $ERROR_DONE;\nour @TMPFILE_LI\
+ST;\nour $EXIT_FAILURE=1;\nour $EXIT_SUCCESS=0;\n\\
+nour $REFDIR=getcwd;\nour $EXIT_SUCCESS=0;\nour $E\
+XIT_FAILURE=1;\n\nour $PROGRAM=\"tc_generic_method\
+.pl\";\nour $CL=$PROGRAM;\n\nour $CLEAN_EXIT_START\
+ED;\nour $debug_lock=$ENV{\"DEBUG_LOCK\"};\nour $L\
+OCKDIR=$ENV{\"LOCKDIR_4_TCOFFEE\"};\nif (!$LOCKDIR\
+){$LOCKDIR=getcwd();}\nour $ERRORDIR=$ENV{\"ERRORD\
+IR_4_TCOFFEE\"};\nour $ERRORFILE=$ENV{\"ERRORFILE_\
+4_TCOFFEE\"};\n&set_lock ($$);\nif (isshellpid(get\
+ppid())){lock4tc(getppid(), \"LLOCK\", \"LSET\", \\
+"$$\\n\");}\n      \nour $print;\nmy ($fmsq1, $fms\
+q2, $output, $outfile, $arch, $psv, $hmmtop_home, \
+$trim, $cov, $sample, $mode, $gor_home, $gor_seq, \
+$gor_obs);\n\nGetOptions(\"-in=s\" => \\$fmsq1,\"-\
+output=s\" =>\\$output ,\"-out=s\" => \\$outfile, \
+\"-arch=s\" => \\$arch,\"-psv=s\" => \\$psv, \"-hm\
+mtop_home=s\", \\$hmmtop_home,\"-trim=s\" =>\\$tri\
+m ,\"-print=s\" =>\\$print,\"-cov=s\" =>\\$cov , \\
+"-sample=s\" =>\\$sample, \"-mode=s\" =>\\$mode, \\
+"-gor_home=s\"=>\\$gor_home, \"-gor_seq=s\"=>\\$go\
+r_seq,\"-gor_obs=s\"=>\\$gor_obs);\n\n\nif (!$mode\
+){$mode = \"hmmtop\"}\nelsif ($mode eq \"hmmtop\")\
+{;}\nelsif ($mode eq \"gor\"){;}\nelse {myexit(flu\
+sh_error (\"-mode=$mode is unknown\"));}\n\n\nour \
+$HOME=$ENV{\"HOME\"};\nour $MCOFFEE=($ENV{\"MCOFFE\
+E_4_TCOFFEE\"})?$ENV{\"MCOFFEE_4_TCOFFEE\"}:\"$HOM\
+E/.t_coffee/mcoffee\";\n\nif ($mode eq \"hmmtop\")\
+\n  {\n    check_configuration (\"hmmtop\");\n    \
+if (-e $arch){$ENV{'HMMTOP_ARCH'}=$arch;}\n    els\
+if (-e $ENV{HMMTOP_ARCH}){$arch=$ENV{HMMTOP_ARCH};\
+}\n    elsif (-e \"$MCOFFEE/hmmtop.arch\"){$arch=$\
+ENV{'HMMTOP_ARCH'}=\"$MCOFFEE/hmmtop.arch\";}\n   \
+ elsif (-e \"$hmmtop_home/hmmtop.arc\"){$arch=$ENV\
+{'HMMTOP_ARCH'}=\"$hmmtop_home/hmmtop.arc\";}\n   \
+ else {myexit(flush_error ( \"Could not find ARCH \
+file for hmmtop\"));}\n    \n    \n    if (-e $psv\
+){$ENV{'HMMTOP_PSV'}=$psv;}\n    elsif (-e $ENV{HM\
+MTOP_PSV}){$psv=$ENV{HMMTOP_PSV};}\n    elsif (-e \
+\"$MCOFFEE/hmmtop.psv\"){$psv=$ENV{'HMMTOP_PSV'}=\\
+"$MCOFFEE/hmmtop.psv\";}\n    elsif (-e \"$hmmtop_\
+home/hmmtop.psv\"){$psv=$ENV{'HMMTOP_PSV'}=\"$hmmt\
+op_home/hmmtop.psv\";}\n    else {myexit(flush_err\
+or ( \"Could not find PSV file for hmmtop\"));}\n \
+ }\nelsif ($mode eq \"gor\")\n  {\n    our $GOR_SE\
+Q;\n    our $GOR_OBS;\n    \n    check_configurati\
+on (\"gorIV\");\n    if (-e $gor_seq){$GOR_SEQ=$go\
+r_seq;}\n    elsif (-e $ENV{GOR_SEQ}){$GOR_SEQ=$EN\
+V{GOR_SEQ};}\n    elsif (-e \"$MCOFFEE/New_KS.267.\
+seq\"){$GOR_SEQ=\"$MCOFFEE/New_KS.267.seq\";}\n   \
+ elsif (-e \"$gor_home/New_KS.267.seq\"){$GOR_SEQ=\
+\"$gor_home/New_KS.267.seq\";}\n    else {myexit(f\
+lush_error ( \"Could not find SEQ file for gor\"))\
+;}\n\n    if (-e $gor_obs){$GOR_OBS=$gor_obs;}\n  \
+  elsif (-e $ENV{GOR_OBS}){$GOR_OBS=$ENV{GOR_OBS};\
+}\n    elsif (-e \"$MCOFFEE/New_KS.267.obs\"){$GOR\
+_OBS=\"$MCOFFEE/New_KS.267.obs\";}\n    elsif (-e \
+\"$gor_home/New_KS.267.obs\"){$GOR_OBS=\"$gor_home\
+/New_KS.267.obs\";}\n    else {myexit(flush_error \
+( \"Could not find OBS file for gor\"));}\n  }\n\n\
+\nif ( ! -e $fmsq1){myexit(flush_error (\"Could No\
+t Read Input file $fmsq1\"));}\n\n\nmy $fmsq2=vtmp\
+nam();\nmy $fmsq3=vtmpnam();\nmy $tmpfile=vtmpnam(\
+);\nmy $predfile=vtmpnam();\n\nif ($trim){$trim_ac\
+tion=\" +trim _aln_%%$trim\\_K1 \";}\nif ($cov) {$\
+cov_action= \" +sim_filter _aln_c$cov \";}\n&safe_\
+system(\"t_coffee -other_pg seq_reformat -in $fmsq\
+1 -action +convert 'BOUJXZ-' $cov_action $trim_act\
+ion -output fasta_aln -out $fmsq2\");\nmy (%pred, \
+%seq, %predA);\n\n\n%seq=read_fasta_seq($fmsq2);\n\
+%seq=fasta2sample(\\%seq, $sample);\n\nif (1==2 &&\
+ $mode eq \"hmmtop\" && $output eq \"cons\")\n  {\\
+n    fasta2hmmtop_cons($outfile,\\%seq);\n  }\nels\
+e\n  {\n    %pred=fasta2pred(\\%seq, $mode);\n    \
+%predA=pred2aln (\\%pred, \\%seq);\n    \n    \n  \
+  if (!$output || $output eq \"prediction\"){outpu\
+t_fasta_seq (\\%predA, $outfile);}\n    elsif ($ou\
+tput eq \"color_html\"){pred2color (\\%pred,\\%seq\
+, $outfile);}\n    elsif ($output eq \"cons\"){pre\
+d2cons($outfile,\\%predA);}\n    else {flush_error\
+ (\"$output is an unknown output mode\");}\n  }\n\\
+nsub fasta2sample\n  {\n    my $SR=shift;\n    my \
+$it=shift;\n    my %S=%$SR;\n    \n    my $seq=ind\
+ex2seq_name (\\%S, 1);\n    my $l=length($S{$seq}{\
+seq});\n    my @sl=keys(%S);\n    my $nseq=$#sl+1;\
+\n    my $index=$nseq;\n  \n    if (!$sample) {ret\
+urn %S;}\n    for (my $a=0; $a<$it; $a++)\n      {\
+\n	my $newseq=\"\";\n	my $nname=\"$seq\\_sampled_$\
+index\";\n	for (my $p=0; $p<$l; $p++)\n	  {\n	    \
+my $i=int(rand($nseq));\n	    \n	    my $name = $s\
+l[$i];\n	    my $seq=$S{$name}{seq};\n	    my $r=s\
+ubstr ($seq, $p, 1);\n	    $newseq.=$r;\n	  }\n	$S\
+{$nname}{name}=$nname;\n	$S{$nname}{seq}=$newseq;\\
+n	$S{$nname}{com}=\"sampled\";\n	$S{$nname}{index}\
+=++$index;\n      }\n    return %S;\n  }\n	      \\
+nsub fasta2pred\n  {\n    my $s=shift;\n    my $mo\
+de=shift;\n\n    if ( $mode eq \"hmmtop\"){return \
+fasta2hmmtop_pred($s);}\n    elsif ($mode eq \"gor\
+\"){return fasta2gor_pred ($s);}\n  }\nsub fasta2h\
+mmtop_cons\n  {\n    my $outfile=shift;\n    my $S\
+R=shift;\n    \n    my $o = new FileHandle;\n    m\
+y $i = new FileHandle;\n    my $tmp_in =vtmpnam();\
 \n    my $tmp_out=vtmpnam();\n    my %seq=%$SR;\n \
-   my %pred;\n    \n\n    output_fasta_seq (\\%seq\
-,$tmp_in, \"seq\");\n    `gorIV -prd $tmp_in -seq \
-$GOR_SEQ -obs $GOR_OBS >$tmp_out`;\n    open ($o, \
-\">$tmp\");\n    open ($i, \"$tmp_out\");\n    whi\
-le (<$i>)\n      {\n	my $l=$_;\n\n	\n	if ( $l=~/>/\
-){print $o \"$l\";}\n	elsif ( $l=~/Predicted Sec. \
-Struct./){$l=~s/Predicted Sec. Struct\\.//;print $\
-o \"$l\";}\n      }\n    close ($o);\n    close ($\
-i);\n    return read_fasta_seq($tmp);\n  }\n			\n	\
-		     \nsub index2seq_name\n  {\n    \n    my $SR\
-=shift;\n    my $index=shift;\n    \n    \n    my \
-%S=%$SR;\n    \n    foreach my $s (%S)\n      {\n	\
-if ( $S{$s}{index}==$index){return $s;}\n      }\n\
-    return \"\";\n  }\n\nsub pred2cons\n  {\n    m\
-y $outfile=shift;\n    my $predR=shift;\n    my $s\
-eq=shift;\n    my %P=%$predR;\n    my %C;\n    my \
-($s,@r,$nseq);\n    my $f= new FileHandle;\n\n    \
-open ($f, \">$outfile\");\n\n    if (!$seq){$seq=i\
-ndex2seq_name(\\%P,1);}\n    foreach my $s (keys(%\
-P))\n      {\n	$nseq++;\n	$string= $P{$s}{seq};\n	\
-$string = uc $string;\n	my @r=split (//,$string);\\
-n	for (my $a=0; $a<=$#r; $a++)\n	  {\n	    if (($r\
-[$a]=~/[OHICE]/)){$C{$a}{$r[$a]}++;}\n	  }\n      \
-}\n    @l=keys(%C);\n    \n    \n    $s=$P{$seq}{s\
-eq};\n    print $f \">$seq pred based on $nseq\\n\\
-";\n    @r=split (//,$s);\n    \n    for (my $x=0;\
- $x<=$#r; $x++)\n      {\n	if ($r[$x] ne \"-\")\n	\
-  {\n	    my $h=$C{$x}{H};\n	    my $i=$C{$x}{I};\\
-n	    my $o=$C{$x}{O};\n	    my $c=$C{$x}{C};\n	  \
-  my $e=$C{$x}{E};\n	    my $l=$i+$o;\n	    \n	   \
- if ($h>=$i && $h>=$o && $h>=$c && $h>=$e){$r[$x]=\
-'H';}\n	    elsif ($i>=$o && $i>=$c && $i>=$e){$r[\
-$x]='I';}\n	    elsif ($o>=$c && $o>=$e){$r[$x]='O\
-';}\n	    elsif ($c>=$e){$r[$x]='C';}\n	    else {\
-$r[$x]='E';}\n	  }\n      }\n    $j=join ('', @r);\
-\n    print $f \"$j\\n\";\n    close ($f);\n    re\
-turn $j;\n  }\n\nsub pred2aln\n  {\n    my $PR=shi\
-ft;\n    my $AR=shift;\n    \n    my $f=new FileHa\
-ndle;\n    my %P=%$PR;\n    my %A=%$AR;\n    my %P\
-A;\n    my $tmp=vtmpnam();\n    my $f= new FileHan\
-dle;\n    \n    open ($f, \">$tmp\");\n    foreach\
- my $s (sort{$A{$a}{index}<=>$A{$b}{index}}(keys (\
-%A)))\n      {\n	my (@list, $seq, @plist, @pseq, $\
-L, $PL, $c, $w);\n	my $seq;\n	my $seq=$A{$s}{seq};\
-\n	my $pred=$P{$s}{seq};\n	$seq=pred2alnS($P{$s}{s\
-eq},$A{$s}{seq});\n	print $f \">$s\\n$seq\\n\";\n \
-     }\n    close ($f);\n    return read_fasta_seq\
- ($tmp);\n  }\nsub pred2alnS\n  {\n    my $pred=sh\
-ift;\n    my $aln= shift;\n    my ($j,$a,$b);\n   \
- my @P=split (//, $pred);\n    my @A=split (//, $a\
-ln);\n    for ($a=$b=0;$a<=$#A; $a++)\n      {\n	i\
-f ($A[$a] ne \"-\"){$A[$a]=$P[$b++];}\n      }\n  \
-  if ($b!= ($#P+1)){add_warning (\"Could not threa\
-d sequence: $b $#P\");}\n    \n    $j= join ('', @\
-A);\n    return $j;\n  }\nsub pred2color\n  {\n   \
- my $predP=shift;\n    my $alnP=shift;\n    my $ou\
-t=shift;\n    my $F=new FileHandle;\n    my $struc\
-=vtmpnam();\n    my $aln=vtmpnam();\n    \n\n    o\
-utput_fasta_seq ($alnP, $aln);\n    my %p=%$predP;\
-\n    \n    open ($F, \">$struc\");\n    \n    \n \
-   foreach my $s (keys(%p))\n      {\n	\n	print $F\
- \">$s\\n\";\n	my $s=uc($p{$s}{seq});\n	\n	$s=~s/[\
-Oo]/0/g;\n	$s=~s/[Ee]/0/g;\n	\n	$s=~s/[Ii]/5/g;\n	\
-$s=~s/[Cc]/5/g;\n	\n	$s=~s/[Hh]/9/g;\n	\n	print $F\
- \"$s\\n\";\n      }\n    close ($F);\n    \n    \\
-n    \n    safe_system ( \"t_coffee -other_pg seq_\
-reformat -in $aln -struc_in $struc -struc_in_f num\
-ber_fasta -output color_html -out $out\");\n    re\
-turn;\n  }\n	  \n    \nsub display_fasta_seq\n  {\\
-n    my $SR=shift;\n    my %S=%$SR;\n    \n    for\
-each my $s (sort{$S{$a}{index}<=>$S{$b}{index}}(ke\
-ys (%S)))\n      {\n	print STDERR \">$s\\n$S{$s}{s\
-eq}\\n\";\n      }\n    close ($f);\n  }\nsub outp\
-ut_fasta_seq\n  {\n    my $SR=shift;\n    my $outf\
-ile=shift;\n    my $mode =shift;\n    my $f= new F\
-ileHandle;\n    my %S=%$SR;\n    \n    \n    open \
-($f, \">$outfile\");\n    foreach my $s (sort{$S{$\
-a}{index}<=>$S{$b}{index}}(keys (%S)))\n      {\n	\
-my $seq=$S{$s}{seq};\n	if ( $mode eq \"seq\"){$seq\
-=~s/\\-//g;}\n	print $f \">$s\\n$seq\\n\";\n      \
-}\n    close ($f);\n  }\n      \nsub read_fasta_se\
-q \n  {\n    my $f=$_[0];\n    my %hseq;\n    my (\
-@seq, @com, @name);\n    my ($a, $s,$nseq);\n    m\
-y $index;\n    open (F, $f);\n    while (<F>)\n   \
-   {\n	$s.=$_;\n      }\n    close (F);\n\n    \n \
-   @name=($s=~/>(\\S*).*\\n[^>]*/g);\n    \n    @s\
-eq =($s=~/>.*.*\\n([^>]*)/g);\n    @com =($s=~/>.*\
-(.*)\\n([^>]*)/g);\n\n\n    $nseq=$#name+1;\n    \\
-n  \n    for ($a=0; $a<$nseq; $a++)\n      {\n	my \
-$n=$name[$a];\n	my $s;\n	$hseq{$n}{name}=$n;\n	$s=\
-$seq[$a];$s=~s/\\s//g;\n	$hseq{$n}{index}=++$index\
-;\n	$hseq{$n}{seq}=$s;\n	$hseq{$n}{com}=$com[$a];\\
-n      }\n    return %hseq;\n  }\n\n\nsub file2hea\
-d\n      {\n	my $file = shift;\n	my $size = shift;\
-\n	my $f= new FileHandle;\n	my $line;\n	open ($f,$\
-file);\n	read ($f,$line, $size);\n	close ($f);\n	r\
-eturn $line;\n      }\nsub file2tail\n      {\n	my\
- $file = shift;\n	my $size = shift;\n	my $f= new F\
-ileHandle;\n	my $line;\n	\n	open ($f,$file);\n	see\
-k ($f,$size*-1, 2);\n	read ($f,$line, $size);\n	cl\
-ose ($f);\n	return $line;\n      }\n\n\nsub vtmpna\
-m\n      {\n	my $r=rand(100000);\n	my $f=\"file.$r\
-.$$\";\n	while (-e $f)\n	  {\n	    $f=vtmpnam();\n\
-	  }\n	push (@TMPFILE_LIST, $f);\n	return $f;\n   \
-   }\n\nsub myexit\n  {\n    my $code=@_[0];\n    \
-if ($CLEAN_EXIT_STARTED==1){return;}\n    else {$C\
-LEAN_EXIT_STARTED=1;}\n    ### ONLY BARE EXIT\n   \
- exit ($code);\n  }\nsub set_error_lock\n    {\n  \
-    my $name = shift;\n      my $pid=$$;\n\n      \
-\n      &lock4tc ($$,\"LERROR\", \"LSET\", \"$$ --\
- ERROR: $name $PROGRAM\\n\");\n      return;\n    \
-}\nsub set_lock\n  {\n    my $pid=shift;\n    my $\
-msg= shift;\n    my $p=getppid();\n    &lock4tc ($\
-pid,\"LLOCK\",\"LRESET\",\"$p$msg\\n\");\n  }\nsub\
- unset_lock\n   {\n     \n    my $pid=shift;\n    \
-&lock4tc ($pid,\"LLOCK\",\"LRELEASE\",\"\");\n  }\\
-nsub shift_lock\n  {\n    my $from=shift;\n    my \
-$to=shift;\n    my $from_type=shift;\n    my $to_t\
-ype=shift;\n    my $action=shift;\n    my $msg;\n \
-   \n    if (!&lock4tc($from, $from_type, \"LCHECK\
-\", \"\")){return 0;}\n    $msg=&lock4tc ($from, $\
-from_type, \"LREAD\", \"\");\n    &lock4tc ($from,\
- $from_type,\"LRELEASE\", $msg);\n    &lock4tc ($t\
-o, $to_type, $action, $msg);\n    return;\n  }\nsu\
-b isshellpid\n  {\n    my $p=shift;\n    if (!lock\
-4tc ($p, \"LLOCK\", \"LCHECK\")){return 0;}\n    e\
-lse\n      {\n	my $c=lock4tc($p, \"LLOCK\", \"LREA\
-D\");\n	if ( $c=~/-SHELL-/){return 1;}\n      }\n \
-   return 0;\n  }\nsub isrootpid\n  {\n    if(lock\
-4tc (getppid(), \"LLOCK\", \"LCHECK\")){return 0;}\
-\n    else {return 1;}\n  }\nsub lock4tc\n	{\n	  m\
-y ($pid,$type,$action,$value)=@_;\n	  my $fname;\n\
-	  my $host=hostname;\n	  \n	  if ($type eq \"LLOC\
-K\"){$fname=\"$LOCKDIR/.$pid.$host.lock4tcoffee\";\
-}\n	  elsif ( $type eq \"LERROR\"){ $fname=\"$LOCK\
-DIR/.$pid.$host.error4tcoffee\";}\n	  elsif ( $typ\
-e eq \"LWARNING\"){ $fname=\"$LOCKDIR/.$pid.$host.\
-warning4tcoffee\";}\n	  \n	  if ($debug_lock)\n	  \
-  {\n	      print STDERR \"\\n\\t---lock4tc(tcg): \
-$action => $fname =>$value (RD: $LOCKDIR)\\n\";\n	\
-    }\n\n	  if    ($action eq \"LCHECK\") {return \
--e $fname;}\n	  elsif ($action eq \"LREAD\"){retur\
-n file2string($fname);}\n	  elsif ($action eq \"LS\
-ET\") {return string2file ($value, $fname, \">>\")\
-;}\n	  elsif ($action eq \"LRESET\") {return strin\
-g2file ($value, $fname, \">\");}\n	  elsif ($actio\
-n eq \"LRELEASE\") \n	    {\n	      if ( $debug_lo\
-ck)\n		{\n		  my $g=new FileHandle;\n		  open ($g,\
- \">>$fname\");\n		  print $g \"\\nDestroyed by $$\
-\\n\";\n		  close ($g);\n		  safe_system (\"mv $fn\
-ame $fname.old\");\n		}\n	      else\n		{\n		  unl\
-ink ($fname);\n		}\n	    }\n	  return \"\";\n	}\n	\
-\nsub file2string\n	{\n	  my $file=@_[0];\n	  my $\
-f=new FileHandle;\n	  my $r;\n	  open ($f, \"$file\
-\");\n	  while (<$f>){$r.=$_;}\n	  close ($f);\n	 \
- return $r;\n	}\nsub string2file \n    {\n    my (\
-$s,$file,$mode)=@_;\n    my $f=new FileHandle;\n  \
-  \n    open ($f, \"$mode$file\");\n    print $f  \
-\"$s\";\n    close ($f);\n  }\n\nBEGIN\n    {\n   \
-   srand;\n    \n      $SIG{'SIGUP'}='signal_clean\
-up';\n      $SIG{'SIGINT'}='signal_cleanup';\n    \
-  $SIG{'SIGQUIT'}='signal_cleanup';\n      $SIG{'S\
-IGILL'}='signal_cleanup';\n      $SIG{'SIGTRAP'}='\
-signal_cleanup';\n      $SIG{'SIGABRT'}='signal_cl\
-eanup';\n      $SIG{'SIGEMT'}='signal_cleanup';\n \
-     $SIG{'SIGFPE'}='signal_cleanup';\n      \n   \
-   $SIG{'SIGKILL'}='signal_cleanup';\n      $SIG{'\
-SIGPIPE'}='signal_cleanup';\n      $SIG{'SIGSTOP'}\
-='signal_cleanup';\n      $SIG{'SIGTTIN'}='signal_\
-cleanup';\n      $SIG{'SIGXFSZ'}='signal_cleanup';\
-\n      $SIG{'SIGINFO'}='signal_cleanup';\n      \\
-n      $SIG{'SIGBUS'}='signal_cleanup';\n      $SI\
-G{'SIGALRM'}='signal_cleanup';\n      $SIG{'SIGTST\
-P'}='signal_cleanup';\n      $SIG{'SIGTTOU'}='sign\
-al_cleanup';\n      $SIG{'SIGVTALRM'}='signal_clea\
-nup';\n      $SIG{'SIGUSR1'}='signal_cleanup';\n\n\
-\n      $SIG{'SIGSEGV'}='signal_cleanup';\n      $\
-SIG{'SIGTERM'}='signal_cleanup';\n      $SIG{'SIGC\
-ONT'}='signal_cleanup';\n      $SIG{'SIGIO'}='sign\
-al_cleanup';\n      $SIG{'SIGPROF'}='signal_cleanu\
-p';\n      $SIG{'SIGUSR2'}='signal_cleanup';\n\n  \
-    $SIG{'SIGSYS'}='signal_cleanup';\n      $SIG{'\
-SIGURG'}='signal_cleanup';\n      $SIG{'SIGCHLD'}=\
-'signal_cleanup';\n      $SIG{'SIGXCPU'}='signal_c\
-leanup';\n      $SIG{'SIGWINCH'}='signal_cleanup';\
-\n      \n      $SIG{'INT'}='signal_cleanup';\n   \
-   $SIG{'TERM'}='signal_cleanup';\n      $SIG{'KIL\
-L'}='signal_cleanup';\n      $SIG{'QUIT'}='signal_\
-cleanup';\n      \n      our $debug_lock=$ENV{\"DE\
-BUG_LOCK\"};\n      \n      \n      \n      \n    \
-  foreach my $a (@ARGV){$CL.=\" $a\";}\n      if (\
- $debug_lock ){print STDERR \"\\n\\n\\n********** \
-START PG: $PROGRAM *************\\n\";}\n      if \
-( $debug_lock ){print STDERR \"\\n\\n\\n**********\
-(tcg) LOCKDIR: $LOCKDIR $$ *************\\n\";}\n \
-     if ( $debug_lock ){print STDERR \"\\n --- $$ \
--- $CL\\n\";}\n      \n	     \n      \n      \n   \
- }\nsub flush_error\n  {\n    my $msg=shift;\n    \
-return add_error ($EXIT_FAILURE,$$, $$,getppid(), \
-$msg, $CL);\n  }\nsub add_error \n  {\n    my $cod\
-e=shift;\n    my $rpid=shift;\n    my $pid=shift;\\
-n    my $ppid=shift;\n    my $type=shift;\n    my \
-$com=shift;\n    \n    $ERROR_DONE=1;\n    lock4tc\
- ($rpid, \"LERROR\",\"LSET\",\"$pid -- ERROR: $typ\
-e\\n\");\n    lock4tc ($$, \"LERROR\",\"LSET\", \"\
-$pid -- COM: $com\\n\");\n    lock4tc ($$, \"LERRO\
-R\",\"LSET\", \"$pid -- STACK: $ppid -> $pid\\n\")\
-;\n   \n    return $code;\n  }\nsub add_warning \n\
-  {\n    my $rpid=shift;\n    my $pid =shift;\n   \
- my $command=shift;\n    my $msg=\"$$ -- WARNING: \
-$command\\n\";\n    print STDERR \"$msg\";\n    lo\
-ck4tc ($$, \"LWARNING\", \"LSET\", $msg);\n  }\n\n\
-sub signal_cleanup\n  {\n    print dtderr \"\\n***\
-* $$ (tcg) was killed\\n\";\n    &cleanup;\n    ex\
-it ($EXIT_FAILURE);\n  }\nsub clean_dir\n  {\n    \
-my $dir=@_[0];\n    if ( !-d $dir){return ;}\n    \
-elsif (!($dir=~/tmp/)){return ;}#safety check 1\n \
-   elsif (($dir=~/\\*/)){return ;}#safety check 2\\
-n    else\n      {\n	`rm -rf $dir`;\n      }\n    \
-return;\n  }\nsub cleanup\n  {\n    #print stderr \
-\"\\n----tc: $$ Kills $PIDCHILD\\n\";\n    #kill (\
-SIGTERM,$PIDCHILD);\n    my $p=getppid();\n    $CL\
-EAN_EXIT_STARTED=1;\n    \n    \n    \n    if (&lo\
-ck4tc($$,\"LERROR\", \"LCHECK\", \"\"))\n      {\n\
-	my $ppid=getppid();\n	if (!$ERROR_DONE) \n	  {\n	\
-    &lock4tc($$,\"LERROR\", \"LSET\", \"$$ -- STAC\
-K: $p -> $$\\n\");\n	    &lock4tc($$,\"LERROR\", \\
-"LSET\", \"$$ -- COM: $CL\\n\");\n	  }\n      }\n \
-   my $warning=&lock4tc($$, \"LWARNING\", \"LREAD\\
-", \"\");\n    my $error=&lock4tc($$,  \"LERROR\",\
- \"LREAD\", \"\");\n    #release error and warning\
- lock if root\n    \n    if (isrootpid() && ($warn\
-ing || $error) )\n      {\n	\n	print STDERR \"****\
-************ Summary *************\\n$error\\n$war\
-ning\\n\";\n\n	&lock4tc($$,\"LERROR\",\"RELEASE\",\
-\"\");\n	&lock4tc($$,\"LWARNING\",\"RELEASE\",\"\"\
-);\n      } \n    \n    \n    foreach my $f (@TMPF\
-ILE_LIST)\n      {\n	if (-e $f){unlink ($f);} \n  \
-    }\n    foreach my $d (@TMPDIR_LIST)\n      {\n\
-	clean_dir ($d);\n      }\n    #No More Lock Relea\
-se\n    #&lock4tc($$,\"LLOCK\",\"LRELEASE\",\"\");\
- #release lock \n\n    if ( $debug_lock ){print ST\
-DERR \"\\n\\n\\n********** END PG: $PROGRAM ($$) *\
-************\\n\";}\n    if ( $debug_lock ){print \
-STDERR \"\\n\\n\\n**********(tcg) LOCKDIR: $LOCKDI\
-R $$ *************\\n\";}\n  }\nEND \n  {\n    \n \
-   &cleanup();\n  }\n   \n\nsub safe_system \n{\n \
- my $com=shift;\n  my $ntry=shift;\n  my $ctry=shi\
-ft;\n  my $pid;\n  my $status;\n  my $ppid=getppid\
-();\n  if ($com eq \"\"){return 1;}\n  \n  \n\n  i\
-f (($pid = fork ()) < 0){return (-1);}\n  if ($pid\
- == 0)\n    {\n      set_lock($$, \" -SHELL- $com \
-(tcg)\");\n      exec ($com);\n    }\n  else\n    \
-{\n      lock4tc ($$, \"LLOCK\", \"LSET\", \"$pid\\
-\n\");#update parent\n      $PIDCHILD=$pid;\n    }\
-\n  if ($debug_lock){printf STDERR \"\\n\\t .... s\
-afe_system (fasta_seq2hmm)  p: $$ c: $pid COM: $co\
-m\\n\";}\n\n  waitpid ($pid,WTERMSIG);\n\n  shift_\
-lock ($pid,$$, \"LWARNING\",\"LWARNING\", \"LSET\"\
-);\n\n  if ($? == $EXIT_FAILURE || lock4tc($pid, \\
-"LERROR\", \"LCHECK\", \"\"))\n    {\n      if ($n\
-try && $ctry <$ntry)\n	{\n	  add_warning ($$,$$,\"\
-$com failed [retry: $ctry]\");\n	  lock4tc ($pid, \
-\"LRELEASE\", \"LERROR\", \"\");\n	  return safe_s\
-ystem ($com, $ntry, ++$ctry);\n	}\n      elsif ($n\
-try == -1)\n	{\n	  if (!shift_lock ($pid, $$, \"LE\
-RROR\", \"LWARNING\", \"LSET\"))\n	    {\n	      a\
-dd_warning ($$,$$,\"$com failed\");\n	    }\n	  el\
-se\n	    {\n	      lock4tc ($pid, \"LRELEASE\", \"\
-LERROR\", \"\");\n	    }\n	  return $?;}\n      el\
-se\n	{\n	  if (!shift_lock ($pid,$$, \"LERROR\",\"\
-LERROR\", \"LSET\"))\n	    {\n	      myexit(add_er\
-ror ($EXIT_FAILURE,$$,$pid,getppid(), \"UNSPECIFIE\
-D system\", $com));\n	    }\n	}\n    }\n  return $\
-?;\n}\n\nsub check_configuration \n    {\n      my\
- @l=@_;\n      my $v;\n      foreach my $p (@l)\n	\
-{\n	  \n	  if   ( $p eq \"EMAIL\")\n	    { \n	    \
-  if ( !($EMAIL=~/@/))\n		{\n		add_warning($$,$$,\\
-"Could Not Use EMAIL\");\n		myexit(add_error ($EXI\
-T_FAILURE,$$,$$,getppid(),\"EMAIL\",\"$CL\"));\n	 \
-     }\n	    }\n	  elsif( $p eq \"INTERNET\")\n	  \
-  {\n	      if ( !&check_internet_connection())\n	\
-	{\n		  myexit(add_error ($EXIT_FAILURE,$$,$$,getp\
-pid(),\"INTERNET\",\"$CL\"));\n		}\n	    }\n	  els\
-if( $p eq \"wget\")\n	    {\n	      if (!&pg_is_in\
-stalled (\"wget\") && !&pg_is_installed (\"curl\")\
-)\n		{\n		  myexit(add_error ($EXIT_FAILURE,$$,$$,\
-getppid(),\"PG_NOT_INSTALLED:wget\",\"$CL\"));\n		\
-}\n	    }\n	  elsif( !(&pg_is_installed ($p)))\n	 \
-   {\n	      myexit(add_error ($EXIT_FAILURE,$$,$$\
-,getppid(),\"PG_NOT_INSTALLED:$p\",\"$CL\"));\n	  \
-  }\n	}\n      return 1;\n    }\nsub pg_is_install\
-ed\n  {\n    my @ml=@_;\n    my $r, $p, $m;\n    m\
-y $supported=0;\n    \n    my $p=shift (@ml);\n   \
- if ($p=~/::/)\n      {\n	if (safe_system (\"perl \
--M$p -e 1\")==$EXIT_SUCCESS){return 1;}\n	else {re\
-turn 0;}\n      }\n    else\n      {\n	$r=`which $\
-p 2>/dev/null`;\n	if ($r eq \"\"){return 0;}\n	els\
-e {return 1;}\n      }\n  }\n\n\n\nsub check_inter\
-net_connection\n  {\n    my $internet;\n    my $tm\
-p;\n    &check_configuration ( \"wget\"); \n    \n\
-    $tmp=&vtmpnam ();\n    \n    if     (&pg_is_in\
-stalled    (\"wget\")){`wget www.google.com -O$tmp\
- >/dev/null 2>/dev/null`;}\n    elsif  (&pg_is_ins\
-talled    (\"curl\")){`curl www.google.com -o$tmp \
->/dev/null 2>/dev/null`;}\n    \n    if ( !-e $tmp\
- || -s $tmp < 10){$internet=0;}\n    else {$intern\
-et=1;}\n    if (-e $tmp){unlink $tmp;}\n\n    retu\
-rn $internet;\n  }\nsub check_pg_is_installed\n  {\
-\n    my @ml=@_;\n    my $r=&pg_is_installed (@ml)\
-;\n    if (!$r && $p=~/::/)\n      {\n	print STDER\
-R \"\\nYou Must Install the perl package $p on you\
-r system.\\nRUN:\\n\\tsudo perl -MCPAN -e 'install\
- $pg'\\n\";\n      }\n    elsif (!$r)\n      {\n	m\
-yexit(flush_error(\"\\nProgram $p Supported but No\
-t Installed on your system\"));\n      }\n    else\
-\n      {\n	return 1;\n      }\n  }\n\n\n\n","\n\n\
-\n\n\nmy $FMODEL =\"\"; \nmy $TMPDIR = \"/tmp\";\n\
-\n\n\n\nmy $NUCALPH = \"ACGTUNRYMKSWHBVD\";\nmy $P\
-RIMNUCALPH = \"ACGTUN\";\nuse vars qw($NUCALPH $PR\
-IMNUCALPH $TMPDIR);\n\n\nmy $errmsg;\nuse vars qw(\
-$errmsg);\n\n\n\nuse Getopt::Long;\nuse Cwd;\nuse \
-File::Basename;\nuse File::Temp qw/ tempfile tempd\
-ir /;\nuse File::Copy;\nuse File::Path;\n\n\n\nsub\
- usage(;$)\n{\n    my ($errmsg) = @_;\n    my $myn\
-ame = basename($0);\n\n    if ($errmsg) {\n       \
- print STDERR \"ERROR: $errmsg\\n\";\n    }\n\n   \
- print STDERR << \"EOF\";\n    \n$myname: align tw\
-o sequences by means of consan\\'s sfold\nUsage:\n\
- $myname -i file -o file -d path\nOptions:\n -i|--\
-in : pairwise input sequence file\n -o|--out: outp\
-ut alignment\n -d|--directory containing data\n\nE\
-OF\n}\n\nsub read_stk_aln \n  {\n    my $f=$_[0];\\
-n    my ($seq, $id);\n    \n    my %hseq;\n\n    o\
-pen (STK, \"$f\");\n    while (<STK>)\n      {\n	i\
-f ( /^#/ || /^\\/\\// || /^\\s*$/){;}\n	else\n	  {\
-\n	    ($id,$seq)=/(\\S+)\\s+(\\S+)/;\n	    $hseq{\
-$id}{'seq'}.=$seq;\n	  }\n      }\n    close (STK)\
-;\n    return %hseq;\n  }\nsub read_fasta_seq \n  \
-{\n    my $f=$_[0];\n    my %hseq;\n    my (@seq, \
-@com, @name);\n    my ($a, $s,$nseq);\n\n    open \
-(F, $f);\n    while (<F>)\n      {\n	$s.=$_;\n    \
-  }\n    close (F);\n\n    \n    @name=($s=~/>(.*)\
-.*\\n[^>]*/g);\n    \n    @seq =($s=~/>.*.*\\n([^>\
-]*)/g);\n    @com =($s=~/>.*(.*)\\n([^>]*)/g);\n\n\
-    \n    $nseq=$#name+1;\n    \n    for ($a=0; $a\
-<$nseq; $a++)\n      {\n	my $n=$name[$a];\n	$hseq{\
-$n}{name}=$n;\n	$hseq{$n}{seq}=$seq[$a];\n	$hseq{$\
-n}{com}=$com[$a];\n      }\n    return %hseq;\n  }\
-\n\n\n\nsub sfold_parseoutput($$)\n{\n    my ($fra\
-wout, $foutfa) = @_;\n    my %haln;\n    my ($fstk\
-, $cmd, $id);\n    open FOUTFA, \">$foutfa\";\n   \
- \n    $fstk = $frawout . \".stk\";\n    \n    # f\
-irst line of raw out contains info\n    # remainin\
-g stuff is stockholm formatted\n    $cmd = \"sed -\
-e '1d' $frawout\";\n    system(\"$cmd > $fstk\");\\
-n    if ($? != 0) {\n        $errmsg = \"command f\
-ailed with exit status $?.\";\n        $errmsg .= \
- \"Command was \\\"$cmd\\\"\";\n        return -1;\
-\n    }\n\n    # this gives an error message. just\
- ignore it...\n    %haln=read_stk_aln ( $fstk);\n \
-   foreach $i (keys (%haln))\n      {\n	my $s;\n	$\
-s=$haln{$i}{'seq'};\n	$s =~ s/\\./-/g;\n	print FOU\
-TFA \">$i\\n$s\\n\";\n      }\n    close FOUTFA;\n\
-    return 0;\n}\n\n\n\n\nsub sfold_wrapper($$$$)\\
-n{\n    \n    my ($fs1, $fs2, $fmodel, $foutfa) = \
-@_;\n    \n\n    my ($cmd, $frawout, $ferrlog, $fr\
-eadme, $ftimelog, $fstk);\n\n    # add  basename($\
-fmsqin) (unknown here!)\n    $frawout = \"sfold.lo\
-g\";\n    $ferrlog = \"sfold.err\";\n    $ftimelog\
- = \"sfold.time\";\n    $freadme =  \"sfold.README\
-\";\n    $fstk = \"sfold.stk\";\n    \n    # prepa\
-re execution...\n    #\n    # ./tmp is essential f\
-or dswpalign\n    # otherwise you'll get a segfaul\
-t\n    mkdir \"./tmp\";\n    \n    $cmd = \"sfold \
--m $fmodel $fs1 $fs2\";\n    open(FREADME,\">$frea\
-dme\");\n    print FREADME \"$cmd\\n\"; \n    clos\
-e(FREADME);\n\n    # and go\n    #\n    system(\"/\
-usr/bin/time -p -o $ftimelog $cmd >$frawout 2>$fer\
-rlog\");\n    if ($? != 0) {\n        $errmsg = \"\
-command failed with exit status $?\";\n        $er\
-rmsg .= \"command was \\\"$cmd\\\". See \" . getcw\
-d . \"\\n\";\n        return -1;\n    }\n\n    ret\
-urn sfold_parseoutput($frawout, $foutfa);\n}\n\n\n\
-\n\n\n\n\nmy ($help, $fmsqin, $fmsaout);\nGetOptio\
-ns(\"help\"  => \\$help,\n           \"in=s\" => \\
-\$fmsqin,\n           \"out=s\" => \\$fmsaout,\n	 \
-  \"data=s\" => \\$ref_dir);\n\n\n\nif ($help) {\n\
-    usage();\n    exit(0);\n}\nif (! defined($fmsq\
-in)) {\n    usage('missing input filename');\n    \
-exit(1);\n}\nif (! defined($fmsaout)) {\n    usage\
-('missing output filename');\n    exit(1);\n\n}\ni\
-f (scalar(@ARGV)) {\n    usage('Unknown remaining \
-args');\n    exit(1);\n}\n\n$FMODEL = \"$ref_dir/m\
-ix80.mod\";\nif (! -e \"$FMODEL\") {\n    die(\"co\
-uldn't find sfold grammar model file. Expected $FM\
-ODEL\\n\");\n}\n\n\nmy %hseq=read_fasta_seq ($fmsq\
-in);\nmy $id;\n\nforeach $id (keys(%hseq))\n  {\n \
-   push(@seq_array, $hseq{$id});\n  }\n\nif ( scal\
-ar(@seq_array) != 2 ) {\n    die(\"Need *exactly* \
-two sequences as input (pairwise alignment!).\")\n\
-}\n\n\n\nmy ($sec, $min, $hour, $mday, $mon, $year\
-, $wday, $yday, $isdst) = localtime(time);\nmy $da\
-tei = sprintf(\"%4d-%02d-%02d\", $year+1900, $mon+\
-1, $mday);\nmy $templ = basename($0) . \".\" . $da\
-tei . \".pid-\" . $$ . \".XXXXXX\";\nmy $wd = temp\
-dir ( $templ, DIR => $TMPDIR);\n\ncopy($fmsqin, \"\
-$wd/\" . basename($fmsqin) . \".org\"); # for repr\
-oduction\ncopy($FMODEL, \"$wd\");\nmy $fmodel = ba\
-sename($FMODEL);\nmy $orgwd = getcwd;\nchdir $wd;\\
-n\n\n\nmy @sepseqfiles;\nforeach $id (keys(%hseq))\
- {\n    my ($seq, $orgseq, $fname, $sout);\n    $s\
-eq=$hseq{$id}{'seq'};\n    \n    $fname = basename\
-($fmsqin) . \"_$id.fa\";\n    # replace funnies in\
- file/id name (e.g. \"/\" \" \" etc)\n    $fname =\
-~ s,[/ ],_,g;\n    open (PF, \">$fname\");\n    pr\
-int (PF \">$id\\n$seq\\n\");\n    close (PF);\n\n \
-   push(@sepseqfiles, $fname);\n}\n\nmy ($f1, $f2,\
- $fout);\n$f1 = $sepseqfiles[0];\n$f2 = $sepseqfil\
-es[1];\n$fout = $wd . basename($fmsqin) . \".out.f\
-a\";\nif (sfold_wrapper($f1, $f2, $fmodel, \"$fout\
-\") != 0) {\n    printf STDERR \"ERROR: See logs i\
-n $wd\\n\";\n    exit(1);\n} else {\n    chdir $or\
-gwd;\n    copy($fout, $fmsaout);\n    rmtree($wd);\
-\n   exit(0);\n}\n","\nuse Env qw(HOST);\nuse Env \
-qw(HOME);\nuse Env qw(USER);\n\n\n$tmp=clean_cr ($\
-ARGV[0]);\nopen (F, $tmp);\n\nwhile ( <F>)\n  {\n \
-   my $l=$_;\n    if ( $l=~/^# STOCKHOLM/){$stockh\
-olm=1;}\n    elsif ( $stockholm && $l=~/^#/)\n    \
-  {\n	$l=~/^#(\\S+)\\s+(\\S+)\\s+(\\S*)/g;\n	$l=\"\
-_stockholmhasch_$1\\_stockholmspace_$2 $3\\n\";\n \
-     }\n    $file.=$l;\n  }\nclose (F);\nunlink($t\
-mp);\n$file1=$file;\n\n$file=~s/\\#/_hash_symbol_/\
-g;\n$file=~s/\\@/_arobase_symbol_/g;\n\n\n$file=~s\
-/\\n[\\.:*\\s]+\\n/\\n\\n/g;\n\n$file=~s/\\n[ \\t\\
-\r\\f]+(\\b)/\\n\\1/g;\n\n\n$file=~s/(\\n\\S+)(\\s\
-+)(\\S)/\\1_blank_\\3/g;\n\n$file=~s/[ ]//g;\n$fil\
-e=~s/_blank_/ /g;\n\n\n\n$file =~s/\\n\\s*\\n/#/g;\
-\n\n$file.=\"#\";\n$file =~s/\\n/@/g;\n\n\n\n\n@bl\
-ocks=split /\\#/, $file;\nshift (@blocks);\n@s=spl\
-it /\\@/, $blocks[0];\n$nseq=$#s+1;\n\n\n\n$file=j\
-oin '@', @blocks;\n@lines=split /\\@/,$file;\n\n$c\
-=0;\n\nforeach $l (@lines)\n  {\n    if (!($l=~/\\\
-S/)){next;}\n    elsif ($stockholm && ($l=~/^\\/\\\
-// || $l=~/STOCKHOLM/)){next;}#get read of STOCHOL\
-M Terminator\n   \n    $l=~/(\\S+)\\s+(\\S*)/g;\n \
-   $n=$1; $s=$2;\n    \n    $seq[$c].=$s;\n    $na\
-me[$c]=$n;\n    $c++;\n    \n    if ( $c==$nseq){$\
-c=0;}\n    \n  } \n\nif ( $c!=0)\n      {\n	print \
-STDERR \"ERROR: $ARGV[0] is NOT an MSA in Clustalw\
- format: make sure there is no blank line within a\
- block [ERROR]\\n\";\n	exit (EXIT_FAILURE);\n     \
- }\n\nfor ($a=0; $a< $nseq; $a++)\n  {\n    $name[\
-$a]=cleanstring ($name[$a]);\n    $seq[$a]=cleanst\
-ring ($seq[$a]);\n    $seq[$a]=breakstring($seq[$a\
-], 60);\n    \n    $line=\">$name[$a]\\n$seq[$a]\\\
-n\";\n    \n    print \"$line\";\n  }\nexit (EXIT_\
-SUCCESS);\n\nsub cleanstring\n  {\n    my $s=@_[0]\
-;\n    $s=~s/_hash_symbol_/\\#/g;\n    $s=~s/_arob\
-ase_symbol_/\\@/g;\n    $s=~s/[ \\t]//g;\n    retu\
-rn $s;\n  }\nsub breakstring\n  {\n    my $s=@_[0]\
-;\n    my $size=@_[1];\n    my @list;\n    my $n,$\
-ns, $symbol;\n    \n    @list=split //,$s;\n    $n\
-=0;$ns=\"\";\n    foreach $symbol (@list)\n      {\
-\n	if ( $n==$size)\n	  {\n	    $ns.=\"\\n\";\n	   \
- $n=0;\n	  }\n	$ns.=$symbol;\n	$n++;\n      }\n   \
- return $ns;\n    }\n\nsub clean_cr\n  {\n    my $\
-f=@_[0];\n    my $file;\n    \n    $tmp=\"f$.$$\";\
-\n    \n    \n    open (IN, $f);\n    open (OUT, \\
-">$tmp\");\n    \n    while ( <IN>)\n      {\n	$fi\
-le=$_;\n	$file=~s/\\r\\n/\\n/g;\n	$file=~s/\\n\\r/\
-\\n/g;\n	$file=~s/\\r\\r/\\n/g;\n	$file=~s/\\r/\\n\
-/g;\n	print OUT \"$file\";\n      }\n    \n    clo\
-se (IN);\n    close (OUT);\n    return $tmp;\n  }\\
-n","use Env qw(HOST);\nuse Env qw(HOME);\nuse Env \
-qw(USER);\n\n\n$query_start=-1;\n$query_end=-1;\n\\
-nwhile (<>)\n  {\n    if ( /\\/\\//){$in_aln=1;}\n\
-    elsif ( $in_aln && /(\\S+)\\s+(.*)/)\n      {\\
-n\n\n	$name=$1;\n	\n\n	$seq=$2;\n	$seq=~s/\\s//g;\\
-n        $seq=~s/\\~/\\-/g;\n	$seq=~s/\\./\\-/g;\n\
-	if ( $list{$n}{'name'} && $list{$n}{'name'} ne $n\
-ame)\n	  {\n	    print \"$list{$n}{'name'} Vs $nam\
-e\";\n	    \n	    exit (EXIT_FAILURE);\n	  }\n	els\
-e\n	  {\n	    $list{$n}{'name'}= $name;\n	  }\n\n	\
-$list{$n}{'seq'}=$list{$n}{'seq'}.$seq;\n	\n	$nseq\
-=++$n;\n	\n      }\n    else\n      {$n=0;}\n  }\n\
-\n\nfor ($a=0; $a<$nseq; $a++)\n  {\n    print \">\
-$list{$a}{'name'}\\n$list{$a}{'seq'}\\n\";\n  }\n \
-     \n","\nuse Env qw(HOST);\nuse Env qw(HOME);\n\
-use Env qw(USER);\n\n                             \
-                           \nuse strict;          \
-                                   \nuse warnings;\
-\nuse diagnostics;\n\nmy $in_hit_list, my $in_aln=\
-0, my(%name_list)=(),my (%list)=(),my $n_seq=0; my\
- $test=0;\nmy($j)=0, my $n=0, my $nom, my $lg_quer\
-y, my %vu=();\n\nopen (F, \">tmp\");\n\n$/=\"\\n\"\
-;\nwhile (<>)\n{\n    print F $_;\n    if($_ =~ /Q\
-uery=\\s*(.+?)\\s/i) { $nom=$1;}\n\n    if ( /Sequ\
-ences producing significant alignments/){$in_hit_l\
-ist=1;}\n    \n    if ($_=~ /^pdb\\|/i) { $_=~ s/p\
-db\\|//g; }\n    if ($_=~ /^(1_\\d+)\\s+\\d+/) { $\
-_=~ s/$1/QUERY/;}\n      \n    if ( /^(\\S+).+?\\s\
-+[\\d.]+\\s+([\\de.-]+)\\s+$/ && $in_hit_list)	\n \
-   {\n	my($id)=$1; # \n	$id=~ s/\\|/_/g; #\n	if ($\
-id =~ /.+_$/) { chop($id) }; #\n	$name_list{$n_seq\
-++}=$id;\n	$name_list{$n_seq-1}=~ s/.*\\|//g;     \
-\n    }\n  \n    if (/query/i) {$in_aln=1;}\n    i\
-f ( /^(\\S+)\\s+(\\d+)\\s+([a-zA-Z-]+)\\s+(\\d+)/ \
-|| /^(\\S+)(\\s+)(\\-+)(\\s+)/ && ($in_aln == 1))\\
-n    {\n	my $name=$1;\n	my $start=$2;\n	my $seq=$3\
-;\n	my $end=$4;\n		\n	if ($name =~ /QUERY/i) { $lg\
-_query=length($seq); }\n\n	unless ($test > $n) #m\\
-n	{\n	    my(@seqq)= split('',$seq);\n	    my($gap\
-_missing)= scalar(@seqq);\n	    \n	    while ($gap\
-_missing != $lg_query)  { unshift (@seqq,\"-\"); $\
-gap_missing= scalar(@seqq); }\n	    $seq=join('',@\
-seqq);  #m\n	}\n	\n	if ($name =~ /QUERY/i)\n	{\n	 \
-   $n=0; %vu=(); $j=0;\n	    $list{$n}{'real_name'\
-}=\"$nom\";\n	}	\n	else\n	{\n	    unless (exists $\
-vu{$name}) { ++$j;}	\n	    $list{$n}{'real_name'}=\
-$name_list{$j-1};\n	}\n		\n	$list{$n}{'name'}=$nam\
-e;\n\n	$seq=~tr/a-z/A-Z/;\n	$list{$n}{'seq'}=$list\
-{$n}{'seq'};\n	$list{$n}{'seq'}.=$seq;\n\n	$n++;\n\
-	$vu{$name}++;\n	$test++;\n   } \n    \n}\n\nmy @n\
-umero=();\n\nfor (my $a=0; $a<$n; $a++) #m\n{\n   \
- my $long=length($list{0}{'seq'});  \n    my $long\
-1= length($list{$a}{'seq'});\n  \n    while ($long\
-1 ne $long)\n    {\n	$list{$a}{'seq'}.=\"-\";\n	$l\
-ong1= length ($list{$a}{'seq'});\n    } \n \n    p\
-ush (@numero,\"$list{$a}{'name'} $list{$a}{'real_n\
-ame'}\\n\");\n}\n\nmy %dejavu=();\n\n\nfor (my $i=\
-0; $i<=$#numero; $i++)\n{\n    my $s=\">$list{$i}{\
-'real_name'}\\n$list{$i}{'seq'}\\n\";\n    my $k=0\
-;\n    \n    if (exists $dejavu{$numero[$i]}) {nex\
-t;}\n    else\n    {	\n	for ($j=0; $j<$n ; $j++)\n\
-	{\n	    if (\"$numero[$i]\" eq \"$numero[$j]\" &&\
- $j != $i )\n	    {\n		++$k;\n		$s .=\">$list{$j}{\
-'real_name'}\\n$list{$j}{'seq'}\\n\";\n	    }\n	}	\
-\n    }\n    \n    if ($k>0) \n    {\n	my $cons;\n\
-	open (SOR,\">tempo_aln2cons\"); print SOR $s;  cl\
-ose SOR ;\n	open (COM,\"t_coffee -other_pg seq_ref\
-ormat -in tempo_aln2cons -action +aln2cons +upper \
-|\") ; \n     	while (<COM>)\n	{	\n	    if (/^>/) \
-{ $cons =\">$list{$i}{'real_name'}\\n\"; next;}\n	\
-    $_=~ s/\\n//g;\n	    $cons .=$_;\n	}\n	close C\
-OM; unlink (\"tempo_aln2cons\");\n	print $cons,\"\\
-\n\"; print F $cons,\"\\n\";\n    }	\n    else  { \
-print $s;  print F $s; }\n    \n    $dejavu{$numer\
-o[$i]}++;\n} #m\n\nexit;\n\n\n\n\n\n\n\n\n\n\n\n",\
-"use Env;\n\n\n$tmp_dir=\"\";\n$init_dir=\"\";\n$p\
-rogram=\"tc_generic_method.pl\";\n\n$blast=@ARGV[0\
-];\n\n$name=\"query\";$seq=\"\";\n%p=blast_xml2pro\
-file($name,$seq,100, 0, 0, $blast);\n&output_profi\
-le (%p);\n\n\nsub output_profile\n  {\n    my (%pr\
-ofile)=(@_);\n    my ($a);\n    for ($a=0; $a<$pro\
-file{n}; $a++)\n      {\n	\n	print \">$profile{$a}\
-{name} $profile{$a}{comment}\\n$profile{$a}{seq}\\\
-n\";\n      }\n    return;\n  }\nsub file_contains\
- \n  {\n    my ($file, $tag, $max)=(@_);\n    my (\
-$n);\n    $n=0;\n    \n    if ( !-e $file && ($fil\
-e =~/$tag/)) {return 1;}\n    elsif ( !-e $file){r\
-eturn 0;}\n    else \n      {\n	open (FC, \"$file\\
-");\n	while ( <FC>)\n	  {\n	    if ( ($_=~/$tag/))\
-\n	      {\n		close (FC);\n		return 1;\n	      }\n\
-	    elsif ($max && $n>$max)\n	      {\n		close (F\
-C);\n		return 0;\n	      }\n	    $n++;\n	  }\n    \
-  }\n    close (FC);\n    return 0;\n  }\n	    \n	\
-  \nsub file2string\n  {\n    my $f=@_[0];\n    my\
- $string, $l;\n    open (F,\"$f\");\n    while (<F\
->)\n      {\n\n	$l=$_;\n	#chomp ($l);\n	$string.=$\
-l;\n      }\n    close (F);\n    $string=~s/\\r\\n\
-//g;\n    $string=~s/\\n//g;\n    return $string;\\
-n  }\n\n\n\nsub tag2value \n  {\n    \n    my $tag\
-=(@_[0]);\n    my $word=(@_[1]);\n    my $return;\\
-n    \n    $tag=~/$word=\"([^\"]+)\"/;\n    $retur\
-n=$1;\n    return $return;\n  }\n      \nsub hit_t\
-ag2pdbid\n  {\n    my $tag=(@_[0]);\n    my $pdbid\
-;\n       \n    $tag=~/id=\"(\\S+)\"/;\n    $pdbid\
-=$1;\n    $pdbid=~s/_//;\n    return $pdbid;\n  }\\
-nsub id2pdbid \n  {\n    my $id=@_[0];\n  \n    if\
- ($id =~/pdb/)\n      {\n	$id=~/pdb(.*)/;\n	$id=$1\
-;\n      }\n    $id=~s/[|¦_]//g;\n    return $id;\\
-n  }\nsub set_blast_type \n  {\n    my $file =@_[0\
-];\n    if (&file_contains ($file,\"EBIApplication\
-Result\",100)){$BLAST_TYPE=\"EBI\";}\n    elsif (&\
-file_contains ($file,\"NCBI_BlastOutput\",100)) {$\
-BLAST_TYPE=\"NCBI\";}\n    else\n      {\n	$BLAST_\
-TYPE=\"\";\n      }\n    return $BLAST_TYPE;\n  }\\
-nsub blast_xml2profile \n  {\n    my ($name,$seq,$\
-maxid, $minid, $mincov, $file)=(@_);\n    my (%p, \
-$a, $string, $n);\n    \n\n\n    if ($BLAST_TYPE e\
-q \"EBI\" || &file_contains ($file,\"EBIApplicatio\
-nResult\",100)){%p=ebi_blast_xml2profile(@_);}\n  \
-  elsif ($BLAST_TYPE eq \"NCBI\" || &file_contains\
- ($file,\"NCBI_BlastOutput\",100)){%p=ncbi_blast_x\
-ml2profile(@_);}\n    else \n      {\n	print \"***\
-********* ERROR: Blast Returned an unknown XML For\
-mat **********************\";\n	die;\n      }\n   \
- for ($a=0; $a<$p{n}; $a++)\n      {\n	my $name=$p\
-{$a}{name};\n	$p{$name}{seq}=$p{$a}{seq};\n      }\
-\n    return %p;\n  }\nsub ncbi_blast_xml2profile \
-\n  {\n    my ($name,$seq,$maxid, $minid, $mincov,\
- $string)=(@_);\n    my ($L,$l, $a,$b,$c,$d,$nhits\
-,@identifyerL);\n    \n    \n    $seq=~s/[^a-zA-Z]\
-//g;\n    $L=length ($seq);\n    \n    %hit=&xml2t\
-ag_list ($string, \"Hit\");\n    \n    \n    for (\
-$nhits=0,$a=0; $a<$hit{n}; $a++)\n      {\n	my ($l\
-db,$id, $identity, $expectation, $start, $end, $co\
-verage, $r);\n	my (%ID,%DE,%HSP);\n	\n	$ldb=\"\";\\
-n\n	%ID=&xml2tag_list ($hit{$a}{body}, \"Hit_id\")\
-;\n	$identifyer=$ID{0}{body};\n	\n	%DE=&xml2tag_li\
-st ($hit{$a}{body}, \"Hit_def\");\n	$definition=$D\
-E{0}{body};\n	\n	%HSP=&xml2tag_list ($hit{$a}{body\
-}, \"Hsp\");\n	for ($b=0; $b<$HSP{n}; $b++)\n	  {\\
-n	    my (%START,%END,%E,%I,%Q,%M);\n\n	 \n	    %S\
-TART=&xml2tag_list ($HSP{$b}{body}, \"Hsp_query-fr\
-om\");\n	    %HSTART=&xml2tag_list ($HSP{$b}{body}\
-, \"Hsp_hit-from\");\n	    \n	    %LEN=  &xml2tag_\
-list ($HSP{$b}{body}, \"Hsp_align-len\");\n	    %E\
-ND=  &xml2tag_list ($HSP{$b}{body}, \"Hsp_query-to\
-\");\n	    %HEND=  &xml2tag_list ($HSP{$b}{body}, \
-\"Hsp_hit-to\");\n	    %E=&xml2tag_list     ($HSP{\
-$b}{body}, \"Hsp_evalue\");\n	    %I=&xml2tag_list\
-     ($HSP{$b}{body}, \"Hsp_identity\");\n	    %Q=\
-&xml2tag_list     ($HSP{$b}{body}, \"Hsp_qseq\");\\
-n	    %M=&xml2tag_list     ($HSP{$b}{body}, \"Hsp_\
-hseq\");\n	    \n	    for ($e=0; $e<$Q{n}; $e++)\n\
-\n	      {\n		$qs=$Q{$e}{body};\n		$ms=$M{$e}{body\
-};\n		if ($seq eq\"\"){$seq=$qs;$L=length($seq);}\\
-n		\n		$expectation=$E{$e}{body};\n		$identity=($L\
-EN{$e}{body}==0)?0:$I{$e}{body}/$LEN{$e}{body}*100\
-;\n		$start=$START{$e}{body};\n		$end=$END{$e}{bod\
-y};\n		$Hstart=$HSTART{$e}{body};\n		$Hend=$HEND{$\
-e}{body};\n	\n		$coverage=(($end-$start)*100)/$L;\\
-n\n	\n		if ($identity>$maxid || $identity<$minid |\
-| $coverage<$mincov){next;}\n		@lr1=(split (//,$qs\
-));\n		@lr2=(split (//,$ms));\n		$l=$#lr1+1;\n		fo\
-r ($c=0;$c<$L;$c++){$p[$nhits][$c]=\"-\";}\n		for \
-($d=0,$c=0; $c<$l; $c++)\n		  {\n		    $r=$lr1[$c]\
-;\n		    if ( $r=~/[A-Za-z]/)\n		      {\n			\n			\
-$p[$nhits][$d + $start-1]=$lr2[$c];\n			$d++;\n		 \
-     }\n		  }\n		$Qseq[$nhits]=$qs;\n		$Hseq[$nhit\
-s]=$ms;\n		$QstartL[$nhits]=$start;\n		$HstartL[$n\
-hits]=$Hstart;\n		$identityL[$nhits]=$identity;\n	\
-	$endL[$nhits]=$end;\n		$definitionL[$nhits]=$defi\
-nition;\n		$identifyerL[$nhits]=$identifyer;\n		$c\
-omment[$nhits]=\"$ldb|$identifyer [Eval=$expectati\
-on][id=$identity%][start=$Hstart end=$Hend]\";\n		\
-$nhits++;\n	      }\n	  }\n      }\n    \n    $pro\
-file{n}=0;\n    $profile{$profile{n}}{name}=$name;\
-\n    $profile{$profile{n}}{seq}=$seq;\n    $profi\
-le {n}++;\n    \n    for ($a=0; $a<$nhits; $a++)\n\
-      {\n	$n=$a+1;\n	\n	$profile{$n}{name}=\"$name\
-\\_$a\";\n	$profile{$n}{seq}=\"\";\n	$profile{$n}{\
-Qseq}=$Qseq[$a];\n	$profile{$n}{Hseq}=$Hseq[$a];\n\
-	$profile{$n}{Qstart}=$QstartL[$a];\n	$profile{$n}\
-{Hstart}=$HstartL[$a];\n	$profile{$n}{identity}=$i\
-dentityL[$a];\n	$profile{$n}{definition}=$definiti\
-onL[$a];\n	$profile{$n}{identifyer}=$identifyerL[$\
-a];\n	$profile{$n}{comment}=$comment[$a];\n	for ($\
-b=0; $b<$L; $b++)\n	  {\n	    if ($p[$a][$b])\n	  \
-    {\n		$profile{$n}{seq}.=$p[$a][$b];\n	      }\\
-n	    else\n	      {\n		$profile{$n}{seq}.=\"-\";\\
-n	      }\n	  }\n      }\n    \n    $profile{n}=$n\
-hits+1;\n    return %profile;\n  }\nsub ebi_blast_\
-xml2profile \n  {\n    my ($name,$seq,$maxid, $min\
-id, $mincov, $string)=(@_);\n    my ($L,$l, $a,$b,\
-$c,$d,$nhits,@identifyerL,$identifyer);\n    \n\n \
-   \n    $seq=~s/[^a-zA-Z]//g;\n    $L=length ($se\
-q);\n    %hit=&xml2tag_list ($string, \"hit\");\n \
-   \n    for ($nhits=0,$a=0; $a<$hit{n}; $a++)\n  \
-    {\n	my ($ldb,$id, $identity, $expectation, $st\
-art, $end, $coverage, $r);\n	my (%Q,%M,%E,%I);\n	\\
-n	$ldb=&tag2value ($hit{$a}{open}, \"database\");\\
-n	$identifyer=&tag2value ($hit{$a}{open}, \"id\");\
-\n\n	$description=&tag2value ($hit{$a}{open}, \"de\
-scription\");\n	\n	%Q=&xml2tag_list ($hit{$a}{body\
-}, \"querySeq\");\n	%M=&xml2tag_list ($hit{$a}{bod\
-y}, \"matchSeq\");\n	%E=&xml2tag_list ($hit{$a}{bo\
-dy}, \"expectation\");\n	%I=&xml2tag_list ($hit{$a\
-}{body}, \"identity\");\n	\n\n	for ($b=0; $b<$Q{n}\
-; $b++)\n	  {\n	    \n	    \n	    $qs=$Q{$b}{body}\
-;\n	    $ms=$M{$b}{body};\n	    if ($seq eq\"\"){$\
-seq=$qs;$L=length($seq);}\n\n	    $expectation=$E{\
-$b}{body};\n	    $identity=$I{$b}{body};\n	    \n	\
-    	    \n	    $start=&tag2value ($Q{$b}{open}, \\
-"start\");\n	    $end=&tag2value ($Q{$b}{open}, \"\
-end\");\n	    $startM=&tag2value ($M{$b}{open}, \"\
-start\");\n	    $endM=&tag2value ($M{$b}{open}, \"\
-end\");\n	    $coverage=(($end-$start)*100)/$L;\n	\
-    \n	   # print \"$id: ID: $identity COV: $cover\
-age [$start $end]\\n\";\n	    \n	    \n	    if ($i\
-dentity>$maxid || $identity<$minid || $coverage<$m\
-incov){next;}\n	    # print \"KEEP\\n\";\n\n	    \\
-n	    @lr1=(split (//,$qs));\n	    @lr2=(split (//\
-,$ms));\n	    $l=$#lr1+1;\n	    for ($c=0;$c<$L;$c\
-++){$p[$nhits][$c]=\"-\";}\n	    for ($d=0,$c=0; $\
-c<$l; $c++)\n	      {\n		$r=$lr1[$c];\n		if ( $r=~\
-/[A-Za-z]/)\n		  {\n		    \n		    $p[$nhits][$d + \
-$start-1]=$lr2[$c];\n		    $d++;\n		  }\n	      }\\
-n	  \n	    \n	    $identifyerL[$nhits]=$identifyer\
-;\n	    $comment[$nhits]=\"$ldb|$identifyer [Eval=\
-$expectation][id=$identity%][start=$startM end=$en\
-dM]\";\n	    $nhits++;\n	  }\n      }\n    \n    $\
-profile{n}=0;\n    $profile{$profile{n}}{name}=$na\
-me;\n    $profile{$profile{n}}{seq}=$seq;\n    $pr\
-ofile {n}++;\n    \n    for ($a=0; $a<$nhits; $a++\
-)\n      {\n	$n=$a+1;\n	$profile{$n}{name}=\"$name\
-\\_$a\";\n	$profile{$n}{seq}=\"\";\n	$profile{$n}{\
-identifyer}=$identifyerL[$a];\n	\n	$profile{$n}{co\
-mment}=$comment[$a];\n	for ($b=0; $b<$L; $b++)\n	 \
- {\n	    if ($p[$a][$b])\n	      {\n		$profile{$n}\
-{seq}.=$p[$a][$b];\n	      }\n	    else\n	      {\\
-n		$profile{$n}{seq}.=\"-\";\n	      }\n	  }\n    \
-  }\n    $profile{n}=$nhits+1;\n    \n    return %\
-profile;\n  }\n\nsub blast_xml2hit_list\n  {\n    \
-my $string=(@_[0]);\n    return &xml2tag_list ($st\
-ring, \"hit\");\n  }\nsub xml2tag_list  \n  {\n   \
- my ($string_in,$tag)=@_;\n    my $tag_in, $tag_ou\
-t;\n    my %tag;\n    \n    if (-e $string_in)\n  \
-    {\n	$string=&file2string ($string_in);\n      \
-}\n    else\n      {\n	$string=$string_in;\n      \
-}\n    $tag_in1=\"<$tag \";\n    $tag_in2=\"<$tag>\
-\";\n    $tag_out=\"/$tag>\";\n    $string=~s/>/>#\
-#1/g;\n    $string=~s/</##2</g;\n    $string=~s/##\
-1/<#/g;\n    $string=~s/##2/#>/g;\n    @l=($string\
-=~/(\\<[^>]+\\>)/g);\n    $tag{n}=0;\n    $in=0;$n\
-=-1;\n  \n \n\n    foreach $t (@l)\n      {\n\n	$t\
-=~s/<#//;\n	$t=~s/#>//;\n	\n	if ( $t=~/$tag_in1/ |\
-| $t=~/$tag_in2/)\n	  {\n	 \n	    $in=1;\n	    $ta\
-g{$tag{n}}{open}=$t;\n	    $n++;\n	    \n	  }\n	el\
-sif ($t=~/$tag_out/)\n	  {\n	    \n\n	    $tag{$ta\
-g{n}}{close}=$t;\n	    $tag{n}++;\n	    $in=0;\n	 \
- }\n	elsif ($in)\n	  {\n	   \n	    $tag{$tag{n}}{b\
-ody}.=$t;\n	  }\n      }\n  \n    return %tag;\n  \
-}\n\n\n\n\n","use Env qw(HOST);\nuse Env qw(HOME);\
-\nuse Env qw(USER);\nwhile (<>)\n  {\n    if ( /^>\
-(\\S+)/)\n      {\n	if ($list{$1})\n	  {\n	    pri\
-nt \">$1_$list{$1}\\n\";\n	    $list{$1}++;\n	  }\\
-n	else\n	  {\n	    print $_;\n	    $list{$1}=1;\n	\
-  }\n      }\n    else\n      {\n	print $_;\n     \
- }\n  }\n      \n","\n\n\nuse Env qw(HOST);\nuse E\
-nv qw(HOME);\nuse Env qw(USER);\n\n\nopen (F,$ARGV\
-[0]);\nwhile ( <>)\n  {\n    @x=/([^:,;\\)\\(\\s]+\
-):[^:,;\\)\\(]*/g;\n    @list=(@list,@x);\n  }\n$n\
-=$#list+1;\nforeach $n(@list){print \">$n\\nsequen\
-ce\\n\";}\n\n\nclose (F);\n","\nopen (F, $ARGV[0])\
-;\n\nwhile ( <F>)\n  {\n    @l=($_=~/(\\S+)/g);\n \
-   \n    $name=shift @l;\n    \n    print STDOUT \\
-"\\n>$name\\n\";\n    foreach $e (@l){$e=($e eq \"\
-0\")?\"O\":\"I\";print \"$e\";}\n  }\nclose (F);\n\
-\n		       \n    \n","use Env qw(HOST);\nuse Env q\
-w(HOME);\nuse Env qw(USER);\n\n$tmp=\"$ARGV[0].$$\\
-";\nopen (IN, $ARGV[0]);\nopen (OUT, \">$tmp\");\n\
-\nwhile ( <IN>)\n  {\n    $file=$_;\n    $file=~s/\
-\\r\\n/\\n/g;\n    $file=~s/\\n\\r/\\n/g;\n    $fi\
-le=~s/\\r\\r/\\n/g;\n    $file=~s/\\r/\\n/g;\n    \
-print OUT \"$file\";\n  }\nclose (IN);\nclose (OUT\
-);\n\nopen (OUT, \">$ARGV[0]\");\nopen (IN, \"$tmp\
-\");\n\nwhile ( <IN>)\n{\n  print OUT \"$_\";\n}\n\
-close (IN);\nclose (OUT);\nunlink ($tmp);\n\n"};
+   my %pred;\n    my $N=keys(%seq);\n    \n    out\
+put_fasta_seq (\\%seq,$tmp_in, \"seq\");\n    `hmm\
+top -pi=mpred -if=$tmp_in -sf=FAS -pl 2>/dev/null \
+>$tmp_out`;\n    open ($o, \">$outfile\");\n    op\
+en ($i, \"$tmp_out\");\n    while (<$i>)\n      {\\
+n	my $l=$_;\n	if (($l=~/>HP\\:\\s+(\\d+)\\s+(.*)/)\
+){my $line=\">$2 NSEQ: $N\\n\";print $o \"$line\";\
+}\n	elsif ( ($l=~/.*pred(.*)/))  {my $line=\"$1\\n\
+\";print $o \"$line\";}\n      }\n    close ($o);\\
+n    close ($i);\n    return read_fasta_seq($tmp);\
+\n  }\nsub fasta2hmmtop_pred\n  {\n    my $SR=shif\
+t;\n    my $o = new FileHandle;\n    my $i = new F\
+ileHandle;\n    my $tmp    =vtmpnam();\n    my $tm\
+p_in =vtmpnam();\n    my $tmp_out=vtmpnam();\n    \
+my %seq=%$SR;\n    my %pred;\n    \n\n    output_f\
+asta_seq (\\%seq,$tmp_in, \"seq\");\n    `hmmtop -\
+if=$tmp_in -sf=FAS -pl 2>/dev/null >$tmp_out`;\n  \
+  open ($o, \">$tmp\");\n    open ($i, \"$tmp_out\\
+");\n    while (<$i>)\n      {\n	my $l=$_;\n	if ((\
+$l=~/>HP\\:\\s+(\\d+)\\s+(.*)/)){my $line=\">$2\\n\
+\";print $o \"$line\";}\n	elsif ( ($l=~/.*pred(.*)\
+/))  {my $line=\"$1\\n\";print $o \"$line\";}\n   \
+   }\n    close ($o);\n    close ($i);\n    return\
+ read_fasta_seq($tmp);\n  }\n    \n	\n	\n	    \n	\\
+n	\n\n	\nsub fasta2gor_pred\n  {\n    my $SR=shift\
+;\n    my $o = new FileHandle;\n    my $i = new Fi\
+leHandle;\n    my $tmp    =vtmpnam();\n    my $tmp\
+_in =vtmpnam();\n    my $tmp_out=vtmpnam();\n    m\
+y %seq=%$SR;\n    my %pred;\n    \n\n    output_fa\
+sta_seq (\\%seq,$tmp_in, \"seq\");\n    `gorIV -pr\
+d $tmp_in -seq $GOR_SEQ -obs $GOR_OBS >$tmp_out`;\\
+n    open ($o, \">$tmp\");\n    open ($i, \"$tmp_o\
+ut\");\n    while (<$i>)\n      {\n	my $l=$_;\n\n	\
+\n	if ( $l=~/>/){print $o \"$l\";}\n	elsif ( $l=~/\
+Predicted Sec. Struct./){$l=~s/Predicted Sec. Stru\
+ct\\.//;print $o \"$l\";}\n      }\n    close ($o)\
+;\n    close ($i);\n    return read_fasta_seq($tmp\
+);\n  }\n			\n			     \nsub index2seq_name\n  {\n \
+   \n    my $SR=shift;\n    my $index=shift;\n    \
+\n    \n    my %S=%$SR;\n    \n    foreach my $s (\
+%S)\n      {\n	if ( $S{$s}{index}==$index){return \
+$s;}\n      }\n    return \"\";\n  }\n\nsub pred2c\
+ons\n  {\n    my $outfile=shift;\n    my $predR=sh\
+ift;\n    my $seq=shift;\n    my %P=%$predR;\n    \
+my %C;\n    my ($s,@r,$nseq);\n    my $f= new File\
+Handle;\n\n    open ($f, \">$outfile\");\n\n    if\
+ (!$seq){$seq=index2seq_name(\\%P,1);}\n    foreac\
+h my $s (keys(%P))\n      {\n	$nseq++;\n	$string= \
+$P{$s}{seq};\n	$string = uc $string;\n	my @r=split\
+ (//,$string);\n	for (my $a=0; $a<=$#r; $a++)\n	  \
+{\n	    if (($r[$a]=~/[OHICE]/)){$C{$a}{$r[$a]}++;\
+}\n	  }\n      }\n    @l=keys(%C);\n    \n    \n  \
+  $s=$P{$seq}{seq};\n    print $f \">$seq pred bas\
+ed on $nseq\\n\";\n    @r=split (//,$s);\n    \n  \
+  for (my $x=0; $x<=$#r; $x++)\n      {\n	if ($r[$\
+x] ne \"-\")\n	  {\n	    my $h=$C{$x}{H};\n	    my\
+ $i=$C{$x}{I};\n	    my $o=$C{$x}{O};\n	    my $c=\
+$C{$x}{C};\n	    my $e=$C{$x}{E};\n	    my $l=$i+$\
+o;\n	    \n	    if ($h>=$i && $h>=$o && $h>=$c && \
+$h>=$e){$r[$x]='H';}\n	    elsif ($i>=$o && $i>=$c\
+ && $i>=$e){$r[$x]='I';}\n	    elsif ($o>=$c && $o\
+>=$e){$r[$x]='O';}\n	    elsif ($c>=$e){$r[$x]='C'\
+;}\n	    else {$r[$x]='E';}\n	  }\n      }\n    $j\
+=join ('', @r);\n    print $f \"$j\\n\";\n    clos\
+e ($f);\n    return $j;\n  }\n\nsub pred2aln\n  {\\
+n    my $PR=shift;\n    my $AR=shift;\n    \n    m\
+y $f=new FileHandle;\n    my %P=%$PR;\n    my %A=%\
+$AR;\n    my %PA;\n    my $tmp=vtmpnam();\n    my \
+$f= new FileHandle;\n    \n    open ($f, \">$tmp\"\
+);\n    foreach my $s (sort{$A{$a}{index}<=>$A{$b}\
+{index}}(keys (%A)))\n      {\n	my (@list, $seq, @\
+plist, @pseq, $L, $PL, $c, $w);\n	my $seq;\n	my $s\
+eq=$A{$s}{seq};\n	my $pred=$P{$s}{seq};\n	$seq=pre\
+d2alnS($P{$s}{seq},$A{$s}{seq});\n	print $f \">$s\\
+\n$seq\\n\";\n      }\n    close ($f);\n    return\
+ read_fasta_seq ($tmp);\n  }\nsub pred2alnS\n  {\n\
+    my $pred=shift;\n    my $aln= shift;\n    my (\
+$j,$a,$b);\n    my @P=split (//, $pred);\n    my @\
+A=split (//, $aln);\n    for ($a=$b=0;$a<=$#A; $a+\
++)\n      {\n	if ($A[$a] ne \"-\"){$A[$a]=$P[$b++]\
+;}\n      }\n    if ($b!= ($#P+1)){add_warning (\"\
+Could not thread sequence: $b $#P\");}\n    \n    \
+$j= join ('', @A);\n    return $j;\n  }\nsub pred2\
+color\n  {\n    my $predP=shift;\n    my $alnP=shi\
+ft;\n    my $out=shift;\n    my $F=new FileHandle;\
+\n    my $struc=vtmpnam();\n    my $aln=vtmpnam();\
+\n    \n\n    output_fasta_seq ($alnP, $aln);\n   \
+ my %p=%$predP;\n    \n    open ($F, \">$struc\");\
+\n    \n    \n    foreach my $s (keys(%p))\n      \
+{\n	\n	print $F \">$s\\n\";\n	my $s=uc($p{$s}{seq}\
+);\n	\n	$s=~s/[Oo]/0/g;\n	$s=~s/[Ee]/0/g;\n	\n	$s=\
+~s/[Ii]/5/g;\n	$s=~s/[Cc]/5/g;\n	\n	$s=~s/[Hh]/9/g\
+;\n	\n	print $F \"$s\\n\";\n      }\n    close ($F\
+);\n    \n    \n    \n    safe_system ( \"t_coffee\
+ -other_pg seq_reformat -in $aln -struc_in $struc \
+-struc_in_f number_fasta -output color_html -out $\
+out\");\n    return;\n  }\n	  \n    \nsub display_\
+fasta_seq\n  {\n    my $SR=shift;\n    my %S=%$SR;\
+\n    \n    foreach my $s (sort{$S{$a}{index}<=>$S\
+{$b}{index}}(keys (%S)))\n      {\n	print STDERR \\
+">$s\\n$S{$s}{seq}\\n\";\n      }\n    close ($f);\
+\n  }\nsub output_fasta_seq\n  {\n    my $SR=shift\
+;\n    my $outfile=shift;\n    my $mode =shift;\n \
+   my $f= new FileHandle;\n    my %S=%$SR;\n    \n\
+    \n    open ($f, \">$outfile\");\n    foreach m\
+y $s (sort{$S{$a}{index}<=>$S{$b}{index}}(keys (%S\
+)))\n      {\n	my $seq=$S{$s}{seq};\n	if ( $mode e\
+q \"seq\"){$seq=~s/\\-//g;}\n	print $f \">$s\\n$se\
+q\\n\";\n      }\n    close ($f);\n  }\n      \nsu\
+b read_fasta_seq \n  {\n    my $f=$_[0];\n    my %\
+hseq;\n    my (@seq, @com, @name);\n    my ($a, $s\
+,$nseq);\n    my $index;\n    open (F, $f);\n    w\
+hile (<F>)\n      {\n	$s.=$_;\n      }\n    close \
+(F);\n\n    \n    @name=($s=~/>(\\S*).*\\n[^>]*/g)\
+;\n    \n    @seq =($s=~/>.*.*\\n([^>]*)/g);\n    \
+@com =($s=~/>.*(.*)\\n([^>]*)/g);\n\n\n    $nseq=$\
+#name+1;\n    \n  \n    for ($a=0; $a<$nseq; $a++)\
+\n      {\n	my $n=$name[$a];\n	my $s;\n	$hseq{$n}{\
+name}=$n;\n	$s=$seq[$a];$s=~s/\\s//g;\n	$hseq{$n}{\
+index}=++$index;\n	$hseq{$n}{seq}=$s;\n	$hseq{$n}{\
+com}=$com[$a];\n      }\n    return %hseq;\n  }\n\\
+n\nsub file2head\n      {\n	my $file = shift;\n	my\
+ $size = shift;\n	my $f= new FileHandle;\n	my $lin\
+e;\n	open ($f,$file);\n	read ($f,$line, $size);\n	\
+close ($f);\n	return $line;\n      }\nsub file2tai\
+l\n      {\n	my $file = shift;\n	my $size = shift;\
+\n	my $f= new FileHandle;\n	my $line;\n	\n	open ($\
+f,$file);\n	seek ($f,$size*-1, 2);\n	read ($f,$lin\
+e, $size);\n	close ($f);\n	return $line;\n      }\\
+n\n\nsub vtmpnam\n      {\n	my $r=rand(100000);\n	\
+my $f=\"file.$r.$$\";\n	while (-e $f)\n	  {\n	    \
+$f=vtmpnam();\n	  }\n	push (@TMPFILE_LIST, $f);\n	\
+return $f;\n      }\n\nsub myexit\n  {\n    my $co\
+de=@_[0];\n    if ($CLEAN_EXIT_STARTED==1){return;\
+}\n    else {$CLEAN_EXIT_STARTED=1;}\n    ### ONLY\
+ BARE EXIT\n    exit ($code);\n  }\nsub set_error_\
+lock\n    {\n      my $name = shift;\n      my $pi\
+d=$$;\n\n      \n      &lock4tc ($$,\"LERROR\", \"\
+LSET\", \"$$ -- ERROR: $name $PROGRAM\\n\");\n    \
+  return;\n    }\nsub set_lock\n  {\n    my $pid=s\
+hift;\n    my $msg= shift;\n    my $p=getppid();\n\
+    &lock4tc ($pid,\"LLOCK\",\"LRESET\",\"$p$msg\\\
+n\");\n  }\nsub unset_lock\n   {\n     \n    my $p\
+id=shift;\n    &lock4tc ($pid,\"LLOCK\",\"LRELEASE\
+\",\"\");\n  }\nsub shift_lock\n  {\n    my $from=\
+shift;\n    my $to=shift;\n    my $from_type=shift\
+;\n    my $to_type=shift;\n    my $action=shift;\n\
+    my $msg;\n    \n    if (!&lock4tc($from, $from\
+_type, \"LCHECK\", \"\")){return 0;}\n    $msg=&lo\
+ck4tc ($from, $from_type, \"LREAD\", \"\");\n    &\
+lock4tc ($from, $from_type,\"LRELEASE\", $msg);\n \
+   &lock4tc ($to, $to_type, $action, $msg);\n    r\
+eturn;\n  }\nsub isshellpid\n  {\n    my $p=shift;\
+\n    if (!lock4tc ($p, \"LLOCK\", \"LCHECK\")){re\
+turn 0;}\n    else\n      {\n	my $c=lock4tc($p, \"\
+LLOCK\", \"LREAD\");\n	if ( $c=~/-SHELL-/){return \
+1;}\n      }\n    return 0;\n  }\nsub isrootpid\n \
+ {\n    if(lock4tc (getppid(), \"LLOCK\", \"LCHECK\
+\")){return 0;}\n    else {return 1;}\n  }\nsub lo\
+ck4tc\n	{\n	  my ($pid,$type,$action,$value)=@_;\n\
+	  my $fname;\n	  my $host=hostname;\n	  \n	  if (\
+$type eq \"LLOCK\"){$fname=\"$LOCKDIR/.$pid.$host.\
+lock4tcoffee\";}\n	  elsif ( $type eq \"LERROR\"){\
+ $fname=\"$LOCKDIR/.$pid.$host.error4tcoffee\";}\n\
+	  elsif ( $type eq \"LWARNING\"){ $fname=\"$LOCKD\
+IR/.$pid.$host.warning4tcoffee\";}\n	  \n	  if ($d\
+ebug_lock)\n	    {\n	      print STDERR \"\\n\\t--\
+-lock4tc(tcg): $action => $fname =>$value (RD: $LO\
+CKDIR)\\n\";\n	    }\n\n	  if    ($action eq \"LCH\
+ECK\") {return -e $fname;}\n	  elsif ($action eq \\
+"LREAD\"){return file2string($fname);}\n	  elsif (\
+$action eq \"LSET\") {return string2file ($value, \
+$fname, \">>\");}\n	  elsif ($action eq \"LRESET\"\
+) {return string2file ($value, $fname, \">\");}\n	\
+  elsif ($action eq \"LRELEASE\") \n	    {\n	     \
+ if ( $debug_lock)\n		{\n		  my $g=new FileHandle;\
+\n		  open ($g, \">>$fname\");\n		  print $g \"\\n\
+Destroyed by $$\\n\";\n		  close ($g);\n		  safe_s\
+ystem (\"mv $fname $fname.old\");\n		}\n	      els\
+e\n		{\n		  unlink ($fname);\n		}\n	    }\n	  retu\
+rn \"\";\n	}\n	\nsub file2string\n	{\n	  my $file=\
+@_[0];\n	  my $f=new FileHandle;\n	  my $r;\n	  op\
+en ($f, \"$file\");\n	  while (<$f>){$r.=$_;}\n	  \
+close ($f);\n	  return $r;\n	}\nsub string2file \n\
+    {\n    my ($s,$file,$mode)=@_;\n    my $f=new \
+FileHandle;\n    \n    open ($f, \"$mode$file\");\\
+n    print $f  \"$s\";\n    close ($f);\n  }\n\nBE\
+GIN\n    {\n      srand;\n    \n      $SIG{'SIGUP'\
+}='signal_cleanup';\n      $SIG{'SIGINT'}='signal_\
+cleanup';\n      $SIG{'SIGQUIT'}='signal_cleanup';\
+\n      $SIG{'SIGILL'}='signal_cleanup';\n      $S\
+IG{'SIGTRAP'}='signal_cleanup';\n      $SIG{'SIGAB\
+RT'}='signal_cleanup';\n      $SIG{'SIGEMT'}='sign\
+al_cleanup';\n      $SIG{'SIGFPE'}='signal_cleanup\
+';\n      \n      $SIG{'SIGKILL'}='signal_cleanup'\
+;\n      $SIG{'SIGPIPE'}='signal_cleanup';\n      \
+$SIG{'SIGSTOP'}='signal_cleanup';\n      $SIG{'SIG\
+TTIN'}='signal_cleanup';\n      $SIG{'SIGXFSZ'}='s\
+ignal_cleanup';\n      $SIG{'SIGINFO'}='signal_cle\
+anup';\n      \n      $SIG{'SIGBUS'}='signal_clean\
+up';\n      $SIG{'SIGALRM'}='signal_cleanup';\n   \
+   $SIG{'SIGTSTP'}='signal_cleanup';\n      $SIG{'\
+SIGTTOU'}='signal_cleanup';\n      $SIG{'SIGVTALRM\
+'}='signal_cleanup';\n      $SIG{'SIGUSR1'}='signa\
+l_cleanup';\n\n\n      $SIG{'SIGSEGV'}='signal_cle\
+anup';\n      $SIG{'SIGTERM'}='signal_cleanup';\n \
+     $SIG{'SIGCONT'}='signal_cleanup';\n      $SIG\
+{'SIGIO'}='signal_cleanup';\n      $SIG{'SIGPROF'}\
+='signal_cleanup';\n      $SIG{'SIGUSR2'}='signal_\
+cleanup';\n\n      $SIG{'SIGSYS'}='signal_cleanup'\
+;\n      $SIG{'SIGURG'}='signal_cleanup';\n      $\
+SIG{'SIGCHLD'}='signal_cleanup';\n      $SIG{'SIGX\
+CPU'}='signal_cleanup';\n      $SIG{'SIGWINCH'}='s\
+ignal_cleanup';\n      \n      $SIG{'INT'}='signal\
+_cleanup';\n      $SIG{'TERM'}='signal_cleanup';\n\
+      $SIG{'KILL'}='signal_cleanup';\n      $SIG{'\
+QUIT'}='signal_cleanup';\n      \n      our $debug\
+_lock=$ENV{\"DEBUG_LOCK\"};\n      \n      \n     \
+ \n      \n      foreach my $a (@ARGV){$CL.=\" $a\\
+";}\n      if ( $debug_lock ){print STDERR \"\\n\\\
+n\\n********** START PG: $PROGRAM *************\\n\
+\";}\n      if ( $debug_lock ){print STDERR \"\\n\\
+\n\\n**********(tcg) LOCKDIR: $LOCKDIR $$ ********\
+*****\\n\";}\n      if ( $debug_lock ){print STDER\
+R \"\\n --- $$ -- $CL\\n\";}\n      \n	     \n    \
+  \n      \n    }\nsub flush_error\n  {\n    my $m\
+sg=shift;\n    return add_error ($EXIT_FAILURE,$$,\
+ $$,getppid(), $msg, $CL);\n  }\nsub add_error \n \
+ {\n    my $code=shift;\n    my $rpid=shift;\n    \
+my $pid=shift;\n    my $ppid=shift;\n    my $type=\
+shift;\n    my $com=shift;\n    \n    $ERROR_DONE=\
+1;\n    lock4tc ($rpid, \"LERROR\",\"LSET\",\"$pid\
+ -- ERROR: $type\\n\");\n    lock4tc ($$, \"LERROR\
+\",\"LSET\", \"$pid -- COM: $com\\n\");\n    lock4\
+tc ($$, \"LERROR\",\"LSET\", \"$pid -- STACK: $ppi\
+d -> $pid\\n\");\n   \n    return $code;\n  }\nsub\
+ add_warning \n  {\n    my $rpid=shift;\n    my $p\
+id =shift;\n    my $command=shift;\n    my $msg=\"\
+$$ -- WARNING: $command\\n\";\n    print STDERR \"\
+$msg\";\n    lock4tc ($$, \"LWARNING\", \"LSET\", \
+$msg);\n  }\n\nsub signal_cleanup\n  {\n    print \
+dtderr \"\\n**** $$ (tcg) was killed\\n\";\n    &c\
+leanup;\n    exit ($EXIT_FAILURE);\n  }\nsub clean\
+_dir\n  {\n    my $dir=@_[0];\n    if ( !-d $dir){\
+return ;}\n    elsif (!($dir=~/tmp/)){return ;}#sa\
+fety check 1\n    elsif (($dir=~/\\*/)){return ;}#\
+safety check 2\n    else\n      {\n	`rm -rf $dir`;\
+\n      }\n    return;\n  }\nsub cleanup\n  {\n   \
+ #print stderr \"\\n----tc: $$ Kills $PIDCHILD\\n\\
+";\n    #kill (SIGTERM,$PIDCHILD);\n    my $p=getp\
+pid();\n    $CLEAN_EXIT_STARTED=1;\n    \n    \n  \
+  \n    if (&lock4tc($$,\"LERROR\", \"LCHECK\", \"\
+\"))\n      {\n	my $ppid=getppid();\n	if (!$ERROR_\
+DONE) \n	  {\n	    &lock4tc($$,\"LERROR\", \"LSET\\
+", \"$$ -- STACK: $p -> $$\\n\");\n	    &lock4tc($\
+$,\"LERROR\", \"LSET\", \"$$ -- COM: $CL\\n\");\n	\
+  }\n      }\n    my $warning=&lock4tc($$, \"LWARN\
+ING\", \"LREAD\", \"\");\n    my $error=&lock4tc($\
+$,  \"LERROR\", \"LREAD\", \"\");\n    #release er\
+ror and warning lock if root\n    \n    if (isroot\
+pid() && ($warning || $error) )\n      {\n	\n	prin\
+t STDERR \"**************** Summary *************\\
+\n$error\\n$warning\\n\";\n\n	&lock4tc($$,\"LERROR\
+\",\"RELEASE\",\"\");\n	&lock4tc($$,\"LWARNING\",\\
+"RELEASE\",\"\");\n      } \n    \n    \n    forea\
+ch my $f (@TMPFILE_LIST)\n      {\n	if (-e $f){unl\
+ink ($f);} \n      }\n    foreach my $d (@TMPDIR_L\
+IST)\n      {\n	clean_dir ($d);\n      }\n    #No \
+More Lock Release\n    #&lock4tc($$,\"LLOCK\",\"LR\
+ELEASE\",\"\"); #release lock \n\n    if ( $debug_\
+lock ){print STDERR \"\\n\\n\\n********** END PG: \
+$PROGRAM ($$) *************\\n\";}\n    if ( $debu\
+g_lock ){print STDERR \"\\n\\n\\n**********(tcg) L\
+OCKDIR: $LOCKDIR $$ *************\\n\";}\n  }\nEND\
+ \n  {\n    \n    &cleanup();\n  }\n   \n\nsub saf\
+e_system \n{\n  my $com=shift;\n  my $ntry=shift;\\
+n  my $ctry=shift;\n  my $pid;\n  my $status;\n  m\
+y $ppid=getppid();\n  if ($com eq \"\"){return 1;}\
+\n  \n  \n\n  if (($pid = fork ()) < 0){return (-1\
+);}\n  if ($pid == 0)\n    {\n      set_lock($$, \\
+" -SHELL- $com (tcg)\");\n      exec ($com);\n    \
+}\n  else\n    {\n      lock4tc ($$, \"LLOCK\", \"\
+LSET\", \"$pid\\n\");#update parent\n      $PIDCHI\
+LD=$pid;\n    }\n  if ($debug_lock){printf STDERR \
+\"\\n\\t .... safe_system (fasta_seq2hmm)  p: $$ c\
+: $pid COM: $com\\n\";}\n\n  waitpid ($pid,WTERMSI\
+G);\n\n  shift_lock ($pid,$$, \"LWARNING\",\"LWARN\
+ING\", \"LSET\");\n\n  if ($? == $EXIT_FAILURE || \
+lock4tc($pid, \"LERROR\", \"LCHECK\", \"\"))\n    \
+{\n      if ($ntry && $ctry <$ntry)\n	{\n	  add_wa\
+rning ($$,$$,\"$com failed [retry: $ctry]\");\n	  \
+lock4tc ($pid, \"LRELEASE\", \"LERROR\", \"\");\n	\
+  return safe_system ($com, $ntry, ++$ctry);\n	}\n\
+      elsif ($ntry == -1)\n	{\n	  if (!shift_lock \
+($pid, $$, \"LERROR\", \"LWARNING\", \"LSET\"))\n	\
+    {\n	      add_warning ($$,$$,\"$com failed\");\
+\n	    }\n	  else\n	    {\n	      lock4tc ($pid, \\
+"LRELEASE\", \"LERROR\", \"\");\n	    }\n	  return\
+ $?;}\n      else\n	{\n	  if (!shift_lock ($pid,$$\
+, \"LERROR\",\"LERROR\", \"LSET\"))\n	    {\n	    \
+  myexit(add_error ($EXIT_FAILURE,$$,$pid,getppid(\
+), \"UNSPECIFIED system\", $com));\n	    }\n	}\n  \
+  }\n  return $?;\n}\n\nsub check_configuration \n\
+    {\n      my @l=@_;\n      my $v;\n      foreac\
+h my $p (@l)\n	{\n	  \n	  if   ( $p eq \"EMAIL\")\\
+n	    { \n	      if ( !($EMAIL=~/@/))\n		{\n		add_\
+warning($$,$$,\"Could Not Use EMAIL\");\n		myexit(\
+add_error ($EXIT_FAILURE,$$,$$,getppid(),\"EMAIL\"\
+,\"$CL\"));\n	      }\n	    }\n	  elsif( $p eq \"I\
+NTERNET\")\n	    {\n	      if ( !&check_internet_c\
+onnection())\n		{\n		  myexit(add_error ($EXIT_FAI\
+LURE,$$,$$,getppid(),\"INTERNET\",\"$CL\"));\n		}\\
+n	    }\n	  elsif( $p eq \"wget\")\n	    {\n	     \
+ if (!&pg_is_installed (\"wget\") && !&pg_is_insta\
+lled (\"curl\"))\n		{\n		  myexit(add_error ($EXIT\
+_FAILURE,$$,$$,getppid(),\"PG_NOT_INSTALLED:wget\"\
+,\"$CL\"));\n		}\n	    }\n	  elsif( !(&pg_is_insta\
+lled ($p)))\n	    {\n	      myexit(add_error ($EXI\
+T_FAILURE,$$,$$,getppid(),\"PG_NOT_INSTALLED:$p\",\
+\"$CL\"));\n	    }\n	}\n      return 1;\n    }\nsu\
+b pg_is_installed\n  {\n    my @ml=@_;\n    my $r,\
+ $p, $m;\n    my $supported=0;\n    \n    my $p=sh\
+ift (@ml);\n    if ($p=~/::/)\n      {\n	if (safe_\
+system (\"perl -M$p -e 1\")==$EXIT_SUCCESS){return\
+ 1;}\n	else {return 0;}\n      }\n    else\n      \
+{\n	$r=`which $p 2>/dev/null`;\n	if ($r eq \"\"){r\
+eturn 0;}\n	else {return 1;}\n      }\n  }\n\n\n\n\
+sub check_internet_connection\n  {\n    my $intern\
+et;\n    my $tmp;\n    &check_configuration ( \"wg\
+et\"); \n    \n    $tmp=&vtmpnam ();\n    \n    if\
+     (&pg_is_installed    (\"wget\")){`wget www.go\
+ogle.com -O$tmp >/dev/null 2>/dev/null`;}\n    els\
+if  (&pg_is_installed    (\"curl\")){`curl www.goo\
+gle.com -o$tmp >/dev/null 2>/dev/null`;}\n    \n  \
+  if ( !-e $tmp || -s $tmp < 10){$internet=0;}\n  \
+  else {$internet=1;}\n    if (-e $tmp){unlink $tm\
+p;}\n\n    return $internet;\n  }\nsub check_pg_is\
+_installed\n  {\n    my @ml=@_;\n    my $r=&pg_is_\
+installed (@ml);\n    if (!$r && $p=~/::/)\n      \
+{\n	print STDERR \"\\nYou Must Install the perl pa\
+ckage $p on your system.\\nRUN:\\n\\tsudo perl -MC\
+PAN -e 'install $pg'\\n\";\n      }\n    elsif (!$\
+r)\n      {\n	myexit(flush_error(\"\\nProgram $p S\
+upported but Not Installed on your system\"));\n  \
+    }\n    else\n      {\n	return 1;\n      }\n  }\
+\n\n\n\n","\n\n\n\n\nmy $FMODEL =\"\"; \nmy $TMPDI\
+R = \"/tmp\";\n\n\n\n\nmy $NUCALPH = \"ACGTUNRYMKS\
+WHBVD\";\nmy $PRIMNUCALPH = \"ACGTUN\";\nuse vars \
+qw($NUCALPH $PRIMNUCALPH $TMPDIR);\n\n\nmy $errmsg\
+;\nuse vars qw($errmsg);\n\n\n\nuse Getopt::Long;\\
+nuse Cwd;\nuse File::Basename;\nuse File::Temp qw/\
+ tempfile tempdir /;\nuse File::Copy;\nuse File::P\
+ath;\n\n\n\nsub usage(;$)\n{\n    my ($errmsg) = @\
+_;\n    my $myname = basename($0);\n\n    if ($err\
+msg) {\n        print STDERR \"ERROR: $errmsg\\n\"\
+;\n    }\n\n    print STDERR << \"EOF\";\n    \n$m\
+yname: align two sequences by means of consan\\'s \
+sfold\nUsage:\n $myname -i file -o file -d path\nO\
+ptions:\n -i|--in : pairwise input sequence file\n\
+ -o|--out: output alignment\n -d|--directory conta\
+ining data\n\nEOF\n}\n\nsub read_stk_aln \n  {\n  \
+  my $f=$_[0];\n    my ($seq, $id);\n    \n    my \
+%hseq;\n\n    open (STK, \"$f\");\n    while (<STK\
+>)\n      {\n	if ( /^#/ || /^\\/\\// || /^\\s*$/){\
+;}\n	else\n	  {\n	    ($id,$seq)=/(\\S+)\\s+(\\S+)\
+/;\n	    $hseq{$id}{'seq'}.=$seq;\n	  }\n      }\n\
+    close (STK);\n    return %hseq;\n  }\nsub read\
+_fasta_seq \n  {\n    my $f=$_[0];\n    my %hseq;\\
+n    my (@seq, @com, @name);\n    my ($a, $s,$nseq\
+);\n\n    open (F, $f);\n    while (<F>)\n      {\\
+n	$s.=$_;\n      }\n    close (F);\n\n    \n    @n\
+ame=($s=~/>(.*).*\\n[^>]*/g);\n    \n    @seq =($s\
+=~/>.*.*\\n([^>]*)/g);\n    @com =($s=~/>.*(.*)\\n\
+([^>]*)/g);\n\n    \n    $nseq=$#name+1;\n    \n  \
+  for ($a=0; $a<$nseq; $a++)\n      {\n	my $n=$nam\
+e[$a];\n	$hseq{$n}{name}=$n;\n	$hseq{$n}{seq}=$seq\
+[$a];\n	$hseq{$n}{com}=$com[$a];\n      }\n    ret\
+urn %hseq;\n  }\n\n\n\nsub sfold_parseoutput($$)\n\
+{\n    my ($frawout, $foutfa) = @_;\n    my %haln;\
+\n    my ($fstk, $cmd, $id);\n    open FOUTFA, \">\
+$foutfa\";\n    \n    $fstk = $frawout . \".stk\";\
+\n    \n    # first line of raw out contains info\\
+n    # remaining stuff is stockholm formatted\n   \
+ $cmd = \"sed -e '1d' $frawout\";\n    system(\"$c\
+md > $fstk\");\n    if ($? != 0) {\n        $errms\
+g = \"command failed with exit status $?.\";\n    \
+    $errmsg .=  \"Command was \\\"$cmd\\\"\";\n   \
+     return -1;\n    }\n\n    # this gives an erro\
+r message. just ignore it...\n    %haln=read_stk_a\
+ln ( $fstk);\n    foreach $i (keys (%haln))\n     \
+ {\n	my $s;\n	$s=$haln{$i}{'seq'};\n	$s =~ s/\\./-\
+/g;\n	print FOUTFA \">$i\\n$s\\n\";\n      }\n    \
+close FOUTFA;\n    return 0;\n}\n\n\n\n\nsub sfold\
+_wrapper($$$$)\n{\n    \n    my ($fs1, $fs2, $fmod\
+el, $foutfa) = @_;\n    \n\n    my ($cmd, $frawout\
+, $ferrlog, $freadme, $ftimelog, $fstk);\n\n    # \
+add  basename($fmsqin) (unknown here!)\n    $frawo\
+ut = \"sfold.log\";\n    $ferrlog = \"sfold.err\";\
+\n    $ftimelog = \"sfold.time\";\n    $freadme = \
+ \"sfold.README\";\n    $fstk = \"sfold.stk\";\n  \
+  \n    # prepare execution...\n    #\n    # ./tmp\
+ is essential for dswpalign\n    # otherwise you'l\
+l get a segfault\n    mkdir \"./tmp\";\n    \n    \
+$cmd = \"sfold -m $fmodel $fs1 $fs2\";\n    open(F\
+README,\">$freadme\");\n    print FREADME \"$cmd\\\
+n\"; \n    close(FREADME);\n\n    # and go\n    #\\
+n    system(\"/usr/bin/time -p -o $ftimelog $cmd >\
+$frawout 2>$ferrlog\");\n    if ($? != 0) {\n     \
+   $errmsg = \"command failed with exit status $?\\
+";\n        $errmsg .= \"command was \\\"$cmd\\\".\
+ See \" . getcwd . \"\\n\";\n        return -1;\n \
+   }\n\n    return sfold_parseoutput($frawout, $fo\
+utfa);\n}\n\n\n\n\n\n\n\nmy ($help, $fmsqin, $fmsa\
+out);\nGetOptions(\"help\"  => \\$help,\n         \
+  \"in=s\" => \\$fmsqin,\n           \"out=s\" => \
+\\$fmsaout,\n	   \"data=s\" => \\$ref_dir);\n\n\n\\
+nif ($help) {\n    usage();\n    exit(0);\n}\nif (\
+! defined($fmsqin)) {\n    usage('missing input fi\
+lename');\n    exit(1);\n}\nif (! defined($fmsaout\
+)) {\n    usage('missing output filename');\n    e\
+xit(1);\n\n}\nif (scalar(@ARGV)) {\n    usage('Unk\
+nown remaining args');\n    exit(1);\n}\n\n$FMODEL\
+ = \"$ref_dir/mix80.mod\";\nif (! -e \"$FMODEL\") \
+{\n    die(\"couldn't find sfold grammar model fil\
+e. Expected $FMODEL\\n\");\n}\n\n\nmy %hseq=read_f\
+asta_seq ($fmsqin);\nmy $id;\n\nforeach $id (keys(\
+%hseq))\n  {\n    push(@seq_array, $hseq{$id});\n \
+ }\n\nif ( scalar(@seq_array) != 2 ) {\n    die(\"\
+Need *exactly* two sequences as input (pairwise al\
+ignment!).\")\n}\n\n\n\nmy ($sec, $min, $hour, $md\
+ay, $mon, $year, $wday, $yday, $isdst) = localtime\
+(time);\nmy $datei = sprintf(\"%4d-%02d-%02d\", $y\
+ear+1900, $mon+1, $mday);\nmy $templ = basename($0\
+) . \".\" . $datei . \".pid-\" . $$ . \".XXXXXX\";\
+\nmy $wd = tempdir ( $templ, DIR => $TMPDIR);\n\nc\
+opy($fmsqin, \"$wd/\" . basename($fmsqin) . \".org\
+\"); # for reproduction\ncopy($FMODEL, \"$wd\");\n\
+my $fmodel = basename($FMODEL);\nmy $orgwd = getcw\
+d;\nchdir $wd;\n\n\n\nmy @sepseqfiles;\nforeach $i\
+d (keys(%hseq)) {\n    my ($seq, $orgseq, $fname, \
+$sout);\n    $seq=$hseq{$id}{'seq'};\n    \n    $f\
+name = basename($fmsqin) . \"_$id.fa\";\n    # rep\
+lace funnies in file/id name (e.g. \"/\" \" \" etc\
+)\n    $fname =~ s,[/ ],_,g;\n    open (PF, \">$fn\
+ame\");\n    print (PF \">$id\\n$seq\\n\");\n    c\
+lose (PF);\n\n    push(@sepseqfiles, $fname);\n}\n\
+\nmy ($f1, $f2, $fout);\n$f1 = $sepseqfiles[0];\n$\
+f2 = $sepseqfiles[1];\n$fout = $wd . basename($fms\
+qin) . \".out.fa\";\nif (sfold_wrapper($f1, $f2, $\
+fmodel, \"$fout\") != 0) {\n    printf STDERR \"ER\
+ROR: See logs in $wd\\n\";\n    exit(1);\n} else {\
+\n    chdir $orgwd;\n    copy($fout, $fmsaout);\n \
+   rmtree($wd);\n   exit(0);\n}\n","\nuse Env qw(H\
+OST);\nuse Env qw(HOME);\nuse Env qw(USER);\n\n\n$\
+tmp=clean_cr ($ARGV[0]);\nopen (F, $tmp);\n\nwhile\
+ ( <F>)\n  {\n    my $l=$_;\n    if ( $l=~/^# STOC\
+KHOLM/){$stockholm=1;}\n    elsif ( $stockholm && \
+$l=~/^#/)\n      {\n	$l=~/^#(\\S+)\\s+(\\S+)\\s+(\\
+\S*)/g;\n	$l=\"_stockholmhasch_$1\\_stockholmspace\
+_$2 $3\\n\";\n      }\n    $file.=$l;\n  }\nclose \
+(F);\nunlink($tmp);\n$file1=$file;\n\n$file=~s/\\#\
+/_hash_symbol_/g;\n$file=~s/\\@/_arobase_symbol_/g\
+;\n\n\n$file=~s/\\n[\\.:*\\s]+\\n/\\n\\n/g;\n\n$fi\
+le=~s/\\n[ \\t\\r\\f]+(\\b)/\\n\\1/g;\n\n\n$file=~\
+s/(\\n\\S+)(\\s+)(\\S)/\\1_blank_\\3/g;\n\n$file=~\
+s/[ ]//g;\n$file=~s/_blank_/ /g;\n\n\n\n$file =~s/\
+\\n\\s*\\n/#/g;\n\n$file.=\"#\";\n$file =~s/\\n/@/\
+g;\n\n\n\n\n@blocks=split /\\#/, $file;\nshift (@b\
+locks);\n@s=split /\\@/, $blocks[0];\n$nseq=$#s+1;\
+\n\n\n\n$file=join '@', @blocks;\n@lines=split /\\\
+@/,$file;\n\n$c=0;\n\nforeach $l (@lines)\n  {\n  \
+  if (!($l=~/\\S/)){next;}\n    elsif ($stockholm \
+&& ($l=~/^\\/\\// || $l=~/STOCKHOLM/)){next;}#get \
+read of STOCHOLM Terminator\n   \n    $l=~/(\\S+)\\
+\s+(\\S*)/g;\n    $n=$1; $s=$2;\n    \n    $seq[$c\
+].=$s;\n    $name[$c]=$n;\n    $c++;\n    \n    if\
+ ( $c==$nseq){$c=0;}\n    \n  } \n\nif ( $c!=0)\n \
+     {\n	print STDERR \"ERROR: $ARGV[0] is NOT an \
+MSA in Clustalw format: make sure there is no blan\
+k line within a block [ERROR]\\n\";\n	exit (EXIT_F\
+AILURE);\n      }\n\nfor ($a=0; $a< $nseq; $a++)\n\
+  {\n    $name[$a]=cleanstring ($name[$a]);\n    $\
+seq[$a]=cleanstring ($seq[$a]);\n    $seq[$a]=brea\
+kstring($seq[$a], 60);\n    \n    $line=\">$name[$\
+a]\\n$seq[$a]\\n\";\n    \n    print \"$line\";\n \
+ }\nexit (EXIT_SUCCESS);\n\nsub cleanstring\n  {\n\
+    my $s=@_[0];\n    $s=~s/_hash_symbol_/\\#/g;\n\
+    $s=~s/_arobase_symbol_/\\@/g;\n    $s=~s/[ \\t\
+]//g;\n    return $s;\n  }\nsub breakstring\n  {\n\
+    my $s=@_[0];\n    my $size=@_[1];\n    my @lis\
+t;\n    my $n,$ns, $symbol;\n    \n    @list=split\
+ //,$s;\n    $n=0;$ns=\"\";\n    foreach $symbol (\
+@list)\n      {\n	if ( $n==$size)\n	  {\n	    $ns.\
+=\"\\n\";\n	    $n=0;\n	  }\n	$ns.=$symbol;\n	$n++\
+;\n      }\n    return $ns;\n    }\n\nsub clean_cr\
+\n  {\n    my $f=@_[0];\n    my $file;\n    \n    \
+$tmp=\"f$.$$\";\n    \n    \n    open (IN, $f);\n \
+   open (OUT, \">$tmp\");\n    \n    while ( <IN>)\
+\n      {\n	$file=$_;\n	$file=~s/\\r\\n/\\n/g;\n	$\
+file=~s/\\n\\r/\\n/g;\n	$file=~s/\\r\\r/\\n/g;\n	$\
+file=~s/\\r/\\n/g;\n	print OUT \"$file\";\n      }\
+\n    \n    close (IN);\n    close (OUT);\n    ret\
+urn $tmp;\n  }\n","use Env qw(HOST);\nuse Env qw(H\
+OME);\nuse Env qw(USER);\n\n\n$query_start=-1;\n$q\
+uery_end=-1;\n\nwhile (<>)\n  {\n    if ( /\\/\\//\
+){$in_aln=1;}\n    elsif ( $in_aln && /(\\S+)\\s+(\
+.*)/)\n      {\n\n\n	$name=$1;\n	\n\n	$seq=$2;\n	$\
+seq=~s/\\s//g;\n        $seq=~s/\\~/\\-/g;\n	$seq=\
+~s/\\./\\-/g;\n	if ( $list{$n}{'name'} && $list{$n\
+}{'name'} ne $name)\n	  {\n	    print \"$list{$n}{\
+'name'} Vs $name\";\n	    \n	    exit (EXIT_FAILUR\
+E);\n	  }\n	else\n	  {\n	    $list{$n}{'name'}= $n\
+ame;\n	  }\n\n	$list{$n}{'seq'}=$list{$n}{'seq'}.$\
+seq;\n	\n	$nseq=++$n;\n	\n      }\n    else\n     \
+ {$n=0;}\n  }\n\n\nfor ($a=0; $a<$nseq; $a++)\n  {\
+\n    print \">$list{$a}{'name'}\\n$list{$a}{'seq'\
+}\\n\";\n  }\n      \n","\nuse Env qw(HOST);\nuse \
+Env qw(HOME);\nuse Env qw(USER);\n\n              \
+                                          \nuse st\
+rict;                                             \
+\nuse warnings;\nuse diagnostics;\n\nmy $in_hit_li\
+st, my $in_aln=0, my(%name_list)=(),my (%list)=(),\
+my $n_seq=0; my $test=0;\nmy($j)=0, my $n=0, my $n\
+om, my $lg_query, my %vu=();\n\nopen (F, \">tmp\")\
+;\n\n$/=\"\\n\";\nwhile (<>)\n{\n    print F $_;\n\
+    if($_ =~ /Query=\\s*(.+?)\\s/i) { $nom=$1;}\n\\
+n    if ( /Sequences producing significant alignme\
+nts/){$in_hit_list=1;}\n    \n    if ($_=~ /^pdb\\\
+|/i) { $_=~ s/pdb\\|//g; }\n    if ($_=~ /^(1_\\d+\
+)\\s+\\d+/) { $_=~ s/$1/QUERY/;}\n      \n    if (\
+ /^(\\S+).+?\\s+[\\d.]+\\s+([\\de.-]+)\\s+$/ && $i\
+n_hit_list)	\n    {\n	my($id)=$1; # \n	$id=~ s/\\|\
+/_/g; #\n	if ($id =~ /.+_$/) { chop($id) }; #\n	$n\
+ame_list{$n_seq++}=$id;\n	$name_list{$n_seq-1}=~ s\
+/.*\\|//g;     \n    }\n  \n    if (/query/i) {$in\
+_aln=1;}\n    if ( /^(\\S+)\\s+(\\d+)\\s+([a-zA-Z-\
+]+)\\s+(\\d+)/ || /^(\\S+)(\\s+)(\\-+)(\\s+)/ && (\
+$in_aln == 1))\n    {\n	my $name=$1;\n	my $start=$\
+2;\n	my $seq=$3;\n	my $end=$4;\n		\n	if ($name =~ \
+/QUERY/i) { $lg_query=length($seq); }\n\n	unless (\
+$test > $n) #m\n	{\n	    my(@seqq)= split('',$seq)\
+;\n	    my($gap_missing)= scalar(@seqq);\n	    \n	\
+    while ($gap_missing != $lg_query)  { unshift (\
+@seqq,\"-\"); $gap_missing= scalar(@seqq); }\n	   \
+ $seq=join('',@seqq);  #m\n	}\n	\n	if ($name =~ /Q\
+UERY/i)\n	{\n	    $n=0; %vu=(); $j=0;\n	    $list{\
+$n}{'real_name'}=\"$nom\";\n	}	\n	else\n	{\n	    u\
+nless (exists $vu{$name}) { ++$j;}	\n	    $list{$n\
+}{'real_name'}=$name_list{$j-1};\n	}\n		\n	$list{$\
+n}{'name'}=$name;\n\n	$seq=~tr/a-z/A-Z/;\n	$list{$\
+n}{'seq'}=$list{$n}{'seq'};\n	$list{$n}{'seq'}.=$s\
+eq;\n\n	$n++;\n	$vu{$name}++;\n	$test++;\n   } \n \
+   \n}\n\nmy @numero=();\n\nfor (my $a=0; $a<$n; $\
+a++) #m\n{\n    my $long=length($list{0}{'seq'}); \
+ \n    my $long1= length($list{$a}{'seq'});\n  \n \
+   while ($long1 ne $long)\n    {\n	$list{$a}{'seq\
+'}.=\"-\";\n	$long1= length ($list{$a}{'seq'});\n \
+   } \n \n    push (@numero,\"$list{$a}{'name'} $l\
+ist{$a}{'real_name'}\\n\");\n}\n\nmy %dejavu=();\n\
+\n\nfor (my $i=0; $i<=$#numero; $i++)\n{\n    my $\
+s=\">$list{$i}{'real_name'}\\n$list{$i}{'seq'}\\n\\
+";\n    my $k=0;\n    \n    if (exists $dejavu{$nu\
+mero[$i]}) {next;}\n    else\n    {	\n	for ($j=0; \
+$j<$n ; $j++)\n	{\n	    if (\"$numero[$i]\" eq \"$\
+numero[$j]\" && $j != $i )\n	    {\n		++$k;\n		$s \
+.=\">$list{$j}{'real_name'}\\n$list{$j}{'seq'}\\n\\
+";\n	    }\n	}	\n    }\n    \n    if ($k>0) \n    \
+{\n	my $cons;\n	open (SOR,\">tempo_aln2cons\"); pr\
+int SOR $s;  close SOR ;\n	open (COM,\"t_coffee -o\
+ther_pg seq_reformat -in tempo_aln2cons -action +a\
+ln2cons +upper |\") ; \n     	while (<COM>)\n	{	\n\
+	    if (/^>/) { $cons =\">$list{$i}{'real_name'}\\
+\n\"; next;}\n	    $_=~ s/\\n//g;\n	    $cons .=$_\
+;\n	}\n	close COM; unlink (\"tempo_aln2cons\");\n	\
+print $cons,\"\\n\"; print F $cons,\"\\n\";\n    }\
+	\n    else  { print $s;  print F $s; }\n    \n   \
+ $dejavu{$numero[$i]}++;\n} #m\n\nexit;\n\n\n\n\n\\
+n\n\n\n\n\n\n","use Env;\n\n\n$tmp_dir=\"\";\n$ini\
+t_dir=\"\";\n$program=\"tc_generic_method.pl\";\n\\
+n$blast=@ARGV[0];\n\n$name=\"query\";$seq=\"\";\n%\
+p=blast_xml2profile($name,$seq,100, 0, 0, $blast);\
+\n&output_profile (%p);\n\n\nsub output_profile\n \
+ {\n    my (%profile)=(@_);\n    my ($a);\n    for\
+ ($a=0; $a<$profile{n}; $a++)\n      {\n	\n	print \
+\">$profile{$a}{name} $profile{$a}{comment}\\n$pro\
+file{$a}{seq}\\n\";\n      }\n    return;\n  }\nsu\
+b file_contains \n  {\n    my ($file, $tag, $max)=\
+(@_);\n    my ($n);\n    $n=0;\n    \n    if ( !-e\
+ $file && ($file =~/$tag/)) {return 1;}\n    elsif\
+ ( !-e $file){return 0;}\n    else \n      {\n	ope\
+n (FC, \"$file\");\n	while ( <FC>)\n	  {\n	    if \
+( ($_=~/$tag/))\n	      {\n		close (FC);\n		return\
+ 1;\n	      }\n	    elsif ($max && $n>$max)\n	    \
+  {\n		close (FC);\n		return 0;\n	      }\n	    $n\
+++;\n	  }\n      }\n    close (FC);\n    return 0;\
+\n  }\n	    \n	  \nsub file2string\n  {\n    my $f\
+=@_[0];\n    my $string, $l;\n    open (F,\"$f\");\
+\n    while (<F>)\n      {\n\n	$l=$_;\n	#chomp ($l\
+);\n	$string.=$l;\n      }\n    close (F);\n    $s\
+tring=~s/\\r\\n//g;\n    $string=~s/\\n//g;\n    r\
+eturn $string;\n  }\n\n\n\nsub tag2value \n  {\n  \
+  \n    my $tag=(@_[0]);\n    my $word=(@_[1]);\n \
+   my $return;\n    \n    $tag=~/$word=\"([^\"]+)\\
+"/;\n    $return=$1;\n    return $return;\n  }\n  \
+    \nsub hit_tag2pdbid\n  {\n    my $tag=(@_[0]);\
+\n    my $pdbid;\n       \n    $tag=~/id=\"(\\S+)\\
+"/;\n    $pdbid=$1;\n    $pdbid=~s/_//;\n    retur\
+n $pdbid;\n  }\nsub id2pdbid \n  {\n    my $id=@_[\
+0];\n  \n    if ($id =~/pdb/)\n      {\n	$id=~/pdb\
+(.*)/;\n	$id=$1;\n      }\n    $id=~s/[|¦_]//g;\n \
+   return $id;\n  }\nsub set_blast_type \n  {\n   \
+ my $file =@_[0];\n    if (&file_contains ($file,\\
+"EBIApplicationResult\",100)){$BLAST_TYPE=\"EBI\";\
+}\n    elsif (&file_contains ($file,\"NCBI_BlastOu\
+tput\",100)) {$BLAST_TYPE=\"NCBI\";}\n    else\n  \
+    {\n	$BLAST_TYPE=\"\";\n      }\n    return $BL\
+AST_TYPE;\n  }\nsub blast_xml2profile \n  {\n    m\
+y ($name,$seq,$maxid, $minid, $mincov, $file)=(@_)\
+;\n    my (%p, $a, $string, $n);\n    \n\n\n    if\
+ ($BLAST_TYPE eq \"EBI\" || &file_contains ($file,\
+\"EBIApplicationResult\",100)){%p=ebi_blast_xml2pr\
+ofile(@_);}\n    elsif ($BLAST_TYPE eq \"NCBI\" ||\
+ &file_contains ($file,\"NCBI_BlastOutput\",100)){\
+%p=ncbi_blast_xml2profile(@_);}\n    else \n      \
+{\n	print \"************ ERROR: Blast Returned an \
+unknown XML Format **********************\";\n	die\
+;\n      }\n    for ($a=0; $a<$p{n}; $a++)\n      \
+{\n	my $name=$p{$a}{name};\n	$p{$name}{seq}=$p{$a}\
+{seq};\n      }\n    return %p;\n  }\nsub ncbi_bla\
+st_xml2profile \n  {\n    my ($name,$seq,$maxid, $\
+minid, $mincov, $string)=(@_);\n    my ($L,$l, $a,\
+$b,$c,$d,$nhits,@identifyerL);\n    \n    \n    $s\
+eq=~s/[^a-zA-Z]//g;\n    $L=length ($seq);\n    \n\
+    %hit=&xml2tag_list ($string, \"Hit\");\n    \n\
+    \n    for ($nhits=0,$a=0; $a<$hit{n}; $a++)\n \
+     {\n	my ($ldb,$id, $identity, $expectation, $s\
+tart, $end, $coverage, $r);\n	my (%ID,%DE,%HSP);\n\
+	\n	$ldb=\"\";\n\n	%ID=&xml2tag_list ($hit{$a}{bod\
+y}, \"Hit_id\");\n	$identifyer=$ID{0}{body};\n	\n	\
+%DE=&xml2tag_list ($hit{$a}{body}, \"Hit_def\");\n\
+	$definition=$DE{0}{body};\n	\n	%HSP=&xml2tag_list\
+ ($hit{$a}{body}, \"Hsp\");\n	for ($b=0; $b<$HSP{n\
+}; $b++)\n	  {\n	    my (%START,%END,%E,%I,%Q,%M);\
+\n\n	 \n	    %START=&xml2tag_list ($HSP{$b}{body},\
+ \"Hsp_query-from\");\n	    %HSTART=&xml2tag_list \
+($HSP{$b}{body}, \"Hsp_hit-from\");\n	    \n	    %\
+LEN=  &xml2tag_list ($HSP{$b}{body}, \"Hsp_align-l\
+en\");\n	    %END=  &xml2tag_list ($HSP{$b}{body},\
+ \"Hsp_query-to\");\n	    %HEND=  &xml2tag_list ($\
+HSP{$b}{body}, \"Hsp_hit-to\");\n	    %E=&xml2tag_\
+list     ($HSP{$b}{body}, \"Hsp_evalue\");\n	    %\
+I=&xml2tag_list     ($HSP{$b}{body}, \"Hsp_identit\
+y\");\n	    %Q=&xml2tag_list     ($HSP{$b}{body}, \
+\"Hsp_qseq\");\n	    %M=&xml2tag_list     ($HSP{$b\
+}{body}, \"Hsp_hseq\");\n	    \n	    for ($e=0; $e\
+<$Q{n}; $e++)\n\n	      {\n		$qs=$Q{$e}{body};\n		\
+$ms=$M{$e}{body};\n		if ($seq eq\"\"){$seq=$qs;$L=\
+length($seq);}\n		\n		$expectation=$E{$e}{body};\n\
+		$identity=($LEN{$e}{body}==0)?0:$I{$e}{body}/$LE\
+N{$e}{body}*100;\n		$start=$START{$e}{body};\n		$e\
+nd=$END{$e}{body};\n		$Hstart=$HSTART{$e}{body};\n\
+		$Hend=$HEND{$e}{body};\n	\n		$coverage=(($end-$s\
+tart)*100)/$L;\n\n	\n		if ($identity>$maxid || $id\
+entity<$minid || $coverage<$mincov){next;}\n		@lr1\
+=(split (//,$qs));\n		@lr2=(split (//,$ms));\n		$l\
+=$#lr1+1;\n		for ($c=0;$c<$L;$c++){$p[$nhits][$c]=\
+\"-\";}\n		for ($d=0,$c=0; $c<$l; $c++)\n		  {\n		\
+    $r=$lr1[$c];\n		    if ( $r=~/[A-Za-z]/)\n		  \
+    {\n			\n			$p[$nhits][$d + $start-1]=$lr2[$c];\
+\n			$d++;\n		      }\n		  }\n		$Qseq[$nhits]=$qs;\
+\n		$Hseq[$nhits]=$ms;\n		$QstartL[$nhits]=$start;\
+\n		$HstartL[$nhits]=$Hstart;\n		$identityL[$nhits\
+]=$identity;\n		$endL[$nhits]=$end;\n		$definition\
+L[$nhits]=$definition;\n		$identifyerL[$nhits]=$id\
+entifyer;\n		$comment[$nhits]=\"$ldb|$identifyer [\
+Eval=$expectation][id=$identity%][start=$Hstart en\
+d=$Hend]\";\n		$nhits++;\n	      }\n	  }\n      }\\
+n    \n    $profile{n}=0;\n    $profile{$profile{n\
+}}{name}=$name;\n    $profile{$profile{n}}{seq}=$s\
+eq;\n    $profile {n}++;\n    \n    for ($a=0; $a<\
+$nhits; $a++)\n      {\n	$n=$a+1;\n	\n	$profile{$n\
+}{name}=\"$name\\_$a\";\n	$profile{$n}{seq}=\"\";\\
+n	$profile{$n}{Qseq}=$Qseq[$a];\n	$profile{$n}{Hse\
+q}=$Hseq[$a];\n	$profile{$n}{Qstart}=$QstartL[$a];\
+\n	$profile{$n}{Hstart}=$HstartL[$a];\n	$profile{$\
+n}{identity}=$identityL[$a];\n	$profile{$n}{defini\
+tion}=$definitionL[$a];\n	$profile{$n}{identifyer}\
+=$identifyerL[$a];\n	$profile{$n}{comment}=$commen\
+t[$a];\n	for ($b=0; $b<$L; $b++)\n	  {\n	    if ($\
+p[$a][$b])\n	      {\n		$profile{$n}{seq}.=$p[$a][\
+$b];\n	      }\n	    else\n	      {\n		$profile{$n\
+}{seq}.=\"-\";\n	      }\n	  }\n      }\n    \n   \
+ $profile{n}=$nhits+1;\n    return %profile;\n  }\\
+nsub ebi_blast_xml2profile \n  {\n    my ($name,$s\
+eq,$maxid, $minid, $mincov, $string)=(@_);\n    my\
+ ($L,$l, $a,$b,$c,$d,$nhits,@identifyerL,$identify\
+er);\n    \n\n    \n    $seq=~s/[^a-zA-Z]//g;\n   \
+ $L=length ($seq);\n    %hit=&xml2tag_list ($strin\
+g, \"hit\");\n    \n    for ($nhits=0,$a=0; $a<$hi\
+t{n}; $a++)\n      {\n	my ($ldb,$id, $identity, $e\
+xpectation, $start, $end, $coverage, $r);\n	my (%Q\
+,%M,%E,%I);\n	\n	$ldb=&tag2value ($hit{$a}{open}, \
+\"database\");\n	$identifyer=&tag2value ($hit{$a}{\
+open}, \"id\");\n\n	$description=&tag2value ($hit{\
+$a}{open}, \"description\");\n	\n	%Q=&xml2tag_list\
+ ($hit{$a}{body}, \"querySeq\");\n	%M=&xml2tag_lis\
+t ($hit{$a}{body}, \"matchSeq\");\n	%E=&xml2tag_li\
+st ($hit{$a}{body}, \"expectation\");\n	%I=&xml2ta\
+g_list ($hit{$a}{body}, \"identity\");\n	\n\n	for \
+($b=0; $b<$Q{n}; $b++)\n	  {\n	    \n	    \n	    $\
+qs=$Q{$b}{body};\n	    $ms=$M{$b}{body};\n	    if \
+($seq eq\"\"){$seq=$qs;$L=length($seq);}\n\n	    $\
+expectation=$E{$b}{body};\n	    $identity=$I{$b}{b\
+ody};\n	    \n	    	    \n	    $start=&tag2value (\
+$Q{$b}{open}, \"start\");\n	    $end=&tag2value ($\
+Q{$b}{open}, \"end\");\n	    $startM=&tag2value ($\
+M{$b}{open}, \"start\");\n	    $endM=&tag2value ($\
+M{$b}{open}, \"end\");\n	    $coverage=(($end-$sta\
+rt)*100)/$L;\n	    \n	   # print \"$id: ID: $ident\
+ity COV: $coverage [$start $end]\\n\";\n	    \n	  \
+  \n	    if ($identity>$maxid || $identity<$minid \
+|| $coverage<$mincov){next;}\n	    # print \"KEEP\\
+\n\";\n\n	    \n	    @lr1=(split (//,$qs));\n	    \
+@lr2=(split (//,$ms));\n	    $l=$#lr1+1;\n	    for\
+ ($c=0;$c<$L;$c++){$p[$nhits][$c]=\"-\";}\n	    fo\
+r ($d=0,$c=0; $c<$l; $c++)\n	      {\n		$r=$lr1[$c\
+];\n		if ( $r=~/[A-Za-z]/)\n		  {\n		    \n		    $\
+p[$nhits][$d + $start-1]=$lr2[$c];\n		    $d++;\n	\
+	  }\n	      }\n	  \n	    \n	    $identifyerL[$nhi\
+ts]=$identifyer;\n	    $comment[$nhits]=\"$ldb|$id\
+entifyer [Eval=$expectation][id=$identity%][start=\
+$startM end=$endM]\";\n	    $nhits++;\n	  }\n     \
+ }\n    \n    $profile{n}=0;\n    $profile{$profil\
+e{n}}{name}=$name;\n    $profile{$profile{n}}{seq}\
+=$seq;\n    $profile {n}++;\n    \n    for ($a=0; \
+$a<$nhits; $a++)\n      {\n	$n=$a+1;\n	$profile{$n\
+}{name}=\"$name\\_$a\";\n	$profile{$n}{seq}=\"\";\\
+n	$profile{$n}{identifyer}=$identifyerL[$a];\n	\n	\
+$profile{$n}{comment}=$comment[$a];\n	for ($b=0; $\
+b<$L; $b++)\n	  {\n	    if ($p[$a][$b])\n	      {\\
+n		$profile{$n}{seq}.=$p[$a][$b];\n	      }\n	    \
+else\n	      {\n		$profile{$n}{seq}.=\"-\";\n	    \
+  }\n	  }\n      }\n    $profile{n}=$nhits+1;\n   \
+ \n    return %profile;\n  }\n\nsub blast_xml2hit_\
+list\n  {\n    my $string=(@_[0]);\n    return &xm\
+l2tag_list ($string, \"hit\");\n  }\nsub xml2tag_l\
+ist  \n  {\n    my ($string_in,$tag)=@_;\n    my $\
+tag_in, $tag_out;\n    my %tag;\n    \n    if (-e \
+$string_in)\n      {\n	$string=&file2string ($stri\
+ng_in);\n      }\n    else\n      {\n	$string=$str\
+ing_in;\n      }\n    $tag_in1=\"<$tag \";\n    $t\
+ag_in2=\"<$tag>\";\n    $tag_out=\"/$tag>\";\n    \
+$string=~s/>/>##1/g;\n    $string=~s/</##2</g;\n  \
+  $string=~s/##1/<#/g;\n    $string=~s/##2/#>/g;\n\
+    @l=($string=~/(\\<[^>]+\\>)/g);\n    $tag{n}=0\
+;\n    $in=0;$n=-1;\n  \n \n\n    foreach $t (@l)\\
+n      {\n\n	$t=~s/<#//;\n	$t=~s/#>//;\n	\n	if ( $\
+t=~/$tag_in1/ || $t=~/$tag_in2/)\n	  {\n	 \n	    $\
+in=1;\n	    $tag{$tag{n}}{open}=$t;\n	    $n++;\n	\
+    \n	  }\n	elsif ($t=~/$tag_out/)\n	  {\n	    \n\
+\n	    $tag{$tag{n}}{close}=$t;\n	    $tag{n}++;\n\
+	    $in=0;\n	  }\n	elsif ($in)\n	  {\n	   \n	    \
+$tag{$tag{n}}{body}.=$t;\n	  }\n      }\n  \n    r\
+eturn %tag;\n  }\n\n\n\n\n","use Env qw(HOST);\nus\
+e Env qw(HOME);\nuse Env qw(USER);\nwhile (<>)\n  \
+{\n    if ( /^>(\\S+)/)\n      {\n	if ($list{$1})\\
+n	  {\n	    print \">$1_$list{$1}\\n\";\n	    $lis\
+t{$1}++;\n	  }\n	else\n	  {\n	    print $_;\n	    \
+$list{$1}=1;\n	  }\n      }\n    else\n      {\n	p\
+rint $_;\n      }\n  }\n      \n","\n\n\nuse Env q\
+w(HOST);\nuse Env qw(HOME);\nuse Env qw(USER);\n\n\
+\nopen (F,$ARGV[0]);\nwhile ( <>)\n  {\n    @x=/([\
+^:,;\\)\\(\\s]+):[^:,;\\)\\(]*/g;\n    @list=(@lis\
+t,@x);\n  }\n$n=$#list+1;\nforeach $n(@list){print\
+ \">$n\\nsequence\\n\";}\n\n\nclose (F);\n","\nope\
+n (F, $ARGV[0]);\n\nwhile ( <F>)\n  {\n    @l=($_=\
+~/(\\S+)/g);\n    \n    $name=shift @l;\n    \n   \
+ print STDOUT \"\\n>$name\\n\";\n    foreach $e (@\
+l){$e=($e eq \"0\")?\"O\":\"I\";print \"$e\";}\n  \
+}\nclose (F);\n\n		       \n    \n","use Env qw(HO\
+ST);\nuse Env qw(HOME);\nuse Env qw(USER);\n\n$tmp\
+=\"$ARGV[0].$$\";\nopen (IN, $ARGV[0]);\nopen (OUT\
+, \">$tmp\");\n\nwhile ( <IN>)\n  {\n    $file=$_;\
+\n    $file=~s/\\r\\n/\\n/g;\n    $file=~s/\\n\\r/\
+\\n/g;\n    $file=~s/\\r\\r/\\n/g;\n    $file=~s/\\
+\r/\\n/g;\n    print OUT \"$file\";\n  }\nclose (I\
+N);\nclose (OUT);\n\nopen (OUT, \">$ARGV[0]\");\no\
+pen (IN, \"$tmp\");\n\nwhile ( <IN>)\n{\n  print O\
+UT \"$_\";\n}\nclose (IN);\nclose (OUT);\nunlink (\
+$tmp);\n\n"};

@@ -4254,7 +4254,7 @@ get_cl_param(\
 		       for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
 		       for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 		       sprintf ( emode, "lib_%s", out_lib_mode);
-
+		       
 		       OUT=vfopen (out_lib, "w");
 		       OUT=save_extended_constraint_list(CL,emode,OUT);
 		     }
@@ -4273,11 +4273,11 @@ get_cl_param(\
 	      if (!processed_lib)
 		{
 		  if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
-		   if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
-		   for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
-		   for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
+		  if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
+		  for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
+		  for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 		}
-
+	      
 	      CL=evaluate_constraint_list_reference (CL);
 	      sprintf ( CL->distance_matrix_mode, "%s", distance_matrix_mode);
 	      sprintf ( CL->distance_matrix_sim_mode, "%s", distance_matrix_sim_mode);

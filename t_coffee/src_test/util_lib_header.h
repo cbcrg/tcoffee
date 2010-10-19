@@ -1329,6 +1329,7 @@ FILE * save_constraint_list_bin   ( FILE *OUT,Constraint_list *CL, int start,int
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/		
+Constraint_list * expand_constraint_list (Constraint_list *CL, int T);
 Constraint_list * shrink_constraint_list_indexed (Constraint_list *CL, int T);
 Constraint_list * shrink_constraint_list (Constraint_list *CL);
 Constraint_list * extend_constraint_list ( Constraint_list *CL);

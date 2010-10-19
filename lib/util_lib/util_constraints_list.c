@@ -2974,7 +2974,7 @@ Constraint_list * extend_constraint_list ( Constraint_list *CL)
 	static int *entry;
 	if (!CL || !CL->residue_index || !CL->S)return CL;
 	S=CL->S;
-	
+
 	tmp=vtmpnam (NULL);
 	fp=vfopen (tmp, "w");
 	cache=declare_int (S->nseq, S->max_len+1);
@@ -3008,7 +3008,7 @@ Constraint_list * extend_constraint_list ( Constraint_list *CL)
 					r3=CL->residue_index[s2][r2][b+R2];
 					w3=CL->residue_index[s2][r2][b+WE];
 					
-					if (!cache[s3][r3] )//&& s3>s1)
+					if (!cache[s3][r3] && s3>s1)
 					{
 						int ts,tr;
 						
@@ -3569,7 +3569,6 @@ Constraint_list *aln_file2constraint_list (char *alname, Constraint_list *CL,cha
 {
 	Alignment *A;
 	A=main_read_aln ( alname, NULL);
-	
 	CL=aln2constraint_list (A, CL, weight_mode);
 	free_aln (A);
 	return CL;
@@ -3695,54 +3694,57 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 	}
 	
 	for ( a=0; a<A->nseq-1; a++)
-	{
+	  {
 		if ((s1=fixed[a][0])==-1)continue;
+		
 		for (set_misc=0,b=a+1; b< A->nseq; b++)
 		{
+		  
 			int use_pair;
 			int nres1=0;
 			int nres2=0;
+			
 			if ((s2=fixed[b][0])==-1)continue;
 			weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
 			
 			for (c=0; c< A->len_aln; c++)
-			{
-				int isgap1, isgap2;
-				isgap1=is_gap(A->seq_al[a][c]);
-				isgap2=is_gap(A->seq_al[b][c]);
-				nres1+=!isgap1;
-				nres2+=!isgap2;
+			  {
+			    int isgap1, isgap2;
+			    isgap1=is_gap(A->seq_al[a][c]);
+			    isgap2=is_gap(A->seq_al[b][c]);
+			    nres1+=!isgap1;
+			    nres2+=!isgap2;
+			    
+			    if (cache[c]==-1 && top)continue;
+			    if (!isgap1)cache[c]=1;
+			    if (cache[c] && b==A->nseq-1)cache[c]=-1;
+			    
+			    use_pair=1;
+			    use_pair=use_pair && !is_gap(A->seq_al[a][c]);
+			    use_pair=use_pair && !is_gap(A->seq_al[b][c]);
+			    use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
+			    use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
+			    use_pair=use_pair && !(do_pdb && pdb_weight==0);
+			    use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
+			    
+			    if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
+			    
+			    if (use_pair)
+			      {
 				
-				if (cache[c]==-1 && top)continue;
-				if (!isgap1)cache[c]=1;
-				if (cache[c] && b==A->nseq-1)cache[c]=-1;
+				if ((fixed_nres1=fixed[a][nres1])<0)continue;
+				if ((fixed_nres2=fixed[b][nres2])<0)continue;
 				
-				use_pair=1;
-				use_pair=use_pair && !is_gap(A->seq_al[a][c]);
-				use_pair=use_pair && !is_gap(A->seq_al[b][c]);
-				use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
-				use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
-				use_pair=use_pair && !(do_pdb && pdb_weight==0);
-				use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
-				
-				if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
-				
-				if (use_pair)
-				{
-					
-					if ((fixed_nres1=fixed[a][nres1])<0)continue;
-					if ((fixed_nres2=fixed[b][nres2])<0)continue;
-					
-					entry[SEQ1]=s1;
-					entry[SEQ2]=s2;
-					entry[R1]=fixed_nres1;
-					entry[R2]=fixed_nres2;
-					entry[CONS]=1;
-					if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
-					else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
-					add_entry2list (entry, CL);
-				}
-			}
+				entry[SEQ1]=s1;
+				entry[SEQ2]=s2;
+				entry[R1]=fixed_nres1;
+				entry[R2]=fixed_nres2;
+				entry[CONS]=1;
+				if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
+				else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
+				add_entry2list (entry, CL);
+			      }
+			  }
 		}
 	}
 	vfree (entry);

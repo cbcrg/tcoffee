@@ -3962,6 +3962,9 @@ int  seq_list2fasta_file( Sequence *S,  char *list, char *file, char *outmode)
 	      }
 	    else
 	      {
+		int **list2;
+		int max;
+		
 		l=strlen (list);
 		if ( l>blen)
 		  {
@@ -3971,12 +3974,20 @@ int  seq_list2fasta_file( Sequence *S,  char *list, char *file, char *outmode)
 		    blen=l;
 		  }
 		n=atoi(strtok (list,SEPARATORS));
+		
+		list2=declare_int (n, 2);
+		max=n*1000;
+		for ( a=0; a<n; a++)
+		  {
+		    list2[a][0]=atoi(strtok (NULL, SEPARATORS));
+		    list2[a][1]=rand()%max;
+		  }
+		if ( atoigetenv ("HoT_4_TCOFFEE"))sort_int ( list2,2, 1, 0, n-1);
 		for ( a=0; a< n; a++)
 		  {
-		    s=atoi(strtok (NULL, SEPARATORS));
-		    
-		    if (outmode && strm (outmode, "aln"))fprintf ( fp, ">%s %s\n%s\n", decode_name (S->name[s], CODE), S->name[a],S->seq[s]);
-		    else fprintf ( fp, ">%s %s\n%s\n", S->name[a], S->name[a],S->seq[s]);
+		    int i=list2[a][0];
+		    if (outmode && strm (outmode, "aln"))fprintf ( fp, ">%s %s\n%s\n", decode_name (S->name[i], CODE), S->name[a],S->seq[i]);
+		    else fprintf ( fp, ">%s %s\n%s\n", S->name[a], S->name[a],S->seq[i]);
 		  }
 	      }
 	    vfclose (fp);
@@ -6018,7 +6029,7 @@ char ** name2random_subset (char **in_name, int n_in, int n_out)
   max=n_in*10000;
   out_name=declare_char (n_out,MAXNAMES+1 );
   list=declare_int (n_in, 2);
-    
+  
   for (a=0; a<n_in; a++)
       {
 	list[a][0]=a;
@@ -6026,8 +6037,10 @@ char ** name2random_subset (char **in_name, int n_in, int n_out)
       }
   sort_int ( list,2, 1, 0, n_in-1);
   
-  for ( a=0; a<n_out; a++)
+  for ( a=0; a<n_in; a++)
+  {
     sprintf ( out_name[a], "%s", in_name[list[a][0]]);
+  }
   free_int (list, -1);
   return out_name;
 }
