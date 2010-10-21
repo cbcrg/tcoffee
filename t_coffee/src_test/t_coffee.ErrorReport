@@ -1,110 +1,99 @@
 
 ######### RUN_REPORT      START  ######
 ######### PROGRAM_VERSION START  ######
-          T-COFFEE, Version_8.92
+          T-COFFEE, Version_8.93
 ######### PROGRAM_VERSION END    ######
 ######### COMMAND_LINE    START  ######
-t_coffee r.fasta -mode rcoffee 
+t_coffee ArsA.fas -multi_core no 
 ######### COMMAND_LINE    END    ######
 
 ######### MESSAGES START    ######
 
 
 *************************************************************************************************
-*                        FULL TRACE BACK PID: 20885                                    
-20885 -- ERROR: COREDUMP: T-COFFEE Version_8.92
+*                        FULL TRACE BACK PID: 16084                                    
+16084 -- ERROR: COREDUMP: T-COFFEE Version_8.93
 *************************************************************************************************
 
 ######### MESSAGES END    ######
 
 ######### FILES START     ######
 
-************* Start_File: r.fasta  *************
->D11467.1-6989_6916
-GCAUCCAUGGCUGAAUGGUUAAAGCGCCCAACUCAUAAUUGGCGAACUCGCGGGUUCAAU
-UCCUGCUGGAUGCA
->AC092686.3-29631_29561
-GCAUUGGUGGUUCAGUGGUAGAAUUCUCGCCUGCCACGCGGGAGGCCCGGGUUCGAUUCC
-CGGCCAAUGCA
->X53649.1-160_231
-UGGGCUAUGGUGUAAUUGGCAGCACGACUGAUUCUGGUUCAGUUAGUCUAGGUUCGAGUC
-CUGGUAGCCCAG
->AE008874.1-15640_15730
-GAAGAUCGUCGUCUCCGGUGAGGCGGCUGGACUUCAAAUCCAGUUGGGGCCGCCAGCGGU
-CCCGGGCAGGUUCGACUCCUGUGAUCUUCCG
->X02167.1-268_340
-CUAAAUAUAUUUCAAUGGUUAGCAAAAUACGCUUGUGGUGCGUUAAAUCUAAGUUCGAUU
-CUUAGUAUUUACC
+************* Start_File: ArsA.fas  *************
+>H_sapiens_hASNA-I
+MLLDVEPLEPTLSNIIEQRSLKWIFVGGKGGVGKTTCSCSLAVQLSKGRESVLIISTDPAHNISDAFDQKFSKVPTKVKGYDNLFAMEIDPSLGVADVPDEFFEEDNMLSMGKKMMQEAMSAFPGIDEAMSYAEVMRLVKGMNFSVVVFDTAPTGHTLRLLNFPTIVERGLGRLMQIKNQISPFISQMCNMLGLGDMNADQLASKLEETLPVIRSVSEQFKDPEQTTFICVCIAEFLSLYETERLIQELAKCKIDTHNIIVNQLVFPDPEKPCKMCEARHKIQAKYLDQMEDLYEDFHIVKLPLLPHEVRGADKVNTFSALLLEPYKPPSAQ
+>C_merolae_CMER_CMP235C
+MTFGEGLSNLLSSETLQWIAFTAKGGQGKTTCACATGIQAALRRPNQRVLVISTDPAHNVSDAFGQRFARDPLPVRGYPNLYAMEIDPERDFAETDLGRALLGNGFGGVAADGEEGARAALPGVEDDPFGLSSLVSELISSVPGIDEALSFGQMMKSVQEMTFDLIIFDMAPTGHALKLLSFPAVLEKGLSRLLDLRSRLAPMLNMASSMLRMSGTPDMGATANAFDEEIVGKIEELLSIVRRVDAQFRDPSKTAFVCVCMPEFLSLYETDRLLRELRRMRMTCSNLVINQVLWVADLPSHVPQMPPKYLPVCLPQEPCGWSALTLFQSRVEIQSKYLQQIEDLYAEDFHITRVPMLRNEVRGVDDLRAFGKRLLVDSGIRPLEPAQNSPFEPTLRNVLEARSLELIIASGKGNVGKTTTTSALAIQLAEDTRRQRRVLLVSTDPAHSLSDAFGQNFTVSLSNTQSLSVNDIDEVMRPVRVHGIGGPGILDVLEVDTAHFLQDIGNAVQDTNLSDLAAGATNANDPRTALAAMMLGASPSDIIRDLLQAVPGLDDAIAFTRLMQRIQGLDYDVIVLDTAPTGHTLRLLSFPALLQKGLQKLEEMRQRFAGALSMASSLAESSGLGVGGGRRPDEEIAERLSNMQETILRVVKQFQDPERTTFICVCIAEFLSVYETERLIQDLAEHDIDAHNIVVNQLFPPSATEAERIDMVCARIGMQQKYLREIDELYARDMRLVVLPLEPQEVRGAEALRRFGQRLAS
 
-
-************* End_File: r.fasta  *************
+************* End_File: ArsA.fas  *************
 ######### FILES END  ######
 
 ######### ENVIRONEMENT  ######
-HOME_4_TCOFFEE=/home/cnotredame
+HOME_4_TCOFFEE=/home/cnotredame/
 ORBIT_SOCKETDIR=/tmp/orbit-cnotredame
 HOSTNAME=fedora12
 IMSETTINGS_INTEGRATE_DESKTOP=yes
-MCOFFEE_4_TCOFFEE=/home/cnotredame/.t_coffee/mcoffee/
+MCOFFEE_4_TCOFFEE=/home/cnotredame//.t_coffee//mcoffee/
 SHELL=/bin/bash
 TERM=xterm
 HISTSIZE=1000
-XDG_SESSION_COOKIE=e9b402a1726cb67c2c4484a24b7f1cfb-1277979632.626455-845836942
+XDG_SESSION_COOKIE=e9b402a1726cb67c2c4484a24b7f1cfb-1286540080.181457-1574818556
+LD_PRELOAD=
 GTK_RC_FILES=/etc/gtk/gtkrc:/home/cnotredame/.gtkrc-1.2-gnome2
 OSNAME=linux
 WINDOWID=14680067
 PERL_BIN=/home/cnotredame/Dropbox/projects/c/lib/perl/lib/algorithms::/home/cnotredame/Dropbox/projects/c/lib/perl/lib/debug:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4data_process:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/filters:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4makefile:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/util:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/benchmark:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/scripts:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/stat:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/droit:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/phecomp:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/webservices
-METHODS_4_TCOFFEE=/home/cnotredame/.t_coffee/methods/
+METHODS_4_TCOFFEE=/home/cnotredame//.t_coffee//methods/
 IMSETTINGS_MODULE=none
 http_proxy=
 HTTP_proxy=
 USER=cnotredame
 LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
-SSH_AUTH_SOCK=/tmp/keyring-6lNs3L/socket.ssh
-GNOME_KEYRING_SOCKET=/tmp/keyring-6lNs3L/socket
+SSH_AUTH_SOCK=/tmp/keyring-kuWDCi/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-kuWDCi/socket
 USERNAME=cnotredame
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1849,unix/unix:/tmp/.ICE-unix/1849
-ENV_4_TCOFFEE=/home/cnotredame/.t_coffee/.t_coffee_env
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1875,unix/unix:/tmp/.ICE-unix/1875
+ENV_4_TCOFFEE=/home/cnotredame//.t_coffee//.t_coffee_env
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/home/cnotredame/.t_coffee/plugins/linux:/home/cnotredame/.t_coffee/plugins:/home/cnotredame/bin/linux://home/cnotredame/.t_coffee/plugins/linux:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/algorithms::/home/cnotredame/Dropbox/projects/c/lib/perl/lib/debug:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4data_process:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/filters:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4makefile:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/util:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/benchmark:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/scripts:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/stat:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/droit:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/phecomp:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/webservices:/home/cnotredame/bin/Scripts/:/home/cnotredame/bin/linux://home/cnotredame/.t_coffee/plugins/linux:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/algorithms::/home/cnotredame/Dropbox/projects/c/lib/perl/lib/debug:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4data_process:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/filters:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4makefile:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/util:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/benchmark:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/scripts:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/stat:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/droit:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/phecomp:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/webservices:/home/cnotredame/bin/Scripts/:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/cnotredame/bin
+PATH=/home/cnotredame//.t_coffee//plugins/linux/:/home/cnotredame/.t_coffee/plugins:/home/cnotredame/bin/linux://home/cnotredame/.t_coffee/plugins/linux:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/algorithms::/home/cnotredame/Dropbox/projects/c/lib/perl/lib/debug:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4data_process:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/filters:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4makefile:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/util:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/benchmark:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/scripts:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/stat:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/droit:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/phecomp:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/webservices:/home/cnotredame/bin/Scripts/:/home/cnotredame/bin/linux://home/cnotredame/.t_coffee/plugins/linux:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/algorithms::/home/cnotredame/Dropbox/projects/c/lib/perl/lib/debug:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4data_process:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/filters:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4makefile:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/util:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/benchmark:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/scripts:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/stat:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/droit:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/phecomp:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/webservices:/home/cnotredame/bin/Scripts/:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/cnotredame/bin
 MAIL=/var/spool/mail/cnotredame
 DESKTOP_SESSION=gnome
 _=/usr/bin/printenv
 QT_IM_MODULE=xim
-DIR_4_TCOFFEE=/home/cnotredame/.t_coffee
-PWD=/mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test
-CACHE_4_TCOFFEE=/home/cnotredame/.t_coffee/cache/
+DIR_4_TCOFFEE=/home/cnotredame//.t_coffee/
+PWD=/mnt/hgfs/cnotredame/projects/c/t_coffee/src_test
+CACHE_4_TCOFFEE=/home/cnotredame//.t_coffee//cache/
 XMODIFIERS=@im=none
 GDM_KEYBOARD_LAYOUT=us
-GNOME_KEYRING_PID=1842
+GNOME_KEYRING_PID=1868
 LANG=en_US.UTF-8
 GDM_LANG=en_US.UTF-8
 GDMSESSION=gnome
 HISTCONTROL=ignoreboth
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
-PLUGINS_4_TCOFFEE=/home/cnotredame/.t_coffee/plugins/linux
+PLUGINS_4_TCOFFEE=/home/cnotredame//.t_coffee//plugins/linux/
 SHLVL=3
 HOME=/home/cnotredame
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 HTTP_PROXY=
-MAFFT_BINARIES=/home/cnotredame/.t_coffee/plugins/linux
+MAFFT_BINARIES=/home/cnotredame//.t_coffee//plugins/linux/
 BIN=/home/cnotredame/bin/linux
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=
-DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-80SixBy9fW,guid=81b2995a035a69e48a8ea8e34c2c6bf0
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-aaqR3NJ1aX,guid=82c56af8e77dbf9a947f92454caf0b30
 LESSOPEN=|/usr/bin/lesspipe.sh %s
 EMAIL=
 UPDATED_ENV_4_TCOFFEE=1
 DISPLAY=:0.0
 NUMBER_OF_PROCESSORS=4
 ALL_proxy=
-LOCKDIR_4_TCOFFEE=/var/tmp
+LOCKDIR_4_TCOFFEE=/var/tmp/
 G_BROKEN_FILENAMES=1
-TMP_4_TCOFFEE=/var/tmp
+TMP_4_TCOFFEE=/var/tmp/
 COLORTERM=gnome-terminal
 USER_BIN=/home/cnotredame/bin/linux
-XAUTHORITY=/var/run/gdm/auth-for-cnotredame-ULB2WB/database
+XAUTHORITY=/var/run/gdm/auth-for-cnotredame-YiRMb5/database
 SCRIPT_BIN=/home/cnotredame/bin/Scripts/

@@ -1503,6 +1503,7 @@ char*  is_pdb_struc ( char *name)
 
      static char *file_name1;
      static char *file_name2;
+          
      static char **buf_names;
      static char **buf_result;
      static int   nbuf, s;
@@ -1530,29 +1531,18 @@ char*  is_pdb_struc ( char *name)
      r=NULL;
      sprintf ( file_name1, "%s", name);
      sprintf ( file_name2, "%s.pdb", name);
-
-
+     
+     
      if (is_pdb_file(file_name1)){r=file_name1;}
      else if (is_pdb_file(file_name2)){r=file_name2;}
      else if (is_pdb_name (name))
        {
-	 char *tmpname;
-	 tmpname=vtmpnam (NULL);
-
-
-	 sprintf ( file_name2, "%s.pdb", name);
-	 /*sprintf ( command, "extract_from_pdb -netfile \'%s\' > %s%s 2>/dev/null",name, get_cache_dir(), file_name2);*/
-	 sprintf ( command, "extract_from_pdb -netfile \'%s\' > %s 2>/dev/null",name,tmpname);
-	 if ( getenv4debug ("DEBUG_EXTRACT_FROM_PDB"))fprintf ( stderr, "\n[DEBUG_EXTRACT_FROM_PDB:is_pdb_struc] %s\n", command);
-	 my_system (command);
-	 
-	 sprintf ( command, "cp %s %s%s", tmpname, get_cache_dir(), file_name2);
-	 my_system (command);
-	 
+	 printf_system ("extract_from_pdb -netfile \'%s\' > %s/%s 2>/dev/null",name, get_cache_dir(), file_name2);
 	 if ( is_pdb_file(file_name2))r=file_name2; 
 	 else r=NULL;	 
-
+	 
        }
+     
 
       /*Fill the buffer*/
      buf_names[nbuf]=vcalloc ( strlen (name)+1, sizeof (char)); 
@@ -1649,37 +1639,33 @@ int is_pdb_file ( char *name)
        {
 	 FILE *fp;
 	 int ispdb=0;
-
+	 
 	 if ( name==NULL) return 0;
 	 if (!check_file_exists (name))return 0;
-       
-              
-	
-       if ((fp=find_token_in_file (name, NULL, "\nHEADER"))!=NULL)
+	 
+	 if ((fp=find_token_in_file (name, NULL, "\nHEADER"))!=NULL)
            {vfclose (fp);
 	     ispdb++; 
 	   }
-       if ((fp=find_token_in_file (name, NULL, "\nSEQRES"))!=NULL)
-           {vfclose (fp);
-	  
+	 if ((fp=find_token_in_file (name, NULL, "\nSEQRES"))!=NULL)
+           {
+	     vfclose (fp);
 	     ispdb++;
 	   }
-       
-       if ((fp=find_token_in_file (name, NULL, "\nATOM"))!=NULL)
-	 {
-	   vfclose (fp);
-	   ispdb++;
-	  
-	 }
-       else
-	 {
-	   ispdb=0;
-	 }
-
 	 
-
-       if ( ispdb>=2)return 1;
-       else return 0;
+	 if ((fp=find_token_in_file (name, NULL, "\nATOM"))!=NULL)
+	   {
+	     vfclose (fp);
+	     ispdb++;
+	   }
+	 else
+	   {
+	     ispdb=0;
+	   }
+	 
+	 
+	 if ( ispdb>=2)return 1;
+	 else return 0;
        }
 int is_seq ( char *name)
        {

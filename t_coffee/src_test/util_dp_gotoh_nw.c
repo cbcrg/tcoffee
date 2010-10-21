@@ -1341,6 +1341,8 @@ int list2nodup_list ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int 
   
   if ( !A)return 0;
   
+  
+  sort_list_int (list,7, 1, 0, n-1);
   for (b=a=1; a<n; a++)
     {
       if (list[a][0]==list[b-1][0] && list[a][1]==list[b-1][1])
@@ -1675,7 +1677,6 @@ int cl2list_borders   (Alignment *A, int *ns, int **ls, Constraint_list *CL, int
 
   l1=strlen (A->seq_al[ls[0][0]]);
   l2=strlen (A->seq_al[ls[1][0]]);
-//    pos=aln2pos_simple ( A,-1, ns, ls);
 
   for (p1=0; p1<=l1; p1++)
     {
@@ -1688,7 +1689,6 @@ int cl2list_borders   (Alignment *A, int *ns, int **ls, Constraint_list *CL, int
 	      list[n][0]=p1;
 	      list[n][1]=p2;
 	      list[n][3]=(l1-(p1))+(p2);
-	      //list[n][2]=(p1==0||p2==0)?0:(CL->get_dp_cost) (A, pos, ns[0], ls[0], p1-1, pos, ns[1], ls[1],p2-1,CL);;
 	      list[n][2]=(CL->gep)*SCORE_K*p2;
 	      n++;
 	    }
@@ -1703,208 +1703,134 @@ int cl2list_borders   (Alignment *A, int *ns, int **ls, Constraint_list *CL, int
 	      list[n][0]=p1;
 	      list[n][1]=p2;
 	      list[n][3]=(l1-(p1))+(p2);
-	      //list[n][2]=(p1==0||p2==0)?0:(CL->get_dp_cost) (A, pos, ns[0], ls[0], p1-1, pos, ns[1], ls[1],p2-1,CL);;
 	      list[n][2]=(CL->gep)*SCORE_K*p1;
 	      n++;
 	    }
 	}
     }
-//   free_int (pos, -1);
   list_in[0]=list;
   n_in[0]=n;
   return read_array_size (list, sizeof (int*));
 }
-
-int cl2diag_cap (Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+int addE (int i, int j, int d, int s, int ***list, int *n);
+int addE (int i, int j, int d, int s, int ***list, int *n)
 {
-  int **list;
-  int n, in, a, b, al1, al2;
+  int max_n;
+  max_n=read_array_size (list[0], sizeof (int*));
+  if (n[0]==max_n){max_n+=1000;list[0]=vrealloc (list[0], max_n*sizeof (int*));}
+  if (!list[0][n[0]])list[0][n[0]]=vcalloc (7, sizeof (int));
+  list[0][n[0]][0]=i;
+  list[0][n[0]][1]=j;
+  list[0][n[0]][3]=d;
+  list[0][n[0]][2]=s;
+  n[0]++;
+  return n[0];
+}
+int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***list, int *n)
+{
+  int *sortseq;
+  
+  int in, a, b, al1, al2;
   int max_n;
   int cap=0;
+  int k=0;
   
-  if (!A) return 0;
+  static int *term;
+  static int *start;
+  static int max_term;
+  static int max_start;
+
+  int ns=0;
+  int nt=0;
+  int i,j,si,sj,ti,tj,d;
+  int nterm;
   
+  if ( !A)
+    {
+      vfree (term); max_term=0;
+      vfree (start);max_start=0;
+    }
   al1=strlen (A->seq_al[ls[0][0]]);
   al2=strlen (A->seq_al[ls[1][0]]);
+    
+  sortseq=vcalloc (7, sizeof (int));
+  sortseq[0]=3;sortseq[1]=0;sortseq[2]=-1;
+  sort_list_int2 (list[0], sortseq,4, 0, n[0]-1);
+  vfree(sortseq);
+  in=n[0];
   
-  list=list_in[0];
-  n=n_in[0];
-  max_n=read_array_size (list, sizeof (int*));
   
   
-  
-  
-  for (a=0; a< n; a++)
-    {
-      b=list[a][3];
-      list[a][3]=list[a][0];
-      list[a][0]=b;
-      
-    }
-  sort_list_int (list, 4, 1, 0, n-1);
-  for (a=0; a< n; a++)
-    {
-      b=list[a][3];
-      list[a][3]=list[a][0];
-      list[a][0]=b;
-    }
-  
-
-  in=n;
+  if (!term){max_term=100;term=vcalloc (max_term, sizeof (int));}
+  if (!start){max_start=100;start=vcalloc(max_start,sizeof(int));}
   
   for (a=0; a<in; a++)
     {
       int i, j, pi, pj, ni, nj;
-      if (list[a][2]==0)continue;
-      i=list[a][0];
-      j=list[a][1];
+      if (list[0][a][2]==0)continue;//this is where borders are eliminated
+      i=list[0][a][0];
+      j=list[0][a][1];
       
       if (a==0){pi=-10;pj=-10;}
-      else {pi=list[a-1][0];pj=list[a-1][1];}
+      else {pi=list[0][a-1][0];pj=list[0][a-1][1];}
       
       if (a==in-1){ni=-10; nj=-10;}
-      else {ni=list[a+1][0]; nj=list[a+1][1];}
+      else {ni=list[0][a+1][0]; nj=list[0][a+1][1];}
       
       
-      if (i==0 || j==0);
+      if ((i==0 || j==0));
       else if ( i==pi || j==pj);
       else if ( i-pi!=1 || j-pj!=1)
 	{
-	  
-	  
-	  int x;
-	  int delta=MAX((i-pi),(j-pj));
-	  for (x=1; x<=delta; x++)
-	    {
-	      if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
-	      if (!list[n])list[n]=vcalloc (7, sizeof (int));
-	      if ((i-x)<=1)continue;
-	      if ((j-x)<=1)continue;
-	      list[n][0]=i-x;
-	      list[n][1]=j-x;
-	      list[n][3]=list[a][3];
-	      list[n][2]=cap;
-	      n++;
-	    }
+	  if (ns>=max_start){max_start+=1000;start=vrealloc (start, max_start*sizeof (int));}
+	  start[ns++]=a;
 	}
-    
-    
+          
       if (i==al1 || j==al2);
       else if ( i==ni || j==nj);
       else if ( ni-i!=1 || nj-j!=1)
 	{
-	  int x;
-	  int delta=MAX((ni-i),(nj-j));
-	  for (x=1; x<=delta; x++)
-	    {
-		if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
-		if (!list[n])list[n]=vcalloc (7, sizeof (int));
-		
-		if (i+x>=al1)continue;
-		if (j+x>=al2) continue;
-		
-		
-		list[n][0]=i+x;
-		list[n][1]=j+x;
-		list[n][3]=list[a][3];
-		list[n][2]=cap;
-		n++;
-	      }
-	  
+	  if (nt>=max_term){max_term+=1000;term=vrealloc (term, max_term*sizeof (int));}
+	  term[nt++]=a;
 	}
-    
     }
-  list_in[0]=list;
-  n_in[0]=n;
-  return n;
+  for (a=0; a<nt; a++)
+    {
+      int best_d=-1;
+      int best_s= 0;
+      i=list[0][term[a]][0];
+      j=list[0][term[a]][1];
+      for (b=0; b<ns; b++)
+	{
+	  si=list[0][start[b]][0];
+	  sj=list[0][start[b]][1];
+	  
+	  d=MIN((si-i),(sj-j));
+	  if (d<=0)continue;
+	  else if (best_d==-1 || best_d>d){best_d=d; best_s=start[b];}
+	}
+      if ( best_d==-1)continue;
+      
+      si=list[0][best_s][0];
+      sj=list[0][best_s][1];
+      ti=i;
+      tj=j;
+      
+
+
+      for (i=ti, j=tj; (i<=si && j<=sj); i++, j++)//extend the top diagonal
+	{
+	  addE(i,j,al1-i+j,cap, list,n);
+	}
+      
+      for (i=si, j=sj; (i>=ti && j>=tj); i--, j--)//extend the bottom diagonal
+	{
+	  addE(i,j,al1-i+j,cap, list,n);
+	}
+    }
+  return n[0];
 }
 
-int cl2diag_cap_old (Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
-{
-  int **list;
-  int n, in, a, b, al1, al2;
-  int max_n;
-  int cap=0;
-  
-  if (!A) return 0;
-  
-  al1=strlen (A->seq_al[ls[0][0]]);
-  al2=strlen (A->seq_al[ls[1][0]]);
-  
-  list=list_in[0];
-  n=n_in[0];
-  max_n=read_array_size (list, sizeof (int*));
-  
-  
-  
-  
-  for (a=0; a< n; a++)
-    {
-      b=list[a][3];
-      list[a][3]=list[a][0];
-      list[a][0]=b;
-      
-    }
-  sort_list_int (list, 4, 1, 0, n-1);
-  for (a=0; a< n; a++)
-    {
-      b=list[a][3];
-      list[a][3]=list[a][0];
-      list[a][0]=b;
-    }
-  
-
-  in=n;
-  
-  for (a=0; a<in; a++)
-    {
-      int i, j, pi, pj, ni, nj;
-      if (list[a][2]==0)continue;
-      i=list[a][0];
-      j=list[a][1];
-      
-      if (a==0){pi=-10;pj=-10;}
-      else {pi=list[a-1][0];pj=list[a-1][1];}
-      
-      if (a==in-1){ni=-10; nj=-10;}
-      else {ni=list[a+1][0]; nj=list[a+1][1];}
-      
-      
-      if (i==0 || j==0);
-      else if ( i==pi || j==pj);
-      else if ( i-pi!=1 || j-pj!=1)
-	{
-	  
-	  if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
-	  if (!list[n])list[n]=vcalloc (7, sizeof (int));
-	  
-	  list[n][0]=i-1;
-	  list[n][1]=j-1;
-	  list[n][3]=list[a][3];
-	  list[n][2]=cap;
-	  n++;
-	}
-    
-    
-      if (i==al1 || j==al2);
-      else if ( i==ni || j==nj);
-      else if ( ni-i!=1 || nj-j!=1)
-	{
-	  if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
-	  if (!list[n])list[n]=vcalloc (7, sizeof (int));
-	  
-	  list[n][0]=i+1;
-	  list[n][1]=j+1;
-	  list[n][3]=list[a][3];
-	  list[n][2]=cap;
-	  n++;
-	}
-    
-    }
-  list_in[0]=list;
-  n_in[0]=n;
-  return n;
-}
 	  
 int cl2pair_list_diag_mat ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add );
 int cl2pair_list_diag_cl ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add );	  
@@ -3051,8 +2977,8 @@ int linked_pair_wise ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL)
   static int **list=NULL;
   int score, a;
   int *ns, **ls;
-  int mode=1;//1:ecl, 0:ref
-
+  
+  if ( !A)free_int (list, -1);
   if ( !CL->residue_index)return myers_miller_pair_wise (A, nsi,lsi,CL);
   
 
@@ -3066,13 +2992,18 @@ int linked_pair_wise ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL)
   for (a=0; a<ns[0]; a++)
     ls[0][a]=lsi[1][a];
   
- 
+  /*Prepare the list*/
   
-  cl2pair_list (A,ns, ls, CL, &list, &n, mode, 0);
-    
+  cl2list_borders     (A, ns, ls, CL, &list, &n);
+  cl2pair_list_ecl_pc (A, ns, ls, CL, &list, &n);
+  cl2diag_cap (A, ns, ls, CL, &list, &n);
+  list2nodup_list (A, ns, ls, CL, &list, &n);
+  
+  /*Do the DP*/
   score=list2linked_pair_wise (A, ns, ls, CL, list, n);
-  cl2pair_list (NULL,ns, ls, CL, &list, &n, mode, 0);
- 
+  
+  /*Free the list*/
+  free_int (ls, -1);vfree (ns);
   return score;
 }
  

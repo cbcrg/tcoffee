@@ -4318,20 +4318,20 @@ char *get_home_4_tcoffee ()
   if ( home_4_tcoffee[0])return home_4_tcoffee;
   else if ( check_dir_getenv ("HOME_4_TCOFFEE"))
     {
-      sprintf (home_4_tcoffee, "%s", getenv ("HOME_4_TCOFFEE"));
+      sprintf (home_4_tcoffee, "%s/", getenv ("HOME_4_TCOFFEE"));
     }
   else if ( check_dir_getenv ("HOME"))
     {
-      sprintf (home_4_tcoffee, "%s", getenv ("HOME"));
-      sprintf (home, "%s", home_4_tcoffee);
+      sprintf (home_4_tcoffee, "%s/", getenv ("HOME"));
+      sprintf (home, "%s/", home_4_tcoffee);
     }
   else if ( check_dir_getenv ("TMP"))
     {
-      sprintf (home_4_tcoffee, "%s", getenv ("TMP"));
+      sprintf (home_4_tcoffee, "%s/", getenv ("TMP"));
     }
   else if (check_dir_getenv ("TEMP"))
     {
-      sprintf (home_4_tcoffee, "%s", getenv ("TEMP"));
+      sprintf (home_4_tcoffee, "%s/", getenv ("TEMP"));
     }
   else 
     {
@@ -4348,9 +4348,9 @@ char *get_dir_4_tcoffee()
   if (dir_4_tcoffee[0])return dir_4_tcoffee;
   else
     {
-      if ( getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (dir_4_tcoffee, "%s", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if ( getenv ("DIR_4_TCOFFEE"))sprintf (dir_4_tcoffee, "%s", getenv("DIR_4_TCOFFEE"));
-      else sprintf ( dir_4_tcoffee, "%s/.t_coffee",get_home_4_tcoffee());
+      if ( getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (dir_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
+      else if ( getenv ("DIR_4_TCOFFEE"))sprintf (dir_4_tcoffee, "%s/", getenv("DIR_4_TCOFFEE"));
+      else sprintf ( dir_4_tcoffee, "%s/.t_coffee/",get_home_4_tcoffee());
       my_mkdir (dir_4_tcoffee);
     }
   return dir_4_tcoffee;
@@ -4363,8 +4363,8 @@ char *get_tmp_4_tcoffee ()
   else
     {
       
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if ( getenv ("TMP_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s", getenv("TMP_4_TCOFFEE"));
+      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
+      else if ( getenv ("TMP_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP_4_TCOFFEE"));
       else
 	{
 
@@ -4374,10 +4374,10 @@ char *get_tmp_4_tcoffee ()
 	      sprintf ( tmp_4_tcoffee, ".TCtmp");
 	    }
 	  else if (isdir("/var/tmp"))
-	    sprintf (tmp_4_tcoffee, "/var/tmp");
+	    sprintf (tmp_4_tcoffee, "/var/tmp/");
 	  else
 	    {
-	    sprintf ( tmp_4_tcoffee, "%s/tmp", get_dir_4_tcoffee());
+	    sprintf ( tmp_4_tcoffee, "%s/tmp/", get_dir_4_tcoffee());
 	    }
 	}
       
@@ -4394,8 +4394,8 @@ char *get_cache_4_tcoffee ()
   if ( cache_4_tcoffee[0])return cache_4_tcoffee;
   else
     {
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (cache_4_tcoffee, "%s", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if ( getenv ("CACHE_4_TCOFFEE"))sprintf (cache_4_tcoffee, "%s", getenv("CACHE_4_TCOFFEE"));
+      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (cache_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
+      else if ( getenv ("CACHE_4_TCOFFEE"))sprintf (cache_4_tcoffee, "%s/", getenv("CACHE_4_TCOFFEE"));
       else sprintf ( cache_4_tcoffee, "%s/cache/", get_dir_4_tcoffee());
       
       my_mkdir(cache_4_tcoffee); /*Do not use mkdir: not yet initialized*/
@@ -4409,8 +4409,8 @@ char *get_mcoffee_4_tcoffee ()
   if ( mcoffee_4_tcoffee[0])return mcoffee_4_tcoffee;
   else
     {
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (mcoffee_4_tcoffee, "%s", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if ( getenv ("MCOFFEE_4_TCOFFEE"))sprintf (mcoffee_4_tcoffee, "%s", getenv("MCOFFEE_4_TCOFFEE"));
+      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (mcoffee_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
+      else if ( getenv ("MCOFFEE_4_TCOFFEE"))sprintf (mcoffee_4_tcoffee, "%s/", getenv("MCOFFEE_4_TCOFFEE"));
       else sprintf ( mcoffee_4_tcoffee, "%s/mcoffee/", get_dir_4_tcoffee());
       my_mkdir (mcoffee_4_tcoffee);
     }
@@ -4422,8 +4422,8 @@ char *get_methods_4_tcoffee ()
   if ( methods_4_tcoffee[0])return methods_4_tcoffee;
   else
     {
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (methods_4_tcoffee, "%s", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if ( getenv ("METHODS_4_TCOFFEE"))sprintf (methods_4_tcoffee, "%s", getenv("METHODS_4_TCOFFEE"));
+      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (methods_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
+      else if ( getenv ("METHODS_4_TCOFFEE"))sprintf (methods_4_tcoffee, "%s/", getenv("METHODS_4_TCOFFEE"));
       else sprintf ( methods_4_tcoffee, "%s/methods/", get_dir_4_tcoffee());
       my_mkdir (methods_4_tcoffee);
     }
@@ -4436,9 +4436,9 @@ char *get_plugins_4_tcoffee ()
   if ( plugins_4_tcoffee[0])return plugins_4_tcoffee;
   else
     {
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (plugins_4_tcoffee, "%s", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if (isdir4path (getenv("PLUGINS_4_TCOFFEE")))sprintf (plugins_4_tcoffee, "%s", getenv("PLUGINS_4_TCOFFEE"));
-      else sprintf (plugins_4_tcoffee, "%s/plugins/%s", get_dir_4_tcoffee(), get_os());
+      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (plugins_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
+      else if (isdir4path (getenv("PLUGINS_4_TCOFFEE")))sprintf (plugins_4_tcoffee, "%s/", getenv("PLUGINS_4_TCOFFEE"));
+      else sprintf (plugins_4_tcoffee, "%s/plugins/%s/", get_dir_4_tcoffee(), get_os());
       my_mkdir(plugins_4_tcoffee);
     }
   return plugins_4_tcoffee;
@@ -4457,13 +4457,13 @@ char *get_lockdir_4_tcoffee ()
   else
     {
       
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (lockdir_4_tcoffee, "%s", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if (v && strstr (v, "TMP"))sprintf (lockdir_4_tcoffee, "%s", getenv("TMP_4_TCOFFEE"));
-      else if (v && strstr (v, "LOCAL"))sprintf (lockdir_4_tcoffee, "%s", getcwd(NULL,0));
-      else if (v && strstr (v, "."))sprintf (lockdir_4_tcoffee, "%s", getcwd(NULL,0));
+      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (lockdir_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
+      else if (v && strstr (v, "TMP"))sprintf (lockdir_4_tcoffee, "%s/", getenv("TMP_4_TCOFFEE"));
+      else if (v && strstr (v, "LOCAL"))sprintf (lockdir_4_tcoffee, "%s/", getcwd(NULL,0));
+      else if (v && strstr (v, "."))sprintf (lockdir_4_tcoffee, "%s/", getcwd(NULL,0));
       else if (v)sprintf (lockdir_4_tcoffee, "%s", v);
-      else if (isdir("/var/tmp"))sprintf (lockdir_4_tcoffee, "/var/tmp");
-      else sprintf (lockdir_4_tcoffee, "%s", getcwd(NULL,0));
+      else if (isdir("/var/tmp"))sprintf (lockdir_4_tcoffee, "/var/tmp/");
+      else sprintf (lockdir_4_tcoffee, "%s/", getcwd(NULL,0));
       
       my_mkdir(lockdir_4_tcoffee);
     }
@@ -6821,7 +6821,7 @@ int file_exists (char *path, char *fname)
 {
   struct stat s;
   char file[1000];
-  
+
   if (!fname)return 0;
   else if (path && strm (path, "CACHE"))
     {
