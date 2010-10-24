@@ -1010,8 +1010,6 @@ int compare_pos_column( int **pos1,int p1, int **pos2,int p2, int nseq)
     {
     int a,v1, v2;
     int identical=0;
-
-
     
     for ( a=0; a< nseq; a++)
 	{

@@ -69,7 +69,7 @@ int aln_compare ( int argc, char *argv[])
  int **posB;
  int **seq_cache;
  int is_same;
- int n;
+ int *correct_column;
 /*RESULTS_VARIABLES*/
     int **tot_count;
     int **pos_count;
@@ -501,22 +501,26 @@ if ( aln_compare==1)pep_compare=0;
 		  
 		}
 	    }
-       else if ( strm( compare_mode, "column"))
+       else if ( strm( compare_mode, "column") )
 	    {
 	      int *entry;
 	      posA=aln2pos_simple_2(A);
 	      posB=aln2pos_simple_2(B);
 	      seq_cache=declare_int ( A->nseq, A->len_aln+1);
-	      for ( n=0,a=0; a< A->len_aln; a++)
+	      for ( a=0; a< A->len_aln; a++)
 		for ( b=0; b<B->len_aln; b++)
 		  {
-		    is_same=compare_pos_column(posA, a, posB, b, A->nseq);
-		    
-		    n+=is_same;
-		    if (is_same)
-		      {
-			for (c=0; c< A->nseq;c++)if ( posA[c][a]>0)seq_cache[c][posA[c][a]]=1;
-		      }
+		    is_same=compare_pos_column(posA, a, posB, b, A->nseq);    
+		    if(is_same)
+		    {
+		      for (c=0; c< A->nseq;c++)
+			  {
+			    if(posA[c][a]>0)
+			    {
+				seq_cache[c][posA[c][a]]=1;
+			    }
+			  }
+		    }
 		  }
 	      
 	      while (entry=extract_entry (CL_A))
@@ -531,14 +535,31 @@ if ( aln_compare==1)pep_compare=0;
 		  pw_glob[s1][s2]++;
 		  pw_glob[s2][s1]++;
 		  
-		  if (seq_cache[s1][r1]){entry[MISC]=1;add_entry2list (entry, CL_A);}
+		  if (seq_cache[s1][r1])
+		  {
+		     entry[MISC]=1;
+		     add_entry2list (entry, CL_A);
+		  }
 		}
 	      free_int (posA, -1);
 	      free_int (posB, -1);
-	      free_int (seq_cache, -1);
-	      
-	    }
-      
+	      free_int (seq_cache, -1);      
+	    }	
+	else if ( strm( compare_mode, "tc") )
+	{
+	      correct_column = vcalloc(A->len_aln+1, sizeof (int));
+	      posA=aln2pos_simple_2(A);
+	      posB=aln2pos_simple_2(B);
+	      for ( a=0; a< A->len_aln; a++)
+		for ( b=0; b<B->len_aln; b++)
+		  {
+		    is_same = compare_pos_column(posA, a, posB, b, A->nseq);
+		    if(is_same)
+		      correct_column[a] = is_same;
+		  }
+	      free_int (posB, -1);
+	}
+	
        for ( a=0; a< n_structure; a++)
            {
 	       ST=read_structure (struct_file[a],struct_format[a], A,B,ST,n_symbol[a], symbol_list[a]); 
@@ -554,48 +575,93 @@ if ( aln_compare==1)pep_compare=0;
     
        pw_pos_count=vcalloc ( A->nseq, sizeof (int**));
        for ( a=0; a< A->nseq; a++)pw_pos_count[a]=declare_int ( A->nseq, n_categories);
+ 
+     /*COMPARISON MODULE*/
+	if (strm( compare_mode, "tc") )
+	{
+	  int column_is_structure;
+	  int pair_is_structure;
 
-     /*COMPARISON MODULE*/     
-       for ( a=0; a< n_categories; a++)
-           {
-	     int *entry;
-	     while (entry=extract_entry (CL_A))
+	  for ( a=0; a< n_categories; a++)
+           {     
+	     for(b = 0; b < A->len_aln; b++)
+	     {
+	       column_is_structure = 1;
+	       pair_is_structure = 0;
+	       for (s1=0; s1< A->nseq-1; s1++)
 	       {
-		 s1=entry[SEQ1];
-		 s2=entry[SEQ2];
-		 r1=entry[R1];
-		 r2=entry[R2];
-		 c= entry[MISC];
-		 if ( is_in_struct_category ( s1, s2, r1, r2, ST, category[a], n_sub_categories[a]))
-		   {
-		     
-		     tot_count[a][0]++;
-		     tot_count[a][s1+1]++;
-		     tot_count[a][s2+1]++;
-		     pw_tot_count[s1][s2][a]++;
-		     pw_tot_count[s2][s1][a]++;
-		     if ( c==1)
-		       {
-			 pw_pos_count[s1][s2][a]++;
-			 pw_pos_count[s2][s1][a]++;
-			 pos_count[a][0]++;
-			 pos_count[a][s1+1]++;
-			 pos_count[a][s2+1]++;
-		       }
+		 for(s2=s1+1; s2 < A->nseq; s2++)
+		 {
+		   if ((posA[s1][b]>0) && (posA[s2][b]>0))
+		   {  
+		     pair_is_structure=is_in_struct_category(s1,s2,posA[s1][b],posA[s2][b],ST,category[a], n_sub_categories[a]);     
+		     column_is_structure = (column_is_structure && pair_is_structure);
+		     if(pair_is_structure)
+		     {
+			tot_count[a][s1+1]++;
+			tot_count[a][s2+1]++;
+			pw_tot_count[s1][s2][a]++;
+			pw_tot_count[s2][s1][a]++;
+			if (correct_column[b])
+			  {
+			    pw_pos_count[s1][s2][a]++;
+			    pw_pos_count[s2][s1][a]++;
+			    pos_count[a][s1+1]++;
+			    pos_count[a][s2+1]++;
+			  }
+		     }
 		   }
-		 
-	       }
+		 }
+	       }	       
+		if(column_is_structure && pair_is_structure)
+		{
+		 tot_count[a][0]++;
+		 if(correct_column[b]) 
+		 {
+		   pos_count[a][0]++;
+		 }
+		}
+	     }
 	   }
-       
-   
-		    
-       
-	       
+	   free_int (posA, -1);
+	}
+	else
+	{
+	/*COMPARISON MODULE*/
+	  int *entry;
+	  for ( a=0; a< n_categories; a++)
+	      {
+		while (entry=extract_entry (CL_A))
+		  {
+		    s1=entry[SEQ1];
+		    s2=entry[SEQ2];
+		    r1=entry[R1];
+		    r2=entry[R2];
+		    c= entry[MISC];
+		    if ( is_in_struct_category ( s1, s2, r1, r2, ST, category[a], n_sub_categories[a]))
+		      {
+			    tot_count[a][0]++;
+			    tot_count[a][s1+1]++;
+			    tot_count[a][s2+1]++;
+			    pw_tot_count[s1][s2][a]++;
+			    pw_tot_count[s2][s1][a]++;
+			    if ( c==1)
+			      {
+				pw_pos_count[s1][s2][a]++;
+				pw_pos_count[s2][s1][a]++;
+				pos_count[a][0]++;
+				pos_count[a][s1+1]++;
+				pos_count[a][s2+1]++;
+			      }
+			}
+		      }
+		  }
+	}
+// 	printf("pos=%d,tot=%d\n", pos_count[0][0], tot_count[0][0]);
     /*Measure of Aligned Sequences Similarity*/
     
        sim=get_aln_compare_sim ((strcmp (sim_aln, "al1")==0)?A:B, ST,sim_category[0], sim_n_sub_categories[0], sim_matrix);
        sim_param=analyse_sim ((strcmp (sim_aln, "al1")==0)?A:B, sim);
-
 
    /*Fill the Result_structure*/
        R=vcalloc ( 1, sizeof (Result));
