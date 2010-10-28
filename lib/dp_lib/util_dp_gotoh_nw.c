@@ -1726,6 +1726,120 @@ int addE (int i, int j, int d, int s, int ***list, int *n)
   n[0]++;
   return n[0];
 }
+
+int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***list, int *n)
+{
+  int *sortseq;
+  
+  int in, a, b, al1, al2;
+  int max_n;
+  int cap=0;
+  int k=0;
+  
+  static int **ll;
+  static int max_ll;
+  int nll=0;
+
+  int ns=0;
+  int nt=0;
+  int i,j,si,sj,ti,tj;
+    
+  if ( !A)vfree (ll);max_ll=0;
+
+  al1=strlen (A->seq_al[ls[0][0]]);
+  al2=strlen (A->seq_al[ls[1][0]]);
+    
+  sortseq=vcalloc (7, sizeof (int));
+  sortseq[0]=3;sortseq[1]=0;sortseq[2]=-1;
+  sort_list_int2 (list[0], sortseq,4, 0, n[0]-1);
+  vfree(sortseq);
+  in=n[0];
+  
+  
+  
+  if (!ll){max_ll=100;ll=vcalloc(max_ll,sizeof(int*));}
+  
+  for (a=0; a<in; a++)
+    {
+      int i, j, pi, pj, ni, nj;
+      if (list[0][a][2]==0)continue;//this is where borders are avoided
+      i=list[0][a][0];
+      j=list[0][a][1];
+      
+      if (a==0){pi=-10;pj=-10;}
+      else {pi=list[0][a-1][0];pj=list[0][a-1][1];}
+      
+      if (a==in-1){ni=-10; nj=-10;}
+      else {ni=list[0][a+1][0]; nj=list[0][a+1][1];}
+      
+      
+      if ((i==0 || j==0));
+      else if ( i==pi || j==pj);
+      else if ( i-pi!=1 || j-pj!=1)
+	{
+	  if (nll>=max_ll){max_ll+=1000;ll=vrealloc (ll, max_ll*sizeof (int*));}
+	  ll[nll++]=list[0][a];
+	  list[0][a][6]=_START;
+	}
+      
+      if (i==al1 || j==al2);
+      else if ( i==ni || j==nj);
+      else if ( ni-i!=1 || nj-j!=1)
+	{
+	  if (nll>=max_ll){max_ll+=1000;ll=vrealloc (ll, max_ll*sizeof (int*));}
+	  ll[nll++]=list[0][a];
+	  list[0][a][6]=_TERM;
+	}
+    }
+  
+  sortseq=vcalloc (7, sizeof (int));
+  sortseq[0]=0;sortseq[1]=1;sortseq[2]=-1;
+  sort_list_int2 (ll, sortseq,4, 0,nll-1);
+  vfree (sortseq);
+ 
+  for (a=0; a<nll; a++)
+    {
+      int ci, nl,max_nl,best_d,d,best_s;
+      max_nl=100;
+      if (ll[a][6]!=_TERM)continue;
+      
+      ti=ll[a][0];
+      tj=ll[a][1];
+      ci=ti;
+      
+      for (nl=0,best_d=-1,b=a+1;b<nll && nl<max_nl; b++)
+	{
+	  if (ll[b][6]!=_START)continue;
+	  
+	  si=ll[b][0];
+	  sj=ll[b][1];
+	  
+	  if (si>ci){nl++;ci=si;}
+	  d=MIN((si-ti), (sj,j));
+	  if (d<=0);
+	  else if (best_d==-1 || best_d>d){best_d=d; best_s=b;}
+	}
+      if (best_d==-1)continue;
+      
+      si=ll[best_s][0];
+      sj=ll[best_s][1];
+	      
+      for (i=ti, j=tj; (i<=si && j<=sj); i++, j++)//extend the top diagonal
+	{
+	  addE(i,j,al1-i+j,cap, list,n);
+	}
+      
+      for (i=si, j=sj; (i>=ti && j>=tj); i--, j--)//extend the bottom diagonal
+	{
+	  addE(i,j,al1-i+j,cap, list,n);
+	}
+    }
+ 
+  for (a=0; a<nll; a++)ll[a][6]=0;
+  
+  return n[0];
+}
+#ifdef AFAFAFA
 int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***list, int *n)
 {
   int *sortseq;
@@ -1737,6 +1851,8 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
   
   static int *term;
   static int *start;
+  int *extend;
+  
   static int max_term;
   static int max_start;
 
@@ -1767,7 +1883,7 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
   for (a=0; a<in; a++)
     {
       int i, j, pi, pj, ni, nj;
-      if (list[0][a][2]==0)continue;//this is where borders are eliminated
+      if (list[0][a][2]==0)continue;//this is where borders are avoided
       i=list[0][a][0];
       j=list[0][a][1];
       
@@ -1794,12 +1910,16 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
 	  term[nt++]=a;
 	}
     }
+ 
+  extend=vcalloc (nt, sizeof (int));
   for (a=0; a<nt; a++)
     {
       int best_d=-1;
       int best_s= 0;
+      extend[a]=-1;
       i=list[0][term[a]][0];
       j=list[0][term[a]][1];
+      //fprintf ( stderr, "\r\t%d", a);
       for (b=0; b<ns; b++)
 	{
 	  si=list[0][start[b]][0];
@@ -1810,16 +1930,23 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
 	  else if (best_d==-1 || best_d>d){best_d=d; best_s=start[b];}
 	}
       if ( best_d==-1)continue;
-      
-      si=list[0][best_s][0];
-      sj=list[0][best_s][1];
-      ti=i;
-      tj=j;
-      
+      extend[a]=best_s;
+    }
 
-
+ 
+  for (a=0; a< nt; a++)
+    {
+      int l=0;
+      if ( extend[a]==-1)continue;
+      ti=list[0][term[a]][0];
+      tj=list[0][term[a]][1];
+      
+      si=list[0][extend[a]][0];
+      sj=list[0][extend[a]][1];
+      
       for (i=ti, j=tj; (i<=si && j<=sj); i++, j++)//extend the top diagonal
 	{
+	  l++;
 	  addE(i,j,al1-i+j,cap, list,n);
 	}
       
@@ -1827,10 +1954,14 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
 	{
 	  addE(i,j,al1-i+j,cap, list,n);
 	}
+      fprintf (stderr, "[%d]",l);
     }
+  vfree (extend);    
+ 
+  
   return n[0];
 }
-
+#endif
 	  
 int cl2pair_list_diag_mat ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add );
 int cl2pair_list_diag_cl ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add );	  
