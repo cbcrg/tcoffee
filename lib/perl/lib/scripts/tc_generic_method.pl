@@ -378,6 +378,82 @@ sub blast2pdb_template
   close (R);
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile);
 }
+sub blast_msa_o2a
+  {
+    my ($infile,$outfile)=@_;
+    my ($a, %seq);
+    my $seqfile;
+    my $SEQ=new FileHandle;
+    my $seqfile="seqfile";
+   
+    open (SEQ, ">$seqfile");
+    %s1=&read_fasta_seq ($infile);
+    foreach $s (keys (%s1))
+      {
+	$i=$s1{$s}{order};
+	if ( $i==0){print SEQ ">$s1{$s}{name}\n$s1{$s}{seq}\n";}
+	
+	$s{$i}{name}=$s;
+	$s{$i}{seq}=$s1{$s}{seq};
+	$s{$i}{len}=length( $s{$i}{seq});
+	$s{n}++;
+      }
+    close (SEQ);
+    
+    `formatdb -i $infile`;
+    `blastpgp -i $seqfile -d $infile -m7 -j4 > io`;
+    &set_blast_type ("io");
+    
+    %FB=&xml2tag_list ("io", "BlastOutput");
+    
+    open (F, ">$outfile");
+    print F "! TC_LIB_FORMAT_01\n";
+    print F "$s{n}\n";
+    for ( $a=0; $a<$s{n}; $a++)
+      {
+	print F "$s{$a}{name} $s{$a}{len} $s{$a}{seq}\n";
+      }
+
+
+    for ( $a=0; $a<$FB{n}; $a++)
+      {
+	%p=blast_xml2profile ($s{$a}{name}, $s{$a}{seq},100, 0, 0, $FB{$a}{body});
+	for ($b=1; $b<$p{n}; $b++)
+	  {
+	    my $l=length ($p{$b}{Qseq});
+	    my $hit=$p{$b}{definition};
+	    my $Qstart=$p{$b}{Qstart};
+	    my $Hstart=$p{$b}{Hstart};
+	    my $identity=$p{$b}{identity};
+	    my @lrQ=split (//,$p{$b}{Qseq});
+	    my @lrH=split (//,$p{$b}{Hseq});
+	    my $i= $s1{$s{$a}{name}}{order}+1;
+	    my $j= $s1{$hit}{order}+1;
+	    #if ( $j==$i){next;}
+	    printf F "# %d %d\n", $i, $j;
+	    #  print  F "\n$p{$b}{Qseq} ($Qstart)\n$p{$b}{Hseq} ($Hstart)";
+	    for ($c=0; $c<$l; $c++)
+	      {
+		my $rQ=$lrQ[$c];
+		my $rH=$lrH[$c];
+		my $n=0;
+		
+		if ($rQ ne "-"){$n++, $Qstart++;}
+		if ($rH ne "-"){$n++; $Hstart++;}
+		
+		if ( $n==2)
+		  {
+		    printf F "\t%d %d %d\n", $Qstart-1, $Hstart-1,$identity;
+		  }
+	      }
+	  }
+      }
+    print F "! SEQ_1_TO_N\n";
+    close (F);
+    return $output;
+  
+  }
+
 sub blast_msa
   {
     my ($infile,$outfile)=@_;
@@ -455,7 +531,8 @@ sub seq2msa
     
     if ( $method eq "blastpgp")
       {
-	&blast_msa ("seq.pep", "result.aln");
+	if ( $param =~/o2a/){&blast_msa_o2a ("seq.pep", "result.aln");}
+	else {&blast_msa ("seq.pep", "result.aln");}
       }
     elsif ( $method eq "muscle")
       {

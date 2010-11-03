@@ -777,8 +777,34 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 		vfree (bufA);
 		
 	}
+	else if ( strstr(aln_mode, "o2a"))
+	  {
+	    int x, y;
+	    
+	    for (x=0; x< S->nseq; x++)
+	      {
+		sprintf (bufS, "%d %d", S->nseq, x);
+		for ( y=0; y< S->nseq; y++)
+		  {
+		    char buf[1000];
+		    if (y==x)continue;
+		    sprintf (buf, " %d",y);
+		    strcat ( bufS, buf);
+		  }
+		bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
+		if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
+		if ( check_seq_type ( method, bufS, S))
+		  {
+		    
+		    job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
+		    
+		    job=queue_cat (job, job->c);
+		  }
+		vfree (bufA);
+	      }
+	  }
 	else if ( strstr(aln_mode, "pairwise"))
-	{
+	  {
 		
 		int do_mirror, do_self, x, y, id;
 		do_mirror=(strstr(aln_mode, "m_"))?1:0;
@@ -5220,6 +5246,22 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   fL\n");
 	fprintf ( fp, "IN_FLAG    -infile=\n");
+	fprintf ( fp, "OUT_FLAG   -outfile=\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", NCBIBLAST_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", NCBIBLAST_4_TCOFFEE);
+	vfclose (fp);}
+
+	sprintf (list[n][0], "blast_o2a");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "DOC: BLAST multiple Aligner [%s]\n", NCBIBLAST_ADDRESS);
+	fprintf ( fp, "EXECUTABLE seq_msa\n");
+	fprintf ( fp, "EXECUTABLE2 blastpgp\n" );
+	fprintf ( fp, "ALN_MODE   o2a\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    -infile=\n");
+	fprintf ( fp, "PARAM      -param=o2a\n");
 	fprintf ( fp, "OUT_FLAG   -outfile=\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", NCBIBLAST_ADDRESS);

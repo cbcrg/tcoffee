@@ -5190,7 +5190,7 @@ FILE * t_coffee_tip (FILE *fp,char *mode)
   return fp;
 }
 
-char* prepare_one2all (char *seq,Sequence *S, char *lib_file)
+char* prepare_one2all_old (char *seq,Sequence *S, char *lib_file)
  {
    int a, n, i;
    FILE *fp;
@@ -5236,6 +5236,76 @@ char* prepare_one2all (char *seq,Sequence *S, char *lib_file)
    free_char (name, -1);
 
    return use_tree;
+ }
+char* prepare_one2all (char *seq,Sequence *S, char *lib_file)
+ {
+   int a,b,s1, n, i;
+   FILE *fp;
+   char **name;
+   int **score;
+   int *done;
+   int nseq=0;
+
+   if ( S->nseq==2) return NULL;
+   name=declare_char (S->nseq+1, 100);
+  
+   if ( check_file_exists (seq))
+     {
+       Sequence *L;
+       L=main_read_seq (seq);
+       for (a=0; a< L->nseq; a++)
+	 if ( (b=name_is_in_list (L->name[a], S->name,S->nseq, 100))!=-1)
+	   {
+	     sprintf ( name[nseq++], "%s", L->name[a]);
+	   }
+     }
+   else if ( is_number (seq))
+     {
+       Sequence *LS;
+
+       nseq=atoi (seq);
+       if ( nseq<0)
+	 nseq=((float)S->nseq*((float)nseq/(float)100.0)*(float)-1);
+
+       nseq=MIN(nseq,S->nseq);
+       if ( nseq>=S->nseq)LS=S;
+       else
+	 {
+	   Alignment *A, *SA;
+	   char tmode[1000];
+	   A=very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL);
+	   sprintf (tmode, "_aln_n%d", nseq);
+	   SA=simple_trimseq (A, NULL, tmode, NULL);
+	   LS=aln2seq(SA);
+	   free_aln (A);
+	   free_aln (SA);
+	 }
+       for (a=0; a<LS->nseq; a++)
+	 {
+	   sprintf (name[a], "%s", LS->name[a]);
+	   fprintf ( stderr, "\n\tMaster Sequence: %s", name[a]);
+	 }
+       if (LS!=S)free_sequence (LS, LS->nseq);
+     }
+   else
+     {
+       printf_exit (EXIT_FAILURE, stderr, "ERROR: %s is neither a file nor a method nor a number for subset2all [FATAL:%s]\n",seq,PROGRAM);
+     }
+
+   sprintf (lib_file, "%s", vtmpnam (NULL));
+   fp=vfopen (lib_file, "w");
+   for (a=0; a<nseq; a++)
+     {
+       fprintf ( fp, "%d %s ",S->nseq, name[a]);
+       for ( b=0; b<S->nseq; b++)
+	 {
+	   if ( !strm (name[a], S->name[b]))fprintf ( fp, "%s ",S->name[b]);
+	 }
+       fprintf ( fp, "\n");
+     }
+   vfclose (fp);
+
+   return NULL;
  }
 char* prepare_subset2all (char *mode, Sequence *S, char *lib_file, Constraint_list *CL)
  {

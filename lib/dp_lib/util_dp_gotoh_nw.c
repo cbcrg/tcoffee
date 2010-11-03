@@ -1726,7 +1726,24 @@ int addE (int i, int j, int d, int s, int ***list, int *n)
   n[0]++;
   return n[0];
 }
+int **scramble_list ( int **l,int n);
+int **scramble_list ( int **l,int n)
+{
+  int a, b, c;
+  int *l1,*l2;
+  
+  
+  for (a=0, b=n-1; a<n && b>=0; a+=2,b-=2)
+    {
+      l1=l[a];
+      l2=l[b];
 
+      l[a]=l2;
+      l[b]=l1;
+    }
+  return l;
+}
+      
 int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***list, int *n)
 {
   int *sortseq;
@@ -1748,15 +1765,14 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
 
   al1=strlen (A->seq_al[ls[0][0]]);
   al2=strlen (A->seq_al[ls[1][0]]);
-    
+  
   sortseq=vcalloc (7, sizeof (int));
   sortseq[0]=3;sortseq[1]=0;sortseq[2]=-1;
   sort_list_int2 (list[0], sortseq,4, 0, n[0]-1);
   vfree(sortseq);
   in=n[0];
   
-  
-  
+    
   if (!ll){max_ll=100;ll=vcalloc(max_ll,sizeof(int*));}
   
   for (a=0; a<in; a++)
@@ -1839,135 +1855,12 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
   
   return n[0];
 }
-#ifdef AFAFAFA
-int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***list, int *n)
-{
-  int *sortseq;
-  
-  int in, a, b, al1, al2;
-  int max_n;
-  int cap=0;
-  int k=0;
-  
-  static int *term;
-  static int *start;
-  int *extend;
-  
-  static int max_term;
-  static int max_start;
-
-  int ns=0;
-  int nt=0;
-  int i,j,si,sj,ti,tj,d;
-  int nterm;
-  
-  if ( !A)
-    {
-      vfree (term); max_term=0;
-      vfree (start);max_start=0;
-    }
-  al1=strlen (A->seq_al[ls[0][0]]);
-  al2=strlen (A->seq_al[ls[1][0]]);
-    
-  sortseq=vcalloc (7, sizeof (int));
-  sortseq[0]=3;sortseq[1]=0;sortseq[2]=-1;
-  sort_list_int2 (list[0], sortseq,4, 0, n[0]-1);
-  vfree(sortseq);
-  in=n[0];
-  
-  
-  
-  if (!term){max_term=100;term=vcalloc (max_term, sizeof (int));}
-  if (!start){max_start=100;start=vcalloc(max_start,sizeof(int));}
-  
-  for (a=0; a<in; a++)
-    {
-      int i, j, pi, pj, ni, nj;
-      if (list[0][a][2]==0)continue;//this is where borders are avoided
-      i=list[0][a][0];
-      j=list[0][a][1];
-      
-      if (a==0){pi=-10;pj=-10;}
-      else {pi=list[0][a-1][0];pj=list[0][a-1][1];}
-      
-      if (a==in-1){ni=-10; nj=-10;}
-      else {ni=list[0][a+1][0]; nj=list[0][a+1][1];}
-      
-      
-      if ((i==0 || j==0));
-      else if ( i==pi || j==pj);
-      else if ( i-pi!=1 || j-pj!=1)
-	{
-	  if (ns>=max_start){max_start+=1000;start=vrealloc (start, max_start*sizeof (int));}
-	  start[ns++]=a;
-	}
-          
-      if (i==al1 || j==al2);
-      else if ( i==ni || j==nj);
-      else if ( ni-i!=1 || nj-j!=1)
-	{
-	  if (nt>=max_term){max_term+=1000;term=vrealloc (term, max_term*sizeof (int));}
-	  term[nt++]=a;
-	}
-    }
- 
-  extend=vcalloc (nt, sizeof (int));
-  for (a=0; a<nt; a++)
-    {
-      int best_d=-1;
-      int best_s= 0;
-      extend[a]=-1;
-      i=list[0][term[a]][0];
-      j=list[0][term[a]][1];
-      //fprintf ( stderr, "\r\t%d", a);
-      for (b=0; b<ns; b++)
-	{
-	  si=list[0][start[b]][0];
-	  sj=list[0][start[b]][1];
-	  
-	  d=MIN((si-i),(sj-j));
-	  if (d<=0)continue;
-	  else if (best_d==-1 || best_d>d){best_d=d; best_s=start[b];}
-	}
-      if ( best_d==-1)continue;
-      extend[a]=best_s;
-    }
-
- 
-  for (a=0; a< nt; a++)
-    {
-      int l=0;
-      if ( extend[a]==-1)continue;
-      ti=list[0][term[a]][0];
-      tj=list[0][term[a]][1];
-      
-      si=list[0][extend[a]][0];
-      sj=list[0][extend[a]][1];
-      
-      for (i=ti, j=tj; (i<=si && j<=sj); i++, j++)//extend the top diagonal
-	{
-	  l++;
-	  addE(i,j,al1-i+j,cap, list,n);
-	}
-      
-      for (i=si, j=sj; (i>=ti && j>=tj); i--, j--)//extend the bottom diagonal
-	{
-	  addE(i,j,al1-i+j,cap, list,n);
-	}
-      fprintf (stderr, "[%d]",l);
-    }
-  vfree (extend);    
- 
-  
-  return n[0];
-}
-#endif
 	  
 int cl2pair_list_diag_mat ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add );
 int cl2pair_list_diag_cl ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add );	  
 int cl2pair_list_diag ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add )
 {
-  if (CL->residue_index)return cl2pair_list_diag_cl (A, ns, ls, CL, list_in, n_in, add);
+  if (CL->residue_index)return  cl2pair_list_diag_cl (A, ns, ls, CL, list_in, n_in, add);
   else return cl2pair_list_diag_mat (A, ns, ls, CL, list_in, n_in, add);
 }
 int cl2pair_list_diag_mat ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int add )
@@ -3125,9 +3018,10 @@ int linked_pair_wise ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL)
   
   /*Prepare the list*/
   
-  cl2list_borders     (A, ns, ls, CL, &list, &n);
+  
   cl2pair_list_ecl_pc (A, ns, ls, CL, &list, &n);
   cl2diag_cap (A, ns, ls, CL, &list, &n);
+  cl2list_borders     (A, ns, ls, CL, &list, &n);
   list2nodup_list (A, ns, ls, CL, &list, &n);
   
   /*Do the DP*/

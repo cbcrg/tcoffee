@@ -86,6 +86,7 @@ static void exchange(void *a, void *b, size_t size) {
     }
 }
 
+#ifdef USE_QSORT
 void qsort(void *base, size_t nmemb, size_t size,
         int (*compar)(const void *, const void *)) {
     void *lbStack[MAXSTACK], *ubStack[MAXSTACK];
@@ -145,7 +146,7 @@ void qsort(void *base, size_t nmemb, size_t size,
         }
     }
 }
-
+#endif
 int pstrcmp(char *p1, char *p2);
 
 
