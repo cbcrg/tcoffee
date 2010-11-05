@@ -405,6 +405,7 @@ int TC_method2method_file( struct TC_method*, char *fname );
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
+Constraint_list *  empty_constraint_list (Constraint_list *CL);
 Constraint_list *  unfreeze_constraint_list (Constraint_list *CL);
 Constraint_list *  freeze_constraint_list (Constraint_list *CL);
 Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file);

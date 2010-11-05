@@ -1831,7 +1831,7 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
 	  sj=ll[b][1];
 	  
 	  if (si>ci){nl++;ci=si;}
-	  d=MIN((si-ti), (sj,j));
+	  d=MIN((si-ti), (sj-tj));
 	  if (d<=0);
 	  else if (best_d==-1 || best_d>d){best_d=d; best_s=b;}
 	}
@@ -2910,112 +2910,18 @@ int cl2pair_list_ecl_ext_pc ( Alignment *A, int *ns, int **ls, Constraint_list *
   return avg;
 }
 
-int list2linked_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int **list, int n);
-int two_pass_linked_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)
-{
-  int n=0, **list=NULL;
-  int nscore;
-  int mode=2;
-  int id;
-  
-  cl2pair_list (A,ns, l_s, CL, &list, &n, mode, 10);
-  nscore=list2linked_pair_wise (A, ns, l_s, CL, list, n);
-  id=sub_aln2sim (A, ns, l_s, "idmat_sim");
-  
-  if (id>50)return nscore;
-  ungap_sub_aln ( A, ns[0], l_s[0]);
-  ungap_sub_aln ( A, ns[1], l_s[1]);
-  cl2pair_list (A,ns, l_s, CL, &list, &n,mode,0);
-  nscore=list2linked_pair_wise (A, ns, l_s, CL, list, n);
-  cl2pair_list (NULL,ns, l_s, CL, &list, &n, mode, 0);
-  return nscore;
-}
-int clinked_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)
-{
-  int n=0, **list=NULL;
-  int nscore, pscore=0;
-  int mode=2;
-
-  int add=0;
-  cl2pair_list (A,ns, l_s, CL, &list, &n, mode, 1000);
-  nscore=list2linked_pair_wise (A, ns, l_s, CL, list, n);
-  HERE ("***********First: %d", nscore);
-  if (add)
-    {
-      while (nscore>pscore)
-	{
-	  pscore=nscore;
-	  ungap_sub_aln ( A, ns[0], l_s[0]);
-	  ungap_sub_aln ( A, ns[1], l_s[1]);
-	  cl2pair_list (A,ns, l_s, CL, &list, &n, mode, 10);
-	  nscore=list2linked_pair_wise (A, ns, l_s, CL, list, n);
-	  HERE ("****************New: %d", nscore);
-	}
-    }
-  cl2pair_list (NULL,ns, l_s, CL, &list, &n, mode, 0);
-  return nscore;
-}
-int linked_pair_wise_test ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL)
+int list2linked_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int **list, int n, char ***al, int *len);
+int linked_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 {
   int n=0;
   static int **list=NULL;
   int score, a;
-  int *ns, **ls;
-  int mode=1;//1:ecl, 0:ref
-  HERE ("****SHUNT***");
-  int x=12;
-  int y=15;
-  int nseq=17;
-
-  ns=vcalloc (2, sizeof (int));
-  ls=declare_int (2,2);
-  ns[0]=1; ns[1]=1;
-  
-
-  for ( x=0; x<nseq-1; x++)
-    for ( y=x+1; y<nseq; y++)
-      {
-	HERE ("X=%d Y=%d", x, y);
-	ls[0][0]=x;
-	ls[1][0]=y;
-	
-	myers_miller_pair_wise (A, ns,ls,CL);
-	HERE ("MM\n\n%s\n%s\n", A->seq_al[x], A->seq_al[y]);
-	ungap (A->seq_al[x]);
-	ungap (A->seq_al[y]);
-	
-	cl2pair_list (A,ns, ls, CL, &list, &n, mode, 0);  
-	score=list2linked_pair_wise (A, ns, ls, CL, list, n);
-	
-	HERE ("CLINK\n%s\n%s", A->seq_al[x], A->seq_al[y]);
-	ungap (A->seq_al[x]);
-	ungap (A->seq_al[y]);
-	cl2pair_list (NULL,ns, ls, CL, &list, &n, mode, 0);
-      }
-  exit (0);
-  return score;
-}
-int linked_pair_wise ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL)
-{
-  int n=0;
-  static int **list=NULL;
-  int score, a;
-  int *ns, **ls;
+  char **al;
+  int len=0;
   
   if ( !A)free_int (list, -1);
-  if ( !CL->residue_index)return myers_miller_pair_wise (A, nsi,lsi,CL);
-  
-
-  ns=vcalloc (2, sizeof (int));
-  ns[0]=nsi[1]; ns[1]=nsi[0];
-  
-  
-  ls=declare_int (2, ns[0]+ns[1]);
-  for (a=0; a<ns[1]; a++)
-    ls[1][a]=lsi[0][a];
-  for (a=0; a<ns[0]; a++)
-    ls[0][a]=lsi[1][a];
-  
+  if ( !CL->residue_index)return myers_miller_pair_wise (A, ns,ls,CL);
+    
   /*Prepare the list*/
   
   
@@ -3025,25 +2931,14 @@ int linked_pair_wise ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL)
   list2nodup_list (A, ns, ls, CL, &list, &n);
   
   /*Do the DP*/
-  score=list2linked_pair_wise (A, ns, ls, CL, list, n);
-  
+  score=list2linked_pair_wise (A, ns, ls, CL, list, n, &al,&len);
+  free_char (al, -1);
   /*Free the list*/
-  free_int (ls, -1);vfree (ns);
   return score;
 }
  
-
-int list2linked_pair_wise_nolgp ( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int **list, int n);
-int list2linked_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int **list, int n)
- {
-   int mode=0;
-   if (mode==0)return list2linked_pair_wise_nolgp    (A, ns, l_s, CL, list, n);
-   return 0;
- }
-
-
 #define LIN(a,b,c) a[b*5+c]
-int list2linked_pair_wise_nolgp( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int **list, int n)
+int list2linked_pair_wise( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int **list, int n, char ***tb, int *len)
 {
   int a,b,c, i, j, LEN=0, start_trace;
   int pi, pj,ij, delta_i, delta_j, prev_i, prev_j;
@@ -3062,6 +2957,7 @@ int list2linked_pair_wise_nolgp( Alignment *A, int *ns, int **l_s, Constraint_li
   l1=strlen (A->seq_al[l_s[0][0]]);
   l2=strlen (A->seq_al[l_s[1][0]]);
   al=declare_char (2,l1+l2+1);
+  tb[0]=al;
   
  
   //Penalties: max score is NORM_F
@@ -3306,64 +3202,233 @@ int list2linked_pair_wise_nolgp( Alignment *A, int *ns, int **l_s, Constraint_li
   A->nseq=ns[0]+ns[1];
   
   vfree (char_buf);
-  free_char (al, -1);
-  
+  len[0]=LEN;
   return score;
 }
-int ** aln2local_penalties4link (Alignment *A, int n, int *ls, Constraint_list *CL, int **lg);
-int ** aln2local_penalties4link (Alignment *A, int n, int *ls, Constraint_list *CL, int **lg)
+static int left_nseq;
+int cl2pair_list_collapse ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+Constraint_list* collapse_list (int *ns, int **ls, char**al, int len, Constraint_list *CL);
+int ns2s (int *ns, int **ls, int *is1, int *is2, int *is);
+int linked_pair_wise_collapse ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 {
-  //adapted from gap_count in MAFFT V 5.5
-  int p,s,l, c1, c2;
-  int gep,gop;
-  int open=3, close=4, gap=5;
+  int n=0;
+  static int **list=NULL;
+  int score, a;
+  char **al;
+  int len=0;
+  if (!left_nseq)left_nseq=(CL->S)->nseq;
   
-  gop=CL->gop;
-  gep=CL->gep;
-  
-  l=strlen (A->seq_al[ls[0]]);
-  
-  if (!lg)
-    {
-      lg=declare_int (6, l);
-    }
-  
-  if ( read_array_size_new (lg[0])<l)
-    {
-      free_int (lg, -1);
-      lg=declare_int (6, l);
-    }
-  
-  for( s=0; s<n; s++ ) 
-	{
-	  c1='x';
-	  for (p=0; p<l; p++)
-	    {
-	      c2=A->seq_al[ls[s]][p];
-	      
-	      if (c1!='-' && c2=='-')lg[open][p]++;
-	      if (c1=='-' && c2!='-')lg[close][p]++;
-	      if ( c1=='-')lg[gap][p]++;
-	      c1=c2;
-	    }
-	}
-  
-  for (p=0; p<l; p++)
-    {
-      float go, gc, nn;
-      nn=n;
-      go=lg[open ][p];
-      gc=lg[close][p];
-     
+  if ( !A)free_int (list, -1);
+  if ( !CL->residue_index)return myers_miller_pair_wise (A, ns,ls,CL);
     
-      lg[GOP][p]=0.5*(1-(go/nn))*gop;
-      lg[GCP][p]=0.5*(1-(gc/nn))*gop;
-      //Checked locacal gep => gives low quality results
-      lg[GEP][p]=gep;//(1-((float)lg[gap][p]/(float)n))*gep;
-      lg[open][p]=lg[close][p]=lg[gap][p]=0;
-      
-    }
-
-  return lg;
+  /*Prepare the list*/
+  
+  HERE ("1");
+  cl2pair_list_collapse (A, ns, ls, CL, &list, &n);
+  cl2diag_cap (A, ns, ls, CL, &list, &n);
+  cl2list_borders     (A, ns, ls, CL, &list, &n);
+  list2nodup_list (A, ns, ls, CL, &list, &n);
+  HERE ("2");
+  /*Do the DP*/
+  score=list2linked_pair_wise (A, ns, ls, CL, list, n, &al,&len);
+  CL=collapse_list (ns, ls, al, len, CL);
+  free_char (al, -1);
+  /*Free the list*/
+  return score;
 }
 
+
+Constraint_list* collapse_list (int *ns, int **ls, char **al, int len, Constraint_list *CL)
+{
+  int s1, s2,s, cs1, cs2;
+  int **lu, *p;
+  int a,b,c,d;
+  
+  if (!left_nseq)left_nseq=(CL->S)->nseq;
+  lu=declare_int (2, len+1);
+  for (a=0; a<2; a++)
+    for (c=0,b=0; b<len; b++)if (al[a][b]){lu[a][++c]=b+1;}
+  
+
+  ns2s (ns, ls, &s1, &s2, &s);
+  CL->residue_index[s]=vrealloc (CL->residue_index[s], (len+2)*sizeof (int*));
+  for (a=0; a<=len; a++)
+    {
+      if (!CL->residue_index[s][a])
+	{
+	  CL->residue_index[s][a]=vcalloc (1, sizeof (int));
+	  CL->residue_index[s][a][0]=1;
+	}
+    }
+	  
+  while ( (p=extract_entry (CL)))
+    {
+      
+      int i=p[INDEX];
+      
+      cs1=p[SEQ1];
+      cs2=p[SEQ2];
+            
+      if (cs1==s1 || cs1==s2 || cs2==s1 || cs2==s2)
+	{
+	  remove_entry (p, CL, i);
+	  p[INDEX]=0;
+	  if (cs1==s1)
+	    {
+	      p[SEQ1]=s;
+	      p[R1]=lu[0][p[R1]];
+	    }
+	  else if (cs1==s2)
+	     {
+	      p[SEQ1]=s;
+	      p[R1]=lu[1][p[R1]];
+	    }
+	  
+	  if (cs2==s1)
+	    {
+	      p[SEQ2]=s;
+	      p[R2]=lu[0][p[R2]];
+	    }
+	  else if (cs2==s2)
+	     {
+	      p[SEQ2]=s;
+	      p[R2]=lu[1][p[R2]];
+	    }
+	  
+	  if (p[SEQ1]==p[SEQ2]);
+	  else add_entry2list2(p, CL);
+	}
+    }
+  //left_nseq--;
+  return CL;
+}
+	  
+	  
+
+
+int cl2pair_list_collapse ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+{
+  int si, r1,r2,t_s, t_r,t_w, t_s2, t_r2, t_w2, n, s1, s2;
+  int a, b, l1, l2;
+  int **list;
+  int max_n;
+
+  int nused;
+  int *used_list;
+  
+  float nscore, score, tot, filter, avg=0, new=0;
+  float **used;
+
+  HERE ("1.1");
+ 
+  if ( !A) return 0;
+  list=list_in[0];
+  n=n_in[0];
+  max_n=read_array_size (list, sizeof (int*));
+
+  
+  ns2s (ns, ls, &s1, &s2,NULL);
+  l1=strlen (A->seq_al[s1]);
+  l2=strlen (A->seq_al[s2]);
+  used=declare_float (l2+1,2);  used_list=vcalloc (l2+1, sizeof (int));
+  nused=0;
+  
+  s1=name_is_in_list (A->name[s1], (CL->S)->name, (CL->S)->nseq, 100);
+  s2=name_is_in_list (A->name[s2], (CL->S)->name, (CL->S)->nseq, 100);
+
+  for (r1=1; r1<=l1; r1++)
+    {
+      tot=0; nused=0;
+      for (a=1; r1>0 && a<CL->residue_index[s1][r1][0];a+=ICHUNK)
+	{
+	  t_s=CL->residue_index[s1][r1][a+SEQ2];
+	  t_r=CL->residue_index[s1][r1][a+R2];
+	  t_w=CL->residue_index[s1][r1][a+WE];
+	  for (b=0; b<CL->residue_index[t_s][t_r][0];)
+	    {
+	      if (b==0){t_s2=t_s;t_r2=t_r;t_w2=t_w;b++;}
+	      else 
+		{ 
+		  t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
+		  t_r2=CL->residue_index[t_s][t_r][b+R2];
+		  t_w2=CL->residue_index[t_s][t_r][b+WE];
+		  b+=ICHUNK;
+		}
+	      
+	      if (t_s2==s2)
+		{
+		  score=MIN(((float)t_w/(float)NORM_F),((float)t_w2/(float)NORM_F));
+		  
+		  if (!used[t_r2][1] && score>0)
+		    {
+		      used_list[nused++]=t_r2;
+		    }
+		  
+		  tot+=score;
+		  used[t_r2][0]+=score;
+		  used[t_r2][1]++;
+		}
+	    }
+	}
+	  
+      //FILTER: Keep in the graph the edges where (p1->p2/(Sum (P1->x))>0.01
+      filter=0.01;
+      
+      for (a=0; a<nused; a++)
+	{
+	  
+	  r2=used_list[a];
+	  nscore=used[r2][0]/tot; //Normalized score used for filtering
+	  score =used[r2][0];
+		  
+	  used[r2][0]=used[r2][1]=0;
+	  if (n==max_n)
+	    {
+	      max_n+=10000;list=vrealloc (list, max_n*sizeof (int*));
+	    }
+	  if (nscore>filter && r1!=0 && r2!=0 && r1!=l1 && r2!=l2)
+	    {
+	      if (!list[n])list[n]=vcalloc (7, sizeof (int));
+	      
+	      list[n][0]=r1;
+	      list[n][1]=r2;
+	      list[n][3]=(l1-(r1))+(r2);
+	      score/=(float)(left_nseq);
+	      list[n][2]=(int)((float)score*(float)NORM_F);
+	      avg+=(int)((float)score*(float)NORM_F);
+	      new++;
+	      n++;
+	      
+	    }
+	}
+    }
+  HERE ("1.4");
+  free_float (used, -1);
+  vfree (used_list);
+  
+  n_in[0]=n;
+  list_in[0]=list;
+  if (new)avg/=new;
+  return avg;
+}
+int ns2s (int *ns, int **ls, int *is1, int *is2, int *is)
+{
+  int a, b;
+  int s1, s2, s;
+  
+  s1=s2=s=-1;
+  
+  for (a=0; a< 2; a++)
+    for (b=0; b<ns[a]; b++)
+      {
+	if (a==0)s1=MAX(s1,(ls[a][b]));
+	if (a==1)s2=MAX(s2,(ls[a][b]));
+	fprintf ( stderr, "\n\t**%d -> %d",a, ls[a][b]);
+      }
+  s=MAX((s1),(s2));
+  if (is1)is1[0]=s1;
+  if (is2)is2[0]=s2;
+  if (is) is [0]=s;
+  
+  return s;
+}

@@ -148,6 +148,9 @@
 #define EXIT_ON_FAILURE    62
 #define IGNORE_FAILURE     63
 
+#define _START 64
+#define _TERM  65
+
 #define GOP               0
 #define GCP               1
 #define GEP               2
@@ -736,8 +739,8 @@ The format is as follow:
 -------------------------------------------------------------------------------------------
 the RGB values are used for the post-script generation, the html code is used in html documents.
 */
-#define DATE "Thu Aug 5 18:09:23 CEST 2010"
+#define DATE "Wed Oct 27 19:32:44 CEST 2010"
 #define PROGRAM "T-COFFEE"
-#define VERSION "Version_8.93"
+#define VERSION "Version_8.95"
 #define AUTHOR "Cedric Notredame "
 #define DISTRIBUTION_ADDRESS "www.tcoffee.org/Packages/"

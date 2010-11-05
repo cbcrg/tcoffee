@@ -1,16 +1,28 @@
-CLUSTAL FORMAT for T-COFFEE Version_8.91 [http://www.tcoffee.org] [MODE:  ], CPU=0.01 sec, SCORE=81, Nseq=4, Len=81 
+CLUSTAL FORMAT for T-COFFEE Version_8.95 [http://www.tcoffee.org] [MODE:  ], CPU=0.03 sec, SCORE=38, Nseq=4, Len=151 
 
-hmgl_trybr      kkdsnapkramtsfmffssdfrskhs-dls----ivemskaagaawkelg
-hmgt_mouse      -----kpkrprsayniyvsesfqeakddsa----qgkl-klvneawknls
-hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpdfk-vtevakkggelwrglk
-hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
-                      ***. ::: .: ..  .. . . .       : *  .  *: * 
+hmgl_trybr      ---kkdsnapkramtsfmff-ssd-----frskhsdlsivemskaagaaw
+hmgt_mouse      --------------------------------------------------
+hmgb_chite      -adkpkrplsaymlwln-saresikrenp-dfkvtevakkggelwrglk-
+hmgl_wheat      dpnkpkrapsaffvfmg-efreefkqknpknksvaavgkaagerwksls-
+                                                                  
 
-hmgl_trybr      peerkvyeemaekdkerykrem---------
-hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
-hmgb_chite      --dkseweakaatakqnyiralqeyerngg-
-hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
-                  ::  :   *   : .* . :         
+hmgl_trybr      kelgpeerkvyeemaekdkerykrem------------------------
+hmgt_mouse      -------------------------kpkrprsayniyvsesfqeakddsa
+hmgb_chite      --------------------------------------------------
+hmgl_wheat      --------------------------------------------------
+                                                                  
+
+hmgl_trybr      --------------------------------------------------
+hmgt_mouse      qgklklvneawknlspeekqayiqlakddrirydnemkswe-----eqma
+hmgb_chite      -----------------dkse-----weakaatakqnyiralqeye-rng
+hmgl_wheat      ---------------esekap-----yvakanklkgeynkaiaaynkges
+                                                                  
+
+hmgl_trybr      -
+hmgt_mouse      e
+hmgb_chite      g
+hmgl_wheat      a
+                 
 
 
 

@@ -55,7 +55,7 @@ int *** declare_residue_index (Sequence *S)
   r=vcalloc ( S->nseq, sizeof (int**));
   for ( a=0; a<S->nseq; a++)
     {
-      r[a]=vcalloc (S->len[a]+1, sizeof (int*));
+      r[a]=vcalloc (S->len[a]+2, sizeof (int*));//The empty terminator makes a scan possible without knowing len
       for ( b=0; b<=S->len[a]; b++)
 	{
 	  r[a][b]=vcalloc ( 1, sizeof (int));

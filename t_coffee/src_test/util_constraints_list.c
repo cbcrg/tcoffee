@@ -777,8 +777,34 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 		vfree (bufA);
 		
 	}
+	else if ( strstr(aln_mode, "o2a"))
+	  {
+	    int x, y;
+	    
+	    for (x=0; x< S->nseq; x++)
+	      {
+		sprintf (bufS, "%d %d", S->nseq, x);
+		for ( y=0; y< S->nseq; y++)
+		  {
+		    char buf[1000];
+		    if (y==x)continue;
+		    sprintf (buf, " %d",y);
+		    strcat ( bufS, buf);
+		  }
+		bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
+		if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
+		if ( check_seq_type ( method, bufS, S))
+		  {
+		    
+		    job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
+		    
+		    job=queue_cat (job, job->c);
+		  }
+		vfree (bufA);
+	      }
+	  }
 	else if ( strstr(aln_mode, "pairwise"))
-	{
+	  {
 		
 		int do_mirror, do_self, x, y, id;
 		do_mirror=(strstr(aln_mode, "m_"))?1:0;
@@ -1267,13 +1293,34 @@ Constraint_list *  freeze_constraint_list (Constraint_list *CL)
 	int **freeze=declare_int2 (S->nseq, S->len, 1);
 	
 	for ( a=0; a<S->nseq; a++)
-		for ( b=1; b<=S->len[a]; b++)
-		{
-			d+=CL->residue_index[a][b][0];
-			freeze[a][b]=CL->residue_index[a][b][0];
-		}
-		CL->freeze=freeze;
+	  {
+	    b=1;
+	    while (CL->residue_index[a][b])
+	      {
+		  d+=CL->residue_index[a][b][0];
+		  freeze[a][b]=CL->residue_index[a][b][0];
+		  b++;
+	      }
+	  }
+	CL->freeze=freeze;
 	return CL;
+}
+Constraint_list *  empty_constraint_list (Constraint_list *CL)
+{
+  //reset all the indexes
+  int a, b;
+  
+  for (a=0; a<(CL->S)->nseq; a++)
+    {
+      b=0;
+      while (CL->residue_index[a][b])
+	{
+	  CL->residue_index[a][b][0]=1;
+	  b++;
+	}
+    }
+  CL->ne=0;
+  return CL;
 }
 
 Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file)
@@ -1375,20 +1422,20 @@ int display_constraint_list (Constraint_list *CL, FILE *fp, char *tag)
 	
 	n=0;
 	for (s1=0; s1<S->nseq; s1++)
-	{
-		int l=S->len[s1];
-		
-		for (r1=1; r1<=l; r1++)
-		{
-			for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
-			{
-				s2=CL->residue_index[s1][r1][b+SEQ2];
-				r2=CL->residue_index[s1][r1][b+R2];
-				w2=CL->residue_index[s1][r1][b+WE];
-				fprintf ( fp, "%s -- %5d -- %5d %5d %5d %5d --> %5d", tag, ++n, s1, s2, r1, r2, w2);
-			}
-		}
-	}
+	  {
+	    int l=S->len[s1];
+	    
+	    for (r1=1; r1<=l; r1++)
+	      {
+		for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+		  {
+		    s2=CL->residue_index[s1][r1][b+SEQ2];
+		    r2=CL->residue_index[s1][r1][b+R2];
+		    w2=CL->residue_index[s1][r1][b+WE];
+		    fprintf ( fp, "%s -- %5d -- %5d %5d %5d %5d --> %5d", tag, ++n, s1, s2, r1, r2, w2);
+		  }
+	      }
+	  }
 }
 
 
@@ -1516,7 +1563,41 @@ Constraint_list * add_list_entry2list (Constraint_list *CL, int n_para, ...)
 	return CL;
 }
 
+
 int next_entry (Constraint_list *CL, int *s, int*r, int *l);
+
+int *extract_entry (Constraint_list *CL)
+{
+	static int s=0;
+	static int r=1;
+	static int l=1;
+	static int *entry;
+	int v;
+	
+	if (!entry)entry=vcalloc (100, sizeof (int));
+	if (!CL){s=1;r=1;l=1; return NULL;}
+	
+	
+	while ((v=next_entry (CL, &s, &r, &l)))
+	  {
+	    if (v==1)
+	    
+		{
+			
+			entry[SEQ1]=s;
+			entry[R1]=r;
+			entry[SEQ2]=CL->residue_index[s][r][l-ICHUNK+SEQ2];
+			entry[R2]=  CL->residue_index[s][r][l-ICHUNK+R2];
+			entry[WE]=  CL->residue_index[s][r][l-ICHUNK+WE];
+			entry[CONS]=CL->residue_index[s][r][l-ICHUNK+CONS];
+			entry[MISC]=CL->residue_index[s][r][l-ICHUNK+MISC];
+			entry[INDEX]=l-ICHUNK;
+			return entry;
+		}
+	  }
+	s=0; r=1; l=1;
+	return NULL;
+}
 int next_entry (Constraint_list *CL, int *s, int*r,int *l)
 {
 	Sequence *S=CL->S;
@@ -1543,75 +1624,6 @@ int next_entry (Constraint_list *CL, int *s, int*r,int *l)
 	}
 }
 
-int *extract_entry (Constraint_list *CL)
-{
-	static int s=0;
-	static int r=1;
-	static int l=1;
-	static int *entry;
-	int v;
-	
-	if (!entry)entry=vcalloc (100, sizeof (int));
-	if ( !CL){s=1;r=1;l=1;}
-	
-	
-	while ((v=next_entry (CL, &s, &r, &l)))
-	{
-		if (v==1)
-		{
-			
-			entry[SEQ1]=s;
-			entry[R1]=r;
-			entry[SEQ2]=CL->residue_index[s][r][l-ICHUNK+SEQ2];
-			entry[R2]=  CL->residue_index[s][r][l-ICHUNK+R2];
-			entry[WE]=  CL->residue_index[s][r][l-ICHUNK+WE];
-			entry[CONS]=CL->residue_index[s][r][l-ICHUNK+CONS];
-			entry[MISC]=CL->residue_index[s][r][l-ICHUNK+MISC];
-			
-			return entry;
-		}
-	}
-	s=0; r=1; l=1;
-	return NULL;
-}
-int *extract_entry_old (Constraint_list *CL)
-{
-	
-	static int r;
-	static int s;
-	static int l=1;
-	static int *entry;
-	if (!entry)entry=vcalloc (ICHUNK+3, sizeof (int));
-	
-	if ( CL==NULL){r=0;s=0;l=1;return NULL;}
-	
-	
-	if (s>=(CL->S)->nseq){return extract_entry (NULL);}
-	
-	HERE ("-- %d %d %d (L=%d) ",s,r,l, (CL->S)->len[s]);
-	if (r>(CL->S)->len[s])
-	{
-		s++;
-		r=1;
-		l=1;
-		return extract_entry (CL);
-	}
-	else if (l>=CL->residue_index[r][s][0])
-	{
-		l=1;
-		r++;
-		return extract_entry (CL);
-	}
-	else
-	{
-		entry[SEQ1]=s;
-		entry[R1]=r;
-		memcpy (entry+2, CL->residue_index[r][s]+l+2,ICHUNK*sizeof (int));
-		entry[INDEX]=l;
-		l+=ICHUNK;
-		return entry;
-	}
-}
 
 int CLisCompacted (Constraint_list *CL, char *t)
 {
@@ -1700,29 +1712,31 @@ int checkCL (Constraint_list *CL, char *t)
 
 Constraint_list *add_entry2list( CLIST_TYPE *entry, Constraint_list *CL)
 {
+  //adds an entry and its mirror to the list
+  //if INDEX is set the entry replaces the entry with a similar index
+  //otherwise the entry (and its mirror) are added
+  int s1=entry[SEQ1];
+  int s2=entry[SEQ2];
+  int r1=entry[R1];
+  int r2=entry[R2];
+  
+  if (entry[INDEX])return add_entry2list2(entry, CL);
 	
-	int s1=entry[SEQ1];
-	int s2=entry[SEQ2];
-	int r1=entry[R1];
-	int r2=entry[R2];
+  entry[SEQ1]=s2;
+  entry[SEQ2]=s1;
+  entry[R1]=r2;
+  entry[R2]=r1;
+  add_entry2list2 (entry, CL);
 	
-	if (entry[INDEX])return add_entry2list2(entry, CL);
-	
-	entry[SEQ1]=s2;
-	entry[SEQ2]=s1;
-	entry[R1]=r2;
-	entry[R2]=r1;
-	add_entry2list2 (entry, CL);
-	
-	entry[SEQ1]=s1;
-	entry[SEQ2]=s2;
-	entry[R1]=r1;
-	entry[R2]=r2;
-	add_entry2list2 (entry, CL);
-	return CL;
+  entry[SEQ1]=s1;
+  entry[SEQ2]=s2;
+  entry[R1]=r1;
+  entry[R2]=r2;
+  add_entry2list2 (entry, CL);
+  return CL;
 }
 
-int get_entry_index_ref (int *entry, Constraint_list *CL);
+
 int get_entry_index (int *entry, Constraint_list *CL);
 Constraint_list *insert_entry (CLIST_TYPE *entry, Constraint_list *CL, int i);
 Constraint_list *update_entry (CLIST_TYPE *entry, Constraint_list *CL, int i);
@@ -1730,118 +1744,83 @@ Constraint_list *reset_entry (CLIST_TYPE *entry, Constraint_list *CL, int i);
 Constraint_list *remove_entry (CLIST_TYPE *entry, Constraint_list *CL, int i);
 Constraint_list *add_entry2list2 (CLIST_TYPE *entry, Constraint_list *CL)
 {
-	int s2=entry[SEQ2];
-	int r2=entry[R2];
-	int i1;
-	
-	int i=CL->residue_index[entry[SEQ1]][entry[R1]][0];
-	if (entry[INDEX]){return reset_entry (entry, CL, entry[INDEX]); }
-	else if (i==1){insert_entry (entry, CL,1);}
-	else
-	{
-		i=get_entry_index(entry,CL);
-		i1=get_entry_index_ref(entry,CL);
-		
-		if (i!=i1)
-		{
-			int a;
-			int *r=CL->residue_index[entry[SEQ1]][entry[R1]];
-			fprintf ( stderr,"\nI=%d Iref=%d\n", i, i1);
-			for (a=0; a<r[0]; a++)
-				fprintf ( stderr, "%5d ", r[a]);
-			fprintf ( stderr, "\n\n********\n");
-			for (a=0; a<CL->entry_len; a++)
-				fprintf ( stderr, "%5d ", entry[a]);
-			fprintf ( stderr, "\n\n********\n");
-			exit (0);
-		}
-		if (i<0)insert_entry (entry,CL,-i);
-		else update_entry (entry, CL, i);
-	}
-	return CL;
+  //adds an entry to the list
+  int s2=entry[SEQ2];
+  int r2=entry[R2];
+ 
+  int i=CL->residue_index[entry[SEQ1]][entry[R1]][0];
+  if (entry[INDEX]){return reset_entry (entry, CL, entry[INDEX]); }
+  else if (i==1){insert_entry (entry, CL,1);}
+  else
+    {
+      i=get_entry_index(entry,CL);
+      if (i<0)insert_entry (entry,CL,-i);
+      else update_entry (entry, CL, i);
+    }
+  return CL;
 }
 
 
 static int *sent;
 static Constraint_list *sCL;
 
-
-
 int get_entry_index (int *entry, Constraint_list *CL)
 {
-	int s1=entry[SEQ1];
-	int r1=entry[R1];
-	int s2=entry[SEQ2];
-	int r2=entry[R2];
-	int dir;
-	int delta;
-	int i;
-	int *r= CL->residue_index[s1][r1];
-	int ps2, pr2, ns2,nr2,p,n;
-	
-	if (r[0]==1)return -1;
-	dir=1;
-	i=1;
-	delta=((r[0]-1)/ICHUNK);
-	delta=MAX(1,(delta/2));
-	
-	while (1==1)
+  //return the index of an entry
+  //positive value: the entry exists on position i
+  //negative value: the entry must be created on poistion -i
+  int s1=entry[SEQ1];
+  int r1=entry[R1];
+  int s2=entry[SEQ2];
+  int r2=entry[R2];
+  int dir;
+  int delta;
+  int i;
+  int *r= CL->residue_index[s1][r1];
+  int ps2, pr2, ns2,nr2,p,n;
+  
+  if (r[0]==1)return -1;//corresponding entry undeclared->must be inserted
+  dir=1;
+  i=1;
+  delta=((r[0]-1)/ICHUNK);
+  delta=MAX(1,(delta/2));
+  
+  while (1==1)
+    {
+      i+=(delta*dir*ICHUNK);
+      i=MAX(i,1);
+      i=MIN(i,(r[0]));
+      if (i<r[0] && s2==r[i+SEQ2] && r2==r[i+R2])return i;
+      else
 	{
-		i+=(delta*dir*ICHUNK);
-		i=MAX(i,1);
-		i=MIN(i,(r[0]));
-		if (i<r[0] && s2==r[i+SEQ2] && r2==r[i+R2])return i;
-		else
-		{
-			p=1; n=1;
-			if (i>1)
-			{
-				ps2=r[i-ICHUNK+SEQ2];
-				pr2=r[i-ICHUNK+R2];
-				p=(s2>ps2 || (s2==ps2 && r2>pr2))?1:0;
-			}
-			if (i<r[0])
-			{
-				ns2=r[i+SEQ2];
-				nr2=r[i+R2];
-				n=(s2<ns2 || (s2==ns2 && r2<nr2))?1:0;
-			}
-			
-			if ( p && n) return -i;
-			else if (p)
-			{
-				if (dir==-1)delta=MAX(1,(delta/2));
-				dir=1;
-			}
-			else if (n)
-			{
-				if ( dir==1)delta=MAX(1,(delta/2));
-				dir=-1;
-			}
-			
-		}
+	  p=1; n=1;
+	  if (i>1)
+	    {
+	      ps2=r[i-ICHUNK+SEQ2];
+	      pr2=r[i-ICHUNK+R2];
+	      p=(s2>ps2 || (s2==ps2 && r2>pr2))?1:0;
+	    }
+	  if (i<r[0])
+	    {
+	      ns2=r[i+SEQ2];
+	      nr2=r[i+R2];
+	      n=(s2<ns2 || (s2==ns2 && r2<nr2))?1:0;
+	    }
+	  
+	  if ( p && n) return -i;
+	  else if (p)
+	    {
+	      if (dir==-1)delta=MAX(1,(delta/2));
+	      dir=1;
+	    }
+	  else if (n)
+	    {
+	      if ( dir==1)delta=MAX(1,(delta/2));
+	      dir=-1;
+	    }
+	  
 	}
-}
-
-
-int get_entry_index_ref (int *entry, Constraint_list *CL)
-{
-	int s1=entry[SEQ1];
-	int r1=entry[R1];
-	int s2=entry[SEQ2];
-	int r2=entry[R2];
-	int *r=CL->residue_index[s1][r1];
-	int i,cs2,cr2;
-	
-	for (i=1; i<r[0]; i+=ICHUNK)
-	{
-		cs2=r[i+SEQ2];
-		cr2=r[i+R2];
-		
-		if ( cs2==s2 && cr2==r2)return i;
-		else if (s2 <cs2 || (s2==cs2 && r2<cr2))return -i;
-	}
-	return r[0]*-1;
+    }
 }
 
 Constraint_list *remove_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
@@ -1859,7 +1838,7 @@ Constraint_list *remove_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
 	memcpy(buf,r+i, s*sizeof (int));
 	memcpy(r+i-ICHUNK, buf, s*sizeof (int));
 	r[0]-=ICHUNK;
-	r=vrealloc(r,r[0]*sizeof (int));
+	CL->residue_index[entry[SEQ1]][entry[R1]]=vrealloc(r,r[0]*sizeof (int));
 	CL->ne--;
 	return CL;
 }
@@ -1886,26 +1865,26 @@ Constraint_list *insert_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
 	r[0]+=ICHUNK;
 	return CL;
 }
+
 Constraint_list *reset_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
 {
-	
-	int *r=CL->residue_index[entry[SEQ1]][entry[R1]];
-	memcpy (r+i, entry, ICHUNK*sizeof (int));
-	return CL;
+  int *r=CL->residue_index[entry[SEQ1]][entry[R1]];
+  memcpy (r+i, entry, ICHUNK*sizeof (int));
+  return CL;
 }
 Constraint_list *update_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
 {
-	int s1=entry[SEQ1];
-	int s2=entry[SEQ2];
-	int r1=entry[R1];
-	int r2=entry[R2];
-	
-	CL->residue_index[s1][r1][i+SEQ2]=entry[SEQ2];
-	CL->residue_index[s1][r1][i+R2]  =entry[R2];
-	CL->residue_index[s1][r1][i+WE]  =MAX(entry[WE],CL->residue_index[s1][r1][i+WE]);
-	CL->residue_index[s1][r1][i+CONS]+=entry[CONS];
-	CL->residue_index[s1][r1][i+MISC]=entry[MISC];
-	return CL;
+  int s1=entry[SEQ1];
+  int s2=entry[SEQ2];
+  int r1=entry[R1];
+  int r2=entry[R2];
+  
+  CL->residue_index[s1][r1][i+SEQ2]=entry[SEQ2];
+  CL->residue_index[s1][r1][i+R2]  =entry[R2];
+  CL->residue_index[s1][r1][i+WE]  =MAX(entry[WE],CL->residue_index[s1][r1][i+WE]);
+  CL->residue_index[s1][r1][i+CONS]+=entry[CONS];
+  CL->residue_index[s1][r1][i+MISC]=entry[MISC];
+  return CL;
 }
 
 /*********************************************************************/
@@ -5220,6 +5199,22 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   fL\n");
 	fprintf ( fp, "IN_FLAG    -infile=\n");
+	fprintf ( fp, "OUT_FLAG   -outfile=\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", NCBIBLAST_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", NCBIBLAST_4_TCOFFEE);
+	vfclose (fp);}
+
+	sprintf (list[n][0], "blast_o2a");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "DOC: BLAST multiple Aligner [%s]\n", NCBIBLAST_ADDRESS);
+	fprintf ( fp, "EXECUTABLE seq_msa\n");
+	fprintf ( fp, "EXECUTABLE2 blastpgp\n" );
+	fprintf ( fp, "ALN_MODE   o2a\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    -infile=\n");
+	fprintf ( fp, "PARAM      -param=o2a\n");
 	fprintf ( fp, "OUT_FLAG   -outfile=\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", NCBIBLAST_ADDRESS);

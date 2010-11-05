@@ -1,4 +1,4 @@
-//DIR_4_TCOFFEE [def: ~/.t_coffee]: UNIQUE_DIR_4_TCOFFEE -> DIR_4_TCOFFEE ->HOME/.t_coffee
+// DIR_4_TCOFFEE [def: ~/.t_coffee]: UNIQUE_DIR_4_TCOFFEE -> DIR_4_TCOFFEE ->HOME/.t_coffee
 //TMP_4_TCOFFEE [def: ~/.t_coffee/tmp]:: UNIQUE_DIR_4_TCOFFEE -> TMP_4_TCOFFEE ->DIR_4_TCOFFEE/tmp
 
 #define FILE_CHECK 1
@@ -86,6 +86,7 @@ static void exchange(void *a, void *b, size_t size) {
     }
 }
 
+#ifdef USE_QSORT
 void qsort(void *base, size_t nmemb, size_t size,
         int (*compar)(const void *, const void *)) {
     void *lbStack[MAXSTACK], *ubStack[MAXSTACK];
@@ -145,7 +146,7 @@ void qsort(void *base, size_t nmemb, size_t size,
         }
     }
 }
-
+#endif
 int pstrcmp(char *p1, char *p2);
 
 

@@ -148,6 +148,9 @@
 #define EXIT_ON_FAILURE    62
 #define IGNORE_FAILURE     63
 
+#define _START 64
+#define _TERM  65
+
 #define GOP               0
 #define GCP               1
 #define GEP               2

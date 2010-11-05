@@ -3094,8 +3094,22 @@ NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_li
 {
   int a;
   
-  if ( strm ((CL->TC)->use_seqan, "NO"))return local_tree_aln (LT, RT, A, nseq, CL);
+  
+
+  
+  if ( strm ((CL->TC)->use_seqan, "NO"))
+    {
+      static char *tmp;
+      NT_node *T;
+      if (!tmp)tmp=vtmpnam(NULL);
+      dump_constraint_list (CL, tmp, "w");
+      T=local_tree_aln (LT, RT, A, nseq, CL);
+      empty_constraint_list  (CL);
+      undump_constraint_list (CL, tmp);
+      return T;
+    }
   else return seqan_tree_aln (LT, RT, A, nseq, CL);
+  
 }
 
 NT_node* seqan_tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_list *CL)
@@ -3253,8 +3267,8 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
 
   P->score=A->score_aln=score=profile_pair_wise (A,L->nseq, L->lseq,R->nseq,R->lseq,CL);
   A->len_aln=strlen (A->seq_al[P->lseq[0]]);
-  score=node2sub_aln_score (A, CL, CL->evaluate_mode,P);
-  if (print)fprintf(CL->local_stderr, "\n\tGroup %4d: [Group %4d (%4d seq)] with [Group %4d (%4d seq)]-->[Score=%4d][Len=%5d][PID:%d]%s",P->index,R->index,R->nseq,L->index,L->nseq,score, A->len_aln,getpid(),(P->fork==1)?"[Forked]":"" );
+   
+  if (print)fprintf(CL->local_stderr, "\n\tGroup %4d: [Group %4d (%4d seq)] with [Group %4d (%4d seq)]-->[Len=%5d][PID:%d]%s",P->index,R->index,R->nseq,L->index,L->nseq, A->len_aln,getpid(),(P->fork==1)?"[Forked]":"" );
 
   return P;
 }
@@ -4241,10 +4255,6 @@ Pwfunc get_pair_wise_function (Pwfunc pw,char *dp_mode, int *glocal)
 	dps[npw]=GLOBAL;
 	npw++;
 
-	pwl[npw]=gotoh_pair_wise_lgp_sticky;
-	sprintf (dpl[npw], "gotoh_pair_wise_lgp_sticky");
-	dps[npw]=GLOBAL;
-	npw++;
 
 	pwl[npw]=proba_pair_wise;
 	sprintf (dpl[npw], "proba_pair_wise");
@@ -4369,11 +4379,12 @@ Pwfunc get_pair_wise_function (Pwfunc pw,char *dp_mode, int *glocal)
 	sprintf (dpl[npw], "linked_pair_wise");
 	dps[npw]=GLOBAL;
 	npw++;
-
-	pwl[npw]=clinked_pair_wise;
-	sprintf (dpl[npw], "clinked_pair_wise");
+	
+	pwl[npw]=linked_pair_wise_collapse;
+	sprintf (dpl[npw], "linked_pair_wise_collapse");
 	dps[npw]=GLOBAL;
 	npw++;
+
 
 	/*
 	pwl[npw]=viterbiDGL_pair_wise;
