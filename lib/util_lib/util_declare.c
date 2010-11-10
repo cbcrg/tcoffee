@@ -36,8 +36,8 @@ int *** duplicate_residue_index (int ***r)
   nr=vcalloc ( d1, sizeof (int**));
   for (a=0; a<d1; a++)
     {
-      d2=read_array_size_new (r[a]);
-      nr[a]=vcalloc ( d2, sizeof (int*));
+      d2=read_array_size_new (r[a])-1;
+      nr[a]=vcalloc ( d2+1, sizeof (int*));
       for (b=0; b<d2; b++)
 	{
 	  d3=read_array_size_new (r[a][b]);

@@ -1232,7 +1232,7 @@ Constraint_list *  freeze_constraint_list (Constraint_list *CL);
 Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file);
 int   dump_constraint_list (Constraint_list *CL, char *file,char *mode);
 int   safe_dump_constraint_list (Constraint_list *CL, char *file,char *mode, Sequence *RS);
-int display_constraint_list (Constraint_list *CL, FILE *fp, char *tag);
+FILE* display_constraint_list (Constraint_list *CL, FILE *fp, char *tag);
 
 
 Constraint_list *index_constraint_list ( Constraint_list *CL);

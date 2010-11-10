@@ -3102,13 +3102,15 @@ NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_li
       static char *tmp;
       NT_node *T;
       if (!tmp)tmp=vtmpnam(NULL);
-      HERE ("******* BEFORE %d", CL->ne);
-      dump_constraint_list (CL, tmp, "w");
+      if ( CL && CL->dp_mode && strstr (CL->dp_mode, "collapse"))dump_constraint_list (CL, tmp, "w");
       T=local_tree_aln (LT, RT, A, nseq, CL);
-      HERE ("******* INSIDE %d", CL->ne);
-      empty_constraint_list  (CL);
-      undump_constraint_list (CL, tmp);
-      HERE ("******* AFTER %d", CL->ne);
+      
+      if ( CL && CL->dp_mode && strstr (CL->dp_mode, "collapse"))
+	{
+	  empty_constraint_list  (CL);
+	  undump_constraint_list (CL, tmp);
+	  
+	}
       return T;
     }
   else return seqan_tree_aln (LT, RT, A, nseq, CL);
@@ -3269,11 +3271,11 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
     }
 
   P->score=A->score_aln=score=profile_pair_wise (A,L->nseq, L->lseq,R->nseq,R->lseq,CL);
+  score=node2sub_aln_score (A, CL, CL->evaluate_mode,P);
   A->len_aln=strlen (A->seq_al[P->lseq[0]]);
-  //score=node2sub_aln_score (A, CL, CL->evaluate_mode,P);
-  score=-100;
-  if (print)fprintf(CL->local_stderr, "\n\tGroup %4d: [Group %4d (%4d seq)] with [Group %4d (%4d seq)]-->[Score=%4d][Len=%5d][PID:%d]%s",P->index,R->index,R->nseq,L->index,L->nseq,score, A->len_aln,getpid(),(P->fork==1)?"[Forked]":"" );
-
+  
+  if (print)fprintf(CL->local_stderr, "\n\tGroup %4d: [Group %4d (%4d seq)] with [Group %4d (%4d seq)]-->[Len=%5d][PID:%d]%s",P->index,R->index,R->nseq,L->index,L->nseq, A->len_aln,getpid(),(P->fork==1)?"[Forked]":"" );
+  
   return P;
 }
 

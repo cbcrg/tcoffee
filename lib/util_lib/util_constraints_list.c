@@ -1310,6 +1310,7 @@ Constraint_list *  empty_constraint_list (Constraint_list *CL)
   //reset all the indexes
   int a, b;
   
+  if ( !CL || ! CL->residue_index) return CL;
   for (a=0; a<(CL->S)->nseq; a++)
     {
       b=0;
@@ -1329,7 +1330,7 @@ Constraint_list *  undump_constraint_list (Constraint_list *CL, char *file)
 	FILE *fp;
 	int a, b, c,e,tot;
 	
-	if (!CL)return CL;
+	if (!CL || !CL->residue_index)return CL;
 	entry=vcalloc ( CL->entry_len+1, sizeof (int));
 	fp=vfopen (file, "r");
 	b=0;c=0;tot=0;
@@ -1360,7 +1361,7 @@ int safe_dump_constraint_list (Constraint_list *CL,char *file, char *mode, Seque
 	int *entry = vcalloc (CL->entry_len+1, sizeof (int));
 	int b,c,s1, r1, s2, r2;
 	int d=0;
-	if (!CL || !CL->S || CL->ne==0)return;
+	if (!CL || !CL->S || !CL->residue_index || CL->ne==0)return;
 	S=CL->S;
 	if (RS)cache=fix_seq_seq (S, RS);
 // 	if (!entry)
@@ -1415,7 +1416,8 @@ int dump_constraint_list (Constraint_list *CL, char *file, char *mode)
 	return safe_dump_constraint_list (CL, file, mode, NULL);
 }
 
-int display_constraint_list (Constraint_list *CL, FILE *fp, char *tag)
+  
+FILE* display_constraint_list (Constraint_list *CL, FILE *fp, char *tag)
 {
 	Sequence *S=CL->S;
 	int b,c,l,s1,r1,s2,r2,w2,n;
@@ -1423,19 +1425,23 @@ int display_constraint_list (Constraint_list *CL, FILE *fp, char *tag)
 	n=0;
 	for (s1=0; s1<S->nseq; s1++)
 	  {
-	    int l=S->len[s1];
+	    fprintf (fp, "SEQUENCE %d\n", s1);
 	    
-	    for (r1=1; r1<=l; r1++)
+	    r1=1;
+	    while (CL->residue_index[s1][r1])
 	      {
 		for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
 		  {
 		    s2=CL->residue_index[s1][r1][b+SEQ2];
 		    r2=CL->residue_index[s1][r1][b+R2];
 		    w2=CL->residue_index[s1][r1][b+WE];
-		    fprintf ( fp, "%s -- %5d -- %5d %5d %5d %5d --> %5d", tag, ++n, s1, s2, r1, r2, w2);
+		    fprintf ( fp, "\t%sS1:%5d - R1:%5d S2:%5d R2:%5d W:%5d\n", tag,s1,r1, s2, r2,w2);
 		  }
+		r1++;
 	      }
+	    
 	  }
+	return fp;
 }
 
 
@@ -1563,9 +1569,49 @@ Constraint_list * add_list_entry2list (Constraint_list *CL, int n_para, ...)
 	return CL;
 }
 
+int *extract_entry (Constraint_list *CL)
+{
+	static int s=0;
+	static int r=0;
+	static int l=1;
+	static int *entry;
+	int v;
+	
+	if (!entry)entry=vcalloc (100, sizeof (int));
+	if (!CL){s=0;r=1;l=1; return NULL;}
+	
 
+	for (; s<(CL->S)->nseq; s++)
+	  {
+	    while ((CL->residue_index[s][r]))
+	      {
+		for (; l<CL->residue_index[s][r][0];)
+		  {
+		    
+		    entry[SEQ1]=s;
+		    entry[R1]=r;
+		    entry[SEQ2]=CL->residue_index[s][r][l+SEQ2];
+		    entry[R2]=  CL->residue_index[s][r][l+R2];
+		    entry[WE]=  CL->residue_index[s][r][l+WE];
+		    entry[CONS]=CL->residue_index[s][r][l+CONS];
+		    entry[MISC]=CL->residue_index[s][r][l+MISC];
+		    entry[INDEX]=l;
+		    l+=ICHUNK;
+		    return entry;
+		  }
+		l=1;
+		r++;
+	      }
+	    r=0;
+	  }
+	s=0;
+	r=0;
+	l=1;
+	
+	return NULL;
+}
+#ifdef FAFAFA
 int next_entry (Constraint_list *CL, int *s, int*r, int *l);
-
 int *extract_entry (Constraint_list *CL)
 {
 	static int s=0;
@@ -1575,7 +1621,7 @@ int *extract_entry (Constraint_list *CL)
 	int v;
 	
 	if (!entry)entry=vcalloc (100, sizeof (int));
-	if (!CL){s=1;r=1;l=1; return NULL;}
+	if (!CL){s=0;r=1;l=1; return NULL;}
 	
 	
 	while ((v=next_entry (CL, &s, &r, &l)))
@@ -1603,7 +1649,7 @@ int next_entry (Constraint_list *CL, int *s, int*r,int *l)
 	Sequence *S=CL->S;
 	
 	if (s[0]>=S->nseq)return 0;
-	else if (r[0]>(CL->S)->len[s[0]])
+	else if (!CL->residue_index[s[0]][r[0]])
 	{
 		r[0]=1;
 		l[0]=1;
@@ -1623,7 +1669,7 @@ int next_entry (Constraint_list *CL, int *s, int*r,int *l)
 		return 1;
 	}
 }
-
+#endif
 
 int CLisCompacted (Constraint_list *CL, char *t)
 {
@@ -3132,6 +3178,7 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 			{
 				s2=CL->residue_index[s1][r1][a+SEQ2];
 				r2=CL->residue_index[s1][r1][a+R2];
+			       
 				fprintf (fp, "%d ",residue_pair_extended_list_pc (CL,s1, r1,s2, r2));
 			}
 		}
@@ -3159,7 +3206,6 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 
 
 // relax constraint list for gene prediction
-
 Constraint_list * expand_constraint_list_4gp (Constraint_list *CL, int T)
 {
 	int *L;
@@ -3644,11 +3690,12 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 	char *p, *s;
 	char weight_mode [100];
 	int *cache;
-	int top=0;
+	int top=1;
 	int *entry;
 	int **fixed;
 	entry=vcalloc (CL->entry_len+1, sizeof (int));
 	
+	//MSA are now read as one to all (+ extra bits if needed) libraries
 	//if ( atoigetenv ("TOP4TC")){HERE ("TOP=1");top=1;}
 	
 	sprintf ( weight_mode , "%s", (!in_weight_mode || strm (in_weight_mode, "default"))?"sim":in_weight_mode);

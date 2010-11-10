@@ -188,7 +188,7 @@ Alignment * main_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, con
   
   Alignment *TopS=NULL, *LastS=NULL, *CurrentS=NULL;
   
-  
+ 
   if ( IN->A)IN=IN->A;
   while (IN)
     {
@@ -2237,20 +2237,106 @@ int residue_pair_extended_list_4gp ( Constraint_list *CL, int s1, int r1, int s2
 
 int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2, int r2 )
         {
-	  double score=0;  
-
-
-
-	int a, t_s, t_r;
-	static int **hasch;
-	static int max_len;
-	int field;
-	double delta;
-	
-	/*
+	  //old norm does not take into account the number of effective intermediate sequences
 	  
+	  double score=0;  
+	  int a, t_s, t_r;
+	  static int **hasch;
+	  int nclean;
+	  static int max_len;
+	  int field;
+	  double delta;
+	  int norm1=0;
+	  int norm2=0;
+	  /*
+	    
 	  function documentation: start
+	  
+	  int residue_pair_extended_list ( Constraint_list *CL, int s1, int r1, int s2, int r2);
+	  
+	  Computes the extended score for aligning residue seq1(r1) Vs seq2(r2)
+	  Computes: matrix_score
+	            non extended score
+		    extended score
 
+	  The extended score depends on the function index_res_constraint_list.
+	  This function can compare a sequence with itself.
+	  
+	  Associated functions: See util constraint list, list extention functions.
+	  
+	  function documentation: end
+	*/
+	
+	field=CL->weight_field;
+	field=WE;
+	
+	if ( r1<=0 || r2<=0)return 0;
+	if ( !hasch || max_len!=(CL->S)->max_len)
+	       {
+	       max_len=(CL->S)->max_len;
+	       if ( hasch) free_int ( hasch, -1);
+	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
+	       
+	       }
+
+
+	/* Check matches for R1 in the indexed lib*/
+	hasch[s1][r1]=FORBIDEN;
+	for (a=1; a< CL->residue_index[s1][r1][0]; a+=ICHUNK)
+	  {
+	    t_s=CL->residue_index[s1][r1][a+SEQ2];
+	    t_r=CL->residue_index[s1][r1][a+R2];
+	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];
+	    norm1++;
+	  }
+	
+	
+	/*Check Matches for r1 <-> r2 in the indexed lib */
+	for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
+	  {
+	    t_s=CL->residue_index[s2][r2][a+SEQ2];
+	    t_r=CL->residue_index[s2][r2][a+R2];
+	    norm2++;
+	    
+	    if (hasch[t_s][t_r])
+	      {
+		if (hasch[t_s][t_r]==FORBIDEN)
+		  {
+		    score+=((float)CL->residue_index[s2][r2][a+2]/NORM_F);
+		  }
+		else 
+		  {
+		    delta=MIN((((float)hasch[t_s][t_r]/NORM_F)),(((float)CL->residue_index[s2][r2][a+field]/NORM_F)));
+		    score+=delta;
+		  }
+	      }
+	  }
+
+	clean_residue_pair_hasch ( s1, r1,s2, r2, hasch, CL);	
+	norm1=MIN(norm1,norm2);
+
+	//Old Normailzation: on the number of sequences, useless when not doiang an all against all
+	//norm1=(CL->S)->nseq;
+	score=(norm1)?score/norm1:0;
+	
+	return score*NORM_F;
+	}
+int residue_pair_extended_list_pc_old ( Constraint_list *CL, int s1, int r1, int s2, int r2 )
+        {
+	  //old norm does not take into account the number of effective intermediate sequences
+	  
+	  double score=0;  
+	  int a, t_s, t_r;
+	  static int **hasch;
+	  
+	  static int max_len;
+	  int field;
+	  double delta;
+	  
+	  /*
+	    
+	  function documentation: start
+	  
 	  int residue_pair_extended_list ( Constraint_list *CL, int s1, int r1, int s2, int r2);
 	  
 	  Computes the extended score for aligning residue seq1(r1) Vs seq2(r2)
@@ -2276,7 +2362,6 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	       if ( hasch) free_int ( hasch, -1);
 	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
 	       }
-	
 
 
 	/* Check matches for R1 in the indexed lib*/
@@ -2287,7 +2372,8 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	    t_r=CL->residue_index[s1][r1][a+R2];
 	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];
 	  }
-
+	
+	
 	/*Check Matches for r1 <-> r2 in the indexed lib */
 	for (a=1; a< CL->residue_index[s2][r2][0]; a+=ICHUNK) 
 	  {
