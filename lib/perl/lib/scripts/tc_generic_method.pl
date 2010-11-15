@@ -101,9 +101,10 @@ if (!$cl=~/\-mincov\=/){$mincov=80;}
 
 
 
+
 if ($mode eq "seq_msa")
   {
-    &seq2msa($mode,&my_get_opt ( $cl, "-infile=",1,1, "-method=",1,2, "-param=",0,0, "-outfile=",1,0));
+    &seq2msa($mode,&my_get_opt ( $cl, "-infile=",1,1, "-method=",1,2, "-param=",0,0,"-outfile=",1,0, "-database=",0,0));
   }
 elsif ( $mode eq "tblastx_msa")
   {
@@ -353,6 +354,9 @@ sub blast2pdb_template
   #print stdout "\n";
   foreach $seq (keys(%s))
     {
+      my $c;
+      my $found;
+      
       open (F, ">seqfile");
       print (F ">$A\n$s{$seq}{seq}\n");
       close (F);
@@ -361,51 +365,71 @@ sub blast2pdb_template
      
       %p=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$blast_output);
       unlink ($blast_output);
-      if ($p{n}>1)
+      
+      $c=1;
+      print stdout "\tProcess: >$s{$seq}{name} [$SERVER/blast/$db][$CACHE_STATUS]\n";
+      while (!$found && $c<$p{n})
 	{
-	  $pdbid=id2pdbid($p{1}{identifyer});
-	  if ( length ($pdbid)>5){$pdbid=id2pdbid($p{1}{definition});}
+	  $pdbid=&id2pdbid($p{$c}{identifyer});
+	  if ( length ($pdbid)>5){$pdbid=id2pdbid($p{$c}{definition});}
 	  
+	  if (&pdb_is_released ($pdbid)){$found=1;}
+	  else 
+	    {
+	      print stdout "\t\t**$pdbid [PDB NOT RELEASED or WITHDRAWN]\n";
+	      $c++;}
+	}
+
+      if ($found)
+	{
 	  print R ">$s{$seq}{name} _P_ $pdbid\n";
-	  print stdout "\tProcess: >$s{$seq}{name} _P_ $pdbid [$SERVER/blast/$db][$CACHE_STATUS]\n";
+	  print stdout "\t\t >$s{$seq}{name} _P_ $pdbid\n";
 	}
       else
 	{
 	  print R ">$s{$seq}{name}\n";
-	  print stdout "\tProcess: >$s{$seq}{name} _P_ No Template Found [$SERVER/blast/$db][$CACHE_STATUS]\n";
+	  print stdout "\t\t >$s{$seq}{name} No Template Selected\n";
 	}
     }
   close (R);
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile);
 }
-sub blast_msa_o2a
+sub pdb_is_released
   {
-    my ($infile,$outfile)=@_;
+    my $pdb=shift;
+    my $f=vtmpnam();
+    
+    $value= &safe_system ("t_coffee -other_pg extract_from_pdb -is_released_pdb_name $pdb > $f");
+    my $r=&file2string ($f);
+    chomp($r);
+    return $r;
+  }
+sub blast_msa
+  {
+    my ($infile,$db,$outfile)=@_;
     my ($a, %seq);
     my $seqfile;
     my $SEQ=new FileHandle;
     my $seqfile="seqfile";
-   
-    open (SEQ, ">$seqfile");
-    %s1=&read_fasta_seq ($infile);
+    my @txt;
+    
+    
+    %s1=&read_fasta_seq ($db);
+    
     foreach $s (keys (%s1))
       {
 	$i=$s1{$s}{order};
-	if ( $i==0){print SEQ ">$s1{$s}{name}\n$s1{$s}{seq}\n";}
-	
 	$s{$i}{name}=$s;
 	$s{$i}{seq}=$s1{$s}{seq};
 	$s{$i}{len}=length( $s{$i}{seq});
 	$s{n}++;
       }
-    close (SEQ);
     
-    `formatdb -i $infile`;
-    `blastpgp -i $seqfile -d $infile -m7 -j4 > io`;
+    &safe_system ("formatdb -i $db");
+    &safe_system  ("blastall -i $infile -d $db -m7 -p blastp -o io");
     &set_blast_type ("io");
     
-    %FB=&xml2tag_list ("io", "BlastOutput");
-    
+    %FB=&xml2tag_list ("io", "Iteration");
     open (F, ">$outfile");
     print F "! TC_LIB_FORMAT_01\n";
     print F "$s{n}\n";
@@ -418,6 +442,8 @@ sub blast_msa_o2a
     for ( $a=0; $a<$FB{n}; $a++)
       {
 	%p=blast_xml2profile ($s{$a}{name}, $s{$a}{seq},100, 0, 0, $FB{$a}{body});
+	my $query=$p{0}{name};
+	my $i= $s1{$query}{order}+1;
 	for ($b=1; $b<$p{n}; $b++)
 	  {
 	    my $l=length ($p{$b}{Qseq});
@@ -427,7 +453,7 @@ sub blast_msa_o2a
 	    my $identity=$p{$b}{identity};
 	    my @lrQ=split (//,$p{$b}{Qseq});
 	    my @lrH=split (//,$p{$b}{Hseq});
-	    my $i= $s1{$s{$a}{name}}{order}+1;
+	    
 	    my $j= $s1{$hit}{order}+1;
 	    #if ( $j==$i){next;}
 	    printf F "# %d %d\n", $i, $j;
@@ -454,7 +480,7 @@ sub blast_msa_o2a
   
   }
 
-sub blast_msa
+sub blast_msa_old
   {
     my ($infile,$outfile)=@_;
     my ($a, %seq);
@@ -467,11 +493,11 @@ sub blast_msa
 	$s{$i}{len}=length( $s{$i}{seq});
 	$s{n}++;
       }
-    `formatdb -i $infile`;
-    `blastpgp -i $infile -d $infile -m7 -j4 > io`;
+    &safe_system ("formatdb -i $infile");
+    &safe_system ("blastall -i $infile -d $infile -m7 -o io");
     &set_blast_type ("io");
     
-    %FB=&xml2tag_list ("io", "BlastOutput");
+    %FB=&xml2tag_list ("io", "Iteration");
     
     open (F, ">$outfile");
     print F "! TC_LIB_FORMAT_01\n";
@@ -521,18 +547,18 @@ sub blast_msa
 
 sub seq2msa
   {
-    my ($mode, $infile, $method, $param, $outfile)=@_;
-    &set_temporary_dir ("set",$infile,"seq.pep");
+    my ($mode, $infile, $method, $param, $outfile,$database)=@_;
+    &set_temporary_dir ("set",$infile,"seq.pep", $database, "db.pep");
     $param.=" >/dev/null 2>&1 ";
+    
     
     #make sure test.pep is in FASTA
     &safe_system ("t_coffee -other_pg seq_reformat -in seq.pep -output fasta_seq > x");
     `mv x seq.pep`;
     
-    if ( $method eq "blastpgp")
+    if ( $method eq "blastp")
       {
-	if ( $param =~/o2a/){&blast_msa_o2a ("seq.pep", "result.aln");}
-	else {&blast_msa ("seq.pep", "result.aln");}
+	&blast_msa ("seq.pep", "db.pep","result.aln");
       }
     elsif ( $method eq "muscle")
       {
@@ -792,7 +818,7 @@ sub seq2profile_pair
 sub pg_is_installed
   {
     my @ml=@_;
-    my $r, $p, $m;
+    my ($r, $p, $m);
     my $supported=0;
     
     my $p=shift (@ml);
@@ -804,13 +830,25 @@ sub pg_is_installed
     else
       {
 	$r=`which $p 2>/dev/null`;
-	if ($r eq ""){return 0;}
-	else {return 1;}
+	if ($r eq ""){$r=0;}
+	else {$r1;}
+
+	if ($r==0 && is_blast_package ($p)){return pg_is_installed ("legacy_blast.pl");}
+	else {return $r;}
       }
   }
 
-
-
+sub is_blast_package
+  {
+    my $p=shift;
+    if ( $p=~/blastp/){return 1;}
+    elsif ($p=~/blastall/){return 1;}
+    elsif ($p=~/blastn/){return 1;}
+    elsif ($p=~/blastx/){return 1;}
+    elsif ($p=~/formatdb/){return 1;}
+    else {return 0;}
+  }
+    
 sub check_internet_connection
   {
     my $internet;
@@ -869,7 +907,7 @@ sub set_temporary_dir
 	
 	for ( $a=0; $a<=$#list; $a+=2)
 	      {
-		`cp $list[$a] $tmp_dir/$list[$a+1]`;
+		if (-e $list[$a]){ `cp $list[$a] $tmp_dir/$list[$a+1]`;}
 	      }
 	chdir $tmp_dir;
       }
@@ -900,7 +938,7 @@ sub set_temporary_dir
 	    shift (@list); shift (@list);
 	    foreach $f (@list)
 	      {
-		`mv $tmp_dir/$f .`;
+		if (-e ("$tmp_dir/$f")){`mv $tmp_dir/$f .`;}
 	      }
 	  }
       }
@@ -1237,7 +1275,7 @@ sub hit_tag2pdbid
     $pdbid=~s/_//;
     return $pdbid;
   }
-sub id2pdbid 
+sub id2pdbid
   {
     my $in=@_[0];
     my $id;
@@ -1508,6 +1546,9 @@ sub ncbi_blast_xml2profile
     
     $seq=~s/[^a-zA-Z]//g;
     $L=length ($seq);
+   
+    %query=&xml2tag_list ($string, "Iteration_query-def");
+    $name=$query{0}{body};
     
     %hit=&xml2tag_list ($string, "Hit");
     
@@ -1585,6 +1626,7 @@ sub ncbi_blast_xml2profile
 	      }
 	  }
       }
+    
     
     $profile{n}=0;
     $profile{$profile{n}}{name}=$name;
@@ -2396,9 +2438,8 @@ sub seq2tblastx_lib
 	print F "$sname[$a] $slen[$a]  $slist[$a]\n"
       }
     close (F);
-    `formatdb -i infile -p F`;
-
-    `blastall -p tblastx -i infile -d infile -m 7 -S1>blast.output`;
+    &safe_system ("formatdb -i infile -p F");
+    &safe_system ("blastall -p tblastx -i infile -d infile -m 7 -S1>blast.output");
     
     ncbi_tblastx_xml2lib_file ("outfile", file2string ("blast.output"));
     &set_temporary_dir ("unset",$mode, $method, "outfile",$outfile);
@@ -2427,10 +2468,9 @@ sub seq2tblastpx_lib
 	print F "$sname[$a] $slen[$a]  $slist[$a]\n"
       }
     close (F);
-    `printenv > /home/notredame/tmp/ce`;
-    `t_coffee -other_pg seq_reformat -in infile -output tblastx_db1 > tblastxdb`;
-    `formatdb -i tblastxdb -p T`;
-    `blastall -p blastp -i tblastxdb -d tblastxdb -m7 >blast.output`;
+    &safe_system("t_coffee -other_pg seq_reformat -in infile -output tblastx_db1 > tblastxdb");
+    &safe_system ("formatdb -i tblastxdb -p T");
+    &safe_system ("blastall -p blastp -i tblastxdb -d tblastxdb -m7 >blast.output");
     ncbi_tblastpx_xml2lib_file ("outfile", file2string ("blast.output"), %s);
     &set_temporary_dir ("unset",$mode, $method, "outfile",$outfile);
     myexit ($EXIT_SUCCESS);
@@ -2759,7 +2799,43 @@ END
     &cleanup();
   }
    
-
+sub blast_com2new_blast_com
+    {
+      my $com=shift;
+      if ($ENV{"NCBI_BLAST_4_TCOFFEE"} eq "OLD"){return $com;}
+      elsif (!&pg_is_installed("legacy_blast.pl")){return $com;}
+      else 
+	{
+	  if ($com=~/formatdb/)
+	    {
+	      $com=~s/formatdb/makeblastdb/;
+	      $com=~s/\-i/\-in/;
+	      if ($com =~/pF/){$com=~s/\-pF/\-dbtype nucl/;}
+	      if ($com =~/p F/){$com=~s/\-p F/\-dbtype nucl/;}
+	      $com="$com -logfile /dev/null";
+	      return $com;
+	    }
+	  elsif (&is_blast_package($com))
+	    {
+	      my $path;
+	      
+	      if ( $ENV{"NCBI_BIN_4_TCOFFEE"}){$path=$ENV{"NCBI_BLAST_4_TCOFFEE"};}
+	      else
+		{
+		  $path=`which legacy_blast.pl`;
+		  $path=~s/\/legacy_blast\.pl//;
+		  chomp ($path);
+		}
+	      $path="--path $path";
+	      if ( $com=~/\>\>/){$com=~s/\>\>/ $path \>\>/;}
+	      elsif ( $com=~/\>/){$com=~s/\>/ $path \>/;}
+	      else {$com.=" $path";}
+	      $com="legacy_blast.pl $com";
+	      
+	      return $com;
+	    }
+	}
+    }
 sub safe_system 
 {
   my $com=shift;
@@ -2770,7 +2846,7 @@ sub safe_system
   my $ppid=getppid();
   if ($com eq ""){return 1;}
   
-  
+  if ( ($com=~/^blast/) ||($com=~/^formatdb/)){$com=&blast_com2new_blast_com($com);} 
 
   if (($pid = fork ()) < 0){return (-1);}
   if ($pid == 0)
@@ -2855,60 +2931,4 @@ sub check_configuration
 	}
       return 1;
     }
-sub pg_is_installed
-  {
-    my @ml=@_;
-    my $r, $p, $m;
-    my $supported=0;
-    
-    my $p=shift (@ml);
-    if ($p=~/::/)
-      {
-	if (safe_system ("perl -M$p -e 1")==$EXIT_SUCCESS){return 1;}
-	else {return 0;}
-      }
-    else
-      {
-	$r=`which $p 2>/dev/null`;
-	if ($r eq ""){return 0;}
-	else {return 1;}
-      }
-  }
-
-
-
-sub check_internet_connection
-  {
-    my $internet;
-    my $tmp;
-    &check_configuration ( "wget"); 
-    
-    $tmp=&vtmpnam ();
-    
-    if     (&pg_is_installed    ("wget")){`wget www.google.com -O$tmp >/dev/null 2>/dev/null`;}
-    elsif  (&pg_is_installed    ("curl")){`curl www.google.com -o$tmp >/dev/null 2>/dev/null`;}
-    
-    if ( !-e $tmp || -s $tmp < 10){$internet=0;}
-    else {$internet=1;}
-    if (-e $tmp){unlink $tmp;}
-
-    return $internet;
-  }
-sub check_pg_is_installed
-  {
-    my @ml=@_;
-    my $r=&pg_is_installed (@ml);
-    if (!$r && $p=~/::/)
-      {
-	print STDERR "\nYou Must Install the perl package $p on your system.\nRUN:\n\tsudo perl -MCPAN -e 'install $pg'\n";
-      }
-    elsif (!$r)
-      {
-	myexit(flush_error("\nProgram $p Supported but Not Installed on your system"));
-      }
-    else
-      {
-	return 1;
-      }
-  }
 

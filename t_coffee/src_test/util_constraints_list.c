@@ -751,7 +751,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 		}
 	}
 	else if ( strcmp (aln_mode, "multiple")==0)
-	{
+	  {
 		int d;
 		char buf[1000];
 		
@@ -775,14 +775,52 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 			
 		}
 		vfree (bufA);
-		
-	}
+	  }
 	else if ( strstr(aln_mode, "o2a"))
+	  {
+	    int x, y, n;
+	    int *used;
+	    static char *tmpf;
+	    FILE *fp;
+	    int byte=CL->o2a_byte;
+	    int max=0;
+	    
+	    for (x=0; x<(CL->S)->nseq; x++)max+=(CL->master[x]);
+	    
+	    if (CL->o2a_byte>=max)byte=(max/get_nproc())+1;
+	    
+	    if (!tmpf)tmpf=vtmpnam (NULL);
+	    
+	    fp=vfopen (tmpf, "w");
+	    for (n=0,x=0; x<(CL->S)->nseq; x++)
+	      {
+		if (CL->master[x]){fprintf (fp, "%d ", x);n++;}
+		if (n==byte || (n && x==(CL->S)->nseq-1))
+		      {
+			vfclose (fp);
+			sprintf (bufS, "%d %s", n,file2string (tmpf));n=0;
+			
+			bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
+			if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
+			if ( check_seq_type ( method, bufS, S))
+			  {
+			    job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
+			    job=queue_cat (job, job->c);
+			  }
+			vfree (bufA);
+			fp=vfopen (tmpf, "w");
+		      }
+	      }
+	    vfclose (fp);
+	  }
+	
+	else if ( strstr(aln_mode, "old_o2a"))
 	  {
 	    int x, y;
 	    
 	    for (x=0; x< S->nseq; x++)
 	      {
+		if (!CL->master[x])continue;
 		sprintf (bufS, "%d %d", S->nseq, x);
 		for ( y=0; y< S->nseq; y++)
 		  {
@@ -805,50 +843,51 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 	  }
 	else if ( strstr(aln_mode, "pairwise"))
 	  {
-		
-		int do_mirror, do_self, x, y, id;
-		do_mirror=(strstr(aln_mode, "m_"))?1:0;
-		do_self=(strstr(aln_mode, "s_"))?1:0;
-		
-		
-		for (x=0; x< S->nseq; x++)
-			for ( y=(do_mirror)?0:x; y< S->nseq; y++)
-			{
-				
-				id=DM->similarity_matrix[x][y];
-				
-				if ( x==y && !do_self);
-				else if ( !is_in_range(id,method->minid, method->maxid));
-				else
-				{
-					sprintf (bufS, "2 %d %d",x,y);
-					bufA=make_aln_command (method,in=vtmpnam(NULL),out=vtmpnam (NULL));
-					
-					if (strrchr(bufA, '>')==NULL)strcat (bufA, TO_NULL_DEVICE);
-					if (check_seq_type (method, bufS, S))
-					{
-						job->c=print_lib_job (job->c, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ",method,fname,bufA, bufS, in, out);
-						job=queue_cat (job, job->c);
-					}
-					else if ( method->seq_type[0]=='P' && hijack_P_jobs)
-					{
-						//Hijack _P_ jobs without enough templates
-						static TC_method *proba_pairM;
-						
-						fprintf (stderr, "\n\t Information: Method %s cannot be applied to [%s vs %s]. Use proba_pair instead", method->executable, (CL->S)->name[x], (CL->S)->name [y]);
-						if (!proba_pairM)
-						{
-							proba_pairM=method_file2TC_method(method_name2method_file ("proba_pair"));
-							proba_pairM->PW_CL=method2pw_cl(proba_pairM, CL);
-						}
-						job->c=print_lib_job (job->c, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ",proba_pairM,fname,bufA, bufS, in, out);
-						job=queue_cat (job, job->c);
-					}
-					
-					vfree (bufA);
-				}
-			}
-	}
+	    int do_mirror, do_self, x, y, id;
+	    do_mirror=(strstr(aln_mode, "m_"))?1:0;
+	    do_self=(strstr(aln_mode, "s_"))?1:0;
+	    
+	    for (x=0; x< S->nseq; x++)
+	      {
+		if (!CL->master[x])continue;
+		for ( y=(do_mirror)?0:x; y< S->nseq; y++)
+		  {
+		    
+		    id=DM->similarity_matrix[x][y];
+		    
+		    if ( x==y && !do_self);
+		    else if ( !is_in_range(id,method->minid, method->maxid));
+		    else
+		      {
+			sprintf (bufS, "2 %d %d",x,y);
+			bufA=make_aln_command (method,in=vtmpnam(NULL),out=vtmpnam (NULL));
+			
+			if (strrchr(bufA, '>')==NULL)strcat (bufA, TO_NULL_DEVICE);
+			if (check_seq_type (method, bufS, S))
+			  {
+			    job->c=print_lib_job (job->c, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ",method,fname,bufA, bufS, in, out);
+			    job=queue_cat (job, job->c);
+			  }
+			else if ( method->seq_type[0]=='P' && hijack_P_jobs)
+			  {
+			    //Hijack _P_ jobs without enough templates
+			    static TC_method *proba_pairM;
+			    
+			    fprintf (stderr, "\n\t Information: Method %s cannot be applied to [%s vs %s]. Use proba_pair instead", method->executable, (CL->S)->name[x], (CL->S)->name [y]);
+			    if (!proba_pairM)
+			      {
+				proba_pairM=method_file2TC_method(method_name2method_file ("proba_pair"));
+				proba_pairM->PW_CL=method2pw_cl(proba_pairM, CL);
+			      }
+			    job->c=print_lib_job (job->c, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ",proba_pairM,fname,bufA, bufS, in, out);
+			    job=queue_cat (job, job->c);
+			  }
+			
+			vfree (bufA);
+		      }
+		  }
+	      }
+	  }
 	
 	return job;
 }
@@ -1260,10 +1299,11 @@ char *make_aln_command(TC_method *m, char *seq, char *aln)
 	char buf[1000];
 	
 	//      sprintf ( buf, "%s %s %s%s %s%s %s", m->executable, m->param1, m->in_flag, seq,m->param2, m->out_flag,aln, m->param);
+	
 	sprintf ( buf, "%s %s %s%s %s %s%s %s", m->executable, m->param1, m->in_flag, seq,m->param2, m->out_flag,aln, m->param);
 	command=vcalloc ( strlen (buf)+100, sizeof (char));
 	sprintf ( command, "%s", buf);
-	
+	//HERE ("%s", command); exit (0);
 	
 	command=substitute (command, "&bnsp", " ");
 	command=substitute (command, "no_name", "");
@@ -3206,7 +3246,6 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 
 
 // relax constraint list for gene prediction
-
 Constraint_list * expand_constraint_list_4gp (Constraint_list *CL, int T)
 {
 	int *L;
@@ -5238,12 +5277,12 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
 
-	sprintf (list[n][0], "blast_msa");
+	sprintf (list[n][0], "blastp_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "DOC: BLAST multiple Aligner [%s]\n", NCBIBLAST_ADDRESS);
 	fprintf ( fp, "EXECUTABLE seq_msa\n");
-	fprintf ( fp, "EXECUTABLE2 blastpgp\n" );
+	fprintf ( fp, "EXECUTABLE2 blastp\n" );
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   fL\n");
 	fprintf ( fp, "IN_FLAG    -infile=\n");
@@ -5253,16 +5292,15 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", NCBIBLAST_4_TCOFFEE);
 	vfclose (fp);}
 
-	sprintf (list[n][0], "blast_o2a");
+	sprintf (list[n][0], "blastp_o2a");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "DOC: BLAST multiple Aligner [%s]\n", NCBIBLAST_ADDRESS);
 	fprintf ( fp, "EXECUTABLE seq_msa\n");
-	fprintf ( fp, "EXECUTABLE2 blastpgp\n" );
+	fprintf ( fp, "EXECUTABLE2 blastp\n" );
 	fprintf ( fp, "ALN_MODE   o2a\n");
 	fprintf ( fp, "OUT_MODE   fL\n");
 	fprintf ( fp, "IN_FLAG    -infile=\n");
-	fprintf ( fp, "PARAM      -param=o2a\n");
 	fprintf ( fp, "OUT_FLAG   -outfile=\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", NCBIBLAST_ADDRESS);

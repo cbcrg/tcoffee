@@ -11150,7 +11150,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   
        else if ( strm (action, "trim"))
 	 {
-	   D1->A=simple_trimseq (D1->A,(D2)?D2->A:NULL, action_list[1], ACTION (2));
+	   D1->A=simple_trimseq (D1->A,(D2)?D2->A:NULL, action_list[1], ACTION (2), NULL);
 	   
 	   free_sequence (D1->S,(D1->S)->nseq);
 	   D1->S=aln2seq (D1->A); 

@@ -1,127 +1,14 @@
---------------------------------------------------------------------------------
-I1 cache:         67108864 B, 64 B, 2-way associative
-D1 cache:         32768 B, 64 B, 8-way associative
-L2 cache:         268435456 B, 64 B, 8-way associative
-Command:          t_coffee 1aab_ref1.pep -multi_core no
-Data file:        cachegrind.out.25590
-Events recorded:  Ir I1mr I2mr Dr D1mr D2mr Dw D1mw D2mw
-Events shown:     Ir I1mr I2mr Dr D1mr D2mr Dw D1mw D2mw
-Event sort order: Ir I1mr I2mr Dr D1mr D2mr Dw D1mw D2mw
-Thresholds:       99 0 0 0 0 0 0 0 0
-Include dirs:     
-User annotated:   
-Auto-annotation:  off
+CLUSTAL W (1.82) multiple sequence alignment
 
---------------------------------------------------------------------------------
-         Ir  I1mr  I2mr         Dr    D1mr D2mr         Dw    D1mw    D2mw 
---------------------------------------------------------------------------------
-161,824,000 3,492 3,489 66,893,530 169,413  804 21,988,771 237,280 124,242  PROGRAM TOTALS
 
---------------------------------------------------------------------------------
-        Ir I1mr I2mr        Dr   D1mr D2mr        Dw    D1mw   D2mw  file:function
---------------------------------------------------------------------------------
-21,896,924    3    3 8,483,900  7,797    0 1,786,468       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:LOG_PLUS_EQUALS
-17,384,879   19   19 8,710,529  2,247    0 1,603,526  10,200      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_suboptimal_nw.c:backward_proba_pair_wise
-14,864,137    4    4 5,901,420     27    2   471,172       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:LOOKUP
-14,800,329   19   19 7,611,881  2,234    1 1,346,383  20,388      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_suboptimal_nw.c:forward_proba_pair_wise
- 7,664,689    0    0 2,066,400  2,460    0 1,610,342  38,951 20,646  ???:_int_malloc
- 6,115,916   41   41 3,020,573    544    0   443,460   2,264      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_suboptimal_nw.c:get_tot_prob
- 5,440,801    4    4 1,784,090      6    0   626,996       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:LOG_ADD
- 3,804,339    0    0   301,002     13    0 2,901,333 125,158 93,920  ???:memset
- 3,449,087    1    1 1,715,895 19,647    0   224,497       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:cmp_list_int2
- 3,304,302    0    0 1,154,808     37    0 1,017,733   1,379      0  ???:msort_with_tmp
- 2,903,791    0    0   904,225 16,888    0   464,575      84      0  ???:_int_free
- 2,544,449    0    0   709,777    212   24   547,420       0      0  ???:__GI_strstr
- 2,348,061    4    4   688,824     64    1   258,309       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:verify_memory
- 2,340,028    5    5 1,300,008 16,251    0        12       1      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:kill_child_pid
- 2,263,173   20   20 1,166,962  2,718    1   169,734      88      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/evaluate.c:residue_pair_extended_list
- 2,142,824   17   17 1,141,462  2,889    2   124,557      25      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/evaluate.c:residue_pair_extended_list_pc
- 2,075,295    0    0   345,327    275    4    47,709       0      0  ???:index
- 2,072,322    0    0   601,614      2    0   601,662       0      0  ???:log
- 1,938,446    0    0   722,336  4,411  121   354,976   6,498  5,430  ???:memcpy
- 1,912,888    0    0   704,721    302    0   302,126      39      3  ???:malloc
- 1,855,994    4    4   902,916      9    0   601,944      48      2  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:sub_vcalloc
- 1,806,084    3    3   702,366      2    0   702,366   2,043  2,013  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:vmalloc
- 1,743,729   18   18   825,821 20,416    1   112,772     896      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_suboptimal_nw.c:ProbaMatrix2CL
- 1,598,727    0    0   577,055    695   26   414,731     633     73  ???:vfprintf
- 1,573,525    2    2   798,306  7,139    0    64,869       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:cmp_list_int
- 1,536,997   11   11   802,302  4,361    1   267,925   4,555      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_suboptimal_nw.c:ProbabilisticModel
- 1,361,338    5    5   741,523      0    0    83,634       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/evaluate.c:clean_residue_pair_hasch
- 1,272,810    8    8   431,179     26    4    97,788       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:EXP
- 1,270,074    0    0   267,384      1    0    66,846       0      0  ???:__ieee754_log
- 1,230,712   40   37 1,230,406    485    0       192       2      2  ???:???
- 1,204,002    0    0   334,445      0    0   133,778       2      0  ???:isnan
- 1,195,867    0    0   411,318    223    2   217,896     519      1  ???:_IO_vfscanf
- 1,189,541    0    0   523,123     13    2   214,274       0      0  ???:getc
- 1,136,664   73   73   487,053 13,802    1    78,702  10,571      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_gotoh_nw.c:list2linked_pair_wise
- 1,123,445   35   35   588,491  2,325    2    73,322     625      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_gotoh_nw.c:cl2pair_list_ecl_pc
- 1,023,601   16   16   520,050     24    1   162,346       1      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/aln_convertion_util.c:analyse_aln_column
-   962,390    0    0   265,520    312    0   199,125      10      0  ???:free
-   900,290   42   42   416,713    210   28    70,166   4,517      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_suboptimal_nw.c:proba_pair_wise
-   873,989    0    0   311,288 12,095    0   203,373      45      0  ???:malloc_consolidate
-   864,186    3    3   382,266  1,194    0   192,788      16      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:free_arrayN
-   843,667    2    2   506,861    499    0   128,808     706    615  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:vrealloc
-   759,768    3    3   330,310  3,402    0   264,178      11      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:vfree
-   759,459    5    5   393,275      3    0   179,826   1,880  1,210  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:declare_arrayN
-   721,989    2    2   223,905      0    0   268,686      21      1  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:is_in_set
-   663,110    0    0   216,164     31    0   135,429     191     25  ???:_IO_default_xsputn
-   528,080    0    0   127,270    221    2   109,225     522      3  ???:strcpy
-   527,320   21   21   299,022  2,658    0    24,978       6      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_constraints_list.c:evaluate_constraint_list_reference
-   526,196    1    1   191,344      2    0   239,180      33      2  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:vcalloc
-   461,715    0    0   161,578     11    4    90,636     139     75  ???:_IO_file_xsputn@@GLIBC_2.1
-   348,888    5    5   232,335    252    0    19,749       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:new_realloc_char
-   340,175    9    9   158,929    428    0    45,825       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_constraints_list.c:get_entry_index
-   328,580    0    0    66,402    150   61    11,524       0      0  ???:strchrnul
-   307,591   37   37   168,500    203    0    21,701   1,089      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_gotoh_nw.c:cl2diag_cap
-   298,280    5    5   170,413  3,638    0    12,248     468      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_gotoh_nw.c:list2nodup_list
-   290,026    0    0   110,919     76    0    40,080       3      0  ???:____strtol_l_internal
-   272,935    0    0    42,943     71    1   145,971       2      0  ???:strtok
-   252,485   22   22   114,446      1    0    42,329       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/reformat.c:get_fasta_sequence
-   226,284    0    0    61,719    115    0    41,149       3      0  ???:realloc
-   218,430    0    0    70,953    637    0    48,560      10      4  ???:_int_realloc
-   202,791   30   30   112,775     83    0    30,811      19      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/evaluate.c:fast_coffee_evaluate_output
-   195,531    0    0    80,770  1,174  208         0       0      0  ???:strcmp
-   184,850   12   12    93,594    632    0    29,071       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_constraints_list.c:nfork_relax_constraint_list
-   158,346    2    2    69,275      0    0    39,582      24      1  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:vstrcmp
-   155,953    7    7    82,797    151    0     7,214      53      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:sort_int_inv
-   150,354    0    0    62,865  1,233    0     4,395       9      3  ???:getenv
-   144,074    7    7    72,107     21    0    29,455       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_constraints_list.c:insert_entry
-   142,392    2    2    64,630      0    0    41,525      79      4  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:declare_arrayN2
-   137,966    0    0    53,445    317    2    14,288       0      0  ???:strncmp
-   136,464    0    0    30,818     49    0    19,706      46      5  ???:_itoa_word
-   134,761    3    3    71,514    774    0     4,817       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:cmp_int
-   133,692    0    0   133,692      0    0         0       0      0  ???:__i686.get_pc_thunk.dx
-   132,716    6    6    70,177    645    0     8,918       1      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_constraints_list.c:re_weight_constraint_list
-   127,512    0    0    54,648      0    0    18,216       2      1  ???:_IO_sputbackc
-   116,476    0    0    30,513      0    0    50,061       0      0  ???:_IO_str_init_static_internal
-   113,946    0    0    27,130      0    0    62,399      60      9  ???:vsprintf
-   113,181   19   19    73,509    183    0     5,661      13      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_declare.c:copy_aln
-   112,482    0    0    45,826      0    0    27,079       0      0  ???:__isoc99_fscanf
-   111,760    0    0    22,055    524   50     4,660       0      0  ???:__strlen_sse2
-   100,405    4    4    54,380    702    0     6,045       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_constraints_list.c:seq2defined_residues
-    95,413    6    6    58,379    753    0     7,259       1      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_constraints_list.c:filter_constraint_list
-    94,443   14   14    47,981      2    0     8,046       2      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/aln_convertion_util.c:aln2pos_simple
-    91,324    4    4    43,286    713    0    20,172       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_constraints_list.c:add_entry2list2
-    88,612    0    0    40,279      4    0    16,111       0      0  ???:__ctype_b_loc
-    86,216    7    7    29,827      0    0    34,622      21      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:get_list_of_tokens
-    85,263   14   14    48,039     70    0     8,532     559      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_dp_gotoh_nw.c:cl2list_borders
-    82,888    4    4    39,423     23    0    13,531       6      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:name_is_in_list
-    80,788    0    0    29,323      0    0    33,957      60      6  ???:_IO_no_init
-    79,215    0    0    14,590      0    0    52,953      49      4  ???:_IO_old_init
-    75,610    0    0    31,201      0    0    18,960      10      4  ???:_IO_setb
-    74,546   51   51    35,201     82   18    12,392     270      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/io_func.c:read_matrice
-    74,283    0    0    29,905    763    0     9,269       1      0  ???:_dl_addr
-    69,410    2    2    25,240      0    0    31,550       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:is_gap
-    66,016    5    5    40,020      0    0    13,223       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:remove_charset
-    64,308   17   17    34,795     36    1     9,812       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/evaluate.c:fast_get_dp_cost_2
-    61,740    0    0    32,928     64    0     8,232       0      0  ???:tolower
-    58,674    4    4    29,337      0    0    16,891       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util_constraints_list.c:add_entry2list
-    57,868    9    9    19,100      2    0    17,798       1      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/io_func.c:print_html_char
-    57,008    0    0    21,634      0    0    19,161       0      0  ???:_IO_strn_overflow
-    55,251    0    0    19,054      3    0     9,530       0      0  ???:sYSTRIm
-    54,855    0    0    22,701      6    0    11,427       4      4  ???:fputc
-    54,089   54   54    17,230     62    0    22,626      50      4  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:get_cl_param
-    53,556    0    0    22,117    550    1     8,810      21      6  ???:do_lookup_x
-    50,370    3    3    21,924      0    0    16,788       0      0  /mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test/util.c:measure_longest_line_in_file
-    49,638    0    0    19,198      0    0     9,936       0      0  ???:fputs
+CD2AP_5-51         --------------IVEYDYDA---VHDDE-------LTIRVGEIIRNVKKLQ-EEG---
+CD2AP_275-322      --------------RTLFAYEG---TNEDE-------LTFKEGEIIHLISKETGEAG---
+GRB2_60-135        WFFGKIPRAKAEEMLSKQRHDGAFLIRESESAPGDFSLSVKFGNDVQHFKVLRDGAGKYF
+RASA1_351-426      WFHGKISKQEAYNLLMTVGQVCSFLVRPSDNTPGDYSLYFRTNENIQRFKICPTPNNQ--
+                                             . .:       * .: .: :: ..      .   
 
+CD2AP_5-51         -WLEG--ELNGRRGMFPD-
+CD2AP_275-322      -WWRG--ELNGKEGVFPD-
+GRB2_60-135        LWVV---KFNSLNELVDYH
+RASA1_351-426      -FMMGGRYYNSIGDIIDHY
+                    :       *.   :.   

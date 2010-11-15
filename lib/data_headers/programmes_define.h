@@ -98,7 +98,7 @@
 #define NCBIWEBBLAST_4_TCOFFEE "blastcl3"
 #define NCBIWEBBLAST_ADDRESS "ftp://ftp.ncbi.nih.gov/blast/executables/LATEST"
 
-#define NCBIBLAST_4_TCOFFEE "blastpgp"
+#define NCBIBLAST_4_TCOFFEE "legacy_blast.pl"
 #define NCBIBLAST_ADDRESS "ftp://ftp.ncbi.nih.gov/blast/executables/LATEST"
 
 

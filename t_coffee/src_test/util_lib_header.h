@@ -1006,6 +1006,8 @@ struct Constraint_list
       int copy_mode;
       struct Constraint_list *pCL; 
       Sequence *S;         /*Total sequences*/
+      int *master; //Sequences used as master sequences
+      int o2a_byte; // number of one to all provided in one go. 
       Sequence *STRUC_LIST; /*Name of the sequences with a Structure*/
       char align_pdb_param_file[FILENAMELEN+1];
       char align_pdb_hasch_mode[FILENAMELEN+1];
@@ -1807,7 +1809,7 @@ char *aln2random_seq (Alignment *A, int noise1, int noise2, int noise3, int gap_
 
 Alignment * master_trimseq( Alignment *A, Sequence *S,char *mode);
 Alignment * trimseq( Alignment *A, Sequence *S, char *mode);
-Alignment *simple_trimseq (Alignment *A,Alignment*K, char *mode, char *seq);
+Alignment *simple_trimseq (Alignment *A,Alignment*K, char *mode, char *seq, int **sim);
 Alignment *sim_filter (Alignment *A, char *in_mode, char *seq_list);
 
 Sequence  * seq_weight2species_weight (Alignment *A, Sequence *S);

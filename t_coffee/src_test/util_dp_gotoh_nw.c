@@ -1608,7 +1608,6 @@ int linked_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
   
   
   cl2pair_list_ecl_pc (A, ns, ls, CL, &list, &n);
-  if (n<=1){return myers_miller_pair_wise (A, ns,ls,CL);}
   cl2diag_cap         (A, ns, ls, CL, &list, &n);
   cl2list_borders     (A, ns, ls, CL, &list, &n);
   list2nodup_list     (A, ns, ls, CL, &list, &n);

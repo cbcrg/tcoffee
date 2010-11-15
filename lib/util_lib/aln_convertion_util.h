@@ -372,7 +372,7 @@ char *aln2random_seq (Alignment *A, int noise1, int noise2, int noise3, int gap_
 
 Alignment * master_trimseq( Alignment *A, Sequence *S,char *mode);
 Alignment * trimseq( Alignment *A, Sequence *S, char *mode);
-Alignment *simple_trimseq (Alignment *A,Alignment*K, char *mode, char *seq);
+Alignment *simple_trimseq (Alignment *A,Alignment*K, char *mode, char *seq, int **sim);
 Alignment *sim_filter (Alignment *A, char *in_mode, char *seq_list);
 
 Sequence  * seq_weight2species_weight (Alignment *A, Sequence *S);

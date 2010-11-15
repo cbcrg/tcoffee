@@ -13,6 +13,7 @@
 #define CACHE_MAX_KEEP  180
 #define MAX_N_PID       260000
 //Importnat Values Affecting the Program Behavior
+#define O2A_BYTE         50
 #define SCORE_K          10
 #define NORM_F           1000
 #define PAVIE_MAT_FACTOR 1000
@@ -661,7 +662,7 @@
 #define NCBIWEBBLAST_source "empty"
 #define NCBIWEBBLAST_update_action "never"
 #define NCBIWEBBLAST_mode "psicoffee,expresso,3dcoffee"
-#define NCBIBLAST_4_TCOFFEE "blastpgp"
+#define NCBIBLAST_4_TCOFFEE "legacy_blast.pl"
 #define NCBIBLAST_type "protein_homology_predictor"
 #define NCBIBLAST_ADDRESS "ftp://ftp.ncbi.nih.gov/blast/executables/LATEST"
 #define NCBIBLAST_language "C"
@@ -675,7 +676,7 @@
 #define SOAPLITE_language "Perl"
 #define SOAPLITE_language2 "Perl"
 #define SOAPLITE_source "empty"
-#define NCBIBLAST_update_action "never"
+#define _update_action "never"
 #define SOAPLITE_mode "none"
 #define XMLSIMPLE_4_TCOFFEE "XML::Simple"
 #define XMLSIMPLE_type "library"
@@ -739,7 +740,7 @@ The format is as follow:
 -------------------------------------------------------------------------------------------
 the RGB values are used for the post-script generation, the html code is used in html documents.
 */
-#define DATE "Wed Oct 27 19:32:44 CEST 2010"
+#define DATE "Fri Nov 12 19:52:13 CET 2010"
 #define PROGRAM "T-COFFEE"
 #define VERSION "Version_8.95"
 #define AUTHOR "Cedric Notredame "

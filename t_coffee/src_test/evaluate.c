@@ -2242,7 +2242,7 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	  double score=0;  
 	  int a, t_s, t_r;
 	  static int **hasch;
-	  
+	  int nclean;
 	  static int max_len;
 	  int field;
 	  double delta;
@@ -2276,6 +2276,7 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	       max_len=(CL->S)->max_len;
 	       if ( hasch) free_int ( hasch, -1);
 	       hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
+	       
 	       }
 
 
@@ -2313,6 +2314,8 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 
 	clean_residue_pair_hasch ( s1, r1,s2, r2, hasch, CL);	
 	norm1=MIN(norm1,norm2);
+
+	//Old Normailzation: on the number of sequences, useless when not doiang an all against all
 	//norm1=(CL->S)->nseq;
 	score=(norm1)?score/norm1:0;
 	

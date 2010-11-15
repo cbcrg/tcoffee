@@ -142,7 +142,8 @@ if($ARGV[0]=~/help/ ||$ARGV[0]=~/man/ || $ARGV[0]=~/HELP/ || $ARGV[0]=~/Man/ || 
                                       [Give the ..../pdb/structure/ dir]
                                       [If value omitted, the pg gets it from the env variable PDB_DIR]
            -netcompression_pg.........[gunzip]
-           -is_pdb_name........name...[Returns 1 if the name is a PDB ID, 0 otherwise]
+           -is_pdb_name..........name.[Returns 1 if the name is a PDB ID, 0 otherwise]
+           -is_released_pdb_name name.[Returns 1 if the name corresponds to a released PDB file]
            -get_pdb_chains.....name...[Returns the list of chains corresponding to the entry]
            -get_pdb_id.........name...[Returns the PDB id within the provided pdb file]
            -get_fugue_name.....name...[Turns a name into a name valid for fugue]
@@ -212,38 +213,41 @@ $netaddress="http://www.rcsb.org/pdb/files/%%.pdb.gz";
 $netcompression_pg="gunzip";
 $netcompression="gz";
 
-  foreach ($np=0; $np<=$n_para; $np++)
-{        
+foreach ($np=0; $np<=$n_para; $np++)
+  {        
     $value=$ARGV[$np];
     
     if  ($np==0 && !($value=~/^-.*/))
-{ 
-       $pdb_file= $ARGV[$np];
-}
+      { 
+	$pdb_file= $ARGV[$np];
+      }
     elsif ( !($value=~/^-.*/))
-{
+      {
 	print "@ARGV";
 	die;
-} 
+      } 
     
     elsif ($value eq "-nodiagnostic"){$nodiagnostic=1;}
     elsif ($value eq "-force")
-{
+      {
 	$force_pdb=1;
-}
+      }
     elsif ($value eq "-force_name")
-{
+      {
 	$force_name=$ARGV[++$np];
 	$force_pdb=1;
-}
+      }
     
     elsif ($value eq "-is_pdb_name")
-{
-	$pdb_file= $ARGV[++$np];
-	
-	$is_pdb_name=1;
-	
-} 
+      {
+	$pdb_file= $ARGV[++$np];	
+	$is_pdb_name=1;	
+      } 
+    elsif ($value eq "-is_released_pdb_name")
+      {
+	$pdb_file= $ARGV[++$np];	
+	$is_released_pdb_name=1;
+      }
     elsif ($value eq "-debug")
 {
 	$debug=1;
@@ -404,20 +408,35 @@ if ( $debug)
 }
 
 ####################################################################################################################
-#                                    COPY THE FILE INTO A TMP FILE                                                 #
+#                                    CHECK if ID is valid                                                          #
 ####################################################################################################################     
 if ( $is_pdb_name)
-{
-    if (remote_is_pdb_name($pdb_file, $netaddress))
-{
+  {
+    if (remote_is_pdb_name($pdb_file))
+      {
 	print "1";
-}
+      }
     else
-{
+      {
 	print "0";
-}
+      }
     exit ($EXIT_SUCCESS);
-}
+  }
+
+if ( $is_released_pdb_name)
+  {
+    
+    if (&is_released($pdb_file))
+      {
+	print "1";
+      }
+    else
+      {
+	print "0";
+      }
+    exit ($EXIT_SUCCESS);
+  }
+
 ####################################################################################################################
 #                                    COPY THE FILE INTO A TMP FILE                                                 #
 ####################################################################################################################     
@@ -458,29 +477,32 @@ if ( !-e $tmp_pdb_file || $tmp_pdb_file eq "")
 
 $no_remote_pdb_dir=$mem;
 if ($no_remote_pdb_dir==0)
-{
+  {
+    
     if ( !-e $tmp_pdb_file || $tmp_pdb_file eq "")
-{
+      {
 	
 	$local_pdb_file=$pdb_file;
 	($local_pdb_file, $suffix_chain)=&pdb_name2name_and_chain($local_pdb_file);
 	if ($local_pdb_file)
-{
+	  {
+	    
 	    if ( $debug){print STDERR "\nSplit $pdb_file into $local_pdb_file and $suffix_chain \n";}
+	    
 	    $tmp_pdb_file=get_pdb_file ($local_pdb_file);    
+	    
 	    if ( $tmp_pdb_file ne "")
-{
+	      {
 		@c_chain=();
 		@c_chain=($suffix_chain);
 		%hc_chain=();
 		$hc_chain{$suffix_chain}=1;
-}
-}
-}
-}
+	      }
+	  }
+      }
+  }
 
 if ( $debug){print STDERR "\n$pdb_file copied into ##$tmp_pdb_file##\n";}
-
 
 if ( !-e $tmp_pdb_file || $tmp_pdb_file eq "")
 {
@@ -1116,30 +1138,60 @@ if (!$nodiagnostic){print STDERR $error;}
 ####################################################################################################################
 #                                    TEST FUNCTIONS                                                                 #
 ####################################################################################################################
+sub is_released 
+  {
+    my ($r);
+    my $in=@_[0];
+    my $name=&remote_is_pdb_name ($in);
+    my $hold=&remote_is_on_hold($in);
+    
+    $r=($name && !$hold)?1:0;
+    return $r;
+  }
 sub remote_is_pdb_name 
 {
     my $in=@_[0];
-    my $netaddress=@_[1];
-    my $ref_file, $pdb;
-    my $value;
+    my ($ref_file, $pdb);
+    my ($value,$value1,$value2);
 
     if ( $in=~/[^\w\d\:\_]/){return 0;}
-    
-    
     $ref_file="$cache/pdb_entry_type.txt";
     
     if ( !-e $ref_file || (-M $ref_file)>2 || -z $ref_file)
-{
+      {
 	&url2file("ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt", $ref_file);
-}
- 
+      }
     $pdb=substr ($in,0, 4);
+    chomp(($value1=`grep -c $pdb $ref_file`));
+    $pdb=lc($pdb);
+    chomp(($value2=`grep -c $pdb $ref_file`));
+    $value=($value1 || $value2)?1:0;
+    $value=($value>0)?1:0;
     
-    
-    $value=`grep -c $pdb $ref_file`;
     return $value;
-}
-      
+  }
+sub remote_is_on_hold
+  {
+    my $in=@_[0];
+    my ($ref_file, $pdb);
+    my ($value1, $value2,$value);
+    
+    if ( $in=~/[^\w\d\:\_]/){return 0;}
+    $ref_file="$cache/unreleased.xml";
+    
+    if ( !-e $ref_file || (-M $ref_file)>2 || -z $ref_file)
+      {
+	&url2file("http://www.rcsb.org/pdb/rest/getUnreleased",$ref_file);
+      }
+    
+    $pdb=substr ($in,0, 4);
+    chomp(($value1=`grep -c $pdb $ref_file`));
+    $pdb=lc($pdb);
+    chomp(($value2=`grep -c $pdb $ref_file`));
+    $value=($value1 || $value2)?1:0;
+    $value=($value>0)?1:0;
+    return $value;
+  }
 sub is_pdb_file
 {
     my @arg=@_;
@@ -1344,27 +1396,27 @@ sub get_pdb_file
     my $pdb_file=$pdb_file_in;
 
     $pdb_file=($pdb_file_in=~/\S+_S_(\S+)/)?$1:$pdb_file_in;
-
+    
     if ($no_remote_pdb_dir==0)
-{
+      {
 	$no_remote_pdb_dir=1;
 	$result=get_pdb_file3 ($pdb_file);
 	$no_remote_pdb_dir=0;
 	if ( $result){return $result;}
 	else
-{
+	  {
 	    
 	    lc ($pdb_file);
 	    $result=get_pdb_file3($pdb_file);
 	    return  $result;
-}
-}
+	  }
+      }
     else
-{
+      {
 	return get_pdb_file3 ($pdb_file);
-}
+      }
     
-}
+  }
 
 sub get_pdb_file3 
 {
@@ -1538,13 +1590,12 @@ sub get_pdb_file0
 #5 Get the file from a remote location    
 if (!$no_remote_pdb_dir) 
   {
-    my $value=remote_is_pdb_name ($pdb_file, $netaddress);
-    
+    my $value=&is_released ($pdb_file);
     my $return_value="";
-    if ( &remote_is_pdb_name ($pdb_file, $netaddress)==1)
+    if ($value==1)
       {
 	
-	&debug_print ("\n*******************************************************\nTry Remote Access for $pdb_file");
+	&debug_print ("\n*****************************************************\nTry Remote Access for $pdb_file");
 	$tmp_pdb_file=vtmpnam();
 	$netcommand=$netaddress;
 	$netcommand=~s/%%/$pdb_file/g;

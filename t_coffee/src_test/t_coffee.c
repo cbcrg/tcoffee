@@ -22,7 +22,6 @@ static char *get_t_coffee_defaults(char *buf, char *type);
 
 static char *get_dmcoffee_defaults(char *buf, char *type);
 static char *get_rcoffee_consan_defaults(char *buf, char *type);
-
 static char *get_rmcoffee_defaults(char *buf, char *type);//Original R-Coffee Paper
 static char *get_rcoffee_defaults(char *buf, char *type);//Original R-Coffee Paper
 static char *get_rmcoffee_defaults_old(char *buf, char *type);//Original R-Coffee Paper
@@ -52,8 +51,8 @@ static int set_methods_limits (char **method_limits,int n_methods_limit,char **l
 static FILE *t_coffee_tip (FILE *fp,char *mode);
 
 static int run_other_pg(int argc, char *argv[]);
-static char* prepare_one2all (char *seq,Sequence *S, char *lib_file);
-static char* prepare_subset2all (char *seq,Sequence *S, char *lib_file, Constraint_list *CL);
+
+static int* prepare_master (char *seq,Sequence *S,Constraint_list *CL, char *dmode);
 
 #define is_a_seq_file(file) (!is_matrix(file) && !is_matrix(file+1) && !is_method (file) && !is_method (file+1) &&(check_file_exists(file) || check_file_exists(file+1)))
 static int NO_METHODS_IN_CL;
@@ -312,9 +311,9 @@ int batch_main ( int argc, char **argv)
 	/*msa_mode*/
 	char *use_seqan;
 	char *msa_mode;
-	char *one2all;
-	char *subset2all;
-
+	char *master_mode;
+	int blast_maxnseq;
+	
 	int lalign_n_top;
 	int iterate;
 	/*split*/
@@ -2760,41 +2759,40 @@ declare_name (msa_mode);
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-declare_name (one2all);
- get_cl_param(\
-			    /*argc*/      argc          ,\
-			    /*argv*/      argv          ,\
-			    /*output*/    &le           ,\
-			    /*Name*/      "-one2all"    ,\
-			    /*Flag*/      &garbage      ,\
-			    /*TYPE*/      "S"         ,\
-			    /*OPTIONAL?*/ OPTIONAL      ,\
-			    /*MAX Nval*/  1             ,\
-			    /*DOC*/       "Align all the sequences to the master sequence"          ,\
-			    /*Parameter*/ &one2all      ,\
-			    /*Def 1*/    "NULL"      ,\
-			    /*Def 2*/    "1"      ,\
-			    /*Min_value*/ "any"         ,\
-			    /*Max Value*/ "any"          \
-		   );
-declare_name (subset2all);
- get_cl_param(\
-			    /*argc*/      argc          ,\
-			    /*argv*/      argv          ,\
-			    /*output*/    &le           ,\
-			    /*Name*/      "-subset2all"    ,\
-			    /*Flag*/      &garbage      ,\
-			    /*TYPE*/      "S"         ,\
-			    /*OPTIONAL?*/ OPTIONAL      ,\
-			    /*MAX Nval*/  1             ,\
-			    /*DOC*/       "Align all the sequences to the master sequence"          ,\
-			    /*Parameter*/ &subset2all      ,\
-			    /*Def 1*/    "NULL"      ,\
-			    /*Def 2*/    "1"      ,\
-			    /*Min_value*/ "any"         ,\
-			    /*Max Value*/ "any"          \
-		   );
 
+declare_name (master_mode);
+get_cl_param(\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-master"    ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "S"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "Align all the sequences to the master sequences: file or number"          ,\
+			    /*Parameter*/ &master_mode      ,\
+			    /*Def 1*/    "no"      ,\
+			    /*Def 2*/    "1"      ,\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+		   );
+ get_cl_param(							\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-blast_nseq"    ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "D"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "Maximum number of querries for BLAST (0: all)"          ,\
+			    /*Parameter*/ &blast_maxnseq      ,\
+			    /*Def 1*/    "0"      ,\
+			    /*Def 2*/    "0"      ,\
+			    /*Min_value*/ "0"         ,\
+			    /*Max Value*/ "any"          \
+		   );
  get_cl_param(\
 			    /*argc*/      argc          ,\
 			    /*argv*/      argv          ,\
@@ -4056,12 +4054,10 @@ get_cl_param(\
 	       CL->DM=cl2distance_matrix ( CL,NOALN,distance_matrix_mode, distance_matrix_sim_mode,1);
 
 	       /*one to all alignment*/
-	       if (one2all && one2all[0])prepare_one2all (one2all,S, lib_list);
-	       else if ( subset2all)
-		 {
-		   prepare_subset2all (subset2all,S, lib_list,CL);
-		 }
-
+	       prepare_master(master_mode,S,CL, "ktup");
+	       if (!blast_maxnseq)CL->o2a_byte=(CL->S)->nseq;
+	       else CL->o2a_byte=blast_maxnseq;
+	       
 	       if (  matrix && matrix[0])
 		 {
 		   sprintf ( CL->method_matrix,"%s", matrix);
@@ -4633,7 +4629,8 @@ get_cl_param(\
 
 
 		      fprintf (le, "\n\nOUTPUT RESULTS");
-		      le=display_output_filename (le, "GUIDE_TREE","newick", tree_file, CHECK);
+		      if ((CL->S)->nseq>2)
+			le=display_output_filename (le, "GUIDE_TREE","newick", tree_file, CHECK);
 		      
 		      for ( a=0; a< n_out_aln_format; a++)
 			le=display_output_filename( le,"MSA",out_aln_format[a], tot_out_aln[a], CHECK);
@@ -5190,203 +5187,77 @@ FILE * t_coffee_tip (FILE *fp,char *mode)
   return fp;
 }
 
-char* prepare_one2all_old (char *seq,Sequence *S, char *lib_file)
- {
-   int a, n, i;
-   FILE *fp;
-   char **name, *use_tree;
 
 
-   if ( S->nseq==2) return NULL;
-
-
-   if ((i=name_is_in_list (seq,S->name,S->nseq, 100))!=-1);
-   else if ( is_number (seq))
-     i=atoi(seq)-1;
-   else
-     return NULL;
-
-
-   declare_name (use_tree);
-
-
-   name=declare_char (S->nseq+1, 100);
-   for (a=0; a<S->nseq; a++)
-     sprintf (name[a], "%s", S->name[a]);
-   n=S->nseq;
-
-   if (i!=0)
-     {
-       sprintf (name[n], "%s", name[i]);
-       sprintf (name[i], "%s", name[0]);
-       sprintf (name[0], "%s", name[n]);
-     }
-   sprintf (lib_file, "%s", vtmpnam (NULL));
-   fp=vfopen (lib_file, "w");
-   for ( a=1; a<n; a++)
-     {
-       fprintf ( fp, "2 %s %s\n", name[0],name[a]);
-     }
-   vfclose (fp);
-
-
-   sprintf ( use_tree, "%s", vtmpnam (NULL));
-   fp=vfopen (use_tree, "w");
-   vfclose (create_linear_tree (name, n, fp));
-   free_char (name, -1);
-
-   return use_tree;
- }
-char* prepare_one2all (char *seq,Sequence *S, char *lib_file)
+int* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmode)
  {
    int a,b,s1, n, i;
    FILE *fp;
-   char **name;
-   int **score;
-   int *done;
-   int nseq=0;
-
-   if ( S->nseq==2) return NULL;
-   name=declare_char (S->nseq+1, 100);
-  
-   if ( check_file_exists (seq))
+   
+   CL->master=vcalloc (S->nseq+1, sizeof(int));
+   
+   if ( S->nseq==2 || strm (seq, "no") || strm (seq, "default")) 
+     {
+       for (a=0; a<S->nseq; a++)CL->master[a]=1;
+       return CL->master;
+     }
+   else if ( check_file_exists (seq))
      {
        Sequence *L;
        L=main_read_seq (seq);
        for (a=0; a< L->nseq; a++)
-	 if ( (b=name_is_in_list (L->name[a], S->name,S->nseq, 100))!=-1)
-	   {
-	     sprintf ( name[nseq++], "%s", L->name[a]);
-	   }
+	 if ( (b=name_is_in_list (L->name[a], S->name,S->nseq, 100))!=-1)CL->master[b]=1;
+     }
+   else if ( strm (seq, "_P_"))
+     {
+       for (a=0; a<S->nseq; a++)
+	 {
+	   if (seq_has_template (S, a, "_P_"))CL->master[a]=1;
+	 }
      }
    else if ( is_number (seq))
      {
-       Sequence *LS;
-
+       int nseq;
+       char **name;
+       Alignment *A=NULL, *SA=NULL;
        nseq=atoi (seq);
        if ( nseq<0)
 	 nseq=((float)S->nseq*((float)nseq/(float)100.0)*(float)-1);
 
        nseq=MIN(nseq,S->nseq);
-       if ( nseq>=S->nseq)LS=S;
+       if ( nseq>=S->nseq){nseq=(CL->S)->nseq; name=(CL->S)->name;}
        else
 	 {
-	   Alignment *A, *SA;
+	   
 	   char tmode[1000];
-	   A=very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL);
+	   int **sim;
+	   
+	   A=(strm (dmode, "msa"))?(very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL)):(seq2aln (S, NULL, RM_GAP));
+	   sim=(strm (dmode, "ktup") && CL->DM)?(CL->DM)->similarity_matrix:NULL;
+	   
 	   sprintf (tmode, "_aln_n%d", nseq);
-	   SA=simple_trimseq (A, NULL, tmode, NULL);
-	   LS=aln2seq(SA);
-	   free_aln (A);
-	   free_aln (SA);
+	   SA=simple_trimseq (A, NULL, tmode, NULL, NULL);
+	   nseq=SA->nseq;
+	   name=SA->name;
 	 }
-       for (a=0; a<LS->nseq; a++)
+       for (a=0; a<nseq;a++)
 	 {
-	   sprintf (name[a], "%s", LS->name[a]);
-	   fprintf ( stderr, "\n\tMaster Sequence: %s", name[a]);
+	   if (nseq==(CL->S)->nseq)CL->master[a]=1;
+	   else if ((b=name_is_in_list (name[a], S->name,S->nseq, 100))!=-1)CL->master[b]=1;
 	 }
-       if (LS!=S)free_sequence (LS, LS->nseq);
+       free_aln (A);
+       free_aln (SA);
      }
    else
      {
-       printf_exit (EXIT_FAILURE, stderr, "ERROR: %s is neither a file nor a method nor a number for subset2all [FATAL:%s]\n",seq,PROGRAM);
+       printf_exit (EXIT_FAILURE, stderr, "ERROR: %s is neither a file nor a method nor a number for -master [FATAL:%s]\n",seq,PROGRAM);
      }
-
-   sprintf (lib_file, "%s", vtmpnam (NULL));
-   fp=vfopen (lib_file, "w");
-   for (a=0; a<nseq; a++)
+   fprintf ( CL->local_stderr, "\n");
+   for (a=0; a<S->nseq; a++)
      {
-       fprintf ( fp, "%d %s ",S->nseq, name[a]);
-       for ( b=0; b<S->nseq; b++)
-	 {
-	   if ( !strm (name[a], S->name[b]))fprintf ( fp, "%s ",S->name[b]);
-	 }
-       fprintf ( fp, "\n");
+       if ( CL->master[a])fprintf (CL->local_stderr, "\tMaster_sequence: %s\n", S->name[a]);
      }
-   vfclose (fp);
-
-   return NULL;
- }
-char* prepare_subset2all (char *mode, Sequence *S, char *lib_file, Constraint_list *CL)
- {
-   int a,b,s1, n, i;
-   FILE *fp;
-   char **name;
-   int **score;
-   int **done;
-   int nseq=0;
-
-   if ( S->nseq==2) return NULL;
-   name=declare_char (S->nseq+1, 100);
-   done=declare_int (S->nseq, S->nseq);
-   for (a=0; a<S->nseq; a++)done[a][a]=1;
-
-   if ( check_file_exists (mode))
-     {
-       Sequence *L;
-       L=main_read_seq (mode);
-       for (a=0; a< L->nseq; a++)
-	 if ( (b=name_is_in_list (L->name[a], S->name,S->nseq, 100))!=-1)
-	   {
-	     sprintf ( name[nseq++], "%s", L->name[a]);
-	   }
-     }
-   else if ( strm (mode, "_P_"))
-     {
-       for (a=0; a<S->nseq; a++)
-	 {
-	   if (seq_has_template (S, a, "_P_"))
-	     {
-	       sprintf (name[nseq++], "%s", name [a]);
-	     }
-	 }
-     }
-   else if ( is_number (mode))
-     {
-       Sequence *LS;
-
-       nseq=atoi (mode);
-       if ( nseq<0)
-	 nseq=((float)S->nseq*((float)nseq/(float)100.0)*(float)-1);
-
-       nseq=MIN(nseq,S->nseq);
-       if ( nseq>=S->nseq)LS=S;
-       else
-	 {
-	   Alignment *A, *SA;
-	   char tmode[1000];
-	   A=very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL);
-	   sprintf (tmode, "_aln_n%d", nseq);
-	   SA=simple_trimseq (A, NULL, tmode, NULL);
-	   LS=aln2seq(SA);
-	   free_aln (A);
-	   free_aln (SA);
-	 }
-       for (a=0; a<LS->nseq; a++)
-	 {
-	   sprintf (name[a], "%s", LS->name[a]);
-	   fprintf ( stderr, "\n\tMaster Sequence: %s", name[a]);
-	 }
-       if (LS!=S)free_sequence (LS, LS->nseq);
-     }
-   else
-     {
-       printf_exit (EXIT_FAILURE, stderr, "ERROR: %s is neither a file nor a method nor a number for subset2all [FATAL:%s]\n",mode,PROGRAM);
-     }
-
-   sprintf (lib_file, "%s", vtmpnam (NULL));
-   fp=vfopen (lib_file, "w");
-   for (a=0; a<nseq; a++)
-     {
-       for ( b=0; b<S->nseq; b++)
-	 {
-	   if(!done[a][b] && !strm (name[a],S->name[b]))fprintf ( fp, "2 %s %s\n", name[a],S->name[b]);
-	   done[a][b]=done[b][a]=1;
-	 }
-     }
-   vfclose (fp);
-
-   return NULL;
+   return CL->master;
  }
 int set_methods_limits (char ** method,int nl,char **list, int n, int *maxnseq, int *maxlen)
 {

@@ -9301,9 +9301,8 @@ Alignment *sim_filter (Alignment *A, char *in_mode, char *seq)
 	
 
 static int find_worst_seq ( int **sim, int n, int *keep, int max, int direction);
-Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_list)
+Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_list, int **sim)
 {
-  int **sim;
   int *list;
   int *keep;
   int maxnseq, maxsim, nseq_ratio, nc;
@@ -9395,7 +9394,7 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
       NT_node **T;
       Sequence *O;
       
-      sim=sim_array2dist_array ( NULL, MAXID);
+      if (!sim)sim=sim_array2dist_array ( NULL, MAXID);
       T=int_dist2nj_tree (sim, A->name, A->nseq, NULL);
       O=tree2seq (T[3][0], NULL);
       A=reorder_aln (A, O->name, O->nseq);
@@ -9406,13 +9405,13 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
   
   if ( coverage==0)
     {
-      if ( strstr (mode, "seq_"))sim=seq2comp_mat (aln2seq(A), "blosum62mt", "sim");
+      if ( strstr (mode, "seq_") && !sim)sim=seq2comp_mat (aln2seq(A), "blosum62mt", "sim");
       else sim=aln2sim_mat (A, "idmat");
     }
   else
     {
       int b;
-      if ( strstr (mode, "seq_"))sim=seq2comp_mat (aln2seq(A), "blosum62mt", "cov");
+      if ( strstr (mode, "seq_") && !sim)sim=seq2comp_mat (aln2seq(A), "blosum62mt", "cov");
       else sim=aln2cov (A);
     
     }

@@ -135,9 +135,6 @@ Constraint_list *seq2list     ( Job_TC *job)
       int *seqlist;
 
 
-
-
-      static char *s1, *s2;
       Sequence *S, *STL;
       Constraint_list *CL;
 
@@ -161,17 +158,9 @@ Constraint_list *seq2list     ( Job_TC *job)
       S=(CL)?CL->S:NULL;
       STL=(CL)?CL->STRUC_LIST:NULL;
 
-
-
-
       seqlist=string2num_list (seq)+1;
 
-      if (!s1)s1=vcalloc ( MAXNAMES+1, sizeof (char));
-      if (!s2)s2=vcalloc ( MAXNAMES+1, sizeof (char));
-
-
-      sprintf (s1, "%s", (CL->S)->name[seqlist[1]]);
-      sprintf (s2, "%s", (CL->S)->name[seqlist[2]]);
+      
 
 /*Proteins*/
 
@@ -1223,30 +1212,48 @@ Constraint_list * pdb_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 Constraint_list * seq_msa (TC_method *M , char *in_seq, Constraint_list *CL)
 {
   char seq[1000];
+  char db[1000];
   char *infile, *outfile;
   int a, n, s;
   Alignment *F=NULL;
   FILE *fp;
   char command[1000];
+  static char *db_file;
+  
 
-
+  if (!db_file)
+    {
+      db_file=vtmpnam (NULL);
+      fp=vfopen (db_file, "w");
+      for (a=0; a<(CL->S)->nseq; a++)fprintf ( fp, ">%s\n%s\n", (CL->S)->name[a], (CL->S)->seq[a]);
+      vfclose (fp);
+    }
+  
   infile=vtmpnam (NULL);
   outfile=vtmpnam (NULL);
 
   sprintf ( seq, "%s", in_seq);
 
   n=atoi(strtok (seq,SEPARATORS));
-
+  
   fp=vfopen (infile, "w");
   for ( a=0; a<n; a++)
     {
       s=atoi(strtok (NULL,SEPARATORS));
-
       fprintf (fp, ">%s\n%s\n", (CL->S)->name[s], (CL->S)->seq[s]);
     }
   vfclose (fp);
+  
+  if (strstr (M->executable2, "blast"))sprintf ( db, " -database=%s", db_file);
+  else db[0]='\0';
+  
+  sprintf ( command, "t_coffee -other_pg tc_generic_method.pl -mode=%s -method=%s %s %s%s %s %s%s -tmpdir=%s %s %s", M->executable, M->executable2, M->param1,M->in_flag,infile,M->param2,M->out_flag,outfile,get_tmp_4_tcoffee(),db,M->param);
 
-  sprintf ( command, "t_coffee -other_pg tc_generic_method.pl -mode=seq_msa -method=%s %s%s %s%s -tmpdir=%s", M->executable2, M->in_flag, infile, M->out_flag, outfile, get_tmp_4_tcoffee());
+      
+	
+  
+  //HERE ("%s", command);exit (0);
+  //sprintf ( command, "t_coffee -other_pg tc_generic_method.pl -mode=seq_msa -method=%s %s%s %s%s -tmpdir=%s %s", M->executable2, M->in_flag, infile, M->out_flag, outfile, get_tmp_4_tcoffee(), M->param);
   my_system (command);
 
 

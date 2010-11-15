@@ -159,7 +159,8 @@ Constraint_list *copy_constraint_list (Constraint_list *CL, int mode)
     
 
       S=(mode==HARD_COPY)?duplicate_sequence (CL->S):CL->S;
- 
+      
+      
       if (mode==HARD_COPY)
 	NCL=declare_constraint_list (S, NULL, NULL,0, NULL, NULL);
       else
@@ -168,10 +169,23 @@ Constraint_list *copy_constraint_list (Constraint_list *CL, int mode)
 	  NCL[0]=CL[0];
 	}
       
-      NCL->S=S;
+      
       NCL->copy_mode=mode;
       if (mode==SOFT_COPY)NCL->pCL=CL;
+      NCL->S=S;
+      /*master*/
+      if (mode==HARD_COPY && CL->master)
+	{NCL->master=vcalloc ( S->nseq, sizeof(int));
+	for ( a=0; a< S->nseq; a++)
+	  NCL->master[a]=CL->master[a];
+	}
+      else if (mode==SOFT_COPY)
+	{
+	  NCL->seq_for_quadruplet=CL->seq_for_quadruplet;
+	}
+      NCL->o2a_byte=CL->o2a_byte;
       
+      /*struc List*/
       NCL->STRUC_LIST=(mode==HARD_COPY)?duplicate_sequence (CL->STRUC_LIST):CL->STRUC_LIST;
       sprintf ( NCL->align_pdb_param_file, "%s", CL->align_pdb_param_file);
       sprintf ( NCL->align_pdb_hasch_mode, "%s", CL->align_pdb_hasch_mode);

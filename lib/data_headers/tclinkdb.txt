@@ -311,14 +311,14 @@ PG blastcl3 update_action	never
 PG blastcl3 mode		psicoffee,expresso,3dcoffee
 
 
-PG blastpgp 4_TCOFFEE		NCBIBLAST
-PG blastpgp type		protein_homology_predictor
-PG blastpgp ADDRESS		ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
-PG blastpgp language		C
-PG blastpgp language2		C
-PG blastpgp source		empty
-PG blastpgp update_action	never
-PG blastpgp mode		psicoffee,expresso,3dcoffee
+PG legacy_blast.pl 4_TCOFFEE	 NCBIBLAST
+PG legacy_blast.pl type		 protein_homology_predictor
+PG legacy_blast.pl ADDRESS	 ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
+PG legacy_blast.pl language	 C
+PG legacy_blast.pl language2	 C
+PG legacy_blast.pl source	 empty
+PG legacy_blast.pl update_action never
+PG legacy_blast.pl mode		 psicoffee,expresso,3dcoffee
 
 PG SOAP::Lite 4_TCOFFEE		SOAPLITE
 PG SOAP::Lite type		library

@@ -13,6 +13,7 @@
 #define CACHE_MAX_KEEP  180
 #define MAX_N_PID       260000
 //Importnat Values Affecting the Program Behavior
+#define O2A_BYTE         50
 #define SCORE_K          10
 #define NORM_F           1000
 #define PAVIE_MAT_FACTOR 1000

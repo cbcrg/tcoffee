@@ -522,12 +522,13 @@ void sort_list_int2 ( int **V,int *list,int N_F, int left, int right)
 int cmp_list_int2 (const int**a, const int**b)
 	{
 	  int p=0;;
-	  int c;
-
+	  int c,d;
+	  
 	  
 
 	  while ((c=order[p])!=-1)
 	  {
+	    
 	    if ( a[0][c]>b[0][c])return   1;
 	    else if ( a[0][c]<b[0][c])return  -1;
 	    p++;
@@ -7350,8 +7351,8 @@ void LOG_PLUS_EQUALS (float *x, float y){
 }
 
 float LOG_ADD (float x, float y){
-  if (x < y) return (x == LOG_ZERO || y - x >= LOG_UNDERFLOW_THRESHOLD) ? y : LOOKUP(y-x) + x;
-  return (y == LOG_ZERO || x - y >= LOG_UNDERFLOW_THRESHOLD) ? x : LOOKUP(x-y) + y;
+  if (x < y) return (x == LOG_ZERO || y - x >= LOG_UNDERFLOW_THRESHOLD) ? y : LOOKUP((y-x)) + x;
+  return (y == LOG_ZERO || x - y >= LOG_UNDERFLOW_THRESHOLD) ? x : LOOKUP((x-y)) + y;
 }
 
 float LOG_ADD3 (float x1, float x2, float x3){

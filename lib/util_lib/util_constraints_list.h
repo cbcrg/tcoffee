@@ -185,6 +185,8 @@ struct Constraint_list
       int copy_mode;
       struct Constraint_list *pCL; 
       Sequence *S;         /*Total sequences*/
+      int *master; //Sequences used as master sequences
+      int o2a_byte; // number of one to all provided in one go. 
       Sequence *STRUC_LIST; /*Name of the sequences with a Structure*/
       char align_pdb_param_file[FILENAMELEN+1];
       char align_pdb_hasch_mode[FILENAMELEN+1];
