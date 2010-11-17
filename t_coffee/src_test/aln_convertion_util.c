@@ -5618,7 +5618,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   P=fill_X_template ( name, p, "_P_");
   sprintf (P->template_format , "pdb");
   
-  if (!P)
+  if (!P ||(check_file_exists (P->template_name) && !is_pdb_file (P->template_name) ))
     {
       //fprintf ( stderr, "Could Not Fill _P_ template for sequence |%s|", name);
       free_X_template (P);
@@ -5626,7 +5626,6 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
     }
   else if ( check_file_exists (P->template_name))
     {
-      
       sprintf ( P->template_file, "%s", P->template_name);
       buf=path2filename (P->template_name);
       if (P->template_name!=buf)
@@ -5638,7 +5637,6 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
    else
      {
        char *st;
-       
        
        st=is_pdb_struc (P->template_name);
        if (st)
@@ -5662,7 +5660,8 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   if (!is_pdb_file (P->template_file))
     {
 
-      add_warning(stderr, "_P_ Template | %s | Could Not Be Found\n",p);
+      if (p)add_warning(stderr, "_P_ Template | %s | Could Not Be Found\n",p);
+      else if (name)add_warning(stderr, "_P_ Template | %s | Could Not Be Found\n",name);
       free_X_template (P);
       return NULL;
     }
@@ -5704,14 +5703,15 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
      
       if (sim<=minsim)
 	{
-	  add_warning( stderr, "_P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]");          add_warning( stderr, "If you want to include this sequence in anycase, please use the -pdb_minsim=%d flag",P->template_name,name, sim, minsim, sim);
+	  add_warning( stderr, "_P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]",P->template_name,name,sim,minsim);          
+	  add_information( stderr, "If you want to include %s in anycase, please use the -pdb_minsim=%d flag",name,sim);
 	  print_aln (A);
 	  free_X_template (P);
 	  P=NULL;
 	}
       else if ( cov<=mincov)
 	{
-	  add_warning( stderr, "WARNING:  _P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_min_cov=%d flag\n", P->template_name,name, cov, mincov,cov);
+	  add_information( stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_min_cov=%d flag\n", P->template_name,name, cov, mincov,cov);
 	  print_aln (A);
 	  free_X_template (P);P=NULL;
 	}
@@ -5743,7 +5743,7 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
   if (!is_aln(R->template_name) && !is_seq (R->template_name))
     {
       
-      add_warning ( stderr, "WARNING: _R_ Template %s Could Not Be Found\n",R->template_name);
+      add_information ( stderr, "_R_ Template %s Could Not Be Found\n",R->template_name);
       free_X_template (R);
       return NULL;
     }
@@ -5792,7 +5792,7 @@ struct X_template *fill_T_template ( char *name,char *p, Sequence *S)
   if (!is_aln(T->template_name) && !is_seq (T->template_name))
     {
       
-      add_warning ( stderr, "WARNING: _T_ Template %s Could Not Be Found\n",T->template_name);
+      add_information ( stderr, "_T_ Template %s Could Not Be Found\n",T->template_name);
       free_X_template (T);
       return NULL;
     }
@@ -5815,7 +5815,7 @@ struct X_template *fill_U_template ( char *name,char *p, Sequence *S)
   
   if (!check_file_exists(U->template_name))
     {
-      add_warning ( stderr, "WARNING: _U_ Template %s Could Not Be Found\n",U->template_name);
+      add_information ( stderr, "_U_ Template %s Could Not Be Found\n",U->template_name);
       free_X_template (U);
       return NULL;
     }
@@ -5838,7 +5838,7 @@ struct X_template *fill_E_template ( char *name,char *p, Sequence *S)
   if (!is_aln(E->template_name) && !is_seq (E->template_name))
     {
       
-      add_warning ( stderr, "WARNING: _E_ Template %s Could Not Be Found\n",E->template_name);
+      add_information ( stderr, "_E_ Template %s Could Not Be Found\n",E->template_name);
       free_X_template (E);
       return NULL;
     }
@@ -5879,7 +5879,7 @@ struct X_template *fill_G_template ( char *name,char *p, Sequence *S)
   /*2: Put the template in VG->S*/
   if (!is_seq (G->template_file))
     {
-      add_warning ( stderr, "\nWARNING: _G_ Template %s Could Not Be Found \n",p);
+      add_information ( stderr, "_G_ Template %s Could Not Be Found \n",p);
 
       free_X_template (G);
       return NULL;
@@ -6357,7 +6357,7 @@ Alignment * alnpos_list2block (Alignment *A, int n, char **in_list)
 	  x=sscanf (list[a], "%d-%d", &start, &end);
 	  if (x!=2 || !A || start<=0 || start>=end || end>A->len_aln+1)
 	    {
-	      add_warning ( stderr, "\nWARNING: Illegal coordinates in extract_pos_list [%s]", list[a]);
+	      add_warning ( stderr, "Illegal coordinates in extract_pos_list [%s]", list[a]);
 	      return A;
 	    }
 	  start--; end--;
@@ -6369,7 +6369,7 @@ Alignment * alnpos_list2block (Alignment *A, int n, char **in_list)
 	  p=atoi (list[a]);
 	  if (p<1 || p>A->len_aln)
 	    {
-	      add_warning ( stderr, "\nWARNING: Illegal coordinates in extract_pos_list [%s]", list[a]);
+	      add_warning ( stderr, "Illegal coordinates in extract_pos_list [%s]", list[a]);
 	    }
 	  p--;
 	  pos[p]=1;
@@ -6385,7 +6385,7 @@ Alignment * aln2block   (Alignment  *A, int start, int end, Alignment *B)
 {
   if ( !A || start<=0 || start>=end || end>A->len_aln+1)
     {
-      add_warning ( stderr, "\nWARNING: Illegal coordinates in extract_block start=%d end=%d len=%d [Note : [start-end[, with [1...n]", start, end, A->len_aln);
+      add_warning ( stderr, "Illegal coordinates in extract_block start=%d end=%d len=%d [Note : [start-end[, with [1...n] ** Block Ingored", start, end, A->len_aln);
       return A;
     }
   else
@@ -6498,7 +6498,7 @@ Alignment * extract_aln3 ( Alignment *B, char *file)
 	       }
 	     else
 	       {
-		 add_warning ( stderr, "\nWARNING: wrong format in coordinate file (line=%d)\n", nline);
+		 add_warning ( stderr, "Wrong format in coordinate file (line=%d) ** Line Ignored", nline);
 		 continue;
 	       }
 	     if ( end==0)end=A->len_aln+1;
@@ -6508,12 +6508,12 @@ Alignment * extract_aln3 ( Alignment *B, char *file)
 	     
 	     if ( s==-1 && !strm (name, "cons"))
 	       {
-		 add_warning ( stderr, "\nWARNING: Seq %s does not belong to the alignment (line %d)\n", name,nline);
+		 add_warning ( stderr, "Seq %s does not belong to the alignment (line %d) ** Line ignored", name,nline);
 		 continue;
 	       }
 	     else if ( start>end)
 	       {
-		 add_warning ( stderr, "\nWARNING: Illegal coordinates [%s %d %d] (line %d)\n", name,start, end,nline);
+		 add_warning ( stderr, "Illegal coordinates [%s %d %d] (line %d) ** Line ignored", name,start, end,nline);
 		 continue;
 	       }
 	     else
@@ -6754,7 +6754,7 @@ Alignment * orthologous_concatenate_aln (Alignment *A, Sequence *S, char *mode)
       char *p=strstr (A->name[a], "_");
       if (!p)
 	{
-	  fprintf ( stderr, "\nWARNING: Seq %s could not bne included.", A->name[a]);
+	  fprintf ( stderr, "\nWARNING: Seq %s could not be included.", A->name[a]);
 	}
       p+=1;
       if ( name_is_in_list (p, name,nname, 100)==-1)

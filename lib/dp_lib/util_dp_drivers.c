@@ -2142,6 +2142,7 @@ NT_node ** make_tree ( Alignment *A,Constraint_list *CL,int gop, int gep,Sequenc
 	  {
 	    return  seq2cw_tree ( S, tree_file);
 	  }
+		  
 	else if (strm ( CL->tree_mode, "upgma") || strm ( CL->tree_mode, "nj"))
 	  {
 	    out_nseq=S->nseq;

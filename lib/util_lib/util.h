@@ -521,6 +521,7 @@ void myexit (int signal);
 FILE *fatal_exit ( FILE *fp, int exit_signal, char *string, ...);
 int set_warning_mode ( int mode);
 FILE *add_warning (FILE *fp, char *string, ...);
+FILE *add_information (FILE *fp, char *string, ...);
 int  fprintf_error( FILE *fp, char *string, ...);
 
 void output_warning_list();

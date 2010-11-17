@@ -2196,7 +2196,8 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 int **score;
 	 int proceed=1;
 	 int **lc;
-
+	 int used;
+	 
 	 lc=declare_int (A->nseq, 2);
 	 for (a=0; a<A->nseq; a++)lc[a][0]=a;
 	 
@@ -2234,18 +2235,28 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 CL=A->CL;
 
 	 //Check all sequences have a PDB structure
-	 for (a=0; a<A->nseq; a++)
+
+	 for (used=0,a=0; a<A->nseq; a++)
 	   {
 	     if ( ! seq2P_template_file(A->S,a))
 	       {
-		 fprintf ( stderr, "\n--- ERROR: %s has no structural template. All sequence in the MSA must have a known structure [FATAL]\n", (A->name[a]));
-		 proceed=0;
+		 add_warning (stderr, "Sequence %s removed from the dataset [No Usable Structure]", A->name[a]);
+		 A->nseq;
+	       }
+	     else
+	       {
+		 if (used==a);
+		 else
+		   {
+		     sprintf (A->name[used], "%s", A->name[a]);
+		     sprintf (A->seq_al[used], "%s", A->seq_al[a]);
+		     for (b=0; b<4; b++)A->order[used][b]=A->order[a][b];
+		     used++;
+		   }
 	       }
 	   }
-
-	
-	 if (!proceed)
-	    printf_exit (EXIT_FAILURE, stderr, "\n\n---- ERROR: All provided sequences must have a valid PDB identifier [FATAL:tRMSD-%s]\n\n", PROGRAM);
+	 A->nseq=used;
+	 if (A->nseq<2)myexit (fprintf_error(stderr, "Two sequences at least must have a known structure"));
 	 
 	 for ( s1=0; s1< (A->S)->nseq; s1++)
 	   if ( CL->T[s1]){PP=(CL->T[s1])->pdb_param;break;}
@@ -2265,26 +2276,22 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 PP->maximum_distance=1000;
 	 sprintf ( PP->local_mode, "sphere");
 	 
-	 
 	 while ((npos=aln2ncol4trmsd(A,pos,CL,lc))<min_ncol4trmsd && A->nseq>1)
 	   {
 	     
 	     sort_int_inv (lc,2, 1, 0,A->nseq-1);
-	     fprintf ( stdout, "\nRemove Sequence [%s] that contains %d un-suitable positions\n", A->name[lc[0][0]], lc[0][1]);
+	     add_information (stderr, "Remove Sequence [%s] that contains %d un-suitable positions", A->name[lc[0][0]], lc[0][1]);
 	     A=remove_seq_from_aln (A, A->name[lc[0][0]]);
 	     ungap_aln (A);
 	     pos=aln2pos_simple (A, A->nseq);
 	   }
 	 if (!A->nseq)
 	   {
-	     fprintf ( stderr, "\nERROR: No suitable pair of column supporting a tree [FATAL]\n");
-	     exit (EXIT_SUCCESS);
+	     myexit (fprintf_error(stderr,"No suitable pair of column supporting a tree"));
 	   }
 	 else
-	    fprintf ( stdout, "\n---- Number of usable positions: %d [%.2f %%]\n", npos, ((float)npos*100)/(float)A->len_aln);
+	    fprintf ( stderr, "\n---- Number of usable positions: %d [%.2f %%]\n", npos, ((float)npos*100)/(float)A->len_aln);
 
-	 print_aln (A);
-	 HERE ("Gapped=%d", gapped);
 	 tl=vfopen (tot_pos_list, "w");
 	 for (ncol=0,ntree=0, col1=0; col1< A->len_aln; col1++)
 	   {
@@ -2380,13 +2387,12 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	     for (a=0; a<A->len_aln; a++)
 	       {
 		 int score;
-		 Tree_sim *S;
+		 Tree_sim *S=NULL;
 		 
 		 if (POS[a])
 		   {
 		     S=tree_cmp (POS[a], RBT);
 		     score=S->uw/10;
-		     vfree (S);
 		   }
 		 else
 		   {
@@ -2404,6 +2410,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 			 B->seq_al[b][a]=S->uw/10;
 		       }
 		   }
+		 if (S)vfree (S);
 	       }
 	     
 	     output_format_aln ("score_html", A,B,color_struc_tree);

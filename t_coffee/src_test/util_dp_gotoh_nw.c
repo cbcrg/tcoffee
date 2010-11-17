@@ -1488,7 +1488,7 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
 
   float nscore, score, tot, filter, avg=0, new=0;
   float **used;
-  int *norm;
+  float *norm;
 
   if ( !A) return 0;
   
@@ -1500,7 +1500,7 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
   l2=strlen (A->seq_al[ls[1][0]]);
   sl2=vcalloc ((CL->S)->nseq, sizeof (int));
   nr=declare_int (2, MAX(l1,l2)+1);
-  norm=vcalloc ( l1+1, sizeof (int));
+  norm=vcalloc ( l1+1, sizeof (float));
   
   for (a=0; a<l1;a++)
     for (b=0; b<ns[0]; b++)
@@ -1573,7 +1573,11 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
          
           if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
             {
-	      //score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
+	      
+	      //old normalization
+	      //score=(score/(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]))*NORM_F;
+	      
+	      //new normalization
 	      score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
 	      addE (p1,p2,((l1-(p1))+(p2)),score,list_in, n_in);
 	    }

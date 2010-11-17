@@ -2246,8 +2246,9 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	  static int max_len;
 	  int field;
 	  double delta;
-	  int norm1=0;
-	  int norm2=0;
+	  float norm1=0;
+	  float norm2=0;
+	  
 	  /*
 	    
 	  function documentation: start
@@ -2288,6 +2289,7 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	    t_r=CL->residue_index[s1][r1][a+R2];
 	    hasch[t_s][t_r]=CL->residue_index[s1][r1][a+field];
 	    norm1++;
+	    
 	  }
 	
 	
@@ -2302,7 +2304,7 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	      {
 		if (hasch[t_s][t_r]==FORBIDEN)
 		  {
-		    score+=((float)CL->residue_index[s2][r2][a+2]/NORM_F);
+		    score+=((float)CL->residue_index[s2][r2][a+field]/NORM_F);
 		  }
 		else 
 		  {
@@ -2313,12 +2315,16 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	  }
 
 	clean_residue_pair_hasch ( s1, r1,s2, r2, hasch, CL);	
+	
+	//New Normalization
 	norm1=MIN(norm1,norm2);
-
+		
 	//Old Normailzation: on the number of sequences, useless when not doiang an all against all
 	//norm1=(CL->S)->nseq;
+	
 	score=(norm1)?score/norm1:0;
 	
+
 	return score*NORM_F;
 	}
 int residue_pair_extended_list_pc_old ( Constraint_list *CL, int s1, int r1, int s2, int r2 )

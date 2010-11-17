@@ -3791,6 +3791,7 @@ char* lock(int pid,int type, int action,char *string, ...)
       string2file (fname, (action==LSET)?"a":"w", value);
       vfree (value);
       r= " ";
+      
     }
   else myexit(fprintf_error ( stderr, "ERROR: Unknown action for LOCK"));
   vfree (fname);
@@ -4687,8 +4688,27 @@ FILE *add_warning (FILE *fp, char *string, ...)
       cvsprintf (buf, string);
       if (fp)fprintf (fp, "\npid %d -- %s\n",getpid(), buf);
       if ( clean_exit_started)return fp;
-      lock(getpid(),LWARNING, LSET, "%d -- WARNING: %s\n", getpid(),buf);
       
+      
+      lock(getpid(),LWARNING, LSET, "%d -- WARNING: %s\n", getpid(),buf);
+      vfree (buf);
+    }
+  return fp;
+}
+FILE *add_information (FILE *fp, char *string, ...)
+{
+  char *buf;
+    
+  if ( warning_mode==NO || getenv("NO_INFORMATION_4_TCOFFEE"))return fp;
+  else
+    {
+      
+      cvsprintf (buf, string);
+      if (fp)fprintf (fp, "\npid %d -- %s\n",getpid(), buf);
+      if ( clean_exit_started)return fp;
+      
+      
+      lock(getpid(),LWARNING, LSET, "%d -- INFORMATION: %s\n", getpid(),buf);
       vfree (buf);
     }
   return fp;
@@ -5117,7 +5137,7 @@ FILE* warning_msg(FILE*fp)
   if (!msg) return fp;
   fprintf ( fp, "\n\n");
   fprintf ( fp, "*************************************************************************************************\n");
-  fprintf ( fp, "*                        WARNING LIST                                    \n");
+  fprintf ( fp, "*                        MESSAGES RECAPITULATION                                    \n");
   fprintf ( fp, "%s",msg);
   fprintf ( fp, "*************************************************************************************************\n");
   return fp;
@@ -8113,7 +8133,7 @@ void clean_exit ()
 
   Tmpname *start;
   int debug;
-
+  
   clean_exit_started=1;//prevent new locks 
   
   start=tmpname;
@@ -8128,9 +8148,11 @@ void clean_exit ()
       
       //
     }
-    
+  
+  
   if (is_rootpid())
     {
+      
       kill_child_pid(getpid());
       if (has_error_lock())
 	{
@@ -8155,7 +8177,7 @@ void clean_exit ()
 	}
       else if ( has_warning_lock())
 	{
-	   warning_msg (stderr);
+	  warning_msg (stderr);
 	}
       else
 	print_exit_success_message();
