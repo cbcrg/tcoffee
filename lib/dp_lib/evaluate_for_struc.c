@@ -91,7 +91,7 @@ int apdb ( int argc, char *argv[])
 	
 	char *pdb_db;
 	char *prot_db;
-
+	int min_ncol;
 
 	argv=standard_initialisation (argv, &argc);
 	
@@ -824,7 +824,22 @@ declare_name (prot_db);
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-
+ get_cl_param(							\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-min_ncol"    ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "D"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "minimum number of columns (negative: fraction)"          ,\
+ 			    /*Parameter*/&min_ncol       ,\
+	 		    /*Def 1*/    "4"      ,\
+			    /*Def 2*/    "1"      ,\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+		   );
  // set the correct mode:
  if ( strm (argv[0], "trmsd"))sprintf (mode, "trmsd");
    
@@ -954,7 +969,7 @@ declare_name (prot_db);
 		  }
 		else if ( strm (mode, "msa2tree") || strm (mode, "trmsd"))
 		  {
-		    EA=msa2struc_dist ( A, EA,F->name, gapped);
+		    EA=msa2struc_dist ( A, EA,F->name, gapped, min_ncol);
 		  }
 		le=display_output_filename ( le, "APDB_RESULT", "APDB_RESULT_FORMAT_01", apdb_outfile, CHECK);
 		
@@ -2142,7 +2157,7 @@ int column_is_suitable4trmsd(int col1,Alignment *A, int **pos, Pdb_param *PP, Co
 
 
 NT_node trmsdmat2tree (float **dm, int **count,Alignment *A);
-Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gapped)
+Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gapped, int min_ncol4trmsd)
      {
 
        int **pos, c;
@@ -2179,7 +2194,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 NT_node *T0,*T1,*T2,*PT, *POS;
 	 NT_node BT0, BT10,BT50, BT100,RBT;
 	 char **pair_pos_list;
-	 int min_ncol4trmsd=4;
+	 
 	 int ntree=0, ntree2;
 	 
 	 Alignment *B;
@@ -2198,6 +2213,16 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 int **lc;
 	 int used;
 	 
+	 if (min_ncol4trmsd<0)
+	   {
+	     min_ncol4trmsd*=-1;
+	     min_ncol4trmsd=(min_ncol4trmsd*A->len_aln)/100;
+	   }
+	 else if ( min_ncol4trmsd>=A->len_aln)
+	   {
+	     min_ncol4trmsd=A->len_aln-1;
+	   }
+
 	 lc=declare_int (A->nseq, 2);
 	 for (a=0; a<A->nseq; a++)lc[a][0]=a;
 	 
@@ -2348,7 +2373,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 
 	 if (treelist_file2consense (tot_pos_list, NULL, consense_file))
 	   {
-	     display_output_filename( stdout,"ConsenseTree","phylip",consense_file, CHECK);
+	     display_output_filename( stderr,"ConsenseTree","phylip",consense_file, CHECK);
 	   }
 	 else
 	   {
@@ -2358,25 +2383,25 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 if ( (BT0=trmsdmat2tree (tdm, tcount, A)))
 	   {
 	     vfclose (print_tree (BT0,"newick", vfopen (struc_tree0, "w")));
-	     display_output_filename( stdout,"Tree","newick",struc_tree0, CHECK);
+	     display_output_filename( stderr,"Tree","newick",struc_tree0, CHECK);
 	   }
 
 	 if ((BT10=treelist2filtered_bootstrap (T1, NULL,score, 0.1)))
 	   {
 	     vfclose (print_tree (BT10,"newick", vfopen (struc_tree10, "w")));
-	     display_output_filename( stdout,"Tree","newick",struc_tree10, CHECK);
+	     display_output_filename( stderr,"Tree","newick",struc_tree10, CHECK);
 	   }
 	 
 	 if ((BT50=treelist2filtered_bootstrap (T1, NULL, score,0.5)))
 	   {
 	     vfclose (print_tree (BT50,"newick", vfopen (struc_tree50, "w")));
-	     display_output_filename( stdout,"Tree","newick",struc_tree50, CHECK);
+	     display_output_filename( stderr,"Tree","newick",struc_tree50, CHECK);
 	   }
 	 
 	 if ((BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0)))
 	   {
 	     vfclose (print_tree (BT100,"newick", vfopen (struc_tree100, "w")));
-	     display_output_filename( stdout,"Tree","newick",struc_tree100, CHECK);
+	     display_output_filename( stderr,"Tree","newick",struc_tree100, CHECK);
 	   }
 	 
 	 
@@ -2414,8 +2439,9 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	       }
 	     
 	     output_format_aln ("score_html", A,B,color_struc_tree);
-	     display_output_filename( stdout,"Colored MSA","score_html",color_struc_tree, CHECK);
+	     display_output_filename( stderr,"Colored MSA","score_html",color_struc_tree, CHECK);
 	     free_aln (BA);
+	     fprintf ( stderr, "\n");
 	   }
 	 free_int (pos, -1);
 	 exit (EXIT_SUCCESS);

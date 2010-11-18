@@ -72,6 +72,7 @@ our $INTERNET=-1;
 # test command line arguments and open files:
 
 
+
 our $BLAST_MAX_NRUNS=2;
 our $EXIT_SUCCESS=0;
 our $EXIT_FAILURE=1;
@@ -143,6 +144,7 @@ if($ARGV[0]=~/help/ ||$ARGV[0]=~/man/ || $ARGV[0]=~/HELP/ || $ARGV[0]=~/Man/ || 
                                       [If value omitted, the pg gets it from the env variable PDB_DIR]
            -netcompression_pg.........[gunzip]
            -is_pdb_name..........name.[Returns 1 if the name is a PDB ID, 0 otherwise]
+           -model_type...........name.[Returns the model type if valid PDB name]
            -is_released_pdb_name name.[Returns 1 if the name corresponds to a released PDB file]
            -get_pdb_chains.....name...[Returns the list of chains corresponding to the entry]
            -get_pdb_id.........name...[Returns the PDB id within the provided pdb file]
@@ -216,7 +218,7 @@ $netcompression="gz";
 foreach ($np=0; $np<=$n_para; $np++)
   {        
     $value=$ARGV[$np];
-    
+   
     if  ($np==0 && !($value=~/^-.*/))
       { 
 	$pdb_file= $ARGV[$np];
@@ -247,6 +249,11 @@ foreach ($np=0; $np<=$n_para; $np++)
       {
 	$pdb_file= $ARGV[++$np];	
 	$is_released_pdb_name=1;
+      }
+    elsif ($value eq "-model_type")
+      {
+	$pdb_file= $ARGV[++$np];	
+	$model_type=1;
       }
     elsif ($value eq "-debug")
 {
@@ -409,10 +416,11 @@ if ( $debug)
 
 ####################################################################################################################
 #                                    CHECK if ID is valid                                                          #
-####################################################################################################################     
+#################################################################################################################### 
+
 if ( $is_pdb_name)
   {
-    if (remote_is_pdb_name($pdb_file))
+    if (&remote_is_pdb_name($pdb_file))
       {
 	print "1";
       }
@@ -436,7 +444,13 @@ if ( $is_released_pdb_name)
       }
     exit ($EXIT_SUCCESS);
   }
-
+if ($model_type)
+  {
+   
+    printf "%s", &pdb2model_type($pdb_file);
+    exit ($EXIT_SUCCESS);
+    
+  }
 ####################################################################################################################
 #                                    COPY THE FILE INTO A TMP FILE                                                 #
 ####################################################################################################################     
@@ -1169,6 +1183,31 @@ sub remote_is_pdb_name
     $value=($value>0)?1:0;
     
     return $value;
+  }
+
+sub pdb2model_type
+{
+    my $in=@_[0];
+    my ($ref_file, $pdb);
+    my ($value, $ret);
+
+    if ( $in=~/[^\w\d\:\_]/){return 0;}
+    $ref_file="$cache/pdb_entry_type.txt";
+    
+    if ( !-e $ref_file || (-M $ref_file)>2 || -z $ref_file)
+      {
+	&url2file("ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt", $ref_file);
+      }
+    $pdb=substr ($in,0, 4);
+    $pdb=lc($pdb);
+    
+    chomp(($value=`grep $pdb $ref_file`));
+    
+    $value=~/^\S+\s+\S+\s+(\S+)/;
+    $ret=$1;
+    if ( $ret eq""){return "UNKNOWN";}
+    
+    return $ret;
   }
 sub remote_is_on_hold
   {

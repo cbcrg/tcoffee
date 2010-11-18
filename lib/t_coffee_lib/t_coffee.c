@@ -275,7 +275,7 @@ int batch_main ( int argc, char **argv)
 	int pdb_min_sim;
 	int pdb_max_sim;
 	int pdb_min_cov;
-
+	char *pdb_type;
 
 
 	char *prot_blast_server;
@@ -2480,8 +2480,25 @@ get_cl_param(\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 		   );
-set_int_variable ("prot_min_cov", prot_min_cov);
 
+declare_name(pdb_type);
+get_cl_param(\
+			    /*argc*/      argc             ,\
+			    /*argv*/      argv             ,\
+			    /*output*/    &le              ,\
+			    /*Name*/      "-pdb_type"        ,\
+			    /*Flag*/      &pdb_min_sim        ,\
+			    /*TYPE*/      "S"              ,\
+			    /*OPTIONAL?*/ OPTIONAL         ,\
+			    /*MAX Nval*/  1                ,\
+			    /*DOC*/       "d: diffraction, n: nmr, m:model" ,\
+			    /*Parameter*/ &pdb_type          ,\
+			    /*Def 1*/     "d"             ,\
+			    /*Def 2*/     "d"             ,\
+			    /*Min_value*/ "any"            ,\
+			    /*Max Value*/ "any"             \
+		   );
+set_string_variable ("pdb_type", pdb_type);
 get_cl_param(\
 			    /*argc*/      argc             ,\
 			    /*argv*/      argv             ,\

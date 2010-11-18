@@ -132,7 +132,7 @@ elsif ( $mode eq "profile_pair")
   }
 elsif ( $mode eq "pdb_template")
   {
-    &blast2pdb_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0));
+    &blast2pdb_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0,"-pdb_type=",1,0,));
   }
 elsif ( $mode eq "profile_template")
   {
@@ -343,7 +343,7 @@ sub psiblast2profile_template
 
 sub blast2pdb_template 
   {
-  my ($mode, $infile, $db, $method, $outfile)=@_;
+  my ($mode, $infile, $db, $method, $outfile,$type)=@_;
   my %s, %h, ;
   my ($result,$blast_output);
   &set_temporary_dir ("set",$infile,"seq.pep");
@@ -373,11 +373,20 @@ sub blast2pdb_template
 	  $pdbid=&id2pdbid($p{$c}{identifyer});
 	  if ( length ($pdbid)>5){$pdbid=id2pdbid($p{$c}{definition});}
 	  
-	  if (&pdb_is_released ($pdbid)){$found=1;}
-	  else 
+	  if (!&pdb_is_released($pdbid))
 	    {
 	      print stdout "\t\t**$pdbid [PDB NOT RELEASED or WITHDRAWN]\n";
-	      $c++;}
+	      $c++;
+	    }
+	  elsif (!&pdb_has_right_type ($pdbid,$type))
+	    {
+	      print stdout "\t\t**$pdbid [PDB with Invalid Type ($type)]\n";
+	      $c++;
+	    }
+	  else
+	    {
+	      $found=1;
+	    }
 	}
 
       if ($found)
@@ -394,6 +403,22 @@ sub blast2pdb_template
   close (R);
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile);
 }
+sub pdb_has_right_type
+  {
+    my $pdb=shift;
+    my $type=shift;
+    my $f=vtmpnam();
+    
+    $value= &safe_system ("t_coffee -other_pg extract_from_pdb -model_type $pdb > $f");
+    my $r=&file2string ($f);
+    chomp($r);
+
+        
+    if ( $r eq "NMR" && $type=~/n/){return 1;}
+    elsif ( $r eq "diffraction" && $type=~/d/){return 1;}
+    elsif ( $r eq "model" && $type=~/m/){return 1;}
+    else {return 0;}
+  }
 sub pdb_is_released
   {
     my $pdb=shift;
