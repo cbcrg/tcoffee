@@ -382,7 +382,8 @@ int batch_main ( int argc, char **argv)
 	int     overaln_threshold;
 	int     overaln_target;
 	int     clean_overaln;
-
+	
+	char *dump;
 	
 	argv=standard_initialisation (argv, &argc);
 	set_string_variable ("t_coffee", argv[0]);
@@ -3515,8 +3516,32 @@ get_cl_param(\
 		   );
 	       if ( exon_boundaries[0])set_string_variable ("exon_boundaries", exon_boundaries);
 
-
-
+	       declare_name (dump);
+	       get_cl_param(\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-dump",\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "S"          ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "dump",\
+			    /*Parameter*/ &dump   ,\
+			    /*Def 1*/    "no"       ,\
+			    /*Def 2*/    ""              ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+			   );
+	       
+	       if (!strm (dump, "no"))
+		 {
+		   set_string_variable ("dump_output_file", vtmpnam (NULL));
+		   set_string_variable ("dump_output_file_list", vtmpnam (NULL));
+		   
+		   set_string_variable ("dump",dump);
+		 }
+	       
 
 
 /*******************************************************************************************************/
@@ -4783,6 +4808,7 @@ get_cl_param(\
 		}
 
 	      //fLUSH OUT THE NAME OF ALL THE FILES THAT HAVE BEEN PRODUCED
+	    
 	      le=display_output_filename (le, NULL, NULL, NULL, FLUSH);
 
 

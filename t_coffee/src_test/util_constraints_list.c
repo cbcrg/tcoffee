@@ -3440,7 +3440,7 @@ Constraint_list * nfork_relax_constraint_list_4gp (Constraint_list *CL)
 				
 				t_s=CL->residue_index[s][r][a+SEQ2];
 				t_r=CL->residue_index[s][r][a+WE];
-				fprintf (fp, "%d ",residue_pair_extended_list_4gp (CL,s, r,t_s, t_r));
+				fprintf (fp, "%d ",residue_pair_extended_list_pc (CL,s, r,t_s, t_r));
 			}
 		}
 	}

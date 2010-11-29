@@ -521,6 +521,7 @@ void myexit (int signal);
 FILE *fatal_exit ( FILE *fp, int exit_signal, char *string, ...);
 int set_warning_mode ( int mode);
 FILE *add_warning (FILE *fp, char *string, ...);
+FILE *add_information (FILE *fp, char *string, ...);
 int  fprintf_error( FILE *fp, char *string, ...);
 
 void output_warning_list();
@@ -552,7 +553,7 @@ char *get_t_coffee_environement (char *file);
 char *set_path_4_plugins (char *);
 int add_package2_tcoffee_env (char *package);
 
-
+void dump (char *dump_file, char *dump_nature);
 void dump_error_file();
 void update_error_dir();
 

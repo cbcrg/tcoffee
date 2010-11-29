@@ -327,7 +327,12 @@ char *vcat (char *v1, char *v2);
 int strget_param ( char *string, char *param_name, char *param_value, char *format, ...);
 char * lstrstr ( char *in, char *token);
 char * vstrstr ( char *in, char *token);
+char * estrstr ( char *in, char *token,...);
+char * festrstr ( char *in, char *token,...);
+
 int strscanf (char *in, char *token, char *format, ...);
+int strfcanf (char *file, char *token, char *format, ...);
+
 int match_motif ( char *string, char **motif);
 
 char *after_strstr (char *string, char *token);
@@ -553,7 +558,7 @@ char *get_t_coffee_environement (char *file);
 char *set_path_4_plugins (char *);
 int add_package2_tcoffee_env (char *package);
 
-
+void dump (char *dump_file, char *dump_nature);
 void dump_error_file();
 void update_error_dir();
 

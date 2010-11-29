@@ -5230,7 +5230,71 @@ void update_error_dir()
   
   
 }
+void dump_tcoffee(char *target, char *nature)
+{
+  char **list, *s;
+  int a=0;
+  FILE *fp;
+  char *f;
+  
+  if ((fp=fopen (target, "w")))
+    {
+      fprintf (fp, "<report>\n<nature>%s</nature>\n", nature);
+      fprintf (fp, "<program>%s</program>\n", PROGRAM);
+      fprintf (fp, "<version>%s</version>\n",VERSION);
+      fprintf (fp, "<cl>%s</cl>\n",in_cl);
+      fprintf (fp, "<stack>\n");
+      stack_msg(fp);
+      fprintf (fp, "</stack>\n<warning>\n");
+      warning_msg (fp);
+      fprintf (fp, "</warning>\n");
+      
+      //dump input
+      list=string2list (in_cl);
+      
+      for (a=1; a<atoi (list[0]); a++)
+	{
+	  FILE *fp2;
+	  char c;
+	  s=list[a];
+	  if (file_exists (NULL,s))
+	    {
+	      fp2=fopen (s, "r");
+	      fprintf (fp, "<file><stream>input</stream>\n");
+	      fprintf (fp, "<name>%s</name>\n",s);
+	      fprintf (fp, "<content>");
+	      while ((c=fgetc(fp2))!=EOF)fprintf ( fp, "%c", c);
+	      fclose (fp2);
+	      fprintf (fp, "</content></file>");
+	    }
+	}
+      //dump output
+      if ((f=get_string_variable ("dump_output_file")))
+	{
+	  FILE *fp2;
+	  char c;
+	  
+	  if ((fp2=fopen (f, "r"))!=NULL)
+	    {
+	      while ((c=fgetc (fp2))!=EOF)fprintf (fp, "%c",c);
+	      fclose (fp2);
+	    }
+	  
+	}
+      
+      fprintf (fp, "<environement>");
+      fclose (fp);
+      printf_system_direct("printenv >> %s", target);
+      fp=fopen (target, "a");
+      fprintf (fp, "</environement></report>");
+      fclose (fp);
+      
+      fprintf ( stderr, "\n#----- Dumped File: %s\n",target);
+    }
+  else fprintf ( stderr, "\n#----- Could NOT Produce Dump File: %s -- Sorry \n", target);
+  
 
+}
 void dump_error_file()
 {
   char target[1000];
@@ -5243,8 +5307,12 @@ void dump_error_file()
 
   
   sprintf ( target, "%s",getenv("ERRORFILE_4_TCOFFEE"));
+  dump_tcoffee (target, "error");
+  return;
+  
   if ((fp=fopen (target, "w")))
     {
+      
       fprintf ( fp, "\n######### RUN_REPORT      START  ######");
       fprintf ( fp, "\n######### PROGRAM_VERSION START  ######"); 
       fprintf ( fp, "\n          %s, %s", PROGRAM, VERSION);
@@ -5270,10 +5338,10 @@ void dump_error_file()
 	  if (file_exists (NULL,s))
 	    {
 	      fp2=fopen (s, "r");
-	      fprintf ( fp, "\n************* Start_File: %s  *************\n", s);
+	      fprintf ( fp, "\n************* Start_Input_File: %s  *************\n", s);
 	      while ((c=fgetc(fp2))!=EOF)fprintf ( fp, "%c", c);
 	      fclose (fp2);
-	      fprintf ( fp, "\n************* End_File: %s  *************", s);
+	      fprintf ( fp, "\n************* End_Input_File: %s  *************", s);
 	      
 	    }
 	}
@@ -6778,6 +6846,7 @@ FILE * display_output_filename ( FILE *io, char *type, char *format, char *name,
 {
   static char ***buf;
   static int nbuf;
+  char *f;
   
   if ( strm ( name, "stdout") || strm (name, "stderr"))return io;
   
@@ -6815,6 +6884,26 @@ FILE * display_output_filename ( FILE *io, char *type, char *format, char *name,
 	  return io;
 	}
       fprintf ( io, "\n\t#### File Type= %10s Format= %10s Name= %s",type, format, name );
+    }
+
+  
+  if ((f=get_string_variable ("dump_output_file")))
+    {
+      FILE *out;
+      FILE *fp;
+      char c;
+      out=vfopen (f, "a");
+      fprintf (out, "<file>/n");
+      fprintf (out,"<stream>output</stream>\n");
+      fprintf (out,"<type>%10s</type>\n", type);
+      fprintf (out, "<format>%s</format>\n", format);
+      fprintf (out, "<name>%s</name>\n", name);
+      fprintf (out, "<content>\n");
+      fp=vfopen (name, "r");
+      while ((c=fgetc (fp))!=EOF){fprintf(out, "%c",c);}
+      vfclose (fp);
+      fprintf (out,"</content></file>\n");
+      vfclose (out);
     }
   return io;
 }
@@ -8130,7 +8219,7 @@ void clean_exit ()
 {
   Tmpname *b;
   char *tmp;
-
+  char *f;
   Tmpname *start;
   int debug;
   
@@ -8181,7 +8270,17 @@ void clean_exit ()
 	}
       else
 	print_exit_success_message();
+      
+      if ( (f=get_string_variable ("dump")))
+	{
+	  dump_tcoffee (f, "standard dump");
+	  HERE ("DONE");
+	  //unset_string_variable ("dump");
+	  //unset_string_variable ("dump_output_file");
+	  //display_output_filename (stdout, "DUMP", "DUMP_4_TCOFFEE",f, CHECK);
+	}
 
+      
       lock (getpid(), LLOCK, LRELEASE, "");
       lock (getpid(), LWARNING, LRELEASE, "");
       lock (getpid(), LERROR, LRELEASE, "");

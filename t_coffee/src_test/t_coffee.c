@@ -275,7 +275,7 @@ int batch_main ( int argc, char **argv)
 	int pdb_min_sim;
 	int pdb_max_sim;
 	int pdb_min_cov;
-
+	char *pdb_type;
 
 
 	char *prot_blast_server;
@@ -382,7 +382,8 @@ int batch_main ( int argc, char **argv)
 	int     overaln_threshold;
 	int     overaln_target;
 	int     clean_overaln;
-
+	
+	char *dump;
 	
 	argv=standard_initialisation (argv, &argc);
 	set_string_variable ("t_coffee", argv[0]);
@@ -2480,8 +2481,25 @@ get_cl_param(\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 		   );
-set_int_variable ("prot_min_cov", prot_min_cov);
 
+declare_name(pdb_type);
+get_cl_param(\
+			    /*argc*/      argc             ,\
+			    /*argv*/      argv             ,\
+			    /*output*/    &le              ,\
+			    /*Name*/      "-pdb_type"        ,\
+			    /*Flag*/      &pdb_min_sim        ,\
+			    /*TYPE*/      "S"              ,\
+			    /*OPTIONAL?*/ OPTIONAL         ,\
+			    /*MAX Nval*/  1                ,\
+			    /*DOC*/       "d: diffraction, n: nmr, m:model" ,\
+			    /*Parameter*/ &pdb_type          ,\
+			    /*Def 1*/     "d"             ,\
+			    /*Def 2*/     "d"             ,\
+			    /*Min_value*/ "any"            ,\
+			    /*Max Value*/ "any"             \
+		   );
+set_string_variable ("pdb_type", pdb_type);
 get_cl_param(\
 			    /*argc*/      argc             ,\
 			    /*argv*/      argv             ,\
@@ -3498,8 +3516,30 @@ get_cl_param(\
 		   );
 	       if ( exon_boundaries[0])set_string_variable ("exon_boundaries", exon_boundaries);
 
-
-
+	       declare_name (dump);
+	       get_cl_param(\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-dump",\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "S"          ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "dump",\
+			    /*Parameter*/ &dump   ,\
+			    /*Def 1*/    "no"       ,\
+			    /*Def 2*/    ""              ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+			   );
+	       
+	       if (!strm (dump, "no"))
+		 {
+		   set_string_variable ("dump_output_file", vtmpnam (NULL));
+		   set_string_variable ("dump",dump);
+		 }
+	       
 
 
 /*******************************************************************************************************/

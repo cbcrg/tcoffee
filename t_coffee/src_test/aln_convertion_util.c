@@ -5006,13 +5006,15 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   /*Fill the sequences*/
   /*1: No template*/
   char buf[1000];
-
+  
   int PmC,PmI,PMI;
   int BmC,BmI,BMI;
   char *server;
   char *pdb_db,*prot_db;
-
+  char pdb_type[100];
+  char *p;
   int remove_template_file=0;
+  
   
   remove_template_file=get_int_variable ("remove_template_file");
   server=get_string_variable ("blast_server");
@@ -5026,7 +5028,17 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   BmI=get_int_variable ("prot_min_sim");
   BMI=get_int_variable ("prot_max_sim");
   BmC=get_int_variable ("prot_min_cov");
-    
+  
+  //Set the type of the PDB structure
+  if ((p=get_string_variable ("pdb_type")))
+    {
+      sprintf ( pdb_type, "%s",p);
+    }
+  else
+    {
+      sprintf (pdb_type, "dmn");
+    }
+  
   if ( (template_list && template_list[0]=='\0') || strm ( template_list, "no_template")) 
     {
       return S;
@@ -5106,11 +5118,11 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       
       if (isRNA)
 	{
-	  sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#pdb_template@database#%s@method#blastn@cache#%s@minid#%d@maxid#%d@mincov#%d@server#%s@type#_P_",pdb_db, get_cache_dir(),PmI,PMI,PmC, server);
+	  sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#pdb_template@database#%s@method#blastn@cache#%s@minid#%d@maxid#%d@mincov#%d@server#%s@type#_P_@pdb_type#%s",pdb_db, get_cache_dir(),PmI,PMI,PmC, server,pdb_type);
 	}
       else
 	{
-	  sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#pdb_template@database#%s@method#blastp@cache#%s@minid#%d@maxid#%d@mincov#%d@server#%s@type#_P_",pdb_db, get_cache_dir(),PmI,PMI,PmC, server);
+	  sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#pdb_template@database#%s@method#blastp@cache#%s@minid#%d@maxid#%d@mincov#%d@server#%s@type#_P_@pdb_type#%s",pdb_db, get_cache_dir(),PmI,PMI,PmC, server,pdb_type);
 	}
       return seq2template_seq (S,buf, F);
     }
