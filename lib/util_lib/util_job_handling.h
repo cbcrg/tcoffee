@@ -62,3 +62,4 @@ Job_TC *delete_job (Job_TC *job);
 struct Job_TC* submit_job ( Job_TC *job);
 struct Job_TC* retrieve_job ( Job_TC *job);
 Job_TC*** split_job_list (Job_TC *job, int ns);
+int **n2splits (int nsplits, int nelements);

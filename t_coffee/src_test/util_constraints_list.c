@@ -653,7 +653,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 	{
 		method=method_file2TC_method("no_method");
 		sprintf ( method->out_mode, "%c", fname[0]);
-		
+	
 		if (!strm (weight, "default"))sprintf ( method->weight, "%s", weight);
 		
 		return print_lib_job(NULL,"param->out=%s param->TCM=%p",fname+1, method);
@@ -742,10 +742,10 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 			
 			if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
 			if ( check_seq_type ( method, bufS, S))
-			{
-				job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out);
-				job=queue_cat (job, job->c);
-			}
+			  {
+			    job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out);
+			    job=queue_cat (job, job->c);
+			  }
 			vfree (bufA);
 			
 		}
@@ -753,7 +753,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 	else if ( strcmp (aln_mode, "multiple")==0)
 	  {
 		int d;
-		char buf[1000];
+		char buf[10000];
 		
 		sprintf (bufS, "%d",S->nseq);
 		for (d=0; d< S->nseq; d++)
@@ -763,17 +763,15 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 		}
 		
 		bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
-		
 		if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
 		
 		if ( check_seq_type ( method, bufS, S))
-		{
-			
-			job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
-			
-			job=queue_cat (job, job->c);
-			
-		}
+		  {
+		    job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
+		    
+		    job=queue_cat (job, job->c);
+		    
+		  }
 		vfree (bufA);
 	  }
 	else if ( strstr(aln_mode, "o2a"))
@@ -3125,74 +3123,126 @@ Constraint_list * relax_constraint_list (Constraint_list *CL)
 
 Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
 {
-	int a, s1, s2, r1, r2;
-	int score;
-	int thr=10;
-	FILE *fp;
-	char **pid_tmpfile;
-	int rjob;
-	Sequence *S;
-	int in;
-	if (!CL || !CL->residue_index)return CL;
-	fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", get_nproc());
-	S=CL->S;
-	in=CL->ne;
-	pid_tmpfile=vcalloc (S->nseq, sizeof (char*));
+  int a, s1, s2, r1, r2,j;
 	
+  int thr=10;
+  FILE *fp;
+  char **pid_tmpfile;
+  int sjobs, njobs;
+  int **sl;
+  Sequence *S;
+  int in;
+  
+  static int **hasch;
+  static int max_len;
+  int norm1, norm2;
+  int t_s1, t_s2, t_r1, t_r2,x;
+  float score;
+  int np;
+
+  njobs=get_nproc();
 	
-	for (rjob=0,s1=0; s1<S->nseq; s1++)
+  if (!CL || !CL->residue_index)return CL;
+  fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", get_nproc());
+  
+  if ( !hasch || max_len!=(CL->S)->max_len)
+    {
+      max_len=(CL->S)->max_len;
+      if ( hasch) free_int ( hasch, -1);
+      hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
+    }
+  
+  S=CL->S;
+  in=CL->ne;
+  
+  sl=n2splits (njobs, (CL->S)->nseq);
+  pid_tmpfile=vcalloc (njobs, sizeof (char*));
+  
+  for (sjobs=0,j=0;j<njobs; j++)
+    {
+      pid_tmpfile[j]=vtmpnam(NULL);
+      if (vvfork (NULL)==0)
 	{
-		output_completion ( CL->local_stderr,s1,S->nseq,1, "Relax ");
-		pid_tmpfile[s1]=vtmpnam(NULL);
-		while(rjob>=get_nproc())
+	  initiate_vtmpnam(NULL);
+	  fp=vfopen (pid_tmpfile[j], "w");
+	  for (s1=sl[j][0]; s1<sl[j][1]; s1++)
+	    {
+	      if (j==0)output_completion (stderr,s1,sl[0][1],1, "Relax Library");
+	      for (r1=1; r1<S->len[s1]; r1++)
 		{
-			vwait (NULL);rjob--;
-		}
-		if (vvfork (NULL)==0)
-		{
-			initiate_vtmpnam(NULL);
-			fp=vfopen (pid_tmpfile[s1], "w");
-			for (r1=1; r1<S->len[s1]; r1++)
+		  norm1=0;
+		  
+		  for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
+		    {
+		      t_s1=CL->residue_index[s1][r1][x+SEQ2];
+		      t_r1=CL->residue_index[s1][r1][x+R2];
+		      hasch[t_s1][t_r1]=CL->residue_index[s1][r1][x+WE];
+		      norm1++;
+		    }
+		  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+		    {
+		      score=0;
+		      norm2=0;
+		      s2=CL->residue_index[s1][r1][a+SEQ2];
+		      r2=CL->residue_index[s1][r1][a+R2];
+		      for (x=1; x< CL->residue_index[s2][r2][0]; x+=ICHUNK)
 			{
-				for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
-				{
-					s2=CL->residue_index[s1][r1][a+SEQ2];
-					r2=CL->residue_index[s1][r1][a+R2];
-					fprintf (fp, "%d ",residue_pair_extended_list_pc (CL,s1, r1,s2, r2));
-				}
+			  t_s2=CL->residue_index[s2][r2][x+SEQ2];
+			  t_r2=CL->residue_index[s2][r2][x+R2];
+			  norm2++;
+			  
+			  if (t_s2==s1 && t_r2==r1)score+=CL->residue_index[s2][r2][x+WE];
+			  else if (hasch[t_s2][t_r2])
+			    {
+			      score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
+			    }
 			}
-			vfclose (fp);
-			myexit (EXIT_SUCCESS);
+		      norm2=MIN(norm1,norm2);
+		      score=((norm2)?score/norm2:0);
+		      fprintf (fp, "%d ",(int)(score));
+		    }
+		  for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
+		    {
+		      t_s1=CL->residue_index[s1][r1][x+SEQ2];
+		      t_r1=CL->residue_index[s1][r1][x+R2];
+		      hasch[t_s1][t_r1]=0;
+		    }
 		}
-		else
-		{
-			rjob++;
-		}
+	    }
+	  vfclose (fp);
+	  myexit (EXIT_SUCCESS);
 	}
-	while (rjob>=0){vwait(NULL); rjob--;}//wait for all jobs to complete
-		
-		for (s1=0; s1<S->nseq; s1++)
+      else
+	{
+	  sjobs++;
+	}
+    }
+ 
+  while (sjobs>=0){vwait(NULL); sjobs--;}//wait for all jobs to complete
+  for (j=0; j<njobs; j++)
+    {
+      
+      fp=vfopen (pid_tmpfile[j], "r");
+      for (s1=sl[j][0]; s1<sl[j][1]; s1++)
+	for (r1=1; r1<S->len[s1]; r1++)
+	  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+	    {
+	      if (!(fscanf ( fp, "%d ", &CL->residue_index[s1][r1][a+WE])))
 		{
-			output_completion ( CL->local_stderr,s1,S->nseq,1, "Update");
-			fp=vfopen (pid_tmpfile[s1], "r");
-			for (r1=1; r1<S->len[s1]; r1++)
-				for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
-				{
-					if (!(fscanf ( fp, "%d ", &CL->residue_index[s1][r1][a+WE])))
-					{
-						printf_exit (EXIT_FAILURE,stderr, "Could not complete relaxation cycle");
-					}
-				}
-				vfclose (fp);
-			remove (pid_tmpfile[s1]);
+		  printf_exit (EXIT_FAILURE,stderr, "Could not complete relaxation cycle");
 		}
-		
-		CL=filter_constraint_list (CL,WE,thr);
-		fprintf ( CL->local_stderr, "\nRelaxation Summary: [%d]--->[%d]\n", in,CL->ne);
-		vfree (pid_tmpfile);
-		return CL;
-		
+	    }
+      vfclose (fp);
+      remove (pid_tmpfile[j]);
+    }
+  
+  CL=filter_constraint_list (CL,WE,thr);
+  fprintf ( CL->local_stderr, "\nRelaxation Summary: [%d]--->[%d]\n", in,CL->ne);
+  vfree (pid_tmpfile);
+  free_int (sl, -1);
+  return CL;
 }
+
 
 Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 {
@@ -3202,6 +3252,11 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 	FILE *fp;
 	int thr=10;
 	int nne;
+	static int **hasch;
+	static int max_len;
+	int norm1, norm2;
+	int t_s1, t_s2, t_r1, t_r2,x;
+	float score;
 	
 	tmp=vtmpnam(NULL);
 	if (!CL || !CL->residue_index)return CL;
@@ -3210,34 +3265,76 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 	nne=CL->ne;
 	
 	fp=vfopen (tmp, "w");
+	
+	if ( !hasch || max_len!=(CL->S)->max_len)
+	       {
+		 max_len=(CL->S)->max_len;
+		 if ( hasch) free_int ( hasch, -1);
+		 hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
+	       }
+	
+	
 	for (s1=0; s1< S->nseq; s1++)
-	{
-		for ( r1=1; r1<=S->len[s1]; r1++)
-		{
-			for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
-			{
-				s2=CL->residue_index[s1][r1][a+SEQ2];
-				r2=CL->residue_index[s1][r1][a+R2];
-			       
-				fprintf (fp, "%d ",residue_pair_extended_list_pc (CL,s1, r1,s2, r2));
-			}
-		}
-	}
+	  {
+	    for ( r1=1; r1<=S->len[s1]; r1++)
+	      {
+		norm1=0;
+		
+		for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
+		  {
+		    t_s1=CL->residue_index[s1][r1][x+SEQ2];
+		    t_r1=CL->residue_index[s1][r1][x+R2];
+		    hasch[t_s1][t_r1]=CL->residue_index[s1][r1][x+WE];
+		    norm1++;
+		  }
+		
+		for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+		  {
+		    score=0;
+		    norm2=0;
+		    s2=CL->residue_index[s1][r1][a+SEQ2];
+		    r2=CL->residue_index[s1][r1][a+R2];
+		    
+		    for (x=1; x< CL->residue_index[s2][r2][0]; x+=ICHUNK)
+		      {
+			t_s2=CL->residue_index[s2][r2][x+SEQ2];
+			t_r2=CL->residue_index[s2][r2][x+R2];
+			norm2++;
+			
+			if (t_s2==s1 && t_r2==r1)score+=CL->residue_index[s2][r2][x+WE];
+			else if (hasch[t_s2][t_r2])
+			  {
+			    score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
+			  }
+		      }
+		    norm2=MIN(norm1,norm2);
+		    score=((norm2)?score/norm2:0);
+		    fprintf (fp, "%d ",(int)(score));
+		  }
+		
+		for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
+		  {
+		    t_s1=CL->residue_index[s1][r1][x+SEQ2];
+		    t_r1=CL->residue_index[s1][r1][x+R2];
+		    hasch[t_s1][t_r1]=0;
+		  }
+	      }
+	  }
 	vfclose (fp);
 	fp=vfopen (tmp, "r");
 	
 	for (s1=0; s1< S->nseq; s1++)
-	{
-		for ( r1=1; r1<=S->len[s1]; r1++)
-		{
-			
-			for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
-			{
-				
-				fscanf (fp, "%d ", &CL->residue_index[s1][r1][a+WE]);
-			}
-		}
-	}
+	  {
+	    for ( r1=1; r1<=S->len[s1]; r1++)
+	      {
+		
+		for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+		  {
+		    
+		    fscanf (fp, "%d ", &CL->residue_index[s1][r1][a+WE]);
+		  }
+	      }
+	  }
 	vfclose (fp);
 	filter_constraint_list (CL,WE,thr);
 	fprintf ( CL->local_stderr, "--->[%d]\n", CL->ne);

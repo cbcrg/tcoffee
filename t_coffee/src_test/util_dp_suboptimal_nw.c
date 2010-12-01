@@ -1091,46 +1091,7 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
   return A->CL;
 }
 
-Constraint_list *ProbaMatrix2CL_old (Alignment *A, int *ns, int **ls, int NumMatrixTypes, int NumInsertStates, float *forward, float *backward, float thr, Constraint_list *CL)
-{
-  float totalProb;
-  int ij, i, j,k, I, J, s1, s2;
-  static int *entry;
-  int lib_size=0;
-  double v;
-  
-  I=strlen (A->seq_al[ls[0][0]]);
-  J=strlen (A->seq_al[ls[1][0]]);
-  s1=name_is_in_list (A->name[ls[0][0]], (CL->S)->name, (CL->S)->nseq, 100);
-  s2=name_is_in_list (A->name[ls[1][0]], (CL->S)->name, (CL->S)->nseq, 100);
-  
-  totalProb = ComputeTotalProbability (I,J,NumMatrixTypes, NumInsertStates,forward, backward);
-  if (!entry)entry=vcalloc ( CL->entry_len+1, CL->el_size);
-  ij = 0;
-  thr=0.01;
 
-
-  for (ij=0,i =0; i <= I; i++)
-    {
-    for (j =0; j <= J; j++)
-      {
-	v= EXP (MIN(LOG_ONE,(forward[ij] + backward[ij] - totalProb)));
-	if (i && j && v>=thr)
-	  
-	  {
-	    entry[SEQ1]=s1;entry[SEQ2]=s2;
-	    entry[R1]=i;entry[R2]=j;
-	    entry[WE]=(int)((float)v*(float)NORM_F);
-	    entry[CONS]=1;
-	    add_entry2list (entry,A->CL);
-	    lib_size++;
-	  }
-	ij += NumMatrixTypes;
-      }
-    }
-  HERE ("LIB_SIZE_OLD: %d", lib_size);
-  return A->CL;
-}
 
 float ComputeTotalProbability (int seq1Length, int seq2Length,int NumMatrixTypes, int NumInsertStates,float *forward, float *backward) 
 {

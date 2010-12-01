@@ -16,7 +16,7 @@ Alignment * categories_evaluate_output               ( Alignment *IN,Constraint_
 Alignment * matrix_evaluate_output               ( Alignment *IN,Constraint_list *CL);
 Alignment * sar_evaluate_output ( Alignment *IN,Constraint_list *CL);
 Alignment * boxshade_evaluate_output ( Alignment *IN,Constraint_list *CL, int T);
-
+Alignment * triplet_coffee_evaluate_output          ( Alignment *IN,Constraint_list *CL);
 Alignment * fast_coffee_evaluate_output          ( Alignment *IN,Constraint_list *CL);
 
 int slow_coffee_evaluate_sub_aln         ( Alignment *IN,int *ns, int **ls, Constraint_list *CL);

@@ -158,7 +158,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +reorder.............Reorders sequences of <in> according to <in2>");
 		fprintf ( stdout, "\n     .........random......Random_order");
 		fprintf ( stdout, "\n     .........tree........Tree Order (in2)");
-		fprintf ( stdout, "\n     +reorder_columns.....Reorders sequences of <in> according to <in2>");
+		fprintf ( stdout, "\n     +reorder_column.....Reorders sequences of <in> according to <in2>");
 		fprintf ( stdout, "\n     .........random......Random_order");
 		fprintf ( stdout, "\n     .........tree..mode..Tree Order (comuted with mode: sarmat, idmat, blosum62mt...");
 		fprintf ( stdout, "\n     +aln2random_aln SCR..Randomize the aln, S: swap sequences names");

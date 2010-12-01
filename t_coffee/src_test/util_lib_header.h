@@ -327,7 +327,12 @@ char *vcat (char *v1, char *v2);
 int strget_param ( char *string, char *param_name, char *param_value, char *format, ...);
 char * lstrstr ( char *in, char *token);
 char * vstrstr ( char *in, char *token);
+char * estrstr ( char *in, char *token,...);
+char * festrstr ( char *in, char *token,...);
+
 int strscanf (char *in, char *token, char *format, ...);
+int strfcanf (char *file, char *token, char *format, ...);
+
 int match_motif ( char *string, char **motif);
 
 char *after_strstr (char *string, char *token);
@@ -801,6 +806,7 @@ Job_TC *delete_job (Job_TC *job);
 struct Job_TC* submit_job ( Job_TC *job);
 struct Job_TC* retrieve_job ( Job_TC *job);
 Job_TC*** split_job_list (Job_TC *job, int ns);
+int **n2splits (int nsplits, int nelements);
 struct Dps_result
     {
       int njobs;

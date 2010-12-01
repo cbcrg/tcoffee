@@ -81,6 +81,7 @@
 #define FORCE             2
 #define STORE             3
 #define FLUSH             4
+#define DUMP              5
 
 
 #define ON                8

@@ -81,6 +81,7 @@
 #define FORCE             2
 #define STORE             3
 #define FLUSH             4
+#define DUMP              5
 
 
 #define ON                8
@@ -740,8 +741,8 @@ The format is as follow:
 -------------------------------------------------------------------------------------------
 the RGB values are used for the post-script generation, the html code is used in html documents.
 */
-#define DATE "Fri Nov 12 19:52:13 CET 2010"
+#define DATE "Fri Nov 26 10:26:38 CET 2010"
 #define PROGRAM "T-COFFEE"
-#define VERSION "Version_8.95"
+#define VERSION "Version_8.97"
 #define AUTHOR "Cedric Notredame "
 #define DISTRIBUTION_ADDRESS "www.tcoffee.org/Packages/"

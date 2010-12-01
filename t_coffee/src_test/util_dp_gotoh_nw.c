@@ -1481,7 +1481,7 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
 
   int nused;
   int *used_list;
-  int *sl2, **inv_pos;
+  int *sl2,*sl1, **inv_pos;
 
   int **nr;
 
@@ -1498,7 +1498,9 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
 
   l1=strlen (A->seq_al[ls[0][0]]);
   l2=strlen (A->seq_al[ls[1][0]]);
+  sl1=vcalloc ((CL->S)->nseq, sizeof (int));
   sl2=vcalloc ((CL->S)->nseq, sizeof (int));
+  
   nr=declare_int (2, MAX(l1,l2)+1);
   norm=vcalloc ( l1+1, sizeof (float));
   
@@ -1509,8 +1511,10 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
     for (b=0; b<ns[1]; b++)
       if (!is_gap(A->seq_al[ls[1][b]][a]))nr[1][a+1]++;
 
+  for (a=0;a<ns[0]; a++)sl1[ls[0][a]]=1;
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
-
+  
+  
 
   used=declare_float (l2+1,2);
   used_list=vcalloc (l2+1, sizeof (int));
@@ -1527,6 +1531,8 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
               t_s=CL->residue_index[s][r][a+SEQ2];
               t_r=CL->residue_index[s][r][a+R2];
               t_w=CL->residue_index[s][r][a+WE];
+	      if (sl1[t_s])continue;//do not extend within a profile
+	      
 	      norm[p1]++;
               for (b=0; b<CL->residue_index[t_s][t_r][0];)
                 {
@@ -1587,7 +1593,7 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
   vfree (used_list);
   free_int (inv_pos, -1);
   free_int (pos, -1);
-  vfree (sl2);
+  vfree (sl2);vfree (sl1);
   free_int (nr, -1);
   vfree(norm);
   return n_in[0];
@@ -1604,10 +1610,46 @@ int linked_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
   int score, a;
   char **al;
   int len=0;
+  int invert=0;
+  int tr0,tr1;
   
   if ( !A)free_int (list, -1);
   if ( !CL->residue_index)return myers_miller_pair_wise (A, ns,ls,CL);
-    
+  
+
+  tr0=ns[0]*strlen (A->seq_al[ls[0][0]]);
+  tr1=ns[1]*strlen (A->seq_al[ls[1][0]]);
+  
+  if (tr0>tr1)
+    {
+      int *ins;
+      int **ils;
+      int a,b,c;
+      invert=1;
+      ins=vcalloc (2, sizeof(int));
+      ils=declare_int (2, (CL->S)->nseq);
+      
+      for ( a=0; a<2; a++)
+	{
+	  ins[a]=ns[a];
+	  for (b=0; b<ns[a]; b++)ils[a][b]=ls[a][b];
+	}
+      
+      for (c=1,a=0; a<2; a++,c--)
+	{
+	  ns[c]=ins[a];
+	  for (b=0; b<ins[a]; b++)
+	    ls[c][b]=ils[a][b];
+	}
+      
+      vfree (ins);
+      free_int (ils, -1);
+    }
+      
+
+
+      
+      
   /*Prepare the list*/
   
   
@@ -1615,11 +1657,36 @@ int linked_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
   cl2diag_cap         (A, ns, ls, CL, &list, &n);
   cl2list_borders     (A, ns, ls, CL, &list, &n);
   list2nodup_list     (A, ns, ls, CL, &list, &n);
-  
   /*Do the DP*/
-  
   score=list2linked_pair_wise (A, ns, ls, CL, list, n, &al,&len);
   free_char (al, -1);
+
+  if (invert)
+    {
+      int *ins;
+      int **ils;
+      int a,b,c;
+      
+      ins=vcalloc (2, sizeof(int));
+      ils=declare_int (2, (CL->S)->nseq);
+      
+      for ( a=0; a<2; a++)
+	{
+	  ins[a]=ns[a];
+	  for (b=0; b<ns[a]; b++)ils[a][b]=ls[a][b];
+	}
+      
+      for (c=1,a=0; a<2; a++,c--)
+	{
+	  ns[c]=ins[a];
+	  for (b=0; b<ins[a]; b++)
+	    ls[c][b]=ils[a][b];
+	}
+      
+      vfree (ins);
+      free_int (ils, -1);
+    }
+  
   /*Free the list*/
   return score;
 }
@@ -1894,6 +1961,9 @@ int list2linked_pair_wise( Alignment *A, int *ns, int **l_s, Constraint_list *CL
   len[0]=LEN;
   return score;
 }
+
+
+
 
 //linked_pair_wise_collapse
 //Collapses the CL as it proceeds during the progressive alignment

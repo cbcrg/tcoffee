@@ -2324,7 +2324,7 @@ get_cl_param(\
 			    /*MAX Nval*/  1                ,\
 			    /*DOC*/       "Mode used to produce the color output:t_coffee_fast,t_coffee_slow  " ,\
 			    /*Parameter*/ &evaluate_mode          ,\
-			    /*Def 1*/    "t_coffee_fast"             ,\
+			    /*Def 1*/    "triplet"             ,\
 			    /*Def 2*/    "dali"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
@@ -3121,10 +3121,10 @@ get_cl_param(\
 			    /*TYPE*/      "S"          ,\
 			    /*OPTIONAL?*/ OPTIONAL       ,\
 			    /*MAX Nval*/  1              ,\
-			    /*DOC*/       "Multi core: template_jobs_relax_msa",\
+			    /*DOC*/       "Multi core: template_jobs_relax_[msa|pairwise]_evaluate",\
 			    /*Parameter*/ &multi_core   ,\
-			    /*Def 1*/    "templates_jobs_relax_msa"       ,\
-			    /*Def 2*/    "templates_jobs_relax_msa"              ,\
+			    /*Def 1*/    "templates_jobs_relax_msa_pairwise_evaluate"       ,\
+			    /*Def 2*/    "templates_jobs_relax_msa_evaluate"              ,\
 			    /*Min_value*/ "0"          ,\
 			    /*Max Value*/ "100"           \
 		   );

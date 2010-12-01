@@ -1473,7 +1473,162 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
  * \param list_in the diagonals
  * \param n_in number of sequences?
  */
+int fork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int nfork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
 int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+{
+  
+  if (!CL || !CL->S || !CL->residue_index) return 0;
+  
+  
+  if ( get_nproc()==1)return  nfork_cl2pair_list_ecl_pc(A,ns,ls,CL,list_in,n_in);
+  else if (strstr ( CL->multi_thread, "pairwise"))return fork_cl2pair_list_ecl_pc(A,ns,ls,CL,list_in,n_in);
+  else return nfork_cl2pair_list_ecl_pc(A,ns,ls,CL,list_in,n_in);
+}
+
+
+int fork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+{
+  int p1, p2,diag, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2;
+  int a, b, l1, l2;
+  int **pos;
+
+  int nused;
+  int *used_list;
+  int *sl2,*sl1, **inv_pos;
+
+  
+
+  float nscore, score, tot, filter, avg=0, new=0;
+  float **used;
+  float *norm;
+
+  //variables for fork
+  FILE *fp;
+  char **pid_tmpfile;
+  int sjobs, njobs,j;
+  int **sl;
+  
+ 
+  if ( !A) return 0;
+  
+  
+  
+  pos=aln2pos_simple ( A,-1, ns, ls);
+  inv_pos=vcalloc ((CL->S)->nseq, sizeof (int*));
+  for (a=0; a<ns[1]; a++)inv_pos[ls[1][a]] =seq2inv_pos(A->seq_al[ls[1][a]]);
+
+  l1=strlen (A->seq_al[ls[0][0]]);
+  l2=strlen (A->seq_al[ls[1][0]]);
+  sl1=vcalloc ((CL->S)->nseq, sizeof (int));
+  sl2=vcalloc ((CL->S)->nseq, sizeof (int));
+  
+  for (a=0;a<ns[0]; a++)sl1[ls[0][a]]=1;
+  for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
+  norm=vcalloc ( l1+1, sizeof (float));
+  
+  njobs=get_nproc();
+  sl=n2splits (njobs,l1+1);
+  pid_tmpfile=vcalloc (njobs, sizeof (char*));
+
+  used=declare_float (l2+1,2);
+  used_list=vcalloc (l2+1, sizeof (int));
+  nused=0;
+  
+  for (sjobs=0, j=0; j<njobs; j++)
+    {
+      pid_tmpfile[j]=vtmpnam(NULL);
+      if (vvfork (NULL)==0)
+	{
+	  initiate_vtmpnam(NULL);
+	  fp=vfopen (pid_tmpfile[j], "w");
+	  for (p1=sl[j][0]; p1<sl[j][1]; p1++)
+	    {
+	      for (tot=0,nused=0,si=0;p1>0 && si<ns[0]; si++)
+		{
+		  s=ls [0][si];r=pos[s][p1-1];
+		  for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
+		    {
+		      t_s=CL->residue_index[s][r][a+SEQ2];
+		      t_r=CL->residue_index[s][r][a+R2];
+		      t_w=CL->residue_index[s][r][a+WE];
+		      if (sl1[t_s])continue;//do not extend within a profile
+		      
+		      norm[p1]++;
+		      for (b=0; b<CL->residue_index[t_s][t_r][0];)
+			{
+			  if (b==0){t_s2=t_s;t_r2=t_r;t_w2=t_w;b++;}
+			  else
+			    {
+			      t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
+			      t_r2=CL->residue_index[t_s][t_r][b+R2];
+			      t_w2=CL->residue_index[t_s][t_r][b+WE];
+			      b+=ICHUNK;
+			    }
+			  if (sl2[t_s2])
+			    {
+			      p2=inv_pos[t_s2][t_r2];
+			      score=MIN(((float)t_w/(float)NORM_F),((float)t_w2/(float)NORM_F));
+			      
+			      if (!used[p2][1] && score>0)
+				{
+				  used_list[nused++]=p2;
+				}
+			      
+			      tot+=score;
+			      used[p2][0]+=score;
+			      used[p2][1]++;
+			    }
+			}
+		    }
+		}
+	      filter=0.01;
+	      for (a=0; a<nused; a++)
+		{
+		  
+		  p2=used_list[a];
+		  nscore=used[p2][0]/tot; //Normalized score used for filtering
+		  score =used[p2][0];
+		  used[p2][0]=used[p2][1]=0;
+		  
+		  if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
+		    {
+		      score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
+		      fprintf (fp, "%d %d %d %f ", p1, p2, ((l1-(p1))+(p2)), score);
+		    }
+		}
+	    }
+	  vfclose (fp);
+	  myexit (EXIT_SUCCESS);
+	}
+      else
+	{
+	  sjobs++;
+	}
+    }
+  while (sjobs>=0){vwait(NULL); sjobs--;}//wait for all jobs to complete
+  for (j=0; j<njobs; j++)
+    {
+      fp=vfopen (pid_tmpfile[j], "r");
+      while ((fscanf(fp, "%d %d %d %f ", &p1,&p2, &diag, &score))==4)
+	addE (p1,p2,((l1-(p1))+(p2)),score,list_in, n_in);
+      vfclose (fp);
+      remove (pid_tmpfile[j]);
+    }
+  
+  free_float (used, -1);
+  vfree (used_list);
+  free_int (inv_pos, -1);
+  free_int (pos, -1);
+  vfree (sl2);vfree (sl1);
+  vfree(norm);
+  return n_in[0];
+}
+
+
+
+
+int nfork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
   int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2;
   int a, b, l1, l2;
@@ -1481,9 +1636,7 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
 
   int nused;
   int *used_list;
-  int *sl2, **inv_pos;
-
-  int **nr;
+  int *sl2,*sl1, **inv_pos;
 
 
   float nscore, score, tot, filter, avg=0, new=0;
@@ -1498,19 +1651,16 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
 
   l1=strlen (A->seq_al[ls[0][0]]);
   l2=strlen (A->seq_al[ls[1][0]]);
+  sl1=vcalloc ((CL->S)->nseq, sizeof (int));
   sl2=vcalloc ((CL->S)->nseq, sizeof (int));
-  nr=declare_int (2, MAX(l1,l2)+1);
+  
   norm=vcalloc ( l1+1, sizeof (float));
   
-  for (a=0; a<l1;a++)
-    for (b=0; b<ns[0]; b++)
-      if (!is_gap(A->seq_al[ls[0][b]][a]))nr[0][a+1]++;
-  for (a=0; a<l2;a++)
-    for (b=0; b<ns[1]; b++)
-      if (!is_gap(A->seq_al[ls[1][b]][a]))nr[1][a+1]++;
 
+  for (a=0;a<ns[0]; a++)sl1[ls[0][a]]=1;
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
-
+  
+  
 
   used=declare_float (l2+1,2);
   used_list=vcalloc (l2+1, sizeof (int));
@@ -1527,6 +1677,8 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
               t_s=CL->residue_index[s][r][a+SEQ2];
               t_r=CL->residue_index[s][r][a+R2];
               t_w=CL->residue_index[s][r][a+WE];
+	      if (sl1[t_s])continue;//do not extend within a profile
+	      
 	      norm[p1]++;
               for (b=0; b<CL->residue_index[t_s][t_r][0];)
                 {
@@ -1542,12 +1694,8 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
                   if (sl2[t_s2])
                     {
                       p2=inv_pos[t_s2][t_r2];
-		      //ProbCons: Probabilistic consisistency (ah! ah!)
-		      //score=((float)t_w/(float)NORM_F)*((float)t_w2/(float)NORM_F);
-                      
-		      //T-Coffee
 		      score=MIN(((float)t_w/(float)NORM_F),((float)t_w2/(float)NORM_F));
-
+		      
                       if (!used[p2][1] && score>0)
                         {
                           used_list[nused++]=p2;
@@ -1562,7 +1710,7 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
         }
       //FILTER: Keep in the graph the edges where (p1->p2/(Sum (P1->x))>0.01
       filter=0.01;
-
+      
       for (a=0; a<nused; a++)
         {
 
@@ -1573,11 +1721,6 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
          
           if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
             {
-	      
-	      //old normalization
-	      //score=(score/(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]))*NORM_F;
-	      
-	      //new normalization
 	      score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
 	      addE (p1,p2,((l1-(p1))+(p2)),score,list_in, n_in);
 	    }
@@ -1587,8 +1730,7 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
   vfree (used_list);
   free_int (inv_pos, -1);
   free_int (pos, -1);
-  vfree (sl2);
-  free_int (nr, -1);
+  vfree (sl2);vfree (sl1);
   vfree(norm);
   return n_in[0];
 }
@@ -1604,10 +1746,46 @@ int linked_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
   int score, a;
   char **al;
   int len=0;
+  int invert=0;
+  int tr0,tr1;
   
   if ( !A)free_int (list, -1);
   if ( !CL->residue_index)return myers_miller_pair_wise (A, ns,ls,CL);
-    
+  
+
+  tr0=ns[0]*strlen (A->seq_al[ls[0][0]]);
+  tr1=ns[1]*strlen (A->seq_al[ls[1][0]]);
+  
+  if (tr0>tr1)
+    {
+      int *ins;
+      int **ils;
+      int a,b,c;
+      invert=1;
+      ins=vcalloc (2, sizeof(int));
+      ils=declare_int (2, (CL->S)->nseq);
+      
+      for ( a=0; a<2; a++)
+	{
+	  ins[a]=ns[a];
+	  for (b=0; b<ns[a]; b++)ils[a][b]=ls[a][b];
+	}
+      
+      for (c=1,a=0; a<2; a++,c--)
+	{
+	  ns[c]=ins[a];
+	  for (b=0; b<ins[a]; b++)
+	    ls[c][b]=ils[a][b];
+	}
+      
+      vfree (ins);
+      free_int (ils, -1);
+    }
+      
+
+
+      
+      
   /*Prepare the list*/
   
   
@@ -1615,11 +1793,36 @@ int linked_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
   cl2diag_cap         (A, ns, ls, CL, &list, &n);
   cl2list_borders     (A, ns, ls, CL, &list, &n);
   list2nodup_list     (A, ns, ls, CL, &list, &n);
-  
   /*Do the DP*/
-  
   score=list2linked_pair_wise (A, ns, ls, CL, list, n, &al,&len);
   free_char (al, -1);
+
+  if (invert)
+    {
+      int *ins;
+      int **ils;
+      int a,b,c;
+      
+      ins=vcalloc (2, sizeof(int));
+      ils=declare_int (2, (CL->S)->nseq);
+      
+      for ( a=0; a<2; a++)
+	{
+	  ins[a]=ns[a];
+	  for (b=0; b<ns[a]; b++)ils[a][b]=ls[a][b];
+	}
+      
+      for (c=1,a=0; a<2; a++,c--)
+	{
+	  ns[c]=ins[a];
+	  for (b=0; b<ins[a]; b++)
+	    ls[c][b]=ils[a][b];
+	}
+      
+      vfree (ins);
+      free_int (ils, -1);
+    }
+  
   /*Free the list*/
   return score;
 }
@@ -1894,6 +2097,9 @@ int list2linked_pair_wise( Alignment *A, int *ns, int **l_s, Constraint_list *CL
   len[0]=LEN;
   return score;
 }
+
+
+
 
 //linked_pair_wise_collapse
 //Collapses the CL as it proceeds during the progressive alignment

@@ -223,16 +223,20 @@ Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, co
        else if ( CL->ne==0) return matrix_evaluate_output (IN, CL);
      }
    else if ( strm (mode, "no"))return NULL;
-  else if ( strm4 ( mode, "t_coffee_fast","tcoffee_fast","fast_tcoffee", "fast_t_coffee"))
+   else if ( strstr( mode, "triplet"))
+     {
+       return triplet_coffee_evaluate_output ( IN,CL);
+     }
+   else if ( strstr ( mode, "fast"))
      {
        return fast_coffee_evaluate_output ( IN,CL);
      }
-   else if ( strm4 ( mode, "t_coffee_slow","tcoffee_slow","slow_tcoffee","slow_t_coffee" ))
+   else if ( strstr ( mode, "slow"))
      {
        return slow_coffee_evaluate_output ( IN,CL);
      }
    
-   else if ( strm4 ( mode, "tcoffee_non_extended","t_coffee_non_extended","non_extended_tcoffee","non_extended_t_coffee"))
+   else if ( strstr ( mode, "non_extended"))
      {
        return non_extended_t_coffee_evaluate_output ( IN,CL);
      }
@@ -605,7 +609,277 @@ Alignment * categories_evaluate_output_old ( Alignment *IN,Constraint_list *CL)
     vfree(aa);
     return OUT;
     }
+Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL);
+Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL);
+Alignment * triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)  
+{
+  
+  if (!IN || !CL || !CL->residue_index) return IN;
+  
+  
+  if ( get_nproc()==1)return  nfork_triplet_coffee_evaluate_output (IN,CL);
+  else if (strstr ( CL->multi_thread, "evaluate"))return  fork_triplet_coffee_evaluate_output (IN,CL);
+  else return nfork_triplet_coffee_evaluate_output (IN,CL);
+}
+Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
+    {
+      Alignment *OUT=NULL;
+      int **pos;
+      
+      double score_col=0, score_aln=0, score_res=0, score=0;
+      double max_col=0, max_aln=0, max_res=0;
+      double *max_seq, *score_seq;
+      
+      int a,b, x, y,res;
+      int s1,r1,s2,r2,w2,s3,r3,w3;
+      int **lu;
+      
+      //multi-threading
+      FILE *fp;
+      char **pid_tmpfile;
+      int sjobs, njobs;
+      int **sl;
+      int j;
+      
+      OUT=copy_aln (IN, OUT);
+      pos=aln2pos_simple(IN, IN->nseq);
+      sprintf ( OUT->name[IN->nseq], "cons");
+      
+      max_seq=vcalloc ( IN->nseq, sizeof (double));
+      score_seq=vcalloc ( IN->nseq, sizeof (double));
+      lu=declare_int (IN->nseq, IN->len_aln+1);
+      
+      //multi Threading stuff
+      njobs=get_nproc();
+      sl=n2splits (njobs,IN->len_aln);
+      pid_tmpfile=vcalloc (njobs, sizeof (char*));
+      
+      for (sjobs=0,j=0; sjobs<njobs; j++)
+	{
+	  pid_tmpfile[j]=vtmpnam(NULL);
+	  if (vvfork (NULL)==0)
+	    {
+	      initiate_vtmpnam(NULL);
+	      fp=vfopen (pid_tmpfile[j], "w");
+	      score_aln=max_aln=0;
+	      for (a=sl[j][0]; a<sl[j][1]; a++)
+		{
+		  if (j==0)output_completion (stderr,s1,sl[0][1],1, "Final Evaluation");
+		  score_col=max_col=0;
+		  for (b=0; b<IN->nseq; b++)
+		    {
+		      s1=IN->order[b][0];
+		      r1=pos[b][a];
+		      if (r1>=0)lu[s1][r1]=1;
+		    }
+		  for (b=0; b<IN->nseq; b++)
+		    {
+		      score_res=max_res=NORM_F;
+		      res=NO_COLOR_RESIDUE;
+		      s1=IN->order[b][0];
+		      r1=pos[b][a];
+		      if (r1<=0)
+			{
+			  fprintf (fp, "%d ", res);
+			  continue;
+			}
+		      
+		      for (x=1;x<CL->residue_index[s1][r1][0];x+=ICHUNK)
+			{
+			  s2=CL->residue_index[s1][r1][x+SEQ2];
+			  r2=CL->residue_index[s1][r1][x+R2];
+			  w2=CL->residue_index[s1][r1][x+WE];
+			  for (y=1; y<CL->residue_index[s2][r2][0];y+=ICHUNK)
+			    {
+			      s3=CL->residue_index[s2][r2][y+SEQ2];
+			      r3=CL->residue_index[s2][r2][y+R2];
+			      w3=CL->residue_index[s2][r2][y+WE];
+			      
+			      score=MIN(w2,w3);
+			      
+			      max_res+=score;
+			      max_col+=score;
+			      max_seq[b]+=score;
+			      max_aln+=score;
+			      
+			      if (lu[s3][r3])
+				{
+				  score_res+=score;
+				  score_col+=score;
+				  score_seq[b]+=score;
+				  score_aln+=score;
+				}
+			    }
+			}
+		      res=(max_res==0)?NO_COLOR_RESIDUE:((score_res*10)/max_res);
+		      res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+		      fprintf ( fp, "%d ", res);
+		    }
+		  for (b=0; b<IN->nseq; b++)
+		    {
+		      s1=IN->order[b][0];
+		      r1=pos[b][a];
+		      if (r1>0)lu[s1][r1]=0;
+		    }
+		  
+		  res=(max_col==0)?NO_COLOR_RESIDUE:((score_col*10)/max_col);	
+		  res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+		  fprintf (fp, "%d ", res);
+		  for (b=0; b<IN->nseq; b++)fprintf (fp, "%f %f ", score_seq[b], max_seq[b]);
+		}
+	      fprintf (fp, "%f %f ", score_aln, max_aln);
+	      vfclose (fp);
+	      myexit (EXIT_SUCCESS);
+	    }
+	  else
+	    {
+	      sjobs++;
+	    }
+	}
+    
+      while (sjobs>=0){vwait(NULL); sjobs--;}//wait for all jobs to complete
+      
+      for (j=0; j<njobs; j++)
+	{
+	  float sseq, mseq;
+	  fp=vfopen (pid_tmpfile[j], "r");
+	  for (a=sl[j][0];a<sl[j][1]; a++)
+	    {
+	      for (b=0; b<=IN->nseq; b++)//don't forget the consensus
+		{
+		  fscanf (fp, "%d ", &res);
+		  OUT->seq_al[b][a]=res;
+		}
+	      for (b=0; b<IN->nseq; b++)
+		{
+		  fscanf (fp, "%f %f", &sseq, &mseq);
+		  score_seq[b]+=sseq;
+		  max_seq[b]+=mseq;
+		}
+	    }
+	  fscanf (fp, "%f %f", &sseq, &mseq);
+	  score_aln+=sseq;
+	  max_aln+=mseq;
+	  vfclose (fp);
+	  remove (pid_tmpfile[j]);
+	}
+      fprintf ( stderr, "\n");
+      
+      IN->score_aln=OUT->score_aln=(max_aln==0)?0:((score_aln*100)/max_aln);
+      for ( a=0; a< OUT->nseq; a++)
+	{
+	  OUT->score_seq[a]=(max_seq[a]==0)?0:((score_seq[a]*100)/max_seq[a]);
+	}
+      
+      free_int (lu,-1);
+      free_int (pos , -1);
+      vfree (pid_tmpfile);
+      free_int (sl, -1);
+      vfree ( score_seq);
+      vfree ( max_seq);
+      return OUT;
+    }  
 
+Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
+    {
+      Alignment *OUT=NULL;
+      int **pos;
+      
+      double score_col=0, score_aln=0, score_res=0, score=0;
+      double max_col=0, max_aln=0, max_res=0;
+      double *max_seq, *score_seq;
+      
+      int a,b, x, y,res;
+      int s1,r1,s2,r2,w2,s3,r3,w3;
+      int **lu;
+      
+     
+      
+      OUT=copy_aln (IN, OUT);
+      pos=aln2pos_simple(IN, IN->nseq);
+      sprintf ( OUT->name[IN->nseq], "cons");
+      
+      max_seq=vcalloc ( IN->nseq, sizeof (double));
+      score_seq=vcalloc ( IN->nseq, sizeof (double));
+      lu=declare_int (IN->nseq, IN->len_aln+1);
+      
+     
+      
+     
+      score_aln=max_aln=0;
+      for (a=0; a<IN->len_aln; a++)
+	{
+	  output_completion (stderr,a,IN->len_aln,1, "Final Evaluation");
+	  score_col=max_col=0;
+	  for (b=0; b<IN->nseq; b++)
+	    {
+	      s1=IN->order[b][0];
+	      r1=pos[b][a];
+	      if (r1>=0)lu[s1][r1]=1;
+	    }
+	  for (b=0; b<IN->nseq; b++)
+	    {
+	      score_res=max_res=NORM_F;
+	      OUT->seq_al[b][a]=NO_COLOR_RESIDUE;
+	      s1=IN->order[b][0];
+	      r1=pos[b][a];
+	      if (r1<=0)continue;
+	      for (x=1;x<CL->residue_index[s1][r1][0];x+=ICHUNK)
+		{
+		  s2=CL->residue_index[s1][r1][x+SEQ2];
+		  r2=CL->residue_index[s1][r1][x+R2];
+		  w2=CL->residue_index[s1][r1][x+WE];
+		  for (y=1; y<CL->residue_index[s2][r2][0];y+=ICHUNK)
+		    {
+		      s3=CL->residue_index[s2][r2][y+SEQ2];
+		      r3=CL->residue_index[s2][r2][y+R2];
+		      w3=CL->residue_index[s2][r2][y+WE];
+		      
+		      score=MIN(w2,w3);
+		      
+		      max_res+=score;
+		      max_col+=score;
+		      max_seq[b]+=score;
+		      max_aln+=score;
+		      
+		      if (lu[s3][r3])
+			{
+			  score_res+=score;
+			  score_col+=score;
+			  score_seq[b]+=score;
+			  score_aln+=score;
+			}
+		    }
+		}
+	      res=(max_res==0)?NO_COLOR_RESIDUE:((score_res*10)/max_res);
+	      res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+	      OUT->seq_al[b][a]=res;
+	    }
+	  for (b=0; b<IN->nseq; b++)
+	    {
+	      s1=IN->order[b][0];
+	      r1=pos[b][a];
+	      if (r1>0)lu[s1][r1]=0;
+	    }
+	  
+	  res=(max_col==0)?NO_COLOR_RESIDUE:((score_col*10)/max_col);	
+	  res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+	  OUT->seq_al[IN->nseq][a]=res;
+	}
+      fprintf ( stderr, "\n");
+      
+      IN->score_aln=OUT->score_aln=(max_aln==0)?0:((score_aln*100)/max_aln);
+      for ( a=0; a< OUT->nseq; a++)
+	{
+	  OUT->score_seq[a]=(max_seq[a]==0)?0:((score_seq[a]*100)/max_seq[a]);
+	}
+      
+      free_int (lu,-1);
+      free_int (pos , -1);
+      vfree ( score_seq);
+      vfree ( max_seq);
+      return OUT;
+    }   
 Alignment * fast_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     {
     int a,b, c, m,res, s, s1, s2, r1, r2;	
@@ -721,9 +995,7 @@ Alignment * fast_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     vfree ( score_seq);
     vfree ( max_seq);
     return OUT;
-    }
-
-      
+    }      
   
 Alignment * slow_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     {

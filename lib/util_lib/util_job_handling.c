@@ -18,8 +18,9 @@ Job_TC* print_lib_job ( Job_TC *job,char *string, ...)
   char **value;
   char **name;
   int a, np, n;
-  char bname[LONG_STRING];
-  char bval[LONG_STRING];
+    
+  char bname[100];
+  char bval[100];
   
   list=string2list2(string, " =");
   n=atoi (list[0]);
@@ -28,24 +29,20 @@ Job_TC* print_lib_job ( Job_TC *job,char *string, ...)
   name =vcalloc ( (n-1)/2, sizeof (char*));
   value=vcalloc ( (n-1)/2, sizeof (char*));
   
-
+  
   va_start (ap, string);
   for (a=1, np=0; a<n; a++)
     {
-      if (list[a][0]=='%')
+      if (list[a][0]=='%' && list[a][1]=='s')
+	{
+	  value[np++]=duplicate_string (va_arg (ap,char *));
+	}
+      else if (list[a][0]=='%')
 	{
 	  if ( list[a][1]=='d')sprintf (bval, "%d", va_arg (ap,int));
-	  else if ( list[a][1]=='s')sprintf (bval, "%s", va_arg (ap,char *));
-	  
 	  else if ( list[a][1]=='f')sprintf (bval, "%lf",(float) va_arg (ap,double));
 	  else if ( list[a][1]=='p')sprintf (bval, "%ld", (long)va_arg (ap,void *));
-	  /*
-	    Before 64 Bits
-	  else if ( list[a][1]=='f')sprintf (bval, "%f",(float) va_arg (ap,double));
-	  else if ( list[a][1]=='p')sprintf (bval, "%d", (long)va_arg (ap,void *));
-	  */
-	  value[np]=duplicate_string (bval);
-	  np++;
+	  value[np++]=duplicate_string (bval);
 	}
       else
 	{
@@ -311,3 +308,26 @@ Job_TC* retrieve_job ( Job_TC *job)
       return NULL;
     }
 }
+int **n2splits (int splits, int tot)
+{
+  int **l;
+  int a,b,delta;
+  
+  if (splits==0)return NULL;
+  else if ( tot==0)return NULL;
+  else
+    {
+      
+      l=declare_int (splits,2);
+      delta=tot/splits;
+      
+      for (a=0,b=0; a<splits && b<tot; a++,b+=delta)
+	{
+	  l[a][0]=b;
+	  l[a][1]=MIN((b+delta),tot);
+	}
+      l[splits-1][1]=MAX((l[splits-1][1]),tot);
+      return l;
+    }
+}
+  
