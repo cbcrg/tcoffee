@@ -2481,7 +2481,7 @@ get_cl_param(\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 		   );
-
+set_int_variable ("prot_min_cov", prot_min_cov);
 declare_name(pdb_type);
 get_cl_param(\
 			    /*argc*/      argc             ,\

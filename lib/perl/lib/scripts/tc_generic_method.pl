@@ -128,11 +128,11 @@ elsif ( $mode eq "pdb_pair")
   }
 elsif ( $mode eq "profile_pair")
   {
-     &seq2profile_pair($mode,&my_get_opt ( $cl, "-profile1=",1,1, "-profile2=",1,1, "-method=",1,2,"-param=",0,0, "-outfile=",1,0, ));
+     &seq2profile_pair($mode,&my_get_opt ( $cl, "-profile1=",1,1, "-profile2=",1,1, "-method=",1,2,"-param=",0,0, "-outfile=",1,0 ));
   }
 elsif ( $mode eq "pdb_template")
   {
-    &blast2pdb_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0,"-pdb_type=",1,0,));
+    &blast2pdb_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0,"-pdb_type=",1,0));
   }
 elsif ( $mode eq "profile_template")
   {
@@ -324,7 +324,8 @@ sub psiblast2profile_template
       print (F ">$A\n$s{$seq}{seq}\n");
       close (F);
       $psiblast_output=&run_blast ($s{$seq}{name},$method, $db, "seqfile","outfile");
-      if ( -e $psiblast_output)
+      
+if ( -e $psiblast_output)
 	{
 	  %profile=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$psiblast_output);
 	  unlink ($psiblast_output);
@@ -1733,7 +1734,6 @@ sub ebi_blast_xml2profile
 	    $coverage=(($end-$start)*100)/$L;
 	    
 	   # print "$id: ID: $identity COV: $coverage [$start $end]\n";
-	    
 	    
 	    if ($identity>$maxid || $identity<$minid || $coverage<$mincov){next;}
 	    # print "KEEP\n";
