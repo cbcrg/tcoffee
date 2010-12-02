@@ -3123,7 +3123,7 @@ get_cl_param(\
 			    /*MAX Nval*/  1              ,\
 			    /*DOC*/       "Multi core: template_jobs_relax_[msa|pairwise]_evaluate",\
 			    /*Parameter*/ &multi_core   ,\
-			    /*Def 1*/    "templates_jobs_relax_msa_pairwise_evaluate"       ,\
+			    /*Def 1*/    "templates_jobs_relax_msa_evaluate"       ,\
 			    /*Def 2*/    "templates_jobs_relax_msa_evaluate"              ,\
 			    /*Min_value*/ "0"          ,\
 			    /*Max Value*/ "100"           \
