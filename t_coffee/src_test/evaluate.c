@@ -664,7 +664,7 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 	      score_aln=max_aln=0;
 	      for (a=sl[j][0]; a<sl[j][1]; a++)
 		{
-		  if (j==0)output_completion (stderr,s1,sl[0][1],1, "Final Evaluation");
+		  if (j==0)output_completion (stderr,a,sl[0][1],1, "Final Evaluation");
 		  score_col=max_col=0;
 		  for (b=0; b<IN->nseq; b++)
 		    {

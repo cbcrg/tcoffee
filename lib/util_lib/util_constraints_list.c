@@ -1847,8 +1847,47 @@ Constraint_list *add_entry2list2 (CLIST_TYPE *entry, Constraint_list *CL)
 
 static int *sent;
 static Constraint_list *sCL;
-
+int get_entry_index_serial (int *entry, Constraint_list *CL);
+int get_entry_index_dico (int *entry, Constraint_list *CL);
 int get_entry_index (int *entry, Constraint_list *CL)
+{
+  int s1=entry[SEQ1];
+  int r1=entry[R1];
+  int *r= CL->residue_index[s1][r1];
+  
+  
+  return get_entry_index_dico (entry, CL);
+}
+int get_entry_index_serial (int *entry, Constraint_list *CL)
+{
+  //return the index of an entry
+  //positive value: the entry exists on position i
+  //negative value: the entry must be created on poistion -i
+  int s1=entry[SEQ1];
+  int r1=entry[R1];
+  int s2=entry[SEQ2];
+  int r2=entry[R2];
+  int a;
+  int *r= CL->residue_index[s1][r1];
+  
+  static int tot;
+  static int pr;
+  if (r[0]==1)return -1;//corresponding entry undeclared->must be inserted
+  else 
+    {
+      for (a=1; a<r[0]; a+=ICHUNK)
+	{
+	  tot++;
+	  pr++;
+	  if (r[a+SEQ2]==s2 && r[a+R2]==r2)return a;
+	  else if (r[a+SEQ2]==s2 && r[a+R2]>r2)return -a;
+	  else if (r[a+SEQ2]>s2)return -a;
+	}
+    }
+  return -a;
+}
+
+int get_entry_index_dico (int *entry, Constraint_list *CL)
 {
   //return the index of an entry
   //positive value: the entry exists on position i
@@ -1862,7 +1901,9 @@ int get_entry_index (int *entry, Constraint_list *CL)
   int i;
   int *r= CL->residue_index[s1][r1];
   int ps2, pr2, ns2,nr2,p,n;
-  
+  static int tot;
+  static int pr;
+      
   if (r[0]==1)return -1;//corresponding entry undeclared->must be inserted
   dir=1;
   i=1;
@@ -1871,6 +1912,8 @@ int get_entry_index (int *entry, Constraint_list *CL)
   
   while (1==1)
     {
+      pr++;
+      tot++;
       i+=(delta*dir*ICHUNK);
       i=MAX(i,1);
       i=MIN(i,(r[0]));
@@ -3981,106 +4024,54 @@ int **list2residue_total_weight ( Constraint_list *CL)
 /*                                                                   */
 /*********************************************************************/
 
-static Constraint_list *fast_merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode);
-static Constraint_list *slow_merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode);
-
 Constraint_list *merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode)
 {
-	
-	
-	if ( !ML)
+  
+  int **cache=NULL;
+  int s1,r1,s2,r2,a,b;
+  int *entry;
+  
+  entry=vcalloc (ICHUNK+10, sizeof (int));
+  
+  for (a=0;a<ICHUNK+10; a++)entry[a]=0;
+  if (SL->S!= ML->S)cache=fix_seq_seq((SL->S),(ML->S));
+  
+  if (!ML || !SL)return ML;
+  for (s1=0; s1<(SL->S)->nseq; s1++)
+    {
+      if (cache && cache[s1][0]==-1)continue;
+      for (r1=1; r1<=((SL)->S)->len[s1]; r1++)
 	{
-		return SL;
-	}
-	else if ( SL==ML) return SL;
-	else if ( SL->S == ML->S)
-	{
-		return fast_merge_constraint_list (SL, ML, mode);
-	}
-	else
-	{
-		return slow_merge_constraint_list (SL, ML, mode);
-	}
-}
-
-Constraint_list *fast_merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode)
-{
-	int l;
-	static char *tmp;
-	
-	if ( !tmp)tmp=vtmpnam (NULL);
-	dump_constraint_list (SL, tmp, "w");
-	return undump_constraint_list (ML, tmp);
-}
-
-Constraint_list *slow_merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode)
-{
-	static char *tmp;
-	if (!tmp)tmp=tmpnam(NULL);
-	safe_dump_constraint_list(SL,tmp,"w", ML->S);
-	return undump_constraint_list (ML, tmp);
-}
-Constraint_list *compact_list (Constraint_list *CL,char *compact_mode)
-{
-	//list must be sorted before hand
-	int ws=0;
-	int **W=NULL;
-	Sequence *S=CL->S;
-	int s1, s2, r1, r2, w2,b,cp, ps2, pr2;
-	char mode [100];
-	
-	if ( strm (compact_mode, "default"))sprintf ( mode, "best");
-	else sprintf ( mode, "%s",compact_mode);
-	
-	CL=sort_constraint_list (CL, -1,-1);
-	for (s1=0; s1<S->nseq; s1++)
-	{
-		for (r1=1; r1<=S->len[s1]; r1++)
+	  entry[SEQ1]=(cache)?cache[s1][0]:s1;
+	  entry[R1]=(cache)?cache[s1][r1]:r1;
+	  if (entry[R1]<=0)continue;
+	  b=(SL->freeze)?SL->freeze[s1][r1]:1;
+	  for (;b<SL->residue_index[s1][r1][0]; b+=ICHUNK)
+	    {
+	      s2=SL->residue_index[s1][r1][b+SEQ2];
+	      r2=SL->residue_index[s1][r1][b+R2];
+	      entry[SEQ2]=(cache)?cache[s2][0]:s2;
+	      if ( entry[SEQ2]==-1)continue;
+	      else
 		{
-			int ni=CL->residue_index[s1][r1][0];
-			if (ws<ni){free_int (W, -1); ws=ni;W=declare_int (ws, 2);}
-			pr2=ps2=-1;
-			
-			for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
-			{
-				s2=CL->residue_index[s1][r1][b+SEQ2];
-				r2=CL->residue_index[s1][r1][b+R2];
-				w2=CL->residue_index[s1][r1][b+WE];
-				if (s2==ps2 && r2==pr2)
-				{
-					W[cp+WE][0]=MAX(W[cp+WE][0],w2);
-					W[cp+WE][1]=MIN(W[cp+WE][1],w2);
-					W[cp+MISC][0]+=CL->residue_index[s1][r1][b+MISC];
-					W[cp+CONS][0]+=CL->residue_index[s1][r1][b+CONS];
-					
-					W[b+WE][0]=-1;
-					W[b+WE][1]=-1;
-				}
-				else
-				{
-					cp=b;
-					W[cp+WE][0]=w2;
-					W[cp+WE][1]=w2;
-					W[cp+MISC][0]=CL->residue_index[s1][r1][b+MISC];
-					W[cp+CONS][0]=CL->residue_index[s1][r1][b+CONS];
-				}
-				pr2=r2;
-				ps2=s2;
-			}
-			for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
-			{
-				CL->residue_index[s1][r1][b+WE]=(strm(mode, "best")==1)?W[b+WE][0]:W[b+WE][1];
-				CL->residue_index[s1][r1][b+MISC]=W[b+MISC][0];
-				CL->residue_index[s1][r1][b+CONS]=W[b+CONS][0];
-			}
+		  entry[R2]=(cache)?cache[s2][r2]:r2;
+		  if (entry[R2]<=0)continue;
+		  else
+		    {
+		      entry[WE]=SL->residue_index[s1][r1][b+WE];
+		      entry[CONS]=SL->residue_index[s1][r1][b+CONS];
+		      entry[MISC]=SL->residue_index[s1][r1][b+MISC]; 
+		    }
+		  add_entry2list2(entry, ML);
 		}
+	    }
 	}
-	
-	CL=filter_constraint_list (CL,WE,0);
-	
-	return CL;
-	
+    }
+  vfree (entry);
+  if ( cache)free_int (cache, -1);
+  return ML;
 }
+
 
 
 

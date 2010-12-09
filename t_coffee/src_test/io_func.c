@@ -96,7 +96,7 @@ char *    get_string_type   (char *S)
 	      sprintf ( type, "PROTEIN");
 	    
 	  }
-	else if ( dna>98 && rna>10)sprintf ( type, "RNA");
+	else if ( dna>98 && rna>0)sprintf ( type, "RNA");
 	else if ( dna>98)sprintf ( type, "DNA");
 	else sprintf ( type, "PROTEIN");
 	

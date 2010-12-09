@@ -1137,17 +1137,20 @@ Sequence* free_aln ( Alignment *LA){ return free_Alignment(LA);}
 Alignment *free_data_in_aln (Alignment *A)
 {
   //Frees only the sequence data (keeps profile information)
-  free_char (A->seq_al, -1);
-  free_char (A->seq_comment, -1);
-  free_char (A->aln_comment, -1);
-  free_char (A->name, -1);
-  free_char (A->expanded_order, -1);
-  free_char (A->seq_al, -1);
-  free_int (A->order, -1);
-  free_int (A->seq_cache, -1);
-  free_int (A->cdna_cache, -1);
-  free_int (A->score_res, -1);
+  A->seq_al=free_char (A->seq_al, -1);
+  A->seq_comment=free_char (A->seq_comment, -1);
+  A->aln_comment=free_char (A->aln_comment, -1);
+  A->name=free_char (A->name, -1);
+  A->expanded_order=free_char (A->expanded_order, -1);
+  
+  A->order=free_int (A->order, -1);
+  A->seq_cache=free_int (A->seq_cache, -1);
+  A->cdna_cache=free_int (A->cdna_cache, -1);
+  A->score_res=free_int (A->score_res, -1);
   free_sequence (A->S, -1);
+  A->S=NULL;
+  return A;
+  
 }
 Sequence* free_Alignment ( Alignment *LA)
 	{

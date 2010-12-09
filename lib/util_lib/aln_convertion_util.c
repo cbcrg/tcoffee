@@ -4906,7 +4906,7 @@ Sequence * seq2template_type(Sequence *Seq)
       s=(!P)?1:0;
       sprintf ( (Seq->T[a])->seq_type, "%c%c%c%c%c%c%c%c", (P)?'P':e, (S)?'S':e, (S &&!P)?'s':e,(R)?'R':e, (G)?'G':e,(T)?'T':e,(E)?'E':e,(U)?'U':e);
       
-      if (R && (A=seq2R_template_profile (Seq,a)))
+      if (R && (A=seq2R_template_profile (Seq,a)) && A->S)
 	{
 	
 	  A->S=seq2template_type ( A->S);
@@ -5274,8 +5274,8 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       if (freeF)free_fname(F);
       
       nproc=get_nproc();
-      max_nproc=2*nproc;
-                  
+      //max_nproc=2*nproc;
+      max_nproc=20; //EBI recommended maximum            
       script=substitute(script, "@", " -");
       script=substitute(script, "#", "=");
            
@@ -5420,7 +5420,7 @@ char* seq2template_file (Sequence *S, char *file)
 {
   Alignment *A;
   int i;
-  
+  if (!S)return file;
   if (file==NULL)file=vtmpnam (NULL);
   
   seq2template_file2 (S, file, "w");
@@ -5431,7 +5431,7 @@ char* seq2template_file (Sequence *S, char *file)
 	{
 	  Sequence *S;
 	  S=A->S;
-	  seq2template_file2 (A->S, file, "a");
+	  if (S)seq2template_file2 (A->S, file, "a");
 	}
     }
   return file;

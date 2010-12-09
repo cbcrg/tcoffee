@@ -2,149 +2,33 @@
 <nature>error</nature>
 <program>T-COFFEE</program>
 <version>Version_8.97</version>
-<cl>t_coffee sproteases_small.fasta </cl>
+<cl>t_coffee 1aab_ref1.pep -mode psicoffee -cache /mnt/hgfs/cnotredame/.t_coffee/cache -multi_core no </cl>
 <stack>
 
 
 *************************************************************************************************
-*                        FULL TRACE BACK PID: 597                                    
-597 -- ERROR: COREDUMP: T-COFFEE Version_8.97
+*                        FULL TRACE BACK PID: 25082                                    
+25082 -- ERROR: COREDUMP: T-COFFEE Version_8.97
 *************************************************************************************************
 </stack>
 <warning>
 </warning>
 <file>
 <stream>input</stream>
-<name>sproteases_small.fasta</name>
+<name>1aab_ref1.pep</name>
 <content>
->sp|Q06606|GRZ2_RAT	 Granzyme-like protein 2 precursor (EC 3.4.21.-) (GLP-2) (Granzyme-like protein II) (GLP II) (Mast cell protease X) (rMCP-X) (rMCP-10) - Rattus norvegicus (Rat).
-MFLFLFFLVAILPVNTEGGEIIWGTESKPHSRPYMAFIKFYDSNSEPHHC
-GGFLVAKDIVMTAAHCNGRNIKVTLGAHNIKKQENTQVISVVKAKPHENY
-DRDSHFNDIMLLKLERKAQLNGVVKTIALPRSQDWVKPGQVCTVAGWGRL
-ANCTSSNTLQEVNLEVQKGQKCQDMSEDYNDSIQLCVGNPSEGKATGKGD
-SGGPFVCDGVAQGIVSYRLCTGTLPRVFTRISSFIPWIQKTMKVLQQS
->sp|P08884|GRAE_MOUSE	 Granzyme E precursor (EC 3.4.21.-) (Cytotoxic cell protease 3) (CCP3) (CTL serine protease 2) (D12) (Cytotoxic serine protease 2) (MCSP2) - Mus musculus (Mouse).
-MPPVLILLTLLLPLGAGAEEIIGGHVVKPHSRPYMAFVKSVDIEGNRRYC
-GGFLVQDDFVLTAAHCRNRTMTVTLGAHNIKAKEETQQIIPVAKAIPHPD
-YNATAFFSDIMLLKLESKAKRTKAVRPLKLPRPNARVKPGDVCSVAGWGS
-RSINDTKASARLREAQLVIQEDEECKKRFRHYTETTEICAGDLKKIKTPF
-KGDSGGPLVCDNKAYGLLAYAKNRTISSGVFTKIVHFLPWISRNMKLL
->sp|P21844|MCPT5_MOUSE	 Mast cell protease 5 precursor (EC 3.4.21.-) (MMCP-5) (Mast cell chymase 1) - Mus musculus (Mouse).
-MHLLTLHLLLLLLGSSTKAGEIIGGTECIPHSRPYMAYLEIVTSENYLSA
-CSGFLIRRNFVLTAAHCAGRSITVLLGAHNKTSKEDTWQKLEVEKQFLHP
-KYDENLVVHDIMLLKLKEKAKLTLGVGTLPLSANFNFIPPGRMCRAVGWG
-RTNVNEPASDTLQEVKMRLQEPQACKHFTSFRHNSQLCVGNPKKMQNVYK
-GDSGGPLLCAGIAQGIASYVHRNAKPPAVFTRISHYRPWINKILREN
->sp|O35205|GRAK_MOUSE	 Granzyme K precursor (EC 3.4.21.-) - Mus musculus (Mouse).
-MRFSSWALVSLVAGVYMSSECFHTEIIGGREVQPHSRPFMASIQYRSKHI
-CGGVLIHPQWVLTAAHCYSWFPRGHSPTVVLGAHSLSKNEPMKQTFEIKK
-FIPFSRLQSGSASHDIMLIKLRTAAELNKNVQLLHLGSKNYLRDGTKCQV
-TGWGTTKPDLLTASDTLREVTVTIISRKRCNSQSYYNHKPVITKDMICAG
-DARGQKDSCKGDSGGPLICKGIFHALVSQGYKCGIAKKPGIYTLLTKKYQ
-TWIKSKLAPSRAH
->sp|Q9Y5K2|KLK4_HUMAN	 Kallikrein-4 precursor (EC 3.4.21.-) (Prostase) (Kallikrein-like protein 1) (KLK-L1) (Enamel matrix serine proteinase 1) - Homo sapiens (Human).
-MATAGNPWGWFLGYLILGVAGSLVSGSCSQIINGEDCSPHSQPWQAALVM
-ENELFCSGVLVHPQWVLSAAHCFQNSYTIGLGLHSLEADQEPGSQMVEAS
-LSVRHPEYNRPLLANDLMLIKLDESVSESDTIRSISIASQCPTAGNSCLV
-SGWGLLANGRMPTVLQCVNVSVVSEEVCSKLYDPLYHPSMFCAGGGQDQK
-DSCNGDSGGPLICNGYLQGLVSFGKAPCGQVGVPGVYTNLCKFTEWIEKT
-VQAS
->sp|Q7YRZ7|GRAA_BOVIN	 Granzyme A precursor (EC 3.4.21.78) - Bos taurus (Bovine).
-MNIPFPFSFPPAICLLLIPGVFPVSCEGIIGGNEVAPHTRRYMALIKGLK
-LCAGALIKENWVLTAAHCDLKGNPQVILGAHSTSHKEKLDQVFSIKKAIP
-YPCFDPQTFEGDLQLLQLEGKATMTKAVGILQLPRTEDDVKPHTKCHVAG
-WGSTKKDACQMSNALREANVTVIDRKICNDAQHYNFNPVIDLSMICAGGR
-KGEDDSCEGDSGSPLICDNVFRGVTSFGKCGNPQKPGIYILLTKKHLNWI
-KKTIAGAI
->sp|Q00871|CTRB1_PENVA	 Chymotrypsin BI precursor (EC 3.4.21.1) - Penaeus vannamei (Penoeid shrimp) (European white shrimp).
-MIGKLSLLLVCVAVASGNPAAGKPWHWKSPKPLVDPRIHVNATPRIVGGV
-EATPHSWPHQAALFIDDMYFCGGSLISSEWVLTAAHCMDGAGFVEVVLGA
-HNIRQNEASQVSITSTDFFTHENWNSWLLTNDIALIRLPSPVSLNSNIKT
-VKLPSSDVSVGTTVTPTGWGRPSDSASGISDVLRQVNVPVMTNADCDSVY
-GIVGDGVVCIDGTGGKSTCNGDSGGPLNLNGMTYGITSFGSSAGCEKGYP
-AAFTRVYYYLDWIQQKTGVTP
->sp|P08246|ELNE_HUMAN	 Leukocyte elastase precursor (EC 3.4.21.37) (Elastase-2) (Neutrophil elastase) (PMN elastase) (Bone marrow serine protease) (Medullasin) (Human leukocyte elastase) (HLE) - Homo sapiens (Human).
-MTLGRRLACLFLACVLPALLLGGTALASEIVGGRRARPHAWPFMVSLQLR
-GGHFCGATLIAPNFVMSAAHCVANVNVRAVRVVLGAHNLSRREPTRQVFA
-VQRIFENGYDPVNLLNDIVILQLNGSATINANVQVAQLPAQGRRLGNGVQ
-CLAMGWGLLGRNRGIASVLQELNVTVVTSLCRRSNVCTLVRGRQAGVCFG
-DSGSPLVCNGLIHGIASFVRGGCASGLYPDAFAPVAQFVNWIDSIIQRSE
-DNPCPHPRDPDPASRTH
->sp|P03953|CFAD_MOUSE	 Complement factor D precursor (EC 3.4.21.46) (C3 convertase activator) (Properdin factor D) (Adipsin) (28 kDa protein, adipocyte) - Mus musculus (Mouse).
-MHSSVYFVALVILGAAVCAAQPRGRILGGQEAAAHARPYMASVQVNGTHV
-CGGTLLDEQWVLSAAHCMDGVTDDDSVQVLLGAHSLSAPEPYKRWYDVQS
-VVPHPGSRPDSLEDDLILFKLSQNASLGPHVRPLPLQYEDKEVEPGTLCD
-VAGWGVVTHAGRRPDVLHQLRVSIMNRTTCNLRTYHDGVVTINMMCAESN
-RRDTCRGDSGSPLVCGDAVEGVVTWGSRVCGNGKKPGVYTRVSSYRMWIE
-NITNGNMTS
->sp|Q91VE3|KLK7_MOUSE	 Kallikrein-7 precursor (EC 3.4.21.-) (Stratum corneum chymotryptic enzyme) (Thymopsin) - Mus musculus (Mouse).
-MGVWLLSLITVLLSLALETAGQGERIIDGYKCKEGSHPWQVALLKGNQLH
-CGGVLVDKYWVLTAAHCKMGQYQVQLGSDKIGDQSAQKIKATKSFRHPGY
-STKTHVNDIMLVRLDEPVKMSSKVEAVQLPEHCEPPGTSCTVSGWGTTTS
-PDVTFPSDLMCSDVKLISSRECKKVYKDLLGKTMLCAGIPDSKTNTCNGD
-SGGPLVCNDTLQGLVSWGTYPCGQPNDPGVYTQVCKYKRWVMETMKTHR
->sp|Q6H321|KLK2_HORSE	 Kallikrein-1E2 precursor (EC 3.4.21.35) (Glandular kallikrein) (HPK) - Equus caballus (Horse).
-MWFLVLCLDLSLGETGALPPIQSRIIGGWECEKHSKPWQVAVYHQGHFQC
-GGVLVHPQWVLTAAHCMSDDYQIWLGRHNLSEDEDTAQFHQVSDSFLDPQ
-FDLSLLKKKYLRPYDDISHDLMLLRLAQPARITDAVKILDLPTQEPKLGS
-TCYTSGWGLISTFTNRGSGTLQCVELRLQSNEKCARAYPEKMTEFVLCAT
-HRDDSGSICLGDSGGALICDGVFQGITSWGYSECADFNDNFVFTKVMPHL
-KWIKETIEKNS
->sp|Q03238|GRAM_RAT	 Granzyme M precursor (EC 3.4.21.-) (Met-ase) (Natural killer cell granular protease) (RNK-Met-1) (Fragment) - Rattus norvegicus (Rat).
-LLLLLALKTLWAVGNRFEAQIIGGREAVPHSRPYMVSLQNTKSHMCGGVL
-VHQKWVLTAAHCLSEPLQQLKLVFGLHSLHDPQDPGLTFYIKQAIKHPGY
-NLKYENDLALLKLDGRVKPSKNVKPLALPRKPRDKPAEGSRCSTAGWGIT
-HQRGQLAKSLQELDLRLLDTRMCNNSRFWNGVLTDSMLCLKAGAKGQAPC
-KGDSGGPLVCGKGKVDGILSFSSKNCTDIFKPTVATAVAPYSSWIRKVIG
-RWSPQPLT
->sp|P20160|CAP7_HUMAN	 Azurocidin precursor (Cationic antimicrobial protein CAP37) (Heparin- binding protein) (HBP) - Homo sapiens (Human).
-MTRLTVLALLAGLLASSRAGSSPLLDIVGGRKARPRQFPFLASIQNQGRH
-FCGGALIHARFVMTAASCFQSQNPGVSTVVLGAYDLRRRERQSRQTFSIS
-SMSENGYDPQQNLNDLMLLQLDREANLTSSVTILPLPLQNATVEAGTRCQ
-VAGWGSQRSGGRLSRFPRFVNVTVTPEDQCRPNNVCTGVLTRRGGICNGD
-GGTPLVCEGLAHGVASFSLGPCGRGPDFFTRVALFRDWIDGVLNNPGPGP
-A
->sp|P07338|CTRB1_RAT	 Chymotrypsinogen B precursor (EC 3.4.21.1) [Contains: Chymotrypsin B chain A; Chymotrypsin B chain B; Chymotrypsin B chain C] - Rattus norvegicus (Rat).
-MAFLWLVSCFALVGATFGCGVPTIQPVLTGLSRIVNGEDAIPGSWPWQVS
-LQDKTGFHFCGGSLISEDWVVTAAHCGVKTSDVVVAGEFDQGSDEENIQV
-LKIAQVFKNPKFNMFTVRNDITLLKLATPAQFSETVSAVCLPNVDDDFPP
-GTVCATTGWGKTKYNALKTPEKLQQAALPIVSEADCKKSWGSKITDVMTC
-AGASGVSSCMGDSGGPLVCQKDGVWTLAGIVSWGSGVCSTSTPAVYSRVT
-ALMPWVQQILEAN
->sp|P00757|KLKB4_MOUSE	 Kallikrein 1-related peptidase-like b4 precursor (7S nerve growth factor alpha chain) (Alpha-NGF) - Mus musculus (Mouse).
-MWFLILFLALSLGGIDAAPPVQSQVDCENSQPWHVAVYRFNKYQCGGVLL
-DRNWVLTAAHCYNDKYQVWLGKNNFLEDEPSDQHRLVSKAIPHPDFNMSL
-LNEHTPQPEDDYSNDLMLLRLSKPADITDVVKPITLPTEEPKLGSTCLAS
-GWGSTTPIKFKYPDDLQCVNLKLLPNEDCDKAHEMKVTDAMLCAGEMDGG
-SYTCEHDSGGPLICDGILQGITSWGPEPCGEPTEPSVYTKLIKFSSWIRE
-TMANNP
->sp|P80015|CAP7_PIG	 Azurocidin (Cationic antimicrobial protein CAP37) (Heparin-binding protein) (HBP) - Sus scrofa (Pig).
-IVGGRRAQPQEFPFLASIQKQGRPFCAGALVHPRFVLTAASCFRGKNSGS
-ASVVLGAYDLRQQEQSRQTFSIRSISQNGYDPRQNLNDVLLLQLDREARL
-TPSVALVPLPPQNATVEAGTNCQVAGWGTQRLRRLFSRFPRVLNVTVTSN
-PCLPRDMCIGVFSRRGRISQGDRGTPLVCNGLAQGVASFLRRRFRRSSGF
-FTRVALFRNWIDSVLNNPP
->sp|P29786|TRY3_AEDAE	 Trypsin 3A1 precursor (EC 3.4.21.4) - Aedes aegypti (Yellowfever mosquito).
-MNQFLFVSFCALLDSAKVSAATLSSGRIVGGFQIDIAEVPHQVSLQRSGR
-HFCGGSIISPRWVLTRAHCTTNTDPAAYTIRAGSTDRTNGGIIVKVKSVI
-PHPQYNGDTYNYDFSLLELDESIGFSRSIEAIALPDASETVADGAMCTVS
-GWGDTKNVFEMNTLLRAVNVPSYNQAECAAALVNVVPVTEQMICAGYAAG
-GKDSCQGDSGGPLVSGDKLVGVVSWGKGCALPNLPGVYARVSTVRQWIRE
-VSEV
->sp|P35037|TRY3_ANOGA	 Trypsin-3 precursor (EC 3.4.21.4) - Anopheles gambiae (African malaria mosquito).
-MISNKIAILLAVLVVAVACAQARVAQQHRSVQALPRFLPRPKYDVGHRIV
-GGFEIDVSETPYQVSLQYFNSHRCGGSVLNSKWILTAAHCTVNLQPSSLA
-VRLGSSRHASGGTVVRVARVLEHPNYDDSTIDYDFSLMELESELTFSDVV
-QPVSLPDQDEAVEDGTMTIVSGWGNTQSAAESNAILRAANVPTVNQKECT
-IAYSSSGGITDRMLCAGYKRGGKDACQGDSGGPLVVDGKLVGVVSWGFGC
-AMPGYPGVYARVAVVRDWVRENSGA
->sp|P00773|ELA1_RAT	 Elastase-1 precursor (EC 3.4.21.36) - Rattus norvegicus (Rat).
-MLRFLVFASLVLYGHSTQDFPETNARVVGGAEARRNSWPSQISLQYLSGG
-SWYHTCGGTLIRRNWVMTAAHCVSSQMTFRVVVGDHNLSQNDGTEQYVSV
-QKIMVHPTWNSNNVAAGYDIALLRLAQSVTLNNYVQLAVLPQEGTILANN
-NPCYITGWGRTRTNGQLSQTLQQAYLPSVDYSICSSSSYWGSTVKTTMVC
-AGGDGVRSGCQGDSGGPLHCLVNGQYSVHGVTSFVSSMGCNVSKKPTVFT
-RVSAYISWMNNVIAYT
+>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
 </content>
 </file>
 <environement>
@@ -152,59 +36,61 @@ HOME_4_TCOFFEE=/home/cnotredame/
 ORBIT_SOCKETDIR=/tmp/orbit-cnotredame
 HOSTNAME=fedora12
 IMSETTINGS_INTEGRATE_DESKTOP=yes
-MCOFFEE_4_TCOFFEE=/home/cnotredame//.t_coffee//mcoffee/
+MCOFFEE_4_TCOFFEE=/home/cnotredame/tcoffee/Version_8.95_101019//mcoffee/
 SHELL=/bin/bash
 TERM=xterm
 HISTSIZE=1000
-XDG_SESSION_COOKIE=e9b402a1726cb67c2c4484a24b7f1cfb-1286540080.181457-1574818556
+XDG_SESSION_COOKIE=e9b402a1726cb67c2c4484a24b7f1cfb-1270158444.595330-702992861
+PERL5LIB=/home/cnotredame/tcoffee/Version_8.95_101019/perl
 LD_PRELOAD=
 GTK_RC_FILES=/etc/gtk/gtkrc:/home/cnotredame/.gtkrc-1.2-gnome2
+WINDOWID=71336639
 OSNAME=linux
-WINDOWID=14680067
 PERL_BIN=/home/cnotredame/Dropbox/projects/c/lib/perl/lib/algorithms::/home/cnotredame/Dropbox/projects/c/lib/perl/lib/debug:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4data_process:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/filters:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4makefile:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/util:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/benchmark:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/scripts:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/stat:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/droit:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/phecomp:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/webservices
-METHODS_4_TCOFFEE=/home/cnotredame//.t_coffee//methods/
+METHODS_4_TCOFFEE=/home/cnotredame/tcoffee/Version_8.95_101019//methods/
 IMSETTINGS_MODULE=none
 http_proxy=
 HTTP_proxy=
 USER=cnotredame
-LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
-SSH_AUTH_SOCK=/tmp/keyring-kuWDCi/socket.ssh
-GNOME_KEYRING_SOCKET=/tmp/keyring-kuWDCi/socket
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-EqYdfL/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-EqYdfL/socket
 USERNAME=cnotredame
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1875,unix/unix:/tmp/.ICE-unix/1875
-ENV_4_TCOFFEE=/home/cnotredame//.t_coffee//.t_coffee_env
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/1851,unix/unix:/tmp/.ICE-unix/1851
+ENV_4_TCOFFEE=/home/cnotredame/tcoffee/Version_8.95_101019//.t_coffee_env
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/home/cnotredame//.t_coffee//plugins/linux/:/home/cnotredame/.t_coffee/plugins:/home/cnotredame/bin/linux://home/cnotredame/.t_coffee/plugins/linux:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/algorithms::/home/cnotredame/Dropbox/projects/c/lib/perl/lib/debug:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4data_process:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/filters:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4makefile:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/util:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/benchmark:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/scripts:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/stat:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/droit:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/phecomp:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/webservices:/home/cnotredame/bin/Scripts/:/home/cnotredame/bin/linux://home/cnotredame/.t_coffee/plugins/linux:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/algorithms::/home/cnotredame/Dropbox/projects/c/lib/perl/lib/debug:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4data_process:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/filters:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4makefile:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/util:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/benchmark:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/scripts:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/stat:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/droit:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/phecomp:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/webservices:/home/cnotredame/bin/Scripts/:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/cnotredame/bin
+PATH=/home/cnotredame/tcoffee/Version_8.95_101019//plugins/linux/:/home/cnotredame/.t_coffee/plugins:/home/cnotredame/tcoffee/Version_8.95_101019/bin:/home/cnotredame/bin/linux://home/cnotredame/.t_coffee/plugins/linux:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/algorithms::/home/cnotredame/Dropbox/projects/c/lib/perl/lib/debug:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4data_process:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/filters:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/perl4makefile:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/util:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/benchmark:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/scripts:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/stat:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/droit:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/phecomp:/home/cnotredame/Dropbox/projects/c/lib/perl/lib/webservices:/home/cnotredame/bin/Scripts/:/home/cnotredame/.t_coffee/plugins/linux:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/cnotredame/bin:/home/cnotredame/tcoffee/r406/bin
 MAIL=/var/spool/mail/cnotredame
 DESKTOP_SESSION=gnome
 _=/usr/bin/printenv
 QT_IM_MODULE=xim
-DIR_4_TCOFFEE=/home/cnotredame//.t_coffee/
-PWD=/mnt/hgfs/cnotredame/projects/c/t_coffee/src_test
-CACHE_4_TCOFFEE=/home/cnotredame//.t_coffee//cache/
+PWD=/mnt/hgfs/cnotredame/Dropbox/projects/c/t_coffee/src_test
+DIR_4_TCOFFEE=/home/cnotredame/tcoffee/Version_8.95_101019/
 XMODIFIERS=@im=none
-GDM_KEYBOARD_LAYOUT=us
-GNOME_KEYRING_PID=1868
+CACHE_4_TCOFFEE=/home/cnotredame/.t_coffee/cache/
+GDM_KEYBOARD_LAYOUT=ch	fr_mac
+GNOME_KEYRING_PID=1844
 LANG=en_US.UTF-8
 GDM_LANG=en_US.UTF-8
 GDMSESSION=gnome
 HISTCONTROL=ignoreboth
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
-PLUGINS_4_TCOFFEE=/home/cnotredame//.t_coffee//plugins/linux/
+PLUGINS_4_TCOFFEE=/home/cnotredame/tcoffee/Version_8.95_101019//plugins/linux/
 SHLVL=3
 HOME=/home/cnotredame
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 HTTP_PROXY=
-MAFFT_BINARIES=/home/cnotredame//.t_coffee//plugins/linux/
-BIN=/home/cnotredame/bin/linux
+MAFFT_BINARIES=/home/cnotredame/tcoffee/Version_8.95_101019/plugins/linux/
 LOGNAME=cnotredame
-EMAIL_4_TCOFFEE=
-DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-aaqR3NJ1aX,guid=82c56af8e77dbf9a947f92454caf0b30
+BIN=/home/cnotredame/bin/linux
+EMAIL_4_TCOFFEE=cedric.notredame@crg.es
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-17YSYzzj4y,guid=79ed5a423e6288e6b06f65214bb5146c
 LESSOPEN=|/usr/bin/lesspipe.sh %s
-EMAIL=
+CODE=/mnt/hgfs/cnotredame/Dropbox/projects/c.svn/trunk/t_coffee/src/
+EMAIL=cedric.notredame@crg.es
 UPDATED_ENV_4_TCOFFEE=1
 DISPLAY=:0.0
 NUMBER_OF_PROCESSORS=4
@@ -213,8 +99,8 @@ LOCKDIR_4_TCOFFEE=/var/tmp/
 G_BROKEN_FILENAMES=1
 TMP_4_TCOFFEE=/var/tmp/
 COLORTERM=gnome-terminal
-USER_BIN=/home/cnotredame/bin/linux
-XAUTHORITY=/var/run/gdm/auth-for-cnotredame-YiRMb5/database
+XAUTHORITY=/var/run/gdm/auth-for-cnotredame-xS0G50/database
 SCRIPT_BIN=/home/cnotredame/bin/Scripts/
+USER_BIN=/home/cnotredame/bin/linux
 </environement>
 </T-CoffeeApplicationDump>

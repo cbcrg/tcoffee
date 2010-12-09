@@ -2217,7 +2217,6 @@ Alignment *recompute_local_aln (Alignment *A, Sequence *S,Constraint_list *CL, i
     B=stack_progressive_nol_aln_with_seq_coor(CL,0,0,S,coor,A->nseq);
     A=copy_aln ( B, A);
 
-    CL=compact_list (CL,"best");
     free_Alignment(B);
     return A;
     }

@@ -17,17 +17,12 @@ static float LOG_UNDERFLOW_THRESHOLD = 7.50f;
 //static float LOG_ZERO = -FLT_MAX;
 static float LOG_ZERO=-200000004008175468544.000000;
 static float LOG_ONE = 0.0f;
+//DNA Alignment Models
+static float DNAinitDistrib2Default[] ={ 0.9588437676f, 0.0205782652f, 0.0205782652f }; 
+static float DNAgapOpen2Default[] = { 0.0190259293f, 0.0190259293f };
+static float DNAgapExtend2Default[] = { 0.3269913495f, 0.3269913495f };
 
-//Probabilistic Alignment DNA
-
-
-
-
-static float DNAinitDistrib2Default[] = { 0.9615409374f, 0.0000004538f, 0.0000004538f, 0.0192291681f, 0.0192291681f };
-static float DNAgapOpen2Default[] = { 0.0082473317f, 0.0082473317f, 0.0107844425f, 0.0107844425f };
-static float DNAgapExtend2Default[] = { 0.3210460842f, 0.3210460842f, 0.3298229277f, 0.3298229277f };
-
-static char DNAalphabetDefault[] = "ACGUTN";
+static char  DNAalphabetDefault[] = "ACGUTN";
 static float DNAemitSingleDefault[6] = {0.2270790040f, 0.2422080040f, 0.2839320004f, 0.2464679927f, 0.2464679927f, 0.0003124650f};
 
 static float DNAemitPairsDefault[6][6] = {
@@ -38,12 +33,25 @@ static float DNAemitPairsDefault[6][6] = {
   { 0.0238473993f, 0.0389291011f, 0.0244289003f, 0.1557479948f, 0.1557479948f, 0.0000743985f },
   { 0.0000375308f, 0.0000815823f, 0.0000824765f, 0.0000743985f, 0.0000743985f, 0.0000263252f }
 };
+//RNA Alignment Models
 
-//Probabilistic ALignment Blosum62mt
+static float RNAinitDistrib2Default[] = { 0.9615409374f, 0.0000004538f, 0.0000004538f, 0.0192291681f, 0.0192291681f };
+static float RNAgapOpen2Default[] = { 0.0082473317f, 0.0082473317f, 0.0107844425f, 0.0107844425f };
+static float RNAgapExtend2Default[] = { 0.3210460842f, 0.3210460842f, 0.3298229277f, 0.3298229277f };
 
+static char RNAalphabetDefault[] = "ACGUTN";
+static float RNAemitSingleDefault[6] = {0.2270790040f, 0.2422080040f, 0.2839320004f, 0.2464679927f, 0.2464679927f, 0.0003124650f};
 
+static float RNAemitPairsDefault[6][6] = {
+  { 0.1487240046f, 0.0184142999f, 0.0361397006f, 0.0238473993f, 0.0238473993f, 0.0000375308f },
+  { 0.0184142999f, 0.1583919972f, 0.0275536999f, 0.0389291011f, 0.0389291011f, 0.0000815823f },
+  { 0.0361397006f, 0.0275536999f, 0.1979320049f, 0.0244289003f, 0.0244289003f, 0.0000824765f },
+  { 0.0238473993f, 0.0389291011f, 0.0244289003f, 0.1557479948f, 0.1557479948f, 0.0000743985f },
+  { 0.0238473993f, 0.0389291011f, 0.0244289003f, 0.1557479948f, 0.1557479948f, 0.0000743985f },
+  { 0.0000375308f, 0.0000815823f, 0.0000824765f, 0.0000743985f, 0.0000743985f, 0.0000263252f }
+};
 
-
+//Protein Alignment Models
 static float initDistrib2Default[] = { 0.6814756989f, 8.615339902e-05f, 8.615339902e-05f, 0.1591759622f, 0.1591759622 };
 static float gapOpen2Default[] = { 0.0119511066f, 0.0119511066f, 0.008008334786f, 0.008008334786 };
 static float gapExtend2Default[] = { 0.3965826333f, 0.3965826333f, 0.8988758326f, 0.8988758326 };
@@ -604,8 +612,8 @@ void free_proba_pair_wise ()
 }
 int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 {
-   int NumMatrixTypes=5;
-   int NumInsertStates=2;
+   static int NumMatrixTypes;
+   static int NumInsertStates;
    static float **transMat, **insProb, **matchProb, *initialDistribution, **transProb, **emitPairs, *emitSingle, ***TinsProb, *TmatchProb;
    static int TinsProb_ml, TmatchProb_ml;
    int i, j,I, J;
@@ -639,25 +647,92 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        return 0;
      }
    
-   if (!transMat && (strm (retrieve_seq_type(), "DNA") ||strm (retrieve_seq_type(), "RNA")) )
+   if (!transMat && (strm (retrieve_seq_type(), "DNA")))
+     {
+     static float **p;
+     static float *s;
+     NumInsertStates=1;
+     NumMatrixTypes=3;
+     if (!p)
+       {
+	 int l,a,b;
+	 l=strlen (DNAalphabetDefault);
+	 p=declare_float (l,l);
+	 s=vcalloc (l, sizeof (float));
+	 for (a=0; a<l; a++)
+	   {
+	     s[a]=DNAemitSingleDefault[a];
+	     for (b=0; b<l; b++)
+	       p[a][b]=RNAemitPairsDefault[a][b];
+	   }
+       }
+     p=get_emitPairs (CL->method_matrix, DNAalphabetDefault,p,s);
+     alphabet=RNAalphabetDefault;
+     emitPairs=declare_float (256, 256);
+     emitSingle=vcalloc (256, sizeof (float));
+     for (i=0; i<256; i++)
+       {
+	 emitSingle[i]=1e-5;
+	 for (j=0; j<256; j++)
+	   emitPairs[i][j]=1e-10;
+       }
+     l=strlen (alphabet);
+     
+     for (i=0; i<l; i++)
+       {
+	 int C1,c1, C2,c2;
+	 c1=tolower(alphabet[i]);
+	 C1=toupper(alphabet[i]);
+	 emitSingle[c1]=s[i];
+	 emitSingle[C1]=s[i];
+	 for (j=0; j<=i; j++)
+	   {
+	     c2=tolower(alphabet[j]);
+	     C2=toupper(alphabet[j]);
+	     
+	     emitPairs[c1][c2]=p[i][j];
+	     emitPairs[C1][c2]=p[i][j];
+	     emitPairs[C1][C2]=p[i][j];
+	     emitPairs[c1][C2]=p[i][j];
+	     emitPairs[c2][c1]=p[i][j];
+	     emitPairs[C2][c1]=p[i][j];
+	     emitPairs[C2][C1]=p[i][j];
+	     emitPairs[c2][C1]=p[i][j];
+	   }
+       }
+     
+     
+     transMat=declare_float (2*NumInsertStates+1, 2*NumInsertStates+1);
+     transProb=declare_float (2*NumInsertStates+1,2* NumInsertStates+1);
+     insProb=declare_float (256,NumMatrixTypes);
+     matchProb=declare_float (256, 256);
+     initialDistribution=vcalloc (2*NumMatrixTypes+1, sizeof (float));
+     
+     ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib2Default, emitSingle,emitPairs,DNAgapOpen2Default,DNAgapExtend2Default, transMat,initialDistribution,matchProb, insProb,transProb);
+     
+     }
+   else if (!transMat && (strm (retrieve_seq_type(), "RNA")))
      {
        static float **p;
        static float *s;
+       NumInsertStates=2;
+       NumMatrixTypes=5;
+       
        if (!p)
 	 {
 	   int l,a,b;
-	   l=strlen (DNAalphabetDefault);
+	   l=strlen (RNAalphabetDefault);
 	   p=declare_float (l,l);
 	   s=vcalloc (l, sizeof (float));
 	   for (a=0; a<l; a++)
 	     {
-	       s[a]=DNAemitSingleDefault[a];
+	       s[a]=RNAemitSingleDefault[a];
 	       for (b=0; b<l; b++)
-		 p[a][b]=DNAemitPairsDefault[a][b];
+		 p[a][b]=RNAemitPairsDefault[a][b];
 	     }
 	 }
-       p=get_emitPairs (CL->method_matrix, DNAalphabetDefault,p,s);
-       alphabet=DNAalphabetDefault;
+       p=get_emitPairs (CL->method_matrix, RNAalphabetDefault,p,s);
+       alphabet=RNAalphabetDefault;
        emitPairs=declare_float (256, 256);
        emitSingle=vcalloc (256, sizeof (float));
        for (i=0; i<256; i++)
@@ -698,12 +773,15 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        matchProb=declare_float (256, 256);
        initialDistribution=vcalloc (2*NumMatrixTypes+1, sizeof (float));
        
-       ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib2Default, emitSingle,emitPairs,DNAgapOpen2Default,DNAgapExtend2Default, transMat,initialDistribution,matchProb, insProb,transProb);
+       ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib2Default, emitSingle,emitPairs,RNAgapOpen2Default,RNAgapExtend2Default, transMat,initialDistribution,matchProb, insProb,transProb);
      }
    else if ( !transMat && strm (retrieve_seq_type(), "PROTEIN"))
      {
        static float **p;
        static float *s;
+       NumInsertStates=2;
+       NumMatrixTypes=5;
+       
        if (!p)
 	 {
 	   int l,a,b;

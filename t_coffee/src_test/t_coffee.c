@@ -542,7 +542,7 @@ int batch_main ( int argc, char **argv)
 			    /*TYPE*/      "S"            ,	\
 			    /*OPTIONAL?*/ OPTIONAL       ,	\
 			    /*MAX Nval*/  1              ,		\
-			    /*DOC*/       "protein or dna. Automatically set, but can be forced with this flag"           , \
+			    /*DOC*/       "PROTEIN, DNA or RNA. Automatically set, but can be forced with this flag"           , \
 			    /*Parameter*/ &type          ,		\
 			    /*Def 1*/    ""              ,		\
 			    /*Def 2*/    ""              ,		\
@@ -2481,7 +2481,7 @@ get_cl_param(\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 		   );
-
+set_int_variable ("prot_min_cov", prot_min_cov);
 declare_name(pdb_type);
 get_cl_param(\
 			    /*argc*/      argc             ,\
@@ -3121,7 +3121,7 @@ get_cl_param(\
 			    /*TYPE*/      "S"          ,\
 			    /*OPTIONAL?*/ OPTIONAL       ,\
 			    /*MAX Nval*/  1              ,\
-			    /*DOC*/       "Multi core: template_jobs_relax_msa",\
+			    /*DOC*/       "Multi core: template_jobs_relax_[msa|pairwise]_evaluate",\
 			    /*Parameter*/ &multi_core   ,\
 			    /*Def 1*/    "templates_jobs_relax_msa_evaluate"       ,\
 			    /*Def 2*/    "templates_jobs_relax_msa_evaluate"              ,\
@@ -5009,7 +5009,7 @@ char *get_fmcoffee_defaults(char *buf, char *type)
      //Fast Mcoffee
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
 
-     if (NO_METHODS_IN_CL) buf=strcat (buf,"-in Mclustalw2_msa  Mmuscle_msa Mmafft_msa -multi_core methods_relax_msa");
+     if (NO_METHODS_IN_CL) buf=strcat (buf,"-in Mkalign_msa  Mmuscle_msa Mmafft_msa -multi_core methods_relax_msa");
 
      /*buf=strcat (buf,"-in ");*/
 
