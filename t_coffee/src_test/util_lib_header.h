@@ -1067,7 +1067,8 @@ struct Constraint_list
       int   F_TG_MODE;
 
       char  dp_mode[FILENAMELEN+1];
-      int   reverse_seq;
+      int   reverse_seq;//Used for HoT
+      int   extend_seq; //Used for RNA or Promoter Alignments 
       int   maximise;
       char  matrix_for_aa_group[FILENAMELEN+1];
       char  method_matrix[FILENAMELEN+1];
@@ -1199,7 +1200,8 @@ struct TC_method
   char param[1000];
   char param1[1000];
   char param2[1000];
-  
+  int extend_seq;
+  int reverse_seq;
   Constraint_list *PW_CL;
 };
 typedef struct TC_method TC_method;
@@ -2711,6 +2713,10 @@ int translate_dna_codon ( char *seq, char stop);
 char* mutate_amino_acid ( char aa, char *mode);
 Alignment * mutate_aln ( Alignment *A, char *r);
 
+int extend_seqaln (Sequence *S, Alignment *A);
+int unextend_seqaln (Sequence *S, Alignment *A);
+char *extend_seq (char *seq);
+char *unextend_seq (char *seq);
 
 Sequence * transform_sequence ( Sequence *S, char *mode);
 Alignment *translate_splice_dna_aln (Alignment *A,Alignment *ST );

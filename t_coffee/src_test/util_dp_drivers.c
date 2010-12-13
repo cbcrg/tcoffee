@@ -205,7 +205,6 @@ Constraint_list *seq2list     ( Job_TC *job)
 	{
 	  A=fast_pair (job);
 	  RCL=A->CL;
-
 	}
       else if ( strm ( mode, "proba_pair") )
 	{
@@ -216,13 +215,12 @@ Constraint_list *seq2list     ( Job_TC *job)
 	{
 	  RCL=best_pair4prot (job);
 	}
-	else if ( strm ( mode, "best_pair4rna"))
+      else if ( strm ( mode, "best_pair4rna"))
 	{
 	  RCL=best_pair4rna (job);
 	}
       else if ( strm ( mode, "exon2_pair"))
 	{
-
 	  char weight2[1000];
 
 	  A=fast_pair (job);
@@ -231,14 +229,12 @@ Constraint_list *seq2list     ( Job_TC *job)
 	}
       else if ( strm ( mode, "exon_pair"))
 	{
-
 	  A=fast_pair (job);
 	  RCL=aln2constraint_list (A, CL,weight);
 
 	}
       else if ( strm ( mode, "exon3_pair"))
 	{
-
 	  char weight2[1000];
 
 	  A=fast_pair (job);
@@ -361,7 +357,9 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
       if ( M->gep!=UNDEFINED)PW_CL->gep=M->gep;
       else PW_CL->gep=-1;
 
-
+      if (M->extend_seq ==1) PW_CL->extend_seq=1;
+      if (M->reverse_seq==1)PW_CL->reverse_seq=1;
+      
 
       if ( strm2 ( mode,"fast_pair", "ifast_pair"))
 	    {
@@ -1895,22 +1893,28 @@ Alignment * fast_pair      (Job_TC *job)
 	    A->S=CL->S;
 	    PW_CL->S=CL->S;
 	    A->CL=CL;
+	    A->nseq=n;
 	    ns[0]=ns[1]=1;
 	    l_s[0][0]=0;
 	    l_s[1][0]=1;
-
-
+	    
+	    //Preprocessing of the sequences
 	    if (PW_CL->reverse_seq)
 	      {
 		invert_string2(A->seq_al[0]);
 		invert_string2(A->seq_al[1]);
 		invert_string2 ((CL->S)->seq[A->order[0][0]]);
 		invert_string2 ((CL->S)->seq[A->order[1][0]]);
-
 	      }
-
+	    if (PW_CL->extend_seq)//use te alphabet extension for nucleic acids
+	      {
+		extend_seqaln (A->S,NULL);
+		extend_seqaln (NULL,A);
+	      }
+	    
 	    pair_wise ( A, ns, l_s, PW_CL);
-
+	    
+	    //PostProcessing of the sequences
 	    if (PW_CL->reverse_seq)
 	      {
 
@@ -1918,6 +1922,11 @@ Alignment * fast_pair      (Job_TC *job)
 		invert_string2(A->seq_al[1]);
 		invert_string2 ((CL->S)->seq[A->order[0][0]]);
 		invert_string2 ((CL->S)->seq[A->order[1][0]]);
+	      }
+	    if (PW_CL->extend_seq)
+	      {
+		unextend_seqaln (A->S,NULL);
+		unextend_seqaln (NULL,A);
 	      }
 	    A->nseq=n;
 

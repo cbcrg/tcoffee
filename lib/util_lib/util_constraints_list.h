@@ -239,7 +239,8 @@ struct Constraint_list
       int   F_TG_MODE;
 
       char  dp_mode[FILENAMELEN+1];
-      int   reverse_seq;
+      int   reverse_seq;//Used for HoT
+      int   extend_seq; //Used for RNA or Promoter Alignments 
       int   maximise;
       char  matrix_for_aa_group[FILENAMELEN+1];
       char  method_matrix[FILENAMELEN+1];
@@ -371,7 +372,8 @@ struct TC_method
   char param[1000];
   char param1[1000];
   char param2[1000];
-  
+  int extend_seq;
+  int reverse_seq;
   Constraint_list *PW_CL;
 };
 typedef struct TC_method TC_method;

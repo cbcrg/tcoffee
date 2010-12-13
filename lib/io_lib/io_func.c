@@ -332,6 +332,8 @@ int ** read_matrice (char *mat_name_in)
 	else if (strm(mat_name, "ralpha_mat" ))vector=ralpha_mat;
 	else if (strm(mat_name, "rcoil_mat" ))vector=rcoil_mat;
 	else if (strm (mat_name, "jtttm250mt"))vector=jtttm250mt;
+	
+	else if (strm (mat_name, "promoter_tf1"))vector=promoter_tf1;
 
 	/*Header Matrices*/
 	if(vector)

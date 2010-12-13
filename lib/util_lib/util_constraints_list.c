@@ -1256,6 +1256,9 @@ struct TC_method * method_file2TC_method( char *method)
 		else if ( (p=strstr (line, "GEP"        ))) sscanf (p, "GEP %d"  , &m->gep);
 		else if ( (p=strstr (line, "MAXID"      ))) sscanf (p, "MAXID %d"  , &m->maxid);
 		else if ( (p=strstr (line, "MINID"      ))) sscanf (p, "MINID %d"  , &m->minid);
+		else if ( (p=strstr (line, "EXTEND_SEQ"      ))) sscanf (p, "EXTEND_SEQ %d"  , &m->extend_seq);
+		else if ( (p=strstr (line, "REVERSE_SEQ"      ))) sscanf (p, "REVERSE_SEQ %d"  , &m->reverse_seq);
+		
 		
 	}
 	vfclose ( fp);
@@ -3807,31 +3810,32 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 		weight[1]=ow*get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-", NULL);
 		
 	}
-	else if ( strncmp ( weight_mode, "len",3)==0)
-	{
-		weight[1]=A->len_aln;
-	}
-	else if ( strnm ( weight_mode, "sim", 3) || strm (weight_mode, "default"))
-	{
-		
-		ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-", (strm (weight_mode, "default"))?NULL:(weight_mode+3));
-		if (ref_weight == 0)
-			ref_weight = 1;
-		weight[1]=ref_weight;
-		
-	}
-	else if ( strnm ( weight_mode, "subset", 6))
-	{
-		ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-",NULL);
-		weight[1]=ref_weight;
-	}
-	
-	else if ( strncmp (weight_mode, "winsim", 6)==0)
-	{
-		weight=get_seq_winsim ( A->seq_al[s1], A->seq_al[s2], "-", weight_mode+6, weight);
-	}
-	else if (  strncmp ( weight_mode, "cdna", 4)==0)
-	{
+	else if ( strstr ( weight_mode, "len"))
+	  {
+	    weight[1]=A->len_aln;
+	  }
+	else if ( strstr (weight_mode, "winsim"))
+	  {
+	    weight=get_seq_winsim ( A->seq_al[s1], A->seq_al[s2], "-", weight_mode+6, weight);
+	  }
+	else if ( strstr ( weight_mode, "sim") || strstr (weight_mode, "default"))
+	  {
+	    char *sim_mode;
+	    if ( strstr(weight_mode, "sim"))sim_mode=strstr(weight_mode, "sim")+3;
+	    else sim_mode=NULL;
+	    ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-", sim_mode);
+	    if (ref_weight == 0)
+	      ref_weight = 1;
+	    weight[1]=ref_weight;
+	    
+	  }
+	else if ( strstr ( weight_mode, "subset"))
+	  {
+	    ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-",NULL);
+	    weight[1]=ref_weight;
+	  }
+	else if (  strstr ( weight_mode, "cdna"))
+	  {
 		ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-", weight_mode+4);
 		col=vcalloc ( A->len_aln+1, sizeof (int));
 		if (A->cdna_cache)
@@ -3840,19 +3844,19 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 				for ( a=0; a<=A->len_aln; a++)col[a]=1;
 				for ( c=0; c< A->len_aln; c++)weight[c]=ref_weight*col[c];
 				vfree (col);
-	}
+	  }
 	
-	else if ( strm (weight_mode, "overaln"))
-	{
-		ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-","idmat");
-		//weight=pw_aln2clean_aln_weight (A->seq_al[s1], A->seq_al[s2], ref_weight,0, 0, 0, 0, NULL);
-		printf_exit (EXIT_FAILURE, stderr,"ERROR: mode overaln not currently supported [FATAL:%s]", PROGRAM);
-	}
+	else if ( strstr (weight_mode, "overaln"))
+	  {
+	    ref_weight=get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-","idmat");
+	    //weight=pw_aln2clean_aln_weight (A->seq_al[s1], A->seq_al[s2], ref_weight,0, 0, 0, 0, NULL);
+	    printf_exit (EXIT_FAILURE, stderr,"ERROR: mode overaln not currently supported [FATAL:%s]", PROGRAM);
+	  }
 	else
-	{
-		fprintf ( stderr, "\nERROR: Weight Mode %s is unknown [FATAL:%s]", weight_mode, PROGRAM);
-		crash ("");
-	}
+	  {
+	    fprintf ( stderr, "\nERROR: Weight Mode %s is unknown [FATAL:%s]", weight_mode, PROGRAM);
+	    crash ("");
+	  }
 	return weight;
 }
 
@@ -3875,96 +3879,114 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 	int **fixed;
 	entry=vcalloc (CL->entry_len+1, sizeof (int));
 	
+
 	//MSA are now read as one to all (+ extra bits if needed) libraries
 	//if ( atoigetenv ("TOP4TC")){HERE ("TOP=1");top=1;}
 	
 	sprintf ( weight_mode , "%s", (!in_weight_mode || strm (in_weight_mode, "default"))?"sim":in_weight_mode);
-	
+
 	if ( !A)return CL;
-	fixed=fix_aln_seq_new (A, (CL->S));
+	if (strstr (weight_mode, "extend"))
+	  {
+	    extend_seqaln(NULL, A);
+	    extend_seqaln(CL->S,NULL);
+	    if (CL->S!=A->S)extend_seqaln(A->S,NULL);
+	  }
 	
+	fixed=fix_aln_seq_new (A, (CL->S));
+
 	if ( !CL)
-	{
-		Sequence *S;
-		S=aln2seq (A);
-		CL=declare_constraint_list (S,NULL, NULL, 0,NULL, NULL);
-		CL->S=S;
-	}
+	  {
+	    Sequence *S;
+	    S=aln2seq (A);
+	    CL=declare_constraint_list (S,NULL, NULL, 0,NULL, NULL);
+	    CL->S=S;
+	  }
 	
 	cache=vcalloc (A->len_aln, sizeof (int));
 	
 	if ( (p=strstr (weight_mode, "_subset_")))
-	{
-		alp=strchr (weight_mode, '_')+1;
-		p[0]='\0';
-	}
+	  {
+	    alp=strchr (weight_mode, '_')+1;
+	    p[0]='\0';
+	  }
 	
 	for ( a=0; a<A->nseq-1; a++)
 	  {
-		if ((s1=fixed[a][0])==-1)continue;
+	    if ((s1=fixed[a][0])==-1)continue;
+	    
+	    for (set_misc=0,b=a+1; b< A->nseq; b++)
+	      {
 		
-		for (set_misc=0,b=a+1; b< A->nseq; b++)
-		{
-		  
-			int use_pair;
-			int nres1=0;
-			int nres2=0;
+		int use_pair;
+		int nres1=0;
+		int nres2=0;
+		
+		if ((s2=fixed[b][0])==-1)continue;
+		
+		weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
+		for (c=0; c< A->len_aln; c++)
+		  {
+		    int isgap1, isgap2;
+		    isgap1=is_gap(A->seq_al[a][c]);
+		    isgap2=is_gap(A->seq_al[b][c]);
+		    nres1+=!isgap1;
+		    nres2+=!isgap2;
+		    
+		    if (cache[c]==-1 && top)continue;
+		    if (!isgap1)cache[c]=1;
+		    if (cache[c] && b==A->nseq-1)cache[c]=-1;
+		    
+		    use_pair=1;
+		    use_pair=use_pair && !is_gap(A->seq_al[a][c]);
+		    use_pair=use_pair && !is_gap(A->seq_al[b][c]);
+		    use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
+		    use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
+		    use_pair=use_pair && !(do_pdb && pdb_weight==0);
+		    use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
+		    
+		    if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
+		    
+		    if (use_pair)
+		      {
 			
-			if ((s2=fixed[b][0])==-1)continue;
-			weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
+			if ((fixed_nres1=fixed[a][nres1])<0)continue;
+			if ((fixed_nres2=fixed[b][nres2])<0)continue;
 			
-			for (c=0; c< A->len_aln; c++)
-			  {
-			    int isgap1, isgap2;
-			    isgap1=is_gap(A->seq_al[a][c]);
-			    isgap2=is_gap(A->seq_al[b][c]);
-			    nres1+=!isgap1;
-			    nres2+=!isgap2;
-			    
-			    if (cache[c]==-1 && top)continue;
-			    if (!isgap1)cache[c]=1;
-			    if (cache[c] && b==A->nseq-1)cache[c]=-1;
-			    
-			    use_pair=1;
-			    use_pair=use_pair && !is_gap(A->seq_al[a][c]);
-			    use_pair=use_pair && !is_gap(A->seq_al[b][c]);
-			    use_pair=use_pair && A->seq_al[b][c]!=UNDEFINED_RESIDUE;
-			    use_pair=use_pair && A->seq_al[a][c]!=UNDEFINED_RESIDUE;
-			    use_pair=use_pair && !(do_pdb && pdb_weight==0);
-			    use_pair=use_pair && ((weight[0]==FORBIDEN)?weight[1]:weight[c]);
-			    
-			    if (alp)use_pair=use_pair && is_in_set (A->seq_al[b][c], alp) && is_in_set (A->seq_al[a][c], alp);
-			    
-			    if (use_pair)
-			      {
-				
-				if ((fixed_nres1=fixed[a][nres1])<0)continue;
-				if ((fixed_nres2=fixed[b][nres2])<0)continue;
-				
-				entry[SEQ1]=s1;
-				entry[SEQ2]=s2;
-				entry[R1]=fixed_nres1;
-				entry[R2]=fixed_nres2;
-				entry[CONS]=1;
-				if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
+			entry[SEQ1]=s1;
+			entry[SEQ2]=s2;
+			entry[R1]=fixed_nres1;
+			entry[R2]=fixed_nres2;
+			entry[CONS]=1;
+			if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
 				else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
-				add_entry2list (entry, CL);
-			      }
-			  }
-		}
-	}
+			add_entry2list (entry, CL);
+		      }
+		  }
+	      }
+	  }
 	vfree (entry);
 	vfree (cache);
 	vfree (weight);
 	free_int (fixed, -1);
+	
+	if (strstr (weight_mode, "extend"))
+	  {
+	    unextend_seqaln(NULL, A);
+	    unextend_seqaln(CL->S,NULL);
+	    if (A->S!=CL->S)unextend_seqaln(A->S,NULL);
+
+	    
+	    
+	  }
 	if (A->A)
-	{
-		return aln2constraint_list (A->A, CL, weight_mode);
-	}
+	  {
+	    return aln2constraint_list (A->A, CL, weight_mode);
+	  }
 	else
-	{
-		return CL;
-	}
+	  {
+	    return CL;
+	  }
 }
 
 
@@ -4895,6 +4917,24 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
 
+	sprintf (list[n][0], "promo_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE slow_pair\n");
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    no_name\n");
+	fprintf ( fp, "OUT_FLAG   no_name\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "EXTEND_SEQ 1\n");
+	fprintf ( fp, "MATRIX     promoter_tf1\n");
+	fprintf ( fp, "GOP        -30\n");
+	fprintf ( fp, "GEP        0\n");
+	fprintf ( fp, "WEIGHT     extend_sim\n");
+	
+	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+	vfclose (fp);}
 
 	sprintf (list[n][0], "clean_slow_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));

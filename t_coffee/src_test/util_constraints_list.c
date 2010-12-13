@@ -1256,6 +1256,9 @@ struct TC_method * method_file2TC_method( char *method)
 		else if ( (p=strstr (line, "GEP"        ))) sscanf (p, "GEP %d"  , &m->gep);
 		else if ( (p=strstr (line, "MAXID"      ))) sscanf (p, "MAXID %d"  , &m->maxid);
 		else if ( (p=strstr (line, "MINID"      ))) sscanf (p, "MINID %d"  , &m->minid);
+		else if ( (p=strstr (line, "EXTEND_SEQ"      ))) sscanf (p, "EXTEND_SEQ %d"  , &m->extend_seq);
+		else if ( (p=strstr (line, "REVERSE_SEQ"      ))) sscanf (p, "REVERSE_SEQ %d"  , &m->reverse_seq);
+		
 		
 	}
 	vfclose ( fp);
@@ -4895,6 +4898,22 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
 
+	sprintf (list[n][0], "promo_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE slow_pair\n");
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    no_name\n");
+	fprintf ( fp, "OUT_FLAG   no_name\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "EXTEND_SEQ 1\n");
+	fprintf ( fp, "MATRIX     promoter_tf1\n");
+	fprintf ( fp, "GOP        -30\n");
+	fprintf ( fp, "GEP        0\n");
+	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+	vfclose (fp);}
 
 	sprintf (list[n][0], "clean_slow_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));

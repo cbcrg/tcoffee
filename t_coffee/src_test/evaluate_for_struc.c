@@ -2266,21 +2266,21 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	     if ( ! seq2P_template_file(A->S,a))
 	       {
 		 add_warning (stderr, "Sequence %s removed from the dataset [No Usable Structure]", A->name[a]);
-		 A->nseq;
 	       }
 	     else
 	       {
-		 if (used==a);
-		 else
+		 if (used!=a)
 		   {
 		     sprintf (A->name[used], "%s", A->name[a]);
 		     sprintf (A->seq_al[used], "%s", A->seq_al[a]);
 		     for (b=0; b<4; b++)A->order[used][b]=A->order[a][b];
-		     used++;
 		   }
+		 used++;
 	       }
 	   }
+	 
 	 A->nseq=used;
+	 
 	 if (A->nseq<2)myexit (fprintf_error(stderr, "Two sequences at least must have a known structure"));
 	 
 	 for ( s1=0; s1< (A->S)->nseq; s1++)

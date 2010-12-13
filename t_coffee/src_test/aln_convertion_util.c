@@ -177,6 +177,7 @@ Alignment *aln2alifold(Alignment *A)
   char *tmp1;
   char *tmp2;
   
+  print_aln (A);
   tmp1=vtmpnam (NULL);
   tmp2=vtmpnam (NULL);
   output_clustal_aln (tmp1,A);

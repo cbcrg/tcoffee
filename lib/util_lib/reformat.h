@@ -320,6 +320,10 @@ int translate_dna_codon ( char *seq, char stop);
 char* mutate_amino_acid ( char aa, char *mode);
 Alignment * mutate_aln ( Alignment *A, char *r);
 
+int extend_seqaln (Sequence *S, Alignment *A);
+int unextend_seqaln (Sequence *S, Alignment *A);
+char *extend_seq (char *seq);
+char *unextend_seq (char *seq);
 
 Sequence * transform_sequence ( Sequence *S, char *mode);
 Alignment *translate_splice_dna_aln (Alignment *A,Alignment *ST );

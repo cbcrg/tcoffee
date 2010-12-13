@@ -2928,6 +2928,11 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  {
 	    output_blast_mat (D1->M, out_file);
 	  }
+	else if ( strm (out_format, "header_matrix"))
+	  {
+	    output_header_mat(D1->M, out_file);
+	  }
+		  
 	else 
 	        {
 
@@ -9755,6 +9760,139 @@ int translate_dna_codon ( char *sequence, char stop)
 	return ret;
 	}
 
+int extend_seqaln (Sequence *S, Alignment *A)
+{
+  char **s;
+  int n,a;
+  if (S){s=S->seq;n=S->nseq;}
+  else if (A){s=A->seq_al;n=A->nseq;}
+  else return 0;
+  
+  for (a=0; a<n;a++){extend_seq(s[a]);}
+  return 1;
+}
+int unextend_seqaln (Sequence *S, Alignment *A)
+{
+  char **s;
+  int n, a;
+  if (S){s=S->seq;n=S->nseq;}
+  else if (A){s=A->seq_al;n=A->nseq;}
+  else return 0;
+  
+  for (a=0; a<n;a++){unextend_seq(s[a]);}
+  return 1;
+}
+    
+
+char *extend_seq (char *seq)
+{
+  char *buf, *ebuf;
+  int l, lb, a, b, upper,v;
+  char r1, r2;
+  
+  l=strlen (seq);
+  buf =vcalloc ( l+1, sizeof (char));
+  ebuf=vcalloc ( l+1, sizeof (char));
+  sprintf (  buf, "%s", seq);
+  sprintf ( ebuf, "%s", seq);
+  
+  ungap ( buf);
+  ungap (ebuf);
+  lb=strlen (buf);
+  
+  for (a=1; a<lb-1; a++)
+    {
+      r1=buf[a];
+      r2=buf[a+1];
+      
+      upper=(isupper(r1))?1:0;
+      r1=tolower(r1);
+      r2=tolower(r2);
+    
+      r1=(r1=='u')?'t':r1;
+      r2=(r2=='u')?'t':r2;
+            
+      if (r1=='x' || r1=='n')v='x';
+      else if (r2=='n' || r2=='x')v=r1;
+      
+      else if (r1=='a' && r2=='a')v='d';
+      else if (r1=='a' && r2=='c')v='e';
+      else if (r1=='a' && r2=='g')v='f';
+      else if (r1=='a' && r2=='t')v='h';
+      
+      else if (r1=='c' && r2=='a')v='i';
+      else if (r1=='c' && r2=='c')v='k';
+      else if (r1=='c' && r2=='g')v='l';
+      else if (r1=='c' && r2=='t')v='m';
+      
+      else if (r1=='g' && r2=='a')v='n';
+      else if (r1=='g' && r2=='c')v='p';
+      else if (r1=='g' && r2=='g')v='q';
+      else if (r1=='g' && r2=='t')v='r';
+      
+      else if (r1=='t' && r2=='a')v='s';
+      else if (r1=='t' && r2=='c')v='v';
+      else if (r1=='t' && r2=='g')v='w';
+      else if (r1=='t' && r2=='t')v='y';
+      else
+	{
+	  v='j';
+	}
+      ebuf[a]=(upper)?toupper(v):v;
+    }
+  
+  for (b=0,a=0; a<l; a++)
+    {
+      if ( !is_gap(seq[a]))seq[a]=ebuf[b++];
+    }
+  vfree (ebuf);
+  vfree (buf);
+  return seq;
+}
+char *unextend_seq (char *seq)
+{
+  char *buf, *ebuf;
+  int l, lb, a, b, upper,v;
+  char r1, r2;
+  
+  l=strlen (seq);
+  buf =vcalloc ( l+1, sizeof (char));
+  ebuf=vcalloc ( l+1, sizeof (char));
+  sprintf (  buf, "%s", seq);
+  sprintf ( ebuf, "%s", seq);
+  
+  ungap ( buf);
+  ungap (ebuf);
+  lb=strlen (buf);
+  
+  for (a=1; a<lb-1; a++)
+    {
+      r1=buf[a];
+      upper=(isupper(r1))?1:0;
+      r1=tolower(r1);
+      r1=(r1=='u')?'t':r1;
+      
+      if (r1=='x')v='n';
+      else if (r1=='d' || r1=='e' || r1 == 'f' || r1 == 'h')v='a';
+      else if (r1=='i' || r1=='k' || r1 == 'l' || r1 == 'm')v='c';
+      else if (r1=='n' || r1=='p' || r1 == 'q' || r1 == 'r')v='g';
+      else if (r1=='s' || r1=='v' || r1 == 'w' || r1 == 'y')v='t';
+      else v='j';
+            
+      ebuf[a]=(upper)?toupper(v):v;
+    }
+  
+  for (b=0,a=0; a<l; a++)
+    {
+      if ( !is_gap(seq[a]))seq[a]=ebuf[b++];
+    }
+  vfree (ebuf);
+  vfree (buf);
+  return seq;
+}
+
+  
+
 Alignment * mutate_aln ( Alignment *A, char *r)
 {
   int a, b, c, mut,type, ratio;
@@ -11075,6 +11213,18 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   free_sequence ( D1->S, (D1->S)->nseq);
 	   D1->S=aln2seq ( D1->A);
 	 }
+       else if ( strm ( action, "extend"))
+	 {
+	   extend_seqaln( NULL,D1->A);
+	   free_sequence ( D1->S, (D1->S)->nseq);
+	   D1->S=aln2seq ( D1->A);
+	 }
+       else if ( strm ( action, "unextend"))
+	 {
+	   unextend_seqaln( NULL,D1->A);
+	   free_sequence ( D1->S, (D1->S)->nseq);
+	   D1->S=aln2seq ( D1->A);
+	 }
        else if ( strm ( action, "translate"))
 	 {
 	   D1->A=translate_dna_aln( D1->A,(n_actions==1)?0:atoi(action_list[1]));
@@ -12169,7 +12319,34 @@ int output_blast_mat (int **mat, char *fname)
   return output_mat(mat, fname, BLAST_AA_ALPHABET, 'a');
   
 }
-		      
+int output_header_mat (int **mat, char *fname, char *alp)
+{
+  int a, b,l;
+  FILE *fp;
+  int naa;
+
+  char raa[]="ABCDEFGHIKLMNPQRSTVWXYZ";
+  char *aa;
+  
+  naa=strlen (raa);
+  aa=vcalloc ( naa+2, sizeof (char));
+  sprintf ( aa, "%s",raa);
+  lower_string (aa);
+  
+  fp=vfopen (fname, "w");
+  fprintf ( fp, "int new_mat[]={\n");
+  l=strlen (aa);
+  for (a=0; a<naa; a++)
+    {
+      for (b=0; b<=a; b++)
+	{
+	  fprintf (fp, "%3d, ", mat[aa[a]-'a'][aa[b]-'a']);
+	}
+      fprintf (fp, "\n");
+    }
+  fprintf ( fp, "}");
+  vfclose (fp);
+}
 int output_mat (int **mat, char *fname, char *alp, int offset)
 {
   char *aa;
