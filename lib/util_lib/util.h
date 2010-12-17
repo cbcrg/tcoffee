@@ -660,6 +660,8 @@ FILE * display_input_filename ( FILE *io, char *type, char *format, char *name, 
 int filename_is_special ( char *fname);
 char *check_file_exists ( char *fname);
 int my_mkdir ( char *dir);
+int my_rmdir ( char *dir);
+
 int file_is_empty(char *fname);
 int file_exists (char *path,char *fname);
 int isexec (char *fname);
