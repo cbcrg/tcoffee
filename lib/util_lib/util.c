@@ -5202,7 +5202,7 @@ FILE* proxy_msg(FILE*fp)
   {
   fprintf ( fp, "\n\n");
   fprintf ( fp, "*************************************************************************************************\n");
-  fprintf ( fp, "*                        CONFIGURATION: Faukty Network OR Missing Proxy                                        \n");
+  fprintf ( fp, "*                        CONFIGURATION: Faulty Network OR Missing Proxy                                        \n");
   fprintf ( fp, "*                                                                                               \n");
   fprintf ( fp, "*                                                                                               \n");
   fprintf ( fp, "* It looks like you cannot access the network\n");    
