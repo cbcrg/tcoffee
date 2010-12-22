@@ -39,6 +39,7 @@ static char *get_accurate4DNA_defaults(char *buf, char *type);
 static char *get_accurate4RNA_defaults(char *buf, char *type);
 
 static char *get_procoffee_defaults(char *buf, char *type);
+static char *get_blastr_defaults(char *buf, char *type);
 static char *get_psicoffee_defaults(char *buf, char *type);
 static char *get_dna_defaults(char *buf, char *type);
 static char *get_cdna_defaults(char *buf, char *type);
@@ -630,7 +631,8 @@ if (t_coffee_defaults_flag)
 	 else if ( strm (special_mode, "expresso"))new_arg=get_expresso_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "repeats"))new_arg=get_repeat_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "psicoffee"))new_arg=get_psicoffee_defaults(NULL,lseq_type);
-	 else if ( strm (special_mode, "procoffee"))new_arg=get_procoffee_defaults(NULL,lseq_type);
+	  else if ( strm (special_mode, "procoffee"))new_arg=get_procoffee_defaults(NULL,lseq_type);
+	  else if ( strm (special_mode, "blastr"))new_arg=get_blastr_defaults(NULL,lseq_type);
 
 	 else if ( strm (special_mode, "accurate") || strm (special_mode, "accurate_slow") || strm (special_mode, "psicoffee_expresso"))new_arg=get_accurate_defaults(NULL, lseq_type);
 	 else if ( strm (special_mode, "accurate4DNA"))new_arg=get_accurate4DNA_defaults(NULL,lseq_type);
@@ -4979,7 +4981,7 @@ char *get_expresso_defaults(char *buf, char *type)
 
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
 
-     buf=strcat (buf,"-in Msap_pair -template_file EXPRESSO -profile_template_file EXPRESSO");
+     buf=strcat (buf,"-method mustang_pair  -template_file EXPRESSO -profile_template_file EXPRESSO");
 
      /*buf=strcat (buf,"-in ");*/
 
@@ -4991,6 +4993,16 @@ char *get_procoffee_defaults(char *buf, char *type)
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
 
      buf=strcat (buf,"-in Mpromo_pair -extend_seq   ");
+     /*buf=strcat (buf,"-in ");*/
+
+     return buf;
+   }
+char *get_blastr_defaults(char *buf, char *type)
+   {
+
+     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+
+     buf=strcat (buf,"-in Mblastr_pair -extend_seq   ");
      /*buf=strcat (buf,"-in ");*/
 
      return buf;

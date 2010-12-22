@@ -871,7 +871,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 			    //Hijack _P_ jobs without enough templates
 			    static TC_method *proba_pairM;
 			    
-			    add_information(stderr, "Method %s cannot be applied to [%s vs %s]. Use proba_pair instead", method->executable, (CL->S)->name[x], (CL->S)->name [y]);
+			    add_information(stderr, "Method %s cannot be applied to [%s vs %s]. Use proba_pair instead",(method->executable2)?method->executable2:method->executable, (CL->S)->name[x], (CL->S)->name [y]);
 			    if (!proba_pairM)
 			      {
 				proba_pairM=method_file2TC_method(method_name2method_file ("proba_pair"));
@@ -3213,7 +3213,7 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
 	  fp=vfopen (pid_tmpfile[j], "w");
 	  for (s1=sl[j][0]; s1<sl[j][1]; s1++)
 	    {
-	      if (j==0)output_completion (stderr,s1,sl[0][1],1, "Relax Library");
+	      if (j==0)output_completion (CL->local_stderr,s1,sl[0][1],1, "Relax Library");
 	      for (r1=1; r1<S->len[s1]; r1++)
 		{
 		  norm1=0;
@@ -3321,7 +3321,7 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 	
 	for (s1=0; s1< S->nseq; s1++)
 	  {
-	    output_completion (stderr,s1,S->nseq,1, "Relax Library");
+	    output_completion (CL->local_stderr,s1,S->nseq,1, "Relax Library");
 	    for ( r1=1; r1<=S->len[s1]; r1++)
 	      {
 		norm1=0;
@@ -4917,6 +4917,26 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
 
+
+	sprintf (list[n][0], "blastr_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE slow_pair\n");
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    no_name\n");
+	fprintf ( fp, "OUT_FLAG   no_name\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "EXTEND_SEQ 1\n");
+	fprintf ( fp, "MATRIX     blosumR\n");
+	fprintf ( fp, "GOP        -20\n");
+	fprintf ( fp, "GEP        0\n");
+	fprintf ( fp, "WEIGHT     extend_sim\n");
+	
+	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+	vfclose (fp);}
+
 	sprintf (list[n][0], "promo_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
@@ -4928,7 +4948,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "EXTEND_SEQ 1\n");
 	fprintf ( fp, "MATRIX     promoter_tf1\n");
-	fprintf ( fp, "GOP        -30\n");
+	fprintf ( fp, "GOP        -40\n");
 	fprintf ( fp, "GEP        0\n");
 	fprintf ( fp, "WEIGHT     extend_sim\n");
 	

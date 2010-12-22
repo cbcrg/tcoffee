@@ -310,6 +310,14 @@ PG blastcl3 source		empty
 PG blastcl3 update_action	never
 PG blastcl3 mode		psicoffee,expresso,3dcoffee
 
+PG blastall 4_TCOFFEE	 blastall
+PG blastall type		 protein_homology_predictor
+PG blastall ADDRESS	 ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
+PG blastall language	 C
+PG blastall language2	 C
+PG blastall source	 empty
+PG blastall update_action never
+PG blastall mode		 psicoffee,expresso,3dcoffee
 
 PG legacy_blast.pl 4_TCOFFEE	 NCBIBLAST
 PG legacy_blast.pl type		 protein_homology_predictor

@@ -31,7 +31,7 @@ endif
 
 WEB_BASE=$(HOME2)/projects/server/html_server/public_html/
 WEB_UPDATE=$(HOME2)/projects/server/html_server/update/
-WEB_DISTRIBUTION=$(WEB_BASE)/Packages/Stable/Latest
+WEB_DISTRIBUTION=$(WEB_BASE)/Packages/
 WEB_BINARIES=$(WEB_DISTRIBUTION)/Binaries/$(OSNAME)
 WEB_DOC=$(WEB_BASE)/Documentation/
 WEB_DOCUMENTATION=$(WEB_BASE)/Documentation/$(EXECUTABLE)/

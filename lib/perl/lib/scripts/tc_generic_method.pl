@@ -381,7 +381,10 @@ sub blast2pdb_template
 	    }
 	  elsif (!&pdb_has_right_type ($pdbid,$type))
 	    {
-	      print stdout "\t\t**$pdbid [PDB with Invalid Type ($type)]\n";
+	      my $ptype=&pdb2type ($pdbid);
+	      my $etype=&type2etype($type);
+	      
+	      print stdout "\t\t**$pdbid [$ptype cannot be used (expected: $etype)]\n";
 	      $c++;
 	    }
 	  else
@@ -404,13 +407,34 @@ sub blast2pdb_template
   close (R);
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile);
 }
+sub type2etype
+  {
+    my $type=shift;
+    my $etype;
+    
+    if ( $type=~/n/){$etype.="NMR ";}
+    if ( $type=~/d/){$etype.="diffraction ";}
+    if ( $type=~/m/){$etype.="model ";}
+    return $etype;
+  }
+sub pdb2type
+  {
+     my $pdb=shift;
+     my $f=vtmpnam();
+     
+     my $value= &safe_system ("t_coffee -other_pg extract_from_pdb -model_type $pdb > $f");
+     my $r=&file2string ($f);
+     chomp($r);
+     return $r;
+   }
 sub pdb_has_right_type
   {
     my $pdb=shift;
     my $type=shift;
+    
     my $f=vtmpnam();
     
-    $value= &safe_system ("t_coffee -other_pg extract_from_pdb -model_type $pdb > $f");
+    my $value= &safe_system ("t_coffee -other_pg extract_from_pdb -model_type $pdb > $f");
     my $r=&file2string ($f);
     chomp($r);
 
@@ -857,8 +881,8 @@ sub pg_is_installed
       {
 	$r=`which $p 2>/dev/null`;
 	if ($r eq ""){$r=0;}
-	else {$r1;}
-
+	else {$r=1;}
+	
 	if ($r==0 && is_blast_package ($p)){return pg_is_installed ("legacy_blast.pl");}
 	else {return $r;}
       }
