@@ -4981,7 +4981,7 @@ char *get_expresso_defaults(char *buf, char *type)
 
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
 
-     buf=strcat (buf,"-method mustang_pair  -template_file EXPRESSO -profile_template_file EXPRESSO");
+     buf=strcat (buf,"-method sap_pair  -template_file EXPRESSO -profile_template_file EXPRESSO");
 
      /*buf=strcat (buf,"-in ");*/
 

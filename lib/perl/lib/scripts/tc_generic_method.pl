@@ -2191,10 +2191,15 @@ sub run_blast
 	      }
 	    else
 	      {
-	
-		add_warning ($$,$$,"Blast for $name failed (Run: $run)");
+		my $out;
 		
-		return run_blast ($name, $method, $db,$infile, $outfile, $run+1);
+		if ($SERVER eq "NCBI") {$SERVER="EBI"; }
+		elsif ($SERVER eq "EBI"){$SERVER="NCBI";}
+		add_warning ($$,$$,"Blast for $name failed (Run: $run out of $BLAST_MAX_NRUNS. Use $SERVER)");
+		$out=&run_blast ($name, $method, $db,$infile, $outfile, $run+1);
+		if ($SERVER eq "NCBI") {$SERVER="EBI"; }
+		elsif ($SERVER eq "EBI"){$SERVER="NCBI";}
+		return $out;
 	      }
 	  }
 	
@@ -2918,8 +2923,12 @@ sub safe_system
     {
       if ($ntry && $ctry <$ntry)
 	{
-	  add_warning ($$,$$,"$com failed [retry: $ctry]");
+
+	  add_warning ($$,$$,"$com failed [retry: $ctry out of $ntry]");
 	  lock4tc ($pid, "LRELEASE", "LERROR", "");
+	  #if ($com=~/EBI/){$com=~s/EBI/NCBI/;}
+	  #elsif ($com=~/NCBI/){$com=~s/NCBI/EBI/;}
+	  
 	  return safe_system ($com, $ntry, ++$ctry);
 	}
       elsif ($ntry == -1)

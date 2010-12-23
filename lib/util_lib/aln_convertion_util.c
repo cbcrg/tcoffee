@@ -5716,15 +5716,16 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
      
       if (sim<=minsim)
 	{
-	  add_warning( stderr, "_P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]",P->template_name,name,sim,minsim);          
-	  add_information( stderr, "If you want to include %s in anycase, please use the -pdb_minsim=%d flag",name,sim);
+	  add_information( stderr, "_P_  Template %s Could Not be Used for Sequence %s: Similarity too low [%d, Min=%d]",P->template_name,name,sim,minsim);          
+	  add_information( stderr, "If you want to include %s in anycase,add -pdb_min_sim=%d to the command line",name,sim);
 	  print_aln (A);
 	  free_X_template (P);
 	  P=NULL;
 	}
       else if ( cov<=mincov)
 	{
-	  add_information( stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]\nWARNING: If you want to include this sequence in anycase, please use the -pdb_min_cov=%d flag\n", P->template_name,name, cov, mincov,cov);
+	  add_information(stderr, "_P_  Template |%s| Could Not be Used for Sequence |%s|: Coverage too low [%d, Min=%d]",P->template_name,name, cov, mincov);
+	  add_information( stderr, "If you want to include this sequence in anycase add -pdb_min_cov=%d to the command line", cov);
 	  print_aln (A);
 	  free_X_template (P);P=NULL;
 	}
