@@ -373,7 +373,13 @@ sub blast2pdb_template
 	{
 	  $pdbid=&id2pdbid($p{$c}{identifyer});
 	  if ( length ($pdbid)>5){$pdbid=id2pdbid($p{$c}{definition});}
+
+	  if ( length ($pdbid)>5)
+	    {
+	      myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::Could Not Parse PDBID ($p{$c}{identifyer},$p{$c}{definition})"));
+	    }
 	  
+
 	  if (!&pdb_is_released($pdbid))
 	    {
 	      print stdout "\t\t**$pdbid [PDB NOT RELEASED or WITHDRAWN]\n";
@@ -1332,13 +1338,13 @@ sub id2pdbid
     
     $in=~/(\S+)/;
     $id=$in;
-    
+    $id=~s/PDB/pdb/g;
     if ($id =~/pdb/)
       {
 	$id=~/pdb(.*)/;
 	$id=$1;
       }
-    $id=~s/[|��_]//g;
+    $id=~s/[:|��_]//g;
     return $id;
   }
 sub set_blast_type 
@@ -1367,7 +1373,7 @@ sub file2blast_flavor
       {
 	my $file=shift;
 	if (&file_contains ($file,"EBIApplicationResult",100)){return "EBI";}
-	elsif (&file_contains ($file,"EBIApplicationResult",100)){return "NCBI";}
+	elsif (&file_contains ($file,"NCBI_BlastOutput",100)){return "NCBI";}
 	else {return "UNKNOWN";}
       }
 sub blast_xml2profile 
@@ -2084,28 +2090,22 @@ sub run_blast
 	    if ($cl_method =~/wu/)
 	      {
 		$cl_method=~s/wu//;
-		if ( $cl_method eq "psiblast")
-		  {
-		    $cl_method="blastp";
-		  }
+		if ( $cl_method eq "psiblast"){$cl_method="blastp";}
 		
-		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null 2>/dev/null";
-		&safe_system ( $command,5);
-		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
-		elsif (-e "$outfile.xml.xml"){`mv $outfile.xml.xml $outfile`;}
+		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 7 --stype protein $infile>/dev/null 2>/dev/null";
+		
 	      }
 	    else
 	      {
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp -j5";}
-		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null 2>/dev/null";
-		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --outformat xml --stype protein $infile>/dev/null";
-		&safe_system ( $command,5);
-		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
-		elsif (-e "$outfile.xml.xml"){`mv $outfile.xml.xml $outfile`;} 
-		
+		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 7 --stype protein $infile>/dev/null 2>/dev/null";
 	      }
-	    
-	 }
+	    &safe_system ( $command,5);
+	    if (-e "$outfile.out.xml") {`mv $outfile.out.xml $outfile`;}
+	    elsif (-e "$outfile.xml.xml"){`mv $outfile.xml.xml $outfile`;}
+	    elsif (-e "$outfile.out..xml") {`mv $outfile.out..xml $outfile`;}
+	    elsif (-e "$outfile.xml..xml"){`mv $outfile.xml..xml $outfile`;}
+	  }
 	elsif ($SERVER eq "NCBI")
 	  {
 	    &check_configuration ("blastcl3","INTERNET");
@@ -2192,7 +2192,6 @@ sub run_blast
 	    else
 	      {
 		my $out;
-		
 		if ($SERVER eq "NCBI") {$SERVER="EBI"; }
 		elsif ($SERVER eq "EBI"){$SERVER="NCBI";}
 		add_warning ($$,$$,"Blast for $name failed (Run: $run out of $BLAST_MAX_NRUNS. Use $SERVER)");
@@ -2204,6 +2203,8 @@ sub run_blast
 	  }
 	
 	&cache_file("SET",$infile,$name,$method,$db,$outfile,$SERVER);
+	#system ("cp $outfile ~/Dropbox/tmp/cedric.out");
+	#die;
 	return $outfile;
       }
   }

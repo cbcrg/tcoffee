@@ -1491,12 +1491,32 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	      }
 	    else
 	      {
+		char local1[100];
+		char local2[100];
+		char cdir[1000];
+		
 		tmp_name=tmp_name1;
 
 		tmp_pdb1=normalize_pdb_file(seq2P_template_file(CL->S,s1),(CL->S)->seq[s1], vtmpnam (NULL));
 		tmp_pdb2=normalize_pdb_file(seq2P_template_file(CL->S,s2),(CL->S)->seq[s2], vtmpnam (NULL));
 		sprintf ( full_name, "%s%s", get_cache_dir (), tmp_name);
-		printf_system ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,tmp_pdb1,tmp_pdb2, full_name);
+		
+		//pb: sap crashes when file names are too long
+		//solution: create shorter names
+		//To ease server, create files in tmp dir
+		
+		getcwd (cdir, sizeof(char)*1000);
+		chdir (get_cache_dir());
+		
+		sprintf (local1, "%d_1.%d.sap_tmp", getpid(), rand()%10000);
+		sprintf (local2, "%d_2.%d.sap_tmp", getpid(), rand()%10000);
+		printf_system ("cp %s %s", tmp_pdb1, local1);
+		printf_system ("cp %s %s", tmp_pdb2, local2);
+		printf_system ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,local1,local2, full_name);
+		printf_system ("rm %s", local1);
+		printf_system ("rm %s", local2);
+		chdir (cdir);
+		
 		if ( !check_file_exists (full_name) || !is_sap_file(full_name))
 		  {
 		    add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
