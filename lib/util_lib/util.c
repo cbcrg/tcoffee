@@ -6922,10 +6922,10 @@ FILE * display_output_filename ( FILE *io, char *type, char *format, char *name,
       if (check_file_exists(name)==NULL)
 	{
 	  if ( !strm (name, "no") && !strm (name, "NO") && !strm (name, "STDOUT") && !strm(name, "stdout"))
-	       add_warning( io, "\n\t#### File Type= %10s Format= %10s Name= %s | NOT PRODUCED [WARNING:%s:%s]\n",type, format, name, PROGRAM, VERSION );
+	       add_warning( io, "\n\t#### File Type= %-15s Format= %-15s Name= %s | NOT PRODUCED [WARNING:%s:%s]\n",type, format, name, PROGRAM, VERSION );
 	  return io;
 	}
-      fprintf ( io, "\n\t#### File Type= %10s Format= %10s Name= %s",type, format, name );
+      fprintf ( io, "\n\t#### File Type= %-15s Format= %-15s Name= %s",type, format, name );
       io=display_output_filename ( io,type,format,name, DUMP);
     }
   else if (check_output==DUMP)

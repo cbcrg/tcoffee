@@ -2192,7 +2192,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 float nrapdb, rapdb;
 	 Alignment *BA=NULL;
 	 NT_node *T0,*T1,*T2,*PT, *POS;
-	 NT_node BT0, BT10,BT50, BT100,RBT;
+	 NT_node BT0, BT10,BT50, BT100=NULL,RBT;
 	 char **pair_pos_list;
 	 
 	 int ntree=0, ntree2;
@@ -2379,14 +2379,22 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	   {
 	     fprintf ( stderr, "\nPhylip is not installed: the program could not produce the consense output. This is not mandatory but useful");
 	   }
+
+	 //consensus tree
+	
+	 if ((BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0)))
+	       {
+		 vfclose (print_tree (BT100,"newick", vfopen (struc_tree0, "w")));
+		 display_output_filename( stderr,"Tree","newick",struc_tree0, CHECK);
+	       }
 	 if (print_subtrees)
 	   {
+	    
 	     if ( (BT0=trmsdmat2tree (tdm, tcount, A)))
 	       {
 		 vfclose (print_tree (BT0,"newick", vfopen (struc_tree0, "w")));
 		 display_output_filename( stderr,"Tree","newick",struc_tree0, CHECK);
 	       }
-	     
 	     if ((BT10=treelist2filtered_bootstrap (T1, NULL,score, 0.1)))
 	       {
 		 vfclose (print_tree (BT10,"newick", vfopen (struc_tree10, "w")));
@@ -2398,16 +2406,10 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 		 vfclose (print_tree (BT50,"newick", vfopen (struc_tree50, "w")));
 		 display_output_filename( stderr,"Tree","newick",struc_tree50, CHECK);
 	       }
-	     
-	     if ((BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0)))
-	       {
-		 vfclose (print_tree (BT100,"newick", vfopen (struc_tree100, "w")));
-		 display_output_filename( stderr,"Tree","newick",struc_tree100, CHECK);
-	       }
 	   }
 
 	 
-	 if (BT100)BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0);
+	 if (!BT100)BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0);
 	 
 	 RBT=BT100;
 	 if (RBT)
