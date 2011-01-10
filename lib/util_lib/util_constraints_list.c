@@ -871,7 +871,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 			    //Hijack _P_ jobs without enough templates
 			    static TC_method *proba_pairM;
 			    
-			    add_information(stderr, "Method %s cannot be applied to [%s vs %s]. Use proba_pair instead",(method->executable2)?method->executable2:method->executable, (CL->S)->name[x], (CL->S)->name [y]);
+			    add_information(stderr, "Method %s cannot be applied to [%s vs %s], proba_pair will be used instead",(method->executable2)?method->executable2:method->executable, (CL->S)->name[x], (CL->S)->name [y]);
 			    if (!proba_pairM)
 			      {
 				proba_pairM=method_file2TC_method(method_name2method_file ("proba_pair"));

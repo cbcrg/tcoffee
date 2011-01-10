@@ -2167,7 +2167,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 float ****distances;
 	 float **dm,**tdm;
 	 int **count,**tcount;
-	
+	 int print_subtrees=0;
 	 float min, max;
 	 
 	      /*Distances[Nseq][len_aln][4]
@@ -2227,16 +2227,16 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 for (a=0; a<A->nseq; a++)lc[a][0]=a;
 	 
 	 declare_name(tot_pos_list);
-	 sprintf ( tot_pos_list, "%s.tot_pos_list", results);
+	 sprintf ( tot_pos_list, "%s.struc_tree.list", results);
 
 	 declare_name(consense_file);
-	 sprintf (consense_file, "%s.consense_output", results);
+	 sprintf (consense_file, "%s.struc_tree.consense_output", results);
 
 	 declare_name(pos_list);
 	 sprintf ( pos_list, "%s.pos_list", results);
 
 	 declare_name(struc_tree0);
-	 sprintf ( struc_tree0, "%s.struc_tree_full",results);
+	 sprintf ( struc_tree0, "%s.struc_tree.consensus",results);
 
 	 declare_name(struc_tree10);
 	 sprintf ( struc_tree10, "%s.struc_tree10",results);
@@ -2369,7 +2369,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 if (!ntree){fprintf ( stderr, "\nERROR: No suitable pair of column supporting a tree [FATAL]\n"); exit (EXIT_SUCCESS);}
 	 
 	 score=treelist2avg_treecmp (T1, NULL);
-	 display_output_filename( stdout,"TreeList","newick",tot_pos_list, CHECK);
+	 display_output_filename( stderr,"TreeList","newick",tot_pos_list, CHECK);
 	 
 	 if (treelist_file2consense (tot_pos_list, NULL, consense_file))
 	   {
@@ -2379,31 +2379,35 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	   {
 	     fprintf ( stderr, "\nPhylip is not installed: the program could not produce the consense output. This is not mandatory but useful");
 	   }
-		  
-	 if ( (BT0=trmsdmat2tree (tdm, tcount, A)))
+	 if (print_subtrees)
 	   {
-	     vfclose (print_tree (BT0,"newick", vfopen (struc_tree0, "w")));
-	     display_output_filename( stderr,"Tree","newick",struc_tree0, CHECK);
+	     if ( (BT0=trmsdmat2tree (tdm, tcount, A)))
+	       {
+		 vfclose (print_tree (BT0,"newick", vfopen (struc_tree0, "w")));
+		 display_output_filename( stderr,"Tree","newick",struc_tree0, CHECK);
+	       }
+	     
+	     if ((BT10=treelist2filtered_bootstrap (T1, NULL,score, 0.1)))
+	       {
+		 vfclose (print_tree (BT10,"newick", vfopen (struc_tree10, "w")));
+		 display_output_filename( stderr,"Tree","newick",struc_tree10, CHECK);
+	       }
+	     
+	     if ((BT50=treelist2filtered_bootstrap (T1, NULL, score,0.5)))
+	       {
+		 vfclose (print_tree (BT50,"newick", vfopen (struc_tree50, "w")));
+		 display_output_filename( stderr,"Tree","newick",struc_tree50, CHECK);
+	       }
+	     
+	     if ((BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0)))
+	       {
+		 vfclose (print_tree (BT100,"newick", vfopen (struc_tree100, "w")));
+		 display_output_filename( stderr,"Tree","newick",struc_tree100, CHECK);
+	       }
 	   }
 
-	 if ((BT10=treelist2filtered_bootstrap (T1, NULL,score, 0.1)))
-	   {
-	     vfclose (print_tree (BT10,"newick", vfopen (struc_tree10, "w")));
-	     display_output_filename( stderr,"Tree","newick",struc_tree10, CHECK);
-	   }
 	 
-	 if ((BT50=treelist2filtered_bootstrap (T1, NULL, score,0.5)))
-	   {
-	     vfclose (print_tree (BT50,"newick", vfopen (struc_tree50, "w")));
-	     display_output_filename( stderr,"Tree","newick",struc_tree50, CHECK);
-	   }
-	 
-	 if ((BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0)))
-	   {
-	     vfclose (print_tree (BT100,"newick", vfopen (struc_tree100, "w")));
-	     display_output_filename( stderr,"Tree","newick",struc_tree100, CHECK);
-	   }
-	 
+	 if (BT100)BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0);
 	 
 	 RBT=BT100;
 	 if (RBT)
@@ -2443,6 +2447,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	     free_aln (BA);
 	     fprintf ( stderr, "\n");
 	   }
+	 fprintf ( stderr, "\n");
 	 free_int (pos, -1);
 	 exit (EXIT_SUCCESS);
 	 return NULL;
