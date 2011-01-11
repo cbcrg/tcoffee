@@ -1,7 +1,16 @@
 PROGRAM="T-COFFEE"
 EXECUTABLE=t_coffee
 AUTHOR= "Cedric Notredame "
+
+#
+# make it possibile to define HOME2 externally using environment 
+# variable named 'SANDBOX', otherwise fallback on the defult mechanism 
+# 
+ifndef HOME2
 HOME2=$(HOME)/Dropbox
+endif
+
+
 HTML=private_html
 HTML_DOC=public_html/Documentation/$(EXECUTABLE)
 HTML_PUBLIC=$(HOME2)/public_html/
@@ -63,14 +72,12 @@ all: $(EXECUTABLE)
 #							#
 #########################################################
 distribution: 
-	rm *.c
-	rm *.h	
+	-rm *.c
+	-rm *.h
 	make -i VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
-	make -i VERSION=$(VERSION) CC=cc html
 	make -i VERSION=$(VERSION) CC=cc mcoffee		
 	make -i VERSION=$(VERSION) CC=cc packing
-
 
 code:
 	make CC=cc c_code
@@ -87,10 +94,11 @@ doc:
 	cp $(PWD)/../../$(EXECUTABLE)/doc/seq_reformat.doc.txt $(DISTRIB_DOC)
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE).pdf $(DISTRIB_DOC)
 mcoffee:
-	mkdir  $(DISTRIB_DIR)/mcoffee
-	cp $(HOME)/.t_coffee/mcoffee/* $(DISTRIB_DIR)/mcoffee
+	-rm -rf $(DISTRIB_DIR)/mcoffee
+	mkdir -p $(DISTRIB_DIR)/mcoffee
+	cp $(LIBRARY)/mcoffee/* $(DISTRIB_DIR)/mcoffee
 examples:	
-	mkdir $(DISTRIB_DIR)/example/
+	mkdir -p $(DISTRIB_DIR)/example/
 	cp $(PWD)/../../$(EXECUTABLE)/doc_test/data/*  $(DISTRIB_DIR)/example/
 html:
 	mkdir $(DISTRIB_DIR)/html/
@@ -98,8 +106,8 @@ html:
 	cp $(PWD)/../../$(EXECUTABLE)/html/$(EXECUTABLE)4html.cgi $(DISTRIB_DIR)/html/
 
 test:
-	mkdir $(DISTRIB_DIR)/test
-	cp $(HOME2)/db/proteins/Bali/testcases/1aboA_ref1/1aboA_ref1.pep $(DISTRIB_DIR)/test/test.pep
+	mkdir -p $(DISTRIB_DIR)/test
+	cp $(PWD)/../test/test.pep $(DISTRIB_DIR)/test/test.pep
 	$(EXECUTABLE)  $(DISTRIB_DIR)/test/test.pep -in=Mfast_pair -outfile=$(DISTRIB_DIR)/test/reference_test.aln -outorder=input
 	echo '#!/usr/bin/env perl'    > $(DISTRIB_DIR)/bin/test.pl
 	echo 'chdir "./test";' >> $(DISTRIB_DIR)/bin/test.pl
@@ -111,14 +119,36 @@ test:
 	#echo "./bin/test.pl" >>$(DISTRIB_DIR)/install 
 	#echo "./bin/t_coffee -update" >>$(DISTRIB_DIR)/install 
 doc_test:
-	check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.doc
-	check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.doc
+	$(PWD)/../../lib/perl/lib/debug/check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.doc -data $(PWD)/../doc_test/data/
+	$(PWD)/../../lib/perl/lib/debug/check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.doc -data $(PWD)/../doc_test/data/
+
 debug:  t_coffee
 	rm -r debug
 	mkdir debug
 	cp *.c debug
 	cp *.h debug
 	mv debug $(HOME2)/debug
+
+env: 
+	@echo 'Home             :' $(HOME) 
+	@echo 'Pwd              :' $(PWD)
+	@echo 'Version          :' $(VERSION) 
+	@echo 'OSNAME           :' $(OSNAME) 
+	@echo 'DISTRIB_DIR      :' $(DISTRIB_DIR)
+	@echo 'DISTRIB_DOC      :' $(DISTRIB_DOC)
+	@echo 'WEB_BASE         :' $(WEB_BASE)
+	@echo 'WEB_DISTRIBUTION :' $(WEB_DISTRIBUTION)
+	@echo 'WEB_BINARIES     :' $(WEB_BINARIES)
+	@echo 'WEB_RESOURCES    :' $(WEB_RESOURCES)
+	@echo 'WEB_DOCUMENTATION:' $(WEB_DOCUMENTATION)
+	@echo 'WEB_HOMEPAGE     :' $(WEB_HOMEPAGE)
+	@echo 'EXECUTABLE       :' $(EXECUTABLE)
+	@echo 'USER_BIN         :' $(USER_BIN)
+	@echo 'DOCUMENTATION    :' $(DOCUMENTATION) 
+	@echo 'LIBRARY          :' $(LIBRARY)
+	@echo 'DISTRIBUTIONS    :' $(DISTRIBUTIONS)
+
+
 #########################################################
 #							#
 #		GENERIC  LIBRARY         		#

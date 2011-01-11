@@ -6,11 +6,28 @@
 #							#
 #							#
 #########################################################
+
+#
+# make the 'date' variable configurable from the caller
+# otherwise fallback on the default behaviour 
+# 
+ifndef DATE
 DATE=`date`
+endif
+
+#
+# make version number condition so that it can specified 
+# using env variable otherwise it fallback on legacy mechanism
+#
+ifndef VERSION
 VERSION=`$(PERL4MAKEFILE_LIB)/read_program_version.pl version_number.version`
+endif
 
 LIBRARY=$(PWD)/../../lib/
+
+ifndef HOME2
 HOME2=$(HOME)/Dropbox
+endif
 
 WEB_BASE=$(HOME2)/projects/server/html_server/public_html/
 WEB_UPDATE=$(HOME2)/projects/server/html_server/update/
@@ -46,37 +63,34 @@ TC_MAKEFILE2=$(DISTRIB_DIR)/$(EXECUTABLE)_source/makefile
 INSTITUTE="Centro de Regulacio Genomica"
 EMAIL="cedric.notredame@europe.com"
 DISTRIBUTION_ADDRESS="www.tcoffee.org/Packages/"
-pg_makefile:
-	make -i CC=cc general_makefile
-
 
 general_distribution: 
-	rm $(CODE_LIST);
-	#make -i library_distribution
-	make empty
-	mkdir $(DISTRIB_DIR)
-	mkdir $(DISTRIB_DIR)/bin
-	mkdir $(DISTRIB_DOC)
-	mkdir $(DISTRIB_DIR)/$(EXECUTABLE)_source
-	mkdir $(DISTRIB_DIR)/reference_test
+	-rm $(CODE_LIST);
+	#make empty
+	mkdir -p $(DISTRIB_DIR)
+	mkdir -p $(DISTRIB_DIR)/bin
+	mkdir -p $(DISTRIB_DOC)
+	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
+	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
-	mkdir $(WEB_BASE)
-	mkdir $(WEB_DISTRIBUTION)
+	mkdir -p $(WEB_BASE)
+	mkdir -p $(WEB_DISTRIBUTION)
 	mkdir -p $(WEB_BINARIES)
-	mkdir $(WEB_BASE)/Documentation	
-	mkdir $(WEB_BASE)/Documentation/$(EXECUTABLE)
-	mkdir $(WEB_BASE)/Projects_home_page/
-	mkdir $(WEB_RESOURCES)
+	mkdir -p $(WEB_BASE)/Documentation	
+	mkdir -p $(WEB_BASE)/Documentation/$(EXECUTABLE)
+	mkdir -p $(WEB_BASE)/Projects_home_page/
+	mkdir -p $(WEB_RESOURCES)
 	make -i VERSION=$(VERSION) CC=cc code
-	make -i VERSION=$(VERSION) CC=cc pg_makefile
+	make -i VERSION=$(VERSION) CC=cc general_makefile
 	make -i VERSION=$(VERSION) CC=cc test
 	make -i VERSION=$(VERSION) CC=cc doc
 	make -i VERSION=$(VERSION) CC=cc license
-	make -i VERSION=$(VERSION) update_webpage
+	#make -i VERSION=$(VERSION) update_webpage
 library_distribution:
 	cd $(LIBRARY)/..
 	tar -cvf lib.tar $(LIBRARY)
 	gzip lib.tar 
+	mkdir $(DISTRIBUTIONS)
 	mv lib.tar.gz $(DISTRIBUTIONS)/lib_$(VERSION).tar.gz 
 update_webpage:
 	cp $(DISTRIB_DIR)/doc/* $(WEB_DOCUMENTATION)	
@@ -103,11 +117,11 @@ general_makefile:
 
 .PHONY: clean
 clean:
-	rm *.o_$(OSNAME)
+	-rm *.o_$(OSNAME)
 	echo x > core
 	rm core
 empty:
-	rm *.o_$(OSNAME) 
+	-rm *.o_$(OSNAME)  
 	tar -cf old_c.tar *.c *.h
 	rm *.c 
 	rm *.h
@@ -117,10 +131,10 @@ empty:
 distribute: all
 	echo x > core
 	rm core
-	rm *.o_$(OSNAME)
+	-rm *.o_$(OSNAME)
 c_code:
 
-	make clean
+	#make clean
 	#make CC="gcc-linux -O3" $(EXECUTABLE)
 	#cp $(EXECUTABLE) $(LINUX_WEB_BINARIES)
 	#mv $(EXECUTABLE) $(LINUX_WEB_BINARIES)/$(EXECUTABLE)_$(VERSION)
@@ -152,6 +166,10 @@ license:
 #	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt > install
 
 packing:
+	mkdir -p $(UNTARED_DISTRIBUTIONS)
+	mkdir -p $(DISTRIBUTIONS)
+	mkdir -p $(LATEST_DISTRIBUTIONS)
+	mkdir -p $(WEB_DISTRIBUTION)
 	mv $(DISTRIB_DIR) .
 	tar -cvf $(DISTRIBUTION_FILE).tar $(DISTRIBUTION_FILE)
 	gzip $(DISTRIBUTION_FILE).tar
@@ -161,12 +179,12 @@ packing:
 	cp $(DISTRIBUTION_FILE).tar.gz $(WEB_DISTRIBUTION)/$(LATEST_DISTRIBUTION_FILE).tar.gz
 	cp $(DISTRIBUTION_FILE).tar.gz $(WEB_DISTRIBUTION)/
 	rm $(DISTRIBUTION_FILE).tar.gz
-	$(PERL4MAKEFILE_LIB)/change_program_version.pl version_number.version $(VERSION)
-	rm -r web_update
-	make -i web_update
+	#$(PERL4MAKEFILE_LIB)/change_program_version.pl version_number.version $(VERSION)
+	#make -i web_update
 
 web_update:
 	echo "Run Web Update: if standalone: VERSION=Version_X.xx"
+	rm -r web_update
 	rm -r $(LOCAL_VERSION)
 	mkdir $(LOCAL_BASE)
 	mkdir $(LOCAL_DISTRIBUTION);
