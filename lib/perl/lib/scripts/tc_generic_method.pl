@@ -1339,11 +1339,18 @@ sub id2pdbid
     $in=~/(\S+)/;
     $id=$in;
     $id=~s/PDB/pdb/g;
-    if ($id =~/pdb/)
+    
+    if ( $id =~/^gnl/)
+      {
+	$id=~/^gnl.*\,(.*)\s.*/;
+	$id=$1;
+      }
+    elsif ($id =~/pdb/)
       {
 	$id=~/pdb(.*)/;
 	$id=$1;
       }
+
     $id=~s/[:|��_]//g;
     return $id;
   }
