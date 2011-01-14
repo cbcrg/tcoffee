@@ -21,6 +21,7 @@ our $CL=$PROGRAM;
 
 our $CLEAN_EXIT_STARTED;
 our $debug_lock=$ENV{"DEBUG_LOCK"};
+our $debug_cmd_exec=$ENV{"DEBUG_CMD_EXEC"};
 our $LOCKDIR=$ENV{"LOCKDIR_4_TCOFFEE"};
 if (!$LOCKDIR){$LOCKDIR=getcwd();}
 our $ERRORDIR=$ENV{"ERRORDIR_4_TCOFFEE"};
@@ -2906,6 +2907,7 @@ sub safe_system
   if ($pid == 0)
     {
       set_lock($$, " -SHELL- $com (tcg)");
+      if( $debug_cmd_exec ) { printf "exec: %s\n", $com; } 
       exec ($com);
     }
   else
