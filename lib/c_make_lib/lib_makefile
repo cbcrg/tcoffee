@@ -762,7 +762,7 @@ tree_util.c:\
 #########################################################################
 ########################      	UTIL_LIB    #############################
 #########################################################################
-UT_LIB	_HEADER= util_lib_header.h
+UT_LIB_HEADER= util_lib_header.h
 
 UT_LIB_OBJECTS=	util_constraints_list.o_$(OSNAME)\
 		util_job_handling.o_$(OSNAME)\
