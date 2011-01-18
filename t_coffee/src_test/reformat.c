@@ -9800,7 +9800,7 @@ char *extend_seq (char *seq)
   ungap (ebuf);
   lb=strlen (buf);
   
-  for (a=1; a<lb-1; a++)
+  for (a=0; a<lb-1; a++)
     {
       r1=buf[a];
       r2=buf[a+1];
@@ -9865,7 +9865,7 @@ char *unextend_seq (char *seq)
   ungap (ebuf);
   lb=strlen (buf);
   
-  for (a=1; a<lb-1; a++)
+  for (a=0; a<lb-1; a++)
     {
       r1=buf[a];
       upper=(isupper(r1))?1:0;

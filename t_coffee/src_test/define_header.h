@@ -663,6 +663,14 @@
 #define NCBIWEBBLAST_source "empty"
 #define NCBIWEBBLAST_update_action "never"
 #define NCBIWEBBLAST_mode "psicoffee,expresso,3dcoffee"
+#define blastall_4_TCOFFEE "blastall"
+#define blastall_type "protein_homology_predictor"
+#define blastall_ADDRESS "ftp://ftp.ncbi.nih.gov/blast/executables/LATEST"
+#define blastall_language "C"
+#define blastall_language2 "C"
+#define blastall_source "empty"
+#define blastall_update_action "never"
+#define blastall_mode "psicoffee,expresso,3dcoffee"
 #define NCBIBLAST_4_TCOFFEE "legacy_blast.pl"
 #define NCBIBLAST_type "protein_homology_predictor"
 #define NCBIBLAST_ADDRESS "ftp://ftp.ncbi.nih.gov/blast/executables/LATEST"
@@ -741,8 +749,8 @@ The format is as follow:
 -------------------------------------------------------------------------------------------
 the RGB values are used for the post-script generation, the html code is used in html documents.
 */
-#define DATE "Fri Nov 26 10:26:38 CET 2010"
+#define DATE "Tue Jan 11 23:44:37 CET 2011"
 #define PROGRAM "T-COFFEE"
-#define VERSION "Version_8.97"
+#define VERSION "Version_8.98"
 #define AUTHOR "Cedric Notredame "
 #define DISTRIBUTION_ADDRESS "www.tcoffee.org/Packages/"

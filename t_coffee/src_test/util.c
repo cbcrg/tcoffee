@@ -4399,27 +4399,27 @@ char *get_tmp_4_tcoffee ()
   if ( tmp_4_tcoffee[0])return tmp_4_tcoffee;
   else
     {
-      
+      char *v=getenv("TMP_4_TCOFFEE");
+      char buf[1000];
+      char host[1024];
+      gethostname(host, 1023);
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if ( getenv ("TMP_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP_4_TCOFFEE"));
-      else
-	{
-
-	  
-	  if ( strm (get_os(), "windows"))
-	    {
-	      sprintf ( tmp_4_tcoffee, ".TCtmp");
-	    }
-	  else if (isdir("/var/tmp"))
-	    sprintf (tmp_4_tcoffee, "/var/tmp/");
-	  else
-	    {
-	    sprintf ( tmp_4_tcoffee, "%s/tmp/", get_dir_4_tcoffee());
-	    }
-	}
+      else if (v && strstr (v, "TMP"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP_4_TCOFFEE"));
+      else if (v && strstr (v, "LOCAL"))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
+      else if (v && strstr (v, "."))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
+      else if (v)sprintf (tmp_4_tcoffee, "%s", v);
+      else if (isdir("/var/tmp"))sprintf (tmp_4_tcoffee, "/var/tmp/");
+      else sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
       
-
-      my_mkdir (tmp_4_tcoffee);
+      //now that rough location is decided, create the subdir structure
+       if (is_rootpid())
+	{
+	  sprintf (buf, "%s/t_coffee.tmp.%s/tmp.%d/", tmp_4_tcoffee, host,getpid());
+	  sprintf (tmp_4_tcoffee, "%s", buf);
+	  my_mkdir(tmp_4_tcoffee);
+	  my_rmdir(tmp_4_tcoffee);
+	  my_mkdir(tmp_4_tcoffee);
+	}
     }
 
   return tmp_4_tcoffee;
@@ -4484,25 +4484,15 @@ char *get_lockdir_4_tcoffee ()
 {
   static char lockdir_4_tcoffee [1000];
   char *v;
-
-
-  
-
-  v=getenv ("LOCKDIR_4_TCOFFEE");
   
   if ( lockdir_4_tcoffee[0])return lockdir_4_tcoffee;
   else
     {
-      
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (lockdir_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if (v && strstr (v, "TMP"))sprintf (lockdir_4_tcoffee, "%s/", getenv("TMP_4_TCOFFEE"));
-      else if (v && strstr (v, "LOCAL"))sprintf (lockdir_4_tcoffee, "%s/", getcwd(NULL,0));
-      else if (v && strstr (v, "."))sprintf (lockdir_4_tcoffee, "%s/", getcwd(NULL,0));
-      else if (v)sprintf (lockdir_4_tcoffee, "%s", v);
-      else if (isdir("/var/tmp"))sprintf (lockdir_4_tcoffee, "/var/tmp/");
-      else sprintf (lockdir_4_tcoffee, "%s/", getcwd(NULL,0));
-      
-      my_mkdir(lockdir_4_tcoffee);
+      char buf[1000];
+      v=getenv ("LOCKDIR_4_TCOFFEE");
+      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (lockdir_4_tcoffee, "%s/", get_tmp_4_tcoffee());
+      else if (v)sprintf (lockdir_4_tcoffee, "%s/", v);
+      else sprintf (lockdir_4_tcoffee, "%s/", get_tmp_4_tcoffee());
     }
   
   
@@ -5212,7 +5202,7 @@ FILE* proxy_msg(FILE*fp)
   {
   fprintf ( fp, "\n\n");
   fprintf ( fp, "*************************************************************************************************\n");
-  fprintf ( fp, "*                        CONFIGURATION: Faukty Network OR Missing Proxy                                        \n");
+  fprintf ( fp, "*                        CONFIGURATION: Faulty Network OR Missing Proxy                                        \n");
   fprintf ( fp, "*                                                                                               \n");
   fprintf ( fp, "*                                                                                               \n");
   fprintf ( fp, "* It looks like you cannot access the network\n");    
@@ -6843,8 +6833,10 @@ int check_program_is_installed ( char *program_name, char *path_variable, char *
   {
    
    static char *path;
+   int install_4_tcoffee=0;
    
-
+   if (atoigetenv("INSTALL_4_TCOFFEE"))install_4_tcoffee=1;
+   
    if ( strm (where2getit, "built_in"))return 1;
    
    if (path)vfree (path);
@@ -6862,7 +6854,7 @@ int check_program_is_installed ( char *program_name, char *path_variable, char *
 	 {
 	   int install=EXIT_FAILURE;
 	       
-	   if (fatal==INSTALL || fatal==INSTALL_OR_DIE)
+	   if ((fatal==INSTALL || fatal==INSTALL_OR_DIE) && install_4_tcoffee)
 	     {
 	       HERE ("************** %s is missing from your system. T-Coffee will make an attempt to install it.\n", program_name);
 	       install=printf_system ("install.pl %s -plugins=%s -clean", program_name, get_plugins_4_tcoffee());
@@ -6930,10 +6922,10 @@ FILE * display_output_filename ( FILE *io, char *type, char *format, char *name,
       if (check_file_exists(name)==NULL)
 	{
 	  if ( !strm (name, "no") && !strm (name, "NO") && !strm (name, "STDOUT") && !strm(name, "stdout"))
-	       add_warning( io, "\n\t#### File Type= %10s Format= %10s Name= %s | NOT PRODUCED [WARNING:%s:%s]\n",type, format, name, PROGRAM, VERSION );
+	       add_warning( io, "\n\t#### File Type= %-15s Format= %-15s Name= %s | NOT PRODUCED [WARNING:%s:%s]\n",type, format, name, PROGRAM, VERSION );
 	  return io;
 	}
-      fprintf ( io, "\n\t#### File Type= %10s Format= %10s Name= %s",type, format, name );
+      fprintf ( io, "\n\t#### File Type= %-15s Format= %-15s Name= %s",type, format, name );
       io=display_output_filename ( io,type,format,name, DUMP);
     }
   else if (check_output==DUMP)
@@ -7067,6 +7059,25 @@ char *ls_l ( char *path,char *file)
     }
   vfclose (fp);
   return state;
+}
+
+int my_rmdir ( char *dir_in)
+{
+  int dir_sep='/';
+  
+ int a, buf;
+ char *dir;
+ 
+ dir=vcalloc ( strlen (dir_in)+strlen (get_home_4_tcoffee())+100, sizeof (char));
+ sprintf ( dir, "%s", dir_in);
+ tild_substitute ( dir, "~",get_home_4_tcoffee());
+ 
+ if (access(dir, F_OK)==-1);
+ else 
+   {
+     if ( strstr (dir, "coffee"))printf_system ( "rm -rf %s", dir);
+     else myexit(fprintf_error ( stderr, "\nERROR: directory %s does not contain 'coffee' [FATAL:%s]", dir, PROGRAM));		} 
+ vfree (dir);return;
 }
 
 int my_mkdir ( char *dir_in)
@@ -8387,6 +8398,8 @@ void clean_exit ()
       start=start->next;
       //vfree(b->name);vfree(b);
     }
+  if (!debug && is_rootpid())my_rmdir (get_tmp_4_tcoffee());
+  
   
   //Remove the lock 
   //lock (getpid(), LLOCK, LRELEASE,NULL); Now keep the lock unless it is a parent process

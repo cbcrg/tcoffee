@@ -131,6 +131,11 @@ elsif ( $mode eq "profile_pair")
   {
      &seq2profile_pair($mode,&my_get_opt ( $cl, "-profile1=",1,1, "-profile2=",1,1, "-method=",1,2,"-param=",0,0, "-outfile=",1,0 ));
   }
+elsif ($mode eq "pdb_template_test")
+  {
+    &blast2pdb_template_test ($mode,&my_get_opt ( $cl, "-infile=",1,1));
+
+  }
 elsif ( $mode eq "pdb_template")
   {
     &blast2pdb_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0,"-pdb_type=",1,0));
@@ -342,7 +347,59 @@ if ( -e $psiblast_output)
   close (R);
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
 }
+sub blast2pdb_template_test
+    {
+      my ($mode,$infile)=@_;
+      my ($maxid,$minid,$mincov);
+      $maxid=100;
+      $minid=0;
+      $mincov=0;
+      
+      print "$infile\n";
+      
+      %p=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$infile);
+      $c=1;
+      print stdout "\tProcess: >$s{$seq}{name} [$SERVER/blast/$db][$CACHE_STATUS]\n";
+      while (!$found && $c<$p{n})
+	{
+	  $pdbid=&id2pdbid($p{$c}{identifyer});
+	  if ( length ($pdbid)>5){$pdbid=id2pdbid($p{$c}{definition});}
+	  
+	  if ( length ($pdbid)>5)
+	    {
+	      myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::Could Not Parse PDBID ($p{$c}{identifyer},$p{$c}{definition})"));
+	    }
+	  
+	  
+	  if (!&pdb_is_released($pdbid))
+	    {
+	      print stdout "\t\t**$pdbid [PDB NOT RELEASED or WITHDRAWN]\n";
+	      $c++;
+	    }
+	  elsif (!&pdb_has_right_type ($pdbid,$type))
+	    {
+	      my $ptype=&pdb2type ($pdbid);
+	      my $etype=&type2etype($type);
+	      
+	      print stdout "\t\t**$pdbid [$ptype cannot be used (expected: $etype)]\n";
+	      $c++;
+	    }
+	  else
+	    {
+	      $found=1;
+	    }
+	}
 
+      if ($found)
+	{
+	  print stdout "\t\t >$s{$seq}{name} _P_ $pdbid\n";
+	}
+      else
+	{
+	  print stdout "\t\t >$s{$seq}{name} No Template Selected\n";
+	}
+      die;
+    }
 sub blast2pdb_template 
   {
   my ($mode, $infile, $db, $method, $outfile,$type)=@_;
@@ -1341,9 +1398,8 @@ sub id2pdbid
     $id=$in;
     $id=~s/PDB/pdb/g;
     
-    if ( $id=~/.*gnl\|.*\,(\S*).*/){$id=$1;}
-    elsif ($id =~/pdb(.*)/){$id=$1;}
-    
+    if ($id =~/pdb(.*)/){$id=$1;}
+    elsif ( $id=~/(\S+)\s+mol:protein/){$id=$1;}
     $id=~s/[:|��_]//g;
     return $id;
   }
@@ -1381,7 +1437,7 @@ sub blast_xml2profile
     my ($name,$seq,$maxid, $minid, $mincov, $file)=(@_);
     my (%p, $a, $string, $n);
     
-
+    
 
     if ($BLAST_TYPE eq "EBI" || &file_contains ($file,"EBIApplicationResult",100)){%p=ebi_blast_xml2profile(@_);}
     elsif ($BLAST_TYPE eq "NCBI" || &file_contains ($file,"NCBI_BlastOutput",100)){%p=ncbi_blast_xml2profile(@_);}
@@ -1652,7 +1708,7 @@ sub ncbi_blast_xml2profile
 		$Hstart=$HSTART{$e}{body};
 		$Hend=$HEND{$e}{body};
 	
-		$coverage=(($end-$start)*100)/$L;
+		$coverage=($L)?(($end-$start)*100)/$L:0;
 	
 		if ($identity>$maxid || $identity<$minid || $coverage<$mincov){next;}
 		@lr1=(split (//,$qs));

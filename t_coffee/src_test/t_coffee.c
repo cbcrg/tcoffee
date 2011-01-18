@@ -38,6 +38,8 @@ static char *get_accurate4PROTEIN_defaults(char *buf, char *type);
 static char *get_accurate4DNA_defaults(char *buf, char *type);
 static char *get_accurate4RNA_defaults(char *buf, char *type);
 
+static char *get_procoffee_defaults(char *buf, char *type);
+static char *get_blastr_defaults(char *buf, char *type);
 static char *get_psicoffee_defaults(char *buf, char *type);
 static char *get_dna_defaults(char *buf, char *type);
 static char *get_cdna_defaults(char *buf, char *type);
@@ -207,6 +209,7 @@ int batch_main ( int argc, char **argv)
 	int check_type;
 	int type_only;
 	char *transform;
+	int   extend_seq;
 	char *outorder;
 	char  *inorder;
 	char *output_res_num;
@@ -514,6 +517,7 @@ int batch_main ( int argc, char **argv)
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
 		   );
+	        
 	       /*PARAMETER PROTOTYPE:    CHECK_TYPE     */
 	       get_cl_param(					\
 			    /*argc*/      argc          ,\
@@ -627,6 +631,8 @@ if (t_coffee_defaults_flag)
 	 else if ( strm (special_mode, "expresso"))new_arg=get_expresso_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "repeats"))new_arg=get_repeat_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "psicoffee"))new_arg=get_psicoffee_defaults(NULL,lseq_type);
+	  else if ( strm (special_mode, "procoffee"))new_arg=get_procoffee_defaults(NULL,lseq_type);
+	  else if ( strm (special_mode, "blastr"))new_arg=get_blastr_defaults(NULL,lseq_type);
 
 	 else if ( strm (special_mode, "accurate") || strm (special_mode, "accurate_slow") || strm (special_mode, "psicoffee_expresso"))new_arg=get_accurate_defaults(NULL, lseq_type);
 	 else if ( strm (special_mode, "accurate4DNA"))new_arg=get_accurate4DNA_defaults(NULL,lseq_type);
@@ -2002,6 +2008,23 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
 		   );
+/*PARAMETER PROTOTYPE:    INFILE    */
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-extend_seq"        ,\
+			    /*Flag*/      &extend_seq       ,\
+			    /*TYPE*/      "FL"            ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  0             ,\
+			    /*DOC*/       "extend the sequences",	\
+			    /*Parameter*/ &extend_seq          ,\
+			    /*Def 1*/    "0"              ,\
+			    /*Def 2*/    "1"              ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+			    );
 
 /*PARAMETER PROTOTYPE:    INFILE    */
 	       declare_name (outorder);
@@ -3987,8 +4010,7 @@ get_cl_param(\
 		      myexit (EXIT_FAILURE);
 
 		  }
-
-	      
+	    	      
 
 
 	    
@@ -4080,7 +4102,7 @@ get_cl_param(\
 	       S=reorder_seq(S,new_order,S->nseq);
 	       free_char (new_order, -1);
 
-	       
+	      
 
 	       /*3 PREPARE THE CONSTRAINT LIST*/
 
@@ -4093,8 +4115,12 @@ get_cl_param(\
 	       /*set the genepred parameters*/
 	       sprintf ( CL->genepred_score, "%s", genepred_score);
 	       /*Estimate the distance Matrix*/
-	       CL->DM=cl2distance_matrix ( CL,NOALN,distance_matrix_mode, distance_matrix_sim_mode,1);
 
+	       
+	       if (extend_seq)extend_seqaln(CL->S,NULL);
+	       CL->DM=cl2distance_matrix ( CL,NOALN,distance_matrix_mode, distance_matrix_sim_mode,1);
+	       if (extend_seq)unextend_seqaln(CL->S,NULL);
+	       
 	       /*one to all alignment*/
 	       prepare_master(master_mode,S,CL, "ktup");
 	       if (!blast_maxnseq)CL->o2a_byte=(CL->S)->nseq;
@@ -4955,8 +4981,28 @@ char *get_expresso_defaults(char *buf, char *type)
 
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
 
-     buf=strcat (buf,"-in Msap_pair -template_file EXPRESSO -profile_template_file EXPRESSO");
+     buf=strcat (buf,"-method sap_pair  -template_file EXPRESSO -profile_template_file EXPRESSO");
 
+     /*buf=strcat (buf,"-in ");*/
+
+     return buf;
+   }
+char *get_procoffee_defaults(char *buf, char *type)
+   {
+
+     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+
+     buf=strcat (buf,"-in Mpromo_pair -extend_seq   ");
+     /*buf=strcat (buf,"-in ");*/
+
+     return buf;
+   }
+char *get_blastr_defaults(char *buf, char *type)
+   {
+
+     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+
+     buf=strcat (buf,"-in Mblastr_pair -extend_seq   ");
      /*buf=strcat (buf,"-in ");*/
 
      return buf;
