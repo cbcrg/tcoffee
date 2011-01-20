@@ -4144,12 +4144,10 @@ int get_child_list (int pid,int *clist)
   clist[pid]++;
   if (clist[pid]>1)
     {
-      
-      char host[1024];
-      gethostname(host, 1023);
-      fprintf (stderr,"WARNING: **** Corrupted Lock System ****");
-      for (a=0; a<MAX_N_PID; a++)release_all_locks (a);
-      exit (EXIT_FAILURE);
+	  add_information ( stderr, "Corrupted Lock System" );
+	  for (a=0; a<MAX_N_PID; a++)release_all_locks (a);
+	  return 0;
+
     }
 	
   lockf=lock2name (pid, LLOCK);
