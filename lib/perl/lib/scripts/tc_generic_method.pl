@@ -136,10 +136,17 @@ elsif ($mode eq "pdb_template_test")
     &blast2pdb_template_test ($mode,&my_get_opt ( $cl, "-infile=",1,1));
 
   }
+elsif ($mode eq "psi_template_test")
+  {
+    &psiblast2profile_template_test ($mode,&my_get_opt ( $cl, "-seq=",1,1,"-blast=",1,1));
+
+  }
+
 elsif ( $mode eq "pdb_template")
   {
     &blast2pdb_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0,"-pdb_type=",1,0));
   }
+
 elsif ( $mode eq "profile_template")
   {
     
@@ -312,7 +319,46 @@ sub seq2RNA_template
   close (R);
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
 }
+sub psiblast2profile_template_test
+  {
+  my ($mode, $seq,$blast)=@_;
+  my %s, %h, ;
+  my ($result,$psiblast_output,$profile_name,@profiles);
+  my $trim=0;
+  my $maxid=100;
+  my $minid=0;
+  my $mincov=0;
+  my $maxcov=100;
+  
+  %s=read_fasta_seq ($seq);
+  open (R, ">result.aln");
+  
+  #print stdout "\n";
+  foreach $seq (keys(%s))
+    {
+      
+      open (F, ">seqfile");
+      print (F ">$A\n$s{$seq}{seq}\n");
+      close (F);
+      $psiblast_output=$blast;
+      if ( -e $psiblast_output)
+	{
+	  %profile=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$psiblast_output);
 
+
+	  
+	  $profile_name="$s{$seq}{name}.prf";
+	  $profile_name=&clean_file_name ($profile_name);
+	  unshift (@profiles, $profile_name);
+	  output_profile ($profile_name, \%profile, $trim);
+	  print stdout "\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$SERVER/blast/$db][$CACHE_STATUS]\n";
+	  print R ">$s{$seq}{name} _R_ $profile_name\n";
+	}
+    }
+  close (R);
+  
+  die;
+}
 sub psiblast2profile_template 
   {
   my ($mode, $infile, $db, $method, $outfile)=@_;
@@ -1659,8 +1705,9 @@ sub ncbi_blast_xml2profile
     $seq=~s/[^a-zA-Z]//g;
     $L=length ($seq);
    
-    %query=&xml2tag_list ($string, "Iteration_query-def");
-    $name=$query{0}{body};
+    #This is causing the NCBI parser to fail when Iteration_query-def is missing 
+    #%query=&xml2tag_list ($string, "Iteration_query-def");
+    #$name=$query{0}{body};
     
     %hit=&xml2tag_list ($string, "Hit");
     
