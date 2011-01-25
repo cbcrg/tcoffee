@@ -23,7 +23,11 @@ HTML_PUBLIC=$(HOME2)/public_html/
 #							#
 #########################################################
 
-CC=gcc -O3
+ifndef CFLAGS
+CFLAGS=-O3
+endif
+
+CC=gcc 
 
 
 SOURCE_DIR=$(PWD)/../../$(EXECUTABLE)/lib
