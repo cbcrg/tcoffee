@@ -218,7 +218,8 @@ int batch_main ( int argc, char **argv)
 
 
 	char *weight;
-
+	int sample_dp=0;
+	
 	char *seq_weight;
 	int do_align;
 	char *evaluate_mode;
@@ -2157,7 +2158,26 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-
+/*PARAMETER PROTOTYPE:    WEIGHT      */
+	       
+	       get_cl_param(\
+			    /*argc*/      argc             ,\
+			    /*argv*/      argv             ,\
+			    /*output*/    &le              ,\
+			    /*Name*/      "-sample_dp"        ,\
+			    /*Flag*/      &garbage        ,\
+			    /*TYPE*/      "D"              ,\
+			    /*OPTIONAL?*/ OPTIONAL         ,\
+			    /*MAX Nval*/  1                ,\
+			    /*DOC*/       "defines the tie breaking strategy (only with gotoh_pair_wise)" ,\
+			    /*Parameter*/ &sample_dp          ,\
+			    /*Def 1*/    "0"             ,\
+			    /*Def 2*/    "1"             ,\
+			    /*Min_value*/ "0"            ,\
+			    /*Max Value*/ "2"             \
+		   );	  
+	       if ( sample_dp)cputenv ("SAMPLE_DP_4_TCOFFEE=%d", sample_dp);
+	       
 
 /*PARAMETER PROTOTYPE:    WEIGHT      */
 	       declare_name ( weight);
@@ -4641,7 +4661,7 @@ get_cl_param(\
 			}
 
 		      A->output_res_num=strm3 ( output_res_num, "on", "On", "ON");
-
+		    
 		      if ( strm2 (residue_case, "keep", "retain"))A->residue_case=KEEP_CASE;
 		      else if (strm3 (residue_case, "upper", "Upper", "UPPER"))A->residue_case=UPPER_CASE;
 		      else if (strm3 (residue_case, "lower", "Lower", "LOWER"))A->residue_case=LOWER_CASE;
@@ -4826,7 +4846,7 @@ get_cl_param(\
 		       le=display_output_filename( le,"TRIM_SEQ",trim_format,trimfile, CHECK);
 		      }
 		}
-
+	     
 	      if (remove_template_file){S=vremove_seq_template_files(S);}
 	      else
 		{

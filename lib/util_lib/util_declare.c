@@ -850,6 +850,7 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 
 	    B->score_aln=A->score_aln;
 	    B->score=A->score;
+	    B->ibit=A->ibit;
 	    B->cpu=A->cpu;
 	    B->finished=A->finished;
 

@@ -3133,7 +3133,7 @@ NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_li
   
   
 
-  
+  A->ibit=0;
   if ( strm ((CL->TC)->use_seqan, "NO"))
     {
       static char *tmp;
@@ -3246,7 +3246,7 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
   rec_local_tree_aln (P, A,CL, 1);
   for (a=0; a<P->nseq; a++)sprintf (A->tree_order[a], "%s", (CL->S)->name[P->lseq[a]]);
   A->len_aln=strlen (A->seq_al[0]);
-
+  
   fprintf ( CL->local_stderr, "\n\n");
 
   return NULL;
