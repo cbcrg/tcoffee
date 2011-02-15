@@ -769,14 +769,15 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 	char *buffer;
 	char *char_buf;
 /*trace back variables       */
-	FILE       *long_trace=NULL;
-	TRACE_TYPE *buf_trace=NULL;
-	static TRACE_TYPE **trace;
-	TRACE_TYPE k;
-	TRACE_TYPE *tr;
-	int long_trace_flag=0;
+	static int **trace;
+	static int **bit;
+	int *bi;
+	int *tr;
 	int dim;
-/********Prepare penalties*******/
+	int ibit=0;
+	int k;
+	int sample=0;//road==0, random tie; road=1: upper road; road=2 lower road;
+	/********Prepare penalties*******/
 	gop=CL->gop*SCORE_K;
 	gep=CL->gep*SCORE_K;
 	TG_MODE=CL->TG_MODE;
@@ -788,7 +789,10 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 	if ( A==NULL)
 	   {
 	   free_int (trace,-1);
+	   free_int (bit, -1);
 	   trace=NULL;
+	   bit=NULL;
+	   
 	   free_char (al,-1);
 	   al=NULL;
 	   return 0;
@@ -796,10 +800,13 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 
 /*DO MEMORY ALLOCATION FOR DP*/
 
+
+	sample=atoigetenv ("SAMPLE_DP_4_TCOFFEE");
+	
 	lenal[0]=strlen (A->seq_al[l_s[0][0]]);
 	lenal[1]=strlen (A->seq_al[l_s[1][0]]);
 	len= MAX(lenal[0],lenal[1])+1;
-	buf_trace=vcalloc ( len, sizeof (TRACE_TYPE));	
+	
 	buffer=vcalloc ( 2*len, sizeof (char));	
         al=declare_char (2, 2*len);  
 	
@@ -814,17 +821,11 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 	
 
 	
-	if ( len>=MAX_LEN_FOR_DP)
-	    {
-	    long_trace_flag=1;
-	    long_trace=vtmpfile();
-	    }
-	else
-	    {
-	   
-	    dim=(trace==NULL)?0:read_size_int ( trace,sizeof (int*));	   
-	    trace    =realloc_int ( trace,dim,dim,MAX(0,len-dim), MAX(0,len-dim));
-	    }
+
+	
+	dim=(trace==NULL)?0:read_size_int ( trace,sizeof (int*));	   
+	trace    =realloc_int ( trace,dim,dim,MAX(0,len-dim), MAX(0,len-dim));
+	bit      =realloc_int ( bit,dim,dim,MAX(0,len-dim), MAX(0,len-dim));
 	
 /*END OF MEMORY ALLOCATION*/
 	
@@ -845,11 +846,10 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 
 
 	cc[0]=0;		
-	tr=(long_trace_flag)?buf_trace:trace[0];
-	tr[0]=(TRACE_TYPE)1;
-	for ( j=1; j<=lenal[1]; j++)tr[j]=(TRACE_TYPE)-1;
-	if (long_trace_flag)fwrite (buf_trace, sizeof ( TRACE_TYPE),lenal[1]+1, long_trace);
-	
+	tr=trace[0];
+	bi=bit[0];
+	tr[0]=1;
+	for ( j=1; j<=lenal[1]; j++)tr[j]=-1;
 	
 	t=(TG_MODE==0)?gop:0;
 	
@@ -865,75 +865,114 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 	    }
 
 	t=(TG_MODE==0)?gop:0;	
-	
+
 	for (i=1; i<=lenal[0];i++)
 			{			
-			tr=(long_trace_flag)?buf_trace:trace[i];
-			s=cc[0];
+			  tr=trace[i];
+			  bi=bit[i];
+			  s=cc[0];
 
-			l_gop=(TG_MODE==0)?gop:0;
-			l_gep=(TG_MODE==2)?0:gep;
-			
-			
-			
-			cc[0]=c=t=t+l_gep;
-			e=t+  gop;
-			tr[0]=(TRACE_TYPE)1;
-
-			
-
-			for (eg=0,j=1; j<=lenal[1];j++)
-				{				   
-				 
-				  sub=(CL->get_dp_cost) (A, pos0, ns[0], l_s[0], i-1, pos0, ns[1], l_s[1],j-1,CL);	
-				      
-				/*get the best Insertion*/
-				l_gop=(i==lenal[0] || i==1 )?((TG_MODE==0)?gop:0):gop;
-				l_gep=(i==lenal[0] || i==1)?((TG_MODE==2)?0:gep):gep;
-			
-
-				if ( a_better_than_b ( e,c+l_gop, maximise))eg++;
-				else eg=1;	
-				e=best_of_a_b (e, c+l_gop, maximise)+l_gep;
-				
-				/*Get the best deletion*/
-				l_gop=(j==lenal[1] || j==1)?((TG_MODE==0)?gop:0):gop;
-				l_gep=(j==lenal[1] || j==1)?((TG_MODE==2)?0:gep):gep;
-				
-
-				if ( a_better_than_b ( dd[j], cc[j]+l_gop, maximise))ddg[j]++;
-				else ddg[j]=1;
-				dd[j]=best_of_a_b( dd[j], cc[j]+l_gop,maximise)+l_gep;
-				
-
-
-				c=best_int(3,maximise,&fop, e, s+sub,dd[j]);
-				/*Chose Substitution for tie breaking*/
-				if ( fop==0 && (s+sub)==e)fop=1;
-				else if ( fop==2 && (s+sub)==dd[j])fop=1;
-				/*Chose Deletion for tie breaking*/
-				else if ( fop==2 && e==dd[j])fop=1;
-
-				fop-=1;
-				s=cc[j];
-				cc[j]=c;	
-
-	
-				if ( fop<0)
-					{tr[j]=(TRACE_TYPE)fop*eg;
-					}
-				else if ( fop>0)
-				        {tr[j]=(TRACE_TYPE)fop*ddg[j];
-					}
-				else if (fop==0)
-					{tr[j]=(TRACE_TYPE)0;	
-					}					
-				fop= -2;
+			  l_gop=(TG_MODE==0)?gop:0;
+			  l_gep=(TG_MODE==2)?0:gep;
+			  
+			  
+			  
+			  cc[0]=c=t=t+l_gep;
+			  e=t+  gop;
+			  tr[0]=1;
+			  
+			  
+			  
+			  for (eg=0,j=1; j<=lenal[1];j++)
+			    {				   
+			      
+			      sub=(CL->get_dp_cost) (A, pos0, ns[0], l_s[0], i-1, pos0, ns[1], l_s[1],j-1,CL);	
+			      
+			      /*get the best Insertion*/
+			      l_gop=(i==lenal[0] || i==1 )?((TG_MODE==0)?gop:0):gop;
+			      l_gep=(i==lenal[0] || i==1)?((TG_MODE==2)?0:gep):gep;
+			      
+			      
+			      if ( a_better_than_b ( e,c+l_gop, maximise))eg++;
+			      else eg=1;	
+			      e=best_of_a_b (e, c+l_gop, maximise)+l_gep;
+			      
+			      /*Get the best deletion*/
+			      l_gop=(j==lenal[1] || j==1)?((TG_MODE==0)?gop:0):gop;
+			      l_gep=(j==lenal[1] || j==1)?((TG_MODE==2)?0:gep):gep;
+			      
+			      
+			      if ( a_better_than_b ( dd[j], cc[j]+l_gop, maximise))ddg[j]++;
+			      else ddg[j]=1;
+			      dd[j]=best_of_a_b( dd[j], cc[j]+l_gop,maximise)+l_gep;
+			      
+			      
+			      
+			      c=best_int(3,maximise,&fop, e, s+sub,dd[j]);
+			 
+			    
+			      if (sample==1)
+				{
+				  int rr[3];
+				  int nn=0;
+				  int fop2;
+				  int ind;
+				  if (c==e)rr[nn++]=0;
+				  if (c==(s+sub))rr[nn++]=1;
+				  if (c==dd[j])rr[nn++]=2;
+				  ind=rand()%(nn);
+				  fop=rr[ind];
+				  if (nn>1)
+				    {
+				      // HERE ("NN=%d index=%d",nn, ind);
+				      //HERE ("%d ->%d", fop, fop2);
+				      //HERE ("%d %d %d",  e, s+sub,dd[j]);
+				      ;
+				    }
 				}
-			if (long_trace_flag)
-			    {
-			    fwrite ( buf_trace, sizeof (TRACE_TYPE), lenal[1]+1, long_trace);
+			      else if (sample==0)
+				{
+				  /*Chose Substitution for tie breaking*/
+				  if ( fop==0 && (s+sub)==e)fop=1;
+				  else if ( fop==2 && (s+sub)==dd[j])fop=1;
+				  /*Chose Deletion for tie breaking*/
+				  else if ( fop==2 && e==dd[j])fop=2;
+				}
+			      else if (sample==-1)
+				{
+				  
+				  if ( fop==0 && (s+sub)==e)fop=1;
+				  else if ( fop==1 && (s+sub)==dd[j])fop=2;
+				  /*Chose Deletion for tie breaking*/
+				  else if ( fop==2 && e==dd[j])fop=1; 
+				}
+			      bi[j]=0;
+			      if (c==e){bi[j]++;}
+			      if (c==(s+sub)){bi[j]++;}
+			      if (c==(dd[j])){bi[j]++;}
+			      //bi[j]--;
+
+
+			      fop-=1;
+			      s=cc[j];
+			      cc[j]=c;	
+			      
+			      
+			      
+			      
+			      
+			      if ( fop<0)
+				{tr[j]=(TRACE_TYPE)fop*eg;
+				}
+			      else if ( fop>0)
+				{tr[j]=(TRACE_TYPE)fop*ddg[j];
+				}
+			      else if (fop==0)
+				{tr[j]=(TRACE_TYPE)0;	
+				}					
+			      fop= -2;
 			    }
+			  
 			}
 	
 	score=c;
@@ -942,60 +981,52 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 	j=lenal[1];
 	ala=alb=0;
 	
-
+	if (!A->ibit)A->ibit=1; //set the bit counter on
 	while (i>=0 && j>=0 && ((i+j)!=0))
 			{
-			if ( i==0)
+			  if ( i==0)
 				k=-1;
 			else if ( j==0)
 				k=1;
 			else if ( j==0 && i==0)
 				k=1;	
 			else
-			        {
-				if (long_trace_flag)
-				   {
-				   fseek ( long_trace, sizeof (TRACE_TYPE)*((lenal[1]+1)*(i)+j),SEEK_SET);
-				   fread ( &k, sizeof (TRACE_TYPE), 1, long_trace);
-				   }
-				else
-				   {
-				   
-				   k=trace[i][j];
-				   }
-				}
-				
-				
+			  {
+			    k=trace[i][j];
+			    A->ibit*=bit[i][j];	
+			  }
+			
+			
 			if (k==0)
-				{
-				
-				al[0][ala++]=1;
-				al[1][alb++]=1;
-				i--;
-				j--;
-				}		
+			  {
+			    
+			    al[0][ala++]=1;
+			    al[1][alb++]=1;
+			    i--;
+			    j--;
+			  }		
 			else if (k>0)
-				{
-				
-				for ( a=0; a< k; a++)
-					{
-					al[0][ala++]=1;
-					al[1][alb++]=0;
-					i--;
-					}
-				}
+			  {
+			    
+			    for ( a=0; a< k; a++)
+			      {
+				al[0][ala++]=1;
+				al[1][alb++]=0;
+				i--;
+			      }
+			  }
 			else if (k<0)
-				{
-				
-				for ( a=0; a>k; a--)
-					{
-					al[0][ala++]=0;
-					al[1][alb++]=1;
-					j--;
-					}
-				}
+			  {
+			    
+			    for ( a=0; a>k; a--)
+			      {
+				al[0][ala++]=0;
+				al[1][alb++]=1;
+				j--;
+			      }
+			  }
 			}
-      
+	
 	LEN=ala;	
 	c=LEN-1;  
 	
@@ -1027,16 +1058,16 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 	A->len_aln=LEN;
 	A->nseq=ns[0]+ns[1];
 	
-
+	
 	vfree ( cc);
 	vfree (dd);		
 	vfree (ddg);
 	vfree (buffer);
 	vfree (char_buf); 
-	vfree (buf_trace);
+	
 	free_char ( al, -1);
 	free_int (pos0, -1);
-	if ( long_trace_flag)fclose (long_trace);	
+
 
 
 

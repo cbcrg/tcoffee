@@ -6144,6 +6144,7 @@ FILE * output_aln ( Alignment *B, FILE *fp){return output_Alignment(B, fp);}
 FILE * output_Alignment ( Alignment *B, FILE *fp)
     {
       fprintf ( fp, "%s, %s (%s) [%s] [MODE: %s]\n%s\nCPU   %d sec\nSCORE %d\nNSEQ  %d\nLEN   %d\n",PROGRAM,VERSION,DATE,retrieve_mode(),URL,AUTHOR,  (B->cpu+get_time())/1000, B->score_aln, B->nseq, B->len_aln);     
+     
       return output_Alignment_without_header ( B, fp);
     }
   
@@ -6809,7 +6810,16 @@ void output_generic_clustal_aln ( char *name, Alignment *B, char *mode)
     if ( strm (mode, "strict_clustal"))
       fprintf ( fp, "CLUSTAL W (1.83) multiple sequence alignment");
     else
-      fprintf (fp, "CLUSTAL FORMAT for %s %s [%s] [MODE: %s ], CPU=%.2f sec, SCORE=%d, Nseq=%d, Len=%d ", PROGRAM, VERSION,URL, retrieve_mode (),(float)(B->cpu+get_time())/1000, B->score_aln, B->nseq, B->len_aln);
+      {
+	fprintf (fp, "CLUSTAL FORMAT for %s %s [%s] [MODE: %s ], CPU=%.2f sec, SCORE=%d, Nseq=%d, Len=%d ", PROGRAM, VERSION,URL, retrieve_mode (),(float)(B->cpu+get_time())/1000, B->score_aln, B->nseq, B->len_aln);
+	if (B->ibit>0)
+	  {
+	    float ibit=(float)log ((double)B->ibit)/log ((double)2);
+	    float nibit=(float)log(ibit/(B->len_aln*B->nseq));
+	    fprintf ( fp, "\nTies: %.1f bits (%d alternative)\n",ibit, B->ibit-1);
+	  
+	  }
+      }
     fprintf (fp, "\n\n");
 
 

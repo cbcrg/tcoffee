@@ -1054,7 +1054,9 @@ char *** display_method_names (char *mode, FILE *fp)
 		ml2=MAX((strlen (l2  [a][0])),ml2);
 		ml3=MAX((strlen (l2  [a][1])),ml3);
 		l2[a][4][0]= check_program_is_installed (l2[a][1],NULL,NULL,l2[a][0],NO_REPORT);
-		if (l2[a][4][0])l2[a][5]=pg2path (l2[a][1]);
+		if (strm (l2[a][0], "built_in")){sprintf (l2[a][5], "built_in");}
+		else if (l2[a][4][0])l2[a][5]=pg2path (l2[a][1]);
+		
 		a++;
 	}
 	fprintf ( fp, "\n#######   Methods For which an Interface is available in T-Coffee\n");

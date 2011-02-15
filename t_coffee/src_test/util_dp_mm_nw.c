@@ -37,7 +37,6 @@ static int  last;                /* Last script op appended */
 }
  
 #define REP { last = *sapp++ = 0; }        /* Append "Replace" op */
-
 int myers_miller_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL )
 	{
 	int **pos;
@@ -45,7 +44,7 @@ int myers_miller_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL 
 	int *S;
 	char ** char_buf;
 	int score;
-
+	
 	
 	/********Prepare Penalties******/
 
@@ -61,9 +60,10 @@ int myers_miller_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL 
 	last=0;
 	sapp=S;
 
-	
         score=diff (A,ns, l_s, 0, l1, 0, l2, 0, 0, CL, pos);	
 	diff (NULL,ns, l_s, 0, l1, 0, l2, 0, 0, CL, pos);
+
+
 
 	i=0;j=0;sapp=S; len=0;
 	while (!(i==l1 && j==l2))
@@ -181,7 +181,7 @@ int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb
 	 
 	 {
 	 int   i, j;
-	 int   c, e, d, s;
+	 int   c, e, d, s,ma;
          int t, g,h,m;
 	 
 	 
@@ -248,11 +248,12 @@ int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb
 		 if ((c =   c   + m) > (e =   e   + h)) e = c;
 		 if ((c = CC[j] + m) > (d = DD[j] + h)) d = c;
 		 
-		 c = s + (CL->get_dp_cost) (A, pos, ns[0], l_s[0],i-1+s1, pos, ns[1], l_s[1],j-1+s2,CL);
+		 ma=c = s + (CL->get_dp_cost) (A, pos, ns[0], l_s[0],i-1+s1, pos, ns[1], l_s[1],j-1+s2,CL);
 		 
 		 if (e > c) c = e;
 		 if (d > c) c = d;
-
+		 
+		     
 		 s = CC[j];
 		 CC[j] = c;
 		 DD[j] = d;
@@ -278,10 +279,12 @@ int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb
 		  if ((c =   c   + m) > (e =   e   + h)) e = c;
 		  if ((c = RR[j] + m) > (d = SS[j] + h)) d = c;
 		  
-		  c = s + (CL->get_dp_cost) (A, pos, ns[0], l_s[0],i+s1, pos, ns[1], l_s[1],j+s2,CL);
+		  ma=c = s + (CL->get_dp_cost) (A, pos, ns[0], l_s[0],i+s1, pos, ns[1], l_s[1],j+s2,CL);
 		  
 		  if (e > c) c = e;
 		  if (d > c) c = d;
+		 
+	
 		  s = RR[j];
 		  RR[j] = c;
 		  SS[j] = d;
@@ -307,7 +310,7 @@ int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb
 		 }
 	 }	    
 /* Conquer: recursively around midpoint */
- 
+
   if (type == 1)
     { 
 	
@@ -337,32 +340,3 @@ int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb
 
 
 
-/*********************************COPYRIGHT NOTICE**********************************/
-/*© Centre National de la Recherche Scientifique (CNRS) */
-/*and */
-/*Cedric Notredame */
-/*Wed Sep 21 19:11:38     2005. */
-/*All rights reserved.*/
-/*This file is part of T-COFFEE.*/
-/**/
-/*    T-COFFEE is free software; you can redistribute it and/or modify*/
-/*    it under the terms of the GNU General Public License as published by*/
-/*    the Free Software Foundation; either version 2 of the License, or*/
-/*    (at your option) any later version.*/
-/**/
-/*    T-COFFEE is distributed in the hope that it will be useful,*/
-/*    but WITHOUT ANY WARRANTY; without even the implied warranty of*/
-/*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the*/
-/*    GNU General Public License for more details.*/
-/**/
-/*    You should have received a copy of the GNU General Public License*/
-/*    along with Foobar; if not, write to the Free Software*/
-/*    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA*/
-/*...............................................                                                                                      |*/
-/*  If you need some more information*/
-/*  cedric.notredame@europe.com*/
-/*...............................................                                                                                                                                     |*/
-/**/
-/**/
-/*	*/
-/*********************************COPYRIGHT NOTICE**********************************/

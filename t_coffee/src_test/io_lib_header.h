@@ -580,7 +580,7 @@ struct Alignment
     int ** score_res;
     int score_aln;
     int score;
-    	
+    int ibit;  
     int cpu;
     int finished;
 
