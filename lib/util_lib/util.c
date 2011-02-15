@@ -3408,7 +3408,8 @@ static long milli_sec_conv=1000;
 FILE *print_program_information (FILE *fp, char *comment)
 {
    fprintf ( fp, "# Results Produced with %s (%s)\n",PROGRAM, VERSION);
-   fprintf ( fp, "# %s is available from %s\n",PROGRAM,URL);  
+   fprintf ( fp, "# %s is available from %s\n",PROGRAM,URL);
+   fprintf ( fp, "# Register on: https://groups.google.com/group/tcoffee/\n");
    if (comment)fprintf ( fp, "# %s\n", comment);
    return fp;
 }

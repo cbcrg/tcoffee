@@ -5172,7 +5172,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       //add template
       for (a=0; a< S->nseq; a++)
 	{
-
+	  
 	  if ( (p=strstr (template_list,"SELF_")))p=S->name[a];
 	  else if ( strstr (template_list, "SEQFILE_"))p=template_list;
 	  else 

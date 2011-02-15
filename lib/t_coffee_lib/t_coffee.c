@@ -54,7 +54,7 @@ static FILE *t_coffee_tip (FILE *fp,char *mode);
 
 static int run_other_pg(int argc, char *argv[]);
 
-static int* prepare_master (char *seq,Sequence *S,Constraint_list *CL, char *dmode);
+static Sequence* prepare_master (char *seq,Sequence *S,Constraint_list *CL, char *dmode);
 
 #define is_a_seq_file(file) (!is_matrix(file) && !is_matrix(file+1) && !is_method (file) && !is_method (file+1) &&(check_file_exists(file) || check_file_exists(file+1)))
 static int NO_METHODS_IN_CL;
@@ -316,6 +316,9 @@ int batch_main ( int argc, char **argv)
 	char *use_seqan;
 	char *msa_mode;
 	char *master_mode;
+	Sequence *MASTER_SEQ=NULL;
+	Sequence *TEMP_SEQ=NULL;
+	
 	int blast_maxnseq;
 	
 	int lalign_n_top;
@@ -2834,7 +2837,7 @@ get_cl_param(\
 			    /*DOC*/       "Align all the sequences to the master sequences: file or number"          ,\
 			    /*Parameter*/ &master_mode      ,\
 			    /*Def 1*/    "no"      ,\
-			    /*Def 2*/    "1"      ,\
+			    /*Def 2*/    "_LONG_N_10"      ,\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
@@ -3244,7 +3247,7 @@ get_cl_param(\
 			    /*MAX Nval*/  1              ,\
 			    /*DOC*/       "Controls The Output of A TIP When Computation is over [one,all,none]",\
 			    /*Parameter*/ &tip   ,\
-			    /*Def 1*/    "one"       ,\
+			    /*Def 1*/    "none"       ,\
 			    /*Def 2*/    "all"              ,\
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
@@ -4033,71 +4036,11 @@ get_cl_param(\
 	    	      
 
 
-	    
-	       S=seq2template_seq(S, "SELF_S_",F);
-	       /* Get the Templates*/
-	       if ( n_template_file)
-		 {
-		   fprintf ( le, "\nLooking For Sequence Templates:\n");
-		   for ( a=0; a< n_template_file; a++)
-		     {
-		       //correct for missing extension modes
-		       if (strm (template_file_list[a],"RNA") && !strstr (extend_mode, "rna"))sprintf ( extend_mode, "rna2");
-
-
-		       fprintf ( le, "\n\tTemplate Type: [%s] Mode Or File: [%s] [Start", template_type2type_name(template_file_list[a]), template_file_list[a]);
-		       S=seq2template_seq(S, template_file_list[a], F);
-		       fprintf ( le, "]");
-
-		       if (S==NULL)
-			 {
-			   add_warning (stderr, "\nImpossible to find %s Templates\nCheck that your blast server is properly installed [See documentation][FATAL:%s]\n", template_file_list[a],PROGRAM);
-			   myexit (EXIT_FAILURE);
-			 }
-		     }
-		   
-		   if (seq2n_X_template ( S, "_*_"))
-		     {
-		       
-		       sprintf (S->template_file, "%s",seq2template_file (S, NULL));
-		     }
-		 }
-	       else
-		 {
-		   int ptf=0;
-		   for ( a=0; a<S->nseq; a++)
-		     {
-		       if ( seq_has_template ( S, a, "_P_"))ptf=1;
-		     }
-		   if (ptf)
-		     {
-		       int j;
-		       sprintf ( S->template_file   ,"%s%s.template_file",F->path     , F->name);
-		       seq2template_file (S,S->template_file);
-		       display_output_filename ( stdout, "Template_List","fasta_seq", S->template_file, STORE);
-		     }
-		 }
-	     
-
-	       if (n_profile_template_file)
-		 {
-		   fprintf ( le, "\nLooking For Profile  Templates");
-		   for ( a=0; a< n_profile_template_file; a++)
-		     {
-		       fprintf ( le, "\n\tTemplate Type: [%s] Mode Or File: [%s] [Start", template_type2type_name(profile_template_file_list[a]), profile_template_file_list[a]);
-		       S=profile_seq2template_seq(S, profile_template_file_list[a], F);
-		       fprintf ( le, "]");
-		       if (S==NULL)
-			 {
-			   add_warning(stderr, "Impossible to find %s Templates\nCheck that your blast server is properly installed [See documentation][FATAL:%s]\n",profile_template_file_list[a], PROGRAM);
-			   myexit (EXIT_FAILURE);
-			 }
-		     }
-		 }
 	       
-	       S=seq2template_type (S);
-	      
-	       le=display_sequences_names   ( S, le, check_pdb_status, TEMPLATES);
+	       
+	       /* Get the Templates*/
+	       
+
 	        
 		 
 
@@ -4141,11 +4084,104 @@ get_cl_param(\
 	       CL->DM=cl2distance_matrix ( CL,NOALN,distance_matrix_mode, distance_matrix_sim_mode,1);
 	       if (extend_seq)unextend_seqaln(CL->S,NULL);
 	       
+
+	       
 	       /*one to all alignment*/
-	       prepare_master(master_mode,S,CL, "ktup");
+	       MASTER_SEQ=prepare_master(master_mode,S,CL, "ktup");
 	       if (!blast_maxnseq)CL->o2a_byte=(CL->S)->nseq;
 	       else CL->o2a_byte=blast_maxnseq;
 	       
+	       /*4 GET TEMPLATES*/
+	       	       //Intercept Master Sequences
+	       
+	       if (MASTER_SEQ)
+		 {
+		   TEMP_SEQ=S;
+		   S=MASTER_SEQ;
+		 }
+
+	       if ( n_template_file)
+		 {
+		   fprintf ( le, "\nLooking For Sequence Templates:\n");
+		   for ( a=0; a< n_template_file; a++)
+		     {
+		       //correct for missing extension modes
+		       if (strm (template_file_list[a],"RNA") && !strstr (extend_mode, "rna"))sprintf ( extend_mode, "rna2");
+
+
+		       fprintf ( le, "\n\tTemplate Type: [%s] Mode Or File: [%s] [Start", template_type2type_name(template_file_list[a]), template_file_list[a]);
+		       S=seq2template_seq(S, template_file_list[a], F);
+		       fprintf ( le, "]");
+
+		       if (S==NULL)
+			 {
+			   add_warning (stderr, "\nImpossible to find %s Templates\nCheck that your blast server is properly installed [See documentation][FATAL:%s]\n", template_file_list[a],PROGRAM);
+			   myexit (EXIT_FAILURE);
+			 }
+		     }
+		   
+		   if (seq2n_X_template ( S, "_*_"))
+		     {
+		       
+		       sprintf (S->template_file, "%s",seq2template_file (S, NULL));
+		     }
+		 }
+	       else
+		 {
+		   int ptf=0;
+		   for ( a=0; a<S->nseq; a++)
+		     {
+		       if ( seq_has_template ( S, a, "_P_"))ptf=1;
+		     }
+		   if (ptf)
+		     {
+		       int j;
+		       sprintf ( S->template_file   ,"%s%s.template_file",F->path     , F->name);
+		       seq2template_file (S,S->template_file);
+		       display_output_filename ( stdout, "Template_List","fasta_seq", S->template_file, STORE);
+		     }
+		 }
+
+
+	       if (n_profile_template_file)
+		 {
+		   fprintf ( le, "\nLooking For Profile  Templates");
+		   for ( a=0; a< n_profile_template_file; a++)
+		     {
+		       fprintf ( le, "\n\tTemplate Type: [%s] Mode Or File: [%s] [Start", template_type2type_name(profile_template_file_list[a]), profile_template_file_list[a]);
+		       S=profile_seq2template_seq(S, profile_template_file_list[a], F);
+		       fprintf ( le, "]");
+		       if (S==NULL)
+			 {
+			   add_warning(stderr, "Impossible to find %s Templates\nCheck that your blast server is properly installed [See documentation][FATAL:%s]\n",profile_template_file_list[a], PROGRAM);
+			   myexit (EXIT_FAILURE);
+			 }
+		     }
+		 }
+	       
+	      
+
+	     
+	       //Release Master Sequences
+	       if (MASTER_SEQ )
+		 {
+		   int i;
+		   S=TEMP_SEQ;
+		   for (a=0; a< MASTER_SEQ->nseq; a++)
+		     if ((i=name_is_in_list (MASTER_SEQ->name[a], S->name, S->nseq, 100))!=-1)
+		       {
+			 S->T[i]=MASTER_SEQ->T[a];
+		       }
+		 }
+	       S=seq2template_seq(S, "SELF_S_",F);
+	       S=seq2template_type (S);
+	       
+	       le=display_sequences_names   ( S, le, check_pdb_status, TEMPLATES);
+	       /*4 GET TEMPLATES: DONE*/
+
+
+
+
 	       if (  matrix && matrix[0])
 		 {
 		   sprintf ( CL->method_matrix,"%s", matrix);
@@ -4876,8 +4912,8 @@ get_cl_param(\
 
 	      le=t_coffee_tip (le, tip);
 	      le=print_command_line ( le);
-	      le=print_mem_usage (le, PROGRAM);
-	      le=print_cpu_usage(le, PROGRAM);
+	      //le=print_mem_usage (le, PROGRAM);
+	      //le=print_cpu_usage(le, PROGRAM);
 	      le=print_program_information (le, NULL);
 
 
@@ -5272,7 +5308,7 @@ FILE * t_coffee_tip (FILE *fp,char *mode)
     }
 
   if ( strm (mode, "none"))return fp;
-
+  
   fprintf ( fp, "\n# TIP :See The Full Documentation on www.tcoffee.org\n");
 
   if (strm ( mode, "all"))
@@ -5298,7 +5334,7 @@ FILE * t_coffee_tip (FILE *fp,char *mode)
 
 
 
-int* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmode)
+Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmode)
  {
    int a,b,s1, n, i;
    FILE *fp;
@@ -5308,7 +5344,7 @@ int* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmode)
    if ( S->nseq==2 || strm (seq, "no") || strm (seq, "default")) 
      {
        for (a=0; a<S->nseq; a++)CL->master[a]=1;
-       return CL->master;
+       return NULL;
      }
    else if ( check_file_exists (seq))
      {
@@ -5317,56 +5353,95 @@ int* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmode)
        for (a=0; a< L->nseq; a++)
 	 if ( (b=name_is_in_list (L->name[a], S->name,S->nseq, 100))!=-1)CL->master[b]=1;
      }
-   else if ( strm (seq, "_P_"))
-     {
-       for (a=0; a<S->nseq; a++)
-	 {
-	   if (seq_has_template (S, a, "_P_"))CL->master[a]=1;
-	 }
-     }
-   else if ( is_number (seq))
-     {
-       int nseq;
-       char **name;
-       Alignment *A=NULL, *SA=NULL;
-       nseq=atoi (seq);
-       if ( nseq<0)
-	 nseq=((float)S->nseq*((float)nseq/(float)100.0)*(float)-1);
-
-       nseq=MIN(nseq,S->nseq);
-       if ( nseq>=S->nseq){nseq=(CL->S)->nseq; name=(CL->S)->name;}
-       else
-	 {
-	   
-	   char tmode[1000];
-	   int **sim;
-	   
-	   A=(strm (dmode, "msa"))?(very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL)):(seq2aln (S, NULL, RM_GAP));
-	   sim=(strm (dmode, "ktup") && CL->DM)?(CL->DM)->similarity_matrix:NULL;
-	   
-	   sprintf (tmode, "_aln_n%d", nseq);
-	   SA=simple_trimseq (A, NULL, tmode, NULL, NULL);
-	   nseq=SA->nseq;
-	   name=SA->name;
-	 }
-       for (a=0; a<nseq;a++)
-	 {
-	   if (nseq==(CL->S)->nseq)CL->master[a]=1;
-	   else if ((b=name_is_in_list (name[a], S->name,S->nseq, 100))!=-1)CL->master[b]=1;
-	 }
-       free_aln (A);
-       free_aln (SA);
-     }
    else
+     {
+       
+       if ( strstr (seq, "_P_"))
+	 {
+	   for (a=0; a<S->nseq; a++)
+	     {
+	       if (seq_has_template (S, a, "_P_"))CL->master[a]=1;
+	     }
+	 }
+       if ( is_number (seq) || strstr (seq, "_N_"))
+	 {
+	   int nseq;
+	   char **name;
+	   Alignment *A=NULL, *SA=NULL;
+	   if ( strstr (seq, "_N_")){nseq=atoi (strstr(seq, "_N_")+strlen ("_N_"));}
+	   else nseq=atoi (seq);
+	   if ( nseq<0)
+	     nseq=((float)S->nseq*((float)nseq/(float)100.0)*(float)-1);
+	   
+	   nseq=MIN(nseq,S->nseq);
+	   if ( nseq>=S->nseq)
+	     {
+	       for (a=0; a<(CL->S)->nseq; a++)CL->master[a]=1;
+	     }
+	   else
+	     {
+	       
+	       char tmode[1000];
+	       int **sim;
+	       
+	       A=(strm (dmode, "msa"))?(very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL)):(seq2aln (S, NULL, RM_GAP));
+	       sim=(strm (dmode, "ktup") && CL->DM)?(CL->DM)->similarity_matrix:NULL;
+	       
+	       sprintf (tmode, "_aln_n%d", nseq);
+	       SA=simple_trimseq (A, NULL, tmode, NULL, NULL);
+	       nseq=SA->nseq;
+	       name=SA->name;
+	       for (a=0; a<nseq;a++)
+		 {
+		   if (nseq==(CL->S)->nseq)CL->master[a]=1;
+		   else if ((b=name_is_in_list (name[a], S->name,S->nseq, 100))!=-1)CL->master[b]=1;
+		 }
+	       free_aln (A);
+	       free_aln (SA);
+	     }
+	 }
+       if ( strstr (seq, "_LONG_"))
+	 {
+	   int ml=0;
+	   int ls=0;
+	   for (a=0; a< (CL->S)->nseq; a++)
+	     {
+	       int l=strlen ((CL->S)->seq[a]);
+	       if (l>ml){ml=l;ls=a;}
+	     }
+	   CL->master[ls]=1; //keep the longest seqquence
+	 }
+     }
+  
+   
+   fprintf ( CL->local_stderr, "\n");
+   for (b=0,a=0; a<S->nseq; a++)
+     {
+       if ( CL->master[a])
+	 {
+	   fprintf (CL->local_stderr, "\tMaster_sequence: %s\n", S->name[a]);
+	   b++;
+	 }
+     }
+   if ( b==0)
      {
        printf_exit (EXIT_FAILURE, stderr, "ERROR: %s is neither a file nor a method nor a number for -master [FATAL:%s]\n",seq,PROGRAM);
      }
-   fprintf ( CL->local_stderr, "\n");
-   for (a=0; a<S->nseq; a++)
+ 
+   if (b!=(CL->S)->nseq)
      {
-       if ( CL->master[a])fprintf (CL->local_stderr, "\tMaster_sequence: %s\n", S->name[a]);
+       Sequence *T, *MS;
+       T=duplicate_sequence (CL->S);
+       for(a=0; a<T->nseq; a++)
+	 {
+	   if (!CL->master[a]){vfree (T->seq[a]); T->seq[a]=NULL;}
+	 }
+       MS=duplicate_sequence (T);
+       free_sequence (T, -1);
+       return MS;
      }
-   return CL->master;
+   else
+     return CL->S;
  }
 int set_methods_limits (char ** method,int nl,char **list, int n, int *maxnseq, int *maxlen)
 {

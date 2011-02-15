@@ -614,6 +614,8 @@ Sequence * declare_sequence ( int min, int max, int nseq)
     LS->max_nseq=nseq;
     LS->type=vcalloc(30, sizeof (char));
     LS->T=declare_arrayN(2, sizeof (Template), nseq, 1);
+    
+    
     LS->dc=declare_int (nseq, 2);
     return LS;
     }
@@ -637,6 +639,7 @@ Sequence * realloc_sequence   (Sequence *OUT, int new_nseq, int max_len)
       
       OUT->T=(Template**)realloc_arrayN (2, (void **)OUT->T,sizeof (Template), new_nseq, 1);
       OUT->dc=(int **)realloc_arrayN (2, (void **)OUT->dc,sizeof (int), new_nseq, 2);
+      
       OUT->max_nseq=new_nseq;
       return OUT;
     }
@@ -657,12 +660,13 @@ Sequence * duplicate_sequence (Sequence *S )
 	      sprintf ( LS->file[b], "%s", S->file[a]);	
 	      if ( S->seq_comment && S->seq_comment[a])sprintf ( LS->seq_comment[b], "%s", S->seq_comment[a]);
 	      if ( S->aln_comment && S->aln_comment[a])sprintf ( LS->aln_comment[b], "%s", S->aln_comment[a]);
-	      if ( S->seq && S->seq[a])sprintf  ( LS->seq[b], "%s", S->seq[a]);
+	      if ( S->seq && S->seq[a])sprintf  ( LS->seq[b],  "%s", S->seq[a]);
 	      if ( S->name&& S->name[a])sprintf ( LS->name[b], "%s", S->name[a]);
 	      LS->dc[b][0]=S->dc[a][0];
 	      LS->dc[b][1]=S->dc[a][1];
 	      LS->len[b]=S->len[a];
 	      LS->T[b][0]=S->T[a][0];
+	      
 	      b++;
 	      
 	    }
@@ -672,7 +676,7 @@ Sequence * duplicate_sequence (Sequence *S )
     LS->min_len=S->min_len;
     LS->nseq=b;
 
-    if ( S->W)LS->W=duplicate_weights (S->W);
+    if (S->W)LS->W=duplicate_weights (S->W);
     sprintf ( LS->type, "%s", S->type);
     sprintf ( LS->template_file, "%s", S->template_file);
     LS->max_nseq=S->nseq;
@@ -697,6 +701,7 @@ void free_sequence ( Sequence *LS, int nseq)
 	vfree (LS->type);
 	vfree (LS->len);
 	free_weights (LS->W);
+	
 	vfree (LS);
 
 	}

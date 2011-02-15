@@ -43,6 +43,7 @@ struct Sequence
       char template_file[FILENAMELEN+1];
       struct Template **T;
       
+      
 };
 typedef struct Sequence Sequence;
 
