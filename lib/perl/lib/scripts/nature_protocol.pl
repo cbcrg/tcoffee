@@ -1,9 +1,10 @@
 #!/usr/bin/env perl
 
 my $address="http://www.tcoffee.org/Projects/Datasets/NatureMethodsDataset.tar.gz";
-&url2file ($address);
+my $out="NatureMethodsDataset.tar.gz";
+&url2file ($address,$out);
 
-if ( -e "NatureMethodsDataset.tar.gz" )
+if ( -e $out)
   {
     
     system ("gunzip NatureMethodsDataset.tar.gz");
@@ -28,7 +29,7 @@ sub url2file
     
     if (&pg_is_installed ("wget"))   {$pg="wget"; $flag="-O";$arg=$wget_arg;}
     elsif (&pg_is_installed ("curl")){$pg="curl"; $flag="-o";$arg=$curl_arg;}
-    return system ("$pg $address >/dev/null 2>/dev/null");
+    return system ("$pg $address $flag $out>/dev/null 2>/dev/null");
 
 }
 
@@ -115,3 +116,4 @@ sub vtmpnam
 	push (@TMPFILE_LIST, $f);
 	return $f;
       }
+
