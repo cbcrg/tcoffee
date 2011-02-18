@@ -45,9 +45,9 @@ foreach ($np=0; $np<=$#ARGV; $np++)
 
 open F, $file || die;
 print $INSTITUTE;
-if ( $type eq "c"){print "/*********************************COPYRIGHT NOTICE**********************************/\n";}
-if ( $type eq "perl"){print "#################################COPYRIGHT NOTICE#################################/\n";}
-if ( $type eq "txt"){print "----------------------------------COPYRIGHT NOTICE---------------------------------/\n";}
+if ( $type eq "c"){print "/******************************COPYRIGHT NOTICE*******************************/\n";}
+if ( $type eq "perl"){print "##############################COPYRIGHT NOTICE##############################/\n";}
+if ( $type eq "txt"){print "-------------------------------COPYRIGHT NOTICE------------------------------/\n";}
 
 
 while (<F>)
@@ -62,7 +62,7 @@ while (<F>)
   elsif ($type eq "perl"){print "\#$_";}
 }
 close (F);
-if ( $type eq "c"){print "/*********************************COPYRIGHT NOTICE**********************************/\n";}
-if ( $type eq "perl"){print "#################################COPYRIGHT NOTICE#################################/\n";}
-if ( $type eq "txt"){print "----------------------------------COPYRIGHT NOTICE---------------------------------/\n";}
+if ( $type eq "c"){print "/******************************COPYRIGHT NOTICE*******************************/\n";}
+if ( $type eq "perl"){print "##############################COPYRIGHT NOTICE##############################/\n";}
+if ( $type eq "txt"){print "-------------------------------COPYRIGHT NOTICE------------------------------/\n";}
 
