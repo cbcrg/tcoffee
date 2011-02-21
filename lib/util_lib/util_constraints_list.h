@@ -472,6 +472,7 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *fname,char *in_m
 Constraint_list * read_constraint_list_raw_file(Constraint_list *CL, char *fname);
 
 int        read_cpu_in_n_list(char **fname, int n);
+Sequence *precompute_blast_db (Sequence *S, char **ml, int n);
 int read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name);
 
 Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode);

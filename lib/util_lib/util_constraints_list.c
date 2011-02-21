@@ -796,8 +796,8 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 		if (n==byte || (n && x==(CL->S)->nseq-1))
 		      {
 			vfclose (fp);
+			HERE ("N=%d", n);
 			sprintf (bufS, "%d %s", n,file2string (tmpf));n=0;
-			
 			bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
 			if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
 			if ( check_seq_type ( method, bufS, S))
@@ -812,7 +812,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 	    vfclose (fp);
 	  }
 	
-	else if ( strstr(aln_mode, "old_o2a"))
+	else if ( strstr(aln_mode, "o2a_old"))
 	  {
 	    int x, y;
 	    
@@ -2400,7 +2400,21 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 	
 	return CL;
 }
-
+Sequence *precompute_blast_db (Sequence *S, char **ml, int n)
+{
+  int a;
+  for (a=0; a<n; a++)
+    {
+      if ( strstr (ml[a], "blast"))
+	{
+	  S->blastdb=vtmpnam(NULL);
+	  seq2blastdb(S->blastdb,S);
+	  return S;
+	}
+      a++;
+    }
+  return S;
+}
 #define is_seq_source(Symbol,Mode,SeqMode)            (Symbol==Mode && (SeqMode==NULL || strm (SeqMode, "ANY") || (SeqMode[0]!='_' && strchr (SeqMode,Symbol)) || (SeqMode[0]=='_' && !strchr (SeqMode,Symbol))))
 Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 {

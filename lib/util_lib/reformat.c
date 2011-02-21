@@ -5979,6 +5979,18 @@ void output_fasta_seqS (char *fname, Sequence *S)
   output_fasta_seq (fname, A);
   free_aln (A);
 }
+void output_fasta_simple (char *fname, Sequence *S)
+{
+  FILE *fp;
+  int a;
+  
+  if (!S)return;
+  if (!fname)return;
+  
+  if (!(fp=vfopen (fname, "w")))return;
+  for (a=0; a<S->nseq; a++)fprintf ( fp, ">%s\n%s\n", S->name[a], S->seq[a]);
+  vfclose (fp);
+}
 
 void output_fasta_seq (char *fname, Alignment*A)
 {
@@ -8143,8 +8155,16 @@ Alignment *translate_dna_aln (Alignment *A, int frame)
 	 
 	 return A;
        }
-
-
+int seq2blastdb (char *out, Sequence *S)
+{
+  
+ 
+  output_fasta_simple (out, S);
+  
+  if ( strm (S->type, "DNA"))printf_system ("makeblastdb -in %s -dbtype nucl -logfile /dev/null", out);
+  else printf_system ("makeblastdb -in %s  -logfile /dev/null", out);
+  return 1;
+}
 int seq2tblastx_db (char *out,Sequence *S, int strand)
 {
   //strand : same values as in ncbi blastall

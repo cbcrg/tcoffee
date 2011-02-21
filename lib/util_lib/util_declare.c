@@ -677,6 +677,7 @@ Sequence * duplicate_sequence (Sequence *S )
     LS->nseq=b;
 
     if (S->W)LS->W=duplicate_weights (S->W);
+    LS->blastdb=S->blastdb;
     sprintf ( LS->type, "%s", S->type);
     sprintf ( LS->template_file, "%s", S->template_file);
     LS->max_nseq=S->nseq;
@@ -701,7 +702,7 @@ void free_sequence ( Sequence *LS, int nseq)
 	vfree (LS->type);
 	vfree (LS->len);
 	free_weights (LS->W);
-	
+	//Don't free LS->blastdb;
 	vfree (LS);
 
 	}

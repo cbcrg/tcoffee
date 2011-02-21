@@ -1219,13 +1219,12 @@ Constraint_list * seq_msa (TC_method *M , char *in_seq, Constraint_list *CL)
   static char *db_file;
   
 
-  if (!db_file)
+  if (!(CL->S)->blastdb)
     {
-      db_file=vtmpnam (NULL);
-      fp=vfopen (db_file, "w");
-      for (a=0; a<(CL->S)->nseq; a++)fprintf ( fp, ">%s\n%s\n", (CL->S)->name[a], (CL->S)->seq[a]);
-      vfclose (fp);
+      (CL->S)->blastdb=vtmpnam(NULL);
+      seq2blastdb ((CL->S)->blastdb, (CL->S));
     }
+  db_file=(CL->S)->blastdb;
   
   infile=vtmpnam (NULL);
   outfile=vtmpnam (NULL);
@@ -1244,6 +1243,9 @@ Constraint_list * seq_msa (TC_method *M , char *in_seq, Constraint_list *CL)
   
   if (strstr (M->executable2, "blast"))sprintf ( db, " -database=%s", db_file);
   else db[0]='\0';
+  
+  if (strm ((CL->S)->type, "DNA") ||strm ((CL->S)->type, "RNA" )){sprintf ( M->executable2, "blastn");}
+  else {sprintf ( M->executable2, "blastp");}
   
   sprintf ( command, "t_coffee -other_pg tc_generic_method.pl -mode=%s -method=%s %s %s%s %s %s%s -tmpdir=%s %s %s", M->executable, M->executable2, M->param1,M->in_flag,infile,M->param2,M->out_flag,outfile,get_tmp_4_tcoffee(),db,M->param);
 

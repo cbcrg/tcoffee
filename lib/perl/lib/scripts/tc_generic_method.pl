@@ -566,8 +566,8 @@ sub pdb_is_released
   }
 sub blast_msa
   {
-    my ($infile,$db,$outfile)=@_;
-    my ($a, %seq);
+    my ($blast,$infile,$db,$outfile)=@_;
+    my ($a, %s1, %s, %qs, %qs1);
     my $seqfile;
     my $SEQ=new FileHandle;
     my $seqfile="seqfile";
@@ -575,36 +575,34 @@ sub blast_msa
     
     
     %s1=&read_fasta_seq ($db);
+    %s=&fasta_hash2index_hash(%s1);
+    %qs1=&read_fasta_seq ($infile);
+    %qs=&fasta_hash2index_hash(%qs1);
     
-    foreach $s (keys (%s1))
-      {
-	$i=$s1{$s}{order};
-	$s{$i}{name}=$s;
-	$s{$i}{seq}=$s1{$s}{seq};
-	$s{$i}{len}=length( $s{$i}{seq});
-	$s{n}++;
-      }
     
-    &safe_system ("formatdb -i $db");
-    &safe_system  ("blastall -i $infile -d $db -m7 -p blastp -o io");
+    #&safe_system ("formatdb -i $db");
+    if ($blast eq "blastp"){&safe_system  ("blastall -i $infile -d $db -m7 -p blastp -o io");}
+    elsif ($blast eq "blastn"){&safe_system  ("blastn -query $infile -db $db -outfmt 5 -word_size 4 -out io");}
+
     &set_blast_type ("io");
     
-    %FB=&xml2tag_list ("io", "Iteration");
+
+    my %FB=&xml2tag_list ("io", "Iteration");
     open (F, ">$outfile");
     print F "! TC_LIB_FORMAT_01\n";
     print F "$s{n}\n";
-    for ( $a=0; $a<$s{n}; $a++)
+    for ( my $a=0; $a<$s{n}; $a++)
       {
 	print F "$s{$a}{name} $s{$a}{len} $s{$a}{seq}\n";
       }
 
 
-    for ( $a=0; $a<$FB{n}; $a++)
+    for ( my $a=0; $a<$FB{n}; $a++)
       {
-	%p=blast_xml2profile ($s{$a}{name}, $s{$a}{seq},100, 0, 0, $FB{$a}{body});
+	my %p=blast_xml2profile ($qs{$a}{name}, $qs{$a}{seq},100, 0, 0, $FB{$a}{body});
 	my $query=$p{0}{name};
 	my $i= $s1{$query}{order}+1;
-	for ($b=1; $b<$p{n}; $b++)
+	for (my $b=1; $b<$p{n}; $b++)
 	  {
 	    my $l=length ($p{$b}{Qseq});
 	    my $hit=$p{$b}{definition};
@@ -637,7 +635,6 @@ sub blast_msa
     print F "! SEQ_1_TO_N\n";
     close (F);
     return $output;
-  
   }
 
 sub blast_msa_old
@@ -718,8 +715,13 @@ sub seq2msa
     
     if ( $method eq "blastp")
       {
-	&blast_msa ("seq.pep", "db.pep","result.aln");
+	&blast_msa ("blastp","seq.pep",$database,"result.aln");
       }
+    elsif ( $method eq "blastn")
+      {
+	&blast_msa ("blastn","seq.pep",$database,"result.aln");
+      }
+    
     elsif ( $method eq "muscle")
       {
 	`muscle -in seq.pep -out result.aln $param`;
@@ -1315,7 +1317,20 @@ sub read_fasta_seq
       }
     return %hseq;
   }
-
+sub fasta_hash2index_hash
+  {
+    my %s1=@_;
+    my %s;
+    foreach my $s (keys (%s1))
+      {
+	my $i=$s1{$s}{order};
+	$s{$i}{name}=$s;
+	$s{$i}{seq}=$s1{$s}{seq};
+	$s{$i}{len}=length( $s{$i}{seq});
+	$s{n}++;
+      }
+    return %s;
+  }
 sub file_contains 
   {
     my ($file, $tag, $max)=(@_);
@@ -2973,6 +2988,7 @@ sub blast_com2new_blast_com
 	      $com="$com -logfile /dev/null";
 	      return $com;
 	    }
+	  elsif ($com =~/^blastn/){return $com;}
 	  elsif (&is_blast_package($com))
 	    {
 	      my $path;

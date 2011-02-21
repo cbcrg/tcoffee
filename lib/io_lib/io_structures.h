@@ -42,7 +42,7 @@ struct Sequence
       Weights *W;         /*Associated weights*/
       char template_file[FILENAMELEN+1];
       struct Template **T;
-      
+      char *blastdb;
       
 };
 typedef struct Sequence Sequence;

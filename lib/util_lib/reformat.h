@@ -195,6 +195,7 @@ void output_gor_seq (char *fname, Alignment*A );
 void output_mult_fasta_seq (char *fname, Alignment*A, int n );
 
 void main_output_fasta_seq ( char *fname, Alignment *A, int header);
+void output_fasta_simple   ( char *name, Sequence *S);
 void output_fasta_tree ( char *fname, Alignment *A);
 void output_fasta_seqS (char *fname, Sequence *S );
 void output_fasta_seq1 (char *fname, Alignment*A );
@@ -349,7 +350,7 @@ char * translate_dna_seq_on3frame (  char *dna_seq, char stop, char *prot);
 char * translate_dna_seq ( char *dna_seq, int frame, char stop, char *prot);
 int is_stop (char r1, char r2, char r3);
 int seq2tblastx_db (char *file,Sequence *S, int strand);
-
+int seq2blastdb (char *out, Sequence *S);
 char * back_translate_dna_seq ( char *in_seq,char *out_seq, int mode);     
 Alignment *back_translate_dna_aln (Alignment *A);
 Sequence  *translate_dna_seqS     (Sequence *S, int frame, int stop);

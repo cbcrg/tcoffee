@@ -414,7 +414,7 @@ int batch_main ( int argc, char **argv)
 			    /*MAX Nval*/  1                ,\
 			    /*DOC*/       "Limit the maximum memory usage (in Megabytes). 0: no limit" ,\
 			    /*Parameter*/ &no_error_report          ,\
-			    /*Def 1*/     "0"             ,\
+			    /*Def 1*/     "1"             ,\
 			    /*Def 2*/     "1"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
@@ -3998,6 +3998,7 @@ get_cl_param(\
 	       /*1 READ THE SEQUENCES*/
 	       
 	       S=read_seq_in_n_list   (list_file, n_list, type,seq_source);
+	       S=precompute_blast_db(S,method_list, n_method_list);
 	       
 	       if ( check_type)
 		 {
