@@ -3633,7 +3633,7 @@ int my_system ( char *command0)
     
   if (!unpacked_list)
     {
-      unpacked_list=declare_arrayN(3, sizeof (char), 3, 200,300);
+      unpacked_list=declare_arrayN(3, sizeof (char), 3, 200,vtmpnam_size());
     }
 
   if ( getenv ("DEBUG_PERL"))return safe_system (command0);
@@ -5515,7 +5515,17 @@ char *vtmpnam ( char *s1)
 }
      
 
+int vtmpnam_size()
+{
+  static int size;
 
+  if (!size)
+    {
+      char *p=vtmpnam (NULL);
+      size=(strlen (p)*2)+1;
+    }
+  return size;
+}
 int get_vtmpnam2_root()
 {
   int MAX_TMPNAM_ROOT=10000;

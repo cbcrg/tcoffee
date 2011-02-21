@@ -608,7 +608,8 @@ char * add2file2remove_list ( char *name);
 
 FILE * vtmpfile();
 void initiate_vtmpnam (char *s);
-char * vtmpnam ( char *s);
+int     vtmpnam_size ();
+char *  vtmpnam ( char *s);
 char *  tmpnam_2 (char *s);
 void    safe_remove(char*s);
 char *  vremove ( char *s);

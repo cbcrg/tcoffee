@@ -4831,9 +4831,12 @@ char *** produce_method_file ( char *method)
 	int n=0;
 	FILE *fp;
 
-	if (!list)list=declare_arrayN(3, sizeof (char),1000,2, 100);
-
-
+	if (!list)
+	  
+	  {
+	    list=declare_arrayN(3, sizeof (char),1000,2,vtmpnam_size());
+	  }
+	
 	/*
 	sprintf (list[n][0], "t_coffee");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
