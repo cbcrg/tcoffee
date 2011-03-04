@@ -1,9 +1,0 @@
-PARAMETER   : -in
-USAGE       : Reads the Ssequences, Mmethods, Llibraries,Xmatrices,Rprofiles,Pstructures,AAlignments
-MAX_N_VALUES: 2000
-DEFAULT     :  OR stdin (when flag set)
-RANGE       : [any]...[]
-TYPE        : S
-
-
-PROGRAM: T-COFFEE (Version_8.80)

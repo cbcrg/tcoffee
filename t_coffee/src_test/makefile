@@ -1,9 +1,0 @@
-CC=gcc -g -Wall
-t_coffee: util_constraints_list.o util_job_handling.o util_dps.o util_domain_constraints_list.o util_analyse_constraints_list.o util_aln_analyze.o aln_convertion_util.o util_declare.o hsearch.o random.o util_make_tree.o util.o reformat_struc.o reformat.o aln_compare.o io_func.o pb_util_read_sequence.o pb_util_read_seq_util.o tree_util.o util_graph_maln.o util_dp_clean_maln.o util_dp_ssec_pwaln.o util_dp_sim.o util_dp_mm_nw.o util_dp_gotoh_nw.o util_dp_suboptimal_nw.o util_dp_cdna_fasta_nw.o util_dp_generic_fasta_nw.o util_dp_fasta_nw.o util_dp_fasta_sw.o util_dp_gotoh_sw.o util_dp_est.o util_domain_dp_drivers.o util_dp_drivers.o util_domain_dp.o CUSTOM_evaluate_for_struc.o evaluate_for_struc.o evaluate_for_domain.o evaluate_dirichlet.o evaluate.o showpair.o fsa_dp.o pavie_dp.o dev1.o fastal.o parttree.o tree.o fastal_opt_parsing.o scoring.o iteration.o dev3.o t_coffee.o 
-	$(CC)  -o t_coffee util_constraints_list.o util_job_handling.o util_dps.o util_domain_constraints_list.o util_analyse_constraints_list.o util_aln_analyze.o aln_convertion_util.o util_declare.o hsearch.o random.o util_make_tree.o util.o reformat_struc.o reformat.o aln_compare.o io_func.o pb_util_read_sequence.o pb_util_read_seq_util.o tree_util.o util_graph_maln.o util_dp_clean_maln.o util_dp_ssec_pwaln.o util_dp_sim.o util_dp_mm_nw.o util_dp_gotoh_nw.o util_dp_suboptimal_nw.o util_dp_cdna_fasta_nw.o util_dp_generic_fasta_nw.o util_dp_fasta_nw.o util_dp_fasta_sw.o util_dp_gotoh_sw.o util_dp_est.o util_domain_dp_drivers.o util_dp_drivers.o util_domain_dp.o CUSTOM_evaluate_for_struc.o evaluate_for_struc.o evaluate_for_domain.o evaluate_dirichlet.o evaluate.o showpair.o fsa_dp.o pavie_dp.o dev1.o t_coffee.o  fastal.o parttree.o tree.o fastal_opt_parsing.o scoring.o iteration.o dev3.o -lm
-	mv t_coffee $(USER_BIN)
-
-all:  t_coffee
-
-clean:
-	rm *.o

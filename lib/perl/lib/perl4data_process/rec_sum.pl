@@ -6,9 +6,12 @@ use Env qw(USER);
 #Specific Files and Default Parameters
 $x_field=0;
 $y_field=1;
+$y_field_set=1;
+$nyf=1;
+
 $interval=0;
 $file="stdin";
-#
+
 $print_avg=1;
 $print_sd=0;
 $print_sum=0;
@@ -72,7 +75,7 @@ foreach $value ( @ARGV)
     	    }
 	elsif ($value eq "-y")
 	    {
-	      
+	    $nyf=0;  
 	    while ($ARGV[$np+1] && !($ARGV[$np+1]=~/\-/))
 	      {
 		$y_field[$nyf++]=$ARGV[++$np]-1;
@@ -133,12 +136,31 @@ if ($file eq "stdin")
 	;}
 
 
-open(F,$file);
 
-if ($interval)
+
+if ($interval && $max)
   {
     $interval_size=($max-$min)/$interval;
   }
+elsif ($interval)
+  {
+    open(F,$file);  
+    my $set_max=0;
+    my $set_min=0;
+    while (<F>)
+      {
+	my $v=$_;
+	chomp($v);
+	print "--$v--";
+	
+	if ($v<$min ||!$set_min){$set_min=1;$min=$v;}
+	if ($v>$max ||!$set_max){$set_max=1;$max=$v;}
+      }
+    close (F);
+    print "$min $max uuuu";
+    $interval_size=($max-$min)/$interval;
+  }
+open(F,$file);  
 while (<F>)
   {
     $line=$_;
@@ -161,7 +183,7 @@ while (<F>)
 if (!$interval){$interval=1;}
 for ( $a=0; $a<$interval; $a++)
   {
-    printf ( "%3d %3d ", $interval_size*$a, $interval_size*($a+1));
+    printf ( "%4d %4d ", $interval_size*$a, $interval_size*($a+1));
     for ( $b=0; $b<$nyf; $b++)	
       {
 	$i=$interval*$a;
@@ -175,10 +197,10 @@ for ( $a=0; $a<$interval; $a++)
 	    $avg=$sum{$b}{$a}/$n{$b}{$a};
 	    $sd=sqrt($sum2{$b}{$a}*$n{$b}{$a}-$sum{$b}{$a}*$sum{$b}{$a})/($n{$b}{$a}*$n{$b}{$a});
 	  }
-	if ($print_n) {printf "%10.4f ", $n{$b}{$a};}
-	if ($print_sum){printf "%10.4f ", $sum{$b}{$a};}
-	if ($print_avg){printf "%10.4f ", $avg}
-	if ($print_sd) {printf "%10.4f ", $sd;}
+	if ($print_n) {printf "%15.4f ", $n{$b}{$a};}
+	if ($print_sum){printf "%15.4f ", $sum{$b}{$a};}
+	if ($print_avg){printf "%15.4f ", $avg}
+	if ($print_sd) {printf "%15.4f ", $sd;}
       }
     printf ("\n");
   }
