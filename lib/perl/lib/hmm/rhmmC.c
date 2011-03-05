@@ -32,7 +32,7 @@ typedef struct
   char    *out;
 }Hmm;
 
-#define RSEED 10
+
 #define UNPACK_HMM(name)\
 double **M =name->M;\
 double **NM =name->NM;\
@@ -100,12 +100,8 @@ main (int argc, char *argv[])
   //argv[3]: nit
   //argv[4]: out
   //
-#ifdef RSEED
-    srand(RSEED);
-#else
-    srand(time(NULL));
-#endif
-    
+
+  srand(time(NULL));
   H=calloc (1, sizeof (Hmm));
   
   H->S  =undump_seq (argv[2],H);
