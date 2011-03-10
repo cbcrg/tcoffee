@@ -32,9 +32,8 @@ if ($#ARGV ==-1)
     print "  ................................rhmm.pl -model out.rhmm.model -data rhmm.out.data -train bw -evaluate\n";
     
     print "  -model       <file>,<mode> .....File: input model from file.\n";
-    print "  ................................Mode: 'data' estimates model from data if RST field is set.\n";
     print "  ................................Mode: 'topology' creates a model with -nst states\n";
-    print "  ................................number of emission is set to the number of bin in data\n";
+    print "  ................................number of emission is set to the number of bin in data or to -nem\n";
     
     print "  -nem         <int>..............Number of emmissions when -model=toplogy\n";
     print "  -nst         <int>..............Number of states when -model=toplogy\n";
@@ -44,6 +43,9 @@ if ($#ARGV ==-1)
     print "  ................................Mode: 'model' to generate simulated data from the model -model.\n";
     print "  -action      <mode> ............'bw' to apply aum and welch training.\n";
     print "  ................................'decode' to apply the provided model onto the data\n";
+    print "  ................................'model2data' generates -n artificial dataset -len long (with RST)\n";  print "  -single.........................Set model states and emission to single char values (max=62 values)";
+    print "  ................................'data2model' estimates model from data (must have RST)\n";
+    
     print "  -nrounds     <value>............Value; number of trainned models.\n";
     print "  -nit         <value>............Value: number of iterations in each round of trainning\n";
     print "  -outmodel    <file>.............File:  name of the output file containning the trainned model.\n";
@@ -68,8 +70,8 @@ if ($#ARGV ==-1)
     print "Note: output files can be used as input\n";
     print "Note: run rhmm.pl -test to get sample formats\n";
     print "****************** Model Format **************************\n";
-    print "  #st;<state label>;<state label>;proba;\n";
-    print "  #em;<state label>;<emission bin>;proba;\n";
+    print "  #set;<state label>;<state label>;proba;\n";
+    print "  #set;<state label>;<emission bin>;proba;\n";
     print "  #comment;<free text>;\n";
     print "\n";
     print "Note: to declare constraints one simply needs to declare transitions\n";
@@ -79,105 +81,91 @@ if ($#ARGV ==-1)
     die;
   }
 
+my $param;
 
-my $param=process_param (@ARGV);
+$param=process_param (@ARGV);
+if (!exists ($param->{c})){$param->{c}=1;}
 my $nrounds=1;
 my $nit=100;
 my ($Data,$Model,$P);
+my $newModel;
 
 #process Parameters
-if (!$param->{nref}){$param->{nref}=1;}
-if (!$param->{lenref}){$param->{lenref}=3000;}
-if ($param-> {test})
+if (!$param->{n}){$param->{n}=1;}
+if (!$param->{len}){$param->{len}=3000;}
+if ( $param-> {test})
   {
-    $param->{model}="in.rhmm.model";
+    $param->{model}="test.rhmm.model";
     my $Model=ODHC2model($Model);
     dump_model ($Model,$param->{model},"Reference_test");
     
-    my $Data=model2data($Model, $param->{nref}, $param->{lenref});
-    $param->{data}="in.rhmm.data";
+    my $Data=model2data($Model, $param->{n}, $param->{len});
+    $param->{data}="test.rhmm.data";
     dump_data ($Data,$param->{data}, "ReferenceData");
+    printf "      Data : $param->{data}\n";
+    printf "      Model: $param->{model}\n";
+    if (!$param->{action}){exit(0);}
   }
 
-if ($param->{model} eq "data"){;}
-elsif ( $param->{model} eq "topology"){;}
-elsif (-e $param->{model}){$Model=undump_model($param->{model});}
-else 
-  {
-    print STDERR "**** ERROR: -model: $param->{model} is neither a valid file nor a valid mode [FATAL]\n";
-    die;
-  }
+#Read the data, the model and estimate the constraints
+$Data =main_undump_data ($Data, $param);
 
+#Read/Create the model
+if (-e $param->{model}){$Model=undump_model($param->{model});}
+elsif ($param->{model} eq "topology")
+  {
+    $Model=topology2model($Data,$param->{nst},$param->{nem});
+  }
+if (-e $param->{constraints}){$Model=undump_model($param->{constraints});}
+elsif ($Model){$Model=model2constraints($Model, $param->{constraints})};
 
-
-if ($param->{constraints} eq "1" )
-  {
-    #makes non specified transitions/emissions forbiden in the seed model
-    $Model=model2constraints($Model, $param->{constraints});
-  }
-elsif    (-e $param->{constraints}){$Model=undump_model($param->{constraints});}
-else 
-  {
-    $Model=model2constraints($Model,"default");
-  }
-
-if ($param->{data} eq "model"){;}
-elsif (-e $param->{data}) 
-  {
-    my @flist=split (/\s+/, $param->{data});
-    foreach my $ff (@flist)
-      {
-	$Data=generic_undump_data($ff,$Data);
-      }
-  }
-
-
-
-if ($param->{model} eq "data" && $param->{data} eq "model")
-  {
-    print STDERR "Error: you must provide some data or a model!\n";die;
-  }
-elsif ($param->{data} eq "model")
-  {
-    $Data=model2data ($param->{nref}, $param->{lenref});
-  }
-elsif ($param->{model} eq "data")
-  {
-    $Model=data2model ($Data);
-  }
-elsif ( $param->{model} eq "topology")
-  {
-    $Model=topology2model($Data,$param->{nst});
-  }
+#Reformat the Model
+if ($param->{single}){$Model=model2single_symbol_state($Model);}
 
 if ($param->{action} eq "bw")
   {
-   
+    check_data ($Data, "data", $Model, "model"); 
+    
     if (!$param->{nrounds}){$param->{nrounds}=1;}
     if (!$param->{nit}){$param->{nit}=100;}
     ($Data,$Model,$P)=&baum_welch($Data,$Model,$param);
     if ($param->{sort}){($Data,$Model)=data2recode_on_em($Data, $Model);}
     $Model=modelL2model($Model);
   }
+elsif ($param->{action} eq "model2data")
+  {
+    check_data ($Model, "model"); 
+    $Data=model2data($Model, $param->{n}, $param->{len});
+    ($Data,$P)=decode ($Model,$Data,$param);
+  }
+elsif ($param->{action} eq "data2model")
+  {
+    check_data ($Data, "data"); 
+    $Model=data2model ($Data);
+    ($Data,$P)=decode ($Model, $Data, $param);
+  }
 elsif ($param->{action} eq "decode")
   {
-    $Model=model2modelL($Model);
+    check_data ($Data, "data", $Model, "model");
     ($Data,$P)=decode ($Model, $Data, $param);
-    $Model=modelL2model($Model);
   }
 elsif  ($param->{action} eq "convert")
   {
     ;
   }
+else
+  {
+    print STDERR "ERROR: $param->{action} is an unknown action \n";
+  }
 
-
+      
 
 $param=set_output_name ($param, model2nst($Model),model2nem($Model));
 
     
 print "\n";
 print "----- rhhm.pl Output:-----\n";
-if ($param->{data})
+if ($Data && $param->{outdata} ne "no")
     {
       printf "      Data Score  : log(P)=%.3f\n",$P;
       if ($param->{evaluate})
@@ -187,27 +175,27 @@ if ($param->{data})
 	  my $sc2=data2evaluation2 ($Data, $Model,$param->{evaluate});
 	  printf "      Data Pred   : sc1=%.2f sc2=%.2f\n", $sc1,$sc2;
 	}
-      printf "      Decoded Data: $param->{outdata}\n";
-      printf "      Model       : $param->{outmodel}\n\n";
-      printf "      Model       : $param->{outconstraints}\n\n";
       
       if (!$param->{output} || $param->{output} eq "data")
-	{dump_data ($Data, $param->{outdata},hash2string($param, "-"));}
+	{
+	  dump_data ($Data, $param->{outdata},hash2string($param, "-"));
+	}
       elsif ($param->{output} eq "fasta")
 	{
+	  $Model=long_state2short_state ($Model,$Data);
 	  dump_seq ($Data, $param->{outdata});
 	}
-      dump_model      ($Model,$param->{outmodel}      ,hash2string($param, "-"));
-      dump_constraints($Model,$param->{outconstraints}, hash2string($param, "-"));
+      printf "      Decoded Data: $param->{outdata}\n";
     }
-else
+if ($Model && $param->{outmodel} ne "no")
   {
-    printf "      Model       : $param->{outmodel}\n\n";
-    dump_model($Model,$param->{outmodel}, hash2string($param, "-"));
+    printf "      Model       : $param->{outmodel}\n";
+    printf "      Constraints : $param->{outconstraints}\n\n";
+    dump_model      ($Model,$param->{outmodel}      ,hash2string($param, "-"));
     dump_constraints($Model,$param->{outconstraints}, hash2string($param, "-"));
-    
   }
-die;
+exit (0);
+
 
 ####################################################################
 #                                                                  #
@@ -226,8 +214,14 @@ sub set_output_name
       {
 	$param->{out}=$param->{data};
 	$param->{out}=~s/\.[^\.]*$//;
+	if (!$param->{out})
+	  {
+	    $param->{out}=$param->{model};
+	    $param->{out}=~s/\.[^\.]*$//;
+	  }
 	if ($param->{out} eq "in.rhmm"){$param->{out}="out";}
       }
+    $param->{out}=~s/\.rhmm//;
     
     if (!$param->{outdata})       {$param->{outdata}       ="$param->{out}.rhmm.$nst\_$nem.decoded";}
     if (!$param->{outmodel})      {$param->{outmodel}      ="$param->{out}.rhmm.$nst\_$nem.model";}
@@ -235,14 +229,32 @@ sub set_output_name
     
     return $param;
   }
+sub check_data
+  {
+    my @l=@_;
+
+    for (my $a=0; $a<=$#l; $a+=2)
+      {
+	if ( !$l[$a])
+	  {print "\n*****ERROR: could not use $l[$a+1] [FATAL]\n";
+	   exit (1);
+	 }
+      }
+    return 1;
+  }
+		      
 sub check_parameters 
   {
     my $p=shift;
     my $rp={};
 
     $rp->{test}=1;
+    $rp->{n}=1;
+    $rp->{len}=1;
     $rp->{model}=1;
     $rp->{data}=1;
+    $rp->{data2}=1;
+    
     $rp->{constraints}=1;
     $rp->{action}=1;
     $rp->{nrounds}=1;
@@ -251,8 +263,12 @@ sub check_parameters
     $rp->{outmodel}=1;
     $rp->{evaluate}=1;
     $rp->{output}=1;
-    $rp->{output}=1;
+    $rp->{out}=1;
+    $rp->{single}=1;
     $rp->{nst}=1;
+    $rp->{nem}=1;
+    $rp->{w}=1;
+    $rp->{gw}=1;
     
     $rp->{c}=1;
     
@@ -379,22 +395,23 @@ sub baum_welch_P
     my $BM;
     my $maxidle=5;
     my $score;
+    my $delta;
     my ($P, $PP, $BP);
     
 
-    for (my $i=0;$i<$p->{nrounds}; $i++)
+    for (my $i=1;$i<=$p->{nrounds}; $i++)
       {
 	
 	print "---- $i -----\n";
 	
 	$M=model2modelR ($M);
-	display_model ($M);
+	#display_model ($M);
 	$M=model2modelL($M);
 	
 
 	my $idle;
 	my $cont=1;
-	$maxidle=10000;
+	
 	my $it;
 	$PP=0;
 	for ($it=0; $it<$p->{nit} && $idle<$maxidle && $cont; $it++)
@@ -402,9 +419,9 @@ sub baum_welch_P
 	    ($M,$P)=baum_welch_iteration ($S,$M);
 	    if ($PP)
 	      {
-		my $delta=$P-$PP;
-		if ($delta<-1){$cont=0;}
-		elsif ($delta<0.001){$idle++;}
+		$delta=$P-$PP;
+		if ($delta<0){$idle++;}
+		elsif ($delta<0.001 || $delta<0){$idle++;}
 		else {$idle=0;}
 	      }
 	    printf "\t$it ==> %.3f\n", $P;
@@ -456,6 +473,12 @@ sub baum_welch_C
     print "$p->{c} bw $dfile $mfile $nmfile $cfile $p->{nrounds} $p->{nit}\n";
     
     system ("$p->{c} bw $dfile $mfile $nmfile $cfile $p->{nrounds} $p->{nit}");
+
+    if (!-e "$nmfile.model")
+      {
+	print "ERROR: $p->{c} is Not properly installed--- Will run the Perl version (100X slower)\n";
+	return baum_welch_P($D,$M,$p);
+      }
     
     ($M,$P)=undump_model_C  ($M,$I,"$nmfile.model");
     ($D,$PP)=undump_viterbi_C ($D,$I,"$nmfile.viterbi");
@@ -473,27 +496,26 @@ sub baum_welch_iteration
     my $M=shift;
     my $A={};
     my $E={};
-    my $P;
+    my $TP;
     my $new_proc=1; #use the new procedure
     
     foreach my $j (keys (%$S))
       {
-	
 	my $L=keys (%{$S->{$j}});
 	my $F={};
 	my $B={};
+	my $P;
 	
 	($B,$P)=backwardL($M, $S->{$j});#log_space
-	
 	($F,$P)=forwardL ($M, $S->{$j});
-	
+		
 	#Update A
 	foreach my $k (keys (%$M))
 	  {
 	    foreach my $l(keys(%$M))
 	      {
 		$A->{$j}{$k}{$l}=$LOG_ZERO;
-		if (!$A->{$k}{$l}){$A->{$k}{$l}=$LOG_ZERO;}
+		if (!$A->{-1}{$k}{$l}){$A->{-1}{$k}{$l}=$LOG_ZERO;}
 		
 		for (my $i=1; $i<$L; $i++)
 		  {
@@ -507,18 +529,18 @@ sub baum_welch_iteration
 		    $A->{$j}{$k}{$l}=log_add ($A->{$j}{$k}{$l},log_multiply($fo,$tr,$em,$ba));
 		  }
 		$A->{$j}{$k}{$l}=log_divide($A->{$j}{$k}{$l},$P);
-		$A->{$k}{$l}=log_add ($A->{$k}{$l},$A->{$j}{$k}{$l});
+		$A->{-1}{$k}{$l}=log_add ($A->{-1}{$k}{$l},$A->{$j}{$k}{$l});
 	      }
 	  }
-
 	#update Emissions
 	foreach my $k (keys (%$M))
 	  {
 	    foreach my $b (keys (%{$M->{$k}}))
 	      {
+
 		if ($b=~/ST::/){next;}
 		$E->{$j}{$k}{$b}=$LOG_ZERO;
-		if ( ! exists ($E->{$k}{$b}{v})){$E->{$k}{$b}=$LOG_ZERO;}
+		if ( ! $E->{-1}{$k}{$b}){$E->{-1}{$k}{$b}=$LOG_ZERO;}
 		
 		for (my $i=1; $i<=$L; $i++)
 		  {
@@ -531,9 +553,10 @@ sub baum_welch_iteration
 		  }
 		
 		$E->{$j}{$k}{$b}=log_divide($E->{$j}{$k}{$b},$P);
-		$E->{$k}{$b}=log_add($E->{$k}{$b},$E->{$j}{$k}{$b});
+		$E->{-1}{$k}{$b}=log_add($E->{-1}{$k}{$b},$E->{$j}{$k}{$b});
 	      }
 	  }
+	$TP=(!$TP)?$P:log_multiply ($TP, $P);
       }
     
     #turn log counts into counts
@@ -542,8 +565,8 @@ sub baum_welch_iteration
       {
 	foreach my $l (keys (%{$M->{$k}}))
 	  {
-	    if (($l=~/ST::/ )){$A->{$k}{$l}=exp($A->{$k}{$l})+$pseudocount;}
-	    else {$E->{$k}{$l}=exp($E->{$k}{$l})+$pseudocount;}
+	    if (($l=~/ST::/ )){$A->{-1}{$k}{$l}=exp($A->{-1}{$k}{$l})+$pseudocount;}
+	    else {$E->{-1}{$k}{$l}=exp($E->{-1}{$k}{$l})+$pseudocount;}
 	  }
       }
     if ($new_proc)
@@ -553,7 +576,7 @@ sub baum_welch_iteration
 	    my ($ts,$te,$fs,$fe,$v);
 	    foreach my $s2 (keys(%{$M->{$s1}}))
 	      {
-		$v=$M->{$s1}{$s2}{v}=($s2 =~/ST::/)?$A->{$s1}{$s2}:$E->{$s1}{$s2};
+		$v=$M->{$s1}{$s2}{v}=($s2 =~/ST::/)?$A->{-1}{$s1}{$s2}:$E->{-1}{$s1}{$s2};
 		if (!exists($M->{$s1}{$s2}{f}))
 		  {
 		    if ($s2=~/ST::/){$ts+=$v;}
@@ -586,8 +609,8 @@ sub baum_welch_iteration
 	    my $num;
 	    
 	    
-	    foreach my $l (keys(%$M)){$num+=$A->{$k}{$l};}
-	    foreach my $l (keys(%$M)){$M->{$k}{$l}{v}=($num==0)?0:$A->{$k}{$l}/$num;}
+	    foreach my $l (keys(%$M)){$num+=$A->{-1}{$k}{$l};}
+	    foreach my $l (keys(%$M)){$M->{$k}{$l}{v}=($num==0)?0:$A->{-1}{$k}{$l}/$num;}
 	  }
 	
 	# update E/model 
@@ -596,17 +619,17 @@ sub baum_welch_iteration
 	    my $num;
 	    foreach my $l (keys(%{$M->{$k}}))
 	      {
-		if (!($l =~/ST::/)){$num+=$E->{$k}{$l};}
+		if (!($l =~/ST::/)){$num+=$E->{-1}{$k}{$l};}
 	      }
 	    foreach my $l (keys(%{$M->{$k}}))
 	      {
-		if (!($l =~/ST::/)){$M->{$k}{$l}{v}=($num==0)?0:$E->{$k}{$l}/$num;}
+		if (!($l =~/ST::/)){$M->{$k}{$l}{v}=($num==0)?0:$E->{-1}{$k}{$l}/$num;}
 	      }
 	  }
       }
     $M=model2modelL($M);
     
-    return ($M,$P);
+    return ($M,$TP);
   }
 ####################################################################
 #                                                                  #
@@ -634,6 +657,7 @@ sub posteriorL
     {
       my $M=shift;
       my $S=shift;
+      my $P;
       
       foreach my $j (keys (%$S))
       {
@@ -642,8 +666,8 @@ sub posteriorL
 	my $F={};
 	my $B={};
 	
-	my ($B,$P)=backwardL($M,$S->{$j});#log_space
-	my ($F,$P)=forwardL ($M, $S->{$j});
+	($B,$P)=backwardL($M,$S->{$j});#log_space
+	($F,$P)=forwardL ($M, $S->{$j});
 	
 	for (my $i=1; $i<=$L; $i++)
 	  {
@@ -662,7 +686,7 @@ sub posteriorL
 		  }
 	      }
 	    $S->{$j}{$i}{posterior}=$bpost_k;
-	    $S->{$j}{$i}{bpost_score}=$bpost_score;
+	    $S->{$j}{$i}{bpost_score}=myexp($bpost_score);
 	  }
       }
    return ($S,0);
@@ -754,18 +778,27 @@ sub decode
     my $M=shift;
     my $D= shift;
     my $p=shift;
+    my $P;
 
-    if ( $p->{c}){return decode_C($M,$D,$p);}
-    else {return decode_P($M,$D,$p);}
+    
+    $Model=model2modelL($Model);
+    
+    if ( $p->{c}){($D,$P)=decode_C($M,$D,$p);}
+    else {($D,$P)=decode_P($M,$D,$p);}
+    $Model=modelL2model($Model);
+
+    return ($D,$P);
   }
 sub decode_P
   {
     my $M=shift;
     my $D= shift;
     my $p=shift;
-
-    ($D, $P)=viterbiL  ($Model, $Data);
+    my $P;
+    
+    
     ($D, $P)=posteriorL($Model, $Data);
+    ($D, $P)=viterbiL  ($Model, $Data);
     $Model=modelL2model($Model);
     
     return ($D, $P);
@@ -787,6 +820,14 @@ sub decode_C
     dump_data_C ($D, $I,$dfile);
     dump_model_C($M, $I,$mfile);
     system ("$p->{c} decode $dfile $mfile $nmfile");
+    
+    if (!-e "$nmfile.viterbi")
+      {
+	print "ERROR: $p->{c} is Not properly installed--- Will run the Perl version (100X slower)\n";
+	return baum_welch_P($D,$M,$p);
+      }
+    
+
     ($D,$PP)=undump_viterbi_C ($D,$I,"$nmfile.viterbi");
     ($D,$VP)=undump_posterior_C ($D,$I,"$nmfile.posterior");
     unlink (($dfile,$mfile,$nmfile,"$nmfile.viterbi","$nmfile.posterior"));
@@ -871,26 +912,26 @@ sub ODHC2model
     my $M={};
 
    
-    $M->{'ST::fair'} {'ST::fair'  }{v}=0.95;
-    $M->{'ST::fair'} {'ST::unfair'}{v}=0.05;
+    $M->{'ST::f'} {'ST::f'  }{v}=0.95;
+    $M->{'ST::f'} {'ST::u'}{v}=0.05;
     
-    $M->{'ST::unfair'} {'ST::fair'  }{v}=0.05;
-    $M->{'ST::unfair'} {'ST::unfair'}{v}=0.95;
+    $M->{'ST::u'} {'ST::f'  }{v}=0.05;
+    $M->{'ST::u'} {'ST::u'}{v}=0.95;
     
    
-    $M->{'ST::fair'} {'1'}{v}=1/6;
-    $M->{'ST::fair'} {'2'}{v}=1/6;
-    $M->{'ST::fair'} {'3'}{v}=1/6;
-    $M->{'ST::fair'} {'4'}{v}=1/6;
-    $M->{'ST::fair'} {'5'}{v}=1/6;
-    $M->{'ST::fair'} {'6'}{v}=1/6;
+    $M->{'ST::f'} {'1'}{v}=1/6;
+    $M->{'ST::f'} {'2'}{v}=1/6;
+    $M->{'ST::f'} {'3'}{v}=1/6;
+    $M->{'ST::f'} {'4'}{v}=1/6;
+    $M->{'ST::f'} {'5'}{v}=1/6;
+    $M->{'ST::f'} {'6'}{v}=1/6;
     
-    $M->{'ST::unfair'} {'1'}{v}=1/10;
-    $M->{'ST::unfair'} {'2'}{v}=1/10;
-    $M->{'ST::unfair'} {'3'}{v}=1/10;
-    $M->{'ST::unfair'} {'4'}{v}=1/10;
-    $M->{'ST::unfair'} {'5'}{v}=1/10;
-    $M->{'ST::unfair'} {'6'}{v}=5/10;
+    $M->{'ST::u'} {'1'}{v}=1/10;
+    $M->{'ST::u'} {'2'}{v}=1/10;
+    $M->{'ST::u'} {'3'}{v}=1/10;
+    $M->{'ST::u'} {'4'}{v}=1/10;
+    $M->{'ST::u'} {'5'}{v}=1/10;
+    $M->{'ST::u'} {'6'}{v}=5/10;
     
 
     
@@ -954,6 +995,16 @@ sub data2model
       my $pseudo=1;
       my %tot;
       
+      if (!data_has_RST($d))
+	{
+	  print STDERR "ERROR: data has no RST field. Impossible to estimate model from data\n";
+	  die;
+	}
+      elsif(!data_has_bin($d)) 
+	{
+	  print STDERR "ERROR: data is not binned. Impossible to estimate model from data\n";
+	  die;
+	}
       foreach my $exp (keys(%$d))
 	{
 	  my $pst="";
@@ -963,6 +1014,7 @@ sub data2model
 		{
 		  my $cst=$d->{$exp}{$r}{RST};
 		  my $em= $d->{$exp}{$r}{bin};
+		  
 		  $M->{$cst}{$em}{v}++;
 		  if ($pst){$M->{$pst}{$cst}{v}++;}
 		  $tot{$cst}++;
@@ -979,7 +1031,7 @@ sub data2model
 	      $M->{$s1}{$s2}{v}/=$tot{$s1};
 	    }
 	}
-      display_model ($M);die;
+      
       return $M;
     }
 sub data2recode_on_em
@@ -1203,7 +1255,20 @@ sub data2evaluation2
       return $score;
     }
 
-
+sub data_has_bin
+      {
+	my $d=shift;
+	
+	foreach my $k1 (keys(%$d))
+	  {
+	  foreach my $k2 (keys (%{$d->{$k1}}))
+	    {
+	      if (exists($d->{$k1}{$k2}{bin})){return 1;}
+	      else {return 0;}
+	    }
+	 }
+	return 1;
+      }
 sub data_has_RST
       {
 	my $d=shift;
@@ -1212,7 +1277,7 @@ sub data_has_RST
 	  {
 	  foreach my $k2 (keys (%{$d->{$k1}}))
 	    {
-	      if ($d->{$k1}{$k2}{RST}){return 1;}
+	      if (exists($d->{$k1}{$k2}{RST})){return 1;}
 	      else {return 0;}
 	    }
 	 }
@@ -1226,6 +1291,104 @@ sub data_has_RST
 #                                                                  #
 #                                                                  #
 ####################################################################	
+sub convert_state
+  {
+    my $m=shift;
+    my $st1=shift;
+    my $st2=split; 
+    my $nm={};
+    
+    foreach my $k (keys (%$m))
+      {
+	foreach my $l (keys (%{$m->{$k}}))
+	  {
+	    my $nk=($k eq $st1)?$st2:$k;
+	    my $nl=($l eq $st1)?$st2:$l;
+	    
+	    $nm->{$nk}{$nl}{v}=$m->{$k}{$l}{v};
+	    if ( exists ( $m->{$k}{$l}{f})){$nm->{$nk}{$nl}{f}=$m->{$k}{$l}{f};}
+	  }
+      }
+    return $nm;
+  }
+
+
+sub long_state2short_state
+  {
+    my $m=shift;
+    my $d=shift;
+    my @symbol=split (//,"1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ");
+    
+    my ($a,$b);
+    my $b=0;
+    my $nm={};
+    my $stl={};
+    
+    if (model_has_short_state ($m)){return $m;}
+    
+    foreach my $k (keys(%$m))
+      {
+	if (!exists ($stl->{$k})){$stl->{$k}="ST::$symbol[$a++]";}
+    	foreach my $l (keys(%{$m->{$k}}))
+	  {
+	    if (!($l=~/ST::/) && !exists ($stl->{$l})){$stl->{$l}="$symbol[$b++]";}
+	  }
+      }
+    if ($b>=62 || $a>=62){error ("Too many states or emissions for single");}
+    #print STDOUT "\nModel Conversion into Short State (for Fasta output)\n";
+    #foreach my $k (keys (%$stl)){if ($k=~/ST::/){	print "$k -----> $stl->{$k}\n";}}
+    #foreach my $k (keys (%$stl)){if (!$k=~/ST::/){	print "$k -----> $stl->{$k}\n";}}
+    
+    foreach my $k(keys(%$m))
+      {
+	foreach my $l (keys(%{$m->{$k}}))
+	  {
+	    my $nk=$stl->{$k};
+	    my $nl=$stl->{$l};
+	    $nm->{$nk}{$nl}{v}=$m->{$k}{$l}{v};
+	    if ( exists ($m->{$k}{$l}{f})){$nm->{$nk}{$nl}{f}=$m->{$k}{$l}{f};}
+	  }
+      }
+    if ($d)
+      {
+	my @fl=("bin","viterbi","RST","posterior");
+	foreach my $exp (keys (%$d))
+	  {
+	    foreach my $rec (keys(%{$d->{$exp}}))
+	      {
+		foreach my $f (@fl)
+		  {
+		    if ( exists ($d->{$exp}{$rec}{$f}))
+		      {
+			my $v=$d->{$exp}{$rec}{$f};
+			$v=$stl->{$v};
+			$d->{$exp}{$rec}{$f}=$v;
+		      }
+		  }
+	      }
+	  }
+      }
+    
+
+    return $nm;
+  }
+sub model_has_short_state
+  {
+    my $m=shift;
+    foreach my $k (keys (%$m))
+      {
+	$k=~/ST::(.*)/;
+	if ( length($1)>1){return 0;}
+	foreach my $l (keys (%{$m->{$k}}))
+	  {
+	    if (!$l=~/ST::/)
+	      {
+		if (length($l)>1){return 0;}
+	      }
+	  }
+      }
+    return 1;
+  }
 sub model_is_Count
   {
     my $m=shift;
@@ -1308,7 +1471,7 @@ sub model2data
     my @sll=keys (%$sl);
     $state=shift(@sll);
     
-    for (my $j=0; $j<$n; $j++)
+    for (my $j=1; $j<=$n; $j++)
       {
 	for (my $i=1; $i<=$l; $i++)
 	  {
@@ -1627,24 +1790,42 @@ sub topology2model
   {
     my $data=shift;
     my $nst=shift;
+    my $nem=shift;
+    my $bin;
+    
     my $M={};
     
-    my $bin=data2bin($data);
-    
+    if ($nem)
+      {
+	$bin={};
+	for (my $a=1; $a<=$nem; $a++){$bin->{$a}=1;}
+      }
+    elsif ($data) 
+      {
+	$bin=data2bin($data);
+      }
+    else 
+      {
+	print STDERR "ERROR: Number of Emission unknown";
+	exit (0);
+      }
+    if (!$nst)
+      {
+	print STDERR "ERROR: Number of States unknown";
+	exit (0);
+      }
     for (my $a=1; $a<=$nst; $a++)
       {
 	for (my $b=1; $b<=$nst; $b++)
 	  {
-	    $M->{"ST::$a"}{"ST::$b"}{v}=rand(1000);
+	    $M->{"ST::$a"}{"ST::$b"}{v}=1;
 	  }
 	foreach my $b (keys (%$bin))
 	  {
-	    $M->{"ST::$a"}{$b}{v}=rand(1000);
+	    $M->{"ST::$a"}{$b}{v}=1;
 	  }
       }
     $M=modelC2model($M);
-    display_model ($M);
-    
     return $M;
     
   }
@@ -1762,21 +1943,49 @@ sub string2hash
 #                                                                  #
 #                                                                  #
 ####################################################################
+sub main_undump_data
+  {
+    my $d=shift;
+    my $p=shift;
+    
+    if ($p->{data}) 
+      {
+	my @fl=split (/\s+/, $p->{data});
+	foreach my $ff (@fl)
+	  {
+	    if ( -e $ff) {$d=generic_undump_data($ff,$d, $p);}
+	  }
+      }
+    
+    if ($param->{data2})
+      {
+	my @fl=split (/\s+/, $param->{data2});
+	for (my $a=0; $a<=$#fl; $a+=2)
+	  {
+	    if ( -e $fl[$a]){$d=generic_undump_data($fl[$a],$d, $p,$fl[$a+1]);}
+	  }
+      }
+    return $d;
+  }
 sub generic_undump_data
   {
     my $file=shift;
     my $d=shift;
+    my $p=shift;
+    my $field=shift;
     my $F= new FileHandle;
 
-    open ($F,$file);
+    vfopen ($F,$file);
     my $l=<$F>;
     close ($F);
     
-    if    ($l=~/Format: rhmm.data.01/){return undump_data ($file,$d);}
-    elsif ($l=~/^>/){return undump_seq ($file,$d);}
+    
+
+    if    ($l=~/Format: rhmm.data.01/){return undump_data ($file,$d,$p,$field);}
+    elsif ($l=~/^>/){return undump_seq ($file,$d,$p,$field);}
     else 
       {
-	return undump_data ($file,$d);
+	return undump_data ($file,$d,$p,$field);
 	print STDERR "***** ERROR: Format of $file is unknown [FATAL]\n";
 	die;
       }
@@ -1788,7 +1997,7 @@ sub display_data
     my $F= new FileHandle;
     
     if (!$file){open ($F, ">-");}
-    else {open ($F, ">$file");}
+    else {vfopen ($F, ">$file");}
    
     print $F "$HEADER";
     foreach my $c (sort ({$a<=>$b}keys(%$d)))
@@ -1813,7 +2022,8 @@ sub undump_data
 	my $internalID;
 	
 	if (!$d){$d={};}
-	open ($F, $file);
+	vfopen ($F, $file);
+
 	while (<$F>)
 	  {
 	    my $l=$_;
@@ -1844,7 +2054,7 @@ sub dump_data_C
     my $F=new FileHandle;
 
     
-    open ($F, ">$file");
+    vfopen ($F, ">$file");
     printf $F "%d", data2size($d);
     
     foreach my $exp (sort {$a<=>$b}keys(%$d))
@@ -1866,7 +2076,7 @@ sub undump_viterbi_C
     my $file=shift;
     my $F=new FileHandle;
     
-    open ($F, "$file");
+    vfopen ($F, "$file");
     my $cl=<$F>;
     close ($F);
     my @l=split (/\s+/, $cl);
@@ -1890,7 +2100,7 @@ sub undump_posterior_C
     my $F=new FileHandle;
     
     
-    open ($F, "$file");
+    vfopen ($F, "$file");
     my $cl=<$F>;
     close ($F);
     
@@ -1904,7 +2114,7 @@ sub undump_posterior_C
 	foreach my $rec (sort {$a<=>$b}keys(%{$d->{$exp}}))
 	  {
 	    $d->{$exp}{$rec}{posterior}=$I->{i2l}{shift(@l)};
-	    $d->{$exp}{$rec}{bpost_score}=shift(@l);
+	    $d->{$exp}{$rec}{bpost_score}=myexp(shift(@l));
 	  }
       }
     return ($d,$P);
@@ -1918,7 +2128,7 @@ sub dump_data
 	
 	my $F= new FileHandle;
 
-	open ($F, ">$file");
+	vfopen ($F, ">$file");
 	print $F "#comment;Format: rhmm.data.01\n";
 	print $F "#comment;$comment;\n";
 	foreach my $exp (sort {$a<=>$b}(keys(%$d)))
@@ -1950,36 +2160,49 @@ sub dump_data
 
 sub undump_seq
   {
-    my $f=shift;
+    my $file=shift;
     my $d=shift;
-    my (@seq, @field, @name,$s);
+    my $p=shift;
+    my $f=shift;
     my $F=new FileHandle;
+    my ($w,$gw);
+    $w=(exists($p->{w}))?$p->{w}:1;
+    if ($p->{gw}){$w=$gw=$p->{gw};}
     
-    open ($F, "$f");
-    while (<$F>)
+    
+    foreach my $e ((file2entry($file,">")))
       {
-	$s.=$_;
-      }
-    close ($F);
-    
-    
-    @name=($s=~/>(\S*).*\n[^>]*/g);
-    @seq =($s=~/>.*.*\n([^>]*)/g);
-    @field =($s=~/>\S*(.*)\n([^>]*)/g);
-   
-    
-    for ($a=0; $a<=$#seq; $a++)
-      {
-	my @rl=split (//,$seq[$a]);
-	my $add=($field[$a] eq "bin")?"":"ST::";
+	if ($e eq ">"){next;}
+	my (@s)=split (/\n/, $e);
+	my $h=shift(@s);
+	my $s=join('',@s);
+	$s=~s/>//g;
 	
-	for (my $b=0;$b<=$#rl; $b++)
+	my ($name, $f2)=split (/\s+/,$h);
+	if (!$f){$f=$f2;}
+	
+	if (!$f)
 	  {
-	    $d->{$name[$a]}{$b+1}{$field[$a]}="$add$rl[$b]";
+	    print STDERR "ERROR: untaged data must be provided via -data2\n";
+	    die;
+	  }
+	
+	my @rl=split (//,$s);
+	
+	for (my $b=0;$b<=($#rl-($w-1)); $b++)
+	  {
+	    my $value;
+	    if ($f eq "bin" && !$gw)  {for (my $c=0; $c<$w; $c++){$value.=$rl[$b+$c];}}
+	    elsif ($f eq "bin" && $gw){$value=$rl[$b].$rl[$b+$gw];}
+	    elsif ($f eq "RST"){$value="ST::$rl[$b]";}
+	    
+	    $d->{$name}{$b+1}{$f}=$value;
 	  }
       }
     return $d;
   }
+
+	
 sub dump_seq
   {
     my $d=shift;
@@ -1987,11 +2210,11 @@ sub dump_seq
     my @list=@_;
     my $F=new FileHandle;
     
-    open ($F, ">$f");
-    
+    vfopen ($F, ">$f");
     my $fl=data2field_list($d);
-    if (!@list){@list=("RST","posterior","viterbi","bin");}
+    if ($#list==-1){@list=("RST","posterior","viterbi","bin");}
     
+        
     foreach my $field (@list)
       {
 	if (!$fl->{$field}){next;}
@@ -2058,15 +2281,30 @@ sub undump_model
 	my $C;
 	my $L;
 	my $F= new FileHandle;
-	open ($F, $file);
+	vfopen ($F, $file);
 	while (<$F>)
 	  {
 	    my $l=$_;
 	    chomp($l);
 	    
-	    if    ($l=~/^#st/)     {$m=set_model_value($m, $l);}
-	    elsif ($l=~/^#em/)     {$m=set_model_value ($m, $l);}
-	    elsif ($l=~/^#graph/)  {$m=add_graph($m,$l);}
+	    if ($l=~/^#graph/)     {$m=add_graph($m,$l);}
+	    elsif ($l=~/^#set/)    {$m=set_model_value ($m, $l);}
+	    elsif ($l=~/^#bset/)   {$m=batch_set_model_value ($m, $l);}
+	    elsif ($l=~/^#comment/){;}
+	    elsif ($l=~/^#convert/)
+	      {
+		my @sl=split(/;/,$l);
+		shift (@sl);
+		$m=convert_state($m,shift(@sl), shift(@sl));
+	      }
+	    elsif (!$l=~/^#/){;}
+	    else
+	      {
+		print STDERR "\n---ERROR: unknown model definition: \n$l\n";
+		exit (0);
+	      }
+	    
+	    
 	  }
 	close ($F);
 	
@@ -2111,7 +2349,7 @@ sub add_graph
 		if ($bconnect eq "full" && $b<$a)     {$m->{$s1}{$s2}{v}=1;}
 		elsif ($bconnect eq "nb" && $b==$a-1) {$m->{$s1}{$s2}{v}=1;}
 		
-		if ($sconnect eq "self" && $b==$a){$m->{$s1}{$s2}{v}=1;}
+		if ($sconnect eq "full" && $b==$a){$m->{$s1}{$s2}{v}=1;}
 		
 		if ($fconnect eq "full" && $b>$a)     {$m->{$s1}{$s2}{v}=1;}
 		elsif ($fconnect eq "nb" && $b==$a+1) {$m->{$s1}{$s2}{v}=1;}
@@ -2129,21 +2367,7 @@ sub add_graph
 	  }
 	return $m;
       }
-sub connect_nodes
-      {
-	my $m=shift;
-	my $l=shift;
 
-	my @g=split (/;/, $l);
-	shift (@g);
-	my $s1=shift (@g);
-	my $s2=shift (@g);
-	my $v1=shift(@g);
-	my $v2=shift(@g);
-	if ($v1){$m->{$s1}{$s2}{v}=$v1;}
-	if ($v1){$m->{$s2}{$s1}{v}=$v2;}
-	return $m;
-      }
 sub set_model_value
   {
     my $m=shift;
@@ -2155,74 +2379,47 @@ sub set_model_value
     my $st2  =shift(@g);
     my $v1   =shift(@g);
     my $mode =shift(@g);
-    my $st2_is_em;
-    my $l1={};
     
+    $m->{$st1}{$st2}{v}=$v1;
+    if    ($mode eq "fixed"){ $m->{$st1}{$st2}{f}=$v1;}
+    elsif ($mode eq "unfix"){ undef($m->{$st1}{$st2}{f});}
+    return $m;
+  }
+  
+sub batch_set_model_value
+  {
+    my $m=shift;
+    my $l=shift;
     
-    #st|em;transitions|ST:xx:*|ST::1;transitions_emissions|ST::xx;value;fixed_reverse_inverse;
-    $st1=~s/\*/\.\*/g;
-    $st2=~s/\*/\.\*/g;
-    if (!($st2=~/ST::/)){$st2_is_em=1;}
-   
+    my @g=split (/;/, $l);
+    my $type =shift (@g);
+    my $st1  =shift(@g);
+    my $st2  =shift(@g);
+    my $v1   =shift(@g);
+    my $mode =shift(@g);
     
-    
-    if (!($st1=~/\*/) && !($st1=~/transitions/) && !exists ($m->{$st1}{$st1}{v})){$m->{$st1}{$st1}{v}=0;}
-    foreach my $s1 (keys(%$m))
+    foreach my $k (keys (%$m))
       {
-	if ($s1=~/$st1/ || $st1 =~/transitions/)
+	if ($k=~/^$st1$/)
 	  {
-	    if (!($st2=~/\*/) && !($st2=~/transitions/) && !($st2=~/emissions/)&& !exists ($m->{$s1}{$st2}{v})){$m->{$s1}{$st2}{v}=0;}
-	    foreach my $s2 (keys (%{$m->{$s1}}))
+	    foreach my $l (keys(%{$m->{$k}}))
 	      {
-		if    ($s2 =~/ST::/ && $st2_is_em){;}
-		elsif ($s2 =~/$st2/){$l1->{$s1}{$s2}=1;}
-		elsif ($st2=~/emissions/   && !$s2=~/ST::/){$l1->{$s1}{$s2}=1;}
-		elsif ($st2=~/transitions/ &&  $s2=~/ST::/){$l1->{$s1}{$s2}=1;}
-	      }
-	  }
-      }
-
-    if ($mode=~"inverse")
-      {
-	foreach my $s1 (keys (%$m))
-	  {
-	    foreach my $s2 (keys(%{$m->{$s1}}))
-	      {
-		if ($l1->{$s1}{$s2})
+		if ($l=~/ST::/ && !($st2=~/ST::/)){next;}
+		if ($l=~/^$st2$/)
 		  {
-		    $m->{$s1}{$s2}{v}=$v1;
-		    if ($mode =~/fixed/  ){$m->{$s1}{$s2}{f}=$v1;}
-		    if ($mode =~/reverse/ && $s2=~/ST::/)
+		    $m->{$k}{$l}{v}=$v1;
+		    if ($mode eq "fixed"){$m->{$k}{$l}{f}=$v1;}
+		    elsif ($mode eq "unfixed"){undef ($m->{$k}{$l}{f});}
+		    elsif ($mode)
 		      {
-			$m->{$s2}{$s1}{v}=$v1;
-			if ($mode =~/fixed/){$m->{$s2}{$s1}{f}=$v1;}
+			print STDERR "\n---ERROR: unknown bset mode:\n$l\n";
 		      }
-		  }
-	      }
-	  }
-      }
-    else
-      {
-	foreach my $s1 (keys (%$l1))
-	  {
-	    foreach my $s2 (keys (%{$l1->{$s1}}))
-	      {
-		$m->{$s1}{$s2}{v}=$v1;
-		
-		if ($mode =~/fixed/  ){$m->{$s1}{$s2}{f}=$v1;}
-		if ($mode =~/reverse/ && $s2=~/ST::/)
-		  {
-		    $m->{$s2}{$s1}{v}=$v1;
-		    if ($mode =~/fixed/){$m->{$s2}{$s1}{f}=$v1;}
 		  }
 	      }
 	  }
       }
     return $m;
   }
-	
-	
-
 sub dump_constraints
       {
 	my $model=shift;
@@ -2232,7 +2429,7 @@ sub dump_constraints
 	my $F= new FileHandle;
 	
 	
-	if ($file){open ($F, ">$file");}
+	if ($file){vfopen ($F, ">$file");}
 	else {$F=*STDOUT;}
 	
 	print $F "#comment;constraints\n";
@@ -2254,7 +2451,7 @@ sub dump_constraints
 	      {
 		if (!($k2=~/^ST/)) 
 		  {
-		    if (exists($model->{$k1}{$k2}{f})){printf $F "#em;$k1;$k2;%.4f;\n",$model->{$k1}{$k2}{v};}
+		    if (exists($model->{$k1}{$k2}{f})){printf $F "#set;$k1;$k2;%.4f;\n",$model->{$k1}{$k2}{v};}
 		  }
 	      }
 	  }
@@ -2269,7 +2466,7 @@ sub dump_model
 	my $F= new FileHandle;
 	
 	
-	if ($file){open ($F, ">$file");}
+	if ($file){vfopen ($F, ">$file");}
 	else {$F=*STDOUT;}
 	
 	print $F "#comment;$comment\n";
@@ -2280,7 +2477,7 @@ sub dump_model
 	      {
 		if ($k2=~/^ST/ && $m->{$k1}{$k2}{v}>$DELTA)
 		  {
-		    printf $F "#st;$k1;$k2;%.4f;",$m->{$k1}{$k2}{v};
+		    printf $F "#set;$k1;$k2;%.4f;",$m->{$k1}{$k2}{v};
 		    if (exists ($m->{$k1}{$k2}{f})){print$F "fixed;"}
 		    print $F "\n";
 		  }
@@ -2292,7 +2489,7 @@ sub dump_model
 	      {
 		if (!($k2=~/^ST/) && $m->{$k1}{$k2}{v}>$DELTA)
 		  {
-		    printf $F "#em;$k1;$k2;%.4f;",$m->{$k1}{$k2}{v};
+		    printf $F "#set;$k1;$k2;%.4f;",$m->{$k1}{$k2}{v};
 		    if (exists ($m->{$k1}{$k2}{f})){print$F "fixed;"}
 		    print $F "\n";
 		  }
@@ -2310,8 +2507,8 @@ sub dump_model_C
     my $F1=new FileHandle;
     my $F2=new FileHandle;
     
-    open ($F1, ">$mfile");
-    open ($F2, ">$cfile");
+    vfopen ($F1, ">$mfile");
+    vfopen ($F2, ">$cfile");
     print $F1 "0 $I->{ns} $I->{ne}";
     print $F2 "0 $I->{ns} $I->{ne}";
     
@@ -2341,7 +2538,7 @@ sub undump_model_C
     my $file=shift;
     my $F=new FileHandle;
 
-    open ($F, "$file");
+    vfopen ($F, "$file");
     my $l=<$F>;
     close ($F);
     my @list=split (/\s+/, $l);
@@ -2360,7 +2557,7 @@ sub undump_model_C
       }
     return ($M,$P);
   }
-    
+
 ####################################################################
 #                                                                  #
 #                                                                  #
@@ -2369,6 +2566,44 @@ sub undump_model_C
 #                                                                  #
 #                                                                  #
 ####################################################################
+sub error
+  {
+    my $msg=shift;
+    
+    print STDERR "ERROR: $msg [FATAL]\n";
+    exit (0);
+  }
+
+sub vfopen 
+  {
+    my $f=shift;
+    my $file=shift;
+
+    if (($file =~/^\>/) && !($file =~/^\>\>/ )){open ($f, $file); return $f;}
+    elsif (($file =~/^\>\>(.*)/))
+      {
+	if (!-e $1){	print STDERR "\nERROR: $file does not exist [FATAL]\n";exit(1);}
+      }
+    elsif (!-e $file){	print STDERR "\nERROR: $file does not exist [FATAL]\n";exit(1);}
+   
+    open ($f,$file);
+    return $f;
+  }
+	
+sub file2entry
+  {
+    my $f=shift;
+    my $sep=shift;
+    my $F=new FileHandle;
+    
+    my $rsep=$/;
+    if ($sep){$/=$sep;}
+    
+    vfopen ($F, "$f");
+    my @e=<$F>;
+    close ($F);
+    return @e;
+  }
 sub permute
   {
     my @list=@_;

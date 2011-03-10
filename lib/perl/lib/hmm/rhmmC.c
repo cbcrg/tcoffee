@@ -7,6 +7,7 @@
 #define LOG_ZERO -999999999
 #define LOG_UNDERFLOW 0.000000001
 #define DELTA 0.000001
+#define MINDELTA 0.001
 typedef struct
 {
   double **M;
@@ -196,7 +197,7 @@ double baum_welch_train  (Hmm *H, int round)
   UNPACK_HMM(H);
   int idle, it, cont,print;
   int maxidle=10;
-  float delta=0.001;
+  float delta;
   double PP, RP=0;
   for (PP=0,it=0,idle=0, cont=1,print=0; it<nit && idle<maxidle && cont==1; it++)
     {
@@ -212,7 +213,7 @@ double baum_welch_train  (Hmm *H, int round)
       if (PP)
 	{
 	  delta=H->P-PP;
-	  if (delta<0.001)idle++;
+	  if (delta<MINDELTA)idle++;
 	  else idle=0;
 	}
       
