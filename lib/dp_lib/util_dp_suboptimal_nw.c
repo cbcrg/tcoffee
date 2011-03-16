@@ -596,7 +596,7 @@ int *** backward_so_dp_biphasic ( Alignment *A, int *ns, int **ls, int **pos0, i
 }
 
 
-int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL);
+int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL,int mode);
 
 float * forward_proba_pair_wise  ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *TmatchProb, float ***TinsProb, float **transProb);
 float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *TmatchProb, float ***TinsProb,float **transProb);
@@ -623,7 +623,6 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
    float thr=0.01;//ProbCons Default
    char *alphabet;
   
-   
    
    //Free all the memory
    if (A==NULL)
@@ -864,8 +863,8 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        TinsProb=declare_arrayN (3, sizeof (float),2,NumMatrixTypes,TinsProb_ml);
      }
    
-   get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL);
-
+   get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL, SEQUENCE);
+   
    F=forward_proba_pair_wise (A->seq_al[ls[0][0]], A->seq_al[ls[1][0]], NumMatrixTypes,NumInsertStates,transMat, initialDistribution,TmatchProb,TinsProb, transProb);
    B=backward_proba_pair_wise (A->seq_al[ls[0][0]], A->seq_al[ls[1][0]], NumMatrixTypes,NumInsertStates,transMat, initialDistribution,TmatchProb,TinsProb, transProb);
    A->CL=ProbaMatrix2CL(A,ns, ls,NumMatrixTypes,NumInsertStates, F, B, thr,CL);
@@ -874,7 +873,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
    return 1;
    }
 
-int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL)
+int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL, int mode)
 {
   int i, j, a, b, c,d, k, n,n1,n2, ij;
   int  c1, c2;
@@ -883,12 +882,12 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
   char *ss1=NULL;
   char *ss2=NULL;
   int uss=0;
-  
+  static int gtp=0;
   //Pre-computation of the pairwise scores in order to use potential profiles
   //The profiles are vectorized AND Compressed so that the actual alphabet size (proteins/DNA) does not need to be considered
   
   
-  if (ns[0]==1 && ns[1]==1 )
+  if (mode==SEQUENCE)
     {
       int s1, s2;
       int *nns, **nls;
@@ -907,6 +906,7 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
       
       sst1=seq2T_template_string((CL->S),s1);
       sst2=seq2T_template_string((CL->S),s2);
+      
       
       if (NA1 || NA2)
 	{
@@ -927,7 +927,7 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	    for (a=0; a<ns[0]; a++)
 	      nls[0][a]=ls[0][a];
 	    }
-	  
+
 	  if (NA2)
 	    {
 	      nns[1]=NA2->nseq;
@@ -946,7 +946,7 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	      nls[1][a]=ls[1][a];
 	    }
 	  
-	  get_tot_prob (NA1, NA2, nns, nls, nstates, matchProb, insProb, TmatchProb, TinsProb, CL);
+	  get_tot_prob (NA1, NA2, nns, nls, nstates, matchProb, insProb, TmatchProb, TinsProb, CL,PROFILE);
 	  vfree (nns); free_int (nls,-1);
 	  return 1;
 	}
@@ -1453,6 +1453,7 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
   seq1Length=I=strlen (A->seq_al[ls[0][0]]);
   seq2Length=J=strlen (A->seq_al[ls[1][0]]);
 
+  
   if (!transMat)
     {
        alphabet=alphabetDefault;
@@ -1502,7 +1503,7 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 
    TmatchProb=vcalloc ((I+1)*(J+1), sizeof (float));
    TinsProb=declare_arrayN (3, sizeof (float),2,NumMatrixTypes,MAX(I,J)+1);
-   get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL);
+   get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL,SEQUENCE);
    
    // create viterbi matrix
    l=NumMatrixTypes * (seq1Length+1) * (seq2Length+1);

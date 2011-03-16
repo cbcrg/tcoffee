@@ -188,11 +188,11 @@ Alignment * main_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, con
   
   Alignment *TopS=NULL, *LastS=NULL, *CurrentS=NULL;
   
- 
-  if ( IN->A)IN=IN->A;
+
+  if ( IN->A){IN=IN->A;}
   while (IN)
     {
-    
+
       CurrentS= main_coffee_evaluate_output2(IN, CL, mode);
       if (!TopS)LastS=TopS=CurrentS;
       else
@@ -616,7 +616,6 @@ Alignment * triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
   
   if (!IN || !CL || !CL->residue_index) return IN;
   
-  
   if ( get_nproc()==1)return  nfork_triplet_coffee_evaluate_output (IN,CL);
   else if (strstr ( CL->multi_thread, "evaluate"))return  fork_triplet_coffee_evaluate_output (IN,CL);
   else return nfork_triplet_coffee_evaluate_output (IN,CL);
@@ -664,7 +663,7 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 	      score_aln=max_aln=0;
 	      for (a=sl[j][0]; a<sl[j][1]; a++)
 		{
-		  if (j==0)output_completion (stderr,a,sl[0][1],1, "Final Evaluation");
+		  if (j==0)output_completion (CL->local_stderr,a,sl[0][1],1, "Final Evaluation");
 		  score_col=max_col=0;
 		  for (b=0; b<IN->nseq; b++)
 		    {
@@ -793,7 +792,7 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
       int s1,r1,s2,r2,w2,s3,r3,w3;
       int **lu;
       
-     
+
       
       OUT=copy_aln (IN, OUT);
       pos=aln2pos_simple(IN, IN->nseq);
@@ -817,6 +816,7 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
 	      r1=pos[b][a];
 	      if (r1>=0)lu[s1][r1]=1;
 	    }
+	  
 	  for (b=0; b<IN->nseq; b++)
 	    {
 	      score_res=max_res=NORM_F;

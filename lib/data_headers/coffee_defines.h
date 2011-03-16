@@ -153,6 +153,9 @@
 #define _START 64
 #define _TERM  65
 
+#define PROFILE 66
+#define SEQUENCE 67
+
 #define GOP               0
 #define GCP               1
 #define GEP               2

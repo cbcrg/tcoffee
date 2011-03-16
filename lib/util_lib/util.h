@@ -325,6 +325,7 @@ char* strcatf  (char *string1,char *string2, ...);
 char *vcat (char *v1, char *v2);
 
 int strget_param ( char *string, char *param_name, char *param_value, char *format, ...);
+int   strim (const char *s1, const char *s2);
 char * lstrstr ( char *in, char *token);
 char * vstrstr ( char *in, char *token);
 char * estrstr ( char *in, char *token,...);
@@ -546,6 +547,10 @@ int measure_longest_line_in_file ( char *name );
 int file_cat ( char *fname1, char *fname2);
 FILE* display_file_content (FILE *output, char *name);
 int   cat_file (char *file1, char *file2);
+
+char **list2expanded_flist (char **list, int *n, char *tag);
+char **expand_flist (char *file, char **list,int i,int *n, char *tag);
+
 char ***file2list   (char *name, char *sep);
 char ** file2lines  (char *name);
 char *  file2string (char *name);
@@ -633,6 +638,7 @@ int echo ( char *string, char *fname);
 
 int **get_file_block_pattern (char *fname, int *n_blocks, int max_n_line);
 
+int token_is_in_file_n ( char *fname, char *token, int nlines);
 int token_is_in_file (char *fname, char *token);
 
 FILE * find_token_in_file_nlines ( char *fname, FILE * fp, char *token, int n_line);
@@ -736,3 +742,21 @@ float rates2sensitivity (int tp, int tn, int fp, int fn, float *sp, float *sn, f
 float profile2sensitivity (char *pred, char *ref, float *sp, float *sn, float *sen2, float *b);	      
 float profile2evalue (char *pred, char *ref);
 //isexec lib
+
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //  
+//                                                                           //  
+//                           Kmeans                                          //  
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+void      km_output_data ( double **data, int n, int dim, int len,  char *infile, char *outfile);
+int       km_kmeans(double **data, int n, int m, int k, double t, double **centroids);
+float     km_make_kmeans(double **d, int n, int dim, int k,double t, double **centroids, int nrounds);
+double ** km_read_data ( char *file, int n, int dim, int len, char **field_list);
+int       km_file2dim     ( char *file, int *n,int *dim, int *len);
+double**  km_shuffle_data (double **d, double **sd, int n, int r);
+void      km_display_data (double **d, int n, int dim);
+double    km_data2evaluate ( double **d, int n, int dim);
+double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **centroids, int nrounds);

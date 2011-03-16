@@ -13,7 +13,7 @@
 #include <stdarg.h>
 #include <fcntl.h>
 #include <sys/file.h>
-
+#include <sys/types.h>
 
 #include "io_lib_header.h"
 #include "util_lib_header.h"
@@ -627,6 +627,28 @@ int cmp_list_int (const int**a, const int**b)
 
 
 int name_is_in_list ( char *name, char **name_list, int n_name, int len)
+	{
+	  static char **llist;
+	  static int    ln;
+	  static hash_t h;
+	  static int hdef;
+	  if ( name_list==NULL || name ==NULL)return -1;
+	  if (ln!=n_name || name_list!=llist)
+	    {
+	      int a;
+	      ln=n_name;
+	      llist=name_list;
+	      if (hdef)
+		{
+		  hash_destroy(&h);
+		  hdef=1;
+		}
+	      hash_init(&h, ln*5);
+	      for (a=0; a<ln; a++)hash_insert(&h,llist[a],a);
+	    }
+	  return hash_lookup(&h,name);
+	}
+int name_is_in_list_s ( char *name, char **name_list, int n_name, int len)
 	{
 	int a;
 	int pos=-1;
@@ -2100,6 +2122,25 @@ int  *randomize_list (int *list, int len, int ncycle)
 }
 /*Replace by a gap the parts of the two strings that do not OVERLAP*/
 /*returns the length of the overlap*/
+
+int strim(const char *s1, const char *s2)
+{
+  int l1,l2,a;
+  if (!s1 || !s2)return 0;
+  
+  l1=strlen (s1);
+  l2=strlen (s2);
+  if (l1!=l2)return -1;
+
+  for (a=0; a<l1; a++)
+    {
+      int c1=tolower (s1[a]);
+      int c2=tolower (s2[a]);
+      if ( c1!=c2) return 0;
+    }
+  return 1;
+}
+  
 int vstrcmp (const char *s1, const char *s2)
 {
   if ( !s1 && !s2)return 0;
@@ -3591,8 +3632,8 @@ int printf_system_direct  (char *string, ...)
   int r;
   
   cvsprintf (buf, string);
-
-
+  
+  
   r=system (buf);
   vfree(buf);
   return r;
@@ -3630,7 +3671,7 @@ int my_system ( char *command0)
 {
   static char ***unpacked_list;
   static int n_unpacked;
-    
+ 
   if (!unpacked_list)
     {
       unpacked_list=declare_arrayN(3, sizeof (char), 3, 200,vtmpnam_size());
@@ -3926,8 +3967,9 @@ int safe_system (const char * com_in)
 	failure_handling=EXIT_ON_FAILURE;
       }
     
-	      
-    sprintf ( command, " -SHELL-%s (tc)", com_in);
+    
+    sprintf ( command, " -SHELL- %s (tc)", com_in);
+    
     if ((pid = vvfork (command)) < 0)
         return (-1);
     
@@ -4131,6 +4173,7 @@ int kill_child_list (int *list)
 	  kill (a, SIGTERM);
 	  list[a]=-1;
 	}
+      else if (a==cpid)list[a]=0;
     }
 }
 	  
@@ -4145,10 +4188,9 @@ int get_child_list (int pid,int *clist)
   clist[pid]++;
   if (clist[pid]>1)
     {
-	  add_information ( stderr, "Corrupted Lock System" );
-	  for (a=0; a<MAX_N_PID; a++)release_all_locks (a);
-	  return 0;
-
+      add_information ( stderr, "Corrupted Lock System" );
+      for (a=0; a<MAX_N_PID; a++)release_all_locks (a);
+      return 0;
     }
 	
   lockf=lock2name (pid, LLOCK);
@@ -4402,10 +4444,12 @@ char *get_tmp_4_tcoffee ()
       char buf[1000];
       char host[1024];
       gethostname(host, 1023);
+
+      
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
       else if (v && strstr (v, "TMP"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP_4_TCOFFEE"));
       else if (v && strstr (v, "LOCAL"))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
-      else if (v && strstr (v, "."))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
+      else if (v && strm (v, "."))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
       else if (v)sprintf (tmp_4_tcoffee, "%s", v);
       else if (isdir("/var/tmp"))sprintf (tmp_4_tcoffee, "/var/tmp/");
       else sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
@@ -4413,8 +4457,9 @@ char *get_tmp_4_tcoffee ()
       //now that rough location is decided, create the subdir structure
        if (is_rootpid())
 	{
-	  sprintf (buf, "%s/t_coffee.tmp.%s/tmp.%d/", tmp_4_tcoffee, host,getpid());
+	  sprintf (buf, "%s/t_coffee.tmp/tmp.%d/", tmp_4_tcoffee,getpid());
 	  sprintf (tmp_4_tcoffee, "%s", buf);
+	  
 	  my_mkdir(tmp_4_tcoffee);
 	  my_rmdir(tmp_4_tcoffee);
 	  my_mkdir(tmp_4_tcoffee);
@@ -5916,6 +5961,92 @@ FILE* display_file_content (FILE *output, char *name)
   return output;
 }
 
+char **list2expanded_flist (char **list, int *n, char *tag)
+{
+  //expand files into lists
+  //a file list is declared as tag1::<file_name>
+  //or as a file whose first line is FILE_LIST::
+  //expansion keeps going recursively until all files have been expanded
+  //keeps trap of infinite loops (i.e. file referencing itself
+  
+  int a=0;
+  hash_t h;
+
+  hash_init (&h, n[0]*10);
+  list=vrealloc (list, (n[0]+1)*sizeof (char*));
+  list[n[0]]=NULL;
+  
+  
+  while (list[a]!=NULL)
+    {
+      char *f=NULL;
+      
+      if (strstr (list[a], tag)){f=list[a]+strlen (tag);}
+      else if ( token_is_in_file_n (list[a],tag,1))f=list[a];
+      else f=NULL;
+      
+      if (f)
+	{
+	  if (hash_lookup(&h, f)!=-1)myexit (fprintf_error (stderr,"Recursive file definition : %s", f));
+	  list=expand_flist(f,list,a,n,tag);
+	  hash_insert (&h, f, 1);
+	}
+      else
+	{
+	  a++;
+	}
+    }
+  hash_destroy(&h);
+  return list;
+}
+char **expand_flist (char *file, char **list,int i,int *n, char *tag)
+{
+  //expand the content of a file within a list of files;
+  //make sure the last element is null (list[n[0]]
+  int nl=0;
+  char ***fl=file2list(file, "\n");
+  char **nlist;
+  int nn=0;
+  int a;
+  
+  while (fl[nl++]);
+  nlist=vcalloc (n[0]+nl+1, sizeof (char*));
+  
+  //put the old stuff back
+  for (a=0; a<i; a++)
+    {
+      nlist[nn]=vcalloc ( strlen (list[a])+1, sizeof (char));
+      sprintf (nlist[nn], "%s",list[a]);
+      nn++;
+    }
+
+  //expand i
+  a=0;
+  while (fl[a])
+    {
+      
+      if ( !strm (fl[a][1], tag))
+	{
+	  nlist[nn]=vcalloc ( strlen (fl[a][1])+1, sizeof (char));
+	  sprintf (nlist[nn], "%s",fl[a][1]);
+	  nn++;
+	}
+      a++;
+    }
+  
+  //add the remainder (i+1....end)
+  for (a=i+1; a<n[0]; a++)
+    {
+      nlist[nn]=vcalloc ( strlen (list[a])+1, sizeof (char));
+      sprintf (nlist[nn], "%s",list[a]);
+      nn++;
+    } 
+  n[0]=nn;
+  free_char (list, -1);
+  return nlist;
+}
+
+
 char ***file2list ( char *name, char *sep)
 {
   /*Rturns an array where
@@ -6455,12 +6586,16 @@ FILE * find_token_in_file_nlines ( char *fname, FILE * fp, char *token, int n_li
 	  
 int token_is_in_file ( char *fname, char *token)
 {
+  return token_is_in_file_n (fname, token, 0);
+}
+int token_is_in_file_n ( char *fname, char *token, int nlines)
+{
   /*TH:an argument against torture: innocents get tortured longer, likewise for token testing*/
   FILE *fp;
   static char *buf;
   char *b, *p;
   int begining;
-  
+  int line_number=0;
 
   
   if (token[0]=='\n')
@@ -6478,13 +6613,15 @@ int token_is_in_file ( char *fname, char *token)
   else
     {
       fp=vfopen (fname, "r");
-      while ((b=vfgets (buf,fp))!=NULL)
+      while ((b=vfgets (buf,fp))!=NULL && (line_number<nlines || nlines==0))
 	{
 	  buf=b;
+	  
 	  p=strstr (buf, token);
 	  if (!p);
 	  else if ( begining==1 && p==buf){vfclose (fp); return 1;}
 	  else if ( begining==0 && p){vfclose (fp); return 1;}
+	  line_number++;
 	}
       vfclose (fp);
       return 0;
@@ -6816,27 +6953,36 @@ int check_internet_connection  (int mode)
 }
 char *pg2path (char *pg)
 {
-  char *path;
+  char *buf;
+  char *dir;
+  char *p1,*p;
+
+  if (!pg || !(p1=getenv ("PATH")))return NULL;
   
-  char *tmp;
- 
+  p=vcalloc  ( strlen (p1)+strlen (pg) +1, sizeof (char));
+  buf=vcalloc( strlen (p1)+strlen (pg) +1, sizeof (char));
+  sprintf ( p, "%s", p1);
     
-  if ( !pg) return NULL;
-  tmp=vtmpnam(NULL);
+  dir=strtok (p, ":");
   
-  printf_system_direct("which %s>%s 2>/dev/null", pg, tmp);
-  path=file2string (tmp);
-  chomp (path);
-  if (!file_exists (NULL,path) && !strstr (pg, ".exe"))
+  while( dir) 
     {
-      char pg2[1000];
-      sprintf ( pg2, "%s.exe", pg);
-      path=pg2path (pg2);
+      sprintf ( buf, "%s/%s", dir,pg);
+      if ( file_exists (NULL,buf))
+	{
+	  vfree (p);
+	  return resize_string(buf);
+	}
+      sprintf ( buf, "%s/%s.exe", dir,pg);
+      if (file_exists (NULL, buf))
+	{
+	  vfree (p);
+	  return resize_string(buf);
+	}
+      dir=strtok(NULL, ":");
     }
-  
-  return path;
+  return NULL;
 }
-  
 
 int check_program_is_installed ( char *program_name, char *path_variable, char *path_variable_name, char *where2getit, int fatal)
   {
@@ -6862,7 +7008,6 @@ int check_program_is_installed ( char *program_name, char *path_variable, char *
        else
 	 {
 	   int install=EXIT_FAILURE;
-	       
 	   if ((fatal==INSTALL || fatal==INSTALL_OR_DIE) && install_4_tcoffee)
 	     {
 	       HERE ("************** %s is missing from your system. T-Coffee will make an attempt to install it.\n", program_name);
@@ -7077,6 +7222,7 @@ int my_rmdir ( char *dir_in)
  int a, buf;
  char *dir;
  
+ if (atoigetenv ("NO_RMDIR_4_TCOFFEE")==1)return 1;
  dir=vcalloc ( strlen (dir_in)+strlen (get_home_4_tcoffee())+100, sizeof (char));
  sprintf ( dir, "%s", dir_in);
  tild_substitute ( dir, "~",get_home_4_tcoffee());
@@ -7084,10 +7230,12 @@ int my_rmdir ( char *dir_in)
  if (access(dir, F_OK)==-1);
  else 
    {
-     if ( strstr (dir, "coffee"))printf_system ( "rm -rf %s", dir);
+     if ( strstr (dir, "coffee"))printf_system_direct ( "rm -rf %s", dir);
      else myexit(fprintf_error ( stderr, "\nERROR: directory %s does not contain 'coffee' [FATAL:%s]", dir, PROGRAM));		} 
- vfree (dir);return;
+ vfree (dir);
+ return 1;
 }
+
 
 int my_mkdir ( char *dir_in)
 {
@@ -7097,6 +7245,7 @@ int my_mkdir ( char *dir_in)
   int a, buf;
   char *dir;
 
+    
   dir=vcalloc ( strlen (dir_in)+strlen (get_home_4_tcoffee())+100, sizeof (char));
   sprintf ( dir, "%s", dir_in);
   tild_substitute ( dir, "~",get_home_4_tcoffee());
@@ -7104,7 +7253,7 @@ int my_mkdir ( char *dir_in)
       
   
   a=0;
-
+  
   while (dir[a]!='\0')
     {
       
@@ -7115,12 +7264,11 @@ int my_mkdir ( char *dir_in)
 
 	  if (access(dir, F_OK)==-1)
 	    {
-	    
-
-	      printf_system_direct("mkdir %s", dir);
+	      mkdir (dir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+	      //printf_system_direct ("mkdir %s", dir);
 	      if ( access (dir, F_OK)==-1)
 		{
-		  myexit(fprintf_error ( stderr, "\nERROR: Could Not Create Directory %s [FATAL:%s]", dir, PROGRAM));		}
+		  myexit(fprintf_error ( stderr, "\nERROR: Could Not Create Directory %s [FATAL:%s]", dir, PROGRAM));	}
 	    }
 	  dir[a+1]=buf;
 	} 
@@ -8546,5 +8694,430 @@ char * bachup_env (char *mode,char *f)
     }
   return NULL;
 }
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //  
+//                                                                           //  
+//                           Kmeans                                          //  
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+void km_output_data ( double **data, int n, int dim, int len,  char *infile, char *outfile);
+int km_main (int argc, char *argv[]);
+		
+int km_main (int argc, char *argv[])
+{
+  double **data, **sdata;
   
- 
+  int dim, len, n;
+  int a, b;
+  int k=2;
+  char *infile=NULL;
+  char *outfile=NULL;
+  double t=0.0001;
+  int mode=1;
+  int scan=0;
+  char **field_list;
+  int nf=0;
+  
+  field_list=calloc (1000, sizeof (char*));
+  srand(time(NULL));
+  for (a=1; a<argc;a++)
+    {
+      if    ( strcmp (argv[a], "-k")==0){k=atoi(argv[++a]);}    //k
+      else if ( strcmp (argv[a], "-i")==0){infile=argv[++a];}   //input
+      else if ( strcmp (argv[a], "-o")==0){outfile=argv[++a];}  //output
+      else if ( strcmp (argv[a], "-t")==0){t=(double)atof(argv[++a]);}//t
+      else if ( strcmp (argv[a], "-m")==0){mode=atoi(argv[++a]);}//mode: 1 simple, n, nrounds
+      else if ( strcmp (argv[a], "-f")==0){field_list[nf++]=argv[++a];}
+      else
+	{
+	  fprintf ( stdout, "ERROR: %s: -k <nlust> -i <file> -o <file> -f <field1> -f <filed2>\n", argv[a]);
+	
+	}
+    }
+  km_file2dim (infile,&n, &dim, &len);
+  data=km_read_data(infile, n, dim, len,field_list);
+  
+  if ( k<0)
+    {
+      k*=-1;
+      mode=(mode<=1)?10:mode;
+      
+      for (a=2; a<k; a++)
+	{
+	  fprintf (stdout, "K=%d score=%.3f\n", a,(float)km_make_kmeans (data, n, dim,a,t,NULL, mode));
+	}
+      exit (0);
+    }
+  else
+    km_make_kmeans (data, n, dim,k,t,NULL, mode);
+  
+  km_output_data (data,n, dim,len,infile,outfile);
+}
+
+void km_display_data (double **d, int n, int dim)
+{
+  int a, b;
+  
+  fprintf ( stdout, "\n");
+  for (a=0; a<n; a++)
+    {
+      for (b=0; b<dim; b++)fprintf ( stdout, "%d ", (int)d[a][b]);
+      fprintf ( stdout, "\n");
+    }
+  
+}
+int   km_file2dim   ( char *file, int *n,int *dim, int *len)
+{
+  FILE *fp;
+  double **data;
+  char *buf;
+  int c;
+  int mdim=0;
+  int cdim=0;
+  int mlen=0;
+  int clen=0;
+  char *s1, *s2;
+  
+  fp=vfopen (file, "r");
+  while ((c=fgetc(fp)!=EOF))
+    {
+      clen=0;
+      while ( (c=fgetc(fp))!='\n' && c!=EOF)clen++;
+      mlen=(clen>mlen)?clen:mlen;
+    }
+  len[0]=mlen+10;
+  vfclose (fp);
+  
+  n[0]=0;
+  fp=vfopen (file, "r");
+  buf=calloc(len[0]+1, sizeof (char));
+  while ((fgets (buf,len[0], fp)))
+    {
+      if ( buf[0]='#')
+	{
+	  n[0]++;
+	  cdim=0;
+	  strtok(buf, ";");//pass #d;
+	  strtok(NULL, ";"); //pass exp;
+	  strtok(NULL, ";"); //pass recid;
+	  while ((s1=strtok(NULL, ";")))
+	    {
+	      s2=strtok(NULL, ";");
+	      if (strstr (s1, "value::"))
+		{
+		  cdim++;
+		}
+	    }
+	  mdim=(cdim>mdim)?cdim:mdim;
+	}
+    }
+  free (buf);
+  n[0];
+  dim[0]=mdim;
+  vfclose (fp);
+  return n[0];
+}
+double ** km_read_data ( char *file, int n, int dim, int mlen, char **fl)
+{
+  FILE *fp;
+  double **data;
+  char *buf;
+  char *s1;
+  char *s2;
+  int cdim,cn;
+  int a,b,c,p;
+  int *fi;
+  
+  fi=calloc (1000,sizeof (int));
+  for (a=0; a<1000; a++)fi[a]=-1;
+  buf =calloc (mlen+1,sizeof (char));
+  data=calloc (n+1, sizeof (double*));
+  for (a=0; a<n; a++)data[a]=calloc(dim+1, sizeof (double));
+  
+  fp=vfopen (file, "r");
+  cn=0;
+  while ((fgets (buf,mlen, fp)))
+    {
+      
+      if ( buf[0]='#')
+	{
+	  
+	  p=cdim=0;
+	  strtok(buf, ";"); p++;//pass #d;
+	  strtok(NULL, ";");p++; //pass exp;
+	  strtok(NULL, ";");p++; //pass recid;
+	  while ((s1=strtok(NULL, ";")))
+	    {
+	      s2=strtok(NULL, ";");
+	      p++;
+	      if (fi[p]==-1)
+		{
+		  b=fi[p]=0;
+		  while (fl[b]){if (strcmp(s1,fl[b])==0){fi[p]=1;}b++;}
+		}
+	      if (fi[p]){data[cn][cdim++]=atof(s2);}
+	    }
+	  cn++;
+	}
+    }
+  free (buf);
+  vfclose (fp);
+  return data;
+}
+
+void km_output_data ( double **data,int n, int dim, int mlen, char *infile, char *outfile)
+{
+  FILE *out;
+  FILE *in;
+  int cn=0;
+  char *buf, *s1,*s2;
+  
+  if (!outfile)out=stdout;
+  else out=vfopen (outfile, "w");
+  in=vfopen (infile, "r");
+  
+  buf =calloc (mlen+1,sizeof (char));
+  cn=0;
+  while ((fgets (buf,mlen,in)))
+    {
+      if (buf[0]=='#')
+	{
+	  
+	  fprintf (out,"%s;",strtok(buf , ";"));//pass #d;
+	  fprintf (out,"%s;",strtok(NULL, ";"));//pass exp
+	  fprintf (out,"%s;",strtok(NULL, ";"));//pass #rec_id;
+	  while ((s1=strtok(NULL, ";")) && s1[0]!='\n')
+	    {
+	      s2=strtok(NULL, ";");
+	      if (strcmp (s1, "bin")!=0)
+		{
+		  fprintf (out, "%s;%s;", s1, s2);
+		}
+	    }
+	  fprintf (out, "bin;%d;", (int)data[cn++][dim]);
+	  fprintf ( out, "\n");
+	}
+    }
+  free (buf);
+  vfclose (in);
+  if (out!=stdout)vfclose (out);
+}
+
+	  
+	  
+
+double km_data2evaluate ( double **d, int n, int dim)
+{
+  int score=0;
+  int a,b,c,s;
+  n=10000;
+  for (a=0; a<n; a++)
+    {
+      for (b=a+1; b<n-1; b++)
+	{
+	  for (s=0,c=0; c<dim; c++)
+	    {
+	      s+=(d[a][c]==d[b][c])?1:0;
+	    }
+	  s*=s;
+	  score+=s;
+	}
+    }
+  score/=n;
+  return sqrt(score);
+}
+float km_make_kmeans (double **data, int n, int dim, int k,double t, double **centroids, int nrounds)
+{
+  double **result;
+  double **sdata;
+  float score=0;
+  int a, b;
+  
+  if (nrounds==1)return km_kmeans (data,n,dim,k,t,centroids);
+  
+  result=calloc (n,sizeof (double*));
+  for (a=0; a<n; a++)result[a]=calloc (nrounds+1, sizeof (double));
+  
+  sdata=calloc ( n, sizeof (double*));
+  for (a=0; a<nrounds; a++)
+    {
+      fprintf ( stderr, "Round %d\n", a+1);
+      sdata=km_shuffle_data (data,sdata, n, 10);
+      km_kmeans (sdata, n, dim, k, t, centroids);
+      for (b=0; b<n; b++)result[b][a]=data[b][dim];
+      fprintf ( stderr, "\n");
+    }
+  km_kmeans (result, n,nrounds,k,t, centroids);
+  score=km_data2evaluate(result, n, nrounds);
+  
+  km_display_data (result,n,nrounds+1);
+  
+  for(a=0; a<n; a++)
+    {
+      data[a][dim]=result[a][nrounds];
+      free (result[a]);
+    }
+  
+  free(result);
+  free(sdata);
+  return score;
+}
+	
+double** km_shuffle_data (double **d, double **sd, int n, int r)
+{
+  int a,b, sn;
+  
+  
+  if (!sd)sd=calloc( n, sizeof (double*));
+  for (a=0; a<r; a++)
+    {
+      int p=rand()%n;
+      sn=0;
+      for (b=p; b<n; b++)sd[sn++]=d[b];
+      for (b=0; b<p; b++)sd[sn++]=d[b];
+    }
+  return sd;
+}
+int km_kmeans(double **data, int n, int m, int k, double t, double **centroids)
+{
+   /* output cluster label for each data point */
+  int a;
+   int h, i, j; /* loop counters, of course :) */
+   int *counts = (int*)calloc(k, sizeof(int)); /* size of each cluster */
+   double old_error, error = DBL_MAX; /* sum of squared euclidean distance */
+   double **c = centroids ? centroids : (double**)calloc(k, sizeof(double*));
+   double **c1 = (double**)calloc(k, sizeof(double*)); /* temp centroids */
+
+   //data must be allocated as data[n][m+2]
+   for (a=0; a<n; a++)data[a][m+1]=0;//labels will be stored there
+   
+   /****
+   ** initialization */
+
+   for (h = i = 0; i < k; h += n / k, i++) {
+      c1[i] = (double*)calloc(m, sizeof(double));
+      if (!centroids) {
+         c[i] = (double*)calloc(m, sizeof(double));
+      }
+      /* pick k points as initial centroids */
+      for (j = m; j-- > 0; c[i][j] = data[h][j]);
+   }
+
+   /****
+   ** main loop */
+
+   do {
+      /* save error from last step */
+      old_error = error, error = 0;
+
+      /* clear old counts and temp centroids */
+      for (i = 0; i < k; counts[i++] = 0) {
+         for (j = 0; j < m; c1[i][j++] = 0);
+      }
+
+      for (h = 0; h < n; h++) {
+         /* identify the closest cluster */
+         double min_distance = DBL_MAX;
+         for (i = 0; i < k; i++) {
+            double distance = 0;
+            for (j = m; j-- > 0; distance += pow(data[h][j] - c[i][j], 2));
+            if (distance < min_distance) {
+	      
+              data[h][m+1]=i;
+	      min_distance = distance;
+            }
+         }
+         /* update size and temp centroid of the destination cluster */
+         for (j = m; j-- > 0; c1[(int)data[h][m+1]][j] += data[h][j]);
+         counts[(int)data[h][m+1]]++;
+         /* update standard error */
+         error += min_distance;
+      }
+
+      for (i = 0; i < k; i++) { /* update all centroids */
+         for (j = 0; j < m; j++) {
+            c[i][j] = counts[i] ? c1[i][j] / counts[i] : c1[i][j];
+         }
+      }
+
+   } while (fabs(error - old_error) > t);
+
+   /****
+   ** housekeeping */
+
+   for (i = 0; i < k; i++) {
+      if (!centroids) {
+         free(c[i]);
+      }
+      free(c1[i]);
+   }
+
+   if (!centroids) {
+      free(c);
+   }
+   free(c1);
+
+   free(counts);
+   
+   return 1;
+}
+
+double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **centroids, int nrounds)
+{
+  double **R;
+  double **S;
+  double score=0;
+  double cscore=0;
+  int    **B;
+  int     BR;
+  
+  double tot=100;
+  int a, b,c;
+  int p1, p2;
+
+  srand(time(NULL));
+  
+  B=declare_int (nrounds, 2);
+  R=declare_double(n, nrounds);
+  S=vcalloc ( n, sizeof (double*));
+  
+  for (a=0; a<nrounds; a++)
+    {
+      B[a][0]=a;
+      S=km_shuffle_data (data,S, n,10);
+      km_kmeans (S,n,dim, k, t, centroids);
+      for (b=0; b<n; b++)R[b][a]=data[b][dim+1];
+    }
+  if (nrounds==1)score=100;
+  else
+    {
+      for (a=0; a<100; a++)
+	{
+	  p1=rand()%n;
+	  p2=rand()%n;
+	  for (b=0; b<nrounds; b++)
+	    for (c=0; c<nrounds; c++)
+	      {
+		int value=((R[p1][b]==R[p2][b])==(R[p1][c]==R[p2][c]))?1:0;;
+		score+=value;
+		B[b][1]+=value;
+		tot++;
+	      }
+	}
+      
+      sort_int_inv (B,2,1,0,nrounds-1);
+      BR=B[0][0];
+      for(a=0; a<n; a++)
+	data[a][dim+1]=R[a][BR];
+      score=(score*100)/tot;
+    }
+  
+  free_int   (B,-1);
+  vfree      (S);
+  free_double(R,-1);
+  return score;
+}
+
+  

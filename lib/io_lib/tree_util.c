@@ -1560,6 +1560,7 @@ NT_node compute_fj_tree (NT_node T, Alignment *A, int limit, char *mode)
 }
 
 
+
 NT_node aln2fj_tree(NT_node T, Alignment *A, int limit_in, char *mode)
 {
   NT_node NT;

@@ -1028,11 +1028,76 @@ int compare_pos_column( int **pos1,int p1, int **pos2,int p2, int nseq)
     return identical;
     }
 
+
 char *seq2alphabet (Sequence *S)
 {
   return array2alphabet (S->seq, S->nseq, "");
 }
-
+double *seq2triaa (char *seq, double *v)
+{
+  static int ***diaa;
+  int tot=0;
+  int l=strlen (seq);
+  int a,a1,a2,a3,b,c,d;
+  
+  
+  if (!diaa)
+    {
+      diaa=vcalloc ( 26, sizeof(int**));
+      for (a=0; a<26; a++)
+	{
+	  diaa[a]=vcalloc (26, sizeof (int*));
+	  for (b=0; b<26; b++)
+	    diaa[a][b]=vcalloc (26, sizeof(int));
+	}
+    }
+  for (a=0; a<l-2;a++)
+    {
+      a1=tolower(seq[a])-'a';
+      a2=tolower(seq[a+1])-'a';
+      a3=tolower(seq[a+2])-'a';
+      if (a1<0 || a2<0 || a3<0)continue;
+      diaa[a1][a2][a3]++;
+      tot++;
+    }
+  
+  if (!v)v=malloc (26*26*26*sizeof (double));
+  for (d=0,a=0; a<26; a++)
+    for (b=0; b<26; b++)
+      for (c=0; c<26; c++,d++)
+	{
+	  v[d]=(double)diaa[a][b][c]/(double)tot;
+	  diaa[a][b][c]=0;
+	}
+  return v;
+}
+double *seq2diaa (char *seq, double *v)
+{
+  static int **diaa;
+  int tot=0;
+  int l=strlen (seq);
+  int a,a1,a2,b,c;
+  
+  if (!diaa)diaa=declare_int (256, 256);
+  for (a=0; a<l-1;a++)
+    {
+      a1=tolower(seq[a])-'a';
+      a2=tolower(seq[a+1])-'a';
+      if (a1<0 || a2<0)continue;
+      diaa[a1][a2]++;
+      tot++;
+    }
+  
+  if (!v)v=malloc (26*26*sizeof (double));
+  for (c=0,a=0; a<26; a++)
+    for (b=0; b<26; b++, c++)
+      {
+	v[c]=(double)diaa[a][b]/(double)tot;
+	diaa[a][b]=0;
+      }
+  
+  return v;
+}
 char *aln2alphabet (Alignment *A)
 {
   return array2alphabet (A->seq_al, A->nseq, "");
@@ -4409,7 +4474,7 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
   //residues  1-N+1
   int s0, r0,i;
   int **index;
-
+  
   index=vcalloc ( S0->nseq, sizeof (int*));
   for (s0=0; s0<S0->nseq; s0++)
     {
@@ -4417,7 +4482,7 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
       index[s0]=vcalloc (l+1, sizeof (int));
       i=index[s0][0]=name_is_in_list (S0->name[s0], Sx->name, Sx->nseq, 100);
       if (i==-1);
-      else if (strm (S0->seq[s0], Sx->seq[i]))
+      else if (strim(S0->seq[s0], Sx->seq[i]))
 	{
 	  for (r0=1; r0<=l; r0++)
 	    {
@@ -5753,7 +5818,7 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
   R=fill_X_template ( name, p, "_R_");
   sprintf (R->template_format , "fasta_aln");
   
-  
+  	
   if (!is_aln(R->template_name) && !is_seq (R->template_name))
     {
       
@@ -5768,7 +5833,7 @@ struct X_template *fill_R_template ( char *name,char *p, Sequence *S)
       Alignment *A1;
       
       (R->VR)->A=main_read_aln (R->template_name, NULL);
-      
+            
       if ( !S)
 	sprintf ( R->template_file, "%s", R->template_name);
       else
@@ -7334,6 +7399,31 @@ double aln2entropy (Alignment *A, int *in_ls, int in_ns, float gap_threshold)
   
   return entropy;
 }
+int aln2sim2 (Alignment *A)
+{
+  int a, b, c;
+  int *score;
+  int tscore=0;
+  score=vcalloc ( 256, sizeof (int));
+  
+  for (a =0; a<A->len_aln; a++)
+    {
+      for (b=0; b<A->nseq; b++)
+	{
+	  c=A->seq_al[b][a];
+	  if (c!='-')score[c]++;
+	}
+      for (b=0; b<256; b++)
+	{
+	  tscore+=(score[b]*score[b]);
+	  score[b]=0;
+	}
+    }
+  vfree (score);
+  return tscore;
+}
+
+	      
 int aln2sim ( Alignment *A, char *mode)
 {
   return sub_aln2sim ( A, NULL, NULL, mode);
@@ -9312,7 +9402,230 @@ Alignment *sim_filter (Alignment *A, char *in_mode, char *seq)
   
   return R;
 }
-	
+int km_group2centroid  (int g,double **v, int n, int dim, int *size);
+int * km2centroids (Alignment *A, int k, char *mode, int *keep)
+{
+  
+  double **v;
+  int a,b;
+  int ndim=60;
+  int **group;
+  int g;
+  Sequence *S;
+
+  S=aln2seq(A);
+  
+  
+  if (k>A->nseq)k=A->nseq;
+  group=declare_int (k, 3);
+  
+  v=aln2km_vector(A,mode,&ndim);
+  km_kmeans (v,A->nseq,ndim,k,0.0001,NULL);
+  for (a=0; a<A->nseq; a++)if (!keep[a])keep[a]=-1;
+  for (a=0; a<k; a++)
+    {
+      int s=km_group2centroid (a,v, A->nseq, ndim, &g);
+      if ( s!=-1)
+	{
+	  keep[s]=0; 
+	  sprintf (A->seq_comment[s], "Kmeans Cluster Size: %4d",g);
+	}
+    }
+
+  free_double (v, -1);
+  return keep;
+}
+
+int km_group2centroid  (int g,double **v, int n, int dim, int *size)
+{
+  double *avg;
+  double dist, bdist, val;
+  int a, b, gs,ba;
+  
+  size[0]=0;
+  avg=vcalloc ( dim, sizeof (double));
+  
+  for (a=0; a<n; a++)
+    {
+      if ((int)v[a][dim+1]==g)
+	{
+	  size[0]++;
+	  for (b=0; b<dim; b++)avg[b]+=v[a][b];
+	}
+    }
+
+  if (size[0]==0)return -1;
+  for (b=0; b<dim; b++)avg[b]/=(double)size[0];
+  
+  for (bdist=-1,a=0; a<n; a++)
+    {
+      if ((int)v[a][dim+1]==g)
+	{
+	  for (dist=0,b=0; b<dim; b++)
+	    {
+	      val=v[a][b]-avg[b];
+	      dist+=(val*val);
+	    }
+	  
+	  if ( dist<bdist || bdist==-1)
+	    {
+	      bdist=dist;
+	      ba=a;
+	    }
+	}
+    }
+  vfree (avg);
+  return ba;
+}
+  
+Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
+{
+  Alignment **AL;
+  n[0]=0;
+  
+  if (A->nseq<=k)
+    {
+      AL=vcalloc (1, sizeof (Alignment*));
+      AL[n[0]++]=A;
+    }
+  else
+    {
+      int a, dim;
+      double **v;
+      int   *gn;
+      char **gfile;
+      FILE **gfp;
+      
+      gn=vcalloc ( k, sizeof (int));
+      gfile=vcalloc ( k, sizeof (char*));
+      gfp=vcalloc (k, sizeof (FILE *));
+      AL=vcalloc  (k, sizeof (Alignment*)); 
+      
+      dim=60;
+      v=aln2km_vector(A,mode,&dim);
+      km_kmeans (v,A->nseq,dim,k,0.0001,NULL);
+      
+      for (a=0; a<k; a++)
+	{
+	  gfile[a]=vtmpnam(NULL);
+	  gfp[a]=vfopen (gfile[a], "w");
+	}
+
+      for (a=0; a<A->nseq; a++)
+	{
+	  int g=(int)v[a][dim+1];
+	  int s=(int)v[a][dim+2];
+	  fprintf (gfp[g], ">%s\n%s\n", A->name[s], A->seq_al[s]);
+	  gn[g]++;
+	}
+      for ( a=0; a<k; a++)
+	{
+	  vfclose (gfp[a]);
+	  
+	  if (gn[a])
+	    {
+	      AL[n[0]]=main_read_aln(gfile[a], NULL);
+	      ungap_aln(AL[n[0]]);
+	      n[0]++;
+	    }
+	}
+      free_double(v, -1);
+      vfree (gn);
+      vfree (gfile);
+      vfree (gfp);
+    }
+  return AL;
+  
+}
+Alignment* km_seq (Alignment *A, int k, char *mode, char *name)
+{
+  FILE **f;
+  int ndim=60;
+  double **data2;
+  int a,b, *gs;
+  int **sd;
+  Sequence *S;
+  
+  if (k>A->nseq)k=A->nseq;
+
+  S=aln2seq(A);
+  gs=vcalloc ( k, sizeof (int));
+  f=vmalloc (k*sizeof (FILE*));
+  data2=aln2km_vector(A,mode,&ndim);
+  km_kmeans (data2,A->nseq,ndim,k,0.0001,NULL);
+    
+  for (a=0;a<k; a++)
+    {
+      char buf[1000];
+      sprintf ( buf, "%s.cluster_%d.fasta", (name)?name:"kmeans", a+1);
+      f[a]=vfopen (buf, "w");
+    }
+  
+  for (a=0; a<A->nseq; a++)
+    {
+      int g=(int)data2[a][ndim+1];
+      gs[g]++;
+      fprintf (f[g], ">%s\n%s\n", S->name[a], S->seq[a]);
+    }
+  for (a=0; a<k; a++)
+    {
+      fprintf ( stderr, "\nGroup %d: %d seq ---> %s.cluster_%d.fasta", a+1, gs[a],(name)?name:"kmeans", a+1);
+      vfclose (f[a]);
+    }
+  fprintf ( stderr, "\n");
+  
+  exit (EXIT_SUCCESS);
+}
+
+Alignment *gap_trim (Alignment *A, int f)
+{
+  int **v, *list;
+  Alignment *R;
+  int max=0, a,b, n, cmax, ng, nr,sc;
+  if (!f) f=50;
+  
+  list=vcalloc (A->nseq,sizeof (int));
+  v=declare_int (A->nseq, 2);
+  for (a=0; a< A->nseq; a++)v[a][0]=a;
+  
+  for (a=0; a<A->len_aln; a++)
+    {
+      for (ng=nr=0,b=0; b<A->nseq; b++)
+	{
+	  ng+=(A->seq_al[b][a]=='-')?1:0;
+	  nr+=(A->seq_al[b][a]!='-')?1:0;
+	}
+      
+      for (b=0; b<A->nseq; b++)
+	{
+	  if (A->seq_al[b][a]!='-')
+	    {
+	      sc=(ng/nr)*10*A->nseq;
+	      v[b][1]+=sc;
+	      max+=sc;
+	    }
+	}
+    }
+  
+  max=(max*(100-f))/100;
+  
+  sort_int (v, 2, 1, 0, A->nseq-1);
+  for (n=0,cmax=0,a=0;a<A->nseq; a++)
+    {
+      cmax+=v[a][1];
+      if (cmax<max)list[n++]=v[a][0];
+      else
+	{
+	  fprintf (stderr, ">%s GapScore: %d\n", A->name[v[a][0]], v[a][1]);
+	}
+    }
+  
+  HERE ("Removed %d Sequences\n", A->nseq-n);
+  
+   R=extract_sub_aln (A, n, list);
+   vfree (list); free_int (v, -1);
+   return R;
+}
 
 static int find_worst_seq ( int **sim, int n, int *keep, int max, int direction);
 Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_list, int **sim)
@@ -9403,7 +9716,7 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
     }
 	  
   /*Reorder the sequences according to the tree order: hopefully better phylogenetic coverage after trim*/
-  if (strstr (mode, "_T"))
+  if (strstr (mode, "_T") && !strstr (mode, "_kmeans"))
     {
       NT_node **T;
       Sequence *O;
@@ -9417,7 +9730,11 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
       free_sequence (O, -1);
     }
   
-  if ( coverage==0)
+  if (strstr (mode, "_kmeans_"))
+    {
+      if ( coverage)myexit (fprintf_error (stderr, "_kmeans_ does not support coverage"));
+    }
+  else if ( coverage==0)
     {
       if ( strstr (mode, "seq_") && !sim)sim=seq2comp_mat (aln2seq(A), "blosum62mt", "sim");
       else sim=aln2sim_mat (A, "idmat");
@@ -9436,7 +9753,6 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
       for ( a=0; a< K->nseq; a++)
 	if ( (k=name_is_in_list (K->name[a], A->name, A->nseq, MAXNAMES+1))!=-1)
 	  {
-
 	    keep[k]=1;
 	  }
     }
@@ -9460,48 +9776,54 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
   
   new_nseq=A->nseq;
   
-  
-  while ( (s=find_worst_seq (sim, A->nseq, keep, maxsim, direction))!=-1 && new_nseq>maxnseq)
+  if (strstr (mode, "_kmeans_"))
     {
-      for ( a=0; a< A->nseq; a++)sim[a][s]=sim[s][a]=-1;
-      keep[s]=-1;
-      new_nseq--;
+      //get master sequences via kmeans
+      if (outlayers)myexit (fprintf_error (stderr, "_kmeans_ does not support outlayers"));
+      keep=km2centroids (A, maxnseq, mode,keep);
     }
-  
-  /*Trim Outlayers*/
-  if (outlayers!=0)
+  else
     {
-     int nn, b;
-      tot_avg=vcalloc ( A->nseq, sizeof (int));
-      
-      for (a=0; a<A->nseq; a++)
+      while ( (s=find_worst_seq (sim, A->nseq, keep, maxsim, direction))!=-1 && new_nseq>maxnseq)
 	{
-	  if ( keep[a]==-1)tot_avg[a]=-1;
-	  else
+	  for ( a=0; a< A->nseq; a++)sim[a][s]=sim[s][a]=-1;
+	  keep[s]=-1;
+	  new_nseq--;
+	}
+      /*Trim Outlayers*/
+      if (outlayers!=0)
+	{
+	  int nn, b;
+	  tot_avg=vcalloc ( A->nseq, sizeof (int));
+	  
+	  for (a=0; a<A->nseq; a++)
 	    {
-	      for (nn=0, b=0; b< A->nseq; b++)
+	      if ( keep[a]==-1)tot_avg[a]=-1;
+	      else
 		{
-		  if (a==b || keep[b]==-1)continue;
-		  else
+		  for (nn=0, b=0; b< A->nseq; b++)
 		    {
-		      tot_avg[a]+=sim[a][b];
-		      nn++;
+		      if (a==b || keep[b]==-1)continue;
+		      else
+			{
+			  tot_avg[a]+=sim[a][b];
+			  nn++;
+			}
 		    }
+		  tot_avg[a]=(nn==0)?-1:(tot_avg[a])/nn;
 		}
-	      tot_avg[a]=(nn==0)?-1:(tot_avg[a])/nn;
 	    }
-	}
-      for ( a=0; a<A->nseq; a++)
-	{
-	  if (tot_avg[a]!=-1 && tot_avg[a]<outlayers)
+	  for ( a=0; a<A->nseq; a++)
 	    {
-	      fprintf ( stderr, "\nREMOVED OUTLAYER: %3d %% avg similarity with remaining sequences [Seq %s]", tot_avg[a],A->name[a]);
-	      keep[a]=-1;
+	      if (tot_avg[a]!=-1 && tot_avg[a]<outlayers)
+		{
+		  fprintf ( stderr, "\nREMOVED OUTLAYER: %3d %% avg similarity with remaining sequences [Seq %s]", tot_avg[a],A->name[a]);
+		  keep[a]=-1;
+		}
 	    }
+	  vfree ( tot_avg);
 	}
-      vfree ( tot_avg);
     }
-
   for ( n=0, a=0; a< A->nseq; a++)
     {
       if ( keep[a]!=-1)
@@ -9509,7 +9831,7 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
 	  list[n++]=a;
 	}
     }
-
+  
   R=extract_sub_aln (A, n, list);
   free_int (sim, -1); vfree (list);
   

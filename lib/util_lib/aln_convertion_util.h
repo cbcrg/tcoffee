@@ -31,11 +31,11 @@ Alignment *aln2alifold(Alignment *A);
 //end
 Alignment * aln2bootstrap (Alignment *A, int n);
 Alignment * aln2sample    (Alignment *A, int n);
-Alignment * aln2random_aln (Alignment *A, char *mode);
-Alignment *aln2scale (Alignment *A, char *offset);
-Alignment* aln2case_aln (Alignment *A, char *upper, char *lower);
-Alignment*aln2gap_cache (Alignment *A, int val);
-Alignment *score_aln2score_ascii_aln (Alignment *A, Alignment *C);
+Alignment * aln2random_aln(Alignment *A, char *mode);
+Alignment * aln2scale     (Alignment *A, char *offset);
+Alignment * aln2case_aln  (Alignment *A, char *upper, char *lower);
+Alignment * aln2gap_cache (Alignment *A, int val);
+Alignment * score_aln2score_ascii_aln (Alignment *A, Alignment *C);
 int **aln2resindex ( Alignment *A, Alignment *B, FILE *fp);
 int **index_seq_res      ( Sequence *S1, Sequence *S2, int **name_index);
 int **index_seq_name ( Sequence *S1, Sequence *S2);
@@ -53,12 +53,15 @@ int ** get_nol_seq( Constraint_list *CL,int **coor, int nseq, Sequence *S);
 
 
 int compare_pos_column( int **pos1,int p1, int **pos2,int p2, int nseq);
+char  * seq2alphabet (Sequence *S);
+double* seq2diaa (char *buf, double *v);
+double* seq2triaa(char *buf, double *v);
 
-
-
-char * seq2alphabet (Sequence *S);
 char *aln2alphabet (Alignment *A);
 char *array2alphabet (char **array, int n, char *forbiden);
+
+
+
 
 //TM Predictions
 char* alnpos2hmmtop_pred (Alignment *A, Alignment *Pred, int pos, int mode);
@@ -321,6 +324,7 @@ int aln2coverage ( Alignment *A, int ref_seq);
 double aln2entropy (Alignment *A, int *in_ls, int in_ns, float gap_threshold);
 int sub_aln2sim ( Alignment *A, int *ns, int **ls, char *mode);
 int sub_aln2max_sim ( Alignment *A, int *ns, int **ls, char *mode);
+int aln2sim2    ( Alignment *A); 
 int aln2sim     ( Alignment *A, char *mode);
 int seq2idscore_sim ( char *seq1, char *seq2);
 
@@ -370,6 +374,10 @@ int **sub_aln2count_mat3   (char **al, int n);
 int **aln2count_mat2   (Alignment *A);
 char *aln2random_seq (Alignment *A, int noise1, int noise2, int noise3, int gap_noise);
 
+int * km2centroids (Alignment *A, int k, char *mode,int *keep);
+Alignment* km_seq (Alignment *S, int k, char *mode,char*name );
+Alignment** seq2kmeans_subset (Alignment *A, int k, int *n, char *mode);
+Alignment *gap_trim (Alignment *A, int f);
 Alignment * master_trimseq( Alignment *A, Sequence *S,char *mode);
 Alignment * trimseq( Alignment *A, Sequence *S, char *mode);
 Alignment *simple_trimseq (Alignment *A,Alignment*K, char *mode, char *seq, int **sim);

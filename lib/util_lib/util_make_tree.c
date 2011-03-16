@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include "io_lib_header.h"
 #include "util_lib_header.h"
@@ -1199,7 +1200,377 @@ int upgma_pair_wise (Alignment *A, int *ls0, int ns0, int *ls1, int ns1, Constra
   
   return sub_aln2ecl_raw_score (A,CL,n, fl);
 }
+//////////////////////////////////////////////////////////////////////////////
+//
+//                              km
+///////////////////////////////////////////////////////////////////////////////
+static int count;
+static Sequence *KS;
+static Alignment *KA;
+NT_node expand_km_node (NT_node T,int n, char **name, int dim, double **V);
+
+
+
+double **aln2km_vector (Alignment *A, char *mode, int *dim)
+{
+  double **v;
+  int a,b,c;
+  int mdim;
+  int use_len=0;
+  Sequence *S;
+  S=aln2seq(A);
+  if ( strstr (mode, "diaa"))
+    {
+      
+      mdim=26*26;
+      v=declare_double (A->nseq,mdim+4);
+      for (a=0; a<A->nseq; a++)v[a]=seq2diaa(S->seq[a], v[a]);
+      use_len=1;
+    }
+  else if ( strstr (mode, "triaa"))
+    {
+      mdim=26*26*26;
+      v=declare_double (A->nseq,mdim+4);
+      for (a=0; a<A->nseq; a++) v[a]=seq2triaa(S->seq[a], v[a]);
+      use_len=1;
+    }
+   else if (strstr (mode, "msar"))
+    {
+      int start=rand()%(A->len_aln-110);
+      int end=start+100;
+      
+      mdim=end-start+1;
+      v=declare_double (A->nseq, mdim+4);
+      
+      for (a=0; a<A->nseq; a++)
+	{
+	  for (b=0,c=start; c<end;b++,c++)
+	    {
+	      v[a][b]=(A->seq_al[a][c]=='-')?1:0;
+	    }
+	}
+    }
+  else if (strstr (mode, "msa1"))
+    {
+      int window=10;
+      
+      mdim=A->len_aln;
+      v=declare_double (A->nseq, mdim+4);
+      
+      for (a=0; a<A->nseq; a++)
+	{
+	  for (b=0; b<A->len_aln;b++)
+	    {
+	      v[a][b]=(A->seq_al[a][b]=='-')?1:0;
+	    }
+	}
+    }
+   else if (strstr (mode, "msa2"))
+    {
+      int window=10;
+      
+      mdim=A->len_aln;
+      v=declare_double (A->nseq, mdim+4);
+      
+      for (a=0; a<A->nseq; a++)
+	{
+	  for (b=0; b<A->len_aln;b++)
+	    {
+	      v[a][b]=A->seq_al[a][b];
+	    }
+	}
+    }
+   else if (strstr (mode, "msa3"))
+    {
+      int window=10;
+      
+      mdim=A->len_aln;
+      v=declare_double (A->nseq, mdim+4);
+      
+      for (a=0; a<A->nseq; a++)
+	{
+	  
+	  for (b=0; b<A->len_aln-window;b++)
+	    {
+	      for (c=0; c<window; c++)
+		v[a][b]+=(A->seq_al[a][b]=='-')?1:0;
+	    }
+	}
+    }
+  else if (strstr (mode, "msa4"))
+    {
+      mdim=A->len_aln;
+      v=declare_double (A->nseq, mdim+4);
+      
+      for (a=0; a<A->nseq; a++)
+	{
+	  
+	  for (b=0; b<A->len_aln;b++)
+	    {
+	      if (A->seq_al[a][b]=='-')c++;
+	      else {v[a][b]=c;c=0;}
+	    }
+	}
+    }
+  else
+    {
+      return aln2km_vector(A,"triaa", dim);
+    }
+  //Keep only the components with a high variance
+  if (!dim[0] || dim[0]>=mdim)
+    {
+      dim[0]=mdim;
+      fprintf ( stderr, "\n\t-- Keep %d components out of %d [mode=%s]\n", dim[0], mdim, mode);
+    }
+  else
+    {
+      double **v2, tsd1,tsd2;
+      int    **sd;
+      sd=declare_int    (mdim,2);
+      tsd1=tsd2=0;
+      
+      for (a=0; a<mdim; a++)
+	{
+	  double sum, sum2;
+	  double avg;
+	  sum=sum2=0;
+	  
+	  for (b=0; b<A->nseq; b++)
+	    {
+	      sum+=v[b][a];
+	      sum2+=v[b][a]*v[b][a];
+	    }
+	  
+	  avg=sum/A->nseq;
+	  sd[a][0]=a;
+	  sd[a][1]=100000*sqrt ((double)((sum2/A->nseq)-(avg*avg)));
+	  tsd1+=(double)sd[a][1];
+	}
+      
+      if (dim[0]<=100)
+	{
+	  tsd1=(tsd1*(double)dim[0])/(double)100;
+	  dim[0]=0;
+	  sort_int_inv (sd,2,1, 0,mdim-1);
+	 
+	  for (a=0; a<mdim; a++)
+	    {
+	      tsd2+=(double)sd[a][1];
+	      if (tsd2<=tsd1){dim[0]++;}
+	      else a=mdim;
+	    }
+	  
+	  fprintf ( stderr, "\n\t-- Keep %d components out of %d [mode=%s]\n", dim[0], mdim, mode);
+	  v2=declare_double (A->nseq, dim[0]+4);
+	  for (a=0; a<A->nseq; a++)
+	    for (b=0; b<dim[0]; b++)
+	      v2[a][b]=v[a][sd[b][0]];
+	  free_double (v, -1);
+	  v=v2;
+	}
+      else
+	{
+	  fprintf ( stderr, "\n\t-- Keep %d components out of %d [mode=%s]\n", dim[0], mdim, mode);
+	}
+    }
   
+  //Add the len component and scale it so that it is comparable to the other components
+  if (use_len)
+    {
+      double SumL, SumV;
+      
+      SumL=SumV=0;
+      
+      for (c=0,a=0; a<A->nseq; a++)
+	{
+	  for (b=0; b<dim[0]; b++, c++)
+	    SumV+=v[a][b];
+	  v[a][dim[0]]=strlen(S->seq[a]);
+	  SumL+= v[a][dim[0]];
+	}
+      SumL/=A->nseq;
+      SumV/=c;
+      
+      for (a=0; a<A->nseq; a++)
+	{
+	  v[a][dim[0]]*=SumV/SumL;
+	}
+      dim[0]++;
+    }
+  
+  for (a=0; a<A->nseq; a++)
+    v[a][dim[0]+2]=a;
+  
+  return v;
+}
+static float tid;
+static float tpairs;
+static int tprint;
+static int km_node;
+static float km_tbootstrap;
+static float km_tnode;
+NT_node ** seq2km_tree (Sequence *S, char *file)
+{
+  int tot_node;
+  NT_node T;
+
+  Alignment *A;
+  A=seq2aln(S,NULL,RM_GAP);
+  T=aln2km_tree (A, "triaa", 1);
+  free_aln (A);
+  if (!file)file=vtmpnam (NULL);
+  vfclose (print_tree (T, "newick", vfopen (file, "w")));
+  
+  
+  return read_tree (file, &tot_node, S->nseq, S->name);
+}
+  
+NT_node    aln2km_tree (Alignment *A, char *mode, int nboot)
+{
+  NT_node T;
+  double **V;
+  Sequence *S;
+  int dim=60;//Keep all the vector components summing up to 50% of the cumulated sd
+  
+  KA=A;
+  S=KS=aln2seq(A);
+  
+  if (!nboot)nboot=1;
+  fprintf ( stderr, "\n-- Compute vectors\n");
+  V=aln2km_vector (A, mode, &dim);
+  fprintf ( stderr, "\n-- Estimate Tree (%d boostrap replicates)\n", nboot);
+  T=rec_km_tree (A->name,A->nseq,dim,V, nboot);
+  
+  if (tprint){fprintf ( stderr, "\n---NPAIRS: %d avg id: %.2f %%\n", (int)tpairs, tid/tpairs);}
+  
+  if (nboot>1)fprintf (stderr, "\n-- %5d tested Nodes -- Average bootstrap: %.2f -- %d Replicates\n", (int)km_tnode, km_tbootstrap/km_tnode, nboot);
+  
+  return T;
+}
+NT_node rec_km_tree (char **name,int n,int dim,double **V, int nboot)
+{
+  NT_node T;
+  Alignment *A;
+  
+  T=new_declare_tree_node ();
+  if (n==1)
+    {
+      
+      T->dist=1;
+      sprintf (T->name, "%s", name[(int)V[0][dim+2]]);
+      T->isseq=1;
+    }
+  else if (n==2)
+    {
+      NT_node T0,T1;
+     
+            
+      T0=T->left=new_declare_tree_node ();
+      T1=T->right=new_declare_tree_node ();
+      
+      T0->parent=T1->parent=T;
+      T->dist=T0->dist=T1->dist=1;
+          
+      sprintf (T0->name, "%s", name[(int)V[0][dim+2]]);
+      sprintf (T1->name, "%s", name[(int)V[1][dim+2]]);
+  
+      T0->isseq=1;
+      T1->isseq=1;
+      if (tprint)
+	{
+	  Alignment *A;
+	  int id;
+	  A=align_two_sequences (KS->seq[(int)V[0][dim+2]],KS->seq[(int)V[1][dim+2]],"pam250mt",-10,-2, "myers_miller_pair_wise");
+	  id=aln2sim(A, "idmat");
+	  tid+=id;
+	  tpairs++;
+	  fprintf ( stderr, "\nID=%4d L=%5d (%d)", id, A->len_aln,(int)tpairs);
+	  free_aln (A);
+	}
+    }
+  else
+    {
+      double  **V0, **V1;
+      int n0,n1,a;
+      int d;
+      km_node++;
+      
+      T->bootstrap=(int)km_kmeans_bs (V,n,dim,2,0.001,NULL,nboot);
+      
+      T->dist=1;
+      for (n0=n1=a=0; a<n; a++)(V[a][dim+1]==0)?n0++:n1++;
+      fprintf ( stderr, "\t--Resolve Node %5d: (%5d .. %5d) -- %5d Support: %3d\n", km_node, n0, n1,MIN(n1,n0), (int)T->bootstrap);
+      km_tbootstrap+=T->bootstrap;
+      if (nboot==1)T->bootstrap=0;
+      km_tnode++;
+      
+      V0=vcalloc (n0, sizeof (double **));
+      V1=vcalloc (n1, sizeof (double **));
+      for (n0=n1=a=0; a<n; a++)
+	{
+	  if  (V[a][dim+1]==0)V0[n0++]=V[a];
+	  else V1[n1++]=V[a];
+	}
+      if      (n0==0 ){expand_km_node(T,n1,name, dim,V1);}
+      else if (n1==0 ){expand_km_node(T,n0,name, dim,V0);}
+      else 
+	{
+	  T->left =rec_km_tree (name, n0,dim,V0,nboot);
+	  T->right=rec_km_tree (name, n1,dim,V1,nboot);
+	  (T->left)->parent=(T->right)->parent=T;
+	}
+      vfree(V0);
+      vfree(V1);
+    }
+  return T;
+}
+
+NT_node expand_km_node(NT_node T,int n, char ** name, int dim, double **V)
+{
+  NT_node Root,L, R;
+  int a,b;
+  
+  Root=T;
+   
+  fprintf ( stderr, "\t**Expand  Node %5d into %5d nodes\n", km_node, n);
+  km_node+=n;
+  
+		
+  for (a=0; a<n-1; a++)
+    {
+      L=T->left=new_declare_tree_node ();
+      L->parent=T;
+      L->isseq=1;
+      L->dist=0;
+      sprintf (L->name, "%s", name[(int)V[a][dim+2]]);
+      
+      R=T->right=new_declare_tree_node ();
+      R->parent=T;
+      R->dist=0;
+      
+      T=R;
+    }
+  T->isseq=1;
+  sprintf (T->name, "%s", name[(int)V[n-1][dim+2]]);
+  return Root;
+}
+/*
+void km_print_tree(T)
+{
+  if (!T->isseq)
+    {
+      fprintf (stdout, "(");
+      km_print_tree (T->left);
+      km_print_tree (T->right);
+      fprintf (stdout, ")");
+    }
+  else
+    {
+      fprintf (stdout, "%s ", T->name);
+    }
+  return T;
+}
+*/
 //////////////////////////////////////////////////////////////////////////////
 //
 //                              UPGMA

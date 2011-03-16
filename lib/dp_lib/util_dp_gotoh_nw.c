@@ -1875,6 +1875,8 @@ int list2linked_pair_wise( Alignment *A, int *ns, int **l_s, Constraint_list *CL
   long score;
   int nomatch;
  
+
+  
   l1=strlen (A->seq_al[l_s[0][0]]);
   l2=strlen (A->seq_al[l_s[1][0]]);
   al=declare_char (2,l1+l2+1);
@@ -2155,17 +2157,17 @@ int linked_pair_wise_collapse ( Alignment *A, int *ns, int **ls, Constraint_list
     
   /*Prepare the list*/
   
-
   cl2pair_list_collapse (A, ns, ls, CL, &list, &n);
-  
   cl2diag_cap     (A, ns, ls, CL, &list, &n);
   cl2list_borders (A, ns, ls, CL, &list, &n);
   list2nodup_list (A, ns, ls, CL, &list, &n);
 
   /*Do the DP*/
+  
   score=list2linked_pair_wise (A, ns, ls, CL, list, n, &al,&len);
   CL=collapse_list (A,ns, ls, al, len, CL);
   free_char (al, -1);
+    
   /*Free the list*/
   return score;
 }

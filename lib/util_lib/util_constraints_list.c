@@ -796,7 +796,6 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 		if (n==byte || (n && x==(CL->S)->nseq-1))
 		      {
 			vfclose (fp);
-			HERE ("N=%d", n);
 			sprintf (bufS, "%d %s", n,file2string (tmpf));n=0;
 			bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
 			if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
@@ -845,16 +844,18 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 	    do_mirror=(strstr(aln_mode, "m_"))?1:0;
 	    do_self=(strstr(aln_mode, "s_"))?1:0;
 	    
+	    if (method->minid!=0 || method->maxid!=100)
+	      DM=CL->DM=cl2distance_matrix ( CL,NOALN,NULL,NULL,1);
+	    
 	    for (x=0; x< S->nseq; x++)
 	      {
 		if (!CL->master[x])continue;
 		for ( y=(do_mirror)?0:x; y< S->nseq; y++)
 		  {
-		    
-		    id=DM->similarity_matrix[x][y];
+		    id=(DM && DM->similarity_matrix)?DM->similarity_matrix[x][y]:-1;
 		    
 		    if ( x==y && !do_self);
-		    else if ( !is_in_range(id,method->minid, method->maxid));
+		    else if ( id!=-1 && !is_in_range(id,method->minid, method->maxid));
 		    else
 		      {
 			sprintf (bufS, "2 %d %d",x,y);
@@ -1497,84 +1498,68 @@ FILE* display_constraint_list (Constraint_list *CL, FILE *fp, char *tag)
 /*********************************************************************/
 
 
-
-
-
 Constraint_list * evaluate_constraint_list_reference ( Constraint_list *CL)
 {
 	static CLIST_TYPE *entry;
 	int a, b, c, s1, s2, r1, r2;
-	int ***max_res;
+	int **max_res;
 	
 	if ( CL->M)
-	{
-		CL->max_value=CL->max_ext_value=20;
-		
-	}
+	  {
+	    CL->max_value=CL->max_ext_value=20;
+	    
+	  }
 	else
-	{
-		Sequence *S=CL->S;
-		
-		
-		CL->max_value=CL->max_ext_value=0;
-		max_res=vcalloc ( (CL->S)->nseq, sizeof (int**));
-		
-		for ( a=0; a< (CL->S)->nseq; a++)
-		{
-			max_res[a]=vcalloc ( strlen ((CL->S)->seq[a])+1, sizeof (int*));
-			for ( b=0; b<=(CL->S)->len[a]; b++)
-			{
-				max_res[a][b]=vcalloc ( (CL->S)->nseq+1, sizeof (int));
-			}
-		}
-		
-		
-		for (s1=0; s1<S->nseq; s1++)
-		{
-			for ( r1=1; r1<=S->len[s1]; r1++)
-			{
-				
-				for (a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
-				{
-					int s2=CL->residue_index[s1][r1][a+SEQ2];
-					int r2=CL->residue_index[s1][r1][a+R2];
-					int w2=CL->residue_index[s1][r1][a+WE];
-					if ( w2==UNDEFINED || ( (CL->moca) && (CL->moca)->forbiden_residues  && ((CL->moca)->forbiden_residues[s1][r1]==UNDEFINED || (CL->moca)->forbiden_residues[s2][r2]==UNDEFINED)));
-					else
-					{
-						max_res[s1][r1][s2]+=w2;
-						max_res[s2][r2][s1]+=w2;
-						CL->max_value=MAX(w2, CL->max_value);
-					}
-				}
-			}
-		}
-		
-		for ( a=0; a< (CL->S)->nseq; a++)
-			for ( b=1; b<=(CL->S)->len[a]; b++)
-			{
-				for ( c=0; c< (CL->S)->nseq; c++)
-				{
-					max_res[a][b][(CL->S)->nseq]+= max_res[a][b][c];
-				}
-				CL->max_ext_value=MAX(max_res[a][b][c],CL->max_ext_value);
-			}
+	  {
+	    Sequence *S=CL->S;
+	    
+	    
+	    CL->max_value=CL->max_ext_value=0;
+	    max_res=vcalloc ( (CL->S)->nseq, sizeof (int*));
+	    
+	    for ( a=0; a< (CL->S)->nseq; a++)
+	      {
+		max_res[a]=vcalloc ( strlen ((CL->S)->seq[a])+1, sizeof (int));
+	      }
+	    
+	    
+	    for (s1=0; s1<S->nseq; s1++)
+	      {
+		for ( r1=1; r1<=S->len[s1]; r1++)
+		  {
+		    
+		    for (a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+		      {
+			int s2=CL->residue_index[s1][r1][a+SEQ2];
+			int r2=CL->residue_index[s1][r1][a+R2];
+			int w2=CL->residue_index[s1][r1][a+WE];
 			
-			for ( a=0; a< (CL->S)->nseq; a++)
-			{
-				for ( b=0; b<=(CL->S)->len[a]; b++)
-					vfree ( max_res[a][b]);
-				vfree (max_res[a]);
-			}
-			CL->max_ext_value=MAX(1,CL->max_ext_value);
-			vfree ( max_res);
-	}
+
+			if ( w2==UNDEFINED || ( (CL->moca) && (CL->moca)->forbiden_residues  && ((CL->moca)->forbiden_residues[s1][r1]==UNDEFINED || (CL->moca)->forbiden_residues[s2][r2]==UNDEFINED)));
+			else
+			  {
+			    max_res[s1][r1]+=w2;
+			    max_res[s2][r2]+=w2;
+			    CL->max_value=MAX(w2, CL->max_value);
+			  }
+		      }
+		  }
+	      }
+	    
+	    for ( a=0; a< (CL->S)->nseq; a++)
+	      for ( b=1; b<=(CL->S)->len[a]; b++)
+		{		      
+		  CL->max_ext_value=MAX(max_res[a][b],CL->max_ext_value);
+		}
+	    
+	    free_int (max_res,-1);
+	    CL->max_ext_value=MAX(1,CL->max_ext_value);
+	  }
 	
 	if (CL->normalise)
-	{
-		
-		CL->nomatch=(CL->nomatch*CL->normalise)/CL->max_ext_value;
-	}
+	  {
+	    CL->nomatch=(CL->nomatch*CL->normalise)/CL->max_ext_value;
+	  }
 	
 	return CL;
 }
@@ -2664,15 +2649,17 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *in_fname)
 	fname=expand_constraint_list_file (in_fname);
 	NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
 	if (!CL)
-	{
-		CL=declare_constraint_list_simple(NS);
-		keepNS=1;
-	}
+	  {
+	    CL=declare_constraint_list_simple(NS);
+	    keepNS=1;
+	  }
+	
 	index=fix_seq_seq (NS, CL->S);
 	entry=vcalloc ( CL->entry_len+1, sizeof (int));
 	
 	fp=vfopen(fname,"r");
 	while ((c=fgetc(fp))!='#' && c!=EOF){line+=(c=='\n')?1:0;}
+	
 	
 	ungetc (c, fp);
 	while ((buf=vfgets ( buf, fp))!=NULL)
@@ -2693,20 +2680,21 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *in_fname)
 			if (r1>NS->len[s1] || r2>NS->len[s2] || x<3)error=1;
 			else
 			{
-				
-				entry[SEQ1]=index[s1][0];
-				entry[SEQ2]=index[s2][0];
-				entry[R1]=index[s1][r1];
-				entry[R2]=index[s2][r2];
-				entry[WE]=we;
-				entry[CONS]=cons;
-				entry[MISC]=misc;
+			  
+			  entry[SEQ1]=index[s1][0];//0-N-1
+			  entry[SEQ2]=index[s2][0];//0-N-1
+			  entry[R1]=index[s1][r1];//1-N
+			  entry[R2]=index[s2][r2];//1-N
+			  entry[WE]=we;//0-1000
+			  entry[CONS]=cons;
+			  entry[MISC]=misc;
 				if (entry[SEQ1]>-1 && entry[SEQ2]>-1 && entry[R1]>0 && entry[R2]>0 && entry[WE]>0)
 					add_entry2list (entry, CL);
 			}
 		}
 		if (error)printf_exit (EXIT_FAILURE,stderr,"Parsing Error [L:%d F:%s S:%s]",line,in_fname,buf);
 	}
+	
 	vfclose (fp);
 	
 	if (!keepNS)free_sequence (NS,-1);
@@ -3362,11 +3350,12 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 			t_s2=CL->residue_index[s2][r2][x+SEQ2];
 			t_r2=CL->residue_index[s2][r2][x+R2];
 			norm2++;
-			
+
 			if (t_s2==s1 && t_r2==r1)score+=CL->residue_index[s2][r2][x+WE];
 			else if (hasch[t_s2][t_r2])
 			  {
 			    score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
+			    
 			  }
 		      }
 		    norm2=MIN(norm1,norm2);
@@ -3939,7 +3928,6 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 		int nres2=0;
 		
 		if ((s2=fixed[b][0])==-1)continue;
-		
 		weight=seqpair2weight (a, b, A, CL, weight_mode, weight);
 		for (c=0; c< A->len_aln; c++)
 		  {
@@ -3975,7 +3963,8 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 			entry[R2]=fixed_nres2;
 			entry[CONS]=1;
 			if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
-				else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
+			else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
+			
 			add_entry2list (entry, CL);
 		      }
 		  }
@@ -4272,18 +4261,18 @@ Constraint_list *weight_constraint_list(Constraint_list * CL, char *seq_weight)
 		W=read_seq_weight ((CL->S)->name, (CL->S)->nseq, seq_weight);
 	}
 	else
-	{
-		int a;
-		W=declare_weights((CL->S)->nseq);
-		sprintf ( W->mode, "no_seq_weight");
-		for ( a=0; a<(CL->S)->nseq; a++)
-		{
-			sprintf ( W->seq_name[a], "%s", (CL->S)->name[a]);
-			W->SEQ_W[a]=1;
-		}
-		CL->W=W;
-		return CL;
-	}
+	  {
+	    int a;
+	    W=declare_weights((CL->S)->nseq);
+	    sprintf ( W->mode, "no_seq_weight");
+	    for ( a=0; a<(CL->S)->nseq; a++)
+	      {
+		sprintf ( W->seq_name[a], "%s", (CL->S)->name[a]);
+		W->SEQ_W[a]=1;
+	      }
+	    CL->W=W;
+	    return CL;
+	  }
 	CL=re_weight_constraint_list (CL,W);
 	
 	CL->W=W;
@@ -4392,25 +4381,23 @@ Constraint_list *re_weight_constraint_list(Constraint_list * CL,Weights *W)
 
 Distance_matrix* cl2distance_matrix    (Constraint_list *CL, Alignment *A, char *in_mode, char *in_sim_mode, int print)
 {
-
+  int *a;
 	char mode[100];
 	char sim_mode [100];
-
-
 
 	if ( !CL)return NULL;
 	sprintf ( mode, "%s", (CL && in_mode==NULL)?CL->distance_matrix_mode:in_mode);
 	sprintf ( sim_mode, "%s", (CL && in_sim_mode==NULL)?CL->distance_matrix_sim_mode:in_sim_mode);
 
 	if ( !CL->DM ||!strm ((CL->DM)->mode, mode) || !strm ((CL->DM)->sim_mode, sim_mode) || A )
-	{
-		return seq2distance_matrix (CL, A, mode, sim_mode, print);
-	}
+	  {
+	    return seq2distance_matrix (CL, A, mode, sim_mode, print);
+	  }
 	else
-	{
-
-		return CL->DM;
-	}
+	  {
+	    
+	    return CL->DM;
+	  }
 }
 
 
@@ -4441,254 +4428,254 @@ Distance_matrix *seq2distance_matrix (Constraint_list *CL, Alignment *A,char *mo
 	//Composite modes
 
 	if (strm (mode, "ktup2"))
-	{
-		B=seq2aln ( CL->S, NULL, 1);
-		B=very_fast_aln (B, B->nseq,NULL);
-		sprintf ( CL->distance_matrix_mode, "aln");
-		DM=cl2distance_matrix (CL, B, NULL, NULL, 1);
-		sprintf ( CL->distance_matrix_mode, "ktup2");
-		sprintf ( DM->mode, "%s", mode);
-		sprintf ( DM->sim_mode, "%s", sim_mode);
-		free_aln (B);
-		return DM;
-	}
-
+	  {
+	    B=seq2aln ( CL->S, NULL, 1);
+	    B=very_fast_aln (B, B->nseq,NULL);
+	    sprintf ( CL->distance_matrix_mode, "aln");
+	    DM=cl2distance_matrix (CL, B, NULL, NULL, 1);
+	    sprintf ( CL->distance_matrix_mode, "ktup2");
+	    sprintf ( DM->mode, "%s", mode);
+	    sprintf ( DM->sim_mode, "%s", sim_mode);
+	    free_aln (B);
+	    return DM;
+	  }
+	
 	if ( !CL) return NULL;
 	else
-	{
-		for ( max_name=0,a=0; a<  (CL->S)->nseq; a++)max_name=MAX(strlen ((CL->S)->name[a]), max_name);
-
-
-		if ( CL->DM)DM=CL->DM;
-		else
-		{
-			DM=vcalloc ( 1, sizeof (Distance_matrix));
-			DM->nseq=(CL->S)->nseq;
-			DM->similarity_matrix=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
-			DM->distance_matrix  =declare_int ( (CL->S)->nseq, (CL->S)->nseq);
-			DM->score_similarity_matrix=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
+	  {
+	    for ( max_name=0,a=0; a<  (CL->S)->nseq; a++)max_name=MAX(strlen ((CL->S)->name[a]), max_name);
+	    
+	    
+	    if ( CL->DM)DM=CL->DM;
+	    else
+	      {
+		DM=vcalloc ( 1, sizeof (Distance_matrix));
+		DM->nseq=(CL->S)->nseq;
+		DM->similarity_matrix=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
+		DM->distance_matrix  =declare_int ( (CL->S)->nseq, (CL->S)->nseq);
+		DM->score_similarity_matrix=declare_int ( (CL->S)->nseq, (CL->S)->nseq);
 		}
-
-		sprintf ( DM->mode, "%s", mode);
-		sprintf ( DM->sim_mode, "%s", sim_mode);
-
-		NCL=duplicate_constraint_list_soft (CL);
-		NCL->pw_parameters_set=1;
-
-		if (!A)
-		{
-			if ( CL->tree_aln)B=CL->tree_aln;
-			else B=seq2aln ( NCL->S, NULL, 1);
-		}
-		else
-		{
-			B=copy_aln (A, NULL);
-			B=reorder_aln (B, (CL->S)->name, (CL->S)->nseq);
-		}
-
-		if ( strm (mode, "very_fast"))
-		{
-			sprintf ( NCL->dp_mode, "very_fast_pair_wise");
-			NCL->evaluate_residue_pair=evaluate_matrix_score;
-			if ( strm ((CL->S)->type, "DNA") ||strm ((CL->S)->type, "RNA")  )
-			{
+	    
+	    sprintf ( DM->mode, "%s", mode);
+	    sprintf ( DM->sim_mode, "%s", sim_mode);
+	    
+	    NCL=duplicate_constraint_list_soft (CL);
+	    NCL->pw_parameters_set=1;
+	    
+	    if (!A)
+	      {
+		if ( CL->tree_aln)B=CL->tree_aln;
+		else B=seq2aln ( NCL->S, NULL, 1);
+	      }
+	    else
+	      {
+		B=copy_aln (A, NULL);
+		B=reorder_aln (B, (CL->S)->name, (CL->S)->nseq);
+	      }
+	    
+	    if ( strm (mode, "very_fast"))
+	      {
+		sprintf ( NCL->dp_mode, "very_fast_pair_wise");
+		NCL->evaluate_residue_pair=evaluate_matrix_score;
+		if ( strm ((CL->S)->type, "DNA") ||strm ((CL->S)->type, "RNA")  )
+		  {
 				NCL->M=read_matrice ("idmat");
 				NCL->gop=-10;
 				NCL->gep=-1;
 				CL->ktup=6;
-			}
-			else
-			{
-				NCL->M=read_matrice ("blosum62mt");
-				NCL->gop=get_avg_matrix_mm (NCL->M, AA_ALPHABET)*10;
-				NCL->gep=-1;
-				CL->ktup=2;
-			}
-			NCL->use_fragments=1;
-			CL->diagonal_threshold=6;
-		}
-
-		else if ( strm (mode, "ktup"))
-		{
-
-			NCL->ktup=6;
-			sim_table=ktup_dist_mat((CL->S)->seq,(CL->S)->nseq,NCL->ktup, (CL->S)->type);
-		}
-
-
-		else if (strm (mode, "aln"))
-		{
-
-			sim_table=aln2sim_mat (A, sim_mode);
-		}
-		else if ( strm (mode, "fast") || strm ("idscore", mode))
-		{
-			sprintf ( NCL->dp_mode, "myers_miller_pair_wise");
-			NCL->evaluate_residue_pair=evaluate_matrix_score;
-			if ( strm ((CL->S)->type, "DNA") || strm ((CL->S)->type, "RNA"))
-			{
-				NCL->M=read_matrice ("idmat");
-				NCL->gop=-10;
-				NCL->gep=-1;
-			}
-			else
-			{
-				NCL->M=read_matrice ("blosum62mt");
-				NCL->gop=get_avg_matrix_mm (NCL->M, AA_ALPHABET)*10;
-				NCL->gep=-1;
-			}
-		}
-		else if ( strm (mode, "cscore"))
-		{
-			if (!CL || !CL->residue_index || CL->ne==0)
-				return seq2distance_matrix (CL, A,"idscore",sim_mode, print);
-		}
-		else if ( strm (mode, "geometric") );
-		else if (strm (mode, "slow"));
-		else if (strm (mode, "clustalw"));
-		else if (strm (mode, "no"))
-			print=1;
-		else if (strm (mode, "random"))
-			print=1;
+		  }
 		else
-		{
+		  {
+		    NCL->M=read_matrice ("blosum62mt");
+		    NCL->gop=get_avg_matrix_mm (NCL->M, AA_ALPHABET)*10;
+		    NCL->gep=-1;
+		    CL->ktup=2;
+		  }
+		NCL->use_fragments=1;
+		CL->diagonal_threshold=6;
+	      }
+	    
+	    else if ( strm (mode, "ktup"))
+	      {
+		
+		NCL->ktup=6;
+		sim_table=ktup_dist_mat((CL->S)->seq,(CL->S)->nseq,NCL->ktup, (CL->S)->type);
+	      }
+	    
+	    
+	    else if (strm (mode, "aln"))
+	      {
+		
+		sim_table=aln2sim_mat (A, sim_mode);
+	      }
+	    else if ( strm (mode, "fast") || strm ("idscore", mode))
+	      {
+		sprintf ( NCL->dp_mode, "myers_miller_pair_wise");
+		NCL->evaluate_residue_pair=evaluate_matrix_score;
+		if ( strm ((CL->S)->type, "DNA") || strm ((CL->S)->type, "RNA"))
+		  {
+		    NCL->M=read_matrice ("idmat");
+		    NCL->gop=-10;
+		    NCL->gep=-1;
+		  }
+		else
+		  {
+		    NCL->M=read_matrice ("blosum62mt");
+		    NCL->gop=get_avg_matrix_mm (NCL->M, AA_ALPHABET)*10;
+		    NCL->gep=-1;
+		  }
+	      }
+	    else if ( strm (mode, "cscore"))
+	      {
+		if (!CL || !CL->residue_index || CL->ne==0)
+		  return seq2distance_matrix (CL, A,"idscore",sim_mode, print);
+	      }
+	    else if ( strm (mode, "geometric") );
+	    else if (strm (mode, "slow"));
+	    else if (strm (mode, "clustalw"));
+	    else if (strm (mode, "no"))
+	      print=1;
+	    else if (strm (mode, "random"))
+	      print=1;
+	    else
+	      {
 			fprintf ( stderr, "\nError: %s is an unknown distance_matrix_mode [FATAL:%s]", mode,PROGRAM);
 			crash ("");
-		}
-
+	      }
+	    
 		//Special Geometric Mode
-		if ( strm (NCL->distance_matrix_mode, "geometric"))
-		{
-			free_arrayN(g_matrix, 2);
-			g_matrix=declare_float ((CL->S)->nseq, 3);
-			n_coor=MIN(3,((CL->S)->nseq));
-
-			for ( a=0; a<(CL->S)->nseq; a++)
+	    if ( strm (NCL->distance_matrix_mode, "geometric"))
+	      {
+		free_arrayN(g_matrix, 2);
+		g_matrix=declare_float ((CL->S)->nseq, 3);
+		n_coor=MIN(3,((CL->S)->nseq));
+		
+		for ( a=0; a<(CL->S)->nseq; a++)
 			{
-				for (b=0; b<n_coor; b++)
-				{
-					B=align_two_sequences ((CL->S)->seq[a], (CL->S)->seq[b], "pam250mt", -10, -1, "fasta_pair_wise");
-					g_matrix[a][b]=get_seq_sim ( B->seq_al[0], B->seq_al[1], "-", NULL);
-					free_aln(B);B=NULL;
-				}
+			  for (b=0; b<n_coor; b++)
+			    {
+			      B=align_two_sequences ((CL->S)->seq[a], (CL->S)->seq[b], "pam250mt", -10, -1, "fasta_pair_wise");
+			      g_matrix[a][b]=get_seq_sim ( B->seq_al[0], B->seq_al[1], "-", NULL);
+			      free_aln(B);B=NULL;
+			    }
 			}
-			ref=(float)sqrt((double)(10000*n_coor));
-		}
-
-
-		ns=vcalloc ( 2, sizeof(int));
-		l_s=declare_int ( 2, 1);
-		ns[0]=ns[1]=1;
-		l_s[0][0]=0;
-		l_s[1][0]=1;
-
-		if (CL->local_stderr && print>0)fprintf ( (CL->local_stderr), "\nCOMPUTE PAIRWISE SIMILARITY [dp_mode: %s] [distance_matrix_mode: %s][Similarity Measure: %s] \n", NCL->dp_mode,mode, sim_mode);
-
-		for (a=0; a< (CL->S)->nseq; a++)
-		{
-			if (CL->local_stderr && print>0)fprintf ( (CL->local_stderr), "\n\tSeq: %s", (CL->S)->name[a]);
-			for ( b=a; b< (CL->S)->nseq; b++)
-			{
-				if ( b==a){DM->similarity_matrix[a][b]=MAXID;}
-				else
-				{
-					l_s[0][0]=a;
-					l_s[1][0]=b;
-					if ( !strm(mode, "ktup2") && ! strm (mode, "geometric"))
-					{
-						ungap ( B->seq_al[a]);
-						ungap ( B->seq_al[b]);
-					}
-
-					if ( strm (mode, "slow"))
-					{
-
-						B->score_aln=pair_wise (B, ns, l_s,NCL);
-
-						id=get_seq_sim ( B->seq_al[a], B->seq_al[b], "-", sim_mode);
-						if ( CL->residue_index)
-						{
-							score=(int)(((float)B->score_aln)/(B->len_aln*SCORE_K));
-							score=(int)(CL->normalise)?((score*MAXID)/(CL->normalise)):(score);
-						}
-						else if ( CL->M)score=id;
-
-
-						if ( score>MAXID)score=(CL->residue_index)?sub_aln2sub_aln_score (B, CL, CL->evaluate_mode, ns, l_s):id;
-
-					}
-					else if ( strm2 (mode,"fast", "very_fast"))
-					{
-						B->score_aln=pair_wise (B, ns, l_s,NCL);
-						id=get_seq_sim ( B->seq_al[a], B->seq_al[b], "-", sim_mode);
-						score=(int)(id)*SCORE_K;
-					}
-					else if ( strm (mode, "cscore"))
-					{
-						ungap ( B->seq_al[a]);
-						ungap ( B->seq_al[b]);
-						score=(int)linked_pair_wise (B, ns, l_s, NCL);
-
-
-						score/=(B->len_aln*SCORE_K);
-						id=score/SCORE_K;
-					}
-					else if ( strm (mode, "idscore"))
-					{
-						score=id=idscore_pairseq (B->seq_al[a], B->seq_al[b], NCL->gop, NCL->gep, NCL->M, sim_mode);
-						//HERE ("%s %d %d ->%d", sim_mode, a, b, (int)id);
-					}
-					else if (strm (mode, "ktup"))
-					{
-						id=sim_table[a][b];
-						score=id*SCORE_K;
-
-					}
-					else if (strm (mode, "aln"))
-					{
-						score=id=sim_table[a][b];
-						score*=SCORE_K;
-					}
-
-					else if ( strm (mode, "geometric"))
-					{
-						id=get_geometric_distance (g_matrix,n_coor, a, b, "euclidian");
-						id=MAXID*(1-((id/ref)));
-						score=(int)(id)*SCORE_K;
-					}
-					else if ( strm (mode, "no"))
-					{
-						id=100;
-						score=id*SCORE_K;
-					}
-					else if ( strm (mode, "random"))
-					{
-						id=rand()%100;
-						score=id*SCORE_K;
-					}
-					else
-					{
-						id=B->score_aln=pair_wise (B, ns, l_s,NCL);
-						score=id*SCORE_K;
-					}
-					/*Sim mat*/
-					DM->similarity_matrix[a][b]=DM->similarity_matrix[b][a]=(int)(id);
-					/*Dist mat*/
-					DM->distance_matrix[a][b]=DM->distance_matrix[b][a]=MAXID-(int)(id);
-					/*Score mat*/
-
-
-					DM->score_similarity_matrix[a][b]=DM->score_similarity_matrix[b][a]=(int)score;
-					id_score=id;
-					if (CL->local_stderr && print>1) fprintf (CL->local_stderr, "\n\t%-*s %-*s identity=%3d%% score=%3d", max_name,(CL->S)->name[a], max_name,(CL->S)->name[b], id_score, (int)score);
-				}
-			}
-		}
+		ref=(float)sqrt((double)(10000*n_coor));
+	      }
+	    
+	    
+	    ns=vcalloc ( 2, sizeof(int));
+	    l_s=declare_int ( 2, 1);
+	    ns[0]=ns[1]=1;
+	    l_s[0][0]=0;
+	    l_s[1][0]=1;
+	    
+	    if (CL->local_stderr && print>0)fprintf ( (CL->local_stderr), "\nCOMPUTE PAIRWISE SIMILARITY [dp_mode: %s] [distance_matrix_mode: %s][Similarity Measure: %s] \n", (NCL->dp_mode)?NCL->dp_mode:"NO_DP",mode, sim_mode);
+	    
+	    for (a=0; a< (CL->S)->nseq; a++)
+	      {
+		if (CL->local_stderr && print>0)fprintf ( (CL->local_stderr), "\r\tSeq: %5d %20s -- [%3d %%]",a, (CL->S)->name[a], (int)((a*100)/(CL->S)->nseq));
+		for ( b=a; b< (CL->S)->nseq; b++)
+		  {
+		    if ( b==a){DM->similarity_matrix[a][b]=MAXID;}
+		    else
+		      {
+			l_s[0][0]=a;
+			l_s[1][0]=b;
+			if ( !strm(mode, "ktup2") && ! strm (mode, "geometric"))
+			  {
+			    ungap ( B->seq_al[a]);
+			    ungap ( B->seq_al[b]);
+			  }
+			
+			if ( strm (mode, "slow"))
+			  {
+				
+			    B->score_aln=pair_wise (B, ns, l_s,NCL);
+			    
+			    id=get_seq_sim ( B->seq_al[a], B->seq_al[b], "-", sim_mode);
+			    if ( CL->residue_index)
+			      {
+				score=(int)(((float)B->score_aln)/(B->len_aln*SCORE_K));
+				score=(int)(CL->normalise)?((score*MAXID)/(CL->normalise)):(score);
+			      }
+				else if ( CL->M)score=id;
+			    
+			    
+			    if ( score>MAXID)score=(CL->residue_index)?sub_aln2sub_aln_score (B, CL, CL->evaluate_mode, ns, l_s):id;
+			    
+			  }
+			else if ( strm2 (mode,"fast", "very_fast"))
+			  {
+			    B->score_aln=pair_wise (B, ns, l_s,NCL);
+			    id=get_seq_sim ( B->seq_al[a], B->seq_al[b], "-", sim_mode);
+			    score=(int)(id)*SCORE_K;
+			  }
+			else if ( strm (mode, "cscore"))
+			  {
+			    ungap ( B->seq_al[a]);
+				ungap ( B->seq_al[b]);
+				score=(int)linked_pair_wise (B, ns, l_s, NCL);
+				
+				
+				score/=(B->len_aln*SCORE_K);
+				id=score/SCORE_K;
+			      }
+			    else if ( strm (mode, "idscore"))
+			      {
+				score=id=idscore_pairseq (B->seq_al[a], B->seq_al[b], NCL->gop, NCL->gep, NCL->M, sim_mode);
+				//HERE ("%s %d %d ->%d", sim_mode, a, b, (int)id);
+			      }
+			    else if (strm (mode, "ktup"))
+			      {
+				id=sim_table[a][b];
+				score=id*SCORE_K;
+				
+			      }
+			    else if (strm (mode, "aln"))
+			      {
+				score=id=sim_table[a][b];
+				score*=SCORE_K;
+			      }
+			    
+			    else if ( strm (mode, "geometric"))
+			      {
+				id=get_geometric_distance (g_matrix,n_coor, a, b, "euclidian");
+				id=MAXID*(1-((id/ref)));
+				score=(int)(id)*SCORE_K;
+			      }
+			    else if ( strm (mode, "no"))
+			      {
+				id=100;
+				score=id*SCORE_K;
+			      }
+			    else if ( strm (mode, "random"))
+			      {
+				id=rand()%100;
+				score=id*SCORE_K;
+			      }
+			    else
+			      {
+				id=B->score_aln=pair_wise (B, ns, l_s,NCL);
+				score=id*SCORE_K;
+			      }
+			    /*Sim mat*/
+			    DM->similarity_matrix[a][b]=DM->similarity_matrix[b][a]=(int)(id);
+			    /*Dist mat*/
+			    DM->distance_matrix[a][b]=DM->distance_matrix[b][a]=MAXID-(int)(id);
+			    /*Score mat*/
+			    
+			    
+			    DM->score_similarity_matrix[a][b]=DM->score_similarity_matrix[b][a]=(int)score;
+			    id_score=id;
+			    if (CL->local_stderr && print>1) fprintf (CL->local_stderr, "\n\t%-*s %-*s identity=%3d%% score=%3d [%3d %%]", max_name,(CL->S)->name[a], max_name,(CL->S)->name[b], id_score, (int)score,(int)((a*100)/(CL->S)->nseq));
+			  }
+		      }
+		  }
 		vfree (ns);
 		free_int(l_s, -1);
-
+		
 	}
-
+	
 
 	if (CL->local_stderr) fprintf (CL->local_stderr, "\n");
 	free_constraint_list (NCL);

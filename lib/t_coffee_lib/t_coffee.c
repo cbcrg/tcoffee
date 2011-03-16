@@ -17,6 +17,7 @@ static char *get_evaluate_defaults(char *buf, char *type);
 static char *get_genome_defaults(char *buf, char *type);
 static char *get_dali_defaults(char *buf, char *type);
 static char *get_mcoffee_defaults(char *buf, char *type);
+static char *get_xcoffee_defaults(char *buf, char *type);
 static char *get_fmcoffee_defaults(char *buf, char *type);
 static char *get_t_coffee_defaults(char *buf, char *type);
 
@@ -55,6 +56,11 @@ static FILE *t_coffee_tip (FILE *fp,char *mode);
 static int run_other_pg(int argc, char *argv[]);
 
 static Sequence* prepare_master (char *seq,Sequence *S,Constraint_list *CL, char *dmode);
+char ** km_coffee (int argc, char **argv);
+Alignment* km_coffee_align  (Alignment *A,int mn,int argc, char **argv, int nit,int round);
+Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit,int round);
+Alignment *km_align_seq     (Alignment *A, int argc, char **argv,int nit,int round);
+Alignment *km_refine (Alignment *A, int k, int argc, char **argv, int nit, int round);
 
 #define is_a_seq_file(file) (!is_matrix(file) && !is_matrix(file+1) && !is_method (file) && !is_method (file+1) &&(check_file_exists(file) || check_file_exists(file+1)))
 static int NO_METHODS_IN_CL;
@@ -191,6 +197,7 @@ int batch_main ( int argc, char **argv)
 	int maximise;
 	char **out_aln_format;
 	int  n_out_aln_format;
+	int len;
 	char *infile;
 	char *matrix;
 	char *dp_mode;
@@ -401,6 +408,11 @@ int batch_main ( int argc, char **argv)
 	    //standard_initialisation (NULL,NULL);
 	    return run_other_pg (argc-2, argv+2);
 	  }
+	else if ( name_is_in_list ("kmcoffee", argv, argc, 100)!=-1)
+	  {
+	    argv=km_coffee(argc, argv);
+	  }
+	
 
 /*PARAMETER PROTOTYPE:    READ PARAMETER FILE     */
 	         get_cl_param(\
@@ -651,6 +663,8 @@ if (t_coffee_defaults_flag)
 	 else if ( strm (special_mode, "cdna"))new_arg=get_dna_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "protein"))new_arg=get_low_memory_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "mcoffee"))new_arg=get_mcoffee_defaults(NULL,lseq_type);
+	 else if ( strm (special_mode, "xcoffee"))new_arg=get_xcoffee_defaults(NULL,lseq_type);
+	 
 	 else if ( strm (special_mode, "dmcoffee"))new_arg=get_dmcoffee_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "fmcoffee"))new_arg=get_fmcoffee_defaults(NULL,lseq_type);
 
@@ -1295,7 +1309,11 @@ if ( !do_evaluate)
 			    /*Def 2*/    ""             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
-					  );
+			    );
+	if (n_profile_list)
+	  {
+	    profile_list=list2expanded_flist(profile_list,&n_profile_list, "FILE::");
+	  }
 	declare_name (profile1);
 	get_cl_param(						\
 		     /*argc*/      argc             ,		\
@@ -1681,7 +1699,7 @@ if ( !do_evaluate)
 			    /*TYPE*/      "S"           ,\
 			    /*OPTIONAL?*/ OPTIONAL      ,\
 			    /*MAX Nval*/  1             ,\
-			    /*DOC*/       "nj, upgma, cwph",\
+			    /*DOC*/       "nj, upgma, cwph,kmeans",\
 			    /*Parameter*/ &tree_mode    ,\
 			    /*Def 1*/    "nj"         ,\
 			    /*Def 2*/    "nj"         ,\
@@ -1798,7 +1816,27 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
 		   );
-/*PARAMETER PROTOTYPE:    INFILE    */
+
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-len"      ,\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "D"            ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Line Length\n",\
+			    /*Parameter*/ &len        ,\
+			    /*Def 1*/    "0",\
+			    /*Def 2*/    "100",\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+		   );
+	       if (len)cputenv ("ALN_LINE_LENGTH=%d",len);
+
+	       
+	       /*PARAMETER PROTOTYPE:    INFILE    */
 	       declare_name (infile);
 	       get_cl_param(\
 			    /*argc*/      argc           ,\
@@ -2196,7 +2234,7 @@ if ( !do_evaluate)
 			    /*DOC*/       "Defines the library weight: sim OR  sim_(matrix) OR winsim" ,\
 			    /*Parameter*/ &weight          ,\
 			    /*Def 1*/    "default"             ,\
-			    /*Def 2*/    "sim"             ,\
+			    /*Def 2*/    "default"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 		   );	  /*PARAMETER PROTOTYPE:    WEIGHT      */
@@ -2213,7 +2251,7 @@ if ( !do_evaluate)
 			    /*MAX Nval*/  1                ,\
 			    /*DOC*/       "Defines the sequences weighting scheme t_coffee" ,\
 			    /*Parameter*/ &seq_weight          ,\
-			    /*Def 1*/    "t_coffee"             ,\
+			    /*Def 1*/    "no"             ,\
 			    /*Def 2*/    "t_coffee"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
@@ -3662,23 +3700,7 @@ get_cl_param(\
 
 	       for ( a=0; a< n_profile_list; a++)
 		 {
-		   FILE *fp;
-		   if ( (fp=find_token_in_file (profile_list[a], NULL, "FILE_LIST"))!=NULL)
-		     {
-		       int z;
-		       char rname[1000];
-		       vfclose (fp);
-		       fp=vfopen (profile_list[a], "r");
-
-		       while ( (z=fgetc(fp))!=EOF)
-			 {
-			   ungetc(z, fp);
-			   fscanf (fp, "%s\n", rname);
-			   if ( check_file_exists(rname))sprintf ( list_file[n_list++], "R%s", rname);
-			 }
-		       vfclose (fp);
-		     }
-		   else if (format_is_conc_aln (profile_list[a]))
+		   if (format_is_conc_aln (profile_list[a]))
 		     {
 		       Alignment *P;
 		       char *cname;
@@ -3786,7 +3808,7 @@ get_cl_param(\
 		     }
 		   vfree (nn);
 		 }
-
+	     
 /*FILL THE F STRUCTURE (Contains Information for Output names For the defaults)*/
 	       if (n_list==0 || argc<=1)
 		 {
@@ -3862,9 +3884,9 @@ get_cl_param(\
 	       if (run_name)F=parse_fname(run_name);
 	       else F->path[0]='\0';
 
-
+	       
 	       identify_list_format      (list_file, n_list);
-
+	       
 
 	       fprintf (le, "\nINPUT FILES\n");
 	       for ( a=0; a< n_list; a++)
@@ -3876,6 +3898,7 @@ get_cl_param(\
 
 			 if (!f || f[0]=='\0')
 			   {
+			     printf_system_direct ("cp %s wrong.file", list_file[a]+1);
 			     myexit (fprintf_error(stderr,"The format of %s is not supported", list_file[a]+1));
 				     
 			   }
@@ -3883,7 +3906,7 @@ get_cl_param(\
 		       }
 		     else fprintf (le, "\n");
 		   }
-
+	       
 
 /*CONVERT, ALIGN OR EVALUATE: CHOSE THE RIGHT VERB*/
 	       /*Set the Hierarchy of the verbs*/
@@ -4009,6 +4032,7 @@ get_cl_param(\
 		     }
 		 }
 	       
+	       
 	       if (S->nseq<=1 && !do_domain)
 		 {
 		   printf_exit (EXIT_FAILURE,stderr, "\nERROR: Your Dataset Contains %d Sequence. For multiple alignments you need at least 2 sequences[FATAL:%s]", S->nseq,PROGRAM);
@@ -4069,7 +4093,7 @@ get_cl_param(\
 	      
 
 	       /*3 PREPARE THE CONSTRAINT LIST*/
-
+	       
 	       CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?tmpfile():NULL, NULL);
 	      
 	       sprintf ( CL->method_evaluate_mode, "%s", method_evaluate_mode);
@@ -4082,15 +4106,19 @@ get_cl_param(\
 
 	       
 	       if (extend_seq)extend_seqaln(CL->S,NULL);
-	       CL->DM=cl2distance_matrix ( CL,NOALN,distance_matrix_mode, distance_matrix_sim_mode,1);
+	       //removed to prevent systematic pw distance computation
+	       //CL->DM=cl2distance_matrix ( CL,NOALN,distance_matrix_mode, distance_matrix_sim_mode,1);
 	       if (extend_seq)unextend_seqaln(CL->S,NULL);
 	       
 
 	       
 	       /*one to all alignment*/
-	       MASTER_SEQ=prepare_master(master_mode,S,CL, "ktup");
+	       fprintf ( le, "\nIdentify Master Sequences [%s]:\n", master_mode);
+	       MASTER_SEQ=prepare_master(master_mode,S,CL, "_kmeans_");
+	       fprintf ( le, "\nMaster Sequences Identified");
 	       if (!blast_maxnseq)CL->o2a_byte=(CL->S)->nseq;
 	       else CL->o2a_byte=blast_maxnseq;
+	       
 	       
 	       /*4 GET TEMPLATES*/
 	       	       //Intercept Master Sequences
@@ -4398,7 +4426,7 @@ get_cl_param(\
 		  for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
 		  for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 		}
-	      
+	    
 	      CL=evaluate_constraint_list_reference (CL);
 	      sprintf ( CL->distance_matrix_mode, "%s", distance_matrix_mode);
 	      sprintf ( CL->distance_matrix_sim_mode, "%s", distance_matrix_sim_mode);
@@ -4411,7 +4439,7 @@ get_cl_param(\
 		 }
 	      /*WEIGHT CONSTRAINT LIST*/
 
-	      if ( !do_convert)
+	       if ( !do_convert && !strm (weight, "no"))
 		{
 
 		  CL->DM=cl2distance_matrix (CL, NOALN, NULL, NULL,0);
@@ -4556,8 +4584,12 @@ get_cl_param(\
 			   CL->tree_aln=A;
 			 }
 		       pc=tree_file;
+		      
 		       if ( strm (tree_file, "default") || !check_file_exists (tree_file))
-			 T=make_tree ( A,CL,gop, gep,(CL->S),pc,maximise);
+			 {
+			   
+			   T=make_tree ( A,CL,gop, gep,(CL->S),pc,maximise);
+			 }
 		       else if ( strm (tree_file, "no"))
 			 T=make_tree ( A,CL,gop, gep,(CL->S),NULL, maximise);
 		       else
@@ -4731,7 +4763,7 @@ get_cl_param(\
 			  output_format_aln ("overaln", A, NULL, over_aln_tmp);
 			  A=main_read_aln (over_aln_tmp,A);
 			}
-
+		      
 		      EA=main_coffee_evaluate_output(A, CL, evaluate_mode);
 		      
 		      //correct ascii file
@@ -5118,7 +5150,20 @@ char *get_fmcoffee_defaults(char *buf, char *type)
 
      return buf;
    }
+char *get_xcoffee_defaults(char *buf, char *type)
+   {
 
+     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+
+     buf=strcat (buf, " -master _kmeans_N_25_LONG_ ");
+     buf=strcat (buf, " -dp_mode linked_pair_wise");
+     buf=strcat (buf, " -tree_mode kmeans "); 
+     //buf=strcat (buf, " -method blastp_o2a proba_pair"); 
+     
+     //if (NO_METHODS_IN_CL)   buf=strcat (buf,"-method blastp_o2a ");
+     
+     return buf;
+   }
 char *get_mcoffee_defaults(char *buf, char *type)
    {
 
@@ -5214,6 +5259,7 @@ char *get_repeat_defaults(char *buf, char *type)
      /*buf=strcat (buf,"-in ");*/
      return buf;
    }
+
 
 
 int check_configuration4program()
@@ -5385,10 +5431,13 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	       char tmode[1000];
 	       int **sim;
 	       
+	       
 	       A=(strm (dmode, "msa"))?(very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL)):(seq2aln (S, NULL, RM_GAP));
 	       sim=(strm (dmode, "ktup") && CL->DM)?(CL->DM)->similarity_matrix:NULL;
 	       
-	       sprintf (tmode, "_aln_n%d", nseq);
+	       if (strstr (seq, "_kmeans_"))sprintf (tmode, "_kmeans_n%d_", nseq);
+	       else sprintf (tmode, "_aln_n%d_", nseq);
+	       
 	       SA=simple_trimseq (A, NULL, tmode, NULL, NULL);
 	       nseq=SA->nseq;
 	       name=SA->name;
@@ -5477,8 +5526,9 @@ char * get_seq_type_from_cl (int argc, char **argv)
   int a;
   int seq=0;
  
+  
   sprintf (file, "%d.tmp", rand()%10000);
-  buf=vcalloc ( 1000, sizeof (char));
+  buf=vcalloc ( 10000, sizeof (char));
   sprintf ( buf, "%s ", get_string_variable ("t_coffee"));
   for (a=1, seq=0; a<argc; a++)
     {
@@ -5501,3 +5551,168 @@ char * get_seq_type_from_cl (int argc, char **argv)
   vremove (file);
   return r;
 }
+/////////////////////////
+
+char** km_coffee (int argc, char **argv)
+{
+  char **new_argv;
+  int new_argc=0;
+  Sequence *S;
+  int a;
+  int k=0;
+  int nit=0;
+  Alignment *A;
+  char *tm=NULL;
+  new_argv=vcalloc (argc+100, sizeof (char*));
+  
+  for (a=0; a<argc; a++)
+    {
+      if ( strm (argv[a], "-seq"))
+	{
+	  S=main_read_seq (argv[++a]);
+	}
+      else if ( strm (argv[a], "-mode"))++a;
+      else if ( strm (argv[a], "-km_k"))     {k=atoi (argv[++a]);}
+      else if ( strm (argv[a], "-km_nit"))   {nit=atoi (argv[++a]);}
+      else if ( strm (argv[a], "-tree_mode")) {tm=argv[++a];}
+      
+      else
+	{
+	  new_argv[new_argc++]=argv[a];
+	}
+    }
+
+  if (!tm){new_argv[new_argc]=vcalloc(100, sizeof (char)); sprintf ( new_argv[new_argc++], "kmeans");}
+  if (!k)k=30;
+  if (!nit)nit=1;
+  A=seq2aln(S,NULL, RM_GAP);
+  km_coffee_align (A, k, new_argc, new_argv,nit,0);
+  myexit (EXIT_SUCCESS);
+}
+    
+	
+Alignment* km_coffee_align (Alignment *A,int k,int argc, char **argv, int nit,int round)
+{
+  if (A->nseq<=k)
+    {
+      return km_align_seq (A, argc, argv,nit,round);
+    }
+  else
+    {
+      Alignment**AL;
+      int n,a;
+      AL=seq2kmeans_subset(A,k,&n, "triaa");
+      for (a=0; a<n; a++)
+	{
+	  AL[a]=km_coffee_align (AL[a],k,argc, argv,nit,round+1);
+	}
+      A=km_align_profile(AL,n,argc, argv, nit,round);
+      if (round==0)A=km_refine (A,k,argc,argv,nit,round);
+    }
+}
+Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit, int round)
+{
+  char *cl=NULL;
+  char **prf;
+  char *aln;
+  char *prff;
+  int a;
+  char buf [10000];
+  FILE *fp;
+  Alignment *A;
+  
+  
+  
+  buf[0]='\0';
+  aln=vtmpnam(NULL);
+  prff=vtmpnam(NULL);
+  cl=list2string (argv, argc);
+  strcat (buf, cl);
+  strcat (buf, " ");
+  HERE ("****** Align Profiles ******");
+  
+  strcat (buf, " -method hh_pair -profile FILE::");
+  strcat (buf, prff);
+  if (round!=-1)
+    {
+      strcat (buf, " -outfile ");
+      strcat (buf, aln);
+      strcat (buf, " -output fasta_aln -quiet  ");
+    }
+  else
+    {
+      ;
+    }
+  prf=vcalloc (n, sizeof (char*));
+  
+  fp=vfopen (prff, "w");
+  for ( a=0; a<n; a++)
+    {
+      if (AL[a]->nseq==0);
+      else
+	{
+	  prf[a]=vtmpnam (NULL);
+	  fprintf (fp, "%s\n", prf[a]);
+	  output_fasta_aln (prf[a], AL[a]);
+	}
+    }
+  vfclose (fp);
+  fprintf ( stderr,"%s", buf);
+  printf_system ("%s",buf);
+  vfree (cl); vfree (prf);
+  if (round==-1)myexit(EXIT_SUCCESS);
+  
+  A=main_read_aln (aln, NULL);
+  //print_aln (A);
+  return A;
+}
+Alignment *km_align_seq (Alignment *A, int argc, char **argv, int nit,int round)
+{
+  
+  char *seq;
+  char *aln;
+  char *cl=NULL;
+  char buf[100000];
+  
+  seq=vtmpnam(NULL);
+  aln=vtmpnam(NULL);
+  HERE ("***** Align Sequences *****");
+  if ( A->nseq <=1)return A;
+  else
+    {
+      cl=list2string (argv, argc);
+      output_fasta_seq (seq,A);
+      
+      sprintf ( buf, "%s -seq %s ", cl, seq);
+      if (round!=-1)
+	{
+	  strcat (buf, " -output fasta_aln -quiet -outfile ");
+	  strcat (buf, aln);
+	}
+      
+      printf_system ("%s",buf);
+      fprintf (stderr, "%s", buf);
+      if (round==-1)
+	myexit (EXIT_SUCCESS);
+      
+      A=main_read_aln (aln,A);
+      print_aln (A);
+    }
+  return A;
+}
+
+Alignment* km_refine (Alignment *A, int k, int argc, char **argv, int nit, int round)
+{
+  int a,b,n, rs, s;
+  Alignment *RA;
+  Alignment **AL=vcalloc (k, sizeof (Alignment *));
+      
+  for (a=0; a<nit; a++)
+    {
+      AL=seq2kmeans_subset(A,k,&n, "msa3");
+      A=km_align_profile(AL,n,argc, argv,nit,1);
+    }
+  AL=seq2kmeans_subset(A,k,&n, "msa");
+  return km_align_profile(AL,n,argc, argv,nit,round-1);
+}
+

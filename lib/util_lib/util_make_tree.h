@@ -2,9 +2,21 @@ NT_node ** seq2cw_tree ( Sequence *S, char *file);
 NT_node ** make_nj_tree (  Alignment *A,int **distances,int gop, int gep, char **out_seq, char **out_seq_name, int out_nseq, char *tree_file, char *tree_mode);
 NT_node ** make_upgma_tree (  Alignment *A,int **distances,int gop, int gep, char **out_seq, char **out_seq_name, int out_nseq, char *tree_file, char *tree_mode);
 
+
 NT_node ** int_dist2nj_tree (int **distances, char **out_seq_name, int out_nseq,  char *tree_file);
 NT_node ** float_dist2nj_tree (float **distances, char **out_seq_name, int out_nseq,  char *tree_file);
 NT_node ** dist2nj_tree (double **distances, char **out_seq_name, int out_nseq,  char *tree_file);
+
+//////////////////////////////////////////////////////////////////////////////
+//
+//                              km
+///////////////////////////////////////////////////////////////////////////////
+
+double **aln2km_vector (Alignment *A, char *mode, int *dim);
+NT_node ** seq2km_tree (Sequence *S, char *file);
+NT_node aln2km_tree (Alignment *A, char *mode, int nboot);
+NT_node rec_km_tree (char **name,int n,int dim,double **V, int nboot);
+  
 
 NT_node ** int_dist2upgma_tree (int **mat, Alignment *A, int nseq, char *fname);
 NT_node upgma_merge (int **mat, NT_node *NL, int *used, int *n, int N);

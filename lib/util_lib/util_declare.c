@@ -1666,6 +1666,17 @@ int **declare_int2 (int f, int *s, int d)
 
       
 
+char *resize_string (char *buf)
+{
+  char *nbuf;
+  int l;
+
+  l=strlen (buf);
+  nbuf=vcalloc (l+1, sizeof (char));
+  sprintf (nbuf, "%s",buf);
+  vfree (buf);
+  return nbuf;
+}
   
 
 DECLARE_ARRAY(short,write_size_short,read_size_short,declare_short)

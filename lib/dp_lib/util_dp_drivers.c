@@ -987,6 +987,91 @@ Constraint_list *align_pdb_pair   (char *seq_in, char *dp_mode,char *evaluate_mo
 	      }
 	    return CL;
 	}
+Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL);
+Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
+        {
+	  int *entry;
+	  Alignment *A1, *A2;
+	  char *aln1, *aln2, *prf1, *prf2, *hhfile, *seq;
+	  FILE *fp;
+	  int r1, r2, s1, s2,a,c;
+	  float sc, ss, we;
+	  char *buf;
+	  
+	  seq=vcalloc ( strlen (in_seq)+1, sizeof (char));
+	  entry=vcalloc (CL->entry_len+1, sizeof (int));
+
+	  sprintf ( seq, "%s", in_seq);
+	  atoi(strtok (seq,SEPARATORS));
+	  s1=atoi(strtok (NULL,SEPARATORS));
+	  s2=atoi(strtok (NULL,SEPARATORS));
+
+	  A1=seq2R_template_profile(CL->S,s1);
+	  A2=seq2R_template_profile(CL->S,s2);
+	  buf=vcalloc (strlen ((CL->S)->seq[s1])+strlen ((CL->S)->seq[s2])+1, sizeof (char));
+	  
+	  aln1=vtmpnam (NULL);
+	  prf1=vtmpnam(NULL);
+	  fp=vfopen (aln1, "w");
+
+	  sprintf ( buf, "%s",(CL->S)->seq[s1]);
+	  upper_string(buf);
+	  fprintf ( fp, ">%s\n%s\n", (CL->S)->name[s1],buf);
+	  if (A1)
+	    {
+	      for (a=0; a<A1->nseq; a++)
+		{
+		  sprintf ( buf, "%s",A1->seq_al[a]);upper_string(buf);
+		  fprintf ( fp, ">%s\n%s\n",A1->name[a], buf);
+		}
+	    }
+	  
+	  vfclose (fp);
+	  printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first  >/dev/null 2>/dev/null", aln1, prf1);
+	  
+	  
+	  aln2=vtmpnam (NULL);
+	  prf2=vtmpnam(NULL);
+	  fp=vfopen (aln2, "w");
+	  sprintf ( buf, "%s",(CL->S)->seq[s2]);
+	  upper_string(buf);
+	  fprintf ( fp, ">%s\n%s\n", (CL->S)->name[s2],buf);
+	  if (A2)
+	    {
+	      for (a=0; a<A2->nseq; a++)
+		{
+		  sprintf ( buf, "%s",A2->seq_al[a]);upper_string(buf);
+		  fprintf ( fp, ">%s\n%s\n",A2->name[a], buf);
+		}
+	    }
+	  vfclose (fp);
+	  printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first >/dev/null 2>/dev/null", aln2, prf2);
+	  
+	  
+	  //make the prf prf alignment
+	  hhfile=vtmpnam(NULL);
+	  printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global  >/dev/null 2>/dev/null", prf1, prf2, hhfile);
+	 
+	  //parse the output
+	  fp=vfopen (hhfile, "r");
+	  while ((c=fgetc(fp))!='\n');
+	  
+	  while (fscanf (fp, "%d %d %f %f %f\n", &r1, &r2, &sc, &ss, &we)==5)
+	    {
+	      entry[SEQ1]=s1;
+	      entry[SEQ2]=s2;
+	      entry[R1]=r1;
+	      entry[R2]=r2;
+	      entry[WE]=(int)(we*1000);
+	      add_entry2list (entry,CL);
+	    }
+	  vfclose (fp);
+	  vfree (entry);
+	  vfree (seq);
+	  return CL;
+	}
+
+
 
 Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL)
         {
@@ -999,6 +1084,8 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	  char command[10000];
 	  char *param;
 
+	  if ( strm (M->executable2, "hhalign"))return hh_pair (M ,in_seq, CL);
+	  
 	  if ( M->executable2[0]=='\0')
 	    fprintf ( stderr, "\nERROR: profile_pair requires a method: thread_pair@EP@executable2@<method> [FATAL:%s]\n", PROGRAM);
 
@@ -1081,7 +1168,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	    }
 	  return CL;
 	}
-Constraint_list * pdbid_pair (TC_method *M , char *in_seq, Constraint_list *CL)
+Constraint_list    * pdbid_pair (TC_method *M , char *in_seq, Constraint_list *CL)
         {
 
 	  char seq[1000];
@@ -1282,6 +1369,7 @@ Constraint_list * seq_msa (TC_method *M , char *in_seq, Constraint_list *CL)
 	{
 	  CL=NCL;
 	}
+      
     }
   return CL;
 }
@@ -2174,7 +2262,10 @@ NT_node ** make_tree ( Alignment *A,Constraint_list *CL,int gop, int gep,Sequenc
 	  {
 	    return  seq2cw_tree ( S, tree_file);
 	  }
-		  
+	else if (strm (CL->tree_mode, "kmeans"))
+	  {
+	    return seq2km_tree (S, tree_file);
+	  }
 	else if (strm ( CL->tree_mode, "upgma") || strm ( CL->tree_mode, "nj"))
 	  {
 	    out_nseq=S->nseq;
@@ -3217,7 +3308,7 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
   index_tree_node(P);
   initialize_scoring_scheme (CL);
   
-  if ( get_nproc()>1 && strstr (CL->multi_thread, "msa"))
+  if ( get_nproc()>1 && strstr (CL->multi_thread, "msa") && !(strstr(CL->dp_mode, "collapse")))
     {
       int max_fork;
       
@@ -3310,7 +3401,8 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
     }
 
   P->score=A->score_aln=score=profile_pair_wise (A,L->nseq, L->lseq,R->nseq,R->lseq,CL);
-  score=node2sub_aln_score (A, CL, CL->evaluate_mode,P);
+  //Node evaluation is lwing down the pg for no use
+  //score=node2sub_aln_score (A, CL, CL->evaluate_mode,P);
   A->len_aln=strlen (A->seq_al[P->lseq[0]]);
   
   if (print)fprintf(CL->local_stderr, "\n\tGroup %4d: [Group %4d (%4d seq)] with [Group %4d (%4d seq)]-->[Len=%5d][PID:%d]%s",P->index,R->index,R->nseq,L->index,L->nseq, A->len_aln,getpid(),(P->fork==1)?"[Forked]":"" );

@@ -10544,6 +10544,11 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   D1->T=tree_compute (D1->A, n_actions-1, action_list+1);
 	 }
+       else if  ( strm(action, "aln2km_tree"))
+	 {
+	   if (!ACTION(1))myexit(fprintf_error (stderr,"-aln2km_tree <mode:diaa|triaa|aln> <nboot>"));
+	   D1->T= aln2km_tree(D1->A, (ACTION(1)), ATOI_ACTION(2));
+	 }
        else if ( strm(action, "similarities2tree"))
 	 {
 	   D1->T=similarities_file2tree (ACTION(1));
@@ -11327,7 +11332,20 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   free_sequence (D1->S,(D1->S)->nseq);
 	   D1->S=aln2seq (D1->A); 
 	 }
+       else if ( strm (action, "kmeans"))
+	 {
+	   //k, mode: diaa,triaa, name
+	   if (!ATOI_ACTION(1))myexit(fprintf_error (stderr,"-kmeans <nclusters> <mode:diaa|triaa> <outputname>"));
+	   km_seq (D1->A,ATOI_ACTION (1),ACTION(2),ACTION(3));
+	 }
+       else if ( strm (action, "gap_trim"))
+	 {
+	   D1->A=gap_trim (D1->A,ATOI_ACTION(1));
 	   
+	   free_sequence (D1->S,(D1->S)->nseq);
+	   D1->S=aln2seq (D1->A); 
+	 }
+       
        else if ( strm (action, "trim"))
 	 {
 	   D1->A=simple_trimseq (D1->A,(D2)?D2->A:NULL, action_list[1], ACTION (2), NULL);

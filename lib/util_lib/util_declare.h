@@ -140,7 +140,7 @@ void *declare_arrayN2nomemset ( int ndim, int *A, size_t size);
 void * declare_arrayN (int ndim, size_t size, ...);
 void *declare_arrayN2 ( int ndim, int *A, size_t size);
 
-
+char       * resize_string (char *buf);
 void      ** declare_array     (int first, int second, size_t size);
 short     ** declare_short     ( int first, int second);
 char      ** declare_char      ( int first, int second);
