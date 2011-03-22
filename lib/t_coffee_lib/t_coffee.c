@@ -2875,7 +2875,7 @@ get_cl_param(\
 			    /*DOC*/       "Align all the sequences to the master sequences: file or number"          ,\
 			    /*Parameter*/ &master_mode      ,\
 			    /*Def 1*/    "no"      ,\
-			    /*Def 2*/    "_LONG_N_10"      ,\
+			    /*Def 2*/    "_LONG_n_100_kmeans_"      ,\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
@@ -4774,7 +4774,7 @@ get_cl_param(\
 
 
 		      if (A->A)A=A->A;
-		      if (!strm2(out_aln, "stdout", "stderr") && le==stderr && !do_convert)output_format_aln ("aln",A,NULL,"stdout");
+		      if (!strm2(out_aln, "stdout", "stderr") && le==stderr && !do_convert && A->nseq < MAX_NSEQ_4_DISPLAY)output_format_aln ("aln",A,NULL,"stdout");
 
 
 		      A->CL=CL;
@@ -5385,6 +5385,7 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
  {
    int a,b,s1, n, i;
    FILE *fp;
+   int trim_mode=2;
    
    CL->master=vcalloc (S->nseq+1, sizeof(int));
    
@@ -5402,7 +5403,11 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
      }
    else
      {
-       
+       if ( strstr (seq, "_PLIB_"))
+	 {
+	   set_int_variable ("N_4_PLIB", atoi (strstr(seq, "_PLIB_")+strlen ("_PLIB_")));
+	   return CL->S;
+	 }
        if ( strstr (seq, "_P_"))
 	 {
 	   for (a=0; a<S->nseq; a++)
@@ -5410,13 +5415,16 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	       if (seq_has_template (S, a, "_P_"))CL->master[a]=1;
 	     }
 	 }
-       if ( is_number (seq) || strstr (seq, "_N_"))
+       if ( is_number (seq) || strstr (seq, "_N_") || strstr (seq, "_n_"))
 	 {
 	   int nseq;
 	   char **name;
 	   Alignment *A=NULL, *SA=NULL;
-	   if ( strstr (seq, "_N_")){nseq=atoi (strstr(seq, "_N_")+strlen ("_N_"));}
-	   else nseq=atoi (seq);
+	   char ttag;
+	   
+	   if      ( strstr (seq, "_N_")){nseq=atoi (strstr(seq, "_N_")+strlen ("_N_"));ttag='N';}
+	   else if ( strstr (seq, "_n_")){nseq=atoi (strstr(seq, "_n_")+strlen ("_n_"));ttag='n';}
+	   else {nseq=atoi (seq);ttag='n';}
 	   if ( nseq<0)
 	     nseq=((float)S->nseq*((float)nseq/(float)100.0)*(float)-1);
 	   
@@ -5425,19 +5433,22 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	     {
 	       for (a=0; a<(CL->S)->nseq; a++)CL->master[a]=1;
 	     }
-	   else
+	   else 
 	     {
 	       
 	       char tmode[1000];
 	       int **sim;
-	       
+	     
 	       
 	       A=(strm (dmode, "msa"))?(very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL)):(seq2aln (S, NULL, RM_GAP));
 	       sim=(strm (dmode, "ktup") && CL->DM)?(CL->DM)->similarity_matrix:NULL;
 	       
-	       if (strstr (seq, "_kmeans_"))sprintf (tmode, "_kmeans_n%d_", nseq);
-	       else sprintf (tmode, "_aln_n%d_", nseq);
-	       
+	       if      (strstr (seq,  "_kmeans_"))sprintf (tmode, "_kmeans_%c%d_", ttag,nseq);
+	       else if (strstr (dmode,"_kmeans_"))sprintf (tmode, "_kmeans_%c%d_", ttag,nseq);
+	       else sprintf (tmode, "_aln_%c%d_", ttag,nseq);
+
+
+	       fprintf ( CL->local_stderr, "------- Master Mode For Trimming: %s\n", tmode);
 	       SA=simple_trimseq (A, NULL, tmode, NULL, NULL);
 	       nseq=SA->nseq;
 	       name=SA->name;
@@ -5450,7 +5461,7 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	       free_aln (SA);
 	     }
 	 }
-       if ( strstr (seq, "_LONG_"))
+       if ( strstr (seq, "_LONG_"))//keep the longuest sequence
 	 {
 	   int ml=0;
 	   int ls=0;
@@ -5473,6 +5484,7 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	   b++;
 	 }
      }
+   fprintf (CL->local_stderr, "------- Selected a total of %d Master Sequences\n",b);
    if ( b==0)
      {
        printf_exit (EXIT_FAILURE, stderr, "ERROR: %s is neither a file nor a method nor a number for -master [FATAL:%s]\n",seq,PROGRAM);
@@ -5488,10 +5500,15 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	 }
        MS=duplicate_sequence (T);
        free_sequence (T, -1);
+       MS->blastdbS=CL->S;
        return MS;
      }
    else
-     return CL->S;
+     {
+       
+       (CL->S)->blastdbS=CL->S;
+       return CL->S;
+     }
  }
 int set_methods_limits (char ** method,int nl,char **list, int n, int *maxnseq, int *maxlen)
 {
@@ -5683,7 +5700,7 @@ Alignment *km_align_seq (Alignment *A, int argc, char **argv, int nit,int round)
       cl=list2string (argv, argc);
       output_fasta_seq (seq,A);
       
-      sprintf ( buf, "%s -seq %s ", cl, seq);
+      sprintf ( buf, "%s -seq %s -method hh_pair", cl, seq);
       if (round!=-1)
 	{
 	  strcat (buf, " -output fasta_aln -quiet -outfile ");
@@ -5709,7 +5726,7 @@ Alignment* km_refine (Alignment *A, int k, int argc, char **argv, int nit, int r
       
   for (a=0; a<nit; a++)
     {
-      AL=seq2kmeans_subset(A,k,&n, "msa3");
+      AL=seq2kmeans_subset(A,k,&n, "msa");
       A=km_align_profile(AL,n,argc, argv,nit,1);
     }
   AL=seq2kmeans_subset(A,k,&n, "msa");

@@ -91,7 +91,9 @@ int cmp_float ( const float **a, const float **b);
 void sort_int_1D ( int *L, int n);
 char** sort_string_array (char **V, int n);
      
-void sort_int ( int **V,int N_F, int F, int left, int right);
+void sort_int            ( int **V,int N_F, int F, int left, int right);
+int * flash_sort_int_inv ( int **V,int N_F, int F, int left, int right);
+int * flash_sort_int     ( int **V,int N_F, int F, int left, int right);
 void sort_list_int ( int **V,int N_F, int F, int left, int right);
 void sort_list_int2 ( int **V,int *list,int N_F, int left, int right);
 void sort_int_inv ( int **V,int N_F, int F, int left, int right);

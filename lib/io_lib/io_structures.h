@@ -43,7 +43,7 @@ struct Sequence
       char template_file[FILENAMELEN+1];
       struct Template **T;
       char *blastdb;
-      
+      struct Sequence *blastdbS;
 };
 typedef struct Sequence Sequence;
 

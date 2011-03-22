@@ -37,6 +37,7 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 Constraint_list *nfork_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode,Job_TC *job, FILE *local_stderr);
 Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, FILE *local_stderr);
 int job2first_seq(Job_TC *job);
+
 Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode)
 {
 	Job_TC *job=NULL;
@@ -841,17 +842,22 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 	else if ( strstr(aln_mode, "pairwise"))
 	  {
 	    int do_mirror, do_self, x, y, id;
+	    int **set;
+	    
 	    do_mirror=(strstr(aln_mode, "m_"))?1:0;
 	    do_self=(strstr(aln_mode, "s_"))?1:0;
-	    
+	    set=declare_int (S->nseq, S->nseq);
 	    if (method->minid!=0 || method->maxid!=100)
 	      DM=CL->DM=cl2distance_matrix ( CL,NOALN,NULL,NULL,1);
 	    
 	    for (x=0; x< S->nseq; x++)
 	      {
 		if (!CL->master[x])continue;
-		for ( y=(do_mirror)?0:x; y< S->nseq; y++)
+		for ( y=0; y< S->nseq; y++)
 		  {
+		    if (!do_mirror && set[y][x])continue;
+		    set[x][y]=1;
+		    
 		    id=(DM && DM->similarity_matrix)?DM->similarity_matrix[x][y]:-1;
 		    
 		    if ( x==y && !do_self);
@@ -886,6 +892,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 		      }
 		  }
 	      }
+	    free_int (set, -1);
 	  }
 	
 	return job;
@@ -2398,6 +2405,7 @@ Sequence *precompute_blast_db (Sequence *S, char **ml, int n)
 	}
       a++;
     }
+  S->blastdbS=S;
   return S;
 }
 #define is_seq_source(Symbol,Mode,SeqMode)            (Symbol==Mode && (SeqMode==NULL || strm (SeqMode, "ANY") || (SeqMode[0]!='_' && strchr (SeqMode,Symbol)) || (SeqMode[0]=='_' && !strchr (SeqMode,Symbol))))
@@ -3007,32 +3015,32 @@ FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int
 		int *tot=vcalloc ( S->nseq, sizeof (int));
 		int *max=vcalloc ( S->nseq, sizeof (int));
 		for (a=0;a<S->nseq; a++)
-		{
-			cacheI[a]=vcalloc (S->len[a], sizeof (int*));
-			cacheR[a]=vcalloc (S->len[a], sizeof (int));
-		}
+		  {
+		    cacheI[a]=vcalloc (S->len[a], sizeof (int*));
+		    cacheR[a]=vcalloc (S->len[a], sizeof (int));
+		  }
 		for (a=0; a<S->nseq; a++)max[a]=S->len[a];
 		
 		for (s1=0; s1<S->nseq; s1++)
-		{
-			for (r1=1; r1<=S->len[s1]; r1++)
+		  {
+		  for (r1=1; r1<=S->len[s1]; r1++)
+		    {
+		      for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
 			{
-				for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
-				{
-					
-					s2=CL->residue_index[s1][r1][b+SEQ2];
-					if (tot[s2]>=max[s2])
-					{
-						max[s2]+=100;
-						cacheI[s2]=vrealloc (cacheI[s2], max[s2]*sizeof (int*));
-						cacheR[s2]=vrealloc (cacheR[s2], max[s2]*sizeof (int*));
-					}
-					
-					cacheI[s2][tot[s2]]=CL->residue_index[s1][r1]+b;
-					cacheR[s2][tot[s2]]=r1;
-					tot[s2]++;
-				}
+			  
+			  s2=CL->residue_index[s1][r1][b+SEQ2];
+			  if (tot[s2]>=max[s2])
+			    {
+			      max[s2]+=100;
+			      cacheI[s2]=vrealloc (cacheI[s2], max[s2]*sizeof (int*));
+			      cacheR[s2]=vrealloc (cacheR[s2], max[s2]*sizeof (int*));
+			    }
+			  
+			  cacheI[s2][tot[s2]]=CL->residue_index[s1][r1]+b;
+			  cacheR[s2][tot[s2]]=r1;
+			  tot[s2]++;
 			}
+		    }
 			
 			for (s2=0;s2<S->nseq; s2++)
 			{
@@ -4388,7 +4396,7 @@ Distance_matrix* cl2distance_matrix    (Constraint_list *CL, Alignment *A, char 
 	if ( !CL)return NULL;
 	sprintf ( mode, "%s", (CL && in_mode==NULL)?CL->distance_matrix_mode:in_mode);
 	sprintf ( sim_mode, "%s", (CL && in_sim_mode==NULL)?CL->distance_matrix_sim_mode:in_sim_mode);
-
+	
 	if ( !CL->DM ||!strm ((CL->DM)->mode, mode) || !strm ((CL->DM)->sim_mode, sim_mode) || A )
 	  {
 	    return seq2distance_matrix (CL, A, mode, sim_mode, print);
@@ -4525,6 +4533,7 @@ Distance_matrix *seq2distance_matrix (Constraint_list *CL, Alignment *A,char *mo
 		    NCL->gep=-1;
 		  }
 	      }
+	    
 	    else if ( strm (mode, "cscore"))
 	      {
 		if (!CL || !CL->residue_index || CL->ne==0)
@@ -5002,6 +5011,32 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
+
+	//hash_pair START
+	sprintf (list[n][0], "hash_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "DOC regular dynamic Programming\n");
+	fprintf ( fp, "EXECUTABLE hash_pair\n");
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    no_name\n");
+	fprintf ( fp, "OUT_FLAG   no_name\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	if ( strm ( retrieve_seq_type(), "DNA") || strm (retrieve_seq_type(), "RNA"))
+	{
+		fprintf ( fp, "MATRIX   dna_idmat\n");
+		fprintf ( fp, "GOP   -10\n");
+		fprintf ( fp, "GEP   -1\n");
+	}
+	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+	vfclose (fp);}
+	//hash_pair nsihed
+
+
+	
+
 
 	sprintf (list[n][0], "biphasic_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
@@ -6052,20 +6087,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", PRANK_4_TCOFFEE);
 	vfclose (fp);}
 
-	sprintf (list[n][0], "prank_msa");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "DOC prank [%s]\n", PRANK_ADDRESS);
-	fprintf ( fp, "EXECUTABLE tc_generic_method.pl\n");
-	fprintf ( fp, "ALN_MODE  multiple\n");
-	fprintf ( fp, "OUT_MODE  aln\n");
-	fprintf ( fp, "PARAM -method=%s -mode=seq_msa -tmpdir=%s\n",(getenv("PRANK_4_TCOFFEE"))?getenv("PRANK_4_TCOFFEE"):PRANK_4_TCOFFEE, get_tmp_4_tcoffee());
-	fprintf ( fp, "IN_FLAG -infile=\n");
-	fprintf ( fp, "OUT_FLAG -outfile=\n");
-	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", PRANK_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", PRANK_4_TCOFFEE);
-	vfclose (fp);}
+
 
 	sprintf (list[n][0], "fsa_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
@@ -6129,8 +6151,18 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", NCBIBLAST_4_TCOFFEE);
 	vfclose (fp);}
 
-
-
+	sprintf (list[n][0], "plib_msa");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "DOC t_coffee [%s]\n", "t_coffee");
+	fprintf ( fp, "EXECUTABLE plib_msa\n");
+	fprintf ( fp, "ALN_MODE  multiple\n");
+	fprintf ( fp, "OUT_MODE  fL\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", "www.tcoffee.org");
+	fprintf ( fp, "PROGRAM    %s\n", "t_coffee");
+	vfclose (fp);}
+	
 
 	sprintf (list[n][0], "em");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
@@ -6248,5 +6280,150 @@ char *** produce_method_file ( char *method)
 	list[n]=NULL;
 	return list;
 }
+
+
+
+Constraint_list * plib_msa (Constraint_list *CL)
+{
+  int *list=vcalloc ((CL->S)->nseq,sizeof(int));
+  int s,a,ns;
+  int n;
+
+  n=get_int_variable ("N_4_PLIB");
+  n=(!n)?10:n;
+
+  for (ns=s=a=0; a<n-1 && s!=-1; a++)
+    {
+      list[ns++]=s;
+      CL=add_seq2cl (s,CL);
+      s=cl2worst_seq (CL,list,ns);
+      if (s!=-1)fprintf (stderr, "\n\tMaster Sequence: %s", (CL->S)->name[s]);
+    }
+  return CL;
+}
+
+int cl2worst_seq (Constraint_list *CL, int *list, int ns)
+{
+  Sequence *S=CL->S;
+  int **score;
+  int *bsp;
+  int  bs,a,b,s1,s2,r1,r2;
+  int len_normalize=1;
+  
+  score=declare_int (S->nseq, 2);
+  for (a=0; a<S->nseq; a++)score[a][0]=a;
+  for (s1=0; s1<S->nseq; s1++)
+    for (r1=1; r1<=S->len[s1]; r1++)
+      for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+	{
+	  s2=CL->residue_index[s1][r1][b+SEQ2];
+	  score[s1][1]+=CL->residue_index[s1][r1][b+WE];
+	  score[s2][1]+=CL->residue_index[s1][r1][b+WE];
+	}
+  
+  if (len_normalize)for (a=0; a<S->nseq; a++)score[a][1]/=strlen (S->seq[a]);
+  
+  //get rid of sequences already used
+  for (a=0; a<ns; a++)
+    {
+      score[list[a]][1]=-1;
+    }
+  for (b=0,a=0; a<S->nseq;a++)
+    {
+      if (score[a][1]==-1);
+      else 
+	{
+	  score[b][0]=score[a][0];
+	  score[b][1]=score[a][1];
+	  b++;
+	}
+    }
+  if (b!=0)
+    {
+      bsp=flash_sort_int (score,2,1,0, b-1);
+      bs=bsp[0];
+    }
+  else
+    bs=-1;
+  
+  
+  free_int (score, -1);
+  return bs;
+  
+}
+Constraint_list *add_seq2cl(int s, Constraint_list *CL)
+{
+  static char *master;
+  static char *seq;   
+  static char *lib;
+  static int dumped;
+
+  
+  if (!dumped)
+    {
+      int a;
+      seq   =vtmpnam(NULL);
+            
+      for (a=0; a<(CL->S)->nseq; a++)
+	printf_file (seq, "a", ">%s\n%s\n", (CL->S)->name[a], (CL->S)->seq[a]);
+      dumped=1;
+    }
+  master=vtmpnam(NULL);
+  lib   =vtmpnam(NULL);
+  printf_file (master, "w", ">%s\n", (CL->S)->name[s]);
+  
+  printf_system ("cp %s seq",seq);
+  printf_system ("cp %s master",master);
+  
+  
+  
+  printf_system ("t_coffee -seq %s -master %s -out_lib %s -lib_only -quiet", seq, master,lib);
+  
+  return read_constraint_list_file(CL,lib);
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

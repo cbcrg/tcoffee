@@ -5,7 +5,7 @@
 #define MY_EPS 1000*DBL_EPSILON
 //Maximum number of tries for interactibve things
 #define MAX_N_TRIES 3
-
+#define MAX_NSEQ_4_DISPLAY 50
 //Maximum CACHE and Temporary file size and age (Mb and days, 0: unlimited)
 #define TMP_MAX_SIZE  0
 #define TMP_MAX_KEEP  10

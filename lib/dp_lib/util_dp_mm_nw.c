@@ -37,31 +37,35 @@ static int  last;                /* Last script op appended */
 }
  
 #define REP { last = *sapp++ = 0; }        /* Append "Replace" op */
-int myers_miller_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL )
+static int *sns;
+static int **sls;
+int myers_miller_pair_wise (Alignment *A,int *ns, int **ls,Constraint_list *CL )
 	{
 	int **pos;
 	int a,b, i, j, l,l1, l2, len;
 	int *S;
 	char ** char_buf;
 	int score;
-	
-	
+		
 	/********Prepare Penalties******/
+	//ns2master_ns (ns,ls, &sns,&sls);
+	sns=ns;
+	sls=ls;
 
 	/********************************/
 	
 	
-	pos=aln2pos_simple ( A,-1, ns, l_s);
+	pos=aln2pos_simple ( A,-1, ns, ls);
 	
 
-	l1=strlen (A->seq_al[l_s[0][0]]);
-	l2=strlen (A->seq_al[l_s[1][0]]);
+	l1=strlen (A->seq_al[ls[0][0]]);
+	l2=strlen (A->seq_al[ls[1][0]]);
 	S=vcalloc (l1+l2+1, sizeof (int));
 	last=0;
 	sapp=S;
 
-        score=diff (A,ns, l_s, 0, l1, 0, l2, 0, 0, CL, pos);	
-	diff (NULL,ns, l_s, 0, l1, 0, l2, 0, 0, CL, pos);
+        score=diff (A,ns, ls, 0, l1, 0, l2, 0, 0, CL, pos);	
+	diff (NULL,ns, ls, 0, l1, 0, l2, 0, 0, CL, pos);
 
 
 
@@ -86,9 +90,9 @@ int myers_miller_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL 
 		   if (*sapp==0)
 		      {
 			  for (b=0; b< ns[0]; b++)
-			      char_buf[l_s[0][b]][len]=A->seq_al[l_s[0][b]][i];
+			      char_buf[ls[0][b]][len]=A->seq_al[ls[0][b]][i];
 			  for (b=0; b< ns[1]; b++)
-			      char_buf[l_s[1][b]][len]=A->seq_al[l_s[1][b]][j];
+			      char_buf[ls[1][b]][len]=A->seq_al[ls[1][b]][j];
 			  i++; j++;len++;
 		      }
 		  else if ( *sapp>0)
@@ -97,9 +101,9 @@ int myers_miller_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL 
 			    for ( a=0; a<l; a++, j++, len++)
 			        {
 				for (b=0; b< ns[0]; b++)
-				    char_buf[l_s[0][b]][len]='-';
+				    char_buf[ls[0][b]][len]='-';
 				for (b=0; b< ns[1]; b++)
-				    char_buf[l_s[1][b]][len]=A->seq_al[l_s[1][b]][j];
+				    char_buf[ls[1][b]][len]=A->seq_al[ls[1][b]][j];
 				}
 			}
 		  else if ( *sapp<0)
@@ -108,9 +112,9 @@ int myers_miller_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL 
 			    for ( a=0; a<l; a++, i++, len++)
 			        {
 				for (b=0; b< ns[0]; b++)
-				    char_buf[l_s[0][b]][len]=A->seq_al[l_s[0][b]][i];;
+				    char_buf[ls[0][b]][len]=A->seq_al[ls[0][b]][i];;
 				for (b=0; b< ns[1]; b++)
-				    char_buf[l_s[1][b]][len]='-';
+				    char_buf[ls[1][b]][len]='-';
 				}		        
 			}
 		   
@@ -121,14 +125,14 @@ int myers_miller_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL 
 	A->len_aln=len;
 	A->nseq=ns[0]+ns[1];
 	
-	for ( a=0; a< ns[0]; a++){char_buf[l_s[0][a]][len]='\0'; sprintf ( A->seq_al[l_s[0][a]], "%s", char_buf[l_s[0][a]]);}
-	for ( a=0; a< ns[1]; a++){char_buf[l_s[1][a]][len]='\0'; sprintf ( A->seq_al[l_s[1][a]], "%s", char_buf[l_s[1][a]]);}
+	for ( a=0; a< ns[0]; a++){char_buf[ls[0][a]][len]='\0'; sprintf ( A->seq_al[ls[0][a]], "%s", char_buf[ls[0][a]]);}
+	for ( a=0; a< ns[1]; a++){char_buf[ls[1][a]][len]='\0'; sprintf ( A->seq_al[ls[1][a]], "%s", char_buf[ls[1][a]]);}
 
 	
 	vfree (S);
 	free_char ( char_buf, -1);
-	l1=strlen (A->seq_al[l_s[0][0]]);
-	l2=strlen (A->seq_al[l_s[1][0]]);
+	l1=strlen (A->seq_al[ls[0][0]]);
+	l2=strlen (A->seq_al[ls[1][0]]);
 	if ( l1!=l2) exit(1);
 		
 	free_int (pos, -1);
@@ -136,7 +140,7 @@ int myers_miller_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL 
 	}
 
 
-int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb, int te, Constraint_list *CL, int **pos)
+int diff (Alignment *A, int *ns, int **ls, int s1, int M,int s2, int N , int tb, int te, Constraint_list *CL, int **pos)
         {
 	 static int *CC;
 	 static int *DD;
@@ -207,7 +211,7 @@ int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb
 	       for (j = 1; j <= N; j++)
 	           { 
 		     
-		     c = gap(j-1) +(CL->get_dp_cost) (A, pos, ns[0], l_s[0],s1, pos, ns[1], l_s[1],j-1+s2,CL)+ gap(N-j);
+		     c = gap(j-1) +(CL->get_dp_cost) (A, pos, sns[0], sls[0],s1, pos, sns[1], sls[1],j-1+s2,CL)+ gap(N-j);
 		     
 		     if (c > midc)
 		       { midc = c;
@@ -248,7 +252,7 @@ int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb
 		 if ((c =   c   + m) > (e =   e   + h)) e = c;
 		 if ((c = CC[j] + m) > (d = DD[j] + h)) d = c;
 		 
-		 ma=c = s + (CL->get_dp_cost) (A, pos, ns[0], l_s[0],i-1+s1, pos, ns[1], l_s[1],j-1+s2,CL);
+		 ma=c = s + (CL->get_dp_cost) (A, pos, sns[0], sls[0],i-1+s1, pos, sns[1], sls[1],j-1+s2,CL);
 		 
 		 if (e > c) c = e;
 		 if (d > c) c = d;
@@ -279,7 +283,7 @@ int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb
 		  if ((c =   c   + m) > (e =   e   + h)) e = c;
 		  if ((c = RR[j] + m) > (d = SS[j] + h)) d = c;
 		  
-		  ma=c = s + (CL->get_dp_cost) (A, pos, ns[0], l_s[0],i+s1, pos, ns[1], l_s[1],j+s2,CL);
+		  ma=c = s + (CL->get_dp_cost) (A, pos, sns[0], sls[0],i+s1, pos, sns[1], sls[1],j+s2,CL);
 		  
 		  if (e > c) c = e;
 		  if (d > c) c = d;
@@ -314,14 +318,14 @@ int diff (Alignment *A, int *ns, int **l_s, int s1, int M,int s2, int N , int tb
   if (type == 1)
     { 
 	
-    diff (A,ns, l_s, s1,midi, s2, midj, tb, CL->gop*SCORE_K, CL, pos); 
-    diff (A,ns, l_s, s1+midi,M-midi, s2+midj, N-midj, CL->gop*SCORE_K,te, CL, pos); 
+    diff (A,ns, ls, s1,midi, s2, midj, tb, CL->gop*SCORE_K, CL, pos); 
+    diff (A,ns, ls, s1+midi,M-midi, s2+midj, N-midj, CL->gop*SCORE_K,te, CL, pos); 
     }
   else
     { 
-      diff (A,ns, l_s, s1,midi-1, s2, midj, tb,0, CL, pos); 
+      diff (A,ns, ls, s1,midi-1, s2, midj, tb,0, CL, pos); 
       DEL(2);
-      diff (A,ns, l_s, s1+midi+1, M-midi-1,s2+midj, N-midj,0,te, CL, pos); 
+      diff (A,ns, ls, s1+midi+1, M-midi-1,s2+midj, N-midj,0,te, CL, pos); 
     }
   return midc;
   }       

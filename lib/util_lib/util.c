@@ -513,6 +513,29 @@ int pstrcmp(char *p1, char *p2)
 {
   return strcmp(*(char **)p1, *(char **)p2);
 }
+int *flash_sort_int_inv ( int **V,int N_F, int F, int left, int right)
+{
+  int *R=NULL;
+  int best;
+  int a;
+  for (a=0; a<=right; a++)
+    {
+      if (a==0 ||V[a][F]>best){R=V[a];best=V[a][F];}
+    }
+  return R;
+}
+int *flash_sort_int ( int **V,int N_F, int F, int left, int right)
+{
+  int *R=NULL;
+  int best;
+  int a;
+  for (a=0; a<=right; a++)
+    {
+      if (a==0 ||V[a][F]<best){R=V[a];best=V[a][F];}
+    }
+  return R;
+}
+
 void sort_int ( int **V,int N_F, int F, int left, int right)
 	{
 	  if (!V)return;

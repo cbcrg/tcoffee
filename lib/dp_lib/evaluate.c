@@ -1446,7 +1446,7 @@ Profile_cost_func get_profile_mode_function (char *name, Profile_cost_func func)
   static Profile_cost_func *flist;
   static char **nlist;
  
- 
+  
  
   /*The first time: initialize the list of pairwse functions*/
   /*If func==NULL:REturns a pointer to the function associated with a name*/
@@ -1583,7 +1583,31 @@ int muscle_profile_profile    (int *prf1, int *prf2, Constraint_list *CL)
        
       return (int)score;
     }
-int cw_profile_profile    (int *prf1, int *prf2, Constraint_list *CL)
+
+int cw_profile_profile   (int *prf1, int *prf2, Constraint_list *CL)
+    {
+      /*see function aln2count2 for prf structure*/
+      int a, b, n,p;
+      int res1, res2;
+      double score=0;
+
+
+      for ( n=0,a=3; a<prf1[1]; a+=3)
+	for ( b=3; b<prf2[1]; b+=3)
+	  {
+	    
+	    res1=prf1[a];
+	    res2=prf2[b];
+	    p=prf1[a+1]*prf2[b+1];
+	
+	    n+=p;
+	    score+=p*CL->M[res1-'A'][res2-'A'];
+	  }
+      
+      score=(score*SCORE_K)/((double)(n==0)?1:n);
+      return score;
+    }
+int cw_profile_profile_ref    (int *prf1, int *prf2, Constraint_list *CL)
     {
       /*see function aln2count2 for prf structure*/
       int a, b, n,p;
@@ -1701,7 +1725,6 @@ int evaluate_aln_profile_score (Constraint_list *CL, int s1, int r1, int s2, int
 
 int evaluate_profile_score     (Constraint_list *CL,Alignment *Prf1, int s1, int r1, Alignment *Prf2,int s2, int r2)
 {
-
   return generic_evaluate_profile_score (CL, Prf1, s1,r1,Prf2, s2,r2,CL->profile_mode);
 }
 
@@ -1909,7 +1932,7 @@ int evaluate_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, int r2)
 	{
 	  return evaluate_aln_profile_score ( CL, s1,r1, s2, r2);
 	}
-    
+     
       if (r1>0 && r2>0)
 	    {
 	    r1--;
@@ -3379,7 +3402,7 @@ int ***make_cw_lu (int **cons, int l, Constraint_list *CL)
   int ***lu;
   int p, a,r;
   
-  lu=declare_arrayN(3, sizeof (int),l,26, 2);
+  lu=declare_arrayN(3, sizeof (int),l,103, 2);
   for ( p=0; p<l ; p++)
     {
       for (r=0; r<26; r++)
@@ -3393,7 +3416,7 @@ int ***make_cw_lu (int **cons, int l, Constraint_list *CL)
     }
   return lu;
 }
-    
+int id2_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL);    
 int cw_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
 {
 	  static int last_tag;
@@ -3404,6 +3427,7 @@ int cw_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int co
 	  float t1, t2;
 	  
 	
+	  
 	  
 	  
 	  if (last_tag!=A->random_tag)
@@ -3451,6 +3475,9 @@ int cw_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int co
 		  t1+=lu[ref_col][r-'a'][0]*p;
 		  t2+=lu[ref_col][r-'a'][1]*p;
 		}
+	      
+	      
+	      
 	      score=(t2==0)?0:(t1*SCORE_K)/t2;
 	      score -=SCORE_K*CL->nomatch;
 	      return score;
@@ -3471,6 +3498,48 @@ int cw_profile_get_dp_cost_old ( Alignment *A, int**pos1, int ns1, int*list1, in
 	      cons2=sub_aln2count_mat2 (A, ns2, list2);
 	    }
 	  score=cw_profile_profile (cons1[col1], cons2[col2], CL)-SCORE_K*CL->nomatch;
+	  return score;
+}
+
+int id2_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
+{
+	  static int last_tag;
+	  static int **cons1, **cons2;
+	  int score=0;
+	  static char *aa;
+	  int a, b, r;
+	  int *pr[2];
+	  if (!aa)aa=vcalloc (100, sizeof (int));
+	  
+	  if (last_tag!=A->random_tag)
+	    {
+	      last_tag=A->random_tag;
+	      free_int (cons1,-1);free_int (cons2,-1);
+	      cons1=sub_aln2count_mat2 (A, ns1, list1);
+	      cons2=sub_aln2count_mat2 (A, ns2, list2);
+	    }
+	  pr[0]=cons1[col1];
+	  pr[1]=cons2[col2];
+	  
+	  for (a=0; a<2; a++)
+	    {
+	      for (b=3; b<pr[a][1]; b+=3)
+		{
+		  char r=tolower (pr[a][b])-'a';
+		  aa[r]+=pr[a][b+1];
+		  if (a==2){aa[r]*=aa[r];}
+		  if (aa[r]>score)score=aa[r];
+		}
+	    }
+	  for (a=0; a<2; a++)
+	    {
+	      for (b=3; b<pr[a][1]; b+=3)
+		{
+		  char r=tolower (pr[a][b]);
+		  aa[b-'a']=0;
+		}
+	    }
+	      
 	  return score;
 }
 
@@ -4051,6 +4120,7 @@ int slow_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, in
 		else 
 		  {					
 		    res_res++;
+
 		    if ((s=(CL->evaluate_residue_pair)(CL, rs1, r1, rs2, r2))!=UNDEFINED) score+=s;				    
 		    else 
 		      {

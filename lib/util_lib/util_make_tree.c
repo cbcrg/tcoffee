@@ -60,7 +60,7 @@ NT_node ** make_upgma_tree (  Alignment *A,int **distances,int gop, int gep, cha
   }
 NT_node ** make_nj_tree (  Alignment *A,int **distances,int gop, int gep, char **out_seq, char **out_seq_name, int out_nseq, char *tree_file, char *tree_mode)
   {
-
+   
     if ( distances==NULL && A==NULL)
       {
 	fprintf ( stderr, "\nError: make_nj_tree, must provide an alignment or a distance matrix [FATAL:%s]", PROGRAM);
@@ -82,8 +82,9 @@ NT_node ** int_dist2nj_tree (int **distances, char **out_seq_name, int out_nseq,
 	  d=declare_double( out_nseq, out_nseq);
 	  for ( a=0; a< out_nseq; a++)
 	    for ( b=0; b< out_nseq; b++)
-	      d[a][b]=distances[a][b];
-	  
+	      {
+		d[a][b]=distances[a][b];
+	      }
 	  T=dist2nj_tree ( d, out_seq_name, out_nseq, tree_file);
 	  
 	  free_double (d, -1);
@@ -1210,6 +1211,8 @@ static Alignment *KA;
 NT_node expand_km_node (NT_node T,int n, char **name, int dim, double **V);
 
 
+  
+    
 
 double **aln2km_vector (Alignment *A, char *mode, int *dim)
 {

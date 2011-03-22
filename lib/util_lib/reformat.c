@@ -5349,12 +5349,14 @@ FILE * display_weights (Weights *W, FILE *fp)
   int a;
   int max_len;
   
-  if ( W==NULL)
+  if ( W==NULL || strm (W->mode, "no_seq_weight"))
     {
       fprintf ( fp, "\n\nUN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1\n");
       return fp;
     }
+  
   fprintf ( fp, "\n\nWEIGHTED MODE:%s\n\n", (W)->mode);
+  if (W->nseq>MAX_NSEQ_4_DISPLAY)return fp;
   for ( a=0, max_len=0; a< W->nseq; a++)max_len=MAX(max_len, strlen (W->seq_name[a]));
   for ( a=0; a< (W->nseq); a++)
     {
@@ -10571,7 +10573,17 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 
 	   DST->A=copy_aln (D1->A, NULL);
 	   DST->S=aln2seq(DST->A);
-	   if (n_actions>1 && strm (  action_list[1], "categories"))
+	   if    (strm (action_list[1], "id2"))
+	     {
+	       fprintf ( stdout, "ID2: %d\n", aln2sim2(D1->A));
+	       exit (EXIT_SUCCESS);
+	     }
+	   else if    (strm (action_list[1], "id"))
+	     {
+	       fprintf ( stdout, "ID: %d\n", aln2sim ((D1->A), "idmat"));
+	       exit (EXIT_SUCCESS);
+	     }
+	   else if (n_actions>1 && strm (  action_list[1], "categories"))
 	     {
 	       CL=declare_constraint_list ( DST->S,NULL, NULL, 0,NULL, read_matrice("pam250mt"));
 	       DST->A=  main_coffee_evaluate_output(DST->A, CL, "categories");
@@ -12740,24 +12752,22 @@ FILE * display_sequences_names (Sequence *S, FILE *fp, int check_pdb_status, int
 	       }
 	    for ( a=0, max_len=0; a< S->nseq; a++)max_len=MAX(max_len, strlen (S->name[a]));
 	    fprintf ( fp, "\nINPUT SEQUENCES: %d SEQUENCES  [%s]", S->nseq,(S->type)?S->type:"Unknown type");
-	    for ( a=0; a< S->nseq; a++)
-	        {
-		  fprintf (fp, "\n  Input File %-*s Seq %-*s Length %4d type %s",max_len,S->file[a], max_len,S->name[a],(int)strlen ( S->seq[a]), S->type);
+	    if (S->nseq<MAX_NSEQ_4_DISPLAY)
+	      {
+		for ( a=0; a< S->nseq; a++)
+		  {
+		    fprintf (fp, "\n  Input File %-*s Seq %-*s Length %4d type %s",max_len,S->file[a], max_len,S->name[a],(int)strlen ( S->seq[a]), S->type);
 		    if (check_pdb_status)
 		      {
 			if ((r=seq_is_pdb_struc (S, a)))fprintf (fp, " Struct Yes PDBID %s", get_pdb_id(r));
 			else fprintf (fp, " Struct No");
-			/*
-			if (is_pdb_struc (S->name[a])||is_pdb_struc (S->file[a]) )fprintf (fp, " Struct Yes");
-			else fprintf (fp, " Struct No");
-			*/
 		      }
 		    else fprintf (fp, " Struct Unchecked");
 		    if ( print_templates)fp=display_sequence_templates (S, a, fp);
-		    
-
-		}
-	    fprintf ( fp, "\n");
+		  }
+		fprintf ( fp, "\n");
+	      }
+	    
 	    return fp;
 	    
 	}

@@ -617,3 +617,12 @@ char * seq2rna_lib ( Sequence *S, char *name);
 Constraint_list *read_rna_lib ( Sequence *S, char *fname);
 Constraint_list *rna_lib_extension ( Constraint_list *CL, Constraint_list *R);
 char *** produce_method_file ( char *method);
+/*********************************************************************/
+/*                                                                   */
+/*                        SCALED CONSISTENCY                          */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+Constraint_list * plib_msa (Constraint_list *CL);
+int cl2worst_seq (Constraint_list *CL, int *list, int n);
+Constraint_list *add_seq2cl(int s, Constraint_list *CL);

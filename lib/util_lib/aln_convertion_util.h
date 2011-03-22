@@ -350,7 +350,10 @@ int logid_score (int sim, int len);
 int ** fast_aln2sim_mat (Alignment *A, char *mode);
 int ** fast_aln2sim_list (Alignment *A, char *mode, int *ns, int **ls);
 
-int ** aln2sim_mat (Alignment *A, char *mode); 
+int ** aln2dist_mat(Alignment *A);
+int ** aln2dist_mat_gap (Alignment *A);
+int ** aln2sim_mat_km (Alignment *A, char *mode); 
+int ** aln2sim_mat    (Alignment *A, char *mode); 
 int **aln2cov (Alignment *A);
 int ** get_dist_aln_array ( Alignment *A, char *mode);
 int ** get_raw_sim_aln_array ( Alignment *A, char *mode);
@@ -377,6 +380,7 @@ char *aln2random_seq (Alignment *A, int noise1, int noise2, int noise3, int gap_
 int * km2centroids (Alignment *A, int k, char *mode,int *keep);
 Alignment* km_seq (Alignment *S, int k, char *mode,char*name );
 Alignment** seq2kmeans_subset (Alignment *A, int k, int *n, char *mode);
+int* seq2kmeans_class  (Alignment *A, int k, char *mode);
 Alignment *gap_trim (Alignment *A, int f);
 Alignment * master_trimseq( Alignment *A, Sequence *S,char *mode);
 Alignment * trimseq( Alignment *A, Sequence *S, char *mode);
@@ -427,3 +431,8 @@ float* analyze_overaln ( Alignment *A, Alignment *B, char *mode, int f,int p1,in
 
 
 Alignment * mark_exon_boundaries  (Alignment *A, Alignment *E);
+//simple_trimseq2
+//Creates Clusters
+//In each cluser there is a path between every pair of sequence
+//A path is made of edges connecting tow nodes with w>min_sim
+int ** simple_trimseq2 (int n, int **sim, int min_sim);

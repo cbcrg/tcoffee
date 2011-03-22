@@ -15,6 +15,8 @@ Alignment * full_sorted_aln (Alignment *A, Constraint_list *CL);
 /*                                                                */
 /*                                                                */
 /******************************************************************/
+int *  set_profile_master (Alignment *A,int *ns, int **ls, Constraint_list *CL);
+int *unset_profile_master (Alignment *A,int *ns, int **ls, Constraint_list *CL);
 
 Constraint_list *profile2list     ( Job_TC *job,int nprf);
 Constraint_list *seq2list     (Job_TC *Job);
@@ -66,7 +68,8 @@ Constraint_list * rna_pair (TC_method *M , char *in_seq, Constraint_list *CL);
 Constraint_list *best_pair4prot (Job_TC *job);
 Constraint_list *best_pair4rna (Job_TC *job);
 Alignment * fast_pair      (Job_TC *job);
-			    
+Constraint_list *hash_pair (TC_method *M , char *in_seq, Constraint_list *CL);
+
 void toggle_case_in_align_two_sequences(int value);
 Alignment * align_two_sequences ( char *seq1, char *seq2, char *matrix, int gop, int gep, char *align_mode);
 Alignment * align_two_aln ( Alignment *A1, Alignment  *A2, char *in_matrix, int gop, int gep, char *in_align_mode);
@@ -113,7 +116,7 @@ int split_condition (int nseq, int score, Constraint_list *CL);
 
 int profile_pair_wise (Alignment *A, int n1, int *l1, int n2, int *l2, Constraint_list *CL);
 int pair_wise (Alignment *A, int*ns, int **l_s,Constraint_list *CL );
-
+int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL);
 int empty_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int glocal);
 
 

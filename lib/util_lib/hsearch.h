@@ -119,3 +119,33 @@ Char_node * declare_char_node (int action);
  #endif
  
  #endif
+ ///////////////////////////////////////////////////////////////////
+ //                                                               //
+ //                                                               //
+ //            Adapted Hash for sequence comparison               //
+ //                                                                //
+ ///////////////////////////////////////////////////////////////////
+#define SHASH_LIMIT 0.5
+#define SHASH_FAILS NULL
+#define SHASH_CHUNK 100
+ 
+ typedef struct shash_node_t {
+   int   * data;//vector containing data 
+   const char * key; /* key for hash lookup */
+   struct shash_node_t *next;           /* next node in hash chain */
+ } shash_node_t;
+typedef struct shash_t {
+   struct shash_node_t **bucket;        /* array of hash nodes */
+   int size;                           /* size of the array */
+   int entries;                        /* number of entries in table */
+   int downshift;                      /* shift cound, used in hash function */
+   int mask;                           /* used to select bits for hashing */
+  int ks; //key size
+} shash_t;
+
+static int shash(const shash_t *tptr, const char *key);
+void shash_init(shash_t *tptr, int buckets,int kl);
+static void shash_rebuild_table(shash_t *tptr);
+shash_node_t* shash_lookup(const shash_t *tptr, const char *key);
+shash_node_t* shash_insert(shash_t *tptr, const char *key, int d);
+void shash_destroy(shash_t *tptr);

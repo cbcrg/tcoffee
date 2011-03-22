@@ -536,3 +536,146 @@ Char_node * declare_char_node (int action)
    return(buf);
  }
  
+ ///////////////////////////////////////////////////////////////////
+ //                                                               //
+ //                                                               //
+ //            Adapted Hash for sequence comparison               //
+ //                                                               //
+ ///////////////////////////////////////////////////////////////////
+
+static int shash(const shash_t *tptr, const char *key) 
+{
+   int i=0;
+   int n=0;
+   int shashvalue;
+   
+   
+   while (n++!=tptr->ks)
+     i=(i<<3)+(*key++ - '0');
+   
+   shashvalue = (((i*1103515249)>>tptr->downshift) & tptr->mask);
+   if (shashvalue < 0) {
+     shashvalue = 0;
+   }    
+ 
+   return shashvalue;
+ }
+ 
+void shash_init(shash_t *tptr, int buckets,int ks) 
+{
+  tptr->entries=0;
+  tptr->size=2;
+  tptr->mask=1;
+  tptr->downshift=29;
+  tptr->ks=ks;
+  
+  while (tptr->size<buckets) 
+     {
+       tptr->size<<=1;
+       tptr->mask=(tptr->mask<<1)+1;
+       tptr->downshift--;
+     } 
+  tptr->bucket=(shash_node_t **) calloc(tptr->size, sizeof(shash_node_t *));
+  return;
+}
+
+static void shash_rebuild_table(shash_t *tptr) 
+{
+  shash_node_t **old_bucket, *old_hash, *tmp;
+  int old_size, h, i;
+ 
+  old_bucket=tptr->bucket;
+  old_size=tptr->size;
+  
+  /* create a new table and rehash old buckets */
+  shash_init(tptr, old_size<<1,tptr->ks);
+  for (i=0; i<old_size; i++) 
+    {
+      old_hash=old_bucket[i];
+      while(old_hash) 
+	{
+	  tmp=old_hash;
+	  old_hash=old_hash->next;
+	  h=shash(tptr, tmp->key);
+	  tmp->next=tptr->bucket[h];
+	  tptr->bucket[h]=tmp;
+	  tptr->entries++;
+	} 
+    } 
+  free(old_bucket);
+  
+  return;
+}
+
+shash_node_t* shash_lookup(const shash_t *tptr, const char *key) 
+{
+  int h;
+  shash_node_t *node;
+   
+  h=shash(tptr, key);
+  for (node=tptr->bucket[h]; node!=NULL; node=node->next) {
+    if (!strncmp(node->key, key,tptr->ks))
+      break;
+  }
+  return node;
+}
+ 
+ 
+shash_node_t* shash_insert(shash_t *tptr, const char *key, int d) 
+{
+  int *tmp;
+  shash_node_t *node;
+  int h;
+  
+  if ((node=shash_lookup(tptr, key)) != SHASH_FAILS)
+     {
+       node->data[node->data[-1]++]=d;
+       if (node->data[-1]==node->data[-2])
+	 {
+	   node->data-=2;
+	   node->data[0]+=SHASH_CHUNK-2;
+	   node->data=realloc (node->data, (node->data[0]+2)*sizeof (int));
+	   node->data+=2;
+	 }
+       return node;
+     }
+   else
+     {
+       while (tptr->entries>=SHASH_LIMIT*tptr->size)
+	 shash_rebuild_table(tptr);
+       
+       h=shash(tptr, key);
+       node=(struct shash_node_t *) malloc(sizeof(shash_node_t));
+       node->data=malloc(SHASH_CHUNK*sizeof(int));
+       node->data[0]=SHASH_CHUNK-2;
+       node->data[1]=0;
+       node->data+=2;
+       node->data[node->data[-1]++]=d;
+       
+       node->key=key;
+       node->next=tptr->bucket[h];
+       tptr->bucket[h]=node;
+       tptr->entries++;
+       return node;
+     }
+}
+ 
+//no need for shash_delete
+void shash_destroy(shash_t *tptr) {
+   shash_node_t *node, *last;
+   int i;
+   
+   for (i=0; i<tptr->size; i++) {
+     node = tptr->bucket[i];
+     while (node != NULL) { 
+       last = node;   
+       node = node->next;
+       free (last->data-2);
+       free(last);
+     }
+   }     
+   if (tptr->bucket != NULL) {
+     free(tptr->bucket);
+     memset((void*)tptr, 0, sizeof(shash_t));
+   }
+}

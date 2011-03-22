@@ -13,6 +13,7 @@ int count_threshold_nodes (Alignment *A, NT_node P, int t);
 int set_node_score (Alignment *A, NT_node P, char *mode);
 char *split_nodes_nseq (Alignment *A, NT_node P, int max_nseq, char *list);
 char *split_nodes_idmax (Alignment *A, NT_node P, int max_id, char *list);
+
 /******************************************************************/
 /*                   MAIN DRIVER                                  */
 /*                                                                */
@@ -206,6 +207,10 @@ Constraint_list *seq2list     ( Job_TC *job)
 	  A=fast_pair (job);
 	  RCL=A->CL;
 	}
+      else if (strm (mode, "hash_pair"))
+	{
+	  RCL=hash_pair(M, seq, CL);
+	}
       else if ( strm ( mode, "proba_pair") )
 	{
 	  A=fast_pair (job);
@@ -248,12 +253,16 @@ Constraint_list *seq2list     ( Job_TC *job)
 	{
 	  RCL=seq_msa(M, seq, CL);
 	}
+       else if (strm (mode, "plib_msa"))
+	{
+	  RCL=plib_msa (CL);
+	}
 /*STRUCTURAL METHODS*/
       else if (strm (mode, "profile_pair") || strm (mode, "hh_pair"))
 	{
 	  RCL=profile_pair (M, seq, CL);
 	}
-
+      
       else if ( strm (mode, "sap_pair"))
 	{
 	  RCL=sap_pair (seq, weight, CL);
@@ -268,7 +277,7 @@ Constraint_list *seq2list     ( Job_TC *job)
 	}
 	else if (strm (mode, "rna_pair"))
 	{
-		RCL=rna_pair(M, seq, CL);
+	  RCL=rna_pair(M, seq, CL);
 	}
       else if ( strm (mode, "pdbid_pair"))
 	{
@@ -1944,7 +1953,79 @@ Constraint_list * best_pair4prot      (Job_TC *job)
   return RCL;
 }
 
-
+Constraint_list *hash_pair (TC_method *M , char *in_seq, Constraint_list *CL)
+{
+  int *entry;
+  Alignment *A1, *A2;
+  char *aln1, *aln2, *prf1, *prf2, *hhfile, *seq;
+  FILE *fp;
+  int r1, r2, s1, s2, l1, l2;
+  char *seq1, *seq2;
+  float sc, ss, we;
+  char *buf;
+  shash_t h;
+  shash_node_t *n;
+  int ktup=2;
+  int a, b, c,d,i,j,is,ij;
+  static int **mat;
+  int **diag;
+  
+  if (!mat)mat=read_matrice ("blosum62mt");
+  
+  seq=vcalloc ( strlen (in_seq)+1, sizeof (char));
+  entry=vcalloc (CL->entry_len+1, sizeof (int));
+  
+  sprintf ( seq, "%s", in_seq);
+  atoi(strtok (seq,SEPARATORS));
+  s1=atoi(strtok (NULL,SEPARATORS));
+  s2=atoi(strtok (NULL,SEPARATORS));
+  seq1=(CL->S)->seq[s1];
+  seq2=(CL->S)->seq[s2];
+  l1=strlen (seq1);
+  l2=strlen (seq2);
+  diag=declare_int (l1+l2+1, 2);
+  for (a=0; a<(l1+l2); a++)diag[a][0]=a;
+  
+  shash_init (&h,l1*2,1);
+  
+  for (a=0; a<l1-ktup; a++) shash_insert (&h,seq1+a,a);
+  for (a=0; a<l2-ktup; a++)
+    {
+      if ((n=shash_lookup(&h,seq2+a)))
+	{
+	  for (b=0; b<n->data[-1]; b++)
+	    {
+	      i=n->data[b];
+	      j=a;
+	      diag[j-i+l1][1]++;
+	    }
+	}
+    }
+  sort_int_inv(diag, 2, 1, 0, l1+l2-1);
+  for (a=0; a<5; a++)
+    {
+      d=diag[a][0];
+      
+      if (d<l1){is=l1-d;ij=0;}
+      else {is=0; ij=d-l1;}
+      for (i=is, j=ij; i<l1 && j<l2; i++, j++)
+	{
+	  entry[SEQ1]=s1;
+	  entry[SEQ2]=s2;
+	  entry[R1]=i+1;
+	  entry[R2]=j+1;
+	  r1=tolower(seq1[i]);
+	  r2=tolower(seq2[j]);
+	  entry[WE]=mat[r1-'a'][r2-'a']; 
+	  add_entry2list (entry,CL);
+	}
+      
+    }
+  free_int (diag,-1);
+  shash_destroy(&h);
+  
+  return CL;
+  } 
 Alignment * fast_pair      (Job_TC *job)
         {
 	    int s, n,a;
@@ -2466,35 +2547,146 @@ Alignment *realign_aln ( Alignment*A, Constraint_list *CL)
   vfree (ns); free_int (ls, -1);
   return A;
 }
+Alignment *realign_twoseq (Alignment *A, Constraint_list *CL)
+{
+  int*ns,**ls;
+  int a;
+  int s1;
+  int s2;
 
+  s1=rand()%A->nseq;
+  s2=rand()%A->nseq;
+
+  if (s1==s2)return A;
+  ns=vcalloc (3, sizeof (int));
+  ls=declare_int (2,A->nseq+1);
+  
+  ls[0][ns[0]++]=s1;
+  ls[0][ns[0]]=s1;
+  for (a=0; a<A->nseq; a++)if (a!=s1)ls[1][ns[1]++]=a;
+  ls[1][ns[1]]=s2;
+  ns[2]=1;
+  ungap_sub_aln ( A, ns[0], ls[0]);
+  ungap_sub_aln ( A, ns[1], ls[1]);
+  A->score_aln=pair_wise (A, ns, ls,CL);
+  vfree(ns);free_int(ls, -1);
+  HERE ("S1=%d S2=%d LEN=%d", A->len_aln);
+  return A;
+}
+Alignment *realign_kmeans (Alignment *A, Constraint_list *CL)
+{
+  int *g,*ns,**ls;
+  int a;
+  g=seq2kmeans_class(A,2,"msar");
+  
+  ns=vcalloc (3, sizeof (int));
+  ls=declare_int (2,A->nseq);
+  for (a=0; a<A->nseq; a++)
+    {
+      if (g[a])ls[0][ns[0]++]=a;
+      else ls[1][ns[1]++]=a;
+    }
+  HERE ("%d %d", ns[0], ns[1]);
+  if (ns[0] && ns[1])
+    {
+      ungap_sub_aln ( A, ns[0], ls[0]);
+      ungap_sub_aln ( A, ns[1], ls[1]);
+      ns=set_profile_master (A, ns, ls, CL);
+      A->score_aln=pair_wise (A, ns, ls,CL);
+      unset_profile_master (A, ns, ls, CL);
+    }
+  vfree(ns);free_int(ls, -1);vfree (g);
+  HERE ("LEN=%d", A->len_aln);
+  return A;
+}
+
+Alignment *realign_aln_best ( Alignment*A, Constraint_list *CL)
+{
+  int *ns;
+  int **ls;
+  
+  int  a,b,p,n,g;
+  int **gc;
+  
+  
+  int s1=rand()%A->nseq;
+  int s2=rand()%A->nseq;
+  if (s1==s2)return A;
+	  
+  ns=vcalloc (3, sizeof (int));
+  ls=declare_int (2,A->nseq);
+  
+  for (a=0; a< A->nseq; a++)
+    {
+      float sc1, sc2, t1, t2;
+      sc1=sc2=t1=t2=0;
+      for (b=0; b<A->len_aln; b++)
+	{
+	  int r1=A->seq_al[s1][b];
+	  int r2=A->seq_al[s2][b];
+	  int rx=A->seq_al[a][b];
+	  
+	  t1+=(r1!='-' || rx !='-')?1:0;
+	  t2+=(r2!='-' || rx !='-')?1:0;
+	  sc1+=(r1==rx && r1 !='-')?1:0;
+	  sc2+=(r2==rx && r2 !='-')?1:0;
+	}
+      sc1/=(t1==0)?1:t1;
+      sc2/=(t2==0)?1:t2;
+      
+      g=(sc1>sc2)?0:1;
+      ls[g][ns[g]++]=a;
+      sprintf ( A->name[a], "%d", g+1);
+      if (a==s1)sprintf ( A->name[a], "%d::G1", g+1);
+      if (a==s2)sprintf ( A->name[a], "%d::G2", g+1);
+      
+    }
+  print_aln (A);
+  
+  
+  HERE ("G+: %d G2:%d", ns[0], ns[1]);
+  ungap_sub_aln ( A, ns[0], ls[0]);
+  ungap_sub_aln ( A, ns[1], ls[1]);
+  ns=set_profile_master (A, ns, ls, CL);
+  A->score_aln=pair_wise (A, ns, ls,CL);
+  HERE ("BIPART: LEN=%d", A->len_aln);
+  unset_profile_master (A, ns, ls, CL);
+  vfree(ns);free_int(ls, -1);
+  
+  return A;
+}
 Alignment *realign_aln_random_bipart ( Alignment*A, Constraint_list *CL)
 {
   int *ns;
-  int **l_s;
+  int **ls;
+  
+  int  a,p,n,g;
+  int **gc;
 
-  int  a,g;
-
-  ns=vcalloc (2, sizeof (int));
-  l_s=declare_int (2,A->nseq);
-
-  for ( a=0; a< A->nseq; a++)
+  
+  p=rand()%A->len_aln;
+  
+  ns=vcalloc (3, sizeof (int));
+  ls=declare_int (2,A->nseq);
+  
+  for (a=0; a<A->nseq; a++)
     {
-    g=rand()%2;
-    l_s[g][ns[g]++]=a;
+      g=(A->seq_al[a][p]=='-')?1:0;
+      ls[g][ns[g]++]=a;
     }
-
-  fprintf ( stderr, "\n");
-  ungap_sub_aln ( A, ns[0], l_s[0]);
-  ungap_sub_aln ( A, ns[1], l_s[1]);
-
-  /* //Display Groups
-  for (a=0;a<2; a++)
-    for (b=0; b<ns[a]; b++)
-      fprintf ( stderr, "[%d-%d]", a, l_s[a][b]);
-  */
-  A->score_aln=pair_wise (A, ns, l_s,CL);
-
-  vfree(ns);free_int(l_s, -1);
+  
+  HERE ("G+: %d G2:%d", ns[0], ns[1]);
+  ungap_sub_aln ( A, ns[0], ls[0]);
+  ungap_sub_aln ( A, ns[1], ls[1]);
+  ns=set_profile_master (A, ns, ls, CL);
+  A->score_aln=pair_wise (A, ns, ls,CL);
+  
+  //HERE ("\n>%s\n%s\n>%s\n%s\n", A->name[ls[0][ns[0]]],A->seq_al[ls[0][ns[0]]],A->name[ls[1][ns[1]]],A->seq_al[ls[1][ns[1]]]);
+  
+  HERE ("BIPART: LEN=%d", A->len_aln);
+  unset_profile_master (A, ns, ls, CL);
+  vfree(ns);free_int(ls, -1);
+  
   return A;
 }
 Alignment *realign_aln_random_bipart_n ( Alignment*A, Constraint_list *CL, int n)
@@ -2920,16 +3112,22 @@ Alignment *stack_progressive_aln(Alignment *A, Constraint_list *CL, int gop, int
 
     return A;
     }
+Alignment *realign_aln_best ( Alignment*A, Constraint_list *CL);
+Alignment *realign_twoseq (Alignment *A, Constraint_list *CL);
 Alignment *realign_aln_clust ( Alignment*A, Constraint_list *CL);
 Alignment *realign_aln_random_bipart_n ( Alignment*A, Constraint_list *CL, int n);
+Alignment *realign_kmeans (Alignment *A, Constraint_list *CL);
+Alignment *tree_realign (Alignment *A, Constraint_list *CL);
 Alignment *iterate_aln ( Alignment*A, int nit, Constraint_list *CL)
 {
   int it;
-  int mode=1;
+  int mode=5;
   int score, iscore, delta;
-  fprintf ( CL->local_stderr, "Iterated Refinement: %d cycles START: score= %d\n", nit,iscore=aln2ecl_raw_score (A, CL) );
 
 
+  fprintf ( CL->local_stderr, "Iterated Refinement: %d cycles START: score= %d\n", nit,iscore=aln2sim2(A) );
+  
+  
   if ( nit==-1)nit=A->nseq*2;
   if ( A->len_aln==0)A=very_fast_aln (A, A->nseq, CL);
   A=reorder_aln (A,(CL->S)->name, A->nseq);
@@ -2941,16 +3139,33 @@ Alignment *iterate_aln ( Alignment*A, int nit, Constraint_list *CL)
       else if (mode ==1)A=realign_aln_random_bipart (A, CL);
       else if (mode ==2)A=realign_aln_clust (A, CL);
       else if (mode ==3)A=realign_aln_random_bipart_n (A, CL,2);
-
-
-      score=aln2ecl_raw_score (A, CL);
+      else if (mode ==4)A=realign_kmeans (A, CL);
+      else if (mode ==5)A=realign_twoseq (A, CL);
+      else if (mode ==6)A=realign_aln_best (A, CL);
+      else if (mode ==7)A=tree_realign(A,CL);
+      score=aln2sim2 (A);
       delta=iscore-score;
+      
       fprintf (CL->local_stderr, "\n\tIteration Cycle: %d Score=%d Improvement= %d", it+1,score, delta);
     }
   fprintf ( CL->local_stderr, "\nIterated Refinement: Completed Improvement=%d\n", delta);
   return A;
 }
+Alignment * tree_realign (Alignment *A, Constraint_list *CL)
+{
+  NT_node **T;
+  char *treefile=vtmpnam(NULL);
 
+  int **d;
+  d=aln2dist_mat (A);
+  T=int_dist2upgma_tree (d,A, A->nseq, treefile);
+  degap_aln (A);
+  tree_aln ((T[3][0])->left,(T[3][0])->right,A,(CL->S)->nseq, CL);
+  A->nseq=(CL->S)->nseq;
+  
+  return A;
+}
+  
 int get_next_best (int seq, int nseq, int *used, int **dm);
 int get_next_best (int seq, int nseq, int *used, int **dm)
 {
@@ -2983,9 +3198,222 @@ Alignment  * full_sorted_aln (Alignment *A, Constraint_list *CL)
     }
   return A;
 }
-Alignment * sorted_aln (Alignment *A, Constraint_list *CL)
+int sa_get_next (Alignment *A,int *used, Constraint_list *CL,int g);
+int sa2sc      (char *s1, char *s2, int *id, int *cov);
+int add_group2sorted_aln (Alignment *A, Constraint_list *CL, int *used,int g, int minid, int mincov);
+Alignment *sorted_aln_old (Alignment *A,Constraint_list *CL)
 {
-  return sorted_aln_seq (-1, A, CL);
+  int *used;
+  int added;
+  int a,g=0;
+  int tot_added=0;
+  used=vcalloc((CL->S)->nseq, sizeof (int));
+  while (tot_added!=(CL->S)->nseq)
+    {
+      added=add_group2sorted_aln (A, CL, used,++g,60,0);
+      tot_added+=added;
+      HERE ("Group %d: %d seq (tot:%d)", g, added, tot_added);
+    }
+  exit (0);
+  while (sa_align_groups (A,CL,used,0,50)!=-1);
+  
+  HERE ("tot_added: %d", tot_added);
+  
+  //add_group2sorted_aln (A, CL, used, 0, 0);
+  return A;
+}
+
+int add_group2sorted_aln   (Alignment *A, Constraint_list *CL, int *used, int g,int minid, int mincov)
+{
+  static int **ls;
+  static int *ns;
+  int a, next, id, cov;
+  int add=1;
+  int tot=0;
+  int nadded=0;
+  if (!ls)
+    {
+      ls=declare_int (2,(CL->S)->nseq);
+      ns=vcalloc (3,sizeof (int));
+    }
+  ns[0]=0;
+  for (a=0; a<(CL->S)->nseq;a++)
+    if (!used[a]){ls[0][ns[0]++]=a;used[a]=g;tot++;break;}
+  if (!ns[0])return 0;
+  ns[1]=1;
+  while (add && tot<(CL->S)->nseq)
+    {
+      ls[1][0]=sa_get_next(A,used, CL,g);
+      
+      ns=set_profile_master (A, ns, ls, CL);
+      pair_wise (A,ns,ls,CL);
+      
+      sa2sc(A->seq_al[ls[0][ns[0]]],A->seq_al[ls[1][ns[1]]], &id, &cov);
+      unset_profile_master (A, ns, ls, CL);
+      
+      if (cov>mincov && id>minid)
+	{
+	  add=1;
+	  used[ls[1][0]]=g;
+	  ls[0][ns[0]++]=ls[1][0];
+	  HERE ("\tID: %d COV: %d ***",id, cov); 
+	  ns[1]=1;
+	}
+      else
+	{
+	  add=0;
+	  used[ls[1][0]]=-1;
+	  HERE ("\tID: %d COV: %d",id, cov); 
+	}
+      tot+=add;
+      nadded+=add;
+    }
+  for (a=0; a<(CL->S)->nseq; a++)if (used[a]==-1)used[a]=0;
+  return nadded+1;
+}
+int sa2sc      (char *s1, char *s2, int *id, int *cov)
+{
+  int t,a;
+  int l=strlen (s1);
+  id[0]=cov[0]=t=0;
+  for (a=0; a<l; a++)
+    {
+      int r1=tolower(s1[a]);
+      int r2=tolower(s2[a]);
+      t+=(r1!='-' || r2!='-');
+      cov[0]+=(r1!='-' && r2!='-');
+      id[0]+=(r1==r2 && r1!='-');
+    }
+
+  id[0]=(id[0]*100)/((cov[0])?cov[0]:1);
+  cov[0]=(cov[0]*100)/((t)?t:1);
+
+
+  return t;
+}
+int sa_get_next (Alignment *A,int *used, Constraint_list *CL, int g)
+{
+  static int **sim;
+  int a, b, c,n;
+  n=(CL->S)->nseq;
+  int bseq=-1, bscore;
+  
+
+  if (!sim)
+    {
+      (CL->DM)=CL->DM=cl2distance_matrix ( CL,A,NULL,NULL, 1);
+      sim=(CL->DM)->score_similarity_matrix;
+    }
+  
+  for (bscore=0,a=0; a< n; a++)
+    {
+      if (used[a]!=g)continue;
+      
+      for (b=0; b<n; b++)
+	{
+	  if (!used[b] && sim[a][b]>=bscore)
+	    {
+	      bscore=sim[a][b];
+	      bseq=b;
+	    }
+	}
+    }
+  
+  return bseq;
+}
+int sa_get_next_group (Alignment *A, Constraint_list *CL, int *used,int *g0, int *g1,int **f);
+int sa_align_groups (Alignment *A, Constraint_list *CL, int *used, int minid, int mincov);
+Alignment *sorted_aln_new (Alignment *A,Constraint_list *CL)
+{
+  int *used;
+  int added;
+  int a,g=0;
+  int n=(CL->S)->nseq;
+  A->nseq=0;
+  used=vcalloc(n, sizeof (int));
+  for (a=0; a<n; a++)used[a]=a+1;
+  
+  while ((added=sa_align_groups(A, CL, used,50,50))!=-1)
+    {
+      HERE ("Group Aligned: %d seq", added);
+    }
+  exit (0);
+  return A;
+  //add_group2sorted_aln (A, CL, used, 0, 0);
+  return A;
+}
+
+	      
+int sa_align_groups (Alignment *A, Constraint_list *CL, int *used, int minid, int mincov)
+{
+  int s0,s1,g0, g1,a,id,cov;
+  static int **ls;
+  static int *ns;
+  int n=(CL->S)->nseq;
+  static int **f;
+  
+
+  if (A->nseq==n) return -1;
+  if (!ls){ls=declare_int (2, n); ns=vcalloc (3, sizeof (int));}
+  if (!f)f=declare_int (n,n);
+  HERE ("***** 1******");
+  
+  sa_get_next_group (A, CL,used,&s0, &s1,f);
+  if (g0==-1) return -1;
+  g0=used[s0];
+  g1=used[s1];
+  
+  ns[0]=ns[1]=0;
+  for (a=0; a<n; a++)
+    {
+      if (used[a]==g0)ls[0][ns[0]++]=a;
+      else if (used[a]==g1) ls[1][ns[1]++]=a;
+    }
+  HERE ("align Groups %d (%d) and %d (%d)", g0, ns[0], g1, ns[1]);
+  ns=set_profile_master (A, ns, ls, CL);
+  pair_wise (A,ns,ls,CL);
+  sa2sc(A->seq_al[ls[0][ns[0]]],A->seq_al[ls[1][ns[1]]], &id, &cov);
+  unset_profile_master (A, ns, ls, CL);
+  HERE ("ID %d COV: %d", id, cov);
+  if (cov>mincov && id>minid)
+    {
+      for (a=0; a<n; a++)if (used[a]==g1)used[a]=g0;
+      A->nseq=ns[0]+ns[1];
+    }
+  else 
+    {
+      HERE ("***** Rejected ****" );
+      f[s0][s1]=1;
+    }
+  return A->nseq;
+}
+int sa_get_next_group (Alignment *A,Constraint_list *CL,int *used, int *s0, int *s1, int **f)
+{
+  static int **sim;
+  int a, b, c, bsim;
+  int n=(CL->S)->nseq;
+  static **sim2;
+  
+  s0[0]=s1[0]=-1;
+  if (!sim)
+    {
+      (CL->DM)=CL->DM=cl2distance_matrix ( CL,A,NULL,NULL, 1);
+      sim=(CL->DM)->score_similarity_matrix;
+    }
+  for (bsim=0,a=0; a<n-1; a++)
+    {
+      for (b=a+1; b<n; b++)
+	{
+	  if (!f[a][b] && used[b] && used[a]!=used[b] && sim[a][b]>bsim)
+	    {
+	      s0[0]=a;
+	      s1[0]=b;
+	      bsim=sim[a][b];
+	    }
+	}
+    }
+  HERE ("---- %d %d", s0[0], s1[0]);
+  return bsim;
 }
 Alignment * sorted_aln_seq (int new_seq, Alignment *A, Constraint_list *CL)
 {
@@ -3225,7 +3653,7 @@ NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_li
   int a;
   
   
-
+  
   A->ibit=0;
   if ( strm ((CL->TC)->use_seqan, "NO"))
     {
@@ -3294,7 +3722,8 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
   else P=r->parent;
 
   fprintf ( CL->local_stderr, "\nPROGRESSIVE_ALIGNMENT [Tree Based]\n");
-  for ( a=0; a<nseq; a++)fprintf (CL->local_stderr,"Group %4d: %s\n",a+1, A->name[a]);
+  if (nseq<50)for ( a=0; a<nseq; a++)fprintf (CL->local_stderr,"Group %4d: %s\n",a+1, A->name[a]);
+  fprintf ( CL->local_stderr, "\n");
   //1: make sure the Alignment and the Sequences are labeled the same way
   if (CL->translation)vfree (CL->translation);
   CL->translation=vcalloc ( (CL->S)->nseq, sizeof (int));
@@ -3349,7 +3778,8 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
 {
   NT_node R,L;
   int score;
-
+  int a;
+  int pp=0;
 
   if (!P || P->nseq==1) return NULL;
   R=P->right;L=P->left;
@@ -3400,12 +3830,36 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
       rec_local_tree_aln (R, A, CL, print);
     }
 
+  if (pp)
+    {
+      HERE ("\n*******************Before Alignmnent *******************");
+      for (a=0;a<L->nseq; a++)
+	fprintf (stderr, "-L%20s %s\n", A->name[L->lseq[a]], A->seq_al[L->lseq[a]]);
+      for (a=0;a<R->nseq; a++)
+	fprintf (stderr, "-R%20s %s\n", A->name[R->lseq[a]], A->seq_al[R->lseq[a]]);
+    }
+  
+  
+
   P->score=A->score_aln=score=profile_pair_wise (A,L->nseq, L->lseq,R->nseq,R->lseq,CL);
-  //Node evaluation is lwing down the pg for no use
-  //score=node2sub_aln_score (A, CL, CL->evaluate_mode,P);
   A->len_aln=strlen (A->seq_al[P->lseq[0]]);
   
-  if (print)fprintf(CL->local_stderr, "\n\tGroup %4d: [Group %4d (%4d seq)] with [Group %4d (%4d seq)]-->[Len=%5d][PID:%d]%s",P->index,R->index,R->nseq,L->index,L->nseq, A->len_aln,getpid(),(P->fork==1)?"[Forked]":"" );
+  if (print)
+    {
+      if ((CL->S)->nseq<MAX_NSEQ_4_DISPLAY)
+	fprintf(CL->local_stderr, "\n\tGroup %4d: [Group %4d (%4d seq)] with [Group %4d (%4d seq)]-->[Len=%5d][PID:%d]%s",P->index,R->index,R->nseq,L->index,L->nseq, A->len_aln,getpid(),(P->fork==1)?"[Forked]":"" );
+      else
+	fprintf(CL->local_stderr, "\r\tGroup %4d: [Group %4d (%4d seq)] with [Group %4d (%4d seq)]-->[Len=%5d][PID:%d]%s",P->index,R->index,R->nseq,L->index,L->nseq, A->len_aln,getpid(),(P->fork==1)?"[Forked]":"" );
+    }
+   if ( pp)
+    {
+      HERE ("\n*******************AFTER Alignmnent *******************");
+      for (a=0;a<L->nseq; a++)
+	fprintf (stderr, "+L%20s %s\n", A->name[L->lseq[a]], A->seq_al[L->lseq[a]]);
+      for (a=0;a<R->nseq; a++)
+	fprintf (stderr, "+R%20s %s\n", A->name[R->lseq[a]], A->seq_al[R->lseq[a]]);
+      HERE ("********************************************************");
+    }
   
   return P;
 }
@@ -4247,6 +4701,81 @@ int set_node_score (Alignment *A, NT_node P, char *mode)
   return 1;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
+void   ns2master_ns       (int *ins, int **ils, int **ons, int ***ols)
+{
+  if (read_size_int (ins, sizeof (int))!=3)
+    {
+      ons[0]=ins;
+      ols[0]=ils;
+    }
+  else
+    {
+      static int *lns;
+      static int **lls;
+      
+      if (!lns){lns=vcalloc (2, sizeof(int));lls=declare_int(2,1);}
+      ons[0]=lns;
+      ols[0]=lls;
+      lls[0][0]=ils[0][ins[0]];
+      lls[1][0]=ils[1][ins[1]];
+    }
+}
+
+      
+
+int *unset_profile_master (Alignment *A,int *ns, int **ls, Constraint_list *CL)
+{
+  if (!atoigetenv ("MASTER_PROFILE"))return ns;
+  else if (read_size_int(ns, sizeof(int))!=3)return ns;
+  else ns[2]=0;
+  return ns;
+}
+int *set_profile_master (Alignment *A,int *ns, int **ls, Constraint_list *CL)
+{
+  int a,b,cs,bs;
+  //set the ns if needed
+  int mode=1;
+  int print=0;
+  if (!atoigetenv ("MASTER_PROFILE"))return ns;
+  else if (read_size_int(ns, sizeof(int))!=3)
+    {
+      ns=vrealloc (ns,3*sizeof(int));
+      ns[2]=1;
+    }
+  else if (ns[2]==1)return ns;  //means the sequences have already been selected
+  else if (ns[2]==-1)return ns; //do not set master
+  for (a=0; a<2; a++)
+    if (read_size_int(ls[a],sizeof(int))<(ns[a]+1))
+      ls[a]=vrealloc (ls[a], sizeof(int)*(ns[a]+1));
+ 
+  if (!CL->DM)CL->DM=cl2distance_matrix ( CL,A,NULL,NULL, 1);
+  for (bs=0,a=0; a<ns[0]; a++)
+    for (b=0; b<ns[1]; b++)
+      {
+	
+	cs=(CL->DM)->score_similarity_matrix[ls[0][a]][ls[1][b]];
+	
+	if (cs>bs)
+	  {
+	    ls[0][ns[0]]=ls[0][a];
+	    ls[1][ns[1]]=ls[1][b];
+	    bs=cs;
+	  }
+      }
+  
+  if (bs<0)
+    {
+      if (print)HERE ("SKIPPED: %d:: %s %s %d(%d %d)", a,(CL->S)->name[ls[0][ns[0]]],A->name[ls[1][ns[1]]], bs,ls[0][ns[0]],ls[1][ns[1]] );
+      ns[2]=-1;
+    }
+  
+  else
+    {
+      if (print)HERE ("SELECTED: %d:: %s %s %d(%d %d)", a,(CL->S)->name[ls[0][ns[0]]],A->name[ls[1][ns[1]]], bs,ls[0][ns[0]],ls[1][ns[1]] );
+    }
+  return ns;
+}
+  
 int split_condition (int nseq, int score, Constraint_list *CL)
 {
   int cond1=1, cond2=1;
@@ -4261,19 +4790,278 @@ int profile_pair_wise (Alignment *A, int n1, int *l1, int n2, int *l2, Constrain
 {
   static int *ns;
   static int **ls;
-
+  static int **ils;
+  int ret,a,b;
+  int master_profile=atoigetenv ("MASTER_PROFILE");
   if (!ns)
     {
+      ils=vcalloc(2, sizeof (int*));
       ns=vcalloc (2, sizeof (int));
-      ls=vcalloc (2, sizeof (int*));
+      ls=declare_int (2, (CL->S)->nseq+1);
     }
+  
   ns[0]=n1;
-  ls[0]=l1;
   ns[1]=n2;
-  ls[1]=l2;
-  return pair_wise (A, ns, ls, CL);
+  ils[0]=l1;
+  ils[1]=l2;
+  for (a=0; a<2; a++)
+    {
+      if (read_size_int(ls[a],sizeof(int))<(ns[a]+1))ls[a]=vrealloc (ls[a], sizeof(int)*(ns[a]+1));
+      for (b=0; b<ns[a]; b++)ls[a][b]=ils[a][b];
+    }
+  
+  if (master_profile)ns=set_profile_master (A, ns, ls, CL);
+  ret=pair_wise (A, ns, ls, CL);
+  if (master_profile)unset_profile_master (A, ns, ls, CL);
+  return ret;
 }
-int pair_wise (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
+Alignment* mpw_compact_aln (Alignment *A, int *ns, int **ils);
+int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL );
+char **mpw_gap_padd (char **array,int *ns,int **ls,int *pos); 
+void mpw_display_groups (Alignment *A, int *ns, int **ls);
+int check_integrity (Alignment *A, Constraint_list *CL);
+int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
+{
+  static int *ns;
+  static int **ls;
+  int score,a;
+  int print=0;
+  
+  if (!ns)ns=vcalloc (2, sizeof(int));
+  if (!ls)ls=declare_int (2,2);
+  ns[0]=ns[1]=1;
+  
+  
+  if      (read_size_int (ins, sizeof (int))!=3)return pair_wise (A, ins,ils,CL);
+  else if (ins[2]==-1)return pair_wise (A, ins,ils,CL);//ignore the new mode
+  else
+    {
+      int a,b,c,d,s,ss,g,p,l,ml;
+      int ***col;
+      char **array1,**array2;
+      int *pos;
+      int *res;
+      static Alignment *B;
+
+      
+      if (!B)B=copy_aln (A, NULL);
+      
+      pos=vcalloc (2, sizeof (int));
+      res=vcalloc (2, sizeof (int));
+      
+      for(g=0;g<2; g++)ls[g][0]=ils[g][ins[g]];
+      
+      for (a=0, ml=0; a<(CL->S)->nseq; a++)ml=MAX(ml,(strlen(A->seq_al[a])));
+      array1 =vcalloc ((CL->S)->nseq, sizeof (char*));
+      array2 =vcalloc ((CL->S)->nseq, sizeof (char*));
+      
+      //mpw_display_groups (A, ins, ils);
+      
+
+      //duplicate the two groups to align
+      for (g=0; g<2; g++)
+	for (b=0; b<ins[g]; b++)
+	  {
+	    s=ils[g][b];
+	    
+	    array1[s]=vcalloc (ml+1,   sizeof (char));
+	    array2[s]=vcalloc (ml*2, sizeof (char));
+	    sprintf (array1[s], "%s", A->seq_al[s]);
+	  }
+
+      //map the columns positions
+      col=vcalloc (2, sizeof(int**));
+      for (g=0;g<2; g++)
+	{
+	  for (b=0; b<ns[g]; b++)
+	    {
+	      int d;
+	      s=ls[g][b];
+	      l=strlen (array1[s]);
+	      col[g]=declare_int (l+1,2); 
+	      for (p=0,d=0; p<l; p++)
+		{
+		  if (is_gap(A->seq_al[s][p])){col[g][d][1]++;}
+		  else {col[g][++d][0]=p+1;}
+		}
+	      ungap (A->seq_al[s]);
+	    }
+	}
+      
+      score=pair_wise (A, ns,ls,CL);
+      
+      if (print)
+	{
+	  B->nseq=2;
+	  B->seq_al[0]=A->seq_al[ls[0][0]];
+	  B->seq_al[1]=A->seq_al[ls[1][0]];
+	  B->name[0]=A->name[ls[0][0]];
+	  B->name[1]=A->name[ls[1][0]];
+	  B->len_aln=strlen (B->seq_al[0]);
+	  print_aln (B);
+	}
+
+      
+      pos[0]=pos[1]=0;
+      res[0]=res[1]=0;
+      
+      //add potential extremity gaps
+      for (g=0; g<2; g++)
+	{
+	  for (b=0; b<ins[g]; b++)
+	    {
+	      s=ils[g][b];
+	      for (p=0; p<col[g][0][1]; p++)array2[s][p]=array1[s][p];
+	    }
+	  pos[g]=p;
+	}
+      array2=mpw_gap_padd (array2,ins,ils,pos);
+      
+      for (p=0; p<A->len_aln; p++)
+	{
+	  for (g=0; g<2; g++)
+	    {
+	      int ig;
+	      int r=A->seq_al[ls[g][0]][p];
+	      int cpos;
+	      int **ccol=col[g];
+	      res[g]+=!(ig=is_gap(r));
+	      
+	      for (b=0; b<ins[g]; b++)
+		{
+		  cpos =pos[g];
+		  ss=ils[g][b];
+		  if (!ig)
+		    {
+		      array2[ss][cpos++]=array1[ss][ccol[res[g]][0]-1];
+		      for (c=0; c<ccol[res[g]][1]; c++)array2[ss][cpos++]=array1[ss][ccol[res[g]][0]+c];;
+		    }
+		  else
+		    {
+		      array2[ss][cpos++]='-';
+		    }
+		 
+		}
+	      pos[g]=cpos;
+	    }
+	  array2=mpw_gap_padd(array2,ins,ils,pos);
+	}
+      A=realloc_aln2  ( A,pos[0]+1, 10000);
+      for (a=0; a<2; a++)
+	for (b=0; b<ins[a]; b++)
+	  {
+	    sprintf (A->seq_al[ils[a][b]], "%s",array2[ils[a][b]]);
+	  }
+      A->len_aln=pos[0];
+      A->nseq=ins[0]+ins[1];
+      
+      A=mpw_compact_aln(A,ins,ils);
+      //mpw_display_groups (A, ins, ils);
+      free_char (array1, -1);
+      free_char (array2,-1);
+      free_arrayN((void**)col, 3);
+      //check_integrity(A, CL);
+      return score;
+    }
+}
+int check_integrity (Alignment *A, Constraint_list *CL)
+{
+  int a;
+  char buf [100000];
+  Sequence*S=CL->S;
+  for (a=0; a<S->nseq; a++)
+    {
+      sprintf (buf, "%s", A->seq_al[a]);
+      ungap (buf);
+      if ( !strm (buf, S->seq[a]))
+	{
+	  HERE ("***** Integrity loss:%s\n%s\n\n%s\n%s *****", A->name[a],buf, S->name[a],S->seq[a]);exit (0);
+	}
+    }
+  return 1;
+}
+	     
+	   
+Alignment *mpw_compact_aln (Alignment *A, int *ns, int **ls)
+{
+  int a,g,col, b, c;
+  
+  for (c=0,a=0; a<A->len_aln; a++)
+    {
+      for (col=0,g=0; g<2; g++)
+	{
+	  for (b=0; b<ns[g]; b++)
+	    {
+	      if (A->seq_al[ls[g][b]][a]!='-'){col=1;}
+	    }
+	}
+      if (col==1)
+	{
+	  
+	  for (g=0; g<2; g++)
+	    {
+	      for (b=0; b<ns[g]; b++)
+		{
+		  A->seq_al[ls[g][b]][c]= A->seq_al[ls[g][b]][a];
+		}
+	    }
+	  c++;
+	}
+    }
+  for (g=0; g<2; g++)
+    {
+      for (b=0; b<ns[g]; b++)
+	{
+	  A->seq_al[ls[g][b]][c]='\0';
+	}
+    }
+  A->len_aln=c;
+  return A;
+}
+void mpw_display_groups (Alignment *A, int *ns, int **ls)
+{
+  int b,g;
+  HERE ("************* DISPLAY **************");
+  for (g=0; g<2; g++)
+    {
+      HERE ("GROUP %d\n",g+1);
+      for ( b=0; b<ns[g]; b++)
+	{
+	  fprintf ( stdout, "%15s\n%s\n",A->name[ls[g][b]],A->seq_al[ls[g][b]]);
+	}
+    }
+  HERE ("************* DONE **************");
+}
+  
+char **mpw_gap_padd (char **array,int *ns,int **ls,int *pos) 
+ {
+   int g, b, s, p0, p1;
+   
+   for (g=0; g<2; g++)
+     {
+       for (b=0; b<ns[g]; b++)
+	 {
+	   s=ls[g][b];
+	   
+	   
+	   if (g==0)for (p0=pos[0];p0<pos[1];)array[s][p0++]='-';
+	   if (g==1)for (p1=pos[1];p1<pos[0];)array[s][p1++]='-';
+	 }
+     }
+   pos[0]=pos[1]=p1;
+    for (g=0; g<2; g++)
+     {
+       for (b=0; b<ns[g]; b++)
+	 {
+	   s=ls[g][b];
+	   array[s][pos[g]]='\0';
+	 }
+     }
+    return array;
+ }
+		       
+  
+int pair_wise   (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
     {
 	/*
 	 CL->maximise
@@ -4286,6 +5074,9 @@ int pair_wise (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
 	int glocal;
 	Pwfunc function;
 
+
+		
+	if (read_size_int (ns, sizeof (int))==3 && ns[2]!=-1)return pair_wise_ms(A,ns,l_s,CL);
 
 
 	/*Make sure evaluation functions update their cache if needed*/
@@ -4522,6 +5313,11 @@ Pwfunc get_pair_wise_function (Pwfunc pw,char *dp_mode, int *glocal)
 	dps[npw]=GLOBAL;
 	npw++;
 
+	pwl[npw]=hh_pair_wise;
+	sprintf (dpl[npw], "hh_pair_wise");
+	dps[npw]=GLOBAL;
+	npw++;
+
 
 	/*
 	pwl[npw]=viterbiDGL_pair_wise;
@@ -4659,3 +5455,268 @@ NT_node fastal_pair_wise (NT_node P)
   free_int ((P->right)->prf, -1);
 }
 #endif
+
+Alignment * sorted_aln_prog(Alignment *A, Constraint_list *CL)
+{
+  int **sim;
+  int *gs;
+  int **group;
+  int *used;
+  int n=(CL->S)->nseq;
+  int *ns;
+  int **ls;
+  int a, b,m;
+  int **mat=read_matrice ("blosum62mt");;
+  int min_sim=30;
+    
+
+
+  //set ls
+  ns=vcalloc (3, sizeof (int));
+  ls=declare_int (2, n);
+  
+  //set groups;
+  used=vcalloc (n, sizeof (int));
+  for (a=0; a<n; a++)used[a]=a;
+  
+  gs=vcalloc        (n, sizeof (int));
+  group=declare_int (n,1);
+  for(a=0; a<n; a++)
+    {
+      int g=used[a];
+      group[g][gs[g]++]=a;
+    }
+   HERE ("2");
+   //prepare similarity
+   sim=declare_int (((n*n)-n)/2,3);
+   for (m=0,a=0; a<n-1; a++)
+     {
+       fprintf ( stderr, "\r %d", (a*100)/n);
+       for (b=a+1; b<n; b++, m++)
+	 {
+	   sim[m][0]=a;
+	   sim[m][1]=b;
+	   sim[m][2]=idscore_pairseq((CL->S)->seq[a], (CL->S)->seq[b], -12, -1, mat, "sim3");
+	   
+	 }
+     }
+   sort_int_inv (sim, 3, 2, 0, m-1);
+   
+   A->nseq=0;
+  
+  for (a=0; a<m && A->nseq<n; a++)
+    {
+      int s1=sim[a][0];
+      int s2=sim[a][1];
+      int s =sim[a][2];
+      if (used[s1]!=used[s2])
+	{
+	  int g1=used[s1];
+	  int g2=used[s2];
+	  ns[0]=ns[1]=0;
+	  if (s<min_sim)
+	    {
+	      ns[2]=-1;
+	      HERE ("Profile for %s %s - %d", (CL->S)->name[s1],(CL->S)->name[s2],s);
+	    }
+	  else ns[2]=1;
+	  
+	  for (b=0; b<gs[g1]; b++)ls[0][ns[0]++]=group[g1][b];
+	  ls[0][ns[0]]=s1;
+	  for (b=0; b<gs[g2]; b++)ls[1][ns[1]++]=group[g2][b];
+	  ls[1][ns[1]]=s2;
+	  
+	  pair_wise(A, ns, ls, CL);
+	  
+	  for (b=0; b<gs[g2]; b++)
+	    {
+	      group[g1]=vrealloc (group[g1], (gs[g1]+gs[g2])*sizeof (int));
+	      used[group[g2][b]]=g1;
+	      group[g1][gs[g1]++]=group[g2][b];
+	    }
+	  A->nseq=ns[0]+ns[1];
+	}
+    }
+  return A;
+}
+  
+Alignment * sorted_aln(Alignment *A, Constraint_list *CL)
+{
+  int **sim;
+  int *gs;
+  int **group;
+  int *used;
+  int n=(CL->S)->nseq;
+  int *ns;
+  int **ls;
+  int a, b,m;
+  int **mat=read_matrice ("blosum62mt");;
+  int min_sim=30;
+   
+  
+  (CL->DM)=CL->DM=cl2distance_matrix ( CL,A,NULL,NULL, 1);
+  
+  
+ 
+  //set ls
+  ns=vcalloc (3, sizeof (int));
+  ls=declare_int (2, n);
+  
+  //set groups;
+  used=vcalloc (n, sizeof (int));
+  for (a=0; a<n; a++)used[a]=a;
+  
+  gs=vcalloc        (n, sizeof (int));
+  group=declare_int (n,1);
+  for(a=0; a<n; a++)
+    {
+      int g=used[a];
+      group[g][gs[g]++]=a;
+    }
+   HERE ("2");
+   //prepare similarity
+   sim=declare_int (((n*n)-n)/2,3);
+   for (m=0,a=0; a<n-1; a++)
+     {
+       fprintf ( stderr, "\r %d", (a*100)/n);
+       for (b=a+1; b<n; b++, m++)
+	 {
+	   sim[m][0]=a;
+	   sim[m][1]=b;
+	   sim[m][2]=idscore_pairseq((CL->S)->seq[a], (CL->S)->seq[b], -12, -1, mat, "sim3");
+	   
+	 }
+     }
+   sort_int_inv (sim, 3, 2, 0, m-1);
+   
+   A->nseq=0;
+  
+   
+   for (a=0; a<m && A->nseq<n; a++)
+     {
+       int s1=sim[a][0];
+       int s2=sim[a][1];
+       int s =sim[a][2];
+       if (used[s1]!=used[s2])
+	 {
+	   int g1=used[s1];
+	   int g2=used[s2];
+	   ns[0]=ns[1]=0;
+	   if (s<min_sim)
+	     {
+	       ns[2]=-1;
+	       HERE ("Profile for %s %s - %d", (CL->S)->name[s1],(CL->S)->name[s2],s);
+	     }
+	   else ns[2]=1;
+	   
+	   for (b=0; b<gs[g1]; b++)ls[0][ns[0]++]=group[g1][b];
+	   ls[0][ns[0]]=s1;
+	   for (b=0; b<gs[g2]; b++)ls[1][ns[1]++]=group[g2][b];
+	   ls[1][ns[1]]=s2;
+	   
+	   pair_wise(A, ns, ls, CL);
+	   
+	   for (b=0; b<gs[g2]; b++)
+	     {
+	       group[g1]=vrealloc (group[g1], (gs[g1]+gs[g2])*sizeof (int));
+	       used[group[g2][b]]=g1;
+	       group[g1][gs[g1]++]=group[g2][b];
+	     }
+	   A->nseq=ns[0]+ns[1];
+	 }
+     }
+   return A;
+}	   
+
+    
+int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
+{
+  char **buf;
+  int a,b,c,p0,p1,l0,l1,r0,r1;
+  float sc,ss,we;
+  char *aln[2];
+  char *prf[2];
+  char *hhfile;
+  char *tmpfile;
+  FILE *fp,*fp1, *fp2;
+  
+  for (a=0; a<2; a++)
+    {
+      aln[a]=vtmpnam(NULL);
+      prf[a]=vtmpnam(NULL);
+      fp=vfopen (aln[a], "w");
+      fprintf (fp, ">cons\n");
+      for (b=0; b<strlen (A->seq_al[ls[a][0]]); b++)fprintf (fp, "X");
+      fprintf (fp, "\n");
+      for (b=0; b<ns[a]; b++)
+	{
+	  int s=ls[a][b];
+	  fprintf (fp, ">%s\n%s\n", A->name[s],A->seq_al[s]);
+	}
+      
+      vfclose (fp);
+      printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first  >/dev/null 2>/dev/null", aln[a], prf[a]);
+    }
+  
+  hhfile=vtmpnam(NULL);
+  tmpfile=vtmpnam (NULL);
+  
+  
+  printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global  >/dev/null 2>/dev/null", prf[0], prf[1], hhfile);
+    
+  p0=p1=0;
+  l0=strlen (A->seq_al[ls[0][0]]);
+  l1=strlen (A->seq_al[ls[1][0]]);
+  buf=declare_char ((CL->S)->nseq, l0+l1+1); 
+  
+  fp1=vfopen (hhfile, "r");
+  fp2=vfopen (tmpfile,"w");
+  while ((c=fgetc(fp1))!='\n' && c!=EOF);
+  while (fscanf (fp1, "%d %d %f %f %f\n", &r0, &r1, &sc, &ss, &we)==5)
+    {
+      if ((r0-p0)>1)
+	{
+	  for (a=p0+1; a<r0;a++){fprintf (fp2, "%d -1\n", a-1);}
+	}
+      if ((r1-p1)>1)
+	{
+	  for (a=p1+1; a<r1;a++){fprintf (fp2, "-1 %d\n", a-1);}
+	}
+      fprintf (fp2, "%d %d\n", r0-1, r1-1);
+      p0=r0;
+      p1=r1;
+    }
+
+  r0=l0;
+  r1=l1;
+  if ((r0-p0)>1)
+    {
+      for (a=p0+1; a<r0;a++){fprintf (fp2, "%d -1\n", a);}
+    }
+  if ((r1-p1)>1)
+    {
+      for (a=p1+1; a<r1;a++){fprintf (fp2, "-1 %d\n", a);}
+    }
+  vfclose (fp1);
+  vfclose (fp2);
+  
+  
+  
+  fp1=vfopen (tmpfile, "r");
+  p0=0;
+  while ((fscanf (fp1, "%d %d\n", &r0, &r1))==2)
+    {
+      
+      for (a=0; a<ns[0]; a++)buf[ls[0][a]][p0]=(r0<0)?'-':A->seq_al[ls[0][a]][r0];
+      for (a=0; a<ns[1]; a++)buf[ls[1][a]][p0]=(r1<0)?'-':A->seq_al[ls[1][a]][r1];
+      p0++;
+    }
+  vfclose (fp1);
+  
+  A=realloc_aln2 ( A,(CL->S)->nseq+1,strlen (buf[ls[0][0]])+1);
+  for (a=0; a<2; a++)
+    for (b=0; b<ns[a]; b++)
+      sprintf (A->seq_al[ls[a][b]], "%s", buf[ls[a][b]]);
+    return 100;
+}
+ 

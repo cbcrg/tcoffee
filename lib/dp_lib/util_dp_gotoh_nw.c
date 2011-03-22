@@ -31,7 +31,7 @@
       n[0]++;								\
     }									\
   
-int cl2pair_list_ecl ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+
 
 
 
@@ -1491,8 +1491,7 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
   
   return n[0];
 }
-	  
-int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);	  
 
 /**
  * Calculates scores for diagonal segments.
@@ -1504,21 +1503,46 @@ int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, 
  * \param list_in the diagonals
  * \param n_in number of sequences?
  */
-int fork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
-int nfork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
-int cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+
+int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int nfork_cl2pair_list_noext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int cl2pair_list_ext ( Alignment *A, int *ins, int **ils, Constraint_list *CL, int ***list_in, int *n_in)
 {
-  
+  int *ns;
+  int **ls;
+  int ret;
   if (!CL || !CL->S || !CL->residue_index) return 0;
   
+  if (read_size_int(ins,sizeof (int))==3 && ins[2]!=-1)
+    {
+      ns=vcalloc (2, sizeof (int));
+      ls=declare_int (2,1);
+      ns[0]=ns[1]=1;
+      ls[0][0]=ils[0][ins[0]];
+      ls[1][0]=ils[1][ins[1]];
+    }
+  else
+    {
+      ns=ins;
+      ls=ils;
+    }
   
-  if ( get_nproc()==1)return  nfork_cl2pair_list_ecl_pc(A,ns,ls,CL,list_in,n_in);
-  else if (strstr ( CL->multi_thread, "pairwise"))return fork_cl2pair_list_ecl_pc(A,ns,ls,CL,list_in,n_in);
-  else return nfork_cl2pair_list_ecl_pc(A,ns,ls,CL,list_in,n_in);
+
+  if ( get_nproc()==1)ret=nfork_cl2pair_list_ext(A,ns,ls,CL,list_in,n_in);
+  else if (strstr ( CL->multi_thread, "pairwise"))ret=fork_cl2pair_list_ext(A,ns,ls,CL,list_in,n_in);
+  else ret=nfork_cl2pair_list_ext(A,ns,ls,CL,list_in,n_in);
+  
+  if (read_size_int (ins, sizeof(int))==3)
+    {
+      vfree (ns);
+      free_int (ls,-1);
+    }
+  return ret;
 }
 
 
-int fork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
   int p1, p2,diag, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2;
   int a, b, l1, l2;
@@ -1659,7 +1683,7 @@ int fork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list 
 
 
 
-int nfork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
   int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2;
   int a, b, l1, l2;
@@ -1668,7 +1692,8 @@ int nfork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list
   int nused;
   int *used_list;
   int *sl2,*sl1, **inv_pos;
-
+  
+  
 
   float nscore, score, tot, filter, avg=0, new=0;
   float **used;
@@ -1765,7 +1790,91 @@ int nfork_cl2pair_list_ecl_pc ( Alignment *A, int *ns, int **ls, Constraint_list
   vfree(norm);
   return n_in[0];
 }
+int nfork_cl2pair_list_noext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+{
+  //This function to be used for very fast dynamic programming
+  int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2;
+  int a, b, l1, l2;
+  int **pos;
 
+  int nused;
+  int *used_list;
+  int *sl2,*sl1, **inv_pos;
+
+
+  float nscore, score, tot, filter, avg=0, new=0;
+  float **used;
+  float *norm;
+
+  if ( !A) return 0;
+  
+  pos=aln2pos_simple ( A,-1, ns, ls);
+  inv_pos=vcalloc ((CL->S)->nseq, sizeof (int*));
+  for (a=0; a<ns[1]; a++)inv_pos[ls[1][a]] =seq2inv_pos(A->seq_al[ls[1][a]]);
+
+  l1=strlen (A->seq_al[ls[0][0]]);
+  l2=strlen (A->seq_al[ls[1][0]]);
+  sl1=vcalloc ((CL->S)->nseq, sizeof (int));
+  sl2=vcalloc ((CL->S)->nseq, sizeof (int));
+  
+  norm=vcalloc ( l1+1, sizeof (float));
+  
+
+  for (a=0;a<ns[0]; a++)sl1[ls[0][a]]=1;
+  for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
+  
+  
+
+  used=declare_float (l2+1,2);
+  used_list=vcalloc (l2+1, sizeof (int));
+  nused=0;
+
+  for (p1=0; p1<=l1; p1++)
+    {
+
+      for (tot=0,nused=0,si=0;p1>0 && si<ns[0]; si++)
+        {
+          s=ls [0][si];r=pos[s][p1-1];
+          for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
+            {
+              t_s=CL->residue_index[s][r][a+SEQ2];
+              t_r=CL->residue_index[s][r][a+R2];
+              t_w=CL->residue_index[s][r][a+WE];
+	      if (sl1[t_s])continue;//do not extend within a profile
+	      if (sl2[t_s])
+		{
+		  p2=inv_pos[t_s][t_r];
+		  score=(float)t_w;
+		  if (!used[p2][1])used_list[nused++]=p2;
+		  tot+=score;
+		  used[p2][0]+=score;
+		  used[p2][1]++;
+		}
+	    }
+        }
+      
+      for (a=0; a<nused; a++)
+        {
+
+          p2=used_list[a];
+          nscore=used[p2][0]/tot; //Normalized score used for filtering
+          score =used[p2][0]/used[p2][1];
+	  used[p2][0]=used[p2][1]=0;
+         
+          if (p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
+            {
+	      addE (p1,p2,((l1-(p1))+(p2)),score,list_in, n_in);
+	    }
+	}
+    }
+  free_float (used, -1);
+  vfree (used_list);
+  free_int (inv_pos, -1);
+  free_int (pos, -1);
+  vfree (sl2);vfree (sl1);
+  vfree(norm);
+  return n_in[0];
+}
 
 
 
@@ -1820,7 +1929,7 @@ int linked_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
   /*Prepare the list*/
   
   
-  cl2pair_list_ecl_pc (A, ns, ls, CL, &list, &n);
+  cl2pair_list_ext    (A, ns, ls, CL, &list, &n);
   cl2diag_cap         (A, ns, ls, CL, &list, &n);
   cl2list_borders     (A, ns, ls, CL, &list, &n);
   list2nodup_list     (A, ns, ls, CL, &list, &n);
