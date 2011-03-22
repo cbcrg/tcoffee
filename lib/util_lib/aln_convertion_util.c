@@ -5099,7 +5099,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   BmC=get_int_variable ("prot_min_cov");
   
 
-  if (strm (prot_db, "dataset") || strm (prot_db, "self")
+  if (strm (prot_db, "dataset") || strm (prot_db, "self"))
     {
       if (!seqdb)
 	{

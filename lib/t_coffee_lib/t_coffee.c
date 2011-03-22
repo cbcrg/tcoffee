@@ -5424,14 +5424,19 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	   
 	   if      ( strstr (seq, "_N_")){nseq=atoi (strstr(seq, "_N_")+strlen ("_N_"));ttag='N';}
 	   else if ( strstr (seq, "_n_")){nseq=atoi (strstr(seq, "_n_")+strlen ("_n_"));ttag='n';}
+	   else if ( strstr (seq, "_N")){nseq=atoi (strstr(seq, "_N")+strlen ("_N"));ttag='N';}
+	   else if ( strstr (seq, "_n")){nseq=atoi (strstr(seq, "_n")+strlen ("_n_"));ttag='n';}
 	   else {nseq=atoi (seq);ttag='n';}
-	   if ( nseq<0)
-	     nseq=((float)S->nseq*((float)nseq/(float)100.0)*(float)-1);
 	   
-	   nseq=MIN(nseq,S->nseq);
-	   if ( nseq>=S->nseq)
+	   if ( ttag=='N')nseq=((float)S->nseq*((float)nseq/(float)100.0));
+	   
+	   
+	   if ( nseq>=S->nseq || nseq==0)
 	     {
+	       HERE ("**** %d %d", nseq, S->nseq);
+	       exit (0);
 	       for (a=0; a<(CL->S)->nseq; a++)CL->master[a]=1;
+	       return NULL;
 	     }
 	   else 
 	     {
