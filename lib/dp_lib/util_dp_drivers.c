@@ -1630,7 +1630,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 
 	    sap_seq1=vcalloc (max_struc_len, sizeof (char));
 	    sap_seq2=vcalloc (max_struc_len, sizeof (char));
-
+	    
 	    fp=find_token_in_file ( tmp_name, NULL, "Percent");
 	    fp=find_token_in_file ( tmp_name, fp  , "Percent");
 	    while ( (c=fgetc (fp))!='\n' && c!=EOF)fprintf ( fp, "%c", c);
@@ -1654,6 +1654,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		  }
 		sap_seq1[tot]=r1;
 		sap_seq2[tot]=r2;
+		
 		tot++;
 	      }
 	    sim=(sim*100)/tot;
@@ -1694,9 +1695,11 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    fprintf (fp, "! SEQ_1_TO_N\n");
 	    vfclose (fp);
 	    
+	    
 	    CL=read_constraint_list_file(CL,sap_lib);
+	    
 	    vremove (sap_lib);
-
+	    
 	    vfree ( string1);vfree ( string2);vfree ( string3);vfree ( string4);vfree ( string5);
 	    vfree (sap_seq1); vfree(sap_seq2);vfree (tmp_name1); vfree(tmp_name2);
 	    vfree (buf);

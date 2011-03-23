@@ -451,10 +451,12 @@ int ** aln2local_penalties (Alignment *A, int n, int *ls, Constraint_list *CL, i
       gc=lg[close][p];
      
     
-      lg[GOP][p]=0.5*(1-(go/nn))*gop;
-      lg[GCP][p]=0.5*(1-(gc/nn))*gop;
-      //Checked locacal gep => gives low quality results
-      lg[GEP][p]=gep;//(1-((float)lg[gap][p]/(float)n))*gep;
+      lg[GOP][p]=0.1*(1-(go/nn))*gop;
+      lg[GCP][p]=0.1*(1-(gc/nn))*gop;
+      
+      lg[GEP][p]=gep;//NO LOCAL GEP
+      //(1-((float)lg[gap][p]/(float)n))*gep;//LOCAL_GEP
+      
       lg[open][p]=lg[close][p]=lg[gap][p]=0;
       
     }

@@ -4481,6 +4481,7 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
       int l=S0->len[s0];
       index[s0]=vcalloc (l+1, sizeof (int));
       i=index[s0][0]=name_is_in_list (S0->name[s0], Sx->name, Sx->nseq, 100);
+
       if (i==-1);
       else if (strim(S0->seq[s0], Sx->seq[i]))
 	{
@@ -4496,6 +4497,7 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
 	  int nr1=0;
 	  
 	  Alignment *B=align_two_sequences (S0->seq[s0],Sx->seq[i],(strm(S0->type, "PROTEIN"))?"blosum62mt":"idmat",-4,-1, "myers_miller_pair_wise");
+	  
 	  for (c=0; c<B->len_aln; c++)
 	    {
 	      

@@ -2653,9 +2653,10 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *in_fname)
 	char *fname;
 	int error=0;
 	int keepNS=0;
-	
+	int a;
 	fname=expand_constraint_list_file (in_fname);
 	NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
+
 	if (!CL)
 	  {
 	    CL=declare_constraint_list_simple(NS);

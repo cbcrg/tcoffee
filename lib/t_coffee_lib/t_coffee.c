@@ -5028,9 +5028,10 @@ char *get_very_fast_defaults(char *buf, char *type)
      buf=strcat (buf,"-distance_matrix_mode ktup ");
      buf=strcat (buf,"-maxnseq 10000 ");
      buf=strcat (buf,"-dpa_maxnseq 0 ");
-     buf=strcat (buf,"-dp_mode fasta_pair_wise ");
+     buf=strcat (buf,"-dp_mode gotoh_pair_wise_lgp ");
+     
      buf=strcat (buf,"-extend_mode matrix ");
-     buf=strcat (buf,"-gapopen -10 ");
+     buf=strcat (buf,"-gapopen -25 ");
      buf=strcat (buf,"-gapext -1 ");
      buf=strcat (buf,"-iterate 0 ");
      /*buf=strcat (buf,"-in ");*/

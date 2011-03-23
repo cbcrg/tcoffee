@@ -2153,7 +2153,7 @@ int strim(const char *s1, const char *s2)
   
   l1=strlen (s1);
   l2=strlen (s2);
-  if (l1!=l2)return -1;
+  if (l1!=l2)return 0;
 
   for (a=0; a<l1; a++)
     {
