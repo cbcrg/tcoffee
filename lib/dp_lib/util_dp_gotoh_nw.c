@@ -1382,6 +1382,110 @@ int cl2list_borders  (Alignment *A, int *ns, int **ls, Constraint_list *CL, int 
   return read_array_size (list_in[0], sizeof (int*));
 }
 
+int cl2diag_cap_r390 (Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+{
+  int **list;
+  int n, in, a, b, al1, al2;
+  int max_n;
+  int cap=0;
+  
+  if (!A) return 0;
+  
+  al1=strlen (A->seq_al[ls[0][0]]);
+  al2=strlen (A->seq_al[ls[1][0]]);
+  
+  list=list_in[0];
+  n=n_in[0];
+  max_n=read_array_size (list, sizeof (int*));
+  
+  
+  
+  
+  for (a=0; a< n; a++)
+    {
+      b=list[a][3];
+      list[a][3]=list[a][0];
+      list[a][0]=b;
+      
+    }
+  sort_list_int (list, 4, 1, 0, n-1);
+  for (a=0; a< n; a++)
+    {
+      b=list[a][3];
+      list[a][3]=list[a][0];
+      list[a][0]=b;
+    }
+  
+
+  in=n;
+  
+  for (a=0; a<in; a++)
+    {
+      int i, j, pi, pj, ni, nj;
+      if (list[a][2]==0)continue;
+      i=list[a][0];
+      j=list[a][1];
+      
+      if (a==0){pi=-10;pj=-10;}
+      else {pi=list[a-1][0];pj=list[a-1][1];}
+      
+      if (a==in-1){ni=-10; nj=-10;}
+      else {ni=list[a+1][0]; nj=list[a+1][1];}
+      
+      
+      if (i==0 || j==0);
+      else if ( i==pi || j==pj);
+      else if ( i-pi!=1 || j-pj!=1)
+	{
+	  
+	  
+	  int x;
+	  int delta=MAX((i-pi),(j-pj));
+	  for (x=1; x<=delta; x++)
+	    {
+	      if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
+	      if (!list[n])list[n]=vcalloc (7, sizeof (int));
+	      if ((i-x)<=1)continue;
+	      if ((j-x)<=1)continue;
+	      list[n][0]=i-x;
+	      list[n][1]=j-x;
+	      list[n][3]=list[a][3];
+	      list[n][2]=cap;
+	      n++;
+	    }
+	}
+    
+    
+      if (i==al1 || j==al2);
+      else if ( i==ni || j==nj);
+      else if ( ni-i!=1 || nj-j!=1)
+	{
+	  int x;
+	  int delta=MAX((ni-i),(nj-j));
+	  for (x=1; x<=delta; x++)
+	    {
+		if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
+		if (!list[n])list[n]=vcalloc (7, sizeof (int));
+		
+		if (i+x>=al1)continue;
+		if (j+x>=al2) continue;
+		
+		
+		list[n][0]=i+x;
+		list[n][1]=j+x;
+		list[n][3]=list[a][3];
+		list[n][2]=cap;
+		n++;
+	      }
+	  
+	}
+    
+    }
+  list_in[0]=list;
+  n_in[0]=n;
+  return n;
+}
+
 int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***list, int *n)
 {
   int *sortseq;
@@ -1565,7 +1669,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   char **pid_tmpfile;
   int sjobs, njobs,j;
   int **sl;
-  
+  int **nr;
  
   if ( !A) return 0;
   
@@ -1584,6 +1688,16 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
   norm=vcalloc ( l1+1, sizeof (float));
   
+  //NR is used for Normalization
+  nr=declare_int (2, MAX(l1,l2)+1);
+  for (a=0; a<l1;a++)
+    for (b=0; b<ns[0]; b++)
+      if (!is_gap(A->seq_al[ls[0][b]][a]))nr[0][a+1]++;
+  for (a=0; a<l2;a++)
+    for (b=0; b<ns[1]; b++)
+      if (!is_gap(A->seq_al[ls[1][b]][a]))nr[1][a+1]++;
+
+
   njobs=get_nproc();
   sl=n2splits (njobs,l1+1);
   pid_tmpfile=vcalloc (njobs, sizeof (char*));
@@ -1650,7 +1764,13 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 		  
 		  if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
 		    {
-		      score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
+		      //Normalization 2
+		      //score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
+		      
+		      //Normalization 1: seems to work better, changed back on the 24/03/2011
+		      score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
+		      score*=NORM_F;
+		      
 		      fprintf (fp, "%d %d %d %f ", p1, p2, ((l1-(p1))+(p2)), score);
 		    }
 		}
@@ -1679,6 +1799,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   free_int (pos, -1);
   vfree (sl2);vfree (sl1);
   vfree(norm);
+  free_int (nr,-1);
   return n_in[0];
 }
 
@@ -1694,13 +1815,13 @@ int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *C
   int nused;
   int *used_list;
   int *sl2,*sl1, **inv_pos;
+  int **nr;
   
   
-
   float nscore, score, tot, filter, avg=0, new=0;
   float **used;
   float *norm;
-
+  
   if ( !A) return 0;
   
   pos=aln2pos_simple ( A,-1, ns, ls);
@@ -1714,11 +1835,20 @@ int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *C
   
   norm=vcalloc ( l1+1, sizeof (float));
   
-
+  
   for (a=0;a<ns[0]; a++)sl1[ls[0][a]]=1;
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
-  
-  
+
+  //NR is used for Normalization
+  nr=declare_int (2, MAX(l1,l2)+1);
+  for (a=0; a<l1;a++)
+    for (b=0; b<ns[0]; b++)
+      if (!is_gap(A->seq_al[ls[0][b]][a]))nr[0][a+1]++;
+  for (a=0; a<l2;a++)
+    for (b=0; b<ns[1]; b++)
+      if (!is_gap(A->seq_al[ls[1][b]][a]))nr[1][a+1]++;
+
+
 
   used=declare_float (l2+1,2);
   used_list=vcalloc (l2+1, sizeof (int));
@@ -1779,7 +1909,14 @@ int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *C
          
           if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
             {
-	      score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
+	      
+	      //Normalization 2
+	      //score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
+	      
+	      //Normalization 1: seems to work better, changed back on the 24/03/2011
+	      score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
+	      score*=NORM_F;
+	      
 	      addE (p1,p2,((l1-(p1))+(p2)),score,list_in, n_in);
 	    }
 	}
@@ -1790,6 +1927,7 @@ int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *C
   free_int (pos, -1);
   vfree (sl2);vfree (sl1);
   vfree(norm);
+  free_int (nr,-1);
   return n_in[0];
 }
 int nfork_cl2pair_list_noext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
