@@ -44,6 +44,7 @@ struct Sequence
       struct Template **T;
       char *blastdb;
       struct Sequence *blastdbS;
+      struct Sequence *MasterS;
 };
 typedef struct Sequence Sequence;
 

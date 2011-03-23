@@ -3256,7 +3256,11 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
 			    }
 			}
 		      norm2=MIN(norm1,norm2);
+		      
+		      //OLD NORM seems to work better 23/03/2011
+		      norm2=((CL->S)->MasterS)?((CL->S)->MasterS)->nseq:(CL->S)->nseq;
 		      score=((norm2)?score/norm2:0);
+		      
 		      fprintf (fp, "%d ",(int)(score));
 		    }
 		  for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
@@ -3367,6 +3371,9 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 			  }
 		      }
 		    norm2=MIN(norm1,norm2);
+		    //OLD NORM seems to work better 23/03/2011
+		    norm2=((CL->S)->MasterS)?((CL->S)->MasterS)->nseq:(CL->S)->nseq;
+
 		    score=((norm2)?score/norm2:0);
 		    fprintf (fp, "%d ",(int)(score));
 		  }

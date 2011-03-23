@@ -666,7 +666,6 @@ Sequence * duplicate_sequence (Sequence *S )
 	      LS->dc[b][1]=S->dc[a][1];
 	      LS->len[b]=S->len[a];
 	      LS->T[b][0]=S->T[a][0];
-	      
 	      b++;
 	      
 	    }
@@ -681,7 +680,8 @@ Sequence * duplicate_sequence (Sequence *S )
     sprintf ( LS->type, "%s", S->type);
     sprintf ( LS->template_file, "%s", S->template_file);
     LS->max_nseq=S->nseq;
-    
+    LS->blastdbS=S->blastdbS;
+    LS->MasterS=S->MasterS;
     return LS;
     }
 

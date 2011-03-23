@@ -4114,7 +4114,7 @@ get_cl_param(\
 	       
 	       /*one to all alignment*/
 	       fprintf ( le, "\nIdentify Master Sequences [%s]:\n", master_mode);
-	       MASTER_SEQ=prepare_master(master_mode,S,CL, "_kmeans_");
+	       (CL->S)->MasterS=MASTER_SEQ=prepare_master(master_mode,S,CL, "_kmeans_");
 	       fprintf ( le, "\nMaster Sequences Identified");
 	       if (!blast_maxnseq)CL->o2a_byte=(CL->S)->nseq;
 	       else CL->o2a_byte=blast_maxnseq;
@@ -5415,7 +5415,7 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	       if (seq_has_template (S, a, "_P_"))CL->master[a]=1;
 	     }
 	 }
-       if ( is_number (seq) || strstr (seq, "_N_") || strstr (seq, "_n_"))
+       if ( is_number (seq) || strstr (seq, "_N") || strstr (seq, "_n"))
 	 {
 	   int nseq;
 	   char **name;
@@ -5430,11 +5430,8 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	   
 	   if ( ttag=='N')nseq=((float)S->nseq*((float)nseq/(float)100.0));
 	   
-	   
 	   if ( nseq>=S->nseq || nseq==0)
 	     {
-	       HERE ("**** %d %d", nseq, S->nseq);
-	       exit (0);
 	       for (a=0; a<(CL->S)->nseq; a++)CL->master[a]=1;
 	       return NULL;
 	     }
@@ -5448,8 +5445,8 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
 	       A=(strm (dmode, "msa"))?(very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL)):(seq2aln (S, NULL, RM_GAP));
 	       sim=(strm (dmode, "ktup") && CL->DM)?(CL->DM)->similarity_matrix:NULL;
 	       
-	       if      (strstr (seq,  "_kmeans_"))sprintf (tmode, "_kmeans_%c%d_", ttag,nseq);
-	       else if (strstr (dmode,"_kmeans_"))sprintf (tmode, "_kmeans_%c%d_", ttag,nseq);
+	       if      (strstr (seq,  "_kmeans_"))sprintf (tmode, "_kmeans_n%d_", nseq);
+	       else if (strstr (dmode,"_kmeans_"))sprintf (tmode, "_kmeans_n%d_", nseq);
 	       else sprintf (tmode, "_aln_%c%d_", ttag,nseq);
 
 
