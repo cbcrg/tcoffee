@@ -1533,7 +1533,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    char *sap_seq1, *sap_seq2;
 	    char *sap_lib,  *tmp_name, *tmp_name1, *tmp_name2;
 	    char *buf=NULL;
-	    int s1, s2, r1=0, r2=0;
+	    int s1, s2;
 	    int sim=0, tot=0, score=0;
 
 	    char program[STRING];
@@ -1636,27 +1636,28 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    while ( (c=fgetc (fp))!='\n' && c!=EOF)fprintf ( fp, "%c", c);
 	    while ((buf=vfgets (buf, fp)))
 	      {
-
-		if ( !strstr (buf, "eighted") && !strstr (buf, "RMSd"))
-		  {
-		    remove_charset (buf, "!alnum");
-		    r1=buf[0];
-		    r2=buf[strlen(buf)-1];
-		  }
-		else
-		  continue;
-
-		sim+=(r1==r2)?1:0;
-		if ( tot>max_struc_len)
-		  {max_struc_len+=max_struc_len;
-		    sap_seq1=vrealloc ( sap_seq1, sizeof(char)*max_struc_len);
-		    sap_seq2=vrealloc ( sap_seq2, sizeof(char)*max_struc_len);
-		  }
-		sap_seq1[tot]=r1;
-		sap_seq2[tot]=r2;
+		char r1, r2;
+		remove_charset (buf, "*");
 		
-		tot++;
+		if ( strstr (buf, "eighted"));
+		else if (strstr (buf, "RMSd"));
+		else if (sscanf (buf, "%s %*d %*f %*d %s", &r1,&r2)==2)
+		  {
+		    if (!isalpha(r1) || !isalpha(r2))continue;
+		    sim+=(r1==r2)?1:0;
+		    if ( tot>max_struc_len)
+		      {max_struc_len+=max_struc_len;
+			sap_seq1=vrealloc ( sap_seq1, sizeof(char)*max_struc_len);
+			sap_seq2=vrealloc ( sap_seq2, sizeof(char)*max_struc_len);
+		      }
+		    sap_seq1[tot]=r1;
+		    sap_seq2[tot]=r2;
+		    
+		    tot++;
+		  }
 	      }
+	   
+	    vfclose (fp);
 	    sim=(sim*100)/tot;
 
 	    if ( is_number (weight))score=atoi(weight);
@@ -5308,6 +5309,11 @@ Pwfunc get_pair_wise_function (Pwfunc pw,char *dp_mode, int *glocal)
 
 	pwl[npw]=linked_pair_wise;
 	sprintf (dpl[npw], "linked_pair_wise");
+	dps[npw]=GLOBAL;
+	npw++;
+
+	pwl[npw]=procoffee_pair_wise;
+	sprintf (dpl[npw], "procoffee_pair_wise");
 	dps[npw]=GLOBAL;
 	npw++;
 	

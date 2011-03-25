@@ -4426,10 +4426,14 @@ get_cl_param(\
 		  for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
 		  for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 		}
-	    
+	     
 	      CL=evaluate_constraint_list_reference (CL);
+	      
+	      
 	      sprintf ( CL->distance_matrix_mode, "%s", distance_matrix_mode);
 	      sprintf ( CL->distance_matrix_sim_mode, "%s", distance_matrix_sim_mode);
+	      
+	      
 	      
 	      sprintf ( CL->tree_mode, "%s", tree_mode);
 	      //Re-estimate the distance matrix with consistency//
@@ -4437,6 +4441,7 @@ get_cl_param(\
 		 {
 		   CL->DM=cl2distance_matrix ( CL,NOALN,distance_matrix_mode, distance_matrix_sim_mode,1);
 		 }
+	     
 	      /*WEIGHT CONSTRAINT LIST*/
 
 	       if ( !do_convert && !strm (weight, "no"))
@@ -4444,14 +4449,16 @@ get_cl_param(\
 
 		  CL->DM=cl2distance_matrix (CL, NOALN, NULL, NULL,0);
 
+		  
 		  CL=weight_constraint_list(CL, seq_weight);
+		  
 		  
 		  if (output_seq_weights (CL->W, outseqweight))
 		    CL->local_stderr=display_output_filename( CL->local_stderr,"WEIGHT","tc_weight",outseqweight, CHECK);
 		  le=display_weights(CL->W, le);
 		}
 
-
+	     
 
 	      /*Prepare quadruplets*/
 	      if ( nseq_for_quadruplet && !strm(seq_name_for_quadruplet[0], "all"))
@@ -4475,7 +4482,7 @@ get_cl_param(\
 		      CL->seq_for_quadruplet[a]=1;
 		    }
 		}
-
+	     
 /*******************************************************************************************************/
 /*                                                                                                     */
 /*                           Prepare The Alignment                                                     */
@@ -5082,7 +5089,7 @@ char *get_procoffee_defaults(char *buf, char *type)
 
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
 
-     buf=strcat (buf,"-in Mpromo_pair -extend_seq   ");
+     buf=strcat (buf,"-in Mpromo_pair -extend_seq -dp_mode procoffee_pair_wise -seq_weight t_coffee  ");
      /*buf=strcat (buf,"-in ");*/
 
      return buf;

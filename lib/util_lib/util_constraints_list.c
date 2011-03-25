@@ -3196,7 +3196,7 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
   static int max_len;
   int norm1, norm2;
   int t_s1, t_s2, t_r1, t_r2,x;
-  float score;
+  double score;
   int np;
 
   njobs=get_nproc();
@@ -3250,18 +3250,29 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
 			  t_r2=CL->residue_index[s2][r2][x+R2];
 			  norm2++;
 			  
-			  if (t_s2==s1 && t_r2==r1)score+=CL->residue_index[s2][r2][x+WE];
+			  //Silly Neutral normalization to be 390 compliant
+			  if (t_s2==s1 && t_r2==r1)score+=(float)CL->residue_index[s2][r2][x+WE]/(float)NORM_F;
 			  else if (hasch[t_s2][t_r2])
 			    {
-			      score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
+			      //silly 'neutral' normalization to recap r390 behavior
+			      //score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
+			      double delta=MIN((((float)hasch[t_s2][t_r2]/NORM_F)),(((float)CL->residue_index[s2][r2][x+WE]/NORM_F)));
+			      score+=delta;
 			    }
+			  //Normal procedure
+			  //if (t_s2==s1 && t_r2==r1)score+=CL->residue_index[s2][r2][x+WE];
+			  //else if (hasch[t_s2][t_r2])
+			  //  {
+			  //    score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
+			  //  }
+			  
 			}
 		      norm2=MIN(norm1,norm2);
 		      
 		      //OLD NORM seems to work better 23/03/2011
 		      norm2=((CL->S)->MasterS)?((CL->S)->MasterS)->nseq:(CL->S)->nseq;
 		      score=((norm2)?score/norm2:0);
-		      
+		      score*=NORM_F;
 		      fprintf (fp, "%d ",(int)(score));
 		    }
 		  for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
@@ -3318,7 +3329,7 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 	static int max_len;
 	int norm1, norm2;
 	int t_s1, t_s2, t_r1, t_r2,x;
-	float score;
+	double score;
 	
 	tmp=vtmpnam(NULL);
 	if (!CL || !CL->residue_index)return CL;
@@ -3364,18 +3375,21 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 			t_r2=CL->residue_index[s2][r2][x+R2];
 			norm2++;
 
-			if (t_s2==s1 && t_r2==r1)score+=CL->residue_index[s2][r2][x+WE];
+			if (t_s2==s1 && t_r2==r1)score+=(float)CL->residue_index[s2][r2][x+WE]/(float)NORM_F;
 			else if (hasch[t_s2][t_r2])
 			  {
-			    score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
-			    
+			    //silly 'neutral' normalization to recap r390 behavior
+			    //score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
+			    double delta=MIN((((float)hasch[t_s2][t_r2]/NORM_F)),(((float)CL->residue_index[s2][r2][x+WE]/NORM_F)));
+			    score+=delta;
 			  }
 		      }
 		    norm2=MIN(norm1,norm2);
 		    //OLD NORM seems to work better 23/03/2011
 		    norm2=((CL->S)->MasterS)?((CL->S)->MasterS)->nseq:(CL->S)->nseq;
-
+		    norm2=(CL->S)->nseq;
 		    score=((norm2)?score/norm2:0);
+		    score*=NORM_F;
 		    fprintf (fp, "%d ",(int)(score));
 		  }
 		
@@ -3397,7 +3411,6 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 		
 		for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
 		  {
-		    
 		    fscanf (fp, "%d ", &CL->residue_index[s1][r1][a+WE]);
 		  }
 	      }
@@ -3405,6 +3418,8 @@ Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
 	vfclose (fp);
 	filter_constraint_list (CL,WE,thr);
 	fprintf ( CL->local_stderr, "--->[%d]\n", CL->ne);
+	
+	
 	return CL;
 }
 
@@ -4268,8 +4283,6 @@ Constraint_list *weight_constraint_list(Constraint_list * CL, char *seq_weight)
 {
 	Weights *W;
 	
-	
-	
 	if ( CL->ne==0){return CL;}
 	else if ( strm(seq_weight, "t_coffee")) {W=compute_t_coffee_weight(CL);}
 	else if (check_file_exists (seq_weight))
@@ -4289,6 +4302,7 @@ Constraint_list *weight_constraint_list(Constraint_list * CL, char *seq_weight)
 	    CL->W=W;
 	    return CL;
 	  }
+	
 	CL=re_weight_constraint_list (CL,W);
 	
 	CL->W=W;

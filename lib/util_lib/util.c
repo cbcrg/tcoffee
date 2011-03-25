@@ -3578,6 +3578,17 @@ int evaluate_sys_call_io ( char *out_file, char *com, char *fonc)
 	   return 0;
 	 }
      }
+void HERE2 (char *string, ...)
+{
+  va_list ap;
+  
+  va_start (ap, string);
+  fprintf ( stdout, "\nHERE: ");
+  vfprintf (stdout, string, ap);
+  fprintf ( stdout, "\n");
+  va_end (ap);
+  
+}
 void HERE (char *string, ...)
 {
   va_list ap;

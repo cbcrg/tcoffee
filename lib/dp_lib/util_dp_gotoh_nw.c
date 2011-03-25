@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdarg.h>
 #include <string.h>
+#include <limits.h>
 
 #include "io_lib_header.h"
 #include "util_lib_header.h"
@@ -31,9 +32,16 @@
       n[0]++;								\
     }									\
   
+ 
 
-
-
+void debug_list (char *tag, int n, int **list, int ex);
+void debug_list (char *tag, int n, int **list, int ex)
+{
+  int a;
+  for (a=0; a<n; a++)
+    fprintf (stdout, "\n_%s_: %d %d %d %d\n", tag,list[a][0], list[a][1],list[a][2],list[a][4]);
+  if (ex) exit(0);
+}
 
 /*******************************************************************************/
 /*                idscore_pairseq: measure the % id without delivering thze aln*/                                                   
@@ -693,7 +701,7 @@ int glocal2_pair_wise (Alignment *IN,int*ns, int **ls,Constraint_list *CL)
   
   gotoh_pair_wise_sw (A, ns, ls, CL);
   
-  HERE ("1");
+
   for (a=0; a<2; a++)
     {
       for (b=0; b<ns[a]; b++)
@@ -1673,7 +1681,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
  
   if ( !A) return 0;
   
-  
+
   
   pos=aln2pos_simple ( A,-1, ns, ls);
   inv_pos=vcalloc ((CL->S)->nseq, sizeof (int*));
@@ -1865,7 +1873,9 @@ int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *C
               t_s=CL->residue_index[s][r][a+SEQ2];
               t_r=CL->residue_index[s][r][a+R2];
               t_w=CL->residue_index[s][r][a+WE];
-	      if (sl1[t_s])continue;//do not extend within a profile
+	      
+	      //NOT QUITE SURE---> Removed to be Compliant with 390
+	      //if (sl1[t_s])continue;//do not extend within a profile
 	      
 	      norm[p1]++;
               for (b=0; b<CL->residue_index[t_s][t_r][0];)
@@ -1888,7 +1898,7 @@ int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *C
                         {
                           used_list[nused++]=p2;
                         }
-
+		      
                       tot+=score;
                       used[p2][0]+=score;
                       used[p2][1]++;
@@ -1915,7 +1925,7 @@ int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *C
 	      
 	      //Normalization 1: seems to work better, changed back on the 24/03/2011
 	      score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
-	      score*=NORM_F;
+	      score*=(float)NORM_F;
 	      
 	      addE (p1,p2,((l1-(p1))+(p2)),score,list_in, n_in);
 	    }
@@ -1980,7 +1990,9 @@ int nfork_cl2pair_list_noext ( Alignment *A, int *ns, int **ls, Constraint_list 
               t_s=CL->residue_index[s][r][a+SEQ2];
               t_r=CL->residue_index[s][r][a+R2];
               t_w=CL->residue_index[s][r][a+WE];
-	      if (sl1[t_s])continue;//do not extend within a profile
+	      
+	      //NOT QUITE SURE---> Removed to be Compliant with 390
+	      //if (sl1[t_s])continue;//do not extend within a profile
 	      if (sl2[t_s])
 		{
 		  p2=inv_pos[t_s][t_r];
@@ -2631,5 +2643,164 @@ int ns2s (int *ns, int **ls, int *is1, int *is2, int *is)
   if (is) is [0]=s;
   
   return s;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////                                                                           ///////////////
+///////////////                                                                           ///////////////
+///////////////                       OLD linked Pw                                       ///////////////
+///////////////                                                                           ///////////////
+///////////////                                                                           ///////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+int cl2pair_list390 ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int cl2list_borders390   (Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int cl2diag_cap390 (Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int list2nodup_list390 ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int list2linked_pair_wise390( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int **list, int n);
+
+void sort_list_int2_390 ( int **V,int *list,int N_F, int left, int right);
+int cmp_list_int2_390 (const int**a, const int**b);
+int cmp_list_int390 (const int**a, const int**b);
+void sort_list_int390 ( int **V,int N_F, int F, int left, int right);
+void sort_int390 ( int **V,int N_F, int F, int left, int right);
+void qsort390(void *base, size_t nmemb, size_t size, int (*compar)(const void *, const void *));
+
+int procoffee_pair_wise ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL)
+{
+  int n=0;
+  int **list=NULL;
+  int score, a;
+  int *ns, **ls;
+  char **al;
+  int len=0;
+  if ( !CL->residue_index)return myers_miller_pair_wise (A, nsi,lsi,CL);
+  
+
+  ns=vcalloc (2, sizeof (int));
+  ns[0]=nsi[1]; ns[1]=nsi[0];
+  
+  
+  ls=declare_int (2, ns[0]+ns[1]);
+  for (a=0; a<ns[1]; a++)
+    ls[1][a]=lsi[0][a];
+  for (a=0; a<ns[0]; a++)
+    ls[0][a]=lsi[1][a];
+  
+  cl2list_borders(A, ns, ls, CL, &list, &n);
+  cl2pair_list_ext    (A, ns, ls, CL, &list, &n);
+  
+  cl2diag_cap390    (A, ns, ls, CL, &list, &n);
+
+  sort_list_int     (list,7, 1, 0, n-1);
+  list2nodup_list (A, ns, ls, CL, &list, &n);
+  score=list2linked_pair_wise (A, ns, ls, CL, list, n, &al,&len);
+  free_int (list,-1);
+  return score;
+}
+
+int cl2diag_cap390 (Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+{
+  int **list;
+  int n, in, a, b, al1, al2;
+  int max_n;
+  int cap=0;
+  
+  if (!A) return 0;
+  
+  al1=strlen (A->seq_al[ls[0][0]]);
+  al2=strlen (A->seq_al[ls[1][0]]);
+  
+  list=list_in[0];
+  n=n_in[0];
+  max_n=read_array_size (list, sizeof (int*));
+  
+  
+  
+  
+  for (a=0; a< n; a++)
+    {
+      b=list[a][3];
+      list[a][3]=list[a][0];
+      list[a][0]=b;
+      
+    }
+  sort_list_int (list, 4, 1, 0, n-1);
+  for (a=0; a< n; a++)
+    {
+      b=list[a][3];
+      list[a][3]=list[a][0];
+      list[a][0]=b;
+    }
+  
+
+  in=n;
+  
+  for (a=0; a<in; a++)
+    {
+      int i, j, pi, pj, ni, nj;
+      if (list[a][2]==0)continue;
+      i=list[a][0];
+      j=list[a][1];
+      
+      if (a==0){pi=-10;pj=-10;}
+      else {pi=list[a-1][0];pj=list[a-1][1];}
+      
+      if (a==in-1){ni=-10; nj=-10;}
+      else {ni=list[a+1][0]; nj=list[a+1][1];}
+      
+      
+      if (i==0 || j==0);
+      else if ( i==pi || j==pj);
+      else if ( i-pi!=1 || j-pj!=1)
+	{
+	  
+	  
+	  int x;
+	  int delta=MAX((i-pi),(j-pj));
+	  for (x=1; x<=delta; x++)
+	    {
+	      if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
+	      if (!list[n])list[n]=vcalloc (7, sizeof (int));
+	      if ((i-x)<=1)continue;
+	      if ((j-x)<=1)continue;
+	      list[n][0]=i-x;
+	      list[n][1]=j-x;
+	      list[n][3]=list[a][3];
+	      list[n][2]=cap;
+	      n++;
+	    }
+	}
+    
+    
+      if (i==al1 || j==al2);
+      else if ( i==ni || j==nj);
+      else if ( ni-i!=1 || nj-j!=1)
+	{
+	  int x;
+	  int delta=MAX((ni-i),(nj-j));
+	  for (x=1; x<=delta; x++)
+	    {
+		if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
+		if (!list[n])list[n]=vcalloc (7, sizeof (int));
+		
+		if (i+x>=al1)continue;
+		if (j+x>=al2) continue;
+		
+		
+		list[n][0]=i+x;
+		list[n][1]=j+x;
+		list[n][3]=list[a][3];
+		list[n][2]=cap;
+		n++;
+	      }
+	  
+	}
+    
+    }
+  list_in[0]=list;
+  n_in[0]=n;
+  return n;
 }
 
