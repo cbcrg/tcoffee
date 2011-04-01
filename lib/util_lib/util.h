@@ -300,7 +300,7 @@ char* getenv4debug ( const char *var);
 char* get_env_variable ( const char *var, int mode);
 int atoigetenv(const char *x);
 void setenv_func ( char *string_name, char *string_value);
-void get_pwd ( char *name);
+char *get_pwd ( char *name);
 char *pg2path (char *pg);
 int pg_is_installed ( char *pg);
 /*********************************************************************/

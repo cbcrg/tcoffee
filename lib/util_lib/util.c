@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <sys/file.h>
 #include <sys/types.h>
+#include <unistd.h>
 
 #include "io_lib_header.h"
 #include "util_lib_header.h"
@@ -1735,21 +1736,17 @@ char* get_env_variable ( const char *var, int mode)
 	       }
 	    else return getenv (var);
 	}
-		
-void get_pwd ( char *name)
-	{
-	char *string;
-	FILE *fp;
-	 
+char *get_pwd ( char *name)
+{
+  char cwd[1024];
+  if (!name)name=vcalloc (1025, sizeof (int));
+  if (getcwd(cwd, sizeof(cwd)) != NULL)
+    sprintf(name, "%s", cwd);
+  else
+    perror("getcwd() error");
+}
+  
 
-	string=vtmpnam(NULL);
-	printf_system_direct ("pwd > %s", string);
-	
-	fp=vfopen ( string, "r");
-	fscanf ( fp, "%s",name);
-	vfclose (fp);
-	printf_system_direct ("rm %s", string);
-	}
 int pg_is_installed ( char *pg)
         {
 	char *fname;
@@ -3677,7 +3674,9 @@ int printf_system  (char *string, ...)
 {
   char *buf;
   int r;
-  
+  char static *tmpdir;
+  char static *cdir;
+
   cvsprintf (buf, string);
   r=my_system (buf);
   vfree(buf);
@@ -3706,6 +3705,7 @@ int my_system ( char *command0)
   static char ***unpacked_list;
   static int n_unpacked;
  
+  
   if (!unpacked_list)
     {
       unpacked_list=declare_arrayN(3, sizeof (char), 3, 200,vtmpnam_size());
@@ -3958,8 +3958,9 @@ int safe_system (const char * com_in)
     int failure_handling;
     char *p;
     char command[1000];
-    
     static char *com;
+    
+    
 
     if ( clean_exit_started) return system (com_in);
     if ( com)vfree (com);
@@ -3972,8 +3973,6 @@ int safe_system (const char * com_in)
 	    char *t;
 	    t=vtmpnam(NULL);
 	    com=vrealloc (com, (strlen (com)+strlen (t)+1)*sizeof (char));
-	    
-	    
 	    com=substitute (com,"SCRATCH_FILE", t);
 	  }
       }
@@ -3984,18 +3983,27 @@ int safe_system (const char * com_in)
       }
     
 
+
     if (com == NULL)
         return (1);
     else if ( (p=strstr (com, "::IGNORE_FAILURE::")))
       {
 	p[0]='\0';
 	failure_handling=IGNORE_FAILURE;
+	
       }
     else if ( (p=strstr (com, "::RETURN_ON_FAILURE::")))
       {
 	p[0]='\0';
 	failure_handling=RETURN_ON_FAILURE;
+	
       }
+    else if ( (p=strstr (com, "::EXIT_ON_FAILURE::")))
+       {
+	p[0]='\0';
+	failure_handling=EXIT_ON_FAILURE;
+	
+       }
     else
       {
 	failure_handling=EXIT_ON_FAILURE;
@@ -4010,16 +4018,13 @@ int safe_system (const char * com_in)
     if (pid == 0) 
       {
 	char * argv [4];
-        
-        argv [0] = "sh";
-
-
-        argv [1] = "-c";
+	argv [0] = "sh";
+	argv [1] = "-c";
         argv [2] =(char*) com;
         argv [3] = 0;
-	
 	if ( debug_lock)fprintf (stderr,"\n--- safe_system (util.h): %s (%d)\n", com, getpid());
 	execvp ("/bin/sh", argv);
+	
       }
     else
       {
@@ -4469,7 +4474,8 @@ char *get_dir_4_tcoffee()
 }
 char *get_tmp_4_tcoffee ()
 {
-  static char tmp_4_tcoffee [1000];
+  static char *tmp_4_tcoffee; 
+  if (!tmp_4_tcoffee)tmp_4_tcoffee=vcalloc ( 1000, sizeof (char));
   
   if ( tmp_4_tcoffee[0])return tmp_4_tcoffee;
   else
@@ -4491,13 +4497,16 @@ char *get_tmp_4_tcoffee ()
       //now that rough location is decided, create the subdir structure
        if (is_rootpid())
 	{
-	  sprintf (buf, "%s/t_coffee.tmp/tmp.%d/", tmp_4_tcoffee,getpid());
+	  sprintf (buf, "%s/t_coffee.tmp/tmp.%s.%d/", tmp_4_tcoffee,host,getpid());
 	  sprintf (tmp_4_tcoffee, "%s", buf);
 	  
 	  my_mkdir(tmp_4_tcoffee);
 	  my_rmdir(tmp_4_tcoffee);
 	  my_mkdir(tmp_4_tcoffee);
 	}
+       substitute (tmp_4_tcoffee, "//", "/");
+       substitute (tmp_4_tcoffee, "//", "/");
+       substitute (tmp_4_tcoffee, "//", "/");
     }
 
   return tmp_4_tcoffee;

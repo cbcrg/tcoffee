@@ -2470,7 +2470,7 @@ Alignment *strings2aln (int nseq,...)
 	  A=seq2aln(S,NULL, 1); 
 	  return A;
 	}
-Alignment *seq2aln ( Sequence *S, Alignment *A,int rm_gap)
+Alignment *seq2aln (Sequence *S, Alignment *A,int rm_gap)
 	{
 	int a;
 

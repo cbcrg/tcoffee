@@ -576,7 +576,11 @@ Job_TC *submit_lib_job ( Job_TC *job)
 	TC_method *M;
 	static char *l;
 	static int log;
-	
+	static char *tdir;
+	static char *cdir;
+	if (!tdir)tdir=get_tmp_4_tcoffee();
+	if (!cdir)cdir=get_pwd(NULL);
+
 	p=job->param;
 	io=job->io;
 	M=(job->param)->TCM;
@@ -584,35 +588,44 @@ Job_TC *submit_lib_job ( Job_TC *job)
 	if ( getenv4debug ("DEBUG_LIBRARY"))fprintf ( stderr, "\n[DEBUG_LIBRARY:produce_list] Instruction: %s\n", p->aln_c);
 	
 	if ( !M)
-	{
-		return job;
-	}
+	  {
+	    return job;
+	  }
 	else if (strm4 (M->out_mode,"A", "L", "aln", "lib"))
-	{
-		seq_list2in_file ( M, (io->CL)->S, p->seq_c, io->in);
-		printf_system ("%s ::IGNORE_FAILURE::", p->aln_c);
-		add_method_output2method_log (NULL,NULL, NULL, NULL, io->out);
-		if (!evaluate_sys_call_io (io->out,p->aln_c, "") || (strm (M->out_mode, "aln") && !(is_aln (io->out) || is_seq(io->out))) )
-		{
-			job->status=EXIT_FAILURE;
-			//myexit (EXIT_FAILURE);
-			return job;
-		}
-	}
+	  {
+	    char *com;
+	    seq_list2in_file ( M, (io->CL)->S, p->seq_c, io->in);
+	    com=vcalloc ( strlen (p->aln_c)+100, sizeof (char));
+	    sprintf (com, "%s", p->aln_c);
+	    substitute (com, "//", "/");
+	    substitute (com, tdir, "./");
+	    chdir (tdir);
+	    printf_system ("%s ::IGNORE_FAILURE::", com);
+	    vfree (com);
+	    chdir (cdir);
+	    add_method_output2method_log (NULL,NULL, NULL, NULL, io->out);
+	    
+	    if (!evaluate_sys_call_io (io->out,p->aln_c, "") || (strm (M->out_mode, "aln") && !(is_aln (io->out) || is_seq(io->out))) )
+	      {
+		job->status=EXIT_FAILURE;
+		//myexit (EXIT_FAILURE);
+		return job;
+	      }
+	  }
 	else if ( strm2 (M->out_mode, "fA", "fL"))
-	{
-		
-		io->CL= seq2list(job);
-		if (!io->CL)
-		{
-			add_warning (stderr, "\nFAILED TO EXECUTE:%s [SERIOUS:%s]", p->aln_c, PROGRAM);
-			job->status=EXIT_FAILURE;
-		}
-	}
+	  {
+	    
+	    io->CL= seq2list(job);
+	    if (!io->CL)
+	      {
+		add_warning (stderr, "\nFAILED TO EXECUTE:%s [SERIOUS:%s]", p->aln_c, PROGRAM);
+		job->status=EXIT_FAILURE;
+	      }
+	  }
 	else
-	{
-		myexit(fprintf_error ( stderr, "\nERROR: Unknown out_mode=%s for method[FATAL:%s]\n", M->out_mode, M->executable));
-	}
+	  {
+	    myexit(fprintf_error ( stderr, "\nERROR: Unknown out_mode=%s for method[FATAL:%s]\n", M->out_mode, M->executable));
+	  }
 	
 	return job;
 }
@@ -621,281 +634,256 @@ Job_TC *submit_lib_job ( Job_TC *job)
 
 Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib_list, Distance_matrix *DM, Constraint_list *CL)
 {
-	int preset_method;
-	static char *fname, *bufS, *bufA;
-	char *in,*out;
-	TC_method *method;
-	char aln_mode[100];
-	char out_mode[100];
-	Job_TC *job;
-	int hijack_P_jobs=1;
-	
-	/*A method can be:
-	1- a pre computed alignment out_mode=A
-	2- a precomputed Library    out_mode=L
-	3- a method producing an alignment out_mode=aln
-	4- a method producing an alignment out_mode=list
-	5- a function producing an alignment out_mode=faln
-	6- a function producing a library    out_mode=flist
-	*/
-	
-	if ( !fname)
+  int preset_method;
+  static char *fname, *bufS, *bufA;
+  char *in,*out;
+  TC_method *method;
+  char aln_mode[100];
+  char out_mode[100];
+  Job_TC *job;
+  int hijack_P_jobs=1;
+  int debugio=atoigetenv ("DEBUG_METHOD_4_TCOFFEE");
+  
+  /*A method can be:
+    1- a pre computed alignment out_mode=A
+    2- a precomputed Library    out_mode=L
+    3- a method producing an alignment out_mode=aln
+    4- a method producing an alignment out_mode=list
+    5- a function producing an alignment out_mode=faln
+    6- a function producing a library    out_mode=flist
+  */
+  
+  if ( !fname)
+    {
+      fname=vcalloc ( 1000, sizeof (char));
+      bufS=vcalloc ( S->nseq*10, sizeof (char));
+    }
+  
+  /*Make sure that fname is a method*/
+  
+  
+  sprintf(fname, "%s", method_name);
+  
+  if ( fname[0]=='A' || fname[0]=='L')
+    {
+      method=method_file2TC_method("no_method");
+      sprintf ( method->out_mode, "%c", fname[0]);
+      
+      if (!strm (weight, "default"))sprintf ( method->weight, "%s", weight);
+      
+      return print_lib_job(NULL,"param->out=%s param->TCM=%p",fname+1, method);
+    }
+  else if ( fname[0]=='M' && is_in_pre_set_method_list (fname+1))
+    {
+      preset_method=1;
+      fname++;
+    }
+  else if ( is_in_pre_set_method_list (fname))
+    {
+      preset_method=1;
+    }
+  else
+    {
+      char buf[1000];
+      if ( check_file_exists ( fname));
+      else if (fname[0]=='M' && check_file_exists(fname+1));
+      else
 	{
-		fname=vcalloc ( 1000, sizeof (char));
-		bufS=vcalloc ( S->nseq*10, sizeof (char));
+	  sprintf ( buf, "%s/%s", get_methods_4_tcoffee(), fname);
+	  if( check_file_exists(buf)){sprintf ( fname, "%s", buf);}
+	  else
+	    {
+	      myexit (fprintf_error ( stderr, "%s is not a valid method", fname));
+	    }
 	}
-	
-	/*Make sure that fname is a method*/
-	
-	
-	sprintf(fname, "%s", method_name);
-	
-	if ( fname[0]=='A' || fname[0]=='L')
+    }
+  
+  
+  method=method_file2TC_method(fname);
+  job=print_lib_job (NULL, "param->TCM=%p", method);
+  job->jobid=-1;
+  
+  if (!strm (weight, "default"))sprintf ( method->weight, "%s", weight);
+  
+  sprintf ( aln_mode, "%s", method->aln_mode);
+  sprintf ( out_mode, "%s", method->out_mode);
+  
+  
+  if (lib_list && lib_list[0])
+    {
+      static char **lines, **list=NULL;
+      int a,i, x, n, nl;
+      
+      
+      
+      if ( lines) free_char (lines, -1);
+      
+      
+      if ( strstr (lib_list, "prune"))
 	{
-		method=method_file2TC_method("no_method");
-		sprintf ( method->out_mode, "%c", fname[0]);
-	
-		if (!strm (weight, "default"))sprintf ( method->weight, "%s", weight);
-		
-		return print_lib_job(NULL,"param->out=%s param->TCM=%p",fname+1, method);
+	  lines=file2lines (list2prune_list (S,DM->similarity_matrix));
 	}
-	else if ( fname[0]=='M' && is_in_pre_set_method_list (fname+1))
+      else
 	{
-		preset_method=1;
-		fname++;
+	  lines=file2lines (lib_list);
 	}
-	else if ( is_in_pre_set_method_list (fname))
+      
+      nl=atoi (lines[0]);
+      for (a=1; a<nl; a++)
 	{
-		preset_method=1;
-	}
-	else
-	{
-		char buf[1000];
-		if ( check_file_exists ( fname));
-		else if (fname[0]=='M' && check_file_exists(fname+1));
-		else
+	  
+	  if (list) free_char (list, -1);
+	  if (isblanc (lines[a]))continue;
+	  
+	  list=string2list (lines[a]);n=atoi(list[1]);
+	  if ( n> 2 && strm (aln_mode, "pairwise"))continue;
+	  if ( n==2 && strm (aln_mode, "multiple"))continue;
+	  
+	  for (i=2; i<n+2; i++)
+	    {
+	      if ( is_number (list[i]));
+	      else if ((x=name_is_in_list (list[i], S->name, S->nseq, 100))!=-1)sprintf(list[i], "%d", x);
+	      else
 		{
-			sprintf ( buf, "%s/%s", get_methods_4_tcoffee(), fname);
-			if( check_file_exists(buf)){sprintf ( fname, "%s", buf);}
-			else
+		  add_warning ( stderr, "\nWARNING: %s is not part of the sequence dataset \n", list[i]);
+		  continue;
+		}
+	    }
+	  sprintf ( bufS, "%s", list[1]);
+	  for ( i=2; i<n+2; i++) {strcat (bufS, " ");strcat ( bufS, list[i]);}
+	  
+	  
+	  bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
+	  
+	  if (!debugio && strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
+	  if ( check_seq_type ( method, bufS, S))
+	    {
+	      job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out);
+	      job=queue_cat (job, job->c);
+	    }
+	  vfree (bufA);
+	  
+	}
+    }
+  else if ( strcmp (aln_mode, "multiple")==0)
+    {
+      int d;
+      char buf[10000];
+      
+      sprintf (bufS, "%d",S->nseq);
+      for (d=0; d< S->nseq; d++)
+	{
+	  sprintf ( buf," %d",d);
+	  strcat ( bufS, buf);
+	}
+      
+      bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
+      if (!debugio && strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
+      
+      if ( check_seq_type ( method, bufS, S))
+	{
+	  job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
+	  
+	  job=queue_cat (job, job->c);
+	  
+	}
+      vfree (bufA);
+    }
+  else if ( strstr(aln_mode, "o2a"))
+    {
+      int x, y, n;
+      int *used;
+      static char *tmpf;
+      FILE *fp;
+      int byte=CL->o2a_byte;
+      int max=0;
+      
+      for (x=0; x<(CL->S)->nseq; x++)max+=(CL->master[x]);
+      
+      if (CL->o2a_byte>=max)byte=(max/get_nproc())+1;
+      
+      if (!tmpf)tmpf=vtmpnam (NULL);
+      
+      fp=vfopen (tmpf, "w");
+      for (n=0,x=0; x<(CL->S)->nseq; x++)
+	{
+	  if (CL->master[x]){fprintf (fp, "%d ", x);n++;}
+	  if (n==byte || (n && x==(CL->S)->nseq-1))
+	    {
+	      vfclose (fp);
+	      sprintf (bufS, "%d %s", n,file2string (tmpf));n=0;
+	      bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
+	      if (!debugio && strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
+	      if ( check_seq_type ( method, bufS, S))
+		{
+		  job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
+		  job=queue_cat (job, job->c);
+		}
+	      vfree (bufA);
+	      fp=vfopen (tmpf, "w");
+	    }
+	}
+      vfclose (fp);
+    }
+  
+  
+  else if ( strstr(aln_mode, "pairwise"))
+    {
+      int do_mirror, do_self, x, y, id;
+      int **set;
+      
+      do_mirror=(strstr(aln_mode, "m_"))?1:0;
+      do_self=(strstr(aln_mode, "s_"))?1:0;
+      set=declare_int (S->nseq, S->nseq);
+      if (method->minid!=0 || method->maxid!=100)
+	DM=CL->DM=cl2distance_matrix ( CL,NOALN,NULL,NULL,1);
+      
+      for (x=0; x< S->nseq; x++)
+	{
+	  if (!CL->master[x])continue;
+	  for ( y=0; y< S->nseq; y++)
+	    {
+	      if (!do_mirror && set[y][x])continue;
+	      set[x][y]=1;
+	      
+	      id=(DM && DM->similarity_matrix)?DM->similarity_matrix[x][y]:-1;
+	      
+	      if ( x==y && !do_self);
+	      else if ( id!=-1 && !is_in_range(id,method->minid, method->maxid));
+	      else
+		{
+		  sprintf (bufS, "2 %d %d",x,y);
+		  bufA=make_aln_command (method,in=vtmpnam(NULL),out=vtmpnam (NULL));
+		  
+		  if (!debugio && strrchr(bufA, '>')==NULL)strcat (bufA, TO_NULL_DEVICE);
+		  if (check_seq_type (method, bufS, S))
+		    {
+		      job->c=print_lib_job (job->c, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ",method,fname,bufA, bufS, in, out);
+		      job=queue_cat (job, job->c);
+		    }
+		  else if ( method->seq_type[0]=='P' && hijack_P_jobs)
+		    {
+		      //Hijack _P_ jobs without enough templates
+		      static TC_method *proba_pairM;
+		      
+		      add_information(stderr, "Method %s cannot be applied to [%s vs %s], proba_pair will be used instead",(method->executable2)?method->executable2:method->executable, (CL->S)->name[x], (CL->S)->name [y]);
+		      if (!proba_pairM)
 			{
-				myexit (fprintf_error ( stderr, "%s is not a valid method", fname));
+			  proba_pairM=method_file2TC_method(method_name2method_file ("proba_pair"));
+			  proba_pairM->PW_CL=method2pw_cl(proba_pairM, CL);
 			}
+		      job->c=print_lib_job (job->c, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ",proba_pairM,fname,bufA, bufS, in, out);
+		      job=queue_cat (job, job->c);
+		    }
+		  
+		  vfree (bufA);
 		}
+	    }
 	}
-	
-	
-	method=method_file2TC_method(fname);
-	job=print_lib_job (NULL, "param->TCM=%p", method);
-	job->jobid=-1;
-	
-	if (!strm (weight, "default"))sprintf ( method->weight, "%s", weight);
-	
-	sprintf ( aln_mode, "%s", method->aln_mode);
-	sprintf ( out_mode, "%s", method->out_mode);
-	
-	
-	if (lib_list && lib_list[0])
-	{
-		static char **lines, **list=NULL;
-		int a,i, x, n, nl;
-		
-		
-		
-		if ( lines) free_char (lines, -1);
-		
-		
-		if ( strstr (lib_list, "prune"))
-		{
-			lines=file2lines (list2prune_list (S,DM->similarity_matrix));
-		}
-		else
-		{
-			lines=file2lines (lib_list);
-		}
-		
-		nl=atoi (lines[0]);
-		for (a=1; a<nl; a++)
-		{
-			
-			if (list) free_char (list, -1);
-			if (isblanc (lines[a]))continue;
-			
-			list=string2list (lines[a]);n=atoi(list[1]);
-			if ( n> 2 && strm (aln_mode, "pairwise"))continue;
-			if ( n==2 && strm (aln_mode, "multiple"))continue;
-			
-			for (i=2; i<n+2; i++)
-			{
-				if ( is_number (list[i]));
-				else if ((x=name_is_in_list (list[i], S->name, S->nseq, 100))!=-1)sprintf(list[i], "%d", x);
-				else
-				{
-					add_warning ( stderr, "\nWARNING: %s is not part of the sequence dataset \n", list[i]);
-					continue;
-				}
-			}
-			sprintf ( bufS, "%s", list[1]);
-			for ( i=2; i<n+2; i++) {strcat (bufS, " ");strcat ( bufS, list[i]);}
-			
-			
-			bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
-			
-			if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
-			if ( check_seq_type ( method, bufS, S))
-			  {
-			    job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out);
-			    job=queue_cat (job, job->c);
-			  }
-			vfree (bufA);
-			
-		}
-	}
-	else if ( strcmp (aln_mode, "multiple")==0)
-	  {
-		int d;
-		char buf[10000];
-		
-		sprintf (bufS, "%d",S->nseq);
-		for (d=0; d< S->nseq; d++)
-		{
-			sprintf ( buf," %d",d);
-			strcat ( bufS, buf);
-		}
-		
-		bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
-		if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
-		
-		if ( check_seq_type ( method, bufS, S))
-		  {
-		    job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
-		    
-		    job=queue_cat (job, job->c);
-		    
-		  }
-		vfree (bufA);
-	  }
-	else if ( strstr(aln_mode, "o2a"))
-	  {
-	    int x, y, n;
-	    int *used;
-	    static char *tmpf;
-	    FILE *fp;
-	    int byte=CL->o2a_byte;
-	    int max=0;
-	    
-	    for (x=0; x<(CL->S)->nseq; x++)max+=(CL->master[x]);
-	    
-	    if (CL->o2a_byte>=max)byte=(max/get_nproc())+1;
-	    
-	    if (!tmpf)tmpf=vtmpnam (NULL);
-	    
-	    fp=vfopen (tmpf, "w");
-	    for (n=0,x=0; x<(CL->S)->nseq; x++)
-	      {
-		if (CL->master[x]){fprintf (fp, "%d ", x);n++;}
-		if (n==byte || (n && x==(CL->S)->nseq-1))
-		      {
-			vfclose (fp);
-			sprintf (bufS, "%d %s", n,file2string (tmpf));n=0;
-			bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
-			if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
-			if ( check_seq_type ( method, bufS, S))
-			  {
-			    job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
-			    job=queue_cat (job, job->c);
-			  }
-			vfree (bufA);
-			fp=vfopen (tmpf, "w");
-		      }
-	      }
-	    vfclose (fp);
-	  }
-	
-	else if ( strstr(aln_mode, "o2a_old"))
-	  {
-	    int x, y;
-	    
-	    for (x=0; x< S->nseq; x++)
-	      {
-		if (!CL->master[x])continue;
-		sprintf (bufS, "%d %d", S->nseq, x);
-		for ( y=0; y< S->nseq; y++)
-		  {
-		    char buf[1000];
-		    if (y==x)continue;
-		    sprintf (buf, " %d",y);
-		    strcat ( bufS, buf);
-		  }
-		bufA=make_aln_command (method, in=vtmpnam(NULL),out=vtmpnam(NULL));
-		if (strrchr(bufA, '>')==NULL)strcat (bufA,TO_NULL_DEVICE);
-		if ( check_seq_type ( method, bufS, S))
-		  {
-		    
-		    job->c=print_lib_job (NULL, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ", method, fname, bufA, bufS, in, out, S->template_file);
-		    
-		    job=queue_cat (job, job->c);
-		  }
-		vfree (bufA);
-	      }
-	  }
-	else if ( strstr(aln_mode, "pairwise"))
-	  {
-	    int do_mirror, do_self, x, y, id;
-	    int **set;
-	    
-	    do_mirror=(strstr(aln_mode, "m_"))?1:0;
-	    do_self=(strstr(aln_mode, "s_"))?1:0;
-	    set=declare_int (S->nseq, S->nseq);
-	    if (method->minid!=0 || method->maxid!=100)
-	      DM=CL->DM=cl2distance_matrix ( CL,NOALN,NULL,NULL,1);
-	    
-	    for (x=0; x< S->nseq; x++)
-	      {
-		if (!CL->master[x])continue;
-		for ( y=0; y< S->nseq; y++)
-		  {
-		    if (!do_mirror && set[y][x])continue;
-		    set[x][y]=1;
-		    
-		    id=(DM && DM->similarity_matrix)?DM->similarity_matrix[x][y]:-1;
-		    
-		    if ( x==y && !do_self);
-		    else if ( id!=-1 && !is_in_range(id,method->minid, method->maxid));
-		    else
-		      {
-			sprintf (bufS, "2 %d %d",x,y);
-			bufA=make_aln_command (method,in=vtmpnam(NULL),out=vtmpnam (NULL));
-			
-			if (strrchr(bufA, '>')==NULL)strcat (bufA, TO_NULL_DEVICE);
-			if (check_seq_type (method, bufS, S))
-			  {
-			    job->c=print_lib_job (job->c, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ",method,fname,bufA, bufS, in, out);
-			    job=queue_cat (job, job->c);
-			  }
-			else if ( method->seq_type[0]=='P' && hijack_P_jobs)
-			  {
-			    //Hijack _P_ jobs without enough templates
-			    static TC_method *proba_pairM;
-			    
-			    add_information(stderr, "Method %s cannot be applied to [%s vs %s], proba_pair will be used instead",(method->executable2)?method->executable2:method->executable, (CL->S)->name[x], (CL->S)->name [y]);
-			    if (!proba_pairM)
-			      {
-				proba_pairM=method_file2TC_method(method_name2method_file ("proba_pair"));
-				proba_pairM->PW_CL=method2pw_cl(proba_pairM, CL);
-			      }
-			    job->c=print_lib_job (job->c, "param->TCM=%p param->method=%s param->aln_c=%s param->seq_c=%s io->in=%s io->out=%s ",proba_pairM,fname,bufA, bufS, in, out);
-			    job=queue_cat (job, job->c);
-			  }
-			
-			vfree (bufA);
-		      }
-		  }
-	      }
-	    free_int (set, -1);
-	  }
-	
-	return job;
+      free_int (set, -1);
+    }
+  
+  return job;
 }
 
 int check_seq_type (TC_method *M, char *list,Sequence *S)
@@ -5310,11 +5298,11 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "SUPPORTED  NO");
 	vfclose (fp);}
 
-	sprintf (list[n][0], "profile_pair");
+	sprintf (list[n][0], "cwprofile_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE profile_pair\n");
-	fprintf ( fp, "EXECUTABLE2 clustalw\n");
+	fprintf ( fp, "EXECUTABLE2 clustalw2\n");
 	fprintf ( fp, "ALN_MODE   pairwise\n");
 	fprintf ( fp, "OUT_MODE   fL\n");
 	fprintf ( fp, "IN_FLAG    -profile1=\n");
@@ -5518,11 +5506,13 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", NCBIBLAST_4_TCOFFEE);
 	vfclose (fp);}
 
+
+	
 	sprintf (list[n][0], "clustalw2_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "DOC: clustalw [%s]\n", CLUSTALW2_ADDRESS);
-	fprintf ( fp, "EXECUTABLE clustalw\n");
+	fprintf ( fp, "EXECUTABLE clustalw2\n");
 	fprintf ( fp, "ALN_MODE   pairwise\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    %sINFILE=\n",CWF);
@@ -5552,7 +5542,7 @@ char *** produce_method_file ( char *method)
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "DOC: clustalw [%s]\n", CLUSTALW_ADDRESS);
-	fprintf ( fp, "EXECUTABLE clustalw\n");
+	fprintf ( fp, "EXECUTABLE clustalw2\n");
 	fprintf ( fp, "ALN_MODE   pairwise\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    %sINFILE=\n", CWF);
@@ -5567,7 +5557,7 @@ char *** produce_method_file ( char *method)
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "DOC clustalw[%s]\n", CLUSTALW_ADDRESS);
-	fprintf ( fp, "EXECUTABLE clustalw\n");
+	fprintf ( fp, "EXECUTABLE clustalw2\n");
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    %sINFILE=\n", CWF);

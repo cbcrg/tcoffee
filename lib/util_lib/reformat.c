@@ -4729,7 +4729,7 @@ void read_aln (char *file_name, Alignment *A)
   else
     {
       S=get_fasta_sequence ( tmp_name,NULL);
-      A=seq2aln (S, A, 0);  
+      A=seq2aln (S,A, 0);  
     }
   return;
 }
