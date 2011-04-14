@@ -2,6 +2,7 @@
 # -filter field <field name> contains|equals|min|max value
 # -bin
 use HTTP::Date;
+use Data::Dumper;
 use strict;
 use FileHandle;
 
@@ -35,8 +36,8 @@ if ($#ARGV ==-1)
     print "  ................................Mode: 'topology' creates a model with -nst states\n";
     print "  ................................number of emission is set to the number of bin in data or to -nem\n";
     
-    print "  -nem         <int>..............Number of emmissions when -model=toplogy\n";
-    print "  -nst         <int>..............Number of states when -model=toplogy\n";
+    print "  -nem         <int>..............Number of emmissions when -model=topology\n";
+    print "  -nst         <int>..............Number of states when -model=topology\n";
     print "  -constraints <file>,<mode>'.....File: input a model where every transition/emission become a seed.\n";
     print "  ................................Mode: 1 to forbid every undeclared transition/emission.\n";
     print "  -data  <file1 file2.. >,<mode>..File: input data from file(s).\n";
@@ -49,6 +50,7 @@ if ($#ARGV ==-1)
     print "  -nrounds     <value>............Value; number of trainned models.\n";
     print "  -nit         <value>............Value: number of iterations in each round of trainning\n";
     print "  -outmodel    <file>.............File:  name of the output file containning the trainned model.\n";
+    print "  -outmodel_f  <mode>.............Mode:  zeros or default.\n";
     print "  -output      <mode>.............Mode: data or fasta.\n";
     print "  -outdata     <file>.............File:  name of the output file containning the decoded data.\n";
     print "  -evaluate    <mode>.............Mode: 'posterior' evaluate posterior decoding predictions.\n";
@@ -191,7 +193,15 @@ if ($Model && $param->{outmodel} ne "no")
   {
     printf "      Model       : $param->{outmodel}\n";
     printf "      Constraints : $param->{outconstraints}\n\n";
-    dump_model      ($Model,$param->{outmodel}      ,hash2string($param, "-"));
+
+    if ($param->{outmodel_format} eq "zeros")
+      {
+	dump_model_with_zero    ($Model, $param->{outmodel_with_zero}, hash2string($param, "-"));
+      }
+    elsif ($param->{outmodel_format} eq "default")
+      {
+	dump_model      ($Model,$param->{outmodel}      ,hash2string($param, "-"));
+      }
     dump_constraints($Model,$param->{outconstraints}, hash2string($param, "-"));
   }
 exit (0);
@@ -225,6 +235,7 @@ sub set_output_name
     
     if (!$param->{outdata})       {$param->{outdata}       ="$param->{out}.rhmm.$nst\_$nem.decoded";}
     if (!$param->{outmodel})      {$param->{outmodel}      ="$param->{out}.rhmm.$nst\_$nem.model";}
+    if (!$param->{outmodel_with_zero})      {$param->{outmodel_with_zero}      ="$param->{out}.rhmm.$nst\_$nem.model_zero";}
     if (!$param->{outconstraints}){$param->{outconstraints}="$param->{out}.rhmm.$nst\_$nem.constraints";}
     
     return $param;
@@ -261,6 +272,7 @@ sub check_parameters
     $rp->{nit}=1;
     $rp->{outdata}=1;
     $rp->{outmodel}=1;
+    $rp->{outmodel_format}=1;
     $rp->{evaluate}=1;
     $rp->{output}=1;
     $rp->{out}=1;
@@ -1548,6 +1560,7 @@ sub model2state_list
       }
     return $list;
   }
+
 sub model2emission_list
   {
     my $M=shift;
@@ -1562,6 +1575,7 @@ sub model2emission_list
       }
     return $list;
   }
+
 sub model2index
   {
     my $M=shift;
@@ -2453,6 +2467,42 @@ sub dump_constraints
 		  {
 		    if (exists($model->{$k1}{$k2}{f})){printf $F "#set;$k1;$k2;%.4f;\n",$model->{$k1}{$k2}{v};}
 		  }
+	      }
+	  }
+	if ($F!=*STDOUT){close ($F);}
+      }
+
+sub dump_model_with_zero
+      {
+	my $m=shift;
+	my $file =shift;
+	my $comment =shift;
+	my $sl=model2state_list ($m);
+	my $el=model2emission_list ($m);
+	my $F= new FileHandle;
+	
+	
+	if ($file){vfopen ($F, ">$file");}
+	else {$F=*STDOUT;}
+	
+	print $F "#comment;$comment\n";
+	
+	foreach my $k1 (keys (%$sl))
+	  {
+	    foreach my $k2 (keys (%$sl))
+	      {
+		printf $F "#set;$k1;$k2;%.4f;",$m->{$k1}{$k2}{v};
+		if (exists ($m->{$k1}{$k2}{f})){print$F "fixed;"}
+		print $F "\n";
+	      }
+	  }
+	foreach my $k1 (keys (%$sl))
+	  {
+	    foreach my $k2 (keys (%$el))
+	      {
+		printf $F "#set;$k1;$k2;%.4f;",$m->{$k1}{$k2}{v};
+		if (exists ($m->{$k1}{$k2}{f})){print$F "fixed;"}
+		print $F "\n";
 	      }
 	  }
 	if ($F!=*STDOUT){close ($F);}
