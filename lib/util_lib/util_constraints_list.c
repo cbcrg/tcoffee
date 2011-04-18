@@ -1816,8 +1816,21 @@ Constraint_list *add_entry2list2 (CLIST_TYPE *entry, Constraint_list *CL)
   //adds an entry to the list
   int s2=entry[SEQ2];
   int r2=entry[R2];
- 
-  int i=CL->residue_index[entry[SEQ1]][entry[R1]][0];
+  int s1=entry[SEQ1];
+  int r1=entry[R1];
+  int i;
+  
+  if (r1>(CL->S)->len[s1])
+    {
+      myexit (fprintf_error ( stderr, "Library out of bounds: %s::%d* vs %s::%d", (CL->S)->name[s1], r1, (CL->S)->name[s2], r2));
+    }
+  else if (r2>(CL->S)->len[s2])
+    {
+      myexit (fprintf_error ( stderr, "Library out of bounds: %s::%d vs %s::%d*", (CL->S)->name[s1], r1, (CL->S)->name[s2], r2));
+    }
+  
+  
+  i=CL->residue_index[entry[SEQ1]][entry[R1]][0];
   if (entry[INDEX]){return reset_entry (entry, CL, entry[INDEX]); }
   else if (i==1){insert_entry (entry, CL,1);}
   else
@@ -2561,40 +2574,46 @@ int read_cpu_in_list ( char *fname)
 }
 char * expand_constraint_list_file ( char *file)
 {
-	char *new_file;
-	FILE *IN, *OUT;
-	int a, b, c, n;
-	char **list;
-	static char *buf;
-	
-	if (!token_is_in_file (file,"+BLOCK+"))return file;
-	
-	new_file=vtmpnam (NULL);
-	IN=vfopen ( file,"r");
-	OUT=vfopen (new_file, "w");
-	
-	while ( (c=fgetc (IN))!=EOF)
+  char *new_file;
+  FILE *IN, *OUT;
+  int a, b, c, n;
+  char **list;
+  static char *buf;
+  int line=0;
+  if (!token_is_in_file (file,"+BLOCK+"))return file;
+  
+  new_file=vtmpnam (NULL);
+  IN=vfopen ( file,"r");
+  OUT=vfopen (new_file, "w");
+  
+  while ( (c=fgetc (IN))!=EOF)
+    {
+      ungetc (c, IN);
+      buf=vfgets (buf, IN);
+      line++;
+      if ( !strstr (buf, "+BLOCK+"))
+	fprintf (OUT, "%s", buf);
+      else
 	{
-		ungetc (c, IN);
-		buf=vfgets (buf, IN);
-		if ( !strstr (buf, "+BLOCK+"))
-			fprintf (OUT, "%s", buf);
-		else
+	  list=string2list (buf);
+	  n=atoi (list[2]);
+	  for (a=0; a< n; a++)
+	    {
+	      if (atoi(list[3])<0 || atoi(list[4])<0)
+		myexit (fprintf_error (stderr,"Illegal Coordinates: File %s, Line %d : %s", file,line, buf));
+	      fprintf ( OUT, "%5d %5d ",atoi(list[3])+a, atoi(list[4])+a);
+	      for (b=5; b<atoi(list[0]); b++) 
 		{
-			list=string2list (buf);
-			n=atoi (list[2]);
-			
-			for (a=0; a< n; a++)
-			{
-				fprintf ( OUT, "%5d %5d ",atoi(list[3])+a, atoi(list[4])+a);
-				for (b=5; b<atoi(list[0]); b++) fprintf ( OUT, "%s ", list[b]);
-				fprintf (OUT, "\n");
-			}
-			free_char (list, -1);
+		  if (atoi(list[b])<0){HERE ("*** %s ****", buf); exit (0);}
+		  fprintf ( OUT, "%s ", list[b]);
 		}
+	      fprintf (OUT, "\n");
+	    }
+	  free_char (list, -1);
 	}
-	vfclose (IN); vfclose (OUT);
-	return new_file;
+    }
+  vfclose (IN); vfclose (OUT);
+  return new_file;
 }
 
 
@@ -2644,7 +2663,7 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *in_fname)
 	int a;
 	fname=expand_constraint_list_file (in_fname);
 	NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
-
+	
 	if (!CL)
 	  {
 	    CL=declare_constraint_list_simple(NS);
@@ -2653,6 +2672,7 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *in_fname)
 	
 	index=fix_seq_seq (NS, CL->S);
 	entry=vcalloc ( CL->entry_len+1, sizeof (int));
+	
 	
 	fp=vfopen(fname,"r");
 	while ((c=fgetc(fp))!='#' && c!=EOF){line+=(c=='\n')?1:0;}
@@ -2664,31 +2684,37 @@ Constraint_list * read_constraint_list_file(Constraint_list *CL, char *in_fname)
 		line++;
 		if (buf[0]=='!')continue;
 		else if (buf[0]=='#')
-		{
-			sscanf ( buf, "#%d %d", &s1, &s2);
-			s1--; s2--;
-			if (s1>NS->nseq || s2>NS->nseq)error=1;
-		}
+		  {
+		    sscanf ( buf, "#%d %d", &s1, &s2);
+		    s1--; s2--;
+		    if (s1>NS->nseq || s2>NS->nseq)error=1;
+		  }
 		else
-		{
-			cons=misc=r1=r2=we=0;
-			x=sscanf (buf, "%d %d %d %d %d",&r1,&r2,&we,&cons,&misc);
+		  {
+		    cons=misc=r1=r2=we=0;
+		    x=sscanf (buf, "%d %d %d %d %d",&r1,&r2,&we,&cons,&misc);
+		    
+		    if (r1>NS->len[s1] || r2>NS->len[s2] || x<3)error=1;
+		    else
+		      {
+			int is1, is2, ir1, ir2;
 			
-			if (r1>NS->len[s1] || r2>NS->len[s2] || x<3)error=1;
-			else
-			{
-			  
-			  entry[SEQ1]=index[s1][0];//0-N-1
-			  entry[SEQ2]=index[s2][0];//0-N-1
-			  entry[R1]=index[s1][r1];//1-N
-			  entry[R2]=index[s2][r2];//1-N
-			  entry[WE]=we;//0-1000
-			  entry[CONS]=cons;
-			  entry[MISC]=misc;
-				if (entry[SEQ1]>-1 && entry[SEQ2]>-1 && entry[R1]>0 && entry[R2]>0 && entry[WE]>0)
-					add_entry2list (entry, CL);
-			}
-		}
+			is1=entry[SEQ1]=index[s1][0];//0-N-1
+			is2=entry[SEQ2]=index[s2][0];//0-N-1
+			ir1=entry[R1]=index[s1][r1];//1-N
+			ir2=entry[R2]=index[s2][r2];//1-N
+			entry[WE]=we;//0-1000
+			entry[CONS]=cons;
+			entry[MISC]=misc;
+			if (ir1>(CL->S)->len[is1] || ir2>(CL->S)->len[is2])
+			  {
+			    
+			    myexit(fprintf_error (stderr, "%s::%d -- %s::%d ---- %s::%d %s::%d", NS->name[s1],r1, NS->name[s2],r2, (CL->S)->name[is1],ir1, (CL->S)->name[is2],ir2));
+			  }
+			if (entry[SEQ1]>-1 && entry[SEQ2]>-1 && entry[R1]>0 && entry[R2]>0 && entry[WE]>0)
+			  add_entry2list (entry, CL);
+		      }
+		  }
 		if (error)printf_exit (EXIT_FAILURE,stderr,"Parsing Error [L:%d F:%s S:%s]",line,in_fname,buf);
 	}
 	

@@ -283,6 +283,48 @@ NT_node collapse_sub_tree ( NT_node T,int nseq, int *list, char *new_name)
     }
 }
   
+NT_node collapse_tree (NT_node T, Sequence *S, char *string)
+{
+  char *r, *p;
+  int a;
+  int collapse;
+  
+  if (!T) return NULL;
+  if (!S)
+    {
+      S=tree2seq(T, NULL);
+      T=recode_tree (T,S);
+    }
+  
+  
+  
+  r=strstr(S->name[T->lseq[0]], string);
+  
+  if (!r)collapse=0;
+  else
+    {
+      for (collapse=1,a=1; a<T->nseq && collapse; a++)
+	{
+	  p=strstr((S->name[T->lseq[a]]),string);
+	  if (p && strm (p, r));
+	  else collapse=0;
+	}
+    }
+  if (collapse)
+    {
+      T->isseq=1;
+      T->right=T->left=NULL;
+      T->nseq=1;
+      sprintf ( T->name, "%s", r);
+    }
+  else
+    {
+      collapse_tree (T->left, S, string);
+      collapse_tree (T->right, S, string);
+    }
+  return T;
+}
+
 /*********************************************************************/
 /*                                                                   */
 /*                                   tree pruning                    */
@@ -1371,6 +1413,8 @@ void display_node (NT_node N, char *string,int nseq)
   fprintf ( stderr, "%s", string);
   for (a=0; a< nseq; a++)fprintf ( stderr, "%d", N->lseq2[a]);
 }
+
+
 
 
 /*********************************************************************/

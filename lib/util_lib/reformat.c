@@ -10483,6 +10483,12 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   treelist2dmat (D1->S);
 	 }
+       else if ( strm(action, "tree2collapse") )
+	 {
+	   D1->T=collapse_tree (D1->T, NULL, ACTION(1));
+	   D1->S=tree2seq(D1->T, NULL);
+	   D1->A=seq2aln (D1->S, NULL, RM_GAP);
+	 }
        else if ( strm(action, "tree2node") )
 	 {
 	   print_node_list ( D1->T,(DST)?DST->S:NULL);

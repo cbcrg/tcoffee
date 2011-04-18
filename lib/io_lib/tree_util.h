@@ -90,7 +90,7 @@ NT_node seq2dpa_tree  (Sequence *S, char *align_mode);
 NT_node tree2dpa_tree (NT_node T, Alignment *A, char *matrix4distance);
 FILE * tree2group ( NT_node T,Sequence *S,int maxnseq, int mindist,char *name, FILE *fp);
 
-
+NT_node  collapse_tree (NT_node T, Sequence *S, char *string);
 NT_node  tree2collapsed_tree (NT_node T, int n, char **string);
 
 /*********************************************************************/

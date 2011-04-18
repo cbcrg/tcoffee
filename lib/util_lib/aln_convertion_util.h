@@ -56,6 +56,7 @@ int compare_pos_column( int **pos1,int p1, int **pos2,int p2, int nseq);
 char  * seq2alphabet (Sequence *S);
 double* seq2diaa (char *buf, double *v);
 double* seq2triaa(char *buf, double *v);
+double* seq2tetraa(char *buf, double *v);
 
 char *aln2alphabet (Alignment *A);
 char *array2alphabet (char **array, int n, char *forbiden);

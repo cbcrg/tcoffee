@@ -1160,7 +1160,7 @@ Alignment * upgma_merge_aln_rows (Alignment *A, int *ns, int **ls,int N, int**ma
 	mat[best_a][a]=mat[a][best_a]=upgma_pair_wise (A, ls[best_a], ns[best_a], ls[a], ns[a], CL);
     }
   
-  HERE ("DONE");
+  
   
   n[0]--;
   return A;
@@ -1237,7 +1237,15 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
       for (a=0; a<A->nseq; a++) v[a]=seq2triaa(S->seq[a], v[a]);
       use_len=1;
     }
-   else if (strstr (mode, "msar"))
+  else if ( strstr (mode, "tetraa"))
+    {
+      mdim=26*26*26*26;
+      v=declare_double (A->nseq,mdim+4);
+      for (a=0; a<A->nseq; a++) v[a]=seq2tetraa(S->seq[a], v[a]);
+      use_len=1;
+    }
+  
+  else if (strstr (mode, "msar"))
     {
       int start=rand()%(A->len_aln-110);
       int end=start+100;
@@ -1433,7 +1441,7 @@ NT_node    aln2km_tree (Alignment *A, char *mode, int nboot)
   NT_node T;
   double **V;
   Sequence *S;
-  int dim=60;//Keep all the vector components summing up to 50% of the cumulated sd
+  int dim=50;//Keep all the vector components summing up to x% of the cumulated sd
   
   KA=A;
   S=KS=aln2seq(A);

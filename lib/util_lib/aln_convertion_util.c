@@ -1033,6 +1033,55 @@ char *seq2alphabet (Sequence *S)
 {
   return array2alphabet (S->seq, S->nseq, "");
 }
+
+double *seq2tetraa (char *seq, double *v)
+{
+  static int ****diaa;
+  int tot=0;
+  int l=strlen (seq);
+  int a,a1,a2,a3,a4,b,c,d,e;
+  
+  
+  if (!diaa)
+    {
+      diaa=vcalloc ( 26, sizeof(int***));
+      for (a=0; a<26; a++)
+	{
+	  diaa[a]=vcalloc (26, sizeof (int**));
+	  for (b=0; b<26; b++)
+	    {
+	      diaa[a][b]=vcalloc (26, sizeof(int*));
+	      for (c=0; c<26; c++)
+		diaa[a][b][c]=vcalloc (26, sizeof(int));
+	    }
+	}
+    }
+  
+  for (a=0; a<l-3;a++)
+    {
+      a1=tolower(seq[a])-'a';
+      a2=tolower(seq[a+1])-'a';
+      a3=tolower(seq[a+2])-'a';
+      a4=tolower(seq[a+3])-'a';
+      
+      if (a1<0 || a2<0 || a3<0 || a4<0)continue;
+      diaa[a1][a2][a3][a4]++;
+      tot++;
+    }
+  
+  if (!v)v=malloc (26*26*26*26*sizeof (double));
+  for (e=0,a=0; a<26; a++)
+    for (b=0; b<26; b++)
+      for (c=0; c<26; c++)
+	for (d=0;d<26; d++,e++) 
+	{
+	  v[e]=(double)diaa[a][b][c][d]/(double)tot;
+	  diaa[a][b][c][d]=0;
+	}
+  
+  return v;
+}
+
 double *seq2triaa (char *seq, double *v)
 {
   static int ***diaa;
