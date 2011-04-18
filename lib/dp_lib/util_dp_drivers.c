@@ -1541,27 +1541,18 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    int max_struc_len=10000;
 	    char *template1, *template2;
 	    int c;
-
-	    /*check_program_is_installed ( "sap"                   ,SAP_4_TCOFFEE, "SAP_4_TCOFFEE",MAIL, IS_FATAL);*/
-
-	    
+	    	    
 	    atoi(strtok (seq,SEPARATORS));
 	    s1=atoi(strtok (NULL,SEPARATORS));
 	    s2=atoi(strtok (NULL,SEPARATORS));
-
+	    
 	    template1=seq2T_value(CL->S,s1, "template_name", "_P_");
 	    template2=seq2T_value(CL->S,s2, "template_name", "_P_");
-
+	    
 	    
 	    if (!template1 || !template2) return CL;
 
-
-	    declare_name (string1);
-	    declare_name (string2);
-	    declare_name (string3);
-	    declare_name (string4);
-	    declare_name (string5);
-
+	    
 #ifndef     SAP_4_TCOFFEE
 	    if ( getenv ( "SAP_4_TCOFFEE")==NULL)crash ("SAP_4_TCOFFEE IS NOT DEFINED");
 	    else  sprintf ( program, "%s", (getenv ( "SAP_4_TCOFFEE")));
@@ -1571,12 +1562,11 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 #endif
 
 
-
+	    
 	    tmp_name1=vcalloc (100, sizeof (char));
 	    sprintf ( tmp_name1, "%s_%s.sap_results",template1,template2);
 	    tmp_name2=vcalloc (100, sizeof (char));
 	    sprintf ( tmp_name2, "%s_%s.sap_results",template2,template1);
-
 
 
 	    if (is_sap_file (tmp_name1))
@@ -1592,7 +1582,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	      {
 		char local1[100];
 		char local2[100];
-		char cdir[1000];
+		char cdir[1001];
 		
 		tmp_name=tmp_name1;
 
@@ -1601,9 +1591,8 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		sprintf ( full_name, "%s%s", get_cache_dir (), tmp_name);
 		
 		//pb: sap crashes when file names are too long
-		//solution: create shorter names
-		//To ease server, create files in tmp dir
-		
+		//solution: create shorter names and chdir
+				
 		getcwd (cdir, sizeof(char)*1000);
 		chdir (get_cache_dir());
 		
@@ -1615,7 +1604,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		printf_system ("rm %s", local1);
 		printf_system ("rm %s", local2);
 		chdir (cdir);
-		
+				
 		if ( !check_file_exists (full_name) || !is_sap_file(full_name))
 		  {
 		    add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
@@ -1626,22 +1615,19 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		remove ("super.pdb");
 	      }
 
-
-
 	    sap_seq1=vcalloc (max_struc_len, sizeof (char));
 	    sap_seq2=vcalloc (max_struc_len, sizeof (char));
 	    
 	    fp=find_token_in_file ( tmp_name, NULL, "Percent");
 	    fp=find_token_in_file ( tmp_name, fp  , "Percent");
-	    while ( (c=fgetc (fp))!='\n' && c!=EOF)fprintf ( fp, "%c", c);
+	    while ( (c=fgetc (fp))!='\n' && c!=EOF);
 	    while ((buf=vfgets (buf, fp)))
 	      {
 		char r1, r2;
 		remove_charset (buf, "*");
-		
 		if ( strstr (buf, "eighted"));
 		else if (strstr (buf, "RMSd"));
-		else if (sscanf (buf, "%s %*d %*f %*d %s", &r1,&r2)==2)
+		else if (sscanf (buf, " %c %*d %*f %*d %c", &r1,&r2)==2)
 		  {
 		    if (!isalpha(r1) || !isalpha(r2))continue;
 		    sim+=(r1==r2)?1:0;
@@ -1656,52 +1642,52 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		    tot++;
 		  }
 	      }
-	   
-	    vfclose (fp);
-	    sim=(sim*100)/tot;
-
-	    if ( is_number (weight))score=atoi(weight);
-	    else if ( strstr ( weight, "OW"))
-	      {
-		int ow;
-		sscanf ( weight, "OW%d", &ow);
-		score=sim*ow;
-	      }
-	    else
-	      {
-		score=sim;
-	      }
-
-
-	    vfclose (fp);
-	    sap_seq1[tot]=sap_seq2[tot]='\0';
-
-
-	    fp=vfopen ( sap_lib=vtmpnam(NULL), "w");
-	    fprintf (fp, "! TC_LIB_FORMAT_01\n");
-	    fprintf (fp, "2\n");
-	    fprintf (fp, "%s %d %s\n", (CL->S)->name[s2],(int)strlen (sap_seq1), sap_seq1);
-	    fprintf (fp, "%s %d %s\n", (CL->S)->name[s1],(int)strlen (sap_seq2), sap_seq2);
-	    fprintf (fp, "#1 2\n");
-
-
-
-	    //HERE ("\n%s\n%s\n%s\n\n%s\n%s\n%s", (CL->S)->name[s1],(CL->S)->seq[s1], sap_seq1, (CL->S)->name[s2],(CL->S)->seq[s2], sap_seq2);exit (0); 
-	    for ( a=0; a< tot; a++)
-	      {
-		fprintf (fp, "%d %d %d 1 0\n", a+1, a+1, score);
-	      }
 	    
-	    fprintf (fp, "! CPU 0\n");
-	    fprintf (fp, "! SEQ_1_TO_N\n");
 	    vfclose (fp);
 	    
 	    
-	    CL=read_constraint_list_file(CL,sap_lib);
+
+	    if (tot>0)
+	      {
+		sim=(sim*100)/tot;
+		if ( is_number (weight))score=atoi(weight);
+		else if ( strstr ( weight, "OW"))
+		  {
+		    int ow;
+		    sscanf ( weight, "OW%d", &ow);
+		    score=sim*ow;
+		  }
+		else
+		  {
+		    score=sim;
+		  }
+		
+		sap_seq1[tot]=sap_seq2[tot]='\0';
+		
+		
+		fp=vfopen ( sap_lib=vtmpnam(NULL), "w");
+		fprintf (fp, "! TC_LIB_FORMAT_01\n");
+		fprintf (fp, "2\n");
+		fprintf (fp, "%s %d %s\n", (CL->S)->name[s2],(int)strlen (sap_seq1), sap_seq1);
+		fprintf (fp, "%s %d %s\n", (CL->S)->name[s1],(int)strlen (sap_seq2), sap_seq2);
+		fprintf (fp, "#1 2\n");
+		
+		
+		for ( a=0; a< tot; a++)
+		  {
+		    fprintf (fp, "%d %d %d 1 0\n", a+1, a+1, score);
+		  }
+		
+		fprintf (fp, "! CPU 0\n");
+		fprintf (fp, "! SEQ_1_TO_N\n");
+		vfclose (fp);
+				
+		CL=read_constraint_list_file(CL,sap_lib);
+	      }
 	    
 	    vremove (sap_lib);
 	    
-	    vfree ( string1);vfree ( string2);vfree ( string3);vfree ( string4);vfree ( string5);
+
 	    vfree (sap_seq1); vfree(sap_seq2);vfree (tmp_name1); vfree(tmp_name2);
 	    vfree (buf);
 	    return CL;
