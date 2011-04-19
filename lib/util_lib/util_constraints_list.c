@@ -4999,8 +4999,8 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "EXTEND_SEQ 1\n");
 	fprintf ( fp, "MATRIX     promoter_tf1\n");
-	fprintf ( fp, "GOP        -40\n");
-	fprintf ( fp, "GEP        0\n");
+	fprintf ( fp, "GOP        -60\n");
+	fprintf ( fp, "GEP        -1\n");
 	fprintf ( fp, "WEIGHT     extend_sim\n");
 	
 	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);

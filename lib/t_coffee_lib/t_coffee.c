@@ -5089,7 +5089,7 @@ char *get_procoffee_defaults(char *buf, char *type)
 
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
 
-     buf=strcat (buf,"-in Mpromo_pair -extend_seq -dp_mode procoffee_pair_wise -seq_weight t_coffee  ");
+     buf=strcat (buf,"-in Mpromo_pair -extend_seq  ");
      /*buf=strcat (buf,"-in ");*/
 
      return buf;
