@@ -4487,7 +4487,8 @@ char *get_tmp_4_tcoffee ()
 
       
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if (v && strstr (v, "TMP"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP_4_TCOFFEE"));
+      else if (v && strstr (v, "TMP_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP_4_TCOFFEE"));
+      else if (v && strstr (v, "TMP"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP"));
       else if (v && strstr (v, "LOCAL"))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
       else if (v && strm (v, "."))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
       else if (v)sprintf (tmp_4_tcoffee, "%s", v);
