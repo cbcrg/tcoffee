@@ -10,7 +10,7 @@ typedef struct
       char format[100];
       char file[100];
       int rm_gap;
-      
+
 }Sequence_data_struc;
 
 typedef struct
@@ -30,7 +30,7 @@ int get_msa_line_length (int line, int aln_len);
 
 int seq_reformat (int argc, char **argv);
 
-Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,Action_data_struc *RAD); 
+Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,Action_data_struc *RAD);
 Alignment * main_read_aln ( char *name, Alignment *A);
 Sequence  * read_sequences ( char *name);
 Sequence  * read_alifold   ( char *name);
@@ -100,7 +100,7 @@ int is_struc_out_format_list ( char *name);
 
 char *** read_rename_file ( char *fname, int mode);
 void get_barton_list_tc_seq ( char *in_file);
-int process_barton_entry (char *buf, char *name);  
+int process_barton_entry (char *buf, char *name);
 
 Structure *read_rna_struc_number ( Alignment *A, char *fname);
 char ** read_lib_list (char *name, int *n);
@@ -162,7 +162,7 @@ int output_freq_mat ( char *outfile, Alignment *A);
 /*                                                                                         */
 /*                               OUTPUT P-Values                                           */
 /*                                                                                         */
-/***************************************************************************************** */	
+/***************************************************************************************** */
 float output_maln_pval ( char *outfile, Alignment *A);
 /*******************************************************************************************/
 /*                                                                                         */
@@ -218,7 +218,8 @@ char * output_fasta_sub_aln (char *fname, Alignment*A, int ns, int *ls  );
 char * output_fasta_sub_aln2 (char *fname, Alignment*A, int *ns, int **ls  );
 
 void ouput_suchard_aln ( char *fname,Alignment*A);
-void output_fasta_aln  ( char *fname,Alignment*A);
+void output_fasta_aln  ( char *fname, Alignment *A);
+void output_xmfa_aln  ( char *fname, Alignment *A);
 void output_msf_aln    ( char *fname,Alignment*B);
 FILE * output_generic_interleaved_aln (FILE *fp, Alignment *B, int line, char gap, char *mode);
 void output_stockholm_aln (char *file, Alignment *A, Alignment *ST);
@@ -307,10 +308,10 @@ int get_best_match ( char *seq1, char *seq2);
 int** extract_m_diag_streches ( int ** m, int l1, int l2,char *seq1, char *seq2, int *n_mdiag);
 int is_strech ( char *AA, char *seq1, char *seq2, int len, int x, int y);
 
-int search_for_cluster ( int seq, int cluster_number, int *cluster_list, int T, int nseq, int **S);	
+int search_for_cluster ( int seq, int cluster_number, int *cluster_list, int T, int nseq, int **S);
 int * SHC ( int nseq, int **NST, int **ST);
 int mutate_sol (int *sol, int nseq);
-int evaluate_sol ( int*sol, int nseq, int **ST, int **NST);	
+int evaluate_sol ( int*sol, int nseq, int **ST, int **NST);
 
 
 
@@ -351,7 +352,7 @@ char * translate_dna_seq ( char *dna_seq, int frame, char stop, char *prot);
 int is_stop (char r1, char r2, char r3);
 int seq2tblastx_db (char *file,Sequence *S, int strand);
 int seq2blastdb (char *out, Sequence *S);
-char * back_translate_dna_seq ( char *in_seq,char *out_seq, int mode);     
+char * back_translate_dna_seq ( char *in_seq,char *out_seq, int mode);
 Alignment *back_translate_dna_aln (Alignment *A);
 Sequence  *translate_dna_seqS     (Sequence *S, int frame, int stop);
 Alignment *translate_dna_aln (Alignment *A, int frame);
@@ -365,7 +366,7 @@ Alignment *clean_est      (Alignment *A);
 /********************************    PROCESSING        ********************************************/
 /*************** ****************                      ********************************************/
 void modify_data  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_data_struc *DST, char **action_list,int n_actions, Action_data_struc *RAD);
-   
+
 //
 // Name MAnipulation
 //

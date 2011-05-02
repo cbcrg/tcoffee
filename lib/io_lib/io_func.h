@@ -1,6 +1,6 @@
 typedef struct
     {
-    int in_seq;	
+    int in_seq;
     FILE *fp;
     int font;
     int x0;
@@ -14,7 +14,7 @@ typedef struct
     int eop;
     int in_html_span;
     char previous_html_color[100];
-   
+
     }
 FILE_format;
 
@@ -24,13 +24,13 @@ typedef struct
     float g;
     float b;
     char html_color[30];
-    char html_color_class[30]; 
+    char html_color_class[30];
     int ascii_value;
     }
 Color;
 
 
-Sequence * fill_sequence_struc ( int nseq, char **sequences, char **seq_name);
+Sequence * fill_sequence_struc ( int nseq, char **sequences, char **seq_name, Genomic_info *genome_co);
 Sequence * cw_read_sequences ( char *seq_name);
 Sequence * get_sequence_type (Sequence *S);
 char     * get_array_type (int n, char **s);
@@ -52,7 +52,7 @@ void get_sequence (char *seq_file,int *NSEQ, char ***SEQ, char ***SN, int **sl, 
 
 int ** get_matrix   ( char *name, char *format);
 int ** read_matrice (char *mat_name);
-int **neg_matrix2pos_matrix ( int **matrix);   
+int **neg_matrix2pos_matrix ( int **matrix);
 
 
 void   print_aln ( Alignment *B);

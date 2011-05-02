@@ -35,35 +35,35 @@ Constraint_list *profile2list     (Job_TC *job, int nprf)
   int ***RI, ***NRI;
   Sequence *RS;
   int Rne;
-  
+
   int *seqlist;
   int **cache;
   static int *entry;
 
-  
+
   if (!entry)entry=vcalloc ( ICHUNK+3, sizeof (int));
-  
+
   CL=(job->io)->CL;
   //1- buffer CL
-  
+
   RS=CL->S;
   RI=CL->residue_index;
   Rne=CL->ne;
   M=(job->param)->TCM;
-  
-  
-   
-  
-  
-  
+
+
+
+
+
+
   //Index
   seqlist=string2num_list ((job->param)->seq_c)+1;
   A1=seq2profile(CL->S, seqlist[1]);
   A2=seq2profile(CL->S, seqlist[2]);
-   
+
   S=merge_seq (A1->S, NULL  );
   S=merge_seq (A2->S, S);
-      
+
   iA1=get_name_index (A1->name,A1->nseq, S->name, S->nseq);
   iA2=get_name_index (A2->name,A2->nseq, S->name, S->nseq);
   cache=vcalloc ( S->nseq, sizeof (int*));
@@ -74,7 +74,7 @@ Constraint_list *profile2list     (Job_TC *job, int nprf)
   CL->S=S;
   CL->residue_index=declare_residue_index(S);
   CL->ne=0;
-  
+
   //Compute lib
    for (a=0; a<A1->nseq; a++)
      for ( b=0; b<A2->nseq; b++)
@@ -84,22 +84,22 @@ Constraint_list *profile2list     (Job_TC *job, int nprf)
 	 job=print_lib_job (job, "param->seq_c=%s", buf);
 	 CL=seq2list (job);
        }
-   
+
    //restaure CL;
    CL->S=RS;
    NRI=CL->residue_index;
    CL->residue_index=RI;
    CL->ne=Rne;
-   
 
-  
+
+
    //incorporate new lib
    entry[SEQ1]=seqlist[1];
    entry[SEQ2]=seqlist[2];
    for (a=0; a<A1->nseq; a++)
      {
        s1=iA1[a];
-       
+
        for (r1=1; r1<=S->len[s1];r1++)
 	 {
 	   for (b=1; b<NRI[s1][r1][0]; b+=ICHUNK)
@@ -107,7 +107,7 @@ Constraint_list *profile2list     (Job_TC *job, int nprf)
 	       int s2=NRI[s1][r1][b+SEQ2];
 	       int r2=NRI[s1][r1][b+R2];
 	       int w2=NRI[s1][r1][b+WE];
-	       
+
 	       entry[R1]=cache[s1][r1];
 	       entry[R2]=cache[s2][r2];
 	       entry[WE]=w2;
@@ -117,7 +117,7 @@ Constraint_list *profile2list     (Job_TC *job, int nprf)
 	     }
 	 }
      }
-   
+
    free_int (cache, -1);
    free_arrayN (NRI, 3);
    vfree (entry);
@@ -161,7 +161,7 @@ Constraint_list *seq2list     ( Job_TC *job)
 
       seqlist=string2num_list (seq)+1;
 
-      
+
 
 /*Proteins*/
 
@@ -262,7 +262,7 @@ Constraint_list *seq2list     ( Job_TC *job)
 	{
 	  RCL=profile_pair (M, seq, CL);
 	}
-      
+
       else if ( strm (mode, "sap_pair"))
 	{
 	  RCL=sap_pair (seq, weight, CL);
@@ -368,7 +368,7 @@ Constraint_list *method2pw_cl (TC_method *M, Constraint_list *CL)
 
       if (M->extend_seq ==1) PW_CL->extend_seq=1;
       if (M->reverse_seq==1)PW_CL->reverse_seq=1;
-      
+
 
       if ( strm2 ( mode,"fast_pair", "ifast_pair"))
 	    {
@@ -1006,7 +1006,7 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  int r1, r2, s1, s2,a,c;
 	  float sc, ss, we;
 	  char *buf;
-	  
+
 	  seq=vcalloc ( strlen (in_seq)+1, sizeof (char));
 	  entry=vcalloc (CL->entry_len+1, sizeof (int));
 
@@ -1018,7 +1018,7 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  A1=seq2R_template_profile(CL->S,s1);
 	  A2=seq2R_template_profile(CL->S,s2);
 	  buf=vcalloc (strlen ((CL->S)->seq[s1])+strlen ((CL->S)->seq[s2])+1, sizeof (char));
-	  
+
 	  aln1=vtmpnam (NULL);
 	  prf1=vtmpnam(NULL);
 	  fp=vfopen (aln1, "w");
@@ -1034,11 +1034,11 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 		  fprintf ( fp, ">%s\n%s\n",A1->name[a], buf);
 		}
 	    }
-	  
+
 	  vfclose (fp);
 	  printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first  >/dev/null 2>/dev/null", aln1, prf1);
-	  
-	  
+
+
 	  aln2=vtmpnam (NULL);
 	  prf2=vtmpnam(NULL);
 	  fp=vfopen (aln2, "w");
@@ -1055,16 +1055,16 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	    }
 	  vfclose (fp);
 	  printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first >/dev/null 2>/dev/null", aln2, prf2);
-	  
-	  
+
+
 	  //make the prf prf alignment
 	  hhfile=vtmpnam(NULL);
 	  printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global  >/dev/null 2>/dev/null", prf1, prf2, hhfile);
-	 
+
 	  //parse the output
 	  fp=vfopen (hhfile, "r");
 	  while ((c=fgetc(fp))!='\n');
-	  
+
 	  while (fscanf (fp, "%d %d %f %f %f\n", &r1, &r2, &sc, &ss, &we)==5)
 	    {
 	      entry[SEQ1]=s1;
@@ -1094,7 +1094,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	  char *param;
 
 	  if ( strm (M->executable2, "hhalign"))return hh_pair (M ,in_seq, CL);
-	  
+
 	  if ( M->executable2[0]=='\0')
 	    fprintf ( stderr, "\nERROR: profile_pair requires a method: thread_pair@EP@executable2@<method> [FATAL:%s]\n", PROGRAM);
 
@@ -1313,7 +1313,7 @@ Constraint_list * seq_msa (TC_method *M , char *in_seq, Constraint_list *CL)
   FILE *fp;
   char command[1000];
   static char *db_file;
-  
+
 
   if (!(CL->S)->blastdb)
     {
@@ -1321,14 +1321,14 @@ Constraint_list * seq_msa (TC_method *M , char *in_seq, Constraint_list *CL)
       seq2blastdb ((CL->S)->blastdb, (CL->S));
     }
   db_file=(CL->S)->blastdb;
-  
+
   infile=vtmpnam (NULL);
   outfile=vtmpnam (NULL);
 
   sprintf ( seq, "%s", in_seq);
 
   n=atoi(strtok (seq,SEPARATORS));
-  
+
   fp=vfopen (infile, "w");
   for ( a=0; a<n; a++)
     {
@@ -1336,18 +1336,18 @@ Constraint_list * seq_msa (TC_method *M , char *in_seq, Constraint_list *CL)
       fprintf (fp, ">%s\n%s\n", (CL->S)->name[s], (CL->S)->seq[s]);
     }
   vfclose (fp);
-  
+
   if (strstr (M->executable2, "blast"))sprintf ( db, " -database=%s", db_file);
   else db[0]='\0';
-  
+
   if (strm ((CL->S)->type, "DNA") ||strm ((CL->S)->type, "RNA" )){sprintf ( M->executable2, "blastn");}
   else {sprintf ( M->executable2, "blastp");}
-  
+
   sprintf ( command, "t_coffee -other_pg tc_generic_method.pl -mode=%s -method=%s %s %s%s %s %s%s -tmpdir=%s %s %s", M->executable, M->executable2, M->param1,M->in_flag,infile,M->param2,M->out_flag,outfile,get_tmp_4_tcoffee(),db,M->param);
 
-      
-	
-  
+
+
+
   //HERE ("%s", command);exit (0);
   //sprintf ( command, "t_coffee -other_pg tc_generic_method.pl -mode=seq_msa -method=%s %s%s %s%s -tmpdir=%s %s", M->executable2, M->in_flag, infile, M->out_flag, outfile, get_tmp_4_tcoffee(), M->param);
   my_system (command);
@@ -1378,7 +1378,7 @@ Constraint_list * seq_msa (TC_method *M , char *in_seq, Constraint_list *CL)
 	{
 	  CL=NCL;
 	}
-      
+
     }
   return CL;
 }
@@ -1541,18 +1541,18 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    int max_struc_len=10000;
 	    char *template1, *template2;
 	    int c;
-	    	    
+
 	    atoi(strtok (seq,SEPARATORS));
 	    s1=atoi(strtok (NULL,SEPARATORS));
 	    s2=atoi(strtok (NULL,SEPARATORS));
-	    
+
 	    template1=seq2T_value(CL->S,s1, "template_name", "_P_");
 	    template2=seq2T_value(CL->S,s2, "template_name", "_P_");
-	    
-	    
+
+
 	    if (!template1 || !template2) return CL;
 
-	    
+
 #ifndef     SAP_4_TCOFFEE
 	    if ( getenv ( "SAP_4_TCOFFEE")==NULL)crash ("SAP_4_TCOFFEE IS NOT DEFINED");
 	    else  sprintf ( program, "%s", (getenv ( "SAP_4_TCOFFEE")));
@@ -1562,7 +1562,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 #endif
 
 
-	    
+
 	    tmp_name1=vcalloc (100, sizeof (char));
 	    sprintf ( tmp_name1, "%s_%s.sap_results",template1,template2);
 	    tmp_name2=vcalloc (100, sizeof (char));
@@ -1583,19 +1583,19 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		char local1[100];
 		char local2[100];
 		char cdir[1001];
-		
+
 		tmp_name=tmp_name1;
 
 		tmp_pdb1=normalize_pdb_file(seq2P_template_file(CL->S,s1),(CL->S)->seq[s1], vtmpnam (NULL));
 		tmp_pdb2=normalize_pdb_file(seq2P_template_file(CL->S,s2),(CL->S)->seq[s2], vtmpnam (NULL));
 		sprintf ( full_name, "%s%s", get_cache_dir (), tmp_name);
-		
+
 		//pb: sap crashes when file names are too long
 		//solution: create shorter names and chdir
-				
+
 		getcwd (cdir, sizeof(char)*1000);
 		chdir (get_cache_dir());
-		
+
 		sprintf (local1, "%d_1.%d.sap_tmp", getpid(), rand()%10000);
 		sprintf (local2, "%d_2.%d.sap_tmp", getpid(), rand()%10000);
 		printf_system ("cp %s %s", tmp_pdb1, local1);
@@ -1604,7 +1604,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		printf_system ("rm %s", local1);
 		printf_system ("rm %s", local2);
 		chdir (cdir);
-				
+
 		if ( !check_file_exists (full_name) || !is_sap_file(full_name))
 		  {
 		    add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
@@ -1617,7 +1617,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 
 	    sap_seq1=vcalloc (max_struc_len, sizeof (char));
 	    sap_seq2=vcalloc (max_struc_len, sizeof (char));
-	    
+
 	    fp=find_token_in_file ( tmp_name, NULL, "Percent");
 	    fp=find_token_in_file ( tmp_name, fp  , "Percent");
 	    while ( (c=fgetc (fp))!='\n' && c!=EOF);
@@ -1638,14 +1638,14 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		      }
 		    sap_seq1[tot]=r1;
 		    sap_seq2[tot]=r2;
-		    
+
 		    tot++;
 		  }
 	      }
-	    
+
 	    vfclose (fp);
-	    
-	    
+
+
 
 	    if (tot>0)
 	      {
@@ -1661,32 +1661,32 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		  {
 		    score=sim;
 		  }
-		
+
 		sap_seq1[tot]=sap_seq2[tot]='\0';
-		
-		
+
+
 		fp=vfopen ( sap_lib=vtmpnam(NULL), "w");
 		fprintf (fp, "! TC_LIB_FORMAT_01\n");
 		fprintf (fp, "2\n");
 		fprintf (fp, "%s %d %s\n", (CL->S)->name[s2],(int)strlen (sap_seq1), sap_seq1);
 		fprintf (fp, "%s %d %s\n", (CL->S)->name[s1],(int)strlen (sap_seq2), sap_seq2);
 		fprintf (fp, "#1 2\n");
-		
-		
+
+
 		for ( a=0; a< tot; a++)
 		  {
 		    fprintf (fp, "%d %d %d 1 0\n", a+1, a+1, score);
 		  }
-		
+
 		fprintf (fp, "! CPU 0\n");
 		fprintf (fp, "! SEQ_1_TO_N\n");
 		vfclose (fp);
-				
+
 		CL=read_constraint_list_file(CL,sap_lib);
 	      }
-	    
+
 	    vremove (sap_lib);
-	    
+
 
 	    vfree (sap_seq1); vfree(sap_seq2);vfree (tmp_name1); vfree(tmp_name2);
 	    vfree (buf);
@@ -1959,12 +1959,12 @@ Constraint_list *hash_pair (TC_method *M , char *in_seq, Constraint_list *CL)
   int a, b, c,d,i,j,is,ij;
   static int **mat;
   int **diag;
-  
+
   if (!mat)mat=read_matrice ("blosum62mt");
-  
+
   seq=vcalloc ( strlen (in_seq)+1, sizeof (char));
   entry=vcalloc (CL->entry_len+1, sizeof (int));
-  
+
   sprintf ( seq, "%s", in_seq);
   atoi(strtok (seq,SEPARATORS));
   s1=atoi(strtok (NULL,SEPARATORS));
@@ -1975,9 +1975,9 @@ Constraint_list *hash_pair (TC_method *M , char *in_seq, Constraint_list *CL)
   l2=strlen (seq2);
   diag=declare_int (l1+l2+1, 2);
   for (a=0; a<(l1+l2); a++)diag[a][0]=a;
-  
+
   shash_init (&h,l1*2,1);
-  
+
   for (a=0; a<l1-ktup; a++) shash_insert (&h,seq1+a,a);
   for (a=0; a<l2-ktup; a++)
     {
@@ -1995,7 +1995,7 @@ Constraint_list *hash_pair (TC_method *M , char *in_seq, Constraint_list *CL)
   for (a=0; a<5; a++)
     {
       d=diag[a][0];
-      
+
       if (d<l1){is=l1-d;ij=0;}
       else {is=0; ij=d-l1;}
       for (i=is, j=ij; i<l1 && j<l2; i++, j++)
@@ -2006,16 +2006,16 @@ Constraint_list *hash_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  entry[R2]=j+1;
 	  r1=tolower(seq1[i]);
 	  r2=tolower(seq2[j]);
-	  entry[WE]=mat[r1-'a'][r2-'a']; 
+	  entry[WE]=mat[r1-'a'][r2-'a'];
 	  add_entry2list (entry,CL);
 	}
-      
+
     }
   free_int (diag,-1);
   shash_destroy(&h);
-  
+
   return CL;
-  } 
+  }
 Alignment * fast_pair      (Job_TC *job)
         {
 	    int s, n,a;
@@ -2079,7 +2079,7 @@ Alignment * fast_pair      (Job_TC *job)
 	    ns[0]=ns[1]=1;
 	    l_s[0][0]=0;
 	    l_s[1][0]=1;
-	    
+
 	    //Preprocessing of the sequences
 	    if (PW_CL->reverse_seq)
 	      {
@@ -2090,11 +2090,11 @@ Alignment * fast_pair      (Job_TC *job)
 	      }
 	    if (PW_CL->extend_seq)//use te alphabet extension for nucleic acids
 	      {
-		
+
 		extend_seqaln (A->S,NULL);
 		extend_seqaln (NULL,A);
 	      }
-	    
+
 	    score=pair_wise ( A, ns, l_s, PW_CL);
 	    //PostProcessing of the sequences
 	    if (PW_CL->reverse_seq)
@@ -2122,7 +2122,7 @@ Alignment * fast_pair      (Job_TC *job)
 
 	}
 Alignment * align_two_aln ( Alignment *A1, Alignment  *A2, char *in_matrix, int gop, int gep, char *in_align_mode)
-        {
+{
 	Alignment *A=NULL;
 	Constraint_list *CL;
 	Sequence *S;
@@ -2134,7 +2134,7 @@ Alignment * align_two_aln ( Alignment *A1, Alignment  *A2, char *in_matrix, int 
 
 	if (!matrix)matrix=vcalloc ( 100, sizeof (char));
 	if (!align_mode)align_mode=vcalloc ( 100, sizeof (char));
-	
+
 
 
 	sprintf ( matrix, "%s", in_matrix);
@@ -2164,7 +2164,8 @@ Alignment * align_two_aln ( Alignment *A1, Alignment  *A2, char *in_matrix, int 
 
 	A=copy_aln (A1, A);
 	A=stack_aln (A, A2);
-	CL->S=fill_sequence_struc(A->nseq, A->seq_al,A->name);
+// 	printf("AAAAAAAAAAAAA\n");
+	CL->S=fill_sequence_struc(A->nseq, A->seq_al,A->name,NULL);
 
 	ns=vcalloc ( 2, sizeof(int));
 	ls=declare_int ( 2,A->nseq);
@@ -2183,15 +2184,22 @@ Alignment * align_two_aln ( Alignment *A1, Alignment  *A2, char *in_matrix, int 
 	free_sequence (S,-1);
 	A->S=NULL;
 	return A;
-	}
+}
+
+
 
 static int align_two_seq_keep_case;
 void toggle_case_in_align_two_sequences(int value)
 {
   align_two_seq_keep_case=value;
 }
+
+
+
+
+
 Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int gop, int gep, char *in_align_mode)
-        {
+{
 	static Alignment *A;
 	Constraint_list *CL;
 	Sequence *S;
@@ -2265,8 +2273,8 @@ Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int g
 	l_s[1][0]=1;
 
 
-
-	CL->S=fill_sequence_struc(2, seq_array, name_array);
+// 	printf("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBbb\n");
+	CL->S=fill_sequence_struc(2, seq_array, name_array, NULL);
 
 	A=seq2aln(CL->S, NULL, 1);
 
@@ -2286,7 +2294,7 @@ Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int g
 	free_sequence (S,-1);
 	A->S=NULL;
 	return A;
-	}
+}
 
 
 NT_node make_root_tree ( Alignment *A,Constraint_list *CL,int gop, int gep,Sequence *S,  char *tree_file,int maximise)
@@ -2296,6 +2304,9 @@ NT_node make_root_tree ( Alignment *A,Constraint_list *CL,int gop, int gep,Seque
    (T[3][0])->nseq=S->nseq;
    return T[3][0];
 }
+
+
+
 NT_node ** make_tree ( Alignment *A,Constraint_list *CL,int gop, int gep,Sequence *S,  char *tree_file,int maximise)
 	{
 	  int a, b, ra, rb;
@@ -2550,7 +2561,7 @@ Alignment *realign_twoseq (Alignment *A, Constraint_list *CL)
   if (s1==s2)return A;
   ns=vcalloc (3, sizeof (int));
   ls=declare_int (2,A->nseq+1);
-  
+
   ls[0][ns[0]++]=s1;
   ls[0][ns[0]]=s1;
   for (a=0; a<A->nseq; a++)if (a!=s1)ls[1][ns[1]++]=a;
@@ -2568,7 +2579,7 @@ Alignment *realign_kmeans (Alignment *A, Constraint_list *CL)
   int *g,*ns,**ls;
   int a;
   g=seq2kmeans_class(A,2,"msar");
-  
+
   ns=vcalloc (3, sizeof (int));
   ls=declare_int (2,A->nseq);
   for (a=0; a<A->nseq; a++)
@@ -2594,18 +2605,18 @@ Alignment *realign_aln_best ( Alignment*A, Constraint_list *CL)
 {
   int *ns;
   int **ls;
-  
+
   int  a,b,p,n,g;
   int **gc;
-  
-  
+
+
   int s1=rand()%A->nseq;
   int s2=rand()%A->nseq;
   if (s1==s2)return A;
-	  
+
   ns=vcalloc (3, sizeof (int));
   ls=declare_int (2,A->nseq);
-  
+
   for (a=0; a< A->nseq; a++)
     {
       float sc1, sc2, t1, t2;
@@ -2615,7 +2626,7 @@ Alignment *realign_aln_best ( Alignment*A, Constraint_list *CL)
 	  int r1=A->seq_al[s1][b];
 	  int r2=A->seq_al[s2][b];
 	  int rx=A->seq_al[a][b];
-	  
+
 	  t1+=(r1!='-' || rx !='-')?1:0;
 	  t2+=(r2!='-' || rx !='-')?1:0;
 	  sc1+=(r1==rx && r1 !='-')?1:0;
@@ -2623,17 +2634,17 @@ Alignment *realign_aln_best ( Alignment*A, Constraint_list *CL)
 	}
       sc1/=(t1==0)?1:t1;
       sc2/=(t2==0)?1:t2;
-      
+
       g=(sc1>sc2)?0:1;
       ls[g][ns[g]++]=a;
       sprintf ( A->name[a], "%d", g+1);
       if (a==s1)sprintf ( A->name[a], "%d::G1", g+1);
       if (a==s2)sprintf ( A->name[a], "%d::G2", g+1);
-      
+
     }
   print_aln (A);
-  
-  
+
+
   HERE ("G+: %d G2:%d", ns[0], ns[1]);
   ungap_sub_aln ( A, ns[0], ls[0]);
   ungap_sub_aln ( A, ns[1], ls[1]);
@@ -2642,41 +2653,41 @@ Alignment *realign_aln_best ( Alignment*A, Constraint_list *CL)
   HERE ("BIPART: LEN=%d", A->len_aln);
   unset_profile_master (A, ns, ls, CL);
   vfree(ns);free_int(ls, -1);
-  
+
   return A;
 }
 Alignment *realign_aln_random_bipart ( Alignment*A, Constraint_list *CL)
 {
   int *ns;
   int **ls;
-  
+
   int  a,p,n,g;
   int **gc;
 
-  
+
   p=rand()%A->len_aln;
-  
+
   ns=vcalloc (3, sizeof (int));
   ls=declare_int (2,A->nseq);
-  
+
   for (a=0; a<A->nseq; a++)
     {
       g=(A->seq_al[a][p]=='-')?1:0;
       ls[g][ns[g]++]=a;
     }
-  
+
   HERE ("G+: %d G2:%d", ns[0], ns[1]);
   ungap_sub_aln ( A, ns[0], ls[0]);
   ungap_sub_aln ( A, ns[1], ls[1]);
   ns=set_profile_master (A, ns, ls, CL);
   A->score_aln=pair_wise (A, ns, ls,CL);
-  
+
   //HERE ("\n>%s\n%s\n>%s\n%s\n", A->name[ls[0][ns[0]]],A->seq_al[ls[0][ns[0]]],A->name[ls[1][ns[1]]],A->seq_al[ls[1][ns[1]]]);
-  
+
   HERE ("BIPART: LEN=%d", A->len_aln);
   unset_profile_master (A, ns, ls, CL);
   vfree(ns);free_int(ls, -1);
-  
+
   return A;
 }
 Alignment *realign_aln_random_bipart_n ( Alignment*A, Constraint_list *CL, int n)
@@ -3116,8 +3127,8 @@ Alignment *iterate_aln ( Alignment*A, int nit, Constraint_list *CL)
 
 
   fprintf ( CL->local_stderr, "Iterated Refinement: %d cycles START: score= %d\n", nit,iscore=aln2sim2(A) );
-  
-  
+
+
   if ( nit==-1)nit=A->nseq*2;
   if ( A->len_aln==0)A=very_fast_aln (A, A->nseq, CL);
   A=reorder_aln (A,(CL->S)->name, A->nseq);
@@ -3135,7 +3146,7 @@ Alignment *iterate_aln ( Alignment*A, int nit, Constraint_list *CL)
       else if (mode ==7)A=tree_realign(A,CL);
       score=aln2sim2 (A);
       delta=iscore-score;
-      
+
       fprintf (CL->local_stderr, "\n\tIteration Cycle: %d Score=%d Improvement= %d", it+1,score, delta);
     }
   fprintf ( CL->local_stderr, "\nIterated Refinement: Completed Improvement=%d\n", delta);
@@ -3152,10 +3163,10 @@ Alignment * tree_realign (Alignment *A, Constraint_list *CL)
   degap_aln (A);
   tree_aln ((T[3][0])->left,(T[3][0])->right,A,(CL->S)->nseq, CL);
   A->nseq=(CL->S)->nseq;
-  
+
   return A;
 }
-  
+
 int get_next_best (int seq, int nseq, int *used, int **dm);
 int get_next_best (int seq, int nseq, int *used, int **dm)
 {
@@ -3206,9 +3217,9 @@ Alignment *sorted_aln_old (Alignment *A,Constraint_list *CL)
     }
   exit (0);
   while (sa_align_groups (A,CL,used,0,50)!=-1);
-  
+
   HERE ("tot_added: %d", tot_added);
-  
+
   //add_group2sorted_aln (A, CL, used, 0, 0);
   return A;
 }
@@ -3234,26 +3245,26 @@ int add_group2sorted_aln   (Alignment *A, Constraint_list *CL, int *used, int g,
   while (add && tot<(CL->S)->nseq)
     {
       ls[1][0]=sa_get_next(A,used, CL,g);
-      
+
       ns=set_profile_master (A, ns, ls, CL);
       pair_wise (A,ns,ls,CL);
-      
+
       sa2sc(A->seq_al[ls[0][ns[0]]],A->seq_al[ls[1][ns[1]]], &id, &cov);
       unset_profile_master (A, ns, ls, CL);
-      
+
       if (cov>mincov && id>minid)
 	{
 	  add=1;
 	  used[ls[1][0]]=g;
 	  ls[0][ns[0]++]=ls[1][0];
-	  HERE ("\tID: %d COV: %d ***",id, cov); 
+	  HERE ("\tID: %d COV: %d ***",id, cov);
 	  ns[1]=1;
 	}
       else
 	{
 	  add=0;
 	  used[ls[1][0]]=-1;
-	  HERE ("\tID: %d COV: %d",id, cov); 
+	  HERE ("\tID: %d COV: %d",id, cov);
 	}
       tot+=add;
       nadded+=add;
@@ -3287,18 +3298,18 @@ int sa_get_next (Alignment *A,int *used, Constraint_list *CL, int g)
   int a, b, c,n;
   n=(CL->S)->nseq;
   int bseq=-1, bscore;
-  
+
 
   if (!sim)
     {
       (CL->DM)=CL->DM=cl2distance_matrix ( CL,A,NULL,NULL, 1);
       sim=(CL->DM)->score_similarity_matrix;
     }
-  
+
   for (bscore=0,a=0; a< n; a++)
     {
       if (used[a]!=g)continue;
-      
+
       for (b=0; b<n; b++)
 	{
 	  if (!used[b] && sim[a][b]>=bscore)
@@ -3308,7 +3319,7 @@ int sa_get_next (Alignment *A,int *used, Constraint_list *CL, int g)
 	    }
 	}
     }
-  
+
   return bseq;
 }
 int sa_get_next_group (Alignment *A, Constraint_list *CL, int *used,int *g0, int *g1,int **f);
@@ -3322,7 +3333,7 @@ Alignment *sorted_aln_new (Alignment *A,Constraint_list *CL)
   A->nseq=0;
   used=vcalloc(n, sizeof (int));
   for (a=0; a<n; a++)used[a]=a+1;
-  
+
   while ((added=sa_align_groups(A, CL, used,50,50))!=-1)
     {
       HERE ("Group Aligned: %d seq", added);
@@ -3333,7 +3344,7 @@ Alignment *sorted_aln_new (Alignment *A,Constraint_list *CL)
   return A;
 }
 
-	      
+
 int sa_align_groups (Alignment *A, Constraint_list *CL, int *used, int minid, int mincov)
 {
   int s0,s1,g0, g1,a,id,cov;
@@ -3341,18 +3352,18 @@ int sa_align_groups (Alignment *A, Constraint_list *CL, int *used, int minid, in
   static int *ns;
   int n=(CL->S)->nseq;
   static int **f;
-  
+
 
   if (A->nseq==n) return -1;
   if (!ls){ls=declare_int (2, n); ns=vcalloc (3, sizeof (int));}
   if (!f)f=declare_int (n,n);
   HERE ("***** 1******");
-  
+
   sa_get_next_group (A, CL,used,&s0, &s1,f);
   if (g0==-1) return -1;
   g0=used[s0];
   g1=used[s1];
-  
+
   ns[0]=ns[1]=0;
   for (a=0; a<n; a++)
     {
@@ -3370,7 +3381,7 @@ int sa_align_groups (Alignment *A, Constraint_list *CL, int *used, int minid, in
       for (a=0; a<n; a++)if (used[a]==g1)used[a]=g0;
       A->nseq=ns[0]+ns[1];
     }
-  else 
+  else
     {
       HERE ("***** Rejected ****" );
       f[s0][s1]=1;
@@ -3383,7 +3394,7 @@ int sa_get_next_group (Alignment *A,Constraint_list *CL,int *used, int *s0, int 
   int a, b, c, bsim;
   int n=(CL->S)->nseq;
   static **sim2;
-  
+
   s0[0]=s1[0]=-1;
   if (!sim)
     {
@@ -3641,9 +3652,9 @@ static NT_node* SNL;
 NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_list *CL)
 {
   int a;
-  
-  
-  
+
+
+
   A->ibit=0;
   if ( strm ((CL->TC)->use_seqan, "NO"))
     {
@@ -3652,17 +3663,17 @@ NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_li
       if (!tmp)tmp=vtmpnam(NULL);
       if ( CL && CL->dp_mode && strstr (CL->dp_mode, "collapse"))dump_constraint_list (CL, tmp, "w");
       T=local_tree_aln (LT, RT, A, nseq, CL);
-      
+
       if ( CL && CL->dp_mode && strstr (CL->dp_mode, "collapse"))
 	{
 	  empty_constraint_list  (CL);
 	  undump_constraint_list (CL, tmp);
-	  
+
 	}
       return T;
     }
   else return seqan_tree_aln (LT, RT, A, nseq, CL);
-  
+
 }
 
 NT_node* seqan_tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_list *CL)
@@ -3726,11 +3737,11 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
   recode_tree (P, (CL->S));
   index_tree_node(P);
   initialize_scoring_scheme (CL);
-  
+
   if ( get_nproc()>1 && strstr (CL->multi_thread, "msa") && !(strstr(CL->dp_mode, "collapse")))
     {
       int max_fork;
-      
+
       max_fork=get_nproc()/2;//number of nodes forked, one node =>two jobs
       tree2nnode (P);
       NL=tree2node_list (P, NULL);
@@ -3758,7 +3769,7 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
   rec_local_tree_aln (P, A,CL, 1);
   for (a=0; a<P->nseq; a++)sprintf (A->tree_order[a], "%s", (CL->S)->name[P->lseq[a]]);
   A->len_aln=strlen (A->seq_al[0]);
-  
+
   fprintf ( CL->local_stderr, "\n\n");
 
   return NULL;
@@ -3828,12 +3839,12 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
       for (a=0;a<R->nseq; a++)
 	fprintf (stderr, "-R%20s %s\n", A->name[R->lseq[a]], A->seq_al[R->lseq[a]]);
     }
-  
-  
+
+
 
   P->score=A->score_aln=score=profile_pair_wise (A,L->nseq, L->lseq,R->nseq,R->lseq,CL);
   A->len_aln=strlen (A->seq_al[P->lseq[0]]);
-  
+
   if (print)
     {
       if ((CL->S)->nseq<MAX_NSEQ_4_DISPLAY)
@@ -3850,7 +3861,7 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
 	fprintf (stderr, "+R%20s %s\n", A->name[R->lseq[a]], A->seq_al[R->lseq[a]]);
       HERE ("********************************************************");
     }
-  
+
   return P;
 }
 
@@ -4702,7 +4713,7 @@ void   ns2master_ns       (int *ins, int **ils, int **ons, int ***ols)
     {
       static int *lns;
       static int **lls;
-      
+
       if (!lns){lns=vcalloc (2, sizeof(int));lls=declare_int(2,1);}
       ons[0]=lns;
       ols[0]=lls;
@@ -4711,7 +4722,7 @@ void   ns2master_ns       (int *ins, int **ils, int **ons, int ***ols)
     }
 }
 
-      
+
 
 int *unset_profile_master (Alignment *A,int *ns, int **ls, Constraint_list *CL)
 {
@@ -4737,14 +4748,14 @@ int *set_profile_master (Alignment *A,int *ns, int **ls, Constraint_list *CL)
   for (a=0; a<2; a++)
     if (read_size_int(ls[a],sizeof(int))<(ns[a]+1))
       ls[a]=vrealloc (ls[a], sizeof(int)*(ns[a]+1));
- 
+
   if (!CL->DM)CL->DM=cl2distance_matrix ( CL,A,NULL,NULL, 1);
   for (bs=0,a=0; a<ns[0]; a++)
     for (b=0; b<ns[1]; b++)
       {
-	
+
 	cs=(CL->DM)->score_similarity_matrix[ls[0][a]][ls[1][b]];
-	
+
 	if (cs>bs)
 	  {
 	    ls[0][ns[0]]=ls[0][a];
@@ -4752,20 +4763,20 @@ int *set_profile_master (Alignment *A,int *ns, int **ls, Constraint_list *CL)
 	    bs=cs;
 	  }
       }
-  
+
   if (bs<0)
     {
       if (print)HERE ("SKIPPED: %d:: %s %s %d(%d %d)", a,(CL->S)->name[ls[0][ns[0]]],A->name[ls[1][ns[1]]], bs,ls[0][ns[0]],ls[1][ns[1]] );
       ns[2]=-1;
     }
-  
+
   else
     {
       if (print)HERE ("SELECTED: %d:: %s %s %d(%d %d)", a,(CL->S)->name[ls[0][ns[0]]],A->name[ls[1][ns[1]]], bs,ls[0][ns[0]],ls[1][ns[1]] );
     }
   return ns;
 }
-  
+
 int split_condition (int nseq, int score, Constraint_list *CL)
 {
   int cond1=1, cond2=1;
@@ -4789,7 +4800,7 @@ int profile_pair_wise (Alignment *A, int n1, int *l1, int n2, int *l2, Constrain
       ns=vcalloc (2, sizeof (int));
       ls=declare_int (2, (CL->S)->nseq+1);
     }
-  
+
   ns[0]=n1;
   ns[1]=n2;
   ils[0]=l1;
@@ -4799,7 +4810,7 @@ int profile_pair_wise (Alignment *A, int n1, int *l1, int n2, int *l2, Constrain
       if (read_size_int(ls[a],sizeof(int))<(ns[a]+1))ls[a]=vrealloc (ls[a], sizeof(int)*(ns[a]+1));
       for (b=0; b<ns[a]; b++)ls[a][b]=ils[a][b];
     }
-  
+
   if (master_profile)ns=set_profile_master (A, ns, ls, CL);
   ret=pair_wise (A, ns, ls, CL);
   if (master_profile)unset_profile_master (A, ns, ls, CL);
@@ -4807,7 +4818,7 @@ int profile_pair_wise (Alignment *A, int n1, int *l1, int n2, int *l2, Constrain
 }
 Alignment* mpw_compact_aln (Alignment *A, int *ns, int **ils);
 int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL );
-char **mpw_gap_padd (char **array,int *ns,int **ls,int *pos); 
+char **mpw_gap_padd (char **array,int *ns,int **ls,int *pos);
 void mpw_display_groups (Alignment *A, int *ns, int **ls);
 int check_integrity (Alignment *A, Constraint_list *CL);
 int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
@@ -4816,12 +4827,12 @@ int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
   static int **ls;
   int score,a;
   int print=0;
-  
+
   if (!ns)ns=vcalloc (2, sizeof(int));
   if (!ls)ls=declare_int (2,2);
   ns[0]=ns[1]=1;
-  
-  
+
+
   if      (read_size_int (ins, sizeof (int))!=3)return pair_wise (A, ins,ils,CL);
   else if (ins[2]==-1)return pair_wise (A, ins,ils,CL);//ignore the new mode
   else
@@ -4833,27 +4844,27 @@ int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
       int *res;
       static Alignment *B;
 
-      
+
       if (!B)B=copy_aln (A, NULL);
-      
+
       pos=vcalloc (2, sizeof (int));
       res=vcalloc (2, sizeof (int));
-      
+
       for(g=0;g<2; g++)ls[g][0]=ils[g][ins[g]];
-      
+
       for (a=0, ml=0; a<(CL->S)->nseq; a++)ml=MAX(ml,(strlen(A->seq_al[a])));
       array1 =vcalloc ((CL->S)->nseq, sizeof (char*));
       array2 =vcalloc ((CL->S)->nseq, sizeof (char*));
-      
+
       //mpw_display_groups (A, ins, ils);
-      
+
 
       //duplicate the two groups to align
       for (g=0; g<2; g++)
 	for (b=0; b<ins[g]; b++)
 	  {
 	    s=ils[g][b];
-	    
+
 	    array1[s]=vcalloc (ml+1,   sizeof (char));
 	    array2[s]=vcalloc (ml*2, sizeof (char));
 	    sprintf (array1[s], "%s", A->seq_al[s]);
@@ -4868,7 +4879,7 @@ int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
 	      int d;
 	      s=ls[g][b];
 	      l=strlen (array1[s]);
-	      col[g]=declare_int (l+1,2); 
+	      col[g]=declare_int (l+1,2);
 	      for (p=0,d=0; p<l; p++)
 		{
 		  if (is_gap(A->seq_al[s][p])){col[g][d][1]++;}
@@ -4877,9 +4888,9 @@ int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
 	      ungap (A->seq_al[s]);
 	    }
 	}
-      
+
       score=pair_wise (A, ns,ls,CL);
-      
+
       if (print)
 	{
 	  B->nseq=2;
@@ -4891,10 +4902,10 @@ int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
 	  print_aln (B);
 	}
 
-      
+
       pos[0]=pos[1]=0;
       res[0]=res[1]=0;
-      
+
       //add potential extremity gaps
       for (g=0; g<2; g++)
 	{
@@ -4906,7 +4917,7 @@ int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
 	  pos[g]=p;
 	}
       array2=mpw_gap_padd (array2,ins,ils,pos);
-      
+
       for (p=0; p<A->len_aln; p++)
 	{
 	  for (g=0; g<2; g++)
@@ -4916,7 +4927,7 @@ int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
 	      int cpos;
 	      int **ccol=col[g];
 	      res[g]+=!(ig=is_gap(r));
-	      
+
 	      for (b=0; b<ins[g]; b++)
 		{
 		  cpos =pos[g];
@@ -4930,7 +4941,7 @@ int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
 		    {
 		      array2[ss][cpos++]='-';
 		    }
-		 
+
 		}
 	      pos[g]=cpos;
 	    }
@@ -4944,7 +4955,7 @@ int pair_wise_ms(Alignment *A, int*ins, int **ils,Constraint_list *CL )
 	  }
       A->len_aln=pos[0];
       A->nseq=ins[0]+ins[1];
-      
+
       A=mpw_compact_aln(A,ins,ils);
       //mpw_display_groups (A, ins, ils);
       free_char (array1, -1);
@@ -4970,12 +4981,12 @@ int check_integrity (Alignment *A, Constraint_list *CL)
     }
   return 1;
 }
-	     
-	   
+
+
 Alignment *mpw_compact_aln (Alignment *A, int *ns, int **ls)
 {
   int a,g,col, b, c;
-  
+
   for (c=0,a=0; a<A->len_aln; a++)
     {
       for (col=0,g=0; g<2; g++)
@@ -4987,7 +4998,7 @@ Alignment *mpw_compact_aln (Alignment *A, int *ns, int **ls)
 	}
       if (col==1)
 	{
-	  
+
 	  for (g=0; g<2; g++)
 	    {
 	      for (b=0; b<ns[g]; b++)
@@ -5022,18 +5033,18 @@ void mpw_display_groups (Alignment *A, int *ns, int **ls)
     }
   HERE ("************* DONE **************");
 }
-  
-char **mpw_gap_padd (char **array,int *ns,int **ls,int *pos) 
+
+char **mpw_gap_padd (char **array,int *ns,int **ls,int *pos)
  {
    int g, b, s, p0, p1;
-   
+
    for (g=0; g<2; g++)
      {
        for (b=0; b<ns[g]; b++)
 	 {
 	   s=ls[g][b];
-	   
-	   
+
+
 	   if (g==0)for (p0=pos[0];p0<pos[1];)array[s][p0++]='-';
 	   if (g==1)for (p1=pos[1];p1<pos[0];)array[s][p1++]='-';
 	 }
@@ -5049,8 +5060,8 @@ char **mpw_gap_padd (char **array,int *ns,int **ls,int *pos)
      }
     return array;
  }
-		       
-  
+
+
 int pair_wise   (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
     {
 	/*
@@ -5065,7 +5076,7 @@ int pair_wise   (Alignment *A, int*ns, int **l_s,Constraint_list *CL )
 	Pwfunc function;
 
 
-		
+
 	if (read_size_int (ns, sizeof (int))==3 && ns[2]!=-1)return pair_wise_ms(A,ns,l_s,CL);
 
 
@@ -5302,7 +5313,7 @@ Pwfunc get_pair_wise_function (Pwfunc pw,char *dp_mode, int *glocal)
 	sprintf (dpl[npw], "procoffee_pair_wise");
 	dps[npw]=GLOBAL;
 	npw++;
-	
+
 	pwl[npw]=linked_pair_wise_collapse;
 	sprintf (dpl[npw], "linked_pair_wise_collapse");
 	dps[npw]=GLOBAL;
@@ -5463,17 +5474,17 @@ Alignment * sorted_aln_prog(Alignment *A, Constraint_list *CL)
   int a, b,m;
   int **mat=read_matrice ("blosum62mt");;
   int min_sim=30;
-    
+
 
 
   //set ls
   ns=vcalloc (3, sizeof (int));
   ls=declare_int (2, n);
-  
+
   //set groups;
   used=vcalloc (n, sizeof (int));
   for (a=0; a<n; a++)used[a]=a;
-  
+
   gs=vcalloc        (n, sizeof (int));
   group=declare_int (n,1);
   for(a=0; a<n; a++)
@@ -5492,13 +5503,13 @@ Alignment * sorted_aln_prog(Alignment *A, Constraint_list *CL)
 	   sim[m][0]=a;
 	   sim[m][1]=b;
 	   sim[m][2]=idscore_pairseq((CL->S)->seq[a], (CL->S)->seq[b], -12, -1, mat, "sim3");
-	   
+
 	 }
      }
    sort_int_inv (sim, 3, 2, 0, m-1);
-   
+
    A->nseq=0;
-  
+
   for (a=0; a<m && A->nseq<n; a++)
     {
       int s1=sim[a][0];
@@ -5515,14 +5526,14 @@ Alignment * sorted_aln_prog(Alignment *A, Constraint_list *CL)
 	      HERE ("Profile for %s %s - %d", (CL->S)->name[s1],(CL->S)->name[s2],s);
 	    }
 	  else ns[2]=1;
-	  
+
 	  for (b=0; b<gs[g1]; b++)ls[0][ns[0]++]=group[g1][b];
 	  ls[0][ns[0]]=s1;
 	  for (b=0; b<gs[g2]; b++)ls[1][ns[1]++]=group[g2][b];
 	  ls[1][ns[1]]=s2;
-	  
+
 	  pair_wise(A, ns, ls, CL);
-	  
+
 	  for (b=0; b<gs[g2]; b++)
 	    {
 	      group[g1]=vrealloc (group[g1], (gs[g1]+gs[g2])*sizeof (int));
@@ -5534,7 +5545,7 @@ Alignment * sorted_aln_prog(Alignment *A, Constraint_list *CL)
     }
   return A;
 }
-  
+
 Alignment * sorted_aln(Alignment *A, Constraint_list *CL)
 {
   int **sim;
@@ -5547,20 +5558,20 @@ Alignment * sorted_aln(Alignment *A, Constraint_list *CL)
   int a, b,m;
   int **mat=read_matrice ("blosum62mt");;
   int min_sim=30;
-   
-  
+
+
   (CL->DM)=CL->DM=cl2distance_matrix ( CL,A,NULL,NULL, 1);
-  
-  
- 
+
+
+
   //set ls
   ns=vcalloc (3, sizeof (int));
   ls=declare_int (2, n);
-  
+
   //set groups;
   used=vcalloc (n, sizeof (int));
   for (a=0; a<n; a++)used[a]=a;
-  
+
   gs=vcalloc        (n, sizeof (int));
   group=declare_int (n,1);
   for(a=0; a<n; a++)
@@ -5579,14 +5590,14 @@ Alignment * sorted_aln(Alignment *A, Constraint_list *CL)
 	   sim[m][0]=a;
 	   sim[m][1]=b;
 	   sim[m][2]=idscore_pairseq((CL->S)->seq[a], (CL->S)->seq[b], -12, -1, mat, "sim3");
-	   
+
 	 }
      }
    sort_int_inv (sim, 3, 2, 0, m-1);
-   
+
    A->nseq=0;
-  
-   
+
+
    for (a=0; a<m && A->nseq<n; a++)
      {
        int s1=sim[a][0];
@@ -5603,14 +5614,14 @@ Alignment * sorted_aln(Alignment *A, Constraint_list *CL)
 	       HERE ("Profile for %s %s - %d", (CL->S)->name[s1],(CL->S)->name[s2],s);
 	     }
 	   else ns[2]=1;
-	   
+
 	   for (b=0; b<gs[g1]; b++)ls[0][ns[0]++]=group[g1][b];
 	   ls[0][ns[0]]=s1;
 	   for (b=0; b<gs[g2]; b++)ls[1][ns[1]++]=group[g2][b];
 	   ls[1][ns[1]]=s2;
-	   
+
 	   pair_wise(A, ns, ls, CL);
-	   
+
 	   for (b=0; b<gs[g2]; b++)
 	     {
 	       group[g1]=vrealloc (group[g1], (gs[g1]+gs[g2])*sizeof (int));
@@ -5621,9 +5632,9 @@ Alignment * sorted_aln(Alignment *A, Constraint_list *CL)
 	 }
      }
    return A;
-}	   
+}
 
-    
+
 int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 {
   char **buf;
@@ -5634,7 +5645,7 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
   char *hhfile;
   char *tmpfile;
   FILE *fp,*fp1, *fp2;
-  
+
   for (a=0; a<2; a++)
     {
       aln[a]=vtmpnam(NULL);
@@ -5648,22 +5659,22 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	  int s=ls[a][b];
 	  fprintf (fp, ">%s\n%s\n", A->name[s],A->seq_al[s]);
 	}
-      
+
       vfclose (fp);
       printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first  >/dev/null 2>/dev/null", aln[a], prf[a]);
     }
-  
+
   hhfile=vtmpnam(NULL);
   tmpfile=vtmpnam (NULL);
-  
-  
+
+
   printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global  >/dev/null 2>/dev/null", prf[0], prf[1], hhfile);
-    
+
   p0=p1=0;
   l0=strlen (A->seq_al[ls[0][0]]);
   l1=strlen (A->seq_al[ls[1][0]]);
-  buf=declare_char ((CL->S)->nseq, l0+l1+1); 
-  
+  buf=declare_char ((CL->S)->nseq, l0+l1+1);
+
   fp1=vfopen (hhfile, "r");
   fp2=vfopen (tmpfile,"w");
   while ((c=fgetc(fp1))!='\n' && c!=EOF);
@@ -5694,24 +5705,24 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
     }
   vfclose (fp1);
   vfclose (fp2);
-  
-  
-  
+
+
+
   fp1=vfopen (tmpfile, "r");
   p0=0;
   while ((fscanf (fp1, "%d %d\n", &r0, &r1))==2)
     {
-      
+
       for (a=0; a<ns[0]; a++)buf[ls[0][a]][p0]=(r0<0)?'-':A->seq_al[ls[0][a]][r0];
       for (a=0; a<ns[1]; a++)buf[ls[1][a]][p0]=(r1<0)?'-':A->seq_al[ls[1][a]][r1];
       p0++;
     }
   vfclose (fp1);
-  
+
   A=realloc_aln2 ( A,(CL->S)->nseq+1,strlen (buf[ls[0][0]])+1);
   for (a=0; a<2; a++)
     for (b=0; b<ns[a]; b++)
       sprintf (A->seq_al[ls[a][b]], "%s", buf[ls[a][b]]);
     return 100;
 }
- 
+

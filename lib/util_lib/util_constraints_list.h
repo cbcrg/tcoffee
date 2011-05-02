@@ -28,12 +28,12 @@ typedef int (*Pwfunc) (Alignment *, int*, int **,struct Constraint_list *);
 /*         STRUCTURES FOR PDB ANALYSIS                                                       */
 /*                                                                                           */
 /*********************************************************************************************/
-typedef struct 
+typedef struct
     {
       char *use_seqan;
 }
 TC_param;
-typedef struct 
+typedef struct
     {
       char blast_server[FILENAMELEN+1];
       char db[FILENAMELEN+1];
@@ -46,7 +46,7 @@ Blast_param;
 typedef struct
     {
 	int   n_excluded_nb;
-	
+
 	float similarity_threshold;
 	float rmsd_threshold;
         float md_threshold;
@@ -55,7 +55,7 @@ typedef struct
         int    print_rapdb;
         float maximum_distance;/*Diameter of the bubble used to identify the Calpha Neighborhood*/
 	int   N_ca;            /*Number of Calpha to be looked at on both side*/
-	float max_delta ;      /*Maximum value for delta to be positive*/ 
+	float max_delta ;      /*Maximum value for delta to be positive*/
 	char *local_mode;
         int   scale;             /*Value substracted to the pdb score in the bubble mode*/
         int   n_extra_param;
@@ -66,8 +66,8 @@ typedef struct
       int filter_aln;
       int irmsd_graph;
       int nirmsd_graph;
-      
-      
+
+
     }
 Pdb_param;
 
@@ -85,7 +85,7 @@ Atom;
 
 typedef struct
     {
-      
+
       Atom*CA;
       Atom *C;
       Atom *N;
@@ -101,13 +101,13 @@ typedef struct
 	                   /*nb[x][0] contains the number of neighbor atoms*/
 	float  **d_nb;     /* contains the distances between atom y=nb[x][5] and Ca x*/
 	                   /* !!!d_nb[x][0] is empty, the array starts at +1 to folow nb*/
-	int max_nb;        /* Largest neigborhood*/ 
+	int max_nb;        /* Largest neigborhood*/
 }
 Struct_nb;
 
-typedef struct 
+typedef struct
     {
-        
+
 	int   len;         /*Number of Calpha Carbons*/
 	int   n_atom;      /*Number of atoms*/
 	char  *name;       /*Name of the sequence*/
@@ -115,12 +115,12 @@ typedef struct
 	Atom  **structure; /*Atoms*/
         Atom  **ca;        /*List of pointers to the Calpha Atoms from 0 to N-1*/
         Amino_acid **peptide_chain;/*List of pointers to the Calpha Atoms from 0 to N-1*/
-      
-        
+
+
         Struct_nb *Chain;
         Struct_nb *Bubble;
         Struct_nb *Transversal;
-        
+
         float ** ca_dist;
 	Pdb_param *pdb_param;
 }
@@ -143,16 +143,16 @@ struct Moca
       /*Function for hiding previously used residues*/
       int  ** (*cache_cl_with_domain)(Alignment*, struct Constraint_list *);
       int  **forbiden_residues; /*List of residues already used for domain construction*/
-      
-      
+
+
       /*Function for trunkating the result into a non-overlapping alignment*/
       Alignment* (*make_nol_aln)(Alignment*, struct Constraint_list *);
-     
+
       /*Parameters Coordinates of the first motif to extract*/
       int moca_start;
       int moca_len;
       int moca_interactive;
-      
+
 };
 typedef struct Moca Moca;
 /*********************************************************************************************/
@@ -165,9 +165,9 @@ struct Distance_matrix
   char mode[100];
   char sim_mode[100];
   char nseq;
-  int     **similarity_matrix; /*Pairwise ID levels: 1-10000*/ 
-  int     **score_similarity_matrix; /*Pairwise ID levels: 1-10000*/ 
-  int     **distance_matrix; /*Pairwise ID levels: 1-10000*/ 
+  int     **similarity_matrix; /*Pairwise ID levels: 1-10000*/
+  int     **score_similarity_matrix; /*Pairwise ID levels: 1-10000*/
+  int     **distance_matrix; /*Pairwise ID levels: 1-10000*/
 };
 typedef struct Distance_matrix Distance_matrix;
 struct Constraint_list
@@ -183,47 +183,47 @@ struct Constraint_list
       TC_param *TC;
 
       int copy_mode;
-      struct Constraint_list *pCL; 
+      struct Constraint_list *pCL;
       Sequence *S;         /*Total sequences*/
       int *master; //Sequences used as master sequences
-      int o2a_byte; // number of one to all provided in one go. 
+      int o2a_byte; // number of one to all provided in one go.
       Sequence *STRUC_LIST; /*Name of the sequences with a Structure*/
       char align_pdb_param_file[FILENAMELEN+1];
       char align_pdb_hasch_mode[FILENAMELEN+1];
-     
+
 
       Weights  *W;         /*Sequence Weights*/
       Distance_matrix *DM; /*Accurate Distance Matrix*/
       Distance_matrix *ktupDM; /*Fast Distance Matrix*/
       Fname *RunName;
-      
-      int *translation;   
+
+      int *translation;
       char **  out_aln_format;
       int    n_out_aln_format;
 
-      
+
       /*Packing Sequence: To use with domain analysis*/
       int **packed_seq_lu;
-      
+
       /*DATA*/
       FILE *fp;           /*File used for i/o if disk being used*/
       //int *L;            /*Array used for storing Lib if mem being used*/
       int **M;            /*substitution matrix*/
       char rna_lib[FILENAMELEN+1];  /*name of a file containing the RNA libraries*/
-      
-      /*List Information*/      
+
+      /*List Information*/
       int ne;             /*Number of elements in the list*/
       char list_name[1000];    /*Name of the list*/
       int  entry_len;     /*Size of an entry in el_size*/
       size_t el_size;     /*Size of each elements in an entry in bytes*/
-      
+
       /*Normalisation information*/
       int normalise;
       int max_ext_value;
       int max_value;
       int overweight;
       int filter_lib;
-      
+
       /*Pair wise alignment method*/
       int   pw_parameters_set;
       int   gop;
@@ -232,15 +232,15 @@ struct Constraint_list
       int   f_gep;
       int   nm_gop;
       int   nm_gep;
-      
+
       int   nomatch;
-      
+
       int   TG_MODE;
       int   F_TG_MODE;
 
       char  dp_mode[FILENAMELEN+1];
       int   reverse_seq;//Used for HoT
-      int   extend_seq; //Used for RNA or Promoter Alignments 
+      int   extend_seq; //Used for RNA or Promoter Alignments
       int   maximise;
       char  matrix_for_aa_group[FILENAMELEN+1];
       char  method_matrix[FILENAMELEN+1];
@@ -256,21 +256,21 @@ struct Constraint_list
 
       char distance_matrix_mode[FILENAMELEN+1];
       char distance_matrix_sim_mode[FILENAMELEN+1];
-      
+
       Alignment *tree_aln;
-      
+
       /*Functions used for dynamic programming and Evaluation*/
       int no_overaln;
       /*1 Function for evaluating the cost of a column*/
       Col_cost_func get_dp_cost;
       Profile_cost_func profile_mode;
       char profile_comparison [FILENAMELEN+1];
-      
+
       /*2 Function for evaluating the cost of a pair of residues*/
       Pair_cost_func evaluate_residue_pair;
       /*3 Function for making dynamic programming*/
       Pwfunc pair_wise;
-      
+
       /*
       int (*get_dp_cost)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *);
       int (*evaluate_residue_pair)(struct Constraint_list *, int, int, int, int);
@@ -281,7 +281,7 @@ struct Constraint_list
       int max_n_pair; /*maximum number of pairs when aligning two profiles*/
 
       /*Extend a sequence against itself*/
-      
+
       /*Threading parameters*/
       Blast_param *Prot_Blast;
       Blast_param *Pdb_Blast;
@@ -296,10 +296,10 @@ struct Constraint_list
       char method_log[1000];
       char evaluate_mode[1000];
       char method_evaluate_mode[100];
-      /*Gene Prediction Parameter*/      
+      /*Gene Prediction Parameter*/
       char genepred_score[100];
-      
-      /*Parameters for domain extraction*/      
+
+      /*Parameters for domain extraction*/
       Moca *moca;
       /*Functions for hiding forbiden pairs of residues*/
       int ****forbiden_pair_list;     /* pair_list[S1][S2][L1][L2]=1 ->forbiden*/
@@ -307,18 +307,18 @@ struct Constraint_list
       /* pair_list[S1][S2][L1]=NULL  ->all pairs S1L1, S2 allowed */
       /* S-> sequences, 0..N   */
       /* L-> residues , 1..L-1 */
-      
+
       /*extention properties:  copy*/
       int *seq_for_quadruplet;
       int nseq_for_quadruplet;
-      
+
       /*extention properties: Do Not copy*/
       int extend_jit;               /*Extend only on request*/
       int extend_threshold;         /*Do not extend pairs below the Theshold*/
       int do_self;                  /*Extend a sequence against itself*/
-      char extend_clean_mode[100];  
+      char extend_clean_mode[100];
       char extend_compact_mode[100];
-      
+
       /*Lookup table parameteres*/
       /*!!!!!do not copy in duplication*/
       /*Residue Index contains residue_index[nseq][seq_len][0]->number of links*/
@@ -329,7 +329,7 @@ struct Constraint_list
       int residue_indexed;
       int ***residue_index;
       int ** freeze;
-      int residue_field;	
+      int residue_field;
 
       /*Index of the pairs of sequences within L*/
       int seq_indexed;
@@ -337,10 +337,10 @@ struct Constraint_list
       int **end_index;
       int max_L_len;
       int chunk;
-      
-      
-            
-      /*PDB STRUCTURE ALIGNMENTS*/      
+
+
+
+      /*PDB STRUCTURE ALIGNMENTS*/
       Ca_trace ** T;	/*This structure contains the PDB trace for sequences with a known Struc T[Nseq]*/
 
        /*MISC*/
@@ -352,9 +352,9 @@ struct Constraint_list
 
 typedef struct Constraint_list Constraint_list;
 
-struct TC_method 
+struct TC_method
 {
-  
+
   char executable[FILENAMELEN+1];
   char executable2[FILENAMELEN+1];
   char in_flag[FILENAMELEN+1];
@@ -384,7 +384,7 @@ typedef struct TC_method TC_method;
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-Constraint_list *produce_list ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode);	
+Constraint_list *produce_list ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode);
 Job_TC* method2job_list ( char *method, Sequence *S,char *weight, char *lib_list, Distance_matrix *DM, Constraint_list *CL);
 
 Job_TC *job_list2multi_thread_job_list (Job_TC* ojob, char *mt, Constraint_list *CL);
@@ -473,7 +473,7 @@ Constraint_list * read_constraint_list_raw_file(Constraint_list *CL, char *fname
 
 int        read_cpu_in_n_list(char **fname, int n);
 Sequence *precompute_blast_db (Sequence *S, char **ml, int n);
-int read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name);
+int read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name, Genomic_info **genome_co);
 
 Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode);
 
@@ -489,7 +489,7 @@ Constraint_list * fast_read_constraint_list_file(Constraint_list *CL, char *fnam
 /*                         EXTENDED LIST OUTPUT                      */
 /*                                                                   */
 /*                                                                   */
-/*********************************************************************/	
+/*********************************************************************/
 FILE * save_extended_constraint_list      (  Constraint_list *CL, char *mode, FILE *fp) ;
 FILE * save_extended_constraint_list_pair (  Constraint_list *CL, char *mode, char* seq1, char * seq2,FILE *fp);
 
@@ -498,7 +498,7 @@ FILE * save_extended_constraint_list_pair (  Constraint_list *CL, char *mode, ch
 /*                         LIST OUTPUT                               */
 /*                                                                   */
 /*                                                                   */
-/*********************************************************************/	
+/*********************************************************************/
 int constraint_list2raw_file ( Constraint_list *CL, char *fname, char *fmode);
 FILE * save_raw_constraint_list   ( FILE *fp,Constraint_list *CL, int start,int len, int *translation);
 FILE * save_constraint_list ( Constraint_list *CL,int start, int len, char *fname, FILE *fp,char *mode,Sequence *S);
@@ -513,7 +513,7 @@ FILE * save_constraint_list_bin   ( FILE *OUT,Constraint_list *CL, int start,int
 /*                         LIST CONVERTION                           */
 /*                                                                   */
 /*                                                                   */
-/*********************************************************************/		
+/*********************************************************************/
 Constraint_list * expand_constraint_list (Constraint_list *CL, int T);
 Constraint_list * shrink_constraint_list_indexed (Constraint_list *CL, int T);
 Constraint_list * shrink_constraint_list (Constraint_list *CL);
@@ -557,7 +557,7 @@ Constraint_list * clean_shadow ( Constraint_list *CL, int start, int len);
 /*                         LIST FUNCTIONS                            */
 /*                                                                   */
 /*                                                                   */
-/*********************************************************************/	
+/*********************************************************************/
 Constraint_list *merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode);
 CLIST_TYPE return_max_constraint_list ( Constraint_list *CL, int field);
 Constraint_list *modify_weight( Constraint_list *CL,int start, int end,  char *modify_mode);
@@ -568,10 +568,10 @@ Constraint_list* filter_list (Constraint_list *CL, int start, int len,int T);
 Constraint_list *undefine_list (Constraint_list *CL);
 int ** seq2defined_residues ( Sequence *S, Constraint_list *CL);
 int ** aln2defined_residues ( Alignment *A, Constraint_list *CL);
-/*********************************************************************/	
+/*********************************************************************/
 /*          DEBUG                                                    */
 /*                                                                   */
-/*********************************************************************/	
+/*********************************************************************/
 void print_CL_mem(Constraint_list *CL, char *function);
 int constraint_list_is_sorted ( Constraint_list *CL);
 void check_seq_pair_in_list(Constraint_list *CL,int seq1, int seq2);

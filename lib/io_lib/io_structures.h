@@ -19,11 +19,24 @@ typedef struct
     int nseq;
     int *len;
     int ***struc;
-    struct Sequence *S;  
+    struct Sequence *S;
     }Structure;
 
+
+typedef struct
+{
+	char *seg_name; /// Name of chromosome, contig...
+	char strand; 	/// The strand of the sequence: +/-
+	unsigned int start; /// Start point (always from + point of view) start at 0
+	unsigned int end;	///last nucleotide included (always from + point of view)
+	unsigned int seg_len; ///The length of the chromosome
+}
+Genomic_info;
+
+
+
 struct Sequence
-    {
+{
       char **file;          /* file[Nseq][FILENAMELEN] name of the file that contributed each sequence*/
       char **seq_comment;     /* seq_comment[Nseq][LONG_STRING] comment read in the file */
       char **aln_comment;  /*id*/
@@ -45,6 +58,9 @@ struct Sequence
       char *blastdb;
       struct Sequence *blastdbS;
       struct Sequence *MasterS;
+	  Genomic_info *genome_co; //safes genome_coordinates
+
+
 };
 typedef struct Sequence Sequence;
 
@@ -60,20 +76,20 @@ struct Template
   struct X_template *T;//transmembrane
   struct X_template *E;//secondary structure
   struct X_template *U;//Unicode, strings
-  
+
   struct X_template *RB;
 };
 typedef struct Template Template;
 //_E_
-struct X_template 
+struct X_template
 {
   char seq_name[FILENAMELEN+1];
   char template_type[FILENAMELEN+1];
   char template_format[100];
   char template_name[FILENAMELEN+1];
   char template_file[FILENAMELEN+1];
-  
-  struct P_template *VP; 
+
+  struct P_template *VP;
   struct F_template *VF;
   struct S_template *VS;
   struct R_template *VR;
@@ -81,8 +97,8 @@ struct X_template
   struct T_template *VT;
   struct E_template *VE;
   struct U_template *VU;
-  
-  
+
+
 };
 typedef struct X_template X_template;
 
@@ -147,18 +163,18 @@ typedef struct
     int max_len;
     int alp_size;
     char *alphabet;
-    int **count3;  
+    int **count3;
     int **count;
-    int **count2;  
+    int **count2;
     }Profile;
 
 struct Alignment
     {
 /*Size*/
     int max_len;
-    int min_len;   
+    int min_len;
     int *  len;
-      //int *weight;  
+      //int *weight;
     int declared_len;
     int max_n_seq;
     int nseq;
@@ -170,11 +186,11 @@ struct Alignment
     char **seq_comment;
     char **aln_comment;
     char **name;
-      
+
     char **expanded_order;
     char **tree_order;
     char **seq_al;
-    
+
     int  **order;
     Profile *P;
     Sequence *S;
@@ -183,7 +199,7 @@ struct Alignment
 
     int **seq_cache; /*Contains the index of the residues:
 		       The sequence Numbering is relative to the sequences, and not to the alignmnent
-		       
+
 		       seq_cache[0][1]=3
 		       indicates that in the aln residue (0)1 corresponds to [order[0][0]][3]
 		       residues: 1...N
@@ -193,7 +209,7 @@ struct Alignment
                      /*Only defined if used */
 
 
-/*Weight*/   
+/*Weight*/
       float *col_weight;
       float *seq_weight;
       float **res_weight;
@@ -202,7 +218,7 @@ struct Alignment
     int ** score_res;
     int score_aln;
     int score;
-    int ibit;  
+    int ibit;
     int cpu;
     int finished;
 
@@ -213,13 +229,13 @@ struct Alignment
     int output_tm;
 /*Must Not be copied*/
      int used;
-     int num;     
-     int **pos; 
-/*For linked lists*/      
-    struct Alignment * A;  
+     int num;
+     int **pos;
+/*For linked lists*/
+    struct Alignment * A;
       /*Misc*/
     int random_tag;
-     
+
     };
-    
+
 typedef struct Alignment Alignment;

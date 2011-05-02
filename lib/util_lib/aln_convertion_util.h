@@ -78,7 +78,7 @@ Alignment * aln2unique_name_aln ( Alignment *S);
 int name_list2unique_name_list (int n, char **name);
 Sequence *seq2clean_seq ( Sequence *S, char *alp);//remove all alp characters from seq
 char**gene2exons    (char **seq, int nseq);
- 
+
 int       ** seq2aln_pos      (Alignment *A, int *n, int **ls);
 Alignment *padd_aln ( Alignment *A);
 char **padd_string ( char **string, int n,char pad);
@@ -101,7 +101,7 @@ int       ** aln2pos_simple   (Alignment *A, int n_nseq, ...);
 int       ** aln2pos_simple_2 (Alignment *A);
 Alignment ** split_seq_in_aln_list ( Alignment **aln, Sequence *S, int l_seq, char **seq_list);
 
-Sequence * fill_sequence_struc ( int nseq, char **sequences, char **seq_name);
+Sequence * fill_sequence_struc ( int nseq, char **sequences, char **seq_name, Genomic_info *genome_co);
 
 int  seq_list2in_file ( TC_method *M, Sequence *S, char *list, char *file);
 int  seq_list2fasta_file( Sequence *S,  char *list, char *file, char *outmode);
@@ -325,7 +325,7 @@ int aln2coverage ( Alignment *A, int ref_seq);
 double aln2entropy (Alignment *A, int *in_ls, int in_ns, float gap_threshold);
 int sub_aln2sim ( Alignment *A, int *ns, int **ls, char *mode);
 int sub_aln2max_sim ( Alignment *A, int *ns, int **ls, char *mode);
-int aln2sim2    ( Alignment *A); 
+int aln2sim2    ( Alignment *A);
 int aln2sim     ( Alignment *A, char *mode);
 int seq2idscore_sim ( char *seq1, char *seq2);
 
@@ -353,13 +353,13 @@ int ** fast_aln2sim_list (Alignment *A, char *mode, int *ns, int **ls);
 
 int ** aln2dist_mat(Alignment *A);
 int ** aln2dist_mat_gap (Alignment *A);
-int ** aln2sim_mat_km (Alignment *A, char *mode); 
-int ** aln2sim_mat    (Alignment *A, char *mode); 
+int ** aln2sim_mat_km (Alignment *A, char *mode);
+int ** aln2sim_mat    (Alignment *A, char *mode);
 int **aln2cov (Alignment *A);
 int ** get_dist_aln_array ( Alignment *A, char *mode);
 int ** get_raw_sim_aln_array ( Alignment *A, char *mode);
 int ** get_sim_aln_array ( Alignment *A, char *mode);
-int generic_get_seq_sim  ( char *seq1, char *seq2, int *cache, char *mode);  
+int generic_get_seq_sim  ( char *seq1, char *seq2, int *cache, char *mode);
 Alignment * grep_seq (Alignment *S,char *field, char *mode, char *string);
 Alignment* modify_seq (Alignment *S,char *field, char *string1, char *string2);
 
