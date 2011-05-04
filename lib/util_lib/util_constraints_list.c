@@ -2688,9 +2688,102 @@ Constraint_list * make_test_lib(Constraint_list *CL)
 }
 
 
-Constraint_list *
-expand_constraint_list_file_w_blocks(Constraint_list *CL, char *fname)
+
+Constraint_list * old_read_constraint_list_file(Constraint_list *CL, char *fname)
 {
+	Sequence *NS;
+	int **index, *entry;
+	int c,line=0,s1, s2, r1, r2, misc, cons,x,we;
+	FILE *fp;
+	char *buf=NULL;
+	int error=0;
+	int keepNS=0;
+	int a;
+
+
+	NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
+
+	if (!CL)
+	{
+		CL=declare_constraint_list_simple(NS);
+		keepNS=1;
+	}
+
+
+	index=fix_seq_seq (NS, CL->S);
+	entry=vcalloc ( CL->entry_len+1, sizeof (int));
+
+
+	fp=vfopen(fname,"r");
+	while ((c=fgetc(fp))!='#' && c!=EOF){line+=(c=='\n')?1:0;}
+
+
+	ungetc (c, fp);
+	while ((buf=vfgets ( buf, fp))!=NULL)
+	{
+		line++;
+		if (buf[0]=='!')continue;
+		else if (buf[0]=='#')
+		{
+			sscanf ( buf, "#%d %d", &s1, &s2);
+			s1--; s2--;
+			if (s1>NS->nseq || s2>NS->nseq)error=1;
+		}
+		else
+		{
+			cons=misc=r1=r2=we=0;
+			x=sscanf (buf, "%d %d %d %d %d",&r1,&r2,&we,&cons,&misc);
+
+			if (r1>NS->len[s1] || r2>NS->len[s2] || x<3)error=1;
+			else
+			{
+				int is1, is2, ir1, ir2;
+
+				is1=entry[SEQ1]=index[s1][0];//0-N-1
+				is2=entry[SEQ2]=index[s2][0];//0-N-1
+				ir1=entry[R1]=index[s1][r1];//1-N
+				ir2=entry[R2]=index[s2][r2];//1-N
+				entry[WE]=we;//0-1000
+				entry[CONS]=cons;
+				entry[MISC]=misc;
+				if (ir1>(CL->S)->len[is1] || ir2>(CL->S)->len[is2])
+				{
+
+					myexit(fprintf_error (stderr, "%s::%d -- %s::%d ---- %s::%d %s::%d", NS->name[s1],r1, NS->name[s2],r2, (CL->S)->name[is1],ir1, (CL->S)->name[is2],ir2));
+				}
+				if (entry[SEQ1]>-1 && entry[SEQ2]>-1 && entry[R1]>0 && entry[R2]>0 && entry[WE]>0)
+					add_entry2list (entry, CL);
+			}
+		}
+		if (error)
+			printf_exit (EXIT_FAILURE,stderr,"Parsing Error [L:%d F:%s S:%s]",line,fname,buf);
+	}
+
+	vfclose (fp);
+
+	if (!keepNS)free_sequence (NS,-1);
+	vfree (entry);
+	vfree (buf);
+	free_int (index, -1);
+	return CL;
+}
+
+
+Constraint_list *
+read_constraint_list_file(Constraint_list *CL, char *fname)
+{
+	static int ov = -1;
+	if (ov == -1)
+	{
+		if (NULL == getenv ("DEBUG_READ_LIB"))
+			ov = 0;
+		else
+			ov = 1;
+	}
+
+	if (ov)
+		return old_read_constraint_list_file(CL, fname);
+
 	Sequence *NS;
 	int **index, *entry;
 	int c,line=0,s1, s2, r1, r2, misc, cons,x,we;
@@ -2782,94 +2875,6 @@ expand_constraint_list_file_w_blocks(Constraint_list *CL, char *fname)
 	free_int (index, -1);
 	return CL;
 }
-
-
-Constraint_list * read_constraint_list_file(Constraint_list *CL, char *fname)
-{
-
-	if ((token_is_in_file (fname,"+BLOCK+")) || (token_is_in_file (fname,"++")))
-	{
-		return expand_constraint_list_file_w_blocks(CL, fname);
-	}
-
-
-	Sequence *NS;
-	int **index, *entry;
-	int c,line=0,s1, s2, r1, r2, misc, cons,x,we;
-	FILE *fp;
-	char *buf=NULL;
-	int error=0;
-	int keepNS=0;
-	int a;
-
-
-	NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
-
-	if (!CL)
-	{
-		CL=declare_constraint_list_simple(NS);
-		keepNS=1;
-	}
-
-
-	index=fix_seq_seq (NS, CL->S);
-	entry=vcalloc ( CL->entry_len+1, sizeof (int));
-
-
-	fp=vfopen(fname,"r");
-	while ((c=fgetc(fp))!='#' && c!=EOF){line+=(c=='\n')?1:0;}
-
-
-	ungetc (c, fp);
-	while ((buf=vfgets ( buf, fp))!=NULL)
-	{
-		line++;
-		if (buf[0]=='!')continue;
-		else if (buf[0]=='#')
-		{
-			sscanf ( buf, "#%d %d", &s1, &s2);
-			s1--; s2--;
-			if (s1>NS->nseq || s2>NS->nseq)error=1;
-		}
-		else
-		{
-			cons=misc=r1=r2=we=0;
-			x=sscanf (buf, "%d %d %d %d %d",&r1,&r2,&we,&cons,&misc);
-
-			if (r1>NS->len[s1] || r2>NS->len[s2] || x<3)error=1;
-			else
-			{
-				int is1, is2, ir1, ir2;
-
-				is1=entry[SEQ1]=index[s1][0];//0-N-1
-				is2=entry[SEQ2]=index[s2][0];//0-N-1
-				ir1=entry[R1]=index[s1][r1];//1-N
-				ir2=entry[R2]=index[s2][r2];//1-N
-				entry[WE]=we;//0-1000
-				entry[CONS]=cons;
-				entry[MISC]=misc;
-				if (ir1>(CL->S)->len[is1] || ir2>(CL->S)->len[is2])
-				{
-
-					myexit(fprintf_error (stderr, "%s::%d -- %s::%d ---- %s::%d %s::%d", NS->name[s1],r1, NS->name[s2],r2, (CL->S)->name[is1],ir1, (CL->S)->name[is2],ir2));
-				}
-				if (entry[SEQ1]>-1 && entry[SEQ2]>-1 && entry[R1]>0 && entry[R2]>0 && entry[WE]>0)
-					add_entry2list (entry, CL);
-			}
-		}
-		if (error)
-			printf_exit (EXIT_FAILURE,stderr,"Parsing Error [L:%d F:%s S:%s]",line,fname,buf);
-	}
-
-	vfclose (fp);
-
-	if (!keepNS)free_sequence (NS,-1);
-	vfree (entry);
-	vfree (buf);
-	free_int (index, -1);
-	return CL;
-}
-
 
 int
 read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name, Genomic_info **genome_co)
