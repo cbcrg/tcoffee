@@ -3656,7 +3656,7 @@ NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_li
 
 
   A->ibit=0;
-  if ( strm ((CL->TC)->use_seqan, "NO"))
+  if ( strm ((CL->TC)->use_seqan, "NO") || !(CL->TC)->use_seqan)
     {
       static char *tmp;
       NT_node *T;

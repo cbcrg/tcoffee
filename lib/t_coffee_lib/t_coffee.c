@@ -1225,6 +1225,7 @@ if ( !do_evaluate)
 				/*Min_value*/ "any"         ,		\
 				/*Max Value*/ "any"			\
 					      );
+
 	aln_file_list=declare_char (1000, STRING);
 	n_aln_file_list=get_cl_param(				\
 				/*argc*/      argc          ,	\
@@ -5397,17 +5398,17 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
    
    CL->master=vcalloc (S->nseq+1, sizeof(int));
    
-   if ( S->nseq==2 || strm (seq, "no") || strm (seq, "default")) 
-     {
-       for (a=0; a<S->nseq; a++)CL->master[a]=1;
-       return NULL;
-     }
-   else if ( check_file_exists (seq))
+   if ( check_file_exists (seq))
      {
        Sequence *L;
        L=main_read_seq (seq);
        for (a=0; a< L->nseq; a++)
 	 if ( (b=name_is_in_list (L->name[a], S->name,S->nseq, 100))!=-1)CL->master[b]=1;
+     }
+   else if ( S->nseq==2 || strm (seq, "no") || strm (seq, "default")) 
+     {
+       for (a=0; a<S->nseq; a++)CL->master[a]=1;
+       return NULL;
      }
    else
      {

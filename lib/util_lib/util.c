@@ -8586,12 +8586,12 @@ void clean_exit ()
       lock (getpid(), LLOCK, LRELEASE, "");
       lock (getpid(), LWARNING, LRELEASE, "");
       lock (getpid(), LERROR, LRELEASE, "");
+      add_method_output2method_log (NULL, NULL, NULL, NULL, decode_name (NULL, CODELIST));
     }
 
 
 
 
-  add_method_output2method_log (NULL, NULL, NULL, NULL, decode_name (NULL, CODELIST));
 
   //Remove all temporary files
   debug=(atoigetenv ("DEBUG_TMP_FILE"));

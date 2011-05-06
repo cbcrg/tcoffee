@@ -536,8 +536,14 @@ int add_method_output2method_log (char *l,char *command,Alignment *A, Constraint
 	static char *file, *log_file;
 	static int set;
 
+	
 	if ( set && log_file==NULL && l==NULL) return 0;
-	if (!set ){log_file=get_string_variable ("method_log");if (log_file && strm (log_file, "no"))log_file=NULL; set=1;}
+	if (!set )
+	  {
+
+	    log_file=get_string_variable ("method_log");if (log_file && strm (log_file, "no"))log_file=NULL; set=1;
+	  }
+	
 	if (!file)file=vtmpnam (NULL);
 
 	if ( l);

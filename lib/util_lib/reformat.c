@@ -833,7 +833,6 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	if (!in_format[0])return NULL;
 
 
-
 	D->A=declare_Alignment(NULL);
 	if ( RAD->keep_case)(D->A)->residue_case=KEEP_CASE;
 
@@ -851,6 +850,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 
 		}
 
+	
 	else if ( strm (in_format, "treefile_list"))
 	  {
 
@@ -7226,6 +7226,8 @@ Alignment *input_conc_aln ( char *name, Alignment *IN)
   while ( (p=strtok (NULL,"@"))!=NULL)
     {
       char *buf;
+      HERE ("--- %s", p);
+      if ( p[0]=='#')continue;
       buf=vcalloc ( strlen (p)+1, sizeof (char));
       sprintf (buf,"%s", p);
       buf=substitute (buf,"!protected!", "@");
@@ -12772,7 +12774,6 @@ char *decode_name (char *name, int mode)
     {
       for (a=0; a< n; a++)
 	if ( strm (name, name_list[a][0]))return name_list[a][1];
-
 
       name_list=realloc (name_list, sizeof (char**)*(n+1));
       name_list[n]=vcalloc (2, sizeof (char*));
