@@ -5610,7 +5610,7 @@ char** km_coffee (int argc, char **argv)
       else if ( strm (argv[a], "-mode"))++a;
       else if ( strm (argv[a], "-km_k"))     {k=atoi (argv[++a]);}
       else if ( strm (argv[a], "-km_nit"))   {nit=atoi (argv[++a]);}
-      else if ( strm (argv[a], "-tree_mode")) {tm=argv[++a];}
+      //else if ( strm (argv[a], "-tree_mode")) {tm=argv[++a];}
       
       else
 	{
@@ -5624,7 +5624,7 @@ char** km_coffee (int argc, char **argv)
     }
 	     
   
-  if (!tm){new_argv[new_argc]=vcalloc(100, sizeof (char)); sprintf ( new_argv[new_argc++], "kmeans");}
+  //if (!tm){new_argv[new_argc]=vcalloc(100, sizeof (char)); sprintf ( new_argv[new_argc++], "kmeans");}
   if (!k)k=30;
   if (!nit)nit=1;
   A=seq2aln(S,NULL, RM_GAP);
