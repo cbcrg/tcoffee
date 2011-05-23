@@ -2273,7 +2273,7 @@ Alignment * align_two_sequences ( char *seq1, char *seq2, char *in_matrix, int g
 	l_s[1][0]=1;
 
 
-// 	printf("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBbb\n");
+
 	CL->S=fill_sequence_struc(2, seq_array, name_array, NULL);
 
 	A=seq2aln(CL->S, NULL, 1);

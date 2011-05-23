@@ -1179,7 +1179,6 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        format=identify_seq_format (name);
 
        IN_SEQ=A->S;
-
        if      ((format && strm(format, "saga_aln" )) ||strm(format, "clustal_aln")||strm(format, "t_coffee_aln" ) )
 	 {
 
@@ -1194,7 +1193,6 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 
 
 		S=get_fasta_sequence ( name, NULL);
-
 		S->contains_gap=0;
 		seq2aln (S, A, 0);
 		}
@@ -1207,7 +1205,6 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        else if (format && strm(format, "fasta_seq") && A)
 	   {
 	   S=get_fasta_sequence ( name, NULL);
-
 	   for ( a=1; a<S->nseq; a++)if ( strlen (S->seq[a-1])!=strlen (S->seq[a])){free_sequence (S, S->nseq); free_aln (A); return NULL;}
 	   S->contains_gap=0;
 	   seq2aln (S, A, 0);
@@ -1233,17 +1230,14 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	      fprintf ( stderr, "\nWARNING (main_read_aln): %s is duplicated in File %s ", check_list_for_dup( A->name, A->nseq), A->file[0]);
 	      A=aln2unique_name_aln(A);
 	  }
-
-       if (IN_SEQ)A->S=IN_SEQ;
-       else if (!A->S){A->S=aln2seq(A);}
-
-       A->S=ungap_seq(A->S);
-       A=fix_aln_seq(A, A->S);
-       compress_aln (A);
-       for ( a=0; a< A->nseq; a++) sprintf ( A->file[a], "%s", name);
-
-       A=clean_aln (A);
-       return A;
+	 if (IN_SEQ)A->S=IN_SEQ;
+	 else if (!A->S){A->S=aln2seq(A);}
+	 A->S=ungap_seq(A->S);
+	 A=fix_aln_seq(A, A->S);
+	 compress_aln (A);
+	 for ( a=0; a< A->nseq; a++) sprintf ( A->file[a], "%s", name);
+	 A=clean_aln (A);
+	 return A;
        }
 
 

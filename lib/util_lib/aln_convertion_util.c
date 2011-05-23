@@ -4710,6 +4710,7 @@ Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
 
 Sequence * add_prf2seq  ( char *file, Sequence *S)
     {
+      
       char **new_seq;
       Sequence *NS;
 
@@ -4726,8 +4727,9 @@ Sequence * add_prf2seq  ( char *file, Sequence *S)
 	  ((R->VR)->A)->expand=1;
 	  new_seq=declare_char (1,A->len_aln+1);
 	  sprintf ( new_seq[0], "%s",aln2cons_seq_mat(A, "blosum62mt"));
-
 	  NS=fill_sequence_struc(1, new_seq,A->file, NULL);
+	  
+	  
 	  S=add_sequence (NS, S, 0);
 	  (S->T[S->nseq-1])->R=R;
 
@@ -6371,7 +6373,7 @@ Alignment * reorder_aln ( Alignment *A, char **name, int nseq)
 		  sn =name_is_in_list ( name[a],BUF->name, A->nseq,STRING);
 		  if ( sn==-1)
 			{
-			    ;
+			  ;
 			}
 		else
 		    {
@@ -9753,52 +9755,119 @@ Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
     }
   else
     {
-      int a, dim;
+      int a,b, dim;
       double **v;
-      int   *gn;
-      char **gfile;
-      FILE **gfp;
-
-      gn=vcalloc ( k, sizeof (int));
-      gfile=vcalloc ( k, sizeof (char*));
-      gfp=vcalloc (k, sizeof (FILE *));
+      static char *tfile;
+      int *gn;
+      int **gl;
+      
+      //Declare memory
+      if (!tfile)tfile=vtmpnam(NULL);
+      gn=vcalloc    (k, sizeof (int));
+      gl=declare_int(k, A->nseq); 
       AL=vcalloc  (k, sizeof (Alignment*));
-
+      
+      //Run KM
       dim=60;
       v=aln2km_vector(A,mode,&dim);
       km_kmeans (v,A->nseq,dim,k,0.0001,NULL);
 
-      for (a=0; a<k; a++)
-	{
-	  gfile[a]=vtmpnam(NULL);
-	  gfp[a]=vfopen (gfile[a], "w");
-	}
-
+      //distribut sequences. Warning::some groups may be empty
       for (a=0; a<A->nseq; a++)
 	{
 	  int g=(int)v[a][dim+1];
 	  int s=(int)v[a][dim+2];
-	  fprintf (gfp[g], ">%s\n%s\n", A->name[s], A->seq_al[s]);
-	  gn[g]++;
+	  gl[g][gn[g]++]=s;
 	}
-      for ( a=0; a<k; a++)
+      for (a=0; a<k; a++)
 	{
-	  vfclose (gfp[a]);
-
+	  FILE *fp;
 	  if (gn[a])
 	    {
-	      AL[n[0]]=main_read_aln(gfile[a], NULL);
-	      ungap_aln(AL[n[0]]);
-	      n[0]++;
+	      fp=vfopen (tfile, "w");
+	      for (b=0; b<gn[a]; b++)
+		{
+		  int s=gl[a][b];
+		  fprintf (fp, ">%s\n%s\n", A->name[s], A->seq_al[s]);
+		}
+	      vfclose (fp);
+	      AL[n[0]++]=main_read_aln(tfile, NULL);
+	      
 	    }
 	}
-      free_double(v, -1);
       vfree (gn);
-      vfree (gfile);
-      vfree (gfp);
+      free_int (gl, -1);
     }
+ 
   return AL;
 
+}
+Alignment** seq2id_subset (Alignment*A,int k,int *ng, char *mode)
+{
+  int n, nn, a;
+  int *l, *nl;
+  Alignment **AL;
+  static char *file1;
+  static char *file2;
+  int minid;
+  int count=0;
+  Alignment *B;
+  
+  if (!A || !A->nseq)return NULL;
+  
+  if (!file1)file1=vtmpnam (NULL);
+  minid=atoi (mode);
+  
+  if (minid<100)
+    myexit(fprintf_error (stderr, "minid<100 Not supported in seq2id_subset"));
+  
+  ng[0]=0;
+  n=A->nseq;
+  
+  
+  nn=0;
+  l=vcalloc  ( n*2, sizeof (int));
+  nl=vcalloc ( n*2, sizeof (int));
+  for (a=0; a<n; a++)l[a]=a;
+  AL=vcalloc (n, sizeof (Alignment *));
+  
+  while (n)
+    {
+      int n2=0;
+      FILE *fp2;
+      char tmpfile[100];
+      
+      fp2=vfopen (file1, "w");
+      fprintf (fp2, ">%s\n%s\n", A->name[l[0]], A->seq_al[l[0]]);
+      for (a=1; a<n; a++)
+	{
+	  if ( strm (A->seq_al[l[a]],A->seq_al[l[0]]))
+	    {
+	      fprintf (fp2, ">%s\n%s\n", A->name[l[a]], A->seq_al[l[a]]);
+	    }
+	  else
+	    nl[nn++]=l[a];
+	}
+      
+      vfclose (fp2);
+      fp2=vfopen (file1, "r");vfclose (fp2);
+      for (a=0; a<nn; a++)l[a]=nl[a];
+      B=AL[ng[0]++]=main_read_aln(file1, NULL);
+      
+      
+      
+      if (B->nseq==0)
+	{
+	  HERE ("%s", B->seq_al[0]);
+	  printf_system ( "cp %s error_file", file1);exit (0);
+	}
+      n=nn;
+      nn=0;
+    }
+ 
+  vfree (l);
+  vfree (nl);
+  return AL;
 }
 Alignment* km_seq (Alignment *A, int k, char *mode, char *name)
 {

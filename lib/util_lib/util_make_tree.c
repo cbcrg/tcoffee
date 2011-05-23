@@ -1222,6 +1222,7 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
   int use_len=0;
   Sequence *S;
   S=aln2seq(A);
+  
   if ( strstr (mode, "diaa"))
     {
       
@@ -1328,22 +1329,23 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
       return aln2km_vector(A,"triaa", dim);
     }
   //Keep only the components with a high variance
-  if (!dim[0] || dim[0]>=mdim)
+ 
+  if ((!dim[0] || dim[0]>=mdim))
     {
       dim[0]=mdim;
-      fprintf ( stderr, "\n\t-- Keep %d components out of %d [mode=%s]\n", dim[0], mdim, mode);
+      if (dim[0]<1)fprintf ( stderr, "\n\t-- 1-Keep %d components out of %d [mode=%s]\n", dim[0], mdim, mode);
     }
   else
     {
       double **v2, tsd1,tsd2;
-      int    **sd;
-      sd=declare_int    (mdim,2);
+      double  **sd;
+      sd=declare_double    (mdim,2);
       tsd1=tsd2=0;
       
       for (a=0; a<mdim; a++)
 	{
 	  double sum, sum2;
-	  double avg;
+	  double avg, diff;
 	  sum=sum2=0;
 	  
 	  for (b=0; b<A->nseq; b++)
@@ -1352,17 +1354,20 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
 	      sum2+=v[b][a]*v[b][a];
 	    }
 	  
-	  avg=sum/A->nseq;
+	  avg=(A->nseq==0)?0:sum/A->nseq;
 	  sd[a][0]=a;
-	  sd[a][1]=100000*sqrt ((double)((sum2/A->nseq)-(avg*avg)));
-	  tsd1+=(double)sd[a][1];
+	  diff=(sum2/A->nseq)-(avg*avg);
+	  
+	  sd[a][1]=(diff<=0)?0:sqrt (diff);
+	  
+	  tsd1+=sd[a][1];
 	}
-      
+     
       if (dim[0]<=100)
 	{
 	  tsd1=(tsd1*(double)dim[0])/(double)100;
 	  dim[0]=0;
-	  sort_int_inv (sd,2,1, 0,mdim-1);
+	  sort_double_inv (sd,2,1, 0,mdim-1);
 	 
 	  for (a=0; a<mdim; a++)
 	    {
@@ -1371,17 +1376,18 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
 	      else a=mdim;
 	    }
 	  
-	  fprintf ( stderr, "\n\t-- Keep %d components out of %d [mode=%s]\n", dim[0], mdim, mode);
+	  if (dim[0]<1)fprintf ( stderr, "\n\t-- 2-Keep %d components out of %d [mode=%s]\n", dim[0], mdim, mode);
 	  v2=declare_double (A->nseq, dim[0]+4);
 	  for (a=0; a<A->nseq; a++)
 	    for (b=0; b<dim[0]; b++)
-	      v2[a][b]=v[a][sd[b][0]];
+	      v2[a][b]=v[a][(int)sd[b][0]];
 	  free_double (v, -1);
+	  
 	  v=v2;
 	}
       else
 	{
-	  fprintf ( stderr, "\n\t-- Keep %d components out of %d [mode=%s]\n", dim[0], mdim, mode);
+	  if (dim[0]<1)fprintf ( stderr, "\n\t-- 3-Keep %d components out of %d [mode=%s]\n", dim[0], mdim, mode);
 	}
     }
   

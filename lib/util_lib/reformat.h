@@ -31,6 +31,7 @@ int get_msa_line_length (int line, int aln_len);
 int seq_reformat (int argc, char **argv);
 
 Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,Action_data_struc *RAD);
+Alignment * read_fasta_aln_noceck ( char *name, Alignment *A);
 Alignment * main_read_aln ( char *name, Alignment *A);
 Sequence  * read_sequences ( char *name);
 Sequence  * read_alifold   ( char *name);

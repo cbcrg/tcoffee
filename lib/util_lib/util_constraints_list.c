@@ -2472,7 +2472,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 			buf=name2type_name(fname[a]);mode=buf[0];lname=buf+1;
 
 			if (is_seq_source ('A', mode, SeqMode))
-			{
+			  {
 
 
 				A=main_read_aln (lname,NULL);
@@ -2482,35 +2482,35 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 				if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);}
 				free_aln (A);
 				free_sequence (S1, S1->nseq);
-			}
+			  }
 			else if ( is_seq_source ('R', mode, SeqMode))
-			{
+			  {
 				S=add_prf2seq (lname, S);
 
-			}
+			  }
 			else if (is_seq_source ('P', mode, SeqMode))
-			{
-				int i;
-
-				S1=get_pdb_sequence (lname);
-				if (S1==NULL)
-				{
-					add_warning ( stderr, "\nWarning: Could not use PDB: %s", lname);
-				}
-				else
-				{
-					if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);}
-					i=name_is_in_list (S1->name[0], S->name, S->nseq, 100);
-					(S->T[i])->P=fill_P_template (S->name[i], lname, S);
-				}
-				free_sequence (S1, S1->nseq);
-			}
+			  {
+			    int i;
+			    
+			    S1=get_pdb_sequence (lname);
+			    if (S1==NULL)
+			      {
+				add_warning ( stderr, "\nWarning: Could not use PDB: %s", lname);
+			      }
+			    else
+			      {
+				if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);}
+				i=name_is_in_list (S1->name[0], S->name, S->nseq, 100);
+				(S->T[i])->P=fill_P_template (S->name[i], lname, S);
+			      }
+			    free_sequence (S1, S1->nseq);
+			  }
 			else if ( mode=='M');
 			else if ( mode=='X');
 			else if ( mode=='W');
-
+			
 			else if (is_seq_source ('S', mode, SeqMode))
-			{
+			  {
 				/*1 Try with my routines (read t_coffee and MSF)*/
 				if ( (A=main_read_aln ( lname, NULL))!=NULL)
 				{
@@ -2775,8 +2775,7 @@ Constraint_list * old_read_constraint_list_file(Constraint_list *CL, char *fname
 }
 
 
-Constraint_list *
-read_constraint_list_file(Constraint_list *CL, char *fname)
+Constraint_list *read_constraint_list_file(Constraint_list *CL, char *fname)
 {
 	static int ov = -1;
 	if (ov == -1)

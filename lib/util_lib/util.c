@@ -474,17 +474,6 @@ int **search_in_list_int ( int *key, int k_len, int **list, int ne)
 	l=bsearch (&key,list, ne, sizeof(int**),(int(*)(const void*,const void*))(cmp_list_int));
 	return l;
 	}
-void sort_float ( float **V,int N_F, int F, int left, int right)
-	{
-	sort_field=F;
-	qsort ( V, right+1, sizeof(int**),(int(*)(const void*,const void*))(cmp_int));
-	}
-int cmp_float ( const float **a, const float **b)
-	{
-	if ( a[0][sort_field]< b[0][sort_field])return-1;
-	else if ( a[0][sort_field]==b[0][sort_field])return 0;
-	else return 1;
-	}
 
 void sort_int_1D ( int *L, int n)
 	{
@@ -543,6 +532,20 @@ void sort_int ( int **V,int N_F, int F, int left, int right)
 	sort_field=F;
 	qsort ( V, (right-left)+1, sizeof(int**),(int(*)(const void*,const void*))(cmp_int));
 	}
+void sort_float ( float **V,int N_F, int F, int left, int right)
+	{
+	  if (!V)return;
+	sort_field=F;
+	qsort ( V, (right-left)+1, sizeof(float**),(int(*)(const void*,const void*))(cmp_float));
+	}
+void sort_double ( double **V,int N_F, int F, int left, int right)
+	{
+	  if (!V)return;
+	  sort_field=F;
+	  qsort ( V, (right-left)+1, sizeof(double**),(int(*)(const void*,const void*))(cmp_double));
+	}
+
+
 void sort_list_int ( int **V,int N_F, int F, int left, int right)
         {
 	if (!V)return;
@@ -574,6 +577,54 @@ int cmp_list_int2 (const int**a, const int**b)
 	  }
 	return 0;
 	}
+
+void sort_float_inv ( float **V,int N_F, int F, int left, int right)
+	{
+	int a,b;
+	float **list;
+	if (!V)return;
+	sort_field=F;
+	qsort ( V, (right-left)+1, sizeof(float**),(int(*)(const void*,const void*))(cmp_float));
+
+	list=declare_float ((right-left)+1, N_F);
+	for ( a=left; a< (right-left)+1; a++)
+		{
+		for ( b=0; b< N_F; b++)
+			{
+			list[a-left][b]=V[a][b];
+			}
+		}
+	for ( a=left; a< (right-left)+1; a++)
+		{
+		for ( b=0; b< N_F; b++)
+			V[a][b]=list[(right-left)-a][b];
+		}
+	free_float (list, -1);
+	}
+void sort_double_inv ( double **V,int N_F, int F, int left, int right)
+	{
+	int a,b;
+	double **list;
+	if (!V)return;
+	sort_field=F;
+	qsort ( V, (right-left)+1, sizeof(double**),(int(*)(const void*,const void*))(cmp_double));
+
+	list=declare_double ((right-left)+1, N_F);
+	for ( a=left; a< (right-left)+1; a++)
+		{
+		for ( b=0; b< N_F; b++)
+			{
+			list[a-left][b]=V[a][b];
+			}
+		}
+	for ( a=left; a< (right-left)+1; a++)
+		{
+		for ( b=0; b< N_F; b++)
+			V[a][b]=list[(right-left)-a][b];
+		}
+	free_double (list, -1);
+	}
+
 void sort_int_inv ( int **V,int N_F, int F, int left, int right)
 	{
 	int a,b;
@@ -623,7 +674,18 @@ void sort_list_int_inv ( int **V,int N_F, int F, int left, int right)
 	}
 
 
-
+int cmp_float  ( const float**a, const float**b)
+	{
+	if ( a[0][sort_field]< b[0][sort_field])return-1;
+	else if ( a[0][sort_field]==b[0][sort_field])return 0;
+	else return 1;
+	}
+int cmp_double ( const double**a, const double**b)
+	{
+	if ( a[0][sort_field]< b[0][sort_field])return-1;
+	else if ( a[0][sort_field]==b[0][sort_field])return 0;
+	else return 1;
+	}
 int cmp_int ( const int**a, const int**b)
 	{
 	if ( a[0][sort_field]< b[0][sort_field])return-1;
@@ -650,7 +712,7 @@ int cmp_list_int (const int**a, const int**b)
 	}
 
 
-int name_is_in_list ( char *name, char **name_list, int n_name, int len)
+int name_is_in_list_h ( char *name, char **name_list, int n_name, int len)
 {
 	static char **llist;
 	static int    ln;
@@ -675,7 +737,7 @@ int name_is_in_list ( char *name, char **name_list, int n_name, int len)
 }
 
 
-int name_is_in_list_s ( char *name, char **name_list, int n_name, int len)
+int name_is_in_list ( char *name, char **name_list, int n_name, int len)
 {
 	int a;
 	int pos=-1;
@@ -5980,7 +6042,9 @@ FILE * vfclose ( FILE *fp)
        if ( fp==stderr)return stderr;
        if ( fp==stdin) return stdin;
        if ( fp==NULL)return NULL;
-       else fclose (fp);
+       else 
+	 if (fclose (fp)!=0)HERE ("***** ERROR****");
+       
        return NULL;
        }
 

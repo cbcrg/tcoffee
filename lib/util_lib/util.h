@@ -87,7 +87,7 @@ void **search_in_list_array ( void *key,int *p, int comp_len,void **L , int len,
 
 int **search_in_list_int ( int *key, int k_len, int **list, int ne);
 void sort_float ( float **V,int N_F, int F, int left, int right);
-int cmp_float ( const float **a, const float **b);
+
 void sort_int_1D ( int *L, int n);
 char** sort_string_array (char **V, int n);
      
@@ -96,9 +96,17 @@ int * flash_sort_int_inv ( int **V,int N_F, int F, int left, int right);
 int * flash_sort_int     ( int **V,int N_F, int F, int left, int right);
 void sort_list_int ( int **V,int N_F, int F, int left, int right);
 void sort_list_int2 ( int **V,int *list,int N_F, int left, int right);
-void sort_int_inv ( int **V,int N_F, int F, int left, int right);
+
+void sort_int_inv    ( int    **V,int N_F, int F, int left, int right);
+void sort_double_inv ( double **V,int N_F, int F, int left, int right);
+void sort_float_inv  ( float  **V,int N_F, int F, int left, int right);
+
 void sort_list_int_inv ( int **V,int N_F, int F, int left, int right);
-int cmp_int ( const int**a, const int**b);
+
+int cmp_int    ( const int**a,    const int**b);
+int cmp_double ( const double**a, const double**b);
+int cmp_float  ( const float **a, const float**b);
+
 int cmp_list_int (const int**a, const int**b);
 int cmp_list_int2 (const int**a, const int**b);
 

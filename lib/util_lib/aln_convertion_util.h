@@ -381,6 +381,8 @@ char *aln2random_seq (Alignment *A, int noise1, int noise2, int noise3, int gap_
 int * km2centroids (Alignment *A, int k, char *mode,int *keep);
 Alignment* km_seq (Alignment *S, int k, char *mode,char*name );
 Alignment** seq2kmeans_subset (Alignment *A, int k, int *n, char *mode);
+Alignment** seq2id_subset (Alignment *A, int k, int *n, char *mode);
+
 int* seq2kmeans_class  (Alignment *A, int k, char *mode);
 Alignment *gap_trim (Alignment *A, int f);
 Alignment * master_trimseq( Alignment *A, Sequence *S,char *mode);
