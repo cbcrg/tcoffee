@@ -2804,3 +2804,107 @@ int cl2diag_cap390 (Alignment *A, int *ns, int **ls, Constraint_list *CL, int **
   return n;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////                                                                           ///////////////
+///////////////                                                                           ///////////////
+///////////////                       Profile_PW                                          ///////////////
+///////////////                                                                           ///////////////
+///////////////                                                                           ///////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int **aln2prf (Alignment *A, char *matrix)
+{
+  int **mat=read_matrice (matrix);
+  int *vector;
+  int **prf;
+  int r,a,b,c;
+  vector=vcalloc (27, sizeof (int));
+  prf=declare_int (A->len_aln, 26);
+  
+  for (a=0; a<A->len_aln; a++)
+    {
+      for (b=0; b<26; b++)vector[b]=0;
+      for ( b=0; b<A->nseq; b++)
+	{
+	  r=tolower(A->seq_al[b][a]);
+	  if (r=='-')continue;
+	  r-='a';
+	  vector[r]++;
+	}
+      
+      for (b=0; b<26; b++)
+	{
+	  double score=0;
+	  double tot=0;
+	  for (c=0; c<26; c++)
+	    {
+	      
+	      score+=mat[b][c]*vector[c];
+	      tot  +=vector[c];
+	    }
+	  prf[a][b]=(int)((score/tot)*100);
+	}
+    }
+  vfree (vector);
+  
+  return prf;
+}
+char *add_sequence2prf (char *seq,char *al, int **prf, int lj, int gop, int gep)
+{
+  static int **match, **score,**indel,**tb;
+  int m,g;
+  int li, i, j,l;
+  static int max_i;
+  static int max_j;
+  gop*=100;
+  gep*=100;
+  if (seq)li=strlen (seq);
+  
+  if (li>max_i ||lj>max_j|| !seq)
+    {
+      if (match)free_int (match, -1);
+      if (score)free_int (score, -1);
+      if (indel)free_int (indel, -1);
+      if (!seq) return NULL;
+      
+      match=declare_int( li+1, lj+1);
+      score=declare_int( li+1, lj+1);
+      indel=declare_int( li+1, lj+1);
+      tb=declare_int( li+1, lj+1);
+      
+      max_i=li;
+      max_j=lj;
+    }
+  
+  if (!al)al=vcalloc ( li+lj+1, sizeof (char));
+  lower_string (seq);
+  for (i=1; i<=li; i++)//seq
+    {
+      match[i][0]=2*gop;
+      indel[i][0]=gop;
+      for (j=1; j<=lj; j++)//prf
+	{
+	  g=indel[i][j]=MAX((match[i][j-1]+gop),(indel[i][j-1]+gep));
+	  
+	  m=match[i][j]=score[i-1][j-1]+prf[j-1][seq[i-1]-'a'];
+	  if (m>g){score[i][j]=m;tb[i][j]=1;}
+	  else    {score[i][j]=g;tb[i][j]=0;}
+	}
+    }
+  
+  l=0;
+  i=li;
+  j=lj;
+  while (l<lj)
+    {
+
+      //HERE ("%d %d -- %d",i,j, tb[i][j]);
+      if (tb[i][j]==1){al[l]=seq[i-1];i--;j--;}
+      else {j--;al[l]='-';}
+      l++;
+    }
+  al[l]='\0';
+  
+  invert_string2 (al);
+  return al;
+}

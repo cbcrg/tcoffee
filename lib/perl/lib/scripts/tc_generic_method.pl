@@ -2161,7 +2161,7 @@ sub run_blast
   {
     my ($name, $method, $db, $infile, $outfile, $run)=(@_);
     if (!$run){$run=1;}
-    
+    my $error_log=vtmpnam();
     
     if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER) && is_valid_blast_xml ($outfile))
       {return $outfile;}
@@ -2182,7 +2182,7 @@ sub run_blast
 		    $cl_method="blastp";
 		  }
 		
-		$command="t_coffee -other_pg wublast.pl --email $EMAIL $infile -D $db -p $cl_method --outfile $outfile -o xml>/dev/null 2>/dev/null";
+		$command="t_coffee -other_pg wublast.pl --email $EMAIL $infile -D $db -p $cl_method --outfile $outfile -o xml>/dev/null 2>$error_log";
 		&safe_system ( $command);
 		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
 	      }
@@ -2190,7 +2190,7 @@ sub run_blast
 	      {
 		if ($cl_method eq "psiblast"){$cl_method ="blastp -j5";}
 		
-		$command="t_coffee -other_pg blastpgp.pl --email $EMAIL $infile -d $db --outfile $outfile -p $cl_method --mode PSI-Blast>/dev/null 2>/dev/null";
+		$command="t_coffee -other_pg blastpgp.pl --email $EMAIL $infile -d $db --outfile $outfile -p $cl_method --mode PSI-Blast>/dev/null 2>$error_log";
 		&safe_system ( $command);
 		
 		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
@@ -2198,7 +2198,7 @@ sub run_blast
 	  }
 	elsif ($SERVER eq "EBI_REST" || $SERVER eq "EBI")
 	  {
-	   
+	    
 	    $cl_method=$method;
 	    &check_configuration("EMAIL","XML::Simple", "INTERNET");
 	    if ($db eq "uniprot"){$db1="uniprotkb";}
@@ -2210,13 +2210,13 @@ sub run_blast
 		$cl_method=~s/wu//;
 		if ( $cl_method eq "psiblast"){$cl_method="blastp";}
 		
-		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 7 --stype protein $infile>/dev/null 2>/dev/null";
+		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 7 --stype protein $infile>/dev/null 2>error_log";
 		
 	      }
 	    else
 	      {
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp -j5";}
-		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 7 --stype protein $infile>/dev/null 2>/dev/null";
+		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 7 --stype protein $infile>/dev/null 2>$error_log";
 	      }
 	    &safe_system ( $command,5);
 	    if (-e "$outfile.out.xml") {`mv $outfile.out.xml $outfile`;}
@@ -2293,6 +2293,9 @@ sub run_blast
 	    myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::UnknownServer",$CL));
 	  }
 	
+
+	#Check that everything went well
+	
 	if ( !-e $outfile || !&is_valid_blast_xml($outfile))
 	  {
 	    
@@ -2301,7 +2304,16 @@ sub run_blast
 		add_warning ($$,$$,"Corrupted Blast Output (Run $run)");
 		unlink($outfile);
 	      }
-	    
+	    if ( -e $error_log)
+	      {
+		
+		my $error_msg=file2string ($error_log);
+		
+		if ( $error_msg =~/enter a valid email/)
+		  {
+		    myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::Invalid_or_rejected_email::$EMAIL", "$command"));  
+		  }
+	      }
 	    if ( $run==$BLAST_MAX_NRUNS)
 	      {
 	

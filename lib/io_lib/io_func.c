@@ -280,8 +280,29 @@ int ** read_matrice (char *mat_name_in)
 	l=strlen(AA);
 
 	
-
-
+	if ( strcmp (mat_name_in, "list")==0)
+	  {
+	    fprintf ( stderr, "****List of available matrices\n");
+	    fprintf ( stderr, "\tidmat\n");
+	    fprintf ( stderr, "\tmd_40mt\n");
+	    fprintf ( stderr, "\tmd_350mt\n");
+	    fprintf ( stderr, "\tmd_250mt\n");
+	    fprintf ( stderr, "\tpam120mt\n");
+	    fprintf ( stderr, "\tpam160mt\n");
+	    fprintf ( stderr, "\tpam350mt\n");
+	    
+	    fprintf ( stderr, "\tblosum30mt\n");
+	    fprintf ( stderr, "\tblosum40mt\n");
+	    fprintf ( stderr, "\tblosum45mt\n");
+	    fprintf ( stderr, "\tblosum50mt\n");
+	    fprintf ( stderr, "\tblosum55mt\n");
+	    fprintf ( stderr, "\tblosum62mt\n");
+	    fprintf ( stderr, "\tblosum80mt\n");
+	    myexit (EXIT_SUCCESS);
+	    
+	  }
+	    
+	    
 	if ( strm2 (mat_name_in, "pam", "PAM"))sprintf ( mat_name, "pam250mt");
 	else if (strm2 (mat_name_in, "blosum", "BLOSUM"))sprintf ( mat_name, "blosum62mt");
 	else if (strm3 (mat_name_in, "id", "ID", "idmat"))sprintf ( mat_name, "idmat");

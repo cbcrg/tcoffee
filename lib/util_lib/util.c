@@ -3696,13 +3696,13 @@ int fprintf_fork  (FILE *fp, char *string, ...)
 
   if (!openF)
     {
-      openF=vcalloc (100, sizeof (char));
-      sprintf (openF, "cedric1");
-      closeF=vcalloc (100, sizeof (char));
-      sprintf (closeF, "cedric2");
+      //openF=vcalloc (100, sizeof (char));
+      //sprintf (openF, "cedric1");
+      //closeF=vcalloc (100, sizeof (char));
+      //sprintf (closeF, "cedric2");
 
-      //openF =vtmpnam (NULL);
-      //closeF=vtmpnam (NULL);
+      openF =vtmpnam (NULL);
+      closeF=vtmpnam (NULL);
       vfclose(vfopen (openF,"w"));
     }
   while ((rename (openF,closeF))==-1);
@@ -4564,20 +4564,22 @@ char *get_tmp_4_tcoffee ()
   else
     {
       char *v=getenv("TMP_4_TCOFFEE");
+      
       char buf[1000];
       char host[1024];
       gethostname(host, 1023);
 
-
+     
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      else if (v && strstr (v, "TMP_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP_4_TCOFFEE"));
-      else if (v && strstr (v, "TMP"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP"));
-      else if (v && strstr (v, "LOCAL"))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
+      
+      if (v && strm (v, "TMP"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP"));
+      else if (v && strm (v, "LOCAL"))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
       else if (v && strm (v, "."))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
       else if (v)sprintf (tmp_4_tcoffee, "%s", v);
       else if (isdir("/var/tmp"))sprintf (tmp_4_tcoffee, "/var/tmp/");
+      else if (isdir(get_dir_4_tcoffee ()))sprintf (tmp_4_tcoffee, "%s", get_dir_4_tcoffee());
       else sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
-
+      
       //now that rough location is decided, create the subdir structure
        if (is_rootpid())
 	{

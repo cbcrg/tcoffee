@@ -4064,29 +4064,29 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 	int *col;
 	int a,c, ref_weight;
 
-
+	
 	if ( !weight)weight=vcalloc (MAX(2,A->len_aln), sizeof (int));
 
 	weight[0]=FORBIDEN;
 	if ( weight_mode==NULL || strcmp (weight_mode, "no")==0 || is_number (weight_mode))
-	{
-
-		if (is_number (weight_mode))ref_weight=atoi(weight_mode);
-		else ref_weight=1;
-		weight[1]=ref_weight;
-
-	}
+	  {
+	    
+	    if (is_number (weight_mode))ref_weight=atoi(weight_mode);
+	    else ref_weight=1;
+	    weight[1]=ref_weight;
+	    
+	  }
 	else if ( strstr ( weight_mode, "cons"))
-	{
-		ref_weight=weight[1]=1000;
-	}
+	  {
+	    ref_weight=weight[1]=1000;
+	  }
 	else if ( strstr ( weight_mode, "OW"))
-	{
-		int ow;
-		sscanf ( weight_mode, "OW%d", &ow);
-		weight[1]=ow*get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-", NULL);
-
-	}
+	  {
+	    int ow;
+	    sscanf ( weight_mode, "OW%d", &ow);
+	    weight[1]=ow*get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-", NULL);
+	    
+	  }
 	else if ( strstr ( weight_mode, "len"))
 	  {
 	    weight[1]=A->len_aln;
@@ -4104,7 +4104,7 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 	    if (ref_weight == 0)
 	      ref_weight = 1;
 	    weight[1]=ref_weight;
-
+	    
 	  }
 	else if ( strstr ( weight_mode, "subset"))
 	  {
@@ -4236,7 +4236,6 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 			entry[CONS]=1;
 			if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
 			else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
-
 			add_entry2list (entry, CL);
 		      }
 		  }
