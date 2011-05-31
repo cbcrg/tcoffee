@@ -83,7 +83,7 @@ general_distribution:
 	make -i VERSION=$(VERSION) CC=cc code
 	make -i VERSION=$(VERSION) CC=cc general_makefile
 	make -i VERSION=$(VERSION) CC=cc test
-	make -i VERSION=$(VERSION) CC=cc doc
+	#make -i VERSION=$(VERSION) CC=cc doc
 	make -i VERSION=$(VERSION) CC=cc license
 	#make -i VERSION=$(VERSION) update_webpage
 library_distribution:
