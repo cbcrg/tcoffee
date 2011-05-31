@@ -154,7 +154,7 @@ PG prank type			sequence_multiple_aligner
 PG prank ADDRESS		http://www.ebi.ac.uk/goldman-srv/prank/
 PG prank language		C++
 PG prank language2		CXX	
-PG prank source			http://www.ebi.ac.uk/goldman-srv/prank/src/prank/prank.src.100303.tgz
+PG prank source			http://www.ebi.ac.uk/goldman-srv/prank/src/prank/prank.src.100802.tgz
 PG prank mode			mcoffee	    
 PG prank version		100303	    
 
@@ -163,7 +163,7 @@ PG sap type			structure_pairwise_aligner
 PG sap ADDRESS			http://mathbio.nimr.mrc.ac.uk/wiki/Software
 PG sap language			C
 PG sap language2		C	
-PG sap source			http://mathbio.nimr.mrc.ac.uk/download/sap-1.1.1.tar.gz
+PG sap source			http://mathbio.nimr.mrc.ac.uk/download/SAP/sap-1.1.1.tar.gz
 PG sap mode			expresso,3dcoffee
 PG sap version			1.1.1
 
