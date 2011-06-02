@@ -4564,14 +4564,14 @@ char *get_tmp_4_tcoffee ()
   else
     {
       char *v=getenv("TMP_4_TCOFFEE");
-      
+
       char buf[1000];
       char host[1024];
       gethostname(host, 1023);
 
-     
+
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
-      
+
       if (v && strm (v, "TMP"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP"));
       else if (v && strm (v, "LOCAL"))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
       else if (v && strm (v, "."))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
@@ -4579,7 +4579,7 @@ char *get_tmp_4_tcoffee ()
       else if (isdir("/var/tmp"))sprintf (tmp_4_tcoffee, "/var/tmp/");
       else if (isdir(get_dir_4_tcoffee ()))sprintf (tmp_4_tcoffee, "%s", get_dir_4_tcoffee());
       else sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
-      
+
       //now that rough location is decided, create the subdir structure
        if (is_rootpid())
 	{
@@ -6044,9 +6044,9 @@ FILE * vfclose ( FILE *fp)
        if ( fp==stderr)return stderr;
        if ( fp==stdin) return stdin;
        if ( fp==NULL)return NULL;
-       else 
+       else
 	 if (fclose (fp)!=0)HERE ("***** ERROR****");
-       
+
        return NULL;
        }
 
@@ -8480,7 +8480,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   //Plugins
 
   get_os();
-  get_nproc();
+//  get_nproc();
 
 
 
