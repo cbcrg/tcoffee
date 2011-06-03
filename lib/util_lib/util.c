@@ -4163,6 +4163,8 @@ pid_t set_pid (pid_t p)
   pidtable[(int)p][0]=getpid();
   pidtable[(int)p][1]=1;
   return p;}
+
+
 pid_t vvfork (char *type)
 {
   pid_t p;
@@ -4310,7 +4312,7 @@ int get_child_list (int pid,int *clist)
   clist[pid]++;
   if (clist[pid]>1)
     {
-      add_information ( stderr, "Corrupted Lock System" );
+      add_information ( stderr, "WARNING Lock System not solved correctly." );
       for (a=0; a<MAX_N_PID; a++)release_all_locks (a);
       return 0;
     }
