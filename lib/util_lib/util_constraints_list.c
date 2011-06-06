@@ -1828,11 +1828,11 @@ Constraint_list *add_entry2list2 (CLIST_TYPE *entry, Constraint_list *CL)
 
   if (r1>(CL->S)->len[s1])
     {
-      myexit (fprintf_error ( stderr, "Library out of bounds: %s::%d* vs %s::%d", (CL->S)->name[s1], r1, (CL->S)->name[s2], r2));
+      myexit (fprintf_error ( stderr, "Library out of bounds: %s::%d [%d]* vs %s::%d", (CL->S)->name[s1], r1,(CL->S)->len[s1], (CL->S)->name[s2], r2));
     }
   else if (r2>(CL->S)->len[s2])
     {
-      myexit (fprintf_error ( stderr, "Library out of bounds: %s::%d vs %s::%d*", (CL->S)->name[s1], r1, (CL->S)->name[s2], r2));
+      myexit (fprintf_error ( stderr, "Library out of bounds: %s::%d vs %s::%d [%d]*", (CL->S)->name[s1], r1, (CL->S)->name[s2], r2,(CL->S)->len[s2] ));
     }
 
 

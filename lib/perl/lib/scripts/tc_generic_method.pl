@@ -1219,9 +1219,10 @@ sub aln2psi_profile
     my (%h)=@_;
     my ($aln,$i,$hv, $a, @c, $n);
    
+    
     $i=$h{index};
     $aln=$h{aln};
-
+    
     `cp $aln $$.hhh_aln`;
     $command="t_coffee -other_pg seq_reformat -in $aln -output hasch";
     $hv=`$command`;chomp ($hv);
@@ -1231,6 +1232,7 @@ sub aln2psi_profile
     if ( -e $h{a3m}){;}
     else
       {
+	$x=`which hhconsensus`;
 	`hhconsensus  -M 50 -i $h{aln} -oa2m $h{a2m}`;
 	if (!-e $h{a2m})
 	  {

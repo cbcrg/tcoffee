@@ -1006,7 +1006,9 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  int r1, r2, s1, s2,a,c;
 	  float sc, ss, we;
 	  char *buf;
-
+	  int narg;
+	  char buf2[10001];
+	  
 	  seq=vcalloc ( strlen (in_seq)+1, sizeof (char));
 	  entry=vcalloc (CL->entry_len+1, sizeof (int));
 
@@ -1037,7 +1039,7 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 
 	  vfclose (fp);
 	  printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first  >/dev/null 2>/dev/null", aln1, prf1);
-
+	 
 
 	  aln2=vtmpnam (NULL);
 	  prf2=vtmpnam(NULL);
@@ -1055,24 +1057,43 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	    }
 	  vfclose (fp);
 	  printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first >/dev/null 2>/dev/null", aln2, prf2);
-
-
+	  
 	  //make the prf prf alignment
 	  hhfile=vtmpnam(NULL);
 	  printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global  >/dev/null 2>/dev/null", prf1, prf2, hhfile);
+	 
 
 	  //parse the output
+	  //PB: sometimes the probab field is missing from the hhalign output
+	  
 	  fp=vfopen (hhfile, "r");
-	  while ((c=fgetc(fp))!='\n');
+	  fgets (buf2, 10000, fp);
+	  if ( strstr (buf2, "probab"))narg=5;
+	  else {narg=4; we=0.5;}
 
-	  while (fscanf (fp, "%d %d %f %f %f\n", &r1, &r2, &sc, &ss, &we)==5)
+	  if (narg==5)
 	    {
-	      entry[SEQ1]=s1;
-	      entry[SEQ2]=s2;
-	      entry[R1]=r1;
-	      entry[R2]=r2;
-	      entry[WE]=(int)(we*1000);
-	      add_entry2list (entry,CL);
+	      while (fscanf (fp, "%d %d %f %f %f\n", &r1, &r2, &sc, &ss, &we)==5)
+		{
+		  entry[SEQ1]=s1;
+		  entry[SEQ2]=s2;
+		  entry[R1]=r1;
+		  entry[R2]=r2;
+		  entry[WE]=(int)(we*1000);
+		  add_entry2list (entry,CL);
+		}
+	    }
+	  else
+	    {
+	      while (fscanf (fp, "%d %d %f %f\n", &r1, &r2, &sc, &ss)==4)
+		{
+		  entry[SEQ1]=s1;
+		  entry[SEQ2]=s2;
+		  entry[R1]=r1;
+		  entry[R2]=r2;
+		  entry[WE]=(int)(we*1000);
+		  add_entry2list (entry,CL);
+		}
 	    }
 	  vfclose (fp);
 	  vfree (entry);
@@ -5645,7 +5666,7 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
   char *hhfile;
   char *tmpfile;
   FILE *fp,*fp1, *fp2;
-
+  
   for (a=0; a<2; a++)
     {
       aln[a]=vtmpnam(NULL);
@@ -5662,6 +5683,7 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 
       vfclose (fp);
       printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first  >/dev/null 2>/dev/null", aln[a], prf[a]);
+      
     }
 
   hhfile=vtmpnam(NULL);
@@ -5669,7 +5691,9 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 
 
   printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global  >/dev/null 2>/dev/null", prf[0], prf[1], hhfile);
-
+ 
+  
+  
   p0=p1=0;
   l0=strlen (A->seq_al[ls[0][0]]);
   l1=strlen (A->seq_al[ls[1][0]]);
