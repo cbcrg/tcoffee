@@ -471,7 +471,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     len             name               statistics<_hnrglNL>");
 		fprintf ( stdout, "\n     sim.............outputs a similarity matrix based on an id comparison of -in");
 		fprintf ( stdout, "\n     sim_sarmat.....in is sar matrix");
-		
+
 		fprintf ( stdout, "\n     sim_mat_<matname>..Evaluates similarity using the matrix: blosum62mt,etc");
 		fprintf ( stdout, "\n     sim_mat_list.......Produces a list of available matrices\n");
 		fprintf ( stdout, "\n     sim_idscore........makes dp alignment of the sequences using Blosum62mt");
@@ -479,7 +479,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     sim............if -in2 is set: in1 vs in2, idscore");
 
 		fprintf ( stdout, "\n     code_name......Outputs a compact list of names for code/decode");
-		
+
  		fprintf ( stdout, "\n");
 
 
@@ -851,7 +851,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 
 		}
 
-	
+
 	else if ( strm (in_format, "treefile_list"))
 	  {
 

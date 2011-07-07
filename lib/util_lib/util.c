@@ -5652,8 +5652,6 @@ void set_file2remove_off()
 
 char *add2file2remove_list (char *name)
 {
-
-
   if ( !tmpname || !name)ntmpname=tmpname=vcalloc ( 1, sizeof (Tmpname));
   else if (!ntmpname->name);
   else ntmpname=ntmpname->next=vcalloc ( 1, sizeof (Tmpname));
@@ -8586,6 +8584,9 @@ void error_exit ()
    global_exit_signal=EXIT_FAILURE;
    myexit (EXIT_FAILURE);
  }
+
+
+
 void clean_exit ()
 {
   Tmpname *b;
@@ -8595,7 +8596,6 @@ void clean_exit ()
   int debug;
 
   clean_exit_started=1;//prevent new locks
-
   start=tmpname;
   //1-start killing all the children
 
@@ -8666,22 +8666,23 @@ void clean_exit ()
 
 
 
-  while ( start)
+  while ( start && start->name)
     {
       if (!debug)
 	{
-
 	  if (isdir(start->name))rrmdir (start->name);
 	  else
 	    {
 	      char test[1000];
 	      vremove (start->name);
+
 	      if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
 	      if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
 	    }
 	}
       else
 	{
+
 	  if (isdir(start->name))
 	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : Dir  %s not removed (%d)\n", start->name, getpid());}
 	  else

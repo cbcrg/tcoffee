@@ -4710,7 +4710,7 @@ Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
 
 Sequence * add_prf2seq  ( char *file, Sequence *S)
     {
-      
+
       char **new_seq;
       Sequence *NS;
 
@@ -4728,8 +4728,8 @@ Sequence * add_prf2seq  ( char *file, Sequence *S)
 	  new_seq=declare_char (1,A->len_aln+1);
 	  sprintf ( new_seq[0], "%s",aln2cons_seq_mat(A, "blosum62mt"));
 	  NS=fill_sequence_struc(1, new_seq,A->file, NULL);
-	  
-	  
+
+
 	  S=add_sequence (NS, S, 0);
 	  (S->T[S->nseq-1])->R=R;
 
@@ -7557,27 +7557,27 @@ double aln2entropy (Alignment *A, int *in_ls, int in_ns, float gap_threshold)
 
 int aln2sim2 (Alignment *A)
 {
-  int a, b, c;
-  double *score;
-  double tscore=0;
-  score=vcalloc ( 256, sizeof (double));
+	int a, b, c;
+	double *score;
+	double tscore=0;
+	score=vcalloc ( 256, sizeof (double));
 
-  for (a =0; a<A->len_aln; a++)
-    {
-      for (b=0; b<A->nseq; b++)
+	for (a =0; a<A->len_aln; a++)
 	{
-	  c=tolower(A->seq_al[b][a]);
-	  if (c!='-')score[c]++;
+		for (b=0; b<A->nseq; b++)
+		{
+			c=tolower(A->seq_al[b][a]);
+			if (c!='-')score[c]++;
+		}
+		for (b=0; b<256; b++)
+		{
+			tscore+=(score[b]*score[b]);
+			score[b]=0;
+		}
 	}
-      for (b=0; b<256; b++)
-	{
-	  tscore+=(score[b]*score[b]);
-	  score[b]=0;
-	}
-    }
-  tscore/=A->nseq;
-  vfree (score);
-  return (int)tscore;
+	tscore/=A->nseq;
+	vfree (score);
+	return (int)tscore;
 }
 
 
@@ -7781,7 +7781,7 @@ int get_seq_sim ( char *string1, char *string2, char *ignore, char *in_mode)
 	  sim_mode: sim1->identities/matches
                     sim2->identities/min len
 	*/
-	
+
 
 	if ( (p=strstr (mode, "_"))!=NULL)
 	  {
@@ -9764,13 +9764,13 @@ Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
       static char *tfile;
       int *gn;
       int **gl;
-      
+
       //Declare memory
       if (!tfile)tfile=vtmpnam(NULL);
       gn=vcalloc    (k, sizeof (int));
-      gl=declare_int(k, A->nseq); 
+      gl=declare_int(k, A->nseq);
       AL=vcalloc  (k, sizeof (Alignment*));
-      
+
       //Run KM
       dim=60;
       v=aln2km_vector(A,mode,&dim);
@@ -9796,13 +9796,13 @@ Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
 		}
 	      vfclose (fp);
 	      AL[n[0]++]=main_read_aln(tfile, NULL);
-	      
+
 	    }
 	}
       vfree (gn);
       free_int (gl, -1);
     }
- 
+
   return AL;
 
 }
@@ -9816,25 +9816,25 @@ Alignment** seq2id_subset (Alignment*A,int k,int *ng, char *mode)
   int minid;
   int count=0;
   Alignment *B;
-  
+
   if (!A || !A->nseq)return NULL;
-  
+
   if (!file1)file1=vtmpnam (NULL);
   minid=atoi (mode);
-  
+
   if (minid<100)
     myexit(fprintf_error (stderr, "minid<100 Not supported in seq2id_subset"));
-  
+
   ng[0]=0;
   n=A->nseq;
-  
-  
+
+
   nn=0;
   l=vcalloc  ( n*2, sizeof (int));
   nl=vcalloc ( n*2, sizeof (int));
   for (a=0; a<n; a++)l[a]=a;
   AL=vcalloc (n, sizeof (Alignment *));
-  
+
   while (n)
     {
       int n2=0;
@@ -9856,17 +9856,17 @@ Alignment** seq2id_subset (Alignment*A,int k,int *ng, char *mode)
 	      if (mm>5)nl[nn++]=l[a];
 	      else fprintf (fp2, ">%s\n%s\n", A->name[l[a]], A->seq_al[l[a]]);
 	    }
-		
-	 
+
+
 	}
-      
+
       vfclose (fp2);
       fp2=vfopen (file1, "r");vfclose (fp2);
       for (a=0; a<nn; a++)l[a]=nl[a];
       B=AL[ng[0]++]=main_read_aln(file1, NULL);
-      
-      
-      
+
+
+
       if (B->nseq==0)
 	{
 	  HERE ("%s", B->seq_al[0]);
@@ -9875,7 +9875,7 @@ Alignment** seq2id_subset (Alignment*A,int k,int *ng, char *mode)
       n=nn;
       nn=0;
     }
- 
+
   vfree (l);
   vfree (nl);
   return AL;
@@ -9920,60 +9920,68 @@ Alignment* km_seq (Alignment *A, int k, char *mode, char *name)
   exit (EXIT_SUCCESS);
 }
 
+
+
 Alignment *gap_trim (Alignment *A, int f)
 {
-  int **v, *list;
-  Alignment *R;
-  int a,b, n;
-  int cmax, ng, nr,sc;
-  double max=0;
-  if (!f) f=50;
+	int **v, *list;
+	Alignment *R;
+	int a,b, n;
+	int cmax, ng, nr,sc;
+	double max=0;
+	if (!f) f=50;
 
-  list=vcalloc (A->nseq,sizeof (int));
-  v=declare_int (A->nseq, 2);
-  for (a=0; a< A->nseq; a++)v[a][0]=a;
+	list=vcalloc (A->nseq,sizeof (int));
+	v=declare_int (A->nseq, 2);
+	for (a=0; a< A->nseq; a++)v[a][0]=a;
 
-  for (a=0; a<A->len_aln; a++)
-    {
-      for (ng=nr=0,b=0; b<A->nseq; b++)
+	for (a=0; a<A->len_aln; a++)
 	{
-	  ng+=(A->seq_al[b][a]=='-')?1:0;
-	  nr+=(A->seq_al[b][a]!='-')?1:0;
+		for (ng=nr=0,b=0; b<A->nseq; b++)
+		{
+
+			ng+=(A->seq_al[b][a]=='-')?1:0;
+			nr+=(A->seq_al[b][a]!='-')?1:0;
+		}
+
+		for (b=0; b<A->nseq; b++)
+		{
+			if (A->seq_al[b][a]!='-')
+			{
+				nr=(nr==0)?1:nr;
+				sc=(ng/nr)*100;
+				v[b][1]+=sc;
+				max+=sc;
+			}
+		}
 	}
 
-      for (b=0; b<A->nseq; b++)
+	max=(max*(100-f))/100;
+	fprintf(stderr, "max %f %i", max,f);
+	sort_int (v, 2, 1, 0, A->nseq-1);
+	for (n=0,cmax=0,a=0;a<A->nseq; a++)
 	{
-	  if (A->seq_al[b][a]!='-')
-	    {
-	      nr=(nr==0)?1:nr;
-	      sc=(ng/nr)*100;
-	      v[b][1]+=sc;
-	      max+=sc;
-	    }
+
+		cmax+=v[a][1];
+ 		fprintf(stderr,"%i\n", cmax);
+		if (cmax<max)
+		{
+// 			fprintf (stderr, ">%s GapScore: %d \n", A->name[v[a][0]], v[a][1]);
+			list[n++]=v[a][0];
+		}
+		else
+		{
+			fprintf (stderr, ">%s GapScore: %d \n", A->name[v[a][0]], v[a][1]);
+		}
 	}
-    }
 
-  max=(max*(100-f))/100;
+	HERE ("Removed %d Sequences\n", A->nseq-n);
 
-  sort_int (v, 2, 1, 0, A->nseq-1);
-  for (n=0,cmax=0,a=0;a<A->nseq; a++)
-    {
-
-      cmax+=v[a][1];
-
-      if (cmax<max)list[n++]=v[a][0];
-      else
-	{
-	  fprintf (stderr, ">%s GapScore: %d \n", A->name[v[a][0]], v[a][1]);
-	}
-    }
-
-  HERE ("Removed %d Sequences\n", A->nseq-n);
-
-   R=extract_sub_aln (A, n, list);
-   vfree (list); free_int (v, -1);
-   return R;
+	R=extract_sub_aln (A, n, list);
+	vfree (list); free_int (v, -1);
+	return R;
 }
+
 
 static int find_worst_seq ( int **sim, int n, int *keep, int max, int direction);
 Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_list, int **sim)
@@ -11318,24 +11326,24 @@ char** make_group_aa (int *ngroup, char *mode)
 
 
 	if ( mode && mode[0]=='_'){mode++;sprintf ( matrix_name, "%s", mode);}
-	
-	
+
+
 	if (mode==NULL || mode[0]=='\0' || strstr (mode, "mat_"))
 	  {
 	    if (mode==NULL || mode[0]=='\0')sprintf ( matrix_name, "idmat");
 	    else if (strstr (mode, "mat_"))sprintf ( matrix_name, "%s", strstr (mode, "mat_")+4);
 
-	    
-	    
+
+
 	    matrix=read_matrice ( matrix_name);
-	    
+
 	    for ( a=0;a< 26; a++)
 	      {
 		if ( matrix[a][a]>0)
 		  {
 		    for ( c=0,b=0;b< 26; b++)
 		      {
-			
+
 			if ( matrix[a][b]>0 && matrix[b][b]>0)
 			  {
 			    buf[c++]=b+'A';
@@ -11345,13 +11353,13 @@ char** make_group_aa (int *ngroup, char *mode)
 		    buf[c]='\0';
 		    for ( is_in=0,b=0; b< ngroup[0]; b++)if ( strcmp (buf, group_list[b])==0)is_in=1;
 		    if (is_in==0)sprintf ( group_list[ngroup[0]++], "%s", buf);
-		    
+
 		  }
 	      }
 	    free_int (matrix, -1);
 	    vfree (matrix_name);
 	  }
-	
+
 	else if ( strstr (mode, "sim") || strm (mode, "idmat") || mode==NULL)
 	  {
 	    sprintf ( group_list[ngroup[0]++], "aA");
@@ -11449,7 +11457,7 @@ char** make_group_aa (int *ngroup, char *mode)
 		 sprintf ( group_list[ngroup[0]++], "pP");
 		 sprintf ( group_list[ngroup[0]++], "tT");
 		 vfree (matrix_name);
-		
+
 	     }
 	else if ( strm (mode, "clustalw_col"))
 	     {
@@ -11488,9 +11496,9 @@ char** make_group_aa (int *ngroup, char *mode)
 		 ngroup[0]=1;
 		 sprintf ( group_list[0], "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 		 vfree (matrix_name);
-		 
+
 	     }
-	
+
 	return group_list;
 	}
 char** make_group_aa_upgma (char*matrix, int max_n)
@@ -11621,7 +11629,7 @@ int is_in_same_group_aa ( char r1, char r2, int n_group, char **gl, char *mode)
 	  {
 	    lgl=make_group_aa ( &ln_group, mode);
 	  }
-	
+
 	if ( gl==NULL)
 	  {
 	    gl2=lgl;
@@ -11632,7 +11640,7 @@ int is_in_same_group_aa ( char r1, char r2, int n_group, char **gl, char *mode)
 	    gl2=gl;
 	    n_group2=n_group;
 	  }
-	
+
 	for ( a=0; a< n_group2; a++)
 	  {
 	    if ( is_in_set ( r1, gl2[a]) && is_in_set ( r2, gl2[a]))
