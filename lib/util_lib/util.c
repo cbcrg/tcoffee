@@ -3315,6 +3315,24 @@ int is_gap ( char x)
          {
 	 return ( is_in_set ( x, GAP_LIST));
 	 }
+
+
+// int is_gap ( char x)
+// {
+// 	static short * gap = NULL;
+// 	if (gap == NULL)
+// 	{
+// 		gap = calloc ( 256, sizeof(short) );
+// 		gap['-'] = 1;
+// 		gap['.'] = 1;
+// 		gap['#'] = 1;
+// 		gap['*'] = 1;
+// 		gap['~'] = 1;
+// 	}
+// 	return ( gap[x]);
+// }
+
+
 int is_gop ( int p, char *s)
 {
   if (!s) return 0;
@@ -3353,16 +3371,16 @@ int array_is_in_set ( char *x, char *set )
 
 
 int is_in_set ( char r, char *list)
-	{
+{
 	static char s[2];
-
 	s[0]=r;
-
-
-	if ( strstr ( list,s)!=NULL)return 1;
-
+	if ( strstr ( list,s)!=NULL)
+		return 1;
 	return 0;
-	}
+}
+
+
+
 char * generate_void ( int x)
     {
     return generate_string (x, ' ');
@@ -5054,6 +5072,8 @@ int   count_n_char_x_in_file(char *name, char x)
       vfclose (fp);
       return n;
       }
+
+
 int   count_n_char_in_file(char *name)
       {
       int  c, n;

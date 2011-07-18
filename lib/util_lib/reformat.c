@@ -5,6 +5,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
+#include <limits.h>
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "dp_lib_header.h"
@@ -1256,20 +1257,37 @@ char * identify_seq_format ( char *file)
        else format[0]='\0';
 
 
-
+		int format_val  = 0;
        if ( !check_file_exists(file))
 	 {
 	   fprintf (stderr, "ERROR: %s Does Not Exist [FATAL:%s]\n",file, PROGRAM);
 	   myexit (EXIT_FAILURE);
 	 }
+		else
+		if (format_val = fast_format_determination(file))
+		{
+			switch( format_val )
+			{
+				case 1 : sprintf ( format, "fasta_seq");
+					break;
+				case 2 : sprintf ( format, "fasta_aln");
+					break;
+				case 3 : sprintf ( format, "pir_seq");
+					break;
+				case 4 : sprintf ( format, "pir_aln");
+					break;
+			}
+		}
+
+// 			if ( format_is_fasta_seq(file))sprintf ( format, "fasta_seq");
+// 		else if ( format_is_fasta_aln(file,1))
+// 			sprintf ( format, "fasta_aln");
        else if ( is_stockholm_aln (file))sprintf (format, "stockholm_aln");
        else if ( is_blast_file (file))sprintf ( format, "blast_aln");
        else if ( is_pdb_file(file))sprintf ( format, "pdb_struc");
        else if ( format_is_msf      (file))sprintf ( format, "msf_aln");
-       else if ( format_is_fasta_seq(file))sprintf ( format, "fasta_seq");
-       else if ( format_is_fasta_aln(file))sprintf ( format, "fasta_aln");
-       else if ( format_is_pir_aln  (file))sprintf ( format, "pir_aln");
-       else if ( format_is_pir_seq  (file))sprintf ( format, "pir_seq");
+//        else if ( format_is_pir_aln  (file))sprintf ( format, "pir_aln");
+//        else if ( format_is_pir_seq  (file))sprintf ( format, "pir_seq");
        else if ( format_is_oligo    (file))sprintf ( format, "oligo_aln");
        else if ( format_is_swissprot     (file))sprintf ( format, "swissprot_seq");
        else if ( format_is_saga     (file))sprintf ( format, "clustal_aln");
@@ -1283,6 +1301,7 @@ char * identify_seq_format ( char *file)
 	   //add_warning ( stderr, "\nThe Format of File: %s was not recognized [SERIOUS:%s]",file, PROGRAM);
 	   ;
 	 }
+// 	 printf("DETERMINED FORMAT: %s\n", format);
        return format;
        }
 char **identify_list_format ( char **list, int n)
@@ -1875,12 +1894,96 @@ int format_is_msf ( char *file)
     }
 
 //Fasta and PIR
-int format_is_fasta_aln ( char *file)
+int format_is_fasta_aln ( char *file, int i_know_that_it_not_seq)
 
-    {
-      if ( format_is_fasta(file) && !format_is_fasta_seq(file))return 1;
-      else return 0;
-    }
+{
+	if( i_know_that_it_not_seq && format_is_fasta(file))
+		return 1;
+	else
+		if ( format_is_fasta(file) && !format_is_fasta_seq(file))
+			return 1;
+	return 0;
+}
+
+
+/*
+ * checks if the file is in fasta or pir format
+ * returns:
+ *   0 nothing of these
+ *   1 fasta sequences
+ *   2 fasta alignemnt
+ *   3 pir sequences
+ *   4 pir alignment
+ */
+int fast_format_determination  ( char *in_f)
+{
+	const unsigned int READ_LENGTH = 401;
+	char line[READ_LENGTH];
+	FILE *in_F = fopen(in_f, "r");
+	int is_pir = 1;
+	int is_aln = 1;
+	char *tmp;
+	if (fgetc(in_F) != '>')
+	{
+		fclose(in_F);
+		return 0;
+	}
+	ungetc('>',in_F);
+	int last_length = -1;
+	int current_length = -1;
+	unsigned int n_seqs = 0;
+	char last;
+	while (fgets(line, READ_LENGTH, in_F) != NULL)
+	{
+		if (line[0] == '>')
+		{
+			++n_seqs;
+			if (!is_pir_name(&line[1]))
+				is_pir = 0;
+			if ((last_length != -1))
+			{
+				if (last != '*')
+					is_pir = 0;
+				if (current_length != last_length)
+					is_aln = 0;
+			}
+			last_length = current_length;
+			current_length = 0;
+		}
+		else
+		{
+			tmp = &(line[0]);
+			while (*tmp != '\0')
+			{
+
+				if ((*tmp != '\n') && (*tmp != ' '))
+				{
+					++current_length;
+					last = *tmp;
+				}
+				++tmp;
+			}
+		}
+	}
+	if ((last_length != -1) && (current_length != last_length))
+		is_aln = 0;
+	if (last != '*')
+		is_pir = 0;
+
+	fclose(in_F);
+	if (!is_pir)
+	{
+		if (is_aln && (n_seqs >1))
+			return 2;
+		return 1;
+	}
+	if (is_pir)
+	{
+		if (is_aln && (n_seqs >1))
+			return 4;
+		return 3;
+	}
+}
 
 
 int format_is_fasta_seq  ( char *file)
@@ -1929,7 +2032,6 @@ int format_is_fasta ( char *file)
     }
 
 int format_is_pir_aln ( char *file)
-
     {
       if ( format_is_pir(file) && !format_is_pir_seq(file))return 1;
       else return 0;
@@ -1986,8 +2088,12 @@ int format_is_pir ( char *file)
       if ( pir_name && star_end) return 1;
       else return 0;
     }
+
+
 int is_pir_name (char *name)
 {
+	if (name[2] != ';')
+		return 0;
   if ( strstr (name, "P1;"))return 1;
   if ( strstr (name, "F1;"))return 1;
   if ( strstr (name, "DL;"))return 1;
@@ -3837,80 +3943,84 @@ Sequence* get_pima_sequence (char *fname)
     }
 
 Sequence* perl_reformat2fasta (char *perl_command, char *fname)
-    {
-      char command[1000];
-      char *file;
+{
+	char command[1000];
+	char *file;
 
-      file=vtmpnam (NULL);
+	file=vtmpnam (NULL);
 
-      check_program_is_installed ( perl_command,"", perl_command,EMAIL,IS_FATAL);
-      sprintf ( command, "%s %s > %s", perl_command, fname, file);
-      my_system ( command);
-      return get_fasta_sequence (file, NULL);
-    }
+	check_program_is_installed ( perl_command,"", perl_command,EMAIL,IS_FATAL);
+	sprintf ( command, "%s %s > %s", perl_command, fname, file);
+	my_system ( command);
+	return get_fasta_sequence (file, NULL);
+}
+
+
+
+
 Sequence* get_fasta_sequence_num (char *fname, char *comment_out)
-    {
-    Sequence *LS;
-    char *buffer;
-    FILE *fp;
-    int a;
+{
+	Sequence *LS;
+	char *buffer;
+	FILE *fp;
+	int a;
 
-    int   c;
-    char *name;
-    int clen=0;
-    int current=0;
-    int p=0;
-    int max;
-    int max_len_seq=0;
-    int min_len_seq=0;
-    int nseq=0, l=0;
-
-
+	int   c;
+	char *name;
+	int clen=0;
+	int current=0;
+	int p=0;
+	int max;
+	int max_len_seq=0;
+	int min_len_seq=0;
+	int nseq=0, l=0;
 
 
-    int *sub;
-
-    buffer=vcalloc (1000, sizeof (char));
-    name=vcalloc ( 100, sizeof (char));
-
-    nseq=count_n_char_x_in_file(fname, '>');
-    min_len_seq=max=count_n_char_in_file(fname);
-    sub=vcalloc (max+1, sizeof (int));
-
-    fp=vfopen (fname,"r");
 
 
-    c=fgetc(fp);
-    while (c!=EOF)
-	 	{
-		 if (c=='>')
-			{
+	int *sub;
+
+	buffer=vcalloc (1000, sizeof (char));
+	name=vcalloc ( 100, sizeof (char));
+
+	nseq=count_n_char_x_in_file(fname, '>');
+	min_len_seq=max=count_n_char_in_file(fname);
+	sub=vcalloc (max+1, sizeof (int));
+
+	fp=vfopen (fname,"r");
+
+
+	c=fgetc(fp);
+	while (c!=EOF)
+	{
+		if (c=='>')
+		{
 			fscanf_seq_name (fp,name);
 			while ((c=fgetc(fp))!='\n' && c!=EOF);
 			while ((c=fgetc(fp))!='>' && c!=EOF)
 				if (isalnum (c)|| is_gap(c))
 					clen++;
-			 max_len_seq=(clen> max_len_seq)?clen: max_len_seq;
-			 min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
-			 clen=0;
-			}
-		else
-		    c=fgetc (fp);
-
+				max_len_seq=(clen> max_len_seq)?clen: max_len_seq;
+			min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
+			clen=0;
 		}
+		else
+			c=fgetc (fp);
 
-    vfclose (fp);
-    LS=declare_sequence (  min_len_seq,  max_len_seq,nseq);
+	}
 
-    LS->nseq=nseq;
+	vfclose (fp);
+	LS=declare_sequence (  min_len_seq,  max_len_seq,nseq);
 
-    fp=vfopen (fname,"r");
-    current=0;
-    c=fgetc(fp);
-    while (c!=EOF)
+	LS->nseq=nseq;
+
+	fp=vfopen (fname,"r");
+	current=0;
+	c=fgetc(fp);
+	while (c!=EOF)
+	{
+		if (c=='>')
 		{
-	 	if (c=='>')
-			{
 
 			fscanf_seq_name (fp,LS->name[current]);
 			l=strlen ( LS->name[current]);
@@ -3923,30 +4033,30 @@ Sequence* get_fasta_sequence_num (char *fname, char *comment_out)
 
 			p=0;
 			while ((c=fgetc(fp))!='>' && c!=EOF)
-			        {
+			{
 				if (isalnum (c))
-				    LS->seq[current][p++]=c;
+					LS->seq[current][p++]=c;
 				else if (is_gap(c))
-				    LS->seq[current][p++]=c;
-				}
+					LS->seq[current][p++]=c;
+			}
 			LS->seq[current][p]='\0';
 			LS->len[current]=strlen ( LS->seq[current]);
 
 			current++;
-			}
-		else
-		    c=fgetc ( fp);
 		}
+		else
+			c=fgetc ( fp);
+	}
 
 
-    vfclose (fp);
+	vfclose (fp);
 
 
-    vfree (sub);
-    vfree (name);
-    vfree (buffer);
-    return LS;
-    }
+	vfree (sub);
+	vfree (name);
+	vfree (buffer);
+	return LS;
+}
 
 Sequence *get_tree_file_list ( char *fname)
 {
@@ -4193,174 +4303,190 @@ Sequence* get_fasta_sequence_raw (char *fname, char *comment_out)
     vfree (buffer);
     return LS;
     }
+
+
+
+
+
 Sequence* get_fasta_sequence (char *fname, char *comment_out)
-    {
-    Sequence *LS;
-    Sequence *pdb_S;
-    int a;
+{
+	Sequence *LS;
+	Sequence *pdb_S;
+	int a;
+	char *pdb_name;
+	FILE *fp;
+	int   c;
+	char *name;
+	int clen=0;
+	int current=0;
+	int p=0;
+	int max_len_seq=0;
+	int min_len_seq=INT_MIN;
+	int nseq=0, l=0;
+	int disk=0;
+	int coor=0;
 
-    char *pdb_name;
+	char allowed[70] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-.#*~";
+	int *al_test = calloc(256, sizeof(int));
+	int i;
+	for (i = 0; i < 67; ++i)
+		al_test[allowed[i]] = 1;
 
-    char *buffer;
-    FILE *fp;
+	if (get_int_variable ("use_disk") || getenv ("SEQ_ON_DISK_4_TCOFFEE"))
+		disk=1;
 
-    int   c;
-    char *name;
-    int clen=0;
-    int current=0;
-    int p=0;
-    int max;
-    int max_len_seq=0;
-    int min_len_seq=0;
-    int nseq=0, l=0;
-    char *sub;
-    int disk=0;
-    int coor=0;
+	min_len_seq = INT_MAX;
+	fp=vfopen (fname,"r");
+	nseq=0;
 
-
-
-    buffer=vcalloc (1000, sizeof (char));
-    name=vcalloc ( 10000, sizeof (char));
-
-    nseq=count_n_char_x_in_file(fname, '>');
-    if (disk==1 || get_int_variable ("use_disk") || getenv ("SEQ_ON_DISK_4_TCOFFEE")){disk=1;}
-    if ( nseq==0)
-      {
-	vfree (buffer); vfree (name);
-	return NULL;
-      }
-
-    min_len_seq=max=count_n_char_in_file(fname);
-    sub=vcalloc (max+1, sizeof (char));
-
-    fp=vfopen (fname,"r");
-
-    nseq=0;
-    c=fgetc(fp);
-    while (c!=EOF)
-	 	{
-		 if (c=='>')
+	const unsigned int READ_LENGTH = 10000;
+	char *line=vcalloc ( READ_LENGTH, sizeof (char));
+	char *tmp;
+	while (fgets(line, READ_LENGTH, fp) != NULL)
+	{
+		if (line[0]=='>')
+		{
+			if (nseq > 0)
 			{
-			  nseq++;
-			  fscanf_seq_name (fp,name);
-			  while ((c=fgetc(fp))!='\n' && c!=EOF);
-			  while ((c=fgetc(fp))!='>' && c!=EOF)
-			    {
-			      if (isalnum (c)|| is_gap(c))
-				sub[clen++]=c;
-			    }
-
-			  if (strm (sub, "PDB"))
-			    {
-			      pdb_name=get_pdb_struc(name,0, 0);
-			      pdb_S=get_pdb_sequence (pdb_name);
-			      if (pdb_S)
-				{
-				  clen=strlen( pdb_S->seq[0]);
-				  free_sequence ( pdb_S,1);
-				}
-			      else
-				clen=0;
-
-			    }
-
-			  max_len_seq=(clen> max_len_seq)?clen: max_len_seq;
-			  min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
-			  clen=0;
+				max_len_seq=(clen> max_len_seq)?clen: max_len_seq;
+				min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
 			}
-		 else
-		   c=fgetc (fp);
+			nseq++;
+			clen= 0;
+			check_seq_name(&line[1]);
+// 				while ((c=fgetc(fp))!='\n' && c!=EOF);
+			if (fgets(line, READ_LENGTH, fp) != NULL)
+			{
+				if (!strcmp(line,"PDB"))
+				{
+					pdb_name=get_pdb_struc(line,0, 0);
+					pdb_S=get_pdb_sequence (pdb_name);
+					if (pdb_S)
+					{
+						clen=strlen( pdb_S->seq[0]);
+						free_sequence ( pdb_S,1);
+					}
+					else
+						clen=0;
+				}
+				else
+				{
+					tmp = &line[0];
+					while (*tmp != '\0')
+					{
+						if (al_test[*tmp])
+							++clen;
+						++tmp;
+					}
+				}
+			}
 
 		}
-
-    vfclose (fp);
-
-
-    if ( disk==0)
-      LS=declare_sequence (  min_len_seq,  max_len_seq,nseq);
-    else
-      {
-	LS=declare_sequence (0,0,nseq);
-	for (a=0; a<nseq; a++)LS->seq[a]=NULL;
-      }
-    LS->nseq=nseq;
-
-    fp=vfopen (fname,"r");
-    current=0;
-    c=fgetc(fp);coor++;
-
-    while (c!=EOF)
+		else
 		{
-	 	if (c=='>')
+
+			tmp = &line[0];
+			while (*tmp != '\0')
 			{
-			  coor+=fscanf_seq_name (fp, LS->name[current]);
-
-
-			  l=strlen ( LS->name[current]);
-			  if ( LS->name[current][l-1]==','||LS->name[current][l-1]==';')LS->name[current][l-1]='\0';
-			  LS->name[current]=translate_name ( LS->name[current]);
-			  a=0;
-			  while ((c=fgetc(fp))!='\n' && c!=EOF && a<(COMMENT_SIZE-1)){LS->seq_comment[current][a++]=c;coor++;}
-			  coor++;
-
-			  LS->seq_comment[current][a]='\0';
-
-			  p=0;
-			  while ((c=fgetc(fp))!='>' && c!=EOF)
-			    {
-			      coor++;
-
-			      if (!isspace(c))
-				{
-				  if (p==0)LS->dc[current][0]=coor;
-
-				  if (disk==0)LS->seq[current][p++]=c;
-				  else p++;
-				}
-
-			      LS->dc[current][1]=coor;
-			    }
-			  coor++;
-
-			  if ( disk==0)LS->seq[current][p]='\0';
-
-			  if (LS->seq[current] && strm (LS->seq[current], "PDB"))
-			    {
-
-			      pdb_name=get_pdb_struc(LS->name[current],0, 0);
-			      pdb_S=get_pdb_sequence (pdb_name);
-			      if (pdb_S)
-				{
-				  sprintf ( LS->seq[current], "%s", pdb_S->seq[0]);
-				  clen=strlen( pdb_S->seq[0]);
-				  free_sequence ( pdb_S, 1);
-				}
-			      else
-				{
-				  add_warning (stderr, "WARNING: Could not fetch PDB file: %s", pdb_name);
-				}
-			    }
-
-
-			  LS->len[current]=p;
-			  current++;
+				if (al_test[*tmp])
+					++clen;
+				++tmp;
 			}
+		}
+	}
+	free(al_test);
+	max_len_seq=(clen> max_len_seq)?clen: max_len_seq;
+	min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
+
+	vfclose (fp);
+
+	if ( nseq==0)
+	{
+		return NULL;
+	}
+
+	if ( disk==0)
+		LS=declare_sequence (  min_len_seq,  max_len_seq,nseq);
+	else
+	{
+		LS=declare_sequence (0,0,nseq);
+		for (a=0; a<nseq; a++)LS->seq[a]=NULL;
+	}
+	LS->nseq=nseq;
+
+	fp=vfopen (fname,"r");
+	current=0;
+	c=fgetc(fp);coor++;
+
+	while (c!=EOF)
+	{
+		if (c=='>')
+		{
+			coor+=fscanf_seq_name (fp, LS->name[current]);
+			l=strlen ( LS->name[current]);
+			if ( LS->name[current][l-1]==','||LS->name[current][l-1]==';')LS->name[current][l-1]='\0';
+			LS->name[current]=translate_name ( LS->name[current]);
+			a=0;
+			while ((c=fgetc(fp))!='\n' && c!=EOF && a<(COMMENT_SIZE-1))
+			{
+				LS->seq_comment[current][a++]=c;
+				coor++;
+			}
+			coor++;
+			LS->seq_comment[current][a]='\0';
+			p=0;
+			while ((c=fgetc(fp))!='>' && c!=EOF)
+			{
+				coor++;
+				if (!isspace(c))
+				{
+					if (p==0)
+						LS->dc[current][0]=coor;
+					if (disk==0)
+						LS->seq[current][p++]=c;
+					else p++;
+				}
+				LS->dc[current][1]=coor;
+			}
+			coor++;
+
+			if ( disk==0)
+				LS->seq[current][p]='\0';
+
+			if (LS->seq[current] && strm (LS->seq[current], "PDB"))
+			{
+
+				pdb_name=get_pdb_struc(LS->name[current],0, 0);
+				pdb_S=get_pdb_sequence (pdb_name);
+				if (pdb_S)
+				{
+					sprintf ( LS->seq[current], "%s", pdb_S->seq[0]);
+					clen=strlen( pdb_S->seq[0]);
+					free_sequence ( pdb_S, 1);
+				}
+				else
+				{
+					add_warning (stderr, "WARNING: Could not fetch PDB file: %s", pdb_name);
+				}
+			}
+			LS->len[current]=p;
+			current++;
+		}
 
 		else
-		  {
-		    c=fgetc ( fp);
-		    coor++;
-		  }
+		{
+			c=fgetc ( fp);
+			coor++;
 		}
+	}
 
-    vfclose (fp);
-    vfree (sub);
-    vfree (name);
-    vfree (buffer);
-    //LS=clean_sequence (LS);
+	vfclose (fp);
 
-    return LS;
-    }
+	//LS=clean_sequence (LS);
+
+	return LS;
+}
+
 
 Sequence* get_sub_fasta_sequence (char *fname, char *comment_out)
     {
@@ -4383,7 +4509,7 @@ Sequence* get_sub_fasta_sequence (char *fname, char *comment_out)
 
     int *sub;
 
-    nseq=count_n_char_x_in_file(fname, '>');
+//     nseq=count_n_char_x_in_file(fname, '>');
     min_len_seq=max=count_n_char_in_file(fname);
     sub=vcalloc (max+1, sizeof (int));
     buf=vcalloc ( max+1, sizeof (char));
@@ -4395,6 +4521,7 @@ Sequence* get_sub_fasta_sequence (char *fname, char *comment_out)
 	 	{
 		 if (c=='>')
 			{
+			++nseq;
 			fscanf_seq_name (fp,name);
 			while ((c=fgetc(fp))!='\n' && c!=EOF);
 			buf=fgets ( buf,max, fp);
@@ -4666,21 +4793,40 @@ Sequence* get_swissprot_sequence (char *fname, char *comment_out)
 
     return LS;
     }
+
+
+void
+check_seq_name (char *sname)
+{
+
+	char *tmp = strchr(sname, ' ');
+	if (tmp != NULL)
+		*tmp='\n';
+	int x = strlen (sname);
+	if ( x>MAXNAMES)
+		add_warning (stderr, "\nWARNING: Seq Name Too long: [%s]. Truncated to %d", sname, MAXNAMES);
+	if (sname[x-1] == '\n')
+		sname[MAXNAMES]='\0';
+}
+
+
+
 int fscanf_seq_name ( FILE *fp, char *sname)
 {
-  static char *name;
-  int r;
-  if ( !sname) return 0;
+	static char *name;
+	int r;
+	if ( !sname) return 0;
 
-  if ( !name)name=vcalloc ( 10000, sizeof (char));
-  fscanf (fp, "%s", name);
-  r=strlen (name);
-  if ( strlen (name)>MAXNAMES)
-    add_warning (stderr, "\nWARNING: Seq Name Too long: [%s]. Truncated to %d", name, MAXNAMES);
-  name[MAXNAMES]='\0';
-  sprintf ( sname, "%s", name);
-  return r;
+	if ( !name)name=vcalloc ( 10000, sizeof (char));
+	fscanf (fp, "%s", name);
+	r=strlen (name);
+	if ( r>MAXNAMES)
+		add_warning (stderr, "\nWARNING: Seq Name Too long: [%s]. Truncated to %d", name, MAXNAMES);
+	name[MAXNAMES]='\0';
+	sprintf ( sname, "%s", name);
+	return r;
 }
+
 
 /*******************************************************************************************/
 /*                                                                                         */

@@ -5921,6 +5921,10 @@ Alignment *km_align_seq_fast (Alignment *A, int argc, char **argv, int nit, int 
 
   return A;
 }
+
+
+
+
 int display_km_progression (Alignment **A, int n, double max, char *type)
 {
   static double current=0;
