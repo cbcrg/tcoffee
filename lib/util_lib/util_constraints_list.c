@@ -2957,37 +2957,50 @@ read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name,
 		char *tmp;
 		while ((c = fgetc(fp)) == '!')
 		{
-			genomic_info_found = 1;
+			
 			fgets (line , 200 , fp);
 
 			tag = strtok(line, " ");
 			if (strcmp(tag, "SG") == 0)
 			{
-				tmp = strtok(NULL, " \n");
-				gn_co[a].seg_name = vcalloc(strlen(tmp)+1, sizeof(char));
-				strcpy(gn_co[a].seg_name, tmp);
+			  genomic_info_found = 1;
+			  tmp = strtok(NULL, " \n");
+			  gn_co[a].seg_name = vcalloc(strlen(tmp)+1, sizeof(char));
+			  strcpy(gn_co[a].seg_name, tmp);
+			  
 
-
-			} else {
-				if (strcmp(tag, "SD") == 0)
+			} 
+			else 
+			  {
+			  if (strcmp(tag, "SD") == 0)
+			    {
+			      genomic_info_found = 1;
+			      gn_co[a].strand = strtok(NULL, " ")[0];
+			    } 
+			  else 
+			    {
+			      if (strcmp(tag, "ST") == 0)
 				{
-					gn_co[a].strand = strtok(NULL, " ")[0];
-				} else {
-					if (strcmp(tag, "ST") == 0)
-					{
-						gn_co[a].start = atoi(strtok(NULL, " "))-1;
-					} else {
-						if (strcmp(tag, "EN") == 0)
-						{
-							gn_co[a].end = atoi(strtok(NULL, " "))-1;
-						} else {
-							if (strcmp(tag, "SL") == 0)
-							{
-								gn_co[a].seg_len = atoi(strtok(NULL, " "));
-							}
-						}
-					}
+				  genomic_info_found = 1;
+				  gn_co[a].start = atoi(strtok(NULL, " "))-1;
+				} 
+			      else 
+				{
+				if (strcmp(tag, "EN") == 0)
+				  {
+				    genomic_info_found = 1;
+				    gn_co[a].end = atoi(strtok(NULL, " "))-1;
+				  } 
+				else 
+				  {
+				    if (strcmp(tag, "SL") == 0)
+				      {
+					genomic_info_found = 1;
+					gn_co[a].seg_len = atoi(strtok(NULL, " "));
+				      }
+				  }
 				}
+			    }
 			}
 		}
  		ungetc(c, fp);
@@ -2995,7 +3008,11 @@ read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name,
 
 
 	if (genomic_info_found)
-		*genome_co = gn_co;
+	  {
+	    *genome_co = gn_co;
+	    
+	  }
+
 	else
 	{
 		vfree(gn_co);

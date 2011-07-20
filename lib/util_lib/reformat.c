@@ -4322,8 +4322,176 @@ Sequence* get_fasta_sequence_raw (char *fname, char *comment_out)
 
 
 
-
 Sequence* get_fasta_sequence (char *fname, char *comment_out)
+    {
+    Sequence *LS;
+    Sequence *pdb_S;
+    int a;
+
+    char *pdb_name;
+    
+    char *buffer;
+    FILE *fp;
+
+    int   c;
+    char *name;
+    int clen=0;
+    int current=0;
+    int p=0;
+    int max;
+    int max_len_seq=0;
+    int min_len_seq=0;
+    int nseq=0, l=0;
+    char *sub;
+    int disk=0;
+    int coor=0;
+
+    
+       
+    buffer=vcalloc (1000, sizeof (char)); 
+    name=vcalloc ( 10000, sizeof (char));
+
+    nseq=count_n_char_x_in_file(fname, '>');
+    if (disk==1 || get_int_variable ("use_disk") || getenv ("SEQ_ON_DISK_4_TCOFFEE")){disk=1;}
+    if ( nseq==0)
+      {
+	vfree (buffer); vfree (name);
+	return NULL;
+      }
+    
+    min_len_seq=max=count_n_char_in_file(fname);
+    sub=vcalloc (max+1, sizeof (char));
+
+    fp=vfopen (fname,"r");
+
+    nseq=0;
+    c=fgetc(fp);
+    while (c!=EOF)
+	 	{
+		 if (c=='>')
+			{
+			  nseq++;
+			  fscanf_seq_name (fp,name);
+			  while ((c=fgetc(fp))!='\n' && c!=EOF);
+			  while ((c=fgetc(fp))!='>' && c!=EOF)
+			    {
+			      if (isalnum (c)|| is_gap(c))
+				sub[clen++]=c;
+			    }
+			  
+			  if (strm (sub, "PDB"))
+			    {
+			      pdb_name=get_pdb_struc(name,0, 0);
+			      pdb_S=get_pdb_sequence (pdb_name);
+			      if (pdb_S)
+				{
+				  clen=strlen( pdb_S->seq[0]);
+				  free_sequence ( pdb_S,1);
+				}
+			      else
+				clen=0;
+			      
+			    }
+						  
+			  max_len_seq=(clen> max_len_seq)?clen: max_len_seq;
+			  min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
+			  clen=0;
+			}
+		 else
+		   c=fgetc (fp);
+		 
+		}  
+    
+    vfclose (fp);	
+    
+    
+    if ( disk==0)
+      LS=declare_sequence (  min_len_seq,  max_len_seq,nseq); 
+    else
+      {
+	LS=declare_sequence (0,0,nseq);
+	for (a=0; a<nseq; a++)LS->seq[a]=NULL;
+      }
+    LS->nseq=nseq;
+    
+    fp=vfopen (fname,"r");
+    current=0;
+    c=fgetc(fp);coor++;
+    
+    while (c!=EOF)
+		{
+	 	if (c=='>')
+			{
+			  coor+=fscanf_seq_name (fp, LS->name[current]);
+
+			  
+			  l=strlen ( LS->name[current]);
+			  if ( LS->name[current][l-1]==','||LS->name[current][l-1]==';')LS->name[current][l-1]='\0';
+			  LS->name[current]=translate_name ( LS->name[current]);			
+			  a=0;
+			  while ((c=fgetc(fp))!='\n' && c!=EOF && a<(COMMENT_SIZE-1)){LS->seq_comment[current][a++]=c;coor++;}
+			  coor++;
+			  
+			  LS->seq_comment[current][a]='\0';
+			  
+			  p=0;
+			  while ((c=fgetc(fp))!='>' && c!=EOF)
+			    {
+			      coor++;
+			      
+			      if (!isspace(c))
+				{
+				  if (p==0)LS->dc[current][0]=coor;
+				  
+				  if (disk==0)LS->seq[current][p++]=c;
+				  else p++;
+				}
+			      
+			      LS->dc[current][1]=coor;
+			    }
+			  coor++;
+			  
+			  if ( disk==0)LS->seq[current][p]='\0';
+			  
+			  if (LS->seq[current] && strm (LS->seq[current], "PDB"))
+			    {
+			      
+			      pdb_name=get_pdb_struc(LS->name[current],0, 0);
+			      pdb_S=get_pdb_sequence (pdb_name);
+			      if (pdb_S)
+				{
+				  sprintf ( LS->seq[current], "%s", pdb_S->seq[0]);
+				  clen=strlen( pdb_S->seq[0]);
+				  free_sequence ( pdb_S, 1);
+				}
+			      else
+				{
+				  add_warning (stderr, "WARNING: Could not fetch PDB file: %s", pdb_name);
+				}
+			    }
+			
+			
+			  LS->len[current]=p;
+			  current++;		
+			}
+			
+		else
+		  {
+		    c=fgetc ( fp);
+		    coor++;
+		  }
+		}
+     
+    vfclose (fp);
+    vfree (sub);
+    vfree (name);
+    vfree (buffer);
+    //LS=clean_sequence (LS);
+   
+    return LS;
+    }
+
+Sequence* get_fasta_sequence_carsten (char *fname, char *comment_out)
 {
 	Sequence *LS;
 	Sequence *pdb_S;
