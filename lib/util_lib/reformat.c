@@ -1264,27 +1264,28 @@ char * identify_seq_format ( char *file)
 	   myexit (EXIT_FAILURE);
 	 }
 		else
-		if (format_val = fast_format_determination(file))
-		{
-			switch( format_val )
-			{
-				case 1 : sprintf ( format, "fasta_seq");
-					break;
-				case 2 : sprintf ( format, "fasta_aln");
-					break;
-				case 3 : sprintf ( format, "pir_seq");
-					break;
-				case 4 : sprintf ( format, "pir_aln");
-					break;
-			}
-		}
+
 
 // 			if ( format_is_fasta_seq(file))sprintf ( format, "fasta_seq");
 // 		else if ( format_is_fasta_aln(file,1))
 // 			sprintf ( format, "fasta_aln");
-       else if ( is_stockholm_aln (file))sprintf (format, "stockholm_aln");
+       if ( is_stockholm_aln (file))sprintf (format, "stockholm_aln");
        else if ( is_blast_file (file))sprintf ( format, "blast_aln");
        else if ( is_pdb_file(file))sprintf ( format, "pdb_struc");
+	   else if (format_val = fast_format_determination(file))
+	   {
+		   switch( format_val )
+		   {
+			   case 1 : sprintf ( format, "fasta_seq");
+			   break;
+			   case 2 : sprintf ( format, "fasta_aln");
+			   break;
+			   case 3 : sprintf ( format, "pir_seq");
+			   break;
+			   case 4 : sprintf ( format, "pir_aln");
+			   break;
+		   }
+	   }
        else if ( format_is_msf      (file))sprintf ( format, "msf_aln");
 //        else if ( format_is_pir_aln  (file))sprintf ( format, "pir_aln");
 //        else if ( format_is_pir_seq  (file))sprintf ( format, "pir_seq");
@@ -3958,6 +3959,20 @@ Sequence* perl_reformat2fasta (char *perl_command, char *fname)
 
 
 
+void
+check_seq_name (char *sname)
+{
+
+	char *tmp = strchr(sname, ' ');
+	if (tmp != NULL)
+		*tmp='\n';
+	int x = strlen (sname);
+	if ( x>MAXNAMES)
+		add_warning (stderr, "\nWARNING: Seq Name Too long: [%s]. Truncated to %d", sname, MAXNAMES);
+	if (sname[x-1] == '\n')
+		sname[MAXNAMES]='\0';
+}
+
 Sequence* get_fasta_sequence_num (char *fname, char *comment_out)
 {
 	Sequence *LS;
@@ -4354,44 +4369,29 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 			nseq++;
 			clen= 0;
 			check_seq_name(&line[1]);
-// 				while ((c=fgetc(fp))!='\n' && c!=EOF);
-			if (fgets(line, READ_LENGTH, fp) != NULL)
+		}else
+
+		if (line[2] == 'B')
+		{
+			if (!strcmp(line,"PDB"))
 			{
-				if (!strcmp(line,"PDB"))
+				pdb_name=get_pdb_struc(line,0, 0);
+				pdb_S=get_pdb_sequence (pdb_name);
+				if (pdb_S)
 				{
-					pdb_name=get_pdb_struc(line,0, 0);
-					pdb_S=get_pdb_sequence (pdb_name);
-					if (pdb_S)
-					{
-						clen=strlen( pdb_S->seq[0]);
-						free_sequence ( pdb_S,1);
-					}
-					else
-						clen=0;
+					clen=strlen( pdb_S->seq[0]);
+					free_sequence ( pdb_S,1);
 				}
 				else
-				{
-					tmp = &line[0];
-					while (*tmp != '\0')
-					{
-						if (al_test[*tmp])
-							++clen;
-						++tmp;
-					}
-				}
+					clen=0;
 			}
-
 		}
-		else
+		tmp = &line[0];
+		while (*tmp != '\0')
 		{
-
-			tmp = &line[0];
-			while (*tmp != '\0')
-			{
-				if (al_test[*tmp])
-					++clen;
-				++tmp;
-			}
+			if (al_test[*tmp])
+				++clen;
+			++tmp;
 		}
 	}
 	free(al_test);
@@ -4414,6 +4414,7 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 	}
 	LS->nseq=nseq;
 
+// 	printf_system("cp %s carsten", fname);
 	fp=vfopen (fname,"r");
 	current=0;
 	c=fgetc(fp);coor++;
@@ -4795,21 +4796,6 @@ Sequence* get_swissprot_sequence (char *fname, char *comment_out)
     }
 
 
-void
-check_seq_name (char *sname)
-{
-
-	char *tmp = strchr(sname, ' ');
-	if (tmp != NULL)
-		*tmp='\n';
-	int x = strlen (sname);
-	if ( x>MAXNAMES)
-		add_warning (stderr, "\nWARNING: Seq Name Too long: [%s]. Truncated to %d", sname, MAXNAMES);
-	if (sname[x-1] == '\n')
-		sname[MAXNAMES]='\0';
-}
-
-
 
 int fscanf_seq_name ( FILE *fp, char *sname)
 {
@@ -4863,6 +4849,10 @@ void dump_msa ( char *file,Alignment *A, int nseq, int *lseq)
     fprintf ( fp, "%d %s\n", lseq[a], A->seq_al[lseq[a]]);
   vfclose (fp);
 }
+
+
+
+
 
 void read_aln (char *file_name, Alignment *A)
 {
