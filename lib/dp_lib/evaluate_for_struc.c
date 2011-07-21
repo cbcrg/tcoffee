@@ -730,26 +730,6 @@ declare_name (pdb_blast_server);
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-// /*
-// declare_name (strike);
-// get_cl_param(\
-// /*argc*/      argc          ,\
-// /*argv*/      argv          ,\
-// /*output*/    &le           ,\
-// /*Name*/      "-mode"    ,\
-// /*Flag*/      &garbage      ,\
-// /*TYPE*/      "W_F"         ,\
-// /*OPTIONAL?*/ OPTIONAL      ,\
-// /*MAX Nval*/  1             ,\
-// /*DOC*/       "ND"          ,\
-// /*Parameter*/&pdb_blast_server       ,\
-// /*Def 1*/    ""      ,\
-// /*Def 2*/    "default"      ,\
-// /*Min_value*/ "any"         ,\
-// /*Max Value*/ "any"          \
-// );
-// */
-
 
 declare_name (prot_blast_server);
  get_cl_param(\
@@ -864,7 +844,7 @@ declare_name (prot_db);
 		   );
  // set the correct mode:
  if ( strm (argv[0], "trmsd"))sprintf (mode, "trmsd");
-//  if ( strm (argv[0], "strike"))sprintf (mode, "str");
+ if ( strm (argv[0], "strike"))sprintf (mode, "strike");
 
 
  set_string_variable ("prot_db", prot_db);
@@ -909,7 +889,6 @@ declare_name (prot_db);
 		pdb_param->nirmsd_graph=nirmsd_graph;
 
 		sprintf ( list_file[n_list++], "S%s", aln);
-// 		printf("HALLO2\n");
 
 		if (!strm (repeat_seq, ""))
 		  {
@@ -934,11 +913,13 @@ declare_name (prot_db);
 		      }
 		  }
 
-// 		if ( !strcmp(mode, "str"))
-// 		{
-// 			printf("HALLO\n");
-// 		}
-// 		printf("HALLO2\n");
+		if ( !strcmp(mode, "strike"))
+		{
+			printf("strike: %s |%s|", aln, get_cache_4_tcoffee());
+// 			S->T[0]->P->template_name
+			exit(EXIT_SUCCESS);
+		}
+
 		if ( !strm (run_name, "default"))
 		  {
 		    F=parse_fname(run_name);
