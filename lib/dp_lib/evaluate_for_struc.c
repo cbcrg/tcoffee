@@ -915,8 +915,20 @@ declare_name (prot_db);
 
 		if ( !strcmp(mode, "strike"))
 		{
-			printf("strike: %s |%s|", aln, get_cache_4_tcoffee());
-// 			S->T[0]->P->template_name
+			char *cache=get_cache_4_tcoffee();
+			char * x=vtmpnam(NULL);
+			FILE *strike_tmp = fopen(x, "w");
+
+			unsigned int n_seq = S->nseq;
+			unsigned int i = 0;
+			for (; i < n_seq; ++i)
+			{
+				if (S->T[i]->P->template_file != NULL)
+					fprintf(strike_tmp, "%s _P_ %s%s\n", S->name[i], cache,S->T[i]->P->template_file);
+			}
+			fclose(strike_tmp);
+			printf("\n\nSTRIKE out:\n");
+			printf_system("strike -a %s -c %s",aln, x);
 			exit(EXIT_SUCCESS);
 		}
 

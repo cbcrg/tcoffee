@@ -3,9 +3,9 @@ EXECUTABLE=t_coffee
 AUTHOR= "Cedric Notredame "
 
 #
-# make it possibile to define HOME2 externally using environment 
-# variable named 'SANDBOX', otherwise fallback on the defult mechanism 
-# 
+# make it possibile to define HOME2 externally using environment
+# variable named 'SANDBOX', otherwise fallback on the defult mechanism
+#
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
@@ -27,7 +27,7 @@ ifndef CFLAGS
 CFLAGS=-O3
 endif
 
-CC=gcc 
+CC=gcc
 
 
 SOURCE_DIR=$(PWD)/../../$(EXECUTABLE)/lib
@@ -59,7 +59,7 @@ OBJECTS	   =$(UT_LIB_OBJECTS) $(IO_LIB_OBJECTS) $(DP_LIB_OBJECTS) $(DEV1_LIB_OBJ
 #EXECUTABLES
 #-mno-cygwin -DWINDOWS
 
-#$(EXECUTABLE):  $(OBJECTS) $(PERL_MODULES) $(USE_MEM_LIB) 
+#$(EXECUTABLE):  $(OBJECTS) $(PERL_MODULES) $(USE_MEM_LIB)
 $(EXECUTABLE):  $(OBJECTS) $(USE_MEM_LIB) $(FORTRAN_LIB_OBJECTS)
 	echo $(OSNAME)
 	$(CC)  $(CFLAGS) -o $(EXECUTABLE)  $(OBJECTS) $(USE_MEM_LIB) -lm
@@ -75,25 +75,25 @@ all: $(EXECUTABLE)
 #							#
 #							#
 #########################################################
-distribution: 
+distribution:
 	-rm *.c
 	-rm *.h
 	make -i VERSION=$(VERSION) CC=cc general_distribution
 	make -i VERSION=$(VERSION) CC=cc examples
-	make -i VERSION=$(VERSION) CC=cc mcoffee		
+	make -i VERSION=$(VERSION) CC=cc mcoffee
 	make -i VERSION=$(VERSION) CC=cc packing
 
 code:
 	make CC=cc c_code
-	chmod u+x $(DISTRIB_DIR)/install	
+	chmod u+x $(DISTRIB_DIR)/install
 
 doc:
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.* $(DISTRIB_DOC)
 	antiword -m  "UTF-8" $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.doc >$(DISTRIB_DOC)/$(EXECUTABLE)_tutorial.txt
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.* $(DISTRIB_DOC)
 	antiword -m "UTF-8" $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.doc >$(DISTRIB_DOC)/$(EXECUTABLE)_technical.txt
-	cp $(PWD)/../../$(EXECUTABLE)/doc/README $(DISTRIB_DIR)	
-	cp $(PWD)/../../$(EXECUTABLE)/doc/README $(DISTRIB_DIR)/doc/	
+	cp $(PWD)/../../$(EXECUTABLE)/doc/README $(DISTRIB_DIR)
+	cp $(PWD)/../../$(EXECUTABLE)/doc/README $(DISTRIB_DIR)/doc/
 	cp $(PWD)/../../$(EXECUTABLE)/doc/aln_compare.doc.txt $(DISTRIB_DOC)
 	cp $(PWD)/../../$(EXECUTABLE)/doc/seq_reformat.doc.txt $(DISTRIB_DOC)
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE).pdf $(DISTRIB_DOC)
@@ -101,7 +101,7 @@ mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
 	mkdir -p $(DISTRIB_DIR)/mcoffee
 	cp $(LIBRARY)/mcoffee/* $(DISTRIB_DIR)/mcoffee
-examples:	
+examples:
 	mkdir -p $(DISTRIB_DIR)/example/
 	cp $(PWD)/../../$(EXECUTABLE)/doc_test/data/*  $(DISTRIB_DIR)/example/
 html:
@@ -120,8 +120,8 @@ test:
 	echo 'else {print "\\nInstallation of $(EXECUTABLE) Not Successful\\n";}'>>$(DISTRIB_DIR)/bin/test.pl
 	echo 'chdir "/..";'
 	chmod u+x $(DISTRIB_DIR)/bin/test.pl
-	#echo "./bin/test.pl" >>$(DISTRIB_DIR)/install 
-	#echo "./bin/t_coffee -update" >>$(DISTRIB_DIR)/install 
+	#echo "./bin/test.pl" >>$(DISTRIB_DIR)/install
+	#echo "./bin/t_coffee -update" >>$(DISTRIB_DIR)/install
 doc_test:
 	$(PWD)/../../lib/perl/lib/debug/check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.doc -data $(PWD)/../doc_test/data/
 	$(PWD)/../../lib/perl/lib/debug/check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.doc -data $(PWD)/../doc_test/data/
@@ -133,11 +133,11 @@ debug:  t_coffee
 	cp *.h debug
 	mv debug $(HOME2)/debug
 
-env: 
-	@echo 'Home             :' $(HOME) 
+env:
+	@echo 'Home             :' $(HOME)
 	@echo 'Pwd              :' $(PWD)
-	@echo 'Version          :' $(VERSION) 
-	@echo 'OSNAME           :' $(OSNAME) 
+	@echo 'Version          :' $(VERSION)
+	@echo 'OSNAME           :' $(OSNAME)
 	@echo 'DISTRIB_DIR      :' $(DISTRIB_DIR)
 	@echo 'DISTRIB_DOC      :' $(DISTRIB_DOC)
 	@echo 'WEB_BASE         :' $(WEB_BASE)
@@ -148,7 +148,7 @@ env:
 	@echo 'WEB_HOMEPAGE     :' $(WEB_HOMEPAGE)
 	@echo 'EXECUTABLE       :' $(EXECUTABLE)
 	@echo 'USER_BIN         :' $(USER_BIN)
-	@echo 'DOCUMENTATION    :' $(DOCUMENTATION) 
+	@echo 'DOCUMENTATION    :' $(DOCUMENTATION)
 	@echo 'LIBRARY          :' $(LIBRARY)
 	@echo 'DISTRIBUTIONS    :' $(DISTRIBUTIONS)
 
