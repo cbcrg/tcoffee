@@ -97,17 +97,15 @@ doc:
 	cp $(PWD)/../../$(EXECUTABLE)/doc/aln_compare.doc.txt $(DISTRIB_DOC)
 	cp $(PWD)/../../$(EXECUTABLE)/doc/seq_reformat.doc.txt $(DISTRIB_DOC)
 	cp $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE).pdf $(DISTRIB_DOC)
+
 mcoffee:
 	-rm -rf $(DISTRIB_DIR)/mcoffee
 	mkdir -p $(DISTRIB_DIR)/mcoffee
 	cp $(LIBRARY)/mcoffee/* $(DISTRIB_DIR)/mcoffee
+
 examples:
 	mkdir -p $(DISTRIB_DIR)/example/
 	cp $(PWD)/../../$(EXECUTABLE)/doc_test/data/*  $(DISTRIB_DIR)/example/
-html:
-	mkdir $(DISTRIB_DIR)/html/
-	cp $(PWD)/../../$(EXECUTABLE)/html/$(EXECUTABLE).html $(DISTRIB_DIR)/html/
-	cp $(PWD)/../../$(EXECUTABLE)/html/$(EXECUTABLE)4html.cgi $(DISTRIB_DIR)/html/
 
 test:
 	mkdir -p $(DISTRIB_DIR)/test
@@ -122,9 +120,6 @@ test:
 	chmod u+x $(DISTRIB_DIR)/bin/test.pl
 	#echo "./bin/test.pl" >>$(DISTRIB_DIR)/install
 	#echo "./bin/t_coffee -update" >>$(DISTRIB_DIR)/install
-doc_test:
-	$(PWD)/../../lib/perl/lib/debug/check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_tutorial.doc -data $(PWD)/../doc_test/data/
-	$(PWD)/../../lib/perl/lib/debug/check_distribution.pl -doc $(PWD)/../../$(EXECUTABLE)/doc/$(EXECUTABLE)_technical.doc -data $(PWD)/../doc_test/data/
 
 debug:  t_coffee
 	rm -r debug

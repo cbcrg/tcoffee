@@ -1,0 +1,39 @@
+
+
+
+*************************************************************************************************
+*                        FULL TRACE BACK PID: 21804                                    
+21804 -- ERROR: COREDUMP: T-COFFEE r965
+*************************************************************************************************
+
+	******************************************************************
+	* Abnormal Termination
+	* Job NOT Completed:[T-COFFEE, r965]
+	* Please CHECK:                                       
+	* 	-1 The format of your Input Files                 
+	* 	-2 The parameters                                 
+	* 	-3 The use of special characters in sequence names:
+	* 		 (@, |, %...)
+	* 	-4 The Online Doc (http://www.tcoffee.org)                   
+	* 	-5 Send the file:
+	*
+	*	    t_coffee.ErrorReport 
+	* to:
+	* 		cedric.notredame@europe.com
+	* If you run T-Coffee over the WEB:
+	* 	Windows Cut and Paste is sometimes erratic and
+	* 	it can loose carriage returns. If you suspect this,
+	* 	try to cut and paste through an intermediate application
+	* 	(word pad) and inspect the results
+
+
+	* CONFIDENTIALITY:
+	* 	The File t_coffee.ErrorReport may contain your personnal DATA
+	* 	Remove ALL confidential DATA from this file BEFORE sending it
+	******************************************************************
+# Command Line: t_coffee -in input-3744686189486913994.txt -method mafft_msa muscle_msa probconsRNA_msa -output score_html clustalw_aln fasta_aln phylip -maxnseq 150 -maxlen 2500 -case upper -seqnos on -outorder input -run_name result -tree -special_mode rcoffee -method_limits consan_pair 5 150 -multi_core 4 -quiet stdout  [PROGRAM:T-COFFEE]
+
+#----- Dumped File: t_coffee.ErrorReport
+
+# TERMINATION STATUS: FAILURE [PROGRAM: T-COFFEE pid 21804 ppid 21803
+#CL: t_coffee -in input-3744686189486913994.txt -method mafft_msa muscle_msa probconsRNA_msa -output score_html clustalw_aln fasta_aln phylip -maxnseq 150 -maxlen 2500 -case upper -seqnos on -outorder input -run_name result -tree -special_mode rcoffee -method_limits consan_pair 5 150 -multi_core 4 -quiet stdout 

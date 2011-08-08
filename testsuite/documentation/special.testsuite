@@ -1,0 +1,11 @@
+test: t_coffee    
+
+test: t_coffee -help    
+
+test: t_coffee -help -in    
+
+# do not check the exit value
+test: t_coffee -update    
+exit: 1
+assert: stdout contains 'Your version of T-COFFEE is not up to date'
+

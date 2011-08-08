@@ -1,0 +1,1 @@
+t_coffee -in=input-3744686189486913994.txt -method=mafft_msa muscle_msa probconsRNA_msa -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result -tree -special_mode=rcoffee -method_limits=consan_pair 5 150 -multi_core=4 -quiet=stdout

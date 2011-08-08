@@ -1,0 +1,12 @@
+
+
+
+test: t_coffee -in=input.fa -method=mafft_msa muscle_msa probconsRNA_msa -output=score_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result -tree -special_mode=rcoffee -method_limits=consan_pair 5 150 -multi_core=4 
+
+assert: stderr contains 'PROGRAM: T-COFFEE'
+assert: stderr not contains 'ERROR'
+assert: stderr not contains 'FATAL'
+assert: stderr not contains 'FAILURE'
+assert: file t_coffee.ErrorReport !exists
+assert: directory ${run.path}/.lck isEmpty
+assert: directory ${run.path}/.tmp/t_coffee.tmp isEmpty

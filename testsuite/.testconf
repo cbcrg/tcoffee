@@ -1,0 +1,19 @@
+#
+# Environmnt definition
+# 
+export DIR_4_TCOFFEE=${tcoffee.home}
+export MAFFT_BINARIES=${tcoffee.home}/plugins/macosx/
+export PERL5LIB=${tcoffee.home}/perl/
+export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:${tcoffee.home}/gfortran
+export LOCKDIR_4_TCOFFEE=${run.path}/.lck
+export CACHE_4_TCOFFEE=${run.path}/.cache
+export TMP_4_TCOFFEE=${run.path}/.tmp
+export EMAIL_4_TCOFFEE=paolo.ditommaso@gmail.com
+export PATH=${tcoffee.home}/bin:$PATH
+
+before: mkdir -p ${run.path}/.lck
+
+assert: directory "${run.path}/.lck" isEmpty
+assert: file t_coffee.ErrorReport not exists
+
+
