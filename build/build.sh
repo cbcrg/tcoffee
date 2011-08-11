@@ -189,7 +189,7 @@ function doc_test() {
 	cd $WORKSPACE/tcoffee/testsuite/
 	
 	set +e
-	java -jar black-coffee.jar --var tcoffee.home=$TCDIR --stop=failed --print-stdout=never --print-stderr=never --sandbox-dir=$WORKSPACE/test-results  ./documentation/ | tee $WORKSPACE/test.log
+	java -jar black-coffee.jar --var tcoffee.home=$TCDIR --stop=failed --sandbox-dir=$WORKSPACE/test-results --html-path-prefix=test-results ./documentation/ | tee $WORKSPACE/test.log
 
 	if [ $? != 0 ]; then
 		echo "Some test FAILED. Check result file: $WORKSPACE/test.log "
@@ -243,7 +243,7 @@ function upload()
 {
 	echo "[ upload_distribution ]"
 
-	scp -B -2 -r -i $WORKSPACE/build/tcoffee_org_id $DIST_BASE $DIST_HOST
+	scp -B -2 -r -i $WORKSPACE/tcoffee/build/tcoffee_org_id $DIST_BASE $DIST_HOST
 }
 
 
@@ -340,10 +340,10 @@ function build_binaries()
 function build_perlm() {
 	echo "[ build_perlm ]"
 
-	chmod +x $WORKSPACE/build/cpanm
-	$WORKSPACE/build/cpanm -n -l $PERLM SOAP::Lite --reinstall
-	$WORKSPACE/build/cpanm -n -l $PERLM XML::Simple --reinstall
-	$WORKSPACE/build/cpanm -n -l $PERLM LWP --reinstall
+	chmod +x $WORKSPACE/tcoffee/build/cpanm
+	$WORKSPACE/tcoffee/build/cpanm -n -l $PERLM SOAP::Lite --reinstall
+	$WORKSPACE/tcoffee/build/cpanm -n -l $PERLM XML::Simple --reinstall
+	$WORKSPACE/tcoffee/build/cpanm -n -l $PERLM LWP --reinstall
 
 }
 
@@ -359,12 +359,12 @@ function pack_binaries() {
 
 	# invoke the install builder 
 	mkdir -p $DIST_DIR
-	"$INSTALLER" build $WORKSPACE/build/tcoffee-installer.xml --setvars product_version=$VERSION untared=$UNTARED osname=$OSNAME tcdir=$TCDIR outdir=$DIST_DIR outname=$INST_NAME
+	"$INSTALLER" build $WORKSPACE/tcoffee/build/tcoffee-installer.xml --setvars product_version=$VERSION untared=$UNTARED osname=$OSNAME tcdir=$TCDIR outdir=$DIST_DIR outname=$INST_NAME
 	
 	# mac osx specific step 
 	if [ $OSNAME == "macosx" ]
 	then
-	$WORKSPACE/build/mkdmg.sh $DIST_DIR/$INST_NAME.app
+	$WORKSPACE/tcoffee/build/mkdmg.sh $DIST_DIR/$INST_NAME.app
 	mv $DIST_DIR/$INST_NAME.app.dmg $DIST_DIR/$INST_NAME.dmg 
 	rm -rf $DIST_DIR/$INST_NAME.app
 	fi
