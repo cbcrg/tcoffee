@@ -1140,6 +1140,15 @@ sub install_binary_package
     my $isdir;
     &input_os();
     
+    #
+    # - paolodt - Check if the module exists in the repository cache 
+    #
+	if( repo_load($pg) ) {
+	    $PG{$pg}{from_binary}=1;
+		return 1;
+	}
+    # - paolodt - end 
+    
     if (!&supported_os($OS)){return 0;}
     if ( $PG{$pg}{binary}){$name=$PG{$pg}{binary};}
     else 
