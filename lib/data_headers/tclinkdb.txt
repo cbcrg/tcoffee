@@ -271,6 +271,7 @@ PG hmmtop source		empty
 PG hmmtop binary		hmmtop
 PG hmmtop update_action		never
 PG hmmtop mode			tcoffee
+PG hmmtop version		2.1
 
 PG gorIV 4_TCOFFEE		GOR4
 PG gorIV type			protein_secondarystructure_predictor
