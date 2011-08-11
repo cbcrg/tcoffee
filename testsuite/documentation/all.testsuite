@@ -1,7 +1,7 @@
 #
 # definitions 
 #
-timeout: 5min
+timeout: 10min
 input: ../../t_coffee/doc_test/data
 
 #
@@ -25,7 +25,6 @@ test: t_coffee sample_seq1.fasta -mode quickaln -ndiag=10
 
 # The accurate mode requires a longer timeout
 test: t_coffee sample_seq1.fasta -mode accurate
-timeout: 10min
     
 test: t_coffee -aln=sproteases_small.cw_aln, sproteases_small.muscle, sproteases_small.tc_aln -outfile=combined_aln.aln    
 test: t_coffee -infile=sproteases_small.aln -special_mode=evaluate    
