@@ -189,7 +189,7 @@ function doc_test() {
 	cd $WORKSPACE/tcoffee/testsuite/
 	
 	set +e
-	java -jar black-coffee.jar --var tcoffee.home=$TCDIR --stop=failed --sandbox-dir=$WORKSPACE/test-results --html-path-prefix=test-results -o tests.html ./documentation/
+	java -jar black-coffee.jar --var tcoffee.home=$TCDIR --stop=failed --sandbox-dir=$WORKSPACE/test-results --html-path-prefix=test-results -o $WORKSPACE/tests.html ./documentation/
 
 	if [ $? != 0 ]; then
 		echo "Some test FAILED. Check result file: $WORKSPACE/tests.html "
