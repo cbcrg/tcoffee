@@ -189,22 +189,22 @@ function doc_test() {
 	cd $WORKSPACE/tcoffee/testsuite/
 	
 	set +e
-	java -jar black-coffee.jar --var tcoffee.home=$TCDIR --stop=failed --sandbox-dir=$WORKSPACE/test-results --html-path-prefix=test-results ./documentation/ | tee $WORKSPACE/test.log
+	java -jar black-coffee.jar --var tcoffee.home=$TCDIR --stop=failed --sandbox-dir=$WORKSPACE/test-results --html-path-prefix=test-results -o tests.html ./documentation/
 
 	if [ $? != 0 ]; then
-		echo "Some test FAILED. Check result file: $WORKSPACE/test.log "
+		echo "Some test FAILED. Check result file: $WORKSPACE/tests.html "
 		exit 2
 	fi
 
 	#check that the result test file exists
-	if [ ! -f $WORKSPACE/test.log ] 
+	if [ ! -f $WORKSPACE/tests.html ] 
 	then 
-		echo "test.log result file is missing."
+		echo "tests.html result file is missing."
 		exit 2
 	fi	 
 
 	if [ $? == 0 ]; then
-		echo "All tests PASSED. Check result file: $WORKSPACE/test.log "
+		echo "All tests PASSED. Check result file: $WORKSPACE/tests.html "
 	fi
 	set -e	
 }
