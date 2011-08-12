@@ -196,7 +196,7 @@ function doc_test() {
 	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT="$WORKSPACE/tests.html"; fi
 	if [ -z $TEST_FILES ];			then TEST_FILES="./documentation/"; fi
 
-	TEST_CMDLINE="--var tcoffee.home=$TCDIR --stop=$TEST_STOP --delete=$TEST_DELETE --sandbox-dir=$TEST_SANDBOX --html-path-prefix=$TEST_HTML_PREFIX -o $TEST_OUTPUT $TEST_ARGS $TEST_FILES"
+	TEST_CMDLINE="--var tcoffee.home=$TCDIR --stop $TEST_STOP --delete $TEST_DELETE --sandbox-dir \"$TEST_SANDBOX\" --html-path-prefix \"$TEST_HTML_PREFIX\" -o \"$TEST_OUTPUT\" $TEST_ARGS $TEST_FILES"
 	echo Test parameters: $TEST_CMDLINE
 	set -u
 	
