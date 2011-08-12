@@ -26,11 +26,17 @@ if [ -z $RELEASE ]; then
 export RELEASE=0
 fi
 
+if [ $RELEASE == 1 ]; then 
+export SVN_BASE=http://tcoffee.googlecode.com/svn/tcoffee/branches/stable
+else 
+export SVN_BASE=http://tcoffee.googlecode.com/svn/tcoffee/trunk
+fi
+
 #
 # default SVN revision number 
 #
 if [ -z $SVN_REVISION ]; then 
-SVN_REVISION=`svn info http://tcoffee.googlecode.com/svn/tcoffee/trunk | grep "Last Changed Rev:" | awk '{ print $4 }'`
+SVN_REVISION=`svn info $SVN_BASE | grep "Last Changed Rev:" | awk '{ print $4 }'`
 fi
 
 if [ $SVN_REVISION == "" ]; then 
@@ -99,8 +105,7 @@ SANDBOX=$WORKSPACE/sandbox
 PERLM=$WORKSPACE/perl
 
 _SRC=$WORKSPACE/tcoffee/t_coffee/src
-_G_USR=cbcrg.lab
-_G_PWD=Zf4Na7vf8SX8
+
 
 #
 # Define the distribution directory that will contain produced artifacts
@@ -184,13 +189,14 @@ function doc_test() {
 	echo "[ doc_test ]"
 
 	set +u
-	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX=test-results;	fi
-	if [ -z $TEST_STOP ]; 			then TEST_STOP=error; fi
-	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX=$WORKSPACE/test-results; fi
-	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT=$WORKSPACE/tests.html; fi
-	if [ -z $TEST_FILES ];			then TEST_FILES=./documentation/; fi
+	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX="test-results";	fi
+	if [ -z $TEST_STOP ]; 			then TEST_STOP="error"; fi
+	if [ -z $TEST_DELETE ]; 		then TEST_DELETE="never"; fi
+	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX="$WORKSPACE/test-results"; fi
+	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT="$WORKSPACE/tests.html"; fi
+	if [ -z $TEST_FILES ];			then TEST_FILES="./documentation/"; fi
 
-	TEST_CMDLINE="--var tcoffee.home=$TCDIR --stop=$TEST_STOP --sandbox-dir=$TEST_SANDBOX --html-path-prefix=$TEST_HTML_PREFIX -o $TEST_OUTPUT $TEST_ARGS $TEST_FILES"
+	TEST_CMDLINE="--var tcoffee.home=$TCDIR --stop=$TEST_STOP --delete=$TEST_DELETE --sandbox-dir=$TEST_SANDBOX --html-path-prefix=$TEST_HTML_PREFIX -o $TEST_OUTPUT $TEST_ARGS $TEST_FILES"
 	echo Test parameters: $TEST_CMDLINE
 	set -u
 	
@@ -404,6 +410,22 @@ function svn_tag()
   svn copy https://tcoffee.googlecode.com/svn/tcoffee/trunk https://tcoffee.googlecode.com/svn/tcoffee/tags/$VERSION -m "Tagging $VERSION" --username $_G_USR --password $_G_PWD
 }
 
+function build_and_pack_stable() {
+	export CFLAGS="-O3"
+	export INST_NAME="T-COFFEE_installer_$VERSION\_$OSNAME\_$OSARCH"
+	
+	build_binaries	
+	pack_binaries
+} 
+
+function build_and_pack_debug() {
+	export CFLAGS="-g -O1"
+	export INST_NAME="T-COFFEE_installer_$VERSION\_$OSNAME\_$OSARCH_debug"
+
+	build_binaries	
+	pack_binaries
+} 
+
 
 #
 #
@@ -416,8 +438,13 @@ function tcoffee() {
 	clean
 	build_dist
 	build_perlm
-	build_binaries	
-	pack_binaries
+	
+	# The stable package is done only for for release 
+	if [ $RELEASE == 1 ]; then 
+	build_and_pack_stable
+	fi 
+	
+	build_and_pack_debug
 
 	if [ $DO_TEST == 1 ]; then
 	doc_test 
