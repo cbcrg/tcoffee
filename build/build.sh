@@ -76,10 +76,11 @@ if [ -z $INSTALLER ]; then
 	fi
 fi
 
-# Flag DO_TEST, if true test are executed (default: true)
+# Flag DO_TEST, if true test are executed (default: false)
 if [ -z $DO_TEST ]; then 
-DO_TEST=1
+DO_TEST=0
 fi 
+
 
 #
 # script directives
@@ -182,6 +183,17 @@ function clean()
 function doc_test() { 
 	echo "[ doc_test ]"
 
+	set +u
+	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX=test-results;	fi
+	if [ -z $TEST_STOP ]; 			then TEST_STOP=error; fi
+	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX=$WORKSPACE/test-results; fi
+	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT=$WORKSPACE/tests.html; fi
+	if [ -z $TEST_FILES ];			then TEST_FILES=./documentation/; fi
+
+	TEST_CMDLINE="--var tcoffee.home=$TCDIR --stop=$TEST_STOP --sandbox-dir=$TEST_SANDBOX --html-path-prefix=$TEST_HTML_PREFIX -o $TEST_OUTPUT $TEST_ARGS $TEST_FILES"
+	echo Test parameters: $TEST_CMDLINE
+	set -u
+	
 	# remove previous result (if any)
 	rm -rf $WORKSPACE/test-results
 	
@@ -189,7 +201,7 @@ function doc_test() {
 	cd $WORKSPACE/tcoffee/testsuite/
 	
 	set +e
-	java -jar black-coffee.jar --var tcoffee.home=$TCDIR --stop=failed --sandbox-dir=$WORKSPACE/test-results --html-path-prefix=test-results -o $WORKSPACE/tests.html ./documentation/
+	java -jar black-coffee.jar $TEST_CMDLINE
 
 	if [ $? != 0 ]; then
 		echo "Some test FAILED. Check result file: $WORKSPACE/tests.html "
@@ -283,6 +295,11 @@ function build_binaries()
 		cp /usr/local/lib/libgfortran.a $TCDIR/gfortran
 		cp /usr/local/lib/libgfortran.la $TCDIR/gfortran
 	fi
+	
+	#
+	# add extra pack packages 
+	#
+	cp $BUILD_REPO/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
 }
 
 
