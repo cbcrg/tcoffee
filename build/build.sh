@@ -124,12 +124,12 @@ DIST_NAME=T-COFFEE_distribution_$VERSION.tar.gz
 DIST_HOST='tcoffeeo@tcoffee.org:~/public_html/Packages/'
 
 # Installer package file name 
-INST_NAME=T-COFFEE_installer_$VERSION\_$OSNAME\_$OSARCH
+INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 
-SERVER_NAME=T-COFFEE_server_$VERSION\_$OSNAME\_$OSARCH
+SERVER_NAME=T-COFFEE_server_"$VERSION"_"$OSNAME"_"$OSARCH"
 SERVER_DIR=$SANDBOX/server/$SERVER_NAME
 SERVER_WAR=$SANDBOX/war
-UNTARED=$SANDBOX/untared_distributions/T-COFFEE_distribution_$VERSION
+UNTARED=$SANDBOX/untared_distributions/T-COFFEE_distribution_"$VERSION"
 TCDIR=$SANDBOX/untared_binaries
 
 #
@@ -375,6 +375,7 @@ function build_perlm() {
 #
 function pack_binaries() {
 	echo "[ pack_binaries ]"
+	echo Package name: $INST_NAME 
 
 	# remove the t_coffee binaries from 'plugins' folder 
 	# it have to exist in 'bin' folder  
@@ -411,6 +412,8 @@ function svn_tag()
 }
 
 function build_and_pack_stable() {
+	echo "[ build_and_pack_stable ]"
+		
 	export CFLAGS="-O3"
 	export INST_NAME="T-COFFEE_installer_$VERSION\_$OSNAME\_$OSARCH"
 	
@@ -419,11 +422,12 @@ function build_and_pack_stable() {
 } 
 
 function build_and_pack_debug() {
+	echo "[ build_and_pack_debug ]"
+	
 	export CFLAGS="-g -O1"
-	export INST_NAME="T-COFFEE_installer_$VERSION\_$OSNAME\_$OSARCH\_debug"
+	export INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"_debug
 	export DATE="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION - DEBUG"
 	
-
 	build_binaries	
 	pack_binaries
 } 
