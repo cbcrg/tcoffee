@@ -420,7 +420,9 @@ function build_and_pack_stable() {
 
 function build_and_pack_debug() {
 	export CFLAGS="-g -O1"
-	export INST_NAME="T-COFFEE_installer_$VERSION\_$OSNAME\_$OSARCH_debug"
+	export INST_NAME="T-COFFEE_installer_$VERSION\_$OSNAME\_$OSARCH\_debug"
+	export DATE="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION - DEBUG"
+	
 
 	build_binaries	
 	pack_binaries
