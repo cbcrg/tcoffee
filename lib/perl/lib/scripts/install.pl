@@ -48,7 +48,7 @@ our $CPP="g++";
 our $CPPFLAGS="";
 
 our $CC="gcc";
-our $CFLAGS="";
+our $CFLAGS=$ENV{'CFLAGS'};
 
 our $FC="f77";
 our $FFLAGS="";
@@ -245,7 +245,7 @@ $PG{C}{compiler}=get_C_compiler($CC);
 $PG{Fortran}{compiler}=get_F_compiler($FC);
 $PG{CXX}{compiler}=$PG{CPP}{compiler}=$PG{GPP}{compiler}=get_CXX_compiler($CXX);
 if ($CXXFLAGS){$PG{CPP}{options}=$PG{GPP}{options}=$PG{CXX}{options}=$CXXFLAGS;}
-if ($CFLAGS){$PG{C}{options}=$CFLAGS;}
+if ($CFLAGS ne "" ){$PG{C}{options}=$CFLAGS;}
 foreach my $c (keys(%PG))
   {
     my $arguments;
@@ -254,7 +254,7 @@ foreach my $c (keys(%PG))
 	$arguments="$PG{$c}{compiler_flag}=$PG{$c}{compiler} ";
 	if ($PG{$c}{options})
 	  {
-	    $arguments.="$PG{$c}{options_flag}=$PG{$c}{options} ";
+	    $arguments.="$PG{$c}{options_flag}='" . $PG{$c}{options} . "' ";
 	  }
 	$PG{$c}{arguments}=$arguments;
       }
@@ -1098,7 +1098,10 @@ sub install_t_coffee
     $language=$PG{$pg} {language2};
     $arguments=$PG{$language}{arguments};
 
-    if ( $CC ne ""){&flush_command ("make -i $arguments t_coffee");}
+    if ( $CC ne ""){
+      print "make -i $arguments t_coffee \n";
+      &flush_command ("make -i $arguments t_coffee");
+    }
     &check_cp ($pg, $BIN);
     
     chdir $CDIR;
