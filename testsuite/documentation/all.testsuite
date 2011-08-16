@@ -1,7 +1,7 @@
 #
 # definitions 
 #
-timeout: 10min
+timeout: 15min
 input: ../../t_coffee/doc_test/data
 
 #
