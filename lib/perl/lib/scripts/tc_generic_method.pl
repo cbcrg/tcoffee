@@ -2218,7 +2218,7 @@ sub run_blast
 	    else
 	      {
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp -j5";}
-		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 7 --stype protein $infile>/dev/null 2>$error_log";
+		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile - --align 7 --stype protein --quiet $infile > $outfile 2>$error_log";
 	      }
 	    &safe_system ( $command,5);
 	    if (-e "$outfile.out.xml") {`mv $outfile.out.xml $outfile`;}
