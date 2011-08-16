@@ -9,6 +9,8 @@ export LOCKDIR_4_TCOFFEE=${run.path}/.lck
 export CACHE_4_TCOFFEE=${run.path}/.cache
 export TMP_4_TCOFFEE=${run.path}/.tmp
 export EMAIL_4_TCOFFEE=tcoffee.msa@gmail.com
+
+# Note: /usr/local/bin is required to run 'valgrind' on macosx because otherwise it is not added by default
 export PATH=${tcoffee.home}/bin:/usr/local/bin:$PATH
 
 before: mkdir -p ${run.path}/.lck
