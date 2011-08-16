@@ -1,10 +1,10 @@
 
 
 #########################################################
-#							#
-#		GENERIC  				#
-#							#
-#							#
+#							
+#		GENERIC  				
+#							
+#							
 #########################################################
 
 #
@@ -28,15 +28,6 @@ LIBRARY=$(PWD)/../../lib/
 ifndef HOME2
 HOME2=$(HOME)/Dropbox
 endif
-
-WEB_BASE=$(HOME2)/projects/server/html_server/public_html/
-WEB_UPDATE=$(HOME2)/projects/server/html_server/update/
-WEB_DISTRIBUTION=$(WEB_BASE)/Packages/
-WEB_BINARIES=$(WEB_DISTRIBUTION)/Binaries/$(OSNAME)
-WEB_DOC=$(WEB_BASE)/Documentation/
-WEB_DOCUMENTATION=$(WEB_BASE)/Documentation/$(EXECUTABLE)/
-WEB_HOMEPAGE=$(WEB_BASE)/Projects_home_page/$(EXECUTABLE)_home_page.html
-WEB_RESOURCES=$(WEB_BASE)/Resources/
 
 LOCAL_BASE=web_update/
 LOCAL_DISTRIBUTION=$(LOCAL_BASE)/Packages/
@@ -66,23 +57,15 @@ DISTRIBUTION_ADDRESS="www.tcoffee.org/Packages/"
 
 general_distribution: 
 	-rm $(CODE_LIST);
-	#make empty
 	mkdir -p $(DISTRIB_DIR)
 	mkdir -p $(DISTRIB_DIR)/bin
 	mkdir -p $(DISTRIB_DOC)
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
-	mkdir -p $(WEB_BASE)
-	mkdir -p $(WEB_DISTRIBUTION)
-	mkdir -p $(WEB_BINARIES)
-	mkdir -p $(WEB_BASE)/Documentation	
-	mkdir -p $(WEB_BASE)/Documentation/$(EXECUTABLE)
-	mkdir -p $(WEB_BASE)/Projects_home_page/
-	mkdir -p $(WEB_RESOURCES)
 	make -i VERSION=$(VERSION) CC=cc code
 	make -i VERSION=$(VERSION) CC=cc general_makefile
-	make -i VERSION=$(VERSION) CC=cc test
+	#make -i VERSION=$(VERSION) CC=cc test
 	#make -i VERSION=$(VERSION) CC=cc doc
 	make -i VERSION=$(VERSION) CC=cc license
 
@@ -127,16 +110,9 @@ distribute: all
 	-rm *.o_$(OSNAME)
 c_code:
 
-	#make clean
-	#make CC="gcc-linux -O3" $(EXECUTABLE)
-	#cp $(EXECUTABLE) $(LINUX_WEB_BINARIES)
-	#mv $(EXECUTABLE) $(LINUX_WEB_BINARIES)/$(EXECUTABLE)_$(VERSION)
-	#rm $(USER_BIN)/$(EXECUTABLE)
 	echo $(OSNAME) Compilation
 	make clean
-	make CC="gcc -O3" $(EXECUTABLE)
-	cp $(EXECUTABLE) $(WEB_BINARIES)
-	cp $(EXECUTABLE) $(WEB_BINARIES)/$(EXECUTABLE)_$(VERSION)
+	make CC="gcc" $(EXECUTABLE)
 	make clean
 	cp *.c $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	cp *.h $(DISTRIB_DIR)/$(EXECUTABLE)_source	
@@ -155,27 +131,27 @@ license:
 	rm $(DISTRIB_DIR)/short_license.c	
 	rm $(DISTRIB_DIR)/short_license.pl
 
+#install:
+#	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt > install
+
 packing:
 	mkdir -p $(UNTARED_DISTRIBUTIONS)
 	mkdir -p $(DISTRIBUTIONS)
 	mkdir -p $(LATEST_DISTRIBUTIONS)
-	mkdir -p $(WEB_DISTRIBUTION)
 	mv $(DISTRIB_DIR) .
 	tar -cvf $(DISTRIBUTION_FILE).tar $(DISTRIBUTION_FILE)
 	gzip $(DISTRIBUTION_FILE).tar
 	mv $(DISTRIBUTION_FILE)        $(UNTARED_DISTRIBUTIONS)
 	cp $(DISTRIBUTION_FILE).tar.gz $(DISTRIBUTIONS)
 	cp $(DISTRIBUTION_FILE).tar.gz $(LATEST_DISTRIBUTIONS)/$(LATEST_DISTRIBUTION_FILE).tar.gz
-	cp $(DISTRIBUTION_FILE).tar.gz $(WEB_DISTRIBUTION)/$(LATEST_DISTRIBUTION_FILE).tar.gz
-	cp $(DISTRIBUTION_FILE).tar.gz $(WEB_DISTRIBUTION)/
 	rm $(DISTRIBUTION_FILE).tar.gz
 
 
 #########################################################
-#							#
-#		RULES    				#
-#							#
-#							#
+#						
+#		RULES    			
+#						
+#						
 #########################################################
 
 

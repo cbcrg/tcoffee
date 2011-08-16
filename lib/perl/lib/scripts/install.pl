@@ -1097,7 +1097,6 @@ sub install_t_coffee
     print "\n------- Compiling T-Coffee\n";
     $language=$PG{$pg} {language2};
     $arguments=$PG{$language}{arguments};
-    if (!($arguments =~/CFLAGS/)){$arguments .= " CFLAGS=-O2 ";}
 
     if ( $CC ne ""){&flush_command ("make -i $arguments t_coffee");}
     &check_cp ($pg, $BIN);
