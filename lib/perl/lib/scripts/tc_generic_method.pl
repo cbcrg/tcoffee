@@ -22,6 +22,7 @@ our $CL=$PROGRAM;
 our $CLEAN_EXIT_STARTED;
 our $debug_lock=$ENV{"DEBUG_LOCK"};
 our $debug_cmd_exec=$ENV{"DEBUG_CMD_EXEC"};
+our $debug_generic_method=$ENV{"DEBUG_GENERIC_METHOD"};
 our $LOCKDIR=$ENV{"LOCKDIR_4_TCOFFEE"};
 if (!$LOCKDIR){$LOCKDIR=getcwd();}
 our $ERRORDIR=$ENV{"ERRORDIR_4_TCOFFEE"};
@@ -1485,6 +1486,11 @@ sub is_valid_blast_xml
       
       if ( !-e $file) {return 0;}
       $line=&file2tail ($file,100);
+      
+      if( $debug_generic_method ) { 
+      	printf "~ blast xml:  %s\n", $line; 
+      } 
+      
       if ( $line=~/<\/EBIApplicationResult/ || $line=~/<\/NCBI_BlastOutput/ || $line=~/<\/BlastOutput/ ){return 1;}
       return 0;
     }
@@ -2218,7 +2224,7 @@ sub run_blast
 	    else
 	      {
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp -j5";}
-		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile - --align 7 --stype protein --quiet $infile > $outfile 2>$error_log";
+		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 7 --stype protein $infile>/dev/null 2>$error_log";
 	      }
 	    &safe_system ( $command,5);
 	    if (-e "$outfile.out.xml") {`mv $outfile.out.xml $outfile`;}
@@ -3040,7 +3046,7 @@ sub safe_system
   if ($pid == 0)
     {
       set_lock($$, " -SHELL- $com (tcg)");
-      if( $debug_cmd_exec ) { printf "exec: %s\n", $com; } 
+      if( $debug_cmd_exec ) { printf "~ exec: %s\n", $com; } 
       exec ($com);
     }
   else
