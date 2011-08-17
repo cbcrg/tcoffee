@@ -11,10 +11,6 @@ HOME2=$(HOME)/Dropbox
 endif
 
 
-HTML=private_html
-HTML_DOC=public_html/Documentation/$(EXECUTABLE)
-HTML_PUBLIC=$(HOME2)/public_html/
-
 #########################################################
 #							#
 #		COMPILERS AND FLAGS			#
@@ -53,16 +49,11 @@ include $(PWD)/../../lib/c_make_lib/lib_makefile
 HEADERS	   =$(UT_LIB_HEADER) $(IO_LIB_HEADER)   $(DP_LIB_HEADER) $(DEV1_LIB_HEADER) $(DEV2_LIB_HEADER) $(DEV3_LIB_HEADER) $(DEV4_LIB_HEADER) $(FASTAL_LIB_HEADER) $(T_COFFEE_LIB_HEADER)
 OBJECTS	   =$(UT_LIB_OBJECTS) $(IO_LIB_OBJECTS) $(DP_LIB_OBJECTS) $(DEV1_LIB_OBJECTS) $(DEV2_LIB_OBJECTS) $(DEV3_LIB_OBJECTS) $(DEV4_LIB_OBJECTS) $(FASTAL_LIB_OBJECTS) $(T_COFFEE_LIB_OBJECTS)
 
-#USE_MEM_LIB	   =$(MEM_OBJECTS)
 
-
-#EXECUTABLES
-#-mno-cygwin -DWINDOWS
-
-#$(EXECUTABLE):  $(OBJECTS) $(PERL_MODULES) $(USE_MEM_LIB)
 $(EXECUTABLE):  $(OBJECTS) $(USE_MEM_LIB) $(FORTRAN_LIB_OBJECTS)
-	echo $(OSNAME)
+	echo Platform: $(OSNAME)
 	$(CC) $(CFLAGS) -o $(EXECUTABLE)  $(OBJECTS) $(USE_MEM_LIB) -lm
+	echo Copying $(EXECUTABLE) --> $(USER_BIN)
 	cp $(EXECUTABLE) $(USER_BIN)
 
 $(EXECUTABLE).test:  $(OBJECTS) $(USE_MEM_LIB)
