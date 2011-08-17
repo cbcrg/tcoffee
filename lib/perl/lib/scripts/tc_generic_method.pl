@@ -21,7 +21,6 @@ our $CL=$PROGRAM;
 
 our $CLEAN_EXIT_STARTED;
 our $debug_lock=$ENV{"DEBUG_LOCK"};
-our $debug_cmd_exec=$ENV{"DEBUG_CMD_EXEC"};
 our $debug_generic_method=$ENV{"DEBUG_GENERIC_METHOD"};
 our $LOCKDIR=$ENV{"LOCKDIR_4_TCOFFEE"};
 if (!$LOCKDIR){$LOCKDIR=getcwd();}
@@ -3046,8 +3045,9 @@ sub safe_system
   if ($pid == 0)
     {
       set_lock($$, " -SHELL- $com (tcg)");
-      if( $debug_cmd_exec ) { printf "~ exec: %s\n", $com; } 
+      if( $debug_generic_method ) { printf "~ exec: %s", $com; } 
       exec ($com);
+      if( $debug_generic_method ) { printf "; exitcode: %s\n", $?; } 
     }
   else
     {
