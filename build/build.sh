@@ -44,6 +44,11 @@ if [ $SVN_REVISION == "" ]; then
   exit 1
 fi
 
+if [ -z $BUILD_NUMBER ]; then 
+	BUILD_NUMBER=0
+fi
+
+
 if [[ (-z $VERSION) || ($VERSION == auto) ]]; then 
 	if [ $RELEASE == 1 ]; then 
 	export VERSION=`cat $WORKSPACE/tcoffee/t_coffee/src/version_number.version`
@@ -56,7 +61,7 @@ fi
 # The date timestamp string contains also the svn revision number
 #
 if [ -z $DATE ]; then 
-export DATE="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION"
+export DATE="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION - Build $BUILD_NUMBER"
 fi
 
 # default bin path 
@@ -105,6 +110,8 @@ SANDBOX=$WORKSPACE/sandbox
 PERLM=$WORKSPACE/perl
 
 _SRC=$WORKSPACE/tcoffee/t_coffee/src
+_G_USR=cbcrg.lab
+_G_PWD=Zf4Na7vf8SX8
 
 
 #
@@ -189,11 +196,11 @@ function doc_test() {
 	echo "[ doc_test ]"
 
 	set +u
-	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX="test-results";	fi
+	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX="."; fi
 	if [ -z $TEST_STOP ]; 			then TEST_STOP="error"; fi
 	if [ -z $TEST_DELETE ]; 		then TEST_DELETE="never"; fi
 	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX="$WORKSPACE/test-results"; fi
-	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT="$WORKSPACE/tests.html"; fi
+	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT="$WORKSPACE/test-results/index.html"; fi
 	if [ -z $TEST_FILES ];			then TEST_FILES="./documentation/"; fi
 
 	TEST_CMDLINE="--var tcoffee.home=$TCDIR --stop $TEST_STOP --delete $TEST_DELETE --sandbox-dir \"$TEST_SANDBOX\" --html-path-prefix \"$TEST_HTML_PREFIX\" -o \"$TEST_OUTPUT\" $TEST_ARGS $TEST_FILES"
@@ -201,7 +208,7 @@ function doc_test() {
 	set -u
 	
 	# remove previous result (if any)
-	rm -rf $WORKSPACE/test-results
+	rm -rf $TEST_SANDBOX
 	
 	# run tests 
 	cd $WORKSPACE/tcoffee/testsuite/
@@ -210,19 +217,13 @@ function doc_test() {
 	java -jar black-coffee.jar $TEST_CMDLINE
 
 	if [ $? != 0 ]; then
-		echo "Some test FAILED. Check result file: $WORKSPACE/tests.html "
+		echo "Some test FAILED. Check result file: $TEST_OUTPUT "
 		exit 2
 	fi
 
-	#check that the result test file exists
-	if [ ! -f $WORKSPACE/tests.html ] 
-	then 
-		echo "tests.html result file is missing."
-		exit 2
-	fi	 
 
 	if [ $? == 0 ]; then
-		echo "All tests PASSED. Check result file: $WORKSPACE/tests.html "
+		echo "All tests PASSED. Check result file: $TEST_OUTPUT "
 	fi
 	set -e	
 }
@@ -311,53 +312,6 @@ function build_binaries()
 
 
 #
-# Run all tests and publish result to workspace
-#
-# Depends on: pack_server
-#  
-#function test_server() 
-#{
-#	echo "[ test_server ]"
-#
-# 	# clean required directories
-#	rm -rf $SANDBOX/web
-#	rm -rf $SANDBOX/$SERVER_NAME 
-#	mkdir -p $SANDBOX/$SERVER_NAME
-#
-#	# unzip the distribution file
-#	unzip $DIST_DIR/$SERVER_NAME.zip -d $SANDBOX > /dev/null
-#	mv $SANDBOX/$SERVER_NAME $SANDBOX/web
-#
-#	# kill tcoffee test server instance if ANY
-#	kill -9 `ps -ef  | grep 'play test' | grep -v grep | awk '{ print $2 }'` || true
-#	kill -9 `ps -ef  | grep 'play.jar' | grep -v grep | awk '{ print $2 }'` || true
-#
-#	# start a play instance and invoke tests
-#	cd $SANDBOX/web
-#	echo "Starting play tests .. "
-#	./$PLAY_VER/play test tserver &
-#	echo "Waiting play starts .. " `date` 
-#	sleep 10
-#	echo "Running tests .. " `date`
-#	wget http://localhost:9000/@tests/all -O index.html -t 6
-#	echo ""
-#	mv index.html $SANDBOX/web/tserver/test-result/index.html
-#
-#	# kill tcoffee test server instance 
-#	kill -9 `ps -ef  | grep 'play test' | grep -v grep | awk '{ print $2 }'`
-#	kill -9 `ps -ef  | grep 'play.jar' | grep -v grep | awk '{ print $2 }'`
-#
-#	# publish the tests
-#	rm -rf $WORKSPACE/test-result
-#	cp -r $SANDBOX/web/tserver/test-result $WORKSPACE/test-result
-#
-#	# check if the failure file exists
-#	#if [ -e $WORKSPACE/test-result/result.failed ]; then exit 1; fi 
-#}
-#
-
-
-#
 # download perl packages 
 #
 function build_perlm() {
@@ -407,7 +361,6 @@ function svn_tag()
 {
   echo "[ svn_tag ]"
 
-  svn copy https://tcoffee.googlecode.com/svn/build/trunk https://tcoffee.googlecode.com/svn/build/tags/$VERSION -m "Tagging $VERSION" --username $_G_USR --password $_G_PWD
   svn copy https://tcoffee.googlecode.com/svn/tcoffee/trunk https://tcoffee.googlecode.com/svn/tcoffee/tags/$VERSION -m "Tagging $VERSION" --username $_G_USR --password $_G_PWD
 }
 
@@ -430,6 +383,24 @@ function build_and_pack_debug() {
 	
 	build_binaries	
 	pack_binaries
+} 
+
+#
+# Copy to dropbox for publishing
+#
+
+function copy_to_dropbox() {
+
+	DROPBOX_BASE=~/Dropbox/distribution
+	if [ $RELEASE == 1 ]; then 
+	DROPBOX_PATH=$DROPBOX_BASE/stable/"$OSNAME"_"$OSARCH"/$VERSION
+	else 
+	DROPBOX_PATH=$DROPBOX_BASE/beta/"$OSNAME"_"$OSARCH"/$VERSION
+	fi
+	
+	mkdir -p $DROPBOX_PATH 
+	cp -r $TCDIR/* $DROPBOX_PATH
+
 } 
 
 
