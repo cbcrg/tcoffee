@@ -2,6 +2,7 @@
 # Environmnt definition
 # 
 export DIR_4_TCOFFEE=${tcoffee.home}
+export MCOFFEE_4_TCOFFEE=${tcoffee.home}/matrix/
 export MAFFT_BINARIES=${tcoffee.home}/plugins/$OSNAME/
 export PERL5LIB=${tcoffee.home}/perl/
 export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:${tcoffee.home}/gfortran

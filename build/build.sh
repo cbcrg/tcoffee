@@ -279,6 +279,10 @@ function build_binaries()
 	mkdir -p $TCDIR
 	mkdir -p $TCDIR/bin
 
+	# Make sure that does not exist already binaries
+	rm -rf $UNTARED/bin
+	mkdir -p $UNTARED/bin
+
 	# create t-coffee binaries installation
 	cd $UNTARED
 	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
@@ -368,7 +372,7 @@ function build_and_pack_stable() {
 	echo "[ build_and_pack_stable ]"
 		
 	export CFLAGS="-O3"
-	export INST_NAME="T-COFFEE_installer_$VERSION\_$OSNAME\_$OSARCH"
+	export INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 	
 	build_binaries	
 	pack_binaries
