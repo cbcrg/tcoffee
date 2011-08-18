@@ -196,10 +196,10 @@ function doc_test() {
 	echo "[ doc_test ]"
 
 	set +u
-	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX="."; fi
+	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX="all"; fi
 	if [ -z $TEST_STOP ]; 			then TEST_STOP="error"; fi
 	if [ -z $TEST_DELETE ]; 		then TEST_DELETE="never"; fi
-	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX="$WORKSPACE/test-results"; fi
+	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX="$WORKSPACE/test-results/all"; fi
 	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT="$WORKSPACE/test-results/index.html"; fi
 	if [ -z $TEST_FILES ];			then TEST_FILES="./documentation/"; fi
 
