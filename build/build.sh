@@ -105,6 +105,12 @@ if [ -z $DO_TEST ]; then
 DO_TEST=0
 fi 
 
+#
+# The Dropbox folder where to copy produces binaries 	
+#
+if [ -z $DROPBOX ]; then 
+DROPBOX=$HOME/devchannel; 
+fi
 
 #
 # script directives
@@ -146,14 +152,11 @@ DIST_HOST='tcoffeeo@tcoffee.org:~/public_html/Packages/'
 # Installer package file name 
 INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 
-SERVER_NAME=T-COFFEE_server_"$VERSION"_"$OSNAME"_"$OSARCH"
-SERVER_DIR=$SANDBOX/server/$SERVER_NAME
-SERVER_WAR=$SANDBOX/war
 UNTARED=$SANDBOX/untared_distributions/T-COFFEE_distribution_"$VERSION"
-TCDIR=$SANDBOX/untared_binaries
+TCDIR=$SANDBOX/build
 
 #
-# exported variabled
+# exported variabled (required by 'generic_makefile')
 #
 export HOME2=$SANDBOX
 
@@ -176,9 +179,6 @@ function env()
   echo "- USER_BIN    : $USER_BIN"
   echo ". SANDBOX     : $SANDBOX"
   echo ". _SRC        : $_SRC"
-  echo ". SERVER_NAME : $SERVER_NAME" 
-  echo ". SERVER_DIR  : $SERVER_DIR"
-  echo ". SERVER_WAR  : $SERVER_WAR"
   echo ". UNTARED     : $UNTARED"  
   echo ". INSTALLER   : $INSTALLER"
   echo ". TCDIR       : $TCDIR"
@@ -408,15 +408,16 @@ function build_and_pack_debug() {
 
 function copy_to_dropbox() {
 
-	DROPBOX_BASE=~/Dropbox/distribution
+	mkdir -p $DROPBOX
+
 	if [ $RELEASE == 1 ]; then 
-	DROPBOX_PATH=$DROPBOX_BASE/stable/"$OSNAME"_"$OSARCH"/$VERSION
+	DROPBOX_DIR=$DROPBOX/stable/"$OSNAME"_"$OSARCH"/$VERSION
 	else 
-	DROPBOX_PATH=$DROPBOX_BASE/beta/"$OSNAME"_"$OSARCH"/$VERSION
+	DROPBOX_DIR=$DROPBOX/beta/"$OSNAME"_"$OSARCH"/$VERSION
 	fi
 	
-	mkdir -p $DROPBOX_PATH 
-	cp -r $TCDIR/* $DROPBOX_PATH
+	mkdir -p $DROPBOX_DIR 
+	cp -r $TCDIR/* $DROPBOX_DIR
 
 } 
 
@@ -443,6 +444,8 @@ function tcoffee() {
 	if [ $DO_TEST == 1 ]; then
 	doc_test 
 	fi
+	
+	copy_to_dropbox
 
 } 
 
