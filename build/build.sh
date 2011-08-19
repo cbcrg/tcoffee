@@ -44,11 +44,16 @@ if [ $SVN_REVISION == "" ]; then
   exit 1
 fi
 
+#
+# The build number is generated automatically by the build containg (Hudson/Jenkins)
+#
 if [ -z $BUILD_NUMBER ]; then 
 	BUILD_NUMBER=0
 fi
 
-
+#
+# Define the VERSION number 
+#
 if [[ (-z $VERSION) || ($VERSION == auto) ]]; then 
 	if [ $RELEASE == 1 ]; then 
 	export VERSION=`cat $WORKSPACE/tcoffee/t_coffee/src/version_number.version`
@@ -61,8 +66,16 @@ fi
 # The date timestamp string contains also the svn revision number
 #
 if [ -z $DATE ]; then 
-export DATE="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION - Build $BUILD_NUMBER"
+export DATE=`date +"%Y-%m-%d %H:%M:%S"`
 fi
+
+#
+# BUILD_INFO
+#
+if [ -z $BUILDINFO ]; then 
+export BUILDINFO="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION - Build $BUILD_NUMBER"
+fi
+
 
 # default bin path 
 if [ -z $USER_BIN ]; then 

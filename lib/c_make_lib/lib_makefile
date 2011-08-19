@@ -41,7 +41,9 @@ ifndef DISTRIBUTION_ADDRESS
 DISTRIBUTION_ADDRESS="www.tcoffee.org/Packages"
 endif
 
-
+ifndef BUILD_INFO
+BUILD_INFO=`date +"%Y-%m-%d %H:%M:%S"`
+endif
 
 #LIST OF C LIBRARIES
 #TC_LIB_DIR MUST BE defined in BAshrc
@@ -500,6 +502,7 @@ define_header.h:\
 	echo '#define PROGRAM'  '"'$(PROGRAM)'"'>> define_header.h
 	echo '#define VERSION'   '"'$(VERSION)'"' >> define_header.h
 	echo '#define AUTHOR' '"'$(AUTHOR)'"' >>  define_header.h
+	echo '#define BUILD_INFO'   '"'$(BUILD_INFO)'"' >> define_header.h
 	echo '#define DISTRIBUTION_ADDRESS' '"'$(DISTRIBUTION_ADDRESS)'"' >>  define_header.h
 
 #########################################################################

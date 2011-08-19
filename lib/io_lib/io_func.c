@@ -776,7 +776,7 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
 	}	
     if ( max_len>max_name_len)max_len=max_name_len;
     
-   sprintf (buf, "\n%s, %s(%s)\n%s\n",PROGRAM,VERSION,DATE, AUTHOR);     
+   sprintf (buf, "\n%s, %s (%s)\n%s\n",PROGRAM,VERSION,BUILD_INFO, AUTHOR);
    fps=print_format_string ( buf,white, ink, fps);
 
    if(B->output_tm == 1)
@@ -914,7 +914,7 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
     
     
     
-    sprintf (buf, "%s, %s(%s)\n%s\nCPU TIME:%d sec.\n%s",PROGRAM,VERSION,DATE, AUTHOR,  (B->cpu+get_time())/1000, (S->generic_comment)?S->generic_comment:"");     
+    sprintf (buf, "%s, %s (%s)\n%s\nCPU TIME:%d sec.\n%s",PROGRAM,VERSION,BUILD_INFO, AUTHOR,  (B->cpu+get_time())/1000, (S->generic_comment)?S->generic_comment:"");
     fps=print_format_string ( buf,white, ink, fps);
     sprintf (buf, "SCORE=%d\n*\n", S->score_aln);
     fps=print_format_string ( buf,white, ink, fps);

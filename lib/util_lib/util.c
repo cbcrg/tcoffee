@@ -3569,7 +3569,7 @@ static long milli_sec_conv=1000;
 
 FILE *print_program_information (FILE *fp, char *comment)
 {
-   fprintf ( fp, "# Results Produced with %s (%s)\n",PROGRAM, VERSION);
+   fprintf ( fp, "# Results Produced with %s %s (%s)\n",PROGRAM, VERSION, BUILD_INFO);
    fprintf ( fp, "# %s is available from %s\n",PROGRAM,URL);
    fprintf ( fp, "# Register on: https://groups.google.com/group/tcoffee/\n");
    if (comment)fprintf ( fp, "# %s\n", comment);
@@ -5463,6 +5463,7 @@ void dump_tcoffee(char *target, char *nature)
       fprintf (fp, "<T-CoffeeApplicationDump>\n<nature>%s</nature>\n", nature);
       fprintf (fp, "<program>%s</program>\n", PROGRAM);
       fprintf (fp, "<version>%s</version>\n",VERSION);
+      fprintf (fp, "<build>%s</build>\n",BUILD_INFO);
       if ((f=strstr (in_cl, "-dump")))f[0]='\0';
       fprintf (fp, "<cl>%s</cl>\n",in_cl);
       fprintf (fp, "<stack>\n");
@@ -5539,7 +5540,7 @@ void dump_error_file()
 
       fprintf ( fp, "\n######### RUN_REPORT      START  ######");
       fprintf ( fp, "\n######### PROGRAM_VERSION START  ######");
-      fprintf ( fp, "\n          %s, %s", PROGRAM, VERSION);
+      fprintf ( fp, "\n          %s, %s (%s)", PROGRAM, VERSION, BUILD_INFO);
       fprintf ( fp, "\n######### PROGRAM_VERSION END    ######");
 
       fprintf ( fp, "\n######### COMMAND_LINE    START  ######");
@@ -8600,7 +8601,7 @@ void signal_exit ()
  }
 void error_exit ()
  {
-   lock (getpid(), LERROR, LSET, "%d -- ERROR: COREDUMP: %s %s\n",getpid(), PROGRAM, VERSION, getpid());
+   lock (getpid(), LERROR, LSET, "%d -- ERROR: COREDUMP: %s %s (%s)\n",getpid(), PROGRAM, VERSION, BUILD_INFO );
    global_exit_signal=EXIT_FAILURE;
    myexit (EXIT_FAILURE);
  }
@@ -8623,7 +8624,7 @@ void clean_exit ()
   //3-update error lock if needed
   if (has_error_lock())//Update error lock
     {
-      lock (getpid(), LERROR, LSET, "%d -- STACK: %d -> %d -- %s %s\n", getpid(), getppid(), getpid(), PROGRAM, VERSION);
+      lock (getpid(), LERROR, LSET, "%d -- STACK: %d -> %d -- %s %s (%s)\n", getpid(), getppid(), getpid(), PROGRAM, VERSION, BUILD_INFO);
       lock (getpid(), LERROR, LSET, "%d -- COM: %s\n",getpid(),in_cl );
 
       //

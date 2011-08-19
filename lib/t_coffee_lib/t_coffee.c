@@ -859,13 +859,13 @@ if ( !do_evaluate)
        }
      if ( do_version)
        {
-	 fprintf ( stdout, "PROGRAM: %s (%s)\n",PROGRAM,VERSION);
+	 fprintf ( stdout, "PROGRAM: %s %s (%s)\n",PROGRAM,VERSION,BUILD_INFO);
 	 return EXIT_SUCCESS;
        }
 
 
      le=vfopen ( se_name, "w");
-     fprintf ( le, "\nPROGRAM: %s (%s)\n",PROGRAM,VERSION);
+     fprintf ( le, "\nPROGRAM: %s %s (%s)\n",PROGRAM,VERSION,BUILD_INFO);
 
 /*PARAMETER PROTOTYPE: RUN NAME*/
                declare_name (full_log);
