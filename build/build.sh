@@ -109,7 +109,7 @@ fi
 # The Dropbox folder where to copy produces binaries 	
 #
 if [ -z $DROPBOX ]; then 
-DROPBOX=$HOME/devchannel; 
+DROPBOX=$HOME/Dropbox/devchannel; 
 fi
 
 #
@@ -407,6 +407,7 @@ function build_and_pack_debug() {
 #
 
 function copy_to_dropbox() {
+	echo "[ copy_to_dropbox ]"
 
 	mkdir -p $DROPBOX
 
@@ -416,6 +417,7 @@ function copy_to_dropbox() {
 	DROPBOX_DIR=$DROPBOX/beta/"$OSNAME"_"$OSARCH"/$VERSION
 	fi
 	
+	rm -rf $DROPBOX_DIR
 	mkdir -p $DROPBOX_DIR 
 	cp -r $TCDIR/* $DROPBOX_DIR
 
@@ -445,8 +447,6 @@ function tcoffee() {
 	doc_test 
 	fi
 	
-	copy_to_dropbox
-
 } 
 
 
