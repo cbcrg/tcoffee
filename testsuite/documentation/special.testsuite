@@ -1,12 +1,26 @@
+#
+# The main command w/o arguments display installation infortation
+#
 test: t_coffee    
 
+#
+# Displays the help info 
+#
 test: t_coffee -help    
 
+#
+# Display the help info
+# 
 test: t_coffee -help -in    
 
+#
 # do not check the exit value
+#
 test: t_coffee -update    
 exit: 1
 assert: stdout contains 'Your version of T-COFFEE is not up to date'
 
-test: t-coffee -version 
+#
+# Display the T-coffee version information
+#
+test: t_coffee -version 
