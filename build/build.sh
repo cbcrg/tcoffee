@@ -109,7 +109,7 @@ fi
 # The Dropbox folder where to copy produces binaries 	
 #
 if [ -z $DROPBOX ]; then 
-DROPBOX=$HOME/Dropbox/devchannel; 
+DROPBOX=$HOME/Dropbox/upstream; 
 fi
 
 #
@@ -413,9 +413,9 @@ function copy_to_dropbox() {
 	mkdir -p $DROPBOX
 
 	if [ $RELEASE == 1 ]; then 
-	DROPBOX_DIR=$DROPBOX/stable/"$OSNAME"_"$OSARCH"/$VERSION
+	DROPBOX_DIR=$DROPBOX/stable/"$OSNAME"_"$OSARCH"
 	else 
-	DROPBOX_DIR=$DROPBOX/beta/"$OSNAME"_"$OSARCH"/$VERSION
+	DROPBOX_DIR=$DROPBOX/beta/"$OSNAME"_"$OSARCH"
 	fi
 	
 	rm -rf $DROPBOX_DIR
@@ -448,6 +448,7 @@ function tcoffee() {
 	doc_test 
 	fi
 	
+	copy_to_dropbox
 } 
 
 
