@@ -62,11 +62,11 @@ double data2evaluate ( double **d, int n, int dim);
 
 void output_data ( double **data, int n, int dim, int len,  char *infile, char *outfile);
 
-		
+
 int main (int argc, char *argv[])
 {
   double **data, **sdata;
-  
+
   int dim, len, n;
   int a, b;
   int k=2;
@@ -77,7 +77,7 @@ int main (int argc, char *argv[])
   int scan=0;
   char **field_list;
   int nf=0;
-  
+
   field_list=calloc (1000, sizeof (char*));
   srand(time(NULL));
   for (a=1; a<argc;a++)
@@ -91,17 +91,17 @@ int main (int argc, char *argv[])
       else
 	{
 	  fprintf ( stdout, "ERROR: %s: -k <nlust> -i <file> -o <file> -f <field1> -f <filed2>\n", argv[a]);
-	
+
 	}
     }
   file2dim (infile,&n, &dim, &len);
   data=read_data(infile, n, dim, len,field_list);
-  
+
   if ( k<0)
     {
       k*=-1;
       mode=(mode<=1)?10:mode;
-      
+
       for (a=2; a<k; a++)
 	{
 	  fprintf (stdout, "K=%d score=%.3f\n", a,mk_means (data, n, dim,a,t,NULL, mode));
@@ -110,21 +110,21 @@ int main (int argc, char *argv[])
     }
   else
     mk_means (data, n, dim,k,t,NULL, mode);
-  
+
   output_data (data,n, dim,len,infile,outfile);
 }
 
 void display_data (double **d, int n, int dim)
 {
   int a, b;
-  
+
   fprintf ( stdout, "\n");
   for (a=0; a<n; a++)
     {
       for (b=0; b<dim; b++)fprintf ( stdout, "%d ", (int)d[a][b]);
       fprintf ( stdout, "\n");
     }
-  
+
 }
 int   file2dim   ( char *file, int *n,int *dim, int *len)
 {
@@ -137,7 +137,7 @@ int   file2dim   ( char *file, int *n,int *dim, int *len)
   int mlen=0;
   int clen=0;
   char *s1, *s2;
-  
+
   fp=fopen (file, "r");
   while ((c=fgetc(fp)!=EOF))
     {
@@ -147,7 +147,7 @@ int   file2dim   ( char *file, int *n,int *dim, int *len)
     }
   len[0]=mlen+10;
   close (fp);
-  
+
   n[0]=0;
   fp=fopen (file, "r");
   buf=calloc(len[0]+1, sizeof (char));
@@ -177,6 +177,9 @@ int   file2dim   ( char *file, int *n,int *dim, int *len)
   close (fp);
   return n[0];
 }
+
+
+
 double ** read_data ( char *file, int n, int dim, int mlen, char **fl)
 {
   FILE *fp;
@@ -187,21 +190,21 @@ double ** read_data ( char *file, int n, int dim, int mlen, char **fl)
   int cdim,cn;
   int a,b,c,p;
   int *fi;
-  
+
   fi=calloc (1000,sizeof (int));
   for (a=0; a<1000; a++)fi[a]=-1;
   buf =calloc (mlen+1,sizeof (char));
   data=calloc (n+1, sizeof (double*));
   for (a=0; a<n; a++)data[a]=calloc(dim+1, sizeof (double));
-  
+
   fp=fopen (file, "r");
   cn=0;
   while ((fgets (buf,mlen, fp)))
     {
-      
+
       if ( buf[0]='#')
 	{
-	  
+
 	  p=cdim=0;
 	  strtok(buf, ";"); p++;//pass #d;
 	  strtok(NULL, ";");p++; //pass exp;
@@ -231,18 +234,18 @@ void output_data ( double **data,int n, int dim, int mlen, char *infile, char *o
   FILE *in;
   int cn=0;
   char *buf, *s1,*s2;
-  
+
   if (!outfile)out=stdout;
   else out=fopen (outfile, "w");
   in=fopen (infile, "r");
-  
+
   buf =calloc (mlen+1,sizeof (char));
   cn=0;
   while ((fgets (buf,mlen,in)))
     {
       if (buf[0]=='#')
 	{
-	  
+
 	  fprintf (out,"%s;",strtok(buf , ";"));//pass #d;
 	  fprintf (out,"%s;",strtok(NULL, ";"));//pass exp
 	  fprintf (out,"%s;",strtok(NULL, ";"));//pass #rec_id;
@@ -263,8 +266,8 @@ void output_data ( double **data,int n, int dim, int mlen, char *infile, char *o
   if (out!=stdout)close (out);
 }
 
-	  
-	  
+
+
 
 double data2evaluate ( double **d, int n, int dim)
 {
@@ -292,12 +295,12 @@ float mk_means (double **data, int n, int dim, int k,double t, double **centroid
   double **sdata;
   float score=0;
   int a, b;
-  
+
   if (nrounds==1)return k_means (data,n,dim,k,t,centroids);
-  
+
   result=calloc (n,sizeof (double*));
   for (a=0; a<n; a++)result[a]=calloc (nrounds+1, sizeof (double));
-  
+
   sdata=calloc ( n, sizeof (double*));
   for (a=0; a<nrounds; a++)
     {
@@ -309,25 +312,25 @@ float mk_means (double **data, int n, int dim, int k,double t, double **centroid
     }
   k_means (result, n,nrounds,k,t, centroids);
   score=data2evaluate(result, n, nrounds);
-  
+
   display_data (result,n,nrounds+1);
-  
+
   for(a=0; a<n; a++)
     {
       data[a][dim]=result[a][nrounds];
       free (result[a]);
     }
-  
+
   free(result);
   free(sdata);
   return score;
 }
-	
+
 double** shuffle_data (double **d, double **sd, int n, int r)
 {
   int a,b, sn;
-  
-  
+
+
   if (!sd)sd=calloc( n, sizeof (double*));
   for (a=0; a<r; a++)
     {
@@ -384,7 +387,7 @@ int k_means(double **data, int n, int m, int k, double t, double **centroids)
             double distance = 0;
             for (j = m; j-- > 0; distance += pow(data[h][j] - c[i][j], 2));
             if (distance < min_distance) {
-	      
+
               data[h][m]=i;
 	      min_distance = distance;
             }
@@ -420,6 +423,6 @@ int k_means(double **data, int n, int m, int k, double t, double **centroids)
    free(c1);
 
    free(counts);
-   
+
    return 1;
 }

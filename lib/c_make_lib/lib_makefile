@@ -7,25 +7,36 @@
 #########################################################
 
 #
-# Base path for library folders  
+# Base path for library folders
 #
+
+
+ifdef NORM
+NORM_2_USE=util_dp_gotoh_nw_2.c
+endif
+
+ifndef NORM
+NORM_2_USE=util_dp_gotoh_nw.c
+endif
+
+
 ifndef LIB_DIR
 LIB_DIR=$(PWD)/../../lib
-endif 
+endif
 
 #
 # Use current date as default if nothing is specified
 #
-ifndef DATE 
+ifndef DATE
 DATE=`date`
-endif 
+endif
 
 #
-# Default program name 
+# Default program name
 #
 ifndef PROGRAM
 PROGRAM="T-COFFEE"
-endif 
+endif
 
 #
 # (nothing to explain here :))
@@ -210,7 +221,7 @@ extract_from_pdb:\
 install.pl:\
 	$(SCRIPT_LIB)/install.pl
 # 	$(PERL4MAKEFILE_LIB)/change_perl_program_version.pl $(SCRIPT_LIB)/install.pl
-	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >install.pl		
+	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >install.pl
 	echo "# `date`" >> install.pl
 msa2bootstrap.pl:\
 	$(SCRIPT_LIB)/msa2bootstrap.pl
@@ -220,7 +231,7 @@ clean_cache.pl:\
 	cp $(SCRIPT_LIB)/clean_cache.pl .
 nature_protocol.pl:\
 	$(SCRIPT_LIB)/nature_protocol.pl
-	cp $(SCRIPT_LIB)/nature_protocol.pl .	
+	cp $(SCRIPT_LIB)/nature_protocol.pl .
 clustalw_method.tc_method:\
 	$(SCRIPT_LIB)/clustalw_method.tc_method
 	cp $(SCRIPT_LIB)/clustalw_method.tc_method .
@@ -261,28 +272,28 @@ FILTER_LIB_OBJECTS=\
 	any_file2unix_file.pl
 
 fasta_seq2hmmtop_fasta.pl:\
-	$(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl 
-# 	$(PERL4MAKEFILE_LIB)/change_perl_program_version.pl $(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl 
-	cp $(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl . 
-	echo "# `date`" >> fasta_seq2hmmtop_fasta.pl 
+	$(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl
+# 	$(PERL4MAKEFILE_LIB)/change_perl_program_version.pl $(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl
+	cp $(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl .
+	echo "# `date`" >> fasta_seq2hmmtop_fasta.pl
 
 fasta_seq2consan_aln.pl:\
-	$(FILTER_LIB)/fasta_seq2consan_aln.pl 
-# 	$(PERL4MAKEFILE_LIB)/change_perl_program_version.pl $(FILTER_LIB)/fasta_seq2consan_aln.pl 
-	cp $(FILTER_LIB)/fasta_seq2consan_aln.pl . 
-	echo "# `date`" >> fasta_seq2consan_aln.pl 
+	$(FILTER_LIB)/fasta_seq2consan_aln.pl
+# 	$(PERL4MAKEFILE_LIB)/change_perl_program_version.pl $(FILTER_LIB)/fasta_seq2consan_aln.pl
+	cp $(FILTER_LIB)/fasta_seq2consan_aln.pl .
+	echo "# `date`" >> fasta_seq2consan_aln.pl
 
 fasta_seq2RNAplfold_templatefile.pl:\
-	$(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl 
-# 	$(PERL4MAKEFILE_LIB)/change_perl_program_version.pl $(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl 
-	cp $(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl . 
-	echo "# `date`" >> fasta_seq2RNAplfold_templatefile.pl 
+	$(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl
+# 	$(PERL4MAKEFILE_LIB)/change_perl_program_version.pl $(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl
+	cp $(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl .
+	echo "# `date`" >> fasta_seq2RNAplfold_templatefile.pl
 
 RNAplfold2tclib.pl:\
-	$(FILTER_LIB)/RNAplfold2tclib.pl 
-# 	$(PERL4MAKEFILE_LIB)/change_perl_program_version.pl $(FILTER_LIB)/RNAplfold2tclib.pl 
+	$(FILTER_LIB)/RNAplfold2tclib.pl
+# 	$(PERL4MAKEFILE_LIB)/change_perl_program_version.pl $(FILTER_LIB)/RNAplfold2tclib.pl
 	cp $(FILTER_LIB)/RNAplfold2tclib.pl .
-	echo "# `date`" >> RNAplfold2tclib.pl 
+	echo "# `date`" >> RNAplfold2tclib.pl
 
 blast_aln2fasta_aln.pl:\
 	$(FILTER_LIB)/blast_aln2fasta_aln.pl
@@ -333,7 +344,7 @@ COMPLETE_PERL_OBJECTS=\
 	$(PERL4MAKEFILE_OBJECTS)\
 	$(SCRIPT_LIB_OBJECTS)\
 	$(WEBSERVICES_LIB_OBJECTS)\
-	$(FILTER_LIB_OBJECTS)	
+	$(FILTER_LIB_OBJECTS)
 perl_header_lib.h:\
 	$(COMPLETE_PERL_OBJECTS)
 	$(FILTER_LIB)/perlfile2cheader.pl $(COMPLETE_PERL_OBJECTS) > perl_header_lib.h
@@ -424,73 +435,73 @@ bga_rescale.c:\
 		$(GA_LIB)/bga_rescale.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_rescale.c .
 bga_select.c:\
 		$(GA_LIB)/bga_select.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_select.c .
 bga_statistic.c:\
 		$(GA_LIB)/bga_statistic.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_statistic.c .
 bga_util.c:\
 		$(GA_LIB)/bga_util.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_util.c .
 bga_util_parall.c:\
 		$(GA_LIB)/bga_util_parall.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_util_parall.c .
 bga_init.c:\
 		$(GA_LIB)/bga_init.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_init.c .
 bga_io.c:\
 		$(GA_LIB)/bga_io.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_io.c .
 bga_operator_manager.c:\
 		$(GA_LIB)/bga_operator_manager.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_operator_manager.c .
 bga_parameters.c:\
 		$(GA_LIB)/bga_parameters.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_parameters.c .
 bga_preselect.c:\
 		$(GA_LIB)/bga_preselect.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_preselect.c .
 bga_core.c:\
 		$(GA_LIB)/bga_core.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_core.c .
 bga_declare.c:\
 		$(GA_LIB)/bga_declare.c\
 		util_lib_header.h\
 		define_header.h\
-		ga.h 
+		ga.h
 	cp $(GA_LIB)/bga_declare.c .
 
 
@@ -501,7 +512,7 @@ bga_declare.c:\
 define_header.h:\
 		$(KO_LIB)/coffee_defines.h $(KO_LIB)/programmes_define.h $(KO_LIB)/tclinkdb.txt
 	cat $(KO_LIB)/coffee_defines.h >define_header.h
-	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(KO_LIB)/programmes_define.h -mode=C -db=$(KO_LIB)/tclinkdb.txt>>define_header.h	
+	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(KO_LIB)/programmes_define.h -mode=C -db=$(KO_LIB)/tclinkdb.txt>>define_header.h
 	echo '#define DATE' '"'$(DATE)'"' >>  define_header.h
 	echo '#define PROGRAM'  '"'$(PROGRAM)'"'>> define_header.h
 	echo '#define VERSION'   '"'$(VERSION)'"' >> define_header.h
@@ -524,7 +535,7 @@ mshell.c:\
 		$(MEM_LIB)/mshell.c\
 		mshell.h
 	cp $(MEM_LIB)/mshell.c .
-	echo 'mshell'>>$(CODE_LIST) 
+	echo 'mshell'>>$(CODE_LIST)
 #########################################################################
 ########################      	T-Coffee_LIB      #############################
 #########################################################################
@@ -728,7 +739,7 @@ io_lib_header.h:\
 		$(IO_LIB)/io_func.h\
 		$(IO_LIB)/pb_util_read_sequence.h\
 		$(IO_LIB)/tree_util.h\
-		$(IO_LIB)/pb_util_read_sequence2.h >io_lib_header.h 
+		$(IO_LIB)/pb_util_read_sequence2.h >io_lib_header.h
 
 #3 SOURCES
 io_func.c:\
@@ -1068,7 +1079,7 @@ util_dp_gotoh_nw.c:\
 		io_lib_header.h\
 		util_lib_header.h\
 		define_header.h
-	cp $(DP_LIB)/util_dp_gotoh_nw.c .
+	cp $(DP_LIB)/$(NORM_2_USE) util_dp_gotoh_nw.c
 	echo 'util_dp_gotoh_nw' >>$(CODE_LIST)
 
 util_dp_cdna_fasta_nw.c:\

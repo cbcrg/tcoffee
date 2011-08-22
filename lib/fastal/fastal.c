@@ -4235,7 +4235,29 @@ fill_parameters(int is_dna, Fastal_param *param_set, char *method, char *diag_me
 		param_set->char2pos['W'] = 18;
  		param_set->char2pos['X'] = 20;
 		param_set->char2pos['Y'] = 19;
-		param_set->char2pos['X'] = 20;
+		param_set->char2pos['a'] = 0;
+		param_set->char2pos['b'] = 20;
+		param_set->char2pos['c'] = 1;
+		param_set->char2pos['d'] = 2;
+		param_set->char2pos['e'] = 3;
+		param_set->char2pos['f'] = 4;
+		param_set->char2pos['g'] = 5;
+		param_set->char2pos['h'] = 6;
+		param_set->char2pos['i'] = 7;
+		param_set->char2pos['j'] = 20;
+		param_set->char2pos['k'] = 8;
+		param_set->char2pos['l'] = 9;
+		param_set->char2pos['m'] = 10;
+		param_set->char2pos['n'] = 11;
+		param_set->char2pos['p'] = 12;
+		param_set->char2pos['q'] = 13;
+		param_set->char2pos['r'] = 14;
+		param_set->char2pos['s'] = 15;
+		param_set->char2pos['t'] = 16;
+		param_set->char2pos['v'] = 17;
+		param_set->char2pos['w'] = 18;
+		param_set->char2pos['x'] = 20;
+		param_set->char2pos['y'] = 19;
 	}
 }
 

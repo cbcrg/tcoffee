@@ -4343,6 +4343,7 @@ Sequence* get_fasta_sequence_raw (char *fname, char *comment_out)
 
 Sequence* get_fasta_sequence (char *fname, char *comment_out)
 {
+	printf("USE OLD GET FASTA\n");
 	Sequence *LS;
 	Sequence *pdb_S;
 	int a;
