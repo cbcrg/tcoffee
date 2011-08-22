@@ -72,8 +72,8 @@ fi
 #
 # BUILD_INFO
 #
-if [ -z $BUILDINFO ]; then 
-export BUILDINFO="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION - Build $BUILD_NUMBER"
+if [ -z $BUILD_INFO ]; then 
+export BUILD_INFO="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION - Build $BUILD_NUMBER"
 fi
 
 
@@ -174,6 +174,7 @@ function env()
   echo "- VERSION     : $VERSION"
   echo "- DATE        : $DATE"
   echo "- RELEASE     : $RELEASE"
+  echo "- BUILD_INFO  : $BUILD_INFO"
   echo "- BUILD_REPO  : $BUILD_REPO"
   echo "- SVN_REVISION: $SVN_REVISION"
   echo "- USER_BIN    : $USER_BIN"

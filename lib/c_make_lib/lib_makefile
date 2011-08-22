@@ -45,6 +45,10 @@ ifndef BUILD_INFO
 BUILD_INFO=`date +"%Y-%m-%d %H:%M:%S"`
 endif
 
+ifndef USER_BIN
+USER_BIN=$(HOME)/bin/
+endif
+
 #LIST OF C LIBRARIES
 #TC_LIB_DIR MUST BE defined in BAshrc
 

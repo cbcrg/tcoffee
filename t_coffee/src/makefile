@@ -53,7 +53,6 @@ OBJECTS	   =$(UT_LIB_OBJECTS) $(IO_LIB_OBJECTS) $(DP_LIB_OBJECTS) $(DEV1_LIB_OBJ
 $(EXECUTABLE):  $(OBJECTS) $(USE_MEM_LIB) $(FORTRAN_LIB_OBJECTS)
 	echo Platform: $(OSNAME)
 	$(CC) $(CFLAGS) -o $(EXECUTABLE)  $(OBJECTS) $(USE_MEM_LIB) -lm
-	echo Copying $(EXECUTABLE) --> $(USER_BIN)
 	cp $(EXECUTABLE) $(USER_BIN)
 
 $(EXECUTABLE).test:  $(OBJECTS) $(USE_MEM_LIB)
@@ -124,6 +123,9 @@ env:
 	@echo 'Pwd              :' $(PWD)
 	@echo 'Version          :' $(VERSION)
 	@echo 'OSNAME           :' $(OSNAME)
+	@echo 'OSARCH           :' $(OSARC)
+	@echo 'HOME2            :' $(HOME2)
+	@echo 'CFLAGS           :' $(CFLAGS)
 	@echo 'DISTRIB_DIR      :' $(DISTRIB_DIR)
 	@echo 'DISTRIB_DOC      :' $(DISTRIB_DOC)
 	@echo 'EXECUTABLE       :' $(EXECUTABLE)
