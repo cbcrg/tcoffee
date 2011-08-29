@@ -1934,6 +1934,7 @@ int fast_format_determination  ( char *in_f)
 	int current_length = -1;
 	unsigned int n_seqs = 0;
 	char last;
+	int has_gap = 0;
 	while (fgets(line, READ_LENGTH, in_F) != NULL)
 	{
 		if (line[0] == '>')
@@ -1945,11 +1946,11 @@ int fast_format_determination  ( char *in_f)
 			{
 				if (last != '*')
 					is_pir = 0;
-				if (current_length != last_length)
-					is_aln = 0;
+// 				if (current_length != last_length)
+// 					is_aln = 0;
 			}
-			last_length = current_length;
-			current_length = 0;
+// 			last_length = current_length;
+// 			current_length = 0;
 		}
 		else
 		{
@@ -1959,14 +1960,19 @@ int fast_format_determination  ( char *in_f)
 
 				if ((*tmp != '\n') && (*tmp != ' '))
 				{
-					++current_length;
+					if (*tmp == '-')
+						has_gap = 1;
+// 					++current_length;
 					last = *tmp;
 				}
 				++tmp;
 			}
 		}
 	}
-	if ((last_length != -1) && (current_length != last_length))
+// 	if ((last_length != -1) && (current_length != last_length))
+	if (has_gap)
+		is_aln = 1;
+	else
 		is_aln = 0;
 	if (last != '*')
 		is_pir = 0;
