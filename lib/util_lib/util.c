@@ -5609,7 +5609,7 @@ FILE* error_msg(FILE*fp )
        fprintf( fp, "\n\t* \ttry to cut and paste through an intermediate application");
        fprintf( fp, "\n\t* \t(word pad) and inspect the results\n\n");
        fprintf( fp, "\n\t* CONFIDENTIALITY:");
-       fprintf( fp, "\n\t* \tThe File %s may contain your personnal DATA", getenv("ERRORFILE_4_TCOFFEE"));
+       fprintf( fp, "\n\t* \tThe File %s may contain your personal DATA", getenv("ERRORFILE_4_TCOFFEE"));
        fprintf( fp, "\n\t* \tRemove ALL confidential DATA from this file BEFORE sending it");
        fprintf( fp, "\n\t******************************************************************\n");
        print_command_line(fp);
