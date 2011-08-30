@@ -1486,10 +1486,6 @@ sub is_valid_blast_xml
       if ( !-e $file) {return 0;}
       $line=&file2tail ($file,100);
       
-      if( $debug_generic_method ) { 
-      	printf "~ blast xml:  %s\n", $line; 
-      } 
-      
       if ( $line=~/<\/EBIApplicationResult/ || $line=~/<\/NCBI_BlastOutput/ || $line=~/<\/BlastOutput/ ){return 1;}
       return 0;
     }
@@ -3045,9 +3041,9 @@ sub safe_system
   if ($pid == 0)
     {
       set_lock($$, " -SHELL- $com (tcg)");
-      if( $debug_generic_method ) { printf "~ exec: %s", $com; } 
+      if( $debug_generic_method ) { printf "~ exec: %s\n", $com; } 
       exec ($com);
-      if( $debug_generic_method ) { printf "; exitcode: %s\n", $?; } 
+      if( $debug_generic_method ) { printf "~ exitcode: %s\n", $?; } 
     }
   else
     {
