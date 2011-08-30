@@ -1946,11 +1946,11 @@ int fast_format_determination  ( char *in_f)
 			{
 				if (last != '*')
 					is_pir = 0;
-// 				if (current_length != last_length)
-// 					is_aln = 0;
+				if (current_length != last_length)
+					is_aln = 0;
 			}
-// 			last_length = current_length;
-// 			current_length = 0;
+			last_length = current_length;
+			current_length = 0;
 		}
 		else
 		{
@@ -1960,16 +1960,16 @@ int fast_format_determination  ( char *in_f)
 
 				if ((*tmp != '\n') && (*tmp != ' '))
 				{
-					if (*tmp == '-')
+					if ((*tmp == '-') || (*tmp == '.')|| (*tmp == '*')|| (*tmp == '#')|| (*tmp == '~'))
 						has_gap = 1;
-// 					++current_length;
+					++current_length;
 					last = *tmp;
 				}
 				++tmp;
 			}
 		}
 	}
-// 	if ((last_length != -1) && (current_length != last_length))
+
 	if (has_gap)
 		is_aln = 1;
 	else
