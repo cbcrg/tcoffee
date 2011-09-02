@@ -1797,9 +1797,12 @@ NT_node* free_treelist (NT_node *L)
 NT_node free_tree ( NT_node R)
 {
   if ( !R)return R;
-  R->right=free_tree (R->right);
-  R->left=free_tree (R->left);
-  R->bot=free_tree (R->bot);
+  if(R->right)
+  	  R->right=free_tree (R->right);
+  if(R->left)
+  	  R->left=free_tree (R->left);
+  if(R->bot)
+  	  R->bot=free_tree (R->bot);
   free_tree_node (R);
   return R;
 }

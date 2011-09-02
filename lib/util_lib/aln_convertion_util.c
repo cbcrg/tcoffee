@@ -5808,7 +5808,7 @@ char *template_type2type_name (char *type)
   else if ( strstr (type, "_R_")) return "Profile";
   else if ( strstr (type, "_G_")) return "Genomic";
   else if ( strstr (type, "_E_")) return "Protein Secondary Structure";
-  else if ( strstr (type, "_T_")) return "Protein Trans Membrane Structure ";
+  else if ( strstr (type, "_T_")) return "Protein Transmembrane Topology";
   else if ( strstr (type, "_U_")) return "Unicode and strings";
 
   else return type;
