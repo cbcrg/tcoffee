@@ -3418,43 +3418,41 @@ Constraint_list * extend_constraint_list ( Constraint_list *CL)
 }
 
 Constraint_list * nfork_relax_constraint_list (Constraint_list *CL);
-Constraint_list * fork_relax_constraint_list (Constraint_list *CL);
+Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs);
 Constraint_list * relax_constraint_list (Constraint_list *CL)
 {
+  int njobs;
+  
 
-	if (!CL || !CL->S || !CL->residue_index) return CL;
-
-
-	if ( get_nproc()==1)return  nfork_relax_constraint_list (CL);
-	else if (strstr ( CL->multi_thread, "relax"))return fork_relax_constraint_list (CL);
-	else return nfork_relax_constraint_list (CL);
+  if (!CL || !CL->S || !CL->residue_index) return CL;
+  if (!CL->multi_thread, "relax")njobs=1;
+  else njobs=get_nproc();
+  
+  return fork_relax_constraint_list (CL, njobs);
 }
-
-
-Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
-{
+Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
+    {
   int a, s1, s2, r1, r2,j;
 
   int thr=10;
   FILE *fp;
   char **pid_tmpfile;
-  int sjobs, njobs;
+  int sjobs;
   int **sl;
   Sequence *S;
   int in;
 
   static int **hasch;
   static int max_len;
-  int norm1, norm2;
+  
+    
   int t_s1, t_s2, t_r1, t_r2,x;
   double score;
   int np;
-
-  njobs=get_nproc();
-
+  
   if (!CL || !CL->residue_index)return CL;
   fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", get_nproc());
-
+  
   if ( !hasch || max_len!=(CL->S)->max_len)
     {
       max_len=(CL->S)->max_len;
@@ -3473,21 +3471,24 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
       pid_tmpfile[j]=vtmpnam(NULL);
       if (vvfork (NULL)==0)
 	{
+	  int norm,norm1,norm2;
+	 	  
 	  initiate_vtmpnam(NULL);
 	  fp=vfopen (pid_tmpfile[j], "w");
+	  
 	  for (s1=sl[j][0]; s1<sl[j][1]; s1++)
 	    {
 	      if (j==0)output_completion (CL->local_stderr,s1,sl[0][1],1, "Relax Library");
 	      for (r1=1; r1<S->len[s1]; r1++)
 		{
 		  norm1=0;
-
 		  for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
 		    {
 		      t_s1=CL->residue_index[s1][r1][x+SEQ2];
 		      t_r1=CL->residue_index[s1][r1][x+R2];
 		      hasch[t_s1][t_r1]=CL->residue_index[s1][r1][x+WE];
 		      norm1++;
+		      
 		    }
 		  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
 		    {
@@ -3495,36 +3496,23 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
 		      norm2=0;
 		      s2=CL->residue_index[s1][r1][a+SEQ2];
 		      r2=CL->residue_index[s1][r1][a+R2];
+		      
 		      for (x=1; x< CL->residue_index[s2][r2][0]; x+=ICHUNK)
 			{
 			  t_s2=CL->residue_index[s2][r2][x+SEQ2];
 			  t_r2=CL->residue_index[s2][r2][x+R2];
-			  norm2++;
-
-			  //Silly Neutral normalization to be 390 compliant
-			  if (t_s2==s1 && t_r2==r1)score+=(float)CL->residue_index[s2][r2][x+WE]/(float)NORM_F;
+			  if (t_s2==s1 && t_r2==r1)score+=(float)CL->residue_index[s2][r2][x+WE];
 			  else if (hasch[t_s2][t_r2])
 			    {
-			      //silly 'neutral' normalization to recap r390 behavior
-			      //score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
-			      double delta=MIN((((float)hasch[t_s2][t_r2]/NORM_F)),(((float)CL->residue_index[s2][r2][x+WE]/NORM_F)));
-			      score+=delta;
+			      score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
 			    }
-			  //Normal procedure
-			  //if (t_s2==s1 && t_r2==r1)score+=CL->residue_index[s2][r2][x+WE];
-			  //else if (hasch[t_s2][t_r2])
-			  //  {
-			  //    score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
-			  //  }
-
+			  norm2++;
 			}
-		      norm2=MIN(norm1,norm2);
-
-		      //OLD NORM seems to work better 23/03/2011
-		      norm2=((CL->S)->MasterS)?((CL->S)->MasterS)->nseq:(CL->S)->nseq;
-		      score=((norm2)?score/norm2:0);
-		      score*=NORM_F;
+		      norm=MIN(norm1,norm2);
+		      score=((norm)?score/norm:0);
 		      fprintf (fp, "%d ",(int)(score));
+		      
+			  
 		    }
 		  for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
 		    {
@@ -3542,7 +3530,7 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
 	  sjobs++;
 	}
     }
-
+  
   while (sjobs>=0){vwait(NULL); sjobs--;}//wait for all jobs to complete
   for (j=0; j<njobs; j++)
     {
@@ -3567,112 +3555,6 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL)
   return CL;
 }
 
-
-Constraint_list * nfork_relax_constraint_list (Constraint_list *CL)
-{
-	int s1, r1, s2, r2, a;
-	Sequence *S=CL->S;
-	char *tmp;
-	FILE *fp;
-	int thr=10;
-	int nne;
-	static int **hasch;
-	static int max_len;
-	int norm1, norm2;
-	int t_s1, t_s2, t_r1, t_r2,x;
-	double score;
-
-	tmp=vtmpnam(NULL);
-	if (!CL || !CL->residue_index)return CL;
-
-	fprintf ( CL->local_stderr, "\nLibrary Relaxation:[%d] ", CL->ne);
-	nne=CL->ne;
-
-	fp=vfopen (tmp, "w");
-
-	if ( !hasch || max_len!=(CL->S)->max_len)
-	       {
-		 max_len=(CL->S)->max_len;
-		 if ( hasch) free_int ( hasch, -1);
-		 hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
-	       }
-
-
-	for (s1=0; s1< S->nseq; s1++)
-	  {
-	    output_completion (CL->local_stderr,s1,S->nseq,1, "Relax Library");
-	    for ( r1=1; r1<=S->len[s1]; r1++)
-	      {
-		norm1=0;
-
-		for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
-		  {
-		    t_s1=CL->residue_index[s1][r1][x+SEQ2];
-		    t_r1=CL->residue_index[s1][r1][x+R2];
-		    hasch[t_s1][t_r1]=CL->residue_index[s1][r1][x+WE];
-		    norm1++;
-		  }
-
-		for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
-		  {
-		    score=0;
-		    norm2=0;
-		    s2=CL->residue_index[s1][r1][a+SEQ2];
-		    r2=CL->residue_index[s1][r1][a+R2];
-
-		    for (x=1; x< CL->residue_index[s2][r2][0]; x+=ICHUNK)
-		      {
-			t_s2=CL->residue_index[s2][r2][x+SEQ2];
-			t_r2=CL->residue_index[s2][r2][x+R2];
-			norm2++;
-
-			if (t_s2==s1 && t_r2==r1)score+=(float)CL->residue_index[s2][r2][x+WE]/(float)NORM_F;
-			else if (hasch[t_s2][t_r2])
-			  {
-			    //silly 'neutral' normalization to recap r390 behavior
-			    //score+=MIN((((float)hasch[t_s2][t_r2])),(((float)CL->residue_index[s2][r2][x+WE])));
-			    double delta=MIN((((float)hasch[t_s2][t_r2]/NORM_F)),(((float)CL->residue_index[s2][r2][x+WE]/NORM_F)));
-			    score+=delta;
-			  }
-		      }
-		    norm2=MIN(norm1,norm2);
-		    //OLD NORM seems to work better 23/03/2011
-		    norm2=((CL->S)->MasterS)?((CL->S)->MasterS)->nseq:(CL->S)->nseq;
-		    norm2=(CL->S)->nseq;
-		    score=((norm2)?score/norm2:0);
-		    score*=NORM_F;
-		    fprintf (fp, "%d ",(int)(score));
-		  }
-
-		for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
-		  {
-		    t_s1=CL->residue_index[s1][r1][x+SEQ2];
-		    t_r1=CL->residue_index[s1][r1][x+R2];
-		    hasch[t_s1][t_r1]=0;
-		  }
-	      }
-	  }
-	vfclose (fp);
-	fp=vfopen (tmp, "r");
-
-	for (s1=0; s1< S->nseq; s1++)
-	  {
-	    for ( r1=1; r1<=S->len[s1]; r1++)
-	      {
-
-		for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
-		  {
-		    fscanf (fp, "%d ", &CL->residue_index[s1][r1][a+WE]);
-		  }
-	      }
-	  }
-	vfclose (fp);
-	filter_constraint_list (CL,WE,thr);
-	fprintf ( CL->local_stderr, "--->[%d]\n", CL->ne);
-
-
-	return CL;
-}
 
 
 // relax constraint list for gene prediction
@@ -4242,7 +4124,7 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 
 		    if (use_pair)
 		      {
-
+			float lw;
 			if ((fixed_nres1=fixed[a][nres1])<0)continue;
 			if ((fixed_nres2=fixed[b][nres2])<0)continue;
 
@@ -4251,6 +4133,9 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 			entry[R1]=fixed_nres1;
 			entry[R2]=fixed_nres2;
 			entry[CONS]=1;
+			//lw=(do_pdb)?(NORM_F/MAXID)*pdb_weight:(((weight[0]==FORBIDEN)?weight[1]:weight[c]));
+			//lw=(lw<0.1)?10:lw;
+			//entry[WE]=(NORM_F/MAXID)*lw;
 			if (do_pdb)entry[WE]=(NORM_F/MAXID)*pdb_weight;
 			else entry[WE]=(NORM_F/MAXID)*((weight[0]==FORBIDEN)?weight[1]:weight[c]);
 			add_entry2list (entry, CL);

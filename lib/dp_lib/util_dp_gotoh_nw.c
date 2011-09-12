@@ -1618,14 +1618,14 @@ int cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int
  * \param n_in number of sequences?
  */
 
-int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
-int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
-int nfork_cl2pair_list_noext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
+int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in, int njobs);
 int cl2pair_list_ext ( Alignment *A, int *ins, int **ils, Constraint_list *CL, int ***list_in, int *n_in)
 {
   int *ns;
   int **ls;
   int ret;
+  int njobs;
+  
   if (!CL || !CL->S || !CL->residue_index) return 0;
   
   if (read_size_int(ins,sizeof (int))==3 && ins[2]!=-1)
@@ -1642,11 +1642,11 @@ int cl2pair_list_ext ( Alignment *A, int *ins, int **ils, Constraint_list *CL, i
       ls=ils;
     }
   
-
-  if ( get_nproc()==1)ret=nfork_cl2pair_list_ext(A,ns,ls,CL,list_in,n_in);
-  else if (strstr ( CL->multi_thread, "pairwise"))ret=fork_cl2pair_list_ext(A,ns,ls,CL,list_in,n_in);
-  else ret=nfork_cl2pair_list_ext(A,ns,ls,CL,list_in,n_in);
+  if (strstr ( CL->multi_thread, "pairwise"))njobs=get_nproc();
+  else njobs=1;
   
+  ret=fork_cl2pair_list_ext(A,ns,ls,CL,list_in,n_in,njobs);
+    
   if (read_size_int (ins, sizeof(int))==3)
     {
       vfree (ns);
@@ -1654,9 +1654,9 @@ int cl2pair_list_ext ( Alignment *A, int *ins, int **ils, Constraint_list *CL, i
     }
   return ret;
 }
+  
 
-
-int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in,int njobs)
 {
   int p1, p2,diag, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2;
   int a, b, l1, l2;
@@ -1675,10 +1675,9 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   //variables for fork
   FILE *fp;
   char **pid_tmpfile;
-  int sjobs, njobs,j;
+  int sjobs,j;
   int **sl;
-  int **nr;
- 
+   
   if ( !A) return 0;
   
 
@@ -1696,17 +1695,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
   norm=vcalloc ( l1+1, sizeof (float));
   
-  //NR is used for Normalization
-  nr=declare_int (2, MAX(l1,l2)+1);
-  for (a=0; a<l1;a++)
-    for (b=0; b<ns[0]; b++)
-      if (!is_gap(A->seq_al[ls[0][b]][a]))nr[0][a+1]++;
-  for (a=0; a<l2;a++)
-    for (b=0; b<ns[1]; b++)
-      if (!is_gap(A->seq_al[ls[1][b]][a]))nr[1][a+1]++;
-
-
-  njobs=get_nproc();
+   
   sl=n2splits (njobs,l1+1);
   pid_tmpfile=vcalloc (njobs, sizeof (char*));
 
@@ -1772,13 +1761,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 		  
 		  if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
 		    {
-		      //Normalization 2
-		      //score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
-		      
-		      //Normalization 1: seems to work better, changed back on the 24/03/2011
-		      score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
-		      score*=NORM_F;
-		      
+		      score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
 		      fprintf (fp, "%d %d %d %f ", p1, p2, ((l1-(p1))+(p2)), score);
 		    }
 		}
@@ -1801,224 +1784,6 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
       remove (pid_tmpfile[j]);
     }
   
-  free_float (used, -1);
-  vfree (used_list);
-  free_int (inv_pos, -1);
-  free_int (pos, -1);
-  vfree (sl2);vfree (sl1);
-  vfree(norm);
-  free_int (nr,-1);
-  return n_in[0];
-}
-
-
-
-
-int nfork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
-{
-  int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2;
-  int a, b, l1, l2;
-  int **pos;
-
-  int nused;
-  int *used_list;
-  int *sl2,*sl1, **inv_pos;
-  int **nr;
-  
-  
-  float nscore, score, tot, filter, avg=0, new=0;
-  float **used;
-  float *norm;
-  
-  if ( !A) return 0;
-  
-  pos=aln2pos_simple ( A,-1, ns, ls);
-  inv_pos=vcalloc ((CL->S)->nseq, sizeof (int*));
-  for (a=0; a<ns[1]; a++)inv_pos[ls[1][a]] =seq2inv_pos(A->seq_al[ls[1][a]]);
-
-  l1=strlen (A->seq_al[ls[0][0]]);
-  l2=strlen (A->seq_al[ls[1][0]]);
-  sl1=vcalloc ((CL->S)->nseq, sizeof (int));
-  sl2=vcalloc ((CL->S)->nseq, sizeof (int));
-  
-  norm=vcalloc ( l1+1, sizeof (float));
-  
-  
-  for (a=0;a<ns[0]; a++)sl1[ls[0][a]]=1;
-  for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
-
-  //NR is used for Normalization
-  nr=declare_int (2, MAX(l1,l2)+1);
-  for (a=0; a<l1;a++)
-    for (b=0; b<ns[0]; b++)
-      if (!is_gap(A->seq_al[ls[0][b]][a]))nr[0][a+1]++;
-  for (a=0; a<l2;a++)
-    for (b=0; b<ns[1]; b++)
-      if (!is_gap(A->seq_al[ls[1][b]][a]))nr[1][a+1]++;
-
-
-
-  used=declare_float (l2+1,2);
-  used_list=vcalloc (l2+1, sizeof (int));
-  nused=0;
-
-  for (p1=0; p1<=l1; p1++)
-    {
-
-      for (tot=0,nused=0,si=0;p1>0 && si<ns[0]; si++)
-        {
-          s=ls [0][si];r=pos[s][p1-1];
-          for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
-            {
-              t_s=CL->residue_index[s][r][a+SEQ2];
-              t_r=CL->residue_index[s][r][a+R2];
-              t_w=CL->residue_index[s][r][a+WE];
-	      
-	      //NOT QUITE SURE---> Removed to be Compliant with 390
-	      //if (sl1[t_s])continue;//do not extend within a profile
-	      
-	      norm[p1]++;
-              for (b=0; b<CL->residue_index[t_s][t_r][0];)
-                {
-                  if (b==0){t_s2=t_s;t_r2=t_r;t_w2=t_w;b++;}
-                  else
-                    {
-                      t_s2=CL->residue_index[t_s][t_r][b+SEQ2];
-                      t_r2=CL->residue_index[t_s][t_r][b+R2];
-                      t_w2=CL->residue_index[t_s][t_r][b+WE];
-                      b+=ICHUNK;
-                    }
-
-                  if (sl2[t_s2])
-                    {
-                      p2=inv_pos[t_s2][t_r2];
-		      score=MIN(((float)t_w/(float)NORM_F),((float)t_w2/(float)NORM_F));
-		      
-                      if (!used[p2][1] && score>0)
-                        {
-                          used_list[nused++]=p2;
-                        }
-		      
-                      tot+=score;
-                      used[p2][0]+=score;
-                      used[p2][1]++;
-                    }
-                }
-            }
-        }
-      //FILTER: Keep in the graph the edges where (p1->p2/(Sum (P1->x))>0.01
-      filter=0.01;
-      
-      for (a=0; a<nused; a++)
-        {
-
-          p2=used_list[a];
-          nscore=used[p2][0]/tot; //Normalized score used for filtering
-          score =used[p2][0];
-	  used[p2][0]=used[p2][1]=0;
-         
-          if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
-            {
-	      
-	      //Normalization 2
-	      //score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
-	      
-	      //Normalization 1: seems to work better, changed back on the 24/03/2011
-	      score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
-	      score*=(float)NORM_F;
-	      
-	      addE (p1,p2,((l1-(p1))+(p2)),score,list_in, n_in);
-	    }
-	}
-    }
-  free_float (used, -1);
-  vfree (used_list);
-  free_int (inv_pos, -1);
-  free_int (pos, -1);
-  vfree (sl2);vfree (sl1);
-  vfree(norm);
-  free_int (nr,-1);
-  return n_in[0];
-}
-int nfork_cl2pair_list_noext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
-{
-  //This function to be used for very fast dynamic programming
-  int p1, p2, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2;
-  int a, b, l1, l2;
-  int **pos;
-
-  int nused;
-  int *used_list;
-  int *sl2,*sl1, **inv_pos;
-
-
-  float nscore, score, tot, filter, avg=0, new=0;
-  float **used;
-  float *norm;
-
-  if ( !A) return 0;
-  
-  pos=aln2pos_simple ( A,-1, ns, ls);
-  inv_pos=vcalloc ((CL->S)->nseq, sizeof (int*));
-  for (a=0; a<ns[1]; a++)inv_pos[ls[1][a]] =seq2inv_pos(A->seq_al[ls[1][a]]);
-
-  l1=strlen (A->seq_al[ls[0][0]]);
-  l2=strlen (A->seq_al[ls[1][0]]);
-  sl1=vcalloc ((CL->S)->nseq, sizeof (int));
-  sl2=vcalloc ((CL->S)->nseq, sizeof (int));
-  
-  norm=vcalloc ( l1+1, sizeof (float));
-  
-
-  for (a=0;a<ns[0]; a++)sl1[ls[0][a]]=1;
-  for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
-  
-  
-
-  used=declare_float (l2+1,2);
-  used_list=vcalloc (l2+1, sizeof (int));
-  nused=0;
-
-  for (p1=0; p1<=l1; p1++)
-    {
-
-      for (tot=0,nused=0,si=0;p1>0 && si<ns[0]; si++)
-        {
-          s=ls [0][si];r=pos[s][p1-1];
-          for (a=1; r>0 && a<CL->residue_index[s][r][0];a+=ICHUNK)
-            {
-              t_s=CL->residue_index[s][r][a+SEQ2];
-              t_r=CL->residue_index[s][r][a+R2];
-              t_w=CL->residue_index[s][r][a+WE];
-	      
-	      //NOT QUITE SURE---> Removed to be Compliant with 390
-	      //if (sl1[t_s])continue;//do not extend within a profile
-	      if (sl2[t_s])
-		{
-		  p2=inv_pos[t_s][t_r];
-		  score=(float)t_w;
-		  if (!used[p2][1])used_list[nused++]=p2;
-		  tot+=score;
-		  used[p2][0]+=score;
-		  used[p2][1]++;
-		}
-	    }
-        }
-      
-      for (a=0; a<nused; a++)
-        {
-
-          p2=used_list[a];
-          nscore=used[p2][0]/tot; //Normalized score used for filtering
-          score =used[p2][0]/used[p2][1];
-	  used[p2][0]=used[p2][1]=0;
-         
-          if (p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
-            {
-	      addE (p1,p2,((l1-(p1))+(p2)),score,list_in, n_in);
-	    }
-	}
-    }
   free_float (used, -1);
   vfree (used_list);
   free_int (inv_pos, -1);
