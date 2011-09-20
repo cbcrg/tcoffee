@@ -247,24 +247,13 @@ test: t_coffee  Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfil
 test: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text  
 
 # Missing Program fugueali
-test: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair    
-disabled: true
-
-# Missing Program fugueali
-test: t_coffee -in Sseq.fas P2PTC Mfugue_pair    
-disabled: true
-
-# Missing Program fugueali
-test: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_    
-disabled: true
+#test: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair    
+#test: t_coffee -in Sseq.fas P2PTC Mfugue_pair    
+#test: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_    
+#test: t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_file template_file6.template    
 
 test: t_coffee -mode 3dcoffee -in Sseq.fas P2PTC    
 test: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_   
- 
-# Missing Program fugueali
-test: t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_file template_file6.template    
-disabled: true
-
 test: t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.template -weight 1001 -out_lib test_lib7.tc_lib -lib_only    
 
 # ERROR
