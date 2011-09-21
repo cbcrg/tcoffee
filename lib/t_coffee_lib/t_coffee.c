@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <string.h>
 #include <unistd.h>
+#include <float.h>
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "dp_lib_header.h"
@@ -4956,7 +4957,7 @@ get_cl_param(\
 
 	      le=t_coffee_tip (le, tip);
 	      le=print_command_line ( le);
-	      //le=print_mem_usage (le, PROGRAM);
+		  le=print_mem_usage (le, PROGRAM);
 	      //le=print_cpu_usage(le, PROGRAM);
 	      le=print_program_information (le, NULL);
 
@@ -5586,7 +5587,7 @@ char * get_seq_type_from_cl (int argc, char **argv)
   return r;
 }
 /////////////////////////
-double max_kmcoffee;
+unsigned int max_kmcoffee;
 static max_nseq;
 int display_km_progression (Alignment **A, int n, double max, char *type);
 Alignment* km_coffee_align  (Alignment *A,int mn,int argc, char **argv, int nit,int round);
@@ -5646,7 +5647,9 @@ char** km_coffee (int argc, char **argv)
 	if (!k)k=100;
 
 	A=seq2aln(S,NULL, RM_GAP);
+
 	max_kmcoffee=A->nseq*A->nseq;
+// 	printf("NUM SEQ: %i", A->nseq);
 	max_nseq=A->nseq;
 
 	km_coffee_align (A, k, new_argc, new_argv,nit,0);
@@ -5973,10 +5976,11 @@ int display_km_progression (Alignment **A, int n, double max, char *type)
 			}
 		}
 	}
+
 	value=current;
-	value/=max;
-	value*=(float)100;
-	fprintf ( stderr, "\r\t\tkmcoffee: %7.4f %% (%7d New Sequences)",  (float)value, (int)tot);
+	double percentage = value/max*100.0;
+
+	fprintf ( stderr, "\r\t\tkmcoffee: %7.4f %% (%7d New Sequences)",  percentage, (int)tot);
 	return 1;
 
 }
