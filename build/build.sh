@@ -353,6 +353,13 @@ function pack_binaries() {
 	# it have to exist in 'bin' folder  
 	rm -rf $TCDIR/plugins/$OSNAME/t_coffee
 
+        # copy the sources 
+        rm -rf $TCDIR/src
+        cp -r $UNTARED/t_coffee_source $TCDIR/src
+        rm -rf $TCDIR/src/*.o
+        rm -rf $TCDIR/src/t_coffee
+        chmod 644 $TCDIR/src/*
+
 	# invoke the install builder 
 	mkdir -p $DIST_DIR
 	"$INSTALLER" build $WORKSPACE/tcoffee/build/tcoffee-installer.xml --setvars product_version=$VERSION untared=$UNTARED osname=$OSNAME tcdir=$TCDIR outdir=$DIST_DIR outname=$INST_NAME

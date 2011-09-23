@@ -158,6 +158,9 @@
                         <distributionDirectory>
                             <origin>${tcdir}/plugins</origin>
                         </distributionDirectory>
+                        <distributionDirectory>
+                            <origin>${tcdir}/src</origin>
+                        </distributionDirectory>
                     </distributionFileList>
                 </folder>
                 <folder>
