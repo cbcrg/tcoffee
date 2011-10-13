@@ -4199,6 +4199,7 @@ pid_t vvfork (char *type)
 	}
       else
 	add_warning (stderr, "Could Not Fork %s [%d/%d tries]", PROGRAM, attempt, 1000);
+	add_warning (stderr, "Error forking : %s\n", strerror( errno ) );
       wait((pid_t*)-1);
       return vvfork(type);
     }
@@ -4578,9 +4579,17 @@ char *get_dir_4_tcoffee()
 char *get_tmp_4_tcoffee ()
 {
   static char *tmp_4_tcoffee;
-  if (!tmp_4_tcoffee)tmp_4_tcoffee=vcalloc ( 1000, sizeof (char));
+  if (!tmp_4_tcoffee)
+  {
+	  tmp_4_tcoffee=vcalloc ( 1000, sizeof (char));
 
-  if ( tmp_4_tcoffee[0])return tmp_4_tcoffee;
+  }
+
+  if ( tmp_4_tcoffee[0])
+  {
+
+	  return tmp_4_tcoffee;
+  }
   else
     {
       char *v=getenv("TMP_4_TCOFFEE");
@@ -4590,8 +4599,11 @@ char *get_tmp_4_tcoffee ()
       gethostname(host, 1023);
 
 
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (tmp_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
-
+      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))
+	  {
+		  printf("UNIQUE_DIR_4_TCOFFEE\n");
+		  sprintf (tmp_4_tcoffee, "%s/", getenv("UNIQUE_DIR_4_TCOFFEE"));
+	  }
       if (v && strm (v, "TMP"))sprintf (tmp_4_tcoffee, "%s/", getenv("TMP"));
       else if (v && strm (v, "LOCAL"))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
       else if (v && strm (v, "."))sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
@@ -4601,7 +4613,9 @@ char *get_tmp_4_tcoffee ()
       else sprintf (tmp_4_tcoffee, "%s/", getcwd(NULL,0));
 
       //now that rough location is decided, create the subdir structure
-       if (is_rootpid())
+
+	if (getppid() != getsid())
+       //if (is_rootpid())
 	{
 	  sprintf (buf, "%s/t_coffee.tmp/tmp.%s.%d/", tmp_4_tcoffee,host,getpid());
 	  sprintf (tmp_4_tcoffee, "%s", buf);
@@ -4687,8 +4701,6 @@ char *get_lockdir_4_tcoffee ()
       else if (v)sprintf (lockdir_4_tcoffee, "%s/", v);
       else sprintf (lockdir_4_tcoffee, "%s/", get_tmp_4_tcoffee());
     }
-
-
   return lockdir_4_tcoffee;
 }
 
@@ -8522,7 +8534,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   cputenv ("DIR_4_TCOFFEE=%s",get_dir_4_tcoffee());
   cputenv ("TMP_4_TCOFFEE=%s",get_tmp_4_tcoffee());
   cputenv ("CACHE_4_TCOFFEE=%s",get_cache_4_tcoffee());
-  cputenv ("MCOFFEE_4_TCOFFEE=%s",get_mcoffee_4_tcoffee());
+    cputenv ("MCOFFEE_4_TCOFFEE=%s",get_mcoffee_4_tcoffee());
   cputenv ("METHODS_4_TCOFFEE=%s",get_methods_4_tcoffee());
   cputenv ("PLUGINS_4_TCOFFEE=%s",get_plugins_4_tcoffee());
   cputenv ("LOCKDIR_4_TCOFFEE=%s",get_lockdir_4_tcoffee());

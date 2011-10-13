@@ -5587,7 +5587,7 @@ char * get_seq_type_from_cl (int argc, char **argv)
   return r;
 }
 /////////////////////////
-unsigned int max_kmcoffee;
+double max_kmcoffee;
 static max_nseq;
 int display_km_progression (Alignment **A, int n, double max, char *type);
 Alignment* km_coffee_align  (Alignment *A,int mn,int argc, char **argv, int nit,int round);
@@ -5804,7 +5804,13 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 
 	vfclose (fp);
 
-	printf_system ("%s",buf);
+	//printf_system ("%s",buf);
+	if (EXIT_SUCCESS != system (buf))
+	{
+		fprintf(stderr, "ERROR in A child process!\n");
+		exit(1);
+	}
+
 	for ( a=0; a<n; a++)
 	{
 		sprintf (prf, "%s/prf_%d_%d", get_tmp_4_tcoffee(), a+1,pid);
@@ -5818,7 +5824,15 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 		//for (a=0; a<10; a++)kmir (A);
 		sprintf (prf, "%s.%d",F->name,getpid());
 		output_fasta_aln (prf,A);
-		printf_system ("%s -profile %s", cl, prf);
+// 		printf_system ("%s -profile %s", cl, prf);
+		char cm[1000];
+		sprintf(cm, "%s -profile %s", cl, prf);
+		if (EXIT_SUCCESS != system(cm))
+		{
+			fprintf(stderr, "ERROR in A child process!\n");
+			exit(1);
+		}
+// 		printf_system_direct ("%s -profile %s", cl, prf);
 		remove (prf);
 		myexit(EXIT_SUCCESS);
 	}
@@ -5861,8 +5875,12 @@ Alignment *km_align_seq_slow (Alignment *A, int argc, char **argv, int nit,int r
 			strcat (buf, " >/dev/null 2>/dev/null");
 		}
 
-		printf_system ("%s",buf);
-
+		//printf_system ("%s",buf);
+		if (EXIT_SUCCESS != system (buf))
+		{
+			fprintf(stderr, "ERROR in A child process!\n");
+			exit(1);
+		}
 		if (round==-1)
 			myexit (EXIT_SUCCESS);
 
@@ -5976,7 +5994,6 @@ int display_km_progression (Alignment **A, int n, double max, char *type)
 			}
 		}
 	}
-
 	value=current;
 	double percentage = value/max*100.0;
 

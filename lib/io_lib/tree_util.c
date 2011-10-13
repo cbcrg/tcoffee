@@ -44,21 +44,21 @@ NT_node seq2dpa_tree  (Sequence *S, char *mode)
   NT_node Tree;
   CL=declare_constraint_list_simple (S);
   CL->local_stderr=NULL;
-  
-  
+
+
   CL->DM=cl2distance_matrix (CL,NOALN,(mode==NULL)?"ktup":mode, NULL, 0);
-  
+
   T=int_dist2nj_tree ( (CL->DM)->similarity_matrix, S->name, S->nseq, vtmpnam (NULL));
   Tree=T[3][0];
-  
+
   Tree=recode_tree (Tree, S);
   Tree=reset_dist_tree (Tree, -1);
-  
+
   Tree=code_dpa_tree (Tree, (CL->DM)->similarity_matrix);
   free_distance_matrix (CL->DM);
   return Tree;
 }
-  
+
 NT_node tree2dpa_tree (NT_node T, Alignment *A, char *mode)
 {
   /*This Function sets the branches with Length values used by DP*/
@@ -70,7 +70,7 @@ NT_node tree2dpa_tree (NT_node T, Alignment *A, char *mode)
   T=recode_tree     (T, S);
   T=reset_dist_tree (T, -1);
   D=get_sim_aln_array (A,mode);
-    
+
   T=code_dpa_tree (T, D);
   return T;
 }
@@ -89,7 +89,7 @@ NT_node code_dpa_tree ( NT_node T, int **D)
       int nr, *lr;
       int a, b, min=100;
       float tot, n=0;
-      
+
       nl=(T->left)->nseq;ll=(T->left)->lseq;
       nr=(T->right)->nseq;lr=(T->right)->lseq;
 
@@ -113,36 +113,36 @@ char *tree2Ngroup (Alignment *A, NT_node T, int max_n, char *fname, char *mat)
   double top, bot, mid, pmid;
   Sequence *S;
   int n;
-  
-  
+
+
 
   if (!T)
     {
       char **list;
 
       list=declare_char ( 2, 100);
-      sprintf (list[0], "%s",mat); 
-      
+      sprintf (list[0], "%s",mat);
+
       fprintf ( stderr, "\nCompute Phylogenetic tree [Matrix=%s]", mat);
       T=compute_std_tree(A,1, list);
       fprintf ( stderr, "\nCompute dpa tree");
       T=tree2dpa_tree (T,A, mat);
     }
-  
+
   S=tree2seq(T, NULL);
-  
+
   if ( max_n<0)
     {
       max_n*=-1;
       n=tree2group_file (T,S,0, max_n, fname);
       fprintf ( stderr, "\n#TrimTC: Split in %d Groups at a minimum of %d%% ID\n",n, (int)max_n);
       return fname;
-      
+
     }
   else if ( max_n>0)
     {
       if ( max_n>S->nseq)max_n=S->nseq;
-            
+
       top=100; bot=0;
       pmid=0; mid=50;
       n=tree2group_file(T, S,0, (int)mid,fname);
@@ -157,20 +157,20 @@ char *tree2Ngroup (Alignment *A, NT_node T, int max_n, char *fname, char *mat)
       return fname;
     }
   return NULL;
-}  
+}
 static int group_number;
 int tree2group_file ( NT_node T,Sequence *S, int maxnseq, int minsim, char *name)
   {
     FILE *fp;
 
-    
+
     fp=vfopen (name, "w");
     vfclose (tree2group (T, S,maxnseq,minsim, "tree2ngroup",fp));
-   
+
     return count_n_line_in_file(name);
   }
-    
-      
+
+
 FILE * tree2group ( NT_node T,Sequence *S, int maxnseq, int minsim,char *name, FILE *fp)
 {
   if ( !T)return fp;
@@ -182,7 +182,7 @@ FILE * tree2group ( NT_node T,Sequence *S, int maxnseq, int minsim,char *name, F
       d=minsim;
 
 
-      
+
       if ( T->nseq<=m && T->dist>=d)
 	{
 	  int a;
@@ -200,7 +200,7 @@ FILE * tree2group ( NT_node T,Sequence *S, int maxnseq, int minsim,char *name, F
 	  if (!T->parent)group_number=0;
 	  return fp;
 	}
-      
+
     }
 }
 
@@ -211,7 +211,7 @@ NT_node  tree2collapsed_tree (NT_node T, int n, char **string)
   Sequence *A;
   int a, *nlist;
 
-  
+
   A=tree2seq(T, NULL);
   T=recode_tree(T, A);
   list=vcalloc (A->nseq, sizeof (char***));
@@ -221,10 +221,10 @@ NT_node  tree2collapsed_tree (NT_node T, int n, char **string)
     {
       int l;
       char *buf;
-      
+
       for (l=0,a=0; a< n; a++)l+=strlen (string[a]);
       buf=vcalloc ( 2*n+l+1, sizeof (char));
-      for (a=0; a< n; a++){buf=strcat (buf,string[a]), buf=strcat ( buf, " ");}     
+      for (a=0; a< n; a++){buf=strcat (buf,string[a]), buf=strcat ( buf, " ");}
       list[0]=string2list (buf);
       vfree (buf);
     }
@@ -236,9 +236,9 @@ NT_node  tree2collapsed_tree (NT_node T, int n, char **string)
     {
       fprintf (stderr, "\nERROR: file <%s> does not exist [FATAL:%s]\n",string[0], PROGRAM);
       myexit (EXIT_FAILURE);
-    }  
+    }
 
-  
+
   a=0;
   while (list[a])
     {
@@ -264,9 +264,9 @@ NT_node collapse_sub_tree ( NT_node T,int nseq, int *list, char *new_name)
   else
     {
       int a=0;
- 
 
-      while (a<nseq && list[a]==T->lseq2[a]){a++;} 
+
+      while (a<nseq && list[a]==T->lseq2[a]){a++;}
       if (a==nseq)
 	{
 	  sprintf ( T->name, "%s", new_name);
@@ -282,24 +282,24 @@ NT_node collapse_sub_tree ( NT_node T,int nseq, int *list, char *new_name)
 	}
     }
 }
-  
+
 NT_node collapse_tree (NT_node T, Sequence *S, char *string)
 {
   char *r, *p;
   int a;
   int collapse;
-  
+
   if (!T) return NULL;
   if (!S)
     {
       S=tree2seq(T, NULL);
       T=recode_tree (T,S);
     }
-  
-  
-  
+
+
+
   r=strstr(S->name[T->lseq[0]], string);
-  
+
   if (!r)collapse=0;
   else
     {
@@ -341,15 +341,15 @@ NT_node main_prune_tree ( NT_node T, Sequence *S)
 
 NT_node prune_tree ( NT_node T, Sequence *S)
 {
-  
+
   if (!T ) return T;
-    
+
   if (T->leaf && T->isseq && name_is_in_list (T->name,S->name, S->nseq, 100)==-1)
     {
       NT_node C, P, PP;
-      
+
       P=T->parent;
-      if ( !P) 
+      if ( !P)
 	{
 	  int a;
 	  for (a=0; a< S->nseq; a++)
@@ -360,7 +360,7 @@ NT_node prune_tree ( NT_node T, Sequence *S)
 	}
       C=(P->right==T)?P->left:P->right;
       PP=C->parent=P->parent;
-            
+
       if (PP && PP->right==P)PP->right=C;
       else if (PP)PP->left=C;
       else
@@ -368,7 +368,7 @@ NT_node prune_tree ( NT_node T, Sequence *S)
 	  if (T==P->right)P->right=NULL;
 	  else P->left=NULL;
 	  T=C;
-	  
+
 	}
     }
   else
@@ -383,14 +383,14 @@ NT_node prune_root (NT_node T)
 {
   //This function prunes the root if needed (and frees it).
   if (T->parent)return T;
-  
+
   if (!T->right && T->left)
     {
       return prune_root (T->left);
     }
   else if (T->right && !T->left)
      {
-      
+
        return prune_root (T->right);
     }
   else
@@ -409,24 +409,24 @@ int main_compare_cog_tree (NT_node T1, char *cogfile)
   char ***array;
   int a, nbac, n=0, p, c, b;
   Alignment *A;
-  
+
   array=file2list(cogfile, ";\n");
   nbac=atoi(array[0][0])-2;
-  
+
   A=declare_aln2 (nbac+1, 10);
   for (a=0; a<nbac; a++)
     {
       sprintf ( A->name[a], "%s", array[0][a+2]);
       A->seq_al[a][0]='a';
       A->seq_al[a][1]='\0';
-      
+
     }
   sprintf ( A->name[nbac], "cons");
-  
+
   A->nseq=nbac+1;
   A->len_aln=1;
-  
-  
+
+
   n=3;
   while (array[n]!=NULL)
     {
@@ -437,7 +437,7 @@ int main_compare_cog_tree (NT_node T1, char *cogfile)
 	  A->seq_al[b][0]=p;
 	  A->seq_al[b][1]=c;
 	  A->seq_al[b][2]='\0';
-	 
+
 	}
       sprintf (A->file[0], "%s", array[n][1]);
       A->len_aln=2;
@@ -447,11 +447,11 @@ int main_compare_cog_tree (NT_node T1, char *cogfile)
   return n;
 }
 
-      
+
 int main_compare_aln_tree (NT_node T1, Alignment *A, FILE *fp)
 {
   int n=0;
-  
+
   fprintf ( fp, "\nTOT_CLASH COG %s N %d", A->file[0], compare_aln_tree (T1, A, &n, fp));
   vfclose (fp);
   return n;
@@ -471,7 +471,7 @@ int compare_aln_tree (NT_node T, Alignment *A, int *n, FILE *fp)
       char *seq1, *seq2;
       if (!(T->left )->seqal)compare_aln_tree (T->left, A,n, fp);
       if (!(T->right)->seqal)compare_aln_tree (T->right, A,n, fp);
-      
+
       seq1=(T->left)->seqal;
       seq2=(T->right)->seqal;
       (T->left)->seqal=(T->right)->seqal=NULL;
@@ -480,18 +480,18 @@ int compare_aln_tree (NT_node T, Alignment *A, int *n, FILE *fp)
 	  if (strm (seq1, seq2))
 	    {
 	      T->seqal=seq1;
-	      
+
 	    }
 	  else
 	    {
-	   
+
 	      if (seq1[0]!=seq2[0] && seq1[1]!=seq2[1])
 		{
 		  fprintf ( fp, "\nNODE_CLASH: COG %s (%s,%s):(",A->file[0],seq1,seq2 );
 		  display_leaf_below_node (T->left, fp);
-		  fprintf ( fp, ");("); 
+		  fprintf ( fp, ");(");
 		  display_leaf_below_node (T->right, fp);
-		  fprintf ( fp, ")"); 
+		  fprintf ( fp, ")");
 		  n[0]++;
 		}
 	    }
@@ -509,7 +509,7 @@ int main_compare_splits ( NT_node T1, NT_node T2, char *mode,FILE *fp)
   Sequence *S1, *S2, *S;
   int  a, b;
 
-  
+
 
   int **sl1, n1;
   int **sl2, n2;
@@ -517,43 +517,43 @@ int main_compare_splits ( NT_node T1, NT_node T2, char *mode,FILE *fp)
     {
       display_tree_duplicates (T1);
       printf_exit (EXIT_FAILURE, stderr, "\nFirst Tree Contains Duplicated Sequences [main_compare_trees][FATAL:%s]", PROGRAM);
-     
+
     }
   else if ( tree_contains_duplicates (T2))
     {
       display_tree_duplicates (T2);
       printf_exit (EXIT_FAILURE, stderr, "\nSecond Tree Contains Duplicated Sequences [main_compare_trees]");
-      
+
     }
-  
-  //Identify the commom Sequence Set  
+
+  //Identify the commom Sequence Set
   S1=tree2seq(T1, NULL);
- 
-  
+
+
   S2=tree2seq(T2, NULL);
- 
-  
+
+
   S=trim_seq ( S1, S2);
-  
+
   //Prune the trees and recode the subtree list
   T1=prune_tree (T1, S);
   T1=recode_tree(T1, S);
-  
-  T2=prune_tree (T2, S);  
+
+  T2=prune_tree (T2, S);
   T2=recode_tree(T2, S);
   HERE ("1");
   sl1=declare_int (10*S->nseq, S->nseq);
   sl2=declare_int (10*S->nseq, S->nseq);
-  
+
   HERE ("2");
   n1=n2=0;
   tree2split_list (T1, S->nseq, sl1, &n1);
   tree2split_list (T2, S->nseq, sl2, &n2);
-  
+
   for (a=0; a<n1; a++)
     {
       int n, best, s;
-      
+
       n=get_split_size (sl1[a], S->nseq);
       for (best=0,b=0; b<n2; b++)
 	{
@@ -563,13 +563,13 @@ int main_compare_splits ( NT_node T1, NT_node T2, char *mode,FILE *fp)
       fprintf ( fp, "\n%4d %4d ", MIN(n,(S->nseq)), best);
       for (b=0; b<S->nseq; b++)fprintf ( fp, "%d", sl1[a][b]);
     }
-      
+
   free_sequence (S, -1);
   free_sequence (S1, -1);
   free_sequence (S2, -1);
   myexit (EXIT_SUCCESS);
   return 1;
-}  
+}
 int compare_split (int *s1, int *s2, int l)
 {
   int n1, n2, score1, score2, a;
@@ -581,7 +581,7 @@ int compare_split (int *s1, int *s2, int l)
       score1+=(s1[a]==1 && s2[a]==1)?1:0;
     }
   score1=(score1*200)/(n1+n2);
-  
+
   for ( score2=0, a=0; a<l; a++)
     {
       score2+=(s1[a]==0 && s2[a]==1)?1:0;
@@ -637,7 +637,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
   int start, w;
   int nl, *poslist;
   char posfile[100];
-  
+
   char *pcFileName = A->file[0];
   char prefix[200] ={0};
   int len = (strrchr(pcFileName,'.')?strrchr(pcFileName,'.')-pcFileName:strlen(pcFileName));
@@ -661,12 +661,12 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
   if ( pscan && strstr ( pscan, "help"))
     {
       fprintf ( stdout, "\n+tree_scan| _W_     : Window size for the tree computation|STD size in norscan mode");
-      fprintf ( stdout, "\n+tree_scan| _MODE_  : Mode for the number of windows (single, double, list, scan, pairscan, norscan, hit, norhit)"); 
+      fprintf ( stdout, "\n+tree_scan| _MODE_  : Mode for the number of windows (single, double, list, scan, pairscan, norscan, hit, norhit)");
       fprintf ( stdout, "\n+tree_scan| _MINW_  : Minimum Window size when using the scan mode (4)");
       fprintf ( stdout, "\n+tree_scan| _OUTTREE_ : specify the format of outputing tree in every position (default: not ouput)");
       myexit (EXIT_SUCCESS);
     }
- 
+
   strget_param (pscan, "_W_", "5", "%d",&w);
   strget_param (pscan, "_MODE_", "single", "%s",mode);
   strget_param (pscan, "_MINW_", "1", "%d",&start);
@@ -674,28 +674,28 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
   strget_param (pscan, "_OUTTREE_", "", "%s", &out_format);
 
 	if(strlen(out_format) > 1)
-		unlink(tree_file);	
+		unlink(tree_file);
 
   l=intlen (A->len_aln);
-  
+
   poslist=vcalloc ( A->len_aln, sizeof (int));
   nl=0;
   fascore = vcalloc(A->len_aln, sizeof (float));
 
   if ( strm (posfile, "NO"))
     {
-     
+
       for ( a=0; a< A->len_aln; a++)poslist[nl++]=a+1;
     }
   else
     {
-      int *p; 
+      int *p;
       p=file2pos_list (A,posfile);
       poslist=pos2list (p, A->len_aln, &nl);
       for (a=0; a<nl; a++)poslist[a]++;
       vfree (p);
     }
- 
+
 //For tree hit
   NT_node *TreeArray = vcalloc(nl, sizeof (NT_node));
 
@@ -706,7 +706,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
 	  Tree_sim *TS;
 	  int left=0, right=0;
 	  a=poslist[ax];
-	  
+
 	  TS=tree_scan_pos_woble (A,a,w,ptree, RT, &left, &right);
 	  fprintf ( stdout, "P: %*d I: %*d %*d SIM: %6.2f\n", l,a,l,left,l,right,TS->uw);
 	  vfree (TS);
@@ -716,15 +716,15 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
     {
       for (b=0,ax=0; ax<nl; ax++)
 	{
-	  
+
 	  Tree_sim *TS;
 	  int pstart, pend;
-	  
+
 	  a=poslist[ax];
-	  
+
 	  pstart=a-b;
 	  pend=a+b;
-	  
+
 	  if (pstart<1 || pstart>A->len_aln)continue;
 	  if (pend<1 || pend>A->len_aln)continue;
 	  TS=tree_scan_pos (A, pstart,pend, ptree, RT);
@@ -733,15 +733,15 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
 	}
     }
   else if (strm (mode, "scan")||strm (mode, "hit"))
-    {      
+    {
     	FILE *fp_ts;
-    	fp_ts=vfopen (score_csv_file, "w");	
+    	fp_ts=vfopen (score_csv_file, "w");
       fprintf ( fp_ts, "Position,Win_Beg,Win_End,Similarity,Win_Len\n");
       for ( ax=0; ax<nl; ax++)
 	{
 	    float best_score=0;
 	    int best_pos=0, best_w=0, best_start, best_end;
-	    
+
 	    a=poslist[ax];
 	    best_pos = best_start = best_end = a;
 	    for (b=start; b<=w; b++)
@@ -750,7 +750,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
 		int pstart, pend;
 		pstart=a-b;
 		pend=a+b;
-		
+
 		if (pstart<1 || pstart>A->len_aln)continue;
 		if (pend<1 || pend>A->len_aln)continue;
 		TS=tree_scan_pos (A, pstart,pend, ptree, RT);
@@ -774,7 +774,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
     {
       FILE *fp_ts;
       ptree=vcalloc(100, sizeof (char));
-      fp_ts=vfopen (score_csv_file, "w");	
+      fp_ts=vfopen (score_csv_file, "w");
       fprintf ( fp_ts, "Position,Similarity,STD_Len\n");
       for ( ax=0; ax<nl; ax++)
 	  {
@@ -788,7 +788,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
 		TS=tree_scan_pos (A, 1, nl, ptree, RT);
 		if (TS->uw>=best_score)
 			{best_score=TS->uw;best_STD=b;}
-		vfree (TS);		
+		vfree (TS);
 	      }
 	      fascore[ax]=best_score;
 	      fprintf ( fp_ts, "%*d,%6.2f,%d\n", l,a, fascore[ax], best_STD);
@@ -835,7 +835,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
   else if ( strm (mode, "pairscan"))
     {
       int d, set;
-     
+
       for ( ax=0; ax<nl; ax++)
 	  {
 	    float best_score=0;
@@ -869,7 +869,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
 		      }
 		  }
 		if (set)fprintf ( stdout, "P1: %*d  I1: %*d %*d P2: %*d I2: %*d %*d SIM: %6.2f L: %2d\n", l,best_pos, l,best_start, l,best_end, l, best_pos2, l, best_start2, l, best_end2, best_score,(best_w*2)+1 );
-		
+
 		set=0;
 	      }
 	  }
@@ -881,7 +881,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
       Tree_sim *TS;
       wlist=generate_array_int_list (nl*2,start, w,1, &n, NULL);
       HERE ("Scan %d Possibilities", n);
-      
+
       for (best_score=best_pos=0,a=0; a<n; a++)
 	{
 	  TS=tree_scan_multiple_pos (poslist,wlist[a],nl, A, ptree, RT);
@@ -920,7 +920,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
 			ST->seq_al[a][b]=r1;
 		}
 	}
-    }	    
+    }
     output_color_html  ( A, ST, score_html_file);
 
 //free memory
@@ -940,7 +940,7 @@ NT_node aln2std_tree(Alignment *A, int ipara1, int ipara2, char *mode)
      NT_node T;
      char *cpSet = vcalloc(100, sizeof (char));
 
-	if(strm (mode, "norhit"))    
+	if(strm (mode, "norhit"))
 	{
 		B=extract_aln (A, 1, A->len_aln);
 		sprintf ( cpSet, "+aln2tree _COMPARE_nordisaln__STD_%d__CENTER_%d_", ipara1, ipara2);
@@ -960,7 +960,7 @@ Tree_sim*  tree_scan_multiple_pos (int *poslist, int *wlist,int nl, Alignment *A
     int a, b, n, s, p, left, right;
     Tree_sim *TS;
     NT_node T=NULL;
-    
+
 
     //poslist positions come [1..n]
     vfree(pos);
@@ -968,7 +968,7 @@ Tree_sim*  tree_scan_multiple_pos (int *poslist, int *wlist,int nl, Alignment *A
 
     pos=vcalloc ( A->len_aln+1, sizeof (int));
     B=copy_aln (A, NULL);
-    
+
     for (a=0; a<nl; a++)
       {
 	p=poslist[a]-1;
@@ -978,11 +978,11 @@ Tree_sim*  tree_scan_multiple_pos (int *poslist, int *wlist,int nl, Alignment *A
 	  {
 	    if (b<1 ||b>A->len_aln) return NULL;
 	    else pos[b]++;
-	    
+
 	    if (pos[b]>1) return NULL;
 	  }
       }
-    
+
     for (s=0; s<A->nseq; s++)
       {
 	for (n=0,a=1; a<=A->len_aln; a++)
@@ -990,41 +990,41 @@ Tree_sim*  tree_scan_multiple_pos (int *poslist, int *wlist,int nl, Alignment *A
 	    if (pos[a])B->seq_al[s][n++]=A->seq_al[s][a-1];
 	  }
       }
-    
+
     B->len_aln=n;
     for (s=0; s<A->nseq; s++)B->seq_al[s][B->len_aln]='\0';
-   
+
     T=compute_std_tree (B, (ptree)?1:0, (ptree)?&ptree:NULL);
-    
+
     TS=tree_cmp (T, RT);
-    
+
     free_tree(T);
     return TS;
   }
-  
+
 Tree_sim*  tree_scan_pair_pos (Alignment *A, int start, int end, int start2, int end2,char *ptree, NT_node RT)
   {
     Tree_sim *TS;
     Alignment *B,*B1, *B2;
     NT_node T=NULL;
     int a;
-    
- 
+
+
     B=copy_aln (A, NULL);
      B1=extract_aln (A,start,end);
      B2=extract_aln (A,start2, end2);
 
-    
+
      for ( a=0; a< B->nseq;a++)
        sprintf (B->seq_al[a], "%s%s", B1->seq_al[a], B2->seq_al[a]);
      B->len_aln=strlen (B->seq_al[0]);
-     
+
      T=compute_std_tree (B, (ptree)?1:0, (ptree)?&ptree:NULL);
      TS=tree_cmp (T, RT);
-     
+
      free_tree(T);
      free_aln (B);free_aln(B1); free_aln(B2);
-     
+
      return TS;
   }
 
@@ -1033,7 +1033,7 @@ Tree_sim*  tree_scan_pos (Alignment *A, int start, int end, char *ptree, NT_node
      Tree_sim *TS;
      Alignment *B;
      NT_node T;
-     
+
      if ( start<1 || start>A->len_aln) return NULL;
      if ( end<1 || end>A->len_aln) return NULL;
 
@@ -1051,17 +1051,17 @@ Tree_sim*  tree_scan_pos_woble (Alignment *A, int center, int max, char *ptree, 
      int left, right;
      float best_score=0;
      int start, end;
-     
+
      br[0]=bl[0]=0;
      BTS=vcalloc (1, sizeof (Tree_sim));
-     
+
      for (left=0; left<max; left++)
        for (right=0; right<max; right++)
 	 {
 	   start=center-left;
 	   end=center+right;
 	   TS=tree_scan_pos (A, start, end, ptree, RT);
-	   
+
 	   if (TS && TS->uw >best_score)
 	     {
 	       best_score=TS->uw;
@@ -1078,23 +1078,23 @@ Tree_sim* tree_cmp( NT_node T1, NT_node T2)
   Sequence *S1, *S2, *S;
   int n;
   int a;
-  
+
   Tree_sim *TS1, *TS2;
 
   if ( tree_contains_duplicates (T1))
     {
       display_tree_duplicates (T1);
       printf_exit (EXIT_FAILURE, stderr, "\nFirst Tree Contains Duplicated Sequences [main_compare_trees][FATAL:%s]", PROGRAM);
-     
+
     }
   else if ( tree_contains_duplicates (T2))
     {
       display_tree_duplicates (T2);
       printf_exit (EXIT_FAILURE, stderr, "\nSecond Tree Contains Duplicated Sequences [main_compare_trees]");
-      
+
     }
-  
-  //Identify the commom Sequence Set  
+
+  //Identify the commom Sequence Set
   S1=tree2seq(T1, NULL);
   S2=tree2seq(T2, NULL);
 
@@ -1108,8 +1108,8 @@ Tree_sim* tree_cmp( NT_node T1, NT_node T2)
   //Prune the trees and recode the subtree list
   T1=prune_tree (T1, S);
   T1=recode_tree(T1, S);
-  
-  T2=prune_tree (T2, S);  
+
+  T2=prune_tree (T2, S);
   T2=recode_tree(T2, S);
 
   TS1=vcalloc (1, sizeof (Tree_sim));
@@ -1117,16 +1117,16 @@ Tree_sim* tree_cmp( NT_node T1, NT_node T2)
 
   new_compare_trees ( T1, T2, S->nseq, TS1);
   new_compare_trees ( T2, T1, S->nseq, TS2);
-  
+
 
   TS1->n=tree2nnode (T1);
   TS1->nseq=S->nseq;
-  
+
   TS2->n=tree2nnode (T2);
   /*if (TS1->n !=TS2->n)
     printf_exit (EXIT_FAILURE, stderr,"\nERROR: Different number of Nodes in the two provided trees after prunning [FATAL: %s]", PROGRAM);
   */
-  
+
   free_sequence (S, -1);
   free_sequence (S1, -1);
   free_sequence (S2, -1);
@@ -1143,18 +1143,18 @@ int print_node_list (NT_node T, Sequence *RS)
   NT_node *L;
   Sequence *S;
   int *nlseq2;
-  
+
   S=tree2seq(T, NULL);
   L=tree2node_list (T, NULL);
   if (!RS)RS=S;
-  
+
   nlseq2=vcalloc ( RS->nseq, sizeof (int));
   while (L[0])
     {
       int d,b;
       d=MIN(((L[0])->nseq), (S->nseq-(L[0])->nseq));
       fprintf ( stdout, "Bootstrap: %5.2f Depth: %5d Splits: ", (L[0])->bootstrap, d);
-      
+
       for (b=0; b<RS->nseq; b++)nlseq2[b]='-';
       for (b=0; b<S->nseq; b++)
 	{
@@ -1187,14 +1187,14 @@ NT_node main_compare_trees_list ( NT_node RT, Sequence *S, FILE *fp)
       TL[a]=recode_tree (TL[a],RS);
       new_compare_trees (RT, TL[a], RS->nseq,T);
     }
-  
+
   vfree (T);
   return RT;
-}  
+}
 NT_node main_compare_trees ( NT_node T1, NT_node T2, FILE *fp)
 {
   Tree_sim *T;
-  
+
   T=tree_cmp (T1, T2);
   fprintf ( fp, "\n#tree_cmp|T: %.f W: %.2f L: %.2f RF: %d N: %d S: %d", T->uw, T->w, T->d, T->rf, T->n, T->nseq);
   fprintf ( fp, "\n#tree_cmp_def|T: ratio of identical nodes");
@@ -1203,25 +1203,25 @@ NT_node main_compare_trees ( NT_node T1, NT_node T2, FILE *fp)
   fprintf ( fp, "\n#tree_cmp_def|RF: Robinson and Foulds");
   fprintf ( fp, "\n#tree_cmp_def|N: number of Nodes in T1 [unrooted]");
   fprintf ( fp, "\n#tree_cmp_def|S: number of Sequences in T1\n");
-  
+
   vfree (T);
   return T1;
-}  
+}
 
 int new_compare_trees ( NT_node T1, NT_node T2, int nseq, Tree_sim *TS)
 {
   int n=0;
   NT_node N;
   float t1, t2;
-  
+
   if (!T1 || !T2) return 0;
-  
+
   n+=new_compare_trees (T1->left,  T2, nseq,TS);
   n+=new_compare_trees (T1->right, T2, nseq,TS);
-  
+
   //Exclude arbitrary splits (dist==0)
   if ((T1->dist==0) && !(T1->parent))return n;
-  
+
   N=new_search_split (T1, T2, nseq);
   t1=FABS(T1->dist);
   t2=(N)?FABS(N->dist):0;
@@ -1234,7 +1234,7 @@ int new_compare_trees ( NT_node T1, NT_node T2, int nseq, Tree_sim *TS)
       w=MIN((nseq-T1->nseq),T1->nseq);
       TS->max_uw++;
       TS->max_w+=w;
-      
+
       if (N)
 	{
 	  TS->uw++;
@@ -1267,31 +1267,31 @@ NT_node new_search_split (NT_node T, NT_node B, int nseq)
 int new_compare_split ( int *b1, int *b2, int n)
 {
   int a, flag;
-  
+
   for (flag=1, a=0; a<n; a++)
     if (b1[a]!=b2[a])flag=0;
   if (flag) return flag;
-  
+
   for (flag=1, a=0; a<n; a++)
     if (b1[a]==b2[a])flag=0;
   return flag;
 }
-  
+
 float compare_trees ( NT_node T1, NT_node T2, int nseq,int  mode)
 {
   /*search each branch of T1 in T2*/
   float n=0;
-  
-  
+
+
   if ( !T1 || !T2)return 0;
-  
+
   if (getenv4debug("DEBUG_TREE_COMPARE"))display_node (T1, "\nNODE ", nseq);
-  
+
   if (T1->parent && T1->nseq>1)n+=search_node ( T1, T2, nseq, mode);
-    
+
   n+=compare_trees ( T1->left, T2, nseq, mode);
   n+=compare_trees ( T1->right, T2, nseq, mode);
-  
+
   return n;
 }
 
@@ -1300,10 +1300,10 @@ float search_node ( NT_node B, NT_node T, int nseq, int mode)
   int n=0;
   if ( !B || !T) return -1;
   if (getenv4debug("DEBUG_TREE_COMPARE"))display_node ( T, "\n\t", nseq);
-  
+
   n=compare_node ( B->lseq2, T->lseq2, nseq );
-  
-  if ( n==1) 
+
+  if ( n==1)
     {
       if (getenv4debug("DEBUG_TREE_COMPARE"))fprintf ( stderr, "[1][%d]", (int)evaluate_node_similarity ( B, T, nseq, mode));
       if (mode==RECODE)B->dist=B->leaf;
@@ -1311,14 +1311,14 @@ float search_node ( NT_node B, NT_node T, int nseq, int mode)
     }
   else if ( n==-1)
     {
-      if (getenv4debug("DEBUG_TREE_COMPARE"))fprintf ( stderr, "[-1]"); 
+      if (getenv4debug("DEBUG_TREE_COMPARE"))fprintf ( stderr, "[-1]");
       if (mode==RECODE)B->dist=-B->leaf;
       return 0;
     }
   else
     {
       if (getenv4debug("DEBUG_TREE_COMPARE"))fprintf ( stderr, "[0]");
-      n=search_node ( B, T->left, nseq, mode);   
+      n=search_node ( B, T->left, nseq, mode);
       if ( n>0) return n;
       n=search_node ( B, T->right, nseq, mode);
       if ( n>0) return n;
@@ -1331,7 +1331,7 @@ float search_node ( NT_node B, NT_node T, int nseq, int mode)
 float evaluate_node_similarity ( NT_node B, NT_node T, int nseq, int mode)
 {
 int a, c;
- 
+
  if ( mode==TOPOLOGY || mode ==RECODE)
    {
      for ( a=0; a< nseq; a++)
@@ -1342,18 +1342,18 @@ int a, c;
    {
      for (c=0, a=0; a< nseq; a++)
        {
-	 if ( B->lseq2[a]!=T->lseq2[a]) return 0; 
+	 if ( B->lseq2[a]!=T->lseq2[a]) return 0;
 	 else c+=B->lseq2[a];
-       }      
+       }
      return (float)(MIN(c,nseq));
    }
  else if ( mode == LENGTH )
    {
      float d1, d2;
-     
+
      for (c=0, a=0; a< nseq; a++)
        {
-	 if ( B->lseq2[a]!=T->lseq2[a]) return 0; 
+	 if ( B->lseq2[a]!=T->lseq2[a]) return 0;
        }
      d1=FABS((B->dist-T->dist));
      d2=MAX(B->dist, T->dist);
@@ -1367,11 +1367,11 @@ int a, c;
 int compare_node ( int *b1, int *b2, int nseq)
 {
   int n1, n2;
-  
+
   n1=compare_node1 ( b1, b2, nseq);
   /*fprintf ( stderr, "[%d]", n1);*/
   if ( n1==1) return 1;
-  
+
   n2=compare_node2 ( b1, b2, nseq);
   /* fprintf ( stderr, "[%d]", n2);*/
   if ( n2==1)return 1;
@@ -1397,7 +1397,7 @@ int compare_node2 ( int *b1, int *b2, int n)
   int a;
   int l1, l2;
   int r=1;
-  
+
   for ( a=0; a< n; a++)
     {
       l1=1-b1[a];
@@ -1435,7 +1435,7 @@ NT_node tree_compute ( Alignment *A, int n, char ** arg_list)
     {
       return compute_fj_tree ( NULL, A, (n>=1)?atoi(arg_list[1]):8, (n>=2)?arg_list[2]:NULL);
     }
-  
+
   else if ( ( strm (arg_list[0], "nj")))
     {
       return compute_std_tree (A, n, arg_list);
@@ -1450,7 +1450,7 @@ NT_node compute_std_tree (Alignment *A, int n, char **arg_list)
 }
 NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
 {
-  
+
   NT_node T, **BT=NULL;
   char *tree_name;
 
@@ -1459,9 +1459,9 @@ NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
   char compare[100];
   char tmode[100];
   int free_s=0;
-  
+
   tree_name =vtmpnam (NULL);
-  
+
   if (strstr (cl, "help"))
     {
       fprintf ( stdout, "\n+aln2tree| _MATRIX_ : matrix used for the comparison (idmat, sarmat, pam250mt..)\n");
@@ -1470,14 +1470,14 @@ NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
       fprintf ( stdout, "\n+aln2tree| _TMODE_  :  tree mode (nj, upgma)\n");
       myexit (EXIT_SUCCESS);
     }
-      
 
-  //matrix: idmat, ktup,sarmat, sarmat2 
+
+  //matrix: idmat, ktup,sarmat, sarmat2
   strget_param (cl, "_MATRIX_", "idmat", "%s",matrix);
-  
+
   //score: sim, raw
   strget_param (cl, "_SCORE_", "sim", "%s",score);
-  
+
   //compare: aln, ktup, align
   strget_param (cl, "_COMPARE_", "aln", "%s",compare);
 
@@ -1496,7 +1496,7 @@ NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
       free_int (s, -1);
       return compute_cw_tree (A);
     }
-  
+
   //compute distance matrix if needed
   if ( !s)
     {
@@ -1525,7 +1525,7 @@ NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
   //Compute the tree
   if (strm (tmode, "nj"))
     {
-     
+
       BT=int_dist2nj_tree (s, A->name, A->nseq, tree_name);
       T=main_read_tree (tree_name);
       free_read_tree(BT);
@@ -1536,7 +1536,7 @@ NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
       T=main_read_tree (tree_name);
       free_read_tree(BT);
     }
-  
+
   if ( strm ( cl, "dpa"))
     {
       s=dist_array2sim_array(s, 100);
@@ -1546,7 +1546,7 @@ NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
   if (free_s)free_int (s, -1);
   return T;
 }
-	  
+
 NT_node similarities_file2tree (char *mat)
 {
   int **s;
@@ -1554,27 +1554,27 @@ NT_node similarities_file2tree (char *mat)
   char *tree_name;
   NT_node T;
 
-  
+
 
   tree_name =vtmpnam (NULL);
-  
+
   s=input_similarities (mat,NULL, NULL);
-  
-  
+
+
   A=similarities_file2aln(mat);
   s=sim_array2dist_array(s, 100);
- 
-  
+
+
   int_dist2nj_tree (s, A->name, A->nseq, tree_name);
   T=main_read_tree(tree_name);
   free_int (s, -1);
   return T;
 }
-  
+
 NT_node compute_cw_tree (Alignment *A)
 {
   char *tmp1, *tmp2, tmp3[1000];
-  
+
   tmp1=vtmpnam (NULL);
   tmp2=vtmpnam (NULL);
 
@@ -1582,7 +1582,7 @@ NT_node compute_cw_tree (Alignment *A)
   output_clustal_aln (tmp1, A);
   printf_system ("clustalw -infile=%s -tree -newtree=%s %s ", tmp1,tmp3, TO_NULL_DEVICE);
   printf_system("mv %s %s", tmp3, tmp2);
-  
+
   return main_read_tree(tmp2);
 }
 
@@ -1590,7 +1590,7 @@ NT_node compute_fj_tree (NT_node T, Alignment *A, int limit, char *mode)
 {
   static int in_fj_tree;
   if (!in_fj_tree)fprintf ( stderr, "\nComputation of an NJ tree using conserved positions\n");
-  
+
   in_fj_tree++;
   if (T && T->leaf<=2);
   else
@@ -1612,13 +1612,13 @@ NT_node aln2fj_tree(NT_node T, Alignment *A, int limit_in, char *mode)
   Alignment *subA=NULL;
   int fraction_gap;
   int l, limit;
-  
+
   if (T)
     S=tree2seq (T,NULL);
   else
     S=aln2seq (A);
 
-  
+
   l=0;
   for ( fraction_gap=100; fraction_gap<=100 && l<1; fraction_gap+=10)
     for ( limit=limit_in; limit>0 && l<1; limit--)
@@ -1642,9 +1642,9 @@ NT_node aln2fj_tree(NT_node T, Alignment *A, int limit_in, char *mode)
   NT=aln2tree (subA);
   NT=tree2fj_tree (NT);
 
-  NT=realloc_tree (NT,A->nseq); 
+  NT=realloc_tree (NT,A->nseq);
   fprintf ( stderr, "Limit:%d Gap: %d Columns: %4d Left: %4d Right %4d BL:%4.2f\n",limit,fraction_gap,  subA->len_aln, (NT->right)->leaf,(NT->left)->leaf, (NT->left)->dist+(NT->right)->dist);
-  
+
   if ( T)
     {
       NT->dist=T->dist;
@@ -1654,48 +1654,48 @@ NT_node aln2fj_tree(NT_node T, Alignment *A, int limit_in, char *mode)
   free_aln (subA);
   free_sequence (S, -1);
   return NT;
-}  
-  
+}
+
 Alignment * filter_aln4tree (Alignment *A, int n,int fraction_gap,char *mode)
 {
   char *aln_file;
   char *ungaped_aln_file;
   char *scored_aln_file;
   char *filtered_aln_file;
-    
+
   aln_file=vtmpnam(NULL);
   ungaped_aln_file=vtmpnam (NULL);
   scored_aln_file=vtmpnam (NULL);
   scored_aln_file=vtmpnam(NULL);
   filtered_aln_file=vtmpnam(NULL);
-  
-  
+
+
 
   output_clustal_aln (aln_file, A);
   /* 1: remove columns with too many gaps*/
   printf_system ("t_coffee -other_pg seq_reformat -in %s -action +rm_gap %d -output clustalw > %s", aln_file,fraction_gap, ungaped_aln_file);
-  
+
   /* 2: evaluate the alignment*/
-  
+
   printf_system ("t_coffee -other_pg seq_reformat -in %s -action +evaluate %s -output clustalw > %s", ungaped_aln_file,(mode)?mode:"categories", scored_aln_file);
- 
-  
+
+
   /*3 extract the high scoring columns*/
   printf_system("t_coffee -other_pg seq_reformat -in %s -struc_in %s -struc_in_f number_aln -action +use_cons +keep '[%d-8]' +rm_gap -output clustalw > %s", ungaped_aln_file, scored_aln_file,n, filtered_aln_file);
- 
-  
+
+
   free_aln (A);
-  
+
   A=main_read_aln ( filtered_aln_file, NULL);
   print_aln (A);
-  
+
   return A;
 }
 
 NT_node tree2fj_tree (NT_node T)
 {
   NT_node L;
-  
+
   return T;
 
   L=find_longest_branch (T, NULL);
@@ -1718,26 +1718,26 @@ int tree2star_nodes (NT_node R, int n_max)
       if (n_max>=1)R->dist=0;
       return 1;
     }
-  else 
+  else
     {
       int n=0;
-      
+
       n+=tree2star_nodes (R->right, n_max);
       n+=tree2star_nodes (R->left, n_max);
-      
+
       if (n<n_max)R->dist=0;
       return n;
     }
 }
-  
+
 NT_node aln2tree (Alignment *A)
 {
   NT_node **T=NULL;
-  
+
 
   T=make_nj_tree (A, NULL, 0, 0, A->seq_al, A->name, A->nseq, NULL, NULL);
   tree2nleaf (T[3][0]);
-  
+
   return T[3][0];
 }
 NT_node realloc_tree ( NT_node R, int n)
@@ -1759,7 +1759,7 @@ NT_node reset_boot_tree ( NT_node R, int n)
   R->left=reset_boot_tree (R->left,n);
   R->bot=reset_boot_tree (R->bot,n);
   R->bootstrap=(float)n;
-  
+
   return R;
 }
 NT_node tree_dist2normalized_tree_dist ( NT_node R, float max)
@@ -1779,14 +1779,14 @@ NT_node reset_dist_tree ( NT_node R, float n)
   R->right=reset_dist_tree (R->right,n);
   R->left=reset_dist_tree (R->left,n);
   R->bot=reset_dist_tree (R->bot,n);
-  
+
   if (R->parent && !(R->parent)->parent && !(R->parent)->bot)R->dist=n/2;
   else R->dist=n;
 
   return R;
 }
 
-      
+
 NT_node* free_treelist (NT_node *L)
 {
   int n=0;
@@ -1810,7 +1810,7 @@ NT_node free_tree ( NT_node R)
 NT_node free_tree_node ( NT_node R)
 {
   if (!R)return NULL;
-  
+
   vfree (R->seqal);
   vfree (R->idist);
   vfree (R->ldist);
@@ -1825,7 +1825,7 @@ NT_node   rename_seq_in_tree ( NT_node R, char ***list)
 {
   if ( !R || !list) return R;
 
-  if ( R->leaf!=1) 
+  if ( R->leaf!=1)
     {
       R->right=rename_seq_in_tree (R->right, list);
       R->left=rename_seq_in_tree (R->left, list);
@@ -1851,7 +1851,7 @@ Sequence * tree2seq    (NT_node R, Sequence *S)
       S=declare_sequence (10, 10, tree2nseq (R));
       S->nseq=0;
     }
-  
+
   if (R->leaf==1)
     {
       sprintf ( S->name[S->nseq++], "%s", R->name);
@@ -1868,42 +1868,42 @@ NT_node balance_tree (NT_node T)
 {
   static int **list;
   NT_node NL[3];
-  
+
   if ( !T) return T;
   else if ( T->leaf<=2)return T;
-  else    
+  else
     {
       if (!list)list=declare_int (3, 2);
-      
+
       NL[0]=T->left;
       NL[1]=T->right;
       NL[2]=T->bot;
-      
+
       list[0][0]=(T->left)?(T->left)->leaf:0;
       list[0][1]=0;
       list[1][0]=(T->right)?(T->right)->leaf:0;
       list[1][1]=1;
       list[2][0]=(T->bot)?(T->bot)->leaf:0;
       list[2][1]=2;
-      
+
       sort_int (list,2,0,0,2);
-      
+
       T->left=NL[list[2][1]];
       T->right=NL[list[1][1]];
       T->bot=NL[list[0][1]];
-      
+
       T->left=balance_tree (T->left);
       T->right=balance_tree (T->right);
       T->bot=balance_tree (T->bot);
-      return T;	
+      return T;
     }
 }
 FILE * display_tree (NT_node R, int nseq, FILE *fp)
 {
   int a;
-  
+
   if ( !R);
-  else 
+  else
     {
       /*
 	if ( R->nseq==1)fprintf (stderr,"\n[%s] ", R->name);
@@ -1914,8 +1914,8 @@ FILE * display_tree (NT_node R, int nseq, FILE *fp)
       for ( a=0; a< nseq; a++)fprintf (fp, "%d", R->lseq2[a]);
       fprintf (fp, "\n %10s D ", R->name);
       for ( a=0; a< nseq; a++)fprintf (fp, "%d", R->idist[a]);
-      
-      
+
+
       if (R->leaf==1) fprintf (fp, " %s", R->name);
       fprintf (fp, " :%.4f", R->dist);
       HERE ("\nGo Left");fp=display_tree (R->left, nseq, fp);
@@ -1937,13 +1937,13 @@ int tree2nnode_unresolved (NT_node R, int *l)
 	{
 	  return n;
 	}
-      else 
+      else
 	{
 	  if (n)l[n]++;
 	  return 0;
 	}
     }
-    
+
 }
 
 int tree2nnode ( NT_node R)
@@ -1951,7 +1951,7 @@ int tree2nnode ( NT_node R)
   int n;
   if ( !R)n=0;
   else if ( R->leaf==1){R->node=1;n=1;}
-  else 
+  else
     {
       n=1;
       n+=tree2nnode (R->right);
@@ -1972,7 +1972,7 @@ int tree2nleaf (NT_node R)
       n+=tree2nleaf (R->right);
       n+=tree2nleaf (R->left);
       n+=tree2nleaf (R->bot);
-      
+
       R->leaf=n;
       return n;
     }
@@ -1988,14 +1988,14 @@ int tree_file2nseq (char *fname)
   FILE *fp;
   char *string;
   int p, a, b, c, n;
-  
+
   string=vcalloc (count_n_char_in_file(fname)+1, sizeof (char));
-  
+
   fp=vfopen (fname, "r");
   n=0;
   while ( (c=fgetc(fp))!=EOF){if (c=='(' || c==')' || c==',' || c==';') string[n++]=c;}
   vfclose (fp);string[n]='\0';
-  
+
   for (n=0, p=1; p<strlen (string); p++)
     {
       a=string[p-1];
@@ -2009,14 +2009,14 @@ int tree_file2nseq (char *fname)
   vfree (string);
   return n;
 }
-  
+
 
 void clear_tree ( NT_node R)
 {
   if (!R) return;
-  
+
   R->visited=0;
-  
+
   if ( R->leaf==1);
   else
     {
@@ -2029,7 +2029,7 @@ int display_leaf_below_node (NT_node T, FILE *fp)
 {
   int n=0;
   if ( !T)return 0;
-  
+
   if ( T->leaf==1)
     {
       fprintf (fp, " %s", T->name);
@@ -2048,7 +2048,7 @@ int display_leaf ( NT_node T, FILE *fp)
   if ( !T)return 0;
   else if ( T->visited)return 0;
   else T->visited=1;
-  
+
   if ( T->leaf==1)
     {
       fprintf (fp, " %s", T->name);
@@ -2063,20 +2063,20 @@ int display_leaf ( NT_node T, FILE *fp)
     }
 }
 
-      
 
-      
+
+
 NT_node find_longest_branch ( NT_node T, NT_node L)
   {
-    
+
     if ( !L || T->dist>L->dist)
       {
-	
+
 	L=T;
       }
 
     if ( T->leaf==1)return L;
-    else 
+    else
       {
 	L=find_longest_branch ( T->right, L);
 	L=find_longest_branch ( T->left,  L);
@@ -2093,41 +2093,41 @@ NT_node reroot_tree ( NT_node TREE, NT_node Right)
   /*ReRoots the tree between Node R and its parent*/
   NT_node NR;
   int n1, n2;
-  
+
   if (!EMPTY)EMPTY=vcalloc (1, sizeof (NT_node));
   if ( !Right->parent)return Right;
-    
+
   TREE=unroot_tree (TREE);
   if (Right->parent==NULL && Right->bot)
     Right=Right->bot;
-  
+
   n1=tree2nleaf (TREE);
-  
+
   NR=declare_tree_node(TREE->maxnseq);
-  
+
   NR->right=Right;
   NR->left=Right->parent;
   Right->parent=NR;
-  
+
   Right->dist=Right->dist/2;
-  
+
   if ((NR->left)->right==Right)(NR->left)->right=EMPTY;
   else if ( (NR->left)->left==Right) (NR->left)->left=EMPTY;
-  
+
   Previous=NULL;
-  
-  
+
+
   NR->left=straighten_node (NR->left);
-  
-  
-  
+
+
+
   (NR->left)->parent=NR;
   (NR->left)->dist=Right->dist;
-  
 
-     
+
+
   n2=tree2nleaf(NR);
-  
+
   if ( n1!=n2){fprintf ( stderr, "\n%d %d", n1, n2);myexit (EXIT_FAILURE);}
   return NR;
 }
@@ -2135,13 +2135,13 @@ NT_node reroot_tree ( NT_node TREE, NT_node Right)
 NT_node straighten_node ( NT_node N)
 {
   NT_node Child;
-  
-  
+
+
   if ( N->parent)
     {
       if (N->right==EMPTY)N->right=N->parent;
       else if ( N->left==EMPTY) N->left=N->parent;
-      
+
       Child=N->parent;
       if (Child->right==N)
 	{
@@ -2151,7 +2151,7 @@ NT_node straighten_node ( NT_node N)
 	{
 	  Child->left=EMPTY;
 	}
-      
+
       Previous=N;
       Child=straighten_node (Child);
       Child->parent=N;
@@ -2162,7 +2162,7 @@ NT_node straighten_node ( NT_node N)
     {
       if ( N->right==EMPTY)N->right=N->bot;
       else if ( N->left==EMPTY)N->left=N->bot;
-      
+
       N->bot=NULL;
       return N;
     }
@@ -2174,7 +2174,7 @@ NT_node straighten_node ( NT_node N)
 }
 int test_print (NT_node T)
 {
-  if ( !T) 
+  if ( !T)
     {
       fprintf ( stderr, "\nEMPTY");
     }
@@ -2201,14 +2201,14 @@ int node2side (NT_node C)
 NT_node straighten_tree ( NT_node P, NT_node C, float new_dist)
 {
   float dist;
-  
+
   if ( C==NULL)return NULL;
 
 
   dist=C->dist;
   C->dist=new_dist;
   C->bot=NULL;
-  
+
   if (C->left && C->right)
     {
       C->parent=P;
@@ -2241,20 +2241,20 @@ NT_node straighten_tree ( NT_node P, NT_node C, float new_dist)
     {
       C->parent=P;
     }
-  
+
   return C;
 }
 
 
 NT_node unroot_tree ( NT_node T)
 {
-  
+
   if (!T || T->visited) return T;
   else T->visited=1;
-  
+
   if (T->parent==NULL)
-    {      
-      
+    {
+
       (T->right)->dist=(T->left)->dist=(T->right)->dist+(T->left)->dist;
       (T->right)->parent=T->left;
       (T->left)->parent=T->right;
@@ -2289,7 +2289,7 @@ char * tree2string (NT_node T)
     {
       static char *f;
       FILE *fp;
-      
+
       if (!f)f=vtmpnam (NULL);
       fp=vfopen (f, "w");
       print_tree (T, "newick", fp);
@@ -2306,12 +2306,12 @@ char * tree2file (NT_node T, char *name, char *mode)
 FILE * print_tree ( NT_node T, char *format,FILE *fp)
 {
   Sequence *S;
-  
+
   tree2nleaf(T);
   S=tree2seq(T, NULL);
-  
+
   recode_tree (T, S);
-  
+
   free_sequence (S, -1);
   if ( format && strm (format, "binary"))
     fp=display_tree ( T,S->nseq, fp);
@@ -2339,14 +2339,14 @@ int print_newick_tree ( NT_node T, char *name)
 }
 FILE * rec_print_tree ( NT_node T, FILE *fp)
 {
- 
+
 
 
   if (!T)return fp;
 
   if ( T->isseq)
     {
-      fprintf ( fp, " %s:%.5f",T->name, T->dist);
+      fprintf ( fp, "%s:%.5f",T->name, T->dist);
     }
   else
     {
@@ -2384,7 +2384,7 @@ int ** make_sub_tree_list ( NT_node **T, int nseq, int n_node)
 
 
 /*This function produces a list of all the sub trees*/
-	 
+
 
 /*  	  /A */
 /*  	-* */
@@ -2395,7 +2395,7 @@ int ** make_sub_tree_list ( NT_node **T, int nseq, int n_node)
 /*                   *--C */
 /*                    \ */
 /*                     \D */
-	
+
 /*  	Contains 4 i_nodes */
 /*  	       8   nodes (internal nodes +leaves) */
 /*  	       8 sub trees: */
@@ -2407,11 +2407,11 @@ int ** make_sub_tree_list ( NT_node **T, int nseq, int n_node)
 /*  	       0011 */
 /*  	       0001 */
 /*  	       0010 */
-       
+
 	int **sub_tree_list;
 	int a, n=0;
-	
-	
+
+
 	if (T)
 	     {
 		 sub_tree_list=declare_int ( (n_node), nseq);
@@ -2423,7 +2423,7 @@ int ** make_sub_tree_list ( NT_node **T, int nseq, int n_node)
 		 sub_tree_list=declare_int (nseq, nseq);
 		 for ( a=0; a< nseq; a++)sub_tree_list[a][a]=1;
 	     }
-	
+
 	return sub_tree_list;
 	}
 
@@ -2442,7 +2442,7 @@ void make_one_sub_tree_list ( NT_node T,int *list)
         {
 	if (T->leaf==1)
 	    {
-	    
+
 	    list[T->seq]=1;
 	    }
 	else
@@ -2475,10 +2475,10 @@ NT_node** simple_read_tree(char *treefile)
 void free_read_tree ( NT_node **BT)
 {
   int a, s;
-  
- 
+
+
   if (!BT) return;
-  
+
   for (s=0,a=0; a<3; a++)
     {
       vfree (BT[a]);
@@ -2487,7 +2487,7 @@ void free_read_tree ( NT_node **BT)
   vfree (BT);
   return;
 }
-  
+
 NT_node** read_tree(char *treefile, int *tot_node,int nseq, char **seq_names)
 	{
 
@@ -2508,7 +2508,7 @@ NT_node** read_tree(char *treefile, int *tot_node,int nseq, char **seq_names)
 
 	tot_nseq=nseq;
 	rooted_tree=distance_tree=TRUE;
-	
+
   	fp = vfopen(treefile, "r");
 	fp=skip_space(fp);
   	ch = (char)getc(fp);
@@ -2525,22 +2525,22 @@ NT_node** read_tree(char *treefile, int *tot_node,int nseq, char **seq_names)
 	lu_ptr[1] = (NT_node *)vcalloc(10*nseq,sizeof(NT_node));
 	lu_ptr[2] = (NT_node *)vcalloc(10*nseq,sizeof(NT_node));
   	lu_ptr[3] =(NT_node *) vcalloc(1,sizeof(NT_node));
-  	
+
   	seq_tree =(NT_node) declare_tree_node(nseq);
-  
+
   	set_info(seq_tree, NULL, 0, "  ", 0.0, 0);
-	
+
 
 	fp=create_tree(seq_tree,NULL,&nseq_read, &ntotal, &nnodes, lu_ptr, fp);
   	fclose (fp);
-	
-	
+
+
   	if (nseq != tot_nseq)
      		{
         	fprintf(stderr," Error: tree not compatible with alignment (%d sequences in alignment and %d in tree\n", nseq,nseq_read);
          	myexit (EXIT_FAILURE);
      		}
-	
+
   	if (distance_tree == FALSE)
      		{
   		if (rooted_tree == FALSE)
@@ -2554,25 +2554,25 @@ NT_node** read_tree(char *treefile, int *tot_node,int nseq, char **seq_names)
      		{
 		  root = reroot(seq_tree, nseq,ntotal,nnodes, lu_ptr);
 		  lu_ptr[1][nnodes++]=lu_ptr[0][ntotal++]=root;
-		  
+
      		}
   	else
      		{
         	root = seq_tree;
-     		}    	
-	
+     		}
+
   	lu_ptr[3][0]=root;
   	tot_node[0]=nnodes;
-	
-	
-	
+
+
+
   	for ( a=0; a< ntotal; a++)
   		{
   		(lu_ptr[0][a])->isseq=(lu_ptr[0][a])->leaf;
   		(lu_ptr[0][a])->dp=(lu_ptr[0][a])->dist;
   		}
-  		
-  	
+
+
   	for ( a=0; a< nseq; a++)
   		{
 		if (!seq_names)
@@ -2583,11 +2583,11 @@ NT_node** read_tree(char *treefile, int *tot_node,int nseq, char **seq_names)
 		else
 		  {
 		    for ( flag=0,b=0; b<nseq; b++)
-		      {		       
+		      {
   			if ( strncmp ( (lu_ptr[2][a])->name, seq_names[b], MAXNAMES)==0)
 			  {
 			    flag=1;
-			    
+
 			    (lu_ptr[2][a])->order=(lu_ptr[2][a])->seq=b;
   				/*vfree ( (lu_ptr[2][a])->name);*/
 			    sprintf ((lu_ptr[2][a])->name, "%s", seq_names[b]);
@@ -2601,11 +2601,11 @@ NT_node** read_tree(char *treefile, int *tot_node,int nseq, char **seq_names)
   			for ( a=0; a< ntotal; a++)
 			  {
 			    fprintf ( stderr, "\n%d %s",(lu_ptr[2][a])->leaf, (lu_ptr[2][a])->name);
-			  } 
+			  }
 		      }
 		*/
   		}
-  	
+
 	if (seq_names)
 	  {
 	    int tnseq;
@@ -2636,12 +2636,12 @@ NT_node** read_tree(char *treefile, int *tot_node,int nseq, char **seq_names)
 	    vfree (tree_names);
 	    if ( fail_flag==1)myexit (EXIT_FAILURE);
 	  }
-	    
+
   	for ( a=0; a< nseq; a++)
   		{
   		p=lu_ptr[2][a];
   		c_seq=p->seq;
-  		
+
   		while ( p!=NULL)
   			{
   			p->lseq[p->nseq]=c_seq;
@@ -2649,17 +2649,17 @@ NT_node** read_tree(char *treefile, int *tot_node,int nseq, char **seq_names)
   			p=p->parent;
   			}
   		}
-  	
-	
-  	return lu_ptr;   	
+
+
+  	return lu_ptr;
  	}
 
 FILE * create_linear_tree ( char **name, int n, FILE *fp)
 {
 
   if (!name || n==0 ||!fp) return NULL;
-  
-  
+
+
   if (n==2)
     fprintf ( fp, "(%s,%s);",name[0],name[1]);
   else if ( n==3)
@@ -2682,13 +2682,13 @@ FILE * create_tree(NT_node ptree, NT_node parent,int *nseq,int  *ntotal,int  *nn
 	float bootstrap=0;
   	char *name;
   	int ch;
-	
+
 
 	name=vcalloc ( MAXNAMES+1, sizeof (char));
 	sprintf ( name, "   ");
   	fp=skip_space(fp);
   	ch = (char)getc(fp);
-  	
+
   	if (ch == '(')
     		{
     		type = NODE;
@@ -2705,7 +2705,7 @@ FILE * create_tree(NT_node ptree, NT_node parent,int *nseq,int  *ntotal,int  *nn
 			ch = (char)getc(fp);
           		if ( ch == ',')
             			{
-            			
+
                			ptree = insert_tree_node(ptree);
                			lu[0][ntotal[0]] = lu[1][nnodes[0]] = ptree;
                			ntotal[0]++;
@@ -2747,9 +2747,9 @@ FILE * create_tree(NT_node ptree, NT_node parent,int *nseq,int  *ntotal,int  *nn
 			ch = (char)getc(fp);
 		      }
 		  }
-		
+
       		name[i] = '\0';
-	
+
       		if ( i>=(MAXNAMES+1)){fprintf (stderr, "\nName is too long");myexit (EXIT_FAILURE);}
       		if (ch != ':' && !isdigit(ch))
          		{
@@ -2779,8 +2779,8 @@ FILE * create_tree(NT_node ptree, NT_node parent,int *nseq,int  *ntotal,int  *nn
 	  }
 
 	set_info(ptree, parent, type, name, dist, bootstrap);
-  	
-  	
+
+
   	vfree (name);
   	return fp;
   	}
@@ -2788,8 +2788,8 @@ FILE * create_tree(NT_node ptree, NT_node parent,int *nseq,int  *ntotal,int  *nn
 NT_node declare_tree_node (int nseq)
 	{
 	NT_node p;
-	
-	p= (NT_node)vcalloc (1, sizeof ( Treenode)); 
+
+	p= (NT_node)vcalloc (1, sizeof ( Treenode));
 	p->left = NULL;
    	p->right = NULL;
    	p->parent = NULL;
@@ -2801,7 +2801,7 @@ NT_node declare_tree_node (int nseq)
    	p->name[0]='\0';
    	p->lseq=(int*)vcalloc ( nseq, sizeof (int));
    	return p;
-	
+
 	}
 
 void set_info(NT_node p, NT_node parent, int pleaf, char *pname, float pdist, float bootstrap)
@@ -2811,10 +2811,10 @@ void set_info(NT_node p, NT_node parent, int pleaf, char *pname, float pdist, fl
    	p->dist = pdist;
 	p->bootstrap=bootstrap;
    	p->order = 0;
-   	
+
 
    	sprintf (p->name, "%s", pname);
-   	
+
 	if (pleaf ==1)
     	 	{
         	p->left = NULL;
@@ -2843,15 +2843,15 @@ void create_tree_node(NT_node pptr, NT_node parent)
   	pptr->parent = parent;
   	pptr->left =declare_tree_node(pptr->maxnseq) ;
   	(pptr->left)->parent=pptr;
-  	
-  	pptr->right =declare_tree_node(pptr->maxnseq) ;    
+
+  	pptr->right =declare_tree_node(pptr->maxnseq) ;
 	(pptr->right)->parent=pptr;
-	}	
+	}
 
 FILE * skip_space(FILE *fp)
 	{
   	int   c;
-  
+
   	do
      	c = getc(fp);
   	while(isspace(c));
@@ -2871,11 +2871,11 @@ NT_node reroot(NT_node ptree, int nseq, int ntotal, int nnodes, NT_node **lu)
  	float   diff, mindiff=0, mindepth = 1.0, maxdist;
 	int   i;
 	int first = TRUE;
-	
-	
-	
+
+
+
 	rootptr = ptree;
-	
+
    	for (i=0; i<ntotal; i++)
      		{
         	p = lu[0][i];
@@ -2901,7 +2901,7 @@ NT_node reroot(NT_node ptree, int nseq, int ntotal, int nnodes, NT_node **lu)
         	mindiff = rootptr->left->dist + rootptr->right->dist;
         	rootptr = rootptr->right;
      		}
-	
+
    	rootnode = insert_root(rootptr, mindiff);
 	diff = calc_root_mean(rootnode, &maxdist, nseq, lu);
 	return(rootnode);
@@ -2915,8 +2915,8 @@ float calc_root_mean(NT_node root, float *maxdist, int nseq, NT_node **lu)
    	int i;
    	int nl, nr;
    	int direction;
-   	
-   
+
+
    	dist = (*maxdist) = 0;
    	nl = nr = 0;
    	for (i=0; i< nseq; i++)
@@ -2942,7 +2942,7 @@ float calc_root_mean(NT_node root, float *maxdist, int nseq, NT_node **lu)
              	rsum += dist;
              	nr++;
            	}
-        
+
         if (dist > (*maxdist)) *maxdist = dist;
      	}
 
@@ -2961,8 +2961,8 @@ float calc_mean(NT_node nptr, float *maxdist, int nseq,NT_node **lu)
    	int depth = 0, i,j , n;
    	int nl , nr;
    	int direction, found;
-	
-	
+
+
 	path2root = (NT_node *)vcalloc(nseq,sizeof(Treenode));
 	dist2node = (float *)vcalloc(nseq,sizeof(float));
 
@@ -2977,7 +2977,7 @@ float calc_mean(NT_node nptr, float *maxdist, int nseq,NT_node **lu)
          	p = p->parent;
          	depth++;
      		}
- 
+
 /***************************************************************************
    *nl = *nr = 0;
    for each leaf, determine whether the leaf is left or right of the node.
@@ -2995,23 +2995,23 @@ float calc_mean(NT_node nptr, float *maxdist, int nseq,NT_node **lu)
          		{
          		direction = LEFT;
          		dist = 0.0;
-			
+
         		found = FALSE;
          		n = 0;
          		while ((found == FALSE) && (p->parent != NULL))
            			{
                			for (j=0; j< depth; j++)
                  			if (p->parent == path2root[j])
-                    				{ 
+                    				{
                       				found = TRUE;
                       				n = j;
                     				}
                			dist += p->dist;
                			p = p->parent;
            			}
-         
+
          		if (p == nptr) direction = RIGHT;
-        
+
 			}
          	if (direction == LEFT)
            		{
@@ -3031,7 +3031,7 @@ float calc_mean(NT_node nptr, float *maxdist, int nseq,NT_node **lu)
    vfree(dist2node);
    vfree(path2root);
 
-   
+
 
    if ( nl==0 || nr==0)
      {
@@ -3039,7 +3039,7 @@ float calc_mean(NT_node nptr, float *maxdist, int nseq,NT_node **lu)
      }
    lmean = lsum / nl;
    rmean = rsum / nr;
-   
+
    diff = lmean - rmean;
    return(diff);
 }
@@ -3049,11 +3049,11 @@ NT_node insert_root(NT_node p, float diff)
    NT_node newp, prev, q, t;
    float dist, prevdist,td;
 
-   
+
    newp = declare_tree_node( p->maxnseq);
    t = p->parent;
-   
-   
+
+
    prevdist = t->dist;
    p->parent = newp;
 
@@ -3062,15 +3062,15 @@ NT_node insert_root(NT_node p, float diff)
    p->dist = diff / 2;
    if (p->dist < 0.0) p->dist = 0.0;
    if (p->dist > dist) p->dist = dist;
-   
-   t->dist = dist - p->dist; 
+
+   t->dist = dist - p->dist;
 
    newp->left = t;
    newp->right = p;
    newp->parent = NULL;
    newp->dist = 0.0;
    newp->leaf = NODE;
-   
+
    if (t->left == p) t->left = t->parent;
    else t->right = t->parent;
 
@@ -3078,7 +3078,7 @@ NT_node insert_root(NT_node p, float diff)
    q = t->parent;
 
    t->parent = newp;
-   
+
    while (q != NULL)
      {
         if (q->left == prev)
@@ -3102,7 +3102,7 @@ NT_node insert_root(NT_node p, float diff)
               q = q->right;
            }
     }
-   
+
 /*
    remove the old root node
 */
@@ -3131,7 +3131,7 @@ NT_node insert_root(NT_node p, float diff)
             prev->parent->right = q;
          prev->left = NULL;
       }
-   
+
    return(newp);
 }
 
@@ -3158,7 +3158,7 @@ Alignment *seq2seq_chain (Alignment *A,Alignment*T, char *arg)
 
   /*Estimate Similarity within the incoming sequences*/
   sim=seq2comp_mat (aln2seq(A), "blosum62mt", "sim2");
-  
+
   /*Read and store the list of sequences to keep*/
   seq2keep=vcalloc (A->nseq, sizeof (int));
   tname=vcalloc (T->nseq, sizeof (int));
@@ -3167,7 +3167,7 @@ Alignment *seq2seq_chain (Alignment *A,Alignment*T, char *arg)
       tname[a]=name_is_in_list ( T->name[a], A->name, A->nseq, 100);
       if (tname[a]>=0)seq2keep[tname[a]]=1;
     }
-  
+
   /*Consider Every Pair of Sequences within the list of sequences to keep*/
 
   fprintf ( stderr, "\n");
@@ -3185,7 +3185,7 @@ Alignment *seq2seq_chain (Alignment *A,Alignment*T, char *arg)
 	      buf=aln2seq_chain ( A, sim,tname[a],tname[b],sim_limit, max_chain);
 	      sim_limit-=5;
 	    }
-	  
+
 	  if ( buf)
 	    {
 	      for (c=0; c< A->nseq; c++)seq2keep[c]+=buf[c];
@@ -3197,14 +3197,14 @@ Alignment *seq2seq_chain (Alignment *A,Alignment*T, char *arg)
 	    }
 	}
     }
-  
+
   list=vcalloc (A->nseq, sizeof (int));
   for ( nl=0,a=0; a< A->nseq; a++)
     if ( seq2keep[a])
       list[nl++]=a;
-  
+
   A=extract_sub_aln (A, nl, list);
-  
+
   free_int (sim, -1);
   vfree (list);
   return A;
@@ -3222,11 +3222,11 @@ int *aln2seq_chain (Alignment *A, int **sim, int seq1, int seq2, int limit, int 
   int *list;
   int n, nseq=0;
 
-  
+
   output1[0]=output2[0]='\0';
   used=vcalloc (A->nseq, sizeof(int));
   used[seq1]=1;
-  
+
   if (find_seq_chain ( A, sim,used,seq1,seq1, seq2,1,limit, max_chain, &nseq))
     {
       list=vcalloc (A->nseq, sizeof (int));
@@ -3240,18 +3240,18 @@ int *aln2seq_chain (Alignment *A, int **sim, int seq1, int seq2, int limit, int 
 	      list[used[a]-1]=a;n++;
 	    }
 	}
-      
+
       sprintf ( output2, "#%s %s N: %d Lower: %d Sim: %d DELTA: %d\n", A->name[list[0]], A->name[list[n-1]],n, limit,sim[list[0]][list[n-1]],limit-sim[list[0]][list[n-1]]);strcat (output1, output2);
-      
+
       sort_int ( chain, 2, 0, 0, n-1);
       sprintf ( output2, "#");strcat(output1, output2);
-      
+
       for ( a=0; a< n-1; a++)
 	{
 	  sprintf (output2, "%s -->%d -->", A->name[chain[a][1]],sim[chain[a][1]][chain[a+1][1]]);strcat ( output1, output2);
 	}
       sprintf ( output2, "%s\n", A->name[chain[n-1][1]]);strcat (output1, output2);
-      
+
       free_int (chain, -1);
       vfree (list);
     }
@@ -3269,7 +3269,7 @@ static int ***pw_sim;
 int find_seq_chain (Alignment *A, int **sim,int *used,int seq0,int seq1, int seq2,int chain_length, int limit, int max_chain, int *nseq)
 {
   int a,b, seq, seq_sim;
-  
+
   n_explore++;
   if ( n_explore>=max_explore)
     {
@@ -3289,7 +3289,7 @@ int find_seq_chain (Alignment *A, int **sim,int *used,int seq0,int seq1, int seq
 	  sort_int_inv ( pw_sim[a],3, 1, 0, A->nseq-1);
 	}
     }
-  
+
   if ( chain_length>max_chain)return 0;
   else if ( sim[seq1][seq2]>=limit)
     {
@@ -3305,8 +3305,8 @@ int find_seq_chain (Alignment *A, int **sim,int *used,int seq0,int seq1, int seq
 	  seq=pw_sim[seq1][a][0];
 	  seq_sim=pw_sim[seq1][a][1];
 	  delta_seq2=pw_sim[seq1][a][2]-sim[seq1][seq2];
-	  
-	  
+
+
 
 	  if ( used[seq])continue;
 	  else if ( seq_sim<limit)continue;
@@ -3346,18 +3346,18 @@ NT_node main_read_tree (char *treefile)
 {
   FILE *fp;
   Sequence *S;
-  
+
   NT_node T;
 
 
 
-  
+
   fp=vfopen (remove_charset_from_file (treefile, " \t\n\r"), "r");
   T=new_get_node (NULL,fp);
   vfclose (fp);
-    
+
   S=tree2seq(T, NULL);
-  
+
   T=recode_tree(T, S);
   free_sequence (S,S->nseq);
   vfree (T->file);
@@ -3368,13 +3368,13 @@ NT_node main_read_tree (char *treefile)
 
 //This function codes the tree into lseq and lseq2
 //lseq:  list of the N->nseq child sequences of the node
-//lsseq2:Array of size Nseq, with lseq[a]=1 if sequence a is child of node N 
+//lsseq2:Array of size Nseq, with lseq[a]=1 if sequence a is child of node N
 static int node_index;
 NT_node index_tree_node    (NT_node T)
 {
   if (!T)return T;
   if (!T->parent){node_index=tree2nseq (T)+1;}
-  
+
   index_tree_node(T->left);
   index_tree_node(T->right);
 
@@ -3382,25 +3382,25 @@ NT_node index_tree_node    (NT_node T)
   else T->index=node_index++;
   return T;
 }
-  
- 
-  
+
+
+
 NT_node simple_recode_tree (NT_node T, int nseq)
 {
 
   //recodes atree wher the leafs are already coded
   if (!T) return T;
-  
-  
- 
-  
+
+
+
+
   T->nseq=0;
-  
+
   if ( T->isseq)
     {
-      
+
       ;
-      
+
     }
   else
     {
@@ -3410,21 +3410,21 @@ NT_node simple_recode_tree (NT_node T, int nseq)
        vfree (T->lseq2); T->lseq2=vcalloc (nseq, sizeof (int));
        vfree (T->idist); T->idist=vcalloc (nseq, sizeof (int));
        vfree (T->ldist); T->ldist=vcalloc (nseq, sizeof (int));
-       
+
        R=simple_recode_tree (T->left,nseq);
-      
+
        L=simple_recode_tree (T->right,nseq);
-       
+
        if (R)for (a=0; a<R->nseq; a++)
 	 {
 	   T->lseq2[R->lseq[a]]=1;
 	 }
-       
+
        if (L)for (a=0; a<L->nseq; a++)
 	 {
 	   T->lseq2[L->lseq[a]]=1;
 	 }
-       
+
        for (a=0; a<nseq; a++)
 	 {
 	   if (T->lseq2[a])T->lseq[T->nseq++]=a;
@@ -3438,22 +3438,22 @@ NT_node simple_recode_tree (NT_node T, int nseq)
 NT_node recode_tree (NT_node T, Sequence *S)
 {
 
-  
+
   if (!T) return T;
-  
-  
+
+
   vfree (T->lseq);  T->lseq=vcalloc (S->nseq, sizeof (int));
   vfree (T->lseq2); T->lseq2=vcalloc (S->nseq, sizeof (int));
   vfree (T->idist); T->idist=vcalloc (S->nseq, sizeof (int));
   vfree (T->ldist); T->ldist=vcalloc (S->nseq, sizeof (int));
   T->nseq=0;
-  
+
   if ( T->isseq)
     {
-      
+
       int i;
       i=name_is_in_list (T->name, S->name, S->nseq, -1);
-      
+
       if (i!=-1)
 	{
 	  T->lseq[T->nseq++]=i;
@@ -3465,33 +3465,33 @@ NT_node recode_tree (NT_node T, Sequence *S)
 	{
 	  printf_exit ( EXIT_FAILURE, stderr, "\nERROR: Sequence %s is in the Tree but Not in the  Sequence dataset [code_lseq][FATAL:%s]", T->name, PROGRAM);
 	}
-      
+
     }
   else
     {
       NT_node R,L;
       int a;
-      
+
       R=recode_tree (T->left, S);
-      
+
       L=recode_tree (T->right, S);
-      
+
       if (R)
 	for (a=0; a<R->nseq; a++)
 	  {
 	    T->lseq2[R->lseq[a]]=1;
 	  }
-      
+
       if (L)for (a=0; a<L->nseq; a++)
 	{
 	  T->lseq2[L->lseq[a]]=1;
 	}
-      
+
       for (a=0; a<S->nseq; a++)
 	{
 	  //don't count the root
 	  int d;
-	  
+
 	  if ( !(T->parent) || !(T->parent)->parent)d=0;
 	  else if ( T->dist==0)d=0;
 	  else d=1;
@@ -3499,7 +3499,7 @@ NT_node recode_tree (NT_node T, Sequence *S)
 	  if (T->lseq2[a])T->lseq[T->nseq++]=a;
 	  if (T->lseq2[a])T->idist[a]=(!R)?0:(R->idist[a]+((!L)?0:L->idist[a])+d);
 	  if (T->lseq2[a])T->ldist[a]=(!R)?0:R->ldist[a]+((!L)?0:L->ldist[a])+(int)(T->dist*10000);
-	  
+
 	}
     }
   return T;
@@ -3508,10 +3508,10 @@ int tree2split_list (NT_node T, int ns,int **sl, int* n)
 {
   if (!T) return 0;
   if (!sl) return 0;
-  
+
   tree2split_list (T->right, ns, sl, n);
   tree2split_list (T->left , ns, sl, n);
-  
+
   if (!T->right) return 1;
   else if (T->parent && !(T->parent)->parent)return 1;
   else if ( T->dist==0)return 1;
@@ -3528,10 +3528,10 @@ int tree2split_list (NT_node T, int ns,int **sl, int* n)
       if (t2==0) HERE ("0");
       c=(t>(ns-t))?1:0;
       sl[n[0]][ns]=t2;//Hash value for quick comparison;
-     
+
       for (a=0; a< ns; a++)sl[n[0]][a]=(c==0)?T->lseq2[a]:(1-T->lseq2[a]);
       n[0]++;
-      
+
     }
   return 1;
 }
@@ -3540,17 +3540,17 @@ NT_node display_splits (NT_node T,Sequence *S, FILE *fp)
 {
   int a;
   if (!T) return T;
-  
+
   if (!S)S=tree2seq (T,NULL);
-  
+
   display_splits (T->right,S, fp);
   display_splits (T->left, S, fp);
-  
-  
- 
+
+
+
   if (!T->right);
   else if (T->parent && !(T->parent)->parent);
-  else  
+  else
     {
       int t=0;
       for (a=0; a< S->nseq; a++)
@@ -3558,7 +3558,7 @@ NT_node display_splits (NT_node T,Sequence *S, FILE *fp)
 	  fprintf (fp, "%d", T->lseq2[a]);
 	  t+=T->lseq2[a];
 	}
-      
+
       fprintf ( fp, " %5d \n", MIN(t,((S->nseq)-t)));
     }
   return T;
@@ -3567,17 +3567,17 @@ NT_node display_leaf_nb (NT_node T, int n, FILE *fp, char * name)
 {
   int a;
   if (!T) return T;
-  
-  
+
+
   display_leaf_nb (T->right, n, fp, name);
   display_leaf_nb (T->left, n, fp, name);
-  
- 
+
+
   if (!T->isseq);
   else
     {
       NT_node P;
- 
+
       P=T->parent;
       fprintf (fp, "%s ", T->name);
       for (a=0; a< n; a++)fprintf (fp, "%d", P->lseq2[a]);
@@ -3590,12 +3590,12 @@ NT_node display_code (NT_node T, int n, FILE *fp)
 {
   int a, debug=0, t=0;
   if (!T) return T;
-  
+
   if (!T->parent)
     root4dc=0;
 
-  
-  
+
+
   if (!T->parent && debug) fprintf ( fp, "\nDISPLAY TREE: START");
   display_code (T->right, n, fp);
   display_code (T->left, n, fp);
@@ -3604,7 +3604,7 @@ NT_node display_code (NT_node T, int n, FILE *fp)
   if (!T->parent) return T;
   else if ( !(T->parent)->parent && root4dc==1)return T;
   else if ( !(T->parent)->parent && root4dc==0)root4dc=1;
-  
+
   for (a=0; a< n; a++)
     t+=T->lseq2[a];
   if ( t<=n/2)
@@ -3612,7 +3612,7 @@ NT_node display_code (NT_node T, int n, FILE *fp)
   else
     for (a=0; a< n; a++)fprintf (fp, "%d", 1-T->lseq2[a]);
   if (T->isseq && debug)fprintf (fp, "%s", T->name);
-  
+
   if (!T->parent && debug) fprintf (fp, "\nDISPLAY TREE: FINISHED");
   return T;
 }
@@ -3620,21 +3620,21 @@ NT_node display_dist (NT_node T, int n, FILE *fp)
 {
   int a;
   if (!T) return T;
-  
+
   if (!T->parent)
     root4dc=0;
-  
+
   display_dist (T->right, n, fp);
   display_dist (T->left, n, fp);
-  
+
   fprintf ( stdout, "\n");
   for ( a=0; a< n; a++)
     fprintf ( stdout, " %2d ", T->idist[a]);
   fprintf ( stdout, "\n");
-  
+
   return T;
 }
-  
+
 NT_node check_tree (NT_node T)
 {
   if (T) HERE("CHECK %s", T->name);
@@ -3642,9 +3642,9 @@ NT_node check_tree (NT_node T)
     {
       HERE ("ERROR: Empty Group");
     }
-  
+
   else if (T->isseq)return T;
-  else 
+  else
     {
       HERE ("R");
       check_tree (T->right);
@@ -3667,11 +3667,11 @@ NT_node new_get_node (NT_node T, FILE *fp)
 
   c=fgetc (fp);
   if (!T)T=declare_tree_node (100);
-  
-  
+
+
   if ( c==';')
     {
-     
+
       if (!T->right)T=T->left;
       else if (!T->left)T=T->right;
       vfree (T->parent);T->parent=NULL;
@@ -3691,7 +3691,7 @@ NT_node new_get_node (NT_node T, FILE *fp)
   else
     {
       NN=new_insert_node (T);
-      
+
       if ( c=='(')
 	{
 	  ++n;
@@ -3701,7 +3701,7 @@ NT_node new_get_node (NT_node T, FILE *fp)
 	{
 	  ungetc (c, fp);
 	  scan_name_and_dist (fp, NN->name, &NN->dist);
-	  
+
 	  NN->leaf=1;
 	  NN->isseq=1;
 	  return new_get_node (T, fp);
@@ -3712,19 +3712,19 @@ int scan_name_and_dist ( FILE *fp, char *name, float *dist)
 {
   int a, c;
   char number [1000];
-  
+
   a=0;
   c=fgetc (fp);ungetc (c, fp);
-  
-  
+
+
   if ( c==';')return 0;
-    
+
   while ((c=fgetc(fp))!=':' && c!=EOF && c!=')' && c!=';' && c!=',')
     {
       name[a++]=c;
     }
   name [a]='\0';
-  
+
   if ( c!=':')
     {
       ungetc (c, fp);
@@ -3739,9 +3739,9 @@ int scan_name_and_dist ( FILE *fp, char *name, float *dist)
 
   ungetc (c, fp);
   number[a]='\0';
-  
+
   dist[0]=atof (number);
-  
+
   return 2;
 }
 NT_node new_insert_node (NT_node T)
@@ -3777,12 +3777,12 @@ NT_node new_insert_node (NT_node T)
     }
 
   /*
-    
+
   else
     {
       NN->right=T->right;
       (T->right)->parent=NN;
-      
+
       NN->parent=T;
       T->right=NN;
       NN->left=new_declare_tree_node ();
@@ -3798,10 +3798,10 @@ NT_node new_insert_node (NT_node T)
       NN->right=T;
       P=NN->parent=T->parent;
       T->parent=NN;
-      
+
       if (P && P->right==T)P->right=NN;
       else if ( P && P->left==T)P->left=NN;
-      
+
       NN->left=new_declare_tree_node ();
       (NN->left)->parent=NN;
       return NN->left;
@@ -3814,7 +3814,7 @@ NT_node new_declare_tree_node ()
 {
 	NT_node p;
 	static int node_index;
-	p= (NT_node)vcalloc (1, sizeof ( Treenode)); 
+	p= (NT_node)vcalloc (1, sizeof ( Treenode));
 	p->left = NULL;
    	p->right = NULL;
    	p->parent = NULL;
@@ -3826,15 +3826,15 @@ NT_node new_declare_tree_node ()
    	p->name=(char*)vcalloc (MAXNAMES+1,sizeof (char));
    	p->name[0]='\0';
    	return p;
-	
+
 	}
 int new_display_tree (NT_node T, int n)
 {
   int in;
 
   in=n;
-  
-  
+
+
   if ( T->parent)fprintf (stdout, "\nNode %d: has parents)", in);
   else fprintf (stdout, "\nNode %d: NO parents)", in);
 
@@ -3844,22 +3844,22 @@ int new_display_tree (NT_node T, int n)
       n=new_display_tree (T->right, n+1);
     }
   else fprintf ( stdout, "\nNode %d No Right\n", in);
-  
+
   if ( T->left)
     {
       fprintf (stdout, "\nNode %d has Left Child", in);
       n=new_display_tree (T->left, n+1);
     }
   else fprintf ( stdout, "\nNode %d No Left\n", in);
-  
+
   if ( T->bot)
     {
       fprintf (stdout, "\nNode %d has Bot Child", in);
       n=new_display_tree (T->bot, n+1);
     }
   else fprintf ( stdout, "\nNode %d No Bot\n", in);
-	
-  
+
+
   if (T->isseq)
     {
       fprintf (stdout, "\nNode %d is %s", in, T->name);
@@ -3871,13 +3871,13 @@ int display_tree_duplicates (NT_node T)
   static Sequence *S;
   static int *dup;
   int a, b;
-  
+
   free_sequence (S, -1);
   vfree (dup);
-  
+
   S=tree2seq (T, NULL);
   dup=vcalloc ( S->nseq, sizeof (int));
-  
+
   for (a=0; a< S->nseq-1; a++)
     for ( b=a+1; b<S->nseq; b++)
       {
@@ -3901,7 +3901,7 @@ int tree_contains_duplicates (NT_node T)
 {
   static Sequence *S;
   int a, b;
-  
+
   free_sequence (S, -1);
 
   S=tree2seq (T, NULL);
@@ -3912,18 +3912,18 @@ int tree_contains_duplicates (NT_node T)
       }
   return 0;
 }
- 
+
 float display_avg_bootstrap ( NT_node T)
 {
   float tot;
   int n;
-  
+
   tot=tree2tot_dist (T, BOOTSTRAP);
   n=tree2n_branches (T, BOOTSTRAP);
   fprintf ( stdout, "\nAVERAGE BOOTSRAP: %.3f on %d Branches\n", (n>0)?tot/n:0, n);
   return (n>0)?tot/n:0;
 }
-	    
+
 
 int tree2n_branches(NT_node T, int mode)
 {
@@ -3940,16 +3940,16 @@ int tree2n_branches(NT_node T, int mode)
 
   return n;
 }
-  
+
 float tree2tot_dist ( NT_node T, int mode)
 {
   float t=0;
-  
-  
+
+
   if ( !T)return 0;
-  
+
   if ( !T->parent);
-  else if  ((T->isseq && mode !=BOOTSTRAP) || !T->isseq) 
+  else if  ((T->isseq && mode !=BOOTSTRAP) || !T->isseq)
     {
       if ( mode == BOOTSTRAP && T->bootstrap!=0)t+=T->bootstrap;
       else t+=T->dist;
@@ -3969,11 +3969,11 @@ int node_sort ( char *name, NT_node T)
   int **array, a;
   Sequence *S;
   while (T->parent)T=T->parent;
-  
+
   nseq=tree2nseq (T);
   array=declare_int (nseq, 2);
   N=tree2node (name, T);
-  
+
   if (N==NULL)printf_exit (EXIT_FAILURE, stderr, "ERROR: %s is not in the tree [FATAL:%s]\n", name, PROGRAM);
   array=display_tree_from_node (N,0,0, array);
   qsort ( array, nseq, sizeof (int**), cmp_tree_array);
@@ -3994,20 +3994,20 @@ NT_node tree2node (char *name, NT_node T)
   NT_node T1, T2;
   if ( !T) return T;
   else if (T->leaf && strm (T->name, name)) return T;
-  else 
+  else
     {
 
       T1=tree2node ( name, T->right);
       T2=tree2node ( name, T->left);
       return (T1>T2)?T1:T2;
   }
-  
+
 }
 static int ni;
 NT_node * tree2node_list (NT_node T, NT_node *L)
 {
-  
-  
+
+
   if (!T) return NULL;
   if (!L) {ni=0;L=vcalloc (tree2nnode(T)+1, sizeof (NT_node));}
   tree2node_list (T->left, L);
@@ -4015,21 +4015,21 @@ NT_node * tree2node_list (NT_node T, NT_node *L)
   L[ni++]=T;
   return L;
 }
-  
-  
-  
+
+
+
 int ** display_tree_from_node (NT_node T, int up, int down, int **array)
 {
-  
+
   if (!T || T->visited)return array;
-  
+
   T->visited=1;
   if (T->isseq)
     {
       array[T->lseq[0]][0]=T->lseq[0];
       array[T->lseq[0]][1]=up;
       array[T->lseq[0]][2]=down;
-      
+
     }
   else
     {
@@ -4057,9 +4057,9 @@ NT_node * read_tree_list (Sequence *S)
 {
   NT_node *T;
   int a;
-  
+
   T=vcalloc ( S->nseq+1, sizeof (NT_node));
-  
+
   for ( a=0; a<S->nseq; a++)
     {
       char *fname;
@@ -4067,7 +4067,7 @@ NT_node * read_tree_list (Sequence *S)
 	fname=S->name[a];
       else
 	string2file ((fname=vtmpnam(NULL)), "w", S->seq[a]);
-      
+
       T[a]=main_read_tree (fname);
       T[a]->file=vcalloc (strlen (S->name[a])+1, sizeof (char));
       sprintf (T[a]->file, "%s", S->name[a]);
@@ -4083,22 +4083,22 @@ int treelist2dmat ( Sequence *S)
   Sequence *TS;
 
 
-  
+
   n=S->nseq;
   T=read_tree_list (S);
   TS=tree2seq(T[0], NULL);
   fprintf (stdout, "\n%d", S->nseq);
   for (a=0; a<n; a++)
     {
-      fprintf ( stdout,"\n%-10s ", S->name[a]); 
+      fprintf ( stdout,"\n%-10s ", S->name[a]);
       for ( b=0; b<n; b++)
 	{
 	  v=100-simple_tree_cmp (T[a], T[b], TS, 1);
 	  fprintf ( stdout, "%.4f ", v);
 	}
-      
+
     }
-  
+
   myexit (EXIT_SUCCESS);
   return 0;
 }
@@ -4107,19 +4107,19 @@ int treelist2leafgroup ( Sequence *S, Sequence *TS, char *taxon)
 {
   NT_node *T;
   int n=0,nseq, a, c,s;
-  
+
   int *used;
-  
+
   char *split_file, *sorted_split_file;
   char *buf=NULL;
   FILE *fp;
   char *name, *fname, *group, *ref_group, *list;
-  
 
-  
+
+
   T=read_tree_list (S);
   if (!TS)TS=tree2seq(T[0], NULL);
-  
+
   name=vcalloc (1000, sizeof (char));
   fname=vcalloc (1000, sizeof (char));
   group=vcalloc (TS->nseq*10, sizeof (char));
@@ -4127,40 +4127,40 @@ int treelist2leafgroup ( Sequence *S, Sequence *TS, char *taxon)
   list=vcalloc (100*S->nseq, sizeof (char));
   split_file=vtmpnam (NULL);
   sorted_split_file =vtmpnam (NULL);
-  
+
   n=S->nseq;
   used=vcalloc (n, sizeof (int));
- 
+
   T=read_tree_list (S);
   if (!TS)TS=tree2seq(T[0], NULL);
   nseq=TS->nseq;
   fp=vfopen (split_file, "w");
-  
+
   for ( a=0; a< S->nseq; a++)
     {
-      
+
       T[a]=prune_tree  (T[a], TS);
       T[a]=recode_tree (T[a], TS);
       display_leaf_nb (T[a], TS->nseq,fp, S->name[a]);
     }
   vfclose (fp);
-  
-  
+
+
   for (s=0; s< TS->nseq; s++)
     {
       int i;
-      
+
 
       if (taxon && !(strm (taxon, TS->name[s]) ))continue;
       else
 	printf_system ( "cat %s | grep %s| sort > %s::IGNORE_FAILURE::", split_file,TS->name[s], sorted_split_file);
-     
+
       vfopen (sorted_split_file, "r");
       ref_group[0]=group[0]='\0';
-      
+
       while ( (c=fgetc (fp))!=EOF)
 	{
-	  
+
 	  ungetc (c, fp);
 	  buf=vfgets (buf, fp);
 	  sscanf (buf, "%s %s %s\n", name, group, fname);
@@ -4168,7 +4168,7 @@ int treelist2leafgroup ( Sequence *S, Sequence *TS, char *taxon)
 	  if ( !ref_group[0]|| !strm (group, ref_group))
 	    {
 	      if (ref_group[0])
-		
+
 		{fprintf (stdout, "%s %6.2f %s",name, (((float)n*100)/(float)S->nseq), ref_group);
 		  for (i=0,a=0; a<nseq; a++)
 		    if (ref_group[a]=='1' && a!=s)fprintf (stdout, " %s ", TS->name[a]);
@@ -4195,7 +4195,7 @@ int treelist2leafgroup ( Sequence *S, Sequence *TS, char *taxon)
       fprintf ( stdout, "\n");
       vfclose (fp);
     }
-  
+
   myexit (0);
 }
 int count_tree_groups( Sequence *LIST, char *group_file)
@@ -4218,18 +4218,18 @@ int count_tree_groups( Sequence *LIST, char *group_file)
     }
 
 
-  
+
   gs=vcalloc (2, sizeof (int));
   list=declare_int (LIST->nseq*S->nseq*2, S->nseq+1);
-  
+
   blist=declare_int (2, S->nseq+1);
   for ( n=0, a=0; a< LIST->nseq; a++)
     {
       int n2=0;
       tree2split_list (T[a], S->nseq, list+n, &n2);
       n+=n2;
-      
-      
+
+
       for (b=0; b<n2; b++)
 	{
 	  for ( c=0; c<S->nseq; c++)
@@ -4237,18 +4237,18 @@ int count_tree_groups( Sequence *LIST, char *group_file)
 	}
       n+=n2;
     }
-  
+
   if ( group_file)
     {
       rlist=declare_arrayN(3, sizeof (int), 2,LIST->nseq*S->nseq, S->nseq+1);
       l=file2list (group_file, " ");
-      
+
       while (l[ng])
 	{
 	  int i, b, g;
 	  if (!strstr (l[ng][1], "group")){ng++;continue;}
 	  g=(strm (l[ng][1], "group2"))?0:1;
-	  
+
 	  for (b=2; b<atoi (l[ng][0]); b++)
 	    {
 	      if ((i=name_is_in_list(l[ng][b], S->name, S->nseq, 100))!=-1)rlist[g][gs[g]][i]=1;
@@ -4262,13 +4262,13 @@ int count_tree_groups( Sequence *LIST, char *group_file)
       rlist=vcalloc ( 2, sizeof (int**));
       rlist[1]=count_int_strings (list, n, S->nseq);
       gs[1]=read_array_size_new (rlist[1]);
-      
+
       rlist[0]=declare_int (S->nseq, S->nseq);
       gs[0]=S->nseq;
       for ( a=0; a<S->nseq; a++)rlist[0][a][a]=1;
     }
- 
-  
+
+
   for (wo=w=0,a=0; a<gs[0]; a++)
     {
       for (c=0; c< gs[1]; c++)
@@ -4277,9 +4277,9 @@ int count_tree_groups( Sequence *LIST, char *group_file)
 	  for (b=0; b<S->nseq; b++)
 	    {
 	      blist[0][b]=blist[1][b]=rlist[1][c][b];
-	      blist[0][b]=(rlist[0][a][b]==1)?1:blist[0][b]; //WITH GROUP 1 
+	      blist[0][b]=(rlist[0][a][b]==1)?1:blist[0][b]; //WITH GROUP 1
 	      blist[1][b]=(rlist[0][a][b]==1)?0:blist[1][b]; //wiTHOUT gROUP 1
-	      
+
 	    }
 	  for (b=0; b<n; b++)
 	    {
@@ -4288,14 +4288,14 @@ int count_tree_groups( Sequence *LIST, char *group_file)
 	      w+=x1;
 	      x2=(memcmp (blist[1], list[b], sizeof (int)*S->nseq)==0)?1:0;
 	      wo+=x2;
-	      
+
 	    }
 	  fprintf ( stdout, "\n%d ", MIN(wo, w));
 	  fprintf ( stdout, "(");
 	  for (b=0; b<S->nseq; b++)if (rlist[1][c][b])fprintf ( stdout, "%s ",S->name[b]);
 	  fprintf ( stdout, ") +/- (");
 	  for (b=0; b<S->nseq; b++)if (rlist[0][a][b])fprintf ( stdout, "%s ",S->name[b]);
-	  
+
 	  fprintf (stdout , ") + %d - %d Delta %d", w, wo, FABS((wo-w)));
 	}
     }
@@ -4309,7 +4309,7 @@ NT_node split2tree ( NT_node RT,Sequence *LIST, char *param)
   Alignment *A;
   S=count_splits (RT, LIST, param);
   A=seq2aln ((S[0])->S,NULL, KEEP_GAP);
-  
+
   return split2upgma_tree (S,A, A->nseq, "no");
 }
 
@@ -4329,28 +4329,28 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
   //+count_splits _NB_x_FILTER_<file>
   //_<file is a fasta file containing the list of species to keep>
   if (!def_param)def_param=vcalloc ( 10, sizeof (char));
-  
+
 
 
   if (!param)param=def_param;
-  
- 
+
+
   strget_param (param, "_NB_", "0", "%d", &nb);
   strget_param (param, "_TLIST_", "0", "%d", &tlist);
   strget_param (param, "_ORDER_", "NO", "%s", order);
   strget_param (param, "_FILTER_", "NO", "%s", filter);
-  
+
   fprintf ( stderr, "\nREAD TREE LIST [%d Trees...", LIST->nseq);
   T=read_tree_list (LIST);
   fprintf ( stderr, "..]");
-  
+
   if ( !(strm (order, "NO")))
     {
       if (is_newick (order))
 	{
 	  OrderT=main_read_tree (order);
 	}
-      else 
+      else
 	{
 	  S=main_read_seq (order);
 	}
@@ -4360,10 +4360,10 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
       OrderT=(RT)?RT:T[0];
     }
   fprintf ( stderr, "\nTrees Ordered according to: %s", (strm (order, "NO"))?"First Tree":order);
-  
-  
+
+
   if (!S)S=tree2seq(OrderT, NULL);
-  
+
   for (a=0; a<S->nseq; a++)
     {
       fprintf ( stdout, "\n#ORDER %15s : %3d", S->name[a], a+1);
@@ -4372,7 +4372,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
     {
       Sequence *F;
       int i;
-      
+
       F=main_read_seq (filter);
       cache=vcalloc (S->nseq, sizeof (int));
       for ( a=0; a<F->nseq; a++)
@@ -4382,27 +4382,27 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
 	}
       free_sequence (F, -1);
     }
-  
+
   main_buf=vcalloc ( S->nseq*(STRING+1), sizeof(int));
 
   list1=declare_int (S->nseq*3, S->nseq+1);
   list2=declare_int (S->nseq*3, S->nseq+1);
-  
+
   for ( a=0; a< LIST->nseq; a++)
     {
       T[a]=prune_tree  (T[a], S);
       T[a]=recode_tree (T[a], S);
     }
-  
 
-  
+
+
   if (!RT)
     {
       char *buf;
       int i,nl;
-      
+
       in=vtmpnam (NULL);in2=vtmpnam(NULL); out=vtmpnam (NULL);
-      
+
       fp=vfopen (in, "w");
       fp2=vfopen (in2, "w");
       for ( a=0; a< LIST->nseq; a++)
@@ -4417,7 +4417,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
 	      for (c=0; c< S->nseq; c++)
 		{fprintf (fp, "%d", 1-list2[b][c]);}
 	      fprintf (fp, "\n");
-	      
+
 	      for (c=0; c< S->nseq; c++)
 		{fprintf (fp2, "%d", list2[b][c]);}
 	      fprintf (fp2, " ");
@@ -4428,11 +4428,11 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
 	}
       vfclose (fp2);
       vfclose (fp);
-     
+
       count_strings_in_file (in, out);
       nl=count_n_line_in_file(out);
       list1=declare_int (nl+1, S->nseq+2);
-      
+
       fp=vfopen (out, "r");
       n1=0;
       buf=vcalloc (measure_longest_line_in_file (out)+1, sizeof (char));
@@ -4446,7 +4446,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
     }
   else
     {
-     
+
       RT=prune_tree  (RT, S);
       RT=recode_tree (RT, S);
       n1=0;
@@ -4466,22 +4466,22 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
 		    }
 		  list1[b][S->nseq+1]+=(di==0 || di== S->nseq)?1:0;
 		}
-	      
+
 	    }
 	}
     }
   SL=vcalloc ( n1+1, sizeof (Split*));
-  
+
   for (a=0; a<n1; a++)
     {
       int s1, s2;
       int cont=1;
       if (nb)fprintf ( stdout, "\nSPLIT: %d and its Neighborhood +/^- %d\n", a+1, nb);
-      
+
       if (cache)
 	for (b=0; b<S->nseq; b++)if (cache[b]!=list1[a][b])cont=0;
       if (!cont) continue;
-      
+
       SL[a]=print_split (a, list1, LIST, S, main_buf, (tlist==1)?in2:NULL);
       for (b=0; b<n1; b++)
 	{
@@ -4495,7 +4495,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
 		  s2+=list1[a][c];
 		  d+=(list1[a][c]!=list1[b][c])?1:0;
 		}
-	      
+
 	    }
 	  if (d<=nb &&((s1==s2)|| ((S->nseq-s1)==s2)))print_split (b, list1, LIST, S, main_buf, (tlist==1)?in2:NULL);
 	}
@@ -4509,21 +4509,21 @@ Split* print_split ( int a, int **list1, Sequence *LIST, Sequence *S, char *buf,
   {
     int f1,t,b;
     Split *SP=NULL;
-    
-    
+
+
 
     SP=declare_split (S->nseq, LIST->nseq);
-    
+
     fprintf ( stdout, "\n>");
     for (t=0,b=0; b<S->nseq; b++){fprintf ( stdout, "%d", list1[a][b]);t+=list1[a][b];SP->split[b]='0'+list1[a][b];}
     fprintf ( stdout, " NumberSplit %5d SplitSize %5d Score %5.2f %s ", list1[a][S->nseq+1],t, (float)(list1[a][S->nseq+1]*100)/LIST->nseq, (buf)?buf:"");
     SP->n= list1[a][S->nseq+1];
     SP->score=(float)(list1[a][S->nseq+1]*100)/LIST->nseq;
     SP->S=S;
-    
+
     for (f1=1,b=0; b< S->nseq; b++)
       {
-	
+
 	if (list1[a][b])
 	  {
 	    if (f1==1)fprintf ( stdout, "(");
@@ -4542,7 +4542,7 @@ Split* print_split ( int a, int **list1, Sequence *LIST, Sequence *S, char *buf,
 	fp=vfopen (split_file, "r");
 	while ( (c=fgetc(fp))!=EOF)
 	  {
-	    
+
 	    c=ungetc (c, fp);
 	    buf=vfgets (buf, fp);
 	    if ( strstr (buf, SP->split))
@@ -4555,7 +4555,7 @@ Split* print_split ( int a, int **list1, Sequence *LIST, Sequence *S, char *buf,
 	  }
 	vfclose (fp);
       }
-    
+
     return SP;
   }
 Split * declare_split (int nseq, int ntrees)
@@ -4575,42 +4575,42 @@ int treelist2splits( Sequence *S, Sequence *TS)
   char *split_file, *sorted_split_file;
   char *buf=NULL, *ref_buf=NULL;
   FILE *fp;
-  
+
   split_file=vtmpnam (NULL);
   sorted_split_file =vtmpnam (NULL);
-  
+
   n=S->nseq;
   used=vcalloc (n, sizeof (int));
- 
+
   T=read_tree_list (S);
   if (!TS)TS=tree2seq(T[0], NULL);
   nseq=TS->nseq;
   fp=vfopen (split_file, "w");
-  
-  
+
+
   for ( a=0; a< S->nseq; a++)
     {
-      
+
       T[a]=prune_tree  (T[a], TS);
       T[a]=recode_tree (T[a], TS);
       display_splits (T[a], TS,fp);
     }
-  
+
   vfclose (fp);
   printf_system ("cp %s split_file::IGNORE_FAILURE::", split_file);
   printf_system ( "cat %s | grep 1| sort > %s::IGNORE_FAILURE::", split_file, sorted_split_file);
-  
+
   fp=vfopen (sorted_split_file, "r");
   fprintf (stdout, "LEGEND: <#occurences> <coded split> <min group size> <(group1,)> <(group2,>\n");
-  
+
   for ( a=0; a<TS->nseq; a++)fprintf ( stdout, "SEQ_INDEX %d %s\n", a+1, TS->name[a]);
   while ( (c=fgetc (fp))!=EOF)
     {
-      
+
       ungetc (c, fp);
       buf=vfgets (buf, fp);
       buf [strlen(buf)-1]='\0';
-      
+
       if ( ref_buf==NULL)
 	{
 	  ref_buf=vcalloc (strlen (buf)+1, sizeof (char));
@@ -4636,7 +4636,7 @@ int treelist2splits( Sequence *S, Sequence *TS)
 		fprintf (stdout, "%s", TS->name[a]);
 		i=1;
 	      }
-		  
+
 	  fprintf (stdout, ")\n");
 	  sprintf ( ref_buf, "%s", buf);
 	  n=1;
@@ -4647,8 +4647,8 @@ int treelist2splits( Sequence *S, Sequence *TS)
 	}
     }
   vfclose (fp);
-      
-  
+
+
   myexit (0);
 }
 
@@ -4656,27 +4656,27 @@ int treelist2splits_old ( Sequence *S, Sequence *TS)
 {
   NT_node *T;
   int n=0,nseq, a,c;
-  
+
   int *used;
-  
+
   char *split_file, *sorted_split_file;
   char *buf=NULL, *ref_buf=NULL;
   FILE *fp;
-  
+
   split_file=vtmpnam (NULL);
   sorted_split_file =vtmpnam (NULL);
-  
+
   n=S->nseq;
   used=vcalloc (n, sizeof (int));
- 
+
   T=read_tree_list (S);
   if (!TS)TS=tree2seq(T[0], NULL);
   nseq=TS->nseq;
   fp=vfopen (split_file, "w");
-  
+
   for ( a=0; a< S->nseq; a++)
     {
-      
+
       T[a]=prune_tree  (T[a], TS);
       T[a]=recode_tree (T[a], TS);
       display_leaf_nb (T[a], TS->nseq,fp, S->name[a]);
@@ -4685,16 +4685,16 @@ int treelist2splits_old ( Sequence *S, Sequence *TS)
   printf_system ("cp %s split_file::IGNORE_FAILURE::", split_file);myexit (0);
 
   printf_system ( "cat %s | grep 1| sort > %s::IGNORE_FAILURE::", split_file, sorted_split_file);
-  
+
   vfopen (sorted_split_file, "r");
 
   while ( (c=fgetc (fp))!=EOF)
     {
-      
+
       ungetc (c, fp);
       buf=vfgets (buf, fp);
       buf [strlen(buf)-1]='\0';
-      
+
       if ( ref_buf==NULL)
 	{
 	  ref_buf=vcalloc (strlen (buf)+1, sizeof (char));
@@ -4720,7 +4720,7 @@ int treelist2splits_old ( Sequence *S, Sequence *TS)
 		fprintf (stdout, "%s", TS->name[a]);
 		i=1;
 	      }
-		  
+
 	  fprintf (stdout, ")\n");
 	  sprintf ( ref_buf, "%s", buf);
 	  n=1;
@@ -4731,8 +4731,8 @@ int treelist2splits_old ( Sequence *S, Sequence *TS)
 	}
     }
   vfclose (fp);
-      
-  
+
+
   myexit (0);
 }
 
@@ -4750,7 +4750,7 @@ NT_node *treelist2prune_treelist (Sequence *S, Sequence *TS, FILE *out)
 	{
 	  ;
 	}
-      else 
+      else
 	{
 	  char *s;
 	  T[b]=T[a];
@@ -4759,12 +4759,12 @@ NT_node *treelist2prune_treelist (Sequence *S, Sequence *TS, FILE *out)
 	  s=tree2string (T[a]);
 	  S->seq[b]=vrealloc (S->seq[b], (strlen (s)+1)*sizeof (char));
 	  sprintf (S->seq[b], "%s",s);
-	  sprintf (S->seq_comment[b], " NSPECIES: %d", TS->nseq); 
+	  sprintf (S->seq_comment[b], " NSPECIES: %d", TS->nseq);
 	  vfree (s);
 
 	  b++;
 	}
-      
+
     }
 
   S->nseq=b;
@@ -4784,13 +4784,13 @@ int treelist2frame (Sequence *S, Sequence *TS)
 {
   int n, a, b, c,d, **r, **order;
   Sequence *temp;
-  
+
   temp=duplicate_sequence (S);
   order= treelist2lti (temp, TS,0,stdout);
-  
+
   TS=reorder_seq_2 (TS, order, 0, TS->nseq);
   n=TS->nseq;
-  
+
   for (a=3; a<n; a++)
     {
       NT_node tree;
@@ -4802,7 +4802,7 @@ int treelist2frame (Sequence *S, Sequence *TS)
       tree=main_read_tree (temp->name[r[0][0]]);
       tree=prune_tree (tree, TS);
       print_tree (tree, "newick",stdout);
-      
+
       free_int (r, -1);
       free_sequence (temp,-1);
     }
@@ -4817,7 +4817,7 @@ int** treelist2lti2 ( Sequence *S, Sequence *TS, int ngb, FILE *out)
   score=declare_int (TS->nseq, 3);
   order=declare_int (TS->nseq, 2);
   vsrand (0);
-  
+
   for (a=0; a<50; a++)
     {
       Sequence *seq, *trees;
@@ -4828,7 +4828,7 @@ int** treelist2lti2 ( Sequence *S, Sequence *TS, int ngb, FILE *out)
       sort_int (order, 2, 1, 0, TS->nseq-1);
       seq=reorder_seq_2(seq, order, 0,5);
       r=treelist2groups (trees,seq, NULL, NULL);
-      
+
       for (b=0; b<5; b++)
 	{
 	  score[order[b][0]][1]+=r[0][1];
@@ -4838,9 +4838,9 @@ int** treelist2lti2 ( Sequence *S, Sequence *TS, int ngb, FILE *out)
       free_int (r, -1);
       free_sequence (seq, -1);
       free_sequence (trees, -1);
-      
+
     }
-  
+
   for ( a=0; a< TS->nseq; a++)
     {
       score[a][0]=a;
@@ -4848,7 +4848,7 @@ int** treelist2lti2 ( Sequence *S, Sequence *TS, int ngb, FILE *out)
       score[a][1]/=(score[a][2])?score[a][2]:1;
     }
   sort_int_inv (score, 3, 1, 0, TS->nseq-1);
-  
+
   return score;
 }
 
@@ -4859,11 +4859,11 @@ int** treelist2lti ( Sequence *S, Sequence *TS, int ngb, FILE *out)
   int a,b, c, d, ****dist, i;
   float score0=0, score1=0;
   int **result;
-  
+
 
   i=S->nseq;
   T=treelist2prune_treelist (S, TS,NULL);
-  
+
   if (!ngb)ngb=TS->nseq*2;
   dist=vcalloc ( S->nseq, sizeof (int****));
   result=declare_int (TS->nseq, 2);
@@ -4914,8 +4914,8 @@ int** treelist2lti ( Sequence *S, Sequence *TS, int ngb, FILE *out)
 int ***tree2dist (NT_node T, Sequence *S, int ***d)
 {
   int *l0, *r0,*l1, *r1, a, b;
-  
-  
+
+
   if (!T) return d;
   if (!S)S=tree2seq(T, NULL);
   if (!d)
@@ -4924,29 +4924,29 @@ int ***tree2dist (NT_node T, Sequence *S, int ***d)
       T=prune_tree(T, S);
       T=recode_tree (T, S);
     }
-  
+
   if (!T->left)return d;
   if (!T->right) return d;
-  
+
   l0=(T->left)->idist;
   r0=(T->right)->idist;
 
   l1=(T->left)->ldist;
   r1=(T->right)->ldist;
-  
-  
-  
+
+
+
   for (a=0; a< S->nseq; a++)
     for (b=0; b<S->nseq; b++)
       {
 	if (l0[a]>0 && r0[b]>0)d[0][a][b]=d[0][b][a]=l0[a]+r0[b];
 	if (l0[a]>0 && r0[b]>0)d[1][a][b]=d[1][b][a]=l1[a]+r1[b];
       }
-  
+
   d=tree2dist (T->left, S, d);
   d=tree2dist (T->right, S, d);
-  
- 
+
+
   return d;
 }
 
@@ -4954,22 +4954,22 @@ int ***tree2dist (NT_node T, Sequence *S, int ***d)
 
 int **tree2dist_split ( NT_node T, Sequence *S, int **dist)
 {
-  
+
   FILE *fp;
   int a, b, c, n=0;
   char *buf=NULL, **list=NULL, *split_file;
 
 
   if (!S)S=tree2seq(T, NULL);
-  
+
   T=prune_tree  (T, S);
   T=recode_tree (T, S);
-  
+
   split_file=vtmpnam (NULL);
   fp=vfopen (split_file, "w");
   display_code (T, S->nseq,fp);
   vfclose (fp);
- 
+
   list=declare_char (2*S->nseq, S->nseq+1);
   fp=vfopen (split_file, "r");
 
@@ -4983,8 +4983,8 @@ int **tree2dist_split ( NT_node T, Sequence *S, int **dist)
     for ( b=0; b<S->nseq; b++)
       for (c=0; c<n; c++)
 	if (list[c][a]!=list[c][b])dist[a][b]++;
-  
- 
+
+
   return dist;
 }
 
@@ -4999,22 +4999,22 @@ int** treelist2groups (Sequence *S, Sequence *TS, char *star_node, FILE *out)
    int cov=100;
    int **results;
 
-   
+
    i=S->nseq;
    T=treelist2prune_treelist (S, TS,NULL);
    nsn=(star_node)?atoi(star_node):0;
-   
+
    results=declare_int (S->nseq+1, 2);
-   
+
    if (nsn)
      {
        for (a=0; a< S->nseq; a++)tree2star_nodes(T[a],nsn);
      }
-   
+
    used=vcalloc (S->nseq, sizeof (int));
    for (ntop=0,a=0; a<S->nseq; a++)
      {
-       
+
        if (used[a]==0)
 	 {
 	   ntop++;
@@ -5026,7 +5026,7 @@ int** treelist2groups (Sequence *S, Sequence *TS, char *star_node, FILE *out)
        for ( b=0; b<S->nseq; b++)
 	 {
 	   v=0;
-	   
+
 	   v=(int)simple_tree_cmp (T[a], T[b], TS, 1);
 	   if ( v==100)
 	     {
@@ -5036,7 +5036,7 @@ int** treelist2groups (Sequence *S, Sequence *TS, char *star_node, FILE *out)
 	       tot++;
 	     }
 	 }
-       
+
        if (out)fprintf ( stdout, "__ N=%d\n", tot-1);
      }
 
@@ -5067,23 +5067,23 @@ float simple_tree_cmp (NT_node T1, NT_node T2,Sequence *S, int mode)
 {
   Tree_sim *TS1, *TS2;
   float t, w, l, n;
-  
+
   TS1=vcalloc (1, sizeof (Tree_sim));
   TS2=vcalloc (1, sizeof (Tree_sim));
-  
-  
+
+
   T1=recode_tree(T1, S);
   T2=recode_tree(T2, S);
-  
+
   n=new_compare_trees ( T1, T2, S->nseq, TS1);
   new_compare_trees ( T2, T1, S->nseq, TS2);
-  
+
 
 
   t=(TS1->uw+TS2->uw)*100/(TS1->max_uw+TS2->max_uw);
   w=(TS1->w+TS2->w)*100/(TS1->max_w+TS2->max_w);
   l=(TS1->d+TS2->d)*100/(TS1->max_d+TS2->max_d);
-  
+
   vfree (TS1); vfree (TS2);
   if ( mode ==1)return t;
   else if (mode ==2) return w;
@@ -5099,13 +5099,13 @@ int **treelist2avg_treecmp (NT_node *L, char *file)
 {
   int a, b, n;
   int **score;
-  
+
   if (file) L=read_tree_list (main_read_seq(file));
   n=treelist2n (L);
-  
+
   score=declare_int (n, 2);
   for (a=0; a<n; a++)score[a][0]=a;
-  
+
   for (a=0; a<n-1; a++)
     {
       output_completion (stderr,a,n,1, "Tree Cmp");
@@ -5129,9 +5129,9 @@ int treelist_file2consense (char *tree_file, char *outtree, char *outfile)
   static char *tmp_outtree;
   static char *tmp_outfile;
   FILE *fp;
-  int flag1=0; 
+  int flag1=0;
   int flag2=0;
-  
+
   if (!command)
     {
       command=vtmpnam (NULL);
@@ -5139,12 +5139,12 @@ int treelist_file2consense (char *tree_file, char *outtree, char *outfile)
       tmp_outfile=vtmpnam (NULL);
     }
   if (!check_program_is_installed ("consense",NULL,NULL,"www.phylip.com",NO_REPORT))return 0;
-  
+
   fp=vfopen (command, "w");fprintf ( fp, "%s\nY\n", tree_file);fclose (fp);
   if ( check_file_exists ("outtree")){flag1=1;printf_system ("mv outtree %s::IGNORE_FAILURE::", tmp_outtree);}
   if ( check_file_exists ("outfile")){flag2=1;printf_system ("mv outfile %s::IGNORE_FAILURE::", tmp_outfile);}
   printf_system ("consense <%s > /dev/null 2>/dev/null::IGNORE_FAILURE::", command);
-  
+
   if ( outtree)printf_system ("mv outtree %s::IGNORE_FAILURE::", outtree);
   remove ("outtree");
   if ( outfile)printf_system ("mv outfile %s::IGNORE_FAILURE::", outfile);
@@ -5153,27 +5153,27 @@ int treelist_file2consense (char *tree_file, char *outtree, char *outfile)
   if (flag2)printf_system ("mv %s outfile::IGNORE_FAILURE::", tmp_outfile);
   return 1;
 }
-  
-  
+
+
 NT_node treelist2filtered_bootstrap ( NT_node *L,char *file, int **score, float t)
 {
   NT_node BT, *L2;
   int n,a;
- 
+
   if (t==1 || t==0 || !score)return treelist2bootstrap (L, file);
- 
+
   if (file)L=read_tree_list (main_read_seq(file));
 
   n=treelist2n(L)*t;
 
   if (n==0) return NULL;
-  
+
   L2=vcalloc ( n+1, sizeof (NT_node));
   for (a=0; a<n; a++)
     L2[a]=L[score[a][0]];
-    
+
   BT=treelist2bootstrap (L2, NULL);
-  
+
   vfree (L2);
   if (file)free_treelist(L);
   return BT;
@@ -5188,22 +5188,22 @@ NT_node treelist2bootstrap ( NT_node *L, char *file)
   if (!file)
     {
       file=vtmpnam (NULL);
-      vfclose (print_tree_list (L,"newick", vfopen (file, "w"))); 
+      vfclose (print_tree_list (L,"newick", vfopen (file, "w")));
     }
- 
+
   outfile=vtmpnam (NULL);
- 
+
   printf_system( "msa2bootstrap.pl -i %s -o %s -input tree >/dev/null 2>/dev/null", file, outfile);
- 
+
   T=main_read_tree (outfile);
   T=tree_dist2normalized_tree_dist (T,treelist2n(L));
-  
+
 
   return T;
 }
 
 
-  
+
 Sequence * treelist2seq (Sequence *S)
 {
   int a, b, c, n, i;
@@ -5212,10 +5212,10 @@ Sequence * treelist2seq (Sequence *S)
   Sequence *TS;
   char *fname;
   FILE *fp;
-  
+
   name=vcalloc (1, sizeof (char*));
   fp=vfopen ((fname=vtmpnam (NULL)), "w");
- 
+
   T=read_tree_list (S);
   for (n=0,a=0; a< S->nseq; a++)
     {
@@ -5234,7 +5234,7 @@ Sequence * treelist2seq (Sequence *S)
       free_sequence(TS, TS->nseq);
       free_tree (T[a]);
     }
-  
+
   vfclose (fp);
   vfree (T);
   return get_fasta_sequence (fname, NULL);
@@ -5250,20 +5250,20 @@ Sequence * treelist2sub_seq ( Sequence *S, int f)
   Sequence *FS, *TS;
   FILE *fp;
   if (!f)return treelist2seq(S);
-  
+
 
   //keep as many taxons as possible so that f% of the trees are kept
   //1: count the frequency of each taxon
-  
+
   FS=treelist2seq (S);
   maxnseq=FS->nseq;
-  
+
   count=declare_int (maxnseq, 3);
   grid=declare_int (S->nseq,maxnseq+1);
   T=read_tree_list (S);
-  
 
-  
+
+
   for (a=0; a<FS->nseq; a++){count[a][0]=a;count[a][2]=1;}
   for (n=0,a=0; a< S->nseq; a++)
     {
@@ -5280,7 +5280,7 @@ Sequence * treelist2sub_seq ( Sequence *S, int f)
     }
   vfree (T);
   sort_int ( count,3,1, 0, maxnseq-1);
-  
+
   for (a=0; a<maxnseq; a++)
     {
       count[a][2]=0;
@@ -5302,7 +5302,7 @@ Sequence * treelist2sub_seq ( Sequence *S, int f)
       if ( tot>=f)break;
     }
   if (tot<f)return NULL;
-  
+
   fname=vtmpnam (NULL);
   fp=vfopen (fname, "w");
   for (a=0; a<maxnseq; a++)
@@ -5310,12 +5310,12 @@ Sequence * treelist2sub_seq ( Sequence *S, int f)
       if (count[a][2])
 	{
 	  fprintf ( fp, ">%s LIMIT: %d %%\n", FS->name[count[a][0]], f);
-	  
+
 	}
     }
   vfclose (fp);
-  free_int (grid, -1); free_int (count, -1); 
+  free_int (grid, -1); free_int (count, -1);
   free_sequence (FS, FS->nseq);
-  
+
   return get_fasta_sequence (fname, NULL);
 }
