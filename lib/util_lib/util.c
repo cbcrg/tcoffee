@@ -4614,8 +4614,8 @@ char *get_tmp_4_tcoffee ()
 
       //now that rough location is decided, create the subdir structure
 
-	if (getppid() != getsid())
-       //if (is_rootpid())
+// 	if (getppid() != getsid())
+   if (is_rootpid())
 	{
 	  sprintf (buf, "%s/t_coffee.tmp/tmp.%s.%d/", tmp_4_tcoffee,host,getpid());
 	  sprintf (tmp_4_tcoffee, "%s", buf);
