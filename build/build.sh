@@ -126,7 +126,7 @@ set -o errexit
 # other common variables 
 #
 SANDBOX=$WORKSPACE/sandbox
-PERLM=$WORKSPACE/perl
+PERLM=$SANDBOX/perl
 
 _SRC=$WORKSPACE/tcoffee/t_coffee/src
 _G_USR=cbcrg.lab
@@ -336,9 +336,9 @@ function build_perlm() {
 	echo "[ build_perlm ]"
 
 	chmod +x $WORKSPACE/tcoffee/build/cpanm
-	$WORKSPACE/tcoffee/build/cpanm -n -l $PERLM SOAP::Lite --reinstall
-	$WORKSPACE/tcoffee/build/cpanm -n -l $PERLM XML::Simple --reinstall
-	$WORKSPACE/tcoffee/build/cpanm -n -l $PERLM LWP --reinstall
+	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM SOAP::Lite
+	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM XML::Simple
+	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM LWP
 
 }
 
