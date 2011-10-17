@@ -22,15 +22,13 @@
 #
 # Release flag  
 # 
-if [ -z $RELEASE ]; then 
-export RELEASE=0
-fi
+export RELEASE=${RELEASE:-0}
 
-if [ $RELEASE == 1 ]; then 
-export SVN_BASE=http://tcoffee.googlecode.com/svn/tcoffee/branches/stable
-else 
+#
+# The SVN root path
+# 
 export SVN_BASE=http://tcoffee.googlecode.com/svn/tcoffee/trunk
-fi
+
 
 #
 # default SVN revision number 
@@ -55,11 +53,7 @@ fi
 # Define the VERSION number 
 #
 if [[ (-z $VERSION) || ($VERSION == auto) ]]; then 
-	if [ $RELEASE == 1 ]; then 
-	export VERSION=`cat $WORKSPACE/tcoffee/t_coffee/src/version_number.version`
-	else 
-	export VERSION=r$SVN_REVISION
-	fi
+	export VERSION="`cat $WORKSPACE/tcoffee/t_coffee/src/version_number.version`.r$SVN_REVISION"
 fi
 
 #
@@ -444,11 +438,7 @@ function tcoffee() {
 	build_dist
 	build_perlm
 	
-	# The stable package is done only for for release 
-	if [ $RELEASE == 1 ]; then 
 	build_and_pack_stable
-	fi 
-	
 	build_and_pack_debug
 
 	if [ $DO_TEST == 1 ]; then
