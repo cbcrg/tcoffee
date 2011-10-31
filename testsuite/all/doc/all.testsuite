@@ -2,7 +2,7 @@
 # definitions 
 #
 timeout: 30min
-input: ../../t_coffee/doc_test/data
+input: ../../../t_coffee/doc_test/data
 
 #
 # common assertions
