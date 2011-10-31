@@ -3758,6 +3758,26 @@ int printf_file  (char *file,char *mode, char *string,...)
   vfclose (fp);
   return 1;
   }
+int printf_system_direct_check  (char *string, ...)
+{
+  char *buf;
+  int r;
+
+  cvsprintf (buf, string);
+
+
+  r=system (buf);
+  
+  if (r!=EXIT_SUCCESS)
+    {
+      printf_exit ( EXIT_FAILURE, stderr, "ERROR: Could not run %s\n", buf);
+    }
+  else
+    {
+      vfree (buf);
+      return r;
+    }
+}
 int printf_system_direct  (char *string, ...)
 {
   char *buf;
@@ -3898,7 +3918,14 @@ int is_shellpid(int pid)
 }
 int is_rootpid()
 {
+  pid_t cp;
 
+  cp=getpid();
+  if (getpgid(cp)==cp)return 1;
+  else return 0;
+  
+  //old is_rootpid
+  //
   if (debug_lock)
     {
       char *f;
@@ -3909,6 +3936,7 @@ int is_rootpid()
 
   if(lock (getppid(), LLOCK, LCHECK, NULL)!=NULL)return 0;
   else return 1;
+  //
 }
 
 int shift_lock ( int from, int to, int from_type,int to_type, int action)
@@ -4580,24 +4608,23 @@ char *get_tmp_4_tcoffee ()
 {
   static char *tmp_4_tcoffee;
   if (!tmp_4_tcoffee)
-  {
-	  tmp_4_tcoffee=vcalloc ( 1000, sizeof (char));
-
-  }
-
+    {
+      tmp_4_tcoffee=vcalloc ( 1000, sizeof (char));
+      
+    }
+  
   if ( tmp_4_tcoffee[0])
-  {
-
-	  return tmp_4_tcoffee;
-  }
+    {
+      
+      return tmp_4_tcoffee;
+    }
   else
     {
       char *v=getenv("TMP_4_TCOFFEE");
-
+      
       char buf[1000];
       char host[1024];
       gethostname(host, 1023);
-
 
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))
 	  {
@@ -4791,7 +4818,7 @@ int cputenv (char *string, ...)
 
   s2=vcalloc (strlen (s)+1, sizeof (char));
   sprintf ( s2, "%s", s);
-
+  
   r=putenv (s2);
   //vfree (s); //Potential leak
   return r;
@@ -6127,6 +6154,37 @@ FILE* display_file_content (FILE *output, char *name)
 
 char **list2expanded_flist (char **list, int *n, char *tag)
 {
+  //expand files into lists
+  //a file list is declared as tag1::<file_name>
+  //or as a file whose first line is FILE_LIST::
+  //expansion keeps going recursively until all files have been expanded
+  //keeps trap of infinite loops (i.e. file referencing itself
+  int a=0;
+  
+  while (list[a]!=NULL)
+    {
+      char *f=NULL;
+      
+      if (strstr (list[a], tag)){f=list[a]+strlen (tag);}
+      else if ( token_is_in_file_n (list[a],tag,1))f=list[a];
+      else f=NULL;
+      
+      if (f)
+	{
+	  list=expand_flist(f,list,a,n,tag);
+	}
+      else
+	{
+	  a++;
+	}
+    }
+  
+  return list;
+}
+
+char **list2expanded_flist_old (char **list, int *n, char *tag)
+{
+  //pb with the hasch function
   //expand files into lists
   //a file list is declared as tag1::<file_name>
   //or as a file whose first line is FILE_LIST::

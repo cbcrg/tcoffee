@@ -4368,21 +4368,22 @@ Sequence * merge_seq( Sequence *IN, Sequence *OUT)
 {
 	int a;
 
+
 	if ( OUT==NULL)
-	{
-		return duplicate_sequence (IN);
-	}
+	  {
+	    return duplicate_sequence (IN);
+	  }
 	else
-	{
-		if ( IN && check_list_for_dup( IN->name, IN->nseq))
-		{
-			fprintf ( stderr, "\nERROR: %s is duplicated in file %s[FATAL]\n", check_list_for_dup( IN->name, IN->nseq), IN->file[0]);
-			myexit (EXIT_FAILURE);
-		}
-		for ( a=0; a< IN->nseq; a++)
-			if ((OUT=add_sequence ( IN, OUT, a))==NULL)return NULL;
-			return OUT;
-	}
+	  {
+	    if ( IN && check_list_for_dup( IN->name, IN->nseq))
+	      {
+		fprintf ( stderr, "\nERROR: %s is duplicated in file %s[FATAL]\n", check_list_for_dup( IN->name, IN->nseq), IN->file[0]);
+		myexit (EXIT_FAILURE);
+	      }
+	    for ( a=0; a< IN->nseq; a++)
+	      if ((OUT=add_sequence ( IN, OUT, a))==NULL)return NULL;
+	    return OUT;
+	  }
 }
 
 Alignment *seq_name2removed_seq_name(Sequence *S, Alignment *NA, float **diff)
@@ -4710,10 +4711,14 @@ Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
 
 Sequence * add_prf2seq  ( char *file, Sequence *S)
     {
-
+      static int n;
+      static char* prf_name;
       char **new_seq;
       Sequence *NS;
-
+      
+      if (!prf_name){prf_name=vcalloc ( 100, sizeof (char));}
+      sprintf (prf_name, "prf_%d", ++n);
+      
       if ( !is_aln (file)&& !is_seq (file))return S;
       else
 	{
@@ -4727,9 +4732,8 @@ Sequence * add_prf2seq  ( char *file, Sequence *S)
 	  ((R->VR)->A)->expand=1;
 	  new_seq=declare_char (1,A->len_aln+1);
 	  sprintf ( new_seq[0], "%s",aln2cons_seq_mat(A, "blosum62mt"));
-	  NS=fill_sequence_struc(1, new_seq,A->file, NULL);
-
-
+	  NS=fill_sequence_struc(1, new_seq,&prf_name, NULL);
+	
 	  S=add_sequence (NS, S, 0);
 	  (S->T[S->nseq-1])->R=R;
 
@@ -4757,23 +4761,24 @@ int prf_in_seq ( Sequence *S)
 Sequence * add_sequence ( Sequence *IN, Sequence *OUT, int i)
 {
 	int s, a;
-
+	
+	
 	char *buf;
 	if (OUT==NULL)
-	{
-		OUT=duplicate_sequence (IN);
-		return OUT;
-	}
+	  {
+	    OUT=duplicate_sequence (IN);
+	    return OUT;
+	  }
 	for (a=0; a<OUT->nseq; a++)
-	{
-		Alignment *P;
-		P=seq2R_template_profile (OUT, a);
-		if (!P)
-			continue;
-		else if (name_is_in_list (IN->name[i], P->name, P->nseq, 100)!=-1)
-			return OUT;
-	}
-
+	  {
+	    Alignment *P;
+	    P=seq2R_template_profile (OUT, a);
+	    if (!P)
+	      continue;
+	    else if (name_is_in_list (IN->name[i], P->name, P->nseq, 100)!=-1)
+	      return OUT;
+	  }
+	
 	/*Adds sequence i of IN at the end of OUT*/
 
 	if ((s=name_is_in_list ( IN->name[i], OUT->name, OUT->nseq,STRING))==-1 )
@@ -4805,37 +4810,37 @@ Sequence * add_sequence ( Sequence *IN, Sequence *OUT, int i)
 	}
 	else if ( s!=-1 && !case_insensitive_strcmp ( IN->seq[i], OUT->seq[s]))
 	{
-
-		if ( getenv4debug("DEBUG_RECONCILIATION"))fprintf ( stderr,"[DEBUG_RECONCILIATION:add_sequence]\n%s\n%s\n", IN->seq[i], OUT->seq[s]);
-
-		add_warning (stderr, "DISCREPANCY:%s in [%s] and  [%s]\n", IN->name[i], IN->file[i], OUT->file[s]);
-
-
-		if (((buf=build_consensus(IN->seq[i], OUT->seq[s],"cfasta_pair_wise" ))!=NULL) || ((buf=build_consensus(IN->seq[i], OUT->seq[s],"myers_miller_pair_wise" ))!=NULL))
-		{
-
-			OUT->max_len=MAX(OUT->max_len, strlen(buf));
-			OUT->min_len=MIN(OUT->min_len, strlen(buf));
-			OUT->seq    =realloc_char ( OUT->seq, -1, -1,OUT->nseq,OUT->max_len+1);
-
-			sprintf ( OUT->seq[s],"%s",buf);
-			OUT->len[s]=strlen (buf);
-			vfree (buf);
-			return OUT;
-		}
-		else
-		{
-			fprintf ( stderr, "IMPOSSIBLE TO RECONCILIATE SOME SEQUENCES[FATAL:%s]\n", PROGRAM);
-			print_aln ( align_two_sequences (IN->seq[i], OUT->seq[s], "idmat", 0, 0, "fasta_pair_wise"));
-			myexit (EXIT_FAILURE);
-			return NULL;
-		}
-
+	  fprintf ( stderr,"[DEBUG_RECONCILIATION:add_sequence]\n%s\n%s\n", IN->seq[i], OUT->seq[s]);
+	  if ( getenv4debug("DEBUG_RECONCILIATION"))fprintf ( stderr,"[DEBUG_RECONCILIATION:add_sequence]\n%s\n%s\n", IN->seq[i], OUT->seq[s]);
+	  
+	  add_warning (stderr, "DISCREPANCY:%s in [%s] and  [%s]\n", IN->name[i], IN->file[i], OUT->file[s]);
+	  
+	  
+	  if (((buf=build_consensus(IN->seq[i], OUT->seq[s],"cfasta_pair_wise" ))!=NULL) || ((buf=build_consensus(IN->seq[i], OUT->seq[s],"myers_miller_pair_wise" ))!=NULL))
+	    {
+	      
+	      OUT->max_len=MAX(OUT->max_len, strlen(buf));
+	      OUT->min_len=MIN(OUT->min_len, strlen(buf));
+	      OUT->seq    =realloc_char ( OUT->seq, -1, -1,OUT->nseq,OUT->max_len+1);
+	      
+	      sprintf ( OUT->seq[s],"%s",buf);
+	      OUT->len[s]=strlen (buf);
+	      vfree (buf);
+	      return OUT;
+	    }
+	  else
+	    {
+	      fprintf ( stderr, "IMPOSSIBLE TO RECONCILIATE SOME SEQUENCES[FATAL:%s]\n", PROGRAM);
+	      print_aln ( align_two_sequences (IN->seq[i], OUT->seq[s], "idmat", 0, 0, "fasta_pair_wise"));
+	      myexit (EXIT_FAILURE);
+	      return NULL;
+	    }
+	  
 	}
 	else
-	{
-		return OUT;
-	}
+	  {
+	    return OUT;
+	  }
 }
 
 
@@ -8770,7 +8775,7 @@ Alignment* aln2sub_seq (Alignment *A, int n, char **string)
       int t;
       Alignment *B;
       Sequence *subS;
-
+   
 
       B=main_read_aln (list[a][1], NULL);
       t=aln2most_similar_sequence(B, "idmat");
@@ -9772,7 +9777,7 @@ Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
       AL=vcalloc  (k, sizeof (Alignment*));
 
       //Run KM
-      dim=60;
+      dim=0;
       v=aln2km_vector(A,mode,&dim);
       km_kmeans (v,A->nseq,dim,k,0.0001,NULL);
 
@@ -9918,6 +9923,72 @@ Alignment* km_seq (Alignment *A, int k, char *mode, char *name)
   fprintf ( stderr, "\n");
 
   exit (EXIT_SUCCESS);
+}
+
+int aln2gap_trimmed (Alignment *A, int n, char *alnf, char *seqf)
+{
+  int **v;
+  int a,b,c,t;
+  int ng, nr;
+  FILE *aln;
+  FILE *seq;
+ 
+  if (A->nseq<=n)return 0;
+  if (n<0){n*=-1; n=(A->nseq*n)/100;}
+  
+  v=declare_int (A->nseq, 2);
+  for (a=0; a< A->nseq; a++)v[a][0]=a;
+  
+  for (a=0; a<A->len_aln; a++)
+    {
+      for (ng=nr=0,b=0; b<A->nseq; b++)
+	{
+	  
+	  ng+=(A->seq_al[b][a]=='-')?1:0;
+	  nr+=(A->seq_al[b][a]!='-')?1:0;
+	}
+      
+      for (b=0; b<A->nseq; b++)
+	{
+	  if (A->seq_al[b][a]!='-') v[b][1]+=(nr==0)?0:(ng*100)/nr;
+	}
+    }
+  sort_int (v, 2, 1, 0, A->nseq-1);
+
+  seq=vfopen (seqf, "w");
+  for (a=A->nseq-n; a< A->nseq; a++)
+    {
+      int s=v[a][0];
+      ungap (A->seq_al[s]);
+      fprintf ( seq, ">%s\n%s\n", A->name[s], A->seq_al[s]);
+    }
+  vfclose (seq);
+  
+  A->nseq-=n;
+  for (c=0,a=0; a< A->len_aln; a++)
+    {
+      for (t=0,b=0; b<A->nseq; b++)t+=(A->seq_al[v[b][0]][a]=='-');
+      if (t!=A->nseq)
+	{
+	  for (b=0; b<A->nseq; b++)A->seq_al[v[b][0]][c]=A->seq_al[v[b][0]][a];
+	  c++;
+	}
+    }
+  A->len_aln=c;
+  
+  aln=vfopen (alnf, "w");
+  for (a=0; a<A->nseq; a++)
+    {
+      int s=v[a][0];
+      A->seq_al[s][c]='\0';
+      fprintf ( aln, ">%s\n%s\n", A->name[s], A->seq_al[s]);
+    }
+  vfclose (aln);
+  
+  
+  free_aln (A);
+  free_int (v, -1);
+  return 1;
 }
 
 

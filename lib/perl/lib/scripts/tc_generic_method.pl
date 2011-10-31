@@ -739,6 +739,10 @@ sub seq2msa
 	`$method -d=seq.pep -o=result.aln -quiet 2>/dev/null`;
 	`mv result.aln.1.fas result.aln`;
       }
+    elsif ($method eq "clustalo")
+      {
+	`clustalo -i seq.pep > result.aln`;
+      }
     else
       {
 	`$method -infile=seq.pep -outfile=result.aln`;

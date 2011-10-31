@@ -384,6 +384,8 @@ Alignment** seq2kmeans_subset (Alignment *A, int k, int *n, char *mode);
 Alignment** seq2id_subset (Alignment *A, int k, int *n, char *mode);
 
 int* seq2kmeans_class  (Alignment *A, int k, char *mode);
+
+int aln2gap_trimmed (Alignment *A, int n, char *alnf, char *seqf);
 Alignment *gap_trim (Alignment *A, int f);
 Alignment * master_trimseq( Alignment *A, Sequence *S,char *mode);
 Alignment * trimseq( Alignment *A, Sequence *S, char *mode);

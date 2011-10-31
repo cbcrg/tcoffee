@@ -656,23 +656,28 @@ Sequence * duplicate_sequence (Sequence *S )
 // 	printf("DUP\n");
 	if (S==NULL)return S;
 	LS=declare_sequence (S->min_len, S->max_len, S->nseq);
+
 	if (S->genome_co != NULL)
 		LS->genome_co = vcalloc(S->nseq, sizeof(Genomic_info));
 	for (b=0, a=0; a<S->nseq; ++a)
-	{
-		if (S->seq && S->seq[a])
-		{
-
-			sprintf ( LS->file[b], "%s", S->file[a]);
-			if ( S->seq_comment && S->seq_comment[a])
-				sprintf ( LS->seq_comment[b], "%s", S->seq_comment[a]);
-			if ( S->aln_comment && S->aln_comment[a])
-				sprintf ( LS->aln_comment[b], "%s", S->aln_comment[a]);
-			if ( S->seq && S->seq[a])
-				sprintf  ( LS->seq[b],  "%s", S->seq[a]);
-			if ( S->name&& S->name[a])
-				sprintf ( LS->name[b], "%s", S->name[a]);
-			if (S->genome_co != NULL)
+	  {
+	    if (S->seq && S->seq[a])
+	      {
+		
+		sprintf ( LS->file[b], "%s", S->file[a]);
+		
+		if ( S->seq_comment && S->seq_comment[a])
+		  sprintf ( LS->seq_comment[b], "%s", S->seq_comment[a]);
+		if ( S->aln_comment && S->aln_comment[a])
+		  sprintf ( LS->aln_comment[b], "%s", S->aln_comment[a]);
+		
+		if ( S->seq && S->seq[a])
+		  sprintf  ( LS->seq[b],  "%s", S->seq[a]);
+	
+		if ( S->name&& S->name[a])
+		  sprintf ( LS->name[b], "%s", S->name[a]);
+		
+		if (S->genome_co != NULL)
 			{
 				unsigned int len;
 

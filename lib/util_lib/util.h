@@ -498,6 +498,8 @@ int printf_file ( char *file, char *mode, char *string, ...);
 int printf_fork ( FILE *fp,char *string,...);
 int printf_system (char *string, ...);
 int printf_system_direct (char *string, ...);
+int printf_system_direct_check (char *string, ...);
+
 int my_system_cl (int argc, char *argv[]);
 int my_system ( char *command);
 int unpack_perl_script (char *name, char ***unpacked, int n);

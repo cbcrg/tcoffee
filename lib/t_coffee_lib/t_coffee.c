@@ -4878,6 +4878,7 @@ get_cl_param(\
 			  trim_S=add_sequence (trim_subS,trim_S,0);
 			}
 		    }
+		 
 		  for ( a=0, b=0; a<A->nseq; a++)
 		    {
 
@@ -5589,13 +5590,16 @@ char * get_seq_type_from_cl (int argc, char **argv)
 /////////////////////////
 double max_kmcoffee;
 static max_nseq;
-int display_km_progression (Alignment **A, int n, double max, char *type);
-Alignment* km_coffee_align  (Alignment *A,int mn,int argc, char **argv, int nit,int round);
+static cur_nseq;
+static int kmk;
+
+Alignment* km_coffee_align  (char *method,Alignment *A,int mn,int argc, char **argv, int nit,int round);
 Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit,int round);
 Alignment *km_align_kprofile (Alignment **AL,int k,int n, int argc, char **argv,int nit,int round);
-Alignment *km_align_seq_slow     (Alignment *A, int argc, char **argv,int nit,int round);
+Alignment *km_align_seq_slow     (char *method,Alignment *A, int argc, char **argv,int nit,int round);
 Alignment *km_align_seq_fast     (Alignment *A, int argc, char **argv,int nit,int round);
-Alignment *km_refine (Alignment *A, int k, int argc, char **argv, int nit, int round);
+Alignment *km_refine_msa (Alignment *A, int argc, char **argv, int k);
+
 static Fname *F;
 
 
@@ -5611,7 +5615,8 @@ char** km_coffee (int argc, char **argv)
 	Alignment *A;
 	char *tm=NULL;
 	int seqset=0;
-
+	char *method=NULL;
+	
 	new_argv=vcalloc (argc+100, sizeof (char*));
 
 	for (a=0; a<argc; a++)
@@ -5631,6 +5636,9 @@ char** km_coffee (int argc, char **argv)
 			{nit=atoi (argv[++a]);}
 		else if ( strm (argv[a], "-tree_mode"))
 			{tm=argv[++a];}
+		else if ( strm (argv[a], "-km_method"))
+			{method=argv[++a];}
+		
 		else
 		{
 			new_argv[new_argc++]=argv[a];
@@ -5645,14 +5653,17 @@ char** km_coffee (int argc, char **argv)
 
 	//if (!tm){new_argv[new_argc]=vcalloc(100, sizeof (char)); sprintf ( new_argv[new_argc++], "kmeans");}
 	if (!k)k=100;
-
+	kmk=k;
+	
 	A=seq2aln(S,NULL, RM_GAP);
-
-	max_kmcoffee=A->nseq*A->nseq;
+       
+	max_kmcoffee=A->nseq;
 // 	printf("NUM SEQ: %i", A->nseq);
-	max_nseq=A->nseq;
+	cur_nseq=max_nseq=A->nseq;
 
-	km_coffee_align (A, k, new_argc, new_argv,nit,0);
+
+	if (A->nseq<=k)k=A->nseq/2;
+	km_coffee_align (method, A, k, new_argc, new_argv,nit,0);
 
 	myexit (EXIT_SUCCESS);
 }
@@ -5671,6 +5682,7 @@ Alignment* kmir (Alignment *A)
 	{
 
 		ungap (A->seq_al[a]);
+		
 		add_sequence2prf(A->seq_al[a],seq, prf, A->len_aln, -10, -1);
 		sprintf ( A->seq_al[a], "%s", seq);
 
@@ -5679,34 +5691,41 @@ Alignment* kmir (Alignment *A)
 }
 
 
-Alignment* km_coffee_align (Alignment *A,int k,int argc, char **argv, int nit,int round)
+Alignment* km_coffee_align (char *method, Alignment *A,int k,int argc, char **argv, int nit,int round)
 {
-	if (A->nseq<=k)
+  
+  if (A->nseq<=k)
+    {
+      cur_nseq=(cur_nseq-A->nseq)+1;
+      A=km_align_seq_slow (method,A, argc, argv,nit,round);
+    }
+  else
+    {
+      Alignment**AL;
+      int n,a;
+      
+      AL=seq2kmeans_subset(A,k,&n, "triaa");
+      free_aln (A);
+      
+      if (n==1)
 	{
-		return km_align_seq_slow (A, argc, argv,nit,round);
+	  AL=seq2id_subset (AL[0],k,&n, "100");
+	  A=km_align_kprofile(AL,n,k,argc, argv,nit,round+1);
 	}
-	else
+      else
 	{
-		Alignment**AL;
-		int n,a;
-
-		AL=seq2kmeans_subset(A,k,&n, "triaa");
-		if (n==1)
-		{
-			AL=seq2id_subset (AL[0],k,&n, "100");
-			A=km_align_kprofile(AL,n,k,argc, argv,nit,round+1);
-		}
-		else
-		{
-			for (a=0; a<n; a++)
-			{
-				AL[a]=km_coffee_align (AL[a],k,argc, argv,nit,round+1);
-			}
-			A=km_align_profile(AL,n,argc, argv, nit,round);
-			for (a=0; a<n; a++)free_aln (AL[a]); vfree(AL);
-		}
-		return A;
+	  for (a=0; a<n; a++)
+	    {
+	      AL[a]=km_coffee_align (method,AL[a],k,argc, argv,nit,round+1);
+	    }
+	  cur_nseq=(cur_nseq-n)+1;
+	  A=km_align_profile(AL,n,argc, argv, nit,round);
+	  for (a=0; a<n; a++)free_aln (AL[a]); vfree(AL);
 	}
+    }
+ 
+  fprintf ( stderr, "\r\t\tkmcoffee: %d Remaining sequences (Aligned: %.2f %%)",  cur_nseq,(float)((((float)max_nseq-(float)cur_nseq)/(float)max_nseq)*(float)100));
+  return A;
 }
 
 
@@ -5717,8 +5736,7 @@ Alignment *km_align_kprofile (Alignment **AL,int n, int k, int argc, char **argv
 	int nn=0;
 	int a;
 	NAL=vcalloc (n, sizeof (Alignment *));
-	display_km_progression (AL,n,max_kmcoffee, "seq");
-
+		
 	if (n==1)return km_align_profile (AL,n,argc, argv, nit, round);
 	else
 	{
@@ -5761,10 +5779,11 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 	static char *treefile;
 	int tot_nseq=0;
 
-	display_km_progression (AL,n,max_kmcoffee, "profile");
+
 	for (a=0; a<n; a++)
 		tot_nseq+=(AL[a])->nseq;
-	if  (tot_nseq==max_nseq)round=-1;
+	
+	if  (tot_nseq>=max_nseq)round=-1;
 
 	if (!treefile)treefile=vtmpnam(NULL);
 	if (!prf)prf=vcalloc (500, sizeof (char));
@@ -5804,13 +5823,8 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 
 	vfclose (fp);
 
-	//printf_system ("%s",buf);
-	if (EXIT_SUCCESS != system (buf))
-	{
-		fprintf(stderr, "ERROR in A child process!\n");
-		exit(1);
-	}
-
+	printf_system_direct_check ("%s",buf);
+	
 	for ( a=0; a<n; a++)
 	{
 		sprintf (prf, "%s/prf_%d_%d", get_tmp_4_tcoffee(), a+1,pid);
@@ -5820,28 +5834,48 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 	A=main_read_aln (aln, NULL);
 
 	if (round==-1)
-	{
-		//for (a=0; a<10; a++)kmir (A);
-		sprintf (prf, "%s.%d",F->name,getpid());
-		output_fasta_aln (prf,A);
-// 		printf_system ("%s -profile %s", cl, prf);
-		char cm[1000];
-		sprintf(cm, "%s -profile %s", cl, prf);
-		if (EXIT_SUCCESS != system(cm))
-		{
-			fprintf(stderr, "ERROR in A child process!\n");
-			exit(1);
-		}
-// 		printf_system_direct ("%s -profile %s", cl, prf);
-		remove (prf);
-		myexit(EXIT_SUCCESS);
-	}
+	  {
+	    sprintf (prf, "%s.%d",F->name,getpid());
+	    output_fasta_aln (prf,A);
+	    printf_system_direct_check ("%s -profile %s", cl, prf);
+	    
+	    remove (prf);
+	    myexit(EXIT_SUCCESS);
+	  }
 	vfree (cl);
 	return A;
 }
-
-
-Alignment *km_align_seq_slow (Alignment *A, int argc, char **argv, int nit,int round)
+Alignment *km_align_seq_slow_withTC (Alignment *A, int argc, char **argv, int nit,int round);
+Alignment *km_align_seq_slow (char *method, Alignment *A, int argc, char **argv, int nit,int round)
+{
+  if (A->nseq==1)return A;
+  else if (!method || strm (method, "tcoffee"))return km_align_seq_slow_withTC (A, argc, argv, nit, round);
+  else
+    {
+      static char *seq;
+      static char *aln; 
+      if (!seq)seq=vtmpnam (NULL);
+      if (!aln)aln=vtmpnam (NULL);
+      output_fasta_seq (seq,A);
+      free_aln (A);
+      
+      printf_system ("tc_generic_method.pl -mode=seq_msa -infile=%s -method=%s -outfile=%s", seq, method, aln);
+      
+      if (round==-1)
+	{
+	  char *cl;
+	  char buf[10000];
+	  cl=list2string (argv, argc);
+	  sprintf ( buf, "%s -profile %s ", cl, aln);
+	  myexit (EXIT_SUCCESS);
+	}
+      else
+	{
+	  return main_read_aln (aln, NULL);
+	}
+    }
+}
+Alignment *km_align_seq_slow_withTC (Alignment *A, int argc, char **argv, int nit,int round)
 {
 
 	static char *seq;
@@ -5857,7 +5891,7 @@ Alignment *km_align_seq_slow (Alignment *A, int argc, char **argv, int nit,int r
 		aln=vtmpnam(NULL);
 	}
 
-	display_km_progression (&A,1, max_kmcoffee, "seq");
+
 	if ( A->nseq <=1)
 		return A;
 	else
@@ -5867,23 +5901,19 @@ Alignment *km_align_seq_slow (Alignment *A, int argc, char **argv, int nit,int r
 		sprintf ( buf, "%s -seq %s ", cl, seq);
 
 		if (round!=-1)
-		{
-			strcat (buf, " -output fasta_aln -quiet -outfile ");
-			strcat (buf, aln);
-			strcat (buf, " -newtree ");
-			strcat (buf, treefile);
-			strcat (buf, " >/dev/null 2>/dev/null");
-		}
-
-		//printf_system ("%s",buf);
-		if (EXIT_SUCCESS != system (buf))
-		{
-			fprintf(stderr, "ERROR in A child process!\n");
-			exit(1);
-		}
+		  {
+		    strcat (buf, " -output fasta_aln -quiet -outfile ");
+		    strcat (buf, aln);
+		    strcat (buf, " -newtree ");
+		    strcat (buf, treefile);
+		    strcat (buf, " >/dev/null 2>/dev/null");
+		  }
+		
+		printf_system_direct_check ("%s",buf);
+		
 		if (round==-1)
-			myexit (EXIT_SUCCESS);
-
+		  myexit (EXIT_SUCCESS);
+		
 		A=main_read_aln (aln,A);
 		vfree (cl);
 	}
@@ -5900,47 +5930,39 @@ Alignment *km_align_seq_fast (Alignment *A, int argc, char **argv, int nit, int 
 	int a;
 
 	if (!CL)
-	{
-		CL=vcalloc ( 1, sizeof (Constraint_list));
-		CL->pw_parameters_set=1;
-		CL->matrices_list=declare_char (10, 10);
-		CL->M=read_matrice ("blosum62mt");
-		CL->evaluate_residue_pair=evaluate_matrix_score;
-		CL->get_dp_cost=get_dp_cost;
-		CL->extend_jit=0;
-		CL->maximise=1;
-		CL->gop=-10;
-		CL->gep=-2;
-		CL->TG_MODE=2;
-		sprintf (CL->matrix_for_aa_group, "vasiliky");
-		CL->use_fragments=0;
-		CL->ktup=3;
-		if ( !CL->use_fragments)CL->diagonal_threshold=0;
-		else CL->diagonal_threshold=6;
-		sprintf (CL->dp_mode, "myers_miller_pair_wise");
-		CL->S=declare_sequence (1,1,1);
-	}
-
+	  {
+	    CL=vcalloc ( 1, sizeof (Constraint_list));
+	    CL->pw_parameters_set=1;
+	    CL->matrices_list=declare_char (10, 10);
+	    CL->M=read_matrice ("blosum62mt");
+	    CL->evaluate_residue_pair=evaluate_matrix_score;
+	    CL->get_dp_cost=get_dp_cost;
+	    CL->extend_jit=0;
+	    CL->maximise=1;
+	    CL->gop=-10;
+	    CL->gep=-2;
+	    CL->TG_MODE=2;
+	    sprintf (CL->matrix_for_aa_group, "vasiliky");
+	    CL->use_fragments=0;
+	    CL->ktup=3;
+	    if ( !CL->use_fragments)CL->diagonal_threshold=0;
+	    else CL->diagonal_threshold=6;
+	    sprintf (CL->dp_mode, "myers_miller_pair_wise");
+	    CL->S=declare_sequence (1,1,1);
+	  }
+	
 	ungap (A->seq_al[0]);
 	n=A->nseq;
-
+	
 	if (n<=1)
-		return A;
-
-	//Seq
-	//(CL->S)->nseq=n;
-	//(CL->S)->name=A->name;
-	//(CL->S)->seq =A->seq_al;
+	  return A;
+	
 	CL->S=fill_sequence_struc(n,A->seq_al, A->name, NULL);
-	//NS
 	ns=vcalloc (2, sizeof (int));
 	ls=declare_int (2, n);
 	ns[0]=ns[1]=1;
 	ls[0][0]=0;
-
-	//
-
-
+	
 	//Alignment
 	A->len_aln=strlen (A->seq_al[0]);
 
@@ -5963,41 +5985,28 @@ Alignment *km_align_seq_fast (Alignment *A, int argc, char **argv, int nit, int 
 
 
 
-int display_km_progression (Alignment **A, int n, double max, char *type)
+Alignment *km_refine_msa (Alignment *A,int argc, char **argv, int k)
 {
-	static double current=0;
-	double n1, n2, value, tot;
+  char *seq;
+  char *prf;
+  char *tree;
+  char *aln;
+  char buf [10000];
 
-	int a, b;
-	tot=0;
-
-	if ( strm (type, "seq"))
-	{
-		for (a=0; a<n; a++)
-		{
-
-			n1=(A[a])->nseq;
-			tot+=n1;
-			current +=n1*n1;
-		}
-	}
-	else
-	{
-		for (a=0; a<n; a++)
-		{
-			n1=(A[a])->nseq;
-			tot+=n1;
-			for (b=a+1; b<n-1; b++)
-			{
-				n2=(A[b])->nseq;
-				current+=n1*n2;
-			}
-		}
-	}
-	value=current;
-	double percentage = value/max*100.0;
-
-	fprintf ( stderr, "\r\t\tkmcoffee: %7.4f %% (%7d New Sequences)",  percentage, (int)tot);
-	return 1;
-
+  prf=vtmpnam(NULL);
+  seq=vtmpnam(NULL);
+  aln=vtmpnam(NULL);
+  tree=vtmpnam (NULL);
+  
+  if (A->nseq<=k)k=A->nseq/2;
+  
+  aln2gap_trimmed (A,k, prf, seq);
+  printf_system_direct_check ("t_coffee -seq %s -profile %s -outfile %s -newtree %s -quiet",seq, prf, aln, tree);
+  free_aln (A);
+  A=main_read_aln (aln, NULL);
+  remove (prf);
+  remove (seq);
+  remove (tree);
+  
+  return A;
 }
