@@ -101,7 +101,7 @@ test: t_coffee -other_pg=seq_reformat -in RNA_rcoffee.aln -action +add_alifold -
 tag: rcoffee
 input: RNA_rcoffee.aln
 
-test: t_coffee -other_pg=seq_reformat -in RNA_rcoffee.aln -in2 1F6X_A_real.struc -input2 alifold -action +add_alifold -output Stockholm_aln -out RNA_rcoffee_real.stk
+test: t_coffee -other_pg=seq_reformat -in RNA_rcoffee.aln -in2 1F6X_A_real.struc -input2 alifold -action +add_alifold -output stockholm_aln -out RNA_rcoffee_real.stk
 tag: rcoffee
 input: RNA_rcoffee.aln, 1F6X_A_real.struc
 
