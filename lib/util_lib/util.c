@@ -3918,24 +3918,29 @@ int is_shellpid(int pid)
 }
 int is_rootpid()
 {
+  static pid_t root_pid=0;
   pid_t cp;
 
   cp=getpid();
-  if (getpgid(cp)==cp)return 1;
-  else return 0;
+  if( root_pid == 0 ) {
+	  root_pid = cp;
+  }
+
+  int result = (cp == root_pid);
+  return result;
   
   //old is_rootpid
   //
-  if (debug_lock)
-    {
-      char *f;
-      fprintf ( stderr,"\n\t------ check if %d isrootpid (util): %s->%d", getpid(),f=lock2name (getppid(),LLOCK), (lock(getppid(), LLOCK, LCHECK, NULL))?1:0);
-      vfree (f);
-    }
-
-
-  if(lock (getppid(), LLOCK, LCHECK, NULL)!=NULL)return 0;
-  else return 1;
+//  if (debug_lock)
+//    {
+//      char *f;
+//      fprintf ( stderr,"\n\t------ check if %d isrootpid (util): %s->%d", getpid(),f=lock2name (getppid(),LLOCK), (lock(getppid(), LLOCK, LCHECK, NULL))?1:0);
+//      vfree (f);
+//    }
+//
+//
+//  if(lock (getppid(), LLOCK, LCHECK, NULL)!=NULL)return 0;
+//  else return 1;
   //
 }
 
