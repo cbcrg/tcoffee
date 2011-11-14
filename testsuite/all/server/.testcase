@@ -43,6 +43,6 @@ test: t_coffee -other_pg apdb -aln input-clustal.txt -apdb_outfile default -outf
 
 ## tm-coffee
 test: t_coffee -in=input-tm.txt -mode=psicoffee -blast_server=LOCAL -protein_db=uniref50-TM -template_file=PSITM -prot_min_sim=30 -prot_max_sim=90 -prot_min_cov=0 -output=score_html tm_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
-if: directory /users/cn/jchang/projects/database/4blast exists
+if: env OSNAME = linux
 assert: file result.tm_html exists
 
