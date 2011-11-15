@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE macsim SYSTEM "http://www-bio3d-igbmc.u-strasbg.fr/macsim.dtd">
+<macsim>
+<alignment>
+<aln-name>ref1/v1/1sbp_ref1_truncated</aln-name>
+<sequence seq-type="Protein">
+<seq-name>1sbp_</seq-name>
+<seq-info>
+<accession>1sbp_</accession>
+<nid>1sbp_</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>qllnvsydptrelyeqynkafsahwkqet-gdnvvidqs-hggsgkqatsvin----gieadtvtlalaydvnaiaergridknwikrlpdds------------------------apyts-tivflvrkgnp------kqihdwndlik--------------pgvsvitpnp--kssggarwnylaawgyalhhnnn----------------dqakaedfvkalfknvevldsg----argstntfvergigdvliaw--eneallatnel-gkdkfeivtpsesil-----aeptvsvvdkvvekkdtkavaeaylkylyspegqeiaaknfyrpr
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1wod_</seq-name>
+<seq-info>
+<accession>1wod_</accession>
+<nid>1wod_</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>kitvfaa----asltnamqdiatqfkkek-gvdvvssfa---ssstlarqiea----gapadlfisadqkwmdyavdkkaidta-------------------------------trqtllgnslvvvapkasvqkdftidsktnwtsllng-------------grlavgdpeh--vpagiyakealqklg-------------------------------awdtlspklapaed-----vrga-lalverneaplgiv---ygsdavask----gvkvvatfpedshk----kveypvavveg-----hnnatvkafydylkgpqaaeifkrygftik
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1atg_</seq-name>
+<seq-info>
+<accession>1atg_</accession>
+<nid>1atg_</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>elkvvta----tnflgtleqlagqfakqt-ghavvissg---ssgpvyaqivn----gapynvffsadekspekldnqgfalpg-------------------------------srftyaigklvlwsakpgl-------vdnqgkvlagngwr-----------hiaisnpqi--apyglagtqvlthlg-------------------------------lldkltaqerivean----svgqahsqtasgaadlgfval-aqiiqaaak-----ipgshwfppany----yepivqqavitk---staekanaeqfmswmkgpkavaiikaagyvlp
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1mrp_</seq-name>
+<seq-info>
+<accession>1mrp_</accession>
+<nid>1mrp_</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>ditvyng-----qhkeaatavakafeqet-gikvtlnsg---kseqlagqlkee-gdktpadvfyteqtatfadlseagllapi-seqtiqq----taqkgvplapkkd-----wialsgrs-rvvvydhtkls----ekdmeksvldyatpkwk----------gkigyvsts---gafleqvvalskmkg-------------------------dkvalnwlkglkengklyak-----nsva-lqavengevpaalinn-yywynlakekgvenlksrlyfvrhqdp--galvsysgaavlk---asknqaeaqkfvdflaskkgqealvaaraeyp
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1pot_</seq-name>
+<seq-info>
+<accession>1pot_</accession>
+<nid>1pot_</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>tlyfynw-----te-yvppglleqftket-gikviysty--esnetmyaklkt--ykdgaydlvvps-tyyvdkmrkegmiqkidkskltn-----fsn-ldpdmlnkpfdpnndysipyiwgataigvngdav----dpksvtswadlwkpeyk----------gsllltdd------arevfqmalrklgysgnttd---------------pkeieaaynelkklmpnvaafn------sdnp-anpymegevnlgmiw--ngsafvarq---agtpidvvwpkeg------gifwmdslaip--anaknkegalklinfllrpdvakqvaetigypt
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1a7l_A</seq-name>
+<seq-info>
+<accession>1a7l_A</accession>
+<nid>1a7l_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>klviwing---dkgynglaevgkkfekdt-gikvtvehp--dkleekfpqvaat---gdgpdiifwa-hdrfggyaqsgllaeitpdkafqd-------klypftwdavryngkliaypiavealsliynkdll-----pnppktweeipaldkelkak------gksalmfnl----qepyftwpliaadggyafkyengkydikd--vgvdnagakagltflvdliknkhmnadt-----dysiaeaafnkgetamting--pwawsnidts--kvnygvtvlptfkgqp-skpfvgvlsagin--aaspnkelakeflenylltdegleavnkdkplg
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1eu8_A</seq-name>
+<seq-info>
+<accession>1eu8_A</accession>
+<nid>1eu8_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>kivfavgga--pneieywkgviaefekkypgvtvelkrqatdteqrrldlvnalrgkssdpdvflmd-vawlgqfiasgwlepl--ddyvqkdnydlsvffqsvinladkqggklyalpvyidagllyyrkdllekygyskppetwqelvemaqkiqsgeretnpnfwgfvwqgkqyeglvcdfveyvysnggslgefkdgkwvptlnk-----penvealqfmvdlihkykisppntytemteepvrlmfqqgnaafernwpyawglhnaddspvkgkvgvaplphfpghksaatlggwhigisk---ysdnkalawefvk-fvesysvqkgfamnlgwn
+</seq-data></sequence>
+<column-score>
+<colsco-name>coreblock</colsco-name>
+<colsco-owner>0</colsco-owner>
+<colsco-type>int</colsco-type>
+<colsco-data>
+1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 </colsco-data>
+</column-score>
+</alignment>
+</macsim>

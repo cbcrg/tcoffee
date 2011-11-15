@@ -1,0 +1,164 @@
+!!RICH_SEQUENCE 1.0
+..
+{
+name 1bbt_ac
+descrip 
+creator 
+type    PROTEIN
+group 1
+sequence
+  ................GIFPVACSDGYGGLVTTDPKTADPVYG...KVFNPPRNQLPGRF
+  TNLLDVAEACPTFLRFEGGV.....PYVTTKT.DSDRVLAQFDMSLAAKHM.........
+  ......................SNTFLAGLAQYYTQYSGTINLHFMFTGPTD.......A
+  KARYMVAYAPPGME..............................................
+  ....PPKTPEAAAHCIHAEWDTGLNSKFTFSIPYLSAADYTYTAS...............
+  ....DVAETTNVQGWVCLFQITHGK.....ADGDALVVLASAGKDFELRLPVDARAE...
+  .........................
+}
+{
+name 1al2_ad
+descrip 
+creator 
+type    PROTEIN
+group 1
+sequence
+  GLPVMNTPGSNQYLTADNFQSPCALPEFDVTPPIDIPGEVKNMMELAEIDTMIPFDLSAT
+  KKNTMEMY......RVRLSD........KPHT..DDPILCLSLSPASDPRL.........
+  ......................SHTMLGEILNYYTHWAGSLKFTFLFCGSMM.......A
+  TGKLLVSYAPPGAD..............................................
+  ....PPKKRKEAMLGTHVIWDIGLQSSCTMVVPWISNTTYRQTIDD..............
+  ........SFTEGGYISVFYQTRIVVPLSTPREMDILGFVSACNDFSVRLLRDTTHIEQK
+  .A.......................
+}
+{
+name 1b35_C
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 37 38 0 square solid STRUCT
+  FT   STRUCT       30     31  STRAND
+feature 63 67 3 square solid STRUCT
+  FT   STRUCT       56     60  HELIX
+feature 71 79 0 square solid STRUCT
+  FT   STRUCT       64     72  STRAND
+feature 87 92 0 square solid STRUCT
+  FT   STRUCT       80     85  STRAND
+feature 101 103 0 square solid STRUCT
+  FT   STRUCT       91     93  STRAND
+feature 111 144 0 square solid STRUCT
+  FT   STRUCT      101    104  STRAND
+feature 146 151 3 square solid STRUCT
+  FT   STRUCT      106    111  HELIX
+feature 156 158 0 square solid STRUCT
+  FT   STRUCT      116    118  STRAND
+feature 161 168 0 square solid STRUCT
+  FT   STRUCT      121    128  STRAND
+feature 180 190 0 square solid STRUCT
+  FT   STRUCT      133    143  STRAND
+feature 252 254 3 square solid STRUCT
+  FT   STRUCT      157    159  HELIX
+feature 256 262 0 square solid STRUCT
+  FT   STRUCT      161    167  STRAND
+feature 267 272 0 square solid STRUCT
+  FT   STRUCT      172    177  STRAND
+feature 281 282 0 square solid STRUCT
+  FT   STRUCT      186    187  STRAND
+feature 289 291 3 square solid STRUCT
+  FT   STRUCT      194    196  HELIX
+feature 308 310 3 square solid STRUCT
+  FT   STRUCT      206    208  HELIX
+feature 314 326 0 square solid STRUCT
+  FT   STRUCT      212    224  STRAND
+feature 333 342 0 square solid STRUCT
+  FT   STRUCT      231    240  STRAND
+feature 347 348 0 square solid STRUCT
+  FT   STRUCT      245    246  STRAND
+feature 356 358 0 square solid STRUCT
+  FT   STRUCT      254    256  STRAND
+feature 365 379 3 square solid STRUCT
+  FT   STRUCT      263    277  HELIX
+sequence
+  .......SKPTVQGKIGECKLRGQGRMANFDGMDMSHKMALSSTNEIETNEGLAGTSLDV
+  MDLSRVLSIPNYWDRFTWKTSDVINTVLWDNY...VSPFKVKPYSATITDRFR.......
+  .......................CTHMGKVANAFTYWRGSMVYTFKFVKTQY.......H
+  SGRLRISFIPYYYNTT............................................
+  ....ISTGTPDVSRTQKIVVDLRTSTAVSFTVPYIGSRPWLYCIRPESSWLSK.......
+  DNTDGALMYNCVSGIVRVEVLNQLVAAQNVFSEIDVICEVNGGPDLEFAGPTCPRYVPYA
+  GDFTLADTRKIEAERTQEYSNNED.
+}
+{
+name 1bbt_ab
+descrip 
+creator 
+type    PROTEIN
+group 1
+sequence
+  ................LLEDRILTTRNGHTTSTTQSSVGVTYGYATAEDFVSGPNTSGLE
+  TRVVQAE.......RFFKTH......LFDWVTSDSFGRCHLLELPTDHK...........
+  ........................GVYGSLTDSYAYMRNGWDVEVTAVGNQF.......N
+  GGCLLVAMVPELCSI.............................................
+  ....QKRELYQLTLFPHQFINPRTNMTAHITVPFVGVNRYDQYKV...............
+  ..........HKPWTLVVMVVAPLTVNTEGAPQIKVYANIAPT.NVHVAGEFPSKE....
+  .........................
+}
+{
+name 1mec_aa
+descrip 
+creator 
+type    PROTEIN
+group 1
+sequence
+  .............................GVENAEKGVTENTDATADFVAQPVYLPENQ.
+  TKVAFFYDRSSPIGRFAVKSGSLESGFAPFSN....KACPNSVILTPGPQFDPAYDQLRP
+  QRLTEIWGNGNEETSEVFPLKTKQDYSFCLFSPFVYYKCDLEVTLSPHTSGA........
+  .HGLLVRWCPTGTPTKPTT.........................................
+  QVLHEVSSLSEGRTPQVYSAGPGTSNQISFVVPYNSPLSVLPAVWYNGHKRFD.......
+  NTGDLGIAPNSDFGTLFFAGTKPD.......IKFTVYLRYKNM..RVFCPRPTVFFPWPT
+  SGDKIDMTPRAGVL...........
+}
+{
+name 1bbt_aa
+descrip 
+creator 
+type    PROTEIN
+group 1
+sequence
+  ...............................TTSAGESADPVTTTVENYGGETQIQRRQH
+  TDVSFIMD......RFVKVT................PQNQINILDLMQVP..........
+  ......................SHTLVGGLLRASTYYFSDLEIAVKHEG...........
+  ....DLTWVPNGAP..............................................
+  ......EKALDNTTNPTAYHK...APLTRLALPYTAPHRVLATVYNGEC...........
+  ....RTLPTSFNYGAIKAT............RVTELLYRMKRA..ETYCPRPLLAIHPTE
+  ARHKQKIVAP...............
+}
+{
+name 1al2_ab
+descrip 
+creator 
+type    PROTEIN
+group 1
+sequence
+  ....AATSRDALPNTEASGPTHSKEIPALTAVETGATNPLVPSDTVQTRHVV.QHRSRSE
+  SSIESFFA......RGACVTIM...TVDNPAS.TTNKDKLFAVWKITYK...........
+  ......................DTVQLRRKLEFFTYSRFDMELTFVVTANFTETNNGHAL
+  NQVYQIMYIPPGAP..............................................
+  VPEKWDDYTWQTSSNPSIFYTYGTAPA.RISVPYVGISNAYSHFYDGFSKVPLKDQSAAL
+  GDSLYGAASLNDFGILAVRVVNDHNP.TKVTSKIRVYLKPKHI..RVWCPRPPRAVAYYG
+  PGVDYKDGTLTPLSTKDLTTY....
+}
+{
+name 1al2_ac
+descrip 
+creator 
+type    PROTEIN
+group 1
+sequence
+  .........EACGYSDRVLQLTLGNSTITTQEAANSVVAYGRWPEYLRDSEANPVDQPTE
+  PDVAAC........RFYTLD.....TVSWTK......ESRGWWWKLPDALR.........
+  ......................DMGLFGQNMYYHYLGRSGYTVHVQCNASKF.......H
+  QGALGVFAVPEMCLAGDSNTTTMHTSYQNANPGEKGGTFTGTFTPDNNQTSPARRFCPVD
+  YLLGNGTLLGNAFVFPHQIINLRTNNCATLVLPYVNSLSIDSMVK...............
+  .........HNNWGIAILPLAPLNFA.SESSPEIPITLTIAPM.CCEFNGLRNITLPRLQ
+  .........................
+}

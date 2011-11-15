@@ -41,8 +41,15 @@ test: t_coffee -infile=input-clustal.txt -in=Mproba_pair -score=1 -output=score_
 ## iRMSD-APDB
 test: t_coffee -other_pg apdb -aln input-clustal.txt -apdb_outfile default -outfile default -io_format hsg3 -output score_html -maximum_distance 10 -md_threshold 2.0 -similarity_threshold 70 -run_name result -quiet stdout
 
+## 
 ## tm-coffee
+## Note: Blast+ have to be available somewhere in the system path
+## !! For some reason does not work in the VM linux box 
+## !! it may be required to run this test in the real linux machine
+## 
+export BLASTDB=/users/cn/jchang/projects/database/4blast/uniref50-TM
 test: t_coffee -in=input-tm.txt -mode=psicoffee -blast_server=LOCAL -protein_db=uniref50-TM -template_file=PSITM -prot_min_sim=30 -prot_max_sim=90 -prot_min_cov=0 -output=score_html tm_html clustalw_aln fasta_aln phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=on -outorder=input -run_name=result 
 if: env OSNAME = linux
+disabled: true
 assert: file result.tm_html exists
 

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE macsim SYSTEM "http://www-bio3d-igbmc.u-strasbg.fr/macsim.dtd">
+<macsim>
+<alignment>
+<aln-name>ref1/v1/1aab_ref1</aln-name>
+<sequence seq-type="Protein">
+<seq-name>1aab_</seq-name>
+<seq-info>
+<accession>1aab_</accession>
+<nid>1aab_</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+<ftable>
+<fitem><ftype>STRUCT</ftype><fstart>14</fstart><fstop>26</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+<fitem><ftype>STRUCT</ftype><fstart>41</fstart><fstop>48</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+<fitem><ftype>STRUCT</ftype><fstart>55</fstart><fstop>73</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+</ftable>
+<length>96</length>
+<weight>100</weight>
+</seq-info>
+<seq-data>---gkgdpkkprgkmssyaffvqtsreehkkkhpdasvnfsefskkcserwktmsakekgkfedmakadkaryeremktyippkge----------
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1j46_A</seq-name>
+<seq-info>
+<accession>1j46_A</accession>
+<nid>1j46_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+<ftable>
+<fitem><ftype>STRUCT</ftype><fstart>11</fstart><fstop>26</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+<fitem><ftype>STRUCT</ftype><fstart>32</fstart><fstop>43</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+<fitem><ftype>STRUCT</ftype><fstart>48</fstart><fstop>68</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+</ftable>
+<length>96</length>
+<weight>100</weight>
+</seq-info>
+<seq-data>------mqdrvkrpmnafivwsrdqrrkmalenp--rmrnseiskqlgyqwkmlteaekwpffqeaqklqamhrekypnykyrprrkakmlpk---
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1k99_A</seq-name>
+<seq-info>
+<accession>1k99_A</accession>
+<nid>1k99_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+<ftable>
+<fitem><ftype>STRUCT</ftype><fstart>17</fstart><fstop>30</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+<fitem><ftype>STRUCT</ftype><fstart>39</fstart><fstop>51</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+<fitem><ftype>STRUCT</ftype><fstart>57</fstart><fstop>80</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+</ftable>
+<length>96</length>
+<weight>100</weight>
+</seq-info>
+<seq-data>mkklkkhpdfpkkpltpyfrffmekrakyaklhp--emsnldltkilskkykelpekkkmkyiqdfqrekqefernlarfredhpdliqnakk---
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>2lef_A</seq-name>
+<seq-info>
+<accession>2lef_A</accession>
+<nid>2lef_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+<ftable>
+<fitem><ftype>STRUCT</ftype><fstart>9</fstart><fstop>24</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+<fitem><ftype>STRUCT</ftype><fstart>30</fstart><fstop>41</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+<fitem><ftype>STRUCT</ftype><fstart>46</fstart><fstop>66</fstop><fcolor>3</fcolor><fscore>0.00</fscore><fnote>HELIX</fnote></fitem>
+</ftable>
+<length>96</length>
+<weight>100</weight>
+</seq-info>
+<seq-data>--------mhikkplnafmlymkemranvvaest--lkesaainqilgrrwhalsreeqakyyelarkerqlhmqlypgwsardnygkkkkrkrek
+</seq-data></sequence>
+<column-score>
+<colsco-name>coreblock</colsco-name>
+<colsco-owner>0</colsco-owner>
+<colsco-type>int</colsco-type>
+<colsco-data>
+-1 -1 -1 -1 -1 -1 -1 -1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 </colsco-data>
+</column-score>
+</alignment>
+</macsim>

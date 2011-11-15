@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!DOCTYPE macsim SYSTEM "http://www-bio3d-igbmc.u-strasbg.fr/macsim.dtd">
+<macsim>
+<alignment>
+<aln-name>ref1/v1/1ped_ref1_truncated</aln-name>
+<sequence seq-type="Protein">
+<seq-name>1ped_A</seq-name>
+<seq-info>
+<accession>1ped_A</accession>
+<nid>1ped_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>mkgfamlgin--------klgwiekerpvags-------ydaivrplavspctsdihtvfegalg-----------drknmilgheavgevvevgsevk-----dfkpgdrvivpcttpdwrslevqagfqqhsng------------------mlagwkfsnfkdgvfgeyfhvndadmnlailpk-----------dmplenavmitdmmttgfhgael---adiqm-gssvvvigi--gavglmgiagaklrg-agriigvgs---rpicveaak-fygatdilnykn-----ghivdqvmkltn--gkgvdrvimagg---------------gsetlsqavsmvkp-ggiisnin--------yhgsgdalliprv-ewgcgmah-ktikgglcpg--------grlraemlrdmvvyn---rvdlsklvthvyh---gfdhi-eealllmkdkpkdlikavvil
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>2ohx_A</seq-name>
+<seq-info>
+<accession>2ohx_A</accession>
+<nid>2ohx_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>ckaavlweek-------kpfsieevevappka-------hevrikmvatgicrsddhvvs-gtlv-----------tplpviagheaagivesigegvt-----tvrpgdkviplftpqcgkcrvckhpegnfclkndlsmprgtmqdgtsrftcrgkpihhflgtstfsqytvvd--eisvakida-----------asplekvcligcgfstgygsavk--vakvtq-gstcavfgl--ggvglsvimgckaag-aariigvdi---nkdkfakak-evgatecvnpqd---ykkpiqevltemsn---ggvdfsfevig---------------rldtmvtalsccqeaygvsvivg--------vppdsqnlsmn----pmlllsg-rtwkgaifggf------kskdsvpklvadfmak---kfaldplithvlp----feki-negfdllrsge--sirtiltf
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1e3j_A</seq-name>
+<seq-info>
+<accession>1e3j_A</accession>
+<nid>1e3j_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>nlsavlykqn--------dlrleqrpipepke-------devllqmayvgicgsdvhyyehgriadfi--------vkdpmvigheasgtvvkvgknvk-----hlkkgdrvavepgvpcrrcqfck-egkynlcp--------------dltfcatppd-----dgnlaryyvha--adfchklpd-----------nvsleegall-eplsvgvhacrr---agvql-gttvlviga--gpiglvsvlaakayg-afvvctars----prrlevak-ncgadvtlvvdpakeeessiierirsaig---dlpnvtidcsg---------------nekcitiginitrt-ggtlmlvg----------mgsqmvtvp---lvnacare-idiksvfr----------ycndypialemvasg---rcnvkqlvthsfk----leqt-vdafeaarkkadntikvmisc
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1vj0_A</seq-name>
+<seq-info>
+<accession>1vj0_A</accession>
+<nid>1vj0_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>ahamvlekfn-------qplvykefeisdipr-------gsilveilsagvcgsdvhmfr-gedpr----------vplpiilghegagrvvevngekrdlngellkpgdlivwnrgitcgecywckvskepylcpn------------rkvyginrgcseyphlrgcysshivldp-etdvlkvse-----------kddldvlamamcsgatayhafde--ypesfa-gktvviqga--gplglfgvviarslg-aenviviag---spnrlklae-eigadltlnrre--tsveerrkaimdith--grgadfileatg---------------dsrallegsellrr-ggfysvag--------vavpqdpvpfk--vyewlvlkn-atfkgiwvs---------dtshfvktvsitsrn---yqllsklithrlp----lkea-nkalelmesre--alkvilyp
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1kol_A</seq-name>
+<seq-info>
+<accession>1kol_A</accession>
+<nid>1kol_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>nrgvvylgsg--------kvevqkidypkmqdprgkkiehgvilkvvstnicgsdqhmvr-grtt-----------aqvglvlgheitgeviekgrdven-----lqigdlvsvpfnvacgrcrsckemhtgvcltvn-----------paraggaygyvdmgdwtggqaeyvlvpyadfnllklpdrdka-------mekirdltclsdilptgyhgavt---agvgp-gstvyvaga--gpvglaaaasarllg-aavvivgdl---nparlahak-aqg-feiadlsl----dtplheqiaallg--epevdcavdavgfearghghegakheapatvlnslmqvtrv-agkigipglyvtedpgavdaaakigslsirfglgwaks-hsfhtgqtp---------vmkynralmqaimwd---riniaevvgvqvi---sldda-prgygefdag--vpkkfvidp
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1gu7_A</seq-name>
+<seq-info>
+<accession>1gu7_A</accession>
+<nid>1gu7_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>aqavlytqhg----epkdvlftqsfeidddnlap-----nevivktlgspvnpsdinqiq-gvypskpakttgfgttepaapcgneglfevikvgsnvs-----sleagdwvipshvn-----------------------------------------------fgtwrthalgn--dddfiklpnpaqskangkpngltinqgatisvnpltaylmlth--yvkltp-gkdwfiqnggtsavgkyasqigklln-fnsisvirdrpnldevvaslk-elgatqvitedqnn--srefgptikewikqsggeaklalncvg----------------gksstgiarklnn-nglmltyg---------gmsfqpvtip---tslyifkn-ftsagfwvtellknnkelktstlnqiiawyeeg---kltdaksietlydgtkplhelyqdgvanskdg-----kqlity
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1qor_A</seq-name>
+<seq-info>
+<accession>1qor_A</accession>
+<nid>1qor_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>atriefhkhg-----gpevlqaveftpadpae-------neiqvenkaiginfidtyirs-glypp----------pslpsglgteaagivskvgsgvk-----hikagdrvvyaqs-----------------------------------------------algayssvhnii--adkaailpa-----------aisfeqaaasflkgltvyyllrk--tyeikp-deqflfhaa-aggvgliacqwakalg-akligtvgt----aqkaqsal-kagawqvinyr-----eedlverlkeitg--gkkvrvvydsvg----------------rdtwersldclqr-rglmvsfg-------nssgavtgvnl-----gilnqkgslyvtrpslqgyi----ttreelteasnelfsliasgvikvdvaeqqkyp----lkda-qraheilesra-tqgssllip
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1iyz_A</seq-name>
+<seq-info>
+<accession>1iyz_A</accession>
+<nid>1iyz_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>mkawvlkrlg-------gplelvdlpepeaee-------gevvlrveavglnfadhlmrl-gayltr---------lhppfipgmevvgvve----------------grryaalvp------------------------------------------------qgglaervavp--kgallplpeg-----------lspeeaaafpvsfltaylalkr---aqarp-gekvlvqaa-agalgtaavqvaramg-lrvlaaasr----peklalpl-algaeeaatya--------evperakawg----gldlvlevrg-----------------keveeslgllah-ggrlvyig------------aaeapip---plrlmrrn-lavlgfwltpll------regalveealgfllprl-grelrpvvgpvfp----faea-eaafralldrg-htgkvvvrl
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1o89_A</seq-name>
+<seq-info>
+<accession>1o89_A</accession>
+<nid>1o89_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>lqallleqqt--------lasvqtldesrlpe-------gdvtvdvhwsslnykdalait-gkgkii---------rnfpmipgidfagtvrtsedpr-------fhagqevlltgwgvgen------------------------------------------hwgglaeqarvk--gdwlvampq-----------gldarkamiigtagftamlcvmaledagvrpqdgeivvtga-sggvgstavallhklg-yqvvavsgr----estheylk-slgasrvlprd--------efaesrplek---qvwagaidtvg----------------dkvlakvlaqmny-ggcvaacg---------laggftlptt---vmpfilrn-vrlqgvds--------vmtpperraqawqrlvadl-pesfytqaakeis----lsea-pnfaeaiinnq-iqgrtlvkv
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1vj1_A</seq-name>
+<seq-info>
+<accession>1vj1_A</accession>
+<nid>1vj1_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>qrvvlnsrpgkngnpvaenfrveefslldalne-----gqvqvrtlylsvdpyxrckxne-dtgtdylapw-----qlaqvadg-ggigiveeskhqk-------lakgdfvtsfywpwq--------------------------------------------------tkaild--gnglekvdpqlvd-------ghlsyflgaigxpgltsligvqekghisags-nqtxvvsga-agacgslagqighllgcsrvvgicgt----qekclfltselgfdaavnyktg-----nvaeqlreacp---ggvdvyfdnvg----------------gdisntvisqxne-nshiilcp---------------pplppaveairkernitrerftvlny-----kdkfepgilqlsqwfkeg-----klkvketvakg----lenx-gvafqsxxtgg-nvgkqivci
+</seq-data></sequence>
+<column-score>
+<colsco-name>coreblock</colsco-name>
+<colsco-owner>0</colsco-owner>
+<colsco-type>int</colsco-type>
+<colsco-data>
+0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 0 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 </colsco-data>
+</column-score>
+</alignment>
+</macsim>

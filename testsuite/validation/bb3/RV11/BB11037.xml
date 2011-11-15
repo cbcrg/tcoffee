@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE macsim SYSTEM "http://www-bio3d-igbmc.u-strasbg.fr/macsim.dtd">
+<macsim>
+<alignment>
+<aln-name>ref1/v1/gal4_ref1</aln-name>
+<sequence seq-type="Protein">
+<seq-name>put3_yeast</seq-name>
+<seq-info>
+<accession>put3_yeast</accession>
+<nid>put3_yeast</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+<length>1257</length>
+<weight>100</weight>
+</seq-info>
+<seq-data>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ssgqeeviqfqlpsynytkllidcfinyndg--cfyffneglvkcginklylenkwlyydntkkaldne--------ndpilqavwfckillilavgemylgsinnemlkn-------------ysnqpklpgskffqmgskifnclfsserlenvt--kkggievlllyafflqvadytlasyfyfgqalrtclilglhvd-------sqsdtlsryeiehhrrlwwtvymfermlsskaglplsftdytistalpadiddetieekn--------------------------shyvfrkaelisncvtivkinaqilsklyqrqpe------tniiitlkvvikqlle-wrnnlsdslqvd--------------------ftqkdedfkisrlstnmfteyfqginlavrpllfhfasiqlkrfktsntfvnlqn--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>yhx8_yeast</seq-name>
+<seq-info>
+<accession>yhx8_yeast</accession>
+<nid>yhx8_yeast</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+<length>1257</length>
+<weight>100</weight>
+</seq-info>
+<seq-data>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------tswvredgsfksidrslldrfiaayfkhnhr--lfpmidkiaflndaa-titdferly-------------------dnknypdsfvfkvymimaigcttlqragmvsqde-----------------eclsehlaflamkkfrsviilq---------dietvrcllllgiysffepkgssswtisgiimrltiglglnrel----takklksmsaleaearyrvfwsaycferlvctslgrisgiddeditvplpralyvderdd-----------------------------------lemtklmislrkmggriykqvhsvsa-------grqkltie-qkqeiisglrkeldeiysreserrklkksqmdqvere---nnsttnvisfhsseiwlamrysqlqillyrpsalmpkppidsl------stlgef--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>cat8_yeast</seq-name>
+<seq-info>
+<accession>cat8_yeast</accession>
+<nid>cat8_yeast</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+<length>1257</length>
+<weight>100</weight>
+</seq-info>
+<seq-data>------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ekpandqddells-lteikellhlffkfwsn--qvpilnndhfliyfn-nfvevvkhlstenletnnttks------tvttnheifalkllmmlqmgllvkikmekikytv--------------pknpkakyarlmayyhqlsliipknpyflnmsttslpslqllslasfyylnvgdisaiygvrgrivsmaqqlrlhrcpsavlsvhsnpvlqkfeqserrllfwaiyyvdvfaslqlgvprllkdfdiecalpisdveykdqlsmenekadkkakk---------------iqlqgqvssfslqiirfakilgnildsifkrgmmde-----ritsevalvhenaldnwrnqlpemyyfqitvngtvnldeiratnqrntetkfdkkdiilfekkilllfyflaksmihlpviatkplpknvdnatkkkqsmfnn--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>YB00_YEAST</seq-name>
+<seq-info>
+<accession>YB00_YEAST</accession>
+<nid>YB00_YEAST</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+<length>1257</length>
+<weight>100</weight>
+</seq-info>
+<seq-data>mnmdsgitsshgsmdktqkqssewaanqkhnqrventrvlmgpavpamppvpsnfppvptgtimspqlspfpdhrlrhhplahmmpadknflaynmesmnmdsgitsshgsmdktqkqssewaanqkhnqrventrvlmgpavpamppvpsnfppvptgtimspqlspfpdhrlrhhplahmmpadknflaynmesfksrvtkacdycrkrkircteiepisgkcrncikynkdctfhfheelkrrreealnnkgngksvkkprldkenkfkdenfdiavrsrntsstdsspklhtnlsqeyigvsagksasdkedtwpdfvpidrtvlekielnhtkvagkvfvleeicknmkgtieklaekskidvidkeymkrpkrkqyskalltkqkmfhfrqnvlshltdeeflspinemftttfkysilqtklvldfsfrsasspssdnilyplprlaiakrllk-nikcpslasllhivdvdqclqfad-vhfdpak-----------------------grltssqafllniclclgatvtnfeekqelvdednhetyyfekfelwrlrsftflnsvyyyhklsvara-----------dmtalkallllakfaqqkisassavkvlsvaikvaldlrlnlh-------styedleldeiikrrrlwcycfstdkffsvvlsrppflkeentdvltdesyvelfrdkilpnlsikyddsklegvkdivsvvnllanhleyvpyiqsyflsrlsliesqiyyscfsirttlddt--ldeiienvlenqkaldrmrddlptilslenykenmrils--------------------ldsskldfevsccttillhlrwyhqkitlslfvisiigdnldqressrhdiaeiirrsrldfkrncievlnilkdfeyyptvqneflyfslttvfsmflylseimvndehametgyiigllrdthtrmlgseerclsvhnlkwqtslffytfflrstmekfnltskyakfyafdsnyyegvlnrlvkhtreskddmvellktsfinkekmaafgsfvtedqekmevsfnifneitiqdlnflqfssipklwenktlepgeeyhhsngtntdnnettgaddtddnnnnnnnnnkngnnssstinnnnnnysnsnnndndnnindddddddddddddddddddddndddysnngadddeedddydrslfptglaslldasypertandyrdeneqsnklfekieghlehgvffydrdfffknvcvkm
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>s50366</seq-name>
+<seq-info>
+<accession>s50366</accession>
+<nid>s50366</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+<length>1257</length>
+<weight>100</weight>
+</seq-info>
+<seq-data>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------kkeflmydpifeln-eklsrsfldtfftrlqf--kypildeqeiytfyd--hylhnkilippsspatssaappsnshsyseiefhflsgrmwlvfsisayllmttgk--------------------ykgfpphryfstairhitkcglhln--------yvqqielltllvlyiirtdrdslilydiikdvmgiskkklhln--------qwypndpf-ankklrlfwcvyllermicvavgkpytikesei--nlplfnndsfytkgvhaaa----------------------pstndhgvqfinqslklrriesqfvetlqllkndsrsvkqsidqlplvrkffedlevwrksystldvkn-------------------------------fenetlklyyyrsvrlliqpyleffapedrl--frecqaaagqi--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</seq-data></sequence>
+<column-score>
+<colsco-name>coreblock</colsco-name>
+<colsco-owner>0</colsco-owner>
+<colsco-type>int</colsco-type>
+<colsco-data>
+-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 0 1 1 1 1 1 0 0 0 0 0 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 1 1 1 1 1 1 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 1 1 1 1 1 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 </colsco-data>
+</column-score>
+</alignment>
+</macsim>

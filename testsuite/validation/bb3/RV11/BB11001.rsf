@@ -1,0 +1,66 @@
+!!RICH_SEQUENCE 1.0
+..
+{
+name 1aab_
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 17 29 3 square solid STRUCT
+  FT   STRUCT       14     26  HELIX
+feature 44 51 3 square solid STRUCT
+  FT   STRUCT       41     48  HELIX
+feature 58 76 3 square solid STRUCT
+  FT   STRUCT       55     73  HELIX
+sequence
+  ...GKGDPKKPRGKMSSYAFFVQTSREEHKKKHPDASVNFSEFSKKCSERWKTMSAKEKG
+  KFEDMAKADKARYEREMKTYIPPKGE..........
+}
+{
+name 1j46_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 17 32 3 square solid STRUCT
+  FT   STRUCT       11     26  HELIX
+feature 40 51 3 square solid STRUCT
+  FT   STRUCT       32     43  HELIX
+feature 56 76 3 square solid STRUCT
+  FT   STRUCT       48     68  HELIX
+sequence
+  ......MQDRVKRPMNAFIVWSRDQRRKMALENP..RMRNSEISKQLGYQWKMLTEAEKW
+  PFFQEAQKLQAMHREKYPNYKYRPRRKAKMLPK...
+}
+{
+name 1k99_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 17 30 3 square solid STRUCT
+  FT   STRUCT       17     30  HELIX
+feature 41 53 3 square solid STRUCT
+  FT   STRUCT       39     51  HELIX
+feature 59 82 3 square solid STRUCT
+  FT   STRUCT       57     80  HELIX
+sequence
+  MKKLKKHPDFPKKPLTPYFRFFMEKRAKYAKLHP..EMSNLDLTKILSKKYKELPEKKKM
+  KYIQDFQREKQEFERNLARFREDHPDLIQNAKK...
+}
+{
+name 2lef_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 17 32 3 square solid STRUCT
+  FT   STRUCT        9     24  HELIX
+feature 40 51 3 square solid STRUCT
+  FT   STRUCT       30     41  HELIX
+feature 56 76 3 square solid STRUCT
+  FT   STRUCT       46     66  HELIX
+sequence
+  ........MHIKKPLNAFMLYMKEMRANVVAEST..LKESAAINQILGRRWHALSREEQA
+  KYYELARKERQLHMQLYPGWSARDNYGKKKKRKREK
+}

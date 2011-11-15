@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE macsim SYSTEM "http://www-bio3d-igbmc.u-strasbg.fr/macsim.dtd">
+<macsim>
+<alignment>
+<aln-name>ref1/v1/1gdoA_ref1_truncated</aln-name>
+<sequence seq-type="Protein">
+<seq-name>1jgt_A</seq-name>
+<seq-info>
+<accession>1jgt_A</accession>
+<nid>1jgt_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>--------------gerslaatlvhaps------vapdravarsltgapttavlageiynrdellsvlpagp----apegdaelvlrllerydlh-----------------afrlvngrfatvvrtgd--rvllatdhagsvplytcvap-----gevrasteakalaahpkg------------fpladarrvagltgvyqvpagavmdidlgs--gtavthrt----------------wtpg
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1ct9_A</seq-name>
+<seq-info>
+<accession>1ct9_A</accession>
+<nid>1ct9_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>-------------------nailaherlsivd--vnagaqplynqq-kthvlavngeiynhqalraeygd--ryqfqtgsdcevilalyqekgpe-----------------flddlqgmfafalydsekdayligrdhlgiiplymgydeh----gqlyvasemkalvpvc--------------------------rtikefpagsylwsq-------dgeirsy---------------yhrd
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1q19_A</seq-name>
+<seq-info>
+<accession>1q19_A</accession>
+<nid>1q19_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>-------------------ngylfieqn--------ghyqkcem---ergtayligslynrtfliglagvwe-geaylandaellallftrlg-----------------analalaegdfcffidepng-eltvitesrgfspvhvvqgk------kawmtnslklvtaaegegalwfeeealvcqslmradtytpvknaqrlkpgavhvlthdsegysfvesrtl---------------ttpa
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1ecf_A</seq-name>
+<seq-info>
+<accession>1ecf_A</accession>
+<nid>1ecf_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>anglvsdvfearhmqrlqgnmgighvryptagsssaseaqpfyvnspygitlahngnltnahelrkklfeekrrhinttsdseillnifaseldnfrhypleadnifaaiaatnrlirgayacvamiigh-gmvafrdpngirplvlgkrdidenrteymvasesvaldtlg-------------------------fdflrdvapgeaiyite----egqlftrqcadnpvsnpclfeyvyfarp
+</seq-data></sequence>
+<column-score>
+<colsco-name>coreblock</colsco-name>
+<colsco-owner>0</colsco-owner>
+<colsco-type>int</colsco-type>
+<colsco-data>
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 </colsco-data>
+</column-score>
+</alignment>
+</macsim>

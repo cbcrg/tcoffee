@@ -1,0 +1,88 @@
+!!RICH_SEQUENCE 1.0
+..
+{
+name 1ycc_
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 30 41 3 square solid STRUCT
+  FT   STRUCT        3     13  HELIX
+feature 82 87 3 square solid STRUCT
+  FT   STRUCT       50     55  HELIX
+feature 93 101 3 square solid STRUCT
+  FT   STRUCT       61     69  HELIX
+feature 103 106 3 square solid STRUCT
+  FT   STRUCT       71     74  HELIX
+feature 147 157 3 square solid STRUCT
+  FT   STRUCT       88     98  HELIX
+sequence
+  ...........................GSAKKGATLFKT.RCLQCHTVEK....GGPHKV
+  GPNLHGIFGRHSGQAEGYSYTDANIKKNVLWDENNMSEYLTNPKKY....IPGTKMAFGG
+  L.......................KKEKDRNDLITYLKKACE..
+}
+{
+name 1cno_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 30 41 3 square solid STRUCT
+  FT   STRUCT        4     13  HELIX
+feature 43 46 3 square solid STRUCT
+  FT   STRUCT       15     18  HELIX
+feature 93 104 3 square solid STRUCT
+  FT   STRUCT       37     48  HELIX
+feature 113 120 3 square solid STRUCT
+  FT   STRUCT       57     64  HELIX
+feature 147 159 3 square solid STRUCT
+  FT   STRUCT       69     81  HELIX
+sequence
+  ..........................AGDIEAGKAKAA..VCAACHGQNG....ISQVPI
+  YPNLAGQ........................KEQYLVAALKAYKAGQRQGGQAPVMQGQA
+  TA......................LSDADIANLAAYYASNPAAA
+}
+{
+name 1a56_
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 32 38 3 square solid STRUCT
+  FT   STRUCT        2      8  HELIX
+feature 42 45 3 square solid STRUCT
+  FT   STRUCT       10     13  HELIX
+feature 79 86 3 square solid STRUCT
+  FT   STRUCT       25     32  HELIX
+feature 92 102 3 square solid STRUCT
+  FT   STRUCT       38     48  HELIX
+feature 148 160 3 square solid STRUCT
+  FT   STRUCT       68     80  HELIX
+sequence
+  ..............................DADLAKKN..NCIACHQVE.......TKVV
+  GPA...............LKDIAAKYADKDDAATYLAGKIKGGSSGV...WGQIPMPPNV
+  N.......................VSDADAKALADWILTLK...
+}
+{
+name 1h31_B
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 5 7 3 square solid STRUCT
+  FT   STRUCT        5      7  HELIX
+feature 27 33 3 square solid STRUCT
+  FT   STRUCT       27     33  HELIX
+feature 42 44 3 square solid STRUCT
+  FT   STRUCT       42     44  HELIX
+feature 82 85 3 square solid STRUCT
+  FT   STRUCT       67     70  HELIX
+feature 93 106 3 square solid STRUCT
+  FT   STRUCT       73     86  HELIX
+feature 147 157 3 square solid STRUCT
+  FT   STRUCT      123    133  HELIX
+sequence
+  AEVAPGDVAIDGQGHVARPLTDAPGDPVEGRRLMTDRSVGNCIACHEVTEMADAQFPGTV
+  GPS...............LDGVAARYP.....EAMIRGILVNSKNV....FPETVMPAYY
+  RVEGFNRPGIAFTSKPIEGEIRPLMTAGQIEDVVAYLMTLTQ..
+}

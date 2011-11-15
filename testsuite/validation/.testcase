@@ -1,0 +1,3 @@
+test: t_coffee BB11001.tfa -output msf
+assert: file BB11001.msf exists
+assert: ./bali_score BB11001.xml BB11001.msf | grep auto | awk '{ print $4 }' > 0.40

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE macsim SYSTEM "http://www-bio3d-igbmc.u-strasbg.fr/macsim.dtd">
+<macsim>
+<alignment>
+<aln-name>ref1/v1/1csy_ref1_truncated</aln-name>
+<sequence seq-type="Protein">
+<seq-name>2pna_</seq-name>
+<seq-info>
+<accession>2pna_</accession>
+<nid>2pna_</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>lqdaewywgdisreevneklrdt--adgtflvrdastkmhgdytltlrkgg-----nnklikifhrd--------------------gkygfsdp-----ltfnsvvelinhyrneslaqyn-pkldvkll
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1mw4_A</seq-name>
+<seq-info>
+<accession>1mw4_A</accession>
+<nid>1mw4_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>hrtqlwfhgrisreesqrligqqglvdglflvresqrnp-qgfvlslchlq-----kvkhylilpsee------------------egrlyfsmddgq--trftdllqlvefhqlnrg----ilpcllrhc
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1uur_A</seq-name>
+<seq-info>
+<accession>1uur_A</accession>
+<nid>1uur_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>lwqegiiygymgrqevndalqnq--dpgtfiirfsernp-gqfgiayigvempa--rikhylvqpndtaaakktfpdflsehsqfvnllqwtkdt--ngaprflklhkdtalgsfapkrta---pvpvggx
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1bf5_A</seq-name>
+<seq-info>
+<accession>1bf5_A</accession>
+<nid>1bf5_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>lwndgcimgfiskererallkdq--qpgtfllrfsessregaitftwversqnggepdfhavepytkkelsavtfpdiirn--ykvmaaenipen--plkylypnidkdhafgkyysrg-------xikte
+</seq-data></sequence>
+<column-score>
+<colsco-name>coreblock</colsco-name>
+<colsco-owner>0</colsco-owner>
+<colsco-type>int</colsco-type>
+<colsco-data>
+0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 0 </colsco-data>
+</column-score>
+</alignment>
+</macsim>

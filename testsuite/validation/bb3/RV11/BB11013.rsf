@@ -1,0 +1,100 @@
+!!RICH_SEQUENCE 1.0
+..
+{
+name 1idy_
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 45 57 3 square solid STRUCT
+  FT   STRUCT       10     22  HELIX
+feature 63 69 3 square solid STRUCT
+  FT   STRUCT       27     33  HELIX
+feature 80 89 3 square solid STRUCT
+  FT   STRUCT       39     48  HELIX
+feature 91 93 3 square solid STRUCT
+  FT   STRUCT       50     52  HELIX
+sequence
+  ...................................MEVKKTSWTEEEDRILYQAHKRLG.
+  NRWAEIAKLLP.....GRTDNAIKNHWNSTMRRKV....................
+}
+{
+name 1hst_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 43 52 3 square solid STRUCT
+  FT   STRUCT        5     14  HELIX
+feature 61 63 0 square solid STRUCT
+  FT   STRUCT       22     24  STRAND
+feature 63 73 3 square solid STRUCT
+  FT   STRUCT       24     34  HELIX
+feature 80 93 3 square solid STRUCT
+  FT   STRUCT       41     54  HELIX
+feature 97 100 0 square solid STRUCT
+  FT   STRUCT       58     61  STRAND
+feature 108 111 0 square solid STRUCT
+  FT   STRUCT       69     72  STRAND
+sequence
+  ......................................SHPTYSEMIAAAIRAEKSRGG.
+  SSRQSIQKYIKSHYKVGHNADLQIKLSIRRLLAAGVLKQTKGVGASGSFRLAK..
+}
+{
+name 1tc3_C
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 46 57 3 square solid STRUCT
+  FT   STRUCT        8     19  HELIX
+feature 63 70 3 square solid STRUCT
+  FT   STRUCT       24     31  HELIX
+feature 80 88 3 square solid STRUCT
+  FT   STRUCT       35     43  HELIX
+sequence
+  ......................................PRGSALSDTERAQLDVMKLLN.
+  VSLHEMSRKIS......RSRHCIRVYLKDPVSYGTS...................
+}
+{
+name 1aoy_
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 47 56 3 square solid STRUCT
+  FT   STRUCT       10     19  HELIX
+feature 63 73 3 square solid STRUCT
+  FT   STRUCT       26     36  HELIX
+feature 80 90 3 square solid STRUCT
+  FT   STRUCT       43     53  HELIX
+feature 93 96 0 square solid STRUCT
+  FT   STRUCT       56     59  STRAND
+feature 102 105 0 square solid STRUCT
+  FT   STRUCT       65     68  STRAND
+sequence
+  .....................................MRSSAKQEELVKAFKALLKEEKF
+  SSQGEIVAALQEQGFDNINQSKVSRMLTKFGAVRTRNAKMEMVYCLPAELGVPTT
+}
+{
+name 1jhg_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 2 24 3 square solid STRUCT
+  FT   STRUCT        2     24  HELIX
+feature 28 35 3 square solid STRUCT
+  FT   STRUCT       28     35  HELIX
+feature 38 56 3 square solid STRUCT
+  FT   STRUCT       38     56  HELIX
+feature 63 70 3 square solid STRUCT
+  FT   STRUCT       61     68  HELIX
+feature 80 92 3 square solid STRUCT
+  FT   STRUCT       72     84  HELIX
+feature 95 105 3 square solid STRUCT
+  FT   STRUCT       87     97  HELIX
+sequence
+  SAAMAEQRHQEWLRFVDLLKNAYQNDLHLPLLNLMLTPDEREALGTRVRIIEELLRGE..
+  MSQRELKNELG......AGIATITRGSNSLKAAPVELRQWLEEVLLKSD......
+}

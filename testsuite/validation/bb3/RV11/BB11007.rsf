@@ -1,0 +1,707 @@
+!!RICH_SEQUENCE 1.0
+..
+{
+name 1cpt_
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 11 18 3 square solid STRUCT
+  FT   STRUCT        9     16  HELIX
+feature 21 24 3 square solid STRUCT
+  FT   STRUCT       19     22  HELIX
+feature 26 39 3 square solid STRUCT
+  FT   STRUCT       24     37  HELIX
+feature 44 47 0 square solid STRUCT
+  FT   STRUCT       40     43  STRAND
+feature 55 58 0 square solid STRUCT
+  FT   STRUCT       51     54  STRAND
+feature 61 69 3 square solid STRUCT
+  FT   STRUCT       57     65  HELIX
+feature 75 76 0 square solid STRUCT
+  FT   STRUCT       70     71  STRAND
+feature 94 103 3 square solid STRUCT
+  FT   STRUCT       82     91  HELIX
+feature 114 116 3 square solid STRUCT
+  FT   STRUCT      102    104  HELIX
+feature 122 132 3 square solid STRUCT
+  FT   STRUCT      109    118  HELIX
+feature 139 161 3 square solid STRUCT
+  FT   STRUCT      123    145  HELIX
+feature 168 171 0 square solid STRUCT
+  FT   STRUCT      150    153  STRAND
+feature 171 174 3 square solid STRUCT
+  FT   STRUCT      153    156  HELIX
+feature 179 188 3 square solid STRUCT
+  FT   STRUCT      161    170  HELIX
+feature 201 212 3 square solid STRUCT
+  FT   STRUCT      174    185  HELIX
+feature 233 255 3 square solid STRUCT
+  FT   STRUCT      193    215  HELIX
+feature 268 274 3 square solid STRUCT
+  FT   STRUCT      223    229  HELIX
+feature 286 317 3 square solid STRUCT
+  FT   STRUCT      239    270  HELIX
+feature 319 327 3 square solid STRUCT
+  FT   STRUCT      272    280  HELIX
+feature 347 361 3 square solid STRUCT
+  FT   STRUCT      282    296  HELIX
+feature 369 372 0 square solid STRUCT
+  FT   STRUCT      303    306  STRAND
+feature 376 378 0 square solid STRUCT
+  FT   STRUCT      310    312  STRAND
+feature 382 384 0 square solid STRUCT
+  FT   STRUCT      315    317  STRAND
+feature 389 392 0 square solid STRUCT
+  FT   STRUCT      322    325  STRAND
+feature 394 397 3 square solid STRUCT
+  FT   STRUCT      327    330  HELIX
+feature 447 465 3 square solid STRUCT
+  FT   STRUCT      365    383  HELIX
+feature 465 470 0 square solid STRUCT
+  FT   STRUCT      383    388  STRAND
+feature 476 477 0 square solid STRUCT
+  FT   STRUCT      393    394  STRAND
+feature 489 492 0 square solid STRUCT
+  FT   STRUCT      403    405  STRAND
+feature 494 499 0 square solid STRUCT
+  FT   STRUCT      407    412  STRAND
+sequence
+  ..MDARATIPEHIARTVILPQGYADDEVIYPAFKWLRDEQ..PLAMAHIEGYDPMWIATK
+  HADVMQIGKQPG.LFSNAE.......GSEILYDQNNEAFMRSISGGCPHVIDSLTSMDP.
+  PTHT.AYRGLTLNWFQ..PASIRKLEENIRRIAQASVQRLLDFD..GECDFMTDCALYYP
+  LHVVMTALGVP.........EDDEPLMLKLTQDFFG.............VEAARRFHETI
+  ATFYDYFNGFTVDRRSCP.....KDDVMSLLANSKLD..GNYIDDKYINAYYVAIATAGH
+  DTTSSSSGGAIIGLSRNPEQLALAKSDP..................ALIPRLVDEAVRWT
+  APVK.SFMRTALADTEVRG.QNIKRGDRIMLSYPSANRDEEVFS.NPDEFDITRF.....
+  .....PNRHLGFGWG....AHMCLGQHLAKLEMKIFFEELLPKLKSVELS.GPPRLVAT.
+  ..NFVGGPK.NVPIRFTKA......
+}
+{
+name 1oxa_
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 23 25 3 square solid STRUCT
+  FT   STRUCT        9     11  HELIX
+feature 29 39 3 square solid STRUCT
+  FT   STRUCT       15     25  HELIX
+feature 44 50 0 square solid STRUCT
+  FT   STRUCT       28     33  STRAND
+feature 53 58 0 square solid STRUCT
+  FT   STRUCT       36     41  STRAND
+feature 61 69 3 square solid STRUCT
+  FT   STRUCT       44     52  HELIX
+feature 75 76 0 square solid STRUCT
+  FT   STRUCT       56     57  STRAND
+feature 91 93 3 square solid STRUCT
+  FT   STRUCT       72     74  HELIX
+feature 98 104 3 square solid STRUCT
+  FT   STRUCT       79     85  HELIX
+feature 113 115 3 square solid STRUCT
+  FT   STRUCT       89     91  HELIX
+feature 122 132 3 square solid STRUCT
+  FT   STRUCT       96    105  HELIX
+feature 139 143 3 square solid STRUCT
+  FT   STRUCT      110    114  HELIX
+feature 146 160 3 square solid STRUCT
+  FT   STRUCT      117    131  HELIX
+feature 168 171 0 square solid STRUCT
+  FT   STRUCT      136    139  STRAND
+feature 171 174 3 square solid STRUCT
+  FT   STRUCT      139    142  HELIX
+feature 178 188 3 square solid STRUCT
+  FT   STRUCT      146    156  HELIX
+feature 206 215 3 square solid STRUCT
+  FT   STRUCT      165    174  HELIX
+feature 230 256 3 square solid STRUCT
+  FT   STRUCT      178    204  HELIX
+feature 267 273 3 square solid STRUCT
+  FT   STRUCT      210    216  HELIX
+feature 275 276 0 square solid STRUCT
+  FT   STRUCT      218    219  STRAND
+feature 280 281 0 square solid STRUCT
+  FT   STRUCT      223    224  STRAND
+feature 285 316 3 square solid STRUCT
+  FT   STRUCT      227    258  HELIX
+feature 318 326 3 square solid STRUCT
+  FT   STRUCT      260    268  HELIX
+feature 328 359 3 square solid STRUCT
+  FT   STRUCT      270    283  HELIX
+feature 367 371 0 square solid STRUCT
+  FT   STRUCT      290    294  STRAND
+feature 375 377 0 square solid STRUCT
+  FT   STRUCT      298    300  STRAND
+feature 381 383 0 square solid STRUCT
+  FT   STRUCT      303    305  STRAND
+feature 388 391 0 square solid STRUCT
+  FT   STRUCT      310    313  STRAND
+feature 393 396 3 square solid STRUCT
+  FT   STRUCT      315    318  HELIX
+feature 446 463 3 square solid STRUCT
+  FT   STRUCT      353    370  HELIX
+feature 468 469 0 square solid STRUCT
+  FT   STRUCT      375    376  STRAND
+feature 473 475 3 square solid STRUCT
+  FT   STRUCT      380    382  HELIX
+feature 493 495 0 square solid STRUCT
+  FT   STRUCT      398    400  STRAND
+sequence
+  ..............ATVPDLESDSFHVDWYSTYAELRETA..PVTPVR.FLGQDAWLVTG
+  YDEAKAALSDLR..LSSDPKKKYPGVEVEFPAYLGFPEDVRNYFA.....TNMGTS.DP.
+  PTHT.RLRKLVSQEFT..VRRVEAMRPRVEQITAELLDEVGDSG...VVDIVDRFAHPLP
+  IKVICELLGVD.........EAARGAFGRWSSEILVMD...........PERAEQRGQAA
+  REVVNFILDLVERRRTEP.....GDDLLSALISVQDDDDGR.LSADELTSIALVLLLAGF
+  EASVSLIGIGTYLLLTHPDQLALVRADP..................SALPNAVEEILRYI
+  APPE.TTTRFAAEEVEIGG.VAIPQYSTVLVANGAANRDPSQFP.DPHRFDVTRD.....
+  .....TRGHLSFGQG....IHFCMGRPLAKLEGEVALRALFGRFPALSLGIDADDVVWRR
+  S.LLLRGID.HLPVRLDG.......
+}
+{
+name 1phd_
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 11 13 3 square solid STRUCT
+  FT   STRUCT       11     13  HELIX
+feature 25 27 3 square solid STRUCT
+  FT   STRUCT       25     27  HELIX
+feature 29 37 3 square solid STRUCT
+  FT   STRUCT       29     37  HELIX
+feature 44 47 0 square solid STRUCT
+  FT   STRUCT       44     47  STRAND
+feature 51 53 3 square solid STRUCT
+  FT   STRUCT       49     51  HELIX
+feature 55 58 0 square solid STRUCT
+  FT   STRUCT       53     56  STRAND
+feature 61 69 3 square solid STRUCT
+  FT   STRUCT       59     67  HELIX
+feature 75 76 0 square solid STRUCT
+  FT   STRUCT       72     73  STRAND
+feature 98 103 3 square solid STRUCT
+  FT   STRUCT       81     86  HELIX
+feature 122 135 3 square solid STRUCT
+  FT   STRUCT       98    110  HELIX
+feature 139 163 3 square solid STRUCT
+  FT   STRUCT      112    136  HELIX
+feature 168 171 0 square solid STRUCT
+  FT   STRUCT      138    141  STRAND
+feature 171 174 3 square solid STRUCT
+  FT   STRUCT      141    144  HELIX
+feature 178 188 3 square solid STRUCT
+  FT   STRUCT      148    158  HELIX
+feature 201 215 3 square solid STRUCT
+  FT   STRUCT      162    176  HELIX
+feature 236 256 3 square solid STRUCT
+  FT   STRUCT      184    204  HELIX
+feature 267 272 3 square solid STRUCT
+  FT   STRUCT      210    215  HELIX
+feature 275 276 0 square solid STRUCT
+  FT   STRUCT      218    219  STRAND
+feature 281 282 0 square solid STRUCT
+  FT   STRUCT      222    223  STRAND
+feature 285 300 3 square solid STRUCT
+  FT   STRUCT      226    241  HELIX
+feature 303 316 3 square solid STRUCT
+  FT   STRUCT      244    257  HELIX
+feature 318 326 3 square solid STRUCT
+  FT   STRUCT      259    267  HELIX
+feature 328 359 3 square solid STRUCT
+  FT   STRUCT      269    282  HELIX
+feature 367 371 0 square solid STRUCT
+  FT   STRUCT      288    292  STRAND
+feature 375 377 0 square solid STRUCT
+  FT   STRUCT      296    298  STRAND
+feature 381 383 0 square solid STRUCT
+  FT   STRUCT      301    303  STRAND
+feature 388 391 0 square solid STRUCT
+  FT   STRUCT      308    311  STRAND
+feature 393 395 3 square solid STRUCT
+  FT   STRUCT      313    315  HELIX
+feature 435 441 3 square solid STRUCT
+  FT   STRUCT      344    346  HELIX
+feature 446 463 3 square solid STRUCT
+  FT   STRUCT      351    368  HELIX
+feature 468 469 0 square solid STRUCT
+  FT   STRUCT      373    374  STRAND
+feature 478 479 0 square solid STRUCT
+  FT   STRUCT      382    383  STRAND
+feature 487 488 0 square solid STRUCT
+  FT   STRUCT      389    390  STRAND
+feature 493 495 0 square solid STRUCT
+  FT   STRUCT      394    396  STRAND
+feature 498 500 3 square solid STRUCT
+  FT   STRUCT      399    401  HELIX
+sequence
+  NLAPLPPHVPEHLVFDFDMYNPSNLSAGVQEAWAVLQESNVPDLVWTR..CNGGHWIATR
+  GQLIREAYEDYR.HFSSECP..............FIPREAGEAYD......FIPTSMDP.
+  PEQR.QFRALANQVVG..MPVVDKLENRIQELACSLIESLRPQG...QCNFTEDYAEPFP
+  IRIFMLLAGLP.........EEDIPHLKYLTDQMTR.............PDGSMTFAEAK
+  EALYDYLIPIIEQRRQKP.....GTDAISIVANGQVN..GRPITSDEAKRMCGLLLVGGL
+  DTVVNFLSFSMEFLAKSPEHRQELIERP..................ERIPAACEELLRRF
+  SLV..ADGRILTSDYEFHG.VQLKKGDQILLPQMLSGLDERENA.CPMHVDFSRQ.....
+  .....KVSHTTFGHG....SHLCLGQHLARREIIVTLKEWLTRIPDFSIA.PGAQIQHKS
+  ..GIVSGVQ.ALPLVWDPATTKAV.
+}
+{
+name 2hpd_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 21 24 3 square solid STRUCT
+  FT   STRUCT       17     20  HELIX
+feature 29 40 3 square solid STRUCT
+  FT   STRUCT       25     36  HELIX
+feature 44 50 0 square solid STRUCT
+  FT   STRUCT       39     44  STRAND
+feature 53 58 0 square solid STRUCT
+  FT   STRUCT       47     52  STRAND
+feature 61 67 3 square solid STRUCT
+  FT   STRUCT       55     61  HELIX
+feature 75 77 0 square solid STRUCT
+  FT   STRUCT       67     69  STRAND
+feature 96 105 3 square solid STRUCT
+  FT   STRUCT       73     82  HELIX
+feature 113 115 3 square solid STRUCT
+  FT   STRUCT       86     88  HELIX
+feature 121 135 3 square solid STRUCT
+  FT   STRUCT       94    107  HELIX
+feature 142 161 3 square solid STRUCT
+  FT   STRUCT      112    131  HELIX
+feature 169 171 0 square solid STRUCT
+  FT   STRUCT      139    141  STRAND
+feature 171 188 3 square solid STRUCT
+  FT   STRUCT      141    158  HELIX
+feature 194 196 3 square solid STRUCT
+  FT   STRUCT      164    166  HELIX
+feature 202 219 3 square solid STRUCT
+  FT   STRUCT      172    189  HELIX
+feature 229 257 3 square solid STRUCT
+  FT   STRUCT      198    226  HELIX
+feature 267 272 3 square solid STRUCT
+  FT   STRUCT      233    238  HELIX
+feature 285 316 3 square solid STRUCT
+  FT   STRUCT      251    282  HELIX
+feature 318 331 3 square solid STRUCT
+  FT   STRUCT      284    297  HELIX
+feature 340 344 3 square solid STRUCT
+  FT   STRUCT      305    309  HELIX
+feature 347 359 3 square solid STRUCT
+  FT   STRUCT      312    324  HELIX
+feature 366 371 0 square solid STRUCT
+  FT   STRUCT      330    335  STRAND
+feature 375 377 0 square solid STRUCT
+  FT   STRUCT      339    341  STRAND
+feature 381 383 0 square solid STRUCT
+  FT   STRUCT      345    347  STRAND
+feature 388 393 0 square solid STRUCT
+  FT   STRUCT      352    357  STRAND
+feature 393 396 3 square solid STRUCT
+  FT   STRUCT      357    360  HELIX
+feature 400 403 3 square solid STRUCT
+  FT   STRUCT      364    367  HELIX
+feature 412 415 3 square solid STRUCT
+  FT   STRUCT      376    379  HELIX
+feature 418 420 3 square solid STRUCT
+  FT   STRUCT      382    384  HELIX
+feature 435 441 3 square solid STRUCT
+  FT   STRUCT      396    398  HELIX
+feature 446 464 3 square solid STRUCT
+  FT   STRUCT      403    421  HELIX
+feature 464 467 0 square solid STRUCT
+  FT   STRUCT      421    424  STRAND
+feature 478 480 0 square solid STRUCT
+  FT   STRUCT      433    435  STRAND
+feature 486 488 0 square solid STRUCT
+  FT   STRUCT      439    441  STRAND
+feature 493 498 0 square solid STRUCT
+  FT   STRUCT      445    450  STRAND
+sequence
+  ....TIKEMPQPKTFGELKNLPLLNTDKPVQALMKIADEL.GEIFKFE.APGRVTRYLSS
+  QRLIKEACDESR..FDKNLS...............QALKFVRDFAG....DGLFTSWTHE
+  KNWK.KAHNILLPSFS..QQAMKGYHAMMVDIAVQLVQKWERLNADEHIEVPEDMTRLTL
+  DTIGLCGFNYRFNSFYRDQPHPFITSMVRALDEAMNKLQRAN.PDDPAYDENKRQFQEDI
+  KVMNDLVDKIIADRKASGEQ...SDDLLTHMLNGKDPETGEPLDDENIRYQIITFLIAGH
+  ETTSGLLSFALYFLVKNPHVLQKAAEEAARVL.VDPVPSYKQVKQLKYVGMVLNEALRLW
+  PTAP.AFSLYAKEDTVLGGEYPLEKGDELMVLIPQLHRDKTIWGDDVEEFRPERFENPSA
+  IP...QHAFKPFGNG....QRACIGQQFALHEATLVLGMMLKHFDFEDH..TNYELDIKE
+  ..TLTLKPE.GFVVKAKSKKIPLGG
+}
+{
+name 1dt6_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 22 24 3 square solid STRUCT
+  FT   STRUCT       14     16  HELIX
+feature 29 40 3 square solid STRUCT
+  FT   STRUCT       21     32  HELIX
+feature 44 48 0 square solid STRUCT
+  FT   STRUCT       35     39  STRAND
+feature 54 58 0 square solid STRUCT
+  FT   STRUCT       44     48  STRAND
+feature 61 68 3 square solid STRUCT
+  FT   STRUCT       51     58  HELIX
+feature 123 134 3 square solid STRUCT
+  FT   STRUCT       91    101  HELIX
+feature 145 161 3 square solid STRUCT
+  FT   STRUCT      112    128  HELIX
+feature 174 187 3 square solid STRUCT
+  FT   STRUCT      140    153  HELIX
+feature 202 216 3 square solid STRUCT
+  FT   STRUCT      163    177  HELIX
+feature 231 255 3 square solid STRUCT
+  FT   STRUCT      188    212  HELIX
+feature 267 272 3 square solid STRUCT
+  FT   STRUCT      223    228  HELIX
+feature 285 316 3 square solid STRUCT
+  FT   STRUCT      241    272  HELIX
+feature 318 331 3 square solid STRUCT
+  FT   STRUCT      274    287  HELIX
+feature 340 343 3 square solid STRUCT
+  FT   STRUCT      296    299  HELIX
+feature 347 360 3 square solid STRUCT
+  FT   STRUCT      303    316  HELIX
+feature 369 370 0 square solid STRUCT
+  FT   STRUCT      325    326  STRAND
+feature 388 391 0 square solid STRUCT
+  FT   STRUCT      343    346  STRAND
+feature 393 397 3 square solid STRUCT
+  FT   STRUCT      348    352  HELIX
+feature 412 415 3 square solid STRUCT
+  FT   STRUCT      366    369  HELIX
+feature 446 464 3 square solid STRUCT
+  FT   STRUCT      395    413  HELIX
+feature 464 467 0 square solid STRUCT
+  FT   STRUCT      413    416  STRAND
+feature 472 474 3 square solid STRUCT
+  FT   STRUCT      421    423  HELIX
+feature 495 498 0 square solid STRUCT
+  FT   STRUCT      443    446  STRAND
+sequence
+  ........PPGPTPFPIIGNILQIDAKDISKSLTKFSECY.GPVFTVY.LGMKPTVVLHG
+  YEAVKEALVDLGEEFAGRGS...............VPILEKVSKG......LGIAFSNA.
+  KTWK.EMRRFSLMTLRNFGMGKRSIEDRIQEEARCLVEELRKTN.ASPCDPTFILGCAPC
+  NVICSVIFHNRFDYK.....DEEFLKLMESLHENVELLG....TPLDYFPGIHKTLLKNA
+  DYIKNFIMEKVKEHQKLLDVN.NPRDFIDCFLIKMEQENNLEFTLESLVIAVSDLFGAGT
+  ETTSTTLRYSLLLLLKHPEVAARVQEEIERVIGRHRSPCMQDRSRMPYTDAVIHEIQRFI
+  DLLPTNLPHAVTRDVRFRN.YFIPKGTDIITSLTSVLHDEKAFP.NPKVFDPGHFLDESG
+  NFKK.SDYFMPFSAG....KRMCVGEGLARMELFLFLTSILQNFKLQSLVEPKDLDITAV
+  VNGFVSVPP.SYQLCFIPIHH....
+}
+{
+name 1e9x_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 22 27 3 square solid STRUCT
+  FT   STRUCT       19     24  HELIX
+feature 29 40 3 square solid STRUCT
+  FT   STRUCT       26     37  HELIX
+feature 44 50 0 square solid STRUCT
+  FT   STRUCT       40     45  STRAND
+feature 53 58 0 square solid STRUCT
+  FT   STRUCT       48     53  STRAND
+feature 60 69 3 square solid STRUCT
+  FT   STRUCT       55     64  HELIX
+feature 75 76 0 square solid STRUCT
+  FT   STRUCT       70     71  STRAND
+feature 99 105 3 square solid STRUCT
+  FT   STRUCT       77     83  HELIX
+feature 122 131 3 square solid STRUCT
+  FT   STRUCT       93    101  HELIX
+feature 139 157 3 square solid STRUCT
+  FT   STRUCT      107    125  HELIX
+feature 163 171 0 square solid STRUCT
+  FT   STRUCT      131    136  STRAND
+feature 171 187 3 square solid STRUCT
+  FT   STRUCT      136    152  HELIX
+feature 190 193 3 square solid STRUCT
+  FT   STRUCT      155    158  HELIX
+feature 205 216 3 square solid STRUCT
+  FT   STRUCT      163    174  HELIX
+feature 220 223 3 square solid STRUCT
+  FT   STRUCT      178    181  HELIX
+feature 231 256 3 square solid STRUCT
+  FT   STRUCT      189    214  HELIX
+feature 267 273 3 square solid STRUCT
+  FT   STRUCT      225    231  HELIX
+feature 285 316 3 square solid STRUCT
+  FT   STRUCT      243    274  HELIX
+feature 318 334 3 square solid STRUCT
+  FT   STRUCT      276    292  HELIX
+feature 338 341 3 square solid STRUCT
+  FT   STRUCT      296    299  HELIX
+feature 347 359 3 square solid STRUCT
+  FT   STRUCT      305    317  HELIX
+feature 367 371 0 square solid STRUCT
+  FT   STRUCT      324    328  STRAND
+feature 375 377 0 square solid STRUCT
+  FT   STRUCT      332    334  STRAND
+feature 381 383 0 square solid STRUCT
+  FT   STRUCT      337    339  STRAND
+feature 388 391 0 square solid STRUCT
+  FT   STRUCT      344    347  STRAND
+feature 393 396 3 square solid STRUCT
+  FT   STRUCT      349    352  HELIX
+feature 412 415 3 square solid STRUCT
+  FT   STRUCT      367    370  HELIX
+feature 421 424 3 square solid STRUCT
+  FT   STRUCT      376    379  HELIX
+feature 435 441 3 square solid STRUCT
+  FT   STRUCT      390    392  HELIX
+feature 446 464 3 square solid STRUCT
+  FT   STRUCT      397    415  HELIX
+feature 464 468 0 square solid STRUCT
+  FT   STRUCT      415    419  STRAND
+feature 472 474 3 square solid STRUCT
+  FT   STRUCT      423    425  HELIX
+feature 477 478 0 square solid STRUCT
+  FT   STRUCT      428    429  STRAND
+feature 486 487 0 square solid STRUCT
+  FT   STRUCT      436    437  STRAND
+feature 493 498 0 square solid STRUCT
+  FT   STRUCT      442    447  STRAND
+sequence
+  ...MSAVALPRVSGGHDEHGHLEEFRTDPIGLMQRVRDEC.GDVGTFQ.LAGKQVVLLSG
+  SHANEFFFRAGDDDLDQAK.................AYPFMTPIF......GEGVVFDA.
+  SPER.RKEMLHNAALR..GEQMKGHAATIEDQVRRMIADWGEAG...EIDLLDFFAELTI
+  YTSSACLIGKKFR.......DQLDGRFAKLYHELERGTDPLAYVDPYLPIESFRRRDEAR
+  NGLVALVADIMNGRIANPPTDKSDRDMLDVLIAVKAETGTPRFSADEITGMFISMMFAGH
+  HTSSGTASWTLIELMRHRDAYAAVIDELDELYGDGRSVSFHALRQIPQLENVLKETLRLH
+  PPLI.ILMRVAKGEFEVQG.HRIHEGDLVAASPAISNRIPEDFP.DPHDFVPARYEQPRQ
+  EDLLNRWTWIPFGAG....RHRCVGAAFAIMQIKAIFSVLLREYEFEMAQPPESYRNDHS
+  K.MVVQLAQ.PACVRYRRRT.....
+}
+{
+name 1izo_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 20 38 3 square solid STRUCT
+  FT   STRUCT        8     26  HELIX
+feature 44 50 0 square solid STRUCT
+  FT   STRUCT       31     36  STRAND
+feature 53 58 0 square solid STRUCT
+  FT   STRUCT       39     44  STRAND
+feature 61 67 3 square solid STRUCT
+  FT   STRUCT       47     53  HELIX
+feature 75 76 0 square solid STRUCT
+  FT   STRUCT       59     60  STRAND
+feature 96 99 3 square solid STRUCT
+  FT   STRUCT       67     70  HELIX
+feature 114 116 3 square solid STRUCT
+  FT   STRUCT       79     81  HELIX
+feature 119 133 3 square solid STRUCT
+  FT   STRUCT       84     96  HELIX
+feature 139 160 3 square solid STRUCT
+  FT   STRUCT      100    121  HELIX
+feature 169 172 0 square solid STRUCT
+  FT   STRUCT      126    129  STRAND
+feature 172 188 3 square solid STRUCT
+  FT   STRUCT      129    145  HELIX
+feature 204 217 3 square solid STRUCT
+  FT   STRUCT      154    167  HELIX
+feature 227 251 3 square solid STRUCT
+  FT   STRUCT      173    197  HELIX
+feature 267 273 3 square solid STRUCT
+  FT   STRUCT      208    214  HELIX
+feature 285 301 3 square solid STRUCT
+  FT   STRUCT      225    240  HELIX
+feature 303 316 3 square solid STRUCT
+  FT   STRUCT      242    255  HELIX
+feature 319 325 3 square solid STRUCT
+  FT   STRUCT      258    264  HELIX
+feature 329 359 3 square solid STRUCT
+  FT   STRUCT      268    281  HELIX
+feature 366 371 0 square solid STRUCT
+  FT   STRUCT      287    292  STRAND
+feature 375 377 0 square solid STRUCT
+  FT   STRUCT      296    298  STRAND
+feature 381 383 0 square solid STRUCT
+  FT   STRUCT      301    303  STRAND
+feature 388 393 0 square solid STRUCT
+  FT   STRUCT      308    313  STRAND
+feature 393 397 3 square solid STRUCT
+  FT   STRUCT      313    317  HELIX
+feature 412 415 3 square solid STRUCT
+  FT   STRUCT      331    334  HELIX
+feature 446 462 3 square solid STRUCT
+  FT   STRUCT      361    377  HELIX
+feature 464 467 0 square solid STRUCT
+  FT   STRUCT      379    382  STRAND
+feature 493 499 0 square solid STRUCT
+  FT   STRUCT      404    410  STRAND
+sequence
+  ............PHDKSLDNSLTLLKEGYLFIKNRTERYN.SDLFQAR.LLGKNFICMTG
+  AEAAKVFYDTDR..FQRQN.............ALPKRVQKSLFGV......NAIQGMDG.
+  SAHI.HRKMLFLSLMT..PPHQKRLAELMTEEWKAAVTRWEKAD....EVVLFEEAKEIL
+  CRVACYWAGVPLK.......ETEVKERADDFIDMVDAFG....AVGPRHWKGRRARPRAE
+  EWIEVMIEDARAGLLKTT.....SGTALHEMAFHTQED.GSQLDSRMAAIELINVLRP.I
+  VAISYFLVFSALALHEHPKYKEWLRSGNS.................REREMFVQEVRRYY
+  PFGP.FLGALVKKDFVWNN.CEFKKGTSVLLDLYGTNHDPRLWD.HPDEFRPERFAEREE
+  N....LFDMIPQGGGHAEKGHRCPGEGITIEVMKASLDFLVHQIEYDV...PEQSLHYSL
+  A.RMPSLPESGFVMSGIRRK.....
+}
+{
+name 1n40_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 31 39 3 square solid STRUCT
+  FT   STRUCT       18     26  HELIX
+feature 44 48 0 square solid STRUCT
+  FT   STRUCT       29     33  STRAND
+feature 54 58 0 square solid STRUCT
+  FT   STRUCT       39     43  STRAND
+feature 61 68 3 square solid STRUCT
+  FT   STRUCT       46     53  HELIX
+feature 75 76 0 square solid STRUCT
+  FT   STRUCT       58     59  STRAND
+feature 78 81 3 square solid STRUCT
+  FT   STRUCT       61     64  HELIX
+feature 112 124 3 square solid STRUCT
+  FT   STRUCT       78     89  HELIX
+feature 128 134 3 square solid STRUCT
+  FT   STRUCT       93     99  HELIX
+feature 145 163 3 square solid STRUCT
+  FT   STRUCT      107    125  HELIX
+feature 169 170 0 square solid STRUCT
+  FT   STRUCT      129    130  STRAND
+feature 176 188 3 square solid STRUCT
+  FT   STRUCT      136    148  HELIX
+feature 201 209 3 square solid STRUCT
+  FT   STRUCT      152    160  HELIX
+feature 211 214 3 square solid STRUCT
+  FT   STRUCT      162    165  HELIX
+feature 234 252 3 square solid STRUCT
+  FT   STRUCT      174    192  HELIX
+feature 266 275 3 square solid STRUCT
+  FT   STRUCT      199    208  HELIX
+feature 278 280 3 square solid STRUCT
+  FT   STRUCT      211    213  HELIX
+feature 285 315 3 square solid STRUCT
+  FT   STRUCT      218    248  HELIX
+feature 318 326 3 square solid STRUCT
+  FT   STRUCT      251    259  HELIX
+feature 328 358 3 square solid STRUCT
+  FT   STRUCT      261    273  HELIX
+feature 367 371 0 square solid STRUCT
+  FT   STRUCT      282    286  STRAND
+feature 375 377 0 square solid STRUCT
+  FT   STRUCT      290    292  STRAND
+feature 381 383 0 square solid STRUCT
+  FT   STRUCT      295    297  STRAND
+feature 388 391 0 square solid STRUCT
+  FT   STRUCT      302    305  STRAND
+feature 393 397 3 square solid STRUCT
+  FT   STRUCT      307    311  HELIX
+feature 435 441 3 square solid STRUCT
+  FT   STRUCT      339    341  HELIX
+feature 446 463 3 square solid STRUCT
+  FT   STRUCT      346    363  HELIX
+feature 468 469 0 square solid STRUCT
+  FT   STRUCT      368    369  STRAND
+feature 473 475 3 square solid STRUCT
+  FT   STRUCT      373    375  HELIX
+feature 493 495 0 square solid STRUCT
+  FT   STRUCT      391    393  STRAND
+sequence
+  .............ATVLLEVPFSARGDRIPDAVAELRTRE..PIRKVRTITGAEAWLVSS
+  YALCTQVLEDRR..FSMKETAA...........AGAPRLNALTVP......PEVVNNMG.
+  NIADAGLRKAVMKAIT..PKAP.GLEQFLRDTANSLLDNLITEG..APADLRNDFADPLA
+  TALHCKVLGIP.........QEDGPKLFRSLSIAFMSS...........ADPIPAAKINW
+  DRDIEYMAGILENPNIT.......TGLMGELSRLRKDPAYSHVSDELFATIGVTFFGAGV
+  ISTGSFLTTALISLIQRPQLRNLLHEKP..................ELIPAGVEELLRIN
+  LSFADGLPRLATADIQVGD.VLVRKGELVLVLLEGANFDPEHFP.NPGSIELDRPN....
+  .....PTSHLAFGRG....QHFCPGSALGRRHAQIGIEALLKKMPGVDLAVPIDQLVWRT
+  R.FQRRIPE.RLPVLW.........
+}
+{
+name 1n97_A
+descrip 
+creator 
+type    PROTEIN
+group 1
+feature 11 12 0 square solid STRUCT
+  FT   STRUCT        2      3  STRAND
+feature 15 27 3 square solid STRUCT
+  FT   STRUCT        6     18  HELIX
+feature 29 39 3 square solid STRUCT
+  FT   STRUCT       20     30  HELIX
+feature 43 46 0 square solid STRUCT
+  FT   STRUCT       33     36  STRAND
+feature 55 58 0 square solid STRUCT
+  FT   STRUCT       43     46  STRAND
+feature 61 69 3 square solid STRUCT
+  FT   STRUCT       49     57  HELIX
+feature 74 75 0 square solid STRUCT
+  FT   STRUCT       61     62  STRAND
+feature 95 104 3 square solid STRUCT
+  FT   STRUCT       66     75  HELIX
+feature 119 131 3 square solid STRUCT
+  FT   STRUCT       84     94  HELIX
+feature 133 135 3 square solid STRUCT
+  FT   STRUCT       96     98  HELIX
+feature 139 143 3 square solid STRUCT
+  FT   STRUCT      100    104  HELIX
+feature 146 158 3 square solid STRUCT
+  FT   STRUCT      107    119  HELIX
+feature 169 171 0 square solid STRUCT
+  FT   STRUCT      126    128  STRAND
+feature 171 189 3 square solid STRUCT
+  FT   STRUCT      128    145  HELIX
+feature 205 239 3 square solid STRUCT
+  FT   STRUCT      151    169  HELIX
+feature 241 245 3 square solid STRUCT
+  FT   STRUCT      171    175  HELIX
+feature 247 272 3 square solid STRUCT
+  FT   STRUCT      177    197  HELIX
+feature 280 282 3 square solid STRUCT
+  FT   STRUCT      203    205  HELIX
+feature 285 299 3 square solid STRUCT
+  FT   STRUCT      208    222  HELIX
+feature 301 314 3 square solid STRUCT
+  FT   STRUCT      224    237  HELIX
+feature 318 326 3 square solid STRUCT
+  FT   STRUCT      241    249  HELIX
+feature 328 359 3 square solid STRUCT
+  FT   STRUCT      251    264  HELIX
+feature 367 371 0 square solid STRUCT
+  FT   STRUCT      271    275  STRAND
+feature 375 377 0 square solid STRUCT
+  FT   STRUCT      279    281  STRAND
+feature 381 383 0 square solid STRUCT
+  FT   STRUCT      284    286  STRAND
+feature 388 391 0 square solid STRUCT
+  FT   STRUCT      291    294  STRAND
+feature 393 399 3 square solid STRUCT
+  FT   STRUCT      296    302  HELIX
+feature 414 417 3 square solid STRUCT
+  FT   STRUCT      314    317  HELIX
+feature 446 461 3 square solid STRUCT
+  FT   STRUCT      339    354  HELIX
+feature 476 478 0 square solid STRUCT
+  FT   STRUCT      367    369  STRAND
+feature 485 487 0 square solid STRUCT
+  FT   STRUCT      373    375  STRAND
+feature 493 494 0 square solid STRUCT
+  FT   STRUCT      380    381  STRAND
+sequence
+  .........MKRLSLREAWPYLKDLQQDPLAVLLAWGRAH.PRLFLPL..PRFPLALIFD
+  PEGVEGALLAEG.TTKAT................FQYRALSRLTG......RGLLTDWG.
+  ESWK.EARKALKDPFL..PKNVRGYREAMEEEARAFFGEWRGEE....RDLDHEM.LALS
+  LRLLGRALFG..........KPLSPSLAEHALKALD................RIMAQTRS
+  PLALLDLAAEARFRKDRG.....ALYREAEALIVHPP..LSHLPRERALSEAVTLLVAGH
+  ETVASALTWSFLLLSHRPDWQKRVAESE..................EAALAAFQEALRLY
+  PPAWI.LTRRLERPLLLGE.DRLPPGTTLVLSPYVTQRL..HFP.DGEAFRPERFLEERG
+  TP...SGRYFPFGLG....QRLCLGRDFALLEGPIVLRAFFRRFRLDPL..PFPRVLAQ.
+  ..VTLRPEG.GLPARPRE.......
+}

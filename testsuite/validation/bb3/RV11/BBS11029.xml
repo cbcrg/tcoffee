@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE macsim SYSTEM "http://www-bio3d-igbmc.u-strasbg.fr/macsim.dtd">
+<macsim>
+<alignment>
+<aln-name>ref1/v1/1ycc_ref1_truncated</aln-name>
+<sequence seq-type="Protein">
+<seq-name>1ycc_</seq-name>
+<seq-info>
+<accession>1ycc_</accession>
+<nid>1ycc_</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>kkgatlfkt-rclqchtvek----ggphkvgpnlhgifgrhsgqaegysytdanikknvlwdennmseyltnpkky----ipgtkmafggl-----------------------kkekdrndlitylkkac
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1cno_A</seq-name>
+<seq-info>
+<accession>1cno_A</accession>
+<nid>1cno_A</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>eagkakaa--vcaachgqng----isqvpiypnlagq------------------------keqylvaalkaykagqrqggqapvmqgqata----------------------lsdadianlaayyasnp
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1a56_</seq-name>
+<seq-info>
+<accession>1a56_</accession>
+<nid>1a56_</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>dadlakkn--nciachqve-------tkvvgpa---------------lkdiaakyadkddaatylagkikggssgv---wgqipmppnvn-----------------------vsdadakaladwiltlk
+</seq-data></sequence>
+<sequence seq-type="Protein">
+<seq-name>1h31_B</seq-name>
+<seq-info>
+<accession>1h31_B</accession>
+<nid>1h31_B</nid>
+<ec>0.0.0.0</ec>
+<group>0</group>
+</seq-info>
+<seq-data>rrlmtdrsvgnciachevtemadaqfpgtvgps---------------ldgvaaryp-----eamirgilvnsknv----fpetvmpayyrvegfnrpgiaftskpiegeirplmtagqiedvvaylmtlt
+</seq-data></sequence>
+<column-score>
+<colsco-name>coreblock</colsco-name>
+<colsco-owner>0</colsco-owner>
+<colsco-type>int</colsco-type>
+<colsco-data>
+1 1 1 1 1 1 1 0 0 0 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 </colsco-data>
+</column-score>
+</alignment>
+</macsim>
