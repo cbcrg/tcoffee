@@ -26,8 +26,10 @@ export OSNAME
 # Some definition variables 
 # 
 ROOT=`pwd`
-ERRORS=0
+COUNT=0
+TOTAL=0
 BALISCORE=$ROOT/bali_score-$OSNAME-$HOSTTYPE
+THRESHOLD=${THRESHOLD:-0.490}
 FAILED=${FAILED:-$ROOT/failed}
 SCRATCH=${SCRATCH:-$ROOT/scratch}
 
@@ -58,8 +60,9 @@ echo "**************************************************************************
 
 for TEST in  `ls  $DATA/*.tfa | xargs -I F basename F | cut -d '.' -f 1 | sort | uniq`
 do 
-  	echo -n "Validating $TEST:  "
-	
+  	echo -n "Validating $TEST - "
+	COUNT=`echo "$COUNT +1" | bc`
+ 	
 	## cleaning 
 	set +e
 	rm -rf * &> /dev/null
@@ -76,19 +79,38 @@ do
 	## Validate
 	$BALISCORE $TEST.xml $TEST.msf &> baliscore.log
 	VALUE=`cat baliscore.log | grep auto | awk '{ print $4 }'`
-	RESULT=`echo "$VALUE > 0.4" | bc`
+	TOTAL=`echo "$VALUE + $TOTAL" | bc`
+	RESULT=`echo "$VALUE >= $THRESHOLD" | bc`
+	echo -n "bscore: $VALUE"
 	
 	if [ $RESULT -eq 1 ]; then 
-	  echo OK 
+	  echo "" 
 	else 
-	  ERRORS=`echo "$ERRORS +1" | bc`
-	  echo "FAILED (bali_score: $VALUE)"
+	  echo "; warn!"
 	  mkdir $FAILED/$TEST
 	  mv * $FAILED/$TEST
 	fi   
 	
 done
 
-if [ $ERRORS -ne 0 ]; then
-   exit 1
+if [ $COUNT -gt 0 ]; then 
+  AVG=`echo "scale=3; $TOTAL/$COUNT" |  bc -l` 
+else 
+  AVG=0
+fi 
+
+PASSED=`echo "($AVG >= $THRESHOLD)" | bc -l`
+FAILED=`echo "($AVG < ($THRESHOLD * 0.9))" | bc -l`
+echo ---------------------------------
+echo -n "Validation average score: $AVG; "
+if [ $FAILED -eq 1 ]; then
+ 	echo "FAILED"
+	exit 1
 fi
+
+if [ $PASSED -eq 1 ]; then
+ 	echo "PASSED"
+else
+	echo "NOT PASSED"
+fi
+
