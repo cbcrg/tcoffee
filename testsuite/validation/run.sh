@@ -47,6 +47,11 @@ rm -rf $SCRATCH; mkdir -p $SCRATCH
 rm -rf $FAILED;  mkdir -p $FAILED
 cd $SCRATCH
 
+VERSION=`t_coffee -version`
+echo "************************************************************************************************************"
+echo "** Validation report for $VERSION"
+echo "************************************************************************************************************"
+
 ##
 ## Go! 
 ## 
