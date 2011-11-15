@@ -1,5 +1,8 @@
 #!/bin/bash 
 set -e
+set -o errexit
+#set -o nounset
+#set -u
 #set -x
 
 ##
@@ -48,7 +51,7 @@ cd $SCRATCH
 ## Go! 
 ## 
 
-for TEST in  `ls  $DATA/* | xargs basename | cut -d '.' -f 1 | sort | uniq`
+for TEST in  `ls  $DATA/*.tfa | xargs -I F basename F | cut -d '.' -f 1 | sort | uniq`
 do 
   	echo -n "Validating $TEST:  "
 	
