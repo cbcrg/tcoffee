@@ -712,31 +712,6 @@ int cmp_list_int (const int**a, const int**b)
 	}
 
 
-int name_is_in_list_h ( char *name, char **name_list, int n_name, int len)
-{
-	static char **llist;
-	static int    ln;
-	static hash_t h;
-	static int hdef;
-	if ( name_list==NULL || name ==NULL)return -1;
-	if (ln!=n_name || name_list!=llist)
-	{
-		int a;
-		ln=n_name;
-		llist=name_list;
-		if (hdef)
-	{
-		hash_destroy(&h);
-		hdef=1;
-	}
-		hash_init(&h, ln*5);
-		for (a=0; a<ln; a++)
-			hash_insert(&h,llist[a],a);
-	}
-	return hash_lookup(&h,name);
-}
-
-
 int name_is_in_list ( char *name, char **name_list, int n_name, int len)
 {
 	int a;
@@ -6187,45 +6162,6 @@ char **list2expanded_flist (char **list, int *n, char *tag)
   return list;
 }
 
-char **list2expanded_flist_old (char **list, int *n, char *tag)
-{
-  //pb with the hasch function
-  //expand files into lists
-  //a file list is declared as tag1::<file_name>
-  //or as a file whose first line is FILE_LIST::
-  //expansion keeps going recursively until all files have been expanded
-  //keeps trap of infinite loops (i.e. file referencing itself
-
-  int a=0;
-  hash_t h;
-
-  hash_init (&h, n[0]*10);
-  list=vrealloc (list, (n[0]+1)*sizeof (char*));
-  list[n[0]]=NULL;
-
-
-  while (list[a]!=NULL)
-    {
-      char *f=NULL;
-
-      if (strstr (list[a], tag)){f=list[a]+strlen (tag);}
-      else if ( token_is_in_file_n (list[a],tag,1))f=list[a];
-      else f=NULL;
-
-      if (f)
-	{
-	  if (hash_lookup(&h, f)!=-1)myexit (fprintf_error (stderr,"Recursive file definition : %s", f));
-	  list=expand_flist(f,list,a,n,tag);
-	  hash_insert (&h, f, 1);
-	}
-      else
-	{
-	  a++;
-	}
-    }
-  hash_destroy(&h);
-  return list;
-}
 char **expand_flist (char *file, char **list,int i,int *n, char *tag)
 {
   //expand the content of a file within a list of files;

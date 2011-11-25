@@ -207,10 +207,6 @@ Constraint_list *seq2list     ( Job_TC *job)
 	  A=fast_pair (job);
 	  RCL=A->CL;
 	}
-      else if (strm (mode, "hash_pair"))
-	{
-	  RCL=hash_pair(M, seq, CL);
-	}
       else if ( strm ( mode, "proba_pair") )
 	{
 	  A=fast_pair (job);
@@ -1964,79 +1960,7 @@ Constraint_list * best_pair4prot      (Job_TC *job)
   return RCL;
 }
 
-Constraint_list *hash_pair (TC_method *M , char *in_seq, Constraint_list *CL)
-{
-  int *entry;
-  Alignment *A1, *A2;
-  char *aln1, *aln2, *prf1, *prf2, *hhfile, *seq;
-  FILE *fp;
-  int r1, r2, s1, s2, l1, l2;
-  char *seq1, *seq2;
-  float sc, ss, we;
-  char *buf;
-  shash_t h;
-  shash_node_t *n;
-  int ktup=2;
-  int a, b, c,d,i,j,is,ij;
-  static int **mat;
-  int **diag;
 
-  if (!mat)mat=read_matrice ("blosum62mt");
-
-  seq=vcalloc ( strlen (in_seq)+1, sizeof (char));
-  entry=vcalloc (CL->entry_len+1, sizeof (int));
-
-  sprintf ( seq, "%s", in_seq);
-  atoi(strtok (seq,SEPARATORS));
-  s1=atoi(strtok (NULL,SEPARATORS));
-  s2=atoi(strtok (NULL,SEPARATORS));
-  seq1=(CL->S)->seq[s1];
-  seq2=(CL->S)->seq[s2];
-  l1=strlen (seq1);
-  l2=strlen (seq2);
-  diag=declare_int (l1+l2+1, 2);
-  for (a=0; a<(l1+l2); a++)diag[a][0]=a;
-
-  shash_init (&h,l1*2,1);
-
-  for (a=0; a<l1-ktup; a++) shash_insert (&h,seq1+a,a);
-  for (a=0; a<l2-ktup; a++)
-    {
-      if ((n=shash_lookup(&h,seq2+a)))
-	{
-	  for (b=0; b<n->data[-1]; b++)
-	    {
-	      i=n->data[b];
-	      j=a;
-	      diag[j-i+l1][1]++;
-	    }
-	}
-    }
-  sort_int_inv(diag, 2, 1, 0, l1+l2-1);
-  for (a=0; a<5; a++)
-    {
-      d=diag[a][0];
-
-      if (d<l1){is=l1-d;ij=0;}
-      else {is=0; ij=d-l1;}
-      for (i=is, j=ij; i<l1 && j<l2; i++, j++)
-	{
-	  entry[SEQ1]=s1;
-	  entry[SEQ2]=s2;
-	  entry[R1]=i+1;
-	  entry[R2]=j+1;
-	  r1=tolower(seq1[i]);
-	  r2=tolower(seq2[j]);
-	  entry[WE]=mat[r1-'a'][r2-'a'];
-	  add_entry2list (entry,CL);
-	}
-
-    }
-  free_int (diag,-1);
-  shash_destroy(&h);
-
-  return CL;
-  }
 Alignment * fast_pair      (Job_TC *job)
         {
 	    int s, n,a;
