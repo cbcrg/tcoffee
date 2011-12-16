@@ -4590,6 +4590,7 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 					++tmp;
 				}
 		}
+		vfree(line);
 		free(al_test);
 		max_len_seq=(clen> max_len_seq)?clen: max_len_seq;
 		min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
