@@ -3742,7 +3742,7 @@ int printf_system_direct_check  (char *string, ...)
 
 
   r=system (buf);
-  
+
   if (r!=EXIT_SUCCESS)
     {
       printf_exit ( EXIT_FAILURE, stderr, "ERROR: Could not run %s\n", buf);
@@ -3903,7 +3903,7 @@ int is_rootpid()
 
   int result = (cp == root_pid);
   return result;
-  
+
   //old is_rootpid
   //
 //  if (debug_lock)
@@ -4590,18 +4590,18 @@ char *get_tmp_4_tcoffee ()
   if (!tmp_4_tcoffee)
     {
       tmp_4_tcoffee=vcalloc ( 1000, sizeof (char));
-      
+
     }
-  
+
   if ( tmp_4_tcoffee[0])
     {
-      
+
       return tmp_4_tcoffee;
     }
   else
     {
       char *v=getenv("TMP_4_TCOFFEE");
-      
+
       char buf[1000];
       char host[1024];
       gethostname(host, 1023);
@@ -4798,7 +4798,7 @@ int cputenv (char *string, ...)
 
   s2=vcalloc (strlen (s)+1, sizeof (char));
   sprintf ( s2, "%s", s);
-  
+
   r=putenv (s2);
   //vfree (s); //Potential leak
   return r;
@@ -6140,15 +6140,15 @@ char **list2expanded_flist (char **list, int *n, char *tag)
   //expansion keeps going recursively until all files have been expanded
   //keeps trap of infinite loops (i.e. file referencing itself
   int a=0;
-  
+
   while (list[a]!=NULL)
     {
       char *f=NULL;
-      
+
       if (strstr (list[a], tag)){f=list[a]+strlen (tag);}
       else if ( token_is_in_file_n (list[a],tag,1))f=list[a];
       else f=NULL;
-      
+
       if (f)
 	{
 	  list=expand_flist(f,list,a,n,tag);
@@ -6158,7 +6158,7 @@ char **list2expanded_flist (char **list, int *n, char *tag)
 	  a++;
 	}
     }
-  
+
   return list;
 }
 
@@ -9149,6 +9149,18 @@ double** km_shuffle_data (double **d, double **sd, int n, int r)
     }
   return sd;
 }
+
+
+double
+sq_dist(double *vec1, double *vec2, int length)
+{
+	int i;
+	double dist = 0;
+	for (i=0; i<length; ++i)
+		dist += ((vec1[i] - vec2[i])*(vec1[i] - vec2[i]));
+	return dist;
+}
+
 int km_kmeans(double **data, int n, int m, int k, double t, double **centroids)
 {
    /* output cluster label for each data point */
@@ -9162,17 +9174,79 @@ int km_kmeans(double **data, int n, int m, int k, double t, double **centroids)
    //data must be allocated as data[n][m+2]
    for (a=0; a<n; a++)data[a][m+1]=0;//labels will be stored there
 
-   /****
-   ** initialization */
 
-   for (h = i = 0; i < k; h += n / k, i++) {
-      c1[i] = (double*)calloc(m, sizeof(double));
-      if (!centroids) {
-         c[i] = (double*)calloc(m, sizeof(double));
-      }
-      /* pick k points as initial centroids */
-      for (j = m; j-- > 0; c[i][j] = data[h][j]);
-   }
+   /*** initialization */
+
+   //old one
+//    for (h = i = 0; i < k; h += n / k, i++) {
+//    c1[i] = (double*)calloc(m, sizeof(double));
+//    if (!centroids) {
+//    c[i] = (double*)calloc(m, sizeof(double));
+// }
+// 	// *** pick k points as initial centroids ***
+// 	for (j = m; j-- > 0; c[i][j] = data[h][j]);
+// }
+//
+
+
+	// reserve space;
+	for (i = 0; i < k; ++i) {
+		c1[i] = (double*)calloc(m, sizeof(double));
+		if (!centroids) {
+			c[i] = (double*)calloc(m, sizeof(double));
+		}
+	}
+	int index = (int)((double)rand() / RAND_MAX * n);
+	for (j=0; ++j<m; c[0][j] = data[index][j]);
+	double *distances = (double*)calloc(m,sizeof(double));
+	double dist,tmp_dist;
+	double currentPot = 0;
+	for (i = 0; i < n; ++i) {
+		dist = sq_dist(data[i], c[0], m);
+		distances[i] = dist;
+		currentPot += dist;
+	}
+
+	// Choose each center
+	int centerCount;
+	for (centerCount = 1; centerCount < k; ++centerCount)
+	{
+		double bestNewPot = DBL_MAX;
+		int bestNewIndex;
+		int localTrial, numLocalTries = 5;
+		for (localTrial = 0; localTrial < numLocalTries; localTrial++)
+		{
+			double randVal = (double)rand() / RAND_MAX * currentPot;
+			for (index = 0; index < n-1; ++index)
+			{
+				if (randVal <= distances[index])
+					break;
+				else
+					randVal -= distances[index];
+			}
+
+			// Compute the new potential
+			double newPot = 0;
+			for (i = 0; i < n; i++)
+			{
+				tmp_dist = sq_dist(data[i], data[index], m);
+				if (tmp_dist < distances[i])
+					newPot += tmp_dist;
+				else
+					newPot += distances[i];
+			}
+
+			// Store the best result
+			if (newPot < bestNewPot)
+			{
+				bestNewPot = newPot;
+				bestNewIndex = index;
+			}
+		}
+		currentPot = bestNewPot;
+		for (j=0; ++j<m; c[centerCount][j] = data[bestNewIndex][j]);
+	}
+
 
    /****
    ** main loop */
@@ -9227,9 +9301,7 @@ int km_kmeans(double **data, int n, int m, int k, double t, double **centroids)
       free(c);
    }
    free(c1);
-
    free(counts);
-
    return 1;
 }
 
