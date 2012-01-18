@@ -9246,6 +9246,7 @@ int km_kmeans(double **data, int n, int m, int k, double t, double **centroids)
 		currentPot = bestNewPot;
 		for (j=0; ++j<m; c[centerCount][j] = data[bestNewIndex][j]);
 	}
+	free(distances);
 
 
    /****
