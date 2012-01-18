@@ -9198,7 +9198,7 @@ int km_kmeans(double **data, int n, int m, int k, double t, double **centroids)
 	}
 	int index = (int)((double)rand() / RAND_MAX * n);
 	for (j=0; ++j<m; c[0][j] = data[index][j]);
-	double *distances = (double*)calloc(m,sizeof(double));
+	double *distances = (double*)calloc(n,sizeof(double));
 	double dist,tmp_dist;
 	double currentPot = 0;
 	for (i = 0; i < n; ++i) {
