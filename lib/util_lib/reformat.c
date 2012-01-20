@@ -10226,7 +10226,6 @@ char *extend_seq (char *seq)
 
       r1=(r1=='u')?'t':r1;
       r2=(r2=='u')?'t':r2;
-
       if (r1=='x' || r1=='n')v='x';
       else if (r2=='n' || r2=='x')v=r1;
 
@@ -10288,11 +10287,14 @@ char *unextend_seq (char *seq)
       r1=(r1=='u')?'t':r1;
 
       if (r1=='x')v='n';
-      else if (r1=='d' || r1=='e' || r1 == 'f' || r1 == 'h')v='a';
-      else if (r1=='i' || r1=='k' || r1 == 'l' || r1 == 'm')v='c';
-      else if (r1=='n' || r1=='p' || r1 == 'q' || r1 == 'r')v='g';
-      else if (r1=='s' || r1=='v' || r1 == 'w' || r1 == 'y')v='t';
-      else v='j';
+      else if (r1=='a' || r1=='d' || r1=='e' || r1 == 'f' || r1 == 'h')v='a';
+	  else if (r1=='c' || r1=='i' || r1=='k' || r1 == 'l' || r1 == 'm')v='c';
+	  else if (r1=='g' || r1=='n' || r1=='p' || r1 == 'q' || r1 == 'r')v='g';
+	  else if (r1=='t' || r1=='s' || r1=='v' || r1 == 'w' || r1 == 'y')v='t';
+      else
+	  {
+		  v='j';
+	  }
 
       ebuf[a]=(upper)?toupper(v):v;
     }
