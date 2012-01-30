@@ -4287,6 +4287,7 @@ get_cl_param(\
 	       sprintf (CL->rna_lib, "%s", rna_lib);
 /* Important: This is where the library is compiled!!!!*/
 
+	      
 	       if ((CL->S)->nseq>1 && !do_convert)
 		 {
 		   CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);

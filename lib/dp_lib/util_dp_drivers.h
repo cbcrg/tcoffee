@@ -117,6 +117,7 @@ int split_condition (int nseq, int score, Constraint_list *CL);
 int profile_pair_wise (Alignment *A, int n1, int *l1, int n2, int *l2, Constraint_list *CL);
 int pair_wise (Alignment *A, int*ns, int **l_s,Constraint_list *CL );
 int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL);
+int co_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL);
 int empty_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL, int glocal);
 
 

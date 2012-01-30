@@ -84,7 +84,6 @@ Constraint_list *profile2list     (Job_TC *job, int nprf)
 	 job=print_lib_job (job, "param->seq_c=%s", buf);
 	 CL=seq2list (job);
        }
-
    //restaure CL;
    CL->S=RS;
    NRI=CL->residue_index;
@@ -5268,6 +5267,11 @@ Pwfunc get_pair_wise_function (Pwfunc pw,char *dp_mode, int *glocal)
 	sprintf (dpl[npw], "hh_pair_wise");
 	dps[npw]=GLOBAL;
 	npw++;
+	
+	pwl[npw]=co_pair_wise;
+	sprintf (dpl[npw], "co_pair_wise");
+	dps[npw]=GLOBAL;
+	npw++;
 
 
 	/*
@@ -5579,6 +5583,45 @@ Alignment * sorted_aln(Alignment *A, Constraint_list *CL)
    return A;
 }
 
+
+int co_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
+{
+  char *aln[2];
+  char *out;
+  FILE *fp;
+  int a, b, s;
+  Alignment *B;
+  
+  for (a=0; a<2; a++)
+    {
+      aln[a]=vtmpnam(NULL);
+      fp=vfopen (aln[a], "w");
+      for (b=0; b<ns[a]; b++)
+	{
+	  int s=ls[a][b];
+	  fprintf (fp, ">%d\n%s\n",s,A->seq_al[s]);
+	}
+      vfclose (fp);
+    }
+  
+  out=vtmpnam(NULL);
+  
+  printf_system ("clustalo --p1 %s --p2 %s -o %s>/dev/null 2>/dev/null", aln[0], aln[1], out);
+  B=main_read_aln(out, NULL);
+  A=realloc_aln2 ( A,(CL->S)->nseq+1,B->len_aln+1);
+  
+  for (a=0; a<B->nseq; a++)
+    {
+      s=atoi  (B->name[a]);
+      sprintf (A->seq_al[s], "%s", B->seq_al[a]);
+    }
+  free_aln (B);
+  return 100;
+}
+	
+  
+  
+ 
 
 int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 {
