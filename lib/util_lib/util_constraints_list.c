@@ -5435,7 +5435,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
-
+	
+	
+	
 	sprintf (list[n][0], "hh_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
@@ -5452,6 +5454,22 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "SUPPORTED  NO");
 	vfclose (fp);}
 
+	sprintf (list[n][0], "co_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE profile_pair\n");
+	fprintf ( fp, "EXECUTABLE2 clustalo\n");
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    -profile1=\n");
+	fprintf ( fp, "IN_FLAG2   -profile2=\n");
+	fprintf ( fp, "OUT_FLAG   -outfile=\n");
+	fprintf ( fp, "SEQ_TYPE   R\n");
+	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+	fprintf ( fp, "SUPPORTED  NO");
+	vfclose (fp);}
+	
 	sprintf (list[n][0], "cwprofile_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
