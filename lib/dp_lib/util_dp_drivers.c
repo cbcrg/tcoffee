@@ -1128,8 +1128,8 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	  fp=vfopen (prf1_file, "w");
 	  if ( A1)
 	    {
-	      fprintf (fp, ">%s\n%s\n",(CL->S)->name[s1], aln2cons_seq_mat(A1, "blosum62mt"));
-	      for ( a=0; a< A1->nseq; a++)fprintf (fp, ">prf_seq1_%d\n%s\n", a, A1->seq_al[a]);
+	      fprintf (fp, ">%s\n%s-\n",(CL->S)->name[s1], aln2cons_seq_mat(A1, "blosum62mt"));
+	      for ( a=0; a< A1->nseq; a++)fprintf (fp, ">prf_seq1_%d\n%s-\n", a, A1->seq_al[a]);
 	    }
 	  else
 	    {
@@ -1141,15 +1141,15 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	  fp=vfopen (prf2_file, "w");
 	  if (A2)
 	    {
-	      fprintf (fp, ">%s\n%s\n",(CL->S)->name[s2], aln2cons_seq_mat(A2, "blosum62mt"));
-	      for ( a=0; a< A2->nseq; a++)fprintf (fp, ">prf_seq2_%d\n%s\n", a, A2->seq_al[a]);
+	      fprintf (fp, ">%s\n%s-\n",(CL->S)->name[s2], aln2cons_seq_mat(A2, "blosum62mt"));
+	      for ( a=0; a< A2->nseq; a++)fprintf (fp, ">prf_seq2_%d\n%s-\n", a, A2->seq_al[a]);
 	    }
 	  else
 	    {
 	      fprintf ( fp, ">%s\n%s\n", (CL->S)->name[s2], (CL->S)->seq[s2]);
 	    }
 	  vfclose (fp);
-
+	  
 	  result=vtmpnam (NULL);
 	  if ( M->param)
 	    {
@@ -1158,13 +1158,12 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	      param=substitute ( param, " ", "");
 	      param=substitute ( param, "\n", "");
 	    }
-
+	  
 	  sprintf ( command, "tc_generic_method.pl -mode=profile_pair -method=%s %s%s %s%s %s%s -param=%s -tmpdir=%s", M->executable2,M->in_flag,prf1_file, M->in_flag2,prf2_file,M->out_flag, result, param, get_tmp_4_tcoffee());
-
 	  my_system ( command);
+	  
 
-
-
+	 
 	  if ( !check_file_exists (result))
 	    {
 	      fprintf ( stderr, "\n\tprofile_pair/%s failed:\n\t%s\n",M->executable2, command);

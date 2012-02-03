@@ -6002,7 +6002,7 @@ Alignment *km_refine_msa (Alignment *A,int argc, char **argv, int k)
   if (A->nseq<=k)k=A->nseq/2;
   
   aln2gap_trimmed (A,k, prf, seq);
-  printf_system_direct_check ("t_coffee -seq %s -profile %s -outfile %s -newtree %s -quiet",seq, prf, aln, tree);
+  printf_system_direct_check ("t_coffee -seq %s -profile %s -outfile %s -newtree %s ",seq, prf, aln, tree);
   free_aln (A);
   A=main_read_aln (aln, NULL);
   remove (prf);

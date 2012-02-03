@@ -970,6 +970,7 @@ sub seq2profile_pair
       }
      elsif ( $method eq "clustalo")
       {
+
 	&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
 	`clustalo --p1 prf1.aln --p2 prf2.aln -o result.aln --force`;
 	&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);

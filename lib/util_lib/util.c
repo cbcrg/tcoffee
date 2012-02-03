@@ -6038,10 +6038,10 @@ FILE * vfopen  ( char *name_in, char *mode)
 		  }
 		else if ( strcmp (mode, "a")==0 && cache_used==1)
     			{
-    			fprintf (stderr, "\nCOULD NOT Append anything to %s\n", name);
-    			if ( get_new_name){fprintf ( stderr, "\nNew name: ");return vfopen (input_name(), mode-1);}
-    			else if ( tolerate_mistake)return NULL;
-			else
+			  fprintf (stderr, "\nCOULD NOT Append anything to %s\n", name);exit (0);
+			  if ( get_new_name){fprintf ( stderr, "\nNew name: ");return vfopen (input_name(), mode-1);}
+			  else if ( tolerate_mistake)return NULL;
+			  else
 			    {
 			      myexit(fprintf_error (stderr, "\nFORCED EXIT (NON INTERACTIVE MODE pid %d)\n", getpid()));
 			    }
