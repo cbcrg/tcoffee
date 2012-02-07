@@ -96,6 +96,7 @@ FILE_format* vfopen_html ( char *name);
 FILE_format* vfclose_html ( FILE_format *fhtml);
 
 int       output_reliability_ascii     ( Alignment *B,Alignment *S, char *name);
+int       output_reliability_fasta     ( Alignment *B,Alignment *S, char *name);
 int       output_color_ascii           ( Alignment *B,Alignment *S, char *name);
 
 FILE_format *print_ascii_string( char *s, Color *box, Color *ink, FILE_format *fascii);

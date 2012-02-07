@@ -1028,7 +1028,83 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
 
     }
 
+int output_reliability_format_fasta ( Alignment *B,Alignment *S,char *name, \
+FILE_format *(*vfopen_format)          ( char *),\
+FILE_format *(*print_format_string)    ( char * ,Color *, Color *, FILE_format*),\
+FILE_format *(*print_format_char)      ( int    ,Color *, Color *, FILE_format*),\
+void         (*get_rgb_values_format)  ( int    ,Color *),\
+FILE_format* (*vfclose_format)         ( FILE_format *))
+    {
+    int a, b, c,l;
+    int max_name_len=15;
+    int max_len=0;
+    static char *buf,*buf2;
+    int s;
+    static FILE_format *fps;
+    Color *ink;
+    Color *box_c;
+    Color *white;
+    int *n_residues;
+   
 
+    box_c=vcalloc ( 1, sizeof (Color));    
+    get_rgb_values_format (DEFAULT_COLOR, (white=vcalloc ( 1, sizeof (Color))));	
+    get_rgb_values_format (INK_COLOR,     (ink  =vcalloc ( 1, sizeof (Color))));
+    
+    n_residues=vcalloc ( B->nseq+1, sizeof (int));
+    for ( a=0; a<B->nseq; a++)n_residues[a]=B->order[a][1];
+
+
+    fps=vfopen_format( name);      
+    if ( buf==NULL)
+	{
+	buf=vcalloc (10000, sizeof (int));
+	buf2=vcalloc (10000, sizeof (int));
+	}
+
+    if ( max_len==0)
+	{
+	for ( a=0; a< B->nseq; a++)
+	    {if ( strlen (B->name[a])>max_len)
+		max_len= strlen ( (B->name[a]));
+	    }
+	}
+
+    if ( vfopen_format==vfopen_ascii)
+      {
+	fps->line+= max_len;
+      }
+    else if ( max_len>max_name_len)max_len=max_name_len;
+   
+   fps->line-=max_len;
+   fps->line=fps->line-(fps->line%3);
+ 
+	   for (b=0; b<S->nseq; b++)
+	     {
+	     sprintf (buf,">%-*.*s \n",max_len+2,max_len,S->name[b]);
+	     fps=print_format_string ( buf,white, ink, fps);
+	     for (fps->in_seq=1,c=0;c<B->len_aln;c++)
+		{
+		   n_residues[b]+=!is_gap(B->seq_al[b][c]);
+		   s=B->seq_al[b][c];
+		   if (!is_gap(s) && S->seq_al[b][c]!=NO_COLOR_RESIDUE )
+			{
+			get_rgb_values_format ( S->seq_al[b][c], box_c);			    	
+			}
+		   else
+		        {
+			get_rgb_values_format (GAP_COLOR, box_c);
+			}
+		   
+		fps=print_format_char ( s,box_c, ink,fps);
+		}
+	      fps->in_seq=0;
+	      fps=print_format_char ( '\n', white, ink, fps);	      
+	     }
+    vfclose_format( fps);
+    return 1;
+    }
+    
 /*****************************************************************************/
 /*                       PDF         FUNCTIONS                               */
 /*                                                                           */
@@ -1443,6 +1519,12 @@ int       output_reliability_ascii     ( Alignment *B,Alignment *S, char *name)
       return 1;
       }
 
+int       output_reliability_fasta     ( Alignment *B,Alignment *S, char *name)
+      {
+      output_reliability_format_fasta (B, S, name, vfopen_ascii,print_ascii_string,print_ascii_char,get_rgb_values_ascii, vfclose_ascii);
+      return 1;
+      }
+      
 FILE_format *print_ascii_string( char *s, Color *box, Color *ink, FILE_format *fascii)
       {
       int l;
