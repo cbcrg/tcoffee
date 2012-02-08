@@ -489,7 +489,7 @@ if ( aln_compare==1)pep_compare=0;
 		{
 		  int d;
 		  static int c;
-		  HERE ("-%d-S1:%d S2:%d R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]);
+// 		  HERE ("-%d-S1:%d S2:%d R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]);
 		  
 		  s1=entry[SEQ1];
 		  s2=entry[SEQ2];
