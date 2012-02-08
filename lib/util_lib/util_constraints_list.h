@@ -532,7 +532,9 @@ int constraint_list2fraction_covered ( Constraint_list *CL);
 
 int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *weight_mode, int *weight);
 Constraint_list *aln_file2constraint_list (char *alname, Constraint_list *CL,char *weight_mode);
-Constraint_list *aln2constraint_list      (Alignment *A, Constraint_list *CL,char *weight_mode);
+Constraint_list *aln2constraint_list            (Alignment *A, Constraint_list *CL,char *weight_mode);
+Constraint_list *aln2constraint_list_full       (Alignment *A, Constraint_list *CL,char *weight_mode);
+Constraint_list *aln2constraint_list_generic    (Alignment *A, Constraint_list *CL,char *weight_mode, int top);
 
 double **list2mat (Constraint_list *CL,int s1,int s2, double *min, double *max);
 Constraint_list * constraint_list2bin_file(Constraint_list *clist);

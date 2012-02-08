@@ -4037,7 +4037,15 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 }
 
 
+Constraint_list *aln2constraint_list_full    (Alignment *A, Constraint_list *CL,char *in_weight_mode)
+  {
+  return aln2constraint_list_generic    (A,CL, in_weight_mode, 0);
+  }
 Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char *in_weight_mode)
+  {
+  return aln2constraint_list_generic    (A,CL, in_weight_mode, 1);
+  }
+Constraint_list *aln2constraint_list_generic    (Alignment *A, Constraint_list *CL,char *in_weight_mode, int top)
 {
 	int a, b, c;
 	int *weight=NULL;
@@ -4050,7 +4058,7 @@ Constraint_list *aln2constraint_list    (Alignment *A, Constraint_list *CL,char 
 	char *p, *s;
 	char weight_mode [100];
 	int *cache;
-	int top=1;
+	
 	int *entry;
 	int **fixed;
 	entry=vcalloc (CL->entry_len+1, sizeof (int));

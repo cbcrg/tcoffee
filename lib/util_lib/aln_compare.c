@@ -473,8 +473,8 @@ if ( aln_compare==1)pep_compare=0;
        CL_B=declare_constraint_list ( CLS, NULL, NULL, 0, NULL, NULL);
        
       
-       CL_A=aln2constraint_list (A,CL_A, "sim");
-       CL_B=aln2constraint_list (B,CL_B, "sim");
+       CL_A=aln2constraint_list_full (A,CL_A, "sim");
+       CL_B=aln2constraint_list_full (B,CL_B, "sim");
        
        
        
@@ -487,6 +487,10 @@ if ( aln_compare==1)pep_compare=0;
 	      int *entry;
 	      while (entry=extract_entry (CL_A))
 		{
+		  int d;
+		  static int c;
+		  HERE ("-%d-S1:%d S2:%d R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]);
+		  
 		  s1=entry[SEQ1];
 		  s2=entry[SEQ2];
 		  glob[0]++;
@@ -577,92 +581,92 @@ if ( aln_compare==1)pep_compare=0;
        for ( a=0; a< A->nseq; a++)pw_pos_count[a]=declare_int ( A->nseq, n_categories);
  
      /*COMPARISON MODULE*/
-	if (strm( compare_mode, "tc") )
-	{
-	  int column_is_structure;
-	  int pair_is_structure;
-
-	  for ( a=0; a< n_categories; a++)
-           {     
-	     for(b = 0; b < A->len_aln; b++)
-	     {
-	       column_is_structure = 1;
-	       pair_is_structure = 0;
-	       for (s1=0; s1< A->nseq-1; s1++)
-	       {
-		 for(s2=s1+1; s2 < A->nseq; s2++)
+       if (strm( compare_mode, "tc") )
+	 {
+	   int column_is_structure;
+	   int pair_is_structure;
+	   
+	   for ( a=0; a< n_categories; a++)
+	     {     
+	       for(b = 0; b < A->len_aln; b++)
 		 {
-		   if ((posA[s1][b]>0) && (posA[s2][b]>0))
-		   {  
-		     pair_is_structure=is_in_struct_category(s1,s2,posA[s1][b],posA[s2][b],ST,category[a], n_sub_categories[a]);     
-		     column_is_structure = (column_is_structure && pair_is_structure);
-		     if(pair_is_structure)
+		   column_is_structure = 1;
+		   pair_is_structure = 0;
+		   for (s1=0; s1< A->nseq-1; s1++)
 		     {
-			tot_count[a][s1+1]++;
-			tot_count[a][s2+1]++;
-			pw_tot_count[s1][s2][a]++;
-			pw_tot_count[s2][s1][a]++;
-			if (correct_column[b])
-			  {
-			    pw_pos_count[s1][s2][a]++;
-			    pw_pos_count[s2][s1][a]++;
-			    pos_count[a][s1+1]++;
-			    pos_count[a][s2+1]++;
-			  }
+		       for(s2=s1+1; s2 < A->nseq; s2++)
+			 {
+			   if ((posA[s1][b]>0) && (posA[s2][b]>0))
+			     {  
+			       pair_is_structure=is_in_struct_category(s1,s2,posA[s1][b],posA[s2][b],ST,category[a], n_sub_categories[a]);     
+			       column_is_structure = (column_is_structure && pair_is_structure);
+			       if(pair_is_structure)
+				 {
+				   tot_count[a][s1+1]++;
+				   tot_count[a][s2+1]++;
+				   pw_tot_count[s1][s2][a]++;
+				   pw_tot_count[s2][s1][a]++;
+				   if (correct_column[b])
+				     {
+				       pw_pos_count[s1][s2][a]++;
+				       pw_pos_count[s2][s1][a]++;
+				       pos_count[a][s1+1]++;
+				       pos_count[a][s2+1]++;
+				     }
+				 }
+			     }
+			 }
+		     }	       
+		   if(column_is_structure && pair_is_structure)
+		     {
+		       tot_count[a][0]++;
+		       if(correct_column[b]) 
+			 {
+			   pos_count[a][0]++;
+			 }
 		     }
-		   }
 		 }
-	       }	       
-		if(column_is_structure && pair_is_structure)
-		{
-		 tot_count[a][0]++;
-		 if(correct_column[b]) 
-		 {
-		   pos_count[a][0]++;
-		 }
-		}
 	     }
-	   }
 	   free_int (posA, -1);
-	}
-	else
-	{
-	/*COMPARISON MODULE*/
-	  int *entry;
-	  for ( a=0; a< n_categories; a++)
-	      {
-		while (entry=extract_entry (CL_A))
-		  {
-		    s1=entry[SEQ1];
-		    s2=entry[SEQ2];
-		    r1=entry[R1];
-		    r2=entry[R2];
-		    c= entry[MISC];
-		    if ( is_in_struct_category ( s1, s2, r1, r2, ST, category[a], n_sub_categories[a]))
-		      {
-			    tot_count[a][0]++;
-			    tot_count[a][s1+1]++;
-			    tot_count[a][s2+1]++;
-			    pw_tot_count[s1][s2][a]++;
-			    pw_tot_count[s2][s1][a]++;
-			    if ( c==1)
-			      {
-				pw_pos_count[s1][s2][a]++;
-				pw_pos_count[s2][s1][a]++;
-				pos_count[a][0]++;
-				pos_count[a][s1+1]++;
-				pos_count[a][s2+1]++;
-			      }
-			}
-		      }
-		  }
-	}
-// 	printf("pos=%d,tot=%d\n", pos_count[0][0], tot_count[0][0]);
-    /*Measure of Aligned Sequences Similarity*/
-    
+	 }
+       else
+	 {
+	   /*COMPARISON MODULE*/
+	   int *entry;
+	   for ( a=0; a< n_categories; a++)
+	     {
+	       while (entry=extract_entry (CL_A))
+		 {
+		   s1=entry[SEQ1];
+		   s2=entry[SEQ2];
+		   r1=entry[R1];
+		   r2=entry[R2];
+		   c= entry[MISC];
+		   if ( is_in_struct_category ( s1, s2, r1, r2, ST, category[a], n_sub_categories[a]))
+		     {
+		       tot_count[a][0]++;
+		       tot_count[a][s1+1]++;
+		       tot_count[a][s2+1]++;
+		       pw_tot_count[s1][s2][a]++;
+		       pw_tot_count[s2][s1][a]++;
+		       if ( c==1)
+			 {
+			   pw_pos_count[s1][s2][a]++;
+			   pw_pos_count[s2][s1][a]++;
+			   pos_count[a][0]++;
+			   pos_count[a][s1+1]++;
+			   pos_count[a][s2+1]++;
+			 }
+		     }
+		 }
+	     }
+	 }
+       // 	printf("pos=%d,tot=%d\n", pos_count[0][0], tot_count[0][0]);
+       /*Measure of Aligned Sequences Similarity*/
+       
        sim=get_aln_compare_sim ((strcmp (sim_aln, "al1")==0)?A:B, ST,sim_category[0], sim_n_sub_categories[0], sim_matrix);
        sim_param=analyse_sim ((strcmp (sim_aln, "al1")==0)?A:B, sim);
-
+       
    /*Fill the Result_structure*/
        R=vcalloc ( 1, sizeof (Result));
     
