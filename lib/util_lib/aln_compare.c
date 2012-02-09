@@ -51,6 +51,7 @@ int aln_compare ( int argc, char *argv[])
     int pep_compare;
     int aln_compare;
     int count;
+    int print_pair;
     int output_aln;
     int output_aln_threshold;
     char output_aln_file[LONG_STRING];
@@ -160,6 +161,7 @@ int aln_compare ( int argc, char *argv[])
     sep_r=']';
 
     output_aln=0;
+    print_pair=0;
     output_aln_threshold=100;
     sprintf ( output_aln_file, "stdout");
     sprintf ( output_aln_format, "clustalw");
@@ -242,10 +244,14 @@ int aln_compare ( int argc, char *argv[])
 	        {
 		count=1;
 		}
+	else if (  strcmp ( argv[a], "-print_pair")==0)
+	        {
+		print_pair=1;
+		}		
 	else if (  strcmp ( argv[a], "-output_aln")==0)
 	        {
 		output_aln=1;
-		}
+		}		
 	else if (  strcmp ( argv[a], "-output_aln_threshold")==0)
 	        {
 		output_aln_threshold=atoi(argv[++a]);
@@ -490,7 +496,6 @@ if ( aln_compare==1)pep_compare=0;
 		  int d;
 		  static int c;
 // 		  HERE ("-%d-S1:%d S2:%d R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]);
-		  
 		  s1=entry[SEQ1];
 		  s2=entry[SEQ2];
 		  glob[0]++;
@@ -649,6 +654,12 @@ if ( aln_compare==1)pep_compare=0;
 		       tot_count[a][s2+1]++;
 		       pw_tot_count[s1][s2][a]++;
 		       pw_tot_count[s2][s1][a]++;
+		       
+		       if(print_pair)
+		       {
+			  HERE("%s,%s,%s",get_structure_residue(s1,r1,ST), get_structure_residue(s2,r2,ST),(c==1)?"Y":"N");
+		       }
+		       
 		       if ( c==1)
 			 {
 			   pw_pos_count[s1][s2][a]++;
@@ -1186,7 +1197,7 @@ fprintf ( stderr, "\nPROGRAM: %s (%s)\n",PROGRAM,VERSION);
 fprintf ( stderr, "******INPUT***************************");
 fprintf ( stderr, "\n-al1 al1_file");
 fprintf ( stderr, "\n-al2 al2_file");
-fprintf ( stderr, "\n-compare_mode [sp] or column");
+fprintf ( stderr, "\n-compare_mode [sp] or column or tc");
 fprintf ( stderr, "\n-pep (compare only the sequences");
 fprintf ( stderr, "\n-count");
 fprintf ( stderr, "\n-pep1 pep1_file");
@@ -1216,14 +1227,15 @@ fprintf ( stderr, "\n   file_name");
 fprintf ( stderr, "\n-io_format hts");
 fprintf ( stderr, "\n           H ->large Header");
 fprintf ( stderr, "\n           h ->small Header");
-fprintf ( stderr, "\n           t->global (average)results");
+fprintf ( stderr, "\n           t ->global (average)results");
 fprintf ( stderr, "\n           s ->average results for each sequence");
 fprintf ( stderr, "\n           p ->results for each pair of sequences");
+fprintf ( stderr, "\n-print_pair           Print structures of pair residues and correctness by ref");
 fprintf ( stderr, "\n-output_aln           Outputs al1 with conserved bits in Upper");
 fprintf ( stderr, "\n-output_aln_threshold [100]");
 fprintf ( stderr, "\n-output_aln_file      [stdout]");
 fprintf ( stderr, "\n-output_aln_format    [clustalw]");
-fprintf ( stderr, "\n-output_aln_modif     [lower]");
+fprintf ( stderr, "\n-output_aln_motif     [lower]");
 fprintf ( stderr, "\n");
 myexit (EXIT_SUCCESS);
 }
