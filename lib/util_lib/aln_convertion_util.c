@@ -9745,6 +9745,7 @@ int *seq2kmeans_class (Alignment *A, int k, char *mode)
   int a;
 
   v=aln2km_vector(A,mode,&dim);
+ 
   km_kmeans (v,A->nseq,dim,k,0.0001,NULL);
 
   class=vcalloc (A->nseq, sizeof (int));
@@ -9757,6 +9758,8 @@ Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
   Alignment **AL;
   n[0]=0;
 
+
+  HERE ("***** %d",k);
   if (A->nseq<=k)
     {
       AL=vcalloc (1, sizeof (Alignment*));

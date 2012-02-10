@@ -51,7 +51,12 @@ static float RNAemitPairsDefault[6][6] = {
   { 0.0000375308f, 0.0000815823f, 0.0000824765f, 0.0000743985f, 0.0000743985f, 0.0000263252f }
 };
 
-//Protein Alignment Models
+//Protein Alignment Gap Model: Monophasic
+float initDistrib1Default[] = { 0.6080327034f, 0.1959836632f, 0.1959836632f };
+float gapOpen1Default[] = { 0.01993141696f, 0.01993141696f };
+float gapExtend1Default[] = { 0.7943345308f, 0.7943345308f };
+
+//Protein Alignment Models: bi-phasic
 static float initDistrib2Default[] = { 0.6814756989f, 8.615339902e-05f, 8.615339902e-05f, 0.1591759622f, 0.1591759622 };
 static float gapOpen2Default[] = { 0.0119511066f, 0.0119511066f, 0.008008334786f, 0.008008334786 };
 static float gapExtend2Default[] = { 0.3965826333f, 0.3965826333f, 0.8988758326f, 0.8988758326 };
@@ -780,7 +785,11 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        static float *s;
        NumInsertStates=2;
        NumMatrixTypes=5;
-       
+       if (atoigetenv ("NOBIPHASIC"))
+	 {
+	   NumInsertStates=1;
+	   NumMatrixTypes=3;
+	 }
        if (!p)
 	 {
 	   int l,a,b;
@@ -839,8 +848,10 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        insProb=declare_float (256,NumMatrixTypes);
        matchProb=declare_float (256, 256);
        initialDistribution=vcalloc (2*NumMatrixTypes+1, sizeof (float));
-       
-       ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib2Default, emitSingle,emitPairs,gapOpen2Default,gapExtend2Default, transMat,initialDistribution,matchProb, insProb,transProb);
+       if (atoigetenv ("NOBIPHASIC"))
+	 ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib1Default, emitSingle,emitPairs,gapOpen1Default,gapExtend1Default, transMat,initialDistribution,matchProb, insProb,transProb);
+       else
+	 ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib2Default, emitSingle,emitPairs,gapOpen2Default,gapExtend2Default, transMat,initialDistribution,matchProb, insProb,transProb);
      }
    
    I=strlen (A->seq_al[ls[0][0]]);

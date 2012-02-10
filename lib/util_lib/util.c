@@ -3714,7 +3714,7 @@ int fprintf_fork2  (FILE *fp, char *string, ...)
 
   char* buf;
 
-  cvsprintf (buf, string);
+  cvsprintf (buf, strsing);
   fprintf ( fp, "%s", buf);
   vfree (buf);
   fflush (fp);
@@ -3727,9 +3727,13 @@ int printf_file  (char *file,char *mode, char *string,...)
   va_list ap;
 
   if (!(fp=vfopen (file, mode)))return 0;
-  va_start (ap, string);
-  vfprintf (fp, string, ap);
-  va_end (ap);
+  
+  if (string)
+    {
+      va_start (ap, string);
+      vfprintf (fp, string, ap);
+      va_end (ap);
+    }
   vfclose (fp);
   return 1;
   }

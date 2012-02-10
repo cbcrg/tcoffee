@@ -1420,12 +1420,27 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
   
   return v;
 }
+
+NT_node ** seq2co_tree (Sequence *S, char *tree)
+{
+  static char *seq;
+  int tot_node;
+  fprintf ( stderr, "\n-----Compute ClustalOmega Tree: [Start---");
+  if (!tree)tree=vtmpnam (NULL);
+  if (!seq)seq=vtmpnam (NULL);
+  output_fasta_simple (seq, S);
+  printf_system ("clustalo --in %s --guidetree-out %s --force>/dev/null 2>/dev/null", seq,tree);
+  fprintf ( stderr, "Done]");
+  return read_tree (tree, &tot_node, S->nseq, S->name);
+}
+
 static float tid;
 static float tpairs;
 static int tprint;
 static int km_node;
 static float km_tbootstrap;
 static float km_tnode;
+
 NT_node ** seq2km_tree (Sequence *S, char *file)
 {
   int tot_node;
@@ -1447,7 +1462,7 @@ NT_node    aln2km_tree (Alignment *A, char *mode, int nboot)
   NT_node T;
   double **V;
   Sequence *S;
-  int dim=50;//Keep all the vector components summing up to x% of the cumulated sd
+  int dim=100;//Keep all the vector components summing up to x% of the cumulated sd
   
   KA=A;
   S=KS=aln2seq(A);

@@ -5716,3 +5716,81 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
     return 100;
 }
 
+/****************************************************/
+char * rec_tree_aln_N ( NT_node P,Sequence *S,int N, int argv, char **argc);
+int align_node (NT_node P, Sequence *S,int argc, char **argv);
+int node2file_list (NT_node P,  Sequence *S,char *flist);
+
+int tree_aln_N ( NT_node P, Sequence *S, int N, int argc, char **argv)
+{
+  int a;
+  fprintf (stderr, "\nPROGRESSIVE_ALIGNMENT [TreeN Based NSEQ=%d K=%d][%s]\n", S->nseq,N, S->file[0]);
+  recode_tree (P,S);
+  index_tree_node(P);
+  tree2nnode (P);
+
+  
+
+  return printf_system_direct_check ("%s -seq %s -usetree=%s -profile %s -newtree=cedri24",list2string (argv, argc),S->file[0], P->file, rec_tree_aln_N (P,S,N,argc,argv));
+}
+
+char * rec_tree_aln_N ( NT_node P,Sequence *S,int N, int argv, char **argc)
+{
+  if (!P) return;
+  else if ((P->leaf)>N)
+    {
+      rec_tree_aln_N (P->left , S,N, argv, argc);
+      rec_tree_aln_N (P->right, S,N, argv, argc);
+      
+      P->leaf=0;
+      if (P->left)P->leaf+=(P->left)->leaf;
+      if (P->right)P->leaf+=(P->right)->leaf;
+    }
+  if (P->leaf>=N || P->parent==NULL){align_node (P,S,argv,argc);P->isseq=1;P->leaf=1;}
+  return P->alfile;
+  
+}
+
+int align_node (NT_node P, Sequence *S,int argc, char **argv)
+{
+  
+  static char *tree;
+  static char *cl;
+  static char *seq;
+  int ng;
+  
+  if (!seq )seq =vtmpnam (NULL);
+  if (!tree)tree=vtmpnam (NULL);
+  if (cl)vfree(cl);
+  P->alfile=vtmpnam (NULL);
+  printf_file (seq, "w", "");
+  ng=node2file_list (P,S,seq);
+  fprintf ( stderr, "\n\tMerge: %5d --- %5d --> %5d seq %5d Groups", (P->left)->nseq, (P->right)->nseq, P->nseq,ng);
+  return printf_system ("%s -profile FILE::%s -outfile %s -newtree %s >/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
+}
+
+int node2file_list (NT_node P, Sequence *S, char *flist)
+{
+  int t=0;
+  
+  if (!P)return 0;
+  if (P->isseq)
+    {
+      
+      if (P->nseq==1)
+	{
+	  int s;
+	  s=P->lseq[0];
+	  P->alfile=vtmpnam (NULL);
+	  printf_file (P->alfile, "w", ">%s\n%s\n", S->name[s], S->seq[s]);
+	}
+      printf_file (flist, "a", "%s\n", P->alfile);
+      t=1;
+    }
+  else
+    {
+      t+=node2file_list (P->left,S,flist);
+      t+=node2file_list (P->right,S,flist);
+    }
+  return t;
+}

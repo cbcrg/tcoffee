@@ -24,7 +24,7 @@ typedef struct tnode{
   int visited;
   char *name;
   char *file;
-  
+  char *alfile;
   ///The parent node
   NT_node parent;
   ///Left child node
@@ -153,7 +153,8 @@ NT_node free_tree_node ( NT_node R);
 
 Sequence * tree2seq    (NT_node R, Sequence *S);
 NT_node  rename_seq_in_tree ( NT_node R, char ***list);
-
+int decode_seq_in_tree (NT_node R, char **name);
+  
 NT_node balance_tree (NT_node);
 int tree2nseq ( NT_node R);
 int tree_file2nseq ( char *file);

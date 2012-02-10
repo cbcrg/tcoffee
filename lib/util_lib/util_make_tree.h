@@ -14,6 +14,8 @@ NT_node ** dist2nj_tree (double **distances, char **out_seq_name, int out_nseq, 
 
 double **aln2km_vector (Alignment *A, char *mode, int *dim);
 NT_node ** seq2km_tree (Sequence *S, char *file);
+NT_node ** seq2co_tree (Sequence *S, char *file);
+
 NT_node aln2km_tree (Alignment *A, char *mode, int nboot);
 NT_node rec_km_tree (char **name,int n,int dim,double **V, int nboot);
   

@@ -1821,6 +1821,27 @@ NT_node free_tree_node ( NT_node R)
   return NULL;
 }
 
+int decode_seq_in_tree (NT_node R, char **name)
+{
+  //seq are expected to be named  1--N in the order of **name
+  //returns the number of sequences effectively decoded
+  int t=0;
+  if (!R) return 0;
+  if (R->leaf!=1)
+    {
+      t+=decode_seq_in_tree (R->right,name);
+      t+=decode_seq_in_tree (R->left, name);
+    }
+  else
+    {
+      int s=atoi (R->name);
+      vfree (R->name);R->name=vcalloc ( strlen (name[s-1])+1, sizeof (char));
+      sprintf (R->name, "%s", name[s-1]);
+      t=1;
+     
+    }
+  return t;
+}
 NT_node   rename_seq_in_tree ( NT_node R, char ***list)
 {
   if ( !R || !list) return R;
@@ -3732,7 +3753,7 @@ int scan_name_and_dist ( FILE *fp, char *name, float *dist)
       return 1;
     }
   a=0;
-  while (isdigit((c=fgetc(fp))) || c=='.' || c=='-')
+  while (isdigit((c=fgetc(fp))) || c=='.' || c=='-' || c=='e')
     {
       number[a++]=c;
     }
