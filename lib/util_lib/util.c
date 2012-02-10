@@ -3714,7 +3714,7 @@ int fprintf_fork2  (FILE *fp, char *string, ...)
 
   char* buf;
 
-  cvsprintf (buf, strsing);
+  cvsprintf (buf, string);
   fprintf ( fp, "%s", buf);
   vfree (buf);
   fflush (fp);
