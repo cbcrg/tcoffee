@@ -1,4 +1,24 @@
 #!/bin/bash 
+#
+# T-Coffee validation script. It runs a T-Coffee alignment for each entry in the Balibase RV11 dataset. 
+# The result is compared with the reference alignment using the bali_score result as metric. 
+# 
+# If the average result is above or equals to the threshold value (default: 0.490) the validation PASSED, 
+# NOT PASSED otherwise. 
+# If the average result is below the threshold value by a 10% the validation is marked as FAILED and 
+# the script will exit with the error code 1.
+#  
+# Usage: ./run.sh [dataset-against-to-test]
+#
+#
+# Environment variables that can be used to override the default values 
+# - THRESHOLD: define the validation threshold score (default: 0.490)
+# - SCRATCH: the path where validation will be executed (default: ./scratch)
+# - FAILED: the path where log and result files for alignment with a score value below the threshold are stored for further analysis (default: ./failed)
+# - OSNAME: the system type (linux|macosx)
+# - OSARCH: the system architecture (i386|x86_64) 
+#
+#
 set -e
 set -o errexit
 #set -o nounset
