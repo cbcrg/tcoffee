@@ -2392,7 +2392,6 @@ FILE * rec_print_tree ( NT_node T, FILE *fp)
 
 
 
-
 /*********************************************************************/
 /*                                                                   */
 /*                                  Tree Functions                   */
@@ -3692,7 +3691,6 @@ NT_node new_get_node (NT_node T, FILE *fp)
 
   if ( c==';')
     {
-
       if (!T->right)T=T->left;
       else if (!T->left)T=T->right;
       vfree (T->parent);T->parent=NULL;

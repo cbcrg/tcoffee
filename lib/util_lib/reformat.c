@@ -10733,6 +10733,19 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 
 	   myexit (EXIT_SUCCESS);
 	 }
+       else if ( strm(action, "redundate"))
+	 {
+	   char *seq;
+	   char *tree;
+
+	   seq=vcalloc (100, sizeof (char));
+	   tree=vcalloc (100, sizeof (char));
+	   sprintf ( seq, "%s.redundated", (D1->S)->file[0]);
+	   sprintf (tree, "%s.redundated", (D2->T)->file);
+
+	   HERE ("%s %s", tree, seq);
+	   redundate (D1->S, D2->T,seq, tree);
+	 }
        else if ( strm(action, "treelist_prune")|| strm(action, "prune_treelist"))
 	 {
 	   Sequence *TS;

@@ -24,7 +24,51 @@ static int 	*tkill;
  *	\file util_make_tree.c
  *	\brief Source code tree algorithms
  */
-
+static int nred;
+NT_node Rredundate (NT_node T, Sequence* S, char *seq);
+NT_node redundate (Sequence* S,NT_node T, char *seq, char *tree)
+{
+  int a;
+  FILE *fp;
+  
+  nred=0;
+  printf_file (seq, "w", "");
+  for (a=0; a<S->nseq; a++)printf_file (seq, "a", ">%s\n%s\n", S->name [a], S->seq[a]);
+  Rredundate (T, S, seq);
+  
+  print_newick_tree (T,tree);
+}
+NT_node Rredundate (NT_node T, Sequence* S, char *seq)
+{
+  
+  if (!T) return NULL;
+  else if (T->isseq)
+    {
+      NT_node L, R;
+      L=new_declare_tree_node ();
+      R=new_declare_tree_node ();
+      T->right=R;
+      T->left=L;
+      R->parent=L->parent=T;
+      T->isseq=0;
+      
+      R->isseq=L->isseq=1;
+      sprintf (L->name, "NR_%d",++nred);
+      sprintf (R->name, "%s", T->name);
+      
+      printf_file (seq, "a", ">NR_%d\n%s\n", nred,S->seq[rand()%S->nseq]);
+    }
+  else
+    {
+      Rredundate (T->left ,S,seq);
+      Rredundate (T->right,S,seq);
+    }
+  return T;
+}
+      
+      
+	
+ 
 NT_node ** seq2cw_tree ( Sequence *S, char *tree)
 {
   Alignment *A;
