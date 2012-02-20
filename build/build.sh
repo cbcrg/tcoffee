@@ -318,7 +318,12 @@ function build_binaries()
 	#
 	# add extra pack packages 
 	#
+	# + hmmtop
 	cp $BUILD_REPO/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
+
+	# + secondary_struc.py (by Carsten)
+	cp $WORKSPACE/tcoffee/build/extra/secondary_struc.py $TCDIR/plugins/secondary_struc.py
+	chmod +x $TCDIR/plugins/secondary_struc.py
 }
 
 
