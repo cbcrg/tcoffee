@@ -5639,33 +5639,33 @@ char** km_coffee (int argc, char **argv)
 
 	for (a=0; a<argc; a++)
 	{
-		if ( strm (argv[a], "-seq"))
-		{
-			++a;
-			seqset=1;
-			S=main_read_seq (argv[a]);
-			F=parse_fname (argv[a]);
-		}
-		else if ( strm (argv[a], "-mode"))
-		  {++a;}
-		else if ( strm (argv[a], "-km_mode"))
-		  {km_mode=argv[++a];}
-		else if ( strm (argv[a], "-km_k"))
-		  {k=atoi (argv[++a]);}
-		else if ( strm (argv[a], "-km_tree"))
-		  {km_tree=argv[++a];}
-		else if ( strm (argv[a], "-km_nit"))
-		  {nit=atoi (argv[++a]);}
-		else if ( strm (argv[a], "-tree_mode"))
-		  {tm=argv[++a];}
-		else if ( strm (argv[a], "-km_method"))
-		  {method=argv[++a];}
-		else
-		  {
-		    new_argv[new_argc++]=argv[a];
-		  }
+	  if ( strm (argv[a], "-seq"))
+	    {
+	      ++a;
+	      seqset=1;
+	      S=main_read_seq (argv[a]);
+	      F=parse_fname (argv[a]);
+	    }
+	  else if ( strm (argv[a], "-mode"))
+	    {++a;}
+	  else if ( strm (argv[a], "-km_mode"))
+	    {km_mode=argv[++a];}
+	  else if ( strm (argv[a], "-km_k"))
+	    {k=atoi (argv[++a]);}
+	  else if ( strm (argv[a], "-km_tree"))
+	    {km_tree=argv[++a];}
+	  else if ( strm (argv[a], "-km_nit"))
+	    {nit=atoi (argv[++a]);}
+	  else if ( strm (argv[a], "-tree_mode"))
+	    {tm=argv[++a];}
+	  else if ( strm (argv[a], "-km_method"))
+	    {method=argv[++a];}
+	  else
+	    {
+	      new_argv[new_argc++]=argv[a];
+	    }
 	}
-
+	
 	if (!seqset)
 	  {
 	    myexit(fprintf_error (stderr, "Error: with -mode=kmcoffee sequences MUST be provided with -seq"));
@@ -5674,11 +5674,6 @@ char** km_coffee (int argc, char **argv)
 	
 	//if (!tm){new_argv[new_argc]=vcalloc(100, sizeof (char)); sprintf ( new_argv[new_argc++], "kmeans");}
 	if (!k)k=100;
-		
-	
-	max_kmcoffee=A->nseq;
-	cur_nseq=max_nseq=A->nseq;
-	
 	if (S->nseq<=k)k=S->nseq/2;
 	
 	if (!km_mode || strm (km_mode, "topdown"))
