@@ -2612,11 +2612,11 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	clean_residue_pair_hasch ( s1, r1,s2, r2, hasch, CL);	
 	
 	//New Normalization
-	//norm1=MIN(norm1,norm2);
+	norm1=MIN(norm1,norm2);
 		
 	//Old Normalization: on the number of sequences, useless when not doing an all against all
 	//Old NORM seems to work better after all (23/03/2011)
-	norm2=(CL->S)->nseq;//OLD NORM (seems to work better: 23/03/2011)
+	//norm2=(CL->S)->nseq;//OLD NORM (seems to work better: 23/03/2011)
 
 	score=(norm1)?score/norm1:0;
 	

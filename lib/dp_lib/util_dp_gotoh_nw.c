@@ -1659,26 +1659,28 @@ int cl2pair_list_ext ( Alignment *A, int *ins, int **ils, Constraint_list *CL, i
 int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in,int njobs)
 {
   int p1, p2,diag, si, s, r, t_s, t_r,t_w, t_s2, t_r2, t_w2;
-  int a, b, l1, l2;
+  int a, b,g, l1, l2;
   int **pos;
-
+  int ll[3];
+  
   int nused;
   int *used_list;
   int *sl2,*sl1, **inv_pos;
 
-  
+  int normalisation_mode=0;
 
   float nscore, score, tot, filter, avg=0, new=0;
   float **used;
   float *norm;
-
+  static int **nr;
+  static int max_nr;
   //variables for fork
   FILE *fp;
   char **pid_tmpfile;
   int sjobs,j;
   int **sl;
    
-  if ( !A) return 0;
+  if (!A) return 0;
   
 
   
@@ -1686,15 +1688,35 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   inv_pos=vcalloc ((CL->S)->nseq, sizeof (int*));
   for (a=0; a<ns[1]; a++)inv_pos[ls[1][a]] =seq2inv_pos(A->seq_al[ls[1][a]]);
 
-  l1=strlen (A->seq_al[ls[0][0]]);
-  l2=strlen (A->seq_al[ls[1][0]]);
+  ll[0]=l1=strlen (A->seq_al[ls[0][0]]);
+  ll[1]=l2=strlen (A->seq_al[ls[1][0]]);
+  ll[2]=MAX(l1,l2);
   sl1=vcalloc ((CL->S)->nseq, sizeof (int));
   sl2=vcalloc ((CL->S)->nseq, sizeof (int));
   
   for (a=0;a<ns[0]; a++)sl1[ls[0][a]]=1;
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
   norm=vcalloc ( l1+1, sizeof (float));
-  
+
+  //data structure used for norm 2
+
+
+  if (!nr || ll[2]>max_nr)
+    {
+      if (nr)free_int (nr, -1);
+      max_nr=ll[2];
+      nr=declare_int (2, max_nr+1);
+    }
+
+  for (g=0; g<2; g++)
+    {
+      for (a=0; a<ll[g]; a++)
+	{
+	  nr[g][a+1]=0;
+	  for (b=0; b<ns[g]; b++)
+	    if (A->seq_al[ls[g][b]][a]!='-')nr[g][a+1]++;
+	}
+    }
    
   sl=n2splits (njobs,l1+1);
   pid_tmpfile=vcalloc (njobs, sizeof (char*));
@@ -1761,7 +1783,16 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 		  
 		  if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
 		    {
-		      score=((norm[p1]>0)?score/norm[p1]:0)*NORM_F;
+		      if (normalisation_mode==0)
+			{
+			  score=((norm[p1]>0)?score/norm[p1]:0);
+			}
+		      else if (normalisation_mode==1)
+			{
+			  score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
+			}
+		      
+		      score*=NORM_F;
 		      fprintf (fp, "%d %d %d %f ", p1, p2, ((l1-(p1))+(p2)), score);
 		    }
 		}

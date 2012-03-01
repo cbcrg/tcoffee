@@ -3511,8 +3511,6 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
 		      norm=MIN(norm1,norm2);
 		      score=((norm)?score/norm:0);
 		      fprintf (fp, "%d ",(int)(score));
-		      
-			  
 		    }
 		  for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
 		    {

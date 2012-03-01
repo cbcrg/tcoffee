@@ -9758,8 +9758,6 @@ Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
   Alignment **AL;
   n[0]=0;
 
-
-  HERE ("***** %d",k);
   if (A->nseq<=k)
     {
       AL=vcalloc (1, sizeof (Alignment*));
