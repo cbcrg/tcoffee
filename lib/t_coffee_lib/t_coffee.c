@@ -372,6 +372,7 @@ int batch_main ( int argc, char **argv)
 	/*Multithread*/
 	char *multi_core;
 	int   n_core;
+	int max_n_proc; //legacy for Nature protocol
 
 	char *lib_list;
 	char *prune_lib_mode;
@@ -3235,7 +3236,26 @@ get_cl_param(\
 			    /*Max Value*/ "100"           \
 		   );
 	       if (n_core)set_int_variable ("n_core",n_core);
-
+	       
+/*PARAMETER PROTOTYPE:    max_n_proc:: legacy for the nature protocol    */
+	       get_cl_param(					\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-max_n_proc",\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "D"          ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Number of cores to be used by machine [default=0 => all those defined in the environement]",\
+			    /*Parameter*/ &max_n_proc   ,\
+			    /*Def 1*/    "0"       ,\
+			    /*Def 2*/    "0"              ,\
+			    /*Min_value*/ "0"          ,\
+			    /*Max Value*/ "100"           \
+		   );
+	       if (max_n_proc)n_core=max_n_proc;
+	       
 
 /*PARAMETER PROTOTYPE:    lib_list    */
 	       declare_name (lib_list);

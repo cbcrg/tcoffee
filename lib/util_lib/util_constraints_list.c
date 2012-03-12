@@ -6127,6 +6127,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    -infile&bnsp\n");
 	fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+	fprintf ( fp, "PARAM      -n_core=1\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", TCOFFEE_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", TCOFFEE_4_TCOFFEE);
@@ -6141,6 +6142,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    -infile&bnsp\n");
 	fprintf ( fp, "OUT_FLAG   -outfile&bnsp\n");
+	fprintf ( fp, "PARAM      -n_core=1\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", TCOFFEE_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", TCOFFEE_4_TCOFFEE);
