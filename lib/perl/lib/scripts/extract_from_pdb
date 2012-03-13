@@ -1167,7 +1167,8 @@ sub remote_is_pdb_name
     my $in=@_[0];
     my ($ref_file, $pdb);
     my ($value,$value1,$value2);
-   
+    my $max=2;
+    
     $ref_file="$cache/pdb_entry_type.txt";
     
     if ( $in=~/[^\w\d\:\_]/){return 0;}

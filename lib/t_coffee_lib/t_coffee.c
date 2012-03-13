@@ -1112,7 +1112,8 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 					  );
-
+	       
+		 
 /*PARAMETER PROTOTYPE:    VERSION      */
 	       setenv_list=declare_char (100, STRING);
 	       n_setenv=get_cl_param(\
@@ -5107,7 +5108,7 @@ char *get_cdna_defaults(char *buf, char *type)
 char *get_3dcoffee_defaults(char *buf, char *type)
    {
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
-
+     
      buf=strcat (buf,"-in Msap_pair  -template_file SELF_P_ -profile_template_file SELF_P_");
      /*buf=strcat (buf,"-in ");*/
 
