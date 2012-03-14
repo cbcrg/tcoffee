@@ -1112,8 +1112,8 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 					  );
-	       
-		 
+
+
 /*PARAMETER PROTOTYPE:    VERSION      */
 	       setenv_list=declare_char (100, STRING);
 	       n_setenv=get_cl_param(\
@@ -3237,7 +3237,7 @@ get_cl_param(\
 			    /*Max Value*/ "100"           \
 		   );
 	       if (n_core)set_int_variable ("n_core",n_core);
-	       
+
 /*PARAMETER PROTOTYPE:    max_n_proc:: legacy for the nature protocol    */
 	       get_cl_param(					\
 			    /*argc*/      argc           ,\
@@ -3256,7 +3256,7 @@ get_cl_param(\
 			    /*Max Value*/ "100"           \
 		   );
 	       if (max_n_proc)n_core=max_n_proc;
-	       
+
 
 /*PARAMETER PROTOTYPE:    lib_list    */
 	       declare_name (lib_list);
@@ -3836,7 +3836,7 @@ get_cl_param(\
 		 }
 
 /*FILL THE F STRUCTURE (Contains Information for Output names For the defaults)*/
-	       
+
 	       if (n_list==0 || argc<=1)
 		 {
 		   fprintf ( stderr, "\nERROR: You have NOT provided enough arguments [FATAL:%s]", PROGRAM);
@@ -3846,7 +3846,7 @@ get_cl_param(\
 
 	       else if ( argv[1][0]!='-' && (check_file_exists( argv[1]) || check_file_exists(argv[1]+1)))
 		 {
-		   
+
 		   if (check_file_exists(argv[1]))F=parse_fname(argv[1]);
 		   else if ( check_file_exists(argv[1]+1))F=parse_fname(argv[1]+1);
 
@@ -3870,7 +3870,7 @@ get_cl_param(\
 		 {
 		   F=parse_fname(aln_file_list[0]);
 		 }
-	       
+
 	       else
 	          {
 
@@ -4037,12 +4037,12 @@ get_cl_param(\
 
 		  }
 
-	       
+
 	       if (   !use_tree && check_file_exists (tree_file))vremove (tree_file);
 	       else if ( !use_tree || (use_tree && strm (use_tree, "default")));
 	       else sprintf ( tree_file, "%s", use_tree);
 
-	       
+
 /*******************************************************************************************************/
 /*                                                                                                     */
 /*                           Input Sequences and Library                                               */
@@ -4321,7 +4321,7 @@ get_cl_param(\
 	       sprintf (CL->rna_lib, "%s", rna_lib);
 /* Important: This is where the library is compiled!!!!*/
 
-	      
+
 	       if ((CL->S)->nseq>1 && !do_convert)
 		 {
 		   CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
@@ -4913,7 +4913,7 @@ get_cl_param(\
 			  trim_S=add_sequence (trim_subS,trim_S,0);
 			}
 		    }
-		 
+
 		  for ( a=0, b=0; a<A->nseq; a++)
 		    {
 
@@ -5108,7 +5108,7 @@ char *get_cdna_defaults(char *buf, char *type)
 char *get_3dcoffee_defaults(char *buf, char *type)
    {
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
-     
+
      buf=strcat (buf,"-in Msap_pair  -template_file SELF_P_ -profile_template_file SELF_P_");
      /*buf=strcat (buf,"-in ");*/
 
@@ -5655,7 +5655,7 @@ char** km_coffee (int argc, char **argv)
 	char *method=NULL;
 	char *km_mode=NULL;
 	char *km_tree=NULL;
-	
+
 	new_argv=vcalloc (argc+100, sizeof (char*));
 
 	for (a=0; a<argc; a++)
@@ -5686,17 +5686,17 @@ char** km_coffee (int argc, char **argv)
 	      new_argv[new_argc++]=argv[a];
 	    }
 	}
-	
+
 	if (!seqset)
 	  {
 	    myexit(fprintf_error (stderr, "Error: with -mode=kmcoffee sequences MUST be provided with -seq"));
 	  }
-	
-	
+
+
 	//if (!tm){new_argv[new_argc]=vcalloc(100, sizeof (char)); sprintf ( new_argv[new_argc++], "kmeans");}
 	if (!k)k=100;
 	if (S->nseq<=k)k=S->nseq/2;
-	
+
 	if (!km_mode || strm (km_mode, "topdown"))
 	  {
 	    A=seq2aln(S,NULL, RM_GAP);
@@ -5723,7 +5723,7 @@ Alignment* kmir (Alignment *A)
 	for (a=0; a<A->nseq; a++)
 	  {
 	    ungap (A->seq_al[a]);
-	    
+
 	    add_sequence2prf(A->seq_al[a],seq, prf, A->len_aln, -10, -1);
 	    sprintf ( A->seq_al[a], "%s", seq);
 	  }
@@ -5732,15 +5732,15 @@ Alignment* kmir (Alignment *A)
 
 int km_coffee_count (Alignment *A,int k, int t)
 {
-  
-  
+
+
   if (A->nseq<=k)t++;
   else
     {
       Alignment**AL;
       int n=0;
       int a;
-      
+
       AL=seq2kmeans_subset(A,k,&n, "triaa");
       if (n==1)return t;
       else
@@ -5758,9 +5758,9 @@ int km_coffee_count (Alignment *A,int k, int t)
 Alignment* km_coffee_align1 (char *method, Alignment *A,int k,int argc, char **argv, int nit,int round)
 {
   int tot=0;
-  
 
-  
+
+
   if (A->nseq<=k)
     {
       A=km_align_seq_slow (method,A, argc, argv,nit,round);
@@ -5770,10 +5770,10 @@ Alignment* km_coffee_align1 (char *method, Alignment *A,int k,int argc, char **a
     {
       Alignment**AL;
       int n,a;
-      
+
       AL=seq2kmeans_subset(A,k,&n, "triaa");
       free_aln (A);
-      
+
       if (n==1)
 	{
 
@@ -5793,8 +5793,8 @@ Alignment* km_coffee_align1 (char *method, Alignment *A,int k,int argc, char **a
 	  for (a=0; a<n; a++)free_aln (AL[a]); vfree(AL);
 	}
     }
- 
-  
+
+
   fprintf ( stderr, "\r\t\tkmcoffee: Aligned: %4.2f %%", (float)aligned*100/(float)toalign);
   return A;
 }
@@ -5807,7 +5807,7 @@ Alignment *km_align_kprofile (Alignment **AL,int n, int k, int argc, char **argv
 	int nn=0;
 	int a;
 	NAL=vcalloc (n, sizeof (Alignment *));
-		
+
 	if (n==1)return km_align_profile (AL,n,argc, argv, nit, round);
 	else
 	{
@@ -5853,7 +5853,7 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 
 	for (a=0; a<n; a++)
 		tot_nseq+=(AL[a])->nseq;
-	
+
 
 	if (!treefile)treefile=vtmpnam(NULL);
 	if (!prf)prf=vcalloc (500, sizeof (char));
@@ -5874,9 +5874,11 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 
 	strcat (buf, " -profile FILE::");
 	strcat (buf, prff);
-
-	strcat (buf, " -outfile ");
-	strcat (buf, aln);
+	if (round!=0)
+	{
+		strcat (buf, " -outfile ");
+		strcat (buf, aln);
+	}
 	strcat (buf, " -output fasta_aln -quiet  ");
 	strcat (buf, " -newtree ");
 	strcat (buf, treefile);
@@ -5894,7 +5896,7 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 	vfclose (fp);
 
 	printf_system_direct_check ("%s",buf);
-	
+
 	for ( a=0; a<n; a++)
 	{
 		sprintf (prf, "%s/prf_%d_%d", get_tmp_4_tcoffee(), a+1,pid);
@@ -5908,7 +5910,7 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 	    sprintf (prf, "%s.%d",F->name,getpid());
 	    output_fasta_aln (prf,A);
 	    printf_system_direct_check ("%s -profile %s", cl, prf);
-	    
+
 	    remove (prf);
 	    myexit(EXIT_SUCCESS);
 	  }
@@ -5923,14 +5925,14 @@ Alignment *km_align_seq_slow (char *method, Alignment *A, int argc, char **argv,
   else
     {
       static char *seq;
-      static char *aln; 
+      static char *aln;
       if (!seq)seq=vtmpnam (NULL);
       if (!aln)aln=vtmpnam (NULL);
       output_fasta_seq (seq,A);
       free_aln (A);
-      
+
       printf_system ("tc_generic_method.pl -mode=seq_msa -infile=%s -method=%s -outfile=%s", seq, method, aln);
-      
+
       if (round==-1)
 	{
 	  char *cl;
@@ -5978,12 +5980,12 @@ Alignment *km_align_seq_slow_withTC (Alignment *A, int argc, char **argv, int ni
 		    strcat (buf, treefile);
 		    strcat (buf, " >/dev/null 2>/dev/null");
 		  }
-		
+
 		printf_system_direct_check ("%s",buf);
-		
+
 		if (round==-1)
 		  myexit (EXIT_SUCCESS);
-		
+
 		A=main_read_aln (aln,A);
 		vfree (cl);
 	}
@@ -6020,19 +6022,19 @@ Alignment *km_align_seq_fast (Alignment *A, int argc, char **argv, int nit, int 
 	    sprintf (CL->dp_mode, "myers_miller_pair_wise");
 	    CL->S=declare_sequence (1,1,1);
 	  }
-	
+
 	ungap (A->seq_al[0]);
 	n=A->nseq;
-	
+
 	if (n<=1)
 	  return A;
-	
+
 	CL->S=fill_sequence_struc(n,A->seq_al, A->name, NULL);
 	ns=vcalloc (2, sizeof (int));
 	ls=declare_int (2, n);
 	ns[0]=ns[1]=1;
 	ls[0][0]=0;
-	
+
 	//Alignment
 	A->len_aln=strlen (A->seq_al[0]);
 
@@ -6067,9 +6069,9 @@ Alignment *km_refine_msa (Alignment *A,int argc, char **argv, int k)
   seq=vtmpnam(NULL);
   aln=vtmpnam(NULL);
   tree=vtmpnam (NULL);
-  
+
   if (A->nseq<=k)k=A->nseq/2;
-  
+
   aln2gap_trimmed (A,k, prf, seq);
   printf_system_direct_check ("t_coffee -seq %s -profile %s -outfile %s -newtree %s ",seq, prf, aln, tree);
   free_aln (A);
@@ -6077,7 +6079,7 @@ Alignment *km_refine_msa (Alignment *A,int argc, char **argv, int k)
   remove (prf);
   remove (seq);
   remove (tree);
-  
+
   return A;
 }
 
@@ -6087,9 +6089,9 @@ Alignment * km_coffee_align2 (Sequence *S, char *km_tree, int k, int argc, char 
   if (strm (km_tree, "kmeans")){km_tree=vtmpnam (NULL);seq2km_tree (S, km_tree);}
   else if (strm (km_tree, "cotree"))seq2co_tree (S, km_tree);
   else if (!km_tree){km_tree=vtmpnam (NULL);seq2km_tree (S, km_tree);}
-  
 
-  
+
+
   T=main_read_tree (km_tree);
   tree_aln_N(T,S, k, argc, argv);
   myexit (EXIT_SUCCESS);
