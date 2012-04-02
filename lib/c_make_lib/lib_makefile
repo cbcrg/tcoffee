@@ -77,6 +77,7 @@ DEV2_LIB=$(LIB_DIR)/dev_lib/dev2_lib
 DEV3_LIB=$(LIB_DIR)/dev_lib/dev3_lib
 DEV4_LIB=$(LIB_DIR)/dev_lib/dev4_lib
 FASTAL_LIB=$(LIB_DIR)/fastal
+KM_COFFEE_LIB=$(LIB_DIR)/km_coffee
 T_COFFEE_LIB=$(LIB_DIR)/t_coffee_lib
 
 
@@ -964,6 +965,73 @@ aln_compare.c:\
 		define_header.h
 	cp $(UT_LIB)/aln_compare.c .
 	echo 'aln_compare' >> $(CODE_LIST)
+
+#########################################################################
+#####################      	KM-COFFEE_LIB      ##########################
+#########################################################################
+
+KM_COFFEE_HEADER=km_coffee_header.h
+KM_COFFEE_OBJECTS=Stack.o_$(OSNAME)\
+Vector.o_$(OSNAME)\
+classes.o_$(OSNAME)\
+km_util.o_$(OSNAME)\
+kmeans.o_$(OSNAME)\
+km_coffee.o_$(OSNAME)
+
+
+
+#2 HEADERS
+km_coffee_lib_header.h:\
+		$(KM_COFFEE_LIB)/km_coffee.h\
+		$(KM_COFFEE_LIB)/km_util.h\
+		$(KM_COFFEE_LIB)/kmeans.h\
+		$(KM_COFFEE_LIB)/classes.h\
+		$(KM_COFFEE_LIB)/Vector.h\
+		$(KM_COFFEE_LIB)/Stack.h
+	cat $(KM_COFFEE_LIB)/classes.h\
+		$(KM_COFFEE_LIB)/Vector.h\
+		$(KM_COFFEE_LIB)/Stack.h\
+		$(KM_COFFEE_LIB)/km_util.h\
+		$(KM_COFFEE_LIB)/kmeans.h\
+		$(KM_COFFEE_LIB)/km_coffee.h > km_coffee_header.h
+
+#3 SOURCES
+km_coffee.c:\
+		$(KM_COFFEE_LIB)/km_coffee.c\
+		km_coffee_lib_header.h
+	cp $(KM_COFFEE_LIB)/km_coffee.c .
+	echo 'km_coffee' >> $(CODE_LIST)
+
+km_util.c:\
+		$(KM_COFFEE_LIB)/km_util.c\
+		km_coffee_lib_header.h
+	cp $(KM_COFFEE_LIB)/km_util.c .
+	echo 'km_util' >> $(CODE_LIST)
+
+Stack.c:\
+		$(KM_COFFEE_LIB)/Stack.c\
+		km_coffee_lib_header.h
+	cp $(KM_COFFEE_LIB)/Stack.c .
+	echo 'Stack' >> $(CODE_LIST)
+Vector.c:\
+		$(KM_COFFEE_LIB)/Vector.c\
+		km_coffee_lib_header.h
+	cp $(KM_COFFEE_LIB)/Vector.c .
+	echo 'Vector' >> $(CODE_LIST)
+kmeans.c:\
+		$(KM_COFFEE_LIB)/kmeans.c\
+		km_coffee_lib_header.h
+	cp $(KM_COFFEE_LIB)/kmeans.c .
+	echo 'kmeans' >> $(CODE_LIST)
+classes.c:\
+		$(KM_COFFEE_LIB)/classes.c\
+		km_coffee_lib_header.h
+	cp $(KM_COFFEE_LIB)/classes.c .
+	echo 'classes' >> $(CODE_LIST)
+
+
+
+
 #########################################################################
 ########################      	DP_LIB      #############################
 #########################################################################

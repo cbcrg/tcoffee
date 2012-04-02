@@ -11,7 +11,7 @@
 #include "dp_lib_header.h"
 #include "define_header.h"
 #include "t_coffee.h"
-
+#include "km_coffee_header.h"
 
 
 static void test();
@@ -5657,47 +5657,70 @@ char** km_coffee (int argc, char **argv)
 	char *km_tree=NULL;
 
 	new_argv=vcalloc (argc+100, sizeof (char*));
-
+	char *seq_f = NULL;
+	char *out_f = NULL;
+	int n_core=1;
 	for (a=0; a<argc; a++)
 	{
-	  if ( strm (argv[a], "-seq"))
-	    {
-	      ++a;
-	      seqset=1;
-	      S=main_read_seq (argv[a]);
-	      F=parse_fname (argv[a]);
+		if ( strm (argv[a], "-seq"))
+		{
+			seq_f=argv[++a];
 	    }
-	  else if ( strm (argv[a], "-mode"))
-	    {++a;}
-	  else if ( strm (argv[a], "-km_mode"))
-	    {km_mode=argv[++a];}
-	  else if ( strm (argv[a], "-km_k"))
-	    {k=atoi (argv[++a]);}
-	  else if ( strm (argv[a], "-km_tree"))
-	    {km_tree=argv[++a];}
-	  else if ( strm (argv[a], "-km_nit"))
-	    {nit=atoi (argv[++a]);}
-	  else if ( strm (argv[a], "-tree_mode"))
-	    {tm=argv[++a];}
-	  else if ( strm (argv[a], "-km_method"))
-	    {method=argv[++a];}
+
+		else if ( strm (argv[a], "-mode"))
+			{++a;}
+		else if ( strm (argv[a], "-km_mode"))
+			{km_mode=argv[++a];}
+		else if ( strm (argv[a], "-km_k"))
+			{k=atoi (argv[++a]);}
+		else if ( strm (argv[a], "-km_tree"))
+			{km_tree=argv[++a];}
+		else if ( strm (argv[a], "-km_nit"))
+			{nit=atoi (argv[++a]);}
+		else if ( strm (argv[a], "-tree_mode"))
+			{tm=argv[++a];}
+		else if ( strm (argv[a], "-km_method"))
+			{method=argv[++a];}
+		else if ( strm (argv[a], "-n_core"))
+		{
+			n_core =atoi (argv[++a]);
+			new_argv[new_argc++]=argv[a-1];
+			new_argv[new_argc++]=argv[a];
+		}
+		else if ( strm (argv[a], "-outfile"))
+		{
+			out_f=argv[++a];
+			new_argv[new_argc++]=argv[a-1];
+			new_argv[new_argc++]=argv[a];
+		}
 	  else
 	    {
 	      new_argv[new_argc++]=argv[a];
 	    }
 	}
 
-	if (!seqset)
+	if (seq_f==NULL)
 	  {
 	    myexit(fprintf_error (stderr, "Error: with -mode=kmcoffee sequences MUST be provided with -seq"));
 	  }
 
 
 	//if (!tm){new_argv[new_argc]=vcalloc(100, sizeof (char)); sprintf ( new_argv[new_argc++], "kmeans");}
-	if (!k)k=100;
-	if (S->nseq<=k)k=S->nseq/2;
 
-	if (!km_mode || strm (km_mode, "topdown"))
+
+	if (strm (km_mode, "km_fast"))
+	{
+		km_coffee_align3(seq_f, k, out_f, n_core );
+	}
+	else
+	{
+		S=main_read_seq (seq_f);
+		F=parse_fname (seq_f);
+		if (!k)k=100;
+		if (S->nseq<=k)k=S->nseq/2;
+
+
+		if (!km_mode || strm (km_mode, "topdown"))
 	  {
 	    A=seq2aln(S,NULL, RM_GAP);
 	    toalign=km_coffee_count (A,k, toalign);
@@ -5707,6 +5730,9 @@ char** km_coffee (int argc, char **argv)
 	  {
 	    km_coffee_align2 (S,km_tree,k, new_argc,new_argv);
 	  }
+	  else
+		  myexit(fprintf_error (stderr,"Please specify km_mode (topdown/bottomup/km_reduced)!\n"));
+	}
 	myexit (EXIT_SUCCESS);
 }
 
@@ -5874,6 +5900,7 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 
 	strcat (buf, " -profile FILE::");
 	strcat (buf, prff);
+
 	if (round!=0)
 	{
 		strcat (buf, " -outfile ");

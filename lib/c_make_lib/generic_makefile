@@ -1,22 +1,22 @@
 
 
 #########################################################
-#							
-#		GENERIC  				
-#							
-#							
+#
+#		GENERIC
+#
+#
 #########################################################
 
 #
 # make the 'date' variable configurable from the caller
-# otherwise fallback on the default behaviour 
-# 
+# otherwise fallback on the default behaviour
+#
 ifndef DATE
 DATE=`date`
 endif
 
 #
-# make version number condition so that it can specified 
+# make version number condition so that it can specified
 # using env variable otherwise it fallback on legacy mechanism
 #
 ifndef VERSION
@@ -55,7 +55,7 @@ INSTITUTE="Centro de Regulacio Genomica"
 EMAIL="cedric.notredame@europe.com"
 DISTRIBUTION_ADDRESS="www.tcoffee.org/Packages/"
 
-general_distribution: 
+general_distribution:
 	-rm $(CODE_LIST);
 	mkdir -p $(DISTRIB_DIR)
 	mkdir -p $(DISTRIB_DIR)/bin
@@ -72,23 +72,23 @@ general_distribution:
 library_distribution:
 	cd $(LIBRARY)/..
 	tar -cvf lib.tar $(LIBRARY)
-	gzip lib.tar 
+	gzip lib.tar
 	mkdir $(DISTRIBUTIONS)
-	mv lib.tar.gz $(DISTRIBUTIONS)/lib_$(VERSION).tar.gz 
+	mv lib.tar.gz $(DISTRIBUTIONS)/lib_$(VERSION).tar.gz
 
 general_makefile:
 	echo MAKE THE MAKEFILE: $(TC_MAKEFILE)
 	echo ' ' > $(TC_MAKEFILE)
-	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '$(EXECUTABLE): ' 
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '$(EXECUTABLE): '
 	$(PERL4MAKEFILE_LIB)/process_list.pl '$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) "@.o " ' $(CODE_LIST)  @
 	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\n'
 	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\t#DOLLAR(CC) #DOLLAR(CFLAGS) -o $(EXECUTABLE) '
-	$(PERL4MAKEFILE_LIB)/process_list.pl '$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) "@.o " ' $(CODE_LIST) @ 
+	$(PERL4MAKEFILE_LIB)/process_list.pl '$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) "@.o " ' $(CODE_LIST) @
 	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) ' -lm\n'
 	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\nall:  $(EXECUTABLE) TMalign\n'
-	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\nclean:\n\trm *.o\n'	
-	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\nTMalign:\n\t #DOLLAR(FCC) TMalign.f -o TMalign\n'	
-	$(PERL4MAKEFILE_LIB)/CCsed.script  $(TC_MAKEFILE) > $(TC_MAKEFILE2)	
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\nclean:\n\trm *.o\n'
+	$(PERL4MAKEFILE_LIB)/append2file.pl $(TC_MAKEFILE) '\nTMalign:\n\t #DOLLAR(FCC) TMalign.f -o TMalign\n'
+	$(PERL4MAKEFILE_LIB)/CCsed.script  $(TC_MAKEFILE) > $(TC_MAKEFILE2)
 	rm $(TC_MAKEFILE)
 
 .PHONY: clean
@@ -97,9 +97,9 @@ clean:
 	echo x > core
 	rm core
 empty:
-	-rm *.o_$(OSNAME)  
+	-rm *.o_$(OSNAME)
 	tar -cf old_c.tar *.c *.h
-	rm *.c 
+	rm *.c
 	rm *.h
 	echo x > core
 	rm core
@@ -115,8 +115,8 @@ c_code:
 	make CC="gcc" $(EXECUTABLE)
 	make clean
 	cp *.c $(DISTRIB_DIR)/$(EXECUTABLE)_source
-	cp *.h $(DISTRIB_DIR)/$(EXECUTABLE)_source	
-	cp *.f $(DISTRIB_DIR)/$(EXECUTABLE)_source	
+	cp *.h $(DISTRIB_DIR)/$(EXECUTABLE)_source
+	cp *.f $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >$(DISTRIB_DIR)/install
 	cp $(KO_LIB)/tclinkdb.txt $(DISTRIB_DIR)
 	chmod u+x $(DISTRIB_DIR)/install
@@ -128,7 +128,7 @@ license:
 	$(PERL4MAKEFILE_LIB)/process_list.pl '$(PERL4MAKEFILE_LIB)/append2file.pl @ $(DISTRIB_DIR)/short_license.c'    $(DISTRIB_DIR)/$(EXECUTABLE)_source/source_list @
 	ls -1 $(DISTRIB_DIR)/$(EXECUTABLE)_source/*.h > $(DISTRIB_DIR)/$(EXECUTABLE)_source/header_list
 	$(PERL4MAKEFILE_LIB)/process_list.pl '$(PERL4MAKEFILE_LIB)/append2file.pl @ $(DISTRIB_DIR)/short_license.c'    $(DISTRIB_DIR)/$(EXECUTABLE)_source/header_list  @
-	rm $(DISTRIB_DIR)/short_license.c	
+	rm $(DISTRIB_DIR)/short_license.c
 	rm $(DISTRIB_DIR)/short_license.pl
 
 #install:
@@ -148,16 +148,16 @@ packing:
 
 
 #########################################################
-#						
-#		RULES    			
-#						
-#						
+#
+#		RULES
+#
+#
 #########################################################
 
 
 .SUFFIXES: .o_$(OSNAME) .pl
 .c.o_$(OSNAME):
-	$(CC) $(CFLAGS) -c $*.c -o $*.o_$(OSNAME)
+	$(CC) $(KM_FLAGS) $(CFLAGS) -c $*.c -o $*.o_$(OSNAME)
 .pl.pl:
 	cp $*.pl $*.pl
 

@@ -54,7 +54,7 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
 	njob=queue2n(job)+1;
 
 
-	if ( get_nproc()==1 || njob==1)return  nfork_produce_list (CL, S, method, weight, mem_mode,job, local_stderr);
+	if ( get_nproc()==1 || njob==1)return  fork_subset_produce_list (CL, S, method, weight, mem_mode,job, local_stderr);
 	else if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,local_stderr);
 	else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, local_stderr);
 	else if (strstr ( CL->multi_thread, "jobs"))return fork_subset_produce_list (CL, S, method, weight, mem_mode,job, local_stderr); //Recommended default
@@ -2491,7 +2491,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 			else if (is_seq_source ('P', mode, SeqMode))
 			  {
 			    int i;
-			    
+
 			    S1=get_pdb_sequence (lname);
 			    if (S1==NULL)
 			      {
@@ -2508,7 +2508,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 			else if ( mode=='M');
 			else if ( mode=='X');
 			else if ( mode=='W');
-			
+
 			else if (is_seq_source ('S', mode, SeqMode))
 			  {
 				/*1 Try with my routines (read t_coffee and MSF)*/
@@ -2957,7 +2957,7 @@ read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name,
 		char *tmp;
 		while ((c = fgetc(fp)) == '!')
 		{
-			
+
 			fgets (line , 200 , fp);
 
 			tag = strtok(line, " ");
@@ -2967,31 +2967,31 @@ read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name,
 			  tmp = strtok(NULL, " \n");
 			  gn_co[a].seg_name = vcalloc(strlen(tmp)+1, sizeof(char));
 			  strcpy(gn_co[a].seg_name, tmp);
-			  
 
-			} 
-			else 
+
+			}
+			else
 			  {
 			  if (strcmp(tag, "SD") == 0)
 			    {
 			      genomic_info_found = 1;
 			      gn_co[a].strand = strtok(NULL, " ")[0];
-			    } 
-			  else 
+			    }
+			  else
 			    {
 			      if (strcmp(tag, "ST") == 0)
 				{
 				  genomic_info_found = 1;
 				  gn_co[a].start = atoi(strtok(NULL, " "))-1;
-				} 
-			      else 
+				}
+			      else
 				{
 				if (strcmp(tag, "EN") == 0)
 				  {
 				    genomic_info_found = 1;
 				    gn_co[a].end = atoi(strtok(NULL, " "))-1;
-				  } 
-				else 
+				  }
+				else
 				  {
 				    if (strcmp(tag, "SL") == 0)
 				      {
@@ -3010,7 +3010,7 @@ read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name,
 	if (genomic_info_found)
 	  {
 	    *genome_co = gn_co;
-	    
+
 	  }
 
 	else
@@ -3422,12 +3422,12 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs);
 Constraint_list * relax_constraint_list (Constraint_list *CL)
 {
   int njobs;
-  
+
 
   if (!CL || !CL->S || !CL->residue_index) return CL;
   if (!CL->multi_thread, "relax")njobs=1;
   else njobs=get_nproc();
-  
+
   return fork_relax_constraint_list (CL, njobs);
 }
 Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
@@ -3444,15 +3444,15 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
 
   static int **hasch;
   static int max_len;
-  
-    
+
+
   int t_s1, t_s2, t_r1, t_r2,x;
   double score;
   int np;
-  
+
   if (!CL || !CL->residue_index)return CL;
   fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", get_nproc());
-  
+
   if ( !hasch || max_len!=(CL->S)->max_len)
     {
       max_len=(CL->S)->max_len;
@@ -3472,10 +3472,10 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
       if (vvfork (NULL)==0)
 	{
 	  int norm,norm1,norm2;
-	 	  
+
 	  initiate_vtmpnam(NULL);
 	  fp=vfopen (pid_tmpfile[j], "w");
-	  
+
 	  for (s1=sl[j][0]; s1<sl[j][1]; s1++)
 	    {
 	      if (j==0)output_completion (CL->local_stderr,s1,sl[0][1],1, "Relax Library");
@@ -3488,7 +3488,7 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
 		      t_r1=CL->residue_index[s1][r1][x+R2];
 		      hasch[t_s1][t_r1]=CL->residue_index[s1][r1][x+WE];
 		      norm1++;
-		      
+
 		    }
 		  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
 		    {
@@ -3496,7 +3496,7 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
 		      norm2=0;
 		      s2=CL->residue_index[s1][r1][a+SEQ2];
 		      r2=CL->residue_index[s1][r1][a+R2];
-		      
+
 		      for (x=1; x< CL->residue_index[s2][r2][0]; x+=ICHUNK)
 			{
 			  t_s2=CL->residue_index[s2][r2][x+SEQ2];
@@ -3528,7 +3528,7 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
 	  sjobs++;
 	}
     }
-  
+
   while (sjobs>=0){vwait(NULL); sjobs--;}//wait for all jobs to complete
   for (j=0; j<njobs; j++)
     {
@@ -3961,17 +3961,17 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 	int *col;
 	int a,c, ref_weight;
 
-	
+
 	if ( !weight)weight=vcalloc (MAX(2,A->len_aln), sizeof (int));
 
 	weight[0]=FORBIDEN;
 	if ( weight_mode==NULL || strcmp (weight_mode, "no")==0 || is_number (weight_mode))
 	  {
-	    
+
 	    if (is_number (weight_mode))ref_weight=atoi(weight_mode);
 	    else ref_weight=1;
 	    weight[1]=ref_weight;
-	    
+
 	  }
 	else if ( strstr ( weight_mode, "cons"))
 	  {
@@ -3982,7 +3982,7 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 	    int ow;
 	    sscanf ( weight_mode, "OW%d", &ow);
 	    weight[1]=ow*get_seq_sim ( A->seq_al[s1], A->seq_al[s2], "-", NULL);
-	    
+
 	  }
 	else if ( strstr ( weight_mode, "len"))
 	  {
@@ -4001,7 +4001,7 @@ int *seqpair2weight (int s1, int s2, Alignment *A,Constraint_list *CL, char *wei
 	    if (ref_weight == 0)
 	      ref_weight = 1;
 	    weight[1]=ref_weight;
-	    
+
 	  }
 	else if ( strstr ( weight_mode, "subset"))
 	  {
@@ -4056,7 +4056,7 @@ Constraint_list *aln2constraint_list_generic    (Alignment *A, Constraint_list *
 	char *p, *s;
 	char weight_mode [100];
 	int *cache;
-	
+
 	int *entry;
 	int **fixed;
 	entry=vcalloc (CL->entry_len+1, sizeof (int));
@@ -5441,9 +5441,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
-	
-	
-	
+
+
+
 	sprintf (list[n][0], "hh_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
@@ -5475,7 +5475,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	fprintf ( fp, "SUPPORTED  NO");
 	vfclose (fp);}
-	
+
 	sprintf (list[n][0], "cwprofile_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
