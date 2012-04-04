@@ -609,7 +609,7 @@ Alignment * categories_evaluate_output_old ( Alignment *IN,Constraint_list *CL)
     vfree(aa);
     return OUT;
     }
-Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL);
+Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL,int nproc);
 Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL);
 Alignment * triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)  
 {
@@ -617,10 +617,10 @@ Alignment * triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
   if (!IN || !CL || !CL->residue_index) return IN;
   
   if ( get_nproc()==1)return  nfork_triplet_coffee_evaluate_output (IN,CL);
-  else if (strstr ( CL->multi_thread, "evaluate"))return  fork_triplet_coffee_evaluate_output (IN,CL);
-  else return nfork_triplet_coffee_evaluate_output (IN,CL);
+  else if (strstr ( CL->multi_thread, "evaluate"))return  fork_triplet_coffee_evaluate_output (IN,CL,get_nproc());
+  else return fork_triplet_coffee_evaluate_output (IN,CL,1);
 }
-Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
+Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL,int nproc)
     {
       Alignment *OUT=NULL;
       int **pos;
@@ -649,7 +649,7 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
       lu=declare_int (IN->nseq, IN->len_aln+1);
       
       //multi Threading stuff
-      njobs=get_nproc();
+      njobs=nproc;
       sl=n2splits (njobs,IN->len_aln);
       pid_tmpfile=vcalloc (njobs, sizeof (char*));
       

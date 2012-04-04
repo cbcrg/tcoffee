@@ -32,10 +32,9 @@ int compare_constraint_list_entry4bsearch ( const void*vx, const void*vy);
 Constraint_list *make_test_lib (Constraint_list *CL);
 
 
-Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode,Job_TC *job, FILE *local_stderr);
-Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode,Job_TC *job, FILE *local_stderr);
-Constraint_list *nfork_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode,Job_TC *job, FILE *local_stderr);
-Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, FILE *local_stderr);
+Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode,Job_TC *job, int nproc,FILE *local_stderr);
+Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode,Job_TC *job, int nproc,FILE *local_stderr);
+Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, int nproc, FILE *local_stderr);
 int job2first_seq(Job_TC *job);
 
 Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode)
@@ -43,7 +42,7 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
 	Job_TC *job=NULL;
 	FILE *local_stderr;
 	int njob;
-
+	int nproc;
 
 	store_seq_type (S->type);
 	if ( CL==NULL)CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?vtmpfile():NULL, NULL);
@@ -53,12 +52,13 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
 	job=queue2heap(method2job_list ( method,S,weight, CL->lib_list,CL->DM, CL));
 	njob=queue2n(job)+1;
 
+	nproc=get_nproc();
+	
 
-	if ( get_nproc()==1 || njob==1)return  fork_subset_produce_list (CL, S, method, weight, mem_mode,job, local_stderr);
-	else if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,local_stderr);
-	else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, local_stderr);
-	else if (strstr ( CL->multi_thread, "jobs"))return fork_subset_produce_list (CL, S, method, weight, mem_mode,job, local_stderr); //Recommended default
-		else return nfork_produce_list (CL, S, method, weight, mem_mode,job, local_stderr);
+	if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,nproc,local_stderr);
+	else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr);
+	else if (strstr ( CL->multi_thread, "jobs"))return fork_subset_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr); //Recommended default
+	else return fork_subset_produce_list (CL, S, method, weight, mem_mode,job,1,local_stderr); //Recommended default
 }
 int job2first_seq(Job_TC *job)
 {
@@ -75,7 +75,7 @@ int job2first_seq(Job_TC *job)
 	return r;
 }
 
-Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, FILE *local_stderr)
+Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, int nproc, FILE *local_stderr)
 {
 	//forks lines of the matrix
 	int a,b;
@@ -84,11 +84,11 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 	char **pid_tmpfile;
 	int   *pid_list;
 	int pid,npid, njob;
-	int nproc, max_nproc, submited;
+	int max_nproc, submited;
 	int cseq, seq, nlines;
 	int n_aln;
 
-	max_nproc=nproc=get_nproc();
+	max_nproc=nproc;
 	max_nproc*=2;
 	/*OUT_MODE:
 	A->  alignment provided in a file
@@ -113,19 +113,16 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 
 	M=(job->param)->TCM;
 	if (M)M->PW_CL=method2pw_cl ( M, CL);
-	pid_tmpfile=vcalloc (MAX(njob,get_nproc())+1, sizeof (char*));
+	pid_tmpfile=vcalloc (MAX(njob,nproc)+1, sizeof (char*));
 	pid_list   =vcalloc (MAX_N_PID, sizeof (int *));
 
-	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processors [subset]\n", get_nproc());
+	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processors [subset]\n", nproc);
 
-	jl=split_job_list(job,get_nproc());
-	a=npid=0;
-
+	jl=split_job_list(job,nproc);
 	a=npid=0;
 	while (jl[a])
 	{
-
-		start=job=jl[a][0];
+	  start=job=jl[a][0];
 		end=jl[a][1];
 		pid_tmpfile[a]=vtmpnam(NULL);
 		pid=vvfork(NULL);
@@ -187,7 +184,7 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 }
 
 
-Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, FILE *local_stderr)
+Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, int nproc,FILE *local_stderr)
 {
 	//forks lines of the matrix
 	int a,b;
@@ -197,10 +194,10 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	char **pid_tmpfile;
 	int   *pid_list;
 	int pid,npid, njob;
-	int nproc, max_nproc, submited;
+	int max_nproc, submited;
 	int cseq, seq, nlines;
 
-	max_nproc=nproc=get_nproc();
+	max_nproc=nproc;
 	max_nproc*=2;
 	/*OUT_MODE:
 	A->  alignment provided in a file
@@ -233,7 +230,7 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	pid_tmpfile=vcalloc (njob, sizeof (char*));
 
 	pid_list   =vcalloc (MAX_N_PID, sizeof (int *));
-	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processors [jobline]\n", get_nproc());
+	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processors [jobline]\n", nproc);
 
 
 	//count the number of lines
@@ -325,7 +322,7 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	return CL;
 }
 
-Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, FILE *local_stderr)
+Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job,int nproc, FILE *local_stderr)
 {
 	//forks cells of the matrix
 	int a,b, n;
@@ -335,10 +332,10 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	int *pid_list;
 	char **pid_tmpfile;
 	int pid,npid, njob;
-	int nproc, max_nproc;
+	int max_nproc;
 	int submited;
 
-	max_nproc=nproc=get_nproc();
+	max_nproc=nproc;
 
 	/*OUT_MODE:
 	A->  alignment provided in a file
@@ -369,7 +366,7 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 	pid_tmpfile=vcalloc (njob, sizeof (char*));
 	pid_list   =vcalloc (MAX_N_PID, sizeof (int *));
 
-	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processors:\n", get_nproc());
+	fprintf ( local_stderr, "\n\tMulti Core Mode: %d processors:\n", nproc);
 	npid=0;
 	submited=0;
 	while (job)
@@ -427,74 +424,6 @@ Constraint_list *fork_cell_produce_list   ( Constraint_list *CL, Sequence *S, ch
 
 	return CL;
 }
-Constraint_list *nfork_produce_list   ( Constraint_list *CL, Sequence *S, char * method,char *weight,char *mem_mode, Job_TC *job, FILE *local_stderr)
-{
-	int n_aln;
-	Job_TC *heap;
-	TC_method *M;
-	int n_elements_in, n_new_elements;
-	int b;
-
-	/*OUT_MODE:
-	A->  alignment provided in a file
-	L->  list      provided in a file
-	aln-> alignment computed and provided in a file
-	list->list      computed and provided in a file
-	*/
-
-
-	if ( job->jobid==-1)
-	{
-		M=(job->param)->TCM;
-		fprintf (local_stderr, "\n\tMethod %s: No Suitable Sequences [Type: %s]\n", method,M->seq_type);
-		return CL;
-	}
-
-
-	job=queue2heap (job);
-
-
-	heap=job;
-	n_aln=queue2n (job);
-	M=(job->param)->TCM;
-
-	if (M)M->PW_CL=method2pw_cl ( M, CL);
-	n_elements_in=CL->ne;
-
-	b=0;
-	while (job)
-	{
-		local_stderr=output_completion ( local_stderr, b, n_aln+1,1, "Submit   Job");
-		job=print_lib_job (job, "io->CL=%p control->submitF=%p control->retrieveF=%p control->mode=%s",CL,submit_lib_job, retrieve_lib_job, CL->multi_thread );
-
-		job=submit_job (job);
-		if (retrieve_job (job))
-		{
-			CL=merge_constraint_list    ((job->io)->CL, CL, "default");
-		}
-		job=job->c;
-		b++;
-	}
-	job=heap;
-	fprintf ( local_stderr, "\n");
-
-	while (job)	job=delete_job (job);
-
-
-	CL->local_stderr=local_stderr;
-
-	free_queue  (heap);
-	return CL;
-}
-
-
-
-
-
-
-
-
-
 
 Job_TC *retrieve_lib_job ( Job_TC *job)
 {
@@ -2138,31 +2067,26 @@ int compare_constraint_list_entry ( const void*vx, const void*vy)
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-Constraint_list*  fork_read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source);
-Constraint_list* nfork_read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source);
-
-
+Constraint_list*  fork_read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source,int nproc);
 Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source)
 {
-
-	if ( get_nproc()==1 || n_list<=2)return nfork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source);
-	else if ( strstr (CL->multi_thread, "methods"))
-		return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source);
-	else
-		return nfork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source);
+    
+  if ( strstr (CL->multi_thread, "methods"))
+    return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source, 1);
+  else
+    return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source, get_nproc());
 }
 
 
-Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source)
+Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL,char *seq_source, int nproc)
 {
 	int a, b;
 	Sequence *S;
 	char **tmp_list;
 	int*proclist;
-	int nproc, ns;
+	int  ns;
 
-	nproc=get_nproc();
-
+	
 	proclist=vcalloc (MAX_N_PID, sizeof (int));
 	tmp_list=vcalloc (n_list+1, sizeof (char*));
 	for (a=0; a<n_list; a++)tmp_list[a]=vtmpnam(NULL);
@@ -2184,7 +2108,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 		if ( b==1);
 		else sprintf ( fname[0], "%s", fname[b-1]);
 		n_list=1;
-		return nfork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode, type,local_stderr, CL, seq_source);
+		return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode, type,local_stderr, CL, seq_source,1);
 	}
 
 	if (!CL)CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?tmpfile():NULL, NULL);
@@ -2254,48 +2178,6 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 
 	vfree (proclist);
 	vfree (tmp_list);
-	return CL;
-}
-
-
-Constraint_list* nfork_read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source)
-{
-	int a, b;
-	Sequence *S;
-
-
-	if (!(CL->S) && (S=read_seq_in_n_list (fname, n_list,type,seq_source))==NULL)
-	{
-		fprintf ( stderr, "\nNO SEQUENCE WAS SPECIFIED[FATAL]\n");
-		myexit(EXIT_FAILURE);
-	}
-	else if (CL->S==NULL)
-	{
-		CL->S=S;
-	}
-
-	/*CHECK IF THERE IS A MATRIX AND GET RID OF OTHER METHODS*/
-	for (b=0, a=0; a< n_list; a++)if (is_matrix(fname[a]) ||is_matrix(fname[a]+1) )b=a+1;
-
-	if ( b)
-	{
-		if ( b==1);
-		else sprintf ( fname[0], "%s", fname[b-1]);
-		n_list=1;
-
-	}
-
-	if (!CL)CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?tmpfile():NULL, NULL);
-	CL->local_stderr=local_stderr;
-	fprintf ( CL->local_stderr,"\nREAD/MAKE LIBRARIES:[%d]\n",n_list );
-
-	CL=read_constraint_list (CL, fname[0], in_mode, mem_mode,weight_mode);
-	for ( a=1; a< n_list; a++)
-	{
-		CL=read_constraint_list (CL, fname[a], in_mode, mem_mode,weight_mode);
-	}
-	CL->local_stderr=local_stderr;
-
 	return CL;
 }
 
@@ -3417,20 +3299,19 @@ Constraint_list * extend_constraint_list ( Constraint_list *CL)
 	return CL;
 }
 
-Constraint_list * nfork_relax_constraint_list (Constraint_list *CL);
-Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs);
+Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int nproc);
 Constraint_list * relax_constraint_list (Constraint_list *CL)
 {
-  int njobs;
+  int njobs,nproc;
 
 
   if (!CL || !CL->S || !CL->residue_index) return CL;
-  if (!CL->multi_thread, "relax")njobs=1;
-  else njobs=get_nproc();
-
-  return fork_relax_constraint_list (CL, njobs);
+  if (strstr ( CL->multi_thread, "relax")){njobs=nproc=get_nproc();}
+  else {njobs=nproc=1;}
+  
+  return fork_relax_constraint_list (CL, njobs,nproc);
 }
-Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
+Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int nproc)
     {
   int a, s1, s2, r1, r2,j;
 
@@ -3445,13 +3326,13 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs)
   static int **hasch;
   static int max_len;
 
-
   int t_s1, t_s2, t_r1, t_r2,x;
   double score;
   int np;
 
+  HERE ("%d", nproc);
   if (!CL || !CL->residue_index)return CL;
-  fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", get_nproc());
+  fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", nproc);
 
   if ( !hasch || max_len!=(CL->S)->max_len)
     {

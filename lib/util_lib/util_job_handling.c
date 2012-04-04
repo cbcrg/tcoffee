@@ -224,10 +224,8 @@ Job_TC*** split_job_list (Job_TC *job, int ns)
   jl[0]=vcalloc (2, sizeof (Job_TC*));
   
   nj=queue2n(job);
- 
-  if   (nj==0)return NULL;
-  else split=(nj/ns)+1;
-   
+  split=(nj/ns)+1;
+     
   n=a=u=0;
   jl[a][0]=job;
   while (job)

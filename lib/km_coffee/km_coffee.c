@@ -1,9 +1,25 @@
 
 // #include "km_coffee.h"
-#include "km_coffee_header.h"
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <limits.h>
+#include <float.h>
+#include <math.h>
+#include <stdarg.h>
+#include <fcntl.h>
+#include <sys/file.h>
+#include <sys/types.h>
+#include <unistd.h>
 
-void
-write_files(KM_node *node, int *vecs, const SeqSet *seq_set, char *name_f)
+#include "io_lib_header.h"
+#include "util_lib_header.h"
+#include "define_header.h"
+
+#include "km_coffee_header.h"
+void write_files(KM_node *node, int *vecs, const SeqSet *seq_set, char *name_f)
 {
 	size_t end = node->end;
 	FILE * tmp_F = fopen(name_f, "w");
