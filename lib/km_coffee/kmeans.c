@@ -72,7 +72,6 @@ distributed_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t 
 	{
 		p = centers->vecs[i]->data;
 		vec = vec_set->vecs[pos]->data;
-
 		for (j=0; j<dim; ++j)
 			p[j] += vec[j];
 

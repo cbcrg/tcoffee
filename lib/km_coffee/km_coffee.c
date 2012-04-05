@@ -101,7 +101,8 @@ traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, i
 					sprintf(command,"t_coffee -in %li -output fasta_aln -outfile %li.fa -n_core %i -quiet >/dev/null 2>/dev/null", current->id, current->id, n_cores);
 				else
 					sprintf(command,"t_coffee -in %li -output fasta_aln -outfile %s -n_core %i -quiet >/dev/null 2>/dev/null", current->id, out_f, n_cores);
-				system(command);
+				if (system(command))
+					printf("%s\n",command);
 			}
 			else
 			{
@@ -126,7 +127,8 @@ traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, i
 				}
 				fclose(prf_F);
 
-				system(command);
+				if (system(command))
+					printf("%s\n",command);
 				pop(to_do);
 			}
 			else
@@ -139,7 +141,7 @@ traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, i
 			}
 		}
 	}
-
+	exit(1);
 }
 
 
@@ -184,7 +186,7 @@ km_coffee_align3(char *seq_f, int k, char *aln_f, int n_cores)
 
 
 
-	VectorSet *vec_set = seqset2vecs_kmer(seq_set, 2, 21, alphabet);
+	VectorSet *vec_set = seqset2vecs_kmer(seq_set, 3, 21, alphabet);
 	KM_node *root = hierarchical_kmeans(vec_set, k, "distributed", 0.001);
 
 // 	printf("clustered\n");
@@ -208,6 +210,7 @@ km_coffee_align3(char *seq_f, int k, char *aln_f, int n_cores)
 	for (i = 0; l< n_vecs; ++l)
 		assignment[l]=vec_set->vecs[l]->id;
 
+// 	printf("TRAVERSE\n");
 	delVecSet(vec_set);
 	traverse_km_tree(root, assignment, seq_set, out_f, n_cores);
 	free( assignment);
