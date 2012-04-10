@@ -206,7 +206,7 @@ identify_fields_variance(const SeqSet *seq_set, short k, unsigned int *factor, s
 // 	for (i = 0; i<vec_length; ++i)
 // 		printf("%f ", variance[i]);
 // 	printf("\n");
-	double threshold=variance[99];
+	double threshold=variance[399];
 
 	j=0;
 	for (i=0; i<vec_length; ++i)

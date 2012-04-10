@@ -1231,7 +1231,7 @@ if ( !do_evaluate)
 				/*Min_value*/ "any"         ,		\
 				/*Max Value*/ "any"			\
 					      );
-	
+
 	aln_file_list=declare_char (1000, STRING);
 	n_aln_file_list=get_cl_param(				\
 				/*argc*/      argc          ,	\
@@ -3755,14 +3755,14 @@ get_cl_param(\
 		   else if ( check_file_exists (seq_list[a]+1))
 		     sprintf (list_file[n_list++], "%s",seq_list[a]);
 		   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s does not exist [FATAL]",seq_list[a]);
-		   
+
 		 }
 	       /*introduce the alignments from the -aln flag*/
 	       //Important: Must be introduced AFTER the profiles
 	       for (a=0; a<n_aln_file_list; a++)
 		 {
 		   sprintf (list_file[n_list++], "A%s",aln_file_list[a]);
-		   
+
 		 }
 	       /*introduce the alignments from the -method flag*/
 	       for (a=0; a<n_method_list; a++)
@@ -3827,7 +3827,7 @@ get_cl_param(\
 			     add_warning (stderr, "\nWARNING: File %s was not properly tagged. Potential ambiguity\n",list_file[a]);
 			 }
 		     }
-		   
+
 
 		   if ( (nn['A']+nn['L']+nn['M'])==0)
 		     {
@@ -3839,7 +3839,7 @@ get_cl_param(\
 		 }
 
 /*FILL THE F STRUCTURE (Contains Information for Output names For the defaults)*/
-	       
+
 	       if (n_list==0 || argc<=1)
 		 {
 		   fprintf ( stderr, "\nERROR: You have NOT provided enough arguments [FATAL:%s]", PROGRAM);
@@ -3904,7 +3904,7 @@ get_cl_param(\
 		      }
 
 		  }
-	       
+
 
 	       /*Get Structures*/
 	       for ( a=0; a< n_list; a++)
@@ -3918,17 +3918,17 @@ get_cl_param(\
 		 }
 
 	       /*FATAL: NO SEQUENCES*/
-	       
+
 	       if (!F)
 		 {
 		   myexit (fprintf_error(stderr,"You have not provided any sequence"));
 		 }
 	       if (run_name)F=parse_fname(run_name);
 	       else F->path[0]='\0';
-	       
+
 
 	       identify_list_format      (list_file, n_list);
-	       
+
 
 	       fprintf (le, "\nINPUT FILES\n");
 	       for ( a=0; a< n_list; a++)
@@ -5701,6 +5701,7 @@ char** km_coffee (int argc, char **argv)
 	    {
 	      new_argv[new_argc++]=argv[a];
 	    }
+
 	}
 
 	if (seq_f==NULL)
@@ -5714,7 +5715,9 @@ char** km_coffee (int argc, char **argv)
 
 	if (strm (km_mode, "km_fast"))
 	{
-		km_coffee_align3(seq_f, k, out_f, n_core );
+		if (method == NULL)
+			method="proba_pair";
+			km_coffee_align3(seq_f, k, method, out_f, n_core );
 	}
 	else
 	{

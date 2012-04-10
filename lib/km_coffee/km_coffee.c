@@ -73,7 +73,7 @@ del_tree(KM_node* root)
 }
 
 void
-traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, int n_cores)
+traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, int n_cores, char *method)
 {
 	Stack *to_do =Stack_init();
 	Node_pair *tmp = my_malloc(sizeof(Node_pair));
@@ -98,9 +98,9 @@ traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, i
 				sprintf(command, "%li",current->id);
 				write_files(current, vecs, seq_set, command);
 				if (current->id!=0)
-					sprintf(command,"t_coffee -in %li -output fasta_aln -outfile %li.fa -n_core %i -quiet >/dev/null 2>/dev/null", current->id, current->id, n_cores);
+					sprintf(command,"t_coffee -in %li -output fasta_aln -outfile %li.fa -n_core %i -method %s -quiet >/dev/null 2>/dev/null", current->id, current->id, n_cores, method);
 				else
-					sprintf(command,"t_coffee -in %li -output fasta_aln -outfile %s -n_core %i -quiet >/dev/null 2>/dev/null", current->id, out_f, n_cores);
+					sprintf(command,"t_coffee -in %li -output fasta_aln -outfile %s -n_core %i -method %s -quiet >/dev/null 2>/dev/null", current->id, out_f, n_cores, method);
 				if (system(command))
 					printf("%s\n",command);
 			}
@@ -116,9 +116,9 @@ traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, i
 			if (child == current->n_children)
 			{
 				if (current->id!=0)
-					sprintf(command, "t_coffee -output fasta_aln -quiet -outfile %li.fa -n_core %i -profile FILE::prf.fa 2>/dev/null >/dev/null", current->id,n_cores);
+					sprintf(command, "t_coffee -output fasta_aln -quiet -outfile %li.fa -n_core %i -method %s -profile FILE::prf.fa 2>/dev/null >/dev/null", current->id,n_cores, method);
 				else
-					sprintf(command, "t_coffee -output fasta_aln -quiet -outfile %s -n_core %i -profile FILE::prf.fa 2>/dev/null >/dev/null", out_f, n_cores);
+					sprintf(command, "t_coffee -output fasta_aln -quiet -outfile %s -n_core %i -method %s -profile FILE::prf.fa 2>/dev/null >/dev/null", out_f, n_cores, method);
 				FILE *prf_F = my_fopen("prf.fa", "w");
 				for(j=0; j<current->n_children;++j)
 				{
@@ -155,7 +155,7 @@ my_seq_sort (const void *i, const void *j)
 
 
 int
-km_coffee_align3(char *seq_f, int k, char *aln_f, int n_cores)
+km_coffee_align3(char *seq_f, int k, char *method, char *aln_f, int n_cores)
 {
 	char *use_as_temp = get_tmp_4_tcoffee();
 
@@ -212,7 +212,7 @@ km_coffee_align3(char *seq_f, int k, char *aln_f, int n_cores)
 
 // 	printf("TRAVERSE\n");
 	delVecSet(vec_set);
-	traverse_km_tree(root, assignment, seq_set, out_f, n_cores);
+	traverse_km_tree(root, assignment, seq_set, out_f, n_cores, method);
 	free( assignment);
 	del_tree(root);
 	delSeqSet(seq_set);
