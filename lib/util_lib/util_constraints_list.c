@@ -529,7 +529,25 @@ Job_TC *submit_lib_job ( Job_TC *job)
 	else if (strm4 (M->out_mode,"A", "L", "aln", "lib"))
 	  {
 	    char *com;
+	    static int do_flip;
+	    int flipped=0;
+	    
+	    if (!do_flip)
+	      {
+		do_flip=get_int_variable ("flip");
+		if (!do_flip)do_flip=-1;
+	      }
+	    
 	    seq_list2in_file ( M, (io->CL)->S, p->seq_c, io->in);
+	    if (do_flip!=-1)
+	      {
+		if ((rand()%100)<do_flip)
+		  {
+		    invert_seq_file (io->in);
+		    flipped=1;
+		  }
+	      }
+	    
 	    com=vcalloc ( strlen (p->aln_c)+100, sizeof (char));
 	    sprintf (com, "%s", p->aln_c);
 	    substitute (com, "//", "/");
@@ -546,6 +564,7 @@ Job_TC *submit_lib_job ( Job_TC *job)
 		//myexit (EXIT_FAILURE);
 		return job;
 	      }
+	    if (flipped==1)invert_aln_file (io->out);
 	  }
 	else if ( strm2 (M->out_mode, "fA", "fL"))
 	  {

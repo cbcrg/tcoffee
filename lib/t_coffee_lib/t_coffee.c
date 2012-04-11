@@ -159,9 +159,9 @@ int batch_main ( int argc, char **argv)
 	int n_template_mode;
 
 
-
+	int flip;
 	int remove_template_file;
-
+	
 	char **profile_template_file_list;
 	int n_profile_template_file;
 
@@ -1154,6 +1154,26 @@ if ( !do_evaluate)
 		 {
 		   sprintf (template_file_list[n_template_file++], "%s", template_mode_list [a]);
 		 }
+/*PARAMETER PROTOTYPE:        flip*/
+
+	       get_cl_param(\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-flip"      ,\
+			    /*Flag*/      &remove_template_file     ,\
+			    /*TYPE*/      "D"           ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "flip sequences"          ,\
+			    /*Parameter*/ &flip   ,\
+			    /*Def 1*/     "0"          ,\
+			    /*Def 2*/     "50"      ,\
+			    /*Min_value*/ "0"         ,\
+			    /*Max Value*/ "100"         \
+		   );
+	       set_int_variable ("flip", flip);
+
 /*PARAMETER PROTOTYPE:        remove_template_file*/
 
 	       get_cl_param(\

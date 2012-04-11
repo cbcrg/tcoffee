@@ -1974,9 +1974,17 @@ Alignment * fast_pair      (Job_TC *job)
 	    TC_method *M;
 	    int*seqlist;
 	    char **buf;
-
+	    static int do_flip;
+	    int flipped=0;
+	    
+	    if (!do_flip)
+	      {
+		do_flip=get_int_variable ("flip");
+		if (!do_flip)do_flip=-1;
+	      }
+	    if (do_flip!=-1)if ((rand()%100)<do_flip)flipped=1;
+	    
 	    A=(job->io)->A;
-
 	    M=(job->param)->TCM;
 	    PW_CL=((job->param)->TCM)->PW_CL;
 	    CL=(job->io)->CL;
@@ -2024,7 +2032,7 @@ Alignment * fast_pair      (Job_TC *job)
 	    l_s[1][0]=1;
 
 	    //Preprocessing of the sequences
-	    if (PW_CL->reverse_seq)
+	    if (PW_CL->reverse_seq || flipped==1)
 	      {
 		invert_string2(A->seq_al[0]);
 		invert_string2(A->seq_al[1]);
@@ -2040,7 +2048,7 @@ Alignment * fast_pair      (Job_TC *job)
 
 	    score=pair_wise ( A, ns, l_s, PW_CL);
 	    //PostProcessing of the sequences
-	    if (PW_CL->reverse_seq)
+	    if (PW_CL->reverse_seq || flipped==1)
 	      {
 
 		invert_string2(A->seq_al[0]);

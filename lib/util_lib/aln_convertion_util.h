@@ -269,6 +269,11 @@ int **fix_aln_seq_new (Alignment *S1, Sequence *S2);
 Alignment * fix_aln_seq  ( Alignment *A, Sequence *S);
 Alignment * rotate_aln ( Alignment *A, char *name);
 Alignment * invert_aln ( Alignment *A);
+Sequence  * invert_seq2 ( Sequence  *A);
+int invert_seq_file (char *seq);
+int invert_aln_file (char *seq);
+
+
 char * complement_string (char *s);
 Alignment * complement_aln ( Alignment *A);
 Alignment * extract_nol_local_aln( Alignment *A, int start, int max_end);

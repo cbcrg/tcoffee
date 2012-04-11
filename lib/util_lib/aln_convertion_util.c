@@ -6484,6 +6484,25 @@ Alignment * rotate_aln ( Alignment *A, char *name)
   /*free_aln (A);*/
   return B;
 }
+int invert_seq_file    (char *file)
+{
+  Sequence *A;
+  A=main_read_seq (file);
+  A=invert_seq2(A);
+  output_fasta_seqS (file,A);
+  free_sequence(A, A->nseq);
+  return 1;
+}
+
+int invert_aln_file    (char *file)
+{
+  Alignment *A;
+  A=main_read_aln (file,NULL);
+  A=invert_aln(A);
+  output_fasta_aln (file,A);
+  free_aln(A);
+  return 1;
+}
 
 Alignment * invert_aln ( Alignment *A)
 {
@@ -6501,6 +6520,26 @@ Alignment * invert_aln ( Alignment *A)
 	  }
 	buf[l]='\0';
 	sprintf ( A->seq_al[a], "%s", buf);
+    }
+  vfree(buf);
+  return A;
+}
+Sequence * invert_seq2 (Sequence *A)
+{
+   char *buf;
+  int l, a, b, c;
+
+  for ( a=0; a< A->nseq; a++)
+    {
+        l=strlen ( A->seq[a]);
+	buf=vcalloc ( l+1,sizeof (char) );
+
+	for ( c=l-1,b=0; b< l; b++, c--)
+	  {
+	    buf[c]=A->seq[a][b];
+	  }
+	buf[l]='\0';
+	sprintf ( A->seq[a], "%s", buf);
     }
   vfree(buf);
   return A;
