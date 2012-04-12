@@ -1133,7 +1133,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	    }
 	  else
 	    {
-	      fprintf ( fp, ">%s\n%s\n", (CL->S)->name[s1], (CL->S)->seq[s1]);
+	      fprintf ( fp, ">%s\n%s-\n", (CL->S)->name[s1], (CL->S)->seq[s1]);
 	    }
 	  vfclose (fp);
 
@@ -1146,7 +1146,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	    }
 	  else
 	    {
-	      fprintf ( fp, ">%s\n%s\n", (CL->S)->name[s2], (CL->S)->seq[s2]);
+	      fprintf ( fp, ">%s\n%s-\n", (CL->S)->name[s2], (CL->S)->seq[s2]);
 	    }
 	  vfclose (fp);
 	  
