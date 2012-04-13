@@ -186,7 +186,7 @@ km_coffee_align3(char *seq_f, int k, char *method, char *aln_f, int n_cores)
 
 
 
-	VectorSet *vec_set = seqset2vecs_kmer(seq_set, 3, 21, alphabet);
+	VectorSet *vec_set = seqset2vecs_kmer(seq_set, 2, 21, alphabet);
 	KM_node *root = hierarchical_kmeans(vec_set, k, "distributed", 0.001);
 
 // 	printf("clustered\n");

@@ -237,7 +237,7 @@ seqset2vecs_kmer(SeqSet *seq_set, short k, short alphabet_size, short *alphabet)
 	Vector **vecs= malloc(n_seqs*sizeof(Vector*));
 	vec_set->n_vecs=n_seqs;
 	vec_set->vecs=vecs;
-	int *used = identify_fields_variance(seq_set, k, factor, &vec_len, alphabet);
+	int *used = identify_fields(seq_set, k, factor, &vec_len, alphabet);
 	size_t i;
 	for (i = 0; i<n_seqs; ++i)
 		vecs[i] = seq2vec_kmer(seq_set->seqs[i], k, factor, vec_len, i, alphabet, used);

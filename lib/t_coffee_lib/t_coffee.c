@@ -161,7 +161,7 @@ int batch_main ( int argc, char **argv)
 
 	int flip;
 	int remove_template_file;
-	
+
 	char **profile_template_file_list;
 	int n_profile_template_file;
 
@@ -5657,8 +5657,8 @@ Alignment* km_coffee_align2 (Sequence *S, char *km_tree, int k, int argc, char *
 Alignment* km_coffee_align1 (char *method,Alignment *A,int mn,int argc, char **argv, int nit,int round);
 Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit,int round);
 Alignment *km_align_kprofile (Alignment **AL,int k,int n, int argc, char **argv,int nit,int round);
-Alignment *km_align_seq_slow     (char *method,Alignment *A, int argc, char **argv,int nit,int round);
-Alignment *km_align_seq_fast     (Alignment *A, int argc, char **argv,int nit,int round);
+Alignment *km_align_seq_slow (char *method,Alignment *A, int argc, char **argv,int nit,int round);
+Alignment *km_align_seq_fast (Alignment *A, int argc, char **argv,int nit,int round);
 Alignment *km_refine_msa (Alignment *A, int argc, char **argv, int k);
 int km_coffee_count (Alignment *A,int k, int t);
 static Fname *F;
@@ -5741,24 +5741,24 @@ char** km_coffee (int argc, char **argv)
 	}
 	else
 	{
-		S=main_read_seq (seq_f);
-		F=parse_fname (seq_f);
-		if (!k)k=100;
-		if (S->nseq<=k)k=S->nseq/2;
+	S=main_read_seq (seq_f);
+	F=parse_fname (seq_f);
+	if (!k)k=100;
+	if (S->nseq<=k)k=S->nseq/2;
 
 
-		if (!km_mode || strm (km_mode, "topdown"))
-	  {
-	    A=seq2aln(S,NULL, RM_GAP);
-	    toalign=km_coffee_count (A,k, toalign);
-	    km_coffee_align1 (method, A, k, new_argc, new_argv,nit,0);
-	  }
+	if (!km_mode || strm (km_mode, "topdown"))
+	{
+		A=seq2aln(S,NULL, RM_GAP);
+		toalign=km_coffee_count (A,k, toalign);
+		km_coffee_align1 (method, A, k, new_argc, new_argv,nit,0);
+	}
 	else if (strm (km_mode, "bottomup"))
-	  {
-	    km_coffee_align2 (S,km_tree,k, new_argc,new_argv);
-	  }
-	  else
-		  myexit(fprintf_error (stderr,"Please specify km_mode (topdown/bottomup/km_reduced)!\n"));
+	{
+		km_coffee_align2 (S,km_tree,k, new_argc,new_argv);
+	}
+	else
+		myexit(fprintf_error (stderr,"Please specify km_mode (topdown/bottomup/km_reduced)!\n"));
 	}
 	myexit (EXIT_SUCCESS);
 }
@@ -6139,14 +6139,19 @@ Alignment *km_refine_msa (Alignment *A,int argc, char **argv, int k)
 
 Alignment * km_coffee_align2 (Sequence *S, char *km_tree, int k, int argc, char **argv)
 {
-  NT_node T;
-  if (strm (km_tree, "kmeans")){km_tree=vtmpnam (NULL);seq2km_tree (S, km_tree);}
-  else if (strm (km_tree, "cotree"))seq2co_tree (S, km_tree);
-  else if (!km_tree){km_tree=vtmpnam (NULL);seq2km_tree (S, km_tree);}
+	char *km_tree2=vtmpnam (NULL);
+	NT_node T;
+	if (strm (km_tree, "kmeans")){
+		seq2km_tree (S, km_tree2);}
+	else if (strm (km_tree, "cotree"))
+		seq2co_tree (S, km_tree2);
+	else if (!km_tree)
+	{
+		seq2km_tree (S, km_tree2);
+	}
 
 
-
-  T=main_read_tree (km_tree);
+  T=main_read_tree (km_tree2);
   tree_aln_N(T,S, k, argc, argv);
   myexit (EXIT_SUCCESS);
   return NULL;
