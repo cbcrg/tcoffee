@@ -4717,7 +4717,10 @@ Sequence * add_prf2seq  ( char *file, Sequence *S)
       Sequence *NS;
 
       if (!prf_name){prf_name=vcalloc ( 100, sizeof (char));}
-      sprintf (prf_name, "prf_%d", ++n);
+      if (file)
+	sprintf (prf_name, "%s", file);
+      else
+	sprintf (prf_name, "prf_%d", ++n);
 
       if ( !is_aln (file)&& !is_seq (file))return S;
       else

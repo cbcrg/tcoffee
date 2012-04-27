@@ -609,6 +609,7 @@ Alignment * categories_evaluate_output_old ( Alignment *IN,Constraint_list *CL)
     vfree(aa);
     return OUT;
     }
+
 Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL,int nproc);
 Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL);
 Alignment * triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)  
@@ -880,6 +881,88 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
       vfree ( max_seq);
       return OUT;
     }   
+int  sp_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, char *fname)
+    {
+      int **pos;
+      int s1, s2, s3, s4;
+      int r1, r2, r3, r4;
+      float w1, w2, w3,w, w4, pw, tw;
+      int a, b,c, x, y;
+      FILE *fp;
+     
+      fp=vfopen (fname, "w");
+      pos=aln2pos_simple(IN, IN->nseq);
+      
+      for (a=0; a<IN->len_aln; a++)
+	{
+	  output_completion (stderr,a,IN->len_aln,1, "Final SP Evaluation");
+	  for (b=0; b<IN->nseq-1; b++)
+	    {
+	      s1=IN->order[b][0];
+	      r1=pos[b][a];
+	      if (r1<=0)continue;
+	      
+	      for (c=b+1; c<IN->nseq; c++)
+		{
+		  pw=tw=0;
+		  s2=IN->order[c][0];
+		  r2=pos[c][a];
+		  if (r2<=0)continue;
+		  
+		  //compute r1->x
+		  for ( x=1;x<CL->residue_index[s1][r1][0];x+=ICHUNK)
+		    {
+		      s3=CL->residue_index[s1][r1][x+SEQ2];
+		      r3=CL->residue_index[s1][r1][x+R2];
+		      w3=CL->residue_index[s1][r1][x+WE];
+		      if (s3==s1 && r3==r1);
+		      else if ( s3==s2 && r3==r2){pw+=w3, tw+=w3;}
+		      else
+			{
+			  for (y=1; y<CL->residue_index[s3][r3][0];y+=ICHUNK)
+			    {
+			      s4=CL->residue_index[s3][r3][y+SEQ2];
+			      r4=CL->residue_index[s3][r3][y+R2];
+			      w4=CL->residue_index[s3][r3][y+WE];
+			      w=MIN(w4,w3);
+			      
+			      if (s4==s1 && r4==r1);
+			      else if ( s4==s2 && r4==r2){pw+=w; tw+=w;}
+			      else if ( s4==s2)tw+=w;
+			    }
+			}
+		    }
+		  //compute r2->y 
+		  for ( x=1;x<CL->residue_index[s2][r2][0];x+=ICHUNK)
+		    {
+		      s3=CL->residue_index[s2][r2][x+SEQ2];
+		      r3=CL->residue_index[s2][r2][x+R2];
+		      w3=CL->residue_index[s2][r2][x+WE];
+		      if (s3==s2 && r3==r2)continue;
+		      else if ( s3==s1 && r3==r1){pw+=w3;tw+=w3;}
+		      else
+			{
+			  for (y=1; y<CL->residue_index[s3][r3][0];y+=ICHUNK)
+			    {
+			      s4=CL->residue_index[s3][r3][y+SEQ2];
+			      r4=CL->residue_index[s3][r3][y+R2];
+			      w4=CL->residue_index[s3][r3][y+WE];
+			      w=MIN(w4,w3);
+			      
+			      if (s4==s2 && r4==r2);
+			      else if ( s4==s1 && r4==r1){pw+=w; tw+=w;}
+			      else if ( s4==s1)tw+=w;
+			    }
+			}  
+		    }
+		  fprintf ( fp, "%d %d %d %.3f\n", a+1, b+1, c+1, (tw>0)?pw/tw:0); 
+		}
+	    }
+	}
+      vfclose (fp);
+      return 1;
+    }   
+
 Alignment * fast_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     {
     int a,b, c, m,res, s, s1, s2, r1, r2;	

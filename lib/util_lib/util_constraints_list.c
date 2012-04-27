@@ -2369,9 +2369,8 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 			char *lname;
 			if (buf)vfree (buf);
 
-
+			
 			buf=name2type_name(fname[a]);mode=buf[0];lname=buf+1;
-
 			if (is_seq_source ('A', mode, SeqMode))
 			  {
 
@@ -2386,6 +2385,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 			  }
 			else if ( is_seq_source ('R', mode, SeqMode))
 			  {
+			    
 				S=add_prf2seq (lname, S);
 
 			  }
@@ -2466,7 +2466,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 				myexit (fprintf_error ( stderr, "%s is neither a file nor a method [FATAL:%s]\n", lname));
 			}
 		}
-
+		
 		S=remove_empty_sequence (S);
 
 

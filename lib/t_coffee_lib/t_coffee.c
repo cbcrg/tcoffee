@@ -37,7 +37,6 @@ static char *get_very_fast_defaults(char *buf, char *type);
 static char *get_precomputed_defaults(char *buf, char *type);
 static char *get_3dcoffee_defaults(char *buf, char *type);
 static char *get_expresso_defaults(char *buf, char *type);
-
 static char *get_accurate_defaults(char *buf, char *type);
 static char *get_accurate4PROTEIN_defaults(char *buf, char *type);
 static char *get_accurate4DNA_defaults(char *buf, char *type);

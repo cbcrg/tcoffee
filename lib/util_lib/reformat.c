@@ -2249,6 +2249,12 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  }
 
 	if ( strm (out_format, ""))return 0;
+	else if ( strm (out_format, "sp_ascii"))
+	  {
+	    if (!D1) return 1;
+	    
+	    sp_triplet_coffee_evaluate_output (D1->A, (D1->A)->CL, out_file);
+	  }
 	else if (    ( strm (out_format, "aln2lib")))
 	  {
 	    int a, b, c;
@@ -2293,6 +2299,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	      }
 	     vfclose (save_list_footer (fp, CL));
 	  }
+	
 	else if      ( strncmp (out_format, "score",5)==0 || strm (out_format, "html"))
 		{
 		  Alignment *BUF;
@@ -7212,7 +7219,7 @@ void output_generic_clustal_aln ( char *name, Alignment *B, char *mode)
 	  {
 	    float ibit=(float)log ((double)B->ibit)/log ((double)2);
 	    float nibit=(float)log(ibit/(B->len_aln*B->nseq));
-	    fprintf ( fp, "\nTies: %.1f bits (%d alternative)\n",ibit, B->ibit-1);
+	    fprintf ( fp, " Ties: %.1f bits (%d alternative)\n",ibit, B->ibit-1);
 
 	  }
       }
