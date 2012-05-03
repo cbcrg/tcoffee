@@ -4,6 +4,8 @@
 
 #include "stdio.h"
 #include "float.h"
+#include "math.h"
+
 // #include "Vector.h"
 // #include "Stack.h"
 
@@ -53,6 +55,21 @@ km_sq_dist(const double *vec1, const double *vec2, size_t dim);
 
 
 /**
+* \brief Initializes the centers using the KKZ method.
+* Initialization as proposed in: I. Katsavounidis, C.-C. J. Kuo, and Z. Zhang. A new initialization tech-nique for generalized Lloyd iteration. IEEE Signal Processing Letters, 1(10):144?146, 1994
+* Basic idea: It tries to find the most distant points in the dataset from each other using a greedy approach.
+* \param vecs The set of vectors.
+* \param k The number of centers.
+* \param centers The vector where the centers will be saved in.
+* \param start The start of the position to consider.
+*
+*/
+VectorSet *
+kkz_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end);
+
+
+
+/**
  * \brief Initializes the centers by taking the first k vectors.
  * \param vecs The set of vectors.
  * \param k The number of centers.
@@ -63,16 +80,10 @@ km_sq_dist(const double *vec1, const double *vec2, size_t dim);
 VectorSet *
 first_init(const VectorSet *vec_set, unsigned int k,  size_t start);
 
-
-
 int
 my_assignment_sort (const void *i, const void *j);
 
-
-
 //bool my_assignment_sort (boost::shared_ptr<Vector<unsigned int> > i, boost::shared_ptr<Vector<unsigned int> > j);
-
-
 
 /**
  * \brief Repeated clustering until size threshold is met.
@@ -110,5 +121,11 @@ kmeans(VectorSet *vecs, unsigned int k, const char *init, double error_threshold
 void
 kmeans_sub(const VectorSet *vecs, unsigned int k, const char *init, double error_threshold, size_t start, size_t end);
 
+
+double
+km_common(const double *vec1, const double *vec2, size_t dim);
+
+double
+km_angle_dist(const double *vec1, const double *vec2, size_t dim);
 #endif
 

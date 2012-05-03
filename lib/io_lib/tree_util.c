@@ -1838,7 +1838,7 @@ int decode_seq_in_tree (NT_node R, char **name)
       vfree (R->name);R->name=vcalloc ( strlen (name[s-1])+1, sizeof (char));
       sprintf (R->name, "%s", name[s-1]);
       t=1;
-     
+
     }
   return t;
 }
@@ -2360,8 +2360,6 @@ int print_newick_tree ( NT_node T, char *name)
 }
 FILE * rec_print_tree ( NT_node T, FILE *fp)
 {
-
-
 
   if (!T)return fp;
 

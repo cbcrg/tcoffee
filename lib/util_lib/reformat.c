@@ -2252,7 +2252,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	else if ( strm (out_format, "sp_ascii"))
 	  {
 	    if (!D1) return 1;
-	    
+
 	    sp_triplet_coffee_evaluate_output (D1->A, (D1->A)->CL, out_file);
 	  }
 	else if (    ( strm (out_format, "aln2lib")))
@@ -2299,7 +2299,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	      }
 	     vfclose (save_list_footer (fp, CL));
 	  }
-	
+
 	else if      ( strncmp (out_format, "score",5)==0 || strm (out_format, "html"))
 		{
 		  Alignment *BUF;
@@ -2321,7 +2321,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		  else if( strm ( out_format, "_pdf"   ))output_reliability_pdf   ( D1->A,  DST->A, out_file);
 		  else if( strm ( out_format, "_ascii" ))output_reliability_ascii ( D1->A,  DST->A, out_file);
 		  else if( strm ( out_format, "_seq"   ))output_seq_reliability_ascii ( D1->A,  DST->A, out_file);
-		  else if( strm ( out_format, "_fasta"   ))output_reliability_fasta ( D1->A,  DST->A, out_file);  
+		  else if( strm ( out_format, "_fasta"   ))output_reliability_fasta ( D1->A,  DST->A, out_file);
 		  else
 		    {
 		      DST->A=BUF;

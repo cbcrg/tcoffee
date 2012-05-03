@@ -14,6 +14,7 @@ seq2vec_kmer(const Seq *seq, short k, unsigned int *factor, size_t vec_len, size
 	size_t j=0;
 	unsigned char c;
 	size_t seq_len = seq->size;
+	t->seq_len = seq_len-k+1;
 	for (i = k; i<seq_len; ++i)
 	{
 		c = alphabet[(int)seq->seq[j]];
@@ -25,6 +26,17 @@ seq2vec_kmer(const Seq *seq, short k, unsigned int *factor, size_t vec_len, size
 	}
 
 	return t;
+}
+
+double
+l2norm(Vector *vec, size_t size)
+{
+	int i;
+	double norm=0;
+	double *data = vec->data;
+	for (i=0; i<size; ++i)
+		norm += data[i]*data[i];
+	return sqrt(norm);
 }
 
 
@@ -206,7 +218,7 @@ identify_fields_variance(const SeqSet *seq_set, short k, unsigned int *factor, s
 // 	for (i = 0; i<vec_length; ++i)
 // 		printf("%f ", variance[i]);
 // 	printf("\n");
-	double threshold=variance[399];
+	double threshold=variance[199];
 
 	j=0;
 	for (i=0; i<vec_length; ++i)

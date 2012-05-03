@@ -1003,7 +1003,7 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  char *buf;
 	  int narg;
 	  char buf2[10001];
-	  
+
 	  seq=vcalloc ( strlen (in_seq)+1, sizeof (char));
 	  entry=vcalloc (CL->entry_len+1, sizeof (int));
 
@@ -1034,7 +1034,7 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 
 	  vfclose (fp);
 	  printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first  >/dev/null 2>/dev/null", aln1, prf1);
-	 
+
 
 	  aln2=vtmpnam (NULL);
 	  prf2=vtmpnam(NULL);
@@ -1052,15 +1052,15 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	    }
 	  vfclose (fp);
 	  printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first >/dev/null 2>/dev/null", aln2, prf2);
-	  
+
 	  //make the prf prf alignment
 	  hhfile=vtmpnam(NULL);
 	  printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global  >/dev/null 2>/dev/null", prf1, prf2, hhfile);
-	 
+
 
 	  //parse the output
 	  //PB: sometimes the probab field is missing from the hhalign output
-	  
+
 	  fp=vfopen (hhfile, "r");
 	  fgets (buf2, 10000, fp);
 	  if ( strstr (buf2, "probab"))narg=5;
@@ -1149,7 +1149,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	      fprintf ( fp, ">%s\n%s-\n", (CL->S)->name[s2], (CL->S)->seq[s2]);
 	    }
 	  vfclose (fp);
-	  
+
 	  result=vtmpnam (NULL);
 	  if ( M->param)
 	    {
@@ -1158,12 +1158,12 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	      param=substitute ( param, " ", "");
 	      param=substitute ( param, "\n", "");
 	    }
-	  
+
 	  sprintf ( command, "tc_generic_method.pl -mode=profile_pair -method=%s %s%s %s%s %s%s -param=%s -tmpdir=%s", M->executable2,M->in_flag,prf1_file, M->in_flag2,prf2_file,M->out_flag, result, param, get_tmp_4_tcoffee());
 	  my_system ( command);
-	  
 
-	 
+
+
 	  if ( !check_file_exists (result))
 	    {
 	      fprintf ( stderr, "\n\tprofile_pair/%s failed:\n\t%s\n",M->executable2, command);
@@ -1976,14 +1976,14 @@ Alignment * fast_pair      (Job_TC *job)
 	    char **buf;
 	    static int do_flip;
 	    int flipped=0;
-	    
+
 	    if (!do_flip)
 	      {
 		do_flip=get_int_variable ("flip");
 		if (!do_flip)do_flip=-1;
 	      }
 	    if (do_flip!=-1)if ((rand()%100)<do_flip)flipped=1;
-	    
+
 	    A=(job->io)->A;
 	    M=(job->param)->TCM;
 	    PW_CL=((job->param)->TCM)->PW_CL;
@@ -5274,7 +5274,7 @@ Pwfunc get_pair_wise_function (Pwfunc pw,char *dp_mode, int *glocal)
 	sprintf (dpl[npw], "hh_pair_wise");
 	dps[npw]=GLOBAL;
 	npw++;
-	
+
 	pwl[npw]=co_pair_wise;
 	sprintf (dpl[npw], "co_pair_wise");
 	dps[npw]=GLOBAL;
@@ -5598,7 +5598,7 @@ int co_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
   FILE *fp;
   int a, b, s;
   Alignment *B;
-  
+
   for (a=0; a<2; a++)
     {
       aln[a]=vtmpnam(NULL);
@@ -5610,13 +5610,13 @@ int co_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	}
       vfclose (fp);
     }
-  
+
   out=vtmpnam(NULL);
-  
+
   printf_system ("clustalo --p1 %s --p2 %s -o %s>/dev/null 2>/dev/null", aln[0], aln[1], out);
   B=main_read_aln(out, NULL);
   A=realloc_aln2 ( A,(CL->S)->nseq+1,B->len_aln+1);
-  
+
   for (a=0; a<B->nseq; a++)
     {
       s=atoi  (B->name[a]);
@@ -5625,10 +5625,10 @@ int co_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
   free_aln (B);
   return 100;
 }
-	
-  
-  
- 
+
+
+
+
 
 int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 {
@@ -5640,7 +5640,7 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
   char *hhfile;
   char *tmpfile;
   FILE *fp,*fp1, *fp2;
-  
+
   for (a=0; a<2; a++)
     {
       aln[a]=vtmpnam(NULL);
@@ -5657,7 +5657,7 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 
       vfclose (fp);
       printf_system ("hhmake -v 0 -i %s -o %s -id 100 -M first  >/dev/null 2>/dev/null", aln[a], prf[a]);
-      
+
     }
 
   hhfile=vtmpnam(NULL);
@@ -5665,9 +5665,9 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 
 
   printf_system ("hhalign -v 0 -i %s -t %s -atab %s -global  >/dev/null 2>/dev/null", prf[0], prf[1], hhfile);
- 
-  
-  
+
+
+
   p0=p1=0;
   l0=strlen (A->seq_al[ls[0][0]]);
   l1=strlen (A->seq_al[ls[1][0]]);
@@ -5737,7 +5737,7 @@ int tree_aln_N ( NT_node P, Sequence *S, int N, int argc, char **argv)
   index_tree_node(P);
   tree2nnode (P);
 
-  
+
 
   return printf_system_direct_check ("%s -seq %s -usetree=%s -profile %s -newtree=cedri24",list2string (argv, argc),S->file[0], P->file, rec_tree_aln_N (P,S,N,argc,argv));
 }
@@ -5749,24 +5749,24 @@ char * rec_tree_aln_N ( NT_node P,Sequence *S,int N, int argv, char **argc)
     {
       rec_tree_aln_N (P->left , S,N, argv, argc);
       rec_tree_aln_N (P->right, S,N, argv, argc);
-      
+
       P->leaf=0;
       if (P->left)P->leaf+=(P->left)->leaf;
       if (P->right)P->leaf+=(P->right)->leaf;
     }
   if (P->leaf>=N || P->parent==NULL){align_node (P,S,argv,argc);P->isseq=1;P->leaf=1;}
   return P->alfile;
-  
+
 }
 
 int align_node (NT_node P, Sequence *S,int argc, char **argv)
 {
-  
+
   static char *tree;
   static char *cl;
   static char *seq;
   int ng;
-  
+
   if (!seq )seq =vtmpnam (NULL);
   if (!tree)tree=vtmpnam (NULL);
   if (cl)vfree(cl);
@@ -5780,11 +5780,11 @@ int align_node (NT_node P, Sequence *S,int argc, char **argv)
 int node2file_list (NT_node P, Sequence *S, char *flist)
 {
   int t=0;
-  
+
   if (!P)return 0;
   if (P->isseq)
     {
-      
+
       if (P->nseq==1)
 	{
 	  int s;

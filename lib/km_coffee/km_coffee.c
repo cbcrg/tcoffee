@@ -93,16 +93,39 @@ traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, i
 		child = ((Node_pair*)to_do->last)->id;
 		if (current->n_children==0)
 		{
-			if(current->end-current->start > 1)
+			if(current->end-current->start > 2)
+			{
+				sprintf(command, "%li",current->id);
+				write_files(current, vecs, seq_set, command);
+				sprintf(command,"clustalo --guidetree-out co_tree.dnd -i %li --force >/dev/null 2>/dev/null", current->id);
+				if (system(command))
+				{
+					printf("%s\n",command);
+					exit(1);
+				}
+				if (current->id!=0)
+					sprintf(command,"t_coffee -usetree co_tree.dnd -in %li -output fasta_aln -dp_mode gotoh_pair_wise -outfile %li.fa -n_core %i -method %s -quiet >/dev/null 2>/dev/null", current->id, current->id, n_cores, method);
+				else
+					sprintf(command,"t_coffee -usetree co_tree.dnd -in %li -output fasta_aln  -dp_mode gotoh_pair_wise -outfile %s -n_core %i -method %s -quiet >/dev/null 2>/dev/null ",  current->id, out_f, n_cores, method);
+				if (system(command))
+				{
+					printf("%s\n",command);
+					exit(1);
+				}
+			}
+			else if(current->end-current->start > 1)
 			{
 				sprintf(command, "%li",current->id);
 				write_files(current, vecs, seq_set, command);
 				if (current->id!=0)
-					sprintf(command,"t_coffee -in %li -output fasta_aln -outfile %li.fa -n_core %i -method %s -quiet >/dev/null 2>/dev/null", current->id, current->id, n_cores, method);
+					sprintf(command,"t_coffee -in %li -output fasta_aln -dp_mode gotoh_pair_wise -outfile %li.fa -n_core %i -method %s -quiet >/dev/null 2>/dev/null", current->id, current->id, n_cores, method);
 				else
-					sprintf(command,"t_coffee -in %li -output fasta_aln -outfile %s -n_core %i -method %s -quiet >/dev/null 2>/dev/null", current->id, out_f, n_cores, method);
+					sprintf(command,"t_coffee -in %li -output fasta_aln  -dp_mode gotoh_pair_wise -outfile %s -n_core %i -method %s -quiet >/dev/null 2>/dev/null ",  current->id, out_f, n_cores, method);
 				if (system(command))
+				{
 					printf("%s\n",command);
+					exit(1);
+				}
 			}
 			else
 			{
@@ -116,9 +139,9 @@ traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, i
 			if (child == current->n_children)
 			{
 				if (current->id!=0)
-					sprintf(command, "t_coffee -output fasta_aln -quiet -outfile %li.fa -n_core %i -method %s -profile FILE::prf.fa 2>/dev/null >/dev/null", current->id,n_cores, method);
+					sprintf(command, "t_coffee -output fasta_aln  -dp_mode gotoh_pair_wise -quiet -outfile %li.fa -n_core %i -method %s -profile FILE::prf.fa 2>/dev/null >/dev/null", current->id,n_cores, method);
 				else
-					sprintf(command, "t_coffee -output fasta_aln -quiet -outfile %s -n_core %i -method %s -profile FILE::prf.fa 2>/dev/null >/dev/null", out_f, n_cores, method);
+					sprintf(command, "t_coffee -output fasta_aln  -dp_mode gotoh_pair_wise -quiet -outfile %s -n_core %i -method %s -profile FILE::prf.fa 2>/dev/null >/dev/null", out_f, n_cores, method);
 				FILE *prf_F = my_fopen("prf.fa", "w");
 				for(j=0; j<current->n_children;++j)
 				{
@@ -155,7 +178,7 @@ my_seq_sort (const void *i, const void *j)
 
 
 int
-km_coffee_align3(char *seq_f, int k, char *method, char *aln_f, int n_cores)
+km_coffee_align3(char *seq_f, int k, char *method, char *aln_f, int n_cores, char *init)
 {
 	char *use_as_temp = get_tmp_4_tcoffee();
 
@@ -187,7 +210,7 @@ km_coffee_align3(char *seq_f, int k, char *method, char *aln_f, int n_cores)
 
 
 	VectorSet *vec_set = seqset2vecs_kmer(seq_set, 2, 21, alphabet);
-	KM_node *root = hierarchical_kmeans(vec_set, k, "distributed", 0.001);
+	KM_node *root = hierarchical_kmeans(vec_set, k, init, 0.001);
 
 // 	printf("clustered\n");
 	char template[400];
@@ -207,7 +230,7 @@ km_coffee_align3(char *seq_f, int k, char *method, char *aln_f, int n_cores)
 	size_t n_vecs = seq_set->n_seqs;
 	int *assignment = malloc(n_vecs*sizeof(int));
 	size_t l;
-	for (i = 0; l< n_vecs; ++l)
+	for (l = 0; l< n_vecs; ++l)
 		assignment[l]=vec_set->vecs[l]->id;
 
 // 	printf("TRAVERSE\n");

@@ -2,12 +2,14 @@
 #define VECTOR_H_
 
 #include <stdlib.h>
+#include <math.h>
 // #include "classes.h"
 // #include "km_util.h"
 
 typedef struct
 {
 	double *data;
+	size_t seq_len;
 	size_t id;
 	size_t assignment;
 } Vector;

@@ -24,4 +24,4 @@ typedef struct
 
 
 int
-km_coffee_align3(char *seq_f, int k, char *method, char *aln_f, int n_cores);
+km_coffee_align3(char *seq_f, int k, char *method, char *aln_f, int n_cores, char *init);

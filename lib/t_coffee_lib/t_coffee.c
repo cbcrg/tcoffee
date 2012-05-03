@@ -37,6 +37,7 @@ static char *get_very_fast_defaults(char *buf, char *type);
 static char *get_precomputed_defaults(char *buf, char *type);
 static char *get_3dcoffee_defaults(char *buf, char *type);
 static char *get_expresso_defaults(char *buf, char *type);
+
 static char *get_accurate_defaults(char *buf, char *type);
 static char *get_accurate4PROTEIN_defaults(char *buf, char *type);
 static char *get_accurate4DNA_defaults(char *buf, char *type);
@@ -5682,6 +5683,7 @@ char** km_coffee (int argc, char **argv)
 	new_argv=vcalloc (argc+100, sizeof (char*));
 	char *seq_f = NULL;
 	char *out_f = NULL;
+	char *km_init = NULL;
 	int n_core=1;
 	for (a=0; a<argc; a++)
 	{
@@ -5704,6 +5706,8 @@ char** km_coffee (int argc, char **argv)
 			{tm=argv[++a];}
 		else if ( strm (argv[a], "-km_method"))
 			{method=argv[++a];}
+		else if ( strm (argv[a], "-km_init"))
+			{km_init=argv[++a];}
 		else if ( strm (argv[a], "-n_core"))
 		{
 			n_core =atoi (argv[++a]);
@@ -5736,7 +5740,9 @@ char** km_coffee (int argc, char **argv)
 	{
 		if (method == NULL)
 			method="proba_pair";
-			km_coffee_align3(seq_f, k, method, out_f, n_core );
+		if (km_init == NULL)
+			km_init = "distributed";
+		km_coffee_align3(seq_f, k, method, out_f, n_core, km_init );
 	}
 	else
 	{

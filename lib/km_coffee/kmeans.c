@@ -23,6 +23,17 @@ plusplus_init(const vector<boost::shared_ptr<Vector<double> > > &vecs, unsigned 
 }*/
 
 
+
+
+
+
+
+
+
+
+
+
+
 /*
 void
 random_init(const vector<boost::shared_ptr<Vector<double> > > &vecs, unsigned int k, vector<boost::shared_ptr<Vector<double> > > &centers, size_t start, size_t end)
@@ -47,6 +58,77 @@ random_init(const vector<boost::shared_ptr<Vector<double> > > &vecs, unsigned in
 	}
 }
 */
+
+
+
+/*
+Initialization as proposed int:
+	I. Katsavounidis, C.-C. J. Kuo, and Z. Zhang. A new initialization tech-nique for generalized Lloyd iteration. IEEE Signal Processing Letters, 1(10):144?146, 1994*/
+VectorSet *
+kkz_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
+{
+	VectorSet *centers = my_malloc(sizeof(VectorSet));
+	centers->dim=vec_set->dim;
+	centers->n_vecs=k;
+	size_t dim = vec_set->dim;
+	centers->vecs=my_malloc(k*sizeof(Vector*));
+	size_t i,j;
+	for (i = 0; i <k; ++i)
+	{
+		centers->vecs[i]=my_malloc(sizeof(Vector));
+		centers->vecs[i]->data=my_calloc(dim,sizeof(double));
+	}
+
+	//get vector with largest l2norm
+	double max_norm =-1, tmp;
+	size_t index =0;
+	for (i=start; i<end; ++i)
+	{
+		tmp=l2norm(vec_set->vecs[i], dim);
+		if (tmp>max_norm)
+		{
+			max_norm=tmp;
+			index=i;
+		}
+	}
+
+	double *p, *vec;
+	p = centers->vecs[0]->data;
+	vec = vec_set->vecs[index]->data;
+	for (j=0; j<dim; ++j)
+		p[j] += vec[j];
+
+	//calculate most distant vectors to existing centers and set as new vector. distance is the distance to the closest centroid.
+	double max_dist, tmp_dist,min_dist;
+	size_t l, min_index;
+	for (i=1; i<k; ++i)
+	{
+		max_dist = -1;
+		index = 0;
+		for (j=start; j<end; ++j)
+		{
+			min_dist=DBL_MAX;
+			for (l=0; l<i; ++l)
+			{
+				tmp_dist = km_sq_dist(centers->vecs[l]->data, vec_set->vecs[j]->data, dim);
+				if (tmp_dist < min_dist)
+					min_dist = tmp_dist;
+			}
+			if (min_dist > max_dist)
+			{
+				max_dist=min_dist;
+				index=j;
+			}
+		}
+
+		p = centers->vecs[i]->data;
+		vec = vec_set->vecs[index]->data;
+		for (j=0; j<dim; ++j)
+			p[j] += vec[j];
+	}
+	return centers;
+}
+
 
 VectorSet *
 distributed_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
@@ -187,7 +269,6 @@ hierarchical_kmeans(VectorSet *vecs, unsigned int k, const char *init, double er
 		tmp->id=++node_id;
 		if ((vecs->vecs[start]->assignment != vecs->vecs[end-1]->assignment) && (i - old_index > k))
 			push(todo, tmp);
-
 	}
 
 	delStack(todo);
@@ -205,10 +286,13 @@ kmeans_sub(const VectorSet *vecs, unsigned int k, const char *init, double error
 	// 		plusplus_init(vecs, k, centers, start, end);
 	if (!strcmp(init, "distributed"))
 		centers = distributed_init(vecs, k, start, end);
+	else if (!strcmp(init, "kkz"))
+		centers = kkz_init(vecs, k, start, end);
 	else if (!strcmp(init, "first"))
 		centers = first_init(vecs, k, start);
 	else
 	{
+		printf("%s\n", init);
 		printf("Unknown initialization value!");
 		exit(1);
 	}
@@ -238,7 +322,8 @@ kmeans_sub(const VectorSet *vecs, unsigned int k, const char *init, double error
 				for (center_id = 0; center_id < k; ++center_id)
 				{
 					tmp_dist = km_sq_dist(vecs->vecs[id]->data, centers->vecs[center_id]->data,dimension);
-
+					//tmp_dist = km_angle_dist(vecs->vecs[id]->data, centers->vecs[center_id]->data,dimension);
+// 					tmp_dist = 1-(km_common(vecs->vecs[id]->data, centers->vecs[center_id]->data,dimension)/vecs->vecs[id]->seq_len);
 					if (tmp_dist < min_dist)
 					{
 						new_center_id = center_id;
@@ -308,6 +393,36 @@ km_sq_dist(const double *vec1, const double *vec2, size_t dim)
 }
 
 
+double
+km_angle_dist(const double *vec1, const double *vec2, size_t dim)
+{
+	double dist = 0, len1=0, len2=0;
+
+	size_t i;
+	for (i=0; i<dim; ++i)
+	{
+		dist += vec1[i]*vec2[i];
+		len1 += vec1[i]*vec1[i];
+		len2 += vec2[i]*vec2[i];
+	}
+	double val =dist/(sqrt(len1)*sqrt(len2));
+	if (val > 1.0)
+		val = 1.0;
+	return acos(val);
+}
+
+double
+km_common(const double *vec1, const double *vec2, size_t dim)
+{
+	double common = 0;
+	size_t i;
+	for (i=0; i<dim; ++i)
+	{
+		if ((vec1[i] >0) && (vec2[i] >0))
+			++common;
+	}
+	return common;
+}
 
 
 

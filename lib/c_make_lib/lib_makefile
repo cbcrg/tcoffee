@@ -970,7 +970,7 @@ aln_compare.c:\
 #####################      	KM-COFFEE_LIB      ##########################
 #########################################################################
 
-KM_COFFEE_HEADER=km_coffee_header.h
+KM_COFFEE_HEADER=km_coffee_lib_header.h
 KM_COFFEE_OBJECTS=Stack.o_$(OSNAME)\
 Vector.o_$(OSNAME)\
 classes.o_$(OSNAME)\
@@ -981,7 +981,7 @@ km_coffee.o_$(OSNAME)
 
 
 #2 HEADERS
-km_coffee_lib_header.h:\
+km_coffee_header.h:\
 		$(KM_COFFEE_LIB)/km_coffee.h\
 		$(KM_COFFEE_LIB)/km_util.h\
 		$(KM_COFFEE_LIB)/kmeans.h\
@@ -998,34 +998,34 @@ km_coffee_lib_header.h:\
 #3 SOURCES
 km_coffee.c:\
 		$(KM_COFFEE_LIB)/km_coffee.c\
-		km_coffee_lib_header.h
+		km_coffee_header.h
 	cp $(KM_COFFEE_LIB)/km_coffee.c .
 	echo 'km_coffee' >> $(CODE_LIST)
 
 km_util.c:\
 		$(KM_COFFEE_LIB)/km_util.c\
-		km_coffee_lib_header.h
+		km_coffee_header.h
 	cp $(KM_COFFEE_LIB)/km_util.c .
 	echo 'km_util' >> $(CODE_LIST)
 
 Stack.c:\
 		$(KM_COFFEE_LIB)/Stack.c\
-		km_coffee_lib_header.h
+		km_coffee_header.h
 	cp $(KM_COFFEE_LIB)/Stack.c .
 	echo 'Stack' >> $(CODE_LIST)
 Vector.c:\
 		$(KM_COFFEE_LIB)/Vector.c\
-		km_coffee_lib_header.h
+		km_coffee_header.h
 	cp $(KM_COFFEE_LIB)/Vector.c .
 	echo 'Vector' >> $(CODE_LIST)
 kmeans.c:\
 		$(KM_COFFEE_LIB)/kmeans.c\
-		km_coffee_lib_header.h
+		km_coffee_header.h
 	cp $(KM_COFFEE_LIB)/kmeans.c .
 	echo 'kmeans' >> $(CODE_LIST)
 classes.c:\
 		$(KM_COFFEE_LIB)/classes.c\
-		km_coffee_lib_header.h
+		km_coffee_header.h
 	cp $(KM_COFFEE_LIB)/classes.c .
 	echo 'classes' >> $(CODE_LIST)
 

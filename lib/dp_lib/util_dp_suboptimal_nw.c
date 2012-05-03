@@ -18,7 +18,7 @@ static float LOG_UNDERFLOW_THRESHOLD = 7.50f;
 static float LOG_ZERO=-200000004008175468544.000000;
 static float LOG_ONE = 0.0f;
 //DNA Alignment Models
-static float DNAinitDistrib2Default[] ={ 0.9588437676f, 0.0205782652f, 0.0205782652f }; 
+static float DNAinitDistrib2Default[] ={ 0.9588437676f, 0.0205782652f, 0.0205782652f };
 static float DNAgapOpen2Default[] = { 0.0190259293f, 0.0190259293f };
 static float DNAgapExtend2Default[] = { 0.3269913495f, 0.3269913495f };
 
@@ -150,15 +150,15 @@ int suboptimal_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
 
   ungap(A->seq_al[ls[0][0]]);
   ungap(A->seq_al[ls[1][0]]);
-  
+
   seqI=A->seq_al[ls[0][0]];
   seqJ=A->seq_al[ls[1][0]];
-  
+
   I=strlen (seqI); J=strlen (seqJ);
   pos0=aln2pos_simple ( A,-1, ns, ls);
   l1=strlen (A->seq_al[ls[0][0]]);
   l2=strlen (A->seq_al[ls[1][0]]);
-  
+
   if ( mode==1)
     {
       F=forward_so_dp (A, ns, ls, pos0,I, J,gop, gep,gop2, gep2,CL);
@@ -181,10 +181,10 @@ int suboptimal_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
       fprintf ( stdout, "\nBackWard: %d \n\n",MAX3( B[match][1][1], B[ins][1][1], B[del][1][1]));
     }
 
-  
+
   for (opt=0,min=0, set=0, i=1; i<=I; i++)
     for (j=1; j<=J; j++)
-      { 
+      {
 	if ( F[match][i][j]==UNDEFINED)continue;
 	F[match][i][j]+=B[match][i][j]-(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);
 	if (set==0)
@@ -192,16 +192,16 @@ int suboptimal_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
 	opt=MAX(F[match][i][j],opt);
 	min=MIN(F[match][i][j],min);
       }
-  
-  
+
+
   s1=name_is_in_list (A->name[ls[0][0]], (CL->S)->name, (CL->S)->nseq, 100);
   s2=name_is_in_list (A->name[ls[1][0]], (CL->S)->name, (CL->S)->nseq, 100);
-  
+
   id=idscore_pairseq(seqI,seqJ,-12, -1, CL->M, "idmat");
-  
+
   entry=vcalloc ( CL->entry_len+1, CL->el_size);
   entry[SEQ1]=s1;entry[SEQ2]=s2;
-  
+
   thres=opt;
   for ( n=0,i=1; i<=I; i++)
     {
@@ -209,14 +209,14 @@ int suboptimal_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL,
 	{
 	  score=F[0][i][j];
 	  nscore=((score-min))/(opt-min);
-	  
+
 	  if (score==opt)
 	    {
 	      n++;
 	      entry[R1]=i;entry[R2]=j;
 	      entry[WE]=id;
 	      entry[CONS]=1;
-	      
+
 	      add_entry2list (entry,A->CL);
 	    }
 	}
@@ -243,25 +243,25 @@ int *** forward_so_dp_glocal ( Alignment *A, int *ns, int **ls, int **pos0,int I
   int sub;
   int ***M;
   int match=0, del=1, ins=2;
-  
+
   M=declare_arrayN (3, sizeof (int), 5, I+1, J+1);
 
   for ( i=0; i<=I; i++)for (j=0; j<=J; j++)for (c=0; c<5; c++)M[c][i][j]=-999999;
-  
+
   M[match][0][0]=0;
-  
+
   for (i=1; i<=I; i++){M[del]  [i][0]=i*gep;M[umatch][i][0]=i*gep2+gop2;}
   for (j=1; j<=J; j++){M[ins]  [0][j]=j*gep;M[umatch][0][j]=j*gep2+gop2;}
-  
-  
+
+
   for (i=1; i<=I; i++)
     {
       for ( j=1; j<=J; j++)
 	{
-	sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);	
-	
+	sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);
+
 	M[match][i][j] =MAX4  (M[match][i-1][j-1],M[del][i-1][j-1], M[ins][i-1][j-1],M[umatch][i-1][j-1])+sub;
-	M[del][i][j]   =MAX2       ((M[match][i-1][j]+gop), M[del][i-1][j])+gep;	
+	M[del][i][j]   =MAX2       ((M[match][i-1][j]+gop), M[del][i-1][j])+gep;
 	M[ins][i][j]   =MAX2       ((M[match][i][j-1]+gop), M[ins][i][j-1])+gep;
 	M[umatch][i][j]=MAX6 (M[match][i-1][j-1]+gop2, M[match][i][j-1]+gop2, M[match][i-1][j]+gop2,M[umatch][i-1][j-1], M[umatch][i-1][j], M[umatch][i][j-1])+gep2;
 	}
@@ -280,21 +280,21 @@ int *** backward_so_dp_glocal ( Alignment *A, int *ns, int **ls, int **pos0, int
   M=declare_arrayN (3, sizeof (int), 5, I+2, J+2);
   for ( i=I+1; i>=0; i--)for (j=J+1; j>=0; j--)for (c=0; c<5; c++)M[c][i][j]=-999999;
   M[match][I+1][J+1]=0;
-  
+
   for (i=I; i>0; i--){M[ins]  [i][J+1]=i*gep;M[umatch]  [i][J+1]=i*gep2+gop2;}
   for (j=J; j>0; j--){M[del]  [I+1][j]=j*gep;M[umatch]  [I+1][j]=j*gep2+gop2;}
-  
+
   for (i=I; i>0; i--)
     {
       for ( j=J; j>0; j--)
 	{
-	sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);	
-	
+	sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);
+
 	M[match ][i][j]  =MAX4 ((M[del][i+1][j+1]+gop), (M[ins][i+1][j+1]+gop), M[match][i+1][j+1], M[umatch][i+1][j+1]+gop2)+sub;
 	M[del   ][i][j]  =MAX2 (M[match][i+1][j], M[del][i+1][j])+gep;
 	M[ins   ][i][j]  =MAX2 (M[match][i][j+1], M[ins][i][j+1])+gep;
 	M[umatch][i][j]  =MAX6 (M[match][i+1][j+1], M[match][i+1][j],M[match][i][j+1], M[umatch][i+1][j+1], M[umatch][i+1][j], M[umatch][i][j+1])+gep2;
-	
+
 	}
     }
   return M;
@@ -319,24 +319,24 @@ int *** forward_so_dp ( Alignment *A, int *ns, int **ls, int **pos0,int I, int J
   int ***M;
   int lgop;
 
-  
+
 
   M=declare_arrayN (3, sizeof (int), 5, I+1, J+1);
   for ( i=0; i<=I; i++)for (j=0; j<=J; j++)for (c=0; c<3; c++)M[c][i][j]=-999999;
-  
+
   M[match][0][0]=0;
   for (i=1; i<=I; i++){M[del]  [i][0]=i*gep;}
   for (j=1; j<=J; j++){M[ins]  [0][j]=j*gep;}
-  
-  
-  
+
+
+
   for (i=1; i<=I; i++)
     {
       for ( j=1; j<=J; j++)
 	{
 	  lgop=(i==I || j==J)?0:gop;
-	  sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);	
-	
+	  sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);
+
 	  M[match][i][j]=MAX3  (M[del][i-1][j-1], M[ins][i-1][j-1], M[match][i-1][j-1])+sub;
 	  M[del][i][j]  =MAX ((M[match][i-1][j]+lgop),M[del][i-1][j])+gep;
 	  M[ins][i][j]  =MAX ((M[match][i][j-1]+lgop),  M[ins][i][j-1])+gep;
@@ -367,10 +367,10 @@ int *** backward_so_dp ( Alignment *A, int *ns, int **ls, int **pos0, int I, int
 	invert_string2(A->seq_al[ls[a][b]]);
 	invert_string2((CL->S)->seq[A->order[ls[a][b]][0]]);
       }
-  
+
   M=declare_arrayN (3, sizeof (int), 5, I+2, J+2);
-  
- 
+
+
   for (i=0; i<=I; i++)
     for (j=0; j<=J; j++)
       {
@@ -402,7 +402,7 @@ int biphasic_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
   int **pos0;
   int score, trace, ntrace;
   M1=n++; D1=n++; D2=n++; I1=n++, I2=n++;
-  
+
   I=strlen (A->seq_al[ls[0][0]]);
   J=strlen (A->seq_al[ls[1][0]]);
   m=declare_arrayN (3, sizeof (int),n, I+1, J+1);
@@ -410,17 +410,17 @@ int biphasic_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
   pos0=aln2pos_simple ( A,-1, ns, ls);
   al=declare_char (2, I+J+1);
   for ( i=0; i<=I; i++)for (j=0; j<=J; j++)for (c=0; c<n; c++)m[c][i][j]=-999999;
-  
+
   gop1=CL->gop*SCORE_K*2;
   gep1=CL->gep*SCORE_K/2;
 
   gop2=CL->gop*SCORE_K/2;
   gep2=CL->gep*SCORE_K*2;
-  
+
   m[M1][0][0]=0;
   for (i=1; i<=I; i++){m[I1][i][0]=gep1*i;}
   for (j=1; j<=J; j++){m[D1][0][j]=gep1*j;}
-  
+
   for (i=1; i<=I; i++){m[I2]  [i][0]=gep2*i;}
   for (j=1; j<=J; j++){m[D2]  [0][j]=gep2*j;}
 
@@ -428,12 +428,12 @@ int biphasic_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
     {
       for ( j=1; j<=J; j++)
 	{
-	  sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);	
+	  sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);
 	  m[M1][i][j]=max_int  (&t[M1][i][j],D1,m[D1][i-1][j-1],I1,m[I1][i-1][j-1], M1, m[M1][i-1][j-1],D2,m[D2][i-1][j-1],I2,m[I2][i-1][j-1], -1)+sub;
 
 	  m[D1][i][j]=max_int  (&t[D1][i][j],M1,(m[M1][i][j-1]+gop1),D1,m[D1][i][j-1], -1)+gep1;
 	  m[I1][i][j]=max_int  (&t[I1][i][j],M1,(m[M1][i-1][j]+gop1),I1,m[I1][i-1][j], -1)+gep1;
-	  
+
 	  m[D2][i][j]=max_int  (&t[D2][i][j],M1,(m[M1][i][j-1]+gop2),D2,m[D2][i][j-1], -1)+gep2;
 	  m[I2][i][j]=max_int  (&t[I2][i][j],M1,(m[M1][i-1][j]+gop2),I2,m[I2][i-1][j], -1)+gep2;
 	}
@@ -441,12 +441,12 @@ int biphasic_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 
   score=max_int (&trace,M1,m[M1][I][J],D1,m[D1][I][J],I1, m[I1][I][J],D2,m[D2][I][J],I2,m[I2][I][J], -1);
   LEN=0;i=I;j=J;
-    
+
 
   trace=t[trace][i][j];
   while (!(i==0 &&j==0))
     {
-  
+
       ntrace=t[trace][i][j];
       if (i==0)
 	{
@@ -469,7 +469,7 @@ int biphasic_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	  i--; j--;
 	  LEN++;
 	}
-     
+
       else if ( trace==D1 || trace==D2)
 	{
 	  al[0][LEN]=0;
@@ -484,23 +484,23 @@ int biphasic_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	  i--;
 	  LEN++;
 	}
-      trace=ntrace;     
-      
+      trace=ntrace;
+
     }
-  
+
   invert_list_char ( al[0], LEN);
-  invert_list_char ( al[1], LEN);	
-  if ( A->declared_len<=LEN)A=realloc_aln2  ( A,A->max_n_seq, 2*LEN);	
-  
+  invert_list_char ( al[1], LEN);
+  if ( A->declared_len<=LEN)A=realloc_aln2  ( A,A->max_n_seq, 2*LEN);
+
   aln=A->seq_al;
-  char_buf= vcalloc (LEN+1, sizeof (char));	
+  char_buf= vcalloc (LEN+1, sizeof (char));
   for ( c=0; c< 2; c++)
     {
-      for ( a=0; a< ns[c]; a++) 
-	{		
+      for ( a=0; a< ns[c]; a++)
+	{
 	  int ch=0;
 	  for ( b=0; b< LEN; b++)
-	    {		   
+	    {
 	      if (al[c][b]==1)
 		char_buf[b]=aln[ls[c][a]][ch++];
 	      else
@@ -510,8 +510,8 @@ int biphasic_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	  sprintf (aln[ls[c][a]],"%s", char_buf);
 	}
     }
-  
-  
+
+
   A->len_aln=LEN;
   A->nseq=ns[0]+ns[1];
   free_arrayN((void *)m, 3);
@@ -528,19 +528,19 @@ int *** forward_so_dp_biphasic ( Alignment *A, int *ns, int **ls, int **pos0,int
   int ***M;
   int match=0, del=1, ins=2;
   int lgop1, lgop2, lgep1, lgep2;
-  
+
   M=declare_arrayN (3, sizeof (int), 5, I+1, J+1);
 
   for ( i=0; i<=I; i++)for (j=0; j<=J; j++)for (c=0; c<5; c++)M[c][i][j]=-999999;
-  
+
   M[match][0][0]=0;
- 
+
   for (i=1; i<=I; i++){M[del]  [i][0]=gep1*i+gop1;}
   for (j=1; j<=J; j++){M[ins]  [0][j]=gep1*j+gop1;}
-  
+
   for (i=1; i<=I; i++){M[del2]  [i][0]=gep2*i+gop2;}
   for (j=1; j<=J; j++){M[ins2]  [0][j]=gep2*j+gop2;}
-  
+
   for (i=1; i<=I; i++)
     {
       for ( j=1; j<=J; j++)
@@ -549,13 +549,13 @@ int *** forward_so_dp_biphasic ( Alignment *A, int *ns, int **ls, int **pos0,int
 	  lgop2=(i==I || j==J)?gop2:gop2;
 	  lgep1=gep1;
 	  lgep2=gep2;
-	  
-	  sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);	
+
+	  sub=(CL->get_dp_cost) (A, pos0, ns[0], ls[0], i-1, pos0, ns[1], ls[1],j-1,CL);
 	  M[match][i][j]=MAX5  (M[del][i-1][j-1], M[ins][i-1][j-1], M[match][i-1][j-1], M[ins2][i-1][j-1], M[del2][i-1][j-1])+sub;
-	  
+
 	  M[del ][i][j] =MAX2 ((M[match][i-1][j]+lgop1), M[del ][i-1][j])+lgep1;
 	  M[del2][i][j] =MAX2 ((M[match][i-1][j]+lgop2), M[del2][i-1][j])+lgep2;
-	  
+
 	  M[ins ][i][j] =MAX2 ((M[match][i][j-1]+lgop1), M[ins ][i][j-1] )+lgep1;
 	  M[ins2][i][j] =MAX2 ((M[match][i][j-1]+lgop2), M[ins2][i][j-1] )+lgep2;
 	}
@@ -568,7 +568,7 @@ int *** backward_so_dp_biphasic ( Alignment *A, int *ns, int **ls, int **pos0, i
 
 
   int ***M, ***T;
-  
+
 
   for (a=0; a<2; a++)
     for (b=0; b<ns[a]; b++)
@@ -583,10 +583,10 @@ int *** backward_so_dp_biphasic ( Alignment *A, int *ns, int **ls, int **pos0, i
 	invert_string2(A->seq_al[ls[a][b]]);
 	invert_string2((CL->S)->seq[A->order[ls[a][b]][0]]);
       }
-  
+
   M=declare_arrayN (3, sizeof (int), 5, I+2, J+2);
-  
- 
+
+
   for (i=0; i<=I; i++)
     for (j=0; j<=J; j++)
       {
@@ -605,7 +605,7 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 
 float * forward_proba_pair_wise  ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *TmatchProb, float ***TinsProb, float **transProb);
 float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *TmatchProb, float ***TinsProb,float **transProb);
-float ComputeTotalProbability (int seq1Length, int seq2Length,int NumMatrixTypes, int NumInsertStates,float *forward, float *backward) ;  
+float ComputeTotalProbability (int seq1Length, int seq2Length,int NumMatrixTypes, int NumInsertStates,float *forward, float *backward) ;
 int ProbabilisticModel (int NumMatrixTypes, int NumInsertStates,float *initDistribMat,float *emitSingle,  float** emitPairs, float *gapOpen, float *gapExtend, float **transMat, float *initialDistribution, float **matchProb, float **insProb, float **transProb);
 
 Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixTypes, int NumInsertStates, float *forward, float *backward, float thr, Constraint_list *CL);
@@ -623,12 +623,12 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
    static int TinsProb_ml, TmatchProb_ml;
    int i, j,I, J;
    float *F, *B;
-   
+
    int l;
    float thr=0.01;//ProbCons Default
    char *alphabet;
-  
-   
+
+
    //Free all the memory
    if (A==NULL)
      {
@@ -639,18 +639,18 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        free_float (transProb, -1);transProb=NULL;
        free_float (emitPairs, -1);emitPairs=NULL;
        vfree (emitSingle);emitSingle=NULL;
-       
+
 
        free_arrayN((void***)TinsProb, 3);TinsProb=NULL;
        vfree (TmatchProb);TmatchProb=NULL;
        TinsProb_ml=0; TmatchProb_ml=0;
-       
+
        forward_proba_pair_wise (NULL, NULL, 0,0,NULL,NULL,NULL,NULL,NULL);
        backward_proba_pair_wise (NULL, NULL, 0,0,NULL,NULL,NULL,NULL,NULL);
        ProbaMatrix2CL(NULL, NULL, NULL, 0, 0, NULL, NULL, 0, NULL);
        return 0;
      }
-   
+
    if (!transMat && (strm (retrieve_seq_type(), "DNA")))
      {
      static float **p;
@@ -681,7 +681,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	   emitPairs[i][j]=1e-10;
        }
      l=strlen (alphabet);
-     
+
      for (i=0; i<l; i++)
        {
 	 int C1,c1, C2,c2;
@@ -693,7 +693,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	   {
 	     c2=tolower(alphabet[j]);
 	     C2=toupper(alphabet[j]);
-	     
+
 	     emitPairs[c1][c2]=p[i][j];
 	     emitPairs[C1][c2]=p[i][j];
 	     emitPairs[C1][C2]=p[i][j];
@@ -704,16 +704,16 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	     emitPairs[c2][C1]=p[i][j];
 	   }
        }
-     
-     
+
+
      transMat=declare_float (2*NumInsertStates+1, 2*NumInsertStates+1);
      transProb=declare_float (2*NumInsertStates+1,2* NumInsertStates+1);
      insProb=declare_float (256,NumMatrixTypes);
      matchProb=declare_float (256, 256);
      initialDistribution=vcalloc (2*NumMatrixTypes+1, sizeof (float));
-     
+
      ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib2Default, emitSingle,emitPairs,DNAgapOpen2Default,DNAgapExtend2Default, transMat,initialDistribution,matchProb, insProb,transProb);
-     
+
      }
    else if (!transMat && (strm (retrieve_seq_type(), "RNA")))
      {
@@ -721,7 +721,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        static float *s;
        NumInsertStates=2;
        NumMatrixTypes=5;
-       
+
        if (!p)
 	 {
 	   int l,a,b;
@@ -746,7 +746,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	     emitPairs[i][j]=1e-10;
 	 }
        l=strlen (alphabet);
-       
+
        for (i=0; i<l; i++)
 	 {
 	   int C1,c1, C2,c2;
@@ -758,7 +758,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	     {
 	       c2=tolower(alphabet[j]);
 	       C2=toupper(alphabet[j]);
-	       
+
 	       emitPairs[c1][c2]=p[i][j];
 	       emitPairs[C1][c2]=p[i][j];
 	       emitPairs[C1][C2]=p[i][j];
@@ -769,14 +769,14 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	       emitPairs[c2][C1]=p[i][j];
 	     }
 	 }
-       
-       
+
+
        transMat=declare_float (2*NumInsertStates+1, 2*NumInsertStates+1);
        transProb=declare_float (2*NumInsertStates+1,2* NumInsertStates+1);
        insProb=declare_float (256,NumMatrixTypes);
        matchProb=declare_float (256, 256);
        initialDistribution=vcalloc (2*NumMatrixTypes+1, sizeof (float));
-       
+
        ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib2Default, emitSingle,emitPairs,RNAgapOpen2Default,RNAgapExtend2Default, transMat,initialDistribution,matchProb, insProb,transProb);
      }
    else if ( !transMat && strm (retrieve_seq_type(), "PROTEIN"))
@@ -814,10 +814,10 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	   for (j=0; j<256; j++)
 	     //emitPairs[i][j]=1e-10;
 	     emitPairs[i][j]=1;
-	   
+
 	 }
        l=strlen (alphabet);
-       
+
        for (i=0; i<l; i++)
 	 {
 	   int C1,c1, C2,c2;
@@ -829,7 +829,7 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	     {
 	       c2=tolower(alphabet[j]);
 	       C2=toupper(alphabet[j]);
-	         
+
 	       emitPairs[c1][c2]=p[i][j];
 	       emitPairs[C1][c2]=p[i][j];
 	       emitPairs[C1][C2]=p[i][j];
@@ -838,11 +838,11 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	       emitPairs[C2][c1]=p[i][j];
 	       emitPairs[C2][C1]=p[i][j];
 	       emitPairs[c2][C1]=p[i][j];
-	   
+
 	     }
 	 }
-       
-       
+
+
        transMat=declare_float (2*NumInsertStates+1, 2*NumInsertStates+1);
        transProb=declare_float (2*NumInsertStates+1,2* NumInsertStates+1);
        insProb=declare_float (256,NumMatrixTypes);
@@ -853,12 +853,12 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        else
 	 ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib2Default, emitSingle,emitPairs,gapOpen2Default,gapExtend2Default, transMat,initialDistribution,matchProb, insProb,transProb);
      }
-   
+
    I=strlen (A->seq_al[ls[0][0]]);
    J=strlen (A->seq_al[ls[1][0]]);
    //TmatchProb=vcalloc ((I+1)*(J+1), sizeof (float));
    //TinsProb=declare_arrayN (3, sizeof (float),2,NumMatrixTypes,MAX(I,J)+1);
-   
+
    l=(I+1)*(J+1);
    if (l>TmatchProb_ml)
      {
@@ -873,13 +873,13 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        if (TinsProb)free_arrayN (TinsProb, 3);
        TinsProb=declare_arrayN (3, sizeof (float),2,NumMatrixTypes,TinsProb_ml);
      }
-   
+
    get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL, SEQUENCE);
-   
+
    F=forward_proba_pair_wise (A->seq_al[ls[0][0]], A->seq_al[ls[1][0]], NumMatrixTypes,NumInsertStates,transMat, initialDistribution,TmatchProb,TinsProb, transProb);
    B=backward_proba_pair_wise (A->seq_al[ls[0][0]], A->seq_al[ls[1][0]], NumMatrixTypes,NumInsertStates,transMat, initialDistribution,TmatchProb,TinsProb, transProb);
    A->CL=ProbaMatrix2CL(A,ns, ls,NumMatrixTypes,NumInsertStates, F, B, thr,CL);
-   
+
    //free_proba_pair_wise();
    return 1;
    }
@@ -896,8 +896,8 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
   static int gtp=0;
   //Pre-computation of the pairwise scores in order to use potential profiles
   //The profiles are vectorized AND Compressed so that the actual alphabet size (proteins/DNA) does not need to be considered
-  
-  
+
+
   if (mode==SEQUENCE)
     {
       int s1, s2;
@@ -906,19 +906,19 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
       char *sst1;
       char *sst2;
 
-      
+
       nns=vcalloc ( 2, sizeof (int));
       nls=vcalloc (2, sizeof (int*));
-      
+
       s1=A1->order[ls[0][0]][0];
       s2=A2->order[ls[1][0]][0];
       NA1=seq2R_template_profile (CL->S,s1);
       NA2=seq2R_template_profile (CL->S,s2);
-      
+
       sst1=seq2T_template_string((CL->S),s1);
       sst2=seq2T_template_string((CL->S),s2);
-      
-      
+
+
       if (NA1 || NA2)
 	{
 	  if (NA1)
@@ -944,11 +944,11 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	      nns[1]=NA2->nseq;
 	      nls[1]=vcalloc (NA2->nseq, sizeof (int));
 	      for (a=0; a<NA2->nseq; a++)
-		nls[1][a]=a;	      
+		nls[1][a]=a;
 	      NA2->seq_al[NA2->nseq]=sst2;
 	      sprintf (NA2->name[NA2->nseq], "sst2");
 	    }
-	  else 
+	  else
 	    {
 	    NA2=A2;
 	    nns[1]=ns[1];
@@ -956,7 +956,7 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	    for (a=0; a<ns[1]; a++)
 	      nls[1][a]=ls[1][a];
 	    }
-	  
+
 	  get_tot_prob (NA1, NA2, nns, nls, nstates, matchProb, insProb, TmatchProb, TinsProb, CL,PROFILE);
 	  vfree (nns); free_int (nls,-1);
 	  return 1;
@@ -970,12 +970,12 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
     }
   else
     uss=0;
-  
+
   I=strlen (A1->seq_al[ls[0][0]]);
   J=strlen (A2->seq_al[ls[1][0]]);
-  
 
- 
+
+
   //get Ins for I
   for (i=1; i<=I; i++)
     {
@@ -988,14 +988,14 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	      if (c1!='-')
 		{
 		  TinsProb[0][k][i]+=insProb[c1][k];
-		  
+
 		  n++;
 		}
 	    }
 	  if (n)TinsProb[0][k][i]/=n;
 	}
     }
-  //Get Ins for J 
+  //Get Ins for J
   for (j=1; j<=J; j++)
     {
       for (k=0; k<nstates; k++)
@@ -1007,7 +1007,7 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	    if (c2!='-')
 	      {
 	      TinsProb[1][k][j]+=insProb[c2][k];
-	      
+
 	      n++;
 	      }
 	    }
@@ -1025,13 +1025,13 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	  c1=tolower(A1->seq_al[ls[0][b]][i]);
 	  if ( c1=='-' || c1=='.' || c1=='~')continue;
 	  c1-='a';
-	  
+
 	  if (!(in=observed[c1])){in=observed[c1]=++index;}
-	  
+
 	  VA1[0][in-1][i]=c1;
 	  VA1[1][in-1][i]++;
 	}
-      
+
       VA1[0][index][i]=-1;
       for (b=0; b<26; b++)observed[b]=0;
     }
@@ -1042,13 +1042,13 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
       for (index=0, b=0; b<ns[1]; b++)
 	{
 	  int in;
-	  
+
 	  c1=tolower(A2->seq_al[ls[1][b]][i]);
 	  if ( c1=='-')continue;
 	  c1-='a';
-	  
+
 	  if (!(in=observed[c1])){in=observed[c1]=++index;}
-	  
+
 	  VA2[0][in-1][i]=c1;
 	  VA2[1][in-1][i]++;
 	}
@@ -1071,8 +1071,8 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	      else if (ss1[i-1]!=ss2[j-1])sfac=1;
 	      else if (ss1[i-1]==ss2[j-1])sfac=1;
 	      else sfac=1;
-	      
-	     
+
+
 	      c=0;
 	      while (VA1[0][c][i-1]!=-1)
 		{
@@ -1116,33 +1116,33 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
   double v;
   static float F=4; //potential number of full suboptimal alignmnents incorporated in the library
   static int tot_old, tot_new;
- 
+
   if (!A)
     {
       free_int (list, -1);list=NULL;
       list_max=0;
-      
+
       vfree(entry); entry=NULL;
       return NULL;
     }
-  
+
   I=strlen (A->seq_al[ls[0][0]]);
   J=strlen (A->seq_al[ls[1][0]]);
   s1=name_is_in_list (A->name[ls[0][0]], (CL->S)->name, (CL->S)->nseq, 100);
   s2=name_is_in_list (A->name[ls[1][0]], (CL->S)->name, (CL->S)->nseq, 100);
-  
+
   list_size=I*J;
-  
+
   if ( list_max<list_size)
     {
       free_int (list, -1);
       list_max=list_size;
       list=declare_int (list_max, 3);
     }
-  
-  
+
+
   totalProb = ComputeTotalProbability (I,J,NumMatrixTypes, NumInsertStates,forward, backward);
-  
+
   ij = 0;
   for (list_n=0,ij=0,i =0; i <= I; i++)
     {
@@ -1162,7 +1162,7 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
 
   sort_int_inv (list, 3, 2, 0, list_n-1);
   if (!entry)entry=vcalloc ( CL->entry_len+1, CL->el_size);
- 
+
   list_n=MIN(list_n,(F*MIN(I,J)));
   for (i=0; i<list_n; i++)
     {
@@ -1182,20 +1182,20 @@ Constraint_list *ProbaMatrix2CL (Alignment *A, int *ns, int **ls, int NumMatrixT
 
 
 
-float ComputeTotalProbability (int seq1Length, int seq2Length,int NumMatrixTypes, int NumInsertStates,float *forward, float *backward) 
+float ComputeTotalProbability (int seq1Length, int seq2Length,int NumMatrixTypes, int NumInsertStates,float *forward, float *backward)
 {
-  
+
     float totalForwardProb = LOG_ZERO;
     float totalBackwardProb = LOG_ZERO;
     int k;
-    
+
     for (k = 0; k < NumMatrixTypes; k++)
       {
       LOG_PLUS_EQUALS (&totalForwardProb,forward[k + NumMatrixTypes * ((seq1Length+1) * (seq2Length+1) - 1)] + backward[k + NumMatrixTypes * ((seq1Length+1) * (seq2Length+1) - 1)]);
       }
 
     totalBackwardProb =forward[0 + NumMatrixTypes * (1 * (seq2Length+1) + 1)] +backward[0 + NumMatrixTypes * (1 * (seq2Length+1) + 1)];
-    
+
     for (k = 0; k < NumInsertStates; k++)
       {
       LOG_PLUS_EQUALS (&totalBackwardProb,forward[2*k+1 + NumMatrixTypes * (1 * (seq2Length+1) + 0)] +backward[2*k+1 + NumMatrixTypes * (1 * (seq2Length+1) + 0)]);
@@ -1209,25 +1209,25 @@ float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, i
 {
   static float *backward;
   static int max_l;
-  
+
 
   int k, i, j,ij, i1j1, i1j, ij1,a, l, seq1Length, seq2Length, m;
   char c1, c2;
   char *iter1, *iter2;
-  
+
   if (!seq1)
     {
       vfree (backward);
       backward=NULL; max_l=0;
       return NULL;
     }
-  
+
   iter1=seq1-1;
   iter2=seq2-1;
-  seq1Length=strlen (seq1); 
+  seq1Length=strlen (seq1);
   seq2Length=strlen (seq2);
   l=(seq1Length+1)*(seq2Length+1)*NumMatrixTypes;
-  
+
   if (!backward)
     {
       backward=vcalloc (l, sizeof (float));
@@ -1238,7 +1238,7 @@ float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, i
       backward=vrealloc (backward, l*sizeof(float));
       max_l=l;
     }
-  
+
   for (a=0; a<l; a++)backward[a]=LOG_ZERO;
 
   for (k = 0; k < NumMatrixTypes; k++)
@@ -1246,7 +1246,7 @@ float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, i
 
   // remember offset for each index combination
   ij = (seq1Length+1) * (seq2Length+1) - 1;
-  
+
   i1j = ij + seq2Length + 1;
   ij1 = ij + 1;
   i1j1 = ij + seq2Length + 2;
@@ -1254,7 +1254,7 @@ float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, i
   i1j *= NumMatrixTypes;
   ij1 *= NumMatrixTypes;
   i1j1 *= NumMatrixTypes;
-  
+
   // compute backward scores
   for (i = seq1Length; i >= 0; i--)
     {
@@ -1262,13 +1262,13 @@ float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, i
       for (j = seq2Length; j >= 0; j--)
 	{
 	  c2 = (j == seq2Length) ? '~' : (unsigned char) iter2[j+1];
-	  
+
 	  if (i < seq1Length && j < seq2Length)
 	    {
 	      m=((i+1)*(seq2Length+1))+j+1;//The backward and the forward are offset by 1
 	      float ProbXY = backward[0 + i1j1] + matchProb[m];
-	      
-	      
+
+
 	      for (k = 0; k < NumMatrixTypes; k++)
 		{
 		  LOG_PLUS_EQUALS (&backward[k + ij], ProbXY + transProb[k][0]);
@@ -1291,14 +1291,14 @@ float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, i
 		LOG_PLUS_EQUALS (&backward[2*k+2 + ij], backward[2*k+2 + ij1] + insProb[1][k][j+1] + transProb[2*k+2][2*k+2]);
 	      }
 	  }
-	
+
         ij -= NumMatrixTypes;
         i1j -= NumMatrixTypes;
         ij1 -= NumMatrixTypes;
         i1j1 -= NumMatrixTypes;
 	}
     }
-  
+
   return backward;
 }
 float * forward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *matchProb, float ***insProb, float **transProb)
@@ -1308,7 +1308,7 @@ float * forward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, in
   int k, i, j,ij, i1j1, i1j, ij1, seq1Length, seq2Length, m;
   char *iter1, *iter2;
   int l,a;
-  
+
   if (!seq1)
     {
       vfree (forward);
@@ -1317,10 +1317,10 @@ float * forward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, in
     }
   iter1=seq1-1;
   iter2=seq2-1;
-  seq1Length=strlen (seq1); 
+  seq1Length=strlen (seq1);
   seq2Length=strlen (seq2);
   l=(seq1Length+1)*(seq2Length+1)*NumMatrixTypes;
-   
+
   if (!forward)
     {
       forward=vcalloc (l, sizeof (float));
@@ -1332,16 +1332,16 @@ float * forward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, in
       max_l=l;
     }
   for (a=0; a<l; a++)forward[a]=LOG_ZERO;
-  
-  
+
+
   forward[0 + NumMatrixTypes * (1 * (seq2Length+1) + 1)] = initialDistribution[0] + matchProb[seq2Length+2];
-  
+
   for (k = 0; k < NumInsertStates; k++)
     {
       forward[2*k+1 + NumMatrixTypes * (1 * (seq2Length+1) + 0)] = initialDistribution[2*k+1] + insProb[0][k][1];
-      forward[2*k+2 + NumMatrixTypes * (0 * (seq2Length+1) + 1)] = initialDistribution[2*k+2] + insProb[1][k][1]; 
+      forward[2*k+2 + NumMatrixTypes * (0 * (seq2Length+1) + 1)] = initialDistribution[2*k+2] + insProb[1][k][1];
     }
-  
+
   // remember offset for each index combination
     ij = 0;
     i1j = -seq2Length - 1;
@@ -1352,8 +1352,8 @@ float * forward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, in
     i1j *= NumMatrixTypes;
     ij1 *= NumMatrixTypes;
     i1j1 *= NumMatrixTypes;
-    
-   
+
+
     // compute forward scores
     for (m=0,i = 0; i <= seq1Length; i++)
       {
@@ -1386,31 +1386,31 @@ float * forward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, in
 	      }
 	    }
 	  }
-	
+
         ij += NumMatrixTypes;
         i1j += NumMatrixTypes;
         ij1 += NumMatrixTypes;
         i1j1 += NumMatrixTypes;
       }
-      
+
     }
     return forward;
   }
 int ProbabilisticModel (int NumMatrixTypes, int NumInsertStates,float *initDistribMat,float *emitSingle,  float **emitPairs, float *gapOpen, float *gapExtend, float **transMat, float *initialDistribution, float **matchProb, float **insProb, float **transProb)
 {
 
-    
+
     // build transition matrix
   int i, j;
-  
- 
+
+
   transMat[0][0] = 1;
   for (i = 0; i < NumInsertStates; i++)
     {
     transMat[0][2*i+1] = gapOpen[2*i];
     transMat[0][2*i+2] = gapOpen[2*i+1];
     transMat[0][0] -= (gapOpen[2*i] + gapOpen[2*i+1]);
-    
+
     transMat[2*i+1][2*i+1] = gapExtend[2*i];
     transMat[2*i+2][2*i+2] = gapExtend[2*i+1];
     transMat[2*i+1][2*i+2] = 0;
@@ -1420,14 +1420,14 @@ int ProbabilisticModel (int NumMatrixTypes, int NumInsertStates,float *initDistr
     }
 
 
-  
+
   // create initial and transition probability matrices
   for (i = 0; i < NumMatrixTypes; i++){
     initialDistribution[i] = (float)log ((float)initDistribMat[i]);
     for (j = 0; j < NumMatrixTypes; j++)
       transProb[i][j] = (float)log ((float)transMat[i][j]);
   }
-  
+
   // create insertion and match probability matrices
   for (i = 0; i < 256; i++)
     {
@@ -1460,11 +1460,11 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 
   ungap_sub_aln (A, ns[0],ls[0]);
   ungap_sub_aln (A, ns[1],ls[1]);
-  
+
   seq1Length=I=strlen (A->seq_al[ls[0][0]]);
   seq2Length=J=strlen (A->seq_al[ls[1][0]]);
 
-  
+
   if (!transMat)
     {
        alphabet=alphabetDefault;
@@ -1477,10 +1477,10 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	     emitPairs[i][j]=1e-10;
 	 }
        l=strlen (alphabet);
-       
+
        for (i=0; i<l; i++)
 	 {
-	
+
 	   c1=tolower(alphabet[i]);
 	   C1=toupper(alphabet[i]);
 	   emitSingle[c1]=emitSingleDefault[i];
@@ -1489,7 +1489,7 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	     {
 	       c2=tolower(alphabet[j]);
 	       C2=toupper(alphabet[j]);
-	       
+
 	       emitPairs[c1][c2]=emitPairsDefault[i][j];
 	       emitPairs[C1][c2]=emitPairsDefault[i][j];
 	       emitPairs[C1][C2]=emitPairsDefault[i][j];
@@ -1500,14 +1500,14 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	       emitPairs[c2][C1]=emitPairsDefault[i][j];
 	     }
 	 }
-       
-       
+
+
        transMat=declare_float (2*NumInsertStates+1, 2*NumInsertStates+1);
        transProb=declare_float (2*NumInsertStates+1,2* NumInsertStates+1);
        insProb=declare_float (256,NumMatrixTypes);
        matchProb=declare_float (256, 256);
        initialDistribution=vcalloc (2*NumMatrixTypes+1, sizeof (float));
-       
+
        ProbabilisticModel (NumMatrixTypes,NumInsertStates,initDistrib2Default, emitSingle,emitPairs,gapOpen2Default,gapExtend2Default, transMat,initialDistribution,matchProb, insProb,transProb);
      }
 
@@ -1515,29 +1515,29 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
    TmatchProb=vcalloc ((I+1)*(J+1), sizeof (float));
    TinsProb=declare_arrayN (3, sizeof (float),2,NumMatrixTypes,MAX(I,J)+1);
    get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL,SEQUENCE);
-   
+
    // create viterbi matrix
    l=NumMatrixTypes * (seq1Length+1) * (seq2Length+1);
    viterbi =vcalloc (l, sizeof (float));
    for (a=0; a<l; a++)viterbi[a]=LOG_ZERO;
    traceback=vcalloc (l, sizeof (int));
    for (a=0; a<l; a++)traceback[a]=-1;
-   
+
    // initialization condition
    for (k = 0; k < NumMatrixTypes; k++)
      viterbi[k] = initialDistribution[k];
-   
+
    // remember offset for each index combination
    ij = 0;
    i1j = -seq2Length - 1;
    ij1 = -1;
    i1j1 = -seq2Length - 2;
-   
+
    ij *= NumMatrixTypes;
    i1j *= NumMatrixTypes;
    ij1 *= NumMatrixTypes;
    i1j1 *= NumMatrixTypes;
-   
+
    // compute viterbi scores
    for (m=0,i = 0; i <= seq1Length; i++)
      {
@@ -1580,21 +1580,21 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 		   viterbi[2*k+2 + ij] = valFromMatch;
 		   traceback[2*k+2 + ij] = 0;
 		 }
-		 else 
+		 else
 		   {
 		     viterbi[2*k+2 + ij] = valFromIns;
 		     traceback[2*k+2 + ij] = 2*k+2;
 		   }
 	       }
 	     }
-	   
+
 	   ij += NumMatrixTypes;
 	   i1j += NumMatrixTypes;
 	   ij1 += NumMatrixTypes;
 	   i1j1 += NumMatrixTypes;
 	 }
      }
-   
+
    // figure out best terminating cell
    bestProb = LOG_ZERO;
    state = -1;
@@ -1607,9 +1607,9 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	   state = k;
 	 }
      }
-   
-   
-   
+
+
+
    // compute traceback
    al=declare_char(2,seq1Length+seq2Length);
    LEN=0;
@@ -1617,27 +1617,27 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
    while (r != 0 || c != 0)
      {
        int newState = traceback[state + NumMatrixTypes * (r * (seq2Length+1) + c)];
-       
+
        if (state == 0){ c--; r--; al[0][LEN]=1;al[1][LEN]=1;}
        else if (state % 2 == 1) {r--; al[0][LEN]=1;al[1][LEN]=0;}
        else { c--; al[0][LEN]=0;al[1][LEN]=1;}
        LEN++;
        state = newState;
      }
-   	
+
 
    invert_list_char ( al[0], LEN);
-   invert_list_char ( al[1], LEN);	
-   if ( A->declared_len<=LEN)A=realloc_aln2  ( A,A->max_n_seq, 2*LEN);	
+   invert_list_char ( al[1], LEN);
+   if ( A->declared_len<=LEN)A=realloc_aln2  ( A,A->max_n_seq, 2*LEN);
    aln=A->seq_al;
-   char_buf= vcalloc (LEN+1, sizeof (char));	
+   char_buf= vcalloc (LEN+1, sizeof (char));
    for ( c=0; c< 2; c++)
      {
-       for ( a=0; a< ns[c]; a++) 
-	 {		
+       for ( a=0; a< ns[c]; a++)
+	 {
 	   int ch=0;
 	   for ( b=0; b< LEN; b++)
-	     {		   
+	     {
 	       if (al[c][b]==1)
 		 char_buf[b]=aln[ls[c][a]][ch++];
 	       else
@@ -1647,17 +1647,17 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 	   sprintf (aln[ls[c][a]],"%s", char_buf);
 	 }
      }
-   
-   
+
+
    A->len_aln=LEN;
    A->nseq=ns[0]+ns[1];
    vfree (char_buf);
    free_char (al, -1);
-   
-   
-  
-      
-  
+
+
+
+
+
    return (int)(bestProb*(float)1000);
 }
 
@@ -1667,14 +1667,14 @@ float ** get_emitPairs (char *mat, char *alp, float **p, float *s)
     float k=0, t=0;
     int a, b, c, l;
     int **M;
-    
+
     if (!rmat)rmat=vcalloc (100, sizeof (char));
-    
+
     if (!mat || !mat[0] || strm (mat, "default"))return p;
     else if (strm (rmat, mat))return p;
-	     
+
     sprintf (rmat,"%s", mat);
- 
+
     M=read_matrice (mat);
     l=strlen (alp);
 
@@ -1696,13 +1696,13 @@ float ** get_emitPairs (char *mat, char *alp, float **p, float *s)
     for (a=0; a<l; a++)
       for (b=0; b<l; b++)
 	p[a][b]=p[a][b]/t;
-    
+
     t=0;
-    
+
     for (a=0; a<l; a++)
       for (b=0; b<l; b++)
 	t+=p[a][b];
-    
+
     return p;
   }
 

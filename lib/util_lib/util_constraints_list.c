@@ -53,7 +53,7 @@ Constraint_list *produce_list   ( Constraint_list *CL, Sequence *S, char * metho
 	njob=queue2n(job)+1;
 
 	nproc=get_nproc();
-	
+
 
 	if (strstr ( CL->multi_thread, "jobcells"))return fork_cell_produce_list (CL, S, method, weight, mem_mode,job,nproc,local_stderr);
 	else if (strstr ( CL->multi_thread, "joblines"))return fork_line_produce_list (CL, S, method, weight, mem_mode,job, nproc,local_stderr);
@@ -531,13 +531,13 @@ Job_TC *submit_lib_job ( Job_TC *job)
 	    char *com;
 	    static int do_flip;
 	    int flipped=0;
-	    
+
 	    if (!do_flip)
 	      {
 		do_flip=get_int_variable ("flip");
 		if (!do_flip)do_flip=-1;
 	      }
-	    
+
 	    seq_list2in_file ( M, (io->CL)->S, p->seq_c, io->in);
 	    if (do_flip!=-1)
 	      {
@@ -547,7 +547,7 @@ Job_TC *submit_lib_job ( Job_TC *job)
 		    flipped=1;
 		  }
 	      }
-	    
+
 	    com=vcalloc ( strlen (p->aln_c)+100, sizeof (char));
 	    sprintf (com, "%s", p->aln_c);
 	    substitute (com, "//", "/");
@@ -2089,7 +2089,7 @@ int compare_constraint_list_entry ( const void*vx, const void*vy)
 Constraint_list*  fork_read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source,int nproc);
 Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source)
 {
-    
+
   if ( strstr (CL->multi_thread, "methods"))
     return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode,type,local_stderr, CL, seq_source, 1);
   else
@@ -2105,7 +2105,7 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 	int*proclist;
 	int  ns;
 
-	
+
 	proclist=vcalloc (MAX_N_PID, sizeof (int));
 	tmp_list=vcalloc (n_list+1, sizeof (char*));
 	for (a=0; a<n_list; a++)tmp_list[a]=vtmpnam(NULL);
@@ -3327,7 +3327,7 @@ Constraint_list * relax_constraint_list (Constraint_list *CL)
   if (!CL || !CL->S || !CL->residue_index) return CL;
   if (strstr ( CL->multi_thread, "relax")){njobs=nproc=get_nproc();}
   else {njobs=nproc=1;}
-  
+
   return fork_relax_constraint_list (CL, njobs,nproc);
 }
 Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int nproc)
