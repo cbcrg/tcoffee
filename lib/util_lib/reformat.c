@@ -6810,7 +6810,7 @@ int output_suchard_aln (char *out_file, Alignment *A)
 void output_fasta_aln (char *fname, Alignment *A )
 {
 	FILE *fp;
-	int a;
+	int a,b,c,l;
 	int line=0;
 
 	line=get_msa_line_length (line, A->len_aln+1);
@@ -6822,7 +6822,12 @@ void output_fasta_aln (char *fname, Alignment *A )
 		if ( A->seq_comment[a][0] && !isblanc (A->seq_comment[a]))
 			fprintf ( fp, " %s", A->seq_comment[a]);
 		fprintf ( fp, "\n");
-		fp=output_string_wrap ( line,A->seq_al[a] , fp);
+		l=strlen (A->seq_al[a]);
+		for (b=0, c=0;b<l; b++, c++)
+		  {
+		    if (line>0 && c==line){fprintf (fp, "\n");c=0;}
+		    fprintf (fp, "%c", GET_CASE(A->residue_case, A->seq_al[a][b]));
+		  }
 		fprintf ( fp, "\n");
 	}
 	vfclose (fp);

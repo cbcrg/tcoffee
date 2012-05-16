@@ -994,7 +994,8 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
 		   {
 		   n_residues[b]+=!is_gap(B->seq_al[b][c]);
 		   //s=toupper(B->seq_al[b][c]);
-		   s=B->seq_al[b][c];
+		   s=GET_CASE(B->residue_case, B->seq_al[b][c]);
+		   
 		   if (!is_gap(s) && S->seq_al[b][c]!=NO_COLOR_RESIDUE )
 			{
 			get_rgb_values_format ( S->seq_al[b][c], box_c);			    			
