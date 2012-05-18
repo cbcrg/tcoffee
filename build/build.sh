@@ -324,6 +324,9 @@ function build_binaries()
 	# + secondary_struc.py (by Carsten)
 	cp $WORKSPACE/tcoffee/build/extra/secondary_struc.py $TCDIR/plugins/$OSNAME/secondary_struc.py
 	chmod +x $TCDIR/plugins/$OSNAME/secondary_struc.py
+	
+	# HH_seach
+	cp $WORKSPACE/tcoffee/build/extra/HHsearch-1.5.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME/	
 }
 
 
