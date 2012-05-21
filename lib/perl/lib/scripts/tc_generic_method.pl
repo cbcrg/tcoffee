@@ -28,7 +28,8 @@ our $ERRORDIR=$ENV{"ERRORDIR_4_TCOFFEE"};
 our $ERRORFILE=$ENV{"ERRORFILE_4_TCOFFEE"};
 &set_lock ($$);
 if (isshellpid(getppid())){lock4tc(getppid(), "LLOCK", "LSET", "$$\n");}
-      
+our %RECODE;
+our $RECODE_N;      
 ########################## GLOBAL VARIABLES ################
 
 
@@ -970,9 +971,14 @@ sub seq2profile_pair
       }
      elsif ( $method eq "clustalo")
       {
-
+	
 	&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
+	recode_name ("prf1.aln", "code");
+	recode_name ("prf2.aln", "code");
+	
 	`clustalo --p1 prf1.aln --p2 prf2.aln -o result.aln --force`;
+	recode_name ("result.aln");
+	
 	&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);
       }
     elsif ( $method eq "hhalign")
@@ -1330,6 +1336,37 @@ sub read_fasta_seq
       }
     return %hseq;
   }
+sub recode_name
+    {
+      my ($in)=shift;
+      my $mode=shift;
+      my $f=new FileHandle;
+      
+      my %seq;
+      my $new_name;
+      
+      if (! -e $in){return;}
+      
+      #needed by ClustalOmega to avoid very long names
+      %seq=read_fasta_seq ($in);
+      
+      open ($f, ">$out");
+      foreach my $s (keys(%seq))
+	{
+	  if ($mode eq "code")
+	    {
+	      $new_name=++$RECODE_N;
+	      $RECODE {$recode_nameN}=$seq{$s}{name};
+	    }
+	  else
+	    {	      
+	      $new_name=$RECODE{$seq{$s}{name}};
+	    }
+	  print $f ">$new_name\n$seq{$s}{seq}\n";
+	}
+      close $f;
+    }
+    
 sub fasta_hash2index_hash
   {
     my %s1=@_;
