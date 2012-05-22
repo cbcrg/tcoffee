@@ -29,7 +29,7 @@ our $ERRORFILE=$ENV{"ERRORFILE_4_TCOFFEE"};
 &set_lock ($$);
 if (isshellpid(getppid())){lock4tc(getppid(), "LLOCK", "LSET", "$$\n");}
 our %RECODE;
-our $RECODE_N;      
+our $RECODE_N;
 ########################## GLOBAL VARIABLES ################
 
 
@@ -150,7 +150,7 @@ elsif ( $mode eq "pdb_template")
 
 elsif ( $mode eq "profile_template")
   {
-    
+
     &psiblast2profile_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0));
   }
 elsif ( $mode eq "psiprofile_template")
@@ -202,26 +202,26 @@ sub seq2ssp_template
   &set_temporary_dir ("set",$infile,"seq.pep");
   %s=read_fasta_seq ("seq.pep");
 
-  
+
   open (R, ">result.aln");
-  
+
   #print stdout "\n";
   foreach $seq (keys(%s))
     {
-      
+
       open (F, ">seqfile");
       $s{$seq}{seq}=uc$s{$seq}{seq};
       print (F ">$s{$seq}{name}\n$s{$seq}{seq}\n");
       close (F);
       $lib_name="$s{$seq}{name}.ssp";
       $lib_name=&clean_file_name ($lib_name);
-      
+
       if ($mode eq "ssp_template"){&seq2gor_prediction ($s{$seq}{name},$s{$seq}{seq}, "seqfile", $lib_name,$gor_seq, $gor_obs);}
       elsif ($mode eq "psissp_template")
 	{
 	  &seq2msa_gor_prediction ($s{$seq}{name},$s{$seq}{seq},"seqfile", $lib_name,$gor_seq, $gor_obs);
 	}
-    
+
       if ( !-e $lib_name)
 	{
 	  myexit(flush_error("GORIV failed to compute the secondary structure of $s{$seq}{name}"));
@@ -247,9 +247,9 @@ sub seq2tm_template
   &set_temporary_dir ("set",$infile,"seq.pep");
   %s=read_fasta_seq ("seq.pep");
 
-  
+
   open (R, ">result.aln");
-  
+
   #print stdout "\n";
   foreach $seq (keys(%s))
     {
@@ -292,9 +292,9 @@ sub seq2RNA_template
   &set_temporary_dir ("set",$infile,"seq.pep");
   %s=read_fasta_seq ("seq.pep");
 
-  
+
   open (R, ">result.aln");
-  
+
   #print stdout "\n";
   foreach $seq (keys(%s))
     {
@@ -304,7 +304,7 @@ sub seq2RNA_template
       $lib_name="$s{$seq}{name}.rfold";
       $lib_name=&clean_file_name ($lib_name);
       &safe_system ("t_coffee -other_pg RNAplfold2tclib.pl -in=seqfile -out=$lib_name");
-      
+
       if ( !-e $lib_name)
 	{
 	 myexit(flush_error("RNAplfold failed to compute the secondary structure of $s{$seq}{name}"));
@@ -330,14 +330,14 @@ sub psiblast2profile_template_test
   my $minid=0;
   my $mincov=0;
   my $maxcov=100;
-  
+
   %s=read_fasta_seq ($seq);
   open (R, ">result.aln");
-  
+
   #print stdout "\n";
   foreach $seq (keys(%s))
     {
-      
+
       open (F, ">seqfile");
       print (F ">$A\n$s{$seq}{seq}\n");
       close (F);
@@ -347,7 +347,7 @@ sub psiblast2profile_template_test
 	  %profile=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$psiblast_output);
 
 
-	  
+
 	  $profile_name="$s{$seq}{name}.prf";
 	  $profile_name=&clean_file_name ($profile_name);
 	  unshift (@profiles, $profile_name);
@@ -357,10 +357,10 @@ sub psiblast2profile_template_test
 	}
     }
   close (R);
-  
+
   die;
 }
-sub psiblast2profile_template 
+sub psiblast2profile_template
   {
   my ($mode, $infile, $db, $method, $outfile)=@_;
   my %s, %h, ;
@@ -369,7 +369,7 @@ sub psiblast2profile_template
   &set_temporary_dir ("set",$infile,"seq.pep");
   %s=read_fasta_seq ("seq.pep");
   open (R, ">result.aln");
-  
+
   #print stdout "\n";
   foreach $seq (keys(%s))
     {
@@ -377,12 +377,12 @@ sub psiblast2profile_template
       print (F ">$A\n$s{$seq}{seq}\n");
       close (F);
       $psiblast_output=&run_blast ($s{$seq}{name},$method, $db, "seqfile","outfile");
-      
+
 if ( -e $psiblast_output)
 	{
 	  %profile=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$psiblast_output);
 	  unlink ($psiblast_output);
-	  
+
 	  $profile_name="$s{$seq}{name}.prf";
 	  $profile_name=&clean_file_name ($profile_name);
 	  unshift (@profiles, $profile_name);
@@ -401,9 +401,9 @@ sub blast2pdb_template_test
       $maxid=100;
       $minid=0;
       $mincov=0;
-      
+
       print "$infile\n";
-      
+
       %p=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$infile);
       $c=1;
       print stdout "\tProcess: >$s{$seq}{name} [$SERVER/blast/$db][$CACHE_STATUS]\n";
@@ -411,13 +411,13 @@ sub blast2pdb_template_test
 	{
 	  $pdbid=&id2pdbid($p{$c}{identifyer});
 	  if ( length ($pdbid)>5){$pdbid=id2pdbid($p{$c}{definition});}
-	  
+
 	  if ( length ($pdbid)>5)
 	    {
 	      myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::Could Not Parse PDBID ($p{$c}{identifyer},$p{$c}{definition})"));
 	    }
-	  
-	  
+
+
 	  if (!&pdb_is_released($pdbid))
 	    {
 	      print stdout "\t\t**$pdbid [PDB NOT RELEASED or WITHDRAWN]\n";
@@ -427,7 +427,7 @@ sub blast2pdb_template_test
 	    {
 	      my $ptype=&pdb2type ($pdbid);
 	      my $etype=&type2etype($type);
-	      
+
 	      print stdout "\t\t**$pdbid [$ptype cannot be used (expected: $etype)]\n";
 	      $c++;
 	    }
@@ -447,7 +447,7 @@ sub blast2pdb_template_test
 	}
       die;
     }
-sub blast2pdb_template 
+sub blast2pdb_template
   {
   my ($mode, $infile, $db, $method, $outfile,$type)=@_;
   my %s, %h, ;
@@ -455,23 +455,23 @@ sub blast2pdb_template
   &set_temporary_dir ("set",$infile,"seq.pep");
   %s=read_fasta_seq ("seq.pep");
   open (R, ">result.aln");
-  
- 
+
+
   #print stdout "\n";
   foreach $seq (keys(%s))
     {
       my $c;
       my $found;
-      
+
       open (F, ">seqfile");
       print (F ">$A\n$s{$seq}{seq}\n");
       close (F);
-     
+
       $blast_output=&run_blast ($s{$seq}{name},$method, $db, "seqfile","outfile");
-     
+
       %p=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$blast_output);
       unlink ($blast_output);
-      
+
       $c=1;
       print stdout "\tProcess: >$s{$seq}{name} [$SERVER/blast/$db][$CACHE_STATUS]\n";
       while (!$found && $c<$p{n})
@@ -483,7 +483,7 @@ sub blast2pdb_template
 	    {
 	      myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::Could Not Parse PDBID ($p{$c}{identifyer},$p{$c}{definition})"));
 	    }
-	  
+
 
 	  if (!&pdb_is_released($pdbid))
 	    {
@@ -494,7 +494,7 @@ sub blast2pdb_template
 	    {
 	      my $ptype=&pdb2type ($pdbid);
 	      my $etype=&type2etype($type);
-	      
+
 	      print stdout "\t\t**$pdbid [$ptype cannot be used (expected: $etype)]\n";
 	      $c++;
 	    }
@@ -522,7 +522,7 @@ sub type2etype
   {
     my $type=shift;
     my $etype;
-    
+
     if ( $type=~/n/){$etype.="NMR ";}
     if ( $type=~/d/){$etype.="diffraction ";}
     if ( $type=~/m/){$etype.="model ";}
@@ -532,7 +532,7 @@ sub pdb2type
   {
      my $pdb=shift;
      my $f=vtmpnam();
-     
+
      my $value= &safe_system ("t_coffee -other_pg extract_from_pdb -model_type $pdb > $f");
      my $r=&file2string ($f);
      chomp($r);
@@ -542,14 +542,14 @@ sub pdb_has_right_type
   {
     my $pdb=shift;
     my $type=shift;
-    
+
     my $f=vtmpnam();
-    
+
     my $value= &safe_system ("t_coffee -other_pg extract_from_pdb -model_type $pdb > $f");
     my $r=&file2string ($f);
     chomp($r);
 
-        
+
     if ( $r eq "NMR" && $type=~/n/){return 1;}
     elsif ( $r eq "diffraction" && $type=~/d/){return 1;}
     elsif ( $r eq "model" && $type=~/m/){return 1;}
@@ -559,7 +559,7 @@ sub pdb_is_released
   {
     my $pdb=shift;
     my $f=vtmpnam();
-    
+
     $value= &safe_system ("t_coffee -other_pg extract_from_pdb -is_released_pdb_name $pdb > $f");
     my $r=&file2string ($f);
     chomp($r);
@@ -573,20 +573,20 @@ sub blast_msa
     my $SEQ=new FileHandle;
     my $seqfile="seqfile";
     my @txt;
-    
-    
+
+
     %s1=&read_fasta_seq ($db);
     %s=&fasta_hash2index_hash(%s1);
     %qs1=&read_fasta_seq ($infile);
     %qs=&fasta_hash2index_hash(%qs1);
-    
-    
+
+
     #&safe_system ("formatdb -i $db");
     if ($blast eq "blastp"){&safe_system  ("blastall -i $infile -d $db -m7 -p blastp -o io");}
     elsif ($blast eq "blastn"){&safe_system  ("blastn -query $infile -db $db -outfmt 5 -word_size 4 -out io");}
 
     &set_blast_type ("io");
-    
+
 
     my %FB=&xml2tag_list ("io", "Iteration");
     open (F, ">$outfile");
@@ -612,7 +612,7 @@ sub blast_msa
 	    my $identity=$p{$b}{identity};
 	    my @lrQ=split (//,$p{$b}{Qseq});
 	    my @lrH=split (//,$p{$b}{Hseq});
-	    
+
 	    my $j= $s1{$hit}{order}+1;
 	    #if ( $j==$i){next;}
 	    printf F "# %d %d\n", $i, $j;
@@ -622,10 +622,10 @@ sub blast_msa
 		my $rQ=$lrQ[$c];
 		my $rH=$lrH[$c];
 		my $n=0;
-		
+
 		if ($rQ ne "-"){$n++, $Qstart++;}
 		if ($rH ne "-"){$n++; $Hstart++;}
-		
+
 		if ( $n==2)
 		  {
 		    printf F "\t%d %d %d\n", $Qstart-1, $Hstart-1,$identity;
@@ -654,9 +654,9 @@ sub blast_msa_old
     &safe_system ("formatdb -i $infile");
     &safe_system ("blastall -i $infile -d $infile -m7 -o io");
     &set_blast_type ("io");
-    
+
     %FB=&xml2tag_list ("io", "Iteration");
-    
+
     open (F, ">$outfile");
     print F "! TC_LIB_FORMAT_01\n";
     print F "$s{n}\n";
@@ -686,10 +686,10 @@ sub blast_msa_old
 		my $rQ=$lrQ[$c];
 		my $rH=$lrH[$c];
 		my $n=0;
-		
+
 		if ($rQ ne "-"){$n++, $Qstart++;}
 		if ($rH ne "-"){$n++; $Hstart++;}
-		
+
 		if ( $n==2)
 		  {
 		    printf F "\t%d %d %d\n", $Qstart-1, $Hstart-1,$identity;
@@ -700,7 +700,7 @@ sub blast_msa_old
     print F "! SEQ_1_TO_N\n";
     close (F);
     return $output;
-  
+
   }
 
 sub seq2msa
@@ -708,12 +708,12 @@ sub seq2msa
     my ($mode, $infile, $method, $param, $outfile,$database)=@_;
     &set_temporary_dir ("set",$infile,"seq.pep", $database, "db.pep");
     $param.=" >/dev/null 2>&1 ";
-    
-    
+
+
     #make sure test.pep is in FASTA
     &safe_system ("t_coffee -other_pg seq_reformat -in seq.pep -output fasta_seq > x");
     `mv x seq.pep`;
-    
+
     if ( $method eq "blastp")
       {
 	&blast_msa ("blastp","seq.pep",$database,"result.aln");
@@ -722,7 +722,7 @@ sub seq2msa
       {
 	&blast_msa ("blastn","seq.pep",$database,"result.aln");
       }
-    
+
     elsif ( $method eq "muscle")
       {
 	`muscle -in seq.pep -out result.aln $param`;
@@ -748,7 +748,7 @@ sub seq2msa
       {
 	`$method -infile=seq.pep -outfile=result.aln`;
       }
-    
+
     &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile);
     myexit ($EXIT_SUCCESS);
   }
@@ -763,13 +763,13 @@ sub seq2thread_pair
 	if (!$ENV{FUGUE_LIB_LIST}){$ENV{FUGUE_LIB_LIST}="DUMMY";}
 	if (!$ENV{HOMSTRAD_PATH})  {$ENV{HOMSTRAD_PATH}="DUMMY";}
 	if (!$ENV{HOMS_PATH}){$ENV{HOMS_PATH}="DUMMY";}
-	
+
 	`joy struc.pdb >x 2>x`;
 	&check_file("struc.tem", "Joy failed [FATAL:$PROGRAM/$method]");
 	`melody -t struc.tem >x 2>x`;
 	&check_file("struc.tem", "Melody failed [FATAL:$PROGRAM/$method]");
 	`fugueali -seq seq.pep -prf struc.fug -print > tmp_result.aln`;
-	
+
 	&check_file("tmp_result.aln", "Fugue failed [FATAL:$PROGRAM/$method]");
 	&safe_system ("t_coffee -other_pg seq_reformat -in tmp_result.aln -output fasta_aln >result.aln");
       }
@@ -789,7 +789,7 @@ sub seq2pdbid_pair
     my ($mode, $pdbfile1, $pdbfile2, $method, $param, $outfile)=@_;
     my ($name);
 
-    
+
     &set_temporary_dir ("set");
     $name=$pdbfile1." ".$pdbfile2;
 
@@ -801,13 +801,13 @@ sub seq2pdbid_pair
 	  {
 	    $pdbfile1=~/(....)(.)/;
 	    $id1=$1; $c1=$2;
-	    
+
 	    $pdbfile2=~/(....)(.)/;
 	    $id2=$1; $c2=$2;
-	    
+
 	    $command="t_coffee -other_pg dalilite.pl --pdb1 $id1 --chainid1 $c1 --pdb2 $id2 --chainid2 $c2 --email=$EMAIL  >dali_stderr 2>dali_stderr";
 	    $dali=`$command`;
-	    
+
 	    open (F, "dali_stderr");
 	    while (<F>)
 	      {
@@ -818,18 +818,18 @@ sub seq2pdbid_pair
 	      }
 	    close (F);
 	    unlink ("dali_stderr");
-	    
+
 	    $output1="dalilite-$jobid.txt";
 	    if ( -e $output1)
 	      {
 		unlink ($output1);
 		&url2file ("http://www.ebi.ac.uk/Tools/es/cgi-bin/jobresults.cgi/dalilite/dalilite-$jobid/aln.html", "output2");
-		
+
 		if ( -e "output2")
 		  {
 		    my ($seq1, $seq2);
 		    $seq1=$seq2="";
-		    
+
 		    open (F, "output2");
 		    while (<F>)
 		      {
@@ -864,7 +864,7 @@ sub seq2pdbid_pair
 sub seq2pdb_pair
   {
     my ($mode, $pdbfile1, $pdbfile2, $method, $param, $outfile)=@_;
-    
+
     &set_temporary_dir ("set",$pdbfile1,"pdb1.pdb",$pdbfile2,"pdb2.pdb");
     if ($method eq "t_coffee")
       {
@@ -876,7 +876,7 @@ sub seq2pdb_pair
 	  {
 	     my ($seq1, $seq2);
 	     $seq1=$seq2="";
-		    
+
 	     open (F, "tmp1");
 	     while (<F>)
 	       {
@@ -904,14 +904,14 @@ sub seq2pdb_pair
 	else
 	  {
 	    print "ERROR: DalLite failed to align the considered structures[tc_generic_method.pl]\n";
-	  }    
+	  }
       }
     elsif ( $method eq "TMalign")
       {
 	if ( &safe_system ("TMalign pdb1.pdb pdb2.pdb >tmp1")==$EXIT_SUCCESS)
 	  {
 	    `tail -4 tmp1 > tmp2`;
-	    
+
 	    open (F, "tmp2");
 	    while (<F>)
 	      {
@@ -959,47 +959,42 @@ sub seq2pdb_pair
   }
 
 sub seq2profile_pair
-  {
-    my ($mode, $profile1, $profile2, $method, $param, $outfile)=@_;
-    
-    
-    if ($method eq "clustalw")
-      {
-	&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
-	`clustalw -profile1=prf1.aln -profile2=prf2.aln -outfile=result.aln`;
-	&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);
-      }
-     elsif ( $method eq "clustalo")
-      {
-	
-	&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
-	recode_name ("prf1.aln", "code");
-	recode_name ("prf2.aln", "code");
-	
-	`clustalo --p1 prf1.aln --p2 prf2.aln -o result.aln --force`;
-	recode_name ("result.aln");
-	
-	&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);
-      }
-    elsif ( $method eq "hhalign")
-      {
-	hhalign ( $profile1,$profile2,$outfile,$param);
-      }
-    else
-      {
-	
-	`$method -profile1=prf1.aln -profile2=prf2.aln -outfile=result.aln $param>x 2>x`;
-      }
-   
-    myexit ($EXIT_SUCCESS);
-  }
+{
+	my ($mode, $profile1, $profile2, $method, $param, $outfile)=@_;
+
+
+	if ($method eq "clustalw")
+	{
+		&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
+		`clustalw -profile1=prf1.aln -profile2=prf2.aln -outfile=result.aln`;
+		&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);
+	}
+	elsif ( $method eq "clustalo")
+	{
+		&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
+		recode_name ("prf1.aln", "code");
+		recode_name ("prf2.aln", "code");
+		`clustalo --p1 prf1.aln --p2 prf2.aln -o result.aln --force`;
+		recode_name ("result.aln");
+		&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);
+	}
+	elsif ( $method eq "hhalign")
+	{
+		hhalign ( $profile1,$profile2,$outfile,$param);
+	}
+	else
+	{
+		`$method -profile1=prf1.aln -profile2=prf2.aln -outfile=result.aln $param>x 2>x`;
+	}
+	myexit ($EXIT_SUCCESS);
+}
 
 sub pg_is_installed
   {
     my @ml=@_;
     my ($r, $p, $m);
     my $supported=0;
-    
+
     my $p=shift (@ml);
     if ($p=~/::/)
       {
@@ -1011,7 +1006,7 @@ sub pg_is_installed
 	$r=`which $p 2>/dev/null`;
 	if ($r eq ""){$r=0;}
 	else {$r=1;}
-	
+
 	if ($r==0 && is_blast_package ($p)){return pg_is_installed ("legacy_blast.pl");}
 	else {return $r;}
       }
@@ -1027,18 +1022,18 @@ sub is_blast_package
     elsif ($p=~/formatdb/){return 1;}
     else {return 0;}
   }
-    
+
 sub check_internet_connection
   {
     my $internet;
     my $tmp;
-    &check_configuration ( "wget"); 
-    
+    &check_configuration ( "wget");
+
     $tmp=&vtmpnam ();
-    
+
     if     (&pg_is_installed    ("wget")){`wget www.google.com -O$tmp >/dev/null 2>/dev/null`;}
     elsif  (&pg_is_installed    ("curl")){`curl www.google.com -o$tmp >/dev/null 2>/dev/null`;}
-    
+
     if ( !-e $tmp || -s $tmp < 10){$internet=0;}
     else {$internet=1;}
     if (-e $tmp){unlink $tmp;}
@@ -1066,10 +1061,10 @@ sub set_temporary_dir
   {
     my @list=@_;
     my $dir_mode, $a, $mode, $method;
-  
+
     $dir_mode=shift (@list);
 
-    
+
     if ( $dir_mode eq "set")
       {
 	$initial_dir=cwd();
@@ -1083,7 +1078,7 @@ sub set_temporary_dir
 	    push (@TMPDIR_LIST, $tmp_dir);
 	    `mkdir $tmp_dir`;
 	  }
-	
+
 	for ( $a=0; $a<=$#list; $a+=2)
 	      {
 		if (-e $list[$a]){ `cp $list[$a] $tmp_dir/$list[$a+1]`;}
@@ -1094,7 +1089,7 @@ sub set_temporary_dir
       {
 	$mode=shift (@list);
 	$method=shift (@list);
-	
+
 	if (!-e $list[0])
 	  {
 	   myexit(flush_error("Program $method failed to produce $list[1]" ));
@@ -1130,7 +1125,7 @@ sub my_get_opt
   {
     my @list=@_;
     my $cl, $a, $argv, @argl;
-    
+
     @argl=();
     $cl=shift @list;
     for ( $a=0; $a<=$#list; $a+=3)
@@ -1141,14 +1136,14 @@ sub my_get_opt
 	$argv="";
 	if ($cl=~/$option(\S+)/){$argv=$1;}
 	@argl=(@argl,$argv);
-	
-	
+
+
 	#$optional:0=>optional
 	#$optional:1=>must be set
 	#$status: 0=>no requirement
 	#$status: 1=>must be an existing file
 	#$status: 2=>must be an installed package
-	
+
 
 	if ($optional==0){;}
 	elsif ( $optional==1 && $argv eq "")
@@ -1172,7 +1167,7 @@ sub my_get_opt
     return @argl;
     }
 
-sub check_file 
+sub check_file
   {
     my ($file, $msg)=@_;
 
@@ -1185,14 +1180,14 @@ sub hhalign
   {
     my ($aln1, $aln2, $outfile, $param)=@_;
     my $h1, $h2;
-    
+
     $h{0}{index}=0;
     $h{1}{index}=1;
-    
+
     $h{0}{aln}=$aln1;
     $h{1}{aln}=$aln2;
 
-   
+
 
     %{$h{0}}=aln2psi_profile (%{$h{0}});
     %{$h{1}}=aln2psi_profile (%{$h{1}});
@@ -1200,24 +1195,24 @@ sub hhalign
     $param=~s/#S/ /g;
     $param=~s/#M/\-/g;
     $param=~s/#E/\=/g;
-    
 
-    
+
+
     $command="hhalign -i $h{0}{a3m} -t $h{1}{a3m} -tc $outfile.tmp -rank 1 -mapt 0 $param";
     `$command`;
-    
+
   #  `hhalign -i $h{0}{a3m} -t $h{1}{a3m} -tc $outfile.tmp -rank 1 -mapt 0 -gapf 0.8 -gapg 0.8`;
-    
+
 
     # To run global use the following
-    
+
     open (I, "$outfile.tmp");
     open (O, ">$outfile");
     $h{0}{cons}=s/\./x/g;
     $h{1}{cons}=s/\./x/g;
 
     print O "! TC_LIB_FORMAT_01\n2\n$h{0}{name} $h{0}{len} $h{0}{seq}\n$h{1}{name} $h{1}{len} $h{1}{seq}\n#1 2\n";
-    
+
     while (<I>)
       {
 	if (/(\d+)\s+(\d+)\s+(\d+)/)
@@ -1235,15 +1230,15 @@ sub aln2psi_profile
   {
     my (%h)=@_;
     my ($aln,$i,$hv, $a, @c, $n);
-   
-    
+
+
     $i=$h{index};
     $aln=$h{aln};
-    
+
     `cp $aln $$.hhh_aln`;
     $command="t_coffee -other_pg seq_reformat -in $aln -output hasch";
     $hv=`$command`;chomp ($hv);
-    
+
     $h{a2m}="$tmp/$hv.tmp4hhpred.a2m";
     $h{a3m}="$tmp/$hv.tmp4hhpred.a3m";
     if ( -e $h{a3m}){;}
@@ -1256,7 +1251,7 @@ sub aln2psi_profile
 	    print STDERR "Program tc_generic_method.pl FAILED to run:\n\thhconsensus  -M 50 -i $h{aln} -oa2m $h{a2m}";
 	    myexit ($EXIT_FAILURE);
 	  }
-	
+
 	`hhconsensus  -M 50 -i $h{aln} -oa3m $h{a3m}`;
 	if (!-e $h{a3m})
 	  {
@@ -1265,14 +1260,14 @@ sub aln2psi_profile
 	  }
        `buildali.pl $h{a3m} -n 1`;
       }
-    
-    
+
+
     $h{a2m_seq}=`head -n 2 $h{a2m} | grep -v ">"`;chomp ($h{a2m_seq});
     $h{a3m_seq}=`head -n 2 $h{a3m} | grep -v ">"`;chomp ($h{a3m_seq});
     $h{cons}=$h{a2m_seq};
     $h{seq}=`head -n 2 $h{aln} | grep -v ">"`;chomp ($h{seq});
-    
-    
+
+
 
     @c=split (//, $h{cons});
     $h{len}=$#c+1;
@@ -1288,19 +1283,19 @@ sub aln2psi_profile
 	    ++$b;
 	  }
       }
-    
+
     $name=`head -n 2 $h{aln} | grep ">"`;
     $name=~/\>(\S+)/;
     $h{name}=$1;
-    
+
     `cp $h{a2m} $i.a2m`;
     `cp $h{a3m} $i.a3m`;
     `cp $h{aln} $i.hh_aln`;
-    
+
     return %h;
   }
 
-sub read_fasta_seq 
+sub read_fasta_seq
   {
     my $f=@_[0];
     my %hseq;
@@ -1314,15 +1309,15 @@ sub read_fasta_seq
       }
     close (F);
 
-    
+
     @name=($s=~/>(\S*).*\n[^>]*/g);
-    
+
     @seq =($s=~/>.*.*\n([^>]*)/g);
     @com =($s=~/>\S*(.*)\n([^>]*)/g);
 
-    
+
     $nseq=$#name+1;
-    
+
     for ($a=0; $a<$nseq; $a++)
       {
 	my $s;
@@ -1332,41 +1327,79 @@ sub read_fasta_seq
 	$hseq{$n}{order}=$a;
 	$hseq{$n}{seq}=$seq[$a];
 	$hseq{$n}{com}=$com[$a];
-	
+
       }
     return %hseq;
   }
+
+
+sub read_fasta_aln
+  {
+    my $f=@_[0];
+    my %hseq;
+    my (@seq, @com, @name);
+    my ($a, $s,$nseq);
+
+    open (F, $f);
+    while (<F>)
+      {
+	$s.=$_;
+      }
+    close (F);
+
+
+    @name=($s=~/>(\S*).*\n[^>]*/g);
+
+    @seq =($s=~/>.*.*\n([^>]*)/g);
+    @com =($s=~/>\S*(.*)\n([^>]*)/g);
+
+
+    $nseq=$#name+1;
+
+    for ($a=0; $a<$nseq; $a++)
+      {
+	my $s;
+	my $n=$name[$a];
+	$hseq{$n}{name}=$n;
+	$seq[$a]=~s/[^A-Za-z-]//g;
+	$hseq{$n}{order}=$a;
+	$hseq{$n}{seq}=$seq[$a];
+	$hseq{$n}{com}=$com[$a];
+
+      }
+    return %hseq;
+  }
+
 sub recode_name
-    {
-      my ($in)=shift;
-      my $mode=shift;
-      my $f=new FileHandle;
-      
-      my %seq;
-      my $new_name;
-      
-      if (! -e $in){return;}
-      
-      #needed by ClustalOmega to avoid very long names
-      %seq=read_fasta_seq ($in);
-      
-      open ($f, ">$out");
-      foreach my $s (keys(%seq))
+{
+	my ($in)=shift;
+	my $mode=shift;
+	my $f=new FileHandle;
+	my %seq;
+	my $new_name;
+
+	if (! -e $in){return;}
+
+	#needed by ClustalOmega to avoid very long names
+	%seq=read_fasta_aln ($in);
+
+	open ($f, ">$in");
+	foreach my $s (keys(%seq))
 	{
-	  if ($mode eq "code")
-	    {
-	      $new_name=++$RECODE_N;
-	      $RECODE {$recode_nameN}=$seq{$s}{name};
-	    }
-	  else
-	    {	      
-	      $new_name=$RECODE{$seq{$s}{name}};
-	    }
-	  print $f ">$new_name\n$seq{$s}{seq}\n";
+		if ($mode eq "code")
+		{
+			$new_name=++$RECODE_N;
+			$RECODE {$new_name}=$seq{$s}{name};
+		}
+		else
+		{
+			$new_name=$RECODE{$seq{$s}{name}};
+		}
+		print $f ">$new_name\n$seq{$s}{seq}\n";
 	}
-      close $f;
-    }
-    
+	close $f;
+}
+
 sub fasta_hash2index_hash
   {
     my %s1=@_;
@@ -1381,15 +1414,15 @@ sub fasta_hash2index_hash
       }
     return %s;
   }
-sub file_contains 
+sub file_contains
   {
     my ($file, $tag, $max)=(@_);
     my ($n);
     $n=0;
-    
+
     if ( !-e $file && ($file =~/$tag/)) {return 1;}
     elsif ( !-e $file){return 0;}
-    else 
+    else
       {
 	open (FC, "$file");
 	while ( <FC>)
@@ -1410,8 +1443,8 @@ sub file_contains
     close (FC);
     return 0;
   }
-	    
-	  
+
+
 sub file2string
   {
     my $f=@_[0];
@@ -1435,7 +1468,7 @@ sub my_get_opt
   {
     my @list=@_;
     my $cl, $a, $argv, @argl;
-    
+
     @argl=();
     $cl=shift @list;
     for ( $a=0; $a<=$#list; $a+=3)
@@ -1446,55 +1479,55 @@ sub my_get_opt
 	$argv="";
 	if ($cl=~/$option(\S+)/){$argv=$1;}
 	@argl=(@argl,$argv);
-	
-	
+
+
 	#$optional:0=>optional
 	#$optional:1=>must be set
 	#$status: 0=>no requirement
 	#$status: 1=>must be an existing file
 	#$status: 2=>must be an installed package
-	
+
 
 	if ($optional==0){;}
 	elsif ( $optional==1 && $argv eq "")
 	  {
 
 	    myexit(flush_error("Option $option must be set"));
-	   
+
 	  }
 	if ($status==0){;}
 	elsif ($status ==1 && $argv ne "" && !-e $argv)
 	  {
 	     myexit(flush_error("File $argv must exist"));
-	   
+
 	  }
 	elsif ( $status==2 && $argv ne "" && &check_pg_is_installed ($argv)==0)
 	  {
 	    myexit(flush_error("$argv is not installed"));
-	   
+
 	  }
       }
 
     return @argl;
     }
 
-sub tag2value 
+sub tag2value
   {
-    
+
     my $tag=(@_[0]);
     my $word=(@_[1]);
     my $return;
-    
+
     $tag=~/$word="([^"]+)"/;
     $return=$1;
     return $return;
   }
-      
+
 sub hit_tag2pdbid
   {
     my $tag=(@_[0]);
     my $pdbid;
-       
+
     $tag=~/id="(\S+)"/;
     $pdbid=$1;
     $pdbid=~s/_//;
@@ -1504,17 +1537,17 @@ sub id2pdbid
   {
     my $in=@_[0];
     my $id;
-    
+
     $in=~/(\S+)/;
     $id=$in;
     $id=~s/PDB/pdb/g;
-    
+
     if ($id =~/pdb(.*)/){$id=$1;}
     elsif ( $id=~/(\S+)\s+mol:protein/){$id=$1;}
     $id=~s/[:|��_]//g;
     return $id;
   }
-sub set_blast_type 
+sub set_blast_type
   {
     my $file =@_[0];
     if (&file_contains ($file,"EBIApplicationResult",100)){$BLAST_TYPE="EBI";}
@@ -1529,11 +1562,11 @@ sub is_valid_blast_xml
     {
       my $file=shift;
       my $line;
-      
-      
+
+
       if ( !-e $file) {return 0;}
       $line=&file2tail ($file,100);
-      
+
       if ( $line=~/<\/EBIApplicationResult/ || $line=~/<\/NCBI_BlastOutput/ || $line=~/<\/BlastOutput/ ){return 1;}
       return 0;
     }
@@ -1544,16 +1577,16 @@ sub file2blast_flavor
 	elsif (&file_contains ($file,"NCBI_BlastOutput",100)){return "NCBI";}
 	else {return "UNKNOWN";}
       }
-sub blast_xml2profile 
+sub blast_xml2profile
   {
     my ($name,$seq,$maxid, $minid, $mincov, $file)=(@_);
     my (%p, $a, $string, $n);
-    
-    
+
+
 
     if ($BLAST_TYPE eq "EBI" || &file_contains ($file,"EBIApplicationResult",100)){%p=ebi_blast_xml2profile(@_);}
     elsif ($BLAST_TYPE eq "NCBI" || &file_contains ($file,"NCBI_BlastOutput",100)){%p=ncbi_blast_xml2profile(@_);}
-    else 
+    else
       {
 	myexit(add_error ( $$,$$,getppid(), "BLAST_FAILURE::unkown XML",$CL));
       }
@@ -1565,17 +1598,17 @@ sub blast_xml2profile
       }
     return %p;
   }
-sub ncbi_tblastx_xml2lib_file 
+sub ncbi_tblastx_xml2lib_file
   {
     my  ($outlib,$string)=(@_);
     my ($L,$l, $a,$b,$c,$d,$i,$nhits,@identifyerL);
     my (%ITERATION);
-      
+
     open (F, ">>$outlib");
-    
+
     $seq=~s/[^a-zA-Z]//g;
     $L=length ($seq);
-    
+
     %ITERATION=xml2tag_list ($string, "Iteration");
     for ($i=0; $i<$ITERATION{n};$i++)
       {
@@ -1590,20 +1623,20 @@ sub ncbi_tblastx_xml2lib_file
 	  {
 	    my ($string);
 	    $string=$hit{$a}{body};
-	 
+
 	    $hindex=xmltag2value($string,"Hit_accession")+1;
 	    if ($hindex<=$qindex){next;}
 	    else  {print F  "# $qindex $hindex\n";}
-		   
-	   
+
+
 	    $hlen=xmltag2value  ($string,"Hit_len");
 	    %HSP=&xml2tag_list  ($string, "Hsp");
-	   
+
 	    for ($b=0; $b<$HSP{n}; $b++)
 	      {
 		my ($string, $qs,$qe,$qf,$hs,$he,$hf,$s, $d, $e);
 		$string=$HSP{$b}{body};
-	
+
 		$qs=xmltag2value  ($string,"Hsp_query-from");
 		$qe=xmltag2value  ($string,"Hsp_query-to");
 		$qf=xmltag2value  ($string,"Hsp_query-frame");
@@ -1611,11 +1644,11 @@ sub ncbi_tblastx_xml2lib_file
 		$hs=xmltag2value  ($string,"Hsp_hit-from");
 		$he=xmltag2value  ($string,"Hsp_hit-to");
 		$hf=xmltag2value  ($string,"Hsp_hit-frame");
-		
+
 		$s=xmltag2value  ($string,"Hsp_identity");
 		$l=xmltag2value  ($string,"Hsp_align-len");
 		$s=int(($s*100)/$l);
-		
+
 		if ($qf>0)
 		  {$rqs=$qs; $rqe=$qe;}
 		else
@@ -1623,7 +1656,7 @@ sub ncbi_tblastx_xml2lib_file
 		    $rqe=($qlen-$qs)+1;
 		    $rqs=($qlen-$qe)+1;
 		  }
-		
+
 		if ($hf>0)
 		  {$rhs=$hs; $rhe=$he;}
 		else
@@ -1642,22 +1675,22 @@ sub ncbi_tblastx_xml2lib_file
 	  }
       }
     print F "! SEQ_1_TO_N\n";
-    
+
     close (F);
     return %lib;
   }
 
-sub ncbi_tblastpx_xml2lib_file 
+sub ncbi_tblastpx_xml2lib_file
   {
     my  ($outlib,$string,%s)=(@_);
     my ($L,$l, $a,$b,$c,$d,$i,$nhits,@identifyerL);
     my (%ITERATION,%hdes, %qdes);
-      
+
     open (F, ">>$outlib");
-    
+
     $seq=~s/[^a-zA-Z]//g;
     $L=length ($seq);
-    
+
     %ITERATION=xml2tag_list ($string, "Iteration");
     for ($i=0; $i<$ITERATION{n};$i++)
       {
@@ -1677,37 +1710,37 @@ sub ncbi_tblastpx_xml2lib_file
 	    %hdes=&tblastpx_name2description($hdef,%s);
 	    if ($hdes{index}<=$qdes{index}){next;}
 	    else  {print F  "# $qdes{index} $hdes{index}\n";}
-		   
-	   
+
+
 	    $hlen=xmltag2value  ($string,"Hit_len");
 	    %HSP=&xml2tag_list  ($string, "Hsp");
-	   
+
 	    for ($b=0; $b<$HSP{n}; $b++)
 	      {
 		my ($string, $l,$qs,$qe,$qf,$hs,$he,$hf,$s, $d, $e, @s1, @s2);
 		$string=$HSP{$b}{body};
-	
+
 		$qs=xmltag2value  ($string,"Hsp_query-from");
 		$qe=xmltag2value  ($string,"Hsp_query-to");
 		$qf=$qdes{frame};
 		$qseq=xmltag2value  ($string,"Hsp_qseq");
-		
+
 		$hs=xmltag2value  ($string,"Hsp_hit-from");
 		$he=xmltag2value  ($string,"Hsp_hit-to");
 		$hf=$hdes{frame};
 		$hseq=xmltag2value  ($string,"Hsp_hseq");
-		
+
 		$s=xmltag2value  ($string,"Hsp_identity");
 		$l=xmltag2value  ($string,"Hsp_align-len");
 		$s=int(($s*100)/$l);
 		@s1=tblastpx_hsp2coordinates($qseq,$qs,$qe,%qdes);
 		@s2=tblastpx_hsp2coordinates($hseq,$hs,$he,%hdes);
-		
-		
+
+
 		for ($f=0; $f<=$#s1; $f++)
 		  {
 		    if ($s1[$f]==-1 || $s2[$f]==-1){next;}
-		    else 
+		    else
 		      {
 			print F " $s1[$f] $s2[$f] $s 0\n";
 		      }
@@ -1716,7 +1749,7 @@ sub ncbi_tblastpx_xml2lib_file
 	  }
       }
     print F "! SEQ_1_TO_N\n";
-    
+
     close (F);
     return %lib;
   }
@@ -1726,12 +1759,12 @@ sub tblastpx_hsp2coordinates
     my @list;
     my @sa;
     my @gap=(-1,-1,-1);
-    
+
     $s=$des{start}+3*($s-1);
-  
+
     if ($des{strand} eq "d"){;}
     else {$s=($des{length}-$s)+1;}
-    
+
     foreach $c (split (//,$seq))
       {
 	if ( $c eq '-'){push (@list,@gap);}
@@ -1755,51 +1788,51 @@ sub tblastpx_name2description
 
     $des{name}=$at[0];
     $des{strand}=$at[1];
-    
+
     $des{start}=$at[2];
     $des{end}=$at[3];
     $des{length}=$at[4];
     $des{index}=$s{$at[0]}{order}+1;
     return %des;
-  }  
-sub ncbi_blast_xml2profile 
+  }
+sub ncbi_blast_xml2profile
   {
     my ($name,$seq,$maxid, $minid, $mincov, $string)=(@_);
     my ($L,$l, $a,$b,$c,$d,$nhits,@identifyerL);
-    
-    
+
+
     $seq=~s/[^a-zA-Z]//g;
     $L=length ($seq);
-   
-    #This is causing the NCBI parser to fail when Iteration_query-def is missing 
+
+    #This is causing the NCBI parser to fail when Iteration_query-def is missing
     #%query=&xml2tag_list ($string, "Iteration_query-def");
     #$name=$query{0}{body};
-    
+
     %hit=&xml2tag_list ($string, "Hit");
-    
-    
+
+
     for ($nhits=0,$a=0; $a<$hit{n}; $a++)
       {
 	my ($ldb,$id, $identity, $expectation, $start, $end, $coverage, $r);
 	my (%ID,%DE,%HSP);
-	
+
 	$ldb="";
 
 	%ID=&xml2tag_list ($hit{$a}{body}, "Hit_id");
 	$identifyer=$ID{0}{body};
-	
+
 	%DE=&xml2tag_list ($hit{$a}{body}, "Hit_def");
 	$definition=$DE{0}{body};
-	
+
 	%HSP=&xml2tag_list ($hit{$a}{body}, "Hsp");
 	for ($b=0; $b<$HSP{n}; $b++)
 	  {
 	    my (%START,%END,%E,%I,%Q,%M);
 
-	 
+
 	    %START=&xml2tag_list ($HSP{$b}{body}, "Hsp_query-from");
 	    %HSTART=&xml2tag_list ($HSP{$b}{body}, "Hsp_hit-from");
-	    
+
 	    %LEN=  &xml2tag_list ($HSP{$b}{body}, "Hsp_align-len");
 	    %END=  &xml2tag_list ($HSP{$b}{body}, "Hsp_query-to");
 	    %HEND=  &xml2tag_list ($HSP{$b}{body}, "Hsp_hit-to");
@@ -1807,22 +1840,22 @@ sub ncbi_blast_xml2profile
 	    %I=&xml2tag_list     ($HSP{$b}{body}, "Hsp_identity");
 	    %Q=&xml2tag_list     ($HSP{$b}{body}, "Hsp_qseq");
 	    %M=&xml2tag_list     ($HSP{$b}{body}, "Hsp_hseq");
-	    
+
 	    for ($e=0; $e<$Q{n}; $e++)
 
 	      {
 		$qs=$Q{$e}{body};
 		$ms=$M{$e}{body};
-		
+
 		$expectation=$E{$e}{body};
 		$identity=($LEN{$e}{body}==0)?0:$I{$e}{body}/$LEN{$e}{body}*100;
 		$start=$START{$e}{body};
 		$end=$END{$e}{body};
 		$Hstart=$HSTART{$e}{body};
 		$Hend=$HEND{$e}{body};
-	
+
 		$coverage=($L)?(($end-$start)*100)/$L:0;
-	
+
 		if ($identity>$maxid || $identity<$minid || $coverage<$mincov){next;}
 		@lr1=(split (//,$qs));
 		@lr2=(split (//,$ms));
@@ -1833,7 +1866,7 @@ sub ncbi_blast_xml2profile
 		    $r=$lr1[$c];
 		    if ( $r=~/[A-Za-z]/)
 		      {
-			
+
 			$p[$nhits][$d + $start-1]=$lr2[$c];
 			$d++;
 		      }
@@ -1851,17 +1884,17 @@ sub ncbi_blast_xml2profile
 	      }
 	  }
       }
-    
-    
+
+
     $profile{n}=0;
     $profile{$profile{n}}{name}=$name;
     $profile{$profile{n}}{seq}=$seq;
     $profile {n}++;
-    
+
     for ($a=0; $a<$nhits; $a++)
       {
 	$n=$a+1;
-	
+
 	$profile{$n}{name}="$name\_$a";
 	$profile{$n}{seq}="";
 	$profile{$n}{Qseq}=$Qseq[$a];
@@ -1885,59 +1918,59 @@ sub ncbi_blast_xml2profile
 	      }
 	  }
       }
-    
+
     $profile{n}=$nhits+1;
     return %profile;
   }
-sub ebi_blast_xml2profile 
+sub ebi_blast_xml2profile
   {
     my ($name,$seq,$maxid, $minid, $mincov, $string)=(@_);
     my ($L,$l, $a,$b,$c,$d,$nhits,@identifyerL,$identifyer);
-    
 
-    
+
+
     $seq=~s/[^a-zA-Z]//g;
     $L=length ($seq);
     %hit=&xml2tag_list ($string, "hit");
-    
+
     for ($nhits=0,$a=0; $a<$hit{n}; $a++)
       {
 	my ($ldb,$id, $identity, $expectation, $start, $end, $coverage, $r);
 	my (%Q,%M,%E,%I);
-	
+
 	$ldb=&tag2value ($hit{$a}{open}, "database");
 	$identifyer=&tag2value ($hit{$a}{open}, "id");
 
 	$description=&tag2value ($hit{$a}{open}, "description");
-	
+
 	%Q=&xml2tag_list ($hit{$a}{body}, "querySeq");
 	%M=&xml2tag_list ($hit{$a}{body}, "matchSeq");
 	%E=&xml2tag_list ($hit{$a}{body}, "expectation");
 	%I=&xml2tag_list ($hit{$a}{body}, "identity");
-	
+
 
 	for ($b=0; $b<$Q{n}; $b++)
 	  {
 
 	    $qs=$Q{$b}{body};
 	    $ms=$M{$b}{body};
-	    
+
 	    $expectation=$E{$b}{body};
 	    $identity=$I{$b}{body};
-	    
-	    	    
+
+
 	    $start=&tag2value ($Q{$b}{open}, "start");
 	    $end=&tag2value ($Q{$b}{open}, "end");
 	    $startM=&tag2value ($M{$b}{open}, "start");
 	    $endM=&tag2value ($M{$b}{open}, "end");
 	    $coverage=(($end-$start)*100)/$L;
-	    
+
 	   # print "$id: ID: $identity COV: $coverage [$start $end]\n";
-	    
+
 	    if ($identity>$maxid || $identity<$minid || $coverage<$mincov){next;}
 	    # print "KEEP\n";
 
-	    
+
 	    @lr1=(split (//,$qs));
 	    @lr2=(split (//,$ms));
 	    $l=$#lr1+1;
@@ -1947,12 +1980,12 @@ sub ebi_blast_xml2profile
 		$r=$lr1[$c];
 		if ( $r=~/[A-Za-z]/)
 		  {
-		    
+
 		    $p[$nhits][$d + $start-1]=$lr2[$c];
 		    $d++;
 		  }
 	      }
-	  
+
 	    $Qseq[$nhits]=$qs;
 	    $Hseq[$nhits]=$ms;
 	    $QstartL[$nhits]=$start;
@@ -1965,12 +1998,12 @@ sub ebi_blast_xml2profile
 	    $nhits++;
 	  }
       }
-    
+
     $profile{n}=0;
     $profile{$profile{n}}{name}=$name;
     $profile{$profile{n}}{seq}=$seq;
     $profile {n}++;
-    
+
     for ($a=0; $a<$nhits; $a++)
       {
 	$n=$a+1;
@@ -1981,7 +2014,7 @@ sub ebi_blast_xml2profile
 	$profile{$n}{Qstart}=$QstartL[$a];
 	$profile{$n}{Hstart}=$HstartL[$a];
 	$profile{$n}{identity}=$identityL[$a];
-	$profile{$n}{definition}=$definitionL[$a];	
+	$profile{$n}{definition}=$definitionL[$a];
 	$profile{$n}{identifyer}=$identifyerL[$a];
 	$profile{$n}{comment}=$comment[$a];
 
@@ -1998,7 +2031,7 @@ sub ebi_blast_xml2profile
 	  }
       }
     $profile{n}=$nhits+1;
-    
+
     return %profile;
   }
 sub output_profile
@@ -2008,7 +2041,7 @@ sub output_profile
     my %profile=%$profileR;
     my $P= new FileHandle;
     my $tmp=vtmpnam();
-    
+
     open ($P, ">$tmp");
     for ($a=0; $a<$profile{n}; $a++)
       {
@@ -2038,13 +2071,13 @@ sub xmltag2value
     %TAG=xml2tag_list ($string_in, $tag);
     return $TAG{0}{body};
   }
-      
-sub xml2tag_list  
+
+sub xml2tag_list
   {
     my ($string_in,$tag)=@_;
     my $tag_in, $tag_out;
     my %tag;
-    
+
     if (-e $string_in)
       {
 	$string=&file2string ($string_in);
@@ -2063,26 +2096,26 @@ sub xml2tag_list
     @l=($string=~/(\<[^>]+\>)/g);
     $tag{n}=0;
     $in=0;$n=-1;
-  
- 
+
+
 
     foreach $t (@l)
       {
 
 	$t=~s/<#//;
 	$t=~s/#>//;
-	
+
 	if ( $t=~/$tag_in1/ || $t=~/$tag_in2/)
 	  {
-	 
+
 	    $in=1;
 	    $tag{$tag{n}}{open}=$t;
 	    $n++;
-	    
+
 	  }
 	elsif ($t=~/$tag_out/)
 	  {
-	    
+
 
 	    $tag{$tag{n}}{close}=$t;
 	    $tag{n}++;
@@ -2090,27 +2123,27 @@ sub xml2tag_list
 	  }
 	elsif ($in)
 	  {
-	   
+
 	    $tag{$tag{n}}{body}.=$t;
 	  }
       }
-  
+
     return %tag;
   }
 
 
-sub seq2gor_prediction 
+sub seq2gor_prediction
   {
     my ($name, $seq,$infile, $outfile, $gor_seq, $gor_obs)=(@_);
     my ($l);
-    
+
     `gorIV -prd $infile -seq $gor_seq -obs $gor_obs > gor_tmp`;
     open (GR, ">$outfile");
     open (OG, "gor_tmp");
 
     while (<OG>)
       {
-	
+
 	$l=$_;
 	if ($l=~/\>/){print GR "$l";}
 	elsif ( $l=~/Predicted Sec. Struct./)
@@ -2123,7 +2156,7 @@ sub seq2gor_prediction
     close (OG);
     return;
   }
-sub seq2msa_tm_prediction 
+sub seq2msa_tm_prediction
   {
     my ($name, $seq, $db, $infile, $outfile, $arch, $psv)=(@_);
     my (%p,%gseq,%R, $blast_output, %s, $l);
@@ -2131,9 +2164,9 @@ sub seq2msa_tm_prediction
     my $db="uniprot";
     my $method="psitm";
     my $SERVER="EBI";
-    
+
     $blast_output=&run_blast ($name,"blastp", $db, $infile, "outfile");
-    
+
     if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER))
       {
 	print "\tPSITM: USE Cache\n";
@@ -2143,13 +2176,13 @@ sub seq2msa_tm_prediction
       {
 	$CACHE_STATUS="COMPUTE CACHE";
 	%p=blast_xml2profile($name,$seq,$maxid, $minid,$mincov,$blast_output);
-	
-	
+
+
 	open (F, ">tm_input");
 	for (my $a=0; $a<$p{n}; $a++)
 	  {
 	    my $s;
-	    
+
 	    $s=$p{$a}{seq};
 	    $s=uc($s);
 	    print F ">$p{$a}{name}\n$s\n";
@@ -2165,7 +2198,7 @@ sub seq2msa_tm_prediction
   }
 
 
-sub seq2msa_gor_prediction 
+sub seq2msa_gor_prediction
   {
     my ($name, $seq,$infile, $outfile, $gor_seq, $gor_obs)=(@_);
     my (%p,%gseq,%R, $blast_output, %s, $l);
@@ -2173,9 +2206,9 @@ sub seq2msa_gor_prediction
     my $db="uniprot";
     my $method="psigor";
     my $SERVER="EBI";
-    
+
     $blast_output=&run_blast ($name,"blastp", "uniprot", $infile, "outfile");
-    
+
     if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER))
       {
 	print "\tPSIGOR: USE Cache\n";
@@ -2185,13 +2218,13 @@ sub seq2msa_gor_prediction
       {
 	$CACHE_STATUS="COMPUTE CACHE";
 	%p=blast_xml2profile($name,$seq,$maxid, $minid,$mincov,$blast_output);
-	
-	
+
+
 	open (F, ">gor_input");
 	for (my $a=0; $a<$p{n}; $a++)
 	  {
 	    my $s;
-	    
+
 	    $s=$p{$a}{seq};
 	    $s=uc($s);
 	    print F ">$p{$a}{name}\n$s\n";
@@ -2213,7 +2246,7 @@ sub run_blast
     my ($name, $method, $db, $infile, $outfile, $run)=(@_);
     if (!$run){$run=1;}
     my $error_log=vtmpnam();
-    
+
     if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER) && is_valid_blast_xml ($outfile))
       {return $outfile;}
     else
@@ -2222,7 +2255,7 @@ sub run_blast
 	if ( $SERVER eq "EBI_SOAP")
 	  {
 	    &check_configuration ("EMAIL","SOAP::Light","INTERNET");
-	    
+
 	    $cl_method=$method;
 	    if ($cl_method =~/wu/)
 	      {
@@ -2232,7 +2265,7 @@ sub run_blast
 		    add_warning($$,$$,"PSI BLAST cannot be used with the wuBLAST Client. Use server=EBI Or server=LOCAL. blastp will be used instead");
 		    $cl_method="blastp";
 		  }
-		
+
 		$command="t_coffee -other_pg wublast.pl --email $EMAIL $infile -D $db -p $cl_method --outfile $outfile -o xml>/dev/null 2>$error_log";
 		&safe_system ( $command);
 		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
@@ -2240,29 +2273,29 @@ sub run_blast
 	    else
 	      {
 		if ($cl_method eq "psiblast"){$cl_method ="blastp -j5";}
-		
+
 		$command="t_coffee -other_pg blastpgp.pl --email $EMAIL $infile -d $db --outfile $outfile -p $cl_method --mode PSI-Blast>/dev/null 2>$error_log";
 		&safe_system ( $command);
-		
+
 		if (-e "$outfile.xml") {`mv $outfile.xml $outfile`;}
 	      }
 	  }
 	elsif ($SERVER eq "EBI_REST" || $SERVER eq "EBI")
 	  {
-	    
+
 	    $cl_method=$method;
 	    &check_configuration("EMAIL","XML::Simple", "INTERNET");
 	    if ($db eq "uniprot"){$db1="uniprotkb";}
 	    else {$db1=$db;}
-	    
+
 
 	    if ($cl_method =~/wu/)
 	      {
 		$cl_method=~s/wu//;
 		if ( $cl_method eq "psiblast"){$cl_method="blastp";}
-		
+
 		$command="t_coffee -other_pg wublast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 7 --stype protein $infile>/dev/null 2>error_log";
-		
+
 	      }
 	    else
 	      {
@@ -2280,7 +2313,7 @@ sub run_blast
 	    &check_configuration ("blastcl3","INTERNET");
 	    if ($db eq "uniprot"){$cl_db="nr";}
 	    else {$cl_db=$db;}
-	    
+
 	    if ( $method eq "psiblast")
 	      {
 		add_warning($$,$$,"PSI BLAST cannot be used with the NCBI BLAST Client. Use server=EBI Or server=LOCAL. blastp will be used instead");
@@ -2310,7 +2343,7 @@ sub run_blast
 	  }
 	elsif ( $SERVER eq "LOCAL")
 	  {
-	    
+
 	    if ($ENV{"BLAST_DB_DIR"})
 	      {
 		$x=$ENV{"BLAST_DB_DIR"};
@@ -2320,7 +2353,7 @@ sub run_blast
 	      {
 		$cl_db=$db;
 	      }
-	    
+
 	    if ($method eq "blastp")
 	      {
 		&check_configuration("blastpgp");
@@ -2335,21 +2368,21 @@ sub run_blast
 	      {
 		&check_configuration("blastall");
 		$command="blastall -p blastn -d $cl_db -i $infile -o $outfile -m7 -W6";
-	      }	
+	      }
 	    &safe_system ($command);
 	  }
 	else
 	  {
-	    
+
 	    myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::UnknownServer",$CL));
 	  }
-	
+
 
 	#Check that everything went well
-	
+
 	if ( !-e $outfile || !&is_valid_blast_xml($outfile))
 	  {
-	    
+
 	    if ( -e $outfile)
 	      {
 		add_warning ($$,$$,"Corrupted Blast Output (Run $run)");
@@ -2357,17 +2390,17 @@ sub run_blast
 	      }
 	    if ( -e $error_log)
 	      {
-		
+
 		my $error_msg=file2string ($error_log);
-		
+
 		if ( $error_msg =~/enter a valid email/)
 		  {
-		    myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::Invalid_or_rejected_email::$EMAIL", "$command"));  
+		    myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::Invalid_or_rejected_email::$EMAIL", "$command"));
 		  }
 	      }
 	    if ( $run==$BLAST_MAX_NRUNS)
 	      {
-	
+
 		myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "BLAST_FAILURE::UnknownReason", "$command"));
 	      }
 	    else
@@ -2382,7 +2415,7 @@ sub run_blast
 		return $out;
 	      }
 	  }
-	
+
 	&cache_file("SET",$infile,$name,$method,$db,$outfile,$SERVER);
 	#system ("cp $outfile ~/Dropbox/tmp/cedric.out");
 	#die;
@@ -2404,13 +2437,13 @@ sub cache_file
       }
     $cache_file_sh="$name.$method.$db.$server.tmp";
     $cache_file="$CACHE/$name.$method.$db.$server.tmp";
-    
+
     if ($infile ne "")
       {
 	$cache_file_infile_sh="$name.$method.$db.$server.infile.tmp";
 	$cache_file_infile="$CACHE/$name.$method.$db.$server.infile.tmp";
       }
-    
+
     if ($cache_mode eq "GET")
       {
 	if ($CACHE eq "" || $CACHE eq "no" || $CACHE eq "ignore"  || $CACHE eq "local" || $CACHE eq "update"){return 0;}
@@ -2459,20 +2492,20 @@ sub file1_eq_file2
     elsif ( !-e $f1){return 0;}
     elsif ( !-e $f2){return 0;}
     elsif ($f1 eq "" || $f2 eq "" || `diff $f1 $f2` eq ""){return 1;}
-    
+
     return 0;
   }
-sub clean_file_name 
+sub clean_file_name
   {
     my $name=@_[0];
-    
+
     $name=~s/[^A-Za-z1-9.-]/_/g;
     return $name;
   }
 sub url2file
   {
     my ($address, $out)=(@_);
-    
+
     if (&pg_is_installed ("wget"))
 	{
 	  return &safe_system ("wget $address -O$out >/dev/null 2>/dev/null");
@@ -2496,19 +2529,19 @@ sub fasta_file1_eq_fasta_file2
     %s2=read_fasta_seq ($f2);
 
     @names=(keys (%s1));
-    
+
     foreach $n (keys(%s1))
       {
 	if ($s1{$n}{seq} ne $s2{$n}{seq}){return 0;}
-      } 
-    
+      }
+
     foreach $n (keys(%s2))
       {
 	if ($s1{$n}{seq} ne $s2{$n}{seq}){return 0;}
       }
     return 1;
   }
-	
+
 
 
 sub read_template_file
@@ -2537,7 +2570,7 @@ sub calc_rna_template
 	my (@profiles);
 	&set_temporary_dir ("set",$infile,"seq.pep");
 	%s=read_fasta_seq ("seq.pep");
-	
+
 	%pdb_template_h = &read_template_file($pdbfile);
 	my $pdb_chain;
 	open (R, ">result.aln");
@@ -2558,9 +2591,9 @@ sub calc_rna_template
 		$lib_name="$s{$seq}{name}.rfold";
 		$lib_name=&clean_file_name ($lib_name);
 # 		safe_system ("t_coffee -other_pg RNAplfold2tclib.pl -in=seqfile -out=$lib_name");
-		
+
  		safe_system ("secondary_struc.py seqfile $CACHE$pdb_chain  $lib_name");
-		
+
 		if ( !-e $lib_name)
 		{
 		myexit(flush_error("RNAplfold failed to compute the secondary structure of $s{$seq}{name}"));
@@ -2581,7 +2614,7 @@ sub calc_rna_template
 
 sub seq2rna_pair{
 	my ($mode, $pdbfile1, $pdbfile2, $method, $param, $outfile)=@_;
-	
+
 	if ($method eq "runsara.py")
 	{
 		open(TMP,"<$pdbfile1");
@@ -2597,7 +2630,7 @@ sub seq2rna_pair{
 			$count += 1;
 		}
 
-		
+
 		$chain1 = substr($line,length($line)-3,1);
 
 		close TMP;
@@ -2616,7 +2649,7 @@ sub seq2rna_pair{
 		close TMP;
 
 		$tmp_file=&vtmpnam();
-	
+
 		safe_system("runsara.py $pdbfile1 $chain1 $pdbfile2 $chain2 -s -o $tmp_file --limitation 5000 > /dev/null 2> /dev/null") == 0 or die "sara did not work $!\n";
 		open(TMP,"<$tmp_file") or die "cannot open the sara tmp file:$!\n";
 		open(OUT,">$outfile") or die "cannot open the $outfile file:$!\n";
@@ -2630,20 +2663,20 @@ sub seq2rna_pair{
 			{
 				$switch =0;
 				print OUT ">seq$seqNum\n";
-				$seqNum++;				
+				$seqNum++;
 			}
 			if ($switch < 2){
 				$switch++;
 				next;
 			}
-	
+
 			if ($line =~/REMARK\s+SARAALI\s+([^\*]+)\*/)
 			{
 				my $string = $1;
 				print OUT "$string\n";
 			}
 		}
-		close TMP; 
+		close TMP;
 		close OUT;
 		unlink($tmp_file);
 	}
@@ -2657,8 +2690,8 @@ sub seq2tblastx_lib
     $method=$mode;
     &set_temporary_dir ("set",$infile,"infile");
     %s=read_fasta_seq("infile");
-    
-    
+
+
     foreach $seq (keys(%s))
       {
 	$slist[$s{$seq}{order}]=$s{$seq}{seq};
@@ -2676,7 +2709,7 @@ sub seq2tblastx_lib
     close (F);
     &safe_system ("formatdb -i infile -p F");
     &safe_system ("blastall -p tblastx -i infile -d infile -m 7 -S1>blast.output");
-    
+
     ncbi_tblastx_xml2lib_file ("outfile", file2string ("blast.output"));
     &set_temporary_dir ("unset",$mode, $method, "outfile",$outfile);
     myexit ($EXIT_SUCCESS);
@@ -2688,7 +2721,7 @@ sub seq2tblastpx_lib
     $method=$mode;
     &set_temporary_dir ("set",$infile,"infile");
     %s=read_fasta_seq("infile");
-    
+
     foreach $seq (keys(%s))
       {
 	$slist[$s{$seq}{order}]=$s{$seq}{seq};
@@ -2713,7 +2746,7 @@ sub seq2tblastpx_lib
     }
 
 
-    
+
 
 
 ######################3 PID LOCK STUFF
@@ -2735,7 +2768,7 @@ sub file2tail
 	my $size = shift;
 	my $f= new FileHandle;
 	my $line;
-	
+
 	open ($f,$file);
 	seek ($f,$size*-1, 2);
 	read ($f,$line, $size);
@@ -2769,7 +2802,7 @@ sub set_error_lock
       my $name = shift;
       my $pid=$$;
 
-      
+
       &lock4tc ($$,"LERROR", "LSET", "$$ -- ERROR: $name $PROGRAM\n");
       return;
     }
@@ -2782,7 +2815,7 @@ sub set_lock
   }
 sub unset_lock
    {
-     
+
     my $pid=shift;
     &lock4tc ($pid,"LLOCK","LRELEASE","");
   }
@@ -2794,7 +2827,7 @@ sub shift_lock
     my $to_type=shift;
     my $action=shift;
     my $msg;
-    
+
     if (!&lock4tc($from, $from_type, "LCHECK", "")){return 0;}
     $msg=&lock4tc ($from, $from_type, "LREAD", "");
     &lock4tc ($from, $from_type,"LRELEASE", $msg);
@@ -2822,11 +2855,11 @@ sub lock4tc
 	  my ($pid,$type,$action,$value)=@_;
 	  my $fname;
 	  my $host=hostname;
-	  
+
 	  if ($type eq "LLOCK"){$fname="$LOCKDIR/.$pid.$host.lock4tcoffee";}
 	  elsif ( $type eq "LERROR"){ $fname="$LOCKDIR/.$pid.$host.error4tcoffee";}
 	  elsif ( $type eq "LWARNING"){ $fname="$LOCKDIR/.$pid.$host.warning4tcoffee";}
-	  
+
 	  if ($debug_lock)
 	    {
 	      print STDERR "\n\t---lock4tc(tcg): $action => $fname =>$value (RD: $LOCKDIR)\n";
@@ -2836,7 +2869,7 @@ sub lock4tc
 	  elsif ($action eq "LREAD"){return file2string($fname);}
 	  elsif ($action eq "LSET") {return string2file ($value, $fname, ">>");}
 	  elsif ($action eq "LRESET") {return string2file ($value, $fname, ">");}
-	  elsif ($action eq "LRELEASE") 
+	  elsif ($action eq "LRELEASE")
 	    {
 	      if ( $debug_lock)
 		{
@@ -2853,7 +2886,7 @@ sub lock4tc
 	    }
 	  return "";
 	}
-	
+
 sub file2string
 	{
 	  my $file=@_[0];
@@ -2864,11 +2897,11 @@ sub file2string
 	  close ($f);
 	  return $r;
 	}
-sub string2file 
+sub string2file
     {
     my ($s,$file,$mode)=@_;
     my $f=new FileHandle;
-    
+
     open ($f, "$mode$file");
     print $f  "$s";
     close ($f);
@@ -2877,7 +2910,7 @@ sub string2file
 BEGIN
     {
       srand;
-    
+
       $SIG{'SIGUP'}='signal_cleanup';
       $SIG{'SIGINT'}='signal_cleanup';
       $SIG{'SIGQUIT'}='signal_cleanup';
@@ -2886,14 +2919,14 @@ BEGIN
       $SIG{'SIGABRT'}='signal_cleanup';
       $SIG{'SIGEMT'}='signal_cleanup';
       $SIG{'SIGFPE'}='signal_cleanup';
-      
+
       $SIG{'SIGKILL'}='signal_cleanup';
       $SIG{'SIGPIPE'}='signal_cleanup';
       $SIG{'SIGSTOP'}='signal_cleanup';
       $SIG{'SIGTTIN'}='signal_cleanup';
       $SIG{'SIGXFSZ'}='signal_cleanup';
       $SIG{'SIGINFO'}='signal_cleanup';
-      
+
       $SIG{'SIGBUS'}='signal_cleanup';
       $SIG{'SIGALRM'}='signal_cleanup';
       $SIG{'SIGTSTP'}='signal_cleanup';
@@ -2914,32 +2947,32 @@ BEGIN
       $SIG{'SIGCHLD'}='signal_cleanup';
       $SIG{'SIGXCPU'}='signal_cleanup';
       $SIG{'SIGWINCH'}='signal_cleanup';
-      
+
       $SIG{'INT'}='signal_cleanup';
       $SIG{'TERM'}='signal_cleanup';
       $SIG{'KILL'}='signal_cleanup';
       $SIG{'QUIT'}='signal_cleanup';
-      
+
       our $debug_lock=$ENV{"DEBUG_LOCK"};
-      
-      
-      
-      
+
+
+
+
       foreach my $a (@ARGV){$CL.=" $a";}
       if ( $debug_lock ){print STDERR "\n\n\n********** START PG: $PROGRAM *************\n";}
       if ( $debug_lock ){print STDERR "\n\n\n**********(tcg) LOCKDIR: $LOCKDIR $$ *************\n";}
       if ( $debug_lock ){print STDERR "\n --- $$ -- $CL\n";}
-      
-	     
-      
-      
+
+
+
+
     }
 sub flush_error
   {
     my $msg=shift;
     return add_error ($EXIT_FAILURE,$$, $$,getppid(), $msg, $CL);
   }
-sub add_error 
+sub add_error
   {
     my $code=shift;
     my $rpid=shift;
@@ -2947,15 +2980,15 @@ sub add_error
     my $ppid=shift;
     my $type=shift;
     my $com=shift;
-    
+
     $ERROR_DONE=1;
     lock4tc ($rpid, "LERROR","LSET","$pid -- ERROR: $type\n");
     lock4tc ($$, "LERROR","LSET", "$pid -- COM: $com\n");
     lock4tc ($$, "LERROR","LSET", "$pid -- STACK: $ppid -> $pid\n");
-   
+
     return $code;
   }
-sub add_warning 
+sub add_warning
   {
     my $rpid=shift;
     my $pid =shift;
@@ -2989,13 +3022,13 @@ sub cleanup
     #kill (SIGTERM,$PIDCHILD);
     my $p=getppid();
     $CLEAN_EXIT_STARTED=1;
-    
-    
-    
+
+
+
     if (&lock4tc($$,"LERROR", "LCHECK", ""))
       {
 	my $ppid=getppid();
-	if (!$ERROR_DONE) 
+	if (!$ERROR_DONE)
 	  {
 	    &lock4tc($$,"LERROR", "LSET", "$$ -- STACK: $p -> $$\n");
 	    &lock4tc($$,"LERROR", "LSET", "$$ -- COM: $CL\n");
@@ -3004,43 +3037,43 @@ sub cleanup
     my $warning=&lock4tc($$, "LWARNING", "LREAD", "");
     my $error=&lock4tc($$,  "LERROR", "LREAD", "");
     #release error and warning lock if root
-    
+
     if (isrootpid() && ($warning || $error) )
       {
-	
+
 	print STDERR "**************** Summary *************\n$error\n$warning\n";
 
 	&lock4tc($$,"LERROR","RELEASE","");
 	&lock4tc($$,"LWARNING","RELEASE","");
-      } 
-    
-    
+      }
+
+
     foreach my $f (@TMPFILE_LIST)
       {
-	if (-e $f){unlink ($f);} 
+	if (-e $f){unlink ($f);}
       }
     foreach my $d (@TMPDIR_LIST)
       {
 	clean_dir ($d);
       }
     #No More Lock Release
-    #&lock4tc($$,"LLOCK","LRELEASE",""); #release lock 
+    #&lock4tc($$,"LLOCK","LRELEASE",""); #release lock
 
     if ( $debug_lock ){print STDERR "\n\n\n********** END PG: $PROGRAM ($$) *************\n";}
     if ( $debug_lock ){print STDERR "\n\n\n**********(tcg) LOCKDIR: $LOCKDIR $$ *************\n";}
   }
-END 
+END
   {
-    
+
     &cleanup();
   }
-   
+
 sub blast_com2new_blast_com
     {
       my $com=shift;
       if ($ENV{"NCBI_BLAST_4_TCOFFEE"} eq "OLD"){return $com;}
       elsif (!&pg_is_installed("legacy_blast.pl")){return $com;}
-      else 
+      else
 	{
 	  if ($com=~/formatdb/)
 	    {
@@ -3055,7 +3088,7 @@ sub blast_com2new_blast_com
 	  elsif (&is_blast_package($com))
 	    {
 	      my $path;
-	      
+
 	      if ( $ENV{"NCBI_BIN_4_TCOFFEE"}){$path=$ENV{"NCBI_BLAST_4_TCOFFEE"};}
 	      else
 		{
@@ -3068,12 +3101,12 @@ sub blast_com2new_blast_com
 	      elsif ( $com=~/\>/){$com=~s/\>/ $path \>/;}
 	      else {$com.=" $path";}
 	      $com="legacy_blast.pl $com";
-	      
+
 	      return $com;
 	    }
 	}
     }
-sub safe_system 
+sub safe_system
 {
   my $com=shift;
   my $ntry=shift;
@@ -3082,16 +3115,16 @@ sub safe_system
   my $status;
   my $ppid=getppid();
   if ($com eq ""){return 1;}
-  
-  if ( ($com=~/^blast/) ||($com=~/^formatdb/)){$com=&blast_com2new_blast_com($com);} 
+
+  if ( ($com=~/^blast/) ||($com=~/^formatdb/)){$com=&blast_com2new_blast_com($com);}
 
   if (($pid = fork ()) < 0){return (-1);}
   if ($pid == 0)
     {
       set_lock($$, " -SHELL- $com (tcg)");
-      if( $debug_generic_method ) { printf "~ exec: %s\n", $com; } 
+      if( $debug_generic_method ) { printf "~ exec: %s\n", $com; }
       exec ($com);
-      if( $debug_generic_method ) { printf "~ exitcode: %s\n", $?; } 
+      if( $debug_generic_method ) { printf "~ exitcode: %s\n", $?; }
     }
   else
     {
@@ -3113,7 +3146,7 @@ sub safe_system
 	  lock4tc ($pid, "LRELEASE", "LERROR", "");
 	  #if ($com=~/EBI/){$com=~s/EBI/NCBI/;}
 	  #elsif ($com=~/NCBI/){$com=~s/NCBI/EBI/;}
-	  
+
 	  return safe_system ($com, $ntry, ++$ctry);
 	}
       elsif ($ntry == -1)
@@ -3138,15 +3171,15 @@ sub safe_system
   return $?;
 }
 
-sub check_configuration 
+sub check_configuration
     {
       my @l=@_;
       my $v;
       foreach my $p (@l)
 	{
-	  
+
 	  if   ( $p eq "EMAIL")
-	    { 
+	    {
 	      if ( !($EMAIL=~/@/))
 		{
 		add_warning($$,$$,"Could Not Use EMAIL");
