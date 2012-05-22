@@ -1,16 +1,16 @@
 #!/usr/bin/env perl
 
-my $address="http://www.tcoffee.org/Projects/Datasets/NatureMethodsDataset.tar.gz";
-my $out="NatureMethodsDataset.tar.gz";
+my $address="http://www.tcoffee.org/Projects/Datasets/NatureProtocolDataset.tar.gz";
+my $out="NatureProtocolDataset.tar.gz";
 &url2file ($address,$out);
 
 if ( -e $out)
   {
     
-    system ("gunzip NatureMethodsDataset.tar.gz");
-    system ("tar -xvf NatureMethodsDataset.tar");
-    
-    print "Your Data Set is in the Folder NatureMethodsDataset\n";
+    system ("gunzip NatureProtocolDataset.tar.gz");
+    system ("tar -xvf NatureProtocolDataset.tar");
+  	system ("rm -rf NatureProtocolDataset.tar");  
+    print "Your Data Set is in the Folder NatureProtocolDataset\n";
   }
 else 
   {
