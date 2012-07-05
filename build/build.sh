@@ -338,9 +338,9 @@ function build_perlm() {
 	echo "[ build_perlm ]"
 
 	chmod +x $WORKSPACE/tcoffee/build/cpanm
-	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM SOAP::Lite
-	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM XML::Simple
-	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM LWP
+	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM -L $PERLM SOAP::Lite
+	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM -L $PERLM XML::Simple
+	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM -L $PERLM LWP
 
 }
 
