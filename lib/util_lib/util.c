@@ -16,6 +16,13 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+// required to find out the numOfCores on MACOSX
+// see function 'getNumCores' below
+#ifdef MACOS
+#include <sys/param.h>
+#include <sys/sysctl.h>
+#endif
+
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"
@@ -4716,6 +4723,26 @@ char *get_lockdir_4_tcoffee ()
 }
 
 
+int getNumCores() {
+#ifdef MACOS
+    int nm[2];
+    size_t len = 4;
+    uint32_t count;
+
+    nm[0] = CTL_HW; nm[1] = HW_AVAILCPU;
+    sysctl(nm, 2, &count, &len, NULL, 0);
+
+    if(count < 1) {
+        nm[1] = HW_NCPU;
+        sysctl(nm, 2, &count, &len, NULL, 0);
+        if(count < 1) { count = 1; }
+    }
+    return count;
+#else
+    return sysconf(_SC_NPROCESSORS_ONLN);
+#endif
+}
+
 int get_nproc ()
 {
   static int nproc;
@@ -4733,18 +4760,8 @@ int get_nproc ()
     {
       nproc=atoi(getenv ("NUMBER_OF_PROCESSORS"));
     }
-  else if ( file_exists (NULL,"/proc/cpuinfo"))
-    {
-      char *tmp;
-      char string[100];
-      tmp=vtmpnam (NULL);
-      printf_system_direct ("grep \"^processor\" /proc/cpuinfo | wc -l>%s", tmp);
-      sprintf ( string, "%s", file2string (tmp));
-      chomp (string);
-      nproc=atoi (string);
-    }
   else
-    nproc=1;
+    nproc=getNumCores();
 
   return nproc;
 }
