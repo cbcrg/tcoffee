@@ -2127,7 +2127,8 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 		if ( b==1);
 		else sprintf ( fname[0], "%s", fname[b-1]);
 		n_list=1;
-		return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode, type,local_stderr, CL, seq_source,1);
+		return read_constraint_list (CL, fname[0], in_mode, mem_mode,weight_mode);
+// 		return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode, type,local_stderr, CL, seq_source,1);
 	}
 
 	if (!CL)CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?tmpfile():NULL, NULL);
