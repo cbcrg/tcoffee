@@ -53,6 +53,8 @@ THRESHOLD=${THRESHOLD:-0.490}
 FAILED=${FAILED:-$ROOT/failed}
 SCRATCH=${SCRATCH:-$ROOT/scratch}
 
+# Grant execute permission
+chmod +x $BALISCORE
 
 ##
 ## The source dataset against to validate can be specified as the first argument on the command line 
