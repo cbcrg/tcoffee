@@ -1354,7 +1354,7 @@ int safe_dump_constraint_list (Constraint_list *CL,char *file, char *mode, Seque
 	int *entry = vcalloc (CL->entry_len+1, sizeof (int));
 	int b,c,s1, r1, s2, r2;
 	int d=0;
-	if (!CL || !CL->S || !CL->residue_index || CL->ne==0)return;
+	if (!CL || !CL->S || !CL->residue_index || CL->ne==0) return 0;
 	S=CL->S;
 	if (RS)cache=fix_seq_seq (S, RS);
 // 	if (!entry)

@@ -1277,7 +1277,7 @@ char * seq2tmstruc ( char *seq)
      return buf;
    }
 
-char * set_blast_default_values()
+void set_blast_default_values()
 {
   set_string_variable ("blast_server", (getenv ("blast_server_4_TCOFFEE"))?getenv ("blast_server_4_TCOFFEE"):"EBI");
   set_string_variable ("pdb_db", (getenv ("pdb_db_4_TCOFFEE"))?getenv ("pdb_db_4_TCOFFEE"):"pdb");
@@ -1293,7 +1293,6 @@ char * set_blast_default_values()
   set_int_variable ("pdb_min_cov", 0);
   set_int_variable ("pdb_max_cov", 100);
 
-  return;
 }
 
 char * seq2pdb   (Sequence *S)

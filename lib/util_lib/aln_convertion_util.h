@@ -69,7 +69,7 @@ char* alnpos2hmmtop_pred (Alignment *A, Alignment *Pred, int pos, int mode);
 Alignment * aln2hmmtop_pred (Alignment *A);
 char * seq2tmstruc ( char *seq);
 
-char * set_blast_default_values();
+void set_blast_default_values();
 char      *  seq2pdb   ( Sequence *S);
 Alignment *  seq2blast ( Sequence *S);
 

@@ -4296,7 +4296,7 @@ pid_t vwait (pid_t *p)
 
 
 int get_child_list (int pid,int *clist);
-int kill_child_list (int *list);
+void kill_child_list (int *list);
 int kill_child_pid(int pid)
 {
   int *list;
@@ -4324,7 +4324,7 @@ int kill_child_pid(int pid)
   return 1;
 }
 
-int kill_child_list (int *list)
+void kill_child_list (int *list)
 {
   int a;
   int cpid=getpid();
@@ -4747,8 +4747,9 @@ int get_nproc ()
 {
   static int nproc;
 
-  if (nproc);
-  else if ( get_int_variable ("n_core"))
+  if (nproc) { return nproc; }
+
+  if ( get_int_variable ("n_core"))
     {
       nproc=get_int_variable ("n_core");
     }
@@ -4765,6 +4766,7 @@ int get_nproc ()
 
   return nproc;
 }
+
 
 
 
@@ -8985,7 +8987,7 @@ int   km_file2dim   ( char *file, int *n,int *dim, int *len)
   buf=calloc(len[0]+1, sizeof (char));
   while ((fgets (buf,len[0], fp)))
     {
-      if ( buf[0]='#')
+      if ( buf[0]=='#')
 	{
 	  n[0]++;
 	  cdim=0;
@@ -9031,7 +9033,7 @@ double ** km_read_data ( char *file, int n, int dim, int mlen, char **fl)
   while ((fgets (buf,mlen, fp)))
     {
 
-      if ( buf[0]='#')
+      if ( buf[0]=='#')
 	{
 
 	  p=cdim=0;
