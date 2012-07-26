@@ -3350,7 +3350,7 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int
   double score;
   int np;
 
-  HERE ("%d", nproc);
+//   HERE ("%d", nproc);
   if (!CL || !CL->residue_index)return CL;
   fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", nproc);
 
