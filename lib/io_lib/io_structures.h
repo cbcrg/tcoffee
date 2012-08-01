@@ -51,7 +51,7 @@ struct Sequence
 /*Constraint list*/
       struct Constraint_list *CL;
       int contains_gap;   /*set to 1 if gaps are to be kept*/
-      char *type;         /*PROTEIN, DNA*/
+      char *type;         /*PROTEIN, DNA, RNA */
       Weights *W;         /*Associated weights*/
       char template_file[FILENAMELEN+1];
       struct Template **T;

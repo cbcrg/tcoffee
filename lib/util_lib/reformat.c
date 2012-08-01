@@ -8556,11 +8556,14 @@ Alignment *translate_dna_aln (Alignment *A, int frame)
 int seq2blastdb (char *out, Sequence *S)
 {
 
-
   output_fasta_simple (out, S);
 
-  if ( strm (S->type, "DNA"))printf_system ("makeblastdb -in %s -dbtype nucl -logfile /dev/null", out);
-  else printf_system ("makeblastdb -in %s  -logfile /dev/null", out);
+  if ( strm (S->type, "DNA") || strm (S->type, "RNA") )
+	  printf_system ("makeblastdb -in %s -dbtype nucl -logfile /dev/null", out);
+  else {
+	  fprintf(stderr, "WARNING: makeblastdb is used with -dbtype prot\n");
+	  printf_system ("makeblastdb -in %s -dbtype prot -logfile /dev/null", out);
+  }
   return 1;
 }
 int seq2tblastx_db (char *out,Sequence *S, int strand)
