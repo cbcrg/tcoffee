@@ -42,7 +42,7 @@ if ($#ARGV ==-1)
     print "  ................................Mode: 1 to forbid every undeclared transition/emission.\n";
     print "  -data  <file1 file2.. >,<mode>..File: input data from file(s).\n";
     print "  ................................Mode: 'model' to generate simulated data from the model -model.\n";
-    print "  -action      <mode> ............'bw' to apply aum and welch training.\n";
+    print "  -action      <mode> ............'bw' to apply baum and welch training.\n";
     print "  ................................'decode' to apply the provided model onto the data\n";
     print "  ................................'model2data' generates -n artificial dataset -len long (with RST)\n";  print "  -single.........................Set model states and emission to single char values (max=62 values)";
     print "  ................................'data2model' estimates model from data (must have RST)\n";
@@ -298,6 +298,7 @@ sub check_parameters
       }
     return $p;
   }
+  
 sub process_param
   {
     my @arg=@_;
@@ -2046,7 +2047,7 @@ sub undump_data
 	    if ( $l=~/#d/)
 	      {
 		my @v=($l=~/([^;]+)/g);
-		shift @v;
+		shift @v;	
 		my $exp=shift (@v);
 		my $record=shift(@v);
 		$internalID+=1;
@@ -2054,7 +2055,7 @@ sub undump_data
 		  {
 		    $d->{$exp}{$internalID}{$v[$a]}=$v[$a+1];
 		  }
-		$d->{$exp}{$internalID}{externalID}=$record;
+		$d->{$exp}{$internalID}{externalID}=$record; 
 	      }
 	  }
 	close ($F);
