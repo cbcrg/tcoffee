@@ -794,7 +794,7 @@ while (<$INFILE>)
 	
 		for ( $a=4; $a<$#field;$a++)
 {
-			@{$complete_seq{$c}}->[$complete_seq_len{$c}++]=$field[$a];
+			$complete_seq{$c}[$complete_seq_len{$c}++]=$field[$a];
 }
 }
     elsif ( $line=~/^ATOM/ || ($line=~/^HETATM/ && &is_aa(substr($line,17,3),substr($line,21,1)) && !$no_hetatm))
@@ -860,7 +860,7 @@ while (<$INFILE>)
 	if ( $residue_index ne $RES_NO)
 {
 	     $residue_index = $RES_NO;
-	     @{$atom_seq{$CHAIN}}->[$atom_seq_len{$CHAIN}++]=$RES_ID;;
+	     $atom_seq{$CHAIN}[$atom_seq_len{$CHAIN}++]=$RES_ID;;
 }
 }
 
