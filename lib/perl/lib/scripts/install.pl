@@ -778,12 +778,6 @@ sub install_source_package
 	if (-e "./configure")
 	  {
 	    #new sap distribution
-	    if ($OS eq "macosx")
-	      {
-		&replace_line_in_file ("./src/galloc.h", "malloc.h",  "");
-		&replace_line_in_file ("./src/pdbprot.h", "malloc.h", "");
-		&replace_line_in_file ("./src/pdbprot.c", "malloc.h", "");
-	      }
 	    
 	    &flush_command ("./configure");
 	    &flush_command ("make clean");
