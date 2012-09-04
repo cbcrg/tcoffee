@@ -163,9 +163,9 @@ PG sap type			structure_pairwise_aligner
 PG sap ADDRESS			http://mathbio.nimr.mrc.ac.uk/wiki/Software
 PG sap language			C
 PG sap language2		C	
-PG sap source			http://mathbio.nimr.mrc.ac.uk/download/SAP/sap-1.1.1.tar.gz
+PG sap source			http://www.tcoffee.org/Packages/Archive/sap-1.1.1_fix1.tar.gz
 PG sap mode			expresso,3dcoffee
-PG sap version			1.1.1
+PG sap version			1.1.1_fix1
 
 PG TMalign 4_TCOFFEE		TMALIGN
 PG TMalign type			structure_pairwise_aligner		
