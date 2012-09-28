@@ -21,28 +21,10 @@
 //Fastal_param *param_set;
 
 
-/*! \mainpage T-Coffee Index Page
- *
- * \section intro_sec Introduction
- *
- * This is the introduction.
- *
- * \section install_sec Installation
- *
- * \subsection step1 Step 1: Opening the box
- *
- * etc...
- * \section fastal_sec Fastal
- *
- * This program is a very fast aligner. It is capable of aligning huge sets of sequences because it keeps as much as necessary on hard disk.
- */
-
-
-
-
 /*!
  *	\file fastal.c
  *	\brief Source code for the fastal algorithm
+ *	\author Carsten Kemena
  */
 
 

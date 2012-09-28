@@ -13,6 +13,50 @@
 #include "t_coffee.h"
 #include "km_coffee_header.h"
 
+#include "debug.h" /* Sascha*/
+
+/**
+ * \file
+ * Main file of T-Coffee
+ * \author Cedric Notredame
+ */
+
+
+/** \mainpage T-Coffee Index Page
+ *
+ * \section start A Place to Start With
+ *
+ * In order to get an idea of the main procedure of T-Coffee when calculating a multiple alignment,
+ * you should have a look at the ::batch_main function.
+ *
+ *
+ *  \section documented_files Files Already Containing Documentation:
+ *
+ *	- t_coffee.c
+ *	- util.c
+ *	- util_constraints_list.c
+ *	- aln_convertion_util.c
+ *	- util.c
+ *	- reformat.c
+ *	- evaluate.c
+ *
+ *	For datastructures, these files are interesting:
+ *	- io_structures.h contains ::Sequence, ::Alignment and ::Template.
+ *	- util_constraints_list.h contains the central structure ::Constraint_list, but also ::Distance_matrix and ::TC_method.
+ *
+ *
+ */
+
+
+
+
+
+
+
+/**
+ * \file t_coffee.c
+ *
+*/
 
 static void test();
 static char * get_seq_type_from_cl (int argc, char **argv);
@@ -57,7 +101,7 @@ static char *get_genepredpx_defaults(char *buf, char *type);
 static int set_methods_limits (char **method_limits,int n_methods_limit,char **list_file, int n_list, int *maxnseq, int *maxlen);
 static FILE *t_coffee_tip (FILE *fp,char *mode);
 
-static int run_other_pg(int argc, char *argv[]);
+static int run_other_pg (int argc, char *argv[]);
 
 static Sequence* prepare_master (char *seq,Sequence *S,Constraint_list *CL, char *dmode);
 char ** km_coffee (int argc, char **argv);
@@ -66,7 +110,14 @@ Alignment *kmir(Alignment *A);
 
 #define is_a_seq_file(file) (!is_matrix(file) && !is_matrix(file+1) && !is_method (file) && !is_method (file+1) &&(check_file_exists(file) || check_file_exists(file+1)))
 static int NO_METHODS_IN_CL;
+
 int batch_main ( int argc, char **argv);
+
+/**
+ * Pass arguments to ::batch_main.
+ *
+ * \callgraph
+ */
 int main (int argc, char *argv[])
 {
 // printf("RUNNING DEBUG\n");
@@ -90,6 +141,25 @@ int main (int argc, char *argv[])
     }
   myexit (r);
 }
+
+
+/**
+ * Brings everything together, but does not contain computations.
+ *
+ * \callgraph
+ * 
+ * \section remark Remark
+ * 
+ * The follwowing text is just a summation of short lines of documentation appearing throughout
+ * the code of this function. Often they make more sense in their specific context,
+ * that means while reading the source code. 
+ *
+ *
+ * \section prep Preparation
+ *
+ * 
+ */
+
 int batch_main ( int argc, char **argv)
 	{
 
@@ -101,6 +171,7 @@ int batch_main ( int argc, char **argv)
 	char **initial_order;
 
 	Fname *F=NULL;
+
 	Constraint_list *CL;
 	Alignment  *A=NULL, *EA=NULL;
 	Alignment  **aln_list;
@@ -111,7 +182,6 @@ int batch_main ( int argc, char **argv)
 	NT_node **T=NULL;
 	int tot_node;
 	char *pc;
-/*Parameters*/
 
 	int check_configuration;
 	int update;
@@ -404,10 +474,14 @@ int batch_main ( int argc, char **argv)
 
 	char *dump;
 
+	/**
+	 * Before anything else, check if we want to use the \b other_pg option of T-Coffee.
+	 *        If so, redirect to ::run_other_pg.
+	 *        (In case of kmcoffee, load the kmcoffee arguments from ::km_coffee)
+	 */
 	argv=standard_initialisation (argv, &argc);
 	set_string_variable ("t_coffee", argv[0]);
 
-/*Running other programs via T-Coffee*/
 	if (argc>=3 && strm (argv[1], "-other_pg"))
 	  {
 	    //standard_initialisation (NULL,NULL);
@@ -418,6 +492,11 @@ int batch_main ( int argc, char **argv)
 	    argv=km_coffee(argc, argv);
 	  }
 
+
+	 /**
+	  * Read all the parameters of T_Coffee using ::get_cl_param
+	  *
+	 */
 
 /*PARAMETER PROTOTYPE:    READ PARAMETER FILE     */
 	         get_cl_param(\
@@ -575,6 +654,16 @@ int batch_main ( int argc, char **argv)
 			    /*Max Value*/ "any"				\
 					  );
 
+
+	   /**
+		  * Load T-Coffee default parameters.
+		  * Next, decide whether a special mode of T_Coffee has been called and load the
+		  * corresponing parameters from a function. Here's an example:
+		  * \code
+		  * else if ( strm (special_mode, "psicoffee")) new_arg = get_psicoffee_defaults( NULL,lseq_type );
+		  * \endcode
+		  *
+		 */
 
 /* extra>prompt>special>parameters>defaults*/
  argv=break_list ( argv, &argc, "=;, \n");
@@ -852,7 +941,10 @@ if ( !do_evaluate)
 			    );
 
 
-
+	 /**
+	  * Special commands, that usually end T-Coffee are handled next:
+	  * check_configuation, update, version etc.
+	  */
      if ( check_configuration)
        {
 
@@ -3681,7 +3773,10 @@ get_cl_param(\
 /*******************************************************************************************************/
 
 
-
+	       /**
+	        * If T-Coffee is invoked without any arguments,
+	        * it displays the available method names through ::display_method_names and exits.
+	        */
 	       if (argc==1  )
 		 {
 		   display_method_names ("display", stdout);
@@ -3689,6 +3784,7 @@ get_cl_param(\
 		 }
 	       get_cl_param( argc, argv,&le, NULL,NULL,NULL,0,0,NULL);
 	       prepare_cache (cache);
+
 /*******************************************************************************************************/
 /*                                                                                                     */
 /*                           FILL list_file (contains seq, aln and meth)                               */
@@ -3725,15 +3821,28 @@ get_cl_param(\
 		   }
 
 
+	       /**
+	        *  Array \c list_file[] contains the names of all input files like sequences, profiles and templates,
+	        *  but also methods.
+	        *  There is a convention in T-Coffee to start the filename of with a
+	        *  capital letter specifying its type:
+	        *      - \b M for methods
+	        *      - \b R for profiles
+	        *      - \b A for alignments
+	        *      - \b L for libraries (via the -lib flag)
+	        *      - \b P for PDB structures
+	        *   
+	        *   See ::read_constraint_list for more information on how these files will be processed.
+	        */
 
-/*Make Sure -infile is set*/
+	       /*Make Sure -infile is set*/
 	       if (!infile[0]&& (do_evaluate || do_convert))
 		 {
 
 		   if ( do_evaluate || do_convert)sprintf ( infile, "%s",seq_list[0]);
 		 }
 
-/*EXPAND -in*/
+	       /*EXPAND -in*/
 	       /*Introduce the sequences from the -profile flag*/
 	       if ( profile1 && profile1[0])
 		 {
@@ -3849,6 +3958,10 @@ get_cl_param(\
 		     }
 
 
+		   /**
+		    * If no alignment A, library L or method M is in the list of infiles (that means in \c list_files[]),
+		    * T-Coffee will add a default method here. The default method is currently \b Mproba_pair.
+		    */
 		   if ( (nn['A']+nn['L']+nn['M'])==0)
 		     {
 		       sprintf ( list_file[n_list++], "Mproba_pair"); //new default
@@ -3867,6 +3980,9 @@ get_cl_param(\
 		 }
 
 
+	    /**
+	     * Check the content of each input file and report possible errors.
+	     */
 	       else if ( argv[1][0]!='-' && (check_file_exists( argv[1]) || check_file_exists(argv[1]+1)))
 		 {
 
@@ -3950,6 +4066,15 @@ get_cl_param(\
 	       identify_list_format      (list_file, n_list);
 
 
+	       /**
+	        * First non-error output: List the Input files, which are usually a sequence
+	        * file (S) and one or several methods (M), as shown in the example:
+	        * \code
+	        * INPUT FILES
+        	*         Input File (S) sh3.fasta  Format fasta_seq
+			*         Input File (M) proba_pair
+	        * \endcode
+	        */
 	       fprintf (le, "\nINPUT FILES\n");
 	       for ( a=0; a< n_list; a++)
 		   {
@@ -4078,9 +4203,17 @@ get_cl_param(\
 
 
 
-/*START*/
 
-	       /*1 READ THE SEQUENCES*/
+
+	       /**
+	        * \section input Input Sequences and Libraries
+	        *
+	        * Read the Sequences (::read_seq_in_n_list). Moreover, for these methods that need Blast scans on the sequences,
+	        * ::precompute_blast_db is called.
+	        * \note The ::precompute_blast_db method is currently invoked only for methods that contain the substring "blast".
+	        *       As far as I know, it's main purpose is the method \b blastr_pair which is used in the special mode blastr.
+	        *       See the source code of ::precompute_blast_db for mmore information.
+	        * */
 
 	       S=read_seq_in_n_list   (list_file, n_list, type,seq_source);
 	       S=precompute_blast_db(S,method_list, n_method_list);
@@ -4107,7 +4240,11 @@ get_cl_param(\
 		   fprintf ( stdout, "%s", S->type);
 		   return EXIT_SUCCESS;
 		 }
-	       /*Translate Sequences*/
+	       /**
+	        * Translate Sequences from RNA to DNA or vice versa,
+	        * if wanted (::transform_sequence).
+	        *
+	        */
 	       if ( transform && transform[0])
 		 {
 		   S=transform_sequence (S, transform);
@@ -4125,14 +4262,6 @@ get_cl_param(\
 
 
 
-	       /* Get the Templates*/
-
-
-
-
-
-
-
 
 
 	       if ( get_type)
@@ -4143,8 +4272,13 @@ get_cl_param(\
 		   return 1;
 		 }
 
-
-	       /*Reorder the sequences*/
+	       /**
+	        * Reorder the sequences, if wanted, by using ::reorder_seq.
+	        * You can make T-Coffee order the sequences lexicographically by their names by
+	        * using the \c -inorder=\c aligned flag. If it is set, the order of the sequences
+	        * is specified by ::sort_string_array(new_oder), otherwise the order from the
+	        * input file (i.e. the order in the Sequence::name array) is kept.
+	        */
 	       new_order=duplicate_char (S->name, -1, -1);
 	       if ( strm (inorder, "aligned"))new_order=sort_string_array   (new_order, S->nseq);
 
@@ -4154,8 +4288,11 @@ get_cl_param(\
 
 
 
-	       /*3 PREPARE THE CONSTRAINT LIST*/
-
+	       /**
+	        * Prepare the global ::Constraint_list object using ::declare_constraint_list.
+	        * This function allocates memory for a Constraint_list and sets the Constraint_list::residue_index
+	        * to default values.
+	        */
 	       CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?tmpfile():NULL, NULL);
 
 	       sprintf ( CL->method_evaluate_mode, "%s", method_evaluate_mode);
@@ -4174,7 +4311,13 @@ get_cl_param(\
 
 
 
-	       /*one to all alignment*/
+	       /**
+	        * Identify Master Sequences for the master mode (option \c -master).
+	        * Per default, master mode is not used (\c -master=\c no), but there are
+	        * several ways to specify master sequences. The master mode is experimental only,
+	        * the idea is not to run all pairwise alignments, but only some of them.
+	        * See ::prepare_master (best in the soruce code) for more details.
+	        */
 	       fprintf ( le, "\nIdentify Master Sequences [%s]:\n", master_mode);
 	       (CL->S)->MasterS=MASTER_SEQ=prepare_master(master_mode,S,CL, "_kmeans_");
 	       fprintf ( le, "\nMaster Sequences Identified");
@@ -4182,15 +4325,29 @@ get_cl_param(\
 	       else CL->o2a_byte=blast_maxnseq;
 
 
-	       /*4 GET TEMPLATES*/
-	       	       //Intercept Master Sequences
-
 	       if (MASTER_SEQ)
 		 {
 		   TEMP_SEQ=S;
 		   S=MASTER_SEQ;
 		 }
 
+
+
+
+
+
+
+	       /**
+	        * \section templates Get the Templates
+	        *
+	        * Call ::seq2template_seq for each template file in \c template_file_list. This will read/fetch template
+	        * files and incorporate them into the ::Seqeunce object. If no template file is given but the Sequence
+	        * object already contains templates, these are written into a \c .template_file file.
+	        * Next,the same procedure is repeated for profile_template_files (\c -profile_template_file), using
+	        * ::profile_seq2template_seq
+	        *
+	        * \sa ::Template for more information on how templates are stored within T-Coffee.
+	        */
 	       if ( n_template_file)
 		 {
 		   fprintf ( le, "\nLooking For Sequence Templates:\n");
@@ -4250,9 +4407,6 @@ get_cl_param(\
 		     }
 		 }
 
-
-
-
 	       //Release Master Sequences
 	       if (MASTER_SEQ )
 		 {
@@ -4264,22 +4418,34 @@ get_cl_param(\
 			 S->T[i]=MASTER_SEQ->T[a];
 		       }
 		 }
+
+	       /**
+	        * Add the sequences as their own template via the generic ::seq2template_seq and the option \c "SELF_S".
+	        * Finally, specify the types of used templates in the Sequence object by ::seq2template_type.
+	        */
 	       S=seq2template_seq(S, "SELF_S_",F);
 	       S=seq2template_type (S);
 
 	       le=display_sequences_names   ( S, le, check_pdb_status, TEMPLATES);
-	       /*4 GET TEMPLATES: DONE*/
 
 
 
 
+
+
+
+		  /**
+		   * Set further options like the potential substitution matrix, the \c -filter_lib flag, the profile_mode
+		   * (see ::get_profile_mode_function), some BLAST parameters, some PDB-BLAST parameters and the multicore mode,
+		   * before we can go on to the real stuff.
+		   */
 	       if (  matrix && matrix[0])
 		 {
 		   sprintf ( CL->method_matrix,"%s", matrix);
-
 		 }
 	       /*Set the filtering*/
 	       CL->filter_lib=filter_lib;
+
 	       /*Set the evaluation Functions*/
 	       CL->profile_mode=get_profile_mode_function (profile_mode, NULL);
 	       sprintf ( CL->profile_comparison, "%s", profile_comparison);
@@ -4337,15 +4503,44 @@ get_cl_param(\
 		   set_string_variable ("method_log", method_log);
 		 }
 
-
 	       CL->lalign_n_top=lalign_n_top;
 	       sprintf ( CL->multi_thread, "%s", multi_core);
 
 	       sprintf ( CL->lib_list, "%s", lib_list);
 	       sprintf (CL->rna_lib, "%s", rna_lib);
-/* Important: This is where the library is compiled!!!!*/
 
 
+
+
+
+
+
+
+	       /**
+	        * \section libcompilation Compile the Library
+	        */
+
+
+	       /**
+	        * \subsection read_CL Build Up the Initial Constraint_list
+	        *
+	        * Finally we can start with the actual algorithm to build an alignment. In this step
+	        * we build the initial ::Constraint_list from various sources. Usually, the initial
+	        * Constraint_list will contain the information from pairwise alignment methods (per
+	        * default \c proba_pair), but of course there are different modes of T-Coffee that use
+	        * structural pairwise alignments or the output of multiple aligners. However, this is
+	        * the place where all this information is produced and collected. The function
+	        * that summarizes all this is ::read_n_constraint_list and its documentation is recommended
+	        * reading.
+	        *
+	        * Just to give a short overview: It will distibute the process of generating pairwise alignments
+	        * (i.e. calling external aligners or built-ins like proba_pair) over several CPUs and incorporate
+	        * their outputs in one single ::Constraint_list object called \b CL. There are some maybe
+	        * non-intuitive decisions done in the process of reading the outputs, which should be documented
+	        * in the function.
+	        * \sa Constraint_list::residue_index to understand how \b CL stores edges/constraints.
+	        *
+	        */
 	       if ((CL->S)->nseq>1 && !do_convert)
 		 {
 		   CL=read_n_constraint_list (list_file,n_list,NULL, mem_mode,weight,type, le, CL, seq_source);
@@ -4366,13 +4561,17 @@ get_cl_param(\
 
 	       if ( is_number (weight))set_weight4constraint_list (CL, atoi(weight));
 
-	       free_pair_wise ();//Free ststic memory allocated in some of the pairwise functions
+	       /**
+	        * Some methods, like \c proba_pair, need a cleanup afterwards to free static memory allocated during their process.
+	        * That's why ::free_pair_wise is called here.
+	        */
+	       free_pair_wise ();
 
 
-	       //Shrink: re-run slow_pair using the library, remove everything
 
-
-	       /*If the List is empty*/
+	       /**
+	        * If the Constraint_list should, for some reason, be empty afterwards, report an Error.
+	        */
 	       if ( (CL->S)->nseq>1 && CL->ne==0 && !CL->M &&!(do_convert && n_list>0))
 		 {
 		   fprintf ( stderr, "\n******************ERROR*****************************************\n");
@@ -4386,12 +4585,15 @@ get_cl_param(\
 		   myexit(EXIT_FAILURE);
 		 }
 
-
 	       CL->normalise=do_normalise;
 
 	       if ( type && type[0])sprintf ( (CL->S)->type, "%s", type);
 	       CL->extend_jit=(do_extend>0)?1:0;
 
+	       /**
+	        * If an \c -extend has been set to a value greater than 0 an initial filtering
+	        * of the Constraint_list is performed, see ::filter_constraint_list.
+	        */
 	       CL->extend_threshold=(do_extend==1)?0:do_extend;
 	       CL->do_self=do_self;
 	       sprintf (CL->extend_clean_mode,   "%s", clean_mode);
@@ -4445,7 +4647,11 @@ get_cl_param(\
 	       sprintf ( CL->evaluate_mode, "%s", evaluate_mode);
 	       fprintf (le, "\n\n\tLibrary Total Size: [%d]\n", CL->ne);
 
-
+	       /**
+	        * Choose the extension mode given by the \c -extend flag, see ::choose_extension_mode.
+	        * Default values seems to be \c very_fast_triplet (??)
+	        * \sa Constraint_list::evaluate_residue_pair for more about the Extension mode.
+	        */
 	       CL=choose_extension_mode (extend_mode, CL);
 	       CL->max_n_pair=max_n_pair;
 
@@ -4453,9 +4659,21 @@ get_cl_param(\
 	       //use the L, vener touch it again
 
 
+
+	       /**
+			* \subsection extend_CL Consistency: Relaxation, Filtering, Extension!
+			*
+			* This is where the magic happens!
+			*
+			* First, if \c -out_lib is used, the library will be written into the specified file
+			* via the ::save_constraint_list function. If you demand an extended library (by
+			* \c -out_lib_mode = \c extended) then first the extension steps are performed and
+			* then the library is written to a file via ::save_extended_constraint_list.
+			* If this was all you wanted to do (\c lib_only), exit the program afterwards.
+			*
+			*/
 	      if (CL->ne>0 && out_lib[0]!='\0' && !strm (out_lib, "no"))
 	         {
-
 		   if (strstr (out_lib_mode, "extended"))
 		     {
 		       char emode[1000];
@@ -4478,83 +4696,108 @@ get_cl_param(\
 		   CL->local_stderr=display_output_filename (le, "TCLIB","tc_lib_format_01",out_lib, CHECK);
 		 }
 
-
 	      if ( lib_only)return EXIT_SUCCESS;
 
-	      //fprintf ( stderr, "AVG LINK: %3f", constraint_list2connectivity (CL); exit (0);
+
+	      /**
+	       * Extension step:
+	       * -# If \c filter_lib > 0 then reduce the Constraint_list::residue_index by
+	       *    removing edges with weight smaller or equal to \c filter_lib.
+	       *    Usually not used right here. See ::filter_constraint_list.
+	       * -# Only if the environment variable \c EXTEND4TC is set to 1, call the ::extend_constraint_list.
+	       * -# For a=0 to \c relax_lib (which is 1 per default) call ::relax_constraint_list.
+	       * -# For a=0 to \c shrink_lib call ::shrink_constraint_list, but \c schrink_lib is usually set to 0.
+	       * -# A call to ::evaluate_constraint_list_reference determines the maximum edge weights.
+	       *
+	       * We recommend reading the documentation of each of these functions to get to grips with the extension.
+	       */
 	      if (!processed_lib)
-		{
-		  if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
-		  if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
-		  for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
-		  for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
-		}
+			  {
+			  if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
+			  if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
+
+			  /* Sascha: edit */
+
+//			  for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
+			  for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
+			  }
 
 	      CL=evaluate_constraint_list_reference (CL);
 
 
 	      sprintf ( CL->distance_matrix_mode, "%s", distance_matrix_mode);
 	      sprintf ( CL->distance_matrix_sim_mode, "%s", distance_matrix_sim_mode);
-
-
-
 	      sprintf ( CL->tree_mode, "%s", tree_mode);
+
 	      //Re-estimate the distance matrix with consistency//
 	       if ( strm ("cscore", distance_matrix_mode))
 		 {
 		   CL->DM=cl2distance_matrix ( CL,NOALN,distance_matrix_mode, distance_matrix_sim_mode,1);
 		 }
 
-	      /*WEIGHT CONSTRAINT LIST*/
 
+	       /**
+	        * If \c weight is not set to no (but to \c sim or \c matrix for example),
+	        * then compute a new distance matrix (::cl2distance_matrix) and ::weight_constraint_list
+	        * with the \c seq_weight flag.
+	        */
 	       if ( !do_convert && !strm (weight, "no"))
-		{
+	       	   {
+	    	   CL->DM=cl2distance_matrix (CL, NOALN, NULL, NULL,0);
 
-		  CL->DM=cl2distance_matrix (CL, NOALN, NULL, NULL,0);
+	    	   CL=weight_constraint_list(CL, seq_weight);
 
+	    	   if (output_seq_weights (CL->W, outseqweight))
+	    		   CL->local_stderr=display_output_filename( CL->local_stderr,"WEIGHT","tc_weight",outseqweight, CHECK);
 
-		  CL=weight_constraint_list(CL, seq_weight);
-
-
-		  if (output_seq_weights (CL->W, outseqweight))
-		    CL->local_stderr=display_output_filename( CL->local_stderr,"WEIGHT","tc_weight",outseqweight, CHECK);
-		  le=display_weights(CL->W, le);
-		}
+	    	   le=display_weights(CL->W, le);
+	       	   }
 
 
 
-	      /*Prepare quadruplets*/
+	      /**
+	       * Quadruplet mode (\b experimental). Only if \c nseq_for_quadruplet > 0.
+	       *
+	       */
 	      if ( nseq_for_quadruplet && !strm(seq_name_for_quadruplet[0], "all"))
-		{
-		  CL->nseq_for_quadruplet=nseq_for_quadruplet;
-		  CL->seq_for_quadruplet=vcalloc ((CL->S)->nseq, sizeof (int));
-		  for (a=0; a< CL->nseq_for_quadruplet; a++)
-		    {
-		      printf ( "\nquad: %s", seq_name_for_quadruplet[a]);
-		      if ( (b=name_is_in_list (seq_name_for_quadruplet[a],(CL->S)->name,(CL->S)->nseq, 100))!=-1)CL->seq_for_quadruplet[b]=1;
-		      else add_warning ( stderr, "\nWARNING: Sequence %s is not in the set and cannot be used for quadruplet extension\n",seq_name_for_quadruplet[a]);
-		    }
-		}
+			{
+			  CL->nseq_for_quadruplet=nseq_for_quadruplet;
+			  CL->seq_for_quadruplet=vcalloc ((CL->S)->nseq, sizeof (int));
+			  for (a=0; a< CL->nseq_for_quadruplet; a++)
+				{
+				  printf ( "\nquad: %s", seq_name_for_quadruplet[a]);
+				  if ( (b=name_is_in_list (seq_name_for_quadruplet[a],(CL->S)->name,(CL->S)->nseq, 100))!=-1)CL->seq_for_quadruplet[b]=1;
+				  else add_warning ( stderr, "\nWARNING: Sequence %s is not in the set and cannot be used for quadruplet extension\n",seq_name_for_quadruplet[a]);
+				}
+			}
 	      else if ( nseq_for_quadruplet && strm(seq_name_for_quadruplet[0], "all"))
-		{
+			{
 
-		  CL->nseq_for_quadruplet=(CL->S)->nseq;
-		  CL->seq_for_quadruplet=vcalloc ((CL->S)->nseq, sizeof (int));
-		  for (a=0; a< CL->nseq_for_quadruplet; a++)
-		    {
-		      CL->seq_for_quadruplet[a]=1;
-		    }
-		}
+			  CL->nseq_for_quadruplet=(CL->S)->nseq;
+			  CL->seq_for_quadruplet=vcalloc ((CL->S)->nseq, sizeof (int));
+			  for (a=0; a< CL->nseq_for_quadruplet; a++)
+				{
+				  CL->seq_for_quadruplet[a]=1;
+				}
+			}
 
-/*******************************************************************************************************/
-/*                                                                                                     */
-/*                           Prepare The Alignment                                                     */
-/*                                                                                                     */
-/*******************************************************************************************************/
+
+
+	      /**
+	       * \section prog_aln Progressive Alignment
+	       *
+	       * At first, transform the ::Seqeunce into an ::Alignment via the small function ::seq2aln and
+	       * use ::ungap_array to remove unwanted gaps.
+	       * Then you have to choose the right \c msa_mode for evaluating columns. Right now,
+	       * there are several options in the code, but only a few of them are used in general.
+	       *    - \c sorted_aln
+	       *    - \c seq_aln
+	       *
+	       * \todo The documentation of this function is not yet finished
+	       */
 
 	      if ( do_align )
 		   {
-
 
 		   A=seq2aln  ((CL->S),NULL,1);
 		   ungap_array(A->seq_al,A->nseq);
@@ -5025,6 +5268,10 @@ get_cl_param(\
 	      if (full_log && full_log[0])log_function(full_log);
 
 	      return EXIT_SUCCESS;
+	      /**
+	       * Done.
+	       * \tableofcontents
+	       */
 	}
 
 /*Specialized set of Parameters*/
@@ -5301,6 +5548,7 @@ char *get_rcoffee_defaults(char *buf, char *type)
      if (buf==NULL)buf=vcalloc (1000, sizeof (char));
 
      check_program_is_installed (RNAPLFOLD_4_TCOFFEE,NULL, NULL,RNAPLFOLD_ADDRESS, INSTALL_OR_DIE);
+
      buf=strcat (buf," -extend_mode rna2 -template_file RCOFFEE -transform dna2rna -check_type -type DNA -relax_lib 0");
      /*buf=strcat (buf,"-in ");*/
 
@@ -5358,6 +5606,15 @@ void test ()
   myexit (0);
 }
 
+
+/**
+ * Use one of the other_pg options.
+ *
+ * If T-Coffee is called with the \b other_pg option, this function determines what to do.
+ *
+ * \callgraph
+ * \see ::seq_reformat, ::aln_compare
+ */
 int run_other_pg ( int argc, char *argv[])
 {
   //make minimum initialization

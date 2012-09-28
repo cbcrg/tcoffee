@@ -1,3 +1,9 @@
+/**
+ * \file io_structures.h
+ *
+ * Defines structs like ::Seqeunce, ::Weights, ::Alignment and ::Template.
+ */
+
 typedef struct
     {
     char *mode;
@@ -35,26 +41,31 @@ Genomic_info;
 
 
 
+/**
+ * Container for several sequences and their attributes.
+ *
+ * \note Not all members have a documentation
+ */
 struct Sequence
 {
-      char **file;          /* file[Nseq][FILENAMELEN] name of the file that contributed each sequence*/
-      char **seq_comment;     /* seq_comment[Nseq][LONG_STRING] comment read in the file */
-      char **aln_comment;  /*id*/
-      char **seq;          /*seq[Nseq][sequence] sequences*/
-      int *len;            /*len[Nseq] length of each sequence*/
-      int max_len;         /*Lenght of the longest seq */
-      int min_len;         /*Length of the shortest seq*/
-      int nseq;            /*nseq*/
-      int max_nseq;        /*Maximum number of sequences in the datastruct*/
-      char **name;         /*name[Nseq][MAXNAMELEN]*/
-      int **dc;         /*coordinates on the disk. Coordinates set if seq[i]==NULL*/
-/*Constraint list*/
-      struct Constraint_list *CL;
-      int contains_gap;   /*set to 1 if gaps are to be kept*/
-      char *type;         /*PROTEIN, DNA, RNA */
-      Weights *W;         /*Associated weights*/
+	  char **file;          	/**< \c file[\c nseq ][\c filenamelength ] Name of the file where each sequence is taken from */
+      char **seq_comment;   	/**< \c seq_comment[\c nseq ][\c LONG_STRING ] comment read in the fasta file */
+      char **aln_comment;  		/*id*/
+      char **seq;          		/**< \c seq[\c nseq ][\c len ] Actual sequences */
+      int *len;            		/**< \c len[\c nseq ] length of each sequence */
+      int max_len;         		/**< Lenght of the longest sequence */
+      int min_len;         		/**< Length of the shortest sequence */
+      int nseq;            		/**< Number of sequences */
+      int max_nseq;        		/*Maximum number of sequences in the datastruct*/
+      char **name;         		/**< \c name[\c nseq ][\c MAXNAMELEN ] Names of the sequences */
+      int **dc;         		/*coordinates on the disk. Coordinates set if seq[i]==NULL*/
+
+      struct Constraint_list *CL; /**< Points to the ::Constraint_list */
+      int contains_gap;   		/**< Set to 1 if gaps should be kept */
+      char *type;         		/**< PROTEIN, DNA, RNA */
+      Weights *W;         		/**< Associated ::Weight object */
       char template_file[FILENAMELEN+1];
-      struct Template **T;
+      struct Template **T;		/**< \c T[\c nseq ] Pointer to ::Template for each sequence */
       char *blastdb;
       struct Sequence *blastdbS;
       struct Sequence *MasterS;
@@ -64,23 +75,41 @@ struct Sequence
 };
 typedef struct Sequence Sequence;
 
-//_E_
+/**
+ * Any sort of Template like PDB structure, Profile or Secondary structure.
+ *
+ * The Template structure looks a little confusing on first sight. It consists of pointers
+ * of type ::X_template to different types of templates, named after their template type (*P, *R, *R etc).
+ *
+ * The ::X_template again contains pointers to all kinds of templates, but this time with each specified type
+ * like ::P_template, ::S_template, ::R_template and so on. These specific template structures contain the
+ * actual information, like a PDB identifier, an alignment or another sequence.
+ *
+ * \attention When alternative templates are given for one sequence, the first one superseeds all the others.
+ * \todo Find out whether you can use more than one of these pointers at the same time to specify several different templates.
+ * \todo See what happens to the template files you specify in :: ... where?
+ */
 struct Template
 {
-  char seq_type[10];
-  struct X_template *P;//PDB structure
-  struct X_template *F;//RNA secondary structure
-  struct X_template *S;//sequence
-  struct X_template *R;//Profile
-  struct X_template *G;//Genomic structure
-  struct X_template *T;//transmembrane
-  struct X_template *E;//secondary structure
-  struct X_template *U;//Unicode, strings
+  char seq_type[10];	 /**< String containing information on which templates are used.
+                              Looks like "P..S.......", for example, where dots are actually white spaces */
+  struct X_template *P;  /**< PDB structure */
+  struct X_template *F;  /**< RNA secondary structure */
+  struct X_template *S;  /**< sequence */
+  struct X_template *R;  /**< Profile */
+  struct X_template *G;  /**< Genomic structure */
+  struct X_template *T;  /**< transmembrane */
+  struct X_template *E;  /**< secondary structure */
+  struct X_template *U;  /**< Unicode, strings */
 
-  struct X_template *RB;
+  struct X_template *RB;  /**< ? */
 };
 typedef struct Template Template;
-//_E_
+
+
+/**
+ * See ::Template
+ */
 struct X_template
 {
   char seq_name[FILENAMELEN+1];
@@ -102,58 +131,78 @@ struct X_template
 };
 typedef struct X_template X_template;
 
-//
+/**
+ * See ::Template
+ */
 struct P_template
 {
-  char pdb_id[100];
+  char pdb_id[100]; /**< PDB identifier */
 };
 typedef struct P_template P_template;
 
-//RNA secondary Structure
+/**
+ * RNA Secondary structure, see ::Template
+ */
 struct F_template
 {
   int l;
 };
 typedef struct F_template F_template;
 
-
+/**
+ * See ::Template
+ */
 struct S_template
 {
-  Sequence *S;
+  Sequence *S; /**< Sequence object */
 };
 typedef struct S_template S_template;
 
-//Prile associated with a sequence
+
+/**
+ * Profile associated with a sequence, see ::Template
+ */
 struct R_template
 {
-  struct Alignment *A;
+  struct Alignment *A; /**< Alignment */
 };
 typedef struct R_template R_template;
 
-//Genomic Information
+
+
+/**
+ * Genomic Information, see ::Template
+ */
 struct G_template
 {
-  Sequence *S;
+  Sequence *S; /**< Sequence object */
 };
 typedef struct G_template G_template;
 
-
+/**
+ * See ::Template
+ */
 struct T_template
 {
-  Sequence *S;
+  Sequence *S; /**< Sequence object */
 };
 typedef struct T_template T_template;
 
-//_E_
+/**
+ * See ::Template
+ */
 struct E_template
 {
-  Sequence *S;
+  Sequence *S; /**< Sequence object */
 };
 typedef struct E_template E_template;
 
+/**
+ * See ::Template
+ */
 struct U_template
 {
-  int *list;
+  int *list; /**< Int aray */
 };
 typedef struct U_template U_template;
 
@@ -167,6 +216,8 @@ typedef struct
     int **count;
     int **count2;
     }Profile;
+
+
 
 struct Alignment
     {

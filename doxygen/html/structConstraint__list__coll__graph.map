@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$structSequence.html" title="Container for several sequences and their attributes." alt="" coords="263,120,351,149"/>
+<area shape="rect" id="node10" href="$structS__template.html" title="See Template." alt="" coords="381,219,483,248"/>
+<area shape="rect" id="node13" href="$structE__template.html" title="See Template." alt="" coords="5,219,107,248"/>
+<area shape="rect" id="node20" href="$structT__template.html" title="See Template." alt="" coords="131,219,232,248"/>
+<area shape="rect" id="node25" href="$structG__template.html" title="Genomic Information, see Template." alt="" coords="256,219,357,248"/>
+<area shape="rect" id="node6" href="$structTemplate.html" title="Any sort of Template like PDB structure, Profile or Secondary structure." alt="" coords="852,549,937,579"/>
+<area shape="rect" id="node8" href="$structX__template.html" title="See Template." alt="" coords="507,315,608,344"/>
+<area shape="rect" id="node16" href="$structR__template.html" title="Profile associated with a sequence, see Template." alt="" coords="507,219,608,248"/>
+<area shape="rect" id="node18" href="$structU__template.html" title="See Template." alt="" coords="632,219,733,248"/>
+<area shape="rect" id="node23" href="$structP__template.html" title="See Template." alt="" coords="757,219,859,248"/>
+<area shape="rect" id="node28" href="$structF__template.html" title="RNA Secondary structure, see Template." alt="" coords="883,219,984,248"/>
+</map>

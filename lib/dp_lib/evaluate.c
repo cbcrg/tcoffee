@@ -10,18 +10,18 @@
 
 #include "dp_lib_header.h"
 float compute_lambda (int **matrix,char *alphabet);
-/*********************************************************************************************/
-/*                                                                                           */
-/*         FUNCTIONS FOR EVALUATING THE CONSISTENCY BETWEEN ALN AND CL                       */
-/*                                                                                           */
-/*********************************************************************************************/
 
-/*Fast:         score= extended_res/max_extended_residue_for the whole aln
-  slow:         score= extended_res/sum all extended score for that residue
-  non_extended  score= non_ext     /sum all non extended  score for that residue
-  heuristic     score= extended    /sum of extended score of all pairs in the library
-                                    (i.e. Not ALL the possible pairs)
-*/				
+/**
+ * \file evaluate.c
+ * Functions to evaluate consistency between CL and Alignment
+ *
+ * \note This comment was already in the code, so I leave it here:
+ *    - Fast:         score= extended_res/max_extended_residue_for the whole aln
+ *    - slow:         score= extended_res/sum all extended score for that residue
+ *    - non_extended  score= non_ext     /sum all non extended  score for that residue
+ *    - heuristic     score= extended    /sum of extended score of all pairs in the library
+ *                                    (i.e. Not ALL the possible pairs)
+ */
 Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, const char *mode );
 int sub_aln2ecl_raw_score (Alignment *A, Constraint_list *CL, int ns, int *ls)
 {
@@ -2707,7 +2707,21 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	return score*NORM_F;
 	}
 
-
+/**
+ * Documentation inaccurate.
+ * 
+ * These lines of documentation are in the code:
+ * 
+ * Computes the extended score for aligning residue seq1(r1) Vs seq2(r2)
+ * Computes: 
+ *     - matrix_score
+ *     - non extended score
+ *     - extended score
+ *     
+ * The extended score depends on the function index_res_constraint_list.
+ * This function can compare a sequence with itself.  
+ *
+ */
 int residue_pair_extended_list ( Constraint_list *CL, int s1, int r1, int s2, int r2 )
         {
 	double score=0;  
@@ -2719,24 +2733,6 @@ int residue_pair_extended_list ( Constraint_list *CL, int s1, int r1, int s2, in
 	static int max_len;
 	int field;
 	
-	/*
-	  new function: self normalized
-	  function documentation: start
-
-	  int residue_pair_extended_list ( Constraint_list *CL, int s1, int r1, int s2, int r2);
-	  
-	  Computes the extended score for aligning residue seq1(r1) Vs seq2(r2)
-	  Computes: matrix_score
-	            non extended score
-		    extended score
-
-	  The extended score depends on the function index_res_constraint_list.
-	  This function can compare a sequence with itself.
-	  
-	  Associated functions: See util constraint list, list extention functions.
-	  
-	  function documentation: end
-	*/
 	
 	field=CL->weight_field;
 	field=WE;
@@ -4954,6 +4950,20 @@ float ** initialise_aa_physico_chemical_property_table (int *n)
 
   return p;
 }
+
+/**
+ * Set the extension mode. Default seems to be \c very_fast_triplet (??)
+ *
+ * Depending on the \c extend_mode, this functions specifies how the evaluation
+ * step has to be performed. I assignes functions to the values
+ * Constraint_list::evaluate_residue_pair and Constraint_list::get_dp_cost.
+ * In many cases, the former value is set to the function ::residue_pair_extended_list,
+ * except for several RNA modes (for example \b mode \b rcoffee uses the keyword \c rna2) and in case a matrix is specified.
+ *
+ * \param[in] extend_mode String specifying the extension mode
+ * \param[in,out] CL global Constraint_list object
+ *
+ */
 Constraint_list * choose_extension_mode ( char *extend_mode, Constraint_list *CL)
 {
   //evaluation_functions: residues start at 1, sequences at 0;

@@ -49,6 +49,13 @@ static int get_vtmpnam2_root();
 
 
 
+/**
+ * \file util.c
+ * Collection of basic C functions.
+ */
+
+
+
 
 static int global_exit_signal;
 static int no_error_report;
@@ -5201,6 +5208,11 @@ char* unset_string_variable (char *name)
   return store_string_variable (name,0, UNSET);
 }
 
+/**
+ * Store program wide parameters in a static array.
+ *
+ * \todo Document
+ */
 char* store_string_variable (char *name, char* v, int mode)
 {
   static char **name_array, **val_array;
@@ -6324,24 +6336,51 @@ char *file2string (char *name)
     }
 }
 
+
+
+
+/**
+ * Read command line parameters.
+ *
+ * This function is repeatedly used in the beginning of ::batch_main to collect all the input from
+ * the command line. Here is one example how it is called:
+ * \code
+ * 	       declare_name (extend_mode);
+ * 	       get_cl_param(\
+ * 			    /*argc* /      argc          ,
+ *              /*argv* /      argv          ,\
+ *              /*output* /    &le           ,\
+ *              /*Name* /      "-extend_mode"     ,\
+ *              /*Flag* /      &garbage    ,\
+ *              /*TYPE* /      "S"           ,\
+ *              /*OPTIONAL?* / OPTIONAL      ,\
+ *              /*MAX Nval* /  1             ,\
+ *              /*DOC* /       "Library extension mode"          ,\
+ *              /*Parameter* / &extend_mode    ,\
+ *              /*Def 1* /     "very_fast_triplet"           ,\
+ *              /*Def 2* /     ""           ,\
+ *              /*Min_value* / "any"         ,\
+ *              /*Max Value* / "any"          \
+ *              );
+ * \endcode
+ *
+ * \param argc        number of argments
+ * \param argv        list *
+ * \param para_name   param
+ * \param set_flag    Set to 1 if param set
+ * \param para_type   F, I, S, R_FN (read_file, name), W_FN (written file, name), R_FP (pointer)
+ * \param max_n_val   maximum number of values
+ * \param optional    1 for yes, 0 for no
+ * \param usage       usage list with optional value
+ * \param val         pointer to the varaible holding the value(s)
+ * \param default1    default value (if value id not there)
+ * \param default2    default value if the flag is there but no value set ("")indicates an error
+ * \param range_left  min value ( "any" for any)
+ * \param range_right max_value ( "any" for any);
+*/
 int get_cl_param (int argc, char **argv, FILE **fp,char *para_name, int *set_flag, char *type, int optional, int max_n_val,char *usage, ...)
         {
-	/*
-	usage:
-	argc:       n_ arg
-	argv        list *
-	para_name   param
-	set_flag    set to 1 if param set;
-	para_type   F, I, S, R_FN (read_file, name), W_FN (written file, name), R_FP (pointer)
-	max_n_val   maximum number of values;
-	optional    1 for yes, 0 for no
-	usage       usage list with optional value;
-	val         pointer to the varaible holding the value(s)
-	default1    default value (if value id not there)
-	default2    default value if the flag is there but no value set ("")indicates an error
-	range_left  min value ( "any" for any);
-	range_right  max_value ( "any" for any);
-	*/
+
 	int pos=0;
 	int a;
 	va_list ap;

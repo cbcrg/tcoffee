@@ -13,6 +13,16 @@
 #define LIST_N_FIELDS 7
 #define CLIST_TYPE int
 
+/**
+ * \file util_constraints_list.h
+ * Introduces the ::Constraint_list and other important structs.
+ *
+ * Ignore the function definitions in here because they are not complete
+ * (in fact, not all functions are defined in the header file).
+ *
+ * \attention For functions, see util_constraints_list.c!
+ */
+
 /*********************************************************************************************/
 /*                                                                                           */
 /*         FUNCTIONS Typedef                                                                 */
@@ -170,13 +180,21 @@ struct Distance_matrix
   int     **distance_matrix; /*Pairwise ID levels: 1-10000*/
 };
 typedef struct Distance_matrix Distance_matrix;
+
+
+/**
+ * The central data structure (library) containing nearly all information to produce an alignment.
+ *
+ * \todo Document this
+ *
+ */
 struct Constraint_list
     {
       /*In Case of Modif, synchronize with:
-	util_declare/declare_constraint_list
-	util_declare/cache_dp_value4constraint_list
-	util_declare/duplicate_constraint_list
-	util_declare/free_constraint_list
+		util_declare/declare_constraint_list
+		util_declare/cache_dp_value4constraint_list
+		util_declare/duplicate_constraint_list
+		util_declare/free_constraint_list
       */
 
       //Generic parameters
@@ -184,7 +202,11 @@ struct Constraint_list
 
       int copy_mode;
       struct Constraint_list *pCL;
-      Sequence *S;         /*Total sequences*/
+
+      /**
+       * ::Sequence object, containing several sequences and parameters.
+       */
+      Sequence *S;
       int *master; //Sequences used as master sequences
       int o2a_byte; // number of one to all provided in one go.
       Sequence *STRUC_LIST; /*Name of the sequences with a Structure*/
@@ -219,10 +241,10 @@ struct Constraint_list
 
       /*Normalisation information*/
       int normalise;
-      int max_ext_value;
-      int max_value;
+      int max_ext_value;			/**< Maximum sum of edges going out from a single nucleotide. See ::evaluate_constraint_list_reference */
+      int max_value;				/**< Overall maximum edge constraint. See ::evaluate_constraint_list_reference */
       int overweight;
-      int filter_lib;
+      int filter_lib;				/**< Threshold to filter the Constraint_list. Is set in ::batch_main. See ::filter_constraint_list */
 
       /*Pair wise alignment method*/
       int   pw_parameters_set;
@@ -261,15 +283,13 @@ struct Constraint_list
 
       /*Functions used for dynamic programming and Evaluation*/
       int no_overaln;
-      /*1 Function for evaluating the cost of a column*/
-      Col_cost_func get_dp_cost;
+
+      Col_cost_func get_dp_cost;			/**< Function for evaluating the cost of a column*/
       Profile_cost_func profile_mode;
       char profile_comparison [FILENAMELEN+1];
 
-      /*2 Function for evaluating the cost of a pair of residues*/
-      Pair_cost_func evaluate_residue_pair;
-      /*3 Function for making dynamic programming*/
-      Pwfunc pair_wise;
+      Pair_cost_func evaluate_residue_pair;	/**< Function for evaluating the cost of a pair of residues */
+      Pwfunc pair_wise; 					/**< Function for making dynamic programming*/
 
       /*
       int (*get_dp_cost)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *);
@@ -278,7 +298,7 @@ struct Constraint_list
       */
 
       int weight_field;
-      int max_n_pair; /*maximum number of pairs when aligning two profiles*/
+      int max_n_pair; /**< Maximum number of pairs when aligning two profiles*/
 
       /*Extend a sequence against itself*/
 
@@ -320,13 +340,21 @@ struct Constraint_list
       char extend_compact_mode[100];
 
       /*Lookup table parameteres*/
-      /*!!!!!do not copy in duplication*/
+      /* !!!!!do not copy in duplication*/
       /*Residue Index contains residue_index[nseq][seq_len][0]->number of links*/
       /*[seq][res][x  ]->target seq (0->N-1)*/
       /*[seq][res][x+1]->traget res (1->len*/
       /*[seq][res][x+2]->target weight */
       /*It is automatically recomputed when L residue_indexed is set to 0*/
+
       int residue_indexed;
+
+      /**
+       * Central structure containing the constraints/edges between residues.
+       *
+       * The residue index bla bla bla
+       * \todo document the residue index!
+       */
       int ***residue_index;
       int ** freeze;
       int residue_field;
@@ -377,6 +405,24 @@ struct TC_method
   Constraint_list *PW_CL;
 };
 typedef struct TC_method TC_method;
+
+
+
+
+
+/**
+ * @cond INCLUDE_WITH_DOXYGEN
+ *
+ * Doxygen:
+ *
+ * Do not document these functions in the *.h file.
+ *
+ * They will be documented in the *.c file.
+ *
+ *
+ */
+
+
 
 /*********************************************************************/
 /*                                                                   */
@@ -467,7 +513,7 @@ Constraint_list * sort_constraint_list_on_n_fields (Constraint_list *CL, int sta
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode,char *type, FILE *local_stderr, Constraint_list *CL, char *seq_source);
+Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode,char *type, FILE *local_stderr, Constraint_list *CL, char *seq_source); /**< See util_constraints_list.c::read_n_constraint_list */
 Constraint_list* read_constraint_list(Constraint_list *CL,char *fname,char *in_mode,char *mem_mode,char *weight_mode);
 Constraint_list * read_constraint_list_raw_file(Constraint_list *CL, char *fname);
 
@@ -628,3 +674,14 @@ char *** produce_method_file ( char *method);
 Constraint_list * plib_msa (Constraint_list *CL);
 int cl2worst_seq (Constraint_list *CL, int *list, int n);
 Constraint_list *add_seq2cl(int s, Constraint_list *CL);
+
+
+
+
+/**
+ * Doxygen
+ *
+ * @endcond
+ *
+ */
+

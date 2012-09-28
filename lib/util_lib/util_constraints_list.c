@@ -12,6 +12,13 @@
 #include "util_lib_header.h"
 #include "define_header.h"
 #include "dp_lib_header.h"
+
+/**
+ * \file util_constraints_list.c
+ * All utilities for the Constraint_list.
+ */
+
+
 static int entry_len;
 int compare_constraint_list_entry ( const void*vx, const void*vy);
 int compare_constraint_list_entry4bsearch ( const void*vx, const void*vy);
@@ -1446,7 +1453,12 @@ FILE* display_constraint_list (Constraint_list *CL, FILE *fp, char *tag)
 /*                                                                   */
 /*********************************************************************/
 
-
+/**
+ * Determine maximal constraints for normalisation.
+ *
+ * Sets Constaint_list::max_value to the largest edge weight occuring in the complete Constraint_list,
+ * and Constraint_list::max_ext_value to the largest sum of outgoing edges of all residues.
+ */
 Constraint_list * evaluate_constraint_list_reference ( Constraint_list *CL)
 {
 	static CLIST_TYPE *entry;
@@ -2087,6 +2099,13 @@ int compare_constraint_list_entry ( const void*vx, const void*vy)
 /*                                                                   */
 /*********************************************************************/
 Constraint_list*  fork_read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source,int nproc);
+
+/**
+ * Read several types of input files and build the library.
+ *
+ * Decides on how many processors to use and redirects to ::fork_read_n_constraint_list,
+ * so please follow the link to continue reading.
+ */
 Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source)
 {
 
@@ -2097,6 +2116,20 @@ Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,c
 }
 
 
+/**
+ * Distributes the reading process for each input file.
+ *
+ * This function forks the process (using ::vvfork) of reading several input files into
+ * several subroutines. Each of these subroutines will eventually call ::read_constraint_list,
+ * which is the central reading method and recommended reading!
+ *
+
+ * \param[in] fname       The names of the input files
+ * \param[in] n_list      Number of input files
+ * \param[in,out] CL      Points to the global ::Constraint_list object
+ * \param[in] nproc       Number of cores to use, per default the output of ::get_nproc
+ *
+ */
 Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL,char *seq_source, int nproc)
 {
 	int a, b;
@@ -2202,7 +2235,15 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 }
 
 
-
+/**
+ * Central method for reading different types of files.
+ *
+ * \todo This MUST be documented! Explain what types of input are possible and so on.
+ * \todo It should also contain odds that occur when reading several inputs, like keeping the maximum edge weight.
+ *
+ * \param[in,out] CL         points to the global ::Constrain_list object.
+ * \param[in]     in_fname   Name of the input file to be read.
+ */
 Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *in_mode, char *mem_mode,char *weight_mode)
 {
 	Sequence *SL=NULL, *TS=NULL;
@@ -2335,7 +2376,14 @@ Sequence *precompute_blast_db (Sequence *S, char **ml, int n)
 #define is_seq_source(Symbol,Mode,SeqMode)            (Symbol==Mode && (SeqMode==NULL || strm (SeqMode, "ANY") || (SeqMode[0]!='_' && strchr (SeqMode,Symbol)) || (SeqMode[0]=='_' && !strchr (SeqMode,Symbol))))
 
 
-
+/**
+ * Reads sequence files and alignments or can extract the sequence from a library.
+ *
+ * This is basically a decision function that calls the appropriate read function depending on the type of the input file.
+ * \sa ::main_read_aln to read Alignment files or sequence files
+ * \sa ::read_seq_in_list to read from a library
+ * \sa several auxiliary functions like ::aln2seq, ::seq2unique_name_seq and ::merge_seq
+ */
 Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 {
 	int nseq=0;
@@ -3236,6 +3284,13 @@ FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int
 
 
 
+/**
+ * Apply Consistency.
+ *
+ * Similar to ::relax_constraint_list, but here even edges that had zero weight before (i.e. that did not exist)
+ * will be reweighted. 
+ * \param[in,out] CL The global Constraint_list object
+ */
 Constraint_list * extend_constraint_list ( Constraint_list *CL)
 {
 	Sequence *S;
@@ -3320,6 +3375,11 @@ Constraint_list * extend_constraint_list ( Constraint_list *CL)
 }
 
 Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int nproc);
+
+
+/**
+ * Distributes the relaxation, see ::fork_relax_constraint_list.
+ */
 Constraint_list * relax_constraint_list (Constraint_list *CL)
 {
   int njobs,nproc;
@@ -3331,6 +3391,59 @@ Constraint_list * relax_constraint_list (Constraint_list *CL)
 
   return fork_relax_constraint_list (CL, njobs,nproc);
 }
+
+/**
+ * First central step of Consistency evaluation.
+ *
+ * Here we evaluate the consistency of edges in the Constraint_list::residue_index.
+ * This function distributes this process on several cores using ::vvfork.
+ * On each core, the alogrithm looks like this:
+ * \code
+ * for (A,resA) in [set of Sequences] { // Iterate over Sequences A and all residues in this sequence
+ *
+ *     n_resA = len(Constraint_list(A,resA)) // number edges/constraint going out from this residue in sequence A
+ *
+ *     for (B, resB, w_resA_resB) in Constraint_list(A,resA) { // Iterate over all matches that can be seen from this residue (usually between 0 and 4 per external sequence ehen using proba_pair)
+ *
+ *         edges_from_A [B, resB] = w_resA_resB // keep in mind outgoing edges from sequence A.
+ *         }
+ *
+ *     for (B, resB, w_resA_resB) in Constraint_list(A,resA) {
+ *
+ *         n_resB = len(Constraint_list(B,resB)) // number edges/constraint going out from resB in sequence B
+ *
+ *         for (C, resC, w_resB_resC) in Constraint_list(B,resB) {
+ *
+ *             if( C == A && resC == resA ) { // looking back at the same edge
+ *
+ *                 score += w_resA_resB
+ *                 }
+ *             else if ( isset edges_from_A[] ) { // found a 3-circle!
+ *
+ *                 score += MIN (w_resA_resB, w_resB_resC) // How to weight this consistency? Here we take the minimum.
+ *                 }
+ *             }
+ *
+ *         save (A,resA)--(B,resB) = score / MIN(n_resA, n_resB)      // Now we have a new score for edge resA -- resB. Save it
+ *
+ *         }
+ *     unset edges_from_A
+ *     }
+ *
+ * // when all jobs are finished
+ * Update CL using the new scores.
+ * \endcode
+ *
+ * During the relaxation step, the new scores are written to a file and updated not before all loops have finished.
+ * It is important not to update edges while the computation is still going on - this would lead to unexpected results.
+ * \note \b Normalisation: The new score, which is a sum of existing scores, is divided by the minimum of
+ * 		\c n_resA nad n_resB, which are the numbers of outgoing edges (to all sequences).
+ *
+ * Finally, the Constrint_list is filtered with a hardcoded threshold of 10, see ::filter_constraint_list.
+ * \attention The relaxation differs from the extension in the fact that only previously existing edges are reweighted.
+ *            Non-existing edges (i.e. edges with zero weight) cannot be created, although they might be highly consistent.
+ * \sa ::extend_constraint_list
+ */
 Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int nproc)
     {
   int a, s1, s2, r1, r2,j;
@@ -3370,6 +3483,8 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int
   for (sjobs=0,j=0;j<njobs; j++)
     {
       pid_tmpfile[j]=vtmpnam(NULL);
+
+      // Child process
       if (vvfork (NULL)==0)
 	{
 	  int norm,norm1,norm2;
@@ -3424,11 +3539,120 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int
 	  vfclose (fp);
 	  myexit (EXIT_SUCCESS);
 	}
+      // Parent process
       else
 	{
 	  sjobs++;
 	}
     }
+
+//Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int nproc)
+//    {
+//  int a, s1, s2, r1, r2,j;
+//
+//  /** Sascha: No filtering please */
+//  int thr=0;
+//  FILE *fp;
+//  char **pid_tmpfile;
+//  int sjobs;
+//  int **sl;
+//  Sequence *S;
+//  int in;
+//
+//  static int **hasch;
+//  static int max_len;
+//
+//  int t_s1, t_s2, t_r1, t_r2,x;
+//  double score;
+//  int np;
+//
+////   HERE ("%d", nproc);
+//  if (!CL || !CL->residue_index)return CL;
+//  fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", nproc);
+//
+//  if ( !hasch || max_len!=(CL->S)->max_len)
+//    {
+//      max_len=(CL->S)->max_len;
+//      if ( hasch) free_int ( hasch, -1);
+//      hasch=declare_int ( (CL->S)->nseq, (CL->S)->max_len+1);
+//    }
+//
+//  S=CL->S;
+//  in=CL->ne;
+//
+//  sl=n2splits (njobs, (CL->S)->nseq);
+//  pid_tmpfile=vcalloc (njobs, sizeof (char*));
+//
+//  for (sjobs=0,j=0;j<njobs; j++)
+//    {
+//      pid_tmpfile[j]=vtmpnam(NULL);
+//      if (vvfork (NULL)==0)
+//	{
+//	  int norm,norm1,norm2;
+//
+//	  initiate_vtmpnam(NULL);
+//	  fp=vfopen (pid_tmpfile[j], "w");
+//
+//	  for (s1=sl[j][0]; s1<sl[j][1]; s1++)
+//	    {
+//	      if (j==0)output_completion (CL->local_stderr,s1,sl[0][1],1, "Relax Library");
+//	      for (r1=1; r1<S->len[s1]; r1++)
+//		{
+//		  norm1=0;
+//		  for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
+//		    {
+//		      t_s1=CL->residue_index[s1][r1][x+SEQ2];
+//		      t_r1=CL->residue_index[s1][r1][x+R2];
+//		      hasch[t_s1][t_r1]=CL->residue_index[s1][r1][x+WE];
+//		      /** Sascha: Sum up all weights / probabilities going out from here. */
+//		      norm1 += hasch[t_s1][t_r1];
+//
+//		    }
+//		  for ( a=1; a<CL->residue_index[s1][r1][0]; a+=ICHUNK)
+//		    {
+//		      score=0;
+//		      norm2=0;
+//		      s2=CL->residue_index[s1][r1][a+SEQ2];
+//		      r2=CL->residue_index[s1][r1][a+R2];
+//
+//		      for (x=1; x< CL->residue_index[s2][r2][0]; x+=ICHUNK)
+//			{
+//			  t_s2=CL->residue_index[s2][r2][x+SEQ2];
+//			  t_r2=CL->residue_index[s2][r2][x+R2];
+//			  if (t_s2==s1 && t_r2==r1) score+= (float) CL->residue_index[s2][r2][x+WE];
+//			  else if (hasch[t_s2][t_r2])
+//			    {
+//			      /** Sascha: Product of probabilities! See ProbCons paper */
+//			      score+= ((float)hasch[t_s2][t_r2]) * ((float)CL->residue_index[s2][r2][x+WE]);
+//			    }
+//			  /** Sascha: Sum up all weights / probabilities going out from here. */
+//			  norm2 += CL->residue_index[s2][r2][x+WE];
+//			}
+//		      /** Sascha: Normalized by the product of posterior probabilities */
+//		      //norm=(float)norm1*norm2;
+//		      /** Sascha: Take only nominator, the marginal probability of Aligning A with B through C */
+//		      norm = 1000;
+//		      score=((score)?score/norm:0);
+//		      fprintf (fp, "%d ",(int)(score));
+//		    }
+//		  for (x=1; x< CL->residue_index[s1][r1][0]; x+=ICHUNK)
+//		    {
+//		      t_s1=CL->residue_index[s1][r1][x+SEQ2];
+//		      t_r1=CL->residue_index[s1][r1][x+R2];
+//		      hasch[t_s1][t_r1]=0;
+//		    }
+//		}
+//	    }
+//	  vfclose (fp);
+//	  myexit (EXIT_SUCCESS);
+//	}
+//      else
+//	{
+//	  sjobs++;
+//	}
+//    }
+
+
 
   while (sjobs>=0){vwait(NULL); sjobs--;}//wait for all jobs to complete
   for (j=0; j<njobs; j++)
@@ -3773,7 +3997,19 @@ int constraint_list2avg ( Constraint_list *CL)
 }
 
 
-
+/**
+ * Deletes unimportant edges from the Constraint_list.
+ *
+ * This function reduces the size of th eConstraint_list, which is useful to speed
+ * up calculations such as the extension step, by kicking out all constraints/edges
+ * with a weight smaller or equal to a given threshold.
+ * Currently there is a hardcoded value of 10 in ::fork_relax_constraint_list, but it
+ * can also be invokled before the relaxation by setting the \c -filter_lib parameter.
+ *
+ * \param[in,out] CL    The global Constraint_list object.
+ * \param[in]     field Internal, constant number to access the CHUNKS of Constraint_list::residue_index correctly.
+ * \param[in]     T     threshold: Edges with weight smaller or equal to T will be removed.
+ */
 Constraint_list * filter_constraint_list (Constraint_list *CL,int field, int T)
 {
 	int s1,r1,b,c,d;
@@ -4327,6 +4563,22 @@ char * list2prune_list ( Sequence *S, int **sm)
 /*                                                                   */
 /*********************************************************************/
 
+
+/**
+ * Specify a weight for each sequence in the Constraint_list.
+ *
+ * If \c seq_weight is "t_coffee", weights (see ::Weights object) are computed according to
+ * ::compute_t_coffee_weight and given to the Constraint_list::W reference.
+ * If \c seq_weight is a file, this function will read the weight file (::read_seq_weight).
+ * In every other case, all sequence weights are set to 1 and the weight mode Weight::mode is
+ * set to "no_seq_weight".
+ *
+ * Unless the third case occurs, so whenever you want the sequences to be weighted,
+ * the function ::re_weight_constraint_list takes care of it.
+ *
+ * \param[in] seq_weight can be "t_coffee" or the name of a weight file.
+ * \param[in,out] CL points to the global Constraint_list object.
+ */
 Constraint_list *weight_constraint_list(Constraint_list * CL, char *seq_weight)
 
 {
@@ -6474,49 +6726,6 @@ Constraint_list *add_seq2cl(int s, Constraint_list *CL)
 
   return read_constraint_list_file(CL,lib);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -9,6 +9,11 @@
 #include "dp_lib_header.h"
 #include "define_header.h"
 
+/**
+ * \file aln_convertion_util.c
+ * Contains several auxiliary functions for alignments and templates.
+ */
+
 int aln_has_stockholm_structure (Alignment *A)
 {
   return name_is_in_list ("#=GC SS_cons", A->name, A->nseq, 100);
@@ -2546,6 +2551,10 @@ Alignment *strings2aln (int nseq,...)
 	  A=seq2aln(S,NULL, 1);
 	  return A;
 	}
+
+/**
+ * Transform a ::Sequence into an ::Alignment.
+ */
 Alignment *seq2aln (Sequence *S, Alignment *A,int rm_gap)
 	{
 	int a;
@@ -5053,6 +5062,14 @@ Sequence * profile_seq2template_seq ( Sequence *S, char *template_file, Fname *F
   return S;
 }
 
+/**
+ * Specify types of used templates for each sequence.
+ *
+ * Writes the types of templates existing for each Seqeuence into Template::seq_type of
+ * the Sequence::T template object. The seq_type is a string like "P..S.......", for example,
+ * where dots are actually white spaces.
+ *
+ */
 Sequence * seq2template_type(Sequence *Seq)
 {
   //add template
@@ -5177,6 +5194,24 @@ int handle_X_template_files ( X_template *T, char *mode)
 
 char *trim_template_file (char *file, Sequence *S);//Remove from template file all sequences that cannot be used
 
+
+/**
+ * Adds templates to a Sequence object.
+ *
+ * This function is recursive: Depending on the type of \c template_file,
+ * it performs some preparations and calles itselt again with a different template_file.
+ *     - \c no_template and the sequence will be returned, unchanged.
+ *     - \c MODE_ and the prefix \c MODE_ will be cut off before calling the same function again.
+ *     - \c PSIBLAST,\c BLAST, \c EXPRESSO, \c RCOFFEE and secveral others:
+ *          The script \b tc_generic_method.pl is initiated (that means, the name of the script is given as new
+ *          parameter for the recursive call with an additional prefix \c SCRIPT_ ). @ work here!!!
+ *          In this case
+ *
+ * \todo @ work here!!! Understand this function and then Document it.
+ *
+ * \param[in,out] S Sequence object, will be modified.
+ * \param[in] template_list String containing the template file or commands how to get one
+ */
 Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 {
   /*Expected format for the template file:

@@ -16,6 +16,11 @@
 #define ACTION2(x,y) ((n_actions>=(x+1))?action_list[x]:y)
 #define ATOI_ACTION(x) ((ACTION(x)!=NULL)?(atoi(ACTION(x))):0)
 
+/**
+ * \file reformat.c
+ * Auxiliary functions to format sequences etc.
+ *
+ */
 /**************************************************************************************************/
 /*****************************    SEQ_REFORMAT     ******************************************/
 /**************************************************************************************************/
@@ -8408,6 +8413,14 @@ char * back_translate_dna_seq ( char *in_seq,char *out_seq, int mode)
 
 static Sequence *rna_seq2dna_seq (Sequence *S);
 static Sequence *dna_seq2rna_seq (Sequence *S);
+
+/**
+ * Transforms RNA to DNA or the other way around.
+ *
+ * Will invoke ::rna_seq2dna_seq or ::dna_seq2rna_seq or give an error, if mode is unknown.
+ * \param[in,out] S Points to a Sequence object.
+ * \param mode Should be either \b rna2dna or \b dna2rna
+ */
 Sequence * transform_sequence ( Sequence *S, char *mode)
 {
   if ( strm (mode, "rna2dna"))
