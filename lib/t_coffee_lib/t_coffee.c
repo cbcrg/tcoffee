@@ -24,6 +24,11 @@
 
 /** \mainpage T-Coffee Index Page
  *
+ * \section premise Premise
+ * 
+ * This documentation is far from comprehensive... in fact only a few functions have been documented yet. 
+ * But maybe it will be extended during the years by people working with the T-Coffe code ;)
+ * 
  * \section start A Place to Start With
  *
  * In order to get an idea of the main procedure of T-Coffee when calculating a multiple alignment,
