@@ -13,8 +13,6 @@
 #include "t_coffee.h"
 #include "km_coffee_header.h"
 
-#include "debug.h" /* Sascha*/
-
 /**
  * \file
  * Main file of T-Coffee
