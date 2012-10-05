@@ -9821,7 +9821,7 @@ int *seq2kmeans_class (Alignment *A, int k, char *mode)
   int a;
 
   v=aln2km_vector(A,mode,&dim);
- 
+
   km_kmeans (v,A->nseq,dim,k,0.0001,NULL);
 
   class=vcalloc (A->nseq, sizeof (int));
@@ -10109,13 +10109,13 @@ Alignment *gap_trim (Alignment *A, int f)
 	}
 
 	max=(max*(100-f))/100;
-	fprintf(stderr, "max %f %i", max,f);
+// 	fprintf(stderr, "max %f %i", max,f);
 	sort_int (v, 2, 1, 0, A->nseq-1);
 	for (n=0,cmax=0,a=0;a<A->nseq; a++)
 	{
 
 		cmax+=v[a][1];
- 		fprintf(stderr,"%i\n", cmax);
+ 	//	fprintf(stderr,"%i\n", cmax);
 		if (cmax<max)
 		{
 // 			fprintf (stderr, ">%s GapScore: %d \n", A->name[v[a][0]], v[a][1]);
@@ -10123,7 +10123,8 @@ Alignment *gap_trim (Alignment *A, int f)
 		}
 		else
 		{
-			fprintf (stderr, ">%s GapScore: %d \n", A->name[v[a][0]], v[a][1]);
+// 			fprintf (stderr, ">%s GapScore: %d \n", A->name[v[a][0]], v[a][1]);
+			fprintf (stderr, ">%s\n", A->name[v[a][0]]);
 		}
 	}
 

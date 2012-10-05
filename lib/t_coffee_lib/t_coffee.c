@@ -5932,6 +5932,7 @@ char** km_coffee (int argc, char **argv)
 	Sequence *S;
 	int a;
 	int k=0;
+	int k_leaf=0;
 	int nit=0;
 	Alignment *A;
 	char *tm=NULL;
@@ -5945,6 +5946,8 @@ char** km_coffee (int argc, char **argv)
 	char *out_f = NULL;
 	char *km_init = NULL;
 	int n_core=1;
+	int gapopen=0;
+	int gapext=0;
 	for (a=0; a<argc; a++)
 	{
 		if ( strm (argv[a], "-seq"))
@@ -5962,6 +5965,18 @@ char** km_coffee (int argc, char **argv)
 			{km_tree=argv[++a];}
 		else if ( strm (argv[a], "-km_nit"))
 			{nit=atoi (argv[++a]);}
+		else if ( strm (argv[a], "-km_kl"))
+			{k_leaf=atoi (argv[++a]);}
+		else if ( strm (argv[a], "-gapopen"))
+			{gapopen=atoi (argv[++a]);
+		new_argv[new_argc++]=argv[a-1];
+		new_argv[new_argc++]=argv[a];
+			}
+		else if ( strm (argv[a], "-gapext"))
+			{gapext=atoi (argv[++a]);
+		new_argv[new_argc++]=argv[a-1];
+		new_argv[new_argc++]=argv[a];
+			}
 		else if ( strm (argv[a], "-tree_mode"))
 			{tm=argv[++a];}
 		else if ( strm (argv[a], "-km_method"))
@@ -6002,7 +6017,9 @@ char** km_coffee (int argc, char **argv)
 			method="proba_pair";
 		if (km_init == NULL)
 			km_init = "distributed";
-		km_coffee_align3(seq_f, k, method, out_f, n_core, km_init );
+		if (k_leaf==0)
+			k_leaf=k;
+		km_coffee_align3(seq_f, k, k_leaf, method, out_f, n_core, gapopen, gapext, km_init );
 	}
 	else
 	{
@@ -6023,7 +6040,7 @@ char** km_coffee (int argc, char **argv)
 		km_coffee_align2 (S,km_tree,k, new_argc,new_argv);
 	}
 	else
-		myexit(fprintf_error (stderr,"Please specify km_mode (topdown/bottomup/km_reduced)!\n"));
+		myexit(fprintf_error (stderr,"Please specify km_mode (topdown/bottomup/km_fast)!\n"));
 	}
 	myexit (EXIT_SUCCESS);
 }
@@ -6340,7 +6357,7 @@ Alignment *km_align_seq_fast (Alignment *A, int argc, char **argv, int nit, int 
 	    else CL->diagonal_threshold=6;
 	    sprintf (CL->dp_mode, "myers_miller_pair_wise");
 	    CL->S=declare_sequence (1,1,1);
-	  }
+	}
 
 	ungap (A->seq_al[0]);
 	n=A->nseq;
@@ -6414,10 +6431,8 @@ Alignment * km_coffee_align2 (Sequence *S, char *km_tree, int k, int argc, char 
 	{
 		seq2km_tree (S, km_tree2);
 	}
-
-
-  T=main_read_tree (km_tree2);
-  tree_aln_N(T,S, k, argc, argv);
-  myexit (EXIT_SUCCESS);
-  return NULL;
+	T=main_read_tree (km_tree2);
+	tree_aln_N(T,S, k, argc, argv);
+	myexit (EXIT_SUCCESS);
+	return NULL;
 }

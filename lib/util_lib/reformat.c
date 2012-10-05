@@ -1657,39 +1657,84 @@ int is_simple_pdb_file ( char *name)
   return 0;
 }
 
-
-int is_pdb_file ( char *name)
+/**
+ * \brief Checks if a given filename belongs to a PDB.
+ * \param fname The filename
+ * \return 1 if the file exists and the keywords "HEADER", "SEQRES" and "ATOM" appear (in this order) at the beginning of a line. 0 otherwise
+ */
+int is_pdb_file ( char *fname)
        {
 	 FILE *fp;
 	 int ispdb=0;
 
-	 if ( name==NULL) return 0;
-	 if (!check_file_exists (name))return 0;
+	 if ( fname==NULL) return 0;
+	 if (!check_file_exists (fname))return 0;
 
-	 if ((fp=find_token_in_file (name, NULL, "\nHEADER"))!=NULL)
-           {vfclose (fp);
-	     ispdb++;
-	   }
-	 if ((fp=find_token_in_file (name, NULL, "\nSEQRES"))!=NULL)
-           {
-	     vfclose (fp);
-	     ispdb++;
-	   }
+// 	static char *name;
+	int token_len;
 
-	 if ((fp=find_token_in_file (name, NULL, "\nATOM"))!=NULL)
-	   {
-	     vfclose (fp);
-	     ispdb++;
-	   }
-	 else
-	   {
-	     ispdb=0;
-	   }
+	int only_start;
+	const int LINE_LENGTH=1000;
+	char line[LINE_LENGTH];
 
 
-	 if ( ispdb>=2)return 1;
-	 else return 0;
-       }
+	/*Note: Token: any string
+	If Token[0]=='\n' Then Token only from the beginning of the line
+	*/
+
+	if (!fp && !file_exists("CACHE",fname))
+		return NULL;
+
+	if (!fp)
+	{
+		fp=vfopen ( fname, "r");
+	}
+
+	line[LINE_LENGTH-2]='\0';
+	while (fgets(line, LINE_LENGTH, fp)!=NULL)
+	{
+		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
+			line[LINE_LENGTH-2]='\0';
+		else
+		{
+			if (!strncmp(line,"HEADER",6))
+			{
+				++ispdb;
+				break;
+			}
+		}
+	}
+	while (fgets(line, LINE_LENGTH, fp)!=NULL)
+	{
+		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
+			line[LINE_LENGTH-2]='\0';
+		else
+		{
+			if (!strncmp(line,"SEQRES",6))
+			{
+				++ispdb;
+				break;
+			}
+		}
+	}
+	while (fgets(line, LINE_LENGTH, fp)!=NULL)
+	{
+		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
+			line[LINE_LENGTH-2]='\0';
+		else
+		{
+			if (!strncmp(line,"ATOM",4))
+			{
+				++ispdb;
+				break;
+			}
+		}
+	}
+
+	return (ispdb>=2?1:0);
+}
+
+
 int is_seq ( char *name)
        {
 	 char *format;
@@ -11462,63 +11507,63 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
        else if ( strm (action, "extract_seq"))
 	 {
-	   int is_file;
-	   if ( check_file_exists (action_list[1])&& format_is_fasta (action_list[1]))
-	     {
-	       is_file=1;
-	       BUFS=main_read_seq (action_list[1]);
-	       action_list=BUFS->name;
-	       n_actions=BUFS->nseq;
-	     }
-	   else
-	     {
-	       is_file=0;
-	       action_list++;
-	       n_actions--;
-	     }
-
-	   for ( a=0; a< n_actions;)
-	     {
-	       s=action_list[a];
-
-	       if ( n_actions==1 || is_file==1)
+		 int is_file;
+		 if ( check_file_exists (action_list[1])&& format_is_fasta (action_list[1]))
 		 {
-		   start=1;
-		   end=0;
-		   a+=1;
+			 is_file=1;
+			 BUFS=main_read_seq (action_list[1]);
+			 action_list=BUFS->name;
+			 n_actions=BUFS->nseq;
 		 }
-	       else
+		 else
 		 {
-
-		   start=(strm2 (s,"#","*"))?1:(atoi(action_list[a+1]));
-		   end=  (strm2 (action_list[a+2],"#","*"))?0:(atoi(action_list[a+2]));
-		   a+=3;
+			 is_file=0;
+			 action_list++;
+			 n_actions--;
 		 }
 
-	       if ( strm2 (s, "#", "*"))
+		 for ( a=0; a< n_actions;)
 		 {
-		   OUT_S=extract_one_seq((D1->A)->name[0],start, end, D1->A, RAD->keep_name);
-		   for (b=1; b< (D1->A)->nseq; b++)
-		     {
-		      NS=extract_one_seq((D1->A)->name[b],start, end, D1->A, RAD->keep_name);
-		      if (count_n_res_in_array(NS->seq[0], -1))
-			OUT_S=add_sequence ( NS,OUT_S, 0);
-		     }
+			 s=action_list[a];
+
+			 if ( n_actions==1 || is_file==1)
+			 {
+				 start=1;
+				 end=0;
+				 a+=1;
+			 }
+			 else
+			 {
+
+				 start=(strm2 (s,"#","*"))?1:(atoi(action_list[a+1]));
+				 end=  (strm2 (action_list[a+2],"#","*"))?0:(atoi(action_list[a+2]));
+				 a+=3;
+			 }
+
+			 if ( strm2 (s, "#", "*"))
+			 {
+				 OUT_S=extract_one_seq((D1->A)->name[0],start, end, D1->A, RAD->keep_name);
+				 for (b=1; b< (D1->A)->nseq; b++)
+				 {
+					 NS=extract_one_seq((D1->A)->name[b],start, end, D1->A, RAD->keep_name);
+					 if (count_n_res_in_array(NS->seq[0], -1))
+						 OUT_S=add_sequence ( NS,OUT_S, 0);
+				 }
+			 }
+			 else
+			 {
+				 if ( a==1)OUT_S=extract_one_seq(s,start, end, D1->A, RAD->keep_name);
+				 else
+				 {
+					 NS=extract_one_seq(s,start, end, D1->A, RAD->keep_name);
+					 OUT_S=add_sequence ( NS,OUT_S, 0);
+				 }
+			 }
 		 }
-	       else
-		 {
-		  if ( a==1)OUT_S=extract_one_seq(s,start, end, D1->A, RAD->keep_name);
-		  else
-		    {
-		      NS=extract_one_seq(s,start, end, D1->A, RAD->keep_name);
-		      OUT_S=add_sequence ( NS,OUT_S, 0);
-		    }
-		 }
-	     }
-	   D1->S=OUT_S;
-	   free_aln (D1->A);
-	   D1->A=declare_Alignment(D1->S);
-	   seq2aln (D1->S, D1->A, RAD->rm_gap);
+		 D1->S=OUT_S;
+		 free_aln (D1->A);
+		 D1->A=declare_Alignment(D1->S);
+		 seq2aln (D1->S, D1->A, RAD->rm_gap);
 	 }
 
        else if ( strm (action, "extract_seq_list"))

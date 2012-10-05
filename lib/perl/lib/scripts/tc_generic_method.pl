@@ -971,12 +971,13 @@ sub seq2profile_pair
 	}
 	elsif ( $method eq "clustalo")
 	{
-		&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
-		recode_name ("prf1.aln", "code");
-		recode_name ("prf2.aln", "code");
-		`clustalo --p1 prf1.aln --p2 prf2.aln -o result.aln --force`;
-		recode_name ("result.aln");
-		&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);
+		`clustalo --p1 $profile1 --p2 $profile2 -o $outfile --force`;
+# 		&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
+# 		recode_name ("prf1.aln", "code");
+# 		recode_name ("prf2.aln", "code");
+# 		`clustalo --p1 prf1.aln --p2 prf2.aln -o result.aln --force`;
+# 		recode_name ("result.aln");
+# 		&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);
 	}
 	elsif ( $method eq "hhalign")
 	{
@@ -1369,6 +1370,71 @@ sub read_fasta_aln
       }
     return %hseq;
   }
+
+sub recode_name2
+{
+	my ($in)=shift;
+	my $mode=shift;
+
+	my %seq;
+	my $new_name;
+
+	if (! -e $in){return;}
+
+	#needed by ClustalOmega to avoid very long names
+	open (INFILE, "+<$in");
+
+	my $line;
+
+	if ($mode eq "code")
+	{
+		chomp($line = <INFILE>);
+		my $line_length = length($line);
+		$new_name=++$RECODE_N;
+		$new_name=">$new_name";
+		my $new_length = length($new_name);
+		$RECODE {$new_name}=$line;
+		for ($count = $new_length; $count < $line_length; $count++)
+		{
+			$new_name .= " ";
+		}
+		$new_name="$new_name\n";
+		seek INFILE, 0, 0
+			or die "could not seek: $!";
+		print INFILE "$new_name";
+	}
+	else
+	{
+		my $n_found = 0;
+		my $file_pos=0;
+		$file_pos=tell INFILE;
+		while (<INFILE>)
+		{
+			$line=$_;
+			$line =~ s/\s*$//;
+
+			$old_name= $RECODE{$line};
+			if ($old_name ne "")
+			{
+				seek INFILE, $file_pos, 0
+					or die "could not seek: $!";
+				print INFILE "$old_name\n";
+				$file_pos++;
+				if ($file_pos == 2)
+				{
+					print "stop\n";
+					break;
+				}
+			}
+			$file_pos=tell INFILE;
+		}
+
+	}
+
+
+	close INFILE;
+}
+
 
 sub recode_name
 {

@@ -620,6 +620,52 @@ Sequence * declare_sequence ( int min, int max, int nseq)
     return LS;
     }
 
+/*
+Sequence * realloc_sequence   (Sequence *OUT, int new_nseq, int max_len)
+{
+
+
+	if ( new_nseq<OUT->max_nseq)
+		return OUT;
+
+	OUT->min_len =MIN(OUT->min_len,max_len);
+	OUT->max_len =MAX(OUT->max_len,max_len);
+
+
+	OUT->seq_comment=vrealloc(OUT->seq_comment, new_nseq*sizeof(char*));
+	OUT->seq_comment[new_nseq-1]=vcalloc(COMMENT_SIZE, sizeof(char));
+	OUT->aln_comment=vrealloc(OUT->aln_comment, new_nseq*sizeof(char*));
+	OUT->aln_comment[new_nseq-1]=vcalloc(COMMENT_SIZE, sizeof(char));
+	OUT->name    =vrealloc ( OUT->name,    new_nseq*sizeof(char*));
+	OUT->name[new_nseq-1]=vcalloc(MAXNAMES+1, sizeof(char));
+
+	if (max_len>OUT->max_len)
+	{
+		// This is still inefficent - could be improved using vrealloc instead of complete new object
+		OUT->seq     =new_realloc_char ( OUT->seq,     new_nseq,OUT->max_len+1);
+	}
+	else
+	{
+		OUT->seq     =vrealloc(OUT->seq,     new_nseq*sizeof(char*));
+		OUT->seq[new_nseq-1]=vcalloc(OUT->max_len+1,sizeof(char));
+	}
+
+	if (OUT->genome_co != NULL)
+		OUT->genome_co = vrealloc(OUT->genome_co, new_nseq * sizeof(Genomic_info));
+
+// 	OUT->file    =new_realloc_char ( OUT->file,    new_nseq,STRING+1);
+	OUT->file = vrealloc(OUT->file, new_nseq*sizeof(char*));
+	OUT->file[new_nseq-1] = vcalloc(STRING+1, sizeof(char));
+	OUT->len     =vrealloc     ( OUT->len,     (new_nseq+1)*sizeof (int));
+
+
+	OUT->T=(Template**)realloc_arrayN (2, (void **)OUT->T,sizeof (Template), new_nseq, 1);
+	OUT->dc=(int **)realloc_arrayN (2, (void **)OUT->dc,sizeof (int), new_nseq, 2);
+
+	OUT->max_nseq=new_nseq;
+	return OUT;
+}*/
+
 
 Sequence * realloc_sequence   (Sequence *OUT, int new_nseq, int max_len)
 {
@@ -630,11 +676,13 @@ Sequence * realloc_sequence   (Sequence *OUT, int new_nseq, int max_len)
 
 	OUT->min_len =MIN(OUT->min_len,max_len);
 	OUT->max_len =MAX(OUT->max_len,max_len);
+
 	OUT->seq_comment =new_realloc_char ( OUT->seq_comment, new_nseq,COMMENT_SIZE);
 	OUT->aln_comment =new_realloc_char ( OUT->aln_comment, new_nseq,COMMENT_SIZE);
-
-	OUT->seq     =new_realloc_char ( OUT->seq,     new_nseq,OUT->max_len+1);
 	OUT->name    =new_realloc_char ( OUT->name,    new_nseq,MAXNAMES+1);
+	OUT->seq     =new_realloc_char ( OUT->seq,     new_nseq,OUT->max_len+1);
+
+
 	if (OUT->genome_co != NULL)
 		OUT->genome_co = vrealloc(OUT->genome_co, new_nseq * sizeof(Genomic_info));
 
@@ -647,7 +695,6 @@ Sequence * realloc_sequence   (Sequence *OUT, int new_nseq, int max_len)
 	OUT->max_nseq=new_nseq;
 	return OUT;
 }
-
 
 Sequence * duplicate_sequence (Sequence *S )
 {
@@ -663,20 +710,20 @@ Sequence * duplicate_sequence (Sequence *S )
 	  {
 	    if (S->seq && S->seq[a])
 	      {
-		
+
 		sprintf ( LS->file[b], "%s", S->file[a]);
-		
+
 		if ( S->seq_comment && S->seq_comment[a])
 		  sprintf ( LS->seq_comment[b], "%s", S->seq_comment[a]);
 		if ( S->aln_comment && S->aln_comment[a])
 		  sprintf ( LS->aln_comment[b], "%s", S->aln_comment[a]);
-		
+
 		if ( S->seq && S->seq[a])
 		  sprintf  ( LS->seq[b],  "%s", S->seq[a]);
-	
+
 		if ( S->name&& S->name[a])
 		  sprintf ( LS->name[b], "%s", S->name[a]);
-		
+
 		if (S->genome_co != NULL)
 			{
 				unsigned int len;
@@ -736,7 +783,7 @@ void free_sequence ( Sequence *LS, int nseq)
 	free_char ( LS->name,-1);
 
 	free_int  (LS->dc, -1);
-	
+
 	free_arrayN((void*)LS->T, 2);
 	vfree (LS->type);
 	vfree (LS->len);
@@ -1859,24 +1906,53 @@ REALLOC_ARRAY(double,write_size_double,read_size_double,realloc_double,declare_d
 
 #define NEW_REALLOC_ARRAY(type,wf,rf,function1,function2,function3)\
 type ** function1 ( type **array, int ext1, int ext2)\
-    {int a, b;\
-     int first, l1;\
-     int second, l2;\
-     type **new_array;\
-\
-     first=rf(array,sizeof (type*));\
-     second=rf(array[0],sizeof (type));\
-     \
-     if ( ext1==-1)ext1=first;\
-     if ( ext2==-1)ext2=second;\
-     l1=MIN(ext1, first);\
-     l2=MIN(ext2, second);\
-     new_array=declare_arrayN(2,sizeof(type),ext1, ext2);\
-     for ( a=0; a<l1; a++)\
-       for ( b=0; b<l2; b++)new_array[a][b]=array[a][b];\
-     function3(array, -1);\
-     return new_array;\
-    }
+{\
+	int first, l1;\
+	int second, l2;\
+	first=rf(array,sizeof (type*));\
+	second=rf(array[0],sizeof (type));\
+	if (ext1==-1) ext1=first;\
+	if (ext2==-1) ext2=second;\
+		\
+	array=vrealloc(array, sizeof(char*)*ext1);\
+	int i,j;\
+	if (ext1>first)\
+	{\
+		for (i=first; i<ext1; ++i)\
+			array[i]=vrealloc(array[i], sizeof(char)*ext2);\
+	}\
+	if (ext2!=second)\
+	{\
+		for (i=0; i<ext1; ++i)\
+		{\
+			array[i]=vrealloc(array[i], sizeof(char)*ext2);\
+		}\
+	}\
+	return array;\
+}
+
+#define NEW_REALLOC_ARRAY_OLD(type,wf,rf,function1,function2,function3)\
+type ** function1 ( type **array, int ext1, int ext2)\
+{\
+	int a, b;\
+	int first, l1;\
+	int second, l2;\
+	type **new_array;\
+	\
+	first=rf(array,sizeof (type*));\
+	second=rf(array[0],sizeof (type));\
+	\
+	if ( ext1==-1)ext1=first;\
+	if ( ext2==-1)ext2=second;\
+	l1=MIN(ext1, first);\
+	l2=MIN(ext2, second);\
+	new_array=declare_arrayN(2,sizeof(type),ext1, ext2);\
+	for ( a=0; a<l1; a++)\
+		for ( b=0; b<l2; b++)new_array[a][b]=array[a][b];\
+			function3(array, -1);\
+	return new_array;\
+}
+
 
 NEW_REALLOC_ARRAY(short,write_size_short,read_size_short,new_realloc_short,declare_short,free_short)
 NEW_REALLOC_ARRAY(char,write_size_char,read_size_char,new_realloc_char,declare_char,free_char)

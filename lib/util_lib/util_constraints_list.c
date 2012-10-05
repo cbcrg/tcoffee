@@ -287,6 +287,7 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 				//set_pid (pid);
 				npid++;
 				submited++;
+				printf(stderr, "%i %i\n", submited, max_nproc);
 				if (submited>max_nproc)
 				{
 					//wait for nproc
@@ -2160,8 +2161,10 @@ Constraint_list* fork_read_n_constraint_list(char **fname,int n_list, char *in_m
 		if ( b==1);
 		else sprintf ( fname[0], "%s", fname[b-1]);
 		n_list=1;
+
 		return read_constraint_list (CL, fname[0], in_mode, mem_mode,weight_mode);
 // 		return fork_read_n_constraint_list(fname,n_list, in_mode,mem_mode,weight_mode, type,local_stderr, CL, seq_source,1);
+
 	}
 
 	if (!CL)CL=declare_constraint_list ( S,NULL, NULL, 0,(strm(mem_mode, "disk"))?tmpfile():NULL, NULL);
@@ -2418,7 +2421,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 			char *lname;
 			if (buf)vfree (buf);
 
-			
+
 			buf=name2type_name(fname[a]);mode=buf[0];lname=buf+1;
 			if (is_seq_source ('A', mode, SeqMode))
 			  {
@@ -2434,7 +2437,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 			  }
 			else if ( is_seq_source ('R', mode, SeqMode))
 			  {
-			    
+
 				S=add_prf2seq (lname, S);
 
 			  }
@@ -2515,7 +2518,7 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 				myexit (fprintf_error ( stderr, "%s is neither a file nor a method [FATAL:%s]\n", lname));
 			}
 		}
-		
+
 		S=remove_empty_sequence (S);
 
 
@@ -3288,7 +3291,7 @@ FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int
  * Apply Consistency.
  *
  * Similar to ::relax_constraint_list, but here even edges that had zero weight before (i.e. that did not exist)
- * will be reweighted. 
+ * will be reweighted.
  * \param[in,out] CL The global Constraint_list object
  */
 Constraint_list * extend_constraint_list ( Constraint_list *CL)

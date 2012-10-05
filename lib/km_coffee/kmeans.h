@@ -24,9 +24,6 @@ void
 delKM_node(KM_node *node);
 
 
-double
-km_sq_dist(const double *vec1, const double *vec2, size_t dim);
-
 /**
  * \brief Initializes the centers by using the kmeans++ initialization.
  * \tparam double The type of data stored in the Vector.
@@ -94,8 +91,9 @@ my_assignment_sort (const void *i, const void *j);
  * \param error_threshold The change of error to stop kmeans
  */
 KM_node*
-hierarchical_kmeans(VectorSet *vec_set, unsigned int k, const char *init, double error_threshold);
-
+hierarchical_kmeans(VectorSet *vec_set, unsigned int k, unsigned int k_leaf, const char *init, double error_threshold);
+KM_node*
+hierarchical_kmeans2(VectorSet *vec_set, unsigned int k, unsigned int k_leaf, const char *init, double error_threshold);
 
 /**
  * \brief The kmeans clustering algorithm.
@@ -121,11 +119,24 @@ kmeans(VectorSet *vecs, unsigned int k, const char *init, double error_threshold
 void
 kmeans_sub(const VectorSet *vecs, unsigned int k, const char *init, double error_threshold, size_t start, size_t end);
 
+/**
+* \brief The kmeans clustering algorithm.
+*
+* \param vecs The vectors to cluster.
+* \param k the number of clusters to use.
+* \param init The methods to use for initializing the first centers: "random", "++" or "first".
+* \param error_threshold The change of error to stop kmeans.
+* \param start The startint point for the clustering.
+* \param end The end point for the clustering.
+* \param return The centers found.
+*/
+VectorSet *
+kmeans_sub2(const VectorSet *vecs, unsigned int k, const char *init, double error_threshold, size_t start, size_t end);
+
 
 double
 km_common(const double *vec1, const double *vec2, size_t dim);
 
-double
-km_angle_dist(const double *vec1, const double *vec2, size_t dim);
+
 #endif
 
