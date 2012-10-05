@@ -1662,77 +1662,111 @@ int is_simple_pdb_file ( char *name)
  * \param fname The filename
  * \return 1 if the file exists and the keywords "HEADER", "SEQRES" and "ATOM" appear (in this order) at the beginning of a line. 0 otherwise
  */
-int is_pdb_file ( char *fname)
+int is_pdb_file ( char *name)
        {
-	 FILE *fp=NULL;
+	 FILE *fp;
 	 int ispdb=0;
 
-	 if ( fname==NULL) return 0;
-	 if (!check_file_exists (fname))return 0;
+	 if ( name==NULL) return 0;
+	 if (!check_file_exists (name))return 0;
 
-// 	static char *name;
-	int token_len;
+	 if ((fp=find_token_in_file (name, NULL, "\nHEADER"))!=NULL)
+           {vfclose (fp);
+	     ispdb++;
+	   }
+	 if ((fp=find_token_in_file (name, NULL, "\nSEQRES"))!=NULL)
+           {
+	     vfclose (fp);
+	     ispdb++;
+	   }
 
-	int only_start;
-	const int LINE_LENGTH=1000;
-	char line[LINE_LENGTH];
+	 if ((fp=find_token_in_file (name, NULL, "\nATOM"))!=NULL)
+	   {
+	     vfclose (fp);
+	     ispdb++;
+	   }
+	 else
+	   {
+	     ispdb=0;
+	   }
 
 
-	/*Note: Token: any string
-	If Token[0]=='\n' Then Token only from the beginning of the line
-	*/
+	 if ( ispdb>=2)return 1;
+	 else return 0;
+       }
 
-	if (!fp && !file_exists("CACHE",fname))
-		return NULL;
-
-	if (!fp)
-	{
-		fp=vfopen ( fname, "r");
-	}
-
-	line[LINE_LENGTH-2]='\0';
-	while (fgets(line, LINE_LENGTH, fp)!=NULL)
-	{
-		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
-			line[LINE_LENGTH-2]='\0';
-		else
-		{
-			if (!strncmp(line,"HEADER",6))
-			{
-				++ispdb;
-				break;
-			}
-		}
-	}
-	while (fgets(line, LINE_LENGTH, fp)!=NULL)
-	{
-		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
-			line[LINE_LENGTH-2]='\0';
-		else
-		{
-			if (!strncmp(line,"SEQRES",6))
-			{
-				++ispdb;
-				break;
-			}
-		}
-	}
-	while (fgets(line, LINE_LENGTH, fp)!=NULL)
-	{
-		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
-			line[LINE_LENGTH-2]='\0';
-		else
-		{
-			if (!strncmp(line,"ATOM",4))
-			{
-				++ispdb;
-				break;
-			}
-		}
-	}
-
-	return (ispdb>=2?1:0);
-}
+       
+// int is_pdb_file ( char *fname)
+//        {
+// 	 FILE *fp=NULL;
+// 	 int ispdb=0;
+// 
+// 	 if ( fname==NULL) return 0;
+// 	 if (!check_file_exists (fname))return 0;
+// 
+// // 	static char *name;
+// 	int token_len;
+// 
+// 	int only_start;
+// 	const int LINE_LENGTH=1000;
+// 	char line[LINE_LENGTH];
+// 
+// 
+// 	/*Note: Token: any string
+// 	If Token[0]=='\n' Then Token only from the beginning of the line
+// 	*/
+// 
+// 	if (!fp && !file_exists("CACHE",fname))
+// 		return NULL;
+// 
+// 	if (!fp)
+// 	{
+// 		fp=vfopen ( fname, "r");
+// 	}
+// 
+// 	line[LINE_LENGTH-2]='\0';
+// 	while (fgets(line, LINE_LENGTH, fp)!=NULL)
+// 	{
+// 		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
+// 			line[LINE_LENGTH-2]='\0';
+// 		else
+// 		{
+// 			if (!strncmp(line,"HEADER",6))
+// 			{
+// 				++ispdb;
+// 				break;
+// 			}
+// 		}
+// 	}
+// 	while (fgets(line, LINE_LENGTH, fp)!=NULL)
+// 	{
+// 		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
+// 			line[LINE_LENGTH-2]='\0';
+// 		else
+// 		{
+// 			if (!strncmp(line,"SEQRES",6))
+// 			{
+// 				++ispdb;
+// 				break;
+// 			}
+// 		}
+// 	}
+// 	while (fgets(line, LINE_LENGTH, fp)!=NULL)
+// 	{
+// 		if ((line[LINE_LENGTH-2]!='\0') && (line[LINE_LENGTH-2]!='\n'))
+// 			line[LINE_LENGTH-2]='\0';
+// 		else
+// 		{
+// 			if (!strncmp(line,"ATOM",4))
+// 			{
+// 				++ispdb;
+// 				break;
+// 			}
+// 		}
+// 	}
+// 
+// 	return (ispdb>=2?1:0);
+// }
 
 
 int is_seq ( char *name)
