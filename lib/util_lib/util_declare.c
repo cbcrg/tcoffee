@@ -1909,11 +1909,8 @@ type ** function1 ( type **array, int ext1, int ext2)\
 {\
 	int first, l1;\
 	int second, l2;\
-	printf("ARG1\n");\
 	first=rf(array,sizeof (type*));\
-	printf("ARG2\n");\
 	second=rf(array[0],sizeof (type));\
-	printf("ARG3\n");\
 	if (ext1==-1) ext1=first;\
 	if (ext2==-1) ext2=second;\
 		\

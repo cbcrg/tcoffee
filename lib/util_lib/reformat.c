@@ -1664,7 +1664,7 @@ int is_simple_pdb_file ( char *name)
  */
 int is_pdb_file ( char *fname)
        {
-	 FILE *fp;
+	 FILE *fp=NULL;
 	 int ispdb=0;
 
 	 if ( fname==NULL) return 0;
