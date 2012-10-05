@@ -1914,18 +1914,18 @@ type ** function1 ( type **array, int ext1, int ext2)\
 	if (ext1==-1) ext1=first;\
 	if (ext2==-1) ext2=second;\
 		\
-	array=vrealloc(array, sizeof(char*)*ext1);\
+	array=vrealloc(array, sizeof(type*)*ext1);\
 	int i,j;\
 	if (ext1>first)\
 	{\
 		for (i=first; i<ext1; ++i)\
-			array[i]=vrealloc(array[i], sizeof(char)*ext2);\
+			array[i]=vrealloc(array[i], sizeof(type)*ext2);\
 	}\
 	if (ext2!=second)\
 	{\
 		for (i=0; i<ext1; ++i)\
 		{\
-			array[i]=vrealloc(array[i], sizeof(char)*ext2);\
+			array[i]=vrealloc(array[i], sizeof(type)*ext2);\
 		}\
 	}\
 	return array;\
