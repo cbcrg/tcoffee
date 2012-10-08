@@ -3138,6 +3138,7 @@ sub blast_com2new_blast_com
     {
       my $com=shift;
       if ($ENV{"NCBI_BLAST_4_TCOFFEE"} eq "OLD"){return $com;}
+      elsif ( $com eq "blastcl3" ) {return $com;}  // <-- 'legacy_blast.pl' does not support 'blastcl3', so return the command as it is
       elsif (!&pg_is_installed("legacy_blast.pl")){return $com;}
       else
 	{
