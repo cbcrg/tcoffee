@@ -1695,35 +1695,35 @@ int is_pdb_file ( char *name)
 	 else return 0;
        }
 
-       
+
 // int is_pdb_file ( char *fname)
 //        {
 // 	 FILE *fp=NULL;
 // 	 int ispdb=0;
-// 
+//
 // 	 if ( fname==NULL) return 0;
 // 	 if (!check_file_exists (fname))return 0;
-// 
+//
 // // 	static char *name;
 // 	int token_len;
-// 
+//
 // 	int only_start;
 // 	const int LINE_LENGTH=1000;
 // 	char line[LINE_LENGTH];
-// 
-// 
+//
+//
 // 	/*Note: Token: any string
 // 	If Token[0]=='\n' Then Token only from the beginning of the line
 // 	*/
-// 
+//
 // 	if (!fp && !file_exists("CACHE",fname))
 // 		return NULL;
-// 
+//
 // 	if (!fp)
 // 	{
 // 		fp=vfopen ( fname, "r");
 // 	}
-// 
+//
 // 	line[LINE_LENGTH-2]='\0';
 // 	while (fgets(line, LINE_LENGTH, fp)!=NULL)
 // 	{
@@ -1764,7 +1764,7 @@ int is_pdb_file ( char *name)
 // 			}
 // 		}
 // 	}
-// 
+//
 // 	return (ispdb>=2?1:0);
 // }
 
@@ -2017,8 +2017,9 @@ int fast_format_determination  ( char *in_f)
 	int last_length = -1;
 	int current_length = -1;
 	unsigned int n_seqs = 0;
-	char last;
+	char last='/';
 	int has_gap = 0;
+	int line_len;
 	while (fgets(line, READ_LENGTH, in_F) != NULL)
 	{
 		if (line[0] == '>')
@@ -2041,7 +2042,6 @@ int fast_format_determination  ( char *in_f)
 			tmp = &(line[0]);
 			while (*tmp != '\0')
 			{
-
 				if ((*tmp != '\n') && (*tmp != ' '))
 				{
 					if ((*tmp == '-') || (*tmp == '.')|| (*tmp == '*')|| (*tmp == '#')|| (*tmp == '~'))
@@ -2060,6 +2060,7 @@ int fast_format_determination  ( char *in_f)
 		is_aln = 0;
 	if (last != '*')
 		is_pir = 0;
+
 
 	fclose(in_F);
 	if (!is_pir)
@@ -2742,7 +2743,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		output_glalign (out_file, D1->A, DST->A);
 		}
 
-	else if ( strm2 ( out_format, "fasta_aln","fasta" ) || strm (out_format, "blast_aln"))
+	else if ( strm3 ( out_format, "fasta_aln","fasta","raw_fasta" ) || strm (out_format, "blast_aln"))
 		{
 		if (!D1)return 1;
 		output_fasta_aln( out_file, D1->A);
@@ -10562,7 +10563,10 @@ char* mutate_amino_acid ( char aa, char *mode)
 /********************************    PROCESSING        ********************************************/
 /********************************                      ********************************************/
 
-
+int ls_compare (const void * a, const void * b)
+{
+	return strcmp(*(char**)a,*(char**)b);
+}
 
 void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequence_data_struc *DSTin, char **action_list,int n_actions, Action_data_struc *RAD)
      {
@@ -11599,7 +11603,80 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 		 D1->A=declare_Alignment(D1->S);
 		 seq2aln (D1->S, D1->A, RAD->rm_gap);
 	 }
+	 else if ( strm (action, "ls_extract_seq"))
+	 {
+		 // if given a file, read it
+		 if ( check_file_exists (action_list[1]) && format_is_fasta (action_list[1]))
+		 {
 
+			 BUFS=main_read_seq (action_list[1]);
+			 action_list=BUFS->name;
+			 n_actions=BUFS->nseq;
+		 }
+		 else
+		 {
+			 action_list++;
+			 n_actions--;
+		 }
+
+		//sort names for binary search
+		char **seq_found;
+		qsort(action_list, n_actions, sizeof(char*), ls_compare);
+		char *names;
+		size_t i,pos = 0;
+		size_t n_seqs = D1->S->nseq;
+		int max_len=0;
+		int min_len=INT_MAX;
+		for (i=0; i<n_seqs; ++i)
+		{
+			seq_found = (char**)bsearch(&D1->S->name[i], action_list, n_actions, sizeof(char*), ls_compare);
+			if (seq_found != NULL)
+			{	//copy values of a sequence to unused position
+				D1->S->name[pos]=D1->S->name[i];
+				D1->S->seq[pos]=D1->S->seq[i];
+				D1->S->len[pos]=D1->S->len[i];
+				if (max_len < D1->S->len[pos])
+					max_len=D1->S->len[pos];
+				if (min_len > D1->S->len[pos])
+					min_len=D1->S->len[pos];
+				D1->S->seq_comment[pos]=D1->S->seq_comment[i];
+				D1->S->file[pos]=D1->S->file[i];
+				D1->S->T[pos]=D1->S->T[i];
+				if (D1->S->genome_co != NULL)
+					D1->S->genome_co[pos]=D1->S->genome_co[i];
+				++pos;
+			}
+			else
+			{	//free memory of deleted sequences
+				vfree(D1->S->name[i]);
+				vfree(D1->S->seq[i]);
+				vfree(D1->S->seq_comment[i]);
+				vfree(D1->S->T[i]);
+				vfree(D1->S->file[i]);
+			}
+		}
+
+		//update values
+
+
+		D1->S->max_nseq=pos;
+		D1->S->nseq=pos;
+		D1->S->max_len=max_len;
+		D1->S->min_len=min_len;
+
+		//free memory
+		D1->S->name=vrealloc(D1->S->name, pos*sizeof(char*));
+		D1->S->seq=vrealloc(D1->S->seq, pos*sizeof(char*));
+		D1->S->seq_comment=vrealloc(D1->S->seq_comment, pos*sizeof(char*));
+		D1->S->file=vrealloc(D1->S->file, pos*sizeof(char*));
+		D1->S->T=vrealloc(D1->S->T, pos*sizeof(Template*));
+		D1->S->len=vrealloc(D1->S->len, pos*sizeof(int));
+		if (D1->S->genome_co != NULL)
+			vrealloc(D1->S->genome_co, pos*sizeof(Genomic_info));
+
+		D1->A=declare_Alignment(D1->S);
+		seq2aln (D1->S, D1->A, RAD->rm_gap);
+	 }
        else if ( strm (action, "extract_seq_list"))
 	 {
 	   if ( check_file_exists (action_list[1]) && format_is_fasta (action_list[1]))

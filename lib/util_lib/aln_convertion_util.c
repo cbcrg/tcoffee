@@ -6400,7 +6400,7 @@ Alignment * aln2scramble_seq (Alignment *A)
 
 
 Alignment * reorder_aln ( Alignment *A, char **name, int nseq)
-	{
+{
 	int a,sn;
 	Alignment *BUF;
 	int  n=0;
@@ -6411,33 +6411,33 @@ Alignment * reorder_aln ( Alignment *A, char **name, int nseq)
 
 	BUF=copy_aln ( A,NULL);
 	for ( a=0; a<nseq; a++)
+	{
+		sn =name_is_in_list ( name[a],BUF->name, A->nseq,STRING);
+		if ( sn==-1)
 		{
-		  sn =name_is_in_list ( name[a],BUF->name, A->nseq,STRING);
-		  if ( sn==-1)
-			{
-			  ;
-			}
-		else
-		    {
-
-
-		    SWAPP(A->order[n], BUF->order[sn], tpp_int);
-		    sprintf ( A->name[n], "%s", BUF->name[sn]);
-		    sprintf ( A->seq_al[n], "%s",BUF->seq_al[sn]);
-		    sprintf ( A->seq_comment[n], "%s",  BUF->seq_comment[sn]);
-
-		    n++;
-
-		    }
+			;
 		}
+		else
+		{
+			SWAPP(A->order[n], BUF->order[sn], tpp_int);
+			sprintf ( A->name[n], "%s", BUF->name[sn]);
+			sprintf ( A->seq_al[n], "%s",BUF->seq_al[sn]);
+			sprintf ( A->seq_comment[n], "%s",  BUF->seq_comment[sn]);
+			n++;
+		}
+	}
 
-	for ( a=n; a< A->nseq; a++)A->name[a][0]=A->seq_al[a][0]='\0';
+	for ( a=n; a< A->nseq; a++)
+		A->name[a][0]=A->seq_al[a][0]='\0';
 	A->nseq=n;
 
 	if ( A->A)A->A=reorder_aln(A->A, name, nseq);
 	free_aln (BUF);
 	return A;
-	}
+}
+
+
+
 Sequence * reorder_seq_2 ( Sequence *A, int **order,int field, int nseq)
 	{
 	  char **name;

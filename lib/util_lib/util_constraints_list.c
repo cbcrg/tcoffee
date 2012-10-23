@@ -287,7 +287,7 @@ Constraint_list *fork_line_produce_list   ( Constraint_list *CL, Sequence *S, ch
 				//set_pid (pid);
 				npid++;
 				submited++;
-				printf(stderr, "%i %i\n", submited, max_nproc);
+				fprintf(stderr, "%i %i\n", submited, max_nproc);
 				if (submited>max_nproc)
 				{
 					//wait for nproc
