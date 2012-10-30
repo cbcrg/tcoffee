@@ -6,8 +6,8 @@
 #include "float.h"
 #include "math.h"
 
-// #include "Vector.h"
-// #include "Stack.h"
+#include "Vector.h"
+#include "Stack.h"
 
 
 

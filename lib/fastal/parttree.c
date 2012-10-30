@@ -6,7 +6,7 @@
 #include <ctype.h>
 // #include <argp.h>
 
-#include "fast_tree_header.h"
+#include "fastal_lib_header.h"
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"

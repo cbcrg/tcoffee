@@ -1,3 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
 typedef struct
     {
     int in_seq;

@@ -1,12 +1,12 @@
 
-//#include <stdlib.h>
-//#include <time.h>
+#include <stdlib.h>
+#include <time.h>
 
-// #include "classes.h"
-// #include "kmeans.h"
-// #include "Vector.h"
+#include "classes.h"
+#include "kmeans.h"
+#include "Vector.h"
 
-// #include "Stack.h"
+#include "Stack.h"
 
 #ifdef _OPENMP
 	#include<omp.h>

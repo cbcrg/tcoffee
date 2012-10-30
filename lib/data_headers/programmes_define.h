@@ -1,5 +1,4 @@
-/*               PROGRAM PATH                  */
-
+/* PROGRAM PATH - DO NOT CHANGE MANUALLY THIS FILE -- It is generated automatically by the build process -- See the 'update' target in the 'makefile' for more details */
 
 //ERROR MESSAGES
 

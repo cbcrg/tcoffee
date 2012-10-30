@@ -12,7 +12,7 @@
 
 
 
-#include "fast_tree_header.h"
+#include "fastal_lib_header.h"
 
 /*!
  *	\file tree.c

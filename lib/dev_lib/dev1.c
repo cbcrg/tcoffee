@@ -8,7 +8,7 @@
 #include "util_lib_header.h"
 #include "define_header.h"
 #include "dp_lib_header.h"
-#include "dev1_lib_header.h"
+#include "dev1.h"
 
 //Insert functions here
 void aln2hitMat_help()

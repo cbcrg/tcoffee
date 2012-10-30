@@ -4,6 +4,8 @@
  * Defines structs like ::Seqeunce, ::Weights, ::Alignment and ::Template.
  */
 
+#include "define_header.h"
+
 typedef struct
     {
     char *mode;

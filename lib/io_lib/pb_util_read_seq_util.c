@@ -8,12 +8,11 @@
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"
-
+#include "pb_util_read_seq_util.h"
 
 /*
-*	Prototypes
-*/
-
+ *	Prototypes
+ */
 
 void		fatal(char *,...);
 void		error(char *,...);

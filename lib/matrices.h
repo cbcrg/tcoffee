@@ -1,3 +1,6 @@
+#ifndef MATRICES_H
+#define MATRICES_H
+
 
 char *amino_acid_order = "ABCDEFGHIKLMNPQRSTVWXYZ";
 
@@ -978,3 +981,5 @@ int blosumR[]={
   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0, 
   0,   0,   0,  -1,  -2,  -2,   0,   2,  -2,  -2,  -2,   2,  -2,  -3,  -4,   1,   2,   0,   2,   1,   0,   6, 
   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,};
+
+#endif // MATRICES_H

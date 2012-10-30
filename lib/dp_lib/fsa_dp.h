@@ -1,3 +1,6 @@
+#ifndef FSA_DP_H
+#define FSA_DP_H
+
 /*By convention, 0: START, 1: END*/
 
 struct Hmm
@@ -156,3 +159,5 @@ Hmm* define_probcons_model(Constraint_list *CL);
 Hmm* define_simple_model(Constraint_list *CL);
 
 Hmm * bound_hmm ( Hmm *H);
+
+#endif // FSA_DP_H

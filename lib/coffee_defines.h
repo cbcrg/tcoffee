@@ -1,3 +1,6 @@
+#ifndef COFFEE_DEFINES_H
+#define COFFEE_DEFINES_H
+
 /*DEBUGGING*/
 /*#include "mshell.h"*/
 /*MEMORY MANAGEMENT*/
@@ -381,3 +384,5 @@
 #define NULL_5 NULL_3,NULL_2
 #define NULL_6 NULL_4,NULL_2
 #define NULL_7 NULL_5,NULL_2
+
+#endif // -- COFFEE_DEFINES_H

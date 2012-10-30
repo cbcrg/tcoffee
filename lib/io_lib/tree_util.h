@@ -1,4 +1,5 @@
-
+#ifndef TREE_UTIL_H
+#define TREE_UTIL_H
 
 typedef struct treesim{
   float w;
@@ -253,3 +254,5 @@ Sequence * treelist2seq ( Sequence *S);
 Sequence * treelist2sub_seq ( Sequence *S, int f);
 
 int treelist_file2consense (char *tree_file, char *outtree, char *outfile);
+
+#endif

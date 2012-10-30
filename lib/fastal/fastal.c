@@ -3,14 +3,13 @@
 #include <math.h>
 #include <ctype.h>
 #include <string.h>
-// #include <unistd.h>
 
+#include "coffee_defines.h"
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"
 #include "dp_lib_header.h"
 #include "fastal_lib_header.h"
-#include "fast_tree_header.h"
 
 
 // #include <omp.h>

@@ -14,7 +14,7 @@
  
 CC=gcc
 
-ifndef
+ifndef CFLAGS
 CFLAGS=-g
 endif 
 
@@ -26,7 +26,7 @@ endif
 # The version number to be stamped in the produced binary
 # Read about date formatting 
 ifndef VERSION 
-VERSION=development@$(shell date '+%Y%m%d_%H:%M')
+VERSION=dev_$(USER)@$(shell date '+%Y%m%d_%H:%M')
 endif 
 
 #
@@ -94,7 +94,7 @@ PERL4DATA_PROCESS_LIB=$(PERL_LIB_DIR)/perl4data_process
 # 	MAKE sources search path. Include here all folder where C source 
 #   have to be located  
 # ===================================================================
-VPATH=$(KO_LIB):$(IO_LIB):$(UT_LIB):$(DP_LIB):$(MEM_LIB):$(GA_LIB):$(DEV1_LIB):$(FASTAL_LIB):$(KM_COFFEE_LIB):$(T_COFFEE_LIB)
+VPATH=$(IO_LIB):$(UT_LIB):$(DP_LIB):$(MEM_LIB):$(GA_LIB):$(DEV1_LIB):$(FASTAL_LIB):$(KM_COFFEE_LIB):$(T_COFFEE_LIB)
 
 
 #########################################################################
@@ -336,9 +336,30 @@ perl_header_lib.h:\
 #########################################################################
 
 define_header.h:\
-		$(KO_LIB)/coffee_defines.h \
-		$(KO_LIB)/programmes_define.h \
-		$(KO_LIB)/tclinkdb.txt
+	$(LIB_DIR)/coffee_defines.h \
+	$(KO_LIB)/programmes_define.h \
+	$(KO_LIB)/tclinkdb.txt
+	#
+	# Copy the 'define_header.h' file and udpate the compile info 
+	#
+	cp $(LIB_DIR)/define_header.h . 
+	sed -i -e 's/#define DATE ".*"/#define DATE "$(DATE)"/' define_header.h  
+	sed -i -e 's/#define AUTHOR ".*"/#define AUTHOR "$(AUTHOR)"/' define_header.h 
+	sed -i -e 's/#define VERSION ".*"/#define VERSION "$(VERSION)"/' define_header.h 
+	sed -i -e 's/#define PROGRAM ".*"/#define PROGRAM "$(PROGRAM)"/' define_header.h  
+	sed -i -e 's/#define BUILD_INFO ".*"/#define BUILD_INFO "$(BUILD_INFO)"/' define_header.h  	
+	sed -i -e 's/#define DISTRIBUTION_ADDRESS ".*"/#define DISTRIBUTION_ADDRESS "$(subst /,\/,$(DISTRIBUTION_ADDRESS))"/' define_header.h 
+
+
+programmes_define.h:\
+	$(KO_LIB)/tclinkdb.txt \
+	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl \
+	$(KO_LIB)/programmes_define.h
+	#
+	# Create in the current folder the file 'programmes_define.h' 
+	# 
+	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(KO_LIB)/programmes_define.h -mode=C -db=$(KO_LIB)/tclinkdb.txt > programmes_define.h
+
 
 
 #########################################################################
@@ -452,8 +473,11 @@ DP_LIB_OBJECTS = \
 		pavie_dp.o_$(OSNAME)
 
 
-
-HEADERS	= define_header.h perl_header_lib.h 
+#
+# Note: The following three header files are updated/created on-fly  
+# in the current path by the makefile 
+# 
+HEADERS	= define_header.h programmes_define.h perl_header_lib.h 
 
 OBJECTS = $(UT_LIB_OBJECTS) $(IO_LIB_OBJECTS) $(DP_LIB_OBJECTS) $(DEV1_LIB_OBJECTS) $(FASTAL_LIB_OBJECTS) $(KM_COFFEE_OBJECTS) $(T_COFFEE_LIB_OBJECTS)
 
@@ -465,15 +489,19 @@ all: t_coffee
 # ===================================================================
 # 	T_COFFEE target: build T-Coffee binary artifact 
 # ===================================================================
-t_coffee: update $(HEADERS) $(OBJECTS)  
+t_coffee: $(HEADERS) $(OBJECTS)  
 	$(CC) $(CFLAGS) -lm -o t_coffee $(OBJECTS) 
 
 # ===================================================================
 # Automatically manage headers dependencies  
+# 
+# Please note: the current path incusion '-I.' must be the fist to give 
+# so that the header files created in the current folder will 
+# override the default definitions 
 # ===================================================================
 
 %.d: %.h
-	$(CC) $(CFLAGS) -MM -I$(LIB_DIR) -I.  $< -MF $@
+	$(CC) $(CFLAGS) -MM -I. -I$(LIB_DIR) $< -MF $@
 
 # ===================================================================
 # 	Generic compilation rule 
@@ -481,22 +509,7 @@ t_coffee: update $(HEADERS) $(OBJECTS)
 
 %.o_$(OSNAME): %.c %.d
 	echo "$<" >> code_list
-	$(CC) $(CFLAGS) $(KM_FLAGS) -I$(LIB_DIR) -I. -c $< -o $@
-
-# ===================================================================
-# 	Update compilation info  
-# ===================================================================
-
-update:
-	sed -i -pe 's/#define DATE ".*"/#define DATE "$(DATE)"/' $(LIB_DIR)/define_header.h
-	sed -i -pe 's/#define AUTHOR ".*"/#define AUTHOR "$(AUTHOR)"/' $(LIB_DIR)/define_header.h
-#	sed -i -pe 's/#define VERSION ".*"/#define VERSION "$(VERSION)"/' $(LIB_DIR)/define_header.h
-	sed -i -pe 's/#define PROGRAM ".*"/#define PROGRAM "$(PROGRAM)"/' $(LIB_DIR)/define_header.h
-#	sed -i -pe 's/#define BUILD_INFO ".*"/#define BUILD_INFO "$(BUILD_INFO)"/' $(LIB_DIR)/define_header.h	
-#	sed -i -pe 's/#define DISTRIBUTION_ADDRESS ".*"/#define DISTRIBUTION_ADDRESS "$(DISTRIBUTION_ADDRESS)"/' $(LIB_DIR)/define_header.h
-	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(KO_LIB)/programmes_define.h -mode=C -db=$(KO_LIB)/tclinkdb.txt > $(KO_LIB)/programmes_define.new
-	mv $(KO_LIB)/programmes_define.new $(KO_LIB)/programmes_define.h	
-
+	$(CC) $(CFLAGS) $(KM_FLAGS) -I. -I$(LIB_DIR) -c $< -o $@
 
 # ===================================================================
 # Clean stuff 

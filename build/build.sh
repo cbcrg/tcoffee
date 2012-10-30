@@ -358,9 +358,9 @@ function pack_binaries() {
         # copy the sources 
         rm -rf $TCDIR/src
         cp -r $UNTARED/t_coffee_source $TCDIR/src
-        rm -rf $TCDIR/src/*.o
-        rm -rf $TCDIR/src/t_coffee
-        chmod 644 $TCDIR/src/*
+        find $TCDIR/src -name '*.o_*' | xargs rm -rf {} 
+        find $TCDIR/src -name 't_coffee' | xargs rm -rf {} 
+        find $TCDIR/src/ -type f -exec chmod 644 '{}' \;
 
 	# invoke the install builder 
 	mkdir -p $DIST_DIR
