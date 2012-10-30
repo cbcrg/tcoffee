@@ -53,7 +53,7 @@ fi
 # Define the VERSION number 
 #
 if [[ (-z $VERSION) || ($VERSION == auto) ]]; then 
-	export VERSION="`cat $WORKSPACE/tcoffee/t_coffee/src/version_number.version`.r$SVN_REVISION"
+	export VERSION="`cat $WORKSPACE/tcoffee/lib/version_number.version`.r$SVN_REVISION"
 fi
 
 #
