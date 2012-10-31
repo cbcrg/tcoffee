@@ -4719,9 +4719,7 @@ get_cl_param(\
 			  if ( filter_lib) CL=filter_constraint_list (CL,CL->weight_field, filter_lib);
 			  if (atoigetenv ("EXTEND4TC")==1)CL=extend_constraint_list(CL);
 
-			  /* Sascha: edit */
-
-//			  for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
+			  for (a=0; a<relax_lib; a++)CL=relax_constraint_list (CL);
 			  for (a=0; a<shrink_lib; a++)CL=shrink_constraint_list (CL);
 			  }
 
