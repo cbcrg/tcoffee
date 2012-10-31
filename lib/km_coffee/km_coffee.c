@@ -512,7 +512,7 @@ km_coffee_align3(char *seq_f, int k, int k_leaf, char *method, char *aln_f, int 
 	char tmp_str[FILENAME_MAX];
 	km_cwd = getcwd(tmp_str, FILENAME_MAX);
 
-	km_tmp_dir = my_make_temp_dir(template, "main", "main.c");
+	km_tmp_dir = my_make_temp_dir(template, "main");
 	chdir(km_tmp_dir);
 	char out_f[500];
 	if (aln_f[0] != '/')

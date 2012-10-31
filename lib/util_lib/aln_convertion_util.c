@@ -10078,8 +10078,8 @@ Alignment *gap_trim (Alignment *A, int f)
 {
 	int **v, *list;
 	Alignment *R;
-	int a,b, n;
-	int cmax, ng, nr,sc;
+	size_t a,b, n;
+	size_t cmax, ng, nr,sc;
 	double max=0;
 	if (!f) f=50;
 

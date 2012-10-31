@@ -56,7 +56,7 @@ my_realloc(void *p, size_t size)
 
 
 char *
-my_make_temp_dir(char *template, char *function, char *file)
+my_make_temp_dir(char *template, char *function)
 {
 
 	char *temp_dir_name = malloc(20 * sizeof(char*));
@@ -68,7 +68,7 @@ my_make_temp_dir(char *template, char *function, char *file)
 	{
 		int errsv = errno;
 		fprintf(stderr, "ERROR! A temporary directory could not be created: %s\n",strerror(errsv));
-		fprintf(stderr, "This error was caused by '%s' in '%s'\n", function, file);
+		fprintf(stderr, "This error was caused by '%s' in '%s'\n", function);
 
 		exit(-1);
 	}
