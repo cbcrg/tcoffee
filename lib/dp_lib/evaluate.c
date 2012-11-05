@@ -7,10 +7,10 @@
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"
-
 #include "dp_lib_header.h"
+               
 float compute_lambda (int **matrix,char *alphabet);
-
+ 
 /**
  * \file evaluate.c
  * Functions to evaluate consistency between CL and Alignment
@@ -23,6 +23,7 @@ float compute_lambda (int **matrix,char *alphabet);
  *                                    (i.e. Not ALL the possible pairs)
  */
 Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, const char *mode );
+
 int sub_aln2ecl_raw_score (Alignment *A, Constraint_list *CL, int ns, int *ls)
 {
   int **pos;
@@ -53,7 +54,6 @@ int sub_aln2ecl_raw_score (Alignment *A, Constraint_list *CL, int ns, int *ls)
     }
   free_int (pos, -1);
   return score;
-  return (score/(((ns*ns)-ns)/2))/A->len_aln;
 }
 int aln2ecl_raw_score (Alignment *A, Constraint_list *CL)
 {
@@ -81,7 +81,6 @@ int aln2ecl_raw_score (Alignment *A, Constraint_list *CL)
     }
   free_int (pos, -1);
   return score;
-  return (score/(((A->nseq*A->nseq)-A->nseq)/2))/A->len_aln;
 }
 int node2sub_aln_score    (Alignment *A,Constraint_list *CL, char *mode, NT_node T)
 {
@@ -99,7 +98,6 @@ int node2sub_aln_score    (Alignment *A,Constraint_list *CL, char *mode, NT_node
       
       return sub_aln2sub_aln_score (A, CL, mode, ns, ls);
     }
-  return -1;
 }
 int sub_aln2sub_aln_score ( Alignment *A,Constraint_list *CL, const char *mode, int *ns, int **ls)
 {
@@ -162,7 +160,7 @@ Alignment* main_coffee_evaluate_output_sub_aln ( Alignment *A,Constraint_list *C
 }
 Alignment * overlay_alignment_evaluation     ( Alignment *I, Alignment *O)
 {
-  int a, b, c, r, i;
+  int a, b, r;
   int *buf;
   
   if ( !I || !O) return O;
@@ -886,8 +884,8 @@ int  sp_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, char
       int **pos;
       int s1, s2, s3, s4;
       int r1, r2, r3, r4;
-      float w1, w2, w3,w, w4, pw, tw;
       int a, b,c, x, y;
+      float w3,w, w4, pw, tw;
       FILE *fp;
      
       fp=vfopen (fname, "w");
@@ -1197,22 +1195,18 @@ double genepred2acc (Sequence *S, Sequence *PS);
 double seq_genepred2acc (Sequence *S, Sequence *PS, char *name);
 Alignment *coffee_seq_evaluate_output ( Alignment *IN, Constraint_list *CL)
 {
-  int **w, a,b,c,l,i;
-  int avg, min_avg, best_cycle;
+  int **w, a, best_cycle, ncycle=20, min_ne;
   char **pred_list,**weight_list; 
-  FILE *fp;
+  float nsd, best_score,score;
   Sequence *S, *PS;
-  int ncycle=20;
-  float nsd, best_score,score, acc;
-  int min_ne;
-  Alignment *A;
-  float *count;
+
   min_ne=CL->ne/10; //avoid side effects due to very relaxed libraries
   w=NULL;
   pred_list=declare_char (ncycle, 100);
   weight_list=declare_char(ncycle,100);
   S=CL->S;
   fprintf ( stderr, "\nSCORE_MODE: %s\n", CL->genepred_score);
+  
   for (a=0; a<ncycle && CL->ne>min_ne; a++)
     {
       if (w);free_int (w, -1);
@@ -1294,8 +1288,7 @@ double genepred2acc (Sequence *S, Sequence *PS)
 double genepred2sd (Sequence *S)
 {
   double sum=0, sum2=0;
-  int a, b;
-  int *len;
+  int a, *len;
   len=genepred2orf_len (S);
   
   for (a=0; a<S->nseq; a++)
@@ -1310,9 +1303,9 @@ double genepred2sd (Sequence *S)
 }
 double genepred2avg (Sequence *S)
 {
-  int a, b;
+  int a, *len;
   double avg=0;
-  int *len;
+
   len=genepred2orf_len (S);
 
   for (a=0; a<S->nseq; a++)avg+=len[a];
@@ -1321,10 +1314,9 @@ double genepred2avg (Sequence *S)
 }
 double genepred2zsum2 (Sequence *S)
 {
-  double sum=0, sum2=0, zscore=0, zsum2=0;
-  int a, b;
-  int *len;
-  double sd, avg;
+  double zscore=0, zsum2=0, sd, avg;
+  int a, *len;
+  
   sd=genepred2sd(S);
   avg=genepred2avg (S);
   
@@ -1350,11 +1342,11 @@ int *genepred2orf_len (Sequence *S)
   
 Alignment *coffee_seq_evaluate_output_old2 ( Alignment *IN, Constraint_list *CL)
 {
-  int **w, a,b,c,l,i;
-  int avg, min_avg, best_cycle;
-  char **pred_list; FILE *fp;
+  int **w, a,b,c;
+  int avg, min_avg, best_cycle, ncycle=100;;
+  char **pred_list; 
   Sequence *S, *PS;
-  int ncycle=100;
+
   w=NULL;
   pred_list=declare_char (ncycle, 100);
   S=CL->S;
@@ -1364,7 +1356,6 @@ Alignment *coffee_seq_evaluate_output_old2 ( Alignment *IN, Constraint_list *CL)
   
   for (a=1; a<ncycle && CL->ne>0; a++)
     {
-      int t;
       if (w);free_int (w, -1);
       w=list2residue_total_weight (CL);
       CL=relax_constraint_list_4gp (CL);
@@ -2070,10 +2061,10 @@ int evaluate_curvature_score( Constraint_list *CL, int s1, int r1, int s2, int r
 int *get_curvature ( int s1, Constraint_list *CL)
 {
   int *array, n=0, a;
-  char c;
-  FILE *fp;
-  char name [1000], b1[100], b2[100];
+  char c, name [1000], b1[100];
   float f;
+  FILE *fp;
+  
   sprintf ( name, "%s.curvature", (CL->S)->name[s1]);
   array=vcalloc (strlen ((CL->S)->seq[s1]), sizeof (int));
   fp=vfopen ( name, "r");
@@ -2620,7 +2611,6 @@ int residue_pair_extended_list_pc ( Constraint_list *CL, int s1, int r1, int s2,
 	  double score=0;  
 	  int a, t_s, t_r;
 	  static int **hasch;
-	  int nclean;
 	  static int max_len;
 	  int field;
 	  double delta;
@@ -3508,9 +3498,9 @@ int id2_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int c
 	  static int last_tag;
 	  static int **cons1, **cons2;
 	  int score=0;
-	  static char *aa;
-	  int a, b, r;
-	  int *pr[2];
+	  static int *aa;
+	  int a, b, r, *pr[2];
+	  
 	  if (!aa)aa=vcalloc (100, sizeof (int));
 	  
 	  if (last_tag!=A->random_tag)
@@ -3527,7 +3517,7 @@ int id2_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int c
 	    {
 	      for (b=3; b<pr[a][1]; b+=3)
 		{
-		  char r=tolower (pr[a][b])-'a';
+		  r=tolower (pr[a][b])-'a';
 		  aa[r]+=pr[a][b+1];
 		  if (a==2){aa[r]*=aa[r];}
 		  if (aa[r]>score)score=aa[r];
@@ -3537,7 +3527,6 @@ int id2_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int c
 	    {
 	      for (b=3; b<pr[a][1]; b+=3)
 		{
-		  char r=tolower (pr[a][b]);
 		  aa[b-'a']=0;
 		}
 	    }
@@ -4358,8 +4347,6 @@ int get_domain_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, 
 			}
 		}
 	return score;
-	score=((res_res+gap_res)==0)?0:score/(res_res+gap_res);
-	return score;	
 	} 
 
 /*********************************************************************************************/
