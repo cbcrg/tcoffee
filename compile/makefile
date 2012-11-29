@@ -496,7 +496,7 @@ all: t_coffee
 # ===================================================================
 t_coffee: $(HEADERS) $(OBJECTS)
 	$(CC) $(CFLAGS) $(KM_FLAGS) -lm -o t_coffee $(OBJECTS)
-	cp t_coffee $(HOME)/bin
+# 	cp t_coffee $(HOME)/bin
 
 # ===================================================================
 # Automatically manage headers dependencies
