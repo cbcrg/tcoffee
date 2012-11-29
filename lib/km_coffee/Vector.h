@@ -50,6 +50,12 @@ Vector *
 seq2vec_kmer(const Seq *seq, short k, unsigned int *factor, size_t vec_len, size_t vec_num, short *alphabet, int *used);
 
 
+VectorSet*
+seqset2vecs_dist(SeqSet *seq_set, char *groups[], size_t n_groups);
+
+VectorSet*
+seqset2vecs_whatever(SeqSet *seq_set, char *groups[], size_t n_groups);
+
 /**
  * \brief Turns as sequence set into a set of vectors
  * \param seq_set The sequence set

@@ -4187,6 +4187,7 @@ Sequence* get_fasta_sequence_num (char *fname, char *comment_out)
 	return LS;
 }
 
+
 Sequence *get_tree_file_list ( char *fname)
 {
 
@@ -4210,6 +4211,8 @@ Sequence *get_tree_file_list ( char *fname)
   free_arrayN((void ***)list, 3);
   return get_fasta_tree (tmp, NULL);
 }
+
+
 Sequence *get_file_list ( char *fname)
 {
 
@@ -4232,6 +4235,8 @@ Sequence *get_file_list ( char *fname)
   free_arrayN((void ***)list, 3);
   return get_fasta_sequence (tmp, NULL);
 }
+
+
 Sequence*get_fasta_tree (char *fname, char *comment_out)
 {
   Sequence *LS;
@@ -4332,6 +4337,8 @@ Sequence*get_fasta_tree (char *fname, char *comment_out)
 
     return LS;
 }
+
+
 Sequence* get_fasta_sequence_raw (char *fname, char *comment_out)
     {
     Sequence *LS;
@@ -4348,9 +4355,6 @@ Sequence* get_fasta_sequence_raw (char *fname, char *comment_out)
     int max_len_seq=0;
     int min_len_seq=0;
     int nseq=0, l=0;
-
-
-
 
     int *sub;
 

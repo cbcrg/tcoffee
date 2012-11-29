@@ -1,36 +1,41 @@
 #
 # Basic T-Coffee makefile
 #
-# This makefile depends on the following environment variables 
-# - LIB_DIR: the base path containing  T-Coffee library folders 
-# - CFLAGS: flags used to control the compilation process (i.e. optimization, debug symbols, etc) 
-# - DATE: the date to the be stamped in T-Coffee binary  
-# - VERSION: the version to be stamped in T-Coffee binary 
-# 
- 
-# 
+# This makefile depends on the following environment variables
+# - LIB_DIR: the base path containing  T-Coffee library folders
+# - CFLAGS: flags used to control the compilation process (i.e. optimization, debug symbols, etc)
+# - DATE: the date to the be stamped in T-Coffee binary
+# - VERSION: the version to be stamped in T-Coffee binary
+#
+
+#
 # About Mac compilation flags see http://goo.gl/HLtS4
 #
- 
+
 CC=gcc
 
 ifndef CFLAGS
-CFLAGS=-g
-endif 
+CFLAGS=-O3
+endif
 
-ifndef LIB_DIR 
+ifndef LIB_DIR
 LIB_DIR = ../lib
-endif 
+endif
+
+ifdef OPENMP
+    KM_FLAGS=-fopenmp
+endif
+
 
 #
 # The version number to be stamped in the produced binary
-# Read about date formatting 
-ifndef VERSION 
+# Read about date formatting
+ifndef VERSION
 VERSION=dev_$(USER)@$(shell date '+%Y%m%d_%H:%M')
-endif 
+endif
 
 #
-# Full Version number 
+# Full Version number
 #
 ifndef BUILD_INFO
 BUILD_INFO=$(VERSION)
@@ -39,22 +44,22 @@ endif
 #
 # Use current date as default if nothing is specified
 #
-ifndef DATE 
+ifndef DATE
 DATE=$(shell date '+%d %b %Y - %H:%M')
-endif 
+endif
 
 #
-# Default program name 
+# Default program name
 #
 ifndef PROGRAM
 PROGRAM=T-COFFEE
-endif 
+endif
 
 #
 # (not so much to explaing here .. :))
 #
 ifndef AUTHOR
-AUTHOR=Cedric Notredame 
+AUTHOR=Cedric Notredame
 endif
 
 #
@@ -91,8 +96,8 @@ PERL4DATA_PROCESS_LIB=$(PERL_LIB_DIR)/perl4data_process
 
 
 # ===================================================================
-# 	MAKE sources search path. Include here all folder where C source 
-#   have to be located  
+# 	MAKE sources search path. Include here all folder where C source
+#   have to be located
 # ===================================================================
 VPATH=$(IO_LIB):$(UT_LIB):$(DP_LIB):$(MEM_LIB):$(GA_LIB):$(DEV1_LIB):$(FASTAL_LIB):$(KM_COFFEE_LIB):$(T_COFFEE_LIB)
 
@@ -211,7 +216,7 @@ extract_from_pdb:\
 	echo "# `date`" >> extract_from_pdb
 install.pl:\
 	$(SCRIPT_LIB)/install.pl
-	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >install.pl		
+	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >install.pl
 	echo "# `date`" >> install.pl
 msa2bootstrap.pl:\
 	$(SCRIPT_LIB)/msa2bootstrap.pl
@@ -259,24 +264,24 @@ FILTER_LIB_OBJECTS=\
 	any_file2unix_file.pl
 
 fasta_seq2hmmtop_fasta.pl:\
-	$(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl 
-	cp $(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl . 
-	echo "# `date`" >> fasta_seq2hmmtop_fasta.pl 
+	$(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl
+	cp $(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl .
+	echo "# `date`" >> fasta_seq2hmmtop_fasta.pl
 
 fasta_seq2consan_aln.pl:\
-	$(FILTER_LIB)/fasta_seq2consan_aln.pl 
-	cp $(FILTER_LIB)/fasta_seq2consan_aln.pl . 
-	echo "# `date`" >> fasta_seq2consan_aln.pl 
+	$(FILTER_LIB)/fasta_seq2consan_aln.pl
+	cp $(FILTER_LIB)/fasta_seq2consan_aln.pl .
+	echo "# `date`" >> fasta_seq2consan_aln.pl
 
 fasta_seq2RNAplfold_templatefile.pl:\
-	$(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl 
-	cp $(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl . 
-	echo "# `date`" >> fasta_seq2RNAplfold_templatefile.pl 
+	$(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl
+	cp $(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl .
+	echo "# `date`" >> fasta_seq2RNAplfold_templatefile.pl
 
 RNAplfold2tclib.pl:\
-	$(FILTER_LIB)/RNAplfold2tclib.pl 
+	$(FILTER_LIB)/RNAplfold2tclib.pl
 	cp $(FILTER_LIB)/RNAplfold2tclib.pl .
-	echo "# `date`" >> RNAplfold2tclib.pl 
+	echo "# `date`" >> RNAplfold2tclib.pl
 
 blast_aln2fasta_aln.pl:\
 	$(FILTER_LIB)/blast_aln2fasta_aln.pl
@@ -319,7 +324,7 @@ COMPLETE_PERL_OBJECTS=\
 	$(PERL4MAKEFILE_OBJECTS)\
 	$(SCRIPT_LIB_OBJECTS)\
 	$(WEBSERVICES_LIB_OBJECTS)\
-	$(FILTER_LIB_OBJECTS)	
+	$(FILTER_LIB_OBJECTS)
 perl_header_lib.h:\
 	$(COMPLETE_PERL_OBJECTS)
 	$(FILTER_LIB)/perlfile2cheader.pl $(COMPLETE_PERL_OBJECTS) > perl_header_lib.h
@@ -340,15 +345,15 @@ define_header.h:\
 	$(KO_LIB)/programmes_define.h \
 	$(KO_LIB)/tclinkdb.txt
 	#
-	# Copy the 'define_header.h' file and udpate the compile info 
+	# Copy the 'define_header.h' file and udpate the compile info
 	#
-	cp $(LIB_DIR)/define_header.h . 
-	sed -i -e 's/#define DATE ".*"/#define DATE "$(DATE)"/' define_header.h  
-	sed -i -e 's/#define AUTHOR ".*"/#define AUTHOR "$(AUTHOR)"/' define_header.h 
-	sed -i -e 's/#define VERSION ".*"/#define VERSION "$(VERSION)"/' define_header.h 
-	sed -i -e 's/#define PROGRAM ".*"/#define PROGRAM "$(PROGRAM)"/' define_header.h  
-	sed -i -e 's/#define BUILD_INFO ".*"/#define BUILD_INFO "$(BUILD_INFO)"/' define_header.h  	
-	sed -i -e 's/#define DISTRIBUTION_ADDRESS ".*"/#define DISTRIBUTION_ADDRESS "$(subst /,\/,$(DISTRIBUTION_ADDRESS))"/' define_header.h 
+	cp $(LIB_DIR)/define_header.h .
+	sed -i -e 's/#define DATE ".*"/#define DATE "$(DATE)"/' define_header.h
+	sed -i -e 's/#define AUTHOR ".*"/#define AUTHOR "$(AUTHOR)"/' define_header.h
+	sed -i -e 's/#define VERSION ".*"/#define VERSION "$(VERSION)"/' define_header.h
+	sed -i -e 's/#define PROGRAM ".*"/#define PROGRAM "$(PROGRAM)"/' define_header.h
+	sed -i -e 's/#define BUILD_INFO ".*"/#define BUILD_INFO "$(BUILD_INFO)"/' define_header.h
+	sed -i -e 's/#define DISTRIBUTION_ADDRESS ".*"/#define DISTRIBUTION_ADDRESS "$(subst /,\/,$(DISTRIBUTION_ADDRESS))"/' define_header.h
 
 
 programmes_define.h:\
@@ -356,8 +361,8 @@ programmes_define.h:\
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl \
 	$(KO_LIB)/programmes_define.h
 	#
-	# Create in the current folder the file 'programmes_define.h' 
-	# 
+	# Create in the current folder the file 'programmes_define.h'
+	#
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(KO_LIB)/programmes_define.h -mode=C -db=$(KO_LIB)/tclinkdb.txt > programmes_define.h
 
 
@@ -474,37 +479,38 @@ DP_LIB_OBJECTS = \
 
 
 #
-# Note: The following three header files are updated/created on-fly  
-# in the current path by the makefile 
-# 
-HEADERS	= define_header.h programmes_define.h perl_header_lib.h 
+# Note: The following three header files are updated/created on-fly
+# in the current path by the makefile
+#
+HEADERS	= define_header.h programmes_define.h perl_header_lib.h
 
 OBJECTS = $(UT_LIB_OBJECTS) $(IO_LIB_OBJECTS) $(DP_LIB_OBJECTS) $(DEV1_LIB_OBJECTS) $(FASTAL_LIB_OBJECTS) $(KM_COFFEE_OBJECTS) $(T_COFFEE_LIB_OBJECTS)
 
 # ===================================================================
-# 	ALL target: create the main application file 
+# 	ALL target: create the main application file
 # ===================================================================
 all: t_coffee
 
 # ===================================================================
-# 	T_COFFEE target: build T-Coffee binary artifact 
+# 	T_COFFEE target: build T-Coffee binary artifact
 # ===================================================================
-t_coffee: $(HEADERS) $(OBJECTS)  
-	$(CC) $(CFLAGS) -lm -o t_coffee $(OBJECTS) 
+t_coffee: $(HEADERS) $(OBJECTS)
+	$(CC) $(CFLAGS) $(KM_FLAGS) -lm -o t_coffee $(OBJECTS)
+	cp t_coffee $(HOME)/bin
 
 # ===================================================================
-# Automatically manage headers dependencies  
-# 
-# Please note: the current path incusion '-I.' must be the fist to give 
-# so that the header files created in the current folder will 
-# override the default definitions 
+# Automatically manage headers dependencies
+#
+# Please note: the current path incusion '-I.' must be the fist to give
+# so that the header files created in the current folder will
+# override the default definitions
 # ===================================================================
 
 %.d: %.h
-	$(CC) $(CFLAGS) -MM -I. -I$(LIB_DIR) $< -MF $@
+	$(CC) $(CFLAGS) $(KM_FLAGS) -MM -I. -I$(LIB_DIR) $< -MF $@
 
 # ===================================================================
-# 	Generic compilation rule 
+# 	Generic compilation rule
 # ===================================================================
 
 %.o_$(OSNAME): %.c %.d
@@ -512,10 +518,10 @@ t_coffee: $(HEADERS) $(OBJECTS)
 	$(CC) $(CFLAGS) $(KM_FLAGS) -I. -I$(LIB_DIR) -c $< -o $@
 
 # ===================================================================
-# Clean stuff 
+# Clean stuff
 # ===================================================================
 
-.PHONY: clean	
+.PHONY: clean
 
 clean:
 	-rm `ls * | grep -v makefile`

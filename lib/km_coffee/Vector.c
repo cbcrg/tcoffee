@@ -1,5 +1,151 @@
 // #include "Vector.h"
 #include "km_coffee_header.h"
+
+
+
+
+//char *groups[]={"LlVvIiMmCc","AaGgSsTtPp","FfYyWw","EeDdNnQqKkRrHh"};
+//size_t n_groups = 4;
+// char *groups[]={"FfLlVvIiMmCcAaGgSsTtPpYyWw","DdEeNnQqKkRrHh"};
+// size_t n_groups = 2;
+
+// double hydrophobic[]={ 0.159, 0, 0.778, -1.289, -1.076, 1.437, -0.131, -0553, 1.388, 0, -1.504, 1.236, 1.048, -0.866, 0, -0.104, -0.836, -1.432, -0.549, -0.292, 0, 1.064, 1.064, 0, 0.476, 0 };
+//A-Ala, B-0, C-Cys, D-Asp, E-Glu, F-Phe, G-Gly, H-His, I-Ile, J-0, K-Lys, L-Leu, M-Met, N-Asn, O-0, P-Pro, Q-Gln, R-Arg, S-Ser, T-Thr, U-0, V-Val, W-Trp, X, Y-Tyr, Z
+
+
+void calc_H(const char *seq, double *hydrophobic, double *H)
+{
+	size_t ProtLength = strlen(seq), i;
+	double sumH=0;
+	int strangeCh=0, a;
+
+	for (i=0; i<ProtLength; ++i)
+	{
+		sumH += hydrophobic[ toupper(seq[i])-65 ];
+		if( hydrophobic[ toupper(seq[i])-65 ] == 0 ){ strangeCh++; }
+	}
+
+	(*H)=sumH/(ProtLength-strangeCh);
+}
+
+
+
+void calc_IEP(char *seq, double *pI )
+{
+	size_t ProtLength = strlen(seq);
+
+	char Asp = 'D';
+	char Glu = 'E';
+	char Cys = 'C';
+	char Tyr = 'Y';
+	char His = 'H';
+	char Lys = 'K';
+	char Arg = 'R';
+
+	int AspNumber = 0;
+	int GluNumber = 0;
+	int CysNumber = 0;
+	int TyrNumber = 0;
+	int HisNumber = 0;
+	int LysNumber = 0;
+	int ArgNumber = 0;
+
+	int i = 0;
+
+	for ( i=0; i<=ProtLength-1; ++i)              // looking for charged amino acids
+	{
+		if (toupper(seq[i]) == Asp)
+			++AspNumber;
+
+		if (toupper(seq[i]) == Glu)
+			++GluNumber;
+
+		if (toupper(seq[i]) == Cys)
+			++CysNumber;
+
+		if (toupper(seq[i]) == Tyr)
+			++TyrNumber;
+
+		if (toupper(seq[i]) == His)
+			++HisNumber;
+
+		if (toupper(seq[i]) == Lys)
+			++LysNumber;
+
+		if (toupper(seq[i]) == Arg)
+			++ArgNumber;
+	}
+
+	double NQ = 0.0; //net charge in given pH
+
+	double QN1=0;  //C-terminal charge
+	double QN2=0;  //D charge
+	double QN3=0;  //E charge
+	double QN4=0;  //C charge
+	double QN5=0;  //Y charge
+	double QP1=0;  //H charge
+	double QP2=0;  //NH2 charge
+	double QP3=0;  //K charge
+	double QP4=0;  //R charge
+
+	double pH = 6.5;             //starting point pI = 6.5 - theoretically it should be 7, but
+	//average protein pI is 6.5 so we increase the probability of finding the solution
+	double pHprev = 0.0;
+	double pHnext = 14.0;        //0-14 is possible pH range
+	double E = 0.01;             //epsilon means precision [pI = pH ± E]
+	double temp = 0.0;
+
+	//%%%%%%%%%%%%%%%%%%%%%%%%%   CALCUTE IEP   %%%%%%%%%%%%%%%%%%%%%%%%
+
+	for(;;){                //the infinite loop --- pK values from Wikipedia
+
+		QN1=-1/(1+pow(10,(3.65-pH)));
+		QN2=-AspNumber/(1+pow(10,(3.9-pH)));
+		QN3=-GluNumber/(1+pow(10,(4.07-pH)));
+		QN4=-CysNumber/(1+pow(10,(8.18-pH)));
+		QN5=-TyrNumber/(1+pow(10,(10.46-pH)));
+		QP1=HisNumber/(1+pow(10,(pH-6.04)));
+		QP2=1/(1+pow(10,(pH-8.2)));
+		QP3=LysNumber/(1+pow(10,(pH-10.54)));
+		QP4=ArgNumber/(1+pow(10,(pH-12.48)));
+
+		NQ=QN1+QN2+QN3+QN4+QN5+QP1+QP2+QP3+QP4;
+
+
+		if(pH>=14.0){
+			printf("ERROR: Something is wrong - pH is higher than 14.\n");
+			exit(1);
+		}
+
+		//%%%%%%%%%%%   BISECTION   %%%%%%%%%%%%%
+
+		if(NQ<0){              //out of range -- the new pH value must be smaller
+			temp = pH;
+			pH = pH-((pH-pHprev)/2);
+			pHnext = temp;
+		}
+		else{                 //too small pH value, so we have to increase it --- swap
+			temp = pH;
+			pH = pH + ((pHnext-pH)/2);
+			pHprev = temp;
+		}
+
+		if ((pH-pHprev<E)&&(pHnext-pH<E)) //finding isoelectric point
+			break;
+	}
+
+	(*pI)=pH; 	//printf("ProtLength: %d  pI: %lf\n",ProtLength, pH );
+}
+
+
+
+
+
+
+
+
+
+
 Vector *
 seq2vec_kmer(const Seq *seq, short k, unsigned int *factor, size_t vec_len, size_t vec_num, short *alphabet, int *used)
 {
@@ -27,6 +173,7 @@ seq2vec_kmer(const Seq *seq, short k, unsigned int *factor, size_t vec_len, size
 
 	return t;
 }
+
 
 double
 l2norm(Vector *vec, size_t size)
@@ -81,14 +228,113 @@ normalize(VectorSet *vec_set)
 	}
 }
 
+
+
+Vector *
+seq2vec_dists(const Seq *seq, char * groups[], size_t n_groups, size_t vec_num)
+{
+	size_t s_len = seq->size;
+	char *tmp_seq=seq->seq;
+	size_t i,j;
+	Vector *t = my_malloc(sizeof(Vector));
+	t->id = vec_num;
+	t->data = my_calloc(n_groups*2, sizeof(double));
+	double *data = t->data;
+	int *last_pos = my_malloc(n_groups*sizeof(int));
+	for (i=0; i<n_groups; ++i)
+		last_pos[i]=-1;
+	for (i=0; i<s_len; ++i)
+	{
+		for (j=0; j<n_groups; ++j)
+		{
+			if (strchr(groups[j],tmp_seq[i]))
+			{
+				++data[j*2];
+				if (last_pos[j] >-1)
+					data[j*2+1]+=(i-last_pos[j]);
+				last_pos[j]=i;
+				break;
+			}
+		}
+	}
+
+	for (j=0; j<n_groups; ++j)
+		if (data[j*2] > 0)
+			data[j*2+1]/=data[j*2];
+
+	free(last_pos);
+	return t;
+}
+
+
+VectorSet*
+seqset2vecs_dist(SeqSet *seq_set, char *groups[], size_t n_groups)
+{
+	VectorSet *vec_set = my_malloc(sizeof(VectorSet));
+	vec_set->dim = seq_set->seqs[0]->size;
+	size_t n_seqs = seq_set->n_seqs;
+
+	Vector **vecs= malloc(n_seqs*sizeof(Vector*));
+	vec_set->n_vecs=n_seqs;
+	vec_set->vecs=vecs;
+
+	size_t i;
+	for (i = 0; i<n_seqs; ++i)
+		vecs[i] = seq2vec_dists(seq_set->seqs[i], groups, n_groups, i);
+	vec_set->dim=n_groups*2;
+// 	print_vecs(vec_set, "strange");
+	return vec_set;
+}
+
+
+
+VectorSet*
+seqset2vecs_whatever(SeqSet *seq_set, char *groups[], size_t n_groups)
+{
+
+	double hydrophobic[]={ 0.159, 0, 0.778, -1.289, -1.076, 1.437, -0.131, -0553, 1.388, 0, -1.504, 1.236, 1.048, -0.866, 0, -0.104, -0.836, -1.432, -0.549, -0.292, 0, 1.064, 1.064, 0, 0.476, 0 };
+
+	VectorSet *vec_set = my_malloc(sizeof(VectorSet));
+	//vec_set->dim = seq_set->seqs[0]->size;
+	size_t n_seqs = seq_set->n_seqs;
+
+	Vector **vecs= malloc(n_seqs*sizeof(Vector*));
+	vec_set->n_vecs=n_seqs;
+	vec_set->vecs=vecs;
+
+	size_t i;
+	vec_set->dim=n_groups*2+1;
+
+	for (i = 0; i<n_seqs; ++i)
+	{
+		vecs[i] = seq2vec_dists(seq_set->seqs[i], groups, n_groups, i);
+		vecs[i] = realloc(vecs[i], vec_set->dim*sizeof(double));
+// 		calc_H(seq_set->seqs[i]->seq, hydrophobic, &(vecs[i]->data[vec_set->dim-2]));
+		calc_IEP(seq_set->seqs[i]->seq,  &(vecs[i]->data[vec_set->dim-1]));
+	}
+// 	print_vecs(vec_set, "strange");
+
+// 	void calc_H(const char *seq, double *hydrophobic, double *H)
+
+	return vec_set;
+}
+
+//A-Ala, B-0, C-Cys, D-Asp, E-Glu, F-Phe, G-Gly, H-His, I-Ile, J-0, K-Lys, L-Leu, M-Met, N-Asn, O-0, P-Pro, Q-Gln, R-Arg, S-Ser, T-Thr, U-0, V-Val, W-Trp, X, Y-Tyr, Z
+
+
+
+
+
+
+
 int*
 identify_fields(const SeqSet *seq_set, short k, unsigned int *factor, size_t *vec_len, short *alphabet )
 {
+
 	size_t vec_length = *vec_len;
 	int *used = my_calloc(vec_length, sizeof(int));
 	int *value_arg = my_calloc(vec_length, sizeof(int));
 	int *value_test = my_malloc(vec_length * sizeof(int));
-
 
 	unsigned int value;
 	Seq *seq;
@@ -144,7 +390,10 @@ identify_fields(const SeqSet *seq_set, short k, unsigned int *factor, size_t *ve
 			value += alphabet[(int)seq->seq[m]];
 			++j;
 			++value_test[value];
+			//if (value >124)
+			//printf("%li %c%c%c %i %i %i\n", value,(int)seq->seq[j],(int)seq->seq[j-1],(int)seq->seq[j-2], alphabet[(int)seq->seq[j]], alphabet[(int)seq->seq[j-1]], alphabet[(int)seq->seq[j-2]]);
 		}
+
 
 		for (x = 0; x < vec_length; ++x)
 		{
@@ -165,7 +414,7 @@ identify_fields(const SeqSet *seq_set, short k, unsigned int *factor, size_t *ve
 			used[i] = j++;
 	}
 	*vec_len=j;
-	printf("DIM=%li\n", *vec_len);
+	//printf("DIM=%li\n", *vec_len);
 	return used;
 }
 
@@ -368,6 +617,7 @@ identify_fields_variance(const SeqSet *seq_set, short k, unsigned int *factor, s
 	return used;
 }
 
+
 VectorSet*
 seqset2vecs_kmer(SeqSet *seq_set, short k, short alphabet_size, short *alphabet)
 {
@@ -389,7 +639,7 @@ seqset2vecs_kmer(SeqSet *seq_set, short k, short alphabet_size, short *alphabet)
 	size_t i;
 	for (i = 0; i<n_seqs; ++i)
 		vecs[i] = seq2vec_kmer(seq_set->seqs[i], k, factor, vec_len, i, alphabet, used);
-
+	vec_set->dim=vec_len;
 // 	size_t l;
 // 	double max_val=0;
 // 	double tmp_val;
@@ -444,7 +694,7 @@ seqset2vecs_kmer(SeqSet *seq_set, short k, short alphabet_size, short *alphabet)
 
 
 // 	Take the next farthest points to any one existing in the set
-	int n_dist_id=5;
+	int n_dist_id=10;
 	Vector **dist_points = my_malloc(n_dist_id*sizeof(Vector));
 	dist_points[0]=new_vec(vecs[id], vec_len);
 	for (i = 0; i<n_seqs; ++i)
@@ -487,12 +737,11 @@ seqset2vecs_kmer(SeqSet *seq_set, short k, short alphabet_size, short *alphabet)
 	vec_len=n_dist_id;
 
 	//TEST test_end;
-*/
-	vec_set->dim=vec_len;
+
+//*/
 
 // 	find_distant(seq_set, vec_set);
 //	exit(1);
-
 
 	free(used);
 	free(factor);
@@ -602,6 +851,7 @@ print_vecs(VectorSet *set, char *out_f)
 	for (i=0; i<n_vecs; ++i)
 	{
 		data=set->vecs[i]->data;
+		fprintf(out_F, "%i ", i);
 		for (j=0; j<dim; ++j)
 			fprintf(out_F, "%f ", data[j]);
 		fprintf(out_F, "\n");

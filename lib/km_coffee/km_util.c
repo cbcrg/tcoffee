@@ -39,7 +39,6 @@ my_calloc ( size_t num, size_t size )
 }
 
 
-
 void *
 my_realloc(void *p, size_t size)
 {

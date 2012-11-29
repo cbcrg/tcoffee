@@ -388,10 +388,16 @@ km_coffee_align3(char *seq_f, int k, int k_leaf, char *method, char *aln_f, int 
 	SeqSet *seq_set = read_fasta(seq_f);
 	qsort(seq_set->seqs, seq_set->n_seqs, sizeof(Seq*), my_seq_sort);
 	srand(time(0));
-	short alphabet[256];
+
+
 	short j = -1;
 	short i;
+	/****************************************************
+	Sequences to vector using k-mers
+	*****************************************************/
+	short alphabet[256];
 
+	// standard alphabet
 	for (i = 65; i < 91; ++i)
 		if ((i==66) || (i==74) || (i==79) || (i==88) || (i==90))
 			alphabet[i] = 0;
@@ -404,98 +410,41 @@ km_coffee_align3(char *seq_f, int k, int k_leaf, char *method, char *aln_f, int 
 		else
 			alphabet[i] = ++j;
 
-// // 	short alphabet()
-// 	for (i=0; i<256;++i)
-// 		alphabet[i]=0;
-// 	alphabet['a']=1;
-// 	alphabet['g']=1;
-// 	alphabet['v']=1;
-// 	alphabet['i']=2;
-// 	alphabet['l']=2;
-// 	alphabet['f']=2;
-// 	alphabet['p']=2;
-// 	alphabet['y']=3;
-// 	alphabet['m']=3;
-// 	alphabet['t']=3;
-// 	alphabet['s']=3;
-// 	alphabet['h']=4;
-// 	alphabet['n']=4;
-// 	alphabet['q']=4;
-// 	alphabet['w']=4;
-// 	alphabet['r']=5;
-// 	alphabet['k']=5;
-// 	alphabet['d']=6;
-// 	alphabet['e']=6;
-// 	alphabet['c']=7;
-// 	alphabet['u']=7;
-// 	alphabet['A']=1;
-// 	alphabet['G']=1;
-// 	alphabet['V']=1;
-// 	alphabet['I']=2;
-// 	alphabet['L']=2;
-// 	alphabet['F']=2;
-// 	alphabet['P']=2;
-// 	alphabet['Y']=3;
-// 	alphabet['M']=3;
-// 	alphabet['T']=3;
-// 	alphabet['S']=3;
-// 	alphabet['H']=4;
-// 	alphabet['N']=4;
-// 	alphabet['Q']=4;
-// 	alphabet['W']=4;
-// 	alphabet['R']=5;
-// 	alphabet['K']=5;
-// 	alphabet['D']=6;
-// 	alphabet['E']=6;
-// 	alphabet['C']=7;
-// 	alphabet['U']=7;
+	// shrinked alphabet
+	for (i = 0; i < 256; ++i)
+		alphabet[i] = 0;
 
-// SE?B(10) 	AST, C, DN, EQ, FY, G, HW, ILMV, KR, P
-// 	alphabet['a']=1;
-// 	alphabet['g']=6;
-// 	alphabet['v']=8;
-// 	alphabet['i']=8;
-// 	alphabet['l']=8;
-// 	alphabet['f']=5;
-// 	alphabet['p']=10;
-// 	alphabet['y']=5;
-// 	alphabet['m']=8;
-// 	alphabet['t']=1;
-// 	alphabet['s']=1;
-// 	alphabet['h']=7;
-// 	alphabet['n']=3;
-// 	alphabet['q']=4;
-// 	alphabet['w']=7;
-// 	alphabet['r']=9;
-// 	alphabet['k']=9;
-// 	alphabet['d']=3;
-// 	alphabet['e']=4;
-// 	alphabet['c']=2;
-// 	alphabet['u']=2;
-// 	alphabet['A']=1;
-// 	alphabet['G']=6;
-// 	alphabet['V']=8;
-// 	alphabet['I']=8;
-// 	alphabet['L']=8;
-// 	alphabet['F']=5;
-// 	alphabet['P']=10;
-// 	alphabet['Y']=5;
-// 	alphabet['M']=8;
-// 	alphabet['T']=1;
-// 	alphabet['S']=1;
-// 	alphabet['H']=7;
-// 	alphabet['N']=3;
-// 	alphabet['Q']=4;
-// 	alphabet['W']=7;
-// 	alphabet['R']=9;
-// 	alphabet['K']=9;
-// 	alphabet['D']=3;
-// 	alphabet['E']=4;
-// 	alphabet['C']=2;
-// 	alphabet['U']=2;
+// 	char *groups[]={"LlVvIiMmCcAaGgSsTtPpFfYyWw","EeDdNnQqKkRrHh"};
+	char *groups[]={"LlVvIiMmCc","AaGgSsTtPp","FfYyWw","EeDdNnQqKkRrHh"};
+	size_t n_groups = 4;
+// 	size_t len;
+// 	char *group;
+// 	for (i=0; i<n_groups; ++i)
+// 	{
+// 		group=groups[i];
+// 		len=strlen(group);
+// 		for (j=0; j<len; ++j)
+// 			alphabet[group[j]]=i+1;
+// 	}
+
+	VectorSet *vec_set = seqset2vecs_kmer(seq_set, 3, n_groups+1, alphabet);
 
 
-	VectorSet *vec_set = seqset2vecs_kmer(seq_set, 2, 21, alphabet);
+	/****************************************************
+		Sequences to vector using distances
+	*****************************************************/
+	// 	char *groups[]={"LVIMC","AGSTP","FYW","EDNQKRH"};
+// 	size_t n_groups = 4;
+// 	char *groups[]={"LlVvIiMmCc","AaGgSsTtPp","FfYyWw","EeDdNnQqKkRrHh"};
+// 	char *groups[]={"LlVvIiMmCcAaGgSsTtPpFfYyWw","EeDdNnQqKkRrHh"};
+// 	size_t n_groups = 2;
+// 	VectorSet *vec_set = seqset2vecs_whatever(seq_set, groups, n_groups);
+
+
+
+
+
+
 // 	char vec_file[500];
 // 	sprintf(vec_file, "%s_2_8_%li_%li.txt", strrchr(seq_f, '/')+1, vec_set->n_vecs, vec_set->dim);
 

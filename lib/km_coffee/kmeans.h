@@ -111,7 +111,7 @@ kmeans(VectorSet *vecs, unsigned int k, const char *init, double error_threshold
  *
  * \param vecs The vectors to cluster.
  * \param k the number of clusters to use.
- * \param init The methods to use for initializing the first centers: "random", "++" or "first".
+ * \param init The methods to use for initializing the first centers
  * \param error_threshold The change of error to stop kmeans.
  * \param start The startint point for the clustering.
  * \param end The end point for the clustering.
@@ -122,16 +122,18 @@ kmeans_sub(const VectorSet *vecs, unsigned int k, const char *init, double error
 /**
 * \brief The kmeans clustering algorithm.
 *
+* \compared to kmeans_sub, this version produces more equal sized clusters
+*
 * \param vecs The vectors to cluster.
 * \param k the number of clusters to use.
-* \param init The methods to use for initializing the first centers: "random", "++" or "first".
+* \param init The methods to use for initializing the first centers
 * \param error_threshold The change of error to stop kmeans.
 * \param start The startint point for the clustering.
 * \param end The end point for the clustering.
 * \param return The centers found.
 */
 VectorSet *
-kmeans_sub2(const VectorSet *vecs, unsigned int k, const char *init, double error_threshold, size_t start, size_t end);
+kmeans_sub_eq_size(const VectorSet *vecs, unsigned int k, const char *init, double error_threshold, size_t start, size_t end);
 
 
 double

@@ -949,7 +949,7 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	      sprintf (NA2->name[NA2->nseq], "sst2");
 	    }
 	  else
-	    {
+	{
 	    NA2=A2;
 	    nns[1]=ns[1];
 	    nls[1]=vcalloc (ns[1], sizeof (int));

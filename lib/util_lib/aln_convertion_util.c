@@ -6220,6 +6220,9 @@ char *profile2P_template_file (Sequence *S, int n)
     }
   return NULL;
 }
+
+
+
 Alignment * seq2R_template_profile (Sequence *S, int n)
 {
   X_template *X;

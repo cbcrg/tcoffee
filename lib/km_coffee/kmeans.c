@@ -24,6 +24,7 @@ plusplus_init(const vector<boost::shared_ptr<Vector<double> > > &vecs, unsigned 
 
 
 
+
 /*
 void
 random_init(const vector<boost::shared_ptr<Vector<double> > > &vecs, unsigned int k, vector<boost::shared_ptr<Vector<double> > > &centers, size_t start, size_t end)
@@ -261,9 +262,102 @@ spss_like_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t en
 }
 
 
+typedef struct
+{
+	size_t x;
+	size_t y;
+} pair;
+
+
+int compare_pair_x (const void * a, const void * b)
+{
+	return ( ((pair*)a)->x - ((pair*)b)->x );
+}
+
+int compare_pair_y (const void * a, const void * b)
+{
+	return ( ((pair*)a)->y - ((pair*)b)->y );
+}
+
+
+
+
+
+VectorSet *
+plusplus_like_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
+{
+	VectorSet *centers = my_malloc(sizeof(VectorSet));
+	centers->dim=vec_set->dim;
+	centers->n_vecs=k;
+	size_t dim = vec_set->dim;
+	centers->vecs=my_malloc(k*sizeof(Vector*));
+	size_t i,j;
+	for (i = 0; i<k; ++i)
+	{
+		centers->vecs[i]=my_malloc(sizeof(Vector));
+		centers->vecs[i]->data=my_malloc(dim*sizeof(double));
+		centers->vecs[i]->id=i;
+	}
+
+	size_t n_vecs = end-start;
+	pair *dists = my_malloc(sizeof(pair) * n_vecs);
+	for (i=0; i<n_vecs; ++i)
+	{
+		dists[i].x=i;
+		dists[i].y=INT_MAX;
+	}
+
+	double dist;
+	for (i=0; i<n_vecs; ++i)
+	{
+		for (j=i+1; j<n_vecs; ++j)
+		{
+			dist= km_sq_dist(vec_set->vecs[i], vec_set->vecs[j], dim);
+			if (dist < dists[i].y)
+				dists[i].y=dist;
+			if (dist < dists[j].y)
+				dists[j].y=dist;
+		}
+	}
+
+	qsort (dists, n_vecs, sizeof(pair), compare_pair_y);
+	size_t med_id = dists[n_vecs/2].x;
+
+	double *p, *vec;
+	p = centers->vecs[0]->data;
+	vec = vec_set->vecs[med_id]->data;
+	for (j=0; j<dim; ++j)
+		p[j] = vec[j];
+	qsort (dists, n_vecs, sizeof(pair), compare_pair_x);
+
+	//calculate most distant vectors to existing centers and set as new vector. distance is the distance to the closest centroid.
+	double tmp_dist;
+	for (i=1; i<k; ++i)
+	{
+		for (j=start; j<end; ++j)
+		{
+			tmp_dist = km_sq_dist(centers->vecs[i-1], vec_set->vecs[j], dim);
+			if (tmp_dist < dists[j].y)
+				dists[j].y=tmp_dist;
+		}
+
+		qsort (dists+i, n_vecs-i, sizeof(pair), compare_pair_y);
+		p = centers->vecs[i]->data;
+		vec = vec_set->vecs[dists[i+((n_vecs-i)/2)].x]->data;
+		for (j=0; j<dim; ++j)
+			p[j] = vec[j];
+		qsort (dists+i, n_vecs-i, sizeof(pair), compare_pair_x);
+	}
+
+	return centers;
+}
+
+
+
 /*
 Initialization as proposed int:
-	I. Katsavounidis, C.-C. J. Kuo, and Z. Zhang. A new initialization technique for generalized Lloyd iteration. IEEE Signal Processing Letters, 1(10):144?146, 1994*/
+I. Katsavounidis, C.-C. J. Kuo, and Z. Zhang. A new initialization technique for generalized Lloyd iteration. IEEE Signal Processing Letters, 1(10):144?146, 1994
+*/
 VectorSet *
 kkz_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
 {
@@ -420,10 +514,13 @@ delKM_node(KM_node *node)
 	free(node);
 }
 
+
 KM_node*
 hierarchical_kmeans(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const char *init, double error_threshold)
 {
 	Stack *todo =Stack_init();
+
+	// Initialize tree
 	KM_node *root = my_malloc(sizeof(KM_node));
 	root->children=malloc(k*sizeof(KM_node));
 	KM_node *current, *tmp;
@@ -431,6 +528,8 @@ hierarchical_kmeans(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const 
 	root->start=0;
 	root->end=vecs->n_vecs;
 	root->id=0;
+
+
 	push(todo, root);
 	size_t node_id = 0;
 	int use_k;
@@ -459,7 +558,7 @@ hierarchical_kmeans(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const 
 				tmp->start=old_index;
 				tmp->end=i;
 				tmp->id = ++node_id;
-				if (i - old_index > k_leaf)//(k*1.5))
+				if (i - old_index > (k_leaf))//(k*1.5))
 					push(todo, tmp);
 				old_index=i;
 				old_assignment=vecs->vecs[i]->assignment;
@@ -473,11 +572,8 @@ hierarchical_kmeans(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const 
 		tmp->start=old_index;
 		tmp->end=i;
 		tmp->id=++node_id;
-		if ((vecs->vecs[start]->assignment != vecs->vecs[end-1]->assignment) && (i - old_index > k))
-		{
-			printf("size\n", end-start);
+		if ((vecs->vecs[start]->assignment != vecs->vecs[end-1]->assignment) && (i - old_index > (k_leaf)))
 			push(todo, tmp);
-		}
 	}
 
 	delStack(todo);
@@ -513,7 +609,7 @@ hierarchical_kmeans2(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const
 	{
 		n_vecs= vecs->n_vecs;
 		use_k = max(2, n_vecs/k);
-		centers=kmeans_sub2(vecs, use_k, init, error_threshold, 0, n_vecs);
+		centers=kmeans_sub_eq_size(vecs, use_k, init, error_threshold, 0, n_vecs);
 		qsort(&vecs->vecs[0], n_vecs, sizeof(Vector*), my_assignment_sort);
 		old_assignment=-1;
 		tmp_node_id=-1;
@@ -527,7 +623,7 @@ hierarchical_kmeans2(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const
 		{
 			if (vecs->vecs[i]->assignment != old_assignment)
 			{
-// 				printf("%li\n", i - old_id);
+//  				printf("%li\n", i - old_id);
 				old_id=i;
 				tmp=my_malloc(sizeof(KM_node));
 				tmp_nodes[++tmp_node_id]=tmp;
@@ -584,8 +680,6 @@ kmeans_sub(const VectorSet *vecs, unsigned int k, const char *init, double error
 	// 	printf("%li-%li\n", start, end);
 	// determine first centers
 	VectorSet *centers;
-	// 	if (init == "++")
-	// 		plusplus_init(vecs, k, centers, start, end);
 	if (!strcmp(init, "distributed"))
 		centers = distributed_init(vecs, k, start, end);
 	else if (!strcmp(init, "kkz"))
@@ -594,6 +688,8 @@ kmeans_sub(const VectorSet *vecs, unsigned int k, const char *init, double error
 		centers = spss_like_init(vecs, k, start, end);
 	else if (!strcmp(init, "first"))
 		centers = first_init(vecs, k, start);
+	else if (!strcmp(init, "plusplus"))
+		centers = plusplus_like_init(vecs, k, start, end);
 	else
 	{
 		printf("%s\n", init);
@@ -699,19 +795,18 @@ kmeans_sub(const VectorSet *vecs, unsigned int k, const char *init, double error
 
 
 VectorSet *
-kmeans_sub2(const VectorSet *vecs, unsigned int k, const char *init, double error_threshold, size_t start, size_t end)
+kmeans_sub_eq_size(const VectorSet *vecs, unsigned int k, const char *init, double error_threshold, size_t start, size_t end)
 {
-	// 	printf("%li-%li\n", start, end);
 	// determine first centers
 	VectorSet *centers;
-	// 	if (init == "++")
-	// 		plusplus_init(vecs, k, centers, start, end);
 	if (!strcmp(init, "distributed"))
 		centers = distributed_init(vecs, k, start, end);
 	else if (!strcmp(init, "kkz"))
 		centers = kkz_init(vecs, k, start, end);
-		else if (!strcmp(init, "spss"))
-			centers = spss_like_init(vecs, k, start, end);
+	else if (!strcmp(init, "spss"))
+		centers = spss_like_init(vecs, k, start, end);
+	else if (!strcmp(init, "plusplus"))
+		centers = plusplus_like_init(vecs, k, start, end);
 	else if (!strcmp(init, "first"))
 		centers = first_init(vecs, k, start);
 	else
@@ -742,9 +837,11 @@ kmeans_sub2(const VectorSet *vecs, unsigned int k, const char *init, double erro
 		error=0;
 		for (i = 0; i<k; ++i)
 			nums[i] = 0;
-		#pragma omp parallel shared(start, end, vecs, chunk, k, centers, nums) private(id, new_center_id, min_dist, center_id, tmp_dist)
+
+		//simple parallel not possible - number of vectors inside clusters would vary!!!
+/*		#pragma omp parallel shared(start, end, vecs, chunk, k, centers, nums) private(id, new_center_id, min_dist, center_id, tmp_dist)
 		{
-			#pragma omp for schedule(dynamic,chunk) reduction(+:error) nowait
+			#pragma omp for schedule(dynamic,chunk) reduction(+:error) nowait*/
 			for (id = start; id < end; ++id)
 			{
 				min_dist = DBL_MAX;
@@ -770,7 +867,7 @@ kmeans_sub2(const VectorSet *vecs, unsigned int k, const char *init, double erro
 				#pragma omp atomic
 				++nums[new_center_id];
 			}
-		}
+// 		}
 
 		chunk=10;
 		// set centers to 0
