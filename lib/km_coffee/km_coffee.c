@@ -479,16 +479,11 @@ km_coffee_align3(char *seq_f, int k, int k_leaf, char *method, char *aln_f, int 
 
 // 	printf("TRAVERSE\n");
 	delVecSet(vec_set);
-	print_km_tree(root, assignment, seq_set, "/users/cn/ckemena/projects/km-coffee/data/test_set_1000/run/km_tree.dnd");
-// 	exit(0);
 	traverse_km_tree(root, assignment, seq_set, out_f, n_cores, gapopen, gapext, method);
 	free( assignment);
 	del_tree(root);
 	delSeqSet(seq_set);
-// 	char command[100];
 
-// 	sprintf(command, "rm -r %s", km_tmp_dir);
-// 	system(command);
 	free(km_tmp_dir);
 
 
