@@ -1954,8 +1954,6 @@ Constraint_list *update_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
 
 CLIST_TYPE *main_search_in_list_constraint ( int *key,int *p,int k_len,Constraint_list *CL)
 {
-printf("lalalla\n");
-
 	static CLIST_TYPE *l=NULL;
 	int a, s1, s2, r1, r2, ni;
 
@@ -3252,7 +3250,6 @@ FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int
 
 Constraint_list * extend_constraint_list ( Constraint_list *CL)
 {
-	printf("EXTEND!!!!!!!!!!!!\n\n");
 	Sequence *S;
 	int **cache;
 	int tot=0;
@@ -3402,8 +3399,7 @@ Constraint_list * relax_constraint_list (Constraint_list *CL)
 
 Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int nproc)
     {
-      
-      printf("RELAX OLA 8A PANE KALA!!!! BASIKA OLA 8A PANE TELEIA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    
   int a, s1, s2, r1, r2,j;
 
   int thr=10;

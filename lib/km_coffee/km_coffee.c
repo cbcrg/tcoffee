@@ -411,12 +411,12 @@ km_coffee_align3(char *seq_f, int k, int k_leaf, char *method, char *aln_f, int 
 			alphabet[i] = ++j;
 
 	// shrinked alphabet
-	for (i = 0; i < 256; ++i)
-		alphabet[i] = 0;
+//	for (i = 0; i < 256; ++i)
+//		alphabet[i] = 0;
 
 // 	char *groups[]={"LlVvIiMmCcAaGgSsTtPpFfYyWw","EeDdNnQqKkRrHh"};
-	char *groups[]={"LlVvIiMmCc","AaGgSsTtPp","FfYyWw","EeDdNnQqKkRrHh"};
-	size_t n_groups = 4;
+//	char *groups[]={"LlVvIiMmCc","AaGgSsTtPp","FfYyWw","EeDdNnQqKkRrHh"};
+//	size_t n_groups = 4;
 // 	size_t len;
 // 	char *group;
 // 	for (i=0; i<n_groups; ++i)
@@ -427,7 +427,7 @@ km_coffee_align3(char *seq_f, int k, int k_leaf, char *method, char *aln_f, int 
 // 			alphabet[group[j]]=i+1;
 // 	}
 
-	VectorSet *vec_set = seqset2vecs_kmer(seq_set, 3, n_groups+1, alphabet);
+	VectorSet *vec_set = seqset2vecs_kmer(seq_set, 2, 21, alphabet);
 
 
 	/****************************************************

@@ -16,7 +16,6 @@ FILE * compare_al_to_lib ( Constraint_list *CL, int start, char *fname, Sequence
 {
     
 	int a, b, s1, s2, r1, r2;
-	
 	int len;
 	static int* translation;
 	FILE *fp;
@@ -486,58 +485,39 @@ if ( aln_compare==1)pep_compare=0;
        if ( pep1_file[0])sprintf ( seq_list[n_seq_file++], "S%s", pep1_file);
        if ( pep2_file[0])sprintf ( seq_list[n_seq_file++], "S%s", pep2_file);
        if ( lib_file[0]){		 //----------------Maria added this-----------------// 
-	  CL=read_constraint_list_file( CL, lib_file);
-         
-	  printf("%s  %s\n",lib_file, alignment2_file);
-	//  printf("%d  %d %d  %d %d %dlala\n\n",CL->residue_index[0][1][0],CL->residue_index[0][1][1], CL->residue_index[0][1][2], CL->residue_index[0][1][3], CL->residue_index[0][1][4],CL->residue_index[0][1][5],CL->residue_index[0][1][6]);
-	//  FILE *OUT;
-	//  OUT=compare_al_to_lib ( CL, 0, "lib_out_lala", CL->S);
-      
+	   
 	  int *entry, *aln_pos;
 	  char **tmp_pos;
-	  int tot_we=0, al_we=0, i, j;
+	  int tot_we=0, al_we=0, len, i, j;
 	  double comp_Score=0;
-	  
-	   printf("EDW prin na diabasei to al2!!!!!!!!!!!\n");
-	   
-	  TOT_SEQ=read_seq_in_n_list ( seq_list, n_seq_file, NULL, NULL);
-	  
-	   printf("EDW prin na diabasei to al2!!!!!!!!!!!\n");
-	  B=declare_aln (TOT_SEQ);
 	
-	  printf("333EDW prin na diabasei to al2!!!!!!!!!!!\n");  
-	  main_read_aln ( alignment2_file, B);
+	  CL=read_constraint_list_file( CL, lib_file);
+	  printf("%s  %s\n",lib_file, alignment2_file);
 	  
-	  printf("EDW   %d %d\n", B->nseq, CL->S->nseq);
+	  TOT_SEQ=read_seq_in_n_list ( seq_list, n_seq_file, NULL, NULL);
+	  B=declare_aln (TOT_SEQ);
+	  main_read_aln ( alignment2_file, B);
 	  
 	  tmp_pos= (char **) malloc ( CL->S->nseq * sizeof(char *) );
 	  for (i=0; i< B->nseq; i++){
 	    for (j=0; j< CL->S->nseq; j++){
 		if( strcmp(CL->S->name[j], B->name[i])==0 ){
-		      tmp_pos[j]=B->seq_al[i];  printf(" %s   \n", tmp_pos[j]);
+		      tmp_pos[j]=B->seq_al[i]; 						//printf(" %s   \n", tmp_pos[j]);
 		      break;
 		}
 	    }
 	  }
-	  B->seq_al = tmp_pos;
-	  printf("   \n");
-	  for (i=0; i< B->nseq; i++){
-	      printf(" %s   \n", B->seq_al[i]);
-	  }
+	  B->seq_al = tmp_pos;								//printf("\n");   for (i=0; i< B->nseq; i++){ printf(" %s   \n", B->seq_al[i]);  }
 	    
 	  SB=aln2seq ( B);
-	  CL_B=declare_constraint_list ( SB, NULL, NULL, 0, NULL, NULL);
-
-	  printf("    To eftia3a!! Teleiwse!! Kai 3etrela8ikan oloi :P\n");
-	  
+	  CL_B=declare_constraint_list ( SB, NULL, NULL, 0, NULL, NULL);	  
 	  CL_B=aln2constraint_list_full (B,CL_B, "1");
+	  
 	  while ( ( entry=extract_entry (CL) ) ){ tot_we+=entry[WE]; }
 	 
 	  while ( ( entry=extract_entry (CL_B) ) ){
-	      int len,i;
-	      printf ("-%d- S1:%d  S2:%d    R1:%d R2:%d\n", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]); 
-	      if ((main_search_in_list_constraint (entry,&pos_in_clist,4,CL))!=NULL){
-		//printf ("-%d- S1:%d  S2:%d    R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]); 
+	   
+	      if ((main_search_in_list_constraint (entry,&pos_in_clist,4,CL))!=NULL){   //printf ("-%d- S1:%d  S2:%d    R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]); 
 		
 		len=CL->residue_index[ entry[SEQ1] ][ entry[R1] ][0];
 		i=0;
@@ -545,15 +525,14 @@ if ( aln_compare==1)pep_compare=0;
 		  ++i;
 		
 		if (i<len)
-		{
-		    printf("     %d\n", CL->residue_index[ entry[SEQ1] ][ entry[R1] ][(i*5)+3]);
-		     al_we+= (CL->residue_index[ entry[SEQ1] ][ entry[R1] ][(i*5)+3]);
+		{									 //printf("     %d\n", CL->residue_index[ entry[SEQ1] ][ entry[R1] ][(i*5)+3]);
+		    al_we+= (CL->residue_index[ entry[SEQ1] ][ entry[R1] ][(i*5)+3]);
 		} 
 	      } 
 	  }
 	  
-	  comp_Score=(double)al_we/tot_we; printf("SCORE:  %d   %d    %.3lf\n", al_we, tot_we, comp_Score );
-	
+	  comp_Score=(double)al_we/tot_we; 
+	  printf("SCORE:  %d   %d    %.3lf\n", al_we, tot_we, comp_Score );
        }
        //--------------------------------------------------------------------------------//
        

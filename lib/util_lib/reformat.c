@@ -4638,7 +4638,6 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 		int *al_test = calloc(256, sizeof(int));
 		int i;
 		
-		HERE ("Check1 ");
 		
 		for (i = 0; i < 67; ++i)
 			al_test[allowed[i]] = 1;
@@ -4696,7 +4695,7 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 		min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
 		
 		vfclose (fp);
-		HERE ("Check2");	
+		
 		if ( nseq==0)
 		{
 			return NULL;
@@ -4714,7 +4713,7 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 		fp=vfopen (fname,"r");
 		current=0;
 		c=fgetc(fp);coor++;
-		HERE ("Check3");	
+	
 		while (c!=EOF)
 		{
 			if (c=='>')
@@ -4778,7 +4777,7 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 		}
 
 		vfclose (fp);
-		HERE ("Check4");	
+	
 		//LS=clean_sequence (LS);
 
 		return LS;
