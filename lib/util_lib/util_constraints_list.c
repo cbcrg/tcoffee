@@ -13,6 +13,8 @@
 #include "define_header.h"
 #include "dp_lib_header.h"
 
+static int entry_len;
+
 /**
  * \file util_constraints_list.c
  * All utilities for the Constraint_list.
@@ -130,7 +132,7 @@ Constraint_list *fork_subset_produce_list   ( Constraint_list *CL, Sequence *S, 
 		if (pid==0)//child process
 		{
 			int done, todo;
-			
+
 			freeze_constraint_list (CL);//record the current state, so as not to dump everything
 			initiate_vtmpnam(NULL);
 			vfclose(vfopen (pid_tmpfile[a],"w"));
@@ -1202,8 +1204,6 @@ struct TC_method * method_file2TC_method( char *method)
 	}
 	vfclose ( fp);
 
-
-
 	return m;
 }
 
@@ -1954,7 +1954,7 @@ Constraint_list *update_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
 
 CLIST_TYPE *main_search_in_list_constraint ( int *key,int *p,int k_len,Constraint_list *CL)
 {
-
+printf("lalalla\n");
 
 	static CLIST_TYPE *l=NULL;
 	int a, s1, s2, r1, r2, ni;
@@ -2064,8 +2064,9 @@ Constraint_list*  fork_read_n_constraint_list(char **fname,int n_list, char *in_
  * Read several types of input files and build the library.
  *
  * Decides on how many processors to use and redirects to ::fork_read_n_constraint_list,
- * so please follow the link to continue reading.
+ * so please follow th elibnk to continue reading.
  */
+
 Constraint_list* read_n_constraint_list(char **fname,int n_list, char *in_mode,char *mem_mode,char *weight_mode, char *type,FILE *local_stderr, Constraint_list *CL, char *seq_source)
 {
 
@@ -2944,12 +2945,11 @@ read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name,
 FILE * save_extended_constraint_list      (  Constraint_list *CL, char *mode, FILE *fp)
 {
 	int a, b;
+
 	if (!CL || !CL->S || CL->residue_index)return fp;
 	if ( !fp)fp=stdout;
 
-
 	fp=save_list_header (fp,CL);
-
 
 	for ( a=0; a< (CL->S)->nseq; a++)
 	{
@@ -2994,6 +2994,7 @@ FILE * save_extended_constraint_list_pair (  Constraint_list *CL, char *mode, ch
 
 	for ( a=0; a<(CL->S)->len[s1]; a++)
 	{
+
 		for ( b=0; b<(CL->S)->len[s2]; b++)
 		{
 			if ( a>=b && s1==s2)continue;
@@ -3241,8 +3242,6 @@ FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int
 /*                                                                   */
 /*********************************************************************/
 
-
-
 /**
  * Apply Consistency.
  *
@@ -3250,8 +3249,10 @@ FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int
  * will be reweighted.
  * \param[in,out] CL The global Constraint_list object
  */
+
 Constraint_list * extend_constraint_list ( Constraint_list *CL)
 {
+	printf("EXTEND!!!!!!!!!!!!\n\n");
 	Sequence *S;
 	int **cache;
 	int tot=0;
@@ -3398,8 +3399,11 @@ Constraint_list * relax_constraint_list (Constraint_list *CL)
  *            Non-existing edges (i.e. edges with zero weight) cannot be created, although they might be highly consistent.
  * \sa ::extend_constraint_list
  */
+
 Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int nproc)
     {
+      
+      printf("RELAX OLA 8A PANE KALA!!!! BASIKA OLA 8A PANE TELEIA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   int a, s1, s2, r1, r2,j;
 
   int thr=10;

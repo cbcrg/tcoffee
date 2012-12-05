@@ -1672,6 +1672,8 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   float nscore, score, tot, filter, avg=0, new=0;
   float **used;
   float *norm;
+  //Maria added this
+  int norm2=0;  //  
   static int **nr;
   static int max_nr;
   //variables for fork
@@ -1744,7 +1746,8 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 		      t_w=CL->residue_index[s][r][a+WE];
 		      if (sl1[t_s])continue;//do not extend within a profile
 
-		      norm[p1]++;
+		      norm[p1]++; //printf("Seq=%d Seq=%d RES=%d W=%d norm=%f",a, t_s, t_r, t_w, norm[p1]);
+		      norm2=0;
 		      for (b=0; b<CL->residue_index[t_s][t_r][0];)
 			{
 			  if (b==0){t_s2=t_s;t_r2=t_r;t_w2=t_w;b++;}
@@ -1754,6 +1757,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 			      t_r2=CL->residue_index[t_s][t_r][b+R2];
 			      t_w2=CL->residue_index[t_s][t_r][b+WE];
 			      b+=ICHUNK;
+			      norm2++;  printf("    norm2=%d\n", norm2);
 			    }
 			  if (sl2[t_s2])
 			    {
@@ -1784,7 +1788,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 		  if (nscore>filter && p1!=0 && p2!=0 && p1!=l1 && p2!=l2)
 		    {
 		      if (normalisation_mode==0)
-			{
+			{ printf("----------> norm1Total=%f\n", norm[p1]);
 			  score=((norm[p1]>0)?score/norm[p1]:0);
 			}
 		      else if (normalisation_mode==1)

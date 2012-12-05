@@ -10,12 +10,116 @@
 #include "dp_lib_header.h"
 #include "define_header.h"
 
-  
+//-----------MARIA ADDED CHANGES------------//
+
+FILE * compare_al_to_lib ( Constraint_list *CL, int start, char *fname, Sequence *S)
+{
+    
+	int a, b, s1, s2, r1, r2;
+	
+	int len;
+	static int* translation;
+	FILE *fp;
+
+
+	if ( translation!=NULL)vfree(translation);
+	  translation=vcalloc ( (CL->S)->nseq+1, sizeof (int));
+	    for ( b=0,a=0; a< (CL->S)->nseq; a++)
+		{
+			if ( name_is_in_list((CL->S)->name[a],S->name,S->nseq, 100)==-1)
+			{
+				(CL->S)->len[a]=-1;
+				translation [a]=-1;
+			}
+			else
+			{
+				translation[a]=b++;
+			}
+		}
+
+	
+	fp=vfopen ( fname, "w");
+	fp=save_list_header (fp,CL);
+		
+	len=CL->ne;
+	
+	if (len==start && CL->cpu!=-1)
+	{
+		fprintf (fp, "! CPU %d\n",get_time());
+		return fp;
+	}
+	else
+	{
+		Sequence *S=CL->S;
+		int ***cacheI=vcalloc (S->nseq, sizeof (int**));
+		int **cacheR=vcalloc (S->nseq, sizeof (int*));
+		int *tot=vcalloc ( S->nseq, sizeof (int));
+		int *max=vcalloc ( S->nseq, sizeof (int));
+		for (a=0;a<S->nseq; a++)
+		  {
+		    cacheI[a]=vcalloc (S->len[a], sizeof (int*));
+		    cacheR[a]=vcalloc (S->len[a], sizeof (int));
+		  }
+		for (a=0; a<S->nseq; a++)max[a]=S->len[a];
+
+		for (s1=0; s1<S->nseq; s1++)
+		  {
+		  for (r1=1; r1<=S->len[s1]; r1++)
+		    {
+		      for (b=1; b<CL->residue_index[s1][r1][0]; b+=ICHUNK)
+			{
+
+			  s2=CL->residue_index[s1][r1][b+SEQ2];
+			  if (tot[s2]>=max[s2])
+			    {
+			      max[s2]+=100;
+			      cacheI[s2]=vrealloc (cacheI[s2], max[s2]*sizeof (int*));
+			      cacheR[s2]=vrealloc (cacheR[s2], max[s2]*sizeof (int*));
+			    }
+
+			  cacheI[s2][tot[s2]]=CL->residue_index[s1][r1]+b;
+			  cacheR[s2][tot[s2]]=r1;
+			  tot[s2]++;
+			}
+		    }
+
+			for (s2=0;s2<S->nseq; s2++)
+			{
+				int x1=translation[s1];
+				int x2=translation[s2];
+				if (tot[s2] && x1!=-1 && x2!=-1 && x1<x2)
+				{
+					fprintf ( fp, "#%d %d\n", x1+1, x2+1);
+					for ( r2=0; r2<tot[s2];r2++)
+					{
+						int *v=cacheI[s2][r2];
+						fprintf (fp, "%5d %5d %5d %5d %5d\n",cacheR[s2][r2], v[R2], v[WE], v[CONS], v[MISC]);
+					}
+				}
+				tot[s2]=0;
+			}
+		}
+		for (a=0; a<S->nseq; a++)
+		{
+			vfree (cacheI[a]);
+			vfree (cacheR[a]);
+		}
+		vfree (cacheI); vfree (cacheR);
+		vfree (tot);
+		vfree (max);
+	}
+
+	return save_list_footer (fp, CL);
+
+}
+//-----------END OF CHANGES------------//
+ 
+ 
+ 
 int aln_compare ( int argc, char *argv[])
     {
-    int a, b, c,f;
+    int a, b, c, f;
 	
-	int ik =0;
     Alignment *A, *B;
     Sequence *SA, *SB, *TOT_SEQ=NULL;
     Sequence *defined_residueA;
@@ -37,6 +141,8 @@ int aln_compare ( int argc, char *argv[])
     char sim_aln[STRING];
     char *alignment1_file;
     char *alignment2_file;
+    //---Maria added this---
+    char *lib_file; //---
     
     char *pep1_file;
     char *pep2_file;
@@ -60,6 +166,8 @@ int aln_compare ( int argc, char *argv[])
 /*LIST VARIABLES*/
     Constraint_list *CL_A;
     Constraint_list *CL_B;
+    //---Maria added this---//
+    Constraint_list *CL;
 
     int pos_in_clist;
     Sequence *CLS;
@@ -111,6 +219,8 @@ int aln_compare ( int argc, char *argv[])
 /*Declarations and Initializations*/
     alignment1_file=vcalloc ( LONG_STRING, sizeof (char));
     alignment2_file=vcalloc ( LONG_STRING, sizeof (char));
+    //---Maria added this---//
+    lib_file=vcalloc ( LONG_STRING, sizeof (char));
     
     pep1_file=vcalloc ( LONG_STRING, sizeof (char));
     pep2_file=vcalloc ( LONG_STRING, sizeof (char));
@@ -199,8 +309,7 @@ int aln_compare ( int argc, char *argv[])
 		   else
 		       {
 		       fprintf ( stderr, "\n%s: Unknown category for distance measure", argv[a]);
-		       }
-		       
+		       } 
 		   }
 		else
 		   {
@@ -214,6 +323,19 @@ int aln_compare ( int argc, char *argv[])
     		n_greps++;
 	     
     		}
+	//----- Maria added this----
+	else if ( strcmp ( argv[a], "-lib")==0)
+    		{
+    		sprintf ( lib_file, "%s", argv[++a]);
+		
+		}	
+	else if ( strcmp ( argv[a], "-al")==0)
+		{
+    		
+    		sprintf ( alignment2_file, "%s", argv[++a]);
+		
+		}	
+	//-----END of changes-----
 	else if ( strcmp ( argv[a], "-al1")==0)
     		{
     		
@@ -328,6 +450,8 @@ int aln_compare ( int argc, char *argv[])
 	}
  
 /*PARAMETER PROCESSING*/
+ //---Maria added this---//
+       CL=NULL;
 
 if ( pep_compare==1 || count==1)aln_compare=0;
 if ( aln_compare==1)pep_compare=0; 
@@ -361,14 +485,84 @@ if ( aln_compare==1)pep_compare=0;
        if ( alignment2_file[0])sprintf ( seq_list[n_seq_file++], "A%s", alignment2_file);
        if ( pep1_file[0])sprintf ( seq_list[n_seq_file++], "S%s", pep1_file);
        if ( pep2_file[0])sprintf ( seq_list[n_seq_file++], "S%s", pep2_file);
+       if ( lib_file[0]){		 //----------------Maria added this-----------------// 
+	  CL=read_constraint_list_file( CL, lib_file);
+         
+	  printf("%s  %s\n",lib_file, alignment2_file);
+	//  printf("%d  %d %d  %d %d %dlala\n\n",CL->residue_index[0][1][0],CL->residue_index[0][1][1], CL->residue_index[0][1][2], CL->residue_index[0][1][3], CL->residue_index[0][1][4],CL->residue_index[0][1][5],CL->residue_index[0][1][6]);
+	//  FILE *OUT;
+	//  OUT=compare_al_to_lib ( CL, 0, "lib_out_lala", CL->S);
+      
+	  int *entry, *aln_pos;
+	  char **tmp_pos;
+	  int tot_we=0, al_we=0, i, j;
+	  double comp_Score=0;
+	  
+	   printf("EDW prin na diabasei to al2!!!!!!!!!!!\n");
+	   
+	  TOT_SEQ=read_seq_in_n_list ( seq_list, n_seq_file, NULL, NULL);
+	  
+	   printf("EDW prin na diabasei to al2!!!!!!!!!!!\n");
+	  B=declare_aln (TOT_SEQ);
+	
+	  printf("333EDW prin na diabasei to al2!!!!!!!!!!!\n");  
+	  main_read_aln ( alignment2_file, B);
+	  
+	  printf("EDW   %d %d\n", B->nseq, CL->S->nseq);
+	  
+	  tmp_pos= (char **) malloc ( CL->S->nseq * sizeof(char *) );
+	  for (i=0; i< B->nseq; i++){
+	    for (j=0; j< CL->S->nseq; j++){
+		if( strcmp(CL->S->name[j], B->name[i])==0 ){
+		      tmp_pos[j]=B->seq_al[i];  printf(" %s   \n", tmp_pos[j]);
+		      break;
+		}
+	    }
+	  }
+	  B->seq_al = tmp_pos;
+	  printf("   \n");
+	  for (i=0; i< B->nseq; i++){
+	      printf(" %s   \n", B->seq_al[i]);
+	  }
+	    
+	  SB=aln2seq ( B);
+	  CL_B=declare_constraint_list ( SB, NULL, NULL, 0, NULL, NULL);
 
-     
-
+	  printf("    To eftia3a!! Teleiwse!! Kai 3etrela8ikan oloi :P\n");
+	  
+	  CL_B=aln2constraint_list_full (B,CL_B, "1");
+	  while ( ( entry=extract_entry (CL) ) ){ tot_we+=entry[WE]; }
+	 
+	  while ( ( entry=extract_entry (CL_B) ) ){
+	      int len,i;
+	      printf ("-%d- S1:%d  S2:%d    R1:%d R2:%d\n", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]); 
+	      if ((main_search_in_list_constraint (entry,&pos_in_clist,4,CL))!=NULL){
+		//printf ("-%d- S1:%d  S2:%d    R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]); 
+		
+		len=CL->residue_index[ entry[SEQ1] ][ entry[R1] ][0];
+		i=0;
+		while ((i<len) && (CL->residue_index[ entry[SEQ1] ][ entry[R1] ][1+(i*5)])!=entry[SEQ2])
+		  ++i;
+		
+		if (i<len)
+		{
+		    printf("     %d\n", CL->residue_index[ entry[SEQ1] ][ entry[R1] ][(i*5)+3]);
+		     al_we+= (CL->residue_index[ entry[SEQ1] ][ entry[R1] ][(i*5)+3]);
+		} 
+	      } 
+	  }
+	  
+	  comp_Score=(double)al_we/tot_we; printf("SCORE:  %d   %d    %.3lf\n", al_we, tot_we, comp_Score );
+	
+       }
+       //--------------------------------------------------------------------------------//
+       
+       else{
+       
        TOT_SEQ=read_seq_in_n_list ( seq_list, n_seq_file, NULL, NULL);
              
        A=declare_aln (TOT_SEQ);
        B=declare_aln (TOT_SEQ);
-
 
 /*1 COMPARISON OF THE SEQUENCES*/
     if ( pep_compare==1 || count==1)
@@ -477,7 +671,7 @@ if ( aln_compare==1)pep_compare=0;
      
        CL_A=declare_constraint_list ( CLS, NULL, NULL, 0, NULL, NULL);
        CL_B=declare_constraint_list ( CLS, NULL, NULL, 0, NULL, NULL);
-       
+             
       
        CL_A=aln2constraint_list_full (A,CL_A, "sim");
        CL_B=aln2constraint_list_full (B,CL_B, "sim");
@@ -491,10 +685,8 @@ if ( aln_compare==1)pep_compare=0;
        if ( strm( compare_mode, "sp"))
 	    {
 	      int *entry;
-	      while (entry=extract_entry (CL_A))
+	      while ( (entry=extract_entry (CL_A)) )
 		{
-		  int d;
-		  static int c;
 // 		  HERE ("-%d-S1:%d S2:%d R1:%d R2:%d", ++c, entry[SEQ1], entry[SEQ2], entry[R1], entry[R2]);
 		  s1=entry[SEQ1];
 		  s2=entry[SEQ2];
@@ -532,7 +724,7 @@ if ( aln_compare==1)pep_compare=0;
 		    }
 		  }
 	      
-	      while (entry=extract_entry (CL_A))
+	      while ( (entry=extract_entry (CL_A)) )
 		{
 		  s1=entry[SEQ1];
 		  s2=entry[SEQ2];
@@ -640,7 +832,7 @@ if ( aln_compare==1)pep_compare=0;
 	   int *entry;
 	   for ( a=0; a< n_categories; a++)
 	     {
-	       while (entry=extract_entry (CL_A))
+	       while ( (entry=extract_entry (CL_A)) )
 		 {
 		   s1=entry[SEQ1];
 		   s2=entry[SEQ2];
@@ -734,7 +926,7 @@ if ( aln_compare==1)pep_compare=0;
 	   aln_output_tot  =declare_int ( A->nseq, A->len_aln+1);
 	   aln_output_count=declare_int ( A->nseq, A->len_aln+1);
 	   
-	   while (entry=extract_entry (CL_A))
+	   while ( (entry=extract_entry (CL_A)) )
 	     {
 	       aln_output_tot[entry[SEQ1]][entry[R1]]++;
 	       aln_output_tot[entry[SEQ2]][entry[R2]]++;
@@ -770,6 +962,7 @@ if ( aln_compare==1)pep_compare=0;
 	   free_int ( aln_output_tot, -1);
 	   free_int ( aln_output_count, -1  );
 	 }
+       }
        }
     return EXIT_SUCCESS;
     }   
