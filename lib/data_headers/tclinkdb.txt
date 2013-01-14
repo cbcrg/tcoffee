@@ -7,6 +7,14 @@ PG t_coffee source		http://www.tcoffee.org/Packages/T-COFFEE_distribution.tar.gz
 PG t_coffee update_action	always
 PG t_coffee mode		tcoffee,mcoffee,rcoffee,expresso,3dcoffee
 
+PG strike 4_TCOFFEE		STRIKE
+PG strike type		sequence_alignment_scoring		
+PG strike ADDRESS		http://www.tcoffee.org/Projects/strike/index.html
+PG strike language		C++
+PG strike language2		CXX
+PG strike source		http://www.tcoffee.org/Projects/strike/strike_v1.2.tar.bz2
+PG strike mode		tcoffee,expresso
+PG strike version	1.2
      
 PG clustalw2 4_TCOFFEE		CLUSTALW2
 PG clustalw2 type		sequence_multiple_aligner		

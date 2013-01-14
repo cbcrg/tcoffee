@@ -805,6 +805,16 @@ sub install_source_package
 	&check_cp ("./src/$pg", "$BIN");
 	repo_store("./src/$pg");
       }
+
+    #
+    # STRIKE module
+    #
+    elsif ($pg eq "strike")
+      {
+	&flush_command("make $arguments");
+	&check_cp ("./bin/$pg", "$BIN");
+	repo_store("./bin/$pg");
+      }
     
     #
     # FSA module
