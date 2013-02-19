@@ -2376,7 +2376,7 @@ sub run_blast
 	  }
 	elsif ($SERVER eq "NCBI")
 	  {
-	    &check_configuration ("blastcl3","INTERNET");
+	    &check_configuration ("INTERNET");
 	    if ($db eq "uniprot"){$cl_db="nr";}
 	    else {$cl_db=$db;}
 
@@ -2389,7 +2389,9 @@ sub run_blast
 	      {
 		$cl_method=$method;
 	      }
-	    $command="blastcl3 -p $cl_method -d $cl_db -i $infile -o $outfile -m 7";
+	      
+	    &check_configuration ($cl_method);  
+	    $command="$cl_method -db $cl_db -query $infile -out $outfile -outfmt 5 -remote";
 	    &safe_system ($command);
 	  }
 	elsif ($SERVER =~/CLIENT_(.*)/)
@@ -3137,11 +3139,6 @@ END
 sub blast_com2new_blast_com
     {
       my $com=shift;
-      if ($ENV{"NCBI_BLAST_4_TCOFFEE"} eq "OLD"){return $com;}
-      elsif ( $com eq "blastcl3" ) {return $com;}  ## <-- 'legacy_blast.pl' does not support 'blastcl3', so return the command as it is
-      elsif (!&pg_is_installed("legacy_blast.pl")){return $com;}
-      else
-	{
 	  if ($com=~/formatdb/)
 	    {
 	      $com=~s/formatdb/makeblastdb/;
@@ -3151,27 +3148,8 @@ sub blast_com2new_blast_com
 	      $com="$com -logfile /dev/null";
 	      return $com;
 	    }
-	  elsif ($com =~/^blastn/){return $com;}
-	  elsif (&is_blast_package($com))
-	    {
-	      my $path;
+	  else {return $com;}
 
-	      if ( $ENV{"NCBI_BIN_4_TCOFFEE"}){$path=$ENV{"NCBI_BLAST_4_TCOFFEE"};}
-	      else
-		{
-		  $path=`which legacy_blast.pl`;
-		  $path=~s/\/legacy_blast\.pl//;
-		  chomp ($path);
-		}
-	      $path="--path $path";
-	      if ( $com=~/\>\>/){$com=~s/\>\>/ $path \>\>/;}
-	      elsif ( $com=~/\>/){$com=~s/\>/ $path \>/;}
-	      else {$com.=" $path";}
-	      $com="legacy_blast.pl $com";
-
-	      return $com;
-	    }
-	}
     }
 sub safe_system
 {
