@@ -116,6 +116,7 @@ $Data =main_undump_data ($Data, $param);
 if (-e $param->{model}){$Model=undump_model($param->{model});}
 elsif ($param->{model} eq "topology")
   {
+    print STDERR "----------------------\n";  
     $Model=topology2model($Data,$param->{nst},$param->{nem});
   }
 if (-e $param->{constraints}){$Model=undump_model($param->{constraints});}
@@ -198,7 +199,7 @@ if ($Model && $param->{outmodel} ne "no")
       {
 	dump_model_with_zero    ($Model, $param->{outmodel_with_zero}, hash2string($param, "-"));
       }
-    elsif ($param->{outmodel_format} eq "default")
+    elsif ($param->{outmodel_format} eq "default" || !$param->{outmodel_format})
       {
 	dump_model      ($Model,$param->{outmodel}      ,hash2string($param, "-"));
       }
