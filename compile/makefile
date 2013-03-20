@@ -208,6 +208,7 @@ SCRIPT_LIB_OBJECTS=\
 	extract_from_pdb\
 	install.pl\
 	clean_cache.pl\
+	nature_protocol.pl\
 	mocca
 #2
 extract_from_pdb:\
@@ -224,6 +225,9 @@ msa2bootstrap.pl:\
 clean_cache.pl:\
 	$(SCRIPT_LIB)/clean_cache.pl
 	cp $(SCRIPT_LIB)/clean_cache.pl .
+nature_protocol.pl:\
+	$(SCRIPT_LIB)/nature_protocol.pl
+	cp $(SCRIPT_LIB)/nature_protocol.pl .
 clustalw_method.tc_method:\
 	$(SCRIPT_LIB)/clustalw_method.tc_method
 	cp $(SCRIPT_LIB)/clustalw_method.tc_method .
