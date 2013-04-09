@@ -2391,7 +2391,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	   }
 	 vfclose (tl);
 
-	 if (!ntree){fprintf ( stderr, "\nERROR: No suitable pair of column supporting a tree [FATAL]\n"); exit (EXIT_SUCCESS);}
+	 if (!ntree){fprintf ( stderr, "\nERROR: No suitable pair of column supporting a tree. Consider removing the most distantly related sequences [FATAL]\n"); exit (EXIT_SUCCESS);}
 
 	 score=treelist2avg_treecmp (T1, NULL);
 	 display_output_filename( stderr,"TreeList","newick",tot_pos_list, CHECK);
