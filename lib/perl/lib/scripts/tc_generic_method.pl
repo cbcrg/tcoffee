@@ -2422,20 +2422,25 @@ sub run_blast
 		$cl_db=$db;
 	      }
 
+        ##
+		## BLAST+ provide different binaries names and CLI options
+		## Use the 'legacy_blast.pl' to keep compatibility with old blast commands
+		##
+		$path=`which legacy_blast.pl 2>/dev/null`;
 	    if ($method eq "blastp")
 	      {
-		&check_configuration("blastpgp");
-		$command="blastpgp -d $cl_db -i $infile -o $outfile -m7 -j1";
+		&check_configuration("legacy_blast.pl");
+		$command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 -j1";
 	      }
 	    elsif ($method eq "psiblast")
 	      {
-		&check_configuration("blastpgp");
-		$command="blastpgp -d $cl_db -i $infile -o $outfile -m7 -j5";
+		&check_configuration("legacy_blast.pl");
+		$command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 -j5";
 	      }
 	    elsif ($method eq "blastn")
 	      {
-		&check_configuration("blastall");
-		$command="blastall -p blastn -d $cl_db -i $infile -o $outfile -m7 -W6";
+		&check_configuration("legacy_blast.pl");
+		$command="legacy_blast.pl blastall --path $path -p blastn -d $cl_db -i $infile -o $outfile -m7 -W6";
 	      }
 	    &safe_system ($command);
 	  }
