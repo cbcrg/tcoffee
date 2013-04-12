@@ -2426,7 +2426,7 @@ sub run_blast
 		## BLAST+ provide different binaries names and CLI options
 		## Use the 'legacy_blast.pl' to keep compatibility with old blast commands
 		##
-		$path=`which legacy_blast.pl 2>/dev/null`;
+		$path=`dirname $(which legacy_blast.pl) 2>/dev/null`;
 	    if ($method eq "blastp")
 	      {
 		&check_configuration("legacy_blast.pl");
