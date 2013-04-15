@@ -2427,7 +2427,7 @@ sub run_blast
 		## Use the 'legacy_blast.pl' to keep compatibility with old blast commands
 		##
 		$path=`which legacy_blast.pl 2>/dev/null`;
-		$path=`dirname $path`
+		$path=`dirname $path`;
 	    if ($method eq "blastp")
 	      {
 		&check_configuration("legacy_blast.pl");
