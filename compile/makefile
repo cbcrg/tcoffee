@@ -12,10 +12,10 @@
 # About Mac compilation flags see http://goo.gl/HLtS4
 #
 
-CC=gcc
+CC=g++ 
 
 ifndef CFLAGS
-CFLAGS=-O3
+CFLAGS=-O3 -Wno-write-strings
 endif
 
 ifndef LIB_DIR
