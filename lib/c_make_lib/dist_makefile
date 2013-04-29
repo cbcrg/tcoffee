@@ -1,4 +1,5 @@
- 
+CC=g++
+CFLAGS=-O3 -Wno-write-strings
 SOURCES := $(shell find . -type f -name *.c)
 OBJECTS := $(SOURCES:.c=.o)
 DEPS := $(OBJECTS:.o=.deps)
