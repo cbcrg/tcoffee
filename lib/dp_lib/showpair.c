@@ -441,7 +441,7 @@ int ** show_pair(int istart, int iend, int jstart, int jend, int *in_seqlen_arra
 	double calc_score;
 	int **tmat;
 	
-	seqlen_array=vcalloc ( in_nseqs+1, sizeof(int));
+	seqlen_array=(int*)vcalloc ( in_nseqs+1, sizeof(int));
 	for ( i=0; i< in_nseqs; i++)seqlen_array[i+1]=in_seqlen_array[i];
 	
 	

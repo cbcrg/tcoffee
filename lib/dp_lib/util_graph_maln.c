@@ -108,10 +108,10 @@ CL_node ***aln2graph (Alignment *A)
   
   if ( !galn)
     {
-      galn=calloc ( A->nseq, sizeof (CL_node**));
+      galn=(CL_node***)calloc ( A->nseq, sizeof (CL_node**));
       for ( a=0; a< A->nseq; a++)
 	{
-	  galn[a]=calloc (A->len_aln, sizeof (CL_node*));
+	  galn[a]=(CL_node**)calloc (A->len_aln, sizeof (CL_node*));
 	}
     }
   pN=iN=NULL;
@@ -313,7 +313,7 @@ CL_node * declare_cl_nodes ( int len, int seq)
 
   if (len==-1)
     {
-      IN=calloc ( 1, sizeof (CL_node)); 
+      IN=(CL_node*)calloc ( 1, sizeof (CL_node)); 
       IN->res=-1;
       return IN;
     }
@@ -323,12 +323,12 @@ CL_node * declare_cl_nodes ( int len, int seq)
   if ( len>Nlen)
     {
       free (N);
-      N=calloc (len, sizeof (CL_node*));
+      N=(CL_node**)calloc (len, sizeof (CL_node*));
     }
 
   if ( len==0)return NULL;
 
-  for (a=0; a<len; a++)N[a]=calloc ( 1, sizeof (CL_node)); 
+  for (a=0; a<len; a++)N[a]=(CL_node*)calloc ( 1, sizeof (CL_node)); 
   for (a=0; a<len; a++)
     {
       (N[a])->res=-1;

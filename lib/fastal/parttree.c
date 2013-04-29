@@ -191,7 +191,7 @@ NT_node ** int_dist2upgma_tree_fastal (int **mat, int nseq, char *fname, char **
 	{
 		printf_exit ( EXIT_FAILURE,stderr, "\nERROR: non empty heap in upgma [FATAL]");
 	}
-	NL=vcalloc (nseq, sizeof (NT_node));
+	NL=(tnode**)vcalloc (nseq, sizeof (NT_node));
 
 	for (a=0; a<nseq; a++)
 	{
@@ -201,7 +201,7 @@ NT_node ** int_dist2upgma_tree_fastal (int **mat, int nseq, char *fname, char **
 		NL[a]->isseq=1;
 		NL[a]->leaf=1;
 	}
-	used=vcalloc ( nseq, sizeof (int));
+	used=(int*)vcalloc ( nseq, sizeof (int));
 	n=nseq;
 	while (n>1)
 	{
@@ -243,7 +243,7 @@ make_partTree(char *sequence_f,
 	int *seq_lengths = NULL;
 	int **tmp2 = &seq_lengths;
 	int number_of_sequences;
-	param_set = vcalloc(1,sizeof(PartTree_param));
+	param_set = (PartTree_param*)vcalloc(1,sizeof(PartTree_param));
 	param_set->ktup = ktup;
 	param_set->subgroup = subgroup;
 	Tree_fastal *tree;
@@ -254,7 +254,7 @@ make_partTree(char *sequence_f,
 		//make index
 		char *ktup_table = vtmpnam(NULL);
 		param_set->num_sequences = number_of_sequences =  make_pos_len_index_of_file(sequence_f, ktup_table, tmp1, tmp2, ktup, is_dna);
-		tree = vcalloc(number_of_sequences-1,sizeof(Tree_fastal));
+		tree = (Tree_fastal*)vcalloc(number_of_sequences-1,sizeof(Tree_fastal));
 		param_set->tree = tree;
 		param_set->ktup_positions = file_positions;
 		param_set->seq_lengths = seq_lengths;
@@ -269,7 +269,7 @@ make_partTree(char *sequence_f,
 
 		//make index
 		param_set->num_sequences = number_of_sequences =  make_pos_len_index_of_file_retree(sequence_f, tmp1, tmp2); 
-		tree = vcalloc(number_of_sequences-1,sizeof(Tree_fastal));
+		tree =(Tree_fastal*) vcalloc(number_of_sequences-1,sizeof(Tree_fastal));
 		param_set->tree = tree;
 		param_set->ktup_positions = file_positions;
 		param_set->seq_lengths = seq_lengths;
@@ -385,21 +385,21 @@ partTree_r(PartTree_param *param_set)
 	
 	
 	//get some memory
-	short *table1 = vcalloc(tsize, sizeof(short));
-	short *table2 = vcalloc(tsize, sizeof(short));
+	short *table1 = (short int*)vcalloc(tsize, sizeof(short));
+	short *table2 = (short int*)vcalloc(tsize, sizeof(short));
 	char **names = declare_char(param_set->subgroup, 8);
 	int **dist_mat = declare_int(param_set->subgroup, param_set->subgroup);
 	int **dist_mat2 = declare_int(param_set->subgroup, param_set->subgroup);
 	char * file_name_tmp = vtmpnam(NULL);
-	int *seed_set_cleaned = vcalloc(param_set->subgroup, sizeof(int));
+	int *seed_set_cleaned = (int*)vcalloc(param_set->subgroup, sizeof(int));
 	FILE *table_f = param_set->ktup_table_f;
 	long *file_positions = param_set->ktup_positions;
 	int max_n_group = param_set->subgroup;
 	int num_in_subgroup = param_set->subgroup;
 	int *seq_lengths = param_set->seq_lengths;
-	int *clusters = vcalloc(param_set->subgroup+1, sizeof(int));
-	int *min_dist = vcalloc(param_set->num_sequences, sizeof(int));
-	int *belongs_to = vcalloc(param_set->num_sequences, sizeof(int));
+	int *clusters =(int*) vcalloc(param_set->subgroup+1, sizeof(int));
+	int *min_dist = (int*)vcalloc(param_set->num_sequences, sizeof(int));
+	int *belongs_to = (int*)vcalloc(param_set->num_sequences, sizeof(int));
 	
 	
 	
@@ -408,14 +408,14 @@ partTree_r(PartTree_param *param_set)
 	
 	//Prepare first node
 	
-	tree[0].index = vcalloc(param_set->num_sequences,sizeof(int));
+	tree[0].index = (int*)vcalloc(param_set->num_sequences,sizeof(int));
 	int *index = tree[0].index;
 	for (i = 0; i< param_set->num_sequences; ++i)
 		index[i] = i;
 	tree[0].name = param_set->pos_tree +param_set->num_sequences;
 	
 	tree[0].num_leafs = param_set->num_sequences;
-	int *sequence_group2 = vcalloc(param_set->num_sequences,sizeof(int));
+	int *sequence_group2 = (int*)vcalloc(param_set->num_sequences,sizeof(int));
 	
 	Tree_fastal *current_node;
 	for (loop_tree_node = 0; loop_tree_node < num_of_tree_nodes; ++loop_tree_node)
@@ -633,8 +633,8 @@ make_distance_matrix(FILE *table_f,
 	int tsize = param_set->tsize;
 	if (table1 == NULL)
 	{
-		table1 = vcalloc(tsize, sizeof(short));
-		table2 = vcalloc(tsize, sizeof(short));
+		table1 = (short int*)vcalloc(tsize, sizeof(short));
+		table2 =(short int*) vcalloc(tsize, sizeof(short));
 	}
 	int i, j, num = number-1;
 	for (i = 0; i < num; ++i)
@@ -674,8 +674,8 @@ make_distance_matrix_sim(FILE *aln_f,
 			length += i;
 			fgets(line, 500, aln_f);
 		}
-		seq1 = vcalloc(length+1, sizeof(short));
-		seq2 = vcalloc(length+1, sizeof(short));
+		seq1 = (char*)vcalloc(length+1, sizeof(short));
+		seq2 = (char*)vcalloc(length+1, sizeof(short));
 	}
 
 
@@ -733,7 +733,7 @@ makepointtable_fast(int *coded_seq,	//sequence
 
 	if (!prod)
 	{
-		prod=vcalloc ( ktup, sizeof (int));
+		prod=(int*)vcalloc ( ktup, sizeof (int));
 		for ( a=0; a<ktup; a++)
 		{
 			prod[ktup-a-1]=(int)pow(ng,a);
@@ -977,7 +977,7 @@ make_pos_len_index_of_file(char *file_name,			//file with sequences
 	{
 		gl=make_group_aa ( &ng, "mafft");
 	}
-	aa=vcalloc ( 256, sizeof (int));
+	aa=(int*)vcalloc ( 256, sizeof (int));
 	for ( a=0; a<ng; a++)
 	{
 		for ( b=0; b< strlen (gl[a]); b++) 
@@ -992,16 +992,16 @@ make_pos_len_index_of_file(char *file_name,			//file with sequences
 	param_set->tsize = tsize;
 	param_set->ng = ng;
 	
-	int *table=vcalloc ( tsize,sizeof (int));
+	int *table=(int*)vcalloc ( tsize,sizeof (int));
 
 
 	//Reading and recoding squences
 	const int LINE_LENGTH = 501;
-	int *coded_seq = vcalloc(2*LINE_LENGTH, sizeof(int));
+	int *coded_seq = (int*)vcalloc(2*LINE_LENGTH, sizeof(int));
 	int allocated_mem = 2*LINE_LENGTH;
 			
-	(*file_positions) = vcalloc(ENLARGEMENT_PER_STEP,  sizeof(long));
-	(*seq_lengths) = vcalloc(ENLARGEMENT_PER_STEP,  sizeof(int));
+	(*file_positions) = (long int*)vcalloc(ENLARGEMENT_PER_STEP,  sizeof(long));
+	(*seq_lengths) =(int*) vcalloc(ENLARGEMENT_PER_STEP,  sizeof(int));
 
 
 	FILE *file = fopen(file_name,"r");
@@ -1031,7 +1031,7 @@ make_pos_len_index_of_file(char *file_name,			//file with sequences
 			if ( str_len >= allocated_mem - LINE_LENGTH)
 			{
 				allocated_mem += LINE_LENGTH;
-				coded_seq = vrealloc(coded_seq, allocated_mem*sizeof(int));
+				coded_seq = (int*)vrealloc(coded_seq, allocated_mem*sizeof(int));
 			}
 			
 			int i;
@@ -1058,8 +1058,8 @@ make_pos_len_index_of_file(char *file_name,			//file with sequences
 				if (num_of_sequences == mem_for_pos)
 				{
 					mem_for_pos += ENLARGEMENT_PER_STEP;
-					(*file_positions) = vrealloc((*file_positions), mem_for_pos * sizeof(long));
-					(*seq_lengths) = vrealloc((*seq_lengths), mem_for_pos * sizeof(int));
+					(*file_positions) = (long int*)vrealloc((*file_positions), mem_for_pos * sizeof(long));
+					(*seq_lengths) = (int*)vrealloc((*seq_lengths), mem_for_pos * sizeof(int));
 				}
 			}
 			else
@@ -1099,8 +1099,8 @@ make_pos_len_index_of_file_retree(char *file_name,			//file with sequences
 // 	printf("HALLO\n");
 	//Reading sequences
 	const int LINE_LENGTH = 501;
-	(*file_positions) = vcalloc(ENLARGEMENT_PER_STEP,  sizeof(long));
-	(*seq_lengths) = vcalloc(ENLARGEMENT_PER_STEP,  sizeof(int));
+	(*file_positions) = (long int*)vcalloc(ENLARGEMENT_PER_STEP,  sizeof(long));
+	(*seq_lengths) = (int*)vcalloc(ENLARGEMENT_PER_STEP,  sizeof(int));
 
 
 	FILE *file = fopen(file_name,"r");
@@ -1137,8 +1137,8 @@ make_pos_len_index_of_file_retree(char *file_name,			//file with sequences
 				if (num_of_sequences == mem_for_pos)
 				{
 					mem_for_pos += ENLARGEMENT_PER_STEP;
-					(*file_positions) = vrealloc((*file_positions), mem_for_pos * sizeof(long));
-					(*seq_lengths) = vrealloc((*seq_lengths), mem_for_pos * sizeof(int));
+					(*file_positions) = (long int*)vrealloc((*file_positions), mem_for_pos * sizeof(long));
+					(*seq_lengths) = (int*)vrealloc((*seq_lengths), mem_for_pos * sizeof(int));
 				}
 			}
 			else
@@ -1229,15 +1229,15 @@ partTree_retree(PartTree_param *param_set)
 	int **dist_mat = declare_int(param_set->subgroup, param_set->subgroup);
 	int **dist_mat2 = declare_int(param_set->subgroup, param_set->subgroup);
 	char * file_name_tmp = vtmpnam(NULL);
-	int *seed_set_cleaned = vcalloc(param_set->subgroup, sizeof(int));
+	int *seed_set_cleaned = (int*)vcalloc(param_set->subgroup, sizeof(int));
 	FILE *aln_f = param_set->ktup_table_f;
 	long *file_positions = param_set->ktup_positions;
 	int max_n_group = param_set->subgroup;
 	int num_in_subgroup = param_set->subgroup;
 	int *seq_lengths = param_set->seq_lengths;
-	int *clusters = vcalloc(param_set->subgroup+1, sizeof(int));
-	int *min_dist = vcalloc(param_set->num_sequences, sizeof(int));
-	int *belongs_to = vcalloc(param_set->num_sequences, sizeof(int));
+	int *clusters = (int*)vcalloc(param_set->subgroup+1, sizeof(int));
+	int *min_dist = (int*)vcalloc(param_set->num_sequences, sizeof(int));
+	int *belongs_to = (int*)vcalloc(param_set->num_sequences, sizeof(int));
 
 	int aln_length = 1;
 	fseek(aln_f, file_positions[0], SEEK_SET);
@@ -1248,19 +1248,19 @@ partTree_retree(PartTree_param *param_set)
 		while ((line[++i] != '\n') && (line[i] != '\0'));
 		aln_length += i;
 	}
-	char *seq1 = vcalloc(aln_length, sizeof(char));
-	char *seq2 = vcalloc(aln_length, sizeof(char));
+	char *seq1 = (char*)vcalloc(aln_length, sizeof(char));
+	char *seq2 = (char*)vcalloc(aln_length, sizeof(char));
 	
 	//Prepare first node
 	
-	tree[0].index = vcalloc(param_set->num_sequences,sizeof(int));
+	tree[0].index = (int*)vcalloc(param_set->num_sequences,sizeof(int));
 	int *index = tree[0].index;
 	for (i = 0; i< param_set->num_sequences; ++i)
 		index[i] = i;
 	tree[0].name = param_set->pos_tree +param_set->num_sequences;
 	
 	tree[0].num_leafs = param_set->num_sequences;
-	int *sequence_group2 = vcalloc(param_set->num_sequences,sizeof(int));
+	int *sequence_group2 = (int*)vcalloc(param_set->num_sequences,sizeof(int));
 // 	
 	Tree_fastal *current_node;
 	for (loop_tree_node = 0; loop_tree_node < num_of_tree_nodes; ++loop_tree_node)

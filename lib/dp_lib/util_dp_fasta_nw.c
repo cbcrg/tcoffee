@@ -32,8 +32,8 @@ int commonsextet( int *table, int *pointt )
 
 	if( !memo )
 	{
-		memo = vcalloc( tsize+1, sizeof( int ) );
-		ct = vcalloc( tsize+1, sizeof( int ) );
+		memo =(int*) vcalloc( tsize+1, sizeof( int ) );
+		ct =(int*) vcalloc( tsize+1, sizeof( int ) );
 	}
 
 	cp = ct;
@@ -92,7 +92,7 @@ int *code_seq (char *seq, char *type)
 
 	  gl=make_group_aa ( &ng, "mafft");
 	}
-      aa=vcalloc ( 256, sizeof (int));
+      aa=(int*)vcalloc ( 256, sizeof (int));
       for ( a=0; a<ng; a++)
 	{
 	  for ( b=0; b< strlen (gl[a]); b++)
@@ -111,7 +111,7 @@ int *code_seq (char *seq, char *type)
   if ( !code || read_array_size (code, sizeof (int))<(l+2))
     {
       vfree (code);
-      code=vcalloc (l+2, sizeof (int));
+      code=(int*)vcalloc (l+2, sizeof (int));
     }
   code[0]=ng;
   code++;
@@ -135,7 +135,7 @@ int * makepointtable( int *pointt, int *n, int ktup )
 
   if (!prod)
     {
-      prod=vcalloc ( ktup, sizeof (int));
+      prod=(int*)vcalloc ( ktup, sizeof (int));
       for ( a=0; a<ktup; a++)
 	{
 	  prod[ktup-a-1]=(int)pow(n[-1],a);
@@ -192,7 +192,7 @@ int ** ktup_dist_mat ( char **seq, int nseq, int ktup, char *type)
   for ( i=0; i<nseq; i++)
     {
       int *table1;
-      table1=vcalloc ( tsize,sizeof (int));
+      table1=(int*)vcalloc ( tsize,sizeof (int));
       makecompositiontable( table1, pointt[i]);
       for (j=i; j<nseq; j++)
 	{
@@ -234,7 +234,7 @@ int ** evaluate_diagonals_for_two_sequences ( char *seq1, char *seq2,int maximis
 	    {
 	      in_cl=0;
 
-	      CL=vcalloc ( 1, sizeof (Constraint_list));
+	      CL=(Constraint_list*)vcalloc ( 1, sizeof (Constraint_list));
 	      CL->maximise=1;
 	      sprintf ( CL->matrix_for_aa_group, "vasiliky");
 	      CL->M=read_matrice ("blosum62mt");
@@ -261,7 +261,7 @@ int ** evaluate_diagonals_for_two_sequences ( char *seq1, char *seq2,int maximis
        if ( !gl)
 	 {
 	   gl=make_group_aa (&ng, CL->matrix_for_aa_group);
-	   ns=vcalloc (2, sizeof (int));
+	   ns=(int*)vcalloc (2, sizeof (int));
 	   ns[0]=ns[1]=1;
 	   l_s=declare_int (2, 2);
 	   l_s[0][0]=0;
@@ -475,7 +475,7 @@ int ** evaluate_diagonals_with_clist ( Alignment *A, int *ns, int **l_s, Constra
     static int *entry;
 
 
-    if ( !entry)entry=vcalloc ( CL->entry_len+1, CL->el_size);
+    if ( !entry)entry=(int*)vcalloc ( CL->entry_len+1, CL->el_size);
     l1=strlen (A->seq_al[l_s[0][0]]);
     l2=strlen (A->seq_al[l_s[1][0]]);
 
@@ -539,8 +539,8 @@ int * flag_diagonals (int l1, int l2, int **sorted_diag, float T, int window)
       }
 
 
-    diag_list=vcalloc (l1+l2+1, sizeof (int));
-    slopes=vcalloc ( n_diag+1, sizeof (int));
+    diag_list=(int*)vcalloc (l1+l2+1, sizeof (int));
+    slopes=(int*)vcalloc ( n_diag+1, sizeof (int));
 
     for ( a=n_diag; a>0; a--)
             {
@@ -586,8 +586,8 @@ int * extract_N_diag (int l1, int l2, int **sorted_diag, int n_chosen_diag, int 
 
     n_diag=l1+l2-1;
 
-    diag_list=vcalloc (l1+l2+1, sizeof (int));
-    slopes=vcalloc ( n_diag+1, sizeof (int));
+    diag_list=(int*)vcalloc (l1+l2+1, sizeof (int));
+    slopes=(int*)vcalloc ( n_diag+1, sizeof (int));
 
 
     for ( a=n_diag; a>0 && a>(n_diag-n_chosen_diag); a--)
@@ -884,8 +884,8 @@ int make_fasta_gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *
        al=declare_char (2,lenal[0]+lenal[1]+lenal[1]+1);
 
        len= MAX(lenal[0],lenal[1])+1;
-       buffer=vcalloc ( 2*len, sizeof (char));
-       char_buf= vcalloc (2*len, sizeof (char));
+       buffer=(char*)vcalloc ( 2*len, sizeof (char));
+       char_buf=(char*) vcalloc (2*len, sizeof (char));
 
        pos0=aln2pos_simple ( A,-1, ns, l_s);
        C[0][0]=0;
@@ -1161,8 +1161,8 @@ int hasch_seq(char *seq, int **hs, int **lu,int ktup,char *alp)
 
 	l=strlen (seq);
 	limit = (int)   pow((double)(alp_size+1),(double)ktup);
-	hs[0]=vcalloc ( l+1,sizeof (int));
-	lu[0]=vcalloc ( limit+1, sizeof(int));
+	hs[0]=(int*)vcalloc ( l+1,sizeof (int));
+	lu[0]=(int*)vcalloc ( limit+1, sizeof(int));
 
 
 	if ( l==0)myexit(EXIT_FAILURE);
@@ -1237,11 +1237,11 @@ struct Hasch_data * allocate_ktup_hasch_data (struct Hasch_data *e, int action)
 	{
 	  free_heap=100;
 	  heap_size+=free_heap;
-	  heap=vrealloc (heap,heap_size*sizeof (struct Hasch_entry *));
+	  heap=(Hasch_data**)vrealloc (heap,heap_size*sizeof (struct Hasch_entry *));
 	  for ( a=0; a<free_heap; a++)
 	    {
-	      (heap[a])=vcalloc ( 1, sizeof ( struct Hasch_entry *));
-	      (heap[a])->list=vcalloc ( 10, sizeof (int));
+	      (heap[a])=(Hasch_data*)vcalloc ( 1, sizeof ( struct Hasch_entry *));
+	      (heap[a])->list=(int*)vcalloc ( 10, sizeof (int));
 	      (heap[a])->list[0]=10;
 	    }
 	}
@@ -1322,13 +1322,13 @@ int ktup_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
       if ( ns[0]>1)seq1=sub_aln2cons_seq_mat (A, ns[0], l_s[0],"blosum62mt");
       else
 	{
-	  seq1=vcalloc ( strlen (A->seq_al[l_s[0][0]])+1, sizeof (char));
+	  seq1=(char*)vcalloc ( strlen (A->seq_al[l_s[0][0]])+1, sizeof (char));
 	  sprintf ( seq1, "%s",A->seq_al[l_s[0][0]]);
 	}
       if ( ns[1]>1)seq2=sub_aln2cons_seq_mat (A, ns[1], l_s[1],"blosum62mt");
       else
 	{
-	  seq2=vcalloc ( strlen (A->seq_al[l_s[1][0]])+1, sizeof (char));
+	  seq2=(char*)vcalloc ( strlen (A->seq_al[l_s[1][0]])+1, sizeof (char));
 	  sprintf ( seq2, "%s",A->seq_al[l_s[1][0]]);
 	}
 
@@ -1419,7 +1419,7 @@ int ktup_comparison_hasch ( char *i_seq1, char *i_seq2, const int ktup)
 	  string2key (NULL, NULL);
 	}
       H1=hasch_sequence ( i_seq1, ktup);
-      vfree (pseq);pseq=vcalloc ( strlen (i_seq1)+1, sizeof (char));
+      vfree (pseq);pseq=(char*)vcalloc ( strlen (i_seq1)+1, sizeof (char));
       sprintf ( pseq, "%s", i_seq1);
     }
 
@@ -1471,7 +1471,7 @@ HaschT* hasch_sequence ( char *seq1, int ktup)
 	}
       else
 	{
-	  if ((e->data)->list[0]==((e->data)->list[1]+2)){(e->data)->list[0]+=10;(e->data)->list=vrealloc ((e->data)->list,(e->data)->list[0]*sizeof (int));}
+	  if ((e->data)->list[0]==((e->data)->list[1]+2)){(e->data)->list[0]+=10;(e->data)->list=(int*)vrealloc ((e->data)->list,(e->data)->list[0]*sizeof (int));}
 	  (e->data)->list[++(e->data)->list[1]+1]=offset;
 	}
        seq1[ktup]=c;seq1++;ls--;
@@ -1525,7 +1525,7 @@ int ** evaluate_diagonals_with_ktup ( Alignment *A, int *ns, int **l_s, Constrai
 
   H1=hasch_sequence ( seq1, ktup);
   H2=hasch_sequence ( seq2, ktup);
-  s=sb=vcalloc (strlen (seq1)+strlen (seq2)+1, sizeof (char));
+  s=sb=(char*)vcalloc (strlen (seq1)+strlen (seq2)+1, sizeof (char));
   sprintf (s, "%s%s", seq1, seq2);
 
   ls=strlen(s);
@@ -1641,7 +1641,7 @@ int ** evaluate_diagonals_with_ktup_1 ( Alignment *A, int *ns, int **l_s, Constr
        {
 	   if ( !buf)
 	       {
-	       buf=vcalloc ( 30, sizeof (30));
+	       buf=(char*)vcalloc ( 30, sizeof (30));
 	       sprintf ( buf, "abcdefghijklmnopqrstuvwxyz");
 	       }
 	    vfree ( hasched_seq1);
@@ -1673,7 +1673,7 @@ Constraint_list * hasch2constraint_list (Sequence*S, Constraint_list *CL)
   int ktup=2;
 
 
-  entry=vcalloc ( CL->entry_len+1, sizeof (int));
+  entry=(int*)vcalloc ( CL->entry_len+1, sizeof (int));
 
   for (a=0; a<S->nseq; a++)
     {
@@ -1714,7 +1714,7 @@ SeqHasch *cleanhasch       (SeqHasch *H)
 {
   int n=1;
   SeqHasch *N;
-  N=vcalloc (2, sizeof (SeqHasch));
+  N=(hseq**)vcalloc (2, sizeof (SeqHasch));
   N[0]=H[0];
 
   while (H[n])
@@ -1758,8 +1758,8 @@ SeqHasch * seq2hasch (int i,char *seq, int ktup, SeqHasch *H)
 
   if (!H)
     {
-      H=vcalloc (2, sizeof (SeqHasch));
-      H[0]=vcalloc (1, sizeof (hseq));
+      H=(hseq**)vcalloc (2, sizeof (SeqHasch));
+      H[0]=(hseq*)vcalloc (1, sizeof (hseq));
       n=1;
     }
   else
@@ -1776,22 +1776,22 @@ SeqHasch * seq2hasch (int i,char *seq, int ktup, SeqHasch *H)
 	{
 	  char r;
 	  r=seq[b];
-	  if (!h->hl[r])  h->hl[r]=vcalloc (1, sizeof (hseq));
+	  if (!h->hl[r])  h->hl[r]=(hseq*)vcalloc (1, sizeof (hseq));
 	  h=h->hl[r];
 	}
       if (!h->l)
 	{
 
 	  h->n=2;
-	  h->l=vcalloc (2, sizeof (int));
-	  H=vrealloc (H,(n+2)*sizeof (SeqHasch));
+	  h->l=(int*)vcalloc (2, sizeof (int));
+	  H=(hseq**)vrealloc (H,(n+2)*sizeof (SeqHasch));
 	  H[n]=h;
 	  n++;
 	}
       else
 	{
 	  h->n+=2;
-	  h->l=vrealloc (h->l, (h->n)*sizeof (int));
+	  h->l=(int*)vrealloc (h->l, (h->n)*sizeof (int));
 	}
 
       h->l[h->n-2]=i;

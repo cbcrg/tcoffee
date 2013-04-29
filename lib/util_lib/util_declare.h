@@ -1,3 +1,7 @@
+#ifndef __UTIL_DECLARE_H
+#define __UTIL_DECLARE_H
+
+
 typedef struct Tmpname Tmpname;
 struct Memcontrol
     {
@@ -86,7 +90,7 @@ void * vrealloc ( void *p, size_t size);
 void   vfree2 ( void **p);
 void   vfree ( void *p);
 void * free_arrayN (void *p, int ndim);
-void   vfree_all ();
+void   vfree_all (void *p);
 /*********************************************************************/
 /*                                                                   */
 /*                          SIZES                                    */
@@ -200,5 +204,7 @@ void free_sequence ( Sequence *LS, int nseq);
 
 
 
-Fname *declare_fname ();
+Fname *declare_fname ( int );
 Fname *free_fname ( Fname *F);
+
+#endif 

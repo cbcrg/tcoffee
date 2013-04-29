@@ -57,12 +57,12 @@ calculate_sum_of_pairs_score_affine(char *alignment_file_name,
 	}
 
 	int alphabet_size = 28;
-	int **counting = vcalloc(alphabet_size, sizeof(int*));
+	int **counting = (int**) vcalloc(alphabet_size, sizeof(int*));
 
 	int i;
 	for (i = 0; i < alphabet_size; ++i)
 	{
-		counting[i] = vcalloc(alignment_length, sizeof(int));
+		counting[i] = (int*) vcalloc(alignment_length, sizeof(int));
 	}
 
 	alphabet_size -= 2;
@@ -77,7 +77,7 @@ calculate_sum_of_pairs_score_affine(char *alignment_file_name,
 	int gap_size = 0;
 	int gap_pos = 0;
 
-	int **gaps = vcalloc(100, sizeof(int*));
+	int **gaps = (int**)vcalloc(100, sizeof(int*));
 
 	while (fgets(line, LINE_LENGTH, alignment_file) != NULL)
 	{
@@ -105,7 +105,7 @@ calculate_sum_of_pairs_score_affine(char *alignment_file_name,
 						if (gap_pos >= gap_size-4)
 						{
 							gap_size += 50;
-							gaps[gap_line] = vrealloc(gaps[gap_line], gap_size * sizeof(int));
+							gaps[gap_line] = (int*)vrealloc(gaps[gap_line], gap_size * sizeof(int));
 							gaps[gap_line][gap_pos++] = pos_alignment;
 						}
 					}
@@ -127,10 +127,10 @@ calculate_sum_of_pairs_score_affine(char *alignment_file_name,
 			if (current_size == gap_line)
 			{
 				current_size += 50;
-				gaps = vrealloc(gaps, current_size * sizeof(int*));
+				gaps = (int**)vrealloc(gaps, current_size * sizeof(int*));
 			}
 			gap_size = 2;
-			gaps[gap_line] = vcalloc(gap_size, sizeof(int));
+			gaps[gap_line] = (int*)vcalloc(gap_size, sizeof(int));
 			++number_of_sequences;
 			pos_alignment = -1;
 			was_gap = 0;
@@ -292,8 +292,7 @@ get_random_value(int a, int b)
 
 
 
-void
-compute_ref_alignments(char *seq_file_name, char* ref_directory, int num_alignments, int num_seq_in_aln)
+void compute_ref_alignments(char *seq_file_name, char* ref_directory, int num_alignments, int num_seq_in_aln)
 {
 
 	printf("%s %s %i %i\n", seq_file_name, ref_directory, num_alignments, num_seq_in_aln);
@@ -322,7 +321,7 @@ compute_ref_alignments(char *seq_file_name, char* ref_directory, int num_alignme
 	int number_of_sequences = make_index_of_file(seq_file_name, tmp_pos);
 	char *tmp_file_name = vtmpnam(NULL);
 	FILE *seq_file = fopen(seq_file_name, "r");
-	int *already_taken = vcalloc(num_seq_in_aln, sizeof(int));
+	int *already_taken = (int*)vcalloc(num_seq_in_aln, sizeof(int));
 	int i, j, k, tmp, already, num_already;
 	for (i = 0; i < num_alignments; ++i)
 	{
@@ -394,8 +393,7 @@ compute_ref_alignments(char *seq_file_name, char* ref_directory, int num_alignme
  * \param ref_aln_name The file where the reference alignment should be written to.
  * \param num_seq_in_ref The number of sequences to choose.
 **/
-void
-make_ref_alignment(char *seq_file_name, char *tree_file_name, char *ref_aln_name, int num_seq_in_ref)
+void make_ref_alignment(char *seq_file_name, char *tree_file_name, char *ref_aln_name, int num_seq_in_ref)
 {
 	const int LINE_LENGTH = 200;
 	char line[LINE_LENGTH];
@@ -410,7 +408,7 @@ make_ref_alignment(char *seq_file_name, char *tree_file_name, char *ref_aln_name
 
 	int every_x = num_sequences/(num_seq_in_ref);
 
-	int *seq_ids = vcalloc(num_seq_in_ref,sizeof(int));
+	int *seq_ids = (int*)vcalloc(num_seq_in_ref,sizeof(int));
 	char delims[] = " ";
 
 	int pos = -1;
@@ -484,8 +482,7 @@ make_ref_alignment(char *seq_file_name, char *tree_file_name, char *ref_aln_name
  * \param ref_file_name The reference alignment.
  * \param aln_file_name The test alignment.
  **/
-double
-agreement_score(char *ref_file_name, char *aln_file_name)
+double agreement_score(char *ref_file_name, char *aln_file_name)
 {
 	const int LINE_LENGTH = 200;
 	char line[LINE_LENGTH];
@@ -500,13 +497,13 @@ agreement_score(char *ref_file_name, char *aln_file_name)
 		}
 	}
 	fseek(ref_f, 0, SEEK_SET);
-	char **seq_names = vcalloc(number_of_sequences, sizeof(char*));
+	char **seq_names = (char**)vcalloc(number_of_sequences, sizeof(char*));
 	int i = 0;
 	while(fgets(line, LINE_LENGTH, ref_f)!=NULL)
 	{
 		if (line[0] == '>')
 		{
-			seq_names[i] = vcalloc(LINE_LENGTH, sizeof(char));
+			seq_names[i] = (char*)vcalloc(LINE_LENGTH, sizeof(char));
 			sprintf(seq_names[i], "%s",line);
 			++i;
 		}
@@ -575,7 +572,7 @@ agreement_score(char *ref_file_name, char *aln_file_name)
 }
 
 
-complete_agreement_score(char *aln_file_name, const char *ref_directory)
+int complete_agreement_score(char *aln_file_name, const char *ref_directory)
 {
 	struct dirent *dp;
 	char *name = strrchr(aln_file_name,'/')+1;

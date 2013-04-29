@@ -324,7 +324,7 @@
 #define strm4(a,b,c,d,e)     (strm2(a,b,c) || strm2(a,d,e))
 #define strm5(a,b,c,d,e,f)   (strm2(a,b,c) || strm3(a,d,e,f))
 #define strm6(a,b,c,d,e,f,g) (strm3(a,b,c,d) || strm3(a,e,f,g))
-#define declare_name(x) (x=vcalloc (MAX(FILENAMELEN,L_tmpnam)+1, sizeof (char))) 
+#define declare_name(x) (x=(char*)vcalloc (MAX(FILENAMELEN,L_tmpnam)+1, sizeof (char))) 
 #define is_parameter(x) (x[0]=='-' && !isdigit(x[1])) 
 
 /*Freing functions*/

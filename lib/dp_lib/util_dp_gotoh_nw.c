@@ -17,14 +17,14 @@
       Memcontrol *ppp;				\
       if (!list[0])\
 	{\
-	  list[0]=vcalloc ( 1000, sizeof (int*));\
+	  list[0]=(int**)vcalloc ( 1000, sizeof (int*));\
 	}\
 						\
       ppp=(Memcontrol*)list[0];			\
       ppp-=2;						\
       max_n=ppp[0].size/sizeof(int*);\
-      if (n[0]>=max_n){max_n+=1000;list[0]=vrealloc (list[0], max_n*sizeof (int*));} \
-      if (!list[0][n[0]])list[0][n[0]]=vcalloc (7, sizeof (int));	\
+      if (n[0]>=max_n){max_n+=1000;list[0]=(int**)vrealloc (list[0], max_n*sizeof (int*));} \
+      if (!list[0][n[0]])list[0][n[0]]=(int*)vcalloc (7, sizeof (int));	\
       list[0][n[0]][0]=i;						\
       list[0][n[0]][1]=j;						\
       list[0][n[0]][3]=d;						\
@@ -271,8 +271,8 @@ int glocal_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)
 
   n=1;
   M1=n++;D1=n++;I1=n++;M2=n++;
-  t=declare_arrayN(3, sizeof (int),n, l1+1, l2+1);
-  m=declare_arrayN(3, sizeof (int),n, l1+1, l2+1);
+  t=(int***)declare_arrayN(3, sizeof (int),n, l1+1, l2+1);
+  m=(int***)declare_arrayN(3, sizeof (int),n, l1+1, l2+1);
 
 
   gop=CL->gop*SCORE_K;
@@ -385,7 +385,7 @@ int glocal_pair_wise ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)
   if ( A->declared_len<=LEN)A=realloc_aln2  ( A,A->max_n_seq, 2*LEN);
 
   aln=A->seq_al;
-  char_buf= vcalloc (LEN+1, sizeof (char));
+  char_buf=(char*)vcalloc (LEN+1, sizeof (char));
   for ( c=0; c< 2; c++)
     {
       for ( a=0; a< ns[c]; a++)
@@ -509,7 +509,7 @@ int gotoh_pair_wise_lgp ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)
   li=strlen (A->seq_al[l_s[I][0]]);
   lj=strlen (A->seq_al[l_s[J][0]]);
 
-  if ( !gpl)gpl=vcalloc ( 2, sizeof (int**));
+  if ( !gpl)gpl=(int***)vcalloc ( 2, sizeof (int**));
   gpl[I]=aln2local_penalties (A,ns[I], l_s[I], CL,gpl[I]);
   gpl[J]=aln2local_penalties (A,ns[J], l_s[J], CL,gpl[J]);
 
@@ -525,8 +525,8 @@ int gotoh_pair_wise_lgp ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)
 
       max_li=li;
       max_lj=lj;
-      t=declare_arrayN(3, sizeof (int),n, max_li+1, max_lj+1);
-      m=declare_arrayN(3, sizeof (int),n, max_li+1, max_lj+1);
+      t=(int***)declare_arrayN(3, sizeof (int),n, max_li+1, max_lj+1);
+      m=(int***)declare_arrayN(3, sizeof (int),n, max_li+1, max_lj+1);
 
     }
   pos0=aln2pos_simple ( A,-1, ns, l_s);
@@ -653,7 +653,7 @@ int gotoh_pair_wise_lgp ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)
   if ( A->declared_len<=LEN)A=realloc_aln  ( A,2*LEN+1);
 
   aln=A->seq_al;
-  char_buf= vcalloc (LEN+1, sizeof (char));
+  char_buf=(char*) vcalloc (LEN+1, sizeof (char));
   for ( c=0; c< 2; c++)
     {
       for ( a=0; a< ns[c]; a++)
@@ -692,8 +692,8 @@ int glocal2_pair_wise (Alignment *IN,int*ns, int **ls,Constraint_list *CL)
   Alignment *A, *R,*L;
   char *seq, *buf;
 
-  buf=vcalloc (1000, sizeof (char));
-  seq=vcalloc (1000, sizeof (char));
+  buf=(char*)vcalloc (1000, sizeof (char));
+  seq=(char*)vcalloc (1000, sizeof (char));
 
   A=copy_aln (IN,NULL);
   L=copy_aln (IN,NULL);
@@ -817,17 +817,17 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 	lenal[1]=strlen (A->seq_al[l_s[1][0]]);
 	len= MAX(lenal[0],lenal[1])+1;
 
-	buffer=vcalloc ( 2*len, sizeof (char));
+	buffer=(char*)vcalloc ( 2*len, sizeof (char));
         al=declare_char (2, 2*len);
 
-	char_buf= vcalloc (2*len, sizeof (char));
+	char_buf=(char*) vcalloc (2*len, sizeof (char));
 
 
-	dd = vcalloc (len, sizeof (int));
+	dd =(int*)vcalloc (len, sizeof (int));
 
 
-	cc = vcalloc (len, sizeof (int));
-	ddg=vcalloc (len, sizeof (int));
+	cc =(int*) vcalloc (len, sizeof (int));
+	ddg=(int*)vcalloc (len, sizeof (int));
 
 
 
@@ -1110,7 +1110,7 @@ int gotoh_pair_wise_lgp_sticky ( Alignment *A, int *ns, int **l_s, Constraint_li
   li=strlen (A->seq_al[l_s[I][0]]);
   lj=strlen (A->seq_al[l_s[J][0]]);
 
-  if ( !gpl)gpl=vcalloc ( 2, sizeof (int**));
+  if ( !gpl)gpl=(int***)vcalloc ( 2, sizeof (int**));
   gpl[I]=aln2local_penalties (A,ns[I], l_s[I], CL,gpl[I]);
   gpl[J]=aln2local_penalties (A,ns[J], l_s[J], CL,gpl[J]);
 
@@ -1126,8 +1126,8 @@ int gotoh_pair_wise_lgp_sticky ( Alignment *A, int *ns, int **l_s, Constraint_li
 
       max_li=li;
       max_lj=lj;
-      t=declare_arrayN(3, sizeof (int),n, max_li+1, max_lj+1);
-      m=declare_arrayN(3, sizeof (int),n, max_li+1, max_lj+1);
+      t=(int***)declare_arrayN(3, sizeof (int),n, max_li+1, max_lj+1);
+      m=(int***)declare_arrayN(3, sizeof (int),n, max_li+1, max_lj+1);
 
     }
   pos0=aln2pos_simple ( A,-1, ns, l_s);
@@ -1252,7 +1252,7 @@ int gotoh_pair_wise_lgp_sticky ( Alignment *A, int *ns, int **l_s, Constraint_li
   if ( A->declared_len<=LEN)A=realloc_aln  ( A,2*LEN+1);
 
   aln=A->seq_al;
-  char_buf= vcalloc (LEN+1, sizeof (char));
+  char_buf=(char*) vcalloc (LEN+1, sizeof (char));
   for ( c=0; c< 2; c++)
     {
       for ( a=0; a< ns[c]; a++)
@@ -1382,6 +1382,7 @@ int cl2list_borders  (Alignment *A, int *ns, int **ls, Constraint_list *CL, int 
 	  for (a=0; a<2; a++)
 	    {
 	      p2=(a==0)?0:l2;
+	      
 	      addE(p1,p2,((l1-(p1))+(p2)),((CL->gep)*SCORE_K*p1), list_in, n_in);
 	    }
 	}
@@ -1451,8 +1452,8 @@ int cl2diag_cap_r390 (Alignment *A, int *ns, int **ls, Constraint_list *CL, int 
 	  int delta=MAX((i-pi),(j-pj));
 	  for (x=1; x<=delta; x++)
 	    {
-	      if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
-	      if (!list[n])list[n]=vcalloc (7, sizeof (int));
+	      if (n==max_n){max_n+=1000;list=(int**)vrealloc (list, max_n*sizeof (int*));}
+	      if (!list[n])list[n]=(int*)vcalloc (7, sizeof (int));
 	      if ((i-x)<=1)continue;
 	      if ((j-x)<=1)continue;
 	      list[n][0]=i-x;
@@ -1472,8 +1473,8 @@ int cl2diag_cap_r390 (Alignment *A, int *ns, int **ls, Constraint_list *CL, int 
 	  int delta=MAX((ni-i),(nj-j));
 	  for (x=1; x<=delta; x++)
 	    {
-		if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
-		if (!list[n])list[n]=vcalloc (7, sizeof (int));
+		if (n==max_n){max_n+=1000;list=(int**)vrealloc (list, max_n*sizeof (int*));}
+		if (!list[n])list[n]=(int*)vcalloc (7, sizeof (int));
 
 		if (i+x>=al1)continue;
 		if (j+x>=al2) continue;
@@ -1516,14 +1517,14 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
   al1=strlen (A->seq_al[ls[0][0]]);
   al2=strlen (A->seq_al[ls[1][0]]);
 
-  sortseq=vcalloc (7, sizeof (int));
+  sortseq=(int*)vcalloc (7, sizeof (int));
   sortseq[0]=3;sortseq[1]=0;sortseq[2]=-1;
   sort_list_int2 (list[0], sortseq,4, 0, n[0]-1);
   vfree(sortseq);
   in=n[0];
 
 
-  if (!ll){max_ll=100;ll=vcalloc(max_ll,sizeof(int*));}
+  if (!ll){max_ll=100;ll=(int**)vcalloc(max_ll,sizeof(int*));}
 
   for (a=0; a<in; a++)
     {
@@ -1543,7 +1544,7 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
       else if ( i==pi || j==pj);
       else if ( i-pi!=1 || j-pj!=1)
 	{
-	  if (nll>=max_ll){max_ll+=1000;ll=vrealloc (ll, max_ll*sizeof (int*));}
+	  if (nll>=max_ll){max_ll+=1000;ll=(int**)vrealloc (ll, max_ll*sizeof (int*));}
 	  ll[nll++]=list[0][a];
 	  list[0][a][6]=_START;
 	}
@@ -1552,13 +1553,13 @@ int cl2diag_cap (Alignment *A, int *nns, int **ls, Constraint_list *CL, int ***l
       else if ( i==ni || j==nj);
       else if ( ni-i!=1 || nj-j!=1)
 	{
-	  if (nll>=max_ll){max_ll+=1000;ll=vrealloc (ll, max_ll*sizeof (int*));}
+	  if (nll>=max_ll){max_ll+=1000;ll=(int**)vrealloc (ll, max_ll*sizeof (int*));}
 	  ll[nll++]=list[0][a];
 	  list[0][a][6]=_TERM;
 	}
     }
 
-  sortseq=vcalloc (7, sizeof (int));
+  sortseq=(int*)vcalloc (7, sizeof (int));
   sortseq[0]=0;sortseq[1]=1;sortseq[2]=-1;
   sort_list_int2 (ll, sortseq,4, 0,nll-1);
   vfree (sortseq);
@@ -1630,7 +1631,7 @@ int cl2pair_list_ext ( Alignment *A, int *ins, int **ils, Constraint_list *CL, i
 
   if (read_size_int(ins,sizeof (int))==3 && ins[2]!=-1)
     {
-      ns=vcalloc (2, sizeof (int));
+      ns=(int*)vcalloc (2, sizeof (int));
       ls=declare_int (2,1);
       ns[0]=ns[1]=1;
       ls[0][0]=ils[0][ins[0]];
@@ -1669,7 +1670,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 
   int normalisation_mode=0;
 
-  float nscore, score, tot, filter, avg=0, new=0;
+  float nscore, score, tot, filter, avg=0;
   float **used;
   float *norm;
   //Maria added this
@@ -1687,18 +1688,18 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 
 
   pos=aln2pos_simple ( A,-1, ns, ls);
-  inv_pos=vcalloc ((CL->S)->nseq, sizeof (int*));
+  inv_pos=(int**)vcalloc ((CL->S)->nseq, sizeof (int*));
   for (a=0; a<ns[1]; a++)inv_pos[ls[1][a]] =seq2inv_pos(A->seq_al[ls[1][a]]);
 
   ll[0]=l1=strlen (A->seq_al[ls[0][0]]);
   ll[1]=l2=strlen (A->seq_al[ls[1][0]]);
   ll[2]=MAX(l1,l2);
-  sl1=vcalloc ((CL->S)->nseq, sizeof (int));
-  sl2=vcalloc ((CL->S)->nseq, sizeof (int));
+  sl1=(int*)vcalloc ((CL->S)->nseq, sizeof (int));
+  sl2=(int*)vcalloc ((CL->S)->nseq, sizeof (int));
 
   for (a=0;a<ns[0]; a++)sl1[ls[0][a]]=1;
   for (a=0;a<ns[1]; a++)sl2[ls[1][a]]=1;
-  norm=vcalloc ( l1+1, sizeof (float));
+  norm= (float*)vcalloc ( l1+1, sizeof (float));
 
   //data structure used for norm 2
 
@@ -1721,10 +1722,10 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
     }
 
   sl=n2splits (njobs,l1+1);
-  pid_tmpfile=vcalloc (njobs, sizeof (char*));
+  pid_tmpfile=(char**)vcalloc (njobs, sizeof (char*));
 
   used=declare_float (l2+1,2);
-  used_list=vcalloc (l2+1, sizeof (int));
+  used_list=(int*)vcalloc (l2+1, sizeof (int));
   nused=0;
 
   for (sjobs=0, j=0; j<njobs; j++)
@@ -1854,7 +1855,7 @@ int linked_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
       int **ils;
       int a,b,c;
       invert=1;
-      ins=vcalloc (2, sizeof(int));
+      ins=(int*)vcalloc (2, sizeof(int));
       ils=declare_int (2, (CL->S)->nseq);
 
       for ( a=0; a<2; a++)
@@ -1895,7 +1896,7 @@ int linked_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
       int **ils;
       int a,b,c;
 
-      ins=vcalloc (2, sizeof(int));
+      ins=(int*)vcalloc (2, sizeof(int));
       ils=declare_int (2, (CL->S)->nseq);
 
       for ( a=0; a<2; a++)
@@ -1958,9 +1959,9 @@ int list2linked_pair_wise( Alignment *A, int *ns, int **l_s, Constraint_list *CL
 
       slist=declare_int (n,3);
 
-      MI=vcalloc (5*n, sizeof (long));
-      MJ=vcalloc (5*n, sizeof (long));
-      MM=vcalloc (5*n, sizeof (long));
+      MI=(long int*)vcalloc (5*n, sizeof (long));
+      MJ=(long int*)vcalloc (5*n, sizeof (long));
+      MM=(long int*)vcalloc (5*n, sizeof (long));
 
     }
   else
@@ -1970,7 +1971,7 @@ int list2linked_pair_wise( Alignment *A, int *ns, int **l_s, Constraint_list *CL
     }
 
   /*New Bit: Start*/
-  if (!sortseq) sortseq=vcalloc( 7, sizeof (int));
+  if (!sortseq) sortseq=(int*)vcalloc( 7, sizeof (int));
   sortseq[0]=0; sortseq[1]=1;sortseq[2]=-1;
   sort_list_int2 (list, sortseq,7, 0, n-1);
 
@@ -2165,7 +2166,7 @@ int list2linked_pair_wise( Alignment *A, int *ns, int **l_s, Constraint_list *CL
 
   if ( A->declared_len<=LEN)A=realloc_aln  ( A,2*LEN+1);
   aln=A->seq_al;
-  char_buf= vcalloc (LEN+1, sizeof (char));
+  char_buf=(char*)vcalloc (LEN+1, sizeof (char));
 
   for ( c=0; c< 2; c++)
     {
@@ -2246,7 +2247,7 @@ Constraint_list* collapse_list (Alignment *A,int *ns, int **ls, char **al, int l
   if (!add)
     {
       add=vtmpnam (NULL);
-      p=vcalloc ( 100, sizeof (int));
+      p=(int*)vcalloc ( 100, sizeof (int));
     }
 
   lu=declare_int (2, len+1);
@@ -2262,12 +2263,12 @@ Constraint_list* collapse_list (Alignment *A,int *ns, int **ls, char **al, int l
   s =name_is_in_list (A->name[s ], (CL->S)->name, (CL->S)->nseq, 100);
 
 
-  CL->residue_index[s]=vrealloc (CL->residue_index[s], (len+2)*sizeof (int*));
+  CL->residue_index[s]=(int**)vrealloc (CL->residue_index[s], (len+2)*sizeof (int*));
   for (a=0; a<=len; a++)
     {
       if (!CL->residue_index[s][a])
 	{
-	  CL->residue_index[s][a]=vcalloc (1, sizeof (int));
+	  CL->residue_index[s][a]=(int*)vcalloc (1, sizeof (int));
 	  CL->residue_index[s][a][0]=1;
 	}
     }
@@ -2344,7 +2345,7 @@ int cl2pair_list_collapse ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   int nused;
   int *used_list;
 
-  float nscore, score, tot, filter, avg=0, new=0;
+  float nscore, score, tot, filter, avg=0;
   float **used;
   int *norm;
 
@@ -2356,9 +2357,9 @@ int cl2pair_list_collapse ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 
   l1=strlen (A->seq_al[s1]);
   l2=strlen (A->seq_al[s2]);
-  used=declare_float (l2+1,2);  used_list=vcalloc (l2+1, sizeof (int));
+  used=declare_float (l2+1,2);  used_list=(int*)vcalloc (l2+1, sizeof (int));
   nused=0;
-  norm=vcalloc (l1+2, sizeof(int));
+  norm=(int*)vcalloc (l1+2, sizeof(int));
 
   s1=name_is_in_list (A->name[s1], (CL->S)->name, (CL->S)->nseq, 100);
   s2=name_is_in_list (A->name[s2], (CL->S)->name, (CL->S)->nseq, 100);
@@ -2478,7 +2479,7 @@ int procoffee_pair_wise ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL
   if ( !CL->residue_index)return myers_miller_pair_wise (A, nsi,lsi,CL);
 
 
-  ns=vcalloc (2, sizeof (int));
+  ns=(int*)vcalloc (2, sizeof (int));
   ns[0]=nsi[1]; ns[1]=nsi[0];
 
 
@@ -2561,8 +2562,8 @@ int cl2diag_cap390 (Alignment *A, int *ns, int **ls, Constraint_list *CL, int **
 	  int delta=MAX((i-pi),(j-pj));
 	  for (x=1; x<=delta; x++)
 	    {
-	      if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
-	      if (!list[n])list[n]=vcalloc (7, sizeof (int));
+	      if (n==max_n){max_n+=1000;list=(int**)vrealloc (list, max_n*sizeof (int*));}
+	      if (!list[n])list[n]=(int*)vcalloc (7, sizeof (int));
 	      if ((i-x)<=1)continue;
 	      if ((j-x)<=1)continue;
 	      list[n][0]=i-x;
@@ -2582,8 +2583,8 @@ int cl2diag_cap390 (Alignment *A, int *ns, int **ls, Constraint_list *CL, int **
 	  int delta=MAX((ni-i),(nj-j));
 	  for (x=1; x<=delta; x++)
 	    {
-		if (n==max_n){max_n+=1000;list=vrealloc (list, max_n*sizeof (int*));}
-		if (!list[n])list[n]=vcalloc (7, sizeof (int));
+		if (n==max_n){max_n+=1000;list=(int**)vrealloc (list, max_n*sizeof (int*));}
+		if (!list[n])list[n]=(int*)vcalloc (7, sizeof (int));
 
 		if (i+x>=al1)continue;
 		if (j+x>=al2) continue;
@@ -2618,7 +2619,7 @@ int **aln2prf (Alignment *A, char *matrix)
   int *vector;
   int **prf;
   int r,a,b,c;
-  vector=vcalloc (27, sizeof (int));
+  vector=(int*)vcalloc (27, sizeof (int));
   prf=declare_int (A->len_aln, 26);
 
   for (a=0; a<A->len_aln; a++)
@@ -2676,7 +2677,7 @@ char *add_sequence2prf (char *seq,char *al, int **prf, int lj, int gop, int gep)
       max_j=lj;
     }
 
-  if (!al)al=vcalloc ( li+lj+1, sizeof (char));
+  if (!al)al=(char*)vcalloc ( li+lj+1, sizeof (char));
   lower_string (seq);
   for (i=1; i<=li; i++)//seq
     {

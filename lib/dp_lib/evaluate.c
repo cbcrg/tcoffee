@@ -89,8 +89,8 @@ int node2sub_aln_score    (Alignment *A,Constraint_list *CL, char *mode, NT_node
     {
       int *ns;
       int **ls;
-      ns=vcalloc (2, sizeof (int));
-      ls=vcalloc (2, sizeof (int*));
+      ns=(int*)vcalloc (2, sizeof (int));
+      ls=(int**)vcalloc (2, sizeof (int*));
       ns[0]= (T->left)->nseq;
       ns[1]=(T->right)->nseq;
       ls[0]= (T->left)->lseq;
@@ -144,7 +144,7 @@ Alignment* main_coffee_evaluate_output_sub_aln ( Alignment *A,Constraint_list *C
   if (strm ( CL->evaluate_mode, "no"))return NULL;
   else 
     {
-        list_seq=vcalloc (n_s[0]+n_s[1], sizeof (int));
+        list_seq=(int*)vcalloc (n_s[0]+n_s[1], sizeof (int));
 	for (b=0, a=0; a< 2; a++){for (c=0;c< n_s[a]; c++)list_seq[b++]=l_s[a][c];}
 	
 
@@ -166,7 +166,7 @@ Alignment * overlay_alignment_evaluation     ( Alignment *I, Alignment *O)
   if ( !I || !O) return O;
   if ( I->len_aln!=O->len_aln)printf_exit (EXIT_FAILURE, stderr, "ERROR: Incompatible alignments in overlay_alignment_evaluation");
   
-  buf=vcalloc ( MAX(I->len_aln, O->len_aln), sizeof (int));
+  buf=(int*)vcalloc ( MAX(I->len_aln, O->len_aln), sizeof (int));
  
   for (a=0; a<O->nseq; a++)
     {
@@ -528,7 +528,7 @@ Alignment * categories_evaluate_output ( Alignment *IN,Constraint_list *CL)
       Residue x: sum of observed extended X.. /sum of possible X..
     */
     OUT=copy_aln (IN, OUT);
-    aa=vcalloc ( 26, sizeof (int));
+    aa=(int*)vcalloc ( 26, sizeof (int));
     nseq2=IN->nseq*IN->nseq;
     
     for (tot_aln=0, a=0; a< IN->len_aln; a++)
@@ -571,7 +571,7 @@ Alignment * categories_evaluate_output_old ( Alignment *IN,Constraint_list *CL)
       Residue x: sum of observed extended X.. /sum of possible X..
     */
     OUT=copy_aln (IN, OUT);
-    aa=vcalloc ( 26, sizeof (int));
+    aa=(int*)vcalloc ( 26, sizeof (int));
     nseq2=IN->nseq*IN->nseq;
     
     for (tot_aln=0, a=0; a< IN->len_aln; a++)
@@ -643,14 +643,14 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
       pos=aln2pos_simple(IN, IN->nseq);
       sprintf ( OUT->name[IN->nseq], "cons");
       
-      max_seq=vcalloc ( IN->nseq, sizeof (double));
-      score_seq=vcalloc ( IN->nseq, sizeof (double));
+      max_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
+      score_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
       lu=declare_int (IN->nseq, IN->len_aln+1);
       
       //multi Threading stuff
       njobs=nproc;
       sl=n2splits (njobs,IN->len_aln);
-      pid_tmpfile=vcalloc (njobs, sizeof (char*));
+      pid_tmpfile=(char**)vcalloc (njobs, sizeof (char*));
       
       for (sjobs=0,j=0; sjobs<njobs; j++)
 	{
@@ -797,8 +797,8 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
       pos=aln2pos_simple(IN, IN->nseq);
       sprintf ( OUT->name[IN->nseq], "cons");
       
-      max_seq=vcalloc ( IN->nseq, sizeof (double));
-      score_seq=vcalloc ( IN->nseq, sizeof (double));
+      max_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
+      score_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
       lu=declare_int (IN->nseq, IN->len_aln+1);
       
      
@@ -1071,8 +1071,8 @@ Alignment * fast_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     pos=aln2pos_simple(IN, IN->nseq);
     pos2=aln2defined_residues (IN, CL);
     
-    max_seq=vcalloc ( IN->nseq, sizeof (double));
-    score_seq=vcalloc ( IN->nseq, sizeof (double));
+    max_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
+    score_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
     
     
     
@@ -1193,9 +1193,9 @@ Alignment * slow_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     pos=aln2pos_simple(IN, IN->nseq);
     pos2=aln2defined_residues (IN, CL);
     
-    max_score_seq=vcalloc ( IN->nseq, sizeof (double));
-    score_seq=vcalloc ( IN->nseq, sizeof (double));
-    res_extended_weight=declare_arrayN(3,sizeof(int), (CL->S)->nseq, (CL->S)->max_len+1, 2);
+    max_score_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
+    score_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
+    res_extended_weight=(int***)declare_arrayN(3,sizeof(int), (CL->S)->nseq, (CL->S)->max_len+1, 2);
     max=(CL->normalise)?(100*CL->normalise)*SCORE_K:100;
     
     for (a=0; a< IN->len_aln; a++)
@@ -1421,7 +1421,7 @@ double genepred2zsum2 (Sequence *S)
 int *genepred2orf_len (Sequence *S)
 {
   int a,b, *len;
-  len=vcalloc (S->nseq, sizeof (int));
+  len=(int*)vcalloc (S->nseq, sizeof (int));
    for (a=0; a<S->nseq; a++)
     for (b=0; b<S->len[a]; b++)
       len[a]+=(isupper(S->seq[a][b]));
@@ -1491,15 +1491,15 @@ Alignment * non_extended_t_coffee_evaluate_output ( Alignment *IN,Constraint_lis
     int p;
     int max_score=0;
 
-    entry=vcalloc (CL->entry_len+1, CL->el_size);
+    entry=(int*)vcalloc (CL->entry_len+1, CL->el_size);
     if ( !CL->evaluate_residue_pair){fprintf ( stderr, "\nWARNING: CL->evaluate_residue_pair Not set\nSet to: extend_residue_pair\n");CL->evaluate_residue_pair= extend_residue_pair; }
 	
     OUT=copy_aln (IN, OUT);
     pos=aln2pos_simple(IN, IN->nseq);
 
 
-    max_score_seq=vcalloc ( IN->nseq, sizeof (double));
-    score_seq=vcalloc ( IN->nseq, sizeof (double));
+    max_score_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
+    score_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
     
     tot_non_extended_weight=list2residue_total_weight(CL);
     res_non_extended_weight=declare_int ((CL->S)->nseq, (CL->S)->max_len+1);
@@ -1616,7 +1616,7 @@ Profile_cost_func get_profile_mode_function (char *name, Profile_cost_func func)
   
     if ( nfunc==0)
       {
-	flist=vcalloc ( 100, sizeof (Pwfunc));
+	flist=(int (**)(int*, int*, Constraint_list*) )vcalloc ( 100, sizeof (Pwfunc));
 	nlist=declare_char (100, 100);
 	
 	flist[nfunc]=cw_profile_profile;
@@ -1655,7 +1655,7 @@ int generic_evaluate_profile_score     (Constraint_list *CL,Alignment *Profile1,
       /*Generic profile function*/
       if( !dummy)
 	{
-	 dummy=vcalloc (10, sizeof(int));
+	 dummy=(int*)vcalloc (10, sizeof(int));
 	 dummy[0]=1;/*Number of Amino acid types on colum*/
 	 dummy[1]=5;/*Length of Dummy*/
 	 dummy[3]='\0';/*Amino acid*/
@@ -1714,7 +1714,7 @@ int muscle_profile_profile    (int *prf1, int *prf2, Constraint_list *CL)
       static double *exp_lu;
       if (exp_lu==NULL)
 	{
-	  exp_lu=vcalloc ( 10000, sizeof (double));
+	  exp_lu=(double*)vcalloc ( 10000, sizeof (double));
 	  exp_lu+=2000;
 	  for ( a=-1000; a<1000; a++)
 	    exp_lu[a]=exp((double)a);
@@ -1955,7 +1955,7 @@ int evaluate_diaa_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, in
 	  char *buf=NULL;
 	  int a;
 	  
-	  m=declare_arrayN(4, sizeof (int), 26, 26, 26, 26);
+	  m=(int****)declare_arrayN(4, sizeof (int), 26, 26, 26, 26);
 	  fp=vfopen ("diaa_mat.mat", "r");
 	  while ((c=fgetc (fp))!=EOF)
 	    {
@@ -1973,7 +1973,7 @@ int evaluate_diaa_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, in
 		}
 	    }
 	  vfclose (fp);
-	  alp=vcalloc (256, sizeof (int));
+	  alp=(int*)vcalloc (256, sizeof (int));
 	  for (a=0; a<26; a++)alp[a+'a']=1;
 	  alp['b']=0;
 	  alp['j']=0;
@@ -2034,7 +2034,7 @@ int evaluate_monoaa_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, 
 	  char *buf=NULL;
 	  int a;
 	  
-	  m=declare_arrayN(2, sizeof (int), 26, 26);
+	  m=(int**)declare_arrayN(2, sizeof (int), 26, 26);
 	  fp=vfopen ("monoaa_mat.mat", "r");
 	  while ((c=fgetc (fp))!=EOF)
 	    {
@@ -2052,7 +2052,7 @@ int evaluate_monoaa_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, 
 		}
 	    }
 	  vfclose (fp);
-	  alp=vcalloc (256, sizeof (int));
+	  alp=(int*)vcalloc (256, sizeof (int));
 	  for (a=0; a<26; a++)alp[a+'a']=1;
 	  alp['b']=0;
 	  alp['j']=0;
@@ -2113,7 +2113,7 @@ int evaluate_curvature_score( Constraint_list *CL, int s1, int r1, int s2, int r
   CL->gop=0;
   CL->gep=0;
   
-  if (!st) st= vcalloc ((CL->S)->nseq, sizeof (char*));
+  if (!st) st=(int**)vcalloc ((CL->S)->nseq, sizeof (char*));
   if (!st[s1])
     {
       st[s1]=get_curvature (s1, CL);
@@ -2154,7 +2154,7 @@ int *get_curvature ( int s1, Constraint_list *CL)
   FILE *fp;
   
   sprintf ( name, "%s.curvature", (CL->S)->name[s1]);
-  array=vcalloc (strlen ((CL->S)->seq[s1]), sizeof (int));
+  array=(int*)vcalloc (strlen ((CL->S)->seq[s1]), sizeof (int));
   fp=vfopen ( name, "r");
   while ( fscanf (fp, "%s %d %c %f\n",b1, &a, &c,&f )==4)
     {
@@ -2171,7 +2171,7 @@ int evaluate_tm_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, int 
   
   if (!st) 
     {
-      st= vcalloc ((CL->S)->nseq, sizeof (char*));
+      st=(char**)vcalloc ((CL->S)->nseq, sizeof (char*));
       RF=atoigetenv ("TM_FACTOR_4_TCOFFEE");
       if ( !RF)RF=10;
     }
@@ -2193,7 +2193,7 @@ int evaluate_ssp_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, int
   
   if (!st) 
     {
-      st= vcalloc ((CL->S)->nseq, sizeof (char*));
+      st=(char**) vcalloc ((CL->S)->nseq, sizeof (char*));
       RF=atoigetenv ("SSP_FACTOR_4_TCOFFEE");
       if ( !RF)RF=10;
     }
@@ -2285,7 +2285,7 @@ int residue_pair_non_extended_list ( Constraint_list *CL, int s1, int r1, int s2
 	if ( r1<=0 || r2<=0)return 0;
 	else if ( !CL->extend_jit)
 	   {
-	    if ( !entry) entry=vcalloc (LIST_N_FIELDS , sizeof (int));
+	    if ( !entry) entry=(int*)vcalloc (LIST_N_FIELDS , sizeof (int));
 	    entry[SEQ1]=s1;
 	    entry[SEQ2]=s2;
 	    entry[R1]=r1;
@@ -2331,8 +2331,8 @@ int residue_pair_extended_list_quadruplet (Constraint_list *CL, int s1, int r1, 
 	  if ( r1<=0 || r2<=0)return 0;
 	  if ( !hasch)
 	    {
-	      hasch=vcalloc ( (CL->S)->nseq, sizeof (int*));
-	      for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=vcalloc ( (CL->S)->len[a]+1, sizeof (int));
+	      hasch=(int**)vcalloc ( (CL->S)->nseq, sizeof (int*));
+	      for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=(int*)vcalloc ( (CL->S)->len[a]+1, sizeof (int));
 	    }
 	  
 
@@ -3066,8 +3066,8 @@ int residue_pair_extended_list_g_coffee_quadruplet ( Constraint_list *CL, int s1
 	  if ( r1<=0 || r2<=0)return 0;
 	  if ( !hasch)
 	    {
-	      hasch=vcalloc ( (CL->S)->nseq, sizeof (int*));
-	      for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=vcalloc ( (CL->S)->len[a]+1, sizeof (int));
+	      hasch=(int**)vcalloc ( (CL->S)->nseq, sizeof (int*));
+	      for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=(int*)vcalloc ( (CL->S)->len[a]+1, sizeof (int));
 	    }
 	  
 
@@ -3160,8 +3160,8 @@ int residue_pair_extended_list_g_coffee ( Constraint_list *CL, int s1, int r1, i
 	if ( r1<=0 || r2<=0)return 0;
 	if ( !hasch)
 	       {
-	       hasch=vcalloc ( (CL->S)->nseq, sizeof (int*));
-	       for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=vcalloc ( (CL->S)->len[a]+1, sizeof (int));
+	       hasch=(int**)vcalloc ( (CL->S)->nseq, sizeof (int*));
+	       for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=(int*)vcalloc ( (CL->S)->len[a]+1, sizeof (int));
 	       }
 	
 
@@ -3243,7 +3243,7 @@ int extend_residue_pair ( Constraint_list *CL, int s1, int r1, int s2, int r2)
 	
 	else if ( !CL->extend_jit)
 	   {
-	    if ( !entry) entry=vcalloc (LIST_N_FIELDS , sizeof (int));
+	    if ( !entry) entry=(int*)vcalloc (LIST_N_FIELDS , sizeof (int));
 	    entry[SEQ1]=s1;
 	    entry[SEQ2]=s2;
 	    entry[R1]=r1;
@@ -3256,8 +3256,8 @@ int extend_residue_pair ( Constraint_list *CL, int s1, int r1, int s2, int r2)
 	   {
 	   if ( !hasch)
 	       {
-	       hasch=vcalloc ( (CL->S)->nseq, sizeof (int*));
-	       for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=vcalloc ( (CL->S)->len[a]+1, sizeof (int));
+	       hasch=(int**)vcalloc ( (CL->S)->nseq, sizeof (int*));
+	       for ( a=0; a< (CL->S)->nseq; a++)hasch[a]=(int*)vcalloc ( (CL->S)->len[a]+1, sizeof (int));
 	       }
 	
 
@@ -3482,7 +3482,7 @@ int ***make_cw_lu (int **cons, int l, Constraint_list *CL)
   int ***lu;
   int p, a,r;
   
-  lu=declare_arrayN(3, sizeof (int),l,103, 2);
+  lu=(int***)declare_arrayN(3, sizeof (int),l,103, 2);
   for ( p=0; p<l ; p++)
     {
       for (r=0; r<26; r++)
@@ -3589,7 +3589,7 @@ int id2_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int c
 	  static int *aa;
 	  int a, b, r, *pr[2];
 	  
-	  if (!aa)aa=vcalloc (100, sizeof (int));
+	  if (!aa)aa=(int*)vcalloc (100, sizeof (int));
 	  
 	  if (last_tag!=A->random_tag)
 	    {
@@ -4164,7 +4164,7 @@ int slow_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, in
 	    last_tag=A->random_tag;
 	    if (!dummy)
 	      {
-		dummy=vcalloc (10, sizeof(int));
+		dummy=(int*)vcalloc (10, sizeof(int));
 		dummy[0]=1;/*Number of Amino acid types on colum*/
 		dummy[1]=5;/*Length of Dummy*/
 		dummy[3]='\0';/*Amino acid*/
@@ -4236,7 +4236,7 @@ int slow_get_dp_cost_pc ( Alignment *A, int**pos1, int ns1, int*list1, int col1,
 	    last_tag=A->random_tag;
 	    if (!dummy)
 	      {
-		dummy=vcalloc (10, sizeof(int));
+		dummy=(int*)vcalloc (10, sizeof(int));
 		dummy[0]=1;/*Number of Amino acid types on colum*/
 		dummy[1]=5;/*Length of Dummy*/
 		dummy[3]='\0';/*Amino acid*/
@@ -4386,7 +4386,7 @@ int get_domain_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, 
 	
 
 
-	if ( entry==NULL) entry=vcalloc (LIST_N_FIELDS , sizeof (int));
+	if ( entry==NULL) entry=(int*)vcalloc (LIST_N_FIELDS , sizeof (int));
 	
 	for (a=0; a< ns1; a++)
 		{
@@ -4525,7 +4525,7 @@ float* set_aa_frequencies ()
      float *frequency;
      /*frequencies tqken from psw*/
      
-     frequency=vcalloc (100, sizeof (float));
+     frequency=(float*)vcalloc (100, sizeof (float));
      frequency ['x'-'A']=0.0013;
      frequency ['a'-'A']=0.0076;
      frequency ['c'-'A']=0.0176;
@@ -4690,7 +4690,7 @@ float evaluate_random_match2 (int **matrix, int n, int len,char *alp)
     {
       vsrand(0);
       freq=set_aa_frequencies ();
-      list=vcalloc ( 10000, sizeof (char));
+      list=(int*)vcalloc ( 10000, sizeof (char));
     }
   
   for (tot=0,c=0,a=0;a<20; a++)
@@ -4847,7 +4847,7 @@ float compare_two_mat_array (int  **matrix1,int **matrix2, int n, int len,char *
     {
       vsrand(0);
       freq=set_aa_frequencies ();
-      list=vcalloc ( 10000, sizeof (char));
+      list=(int*)vcalloc ( 10000, sizeof (char));
     }
   
   for (tot=0,c=0,a=0;a<20; a++)
@@ -4953,7 +4953,7 @@ void output_matrix_header ( char *name, int **matrix, char *alp)
   FILE *fp;
   char *nalp;
   int l;
-  nalp=vcalloc ( 1000, sizeof (char));
+  nalp=(char*)vcalloc ( 1000, sizeof (char));
   
 
   

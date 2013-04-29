@@ -71,19 +71,19 @@ Constraint_list * undefine_sw_pair ( Constraint_list *CL, int s1, int r1, int s2
     if ( !CL->forbiden_pair_list)
       {
 	
-	CL->forbiden_pair_list=vcalloc ( (CL->S)->nseq, sizeof (int ***));
+	CL->forbiden_pair_list=(int ****)vcalloc ( (CL->S)->nseq, sizeof (int ***));
 	for ( a=0; a< ((CL->S)->nseq); a++)
 	  {
-	    CL->forbiden_pair_list[a]=vcalloc ( (CL->S)->nseq, sizeof (int **));
+	    CL->forbiden_pair_list[a]=(int ***)vcalloc ( (CL->S)->nseq, sizeof (int **));
 	    for ( b=0; b< ((CL->S)->nseq); b++)
-	      CL->forbiden_pair_list[a][b]=vcalloc ( (CL->S)->len[a]+1, sizeof (int *));
+	      CL->forbiden_pair_list[a][b]=(int **)vcalloc ( (CL->S)->len[a]+1, sizeof (int *));
 	    
 	  }
       }
-    if ( CL->forbiden_pair_list[s1][s2][r1]==NULL)CL->forbiden_pair_list[s1][s2][r1]=vcalloc ( (CL->S)->len[s2]+1, sizeof (int));
+    if ( CL->forbiden_pair_list[s1][s2][r1]==NULL)CL->forbiden_pair_list[s1][s2][r1]=(int *)vcalloc ( (CL->S)->len[s2]+1, sizeof (int));
     CL->forbiden_pair_list[s1][s2][r1][r2]=1;
     
-    if ( CL->forbiden_pair_list[s2][s1][r2]==NULL)CL->forbiden_pair_list[s2][s1][r2]=vcalloc ( (CL->S)->len[s1]+1, sizeof (int));
+    if ( CL->forbiden_pair_list[s2][s1][r2]==NULL)CL->forbiden_pair_list[s2][s1][r2]=(int *)vcalloc ( (CL->S)->len[s1]+1, sizeof (int));
     CL->forbiden_pair_list[s2][s1][r2][r1]=1;
     
     return CL;
@@ -183,14 +183,14 @@ int gotoh_pair_wise_sw (Alignment *A, int*ns, int **l_s,Constraint_list *CL)
 	lenal[0]=strlen (A->seq_al[l_s[0][0]]);
 	lenal[1]=strlen (A->seq_al[l_s[1][0]]);
 	len= (( lenal[0]>lenal[1])?lenal[0]:lenal[1])+1;
-	buf_trace=vcalloc ( len, sizeof (TRACE_TYPE));	
-	buffer=vcalloc ( 2*len, sizeof (char));	
+	buf_trace=(int*)vcalloc ( len, sizeof (TRACE_TYPE));	
+	buffer=(char*)vcalloc ( 2*len, sizeof (char));	
 	al=declare_char (2, 2*len);  
 	
-	char_buf= vcalloc (2*len, sizeof (char));	
-	dd= vcalloc (len, sizeof (int));
-	cc= vcalloc (len, sizeof (int));
-	ddg=vcalloc (len, sizeof (int));
+	char_buf=(char*) vcalloc (2*len, sizeof (char));	
+	dd= (int*) vcalloc (len, sizeof (int));
+	cc=(int*) vcalloc (len, sizeof (int));
+	ddg=(int*)vcalloc (len, sizeof (int));
 	
 	
 	if ( len>=MAX_LEN_FOR_DP)
@@ -530,7 +530,7 @@ Alignment * add_seq2aln   (Constraint_list *CL, Alignment *IN,Sequence  *S)
 	      {
 	      
 	      IN=realloc_aln2 ( IN, IN->nseq+1,MAX(strlen ( S->seq[ste])+1, IN->len_aln+1));
-	      n_groups=vcalloc ( 2, sizeof (int));
+	      n_groups=(int*)vcalloc ( 2, sizeof (int));
 	      group_list=declare_int (2,IN->nseq+1);
 	      
 	      n_groups[0]=IN->nseq;

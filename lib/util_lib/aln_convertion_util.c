@@ -561,7 +561,7 @@ Alignment * aln2random_aln (Alignment *A, char *smode)
 
   if ( smode==NULL)
     {
-      smode=vcalloc (4, sizeof (char));
+      smode=(char*)vcalloc (4, sizeof (char));
       sprintf ( smode, "SCR");//Sequences, Column Residues
     }
   else if ( strm (smode, "NO"))return A;
@@ -706,8 +706,8 @@ Alignment *aln2scale (Alignment *A, char *coffset)
   n=strlen (s);
 
   A=realloc_aln2 (A, A->nseq+n, A->len_aln+1);
-  s1=vcalloc ( n+1, sizeof (char));
-  s2=vcalloc ( n+1, sizeof (char));
+  s1=(char*)vcalloc ( n+1, sizeof (char));
+  s2=(char*)vcalloc ( n+1, sizeof (char));
 
   for (a=0; a<n; a++)
     {
@@ -743,14 +743,14 @@ int * pos2list (int * pos, int len, int *nl)
   int *list;
   int a;
   nl[0]=0;
-  list=vcalloc (len, sizeof (int));
+  list=(int*)vcalloc (len, sizeof (int));
   for (a=0; a<len; a++)if (pos[a])list[nl[0]++]=a;
   return list;
 }
 int *list2pos (int *list, int nl, int len)
 {
   int *pos, a;
-  pos=vcalloc (len, sizeof (int));
+  pos=(int*)vcalloc (len, sizeof (int));
   for (a=0; a<nl; a++)pos[list[a]]=1;
   return pos;
 }
@@ -761,7 +761,7 @@ int **aln2resindex ( Alignment *A, Alignment *B, FILE *fp)
   int a, b, n, s;
 
 
-  list=vcalloc (A->nseq+((B)?B->nseq:0), sizeof (int));
+  list=(int*)vcalloc (A->nseq+((B)?B->nseq:0), sizeof (int));
   pos=aln2pos_simple_2 (A);
   if (B)
     {
@@ -813,7 +813,7 @@ int **index_seq_res      ( Sequence *S1, Sequence *S2, int **name_index)
   char *seq1=NULL, *seq2=NULL;
   Alignment *Profile;
 
-  index=vcalloc ( S1->nseq, sizeof (int*));
+  index=(int**)vcalloc ( S1->nseq, sizeof (int*));
 
   for (a=0; a< S1->nseq; a++)
     {
@@ -834,7 +834,7 @@ int **index_seq_res      ( Sequence *S1, Sequence *S2, int **name_index)
 
       len1=(seq1)?strlen (seq1):0;
       len2=(seq2)?strlen (seq2):0;
-      index[a]=vcalloc (len2, sizeof(int));
+      index[a]=(int*)vcalloc (len2, sizeof(int));
 
 
       for (c=0,b=0; b<len2; b++)if( !is_gap(seq2[b]))index[a][c++]=b;
@@ -881,7 +881,7 @@ int *get_name_index (char **l1, int n1, char **l2, int n2)
   int *r;
   int a;
   /*return Array[Index_L1]=Index_L2 */
-  r=vcalloc ( n1, sizeof (int));
+  r=(int*)vcalloc ( n1, sizeof (int));
   for ( a=0; a< n1; a++)
     r[a]=name_is_in_list (l1[a],l2,n2,100);
   return r;
@@ -894,7 +894,7 @@ int* get_res_index (char *seq0, char *seq1)
   if ( !seq0 || !seq1) return NULL;
 
 
-  coor=vcalloc ( strlen (seq0)+1, sizeof (int));
+  coor=(int*)vcalloc ( strlen (seq0)+1, sizeof (int));
   if (!strm (seq0, seq1))
     {
       int r0, r1 , isr0, isr1;
@@ -946,7 +946,7 @@ int change_residue_coordinate ( char *in_seq1, char *in_seq2, int v)
       seq1=in_seq1, seq2=in_seq2;
       A=align_two_sequences (seq1,seq2,"pam250mt", -14, -2, "myers_miller_pair_wise");
 
-      coor=vcalloc ( A->len_aln, sizeof (int));
+      coor=(int*)vcalloc ( A->len_aln, sizeof (int));
       for ( a=0; a< A->len_aln; a++)
 	{
 	  r0=A->seq_al[0][a];r1=A->seq_al[1][a];
@@ -1049,15 +1049,15 @@ double *seq2tetraa (char *seq, double *v)
 
   if (!diaa)
     {
-      diaa=vcalloc ( 26, sizeof(int***));
+      diaa=(int****)vcalloc ( 26, sizeof(int***));
       for (a=0; a<26; a++)
 	{
-	  diaa[a]=vcalloc (26, sizeof (int**));
+	  diaa[a]=(int***)vcalloc (26, sizeof (int**));
 	  for (b=0; b<26; b++)
 	    {
-	      diaa[a][b]=vcalloc (26, sizeof(int*));
+	      diaa[a][b]=(int**)vcalloc (26, sizeof(int*));
 	      for (c=0; c<26; c++)
-		diaa[a][b][c]=vcalloc (26, sizeof(int));
+		diaa[a][b][c]=(int*)vcalloc (26, sizeof(int));
 	    }
 	}
     }
@@ -1074,7 +1074,7 @@ double *seq2tetraa (char *seq, double *v)
       tot++;
     }
 
-  if (!v)v=malloc (26*26*26*26*sizeof (double));
+  if (!v)v=(double*)malloc (26*26*26*26*sizeof (double));
   for (e=0,a=0; a<26; a++)
     for (b=0; b<26; b++)
       for (c=0; c<26; c++)
@@ -1097,12 +1097,12 @@ double *seq2triaa (char *seq, double *v)
 
   if (!diaa)
     {
-      diaa=vcalloc ( 26, sizeof(int**));
+      diaa=(int***)vcalloc ( 26, sizeof(int**));
       for (a=0; a<26; a++)
 	{
-	  diaa[a]=vcalloc (26, sizeof (int*));
+	  diaa[a]=(int**)vcalloc (26, sizeof (int*));
 	  for (b=0; b<26; b++)
-	    diaa[a][b]=vcalloc (26, sizeof(int));
+	    diaa[a][b]=(int*)vcalloc (26, sizeof(int));
 	}
     }
   for (a=0; a<l-2;a++)
@@ -1115,7 +1115,7 @@ double *seq2triaa (char *seq, double *v)
       tot++;
     }
 
-  if (!v)v=malloc (26*26*26*sizeof (double));
+  if (!v)v=(double*)malloc (26*26*26*sizeof (double));
   for (d=0,a=0; a<26; a++)
     for (b=0; b<26; b++)
       for (c=0; c<26; c++,d++)
@@ -1142,7 +1142,7 @@ double *seq2diaa (char *seq, double *v)
       tot++;
     }
 
-  if (!v)v=malloc (26*26*sizeof (double));
+  if (!v)v=(double*)malloc (26*26*sizeof (double));
   for (c=0,a=0; a<26; a++)
     for (b=0; b<26; b++, c++)
       {
@@ -1163,8 +1163,8 @@ char *array2alphabet (char **array, int n, char *forbiden)
   int *hasch;
   char *alphabet;
 
-  hasch=vcalloc (256, sizeof (int));
-  alphabet=vcalloc ( 257, sizeof (char));
+  hasch=(int*)vcalloc (256, sizeof (int));
+  alphabet=(char*)vcalloc ( 257, sizeof (char));
 
 
   for ( a=0; a<n; a++)
@@ -1199,8 +1199,8 @@ char* alnpos2hmmtop_pred (Alignment *A,Alignment *Pred, int pos, int mode)
 
   if (!score)
     {
-      score=vcalloc (256, sizeof (int));
-      result=vcalloc (100, sizeof (char));
+      score=(int*)vcalloc (256, sizeof (int));
+      result=(char*)vcalloc (100, sizeof (char));
     }
 
   if (!Pred && !Cache)
@@ -1242,7 +1242,7 @@ Alignment * aln2hmmtop_pred (Alignment *A)
     Alignment *PA;
 
     PA=copy_aln (A, NULL);
-    buf=vcalloc ( A->len_aln+1, sizeof (char));
+    buf=(char*)vcalloc ( A->len_aln+1, sizeof (char));
 
     for ( a=0; a< A->nseq; a++)
       {
@@ -1274,7 +1274,7 @@ char * seq2tmstruc ( char *seq)
 
      printf_system ( "fasta_seq2hmmtop_fasta.pl -in=%s -out=%s -arch=%s/%s -psv=%s/%s", seqfile, predfile, get_mcoffee_4_tcoffee(), "hmmtop.arch", get_mcoffee_4_tcoffee(), "hmmtop.psv");
      S=get_fasta_sequence (predfile, NULL);
-     buf=vcalloc ( strlen (S->seq[0])+1, sizeof (char));
+     buf=(char*)vcalloc ( strlen (S->seq[0])+1, sizeof (char));
      sprintf ( buf, "%s", S->seq[0]);
 
      free_sequence (S, S->nseq);
@@ -1284,9 +1284,10 @@ char * seq2tmstruc ( char *seq)
 
 void set_blast_default_values()
 {
-  set_string_variable ("blast_server", (getenv ("blast_server_4_TCOFFEE"))?getenv ("blast_server_4_TCOFFEE"):"EBI");
-  set_string_variable ("pdb_db", (getenv ("pdb_db_4_TCOFFEE"))?getenv ("pdb_db_4_TCOFFEE"):"pdb");
-  set_string_variable ("prot_db", (getenv ("prot_db_4_TCOFFEE"))?getenv ("prot_db_4_TCOFFEE"):"uniprot");
+  set_string_variable ("blast_server", const_cast<char*>( (getenv ("blast_server_4_TCOFFEE"))?getenv ("blast_server_4_TCOFFEE"):"EBI") );
+  set_string_variable ("pdb_db", const_cast<char*>( (getenv ("pdb_db_4_TCOFFEE"))?getenv ("pdb_db_4_TCOFFEE"):"pdb") );
+  set_string_variable ("prot_db", const_cast<char*>( (getenv ("prot_db_4_TCOFFEE"))?getenv ("prot_db_4_TCOFFEE"):"uniprot") );
+				  //Maria added this to cast a const char* to char*
   set_int_variable ("prot_min_sim", 0);
   set_int_variable ("prot_max_sim", 100);
 
@@ -1389,7 +1390,7 @@ int name_list2unique_name_list (int n, char **name)
       S=get_fasta_sequence (tmp2, NULL);
       for (a=0; a<n; a++)
 	{
-	  name[a]=vrealloc (name [a], sizeof (int)*(strlen (S->name[a])+1));
+	  name[a]=(char*)vrealloc (name [a], sizeof (int)*(strlen (S->name[a])+1));
 	  sprintf ( name[a], "%s", S->name [a]);
 	}
       free_sequence(S, -1);
@@ -1523,7 +1524,7 @@ Alignment *local_maln2global_maln (char *seq, Alignment *A)
 int ** aln2inv_pos ( Alignment *A)
 {
 	int **pos,a;
-	pos=vcalloc (A->nseq, sizeof (char*));
+	pos=(int**)vcalloc (A->nseq, sizeof (char*));
 	for (a=0; a< A->nseq; a++)pos[a]=seq2inv_pos (A->seq_al[a]);
 	return pos;
 }
@@ -1539,7 +1540,7 @@ int *  seq2inv_pos ( char *seq)
 
   l1=strlen ( seq);
   for ( l2=a=0; a< l1; a++)l2+=1-is_gap(seq[a]);
-  pos=vcalloc (l2+1, sizeof (int));
+  pos=(int*)vcalloc (l2+1, sizeof (int));
   for ( l2=a=0; a< l1; a++)if (!is_gap(seq[a]))pos[++l2]=a+1;
   return pos;
 }
@@ -1607,7 +1608,7 @@ int ** aln2pos_simple (Alignment *A, int n_nseq, ...)
        {
        if ( n_nseq>0)
           {
-	  list=vcalloc(n_nseq, sizeof (int));
+	  list=(int*)vcalloc(n_nseq, sizeof (int));
 	  for ( a=0; a< n_nseq; a++)list[a]=a;
 	  }
        else
@@ -1616,7 +1617,7 @@ int ** aln2pos_simple (Alignment *A, int n_nseq, ...)
 	  ns=va_arg(ap, int * );
 	  ls=va_arg(ap, int **);
 	  va_end(ap);
-	  list=vcalloc ( ns[0]+ns[1], sizeof (int));
+	  list=(int*)vcalloc ( ns[0]+ns[1], sizeof (int));
 	  n_nseq=0;
 	  for ( a=0; a< ns[0]; a++)list[n_nseq++]=ls[0][a];
 	  for ( a=0; a< ns[1]; a++)list[n_nseq++]=ls[1][a];
@@ -1665,7 +1666,7 @@ Alignment ** split_seq_in_aln_list ( Alignment **aln, Sequence *S, int n_seq, ch
 	    if((b=name_is_in_list (S->name[a],seq_list, n_seq, 100))!=-1)
 	       {
 	       l=strlen(S->seq[a])+1;
-	       long_seq=vrealloc(long_seq,(len+l+1)*sizeof(char));
+	       long_seq=(char*)vrealloc(long_seq,(len+l+1)*sizeof(char));
 	       long_seq=strcat(long_seq, S->seq[a]);
 	       long_seq=strcat(long_seq, "*");
 
@@ -1756,7 +1757,7 @@ Sequence  *  fill_sequence_struc ( int nseq, char **sequences, char **seq_name, 
 	if (genome_co != NULL)
 	{
 		unsigned int len;
-		S->genome_co = vcalloc(nseq, sizeof(Genomic_info));
+		S->genome_co =(Genomic_info*)vcalloc(nseq, sizeof(Genomic_info));
 		Genomic_info *tmp, *tmp_ori;
 		for ( a=0; a< S->nseq; a++)
 		{
@@ -1766,7 +1767,7 @@ Sequence  *  fill_sequence_struc ( int nseq, char **sequences, char **seq_name, 
 			tmp->start = tmp_ori->start;
 			tmp->end = tmp_ori->end;
 			tmp->seg_len = tmp_ori->seg_len;
-			tmp->seg_name = vcalloc(strlen(tmp_ori->seg_name)+1, sizeof(char));
+			tmp->seg_name =(char*) vcalloc(strlen(tmp_ori->seg_name)+1, sizeof(char));
 			strcpy(tmp->seg_name, tmp_ori->seg_name);
 
 // 			printf("-%s %i-\n", tmp_ori->seg_name, tmp_ori->start);
@@ -1819,7 +1820,7 @@ Alignment * expand_aln (Alignment *A)
 
 
 
-  list=vcalloc (A->nseq, sizeof (int));
+  list=(int*)vcalloc (A->nseq, sizeof (int));
   for ( a=0; a< A->nseq; a++)
     {
       Profile=seq2R_template_profile (A->S, A->order[a][0]);
@@ -1895,7 +1896,7 @@ Alignment * expand_number_aln (Alignment *A,Alignment *EA)
     }
 
 
-  list=vcalloc (EA->nseq, sizeof (int));
+  list=(int*)vcalloc (EA->nseq, sizeof (int));
   for ( a=0; a< EA->nseq; a++)
     {
       Profile=seq2R_template_profile (EA->S, EA->order[a][0]);
@@ -2015,7 +2016,7 @@ Alignment * remove_gap_column ( Alignment *A, char *mode)
     int keep_col, cl;
 
 
-    seq_list =vcalloc ( A->nseq, sizeof (int));
+    seq_list =(int*)vcalloc ( A->nseq, sizeof (int));
     while (  (p=strtok(mode, ":")))
       {
 	mode=NULL;
@@ -2163,7 +2164,7 @@ Alignment* shift_column (Alignment *A, int from, int to)
   char *buf;
   int a;
 
-  buf=vcalloc (A->nseq, sizeof (char));
+  buf=(char*)vcalloc (A->nseq, sizeof (char));
   for (a=0; a<A->nseq; a++)
     {
       buf[a]=A->seq_al[a][from];
@@ -2251,7 +2252,7 @@ Alignment * unalign_aln_pos (Alignment *A, int s, int p, int l)
   int unalign=0;
 
 
-  buf=vcalloc (l+1, sizeof (char));
+  buf=(char*)vcalloc (l+1, sizeof (char));
   for (a=0; a<l; a++)
     {
       buf[a]=A->seq_al[s][p+a];
@@ -2276,7 +2277,7 @@ Alignment * insert_gap_col (Alignment *A, int p, int l)
   gap=generate_null(l);
   if ( !A || p>=A->len_aln || p<0)return A;
 
-  buf=vcalloc (A->len_aln+l+1, sizeof (char));
+  buf=(char*)vcalloc (A->len_aln+l+1, sizeof (char));
   A=realloc_aln2(A,A->nseq, A->len_aln+l+1);
   for (a=0; a<A->nseq; a++)
     {
@@ -2297,8 +2298,8 @@ Alignment * unalign_residues (Alignment *A, int si1, int si2)
   s1=A->seq_al[si1];s2=A->seq_al[si2];
   l=strlen (s1);
 
-  ns1=vcalloc (2*l+1, sizeof (char));
-  ns2=vcalloc (2*l+1, sizeof (char));
+  ns1=(char*)vcalloc (2*l+1, sizeof (char));
+  ns2=(char*)vcalloc (2*l+1, sizeof (char));
 
   for (b=a=0; a< l; a++)
     {
@@ -2518,8 +2519,8 @@ Alignment *strings2aln (int nseq,...)
 	  int a, max;
 
 	  va_start(ap, nseq);
-	  list=vcalloc (nseq, sizeof (char*));
-	  name=vcalloc (nseq, sizeof (char*));
+	  list=(char**)vcalloc (nseq, sizeof (char*));
+	  name=(char**)vcalloc (nseq, sizeof (char*));
 	  for ( a=0; a< nseq; a++)
 	    {
 	      name[a]=va_arg(ap,char*);
@@ -2736,14 +2737,14 @@ Sequence  *keep_residues_in_seq ( Sequence *S, char *list, char replacement)
 }
 
 
-Alignment *aln2short_aln ( Alignment *A, char *list, char *new, int spacer)
+Alignment *aln2short_aln ( Alignment *A, char *list, char *nnew, int spacer)
 {
   int a, b, r, cl, l;
   char *buf;
 
   for ( a=0; a< A->nseq; a++)
     {
-      buf=vcalloc ( strlen (A->seq_al[a])+1, sizeof (char));
+      buf=(char*)vcalloc ( strlen (A->seq_al[a])+1, sizeof (char));
 
       for (l=0,cl=0, b=0; b< A->len_aln; b++)
 	{
@@ -2751,12 +2752,12 @@ Alignment *aln2short_aln ( Alignment *A, char *list, char *new, int spacer)
 	  if ( is_gap(r));
 	  else if ( is_in_set (r, list))
 	    {
-	      if (cl){cl=0; buf[l++]=new[0];}
+	      if (cl){cl=0; buf[l++]=nnew[0];}
 	      buf[l++]=r;
 	    }
 	  else
 	    {
-	      if ( cl==spacer){buf[l++]=new[0];cl=0;}
+	      if ( cl==spacer){buf[l++]=nnew[0];cl=0;}
 	      cl++;
 	    }
 
@@ -2795,7 +2796,7 @@ Alignment *filter_convert_aln ( Alignment *A,Alignment *ST, int use_cons, int va
   char **sl;
   int a;
   va_start (ap, n);
-  sl=vcalloc ( n,sizeof(char*));
+  sl=(char**)vcalloc ( n,sizeof(char*));
   for ( a=0; a< n; a++)
     {
       sl[a]=va_arg(ap, char * );
@@ -3006,8 +3007,8 @@ char ** sar_aln2motif (Alignment *A, Alignment *B, int *pos, int c)
   for (a=0; a<o; a++)O->seq_al[a][O->len_aln]='\0';
   for (a=0; a<i; a++)I->seq_al[a][I->len_aln]='\0';
 
-  alp=vcalloc ( sizeof (char**), I->len_aln);
-  alp_size= vcalloc ( I->len_aln, sizeof (int));
+  alp=(char***)vcalloc ( sizeof (char**), I->len_aln);
+  alp_size= (int*)vcalloc ( I->len_aln, sizeof (int));
   for (a=0; a<I->len_aln; a++)
     {
       char *col;
@@ -3134,8 +3135,8 @@ float search_best_combo(Alignment *A, Alignment *B)
   int delta=0;
   w=1;
 
-  pos=vcalloc ( A->len_aln, sizeof (int));
-  list=vcalloc (A->len_aln, sizeof (int));
+  pos=(int*)vcalloc ( A->len_aln, sizeof (int));
+  list=(int*)vcalloc (A->len_aln, sizeof (int));
   nl=0;
 
   if ( combo_mode==1)
@@ -3178,12 +3179,12 @@ float search_best_combo(Alignment *A, Alignment *B)
       max=1;
       generate_array_int_list (max, 0,A->len_aln-1, 1,NULL, tmpf);
       printf_system ( "cp %s testfile", tmpf);
-      buf=vcalloc ( 1000, sizeof (char));
+      buf=(char*)vcalloc ( 1000, sizeof (char));
       fp=vfopen (tmpf, "r");
       best_score=-99999;
 
       n_preset=0;
-      preset=vcalloc (A->len_aln, sizeof (int));
+      preset=(int*)vcalloc (A->len_aln, sizeof (int));
       preset[n_preset++]=353;
       preset[n_preset++]=361;
       //preset[n_preset++]=365;
@@ -3249,7 +3250,7 @@ float search_best_combo(Alignment *A, Alignment *B)
       int simI, simO;
 
       compound_score=declare_int (B->len_aln, 2);
-      ref_score=vcalloc (nl, sizeof (int));
+      ref_score=(int*)vcalloc (nl, sizeof (int));
 
       result=declare_int (B->len_aln*A->nseq*A->nseq, 2);
       result2=declare_int (B->len_aln*A->nseq*A->nseq, 2);
@@ -3456,7 +3457,7 @@ void count_misc (Alignment *A, Alignment *B)
 
   search_best_combo (A,B);
   myexit (EXIT_FAILURE);
-  pos=vcalloc (A->len_aln+1, sizeof (int));
+  pos=(int*)vcalloc (A->len_aln+1, sizeof (int));
   /*
   pos[354]=1;
   pos[362]=1;
@@ -3530,7 +3531,7 @@ void count_misc (Alignment *A, Alignment *B)
 
   slist=declare_double (A->nseq*A->nseq*10, 2);
   done=declare_int (256, 256);
-  list=vcalloc ( A->nseq, sizeof (int));
+  list=(int*)vcalloc ( A->nseq, sizeof (int));
 
   for (a=0; a<A->len_aln-1; a++)
     {
@@ -3629,7 +3630,7 @@ int  * count_in_aln ( Alignment *A, Alignment *ST, int value, int n_symbol,char 
 	  int a, b, c=0, d;
 	  int st;
 
-	  if (!table)table=vcalloc (n_symbol, sizeof (int));
+	  if (!table)table=(int*)vcalloc (n_symbol, sizeof (int));
 
 	  A->residue_case=KEEP_CASE;
 	  for ( a=0; a< A->nseq; a++)
@@ -3664,19 +3665,19 @@ char *dna_aln2cons_seq ( Alignment *A)
 	int overlap=0, best_overlap=0;
 
 
-	seq=vcalloc ( A->len_aln+1, sizeof (char));
+	seq=(char*)vcalloc ( A->len_aln+1, sizeof (char));
 
 	if (!column_count )
 	  {
-	    column_count=vcalloc(MAX_EST_SIZE, sizeof (int*));
+	    column_count=(int**)vcalloc(MAX_EST_SIZE, sizeof (int*));
 	    for ( a=0; a< MAX_EST_SIZE; a++)
-	      column_count[a]=vcalloc (5, sizeof (int));
+	      column_count[a]=(int*)vcalloc (5, sizeof (int));
 
-	    old_tot_count=vcalloc(MAX_EST_SIZE, sizeof (int*));
-	    new_tot_count=vcalloc(MAX_EST_SIZE, sizeof (int*));
+	    old_tot_count=(int**)vcalloc(MAX_EST_SIZE, sizeof (int*));
+	    new_tot_count=(int**)vcalloc(MAX_EST_SIZE, sizeof (int*));
 	    A->P=declare_profile( "agct-",MAX_EST_SIZE);
-	    string1=vcalloc (MAX_EST_SIZE, sizeof (char));
-	    string2=vcalloc (MAX_EST_SIZE, sizeof (char));
+	    string1=(char*)vcalloc (MAX_EST_SIZE, sizeof (char));
+	    string2=(char*)vcalloc (MAX_EST_SIZE, sizeof (char));
 	  }
 	else if (A->len_aln>MAX_EST_SIZE)
 	  {
@@ -3691,12 +3692,12 @@ char *dna_aln2cons_seq ( Alignment *A)
 		vfree(string2);
 	      }
 
-	  column_count=vcalloc(MAX_EST_SIZE+ size_increment, sizeof (int*));
+	  column_count=(int**)vcalloc(MAX_EST_SIZE+ size_increment, sizeof (int*));
 	  for ( a=0; a< MAX_EST_SIZE+ size_increment; a++)
-	      column_count[a]=vcalloc (5, sizeof (int));
+	      column_count[a]=(int*)vcalloc (5, sizeof (int));
 
-	  old_tot_count=vcalloc(MAX_EST_SIZE+ size_increment, sizeof (int*));
-	  new_tot_count=vcalloc(MAX_EST_SIZE+ size_increment, sizeof (int*));
+	  old_tot_count=(int**)vcalloc(MAX_EST_SIZE+ size_increment, sizeof (int*));
+	  new_tot_count=(int**)vcalloc(MAX_EST_SIZE+ size_increment, sizeof (int*));
 
 	  for (a=0; a< MAX_EST_SIZE; a++)
 	    {
@@ -3708,8 +3709,8 @@ char *dna_aln2cons_seq ( Alignment *A)
 	  (A->P)->count=declare_int (5, MAX_EST_SIZE+ size_increment);
 	  (A->P)->max_len=MAX_EST_SIZE+ size_increment;
 	  MAX_EST_SIZE+= size_increment;
-	  string1=vcalloc (MAX_EST_SIZE, sizeof (char));
-	  string2=vcalloc (MAX_EST_SIZE, sizeof (char));
+	  string1=(char*)vcalloc (MAX_EST_SIZE, sizeof (char));
+	  string2=(char*)vcalloc (MAX_EST_SIZE, sizeof (char));
 	  }
 
 
@@ -3808,15 +3809,15 @@ char *aln2cons_maj ( Alignment *A, int ns, int *ls, int n_groups, char **group_l
 	int clean_ls=0;
 	static int *aa;
 
-	if ( !aa) aa=vcalloc (1000, sizeof (int));
+	if ( !aa) aa=(int*)vcalloc (1000, sizeof (int));
 
 	len=strlen  (A->seq_al[ls[0]]);
-	seq=vcalloc (len+1, sizeof (char));
+	seq=(char*)vcalloc (len+1, sizeof (char));
 
 	if ( ns==0)
 	  {
 	    ns=A->nseq;
-	    ls=vcalloc ( A->nseq, sizeof (int));
+	    ls=(int*)vcalloc ( A->nseq, sizeof (int));
 	    for ( a=0; a< A->nseq; a++)ls[a]=a;
 	    clean_ls=1;
 	  }
@@ -3857,12 +3858,12 @@ char *aln2cons_seq ( Alignment *A, int ns, int *ls, int n_groups, char **group_l
 	int clean_ls=0;
 
 	len=strlen  (A->seq_al[ls[0]]);
-	seq=vcalloc (len+1, sizeof (char));
+	seq=(char*)vcalloc (len+1, sizeof (char));
 
 	if ( ns==0)
 	  {
 	    ns=A->nseq;
-	    ls=vcalloc ( A->nseq, sizeof (int));
+	    ls=(int*)vcalloc ( A->nseq, sizeof (int));
 	    for ( a=0; a< A->nseq; a++)ls[a]=a;
 	    clean_ls=1;
 	  }
@@ -3879,7 +3880,7 @@ char *aln2cons_seq ( Alignment *A, int ns, int *ls, int n_groups, char **group_l
 
 	for ( a=0; a<len; a++)
 	    {
-		group=vcalloc (n_groups+1, sizeof (int));
+		group=(int*)vcalloc (n_groups+1, sizeof (int));
 		for (best_group=0,b=0; b< ns; b++)
 		    {
 		    if ( !is_gap(A->seq_al[ls[b]][a]))
@@ -3912,8 +3913,8 @@ Alignment *aln2conservation ( Alignment *A, int threshold,char *seq)
   int **sim;
   int w=0;
 
-  pos =vcalloc (A->len_aln, sizeof (int));
-  eval=vcalloc (A->len_aln, sizeof (int));
+  pos =(int*)vcalloc (A->len_aln, sizeof (int));
+  eval=(float*)vcalloc (A->len_aln, sizeof (int));
   sim=aln2sim_mat (A, "idmat");
   if (seq)i=name_is_in_list (seq, A->name, A->nseq, 100);
   else i=0;
@@ -3993,7 +3994,7 @@ char *sub_aln2cons_seq_mat  ( Alignment *A,int ns, int *ls, char *mat_name)
 
  mat=read_matrice (mat_name);
  len=strlen ( A->seq_al[(ls==NULL)?0:ls[0]]);
- seq=vcalloc (len+1, sizeof (char));
+ seq=(char*)vcalloc (len+1, sizeof (char));
  for ( a=0; a<len; a++)
    {
      for (b=0; b<20; b++)
@@ -4118,7 +4119,7 @@ int  seq_list2fasta_file( Sequence *S,  char *list, char *file, char *outmode)
 		if ( l>blen)
 		  {
 		    if (buf)vfree(buf);
-		    buf=vcalloc ( strlen (list)+1, sizeof (char));
+		    buf=(char*)vcalloc ( strlen (list)+1, sizeof (char));
 		    sprintf ( buf, "%s", list);
 		    blen=l;
 		  }
@@ -4285,7 +4286,7 @@ Sequence *get_defined_residues( Alignment *A)
 	    S=duplicate_sequence (A->S);
 	    for ( a=0; a< S->nseq; a++)
 		for ( b=0; b< S->len[a]; b++)S->seq[a][b]=UNDEFINED_RESIDUE;
-	    buf=vcalloc(A->len_aln+1,sizeof (char));
+	    buf=(char*)vcalloc(A->len_aln+1,sizeof (char));
 	    for ( a=0; a< A->nseq; a++)
 	        {
 		    sprintf ( buf, "%s",A->seq_al[a]);
@@ -4339,8 +4340,8 @@ int ** trim_aln_borders (char **seq1, char **seq2, int nseq)
 
 
 	max=MAX(get_longest_string (seq1,-1, NULL, NULL),get_longest_string (seq2,-1, NULL, NULL))+1;
-	buf1=vcalloc ( max, sizeof(char));
-	buf2=vcalloc ( max, sizeof(char));
+	buf1=(char*)vcalloc ( max, sizeof(char));
+	buf2=(char*)vcalloc ( max, sizeof(char));
 
 	for ( a=0; a< nseq; a++)
 	{
@@ -4534,7 +4535,7 @@ char *    aln_column2string (Alignment *A, int p)
       }
     else
       {
-	s=vcalloc (A->nseq+1, sizeof (char));
+	s=(char*)vcalloc (A->nseq+1, sizeof (char));
 	for (a=0; a< A->nseq; a++)s[a]=A->seq_al[a][p];
       }
     return s;
@@ -4545,7 +4546,7 @@ int **fix_seq_aln (Sequence *S, Alignment*A, int **cache)
 {
   int s, b,i,nr;
 
-  if (!cache)cache=vcalloc (S->nseq, sizeof (int*));
+  if (!cache)cache=(int**)vcalloc (S->nseq, sizeof (int*));
 
   for (s=0; s<A->nseq; s++)
     {
@@ -4567,11 +4568,11 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
   int s0, r0,i;
   int **index;
 
-  index=vcalloc ( S0->nseq, sizeof (int*));
+  index=(int**)vcalloc ( S0->nseq, sizeof (int*));
   for (s0=0; s0<S0->nseq; s0++)
     {
       int l=S0->len[s0];
-      index[s0]=vcalloc (l+1, sizeof (int));
+      index[s0]=(int*)vcalloc (l+1, sizeof (int));
       i=index[s0][0]=name_is_in_list (S0->name[s0], Sx->name, Sx->nseq, 100);
 
       if (i==-1);
@@ -4588,8 +4589,8 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
 	  int nr0=0;
 	  int nr1=0;
 
-	  Alignment *B=align_two_sequences (S0->seq[s0],Sx->seq[i],(strm(S0->type, "PROTEIN"))?"blosum62mt":"idmat",-4,-1, "myers_miller_pair_wise");
-
+	  Alignment *B=align_two_sequences (S0->seq[s0], Sx->seq[i], const_cast<char*>( (strm(S0->type, "PROTEIN"))?"blosum62mt":"idmat"), -4,-1, "myers_miller_pair_wise");
+								    //Maria added this to cast a const char* to char*
 	  for (c=0; c<B->len_aln; c++)
 	    {
 
@@ -4651,13 +4652,13 @@ Alignment * fix_aln_seq  ( Alignment *A, Sequence *S)
 		   A->order[b][0]=a;
 
 		   vfree (buf1);
-		   buf1=vcalloc ( A->len_aln+1, sizeof (char));
+		   buf1=(char*)vcalloc ( A->len_aln+1, sizeof (char));
 		   sprintf (buf1, "%s", A->seq_al[b]);
 		   ungap (buf1);
 		   upper_string (buf1);
 
 		   vfree(buf2);
-		   buf2=vcalloc (strlen(S->seq[a])+1, sizeof (char));
+		   buf2=(char*)vcalloc (strlen(S->seq[a])+1, sizeof (char));
 		   sprintf (buf2, "%s",S->seq[a]);
 		   ungap (buf2);
 		   upper_string (buf2);
@@ -4724,7 +4725,7 @@ Sequence * add_prf2seq  ( char *file, Sequence *S)
       char **new_seq;
       Sequence *NS;
 
-      if (!prf_name){prf_name=vcalloc ( 100, sizeof (char));}
+      if (!prf_name){prf_name=(char*)vcalloc ( 100, sizeof (char));}
       if (file)
 	sprintf (prf_name, "%s", file);
       else
@@ -4809,7 +4810,7 @@ Sequence * add_sequence ( Sequence *IN, Sequence *OUT, int i)
 			tmp_out->start = tmp_in->start;
 			tmp_out->end = tmp_in->end;
 			tmp_out->seg_len = tmp_in->seg_len;
-			tmp_out->seg_name = vcalloc(strlen(tmp_in->seg_name)+1, sizeof(char));
+			tmp_out->seg_name =(char*) vcalloc(strlen(tmp_in->seg_name)+1, sizeof(char));
 			strcpy(tmp_out->seg_name, tmp_in->seg_name);
 
 		}
@@ -5032,7 +5033,7 @@ Sequence * swap_header ( Sequence *S, Sequence *H)
 	     if ( list==NULL || atoi(list[0])==1)continue;
 	     S->seq_comment[a]='\0';
 	     sprintf (S->name[a], "%s%s%s",H->name[n], list[1], list[2]);
-	     vfree ( S->seq_comment[a]);S->seq_comment[a]=vcalloc ( strlen (H->seq_comment[n])+1, sizeof (char));
+	     vfree ( S->seq_comment[a]);S->seq_comment[a]=(char*)vcalloc ( strlen (H->seq_comment[n])+1, sizeof (char));
 	     for (b=3; b< atoi(list[0]); b++)S->seq_comment[a]=strcat (S->seq_comment[a], list[b]);
 	     free_char (list, -1);
 	   }
@@ -5237,7 +5238,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   remove_template_file=get_int_variable ("remove_template_file");
   server=get_string_variable ("blast_server");
   pdb_db=get_string_variable ("pdb_db");
-  prot_db=get_string_variable ("prot_db");
+  prot_db=get_string_variable ("prot_db");         
 
   PmI=get_int_variable ("pdb_min_sim");
   PMI=get_int_variable ("pdb_max_sim");
@@ -5257,7 +5258,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 
 	}
       prot_db=seqdb;
-      server="LOCAL";
+      strcpy(server,"LOCAL");
     }
 
 
@@ -5486,11 +5487,11 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       int z, i;
       int freeF=0;
 
-      if (!script)script=vcalloc ( 1000, sizeof(char));
+      if (!script)script=(char*)vcalloc ( 1000, sizeof(char));
 
       ntemp++;
 
-      command=vcalloc ( 1000, sizeof (char));
+      command=(char*)vcalloc ( 1000, sizeof (char));
       tmp1=vtmpnam (NULL);
 
       A=seq2aln (S,NULL, 0);
@@ -5515,9 +5516,9 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       script=substitute(script, "@", " -");
       script=substitute(script, "#", "=");
 
-      temp_file=vcalloc ( A->nseq, sizeof (char*));
-      seq_file =vcalloc (A->nseq, sizeof (char*));
-      pid_list =vcalloc (MAX_N_PID, sizeof (int *));
+      temp_file=(char**)vcalloc ( A->nseq, sizeof (char*));
+      seq_file =(char**)vcalloc (A->nseq, sizeof (char*));
+      pid_list =(int *)vcalloc (MAX_N_PID, sizeof (int *));
 
       fprintf ( stderr, "\n\t------ Fetch Templates [Multi Core Mode %d CPUs]\n",get_nproc());
       for (npid=0, submited=0,i=0; i<S->nseq; i++)
@@ -5593,11 +5594,11 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       static int ntemp;
       char *p;
       int z;
-      if (!script)script=vcalloc ( 1000, sizeof(char));
+      if (!script)script=(char*)vcalloc ( 1000, sizeof(char));
 
       ntemp++;
 
-      command=vcalloc ( 1000, sizeof (char));
+      command=(char*)vcalloc ( 1000, sizeof (char));
       tmp1=vtmpnam (NULL);
 
       A=seq2aln (S,NULL, 0);
@@ -5751,7 +5752,7 @@ struct X_template *fill_X_template ( char *name, char *p, char *token)
 
   char *k;
 
-  X=vcalloc (1, sizeof (X_template));
+  X=(X_template*)vcalloc (1, sizeof (X_template));
   sprintf ( X->seq_name, "%s", name);
   if ( (k=strstr (p, token)))sscanf (k+strlen(token), "%s",X->template_name);
   else sprintf (X->template_name, "%s", p);
@@ -5759,15 +5760,15 @@ struct X_template *fill_X_template ( char *name, char *p, char *token)
 
   /*Add a Structure HERE*/
   sprintf ( X->template_type, "%s", token);
-  if ( strm (token, "_P_"))X->VP=vcalloc (1, sizeof (P_template));
-  if ( strm (token, "_F_"))X->VF=vcalloc (1, sizeof (F_template));
+  if ( strm (token, "_P_"))X->VP=(P_template*)vcalloc (1, sizeof (P_template));
+  if ( strm (token, "_F_"))X->VF=(F_template*)vcalloc (1, sizeof (F_template));
 
-  if ( strm (token, "_S_"))X->VS=vcalloc (1, sizeof (S_template));
-  if ( strm (token, "_R_"))X->VR=vcalloc (1, sizeof (R_template));
-  if ( strm (token, "_G_"))X->VG=vcalloc (1, sizeof (G_template));
-  if ( strm (token, "_T_"))X->VT=vcalloc (1, sizeof (T_template));
-  if ( strm (token, "_E_"))X->VE=vcalloc (1, sizeof (E_template));
-  if ( strm (token, "_U_"))X->VU=vcalloc (1, sizeof (U_template));
+  if ( strm (token, "_S_"))X->VS=(S_template*)vcalloc (1, sizeof (S_template));
+  if ( strm (token, "_R_"))X->VR=(R_template*)vcalloc (1, sizeof (R_template));
+  if ( strm (token, "_G_"))X->VG=(G_template*)vcalloc (1, sizeof (G_template));
+  if ( strm (token, "_T_"))X->VT=(T_template*)vcalloc (1, sizeof (T_template));
+  if ( strm (token, "_E_"))X->VE=(E_template*)vcalloc (1, sizeof (E_template));
+  if ( strm (token, "_U_"))X->VU=(U_template*)vcalloc (1, sizeof (U_template));
 
   return X;
 }
@@ -6170,7 +6171,7 @@ char *seq2T_value ( Sequence *S, int n, char *value, char *type)
   static char *rv_buf;
   X_template *X;
 
-  if ( !rv_buf)rv_buf=vcalloc (100, sizeof(char));
+  if ( !rv_buf)rv_buf=(char*)vcalloc (100, sizeof(char));
   if (!(X=seq_has_template (S, n, type)))return NULL;
   else
     {
@@ -6379,7 +6380,7 @@ Alignment * aln2scramble_seq (Alignment *A)
   vsrand (0);
 
   list=declare_int (A->nseq, 2);
-  name_list=vcalloc (A->nseq, sizeof (char*));
+  name_list=(char**)vcalloc (A->nseq, sizeof (char*));
 
 
   for (a=0; a<A->nseq; a++)
@@ -6488,7 +6489,7 @@ char * concatenate_seq ( Sequence *S, char *conc, int *order)
 	    int a;
 
 	    vfree (conc);
-	    conc=vcalloc ( S->nseq*S->max_len, sizeof (char));
+	    conc=(char*)vcalloc ( S->nseq*S->max_len, sizeof (char));
 
 	    for ( a=0; a< S->nseq; a++)
 	        {
@@ -6552,7 +6553,7 @@ Alignment * invert_aln ( Alignment *A)
   for ( a=0; a< A->nseq; a++)
     {
         l=strlen ( A->seq_al[a]);
-	buf=vcalloc ( l+1,sizeof (char) );
+	buf=(char*)vcalloc ( l+1,sizeof (char) );
 
 	for ( c=l-1,b=0; b< l; b++, c--)
 	  {
@@ -6572,7 +6573,7 @@ Sequence * invert_seq2 (Sequence *A)
   for ( a=0; a< A->nseq; a++)
     {
         l=strlen ( A->seq[a]);
-	buf=vcalloc ( l+1,sizeof (char) );
+	buf=(char*)vcalloc ( l+1,sizeof (char) );
 
 	for ( c=l-1,b=0; b< l; b++, c--)
 	  {
@@ -6662,7 +6663,7 @@ Alignment * alnpos_list2block (Alignment *A, int n, char **in_list)
     }
 
 
-  pos=vcalloc (A->len_aln, sizeof (int));
+  pos=(int*)vcalloc (A->len_aln, sizeof (int));
   for (a=0; a<n; a++)
     {
 
@@ -6708,7 +6709,7 @@ Alignment * aln2block   (Alignment  *A, int start, int end, Alignment *B)
       int *pos, p;
       start--;
       end--;
-      pos=vcalloc (A->len_aln, sizeof (int));
+      pos=(int*)vcalloc (A->len_aln, sizeof (int));
       for (p=start;p<end;p++)
 	    {
 	      pos[p]=1;
@@ -6776,7 +6777,7 @@ Alignment * extract_aln3 ( Alignment *B, char *file)
        modifies the incoming alignment
      */
 
-     offset=vcalloc ( B->nseq+1, sizeof (int));
+     offset=(int*)vcalloc ( B->nseq+1, sizeof (int));
      fp=vfopen (file,"r");
      while ( (c=fgetc(fp))!=EOF)
        {
@@ -6794,7 +6795,7 @@ Alignment * extract_aln3 ( Alignment *B, char *file)
      vfclose (fp);
 
      A=copy_aln (B, A);
-     col=vcalloc ( A->len_aln, sizeof (int));
+     col=(int*)vcalloc ( A->len_aln, sizeof (int));
 
      fp=vfopen ( file, "r");
      while ( (c=fgetc(fp))!=EOF)
@@ -7003,10 +7004,10 @@ Alignment * aln2N_replicate (Alignment *A,char *nn, char *name)
   int a, n;
   char *fname;
 
-  fname=vcalloc (100, sizeof (char));
+  fname=(char*)vcalloc (100, sizeof (char));
   if (nn)n=atoi(nn);
   else n=100;
-  if (!name){name=vcalloc (100, sizeof (char)); sprintf (name, "replicate");}
+  if (!name){name=(char*)vcalloc (100, sizeof (char)); sprintf (name, "replicate");}
 
 
   for (a=0; a< n;a++)
@@ -7029,7 +7030,7 @@ FILE *aln2replicate (Alignment *A, FILE *fp)
   if (A->col_weight)for (a=0; a<A->len_aln; a++)tot+=A->col_weight[a];
   else tot=A->len_aln;
 
-  p=vcalloc (A->len_aln, sizeof (int));
+  p=(int*)vcalloc (A->len_aln, sizeof (int));
   corr=(float)A->len_aln/tot;
 
   for (a=0; a<A->len_aln; a++)
@@ -7062,7 +7063,7 @@ Alignment * orthologous_concatenate_aln (Alignment *A, Sequence *S, char *mode)
   if (mode && strm (mode, "voronoi"))seq_weight2species_weight (A, S);
 
 
-  cname=vcalloc ( 100, sizeof (char));
+  cname=(char*)vcalloc ( 100, sizeof (char));
   name=declare_char (A->nseq, 100);
   for (a=0; a<A->nseq; a++)
     {
@@ -7081,7 +7082,7 @@ Alignment * orthologous_concatenate_aln (Alignment *A, Sequence *S, char *mode)
   C=declare_aln2 (nname, (A->len_aln*S->nseq)+1);
   free_char (C->name,-1); C->name=name;
   C->nseq=nname;
-  C->col_weight=vcalloc ( A->len_aln*S->nseq, sizeof(float));
+  C->col_weight=(float*)vcalloc ( A->len_aln*S->nseq, sizeof(float));
 
   C->len_aln=0;
     for (a=0; a<S->nseq; a++)
@@ -7487,7 +7488,7 @@ int aln2most_similar_sequence ( Alignment *A, char *mode)
   else if ( A->nseq==1)return 0;
   else
     {
-      buf=vcalloc ( A->len_aln+1, sizeof (char));
+      buf=(char*)vcalloc ( A->len_aln+1, sizeof (char));
       w=get_sim_aln_array ( A, mode);
 
       for ( a=0; a< A->nseq; a++)
@@ -7584,8 +7585,8 @@ double aln2entropy (Alignment *A, int *in_ls, int in_ns, float gap_threshold)
   double entropy=0;
   float ng;
 
-  ls=vcalloc ( A->nseq, sizeof (int));
-  count=vcalloc ( 26, sizeof (double));
+  ls=(int*)vcalloc ( A->nseq, sizeof (int));
+  count=(double*)vcalloc ( 26, sizeof (double));
 
 
   if ( in_ls)
@@ -7644,7 +7645,7 @@ int aln2sim2 (Alignment *A)
 	int a, b, c;
 	double *score;
 	double tscore=0;
-	score=vcalloc ( 256, sizeof (double));
+	score=(double*)vcalloc ( 256, sizeof (double));
 
 	for (a =0; a<A->len_aln; a++)
 	{
@@ -7851,7 +7852,7 @@ int get_seq_sim ( char *string1, char *string2, char *ignore, char *in_mode)
 	char *p;
 	static char *mode;
 
-	if (!mode)mode=vcalloc (100, sizeof (char));
+	if (!mode)mode=(char*)vcalloc (100, sizeof (char));
 	else mode[0]='\0';
 	if (in_mode)
 	  {
@@ -8007,8 +8008,8 @@ int * get_aln_col_weight ( Alignment *A, char *mode)
 	char *col;
 	int *weight;
 
-	col=vcalloc ( A->nseq, sizeof (int));
-	weight=vcalloc (A->len_aln, sizeof (int));
+	col=(char*)vcalloc ( A->nseq, sizeof (int));
+	weight=(int*)vcalloc (A->len_aln, sizeof (int));
 
 	for (a=0; a< A->len_aln; a++)
 		{
@@ -8046,7 +8047,7 @@ int analyse_aln_column ( Alignment *B, int col)
 
     if ( !B->S || !(B->S)->type)B= get_aln_type (B);
 
-    if ( !mat)mat=vcalloc ( STRING, sizeof (char));
+    if ( !mat)mat=(char*)vcalloc ( STRING, sizeof (char));
 
     if ( !ng_cw_star)
        {
@@ -8055,9 +8056,9 @@ int analyse_aln_column ( Alignment *B, int col)
 	   cw_dot=make_group_aa ( &ng_cw_dot, strcpy (mat, "clustalw_dot"));
        }
 
-    cw_star_count=vcalloc (ng_cw_star, sizeof (int));
-    cw_col_count=vcalloc ( ng_cw_col, sizeof (int));
-    cw_dot_count=vcalloc (ng_cw_dot, sizeof (int));
+    cw_star_count=(int*)vcalloc (ng_cw_star, sizeof (int));
+    cw_col_count=(int*)vcalloc ( ng_cw_col, sizeof (int));
+    cw_dot_count=(int*)vcalloc (ng_cw_dot, sizeof (int));
 
     for ( a=0; a< B->nseq; a++)
         {
@@ -8173,7 +8174,7 @@ Sequence * seq2filter (Sequence *Sin, int min, int max)
 
   S=duplicate_sequence (Sin);
   for (a=0; a<S->nseq; a++)ungap(S->seq[a]);
-  keep=vcalloc (S->nseq, sizeof (int));
+  keep=(int*)vcalloc (S->nseq, sizeof (int));
   M=read_matrice ("blossum62mt");
   for (a=0; a<S->nseq; a++)
     {
@@ -8343,7 +8344,7 @@ int ** fast_aln2sim_list (Alignment *A,  char *mode, int *ns, int **ls)
   if (ns==NULL)
     {
       free_ns=1;
-      ns=vcalloc (2, sizeof (int));
+      ns=(int*)vcalloc (2, sizeof (int));
       ns[0]=ns[1]=A->nseq;
       ls=declare_int (2, A->nseq);
       for ( a=0; a< 2; a++)
@@ -8747,7 +8748,7 @@ Alignment* aln2sub_aln_file (Alignment *A, int n, char **string)
   char ***list;
   int a;
 
-  list=vcalloc (A->nseq, sizeof (char***));
+  list=(char***)vcalloc (A->nseq, sizeof (char***));
   if ( n==0)return A;
   else if (n>1)
     {
@@ -8755,7 +8756,7 @@ Alignment* aln2sub_aln_file (Alignment *A, int n, char **string)
       char *buf;
 
       for (l=0,a=0; a< n; a++)l+=strlen (string[a]);
-      buf=vcalloc ( 2*n+l+1, sizeof (char));
+      buf=(char*)vcalloc ( 2*n+l+1, sizeof (char));
       for (a=0; a< n; a++){buf=strcat (buf,string[a]), buf=strcat ( buf, " ");}
       list[0]=string2list (buf);
       vfree (buf);
@@ -8798,7 +8799,7 @@ Sequence *remove_empty_sequence (Sequence *S)
   char *c;
   Sequence *NS;
 
-  c=vcalloc ( S->max_len+1, sizeof (char));
+  c=(char*)vcalloc ( S->max_len+1, sizeof (char));
 
   for (a=0, b=0; a< S->nseq; a++)
     {
@@ -8822,7 +8823,7 @@ Alignment* aln2sub_seq (Alignment *A, int n, char **string)
   int a;
   Sequence *S=NULL;
 
-  list=vcalloc (A->nseq, sizeof (char***));
+  list=(char***)vcalloc (A->nseq, sizeof (char***));
   if ( n==0)return A;
   else if (n>1)
     {
@@ -8830,7 +8831,7 @@ Alignment* aln2sub_seq (Alignment *A, int n, char **string)
       char *buf;
 
       for (l=0,a=0; a< n; a++)l+=strlen (string[a]);
-      buf=vcalloc ( 2*n+l+1, sizeof (char));
+      buf=(char*)vcalloc ( 2*n+l+1, sizeof (char));
       for (a=0; a< n; a++){buf=strcat (buf,string[a]), buf=strcat ( buf, " ");}
       list[0]=string2list (buf);
       vfree (buf);
@@ -8878,13 +8879,13 @@ Alignment * aln2collapsed_aln (Alignment * A, int n, char **string)
   int a, b,c, ns, m, l;
   int *collapsed;
 
-  list=vcalloc (A->nseq, sizeof (char***));
+  list=(char***)vcalloc (A->nseq, sizeof (char***));
   ns=0;
   if ( n==0)return A;
   else if (n>1)
     {
       for (l=0,a=0; a< n; a++)l+=strlen (string[a]);
-      buf=vcalloc ( 2*n+l+1, sizeof (char));
+      buf=(char*)vcalloc ( 2*n+l+1, sizeof (char));
       for (a=0; a< n; a++){buf=strcat (buf,string[a]), buf=strcat ( buf, " ");}
 
       list[0]=string2list (buf);ns=1;
@@ -8897,7 +8898,7 @@ Alignment * aln2collapsed_aln (Alignment * A, int n, char **string)
 	Groups must NOT be overlaping
       */
       l=measure_longest_line_in_file (string[0])+1;
-      buf=vcalloc (l, sizeof (char));
+      buf=(char*)vcalloc (l, sizeof (char));
       ns=0;
       fp=vfopen (string[0], "r");
       while ((c=fgetc(fp))!=EOF)
@@ -8916,7 +8917,7 @@ Alignment * aln2collapsed_aln (Alignment * A, int n, char **string)
   vfree (buf); buf=NULL;
 
   /*Identify lost sequences*/
-  collapsed=vcalloc (A->nseq, sizeof (int));
+  collapsed=(int*)vcalloc (A->nseq, sizeof (int));
   for ( a=0; a< ns; a++)
       {
 	m=atoi (list[a][0]);
@@ -9021,7 +9022,7 @@ int sub_aln2nseq_prf ( Alignment *A, int ns, int *ls)
   if ( ns==0)
     {
       n=ns=A->nseq;
-      ls=vcalloc (n, sizeof (int));
+      ls=(int*)vcalloc (n, sizeof (int));
       for ( a=0; a<A->nseq; a++)ls[a]=a;
       free_ls=1;
     }
@@ -9059,15 +9060,15 @@ int** sub_aln2count_mat2 ( Alignment *A, int ns, int *ls)
   if ( ns==0)
     {
       n=ns=A->nseq;
-      p=vcalloc ( n, sizeof (char*));
-      ls=vcalloc (n, sizeof (int));
+      p=(char**)vcalloc ( n, sizeof (char*));
+      ls=(int*)vcalloc (n, sizeof (int));
       for ( a=0; a<A->nseq; a++)ls[a]=a;
       free_ls=1;
     }
   else
     {
       n=ns;
-      p=vcalloc (n, sizeof (char*));
+      p=(char**)vcalloc (n, sizeof (char*));
     }
 
   for (c=0,a=0; a<ns; a++)
@@ -9076,7 +9077,7 @@ int** sub_aln2count_mat2 ( Alignment *A, int ns, int *ls)
       if ( A->S && (R=seq2R_template_profile (A->S, A->order[s][0]))!=NULL)
 	{
 	  n+=R->nseq;
-	  p=vrealloc (p, n*sizeof (char*));
+	  p=(char**)vrealloc (p, n*sizeof (char*));
 	  for (b=0; b<R->nseq; b++)
 	    {
 	      p[c++]=R->seq_al[b];
@@ -9302,7 +9303,7 @@ char *aln2random_seq (Alignment *A, int pn1, int pn2, int pn3, int gn)
 
       int max;
 
-      seq=vcalloc ( A->len_aln+1, sizeof (char));
+      seq=(char*)vcalloc ( A->len_aln+1, sizeof (char));
       count=aln2count_mat(A);
       freq=aln2count_mat(A);
 
@@ -9320,14 +9321,14 @@ char *aln2random_seq (Alignment *A, int pn1, int pn2, int pn3, int gn)
 	}
 
 
-      init_freq=vcalloc ( 26, sizeof (double));
-      blur_freq=vcalloc ( 26, sizeof (double));
+      init_freq=(double*)vcalloc ( 26, sizeof (double));
+      blur_freq=(double*)vcalloc ( 26, sizeof (double));
 
       tot_t1=tot_t2=tot_t3=0;
 
-      t1=vcalloc ( 27, sizeof (double));
-      t2=vcalloc ( 27, sizeof (double));
-      t3=vcalloc ( 27, sizeof (double));
+      t1=(double*)vcalloc ( 27, sizeof (double));
+      t2=(double*)vcalloc ( 27, sizeof (double));
+      t3=(double*)vcalloc ( 27, sizeof (double));
       for (a=0; a< A->len_aln; a++)
 	{
 
@@ -9505,7 +9506,7 @@ Alignment * master_trimseq( Alignment *A, Sequence *S,char *mode)
 
 
 
-     seq_list=vcalloc ( S->nseq, sizeof (int));
+     seq_list=(int*)vcalloc ( S->nseq, sizeof (int));
      for ( a=0; a< A->nseq; a++)
        {
 	 seq_list[a]=1;
@@ -9648,9 +9649,9 @@ Alignment *sim_filter (Alignment *A, char *in_mode, char *seq)
   static char *field;
   int maxsim, minsim, maxcov, mincov;
 
-  if ( !field) field=vcalloc (1000, sizeof (char));
+  if ( !field) field=(char*)vcalloc (1000, sizeof (char));
 
-  mode=vcalloc ( strlen (in_mode)+10, sizeof (char));
+  mode=(char*)vcalloc ( strlen (in_mode)+10, sizeof (char));
   sprintf ( mode, "_%s_", in_mode);
 
   strget_param ( mode, "_I", "100", "%d", &maxsim);
@@ -9662,8 +9663,8 @@ Alignment *sim_filter (Alignment *A, char *in_mode, char *seq)
 
 
 
-  keep=vcalloc ( A->nseq, sizeof (int));
-  list=vcalloc ( A->nseq, sizeof (int));
+  keep=(int*)vcalloc ( A->nseq, sizeof (int));
+  list=(int*)vcalloc ( A->nseq, sizeof (int));
 
 
 
@@ -9780,7 +9781,7 @@ int km_group2centroid  (int g,double **v, int n, int dim, int *size)
   int a, b, gs,ba;
 
   size[0]=0;
-  avg=vcalloc ( dim, sizeof (double));
+  avg=(double*)vcalloc ( dim, sizeof (double));
 
   for (a=0; a<n; a++)
     {
@@ -9820,18 +9821,19 @@ int *seq2kmeans_class (Alignment *A, int k, char *mode)
 {
   double **v;
   int dim=60;
-  int *class;
+  int *classs;
   int a;
 
   v=aln2km_vector(A,mode,&dim);
 
   km_kmeans (v,A->nseq,dim,k,0.0001,NULL);
 
-  class=vcalloc (A->nseq, sizeof (int));
-  for (a=0; a<A->nseq; a++)class[a]=(int)v[a][dim+1];
+  classs=(int*)vcalloc (A->nseq, sizeof (int));
+  for (a=0; a<A->nseq; a++)classs[a]=(int)v[a][dim+1];
   free_double (v,-1);
-  return class;
+  return classs;
 }
+
 Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
 {
   Alignment **AL;
@@ -9839,7 +9841,7 @@ Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
 
   if (A->nseq<=k)
     {
-      AL=vcalloc (1, sizeof (Alignment*));
+      AL=(Alignment**)vcalloc (1, sizeof (Alignment*));
       AL[n[0]++]=A;
     }
   else
@@ -9852,9 +9854,9 @@ Alignment** seq2kmeans_subset (Alignment*A, int k, int *n, char *mode)
 
       //Declare memory
       if (!tfile)tfile=vtmpnam(NULL);
-      gn=vcalloc    (k, sizeof (int));
+      gn=(int*)vcalloc    (k, sizeof (int));
       gl=declare_int(k, A->nseq);
-      AL=vcalloc  (k, sizeof (Alignment*));
+      AL=(Alignment**)vcalloc  (k, sizeof (Alignment*));
 
       //Run KM
       dim=0;
@@ -9919,10 +9921,10 @@ Alignment** seq2id_subset (Alignment*A,int k,int *ng, char *mode)
 
 
   nn=0;
-  l=vcalloc  ( n*2, sizeof (int));
-  nl=vcalloc ( n*2, sizeof (int));
+  l=(int*)vcalloc  ( n*2, sizeof (int));
+  nl=(int*)vcalloc ( n*2, sizeof (int));
   for (a=0; a<n; a++)l[a]=a;
-  AL=vcalloc (n, sizeof (Alignment *));
+  AL=(Alignment**)vcalloc (n, sizeof (Alignment *));
 
   while (n)
     {
@@ -9981,8 +9983,8 @@ Alignment* km_seq (Alignment *A, int k, char *mode, char *name)
   if (k>A->nseq)k=A->nseq;
 
   S=aln2seq(A);
-  gs=vcalloc ( k, sizeof (int));
-  f=vmalloc (k*sizeof (FILE*));
+  gs=(int*)vcalloc ( k, sizeof (int));
+  f=(FILE**)vmalloc (k*sizeof (FILE*));
   data2=aln2km_vector(A,mode,&ndim);
   km_kmeans (data2,A->nseq,ndim,k,0.0001,NULL);
 
@@ -10086,7 +10088,7 @@ Alignment *gap_trim (Alignment *A, int f)
 	double max=0;
 	if (!f) f=50;
 
-	list=vcalloc (A->nseq,sizeof (int));
+	list=(int*)vcalloc (A->nseq,sizeof (int));
 	v=declare_int (A->nseq, 2);
 	for (a=0; a< A->nseq; a++)v[a][0]=a;
 
@@ -10157,9 +10159,9 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
   int KeepN=0;
   int Print=0;
 
-  if ( !field) field=vcalloc (1000, sizeof (char));
+  if ( !field) field=(char*)vcalloc (1000, sizeof (char));
 
-  mode=vcalloc ( strlen (in_mode)+10, sizeof (char));
+  mode=(char*)vcalloc ( strlen (in_mode)+10, sizeof (char));
   sprintf ( mode, "_%s_", in_mode);
 
   strget_param ( mode, "_%%", "0", "%d", &maxsim);
@@ -10195,8 +10197,8 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
     }
 
 
-  keep=vcalloc ( A->nseq, sizeof (int));
-  list=vcalloc ( A->nseq, sizeof (int));
+  keep=(int*)vcalloc ( A->nseq, sizeof (int));
+  list=(int*)vcalloc ( A->nseq, sizeof (int));
 
 
 
@@ -10209,7 +10211,7 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
 
       Alignment *F;
 
-      full_list=vcalloc ( A->nseq, sizeof (int));
+      full_list=(int*)vcalloc ( A->nseq, sizeof (int));
       full_n=0;
       for (x=0; x< A->nseq; x++)
 	{
@@ -10306,7 +10308,7 @@ Alignment *simple_trimseq (Alignment *A, Alignment *K, char *in_mode, char *seq_
       if (outlayers!=0)
 	{
 	  int nn, b;
-	  tot_avg=vcalloc ( A->nseq, sizeof (int));
+	  tot_avg=(int*)vcalloc ( A->nseq, sizeof (int));
 
 	  for (a=0; a<A->nseq; a++)
 	    {
@@ -10460,7 +10462,7 @@ Alignment * trimseq( Alignment *A, Sequence *S,char *mode)
 
 
 
-     seq_list=vcalloc ( S->nseq, sizeof (int));
+     seq_list=(int*)vcalloc ( S->nseq, sizeof (int));
      for ( a=0; a< A->nseq; a++)
        {
 	 seq_list[a]=1;
@@ -10608,7 +10610,7 @@ Alignment * tc_trimseq( Alignment *A, Sequence *S,char *mode)
 
      keep_list[0]='\0';
 
-     seq_list=vcalloc ( S->nseq, sizeof (int));
+     seq_list=(int*)vcalloc ( S->nseq, sizeof (int));
      for ( a=0; a< A->nseq; a++)
        {
 	 seq_list[a]=1;
@@ -11006,8 +11008,8 @@ Alignment* seq2subseq1( Alignment *A, Sequence *S,int use_aln, int percent,int m
        }
 
 
-     seq_list=vcalloc ( S->nseq, sizeof (int));
-     used_seq_list=vcalloc ( S->nseq, sizeof (int));
+     seq_list=(int*)vcalloc ( S->nseq, sizeof (int));
+     used_seq_list=(int*)vcalloc ( S->nseq, sizeof (int));
 
 
 
@@ -11368,7 +11370,7 @@ char** string2alphabet (char *string, int depth, int *falp_size)
 
 
   l=strlen (string);
-  array=vcalloc ( 256, sizeof (int));
+  array=(int*)vcalloc ( 256, sizeof (int));
 
 
   max_s=l+1;
@@ -11378,7 +11380,7 @@ char** string2alphabet (char *string, int depth, int *falp_size)
   alp=declare_char(l,2);
   alp_size=0;
 
-  array=vcalloc ( 256, sizeof (int));
+  array=(int*)vcalloc ( 256, sizeof (int));
   for (a=0;a<l; a++)
     {
       if (!array[(int)string[a]])
@@ -11396,8 +11398,8 @@ char** string2alphabet (char *string, int depth, int *falp_size)
       free_char (alp, -1);
       return falp;
     }
-  alp2=vcalloc ( depth, sizeof (char**));
-  alp2_size=vcalloc (depth, sizeof (int));
+  alp2=(char***)vcalloc ( depth, sizeof (char**));
+  alp2_size=(int*)vcalloc (depth, sizeof (int));
 
   for (a=0; a<depth; a++)
     {
@@ -11412,7 +11414,7 @@ char** string2alphabet (char *string, int depth, int *falp_size)
 
       result_array=generate_array_string_list (a, alp2, alp2_size, &n, NULL, NO_OVERLAP);
       max_s+=n+1;
-      falp=vrealloc (falp, sizeof (char**)*max_s);
+      falp=(char**)vrealloc (falp, sizeof (char**)*max_s);
       for (b=0; b<n; b++)
 	{
 	  buf[0]='\0';
@@ -11420,7 +11422,7 @@ char** string2alphabet (char *string, int depth, int *falp_size)
 	    {
 	      strcat (buf, result_array[b][c]);
 	    }
-	  falp[falp_size[0]]=vcalloc (strlen (buf)+1, sizeof (char));
+	  falp[falp_size[0]]=(char*)vcalloc (strlen (buf)+1, sizeof (char));
 	  sprintf ( falp[falp_size[0]++], "%s", buf);
 	  vfree ( result_array[b]);
 	}
@@ -11428,7 +11430,7 @@ char** string2alphabet (char *string, int depth, int *falp_size)
 
     }
 
-  falp[falp_size[0]]=vcalloc (2, sizeof (char));
+  falp[falp_size[0]]=(char*)vcalloc (2, sizeof (char));
   sprintf ( falp[falp_size[0]++], "*");
   free_char (alp, -1);
   return falp;
@@ -11447,7 +11449,7 @@ char** make_group_aa (int *ngroup, char *mode)
 	char **group_list;
 	char *matrix_name;
 	int extend=0;
-	matrix_name=vcalloc ( 100, sizeof (char));
+	matrix_name=(char*)vcalloc ( 100, sizeof (char));
 
 	if (ngroup[0]==-1)extend=1;
 
@@ -11668,7 +11670,7 @@ char** make_group_aa_upgma (char*matrix, int max_n)
 	  group_list=declare_char (l+1, l+1);
 	  for (a=0; a<l; a++)group_list[a][0]='a'+a;
 	  mat=read_matrice(matrix);
-	  used=vcalloc ( l, sizeof (int));
+	  used=(int*)vcalloc ( l, sizeof (int));
 	  n=l;
 
 	  while (n>max_n)
@@ -11734,7 +11736,7 @@ int find_group_aa_distribution (char *col, int nseq,int n_group, char **gl,  int
 		n_group2=n_group;
 		}
 
-	if ( distribution==NULL || ln_group<n_group)distribution=vcalloc ( n_group2, sizeof (int));
+	if ( distribution==NULL || ln_group<n_group)distribution=(int*)vcalloc ( n_group2, sizeof (int));
 	if ( distrib==NULL)d=distribution;
 	else d=distrib;
 
@@ -11844,9 +11846,9 @@ char * test_gene2prot (Constraint_list *CL, int s1)
 	   static int *entry;
 	   int tot=0;
 
-	   seq=vcalloc ( strlen ((CL->S)->seq[s1])+1, sizeof (char));
-	   seq2=vcalloc ( strlen ((CL->S)->seq[s1])+1, sizeof (char));
-	   seq3=vcalloc ( strlen ((CL->S)->seq[s1])+1, sizeof (char));
+	   seq=(char*)vcalloc ( strlen ((CL->S)->seq[s1])+1, sizeof (char));
+	   seq2=(char*)vcalloc ( strlen ((CL->S)->seq[s1])+1, sizeof (char));
+	   seq3=(char*)vcalloc ( strlen ((CL->S)->seq[s1])+1, sizeof (char));
 	   sprintf ( seq, "%s", (CL->S)->seq[s1]);
 	   ungap (seq);
 
@@ -11855,7 +11857,7 @@ char * test_gene2prot (Constraint_list *CL, int s1)
 	   for ( a=0; a< l; a++) seq[a]=(seq[a]=='t')?'u': seq[a];
 
 
-	   potential=vcalloc (l+1, sizeof (int));
+	   potential=(int*)vcalloc (l+1, sizeof (int));
 
 	   for (nal=0, s=0; s<(CL->S)->nseq; s++)
 	     {
@@ -11893,11 +11895,11 @@ char * test_gene2prot (Constraint_list *CL, int s1)
 	   U1=nstate++;     U2=nstate++; U3=nstate++;  U4=nstate++; U5=nstate++;
 	   END=nstate++;
 
-	   is_coding=vcalloc ( nstate, sizeof (int));
+	   is_coding=(int*)vcalloc ( nstate, sizeof (int));
 	   is_coding[ORF1]=is_coding[ORF2]=is_coding[ORF3]=is_coding[U1]=is_coding[U2]=1;
 	   is_coding[U3]=is_coding[U4]=is_coding[U5]=1;
 
-	   is_t4=vcalloc ( nstate, sizeof (int));
+	   is_t4=(int*)vcalloc ( nstate, sizeof (int));
 	   is_t4[ORF3_T4]=is_t4[U1_T4]=is_t4[U2_T4]=1;
 	   transitions=declare_int ( nstate, nstate);
 	   for (a=0; a< nstate; a++)
@@ -11955,7 +11957,7 @@ char * test_gene2prot (Constraint_list *CL, int s1)
 
 	   for (a=0; a< l; a++) potential[a]-=200;
 
-	   codon=vcalloc ( 4, sizeof (char));
+	   codon=(char*)vcalloc ( 4, sizeof (char));
 	   best_pstate_p=START;
 	   best_pstate_v=0;
 	   nal=0;
@@ -12306,7 +12308,7 @@ int  * pw_aln2clean_aln_weight ( char *seq1, char *seq2, int w, OveralnP *F)
 
   aln=pw_aln2clean_pw_aln (aln, F);
 
-  weight=vcalloc (l+1, sizeof (int));
+  weight=(int*)vcalloc (l+1, sizeof (int));
   for (a=0; a<l; a++)
     {
       if ( aln[0][a] || seq1[a]=='x' || seq1[a]=='X' || seq2[a]=='x' || seq2[a]=='X')weight[a]=w;
@@ -12355,8 +12357,8 @@ char **pw_aln2clean_pw_aln_fsa2 (char ** aln, OveralnP *FO)
 
 
 
-  s=vcalloc (l, sizeof (int));
-  ids=vcalloc (l, sizeof (int));
+  s=(int*)vcalloc (l, sizeof (int));
+  ids=(int*)vcalloc (l, sizeof (int));
 
   //record the id level of each posotion
   for (b=0; b<l; b++)
@@ -12509,7 +12511,7 @@ char **pw_aln2clean_pw_aln_fsa2 (char ** aln, OveralnP *FO)
   tran[B2][B1]=  F;
   tran[B2][B2]=  F;
 
-  translate=vcalloc (ns, sizeof (int));
+  translate=(int*)vcalloc (ns, sizeof (int));
   translate[M1]=1;
   translate[m1]=1;
   translate[M2]=0;
@@ -12674,7 +12676,7 @@ char **pw_aln2clean_pw_aln_fsa1 (char ** aln, OveralnP *FO)
   tran[m2][M2]=+FO->p3;
   tran[m2][S]=  F;
 
-  translate=vcalloc (ns, sizeof (int));
+  translate=(int*)vcalloc (ns, sizeof (int));
   translate[M1]=1;
   translate[m1]=1;
   translate[M2]=0;
@@ -12725,7 +12727,7 @@ float* analyze_overaln ( Alignment *iA, Alignment *iB, char *mode, int filter, i
   Alignment *A, *B;
   OveralnP *F;
 
-  F=vcalloc (1, sizeof (OveralnP));
+  F=(OveralnP*)vcalloc (1, sizeof (OveralnP));
   F->p1=p1;
   F->p2=p2;
   F->p3=p3;
@@ -12760,7 +12762,7 @@ float* aln2pred ( Alignment *A, Alignment*B, char *mode)
   int print=1;
   float *fresult;
 
-  fresult=vcalloc ( 3, sizeof (float));
+  fresult=(float*)vcalloc ( 3, sizeof (float));
 
   if ( mode && strstr (mode, "case"))
     {
@@ -12793,8 +12795,8 @@ float* aln2pred ( Alignment *A, Alignment*B, char *mode)
     }
 
   vfree (alp);vfree (alp_lu);
-  alp=vcalloc ( 256, sizeof (char));
-  alp_lu=vcalloc ( 256, sizeof (char));
+  alp=(char*)vcalloc ( 256, sizeof (char));
+  alp_lu=(char*)vcalloc ( 256, sizeof (char));
 
   for (c=0; c<2; c++)
     {
@@ -12816,11 +12818,11 @@ float* aln2pred ( Alignment *A, Alignment*B, char *mode)
     }
 
   vfree (buf1); vfree(buf2);
-  buf1=vcalloc ( A->len_aln+1, sizeof (char));
-  buf2=vcalloc ( B->len_aln+1, sizeof (char));
+  buf1=(char*)vcalloc ( A->len_aln+1, sizeof (char));
+  buf2=(char*)vcalloc ( B->len_aln+1, sizeof (char));
 
   free_arrayN ((void **)r, 3);
-  r=declare_arrayN(3, sizeof (int),A->nseq,salp+1,salp+1);
+  r=(int***)declare_arrayN(3, sizeof (int),A->nseq,salp+1,salp+1);
   free_char ( list, -1);
   list=declare_char ( A->nseq, 100);
   for (n=0,a=0; a< A->nseq; a++)
@@ -12897,8 +12899,8 @@ Alignment * mark_exon_boundaries  (Alignment *A, Alignment *E)
   char *buf, *buf2;
   int a, b, c, i, l;
 
-  buf2=vcalloc ( E->len_aln+1, sizeof (char));
-  buf =vcalloc ( E->len_aln+1, sizeof (char));
+  buf2=(char*)vcalloc ( E->len_aln+1, sizeof (char));
+  buf =(char*)vcalloc ( E->len_aln+1, sizeof (char));
 
   for (a=0; a< A->nseq; a++)
     {
@@ -12951,8 +12953,8 @@ int ** simple_trimseq2 (int n, int **sim, int minsim)
   int ** gl;
   int ** gsim;
 
-  used=vcalloc (n, sizeof (int));
-  ssim=vcalloc (n, sizeof (int**));
+  used=(int*)vcalloc (n, sizeof (int));
+  ssim=(int***)vcalloc (n, sizeof (int**));
   for (s1=0; s1<n; s1++)
     {
       ssim[s1]=declare_int (n,2);
@@ -12972,7 +12974,7 @@ int ** simple_trimseq2 (int n, int **sim, int minsim)
   while (tot<n)
     {
       ng++;
-      vfree(gl[ng]);gl[ng]=vcalloc (n+1, sizeof (int));
+      vfree(gl[ng]);gl[ng]=(int*)vcalloc (n+1, sizeof (int));
       for (s1=0; s1<n; s1++)
 	if (!used[s1])
 	  {

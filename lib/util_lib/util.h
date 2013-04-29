@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <sys/times.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
@@ -110,7 +111,7 @@ int cmp_float  ( const float **a, const float**b);
 int cmp_list_int (const int**a, const int**b);
 int cmp_list_int2 (const int**a, const int**b);
 
-int name_is_in_list ( char *name, char **name_list, int n_name, int len);
+int name_is_in_list (const char name[], char **name_list, int n_name, int len);
 char * check_list_for_dup ( char **list, int ne);
 FILE *get_number_list_in_file ( FILE *fp, int *list, int *n, int *max_len);
 
@@ -569,7 +570,7 @@ char ** file2lines  (char *name);
 char *  file2string (char *name);
 int string2file ( char *file, char *mode, char *string,...);
 char *chomp (char *name);
-int get_cl_param (int argc, char **argv, FILE **fp,char *para_name, int *set_flag, char *type, int optional, int max_n_val,char *usage, ...);
+int get_cl_param (int argc, char **argv, FILE **fp, const char para_name[], int *set_flag, const char type[], int optional, int max_n_val,const char usage[], ...);
 char ** get_parameter ( char *para_name, int *np, char *fname);
 
 char *get_t_coffee_environement (char *file);
@@ -604,15 +605,15 @@ int   fcputenv (char *,char *, char*, ...);
 char *file_putenv (char *file);
 int check_dir_getenv ( char *string);
 
-char* set_string_variable (char *var, char* v);
-char* get_string_variable (char *var);
+char* set_string_variable (const char var[], char* v);
+char* get_string_variable (const char var[]);
 char* unset_string_variable (char *var);
 char* store_string_variable (char *var, char * v, int mode);
 
-int int_variable_isset (char *var);
+int int_variable_isset (const char var[]);
 int set_int_variable (char *var, int v);
-int get_int_variable (char *var);
-int unset_int_variable (char *var);
+int get_int_variable (const char var[]);
+int unset_int_variable (const char var[]);
 int store_int_variable (char *var, int v, int mode);
 
 void check_vtmpnam ();

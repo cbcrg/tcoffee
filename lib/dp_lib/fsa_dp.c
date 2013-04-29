@@ -329,7 +329,7 @@ int * seq_viterbi2path (char *s, Hmm *H, double **M)
   int cs;
 
   l1=strlen (s);
-  path=vcalloc (l1+1, sizeof (int));
+  path=(int*)vcalloc (l1+1, sizeof (int));
   i=l1;
   l=0;
   cs=M[H->nS+H->end][i];
@@ -400,7 +400,7 @@ Alignment * viterbipath2aln (Alignment *A, int *ns,int **ls,int *tb, Hmm *H)
   if ( A->declared_len<=len)A=realloc_aln2  ( A,A->max_n_seq,2*len);
   aln=A->seq_al;
   
-  char_buf=vcalloc (len+1, sizeof (char));
+  char_buf=(char*)vcalloc (len+1, sizeof (char));
   l[0]=strlen ( A->seq_al[ls[0][0]]);
   l[1]=strlen ( A->seq_al[ls[1][0]]);
   
@@ -436,7 +436,7 @@ double*** viterbi_hmm (Alignment *A,int *ns, int **ls, Hmm *H, Constraint_list *
   l1=strlen (A->seq_al[ls[0][0]]);
   l2=strlen (A->seq_al[ls[1][0]]);
   
-  M=vcalloc (H->nS*2, sizeof (double**));
+  M=(double***)vcalloc (H->nS*2, sizeof (double**));
   for ( a=0; a<H->nS*2; a++)M[a]=declare_double (l1+2, l2+2); 
   
   /*Handle the start*/
@@ -511,7 +511,7 @@ int * traceback (Alignment *A,int *ns, int **ls, Hmm *H, Constraint_list *CL,Mat
   
   l1=strlen (A->seq_al[ls[0][0]]);
   l2=strlen (A->seq_al[ls[1][0]]);
-  path=vcalloc ( l1+l2+1, sizeof (int));
+  path=(int*)vcalloc ( l1+l2+1, sizeof (int));
   
   while ( S->st!=H->end)
     {
@@ -540,7 +540,7 @@ int * viterbi2path (int l1,int l2, Hmm *H, double ***M)
   int cs;
 
   l=0;
-  path=vcalloc (l1+l2+1, sizeof (int));
+  path=(int*)vcalloc (l1+l2+1, sizeof (int));
   i=l1;j=l2;
   l=0;
   cs=M[H->nS+H->end][i][j];
@@ -682,7 +682,7 @@ MatState* viterbiL_hmm (Alignment *A,int *ns, int **ls, Hmm *H, Constraint_list 
     {
       LenI=l2+1;
       LenJ=H->nS;
-      M=declare_arrayN(3, sizeof ( MatState),2,LenI*LenJ,0);
+      M=(MatState***)declare_arrayN(3, sizeof ( MatState),2,LenI*LenJ,0);
     }
   
   
@@ -811,7 +811,7 @@ int viterbiD_pair_wise (Alignment *A,int*ns, int **ls,Constraint_list *CL)
   main_i=MAX(1,(l2-l1)+1);
   main_j=MAX(1,(l1-l2)+1);
   
-  seg_list=declare_arrayN(2, sizeof (int), l1+l2+3, 3);
+  seg_list=(int**)declare_arrayN(2, sizeof (int), l1+l2+3, 3);
   seg_list[0][0]=DIAGONALS;
 
   
@@ -993,8 +993,8 @@ MatState* viterbiD_hmm (Alignment *A,int *ns, int **ls, Hmm *H, Constraint_list 
     {
       LenI=l2+1;
       LenJ=H->nS;
-      M=declare_arrayN(3, sizeof ( MatState),2,LenI*LenJ,0);
-      toclean=vcalloc ( LenI*LenJ, sizeof (int));
+      M=(MatState***)declare_arrayN(3, sizeof ( MatState),2,LenI*LenJ,0);
+      toclean=(int*)vcalloc ( LenI*LenJ, sizeof (int));
     }
   
   if ( !main_jlist)main_jlist= seglist2table(seg_list, l1, l2);
@@ -1157,7 +1157,7 @@ int viterbiDGL_pair_wise (Alignment *A,int*ns, int **ls,Constraint_list *CL)
   main_i=MAX(1,(l2-l1)+1);
   main_j=MAX(1,(l1-l2)+1);
   
-  seg_list=declare_arrayN(2, sizeof (int), l1+l2+3, 3);
+  seg_list=(int**)declare_arrayN(2, sizeof (int), l1+l2+3, 3);
   seg_list[0][0]=DIAGONALS;
 
   
@@ -1346,8 +1346,8 @@ MatState* viterbiDGL_hmm (Alignment *A,int *ns, int **ls, Hmm *H, Constraint_lis
     {
       LenI=l2+1;
       LenJ=H->nS;
-      M=declare_arrayN(3, sizeof ( MatState),2,LenI*LenJ,0);
-      toclean=vcalloc ( LenI*LenJ, sizeof (int));
+      M=(MatState***)declare_arrayN(3, sizeof ( MatState),2,LenI*LenJ,0);
+      toclean=(int*)vcalloc ( LenI*LenJ, sizeof (int));
     }
   
   if ( !main_jlist)main_jlist= seglist2table(seg_list, l1, l2);
@@ -1492,14 +1492,14 @@ int **seglist2table ( int **seglist,int l1, int l2)
     int line, a,si, sj, ei, j, c;
     
     /*All: 0*/
-    valuesT=vcalloc ((l1+2)+3, sizeof (int*));
-    valuesT[0]=vcalloc (l2+2, sizeof (int));
+    valuesT=(int**)vcalloc ((l1+2)+3, sizeof (int*));
+    valuesT[0]=(int*)vcalloc (l2+2, sizeof (int));
     for (a=0; a<=l2; a++)valuesT[0][++valuesT[0][0]]=a;
 
     if ( !seglist) return valuesT;
     /*Diagonals: 1*/
-    valuesT[1]=vcalloc (l1+l2+2, sizeof (int));
-    bvalues=vcalloc (l1+l2+2, sizeof (int));
+    valuesT[1]=(int*)vcalloc (l1+l2+2, sizeof (int));
+    bvalues=(int*)vcalloc (l1+l2+2, sizeof (int));
     c=1;
     while (seglist[c][0]!=FORBIDEN)
       {
@@ -1522,10 +1522,10 @@ int **seglist2table ( int **seglist,int l1, int l2)
     vfree (bvalues);
 
     /*Segments: 2*/
-    valuesT[2]=vcalloc (l2+2, sizeof (int));
+    valuesT[2]=(int*)vcalloc (l2+2, sizeof (int));
     for (a=0; a<=l2; a++)valuesT[2][++valuesT[2][0]]=a;
     
-    bvalues=vcalloc (l2+2, sizeof (int));
+    bvalues=(int*)vcalloc (l2+2, sizeof (int));
     for ( line=1; line<=l1; line++)
       {
 	bvalues[0]=c=0;
@@ -1543,7 +1543,7 @@ int **seglist2table ( int **seglist,int l1, int l2)
 		  }
 		c++;
 	  }
-	valuesT[line+2]=vcalloc (bvalues[0]+1, sizeof (int));
+	valuesT[line+2]=(int*)vcalloc (bvalues[0]+1, sizeof (int));
 	for ( a=0; a<=bvalues[0]; a++) valuesT[line+2][a]=bvalues[a];
       }
     vfree (bvalues);
@@ -1565,17 +1565,17 @@ Hmm* declare_hmm(int n)
     Hmm *H;
     int a, b;
     
-    H=vcalloc (1, sizeof (Hmm));
+    H=(Hmm*)vcalloc (1, sizeof (Hmm));
     H->nS=n;
-    H->S=vcalloc (H->nS, sizeof (HmmState*));
+    H->S=(HmmState**)vcalloc (H->nS, sizeof (HmmState*));
     for (a=0; a<H->nS; a++)
       {
-	H->S[a]=vcalloc (1, sizeof (HmmState));
-	(H->S[a])->em2=vcalloc (MAX_EMISSION, sizeof (double));
+	H->S[a]=(HmmState*)vcalloc (1, sizeof (HmmState));
+	(H->S[a])->em2=(double*)vcalloc (MAX_EMISSION, sizeof (double));
 	
-	(H->S[a])->T=vcalloc ( H->nS, sizeof (StateTrans*));
+	(H->S[a])->T=(StateTrans**)vcalloc ( H->nS, sizeof (StateTrans*));
 	for ( b=0; b< H->nS; b++)
-	  (H->S[a])->T[b]=vcalloc (1, sizeof (StateTrans));
+	  (H->S[a])->T[b]=(StateTrans*)vcalloc (1, sizeof (StateTrans));
       }
     return H;
   }
@@ -1584,7 +1584,7 @@ Hmm* free_Hmm(Hmm*H)
   {
     int a, b;
     
-    H=vcalloc (1, sizeof (Hmm));
+    H=(Hmm*)vcalloc (1, sizeof (Hmm));
     free_double (H->T, -1);
     free_int ( H->fromM, -1);
     free_int ( H->toM, -1);
@@ -1705,11 +1705,11 @@ MatState * ManageMatState(int Mode, MatState *C)
     {
       int c=0;
       int extension=1000;
-      if (!Fheap){Fheap=vcalloc (1, sizeof (MatState));Fheap->free=1;free++;}
-      if (!Aheap)Aheap=vcalloc (1, sizeof (MatState));
+      if (!Fheap){Fheap=(MatState*)vcalloc (1, sizeof (MatState));Fheap->free=1;free++;}
+      if (!Aheap)Aheap=(MatState*)vcalloc (1, sizeof (MatState));
       while ( c!=extension)
 	{
-	  C=vcalloc ( 1, sizeof (MatState));
+	  C=(MatState*)vcalloc ( 1, sizeof (MatState));
 	  C->free=1;Fheap->Hn=C;C->Hp=Fheap;
 	  Fheap=C;
 	  c++;

@@ -55,11 +55,11 @@ my_realloc(void *p, size_t size)
 
 
 char *
-my_make_temp_dir(char *template, char *function)
+my_make_temp_dir(char *templatee, char *function)
 {
 
-	char *temp_dir_name = malloc(20 * sizeof(char*));
-	sprintf(temp_dir_name, "%s", template);
+	char *temp_dir_name = (char*)malloc(20 * sizeof(char*));
+	sprintf(temp_dir_name, "%s", templatee);
 // 	char hostname[50];
 // 	gethostname(hostname, 50);
 // 	printf("%s %s\n",hostname, temp_dir_name);

@@ -1,3 +1,6 @@
+#ifndef __REFORMAT_H
+#define __REFORMAT_H
+
 typedef struct
     {
       Alignment *A;
@@ -380,3 +383,5 @@ char * translate_name ( char *name);
 char *decode_name (char *name, int mode);
 FILE * display_sequences_names (Sequence *S, FILE *fp, int check_pdb_status, int print_templates);
 Sequence *add_file2file_list (char *name, Sequence *S);
+
+#endif

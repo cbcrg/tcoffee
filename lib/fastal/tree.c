@@ -81,8 +81,8 @@ void
 compute_oligomer_distance_tree(char *seq_file_name, int* char2value, char *tree_file_name, int max_dist, int word_length, int alphabet_size)
 {
 	int i;
-	int *compare = vcalloc(1,sizeof(int));
-	int *num_seq = vcalloc(1,sizeof(int));
+	int *compare =(int*) vcalloc(1,sizeof(int));
+	int *num_seq =(int*) vcalloc(1,sizeof(int));
 
 	int num_features = (int)pow(alphabet_size,word_length);
 	
@@ -91,12 +91,12 @@ compute_oligomer_distance_tree(char *seq_file_name, int* char2value, char *tree_
 
 	Cluster_info *matrix  = feature_extract(seq_file_name, max_dist, word_length, char2value, alphabet_size, compare, num_seq, num_features);
 	
-	int *node = vcalloc(1, sizeof(int));
+	int *node =(int*) vcalloc(1, sizeof(int));
 	*node = *num_seq;
 	
 	FILE *tree_f = fopen(tree_file_name,"w");
-	double *mean = vcalloc(num_features, sizeof(double));
-	double *variance = vcalloc(num_features, sizeof(double));
+	double *mean = (double*)vcalloc(num_features, sizeof(double));
+	double *variance =  (double*)vcalloc(num_features, sizeof(double));
 	cluster_recursive(0, *num_seq-1, matrix, num_features, mean, variance, compare, tree_f, node);
 	
 	for (i = 0; i < *num_seq; ++i)
@@ -130,7 +130,7 @@ int*
 recode_sequence(char * seq, int seq_length, int *char2value, int alphabet_size, int word_length)
 {
 
-	int *recoded = vcalloc(seq_length - word_length + 1, sizeof(int));
+	int *recoded =(int*) vcalloc(seq_length - word_length + 1, sizeof(int));
 	int i;
 	
 	if (word_length == 1)
@@ -142,7 +142,7 @@ recode_sequence(char * seq, int seq_length, int *char2value, int alphabet_size, 
 	}
 	else
 	{
-		int *prod=vcalloc (word_length, sizeof(int));
+		int *prod=(int*)vcalloc (word_length, sizeof(int));
 		for ( i=0; i<word_length; ++i)
 		{
 			prod[word_length-i-1]=(int)pow(alphabet_size,i);
@@ -186,7 +186,7 @@ get_features(int *recoded_seq, int seq_length, int k_tup, int max_coding, int ma
 	
 	int vector_length = num_features;//max_coding * max_coding*(max_dist+1);
 	
-	double *feature_vector = vcalloc(vector_length, sizeof(double));
+	double *feature_vector =(double*) vcalloc(vector_length, sizeof(double));
 	int i;
 	for (i = 0; i < vector_length; ++i)
 	{
@@ -246,8 +246,8 @@ feature_extract(char *seq_file_name, int max_dist, int k_tup, int *char2value, i
 	int matrix_size = 1000;
 	const int STEP = 1000;
 	int seq_pos = -1;
-	char *seq = vcalloc(size, sizeof(char));
-	Cluster_info *matrix = vcalloc(matrix_size, sizeof(Cluster_info));
+	char *seq = (char*)vcalloc(size, sizeof(char));
+	Cluster_info *matrix =(Cluster_info*) vcalloc(matrix_size, sizeof(Cluster_info));
 	char *c_p;
 	int max_coding = pow(alphabet_size,k_tup);
 	while (fgets(line, 500, tree_f) != NULL)
@@ -260,7 +260,7 @@ feature_extract(char *seq_file_name, int max_dist, int k_tup, int *char2value, i
 				if (num_seq > matrix_size -2)
 				{
 					matrix_size += STEP;
-					matrix = vrealloc(matrix, matrix_size * sizeof(Cluster_info));
+					matrix = (Cluster_info*)vrealloc(matrix, matrix_size * sizeof(Cluster_info));
 				}
 				int *recoded_seq = recode_sequence(seq, seq_pos, char2value, alphabet_size, k_tup);
 				matrix[num_seq].seq_number = num_seq;
@@ -276,7 +276,7 @@ feature_extract(char *seq_file_name, int max_dist, int k_tup, int *char2value, i
 			if (size - seq_pos < 500)
 			{
 				size += STEP;
-				seq = vrealloc(seq, size*sizeof(char));
+				seq = (char*)vrealloc(seq, size*sizeof(char));
 			}
 			c_p = &line[0];
 			while ((*c_p != '\n') && (*c_p != '\0'))

@@ -22,7 +22,7 @@ FILE * compare_al_to_lib ( Constraint_list *CL, int start, char *fname, Sequence
 
 
 	if ( translation!=NULL)vfree(translation);
-	  translation=vcalloc ( (CL->S)->nseq+1, sizeof (int));
+	  translation=(int*)vcalloc ( (CL->S)->nseq+1, sizeof (int));
 	    for ( b=0,a=0; a< (CL->S)->nseq; a++)
 		{
 			if ( name_is_in_list((CL->S)->name[a],S->name,S->nseq, 100)==-1)
@@ -50,14 +50,14 @@ FILE * compare_al_to_lib ( Constraint_list *CL, int start, char *fname, Sequence
 	else
 	{
 		Sequence *S=CL->S;
-		int ***cacheI=vcalloc (S->nseq, sizeof (int**));
-		int **cacheR=vcalloc (S->nseq, sizeof (int*));
-		int *tot=vcalloc ( S->nseq, sizeof (int));
-		int *max=vcalloc ( S->nseq, sizeof (int));
+		int ***cacheI=(int***)vcalloc (S->nseq, sizeof (int**));
+		int **cacheR=(int**)vcalloc (S->nseq, sizeof (int*));
+		int *tot=(int*)vcalloc ( S->nseq, sizeof (int));
+		int *max=(int*)vcalloc ( S->nseq, sizeof (int));
 		for (a=0;a<S->nseq; a++)
 		  {
-		    cacheI[a]=vcalloc (S->len[a], sizeof (int*));
-		    cacheR[a]=vcalloc (S->len[a], sizeof (int));
+		    cacheI[a]=(int**)vcalloc (S->len[a], sizeof (int*));
+		    cacheR[a]=(int*)vcalloc (S->len[a], sizeof (int));
 		  }
 		for (a=0; a<S->nseq; a++)max[a]=S->len[a];
 
@@ -72,8 +72,8 @@ FILE * compare_al_to_lib ( Constraint_list *CL, int start, char *fname, Sequence
 			  if (tot[s2]>=max[s2])
 			    {
 			      max[s2]+=100;
-			      cacheI[s2]=vrealloc (cacheI[s2], max[s2]*sizeof (int*));
-			      cacheR[s2]=vrealloc (cacheR[s2], max[s2]*sizeof (int*));
+			      cacheI[s2]=(int**)vrealloc (cacheI[s2], max[s2]*sizeof (int*));
+			      cacheR[s2]=(int*)vrealloc (cacheR[s2], max[s2]*sizeof (int*));
 			    }
 
 			  cacheI[s2][tot[s2]]=CL->residue_index[s1][r1]+b;
@@ -215,14 +215,14 @@ int aln_compare ( int argc, char *argv[])
       }
     
     argv=standard_initialisation (argv, &argc);
-/*Declarations and Initializations*/
-    alignment1_file=vcalloc ( LONG_STRING, sizeof (char));
-    alignment2_file=vcalloc ( LONG_STRING, sizeof (char));
+    /*Declarations and Initializations*/
+    alignment1_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
+    alignment2_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
     //---Maria added this---//
-    lib_file=vcalloc ( LONG_STRING, sizeof (char));
+    lib_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
     
-    pep1_file=vcalloc ( LONG_STRING, sizeof (char));
-    pep2_file=vcalloc ( LONG_STRING, sizeof (char));
+    pep1_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
+    pep2_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
     
 
     sprintf (compare_mode, "sp");
@@ -231,7 +231,7 @@ int aln_compare ( int argc, char *argv[])
     aln_compare=1;
 
     
-    grep_list=vcalloc ( STRING, sizeof (char**));
+    grep_list=(char***)vcalloc ( STRING, sizeof (char**));
     for ( a=0; a< STRING; a++)grep_list[a]=declare_char (3, STRING);
     n_greps=0;
 
@@ -239,26 +239,26 @@ int aln_compare ( int argc, char *argv[])
     struct_file=declare_char ( MAX_N_STRUC, LONG_STRING);
     struct_format=declare_char (MAX_N_STRUC, STRING);
     
-    n_symbol=vcalloc ( MAX_N_STRUC, sizeof (int));
-    symbol_list=vcalloc (MAX_N_STRUC, sizeof (char**));
+    n_symbol=(int*)vcalloc ( MAX_N_STRUC, sizeof (int));
+    symbol_list=(char***)vcalloc (MAX_N_STRUC, sizeof (char**));
     for ( a=0; a< MAX_N_STRUC; a++)symbol_list[a]=declare_char ( 100, 100);
     
 
    
     
     n_categories=1;
-    category=vcalloc ( MAX_N_CATEGORIES, sizeof (char**));
+    category=(char***)vcalloc ( MAX_N_CATEGORIES, sizeof (char**));
     for ( a=0; a< MAX_N_CATEGORIES; a++)category[a]=declare_char(100, STRING);
-    n_sub_categories=vcalloc ( 100, sizeof (int));
-    category_list=vcalloc ( LONG_STRING, sizeof (char));
+    n_sub_categories=(int*)vcalloc ( 100, sizeof (int));
+    category_list=(char*)vcalloc ( LONG_STRING, sizeof (char));
     sprintf ( category_list, "[*][*]=[ALL]");
     
 
     sim_n_categories=1;
-    sim_category=vcalloc ( MAX_N_CATEGORIES, sizeof (char**));
+    sim_category=(char***)vcalloc ( MAX_N_CATEGORIES, sizeof (char**));
     for ( a=0; a< MAX_N_CATEGORIES; a++)sim_category[a]=declare_char(100, STRING);
-    sim_n_sub_categories=vcalloc ( 100, sizeof (int));
-    sim_category_list=vcalloc ( LONG_STRING, sizeof (char));
+    sim_n_sub_categories=(int*)vcalloc ( 100, sizeof (int));
+    sim_category_list=(char*)vcalloc ( LONG_STRING, sizeof (char));
     sprintf ( sim_category_list, "[*][*]=[ALL]");
     sprintf ( sim_aln, "al1");
     sim_matrix[0]='\0';
@@ -657,7 +657,7 @@ if ( aln_compare==1)pep_compare=0;
        
        
        
-       glob=vcalloc ( A->nseq+1, sizeof (int));
+       glob=(int*)vcalloc ( A->nseq+1, sizeof (int));
        pw_glob=declare_int ( A->nseq+1, A->nseq+1);
 
 
@@ -727,7 +727,7 @@ if ( aln_compare==1)pep_compare=0;
 	    }	
 	else if ( strm( compare_mode, "tc") )
 	{
-	      correct_column = vcalloc(A->len_aln+1, sizeof (int));
+	      correct_column = (int*)vcalloc(A->len_aln+1, sizeof (int));
 	      posA=aln2pos_simple_2(A);
 	      posB=aln2pos_simple_2(B);
 	      for ( a=0; a< A->len_aln; a++)
@@ -749,11 +749,11 @@ if ( aln_compare==1)pep_compare=0;
     
        tot_count=declare_int (n_categories+1, A->nseq+1);
        pos_count=declare_int (n_categories+1, A->nseq+1);
-       pw_tot_count=vcalloc ( A->nseq, sizeof (int**));
+       pw_tot_count=(int***)vcalloc ( A->nseq, sizeof (int**));
        for ( a=0; a< A->nseq; a++)pw_tot_count[a]=declare_int ( A->nseq, n_categories);
 
     
-       pw_pos_count=vcalloc ( A->nseq, sizeof (int**));
+       pw_pos_count=(int***)vcalloc ( A->nseq, sizeof (int**));
        for ( a=0; a< A->nseq; a++)pw_pos_count[a]=declare_int ( A->nseq, n_categories);
  
      /*COMPARISON MODULE*/
@@ -850,7 +850,7 @@ if ( aln_compare==1)pep_compare=0;
        sim_param=analyse_sim ((strcmp (sim_aln, "al1")==0)?A:B, sim);
        
    /*Fill the Result_structure*/
-       R=vcalloc ( 1, sizeof (Result));
+       R=(Result*)vcalloc ( 1, sizeof (Result));
     
        R->grep_list=grep_list;
        R->n_greps=n_greps;
@@ -1241,7 +1241,7 @@ char * get_structure_residue (int seq, int res, Structure *ST)
     int a;
     char *s;
     
-    s=vcalloc ( ST->n_fields+1, sizeof (char));
+    s=(char*)vcalloc ( ST->n_fields+1, sizeof (char));
     for (a=0; a< ST->n_fields; a++)
 	s[a]=ST->struc[seq][res][a];
     s[a]='\0';
@@ -1324,7 +1324,7 @@ int parse_category_list ( char *category_list_in, char ***category, int*n_sub_ca
     int n,a;
     char *category_list;
     char *y,*z;
-    category_list=vcalloc ( strlen(category_list_in)+1, sizeof (char));
+    category_list=(char*)vcalloc ( strlen(category_list_in)+1, sizeof (char));
     sprintf (category_list, "%s", category_list_in);
 
     n=0;

@@ -12,6 +12,7 @@
 #include "util_lib_header.h"
 #include "define_header.h"
 #include "dp_lib_header.h"
+#include "util_declare.h"
 
 void free_pair_wise()
 {
@@ -33,11 +34,11 @@ int *** duplicate_residue_index (int ***r)
   int ***nr;
 
   d1=read_array_size_new(r);
-  nr=vcalloc ( d1, sizeof (int**));
+  nr=(int***)vcalloc ( d1, sizeof (int**));
   for (a=0; a<d1; a++)
     {
       d2=read_array_size_new (r[a])-1;
-      nr[a]=vcalloc ( d2+1, sizeof (int*));
+      nr[a]=(int**)vcalloc ( d2+1, sizeof (int*));
       for (b=0; b<d2; b++)
 	{
 	  d3=read_array_size_new (r[a][b]);
@@ -52,13 +53,13 @@ int *** declare_residue_index (Sequence *S)
   int a,b,c;
 
   if ( !S)return NULL;
-  r=vcalloc ( S->nseq, sizeof (int**));
+  r=(int***)vcalloc ( S->nseq, sizeof (int**));
   for ( a=0; a<S->nseq; a++)
     {
-      r[a]=vcalloc (S->len[a]+2, sizeof (int*));//The empty terminator makes a scan possible without knowing len
+      r[a]=(int**)vcalloc (S->len[a]+2, sizeof (int*));//The empty terminator makes a scan possible without knowing len
       for ( b=0; b<=S->len[a]; b++)
 	{
-	  r[a][b]=vcalloc ( 1, sizeof (int));
+	  r[a][b]=(int*)vcalloc ( 1, sizeof (int));
 	  r[a][b][0]=1;
 	}
     }
@@ -74,7 +75,7 @@ Constraint_list * declare_constraint_list ( Sequence *S, char *name, int *L, int
     {
     Constraint_list *CL;
 
-    CL=vcalloc (1, sizeof ( Constraint_list));
+    CL=( Constraint_list*)vcalloc (1, sizeof ( Constraint_list));
 
 
     CL->S=S;
@@ -99,11 +100,11 @@ Constraint_list * declare_constraint_list ( Sequence *S, char *name, int *L, int
 
 
     CL->weight_field=WE;
-    if ( S)CL->seq_for_quadruplet=vcalloc ( S->nseq, sizeof (int));
-    CL->Prot_Blast=vcalloc ( 1, sizeof ( Blast_param));
-    CL->DNA_Blast=vcalloc ( 1, sizeof ( Blast_param));
-    CL->Pdb_Blast=vcalloc ( 1, sizeof ( Blast_param));
-    CL->TC=vcalloc (1, sizeof (TC_param));
+    if ( S)CL->seq_for_quadruplet=(int*)vcalloc ( S->nseq, sizeof (int));
+    CL->Prot_Blast=( Blast_param*)vcalloc ( 1, sizeof ( Blast_param));
+    CL->DNA_Blast=( Blast_param*)vcalloc ( 1, sizeof ( Blast_param));
+    CL->Pdb_Blast=( Blast_param*)vcalloc ( 1, sizeof ( Blast_param));
+    CL->TC=(TC_param*)vcalloc (1, sizeof (TC_param));
 
     //New data structure
     CL->residue_index=declare_residue_index (S);
@@ -126,7 +127,7 @@ Constraint_list *free_constraint_list4lib_computation (Constraint_list *CL)
 Constraint_list *duplicate_constraint_list4lib_computation (Constraint_list *CL)
 {
   Constraint_list *SCL;
-  SCL=vcalloc (1, sizeof ( Constraint_list));
+  SCL=( Constraint_list*)vcalloc (1, sizeof ( Constraint_list));
   SCL[0]=CL[0];
   SCL->S=CL->S;
   SCL->RunName=CL->RunName;
@@ -165,7 +166,7 @@ Constraint_list *copy_constraint_list (Constraint_list *CL, int mode)
 	NCL=declare_constraint_list (S, NULL, NULL,0, NULL, NULL);
       else
 	{
-	  NCL=vcalloc ( 1, sizeof (Constraint_list));
+	  NCL=( Constraint_list*)vcalloc ( 1, sizeof (Constraint_list));
 	  NCL[0]=CL[0];
 	}
 
@@ -175,7 +176,7 @@ Constraint_list *copy_constraint_list (Constraint_list *CL, int mode)
       NCL->S=S;
       /*master*/
       if (mode==HARD_COPY && CL->master)
-	{NCL->master=vcalloc ( S->nseq, sizeof(int));
+	{NCL->master=(int*)vcalloc ( S->nseq, sizeof(int));
 	for ( a=0; a< S->nseq; a++)
 	  NCL->master[a]=CL->master[a];
 	}
@@ -196,7 +197,7 @@ Constraint_list *copy_constraint_list (Constraint_list *CL, int mode)
       NCL->ktupDM=(mode==HARD_COPY)?duplicate_distance_matrix (CL->ktupDM):CL->ktupDM;
       NCL->RunName=CL->RunName;
 
-      if (  mode==HARD_COPY && CL->translation){NCL->translation=vcalloc ((CL->S)->nseq, sizeof (int)); for ( a=0; a< (CL->S)->nseq; a++)NCL->translation[a]=CL->translation[a];}
+      if (  mode==HARD_COPY && CL->translation){NCL->translation=(int*)vcalloc ((CL->S)->nseq, sizeof (int)); for ( a=0; a< (CL->S)->nseq; a++)NCL->translation[a]=CL->translation[a];}
       else{NCL->translation=CL->translation;}
 
       NCL->out_aln_format=(mode==HARD_COPY)?duplicate_char (CL->out_aln_format, -1, -1):CL->out_aln_format;
@@ -310,7 +311,7 @@ Constraint_list *copy_constraint_list (Constraint_list *CL, int mode)
    /*extention properties:*/
       NCL->nseq_for_quadruplet=CL->nseq_for_quadruplet;
       if (mode==HARD_COPY && CL->seq_for_quadruplet)
-	{NCL->seq_for_quadruplet=vcalloc ( S->nseq, sizeof(int));
+	{NCL->seq_for_quadruplet=(int*)vcalloc ( S->nseq, sizeof(int));
 	for ( a=0; a< S->nseq; a++)
 	  NCL->seq_for_quadruplet[a]=CL->seq_for_quadruplet[a];
 	}
@@ -459,7 +460,7 @@ Distance_matrix * duplicate_distance_matrix ( Distance_matrix *DMin)
   Distance_matrix *DM;
   if (!DMin) return NULL;
 
-  DM=vcalloc ( 1, sizeof (Distance_matrix));
+  DM=(Distance_matrix*)vcalloc ( 1, sizeof (Distance_matrix));
   DM->similarity_matrix=duplicate_int ( DMin->similarity_matrix, -1, -1);
   DM->distance_matrix=duplicate_int ( DMin->distance_matrix, -1, -1);
   DM->score_similarity_matrix=duplicate_int ( DMin->score_similarity_matrix, -1, -1);
@@ -478,7 +479,7 @@ Moca * duplicate_moca ( Moca *m)
 
 	if ( m==NULL)return m;
 
-	nm=vcalloc ( 1, sizeof (Moca));
+	nm=(Moca*)vcalloc ( 1, sizeof (Moca));
 
 	nm->moca_scale=m->moca_scale;
 	nm->evaluate_domain=m->evaluate_domain;
@@ -505,7 +506,7 @@ Moca * free_moca ( Moca *m)
 TC_param * duplicate_TC_param ( TC_param*B)
 {
   TC_param *N;
-  N=vcalloc (1, sizeof ( TC_param));
+  N=(TC_param*)vcalloc (1, sizeof ( TC_param));
   memcpy(B, N, sizeof(TC_param));
   return N;
   }
@@ -523,7 +524,7 @@ TC_param * free_TC_param ( TC_param*B)
 Blast_param * duplicate_blast_param ( Blast_param*B)
 {
   Blast_param *N;
-  N=vcalloc (1, sizeof ( Blast_param));
+  N=(Blast_param*)vcalloc (1, sizeof ( Blast_param));
   sprintf ( N->blast_server, "%s", B->blast_server);
   sprintf ( N->db, "%s", B->db);
   N->min_id=B->min_id;
@@ -548,12 +549,12 @@ Structure* declare_structure ( int n, char **array)
     Structure *S;
     int a;
 
-    S=vcalloc (1, sizeof (Structure));
+    S=(Structure*)vcalloc (1, sizeof (Structure));
     S->n_fields=1;
     S->nseq=n;
 
-    S->struc=vcalloc ( n, sizeof (int**));
-    S->len=vcalloc ( n, sizeof (int));
+    S->struc=(int***)vcalloc ( n, sizeof (int**));
+    S->len=(int*)vcalloc ( n, sizeof (int));
     for ( a=0; a< n; a++)
         {
 	S->len[a]=strlen(array[a]);
@@ -570,7 +571,7 @@ Structure *extend_structure ( Structure *S)
     for ( a=0; a< S->nseq; a++)
         {
 	for ( b=0; b< S->len[a]; b++)
-		S->struc[a][b]=vrealloc ( S->struc[a][b],( S->n_fields+1)*sizeof (int));
+		S->struc[a][b]=(int*)vrealloc ( S->struc[a][b],( S->n_fields+1)*sizeof (int));
 	}
     S->n_fields++;
     return S;
@@ -598,7 +599,7 @@ Sequence * declare_sequence ( int min, int max, int nseq)
 
 
 
-    LS=vcalloc (1, sizeof ( Sequence));
+    LS=( Sequence*)vcalloc (1, sizeof ( Sequence));
 
     LS->seq_comment=declare_char ( nseq,COMMENT_SIZE);
     LS->aln_comment=declare_char ( nseq,COMMENT_SIZE);
@@ -607,13 +608,13 @@ Sequence * declare_sequence ( int min, int max, int nseq)
     LS->seq=declare_char ( nseq, max+1);
     LS->name=declare_char( nseq,MAXNAMES+1);
 
-    LS->len=vcalloc ( nseq, sizeof (int));
+    LS->len=(int*)vcalloc ( nseq, sizeof (int));
     LS->max_len=max;
     LS->min_len=min;
     LS->nseq=nseq;
     LS->max_nseq=nseq;
-    LS->type=vcalloc(30, sizeof (char));
-    LS->T=declare_arrayN(2, sizeof (Template), nseq, 1);
+    LS->type=(char*)vcalloc(30, sizeof (char));
+    LS->T=(Template**)declare_arrayN(2, sizeof (Template), nseq, 1);
 
 
     LS->dc=declare_int (nseq, 2);
@@ -638,10 +639,10 @@ Sequence * realloc_sequence   (Sequence *OUT, int new_nseq, int max_len)
 
 
 	if (OUT->genome_co != NULL)
-		OUT->genome_co = vrealloc(OUT->genome_co, new_nseq * sizeof(Genomic_info));
+		OUT->genome_co =(Genomic_info*)vrealloc(OUT->genome_co, new_nseq * sizeof(Genomic_info));
 
-	OUT->file    =new_realloc_char ( OUT->file,    new_nseq,STRING+1);
-	OUT->len     =vrealloc     ( OUT->len,     (new_nseq+1)*sizeof (int));
+	OUT->file=new_realloc_char ( OUT->file,    new_nseq,STRING+1);
+	OUT->len=(int*)vrealloc( OUT->len,     (new_nseq+1)*sizeof (int));
 
 	OUT->T=(Template**)realloc_arrayN (2, (void **)OUT->T,sizeof (Template), new_nseq, 1);
 	OUT->dc=(int **)realloc_arrayN (2, (void **)OUT->dc,sizeof (int), new_nseq, 2);
@@ -659,7 +660,7 @@ Sequence * duplicate_sequence (Sequence *S )
 	LS=declare_sequence (S->min_len, S->max_len, S->nseq);
 
 	if (S->genome_co != NULL)
-		LS->genome_co = vcalloc(S->nseq, sizeof(Genomic_info));
+		LS->genome_co =(Genomic_info*) vcalloc(S->nseq, sizeof(Genomic_info));
 	for (b=0, a=0; a<S->nseq; ++a)
 	  {
 	    if (S->seq && S->seq[a])
@@ -693,7 +694,7 @@ Sequence * duplicate_sequence (Sequence *S )
 				tmp->end = tmp_ori->end;
 				tmp->seg_len = tmp_ori->seg_len;
 // 				printf("A: %i\n", a);
-				tmp->seg_name = vcalloc(strlen(tmp_ori->seg_name)+1, sizeof(char));
+				tmp->seg_name =(char*) vcalloc(strlen(tmp_ori->seg_name)+1, sizeof(char));
 				strcpy(tmp->seg_name, tmp_ori->seg_name);
 // 				printf("NAME %s\n", tmp->seg_name);
 // 				printf("-%s %i-\n", tmp_ori->seg_name, tmp_ori->start);
@@ -756,14 +757,14 @@ Weights* declare_weights ( int nseq)
 	{
 	Weights *W;
 
-	W=vcalloc ( 1, sizeof ( Weights));
-	W->comments=vcalloc ( 1000, sizeof (char));
+	W=(Weights*)vcalloc ( 1, sizeof ( Weights));
+	W->comments=(char*)vcalloc ( 1000, sizeof (char));
 	W->nseq=nseq;
-	W->mode=vcalloc (FILENAMELEN, sizeof (char));
+	W->mode=(char*)vcalloc (FILENAMELEN, sizeof (char));
 	W->seq_name= declare_char ( W->nseq*2, 200);
 	W->PW_SD=declare_float ( W->nseq, W->nseq);
 	W->PW_ID=declare_float ( W->nseq, W->nseq);
-	W->SEQ_W=vcalloc ( W->nseq, sizeof ( float));
+	W->SEQ_W=(float*)vcalloc ( W->nseq, sizeof ( float));
 	return W;
 	}
 Weights* duplicate_weights (Weights *W)
@@ -843,10 +844,10 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	    if ( A->generic_comment)
 	      {
 		vfree(B->generic_comment);
-		B->generic_comment=vcalloc (strlen(A->generic_comment)+1, sizeof (char));
+		B->generic_comment=(char*)vcalloc (strlen(A->generic_comment)+1, sizeof (char));
 		sprintf ( B->generic_comment, "%s", A->generic_comment);
 	      }
-	    if ( (A->S)==NULL){vfree (B->len); B->len=vcalloc ( A->max_n_seq, sizeof (int));}
+	    if ( (A->S)==NULL){vfree (B->len); B->len=(int*)vcalloc ( A->max_n_seq, sizeof (int));}
 	    ga_memcpy_int ( A->len, B->len, B->nseq);
 
 	    B->seq_comment=copy_char ( A->seq_comment,  B->seq_comment,  -1,-1);
@@ -890,7 +891,7 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 
 /*Score*/
 
-	    if ( (A->S)==NULL){vfree (B->score_seq); B->score_seq=vcalloc ( A->max_n_seq, sizeof (int));}
+	    if ( (A->S)==NULL){vfree (B->score_seq); B->score_seq=(int*)vcalloc ( A->max_n_seq, sizeof (int));}
 	    ga_memcpy_int(  A->score_seq,B->score_seq,B->nseq);
 	    B->score_res=A->score_res;
 
@@ -991,7 +992,7 @@ Alignment *declare_aln2 ( int nseq, int len)
 	  Sequence *S;
 	  Alignment *A;
 
-	  S=vcalloc ( 1, sizeof ( Sequence));
+	  S=(Sequence*)vcalloc ( 1, sizeof ( Sequence));
 	  S->nseq=nseq;
 	  S->max_len=len;
 
@@ -1016,7 +1017,7 @@ Alignment *declare_Alignment ( Sequence *S)
 	*/
 
 
-	LA=vcalloc (1, sizeof ( Alignment));
+	LA=( Alignment*)vcalloc (1, sizeof ( Alignment));
 	aln_stack (LA, DECLARE_ALN);
 	if ( S==NULL)
 	    {
@@ -1047,13 +1048,13 @@ Alignment *declare_Alignment ( Sequence *S)
 	//order[a][2]: used by sw_gotoh_pair_wise
 	//order[a][3]: used by sw_gotoh_pair_wise
 	//order[a][4]: weight, -1
-	LA->score_seq= vcalloc (LA->max_n_seq, sizeof (int));
+	LA->score_seq= (int*)vcalloc (LA->max_n_seq, sizeof (int));
 
 	for ( a=0; a< LA->max_n_seq; a++)LA->order[a][0]=a;
 
 	LA->len_aln=0;
 	LA->score_aln=0;
-	LA->len=vcalloc (LA->max_n_seq, sizeof (int));
+	LA->len=(int*)vcalloc (LA->max_n_seq, sizeof (int));
 
 	if (S && S->name)for ( a=0; a<S->nseq; a++)
 	  {
@@ -1100,7 +1101,7 @@ Alignment * realloc_alignment2 ( Alignment *A, int n_nseq, int n_len)
 
 	else
 	    {
-	        A->len          =vrealloc( A->len      , sizeof (int)*n_nseq);
+	        A->len=(int*)vrealloc( A->len, sizeof (int)*n_nseq);
 		for (a=nseq; a< n_nseq; a++)A->len[a]=0;
 
 		A->declared_len =n_len;
@@ -1123,7 +1124,7 @@ Alignment * realloc_alignment2 ( Alignment *A, int n_nseq, int n_len)
 		if ( A->cdna_cache)A->cdna_cache=new_realloc_int  ( A->cdna_cache, n_nseq,n_len);
 
 
-		A->score_seq    =vrealloc( A->score_seq, sizeof (int)*(n_nseq));
+		A->score_seq=(int*)vrealloc( A->score_seq, sizeof (int)*(n_nseq));
 		for ( a=nseq; a< n_nseq; a++)A->score_seq[a]=0;
 
 
@@ -1146,7 +1147,7 @@ long aln_stack (Alignment *A, int mode)
       if ( size==max_size)
 	{
 	  max_size+=1000;
-	  list=vrealloc (list, max_size*sizeof (long));
+	  list=(long int*)vrealloc (list, max_size*sizeof (long));
 	}
       list[size++]=(long)A;
       return 0;
@@ -1260,10 +1261,10 @@ Profile   *copy_profile   (Profile *P1)
 Profile   *declare_profile(char *alphabet, int len)
 {
   Profile *P;
-  P=vcalloc ( 1, sizeof ( Profile));
+  P=( Profile*)vcalloc ( 1, sizeof ( Profile));
   P->alp_size=strlen(alphabet);
   P->max_len=len;
-  P->alphabet=vcalloc ( strlen (alphabet)+2, sizeof (char));
+  P->alphabet=(char*)vcalloc ( strlen (alphabet)+2, sizeof (char));
   sprintf ( P->alphabet, "%s", alphabet);
 
   P->count=declare_int( P->alp_size+2, len);
@@ -1375,7 +1376,7 @@ void * vmalloc ( size_t size)
 		}
 	    else
 	      {
-		M=x;
+		M=(Memcontrol*)x;
 		M[0].size=size;
 		M[0].size_element=0;
 		sprintf ( M[0].check, "dy");
@@ -1405,7 +1406,10 @@ void *sub_vcalloc ( size_t nobj, size_t size, int MODE)
 	else x=vmalloc (nobj*size);
 
 
-	M=x;M-=2;M[0].size_element=size;M+=2;x=M;
+	M=(Memcontrol*)x;
+	M-=2;M[0].size_element=size;
+	M+=2;
+	x=M;
 
 	if ( x==NULL)
 		{
@@ -1443,7 +1447,7 @@ void *vrealloc ( void *p, size_t size)
 	  }
 	else
 	  {
-	    M=p;
+	    M=(Memcontrol*)p;
 	    M-=2;
 	    i_size=M[0].size;
 	    p=M;
@@ -1456,7 +1460,7 @@ void *vrealloc ( void *p, size_t size)
 		x=realloc ( p, size+2*sizeof(Memcontrol));
 
 		if ( x==NULL){crash ( "\nFAILED TO ALLOCATE REQUIRED MEMORY (realloc)\n");return NULL;}
-		M=x;
+		M=(Memcontrol*)x;
 		M[0].size=size;
 		M+=2;
 		x=M;
@@ -1474,7 +1478,7 @@ void vfree ( void *p)
        if ( !p)return;
        else
 	 {
-	   M=p;
+	   M=(Memcontrol*)p;
 	   M-=2;
 	   size=M[0].size;
 
@@ -1587,7 +1591,7 @@ void * declare_arrayNnomemset (int ndim, size_t size, ...)
 
   va_start (ap, size);
 
-  array=vcalloc (ndim, sizeof (int));
+  array=(int*)vcalloc (ndim, sizeof (int));
   for ( a=0; a< ndim; a++)
     {
       array[a]=va_arg (ap,int);
@@ -1599,7 +1603,7 @@ void * declare_arrayNnomemset (int ndim, size_t size, ...)
   if ( ndim==2)
     {
 
-      p=vcalloc_nomemset (array[0], sizeof ( void*));
+      p=(void**)vcalloc_nomemset (array[0], sizeof ( void*));
       for (a=0; a< array[0]; a++)
 	{
 	p[a]=vcalloc_nomemset (array[1], size);
@@ -1607,7 +1611,7 @@ void * declare_arrayNnomemset (int ndim, size_t size, ...)
     }
   else
     {
-      p=declare_arrayN2nomemset (ndim, array, size);
+      p=(void**)declare_arrayN2nomemset (ndim, array, size);
     }
   vfree (array);
   return p;
@@ -1620,13 +1624,13 @@ void *declare_arrayN2nomemset ( int ndim, int *A, size_t size)
 
   if ( ndim>1)
     {
-      p=vcalloc_nomemset (A[0], sizeof (void*));
+      p=(void**)vcalloc_nomemset (A[0], sizeof (void*));
       for ( a=0; a<A[0]; a++)
     	p[a]=declare_arrayN2(ndim-1, A+1, size);
     }
   else
     {
-      p=vcalloc_nomemset (A[0], size);
+      p=(void**)vcalloc_nomemset (A[0], size);
     }
   return p;
 }
@@ -1641,7 +1645,7 @@ void * declare_arrayN (int ndim, size_t size, ...)
 
   va_start (ap, size);
 
-  array=vcalloc (ndim, sizeof (int));
+  array=(int*)vcalloc (ndim, sizeof (int));
   for ( a=0; a< ndim; a++)
     {
       array[a]=va_arg (ap,int);
@@ -1653,13 +1657,13 @@ void * declare_arrayN (int ndim, size_t size, ...)
   if ( ndim==2)
     {
 
-      p=vcalloc_nomemset (array[0], sizeof ( void*));
+      p=(void**)vcalloc_nomemset (array[0], sizeof ( void*));
       for (a=0; a< array[0]; a++)
 	p[a]=vcalloc (array[1], size);
     }
   else
     {
-      p=declare_arrayN2 (ndim, array, size);
+      p=(void**)declare_arrayN2 (ndim, array, size);
     }
   vfree (array);
   return p;
@@ -1672,13 +1676,13 @@ void *declare_arrayN2 ( int ndim, int *A, size_t size)
 
   if ( ndim>1)
     {
-      p=vcalloc_nomemset (A[0], sizeof (void*));
+      p=(void**)vcalloc_nomemset (A[0], sizeof (void*));
       for ( a=0; a<A[0]; a++)
     	p[a]=declare_arrayN2(ndim-1, A+1, size);
     }
   else
     {
-      p=vcalloc (A[0], size);
+      p=(void**)vcalloc (A[0], size);
     }
   return p;
 }
@@ -1699,9 +1703,9 @@ int **declare_int2 (int f, int *s, int d)
 {
   int **r;
   int a;
-  r=vcalloc ( f, sizeof (int*));
+  r=(int**)vcalloc ( f, sizeof (int*));
   for (a=0; a<f; a++)
-    r[a]=vcalloc (s[a]+d, sizeof (int));
+    r[a]=(int*)vcalloc (s[a]+d, sizeof (int));
   return r;
 }
 
@@ -1713,7 +1717,7 @@ char *resize_string (char *buf)
   int l;
 
   l=strlen (buf);
-  nbuf=vcalloc (l+1, sizeof (char));
+  nbuf=(char*)vcalloc (l+1, sizeof (char));
   sprintf (nbuf, "%s",buf);
   vfree (buf);
   return nbuf;
@@ -1748,7 +1752,7 @@ Alignment ** declare_aln_array ( int first)
     int a;
 
 
-    array=vcalloc (first, sizeof (Alignment*));
+    array=(Alignment**)vcalloc (first, sizeof (Alignment*));
     for ( a=0; a< first; a++)
       array[a]=declare_Alignment (NULL);
     return array;
@@ -1774,7 +1778,7 @@ void ** realloc_arrayN(int ndim,void **main_array,size_t size, ...)
   /*Dim sizes are the absolute size (not the extension*/
   /*If array getting shorter, memory is Not Claimed back*/
 
-  array=vcalloc (ndim, sizeof (int));
+  array=(int*)vcalloc (ndim, sizeof (int));
   va_start (ap, size);
   for ( a=0; a< ndim; a++)
     {
@@ -1799,15 +1803,15 @@ void **realloc_arrayN2 ( int ndim, void ** p, int *A, size_t size)
   if ( ndim>1)
     {
       o=read_array_size (p,sizeof (void*));
-      if (A[0]>o)p=vrealloc (p, sizeof (void*)*A[0]);
+      if (A[0]>o)p=(void**)vrealloc (p, sizeof (void*)*A[0]);
       n=(A[0]==-1)?o:A[0];
       for ( a=0; a<n; a++)
-    	p[a]=realloc_arrayN2(ndim-1,p[a], A+1, size);
+    	p[a]=(void*)realloc_arrayN2(ndim-1, (void**)p[a], A+1, size);
     }
   else
     {
       o=read_array_size (p, size);
-      if (A[0]>o)p=vrealloc (p, size*A[0]);
+      if (A[0]>o)p=(void**)vrealloc (p, size*A[0]);
     }
   return p;
 }
@@ -1829,7 +1833,7 @@ void ** realloc_array (void **array,size_t size, int first, int second, int ext1
   d2=second+ext2;
 
   for ( a=d1; a<first; a++)vfree (array[a]);
-  array=vrealloc (array, sizeof (void*)*d1);
+  array=(void**)vrealloc (array, sizeof (void*)*d1);
 
   if ( d2!=second)
     {
@@ -1872,47 +1876,27 @@ type ** function1 ( type **array, int ext1, int ext2)\
 	int i,j;\
 	if (ext1>first)\
 	{\
-		array=vrealloc(array, sizeof(type*)*ext1);\
+		array=(type**)vrealloc(array, sizeof(type*)*ext1);\
 		for (i=first; i<ext1; ++i)\
-			array[i]=vcalloc(ext2,sizeof(type));\
+			array[i]=(type*)vcalloc(ext2,sizeof(type));\
 	}\
 	else if (ext1<first)\
 	{\
 		for (i=ext1; i<first; ++i)\
 			vfree(array[i]);\
-		array=vrealloc(array, sizeof(type*)*ext1);\
+		array=(type**)vrealloc(array, sizeof(type*)*ext1);\
 	}\
 	if (ext2!=second)\
 	{\
 		if (ext1>first)\
 			ext1=first;\
 		for (i=0; i<ext1; ++i)\
-			array[i]=vrealloc(array[i], sizeof(type)*ext2);\
+			array[i]=(type*)vrealloc(array[i], sizeof(type)*ext2);\
 	}\
-	return array;\
+	return  array;\
 }
 
-#define NEW_REALLOC_ARRAY_OLD(type,wf,rf,function1,function2,function3)\
-type ** function1 ( type **array, int ext1, int ext2)\
-{\
-	int a, b;\
-	int first, l1;\
-	int second, l2;\
-	type **new_array;\
-	\
-	first=rf(array,sizeof (type*));\
-	second=rf(array[0],sizeof (type));\
-	\
-	if ( ext1==-1)ext1=first;\
-	if ( ext2==-1)ext2=second;\
-	l1=MIN(ext1, first);\
-	l2=MIN(ext2, second);\
-	new_array=declare_arrayN(2,sizeof(type),ext1, ext2);\
-	for ( a=0; a<l1; a++)\
-		for ( b=0; b<l2; b++)new_array[a][b]=array[a][b];\
-			function3(array, -1);\
-	return new_array;\
-}
+
 
 
 NEW_REALLOC_ARRAY(short,write_size_short,read_size_short,new_realloc_short,declare_short,free_short)
@@ -1925,7 +1909,6 @@ Alignment ** realloc_aln_array ( Alignment **array, int ext1)
     int a;
     int first;
 
-
     if ( array==NULL)
 	 {
 	 array=declare_aln_array(ext1);
@@ -1934,14 +1917,14 @@ Alignment ** realloc_aln_array ( Alignment **array, int ext1)
      first=read_array_size ( array, sizeof ( Alignment *));
      if ( ext1>0)
 	{
-	array=vrealloc ( array, (sizeof (Alignment*))*(first+ext1));
+	array=(Alignment**)vrealloc ( array, (sizeof (Alignment*))*(first+ext1));
         for ( a=first; a<first+ext1; a++)array[a]=declare_Alignment (NULL);
 	}
     else if ( ext1==0);
     else if ( ext1<0)
          {
 	 for ( a=first-1; a>=(first+ext1);a--)free_Alignment (array[a]);
-	 array=vrealloc ( array, (sizeof (Alignment*))*(first+ext1));
+	 array=(Alignment**)vrealloc ( array, (sizeof (Alignment*))*(first+ext1));
 	 }
      return array;
     }
@@ -1952,17 +1935,17 @@ Alignment ** realloc_aln_array ( Alignment **array, int ext1)
 /*                                                                      */
 /*                                                                      */
 /************************************************************************/
+
 #define FREE_ARRAY(type,wf,rf,function) \
 type ** function (type **array, int first)\
     {\
-      return free_arrayN((void*)array, 2);\
+      return (type **)free_arrayN((void*)array, 2);\
     }
 FREE_ARRAY(short,write_size_short,read_size_short,free_short)
 FREE_ARRAY(char,write_size_char,read_size_char,free_char)
 FREE_ARRAY(int,write_size_int,read_size_int,free_int)
 FREE_ARRAY(float,write_size_float,read_size_float,free_float)
 FREE_ARRAY(double,write_size_double,read_size_double,free_double)
-
 
 
 Alignment ** free_aln_array (Alignment **array)
@@ -1984,11 +1967,11 @@ Fname *declare_fname (int size)
 
    size+=strlen (get_home_4_tcoffee())+FILENAMELEN+1;
 
-   F=vcalloc ( 1, sizeof (Fname));
-   F->name  =vcalloc ( size, sizeof (char));
-   F->path  =vcalloc ( size, sizeof (char));
-   F->suffix=vcalloc ( size, sizeof (char));
-   F->full=vcalloc ( size, sizeof (char));
+   F=(Fname*)vcalloc ( 1, sizeof (Fname));
+   F->name  =(char*)vcalloc ( size, sizeof (char));
+   F->path  =(char*)vcalloc ( size, sizeof (char));
+   F->suffix=(char*)vcalloc ( size, sizeof (char));
+   F->full=(char*)vcalloc ( size, sizeof (char));
    return F;
    }
 

@@ -33,7 +33,7 @@ double int_logB (int *i, int n)
 	static double *array;
 	int a;
 	
-	if ( array==NULL)array=vcalloc ( 1000, sizeof (double));
+	if ( array==NULL)array=(double*)vcalloc ( 1000, sizeof (double));
 	
 	for ( a=0; a< n; a++)
 		array[a]=(double)i[a];
@@ -44,7 +44,7 @@ double float_logB (float *i, int n)
 	static double *array;
 	int a;
 	 
-	if ( array==NULL)array=vcalloc ( 1000, sizeof (double));
+	if ( array==NULL)array=(double*)vcalloc ( 1000, sizeof (double));
 	for ( a=0; a< n; a++)
 		array[a]=(double)i[a];
 	return double_logB(array, n);
@@ -66,12 +66,12 @@ double *** make_lup_table ( Mixture *D)
 	int a, b, c;
 	double ***lup;
 	
-	lup=vcalloc ( 9, sizeof (double**));
+	lup=(double***)vcalloc ( 9, sizeof (double**));
 	for ( a=0; a<9; a++)
 		{
-		lup[a]=vcalloc ( 20, sizeof (double*));
+		lup[a]=(double**)vcalloc ( 20, sizeof (double*));
 		for ( b=0; b< 20; b++)
-			lup[a][b]=vcalloc ( 200, sizeof (double));
+			lup[a][b]=(double*)vcalloc ( 200, sizeof (double));
 		}
 	
 	for ( a=0; a< 9; a++)
@@ -143,7 +143,7 @@ double *compute_matrix_p ( double *n,int Nseq)
 	      matrix=read_matrice ( "pam250mt");	  
 	    }
 	  
-	  R=vcalloc ( 26, sizeof (double));
+	  R=(double*)vcalloc ( 26, sizeof (double));
 
 
 	  for ( a=0; a<26; a++)
@@ -190,12 +190,12 @@ double *compute_dirichlet_p ( double *n,int Nseq)
 		D=read_dirichlet (NULL);
 		
 		D->n_aa=20;
-		R=vcalloc ( D->n_aa, sizeof (double));
-		D->double_logB_alpha=vcalloc (D->N_COMPONENT , sizeof (double));
+		R=(double*)vcalloc ( D->n_aa, sizeof (double));
+		D->double_logB_alpha=(double*)vcalloc (D->N_COMPONENT , sizeof (double));
 		
-		D->exponant_list=vcalloc (D->N_COMPONENT , sizeof (double));
+		D->exponant_list=(double*)vcalloc (D->N_COMPONENT , sizeof (double));
 		precompute_log_B ( D->double_logB_alpha,D);
-		D->alpha_tot=vcalloc (D->N_COMPONENT , sizeof (double));
+		D->alpha_tot=(double*)vcalloc (D->N_COMPONENT , sizeof (double));
 		for ( a=0; a<D->N_COMPONENT; a++)
 			for ( b=0; b< D->n_aa; b++)
 				D->alpha_tot[a]+=D->ALPHA[a][b];
@@ -274,14 +274,14 @@ Mixture * read_dirichlet ( char *name)
 	Mixture *D;
 
 
-	D=vcalloc ( 1, sizeof (Mixture));
+	D=(Mixture*)vcalloc ( 1, sizeof (Mixture));
 	
 	
 	D->N_COMPONENT=9;
-	D->ALPHA=vcalloc (9, sizeof (double*));
+	D->ALPHA= (double**)vcalloc (9, sizeof (double*));
 	for ( a=0; a< 9; a++)
-		D->ALPHA[a]=vcalloc (20, sizeof (double));
-	D->DM_Q=vcalloc (9, sizeof (double));
+		D->ALPHA[a]= (double*)vcalloc (20, sizeof (double));
+	D->DM_Q= (double*)vcalloc (9, sizeof (double));
 	
 	if (name!=NULL)
 	  {

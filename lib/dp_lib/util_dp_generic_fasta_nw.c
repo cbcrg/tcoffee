@@ -91,15 +91,15 @@ Dp_Result * make_fast_generic_dp_pair_wise (Alignment *A, int*ns, int **l_s,Dp_M
 	      mJ=max_len_diag;
 	      
 	      
-	      Mat  =vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
-	      LMat =vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
-	      trace=vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
+	      Mat  =(int*)vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
+	      LMat =(int*)vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
+	      trace=(int*)vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
 	      
 	    }
 	  
-	  prev=vcalloc ( M->nstate, sizeof (int));
-	  DPR=vcalloc ( 1, sizeof ( Dp_Result));
-	  DPR->traceback=vcalloc (max_len_al, sizeof (int));
+	  prev=(int*)vcalloc ( M->nstate, sizeof (int));
+	  DPR=( Dp_Result*)vcalloc ( 1, sizeof ( Dp_Result));
+	  DPR->traceback=(int*)vcalloc (max_len_al, sizeof (int));
 	  
 /*PREPARE THE EVALUATION*/      
 	  

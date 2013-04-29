@@ -26,8 +26,8 @@ Job_TC* print_lib_job ( Job_TC *job,char *string, ...)
   n=atoi (list[0]);
   
 
-  name =vcalloc ( (n-1)/2, sizeof (char*));
-  value=vcalloc ( (n-1)/2, sizeof (char*));
+  name =(char**)vcalloc ( (n-1)/2, sizeof (char*));
+  value=(char**)vcalloc ( (n-1)/2, sizeof (char*));
   
   
   va_start (ap, string);
@@ -64,17 +64,17 @@ Job_TC *print_lib_job2 ( Job_TC* job, int n, char **name, char **value)
   
   if ( job==NULL)
     {
-      job=vcalloc ( 1, sizeof (Job_TC));
-      job->pl=vcalloc (100, sizeof (char*));job->pl[job->np++]=(void*)job->pl;
+      job=(Job_TC*)vcalloc ( 1, sizeof (Job_TC));
+      job->pl=(char**)vcalloc (100, sizeof (char*));job->pl[job->np++]=(char*)job->pl;
       job->jobid=njobs++;
     }
   
   for ( a=0; a< n; a++)
     {
       int string=0;
-      if ( strstr(name[a], "control") && !job->control){job->control=vcalloc ( 1, sizeof (Job_control_TC));job->pl[job->np++]=(void*)job->control;}
-      else if ( strstr(name[a], "io") && !job->io){job->io=vcalloc ( 1, sizeof (Job_io_TC));job->pl[job->np++]=(void*)job->io;}
-      else if ( strstr(name[a], "param") && !job->param){job->param=vcalloc ( 1, sizeof (Job_param_TC));job->pl[job->np++]=(void*)job->param;}
+      if ( strstr(name[a], "control") && !job->control){job->control=(Job_control_TC*)vcalloc ( 1, sizeof (Job_control_TC));job->pl[job->np++]=(char*)job->control;}
+      else if ( strstr(name[a], "io") && !job->io){job->io=(Job_io_TC*)vcalloc ( 1, sizeof (Job_io_TC));job->pl[job->np++]=(char*)job->io;}
+      else if ( strstr(name[a], "param") && !job->param){job->param=(Job_param_TC*)vcalloc ( 1, sizeof (Job_param_TC));job->pl[job->np++]=(char*)job->param;}
       
       if (           strm (name[a], "control"))                {job->control=(struct Job_control_TC*)atol(value[a]);string=0;}
       else if (      strm (name[a], "control->submitF"))       {(job->control) ->submitF=(struct Job_TC *(*)(struct Job_TC *))atol(value[a]);string=0;}
@@ -220,8 +220,8 @@ Job_TC*** split_job_list (Job_TC *job, int ns)
   
   if (ns==0)return NULL;
   job=queue2heap(job);
-  jl=vcalloc(ns+1, sizeof (Job_TC**));
-  jl[0]=vcalloc (2, sizeof (Job_TC*));
+  jl=(Job_TC***)vcalloc(ns+1, sizeof (Job_TC**));
+  jl[0]=(Job_TC**)vcalloc (2, sizeof (Job_TC*));
   
   nj=queue2n(job);
   split=(nj/ns)+1;
@@ -236,7 +236,7 @@ Job_TC*** split_job_list (Job_TC *job, int ns)
 	  jl[a][1]=job;
 	  if (a<ns-1)
 	    {
-	      jl[a+1]=vcalloc (2, sizeof (Job_TC*));
+	      jl[a+1]=(Job_TC**)vcalloc (2, sizeof (Job_TC*));
 	      jl[a+1][0]=job;
 	      u++;
 	    }

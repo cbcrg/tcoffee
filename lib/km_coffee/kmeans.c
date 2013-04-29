@@ -1,7 +1,10 @@
 // #include "kmeans.h"
-
+#include <iostream>  
+#include <algorithm>
 #include "km_coffee_header.h"
 
+//this function is declared in Vector.c
+double l2norm(Vector *vec, size_t size);
 /*
 void
 plusplus_init(const vector<boost::shared_ptr<Vector<double> > > &vecs, unsigned int k, vector<boost::shared_ptr<Vector<double> > > &centers, size_t start, size_t end)
@@ -172,24 +175,23 @@ int init_compare (const void * a, const void * b)
 
 
 
-VectorSet *
-spss_like_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
+VectorSet * spss_like_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
 {
-	VectorSet *centers = my_malloc(sizeof(VectorSet));
+	VectorSet *centers = (VectorSet*)my_malloc(sizeof(VectorSet));
 	centers->dim=vec_set->dim;
 	centers->n_vecs=k;
 	size_t dim = vec_set->dim;
-	centers->vecs=my_malloc(k*sizeof(Vector*));
+	centers->vecs=(Vector**)my_malloc(k*sizeof(Vector*));
 	size_t i,j;
 	for (i = 0; i <k; ++i)
 	{
-		centers->vecs[i]=my_malloc(sizeof(Vector));
-		centers->vecs[i]->data=my_calloc(dim,sizeof(double));
+		centers->vecs[i]=(Vector*)my_malloc(sizeof(Vector));
+		centers->vecs[i]->data=(double*)my_calloc(dim,sizeof(double));
 	}
 
 
 	// Calculate sum of distances from each point to each other
-	init_pair *dists=my_malloc((end-start)* sizeof(init_pair));
+	init_pair *dists=(init_pair*)my_malloc((end-start)* sizeof(init_pair));
 	init_pair *keep = dists;
 	int points=end-start;
 	for (i=0; i<points; ++i)
@@ -286,21 +288,21 @@ int compare_pair_y (const void * a, const void * b)
 VectorSet *
 plusplus_like_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
 {
-	VectorSet *centers = my_malloc(sizeof(VectorSet));
+	VectorSet *centers = (VectorSet*)my_malloc(sizeof(VectorSet));
 	centers->dim=vec_set->dim;
 	centers->n_vecs=k;
 	size_t dim = vec_set->dim;
-	centers->vecs=my_malloc(k*sizeof(Vector*));
+	centers->vecs=(Vector**)my_malloc(k*sizeof(Vector*));
 	size_t i,j;
 	for (i = 0; i<k; ++i)
 	{
-		centers->vecs[i]=my_malloc(sizeof(Vector));
-		centers->vecs[i]->data=my_malloc(dim*sizeof(double));
+		centers->vecs[i]=(Vector*)my_malloc(sizeof(Vector));
+		centers->vecs[i]->data=(double*)my_malloc(dim*sizeof(double));
 		centers->vecs[i]->id=i;
 	}
 
 	size_t n_vecs = end-start;
-	pair *dists = my_malloc(sizeof(pair) * n_vecs);
+	pair *dists = (pair*)my_malloc(sizeof(pair) * n_vecs);
 	for (i=0; i<n_vecs; ++i)
 	{
 		dists[i].x=i;
@@ -361,16 +363,16 @@ I. Katsavounidis, C.-C. J. Kuo, and Z. Zhang. A new initialization technique for
 VectorSet *
 kkz_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
 {
-	VectorSet *centers = my_malloc(sizeof(VectorSet));
+	VectorSet *centers = (VectorSet*)my_malloc(sizeof(VectorSet));
 	centers->dim=vec_set->dim;
 	centers->n_vecs=k;
 	size_t dim = vec_set->dim;
-	centers->vecs=my_malloc(k*sizeof(Vector*));
+	centers->vecs=(Vector**)my_malloc(k*sizeof(Vector*));
 	size_t i,j;
 	for (i = 0; i <k; ++i)
 	{
-		centers->vecs[i]=my_malloc(sizeof(Vector));
-		centers->vecs[i]->data=my_calloc(dim,sizeof(double));
+		centers->vecs[i]=(Vector*)my_malloc(sizeof(Vector));
+		centers->vecs[i]->data=(double*)my_calloc(dim,sizeof(double));
 		centers->vecs[i]->id=i;
 	}
 
@@ -432,16 +434,16 @@ kkz_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
 VectorSet *
 distributed_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t end)
 {
-	VectorSet *centers = my_malloc(sizeof(VectorSet));
+	VectorSet *centers = (VectorSet*)my_malloc(sizeof(VectorSet));
 	centers->dim=vec_set->dim;
 	centers->n_vecs=k;
 	size_t dim = vec_set->dim;
-	centers->vecs=my_malloc(k*sizeof(Vector*));
+	centers->vecs=(Vector**)my_malloc(k*sizeof(Vector*));
 	size_t i;
 	for (i = 0; i <k; ++i)
 	{
-		centers->vecs[i]=my_malloc(sizeof(Vector));
-		centers->vecs[i]->data=my_calloc(dim,sizeof(double));
+		centers->vecs[i]=(Vector*)my_malloc(sizeof(Vector));
+		centers->vecs[i]->data=(double*)my_calloc(dim,sizeof(double));
 	}
 
 
@@ -466,16 +468,16 @@ distributed_init(const VectorSet *vec_set, unsigned int k, size_t start, size_t 
 VectorSet *
 first_init(const VectorSet *vec_set, unsigned int k, size_t start)
 {
-	VectorSet *centers = my_malloc(sizeof(VectorSet));
+	VectorSet *centers = (VectorSet*)my_malloc(sizeof(VectorSet));
 	centers->dim=vec_set->dim;
 	centers->n_vecs=k;
 	size_t dim = vec_set->dim;
-	centers->vecs=my_malloc(k*sizeof(Vector*));
+	centers->vecs=(Vector**)my_malloc(k*sizeof(Vector*));
 	size_t i;
 	for (i = 0; i <k; ++i)
 	{
-		centers->vecs[i]=my_malloc(sizeof(Vector));
-		centers->vecs[i]->data=my_calloc(dim,sizeof(double));
+		centers->vecs[i]=(Vector*)my_malloc(sizeof(Vector));
+		centers->vecs[i]->data=(double*)my_calloc(dim,sizeof(double));
 	}
 
 	size_t j,x = start+k;
@@ -521,8 +523,8 @@ hierarchical_kmeans(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const 
 	Stack *todo =Stack_init();
 
 	// Initialize tree
-	KM_node *root = my_malloc(sizeof(KM_node));
-	root->children=malloc(k*sizeof(KM_node));
+	KM_node *root = (KM_node*)my_malloc(sizeof(KM_node));
+	root->children=(KM_node**)malloc(k*sizeof(KM_node));
 	KM_node *current, *tmp;
 	root->n_children=0;
 	root->start=0;
@@ -536,7 +538,7 @@ hierarchical_kmeans(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const 
 	size_t start, end, i, old_index, old_assignment;
 	while (todo->size != 0)
 	{
-		current = todo->last;
+		current =(KM_node*) todo->last;
 		pop(todo);
 		start = current->start;
 		end = current->end;
@@ -550,8 +552,8 @@ hierarchical_kmeans(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const 
 		{
 			if (vecs->vecs[i]->assignment != old_assignment)
 			{
-				tmp=my_malloc(sizeof(KM_node));
-				tmp->children=malloc(k*sizeof(KM_node*));
+				tmp=(KM_node*)my_malloc(sizeof(KM_node));
+				tmp->children=(KM_node**)malloc(k*sizeof(KM_node*));
 				tmp->n_children=0;
 				current->children[current->n_children++]=tmp;
 
@@ -565,8 +567,8 @@ hierarchical_kmeans(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const 
 			}
 		}
 
-		tmp=my_malloc(sizeof(KM_node));
-		tmp->children=malloc(k*sizeof(KM_node*));
+		tmp=(KM_node*)my_malloc(sizeof(KM_node));
+		tmp->children=(KM_node**)malloc(k*sizeof(KM_node*));
 		tmp->n_children=0;
 		current->children[current->n_children++]=tmp;
 		tmp->start=old_index;
@@ -589,12 +591,12 @@ hierarchical_kmeans2(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const
 	int use_k;
 	size_t n_vecs, i, old_assignment;
 	VectorSet *centers;
-	KM_node **node_array=malloc(vecs->n_vecs*sizeof(KM_node*));
+	KM_node **node_array=(KM_node**)malloc(vecs->n_vecs*sizeof(KM_node*));
 
 	// each sequence gets a node
 	for (i=0; i<vecs->n_vecs; ++i)
 	{
-		node_array[i]=my_malloc(sizeof(KM_node));
+		node_array[i]=(KM_node*)my_malloc(sizeof(KM_node));
 		node_array[i]->start=i;
 		node_array[i]->end=i+1;
 		node_array[i]->id = ++node_id;
@@ -608,31 +610,32 @@ hierarchical_kmeans2(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const
 	while (vecs->n_vecs > k)
 	{
 		n_vecs= vecs->n_vecs;
-		use_k = max(2, n_vecs/k);
+		use_k = std::max(2, (int)(n_vecs/k));
+		//use_k = max(2, (int)(n_vecs/k));
 		centers=kmeans_sub_eq_size(vecs, use_k, init, error_threshold, 0, n_vecs);
 		qsort(&vecs->vecs[0], n_vecs, sizeof(Vector*), my_assignment_sort);
 		old_assignment=-1;
 		tmp_node_id=-1;
 		old_id=0;
-		KM_node **tmp_nodes=malloc(use_k*sizeof(KM_node*));
-		VectorSet *tmpSet = my_malloc(sizeof(VectorSet));
+		KM_node **tmp_nodes=(KM_node**)malloc(use_k*sizeof(KM_node*));
+		VectorSet *tmpSet = (VectorSet*)my_malloc(sizeof(VectorSet));
 		tmpSet->dim=vecs->dim;
 		tmpSet->n_vecs=0;
-		tmpSet->vecs=my_malloc(use_k*sizeof(Vector*));
+		tmpSet->vecs=(Vector**)my_malloc(use_k*sizeof(Vector*));
 		for (i=0; i<vecs->n_vecs; ++i)
 		{
 			if (vecs->vecs[i]->assignment != old_assignment)
 			{
 //  				printf("%li\n", i - old_id);
 				old_id=i;
-				tmp=my_malloc(sizeof(KM_node));
+				tmp=(KM_node*)my_malloc(sizeof(KM_node));
 				tmp_nodes[++tmp_node_id]=tmp;
 				tmpSet->vecs[tmp_node_id]=centers->vecs[vecs->vecs[i]->assignment];
 				tmpSet->vecs[tmp_node_id]->id=tmp_node_id;
 				++tmpSet->n_vecs;
 
 				max_reserve=k;
-				tmp->children=malloc(max_reserve*sizeof(KM_node*));
+				tmp->children=(KM_node**)malloc(max_reserve*sizeof(KM_node*));
 				tmp->n_children=0;
 				tmp->children[tmp->n_children++]=node_array[vecs->vecs[i]->id];
 				tmp->id = ++node_id;
@@ -643,7 +646,7 @@ hierarchical_kmeans2(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const
 				if (tmp->n_children == max_reserve)
 				{
 					max_reserve += 5;
-					tmp->children=realloc(tmp->children, max_reserve*sizeof(KM_node*));
+					tmp->children=(KM_node**)realloc(tmp->children, max_reserve*sizeof(KM_node*));
 				}
 				tmp->children[tmp->n_children++]=node_array[vecs->vecs[i]->id];
 			}
@@ -662,8 +665,8 @@ hierarchical_kmeans2(VectorSet *vecs, unsigned int k, unsigned int k_leaf, const
 		root=node_array[0];
 	else
 	{
-		root=my_malloc(sizeof(KM_node));
-		root->children=malloc(use_k*sizeof(KM_node*));
+		root=(KM_node*)my_malloc(sizeof(KM_node));
+		root->children=(KM_node**)malloc(use_k*sizeof(KM_node*));
 		root->n_children=0;
 		for (i=0; i<vecs->n_vecs; ++i)
 			root->children[root->n_children++]=node_array[vecs->vecs[i]->id];
@@ -696,7 +699,7 @@ kmeans_sub(const VectorSet *vecs, unsigned int k, const char *init, double error
 		printf("Unknown initialization value!");
 		exit(1);
 	}
-	size_t *n_inside = malloc(k*sizeof(size_t));
+	size_t *n_inside = (size_t*)malloc(k*sizeof(size_t));
 	size_t i;
 	for (i=0; i<k; ++i)
 		n_inside[i]=1;
@@ -815,7 +818,7 @@ kmeans_sub_eq_size(const VectorSet *vecs, unsigned int k, const char *init, doub
 		printf("Unknown initialization value!");
 		exit(1);
 	}
-	size_t *n_inside = malloc(k*sizeof(double));
+	size_t *n_inside = (size_t*)malloc(k*sizeof(double));
 	size_t i;
 	for (i=0; i<k; ++i)
 		n_inside[i]=1;
@@ -826,7 +829,7 @@ kmeans_sub_eq_size(const VectorSet *vecs, unsigned int k, const char *init, doub
 	size_t dimension = vecs->dim;
 	size_t j;
 	Vector *center_tmp;
-	size_t *nums = my_malloc(k*sizeof(size_t));
+	size_t *nums =(size_t*) my_malloc(k*sizeof(size_t));
 
 	int chunk = 30;
 	int round=0;

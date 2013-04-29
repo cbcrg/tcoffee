@@ -68,8 +68,8 @@ int domain_pair_wise (Alignment *A,int*in_ns, int **in_l_s,Constraint_list *CL )
 /*Prepare l_s and ns*/
 
 	
-	ns=vcalloc( 2, sizeof (int));
-	l_s=vcalloc ( 2, sizeof (int*));
+	ns=(int*)vcalloc( 2, sizeof (int));
+	l_s=(int**)vcalloc ( 2, sizeof (int*));
 	
 	ns[0]=in_ns[1];
 	ns[1]=in_ns[0];
@@ -94,22 +94,22 @@ scale=(lenal[1]*SCORE_K*(CL->moca)->moca_scale);
 	
 
 
-	buf_trace=vcalloc ( len, sizeof (TRACE_TYPE));	
-	buffer=vcalloc ( 2*len, sizeof (char));	
+	buf_trace=(int*)vcalloc ( len, sizeof (TRACE_TYPE));	
+	buffer=(char*)vcalloc ( 2*len, sizeof (char));	
 	
         al    =declare_int  (2, 2*len);  
 	pos_al=declare_int  (2, 2*len);
 	result_aln=declare_int (1,len);
-	char_buf= vcalloc (2*len, sizeof (char));	
+	char_buf=(char*)vcalloc (2*len, sizeof (char));	
 
-	f     =vcalloc (len, sizeof (int));
-       pf     =vcalloc (len, sizeof (int));
-	e     =vcalloc (len, sizeof (int));
-       pe     =vcalloc (len, sizeof (int));
-	e_len =vcalloc (len, sizeof (int));
-       pe_len =vcalloc (len, sizeof (int));
-	dd    =vcalloc (len, sizeof (int));
-	dd_len=vcalloc (len, sizeof (int));
+	f     =(int*)vcalloc (len, sizeof (int));
+       pf     =(int*)vcalloc (len, sizeof (int));
+	e     =(int*)vcalloc (len, sizeof (int));
+       pe     =(int*)vcalloc (len, sizeof (int));
+	e_len =(int*)vcalloc (len, sizeof (int));
+       pe_len =(int*)vcalloc (len, sizeof (int));
+	dd    =(int*)vcalloc (len, sizeof (int));
+	dd_len=(int*)vcalloc (len, sizeof (int));
 
 	
 	trace=declare_int (lenal[0]+2, lenal[1]+2);
@@ -405,10 +405,10 @@ Alignment *domain_match_list2aln ( Alignment *A,int *ns,int **l_s,int **ml, int 
 	      
 	      
 	      new_ml  =declare_int ( nseq, 3*len);
-	      max_ml  =vcalloc ( nseq, sizeof (int));
+	      max_ml  =(int*)vcalloc ( nseq, sizeof (int));
 	      for ( a=0; a<nseq; a++)max_ml[a]=-1;
 
-	      start_ml=vcalloc ( nseq, sizeof (int));
+	      start_ml=(int*)vcalloc ( nseq, sizeof (int));
 
 	      for ( b=0,a=0; a< len; a++, b+=3)
 	          {
@@ -517,7 +517,7 @@ Alignment * domain_seq2domain (Constraint_list *CL,int scale,int gop,int gep,Ali
 	   A=stack_aln( A, SEQ_DOMAIN);
 
 	   
-	   n_groups=vcalloc ( 2, sizeof (int));
+	   n_groups=(int*)vcalloc ( 2, sizeof (int));
 	   group_list=declare_int (2, A->nseq);
 	   
 	   n_groups[0]=TARGET->nseq;

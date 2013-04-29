@@ -10,6 +10,10 @@
 #include "fastal_lib_header.h"
 
 
+// the following fuctions are defined in fastal.c
+int gotoh_dyn(Fastal_profile **profiles, Fastal_param *param_set, void *method_arguments_p, int is_dna, FILE *edit_file, FILE *prof_file, int number);
+void free_nw(Nw_param* method_arguments_p, int alphabet_size);
+
 /**
  * Adds a single sequence to a profile.
  * \param seq The sequence.
@@ -114,7 +118,7 @@ del_gap_from_profile(Fastal_profile *prf, int alphabet_size, int *gap_list, int 
 			if (++pos >= *gap_list_length)
 			{
 				*gap_list_length += 10;
-				gap_list = vrealloc(gap_list, (*gap_list_length)*sizeof(int));
+				gap_list = (int*)vrealloc(gap_list, (*gap_list_length)*sizeof(int));
 			}
 			gap_list[pos] = gap_pos;
 // 			++gap_counter;
@@ -220,7 +224,7 @@ enlarge_prof(Fastal_profile *prof, int new_length, int alphabet_size)
 		int i;
 		for (i = 0;i < alphabet_size; ++i)
 		{
-			prof->prf[i] = vrealloc(prof->prf[i],new_length*sizeof(int));
+			prof->prf[i] = (int*)vrealloc(prof->prf[i],new_length*sizeof(int));
 		}
 		prof->allocated_memory = new_length;
 	}
@@ -239,20 +243,20 @@ iterate(Fastal_param *param, void *method_arguments_p, char *aln_file_name, char
 	int it_coutner_2 = 0;
 	const int LINE_LENGTH = 200;
 	char line[LINE_LENGTH];
-	char *seq1 = vcalloc(1,sizeof(char));
-	char *seq2 = vcalloc(1,sizeof(char));
-	Fastal_profile **profiles = vcalloc(3,sizeof(Fastal_profile*));
+	char *seq1 = (char*)vcalloc(1,sizeof(char));
+	char *seq2 = (char*)vcalloc(1,sizeof(char));
+	Fastal_profile **profiles =(Fastal_profile**) vcalloc(3,sizeof(Fastal_profile*));
 	initiate_profiles(profiles, param);
 	Fastal_profile *gap_prf = profiles[0];
 	Fastal_profile *no_gap_prf = profiles[1];
 	int alphabet_size = param->alphabet_size;
 
-	int *gap_list_1 = vcalloc(1, sizeof(int));
-	int *gap_list_1_length = vcalloc(1, sizeof(int));
+	int *gap_list_1 = (int*)vcalloc(1, sizeof(int));
+	int *gap_list_1_length = (int*)vcalloc(1, sizeof(int));
 	*gap_list_1_length = 1;
 	int num_gaps_1 = 0;
-	int *gap_list_2 = vcalloc(1, sizeof(int));
-	int *gap_list_2_length = vcalloc(1, sizeof(int));
+	int *gap_list_2 = (int*)vcalloc(1, sizeof(int));
+	int *gap_list_2_length = (int*)vcalloc(1, sizeof(int));
 	*gap_list_2_length = 1;
 	int num_gaps_2 = 0;
 
@@ -260,7 +264,7 @@ iterate(Fastal_param *param, void *method_arguments_p, char *aln_file_name, char
 	//from here repeat!
 	int it_counter = 0;
 	char *out_file_name = aln_file_name;
-	int *gap_profile = vcalloc(alignment_length, sizeof(int));
+	int *gap_profile = (int*)vcalloc(alignment_length, sizeof(int));
 	
 // 	while (it_counter < alignment_length)
 // 	{
@@ -289,9 +293,9 @@ iterate(Fastal_param *param, void *method_arguments_p, char *aln_file_name, char
 			alignment_length += tmp_len;
 		}
 	// 	printf("ALN_LENGTH %i\n", alignment_length);
-		seq1 =vrealloc(seq1, (1+alignment_length)*sizeof(char));
+		seq1 =(char*)vrealloc(seq1, (1+alignment_length)*sizeof(char));
 		
-		gap_profile = vrealloc(gap_profile, alignment_length * sizeof(int));
+		gap_profile = (int*)vrealloc(gap_profile, alignment_length * sizeof(int));
 		int i;
 		for (i = 0; i < alignment_length; ++i)
 		{
@@ -385,8 +389,8 @@ iterate(Fastal_param *param, void *method_arguments_p, char *aln_file_name, char
 		profiles[1] = no_gap_prf;
 
 		alignment_length = gotoh_dyn(profiles, param, method_arguments_p, 0, edit_file, profile_file, 0);
-		seq1 =vrealloc(seq1, (1+alignment_length)*sizeof(char));
-		seq2 =vrealloc(seq2, (1+alignment_length)*sizeof(char));
+		seq1 =(char*)vrealloc(seq1, (1+alignment_length)*sizeof(char));
+		seq2 =(char*)vrealloc(seq2, (1+alignment_length)*sizeof(char));
 		
 		fclose(edit_file);
 		edit_file = fopen(edit_file_name,"r");

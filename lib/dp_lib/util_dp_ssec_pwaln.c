@@ -38,7 +38,7 @@ int ssec_pwaln_maln (Alignment *A, int *ns, int **ls, Constraint_list *CL)
     /*2 Prepare the Model*/
     M=initialize_sseq_model(2,2,CL);    
     ndiag=strlen (A->seq_al[0])+strlen (A->seq_al[1])-1;
-    M->diag=vcalloc (ndiag+1, sizeof (int));
+    M->diag=(int*)vcalloc (ndiag+1, sizeof (int));
     M->diag[0]=ndiag-1;
     for ( a=1; a<=M->diag[0]; a++)M->diag[a]=a;
     
@@ -100,7 +100,7 @@ Dp_Model * initialize_sseq_model(int left_tg_mode, int right_tg_mode, Constraint
 
     
     
-    M=vcalloc ( 1, sizeof (Dp_Model));
+    M=(Dp_Model*)vcalloc ( 1, sizeof (Dp_Model));
     
     M->nstate=9;
     M->START=M->nstate++;
@@ -123,9 +123,9 @@ Dp_Model * initialize_sseq_model(int left_tg_mode, int right_tg_mode, Constraint
 
     a=0;
     M->EMISSION=a++;M->TERM_EMISSION=a++;M->START_EMISSION=a++;
-    M->model_emission_function=vcalloc(M->nstate, sizeof (int (**)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *)));
+    M->model_emission_function=(int (***)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *))vcalloc(M->nstate, sizeof (int (**)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *)));
     for ( a=0; a< M->nstate; a++)
-       M->model_emission_function[a]=vcalloc(3, sizeof (int (*)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *)));
+       M->model_emission_function[a]=(int (**)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *))vcalloc(3, sizeof (int (*)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *)));
     
 
         

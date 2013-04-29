@@ -1,3 +1,5 @@
+#ifndef __UTIL_DP_GOTOH_NW_H
+#define __UTIL_DP_GOTOH_NW_H 
 /*pair wise aln implementations*/
 
 int idscore_pairseq (char *s1, char *s2, int gop, int gep, int **m, char *mode);
@@ -24,3 +26,5 @@ int procoffee_pair_wise ( Alignment *A, int *nsi, int **lsi, Constraint_list *CL
 
 int **aln2prf (Alignment *A, char *matrix);
 char *add_sequence2prf (char *seq, char *al,int **prf, int lj, int gop, int gep);
+
+#endif 

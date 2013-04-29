@@ -110,6 +110,7 @@ static Sequence* prepare_master (char *seq,Sequence *S,Constraint_list *CL, char
 char ** km_coffee (int argc, char **argv);
 
 Alignment *kmir(Alignment *A);
+int fastal_main(int argc, char **argv); //this function was declared in fastal.c
 
 #define is_a_seq_file(file) (!is_matrix(file) && !is_matrix(file+1) && !is_method (file) && !is_method (file+1) &&(check_file_exists(file) || check_file_exists(file+1)))
 static int NO_METHODS_IN_CL;
@@ -476,7 +477,7 @@ int batch_main ( int argc, char **argv)
 	int     clean_overaln;
 
 	char *dump;
-
+ 
 	/**
 	 * Before anything else, check if we want to use the \b other_pg option of T-Coffee.
 	 *        If so, redirect to ::run_other_pg.
@@ -492,7 +493,7 @@ int batch_main ( int argc, char **argv)
 	  }
 	else if ( name_is_in_list ("kmcoffee", argv, argc, 100)!=-1)
 	  {
-	    argv=km_coffee(argc, argv);
+	    argv=km_coffee(argc, argv); 
 	  }
 
 
@@ -3665,6 +3666,7 @@ get_cl_param(\
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
 		   );
+		   
 	       if (overaln_P1)set_int_variable ("overaln_P1", overaln_P1);
 
 	       get_cl_param(					\
@@ -3945,7 +3947,7 @@ get_cl_param(\
 	       if (list_file)
 		 {
 		   int *nn;
-		   nn=vcalloc ( 256, sizeof (int));
+		   nn=(int*)vcalloc ( 256, sizeof (int));
 		   for (a=0; a<n_list; a++)
 		     {
 		       if ( !check_file_exists(list_file[a]))nn[(int)list_file[a][0]]++;
@@ -4103,7 +4105,7 @@ get_cl_param(\
 	       /*The first one decides...*/
 
 
-	       do_list=vcalloc ( 100, sizeof (int*));
+	       do_list=(int**)vcalloc ( 100, sizeof (int*));
 	       n_do=0;
 	       do_list[n_do++]=&do_genepred;
 	       do_list[n_do++]=&do_extended_matrix;
@@ -4611,7 +4613,7 @@ get_cl_param(\
 	       /*Gep and Gop*/
 	       if ( !gep &&  !gop && CL->M)
 		   {
-		    CL->gop=get_avg_matrix_mm ( CL->M, (strm3((CL->S)->type,"PROTEIN", "Protein", "protein")?AA_ALPHABET:"gcuta"))*10;
+		    CL->gop=get_avg_matrix_mm ( CL->M, const_cast<char*>( (strm3((CL->S)->type,"PROTEIN", "Protein", "protein")?AA_ALPHABET:"gcuta")) )*10;
 		    CL->gep=CL->gop/10;
 		    fprintf ( CL->local_stderr, "\nAUTOMATIC PENALTIES: gapopen=%d gapext=%d", CL->gop, CL->gep);
 		   }
@@ -4763,7 +4765,7 @@ get_cl_param(\
 	      if ( nseq_for_quadruplet && !strm(seq_name_for_quadruplet[0], "all"))
 			{
 			  CL->nseq_for_quadruplet=nseq_for_quadruplet;
-			  CL->seq_for_quadruplet=vcalloc ((CL->S)->nseq, sizeof (int));
+			  CL->seq_for_quadruplet=(int*)vcalloc ((CL->S)->nseq, sizeof (int));
 			  for (a=0; a< CL->nseq_for_quadruplet; a++)
 				{
 				  printf ( "\nquad: %s", seq_name_for_quadruplet[a]);
@@ -4775,7 +4777,7 @@ get_cl_param(\
 			{
 
 			  CL->nseq_for_quadruplet=(CL->S)->nseq;
-			  CL->seq_for_quadruplet=vcalloc ((CL->S)->nseq, sizeof (int));
+			  CL->seq_for_quadruplet=(int*)vcalloc ((CL->S)->nseq, sizeof (int));
 			  for (a=0; a< CL->nseq_for_quadruplet; a++)
 				{
 				  CL->seq_for_quadruplet[a]=1;
@@ -4851,7 +4853,7 @@ get_cl_param(\
 		   else if ( strm ( msa_mode, "groups"))
 		     {
 		       A=seq2aln_group (A,dpa_maxnseq, CL);
-		       out_aln_format[0]="conc_aln";
+		       strcpy(out_aln_format[0],"conc_aln");
 		       n_out_aln_format=1;
 		     }
 		   else if ( strm ( msa_mode, "upgma"))
@@ -4957,7 +4959,7 @@ get_cl_param(\
 
 	      else if (do_domain)
 		   {
-		     CL->moca=vcalloc ( 1, sizeof ( Moca));
+		     CL->moca=( Moca*)vcalloc ( 1, sizeof ( Moca));
 		     if (strm ( "cfasta_pair_wise", dp_mode))sprintf (CL->dp_mode, "%s","domain_pair_wise");
 		     (CL->moca)->moca_start=domain_start;
 		     (CL->moca)->moca_len  =domain_len;
@@ -5257,7 +5259,7 @@ get_cl_param(\
 
 	      vremove ( "core");
 
-	      vfree_all();
+	      vfree_all(NULL);
 
 	      le=t_coffee_tip (le, tip);
 	      le=print_command_line ( le);
@@ -5283,7 +5285,7 @@ char *get_defaults (char *buf, char *type)
 char *get_precomputed_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf," -msa_mode=precomputed ");
      buf=strcat (buf," -seq_weight=no ");
@@ -5294,7 +5296,7 @@ char *get_precomputed_defaults(char *buf, char *type)
 char *get_evaluate_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf," -quiet=stdout ");
      /*buf=strcat (buf," -seq_weight=no ");*/
@@ -5310,7 +5312,7 @@ char *get_evaluate_defaults(char *buf, char *type)
 char *get_genome_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf," -seq_weight=no ");
      buf=strcat (buf," -dp_mode sim_pair_wise_lalign ");
@@ -5328,7 +5330,7 @@ char *get_genome_defaults(char *buf, char *type)
 char *get_dali_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf,"-cosmetic_penalty=-50 ");
      buf=strcat (buf,"-distance_matrix_mode=slow ");
@@ -5342,7 +5344,7 @@ char *get_dali_defaults(char *buf, char *type)
 char *get_very_fast_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf,"-in Xblosum62mt ");
      buf=strcat (buf,"-distance_matrix_mode ktup ");
@@ -5361,7 +5363,7 @@ char *get_very_fast_defaults(char *buf, char *type)
 
 char *get_low_memory_defaults(char *buf, char *type)
    {
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      if (NO_METHODS_IN_CL)buf=strcat (buf,"-distance_matrix_mode=idscore -method lalign_id_pair slow_pair -dp_mode=linked_pair_wise ");
      else buf=strcat (buf,"-distance_matrix_mode=idscore -dp_mode=linked_pair_wise ");
@@ -5379,7 +5381,7 @@ char *get_cdna_defaults(char *buf, char *type)
 }
 char *get_3dcoffee_defaults(char *buf, char *type)
    {
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf,"-in Msap_pair  -template_file SELF_P_ -profile_template_file SELF_P_");
      /*buf=strcat (buf,"-in ");*/
@@ -5389,7 +5391,7 @@ char *get_3dcoffee_defaults(char *buf, char *type)
 char *get_expresso_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf,"-method sap_pair  -template_file EXPRESSO -profile_template_file EXPRESSO");
 
@@ -5400,7 +5402,7 @@ char *get_expresso_defaults(char *buf, char *type)
 char *get_procoffee_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf,"-in Mpromo_pair -extend_seq  ");
      /*buf=strcat (buf,"-in ");*/
@@ -5410,7 +5412,7 @@ char *get_procoffee_defaults(char *buf, char *type)
 char *get_blastr_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf,"-in Mblastr_pair -extend_seq   ");
      /*buf=strcat (buf,"-in ");*/
@@ -5420,7 +5422,7 @@ char *get_blastr_defaults(char *buf, char *type)
 char *get_psicoffee_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf,"-in Mproba_pair -template_file BLAST   ");
      /*buf=strcat (buf,"-in ");*/
@@ -5437,7 +5439,7 @@ char *get_accurate_defaults ( char *buf, char *type)
 }
 char *get_accurate4PROTEIN_defaults(char *buf, char *type)
    {
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
      if (NO_METHODS_IN_CL)buf=strcat (buf,"-in Mbest_pair4prot -template_file BLAST -template_file EXPRESSO  ");
      else buf=strcat (buf,"-template_file BLAST -template_file EXPRESSO  ");
      buf=strcat (buf,"-output aln, expanded_fasta_aln ");
@@ -5463,7 +5465,7 @@ char *get_t_coffee_defaults(char *buf, char *type)
 char *get_fmcoffee_defaults(char *buf, char *type)
    {
      //Fast Mcoffee
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      if (NO_METHODS_IN_CL) buf=strcat (buf,"-in Mkalign_msa  Mmuscle_msa Mmafft_msa -multi_core methods_relax_msa");
 
@@ -5474,7 +5476,7 @@ char *get_fmcoffee_defaults(char *buf, char *type)
 char *get_xcoffee_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf, " -master _kmeans_N_25_LONG_ ");
      buf=strcat (buf, " -dp_mode linked_pair_wise");
@@ -5488,7 +5490,7 @@ char *get_xcoffee_defaults(char *buf, char *type)
 char *get_mcoffee_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
 
      if (NO_METHODS_IN_CL)   buf=strcat (buf,"-in Mclustalw2_msa Mt_coffee_msa Mpoa_msa Mmuscle_msa Mmafft_msa Mdialignt_msa Mpcma_msa Mprobcons_msa -multi_core methods_relax_msa  ");
@@ -5498,7 +5500,7 @@ char *get_mcoffee_defaults(char *buf, char *type)
 char *get_dmcoffee_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      if (NO_METHODS_IN_CL)buf=strcat (buf,"-in Mkalign_msa Mt_coffee_msa Mpoa_msa Mmuscle_msa Mmafft_msa Mdialignt_msa Mprobcons_msa Mamap_msa -multi_core methods_relax_msa");
      /*buf=strcat (buf,"-in ");*/
@@ -5508,7 +5510,7 @@ char *get_dmcoffee_defaults(char *buf, char *type)
 char *get_rcoffee_consan_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      check_program_is_installed (RNAPLFOLD_4_TCOFFEE,NULL, NULL,RNAPLFOLD_ADDRESS, INSTALL_OR_DIE);
 	 if (NO_METHODS_IN_CL)buf=strcat (buf,"-in Mconsan_pair -multi_core templates_relax_msa -dp_mode myers_miller_pair_wise -extend_mode rna2 -template_file RCOFFEE -transform dna2rna -type DNA -relax_lib 0");
@@ -5520,7 +5522,7 @@ char *get_rcoffee_consan_defaults(char *buf, char *type)
 char *get_rmcoffee_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      check_program_is_installed (RNAPLFOLD_4_TCOFFEE,NULL, NULL,RNAPLFOLD_ADDRESS, INSTALL_OR_DIE);
      if (NO_METHODS_IN_CL)buf=strcat (buf,"-in Mprobcons_msa Mmafft_msa Mmuscle_msa -extend_mode rna2 -template_file RCOFFEE -transform dna2rna -check_type -type DNA -relax_lib 0");
@@ -5534,7 +5536,7 @@ char *get_rmcoffee_defaults(char *buf, char *type)
    char *get_best4RNA_defaults(char *buf, char *type)
    {
 
-	   if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+	   if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
 	   check_program_is_installed (RNAPLFOLD_4_TCOFFEE,NULL, NULL,RNAPLFOLD_ADDRESS, INSTALL_OR_DIE);
 	   buf=strcat (buf," -extend_mode rna2 -template_file PDB,RNA -in Mbest_pair4rna -transform dna2rna -relax_lib 0");
@@ -5546,7 +5548,7 @@ char *get_rmcoffee_defaults(char *buf, char *type)
 char *get_rcoffee_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      check_program_is_installed (RNAPLFOLD_4_TCOFFEE,NULL, NULL,RNAPLFOLD_ADDRESS, INSTALL_OR_DIE);
 
@@ -5558,7 +5560,7 @@ char *get_rcoffee_defaults(char *buf, char *type)
 char *get_genepredx_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf, "-method tblastx_msa -evaluate_mode sequences  -genepred  -relax_lib 0 -output fasta_seq,exons,texons,wexons -seq_weight no -check_type -type DNA -out_lib");
      return buf;
@@ -5566,7 +5568,7 @@ char *get_genepredx_defaults(char *buf, char *type)
 char *get_genepredpx_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf, "-method tblastpx_msa -evaluate_mode sequences  -genepred  -relax_lib 0 -output fasta_seq,exons,texons,wexons -seq_weight no -check_type -type DNA -out_lib");
      return buf;
@@ -5575,7 +5577,7 @@ char *get_genepredpx_defaults(char *buf, char *type)
 char *get_repeat_defaults(char *buf, char *type)
    {
 
-     if (buf==NULL)buf=vcalloc (1000, sizeof (char));
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
 
      buf=strcat (buf,"-in slow_pair -matrix idmat -out_lib -profile_comparison profile -profile_mode channel_profile_profile -dp_mode myers_miller_pair_wise ");
      /*buf=strcat (buf,"-in ");*/
@@ -5597,7 +5599,7 @@ void test ()
   char command[1000];
   char *c2;
 
-  c2=vcalloc ( 100, sizeof (char));
+  c2=(char*)vcalloc ( 100, sizeof (char));
 
   sprintf (command, "cat hmgt_mouseVsnrl3d.blast_result |blast_aln2fasta_aln.pl | fasta_aln2fasta_aln_unique_name.pl > my_test");
 
@@ -5718,7 +5720,7 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
    FILE *fp;
    int trim_mode=2;
 
-   CL->master=vcalloc (S->nseq+1, sizeof(int));
+   CL->master=(int*)vcalloc (S->nseq+1, sizeof(int));
 
    if ( check_file_exists (seq))
      {
@@ -5881,7 +5883,7 @@ char * get_seq_type_from_cl (int argc, char **argv)
 
 
   sprintf (file, "%d.tmp", rand()%10000);
-  buf=vcalloc ( 10000, sizeof (char));
+  buf=(char*)vcalloc ( 10000, sizeof (char));
   sprintf ( buf, "%s ", get_string_variable ("t_coffee"));
   for (a=1, seq=0; a<argc; a++)
     {
@@ -5939,7 +5941,7 @@ char** km_coffee (int argc, char **argv)
 	char *km_mode=NULL;
 	char *km_tree=NULL;
 
-	new_argv=vcalloc (argc+100, sizeof (char*));
+	new_argv=(char**)vcalloc (argc+100, sizeof (char*));
 	char *seq_f = NULL;
 	char *out_f = NULL;
 	char *km_init = NULL;
@@ -6012,9 +6014,9 @@ char** km_coffee (int argc, char **argv)
 	if (strm (km_mode, "km_fast"))
 	{
 		if (method == NULL)
-			method="proba_pair";
+			strcpy(method,"proba_pair");
 		if (km_init == NULL)
-			km_init = "distributed";
+			strcpy(km_init, "distributed");
 		if (k_leaf==0)
 			k_leaf=k;
 		km_coffee_align3(seq_f, k, k_leaf, method, out_f, n_core, gapopen, gapext, km_init );
@@ -6049,7 +6051,7 @@ Alignment* kmir (Alignment *A)
 	char *seq;
 	int a;
 
-	seq=vcalloc ( A->len_aln+1, sizeof (char));
+	seq=(char*)vcalloc ( A->len_aln+1, sizeof (char));
 
 	prf=aln2prf(A, "blosum62mt");
 
@@ -6139,7 +6141,7 @@ Alignment *km_align_kprofile (Alignment **AL,int n, int k, int argc, char **argv
 	Alignment *A;
 	int nn=0;
 	int a;
-	NAL=vcalloc (n, sizeof (Alignment *));
+	NAL=(Alignment **)vcalloc (n, sizeof (Alignment *));
 
 	if (n==1)return km_align_profile (AL,n,argc, argv, nit, round);
 	else
@@ -6189,7 +6191,7 @@ Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit
 
 
 	if (!treefile)treefile=vtmpnam(NULL);
-	if (!prf)prf=vcalloc (500, sizeof (char));
+	if (!prf)prf=(char*)vcalloc (500, sizeof (char));
 	if (n==1 && round!=-1)
 	{
 		A=copy_aln (AL[0], NULL);
@@ -6337,7 +6339,7 @@ Alignment *km_align_seq_fast (Alignment *A, int argc, char **argv, int nit, int 
 
 	if (!CL)
 	  {
-	    CL=vcalloc ( 1, sizeof (Constraint_list));
+	    CL=(Constraint_list*)vcalloc ( 1, sizeof (Constraint_list));
 	    CL->pw_parameters_set=1;
 	    CL->matrices_list=declare_char (10, 10);
 	    CL->M=read_matrice ("blosum62mt");
@@ -6364,7 +6366,7 @@ Alignment *km_align_seq_fast (Alignment *A, int argc, char **argv, int nit, int 
 	  return A;
 
 	CL->S=fill_sequence_struc(n,A->seq_al, A->name, NULL);
-	ns=vcalloc (2, sizeof (int));
+	ns=(int*)vcalloc (2, sizeof (int));
 	ls=declare_int (2, n);
 	ns[0]=ns[1]=1;
 	ls[0][0]=0;

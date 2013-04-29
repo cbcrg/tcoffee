@@ -116,7 +116,7 @@ Alignment *realign_segment (int seq, int start, int len,Alignment *A, Alignment 
     /*1 Prepare the Constraint list*/
     if ( !CL)
       {
-	CL=vcalloc ( 1, sizeof (Constraint_list));
+	CL=(Constraint_list*)vcalloc ( 1, sizeof (Constraint_list));
 	CL->extend_jit=0;
 	CL->pw_parameters_set=1;
 	CL->M=read_matrice ("blosum62mt");
@@ -140,7 +140,7 @@ Alignment *realign_segment (int seq, int start, int len,Alignment *A, Alignment 
     ungap ( S2->seq_al[seq]);   
     CL->S=A->S;/*aln2seq(S2);*/    
     /*3 Prepare Sequence Presentation*/
-    ns=vcalloc (2, sizeof (int));
+    ns=(int*)vcalloc (2, sizeof (int));
     ls=declare_int (2,S2->nseq);
     
     ns[0]=A->nseq-1;
@@ -177,7 +177,7 @@ Alignment *realign_segment_old (int seq, int start, int len,Alignment *A, Alignm
     /*1 Prepare the Constraint list*/
     if ( !CL)
       {
-	CL=vcalloc ( 1, sizeof (Constraint_list));
+	CL=(Constraint_list*)vcalloc ( 1, sizeof (Constraint_list));
 	CL->extend_jit=0;
 	CL->pw_parameters_set=1;
 	CL->M=read_matrice ("blosum62mt");
@@ -200,12 +200,12 @@ Alignment *realign_segment_old (int seq, int start, int len,Alignment *A, Alignm
 
     /*2 Prepare the Model*/
     M=initialize_seg2prf_model((start==0)?2:0,(start+len==A->len_aln)?2:0,CL);    
-    M->diag=vcalloc ( 2*len+1, sizeof (int));
+    M->diag=(int*)vcalloc ( 2*len+1, sizeof (int));
     M->diag[0]=len+strlen (sub_seq)-1;
     for ( a=1; a<=M->diag[0]; a++)M->diag[a]=a;
     
     /*3 Prepare Sequence Presentation*/
-    ns=vcalloc (2, sizeof (int));
+    ns=(int*)vcalloc (2, sizeof (int));
     ls=declare_int (2,A->nseq);
     
     ns[0]=A->nseq-1;
@@ -253,7 +253,7 @@ Dp_Model * initialize_seg2prf_model(int left_tg_mode, int right_tg_mode, Constra
     Dp_Model *M;
     int a, b, c,d;
     
-    M=vcalloc ( 1, sizeof (Dp_Model));
+    M=(Dp_Model*)vcalloc ( 1, sizeof (Dp_Model));
     M->nstate=2;
     M->START=M->nstate++;
     M->END  =M->nstate++;
@@ -275,9 +275,9 @@ Dp_Model * initialize_seg2prf_model(int left_tg_mode, int right_tg_mode, Constra
     
     a=0;
     M->EMISSION=a++;M->TERM_EMISSION=a++;M->START_EMISSION=a++;
-    M->model_emission_function=vcalloc(M->nstate, sizeof (int (**)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *)));
+    M->model_emission_function=(int (***)(Alignment*, int**, int, int*, int, int**, int, int*, int, Constraint_list*))vcalloc(M->nstate, sizeof (int (**)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *)));
     for ( a=0; a< M->nstate; a++)
-       M->model_emission_function[a]=vcalloc(3, sizeof (int (*)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *)));
+       M->model_emission_function[a]=(int (**)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *)) vcalloc(3, sizeof (int (*)(Alignment*, int **, int, int*, int, int **, int, int*, int, struct Constraint_list *)));
     
     
     /*Substitution*/

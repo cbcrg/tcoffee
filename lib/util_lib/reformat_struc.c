@@ -32,7 +32,7 @@ char * process_repeat (char *aln, char *seq, char *pdb)
 
   A2=align_two_sequences (S->seq[0], P->seq[0], "pam250mt", -10, -1, "myers_miller_pair_wise");
   
-  pos=vcalloc ( A2->len_aln+1, sizeof (int));
+  pos=(int*)vcalloc ( A2->len_aln+1, sizeof (int));
 
   for (l1=0, l2=0,a=0; a< A2->len_aln; a++)
     {
@@ -156,8 +156,8 @@ Ca_trace * trim_ca_trace (Ca_trace *T, char *seq )
   else
     {
      ALN=align_two_sequences (T->seq,seq, "est_idmat",-1, 0,"fasta_pair_wise"); 
-     struc_cache=vcalloc (ALN->len_aln+1, sizeof (int));
-     seq_cache  =vcalloc (ALN->len_aln+1, sizeof (int));
+     struc_cache=(int*)vcalloc (ALN->len_aln+1, sizeof (int));
+     seq_cache  =(int*)vcalloc (ALN->len_aln+1, sizeof (int));
      
      for ( r=0, s=0,a=0; a< ALN->len_aln; a++)
        {
@@ -183,13 +183,13 @@ Ca_trace * trim_ca_trace (Ca_trace *T, char *seq )
 	   }
        }
      
-      T->ca=vrealloc ( T->ca, sizeof (Atom*)*(ALN->len_aln+1));
-      T->peptide_chain=vrealloc ( T->peptide_chain, (sizeof (Amino_acid*))*(ALN->len_aln+1));
-      T->seq=vrealloc ( T->seq,   ALN->len_aln+1);
+      T->ca=(Atom**)vrealloc ( T->ca, sizeof (Atom*)*(ALN->len_aln+1));
+      T->peptide_chain=(Amino_acid**)vrealloc ( T->peptide_chain, (sizeof (Amino_acid*))*(ALN->len_aln+1));
+      T->seq=(char*)vrealloc ( T->seq,   ALN->len_aln+1);
 
       for ( a=T->len; a< ALN->len_aln; a++)
 	{
-	  T->peptide_chain[a]=vcalloc (1, sizeof (Amino_acid));
+	  T->peptide_chain[a]=(Amino_acid*)vcalloc (1, sizeof (Amino_acid));
 	}
       
       
@@ -220,7 +220,7 @@ Ca_trace * trim_ca_trace (Ca_trace *T, char *seq )
 	     tot_l++;
 	     T->ca[a]=NULL;
 	     
-	     if (!T->peptide_chain[a])T->peptide_chain[a]=vcalloc (1, sizeof (Amino_acid));
+	     if (!T->peptide_chain[a])T->peptide_chain[a]=(Amino_acid*)vcalloc (1, sizeof (Amino_acid));
 	     T->peptide_chain[a]->CA=NULL;
 	     T->peptide_chain[a]->C =NULL;
 	     T->peptide_chain[a]->CB=NULL;
@@ -281,12 +281,12 @@ Ca_trace * simple_read_ca_trace (char *tp_name )
 	int res_num=0, last_res_num=0;
 
 	
-	buf=vcalloc ( VERY_LONG_STRING, sizeof (char));
+	buf=(char*)vcalloc ( VERY_LONG_STRING, sizeof (char));
 	n=count_n_line_in_file (tp_name );
 	
 	if ( !T)
 	    {
-	    T=vcalloc ( 1, sizeof ( Ca_trace));
+	    T=(Ca_trace*)vcalloc ( 1, sizeof ( Ca_trace));
 	    declare_name (T->name);
 	    }
 	
@@ -320,13 +320,13 @@ Ca_trace * simple_read_ca_trace (char *tp_name )
 	
 
 	T->len=strlen (buf);
-	T->seq=vcalloc ( T->len+1, sizeof (char));
+	T->seq=(char*)vcalloc ( T->len+1, sizeof (char));
 	buf=lower_string (buf);
 	sprintf ( T->seq, "%s", buf);
 	n+=T->len;
-	T->structure=vcalloc ( n, sizeof (Atom*));
-	for ( a=0; a< n; a++)T->structure[a]=vcalloc ( 1, sizeof (Atom));
-	T->ca=vcalloc ( T->len+1, sizeof ( Atom*));
+	T->structure=(Atom**)vcalloc ( n, sizeof (Atom*));
+	for ( a=0; a< n; a++)T->structure[a]=(Atom*)vcalloc ( 1, sizeof (Atom));
+	T->ca=(Atom**)vcalloc ( T->len+1, sizeof ( Atom*));
 	a=0;
 
 	fp=vfopen (tp_name, "r");
@@ -354,8 +354,8 @@ Ca_trace * simple_read_ca_trace (char *tp_name )
 	   }
 	T->n_atom=a;
 
-	T->peptide_chain=vcalloc (T->len+1, sizeof (Amino_acid*));
-	for ( a=0; a<=T->len; a++) T->peptide_chain[a]=vcalloc (1, sizeof (Amino_acid));				   
+	T->peptide_chain=(Amino_acid**)vcalloc (T->len+1, sizeof (Amino_acid*));
+	for ( a=0; a<=T->len; a++) T->peptide_chain[a]=(Amino_acid*)vcalloc (1, sizeof (Amino_acid));				   
 	for ( a=0; a< T->n_atom; a++)
 	  {
 	    A=T->structure[a];
@@ -399,7 +399,7 @@ Ca_trace * hasch_ca_trace_transversal ( Ca_trace *TRACE)
 	Pdb_param *PP;
 
 
-	TRACE->Transversal=vcalloc ( 1, sizeof (Struct_nb));
+	TRACE->Transversal=(Struct_nb*)vcalloc ( 1, sizeof (Struct_nb));
 	
 	T=TRACE->Transversal;
 	PP=TRACE->pdb_param;
@@ -417,10 +417,10 @@ Ca_trace * hasch_ca_trace_transversal ( Ca_trace *TRACE)
 		    B=TRACE->ca[a+b];
 		    dist=get_atomic_distance ( A, B);
 		    
-		    T->nb[a]=vrealloc ( T->nb[a], (++T->nb[a][0]+1)*sizeof (int));
+		    T->nb[a]=(int*)vrealloc ( T->nb[a], (++T->nb[a][0]+1)*sizeof (int));
 		    T->nb[a][T->nb[a][0]]=b;
 
-		    T->d_nb[a]=vrealloc ( T->d_nb[a], (T->nb[a][0]+1)*sizeof (float));
+		    T->d_nb[a]=(float*)vrealloc ( T->d_nb[a], (T->nb[a][0]+1)*sizeof (float));
 		    T->d_nb[a][T->nb[a][0]]=dist;
 		    
 		    d++;
@@ -452,7 +452,7 @@ Ca_trace * hasch_ca_trace_nb ( Ca_trace *TRACE)
 	Struct_nb *T;
 	Pdb_param *PP;
 	
-	TRACE->Chain=vcalloc ( 1, sizeof (Struct_nb));
+	TRACE->Chain=(Struct_nb*)vcalloc ( 1, sizeof (Struct_nb));
 	
 	T=TRACE->Chain;
 	PP=TRACE->pdb_param;
@@ -472,10 +472,10 @@ Ca_trace * hasch_ca_trace_nb ( Ca_trace *TRACE)
 			if (b<a) dist=-dist;
 		
 
-			T->nb[a]=vrealloc ( T->nb[a], (++T->nb[a][0]+1)*sizeof (int));
+			T->nb[a]=(int*)vrealloc ( T->nb[a], (++T->nb[a][0]+1)*sizeof (int));
 			T->nb[a][T->nb[a][0]]=b;
 			
-			T->d_nb[a]=vrealloc ( T->d_nb[a], (T->nb[a][0]+1)*sizeof (float));
+			T->d_nb[a]=(float*)vrealloc ( T->d_nb[a], (T->nb[a][0]+1)*sizeof (float));
 			T->d_nb[a][T->nb[a][0]]=dist;
 			d++;
 			}
@@ -496,7 +496,7 @@ Ca_trace * hasch_ca_trace_bubble ( Ca_trace *TRACE)
 	Struct_nb *T;
 
 	PP=TRACE->pdb_param;
-	TRACE->Bubble=vcalloc ( 1, sizeof (Struct_nb));
+	TRACE->Bubble=(Struct_nb*)vcalloc ( 1, sizeof (Struct_nb));
 	T=TRACE->Bubble;
 	
 		
@@ -518,10 +518,10 @@ Ca_trace * hasch_ca_trace_bubble ( Ca_trace *TRACE)
 			if ( dist<PP->maximum_distance && FABS((A->res_num-B->res_num))>2)
 			   {
 			     T->nb[a][0]++;			       			       
-			     T->nb[a]=vrealloc ( T->nb[a], (T->nb[a][0]+1)*sizeof (int));
+			     T->nb[a]=(int*)vrealloc ( T->nb[a], (T->nb[a][0]+1)*sizeof (int));
 			     T->nb[a][T->nb[a][0]]=(TRACE->ca[b])->num;
 			     
-			     T->d_nb[a]=vrealloc ( T->d_nb[a], (T->nb[a][0]+1)*sizeof (float));
+			     T->d_nb[a]=(float*)vrealloc ( T->d_nb[a], (T->nb[a][0]+1)*sizeof (float));
 			     T->d_nb[a][T->nb[a][0]]= ((a<b)?dist:-dist);
 			   }						
 		    }
@@ -645,8 +645,8 @@ float ** print_contacts ( char  *file1, char *file2, float T)
   ST2=read_ca_trace (file2, "SEQRES");
   
   
-  cache1=vcalloc (ST1->len+1, sizeof (int));
-  cache2=vcalloc (ST2->len+1, sizeof (int));
+  cache1=(int*)vcalloc (ST1->len+1, sizeof (int));
+  cache2=(int*)vcalloc (ST2->len+1, sizeof (int));
   
   if (list1)for ( a=1; a<list1[0]; a++)cache1[list1[a]]=1;
   else for ( a=1; a<ST1->len; a++)cache1[a]=1;
@@ -700,7 +700,7 @@ int * identify_contacts (Ca_trace *ST1,Ca_trace *ST2, float T)
   
   
     
-  result=vcalloc ( ST1->len+1, sizeof (int));
+  result=(int*)vcalloc ( ST1->len+1, sizeof (int));
 
   
   for ( a=0; a< ST1->n_atom; a++)
@@ -763,7 +763,7 @@ char *string2contacts (char *seq,char *name, char *comment, float T)
   
 
   
-  result=vcalloc ( strlen (seq)+1, sizeof (char));
+  result=(char*)vcalloc ( strlen (seq)+1, sizeof (char));
   for ( a=0; a< strlen (seq); a++)result[a]='0';
   
   nlist=string2list (comment);

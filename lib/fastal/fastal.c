@@ -27,6 +27,10 @@
  */
 
 
+// the following functions are defined in scoring.c
+int complete_agreement_score(char *aln_file_name, const char *ref_directory); 
+void compute_ref_alignments(char *seq_file_name, char* ref_directory, int num_alignments, int num_seq_in_aln);
+
 
 //**************************   sparse dynamic aligning **********************************************************
 
@@ -34,11 +38,11 @@
 void
 fill_arguments_sparse(Sparse_dynamic_param* method_arguments_p)
 {
-	method_arguments_p->diagonals = vcalloc(3,sizeof(Diagonal));
-	method_arguments_p->dig_length = vcalloc(1,sizeof(int));
+	method_arguments_p->diagonals = (int*)vcalloc(3,sizeof(Diagonal));
+	method_arguments_p->dig_length =(int*) vcalloc(1,sizeof(int));
 	*method_arguments_p->dig_length = 3;
 	method_arguments_p->list = NULL;
-	method_arguments_p->list_length = vcalloc(1,sizeof(int));
+	method_arguments_p->list_length = (int*)vcalloc(1,sizeof(int));
 	*method_arguments_p->list_length = 0;
  	method_arguments_p->file_name1 = vtmpnam(NULL);
  	method_arguments_p->file_name2 = vtmpnam(NULL);
@@ -193,8 +197,8 @@ diagonals2int(int *diagonals,
 
 	int current_size = num_diagonals*dig_length + l1 +l2;
 
-	int **list = vcalloc(current_size, sizeof(int*));
-	int *diags = vcalloc(num_diagonals, sizeof(int));
+	int **list = (int**)vcalloc(current_size, sizeof(int*));
+	int *diags = (int*)vcalloc(num_diagonals, sizeof(int));
 	int i;
 	for (i = 0; i < num_diagonals; ++i)
 	{
@@ -204,8 +208,8 @@ diagonals2int(int *diagonals,
 	qsort (diags, num_diagonals, sizeof(int), fastal_compare);
 
 
-	int *diagx = vcalloc(num_diagonals, sizeof(int));
-	int *diagy = vcalloc(num_diagonals, sizeof(int));
+	int *diagx =(int*) vcalloc(num_diagonals, sizeof(int));
+	int *diagy =(int*) vcalloc(num_diagonals, sizeof(int));
 
 
 	//+1 because diagonals start here at position 1, like in "real" dynamic programming
@@ -234,12 +238,12 @@ diagonals2int(int *diagonals,
 	int tmpy_pos;
 	int tmpy_value;
 	int **M = param_set->M;
-	int *last_y = vcalloc(l2+1, sizeof(int));
-	int *last_x = vcalloc(l1+1, sizeof(int));
+	int *last_y = (int*)vcalloc(l2+1, sizeof(int));
+	int *last_x = (int*)vcalloc(l1+1, sizeof(int));
 	last_y[0] = 0;
 
 	last_x[0] = 0;
-	list[0] = vcalloc(6, sizeof(int));
+	list[0] =(int*) vcalloc(6, sizeof(int));
 
 	int list_pos = 1;
 	int dig_num = l1;
@@ -248,7 +252,7 @@ diagonals2int(int *diagonals,
 	//left border
 	for (; list_pos < tmp_l2; ++list_pos)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = 0;
 		list[list_pos][1] = list_pos;
 		last_y[list_pos] = list_pos;
@@ -264,10 +268,10 @@ diagonals2int(int *diagonals,
 		if (list_pos + num_diagonals+2 > current_size)
 		{
 			current_size += num_diagonals*1000;
-			list = vrealloc(list, current_size * sizeof(int*));
+			list =(int**) vrealloc(list, current_size * sizeof(int*));
 		}
 		//upper border
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] = (int*)vcalloc(6, sizeof(int));
 		list[list_pos][0] = ++pos_x;
 		list[list_pos][1] = 0;
 		list[list_pos][2] = pos_x * gep;
@@ -280,7 +284,7 @@ diagonals2int(int *diagonals,
 		//diagonals
 		for (i = a; i <= b; ++i)
 		{
-			list[list_pos] = vcalloc(6, sizeof(int));
+			list[list_pos] =(int*) vcalloc(6, sizeof(int));
 
 			list[list_pos][0] = ++diagx[i];
 
@@ -301,7 +305,7 @@ diagonals2int(int *diagonals,
 		//lower border
 		if (list[list_pos-1][1] != l2)
 		{
-			list[list_pos] = vcalloc(6, sizeof(int));
+			list[list_pos] =(int*) vcalloc(6, sizeof(int));
 			list[list_pos][0] = pos_x;
 			list[list_pos][1] = l2;
 			list[list_pos][3] = last_y[l2];
@@ -330,12 +334,12 @@ diagonals2int(int *diagonals,
 	if (list_pos + l2+2 > current_size)
 	{
 		current_size += list_pos + l2 + 2;
-		list = vrealloc(list, current_size * sizeof(int*));
+		list =(int**) vrealloc(list, current_size * sizeof(int*));
 	}
 
 
 // 	right border
-	list[list_pos] = vcalloc(6, sizeof(int));
+	list[list_pos] =(int*) vcalloc(6, sizeof(int));
 	list[list_pos][0] = l1;
 	list[list_pos][1] = 0;
 	list[list_pos][3] = last_x[l1-1];
@@ -346,7 +350,7 @@ diagonals2int(int *diagonals,
 
 	for (i = 1; i <= l2; ++i)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = l1;
 		list[list_pos][1] = i;
 		list[list_pos][3] = last_y[i];
@@ -404,8 +408,8 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 
 	int current_size = l2+l1;
 
-	int **list = vcalloc(current_size, sizeof(int*));
-	int *diags = vcalloc(num_diagonals, sizeof(int));
+	int **list =(int**) vcalloc(current_size, sizeof(int*));
+	int *diags =(int*) vcalloc(num_diagonals, sizeof(int));
 	int i;
 	for (i = 0; i < num_diagonals; ++i)
 	{
@@ -414,9 +418,9 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 	qsort (diags, num_diagonals, sizeof(int), fastal_compare);
 
 
-	int *diagx = vcalloc(num_diagonals, sizeof(int));
-	int *diagy = vcalloc(num_diagonals, sizeof(int));
-	int *old_pos = vcalloc(num_diagonals, sizeof(int));
+	int *diagx =(int*) vcalloc(num_diagonals, sizeof(int));
+	int *diagy =(int*) vcalloc(num_diagonals, sizeof(int));
+	int *old_pos =(int*) vcalloc(num_diagonals, sizeof(int));
 
 	//+1 because diagonals start here at position 1, like in "real" dynamic programming
 	int a = -1, b = -1;
@@ -445,12 +449,12 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 	int tmpy_pos;
 	int tmpy_value;
 	int **M = param_set->M;
-	int *last_y = vcalloc(l2+1, sizeof(int));
-	int *last_x = vcalloc(l1+1, sizeof(int));
+	int *last_y =(int*) vcalloc(l2+1, sizeof(int));
+	int *last_x =(int*) vcalloc(l1+1, sizeof(int));
 	last_y[0] = 0;
 
 	last_x[0] = 0;
-	list[0] = vcalloc(6, sizeof(int));
+	list[0] =(int*) vcalloc(6, sizeof(int));
 
 	int list_pos = 1;
 	int dig_num = l1;
@@ -459,7 +463,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 	//left border
 	for (; list_pos < tmp_l2; ++list_pos)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = 0;
 		list[list_pos][1] = list_pos;
 		last_y[list_pos] = list_pos;
@@ -478,10 +482,10 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 		if (list_pos + num_diagonals+2 > current_size)
 		{
 			current_size += num_diagonals*1000;
-			list = vrealloc(list, current_size * sizeof(int*));
+			list =(int**) vrealloc(list, current_size * sizeof(int*));
 		}
 		//upper border
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = ++pos_x;
 		list[list_pos][1] = 0;
 		list[list_pos][2] = pos_x * gep;
@@ -494,7 +498,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 		//diagonals
 		for (i = a; i <= b; ++i)
 		{
-			list[list_pos] = vcalloc(6, sizeof(int));
+			list[list_pos] =(int*) vcalloc(6, sizeof(int));
 
 			list[list_pos][0] = ++diagx[i];
 
@@ -544,7 +548,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 		//lower border
 		if (list[list_pos-1][1] != l2)
 		{
-			list[list_pos] = vcalloc(6, sizeof(int));
+			list[list_pos] =(int*) vcalloc(6, sizeof(int));
 			list[list_pos][0] = pos_x;
 			list[list_pos][1] = l2;
 			list[list_pos][3] = last_y[l2];
@@ -573,12 +577,12 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 	if (list_pos + l2+2 > current_size)
 	{
 		current_size += list_pos + l2 + 2;
-		list = vrealloc(list, current_size * sizeof(int*));
+		list =(int**) vrealloc(list, current_size * sizeof(int*));
 	}
 
 
 // 	right border
-	list[list_pos] = vcalloc(6, sizeof(int));
+	list[list_pos] =(int*) vcalloc(6, sizeof(int));
 	list[list_pos][0] = l1;
 	list[list_pos][1] = 0;
 	list[list_pos][3] = last_x[l1-1];
@@ -589,7 +593,7 @@ diagonals2int_gap_test(int *diagonals, int num_diagonals, char *seq1, char *seq2
 
 	for (i = 1; i <= l2; ++i)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = l1;
 		list[list_pos][1] = i;
 		list[list_pos][3] = last_y[i];
@@ -646,8 +650,8 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 
 	int current_size = l2+l1;
 
-	int **list = vcalloc(current_size, sizeof(int*));
-	int *diags = vcalloc(num_diagonals, sizeof(int));
+	int **list =(int**) vcalloc(current_size, sizeof(int*));
+	int *diags =(int*) vcalloc(num_diagonals, sizeof(int));
 	int i;
 	for (i = 0; i < num_diagonals; ++i)
 	{
@@ -657,9 +661,9 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 	qsort (diags, num_diagonals, sizeof(int), fastal_compare);
 
 
-	int *diagx = vcalloc(num_diagonals, sizeof(int));
-	int *diagy = vcalloc(num_diagonals, sizeof(int));
-	int *old_pos = vcalloc(num_diagonals, sizeof(int));
+	int *diagx =(int*) vcalloc(num_diagonals, sizeof(int));
+	int *diagy =(int*) vcalloc(num_diagonals, sizeof(int));
+	int *old_pos =(int*) vcalloc(num_diagonals, sizeof(int));
 
 	//+1 because diagonals start here at position 1, like in "real" dynamic programming
 	int a = -1, b = -1;
@@ -688,12 +692,12 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 	int tmpy_pos;
 	int tmpy_value;
 // 	int **M = param_set->M;
-	int *last_y = vcalloc(l2+1, sizeof(int));
-	int *last_x = vcalloc(l1+1, sizeof(int));
+	int *last_y =(int*) vcalloc(l2+1, sizeof(int));
+	int *last_x =(int*) vcalloc(l1+1, sizeof(int));
 	last_y[0] = 0;
 
 	last_x[0] = 0;
-	list[0] = vcalloc(6, sizeof(int));
+	list[0] =(int*) vcalloc(6, sizeof(int));
 
 	int list_pos = 1;
 	int dig_num = l1;
@@ -702,7 +706,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 	//left border
 	for (; list_pos < tmp_l2; ++list_pos)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = 0;
 		list[list_pos][1] = list_pos;
 		last_y[list_pos] = list_pos;
@@ -721,10 +725,10 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 		if (list_pos + num_diagonals+2 > current_size)
 		{
 			current_size += num_diagonals*1000;
-			list = vrealloc(list, current_size * sizeof(int*));
+			list =(int**) vrealloc(list, current_size * sizeof(int*));
 		}
 		//upper border
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = ++pos_x;
 		list[list_pos][1] = 0;
 		list[list_pos][2] = pos_x * gep;
@@ -737,7 +741,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 		//diagonals
 		for (i = a; i <= b; ++i)
 		{
-			list[list_pos] = vcalloc(6, sizeof(int));
+			list[list_pos] =(int*) vcalloc(6, sizeof(int));
 
 			list[list_pos][0] = ++diagx[i];
 
@@ -771,7 +775,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 		//lower border
 		if (list[list_pos-1][1] != l2)
 		{
-			list[list_pos] = vcalloc(6, sizeof(int));
+			list[list_pos] =(int*) vcalloc(6, sizeof(int));
 			list[list_pos][0] = pos_x;
 			list[list_pos][1] = l2;
 			list[list_pos][3] = last_y[l2];
@@ -800,12 +804,12 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 	if (list_pos + l2+2 > current_size)
 	{
 		current_size += list_pos + l2 + 2;
-		list = vrealloc(list, current_size * sizeof(int*));
+		list =(int**) vrealloc(list, current_size * sizeof(int*));
 	}
 
 
 // 	right border
-	list[list_pos] = vcalloc(6, sizeof(int));
+	list[list_pos] =(int*) vcalloc(6, sizeof(int));
 	list[list_pos][0] = l1;
 	list[list_pos][1] = 0;
 	list[list_pos][3] = last_x[l1-1];
@@ -816,7 +820,7 @@ diagonals2int_euclidf(int *diagonals, int num_diagonals, char *seq1, char *seq2,
 
 	for (i = 1; i <= l2; ++i)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = l1;
 		list[list_pos][1] = i;
 		list[list_pos][3] = last_y[i];
@@ -872,8 +876,8 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 
 	int current_size = l2+l1;
 
-	int **list = vcalloc(current_size, sizeof(int*));
-	int *diags = vcalloc(num_diagonals, sizeof(int));
+	int **list = (int**)vcalloc(current_size, sizeof(int*));
+	int *diags =(int*) vcalloc(num_diagonals, sizeof(int));
 	int i;
 	for (i = 0; i < num_diagonals; ++i)
 	{
@@ -883,9 +887,9 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 	qsort (diags, num_diagonals, sizeof(int), fastal_compare);
 
 
-	int *diagx = vcalloc(num_diagonals, sizeof(int));
-	int *diagy = vcalloc(num_diagonals, sizeof(int));
-	int *old_pos = vcalloc(num_diagonals, sizeof(int));
+	int *diagx =(int*) vcalloc(num_diagonals, sizeof(int));
+	int *diagy =(int*) vcalloc(num_diagonals, sizeof(int));
+	int *old_pos =(int*) vcalloc(num_diagonals, sizeof(int));
 
 	//+1 because diagonals start here at position 1, like in "real" dynamic programming
 	int a = -1, b = -1;
@@ -914,12 +918,12 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 	int tmpy_pos;
 	int tmpy_value;
 // 	int **M = param_set->M;
-	int *last_y = vcalloc(l2+1, sizeof(int));
-	int *last_x = vcalloc(l1+1, sizeof(int));
+	int *last_y =(int*) vcalloc(l2+1, sizeof(int));
+	int *last_x =(int*) vcalloc(l1+1, sizeof(int));
 	last_y[0] = 0;
 
 	last_x[0] = 0;
-	list[0] = vcalloc(6, sizeof(int));
+	list[0] =(int*) vcalloc(6, sizeof(int));
 
 	int list_pos = 1;
 	int dig_num = l1;
@@ -928,7 +932,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 	//left border
 	for (; list_pos < tmp_l2; ++list_pos)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = 0;
 		list[list_pos][1] = list_pos;
 		last_y[list_pos] = list_pos;
@@ -947,10 +951,10 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 		if (list_pos + num_diagonals+2 > current_size)
 		{
 			current_size += num_diagonals*1000;
-			list = vrealloc(list, current_size * sizeof(int*));
+			list =(int**) vrealloc(list, current_size * sizeof(int*));
 		}
 		//upper border
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = ++pos_x;
 		list[list_pos][1] = 0;
 		list[list_pos][2] = pos_x * gep;
@@ -963,7 +967,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 		//diagonals
 		for (i = a; i <= b; ++i)
 		{
-			list[list_pos] = vcalloc(6, sizeof(int));
+			list[list_pos] =(int*) vcalloc(6, sizeof(int));
 
 			list[list_pos][0] = ++diagx[i];
 
@@ -997,7 +1001,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 		//lower border
 		if (list[list_pos-1][1] != l2)
 		{
-			list[list_pos] = vcalloc(6, sizeof(int));
+			list[list_pos] =(int*) vcalloc(6, sizeof(int));
 			list[list_pos][0] = pos_x;
 			list[list_pos][1] = l2;
 			list[list_pos][3] = last_y[l2];
@@ -1026,12 +1030,12 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 	if (list_pos + l2+2 > current_size)
 	{
 		current_size += list_pos + l2 + 2;
-		list = vrealloc(list, current_size * sizeof(int*));
+		list = (int**)vrealloc(list, current_size * sizeof(int*));
 	}
 
 
 // 	right border
-	list[list_pos] = vcalloc(6, sizeof(int));
+	list[list_pos] =(int*) vcalloc(6, sizeof(int));
 	list[list_pos][0] = l1;
 	list[list_pos][1] = 0;
 	list[list_pos][3] = last_x[l1-1];
@@ -1042,7 +1046,7 @@ diagonals2int_dot(int *diagonals, int num_diagonals, char *seq1, char *seq2, Fas
 
 	for (i = 1; i <= l2; ++i)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] =(int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = l1;
 		list[list_pos][1] = i;
 		list[list_pos][3] = last_y[i];
@@ -1196,9 +1200,9 @@ list2linked_pair_wise_fastal(Fastal_profile *prf1,
 
 		vfree (MI);vfree (MJ); vfree (MM);
 
-		MI=vcalloc (5*n, sizeof (long));
-		MJ=vcalloc (5*n, sizeof (long));
-		MM=vcalloc (5*n, sizeof (long));
+		MI=(long int*)vcalloc (5*n, sizeof (long));
+		MJ=(long int*)vcalloc (5*n, sizeof (long));
+		MM=(long int*)vcalloc (5*n, sizeof (long));
 
 	}
 	else
@@ -1427,7 +1431,7 @@ profile2consensus(Fastal_profile *profile, Fastal_param *param_set)
 
 // 	FILE *cons_f = fopen(file_name,"w");
 // 	fprintf(cons_f, ">%i\n", profile->prf_number);
-	char* seq = vcalloc(profile->length+1, sizeof(char));
+	char* seq =(char*) vcalloc(profile->length+1, sizeof(char));
 	int i, j;
 	int most_pos = -1, most;
 	int alphabet_size = param_set->alphabet_size;
@@ -1491,10 +1495,10 @@ seq_pair2diagonal_own(char *seq1,
 		word_number = (int)pow(24, word_length);
 		ng = 24;
 	}
-	int **word_index = vcalloc(word_number, sizeof(int*));
+	int **word_index =(int**) vcalloc(word_number, sizeof(int*));
 	for (i = 0 ; i < word_number; ++i)
 	{
-		word_index[i] = vcalloc(20, sizeof(int));
+		word_index[i] =(int*) vcalloc(20, sizeof(int));
 		word_index[i][0] = 2;
 		word_index[i][1] = 20;
 	}
@@ -1502,7 +1506,7 @@ seq_pair2diagonal_own(char *seq1,
 
 	//making of k-tup index of seq1
 
-	int *prod=vcalloc (word_length, sizeof(int));
+	int *prod=(int*)vcalloc (word_length, sizeof(int));
 	for ( i=0; i<word_length; i++)
 	{
 		prod[word_length-i-1]=(int)pow(ng,i);
@@ -1562,7 +1566,7 @@ seq_pair2diagonal_own(char *seq1,
 		if (tmp[0] == tmp[1])
 		{
 			tmp[1] += 25;
-			tmp = vrealloc(tmp, word_index[index][1] *sizeof(int));
+			tmp =(int*) vrealloc(tmp, word_index[index][1] *sizeof(int));
 			word_index[index] = tmp;
 		}
 		tmp[tmp[0]++] = i;
@@ -1573,7 +1577,7 @@ seq_pair2diagonal_own(char *seq1,
 	//counting diagonals
 	const int window_length = 14;
 
-	Diagonal_counter *diag_index = vcalloc(l1+l2, sizeof(Diagonal_counter));
+	Diagonal_counter *diag_index =(Diagonal_counter*) vcalloc(l1+l2, sizeof(Diagonal_counter));
 	int num = l1+l2;
 	for (i = 0; i < num; ++i)
 	{
@@ -1648,7 +1652,7 @@ seq_pair2diagonal_own(char *seq1,
 		if (current_pos > (*dig_length)-3)
 		{
 			(*dig_length) += 30;
-			diags = vrealloc(diags, sizeof(int)*(*dig_length));
+			diags =(int*) vrealloc(diags, sizeof(int)*(*dig_length));
 		}
 
 
@@ -1700,10 +1704,10 @@ seq_pair2diagonal_swift(char *seq1,
 		word_number = (int)pow(24, word_length);
 		ng = 24;
 	}
-	int **word_index = vcalloc(word_number, sizeof(int*));
+	int **word_index =(int**) vcalloc(word_number, sizeof(int*));
 	for (i = 0 ; i < word_number; ++i)
 	{
-		word_index[i] = vcalloc(20, sizeof(int));
+		word_index[i] =(int*) vcalloc(20, sizeof(int));
 		word_index[i][0] = 2;
 		word_index[i][1] = 20;
 	}
@@ -1711,7 +1715,7 @@ seq_pair2diagonal_swift(char *seq1,
 
 	//making of k-tup index of seq1
 
-	int *prod=vcalloc (word_length, sizeof(int));
+	int *prod=(int*)vcalloc (word_length, sizeof(int));
 	for ( i=0; i<word_length; i++)
 	{
 		prod[word_length-i-1]=(int)pow(ng,i);
@@ -1741,7 +1745,7 @@ seq_pair2diagonal_swift(char *seq1,
 		if (tmp[0] == tmp[1])
 		{
 			tmp[1] += 25;
-			tmp = vrealloc(tmp, word_index[index][1] *sizeof(int));
+			tmp =(int*) vrealloc(tmp, word_index[index][1] *sizeof(int));
 			word_index[index] = tmp;
 		}
 		tmp[tmp[0]++] = i;
@@ -1752,7 +1756,7 @@ seq_pair2diagonal_swift(char *seq1,
 	const int window_length = 14;
 	const int threshold = 12;
 
-	Swift_diagonal *diag_index = vcalloc(l1+l2, sizeof(Swift_diagonal));
+	Swift_diagonal *diag_index =(Swift_diagonal*) vcalloc(l1+l2, sizeof(Swift_diagonal));
 	int num = l1+l2;
 	for (i = 0; i < num; ++i)
 	{
@@ -1816,7 +1820,7 @@ seq_pair2diagonal_swift(char *seq1,
 			if (current_pos > (*dig_length)-3)
 			{
 				(*dig_length) += 30;
-				diags = vrealloc(diags, sizeof(int)*(*dig_length));
+				diags =(int*) vrealloc(diags, sizeof(int)*(*dig_length));
 			}
 			y = diag_index[i].diagonal - l1;
 			if (y < 0)
@@ -1866,7 +1870,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 						int is_dna)
 {
 // 	static int blast_measure[12]={0,0,0,0,0,0,0,0,0,0,0,0};
-	int *diag = vcalloc(l1 + l2, sizeof(int));
+	int *diag = (int*) vcalloc(l1 + l2, sizeof(int));
 	char *out_file = vtmpnam(NULL);
 	char blast_command[200];
 // 	char blast_command2[200];
@@ -1919,7 +1923,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 		if (current_pos >= *dig_length-20)
 		{
 			(*dig_length) += 90;
-			diags = vrealloc(diags, sizeof(int)*(*dig_length));
+			diags =(int*)  vrealloc(diags, sizeof(int)*(*dig_length));
 		}
 		if (diag[l1-(pos_q)+pos_d] == 0)
 		{
@@ -1968,7 +1972,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 			if (current_pos >= *dig_length-20)
 			{
 				(*dig_length) += 90;
-				diags = vrealloc(diags, sizeof(int)*(*dig_length));
+				diags =(int*) vrealloc(diags, sizeof(int)*(*dig_length));
 			}
 			if (diag[l1-(pos_q)+pos_d] == 0)
 			{
@@ -1997,7 +2001,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = 0;
 				diags[current_pos++] = i;
@@ -2010,7 +2014,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = i;
 				diags[current_pos++] = 0;
@@ -2027,7 +2031,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = 0;
 				diags[current_pos++] = i;
@@ -2039,7 +2043,7 @@ seq_pair2blast_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = i;
 				diags[current_pos++] = 0;
@@ -2067,7 +2071,7 @@ seq_pair2blat_diagonal(char *seq_file_name1,
 						int l2,
 						int is_dna)
 {
-	int *diag = vcalloc(l1 + l2, sizeof(int));
+	int *diag = (int*) vcalloc(l1 + l2, sizeof(int));
 	char *out_file = vtmpnam(NULL);
 	char blast_command[200];
 // 	char blast_command2[200];
@@ -2110,7 +2114,7 @@ seq_pair2blat_diagonal(char *seq_file_name1,
 		if (current_pos >= *dig_length-20)
 		{
 			(*dig_length) += 90;
-			diags = vrealloc(diags, sizeof(int)*(*dig_length));
+			diags =(int*) vrealloc(diags, sizeof(int)*(*dig_length));
 		}
 		if (diag[l1-(pos_q)+pos_d] == 0)
 		{
@@ -2132,7 +2136,7 @@ seq_pair2blat_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = 0;
 				diags[current_pos++] = i;
@@ -2145,7 +2149,7 @@ seq_pair2blat_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = i;
 				diags[current_pos++] = 0;
@@ -2162,7 +2166,7 @@ seq_pair2blat_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = 0;
 				diags[current_pos++] = i;
@@ -2174,7 +2178,7 @@ seq_pair2blat_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = i;
 				diags[current_pos++] = 0;
@@ -2213,7 +2217,7 @@ seq_pair2blastz_diagonal(char *seq_file_name1,
 						 int l2,
 						 int is_dna)
 {
-	int *diag = vcalloc(l1 + l2, sizeof(int));
+	int *diag = (int*) vcalloc(l1 + l2, sizeof(int));
 	char *out_file = vtmpnam(NULL);
 	char blast_command[200];
 // 	char blast_command2[200];
@@ -2254,7 +2258,7 @@ seq_pair2blastz_diagonal(char *seq_file_name1,
 					if (current_pos >= *dig_length-20)
 					{
 						(*dig_length) += 90;
-						diags = vrealloc(diags, sizeof(int)*(*dig_length));
+						diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 					}
 					pos_q = atoi(strtok(line_tmp, delims));
 					pos_d = atoi(strtok(NULL, delims));
@@ -2285,7 +2289,7 @@ seq_pair2blastz_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = 0;
 				diags[current_pos++] = i;
@@ -2298,7 +2302,7 @@ seq_pair2blastz_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = i;
 				diags[current_pos++] = 0;
@@ -2315,7 +2319,7 @@ seq_pair2blastz_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = 0;
 				diags[current_pos++] = i;
@@ -2327,7 +2331,7 @@ seq_pair2blastz_diagonal(char *seq_file_name1,
 				if (current_pos >= *dig_length-20)
 				{
 					(*dig_length) += 90;
-					diags = vrealloc(diags, sizeof(int)*(*dig_length));
+					diags = (int*) vrealloc(diags, sizeof(int)*(*dig_length));
 				}
 				diags[current_pos++] = i;
 				diags[current_pos++] = 0;
@@ -2348,26 +2352,24 @@ seq_pair2blastz_diagonal(char *seq_file_name1,
 //**************************   needleman-wunsch aligning **********************************************************
 
 
-void
-fill_arguments_nw(Nw_param* method_arguments_p, int alphabet_size)
+void fill_arguments_nw(Nw_param* method_arguments_p, int alphabet_size)
 {
-	method_arguments_p-> dyn_matrix = vcalloc(1,sizeof(double*));
-	method_arguments_p->dyn_matrix[0] = vcalloc(1,sizeof(double));
-	method_arguments_p->length1 = vcalloc(1,sizeof(int));
-	method_arguments_p->length2 = vcalloc(1,sizeof(int));
+	method_arguments_p-> dyn_matrix =(double**) vcalloc(1,sizeof(double*));
+	method_arguments_p->dyn_matrix[0] =(double*) vcalloc(1,sizeof(double));
+	method_arguments_p->length1 =(int*) vcalloc(1,sizeof(int));
+	method_arguments_p->length2 =(int*) vcalloc(1,sizeof(int));
 	*method_arguments_p->length1 = 1;
 	*method_arguments_p->length2 = 1;
-	method_arguments_p->sumup_prf = vcalloc(alphabet_size+1,sizeof(int*));
+	method_arguments_p->sumup_prf =(int**) vcalloc(alphabet_size+1,sizeof(int*));
 	int i;
 	for (i = 0; i < alphabet_size+1; ++i)
-		method_arguments_p->sumup_prf[i] = vcalloc(1,sizeof(int));
-	method_arguments_p->sumup_length = vcalloc(1,sizeof(int));
+		method_arguments_p->sumup_prf[i] = (int*) vcalloc(1,sizeof(int));
+	method_arguments_p->sumup_length = (int*) vcalloc(1,sizeof(int));
 	*method_arguments_p->sumup_length = 1;
 }
 
 
-void
-free_nw(Nw_param* method_arguments_p, int alphabet_size)
+void free_nw(Nw_param* method_arguments_p, int alphabet_size)
 {
 	free_dyn_matrix(*method_arguments_p->length1,method_arguments_p->dyn_matrix);
 	int i;
@@ -2492,7 +2494,7 @@ nw_matrix2edit_file(double **prog_matrix,	//dynamic programming matrix
 
 			for (i = 0; i <alphabet_size+1; ++i)
 			{
-				prf_field[i] = vrealloc(prf_field[i], (*field_length)*sizeof(int));
+				prf_field[i] = (int*)vrealloc(prf_field[i], (*field_length)*sizeof(int));
 			}
 		}
 
@@ -2613,7 +2615,7 @@ prf_nw(Fastal_profile *profile1,
 	{
 		for (i = 0; i < alphabet_size+1; ++i)
 		{
-			sumup_prf[i] = vrealloc(sumup_prf[i], profile1->length*sizeof(int));
+			sumup_prf[i] = (int*)vrealloc(sumup_prf[i], profile1->length*sizeof(int));
 		}
 		*sumup_length = profile1->length;
 	}
@@ -2668,25 +2670,25 @@ prf_nw(Fastal_profile *profile1,
 void
 fill_arguments_gotoh(Gotoh_param* method_arguments_p, int alphabet_size)
 {
-	method_arguments_p->m_matrix = vcalloc(1,sizeof(double*));
-	method_arguments_p->m_matrix[0] = vcalloc(1,sizeof(double));
-	method_arguments_p->d_matrix = vcalloc(1,sizeof(double*));
-	method_arguments_p->d_matrix[0] = vcalloc(1,sizeof(double));
-	method_arguments_p->i_matrix = vcalloc(1,sizeof(double*));
-	method_arguments_p->i_matrix[0] = vcalloc(1,sizeof(double));
-	method_arguments_p->length1 = vcalloc(1,sizeof(int));
-	method_arguments_p->length2 = vcalloc(1,sizeof(int));
-	method_arguments_p->log_saver = vcalloc(alphabet_size+1, sizeof(double*));
+	method_arguments_p->m_matrix =(double**) vcalloc(1,sizeof(double*));
+	method_arguments_p->m_matrix[0] = (double*)vcalloc(1,sizeof(double));
+	method_arguments_p->d_matrix = (double**)vcalloc(1,sizeof(double*));
+	method_arguments_p->d_matrix[0] = (double*)vcalloc(1,sizeof(double));
+	method_arguments_p->i_matrix =(double**) vcalloc(1,sizeof(double*));
+	method_arguments_p->i_matrix[0] = (double*)vcalloc(1,sizeof(double));
+	method_arguments_p->length1 = (int*)vcalloc(1,sizeof(int));
+	method_arguments_p->length2 =(int*) vcalloc(1,sizeof(int));
+	method_arguments_p->log_saver =(double**) vcalloc(alphabet_size+1, sizeof(double*));
 	*method_arguments_p->length1 = 1;
 	*method_arguments_p->length2 = 1;
-	method_arguments_p->sumup_prf = vcalloc(alphabet_size+1,sizeof(int*));
+	method_arguments_p->sumup_prf =(int**) vcalloc(alphabet_size+1,sizeof(int*));
 	int i;
 	for (i = 0; i < alphabet_size+1; ++i)
 	{
-		method_arguments_p->sumup_prf[i] = vcalloc(1,sizeof(int));
-		method_arguments_p->log_saver[i] = vcalloc(1, sizeof(double));
+		method_arguments_p->sumup_prf[i] =(int*) vcalloc(1,sizeof(int));
+		method_arguments_p->log_saver[i] =(double*) vcalloc(1, sizeof(double));
 	}
-	method_arguments_p->sumup_length = vcalloc(1,sizeof(int));
+	method_arguments_p->sumup_length =(int*) vcalloc(1,sizeof(int));
 	*method_arguments_p->sumup_length = 1;
 }
 
@@ -2710,8 +2712,7 @@ free_gotoh(Gotoh_param* method_arguments_p, int alphabet_size)
 }
 
 
-int
-gotoh_dyn(Fastal_profile **profiles, Fastal_param *param_set, void *method_arguments_p, int is_dna, FILE *edit_file, FILE *prof_file, int number)
+int gotoh_dyn(Fastal_profile **profiles, Fastal_param *param_set, void *method_arguments_p, int is_dna, FILE *edit_file, FILE *prof_file, int number)
 {
 	Gotoh_param *arguments = (Gotoh_param*)method_arguments_p;
 	arguments->m_matrix = resize_dyn_matrix(arguments->m_matrix, *arguments->length1, *arguments->length2, profiles[0]->length+1, profiles[1]->length+1);
@@ -2722,7 +2723,7 @@ gotoh_dyn(Fastal_profile **profiles, Fastal_param *param_set, void *method_argum
 	{
 		for (i = 0; i < param_set->alphabet_size; ++i)
 		{
-			arguments->log_saver[i] = vrealloc(arguments->log_saver[i], (profiles[1]->length)*sizeof(double*));
+			arguments->log_saver[i] =(double*) vrealloc(arguments->log_saver[i], (profiles[1]->length)*sizeof(double*));
 		}
 	}
 	*arguments->length1 = profiles[0]->length+1;
@@ -2787,7 +2788,7 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 
 			for (i = 0; i <alphabet_size+1; ++i)
 			{
-				prf_field[i] = vrealloc(prf_field[i], (*field_length)*sizeof(int));
+				prf_field[i] = (int*)vrealloc(prf_field[i], (*field_length)*sizeof(int));
 			}
 		}
 
@@ -2891,7 +2892,7 @@ gotoh_matrix2edit_file(double **m_matrix,		//dynamic programming matrix
 
 		for (i = 0; i <alphabet_size+1; ++i)
 		{
-			prf_field[i] = vrealloc(prf_field[i], (*field_length)*sizeof(int));
+			prf_field[i] = (int*)vrealloc(prf_field[i], (*field_length)*sizeof(int));
 		}
 	}
 	//gaps in prf2
@@ -2978,7 +2979,7 @@ prf_gotoh(Fastal_profile *profile1,
 	double comp_num = log((double)profile1->number_of_sequences) + log((double)profile2->number_of_sequences);
 	static double *log_test = NULL;
 	if (!log_test)
-		log_test = vcalloc(alphabet_size, sizeof(double));
+		log_test =(double*) vcalloc(alphabet_size, sizeof(double));
 // 	int k;
 	int **prf1 = profile1->prf;
 	int **prf2 = profile2->prf;
@@ -3184,7 +3185,7 @@ file_pos2profile(FILE *seq_file,			//File with sequences
 			{
 				for (i = 0; i < alphabet_size; ++i)
 				{
-					profile->prf[i] = vrealloc(profile->prf[i], (profile->allocated_memory+PROFILE_ENLARGEMENT)*sizeof(int));
+					profile->prf[i] =(int*) vrealloc(profile->prf[i], (profile->allocated_memory+PROFILE_ENLARGEMENT)*sizeof(int));
 				}
 				profile->allocated_memory += PROFILE_ENLARGEMENT;
 			}
@@ -3227,7 +3228,7 @@ make_index_of_file(char *file_name, 		//file with sequences
 				   long **file_positions)	//array to save the positions
 {
 	const int LINE_LENGTH = 150;
-	(*file_positions) = vcalloc(ENLARGEMENT_PER_STEP,  sizeof(long));
+	(*file_positions) =(long int*) vcalloc(ENLARGEMENT_PER_STEP,  sizeof(long));
 
 	FILE *file = fopen(file_name,"r");
 
@@ -3254,7 +3255,7 @@ make_index_of_file(char *file_name, 		//file with sequences
 
 				if (num_of_sequences == mem_for_pos)
 				{
-					(*file_positions) = vrealloc((*file_positions),(ENLARGEMENT_PER_STEP+mem_for_pos) * sizeof(long));
+					(*file_positions) = (long int*)vrealloc((*file_positions),(ENLARGEMENT_PER_STEP+mem_for_pos) * sizeof(long));
 					mem_for_pos += ENLARGEMENT_PER_STEP;
 				}
 			}
@@ -3309,7 +3310,7 @@ profile_file2profile(Fastal_profile *prof,	//structure to save the profile in
 	if (prof->length > prof->allocated_memory)
 		for (i = 0;i < alphabet_size; ++i)
 		{
-			prof->prf[i] = vrealloc(prof->prf[i],prof->length*sizeof(int));
+			prof->prf[i] =(int*) vrealloc(prof->prf[i],prof->length*sizeof(int));
 		}
 	prof->allocated_memory = prof->length;
 	char delims[] = " ";
@@ -3732,8 +3733,7 @@ write2file(int **sumup_prf,
 /**
 *	\brief main of the fastal algorithm
 */
-int
-fastal_main(int argc,		//number of arguments
+int fastal_main(int argc,		//number of arguments
 			char **argv)	//arguments first = fastal, second = tree
 {
 
@@ -3746,7 +3746,7 @@ fastal_main(int argc,		//number of arguments
 
 	arg_parse (argc, argv, &arguments);
 
-	Fastal_param *param_set = vcalloc(1,sizeof(Fastal_param));
+	Fastal_param *param_set =(Fastal_param*) vcalloc(1,sizeof(Fastal_param));
 
 	fill_parameters(arguments.is_dna, param_set, arguments.method, arguments.diag_method, arguments.mat);
 	param_set->gep = arguments.gep;
@@ -3791,14 +3791,14 @@ fastal_main(int argc,		//number of arguments
 	//edit file management
 
 // 	long current_edit_pos;
-	long *edit_positions = vcalloc(number_of_sequences,sizeof(long));
+	long *edit_positions =(long int*) vcalloc(number_of_sequences,sizeof(long));
 
 
 	//profile management
-	Fastal_profile **profiles = vcalloc(3,sizeof(Fastal_profile*));
+	Fastal_profile **profiles =(Fastal_profile**) vcalloc(3,sizeof(Fastal_profile*));
 	initiate_profiles(profiles, param_set);
 	FILE * prof_file = fopen(vtmpnam(NULL),"w+");
-	long* profile_positions = vcalloc(4,sizeof(long*));
+	long* profile_positions = (long int*)vcalloc(4,sizeof(long*));
 	int max_prof = 4;
 	int saved_prof = 0;
 
@@ -3927,7 +3927,7 @@ fastal_main(int argc,		//number of arguments
 		if (saved_prof == max_prof)
 		{
 			max_prof += 5;
-			profile_positions = vrealloc(profile_positions, max_prof*sizeof(long));
+			profile_positions = (long int*)vrealloc(profile_positions, max_prof*sizeof(long));
 		}
 
 		edit_positions[node[2]-number_of_sequences] = ftell(edit_file);
@@ -3946,7 +3946,7 @@ fastal_main(int argc,		//number of arguments
 	FILE *alignment_file = fopen(arguments.output_file, "w");
 	FILE *edit_seq_file = fopen(vtmpnam(NULL),"w+");
 
-	char *aligned_sequence = vcalloc(alignment_length+3, sizeof(char));
+	char *aligned_sequence =(char*) vcalloc(alignment_length+3, sizeof(char));
 
 
 	long offset = ftell(edit_seq_file);
@@ -4059,16 +4059,16 @@ resize_dyn_matrix(double **dyn_matrix,	//the dynamic programming matrix
 	int i;
 	if (old_length1 < length1)
 	{
-		dyn_matrix = vrealloc(dyn_matrix,length1*sizeof(double*));
+		dyn_matrix =(double**) vrealloc(dyn_matrix,length1*sizeof(double*));
 		for (i = old_length1; i < length1; ++i)
-			dyn_matrix[i] = vcalloc(old_length2,sizeof(double));
+			dyn_matrix[i] =(double*) vcalloc(old_length2,sizeof(double));
 		old_length1 = length1;
 	}
 
 	if (old_length2 < length2)
 	{
 		for (i = 0;i<old_length1; ++i)
-			dyn_matrix[i] = vrealloc(dyn_matrix[i], length2*sizeof(double));
+			dyn_matrix[i] =(double*) vrealloc(dyn_matrix[i], length2*sizeof(double));
 		old_length2 = length2;
 	}
 	return dyn_matrix;
@@ -4108,13 +4108,13 @@ initiate_profiles(Fastal_profile **profiles,	//profiles pointer
 	int i,j;
 	for (i =0; i < 3; ++i)
 	{
-		profiles[i] = vcalloc(1,sizeof(Fastal_profile));
+		profiles[i] =(Fastal_profile*) vcalloc(1,sizeof(Fastal_profile));
 		profiles[i]->weight = 1;
 		profiles[i]->is_leaf = 1;
-		profiles[i]->prf = vcalloc(alphabet_size, sizeof(int*));
+		profiles[i]->prf =(int**) vcalloc(alphabet_size, sizeof(int*));
 		for (j = 0; j < alphabet_size; ++j)
 		{
-			profiles[i]->prf[j] = vcalloc(PROFILE_ENLARGEMENT, sizeof(int));
+			profiles[i]->prf[j] =(int*) vcalloc(PROFILE_ENLARGEMENT, sizeof(int));
 		}
 		profiles[i]->allocated_memory = PROFILE_ENLARGEMENT;
 	}

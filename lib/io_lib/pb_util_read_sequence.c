@@ -66,7 +66,7 @@ static void get_msf_seq(char *sname,char *seq,int *len,char *tit,int seqno)
 	static char *line;
 	int i,j,k;
 	unsigned char c;
-	if ( !line)line=vcalloc ( (MAXLINE+1), sizeof (char));
+	if ( !line)line=(char*)vcalloc ( (MAXLINE+1), sizeof (char));
 
 	fseek(fin,0,0); 		/* start at the beginning */
 
@@ -111,7 +111,7 @@ static void get_clustal_seq(char *sname,char *seq,int *len,char *tit,int seqno)
 	static char *line;
 	int i,j;
 	unsigned char c;
-	if ( !line)line=vcalloc ( (MAXLINE+1), sizeof (char));
+	if ( !line)line=(char*)vcalloc ( (MAXLINE+1), sizeof (char));
 	fseek(fin,0,0); 		/* start at the beginning */
 
 	*len=0;				/* initialise length to zero */
@@ -148,7 +148,7 @@ static void get_seq(char *sname,char *seq,int *len,char *tit)
 	static char *line;
 	int i, offset, c=0;
 
-	if ( !line)line=vcalloc ( (MAXLINE+1), sizeof (char));
+	if ( !line)line=(char*)vcalloc ( (MAXLINE+1), sizeof (char));
 	switch(seqFormat) {
 
 /************************************/
@@ -317,10 +317,10 @@ int readseqs(char *saga_file,char ***SAGA_SEQ, char*** SAGA_NAMES, int ***SAGA_L
 	int b, l;
 	int first_seq=0;
 	
-	if ( !line) line=vcalloc   ( (FILENAMELEN+1), sizeof (char));
-	if ( !seq1) seq1=vcalloc   ( (SEQ_MAX_LEN+2), sizeof (char));
-	if ( !sname1)sname1=vcalloc ( (MAXNAMES+1), sizeof (char));
-	if ( !title)title=vcalloc  ( (MAXTITLES+1), sizeof (char));
+	if ( !line) line=(char*)vcalloc   ( (FILENAMELEN+1), sizeof (char));
+	if ( !seq1) seq1=(char*)vcalloc   ( (SEQ_MAX_LEN+2), sizeof (char));
+	if ( !sname1)sname1=(char*)vcalloc ( (MAXNAMES+1), sizeof (char));
+	if ( !title)title=(char*)vcalloc  ( (MAXTITLES+1), sizeof (char));
 	
 	fill_chartab();
 	
@@ -333,8 +333,8 @@ int readseqs(char *saga_file,char ***SAGA_SEQ, char*** SAGA_NAMES, int ***SAGA_L
 	if(no_seqs == 0)
 		return 0;       /* return the number of seqs. (zero here)*/
 	
-	SAGA_SEQ[0]= vcalloc ( no_seqs, sizeof ( char*));
-	SAGA_NAMES[0]= vcalloc ( no_seqs, sizeof ( char*));
+	SAGA_SEQ[0]=(char**) vcalloc ( no_seqs, sizeof ( char*));
+	SAGA_NAMES[0]=(char**) vcalloc ( no_seqs, sizeof ( char*));
 	SAGA_LEN[0]= declare_int ( no_seqs,3);
 	
 	
@@ -359,8 +359,8 @@ int readseqs(char *saga_file,char ***SAGA_SEQ, char*** SAGA_NAMES, int ***SAGA_L
 			seq1[a]=seq1[a+1];	
 		seq1[l1]='\0';
 		
-		(SAGA_SEQ[0])[i]=vcalloc ( strlen ( seq1)+1, sizeof ( char));
-		(SAGA_NAMES[0])[i]=vcalloc ( strlen ( sname1)+1, sizeof ( char));
+		(SAGA_SEQ[0])[i]=(char*)vcalloc ( strlen ( seq1)+1, sizeof ( char));
+		(SAGA_NAMES[0])[i]=(char*)vcalloc ( strlen ( sname1)+1, sizeof ( char));
 		
 		l1=strlen (seq1);
 		(SAGA_LEN[0])[i][0]=l1;
@@ -404,7 +404,7 @@ static void check_infile(int *nseqs)
 	static char *line;
 	int i;	
 
-	if ( !line)line=vcalloc ( (MAXLINE+1), sizeof (char));
+	if ( !line)line=(char*)vcalloc ( (MAXLINE+1), sizeof (char));
 	
 	for ( i=0; i<=MAXLINE; i++)line[i]='a';
 	*nseqs=0;
@@ -488,7 +488,7 @@ static int count_clustal_seqs(void)
 	static char *line;
 	int  nseqs;
 
-	if ( !line)line=vcalloc ( (MAXLINE+1), sizeof (char));
+	if ( !line)line=(char*)vcalloc ( (MAXLINE+1), sizeof (char));
 
 	while (fgets(line,MAXLINE+1,fin) != NULL) {
 		if(!blankline(line)) break;		/* Look for next non- */
@@ -510,7 +510,7 @@ static int count_msf_seqs(void)
 	static char *line;
 	int  nseqs;
 
-	if ( !line)line=vcalloc ( (MAXLINE+1), sizeof (char));
+	if ( !line)line=(char*)vcalloc ( (MAXLINE+1), sizeof (char));
 
 	while (fgets(line,MAXLINE+1,fin) != NULL) {
 		if(linetype(line,"/")) break;

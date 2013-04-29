@@ -108,7 +108,7 @@ Alignment* get_aln_type (Alignment *A)
         {
 	  if ( !A) return A;
 	  
-	  if ( A->S && !(A->S)->type)(A->S)->type=vcalloc (30, sizeof (char));
+	  if ( A->S && !(A->S)->type)(A->S)->type=(char*)vcalloc (30, sizeof (char));
 	  
 	  if ( A->S && (A->S)->type[0]!='\0')
 	    {
@@ -204,11 +204,11 @@ char * get_array_type (int n, char **seq)
 {
   char *buf, *buf2;
   int a, tot=0;
-  buf2=vcalloc ( 100, sizeof (char));
+  buf2=(char*)vcalloc ( 100, sizeof (char));
 		 
   
   for ( tot=0,a=0; a<n; a++)tot+=strlen (seq[a]);
-  buf=vcalloc (tot+1, sizeof (char));
+  buf=(char*)vcalloc (tot+1, sizeof (char));
   for ( a=0; a<n; a++)strcat (buf, seq[a]);
   sprintf ( buf2, "%s", get_string_type(buf));
   vfree (buf);
@@ -232,7 +232,7 @@ void get_sequence (char *seq_file,int *NSEQ, char ***SEQ, char ***SN, int **sl, 
 	int **SL;
 		
 	nseq=NSEQ[0]= readseqs ( seq_file,  SEQ, SN, &SL);
-	sl[0]=vcalloc ( nseq, sizeof (int));
+	sl[0]=(int*)vcalloc ( nseq, sizeof (int));
 	
 	 
 	min_len= max_len= (SL)[0][0];
@@ -275,7 +275,7 @@ int ** read_matrice (char *mat_name_in)
 	char mat_name[200];
 	int *vector=NULL;
 	
-	AA=vcalloc (256, sizeof (char));
+	AA=(char*)vcalloc (256, sizeof (char));
 	sprintf (AA, "abcdefghiklmnpqrstvwxyz");
 	l=strlen(AA);
 
@@ -524,7 +524,7 @@ void get_rgb_values ( int val, Color *C)
        
      static char **html_code;
      static float **ps_code;
-     int class, n, c;
+     int classC, n, c;
      float *r, *g, *b;
      FILE *fp;
 
@@ -621,8 +621,8 @@ void get_rgb_values ( int val, Color *C)
 	     while ((c=fgetc(fp))!=EOF)
 	       {
 		 ungetc(c, fp);
-		 if ( fscanf (fp, "%d", &class)==0)break;
-		 fscanf (fp, "%s %f %f %f", html_code[class], &ps_code[class][0], &ps_code[class][1],&ps_code[class][2]);
+		 if ( fscanf (fp, "%d", &classC)==0)break;
+		 fscanf (fp, "%s %f %f %f", html_code[classC], &ps_code[classC][0], &ps_code[classC][1],&ps_code[classC][2]);
 		 while ((c=fgetc(fp))!='\n' && c!=EOF);
 		 if ( c==EOF)ungetc(c, fp);
 	       }
@@ -722,8 +722,8 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
     
     S=copy_aln (B, NULL);
     
-    buf2=vcalloc (Sin->len_aln+1, sizeof (char));
-    buf3=vcalloc (  B->len_aln+1, sizeof (char));
+    buf2=(char*)vcalloc (Sin->len_aln+1, sizeof (char));
+    buf3=(char*)vcalloc (  B->len_aln+1, sizeof (char));
     for ( a=0; a<B->nseq; a++)
       {
 	int i,n, r;
@@ -754,17 +754,17 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
     S=aln2number(S);
     vfree (buf2);
     
-    box_c=vcalloc ( 1, sizeof (Color));    
-    get_rgb_values_format (DEFAULT_COLOR, (white=vcalloc ( 1, sizeof (Color))));	
-    get_rgb_values_format (INK_COLOR,     (ink  =vcalloc ( 1, sizeof (Color))));
+    box_c=(Color*)vcalloc ( 1, sizeof (Color));    
+    get_rgb_values_format (DEFAULT_COLOR, (white=(Color*)vcalloc ( 1, sizeof (Color))));	
+    get_rgb_values_format (INK_COLOR,     (ink  =(Color*)vcalloc ( 1, sizeof (Color))));
 
-    n_residues=vcalloc ( B->nseq+1, sizeof (int));
+    n_residues=(int*)vcalloc ( B->nseq+1, sizeof (int));
     for ( a=0; a<B->nseq; a++)n_residues[a]=B->order[a][1];
 
     fps=vfopen_format( name);      
     if ( buf==NULL)
 	{
-	buf=vcalloc (10000, sizeof (int));
+	buf=(char*)vcalloc (10000, sizeof (int));
 	}
 
     if ( max_len==0)
@@ -883,19 +883,19 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
     int *n_residues;
    
 
-    box_c=vcalloc ( 1, sizeof (Color));    
-    get_rgb_values_format (DEFAULT_COLOR, (white=vcalloc ( 1, sizeof (Color))));	
-    get_rgb_values_format (INK_COLOR,     (ink  =vcalloc ( 1, sizeof (Color))));
+    box_c=(Color*)vcalloc ( 1, sizeof (Color));    
+    get_rgb_values_format (DEFAULT_COLOR, (white=(Color*)vcalloc ( 1, sizeof (Color))));	
+    get_rgb_values_format (INK_COLOR,     (ink  =(Color*)vcalloc ( 1, sizeof (Color))));
     
-    n_residues=vcalloc ( B->nseq+1, sizeof (int));
+    n_residues=(int*)vcalloc ( B->nseq+1, sizeof (int));
     for ( a=0; a<B->nseq; a++)n_residues[a]=B->order[a][1];
 
 
     fps=vfopen_format( name);      
     if ( buf==NULL)
 	{
-	buf=vcalloc (10000, sizeof (int));
-	buf2=vcalloc (10000, sizeof (int));
+	buf=(char*)vcalloc (10000, sizeof (int));
+	buf2=(char*)vcalloc (10000, sizeof (int));
 	}
 
     if ( max_len==0)
@@ -1048,19 +1048,19 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
     int *n_residues;
    
 
-    box_c=vcalloc ( 1, sizeof (Color));    
-    get_rgb_values_format (DEFAULT_COLOR, (white=vcalloc ( 1, sizeof (Color))));	
-    get_rgb_values_format (INK_COLOR,     (ink  =vcalloc ( 1, sizeof (Color))));
+    box_c=(Color*)vcalloc ( 1, sizeof (Color));    
+    get_rgb_values_format (DEFAULT_COLOR, (white=(Color*)vcalloc ( 1, sizeof (Color))));	
+    get_rgb_values_format (INK_COLOR,     (ink  =(Color*)vcalloc ( 1, sizeof (Color))));
     
-    n_residues=vcalloc ( B->nseq+1, sizeof (int));
+    n_residues=(int*)vcalloc ( B->nseq+1, sizeof (int));
     for ( a=0; a<B->nseq; a++)n_residues[a]=B->order[a][1];
 
 
     fps=vfopen_format( name);      
     if ( buf==NULL)
 	{
-	buf=vcalloc (10000, sizeof (int));
-	buf2=vcalloc (10000, sizeof (int));
+	buf=(char*)vcalloc (10000, sizeof (int));
+	buf2=(char*)vcalloc (10000, sizeof (int));
 	}
 
     if ( max_len==0)
@@ -1233,7 +1233,7 @@ FILE_format* vfopen_ps ( char *name)
       {
       FILE_format*fps;
 
-      fps=vcalloc ( 1, sizeof ( FILE_format));
+      fps=(FILE_format*)vcalloc ( 1, sizeof ( FILE_format));
       fps->font=9;
       fps->max_line_ppage=60;
       fps->line=get_msa_line_length (0, 0);/*N char per line*/
@@ -1315,9 +1315,9 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
 	Color *box_c;
 	Color *white;
 
-	box_c=vcalloc ( 1, sizeof (Color));    
-	get_rgb_values_format (DEFAULT_COLOR, (white=vcalloc ( 1, sizeof (Color))));	
-	get_rgb_values_format (INK_COLOR,     (ink  =vcalloc ( 1, sizeof (Color))));
+	box_c=(Color*)vcalloc ( 1, sizeof (Color));    
+	get_rgb_values_format (DEFAULT_COLOR, (white=(Color*)vcalloc ( 1, sizeof (Color))));	
+	get_rgb_values_format (INK_COLOR,     (ink  =(Color*)vcalloc ( 1, sizeof (Color))));
 
 	if ( max_len==0)
 	{
@@ -1330,7 +1330,7 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
 	if ( max_len>max_name_len)max_len=max_name_len;
 
      	if ( buf==NULL)
- 		buf=vcalloc (10000, sizeof (int));
+ 		buf=(char*)vcalloc (10000, sizeof (int));
 	int iEmptyChr = 32; //SPACE ASCIICODE
 	int iColorValue;
 	fps=vfopen_format(name);
@@ -1454,9 +1454,9 @@ FILE_format* vfopen_html ( char *name)
       Color *color;
       int a;
 
-      color=vcalloc ( 1, sizeof (Color));
+      color=(Color*)vcalloc ( 1, sizeof (Color));
 
-      fhtml=vcalloc ( 1, sizeof ( FILE_format));
+      fhtml=(FILE_format*)vcalloc ( 1, sizeof ( FILE_format));
       fhtml->font=11;
       fhtml->max_line_ppage=100000;
       fhtml->line=get_msa_line_length (0, 0);/*N char per line*/
@@ -1562,7 +1562,7 @@ void get_rgb_values_ascii ( int val, Color *C)
 FILE_format* vfopen_ascii ( char *name)
       {
       FILE_format*fascii;
-      fascii=vcalloc ( 1, sizeof ( FILE_format));
+      fascii=(FILE_format*)vcalloc ( 1, sizeof ( FILE_format));
       fascii->font=11;
       fascii->max_line_ppage=100000;
       fascii->line=get_msa_line_length (0,0);/*N char per line*/

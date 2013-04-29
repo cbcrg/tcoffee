@@ -47,11 +47,11 @@ my_calloc ( size_t num, size_t size );
  * \brief Makes a temporary file.
  *
  * In case of failure, the program exits.
- * \param template The template to used for making the temporary file.
+ * \param templatee The template to used for making the temporary file.
  * \param function The function from where this was called (For error message)
  */
 char *
-my_make_temp_dir(char *template, char *function);
+my_make_temp_dir(char *templatee, char *function);
 
 
 

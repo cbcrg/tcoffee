@@ -60,7 +60,7 @@ int myers_miller_pair_wise (Alignment *A,int *ns, int **ls,Constraint_list *CL )
 
 	l1=strlen (A->seq_al[ls[0][0]]);
 	l2=strlen (A->seq_al[ls[1][0]]);
-	S=vcalloc (l1+l2+1, sizeof (int));
+	S=(int*)vcalloc (l1+l2+1, sizeof (int));
 	last=0;
 	sapp=S;
 
@@ -167,10 +167,10 @@ int diff (Alignment *A, int *ns, int **ls, int s1, int M,int s2, int N , int tb,
 	      int L;
 	      L=M+N+1;
 
-	      CC=vcalloc (L, sizeof (int));
-	      DD=vcalloc (L, sizeof (int));
-	      RR=vcalloc (L, sizeof (int));
-	      SS=vcalloc (L, sizeof (int));
+	      CC=(int*)vcalloc (L, sizeof (int));
+	      DD=(int*)vcalloc (L, sizeof (int));
+	      RR=(int*)vcalloc (L, sizeof (int));
+	      SS=(int*)vcalloc (L, sizeof (int));
 	    }
 
 	 if ( A==NULL)

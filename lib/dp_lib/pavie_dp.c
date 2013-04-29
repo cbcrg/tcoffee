@@ -106,8 +106,8 @@ double **pavie_seq2pavie_aln(Sequence *S,char *mat, char *mode)
   alp=seq2pavie_alp (S, nch);
   S=seq2pavie_seq (S, nch);
 
-  gop=vcalloc (nch, sizeof (double));
-  gep=vcalloc (nch, sizeof (double));
+  gop=(double*)vcalloc (nch, sizeof (double));
+  gep=(double*)vcalloc (nch, sizeof (double));
  
   for ( a=0; a< nch; a++)
     {
@@ -210,7 +210,7 @@ double **pavie_seq2pavie_aln(Sequence *S,char *mat, char *mode)
 	  float *tot,s, bigtot=0;
 	  
 	  for (max=0, a=0; a< S->nseq; a++)max=MAX(max,(strlen (S->name[a])));
-	  tot=vcalloc ( S->nseq, sizeof (float));
+	  tot=(float*)vcalloc ( S->nseq, sizeof (float));
 	  fprintf (stdout, "# TC_DISTANCE_MATRIX_FORMAT_01\n");
 	  for ( a=0; a<S->nseq; a++)
 	    fprintf ( stdout, "# SEQ_INDEX %s %d\n",S->name[a],a);
@@ -296,7 +296,7 @@ int **pavie_seq2trained_pavie_mat(Sequence *S, char *param)
   
   check_pavie_cl (param);
   
-  if ( !param)param=vcalloc (1, sizeof (char));
+  if ( !param)param=(char*)vcalloc (1, sizeof (char));
 
   if ((b=vstrstr(param,"_THR")))sscanf ( b, "_THR%d_", &id_threshold);
   else id_threshold=0;
@@ -326,11 +326,11 @@ int **pavie_seq2trained_pavie_mat(Sequence *S, char *param)
       log_odd_mode=1;
     }
   /*Declare Arrays*/
-  gep=vcalloc (nch, sizeof (double));
-  gop=vcalloc (nch, sizeof (double));
+  gep=(double*)vcalloc (nch, sizeof (double));
+  gop=(double*)vcalloc (nch, sizeof (double));
   mat_file=declare_char ( nch, 100);
-  current_mat =vcalloc ( nch, sizeof (double**));
-  previous_mat=vcalloc ( nch, sizeof (double**));
+  current_mat =(int***)vcalloc ( nch, sizeof (double**));
+  previous_mat=(int***)vcalloc ( nch, sizeof (double**));
   
 
   sprintf (ignore, "X");
@@ -363,7 +363,7 @@ int **pavie_seq2trained_pavie_mat(Sequence *S, char *param)
   
   
   fprintf ( stdout, "\n");
-  previous_mat=vcalloc ( nch, sizeof (int**));
+  previous_mat=(int***)vcalloc ( nch, sizeof (int**));
   while ((d=mc_delta_matrix (previous_mat, current_mat, alp, nch))>delta_min)
     {
 
@@ -439,7 +439,7 @@ double ***pavie_seq2pavie_fmat (Sequence *S,double *gop, double *gep, char **mat
 
 
   id_thres_used_aln=0;
-  fmat=vcalloc ( nch, sizeof (double **));
+  fmat=(double***)vcalloc ( nch, sizeof (double **));
   
   if (sample_size==0)
     {
@@ -756,10 +756,10 @@ Alignment *align_pavie_sequences (char *seq0,char *seq1,char **mat,double *gop,d
   YL=strlen (y)/nch;
   
   
-  ax=vcalloc ( (YL+XL)*nch+1, sizeof (char));
-  ay=vcalloc ( (YL+XL)*nch+1, sizeof (char));
-  bufx=vcalloc ( (YL+XL)*nch+1, sizeof (char));
-  bufy=vcalloc ( (YL+XL)*nch+1, sizeof (char));
+  ax=(char*)vcalloc ( (YL+XL)*nch+1, sizeof (char));
+  ay=(char*)vcalloc ( (YL+XL)*nch+1, sizeof (char));
+  bufx=(char*)vcalloc ( (YL+XL)*nch+1, sizeof (char));
+  bufy=(char*)vcalloc ( (YL+XL)*nch+1, sizeof (char));
   
   F=declare_double (XL+2, YL+2);
   T=declare_int (XL+2, YL+2);
@@ -895,13 +895,13 @@ int pavie_score (char *s0,int p0, char *s1,int p1,char **mat_file, double *gop, 
     
     if ( !cmat || !mat_file || !strm (cmat, mat_file[0]))
       {
-	if ( !cmat)cmat=vcalloc ( 100, sizeof (char));
+	if ( !cmat)cmat=(char*)vcalloc ( 100, sizeof (char));
 	sprintf ( cmat, "%s", (mat_file)?mat_file[0]:"idmat");
-	if ( !mat)mat=vcalloc ( nch, sizeof (int**));
+	if ( !mat)mat=(int***)vcalloc ( nch, sizeof (int**));
 	for ( a=0; a< nch; a++)
 	  {
 	    if ( mat[a])free_int (mat[a], -1);
-	    mat[a]=read_matrice ((mat_file)?mat_file[a]:"idmat");
+	    mat[a]=read_matrice ( const_cast<char*>( (mat_file)?mat_file[a]:"idmat" ) );
 	    
 	  }
       }
@@ -965,7 +965,7 @@ Sequence * seq2pavie_seq ( Sequence *S, int nch)
     for (b=0; b<S->nseq; b++)
       {
 	
-	buf=vcalloc ((strlen (S->seq[b])*nch)+10, sizeof (char));
+	buf=(char*)vcalloc ((strlen (S->seq[b])*nch)+10, sizeof (char));
 	for ( a=0; a< nch; a++)
 	  {
 	    strcat (buf, S->seq[b+(S->nseq)*a]);
@@ -988,7 +988,7 @@ char **seq2pavie_alp (Sequence *S, int nch)
     char **alp;
     
     n=S->nseq/nch;
-    alp=vcalloc (nch, sizeof (char*));
+    alp=(char**)vcalloc (nch, sizeof (char*));
     for ( a=0; a< nch; a++)
       {
 	alp[a]=array2alphabet (S->seq+n*a, n, "-.");
@@ -1085,8 +1085,8 @@ int pavie_pair_wise (Alignment *A,int *ns, int **l_s,Constraint_list *CL )
   XL=strlen (x);
   YL=strlen (y);
   
-  ax=vcalloc ( YL+XL+1, sizeof (char));
-  ay=vcalloc ( YL+XL+1, sizeof (char));
+  ax=(char*)vcalloc ( YL+XL+1, sizeof (char));
+  ay=(char*)vcalloc ( YL+XL+1, sizeof (char));
   
   
   F=declare_double (XL+2, YL+2);

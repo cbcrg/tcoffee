@@ -6,13 +6,13 @@
 Seq*
 init_Seq(char *name, int reserve)
 {
-	Seq *tmp_S = my_malloc(sizeof(Seq));
+	Seq *tmp_S = (Seq*)my_malloc(sizeof(Seq));
 	size_t str_len=strlen(name);
-	tmp_S->name=my_malloc((str_len+1)*sizeof(char));
+	tmp_S->name=(char*)my_malloc((str_len+1)*sizeof(char));
 	strncpy(tmp_S->name, name, str_len);
 	tmp_S->name[str_len]='\0';
 	tmp_S->reserved=reserve;
-	tmp_S->seq=my_malloc(reserve*sizeof(char));
+	tmp_S->seq=(char*)my_malloc(reserve*sizeof(char));
 	tmp_S->size=0;
 	return tmp_S;
 }
@@ -24,7 +24,7 @@ append(Seq *seq, char *sequence)
 	if (seq->size+len+1>=seq->reserved)
 	{
 		seq->reserved +=len+1;
-		seq->seq=my_realloc(seq->seq, seq->reserved*sizeof(char));
+		seq->seq=(char*)my_realloc(seq->seq, seq->reserved*sizeof(char));
 	}
 	strncpy(&seq->seq[seq->size], sequence, len);
 	seq->size+=len;
@@ -41,7 +41,7 @@ add(Seq *seq, SeqSet *set)
 	if (set->n_seqs == set->reserved)
 	{
 		set->reserved += 10;
-		set->seqs = my_realloc(set->seqs, set->reserved*sizeof(Seq **));
+		set->seqs =(Seq**) my_realloc(set->seqs, set->reserved*sizeof(Seq **));
 	}
 	set->seqs[set->n_seqs] = seq;
 	++set->n_seqs;
@@ -53,7 +53,7 @@ read_fasta(char *seq_f)
 {
 
 	FILE *seq_F = my_fopen(seq_f, "r");
-	SeqSet *set = my_malloc(sizeof(SeqSet));
+	SeqSet *set = (SeqSet*)my_malloc(sizeof(SeqSet));
 	set->seqs=NULL;
 	set->n_seqs=0;
 	set->reserved=0;

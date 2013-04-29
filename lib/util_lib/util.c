@@ -40,7 +40,7 @@ if(1)\
     n=vsnprintf (buf2,1, string, ap)+3;		\
     va_end (ap);				\
     va_start (ap, string);			\
-    buf=vcalloc (n, sizeof (char));		\
+    buf=(char*)vcalloc (n, sizeof (char));		\
     vsnprintf (buf, n,string, ap);		\
     va_end(ap);}
 
@@ -393,7 +393,7 @@ void **search_in_list_file ( void *key, int *p,int comp_len,FILE *fp, int len, s
       static void **l;
 
 
-      if ( l==NULL)l=vcalloc ( 1, sizeof (int*));
+      if ( l==NULL)l=(void**)vcalloc ( 1, sizeof (int*));
 
       l[0]=bsearch_file (key,p,0,comp_len,fp,len,entry_len,size,hsort_cmp);
       if (l[0]==NULL)return NULL;
@@ -403,7 +403,7 @@ void **search_in_list_array ( void *key,int *p, int comp_len,void **L, int len, 
       {
       static void **l;
 
-      if ( l==NULL)l=vcalloc ( 1, sizeof (int*));
+      if ( l==NULL)l=(void**)vcalloc ( 1, sizeof (int*));
 
       l[0]=bsearch_array (key,p,0,comp_len,L,len,entry_len,size,hsort_cmp);
       if (l[0]==NULL)return NULL;
@@ -485,7 +485,7 @@ int **search_in_list_int ( int *key, int k_len, int **list, int ne)
 	{
 	int **l;
 	sort_field=k_len;
-	l=bsearch (&key,list, ne, sizeof(int**),(int(*)(const void*,const void*))(cmp_list_int));
+	l=(int**)bsearch (&key,list, ne, sizeof(int**),(int(*)(const void*,const void*))(cmp_list_int));
 	return l;
 	}
 
@@ -726,10 +726,13 @@ int cmp_list_int (const int**a, const int**b)
 	}
 
 
-int name_is_in_list ( char *name, char **name_list, int n_name, int len)
+int name_is_in_list ( const char name_in[], char **name_list, int n_name, int len)
 {
 	int a;
 	int pos=-1;
+	char name[strlen(name_in)+1];
+	
+	strcpy(name,name_in);
 	/*Note: RETURNS THE Offset of the LAST Occurence of name in name_list*/
 
 	if ( name_list==NULL || name ==NULL)return -1;
@@ -772,7 +775,7 @@ FILE *get_number_list_in_file ( FILE *fp, int *list, int *n, int *max_len)
 			{
 			ungetc(c, fp);
 			if ( n[0]>=max_len[0])
-				list=vrealloc ( list, (n[0]+100)*sizeof (int));
+				list=(int*)vrealloc ( list, (n[0]+100)*sizeof (int));
 				max_len[0]=(n[0]+100);
 
 			fscanf ( fp, "%d",&list[n[0]++]);
@@ -827,7 +830,7 @@ int quantile (int argc, char *argv[])
 
   n=count_n_line_in_file (name);
   list=declare_int (n, 2);
-  string_list=declare_arrayN(3,sizeof (char), n, 2, 10);
+  string_list=(char***)declare_arrayN(3,sizeof (char), n, 2, 10);
 
   fp=vfopen (name, "r");
   n=0;
@@ -875,7 +878,7 @@ int quantile_rank (int **list,int field, int n, float p)
     {
       int a, b,j, *l;
       double g, q, np, i_part;
-      l=vcalloc ( n, sizeof (int));
+      l=(int*)vcalloc ( n, sizeof (int));
       for (a=n-1, b=0; b<n; a--, b++)
 	l[b]=list[a][field];
 
@@ -944,7 +947,7 @@ void ** recycle (void **A, int l, int cycle)
 {
   void **B;
   int a,b,c;
-  B=vcalloc (l, sizeof (void*));
+  B=(void**)vcalloc (l, sizeof (void*));
 
   for ( c=0; c< cycle; c++)
     {
@@ -1001,37 +1004,6 @@ READ_ARRAY_SIZE(double,read_size_double)
 /*                                                                   */
 /*********************************************************************/
 
-#define SET_NUMBERS(type,function)\
-type * function(type *list,int n, ...)\
-     {\
-     type *buf;\
-     int  *index,i;\
-     va_list ap;\
-     int max;\
-\
-     va_start(ap, n);\
-     buf=vcalloc(n, sizeof(type));\
-     index=vcalloc(n, sizeof(int));\
-     max=0;\
-     for ( i=0; i< n; i++)\
-         {\
-	 buf[i]  =va_arg(ap,type);\
-	 index[i]=va_arg(ap, int);\
-	 if (index[i]>max)max=index[i];\
-	 }\
-     va_end(ap);\
-     if (list==NULL)list=vcalloc ( max+1, sizeof (type));\
-     for ( i=0; i<n; i++)list[index[i]]=buf[i];\
-     vfree(buf);\
-     vfree(index);\
-     return list;\
-     }
-     /*SET_NUMBERS(short ,set_short)*/
-     /*SET_NUMBERS(char  ,set_char)*/
-SET_NUMBERS(int   ,set_int)
-     /*SET_NUMBERS(float ,set_float)*/
-SET_NUMBERS(double,set_double)
-
 short ** duplicate_short ( short **array , int len, int field)
     {
     return copy_short (array ,declare_short ( len, field),  len, field);
@@ -1054,7 +1026,7 @@ char * duplicate_string ( char *string)
       if ( !l);
       else
 	{
-	  buf=vcalloc ( l+1, sizeof(char));
+	  buf=(char*)vcalloc ( l+1, sizeof(char));
 	  sprintf ( buf, "%s", string);
 	}
       return buf;
@@ -1222,11 +1194,11 @@ int **input_array_int (char *fname)
 
   fp=vfopen (fname, "r");
   fscanf (fp, "%d\n", &len);
-  array=vcalloc (len, sizeof (int*));
+  array=(int**)vcalloc (len, sizeof (int*));
   for (a=0; a<len; a++)
     {
       fscanf(fp, "%d ", &len2);
-      array[a]=vcalloc (len2, sizeof (int));
+      array[a]=(int*)vcalloc (len2, sizeof (int));
       for (b=0; b<len2; b++)
 	fscanf(fp, "%d ", &array[a][b]);
       fscanf (fp, "\n");
@@ -1479,7 +1451,7 @@ double* return_r (double **list, int n)
    double *r;
    int a;
 
-   r=vcalloc ( 3, sizeof (double));
+   r=(double*)vcalloc ( 3, sizeof (double));
    Sy=Sx=Sxy=Sx2=Sy2=0;
 
    for ( a=0; a<n; a++)
@@ -1796,7 +1768,7 @@ char* get_env_variable ( const char *var, int mode)
 char *get_pwd ( char *name)
 {
   char cwd[1024];
-  if (!name)name=vcalloc (1025, sizeof (int));
+  if (!name)name=(char*)vcalloc (1025, sizeof (int));
   if (getcwd(cwd, sizeof(cwd)) != NULL)
     sprintf(name, "%s", cwd);
   else
@@ -1836,7 +1808,7 @@ char *num2plot (int value, int max, int line_len)
 	       char *buf;
 	static char *string;
 
-	if ( string==NULL)string=vcalloc (1000, sizeof(char));
+	if ( string==NULL)string=(char*)vcalloc (1000, sizeof(char));
 
 	if ( line_len==-1)len=30;
 	else len=line_len;
@@ -1866,7 +1838,7 @@ int   perl_strstr ( char *string, char *pattern)
 
 
 
-  string2=vcalloc ( strlen (string)+1, sizeof (char));
+  string2=(char*)vcalloc ( strlen (string)+1, sizeof (char));
   sprintf ( string2,"%s", string);
   string2=substitute (string2, "(", " ");
   string2=substitute (string2, ")", " ");
@@ -1900,7 +1872,7 @@ void crash ( char *s)
 
 
 	fprintf ( stderr, "%s",s);
-	a=vcalloc ( 10, sizeof (int));
+	a=(int*)vcalloc ( 10, sizeof (int));
 	a[20]=1;
 	error_exit();
 	}
@@ -1921,7 +1893,7 @@ int ** make_recursive_combination_table ( int tot_n_param, int *n_param, int *nc
     if (table==NULL)
         {
         if ( local_table!=NULL)vfree (local_table);
-	local_table=vcalloc ( tot_n_param, sizeof (int));
+	local_table=(int*)vcalloc ( tot_n_param, sizeof (int));
 	field=0;
 	for ( a=0; a< tot_n_param; a++)local_table[a]=-1;
 	for ( a=0; a< tot_n_param; a++)nc[0]=nc[0]*n_param[a];
@@ -1971,7 +1943,7 @@ char * update_string (char string1[], char string2[])
   if ( string1==string2);
   else if ( string2==NULL)
     {
-      if ( string1==NULL)string1=vcalloc ( 1, sizeof(char));
+      if ( string1==NULL)string1=(char*)vcalloc ( 1, sizeof(char));
       string1[0]='\0';
     }
   else
@@ -1980,7 +1952,7 @@ char * update_string (char string1[], char string2[])
       l1=read_array_size_new (string1);
       l2=strlen (string2)+1;
       if (l1<l2)
-	string1=vrealloc (string1, (l2)*sizeof (char));
+	string1=(char*)vrealloc (string1, (l2)*sizeof (char));
       sprintf ( string1, "%s", string2);
     }
   return string1;
@@ -1992,7 +1964,7 @@ char* strcatf  (char *string1,char *string2, ...)
   va_list ap;
   char *buf;
 
-  buf=vcalloc ( read_array_size_new (string1)+1, sizeof (char));
+  buf=(char*)vcalloc ( read_array_size_new (string1)+1, sizeof (char));
   va_start (ap, string2);
   vsprintf (buf, string2, ap);
   va_end (ap);
@@ -2011,7 +1983,7 @@ char *vcat ( char *st1, char *st2)
   if ( st2) l+=strlen (st2);
   l++;
 
-  ns=vcalloc ( l, sizeof (char));
+  ns=(char*)vcalloc ( l, sizeof (char));
   sprintf ( ns, "%s%s", (st1)?st1:"", (st2)?st2:"");
   return ns;
 }
@@ -2022,7 +1994,7 @@ int print_param ( char *param, FILE *fp)
   static int np;
   int a;
 
-  if (!p)p=vcalloc (1000, sizeof (char*));
+  if (!p)p=(char**)vcalloc (1000, sizeof (char*));
 
   for ( a=0; a<np; a++)if (p[a]==param) return 0;
 
@@ -2054,7 +2026,7 @@ int strget_param ( char *string, char *token1, char *token2, char *format, ...)
 
   if (buf)
     {
-      buf2=vcalloc (strlen (buf)+1, sizeof (char));
+      buf2=(char*)vcalloc (strlen (buf)+1, sizeof (char));
       sprintf ( buf2, "%s", buf);
       buf2=substitute (buf2, "__", " ");
       n=my_vsscanf (buf2, format, ap);
@@ -2153,7 +2125,7 @@ char ** push_string (char *val, char **stack, int *nval, int position)
 
   if (!val || nval[0]<=position)return stack;
   nval[0]++;
-  new_stack=vcalloc ( nval[0], sizeof (char*));
+  new_stack=(char**)vcalloc ( nval[0], sizeof (char*));
   new_stack[position]=val;
   for (a=0; a< position; a++)new_stack[a]=stack[a];
   for (a=position+1; a<nval[0]; a++)new_stack[a]=stack[a-1];
@@ -2246,21 +2218,21 @@ char * path2filename ( char *array)
   Fname *F;
   char *name;
 
-  name=vcalloc ( strlen (array)+2, sizeof (char));
+  name=(char*)vcalloc ( strlen (array)+2, sizeof (char));
   F=parse_fname (array);
   if ( F->suffix)sprintf ( name, "%s.%s", F->name, F->suffix);
   else sprintf (name, "%s", F->name);
   free_fname (F);
   return name;
 }
+
 Fname* parse_fname ( char *array)
 	 {
 	 int l;
 	 Fname *F;
 
 
-
-	 F=declare_fname (sizeof (array));
+	 F=declare_fname( sizeof(array) );
 
 	 sprintf ( F->full, "%s", array);
 	 sprintf ( F->path, "%s", array);
@@ -2289,7 +2261,7 @@ char *filename2path (char *name)
   if (isdir (name))return name;
 
   x=strlen (name)-1;
-  nname=vcalloc (x+2, sizeof (char));
+  nname=(char*)vcalloc (x+2, sizeof (char));
   sprintf ( nname, "%s", name);
   while ( x >=0 && nname[x]!='/')nname[x--]='\0';
 
@@ -2307,7 +2279,7 @@ char *extract_suffixe ( char *array)
 	char *new_string;
 	char *x;
 	l=strlen (array);
-	new_string=vcalloc ( l+1, sizeof (char));
+	new_string=(char*)vcalloc ( l+1, sizeof (char));
 	sprintf (new_string, "%s",array);
 
 	x=new_string+l;
@@ -2402,7 +2374,7 @@ char* substitute_old ( char *string_in, char *t, char *r)
 
   l=read_array_size_new ((void*)string_in)+1;
 
-  string_out=vcalloc (l, sizeof (char));
+  string_out=(char*)vcalloc (l, sizeof (char));
   delta=strlen(r)-strlen (t);
   delta=(delta<0)?0:delta;
 
@@ -2413,7 +2385,7 @@ char* substitute_old ( char *string_in, char *t, char *r)
       if ( delta)
 	{
 	  l+=delta;
-	  string_out=vrealloc(string_out, sizeof (char)*l);
+	  string_out=(char*)vrealloc(string_out, sizeof (char)*l);
 	}
 
       strcat ( string_out, string_in);
@@ -2423,7 +2395,7 @@ char* substitute_old ( char *string_in, char *t, char *r)
   strcat ( string_out, string_in);
   if (l<strlen (string_out))
     {
-      heap_in=vrealloc (heap_in, sizeof(char)*(strlen (string_out)+1));
+      heap_in=(char*)vrealloc (heap_in, sizeof(char)*(strlen (string_out)+1));
     }
   sprintf ( heap_in, "%s", string_out);
   vfree (string_out);
@@ -2498,7 +2470,7 @@ char* substituteN ( char *string_in, char *t, char *r, int N)
   string_in=heap_in;
 
   lso=nt*delta+lsi;
-  string_out=vcalloc (lso+1, sizeof (char));
+  string_out=(char*)vcalloc (lso+1, sizeof (char));
 
   while ((N==0 ||n<N) && (p=strstr ( string_in, t))!=NULL)
     {
@@ -2509,7 +2481,7 @@ char* substituteN ( char *string_in, char *t, char *r, int N)
       if (N!=0)n++;
     }
   strcat ( string_out, string_in);
-  if (l<(lso+1)){HERE ("Realloc %s %s delta=%d %d %d", t, r,delta, lsi, lso);heap_in=vrealloc (heap_in, sizeof (char)*(lso +1));}
+  if (l<(lso+1)){HERE ("Realloc %s %s delta=%d %d %d", t, r,delta, lsi, lso);heap_in=(char*)vrealloc (heap_in, sizeof (char)*(lso +1));}
   sprintf ( heap_in, "%s", string_out);
   vfree (string_out);
   return heap_in;
@@ -2630,7 +2602,7 @@ char * extract_char ( char * array, int first, int len)
 
     len= ( len<0)?0:len;
 
-    array2=vcalloc ((len+1), sizeof (char));
+    array2=(char*)vcalloc ((len+1), sizeof (char));
 
     for ( a=0; a<len; a++)
 	array2[a]=array[first++];
@@ -2666,7 +2638,7 @@ int check_cl4t_coffee (int argc, char **argv)
 	      strcat ( command, argv[a]);
 	    }
 	}
-      name=vcalloc ( 100, sizeof (char));
+      name=(char*)vcalloc ( 100, sizeof (char));
       sprintf ( name, "TCIT_%d", (int)rand()%10000);
       strcat ( command, " -seq tcoffee_test_seq.pep -quiet -no_error_report");
       fp=vfopen ( name, "w");
@@ -2747,7 +2719,7 @@ int *  string2num_list_old ( char *string)
   int  *list, n;
 
 
-  buf=vcalloc ( strlen (string)+1, sizeof (char));
+  buf=(char*)vcalloc ( strlen (string)+1, sizeof (char));
 
   n=0;
   sprintf ( buf, "%s", string);
@@ -2757,7 +2729,7 @@ int *  string2num_list_old ( char *string)
 	    n++;
 	    s=strtok (NULL, SEPARATORS);
 	  }
-  list=vcalloc (n+1, sizeof (int));
+  list=(int*)vcalloc (n+1, sizeof (int));
 
   n=0;
   sprintf ( buf, "%s", string);
@@ -2778,7 +2750,7 @@ int *name_array2index_array ( char **list1, int n1, char **list2, int n2)
 {
   int *list,a, max;
   /*returns an indexed list of the position of list1 in list2*/
-  list=vcalloc ( n1, sizeof (int));
+  list=(int*)vcalloc ( n1, sizeof (int));
   for ( a=0, max=0; a< n1; a++)max=MAX(max, strlen (list1[a]));
   for ( a=0       ; a< n2; a++)max=MAX(max, strlen (list2[a]));
 
@@ -2808,7 +2780,7 @@ int * string2num_list2 ( char *string, char *separators)
   if (nlist==NULL) return NULL;
 
   n=atoi(nlist[0]);
-  list=vcalloc ( n, sizeof (int));
+  list=(int*)vcalloc ( n, sizeof (int));
 
   for (m=1, a=1; a< n; a++)
     {
@@ -2836,7 +2808,7 @@ char * list2string2 ( char **list,int n, char* sep)
   char *string;
 
   for ( l=0,a=0; a<n; a++)l+=strlen ( list[a])+1;
-  string=vcalloc (l+1, sizeof (char));
+  string=(char*)vcalloc (l+1, sizeof (char));
   for ( a=0; a< n; a++)
       {
 	strcat ( string, list[a]);
@@ -2860,7 +2832,7 @@ char **  string2list2 ( char *string, char *separators)
   int n, max_len;
 
   if ( string==NULL)return NULL;
-  buf=vcalloc ( strlen (string)+2, sizeof (char));
+  buf=(char*)vcalloc ( strlen (string)+2, sizeof (char));
 
 
   n=max_len=0;
@@ -2877,7 +2849,7 @@ char **  string2list2 ( char *string, char *separators)
 
   if ( n==0){vfree(buf); return NULL;}
 
-  list=declare_arrayN (2, sizeof (char), n+2, max_len+1);
+  list=(char**)declare_arrayN (2, sizeof (char), n+2, max_len+1);
 
   n=1;
   sprintf ( buf, "%s", string);
@@ -2905,7 +2877,7 @@ char** break_list ( char **argv, int *argc, char *separators)
        int cont=1;
 
        /*Breaks down the argv command line in smaller units, breaking at every separator*/
-       out=vcalloc (MAX_N_PARAM, sizeof (char*));
+       out=(char**)vcalloc (MAX_N_PARAM, sizeof (char*));
        n_in=argc[0];
        argc[0]=0;
 
@@ -2926,7 +2898,7 @@ char** break_list ( char **argv, int *argc, char *separators)
 
 	     for ( b=0; b< n_ar; b++)
 	       {
-		 out[argc[0]]=vcalloc( strlen (ar[b])+1, sizeof (char));
+		 out[argc[0]]=(char*)vcalloc( strlen (ar[b])+1, sizeof (char));
 		 sprintf (out[argc[0]++], "%s", ar[b]);
 	       }
 	     free_char (ar, -1);
@@ -2943,7 +2915,7 @@ char *invert_string2 (char *string)
   int a, b, l;
 
   l=strlen (string);
-  buf=vcalloc ( l+1, sizeof (char));
+  buf=(char*)vcalloc ( l+1, sizeof (char));
   for ( a=l-1, b=0; a>=0; a--, b++)
     buf[b]=string[a];
   sprintf (string, "%s", buf);
@@ -2960,7 +2932,7 @@ char* string2inverted_string(char *string)
   int a, b, l;
 
   l=strlen (string);
-  buf=vcalloc ( l+1, sizeof (char));
+  buf=(char*)vcalloc ( l+1, sizeof (char));
   for ( a=l-1, b=0; a>=0; a--, b++)
     buf[b]=string[a];
   return buf;
@@ -2984,12 +2956,12 @@ char ** get_list_of_tokens ( char *in_string, char *separators, int *n_tokens)
     else
       {
 	list=declare_char (strlen ( in_string)+1, 1);
-	string=vcalloc ( strlen(in_string)+1, sizeof (char));
+	string=(char*)vcalloc ( strlen(in_string)+1, sizeof (char));
 	sprintf ( string, "%s", in_string);
 
 	while ( (p=strtok ((p==NULL)?string:NULL, ((separators==NULL)?SEPARATORS:separators)))!=NULL)
            {
-	   list[n_tokens[0]]=vrealloc ( list[n_tokens[0]], sizeof (char) *strlen (p)+1);
+	   list[n_tokens[0]]=(char*)vrealloc ( list[n_tokens[0]], sizeof (char) *strlen (p)+1);
 	   sprintf ( list[n_tokens[0]], "%s", p);
 	   n_tokens[0]++;
 	   }
@@ -3060,7 +3032,7 @@ void remove_charset ( char *seq, char *set)
 	int a, b, l;
 	char *set2;
 
-	set2=vcalloc (256, sizeof (char));
+	set2=(char*)vcalloc (256, sizeof (char));
 	if ( strm (set, "!alnum"))
 	  {
 	    for ( b=0,a=1;a< 256; a++)if ( !isalnum (a))set2[b++]=a;
@@ -3119,7 +3091,7 @@ char *mark_internal_gaps(char *seq, char symbol)
 	char *cache_seq;
 
 	l=strlen(seq);
-	cache_seq=vcalloc ( l+1, sizeof (char));
+	cache_seq=(char*)vcalloc ( l+1, sizeof (char));
 	sprintf ( cache_seq, "%s", seq);
 
 	for ( gap=0, in_seq=0,a=0; a< l; a++)
@@ -3340,7 +3312,7 @@ char* get_alphabet   ( char *seq, char *alphabet)
 	int a;
 	int len;
 
-	if ( !alphabet) alphabet=vcalloc ( 200, sizeof (char));
+	if ( !alphabet) alphabet=(char*)vcalloc ( 200, sizeof (char));
 
 	len=strlen (seq);
 
@@ -3387,7 +3359,7 @@ char * generate_string ( int x, char y)
 	 int a;
     char *string;
 
-    string = vcalloc ( x+1, sizeof ( char));
+    string = (char*)vcalloc ( x+1, sizeof ( char));
 
     for ( a=0; a< x; a++)
 	string[a]=y;
@@ -3503,7 +3475,7 @@ char **left_pad_string_array ( char **array, int n, int len, char pad)
      int a, b, c, l;
      char *buf;
 
-     buf=vcalloc ( len+1, sizeof (char));
+     buf=(char*)vcalloc ( len+1, sizeof (char));
      for ( a=0; a< n; a++)
          {
 	 l= strlen ( array[a]);
@@ -3527,7 +3499,7 @@ char * crop_string (char *string, int start, int end)
 	     }
      else
          {
-	 buf=vcalloc (strlen (string)+1, sizeof (char));
+	 buf=(char*)vcalloc (strlen (string)+1, sizeof (char));
 	 string[end]='\0';
 	 sprintf ( buf, "%s", string+start);
 	 sprintf ( string,"%s", buf);
@@ -3805,7 +3777,7 @@ int my_system_cl (int argc, char *argv[])
   char *command;
 
   for ( a=0, l=0; a< argc; a++)l+=(strlen(argv[a])+2);
-  command=vcalloc (l+1, sizeof(char));
+  command=(char*)vcalloc (l+1, sizeof(char));
   for ( a=0; a< argc; a++)
     {
       command=strcat (command, argv[a]);
@@ -3824,7 +3796,7 @@ int my_system ( char *command0)
 
   if (!unpacked_list)
     {
-      unpacked_list=declare_arrayN(3, sizeof (char), 3, 200,vtmpnam_size());
+      unpacked_list=(char***)declare_arrayN(3, sizeof (char), 3, 200,vtmpnam_size());
     }
 
   if ( getenv ("DEBUG_PERL"))return safe_system (command0);
@@ -3837,8 +3809,8 @@ int my_system ( char *command0)
       char *command2;
       int return_val;
 
-      command1=vcalloc ( 3*strlen (command0)+1, sizeof (char));
-      command2=vcalloc ( 100000, sizeof (char));
+      command1=(char*)vcalloc ( 3*strlen (command0)+1, sizeof (char));
+      command2=(char*)vcalloc ( 100000, sizeof (char));
       sprintf ( command1, "%s", command0);
 
       command1=substitute (command1, "|", " | ");
@@ -3962,7 +3934,7 @@ char*lock2name (int pid, int type)
   char host[1024];
   gethostname(host, 1023);
 
-  fname=vcalloc (strlen(host)+strlen (get_lockdir_4_tcoffee())+1000, sizeof (char));
+  fname=(char*)vcalloc (strlen(host)+strlen (get_lockdir_4_tcoffee())+1000, sizeof (char));
   if (type == LLOCK)sprintf (fname, "%s/.%d.%s.lock4tcoffee",get_lockdir_4_tcoffee(), pid,host);
   else if ( type == LERROR) sprintf (fname, "%s/.%d.%s.error4tcoffee", get_lockdir_4_tcoffee(),pid,host);
   else if ( type == LWARNING) sprintf (fname, "%s/.%d.%s.warning4tcoffee",get_lockdir_4_tcoffee(),pid,host);
@@ -3995,7 +3967,7 @@ char* lock(int pid,int type, int action,char *string, ...)
 	}
 	else if ( action == LCHECK)
 	{
-		r=(file_exists (NULL,fname))?"x":NULL;
+		r=const_cast<char*>( (file_exists (NULL,fname))?"x":NULL );
 	}
 	else if (action== LRELEASE)
 	{
@@ -4021,10 +3993,10 @@ char* lock(int pid,int type, int action,char *string, ...)
 		}
 		else
 		{
-			value=vcalloc (2, sizeof(char));
+			value=(char*)vcalloc (2, sizeof(char));
 			sprintf (value, " ");
 		}
-		string2file (fname, (action==LSET)?"a":"w", value);
+		string2file (fname, const_cast<char*>( (action==LSET)?"a":"w"), value);
 		vfree (value);
 		r= " ";
 	}
@@ -4093,19 +4065,19 @@ int safe_system (const char * com_in)
     if ( com)vfree (com);
     if ( strstr ( com_in, "SCRATCH_FILE"))
       {
-	com=vcalloc ( strlen ( com_in)+1, sizeof (char));
+	com=(char*)vcalloc ( strlen ( com_in)+1, sizeof (char));
 	sprintf ( com, "%s", com_in);
 	while (strstr ( com, "SCRATCH_FILE"))
 	  {
 	    char *t;
 	    t=vtmpnam(NULL);
-	    com=vrealloc (com, (strlen (com)+strlen (t)+1)*sizeof (char));
+	    com=(char*)vrealloc (com, (strlen (com)+strlen (t)+1)*sizeof (char));
 	    com=substitute (com,"SCRATCH_FILE", t);
 	  }
       }
     else
       {
-	com=vcalloc (strlen (com_in)+1, sizeof (char));
+	com=(char*)vcalloc (strlen (com_in)+1, sizeof (char));
 	sprintf ( com, "%s", com_in);
       }
 
@@ -4191,10 +4163,10 @@ pid_t **declare_pidtable ()
 {
   int a;
 
-  pidtable=vcalloc (MAX_N_PID, sizeof (pid_t*));
+  pidtable=(int**)vcalloc (MAX_N_PID, sizeof (pid_t*));
   for (a=0; a<MAX_N_PID; a++)
     {
-      pidtable[a]=vcalloc (2, sizeof (pid_t));
+      pidtable[a]=(int*)vcalloc (2, sizeof (pid_t));
     }
   return pidtable;
 }
@@ -4294,7 +4266,7 @@ pid_t vwait (pid_t *p)
   else handle_failure=EXIT_ON_FAILURE;
 
 
-  p2=wait (&rv);
+  p2=wait(&rv); 
   if (p2!=-1)rv=check_process("forked::T-Coffee", p2, rv,handle_failure);
   if ( p) p[0]=rv;
 
@@ -4310,7 +4282,7 @@ int kill_child_pid(int pid)
   int n,a, cpid;
 
   cpid=getpid();
-  list=vcalloc (MAX_N_PID, sizeof (int));
+  list=(int*)vcalloc (MAX_N_PID, sizeof (int));
 
   while ((n=get_child_list (pid,list)))
     {
@@ -4529,7 +4501,7 @@ char *program_name;
 char *error_file;
 void   set_command_line (char *cl)
 {
-  in_cl=vcalloc ( strlen (cl)+1, sizeof (char));
+  in_cl=(char*)vcalloc ( strlen (cl)+1, sizeof (char));
   sprintf (in_cl, "%s", cl);
 }
 FILE * print_command_line (FILE *fp )
@@ -4542,7 +4514,7 @@ char *get_plugins_4_tcoffee_old ( char *mode)
 {
   static char *plugins_4_tcoffee;
 
-  if ( !plugins_4_tcoffee)plugins_4_tcoffee=vcalloc ( 1000, sizeof (char));
+  if ( !plugins_4_tcoffee)plugins_4_tcoffee=(char*)vcalloc ( 1000, sizeof (char));
 
   if (mode)plugins_4_tcoffee[0]='\0';
 
@@ -4567,7 +4539,7 @@ char *get_home_4_tcoffee ()
 
 
   if ( !home_4_tcoffee)
-    home_4_tcoffee=vcalloc ( 1000, sizeof (char));
+    home_4_tcoffee=(char*)vcalloc ( 1000, sizeof (char));
 
   if ( home_4_tcoffee[0])return home_4_tcoffee;
   else if ( check_dir_getenv ("HOME_4_TCOFFEE"))
@@ -4614,7 +4586,7 @@ char *get_tmp_4_tcoffee ()
   static char *tmp_4_tcoffee;
   if (!tmp_4_tcoffee)
     {
-      tmp_4_tcoffee=vcalloc ( 1000, sizeof (char));
+      tmp_4_tcoffee=(char*)vcalloc ( 1000, sizeof (char));
 
     }
 
@@ -4833,7 +4805,7 @@ int cputenv (char *string, ...)
 
   cvsprintf (s, string);
 
-  s2=vcalloc (strlen (s)+1, sizeof (char));
+  s2=(char*)vcalloc (strlen (s)+1, sizeof (char));
   sprintf ( s2, "%s", s);
 
   r=putenv (s2);
@@ -4976,7 +4948,7 @@ FILE *add_information (FILE *fp, char *string, ...)
   else
     {
 
-      cvsprintf (buf, string);
+      cvsprintf(buf, string);
       if (fp)fprintf (fp, "\npid %d -- %s\n",getpid(), buf);
       if ( clean_exit_started)return fp;
 
@@ -5053,20 +5025,20 @@ int ** count_int_strings (int **array, int len, int s)
   int a,n;
 
   sort_list_int (array,s, s,0, len-1);
-  result=vcalloc (len, sizeof (int*));
+  result=(int**)vcalloc (len, sizeof (int*));
   for (n=-1,a=0; a<len; a++)
     {
       if (n==-1 || memcmp (array[a], result[n], sizeof (int)*s)!=0)
 	{
 	  n++;
-	  result[n]=vcalloc (s+1, sizeof (int));
+	  result[n]=(int*)vcalloc (s+1, sizeof (int));
 	  memcpy (result[n],array[a], sizeof (int)*s);
 	  fprintf ( stdout, "*");
 	}
       result[n][s]++;
     }
   sort_int (result, s+1, s, 0, n);
-  result=vrealloc ( result, sizeof (int*)*n);
+  result=(int**)vrealloc ( result, sizeof (int*)*n);
   return result;
 }
 
@@ -5076,7 +5048,7 @@ char** count_strings ( char **array, int len)
   char *cs;
   char **result;
 
-  result=vcalloc (len+1, sizeof (char*));
+  result=(char**)vcalloc (len+1, sizeof (char*));
   array=sort_string_array (array, len);
 
   for (c=0, a=0, n=0, cs=NULL; a< len; a++)
@@ -5085,7 +5057,7 @@ char** count_strings ( char **array, int len)
 	{
 	  if (cs)
 	    {
-	      result[c]=vcalloc (strlen (cs)+20, sizeof (char));
+	      result[c]=(char*)vcalloc (strlen (cs)+20, sizeof (char));
 	      sprintf ( result[c], "%s %d", cs, n);
 	      c++;
 	    }
@@ -5096,7 +5068,7 @@ char** count_strings ( char **array, int len)
       else n++;
     }
 
-  result[c]=vcalloc (strlen (cs)+20, sizeof (char));
+  result[c]=(char*)vcalloc (strlen (cs)+20, sizeof (char));
   sprintf ( result[c], "%s %d", cs, n);
 
   return result;
@@ -5177,7 +5149,7 @@ char *input_name ()
 	int a;
 	char ch;
 
-	string= vcalloc ( 500, sizeof ( char));
+	string= (char*)vcalloc ( 500, sizeof ( char));
 
 	a=0;
     	while ( ( ch=getchar())!='\n' && a<500)
@@ -5202,12 +5174,16 @@ int string_variable_isset (char *name)
   if (store_string_variable (name,NULL, ISSET)==NULL)return 0;
   else return 1;
 }
-char* set_string_variable (char *name, char * v)
+char* set_string_variable (const char name_in[], char * v)
 {
+  char name[strlen(name_in)+1];
+  strcpy(name,name_in);
   return store_string_variable (name, v, SET);
 }
-char * get_string_variable (char *name)
+char * get_string_variable (const char name_in[])
 {
+  char name[strlen(name_in)+1];
+  strcpy(name,name_in);
   return store_string_variable (name,NULL, GET);
 }
 char* unset_string_variable (char *name)
@@ -5235,7 +5211,7 @@ char* store_string_variable (char *name, char* v, int mode)
 	    {
 	      if (v)
 		{
-		  val_array[a]=vrealloc (val_array[a], strlen (v)+1);
+		  val_array[a]=(char*)vrealloc (val_array[a], strlen (v)+1);
 		  sprintf (val_array[a],"%s",v);
 		}
 	      else val_array[a]='\0';
@@ -5244,16 +5220,16 @@ char* store_string_variable (char *name, char* v, int mode)
 	}
       if (!name_array)
 	{
-	  name_array=vcalloc (1, sizeof (char*));
-	  val_array=vcalloc  (1, sizeof (char*));
+	  name_array=(char**)vcalloc (1, sizeof (char*));
+	  val_array=(char**)vcalloc  (1, sizeof (char*));
 	}
       else
 	{
-	  name_array=vrealloc (name_array, (n+1)*sizeof (char*));
-	  val_array=vrealloc (val_array, (n+1)*sizeof (char*));
+	  name_array=(char**)vrealloc (name_array, (n+1)*sizeof (char*));
+	  val_array=(char**)vrealloc (val_array, (n+1)*sizeof (char*));
 	}
-      name_array[n]=vcalloc ( strlen (name)+1, sizeof (char));
-      val_array[n]=vcalloc ( strlen (v)+1, sizeof (char));
+      name_array[n]=(char*)vcalloc ( strlen (name)+1, sizeof (char));
+      val_array[n]=(char*)vcalloc ( strlen (v)+1, sizeof (char));
 
       sprintf ( name_array[n], "%s", name);
       sprintf ( val_array[n], "%s", v);
@@ -5288,20 +5264,26 @@ char* store_string_variable (char *name, char* v, int mode)
     }
   return NULL;
 }
-int int_variable_isset (char *name)
+int int_variable_isset (const char *name_in)
 {
+  char name[strlen(name_in)+1];
+  strcpy(name, name_in);
   return store_int_variable (name,0, ISSET);
 }
 int set_int_variable (char *name, int v)
 {
   return store_int_variable (name, v, SET);
 }
-int get_int_variable (char *name)
+int get_int_variable (const char name_in[])
 {
+  char name[strlen(name_in)+1];
+  strcpy(name, name_in);
   return store_int_variable (name, 0, GET);
 }
-int unset_int_variable (char *name)
+int unset_int_variable (const char name_in[])
 {
+  char name[strlen(name_in)+1];
+  strcpy(name, name_in);
   return store_int_variable (name,0, UNSET);
 }
 
@@ -5324,15 +5306,15 @@ int store_int_variable (char *name, int v, int mode)
 	}
       if (!name_array)
 	{
-	  name_array=vcalloc (1, sizeof (char*));
-	  val_array=vcalloc  (1, sizeof (int));
+	  name_array=(char**)vcalloc (1, sizeof (char*));
+	  val_array=(int*)vcalloc  (1, sizeof (int));
 	}
       else
 	{
-	  name_array=vrealloc (name_array, (n+1)*sizeof (char*));
-	  val_array=vrealloc (val_array, (n+1)*sizeof (int));
+	  name_array=(char**)vrealloc (name_array, (n+1)*sizeof (char*));
+	  val_array=(int*)vrealloc (val_array, (n+1)*sizeof (int));
 	}
-      name_array[n]=vcalloc ( strlen (name)+1, sizeof (char));
+      name_array[n]=(char*)vcalloc ( strlen (name)+1, sizeof (char));
       sprintf ( name_array[n], "%s", name);
       val_array[n]=v;
       n++;
@@ -5385,7 +5367,7 @@ char * get_proxy_from_env ()
 
   if (proxy)set_proxy(proxy);
   else
-    {proxy=vcalloc (1, sizeof(char));}
+    {proxy=(char*)vcalloc (1, sizeof(char));}
 
   return proxy;
 }
@@ -5685,7 +5667,7 @@ char *get_email_from_env ()
   else if ( (email=get_string_variable ("email")));
   else if ( (email=getenv ("EMAIL_4_TCOFFEE")));
   else if ( (email=getenv ("EMAIL")));
-  else email=vcalloc ( 1, sizeof (char));
+  else email=(char*)vcalloc ( 1, sizeof (char));
   return email;
 }
 
@@ -5734,13 +5716,13 @@ void set_file2remove_off()
 
 char *add2file2remove_list (char *name)
 {
-  if ( !tmpname || !name)ntmpname=tmpname=vcalloc ( 1, sizeof (Tmpname));
+  if ( !tmpname || !name)ntmpname=tmpname=(Tmpname*)vcalloc ( 1, sizeof (Tmpname));
   else if (!ntmpname->name);
-  else ntmpname=ntmpname->next=vcalloc ( 1, sizeof (Tmpname));
+  else ntmpname=ntmpname->next=(Tmpname*)vcalloc ( 1, sizeof (Tmpname));
 
   if (!name) return NULL;
 
-  ntmpname->name=vcalloc(strlen(name)+1, sizeof (char));
+  ntmpname->name=(char*)vcalloc(strlen(name)+1, sizeof (char));
 
   sprintf (ntmpname->name, "%s", name);
   return ntmpname->name;
@@ -5759,7 +5741,7 @@ char *vtmpnam ( char *s1)
 
   standard_initialisation(NULL, NULL);
 
-  s=vcalloc ( VERY_LONG_STRING, sizeof (char));
+  s=(char*)vcalloc ( VERY_LONG_STRING, sizeof (char));
   s[0]='\0';
 
   s=tmpnam_2 (s);
@@ -5812,7 +5794,7 @@ char *tmpnam_2 (char *s)
 		root=get_vtmpnam2_root();
 		sprintf ( root2, "%d%d_", root, (int)getpid());
 
-		vtmpnam_prefixe=vcalloc (strlen (root2)+strlen (get_tmp_4_tcoffee())+2, sizeof (char));
+		vtmpnam_prefixe=(char*)vcalloc (strlen (root2)+strlen (get_tmp_4_tcoffee())+2, sizeof (char));
 		sprintf (vtmpnam_prefixe, "%s/%s", get_tmp_4_tcoffee(), root2);
 		set_string_variable ("vtmpnam_prefixe1", vtmpnam_prefixe);
 		set_string_variable ("vtmpnam_prefixe2", root2);
@@ -5823,7 +5805,7 @@ char *tmpnam_2 (char *s)
 	tmpdir=get_tmp_4_tcoffee();
 
 	sprintf (buf, "%s/%s%d_TCtmp%s",tmpdir,root2, file++,set_file2remove_extension (NULL, GET));
-	if ( strlen(buf)>=name_size)s=vrealloc (s,(strlen(buf)+1)*sizeof (char));
+	if ( strlen(buf)>=name_size)s=(char*)vrealloc (s,(strlen(buf)+1)*sizeof (char));
 	sprintf (s, "%s", buf);
 	return s;
 }
@@ -5844,7 +5826,7 @@ char *short_tmpnam_2(char *s)
       root=get_vtmpnam2_root();
       sprintf ( root2, "%d%d", root,getpid());
 
-      vtmpnam_prefixe=vcalloc (strlen (root2)+strlen (get_tmp_4_tcoffee())+2, sizeof (char));
+      vtmpnam_prefixe=(char*)vcalloc (strlen (root2)+strlen (get_tmp_4_tcoffee())+2, sizeof (char));
       sprintf (vtmpnam_prefixe, "%s", root2);
       set_string_variable ("vtmpnam_prefixe1", vtmpnam_prefixe);
       set_string_variable ("vtmpnam_prefixe2", root2);
@@ -5853,7 +5835,7 @@ char *short_tmpnam_2(char *s)
   if (!s) return NULL;
 
   sprintf (buf, "%s%d%s",root2, file++,set_file2remove_extension (NULL, GET));
-  if ( strlen(buf)>=name_size)s=vrealloc (s,(strlen(buf)+1)*sizeof (char));
+  if ( strlen(buf)>=name_size)s=(char*)vrealloc (s,(strlen(buf)+1)*sizeof (char));
   sprintf (s, "%s", buf);
   return s;
 }
@@ -5944,7 +5926,7 @@ FILE *NFP;/*Null file pointer: should only be open once*/
 static char *cache;
 char * prepare_cache ( const char *mode)
 {
-  cache =vcalloc ( 10000, sizeof(char));
+  cache =(char*)vcalloc ( 10000, sizeof(char));
 
   if (strm (mode, "use"))
     {
@@ -5980,7 +5962,7 @@ char * prepare_cache ( const char *mode)
 
 char * get_cache_dir()
 {
-  if ( cache==NULL){cache=vcalloc (1, sizeof (char));cache[0]='\0';}
+  if ( cache==NULL){cache=(char*)vcalloc (1, sizeof (char));cache[0]='\0';}
   return cache;
 }
 
@@ -6023,8 +6005,8 @@ FILE * vfopen  ( char *name_in, char *mode)
 
 
     if ( !name_in)return NULL;
-    if (!name){name=vcalloc (1000, sizeof (char));}
-    if (!name2){name2=vcalloc (1000, sizeof (char));}
+    if (!name){name=(char*)vcalloc (1000, sizeof (char));}
+    if (!name2){name2=(char*)vcalloc (1000, sizeof (char));}
 
     sprintf ( name, "%s", name_in);
     tild_substitute (name, "~", get_home_4_tcoffee());
@@ -6215,12 +6197,12 @@ char **expand_flist (char *file, char **list,int i,int *n, char *tag)
   int a;
 
   while (fl[nl++]);
-  nlist=vcalloc (n[0]+nl+1, sizeof (char*));
+  nlist=(char**)vcalloc (n[0]+nl+1, sizeof (char*));
 
   //put the old stuff back
   for (a=0; a<i; a++)
     {
-      nlist[nn]=vcalloc ( strlen (list[a])+1, sizeof (char));
+      nlist[nn]=(char*)vcalloc ( strlen (list[a])+1, sizeof (char));
       sprintf (nlist[nn], "%s",list[a]);
       nn++;
     }
@@ -6232,7 +6214,7 @@ char **expand_flist (char *file, char **list,int i,int *n, char *tag)
 
       if ( !strm (fl[a][1], tag))
 	{
-	  nlist[nn]=vcalloc ( strlen (fl[a][1])+1, sizeof (char));
+	  nlist[nn]=(char*)vcalloc ( strlen (fl[a][1])+1, sizeof (char));
 	  sprintf (nlist[nn], "%s",fl[a][1]);
 	  nn++;
 	}
@@ -6242,7 +6224,7 @@ char **expand_flist (char *file, char **list,int i,int *n, char *tag)
   //add the remainder (i+1....end)
   for (a=i+1; a<n[0]; a++)
     {
-      nlist[nn]=vcalloc ( strlen (list[a])+1, sizeof (char));
+      nlist[nn]=(char*)vcalloc ( strlen (list[a])+1, sizeof (char));
       sprintf (nlist[nn], "%s",list[a]);
       nn++;
     }
@@ -6269,7 +6251,7 @@ char ***file2list ( char *name, char *sep)
     {
       n=atoi (lines[0]);
 
-      list=vcalloc ( n+1, sizeof (char**));
+      list=(char***)vcalloc ( n+1, sizeof (char**));
       for ( a=1; a<n; a++)
 	{
 
@@ -6330,7 +6312,7 @@ char *file2string (char *name)
 	}
       else return NULL;
 
-      string=vcalloc (a+1, sizeof (char));
+      string=(char*)vcalloc (a+1, sizeof (char));
       a=0;
       if ((fp=fopen (name, "r")))
 	{
@@ -6385,9 +6367,9 @@ char *file2string (char *name)
  * \param range_left  min value ( "any" for any)
  * \param range_right max_value ( "any" for any);
 */
-int get_cl_param (int argc, char **argv, FILE **fp,char *para_name, int *set_flag, char *type, int optional, int max_n_val,char *usage, ...)
+int get_cl_param (int argc, char **argv, FILE **fp,const char para_name_in[], int *set_flag,const char type_in[], int optional, int max_n_val,const char usage_in[], ...)
         {
-
+	
 	int pos=0;
 	int a;
 	va_list ap;
@@ -6421,6 +6403,14 @@ int get_cl_param (int argc, char **argv, FILE **fp,char *para_name, int *set_fla
 	int    n_pv_r;
 	char   value[STRING];
 
+	char para_name[strlen(para_name_in)+1];
+	char type[strlen(type_in)+1];
+	char usage[strlen(usage_in)+1];
+	
+	strcpy(para_name, para_name_in);
+	strcpy(type, type_in);
+	strcpy(usage, usage_in);
+	
 
 
 /*CHECK THAT ALL THE PARAM IN ARG EXIST*/
@@ -6713,7 +6703,7 @@ char ** get_parameter ( char *para_name, int *np, char *fname)
 	return NULL;
       }
 
-    if ( line==NULL)line=vcalloc ( VERY_LONG_STRING+1, sizeof (char));
+    if ( line==NULL)line=(char*)vcalloc ( VERY_LONG_STRING+1, sizeof (char));
     if ( fname!=NULL && fp!=NULL)vfclose (fp);
 
     np[0]=0;
@@ -6877,7 +6867,7 @@ char *vfgets ( char *buf, FILE *fp)
 
   if (!buf)
     {
-      buf=vcalloc ( 1000, sizeof (char));
+      buf=(char*)vcalloc ( 1000, sizeof (char));
       buf_len=1000;
     }
   else
@@ -6894,17 +6884,17 @@ char *vfgets ( char *buf, FILE *fp)
   while ( (c=fgetc (fp))!='\n' && c!=EOF)
     {
       if (l>=buf_len)
-	{buf_len+=100;buf=vrealloc (buf, buf_len*sizeof (char));}
+	{buf_len+=100;buf=(char*)vrealloc (buf, buf_len*sizeof (char));}
       buf[l++]=c;
     }
   /*Add the cariage return*/
   if ( c=='\n')
     {
-      if (l>=buf_len){buf_len+=100,buf=vrealloc (buf, buf_len*sizeof (char));}
+      if (l>=buf_len){buf_len+=100,buf=(char*)vrealloc (buf, buf_len*sizeof (char));}
       buf[l++]='\n';
     }
   /*add the terminator*/
-  if (l>=buf_len){buf_len+=100,buf=vrealloc (buf, buf_len*sizeof (char));}
+  if (l>=buf_len){buf_len+=100,buf=(char*)vrealloc (buf, buf_len*sizeof (char));}
   buf[l]='\0';
 
   if ( bufin!=buf && bufin!=NULL && debug==1)
@@ -6940,7 +6930,7 @@ FILE * find_token_in_file ( char *fname, FILE * fp, char *token)
 	if (!fp)
 	  {
 	    if (name)vfree (name);
-	    name = vcalloc (((fname)?measure_longest_line_in_file (fname):10000)+1, sizeof (char));
+	    name = (char*)vcalloc (((fname)?measure_longest_line_in_file (fname):10000)+1, sizeof (char));
 	    fp=vfopen ( fname, "r");
 	  }
 
@@ -7070,7 +7060,7 @@ int **get_file_block_pattern (char *fname, int *n_blocks, int max_n_line)
 	int n_line;
 
 	lline=measure_longest_line_in_file (fname)+1;
-	line=vcalloc ( sizeof (char),lline+1);
+	line=(char*)vcalloc ( sizeof (char),lline+1);
 
 	fp=vfopen (fname, "r");
 	max_block_size=block_size=0;
@@ -7271,7 +7261,8 @@ int simple_check_internet_connection (char *ref_site)
   int n, internet=0;
 
   test=vtmpnam (NULL);
-  if (url2file((ref_site)?ref_site:TEST_WWWSITE_4_TCOFFEE,test)!=EXIT_SUCCESS)internet=0;
+  if (url2file( const_cast<char*>( (ref_site)?ref_site:TEST_WWWSITE_4_TCOFFEE),test )!=EXIT_SUCCESS)internet=0; 
+	      //Maria added this to cast a const char* to char*
   else if ((n=count_n_char_in_file(test))<10)internet=0;
   else internet =1;
 
@@ -7294,8 +7285,8 @@ char *pg2path (char *pg)
 
   if (!pg || !(p1=getenv ("PATH")))return NULL;
 
-  p=vcalloc  ( strlen (p1)+strlen (pg) +1, sizeof (char));
-  buf=vcalloc( strlen (p1)+strlen (pg) +1, sizeof (char));
+  p=(char*)vcalloc  ( strlen (p1)+strlen (pg) +1, sizeof (char));
+  buf=(char*)vcalloc( strlen (p1)+strlen (pg) +1, sizeof (char));
   sprintf ( p, "%s", p1);
 
   dir=strtok (p, ":");
@@ -7382,7 +7373,7 @@ FILE * display_output_filename ( FILE *io, char *type, char *format, char *name,
   if ( check_output==STORE)
     {
       int a;
-      if ( buf==NULL)buf=vcalloc ( 1000, sizeof (char**));
+      if ( buf==NULL)buf=(char***)vcalloc ( 1000, sizeof (char**));
 
       for (a=0; a<nbuf; a++)
 	if ( strm (name, buf[a][2]))return io;
@@ -7535,7 +7526,7 @@ char *ls_l ( char *path,char *file)
   if (!state)
     {
 
-      state=vcalloc (100, sizeof (char));
+      state=(char*)vcalloc (100, sizeof (char));
     }
   for (a=0;a<100; a++)state[a]=0;
   if (!file || !file_exists (path, file))return state;
@@ -7558,7 +7549,7 @@ int my_rmdir ( char *dir_in)
  char *dir;
 
  if (atoigetenv ("NO_RMDIR_4_TCOFFEE")==1)return 1;
- dir=vcalloc ( strlen (dir_in)+strlen (get_home_4_tcoffee())+100, sizeof (char));
+ dir=(char*)vcalloc ( strlen (dir_in)+strlen (get_home_4_tcoffee())+100, sizeof (char));
  sprintf ( dir, "%s", dir_in);
  tild_substitute ( dir, "~",get_home_4_tcoffee());
 
@@ -7581,7 +7572,7 @@ int my_mkdir ( char *dir_in)
   char *dir;
 
 
-  dir=vcalloc ( strlen (dir_in)+strlen (get_home_4_tcoffee())+100, sizeof (char));
+  dir=(char*)vcalloc ( strlen (dir_in)+strlen (get_home_4_tcoffee())+100, sizeof (char));
   sprintf ( dir, "%s", dir_in);
   tild_substitute ( dir, "~",get_home_4_tcoffee());
 
@@ -7632,8 +7623,8 @@ char* check_file_exists ( char *fname_in)
 	if (!fname_in[0])return NULL;
 	if (fname_in[0]=='-')return NULL;
 
-	if (!fname1){fname1=vcalloc (1000, sizeof (char));}
-	if (!fname2){fname2=vcalloc (1000, sizeof (char));}
+	if (!fname1){fname1=(char*)vcalloc (1000, sizeof (char));}
+	if (!fname2){fname2=(char*)vcalloc (1000, sizeof (char));}
 
 	sprintf ( fname1, "%s", fname_in);tild_substitute (fname1, "~", get_home_4_tcoffee());
 	sprintf ( fname2, "%s%s", get_cache_dir(),fname1);
@@ -7928,7 +7919,7 @@ float my_int_log(int a)
   else
     {
       static float *lu;
-      if (!lu) lu=vcalloc ( 100000, sizeof (float));
+      if (!lu) lu=(float*)vcalloc ( 100000, sizeof (float));
       if ( !lu[a]){lu[a]=log(a);}
       return lu[a];
     }
@@ -8409,7 +8400,7 @@ int **generate_array_int_list (int len, int min, int max, int step, int *n, char
 	 for (s=1, a=0; a<len; a++)s*=((max-min)+1)/step;
 	 array=declare_int (s, len+1);
        }
-     c_array=vcalloc (len, sizeof (int));
+     c_array=(int*)vcalloc (len, sizeof (int));
      array=r_generate_array_int_list ( len, max, min, step, array, 0, n,fp, c_array);
      vfree (c_array);
      if ( fp) vfclose (fp);
@@ -8471,7 +8462,7 @@ char ***generate_array_string_list (int len, char ***alp, int *alp_size, int *n,
 	   {
 	     s*=alp_size[a];
 	   }
-	 array=declare_arrayN (3,sizeof (char), s, len,0);
+	 array=(char***)declare_arrayN (3,sizeof (char), s, len,0);
        }
      c_array=declare_char (len,0);
      array=r_generate_array_string_list ( len, alp, alp_size, array, 0, n,fp, c_array, mode, -1);
@@ -8540,7 +8531,7 @@ float *counts2accuracy (float *count)
   float *result;
   float TP, TN, FP, FN;
 
-  result=vcalloc (4, sizeof (float));
+  result=(float*)vcalloc (4, sizeof (float));
   TP=count[0];
   TN=count[1];
   FP=count[2];
@@ -8559,10 +8550,10 @@ float  rates2sensitivity (int tp, int tn, int fp, int fn, float *sp, float *sn, 
 {
   if (sp==NULL)
     {
-      sp=vcalloc (1, sizeof (float));
-      sn=vcalloc (1, sizeof (float));
-      sen2=vcalloc (1, sizeof (float));
-      b=vcalloc (1, sizeof (float));
+      sp=(float*)vcalloc (1, sizeof (float));
+      sn=(float*)vcalloc (1, sizeof (float));
+      sen2=(float*)vcalloc (1, sizeof (float));
+      b=(float*)vcalloc (1, sizeof (float));
     }
   sn[0]  =((tp+fn)==0)?1:(float)tp/(float)(tp+fn);
   sen2[0]=((tp+fp)==0)?1:(float)tp/(float)(tp+fp);
@@ -8635,19 +8626,12 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   int a, stdi,c;
 
 
-
-
-
-
   //Debug things
   debug_lock=atoigetenv("DEBUG_LOCK");
-
-
 
   if (!in_argv){done=0;return NULL;}
   else if ( done){return in_argv;}
   else done=1;
-
 
   get_time();
 
@@ -8656,17 +8640,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   atexit (clean_exit);
 
 
-
-  signal (SIGTERM,signal_exit);
-  signal (SIGINT, signal_exit);
-  signal (SIGKILL, signal_exit);
-
-  signal (SIGABRT ,error_exit);
-  signal (SIGFPE  ,error_exit);
-  signal (SIGILL  ,error_exit);
-  signal (SIGSEGV ,error_exit);
-
-  program_name=vcalloc ( strlen (in_argv[0])+strlen (PROGRAM)+1, sizeof (char));
+  program_name=(char*)vcalloc ( strlen (in_argv[0])+strlen (PROGRAM)+1, sizeof (char));
   if (in_argv)
     {
       sprintf ( program_name, "%s", in_argv[0]);
@@ -8753,7 +8727,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
 		{
 		  file=vtmpnam (NULL);
 		  vfree (out_argv[a]);
-		  out_argv[a]=vcalloc ( strlen (file)+1, sizeof (char));
+		  out_argv[a]=(char*)vcalloc ( strlen (file)+1, sizeof (char));
 		  sprintf (out_argv[a], "%s", file);
 		  fp_stdi=vfopen ("stdin", "r");
 		  fp=vfopen (file, "w");
@@ -8929,8 +8903,8 @@ int string_putenv ( char *s)
 
 
   if (!s) return 0;
-  v1=vcalloc ( strlen (s)+1, sizeof (char));
-  v2=vcalloc ( strlen (s)+1, sizeof (char));
+  v1=(char*)vcalloc ( strlen (s)+1, sizeof (char));
+  v2=(char*)vcalloc ( strlen (s)+1, sizeof (char));
 
   p=s;
   n=0;
@@ -9016,7 +8990,7 @@ char * bachup_env (char *mode,char *f)
   if (!file)
     {
       file=vtmpnam (NULL);
-      buf=vcalloc ( 10000, sizeof (char));
+      buf=(char*)vcalloc ( 10000, sizeof (char));
     }
 
   if (!f)f=file;
@@ -9058,7 +9032,7 @@ int km_main (int argc, char *argv[])
   char **field_list;
   int nf=0;
 
-  field_list=calloc (1000, sizeof (char*));
+  field_list=(char**)calloc (1000, sizeof (char*));
   srand(time(NULL));
   for (a=1; a<argc;a++)
     {
@@ -9130,7 +9104,7 @@ int   km_file2dim   ( char *file, int *n,int *dim, int *len)
 
   n[0]=0;
   fp=vfopen (file, "r");
-  buf=calloc(len[0]+1, sizeof (char));
+  buf=(char*)calloc(len[0]+1, sizeof (char));
   while ((fgets (buf,len[0], fp)))
     {
       if ( buf[0]=='#')
@@ -9168,11 +9142,11 @@ double ** km_read_data ( char *file, int n, int dim, int mlen, char **fl)
   int a,b,c,p;
   int *fi;
 
-  fi=calloc (1000,sizeof (int));
+  fi=(int*)calloc (1000,sizeof (int));
   for (a=0; a<1000; a++)fi[a]=-1;
-  buf =calloc (mlen+1,sizeof (char));
-  data=calloc (n+1, sizeof (double*));
-  for (a=0; a<n; a++)data[a]=calloc(dim+1, sizeof (double));
+  buf =(char*)calloc (mlen+1,sizeof (char));
+  data=(double**)calloc (n+1, sizeof (double*));
+  for (a=0; a<n; a++)data[a]=(double*)calloc(dim+1, sizeof (double));
 
   fp=vfopen (file, "r");
   cn=0;
@@ -9216,7 +9190,7 @@ void km_output_data ( double **data,int n, int dim, int mlen, char *infile, char
   else out=vfopen (outfile, "w");
   in=vfopen (infile, "r");
 
-  buf =calloc (mlen+1,sizeof (char));
+  buf =(char*)calloc (mlen+1,sizeof (char));
   cn=0;
   while ((fgets (buf,mlen,in)))
     {
@@ -9275,10 +9249,10 @@ float km_make_kmeans (double **data, int n, int dim, int k,double t, double **ce
 
   if (nrounds==1)return km_kmeans (data,n,dim,k,t,centroids);
 
-  result=calloc (n,sizeof (double*));
-  for (a=0; a<n; a++)result[a]=calloc (nrounds+1, sizeof (double));
+  result=(double**)calloc (n,sizeof (double*));
+  for (a=0; a<n; a++)result[a]=(double*)calloc (nrounds+1, sizeof (double));
 
-  sdata=calloc ( n, sizeof (double*));
+  sdata=(double**)calloc ( n, sizeof (double*));
   for (a=0; a<nrounds; a++)
     {
       fprintf ( stderr, "Round %d\n", a+1);
@@ -9308,7 +9282,7 @@ double** km_shuffle_data (double **d, double **sd, int n, int r)
   int a,b, sn;
 
 
-  if (!sd)sd=calloc( n, sizeof (double*));
+  if (!sd)sd=(double**)calloc( n, sizeof (double*));
   for (a=0; a<r; a++)
     {
       int p=rand()%n;
@@ -9492,7 +9466,7 @@ double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **cen
 
   B=declare_int (nrounds, 2);
   R=declare_double(n, nrounds);
-  S=vcalloc ( n, sizeof (double*));
+  S=(double**)vcalloc ( n, sizeof (double*));
 
   for (a=0; a<nrounds; a++)
     {

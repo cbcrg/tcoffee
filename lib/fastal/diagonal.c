@@ -114,7 +114,7 @@ extend_diagonals(Diagonal *diagonals, int *num_diagonal, int l1, int l2)
 	}
 
 	int num_segments =0;
-	Segment *seg = vcalloc(num_diagonals, sizeof(Segment));
+	Segment *seg =(Segment*) vcalloc(num_diagonals, sizeof(Segment));
 	int pos = 0;
 // 	int diag_num1, diag_num2;
 	int *tmp1;
@@ -125,7 +125,7 @@ extend_diagonals(Diagonal *diagonals, int *num_diagonal, int l1, int l2)
 		{
 			++num_segments;
 			tmp2 = &diagonals[i];
-			seg[pos].segments = vcalloc(6, sizeof(int));
+			seg[pos].segments =(int*) vcalloc(6, sizeof(int));
 			seg[pos].current_pos = seg[pos].segments;
 			tmp1 = seg[pos].segments;
 			tmp1[0] = tmp2->x - tmp2->front_exp;
@@ -175,7 +175,7 @@ segments2int(Segment *diagonals,
 
 	int current_size = num_diagonals*dig_length + l1 +l2;
 
-	int **list = vcalloc(current_size, sizeof(int*));
+	int **list = (int**) vcalloc(current_size, sizeof(int*));
 // 	int *diags = vcalloc(num_diagonals, sizeof(int));
 	int i;
 // 	for (i = 0; i < num_diagonals; ++i)
@@ -217,12 +217,12 @@ segments2int(Segment *diagonals,
 	int tmpy_pos;
 	int tmpy_value;
 	int **M = param_set->M;
-	int *last_y = vcalloc(l2+1, sizeof(int));
-	int *last_x = vcalloc(l1+1, sizeof(int));
+	int *last_y = (int*) vcalloc(l2+1, sizeof(int));
+	int *last_x = (int*) vcalloc(l1+1, sizeof(int));
 	last_y[0] = 0;
 
 	last_x[0] = 0;
-	list[0] = vcalloc(6, sizeof(int));
+	list[0] = (int*) vcalloc(6, sizeof(int));
 
 	int list_pos = 1;
 	int dig_num = l1;
@@ -231,7 +231,7 @@ segments2int(Segment *diagonals,
 	//left border
 	for (; list_pos < tmp_l2; ++list_pos)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] = (int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = 0;
 		list[list_pos][1] = list_pos;
 		last_y[list_pos] = list_pos;
@@ -248,10 +248,10 @@ segments2int(Segment *diagonals,
 		if (list_pos + num_diagonals+2 > current_size)
 		{
 			current_size += num_diagonals*1000;
-			list = vrealloc(list, current_size * sizeof(int*));
+			list = (int**) vrealloc(list, current_size * sizeof(int*));
 		}
 		//upper border
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] = (int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = ++pos_x;
 		list[list_pos][1] = 0;
 		list[list_pos][2] = pos_x * gep;
@@ -271,7 +271,7 @@ segments2int(Segment *diagonals,
 				{
 					diagonals[i].current_pos+=3;
 				}
-				list[list_pos] = vcalloc(6, sizeof(int));
+				list[list_pos] = (int*) vcalloc(6, sizeof(int));
 				tmpx = diagonals[i].current_pos[0];
 				tmpy = diagonals[i].current_pos[1];
 				list[list_pos][0] = tmpx;
@@ -297,7 +297,7 @@ segments2int(Segment *diagonals,
 		//lower border
 		if (list[list_pos-1][1] != l2)
 		{
-			list[list_pos] = vcalloc(6, sizeof(int));
+			list[list_pos] = (int*) vcalloc(6, sizeof(int));
 			list[list_pos][0] = pos_x;
 			list[list_pos][1] = l2;
 			list[list_pos][3] = last_y[l2];
@@ -329,12 +329,12 @@ segments2int(Segment *diagonals,
 	if (list_pos + l2+2 > current_size)
 	{
 		current_size += list_pos + l2 + 2;
-		list = vrealloc(list, current_size * sizeof(int*));
+		list = (int**) vrealloc(list, current_size * sizeof(int*));
 	}
 
 
 // 	right border	
-	list[list_pos] = vcalloc(6, sizeof(int));
+	list[list_pos] = (int*) vcalloc(6, sizeof(int));
 	list[list_pos][0] = l1;
 	list[list_pos][1] = 0;
 	list[list_pos][3] = last_x[l1-1];
@@ -345,7 +345,7 @@ segments2int(Segment *diagonals,
 
 	for (i = 1; i <= l2; ++i)
 	{
-		list[list_pos] = vcalloc(6, sizeof(int));
+		list[list_pos] = (int*) vcalloc(6, sizeof(int));
 		list[list_pos][0] = l1;
 		list[list_pos][1] = i;
 		list[list_pos][3] = last_y[i];
@@ -433,7 +433,7 @@ seq_pair2blast_diagonal2(char *seq_file_name1,
 		if (current_pos >= *dig_length)
 		{
 			(*dig_length) += 40;
-			diags = vrealloc(diags, sizeof(Diagonal)*(*dig_length));
+			diags = (Diagonal*)vrealloc(diags, sizeof(Diagonal)*(*dig_length));
 		}
 		diags[current_pos].x = pos_q;
 		diags[current_pos].y = pos_d;

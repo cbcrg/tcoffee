@@ -139,6 +139,60 @@ static int al_len; 				/* length of alignment */
 }
 
 
+/* Add a new node into list.  */
+
+int addnode(int c, int ci,int cj,int i,int j,int K,int cost)
+{ 
+  int found;				/* 1 if the node is in LIST */
+  register int d;
+
+  found = 0;
+  if ( most != 0 && most->SIM_STARI == ci && most->SIM_STARJ == cj )
+    found = 1;
+  else
+     for ( d = 0; d < numnode ; d++ )
+	{ most = LIST[d];
+	  if ( most->SIM_STARI == ci && most->SIM_STARJ == cj )
+	    { found = 1;
+	      break;
+	    }
+        }
+  if ( found )
+    { if ( most->SIM_SCORE < c )
+        { most->SIM_SCORE = c;
+          most->SIM_ENDI = i;
+          most->SIM_ENDJ = j;
+        }
+      if ( most->SIM_TOP > i ) most->SIM_TOP = i;
+      if ( most->SIM_BOT < i ) most->SIM_BOT = i;
+      if ( most->SIM_LEFT > j ) most->SIM_LEFT = j;
+      if ( most->SIM_RIGHT < j ) most->SIM_RIGHT = j;
+    }
+  else
+    { if ( numnode == K )	/* list full */
+	 most = low;
+      else
+         most = LIST[numnode++];
+      most->SIM_SCORE = c;
+      most->SIM_STARI = ci;
+      most->SIM_STARJ = cj;
+      most->SIM_ENDI = i;
+      most->SIM_ENDJ = j;
+      most->SIM_TOP = most->SIM_BOT = i;
+      most->SIM_LEFT = most->SIM_RIGHT = j;
+    }
+  if ( numnode == K )
+    { if ( low == most || ! low ) 
+        { for ( low = LIST[0], d = 1; d < numnode ; d++ )
+            if ( LIST[d]->SIM_SCORE < low->SIM_SCORE )
+              low = LIST[d];
+	}
+      return ( low->SIM_SCORE ) ;
+    }
+  else
+    return cost;
+}
+
 /*
 int sim_pair_wise_lalign (Alignment *in_A, int *in_ns, int **in_l_s,Constraint_list *in_CL)
 {
@@ -399,9 +453,6 @@ int big_pass(int *A,int *B,int M,int N,int K, int nseq)
   register  int  di, dj;		/* end-point associated with d */
   register  int  fi, fj;		/* end-point associated with f */
   register  int  pi, pj;		/* end-point associated with p */
-  
-  int   addnode();			/* function for inserting a node */
-
 	
 	/* Compute the matrix and save the top K best scores in LIST
 	   CC : the scores of the current row
@@ -707,7 +758,6 @@ int small_pass(int *A,int *B,int count,int nseq)
   register  int  di, dj;		/* end-point associated with d */
   register  int  fi, fj;		/* end-point associated with f */
   register  int  pi, pj;		/* end-point associated with p */
-  int   addnode();			/* function for inserting a node */
   int  limit;				/* lower bound on j */
 
 	for ( j = n1 + 1; j <= nn ; j++ )
@@ -771,59 +821,6 @@ int small_pass(int *A,int *B,int count,int nseq)
 	        }
 	  }
 return 1;
-}
-
-/* Add a new node into list.  */
-
-int addnode(c, ci, cj, i, j, K, cost)  int c, ci, cj, i, j, K, cost;
-{ int found;				/* 1 if the node is in LIST */
-  register int d;
-
-  found = 0;
-  if ( most != 0 && most->SIM_STARI == ci && most->SIM_STARJ == cj )
-    found = 1;
-  else
-     for ( d = 0; d < numnode ; d++ )
-	{ most = LIST[d];
-	  if ( most->SIM_STARI == ci && most->SIM_STARJ == cj )
-	    { found = 1;
-	      break;
-	    }
-        }
-  if ( found )
-    { if ( most->SIM_SCORE < c )
-        { most->SIM_SCORE = c;
-          most->SIM_ENDI = i;
-          most->SIM_ENDJ = j;
-        }
-      if ( most->SIM_TOP > i ) most->SIM_TOP = i;
-      if ( most->SIM_BOT < i ) most->SIM_BOT = i;
-      if ( most->SIM_LEFT > j ) most->SIM_LEFT = j;
-      if ( most->SIM_RIGHT < j ) most->SIM_RIGHT = j;
-    }
-  else
-    { if ( numnode == K )	/* list full */
-	 most = low;
-      else
-         most = LIST[numnode++];
-      most->SIM_SCORE = c;
-      most->SIM_STARI = ci;
-      most->SIM_STARJ = cj;
-      most->SIM_ENDI = i;
-      most->SIM_ENDJ = j;
-      most->SIM_TOP = most->SIM_BOT = i;
-      most->SIM_LEFT = most->SIM_RIGHT = j;
-    }
-  if ( numnode == K )
-    { if ( low == most || ! low ) 
-        { for ( low = LIST[0], d = 1; d < numnode ; d++ )
-            if ( LIST[d]->SIM_SCORE < low->SIM_SCORE )
-              low = LIST[d];
-	}
-      return ( low->SIM_SCORE ) ;
-    }
-  else
-    return cost;
 }
 
 /* Find and remove the largest score in list */
@@ -1104,7 +1101,7 @@ void *sim_vcalloc ( size_t nobj, size_t size)
   p=vcalloc (nobj, size);
   
   
-  new_mem=vcalloc (1, sizeof (Mem));
+  new_mem=(Mem*)vcalloc (1, sizeof (Mem));
   if ( last_mem==NULL)first_mem=last_mem=new_mem;
   else
     {

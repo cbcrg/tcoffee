@@ -1142,7 +1142,7 @@ Alignment * upgma_tree_aln  ( Alignment*A, int nseq, Constraint_list *CL)
   nseq=(CL->S)->nseq;
   mat=declare_int (nseq, nseq);
   ls=declare_int  (nseq,nseq);
-  ns=vcalloc (nseq,sizeof (int));
+  ns=(int*)vcalloc (nseq,sizeof (int));
   
   for (a=0; a<nseq-1; a++)
     for (b=a+1; b<nseq; b++)
@@ -1154,7 +1154,7 @@ Alignment * upgma_tree_aln  ( Alignment*A, int nseq, Constraint_list *CL)
 	HERE ("%d %d", a, b, mat[a][b]);
       }
   
-  used=vcalloc (nseq, sizeof (int));
+  used=(int*)vcalloc (nseq, sizeof (int));
   n=nseq;
   while (n>1)
     {
@@ -1218,9 +1218,9 @@ int upgma_pair_wise (Alignment *A, int *ls0, int ns0, int *ls1, int ns1, Constra
   
   if ( !ls )
     {
-      ls=vcalloc (2, sizeof (int*));
-      ns=vcalloc (2, sizeof (int));
-      fl=vcalloc ((CL->S)->nseq, sizeof (int));
+      ls=(int**)vcalloc (2, sizeof (int*));
+      ns=(int*)vcalloc (2, sizeof (int));
+      fl=(int*)vcalloc ((CL->S)->nseq, sizeof (int));
     }
   ls[0]=ls0;
   ls[1]=ls1;
@@ -1580,8 +1580,8 @@ NT_node rec_km_tree (char **name,int n,int dim,double **V, int nboot)
       if (nboot==1)T->bootstrap=0;
       km_tnode++;
       
-      V0=vcalloc (n0, sizeof (double **));
-      V1=vcalloc (n1, sizeof (double **));
+      V0=(double**)vcalloc (n0, sizeof (double **));
+      V1=(double**)vcalloc (n1, sizeof (double **));
       for (n0=n1=a=0; a<n; a++)
 	{
 	  if  (V[a][dim+1]==0)V0[n0++]=V[a];
@@ -1662,7 +1662,7 @@ NT_node ** int_dist2upgma_tree (int **mat, Alignment *A, int nseq, char *fname)
     {
       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: non empty heap in upgma [FATAL]");
     }
-  NL=vcalloc (nseq, sizeof (NT_node));
+  NL=(NT_node*)vcalloc (nseq, sizeof (NT_node));
   
   for (a=0; a<A->nseq; a++)
     {
@@ -1673,7 +1673,7 @@ NT_node ** int_dist2upgma_tree (int **mat, Alignment *A, int nseq, char *fname)
       NL[a]->leaf=1;
     }
     
-  used=vcalloc ( A->nseq, sizeof (int));
+  used=(int*)vcalloc ( A->nseq, sizeof (int));
   n=A->nseq;
   while (n>1)
     {
@@ -1757,7 +1757,7 @@ int upgma_node_heap (NT_node X)
     }
   else
     {
-      h=vrealloc (h, sizeof (NT_node)*(n+1));
+      h=(NT_node*)vrealloc (h, sizeof (NT_node)*(n+1));
       h[n++]=X;
     }
   return n;
@@ -1767,12 +1767,12 @@ NT_node split2upgma_tree (Split **S, Alignment *A, int nseq, char *fname)
   NT_node *NL, T;
   int a, n, *used;
   
-  NL=vcalloc (nseq, sizeof (NT_node));
+  NL=(NT_node*)vcalloc (nseq, sizeof (NT_node));
   for (a=0; a<A->nseq; a++)
     {
       
       NL[a]=new_declare_tree_node ();
-      NL[a]->lseq2=vcalloc (A->nseq+1, sizeof (int));
+      NL[a]->lseq2=(int*)vcalloc (A->nseq+1, sizeof (int));
       NL[a]->lseq2[a]=1;
       sprintf (NL[a]->name, "%s", A->name[a]);
       NL[a]->isseq=1;
@@ -1780,7 +1780,7 @@ NT_node split2upgma_tree (Split **S, Alignment *A, int nseq, char *fname)
       NL[a]->dist=1;
       upgma_node_heap (NL[a]);
     }
-  used=vcalloc ( A->nseq, sizeof (int));
+  used=(int*)vcalloc ( A->nseq, sizeof (int));
   n=A->nseq;
   while (n>1)
     {
@@ -1811,7 +1811,7 @@ NT_node split_upgma_merge (Alignment *A, Split **S, NT_node *NL, int *used, int 
 
   P=new_declare_tree_node();
   upgma_node_heap (P);
-  P->lseq2=vcalloc (N, sizeof (int));
+  P->lseq2=(int*)vcalloc (N, sizeof (int));
   for (set=0,a=0; a<N-1; a++)
     {
       if (used[a])continue;
@@ -1868,7 +1868,7 @@ float get_split_dist ( Alignment *A, NT_node L, NT_node R, Split **S)
   
   if (!split)
     {
-      split=vcalloc ( A->nseq+1, sizeof (char));
+      split=(char*)vcalloc ( A->nseq+1, sizeof (char));
     }
   
   

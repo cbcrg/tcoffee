@@ -116,7 +116,7 @@ int apdb ( int argc, char *argv[])
 		   );
 	       if ( parameters && parameters[0])
 	          {
-		  argv[argc]=vcalloc ( VERY_LONG_STRING, sizeof(char));
+		  argv[argc]=(char*)vcalloc ( VERY_LONG_STRING, sizeof(char));
 		  a=0;
 		  fp_parameters=vfopen (parameters, "r");
 		  while ((c=fgetc (fp_parameters))!=EOF)argv[1][a++]=c;
@@ -866,7 +866,7 @@ declare_name (prot_db);
 		    printf_exit (EXIT_FAILURE, stderr, "\n\n---- ERROR: File %s must be a valid alignment [FATAL:%s-%s]\n\n",aln,argv[0], PROGRAM);
 		  }
 
-		pdb_param=vcalloc ( 1, sizeof(Pdb_param));
+		pdb_param=(Pdb_param*)vcalloc ( 1, sizeof(Pdb_param));
 
 		pdb_param->similarity_threshold=similarity_threshold;
 
@@ -952,7 +952,7 @@ declare_name (prot_db);
 		  }
 
 		CL=declare_constraint_list ( S,NULL, NULL, 0,NULL, NULL);
-		CL->T=vcalloc (S->nseq,sizeof (Ca_trace*));
+		CL->T=(Ca_trace**)vcalloc (S->nseq,sizeof (Ca_trace*));
 
 
 		for ( n_pdb=0,a=0; a<S->nseq; a++)
@@ -1034,7 +1034,7 @@ Constraint_list * set_constraint_list4align_pdb (Constraint_list *CL,int seq, ch
     {
       PWCL=declare_constraint_list ( CL->S,NULL, NULL, 0,NULL, NULL);
 
-      pdb_param=vcalloc ( 1, sizeof(Pdb_param));
+      pdb_param=(Pdb_param*)vcalloc ( 1, sizeof(Pdb_param));
       pdb_param->N_ca=0;
       pdb_param->max_delta=2.0;
       pdb_param->maximum_distance=14;
@@ -1047,7 +1047,7 @@ Constraint_list * set_constraint_list4align_pdb (Constraint_list *CL,int seq, ch
       PWCL->lalign_n_top=10;
       PWCL->sw_min_dist=10;
 
-      PWCL->T=vcalloc ( (PWCL->S)->nseq, sizeof (Ca_trace*));
+      PWCL->T=(Ca_trace**)vcalloc ( (PWCL->S)->nseq, sizeof (Ca_trace*));
 
       PWCL->extend_jit=0;
       PWCL->maximise=1;
@@ -2013,7 +2013,7 @@ Alignment * analyse_pdb ( Alignment *A, Alignment *ST, char *results)
 	  for ( p=0; p<A->len_aln; p++) ST->seq_al[A->nseq][p]=NO_COLOR_RESIDUE;
 
 
-	  ST->generic_comment=vcalloc ( 100, sizeof (int));
+	  ST->generic_comment=(char*)vcalloc ( 100, sizeof (int));
 	  if ( strm (PP->color_mode, "apdb"))
 	    {
 	      sprintf ( ST->generic_comment, "# APDB Evaluation: Color Range Blue-[0 %% -- 100 %%]-Red\n# Sequence Score: APDB\n# Local Score: APDB\n\n");
@@ -2058,7 +2058,7 @@ float **** analyse_pdb_residues ( Alignment *A, Constraint_list *CL, Pdb_param *
 	 PP=pdb_param;
 	 print_rapdb=PP->print_rapdb;
 
-	 distances=declare_arrayN(4, sizeof (float), A->nseq, A->nseq, 0, 0);
+	 distances=(float****)declare_arrayN(4, sizeof (float), A->nseq, A->nseq, 0, 0);
 
 	 /*Pre-computation of the internal distances----> T[seq]->ca_dist[len][len]*/
 	 /*Can be avoided if distance_on_request set to 1 */
@@ -2276,11 +2276,11 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 sprintf ( color_struc_tree, "%s.struc_tree.html", results);
 
 	 pair_pos_list=declare_char (A->len_aln*A->len_aln+1, 100);
-	 T1=vcalloc (A->len_aln*A->len_aln+1, sizeof (NT_node));
-	 T2=vcalloc (A->len_aln+1, sizeof (NT_node));
+	 T1=(tnode**)vcalloc (A->len_aln*A->len_aln+1, sizeof (NT_node));
+	 T2=(tnode**)vcalloc (A->len_aln+1, sizeof (NT_node));
 
-	 PT=vcalloc (A->len_aln*A->len_aln+1, sizeof (NT_node));
-	 POS=vcalloc (A->len_aln+1, sizeof (NT_node));
+	 PT=(tnode**)vcalloc (A->len_aln*A->len_aln+1, sizeof (NT_node));
+	 POS=(tnode**)vcalloc (A->len_aln+1, sizeof (NT_node));
 
 	 CL=A->CL;
 
@@ -2605,7 +2605,7 @@ Atom* reframe_atom ( Atom *X, Atom*Y, Atom *Z, Atom *IN, Atom *R)
      {
        float new_x, new_y, new_z;
 
-       if ( R==NULL)R=vcalloc ( 1, sizeof (Atom));
+       if ( R==NULL)R=(Atom*)vcalloc ( 1, sizeof (Atom));
 
 
         new_x= X->x*IN->x + Y->x*IN->y +Z->x*IN->z;
@@ -2620,7 +2620,7 @@ Atom* reframe_atom ( Atom *X, Atom*Y, Atom *Z, Atom *IN, Atom *R)
 
 Atom* add_atom ( Atom *A, Atom*B, Atom *R)
 {
-  if ( R==NULL)R=vcalloc ( 1, sizeof (Atom));
+  if ( R==NULL)R=(Atom*)vcalloc ( 1, sizeof (Atom));
 
   R->x=A->x+B->x;
   R->y=A->y+B->y;
@@ -2630,7 +2630,7 @@ Atom* add_atom ( Atom *A, Atom*B, Atom *R)
 }
 Atom* diff_atom ( Atom *A, Atom*B, Atom *R)
 {
-  if ( R==NULL)R=vcalloc ( 1, sizeof (Atom));
+  if ( R==NULL)R=(Atom*)vcalloc ( 1, sizeof (Atom));
 
   R->x=A->x-B->x;
   R->y=A->y-B->y;
@@ -2641,7 +2641,7 @@ Atom* diff_atom ( Atom *A, Atom*B, Atom *R)
 
 Atom * copy_atom ( Atom *A, Atom*R)
 {
-  if ( R==NULL)R=vcalloc ( 1, sizeof (Atom));
+  if ( R==NULL)R=(Atom*)vcalloc ( 1, sizeof (Atom));
   R->num=A->num;
   R->res_num=A->res_num;
   R->x=A->x;
@@ -2717,7 +2717,7 @@ char *nussinov(char *S, int THRESHOLD)
 
    /*----- initialization  --*/
    n = strlen(S);
-   paren=vcalloc (n+1, sizeof (char));
+   paren=(char*)vcalloc (n+1, sizeof (char));
    numBasePairs=declare_int (n,n);
 
    for (i=0;i<n;i++) paren[i]='.';

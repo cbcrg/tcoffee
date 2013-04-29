@@ -34,8 +34,8 @@ void aln2hitMat (Alignment *A, char *phitmat)
 //Initialization for files	
 	char *pcFileName = A->file[0];
 	char prefix[200] ={0};
-	char *hit_matrix_file = vcalloc(200, sizeof (char));
-	char *hit_html_file = vcalloc(200, sizeof (char));
+	char *hit_matrix_file =(char*) vcalloc(200, sizeof (char));
+	char *hit_html_file =(char*)  vcalloc(200, sizeof (char));
 	int len = (strrchr(pcFileName,'.')?strrchr(pcFileName,'.')-pcFileName:strlen(pcFileName));
 
 	strncpy(prefix, pcFileName, len);	
@@ -45,7 +45,7 @@ void aln2hitMat (Alignment *A, char *phitmat)
 	if ( phitmat && strstr ( phitmat, "help"))
 		aln2hitMat_help();
 
-	if(phitmat == NULL) phitmat = vcalloc(1, sizeof(char)); //such that program could get default value
+	if(phitmat == NULL) phitmat = (char*) vcalloc(1, sizeof(char)); //such that program could get default value
 
   	strget_param (phitmat, "_MODE_", "id", "%s", mode);
 	strget_param (phitmat, "_MATRIX_", "blosum62mt", "%s", matrix);
@@ -56,9 +56,9 @@ void aln2hitMat (Alignment *A, char *phitmat)
 
 	int **mat = read_matrice(matrix);
 
-	ffpHitScoreMatrix=vcalloc (nl, sizeof (float*));
+	ffpHitScoreMatrix=(float**)vcalloc (nl, sizeof (float*));
 	for(i = 0; i < nl; i++)
-      		ffpHitScoreMatrix[i]=vcalloc (nl-i, sizeof (float));
+      		ffpHitScoreMatrix[i]=(float*)vcalloc (nl-i, sizeof (float));
 
 	fprintf (stdout, "Process positions\n", i);
 	for(i = 0; i < nl; i++)

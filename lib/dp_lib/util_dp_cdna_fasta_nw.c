@@ -144,7 +144,7 @@ Dp_Model* initialize_dna_dp_model (Constraint_list *CL)
       int deltaf1, deltaf0,deltatype;
       int type, type1, type0;
             
-      M=vcalloc ( 1, sizeof (Dp_Model));
+      M=(Dp_Model*)vcalloc( 1, sizeof (Dp_Model));
      
       for (M->nstate=0,f0=0; f0<3; f0++)
 	      for ( f1=0; f1<3; f1++)M->nstate+=3;
@@ -396,7 +396,7 @@ int make_fasta_cdna_pair_wise (Alignment *B,Alignment *A,int*in_ns, int **l_s,Co
      
       M->diag=diag;
 
-      tl_s=declare_int (2, 2);tns=vcalloc(2, sizeof(int));tl_s[0][0]=0;tl_s[1][0]=3;tns[0]=tns[1]=1;
+      tl_s=(int**)declare_int (2, 2);tns=(int*)vcalloc(2, sizeof(int));tl_s[0][0]=0;tl_s[1][0]=3;tns[0]=tns[1]=1;
       DPR=make_fast_dp_pair_wise (A,tns, tl_s,CL,M);
       vfree(tns);free_int(tl_s, -1);
 
@@ -639,15 +639,15 @@ Dp_Result * make_fast_dp_pair_wise (Alignment *A,int*ns, int **l_s, Constraint_l
 	      mJ=max_len_diag;
 	      
 	      
-	      Mat  =vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
-	      LMat =vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
-	      trace=vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
+	      Mat  =(int*)vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
+	      LMat =(int*)vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
+	      trace=(int*)vcalloc ( M->nstate*max_len_al*max_len_diag, sizeof (int));
 	      
 	    }
 	  
-	  prev=vcalloc ( M->nstate, sizeof (int));
-	  DPR=vcalloc ( 1, sizeof ( Dp_Result));
-	  DPR->traceback=vcalloc (max_len_al, sizeof (int));
+	  prev=(int*)vcalloc ( M->nstate, sizeof (int));
+	  DPR=( Dp_Result*) vcalloc ( 1, sizeof ( Dp_Result));
+	  DPR->traceback=(int*)vcalloc (max_len_al, sizeof (int));
 	  
 /*PREPARE THE EVALUATION*/      
 	  if (ns[0]+ns[1]>2)

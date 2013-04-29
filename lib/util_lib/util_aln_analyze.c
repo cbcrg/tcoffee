@@ -43,7 +43,7 @@ int **sar2profile_sim ( Alignment *A, Alignment *S, int **sim, int comp, int lea
 
 
   profile=declare_int (A->len_aln, 26);
-  cache=declare_arrayN (3,sizeof (int),2,A->len_aln, 26);
+  cache=(int***)declare_arrayN (3,sizeof (int),2,A->len_aln, 26);
 
   for ( a=0; a< A->len_aln; a++)
     for ( b=0; b< A->nseq; b++)
@@ -88,7 +88,7 @@ int **sar2profile ( Alignment *A, Alignment *S, int comp, int leave)
   int ncat;
   float n_gap, max_gap;
   profile=declare_int (A->len_aln, 26);
-  cache=declare_arrayN (3,sizeof (int),2,A->len_aln, 26);
+  cache=(int***)declare_arrayN (3,sizeof (int),2,A->len_aln, 26);
 
 
 
@@ -157,7 +157,7 @@ Alignment * filter_aln4sar1 ( Alignment *inA, Alignment *S, int comp, int leave,
   list1=declare_int ( inA->nseq, 2);
   list2=declare_int ( inA->len_aln, 2);
 
-  cache=declare_arrayN (3,sizeof (int),inA->len_aln,2, 26);
+  cache=(int***)declare_arrayN (3,sizeof (int),inA->len_aln,2, 26);
   F=copy_aln (inA, NULL);
 
   A=copy_aln (inA, NULL);
@@ -227,7 +227,7 @@ Alignment * filter_aln4sar2 ( Alignment *inA, Alignment *S, int comp, int leave,
   /*Keep Low entropy columns that contain less than ncat categories of different amino acids*/
   /*REmove columns containing 10% or more gaps*/
 
-  cache=vcalloc ( 500, sizeof (char));
+  cache=(int*)vcalloc ( 500, sizeof (char));
   F=copy_aln (inA, NULL);
   A=copy_aln (inA, NULL);
   A->nseq=strlen (S->seq_al[comp]);
@@ -288,8 +288,8 @@ Alignment * filter_aln4sar3 ( Alignment *inA, Alignment *S, int comp, int leave,
 
 
   list1=declare_int ( inA->len_aln, 2);
-  bufA=vcalloc ( A->nseq+1, sizeof (char));
-  bufS=vcalloc ( A->nseq+1, sizeof (char));
+  bufA=(char*)vcalloc ( A->nseq+1, sizeof (char));
+  bufS=(char*)vcalloc ( A->nseq+1, sizeof (char));
 
   sprintf ( bufS, "%s", S->seq_al[comp]);
   splice_out_seg(bufS,leave, 1);
@@ -336,7 +336,7 @@ Alignment * filter_aln4sar4 ( Alignment *inA, Alignment *S, int comp, int leave,
   list1=declare_int ( inA->nseq, 2);
   list2=declare_int ( inA->len_aln, 2);
 
-  cache=declare_arrayN (3,sizeof (int),inA->len_aln,2, 26);
+  cache=(int***)declare_arrayN (3,sizeof (int),inA->len_aln,2, 26);
   F=copy_aln (inA, NULL);
   A=copy_aln (inA, NULL);
   A->nseq=strlen (S->seq_al[comp]);
@@ -407,8 +407,8 @@ Alignment * filter_aln4sar5 ( Alignment *inA, Alignment *S, int comp, int leave,
   F=copy_aln (inA, NULL);
 
   list1=declare_int ( A->len_aln, 2);
-  bufA=vcalloc ( A->nseq+1, sizeof (char));
-  bufS=vcalloc ( A->nseq+1, sizeof (char));
+  bufA=(char*)vcalloc ( A->nseq+1, sizeof (char));
+  bufS=(char*)vcalloc ( A->nseq+1, sizeof (char));
 
 
 
@@ -531,7 +531,7 @@ Alignment * sar_analyze (Alignment *inA, Alignment *inS, char *mode)
   char method[5];
 
   strget_param (mode, "_METHOD_", "1111", "%s_", method);
-  ff=vcalloc (6,sizeof (filter_func));
+  ff=(filter_func*)vcalloc (6,sizeof (filter_func));
   if (method[0]=='1')ff[n_methods++]=filter_aln4sar0;
   if (method[1]=='1')ff[n_methods++]=filter_aln4sar1;
   if (method[2]=='1')ff[n_methods++]=filter_aln4sar2;
@@ -540,12 +540,12 @@ Alignment * sar_analyze (Alignment *inA, Alignment *inS, char *mode)
     ff[n_methods++]=filter_aln4sar4;
     ff[n_methods++]=filter_aln4sar5;
   */
-  sim=vcalloc (n_methods, sizeof (int**));
+  sim=(int***)vcalloc (n_methods, sizeof (int**));
 
 
-  tot2=vcalloc ( 10, sizeof (float));
-  subset=vcalloc ( 100, sizeof (char));
-  target=vcalloc ( 100, sizeof (char));
+  tot2=(float*)vcalloc ( 10, sizeof (float));
+  subset=(char*)vcalloc ( 100, sizeof (char));
+  target=(char*)vcalloc ( 100, sizeof (char));
 
   strget_param (mode, "_TARGET_", "no", "%s_", target);
   strget_param (mode, "_SUBSET_", "no", "%s_", subset);
@@ -581,12 +581,12 @@ Alignment * sar_analyze (Alignment *inA, Alignment *inS, char *mode)
     }
 
 
-  prediction=vcalloc ( n_methods+1, sizeof (char));
-  reliability=vcalloc ( n_methods+1, sizeof (char));
+  prediction=(char*)vcalloc ( n_methods+1, sizeof (char));
+  reliability=(char*)vcalloc ( n_methods+1, sizeof (char));
 
-  glob_results=declare_arrayN(3, sizeof (int), n_methods*2, 2, 2);
+  glob_results=(int***)declare_arrayN(3, sizeof (int), n_methods*2, 2, 2);
 
-  count=vcalloc (S->nseq, sizeof (int));
+  count=(int*)vcalloc (S->nseq, sizeof (int));
   for (a=0; a<S->nseq; a++)
     {
       int l;
@@ -607,7 +607,7 @@ Alignment * sar_analyze (Alignment *inA, Alignment *inS, char *mode)
   for (a=0; a<S->nseq; a++)
     {
       int n_pred;
-      comp_results=declare_arrayN(3, sizeof (int), n_methods*2, 2, 2);
+      comp_results=(int***)declare_arrayN(3, sizeof (int), n_methods*2, 2, 2);
 
       pred_start=(strlen (S->seq_al[a])==A->nseq)?0:strlen (S->seq_al[a]);
       pred_end=A->nseq;
@@ -880,7 +880,7 @@ int process_cache ( Alignment *A,Alignment *S, int  ***Cache, char *mode)
 
   C=Cache[0];
   ab1=name_is_in_list ("ABL1", A->name, A->nseq,100);
-  ab1_pos=vcalloc (A->len_aln+1, sizeof (int));
+  ab1_pos=(int*)vcalloc (A->len_aln+1, sizeof (int));
 
   for ( b=0,a=0; a< A->len_aln; a++)
     {
@@ -1203,7 +1203,7 @@ float** cache2pred4 (Alignment*A,int **cache, int *ns, int **ls, Alignment *S, c
 
   /*Predict on ns[1] what was trained on ns[0]*/
   /*Identify interesting coloumns*/
-  ul=vcalloc ( A->len_aln, sizeof (int));
+  ul=(int*)vcalloc ( A->len_aln, sizeof (int));
   for (a=0; a< A->len_aln; a++)
     for ( b=0; b< A->nseq; b++)
       if ( cache[b][a])ul[nused++]=a;
@@ -1668,8 +1668,8 @@ float** cache2pred_forbiden_res (Alignment*A,int **cache, int *ns, int **ls, Ali
       int *res_type;
       int **sub;
       int *keep;
-      keep=vcalloc ( 26, sizeof (int));
-      res_type=vcalloc ( 26, sizeof (int));
+      keep=(int*)vcalloc ( 26, sizeof (int));
+      res_type=(int*)vcalloc ( 26, sizeof (int));
       sub=declare_int (256, 2);
 
       if ( cache[26][a]==0)continue;
@@ -2625,8 +2625,8 @@ int aln2jack_group3 (Alignment *A,char *comp, int **l1, int *nl1, int **l2, int 
     }
 
 
-  l1[0]=vcalloc (A->nseq, sizeof (int));
-  l2[0]=vcalloc (A->nseq, sizeof (int));
+  l1[0]=(int*)vcalloc (A->nseq, sizeof (int));
+  l2[0]=(int*)vcalloc (A->nseq, sizeof (int));
   nl1[0]=nl2[0]=0;
 
   sort_int (seq_list, 2, 1, 0,nseq-1);
@@ -2664,8 +2664,8 @@ int aln2jack_group2 (Alignment *A, int seq, int **l1, int *nl1, int **l2, int *n
 
 
   list=declare_int (A->nseq, 2);
-  l1[0]=vcalloc (A->nseq, sizeof (int));
-  l2[0]=vcalloc (A->nseq, sizeof (int));
+  l1[0]=(int*)vcalloc (A->nseq, sizeof (int));
+  l2[0]=(int*)vcalloc (A->nseq, sizeof (int));
   nl1[0]=nl2[0];
 
   vsrand (0);
@@ -2695,8 +2695,8 @@ int aln2jack_group1 (Alignment *A, int seq, int **l1, int *nl1, int **l2, int *n
   int a, mid;
 
   list=declare_int ( A->nseq, 3);
-  l1[0]=vcalloc (A->nseq, sizeof (int));
-  l2[0]=vcalloc (A->nseq, sizeof (int));
+  l1[0]=(int*)vcalloc (A->nseq, sizeof (int));
+  l2[0]=(int*)vcalloc (A->nseq, sizeof (int));
   nl1[0]=nl2[0];
 
   sim=aln2sim_mat (A, "idmat");
@@ -2722,7 +2722,7 @@ int sarset2subsarset ( Alignment *A, Alignment *S, Alignment **subA, Alignment *
   Alignment *rotS, *intS;
   int a,b, *list, nl;
 
-  list=vcalloc ( SUB->nseq, sizeof (int));
+  list=(int*)vcalloc ( SUB->nseq, sizeof (int));
   for (nl=0,a=0; a<SUB->nseq; a++)
     {
       b=name_is_in_list(SUB->name[a], A->name, A->nseq, 100);
@@ -2751,8 +2751,8 @@ int ***simple_sar_analyze_vot ( Alignment *A, Alignment *SAR, char *mode)
   static int ***iresult;
   if (!result)
     {
-    result=declare_arrayN (3,sizeof (float),SAR->nseq, A->len_aln,3);
-    iresult=declare_arrayN (3,sizeof (int),SAR->nseq, A->len_aln,3);
+    result=(float***)declare_arrayN (3,sizeof (float),SAR->nseq, A->len_aln,3);
+    iresult=(int***)declare_arrayN (3,sizeof (int),SAR->nseq, A->len_aln,3);
     }
 
   sim=aln2sim_mat (A, "idmat");
@@ -2818,7 +2818,7 @@ int display_simple_sar_analyze_pair_col (Alignment *A, Alignment *SAR, char *mod
   rA=rotate_aln (A, NULL);
   n=0;
 
-  nI=vcalloc ( SAR->nseq, sizeof (int));
+  nI=(int*)vcalloc ( SAR->nseq, sizeof (int));
   for (a=0; a< SAR->nseq; a++)
     for (b=0; b<SAR->len_aln; b++) nI[a]+=(SAR->seq_al[a][b]=='I')?1:0;
 
@@ -2848,7 +2848,7 @@ int display_simple_sar_analyze_col (Alignment *A, Alignment *SAR, char *mode)
   r3=declare_int (A->len_aln+1, 5);
   r4=declare_int (A->len_aln+1, SAR->nseq+1);
   aa=declare_int (2, 256);
-  cons=vcalloc (A->len_aln+1, sizeof (char));
+  cons=(char*)vcalloc (A->len_aln+1, sizeof (char));
   for (a=0; a<A->len_aln; a++){r3[a][0]=a;cons[a]='A';}
 
 
@@ -2942,7 +2942,7 @@ int ***    simple_sar_predict     (Alignment *A, Alignment *SAR, char *mode)
 
 
   aa=declare_int (2,256);
-  pred=declare_arrayN (3, sizeof (int),SAR->nseq, A->nseq, 5);
+  pred=(int***)declare_arrayN (3, sizeof (int),SAR->nseq, A->nseq, 5);
 
 
   r=simple_sar_analyze_col (A, SAR, mode);
@@ -3070,7 +3070,7 @@ int *pair_seq2seq (int *iseq, char *seq1, char *seq2)
 	  lu[a][b]=n++;
     }
 
-  if (!iseq)iseq=vcalloc ( strlen (seq1)+1, sizeof (int));
+  if (!iseq)iseq=(int*)vcalloc ( strlen (seq1)+1, sizeof (int));
   for ( a=0; a< strlen (seq1); a++)
     {
       if (is_gap(seq1[a]) || is_gap(seq2[a]))iseq[a]=-1;
@@ -3096,7 +3096,7 @@ int ***simple_sar_analyze_col ( Alignment *inA, Alignment *SAR, char *mode)
 
   strget_param (mode, "_METHOD_", "3", "%d", &sar_mode);
   if (!result)
-    result=declare_arrayN (3,sizeof (int),SAR->nseq, inA->len_aln,4);
+    result=(int***)declare_arrayN (3,sizeof (int),SAR->nseq, inA->len_aln,4);
 
 
   sim=aln2sim_mat (inA, "idmat");
@@ -3155,7 +3155,7 @@ int *seq2iseq ( char *seq)
     {
       clen=strlen (seq);
       vfree (iseq);
-      iseq=vcalloc (clen+1, sizeof (int));
+      iseq=(int*)vcalloc (clen+1, sizeof (int));
     }
   for (a=0; a<strlen (seq); a++)
     {
@@ -3185,8 +3185,8 @@ double sar_vs_iseq1 ( char *sar, int *seq, float gl, int **sim, char *best_aa)
 
   if (!aa)
     {
-      aa=vcalloc (256*256, sizeof(int));
-      aal=vcalloc (N, sizeof (int));
+      aa=(int*)vcalloc (256*256, sizeof(int));
+      aal=(int*)vcalloc (N, sizeof (int));
     }
   naa=0;
   for ( a=0; a<N; a++)
@@ -3269,7 +3269,7 @@ double sar_vs_seq5 ( char *sar, char *seq, float gl, int **sim, char *best_aa)
   if (Ng>gl) return 0;
 
   //Identify all the AA associated with a I (Positive alphabet)
-  aa=vcalloc ( 256, sizeof (int));
+  aa=(int*)vcalloc ( 256, sizeof (int));
   for (b=0; b<N; b++)
     {
       s=(sar[b]=='I')?1:0;
@@ -3365,7 +3365,7 @@ double sar_vs_seq3 ( char *sar, char *seq, float gl, int **sim, char *best_aa)
   if (Ng>gl) return 0;
 
   //Identify all the AA associated with a I (Positive alphabet)
-  aa=vcalloc ( 256, sizeof (int));
+  aa=(int*)vcalloc ( 256, sizeof (int));
   for (b=0; b<N; b++)
     {
       s=(sar[b]=='I')?1:0;
@@ -3595,7 +3595,7 @@ Sequence * compare_sar_sequence( Sequence *S1, Sequence *S2, int depth)
 char*  sarseq2anti_sarseq (char *seq_in, char *seq_out)
 {
   int a;
-  if (!seq_out)seq_out=vcalloc (strlen (seq_in)+1, sizeof (char));
+  if (!seq_out)seq_out=(char*)vcalloc (strlen (seq_in)+1, sizeof (char));
   for (a=0; a<strlen (seq_in); a++)seq_out[a]=(seq_in[a]=='I')?'O':'I';
   return seq_out;
 }
@@ -3825,7 +3825,7 @@ Alignment *weight2sar (Alignment *A, Alignment *SAR, char *weight_file, int limi
   char ***list;
   float score;
 
-  weight=vcalloc (SAR->nseq, sizeof (int**));
+  weight=(int***)vcalloc (SAR->nseq, sizeof (int**));
 
 
   list=file2list (weight_file, " ");
@@ -3970,7 +3970,7 @@ Alignment * sar2simpred (Alignment *A, Alignment *SAR, char *posfile, char *comp
 
 
   n11=n10=n01=n00=0;
-  tot=declare_arrayN(3,sizeof (float), 10, 6, 2);
+  tot=(float***)declare_arrayN(3,sizeof (float), 10, 6, 2);
 
   sim_ref=aln2sim_mat (A, "idmat");
   if (strm (posfile, "all"))
@@ -4064,11 +4064,11 @@ Alignment * sar2simpred2 (Alignment *A, Alignment *SAR, char *seqlist, char *pos
   Alignment *B;
   int printall=1;
 
-  out=vcalloc (A->nseq+1, sizeof (char));
-  rlist=vcalloc ( A->nseq, sizeof (int));
-  tlist=vcalloc ( A->nseq, sizeof (int));
-  pred=vcalloc(2, sizeof (int));
-  npred=vcalloc(2, sizeof (int));
+  out=(char*)vcalloc (A->nseq+1, sizeof (char));
+  rlist=(int*)vcalloc ( A->nseq, sizeof (int));
+  tlist=(int*)vcalloc ( A->nseq, sizeof (int));
+  pred=(int*)vcalloc(2, sizeof (int));
+  npred=(int*)vcalloc(2, sizeof (int));
 
   nrs=0;
   if ( strm (seqlist, "first"))
@@ -4258,7 +4258,7 @@ Alignment *or_scan (Alignment *A,Alignment *S, char *pmode)
 
 
   l=intlen (A->len_aln);
-  poslist=vcalloc ( A->len_aln, sizeof (int));
+  poslist=(int*)vcalloc ( A->len_aln, sizeof (int));
   nl=0;
 
   for ( a=0; a< A->len_aln; a++)poslist[nl++]=a+1;
@@ -4338,8 +4338,8 @@ Alignment *or_scan (Alignment *A,Alignment *S, char *pmode)
 
       if (sev==0)for (a=0, sev=1; a<len; a++)sev*=A->len_aln;
 
-      tresults=vcalloc ( A->len_aln, sizeof (int));
-      poscache=vcalloc ( A->len_aln, sizeof (int));
+      tresults=(int*)vcalloc ( A->len_aln, sizeof (int));
+      poscache=(int*)vcalloc ( A->len_aln, sizeof (int));
       poslist=generate_array_int_list (len, 0, A->len_aln-1,1, &n, NULL);
       for (s=0; s<S->len_aln; s++)
 	{
@@ -4409,8 +4409,8 @@ Alignment *or_scan (Alignment *A,Alignment *S, char *pmode)
       int *poscache;
 
       results=declare_int (A->len_aln*A->len_aln, 3);
-      tresults=vcalloc ( A->len_aln, sizeof (int));
-      poscache=vcalloc ( A->len_aln, sizeof (int));
+      tresults=(int*)vcalloc ( A->len_aln, sizeof (int));
+      poscache=(int*)vcalloc ( A->len_aln, sizeof (int));
       for (s=0; s<S->len_aln; s++)
 	{
 	  int count;
@@ -4511,7 +4511,7 @@ Alignment * or_sar(Alignment *inA, Alignment *inS, char *mode, int print)
       S=rS;
     }
 
-  R=vcalloc ( S->len_aln+2, sizeof (ORP*));
+  R=(ORP**)vcalloc ( S->len_aln+2, sizeof (ORP*));
   if (strm (sarmode, "all"))R[0]=or_sar_compound (A, S, mode, print);
   else if ( strm (sarmode, "single"))
     {
@@ -4631,9 +4631,9 @@ ORP * display_or_summary (ORP *CP, char *mode, FILE *fp, int print)
 
 
 
-  pred=vcalloc ( P->nseq*P->len_aln*2, sizeof (char));
-  exp=vcalloc ( P->nseq*P->len_aln*2, sizeof (char));
-  motif=vcalloc (CP->len+1, sizeof (char));
+  pred=(char*)vcalloc ( P->nseq*P->len_aln*2, sizeof (char));
+  exp=(char*)vcalloc ( P->nseq*P->len_aln*2, sizeof (char));
+  motif=(char*)vcalloc (CP->len+1, sizeof (char));
 
 
 
@@ -4697,7 +4697,7 @@ ORP * or_sar_compound(Alignment *A, Alignment *S, char *mode, int print)
 
   if (!PR)
     {
-      PR=vcalloc (1, sizeof (ORP));
+      PR=(ORP*)vcalloc (1, sizeof (ORP));
       PR->P=P;
     }
   return PR;
@@ -4738,7 +4738,7 @@ char* or_id_evaluate2  ( Alignment *A, Alignment *S, char *mode, int *pos, int p
 
   plist=pos2list (pos, A->len_aln, &nl);
   words=declare_char (A->nseq, nl+1);
-  bword=vcalloc (nl+1, sizeof (char));
+  bword=(char*)vcalloc (nl+1, sizeof (char));
   for (p=0; p<nl; p++)
     {
       for (s=0; s< A->nseq; s++)
@@ -4800,8 +4800,8 @@ float or_loo_evaluate2 ( Alignment *A, Alignment *S, char *mode, int *pos, int p
 	  words[s][p]=res;
 	}
     }
-  positive=vcalloc ( A->nseq, sizeof (char*));
-  negative=vcalloc ( A->nseq, sizeof (char*));
+  positive=(char**)vcalloc ( A->nseq, sizeof (char*));
+  negative=(char**)vcalloc ( A->nseq, sizeof (char*));
   for (c=0; c<S->len_aln; c++)
     {
       //Fill the match matrix
@@ -4927,7 +4927,7 @@ int* or_comp_pos ( Alignment *inA, Alignment *inS, char *mode,int print)
   int *main_pos, *pos=NULL;
 
   set_sar (inA, inS, mode);
-  main_pos=vcalloc ( inA->len_aln, sizeof (int));
+  main_pos=(int*)vcalloc ( inA->len_aln, sizeof (int));
 
   inS2=copy_aln (inS, NULL);
   inS2->len_aln=1;
@@ -4950,7 +4950,7 @@ int* or_comp_pos ( Alignment *inA, Alignment *inS, char *mode,int print)
       free_aln (S);
       free_aln (A);
 
-      pos=vcalloc (inA->len_aln, sizeof (int));
+      pos=(int*)vcalloc (inA->len_aln, sizeof (int));
       A=copy_aln (inA, NULL);
       S=copy_aln (inS2, NULL);
       set_sar (A,S, mode);
@@ -5008,8 +5008,8 @@ Alignment * or_comp_loo ( Alignment *inA, Alignment *inS, char *mode, int *pos,i
   inS2->len_aln=1;
 
 
-  comp_pred=vcalloc ( inA->nseq+1, sizeof (int));
-  comp_exp=vcalloc ( inA->nseq+1, sizeof (int));
+  comp_pred=(char*)vcalloc ( inA->nseq+1, sizeof (int));
+  comp_exp=(char*)vcalloc ( inA->nseq+1, sizeof (int));
   compound_pos=NULL;
   //Run every SAR, one at a time
   for ( c=0; c< inS->len_aln; c++)
@@ -5020,7 +5020,7 @@ Alignment * or_comp_loo ( Alignment *inA, Alignment *inS, char *mode, int *pos,i
 	  inS2->seq_al[a][1]='\0';
 	}
       vfree (compound_pos);
-      compound_pos=vcalloc (inA->len_aln, sizeof (int));
+      compound_pos=(int*)vcalloc (inA->len_aln, sizeof (int));
       for (a=0; a<inA->nseq; a++)
 	{
 	  char ***motifs;
@@ -5076,7 +5076,7 @@ Alignment * or_comp_loo ( Alignment *inA, Alignment *inS, char *mode, int *pos,i
 		    {
 		      main_pos[b][1]++;
 		      comp_list[b][0]++;
-		      comp_list[b]=vrealloc (comp_list[b], sizeof (int)*(comp_list[b][0]+1));
+		      comp_list[b]=(int*)vrealloc (comp_list[b], sizeof (int)*(comp_list[b][0]+1));
 		      comp_list[b][comp_list[b][0]]=c;
 		    }
 		}
@@ -5220,7 +5220,7 @@ Alignment * or_jack(Alignment *inA, Alignment *inS, char *mode)
 
 
 
-  main_pos=vcalloc ( inA->len_aln, sizeof (int));
+  main_pos=(int*)vcalloc ( inA->len_aln, sizeof (int));
   for (a=0; a<n_cycles; a++)
     {
 
@@ -5444,7 +5444,7 @@ ORP* new_evaluate_prediction  (ORP *PR, char *mode, int print)
   P=PR->P;
   R=PR->S;
 
-  recall=vcalloc (P->len_aln, sizeof (float));
+  recall=(float*)vcalloc (P->len_aln, sizeof (float));
   if (P->len_aln!=R->len_aln)
     {
       HERE ("Mismatch between number of compounds in prediction and reference");
@@ -5538,7 +5538,7 @@ float  evaluate_prediction  (Alignment *R, Alignment *P, char *mode, int print)
 
 
 
-  recall=vcalloc (P->len_aln, sizeof (float));
+  recall=(float*)vcalloc (P->len_aln, sizeof (float));
   if (P->len_aln!=R->len_aln)
     {
       HERE ("Mismatch between number of compounds in prediction and reference");
@@ -5687,7 +5687,7 @@ int *   file2pos_list (Alignment *A, char *posfile)
   file=file2list (posfile, " ");
 
   index=aln2inv_pos (A);
-  pos=vcalloc ( A->len_aln, sizeof (int));
+  pos=(int*)vcalloc ( A->len_aln, sizeof (int));
 
   n=0;
   while (file[n])
@@ -5737,7 +5737,7 @@ int *   aln2predictive_positions_mat (Alignment *A, Alignment *B, char *mode, in
     float id1,id2,id3,nid1,nid2,nid3;
     int **pos, *fpos;
     pos=declare_int (A->len_aln,2);
-    fpos=vcalloc ( A->len_aln, sizeof (int));
+    fpos=(int*)vcalloc ( A->len_aln, sizeof (int));
 
     strget_param (mode, "_NPOS_", "2", "%d", &npos);
     for ( a=0; a< A->len_aln; a++)
@@ -5817,7 +5817,7 @@ int *   aln2predictive_positions_scan (Alignment *A, Alignment *B, char *mode, i
   if ( !strm(target_posfile, "NO"))tpos=file2pos_list (A,target_posfile);
   else
     {
-      tpos=vcalloc (A->len_aln, sizeof (int));
+      tpos=(int*)vcalloc (A->len_aln, sizeof (int));
       for (a=0; a<A->len_aln; a++)tpos[a]=1;
     }
 
@@ -5869,7 +5869,7 @@ int *   aln2predictive_positions_scan (Alignment *A, Alignment *B, char *mode, i
     }
 
 
-  pos=vcalloc ( A->len_aln, sizeof (int));
+  pos=(int*)vcalloc ( A->len_aln, sizeof (int));
   if (max==0)max=A->len_aln;
   else if ( max==-1)
     {
@@ -5880,8 +5880,8 @@ int *   aln2predictive_positions_scan (Alignment *A, Alignment *B, char *mode, i
 
 
 
-  pos=vcalloc ( A->len_aln, sizeof (int));
-  list=vcalloc (A->len_aln, sizeof (int));
+  pos=(int*)vcalloc ( A->len_aln, sizeof (int));
+  list=(int*)vcalloc (A->len_aln, sizeof (int));
   nl=0;
 
 
@@ -5945,7 +5945,7 @@ char *** compounds2motifs (Alignment *A, Alignment *B, int *pos, int depth, char
   char ***motifs;
   int a;
 
-  motifs=vcalloc (B->len_aln, sizeof (char**));
+  motifs=(char***)vcalloc (B->len_aln, sizeof (char**));
   for (a=0; a<B->len_aln; a++)
     {
 
@@ -6058,8 +6058,8 @@ char ** compound2regexp_motif (Alignment *A, Alignment *B, int *pos, int depth, 
   n=0;
   if (depth>0)
     {
-       alp=vcalloc ( sizeof (char**), I->len_aln);
-       alp_size= vcalloc ( I->len_aln, sizeof (int));
+       alp=(char***)vcalloc ( sizeof (char**), I->len_aln);
+       alp_size= (int*)vcalloc ( I->len_aln, sizeof (int));
        for (a=0; a<I->len_aln; a++)
 	 {
 	   char *col;
@@ -6073,7 +6073,7 @@ char ** compound2regexp_motif (Alignment *A, Alignment *B, int *pos, int depth, 
       int *used;
       char r;
 
-      used=vcalloc (256, sizeof (int));
+      used=(int*)vcalloc (256, sizeof (int));
       fpp=vfopen (motif_file,"w");
       for (a=0;a<I->len_aln; a++)
 	{
@@ -6097,8 +6097,8 @@ char ** compound2regexp_motif (Alignment *A, Alignment *B, int *pos, int depth, 
       depth=I->nseq;
     }
 
-  buf=vcalloc (2*(I->len_aln*depth)+1, sizeof (char));
-  best_buf=vcalloc (2*(I->len_aln*depth)+1, sizeof (char));
+  buf=(char*)vcalloc (2*(I->len_aln*depth)+1, sizeof (char));
+  best_buf=(char*)vcalloc (2*(I->len_aln*depth)+1, sizeof (char));
   fpp=vfopen (motif_file, "r");
 
   for (a=0; a<n; a++)
@@ -6180,7 +6180,7 @@ double  sar_aln2r (Alignment *A, Alignment *B, int *pos, int print)
     {
 
       declare=1;
-      pos=vcalloc ( A->len_aln+1, sizeof (int));
+      pos=(int*)vcalloc ( A->len_aln+1, sizeof (int));
       for (a=0; a<A->len_aln; a++)pos[a]=1;
       pos[a]=-1;
 
@@ -6279,12 +6279,12 @@ char * get_compound_name (int c, char *mode)
     {
       char *comp_list;
       isset=1;
-      lname=vcalloc (100, sizeof (char));
+      lname=(char*)vcalloc (100, sizeof (char));
 
       if (!mode);
       else
 	{
-	  strget_param (mode, "_COMPLIST_", "NO", "%s", comp_list=vcalloc (100, sizeof (char)));
+	  strget_param (mode, "_COMPLIST_", "NO", "%s", comp_list=(char*)vcalloc (100, sizeof (char)));
 	  if (strm(comp_list, "NO"));
 	  else
 	    {
@@ -6303,13 +6303,13 @@ char * get_compound_name (int c, char *mode)
 ORP * declare_or_prediction ( int ncomp, int nseq, int len)
 {
   ORP *P;
-  P=vcalloc ( 1, sizeof (ORP));
+  P=(ORP*)vcalloc ( 1, sizeof (ORP));
   P->ncomp=ncomp;
   P->nseq=nseq;
   P->len=len;
   P->PR=NULL;
 
-  P->pos=vcalloc (len+1, sizeof (int));
+  P->pos=(int*)vcalloc (len+1, sizeof (int));
 
   return P;
 }

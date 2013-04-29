@@ -1,4 +1,7 @@
 // #include "Vector.h"
+#include<iostream>
+#include<cstring>
+#include<string>
 #include "km_coffee_header.h"
 
 
@@ -139,18 +142,10 @@ void calc_IEP(char *seq, double *pI )
 
 
 
-
-
-
-
-
-
-
-Vector *
-seq2vec_kmer(const Seq *seq, short k, unsigned int *factor, size_t vec_len, size_t vec_num, short *alphabet, int *used)
+Vector * seq2vec_kmer(const Seq *seq, short k, unsigned int *factor, size_t vec_len, size_t vec_num, short *alphabet, int *used)
 {
-	Vector *t = my_malloc(sizeof(Vector));
-	t->data = my_calloc(vec_len, sizeof(double));
+	Vector *t = (Vector*) my_malloc(sizeof(Vector));
+	t->data = (double*) my_calloc(vec_len, sizeof(double));
 	t->id = vec_num;
 	size_t i;
 	unsigned int value = 0;
@@ -175,8 +170,7 @@ seq2vec_kmer(const Seq *seq, short k, unsigned int *factor, size_t vec_len, size
 }
 
 
-double
-l2norm(Vector *vec, size_t size)
+double l2norm(Vector *vec, size_t size)
 {
 	int i;
 	double norm=0;
@@ -186,15 +180,14 @@ l2norm(Vector *vec, size_t size)
 	return sqrt(norm);
 }
 
-void
-normalize(VectorSet *vec_set)
+void normalize(VectorSet *vec_set)
 {
 	size_t vec_len=vec_set->dim;
 	size_t n_vecs = vec_set->n_vecs;
 
 	//calculate mean
-	Vector *mean = my_malloc(sizeof(Vector));
-	mean->data = my_calloc(vec_len, sizeof(double));
+	Vector *mean = (Vector*)my_malloc(sizeof(Vector));
+	mean->data = (double*) my_calloc(vec_len, sizeof(double));
 	double *md=mean->data;
 	double *vec;
 	size_t i,j;
@@ -208,8 +201,8 @@ normalize(VectorSet *vec_set)
 		md[j]/=n_vecs;
 
 	//calculate standard deviation
-	Vector *sd = my_malloc(sizeof(Vector));
-	sd->data = my_calloc(vec_len, sizeof(double));
+	Vector *sd = (Vector*)my_malloc(sizeof(Vector));
+	sd->data = (double*)my_calloc(vec_len, sizeof(double));
 	double *sdd = sd->data;
 	for (i=0;i<n_vecs;++i)
 	{
@@ -230,17 +223,16 @@ normalize(VectorSet *vec_set)
 
 
 
-Vector *
-seq2vec_dists(const Seq *seq, char * groups[], size_t n_groups, size_t vec_num)
+Vector * seq2vec_dists(const Seq *seq, char * groups[], size_t n_groups, size_t vec_num)
 {
 	size_t s_len = seq->size;
 	char *tmp_seq=seq->seq;
 	size_t i,j;
-	Vector *t = my_malloc(sizeof(Vector));
+	Vector *t = (Vector*)my_malloc(sizeof(Vector));
 	t->id = vec_num;
-	t->data = my_calloc(n_groups*2, sizeof(double));
+	t->data =(double*) my_calloc(n_groups*2, sizeof(double));
 	double *data = t->data;
-	int *last_pos = my_malloc(n_groups*sizeof(int));
+	int *last_pos =(int*) my_malloc(n_groups*sizeof(int));
 	for (i=0; i<n_groups; ++i)
 		last_pos[i]=-1;
 	for (i=0; i<s_len; ++i)
@@ -267,14 +259,13 @@ seq2vec_dists(const Seq *seq, char * groups[], size_t n_groups, size_t vec_num)
 }
 
 
-VectorSet*
-seqset2vecs_dist(SeqSet *seq_set, char *groups[], size_t n_groups)
+VectorSet* seqset2vecs_dist(SeqSet *seq_set, char *groups[], size_t n_groups)
 {
-	VectorSet *vec_set = my_malloc(sizeof(VectorSet));
+	VectorSet *vec_set =(VectorSet*) my_malloc(sizeof(VectorSet));
 	vec_set->dim = seq_set->seqs[0]->size;
 	size_t n_seqs = seq_set->n_seqs;
 
-	Vector **vecs= malloc(n_seqs*sizeof(Vector*));
+	Vector **vecs= (Vector**)malloc(n_seqs*sizeof(Vector*));
 	vec_set->n_vecs=n_seqs;
 	vec_set->vecs=vecs;
 
@@ -288,17 +279,16 @@ seqset2vecs_dist(SeqSet *seq_set, char *groups[], size_t n_groups)
 
 
 
-VectorSet*
-seqset2vecs_whatever(SeqSet *seq_set, char *groups[], size_t n_groups)
+VectorSet* seqset2vecs_whatever(SeqSet *seq_set, char *groups[], size_t n_groups)
 {
 
 	double hydrophobic[]={ 0.159, 0, 0.778, -1.289, -1.076, 1.437, -0.131, -0553, 1.388, 0, -1.504, 1.236, 1.048, -0.866, 0, -0.104, -0.836, -1.432, -0.549, -0.292, 0, 1.064, 1.064, 0, 0.476, 0 };
 
-	VectorSet *vec_set = my_malloc(sizeof(VectorSet));
+	VectorSet *vec_set = (VectorSet*)my_malloc(sizeof(VectorSet));
 	//vec_set->dim = seq_set->seqs[0]->size;
 	size_t n_seqs = seq_set->n_seqs;
 
-	Vector **vecs= malloc(n_seqs*sizeof(Vector*));
+	Vector **vecs= (Vector**)malloc(n_seqs*sizeof(Vector*));
 	vec_set->n_vecs=n_seqs;
 	vec_set->vecs=vecs;
 
@@ -308,7 +298,7 @@ seqset2vecs_whatever(SeqSet *seq_set, char *groups[], size_t n_groups)
 	for (i = 0; i<n_seqs; ++i)
 	{
 		vecs[i] = seq2vec_dists(seq_set->seqs[i], groups, n_groups, i);
-		vecs[i] = realloc(vecs[i], vec_set->dim*sizeof(double));
+		vecs[i] = (Vector*)realloc(vecs[i], vec_set->dim*sizeof(double));
 // 		calc_H(seq_set->seqs[i]->seq, hydrophobic, &(vecs[i]->data[vec_set->dim-2]));
 		calc_IEP(seq_set->seqs[i]->seq,  &(vecs[i]->data[vec_set->dim-1]));
 	}
@@ -327,14 +317,13 @@ seqset2vecs_whatever(SeqSet *seq_set, char *groups[], size_t n_groups)
 
 
 
-int*
-identify_fields(const SeqSet *seq_set, short k, unsigned int *factor, size_t *vec_len, short *alphabet )
+int* identify_fields(const SeqSet *seq_set, short k, unsigned int *factor, size_t *vec_len, short *alphabet )
 {
 
 	size_t vec_length = *vec_len;
-	int *used = my_calloc(vec_length, sizeof(int));
-	int *value_arg = my_calloc(vec_length, sizeof(int));
-	int *value_test = my_malloc(vec_length * sizeof(int));
+	int *used = (int*) my_calloc(vec_length, sizeof(int));
+	int *value_arg = (int*)my_calloc(vec_length, sizeof(int));
+	int *value_test = (int*)my_malloc(vec_length * sizeof(int));
 
 	unsigned int value;
 	Seq *seq;
@@ -456,8 +445,8 @@ find_distant(SeqSet *seq_set, VectorSet *set)
 	size_t dim = set->dim;
 	size_t i,j;
 
-	dist_pair *avg_dist = malloc(n_vecs*sizeof(dist_pair));
-	dist_pair *nearest_dist = malloc(n_vecs*sizeof(dist_pair));
+	dist_pair *avg_dist = (dist_pair*)malloc(n_vecs*sizeof(dist_pair));
+	dist_pair *nearest_dist = (dist_pair*)malloc(n_vecs*sizeof(dist_pair));
 	for (i =0; i<n_vecs; ++i)
 	{
 		avg_dist[i].id=set->vecs[i]->id;
@@ -488,7 +477,7 @@ find_distant(SeqSet *seq_set, VectorSet *set)
 	//printf("Most dist to nearest:\n");
 
 	int to_extract = 10;
-	int *extract_ids = malloc(to_extract*sizeof(int));
+	int *extract_ids = (int*)malloc(to_extract*sizeof(int));
 	for (i=0; i <to_extract; ++i)
 	{
 		extract_ids[i] = nearest_dist[i].id;
@@ -528,10 +517,10 @@ int*
 identify_fields_variance(const SeqSet *seq_set, short k, unsigned int *factor, size_t *vec_len, short *alphabet)
 {
 	size_t vec_length = *vec_len;
-	int *used = my_calloc(vec_length, sizeof(int));
-	double *mean = my_calloc(vec_length, sizeof(double));
-	double *variance = my_calloc(vec_length, sizeof(double));
-	double *value_test = my_malloc(vec_length * sizeof(double));
+	int *used = (int*)my_calloc(vec_length, sizeof(int));
+	double *mean =(double*) my_calloc(vec_length, sizeof(double));
+	double *variance = (double*)my_calloc(vec_length, sizeof(double));
+	double *value_test = (double*)my_malloc(vec_length * sizeof(double));
 
 	size_t i;
 
@@ -621,10 +610,10 @@ identify_fields_variance(const SeqSet *seq_set, short k, unsigned int *factor, s
 VectorSet*
 seqset2vecs_kmer(SeqSet *seq_set, short k, short alphabet_size, short *alphabet)
 {
-	VectorSet *vec_set = my_malloc(sizeof(VectorSet));
+	VectorSet *vec_set = (VectorSet*)my_malloc(sizeof(VectorSet));
 	vec_set->dim = seq_set->seqs[0]->size;
 	size_t n_seqs = seq_set->n_seqs;
-	unsigned int *factor = my_malloc(k*sizeof(unsigned int));
+	unsigned int *factor = (unsigned int*)my_malloc(k*sizeof(unsigned int));
 	factor[k-1] = 1;
 
 	short j;
@@ -632,7 +621,7 @@ seqset2vecs_kmer(SeqSet *seq_set, short k, short alphabet_size, short *alphabet)
 		factor[j] = factor[j+1] *alphabet_size;
 	size_t vec_len = factor[0] *alphabet_size;
 
-	Vector **vecs= malloc(n_seqs*sizeof(Vector*));
+	Vector **vecs= (Vector**)malloc(n_seqs*sizeof(Vector*));
 	vec_set->n_vecs=n_seqs;
 	vec_set->vecs=vecs;
 	int *used = identify_fields(seq_set, k, factor, &vec_len, alphabet);
@@ -752,8 +741,8 @@ seqset2vecs_kmer(SeqSet *seq_set, short k, short alphabet_size, short *alphabet)
 Vector *
 new_vec(Vector *vec, int vec_len)
 {
-	Vector *new_vec=my_malloc(sizeof(Vector));
-	new_vec->data=my_malloc(vec_len*sizeof(double));
+	Vector *new_vec=(Vector*)my_malloc(sizeof(Vector));
+	new_vec->data=(double*)my_malloc(vec_len*sizeof(double));
 	memcpy(new_vec->data, vec->data, vec_len*sizeof(double));
 	new_vec->id = vec->id;
 	new_vec->seq_len = vec->seq_len;
@@ -764,8 +753,8 @@ new_vec(Vector *vec, int vec_len)
 Vector *
 new_vec_nodata(Vector *vec, int vec_len)
 {
-	Vector *new_vec=my_malloc(sizeof(Vector));
-	new_vec->data=my_malloc(vec_len*sizeof(double));
+	Vector *new_vec=(Vector*)my_malloc(sizeof(Vector));
+	new_vec->data=(double*)my_malloc(vec_len*sizeof(double));
 	new_vec->id = vec->id;
 	new_vec->seq_len = vec->seq_len;
 	new_vec->assignment = vec->assignment;

@@ -46,7 +46,7 @@ NT_node seq2dpa_tree  (Sequence *S, char *mode)
   CL->local_stderr=NULL;
 
 
-  CL->DM=cl2distance_matrix (CL,NOALN,(mode==NULL)?"ktup":mode, NULL, 0);
+  CL->DM=cl2distance_matrix (CL,NOALN,const_cast<char*>( (mode==NULL)?"ktup":mode), NULL, 0);
 
   T=int_dist2nj_tree ( (CL->DM)->similarity_matrix, S->name, S->nseq, vtmpnam (NULL));
   Tree=T[3][0];
@@ -108,6 +108,7 @@ NT_node code_dpa_tree ( NT_node T, int **D)
     }
 }
 static int group_number;
+
 char *tree2Ngroup (Alignment *A, NT_node T, int max_n, char *fname, char *mat)
 {
   double top, bot, mid, pmid;
@@ -158,7 +159,7 @@ char *tree2Ngroup (Alignment *A, NT_node T, int max_n, char *fname, char *mat)
     }
   return NULL;
 }
-static int group_number;
+
 int tree2group_file ( NT_node T,Sequence *S, int maxnseq, int minsim, char *name)
   {
     FILE *fp;
@@ -214,8 +215,8 @@ NT_node  tree2collapsed_tree (NT_node T, int n, char **string)
 
   A=tree2seq(T, NULL);
   T=recode_tree(T, A);
-  list=vcalloc (A->nseq, sizeof (char***));
-  nlist=vcalloc (A->nseq, sizeof (int));
+  list=(char***)vcalloc (A->nseq, sizeof (char***));
+  nlist=(int*)vcalloc (A->nseq, sizeof (int));
   if ( n==0)return T;
   else if (n>1)
     {
@@ -223,7 +224,7 @@ NT_node  tree2collapsed_tree (NT_node T, int n, char **string)
       char *buf;
 
       for (l=0,a=0; a< n; a++)l+=strlen (string[a]);
-      buf=vcalloc ( 2*n+l+1, sizeof (char));
+      buf=(char*)vcalloc ( 2*n+l+1, sizeof (char));
       for (a=0; a< n; a++){buf=strcat (buf,string[a]), buf=strcat ( buf, " ");}
       list[0]=string2list (buf);
       vfree (buf);
@@ -646,11 +647,11 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
   float *fascore;
   char out_format[100];
 
-   char *score_csv_file = vcalloc(200, sizeof (char));
-   char *score_html_file = vcalloc(200, sizeof (char));
-   char *hit_matrix_file = vcalloc(200, sizeof (char));
-   char *hit_html_file = vcalloc(200, sizeof (char));
-   char *tree_file = vcalloc(200, sizeof (char));
+   char *score_csv_file =(char*)vcalloc(200, sizeof (char));
+   char *score_html_file =(char*) vcalloc(200, sizeof (char));
+   char *hit_matrix_file =(char*) vcalloc(200, sizeof (char));
+   char *hit_html_file =(char*) vcalloc(200, sizeof (char));
+   char *tree_file =(char*) vcalloc(200, sizeof (char));
 
   sprintf(score_csv_file, "%s%s", prefix, ".score_csv");
   sprintf(score_html_file, "%s%s", prefix, ".ts_html");
@@ -678,9 +679,9 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
 
   l=intlen (A->len_aln);
 
-  poslist=vcalloc ( A->len_aln, sizeof (int));
+  poslist=(int*)vcalloc ( A->len_aln, sizeof (int));
   nl=0;
-  fascore = vcalloc(A->len_aln, sizeof (float));
+  fascore =(float*) vcalloc(A->len_aln, sizeof (float));
 
   if ( strm (posfile, "NO"))
     {
@@ -697,7 +698,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
     }
 
 //For tree hit
-  NT_node *TreeArray = vcalloc(nl, sizeof (NT_node));
+  NT_node *TreeArray =(NT_node*) vcalloc(nl, sizeof (NT_node));
 
   if ( strm (mode, "woble"))
     {
@@ -773,7 +774,7 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
   else if ( strm (mode, "norscan")||strm (mode, "norhit"))
     {
       FILE *fp_ts;
-      ptree=vcalloc(100, sizeof (char));
+      ptree=(char*)vcalloc(100, sizeof (char));
       fp_ts=vfopen (score_csv_file, "w");
       fprintf ( fp_ts, "Position,Similarity,STD_Len\n");
       for ( ax=0; ax<nl; ax++)
@@ -806,10 +807,10 @@ NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree)
 	fprintf (stdout, "[STRAT] Calculate the hit matrix of the tree scan\n");
 	float **ffpHitScoreMatrix;
 
-	ffpHitScoreMatrix=vcalloc (nl, sizeof (float*));
+	ffpHitScoreMatrix=(float**)vcalloc (nl, sizeof (float*));
 	int i, j;
 	for(i = 0; i < nl; i++)
-      		ffpHitScoreMatrix[i]=vcalloc (nl-i, sizeof (float));
+      		ffpHitScoreMatrix[i]=(float*)vcalloc (nl-i, sizeof (float));
 
 	fprintf (stdout, "Process positions\n", i);
 	for(i = 0; i < nl; i++)
@@ -938,7 +939,7 @@ NT_node aln2std_tree(Alignment *A, int ipara1, int ipara2, char *mode)
 {
      Alignment *B;
      NT_node T;
-     char *cpSet = vcalloc(100, sizeof (char));
+     char *cpSet =(char*) vcalloc(100, sizeof (char));
 
 	if(strm (mode, "norhit"))
 	{
@@ -966,7 +967,7 @@ Tree_sim*  tree_scan_multiple_pos (int *poslist, int *wlist,int nl, Alignment *A
     vfree(pos);
     free_aln (B);
 
-    pos=vcalloc ( A->len_aln+1, sizeof (int));
+    pos=(int*)vcalloc ( A->len_aln+1, sizeof (int));
     B=copy_aln (A, NULL);
 
     for (a=0; a<nl; a++)
@@ -1053,7 +1054,7 @@ Tree_sim*  tree_scan_pos_woble (Alignment *A, int center, int max, char *ptree, 
      int start, end;
 
      br[0]=bl[0]=0;
-     BTS=vcalloc (1, sizeof (Tree_sim));
+     BTS=(Tree_sim*)vcalloc (1, sizeof (Tree_sim));
 
      for (left=0; left<max; left++)
        for (right=0; right<max; right++)
@@ -1112,8 +1113,8 @@ Tree_sim* tree_cmp( NT_node T1, NT_node T2)
   T2=prune_tree (T2, S);
   T2=recode_tree(T2, S);
 
-  TS1=vcalloc (1, sizeof (Tree_sim));
-  TS2=vcalloc (1, sizeof (Tree_sim));
+  TS1=(Tree_sim*)vcalloc (1, sizeof (Tree_sim));
+  TS2=(Tree_sim*)vcalloc (1, sizeof (Tree_sim));
 
   new_compare_trees ( T1, T2, S->nseq, TS1);
   new_compare_trees ( T2, T1, S->nseq, TS2);
@@ -1148,7 +1149,7 @@ int print_node_list (NT_node T, Sequence *RS)
   L=tree2node_list (T, NULL);
   if (!RS)RS=S;
 
-  nlseq2=vcalloc ( RS->nseq, sizeof (int));
+  nlseq2=(int*)vcalloc ( RS->nseq, sizeof (int));
   while (L[0])
     {
       int d,b;
@@ -1175,7 +1176,7 @@ NT_node main_compare_trees_list ( NT_node RT, Sequence *S, FILE *fp)
   Sequence *RS;
   int a;
 
-  T=vcalloc (1, sizeof (Tree_sim));
+  T=(Tree_sim*)vcalloc (1, sizeof (Tree_sim));
   RS=tree2seq(RT, NULL);
 
   TL=read_tree_list (S);
@@ -1747,8 +1748,8 @@ NT_node realloc_tree ( NT_node R, int n)
   R->left=realloc_tree (R->left,n);
   R->bot=realloc_tree (R->bot,n);
 
-  R->lseq=vrealloc (R->lseq, n*sizeof (int));
-  R->lseq2=vrealloc (R->lseq2, n*sizeof (int));
+  R->lseq=(int*)vrealloc (R->lseq, n*sizeof (int));
+  R->lseq2=(int*)vrealloc (R->lseq2, n*sizeof (int));
   return R;
 }
 
@@ -1835,7 +1836,7 @@ int decode_seq_in_tree (NT_node R, char **name)
   else
     {
       int s=atoi (R->name);
-      vfree (R->name);R->name=vcalloc ( strlen (name[s-1])+1, sizeof (char));
+      vfree (R->name);R->name=(char*)vcalloc ( strlen (name[s-1])+1, sizeof (char));
       sprintf (R->name, "%s", name[s-1]);
       t=1;
 
@@ -2010,7 +2011,7 @@ int tree_file2nseq (char *fname)
   char *string;
   int p, a, b, c, n;
 
-  string=vcalloc (count_n_char_in_file(fname)+1, sizeof (char));
+  string=(char*)vcalloc (count_n_char_in_file(fname)+1, sizeof (char));
 
   fp=vfopen (fname, "r");
   n=0;
@@ -2115,7 +2116,7 @@ NT_node reroot_tree ( NT_node TREE, NT_node Right)
   NT_node NR;
   int n1, n2;
 
-  if (!EMPTY)EMPTY=vcalloc (1, sizeof (NT_node));
+  if (!EMPTY)EMPTY=(NT_node)vcalloc (1, sizeof (NT_node));
   if ( !Right->parent)return Right;
 
   TREE=unroot_tree (TREE);
@@ -2631,7 +2632,7 @@ NT_node** read_tree(char *treefile, int *tot_node,int nseq, char **seq_names)
 	    char **tree_names;
 	    int fail_flag=0;
 	    tnseq=tree_file2nseq(treefile);
-	    tree_names=vcalloc ( tnseq, sizeof (char*));
+	    tree_names=(char**)vcalloc ( tnseq, sizeof (char*));
 	    for (a=0; a<tnseq; a++)
 	      {
 		s=(lu_ptr[2][a])->name;
@@ -2702,7 +2703,7 @@ FILE * create_tree(NT_node ptree, NT_node parent,int *nseq,int  *ntotal,int  *nn
   	int ch;
 
 
-	name=vcalloc ( MAXNAMES+1, sizeof (char));
+	name=(char*)vcalloc ( MAXNAMES+1, sizeof (char));
 	sprintf ( name, "   ");
   	fp=skip_space(fp);
   	ch = (char)getc(fp);
@@ -3178,8 +3179,8 @@ Alignment *seq2seq_chain (Alignment *A,Alignment*T, char *arg)
   sim=seq2comp_mat (aln2seq(A), "blosum62mt", "sim2");
 
   /*Read and store the list of sequences to keep*/
-  seq2keep=vcalloc (A->nseq, sizeof (int));
-  tname=vcalloc (T->nseq, sizeof (int));
+  seq2keep=(int*)vcalloc (A->nseq, sizeof (int));
+  tname=(int*)vcalloc (T->nseq, sizeof (int));
   for ( a=0; a< T->nseq; a++)
     {
       tname[a]=name_is_in_list ( T->name[a], A->name, A->nseq, 100);
@@ -3216,7 +3217,7 @@ Alignment *seq2seq_chain (Alignment *A,Alignment*T, char *arg)
 	}
     }
 
-  list=vcalloc (A->nseq, sizeof (int));
+  list=(int*)vcalloc (A->nseq, sizeof (int));
   for ( nl=0,a=0; a< A->nseq; a++)
     if ( seq2keep[a])
       list[nl++]=a;
@@ -3242,12 +3243,12 @@ int *aln2seq_chain (Alignment *A, int **sim, int seq1, int seq2, int limit, int 
 
 
   output1[0]=output2[0]='\0';
-  used=vcalloc (A->nseq, sizeof(int));
+  used=(int*)vcalloc (A->nseq, sizeof(int));
   used[seq1]=1;
 
   if (find_seq_chain ( A, sim,used,seq1,seq1, seq2,1,limit, max_chain, &nseq))
     {
-      list=vcalloc (A->nseq, sizeof (int));
+      list=(int*)vcalloc (A->nseq, sizeof (int));
       chain=declare_int (A->nseq, 2);
       for (n=0, a=0; a< A->nseq; a++)
 	{
@@ -3295,7 +3296,7 @@ int find_seq_chain (Alignment *A, int **sim,int *used,int seq0,int seq1, int seq
     }
   if (!pw_sim)
     {
-      pw_sim=declare_arrayN(3, sizeof (int), A->nseq, A->nseq, 3);
+      pw_sim=(int***)declare_arrayN(3, sizeof (int), A->nseq, A->nseq, 3);
       for ( a=0; a< A->nseq; a++)
 	{
 	  for ( b=0; b<A->nseq; b++)
@@ -3379,7 +3380,7 @@ NT_node main_read_tree (char *treefile)
   T=recode_tree(T, S);
   free_sequence (S,S->nseq);
   vfree (T->file);
-  T->file=vcalloc ( strlen (treefile)+1, sizeof (char));
+  T->file=(char*)vcalloc ( strlen (treefile)+1, sizeof (char));
   sprintf ( T->file, "%s", treefile);
   return T;
 }
@@ -3424,10 +3425,10 @@ NT_node simple_recode_tree (NT_node T, int nseq)
     {
       NT_node R,L;
       int a;
-       vfree (T->lseq); T->lseq=vcalloc (nseq, sizeof (int));
-       vfree (T->lseq2); T->lseq2=vcalloc (nseq, sizeof (int));
-       vfree (T->idist); T->idist=vcalloc (nseq, sizeof (int));
-       vfree (T->ldist); T->ldist=vcalloc (nseq, sizeof (int));
+       vfree (T->lseq); T->lseq=(int*)vcalloc (nseq, sizeof (int));
+       vfree (T->lseq2); T->lseq2=(int*)vcalloc (nseq, sizeof (int));
+       vfree (T->idist); T->idist=(int*)vcalloc (nseq, sizeof (int));
+       vfree (T->ldist); T->ldist=(int*)vcalloc (nseq, sizeof (int));
 
        R=simple_recode_tree (T->left,nseq);
 
@@ -3460,10 +3461,10 @@ NT_node recode_tree (NT_node T, Sequence *S)
   if (!T) return T;
 
 
-  vfree (T->lseq);  T->lseq=vcalloc (S->nseq, sizeof (int));
-  vfree (T->lseq2); T->lseq2=vcalloc (S->nseq, sizeof (int));
-  vfree (T->idist); T->idist=vcalloc (S->nseq, sizeof (int));
-  vfree (T->ldist); T->ldist=vcalloc (S->nseq, sizeof (int));
+  vfree (T->lseq);  T->lseq=(int*)vcalloc (S->nseq, sizeof (int));
+  vfree (T->lseq2); T->lseq2=(int*)vcalloc (S->nseq, sizeof (int));
+  vfree (T->idist); T->idist=(int*)vcalloc (S->nseq, sizeof (int));
+  vfree (T->ldist); T->ldist=(int*)vcalloc (S->nseq, sizeof (int));
   T->nseq=0;
 
   if ( T->isseq)
@@ -3893,7 +3894,7 @@ int display_tree_duplicates (NT_node T)
   vfree (dup);
 
   S=tree2seq (T, NULL);
-  dup=vcalloc ( S->nseq, sizeof (int));
+  dup=(int*)vcalloc ( S->nseq, sizeof (int));
 
   for (a=0; a< S->nseq-1; a++)
     for ( b=a+1; b<S->nseq; b++)
@@ -4026,7 +4027,7 @@ NT_node * tree2node_list (NT_node T, NT_node *L)
 
 
   if (!T) return NULL;
-  if (!L) {ni=0;L=vcalloc (tree2nnode(T)+1, sizeof (NT_node));}
+  if (!L) {ni=0;L=(NT_node*)vcalloc (tree2nnode(T)+1, sizeof (NT_node));}
   tree2node_list (T->left, L);
   tree2node_list (T->right, L);
   L[ni++]=T;
@@ -4075,7 +4076,7 @@ NT_node * read_tree_list (Sequence *S)
   NT_node *T;
   int a;
 
-  T=vcalloc ( S->nseq+1, sizeof (NT_node));
+  T=(NT_node*)vcalloc ( S->nseq+1, sizeof (NT_node));
 
   for ( a=0; a<S->nseq; a++)
     {
@@ -4086,7 +4087,7 @@ NT_node * read_tree_list (Sequence *S)
 	string2file ((fname=vtmpnam(NULL)), "w", S->seq[a]);
 
       T[a]=main_read_tree (fname);
-      T[a]->file=vcalloc (strlen (S->name[a])+1, sizeof (char));
+      T[a]->file=(char*)vcalloc (strlen (S->name[a])+1, sizeof (char));
       sprintf (T[a]->file, "%s", S->name[a]);
     }
   return T;
@@ -4137,16 +4138,16 @@ int treelist2leafgroup ( Sequence *S, Sequence *TS, char *taxon)
   T=read_tree_list (S);
   if (!TS)TS=tree2seq(T[0], NULL);
 
-  name=vcalloc (1000, sizeof (char));
-  fname=vcalloc (1000, sizeof (char));
-  group=vcalloc (TS->nseq*10, sizeof (char));
-  ref_group=vcalloc (TS->nseq*10, sizeof (char));
-  list=vcalloc (100*S->nseq, sizeof (char));
+  name=(char*)vcalloc (1000, sizeof (char));
+  fname=(char*)vcalloc (1000, sizeof (char));
+  group=(char*)vcalloc (TS->nseq*10, sizeof (char));
+  ref_group=(char*)vcalloc (TS->nseq*10, sizeof (char));
+  list=(char*)vcalloc (100*S->nseq, sizeof (char));
   split_file=vtmpnam (NULL);
   sorted_split_file =vtmpnam (NULL);
 
   n=S->nseq;
-  used=vcalloc (n, sizeof (int));
+  used=(int*)vcalloc (n, sizeof (int));
 
   T=read_tree_list (S);
   if (!TS)TS=tree2seq(T[0], NULL);
@@ -4236,7 +4237,7 @@ int count_tree_groups( Sequence *LIST, char *group_file)
 
 
 
-  gs=vcalloc (2, sizeof (int));
+  gs=(int*)vcalloc (2, sizeof (int));
   list=declare_int (LIST->nseq*S->nseq*2, S->nseq+1);
 
   blist=declare_int (2, S->nseq+1);
@@ -4257,7 +4258,7 @@ int count_tree_groups( Sequence *LIST, char *group_file)
 
   if ( group_file)
     {
-      rlist=declare_arrayN(3, sizeof (int), 2,LIST->nseq*S->nseq, S->nseq+1);
+      rlist=(int***)declare_arrayN(3, sizeof (int), 2,LIST->nseq*S->nseq, S->nseq+1);
       l=file2list (group_file, " ");
 
       while (l[ng])
@@ -4276,7 +4277,7 @@ int count_tree_groups( Sequence *LIST, char *group_file)
     }
   else
     {
-      rlist=vcalloc ( 2, sizeof (int**));
+      rlist=(int***)vcalloc ( 2, sizeof (int**));
       rlist[1]=count_int_strings (list, n, S->nseq);
       gs[1]=read_array_size_new (rlist[1]);
 
@@ -4345,7 +4346,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
   char *cache=NULL;
   //+count_splits _NB_x_FILTER_<file>
   //_<file is a fasta file containing the list of species to keep>
-  if (!def_param)def_param=vcalloc ( 10, sizeof (char));
+  if (!def_param)def_param=(char*)vcalloc ( 10, sizeof (char));
 
 
 
@@ -4391,7 +4392,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
       int i;
 
       F=main_read_seq (filter);
-      cache=vcalloc (S->nseq, sizeof (int));
+      cache=(char*)vcalloc (S->nseq, sizeof (int));
       for ( a=0; a<F->nseq; a++)
 	{
 	  if ( (i=name_is_in_list (F->name[a], S->name, S->nseq, 100))!=-1)
@@ -4400,7 +4401,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
       free_sequence (F, -1);
     }
 
-  main_buf=vcalloc ( S->nseq*(STRING+1), sizeof(int));
+  main_buf=(char*)vcalloc ( S->nseq*(STRING+1), sizeof(int));
 
   list1=declare_int (S->nseq*3, S->nseq+1);
   list2=declare_int (S->nseq*3, S->nseq+1);
@@ -4452,7 +4453,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
 
       fp=vfopen (out, "r");
       n1=0;
-      buf=vcalloc (measure_longest_line_in_file (out)+1, sizeof (char));
+      buf=(char*)vcalloc (measure_longest_line_in_file (out)+1, sizeof (char));
       while ( fscanf (fp, "%s %d",buf, &i)==2)
 	{
 	  for (a=0; a<S->nseq; a++)list1[n1][a]=buf[a]-'0';
@@ -4487,7 +4488,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
 	    }
 	}
     }
-  SL=vcalloc ( n1+1, sizeof (Split*));
+  SL=(Split**)vcalloc ( n1+1, sizeof (Split*));
 
   for (a=0; a<n1; a++)
     {
@@ -4578,8 +4579,8 @@ Split* print_split ( int a, int **list1, Sequence *LIST, Sequence *S, char *buf,
 Split * declare_split (int nseq, int ntrees)
 {
   Split *S;
-  S=vcalloc (1, sizeof (Split));
-  S->split=vcalloc ( nseq+1, sizeof (char));
+  S=(Split*)vcalloc (1, sizeof (Split));
+  S->split=(char*)vcalloc ( nseq+1, sizeof (char));
   return S;
 }
 int treelist2splits( Sequence *S, Sequence *TS)
@@ -4597,7 +4598,7 @@ int treelist2splits( Sequence *S, Sequence *TS)
   sorted_split_file =vtmpnam (NULL);
 
   n=S->nseq;
-  used=vcalloc (n, sizeof (int));
+  used=(int*)vcalloc (n, sizeof (int));
 
   T=read_tree_list (S);
   if (!TS)TS=tree2seq(T[0], NULL);
@@ -4630,7 +4631,7 @@ int treelist2splits( Sequence *S, Sequence *TS)
 
       if ( ref_buf==NULL)
 	{
-	  ref_buf=vcalloc (strlen (buf)+1, sizeof (char));
+	  ref_buf=(char*)vcalloc (strlen (buf)+1, sizeof (char));
 	  sprintf ( ref_buf, "%s", buf);
 	  n=1;
 	}
@@ -4684,7 +4685,7 @@ int treelist2splits_old ( Sequence *S, Sequence *TS)
   sorted_split_file =vtmpnam (NULL);
 
   n=S->nseq;
-  used=vcalloc (n, sizeof (int));
+  used=(int*)vcalloc (n, sizeof (int));
 
   T=read_tree_list (S);
   if (!TS)TS=tree2seq(T[0], NULL);
@@ -4714,7 +4715,7 @@ int treelist2splits_old ( Sequence *S, Sequence *TS)
 
       if ( ref_buf==NULL)
 	{
-	  ref_buf=vcalloc (strlen (buf)+1, sizeof (char));
+	  ref_buf=(char*)vcalloc (strlen (buf)+1, sizeof (char));
 	  sprintf ( ref_buf, "%s", buf);
 	  n=1;
 	}
@@ -4759,7 +4760,7 @@ NT_node *treelist2prune_treelist (Sequence *S, Sequence *TS, FILE *out)
   int a, b, c;
 
   T=read_tree_list (S);
-  T=vrealloc (T, (S->nseq+1)*sizeof (NT_node));
+  T=(NT_node*)vrealloc (T, (S->nseq+1)*sizeof (NT_node));
   for (b=0,a=0; a<S->nseq; a++)
     {
       T[a]=prune_tree  (T[a], TS);
@@ -4774,7 +4775,7 @@ NT_node *treelist2prune_treelist (Sequence *S, Sequence *TS, FILE *out)
 	  T[b]=recode_tree (T[b], TS);
 	  sprintf ( S->name[b], "%s", S->name[a]);
 	  s=tree2string (T[a]);
-	  S->seq[b]=vrealloc (S->seq[b], (strlen (s)+1)*sizeof (char));
+	  S->seq[b]=(char*)vrealloc (S->seq[b], (strlen (s)+1)*sizeof (char));
 	  sprintf (S->seq[b], "%s",s);
 	  sprintf (S->seq_comment[b], " NSPECIES: %d", TS->nseq);
 	  vfree (s);
@@ -4882,7 +4883,7 @@ int** treelist2lti ( Sequence *S, Sequence *TS, int ngb, FILE *out)
   T=treelist2prune_treelist (S, TS,NULL);
 
   if (!ngb)ngb=TS->nseq*2;
-  dist=vcalloc ( S->nseq, sizeof (int****));
+  dist=(int****)vcalloc ( S->nseq, sizeof (int****));
   result=declare_int (TS->nseq, 2);
   for (a=0; a<TS->nseq; a++)
     {
@@ -4937,7 +4938,7 @@ int ***tree2dist (NT_node T, Sequence *S, int ***d)
   if (!S)S=tree2seq(T, NULL);
   if (!d)
     {
-      d=declare_arrayN (3, sizeof (float),2, S->nseq, S->nseq);
+      d=(int***)declare_arrayN (3, sizeof (float),2, S->nseq, S->nseq);
       T=prune_tree(T, S);
       T=recode_tree (T, S);
     }
@@ -5028,7 +5029,7 @@ int** treelist2groups (Sequence *S, Sequence *TS, char *star_node, FILE *out)
        for (a=0; a< S->nseq; a++)tree2star_nodes(T[a],nsn);
      }
 
-   used=vcalloc (S->nseq, sizeof (int));
+   used=(int*)vcalloc (S->nseq, sizeof (int));
    for (ntop=0,a=0; a<S->nseq; a++)
      {
 
@@ -5085,8 +5086,8 @@ float simple_tree_cmp (NT_node T1, NT_node T2,Sequence *S, int mode)
   Tree_sim *TS1, *TS2;
   float t, w, l, n;
 
-  TS1=vcalloc (1, sizeof (Tree_sim));
-  TS2=vcalloc (1, sizeof (Tree_sim));
+  TS1=(Tree_sim*)vcalloc (1, sizeof (Tree_sim));
+  TS2=(Tree_sim*)vcalloc (1, sizeof (Tree_sim));
 
 
   T1=recode_tree(T1, S);
@@ -5185,7 +5186,7 @@ NT_node treelist2filtered_bootstrap ( NT_node *L,char *file, int **score, float 
 
   if (n==0) return NULL;
 
-  L2=vcalloc ( n+1, sizeof (NT_node));
+  L2=(NT_node*)vcalloc ( n+1, sizeof (NT_node));
   for (a=0; a<n; a++)
     L2[a]=L[score[a][0]];
 
@@ -5230,7 +5231,7 @@ Sequence * treelist2seq (Sequence *S)
   char *fname;
   FILE *fp;
 
-  name=vcalloc (1, sizeof (char*));
+  name=(char**)vcalloc (1, sizeof (char*));
   fp=vfopen ((fname=vtmpnam (NULL)), "w");
 
   T=read_tree_list (S);
@@ -5241,10 +5242,10 @@ Sequence * treelist2seq (Sequence *S)
 	{
 	  if ( (i=name_is_in_list (TS->name[b], name, n, 100))==-1)
 	    {
-	      name[n]=vcalloc (100, sizeof (int));
+	      name[n]=(char*)vcalloc (100, sizeof (int));
 	      sprintf ( name[n], "%s", TS->name[b]);
 	      n++;
-	      name=vrealloc (name, (n+1)*sizeof (char*));
+	      name=(char**)vrealloc (name, (n+1)*sizeof (char*));
 	      fprintf ( fp, ">%s\n", TS->name[b]);
 	    }
 	}

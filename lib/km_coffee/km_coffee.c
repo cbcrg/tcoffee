@@ -48,7 +48,7 @@ del_tree(KM_node* root)
 {
 		Stack *to_do = Stack_init();
 
-		Node_pair *tmp = my_malloc(sizeof(Node_pair));
+		Node_pair *tmp = (Node_pair*)my_malloc(sizeof(Node_pair));
 		tmp->node=root;
 		tmp->id = 0;
 		push(to_do, tmp);
@@ -74,7 +74,7 @@ del_tree(KM_node* root)
 				else
 				{
 					++((Node_pair*)to_do->last)->id;
-					tmp = my_malloc(sizeof(Node_pair));
+					tmp = (Node_pair*)my_malloc(sizeof(Node_pair));
 					tmp->node=current->children[child];
 					tmp->id = 0;
 					push(to_do, tmp);
@@ -100,7 +100,7 @@ void
 traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, int n_cores, int gapopen, int gapext, char *method)
 {
 	Stack *to_do =Stack_init();
-	Node_pair *tmp = my_malloc(sizeof(Node_pair));
+	Node_pair *tmp = (Node_pair*)my_malloc(sizeof(Node_pair));
 	tmp->node=root;
 	tmp->id = 0;
 	push(to_do, tmp);
@@ -159,7 +159,7 @@ traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, i
 				sprintf(command, "%li.fa",current->id);
 				write_files(current, vecs, seq_set, command);
 			}
-			tmp = pop(to_do);
+			tmp =(Node_pair*) pop(to_do);
 		}
 		else
 		{
@@ -188,7 +188,7 @@ traverse_km_tree(KM_node* root, int *vecs, const SeqSet *seq_set, char *out_f, i
 			else
 			{
 				++((Node_pair*)to_do->last)->id;
-				tmp = my_malloc(sizeof(Node_pair));
+				tmp = (Node_pair*)my_malloc(sizeof(Node_pair));
 				tmp->node=current->children[child];
 				tmp->id = 0;
 				push(to_do, tmp);
@@ -213,7 +213,7 @@ print_km_tree(KM_node *root, int *vecs, const SeqSet *seq_set, char *out_f)
 {
 	FILE *out_F = fopen(out_f, "w");
 	Stack *to_do =Stack_init();
-	Node_pair *tmp = my_malloc(sizeof(Node_pair));
+	Node_pair *tmp = (Node_pair*)my_malloc(sizeof(Node_pair));
 	tmp->node=root;
 	tmp->id = 0;
 	push(to_do, tmp);
@@ -238,7 +238,7 @@ print_km_tree(KM_node *root, int *vecs, const SeqSet *seq_set, char *out_f)
 				if (k<current->end-1)
 					fprintf(out_F, ",");
 			}
-			tmp = pop(to_do);
+			tmp =(Node_pair*) pop(to_do);
 			if (current->end-current->start >1)
 				fprintf(out_F, ")");
 		}
@@ -258,7 +258,7 @@ print_km_tree(KM_node *root, int *vecs, const SeqSet *seq_set, char *out_f)
 				if (child != 0)
 					fprintf(out_F, ",");
 				++((Node_pair*)to_do->last)->id;
-				tmp = my_malloc(sizeof(Node_pair));
+				tmp = (Node_pair*)my_malloc(sizeof(Node_pair));
 				tmp->node=current->children[child];
 				tmp->id = 0;
 				push(to_do, tmp);
@@ -456,12 +456,12 @@ km_coffee_align3(char *seq_f, int k, int k_leaf, char *method, char *aln_f, int 
 // 	KM_node *root = simple_clust(vec_set, k);
 
 
-	char template[400];
-	sprintf(template, "%s/km_coffee_tmp_XXXXXX", use_as_temp);
+	char templatee[400];
+	sprintf(templatee, "%s/km_coffee_tmp_XXXXXX", use_as_temp);
 	char tmp_str[FILENAME_MAX];
 	km_cwd = getcwd(tmp_str, FILENAME_MAX);
 
-	km_tmp_dir = my_make_temp_dir(template, "main");
+	km_tmp_dir = my_make_temp_dir(templatee, "main");
 	chdir(km_tmp_dir);
 	char out_f[500];
 	if (aln_f[0] != '/')
@@ -472,7 +472,7 @@ km_coffee_align3(char *seq_f, int k, int k_leaf, char *method, char *aln_f, int 
 
 
 	size_t n_vecs = seq_set->n_seqs;
-	int *assignment = malloc(n_vecs*sizeof(int));
+	int *assignment = (int*)malloc(n_vecs*sizeof(int));
 	size_t l;
 	for (l = 0; l< n_vecs; ++l)
 		assignment[l]=vec_set->vecs[l]->id;

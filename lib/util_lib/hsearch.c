@@ -16,9 +16,9 @@ HaschT * hcreate ( int n_elements,struct Hasch_data * declare_data(struct Hasch_
 	 
 	 n_elements=n_elements*2+1;
 	 
-	 T=vcalloc ( 1, sizeof (HaschT));
+	 T=(HaschT*)vcalloc ( 1, sizeof (HaschT));
 	 T->ne=n_elements;	 
-	 T->p=vcalloc (n_elements,sizeof ( Hasch_entry*));
+	 T->p=(Hasch_entry**)vcalloc (n_elements,sizeof ( Hasch_entry*));
 	 for ( a=0; a<n_elements; a++)
 	   {
 	     T->p[a]=allocate_hasch_entry(NULL,DECLARE,declare_data, free_data);
@@ -136,7 +136,7 @@ Hasch_entry * allocate_hasch_entry (Hasch_entry *e, int action,struct Hasch_data
     static Hasch_entry *s;
     Hasch_entry *ns;
 
-    if ( !s)s=vcalloc ( 1, sizeof (Hasch_entry));
+    if ( !s)s=(Hasch_entry*)vcalloc ( 1, sizeof (Hasch_entry));
 
     if ( action==DECLARE)
       {
@@ -217,11 +217,11 @@ static int key;
 	{
 	  free_heap=100;
 	  
-	  heap=vrealloc (heap,(heap_size+free_heap)*sizeof (struct Char_node *));
+	  heap=(Char_node**)vrealloc (heap,(heap_size+free_heap)*sizeof (struct Char_node *));
 	  for ( a=heap_size; a<heap_size+free_heap; a++)
 	    {
-	      (heap[a])=vcalloc ( 1, sizeof ( struct Char_node));
-	      (heap[a])->c=vcalloc ( 256, sizeof (Char_node*));
+	      (heap[a])=(Char_node*)vcalloc ( 1, sizeof ( struct Char_node));
+	      (heap[a])->c=(Char_node**)vcalloc ( 256, sizeof (Char_node*));
 	      (heap[a])->key=key++;
 	    }
 	  heap_size+=free_heap;
@@ -234,7 +234,7 @@ static int key;
 	{
 	  heap[a]->key=key++;
 	  vfree ( heap[a]->c);
-	  (heap[a])->c=vcalloc ( 256, sizeof (Char_node*));
+	  (heap[a])->c=(Char_node**)vcalloc ( 256, sizeof (Char_node*));
 	}
       free_heap=heap_size;
       return NULL;

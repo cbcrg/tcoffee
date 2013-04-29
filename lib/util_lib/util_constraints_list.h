@@ -607,7 +607,6 @@ Constraint_list * clean_shadow ( Constraint_list *CL, int start, int len);
 /*                                                                   */
 /*********************************************************************/
 Constraint_list *merge_constraint_list   ( Constraint_list *SL, Constraint_list *ML, char *mode);
-CLIST_TYPE return_max_constraint_list ( Constraint_list *CL, int field);
 Constraint_list *modify_weight( Constraint_list *CL,int start, int end,  char *modify_mode);
 Constraint_list *compact_list (Constraint_list *CL, char *compact_mode);
 Constraint_list *rescale_list_simple (Constraint_list *CL,int start, int len,int new_min, int new_max);

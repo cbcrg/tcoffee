@@ -85,7 +85,7 @@ Alignment ** moca_aln ( Constraint_list *CL)
 
 
 
-   aln_list=vcalloc (max_n_domains, sizeof (Alignment *));
+   aln_list=(Alignment **)vcalloc (max_n_domains, sizeof (Alignment *));
    if ((CL->moca)->moca_interactive)aln_list[n_domains++]=extract_domain ( CL);
    else
      {
@@ -95,7 +95,7 @@ Alignment ** moca_aln ( Constraint_list *CL)
 	   if ( n_domains==max_n_domains)
 	     {
 	       n_domains+=1000;
-	       aln_list=vrealloc (aln_list, max_n_domains*sizeof (Alignment*));
+	       aln_list=(Alignment **)vrealloc (aln_list, max_n_domains*sizeof (Alignment*));
 	     }
 	 }
      }
@@ -220,7 +220,7 @@ Alignment * interactive_domain_extraction ( Constraint_list *CL)
      int **parameters;
 
 
-     choice=vcalloc ( 100, sizeof (char));
+     choice=(char*)vcalloc ( 100, sizeof (char));
      parameters=declare_int (10000, 4);
 
      parameters[0][START]=(CL->moca)->moca_start;
@@ -427,8 +427,8 @@ int measure_domain_length ( Constraint_list *CL,Alignment *IN, int start, int mi
    int *score_matrix, *len_matrix;
    int n_val, best_val;
 
-   score_matrix=vcalloc ( max_len, sizeof (int));
-   len_matrix=vcalloc ( max_len, sizeof (int));
+   score_matrix=(int*)vcalloc ( max_len, sizeof (int));
+   len_matrix=(int*)vcalloc ( max_len, sizeof (int));
 
 
    l=strlen ( (CL->S)->seq[0]);
