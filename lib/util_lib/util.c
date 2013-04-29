@@ -730,15 +730,16 @@ int name_is_in_list ( const char name_in[], char **name_list, int n_name, int le
 {
 	int a;
 	int pos=-1;
-	char name[strlen(name_in)+1];
-	
-	strcpy(name,name_in);
-	/*Note: RETURNS THE Offset of the LAST Occurence of name in name_list*/
 
-	if ( name_list==NULL || name ==NULL)return -1;
+	/*Note: RETURNS THE Offset of the LAST Occurence of name in name_list*/
+	if ( name_list==NULL || name_in ==NULL) return -1;
+
+	char name[strlen(name_in)+1];
+	strcpy(name,name_in);
+	
 	for ( a=n_name-1; a>=0; --a)
 	{
-		if ( name_list[a]==NULL);
+		if ( name_list[a]==NULL) {}
 		else if ( len!=-1)
 		{
 			if (strncmp ( name, name_list[a], len)==0)
@@ -1874,7 +1875,7 @@ void crash ( char *s)
 	fprintf ( stderr, "%s",s);
 	a=(int*)vcalloc ( 10, sizeof (int));
 	a[20]=1;
-	error_exit();
+	error_exit(EXIT_FAILURE);
 	}
 
 static int *local_table;
@@ -6403,18 +6404,9 @@ int get_cl_param (int argc, char **argv, FILE **fp,const char para_name_in[], in
 	int    n_pv_r;
 	char   value[STRING];
 
-	char para_name[strlen(para_name_in)+1];
-	char type[strlen(type_in)+1];
-	char usage[strlen(usage_in)+1];
-	
-	strcpy(para_name, para_name_in);
-	strcpy(type, type_in);
-	strcpy(usage, usage_in);
-	
-
 
 /*CHECK THAT ALL THE PARAM IN ARG EXIST*/
-	if ( para_name==NULL)
+	if ( para_name_in==NULL)
 	   {
 	   for ( a=1; a< argc; a++)
 	       {
@@ -6433,6 +6425,14 @@ int get_cl_param (int argc, char **argv, FILE **fp,const char para_name_in[], in
 	   free_char (parameter_list,-1);
 	   return 0;
 	   }
+
+	char para_name[strlen(para_name_in)+1];
+	char type[strlen(type_in)+1];
+	char usage[strlen(usage_in)+1];
+	strcpy(para_name, para_name_in);
+	strcpy(type, type_in);
+	strcpy(usage, usage_in);
+
 
 	if ( parameter_list==NULL)parameter_list=declare_char(MAX_N_PARAM,STRING);
 	para_name_list=get_list_of_tokens(para_name,NULL, &n_para_name);
@@ -8639,6 +8639,13 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   global_exit_signal=EXIT_SUCCESS;
   atexit (clean_exit);
 
+  signal (SIGTERM,signal_exit);
+  signal (SIGINT, signal_exit);
+  signal (SIGKILL, signal_exit);
+  signal (SIGABRT, error_exit);
+  signal (SIGFPE, error_exit);
+  signal (SIGILL, error_exit);
+  signal (SIGSEGV, error_exit);
 
   program_name=(char*)vcalloc ( strlen (in_argv[0])+strlen (PROGRAM)+1, sizeof (char));
   if (in_argv)
@@ -8745,7 +8752,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
 
   return out_argv;
 }
-void signal_exit ()
+void signal_exit (int)
  {
 
    if (is_rootpid())fprintf ( stderr, "****** Forced interuption of main parent process %d\n", getpid());
@@ -8753,11 +8760,11 @@ void signal_exit ()
    global_exit_signal=EXIT_SUCCESS;
    myexit (EXIT_SUCCESS);
  }
-void error_exit ()
+void error_exit (int exit_code)
  {
    lock (getpid(), LERROR, LSET, "%d -- ERROR: COREDUMP: %s %s (%s)\n",getpid(), PROGRAM, VERSION, BUILD_INFO );
-   global_exit_signal=EXIT_FAILURE;
-   myexit (EXIT_FAILURE);
+   global_exit_signal=exit_code;
+   myexit (exit_code);
  }
 
 

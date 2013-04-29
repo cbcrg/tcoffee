@@ -633,9 +633,9 @@ char *  tmpnam_2 (char *s);
 void    safe_remove(char*s);
 char *  vremove ( char *s);
 char *  vremove2 ( char *s);
-void error_exit ();
+void error_exit (int);
 void clean_exit();
-void signal_exit();
+void signal_exit(int);
 void main_exit ();
 int  log_function (char *fname);
    
