@@ -27,16 +27,15 @@ endif
 #                                                       #
 #########################################################
 
+CC=g++
+
 ifndef CFLAGS
-CFLAGS=-O3
+CFLAGS=-O3 -Wno-write-strings
 endif
 
 ifdef OPENMP
     KM_FLAGS=-fopenmp
 endif
-
-CC=gcc
-
 
 ifndef LIB_DIR
 LIB_DIR=../../lib

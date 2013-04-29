@@ -12,7 +12,7 @@
 # About Mac compilation flags see http://goo.gl/HLtS4
 #
 
-CC=g++ 
+CC=g++
 
 ifndef CFLAGS
 CFLAGS=-O3 -Wno-write-strings
