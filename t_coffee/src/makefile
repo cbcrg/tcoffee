@@ -211,7 +211,7 @@ distribute: all
 code:
 	echo $(OSNAME) Compilation
 	make clean
-	make CC="gcc" $(EXECUTABLE)
+	make CC="g++" $(EXECUTABLE)
 	
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	make copy_sources
