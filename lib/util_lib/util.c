@@ -4697,7 +4697,7 @@ char *get_lockdir_4_tcoffee ()
   static char lockdir_4_tcoffee [1000];
   char *v;
 
-  if ( lockdir_4_tcoffee[0])return lockdir_4_tcoffee;
+  if ( lockdir_4_tcoffee[0] )return lockdir_4_tcoffee;
   else
     {
       char buf[1000];
@@ -4706,6 +4706,12 @@ char *get_lockdir_4_tcoffee ()
       else if (v)sprintf (lockdir_4_tcoffee, "%s/", v);
       else sprintf (lockdir_4_tcoffee, "%s/", get_tmp_4_tcoffee());
     }
+
+  if (is_rootpid())
+	{
+	  my_mkdir(lockdir_4_tcoffee);
+	}
+
   return lockdir_4_tcoffee;
 }
 
@@ -7590,8 +7596,10 @@ int my_mkdir ( char *dir_in)
 
 	  if (access(dir, F_OK)==-1)
 	    {
-	      mkdir (dir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-	      //printf_system_direct ("mkdir %s", dir);
+		  mode_t oldmask = umask(0);
+	      mkdir (dir, S_IRWXU | S_IRWXG | S_IRWXO);
+	      umask(oldmask);
+
 	      if ( access (dir, F_OK)==-1)
 		{
 		  myexit(fprintf_error ( stderr, "\nERROR: Could Not Create Directory %s [FATAL:%s]", dir, PROGRAM));	}
