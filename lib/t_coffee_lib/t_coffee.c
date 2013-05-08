@@ -475,8 +475,8 @@ int batch_main ( int argc, char **argv)
 	int     overaln_threshold;
 	int     overaln_target;
 	int     clean_overaln;
-
-	char *dump;
+	int     display;
+	char    *dump;
  
 	/**
 	 * Before anything else, check if we want to use the \b other_pg option of T-Coffee.
@@ -3769,8 +3769,24 @@ get_cl_param(\
 		   set_string_variable ("dump",dump);
 		 }
 
-
-
+	       
+	       get_cl_param(\
+			    /*argc*/      argc           ,\
+			    /*argv*/      argv           ,\
+			    /*output*/    &le            ,\
+			    /*Name*/      "-display",\
+			    /*Flag*/      &garbage       ,\
+			    /*TYPE*/      "D"          ,\
+			    /*OPTIONAL?*/ OPTIONAL       ,\
+			    /*MAX Nval*/  1              ,\
+			    /*DOC*/       "Sets the threshold (nseq) for the full display of the groups. -1 results in a full display, and 0 in no display at all",\
+			    /*Parameter*/ &display   ,\
+			    /*Def 1*/    "100"       ,\
+			    /*Def 2*/    "-1"              ,\
+			    /*Min_value*/ "any"          ,\
+			    /*Max Value*/ "any"           \
+			   );
+	       if (display)set_int_variable ("display",display);
 /*******************************************************************************************************/
 /*                                                                                                     */
 /*                           TCoffee_dpa Parameter:END                                                 */

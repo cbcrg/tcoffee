@@ -892,6 +892,7 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
       fp=vfopen (fname, "w");
       pos=aln2pos_simple(IN, IN->nseq);
       
+
       for (a=0; a<IN->len_aln; a++)
 	{
 	  output_completion (stderr,a,IN->len_aln,1, "Final SP Evaluation");

@@ -1357,19 +1357,21 @@ char * name2type_name ( char *name)
 	/*turns <file> into <Sfile>, <Afile>...*/
 	char *new_name;
 	char mode;
-
+	
 
 	new_name=(char*)vcalloc ( strlen (name)+2, sizeof (char));
 	sprintf ( new_name, "%s", name);
+
 	if (is_in_set (name[0], "ALSMXPRW") && !check_file_exists(name))
-	{
+	  {
 		sprintf ( new_name, "%s", name);
-	}
+	  }
 	else
-	{
-		mode=identify_format (&new_name);
-		sprintf ( new_name, "%c%s", mode,name);
-	}
+	  {
+	    mode=identify_format (&new_name);
+	    sprintf ( new_name, "%c%s", mode,name);
+	    
+	  }
 	return new_name;
 }
 
@@ -2348,7 +2350,11 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	else if ( strm (out_format, "sp_ascii"))
 	  {
 	    if (!D1) return 1;
-
+	    sp_triplet_coffee_evaluate_output (D1->A, (D1->A)->CL, out_file);
+	  }
+	else if ( strm (out_format, "sp_lib"))
+	  {
+	    if (!D1) return 1;
 	    sp_triplet_coffee_evaluate_output (D1->A, (D1->A)->CL, out_file);
 	  }
 	else if (    ( strm (out_format, "aln2lib")))
@@ -4457,7 +4463,7 @@ Sequence* get_fasta_sequence_raw (char *fname, char *comment_out)
 
 Sequence* get_fasta_sequence (char *fname, char *comment_out)
 {
-	printf("USE OLD GET FASTA\n");
+	printf("USE OLD GET FASTAAAAAAAAA\n");
 	Sequence *LS;
 	Sequence *pdb_S;
 	int a;
@@ -4625,9 +4631,9 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 	return LS;
 	}
 
-	#else
+#else
 
-	Sequence* get_fasta_sequence (char *fname, char *comment_out)
+Sequence* get_fasta_sequence (char *fname, char *comment_out)
 	{
 		Sequence *LS;
 		Sequence *pdb_S;
@@ -4675,13 +4681,14 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 				nseq++;
 				clen= 0;
 				check_seq_name(&line[1]);
-			}else
+			}
+			else
 
 				if (line[2] == 'B')
 				{
 					if (!strcmp(line,"PDB"))
 					{
-						pdb_name=get_pdb_struc(line,0, 0);
+					  pdb_name=get_pdb_struc(line,0, 0);
 						pdb_S=get_pdb_sequence (pdb_name);
 						if (pdb_S)
 						{

@@ -3818,14 +3818,24 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
   int a;
   NT_node P, *NL;
   int **min=NULL;
+  static int set_display;
+  static int display;
 
+  
+  if (!set_display)
+    {
+      set_display=1;
+      if (int_variable_isset ("display"))display=get_int_variable ("display");
+    }
+  
+  
   if (!r && !l) return NULL;
   else if (!r)P=l;
   else if (!l)P=r;
   else P=r->parent;
 
   fprintf ( CL->local_stderr, "\nPROGRESSIVE_ALIGNMENT [Tree Based]\n");
-  if (nseq<50)for ( a=0; a<nseq; a++)fprintf (CL->local_stderr,"Group %4d: %s\n",a+1, A->name[a]);
+  if (nseq<display || display<0)for ( a=0; a<nseq; a++)fprintf (CL->local_stderr,"Group %4d: %s\n",a+1, A->name[a]);
   fprintf ( CL->local_stderr, "\n");
   //1: make sure the Alignment and the Sequences are labeled the same way
   if (CL->translation)vfree (CL->translation);

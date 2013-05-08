@@ -9318,8 +9318,97 @@ sq_dist(double *vec1, double *vec2, int length)
 		dist += ((vec1[i] - vec2[i])*(vec1[i] - vec2[i]));
 	return dist;
 }
-
 int km_kmeans(double **data, int n, int m, int k, double t, double **centroids)
+{
+
+
+/* output cluster label for each data point */
+int a;
+int h, i, j; /* loop counters, of course :) */
+int *counts = (int*)calloc(k, sizeof(int)); /* size of each cluster */
+double old_error, error = DBL_MAX; /* sum of squared euclidean distance */
+double **c = centroids ? centroids : (double**)calloc(k, sizeof(double*));
+double **c1 = (double**)calloc(k, sizeof(double*)); /* temp centroids */
+
+
+ exit (0);
+
+//data must be allocated as data[n][m+2]
+for (a=0; a<n; a++)data[a][m+1]=0;//labels will be stored there
+
+/****
+** initialization */
+
+for (h = i = 0; i < k; h += n / k, i++) {
+c1[i] = (double*)calloc(m, sizeof(double));
+if (!centroids) {
+c[i] = (double*)calloc(m, sizeof(double));
+}
+/* pick k points as initial centroids */
+for (j = m; j-- > 0; c[i][j] = data[h][j]);
+}
+
+/****
+** main loop */
+
+do {
+/* save error from last step */
+old_error = error, error = 0;
+
+/* clear old counts and temp centroids */
+for (i = 0; i < k; counts[i++] = 0) {
+for (j = 0; j < m; c1[i][j++] = 0);
+}
+
+for (h = 0; h < n; h++) {
+/* identify the closest cluster */
+double min_distance = DBL_MAX;
+for (i = 0; i < k; i++) {
+double distance = 0;
+for (j = m; j-- > 0; distance += pow(data[h][j] - c[i][j], 2));
+if (distance < min_distance) {
+
+data[h][m+1]=i;
+min_distance = distance;
+}
+}
+/* update size and temp centroid of the destination cluster */
+for (j = m; j-- > 0; c1[(int)data[h][m+1]][j] += data[h][j]);
+counts[(int)data[h][m+1]]++;
+/* update standard error */
+error += min_distance;
+}
+
+for (i = 0; i < k; i++) { /* update all centroids */
+for (j = 0; j < m; j++) {
+c[i][j] = counts[i] ? c1[i][j] / counts[i] : c1[i][j];
+}
+}
+
+} while (fabs(error - old_error) > t);
+
+/****
+** housekeeping */
+
+for (i = 0; i < k; i++) {
+if (!centroids) {
+free(c[i]);
+}
+free(c1[i]);
+}
+
+if (!centroids) {
+free(c);
+}
+free(c1);
+
+free(counts);
+
+return 1;
+}
+
+
+int km_kmeans_new(double **data, int n, int m, int k, double t, double **centroids)
 {
    /* output cluster label for each data point */
   int a;
