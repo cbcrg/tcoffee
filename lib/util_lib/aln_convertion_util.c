@@ -5225,7 +5225,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   /*Fill the sequences*/
   /*1: No template*/
   char buf[1000];
-
+ 
   int PmC,PmI,PMI;
   int BmC,BmI,BMI;
   char *server;
@@ -5248,7 +5248,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   BMI=get_int_variable ("prot_max_sim");
   BmC=get_int_variable ("prot_min_cov");
 
-
+  
   if (strm (prot_db, "dataset") || strm (prot_db, "self"))
     {
       if (!seqdb)
@@ -5344,8 +5344,9 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
     }
   else if ( strm ( template_list, "EXPRESSO") || strm (template_list, "PDB"))
     {
+      
       check_blast_is_installed(server);
-
+      
       int isRNA = 0;
       int i;
       for (i= 0; i < S->len[0]; ++i)
@@ -5361,6 +5362,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 	{
 	  sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#pdb_template@database#%s@method#blastp@cache#%s@minid#%d@maxid#%d@mincov#%d@server#%s@type#_P_@pdb_type#%s",pdb_db, get_cache_dir(),PmI,PMI,PmC, server,pdb_type);
 	}
+      
       return seq2template_seq (S,buf, F);
     }
 
