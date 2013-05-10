@@ -33,6 +33,9 @@
 #define CLUSTALW2_4_TCOFFEE "clustalw2"
 #define CLUSTALW2_ADDRESS "http://www.clustal.org"
 
+#define CLUSTALO_ADDRESS "http://www.clustal.org/omega/"
+#define CLUSTALO_4_TCOFFEE "clustalo"
+
 #define POA_4_TCOFFEE "poa"
 #define POA_ADDRESS "http://www.bioinformatics.ucla.edu/poa/"
 #define POA_DIR  "/usr/share/"

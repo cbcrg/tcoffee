@@ -5749,6 +5749,36 @@ char *** produce_method_file ( char *method)
 	vfclose (fp);}
 
 
+    sprintf (list[n][0], "clustalo_pair");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: clustalo [%s]\n", CLUSTALO_ADDRESS);
+    fprintf ( fp, "EXECUTABLE clustalo\n");
+    fprintf ( fp, "ALN_MODE   pairwise\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -i&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -o&bnsp\n");
+    fprintf ( fp, "PARAM      --force\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", CLUSTALO_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);
+    vfclose (fp);}
+
+    sprintf (list[n][0], "clustalo_msa");
+    sprintf (list[n][1], "%s", vtmpnam(NULL));
+    n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+    fprintf ( fp, "DOC: clustalo [%s]\n", CLUSTALO_ADDRESS);
+    fprintf ( fp, "EXECUTABLE clustalo\n");
+    fprintf ( fp, "ALN_MODE   multiple\n");
+    fprintf ( fp, "OUT_MODE   aln\n");
+    fprintf ( fp, "IN_FLAG    -i&bnsp\n");
+    fprintf ( fp, "OUT_FLAG   -o&bnsp\n");
+    fprintf ( fp, "PARAM      --force\n");
+    fprintf ( fp, "SEQ_TYPE   S\n");
+    fprintf ( fp, "ADDRESS    %s\n", CLUSTALO_ADDRESS);
+    fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);
+    vfclose (fp);}
+
 
 	sprintf (list[n][0], "clustalw2_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));

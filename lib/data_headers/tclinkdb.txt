@@ -7,6 +7,15 @@ PG t_coffee source		http://www.tcoffee.org/Packages/T-COFFEE_distribution.tar.gz
 PG t_coffee update_action	always
 PG t_coffee mode		tcoffee,mcoffee,rcoffee,expresso,3dcoffee
 
+PG clustalo 4_TCOFFEE 	CLUSTALO
+PG clustalo type        sequence_multiple_aligner
+PG clustalo ADDRESS     http://www.clustal.org/omega/
+PG clustalo language    C++
+PG clustalo language2   C++
+PG clustalo source		http://www.clustal.org/omega/clustal-omega-1.1.0.tar.gz
+PG clustalo mode        mcoffee
+PG clustalo version     1.1.0
+
 PG strike 4_TCOFFEE		STRIKE
 PG strike type		sequence_alignment_scoring		
 PG strike ADDRESS		http://www.tcoffee.org/Projects/strike/index.html
