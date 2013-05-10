@@ -807,6 +807,17 @@ sub install_source_package
       }
 
     #
+    # CLUSTAL-OMEGA module
+    #
+    elsif ($pg eq "clustalo")
+      {
+	&flush_command("./configure");
+	&flush_command("make $arguments");
+	&check_cp ("./src/$pg", "$BIN");
+	repo_store("./src/$pg");
+      }
+
+    #
     # STRIKE module
     #
     elsif ($pg eq "strike")
