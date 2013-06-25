@@ -3555,15 +3555,15 @@ int tree2split_list (NT_node T, int ns,int **sl, int* n)
   return 1;
 }
 
-NT_node display_splits (NT_node T,Sequence *S, FILE *fp)
+NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name)
 {
   int a;
   if (!T) return T;
 
   if (!S)S=tree2seq (T,NULL);
 
-  display_splits (T->right,S, fp);
-  display_splits (T->left, S, fp);
+  display_splits (T->right,S, fp, name);
+  display_splits (T->left, S, fp, name);
 
 
 
@@ -3578,8 +3578,10 @@ NT_node display_splits (NT_node T,Sequence *S, FILE *fp)
 	  t+=T->lseq2[a];
 	}
 
-      fprintf ( fp, " %5d \n", MIN(t,((S->nseq)-t)));
-    }
+      fprintf ( fp, " %d", MIN(t,((S->nseq)-t)));
+      if (name)fprintf (fp, " %s", name);
+      fprintf (fp, "\n");
+}
   return T;
 }
 NT_node display_leaf_nb (NT_node T, int n, FILE *fp, char * name)
@@ -4591,9 +4593,13 @@ int treelist2splits( Sequence *S, Sequence *TS)
   int *used;
 
   char *split_file, *sorted_split_file;
-  char *buf=NULL, *ref_buf=NULL;
+  char *buf=NULL, *ref_spl=NULL;
+  char *spl;
+  char *fname;
+  char **wl;
   FILE *fp;
-
+  char file_list[100000];
+  
   split_file=vtmpnam (NULL);
   sorted_split_file =vtmpnam (NULL);
 
@@ -4608,61 +4614,80 @@ int treelist2splits( Sequence *S, Sequence *TS)
 
   for ( a=0; a< S->nseq; a++)
     {
-
+      
       T[a]=prune_tree  (T[a], TS);
       T[a]=recode_tree (T[a], TS);
-      display_splits (T[a], TS,fp);
+      display_splits (T[a], TS,fp, S->name[a]);
     }
-
+  
   vfclose (fp);
   printf_system ("cp %s split_file::IGNORE_FAILURE::", split_file);
+    
   printf_system ( "cat %s | grep 1| sort > %s::IGNORE_FAILURE::", split_file, sorted_split_file);
 
   fp=vfopen (sorted_split_file, "r");
-  fprintf (stdout, "LEGEND: <#occurences> <coded split> <min group size> <(group1,)> <(group2,>\n");
-
+  
   for ( a=0; a<TS->nseq; a++)fprintf ( stdout, "SEQ_INDEX %d %s\n", a+1, TS->name[a]);
+  fprintf(stdout, "#Legend: <1: minimum split size>\t<2: number of occurences>\t<3: coded split>\t<4: File list <file1>####<file2>>\t<5: Group 1 <leaf1>####<leaf2>>\t<6: Group 2 <leaf1>####<leaf2>>\n"); 
   while ( (c=fgetc (fp))!=EOF)
     {
-
       ungetc (c, fp);
       buf=vfgets (buf, fp);
       buf [strlen(buf)-1]='\0';
-
-      if ( ref_buf==NULL)
+      
+      wl=string2list (buf);
+      spl=wl[1];
+      fname=wl[3];
+            
+      if (!ref_spl)
 	{
-	  ref_buf=(char*)vcalloc (strlen (buf)+1, sizeof (char));
-	  sprintf ( ref_buf, "%s", buf);
+	  ref_spl=(char*)vcalloc (strlen (spl)+1, sizeof (char));
+	  sprintf ( ref_spl, "%s", spl);
+	  file_list[0]='\0';
 	  n=1;
 	}
-      else if ( !strm (buf, ref_buf))
+      else if ( !strm (spl, ref_spl))
 	{
 	  int i;
-	  fprintf ( stdout, "SPLIT_COUNT %3d %s (", n, ref_buf);
+	  int n0=0, n1=0;
+	  
+	  for (i=0; i<nseq; i++)
+	    {
+	      n0+=(ref_spl[i]=='0')?1:0;
+	      n1+=(ref_spl[i]=='1')?1:0;
+	    }
+	  if (n>1)strcat (file_list, "####");
+	  strcat (file_list, fname);
+	  
+	  fprintf ( stdout, "%d\t%d\t%s\t%s\t",((n0>n1)?n1:n0),n,ref_spl, file_list);
+	  
 	  for (i=0,a=0; a<nseq; a++)
-	    if (ref_buf[a]=='1')
+	    if (ref_spl[a]=='1')
 	      {
-		if (i==1)fprintf(stdout, ",");
+		if (i==1)fprintf(stdout, "####");
 		fprintf (stdout, "%s", TS->name[a]);
 		i=1;
 	      }
-	  fprintf ( stdout, "),(");
+	  fprintf ( stdout, ",GROUP2::,");
 	  for (i=0,a=0; a<nseq; a++)
-	    if (ref_buf[a]=='0')
+	    if (ref_spl[a]=='0')
 	      {
-		if (i==1) fprintf ( stdout, ",");
+		if (i==1) fprintf ( stdout, "####");
 		fprintf (stdout, "%s", TS->name[a]);
 		i=1;
 	      }
-
-	  fprintf (stdout, ")\n");
-	  sprintf ( ref_buf, "%s", buf);
+	  fprintf (stdout, "\n");
+	  file_list[0]='\0';
+	  sprintf ( ref_spl, "%s", spl);
 	  n=1;
 	}
       else
 	{
+	  if (n>1)strcat (file_list, "####");
+	  strcat (file_list, fname);
 	  n++;
 	}
+      free_char (wl, -1);
     }
   vfclose (fp);
 

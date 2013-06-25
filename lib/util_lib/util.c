@@ -2864,7 +2864,6 @@ char **  string2list2 ( char *string, char *separators)
   sprintf (list[0], "%d", n);
 
   vfree (buf);
-
   return list;
 }
 

@@ -12603,8 +12603,30 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   fprintf ( stdout, "sn %.2f sp %.2f re %.2f\n", r[0], r[1], r[2]);
 	   myexit (0);
 	 }
-
-
+       else if ( strm (action, "seq2ngs"))
+	 {
+	 
+	   int cov=10;
+	   int rl=50;
+	   
+	   int len,ni,nj,nk,nl;
+	   nl=0;
+	   for (ni=0; ni<(D1->S)->nseq; ni++)
+	       {
+		 len=strlen ((D1->S)->seq[ni]);
+		 for (nj=0; nj<len-50; nj+=rl/cov)
+		   {
+		     fprintf (stdout, ">%d\n", ++nl);
+		     for (nk=nj; nk<nj+rl && nk<len; nk++) 
+		       {
+			 fprintf (stdout, "%c", (D1->S)->seq[ni][nk]);
+		       }
+		     fprintf (stdout, "\n");
+		   }
+	       }
+	   exit (0);
+	 }
+       		     
 //JM_START
        else if ( strm ( action, "aln2hitMat"))
 	 {
