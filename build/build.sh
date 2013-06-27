@@ -338,7 +338,7 @@ function build_perlm() {
 	echo "[ build_perlm ]"
 
 	chmod +x $WORKSPACE/tcoffee/build/cpanm
-	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM --force --reinstall SOAP::Lite XML::Simple LWP
+	$WORKSPACE/tcoffee/build/cpanm -q -n -l $PERLM -L $PERLM SOAP::Lite XML::Simple LWP
 
 }
 
