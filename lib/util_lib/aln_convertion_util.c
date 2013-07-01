@@ -9758,9 +9758,11 @@ int * km2centroids (Alignment *A, int k, char *mode, int *keep)
   if (k>A->nseq)k=A->nseq;
   group=declare_int (k, 3);
 
-
+  
   v=aln2km_vector(A,mode,&ndim);
+ 
   km_kmeans (v,A->nseq,ndim,k,0.0001,NULL);
+
   for (a=0; a<A->nseq; a++)if (!keep[a])keep[a]=-1;
   for (a=0; a<k; a++)
     {

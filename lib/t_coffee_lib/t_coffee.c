@@ -4338,6 +4338,7 @@ get_cl_param(\
 	        * several ways to specify master sequences. The master mode is experimental only,
 	        * the idea is not to run all pairwise alignments, but only some of them.
 	        * See ::prepare_master (best in the soruce code) for more details.
+		* Note that when running master, the library must be relaxed in order to compensate for missing pairs
 	        */
 	       fprintf ( le, "\nIdentify Master Sequences [%s]:\n", master_mode);
 	       (CL->S)->MasterS=MASTER_SEQ=prepare_master(master_mode,S,CL, "_kmeans_");
@@ -5735,7 +5736,11 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
    int a,b,s1, n, i;
    FILE *fp;
    int trim_mode=2;
-
+   int **lu=NULL;
+   char ttag;
+   
+   char tmode[100];
+   int nseq=0;
    CL->master=(int*)vcalloc (S->nseq+1, sizeof(int));
 
    if ( check_file_exists (seq))
@@ -5750,83 +5755,102 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
        for (a=0; a<S->nseq; a++)CL->master[a]=1;
        return NULL;
      }
-   else
+   
+   //figure out the number of sequences to keep as a master
+   nseq=0;
+   if ( is_number (seq) || strstr (seq, "_N") || strstr (seq, "_n"))
      {
-       if ( strstr (seq, "_PLIB_"))
+       char ttag;
+       
+       if      ( strstr (seq, "_N_")){nseq=atoi (strstr(seq, "_N_")+strlen ("_N_"));ttag='N';}
+       else if ( strstr (seq, "_n_")){nseq=atoi (strstr(seq, "_n_")+strlen ("_n_"));ttag='n';}
+       else if ( strstr (seq, "_N")){nseq=atoi (strstr(seq, "_N")+strlen ("_N"));ttag='N';}
+       else if ( strstr (seq, "_n")){nseq=atoi (strstr(seq, "_n")+strlen ("_n_"));ttag='n';}
+       else {nseq=atoi (seq);ttag='n';}
+       
+       if ( ttag=='N')nseq=((float)S->nseq*((float)nseq/(float)100.0));  
+     }
+  
+   //if no seqiuences or all, keep everything and return
+   if ( nseq>=S->nseq || nseq==0)
+     {
+       for (a=0; a<(CL->S)->nseq; a++)CL->master[a]=1;
+       return NULL;
+     }
+  
+   //If keep tghe nlonguest make a sorted list of sequence indexes
+   if ( strstr (seq, "_NLONG_"))
+     {
+       lu=declare_int ((CL->S)->nseq, 2);
+       for (a=0; a< (CL->S)->nseq; a++)
 	 {
-	   set_int_variable ("N_4_PLIB", atoi (strstr(seq, "_PLIB_")+strlen ("_PLIB_")));
-	   return CL->S;
+	   lu[a][0]=a;
+	   lu[a][1]=strlen ((CL->S)->seq[a]);
+	   sort_int_inv(lu,2,1,0, (CL->S)->nseq-1);
 	 }
-       if ( strstr (seq, "_P_"))
+       for (a=0; a<nseq; a++)
 	 {
-	   for (a=0; a<S->nseq; a++)
-	     {
-	       if (seq_has_template (S, a, "_P_"))CL->master[a]=1;
-	     }
+	   CL->master[lu[a][0]]=1;
 	 }
-       if ( is_number (seq) || strstr (seq, "_N") || strstr (seq, "_n"))
+       lu=free_int (lu, -1);
+     }
+   
+   //prepare a special library mode using the most commected sequences only
+   if ( strstr (seq, "_PLIB_"))
+     {
+       set_int_variable ("N_4_PLIB", atoi (strstr(seq, "_PLIB_")+strlen ("_PLIB_")));
+     }
+   
+   //Keep all sequences with a known structure
+   if ( strstr (seq, "_P_"))
+     {
+       for (a=0; a<S->nseq; a++)
 	 {
-	   int nseq;
-	   char **name;
-	   Alignment *A=NULL, *SA=NULL;
-	   char ttag;
-
-	   if      ( strstr (seq, "_N_")){nseq=atoi (strstr(seq, "_N_")+strlen ("_N_"));ttag='N';}
-	   else if ( strstr (seq, "_n_")){nseq=atoi (strstr(seq, "_n_")+strlen ("_n_"));ttag='n';}
-	   else if ( strstr (seq, "_N")){nseq=atoi (strstr(seq, "_N")+strlen ("_N"));ttag='N';}
-	   else if ( strstr (seq, "_n")){nseq=atoi (strstr(seq, "_n")+strlen ("_n_"));ttag='n';}
-	   else {nseq=atoi (seq);ttag='n';}
-
-	   if ( ttag=='N')nseq=((float)S->nseq*((float)nseq/(float)100.0));
-
-	   if ( nseq>=S->nseq || nseq==0)
-	     {
-	       for (a=0; a<(CL->S)->nseq; a++)CL->master[a]=1;
-	       return NULL;
-	     }
-	   else
-	     {
-
-	       char tmode[1000];
-	       int **sim;
-
-
-	       A=(strm (dmode, "msa"))?(very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL)):(seq2aln (S, NULL, RM_GAP));
-	       sim=(strm (dmode, "ktup") && CL->DM)?(CL->DM)->similarity_matrix:NULL;
-
-	       if      (strstr (seq,  "_kmeans_"))sprintf (tmode, "_kmeans_n%d_", nseq);
-	       else if (strstr (dmode,"_kmeans_"))sprintf (tmode, "_kmeans_n%d_", nseq);
-	       else sprintf (tmode, "_aln_%c%d_", ttag,nseq);
-
-
-	       fprintf ( CL->local_stderr, "------- Master Mode For Trimming: %s\n", tmode);
-	       SA=simple_trimseq (A, NULL, tmode, NULL, NULL);
-	       nseq=SA->nseq;
-	       name=SA->name;
-	       for (a=0; a<nseq;a++)
-		 {
-		   if (nseq==(CL->S)->nseq)CL->master[a]=1;
-		   else if ((b=name_is_in_list (name[a], S->name,S->nseq, 100))!=-1)CL->master[b]=1;
-		 }
-	       free_aln (A);
-	       free_aln (SA);
-	     }
+	   if (seq_has_template (S, a, "_P_"))CL->master[a]=1;
 	 }
-       if ( strstr (seq, "_LONG_"))//keep the longuest sequence
+     }
+ 
+   //Keep only the most informative sequences according to simple trim
+   //Criteria depends on a pairwise distance estimate provided by dmode
+   if (strstr (seq, "_TRIM_"))
+     {
+       Alignment *A,*SA;
+       char **name;
+       
+       A=(strm (dmode, "msa"))?(very_fast_aln (seq2aln (S, NULL, RM_GAP), 0, NULL)):(seq2aln (S, NULL, RM_GAP));
+       
+       if (strstr (dmode,"_kmeans_"))sprintf (tmode, "_kmeans_n%d_", nseq);
+       else sprintf (tmode, "_aln_%c%d_", ttag,nseq);
+       
+       fprintf ( CL->local_stderr, "------- Master Mode For Trimming: %s\n", tmode);
+       SA=simple_trimseq (A, NULL, tmode, NULL, NULL);
+       nseq=SA->nseq;
+       name=SA->name;
+       for (a=0; a<nseq;a++)
 	 {
-	   int ml=0;
-	   int ls=0;
-	   for (a=0; a< (CL->S)->nseq; a++)
-	     {
-	       int l=strlen ((CL->S)->seq[a]);
-	       if (l>ml){ml=l;ls=a;}
-	     }
-	   CL->master[ls]=1; //keep the longest seqquence
+	   if (nseq==(CL->S)->nseq)CL->master[a]=1;
+	   else if ((b=name_is_in_list (name[a], S->name,S->nseq, 100))!=-1)CL->master[b]=1;
 	 }
+       free_aln (A);
+       free_aln (SA);
      }
 
 
+   //keep the longuest sequence
+   if ( strstr (seq, "_LONG_"))
+     {
+       int ml=0;
+       int ls=0;
+       for (a=0; a< (CL->S)->nseq; a++)
+	 {
+	   int l=strlen ((CL->S)->seq[a]);
+	   if (l>ml){ml=l;ls=a;}
+	 }
+       CL->master[ls]=1; //keep the longest seqquence
+     }
+   
    fprintf ( CL->local_stderr, "\n");
+   
    for (b=0,a=0; a<S->nseq; a++)
      {
        if ( CL->master[a])
@@ -5838,7 +5862,7 @@ Sequence* prepare_master (char *seq, Sequence *S, Constraint_list *CL, char *dmo
    fprintf (CL->local_stderr, "------- Selected a total of %d Master Sequences\n",b);
    if ( b==0)
      {
-       printf_exit (EXIT_FAILURE, stderr, "ERROR: %s is neither a file nor a method nor a number for -master [FATAL:%s]\n",seq,PROGRAM);
+       printf_exit (EXIT_FAILURE, stderr, "ERROR: %s defines an invalid mode for -master [FATAL:%s]\n",seq,PROGRAM);
      }
 
    if (b!=(CL->S)->nseq)

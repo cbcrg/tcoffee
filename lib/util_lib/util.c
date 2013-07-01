@@ -9330,9 +9330,6 @@ double old_error, error = DBL_MAX; /* sum of squared euclidean distance */
 double **c = centroids ? centroids : (double**)calloc(k, sizeof(double*));
 double **c1 = (double**)calloc(k, sizeof(double*)); /* temp centroids */
 
-
- exit (0);
-
 //data must be allocated as data[n][m+2]
 for (a=0; a<n; a++)data[a][m+1]=0;//labels will be stored there
 
