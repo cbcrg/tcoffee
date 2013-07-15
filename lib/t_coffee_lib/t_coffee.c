@@ -79,6 +79,7 @@ static char *get_rcoffee_defaults(char *buf, char *type);//Original R-Coffee Pap
 static char *get_rmcoffee_defaults_old(char *buf, char *type);//Original R-Coffee Paper
 static char *get_rcoffee_defaults_old(char *buf, char *type);//Original R-Coffee Paper
 static char *get_best4RNA_defaults(char *buf, char *type);
+static char *get_saracoffee_defaults(char *buf, char *type);
 
 static char *get_very_fast_defaults(char *buf, char *type);
 static char *get_precomputed_defaults(char *buf, char *type);
@@ -773,6 +774,7 @@ if (t_coffee_defaults_flag)
 	 else if ( strm (special_mode, "rcoffee_slow_accurate"))new_arg=get_rcoffee_consan_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "rcoffee_fast_approximate"))new_arg=get_rmcoffee_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "t_coffee"))new_arg=get_t_coffee_defaults(NULL,lseq_type);
+	 else if ( strm (special_mode, "saracoffee"))new_arg=get_saracoffee_defaults(NULL,lseq_type);
 
 
 	 else if ( strm (special_mode, "unspecified"));
@@ -5574,6 +5576,19 @@ char *get_rcoffee_defaults(char *buf, char *type)
 
      return buf;
    }
+
+char *get_saracoffee_defaults(char *buf, char *type)
+   {
+
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
+
+     check_program_is_installed ("sara.py",NULL, NULL,"http://structure.biofold.org/sara", INSTALL_OR_DIE);
+
+     buf=strcat (buf,"-method sara_pair -template_file=RNA -extend_mode rna2 -relax_lib 0 -output clustalw,html -transform dna2rna");
+
+     return buf;
+   }
+
 char *get_genepredx_defaults(char *buf, char *type)
    {
 
