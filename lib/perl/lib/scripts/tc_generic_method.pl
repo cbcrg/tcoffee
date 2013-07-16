@@ -2659,17 +2659,14 @@ sub calc_rna_template
 		open (F, ">seqfile");
 		print (F ">$s{$seq}{name}\n$s{$seq}{seq}\n");
 		close (F);
-# 		print "$seq";
 		$pdb_chain = $pdb_template_h{$seq};
 		$lib_name="$s{$seq}{name}.rfold";
 		$lib_name=&clean_file_name ($lib_name);
-# 		safe_system ("t_coffee -other_pg RNAplfold2tclib.pl -in=seqfile -out=$lib_name");
-
- 		safe_system ("secondary_struc.py seqfile $CACHE$pdb_chain  $lib_name");
-
+		safe_system ("secondary_struc.py seqfile $CACHE$pdb_chain  $lib_name");
+		
 		if ( !-e $lib_name)
 		{
-		myexit(flush_error("RNAplfold failed to compute the secondary structure of $s{$seq}{name}"));
+		myexit(flush_error("secondary_struc.py failed to compute the secondary structure of PDB  $s{$seq}{name}"));
 			myexit ($EXIT_FAILURE);
 		}
 		else
@@ -2690,70 +2687,70 @@ sub seq2rna_pair{
 
 	if ($method eq "runsara.py")
 	{
-		open(TMP,"<$pdbfile1");
-		my $count = 0;
-		my $line;
-		while (<TMP>)
+	  open(TMP,"<$pdbfile1");
+	  my $count = 0;
+	  my $line;
+	  while (<TMP>)
+	    {
+	      $line = $_;
+	      if ($count ==1)
 		{
-			$line = $_;
-			if ($count ==1)
-			{
-				last;
-			}
-			$count += 1;
+		  last;
 		}
-
-
-		$chain1 = substr($line,length($line)-3,1);
-
-		close TMP;
-		open(TMP,"<$pdbfile2");
-		my $count = 0;
-		while (<TMP>)
+	      $count += 1;
+	    }
+	  
+	  
+	  $chain1 = substr($line,length($line)-3,1);
+	  
+	  close TMP;
+	  open(TMP,"<$pdbfile2");
+	  my $count = 0;
+	  while (<TMP>)
+	    {
+	      $line = $_;
+	      if ($count ==1)
 		{
-			$line = $_;
-			if ($count ==1)
-			{
-				last;
-			}
-			$count += 1;
+		  last;
 		}
-		$chain2 = substr($line,length($line)-3,1);
-		close TMP;
+	      $count += 1;
+	    }
+	  $chain2 = substr($line,length($line)-3,1);
+	  close TMP;
 
-		$tmp_file=&vtmpnam();
-
-		safe_system("runsara.py $pdbfile1 $chain1 $pdbfile2 $chain2 -s -o $tmp_file --limitation 5000 > /dev/null 2> /dev/null") == 0 or die "sara did not work $!\n";
-		open(TMP,"<$tmp_file") or die "cannot open the sara tmp file:$!\n";
-		open(OUT,">$outfile") or die "cannot open the $outfile file:$!\n";
-
-		my $switch = 0;
-		my $seqNum = 0;
-		foreach my $line (<TMP>)
+	  $tmp_file=&vtmpnam();
+	  
+	  safe_system("runsara.py $pdbfile1 $chain1 $pdbfile2 $chain2 -s -o $tmp_file --limitation 5000 > /dev/null 2> /dev/null") == 0 or die "sara did not work $!\n";
+	  open(TMP,"<$tmp_file") or die "cannot open the sara tmp file:$!\n";
+	  open(OUT,">$outfile") or die "cannot open the $outfile file:$!\n";
+	  
+	  my $switch = 0;
+	  my $seqNum = 0;
+	  foreach my $line (<TMP>)
+	    {
+	      next unless ($line=~/SARAALI/);
+	      if ($line=~/>/)
 		{
-			next unless ($line=~/SARAALI/);
-			if ($line=~/>/)
-			{
-				$switch =0;
-				print OUT ">seq$seqNum\n";
-				$seqNum++;
-			}
-			if ($switch < 2){
-				$switch++;
-				next;
-			}
-
-			if ($line =~/REMARK\s+SARAALI\s+([^\*]+)\*/)
-			{
-				my $string = $1;
-				print OUT "$string\n";
-			}
+		  $switch =0;
+		  print OUT ">seq$seqNum\n";
+		  $seqNum++;
 		}
-		close TMP;
-		close OUT;
-		unlink($tmp_file);
+	      if ($switch < 2){
+		$switch++;
+		next;
+	      }
+	      
+	      if ($line =~/REMARK\s+SARAALI\s+([^\*]+)\*/)
+		{
+		  my $string = $1;
+		  print OUT "$string\n";
+		}
+	    }
+	  close TMP;
+	  close OUT;
+	  unlink($tmp_file);
 	}
-}
+      }
 
 sub seq2tblastx_lib
   {
