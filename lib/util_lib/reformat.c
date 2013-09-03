@@ -491,9 +491,16 @@ int seq_reformat ( int argc, char **in_argv)
 
 		fprintf ( stdout, "\n     sim_mat_<matname>..Evaluates similarity using the matrix: blosum62mt,etc");
 		fprintf ( stdout, "\n     sim_mat_list.......Produces a list of available matrices\n");
-		fprintf ( stdout, "\n     sim_idscore........makes dp alignment of the sequences using Blosum62mt");
+		fprintf ( stdout, "\n     sim_idscore........makes dp alignment of the sequences using Blosum62mt(prot) or idmat(DNA)");
 		fprintf ( stdout, "\n     sim_idscoreDNA.makes dp alignment of the sequences using idmat");
-		fprintf ( stdout, "\n     sim............if -in2 is set: in1 vs in2, idscore");
+		fprintf ( stdout, "\n     sim_sim1(defualt)..Fraction of identical columns overa all columns\n");
+		fprintf ( stdout, "\n     sim_sim2(defualt)..Fraction of identical columns over  shortest seq\n");
+		fprintf ( stdout, "\n     sim_sim3(defualt)..Fraction of identical columns over  longuest seq\n");
+		fprintf ( stdout, "\n     sim_gap1(defualt)..Fraction of ungapped columns\n");
+ 
+		
+			  
+		
 
 		fprintf ( stdout, "\n     code_name......Outputs a compact list of names for code/decode");
 

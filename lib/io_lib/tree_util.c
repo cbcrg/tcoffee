@@ -3568,7 +3568,9 @@ NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name)
 
 
   if (!T->right);
-  else if (T->parent && !(T->parent)->parent);
+  else if (!T->parent);
+  //else if (T->parent && !(T->parent)->parent);
+  //Removed because it prevents some splits to be reported replaced with !T-Parent test.
   else
     {
       int t=0;
