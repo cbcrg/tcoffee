@@ -509,7 +509,7 @@ while (<$INFILE>)
 	  $n_pdb_chains++;
 	  }
 
-       for ( $a=0; $a<$#field;$a++){@{$complete_seq{$c}}->[$complete_seq_len{$c}++]=$field[$a];}  
+       for ( $a=0; $a<$#field;$a++){$complete_seq{$c}[$complete_seq_len{$c}++]=$field[$a];}  
        }
     elsif ( $line=~/^ATOM/ || ($line=~/^HETATM/ && &is_aa(substr($line,17,3))))
        {
@@ -560,7 +560,7 @@ while (<$INFILE>)
 	
 	if ( $AT_ID eq "CA")
            {
-	     @{$atom_seq{$CHAIN}}->[$atom_seq_len{$CHAIN}++]=$RES_ID;;
+	     $atom_seq{$CHAIN}[$atom_seq_len{$CHAIN}++]=$RES_ID;;
 	   }
         }
 

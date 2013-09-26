@@ -213,8 +213,6 @@ SCRIPT_LIB_OBJECTS=\
 #2
 extract_from_pdb:\
 	$(SCRIPT_LIB)/extract_from_pdb
-	cp $(SCRIPT_LIB)/extract_from_pdb .
-	echo "# `date`" >> extract_from_pdb
 install.pl:\
 	$(SCRIPT_LIB)/install.pl
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >install.pl
