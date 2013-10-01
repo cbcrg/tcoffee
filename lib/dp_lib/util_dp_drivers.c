@@ -1846,9 +1846,9 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		vfclose (fp);
 
 		CL=read_constraint_list_file(CL,sap_lib);
+	    vremove (sap_lib);
 	      }
 
-	    vremove (sap_lib);
 
 
 	    vfree (sap_seq1); vfree(sap_seq2);vfree (tmp_name1); vfree(tmp_name2);
