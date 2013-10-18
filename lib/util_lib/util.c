@@ -4622,6 +4622,7 @@ char *get_tmp_4_tcoffee ()
 // 	if (getppid() != getsid())
    if (is_rootpid())
 	{
+	  cputenv ("ROOT_TMP_4_TCOFFEE=%s",  tmp_4_tcoffee);
 	  sprintf (buf, "%s/t_coffee.tmp/tmp.%s.%d/", tmp_4_tcoffee,host,getpid());
 	  sprintf (tmp_4_tcoffee, "%s", buf);
 
@@ -5508,6 +5509,8 @@ void dump_tcoffee(char *target, char *nature)
   char *f;
   char *out_list;
 
+  
+
   if ((fp=fopen (target, "w")))
     {
       fprintf (fp, "<T-CoffeeApplicationDump>\n<nature>%s</nature>\n", nature);
@@ -5582,7 +5585,10 @@ void dump_error_file()
 
 
   sprintf ( target, "%s",getenv("ERRORFILE_4_TCOFFEE"));
-  dump_tcoffee (target, "error");
+  if (strstr (target, "NO"));
+  else
+    dump_tcoffee (target, "error");
+  
   return;
 
   if ((fp=fopen (target, "w")))
@@ -8691,7 +8697,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   cputenv ("DIR_4_TCOFFEE=%s",get_dir_4_tcoffee());
   cputenv ("TMP_4_TCOFFEE=%s",get_tmp_4_tcoffee());
   cputenv ("CACHE_4_TCOFFEE=%s",get_cache_4_tcoffee());
-    cputenv ("MCOFFEE_4_TCOFFEE=%s",get_mcoffee_4_tcoffee());
+  cputenv ("MCOFFEE_4_TCOFFEE=%s",get_mcoffee_4_tcoffee());
   cputenv ("METHODS_4_TCOFFEE=%s",get_methods_4_tcoffee());
   cputenv ("PLUGINS_4_TCOFFEE=%s",get_plugins_4_tcoffee());
   cputenv ("LOCKDIR_4_TCOFFEE=%s",get_lockdir_4_tcoffee());

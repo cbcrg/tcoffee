@@ -3568,7 +3568,9 @@ NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name)
 
 
   if (!T->right);
-  else if (!T->parent);
+  else if (!T->left);
+  else if (!T->parent );
+  
   //else if (T->parent && !(T->parent)->parent);
   //Removed because it prevents some splits to be reported replaced with !T-Parent test.
   else
@@ -3583,7 +3585,7 @@ NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name)
       fprintf ( fp, " %d", MIN(t,((S->nseq)-t)));
       if (name)fprintf (fp, " %s", name);
       fprintf (fp, "\n");
-}
+    }
   return T;
 }
 NT_node display_leaf_nb (NT_node T, int n, FILE *fp, char * name)
@@ -4658,8 +4660,13 @@ int treelist2splits( Sequence *S, Sequence *TS)
 	      n0+=(ref_spl[i]=='0')?1:0;
 	      n1+=(ref_spl[i]=='1')?1:0;
 	    }
-	  if (n>1)strcat (file_list, "####");
-	  strcat (file_list, fname);
+	  
+	  if (n>1 && strstr (file_list, fname))n--;
+	  else
+	    {
+	      if (n>1)strcat (file_list, "####");
+	      strcat (file_list, fname);
+	    }
 	  
 	  fprintf ( stdout, "%d\t%d\t%s\t%s\t",((n0>n1)?n1:n0),n,ref_spl, file_list);
 	  

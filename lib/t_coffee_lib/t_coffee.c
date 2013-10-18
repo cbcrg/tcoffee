@@ -198,6 +198,8 @@ int batch_main ( int argc, char **argv)
 
 	FILE *le=NULL;
 	char *se_name;
+	char *clean_list;
+	int debug=0;
 	char *run_name;
 
 	char *mem_mode;
@@ -909,7 +911,54 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
+
+     
      if (type_only==1)sprintf ( se_name, "/dev/null");
+     
+     get_cl_param(						\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-debug"    ,\
+			    /*Flag*/      &quiet        ,\
+			    /*TYPE*/      "D"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "0 [default]: no dump; 1: dump the input, 2: dump input and keep tmp files", \
+			    /*Parameter*/ &debug      ,\
+			    /*Def 1*/     "0"      ,\
+			    /*Def 2*/     "1"   ,\
+			    /*Min_value*/ "0"         ,\
+			    /*Max Value*/ "2"          \
+		   );
+     if (debug==0)
+       {
+	 cputenv ("ERRORFILE_4_TCOFFEE=NO");
+       }
+     else if (debug==2)
+       {
+	 cputenv ("DEBUG_TMP_FILE=1");
+       }
+     /*PARAMETER PROTOTYPE: MEM MODE*/
+     declare_name(clean_list);
+     get_cl_param(						\
+		  /*argc*/      argc          ,			\
+		  /*argv*/      argv          ,			\
+		  /*output*/    &le           ,			\
+		  /*Name*/      "-clean"   ,		\
+		  /*Flag*/      &garbage      ,			\
+		  /*TYPE*/      "S"          ,			\
+		  /*OPTIONAL?*/ OPTIONAL      ,			\
+		  /*MAX Nval*/  1             ,			\
+		  /*DOC*/       "Will delete cached data and exit: all, cache, lock, tmp. It is possible to specify a list: cache_lock_tmp" ,			\
+		  /*Parameter*/ &clean_list     ,			\
+		  /*Def 1*/     "no"         ,			\
+		  /*Def 2*/     "all"            ,			\
+		  /*Min_value*/ "any"         ,			\
+		  /*Max Value*/ "any"				\
+				);
+     
+
 
      /*PARAMETER PROTOTYPE:    DO FORMAT      */
 	       get_cl_param(\
@@ -3796,6 +3845,11 @@ get_cl_param(\
 /*******************************************************************************************************/
 
 
+
+	       
+
+
+
 	       /**
 	        * If T-Coffee is invoked without any arguments,
 	        * it displays the available method names through ::display_method_names and exits.
@@ -3808,6 +3862,59 @@ get_cl_param(\
 	       get_cl_param( argc, argv,&le, NULL,NULL,NULL,0,0,NULL);
 	       prepare_cache (cache);
 
+/*******************************************************************************************************/
+/*                                                                                                     */
+/*                           TCoffee clean mode                                                        */
+/*                                                                                                     */
+/*******************************************************************************************************/
+	       
+	       if (!strstr (clean_list, "no"))
+		 {
+		   char command[10000];
+		   if (strstr (clean_list, "all") || strstr (clean_list, "cache"))
+		     {
+		       sprintf (command, "rm -rf %s", getenv ("CACHE_4_TCOFFEE")); 
+		       if ( !strstr (command, "cache"))
+			 {
+			   fprintf ( stderr, "For security reasons the cache dir must contain the string cache.\n Your cached data seems to be stored in [%s]\nYou must delete it manually.",getenv ("CACHE_4_TCOFFEE")); 
+			 }
+		       else
+			 {
+			   HERE ("%s",command);
+			   system (command);
+			 }
+		     }
+		   if (strstr (clean_list, "all") || strstr (clean_list, "lock"))
+		     {
+		       
+		       sprintf (command, "rm -rf %s", getenv ("LOCKDIR_4_TCOFFEE")); 
+		       if ( !strstr (command, "lck") &&!strstr (command, "lock")  )
+			 {
+			   fprintf ( stderr, "For security reasons the cache dir must contain the string lck.\n Your lock data seems to be stored in [%s]\nYou must delete it manually.",getenv ("LOCKDIR_4_TCOFFEE")); 
+			 }
+		       else
+			 {
+			   HERE ("%s",command);
+			   system (command);
+			 }
+		       
+		     }
+		   if (strstr (clean_list, "all") || strstr (clean_list, "tmp"))
+		     {
+		       sprintf (command, "rm -rf %s", getenv ("ROOT_TMP_4_TCOFFEE"));
+		       if ( !strstr (command, "tmp"))
+			 {
+			   fprintf ( stderr, "For security reasons the tmp dir must contain the string tmp.\n Your tmp data seems to be stored in [%s]\nYou must delete it manually.",getenv ("ROOT_TMP_4_TCOFFEE")); 
+			 }
+		       else
+			 {
+			   HERE ("%s",command);
+			   system (command);
+			 }
+		     }
+		   exit (EXIT_SUCCESS);
+		 }
+	       
 /*******************************************************************************************************/
 /*                                                                                                     */
 /*                           FILL list_file (contains seq, aln and meth)                               */
