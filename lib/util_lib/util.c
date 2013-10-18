@@ -5642,7 +5642,10 @@ void dump_error_file()
 FILE* error_msg(FILE*fp )
      {
        if ( no_error_report)return fp;
+       char errorfile[100];
 
+       sprintf (errorfile , "%s", getenv("ERRORFILE_4_TCOFFEE"));
+       
        fprintf( fp,"\n\t******************************************************************");
        fprintf( fp, "\n\t* Abnormal Termination");
        fprintf( fp, "\n\t* Job NOT Completed:[%s, %s]",PROGRAM, VERSION);
@@ -5653,8 +5656,13 @@ FILE* error_msg(FILE*fp )
        fprintf( fp, "\n\t* \t\t (@, |, %%...)");
 
        fprintf( fp, "\n\t* \t-4 The Online Doc (%s)                   ", URL);
-       fprintf( fp, "\n\t* \t-5 Send the file:");
+       
+       if ( strm (errorfile, "NO"))
+	    fprintf( fp, "\n\t* \t-5 re-run your CL (see below) with tze -debug option. This will produce a debug file you can send us.");
+       else
+	 fprintf( fp, "\n\t* \t-5 Send the file:");
        fprintf (fp, "\n\t*");
+       
        fprintf (fp, "\n\t*\t    %s ", getenv("ERRORFILE_4_TCOFFEE"));
        fprintf (fp,  "\n\t* to:");
        fprintf( fp, "\n\t* \t\t%s",EMAIL);
