@@ -5136,7 +5136,8 @@ static int check_blast_is_installed (char *server)
 {
   if (strm (server, "EBI"));
   else if ( strm (server, "NCBI"))
-    return check_program_is_installed (NCBIWEBBLAST_4_TCOFFEE,NULL, NULL,NCBIWEBBLAST_ADDRESS, INSTALL_OR_DIE);
+	// The BLAST client to access the NCBI services it is embedded in the BLAST+ tools by adding the '-remote' command line option
+    return check_program_is_installed ("blastp",NULL, NULL,NCBIBLAST_ADDRESS, INSTALL_OR_DIE);
   else if ( strm (server, "LOCAL"))
     return check_program_is_installed (NCBIBLAST_4_TCOFFEE,NULL, NULL,NCBIBLAST_ADDRESS, INSTALL_OR_DIE);
   return 1;

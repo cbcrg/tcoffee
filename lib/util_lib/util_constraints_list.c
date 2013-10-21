@@ -6541,16 +6541,6 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", EBIBLASTPGPc_4_TCOFFEE);
 	vfclose (fp);}
 
-	sprintf (list[n][0], "ncbi_netblast");
-	sprintf (list[n][1], "%s", vtmpnam(NULL));
-	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "EXECUTABLE blastcl3 \n");
-	fprintf ( fp, "ALN_MODE   predict\n");
-	fprintf ( fp, "SEQ_TYPE   PROTEIN\n");
-
-	fprintf ( fp, "ADDRESS    %s\n", NCBIWEBBLAST_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", NCBIWEBBLAST_4_TCOFFEE);
-	vfclose (fp);}
 
 	sprintf (list[n][0], "local_ncbiblast");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));

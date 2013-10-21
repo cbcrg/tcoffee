@@ -319,16 +319,6 @@ PG blastpgp.pl source		empty
 PG blastpgp.pl update_action	never
 PG blastpgp.pl mode		psicoffee,expresso,accurate
 
-
-PG blastcl3 4_TCOFFEE		NCBIWEBBLAST
-PG blastcl3 type		protein_homology_predictor
-PG blastcl3 ADDRESS		ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
-PG blastcl3 language		C
-PG blastcl3 language2		C
-PG blastcl3 source		empty
-PG blastcl3 update_action	never
-PG blastcl3 mode		psicoffee,expresso,3dcoffee
-
 PG blastall 4_TCOFFEE	 blastall
 PG blastall type		 protein_homology_predictor
 PG blastall ADDRESS	 ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
