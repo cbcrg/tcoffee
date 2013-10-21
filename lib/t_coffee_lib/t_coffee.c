@@ -2905,7 +2905,7 @@ declare_name (prot_db);
 			    /*MAX Nval*/  1             ,\
 			    /*DOC*/       "ND"          ,\
  			    /*Parameter*/&prot_db       ,\
-	 		    /*Def 1*/    "uniprotkb"      ,\
+	 		    /*Def 1*/    "uniprot"      ,\
 			    /*Def 2*/    "default"      ,\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \

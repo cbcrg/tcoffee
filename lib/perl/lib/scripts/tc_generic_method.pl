@@ -2375,7 +2375,7 @@ sub run_blast
 	elsif ($SERVER eq "NCBI")
 	  {
 	    &check_configuration ("INTERNET");
-	    if ($db eq "uniprot"){$cl_db="nr";}
+	    if ($db eq "uniprot"){$cl_db="swissprot";}
 	    else {$cl_db=$db;}
 
 	    if ( $method eq "psiblast")
