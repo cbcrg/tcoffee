@@ -161,5 +161,6 @@ sec_file.close()
 sec_file_out.close()
 
 os.remove(pdb_file+"."+chain+'.pairs')
-os.remove(pdb_file+"."+chain+'.ss')
+if os.path.isfile(pdb_file+"."+chain+'.ss'):
+	os.remove(pdb_file+"."+chain+'.ss')
 
