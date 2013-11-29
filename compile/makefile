@@ -15,7 +15,7 @@
 CC=g++
 
 ifndef CFLAGS
-CFLAGS=-O3 -Wno-write-strings
+CFLAGS=-O3 -Wno-write-strings 
 endif
 
 ifndef LIB_DIR
@@ -27,9 +27,31 @@ ifdef OPENMP
 endif
 
 
+################################################
+#         find necessary libraries             #
+################################################
+
+#set(Boost_USE_STATIC_LIBS OFF)
+#set(Boost_USE_MULTITHREADED OFF)
+
+#FIND_PACKAGE(Boost 1.46 COMPONENTS system filesystem program_options REQUIRED)
+#INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
+#link_directories(${Boost_LIBRARY_DIRS})
+#ADD_DEFINITIONS( "-DHAS_BOOST" )
+
+#FIND_PACKAGE(OpenMP)
+# find_package(OpenMP)
+# if (OPENMP_FOUND)
+#	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+# endif (OPENMP_FOUND)
+
+
+###############################################
+
 #
-# The version number to be stamped in the produced binary
-# Read about date formatting
+# The version number to be stamped in the produced binary 
+# Read about date formatting 				  
+#
 ifndef VERSION
 VERSION=dev_$(USER)@$(shell date '+%Y%m%d_%H:%M')
 endif
@@ -82,8 +104,13 @@ MEM_LIB=$(LIB_DIR)/mem_lib
 GA_LIB=$(LIB_DIR)/ga_lib
 DEV1_LIB=$(LIB_DIR)/dev_lib
 FASTAL_LIB=$(LIB_DIR)/fastal
-KM_COFFEE_LIB=$(LIB_DIR)/km_coffee
 T_COFFEE_LIB=$(LIB_DIR)/t_coffee_lib
+TEA_CLUSTERING_LIB=$(LIB_DIR)/TEA/Clustering
+TEA_HMM_LIB=$(LIB_DIR)/TEA/HMM
+TEA_SEQUENCE_LIB=$(LIB_DIR)/TEA/Sequence
+TEA_UTILS_LIB=$(LIB_DIR)/TEA/utils
+TEA_MAIN_LIB=$(LIB_DIR)/TEA/main
+
 
 
 #LIST OF PERL MODULES
@@ -96,17 +123,17 @@ PERL4DATA_PROCESS_LIB=$(PERL_LIB_DIR)/perl4data_process
 
 
 # ===================================================================
-# 	MAKE sources search path. Include here all folder where C source
+#   MAKE sources search path. Include here all folder where C source
 #   have to be located
 # ===================================================================
-VPATH=$(IO_LIB):$(UT_LIB):$(DP_LIB):$(MEM_LIB):$(GA_LIB):$(DEV1_LIB):$(FASTAL_LIB):$(KM_COFFEE_LIB):$(T_COFFEE_LIB)
+VPATH=$(IO_LIB):$(UT_LIB):$(DP_LIB):$(MEM_LIB):$(GA_LIB):$(DEV1_LIB):$(FASTAL_LIB):$(T_COFFEE_LIB):$(TEA_CLUSTERING_LIB):$(TEA_HMM_LIB):$(TEA_SEQUENCE_LIB):$(TEA_UTILS_LIB):$(TEA_MAIN_LIB)
 
 
 #########################################################################
-#				PERL LIB												#
-#																		#
-#																		#
-#																		#
+#				PERL LIB				#
+#									#
+#									#
+#									#
 #########################################################################
 
 #########################################################################
@@ -155,6 +182,7 @@ append2file.pl:\
 CCsed.script:\
 	$(PERL4MAKEFILE_LIB)/CCsed.script
 	cp $(PERL4MAKEFILE_LIB)/CCsed.script .
+
 #########################################################################
 #########################  WEBSERVICES_LIB   ############################
 #########################################################################
@@ -371,24 +399,24 @@ programmes_define.h:\
 
 
 
-#########################################################################
+###############################################################################
 ########################      	T-Coffee_LIB      #############################
-#########################################################################
+###############################################################################
 
 T_COFFEE_LIB_OBJECTS = t_coffee.o_$(OSNAME)
 
 
-#########################################################################
+###########################################################################
 ########################      	DEV1_LIB      #############################
-#########################################################################
+###########################################################################
 
 DEV1_LIB_OBJECTS = dev1.o_$(OSNAME)
 
 
 
-#########################################################################
+#############################################################################
 ########################      	FASTAL_LIB      #############################
-#########################################################################
+#############################################################################
 
 
 FASTAL_LIB_OBJECTS = \
@@ -438,17 +466,30 @@ UT_LIB_OBJECTS = \
 
 
 #########################################################################
-#####################      	KM-COFFEE_LIB      ##########################
+#####################      	TEA_LIB      ############################
 #########################################################################
 
-KM_COFFEE_OBJECTS = \
-		Stack.o_$(OSNAME)\
-		Vector.o_$(OSNAME)\
-		classes.o_$(OSNAME)\
-		km_util.o_$(OSNAME)\
+TEA_LIB_OBJECTS = \
+		tea.o_$(OSNAME)\
+		utils.o_$(OSNAME)\
 		kmeans.o_$(OSNAME)\
-		km_coffee.o_$(OSNAME)
-
+		clustering.o_$(OSNAME)\
+		Vector.o_$(OSNAME)\
+		Tree.o_$(OSNAME)\
+		Matrix.o_$(OSNAME)\
+		fast_math.o_$(OSNAME)\
+		Library.o_$(OSNAME)\
+		ScoringMatrix.o_$(OSNAME)\
+		Sequence.o_$(OSNAME)\
+		SequenceSet.o_$(OSNAME)\
+		Alignment.o_$(OSNAME)\
+		aln_analysis.o_$(OSNAME)\
+		HMM.o_$(OSNAME)\
+		fw_bw.o_$(OSNAME)\
+		gotoh.o_$(OSNAME)\
+		Alignment_io.o_$(OSNAME)\
+		SequenceSet_io.o_$(OSNAME)\
+		other_seq.o_$(OSNAME)
 
 
 #########################################################################
@@ -488,7 +529,7 @@ DP_LIB_OBJECTS = \
 #
 HEADERS	= define_header.h programmes_define.h perl_header_lib.h
 
-OBJECTS = $(UT_LIB_OBJECTS) $(IO_LIB_OBJECTS) $(DP_LIB_OBJECTS) $(DEV1_LIB_OBJECTS) $(FASTAL_LIB_OBJECTS) $(KM_COFFEE_OBJECTS) $(T_COFFEE_LIB_OBJECTS)
+OBJECTS = $(UT_LIB_OBJECTS) $(IO_LIB_OBJECTS) $(DP_LIB_OBJECTS) $(DEV1_LIB_OBJECTS) $(FASTAL_LIB_OBJECTS) $(TEA_LIB_OBJECTS) $(T_COFFEE_LIB_OBJECTS)
 
 # ===================================================================
 # 	ALL target: create the main application file
@@ -499,7 +540,7 @@ all: t_coffee
 # 	T_COFFEE target: build T-Coffee binary artifact
 # ===================================================================
 t_coffee: $(HEADERS) $(OBJECTS)
-	$(CC) $(CFLAGS) $(KM_FLAGS) -lm -o t_coffee $(OBJECTS)
+		$(CC) $(CFLAGS) $(KM_FLAGS) -L/users/cn/mhatzou/src/lib/boost_1_47_0/localBoost/lib -fopenmp -lm -o t_coffee $(OBJECTS) -lboost_program_options -lboost_system -lboost_filesystem 
 # 	cp t_coffee $(HOME)/bin
 
 # ===================================================================
@@ -518,6 +559,10 @@ t_coffee: $(HEADERS) $(OBJECTS)
 # ===================================================================
 
 %.o_$(OSNAME): %.c %.d
+	echo "$<" >> code_list
+	$(CC) $(CFLAGS) $(KM_FLAGS) -I. -I$(LIB_DIR) -c $< -o $@
+
+%.o_$(OSNAME): %.cpp %.d
 	echo "$<" >> code_list
 	$(CC) $(CFLAGS) $(KM_FLAGS) -I. -I$(LIB_DIR) -c $< -o $@
 

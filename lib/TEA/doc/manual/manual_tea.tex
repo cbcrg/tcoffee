@@ -1,0 +1,45 @@
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage[utf8x]{inputenc}
+\usepackage[pdfauthor={Carsten Kemena},colorlinks=true,linkcolor=blue, pdftitle={MSAA - Manual}]{hyperref}
+
+
+% Title Page
+\title{tea v1.0 - Manual}
+\author{Carsten Kemena}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% \begin{abstract}
+% \end{abstract}
+
+\section{Introduction}
+Tea is a simple multiple sequence aligner. It is a re-implementation of the T-Coffee program. 
+
+\section{Options}
+The MSAA program distinguished between three kinds of options:
+\begin{itemize}
+	\item \textbf{General options:} These options regulate the input and output behavior of MSAA - the input/output files and formats.
+	\item \textbf{Pairwise alignment options:} These options regulate how the pairwise alignment library is generated.
+	\item \textbf{Guide tree options:} These options change the computation of the guide tree.
+\end{itemize}
+
+
+
+\subsection{General options}
+There are several general options available:
+
+\textbf{i,in}: The input sequence file in FASTA format.
+
+\textbf{o,out}: The output file for the computed alignment.
+
+\textbf{f,format}: The format which should be used to write the alignment. Currently supported: fasta, clustalw, msf, phylip\_i (Phylip interleaved), phylip\_s (Phylip sequential).
+
+\textbf{n,n\_threads}: The number of threads to use to compute the alignment. Should be a number smaller or equal to the number of cores to use.
+
+\subsection{Pairwise alignment options}
+
+\subsection{Guide tree options}
+
+\end{document}          

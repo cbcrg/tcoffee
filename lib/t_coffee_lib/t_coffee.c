@@ -11,7 +11,8 @@
 #include "dp_lib_header.h"
 #include "define_header.h"
 #include "t_coffee.h"
-#include "km_coffee_header.h"
+#include "TEA/main/tea.h"
+// KM-COFFEE HEADER!! MAYBE WE NEED TEA HEADER!! #include "km_coffee_header.h"
 
 /**
  * \file
@@ -126,7 +127,7 @@ int batch_main ( int argc, char **argv);
 int main (int argc, char *argv[])
 {
 // printf("RUNNING DEBUG\n");
-  int r, a;
+  int r, a, i;
 
   if (argc>=2 && strcmp (argv[1], "-batch")==0)
     {
@@ -142,7 +143,12 @@ int main (int argc, char *argv[])
     }
   else
     {
-      r=batch_main (argc, argv);
+      for(i=0; i<=argc; i++){
+	if(strcmp (argv[i], "-mode")==0){
+	  r=batch_main (argc, argv);
+	}  
+	else{ r=tea_main(argc, argv); }
+      }
     }
   myexit (r);
 }
@@ -198,8 +204,6 @@ int batch_main ( int argc, char **argv)
 
 	FILE *le=NULL;
 	char *se_name;
-	char *clean_list;
-	int debug=0;
 	char *run_name;
 
 	char *mem_mode;
@@ -911,54 +915,7 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-
-     
      if (type_only==1)sprintf ( se_name, "/dev/null");
-     
-     get_cl_param(						\
-			    /*argc*/      argc          ,\
-			    /*argv*/      argv          ,\
-			    /*output*/    &le           ,\
-			    /*Name*/      "-debug"    ,\
-			    /*Flag*/      &quiet        ,\
-			    /*TYPE*/      "D"         ,\
-			    /*OPTIONAL?*/ OPTIONAL      ,\
-			    /*MAX Nval*/  1             ,\
-			    /*DOC*/       "0 [default]: no dump; 1: dump the input, 2: dump input and keep tmp files", \
-			    /*Parameter*/ &debug      ,\
-			    /*Def 1*/     "0"      ,\
-			    /*Def 2*/     "1"   ,\
-			    /*Min_value*/ "0"         ,\
-			    /*Max Value*/ "2"          \
-		   );
-     if (debug==0)
-       {
-	 cputenv ("ERRORFILE_4_TCOFFEE=NO");
-       }
-     else if (debug==2)
-       {
-	 cputenv ("DEBUG_TMP_FILE=1");
-       }
-     /*PARAMETER PROTOTYPE: MEM MODE*/
-     declare_name(clean_list);
-     get_cl_param(						\
-		  /*argc*/      argc          ,			\
-		  /*argv*/      argv          ,			\
-		  /*output*/    &le           ,			\
-		  /*Name*/      "-clean"   ,		\
-		  /*Flag*/      &garbage      ,			\
-		  /*TYPE*/      "S"          ,			\
-		  /*OPTIONAL?*/ OPTIONAL      ,			\
-		  /*MAX Nval*/  1             ,			\
-		  /*DOC*/       "Will delete cached data and exit: all, cache, lock, tmp. It is possible to specify a list: cache_lock_tmp" ,			\
-		  /*Parameter*/ &clean_list     ,			\
-		  /*Def 1*/     "no"         ,			\
-		  /*Def 2*/     "all"            ,			\
-		  /*Min_value*/ "any"         ,			\
-		  /*Max Value*/ "any"				\
-				);
-     
-
 
      /*PARAMETER PROTOTYPE:    DO FORMAT      */
 	       get_cl_param(\
@@ -2905,7 +2862,7 @@ declare_name (prot_db);
 			    /*MAX Nval*/  1             ,\
 			    /*DOC*/       "ND"          ,\
  			    /*Parameter*/&prot_db       ,\
-	 		    /*Def 1*/    "uniprot"      ,\
+	 		    /*Def 1*/    "uniprotkb"      ,\
 			    /*Def 2*/    "default"      ,\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
@@ -3845,11 +3802,6 @@ get_cl_param(\
 /*******************************************************************************************************/
 
 
-
-	       
-
-
-
 	       /**
 	        * If T-Coffee is invoked without any arguments,
 	        * it displays the available method names through ::display_method_names and exits.
@@ -3862,59 +3814,6 @@ get_cl_param(\
 	       get_cl_param( argc, argv,&le, NULL,NULL,NULL,0,0,NULL);
 	       prepare_cache (cache);
 
-/*******************************************************************************************************/
-/*                                                                                                     */
-/*                           TCoffee clean mode                                                        */
-/*                                                                                                     */
-/*******************************************************************************************************/
-	       
-	       if (!strstr (clean_list, "no"))
-		 {
-		   char command[10000];
-		   if (strstr (clean_list, "all") || strstr (clean_list, "cache"))
-		     {
-		       sprintf (command, "rm -rf %s", getenv ("CACHE_4_TCOFFEE")); 
-		       if ( !strstr (command, "cache"))
-			 {
-			   fprintf ( stderr, "For security reasons the cache dir must contain the string cache.\n Your cached data seems to be stored in [%s]\nYou must delete it manually.",getenv ("CACHE_4_TCOFFEE")); 
-			 }
-		       else
-			 {
-			   HERE ("%s",command);
-			   system (command);
-			 }
-		     }
-		   if (strstr (clean_list, "all") || strstr (clean_list, "lock"))
-		     {
-		       
-		       sprintf (command, "rm -rf %s", getenv ("LOCKDIR_4_TCOFFEE")); 
-		       if ( !strstr (command, "lck") &&!strstr (command, "lock")  )
-			 {
-			   fprintf ( stderr, "For security reasons the cache dir must contain the string lck.\n Your lock data seems to be stored in [%s]\nYou must delete it manually.",getenv ("LOCKDIR_4_TCOFFEE")); 
-			 }
-		       else
-			 {
-			   HERE ("%s",command);
-			   system (command);
-			 }
-		       
-		     }
-		   if (strstr (clean_list, "all") || strstr (clean_list, "tmp"))
-		     {
-		       sprintf (command, "rm -rf %s", getenv ("ROOT_TMP_4_TCOFFEE"));
-		       if ( !strstr (command, "tmp"))
-			 {
-			   fprintf ( stderr, "For security reasons the tmp dir must contain the string tmp.\n Your tmp data seems to be stored in [%s]\nYou must delete it manually.",getenv ("ROOT_TMP_4_TCOFFEE")); 
-			 }
-		       else
-			 {
-			   HERE ("%s",command);
-			   system (command);
-			 }
-		     }
-		   exit (EXIT_SUCCESS);
-		 }
-	       
 /*******************************************************************************************************/
 /*                                                                                                     */
 /*                           FILL list_file (contains seq, aln and meth)                               */
@@ -6174,14 +6073,14 @@ char** km_coffee (int argc, char **argv)
 
 
 	if (strm (km_mode, "km_fast"))
-	{
-		if (method == NULL)
+	{	printf("IT USED TO BE KM-COFFEE! NOW IT IS REPLACED BY TEA! FIX ME!!!\n\n");
+		/*if (method == NULL)
 			strcpy(method,"proba_pair");
 		if (km_init == NULL)
 			strcpy(km_init, "distributed");
 		if (k_leaf==0)
 			k_leaf=k;
-		km_coffee_align3(seq_f, k, k_leaf, method, out_f, n_core, gapopen, gapext, km_init );
+		km_coffee_align3(seq_f, k, k_leaf, method, out_f, n_core, gapopen, gapext, km_init );*/
 	}
 	else
 	{
