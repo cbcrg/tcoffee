@@ -8,7 +8,7 @@
 # $OSNAME	: the target platform name i.e. linux, macosx, windows		
 # $OSARCH	: the target platform architecture i.e. i386, x64
 # $BUILD_REPO   : (optional) shared path to cache thirdy parts tools compiled binaries
-# $SVN_REVISION : (optional) the svn revision used to mark this buld
+# $GIT_REVISION : (optional) the svn revision used to mark this buld
 # $VERSION 	: (optional) the version used to tag this build
 # $BUILD_REPO	: (optional) the path where compiled binaries will be cached
 # $USER_BIN	: (deprecated) path where store binary to be used 
@@ -24,21 +24,16 @@
 # 
 export RELEASE=${RELEASE:-0}
 
-#
-# The SVN root path
-# 
-export SVN_BASE=http://tcoffee.googlecode.com/svn/tcoffee/trunk
-
 
 #
 # default SVN revision number 
 #
-if [ -z $SVN_REVISION ]; then 
-SVN_REVISION=`svn info $SVN_BASE | grep "Last Changed Rev:" | awk '{ print $4 }'`
+if [ -z $GIT_REVISION ]; then 
+GIT_REVISION=`( cd $WORKSPACE/tcoffee; git rev-parse --short HEAD; )`
 fi
 
-if [ $SVN_REVISION == "" ]; then 
-  echo 'Missing $SVN_REVISION value. Cannot continue the build process.' 
+if [ "$GIT_REVISION" == "" ]; then 
+  echo 'Missing $GIT_REVISION value. Cannot continue the build process.' 
   exit 1
 fi
 
@@ -53,7 +48,7 @@ fi
 # Define the VERSION number 
 #
 if [[ (-z $VERSION) || ($VERSION == auto) ]]; then 
-	export VERSION="`cat $WORKSPACE/tcoffee/lib/version_number.version`.r$SVN_REVISION"
+	export VERSION="`cat $WORKSPACE/tcoffee/lib/version_number.version`.$GIT_REVISION"
 fi
 
 #
@@ -67,7 +62,7 @@ fi
 # BUILD_INFO
 #
 if [ -z $BUILD_INFO ]; then 
-export BUILD_INFO="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION - Build $BUILD_NUMBER"
+export BUILD_INFO="`date +"%Y-%m-%d %H:%M:%S"` - Revision $GIT_REVISION - Build $BUILD_NUMBER"
 fi
 
 
@@ -87,10 +82,10 @@ fi
 # default install builder location 
 #
 if [ -z $INSTALLER ]; then 
-	INSTALLER=~/installbuilder-7.2.0/bin/builder
+	INSTALLER=~/installbuilder/bin/builder
 	if [ $OSNAME == "macosx" ]
 	then
-	INSTALLER=~/InstallBuilder-7.2.0/bin/Builder.app/Contents/MacOS/installbuilder.sh
+	INSTALLER=~/installbuilder/bin/Builder.app/Contents/MacOS/installbuilder.sh
 	fi
 fi
 
@@ -170,7 +165,7 @@ function env()
   echo "- RELEASE     : $RELEASE"
   echo "- BUILD_INFO  : $BUILD_INFO"
   echo "- BUILD_REPO  : $BUILD_REPO"
-  echo "- SVN_REVISION: $SVN_REVISION"
+  echo "- GIT_REVISION: $GIT_REVISION"
   echo "- USER_BIN    : $USER_BIN"
   echo ". SANDBOX     : $SANDBOX"
   echo ". _SRC        : $_SRC"
@@ -295,7 +290,7 @@ function build_binaries()
 	cd $UNTARED
 	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
     
-    # Check that the binary has successfully compiled 
+	# Check that the binary has successfully compiled 
 	if [ ! -f $TCDIR/bin/t_coffee ] 
 	then 
 		echo "Target 't_coffee' binary has not been compiled"
@@ -304,8 +299,11 @@ function build_binaries()
     
     
 	# add perl modules 
-	cp -r $PERLM/lib/perl5/ $TCDIR/perl
-	
+	#cp -r $PERLM/lib/perl5/ $TCDIR/perl
+	mkdir -p $TCDIR/perl
+	cp $WORKSPACE/tcoffee/build/cpanm  $TCDIR/perl	
+        chmod +x $TCDIR/perl/cpanm
+
 	# add gfortran libraries
 	if [ $OSNAME == "macosx" ] 
 	then 
@@ -382,12 +380,6 @@ function pack_binaries() {
 }
 
 
-function svn_tag() 
-{
-  echo "[ svn_tag ]"
-
-  svn copy https://tcoffee.googlecode.com/svn/tcoffee/trunk https://tcoffee.googlecode.com/svn/tcoffee/tags/$VERSION -m "Tagging $VERSION" --username $_G_USR --password $_G_PWD
-}
 
 function build_and_pack_stable() {
 	echo "[ build_and_pack_stable ]"
@@ -404,7 +396,7 @@ function build_and_pack_debug() {
 	
 	export CFLAGS="-g -O1"
 	export INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"_debug
-	export DATE="`date +"%Y-%m-%d %H:%M:%S"` - Revision $SVN_REVISION - DEBUG"
+	export DATE="`date +"%Y-%m-%d %H:%M:%S"` - Revision $GIT_REVISION - DEBUG"
 	
 	build_binaries	
 	pack_binaries
@@ -442,7 +434,6 @@ function tcoffee() {
 	env
 	clean
 	build_dist
-	build_perlm
 	
 	build_and_pack_stable
 	build_and_pack_debug
@@ -470,4 +461,5 @@ else
     echo "Usage: build <target>"
     exit 1
 fi
+
 
