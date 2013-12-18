@@ -308,9 +308,9 @@ function build_binaries()
 	if [ $OSNAME == "macosx" ] 
 	then 
 		mkdir -p $TCDIR/gfortran
-		cp /usr/local/Cellar/gfortran/4.8.2/gfortran/lib/libgfortran.3.dylib $TCDIR/gfortran
-		cp /usr/local/Cellar/gfortran/4.8.2/gfortran/lib/libgfortran.a $TCDIR/gfortran
-		cp /usr/local/Cellar/gfortran/4.8.2/gfortran/lib/libgfortran.la $TCDIR/gfortran
+		cp /usr/local/gfortran/lib/libgfortran.3.dylib $TCDIR/gfortran
+		cp /usr/local/gfortran/lib/libgfortran.a $TCDIR/gfortran
+		cp /usr/local/gfortran/lib/libgfortran.la $TCDIR/gfortran
 	fi
 	
 	#
