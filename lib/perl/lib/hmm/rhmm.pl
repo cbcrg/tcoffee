@@ -6,7 +6,6 @@ use Data::Dumper;
 use strict;
 use FileHandle;
 
-
 srand();
 my $TAG=0;
 my $BIN=0;
@@ -57,6 +56,7 @@ if ($#ARGV ==-1)
     print "  ................................Mode: 'viterbi'   evaluate viterbi path predictions,\n";
     print "  ................................NOTE: RST field must be set in data.\n";
     print "  ................................NOTE: RST field declares the reference sate of each data item.\n";
+    print "  -evaluation  <mode>.............Mode: 'sequence' evaluates the probability of a sequence of observations\n";
     print "****************** Data Format **************************\n";
     print "  Raw Data\n";
     print "  #d;<exp>;<record id>;bin;<emission bin>;\n";
@@ -152,6 +152,11 @@ elsif ($param->{action} eq "decode")
     check_data ($Data, "data", $Model, "model");
     ($Data,$P)=decode ($Model, $Data, $param);
   }
+elsif ($param->{evaluation} eq "sequence")
+  {    
+    check_data ($Data, "data", $Model, "model");
+    $P = &seq2proba ($Model, $Data, $param);	  
+  }
 elsif  ($param->{action} eq "convert")
   {
     ;
@@ -174,9 +179,10 @@ if ($Data && $param->{outdata} ne "no")
       if ($param->{evaluate})
 	{
 	  data2recode_on_RST ($Data,$Model, "viterbi");
-	  my $sc1=data2evaluation  ($Data, $param->{evaluate});
-	  my $sc2=data2evaluation2 ($Data, $Model,$param->{evaluate});
-	  printf "      Data Pred   : sc1=%.2f sc2=%.2f\n", $sc1,$sc2;
+    my $sc1=data2evaluation  ($Data, $param->{evaluate});
+    my $sc2=data2evaluation2 ($Data, $Model,$param->{evaluate});
+    printf "      Data Pred   : sc1=%.2f sc2=%.2f\n", $sc1,$sc2;
+	   	  
 	}
       
       if (!$param->{output} || $param->{output} eq "data")
@@ -205,6 +211,13 @@ if ($Model && $param->{outmodel} ne "no")
       }
     dump_constraints($Model,$param->{outconstraints}, hash2string($param, "-"));
   }
+
+if ($P && $param->{outEval} ne "no")
+  {
+    printf "   Forward eval: log (P)  $param->{outEval}\n";
+    dump_evalForward ($P, $param->{outEval});
+  }
+  
 exit (0);
 
 
@@ -236,6 +249,7 @@ sub set_output_name
     
     if (!$param->{outdata})       {$param->{outdata}       ="$param->{out}.rhmm.$nst\_$nem.decoded";}
     if (!$param->{outmodel})      {$param->{outmodel}      ="$param->{out}.rhmm.$nst\_$nem.model";}
+    if (!$param->{outEval})      {$param->{outEval}      ="$param->{out}.rhmm.$nst\_$nem.eval";}
     if (!$param->{outmodel_with_zero})      {$param->{outmodel_with_zero}      ="$param->{out}.rhmm.$nst\_$nem.model_zero";}
     if (!$param->{outconstraints}){$param->{outconstraints}="$param->{out}.rhmm.$nst\_$nem.constraints";}
     
@@ -273,8 +287,10 @@ sub check_parameters
     $rp->{nit}=1;
     $rp->{outdata}=1;
     $rp->{outmodel}=1;
+    $rp->{outEval}=1;
     $rp->{outmodel_format}=1;
     $rp->{evaluate}=1;
+    $rp->{evaluation}=1;
     $rp->{output}=1;
     $rp->{out}=1;
     $rp->{single}=1;
@@ -653,20 +669,115 @@ sub baum_welch_iteration
 #                                                                  #
 #                                                                  #
 ####################################################################    
+sub seq2proba
+  {
+    my $M=shift;
+    my $D= shift;
+    my $p=shift;
+
+    if ($p->{c}) 
+      {
+    	($P) = forward_C ($M,$D,$p);
+      }
+    else 
+      {
+        my $f;
+        $P = seq2probaL ($M,$D);
+        print "******** Result forward: log(P)= $P";
+      } 
+    $param->{outdata} = "no";
+    return ($P); 
+  }
+  
 sub seq2probaL
   {
     my $M=shift;
     my $S=shift;
+    $M=model2modelL($M);
     
     my $TP;
 
     for my $j (keys(%$S))
       {
-	my ($P, $f)=forwardL($M, $S->{$j});
-	$TP+=$P;
+	     my ($f,$P)=forwardL($M, $S->{$j});
+
+	     $TP+=$P;
       }
     return $TP;
+
   }
+
+sub forwardL 
+  {    
+    my $M=shift;    
+    my $S=shift;
+    my $f={};
+    my $P;
+    my $L=keys(%$S);
+
+    foreach my $k (keys(%$M)){$f->{0}{$k}=0;}
+      
+    for (my $i=1; $i<=$L; $i++)
+	   {
+	     foreach my $l (keys(%$M))
+	       {
+
+	         $f->{$i}{$l}=$LOG_ZERO;
+	         my $emit=(!exists($M->{$l}{$S->{$i}{bin}}{v}))?$LOG_ZERO:$M->{$l}{$S->{$i}{bin}}{v};
+	         foreach my $k (keys(%$M))
+		        {
+#		  my $v = log_multiply ($f->{$i-1}{$k},$M->{$k}{$l}{v}); print ";;;;;;$f->{$i-1}{$k};;;;;;;;$M->{$k}{$l}{v};;;;;;;;$v\n";#tag2del
+		          $f->{$i}{$l}=log_add($f->{$i}{$l}, log_multiply ($f->{$i-1}{$k},$M->{$k}{$l}{v}));
+		        }
+	         $f->{$i}{$l}=log_multiply($f->{$i}{$l},$emit);
+
+	       }
+     }
+ 
+      $P=$LOG_ZERO;
+      foreach my $k (keys (%$M))
+	     {
+	       $P=log_add ($P, $f->{$L}{$k});
+	     }
+      
+      return ($f,$P);
+    }
+    
+#forward_C ($M,$D,$p)
+sub forward_C
+  {
+    my $M=shift;
+    my $D=shift;
+    my $p=shift;
+    my ($P,$VP,$PP, $pEvalFor);
+    my $mfile="$$.model.m4c";
+    my $dfile="$$.data.d4c";
+    my $cfile="$$.constraint.4dc";
+    my $nmfile="$$.new.m4c";
+        
+    my $I=model2index($M);
+    if ($p->{c} eq "1"){$p->{c}="rhmmC";}
+    dump_data_C ($D, $I,$dfile);
+    dump_model_C($M,$I,$mfile,$cfile);
+    
+    print "RUN $p->{c}\n";
+    print "$p->{c} ev $dfile $mfile $nmfile $cfile\n";
+    
+    system ("$p->{c} ev $dfile $mfile $nmfile $cfile\n");
+    
+    if (!-e "$nmfile.eval")
+      {
+	     print "ERROR: $p->{c} is Not properly installed--- Will run the Perl version (100X slower)\n";
+	     $M=model2modelL($M);
+	     return forwardL ($D,$M,$p);
+      }
+    
+    $pEvalFor = undump_evalForward_C ("$nmfile.eval");
+
+    unlink (($dfile,$mfile,$cfile, $nmfile,"$nmfile.eval"));
+    return ($pEvalFor);
+  }
+    
 sub posteriorL
     {
       my $M=shift;
@@ -705,40 +816,6 @@ sub posteriorL
       }
    return ($S,0);
  }
-sub forwardL 
-    {
-      my $M=shift;
-      my $S=shift;
-      my $f={};
-      my $P;
-      my $L=keys(%$S);
-
-      foreach my $k (keys(%$M)){$f->{0}{$k}=0;}
-      
-      for (my $i=1; $i<=$L; $i++)
-	{
-	  foreach my $l (keys(%$M))
-	    {
-
-	      $f->{$i}{$l}=$LOG_ZERO;
-	      my $emit=(!exists($M->{$l}{$S->{$i}{bin}}{v}))?$LOG_ZERO:$M->{$l}{$S->{$i}{bin}}{v};
-	      foreach my $k (keys(%$M))
-		{
-		  $f->{$i}{$l}=log_add($f->{$i}{$l}, log_multiply ($f->{$i-1}{$k},$M->{$k}{$l}{v}));
-		}
-	      $f->{$i}{$l}=log_multiply($f->{$i}{$l},$emit);
-	    }
-	}
-
-      
-      $P=$LOG_ZERO;
-      foreach my $k (keys (%$M))
-	{
-	  $P=log_add ($P, $f->{$L}{$k});
-	}
-      
-      return ($f,$P);
-    }
 
 sub backwardL 
     {
@@ -2135,6 +2212,18 @@ sub undump_posterior_C
       }
     return ($d,$P);
   }
+  
+sub undump_evalForward_C
+  {
+
+    my $file=shift;
+    my $F=new FileHandle;
+        
+    vfopen ($F, "$file");
+    my $cl=<$F>;
+    close ($F);
+    return ($cl);
+  }  
 
 sub dump_data
       {
@@ -2254,6 +2343,21 @@ sub dump_seq
       }
     close ($F);
   }
+
+sub dump_evalForward
+  {
+	my $P =shift;
+	my $file =shift;
+	my $F= new FileHandle;
+
+	vfopen ($F, ">$file");
+
+	print $F "$P";
+
+	print $F "\n";
+	close ($F);
+   }
+      
 ####################################################################
 #                                                                  #
 #                                                                  #

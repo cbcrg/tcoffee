@@ -64,6 +64,7 @@ double  forward   (Hmm *H);
 double  backward  (Hmm *H);
 double  posterior (Hmm *H);
 double  decode    (Hmm *H);
+double  evaluationForward (Hmm *H);
 //IO
 
 double **undump_model (char *file, Hmm*H);
@@ -73,6 +74,7 @@ int     *undump_seq(char *file, Hmm *L);
 int dump_model    (Hmm *H);
 int dump_viterbi  (Hmm *H);
 int dump_posterior(Hmm *H);
+int dump_evalForward (Hmm *H);
 
 
 //MATH
@@ -83,9 +85,12 @@ double  log_divide(double x, double y);
 double  log_add (double x, double y);
 double  mylog(double x);
 double  myexp(double y);
+
 //Conversion
 double **model2modelR(Hmm*H);
 int model2pruned_model (Hmm*H);
+double **model2modelL(Hmm*H);
+
 //Declare
 double **declare_double (int x, int y);
 int    **declare_int    (int x, int y);
@@ -122,6 +127,11 @@ main (int argc, char *argv[])
       H->nit=atoi(argv[7]);
       baum_welch_Ntrain (H);
     }
+  else if (strcmp(argv[1], "ev")==0)
+  	{
+	  undump_cmodel (argv[5],H);
+	  evaluationForward (H);
+  	}
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -155,6 +165,28 @@ double analyze_stability (int **T,int nr,int L, int n)
 	}
     }
   return sc/tot;
+}
+
+/////////////////////////////////////////////////////////////////////////////
+//                                                                         //
+//                                                                         //
+//                                Evaluation                               //
+//                                                                         //
+//                                                                         //
+/////////////////////////////////////////////////////////////////////////////
+double evaluationForward(Hmm*H)
+{
+  double P;
+
+  UNPACK_HMM(H);
+  model2modelL (H);
+
+  if (isnan(H->P=forward (H)))return LOG_ZERO;
+//  fprintf (stderr, "---- SUMMARY: Best: %10.3f STABILITY: %.3f\n", bP,analyze_stability (stab,nrounds, L, 100));
+  fprintf (stderr, "******** Result forward: log(P)= %2.3f\n", H->P);
+  dump_evalForward (H);
+  return P;
+
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -529,6 +561,8 @@ int model2pruned_model (Hmm*H)
     }
   return t;
 }
+
+//model to model random
 double **model2modelR(Hmm*H)
 {
   
@@ -569,7 +603,24 @@ double **model2modelR(Hmm*H)
   return M;
 }
 
-      
+//moldel2modelL
+double **model2modelL(Hmm*H)
+{
+	int k,l;
+	UNPACK_HMM(H);
+
+	for (k=0; k<ns; k++)
+		{
+	      for (l=0; l<(ns+ne); l++)
+	      	  {
+	    	  	  M[k][l]=mylog(M[k][l]);
+	      	  }
+	    }
+
+	return M;
+
+}
+
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -716,6 +767,21 @@ int dump_viterbi    (Hmm *H)
   fprintf (fp, "%d %.3lf ",H->L, H->VP);
   for (a=1; a<=H->L; a++)
     fprintf ( fp, "%d ",H->VT[a]);
+  return fclose (fp);
+}
+
+int dump_evalForward (Hmm *H)
+{
+  FILE *fp;
+  UNPACK_HMM(H);
+  char file[1000];
+
+  sprintf (file, "%s.eval",H->out);
+  fp=fopen (file, "w");
+//  int a, b;
+
+  fprintf (fp, "%8.5f", H->P);
+
   return fclose (fp);
 }
 /////////////////////////////////////////////////////////////////////////////
