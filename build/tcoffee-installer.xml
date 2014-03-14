@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <project>
     <shortName>tcoffee</shortName>
     <fullName>T-Coffee</fullName>
@@ -85,7 +86,7 @@
 	<addEnvironmentVariable>
             <name>PERL5LIB</name>
             <scope>user</scope>
-            <value>$PERL5LIB:$DIR_4_TCOFFEE/perl</value>
+            <value>$PERL5LIB:$DIR_4_TCOFFEE/perl/lib/perl5</value>
         </addEnvironmentVariable>
 
 	<!-- Append DYLD_LIBRARY_PATH if already exists (only on OSX) -->
@@ -122,6 +123,13 @@
         <createDirectory>
             <path>${installdir}/tmp</path>
         </createDirectory>
+
+        <runProgram>
+            <abortOnError>0</abortOnError>
+            <program>${installdir}/perl/cpanm</program>
+            <programArguments>-q -n -l ${installdir}/perl SOAP::Lite XML::Simple</programArguments>
+        </runProgram>
+
     </postInstallationActionList>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
@@ -153,13 +161,13 @@
                             <origin>${tcdir}/methods</origin>
                         </distributionDirectory>
                         <distributionDirectory>
-                            <origin>${tcdir}/perl</origin>
-                        </distributionDirectory>
-                        <distributionDirectory>
                             <origin>${tcdir}/plugins</origin>
                         </distributionDirectory>
                         <distributionDirectory>
                             <origin>${tcdir}/src</origin>
+                        </distributionDirectory>
+                        <distributionDirectory>
+                            <origin>${tcdir}/perl</origin>
                         </distributionDirectory>
                     </distributionFileList>
                 </folder>

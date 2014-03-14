@@ -890,7 +890,9 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
       return OUT;
     }   
 
-/*int  sp_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, char *fname)
+
+
+int  sp_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, char *fname)
     {
       int **pos;
       int s1, s2, s3, s4;
@@ -965,16 +967,17 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
 			    }
 			}  
 		    }
-		  fprintf ( fp, "lalla %d %d %d %.3f\n", a+1, b+1, c+1, (tw>0)?pw/tw:0); 
+		  fprintf ( fp, "%d %d %d %.3f\n", a+1, b+1, c+1, (tw>0)?pw/tw:0); 
 		}
 	    }
 	}
       vfclose (fp);
       return 1;
-    } */  
-    
-//Maria change
-int  sp_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, char *fname)
+    }  
+
+
+
+int  sp_triplet_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, char *fname)
     {
       int **pos;
       int s1, s2, s3, s4;
@@ -984,15 +987,16 @@ int  sp_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, char
       FILE *fp;
      
       fp=vfopen (fname, "w");
+      save_list_header( fp, CL);
       pos=aln2pos_simple(IN, IN->nseq);
       
-	for (b=0; b<IN->nseq-1; b++)		//---> gia ka8e seq
+	for (b=0; b<IN->nseq-1; b++)		//---> for every seq
 	 {
 	    for (c=b+1; c<IN->nseq; c++)
 	     {
 		fprintf ( fp, "#%d %d \n", b+1, c+1); 
 		
-		for (a=0; a<IN->len_aln; a++)	//---> gia aa kata mikos tou mikous lol :P
+		for (a=0; a<IN->len_aln; a++)	//---> for every aa in a seq
 		 {
 		  output_completion (stderr,a,IN->len_aln,1, "Final SP Evaluation");
 		  
@@ -1051,7 +1055,7 @@ int  sp_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, char
 			    }
 			}  
 		    }
-		  fprintf ( fp, "%5d %5d     %.3f\n", r1, r2, (tw>0)?pw/tw:0); 
+		  fprintf ( fp, "%5d %5d     %.0f\n", r1, r2, ((tw>0)?pw/tw:0)*1000 ); 
 		}
 	    }
 	}
