@@ -1,1 +1,0 @@
-/var/www/cgi-bin/tcoffee/Tcoffee/tcoffee_cgi/configuration_file.txt

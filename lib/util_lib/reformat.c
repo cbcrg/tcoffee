@@ -2705,38 +2705,145 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		output_clustal_aln ( out_file, D1->A);
 	      }
 
+	else if ( strstr (out_format, "tcs"))
+	  {
+	    int target;
+	    int action;
+	    char *p;
+	    int value, c, s, filter;
+	    Alignment *A, *EA;
+
+	    if (!D1)return 1;
+	    if ( !DST)
+	      {
+		fprintf ( stderr,"\n[You Need an evaluation File: Change the output format][FATAL:%s]\n", PROGRAM);
+		myexit(EXIT_FAILURE);
+	      }
+	    
+	    EA=(DST->A)=aln2number (DST->A);
+	    A=D1->A;
+	    
+	    if (strstr (out_format, "residue"))target=0;
+	    else target=1;
+
+	    p=NULL;
+	    if      (p=strstr (out_format, "filter")){action=0;p+=strlen ("filetr");}
+	    else if (p=strstr (out_format, "lower")){action=1;p+=strlen("lower");}
+	    else if (p=strstr (out_format, "weighted")){action=2; p=NULL;}
+	    else if (p=strstr (out_format, "replicate")){action=3; p+=strlen ("replicate");}
+	    else action=1;
+	    
+	    if (p && p[0])sscanf (p, "%d", &filter);
+	    else filter=3;
+	    
+	    if (action==2 || action ==3)
+	      {
+		Alignment *B;
+		if ( check_file_exists (out_file))remove (out_file);
+		
+		B=declare_aln2 (A->nseq, A->len_aln*10);
+		B=copy_aln (A, B);
+		B->len_aln=0;
+		for (c=0; c<A->len_aln; c++) 
+		  {
+		    int vc=EA->seq_al[A->nseq][c];
+		    int n;
+		    
+		    for (n=0; n<=vc; n++, B->len_aln++)
+		      {
+			for (s=0; s<A->nseq; s++)
+			  B->seq_al[s][B->len_aln]=A->seq_al[s][c];
+		      }
+		  }
+		if (action==2)output_phylip_aln ( out_file,B);
+		else if (action==3)
+		  {
+		    Alignment *C;
+		    int a, b, pos, c;
+		    
+		    
+		    C=copy_aln (A, NULL);
+		    if (filter==3)filter=100;
+		    for (a=0; a<filter; a++)
+		      {
+			for (b=0; b<A->len_aln; b++)
+			  {
+			    pos=(int)rand()%B->len_aln;
+			    for (c=0; c<A->nseq; c++)
+			      C->seq_al[c][b]=B->seq_al[c][pos];
+			  }
+			output_phylip_aln ( out_file,C);
+		      }
+		    free_aln(C);
+		  }
+		free_aln (B);
+	      }
+	    else
+	      {
+		    
+		for (c=0; c<A->len_aln; c++)
+		  for (s=0;s<A->nseq; s++)
+		    {
+		      int vr=EA->seq_al[s][c];
+		      int vc=EA->seq_al[A->nseq][c];
+		      int res=A->seq_al[s][c];
+		      
+		      if (is_gap(res))continue;
+		      else if (target==0)
+			{
+			  if      (action==0 && vr<filter)A->seq_al[s][c]='-';
+			  else if (action==1)
+			    {
+			      A->seq_al[s][c]=toupper (A->seq_al[s][c]);
+			      if ( vr<filter)A->seq_al[s][c]=tolower (A->seq_al[s][c]);
+			    }
+			}
+		      else if (target ==1)
+			{
+			  if      (action==0 && vc<filter)A->seq_al[s][c]='-';
+			  else if (action==1)
+			    {
+			      A->seq_al[s][c]=toupper (A->seq_al[s][c]);
+			      if ( vc<filter)A->seq_al[s][c]=tolower (A->seq_al[s][c]);
+			    }
+			}
+		      output_clustal_aln ( out_file, D1->A);
+		    }
+	      }
+	  }
 	else if ( strm4 ( out_format, "filter0", "filter1", "filter2", "filter3"))
-	       {
-	       if (!D1)return 1;
-	       if ( !DST)
-		   {
-		   fprintf ( stderr,"\n[You Need an evaluation File: Change the output format][FATAL:%s]\n", PROGRAM);
-		   myexit(EXIT_FAILURE);
-		   }
-
-	       (DST->A)=aln2number (DST->A);
-
-	       D1->A=filter_aln (D1->A, DST->A, atoi(out_format+6));
-	       output_clustal_aln ( out_file, D1->A);
-	       }
-
+	  {
+	    if (!D1)return 1;
+	    if ( !DST)
+	      {
+		fprintf ( stderr,"\n[You Need an evaluation File: Change the output format][FATAL:%s]\n", PROGRAM);
+		myexit(EXIT_FAILURE);
+	      }
+	    
+	    (DST->A)=aln2number (DST->A);
+	    
+	    D1->A=filter_aln (D1->A, DST->A, atoi(out_format+6));
+	    output_clustal_aln ( out_file, D1->A);
+	  }
+	
 	else if ( strm3 ( out_format, "phylip_aln", "phylip", "phy"))
-		{
-		if (!D1)return 1;
-		output_phylip_aln ( out_file, D1->A);
-		}
+	  {
+	    if (!D1)return 1;
+	    if ( check_file_exists (out_file))remove (out_file);
+	    output_phylip_aln ( out_file, D1->A);
+	  }
 	else if ( strm ( out_format, "mocca_aln"))
-	        {
-		if (!D1)return 1;
-		output_mocca_aln ( out_file, D1->A, DST->A);
-		}
+	  {
+	    if (!D1)return 1;
+	    output_mocca_aln ( out_file, D1->A, DST->A);
+	  }
 	else if ( strm ( out_format, "saga_pw_sd_weights") )
-		{
-		if (!D1)return 1;
-		output_pw_weights4saga ((D1->W),(D1->W)->PW_SD, out_file);
-		}
+	  {
+	    if (!D1)return 1;
+	    output_pw_weights4saga ((D1->W),(D1->W)->PW_SD, out_file);
+	  }
 	else if ( strm ( out_format, "saga_aln"))
-		{
+	  {
 		if (!D1)return 1;
 		output_saga_aln (out_file, D1->A);
 		}
@@ -7453,17 +7560,19 @@ void output_phylip_aln ( char *name, Alignment *B)
     int *print_name;
     static int line=0;
     line=get_msa_line_length(0, 0);
-
+    line=60;
+    
     print_name=(int*)vcalloc ( B->nseq, sizeof (int));
-    fp= vfopen ( name, "w");
-
-    fprintf (fp, "%3d %d\n", B->nseq, B->len_aln);
+    if (check_file_exists(name)) fp= vfopen ( name, "a");//make it possible to output replicates
+    else fp= vfopen ( name, "w");
+    
+    fprintf (fp, "%5d  %d\n", B->nseq, B->len_aln);
     for (a=0; a<B->len_aln; a+=line)
 	   {for (b=0; b<B->nseq; b++)
 	     {if ( print_name[b]==0)
 	     	{
 
-		  fprintf (fp,"%-10.10s  ",B->name[b]);
+		  fprintf (fp,"%-10.10s ",B->name[b]);
 		  print_name[b]=1;
 		}
 	       else

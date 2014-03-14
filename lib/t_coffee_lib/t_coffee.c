@@ -1983,7 +1983,7 @@ if ( !do_evaluate)
 			    /*TYPE*/      "S"            ,\
 			    /*OPTIONAL?*/ OPTIONAL       ,\
 			    /*MAX Nval*/  200              ,\
-			    /*DOC*/       "Specifies one or many formats that must be output: clustalw_aln, msf_aln. The file extension is the output format"           ,\
+			    /*DOC*/       "Specifies one or many formats that must be output: clustalw_aln, msf_aln, tcs_[residue,column][0-9]_[filter,lower], tcs_[weighted,replicate][Nreplicates],sp_ascii, score_ascii . The file extension is the output format"           ,\
 			    /*Parameter*/ out_aln_format,\
 			    /*Def 1*/    "aln,html"           ,\
 			    /*Def 2*/    "1"             ,\

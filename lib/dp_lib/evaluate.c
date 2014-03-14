@@ -207,6 +207,7 @@ Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, co
 {
   
   /*Make sure evaluation functions update their cache if needed*/
+ 
   IN=update_aln_random_tag (IN);
   
   if ( CL->evaluate_residue_pair==evaluate_matrix_score || CL->ne==0 ||strm ( mode , "categories") || strm ( mode , "matrix")|| strm(mode, "sar")|| strstr (mode, "boxshade") )
@@ -227,6 +228,7 @@ Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, co
      }
    else if ( strstr ( mode, "fast"))
      {
+      
        return fast_coffee_evaluate_output ( IN,CL);
      }
    else if ( strstr ( mode, "slow"))
@@ -615,7 +617,7 @@ Alignment * triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
   
   if (!IN || !CL || !CL->residue_index) return IN;
   
-  if ( get_nproc()==1)return  nfork_triplet_coffee_evaluate_output (IN,CL);
+  if (get_nproc()==1)return  nfork_triplet_coffee_evaluate_output (IN,CL);
   else if (strstr ( CL->multi_thread, "evaluate"))return  fork_triplet_coffee_evaluate_output (IN,CL,get_nproc());
   else return fork_triplet_coffee_evaluate_output (IN,CL,1);
 }
@@ -710,7 +712,8 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 			    }
 			}
 		      res=(max_res==0)?NO_COLOR_RESIDUE:((score_res*10)/max_res);
-		      res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+		      //res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+		      res=MIN(res,9);
 		      fprintf ( fp, "%d ", res);
 		    }
 		  for (b=0; b<IN->nseq; b++)
@@ -721,9 +724,13 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 		    }
 		  
 		  res=(max_col==0)?NO_COLOR_RESIDUE:((score_col*10)/max_col);	
-		  res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+		  //res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+		  res=MIN(res,9);
+		  
 		  fprintf (fp, "%d ", res);
-		  for (b=0; b<IN->nseq; b++)fprintf (fp, "%f %f ", score_seq[b], max_seq[b]);
+		  
+		  for (b=0; b<IN->nseq; b++)
+		    fprintf (fp, "%f %f ", score_seq[b], max_seq[b]);
 		}
 	      fprintf (fp, "%f %f ", score_aln, max_aln);
 	      vfclose (fp);
@@ -745,8 +752,10 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 	    {
 	      for (b=0; b<=IN->nseq; b++)//don't forget the consensus
 		{
+
 		  fscanf (fp, "%d ", &res);
 		  OUT->seq_al[b][a]=res;
+		  
 		}
 	      for (b=0; b<IN->nseq; b++)
 		{
@@ -802,8 +811,7 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
       lu=declare_int (IN->nseq, IN->len_aln+1);
       
      
-      
-     
+          
       score_aln=max_aln=0;
       for (a=0; a<IN->len_aln; a++)
 	{
@@ -851,7 +859,8 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
 		    }
 		}
 	      res=(max_res==0)?NO_COLOR_RESIDUE:((score_res*10)/max_res);
-	      res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+	      //res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+	      res=MIN(res,9);
 	      OUT->seq_al[b][a]=res;
 	    }
 	  for (b=0; b<IN->nseq; b++)
@@ -862,7 +871,8 @@ Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list
 	    }
 	  
 	  res=(max_col==0)?NO_COLOR_RESIDUE:((score_col*10)/max_col);	
-	  res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+	  //res=(res==NO_COLOR_RESIDUE)?res:(MIN(res,9));
+	  res=MIN(res,9);
 	  OUT->seq_al[IN->nseq][a]=res;
 	}
       fprintf ( stderr, "\n");
