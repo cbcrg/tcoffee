@@ -44,7 +44,6 @@ int output_header_mat (int **mat, char *fname);
 int tree2nnode_unresolved (NT_node R, int *l);      			/* Is declared in tree_util.c */
 NT_node redundate (Sequence* S,NT_node T, char *seq, char *tree);	/* Is declared in util_make_tree_.c */
 int  sp_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, char *fname);  /* Is declared in evaluate.c */
-int  sp_triplet_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, char *fname);  /* Is declared in evaluate.c */
 /**************************************************************************************************/
 /*****************************    SEQ_REFORMAT     ******************************************/
 /**************************************************************************************************/
@@ -2363,7 +2362,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	else if ( strm (out_format, "sp_lib"))
 	  {
 	    if (!D1) return 1;
-	    sp_triplet_coffee_evaluate_output2 (D1->A, (D1->A)->CL, out_file);
+	    sp_triplet_coffee_evaluate_output (D1->A, (D1->A)->CL, out_file);
 	  }
 	else if (    ( strm (out_format, "aln2lib")))
 	  {
@@ -2796,7 +2795,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 			  else if (action==1)
 			    {
 			      A->seq_al[s][c]=toupper (A->seq_al[s][c]);
-			      if ( vr<filter)A->seq_al[s][c]=tolower (A->seq_al[s][c]);
+			      if ( vr<=filter)A->seq_al[s][c]=tolower (A->seq_al[s][c]);
 			    }
 			}
 		      else if (target ==1)
@@ -2805,7 +2804,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 			  else if (action==1)
 			    {
 			      A->seq_al[s][c]=toupper (A->seq_al[s][c]);
-			      if ( vc<filter)A->seq_al[s][c]=tolower (A->seq_al[s][c]);
+			      if ( vc<=filter)A->seq_al[s][c]=tolower (A->seq_al[s][c]);
 			    }
 			}
 		      output_clustal_aln ( out_file, D1->A);
