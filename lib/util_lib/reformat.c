@@ -756,10 +756,12 @@ int seq_reformat ( int argc, char **in_argv)
 
 /*STRUCTURE INPUT*/
 
-
+	
 	if ((D_ST=read_data_structure (struc_in_format, struc_in_file,RAD)))
 	    {
-
+	     
+	   
+	      
 	      if ( D_ST->CL)
 		{
 		  Constraint_list *CL;
@@ -773,11 +775,11 @@ int seq_reformat ( int argc, char **in_argv)
 		    }
 		  thread_seq_struc2aln (D_ST->A, D_ST->S);
 		}
-	      else if ( name_is_in_list ("cons", ((D_ST)->A)->name, ((D_ST)->A)->nseq, 100));
+	      else if ( name_is_in_list ("cons", ((D_ST)->A)->name, ((D_ST)->A)->nseq, 100)!=-1);
 	      else
 		{
-		  D_ST->A=copy_aln ( D1->A, D_ST->A);
-
+		  
+		  D_ST->A=copy_aln ( D1->A,NULL);
 		  thread_seq_struc2aln (D_ST->A, D_ST->S);
 		}
 	    }
@@ -2741,8 +2743,9 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		Alignment *B;
 		if ( check_file_exists (out_file))remove (out_file);
 		
-		B=declare_aln2 (A->nseq, A->len_aln*10);
-		B=copy_aln (A, B);
+		
+		B=copy_aln (A, NULL);
+		B=realloc_aln (B, B->len_aln*10+1);
 		B->len_aln=0;
 		for (c=0; c<A->len_aln; c++) 
 		  {
@@ -8051,6 +8054,7 @@ void thread_seq_struc2aln ( Alignment *A, Sequence *ST)
 					}
 				}
 			}
+	
 	cons=name_is_in_list ("Cons", ST->name, ST->nseq, 100);
 	if ( cons!=-1 && A->len_aln==strlen ( ST->seq[cons]))
 	  {
@@ -11229,7 +11233,11 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 
 	   DST->A=copy_aln (D1->A, NULL);
 	   DST->S=aln2seq(DST->A);
-	   if    (strm (action_list[1], "id2"))
+	   if (strm (action_list[1], "rna"))
+	     {
+	       sp3_evaluate (D1->A);
+	     }
+	   else if    (strm (action_list[1], "id2"))
 	     {
 	       fprintf ( stdout, "ID2: %d\n", aln2sim2(D1->A));
 	       exit (EXIT_SUCCESS);
@@ -12057,10 +12065,10 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm ( action, "thread_struc_on_aln"))
 	 {
 	   thread_seq_struc2aln ( D2->A, D1->S);
-	   D1->A=copy_aln(D2->A, D1->A);
-	   free_sequence ( D1->S, (D1->S)->nseq);
+	   D1->A=copy_aln(D2->A, NULL);
 	   D1->S=aln2seq (D1->A);
 	 }
+      
        else if ( strm (action, "sim_filter"))
 	 {
 	   D1->A=sim_filter (D1->A, action_list[1], ACTION (2));

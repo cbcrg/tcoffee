@@ -14,6 +14,73 @@
  * Contains several auxiliary functions for alignments and templates.
  */
 
+Alignment *sp3_evaluate (Alignment *A)
+{
+  int a, b, c, d, i;
+  int ***list;
+  int *npairs;
+  float score=0;
+  float max=0;
+  
+  npairs=(int*)vcalloc (A->nseq, sizeof (int));
+  list=  (int***)vcalloc   (A->nseq, sizeof (int**));
+  
+  for (a=0; a<A->nseq; a++)
+    {
+      list[a]=vienna2list (A->seq_al[a]);
+      for (i=0; i<A->len_aln; i++)A->seq_al[a][i]=-1;
+      
+      i=0;
+      while (list[a][i])
+	{
+	  npairs[a]++;
+	  A->seq_al[a][list[a][i][0]]=list[a][i][1];
+	  A->seq_al[a][list[a][i][1]]=list[a][i][0];
+	  i++;
+	}
+      for (b=0; b<A->len_aln; b++)
+	printf ("%3d ", A->seq_al[a][b]);
+      printf ("\n");
+    }
+  
+  
+
+  for (d=0,a=0; a<A->nseq-1; a++)
+    for (b=a+1; b<A->nseq; b++, d++)
+      {
+	float cscore=0;
+	for (c=0; c<A->len_aln; c++)
+	  {
+	    int r1=A->seq_al[a][c];
+	    int r2=A->seq_al[b][c];
+	    if (r1!=-1 && r1==r2)cscore++;
+	  }
+	max=MIN(npairs[a],npairs[b])*2;
+	score+=(max==0)?0:cscore/max;
+      }
+
+  for (score=0,d=0,a=0; a<A->nseq-1; a++)
+    for (b=a+1; b<A->nseq; b++, d++)
+      {
+	float cscore=0;
+	for (c=0; c<A->len_aln; c++)
+	  {
+	    int r1=A->seq_al[a][c];
+	    int r2=A->seq_al[b][c];
+	    if (r1!=-1 && r2!=-1 && r1==r2)cscore++;
+	  }
+	max=MIN(npairs[a],npairs[b])*2;
+	score+=(max==0)?0:cscore/max;
+      }
+
+  score=(score/(float)d)*1000;
+  A->score=(int)score;
+  HERE ("Score=%d", A->score);exit (0);
+  return A;
+  
+}
+		
+
 int aln_has_stockholm_structure (Alignment *A)
 {
   return name_is_in_list ("#=GC SS_cons", A->name, A->nseq, 100);

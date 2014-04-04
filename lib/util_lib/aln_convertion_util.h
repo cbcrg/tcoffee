@@ -17,7 +17,7 @@ int **    alifold_list2cov_list (Alignment *A, int **list);
 int ** update_RNAfold_list (Alignment *A, int **pos, int s, int **l);
 int ** vienna2list ( char *seq);
 Alignment *compare_RNA_fold ( Alignment *A, Alignment *B);
-
+Alignment *sp3_evaluate (Alignment *A);
 Alignment *alifold2analyze (Alignment *A, Alignment *ST, char *mode);
 Alignment *alifold2cov_aln (Alignment *A, int **l, int ug);
 Alignment *alifold2cov_stat (Alignment *A, int **l, int ug);
