@@ -58,7 +58,7 @@ Constraint_list * thread_pair  ( TC_method*M,char *seq, Constraint_list *CL);
 Constraint_list * thread_pair2 ( TC_method *M,int s1, int s2, Constraint_list *CL);
 Constraint_list * sap_pair (char *seq, char *weight, Constraint_list *CL);
 Constraint_list * lsqman_pair (char *seq, Constraint_list *CL);
-Constraint_list * rna_pair (TC_method *M , char *in_seq, Constraint_list *CL);
+Constraint_list * rnapdb_pair (TC_method *M , char *in_seq, Constraint_list *CL);
 
 /******************************************************************/
 /*                   GENERIC PAIRWISE METHODS                     */

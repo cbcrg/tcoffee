@@ -235,7 +235,10 @@ Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, co
      {
        return slow_coffee_evaluate_output ( IN,CL);
      }
-   
+   else if ( strstr (mode, "rna"))
+     {
+       return sp3_evaluate4tcoffee (IN, CL);
+     }
    else if ( strstr ( mode, "non_extended"))
      {
        return non_extended_t_coffee_evaluate_output ( IN,CL);
@@ -2446,10 +2449,8 @@ int residue_pair_extended_list4rna2 (Constraint_list *CL,int s1, int r1, int s2,
 {
   static Constraint_list *R;
 
-  
   if (!R)
     {
-      
       R=read_rna_lib (CL->S, CL->rna_lib);
       rna_lib_extension (CL,R);
 

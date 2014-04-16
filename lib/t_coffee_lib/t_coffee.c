@@ -5365,7 +5365,7 @@ get_cl_param(\
 		{
 		  S=display_seq_template_files (S);
 		}
-
+	      
 	      //fLUSH OUT THE NAME OF ALL THE FILES THAT HAVE BEEN PRODUCED
 
 	      le=display_output_filename (le, NULL, NULL, NULL, FLUSH);

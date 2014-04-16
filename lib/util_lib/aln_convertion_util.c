@@ -14,70 +14,398 @@
  * Contains several auxiliary functions for alignments and templates.
  */
 
-Alignment *sp3_evaluate (Alignment *A)
+Alignment *sp3_evaluate4tcoffee (Alignment *RNA, Constraint_list *CLin)
 {
   int a, b, c, d, i;
-  int ***list;
   int *npairs;
-  float score=0;
-  float max=0;
+
+  float **max_res_sc;
+  float **tot_res_sc;
+  float *max_seq_sc;
+  float *tot_seq_sc;
   
-  npairs=(int*)vcalloc (A->nseq, sizeof (int));
-  list=  (int***)vcalloc   (A->nseq, sizeof (int**));
+  float *max_col_sc;
+  float *tot_col_sc;
   
-  for (a=0; a<A->nseq; a++)
+  float tot_sc=0;
+  float max_sc=0;
+  Alignment *A, *OUT, *IN;
+  Sequence *ST;
+  Constraint_list *CL;
+  int **array;
+  int *lu;
+  if (CLin->rna_lib && check_file_exists (CLin->rna_lib)&& is_lib (CLin->rna_lib))CL=read_rna_lib (CLin->S, CLin->rna_lib);
+  else CL=CLin;
+  
+  ST=duplicate_sequence (CL->S);
+  
+  thread_seq_struc2aln (RNA,ST);
+  IN=copy_aln (RNA, NULL);
+  
+  A=copy_aln (IN, NULL);
+  OUT=copy_aln (IN, NULL);
+  
+  max_res_sc=declare_float (A->nseq, A->len_aln);
+  tot_res_sc=declare_float (A->nseq, A->len_aln);
+  
+  max_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  tot_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  
+
+  max_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  tot_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  
+  array=(int**)vcalloc(RNA->nseq, sizeof (int*));
+  lu=(int*)vcalloc (RNA->len_aln, sizeof (int));
+  for (a=0; a<ST->nseq; a++)
     {
-      list[a]=vienna2list (A->seq_al[a]);
-      for (i=0; i<A->len_aln; i++)A->seq_al[a][i]=-1;
-      
-      i=0;
-      while (list[a][i])
+      int n, r1, r2, s1;
+      s1=name_is_in_list (ST->name[a], RNA->name, RNA->nseq, 100);
+      if (s1!=-1)
 	{
-	  npairs[a]++;
-	  A->seq_al[a][list[a][i][0]]=list[a][i][1];
-	  A->seq_al[a][list[a][i][1]]=list[a][i][0];
+	  for (c=0,b=0; b<RNA->len_aln; b++)
+	    if (!is_gap(RNA->seq_al[s1][b]))lu[c++]=b;
+	    
+	  if (c!=ST->len[a]){HERE ("Incompatible sequence"); exit (0);}
+	  
+	  array[s1]=(int*)vcalloc (RNA->len_aln+1, sizeof (int));
+	  for (r1=0;r1<RNA->len_aln; r1++)array[s1][r1]=-1; 
+	  for (r1=1;r1<=ST->len[a]; r1++)
+	    {
+	      int p1, p2, r2;
+	      if (CL->residue_index[a][r1][0]>1)
+		{
+		  r2=CL->residue_index[a][r1][1+R2];
+		  if (r2)
+		    {
+		      p1=lu[r1-1];
+		      p2=lu[r2-1];
+		      
+		      array[s1][p1]=p2;
+		      array[s1][p2]=p1;
+		    }
+		}
+	    }
+	}
+    }
+  
+  for (a=0; a<RNA->nseq; a++)
+    for (b=0; b<RNA->nseq; b++)
+      {
+	if (array[a] && array[b]);
+	for (c=0; c<A->len_aln; c++)
+	  {
+	    int r1=array[a][c];
+	    int r2=array[b][c];
+	    
+	    max_res_sc[b][c]+=(r1!=-1)?1:0;
+	    tot_res_sc[b][c]+=(r1==r2 && r1!=-1)?1:0;
+	    
+	    max_col_sc[c]+=((r1+r2)!=-2)?1:0;
+	    tot_col_sc[c]+=(r1==r2 && r1!=-1)?1:0;
+	    
+	    max_seq_sc[b]+=((r1+r2)!=-2)?1:0;
+	    tot_seq_sc[b]+=(r1==r2 && r1!=-1)?1:0;
+	    
+	    max_sc+=((r1+r2)!=-2)?1:0;
+	    tot_sc+=(r1==r2 && r1!=-1)?1:0;
+	  }	
+      }
+  for (a=0; a<RNA->nseq; a++)
+    {
+      for (c=0; c<RNA->len_aln; c++)
+	{
+	  if (array[a][c]!=-1)
+	    {
+	      int r1=(max_res_sc[a][c]==0)?0:(tot_res_sc[a][c]*(float)10/max_res_sc[a][c]);
+	      r1=(r1>=10)?9:r1;
+	      OUT->seq_al[a][c]=r1+'0';
+	    }
+	}
+      OUT->score_seq[a]=(max_seq_sc[a]==0)?0:(tot_seq_sc[a]*(float)100)/max_seq_sc[a];
+    }
+  for (c=0; c<A->len_aln; c++)
+    {
+      int r1=(max_col_sc[c]==0)?0:(tot_col_sc[c]*(float)10)/max_col_sc[c];
+      OUT->seq_al[A->nseq][c]=(r1>=10)?9:r1;
+    }
+ 
+  OUT->score=OUT->score_aln=(int)(max_sc==0)?0:(tot_sc*1000)/max_sc;
+
+
+
+  free_aln (A);
+  free_float (tot_res_sc, -1);
+  free_float (max_res_sc, -1);
+  vfree (tot_seq_sc);vfree (max_seq_sc);
+  vfree (tot_col_sc);vfree (max_col_sc);
+  //copy_aln (OUT, RNA);
+  //free_aln (OUT);
+  free_aln (IN);
+  
+  return OUT;
+}
+
+int vienna2template_file (char *outfile, Sequence *R, Sequence *ST)
+{
+  int a;
+  char *seq, *str;
+  FILE *fpout;
+  char *lib;
+  
+  fpout=vfopen (outfile,"w");
+  seq=vtmpnam(NULL);
+  str=vtmpnam(NULL);
+  lib=(char*)vcalloc (1000, sizeof (char));
+  
+  for (a=0; a<ST->nseq; a++)
+    {
+      int s=name_is_in_list (ST->name[a], R->name, R->nseq, 100);
+      
+      if (s!=-1)
+	{
+	  Sequence *STR1;
+	  Sequence *RNA1;
+	  FILE *fp;
+	  
+	  fp=vfopen (seq, "w");
+	  fprintf (fp, ">%s\n%s\n", R->name[s], R->seq[s]);
+	  vfclose (fp);
+	  
+	  fp=vfopen (str, "w");
+	  fprintf (fp, ">%s\n%s\n", ST->name[a], ST->seq[a]);
+	  vfclose (fp);
+
+	  RNA1=get_fasta_sequence(seq, NULL);
+	  STR1=get_fasta_sequence(str, NULL);
+	  
+	  sprintf (lib, "%s.fold_tc_lib", R->name[a]);
+	  vienna2tc_lib (lib,RNA1, STR1);
+	  fprintf (fpout, ">%s _F_ %s\n", R->name[a], lib);
+	 
+	  free_sequence (RNA1, -1);
+	  free_sequence (STR1, -1);
+	}
+    }
+  vfclose (fpout);
+  
+}
+Constraint_list * vienna2tc_lib (char *out, Sequence *R, Sequence *ST)
+{
+  int a, nseq;
+  int **lu;
+  FILE *fp;
+  char *outfile;
+
+    
+  outfile=vtmpnam (NULL);
+  lu=declare_int (ST->nseq, 2);
+  
+  
+  for (nseq=0,a=0; a<ST->nseq; a++)
+    {
+      int s=name_is_in_list (ST->name[a], R->name, R->nseq, 100);
+      if (s!=-1)
+	{
+	  lu[nseq][0]=s;
+	  lu[nseq][1]=a;
+	  nseq++;
+	}
+    }
+  fp=vfopen (outfile, "w");
+  fprintf (fp, "! TC_LIB_FORMAT_01\n%d\n", nseq);
+  for (a=0; a<nseq; a++)
+    {
+      fprintf (fp,"%s %d %s\n", R->name[lu[a][0]], (int)strlen ( R->seq[lu[a][0]]),  R->seq[lu[a][0]]);
+    }
+  for (a=0; a<nseq; a++)
+    {
+      int **list,i;
+      fprintf ( fp, "#%d %d\n", a+1, a+1);
+      list=vienna2list(ST->seq[lu[a][1]]);
+      i=0;
+      while (list[i])
+	{
+	  fprintf (fp, "%d %d %d\n", list[i][0]+1,list[i][1]+1,100);
 	  i++;
 	}
-      for (b=0; b<A->len_aln; b++)
-	printf ("%3d ", A->seq_al[a][b]);
-      printf ("\n");
+      free_int (list, -1);
+    }
+  
+  free_int (lu, -1);
+  fprintf (fp, "! SEQ_1_TO_N\n");
+  vfclose (fp);
+ 
+  if (out)
+    {
+      printf_system ("cp %s %s", outfile, out);
+      return NULL;
+    }
+  else
+    {
+      Constraint_list *L;
+      L=declare_constraint_list ( R,NULL, NULL, 0,NULL, NULL);
+      return read_constraint_list_file (L, outfile);
+    }
+}
+
+Alignment *trim_RNA (Alignment *RNA, Sequence *ST, int max)
+{
+  Alignment *SC;
+  int **score;
+  int a, ctot=0, tot=0, fraction;
+  char *aln;
+  FILE *fp;
+  
+  //evaluate
+  
+  SC=copy_aln (RNA, NULL);
+  SC=sp3_evaluate (SC, ST);
+  score=declare_int (RNA->nseq, 2);
+  //sort and filter
+  for (a=0; a<RNA->nseq; a++)
+    {
+      score[a][0]=a;
+      score[a][1]=SC->score_seq[a];
+      tot+=SC->score_seq[a];
+    }
+  sort_int_inv (score, 2, 1, 0, RNA->nseq-1);
+  
+  aln=vtmpnam (NULL);
+  fp=vfopen (aln, "w");
+  for (a=0; a<RNA->nseq; a++)
+    {
+      int s=score[a][0];
+      ctot+=score[a][1];
+      
+      if (((ctot*100)/tot)<max)
+	{
+	  HERE ("%s %d", RNA->name[s],SC->score_seq[s]);
+	  fprintf (fp, ">%s Score: %d\n%s\n", RNA->name[s],SC->score_seq[s],RNA->seq_al[s]);
+	}
+      else continue;
+    }
+ 
+  vfclose (fp);
+  main_read_aln (aln,RNA);
+  free_int (score, -1);
+  free_aln (SC);
+  return RNA;
+}
+
+
+  
+Alignment *sp3_evaluate (Alignment *RNA, Sequence *ST)
+{
+  int a, b, c, d, i;
+  int *npairs;
+
+  float **max_res_sc;
+  float **tot_res_sc;
+  float *max_seq_sc;
+  float *tot_seq_sc;
+  
+  float *max_col_sc;
+  float *tot_col_sc;
+  
+  float tot_sc=0;
+  float max_sc=0;
+  Alignment *A, *OUT, *IN;
+
+  if (!ST)
+    {
+      HERE ("sp3_evaluate requires an RNA secondary structure via -in2");
+      exit (0);
     }
   
   
-
-  for (d=0,a=0; a<A->nseq-1; a++)
-    for (b=a+1; b<A->nseq; b++, d++)
-      {
-	float cscore=0;
-	for (c=0; c<A->len_aln; c++)
-	  {
-	    int r1=A->seq_al[a][c];
-	    int r2=A->seq_al[b][c];
-	    if (r1!=-1 && r1==r2)cscore++;
-	  }
-	max=MIN(npairs[a],npairs[b])*2;
-	score+=(max==0)?0:cscore/max;
-      }
-
-  for (score=0,d=0,a=0; a<A->nseq-1; a++)
-    for (b=a+1; b<A->nseq; b++, d++)
-      {
-	float cscore=0;
-	for (c=0; c<A->len_aln; c++)
-	  {
-	    int r1=A->seq_al[a][c];
-	    int r2=A->seq_al[b][c];
-	    if (r1!=-1 && r2!=-1 && r1==r2)cscore++;
-	  }
-	max=MIN(npairs[a],npairs[b])*2;
-	score+=(max==0)?0:cscore/max;
-      }
-
-  score=(score/(float)d)*1000;
-  A->score=(int)score;
-  HERE ("Score=%d", A->score);exit (0);
-  return A;
+  thread_seq_struc2aln (RNA,ST);
+  IN=copy_aln (RNA, NULL);
   
+  A=copy_aln (IN, NULL);
+  OUT=copy_aln (IN, NULL);
+  
+  max_res_sc=declare_float (A->nseq, A->len_aln);
+  tot_res_sc=declare_float (A->nseq, A->len_aln);
+  
+  max_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  tot_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  
+
+  max_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  tot_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  
+  for (a=0; a<A->nseq; a++)
+    {
+      int **list=vienna2list (A->seq_al[a]);
+      for (i=0; i<A->len_aln; i++)A->seq_al[a][i]=-1;
+      
+      i=0;
+      while (list[i])
+	{
+	  A->seq_al[a][list[i][0]]=list[i][1];
+	  A->seq_al[a][list[i][1]]=list[i][0];
+	  i++;
+	}
+      free_int (list, -1);
+    }
+  
+  
+  
+  
+  for (a=0; a<A->nseq; a++)
+    for (b=0; b<A->nseq; b++)
+      {
+	for (c=0; c<A->len_aln; c++)
+	  {
+	    int r1=A->seq_al[a][c];
+	    int r2=A->seq_al[b][c];
+	    
+	    max_res_sc[b][c]+=(r1!=-1)?1:0;
+	    tot_res_sc[b][c]+=(r1==r2 && r1!=-1)?1:0;
+	    
+	    max_col_sc[c]+=((r1+r2)!=-2)?1:0;
+	    tot_col_sc[c]+=(r1==r2 && r1!=-1)?1:0;
+	    
+	    max_seq_sc[b]+=((r1+r2)!=-2)?1:0;
+	    tot_seq_sc[b]+=(r1==r2 && r1!=-1)?1:0;
+	    
+	    max_sc+=((r1+r2)!=-2)?1:0;
+	    tot_sc+=(r1==r2 && r1!=-1)?1:0;
+	  }	
+      }
+  for (a=0; a<A->nseq; a++)
+    {
+      for (c=0; c<A->len_aln; c++)
+	{
+	  if (A->seq_al[a][c]!=-1)
+	    {
+	      int r1=(max_res_sc[a][c]==0)?0:(tot_res_sc[a][c]*(float)10/max_res_sc[a][c]);
+	      r1=(r1>=10)?9:r1;
+	      OUT->seq_al[a][c]=r1+'0';
+	    }
+	}
+      OUT->score_seq[a]=(max_seq_sc[a]==0)?0:(tot_seq_sc[a]*(float)100)/max_seq_sc[a];
+    }
+  for (c=0; c<A->len_aln; c++)
+    {
+      int r1=(max_col_sc[c]==0)?0:(tot_col_sc[c]*(float)10)/max_col_sc[c];
+      OUT->seq_al[A->nseq][c]=(r1>=10)?9:r1;
+    }
+ 
+  OUT->score=OUT->score_aln=(int)(max_sc==0)?0:(tot_sc*1000)/max_sc;
+
+
+
+  free_aln (A);
+  free_float (tot_res_sc, -1);
+  free_float (max_res_sc, -1);
+  vfree (tot_seq_sc);vfree (max_seq_sc);
+  vfree (tot_col_sc);vfree (max_col_sc);
+  copy_aln (OUT, RNA);
+  free_aln (IN);
+  free_aln (OUT);
+  return RNA;
 }
 		
 
@@ -235,6 +563,39 @@ int ** vienna2list ( char *seq)
 	    {
 	      if (seq[b]=='(')i2++;
 	      else if (seq[b]==')')i2--;
+	    }
+	  list[i][1]=b-1;
+	  i++;
+	}
+      else if (seq[a]=='<')
+	{
+	  list[i][0]=a;
+	  for (i2=0,b=a+1; b<l && i2>=0; b++)
+	    {
+	      if (seq[b]=='<')i2++;
+	      else if (seq[b]=='>')i2--;
+	    }
+	  list[i][1]=b-1;
+	  i++;
+	}
+      else if (seq[a]=='[')
+	{
+	  list[i][0]=a;
+	  for (i2=0,b=a+1; b<l && i2>=0; b++)
+	    {
+	      if (seq[b]=='[')i2++;
+	      else if (seq[b]==']')i2--;
+	    }
+	  list[i][1]=b-1;
+	  i++;
+	}
+       else if (seq[a]=='{')
+	{
+	  list[i][0]=a;
+	  for (i2=0,b=a+1; b<l && i2>=0; b++)
+	    {
+	      if (seq[b]=='{')i2++;
+	      else if (seq[b]=='}')i2--;
 	    }
 	  list[i][1]=b-1;
 	  i++;
@@ -5436,35 +5797,20 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 
   else if ( strm (template_list, "RCOFFEE") || strm (template_list, "RNA"))
     {
-      char *file_struc_clac = vtmpnam (NULL);
-      FILE* struc_calc_f =vfopen(file_struc_clac,"w");
+      //extract structure from sequences if possible otherwise use RNAPlfold
+      char *file_struc_calc = vtmpnam (NULL);
+      FILE* struc_calc_f =vfopen(file_struc_calc,"w");
       int i;
-      int j=0;
       for (i = 0; i< S->nseq; ++i)
 	{
 	  if (S->T[i]->P)
-	    {
-	      ++j;
-	      fprintf(struc_calc_f,"%s %s\n",S->name[i],S->T[i]->P->template_file);
-	    }
-	}
-	vfclose(struc_calc_f);
-       if (j == S->nseq)
-	  {
-// 		  S = seq2template_seq (S,buf,F);
-		  sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#calc_rna_template@pdbfile#%s@cache#%s@type#_F_", file_struc_clac,get_cache_dir());
-	  }
+	    fprintf(struc_calc_f,"%s %s\n",S->name[i],S->T[i]->P->template_file);
 	  else
-	  {
-		check_program_is_installed (RNAPLFOLD_4_TCOFFEE,NULL, NULL,RNAPLFOLD_ADDRESS, IS_FATAL);
-		sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#RNA_template@type#_F_");
-		if (j > 0)
-		{
-			S = seq2template_seq (S,buf,F);
-			sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#calc_rna_template@pdbfile#%s@cache#%s@type#_F_", file_struc_clac,get_cache_dir());
-		}
-	  }
-// 	  printf("IN T_\n");
+	    fprintf(struc_calc_f,"%s\n",S->name[i]);
+	}
+      vfclose(struc_calc_f);
+      sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#RNA_template@pdbfile#%s@cache#%s@type#_F_", file_struc_calc,get_cache_dir());
+      
       return seq2template_seq (S,buf,F);
     }
 

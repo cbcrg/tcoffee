@@ -547,6 +547,8 @@ FILE * save_extended_constraint_list_pair (  Constraint_list *CL, char *mode, ch
 /*********************************************************************/
 int constraint_list2raw_file ( Constraint_list *CL, char *fname, char *fmode);
 FILE * save_raw_constraint_list   ( FILE *fp,Constraint_list *CL, int start,int len, int *translation);
+int save_contact_constraint_list (Constraint_list *CL, char *name);
+
 FILE * save_constraint_list ( Constraint_list *CL,int start, int len, char *fname, FILE *fp,char *mode,Sequence *S);
 FILE * save_sub_list_header ( FILE *OUT, int n, char **name, Constraint_list *CL);
 FILE * save_list_header ( FILE *OUT,Constraint_list *CL);

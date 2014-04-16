@@ -730,13 +730,15 @@ void free_sequence ( Sequence *LS, int nseq)
 
 
 	if ( !LS) return;
-
+	
 	free_char ( LS->file, -1);
+	
 	free_char ( LS->seq_comment, -1);
 	free_char ( LS->aln_comment, -1);
+
 	free_char ( LS->seq, -1);
 	free_char ( LS->name,-1);
-
+	
 	free_int  (LS->dc, -1);
 
 	free_arrayN((void*)LS->T, 2);

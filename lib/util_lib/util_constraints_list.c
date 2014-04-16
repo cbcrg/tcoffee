@@ -2769,8 +2769,7 @@ Constraint_list *read_constraint_list_file(Constraint_list *CL, char *fname)
 	return CL;
 }
 
-int
-read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name, Genomic_info **genome_co)
+int read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name, Genomic_info **genome_co)
 {
 	int a;
 	int seq_len, sn;
@@ -3055,6 +3054,46 @@ FILE *save_extended_constraint_list ( Constraint_list *CL,Sequence *S, char *fna
 }
 #endif
 
+int save_contact_constraint_list (Constraint_list *CL, char *name)
+{
+  FILE *fp;
+  Sequence *S1;
+  int a,b;
+  
+  S1=CL->S;
+  fp=vfopen (name, "w");
+  fprintf ( fp, "! TC_LIB_FORMAT_01\n");
+  fprintf ( fp, "! Intra sequence contacts\n");
+  fprintf (fp, "%d\n", S1->nseq);
+  for (a=0; a<S1->nseq; a++)fprintf ( fp, "%s %d %s\n",S1->name[a], S1->len[a], S1->seq[a]);
+  for (a=0; a<S1->nseq; a++)
+    {
+      int r1, r2, we;
+      int **contact;
+      fprintf (fp,"#%d %d\n",a+1,a+1); 
+      contact=declare_int (S1->len[a],S1->len[a]);
+      
+      for (r1=1; r1<=S1->len[a]; r1++)
+	{
+	  for (b=1; b<CL->residue_index[a][r1][0]; b+=ICHUNK)
+	    {
+	      r2=CL->residue_index[a][r1][b+R2];
+	      we=CL->residue_index[a][r1][b+WE];
+	      if (!contact[r1][r2])
+		{
+		  if (r1<r2)fprintf (fp, "%d %d %d\n", r1, r2, we);
+		  else fprintf (fp, "%d %d %d\n", r2, r1, we);
+		}
+	      contact[r1][r2]=contact[r2][r1]=1;
+	    }
+	}
+      free_int (contact,-1);
+    }
+  
+  fprintf ( fp, "! SEQ_1_TO_N\n");
+  vfclose (fp);
+  return 1;
+}
 FILE * save_constraint_list ( Constraint_list *CL,int start, int len, char *fname, FILE *fp,char *mode, Sequence *S)
 {
 	int a, b;
@@ -3114,6 +3153,7 @@ FILE * save_sub_list_header ( FILE *OUT, int n, char **name, Constraint_list *CL
 
 					return OUT;
 }
+
 FILE * save_list_header ( FILE *OUT,Constraint_list *CL)
 {
 	int a;
@@ -3138,7 +3178,6 @@ FILE *save_list_footer (FILE *OUT,Constraint_list *CL)
 	fprintf (OUT, "! SEQ_1_TO_N\n");
 	return OUT;
 }
-
 FILE * save_constraint_list_ascii ( FILE *OUT,Constraint_list *CL, int start,int len, int *translation)
 {
 	int a, b, s1, s2, r1, r2;
@@ -4967,34 +5006,37 @@ Constraint_list *read_rna_lib ( Sequence *S, char *fname)
 	int n=0,a;
 
 
-	if (check_file_exists (fname))
-	{
-
+	if  (check_file_exists (fname) && is_lib(fname))
+	  {
+	    R=declare_constraint_list ( S,NULL, NULL, 0,NULL, NULL);
+	    return read_constraint_list_file (R, fname);
+	  }
+	else if (check_file_exists (fname) && is_lib(fname))
+	  {	    
 		list=read_lib_list ( fname, &n);
-	}
+	  }
 	else
-	{
-		X_template *F;
-
-		list=(char**)vcalloc (S->nseq, sizeof (char*));
-		for ( a=0; a<S->nseq; a++)
-		{
-			if ((F=seq_has_template (S, a, "_F_")))
-			{
-				list[n++]=F->template_file;
-			}
-		}
-	}
-
+	  {
+	    X_template *F;
+	    
+	    list=(char**)vcalloc (S->nseq, sizeof (char*));
+	    for ( a=0; a<S->nseq; a++)
+	      {
+		if ((F=seq_has_template (S, a, "_F_")))
+		  {
+		    list[n++]=F->template_file;
+		  }
+	      }
+	  }
+	
 	R=declare_constraint_list ( S,NULL, NULL, 0,NULL, NULL);
-
+	
 	for (a=0; a< n; a++)
-	{
-
-		if (list[a])R=read_constraint_list_file (R, list[a]);
-	}
-
-
+	  {
+	    if (list[a])R=read_constraint_list_file (R, list[a]);
+	  }
+	if (fname[0]) save_contact_constraint_list (R, fname);
+	
 	return R;
 }
 

@@ -204,6 +204,7 @@ void output_fasta_simple   ( char *name, Sequence *S);
 void output_fasta_tree ( char *fname, Alignment *A);
 void output_fasta_seqS (char *fname, Sequence *S );
 void output_fasta_seq1 (char *fname, Alignment*A );
+void output_fasta_seq2 (char *fname, Alignment*A );
 char *output_fasta_seqX (char *name, char *mode, Sequence *S, Alignment *A, int i);
 
 void output_pir_check (char *fname,int nseq, char **A );

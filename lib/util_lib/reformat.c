@@ -112,7 +112,7 @@ int seq_reformat ( int argc, char **in_argv)
  	if ( argc==1 || strm6 ( argv[1], "h", "-h", "help", "-help", "-man", "?"))
  		{
 
-		  fprintf ( stdout, "\n%s (%s,%s,%s [%s])\n",PROGRAM, VERSION,AUTHOR, DATE, URL);
+		fprintf ( stdout, "\n%s (%s,%s,%s [%s])\n",PROGRAM, VERSION,AUTHOR, DATE, URL);
 		fprintf ( stdout, "\n***********     MINIMUM SYNTAX        *****************");
 		fprintf ( stdout, "\nseq_reformat -in <in_file> -output <out_format>");
 		fprintf ( stdout, "\nSome File formats are automatically recognised");
@@ -477,10 +477,13 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     color_pdf      pw_lib_saga_aln tdna_aln");
 		fprintf ( stdout, "\n     thread_dna_on_prot_aln");
 		fprintf ( stdout, "\n");
+		fprintf ( stdout, "\n*********** OUTPUT FORMATS: RNA sequence  ******************");
+ 		fprintf ( stdout, "\n     vienna2tc_lib  vienna2template");
 		fprintf ( stdout, "\n*********** OUTPUT FORMATS: sequence  ******************");
  		fprintf ( stdout, "\n     fasta_seq      fasta_seq1     gotoh_seq");
-		fprintf ( stdout, "\n     gor_seq        cache_id");
-		fprintf ( stdout, "\n     tblastx_db1     tblastx_db2    tblastx_db3");
+		fprintf ( stdout, "\n     gor_seq        cache_id       fasta_seq2");
+		fprintf ( stdout, "\n     tblastx_db1    tblastx_db2    tblastx_db3");
+
 		fprintf ( stdout, "\n*********** OUTPUT FORMATS: weights ******************");
 		fprintf ( stdout, "\n     constraints    saga_pw_sd_weights  nseq\n");
  		fprintf ( stdout, "\n");
@@ -1061,6 +1064,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 		}
 	else if ( strm( in_format, "tc_lib") ||  strm( in_format, "mocca_lib") ||  strm( in_format, "lib"))
 	        {
+		 
 		  read_seq_in_list (in_file,&nseq,&sequences,&seq_name, &genome_co);
 		  D->S=fill_sequence_struc ( nseq, sequences, seq_name, genome_co);
 		  D->CL=declare_constraint_list ( D->S,NULL, NULL, 0,NULL, NULL);
@@ -1068,6 +1072,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 		  seq2aln (D->S, D->A, RAD->rm_gap);
 		  free_char (sequences,-1);
 		  free_char (seq_name, -1);
+		
 		}
 	else if ( strm( in_format,"swissprot_seq"))
 	        {
@@ -2729,7 +2734,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    else target=1;
 
 	    p=NULL;
-	    if      (p=strstr (out_format, "filter")){action=0;p+=strlen ("filetr");}
+	    if      (p=strstr (out_format, "filter")){action=0;p+=strlen ("filter");}
 	    else if (p=strstr (out_format, "lower")){action=1;p+=strlen("lower");}
 	    else if (p=strstr (out_format, "weighted")){action=2; p=NULL;}
 	    else if (p=strstr (out_format, "replicate")){action=3; p+=strlen ("replicate");}
@@ -2992,6 +2997,11 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		if (!D1)return 1;
 		output_fasta_seq1 (out_file, D1->A);
 		}
+	else if ( strm (out_format, "fasta_seq2"))
+	  {
+	    if (!D1)return 1;
+	    output_fasta_seq2 (out_file, D1->A);
+	  }
 	else if ( strm2 (out_format, "pir_aln", "pir"))
 		{
 		if (!D1)return 1;
@@ -3027,6 +3037,15 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		  if (!D1)return 1;
 		output_constraints (out_file, "pdb",D1->A);
 		}
+	else if ( strm  (out_format, "vienna2tc_lib"))
+	  {
+	    vienna2tc_lib (out_file, D1->S,D2->S);
+	  }
+	else if ( strm  (out_format, "vienna2template"))
+	  {
+	    vienna2template_file (out_file, D1->S,D2->S);
+	  }
+	
 	else if ( strm2 (out_format, "constraint_list","tc_lib"))
 	        {
 
@@ -4767,13 +4786,13 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 		int nseq=0, l=0;
 		int disk=0;
 		int coor=0;
-
-		char allowed[70] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-.#*~";
+		int lal;
+		char allowed[100] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-.#*~()[]<>{},_";
 		int *al_test =(int*)calloc(256, sizeof(int));
 		int i;
 		
-		
-		for (i = 0; i < 67; ++i)
+		lal=strlen (allowed);
+		for (i = 0; i <lal; ++i)
 			al_test[allowed[i]] = 1;
 
 		if (get_int_variable ("use_disk") || getenv ("SEQ_ON_DISK_4_TCOFFEE"))
@@ -4849,6 +4868,7 @@ Sequence* get_fasta_sequence (char *fname, char *comment_out)
 		current=0;
 		c=fgetc(fp);coor++;
 	
+
 		while (c!=EOF)
 		{
 			if (c=='>')
@@ -6503,6 +6523,26 @@ char * output_fasta_seqX (char *name, char *mode, Sequence *S, Alignment *A, int
   vfclose (fp);
   return name;
 }
+void output_fasta_seq2 (char *fname, Alignment*A )
+	{
+	char seq_name[VERY_LONG_STRING];
+	int a,b;
+	FILE *fp;
+	char *extension;
+
+	for (a=0; a<A->nseq; a++) ungap (A->seq_al[a]);
+
+	for ( a=0 ; a< A->nseq-1; a++)
+	  for ( b=a+1; b< A->nseq; b++)
+		{
+		  sprintf (seq_name, "%s__%s.fa", A->name[a], A->name[b]);
+		  fp=vfopen (seq_name, "w");
+		  fprintf (fp, ">%s\n%s\n>%s\n%s\n", A->name[a], A->seq_al[a], A->name[b],A->seq_al[b]);
+		  vfclose (fp);
+		  fprintf (stdout,">%s\n",seq_name); 
+		}
+	exit (0);
+	}
 
 void output_fasta_seq1 (char *fname, Alignment*A )
 	{
@@ -11235,7 +11275,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   DST->S=aln2seq(DST->A);
 	   if (strm (action_list[1], "rna"))
 	     {
-	       sp3_evaluate (D1->A);
+	       //D1->A: MSA
+	       //D2->A: rna structure in parenthesis
+	       if (!D2->CL)
+		 {
+		   char *tmp;
+		   
+		   D2->CL=vienna2tc_lib(NULL,D2->S, D2->S);
+		 }
+					
+	       D1->A=sp3_evaluate4tcoffee (D1->A, D2->CL);
 	     }
 	   else if    (strm (action_list[1], "id2"))
 	     {
@@ -12094,7 +12143,10 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   free_sequence (D1->S,(D1->S)->nseq);
 	   D1->S=aln2seq (D1->A);
 	 }
-
+       else if ( strm (action, "trimRNA"))
+	 {
+	   D1->A=trim_RNA(D1->A, D2->S, ATOI_ACTION(1));
+	 }
        else if ( strm (action, "trim"))
 	 {
 	   D1->A=simple_trimseq (D1->A,(D2)?D2->A:NULL, action_list[1], ACTION (2), NULL);

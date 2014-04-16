@@ -270,9 +270,9 @@ Constraint_list *seq2list     ( Job_TC *job)
 	{
 	  RCL=pdb_pair (M,seq, CL);
 	}
-	else if (strm (mode, "rna_pair"))
+	else if (strm (mode, "rnapdb_pair"))
 	{
-	  RCL=rna_pair(M, seq, CL);
+	  RCL=rnapdb_pair(M, seq, CL);
 	}
       else if ( strm (mode, "pdbid_pair"))
 	{
@@ -1858,7 +1858,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 
 
 
-Constraint_list *rna_pair (TC_method *M ,
+Constraint_list *rnapdb_pair (TC_method *M ,
 						   char *in_seq,
 						   Constraint_list *CL)
 {
@@ -1873,7 +1873,7 @@ Constraint_list *rna_pair (TC_method *M ,
 
 	if ( M->executable2[0]=='\0')
 	{
-		fprintf ( stderr, "\nERROR: rna_pair requires a structural alignment method: rna_pair@EP@EXECUTABLE2@<method> [FATAL:%s]\n", PROGRAM);
+		fprintf ( stderr, "\nERROR: rnapdb_pair requires a structural alignment method: rnapdb_pair@EP@EXECUTABLE2@<method> [FATAL:%s]\n", PROGRAM);
 		myexit (EXIT_FAILURE);
 	}
 
@@ -1896,7 +1896,7 @@ Constraint_list *rna_pair (TC_method *M ,
 
 	result=vtmpnam (NULL);
 
-	sprintf ( command, "tc_generic_method.pl -mode=rna_pair -method=%s %s%s %s%s %s%s -tmpdir=%s", M->executable2,M->in_flag,pdb1_file, M->in_flag2,pdb2_file,M->out_flag, result, get_tmp_4_tcoffee());
+	sprintf ( command, "tc_generic_method.pl -mode=rnapdb_pair -method=%s %s%s %s%s %s%s -tmpdir=%s", M->executable2,M->in_flag,pdb1_file, M->in_flag2,pdb2_file,M->out_flag, result, get_tmp_4_tcoffee());
 
 	my_system ( command);
 
@@ -1905,7 +1905,7 @@ Constraint_list *rna_pair (TC_method *M ,
 
 	if ( !F)
 	{
-		fprintf ( stderr, "\n\trna_pair/%s failed:\n\t%s\n",M->executable2, command);
+		fprintf ( stderr, "\n\trnapdb_pair/%s failed:\n\t%s\n",M->executable2, command);
 	}
 	else
 	{
