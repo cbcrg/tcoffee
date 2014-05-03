@@ -54,22 +54,22 @@ typedef struct
 Blast_param;
 
 typedef struct
-    {
-	int   n_excluded_nb;
-
-	float similarity_threshold;
-	float rmsd_threshold;
-        float md_threshold;
-        int   distance_on_request;
-	char  *comparison_io;
-        int    print_rapdb;
-        float maximum_distance;/*Diameter of the bubble used to identify the Calpha Neighborhood*/
-	int   N_ca;            /*Number of Calpha to be looked at on both side*/
-	float max_delta ;      /*Maximum value for delta to be positive*/
-	char *local_mode;
-        int   scale;             /*Value substracted to the pdb score in the bubble mode*/
-        int   n_extra_param;
-        char **extra_param;
+{
+      int   n_excluded_nb;
+      
+      float similarity_threshold;
+      float rmsd_threshold;
+      float md_threshold;
+      int   distance_on_request;
+      char  *comparison_io;
+      int    print_rapdb;
+      float maximum_distance;/*Diameter of the bubble used to identify the Calpha Neighborhood*/
+      int   N_ca;            /*Number of Calpha to be looked at on both side*/
+      float max_delta ;      /*Maximum value for delta to be positive*/
+      char *local_mode;
+      int   scale;             /*Value substracted to the pdb score in the bubble mode*/
+      int   n_extra_param;
+      char **extra_param;
       char  *evaluate_mode;
       char  *color_mode;
       float filter;
@@ -81,17 +81,21 @@ typedef struct
     }
 Pdb_param;
 
-typedef struct
-    {
-	int num;
-	int res_num;/*Residue number from 1 to N*/
-        char res[4];
-	char type[4];
-	float  x;
-	float  y;
-	float  z;
-    }
-Atom;
+struct Atom
+{
+      int num;
+      int res_num;/*Residue number from 1 to N*/
+      char res[10];
+      char type[10];
+      float r; //Van Der Wall Radius in Angstrom
+      float  x;
+      float  y;
+      float  z;
+      struct Atom *N;//Next Atom in a Chain of Atoms
+      struct Atom *L;//List of Atoms linked to CA or C3'
+};
+typedef struct Atom Atom;
+
 
 typedef struct
     {
@@ -371,11 +375,12 @@ struct Constraint_list
       /*PDB STRUCTURE ALIGNMENTS*/
       Ca_trace ** T;	/*This structure contains the PDB trace for sequences with a known Struc T[Nseq]*/
 
-       /*MISC*/
+      /*MISC*/
       int cpu;
       FILE *local_stderr;
       char  multi_thread[100];
       char  lib_list[FILENAMELEN+1];
+      char *comment;
 };
 
 typedef struct Constraint_list Constraint_list;
@@ -571,6 +576,7 @@ Constraint_list * relax_constraint_list_4gp (Constraint_list *CL);
 
 Constraint_list * expand_constraint_list_4gp (Constraint_list *CL, int T);
 
+Constraint_list * constraint_list2sub_constraint_list (Constraint_list *CL, Sequence *SMALL);
 Constraint_list * filter_constraint_list (Constraint_list *CL, int field, int T);
 int constraint_list_is_connected ( Constraint_list *CL);
 int constraint_list2avg ( Constraint_list *CL);
@@ -663,7 +669,7 @@ int run_multi_thread_file (char *fname, char *config);
 /*                                                                   */
 /*********************************************************************/
 char * seq2rna_lib ( Sequence *S, char *name);
-Constraint_list *read_rna_lib ( Sequence *S, char *fname);
+Constraint_list *read_contact_lib ( Sequence *S, char *fname, Constraint_list *R);
 Constraint_list *rna_lib_extension ( Constraint_list *CL, Constraint_list *R);
 char *** produce_method_file ( char *method);
 /*********************************************************************/

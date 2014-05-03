@@ -203,6 +203,7 @@ SCRIPT_LIB_OBJECTS=\
 	t_coffee_dpa\
 	t_coffee_dpa2\
 	tc_generic_method.pl\
+	rnapdb2protpdb.pl\
 	generic_method.tc_method\
 	clustalw_method.tc_method\
 	extract_from_pdb\
@@ -238,6 +239,9 @@ tc_generic_method.pl:\
 	$(SCRIPT_LIB)/tc_generic_method.pl
 	cp $(SCRIPT_LIB)/tc_generic_method.pl .
 	echo "$(dollar)program=$(quote)$(PROGRAM) ($(VERSION))$(quote);\n">> tc_generic_method.pl
+rnapdb2protpdb.pl:\
+	$(SCRIPT_LIB)/rnapdb2protpdb.pl
+	cp $(SCRIPT_LIB)/rnapdb2protpdb.pl .
 t_coffee_dpa:\
 	$(SCRIPT_LIB)/t_coffee_dpa
 	cp $(SCRIPT_LIB)/t_coffee_dpa .

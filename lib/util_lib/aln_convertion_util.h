@@ -12,6 +12,8 @@ typedef struct
 OveralnP;
 
 //RNA
+Constraint_list * seq2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode);
+Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode, float maxD);
 int vienna2template_file (char *outfile, Sequence *R, Sequence *ST);
 Constraint_list * vienna2tc_lib (char *outfile, Sequence *R, Sequence *ST);
 
@@ -21,7 +23,6 @@ int ** update_RNAfold_list (Alignment *A, int **pos, int s, int **l);
 int ** vienna2list ( char *seq);
 Alignment *compare_RNA_fold ( Alignment *A, Alignment *B);
 Alignment *trim_RNA (Alignment *RNA, Sequence *ST, int max);
-Alignment *sp3_evaluate4tcoffee (Alignment *A, Constraint_list *CL);
 Alignment *sp3_evaluate (Alignment *A, Sequence *S);
 Alignment *alifold2analyze (Alignment *A, Alignment *ST, char *mode);
 Alignment *alifold2cov_aln (Alignment *A, int **l, int ug);
@@ -149,6 +150,7 @@ void count_misc (Alignment*A, Alignment *B);
 
 Alignment * trim_aln_with_seq ( Alignment *S, Alignment *P);
 Alignment * add_align_seq2aln ( Alignment *A, char *seq, char *seq_name);
+Alignment * aln2X (Alignment *A, int x);
 Sequence  * aln2seq    ( Alignment *A);
 Sequence  * aln2seq_main    ( Alignment *A, int mode);
 Alignment * thread_profile_files2aln (Alignment *A, char *template_file, Fname *F);
@@ -166,6 +168,7 @@ Alignment * unalign_aln_pos (Alignment *A, int s, int p, int l);
 
 Alignment *degap_aln (Alignment *A);
 
+Alignment * RmLowerInAln (Alignment *A, char *gap);
 Alignment * ungap_aln_n        ( Alignment *A, int n);
 Alignment * ungap_aln        ( Alignment *A);
 void compress_aln     ( Alignment *A);

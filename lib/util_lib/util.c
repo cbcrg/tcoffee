@@ -4795,8 +4795,6 @@ char * get_os()
 
 
 
-
-
 int cputenv (char *string, ...)
 {
 
@@ -7335,7 +7333,6 @@ int check_program_is_installed ( char *program_name, char *path_variable, char *
 
    static char *path;
    int install_4_tcoffee=0;
-
    if (atoigetenv("INSTALL_4_TCOFFEE"))install_4_tcoffee=1;
 
    if ( strm (where2getit, "built_in"))return 1;

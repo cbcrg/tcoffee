@@ -237,7 +237,18 @@ Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, co
      }
    else if ( strstr (mode, "rna"))
      {
-       return sp3_evaluate4tcoffee (IN, CL);
+       Alignment *OUT;
+       int a, b,res;
+
+       OUT=sp3_evaluate4tcoffee (IN, CL);
+       for (a=0; a<OUT->nseq; a++)
+	 for (b=0; b<OUT->len_aln; b++)
+	   {
+	     res=OUT->seq_al[a][b];
+	     if (res>9 && !(res>='0' && res<='9') )OUT->seq_al[a][b]=NO_COLOR_RESIDUE;
+	   }
+       sprintf (OUT->name[OUT->nseq], "Cons");
+       return OUT;
      }
    else if ( strstr ( mode, "non_extended"))
      {
@@ -612,6 +623,10 @@ Alignment * categories_evaluate_output_old ( Alignment *IN,Constraint_list *CL)
     vfree(aa);
     return OUT;
     }
+
+
+
+
 
 Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL,int nproc);
 Alignment * nfork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL);
@@ -1065,8 +1080,442 @@ int  sp_triplet_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, cha
       vfclose (fp);
       return 1;
     }  
+
+
+Alignment *sp3_evaluate4tcoffee (Alignment *RNA, Constraint_list *CLin)
+{
+  int a, b, c, d, i;
+  int *npairs;
+
+  float **max_res_sc;
+  float **tot_res_sc;
+  float *max_seq_sc;
+  float *tot_seq_sc;
+  
+  float *max_col_sc;
+  float *tot_col_sc;
+  
+  float tot_sc=0;
+  float max_sc=0;
+  Alignment *A, *OUT, *IN;
+  Sequence *ST;
+  Constraint_list *CL;
+  int **array;
+  int *lu;
+  if (CLin->rna_lib && check_file_exists (CLin->rna_lib)&& is_lib (CLin->rna_lib))CL=read_contact_lib (CLin->S, CLin->rna_lib,NULL);
+  else CL=CLin;
+  
+  ST=duplicate_sequence (CL->S);
+  
+  thread_seq_struc2aln (RNA,ST);
+  IN=copy_aln (RNA, NULL);
+  
+  A=copy_aln (IN, NULL);
+  OUT=copy_aln (IN, NULL);
+  
+  max_res_sc=declare_float (A->nseq, A->len_aln);
+  tot_res_sc=declare_float (A->nseq, A->len_aln);
+  
+  max_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  tot_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  
+
+  max_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  tot_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  
+  array=(int**)vcalloc(RNA->nseq, sizeof (int*));
+  lu=(int*)vcalloc (RNA->len_aln, sizeof (int));
+  for (a=0; a<ST->nseq; a++)
+    {
+      int n, r1, r2, s1;
+      s1=name_is_in_list (ST->name[a], RNA->name, RNA->nseq, 100);
+      if (s1!=-1)
+	{
+	  for (c=0,b=0; b<RNA->len_aln; b++)
+	    if (!is_gap(RNA->seq_al[s1][b]))lu[c++]=b;
+	    
+	  if (c!=ST->len[a]){HERE ("Incompatible sequence"); exit (0);}
+	  
+	  array[s1]=(int*)vcalloc (RNA->len_aln+1, sizeof (int));
+	  for (r1=0;r1<RNA->len_aln; r1++)array[s1][r1]=-1; 
+	  for (r1=1;r1<=ST->len[a]; r1++)
+	    {
+	      int p1, p2, r2;
+	      if (CL->residue_index[a][r1][0]>1)
+		{
+		  r2=CL->residue_index[a][r1][1+R2];
+		  if (r2)
+		    {
+		      p1=lu[r1-1];
+		      p2=lu[r2-1];
+		      
+		      array[s1][p1]=p2;
+		      array[s1][p2]=p1;
+		    }
+		}
+	    }
+	}
+    }
     
+  for (a=0; a<RNA->nseq; a++)
+    for (b=0; b<RNA->nseq; b++)
+      {
+	if (array[a] && array[b]);
+	if (a==b)continue;
+	for (c=0; c<A->len_aln; c++)
+	  {
+	    int r1=array[a][c];
+	    int r2=array[b][c];
+	    
+	    max_res_sc[b][c]+=(r1!=-1)?1:0;
+	    tot_res_sc[b][c]+=(r1==r2 && r1!=-1)?1:0;
+	    
+	    max_col_sc[c]+=((r1+r2)!=-2)?1:0;
+	    tot_col_sc[c]+=(r1==r2 && r1!=-1)?1:0;
+	    
+	    max_seq_sc[b]+=((r1+r2)!=-2)?1:0;
+	    tot_seq_sc[b]+=(r1==r2 && r1!=-1)?1:0;
+	    max_sc+=(r1!=-1)?1:0;
+	    tot_sc+=(r1==r2 && r1!=-1)?1:0;
+	  }	
+      }
+  
+  for (a=0; a<RNA->nseq; a++)
+    {
+      for (c=0; c<RNA->len_aln; c++)
+	{
+	  if (array[a][c]!=-1)
+	    {
+	      int r1=(max_res_sc[a][c]==0)?0:(tot_res_sc[a][c]*(float)10/max_res_sc[a][c]);
+	      r1=(r1>=10)?9:r1;
+	      OUT->seq_al[a][c]=r1+'0';
+	    }
+	}
+      OUT->score_seq[a]=(max_seq_sc[a]==0)?0:(tot_seq_sc[a]*(float)100)/max_seq_sc[a];
+    }
+  for (c=0; c<A->len_aln; c++)
+    {
+      int r1=(max_col_sc[c]==0)?0:(tot_col_sc[c]*(float)10)/max_col_sc[c];
+      OUT->seq_al[A->nseq][c]=(r1>=10)?9:r1;
+    }
+ 
+  OUT->score=OUT->score_aln=(int)(max_sc==0)?0:(tot_sc*1000)/max_sc;
+
+
+
+  free_aln (A);
+  free_float (tot_res_sc, -1);
+  free_float (max_res_sc, -1);
+  vfree (tot_seq_sc);vfree (max_seq_sc);
+  vfree (tot_col_sc);vfree (max_col_sc);
+  //copy_aln (OUT, RNA);
+  //free_aln (OUT);
+  free_aln (IN);
+  
+  return OUT;
+}    
+
+ 
+Alignment *distance_evaluate4tcoffee (Alignment *A, Constraint_list *CL, float max, float delta, int enb)
+{
+  float **max_res_sc;
+  float **tot_res_sc;
+  float *max_seq_sc;
+  float *tot_seq_sc;
+  
+  float *max_col_sc;
+  float *tot_col_sc;
+  
+  float tot_sc=0;
+  float max_sc=0;
+  Alignment *OUT;
+  Sequence *S;
+  int ***dm, *lu, a, b, c,d,s1,s2,c1,c2,r1,r2,p1,p2,we,**pos;
+ 
+  S=CL->S;
+  OUT=copy_aln (A, NULL);
+  
+  max_res_sc=declare_float (A->nseq, A->len_aln);
+  tot_res_sc=declare_float (A->nseq, A->len_aln);
+  
+  max_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  tot_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  
+  max_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  tot_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  
+  max_sc=0;
+  tot_sc=0;
+  
+  lu=(int*  )vcalloc (A->len_aln, sizeof (int));
+  dm=(int***)vcalloc(A->nseq,sizeof (int**)); 
+
+  max*=100;//Convert Max from Angstrom to Nanometers (likle the library)
+
+  //get pairs to be evaluated
+  for (d=0,a=0; a<S->nseq; a++)
+    {
+      if ((s1=name_is_in_list (S->name[a], A->name, A->nseq, 100))==-1)continue;
+      dm[s1]=declare_int (A->len_aln+1,A->len_aln+1);
+      for (c=0,b=0; b<A->len_aln; b++)
+	if (!is_gap(A->seq_al[s1][b]))lu[c++]=b;
+      if (c!=S->len[a]){printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is different in the target MSA snd in the contact library [FATAL]", A->name[s1]);}
+      
+      for (r1=1;r1<=S->len[a]; r1++)
+	{
+	  for (b=1; b<CL->residue_index[a][r1][0]; b+=ICHUNK)
+	    {
+	      r2=CL->residue_index[a][r1][b+R2];
+	      we=CL->residue_index[a][r1][b+WE];
+	      s2=CL->residue_index[a][r1][b+SEQ2];
+	      
+	      if (s2!=a){HERE ("Warning: Contact library contains inter-sequence data contacts: %d %d", a, s2);}
+	      p1=lu[r1-1];
+	      p2=lu[r2-1];
+	      dm[s1][p1][p2]=dm[s1][p2][p1]=we;
+	      d++;
+	    }
+	}
+    }
+  
+  pos=aln2pos_simple (A, A->nseq);
+  for (s1=0; s1<A->nseq; s1++)
+    for (c1=0; c1<A->len_aln; c1++)
+      {
+	if (A->seq_al[s1][c1]=='-')continue;
+	for (c2=0; c2<A->len_aln; c2++)
+	  {
+	    int w1;
+	    if (A->seq_al[s1][c2]=='-')continue;
+	    else if (FABS((pos[s1][c1]-pos[s1][c2]))<enb)continue;
+	    
+	    
+	    w1=dm[s1][c1][c2];
+	    if (w1==0 || (delta>0 && w1>=max))continue;
+	    
+	    for (s2=0; s2<A->nseq; s2++)
+	      {
+		int w2;
+		if (s1==s2)continue;
+		
+		max_res_sc[s1][c1]++;
+		max_col_sc[c1]++;
+		max_seq_sc[s1]++;
+		max_sc++;
+		
+		if (pos[s2][c1]<=0 || pos[s2][c2]<=0)continue;
+		w2=dm[s2][c1][c2];
+		
+		if (delta>=0 && !(((float)w2>=(float)w1*(1-delta)) && ((float)w2<=(float)w1*(1+delta))))continue;
+		else if ( delta<0 && w2<=0)continue;
+		
+		
+		tot_res_sc[s1][c1]++;
+		tot_col_sc[c1]++;
+		tot_seq_sc[s1]++;
+		tot_sc++;
+	      }
+	  }
+      }
+  for (a=0; a<A->nseq; a++)
+    {
+      for (c=0; c<A->len_aln; c++)
+	{
+	  if (pos[a][c]>0 && max_res_sc[a][c]>0 )
+	    {
+	      int r1=(max_res_sc[a][c]==0)?0:(tot_res_sc[a][c]*(float)10/max_res_sc[a][c]);
+	      r1=(r1>=10)?9:r1;
+	      OUT->seq_al[a][c]=r1+'0';
+	    }
+	  else if (pos[a][c]>0)
+	    {
+	      OUT->seq_al[a][c]=NO_COLOR_RESIDUE;
+	    }
+	}
+      OUT->score_seq[a]=(max_seq_sc[a]==0)?0:(tot_seq_sc[a]*(float)100)/max_seq_sc[a];
+    }
+  sprintf (OUT->name[OUT->nseq], "cons");
+  
+  for (c=0; c<A->len_aln; c++)
+    {
+      int r1=(max_col_sc[c]==0)?0:(tot_col_sc[c]*(float)10)/max_col_sc[c];
+      OUT->seq_al[A->nseq][c]=(r1>=10)?9:r1;
+    }
+ 
+  A->score=A->score_aln=OUT->score=OUT->score_aln=(int)(max_sc==0)?0:(tot_sc*1000)/max_sc;
+  
+  free_float (tot_res_sc, -1);
+  free_float (max_res_sc, -1);
+  vfree (tot_seq_sc);vfree (max_seq_sc);
+  vfree (tot_col_sc);vfree (max_col_sc);
+  
+  return OUT;
+}   
+
+
+ 
+Alignment *strike_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *in_matrix_name)
+{
+  float **max_res_sc;
+  float **tot_res_sc;
+  float *max_seq_sc;
+  float *tot_seq_sc;
+  
+  float *max_col_sc;
+  float *tot_col_sc;
+  
+  float tot_sc=0;
+  float max_sc=0;
+  Alignment *OUT;
+  Sequence *S;
+  int **dm,**pos,i,s, *lu, a, b, c,d,s1,s2,c1,c2,r1,r2,p1,p2,we;
+  int **matrix;
+  int *max;
+  int enb=3;
+  char *matrix_name;
+  
+  S=CL->S;
+  OUT=copy_aln (A, NULL);
+  
+  max_res_sc=declare_float (A->nseq, A->len_aln);
+  tot_res_sc=declare_float (A->nseq, A->len_aln);
+  
+  max_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  tot_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
+  
+  max_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  tot_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
+  
+  max_sc=0;
+  tot_sc=0;
+  
+  //Set the right evlaution matrix for proteins or RNA
+  matrix_name=(char*)vcalloc ((strlen(in_matrix_name)+2), sizeof (char));
+  if (strm (in_matrix_name, "strike"))
+    {
+       S=fast_get_sequence_type(S);
+       if (strm (S->type, "RNA"))sprintf(matrix_name, "strikeR");
+       else sprintf(matrix_name, "strikeP");
+    }
+  else
+    sprintf(matrix_name, "%s", in_matrix_name);
+  
+  matrix=read_matrice (matrix_name);
+  max=(int*)vcalloc (256, sizeof (int));
+  for (a=0; a<256; a++)
+    {
+      for (max[a]=-1000,b=0; b<256; b++)
+	{
+	  if (matrix[a][b]>max[a]){max[a]=matrix[a][b];}
+	}
+    }
+  
+  lu=(int*  )vcalloc (A->len_aln, sizeof (int));
+  dm=declare_int (A->len_aln, A->len_aln);
+  pos=aln2pos_simple (A, A->nseq);
+  for (s1=0; s1<A->nseq; s1++)
+    {
+      int ls;
+      if ((ls=name_is_in_list (A->name[s1], S->name, S->nseq, 100))==-1)continue;
+      for (c=0,b=0; b<A->len_aln; b++)
+	if (!is_gap(A->seq_al[s1][b]))lu[c++]=b;
+      
+      if (c!=S->len[ls]){printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Sequence %s is different in the target MSA snd in the contact library [FATAL]", A->name[s1]);}
+      for (r1=1;r1<=S->len[ls]; r1++)
+	{
+	  for (b=1; b<CL->residue_index[ls][r1][0]; b+=ICHUNK)
+	    {
+	      r2=CL->residue_index[ls][r1][b+R2];
+	      we=CL->residue_index[ls][r1][b+WE];
+	      s2=CL->residue_index[ls][r1][b+SEQ2];
+	      
+	      if (s2!=ls){HERE ("Warning: Contact library contains inter-sequence data contacts: %d %d", a, s2);}
+	      p1=lu[r1-1];
+	      p2=lu[r2-1];
+	      dm[p1][p2]=dm[p2][p1]=we;
+	    }
+	}
+      
+    for (c1=0; c1<A->len_aln; c1++)
+      {
+	if (A->seq_al[s1][c1]=='-')continue;
+	for (c2=0; c2<A->len_aln; c2++)
+	  {
+	    int ref,inc,sc;
+	    
+	    if (A->seq_al[s1][c2]=='-')continue;
+	    else if (FABS((pos[s1][c1]-pos[s1][c2]))<enb)continue;
+	    if (!dm[c1][c2])continue;
+	    
+	    ref=matrix[tolower(A->seq_al[s1][c1])][tolower(A->seq_al[s1][c2])];
+	    
+	    for (s2=0; s2<A->nseq; s2++)
+	      {
+		if (s1==s2)continue;
+		
+		if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'){inc=ref*2; sc=0
+;}
+		else 
+		  {
+		    sc=matrix[tolower(A->seq_al[s2][c1])][tolower(A->seq_al [s2][c2])]*2;
+		    inc=max[tolower(A->seq_al[s2][c1])]+max[tolower(A->seq_al[s2][c1])];
+		  }
+
+		max_res_sc[s1][c1]+=inc;
+		max_col_sc[c1]+=inc;
+		max_seq_sc[s1]+=inc;
+		max_sc+=inc;
+		
+		tot_res_sc[s1][c1]+=sc;
+		tot_col_sc[c1]+=sc;
+		tot_seq_sc[s1]+=sc;
+		tot_sc+=sc;
+	      }
+	  }
+      }
     
+    for (c1=0; c1<A->len_aln; c1++)
+      for (c2=0; c2<A->len_aln; c2++)
+	dm[c1][c2]=0;
+    
+    }
+  for (a=0; a<A->nseq; a++)
+      {
+      for (c=0; c<A->len_aln; c++)
+	{
+	  if (pos[a][c]>0 && max_res_sc[a][c]>0 )
+	    {
+	      int r1=(max_res_sc[a][c]==0)?0:(tot_res_sc[a][c]*(float)10/max_res_sc[a][c]);
+	      r1=(r1>=10)?9:r1;
+	      OUT->seq_al[a][c]=r1+'0';
+	    }
+	  else if (pos[a][c]>0)
+	    {
+	      OUT->seq_al[a][c]=NO_COLOR_RESIDUE;
+	    }
+	}
+      OUT->score_seq[a]=(max_seq_sc[a]==0)?0:(tot_seq_sc[a]*(float)100)/max_seq_sc[a];
+    }
+  sprintf (OUT->name[OUT->nseq], "cons");
+  
+  for (c=0; c<A->len_aln; c++)
+    {
+      int r1=(max_col_sc[c]==0)?0:(tot_col_sc[c]*(float)10)/max_col_sc[c];
+      OUT->seq_al[A->nseq][c]=(r1>=10)?9:r1;
+    }
+ 
+  A->score=A->score_aln=OUT->score=OUT->score_aln=(int)(max_sc==0)?0:(tot_sc*1000)/max_sc;
+  
+  free_float (tot_res_sc, -1);
+  free_float (max_res_sc, -1);
+  vfree (tot_seq_sc);vfree (max_seq_sc);
+  vfree (tot_col_sc);vfree (max_col_sc);
+  
+  return OUT;
+}   
+
+
+		
 Alignment * fast_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     {
     int a,b, c, m,res, s, s1, s2, r1, r2;	
@@ -2430,7 +2879,7 @@ int residue_pair_extended_list4rna4 (Constraint_list *CL,int s1, int r1, int s2,
 int residue_pair_extended_list4rna1 (Constraint_list *CL, int s1, int r1, int s2, int r2 )
 {
   static Constraint_list *R;
-  if (!R)R=read_rna_lib (CL->S, CL->rna_lib);
+  if (!R)R=read_contact_lib (CL->S, CL->rna_lib,NULL);
   return residue_pair_extended_list4rna (CL, R, s1, r1, s2, r2);
 }
 
@@ -2439,7 +2888,7 @@ int residue_pair_extended_list4rna3 (Constraint_list *CL,int s1, int r1, int s2,
   static Constraint_list *R;
   if (!R)
     {
-      R=read_rna_lib (CL->S, CL->rna_lib);
+      R=read_contact_lib (CL->S, CL->rna_lib,NULL);
       rna_lib_extension (CL,R);
     }
   return residue_pair_extended_list (CL, s1,r1, s2,r2);
@@ -2451,7 +2900,7 @@ int residue_pair_extended_list4rna2 (Constraint_list *CL,int s1, int r1, int s2,
 
   if (!R)
     {
-      R=read_rna_lib (CL->S, CL->rna_lib);
+      R=read_contact_lib (CL->S, CL->rna_lib,NULL );
       rna_lib_extension (CL,R);
 
     }

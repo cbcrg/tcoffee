@@ -13,138 +13,120 @@
  * \file aln_convertion_util.c
  * Contains several auxiliary functions for alignments and templates.
  */
-
-Alignment *sp3_evaluate4tcoffee (Alignment *RNA, Constraint_list *CLin)
+Constraint_list * seq2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode)
 {
-  int a, b, c, d, i;
-  int *npairs;
-
-  float **max_res_sc;
-  float **tot_res_sc;
-  float *max_seq_sc;
-  float *tot_seq_sc;
-  
-  float *max_col_sc;
-  float *tot_col_sc;
-  
-  float tot_sc=0;
-  float max_sc=0;
-  Alignment *A, *OUT, *IN;
-  Sequence *ST;
-  Constraint_list *CL;
-  int **array;
-  int *lu;
-  if (CLin->rna_lib && check_file_exists (CLin->rna_lib)&& is_lib (CLin->rna_lib))CL=read_rna_lib (CLin->S, CLin->rna_lib);
-  else CL=CLin;
-  
-  ST=duplicate_sequence (CL->S);
-  
-  thread_seq_struc2aln (RNA,ST);
-  IN=copy_aln (RNA, NULL);
-  
-  A=copy_aln (IN, NULL);
-  OUT=copy_aln (IN, NULL);
-  
-  max_res_sc=declare_float (A->nseq, A->len_aln);
-  tot_res_sc=declare_float (A->nseq, A->len_aln);
-  
-  max_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
-  tot_seq_sc=(float*)vcalloc (A->nseq, sizeof (float));
-  
-
-  max_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
-  tot_col_sc=(float*)vcalloc (A->len_aln, sizeof (float));
-  
-  array=(int**)vcalloc(RNA->nseq, sizeof (int*));
-  lu=(int*)vcalloc (RNA->len_aln, sizeof (int));
-  for (a=0; a<ST->nseq; a++)
+  S=fast_get_sequence_type(S);
+  if (!strm (S->type, "RNA"))return CL;
+  if (T)
     {
-      int n, r1, r2, s1;
-      s1=name_is_in_list (ST->name[a], RNA->name, RNA->nseq, 100);
-      if (s1!=-1)
-	{
-	  for (c=0,b=0; b<RNA->len_aln; b++)
-	    if (!is_gap(RNA->seq_al[s1][b]))lu[c++]=b;
-	    
-	  if (c!=ST->len[a]){HERE ("Incompatible sequence"); exit (0);}
-	  
-	  array[s1]=(int*)vcalloc (RNA->len_aln+1, sizeof (int));
-	  for (r1=0;r1<RNA->len_aln; r1++)array[s1][r1]=-1; 
-	  for (r1=1;r1<=ST->len[a]; r1++)
-	    {
-	      int p1, p2, r2;
-	      if (CL->residue_index[a][r1][0]>1)
-		{
-		  r2=CL->residue_index[a][r1][1+R2];
-		  if (r2)
-		    {
-		      p1=lu[r1-1];
-		      p2=lu[r2-1];
-		      
-		      array[s1][p1]=p2;
-		      array[s1][p2]=p1;
-		    }
-		}
-	    }
-	}
+      char *template_file=vtmpnam(NULL);
+      output_fasta_seqS (template_file,T);
+      S=seq2template_seq(S,template_file,NULL);
     }
   
-  for (a=0; a<RNA->nseq; a++)
-    for (b=0; b<RNA->nseq; b++)
-      {
-	if (array[a] && array[b]);
-	for (c=0; c<A->len_aln; c++)
-	  {
-	    int r1=array[a][c];
-	    int r2=array[b][c];
-	    
-	    max_res_sc[b][c]+=(r1!=-1)?1:0;
-	    tot_res_sc[b][c]+=(r1==r2 && r1!=-1)?1:0;
-	    
-	    max_col_sc[c]+=((r1+r2)!=-2)?1:0;
-	    tot_col_sc[c]+=(r1==r2 && r1!=-1)?1:0;
-	    
-	    max_seq_sc[b]+=((r1+r2)!=-2)?1:0;
-	    tot_seq_sc[b]+=(r1==r2 && r1!=-1)?1:0;
-	    
-	    max_sc+=((r1+r2)!=-2)?1:0;
-	    tot_sc+=(r1==r2 && r1!=-1)?1:0;
-	  }	
-      }
-  for (a=0; a<RNA->nseq; a++)
-    {
-      for (c=0; c<RNA->len_aln; c++)
-	{
-	  if (array[a][c]!=-1)
-	    {
-	      int r1=(max_res_sc[a][c]==0)?0:(tot_res_sc[a][c]*(float)10/max_res_sc[a][c]);
-	      r1=(r1>=10)?9:r1;
-	      OUT->seq_al[a][c]=r1+'0';
-	    }
-	}
-      OUT->score_seq[a]=(max_seq_sc[a]==0)?0:(tot_seq_sc[a]*(float)100)/max_seq_sc[a];
-    }
-  for (c=0; c<A->len_aln; c++)
-    {
-      int r1=(max_col_sc[c]==0)?0:(tot_col_sc[c]*(float)10)/max_col_sc[c];
-      OUT->seq_al[A->nseq][c]=(r1>=10)?9:r1;
-    }
- 
-  OUT->score=OUT->score_aln=(int)(max_sc==0)?0:(tot_sc*1000)/max_sc;
-
-
-
-  free_aln (A);
-  free_float (tot_res_sc, -1);
-  free_float (max_res_sc, -1);
-  vfree (tot_seq_sc);vfree (max_seq_sc);
-  vfree (tot_col_sc);vfree (max_col_sc);
-  //copy_aln (OUT, RNA);
-  //free_aln (OUT);
-  free_aln (IN);
+    
+  else cputenv ("SEQ2TEMPLATE4_F_=%s",(mode)?mode:"no");
+  cputenv ("PDB2TEMPLATE4_F_=no");
   
-  return OUT;
+    
+  if (strm (mode,"RNAplfold") || !mode)S=seq2template_seq (S,"RNA", NULL);
+  else if (strm (mode, "join"));
+  else printf_exit (EXIT_FAILURE,stderr, "+seq2contact %s: unknown mode [FATAL]", mode);
+  
+  return read_contact_lib (S,NULL,CL); 
 }
+Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode, float maxD)
+{
+  char *template_file=vtmpnam(NULL);
+  char *lib_name=NULL;
+ 
+
+  if (mode && strm (mode, "RNAplfold"));
+  else
+    {
+      if (!T)printf_exit (EXIT_FAILURE,stderr, "+pdb2contact requires a template:  -in2 <template_file> [FATAL]");
+      
+      output_fasta_seqS (template_file,T);
+      S=seq2template_seq(S,template_file,NULL);
+    }
+  
+  S=fast_get_sequence_type(S);
+  
+  if (mode)
+    {
+      cputenv ("SEQ2TEMPLATE4_F_=no");
+      cputenv ("PDB2TEMPLATE4_F_=%s", mode);
+    }
+  else HERE ("AAAAAAAAAAAAA");
+  
+  if (strm (mode, "all")||strm (mode, "best")|| strm (mode, "count") || strm (mode,"closest") || strm (mode, "distances"))
+    {
+      lib_name=vtmpnam(NULL);
+      if (maxD==0 && strm (mode, "distances"))maxD=20;
+      else if (maxD==0)maxD=1.2;
+      pdb2lib(S,mode,maxD,lib_name);
+    }
+  else if ((strm(S->type, "RNA")) &&(!mode || strm (mode, "find_pair")|| strm (mode,"RNAplfold") || strm (mode, "find_pair-p") || strm(mode, "x3dna-ssr")))
+    {
+      S=seq2template_seq (S,"RNA", NULL);
+      lib_name=NULL;
+    }
+  else
+    {
+      printf_exit (EXIT_FAILURE,stderr, "+pdb2contact %s: unknown mode [FATAL]", mode);
+    }
+  
+  return read_contact_lib (S,lib_name,CL); 
+}
+  
+  
+Constraint_list * seq2distance_list_old (Sequence *S, Sequence *T, char *mode, float maxD)
+{
+  char *template_file=vtmpnam(NULL);
+  Constraint_list *CL;
+  
+  if (T)
+    {
+      output_fasta_seqS (template_file,T);
+      S=seq2template_seq(S,template_file,NULL);
+    }
+  
+  if (!mode || mode[0]=='\0')
+    {
+      HERE ("+seq2contacts <X3DNA|PFOLD|contacts|contacts_best> <Max Distance|probe in Angstrom>");
+      exit (0);
+    }
+  
+  if ( strm (mode, "find_pair"))
+    {
+      if (!T)printf_exit (EXIT_FAILURE,stderr, "+seq2contact X3DNA requires a template file provides via -in2 [FATAL]");
+      output_fasta_seqS (template_file,T);
+      S=seq2template_seq(S,template_file,NULL);
+      S=seq2template_seq (S,"RNA", NULL);
+      CL=read_contact_lib (S,NULL,NULL);
+    }
+  else if (strm (mode, "RNAplfold"))
+    {
+      
+      S=seq2template_seq (S,"RNA", NULL);
+      CL=read_contact_lib (S,NULL, NULL);
+    }
+  else if (strm (mode, "all")||strm (mode, "best")|| strm (mode, "count") || strm (mode,"closest") || strm (mode, "distances"))
+    {
+      if (!T)printf_exit (EXIT_FAILURE,stderr, "+seq2contact %s requires a template file provides via -in2 [FATAL]",mode);
+      output_fasta_seqS (template_file,T);
+      S=seq2template_seq(S,template_file,NULL);
+      if (maxD==0 && strm (mode, "distances"))maxD=20;
+      else if (maxD==0)maxD=1.2;
+      
+      CL=read_contact_lib (S,pdb2lib(S,mode,maxD,NULL), NULL);
+    }
+  else
+    printf_exit (EXIT_FAILURE,stderr, "+seq2contact %s: unknown mode [FATAL]", mode);
+  return CL;
+}
+  
+
 
 int vienna2template_file (char *outfile, Sequence *R, Sequence *ST)
 {
@@ -2764,6 +2746,21 @@ Alignment *degap_aln (Alignment *A)
   for ( a=0; a< A->nseq; a++)ungap (A->seq_al[a]);
   return A;
 }
+Alignment *RmLowerInAln(Alignment *A, char *gap)
+{
+  char g;
+  int a, b;
+
+  g=(gap)?gap[0]:'-';
+  for (a=0; a<A->nseq; a++)
+    for (b=0; b<A->len_aln; b++)
+      {
+	char c=A->seq_al[a][b];
+	if (is_gap(c));
+	else if (islower(c))A->seq_al[a][b]=g;
+      }
+  return A;
+}
 
 Alignment *ungap_aln_n ( Alignment *A, int p)
 	{
@@ -3113,6 +3110,29 @@ Sequence *seq2number (Sequence *A)
 	A->seq=char_array2number(A->seq, A->nseq);
 	return A;
 	}
+Alignment * aln2X (Alignment *A, int x)
+{
+  char *buf;
+  int a,b,c,d;
+  
+  if (!A) return NULL;
+  buf=(char*)vcalloc ((A->len_aln*x)+1, sizeof (char));
+  A=realloc_aln (A, (A->len_aln)*3+1);
+  for (a=0; a<=A->nseq; a++)
+    {
+      for (d=0,b=0; b<A->len_aln; b++)
+	{
+	  for (c=0; c<x; c++)
+	    buf[d++]=A->seq_al[a][b];
+	}
+      buf[d]='\0';
+      sprintf (A->seq_al[a], "%s", buf);
+    }
+  A->len_aln*=x;
+  vfree(buf);
+  return A;
+}
+
 
 Sequence * aln2seq (Alignment *A)
 {
@@ -5028,7 +5048,7 @@ int **fix_seq_seq (Sequence *S0, Sequence *Sx)
 	      nr1+=1-g1;
 	      if (!g0 && !g1)index[s0][nr0]=nr1;
 	    }
-	  if (aln2sim(B, "idmat")<20) add_warning (stderr,"Unreliable reconciliation for sequence %s. If it a PDB, check source file", S0->name[s0]);
+	  if (aln2sim(B, "idmat")<20) add_warning (stderr,"Unreliable reconciliation for sequence %s. If it is a PDB, check source file", S0->name[s0]);
 	  free_aln (B);B=NULL;
 	}
     }

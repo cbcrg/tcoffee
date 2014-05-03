@@ -40,6 +40,8 @@ Color;
 Sequence * fill_sequence_struc ( int nseq, char **sequences, char **seq_name, Genomic_info *genome_co);
 Sequence * cw_read_sequences ( char *seq_name);
 Sequence * get_sequence_type (Sequence *S);
+Sequence * fast_get_sequence_type (Sequence *S);
+
 char     * get_array_type (int n, char **s);
 Alignment* get_aln_type (Alignment *A);
 

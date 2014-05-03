@@ -228,7 +228,7 @@ sub seq2ssp_template
 	}
       else
 	{
-	  print stdout "\tProcess: >$s{$seq}{name} _E_ $lib_name \n";
+	  print stdout "!\tProcess: >$s{$seq}{name} _E_ $lib_name \n";
 	  print R ">$s{$seq}{name} _E_ $lib_name\n";
 	}
       unshift (@profiles, $lib_name);
@@ -273,7 +273,7 @@ sub seq2tm_template
 	}
       else
 	{
-	  print stdout "\tProcess: >$s{$seq}{name} _T_ $lib_name\n";
+	  print stdout "!\tProcess: >$s{$seq}{name} _T_ $lib_name\n";
 	  print R ">$s{$seq}{name} _T_ $lib_name\n";
 	}
       unshift (@profiles, $lib_name);
@@ -282,43 +282,7 @@ sub seq2tm_template
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
 }
 
-sub seq2RNA_template_old
-  {
-  my ($mode, $infile,$outfile)=@_;
-  my %s, %h, ;
-  my $result;
-  my (@profiles);
-  &set_temporary_dir ("set",$infile,"seq.pep");
-  %s=read_fasta_seq ("seq.pep");
-  
 
-  open (R, ">result.aln");
-
-  #print stdout "\n";
-  foreach $seq (keys(%s))
-    {
-      open (F, ">seqfile");
-      print (F ">$s{$seq}{name}\n$s{$seq}{seq}\n");
-      close (F);
-      $lib_name="$s{$seq}{name}.rfold";
-      $lib_name=&clean_file_name ($lib_name);
-      &safe_system ("t_coffee -other_pg RNAplfold2tclib.pl -in=seqfile -out=$lib_name");
-
-      if ( !-e $lib_name)
-	{
-	 myexit(flush_error("RNAplfold failed to compute the secondary structure of $s{$seq}{name}"));
-	 myexit ($EXIT_FAILURE);
-	}
-      else
-	{
-	  print stdout "\tProcess: >$s{$seq}{name} _F_ $lib_name\n";
-	  print R ">$s{$seq}{name} _F_ $lib_name\n";
-	}
-      unshift (@profiles, $lib_name);
-    }
-  close (R);
-  &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
-}
 
 sub seq2RNA_template
   {
@@ -327,22 +291,17 @@ sub seq2RNA_template
     my %s, %h ;
     my $result;
     my (@profiles);
-    my $comp_mode;
+    my ($seq_mode, $pdb_mode);
     
+    #use $seq_mode to estimate the template of sequences WITHOUT a PDB
+    #use $pdb_mode to estimate the template of sequences WITH    a PDB
 
+    $seq_mode=$ENV{"SEQ2TEMPLATE4_F_"};
+    $pdb_mode=$ENV{"PDB2TEMPLATE4_F_"};
     
-    if ($ENV{RNASS}){$comp_mode=$ENV{RNASS};}
-    else {$comp_mode="x3dna";}
-		     
-    if (!pg_is_installed ("x3dna-ssr")&& !pg_is_installed ("find_pair"))
-      {
-	add_warning ($$,$$, "x3dna-ssr could not be used to extract RNA secondary structures. Less accurate secondary structures will be predicted by RNAPlfold instead.");
-	$comp_mode="RNAplfold"
-      }
-    elsif (!pg_is_installed ("find_pair"))
-      {
-	$comp_mode="x3dna-ssr";
-      }
+    if (!$pdb_mode){$pdb_mode="find_pair-p";}
+    if (!$seq_mode){$seq_mode="RNAplfold";}
+    
 
     &set_temporary_dir ("set",$infile,"seq.pep");
     %s=read_fasta_seq ("seq.pep");
@@ -360,75 +319,50 @@ sub seq2RNA_template
 	$pdb_chain = $pdb_template_h{$seq};
 	$lib_name="$s{$seq}{name}.rfold";
 	$lib_name=&clean_file_name ($lib_name);
-	
-	if ($pdb_template_h{$seq} eq "" || $comp_mode eq "RNAplfold")
+	if ($pdb_template_h{$seq} eq "")
 	  {
-	    RNAplfold2lib ("seqfile", "$lib_name");
+	    if    ($seq_mode eq "RNAplfold"){RNAplfold2lib ("seqfile", "$lib_name");}
+	    elsif ($seq_mode eq "no"){$lib_name=0;}
+	    else
+	      {
+		myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "seq2RNA_template failure::method $seq_mode not available for sequences without PDB structures"));
+	      }
 	  }
-	elsif ($comp_mode eq "x3dna-ssr")
+	elsif ($pdb_template_h{$seq} ne "")
 	  {
-	    x3dnassr2lib ("seqfile", "$CACHE$pdb_chain", "$lib_name");
+	    if($pdb_mode eq "x3dna-ssr")
+	      {
+		x3dnassr2lib ("seqfile", "$CACHE$pdb_chain", "$lib_name");
+	      }
+	    elsif ($pdb_mode eq "find_pair-p")
+	      {
+		x3dna_find_pair2lib ("seqfile", "$CACHE$pdb_chain", "$lib_name", "find_pair -p");
+	      }
+	    elsif ($pdb_mode eq "find_pair")
+	      {
+		x3dna_find_pair2lib ("seqfile", "$CACHE$pdb_chain", "$lib_name", "find_pair");
+	      }
+	    elsif ($pdb_mode eq "RNAplfold")
+	      {
+		RNAplfold2lib ("seqfile", "$lib_name");
+	      }
+	    elsif ($pdb_mode eq "no"){$lib_name=0;}
+	    else
+	      {
+		myexit(add_error (EXIT_FAILURE,$$,$$,getppid(), "seq2RNA_template failure::Could not find method $pdb_mode"));
+	      }
 	  }
-	else
+	if ($lib_name)
 	  {
-	    x3dna_find_pair2lib ("seqfile", "$CACHE$pdb_chain", "$lib_name");
+	    print stdout "!\tProcess: >$s{$seq}{name} _F_ $lib_name\n";
+	    print R ">$s{$seq}{name} _F_ $lib_name\n";
+	    unshift (@profiles, $lib_name);
 	  }
-	
-	print stdout "\tProcess: >$s{$seq}{name} _F_ $lib_name\n";
-	print R ">$s{$seq}{name} _F_ $lib_name\n";
-      	unshift (@profiles, $lib_name);
       }
     close (R);
     &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
   }
 
-
-sub seq2RNAPDB_template_x3dna_Old
-    {
-	my ($mode, $infile, $pdbfile, $outfile)=@_;
-#  	print "$mode $infile $pdbfile $outfile\n";
-# 	print "@_\n";
-	my %s, %h ;
-	my $result;
-	my (@profiles);
-	&set_temporary_dir ("set",$infile,"seq.pep");
-	%s=read_fasta_seq ("seq.pep");
-
-	%pdb_template_h = &read_template_file($pdbfile);
-	my $pdb_chain;
-	open (R, ">result.aln");
-
-
-	#print stdout "\n";
-	foreach $seq (keys(%s))
-	  {
-	    if ($pdb_template_h{$seq} eq "")
-	      {
-		next;
-	      }
-	    open (F, ">seqfile");
-	    print (F ">$s{$seq}{name}\n$s{$seq}{seq}\n");
-	    close (F);
-	    $pdb_chain = $pdb_template_h{$seq};
-	    $lib_name="$s{$seq}{name}.rfold";
-	    $lib_name=&clean_file_name ($lib_name);
-	    safe_system ("secondary_struc.py seqfile $CACHE$pdb_chain  $lib_name");
-	    
-	    if ( !-e $lib_name)
-	      {
-		myexit(flush_error("secondary_struc.py failed to compute the secondary structure of PDB  $s{$seq}{name}"));
-		myexit ($EXIT_FAILURE);
-	      }
-	    else
-	      {
-		print stdout "\tProcess: >$s{$seq}{name} _F_ $lib_name\n";
-		print R ">$s{$seq}{name} _F_ $lib_name\n";
-	      }
-	    unshift (@profiles, $lib_name);
-	  }
-	close (R);
-	&set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
-      }
 
 
 sub psiblast2profile_template_test
@@ -463,7 +397,7 @@ sub psiblast2profile_template_test
 	  $profile_name=&clean_file_name ($profile_name);
 	  unshift (@profiles, $profile_name);
 	  output_profile ($profile_name, \%profile, $trim);
-	  print stdout "\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$SERVER/blast/$db][$CACHE_STATUS]\n";
+	  print stdout "!\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$SERVER/blast/$db][$CACHE_STATUS]\n";
 	  print R ">$s{$seq}{name} _R_ $profile_name\n";
 	}
     }
@@ -498,7 +432,7 @@ if ( -e $psiblast_output)
 	  $profile_name=&clean_file_name ($profile_name);
 	  unshift (@profiles, $profile_name);
 	  output_profile ($profile_name, \%profile, $trim);
-	  print stdout "\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$SERVER/blast/$db][$CACHE_STATUS]\n";
+	  print stdout "!\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$SERVER/blast/$db][$CACHE_STATUS]\n";
 	  print R ">$s{$seq}{name} _R_ $profile_name\n";
 	}
     }
@@ -517,7 +451,7 @@ sub blast2pdb_template_test
 
       %p=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$infile);
       $c=1;
-      print stdout "\tProcess: >$s{$seq}{name} [$SERVER/blast/$db][$CACHE_STATUS]\n";
+      print stdout "!\tProcess: >$s{$seq}{name} [$SERVER/blast/$db][$CACHE_STATUS]\n";
       while (!$found && $c<$p{n})
 	{
 	  $pdbid=&id2pdbid($p{$c}{identifyer});
@@ -584,7 +518,7 @@ sub blast2pdb_template
       unlink ($blast_output);
 
       $c=1;
-      print stdout "\tProcess: >$s{$seq}{name} [$SERVER/blast/$db][$CACHE_STATUS]\n";
+      print stdout "!\tProcess: >$s{$seq}{name} [$SERVER/blast/$db][$CACHE_STATUS]\n";
       while (!$found && $c<$p{n})
 	{
 	  $pdbid=&id2pdbid($p{$c}{identifyer});
@@ -1475,7 +1409,42 @@ sub aln2psi_profile
 
     return %h;
   }
+sub read_fasta_seq_index
+  {
+    my $f=@_[0];
+    my %hseq;
+    my (@seq, @com, @name);
+    my ($a, $s,$nseq);
 
+    open (F, $f);
+    while (<F>)
+      {
+	$s.=$_;
+      }
+    close (F);
+
+
+    @name=($s=~/>(\S*).*\n[^>]*/g);
+
+    @seq =($s=~/>.*.*\n([^>]*)/g);
+    @com =($s=~/>\S*(.*)\n([^>]*)/g);
+
+
+    $nseq=$#name+1;
+
+    for ($a=0; $a<$nseq; $a++)
+      {
+	my $s;
+	my $n=$name[$a];
+	$hseq{$a}{name}=$n;
+	$seq[$a]=~s/[^A-Za-z]//g;
+	$hseq{$a}{order}=$a;
+	$hseq{$a}{seq}=$seq[$a];
+	$hseq{$a}{com}=$com[$a];
+
+      }
+    return %hseq;
+  }
 sub read_fasta_seq
   {
     my $f=@_[0];
@@ -2836,23 +2805,28 @@ sub seq2tblastpx_lib
 
 sub x3dna_find_pair2lib
       {
-      my ($seq, $pdb, $lib)=@_;
+      my ($seq, $pdb, $lib, $pg)=@_;
       my $outfile1="dssr-2ndstrs.dbn";
       my $outfile2="simple.output";
       my $f= new FileHandle;
       my ($rnaSS,$pdbSS);
       my $command;
-      safe_system ("x3dna-ssr -i=$pdb>/dev/null 2>/dev/null");
+      my %s_pdb;
+      my %s_seq;
       
+      #$pg: "find_pair" OR "find_pair -p"
       
-      
-      if ( !-e $outfile1)
+      if (!pg_is_installed ("find_pair"))
 	{
-	  myexit(flush_error("x3dna-ssr failed to compute the secondary structure file $outfile1"));
-	  myexit ($EXIT_FAILURE);
+	  add_warning ($$,$$, "x3dna/find_pairs could not be used to extract RNA secondary structures. Secondary structures will be extracted by x3dna-ssr instead");
+	  return x3dnassr2lib ($seq, $pdb, $lib);
 	}
       
-      $command="find_pair -p $pdb simple.output > /dev/null 2>/dev/null";
+      #get PDB sequence
+      safe_system ("t_coffee -other_pg extract_from_pdb $pdb -seq >$outfile1");
+      
+      #get find_pair contacts
+      $command="$pg $pdb simple.output > /dev/null 2>/dev/null";
       safe_system ($command);
       if (($command=~/find_pair -p/)){$outfile2="allpairs.ana";}
       else {$outfile2="simple.output";}
@@ -2865,23 +2839,21 @@ sub x3dna_find_pair2lib
       
 
       #Handle situations when the pdb sequence differs from the RNA sequence
-      my @out=file2array($outfile1);
-      my %s=read_fasta_seq ($seq);
-      my @names=keys (%s);
-      my $rnaS=uc($s{$names[0]}{seq});
-      my $pdbS=uc($out[1]);
+      #my @out=file2array($outfile1);
+      %s_pdb=read_fasta_seq_index ($outfile1);
+      %s_seq=read_fasta_seq_index ($seq);
+      my $rnaS=uc($s_seq{0}{seq});
+      my $pdbS=uc($s_pdb{0}{seq});
+      
       my $vienna;
       my @lu;
-      
-      #x3dna returns non legitimate nucleotides
-      $pdbS=~s/[^AGCTU]//g;
-      
+    
       if ($rnaS ne $pdbS)
 	{
 	  
 	  my ($rna,$pdb);
-	  my $rnaSS=$rnaS;
-	  my $pdbSS=$pdbS;
+	  $rnaSS=$rnaS;
+	  $pdbSS=$pdbS;
 	  $rnaSS=~s/T/U/g;
 	  $pdbSS=~s/T/U/g;
 	  ($rnaSS,$pdbSS)=nw ($rnaS, $pdbS);
@@ -2890,7 +2862,7 @@ sub x3dna_find_pair2lib
 	  my @pdbA=split (//,$pdbSS);
 	  my $l=@rnaA;
 	  
-	  #print "\n--- $names[0] $rnaSS\n--- $names[0] $pdbSS\n\n";
+	  #print "\n--- $s_seq{0}{name} $rnaSS\n--- $s_seq{0}{name} $pdbSS\n\n";
 	  
 	  for (my $b=0,my $a=0; $a<$l; $a++)
 	    {
@@ -2910,11 +2882,11 @@ sub x3dna_find_pair2lib
       open ($f, ">$lib");
       print $f "! TC_LIB_FORMAT_01\n";
       print $f "1\n";
-      print $f "$names[0] $l $rnaS\n";
-      print $f "! SOURCE: 3D contact library Generated by find_pair (x3dna)\n";
+      print $f "$s_seq{0}{name} $l $rnaS\n";
+      print $f "!CMT: [SOURCE] >$s_seq{0}{name} 3D contact library Generated by $pg (x3dna)\n";
       print $f "#1 1\n";
       
-
+      my $ne;
       my @array=file2array($outfile2);
       for (my $a=0; $a<5; $a++){shift (@array);}
       while (!($array[0]=~/####/))
@@ -2935,7 +2907,7 @@ sub x3dna_find_pair2lib
 	    }
 	  elsif ($f1==-1 || $s1==-1){;}
 	  elsif ($f1<$s1){print $f "$f1 $s1 100\n";}
-	  else {print $f "$s1 $f1 100\n";}
+	  else {print $f "$s1 $f1 100\n";$ne++;}
 	}
       print $f "! SEQ_1_TO_N\n";
       close ($f);
@@ -2954,7 +2926,7 @@ sub RNAplfold2lib
 	 myexit ($EXIT_FAILURE);
        }
     open ($f, ">>$lib");
-    print $f "! SOURCE: 2D contact library Generated by RNAPlfold (Vienna Package)\n";
+    print $f "!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)\n";
     close $f;
     return;
   }
@@ -2963,6 +2935,13 @@ sub x3dnassr2lib
       my ($seq, $pdb, $lib)=@_;
       my $outfile="dssr-2ndstrs.dbn";
       my $f= new FileHandle;
+      
+      if (!pg_is_installed ("x3dna-ssr"))
+	{
+	  add_warning ($$,$$, "x3dna-ssr could not be used to extract RNA secondary structures. Secondary structures will be predicted ab-initio instead with RNAPlfold");
+	  return RNAplfold2lib ($seq,$lib);
+	}
+      
       safe_system ("x3dna-ssr -i=$pdb >/dev/null 2>/dev/null");
       if ( !-e $outfile)
 	{
@@ -3023,7 +3002,7 @@ sub x3dnassr2lib
 	    }
       
       open ($f, ">>$lib");
-      print $f "! SOURCE: 2D Contact library generated by x3dna-ssr\n";
+      print $f "!CMT: [SOURCE] >$names[0] 2D Contact library generated by x3dna-ssr\n";
       #print $f "! Vienna_Format: >$names[0]\n";
       #print $f "! Vienna_Format: $vienna\n";
       close $f;
@@ -3487,7 +3466,7 @@ sub nw
 	my ($i,$j, $s);
 	my $gep=-2;
 	my $match=+2;
-	my $mismatch=-4;
+	my $mismatch=0;
 	my ($sub, $ins, $del);
 
 

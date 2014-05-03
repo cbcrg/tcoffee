@@ -1406,19 +1406,16 @@ Constraint_list * pdb_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  int s1, s2;
 	  char *result, *pdb1,*pdb1_file, *pdb2, *pdb2_file;
 	  Alignment *F=NULL;
-
-
 	  char command[10000];
 
 	  if ( M->executable2[0]=='\0')
 	    {
-	    fprintf ( stderr, "\nERROR: pdb_pair requires a structural alignment method: pdb_pair@EP@EXECUTABLE2@<method> [FATAL:%s]\n", PROGRAM);
-	    myexit (EXIT_FAILURE);
+	      fprintf ( stderr, "\nERROR: pdb_pair requires a structural alignment method: pdb_pair@EP@EXECUTABLE2@<method> [FATAL:%s]\n", PROGRAM);
+	      myexit (EXIT_FAILURE);
 	    }
-
+	  
 	  sprintf ( seq, "%s", in_seq);
-
-
+	  
 	  atoi(strtok (seq,SEPARATORS));
 	  s1=atoi(strtok (NULL,SEPARATORS));
 	  s2=atoi(strtok (NULL,SEPARATORS));
@@ -1426,42 +1423,35 @@ Constraint_list * pdb_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  pdb1=seq2P_template_file(CL->S,s1);
 	  pdb2=seq2P_template_file(CL->S,s2);
 	  if ( !pdb1 || !pdb2) return CL;
-
-
+	  
+	  
 	  pdb1_file=vtmpnam (NULL);
 	  pdb2_file=vtmpnam (NULL);
-
-
-
-	  sprintf ( command, "extract_from_pdb -infile %s -atom ALL -chain FIRST  -nodiagnostic > %s", pdb1, pdb1_file);
-	  my_system (command);
-
-
-
-	  sprintf ( command, "extract_from_pdb -infile %s -atom ALL -chain FIRST  -nodiagnostic > %s", pdb2, pdb2_file);
-	  my_system (command);
-
-
 	  result=vtmpnam (NULL);
-
-	  sprintf ( command, "tc_generic_method.pl -mode=pdb_pair -method=%s %s%s %s%s %s%s -tmpdir=%s", M->executable2,M->in_flag,pdb1_file, M->in_flag2,pdb2_file,M->out_flag, result, get_tmp_4_tcoffee());
-	  my_system ( command);
-
-	  F=main_read_aln (result, NULL);
-
-	  if ( !F)
+	  
+	  printf_system ("extract_from_pdb -infile %s -atom ALL -chain FIRST  -nodiagnostic > %s", pdb1, pdb1_file);
+	  printf_system ("extract_from_pdb -infile %s -atom ALL -chain FIRST  -nodiagnostic > %s", pdb2, pdb2_file);
+	  
+	  if (strm ((CL->S)->type, "RNA"))
 	    {
-	      fprintf ( stderr, "\n\tpdb_pair/%s failed:\n\t%s\n",M->executable2, command);
+	      char *rnatmp1=vtmpnam(NULL);
+	      char *rnatmp2=vtmpnam(NULL);
+	      printf_system ("rnapdb2protpdb.pl C3PRIME %s > %s", pdb1_file, rnatmp1);
+	      printf_system ("rnapdb2protpdb.pl C3PRIME %s > %s", pdb2_file, rnatmp2);
+	      printf_system ("mv %s %s", rnatmp1, pdb1_file);
+	      printf_system ("mv %s %s", rnatmp2, pdb2_file);
 	    }
+	  
+	  printf_system ("tc_generic_method.pl -mode=pdb_pair -method=%s %s%s %s%s %s%s -tmpdir=%s", M->executable2,M->in_flag,pdb1_file, M->in_flag2,pdb2_file,M->out_flag, result, get_tmp_4_tcoffee());
+	  F=main_read_aln (result, NULL);
+	  
+	  if ( !F)fprintf ( stderr, "\n\tpdb_pair/%s failed:\n\t%s\n",M->executable2, command);
 	  else
 	    {
-
 	      sprintf ( F->name[0],"%s", (CL->S)->name[s1]);
 	      sprintf ( F->name[1],"%s", (CL->S)->name[s2]);
 	      CL=aln2constraint_list (F, CL, "sim");
 	    }
-
-
 	  free_aln (F);
 	  return CL;
 	}
@@ -1686,8 +1676,22 @@ Constraint_list * lsqman_pair ( char *in_seq, Constraint_list *CL)
 	 free_aln (F);
 	 return CL;
 	}
+char *atom;
+Constraint_list * srap_pair   (char *seq, char *weight, Constraint_list *CL)
+{
+  atom=(char*)vcalloc (100, sizeof (char));
 
-Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
+  
+  //sprintf (atom, "C1PRIME");CL=sap_pair   (seq, weight, CL);
+  //sprintf (atom, "C2PRIME");CL=sap_pair   (seq, weight, CL);
+  sprintf (atom, "C3PRIME");CL=sap_pair   (seq, weight, CL);
+  //sprintf (atom, "C4PRIME");CL=sap_pair   (seq, weight, CL);
+  //sprintf (atom, "C5PRIME");CL=sap_pair   (seq, weight, CL);
+    
+  vfree (atom); atom=NULL;
+  return CL;
+}
+Constraint_list * sap_pair   (char *seq_in, char *weight, Constraint_list *CL)
  {
             register int a;
 	    FILE *fp;
@@ -1704,15 +1708,19 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 	    int max_struc_len=10000;
 	    char *template1, *template2;
 	    int c;
+	    char *seq=NULL;
 
+
+	    
+	    seq=(char*)vcalloc (strlen (seq_in)+1, sizeof(char));
+	    sprintf ( seq, "%s", seq_in);
+	    
 	    atoi(strtok (seq,SEPARATORS));
 	    s1=atoi(strtok (NULL,SEPARATORS));
 	    s2=atoi(strtok (NULL,SEPARATORS));
-
 	    template1=seq2T_value(CL->S,s1, "template_name", "_P_");
 	    template2=seq2T_value(CL->S,s2, "template_name", "_P_");
-
-
+	    
 	    if (!template1 || !template2) return CL;
 
 
@@ -1725,12 +1733,11 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 #endif
 
 
-
+	    
 	    tmp_name1=(char*)vcalloc (100, sizeof (char));
 	    sprintf ( tmp_name1, "%s_%s.sap_results",template1,template2);
 	    tmp_name2=(char*)vcalloc (100, sizeof (char));
 	    sprintf ( tmp_name2, "%s_%s.sap_results",template2,template1);
-
 
 	    if (is_sap_file (tmp_name1))
 	      {
@@ -1746,7 +1753,7 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		char local1[100];
 		char local2[100];
 		char cdir[1001];
-
+		
 		tmp_name=tmp_name1;
 
 		tmp_pdb1=normalize_pdb_file(seq2P_template_file(CL->S,s1),(CL->S)->seq[s1], vtmpnam (NULL));
@@ -1761,8 +1768,19 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 
 		sprintf (local1, "%d_1.%d.sap_tmp", getpid(), rand()%10000);
 		sprintf (local2, "%d_2.%d.sap_tmp", getpid(), rand()%10000);
-		printf_system ("cp %s %s", tmp_pdb1, local1);
-		printf_system ("cp %s %s", tmp_pdb2, local2);
+
+		
+		if (strm ((CL->S)->type, "RNA"))
+		  {
+		    printf_system ("rnapdb2protpdb.pl C3PRIME %s > %s",tmp_pdb1, local1);
+		    printf_system ("rnapdb2protpdb.pl C3PRIME %s > %s",tmp_pdb2, local2);
+		  }
+		else
+		  {
+		    printf_system ("cp %s %s", tmp_pdb1, local1);
+		    printf_system ("cp %s %s", tmp_pdb2, local2);
+		  }
+		
 		printf_system ("%s %s %s >%s 2>/dev/null::IGNORE_FAILURE::",program,local1,local2, full_name);
 		printf_system ("rm %s", local1);
 		printf_system ("rm %s", local2);
@@ -1772,8 +1790,10 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		  {
 		    add_warning ( stderr, "SAP failed to align: %s against %s [%s:WARNING]\n", seq2P_template_file(CL->S,s1),seq2P_template_file(CL->S,s2), PROGRAM);
 		    if ( check_file_exists (full_name))add2file2remove_list (full_name);
+		    vfree (seq);
 		    return CL;
 		  }
+		
 		if ( flag_file2remove_is_on())add2file2remove_list (full_name);
 		remove ("super.pdb");
 	      }
@@ -1846,21 +1866,19 @@ Constraint_list * sap_pair   (char *seq, char *weight, Constraint_list *CL)
 		vfclose (fp);
 
 		CL=read_constraint_list_file(CL,sap_lib);
-	    vremove (sap_lib);
+		vremove (sap_lib);
 	      }
 
-
+	    if (strm ((CL->S)->type, "RNA")){vremove (tmp_name);vremove (full_name);}
 
 	    vfree (sap_seq1); vfree(sap_seq2);vfree (tmp_name1); vfree(tmp_name2);
-	    vfree (buf);
+	    vfree (buf);vfree (seq);
 	    return CL;
 	}
 
 
 
-Constraint_list *rnapdb_pair (TC_method *M ,
-						   char *in_seq,
-						   Constraint_list *CL)
+Constraint_list *rnapdb_pair (TC_method *M ,char *in_seq,   Constraint_list *CL)
 {
 	char seq[1000];
 	int s1, s2;

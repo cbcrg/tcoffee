@@ -11,8 +11,70 @@
 #include "dp_lib_header.h"
 void print_atom ( Atom*A);
 
+float drmsd ( Alignment *A,  float max_distance, float delta);
+
 float **** quantile_apdb_filtration ( Alignment *A, float ****residues, Constraint_list *CL,Pdb_param *PP, FILE *fp);
 float **** irmsdmin_apdb_filtration ( Alignment *A, float ****residues, Constraint_list *CL,Pdb_param *PP, FILE *fp);
+
+char * pdb2lib (Sequence *S, char *mode,float max, char *name)
+{
+  //if max==0 returns contacts
+  //if max >0 returns all pairs of CA within Max
+  Ca_trace **T;
+  FILE *fp;
+  int a;
+  int keptD=0, totD=0;
+
+
+  if (!name)name=vtmpnam (NULL);
+  fp=vfopen (name, "w");
+  fprintf ( fp, "! TC_LIB_FORMAT_01\n");
+  fprintf ( fp, "!CMT: [SOURCE] +seq2contacts %s %.2f (Angstrom)\n",mode,max);
+    
+  fprintf ( fp, "%d\n", S->nseq);
+  for (a=0; a<S->nseq; a++)fprintf ( fp, "%s %d %s\n",S->name[a], S->len[a], S->seq[a]);
+  
+  T=(Ca_trace**)vcalloc (S->nseq,sizeof (Ca_trace*));
+  for (a=0; a<S->nseq; a++)
+    {
+      char *p=seq2T_value (S, a, "template_file", "_P_");
+      if ( !p || !is_pdb_file (p));
+      else
+	{
+	  int b,c;
+	  int l=S->len[a];
+	  float **d;
+	  
+	  T[a]=read_ca_trace    (p, "ATOM");
+	  T[a]=trim_ca_trace    (T[a], S->seq[a]);
+	  
+	  
+	  if (strm (mode, "distances"))     d=trace2ca_distances      (T[a], max);
+	  else if ( strm (mode, "closest")) d=trace2closest_contacts  (T[a], max);
+	  else if ( strm (mode, "best"))    d=trace2best_contacts     (T[a], max);
+	  else if ( strm (mode, "count"))   d=trace2count_contacts    (T[a], max);
+	  else if ( strm (mode, "all"))     d=trace2contacts          (T[a], max);
+	  else {HERE ("unknown mode"); exit (0);}
+	  fprintf ( fp, "#%d %d\n", a+1, a+1);
+	  for (b=0; b<l-1; b++)
+	    for (c=b+1; c<l; c++)
+	      {
+		totD++;
+		if ((d[b][c])>=UNDEFINED && d[b][c]>0)
+		  {
+		    keptD++;
+		    fprintf (fp, "%d %d %d\n", b+1, c+1,(int)(d[b][c]*100)); 
+		  }
+	      }
+	  free_float (d,-1);
+	}
+    }
+  fprintf ( fp, "!CMT: [INFO] Size: %d", keptD);
+  fprintf ( fp, "!CMT: [INFO] KEPT %d pairs out of %d -- %.2f%%\n", keptD, totD, (float)(keptD*100)/(float)totD);
+  fprintf ( fp, "! SEQ_1_TO_N\n");
+  vfclose (fp);
+  return name;
+}
 int apdb ( int argc, char *argv[])
     {
 
@@ -52,6 +114,8 @@ int apdb ( int argc, char *argv[])
 	int  n_excluded_nb;
 
 	float maximum_distance;
+	float maximum_ratio;
+	
 	float similarity_threshold;
 	float   md_threshold;
 
@@ -393,6 +457,25 @@ int apdb ( int argc, char *argv[])
 			    /*Parameter*/ &maximum_distance          ,\
 			    /*Def 1*/    "10"            ,\
 			    /*Def 2*/    "10"             ,\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"         \
+		   );
+
+
+/*PARAMETER PROTOTYPE:    -maximum ratio     */
+	       get_cl_param(\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-maximum_ratio"     ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "F"           ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "ND"          ,\
+			    /*Parameter*/ &maximum_ratio          ,\
+			    /*Def 1*/    "0.1"            ,\
+			    /*Def 2*/    "0.1"             ,\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"         \
 		   );
@@ -861,10 +944,10 @@ declare_name (prot_db);
 		if (strm ( aln, ""))
 		  sprintf ( aln, "%s", argv[1]);
 
-		if (!is_aln (aln))
-		  {
-		    printf_exit (EXIT_FAILURE, stderr, "\n\n---- ERROR: File %s must be a valid alignment [FATAL:%s-%s]\n\n",aln,argv[0], PROGRAM);
-		  }
+		//if (!is_aln (aln))
+		// {
+		//  printf_exit (EXIT_FAILURE, stderr, "\n\n---- ERROR: File %s must be a valid alignment [FATAL:%s-%s]\n\n",aln,argv[0], PROGRAM);
+		//}
 
 		pdb_param=(Pdb_param*)vcalloc ( 1, sizeof(Pdb_param));
 
@@ -988,6 +1071,17 @@ declare_name (prot_db);
 		    fprintf (fp, "[FATAL:%s]\n", PROGRAM);
 		    vfclose (fp);
 		  }
+		else if ( strm (mode, "drmsd"))
+		  {
+		    float score;
+
+		    //t_coffee -other_pg irmsd  -template_file ../TEMPLATEFILE -mode drmsd -maximum_ratio 0.3 -maximum_distance 10 -aln $.tc' list
+		    score=drmsd ( A, maximum_distance, maximum_ratio);
+		    
+		    fprintf (stdout, "DRMSD: %.2f%% MaxDistance: %.2f +/- %.2f\n", (float)(score*(float)100), maximum_distance, maximum_ratio);
+		    exit (0);
+		  }
+		
 		else if ( strm (mode, "irmsd"))
 		  {
 		      EA=analyse_pdb ( A, EA, apdb_outfile);
@@ -2066,7 +2160,7 @@ float **** analyse_pdb_residues ( Alignment *A, Constraint_list *CL, Pdb_param *
 	 for ( s1=0; s1< A->nseq; s1++)
 	   {
 	     rs1=A->order[s1][0];
-	     if (CL->T[rs1] &&  !(CL->T[rs1])->ca_dist)(CL->T[rs1])->ca_dist=measure_ca_distances(CL->T[rs1]);
+	     if (CL->T[rs1] &&  !(CL->T[rs1])->ca_dist)(CL->T[rs1])->ca_dist=trace2ca_distances(CL->T[rs1],0);
 	     for ( s2=0; s2< A->nseq; s2++)
 	       {
 		 distances[s1][s2]=declare_float ( A->len_aln, 6);
@@ -2173,6 +2267,82 @@ float **** analyse_pdb_residues ( Alignment *A, Constraint_list *CL, Pdb_param *
 	 free_int (pos, -1);
 	 return distances;
      }
+
+float drmsd ( Alignment *A, float max_distance, float delta)
+     {
+
+       int **pos;
+       int s1, s2,col1,col2;
+       float score=0;
+       float tot=0;
+       float max=0;
+       Constraint_list *CL;
+       if (A)CL=A->CL;
+       else return -1;
+       
+       pos=aln2pos_simple (A, A->nseq);
+       
+       for (s1=0; s1<A->nseq; s1++)
+	 for (col1=0; col1<A->len_aln; col1++)
+	   for (col2=0; col2<A->len_aln; col2++)
+	     for (s2=0; s2<A->nseq; s2++)
+	       {
+		 int rs1=A->order[s1][0];
+		 int rs2=A->order[s2][0];
+		 int rr1_s1=pos[s1][col1]-1;
+		 int rr2_s1=pos[s1][col2]-1;
+		 		 
+		 if (s1==s2)continue;
+		 if (col1==col2)continue;
+		 
+		 //gap in master pair
+		 if (rr1_s1<0 || rr2_s1<0)continue;
+		 //Missing Structure
+		 else if (!(CL->T[rs1]) || !(CL->T[rs2]))continue;
+		 //Master pair to be ignored
+		 else if ( islower (A->seq_al[s1][col1]) || islower ( A->seq_al[s1][col2]))continue;//master pair to be ignore
+		 else
+		   {
+		     double d1;
+		     
+		     if (CL->T[rs1] &&  !(CL->T[rs1])->ca_dist)(CL->T[rs1])->ca_dist=trace2ca_distances(CL->T[rs1],0);
+		     if (CL->T[rs2] &&  !(CL->T[rs2])->ca_dist)(CL->T[rs2])->ca_dist=trace2ca_distances(CL->T[rs2],0);
+		     d1=(CL->T[rs1])->ca_dist[rr1_s1][rr2_s1];;
+		     
+		     max++;
+		     
+		     
+		     if (d1<= UNDEFINED  || d1>max_distance)continue;
+		     else
+			 {
+			   int rr1_s2=pos[s2][col1]-1;
+			   int rr2_s2=pos[s2][col2]-1;
+			   
+			   tot++;
+			   if (rr1_s2<0 || rr2_s2<0);
+			   else
+			     {
+			       
+			       double d2=(CL->T[rs2])->ca_dist[rr1_s2][rr2_s2];
+			       
+			       
+			       if ( d2<=UNDEFINED);
+			       else if (d2>(d1-(d1*delta)) && d2< (d1+(d1*delta)))
+				 {
+				   score++;
+				 }
+			     }
+			 }
+		   }
+	       }
+
+       HERE ("MAX=%.0f Tot=%.0f Ratio: %.2f", max, tot, (max==0)?0:tot/max);
+       return score/tot;
+     }
+
+
+
+
 int pair_res_suitable4trmsd    (int s1,int col1, int col2, Alignment *A, int **pos, Pdb_param *PP, Constraint_list *CL,int *s);
 int aln_column_contains_gap (Alignment *A, int c);
 float aln2ncol4trmsd(Alignment *A, int **pos, Constraint_list *CL, int **lc);
@@ -2314,7 +2484,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 for ( s1=0; s1< A->nseq; s1++)
 	   {
 	     rs1=A->order[s1][0];
-	     if (CL->T[rs1] &&  !(CL->T[rs1])->ca_dist)(CL->T[rs1])->ca_dist=measure_ca_distances(CL->T[rs1]);
+	     if (CL->T[rs1] &&  !(CL->T[rs1])->ca_dist)(CL->T[rs1])->ca_dist=trace2ca_distances(CL->T[rs1],0);
 	   }
 	 pos=aln2pos_simple (A, A->nseq);
 

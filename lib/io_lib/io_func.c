@@ -220,6 +220,12 @@ Sequence *get_sequence_type (Sequence *S)
   else sprintf ( S->type, "%s", get_array_type (S->nseq, S->seq));
   return S;
 }
+Sequence *fast_get_sequence_type (Sequence *S)
+{
+  if ( !S) return NULL;
+  else if (S->type && S->type[0])return S;
+  else return get_sequence_type(S);
+}
 
 
 void get_sequence (char *seq_file,int *NSEQ, char ***SEQ, char ***SN, int **sl, int *min, int *max)
@@ -399,6 +405,59 @@ int ** read_matrice (char *mat_name_in)
 	    return matrice;
 	  }
 	/*Blast Matrices*/
+	else if (strm (mat_name, "strikeP"))
+	  {
+	    double min=100000;
+	    
+	    matrice=declare_int ( 256, 256);
+	     for (a=0; a<26; ++a)
+		{
+		 for (b=0;b<26;++b)
+		   {
+		     if (min>strikeP_mat[a][b])min=strikeP_mat[a][b];
+		   }
+		}
+	     for (a=0; a<26; ++a)
+	       {
+		 for (b=0;b<26;++b)
+		   {
+		     
+		     matrice[a+'a'][b+'a']=(int)((double)10*(strikeP_mat[a][b]-min));
+		     matrice[a+'A'][b+'A']=(int)((double)10*(strikeP_mat[a][b]-min));
+		   }
+	       }
+	    return matrice;
+	  }
+	else if (strm (mat_name, "strikeR"))
+	  {
+	    matrice=declare_int ( 256, 256);
+	    matrice['G']['A']=matrice['g']['a']=0;
+	    matrice['G']['G']=matrice['g']['g']=0;
+	    matrice['G']['C']=matrice['g']['c']=6;
+	    matrice['G']['T']=matrice['g']['t']=2;
+	    matrice['G']['U']=matrice['g']['u']=2;
+	    matrice['C']['A']=matrice['g']['a']=0;
+	    matrice['C']['G']=matrice['c']['g']=6;
+	    matrice['C']['C']=matrice['c']['c']=0;
+	    matrice['C']['T']=matrice['c']['t']=0;
+	    matrice['C']['U']=matrice['c']['u']=0;
+	    matrice['T']['A']=matrice['t']['a']=5;
+	    matrice['T']['G']=matrice['t']['g']=0;
+	    matrice['T']['C']=matrice['t']['c']=0;
+	    matrice['T']['T']=matrice['t']['t']=0;
+	    matrice['T']['U']=matrice['t']['u']=0;
+	    matrice['U']['A']=matrice['u']['a']=5;
+	    matrice['U']['G']=matrice['u']['g']=2;
+	    matrice['U']['C']=matrice['u']['c']=0;
+	    matrice['U']['T']=matrice['u']['t']=0;
+	    matrice['U']['U']=matrice['u']['u']=0;
+	    matrice['A']['A']=matrice['a']['a']=0;
+	    matrice['A']['G']=matrice['a']['g']=0;
+	    matrice['A']['C']=matrice['a']['c']=0;
+	    matrice['A']['T']=matrice['a']['t']=5;
+	    matrice['A']['U']=matrice['a']['u']=5;
+	    return matrice;
+	  }
 	else if ( check_file_exists(mat_name) && is_blast_matrix (mat_name))
 	  {
 	    

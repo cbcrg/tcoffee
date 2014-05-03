@@ -352,6 +352,16 @@ Constraint_list *copy_constraint_list (Constraint_list *CL, int mode)
        NCL->cpu=CL->cpu;
        NCL->local_stderr=CL->local_stderr;
        sprintf (NCL->multi_thread, "%s", CL->multi_thread);
+       if (mode==SOFT_COPY)
+	 {
+	   NCL->comment=CL->comment;
+	 }
+       else
+	 {
+	   if (CL->comment)NCL->comment=(char*)vcalloc(strlen (NCL->comment)+1, sizeof (char));
+	   sprintf (NCL->comment, "%s", CL->comment);
+	 }
+       
 
     return NCL;
     }
@@ -1541,7 +1551,7 @@ int read_array_size (void *array, size_t size)
     p-=2;
     if ( p[0].size_element ==0 && size==0)
       {
-		  printf("%i", p[-1]);
+	printf("%i", p[-1]);
 	fprintf ( stderr, "\nERROR in read_array_size: trying to read the size of a malloced block");
       }
     else if ( size ==0) return (int)p[0].size/p[0].size_element;

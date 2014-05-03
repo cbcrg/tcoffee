@@ -167,6 +167,8 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +add_scale..<offset>.addscale below aln");
 
 		fprintf ( stdout, "\n     +rm_gap n ...........Removes col with n%% gap [n=100]");
+		fprintf ( stdout, "\n     +rm_lower c..........Removes lower case positions and replaces them with c [-]");
+		
 		fprintf ( stdout, "\n     +rmgap_col SEQ1:SEQ2.Removes column with a gap in SEQ [#] ");
 
 		fprintf ( stdout, "\n     +backtranslate.......Random Backtranslation");
@@ -299,6 +301,17 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....................MaxLen of the deletions, Ncycle: number of cycles");
 		fprintf ( stdout, "\n     .....................Random_len: 0 sets the len to maxlen, 1 to a random value");
 		fprintf ( stdout, "\n     +remove_nuc.x........Remove Position 1, 2 or 3 of every codon");
+		fprintf ( stdout, "\n     +evaluate contacts...Uses the -in2 contact_lib or the +seq2contacts ");
+		fprintf ( stdout, "\n     .....................OUTPUT: -output score_ascii, score, score_html ");
+		fprintf ( stdout, "\n     +evaluate distances.Max(float).Delta(float)");
+		fprintf ( stdout, "\n     .....................Max[10]  : Maximum distance between a pair in Angs");
+		fprintf ( stdout, "\n     .....................Delta[0.2]: counts pairs +/- Delta %%");
+		fprintf ( stdout, "\n     .....................OUTPUT: -output score_ascii, score, score_html ");
+		fprintf ( stdout, "\n     +evaluate..strikeP...Evaluate a protein MSA using STRIKE");
+		fprintf ( stdout, "\n     .....................Provide contacts: -in2=<contact_lib>");
+		fprintf ( stdout, "\n     .....................Or +seq2contacts");
+		fprintf ( stdout, "\n     .....................OUTPUT: -output score_ascii, score, score_html ");
+		fprintf ( stdout, "\n     +evaluate..strikeR...Evaluate an RNA  MSA using STRIKE");
 		fprintf ( stdout, "\n     +evaluate matrix..gop..gep");
 		fprintf ( stdout, "\n     .....................Make a similarity evaluation with matrix");
 		fprintf ( stdout, "\n     .....................use -output=score_ascii, or score_html.");
@@ -426,15 +439,22 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +seq2lat_mat.........computes a transition matrix on seq provided via -in");
 
 		fprintf ( stdout, "\nStructure Analysis___________________________________________________");
-		fprintf ( stdout, "\n     +struc2contacts.A.B D.Displays in capitals all the residues of A");
-		fprintf ( stdout, "\n     ......................Less than D Angs from a residue of B");
-		fprintf ( stdout, "\n     ......................A and B are pdb file, D is a distance in Angs");
-		fprintf ( stdout, "\n     +seq2contacts.A.D.....Identifies all the residues in contact with ligands");
-		fprintf ( stdout, "\n     ......................Ligands are in the FASTA header of struc in");
-		fprintf ( stdout, "\n     ......................>Name _S_ [Target Struc] [Ligand1] [Chain] ...");
-		fprintf ( stdout, "\n     ......................Output: number_fasta: 0=no contact, 1=ligand 1...");
-	 	fprintf ( stdout, "\n     ......................9: residues in contact with more than 1 ligand");
-		fprintf ( stdout, "\n     ......................Use -output=color_html/ascii to display result");
+		
+		fprintf ( stdout, "\n     +seq2contacts.mode....Reports contacts or distances in library format");
+		fprintf ( stdout, "\n     ......................mode: RNAplfold");
+		fprintf ( stdout, "\n     ......................Sequences with a structure are ignored");
+		fprintf ( stdout, "\n     ......................OUTPUT: -output=contact_lib");
+		fprintf ( stdout, "\n     +struc2nb...D.........Display a list of all the residues D appart");
+		fprintf ( stdout, "\n     +pdb2contacts.mode D..Reports contacts or distances in library format");
+		fprintf ( stdout, "\n     ......................mode: find_pairs|find_pairs-d|RNAplfold|distances|all|best|count|closest");
+		fprintf ( stdout, "\n     ......................If mode is set, sequences without a PDB ignored");
+		fprintf ( stdout, "\n     ......................mode [find_pair-p for RNA/PDB-RNAplfold for RNA]");
+		fprintf ( stdout, "\n     ......................D: [1.2 | 20 for mode=distances] for proteins");
+		
+		fprintf ( stdout, "\n     ......................D: probe size for contacts 1.2A by def");
+		fprintf ( stdout, "\n     ......................D: MaxDistance for distance 30 A by default");
+		fprintf ( stdout, "\n     ......................INPUT: provide template via -in2");
+		fprintf ( stdout, "\n     ......................OUTPUT: -output=contact_lib");
 		fprintf ( stdout, "\n     +struc2nb...D.........Display a list of all the residues D appart");
 		fprintf ( stdout, "\n     +rm_template...V......Removes _[S|G|R]_[template] to sequence names");
 		fprintf ( stdout, "\n     ......................V: omitted | sequences <=> Output sequences");
@@ -470,7 +490,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n***********  OUTPUT FORMATS: Alignments ******************");
 		fprintf ( stdout, "\n     compressed_aln saga_aln        clustal_aln");
 		fprintf ( stdout, "\n     phylip_aln     msf_aln         fasta_aln ");
-		fprintf ( stdout, "\n     pir_aln        ");
+		fprintf ( stdout, "\n     pir_aln        stockhom_aln    stockholm");
 		fprintf ( stdout, "\n     color_html,color_ps......colored using the struc_in file  ");
 		fprintf ( stdout, "\n     color_protogene..........colors codons");
 		fprintf ( stdout, "\n     color_exoset.............mixes conservation (gray) and introns (RGB)");
@@ -478,7 +498,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     thread_dna_on_prot_aln");
 		fprintf ( stdout, "\n");
 		fprintf ( stdout, "\n*********** OUTPUT FORMATS: RNA sequence  ******************");
- 		fprintf ( stdout, "\n     vienna2tc_lib  vienna2template");
+ 		fprintf ( stdout, "\n     vienna2tc_lib  vienna2template  stockholm_aln");
 		fprintf ( stdout, "\n*********** OUTPUT FORMATS: sequence  ******************");
  		fprintf ( stdout, "\n     fasta_seq      fasta_seq1     gotoh_seq");
 		fprintf ( stdout, "\n     gor_seq        cache_id       fasta_seq2");
@@ -1811,7 +1831,7 @@ int is_aln ( char *name)
        {
        char *format;
        if ( !check_file_exists       (name))return 0;
-
+       
        format= identify_seq_format(name);
        if ( !format || format[0]=='\0'){vfree (format);return 0;}
        else if (strstr(format, "aln")){vfree (format); return 1;}
@@ -2415,7 +2435,11 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	      }
 	     vfclose (save_list_footer (fp, CL));
 	  }
-
+	
+	else if (strm (out_format, "score"))
+	  {
+	    fprintf (stdout, "%d\n", (D1->A)->score_aln);
+	  }
 	else if      ( strncmp (out_format, "score",5)==0 || strm (out_format, "html"))
 		{
 		  Alignment *BUF;
@@ -2694,23 +2718,23 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  }
 
 	else if ( strnm (out_format, "upper", 5))
+	  {
+	    
+	    if (!D1)return 1;
+	    if ( !DST)
 	      {
-
-		if (!D1)return 1;
-		if ( !DST)
-		   {
-		   fprintf ( stderr,"\n[You Need an evaluation File: Change the output format][FATAL:%s]\n", PROGRAM);
-		   myexit(EXIT_FAILURE);
-		   }
-
-
-		(DST->A)=aln2number (DST->A);
-
-		value=atoi(out_format+5);
-
-		D1->A=filter_aln_lower_upper (D1->A, DST->A,0, value);
-		output_clustal_aln ( out_file, D1->A);
+		fprintf ( stderr,"\n[You Need an evaluation File: Change the output format][FATAL:%s]\n", PROGRAM);
+		myexit(EXIT_FAILURE);
 	      }
+	    
+	    
+	    (DST->A)=aln2number (DST->A);
+	    
+	    value=atoi(out_format+5);
+	    
+	    D1->A=filter_aln_lower_upper (D1->A, DST->A,0, value);
+	    output_clustal_aln ( out_file, D1->A);
+	  }
 
 	else if ( strstr (out_format, "tcs"))
 	  {
@@ -2727,8 +2751,20 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		myexit(EXIT_FAILURE);
 	      }
 	    
+	    if (D2 && D2->S)
+	      {
+		//must be DNA file
+		HERE ("****");
+		D1->A =thread_dnaseq_on_prot_aln (D2->S, D1->A);
+		HERE ("######");
+		DST->A=aln2X(DST->A,3);
+		HERE ("MMMMMM");
+	      }
+	    
 	    EA=(DST->A)=aln2number (DST->A);
 	    A=D1->A;
+	    
+	    
 	    
 	    if (strstr (out_format, "residue"))target=0;
 	    else target=1;
@@ -2815,9 +2851,10 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 			      if ( vc<=filter)A->seq_al[s][c]=tolower (A->seq_al[s][c]);
 			    }
 			}
-		      output_clustal_aln ( out_file, D1->A);
 		    }
+		output_clustal_aln ( out_file, D1->A);
 	      }
+	    
 	  }
 	else if ( strm4 ( out_format, "filter0", "filter1", "filter2", "filter3"))
 	  {
@@ -3045,10 +3082,14 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  {
 	    vienna2template_file (out_file, D1->S,D2->S);
 	  }
-	
+	else if ( strm2 (out_format, "contact_lib","c_lib"))
+	  {
+	    save_contact_constraint_list (D1->CL, out_file);
+	  }
 	else if ( strm2 (out_format, "constraint_list","tc_lib"))
 	        {
 
+		  HERE ("----- %d", (D1->CL)->ne);
 		  if (!D1)return 1;
 		  else if (!D1->CL)output_constraints (out_file,"sim", D1->A);
 		  else if (D1->CL) vfclose ( save_constraint_list ( D1->CL, 0, (D1->CL)->ne, out_file, NULL, "ascii",(D1->CL)->S));
@@ -3075,6 +3116,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
                 compress_aln (D1->A);
 		output_saga_aln (out_file, D1->A);
 		}
+	
 	else if (strm (out_format, "n_seq") ||strm (out_format, "nseq") )
 		{
 		  if (!D1)return 1;
@@ -3274,7 +3316,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		  if (!D1)return 1;
 		  output_similarities (out_file, D1->A,out_format);
 		}
-	else if ( strm (out_format, "stockholm_aln"))
+	else if ( strm (out_format, "stockholm_aln") ||strm (out_format, "stockholm") )
 	  {
 	    output_stockholm_aln (out_file,D1->A, (D2)?D2->A:NULL);
 	  }
@@ -8055,8 +8097,12 @@ Alignment *thread_dnaseq_on_prot_aln (Sequence *S, Alignment *A)
 			   B->seq_al[a][0]='\0';
 			   for (la=0, ls=0, ln=0; la< A->len_aln; la++)
 			       {
-				   for (c=0; c< 3; c++)
-				       B->seq_al[a][ls++]=(is_gap(A->seq_al[a][la]))?'-':S->seq[b][ln++];
+				 if (is_gap(A->seq_al[a][la]))
+				   for (c=0; c< 3; c++)B->seq_al[a][ls++]='-';
+				 else if (isupper(A->seq_al[a][la]))
+				   for (c=0; c< 3; c++)B->seq_al[a][ls++]=toupper((S->seq[b][ln++]));
+				 else 
+				   for (c=0; c< 3; c++)B->seq_al[a][ls++]=tolower((S->seq[b][ln++]));
 			       }
 		       B->seq_al[a][ls]='\0';
 		       }
@@ -10955,10 +11001,14 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	      	myexit (EXIT_SUCCESS);
 	      }
 	 }
-       else if (strm (action, "add_template") || strm (action, "swap_header"))
+       else if (strm (action, "add_template") || strm (action, "swap_header") || strm (action, "seq2template"))
 	 {
-	   D1->S=seq2template_seq (D1->S, action_list[1], NULL);
-	    D1->A=seq2aln(D1->S, NULL, 1);
+	   int n=1;
+	   while (ACTION(n))
+	     {
+	       D1->S=seq2template_seq (D1->S, action_list[n++], NULL);
+	     }
+	   D1->A=seq2aln(D1->S, NULL, 1);
 	 }
        else if ( strm ( action, "seq2year"))
 	 {
@@ -11000,33 +11050,21 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   myexit (EXIT_SUCCESS);
 	 }
-
-
-
-       else if ( strm(action, "seq2contacts"))
+       else if ( strm (action, "pdb2contacts"))
 	 {
-	   int z;
-	   D1->S=swap_header (D1->S, D2->S);
-	   for ( z=0; z< (D1->S)->nseq; z++)sprintf ( (D1->A)->name[z], "%s", (D1->S)->name[z]);
-	   DST->S=seq2contacts (D1->S, atof (action_list[1]));
-	   DST->A=copy_aln (D1->A, NULL);
-	   thread_seq_struc2aln ( DST->A,DST->S);
-	   for (z=0; z< (D1->S)->nseq; z++)
-	   (DST->A)->S=D1->S;
-
+	   	   
+	   //param1: mode 
+	   //param2: max distance, in Angstrom
+	   float D=0;
+	   ungap_seq(D1->S);
+	   if (ACTION(2))D=atof (ACTION(2));
+	   D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, ACTION (1), D);
 	 }
-       else if ( strm(action, "struc2contacts"))
+       else if ( strm (action, "seq2contacts"))
 	 {
-	   char *seq;
-	   if ( atof (action_list[3])>0)
-	     {
-	       seq=map_contacts  (action_list[1], action_list[2], atof (action_list[3]));
-	       fprintf ( stderr, "\n>%s %s\n%s",action_list[1], action_list[2],seq);
-	     }
-	   else
-	     print_contacts  (action_list[1], action_list[2], atof (action_list[3]));
-
-	   myexit (EXIT_SUCCESS);
+	   //param1: mode
+	   ungap_seq(D1->S); 
+	   D1->CL=seq2contacts (D1->S, D2?(D2->S):NULL, D1->CL, ACTION (1));
 	 }
        else if ( strm(action, "redundate"))
 	 {
@@ -11260,12 +11298,13 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	  (D1->A)->output_res_num=2;
 	 }
-
+      	   
        else if ( strm (action, "aln2pred"))
 	 {
 	   aln2pred (D1->A, D2->A, ACTION (1));
 	   myexit (EXIT_SUCCESS);
 	 }
+       
        else if ( strm(action, "evaluate"))
 	 {
 	   Alignment *A;
@@ -11277,14 +11316,50 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     {
 	       //D1->A: MSA
 	       //D2->A: rna structure in parenthesis
-	       if (!D2->CL)
+	       if (!D2->CL)D2->CL=vienna2tc_lib(NULL,D2->S, D2->S);
+	       DST->A=sp3_evaluate4tcoffee (D1->A, D2->CL);
+	     }
+	   else if    (strm (action_list[1], "strike"))
+	     {
+	       Constraint_list *CL;
+	       
+	       if (!D2)CL=D1->CL;
+	       else if (!D2->CL)CL=D1->CL;
+	       else CL=D2->CL;
+	       if (!CL)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: a contact library must be provided via -in2  [FATAL]");
+	       DST->A=strike_evaluate4tcoffee (D1->A,CL,((ACTION(2)))?(ACTION(2)):(ACTION(1)));
+	     }
+	   
+	   else if    (strm (action_list[1], "contacts") || strm (action_list[1], "distances"))
+	     {
+	       int enb;
+	       float max;
+	       float delta;
+	       Constraint_list *CL;
+	       
+	       if (strm (action_list[1], "distances"))
 		 {
-		   char *tmp;
-		   
-		   D2->CL=vienna2tc_lib(NULL,D2->S, D2->S);
+		   enb=3;
+		   max=10;
+		   delta=0.2;
+		   if (ACTION(2))max=atof(ACTION(2));
+		   if (ACTION(3))delta=atof(ACTION(3));
+		   if (ACTION(4))enb=atoi(ACTION(4));
 		 }
-					
-	       D1->A=sp3_evaluate4tcoffee (D1->A, D2->CL);
+	       else if (strm (action_list[1], "contacts"))
+		 {
+		   enb=3;
+		   max=1.2;
+		   delta=-1;
+		   if (ACTION(2))max=atof(ACTION(2));
+		   if (ACTION(3))enb=atoi(ACTION(3));
+		 }
+	       
+	       if (!D2)CL=D1->CL;
+	       else if (!D2->CL)CL=D1->CL;
+	       else CL=D2->CL;
+	       if (!CL)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: a contact library must be provided via -in2  [FATAL]");
+	       DST->A=distance_evaluate4tcoffee (D1->A,CL,max,delta, enb);
 	     }
 	   else if    (strm (action_list[1], "id2"))
 	     {
@@ -11315,10 +11390,9 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   else
 	     {
-	       CL=declare_constraint_list ( DST->S,NULL, NULL, 0,NULL, read_matrice( const_cast<char*>( (n_actions==1)?"pam250mt":action_list[1]) ) );
-	       DST->A=  main_coffee_evaluate_output(DST->A, CL, "matrix");
+	       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: +evaluate mode [%s] is unknown[FATAL]", action_list[1]);
 	     }
-
+	   
 	   DST->S=aln2seq ( DST->A);
 
 	   A=D1->A;
@@ -11407,6 +11481,13 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm(action, "ungap"))
 	 {
 	   seq2aln (D1->S, D1->A, 1);
+	 }
+       else if ( strm2(action, "rmlower", "rm_lower"))
+	 {
+	   
+	   RmLowerInAln(D1->A, ACTION(1));
+	   D1->S=aln2seq ( D1->A);
+	   (D1->A)->S=D1->S;
 	 }
        else if ( strm2(action, "rmgap", "rm_gap"))
 	 {
@@ -11874,33 +11955,51 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 		D1->A=declare_Alignment(D1->S);
 		seq2aln (D1->S, D1->A, RAD->rm_gap);
 	 }
+	 else if ( strm (action, "extract_lib_list"))
+	   {
+	     D1->CL=constraint_list2sub_constraint_list (D1->CL,main_read_seq (action_list[1]));
+	   }
        else if ( strm (action, "extract_seq_list"))
 	 {
-	   if ( check_file_exists (action_list[1]) && format_is_fasta (action_list[1]))
-	     {
-
-	       BUFS=main_read_seq (action_list[1]);
-	       action_list=BUFS->name;
-	       n_actions=BUFS->nseq;
-	     }
+	   
+	   if (D1->CL)
+	      D1->CL=constraint_list2sub_constraint_list (D1->CL,main_read_seq (action_list[1]));
 	   else
 	     {
-	       action_list++;
-	       n_actions--;
+	       int nadded=0;
+	       if ( check_file_exists (action_list[1]) && format_is_fasta (action_list[1]))
+		 {
+		   
+		   BUFS=main_read_seq (action_list[1]);
+		   action_list=BUFS->name;
+		   n_actions=BUFS->nseq;
+		 }
+	       else
+		 {
+		   action_list++;
+		   n_actions--;
+		 }
+	       
+	       for ( a=0; a< n_actions;a++)
+		 {
+		   if ( (name_is_in_list (action_list[a], (D1->S)->name, (D1->S)->nseq, 100))!=-1)
+		     {
+		       nadded++;
+		       HERE ("%s", action_list[a]);
+		       NS=extract_one_seq(action_list[a],1,0, D1->A, KEEP_NAME);
+		       OUT_S=add_sequence ( NS,OUT_S, 0);
+		     }
+		   else 
+		     {
+		       fprintf (stderr, "WARNING: %s could not be extracted\n", action_list[a]);
+		     }
+		 }
+	       if (nadded==0)exit (0);
+	       D1->S=OUT_S;
+	       free_aln (D1->A);
+	       D1->A=declare_Alignment(D1->S);
+	       seq2aln (D1->S, D1->A, RAD->rm_gap);
 	     }
-
-	   for ( a=0; a< n_actions;a++)
-	     {
-
-	       NS=extract_one_seq(action_list[a],1,0, D1->A, KEEP_NAME);
-	       OUT_S=add_sequence ( NS,OUT_S, 0);
-
-	     }
-
-	   D1->S=OUT_S;
-	   free_aln (D1->A);
-	   D1->A=declare_Alignment(D1->S);
-	   seq2aln (D1->S, D1->A, RAD->rm_gap);
 	 }
        else if ( strm (action, "remove_seq") || strm (action, "rm_seq"))
 	 {
