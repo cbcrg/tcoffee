@@ -232,13 +232,19 @@ int sim_pair_wise_lalign (Alignment *in_A, int *in_ns, int **in_l_s,Constraint_l
   int R, Q;
   Alignment *DA;
   
-
+    
   DA=in_A;
-
   Aln=copy_aln (in_A, NULL);
-
   
-
+  //Importnat because the aln has a lenth of zero, which prevents sequences from being copied by copy_aln
+  for (a=0;a<2; a++)
+    for (b=0; b<in_ns[a]; b++)
+      {
+	Aln->seq_al[in_l_s[a][b]]=(char*)vcalloc ( strlen ( in_A->seq_al[in_l_s[a][b]])+1, sizeof (char));
+	sprintf (Aln->seq_al[in_l_s[a][b]], "%s", in_A->seq_al[in_l_s[a][b]]);
+      }
+  
+		 
   l_s=in_l_s;
   ns=in_ns;
   CL=in_CL;
@@ -247,7 +253,7 @@ int sim_pair_wise_lalign (Alignment *in_A, int *in_ns, int **in_l_s,Constraint_l
   M=strlen (Aln->seq_al[l_s[0][0]]);
   N=strlen (Aln->seq_al[l_s[1][0]]);
   maxl=M+N+1;
-
+  
   pos=aln2pos_simple (Aln,-1, ns, l_s);
   
   seqc0=(int*)sim_vcalloc (maxl+1,sizeof (int));
@@ -305,7 +311,7 @@ int sim_pair_wise_lalign (Alignment *in_A, int *in_ns, int **in_l_s,Constraint_l
 		  z->NEXT = PAIRNULL;
 	  }
   }
-
+ 
   
   q = Q;
   r = R;
@@ -324,12 +330,12 @@ int sim_pair_wise_lalign (Alignment *in_A, int *in_ns, int **in_l_s,Constraint_l
   /* Report the K best alignments one by one. After each alignment is
      output, recompute part of the matrix. First determine the size
      of the area to be recomputed, then do the recomputation         */
-  
+   
 
   for ( count = K - 1; count >= 0; count-- )
-    { if ( numnode == 0 )
+    { 
+      if ( numnode == 0 )
         {
-	  
 	  padd_aln (in_A);
 	  /*fatal("The number of alignments computed is too large");*/
 	  sim_free_all();
@@ -374,7 +380,7 @@ int sim_pair_wise_lalign (Alignment *in_A, int *in_ns, int **in_l_s,Constraint_l
 
       if (!DA->A)DA->A=copy_aln(Aln, DA->A);
       DA->A=realloc_alignment (DA->A,nc+1);
-      
+     
  
       DA=DA->A;
       DA->A=NULL;
@@ -390,6 +396,7 @@ int sim_pair_wise_lalign (Alignment *in_A, int *in_ns, int **in_l_s,Constraint_l
 		    }
 		} 
 	    }
+      
       
       
       for ( t1=min0,t2=min1,a=0; a<nc; a++)
@@ -421,6 +428,7 @@ int sim_pair_wise_lalign (Alignment *in_A, int *in_ns, int **in_l_s,Constraint_l
 	    small_pass(A,B,count,nseq);
 	}
     }
+ 
   padd_aln (in_A);
   
   sim_free_all();
@@ -460,7 +468,9 @@ int big_pass(int *A,int *B,int M,int N,int K, int nseq)
 	   DD : the scores of the current row, ending with deletion
 	   SS and FF : the starting point that leads to score DD        */
  	/* Initialize the 0 th row */
-	for ( j = 1; j <= N ; j++ )
+	
+  
+  for ( j = 1; j <= N ; j++ )
 	  {  CC[j] = 0;
 	     RR[j] = 0;
 	     EE[j] = j;
@@ -495,7 +505,7 @@ int big_pass(int *A,int *B,int M,int N,int K, int nseq)
 		  dj = FF[j];
 		  ORDER(d, di, dj, c, ci, cj)
 		  c = 0;
-		 
+		  
 		  DIAG(i, j, c, p+TC_SCORE(A[i-1],B[j-1]))		/* diagonal */
 		    
 		  if ( c <= 0 )
@@ -704,10 +714,8 @@ int locate(int *A,int *B,int nseq)
 		  ORDER(d, di, dj, c, ci, cj)
 		  c = 0;
 	          DIAG(i, n1, c, p+TC_SCORE(A[i-1], B[n1-1]))
-		 
-		   
-		  
-		  if ( c <= 0 )
+		    
+		    if ( c <= 0 )
 		    { c = 0; ci = i; cj = n1; }
 		  else
 		    { ci = pi; cj = pj; }

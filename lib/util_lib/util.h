@@ -568,6 +568,7 @@ char **expand_flist (char *file, char **list,int i,int *n, char *tag);
 char ***file2list   (char *name, char *sep);
 char ** file2lines  (char *name);
 char *  file2string (char *name);
+int     file2size   (char *name);
 int string2file ( char *file, char *mode, char *string,...);
 char *chomp (char *name);
 int get_cl_param (int argc, char **argv, FILE **fp, const char para_name[], int *set_flag, const char type[], int optional, int max_n_val,const char usage[], ...);
@@ -655,6 +656,7 @@ int **get_file_block_pattern (char *fname, int *n_blocks, int max_n_line);
 int token_is_in_file_n ( char *fname, char *token, int nlines);
 int token_is_in_file (char *fname, char *token);
 
+int    check_file_for_token      ( char *file , char *token);
 FILE * find_token_in_file_nlines ( char *fname, FILE * fp, char *token, int n_line);
 FILE * find_token_in_file ( char *fname, FILE * fp, char *token);
 FILE * quick_find_token_in_file  (FILE *fp, char *token);
@@ -679,6 +681,7 @@ int check_program_is_installed ( char *program_name, char *current_path, char *p
 FILE * display_output_filename ( FILE *io, char *type, char *format, char *name, int check_output);
 FILE * display_input_filename ( FILE *io, char *type, char *format, char *name, int check_output);
 int filename_is_special ( char *fname);
+char *check_url_exists ( char *fname);
 char *check_file_exists ( char *fname);
 int my_mkdir ( char *dir);
 int my_rmdir ( char *dir);

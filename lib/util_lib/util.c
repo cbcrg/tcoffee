@@ -3862,7 +3862,7 @@ int my_system ( char *command0)
       free_char (list,-1);
       vfree ( command1);
       command2=substitute ( command2, "//", "/");
-
+      command2=substitute ( command2, ":/", "://");
       return_val=safe_system (command2);
 
       vfree ( command2);
@@ -6022,10 +6022,23 @@ FILE * vfopen  ( char *name_in, char *mode)
     static char *name2;
     static char *stdin_file;
 
-
     if ( !name_in)return NULL;
     if (!name){name=(char*)vcalloc (1000, sizeof (char));}
     if (!name2){name2=(char*)vcalloc (1000, sizeof (char));}
+
+    //intercept net files
+    
+    if ( strstr (name_in, "tp:/") && mode && (mode[0]=='r' || mode[0]=='R'))
+      {
+	char *tmpf;
+	tmpf=check_url_exists(name_in);
+	
+	if (!tmpf)
+	  {
+	    myexit(fprintf_error (stderr, "\nCould not fetch nefile %s -FORCED EXIT (NON INTERACTIVE MODE pid %d)\n", name_in,getpid()));
+	  }
+	else return vfopen (tmpf, mode);
+      }
 
     sprintf ( name, "%s", name_in);
     tild_substitute (name, "~", get_home_4_tcoffee());
@@ -6041,6 +6054,7 @@ FILE * vfopen  ( char *name_in, char *mode)
  		if ( NFP==NULL)NFP=fopen (NULL_DEVICE, mode);
  		return NFP;
  		}
+    
     else if ( strm3 (name,"stderr","STDERR","Stderr"))return stderr;
     else if ( strm3 (name,"stdout","STDOUT","Stdout"))return stdout;
     else if ( strm3 ( name, "stdin","STDIN","Stdin"))
@@ -6344,8 +6358,16 @@ char *file2string (char *name)
     }
 }
 
-
-
+int file2size(char *name)
+{
+  FILE *fp;
+  char c;
+  int n=0;
+  fp=vfopen (name, "r");
+  while ((c=fgetc (fp)!=EOF))n++;
+  vfclose (fp);
+  return n;
+}
 
 /**
  * Read command line parameters.
@@ -6794,6 +6816,26 @@ FILE * set_fp_after_char ( FILE *fp, char x)
 	return fp;
 	}
 
+int    check_file_for_token      ( char *file , char *token)
+{
+  FILE *fp;
+  char *buf=NULL;
+  if (!file)return 0;
+  if (!token) return 0;
+  if (!(fp=vfopen (file, "r")))return 0;
+  while ((buf=vfgets(buf, fp)))
+    {
+      if ( strstr (buf, token))
+	{
+	  vfree (buf);
+	  vfclose (fp);
+	  return 1;
+	}
+    }
+  vfree (buf);
+  vfclose (fp);
+  return 0;
+}
 FILE * find_token_in_file_nlines ( char *fname, FILE * fp, char *token, int n_line)
 
         {
@@ -7252,20 +7294,24 @@ int check_environement_variable_is_set ( char *variable, char *description, int 
 
 int url2file (char *address, char *out)
 {
-
-  if      (check_program_is_installed ("wget",NULL, NULL,WGET_ADDRESS, IS_NOT_FATAL))return printf_system( "wget %s -O%s >/dev/null 2>/dev/null", address, out);
-  else if (check_program_is_installed ("curl",NULL, NULL,CURL_ADDRESS, IS_NOT_FATAL))return printf_system("curl %s -o%s >/dev/null 2>/dev/null", address, out);
+  
+  if      (check_program_is_installed ("wget",NULL, NULL,WGET_ADDRESS, IS_NOT_FATAL))
+    printf_system( "wget \'%s\' -O%s >/dev/null 2>/dev/null", address, out);
+  else if (check_program_is_installed ("curl",NULL, NULL,CURL_ADDRESS, IS_NOT_FATAL))
+    printf_system("curl \'%s\' -o%s >/dev/null 2>/dev/null", address, out);
   else
     {
       printf_exit (EXIT_FAILURE, stderr, "ERROR: Impossible to fectch external file: Neither wget nor curl is installed on your system [FATAL:%s]\n", PROGRAM);
       return EXIT_FAILURE;
     }
+  if (check_file_exists (out) && file2size(out)>0)return 1;
+  else return 0;
 }
 
 int wget (char *address, char *out)
 {
-  return printf_system ( "curl %s -O%s >/dev/null 2>/dev/null", address, out);
-  }
+  return printf_system ( "wget %s -O%s >/dev/null 2>/dev/null", address, out);
+}
 
 int curl (char *address, char *out)
 {
@@ -7631,16 +7677,43 @@ int filename_is_special (char *fname)
   return 0;
 }
 
+
+char* check_url_exists  ( char *fname_in)
+{
+  static char ***lu;
+  static int n;
+  int a;
+  char *tmp;
+  
+  if (!fname_in)return NULL;
+  
+  for (a=0; a<n; a++) if (strm (lu[a][0], fname_in))return lu[a][1];
+  
+  tmp=vtmpnam (NULL);
+  url2file (fname_in, tmp);
+  
+  lu=(char***)vrealloc (lu, (n+1)*sizeof (char**));
+  lu[n]=declare_char (2, MAX((strlen (fname_in)),(strlen (tmp)))+1);
+  sprintf (lu[n][0], "%s", fname_in);
+  
+  
+  
+  if ( file2size(tmp)>0)sprintf (lu[n][1], "%s", tmp);
+  else{vfree (lu[n][1]); lu[n][1]=NULL;}
+  return lu[n++][1];
+}
+  
 char* check_file_exists ( char *fname_in)
 	{
 
 	static char *fname1;
 	static char *fname2;
 
-
 	if (!fname_in)return NULL;
 	if (!fname_in[0])return NULL;
 	if (fname_in[0]=='-')return NULL;
+
+	if (strstr (fname_in, "tp://"))return check_url_exists(fname_in);
 
 	if (!fname1){fname1=(char*)vcalloc (1000, sizeof (char));}
 	if (!fname2){fname2=(char*)vcalloc (1000, sizeof (char));}

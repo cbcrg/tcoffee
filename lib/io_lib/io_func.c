@@ -307,8 +307,6 @@ int ** read_matrice (char *mat_name_in)
 	    myexit (EXIT_SUCCESS);
 	    
 	  }
-	    
-	    
 	if ( strm2 (mat_name_in, "pam", "PAM"))sprintf ( mat_name, "pam250mt");
 	else if (strm2 (mat_name_in, "blosum", "BLOSUM"))sprintf ( mat_name, "blosum62mt");
 	else if (strm3 (mat_name_in, "id", "ID", "idmat"))sprintf ( mat_name, "idmat");
@@ -460,10 +458,10 @@ int ** read_matrice (char *mat_name_in)
 	  }
 	else if ( check_file_exists(mat_name) && is_blast_matrix (mat_name))
 	  {
-	    
 	    matrice=read_blast_matrix ( mat_name);
-	    return matrice;
 	  }
+
+	
 	else if ( check_file_exists(mat_name) && is_pavie_matrix (mat_name))
 	  {
 	    

@@ -1893,16 +1893,20 @@ int is_similarity_matrix_file (char *name)
   if ( (fp=find_token_in_file (name, NULL, "TC_SIMILARITY_MATRIX_FORMAT_01"))!=NULL){vfclose(fp);return 1;}
   else return 0;
 }
+
 int is_blast_matrix ( char *name)
 {
 
   FILE *fp;
+  int r=0;
+  if (check_file_for_token   (name,"BLAST_MATRIX"))r=1;
+  else if (check_file_for_token(name,"BZX*"))r=1;
+  else if (check_file_for_token(name,"B  Z  X  *"))r=1;
+  else if (check_file_for_token(name,"B   Z   X   *"))r=1;
+  else r=0;
+  return r;
 
-
-  if ( (fp=find_token_in_file (name, NULL, "BLAST_MATRIX"))!=NULL){vfclose(fp);return 1;}
-       else return 0;
 }
-
 int is_single_seq_weight_file ( char *name)
 {
 
@@ -13229,10 +13233,80 @@ int ** read_blast_matrix ( char *mat_name)
 	int a, b, c;
 	int **matrix;
 	int value;
+	char alp[257];
+	char *buf=NULL;
+
+	buf=(char*)vcalloc (300, sizeof (char));
+	fp=vfopen (mat_name, "r");
+	while ((c=fgetc(fp))=='#')buf=vfgets(buf, fp);
+	buf=vfgets(buf,fp);
+	
+	a=n_aa=0;
+	while ((c=buf[a++])!='\0')if (!isspace(c))alp[n_aa++]=c;
+	alp[n_aa]='\0';
+	
+	matrix=declare_int (256,256);
+	vfree ( matrix[30]);
+	matrix[30]=(int*)vcalloc(10000, sizeof (int));
+	
+	for ( a=0; a< n_aa; a++)
+	    {
+	    fscanf ( fp, "%s ", buf);
+
+	    aa1=buf[0];
+
+	    if ( aa1!=alp[a])
+		{
+		fprintf ( stderr, "\nParsing_error when reading blast_matrix %s:\n%c %c",mat_name, aa1,alp[a]);
+		fprintf ( stderr, "\n%c ", fgetc(fp));
+		myexit (EXIT_FAILURE);
+		}
+	    for ( b=0; b<n_aa; b++)
+	        {
+		aa2=alp[b];
+		fscanf ( fp, "%d ", &value);
+		if (is_gap(aa1) || is_gap(aa2))
+		  {
+		    int c1, c2;
+		    continue;
+		    c1=(is_gap(aa1))?GAP_CODE:aa1;
+		    c2=(is_gap(aa2))?GAP_CODE:aa2;
+		    if ( c1==GAP_CODE && c2==GAP_CODE)
+		      matrix[c1][c2]=value;
+		    else if ( c1==GAP_CODE)
+		      {
+			matrix[c1][tolower(c2)]=value;
+			matrix[c1][toupper(c2)]=value;
+		      }
+		    else
+		      {
+			matrix[tolower(c1)][c2]=value;
+			matrix[toupper(c1)][c2]=value;
+		      }
+		  }
+		else if ( aa1!='*' && aa2!='*')
+		  {
+		    matrix[tolower(aa1)-'a'][tolower(aa2)-'a']=value;
+		  }
+		}
+	    fscanf(fp, "\n");
+	    }
+	fclose (fp);
+
+	return matrix;
+	}
+int ** read_blast_matrix_old ( char *mat_name)
+        {
+	FILE *fp;
+	int n_aa,aa1, aa2;
+	int a, b, c;
+	int **matrix;
+	int value;
 	char sbuf[VERY_LONG_STRING];
 	char buf[2];
 	char alp[257];
 
+	for(a=0; a<256; a++)alp[0]='\0';
 	matrix=declare_int (256,256);
 	vfree ( matrix[30]);
 	matrix[30]=(int*)vcalloc(10000, sizeof (int));
@@ -13243,10 +13317,17 @@ int ** read_blast_matrix ( char *mat_name)
 	    fgets ( sbuf, VERY_LONG_STRING, fp);
 	    if ( (p=strstr (sbuf, "ALPHABET")))
 	      sscanf (p, "ALPHABET=%s", alp);
-	}
+	  }
+	
 	ungetc(c, fp);
 	lower_string (alp);
 	n_aa=strlen (alp);
+
+	
+
+
+
+
 
 	for ( a=0; a< n_aa; a++)
 	    {

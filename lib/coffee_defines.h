@@ -368,7 +368,7 @@
 #endif
 
 /*Generic Data*/
-#define EMAIL "cedric.notredame@europe.com"
+#define EMAIL "cedric.notredame@gmail.com"
 #define URL "http://www.tcoffee.org"
 
 #define PERL_HEADER "#!/usr/bin/env perl"

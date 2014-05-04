@@ -2211,7 +2211,7 @@ Alignment * fast_pair      (Job_TC *job)
 		extend_seqaln (A->S,NULL);
 		extend_seqaln (NULL,A);
 	      }
-
+	    
 	    score=pair_wise ( A, ns, l_s, PW_CL);
 	    //PostProcessing of the sequences
 	    if (PW_CL->reverse_seq || flipped==1)
