@@ -2754,11 +2754,8 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    if (D2 && D2->S)
 	      {
 		//must be DNA file
-		HERE ("****");
 		D1->A =thread_dnaseq_on_prot_aln (D2->S, D1->A);
-		HERE ("######");
 		DST->A=aln2X(DST->A,3);
-		HERE ("MMMMMM");
 	      }
 	    
 	    EA=(DST->A)=aln2number (DST->A);
@@ -2775,7 +2772,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    else if (p=strstr (out_format, "weighted")){action=2; p=NULL;}
 	    else if (p=strstr (out_format, "replicate")){action=3; p+=strlen ("replicate");}
 	    else action=1;
-	    
+	    while (p && p[0] && p[0]=='_')p++;
 	    if (p && p[0])sscanf (p, "%d", &filter);
 	    else filter=3;
 	    
@@ -2816,6 +2813,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 			    for (c=0; c<A->nseq; c++)
 			      C->seq_al[c][b]=B->seq_al[c][pos];
 			  }
+		
 			output_phylip_aln ( out_file,C);
 		      }
 		    free_aln(C);
@@ -3125,12 +3123,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
                 vfclose (fp);
 		}
 
-	else if ( strm ( out_format, "thread_dna_on_prot_aln"))
-	        {
-		  if (!D1)return 1;
-		D1->A=thread_dnaseq_on_prot_aln (D1->S, D2->A);
-		output_saga_aln ( out_file, D1->A);
-		}
+	
 	else if ( strm ( out_format, "tdna_fasta_seq1"))
 	        {if (!D1)return 1;
 		D1->A=translate_dna_aln (D1->A,0);
@@ -12205,11 +12198,27 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   D1->S=aln2seq(D1->A);
 	 }
        else if ( strm ( action, "thread_dna_on_prot_aln"))
-	  {
-	    D1->A=thread_dnaseq_on_prot_aln (D1->S, D2->A);
-	    free_sequence (D1->S,(D1->S)->nseq);
-	    D1->S=aln2seq (D1->A);
-	  }
+	 {
+	   if (D1->S)fast_get_sequence_type(D1->S);
+	   if (D2->S)fast_get_sequence_type(D2->S);
+	   
+	   if (D1->S && strm ((D1->S)->type, "DNA"))
+	     D1->A=thread_dnaseq_on_prot_aln (D1->S, D2->A);
+	   else if (D2->S && strm ((D2->S)->type, "DNA"))
+	     D1->A=thread_dnaseq_on_prot_aln (D2->S, D1->A);
+	   else
+	     printf_exit (EXIT_FAILURE, stderr, "Error: +thread_dna_on_prot_aln requires -in=<prot_aln> -in2=<dna sequence>");
+	   
+	   free_sequence (D1->S,(D1->S)->nseq);
+	   D1->S=aln2seq (D1->A);
+	 }
+       
+       //else if ( strm ( action, "thread_dna_on_prot_aln"))
+       //{
+       //   D1->A=thread_dnaseq_on_prot_aln (D1->S, D2->A);
+       //   free_sequence (D1->S,(D1->S)->nseq);
+       //   D1->S=aln2seq (D1->A);
+       // }
        else if ( strm ( action, "thread_struc_on_aln"))
 	 {
 	   thread_seq_struc2aln ( D2->A, D1->S);
