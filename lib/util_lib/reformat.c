@@ -8097,7 +8097,11 @@ Alignment *thread_dnaseq_on_prot_aln (Sequence *S, Alignment *A)
 				 else 
 				   for (c=0; c< 3; c++)B->seq_al[a][ls++]=tolower((S->seq[b][ln++]));
 			       }
-		       B->seq_al[a][ls]='\0';
+			   if (ln!=S->len[b])
+			     {
+			       printf_exit (EXIT_FAILURE, stderr, "thread_dna_seq_on_prot_aln: %s DNA/protein sequences differ [FATAL]", S->name[b]);
+			     }
+			   B->seq_al[a][ls]='\0';
 		       }
 		    }
 		if ( m==0)
