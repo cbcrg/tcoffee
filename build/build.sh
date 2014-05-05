@@ -375,17 +375,24 @@ function pack_binaries() {
 	then
 	mv $DIST_DIR/$INST_NAME.run $DIST_DIR/$INST_NAME.bin
 	chmod u+x $DIST_DIR/$INST_NAME.bin
-	
-	    # creates a tar with all precompiled binaries
-        if [ $OSARCH == "x64" ]
-        then
-          mv $TCDIR $SANDBOX/$INST_NAME
-          cd $SANDBOX 
-          tar -zcvf $INST_NAME.tar.gz $INST_NAME
-          mv $INST_NAME.tar.gz $DIST_DIR/
-        fi
 	fi
 	
+}
+
+function pack_tarball() {
+	
+    # creates a tar with all precompiled binaries
+    if [ $OSARCH == "x64" ]
+    then
+      echo "[ pack_tarball ]"
+
+      cd $SANDBOX 
+      $DIST_DIR/$INST_NAME.bin --mode unattended --user_email tcoffee.msa@gmail.com --prefix $PWD/$INST_NAME
+      tar -zcvf $INST_NAME.tar.gz $PWD/$INST_NAME
+      mv $INST_NAME.tar.gz $DIST_DIR/
+      rm -rf $PWD/$INST_NAME
+      cd -
+    fi
 }
 
 
@@ -398,6 +405,7 @@ function build_and_pack_stable() {
 	
 	build_binaries	
 	pack_binaries
+	pack_tarball
 } 
 
 function build_and_pack_debug() {
