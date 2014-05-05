@@ -388,7 +388,7 @@ function pack_tarball() {
 
       cd $SANDBOX 
       $DIST_DIR/$INST_NAME.bin --mode unattended --user_email tcoffee.msa@gmail.com --prefix $PWD/$INST_NAME
-      tar -zcvf $INST_NAME.tar.gz $PWD/$INST_NAME
+      tar -zcvf $INST_NAME.tar.gz $INST_NAME/
       mv $INST_NAME.tar.gz $DIST_DIR/
       rm -rf $PWD/$INST_NAME
       cd -
