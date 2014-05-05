@@ -351,12 +351,12 @@ function pack_binaries() {
 	# it have to exist in 'bin' folder  
 	rm -rf $TCDIR/plugins/$OSNAME/t_coffee
 
-        # copy the sources 
-        rm -rf $TCDIR/src
-        cp -r $UNTARED/t_coffee_source $TCDIR/src
-        find $TCDIR/src -name '*.o_*' | xargs rm -rf {} 
-        find $TCDIR/src -name 't_coffee' | xargs rm -rf {} 
-        find $TCDIR/src/ -type f -exec chmod 644 '{}' \;
+    # copy the sources 
+    rm -rf $TCDIR/src
+    cp -r $UNTARED/t_coffee_source $TCDIR/src
+    find $TCDIR/src -name '*.o_*' | xargs rm -rf {} 
+    find $TCDIR/src -name 't_coffee' | xargs rm -rf {} 
+    find $TCDIR/src/ -type f -exec chmod 644 '{}' \;
 
 	# invoke the install builder 
 	mkdir -p $DIST_DIR
@@ -375,6 +375,15 @@ function pack_binaries() {
 	then
 	mv $DIST_DIR/$INST_NAME.run $DIST_DIR/$INST_NAME.bin
 	chmod u+x $DIST_DIR/$INST_NAME.bin
+	
+	    # creates a tar with all precompiled binaries
+        if [ $OSARCH == "x64" ]
+        then
+          mv $TCDIR $SANDBOX/$INST_NAME
+          cd $SANDBOX 
+          tar -zcvf $INST_NAME.tar.gz $INST_NAME
+          mv $INST_NAME.tar.gz $DIST_DIR/
+        fi
 	fi
 	
 }
