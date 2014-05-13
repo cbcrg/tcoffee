@@ -382,7 +382,7 @@ function pack_binaries() {
 function pack_tarball() {
 	
     # creates a tar with all precompiled binaries
-    if [ $OSARCH == "x64" ]
+    if [[ $OSARCH == "x64" && $OSNAME == 'linux' ]]
     then
       echo "[ pack_tarball ]"
 
