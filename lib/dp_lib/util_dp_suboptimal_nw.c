@@ -7,7 +7,7 @@
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"
-#include "util_dp_gotoh_nw.h"
+#include "dp_lib_header.h"
 
 
 
@@ -603,6 +603,11 @@ int *** backward_so_dp_biphasic ( Alignment *A, int *ns, int **ls, int **pos0, i
 
 int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL,int mode);
 
+int get_tot_prob2 (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL,int mode);
+
+int get_tot_prob3 (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL,int mode);
+
+
 float * forward_proba_pair_wise  ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *TmatchProb, float ***TinsProb, float **transProb);
 float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *TmatchProb, float ***TinsProb,float **transProb);
 float ComputeTotalProbability (int seq1Length, int seq2Length,int NumMatrixTypes, int NumInsertStates,float *forward, float *backward) ;
@@ -869,8 +874,10 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
        if (TinsProb)free_arrayN (TinsProb, 3);
        TinsProb=(float***)declare_arrayN (3, sizeof (float),2,NumMatrixTypes,TinsProb_ml);
      }
-
-   get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL, SEQUENCE);
+   if (strm (retrieve_seq_type(), "RNA"))
+     get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL, SEQUENCE);
+   else
+     get_tot_prob2 (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL, SEQUENCE);
 
    F=forward_proba_pair_wise (A->seq_al[ls[0][0]], A->seq_al[ls[1][0]], NumMatrixTypes,NumInsertStates,transMat, initialDistribution,TmatchProb,TinsProb, transProb);
    B=backward_proba_pair_wise (A->seq_al[ls[0][0]], A->seq_al[ls[1][0]], NumMatrixTypes,NumInsertStates,transMat, initialDistribution,TmatchProb,TinsProb, transProb);
@@ -950,12 +957,12 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	      sprintf (NA2->name[NA2->nseq], "sst2");
 	    }
 	  else
-	{
-	    NA2=A2;
-	    nns[1]=ns[1];
-	    nls[1]=(int*)vcalloc (ns[1], sizeof (int));
-	    for (a=0; a<ns[1]; a++)
-	      nls[1][a]=ls[1][a];
+	    {
+	      NA2=A2;
+	      nns[1]=ns[1];
+	      nls[1]=(int*)vcalloc (ns[1], sizeof (int));
+	      for (a=0; a<ns[1]; a++)
+		nls[1][a]=ls[1][a];
 	    }
 
 	  get_tot_prob (NA1, NA2, nns, nls, nstates, matchProb, insProb, TmatchProb, TinsProb, CL,PROFILE);
@@ -989,7 +996,6 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	      if (c1!='-')
 		{
 		  TinsProb[0][k][i]+=insProb[c1][k];
-
 		  n++;
 		}
 	    }
@@ -1008,7 +1014,6 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
 	    if (c2!='-')
 	      {
 	      TinsProb[1][k][j]+=insProb[c2][k];
-
 	      n++;
 	      }
 	    }
@@ -1099,7 +1104,260 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
   free_arrayN ((void **)VA2, 3);
   return 1;
 }
+int get_tot_prob2 (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL, int mode)
+{
+  static double **prf1;
+  static double **prf2;
+  int i, I, j, J, k, ij,r,r1,r2; 
+  int *lu;
+   
+  if (mode==SEQUENCE)
+    {
+      int s1, s2, a;
+      int *nns, **nls;
+      Alignment *NA1, *NA2;
+      char *sst1;
+      char *sst2;
 
+
+      nns=(int*)vcalloc ( 2, sizeof (int));
+      nls=(int**)vcalloc (2, sizeof (int*));
+
+      s1=A1->order[ls[0][0]][0];
+      s2=A2->order[ls[1][0]][0];
+      NA1=seq2R_template_profile (CL->S,s1);
+      NA2=seq2R_template_profile (CL->S,s2);
+
+      sst1=seq2T_template_string((CL->S),s1);
+      sst2=seq2T_template_string((CL->S),s2);
+
+
+      if (NA1 || NA2)
+	{
+	  if (NA1)
+	    {
+	      nns[0]=NA1->nseq;
+	      nls[0]=(int*)vcalloc (NA1->nseq, sizeof (int));
+	      for (a=0; a<NA1->nseq; a++)
+		nls[0][a]=a;
+	      NA1->seq_al[NA1->nseq]=sst1;
+	      sprintf (NA1->name[NA1->nseq], "sst1");
+	    }
+	  else
+	    {
+	    NA1=A1;
+	    nns[0]=ns[0];
+	    nls[0]=(int*)vcalloc (ns[0], sizeof (int));
+	    for (a=0; a<ns[0]; a++)
+	      nls[0][a]=ls[0][a];
+	    }
+
+	  if (NA2)
+	    {
+	      nns[1]=NA2->nseq;
+	      nls[1]=(int*)vcalloc (NA2->nseq, sizeof (int));
+	      for (a=0; a<NA2->nseq; a++)
+		nls[1][a]=a;
+	      NA2->seq_al[NA2->nseq]=sst2;
+	      sprintf (NA2->name[NA2->nseq], "sst2");
+	    }
+	  else
+	    {
+	      NA2=A2;
+	      nns[1]=ns[1];
+	      nls[1]=(int*)vcalloc (ns[1], sizeof (int));
+	      for (a=0; a<ns[1]; a++)
+		nls[1][a]=ls[1][a];
+	    }
+
+	  get_tot_prob2 (NA1, NA2, nns, nls, nstates, matchProb, insProb, TmatchProb, TinsProb, CL,PROFILE);
+	  vfree (nns); free_int (nls,-1);
+	  return 1;
+	}
+    }
+  
+  I=strlen (A1->seq_al[ls[0][0]]);
+  J=strlen (A2->seq_al[ls[1][0]]);
+     
+  lu=dirichlet_code2aa_lu();
+  
+  prf1=aln2prf (A1, ns[0], ls[0], I, prf1);
+  prf2=aln2prf (A2, ns[1], ls[1], J, prf2);
+
+    
+  //get Ins for I
+  for (i=1; i<=I; i++)
+    {
+      for (k=0; k<nstates; k++)
+	{
+	  TinsProb[0][k][i]=0;
+	  for (r=0; r<20; r++)
+	    {
+	      TinsProb[0][k][i]+=(float)prf1[i-1][r]*insProb[lu[r]][k];
+	    }
+	}
+    }
+  
+
+  
+  
+  //Get Ins for J
+  for (j=1; j<=J; j++)
+    {
+      for (k=0; k<nstates; k++)
+	{
+	  TinsProb[1][k][j]=0;
+	  for (r=0; r<20; r++)
+	    {
+	      TinsProb[1][k][j]+=(float)prf2[j-1][r]*insProb[lu[r]][k]; 
+	    }
+	}
+    }
+  for (ij=0,i=0; i<=I; i++)
+    for (j=0; j<=J; j++, ij++)
+      {
+	float tot=0,f;
+	if (i==0 || j==0)continue;
+	TmatchProb[ij]=0;
+	for (tot=0,r1=0; r1<20; r1++)
+	  {
+	    for (r2=0; r2<20; r2++)
+	      {
+		f=(float)prf1[i-1][r1]*(float)prf2[j-1][r2];
+		TmatchProb[ij]+=matchProb[lu[r1]][lu[r2]]*f;
+	      }
+	  }
+      }
+  
+  return 1;
+}
+int get_tot_prob3 (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, float **matchProb, float **insProb, float *TmatchProb, float ***TinsProb, Constraint_list *CL, int mode)
+{
+  static double **prf1;
+  static double **prf2;
+  static double **dmx1;
+  static double **dmx2;
+  
+  int i, I, j, J, k, ij,r,r1,r2; 
+  int *lu;
+   
+  if (mode==SEQUENCE)
+    {
+      int s1, s2, a;
+      int *nns, **nls;
+      Alignment *NA1, *NA2;
+      char *sst1;
+      char *sst2;
+
+
+      nns=(int*)vcalloc ( 2, sizeof (int));
+      nls=(int**)vcalloc (2, sizeof (int*));
+
+      s1=A1->order[ls[0][0]][0];
+      s2=A2->order[ls[1][0]][0];
+      NA1=seq2R_template_profile (CL->S,s1);
+      NA2=seq2R_template_profile (CL->S,s2);
+
+      sst1=seq2T_template_string((CL->S),s1);
+      sst2=seq2T_template_string((CL->S),s2);
+
+
+      if (NA1 || NA2)
+	{
+	  if (NA1)
+	    {
+	      nns[0]=NA1->nseq;
+	      nls[0]=(int*)vcalloc (NA1->nseq, sizeof (int));
+	      for (a=0; a<NA1->nseq; a++)
+		nls[0][a]=a;
+	      NA1->seq_al[NA1->nseq]=sst1;
+	      sprintf (NA1->name[NA1->nseq], "sst1");
+	    }
+	  else
+	    {
+	    NA1=A1;
+	    nns[0]=ns[0];
+	    nls[0]=(int*)vcalloc (ns[0], sizeof (int));
+	    for (a=0; a<ns[0]; a++)
+	      nls[0][a]=ls[0][a];
+	    }
+
+	  if (NA2)
+	    {
+	      nns[1]=NA2->nseq;
+	      nls[1]=(int*)vcalloc (NA2->nseq, sizeof (int));
+	      for (a=0; a<NA2->nseq; a++)
+		nls[1][a]=a;
+	      NA2->seq_al[NA2->nseq]=sst2;
+	      sprintf (NA2->name[NA2->nseq], "sst2");
+	    }
+	  else
+	    {
+	      NA2=A2;
+	      nns[1]=ns[1];
+	      nls[1]=(int*)vcalloc (ns[1], sizeof (int));
+	      for (a=0; a<ns[1]; a++)
+		nls[1][a]=ls[1][a];
+	    }
+
+	  get_tot_prob3 (NA1, NA2, nns, nls, nstates, matchProb, insProb, TmatchProb, TinsProb, CL,PROFILE);
+	  vfree (nns); free_int (nls,-1);
+	  return 1;
+	}
+    }
+  
+  I=strlen (A1->seq_al[ls[0][0]]);
+  J=strlen (A2->seq_al[ls[1][0]]);
+     
+  lu=dirichlet_code2aa_lu();
+  
+  prf1=aln2prf (A1, ns[0], ls[0], I, prf1);
+  dmx1=prf2dmx (prf1, dmx1, I);
+  prf2=aln2prf (A2, ns[1], ls[1], J, prf2);
+  dmx2=prf2dmx (prf2, dmx2, J);
+  
+    
+  //get Ins for I
+  for (i=1; i<=I; i++)
+    {
+      for (k=0; k<nstates; k++)
+	{
+	  TinsProb[0][k][i]=0;
+	  for (r=0; r<20; r++)
+	    {
+	      TinsProb[0][k][i]+=(float)prf1[i-1][r]*insProb[lu[r]][k];
+	    }
+	}
+    }
+  
+  //Get Ins for J
+  for (j=1; j<=J; j++)
+    {
+      for (k=0; k<nstates; k++)
+	{
+	  TinsProb[1][k][j]=0;
+	  for (r=0; r<20; r++)
+	    {
+	      TinsProb[1][k][j]+=(float)prf2[j-1][r]*insProb[lu[r]][k];
+	    }
+	}
+    }
+  
+  for (ij=0,i=0; i<=I; i++)
+    for (j=0; j<=J; j++, ij++)
+      {
+	if (i==0 || j==0)continue;
+	TmatchProb[ij]=0;
+	for (r1=0; r1<20; r1++)
+	  for (r2=0; r2<20; r2++)
+	    {
+	      TmatchProb[ij]+=(prf1[i-1][r1]*prf2[j-1][r2])*(dmx2[j-1][r1]+dmx1[i-1][r2]);
+	    }
+	
+      }
+  
+  return 1;
+}
 
 
 
@@ -1404,6 +1662,7 @@ int ProbabilisticModel (int NumMatrixTypes, int NumInsertStates,float *initDistr
     // build transition matrix
   int i, j;
 
+  //Maybe an Issue with this topology
 
   transMat[0][0] = 1;
   for (i = 0; i < NumInsertStates; i++)
@@ -1515,7 +1774,7 @@ int viterbi_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
 
    TmatchProb=(float*)vcalloc ((I+1)*(J+1), sizeof (float));
    TinsProb=(float***)declare_arrayN (3, sizeof (float),2,NumMatrixTypes,MAX(I,J)+1);
-   get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL,SEQUENCE);
+   get_tot_prob2 (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL,SEQUENCE);
 
    // create viterbi matrix
    l=NumMatrixTypes * (seq1Length+1) * (seq2Length+1);

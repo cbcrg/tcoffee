@@ -115,7 +115,7 @@ double compute_exponant ( double *n, int j, Mixture *D)
 	}
 
 
-double *compute_matrix_p ( double *n,int Nseq)
+double *compute_matrix_p ( double *n)
         {
 	  
 	  /*
@@ -170,13 +170,13 @@ double *compute_matrix_p ( double *n,int Nseq)
 	}
 	      
 
-double *compute_dirichlet_p ( double *n,int Nseq)
+double *compute_dirichlet_p ( double *n)
 	{
 	  /*
 	    Given a list of frequenceies measured for the residues, this function returns 
 	    the p_values associated with each residue in the column
 	  */
-	  
+	 
 	int a, b;
 	double X_LIST[100];
 	double sum, log_sum, max;
@@ -324,6 +324,46 @@ Mixture * read_dirichlet ( char *name)
 	
 	return D;
 	}
+int *dirichlet_code2aa_lu ()
+{
+  static int *dm;
+
+  if (dm);
+  else
+    {
+      char aal[21];
+      int a;
+      
+      sprintf (aal, "acdefghiklmnpqrstvwy");
+      dm=(int*)vcalloc (265, sizeof (int));
+      memset (dm, -1, 20*sizeof(int));
+      for (a=0; a<20; a++)
+	{
+	  dm[dirichlet_code (aal[a])]=aal[a];
+	}
+    }
+  return dm;
+}
+int *aa2dirichlet_code_lu ()
+{
+  static int *dm;
+
+  if (dm);
+  else
+    {
+      char aal[21];
+      int a;
+      
+      sprintf (aal, "acdefghiklmnpqrstvwy");
+      dm=(int*)vcalloc (265, sizeof (int));
+      memset (dm, -1, 265*sizeof(int));
+      for (a=0; a<20; a++)
+	{
+	  dm[aal[a]]=dm[(aal[a]-'a')+'A']=dm[(aal[a]-'a')]=dirichlet_code (aal[a]);
+	}
+    }
+  return dm;
+}
 int dirichlet_code( char aa)
 	{
 	
@@ -567,4 +607,60 @@ double lgamma_r(double x, int *signgamp)
             r =  x*(log(x)-one);
         if(hx<0) r = nadj - r;
         return r;
+}
+
+double **prf2dmx (double **in, double **prf, int len)
+{
+  int c,r;
+
+  if (!prf)prf=declare_double (len, 20);
+  else if (read_array_size_new(prf)<len){free_double (prf,-1); prf=declare_double (len, 20);}
+
+  for (c=0; c<len; c++)
+    {
+      memcpy  (prf[c],compute_dirichlet_p(in[c]), 20*sizeof (double));
+    }
+  return prf;
+}
+double **aln2prf (Alignment *A, int ns, int *ls, int len, double **prf)
+{
+  
+  int free_ls=0;
+  int *lu;
+  int c,r,d;
+  double tot;
+  double prior=0.1;
+  
+  
+  if (!A)return prf;
+  if (ns==0 || ls==0 || len==0)
+    {
+      ns=A->nseq;
+      ls=(int*)vcalloc (ns, sizeof (int));
+      for (r=0; r<ns; r++)ls[r]=r;
+      free_ls=1;
+    }
+  
+  lu=aa2dirichlet_code_lu();
+  
+  if (!prf)prf=declare_double (len, 20);
+  else if (read_array_size_new(prf)<len){free_double (prf,-1); prf=declare_double (len, 20);}
+
+  for (c=0; c<len; c++)
+    {
+      double *dmr;
+      memset (prf[c], 0, sizeof (double)*20);
+      for (tot=0,r=0; r<ns; r++)
+	{
+	  d=lu[A->seq_al[ls[r]][c]];
+	  if (d>=0)
+	    {
+	      prf[c][d]++;
+	      tot++;
+	    }
+	}
+      if (tot>0)for (r=0;r<20; r++)prf[c][r]/=tot;
+    }
+  if (free_ls)vfree(ls);
+  return prf;
 }

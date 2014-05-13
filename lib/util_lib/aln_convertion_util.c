@@ -15,8 +15,10 @@
  */
 Constraint_list * seq2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode)
 {
+
+  if (!S || !S->nseq) return CL;
   S=fast_get_sequence_type(S);
-  if (!strm (S->type, "RNA"))return CL;
+  if (!strm (S->type, "RNA"))return CL;//seq2contacts is only supported for RNA
   if (T)
     {
       char *template_file=vtmpnam(NULL);
@@ -24,12 +26,11 @@ Constraint_list * seq2contacts (Sequence *S, Sequence *T,Constraint_list *CL, ch
       S=seq2template_seq(S,template_file,NULL);
     }
   
-    
-  else cputenv ("SEQ2TEMPLATE4_F_=%s",(mode)?mode:"no");
+  cputenv ("SEQ2TEMPLATE4_F_=%s",(mode)?mode:"RNAplfold");
   cputenv ("PDB2TEMPLATE4_F_=no");
   
-    
-  if (strm (mode,"RNAplfold") || !mode)S=seq2template_seq (S,"RNA", NULL);
+  if (seq2n_template (S, "_P_")==S->nseq)return CL;
+  else if (strm (mode,"RNAplfold") || !mode)S=seq2template_seq (S,"RNA", NULL);
   else if (strm (mode, "join"));
   else printf_exit (EXIT_FAILURE,stderr, "+seq2contact %s: unknown mode [FATAL]", mode);
   
@@ -46,6 +47,10 @@ Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, ch
     {
       if (!T)printf_exit (EXIT_FAILURE,stderr, "+pdb2contact requires a template:  -in2 <template_file> [FATAL]");
       
+      
+    }
+  if (T)
+    {
       output_fasta_seqS (template_file,T);
       S=seq2template_seq(S,template_file,NULL);
     }
@@ -57,7 +62,7 @@ Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, ch
       cputenv ("SEQ2TEMPLATE4_F_=no");
       cputenv ("PDB2TEMPLATE4_F_=%s", mode);
     }
-  else HERE ("AAAAAAAAAAAAA");
+  
   
   if (strm (mode, "all")||strm (mode, "best")|| strm (mode, "count") || strm (mode,"closest") || strm (mode, "distances"))
     {
@@ -171,6 +176,9 @@ int vienna2template_file (char *outfile, Sequence *R, Sequence *ST)
     }
   vfclose (fpout);
   
+  
+  return 1;
+  
 }
 Constraint_list * vienna2tc_lib (char *out, Sequence *R, Sequence *ST)
 {
@@ -179,7 +187,6 @@ Constraint_list * vienna2tc_lib (char *out, Sequence *R, Sequence *ST)
   FILE *fp;
   char *outfile;
 
-    
   outfile=vtmpnam (NULL);
   lu=declare_int (ST->nseq, 2);
   
@@ -195,6 +202,7 @@ Constraint_list * vienna2tc_lib (char *out, Sequence *R, Sequence *ST)
 	}
     }
   fp=vfopen (outfile, "w");
+  
   fprintf (fp, "! TC_LIB_FORMAT_01\n%d\n", nseq);
   for (a=0; a<nseq; a++)
     {
@@ -218,7 +226,7 @@ Constraint_list * vienna2tc_lib (char *out, Sequence *R, Sequence *ST)
   fprintf (fp, "! SEQ_1_TO_N\n");
   vfclose (fp);
  
-  if (out)
+  if (out && out[0])
     {
       printf_system ("cp %s %s", outfile, out);
       return NULL;
@@ -4447,7 +4455,7 @@ char *sub_aln2cons_seq_mat  ( Alignment *A,int ns, int *ls, char *mat_name)
    {
      for (b=0; b<20; b++)
        {
-	 r1=AA_ALPHABET[b];
+	 r1=tolower(AA_ALPHABET[b]);
 	 for ( naa=0,score=0,c=0; c<ns; c++)
 	   {
 	     s=(ls==NULL)?c:ls[c];
@@ -4456,8 +4464,8 @@ char *sub_aln2cons_seq_mat  ( Alignment *A,int ns, int *ls, char *mat_name)
 	     else
 	       {
 		 naa++;
-		 r2=A->seq_al[s][a];
-		 score+=mat[r1-'A'][r2-'A'];
+		 r2=tolower(A->seq_al[s][a]);
+		 if (!is_gap(r2))score+=mat[r1-'A'][r2-'A'];
 	       }
 	   }
 	 if (naa==0)best_r='-';
@@ -6705,7 +6713,16 @@ char * seq2T_template_string (Sequence *S, int n)
   else
     return NULL;
 }
-
+int seq2n_template (Sequence *S, char *mode)
+{
+  int a, n;
+  if (!S || !S->nseq || !mode || !mode)return 0;
+  for (a=0, n=0; a<S->nseq; a++)
+    {
+      if (seq_has_template(S,a,mode))n++;
+    }
+  return n;
+}
 struct X_template* seq_has_template ( Sequence *S, int n, char *mode)
 {
   Template *T;
@@ -9783,7 +9800,7 @@ char *aln2random_seq (Alignment *A, int pn1, int pn2, int pn3, int gn)
 	    ncat+=(freq[b][a]!=0)?1:0;
 	  }
 	/*Blurr the distribution using */
-       	blur_freq=compute_matrix_p (init_freq,tot);
+       	blur_freq=compute_matrix_p (init_freq);
 
 
 	/*compute noise 1: biased with blurred content * enthropy--> keeps prosite motifs*/

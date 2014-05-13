@@ -481,7 +481,17 @@ int batch_main ( int argc, char **argv)
 	int     clean_overaln;
 	int     display;
 	char    *dump;
- 
+	
+	int sand_box=0;
+
+
+
+	if (sand_box==1)
+	  {
+	    sb();
+	    exit (0);
+	  }
+	
 	/**
 	 * Before anything else, check if we want to use the \b other_pg option of T-Coffee.
 	 *        If so, redirect to ::run_other_pg.

@@ -912,6 +912,15 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	    B->ibit=A->ibit;
 	    B->cpu=A->cpu;
 	    B->finished=A->finished;
+	    if (A->dm)
+	      {
+		int i,j;
+		B->dm=declare_float (A->nseq, A->nseq);
+		for (i=0; i<A->nseq; i++)
+		  for (j=0; j<A->nseq; j++)
+		    B->dm[i][j]=A->dm[i][j];
+		B->dm=A->dm;
+	      }
 
 /*Output Options*/
 	    B->output_res_num=A->output_res_num;
@@ -1234,6 +1243,7 @@ Sequence* free_Alignment ( Alignment *LA)
 
 	  free_int  ( LA->order, -1);
 
+	  free_float (LA->dm, -1),
 	  vfree ( LA->score_seq);
 	  vfree ( LA->len);
 

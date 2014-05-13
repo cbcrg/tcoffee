@@ -301,17 +301,17 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....................MaxLen of the deletions, Ncycle: number of cycles");
 		fprintf ( stdout, "\n     .....................Random_len: 0 sets the len to maxlen, 1 to a random value");
 		fprintf ( stdout, "\n     +remove_nuc.x........Remove Position 1, 2 or 3 of every codon");
-		fprintf ( stdout, "\n     +evaluate contacts...Uses the -in2 contact_lib or the +seq2contacts ");
-		fprintf ( stdout, "\n     .....................OUTPUT: -output score_ascii, score, score_html ");
-		fprintf ( stdout, "\n     +evaluate distances.Max(float).Delta(float)");
+		fprintf ( stdout, "\n     +evaluate3D..........[strike] strike|distances|contacts");
+		fprintf ( stdout, "\n     .....................Uses the -in2 contact_lib or the +pdb2contacts +seq2contacts ");
+		fprintf ( stdout, "\n     .....................If none, uses +seq2contacts ");
+		fprintf ( stdout, "\n     .....................OUTPUT: -output score_ascii, score, score_html,fasta_tree ");
+		fprintf ( stdout, "\n     .....................OUTPUT: +distance2tree [1] trigers tree computation");
+		fprintf ( stdout, "\n     .....................distances.Max(float)");
 		fprintf ( stdout, "\n     .....................Max[10]  : Maximum distance between a pair in Angs");
-		fprintf ( stdout, "\n     .....................Delta[0.2]: counts pairs +/- Delta %%");
-		fprintf ( stdout, "\n     .....................OUTPUT: -output score_ascii, score, score_html ");
-		fprintf ( stdout, "\n     +evaluate..strikeP...Evaluate a protein MSA using STRIKE");
 		fprintf ( stdout, "\n     .....................Provide contacts: -in2=<contact_lib>");
 		fprintf ( stdout, "\n     .....................Or +seq2contacts");
 		fprintf ( stdout, "\n     .....................OUTPUT: -output score_ascii, score, score_html ");
-		fprintf ( stdout, "\n     +evaluate..strikeR...Evaluate an RNA  MSA using STRIKE");
+		
 		fprintf ( stdout, "\n     +evaluate matrix..gop..gep");
 		fprintf ( stdout, "\n     .....................Make a similarity evaluation with matrix");
 		fprintf ( stdout, "\n     .....................use -output=score_ascii, or score_html.");
@@ -917,7 +917,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 
 	    D->S=get_fasta_tree (in_file, NULL);
 	    D->A=seq2aln(D->S, D->A,NO_PAD);
-
+	    
 	  }
 	else if ( strm (in_format, "tree_list") || strm (in_format, "treelist"))
 	  {
@@ -1841,7 +1841,7 @@ int is_aln ( char *name)
 int is_matrix (char *name)
        {
        int **m;
-
+       if (!name) return 0;
        if ((m=read_matrice (name))!=NULL){free_int (m, -1); return 1;}
        return 0;
        }
@@ -2446,6 +2446,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  }
 	else if      ( strncmp (out_format, "score",5)==0 || strm (out_format, "html"))
 		{
+		  int a;
 		  Alignment *BUF;
 
 		  if (!D1)return 1;
@@ -2455,11 +2456,12 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		      myexit(EXIT_FAILURE);
 		    }
 		  if ( !strm ("html", out_format))while ( out_format[0]!='_' && out_format[0]!='\0' )out_format++;
-
+		  
 		  D1->S=aln2seq(D1->A);
 		  BUF=copy_aln (DST->A, NULL);
 		  DST->A=aln2number (DST->A);
 
+		 
 		  if     ( strstr ( out_format, "html"  ))output_reliability_html  ( D1->A,  DST->A, out_file);
 		  else if( strm ( out_format, "_ps"    ))output_reliability_ps    ( D1->A,  DST->A, out_file);
 		  else if( strm ( out_format, "_pdf"   ))output_reliability_pdf   ( D1->A,  DST->A, out_file);
@@ -3078,46 +3080,47 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		}
 	else if ( strm  (out_format, "vienna2tc_lib"))
 	  {
-	    vienna2tc_lib (out_file, D1->S,D2->S);
+	    D1->CL=vienna2tc_lib (out_file, D1->S,D2->S);
+	    save_contact_constraint_list (D1->CL, out_file);
 	  }
 	else if ( strm  (out_format, "vienna2template"))
 	  {
 	    vienna2template_file (out_file, D1->S,D2->S);
+	    
 	  }
 	else if ( strm2 (out_format, "contact_lib","c_lib"))
 	  {
 	    save_contact_constraint_list (D1->CL, out_file);
 	  }
 	else if ( strm2 (out_format, "constraint_list","tc_lib"))
-	        {
-
-		  HERE ("----- %d", (D1->CL)->ne);
-		  if (!D1)return 1;
-		  else if (!D1->CL)output_constraints (out_file,"sim", D1->A);
-		  else if (D1->CL) vfclose ( save_constraint_list ( D1->CL, 0, (D1->CL)->ne, out_file, NULL, "ascii",(D1->CL)->S));
-		}
+	  {
+	    
+	    if (!D1)return 1;
+	    else if (!D1->CL)output_constraints (out_file,"sim", D1->A);
+	    else if (D1->CL) vfclose ( save_constraint_list ( D1->CL, 0, (D1->CL)->ne, out_file, NULL, "ascii",(D1->CL)->S));
+	  }
 	else if (  strm2 (out_format, "extended_lib","extended_cosmetic"))
-	        {
+	  {
 		  if (!D1)return 1;
 		  output_constraints (out_file,out_format, D1->A);
-		}
+	  }
 	else if ( strncmp (out_format, "extended_pair", 13)==0)
-	        {
-		  if (!D1)return 1;
-		  output_constraints (out_file,out_format, D1->A);
-		}
+	  {
+	    if (!D1)return 1;
+	    output_constraints (out_file,out_format, D1->A);
+	  }
 	else if ( strm (out_format, "cache_id"))
-	        {
-		  if (!D1)return 1;
+	  {
+	    if (!D1)return 1;
 		  cache_id (D1->A);
-		output_saga_aln (out_file, D1->A);
-		}
+		  output_saga_aln (out_file, D1->A);
+	  }
         else if ( strm (out_format, "compress_aln"))
-		{
-		  if (!D1)return 1;
-                compress_aln (D1->A);
-		output_saga_aln (out_file, D1->A);
-		}
+	  {
+	    if (!D1)return 1;
+	    compress_aln (D1->A);
+	    output_saga_aln (out_file, D1->A);
+	  }
 	
 	else if (strm (out_format, "n_seq") ||strm (out_format, "nseq") )
 		{
@@ -6652,12 +6655,14 @@ void output_fasta_tree (char *fname, Alignment*A)
 	FILE *fp;
 	if ( !A || !A->nseq) return;
 
+	if (A->Tree)return  output_fasta_tree (fname, A->Tree);
+	
 	fp=vfopen ( fname, "w");
-
 	for ( a=0; a< A->nseq; a++)
-		{
-		  fprintf ( fp, ">%s %s\n%s\n", A->name[a], A->seq_comment[a], A->seq_al[a]);
-		}
+	  {
+	    A->seq_al[a]=substitute (A->seq_al[a], "\n", "");
+	    fprintf ( fp, ">%s %s\n%s\n", A->name[a], A->seq_comment[a], A->seq_al[a]);
+	  }
 	vfclose (fp);
 	}
 void main_output_fasta_seq (char *fname, Alignment*A,int header )
@@ -10811,9 +10816,13 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        Sequence_data_struc *D2;
        Sequence_data_struc *DST;
        int s1, s2, r1, r2;
-       static int clean_flag;
+       
        Alignment *BUF;
-
+       
+       //Switches
+       static int evaluate2tree;
+       static int clean_flag;
+       
        /*Switches*/
 
        action=action_list[0];
@@ -11249,7 +11258,15 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   node_sort ( action_list[1], D1->T);
 	   myexit (EXIT_SUCCESS);
 	 }
-
+       else if ( strm ( action, "tree2cons"))
+	 {
+	   treelist2cons (D1->A);
+	 }
+       else if ( strm ( action, "tree2support"))
+	 {
+	   
+	   treelist2node_support (D1->A);
+	 }
        else if ( strm ( action, "avg_bootstrap"))
 	 {
 	   display_avg_bootstrap (D1->T);
@@ -11305,72 +11322,98 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   aln2pred (D1->A, D2->A, ACTION (1));
 	   myexit (EXIT_SUCCESS);
 	 }
-       
+       else if ( strm(action, "tree"))
+	 {
+	   if (ACTION(1))evaluate2tree=atoi(ACTION(1));
+	   else evaluate2tree=1;
+	 }       
+       else if ( strm(action, "evaluate3D"))
+	 {
+	   int enb;
+	   float max=0;
+	   char *strikem=NULL;
+	   Constraint_list *CL;
+	   Alignment *A;
+	   
+	   DST->A=copy_aln (D1->A, NULL);
+	   DST->S=aln2seq(DST->A);
+	  
+	   
+	   if ( !ACTION(1) || strm (action_list[1], "strike"))
+	     {
+	       
+	       strikem=(char*)vcalloc (100, sizeof (char));
+	       if (!ACTION(1)||!ACTION(2))sprintf (strikem, "strike");
+	       else sprintf (strikem, "%s", ACTION(2));
+	       enb=3;
+	     }
+	   else if (strm (action_list[1], "distances"))
+	     {
+	       enb=3;
+	       max=100;//nm
+	       
+	       if (ACTION(2))max=atof(ACTION(2));
+	       if (ACTION(3))enb=atoi(ACTION(4));
+	     }
+	   else if (strm (action_list[1], "contacts"))
+	     {
+	       enb=3;
+	       max=1.2;
+		   
+	       if (ACTION(2))max=atof(ACTION(2));
+	       if (ACTION(3))enb=atoi(ACTION(3));
+	     }
+	   
+	   if (!D2)CL=D1->CL;
+	   else if (!D2->CL)CL=D1->CL;
+	   else CL=D2->CL;
+	   if (!CL)//do a default contact based evaluation
+	     {
+	       
+	       ungap_seq(D1->S);
+	       if (ACTION(1) && strm (ACTION(1), "distances"))
+		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "distances",2*max);
+	       else
+		 {
+		   D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "all",0);
+		   D1->CL=seq2contacts (D1->S, D2?(D2->S):NULL,D1->CL, NULL);
+		 }
+	       CL=D1->CL;
+	     }
+	   
+	   DST->A=struc_evaluate4tcoffee (D1->A,CL,ACTION(1),max,enb, strikem,evaluate2tree);
+	 }
        else if ( strm(action, "evaluate"))
 	 {
 	   Alignment *A;
-
-
 	   DST->A=copy_aln (D1->A, NULL);
 	   DST->S=aln2seq(DST->A);
-	   if (strm (action_list[1], "rna"))
-	     {
-	       //D1->A: MSA
-	       //D2->A: rna structure in parenthesis
-	       if (!D2->CL)D2->CL=vienna2tc_lib(NULL,D2->S, D2->S);
-	       DST->A=sp3_evaluate4tcoffee (D1->A, D2->CL);
-	     }
-	   else if    (strm (action_list[1], "strike"))
-	     {
-	       Constraint_list *CL;
-	       
-	       if (!D2)CL=D1->CL;
-	       else if (!D2->CL)CL=D1->CL;
-	       else CL=D2->CL;
-	       if (!CL)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: a contact library must be provided via -in2  [FATAL]");
-	       DST->A=strike_evaluate4tcoffee (D1->A,CL,((ACTION(2)))?(ACTION(2)):(ACTION(1)));
-	     }
 	   
-	   else if    (strm (action_list[1], "contacts") || strm (action_list[1], "distances"))
-	     {
-	       int enb;
-	       float max;
-	       float delta;
-	       Constraint_list *CL;
-	       
-	       if (strm (action_list[1], "distances"))
-		 {
-		   enb=3;
-		   max=10;
-		   delta=0.2;
-		   if (ACTION(2))max=atof(ACTION(2));
-		   if (ACTION(3))delta=atof(ACTION(3));
-		   if (ACTION(4))enb=atoi(ACTION(4));
-		 }
-	       else if (strm (action_list[1], "contacts"))
-		 {
-		   enb=3;
-		   max=1.2;
-		   delta=-1;
-		   if (ACTION(2))max=atof(ACTION(2));
-		   if (ACTION(3))enb=atoi(ACTION(3));
-		 }
-	       
-	       if (!D2)CL=D1->CL;
-	       else if (!D2->CL)CL=D1->CL;
-	       else CL=D2->CL;
-	       if (!CL)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: a contact library must be provided via -in2  [FATAL]");
-	       DST->A=distance_evaluate4tcoffee (D1->A,CL,max,delta, enb);
-	     }
-	   else if    (strm (action_list[1], "id2"))
+	   
+	   if    (strm (action_list[1], "id2"))
 	     {
 	       fprintf ( stdout, "ID2: %d\n", aln2sim2(D1->A));
 	       exit (EXIT_SUCCESS);
 	     }
-	   else if    (strm (action_list[1], "id"))
+	   else if    (strm (action_list[1], "id") || is_matrix(ACTION(1)))
 	     {
-	       fprintf ( stdout, "ID: %d\n", aln2sim ((D1->A), "idmat"));
-	       exit (EXIT_SUCCESS);
+	       Constraint_list *CL;
+	       CL=(Constraint_list*)vcalloc (1, sizeof (Constraint_list));
+	       if (is_matrix(ACTION(2)))CL->M=read_matrice (ACTION(2));
+	       else if (is_matrix (ACTION(1)))CL->M=read_matrice (ACTION(1));
+	       else CL->M=read_matrice ("idmat");
+
+
+	       DST->A=matrix_evaluate_output (D1->A, CL);
+	       
+		    
+	       
+	       (D1->A)->score=(D1->A)->score_aln=(DST->A)->score=(DST->A)->score_aln;
+	       
+	       //fprintf ( stdout, "ID: %d\n", aln2sim ((D1->A), "idmat"));
+	       //exit (EXIT_SUCCESS);
+	       free_int (CL->M, -1);
+	       vfree (CL);
 	     }
 	   else if (n_actions>1 && strm (  action_list[1], "categories"))
 	     {
@@ -11381,6 +11424,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     {
 	       CL=declare_constraint_list ( DST->S,NULL, NULL, 0,NULL, read_matrice("pam250mt"));
 	       DST->A=  main_coffee_evaluate_output(DST->A, CL, "sar");
+	       (D1->A)->score=(D1->A)->score_aln=(DST->A)->score=(DST->A)->score_aln;
+	       (DST->A)->score_seq[(D1->A)->nseq]*=10;
 	     }
 	   else if (n_actions>1 && strstr (  action_list[1], "boxshade"))
 	     {
@@ -11389,6 +11434,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       CL=declare_constraint_list ( DST->S,NULL, NULL, 0,NULL, read_matrice("pam250mt"));
 	       DST->A=  main_coffee_evaluate_output(DST->A, CL, color_mode);
 	     }
+	  
 	   else
 	     {
 	       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: +evaluate mode [%s] is unknown[FATAL]", action_list[1]);
@@ -11398,8 +11444,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 
 	   A=D1->A;
 
-	   sprintf ( A->name[A->nseq], "cons");
-	   sprintf ( A->seq_al[A->nseq], "%s", aln2cons_seq_mat (A, "idmat"));
+	   //sprintf ( A->name[A->nseq], "cons");
+	   //sprintf ( A->seq_al[A->nseq], "%s", aln2cons_seq_mat (A, "idmat"));
 
 	 }
        else if ( strm (action, "sp_evaluate"))
