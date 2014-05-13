@@ -41,7 +41,7 @@ test: t_coffee -other_pg seq_reformat -code sproteases_large.code_name -in sprot
 test: t_coffee -other_pg seq_reformat -decode sproteases_large.code_name -in sproteases_large.coded.fasta    
 test: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action  +3convert a0 -output color_html > colored.html   
 test: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +color_residue hmgb_chite 10 1 -output color_html > color.html   
-test: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +3evaluate pam250mt- output color_html > color.html   
+test: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +3evaluate pam250mt -output color_html > color.html   
 test: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +3evaluate boxshade -output color_html > color.html   
 test: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=clustalw_aln -out=cache.aln -action +convert 'Aa1' '.--' +convert '#0'    
 test: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out=cache.seq -action +convert 'Aa1' '.--' +convert '#0'    
