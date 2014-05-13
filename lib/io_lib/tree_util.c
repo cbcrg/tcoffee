@@ -4077,6 +4077,16 @@ int cmp_tree_array ( const void *p, const void *q)
   else return 0;
 }
 
+NT_node newick_string2tree (char *string)
+{
+  static char *tmp=vtmpnam (NULL);
+  
+  if (!string) return NULL;
+  printf_file (tmp,"w", "%s", string);
+  
+  return main_read_tree (tmp);
+}
+  
 NT_node * read_tree_list (Sequence *S)
 {
   NT_node *T;
@@ -5229,6 +5239,106 @@ NT_node treelist2filtered_bootstrap ( NT_node *L,char *file, int **score, float 
   vfree (L2);
   if (file)free_treelist(L);
   return BT;
+}
+Alignment *treelist2cons (Alignment *T)
+{
+  char *infile=vtmpnam (NULL);
+  char *outfile=vtmpnam (NULL);
+  FILE *fp;
+  int a=0;
+
+  if (!T) return T;
+  else if (T->Tree)return treelist2cons (T->Tree);
+  
+  fp=vfopen (infile, "w");
+  for (a=0; a<T->nseq; a++)
+    {
+      fprintf (fp, "%s\n", T->seq_al[a]);
+    }
+  vfclose (fp);
+    
+  printf_system( "msa2bootstrap.pl -i %s -o %s -input tree >/dev/null 2>/dev/null", infile, outfile);
+  vfree (T->seq_al[0]);
+  T->seq_al[0]=file2string(outfile);
+  HERE ("%s", T->seq_al[0]);
+  sprintf (T->name[0], "MajorityConsensusTree");
+  sprintf (T->seq_comment[0], "Raplicates: %d Source: consense", T->nseq);
+  
+  T->nseq=1;
+  return T;
+}
+Alignment *treelist2node_support (Alignment *T)
+{
+  if (!T) return T;
+  else if (T->Tree)return treelist2node_support (T->Tree);
+  
+  return tree2node_support (T->seq_al[0], T);
+}
+Alignment *tree2node_support (char *newick_tree, Alignment *T)
+{
+  NT_node RT, TT;
+  Sequence *S;
+  int a;
+  float s=0;
+  
+  RT=newick_string2tree(newick_tree);
+  
+  S=tree2seq(RT, NULL);
+  RT=recode_tree (RT,S);
+  
+  for (a=0; a<T->nseq; a++)
+    {
+      TT=newick_string2tree(T->seq_al[a]);
+      TT=prune_tree (TT,S);
+      TT=recode_tree(TT,S);
+      s+=update_node_support (RT, TT,S->nseq);
+      free_tree (TT);
+    }
+  s=(s/(float)(T->nseq-1))*100;
+  sprintf (T->seq_al[0], "%s", tree2string (RT));
+  sprintf (T->name[0], "OriginalDistanceTree");
+  sprintf (T->seq_comment[0], "Replicates: %d AverageNodeSupport: %.2f %% Source: seq_reformat", T->nseq, s);
+  T->nseq=1;
+  return T;
+}
+float update_node_support (NT_node T1, NT_node T2, int nseq)
+{
+  //Trees must have been -prune_tree- and -recode_tree- with the same referecne sequence
+  //updates node boostrap values in T1
+  //Returns the number of nodes in T2 supporting nodes in T1
+  
+  float sc=0;
+  float tot=0;
+  NT_node *L1,*iL1,*L2,*iL2;
+  
+  if (!T1 || !T2 || !nseq) return 0;
+  
+
+
+  L1=iL1=tree2node_list (T1, NULL);
+  L2=iL2=tree2node_list (T2, NULL);
+  
+  
+  while (L1 && L1[0])
+    {
+      NT_node*L2=iL2;
+      while (L2 && L2[0])
+	{
+	  if (memcmp((L1[0])->lseq2, (L2[0])->lseq2,nseq * sizeof(int)))L2++;
+	  else
+	    {
+	      sc++;
+	      (L1[0])->bootstrap++;
+	      L2=NULL;
+	    }
+	}
+      tot++;
+      L1++;
+    }
+  
+  vfree (iL1);
+  vfree (iL2);
+  return (tot==0)?0:(sc/tot);
 }
 
 NT_node treelist2bootstrap ( NT_node *L, char *file)

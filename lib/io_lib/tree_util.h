@@ -1,6 +1,8 @@
 #ifndef TREE_UTIL_H
 #define TREE_UTIL_H
 
+
+
 typedef struct treesim{
   float w;
   float uw;
@@ -227,7 +229,7 @@ int new_tree_sort ( char *name, NT_node T);
 
 NT_node split2tree ( NT_node RT,Sequence *LIST, char *param);
 NT_node * read_tree_list (Sequence *S);
-
+NT_node newick_string2tree (char *string);
 int count_groups( Sequence *S, char *s);
 
 Split ** count_splits( NT_node RT, Sequence *S, char *s);
@@ -247,6 +249,10 @@ int count_tree_groups( Sequence *LIST, char *group_file);
 int node_sort ( char *name, NT_node T);
 int    treelist2n (NT_node *L);
 int ** treelist2avg_treecmp (NT_node *L, char *file);
+Alignment *treelist2cons (Alignment *T);
+Alignment *tree2node_support (char *newicktree,Alignment *T);
+Alignment *treelist2node_support (Alignment *T);
+float update_node_support (NT_node T1, NT_node T2, int nseq);
 NT_node treelist2bootstrap ( NT_node *L, char *file);
 NT_node treelist2filtered_bootstrap ( NT_node *L, char *file, int **score,float f);
 

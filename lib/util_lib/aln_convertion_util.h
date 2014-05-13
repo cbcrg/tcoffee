@@ -263,6 +263,8 @@ char      * seq2T_template_string (Sequence *S, int n);
 char      * seq2E_template_string (Sequence *S, int n);
 int       * seq2U_template (Sequence *S, int n);
 
+
+int seq2n_template (Sequence *S, char *type);
 struct X_template * seq_has_template ( Sequence *S, int n, char *type);
 
 /******************************************************************************/

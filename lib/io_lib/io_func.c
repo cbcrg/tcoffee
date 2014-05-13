@@ -584,110 +584,373 @@ void get_rgb_values ( int val, Color *C)
      int classC, n, c;
      float *r, *g, *b;
      FILE *fp;
-
-
-
-     if ( !html_code)
+     int new_scheme=3;
+     int color_file=0;
+     
+     if (!html_code)
        {
-	 html_code=declare_char(10, 10);
-	 ps_code=declare_float  (10, 3);
+	 int rgb255=0;
+	 int a, b;
+	 color_file=(check_file_exists(COLOR_FILE))?1:0;
+	 html_code=declare_char(20, 10);
+	 ps_code=declare_float  (20, 3);
 	 
-	 n=0;
-	 /*0*/
-	 sprintf (html_code[n], "#6666FF");
-	 ps_code[n][0]=0.4;
-	 ps_code[n][1]=0.4;
-	 ps_code[n][2]=1;
-	 n++;
-	 /*1*/
-	 sprintf (html_code[n], "#00FF00");
-	 ps_code[n][0]=0.6;
-	 ps_code[n][1]=1;
-	 ps_code[n][2]=0;
-	 n++;
+	 if (!color_file && new_scheme==3 )
+	   {
+	     n=0;
+	      /*0*/
+	     sprintf (html_code[n], "#9B92FF");//blue
+	     ps_code[n][0]=155;
+	     ps_code[n][1]=146;
+	     ps_code[n][2]=255;
+	     n++;
+	    
+	     
+	     
+	     /*1*/
+	     sprintf (html_code[n], "#B4FFB4");//green1
+	     ps_code[n][0]=180;
+	     ps_code[n][1]=255;
+	     ps_code[n][2]=180;
+	     n++;
+	    
 
-	 /*2*/
-	 sprintf (html_code[n], "#66FF00");
-	 ps_code[n][0]=0.8;
-	 ps_code[n][1]=1;
-	 ps_code[n][2]=0;
-	 n++;
+	     /*2*/
+	     sprintf (html_code[n], "#BEFFBE");//green2
+	     ps_code[n][0]=190;
+	     ps_code[n][1]=255;
+	     ps_code[n][2]=190;
+	     n++;
+	     
+	     /*3*/
+	     sprintf (html_code[n], "#C8FFC8");//green3
+	     ps_code[n][0]=200;
+	     ps_code[n][1]=255;
+	     ps_code[n][2]=200;
+	     n++;
+	     
+	     /*4*/
+	     sprintf (html_code[n], "#FFFFB7");//orange 1
+	     ps_code[n][0]=255;
+	     ps_code[n][1]=255;
+	     ps_code[n][2]=183;
+	     n++;
+	     
+	     /*5*/
+	     sprintf (html_code[n], "#FFFFAD");//orange 1
+	     ps_code[n][0]=255;
+	     ps_code[n][1]=255;
+	     ps_code[n][2]=173;
+	     n++;
 	   
-	 /*3*/
-	 sprintf (html_code[n], "#CCFF00");
-	 ps_code[n][0]=1.0;
-	 ps_code[n][1]=1.0;
-	 ps_code[n][2]=0;
-	 n++;
-	   
-	 /*4*/
-	 sprintf (html_code[n], "#FFFF00");
-	 ps_code[n][0]=1;
-	 ps_code[n][1]=0.85;
-	 ps_code[n][2]=0;
-	 n++;
-	   
-	 /*5*/
-	 sprintf (html_code[n], "#FFCC00");
-	 ps_code[n][0]=1;
-	 ps_code[n][1]=0.7;
-	 ps_code[n][2]=0;
-	 n++;
-	   
-	 /*6*/
-	 sprintf (html_code[n], "#FF9900");
-	 ps_code[n][0]=1;
-	 ps_code[n][1]=0.6;
-	 ps_code[n][2]=0;
-	 n++;
-	   
-	 /*7*/
-	 sprintf (html_code[n], "#FF6600");
-	 ps_code[n][0]=1;
-	 ps_code[n][1]=0.4;
-	 ps_code[n][2]=0;
-	 n++;
-         
-	 /*8*/
-	 sprintf (html_code[n], "#FF3300");
-	 ps_code[n][0]=1;
-	 ps_code[n][1]=0.2;
-	 ps_code[n][2]=0;
-	 n++;
-	 
-	   
-	 /*9*/
-	 sprintf (html_code[n], "#FF2000");
-	 ps_code[n][0]=1;
-	 ps_code[n][1]=0;
-	 ps_code[n][2]=0;
-	 n++;
-	 
-         
-	 
-	 
+	     /*6*/
+	     sprintf (html_code[n], "#FFFFAD");//orange 2
+	     ps_code[n][0]=255;
+	     ps_code[n][1]=255;
+	     ps_code[n][2]=173;
+	     n++;
+	     
+	     /*7*/
+	     sprintf (html_code[n], "#FFE6E6");//red1
+	     ps_code[n][0]=255;
+	     ps_code[n][1]=230;
+	     ps_code[n][2]=230;
+	     n++;
+	     
+	     /*8*/
+	     sprintf (html_code[n], "#FFDCDC");//red2
+	     ps_code[n][0]=255;
+	     ps_code[n][1]=220;
+	     ps_code[n][2]=220;
+	     n++;
 
-	 if ( check_file_exists(COLOR_FILE))
+	     /*9*/
+	     sprintf (html_code[n], "#FFC8C8");//red3
+	     ps_code[n][0]=255;
+	     ps_code[n][1]=200;
+	     ps_code[n][2]=200;
+	     n++;
+
+	   
+	     
+
+	   }
+	 else if (!color_file && new_scheme==2 )
+	   {
+	     n=0;
+	      /*0*/
+	     sprintf (html_code[n], "#008080");//blue
+	     ps_code[n][0]=0.4;
+	     ps_code[n][1]=0.4;
+	     ps_code[n][2]=1;
+	     n++;
+	     /*0
+	     sprintf (html_code[n], "#BC4400");//blue
+	     ps_code[n][0]=0.4;
+	     ps_code[n][1]=0.4;
+	     ps_code[n][2]=1;
+	     n++;
+	     */
+	     
+	     
+	     /*2*/
+	     sprintf (html_code[n], "#D05800");//blue green
+	     ps_code[n][0]=0.6;
+	     ps_code[n][1]=1;
+	     ps_code[n][2]=0;
+	     n++;
+	     /*2
+	     sprintf (html_code[n], "#E46C03");//Green pea
+	     ps_code[n][0]=0.6;
+	     ps_code[n][1]=1;
+	     ps_code[n][2]=0;
+	     n++;
+	     /*
+
+	     /*3*/
+	     sprintf (html_code[n], "#FF8A21");//lighter pink
+	     ps_code[n][0]=0.8;
+	     ps_code[n][1]=1;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*4*/
+	     sprintf (html_code[n], "#FF9E35");//light pink
+	     ps_code[n][0]=1.0;
+	     ps_code[n][1]=1.0;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*5*/
+	     sprintf (html_code[n], "#FFB249");//light orange
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.85;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*6*/
+	     sprintf (html_code[n], "#FFC65D");//light orange/bown
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.7;
+	     ps_code[n][2]=0;
+	     n++;
+	   
+	     /*7*/
+	     sprintf (html_code[n], "#FFDA71");//darker orange/brown
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.6;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*8*/
+	     sprintf (html_code[n], "#FFEE85");//mysti rose
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.4;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*9*/
+	     sprintf (html_code[n], "#FFFF99");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.2;
+	     ps_code[n][2]=0;
+	     n++;
+
+	     /*9*/
+	     sprintf (html_code[n], "#FFFFAD");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.2;
+	     ps_code[n][2]=0;
+	     n++;
+
+	     /*9*/
+	     sprintf (html_code[n], "#FFFFC1");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.2;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+
+	   }
+	 else if (!color_file && new_scheme==1 )
+	   {
+	     n=0;
+	     /*0*/
+	     sprintf (html_code[n], "#7AD1FF");//blue
+	     ps_code[n][0]=0.4;
+	     ps_code[n][1]=0.4;
+	     ps_code[n][2]=1;
+	     n++;
+	     /*2*/
+	     sprintf (html_code[n], "#91FF49");//blue green
+	     ps_code[n][0]=0.6;
+	     ps_code[n][1]=1;
+	     ps_code[n][2]=0;
+	     n++;
+	     /*2*/
+	     sprintf (html_code[n], "#A5FF5D");//Green pea
+	     ps_code[n][0]=0.6;
+	     ps_code[n][1]=1;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*3*/
+	     sprintf (html_code[n], "#B9FF71");//lighter pink
+	     ps_code[n][0]=0.8;
+	     ps_code[n][1]=1;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*4*/
+	     sprintf (html_code[n], "#FFC5C3");//light pink
+	     ps_code[n][0]=1.0;
+	     ps_code[n][1]=1.0;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*5*/
+	     sprintf (html_code[n], "#FAD1B9");//light orange
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.85;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*6*/
+	     sprintf (html_code[n], "#FAE6B9");//light orange/bown
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.7;
+	     ps_code[n][2]=0;
+	     n++;
+	   
+	     /*7*/
+	     sprintf (html_code[n], "#FAF1B9");//darker orange/brown
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.6;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*8*/
+	     sprintf (html_code[n], "#F8FAB9");//mysti rose
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.4;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*9*/
+	     sprintf (html_code[n], "#EDFAB9");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.2;
+	     ps_code[n][2]=0;
+	     n++;
+
+	   }
+	 else if (!color_file)//old code
+	   {
+	     n=0;
+	     /*0*/
+	     sprintf (html_code[n], "#6666FF");
+	     ps_code[n][0]=0.4;
+	     ps_code[n][1]=0.4;
+	     ps_code[n][2]=1;
+	     n++;
+	     /*1*/
+	     sprintf (html_code[n], "#00FF00");
+	     ps_code[n][0]=0.6;
+	     ps_code[n][1]=1;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*2*/
+	     sprintf (html_code[n], "#66FF00");
+	     ps_code[n][0]=0.8;
+	     ps_code[n][1]=1;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*3*/
+	     sprintf (html_code[n], "#CCFF00");
+	     ps_code[n][0]=1.0;
+	     ps_code[n][1]=1.0;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*4*/
+	     sprintf (html_code[n], "#FFFF00");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.85;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*5*/
+	     sprintf (html_code[n], "#FFCC00");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.7;
+	     ps_code[n][2]=0;
+	     n++;
+	   
+	     /*6*/
+	     sprintf (html_code[n], "#FF9900");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.6;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*7*/
+	     sprintf (html_code[n], "#FF6600");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.4;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     /*8*/
+	     sprintf (html_code[n], "#FF3300");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0.2;
+	     ps_code[n][2]=0;
+	     n++;
+	     
+	     
+	     /*9*/
+	     sprintf (html_code[n], "#FF2000");
+	     ps_code[n][0]=1;
+	     ps_code[n][1]=0;
+	     ps_code[n][2]=0;
+	     n++;
+	   }
+	 else if (color_file)
 	   {
 	     fp=vfopen( COLOR_FILE, "r");
 	     
 	     while ((c=fgetc(fp))!='*');
 	     while ((c=fgetc(fp))!='\n');
 	     
-	     c=0;
-	     while ((c=fgetc(fp))!=EOF)
-	       {
-		 ungetc(c, fp);
-		 if ( fscanf (fp, "%d", &classC)==0)break;
-		 fscanf (fp, "%s %f %f %f", html_code[classC], &ps_code[classC][0], &ps_code[classC][1],&ps_code[classC][2]);
-		 while ((c=fgetc(fp))!='\n' && c!=EOF);
-		 if ( c==EOF)ungetc(c, fp);
-	       }
-	     vfclose(fp);
+		 c=0;
+		 while ((c=fgetc(fp))!=EOF)
+		   {
+		     ungetc(c, fp);
+		     if ( fscanf (fp, "%d", &classC)==0)break;
+		     fscanf (fp, "%s %f %f %f", html_code[classC], &ps_code[classC][0], &ps_code[classC][1],&ps_code[classC][2]);
+		     while ((c=fgetc(fp))!='\n' && c!=EOF);
+		     if ( c==EOF)ungetc(c, fp);
+		   }
+		 vfclose(fp);
 	   }
+	 
+	  for (a=0; a<n; a++)
+	    {
+	      for (b=0; b<3; b++)
+		if (ps_code[a][b]>1){rgb255=1;b=3;a=n;}
+	    }
+	  if (rgb255)
+	    for (a=0; a<n; a++)
+	      {
+		for (b=0; b<3; b++)
+		  ps_code[a][b]/=255;
+	      }
        }
      
-
+    
+     
 
      /*Conversions*/
      if ( val==10)val--;
@@ -790,9 +1053,11 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
 	sprintf (buf2, "%s", Sin->seq_al[i]);ungap(buf2);
 	sprintf (buf3, "%s", S->seq_al[a]);ungap(buf3);
 	
-	if ( strlen (buf2) !=strlen(buf3))
+	
+	
+	if (strlen (buf2) !=strlen(buf3))
 	  {
-	    
+	    for (b=0; b<strlen (buf2); b++)HERE ("%d", buf2[b]);
 	    fprintf ( stderr, "\nERROR: Incompatible cache ON sEQ: %s\n", S->name[a]);
 	    fprintf ( stderr, "\n%s\n%s", buf2, buf3); 
 	    fprintf ( stderr, "\n\n%s\n%s", Sin->seq_al[i],S->seq_al[a]); exit (EXIT_FAILURE);
@@ -989,10 +1254,9 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
    
    
    fps=print_format_string ( "\n*\n",white,ink, fps);
-   
    for ( a=0;S->score_seq && a< B->nseq; a++)
        {
-       get_rgb_values_format (S->score_seq[a]/10, box_c);
+	 get_rgb_values_format (S->score_seq[a]/10, box_c);
        sprintf ( buf, "%-*.*s ", max_len+2,max_len, S->name[a]);
        fps=print_format_string ( buf,box_c, ink,fps);
        sprintf ( buf, ": %3d\n", S->score_seq[a]);
@@ -1002,7 +1266,7 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
    get_rgb_values_format (S->score_aln/10, box_c);
    sprintf ( buf, "%-*.*s ", max_len+2,max_len, S->name[S->nseq]);
    fps=print_format_string ( buf,box_c, ink,fps);
-   sprintf ( buf, ": %3d\n", S->score_aln);
+   sprintf ( buf, ": %3d\n", S->score_aln/10);
    fps=print_format_string ( buf,white, ink,fps);
    
    fps=print_format_string ( "\n",white, ink,fps);
@@ -1607,11 +1871,12 @@ FILE_format * print_ascii_char ( int c, Color *box, Color *ink, FILE_format *f)
 
       
 void get_rgb_values_ascii ( int val, Color *C)
-     {
+{
+
      
      if ( val==NO_COLOR_RESIDUE)C->ascii_value='-';
      else if ( val==NO_COLOR_GAP)C->ascii_value='*';
-     else if ( val>9)C->ascii_value='#';     
+     else if ( val>9){C->ascii_value='#'; }
      else if ( val>=0 && val<=9) C->ascii_value=val+'0';
      else   C->ascii_value=val;
      }

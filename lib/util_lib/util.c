@@ -27,6 +27,7 @@
 #include "util_lib_header.h"
 #include "define_header.h"
 #include "perl_header_lib.h"
+#include "dp_lib_header.h"
 
 //defined this way because all compilers cannot pas ap
 //safe printf: it declares buf to the proper size
@@ -63,6 +64,44 @@ static int clean_exit_started;
 static int debug_lock;
 static char *in_cl;
 static char *logfile;
+
+/*********************************************************************/
+/*                                                                   */
+/*                                  SANDBOX
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+void sb()
+{
+  double *in;
+  double *out;
+  int a;
+  float tot=0;
+
+  in=(double *)vcalloc (26, sizeof (double));
+  in[dirichlet_code('y')]=0.5;
+  in[dirichlet_code('k')]=0.5;
+  
+  
+  out=compute_dirichlet_p (in);
+  for ( a=0; a<26; a++)
+    {
+     
+      if (is_aa(a+'a'))
+	{
+	  int i=dirichlet_code (a+'a');
+	  HERE ("%c %.2f", a+'a', (float)exp((float)out[i]));
+	  tot+=(float)exp((float)out[i]);
+	  
+	}
+    }
+  HERE ("TOT=%.2f", tot);
+  exit(0);
+}
+
+    
+
+
 /*********************************************************************/
 /*                                                                   */
 /*                                  DICHOTOMY                        */
@@ -2482,7 +2521,7 @@ char* substituteN ( char *string_in, char *t, char *r, int N)
       if (N!=0)n++;
     }
   strcat ( string_out, string_in);
-  if (l<(lso+1)){HERE ("Realloc %s %s delta=%d %d %d", t, r,delta, lsi, lso);heap_in=(char*)vrealloc (heap_in, sizeof (char)*(lso +1));}
+  if (l<(lso+1)){heap_in=(char*)vrealloc (heap_in, sizeof (char)*(lso +1));}
   sprintf ( heap_in, "%s", string_out);
   vfree (string_out);
   return heap_in;
@@ -3045,14 +3084,15 @@ void remove_charset ( char *seq, char *set)
 	  {
 	    sprintf ( set2, "%s", set);
 	  }
-
+	
 	l=strlen ( seq);
-	for (b=0, a=0; a<=l; a++)
+	for (b=0, a=0; a<l; a++)
 	  {
 	    if ( strchr ( set2, seq[a]));
 	    else seq[b++]=seq[a];
 	  }
 	seq[b]='\0';
+	
 	vfree (set2);
 	}
 
@@ -7843,20 +7883,23 @@ FILE * output_completion ( FILE *fp,int n, int tot, int n_reports, char *string)
 	    }
 	  t=get_time()/1000;
 	  elapsed=t-ref_time;
-
+	  
 	  if ( !ref_val && !flag)
 	    {
-	      fprintf (fp, "\n\t\t[%s][TOT=%5d][%3d %%][ELAPSED TIME: %4d sec.]",(string)?string:"",tot,(tot==1)?100:0, elapsed);
+	      fprintf (fp, "\n\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]",(string)?string:"",tot,(tot==1)?100:0, elapsed);
 	      flag=1;
 	    }
-	  else if ( n==tot)fprintf (fp, "\r\t\t[%s][TOT=%5d][%3d %%][ELAPSED TIME: %4d sec.]",(string)?string:"", tot,100, elapsed);
+	  else if ( n>=tot)fprintf (fp, "\r\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]",(string)?string:"", tot,100, elapsed);
 	  else if ( ((n*100)/tot)>ref_val)
 	    {
+	      
 	      ref_val=((n*100)/tot);
 	      t=(ref_val==0)?0:elapsed/ref_val;
 	      t=t*(100-ref_val);
 	      t=0;
-	      fprintf (fp, "\r\t\t[%s][TOT=%5d][%3d %%][ELAPSED TIME: %4d sec.]", (string)?string:"",tot,ref_val, elapsed);
+
+	      elapsed=((float)100-(float)ref_val)*((float)elapsed/(float)ref_val);
+	      fprintf (fp, "\r\t\t[%s][TOT=%5d][%3d %%][REMAINING TIME: %4d sec.]", (string)?string:"",tot,ref_val, elapsed);
 	      flag=0;
 	    }
 	  return fp;

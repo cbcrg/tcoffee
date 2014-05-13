@@ -260,20 +260,25 @@ struct Alignment
 		     */
     int **cdna_cache; /*Contains the information about wheather a nucleotide is coding or not*/
                      /*Only defined if used */
-
+      
 
 /*Weight*/
       float *col_weight;
       float *seq_weight;
       float **res_weight;
+
+/*Trees*/
+      Alignment *Tree;
 /*Score*/
-    int *  score_seq;
-    int ** score_res;
-    int score_aln;
-    int score;
-    int ibit;
-    int cpu;
-    int finished;
+      
+    float ** dm;   
+    int   *  score_seq;
+    int   ** score_res;
+    int      score_aln;
+    int      score;
+    int      ibit;
+    int      cpu;
+    int      finished;
 
 /*Input/Output Options*/
     int output_res_num;
