@@ -1151,7 +1151,6 @@ Alignment * upgma_tree_aln  ( Alignment*A, int nseq, Constraint_list *CL)
 	ls[a][0]=a;
 	ls[b][0]=b;
 	mat[a][b]=mat[b][a]=upgma_pair_wise(A,ls[a],ns[a],ls[b],ns[b],CL);
-	HERE ("%d %d", a, b, mat[a][b]);
       }
   
   used=(int*)vcalloc (nseq, sizeof (int));
@@ -1161,7 +1160,6 @@ Alignment * upgma_tree_aln  ( Alignment*A, int nseq, Constraint_list *CL)
       upgma_merge_aln_rows (A,ns, ls,nseq, mat, used, &n,CL);
     }    
   print_aln (A);
-  HERE ("finished");
   free_int ( mat, -1);
   free_int (ls, -1);
   vfree (ns);
@@ -1235,9 +1233,8 @@ int upgma_pair_wise (Alignment *A, int *ls0, int ns0, int *ls1, int ns1, Constra
 	      
   ungap_sub_aln (A, ns[0], ls[0]);
   ungap_sub_aln (A, ns[1], ls[1]);
-  HERE ("Align");
   pair_wise (A, ns, ls, CL);
-  HERE ("Done");
+  
 	
   for (n=0,a=0;a<2; a++)
     for (b=0; b<ns[a]; b++)
@@ -1652,8 +1649,49 @@ void km_print_tree(T)
 //                              UPGMA
 ///////////////////////////////////////////////////////////////////////////////
 
+NT_node **     dist2upgma_tree (double **imat, char **name, int nseq, char *fname)
+{
+  int **mat;
+  NT_node *NL, T;
+  int a,b, n, *used;
+  int tot_node;
 
-NT_node ** int_dist2upgma_tree (int **mat, Alignment *A, int nseq, char *fname)
+  mat=declare_int (nseq, nseq);
+  for (a=0; a<nseq; a++)
+    for (b=0; b<nseq; b++)
+      mat[a][b]=(int)((double)100*imat[a][b]);
+
+  if (upgma_node_heap (NULL))
+    {
+      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: non empty heap in upgma [FATAL]");
+    }
+  NL=(NT_node*)vcalloc (nseq, sizeof (NT_node));
+  
+  for (a=0; a<nseq; a++)
+    {
+      NL[a]=new_declare_tree_node ();
+      upgma_node_heap (NL[a]);
+      sprintf (NL[a]->name, "%s", name[a]);
+      NL[a]->isseq=1;
+      NL[a]->leaf=1;
+    }
+    
+  used=(int*)vcalloc ( nseq, sizeof (int));
+  n=nseq;
+  while (n>1)
+    {
+      T=upgma_merge (mat, NL,used, &n, nseq);
+    }    
+ 
+  vfree (used);
+  print_newick_tree (T, fname);
+  upgma_node_heap (NULL);
+  vfree (NL);
+  free_int (mat, -1);
+  
+  return read_tree (fname,&tot_node,nseq, name);
+}
+NT_node ** int_dist2upgma_tree (int    **mat, Alignment *A, int nseq, char *fname)
 {
   NT_node *NL, T;
   int a, n, *used;
@@ -1684,7 +1722,7 @@ NT_node ** int_dist2upgma_tree (int **mat, Alignment *A, int nseq, char *fname)
   vfclose (print_tree (T, "newick", vfopen (fname, "w")));
   upgma_node_heap (NULL);
   vfree (NL);
-  
+ 
   return read_tree (fname,&tot_node,A->nseq,  A->name);
 }
 NT_node upgma_merge (int **mat, NT_node *NL, int *used, int *n, int N)

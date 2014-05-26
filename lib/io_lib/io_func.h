@@ -65,7 +65,7 @@ int **neg_matrix2pos_matrix ( int **matrix);
 
 
 void   print_aln ( Alignment *B);
-
+int output_raw_score (Alignment *A, Alignment *B, char *name);
 int       output_reliability_ps     ( Alignment *B,Alignment *S, char *name);
 int       output_reliability_pdf    ( Alignment *B,Alignment *S, char *name);
 int       output_reliability_html   ( Alignment *B,Alignment *S, char *name);
@@ -91,7 +91,7 @@ FILE_format* (*vfclose_format)         ( FILE_format *));
 
 FILE_format * print_ps_string      ( char *s , Color *box, Color *ink, FILE_format *f);
 FILE_format * print_ps_char        ( int   c,    Color *box, Color *ink, FILE_format *f);
-
+FILE_format * print_ps_line        (int len, Color *c, FILE_format *f);
 
 
 void get_rgb_values_ps ( int val, Color *C);
@@ -115,3 +115,5 @@ void get_rgb_values_ascii ( int val, Color *C);
 FILE_format* vfopen_ascii ( char *name);
 FILE_format* vfclose_ascii ( FILE_format *fascii);
 int       output_seq_reliability_ascii     ( Alignment *B,Alignment *S, char *name);
+int aln2compressed_ps (Alignment *A,char *file);
+int aln2compressed_pdf (Alignment *A,char *file);

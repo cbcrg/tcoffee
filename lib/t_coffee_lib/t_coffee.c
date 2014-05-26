@@ -360,6 +360,7 @@ int batch_main ( int argc, char **argv)
 
 	int maxnseq;
 	int maxlen;
+	int ulimit;
 	/*Thread parameters*/
 	int prot_min_sim;
 	int prot_max_sim;
@@ -2347,6 +2348,26 @@ if ( !do_evaluate)
 			    /*Max Value*/ "any"          \
 		   );
 
+/*PARAMETER PROTOTYPE:    -ulimit     */
+
+	       get_cl_param(\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-ulimit"     ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "D"           ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "Maximum amount of memory to be used. Kill job otherwise"          ,\
+			    /*Parameter*/ &ulimit       ,\
+			    /*Def 1*/    "-1"            ,\
+			    /*Def 2*/    "0"            ,\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+		   );
+	       if (ulimit!=-1)set_max_mem (ulimit);
+
 /*PARAMETER PROTOTYPE:    MAXNSEQ     */
 
 	       get_cl_param(\
@@ -2360,7 +2381,7 @@ if ( !do_evaluate)
 			    /*MAX Nval*/  1             ,\
 			    /*DOC*/       "Maximum number of sequences (-1=no max)"          ,\
 			    /*Parameter*/ &maxnseq    ,\
-			    /*Def 1*/    "1000"            ,\
+			    /*Def 1*/    "-1"            ,\
 			    /*Def 2*/    "0"            ,\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
@@ -2384,6 +2405,7 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
+	       
 /*PARAMETER PROTOTYPE:    WEIGHT      */
 
 	       get_cl_param(\
@@ -4358,6 +4380,11 @@ get_cl_param(\
 	        * */
 
 	       S=read_seq_in_n_list   (list_file, n_list, type,seq_source);
+	       if (maxnseq!=-1 && S->nseq>maxnseq)
+		 {
+		   printf_exit ( EXIT_FAILURE,stderr, "\nNumber of sequences (%d) exceeds the allowed maximum (%d) [FATAL:%s]", S->nseq,maxnseq, PROGRAM);
+		 }
+	       
 	       S=precompute_blast_db(S,method_list, n_method_list);
 
 	       if ( check_type)

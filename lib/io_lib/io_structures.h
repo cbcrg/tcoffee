@@ -269,9 +269,10 @@ struct Alignment
 
 /*Trees*/
       Alignment *Tree;
+      int **RepColList;//last item set to -1
 /*Score*/
       
-    float ** dm;   
+    double ** dm;   
     int   *  score_seq;
     int   ** score_res;
     int      score_aln;

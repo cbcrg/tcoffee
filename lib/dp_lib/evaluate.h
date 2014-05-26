@@ -21,8 +21,10 @@ Alignment * fast_coffee_evaluate_output          ( Alignment *IN,Constraint_list
 Alignment * sp3_evaluate4tcoffee (Alignment *RNA, Constraint_list *CLin);
 Alignment * distance_evaluate4tcoffee (Alignment *A, Constraint_list *CL, float max, float delta, int enb);
 Alignment * strike_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *matrix);
-Alignment * struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *mode,float max, int enb,char *in_matrix_name, int replicate);
-  
+Alignment * struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *mode,float max, int enb,char *in_matrix_name);
+Alignment * evaluate_tree_group (Alignment *T, Sequence *G);
+Alignment *treealn_evaluate4tcoffee (Alignment *A, Sequence *G);
+
 int slow_coffee_evaluate_sub_aln         ( Alignment *IN,int *ns, int **ls, Constraint_list *CL);
 Alignment * slow_coffee_evaluate_output          ( Alignment *IN,Constraint_list *CL);
 Alignment * non_extended_t_coffee_evaluate_output( Alignment *IN,Constraint_list *CL);

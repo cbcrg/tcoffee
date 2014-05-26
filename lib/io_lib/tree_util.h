@@ -217,7 +217,8 @@ NT_node reroot(NT_node ptree, int nseq, int ntotal, int nnodes, NT_node **lu);
 
 Alignment *seq2seq_chain (Alignment *A,Alignment *B, char *arg);
 
-float display_avg_bootstrap ( NT_node T);
+float newick2avg_bs(char *string);
+float tree2avg_bs ( NT_node T);
 float tree2tot_dist ( NT_node T, int mode);
 int tree2n_branches(NT_node T, int mode);
 int **display_tree_from_node (NT_node T, int up, int down, int **array);
@@ -250,8 +251,11 @@ int node_sort ( char *name, NT_node T);
 int    treelist2n (NT_node *L);
 int ** treelist2avg_treecmp (NT_node *L, char *file);
 Alignment *treelist2cons (Alignment *T);
-Alignment *tree2node_support (char *newicktree,Alignment *T);
+Alignment *tree2node_support      (char *newicktree,Alignment *T);
+float      treelist2avg_node_support (Alignment *T);
 Alignment *treelist2node_support (Alignment *T);
+Alignment *treelist2node_support_best (Alignment *T);
+
 float update_node_support (NT_node T1, NT_node T2, int nseq);
 NT_node treelist2bootstrap ( NT_node *L, char *file);
 NT_node treelist2filtered_bootstrap ( NT_node *L, char *file, int **score,float f);
@@ -260,5 +264,5 @@ Sequence * treelist2seq ( Sequence *S);
 Sequence * treelist2sub_seq ( Sequence *S, int f);
 
 int treelist_file2consense (char *tree_file, char *outtree, char *outfile);
-
+float group2tree_score (Sequence *G, char *nwtree);
 #endif

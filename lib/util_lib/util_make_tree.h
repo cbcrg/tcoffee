@@ -21,6 +21,7 @@ NT_node rec_km_tree (char **name,int n,int dim,double **V, int nboot);
   
 
 NT_node ** int_dist2upgma_tree (int **mat, Alignment *A, int nseq, char *fname);
+NT_node **     dist2upgma_tree (double **mat, char **name, int nseq, char *fname);
 NT_node upgma_merge (int **mat, NT_node *NL, int *used, int *n, int N);
 
 void nj_tree(char **tree_description, int nseq);
