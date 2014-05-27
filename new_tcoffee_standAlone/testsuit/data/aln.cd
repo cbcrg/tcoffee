@@ -1,0 +1,36 @@
+ENTRY           IXI_234
+SEQUENCE
+                 5        10        15        20        25        30
+      1 T S P A S I R P P A G P S S R P A M V S S R R T R P S P P G
+     31 P R R P T G R P C C S A A P R R P Q A T G G W K T C S G T C
+     61 T T S T S T R H R G R S G W S A R T T T A A C L R A S R K S
+     91 M R A A C S R S A G S R P N R F A P T L M S S C I T S T T G
+    121 P P A W A G D R S H E
+///
+ENTRY           IXI_235
+SEQUENCE
+                 5        10        15        20        25        30
+      1 T S P A S I R P P A G P S S R - - - - - - - - - R P S P P G
+     31 P R R P T G R P C C S A A P R R P Q A T G G W K T C S G T C
+     61 T T S T S T R H R G R S G W - - - - - - - - - - R A S R K S
+     91 M R A A C S R S A G S R P N R F A P T L M S S C I T S T T G
+    121 P P A W A G D R S H E
+///
+ENTRY           IXI_236
+SEQUENCE
+                 5        10        15        20        25        30
+      1 T S P A S I R P P A G P S S R P A M V S S R - - R P S P P P
+     31 P R R P P G R P C C S A A P P R P Q A T G G W K T C S G T C
+     61 T T S T S T R H R G R S G W S A R T T T A A C L R A S R K S
+     91 M R A A C S R - - G S R P P R F A P P L M S S C I T S T T G
+    121 P P P P A G D R S H E
+///
+ENTRY           IXI_237
+SEQUENCE
+                 5        10        15        20        25        30
+      1 T S P A S L R P P A G P S S R P A M V S S R R - R P S P P G
+     31 P R R P T - - - - C S A A P R R P Q A T G G Y K T C S G T C
+     61 T T S T S T R H R G R S G Y S A R T T T A A C L R A S R K S
+     91 M R A A C S R - - G S R P N R F A P T L M S S C L T S T T G
+    121 P P A Y A G D R S H E
+///
