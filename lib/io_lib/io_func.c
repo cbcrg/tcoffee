@@ -581,16 +581,29 @@ void get_rgb_values ( int val, Color *C)
        
      static char **html_code;
      static float **ps_code;
-     int classC, n, c;
      float *r, *g, *b;
-     FILE *fp;
-     int new_scheme=3;
-     int color_file=0;
-     
      if (!html_code)
        {
 	 int rgb255=0;
 	 int a, b;
+	 int new_scheme=3;
+	 int color_file=0;
+	 FILE *fp;
+	 int classC, n, c;
+	 char *cs;
+	 
+	 if ((cs=getenv ("COLOR_4_TCOFFEE"))) 
+	    {
+	      if ( strm (cs, "new")|| strm (cs, "NEW")||strm (cs, "monet"))new_scheme=3;
+	      else if (strm (cs, "old")|| strm (cs, "OLD")||strm (cs, "delaunay"))new_scheme=0;
+	      else if (strm (cs, "2"))new_scheme=2;
+	      else if (strm (cs, "1"))new_scheme=1;
+	      else 
+		{
+		  printf_exit ( EXIT_FAILURE,stderr, "\nERROR: color scheme %s is unknown",cs);
+		}
+	    }
+
 	 color_file=(check_file_exists(COLOR_FILE))?1:0;
 	 html_code=declare_char(20, 10);
 	 ps_code=declare_float  (20, 3);
@@ -844,7 +857,7 @@ void get_rgb_values ( int val, Color *C)
 	     n++;
 
 	   }
-	 else if (!color_file)//old code
+	 else if (!color_file && new_scheme==0)//old code
 	   {
 	     n=0;
 	     /*0*/
@@ -1185,6 +1198,52 @@ FILE_format* (*vfclose_format)         ( FILE_format *))
     return 1;
 
     }
+
+int output_raw_score (Alignment *A, Alignment *B, char *name)
+{
+  FILE *fp;
+  int a, b,pos;
+  int *ngap;
+  int *len;
+  
+  if (!A)return NULL;
+  ngap=(int*)vcalloc (A->len_aln, sizeof (int));
+  len=(int*)vcalloc  (A->len_aln,sizeof (int)); 
+  for (b=0; b<A->len_aln; b++)
+    for (a=0; a<A->nseq; a++)
+      {
+	int g=is_gap(A->seq_al[a][b]);
+	ngap[b]+=g;
+	len[a]+=1-g;
+      }
+  
+  fp=vfopen (name, "w");
+  fprintf ( fp, "#ALN nseq: %d len: %d score: %d\n", A->nseq, A->len_aln, (B)?B->score:0);
+  for (b=0; b<A->len_aln; b++)
+    fprintf (fp, "#COLUMN pos: %d ngap: %d score: %d\n", b+1,ngap[b],(B)?B->seq_al[B->nseq][b]-'0':0);
+  for (a=0; a<A->nseq; a++)
+    fprintf ( fp, "#SEQUENCE name: %s len: %d score: %d\n", A->name[a], len[a], (B)?B->score_seq[a]:0);
+  for (a=0; a<A->nseq; a++)
+    for (pos=0,b=0; b<A->len_aln; b++)
+      {
+	int r=A->seq_al[a][b];
+	int s=(B)?B->seq_al[a][b]:0;
+	int g=is_gap(r);
+	pos+=1-g;
+	if (!g && s!=NO_COLOR_RESIDUE)
+	  {
+	    int s=B->seq_al[a][b];
+	    if (s>='0')s-='0';
+	    fprintf (fp, "#RESIDUE seq: %s pos: %d res: %c score: %d\n", A->name[a],pos, r,s);
+	  }
+	  }
+  vfclose (fp);
+  vfree (ngap);
+  vfree(len);
+  return 1;
+}
+
+
 
 int output_reliability_format ( Alignment *B,Alignment *S,char *name, \
 FILE_format *(*vfopen_format)          ( char *),\
@@ -1543,6 +1602,37 @@ FILE_format * print_ps_char ( int c, Color *box, Color *ink, FILE_format *f)
 	  }
        return f;
        }
+FILE_format* print_ps_line (int len, Color *c, FILE_format *f)
+{
+  static int x=0;
+  static int y=0;
+  int pix=1;
+  int xs=0;
+  static int width;
+
+  if (!width)
+    {
+      width=1;
+      fprintf (f->fp, "%d setlinewidth\n", pix);
+    }
+  
+  if (len==-1)
+    {
+      y-=pix;
+      x=xs;
+    }
+  else
+    {
+      fprintf (f->fp, "newpath\n");
+      fprintf (f->fp, "%d %d moveto\n",x, y);
+      fprintf(f->fp,"%3.1f %3.1f %3.1f setrgbcolor\n", c->r,c->g,c->b);
+      x+=len*pix;
+      fprintf (f->fp, "%d %d lineto\n", x, y);
+      fprintf (f->fp, "stroke\n");
+    }
+  return f;
+}
+
 void get_rgb_values_ps ( int val, Color *C)
      {
      get_rgb_values ( val, C);
@@ -1927,3 +2017,53 @@ int       output_seq_reliability_ascii     ( Alignment *B,Alignment *S, char *na
   return 1;
 }
   
+int aln2compressed_ps (Alignment *A,char *file)
+{
+  FILE_format *fps;
+  int a, b, cs, cl, ns;
+  
+  static Color *C=(Color*)vcalloc ( 1, sizeof (Color));
+  fps=vfopen_ps(file);
+  for (a=0; a<A->nseq; a++)
+    {
+      for (cs=-1,cl=0,b=0; b<A->len_aln; b++)
+	{
+	  ns=A->seq_al[a][b]-'0';
+	  if (cs==-1){cs=ns;cl=1;}
+	  else if (ns==cs){cl++;}
+	  else 
+	    {
+	      
+	      get_rgb_values_ps(cs,C);
+	      fps=print_ps_line (cl,C, fps);
+	      cl=1;
+	      cs=ns;
+	    }
+	}
+      get_rgb_values_ps(cs,C);
+      fps=print_ps_line (cl, C, fps);
+      fps=print_ps_line (-1, NULL, fps);
+    }
+  vfclose_ps (fps);
+}
+int aln2compressed_pdf    ( Alignment *A,char *name)
+      {
+      char *tmp_name;
+      char command[LONG_STRING];
+
+      
+#ifndef PS2PDF 
+      fprintf (stderr, "\nPDF FORMAT IS NOT SUPPORTED: INSTALL THE PROGRAM PS2PDF\n");
+      myexit (EXIT_FAILURE);
+#else
+      tmp_name=vtmpnam(NULL);
+      
+      aln2compressed_ps (A, tmp_name);
+      sprintf ( command, "%s %s %s", PS2PDF, tmp_name, name);
+      my_system  ( command); 
+      vremove  ( tmp_name); 
+#endif      
+      
+      
+      return 1;
+      }

@@ -1775,14 +1775,21 @@ char* getenv4debug (const char * val)
   else
     return NULL;
 }
-
+float   atofgetenv (const char*var)
+{
+  char *v;
+  if (!var) return 0;
+  else if (!(v=getenv(var)))return 0;
+  else if ( is_number(v))return atof(v);
+  else return 1;
+}
 int   atoigetenv (const char*var)
 {
   char *v;
   if (!var) return 0;
   else if (!(v=getenv(var)))return 0;
   else if ( is_number(v))return atoi(v);
-  else return 1;
+  else return 0;
 }
 char* get_env_variable ( const char *var, int mode)
         {
@@ -2472,11 +2479,18 @@ char* substitute_char_set (char *s, char *set, char r)
 char* substitute_char ( char *string_in, char t, char r)
 {
   int n=0;
+  int c=0;
   while ( string_in && string_in[n]!='\0')
     {
-      if ( string_in[n] == t)string_in[n]=r;
+      if ( string_in[n] == t)
+	{
+	  if (r)string_in[c++]=r;
+	}
+      else
+	string_in[c++]=string_in[n];
       n++;
     }
+  string_in[c]='\0';
   return string_in;
 }
 char* substitute ( char *string_in, char *t, char *r)
@@ -3195,7 +3209,7 @@ int is_number  ( char *num)
 	l=strlen (num);
 
 	for (a=0;a<l; a++)
-		if ( !strchr ("0123456789.-+", num[a]))return 0;
+		if ( !strchr ("0123456789.-+E", num[a]))return 0;
 		return 1;
 }
 
@@ -7886,10 +7900,10 @@ FILE * output_completion ( FILE *fp,int n, int tot, int n_reports, char *string)
 	  
 	  if ( !ref_val && !flag)
 	    {
-	      fprintf (fp, "\n\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]",(string)?string:"",tot,(tot==1)?100:0, elapsed);
+	      fprintf (fp, "\n!\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]",(string)?string:"",tot,(tot==1)?100:0, elapsed);
 	      flag=1;
 	    }
-	  else if ( n>=tot)fprintf (fp, "\r\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]",(string)?string:"", tot,100, elapsed);
+	  else if ( n>=tot)fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]\n",(string)?string:"", tot,100, elapsed);
 	  else if ( ((n*100)/tot)>ref_val)
 	    {
 	      
@@ -7899,7 +7913,7 @@ FILE * output_completion ( FILE *fp,int n, int tot, int n_reports, char *string)
 	      t=0;
 
 	      elapsed=((float)100-(float)ref_val)*((float)elapsed/(float)ref_val);
-	      fprintf (fp, "\r\t\t[%s][TOT=%5d][%3d %%][REMAINING TIME: %4d sec.]", (string)?string:"",tot,ref_val, elapsed);
+	      fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%][REMAINING TIME: %4d sec.]", (string)?string:"",tot,ref_val, elapsed);
 	      flag=0;
 	    }
 	  return fp;

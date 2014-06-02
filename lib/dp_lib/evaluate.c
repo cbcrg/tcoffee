@@ -240,7 +240,7 @@ Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, co
        Alignment *OUT;
        int a, b,res;
 
-       OUT=struc_evaluate4tcoffee (IN, CL, "strike",0,3,NULL,0);
+       OUT=struc_evaluate4tcoffee (IN, CL, "strike",0,3,NULL);
        for (a=0; a<OUT->nseq; a++)
 	 for (b=0; b<OUT->len_aln; b++)
 	   {
@@ -930,7 +930,8 @@ int  sp_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL, char
       fp=vfopen (fname, "w");
       pos=aln2pos_simple(IN, IN->nseq);
       
-
+      fprintf ( fp, "! SP_ASCII_FORMAT_O1\n");
+      fprintf ( fp, "! <column> <seq1> <seq2> <tcs score>\n");
       for (a=0; a<IN->len_aln; a++)
 	{
 	  output_completion (stderr,a,IN->len_aln,1, "Final SP Evaluation");
@@ -1089,7 +1090,7 @@ int  sp_triplet_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, cha
       return 1;
     }  
 
-Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode, float maxD, int enb,char *in_matrix_name, int replicate)
+Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode, float imaxD, int enb,char *in_matrix_name)
 {
   double **max_pw_sc;
   double **tot_pw_sc;
@@ -1097,27 +1098,57 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   double **tot_res_sc;
   double *max_seq_sc;
   double *tot_seq_sc;
-  
+  double *gscore;
  
   double *max_col_sc;
   double *tot_col_sc;
   
   double tot_sc=0;
   double max_sc=0;
-  Alignment *OUT;
-  Sequence *S;
-  int **dm1,**dm2,**pos,i,s, **lu,*rseq, a, b, c,d,s1,s2,c1,ic1,c2,r1,r2,p1,p2,we, rep, nM;
+  Alignment *OUT, *T;
+  Sequence *S=NULL;
+  int replicates;
+  
+  int **dm1,**dm2,**pos,i,s, **lu,*rseq, a, b, c,d,s1,s2,c1,ic1,c2,r1,r2,p1,p2,we, rep, nM, it;
   int **matrix;
   int *max;
   char *matrix_name;
-  int *RepColList;
   int strikeM, contactsM,distancesM, modeM;
   int tree;
+  float gap, max_gap;
+  int nlen_aln, nlen_aln1;
+  int *used_col, *col_lu;
+  char *tree_mode=NULL;
+  int scan_maxD=0;
+  float highD, lowD, maxD;
+  int nd, ntrees;
+  long tot_inf=0;
+  int use_columns=0;
   
+  if (!A) return A;
+  
+  //Get arguments passed via environement
+  if (getenv ("TREE_GAP_4_TCOFFEE")) max_gap  =atofgetenv("TREE_GAP_4_TCOFFEE");
+  else max_gap=0.5;
+  
+  if (getenv ("TREE_MODE_4_TCOFFEE"))tree_mode=getenv("TREE_MODE_4_TCOFFEE");
+  else tree_mode="nj";
+    
+  if (getenv ("REPLICATES_4_TCOFFEE"))
+    {
+      if ( strm (getenv ("REPLICATES_4_TCOFFEE"), "columns"))
+	{
+	  use_columns=1;
+	  replicates=A->len_aln;
+	}
+      else 
+	replicates=atoigetenv ("REPLICATES_4_TCOFFEE");
+    }
+  else replicates=0;
   
   S=CL->S;
   OUT=copy_aln (A, NULL);
-  maxD*=100; //set in picometers
+  
   
   nM=0;strikeM=++nM;contactsM=++nM;distancesM=++nM;
   if (!mode || strm (mode, "strike"))modeM=strikeM;
@@ -1128,27 +1159,49 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: struc_evaluate4tcoffe::mode %s is unknown", (mode)?mode:"unset");
     }
   
+
+
+  //identify sequences with contact information
   rseq=(int*)vcalloc (A->nseq, sizeof (int));
   for (a=0,s1=0; s1<A->nseq; s1++)
     {
       rseq[s1]=name_is_in_list (A->name[s1], S->name, S->nseq, 100);
-      if (rseq[s1]!=-1)a++;
+      if (rseq[s1]==-1);
+      else
+	{
+	  int ls1=rseq[s1];
+	  rseq[s1]=-1;
+	  for (r1=1;r1<=S->len[ls1]; r1++)
+	    {
+	      if (CL->residue_index[ls1][r1][0]>1){rseq[s1]=ls1;r1=S->len[ls1]+1;}
+	    }
+	  if (rseq[s1]!=-1)a++;
+	}      
     }
+  
+  //Trim out sequences without contact information or exit if no a single contact information
   if (!a)
     printf_exit ( EXIT_FAILURE,stderr, "\nERROR: No contact information could be gathered for any sequence  [FATAL]");
+  else if (a!=A->nseq && modeM!=strikeM)
+    {
+      int ns=0;
+      for (s1=0; s1<A->nseq; s1++)
+	{
+	  if (rseq[s1]==-1);
+	  else
+	    {
+	      sprintf (A->name[ns], "%s", A->name[s1]);
+	      sprintf (A->seq_al[ns], "%s", A->seq_al[s1]);
+	      rseq[ns]=rseq[s1];
+	      ns++;
+	    }
+	}
+      A->nseq=ns;
+    }
   
-  if (replicate>=1)
-    {
-      max_pw_sc=declare_double (A->nseq, A->nseq);
-      tot_pw_sc=declare_double (A->nseq, A->nseq);
-      tree=1;
-    }
-  else 
-    {
-      tree=0;
-      replicate=1;
-      max_pw_sc=tot_pw_sc=NULL;
-    }
+
+  //Prepare the evlauation information
+  
   
   max_res_sc=declare_double (A->nseq, A->len_aln);
   tot_res_sc=declare_double (A->nseq, A->len_aln);
@@ -1191,7 +1244,6 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
       matrix=NULL;
     }
  
-  RepColList=(int*)vcalloc (A->len_aln, sizeof (int));
   dm1=declare_int (A->len_aln, A->len_aln);
   dm2=declare_int (A->len_aln, A->len_aln);
   
@@ -1209,179 +1261,267 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
  
   vsrand (0);
   
-  for (rep=0; rep<replicate; rep++)
-    {
-      
-      for (c1=0; c1<A->len_aln; c1++)
-	{
-	  if (rep>0)RepColList[c1]=rand()%A->len_aln;
-	  else RepColList[c1]=c1;
-	}
-      for (s1=0; s1<A->nseq; s1++)
-	{
-	  int ls1=rseq[s1];
-	  int s2_has_contacts=0;
-	  
-	  if (ls1==-1)continue;
-	  
-	  for (r1=1;r1<=S->len[ls1]; r1++)
-	    {
-	       for (b=1; b<CL->residue_index[ls1][r1][0]; b+=ICHUNK)
-		 {
-		   int ss2;
-		   r2 =CL->residue_index[ls1][r1][b+R2];
-		   we =CL->residue_index[ls1][r1][b+WE];
-		   ss2=CL->residue_index[ls1][r1][b+SEQ2];
-		   
-		   if (ss2!=ls1){HERE ("Warning: Contact library contains inter-sequence data contacts: %d %d", a, ss2);}
-		   p1=lu[s1][r1-1];
-		   p2=lu[s1][r2-1];
-		   dm1[p1][p2]=dm1[p2][p1]=we;
-		 }
-	     }
-	   
-	   for (s2=0; s2<A->nseq; s2++)
-	     {
-	       int ls2=rseq[s2];
-	       if (s1==s2) continue;
-	       else if (ls2!=-1)
-		 {
-		   s2_has_contacts=1;
-		   
-		   for (r1=1;r1<=S->len[ls2]; r1++)
-		     {
-		       for (b=1; b<CL->residue_index[ls2][r1][0]; b+=ICHUNK)
-			 {
-			   int ss2;
-			   r2 =CL->residue_index[ls2][r1][b+R2];
-			   we =CL->residue_index[ls2][r1][b+WE];
-			   ss2=CL->residue_index[ls2][r1][b+SEQ2];
-			   
-			   if (ss2!=ls2){HERE ("Warning: Contact library contains inter-sequence data contacts: %d %d", a,ss2);}
-			   p1=lu[s2][r1-1];
-			   p2=lu[s2][r2-1];
-			   dm2[p1][p2]=dm2[p2][p1]=we;
-			 }
-		     }
-		 }
-	       else
-		 {
-		   s2_has_contacts=0;
-		 }
-	       //Scan the pairs of contact for S1 vs S2
-	       
-	       if (modeM!=strikeM && !s2_has_contacts)continue;//ignore sequences w/o contacts 
-	       
-	       for (ic1=0; ic1<A->len_aln; ic1++)
-		 {
-		   c1=RepColList[ic1];
-		   
-		   if (A->seq_al[s1][c1]=='-')continue;
-		   for (c2=0; c2<A->len_aln; c2++)
-		     {
-		       double sc=0;
-		       double w1=(double)dm1[c1][c2];
-		       
-		       
-		       if (A->seq_al[s1][c2]=='-')continue;
-		       else if (FABS((pos[s1][c1]-pos[s1][c2]))<enb)continue;
-		       else if (!dm1[c1][c2])continue;
-		       else if (modeM==distancesM && w1>maxD)continue;
-		       		       
-		       if (modeM==strikeM && !s2_has_contacts)
-			 {
-			   if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'){sc=0;}
-			   else 
-			     {
-			       
-			       sc=matrix[tolower(A->seq_al[s2][c1])][tolower(A->seq_al [s2][c2])]*2;
-			       sc/=max[tolower(A->seq_al[s2][c1])]+max[tolower(A->seq_al[s2][c1])];
-			     }
-			 }
-		       else
-			 {
-			   if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'){sc=0;}
-			   else
-			     {
-			       double w2=(double)dm2[c1][c2];
-			       if (modeM==distancesM)
-				 {
-				   sc=MIN((w1/w2),(w2/w1));
-				   sc=sc*sc*sc;
-				 }
-			       else if (modeM==contactsM && w2>0)sc=1;
-			       else if (modeM==strikeM   && w2>0)sc=1; 
-			       else sc=0;
-			     }
-			 }
-		       if (tree)
-			 {
-			   max_pw_sc[s1][s2]++;
-			   tot_pw_sc[s2][s1]+=(double)sc;
-			 }
-		       
-		       max_res_sc[s1][c1]++;
-		       max_col_sc[c1]++;
-		       max_seq_sc[s1]++;
-		       max_sc++;
-		       		       
-		       tot_res_sc[s1][c1]+=sc;
-		       tot_col_sc[c1]+=sc;
-		       tot_seq_sc[s1]+=sc;
-		       tot_sc+=sc;
-		     }
-		 }
-	       for (c1=0; c1<A->len_aln; c1++)for (c2=0; c2<A->len_aln; c2++)dm2[c1][c2]=0;
-	     }
-	   for (c1=0; c1<A->len_aln; c1++)for (c2=0; c2<A->len_aln; c2++)dm1[c1][c2]=0;
-	 }
-      
-      //Estimate Phylogenetic Tree Replicates
-      if (tree)
-	 {
-	   static Alignment *T;
-	   static char *treeF;
-	   
-	   if (!A->Tree)T=A->Tree=declare_aln2(replicate,0);
-	   if (!treeF)treeF=vtmpnam (NULL);
-	   output_completion (stderr,T->nseq,replicate,1, "Distance Tree Replicates");
+  highD=imaxD*100; //set in picometers
+  lowD=1500;
+  if (modeM==distancesM && replicates>0 && scan_maxD)lowD=500;
+  else lowD=highD;
+  for (nd=0,maxD=lowD;maxD<=highD; maxD+=100, nd++);
+  
+  
 
-	   
-	   for (s1=0; s1<A->nseq; s1++)
-	     for (s2=0; s2<A->nseq; s2++)
-	       if (max_pw_sc[s1][s2])
-		 {tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];tot_pw_sc[s1][s2]=(double)100*(1-tot_pw_sc[s1][s2]);}
-	   
-	   dist2nj_tree (tot_pw_sc, A->name, A->nseq, treeF);
-	   
-	   if (T->nseq==0)sprintf (T->name[T->nseq], "OriginalTree",T->nseq); 
-	   else sprintf (T->name[T->nseq], "Tree_replicate_%d",T->nseq); 
-	   
-	   T->seq_al[T->nseq]=file2string(treeF);
-	   T->nseq++;
-	   
-	   if (T->nseq<replicate)
-	     {
-	       for (s1=0; s1<A->nseq; s1++)
-		 {
-		   max_seq_sc[s1]=tot_seq_sc[s1]=0;
-		   for (c1=0; c1<A->len_aln; c1++)
-		     max_res_sc[s1][c1]=tot_res_sc[s1][c1]=0;
-		   
-		   for (s2=0; s2<A->nseq; s2++)
-		     max_pw_sc[s1][s2]=tot_pw_sc[s1][s2]=0;
-		 }
-	       for (c1=0; c1<A->len_aln; c1++)max_col_sc[c1]=tot_col_sc[c1]=0;
-	     }
-	 }
+  //Prepare the gap cache
+  nlen_aln=0;
+  used_col=(int*)vcalloc (A->len_aln, sizeof (int));
+  col_lu=(int*)vcalloc (A->len_aln, sizeof (int));
+  
+  for (c1=0; c1<A->len_aln; c1++)
+    {
+      for (gap=0,r1=0; r1<A->nseq; r1++)
+	if (is_gap(A->seq_al[r1][c1]))gap++;
+      gap/=(float)A->nseq;
+      if (gap<=max_gap){used_col[nlen_aln++]=c1;col_lu[c1]=1;}
     }
+  if (nlen_aln==0)
+    {printf_exit ( EXIT_FAILURE,stderr, "\nERROR: No column with less than %.2f %% gaps[FATAL]", max_gap*100);}
+  
+
+  if (replicates>=1)
+    {
+      tree=1;
+      max_pw_sc=declare_double (A->nseq, A->nseq);
+      tot_pw_sc=declare_double (A->nseq, A->nseq);
+      if (use_columns)replicates=nlen_aln;
+      
+    }
+  else 
+    {
+      tree=0;
+      replicates=1;
+      max_pw_sc=tot_pw_sc=NULL;
+    }
+  ntrees=nd*replicates;
+  if (!A->Tree)T=A->Tree=declare_aln2(ntrees,0);
+  T->RepColList=declare_int  (ntrees, ((use_columns)?1:nlen_aln)+1);
+  
+
+  
+  
+  for (maxD=lowD; maxD<=highD;maxD+=100) 
+    {
+      for (rep=0; rep<replicates; rep++)
+	{
+	  //prepare the replicates drawing from the proper positions
+	  if (use_columns)
+	    {
+	      nlen_aln1=1;
+	      T->RepColList[rep][0]=used_col[rep];
+	      T->RepColList[rep][1]=-1;
+	    }
+	  else
+	    {
+	      nlen_aln1=nlen_aln;
+	      for (c1=0; c1<nlen_aln; c1++)
+		{
+		  if (rep>0)T->RepColList[rep][c1]=used_col[(int)rand()%nlen_aln];
+		  else T->RepColList[rep][c1]=used_col[c1];
+		}
+	      T->RepColList[rep][c1]=-1;
+	    }
+	  for (s1=0; s1<A->nseq; s1++)
+	    {
+	    int ls1=rseq[s1];
+	    int s2_has_contacts=0;
+	    
+	    if (ls1==-1)continue;
+	    
+	    //Get contacts from top sequence
+	    for (r1=1;r1<=S->len[ls1]; r1++)
+	      {
+		for (b=1; b<CL->residue_index[ls1][r1][0]; b+=ICHUNK)
+		  {
+		    int ss2;
+		    r2 =CL->residue_index[ls1][r1][b+R2];
+		    we =CL->residue_index[ls1][r1][b+WE];
+		    ss2=CL->residue_index[ls1][r1][b+SEQ2];
+		    
+		    if (ss2!=ls1){HERE ("Warning: Contact library contains inter-sequence data contacts: %d %d", a, ss2);}
+		    p1=lu[s1][r1-1];
+		    p2=lu[s1][r2-1];
+		    dm1[p1][p2]=dm1[p2][p1]=we;
+		  }
+	      }
+	    //Scan bottom sequences
+	    for (s2=0; s2<A->nseq; s2++)
+	      {
+		int ls2=rseq[s2];
+		if (s1==s2) continue;
+		else if (ls2!=-1)
+		  {
+		    s2_has_contacts=1;
+		    
+		    for (r1=1;r1<=S->len[ls2]; r1++)
+		      {
+			for (b=1; b<CL->residue_index[ls2][r1][0]; b+=ICHUNK)
+			  {
+			    int ss2;
+			    r2 =CL->residue_index[ls2][r1][b+R2];
+			    we =CL->residue_index[ls2][r1][b+WE];
+			    ss2=CL->residue_index[ls2][r1][b+SEQ2];
+			    
+			    if (ss2!=ls2){HERE ("Warning: Contact library contains inter-sequence data contacts: %d %d", a,ss2);}
+			    p1=lu[s2][r1-1];
+			    p2=lu[s2][r2-1];
+			    dm2[p1][p2]=dm2[p2][p1]=we;
+			  }
+		      }
+		  }
+		else
+		  {
+		    s2_has_contacts=0;
+		  }
+		//Scan the pairs of contact for S1 vs S2
+		
+		if (modeM!=strikeM && !s2_has_contacts)continue;//ignore sequences w/o contacts 
+		
+		for (ic1=0; ic1<nlen_aln1; ic1++)
+		  {
+		    c1=T->RepColList[rep][ic1];
+		    
+		    if (A->seq_al[s1][c1]=='-')continue;
+		    for (c2=0; c2<A->len_aln; c2++)
+		      {
+			double sc=0;
+			double in=0;
+			double w1=(double)dm1[c1][c2];
+			
+			
+			if (A->seq_al[s1][c2]=='-')continue;
+			else if (!col_lu[c2])continue; 
+			else if (FABS((pos[s1][c1]-pos[s1][c2]))<enb)continue;
+			else if (!dm1[c1][c2])continue;
+			else if (modeM==distancesM && w1>maxD)continue;
+			
+			if (modeM==strikeM && !s2_has_contacts)
+			  {
+			    if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'){sc=0;}
+			    else 
+			      {
+				
+				sc=matrix[tolower(A->seq_al[s2][c1])][tolower(A->seq_al [s2][c2])]*2;
+				sc/=max[tolower(A->seq_al[s2][c1])]+max[tolower(A->seq_al[s2][c1])];
+			      }
+			    in=1;
+			  }
+			else
+			  {
+			    if (A->seq_al[s2][c1]=='-' || A->seq_al[s2][c2]=='-'){sc=0;in=1;}
+			    else
+			      {
+				double w2=(double)dm2[c1][c2];
+				if (modeM==distancesM && dm2[c1][c2])
+				  {
+				    double we=w1;
+				    sc=((MIN((w1/w2),(w2/w1))));
+				    sc=sc*sc*sc*we;
+				    in=we;
+				  }
+				else if (modeM==contactsM && w2>0){sc=1;in=1;}
+				else if (modeM==strikeM   && w2>0){sc=1;in=1;}
+				else {sc=0;in=1;}
+			      }
+			  }
+
+			if (tree)
+			  {
+			    tot_pw_sc[s2][s1]+=sc;
+			    max_pw_sc[s1][s2]+=in;;
+			  }
+			
+			
+			//residues
+			max_res_sc[s1][c1]+=in;
+			tot_res_sc[s1][c1]+=sc;
+			
+			max_res_sc[s2][c1]+=in;
+			tot_res_sc[s2][c1]+=sc;
+			
+			//seq
+			tot_seq_sc[s1]+=sc;
+			max_seq_sc[s1]+=in;
+			
+			tot_seq_sc[s2]+=sc;
+			max_seq_sc[s2]+=in;
+			
+			//column
+			max_col_sc[c1]+=in;;
+			tot_col_sc[c1]+=sc;
+			
+			//aln
+			max_sc+=in;
+			tot_sc+=sc;
+			
+		      }
+		  }
+		for (c1=0; c1<A->len_aln; c1++)for (c2=0; c2<A->len_aln; c2++)dm2[c1][c2]=0;
+	      }
+	    for (c1=0; c1<A->len_aln; c1++)for (c2=0; c2<A->len_aln; c2++)dm1[c1][c2]=0;
+	    }
+	  
+	 
+	  //Estimate Phylogenetic Tree Replicates
+	  if (tree)
+	    {
+	    static char *treeF=vtmpnam (NULL);
+	    
+	    output_completion (stderr,T->nseq,ntrees,1, "Distance Tree Replicates");
+	    	    
+	    for (s1=0; s1<A->nseq; s1++)
+	      for (s2=0; s2<A->nseq; s2++)
+		if (max_pw_sc[s1][s2])
+		  {tot_pw_sc[s1][s2]/=max_pw_sc[s1][s2];tot_pw_sc[s1][s2]=(double)100*(1-tot_pw_sc[s1][s2]);}
+	    
+	    
+	    if (strm (tree_mode, "nj"))
+	      dist2nj_tree (tot_pw_sc, A->name, A->nseq, treeF);
+	    else if ( strm (tree_mode, "upgma"))
+	      dist2upgma_tree (tot_pw_sc, A->name, A->nseq, treeF);
+	    else
+	      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known tree_mode[FATAL]",tree_mode);
+	    
+	    T->seq_al[T->nseq]=file2string(treeF);
+	    sprintf (T->name[T->nseq], "%d",T->nseq+1); 
+	    T->nseq++;
+	    
+	    if (T->nseq<ntrees)
+	      {
+		for (s1=0; s1<A->nseq; s1++)
+		  {
+		    max_seq_sc[s1]=tot_seq_sc[s1]=0;
+		    for (c1=0; c1<A->len_aln; c1++)
+		      max_res_sc[s1][c1]=tot_res_sc[s1][c1]=0;
+		    
+		    for (s2=0; s2<A->nseq; s2++)
+		      max_pw_sc[s1][s2]=tot_pw_sc[s1][s2]=0;
+		  }
+		for (c1=0; c1<A->len_aln; c1++)max_col_sc[c1]=tot_col_sc[c1]=0;
+	      }
+	    else 
+	      {
+		OUT->dm=tot_pw_sc;
+	      }
+	    }
+	}
+    }
+
+  //compute bs_score
+  
   if (tree)fprintf (stderr, "\n");
   
   for (a=0; a<A->nseq; a++)
     {
       for (c=0; c<A->len_aln; c++)
 	{
-	  if (pos[a][c]>0 && max_res_sc[a][c]>0 )
+	 if (pos[a][c]>0 && max_res_sc[a][c]>0 )
 	    {
 	      int r1=(max_res_sc[a][c]==0)?0:(tot_res_sc[a][c]*(double)10/max_res_sc[a][c]);
 	      r1=(r1>=10)?9:r1;
@@ -1392,9 +1532,10 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	      OUT->seq_al[a][c]=NO_COLOR_RESIDUE;
 	    }
 	}
-      OUT->score_seq[a]=(max_seq_sc[a]==0)?0:(tot_seq_sc[a]*(double)100)/max_seq_sc[a];
+
+      A->score_seq[a]=OUT->score_seq[a]=(max_seq_sc[a]==0)?0:(tot_seq_sc[a]*(double)100)/max_seq_sc[a];
+      
     }
-  
   sprintf (OUT->name[OUT->nseq], "cons");
   
   for (c=0; c<A->len_aln; c++)
@@ -1406,17 +1547,128 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   A->score=A->score_aln=OUT->score=OUT->score_aln=(int)(max_sc==0)?0:(tot_sc*1000)/max_sc;
   
   
-  
   free_int (lu,  -1);
   free_int (dm1, -1);
   free_int (dm2, -1);
   free_double (tot_res_sc, -1);
   free_double (max_res_sc, -1);
+  if (max_pw_sc)free_double(max_pw_sc, -1);
   vfree (tot_seq_sc);vfree (max_seq_sc);
   vfree (tot_col_sc);vfree (max_col_sc);
   
   return OUT;
-}   		
+}   	
+Alignment *treealn_evaluate4tcoffee (Alignment *A, Sequence *G)
+{
+  int a,b,c;
+  int *count;
+  double  max, min;
+  double *tot_seq_sc, *gscore;
+  
+  Alignment *OUT;
+  Alignment *T;
+
+  
+  
+  if (!A) return A;
+  else if (!G)printf_exit (EXIT_FAILURE,stderr, "ERROR: treealn_evaluate requires a group");
+  else if (!A->Tree)printf_exit (EXIT_FAILURE,stderr, "ERROR: treealn_evaluate requires pre-computed trees");
+
+  T=A->Tree;
+  
+  OUT=copy_aln (A, NULL);
+  gscore =(double*)vcalloc (A->len_aln, sizeof (double));
+  tot_seq_sc=(double*)vcalloc (A->nseq, sizeof (double));
+  count  =(int*)   vcalloc (A->len_aln, sizeof (int)); 
+  
+  for (a=0; a<T->nseq; a++)
+    {
+      double sc=(double)group2tree_score (G, T->seq_al[a]);
+      sprintf (T->seq_comment[a], "GSCORE: %.2f",sc);
+      if (sc>=0)
+	{
+	  T->score_seq[a]=(int)((double)100*sc);
+	  
+	  b=0;
+	  while((c=T->RepColList[a][b++])!=-1)
+	    {
+	      
+	      gscore[c]+=sc;
+	      count[c]++;
+	    }
+	}
+    }
+  
+  for (a=0; a<A->len_aln; a++)
+    {
+      gscore[a]=(count[a])?(gscore[a]/(double)count[a]):-1;
+      if (gscore[a]<0);
+      else 
+	{
+	  if (a==0)min=max=gscore[a];
+	  else
+	    {
+	      if (gscore[a]>max)max=gscore[a];
+	      if (gscore[a]<min)min=gscore[a];
+	    }
+	}
+    }
+  
+  for (a=0; a<A->len_aln; a++)
+    {
+      gscore[a]=((max-min)==0)?max:(gscore[a]-min)/(max-min);
+    }
+  
+  for (a=0; a<A->nseq; a++)
+    {
+      for (c=0; c<A->len_aln; c++)
+	{
+	  if (gscore[c]<0)OUT->seq_al[a][c]=NO_COLOR_RESIDUE;
+	  else 
+	    {
+	      int r1=(float)(gscore[c]*10);
+	      r1=(r1>=10)?9:r1;
+	      OUT->seq_al[a][c]=r1+'0';
+	      tot_seq_sc[a]=(gscore[c]>tot_seq_sc[a])?gscore[c]:tot_seq_sc[a];
+	    }
+	}
+      A->score_seq[a]=OUT->score_seq[a]=tot_seq_sc[a]*100;
+    }
+  sprintf (OUT->name[OUT->nseq], "cons");
+  
+  for (c=0; c<A->len_aln; c++)
+    {
+      if (gscore[c]<0)OUT->seq_al[a][c]='0';
+      else 
+	{
+	  int r1=(int)(gscore[c]*(float)10);
+	  r1=(r1>=10)?9:r1;
+	  OUT->seq_al[A->nseq][c]=r1+'0';
+	}
+    }
+  max*=1000;
+ 
+  A->score=A->score_aln=OUT->score=OUT->score_aln=(int)max;
+  vfree (count);
+  vfree (gscore);
+  vfree (tot_seq_sc);
+  return OUT;
+}
+  
+Alignment *evaluate_tree_group (Alignment *T, Sequence *G)
+{
+  int a;
+  double s;
+  if (T->Tree)return evaluate_tree_group (T->Tree, G);
+  
+  for (a=0; a<T->nseq; a++)
+    {
+      s=group2tree_score (G, T->seq_al[a]);
+      sprintf (T->seq_comment[a], "GSCORE: %.2f", (float)s);
+      T->score_seq[a]=(int)((double)100*s);
+    }
+  return T;
+}
 Alignment * fast_coffee_evaluate_output ( Alignment *IN,Constraint_list *CL)
     {
     int a,b, c, m,res, s, s1, s2, r1, r2;	
@@ -2505,8 +2757,6 @@ int evaluate_curvature_score( Constraint_list *CL, int s1, int r1, int s2, int r
       score=p1-p2;
       score=FABS(score);
       score=20-score;
-      //HERE ("%d", score);
-      //if (score<0)HERE ("%d", score);
       return score;
     }
   else

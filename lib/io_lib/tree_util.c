@@ -212,11 +212,15 @@ NT_node  tree2collapsed_tree (NT_node T, int n, char **string)
   Sequence *A;
   int a, *nlist;
 
-
+  
   A=tree2seq(T, NULL);
+  
   T=recode_tree(T, A);
+  
+  
   list=(char***)vcalloc (A->nseq, sizeof (char***));
   nlist=(int*)vcalloc (A->nseq, sizeof (int));
+  
   if ( n==0)return T;
   else if (n>1)
     {
@@ -238,7 +242,6 @@ NT_node  tree2collapsed_tree (NT_node T, int n, char **string)
       fprintf (stderr, "\nERROR: file <%s> does not exist [FATAL:%s]\n",string[0], PROGRAM);
       myexit (EXIT_FAILURE);
     }
-
 
   a=0;
   while (list[a])
@@ -298,31 +301,24 @@ NT_node collapse_tree (NT_node T, Sequence *S, char *string)
     }
 
 
-
-  r=strstr(S->name[T->lseq[0]], string);
-
-  if (!r)collapse=0;
-  else
+  for (a=0; a<T->nseq; a++)
     {
-      for (collapse=1,a=1; a<T->nseq && collapse; a++)
+      
+      p=strstr((S->name[T->lseq[a]]),string);
+	
+      if (p && strm (p, string));
+      else 
 	{
-	  p=strstr((S->name[T->lseq[a]]),string);
-	  if (p && strm (p, r));
-	  else collapse=0;
+	  collapse_tree (T->left, S, string);
+	  collapse_tree (T->right, S, string);
+	  return T;
 	}
     }
-  if (collapse)
-    {
-      T->isseq=1;
-      T->right=T->left=NULL;
-      T->nseq=1;
-      sprintf ( T->name, "%s", r);
-    }
-  else
-    {
-      collapse_tree (T->left, S, string);
-      collapse_tree (T->right, S, string);
-    }
+  
+  T->isseq=1;
+  T->right=T->left=NULL;
+  T->nseq=1;
+  sprintf ( T->name, "%s",string);
   return T;
 }
 
@@ -542,11 +538,10 @@ int main_compare_splits ( NT_node T1, NT_node T2, char *mode,FILE *fp)
 
   T2=prune_tree (T2, S);
   T2=recode_tree(T2, S);
-  HERE ("1");
+  
   sl1=declare_int (10*S->nseq, S->nseq);
   sl2=declare_int (10*S->nseq, S->nseq);
 
-  HERE ("2");
   n1=n2=0;
   tree2split_list (T1, S->nseq, sl1, &n1);
   tree2split_list (T2, S->nseq, sl2, &n2);
@@ -2366,6 +2361,7 @@ FILE * rec_print_tree ( NT_node T, FILE *fp)
 
   if ( T->isseq)
     {
+      
       fprintf ( fp, "%s:%.5f",T->name, T->dist);
     }
   else
@@ -3937,14 +3933,17 @@ int tree_contains_duplicates (NT_node T)
   return 0;
 }
 
-float display_avg_bootstrap ( NT_node T)
+float newick2avg_bs  (char *string)
+{
+  return tree2avg_bs (newick_string2tree(string));
+}
+float tree2avg_bs ( NT_node T)
 {
   float tot;
   int n;
-
+  if (!T) return 0;
   tot=tree2tot_dist (T, BOOTSTRAP);
   n=tree2n_branches (T, BOOTSTRAP);
-  fprintf ( stdout, "\nAVERAGE BOOTSRAP: %.3f on %d Branches\n", (n>0)?tot/n:0, n);
   return (n>0)?tot/n:0;
 }
 
@@ -5258,15 +5257,116 @@ Alignment *treelist2cons (Alignment *T)
   vfclose (fp);
     
   printf_system( "msa2bootstrap.pl -i %s -o %s -input tree >/dev/null 2>/dev/null", infile, outfile);
+  
   vfree (T->seq_al[0]);
   T->seq_al[0]=file2string(outfile);
-  HERE ("%s", T->seq_al[0]);
+  
   sprintf (T->name[0], "MajorityConsensusTree");
   sprintf (T->seq_comment[0], "Raplicates: %d Source: consense", T->nseq);
   
   T->nseq=1;
   return T;
 }
+
+float group2tree_score (Sequence *G, char *nwtree)
+{
+  //returns the fraction of G sequences in the node containing at least all the G sequences
+  float bs=0;
+  NT_node T, *L, *iL;
+  Sequence *S;
+  int a, b;
+  int *l1, *bl2;
+  
+  if (!nwtree || !nwtree[0]) return -1;
+  
+  bl2=NULL;
+  T=newick_string2tree(nwtree);
+  S=tree2seq(T, NULL);
+  l1=(int*)vcalloc (S->nseq, sizeof (int));
+  
+  for (a=0; a<G->nseq; a++)
+    {
+      if ((b=name_is_in_list (G->name[a], S->name, S->nseq, 100))!=-1)
+	l1[b]=1;
+    }
+  iL=L=tree2node_list (T, NULL);
+  
+  while (L && L[0])
+    {
+      float c, t,cs;
+      int *l2=(L[0])->lseq2;
+      c=t=0;
+      for (a=0; a<S->nseq; a++)
+	{
+	  if (l1[a]+l2[a]==2)c++;
+	  else if (l2[a])t++;
+	  else if (l1[a]){a=S->nseq; c=0;}
+	}
+      
+      cs=(c>0)?c/(c+t):0;
+      if (cs>bs){bs=cs;bl2=l2;}
+      
+      for (c=0,t=0,a=0; a<S->nseq; a++)l2[a]=1-l2[a];
+      for (c=0,t=0,a=0; a<S->nseq; a++)
+	{
+	  if (l1[a]+l2[a]==2)c++;
+	  else if (l2[a])t++;
+	  else if (l1[a]){a=S->nseq; c=0;}
+	}
+      cs=(c>0)?c/(c+t):0;
+      if (cs>bs){bs=cs;bl2=l2;}
+      L++;
+    }
+  
+  
+  free_tree (T);
+  free_sequence (S, S->nseq);
+  vfree (iL);
+  vfree (l1);
+  return bs;
+}
+
+  
+Alignment *treelist2node_support_best (Alignment *T)
+{
+  NT_node *RT, TT;
+  Sequence *S=NULL;
+  int a, b, best_tree;
+  float s=0, best_s=0;
+  if (T->Tree)return treelist2node_support_best (T->Tree);
+  
+  RT=(NT_node*)vcalloc (T->nseq, sizeof (NT_node));
+  for (a=0; a<T->nseq; a++)
+    {
+      output_completion (stderr,a,T->nseq,1, "Input Replicate Trees");
+      RT[a]=newick_string2tree(T->seq_al[a]);
+      if (!S)S=tree2seq(RT[a], NULL);
+      RT[a]=prune_tree  (RT[a],S);
+      RT[a]=recode_tree (RT[a],S);
+    }
+  
+  for (best_s=best_tree=0,a=0;a<T->nseq; a++)
+    {
+      output_completion (stderr,a,T->nseq,1, "Scan for the best Supported Tree");
+      for (s=0,b=0; b<T->nseq; b++)
+	{
+	  s+=update_node_support (RT[a],RT[b],S->nseq);
+	}
+      if (s>best_s){best_s=s; best_tree=a;}
+    }
+  
+  s=(best_s/(float)(T->nseq-1))*100;
+  sprintf (T->seq_al[0], "%s", tree2string (RT[best_tree]));
+  sprintf (T->name[0], "OriginalDistanceTree");
+  sprintf (T->seq_comment[0], "Replicates: %d AverageNodeSupport: %.2f %% Source: seq_reformat", T->nseq, s);
+  T->nseq=1;
+  T->score=T->score_aln=s*100;
+
+  for (a=0; a<T->nseq; a++)free_tree (RT[a]);
+  vfree (RT);
+  return T;
+}
+
 Alignment *treelist2node_support (Alignment *T)
 {
   if (!T) return T;
@@ -5274,18 +5374,17 @@ Alignment *treelist2node_support (Alignment *T)
   
   return tree2node_support (T->seq_al[0], T);
 }
+
 Alignment *tree2node_support (char *newick_tree, Alignment *T)
 {
   NT_node RT, TT;
   Sequence *S;
   int a;
   float s=0;
-  
   RT=newick_string2tree(newick_tree);
   
   S=tree2seq(RT, NULL);
   RT=recode_tree (RT,S);
-  
   for (a=0; a<T->nseq; a++)
     {
       TT=newick_string2tree(T->seq_al[a]);
@@ -5294,13 +5393,15 @@ Alignment *tree2node_support (char *newick_tree, Alignment *T)
       s+=update_node_support (RT, TT,S->nseq);
       free_tree (TT);
     }
+  
   s=(s/(float)(T->nseq-1))*100;
   sprintf (T->seq_al[0], "%s", tree2string (RT));
   sprintf (T->name[0], "OriginalDistanceTree");
   sprintf (T->seq_comment[0], "Replicates: %d AverageNodeSupport: %.2f %% Source: seq_reformat", T->nseq, s);
+  T->score=T->score_aln=(float)s*100;
   T->nseq=1;
   return T;
-}
+ }
 float update_node_support (NT_node T1, NT_node T2, int nseq)
 {
   //Trees must have been -prune_tree- and -recode_tree- with the same referecne sequence
@@ -5310,21 +5411,27 @@ float update_node_support (NT_node T1, NT_node T2, int nseq)
   float sc=0;
   float tot=0;
   NT_node *L1,*iL1,*L2,*iL2;
-  
+  int *l1seq, *l2seq, *rl1seq;
+  int a;
   if (!T1 || !T2 || !nseq) return 0;
   
 
-
+ 
   L1=iL1=tree2node_list (T1, NULL);
   L2=iL2=tree2node_list (T2, NULL);
-  
+  rl1seq=(int*)vcalloc (nseq, sizeof (int));
   
   while (L1 && L1[0])
     {
       NT_node*L2=iL2;
       while (L2 && L2[0])
 	{
-	  if (memcmp((L1[0])->lseq2, (L2[0])->lseq2,nseq * sizeof(int)))L2++;
+	  
+	  l1seq=(L1[0])->lseq2;
+	  l2seq=(L2[0])->lseq2;
+	  for (a=0; a<nseq; a++)rl1seq[a]=1-l1seq[a];
+	  
+	  if (memcmp (rl1seq, l2seq, nseq*sizeof(int)) && memcmp (l1seq, l2seq, sizeof (int)*nseq))L2++;
 	  else
 	    {
 	      sc++;
@@ -5338,6 +5445,7 @@ float update_node_support (NT_node T1, NT_node T2, int nseq)
   
   vfree (iL1);
   vfree (iL2);
+  vfree (rl1seq);
   return (tot==0)?0:(sc/tot);
 }
 

@@ -878,8 +878,13 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	      {
 		if (A->seq_al[a])
 		  {
-		    for ( b=0; b< A->len_aln; b++)
-		      B->seq_al[a][b]=A->seq_al[a][b];
+		    b=0;
+		    while ((A->seq_al[a][b]))
+		      {
+			B->seq_al[a][b]=A->seq_al[a][b];
+			b++;
+		      }
+		    B->seq_al[a][b]='\0';
 		  }
 	      }
 
@@ -915,7 +920,7 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	    if (A->dm)
 	      {
 		int i,j;
-		B->dm=declare_float (A->nseq, A->nseq);
+		B->dm=declare_double (A->nseq, A->nseq);
 		for (i=0; i<A->nseq; i++)
 		  for (j=0; j<A->nseq; j++)
 		    B->dm[i][j]=A->dm[i][j];
@@ -936,7 +941,10 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 		B->A=copy_aln (A->A, NULL);
 	      }
 	    else B->A=NULL;
-
+	    /*Deal with Trees*/
+	    //if (A->Tree)
+	    //B->Tree=copy_aln (A->Tree, NULL);
+	    
 	    return B;
 	}
 
@@ -1217,6 +1225,9 @@ Alignment *free_data_in_aln (Alignment *A)
   A->cdna_cache=free_int (A->cdna_cache, -1);
   A->score_res=free_int (A->score_res, -1);
   free_sequence (A->S, -1);
+  if (A->Tree)free_Alignment (A->Tree);
+  if (A->RepColList)free_int (A->RepColList, -1);
+  if (A->dm)free_double (A->dm,-1);
   A->S=NULL;
   return A;
 
@@ -1243,13 +1254,14 @@ Sequence* free_Alignment ( Alignment *LA)
 
 	  free_int  ( LA->order, -1);
 
-	  free_float (LA->dm, -1),
+	  free_double (LA->dm, -1),
 	  vfree ( LA->score_seq);
 	  vfree ( LA->len);
 
 	  free_profile (LA->P);
 	  if ( LA->A){free_Alignment (LA->A);LA->A=NULL;}
-
+	  if ( LA->Tree){free_Alignment (LA->Tree);LA->Tree=NULL;}
+	  if ( LA->RepColList)free_int (LA->RepColList, -1);
 
 	  vfree ( LA);
 	  return S;
@@ -1334,15 +1346,15 @@ void set_max_mem (int m)
 
 int verify_memory (int s)
 {
+  static int flushed;
   alloc_mem+=s;
-
+  
   tot_mem=(alloc_mem>tot_mem)?alloc_mem:tot_mem;
 
-  if (max_mem && alloc_mem>max_mem)
+  if (max_mem && alloc_mem>max_mem && !flushed)
     {
-      fprintf (stderr, "\n%s Requires Too Much Memory: %d Megabytes [FATAL:%s]\n", PROGRAM,(int)(alloc_mem/1024*1024),PROGRAM);
-      fprintf (stderr, "Tip: Rerun your Job with a smaller dataset\n");
-
+      flushed=1;
+      fprintf (stderr, "\nERROR: Current Memory usage of %d Mb exceeds allowed maximum (%d Mb). [FATAL:%s]\n",(int)(alloc_mem/(1024*1024)),(int)(max_mem/(1024*1024)), PROGRAM);
       myexit (EXIT_FAILURE);
     }
   else
@@ -1383,7 +1395,7 @@ void * vmalloc ( size_t size)
 	Memcontrol *M;
 
 	verify_memory (size+2*sizeof (Memcontrol));
-
+	
 	if ( size==0)
 	    return NULL; /*crash ("\n0 bytes in vmalloc\n");*/
 	else
@@ -1561,7 +1573,6 @@ int read_array_size (void *array, size_t size)
     p-=2;
     if ( p[0].size_element ==0 && size==0)
       {
-	printf("%i", p[-1]);
 	fprintf ( stderr, "\nERROR in read_array_size: trying to read the size of a malloced block");
       }
     else if ( size ==0) return (int)p[0].size/p[0].size_element;

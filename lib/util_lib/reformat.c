@@ -378,6 +378,13 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\nTree Analysis___________________________________________________");
 
 
+		fprintf ( stdout, "\n     +tree................Passes information to +evaluate");
+		fprintf ( stdout, "\n     .....................Default: +evaluate returns a tree");
+		fprintf ( stdout, "\n     .....<N>.............+evaluate makes N replicates");
+		fprintf ( stdout, "\n     .....replicates <N>..+evaluate makes N replicates");
+		fprintf ( stdout, "\n     .....mode <nj|upgma>.+evaluate makes N replicates");
+		fprintf ( stdout, "\n     .....gap <N float>...+evaluate ignores colum with N float gap");
+		
 		fprintf ( stdout, "\n     +tree_prune..........Prune the tree -in using the sequences provided via -in2");
 		fprintf ( stdout, "\n     +tree_cmp............Compares the tree -in and the tree -in2");
 		fprintf ( stdout, "\n     +tree_cmp_list......Compares the tree -in and the tree_list -in2");
@@ -430,12 +437,12 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     ..nj | cw............Runs Neighbor Joining OR Cw to compute Tree");
 		fprintf ( stdout, "\n     ..dpa................Turns the tree into a daptree (+tree2dpatree)");
 		fprintf ( stdout, "\n     +node_sort..<name>...Sort leafs of tree n1, by node distance");
-
-
-		fprintf ( stdout, "\nMatrix Analysis___________________________________________________");
+		fprintf ( stdout, "\n     +treelist2bs.........Turns a list of tree into a tree with BS support");
+		fprintf ( stdout, "\n     .............cons....Runs consense majoprity rule. Distances are the BS values");
+		fprintf ( stdout, "\n     .............best....identifies the tree with the best support");
+		fprintf ( stdout, "\n     .............first...Reports support for the first tree in the list");  			fprintf ( stdout, "\nMatrix Analysis___________________________________________________");
 		fprintf ( stdout, "\n     +aln2mat_diaa........computes a dinucleotide matrix on a list of aln");
-		fprintf ( stdout, "\n     +aln2mat.............computes a log odd matrix");
-
+		fprintf ( stdout, "\n     +aln2mat.............computes a log odd matrix. Input is a list of MSA provided in fasta format (i.e. each name is a valid MSA file");
 		fprintf ( stdout, "\n     +seq2lat_mat.........computes a transition matrix on seq provided via -in");
 
 		fprintf ( stdout, "\nStructure Analysis___________________________________________________");
@@ -2384,7 +2391,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    expanded=1;
 	  }
 
-	if ( strm (out_format, ""))return 0;
+	if ( strm (out_format, "") || strm (out_format, "no") || strm (out_format, "NO"))return 0;
 	else if ( strm (out_format, "sp_ascii"))
 	  {
 	    if (!D1) return 1;
@@ -2440,40 +2447,73 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	     vfclose (save_list_footer (fp, CL));
 	  }
 	
-	else if (strm (out_format, "score"))
+	else if (strm (out_format, "score") || strm (out_format, "score_aln") || strm (out_format, "score_seq") || strm (out_format, "score_pw"))
 	  {
-	    fprintf (stdout, "%d\n", (D1->A)->score_aln);
+	    int i, x, y;
+	    double **dm;
+	    
+	   
+	    
+	    if ( strm (out_format, "score_aln") || strm (out_format, "score"))
+	      fprintf (stdout, "%d [SCORE_ALN]\n", (D1->A)->score_aln);
+	    if ( strm (out_format, "score_seq") || strm (out_format, "score"))
+	      {
+		for (x=0; x<(D1->A)->nseq; x++)
+		  fprintf (stdout, ">%-20s %d [SCORE_SEQ]\n", (D1->A)->name[x], (D1->A)->score_seq[x]);
+	      }
+	    if ( strm (out_format, "score_pw") || strm (out_format, "score"))
+	      {
+		if ((D1->A)->dm)dm=(D1->A)->dm;
+		else if (D2 && D2->A && (D2->A)->dm)dm=(D2->A)->dm;
+		else if (DST && DST->A && (DST->A)->dm)dm=(DST->A)->dm;
+		if (dm)
+		  {
+		    for (x=0; x<(D1->A)->nseq; x++)
+		      for (y=0; y<(D1->A)->nseq; y++)
+			if (x!=y)fprintf (stdout, ">%-20s %-20s %.3f [SCORE_PW]\n", (D1->A)->name[x], (D1->A)->name[y],(float)dm[x][y]);
+		  }
+	      }
 	  }
 	else if      ( strncmp (out_format, "score",5)==0 || strm (out_format, "html"))
-		{
-		  int a;
-		  Alignment *BUF;
-
-		  if (!D1)return 1;
-		  if ( !DST)
-		    {
-		      fprintf ( stderr,"\n[You Need an evaluation File: Change the output format or use +evaluate][FATAL:%s]\n", PROGRAM);
-		      myexit(EXIT_FAILURE);
-		    }
-		  if ( !strm ("html", out_format))while ( out_format[0]!='_' && out_format[0]!='\0' )out_format++;
-		  
-		  D1->S=aln2seq(D1->A);
-		  BUF=copy_aln (DST->A, NULL);
-		  DST->A=aln2number (DST->A);
-
-		 
-		  if     ( strstr ( out_format, "html"  ))output_reliability_html  ( D1->A,  DST->A, out_file);
-		  else if( strm ( out_format, "_ps"    ))output_reliability_ps    ( D1->A,  DST->A, out_file);
-		  else if( strm ( out_format, "_pdf"   ))output_reliability_pdf   ( D1->A,  DST->A, out_file);
-		  else if( strm ( out_format, "_ascii" ))output_reliability_ascii ( D1->A,  DST->A, out_file);
-		  else if( strm ( out_format, "_seq"   ))output_seq_reliability_ascii ( D1->A,  DST->A, out_file);
-		  else if( strm ( out_format, "_fasta"   ))output_reliability_fasta ( D1->A,  DST->A, out_file);
-		  else
-		    {
-		      DST->A=BUF;
-		      main_output (DST, NULL, NULL, out_format+1, out_file);
-		    }
-		}
+	  {
+	    int a;
+	    Alignment *BUF;
+	    
+	    if (!D1)return 1;
+	    if ( !DST)
+	      {
+		fprintf ( stderr,"\n[You Need an evaluation File: Change the output format or use +evaluate][FATAL:%s]\n", PROGRAM);
+		myexit(EXIT_FAILURE);
+	      }
+	    if ( !strm ("html", out_format))while ( out_format[0]!='_' && out_format[0]!='\0' )out_format++;
+	    
+	    D1->S=aln2seq(D1->A);
+	    BUF=copy_aln (DST->A, NULL);
+	    DST->A=aln2number (DST->A);
+	    
+	    
+	    if     ( strstr ( out_format, "html" ))output_reliability_html  ( D1->A,  DST->A, out_file);
+	    else if( strm ( out_format, "_ps"    ))output_reliability_ps    ( D1->A,  DST->A, out_file);
+	    else if( strm ( out_format, "_pdf"   ))output_reliability_pdf   ( D1->A,  DST->A, out_file);
+	    else if( strm ( out_format, "_ascii" ))output_reliability_ascii ( D1->A,  DST->A, out_file);
+	    else if( strm ( out_format, "_fasta" ))output_reliability_fasta ( D1->A,  DST->A, out_file);
+	    else if( strm ( out_format, "_raw"   ))output_raw_score ( D1->A,  DST->A, out_file);
+	    else
+	      {
+		DST->A=BUF;
+		main_output (DST, NULL, NULL, out_format+1, out_file);
+	      }
+	  }
+	else if (strm(out_format, "compressed_ps"))
+	  {
+	    if (!D1) return 1;
+	    aln2compressed_ps (D1->A, out_file);
+	  }
+	else if (strm(out_format, "compressed_pdf"))
+	  {
+	    if (!D1) return 1;
+	    aln2compressed_pdf (D1->A, out_file);
+	  }
 	else if (strm (out_format, "sec_html") || strm (out_format, "_E_html"))
 	  {
 	    Alignment *ST, *A;
@@ -2856,7 +2896,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 			    }
 			}
 		    }
-		output_clustal_aln ( out_file, D1->A);
+		output_phylip_aln ( out_file, D1->A);
 	      }
 	    
 	  }
@@ -3294,10 +3334,25 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 
 	else if ( strm4 (out_format, "newick_tree","newick","binary","nh"))
 	        {
+		 
 		  if (!D1)return 1;
-
-		  /*D1->T=unroot_tree(D1->T);*/
-		  vfclose (print_tree ((D1->T), out_format, vfopen ( out_file, "w")));
+		  if (!D1->T && (D1->A))
+		    {
+		      Alignment *T;
+		      FILE *fpx;
+		      int x;
+		      if ((D1->A)->Tree)T=(D1->A)->Tree;
+		      else T=(D1->A);
+		      fpx=vfopen (out_file, "w");
+		      for (x=0; x<T->nseq; x++)
+			fprintf (fpx, "%s\n", T->seq_al[0]);
+		      vfclose (fpx);
+		    }
+		  else
+		    {
+		      /*D1->T=unroot_tree(D1->T);*/
+		      vfclose (print_tree ((D1->T), out_format, vfopen ( out_file, "w")));
+		    }
 		}
 	else if ( strncmp (out_format, "sarsim", 6)==0)
 	        {
@@ -11227,7 +11282,34 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
        else if ( strm(action, "tree2collapse") )
 	 {
-	   D1->T=collapse_tree (D1->T, NULL, ACTION(1));
+	   char *string;
+	   int x,ng,l;
+	   
+	   if (!D1->T && (D1->A)->Tree)D1->T=newick_string2tree (((D1->A)->Tree)->seq_al[0]);
+	   
+	   l=0;
+	   if ( strm (ACTION(1), "groups"))
+	     {
+	       ng=atoi(ACTION (2))+1;
+	       l=1;
+	       string=(char*)vcalloc ( 1000, sizeof (char));
+	     }
+	   else 
+	     ng=n_actions;
+	   
+	   for (x=1; x<ng; x++)
+	     {
+	       if (!l)
+		 {
+		   string=ACTION(x);
+		   string=substitute_char (string, '\\', 0);
+		 }
+	       else
+		 {
+		   sprintf (string, "-%d", x);
+		 }
+	       D1->T=collapse_tree (D1->T, NULL,string);
+	     }
 	   D1->S=tree2seq(D1->T, NULL);
 	   D1->A=seq2aln (D1->S, NULL, RM_GAP);
 	 }
@@ -11258,19 +11340,31 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   node_sort ( action_list[1], D1->T);
 	   myexit (EXIT_SUCCESS);
 	 }
-       else if ( strm ( action, "tree2cons"))
+       else if ( strm ( action, "treelist2bs") ||strm ( action, "tree2bs") )
 	 {
-	   treelist2cons (D1->A);
+	   if (ACTION(1) && strm (ACTION(1), "best"))treelist2node_support_best (D1->A);
+	   else if (ACTION(1) && strm (ACTION(1), "cons"))treelist2cons (D1->A);
+	   else treelist2node_support (D1->A);
 	 }
-       else if ( strm ( action, "tree2support"))
+       else if ( strm ( action, "print"))
 	 {
+	   int x;
 	   
-	   treelist2node_support (D1->A);
-	 }
-       else if ( strm ( action, "avg_bootstrap"))
-	 {
-	   display_avg_bootstrap (D1->T);
-	   myexit (EXIT_SUCCESS);
+	   for (x=1; x<n_actions;x++)
+	     {
+	       if ( strm (ACTION(x), "bs"))
+		 {
+		   float bs;
+		   if (D1->T)bs=tree2avg_bs(D1->T);
+		   else if (D1->A && (D1->A)->Tree)bs=newick2avg_bs (((D1->A)->Tree)->seq_al[0]);
+		   else bs=newick2avg_bs ((D1->A)->seq_al[0]);
+		   fprintf ( stdout, "AVERAGE_BS: %.2f\n", bs);
+		 }
+	       else if ( strm (ACTION(x), "nseq"))
+		 {
+		   fprintf (stdout, "NSEQ: %d\n", (D1->A)->nseq);
+		 }
+	     }
 	 }
        else if ( strm (action, "genepred2acc"))
 	 {
@@ -11322,11 +11416,44 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   aln2pred (D1->A, D2->A, ACTION (1));
 	   myexit (EXIT_SUCCESS);
 	 }
+       else if ( strm(action, "color"))
+	 {
+	   cputenv ("TREE_MODE_4_TCOFFEE=%s",ACTION(1));
+	 }
        else if ( strm(action, "tree"))
 	 {
-	   if (ACTION(1))evaluate2tree=atoi(ACTION(1));
-	   else evaluate2tree=1;
-	 }       
+	   if      (!ACTION(1))cputenv ("REPLICATES_4_TCOFFEE=1");
+	   else if (is_number(ACTION(1)))cputenv ("REPLICATES_4_TCOFFEE=%s",ACTION(1));
+	   else
+	     {
+	       int j;
+	       for (j=1; j<n_actions; j+=2)
+		 {
+		   if      (strm (action_list[j], "mode")) cputenv ("TREE_MODE_4_TCOFFEE=%s",action_list[j+1]);
+		   else if (strm (action_list[j], "gap" )) cputenv ("TREE_GAP_4_TCOFFEE=%s" ,action_list[j+1]);
+		   else if (strm (action_list[j], "replicates"))cputenv ("REPLICATES_4_TCOFFEE=%s" ,action_list[j+1]);
+		   else if (strm (action_list[j], "group"))cputenv ("SGROUP_4_TCOFFEE=%s" ,action_list[j+1]);
+		   
+		   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is not a known +tree parameter (replicates <int>|mode <string>|gap <float>|goup <seqfile>)[FATAL]",action_list[j]);
+		 }
+	     }
+	 }
+       
+       else if ( strm(action, "evaluateGroup"))
+	 {
+	   
+	   if(ACTION(1))D1->A=evaluate_tree_group ((D1->A), main_read_seq(ACTION(1)));
+	   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: -evaluateGroup requires a sequence list in FASTA formal [FATAL]") ;
+	 }
+       else if ( strm(action, "evaluateTree"))
+	 {
+	   if (ACTION(1))
+	     {
+	       Sequence *G=main_read_seq (ACTION(1));
+	       DST->A=treealn_evaluate4tcoffee (D1->A,G);
+	     }
+	   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: -evaluateTree requires a sequence list in FASTA formal [FATAL]") ;
+	 }
        else if ( strm(action, "evaluate3D"))
 	 {
 	   int enb;
@@ -11334,34 +11461,41 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   char *strikem=NULL;
 	   Constraint_list *CL;
 	   Alignment *A;
-	   
+	   int na=1;
 	   DST->A=copy_aln (D1->A, NULL);
 	   DST->S=aln2seq(DST->A);
-	  
-	   
-	   if ( !ACTION(1) || strm (action_list[1], "strike"))
+	   char *ev3d;
+	   if (ACTION(na) && strm (ACTION(na), "group"))
 	     {
-	       
+	        cputenv ("SGROUP_4_TCOFFEE=%s" ,ACTION(na+1));
+		cputenv ("REPLICATES_4_TCOFFEE=columns");
+		na+=2;
+	     }
+	   if ( !ACTION(na) || strm (ACTION(na), "strike"))
+	     {
+	       ev3d="strike";
 	       strikem=(char*)vcalloc (100, sizeof (char));
-	       if (!ACTION(1)||!ACTION(2))sprintf (strikem, "strike");
-	       else sprintf (strikem, "%s", ACTION(2));
+	       if (!ACTION(na)||!ACTION(na+1))sprintf (strikem, "strike");
+	       else sprintf (strikem, "%s", ACTION(na+1));
 	       enb=3;
 	     }
-	   else if (strm (action_list[1], "distances"))
+	   else if (strm (ACTION(na), "distances"))
 	     {
+	       ev3d="distances";
 	       enb=3;
-	       max=100;//nm
+	       max=15;//Angstrom
 	       
-	       if (ACTION(2))max=atof(ACTION(2));
-	       if (ACTION(3))enb=atoi(ACTION(4));
+	       if (ACTION(na+1))max=atof(ACTION(na+1));
+	       if (ACTION(na+2))enb=atoi(ACTION(na+2));
 	     }
-	   else if (strm (action_list[1], "contacts"))
+	   else if (strm (ACTION(na), "contacts"))
 	     {
+	       ev3d="contacts";
 	       enb=3;
 	       max=1.2;
 		   
-	       if (ACTION(2))max=atof(ACTION(2));
-	       if (ACTION(3))enb=atoi(ACTION(3));
+	       if (ACTION(na+1))max=atof(ACTION(na+1));
+	       if (ACTION(na+2))enb=atoi(ACTION(na+2));
 	     }
 	   
 	   if (!D2)CL=D1->CL;
@@ -11371,8 +11505,10 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     {
 	       
 	       ungap_seq(D1->S);
-	       if (ACTION(1) && strm (ACTION(1), "distances"))
+	       if (strm (ev3d, "distances"))
 		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "distances",2*max);
+	       else if (strm (ev3d, "contacts"))
+		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "all",0);
 	       else
 		 {
 		   D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "all",0);
@@ -11381,7 +11517,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       CL=D1->CL;
 	     }
 	   
-	   DST->A=struc_evaluate4tcoffee (D1->A,CL,ACTION(1),max,enb, strikem,evaluate2tree);
+	   DST->A=struc_evaluate4tcoffee (D1->A,CL,ev3d,max,enb, strikem);
 	 }
        else if ( strm(action, "evaluate"))
 	 {

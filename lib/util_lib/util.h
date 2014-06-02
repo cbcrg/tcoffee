@@ -314,7 +314,8 @@ void   **recycle   (void   **A, int l, int cycle);
 /*********************************************************************/
 char* getenv4debug ( const char *var);
 char* get_env_variable ( const char *var, int mode);
-int atoigetenv(const char *x);
+float atofgetenv(const char *x);
+int   atoigetenv(const char *x);
 void setenv_func ( char *string_name, char *string_value);
 char *get_pwd ( char *name);
 char *pg2path (char *pg);
