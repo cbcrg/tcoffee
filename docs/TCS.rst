@@ -125,32 +125,40 @@ Flags        					Description
 ============================ 	================
 
 
-Data sets
+Supplement data
 ---------------
+
+#. Documents
+
+	* A `pre-print <http://www.tcoffee.org/Publications/Pdf/062-MBE-TCS.preprint.pdf>`_
+	* The final publication can be accessed from `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24694831>`_
+	* A `powerpoint <http://www.tcoffee.org/Projects/tcs/201403_TCS_MBE.pptx>`_
 
 #. Example 
 
-    * All files used in the above examples can be downloaded from here
+    * All files used in the above examples can be downloaded from `here <http://www.tcoffee.org/Projects/tcs/files.tar.gz>`_.
 
 #. Structural validation
 
-	* BAliBASE 3
-	* PREFAB 4
+	* `BAliBASE 3 <http://lbgi.fr/balibase/>`_ [1]_
+	* `PREFAB 4 <http://www.drive5.com/bench/>`_ [2]_
 
 #. Phylogenetic validation
 
-	* yeasts from Wong et al. Science, 2008
-	* subset gene list : at least one aligner yields a phylogeny topology identical to the canonical yeast ToL
-	* tips16 from Gblocks
-	* tips32, tips64 from trimAl
+	* `yeasts <http://www.ncbi.nlm.nih.gov/pubmed/18218900>`_ [3]_
+	* `subset gene list <http://www.tcoffee.org/Projects/tcs/geneList_YeastToL.txt>`_ : at least one aligner yields a phylogeny topology identical to the canonical yeast ToL
+	* `tips16 <http://molevol.cmima.csic.es/castresana/Gblocks.html>`_ from Gblocks [4]_
+	* `tips32, tips64 <http://trimal.cgenomics.org/>`_ from trimAl [5]_
+
+
+.. Note:: Please cite `Chang, J.-M., Tommaso, P. & Notredame, C. TCS: A New Multiple Sequence Alignment Reliability Measure to Estimate Alignment Accuracy and Improve Phylogenetic Tree Reconstruction. Molecular biology and evolution 31, 1625–37 (2014). doi: 10.1093/molbev/msu117 <http://www.ncbi.nlm.nih.gov/pubmed/24694831>`_.
 
 
 Reference
 ---------------
 
-A pre-print is available here and the final publication can be accessed from `PubMed <http://www.ncbi.nlm.nih.gov/pubmed/24694831>`_.
-
-A powerpoint is available here.
-
-Please Cite:
-`Chang, J.-M., Tommaso, P. & Notredame, C. TCS: A New Multiple Sequence Alignment Reliability Measure to Estimate Alignment Accuracy and Improve Phylogenetic Tree Reconstruction. Molecular biology and evolution 31, 1625–37 (2014). doi: 10.1093/molbev/msu117 <http://www.ncbi.nlm.nih.gov/pubmed/24694831>`_
+.. [1] Edgar RC 2004. MUSCLE: multiple sequence alignment with high accuracy and high throughput. Nucleic Acids Res 32: 1792-1797.
+.. [2] Edgar RC 2004. MUSCLE: multiple sequence alignment with high accuracy and high throughput. Nucleic Acids Res 32: 1792-1797.
+.. [3] Wong KM, Suchard MA, Huelsenbeck JP 2008. Alignment uncertainty and genomic analysis. Science 319: 473-476.
+.. [4] Wong KM, Suchard MA, Huelsenbeck JP 2008. Alignment uncertainty and genomic analysis. Science 319: 473-476.Talavera G, Castresana J 2007. Improvement of phylogenies after removing divergent and ambiguously aligned blocks from protein sequence alignments. Syst Biol 56: 564-577.
+.. [5] Capella-Gutierrez S, Silla-Martinez JM, Gabaldon T 2009. trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses. BIOINFORMATICS 25: 1972-1973.
