@@ -1,4 +1,4 @@
-*3DTree is a tree estimation procedure based on the comparison of internal distances
+3DTree is a tree estimation procedure based on the comparison of internal distances
 =============================
 
 3DTree makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. 3DTree also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
@@ -7,7 +7,8 @@ Generating a Tree based on distances
 ------------------------
 This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences.
 
-Input
+Input:
+
 * `aln`: Multiple Sequence Alignment in FASTA, MSA or MSF
 * `template`: FASTA name list with templates: ">name _P_ template"
 
@@ -20,7 +21,7 @@ Outputs:
 
 * `fasta_tree`  This call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored
 
-It is possible to control default parameters using the following extended command line:
+It is possible to control default parameters using the following extended command line
 
 ::
   t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output fasta_tree
@@ -53,7 +54,7 @@ It is possible to control default parameters using the following extended comman
 Visulizing 3D Conservation
 ------------------------
 
-This same procedure can be used to visualize either intra-miolecular distance conservation or contact conservation:
+This same procedure can be used to visualize either intra-miolecular distance conservation or contact conservation
 
 ::
   seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_html 
@@ -88,7 +89,7 @@ The tree can be pre-computed
 
   seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
 
-Or it can be computed on the fly:
+Or it can be computed on the fly
 :: 
 
   seq_reformat -in <aln> -in2 <template> -action +tree replicates 100  +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
