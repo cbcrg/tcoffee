@@ -6990,11 +6990,11 @@ char *vfgets ( char *buf, FILE *fp)
     }
 
   l=0;
-
-  if ( (c=fgetc (fp))==EOF)return NULL;
-  else ungetc (c, fp);
-
-
+  c=fgetc (fp);
+  
+  if ( (c==EOF))return NULL;
+  ungetc (c, fp);
+    
   while ( (c=fgetc (fp))!='\n' && c!=EOF)
     {
       if (l>=buf_len)
