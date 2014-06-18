@@ -9,8 +9,8 @@ This option makes it possible to estimate a tree while taking into account the v
 
 Input:
 
-* `aln`: Multiple Sequence Alignment in FASTA, MSA or MSF
-* `template`: FASTA name list with templates: ">name _P_ template"
+* ``aln``: Multiple Sequence Alignment in FASTA, MSA or MSF
+* ``template``: FASTA name list with templates: ``>name _P_ template``
 
 :: 
 
@@ -24,6 +24,7 @@ Outputs:
 It is possible to control default parameters using the following extended command line
 
 ::
+
   t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output fasta_tree
 
 .. warning: sequences without 3D structure will be excluded from the analysis and from the final output
