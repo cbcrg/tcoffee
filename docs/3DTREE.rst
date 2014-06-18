@@ -5,7 +5,8 @@
 
 Generating a Tree based on distances
 ------------------------
-This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences.
+This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored
+
 
 Input:
 
@@ -14,39 +15,40 @@ Input:
 
 :: 
 
-  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100  +evaluate3D distances +tree2bs first -output fasta_tree
+  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100  +evaluate3D distances +tree2bs first -output newick -out tree.dnd
 
 
 Outputs: 
 
-* `fasta_tree`  This call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored
+* ``tree.dnd``: Tree in newick format with bootstrap support   
 
 It is possible to control default parameters using the following extended command line
 
 ::
 
-  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output fasta_tree
+  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick -out tree.dnd
 
 .. warning: sequences without 3D structure will be excluded from the analysis and from the final output
 
 
 Generating a Tree based on contact conservation
 ------------------------
-This option makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences.
+This option makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate nj trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cut-off of 1.2 A between VdW radius and ignoring the 3 closests neighbors. Columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA).
 
 :: 
 
-  seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates 100  +evaluate3D contacts +tree2bs first -output fasta_tree
+  t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates 100  +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
 
 
 Outputs: 
 
-* `fasta_tree`  This call will generate a 100 replicate nj trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cut-off of 1.2 A between VdW radius and ignoring the 3 closests neighbors. Columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA).
+* ``tree.dnd``: Tree in newick format  
 
 It is possible to control default parameters using the following extended command line:
 
 ::
-  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mode nj  +evaluate3D contacts 1.2 3 +tree2bs first -output fasta_tree
+
+  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mode nj  +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
 
 .. warning: the procedure requires at least 1 sequence with a known 3D structure or with contact information.
 
@@ -63,7 +65,7 @@ This same procedure can be used to visualize either intra-miolecular distance co
   seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_raw
 
 Outputs:
-* ``score_raw``: this output flag triggers a dump of the values associated with every residue, every sequence and every column of the considered alignment.
+* ``score_raw``: Tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
 
 Identification positions that support a given sub-cluster
 ------------------------
@@ -71,13 +73,14 @@ Identification positions that support a given sub-cluster
 If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificty, etc...), it is possible to estimate which columns yield the best support using the following command,
 
 Input:
-* `group.fasta`: A Fasta formatted list of the sequences that form the group whose support you want to analyze
+* ``group.fasta``: A Fasta formatted list of the sequences that form the group whose support you want to analyze
 
 ::
+
 seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates columns  +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
 
 Output
-* `aln.score_html` Colored version of your MSA indicating the sequences that best contribute to your clustering.
+* ``aln.score_html`` Colored version of your MSA indicating the sequences that best contribute to your clustering.
 
 
 Evaluating Clutering capacities
