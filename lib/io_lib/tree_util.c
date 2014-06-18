@@ -5333,6 +5333,8 @@ Alignment *treelist2node_support_best (Alignment *T)
   Sequence *S=NULL;
   int a, b, best_tree;
   float s=0, best_s=0;
+  char *p;
+  
   if (T->Tree)return treelist2node_support_best (T->Tree);
   
   RT=(NT_node*)vcalloc (T->nseq, sizeof (NT_node));
@@ -5356,7 +5358,11 @@ Alignment *treelist2node_support_best (Alignment *T)
     }
   
   s=(best_s/(float)(T->nseq-1))*100;
-  sprintf (T->seq_al[0], "%s", tree2string (RT[best_tree]));
+
+  p=tree2string (RT[best_tree]);
+  T->seq_al[0]=(char*)vrealloc (T->seq_al[0],(strlen (p)+1)*sizeof (char));
+  sprintf (T->seq_al[0], "%s",p);
+  
   sprintf (T->name[0], "OriginalDistanceTree");
   sprintf (T->seq_comment[0], "Replicates: %d AverageNodeSupport: %.2f %% Source: seq_reformat", T->nseq, s);
   T->nseq=1;
@@ -5381,6 +5387,7 @@ Alignment *tree2node_support (char *newick_tree, Alignment *T)
   Sequence *S;
   int a;
   float s=0;
+  char *p;
   RT=newick_string2tree(newick_tree);
   
   S=tree2seq(RT, NULL);
@@ -5395,7 +5402,11 @@ Alignment *tree2node_support (char *newick_tree, Alignment *T)
     }
   
   s=(s/(float)(T->nseq-1))*100;
-  sprintf (T->seq_al[0], "%s", tree2string (RT));
+  
+  //make sure new tree is not longuer than previous
+  p=tree2string (RT);
+  T->seq_al[0]=(char*)vrealloc (T->seq_al[0],(strlen (p)+1)*sizeof (char));
+  sprintf (T->seq_al[0], "%s",p);
   sprintf (T->name[0], "OriginalDistanceTree");
   sprintf (T->seq_comment[0], "Replicates: %d AverageNodeSupport: %.2f %% Source: seq_reformat", T->nseq, s);
   T->score=T->score_aln=(float)s*100;

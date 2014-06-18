@@ -2714,9 +2714,8 @@ Constraint_list *read_constraint_list_file(Constraint_list *CL, char *fname)
 
 	fp=vfopen(fname,"r");
 	//while ((c=fgetc(fp))!='#' && c!=EOF){line+=(c=='\n')?1:0;}
+	//ungetc (c, fp);
 
-
-	ungetc (c, fp);
 	while ((buf=vfgets ( buf, fp))!=NULL)
 	{
 		line++;

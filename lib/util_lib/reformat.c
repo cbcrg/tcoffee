@@ -300,17 +300,19 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .....................pos=0: chosen randomly");
 		fprintf ( stdout, "\n     .....................MaxLen of the deletions, Ncycle: number of cycles");
 		fprintf ( stdout, "\n     .....................Random_len: 0 sets the len to maxlen, 1 to a random value");
+		fprintf ( stdout, "\n     +tree..gap <F|def=0.5> replicates<D|column|def=1> mode <nj|upgma|def=nj>");
+		
 		fprintf ( stdout, "\n     +remove_nuc.x........Remove Position 1, 2 or 3 of every codon");
-		fprintf ( stdout, "\n     +evaluate3D..........[strike] strike|distances|contacts");
+		fprintf ( stdout, "\n     +evaluate3D..........strike|distances|contacts|Def=strike");
 		fprintf ( stdout, "\n     .....................Uses the -in2 contact_lib or the +pdb2contacts +seq2contacts ");
 		fprintf ( stdout, "\n     .....................If none, uses +seq2contacts ");
-		fprintf ( stdout, "\n     .....................OUTPUT: -output score_ascii, score, score_html,fasta_tree ");
-		fprintf ( stdout, "\n     .....................OUTPUT: +distance2tree [1] trigers tree computation");
-		fprintf ( stdout, "\n     .....................distances.Max(float)");
-		fprintf ( stdout, "\n     .....................Max[10]  : Maximum distance between a pair in Angs");
-		fprintf ( stdout, "\n     .....................Provide contacts: -in2=<contact_lib>");
-		fprintf ( stdout, "\n     .....................Or +seq2contacts");
-		fprintf ( stdout, "\n     .....................OUTPUT: -output score_ascii, score, score_html ");
+		fprintf ( stdout, "\n     .....................-output score_ascii, score, score_html,fasta_tree ");
+		fprintf ( stdout, "\n     .....................+tree [1] trigers tree computation for -output fasta_tree");
+		fprintf ( stdout, "\n     .....................distances..<Max|Def=15 >");
+		fprintf ( stdout, "\n     .....................contacts...<Max|Def=1.2> <nb|Def=3>");
+		fprintf ( stdout, "\n     .....................contacts|distances provided via -in2=contact_lib");
+		fprintf ( stdout, "\n     .....................contacts|distances estimated via pdb2contacts");
+		fprintf ( stdout, "\n     +evaluateTree.<group>.Group is a fasta sequence file");
 		
 		fprintf ( stdout, "\n     +evaluate matrix..gop..gep");
 		fprintf ( stdout, "\n     .....................Make a similarity evaluation with matrix");
