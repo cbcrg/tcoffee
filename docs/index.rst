@@ -11,9 +11,13 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   installation
+   quickstart
+   manual
+   formats
    TCS
    3DTREE
-   page2
+   problems
 
    
 
