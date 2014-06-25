@@ -84,7 +84,7 @@ Output
 * ``aln.score_html`` Colored version of your MSA indicating the sequences that best contribute to your clustering.
 
 
-Evaluating Clutering capacities
+Evaluating Clustering capacities
 -------------------------------
 
 If you want to check the capacity of an algorithm to bring related sequences within mono-phyletic groups, you should name your sequences according to the group they belong to (XXXX_1, YYYYY_1, ZZZZ_2, KKKK_2, for members of _1 and _2, etc) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group:
