@@ -68,7 +68,7 @@ This same procedure can be used to visualize either intra-molecular distance con
 Outputs:
 * ``score_raw``: Tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
 
-Identification positions that support a given sub-cluster
+Identification of positions that support a given sub-cluster
 ------------------------
 
 If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificty, etc...), it is possible to estimate which columns yield the best support using the following command,
@@ -78,7 +78,7 @@ Input:
 
 ::
 
-seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates columns  +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
+ seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates columns  +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
 
 Output
 * ``aln.score_html`` Colored version of your MSA indicating the sequences that best contribute to your clustering.
