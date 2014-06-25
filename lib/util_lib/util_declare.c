@@ -834,7 +834,14 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	  if ( A==NULL){free_aln(B); return NULL;}
 
 	  nnseq=MAX(A->nseq, A->max_n_seq);
-	  nlen=A->len_aln+1;
+	  nlen=A->len_aln;
+	  for (a=0; a<A->nseq; a++)
+	    {
+	      int cl=(A->seq_al[a])?strlen(A->seq_al[a]):0;
+	      if (cl>nlen)nlen=cl;
+	    }
+	  nlen++;
+	  
 	  if (B)
 	    B=realloc_alignment2 (B, nnseq, nlen);
 	  else

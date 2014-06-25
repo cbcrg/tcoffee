@@ -671,8 +671,8 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
       pos=aln2pos_simple(IN, IN->nseq);
       sprintf ( OUT->name[IN->nseq], "cons");
       
-      max_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
-      score_seq=(double*)vcalloc ( IN->nseq, sizeof (double));
+      max_seq=(double*)vcalloc ( IN->nseq+1, sizeof (double));
+      score_seq=(double*)vcalloc ( IN->nseq+1, sizeof (double));
       lu=declare_int (IN->nseq, IN->len_aln+1);
       
       //multi Threading stuff
