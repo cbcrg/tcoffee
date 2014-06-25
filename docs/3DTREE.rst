@@ -1,4 +1,4 @@
-3DTree is a tree estimation procedure based on the comparison of internal distances
+3DTree: tree estimation procedure based on the comparison of internal distances
 =============================
 
 3DTree makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. 3DTree also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
