@@ -57,9 +57,10 @@ It is possible to control default parameters using the following extended comman
 Visulizing 3D Conservation
 ------------------------
 
-This same procedure can be used to visualize either intra-miolecular distance conservation or contact conservation
+This same procedure can be used to visualize either intra-molecular distance conservation or contact conservation
 
 ::
+
   seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_html 
   seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_ascii
   seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_raw
