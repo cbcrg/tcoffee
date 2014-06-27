@@ -422,7 +422,7 @@ int batch_main ( int argc, char **argv)
 
 	int check_pdb_status;
 	/*trim*/
-	int trim;
+	int trim=0;
 	Sequence *trim_subS=NULL;
 	Sequence *trim_S=NULL;
 	Sequence *SEQ_TO_KEEP=NULL;
@@ -2349,7 +2349,7 @@ if ( !do_evaluate)
 		   );
 
 /*PARAMETER PROTOTYPE:    -ulimit     */
-
+	       ulimit=-1;
 	       get_cl_param(\
 			    /*argc*/      argc          ,\
 			    /*argv*/      argv          ,\
@@ -3184,6 +3184,8 @@ get_cl_param(\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
+split=0;
+
 get_cl_param(\
 			    /*argc*/      argc          ,\
 			    /*argv*/      argv          ,\
@@ -3421,6 +3423,7 @@ get_cl_param(\
 		   );
 	       if (multi_core[0])set_string_variable ("multi_core",multi_core);
 /*PARAMETER PROTOTYPE:    multi_core    */
+	       n_core=0;
 	       get_cl_param(					\
 			    /*argc*/      argc           ,\
 			    /*argv*/      argv           ,\
@@ -3437,9 +3440,11 @@ get_cl_param(\
 			    /*Min_value*/ "0"          ,\
 			    /*Max Value*/ "100"           \
 		   );
+	      
 	       if (n_core)set_int_variable ("n_core",n_core);
 
 /*PARAMETER PROTOTYPE:    max_n_proc:: legacy for the nature protocol    */
+	       max_n_proc=0;
 	       get_cl_param(					\
 			    /*argc*/      argc           ,\
 			    /*argv*/      argv           ,\
@@ -3734,7 +3739,8 @@ get_cl_param(\
 			    /*Max Value*/ "any"           \
 		   );
 	       set_int_variable ("overaln_target", overaln_threshold);
-
+	       
+	       overaln_P1=0;
 	       get_cl_param(					\
 			    /*argc*/      argc           ,\
 			    /*argv*/      argv           ,\
@@ -3753,7 +3759,8 @@ get_cl_param(\
 		   );
 		   
 	       if (overaln_P1)set_int_variable ("overaln_P1", overaln_P1);
-
+	       
+	       overaln_P2=0;
 	       get_cl_param(					\
 			    /*argc*/      argc           ,\
 			    /*argv*/      argv           ,\
@@ -3772,6 +3779,7 @@ get_cl_param(\
 		   );
 		if (overaln_P2)set_int_variable ("overaln_P2", overaln_P2);
 
+		overaln_P3=0;
 	        get_cl_param(					\
 			    /*argc*/      argc           ,\
 			    /*argv*/      argv           ,\
@@ -3789,7 +3797,8 @@ get_cl_param(\
 			    /*Max Value*/ "any"           \
 		   );
 	       if (overaln_P3)set_int_variable ("overaln_P3", overaln_P3);
-
+	       
+	       overaln_P4=0;
 	       get_cl_param(					\
 			    /*argc*/      argc           ,\
 			    /*argv*/      argv           ,\
@@ -3854,7 +3863,7 @@ get_cl_param(\
 		   set_string_variable ("dump",dump);
 		 }
 
-	       
+	       display=100;
 	       get_cl_param(\
 			    /*argc*/      argc           ,\
 			    /*argv*/      argv           ,\

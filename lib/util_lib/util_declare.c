@@ -1354,6 +1354,7 @@ void set_max_mem (int m)
 int verify_memory (int s)
 {
   static int flushed;
+    
   alloc_mem+=s;
   
   tot_mem=(alloc_mem>tot_mem)?alloc_mem:tot_mem;
