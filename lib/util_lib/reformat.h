@@ -275,6 +275,7 @@ int is_clustalw_matrix (char *fname);
 int is_distance_matrix_file (char *name);
 int is_similarity_matrix_file (char *name);
 
+void aln2proba_mat (Sequence *S);
 void aln2mat (Sequence *S);
 void aln2mat_diaa (Sequence *S);
 int **seq2latmat ( Sequence *S, char *fname);

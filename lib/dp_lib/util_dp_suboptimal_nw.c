@@ -9,7 +9,11 @@
 #include "define_header.h"
 #include "dp_lib_header.h"
 
-
+float * backward_proba_pair_wise_test ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *matchProb, float ***insProb, float **transProb);
+float * forward_proba_pair_wise_test ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *matchProb, float ***insProb, float **transProb);
+Constraint_list *ProbaMatrix2CL_test (Alignment *A, int *ns, int **ls, int NumMatrixTypes, int NumInsertStates, float *forward, float *backward, float thr, Constraint_list *CL);
+float ComputeTotalProbability_test (int seq1Length, int seq2Length,int NumMatrixTypes, int NumInsertStates,float *forward, float *backward);
+float * backward_proba_pair_wise_test_old ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *matchProb, float ***insProb, float **transProb);
 
 //Values as provided in Probcons V1.1
 static float EXP_UNDERFLOW_THRESHOLD = -4.60f;
@@ -57,9 +61,9 @@ float gapOpen1Default[] = { 0.01993141696f, 0.01993141696f };
 float gapExtend1Default[] = { 0.7943345308f, 0.7943345308f };
 
 //Protein Alignment Models: bi-phasic
-static float initDistrib2Default[] = { 0.6814756989f, 8.615339902e-05f, 8.615339902e-05f, 0.1591759622f, 0.1591759622 };
-static float gapOpen2Default[] = { 0.0119511066f, 0.0119511066f, 0.008008334786f, 0.008008334786 };
-static float gapExtend2Default[] = { 0.3965826333f, 0.3965826333f, 0.8988758326f, 0.8988758326 };
+static float initDistrib2Default[] = { 0.6814756989f, 8.615339902e-05f, 8.615339902e-05f, 0.1591759622f, 0.1591759622f };
+static float gapOpen2Default[] = { 0.0119511066f, 0.0119511066f, 0.008008334786f, 0.008008334786f };
+static float gapExtend2Default[] = { 0.3965826333f, 0.3965826333f, 0.8988758326f, 0.8988758326f };
 
 static char alphabetDefault[] = "ARNDCQEGHILKMFPSTWYV";
 static float emitSingleDefault[20] = {
@@ -878,7 +882,6 @@ int proba_pair_wise ( Alignment *A, int *ns, int **ls, Constraint_list *CL)
      get_tot_prob (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL, SEQUENCE);
    else
      get_tot_prob2 (A,A, ns,ls,NumMatrixTypes, matchProb, insProb,TmatchProb,TinsProb, CL, SEQUENCE);
-
    F=forward_proba_pair_wise (A->seq_al[ls[0][0]], A->seq_al[ls[1][0]], NumMatrixTypes,NumInsertStates,transMat, initialDistribution,TmatchProb,TinsProb, transProb);
    B=backward_proba_pair_wise (A->seq_al[ls[0][0]], A->seq_al[ls[1][0]], NumMatrixTypes,NumInsertStates,transMat, initialDistribution,TmatchProb,TinsProb, transProb);
    A->CL=ProbaMatrix2CL(A,ns, ls,NumMatrixTypes,NumInsertStates, F, B, thr,CL);
@@ -1460,6 +1463,7 @@ float ComputeTotalProbability (int seq1Length, int seq2Length,int NumMatrixTypes
       LOG_PLUS_EQUALS (&totalBackwardProb,forward[2*k+1 + NumMatrixTypes * (1 * (seq2Length+1) + 0)] +backward[2*k+1 + NumMatrixTypes * (1 * (seq2Length+1) + 0)]);
       LOG_PLUS_EQUALS (&totalBackwardProb,forward[2*k+2 + NumMatrixTypes * (0 * (seq2Length+1) + 1)] +backward[2*k+2 + NumMatrixTypes * (0 * (seq2Length+1) + 1)]);
       }
+
     return (totalForwardProb + totalBackwardProb) / 2;
   }
 
@@ -1502,7 +1506,9 @@ float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, i
 
   for (k = 0; k < NumMatrixTypes; k++)
     backward[NumMatrixTypes * ((seq1Length+1) * (seq2Length+1) - 1) + k] = initialDistribution[k];
-
+  
+  //Difference with Probcons: this emission is not added to the bward
+  backward[NumMatrixTypes * ((seq1Length+1) * (seq2Length+1) - 1) + 0]+=matchProb[(seq1Length+1) * (seq2Length+1) - 1];
   // remember offset for each index combination
   ij = (seq1Length+1) * (seq2Length+1) - 1;
 
@@ -1557,9 +1563,10 @@ float * backward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, i
         i1j1 -= NumMatrixTypes;
 	}
     }
-
+ 
   return backward;
 }
+
 float * forward_proba_pair_wise ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *matchProb, float ***insProb, float **transProb)
 {
   static float *forward;
@@ -1966,3 +1973,536 @@ float ** get_emitPairs (char *mat, char *alp, float **p, float *s)
     return p;
   }
 
+float * forward_proba_pair_wise_test_old ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *matchProb, float ***insProb, float **transProb)
+{
+  static float *forward;
+  static int max_l;
+  int k, i, j,ij, i1j1, i1j, ij1, seq1Length, seq2Length, m;
+  char *iter1, *iter2;
+  int l,a;
+
+ 
+
+  if (!seq1)
+    {
+      vfree (forward);
+      forward=NULL; max_l=0;
+      return NULL;
+    }
+  iter1=seq1-1;
+  iter2=seq2-1;
+  seq1Length=strlen (seq1);
+  seq2Length=strlen (seq2);
+  l=(seq1Length+1)*(seq2Length+1)*NumMatrixTypes;
+
+  if (!forward)
+    {
+      forward=(float*)vcalloc (l, sizeof (float));
+      max_l=l;
+    }
+  else if (max_l<l)
+    {
+      forward=(float*)vrealloc (forward, l*sizeof(float));
+      max_l=l;
+    }
+  for (a=0; a<l; a++)forward[a]=LOG_ZERO;
+
+  //f[1][1][0]
+  forward[0 + NumMatrixTypes * (1 * (seq2Length+1) + 1)] = initialDistribution[0] + matchProb[seq2Length+2];
+
+  // SEQ2
+  //S
+  //E
+  //Q
+  //1
+  //Sequences start at 1
+  //
+  for (k = 0; k < NumInsertStates; k++)
+    {
+      //forward[1][0][k]
+      forward[2*k+1 + NumMatrixTypes * (1 * (seq2Length+1) + 0)] = initialDistribution[2*k+1] + insProb[0][k][1];
+      //forward[1][0][k]
+      forward[2*k+2 + NumMatrixTypes * (0 * (seq2Length+1) + 1)] = initialDistribution[2*k+2] + insProb[1][k][1];
+    }
+
+  // remember offset for each index combination
+  ij = 0;                //f[i][j]
+  i1j = -seq2Length - 1; //f[i-1][j]
+  ij1 = -1;              //f[i][j-1]
+  i1j1 = -seq2Length - 2;//f[i-1][j-1]
+  
+  ij *= NumMatrixTypes;
+  i1j *= NumMatrixTypes;
+  ij1 *= NumMatrixTypes;
+  i1j1 *= NumMatrixTypes;
+  
+
+  // compute forward scores
+  for (m=0,i = 0; i <= seq1Length; i++)
+    {
+      for (j = 0; j <= seq2Length; j++, m++)
+	{
+	  if (i > 1 || j > 1)
+	    {
+	      if (i > 0 && j > 0)
+		{
+		  //Sum over all possible alignments
+		  forward[0 + ij] = forward[0 + i1j1] + transProb[0][0];
+		  for (k = 1; k < NumMatrixTypes; k++)
+		    {
+		      LOG_PLUS_EQUALS (&forward[0 + ij], forward[k + i1j1] + transProb[k][0]);
+		    }
+		  forward[0 + ij] += matchProb[m];
+		}
+	      if ( i > 0)
+		{
+		  for (k = 0; k < NumInsertStates; k++)
+		    {
+		      forward[2*k+1 + ij] = insProb[0][k][i] + LOG_ADD (forward[0 + i1j] + transProb[0][2*k+1],forward[2*k+1 + i1j] + transProb[2*k+1][2*k+1]);
+		    }
+		}
+	      if (j > 0)
+		{
+		  for (k = 0; k < NumInsertStates; k++)
+		    {
+		      forward[2*k+2 + ij] = insProb[1][k][j] +LOG_ADD (forward[0 + ij1] + transProb[0][2*k+2],forward[2*k+2 + ij1] + transProb[2*k+2][2*k+2]);
+		    }
+		}
+	    }
+	  
+	  ij += NumMatrixTypes;
+	  i1j += NumMatrixTypes;
+	  ij1 += NumMatrixTypes;
+	  i1j1 += NumMatrixTypes;
+	}
+      
+    }
+  return forward;
+}
+//old
+
+float * backward_proba_pair_wise_test_old ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *matchProb, float ***insProb, float **transProb)
+{
+  static float *backward;
+  static int max_l;
+
+
+  int k, i, j,ij, i1j1, i1j, ij1,a, l, seq1Length, seq2Length, m;
+  char c1, c2;
+  char *iter1, *iter2;
+
+  if (!seq1)
+    {
+      vfree (backward);
+      backward=NULL; max_l=0;
+      return NULL;
+    }
+
+  iter1=seq1-1;
+  iter2=seq2-1;
+  seq1Length=strlen (seq1);
+  seq2Length=strlen (seq2);
+  l=(seq1Length+1)*(seq2Length+1)*NumMatrixTypes;
+
+  if (!backward)
+    {
+      backward=(float*)vcalloc (l, sizeof (float));
+      max_l=l;
+    }
+  else if (max_l<l)
+    {
+      backward=(float*)vrealloc (backward, l*sizeof(float));
+      max_l=l;
+    }
+
+  for (a=0; a<l; a++)backward[a]=LOG_ZERO;
+
+  for (k = 0; k < NumMatrixTypes; k++)
+    backward[NumMatrixTypes * ((seq1Length+1) * (seq2Length+1) - 1) + k] = initialDistribution[k];
+  backward[NumMatrixTypes * ((seq1Length+1) * (seq2Length+1) - 1) + 0]+=matchProb[(seq1Length+1) * (seq2Length+1) - 1];
+  
+  // remember offset for each index combination
+  ij = (seq1Length+1) * (seq2Length+1) - 1;
+
+  i1j = ij + seq2Length + 1;
+  ij1 = ij + 1;
+  i1j1 = ij + seq2Length + 2;
+  ij *= NumMatrixTypes;
+  i1j *= NumMatrixTypes;
+  ij1 *= NumMatrixTypes;
+  i1j1 *= NumMatrixTypes;
+
+  // compute backward scores
+  for (i = seq1Length; i >= 0; i--)
+    {
+      c1 = (i == seq1Length) ? '~' : (unsigned char) iter1[i+1];
+      for (j = seq2Length; j >= 0; j--)
+	{
+	  c2 = (j == seq2Length) ? '~' : (unsigned char) iter2[j+1];
+
+	  if (i < seq1Length && j < seq2Length)
+	    {
+	      m=((i+1)*(seq2Length+1))+j+1;//The backward and the forward are offset by 1
+	      float ProbXY = backward[0 + i1j1] + matchProb[m];
+
+
+	      for (k = 0; k < NumMatrixTypes; k++)
+		{
+		  LOG_PLUS_EQUALS (&backward[k + ij], ProbXY + transProb[k][0]);
+		}
+	    }
+	  if (i < seq1Length)
+	    {
+	      for (k = 0; k < NumInsertStates; k++)
+		{
+		LOG_PLUS_EQUALS (&backward[0 + ij], backward[2*k+1 + i1j] + insProb[0][k][i+1] + transProb[0][2*k+1]);
+		LOG_PLUS_EQUALS (&backward[2*k+1 + ij], backward[2*k+1 + i1j] + insProb[0][k][i+1] + transProb[2*k+1][2*k+1]);
+		}
+	    }
+        if (j < seq2Length)
+	  {
+	    for (k = 0; k < NumInsertStates; k++)
+	      {
+		//+1 because the backward and the forward are offset by 1
+		LOG_PLUS_EQUALS (&backward[0 + ij], backward[2*k+2 + ij1] + insProb[1][k][j+1] + transProb[0][2*k+2]);
+		LOG_PLUS_EQUALS (&backward[2*k+2 + ij], backward[2*k+2 + ij1] + insProb[1][k][j+1] + transProb[2*k+2][2*k+2]);
+	      }
+	  }
+
+        ij -= NumMatrixTypes;
+        i1j -= NumMatrixTypes;
+        ij1 -= NumMatrixTypes;
+        i1j1 -= NumMatrixTypes;
+	}
+    }
+ 
+  return backward;
+}
+
+Constraint_list *ProbaMatrix2CL_test (Alignment *A, int *ns, int **ls, int NumMatrixTypes, int NumInsertStates, float *forward, float *backward, float thr, Constraint_list *CL)
+{
+  float totalProb;
+  int ij, i, j,k, I, J, s1, s2;
+  static int *entry;
+  static int **list;
+  static int list_max;
+  int sim;
+  int list_size;
+  int list_n;
+  int old_n=0;
+  double v;
+  static float F=4; //potential number of full suboptimal alignmnents incorporated in the library
+  static int tot_old, tot_new;
+  float ***fw, tfw;
+  float ***bw, tbw;
+
+
+  
+  
+  if (!A)
+    {
+      free_int (list, -1);list=NULL;
+      list_max=0;
+
+      vfree(entry); entry=NULL;
+      return NULL;
+    }
+
+  
+  
+  I=strlen (A->seq_al[ls[0][0]]);
+  J=strlen (A->seq_al[ls[1][0]]);
+  s1=name_is_in_list (A->name[ls[0][0]], (CL->S)->name, (CL->S)->nseq, 100);
+  s2=name_is_in_list (A->name[ls[1][0]], (CL->S)->name, (CL->S)->nseq, 100);
+
+  list_size=I*J;
+  
+  fw=(float***)vcalloc (NumMatrixTypes, sizeof (float**));
+  bw=(float***)vcalloc (NumMatrixTypes, sizeof (float**));
+  
+  for (k=0; k<NumMatrixTypes; k++)
+    {
+      fw[k]=declare_float (I+1, J+1);
+      bw[k]=declare_float (I+1, J+1);
+    }
+  
+  
+  if ( list_max<list_size)
+     {
+      free_int (list, -1);
+      list_max=list_size;
+      list=declare_int (list_max, 3);
+    }
+
+
+  totalProb = ComputeTotalProbability_test (I,J,NumMatrixTypes, NumInsertStates,forward, backward);
+
+  ij = 0;
+  for (list_n=0,ij=0,i =0; i <= I; i++)
+    {
+      for (j =0; j <= J; j++, ij+=NumMatrixTypes)
+	{
+	  for (k=0; k<NumMatrixTypes; k++)
+	    {
+	      fw[k][i][j]=forward [k+ij];
+	      bw[k][i][j]=backward[k+ij];
+	    }
+	 
+	  v= EXP (MIN(LOG_ONE,(forward[ij] + backward[ij] - totalProb)));
+	  if (v>thr)//Conservative reduction of the list size to speed up the sorting
+	    {
+	      HERE ("%d %d -- > %.2f", i, j,forward[ij] + backward[ij] -totalProb );
+	      list[list_n][0]=i;
+	      list[list_n][1]=j;
+	      list[list_n][2]=(int)((float)v*(float)NORM_F);
+	      list_n++;
+	    }
+	  if (v>0.01)old_n++;
+	}
+    }
+
+  if (2==1)
+    {
+      for (i=0; i<=I; i++)
+	for (j=0; j<=J; j++)
+	  {
+	    int ns=NumMatrixTypes;
+	    for (k=0; k<ns; k++)
+	      {
+		fprintf ( stderr, "\ni=%2d j=%2d K=%d F=%f B=%f", i, j, k, fw[k][i][j], bw[k][i][j]);
+	      }
+	  }
+    }
+  tbw=tfw=LOG_ZERO;
+  for (k=0; k<NumMatrixTypes; k++)
+    {
+      //LOG_PLUS_EQUALS(&tbw, bw[k][1][1]);
+      //LOG_PLUS_EQUALS(&tbw, fw[k][1][1]);
+      
+      LOG_PLUS_EQUALS(&tfw, fw[k][I][J]);
+      LOG_PLUS_EQUALS(&tfw, bw[k][I][J]);
+    }
+      
+  HERE ("FW: %.5f BW: %.5f", tfw, tbw);
+    
+  sort_int_inv (list, 3, 2, 0, list_n-1);
+  if (!entry)entry=(int*)vcalloc ( CL->entry_len+1, CL->el_size);
+
+  list_n=MIN(list_n,(F*MIN(I,J)));
+  for (i=0; i<list_n; i++)
+    {
+       entry[SEQ1]=s1;
+       entry[SEQ2]=s2;
+       entry[R1]  =list[i][0];
+       entry[R2]  =list[i][1];
+       entry[WE]  =list[i][2];
+       entry[CONS]=1;
+       add_entry2list (entry,A->CL);
+    }
+  tot_new+=list_n;
+  tot_old+=old_n;
+  // HERE ("LIB_SIZE NEW: %d (new) %d (old) [%.2f]", list_n, old_n, (float)tot_new/(float)tot_old);
+  return A->CL;
+}
+
+float ComputeTotalProbability_test (int seq1Length, int seq2Length,int NumMatrixTypes, int NumInsertStates,float *forward, float *backward)
+{
+
+    float totalForwardProb = LOG_ZERO;
+    float totalBackwardProb = LOG_ZERO;
+    int k;
+   
+    for (k = 0; k < NumMatrixTypes; k++)
+      {
+      LOG_PLUS_EQUALS (&totalForwardProb,forward[k + NumMatrixTypes * ((seq1Length+1) * (seq2Length+1) - 1)] + backward[k + NumMatrixTypes * ((seq1Length+1) * (seq2Length+1) - 1)]);
+      }
+
+    totalBackwardProb =forward[0 + NumMatrixTypes * (1 * (seq2Length+1) + 1)] +backward[0 + NumMatrixTypes * (1 * (seq2Length+1) + 1)];
+
+    for (k = 0; k < NumInsertStates; k++)
+      {
+      LOG_PLUS_EQUALS (&totalBackwardProb,forward[2*k+1 + NumMatrixTypes * (1 * (seq2Length+1) + 0)] +backward[2*k+1 + NumMatrixTypes * (1 * (seq2Length+1) + 0)]);
+      LOG_PLUS_EQUALS (&totalBackwardProb,forward[2*k+2 + NumMatrixTypes * (0 * (seq2Length+1) + 1)] +backward[2*k+2 + NumMatrixTypes * (0 * (seq2Length+1) + 1)]);
+      }
+    HERE ("\n\n-----FW1 %.5f BW1 %.5f",totalForwardProb, totalBackwardProb); 
+    return (totalForwardProb + totalBackwardProb) / 2;
+  }
+float * forward_proba_pair_wise_test ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *matchProb, float ***insProb, float **transProb)
+{
+  static float *forward;
+  static int max_l;
+  int k, i, j,ij, i1j1, i1j, ij1, seq1Length, seq2Length, m;
+  char *iter1, *iter2;
+  int l1, l2,l,a;
+  float ***fw;
+  int ns=NumMatrixTypes;
+
+  if (!seq1)
+    {
+      vfree (forward);
+      forward=NULL; max_l=0;
+      return NULL;
+    }
+  iter1=seq1-1;
+  iter2=seq2-1;
+  l1=seq1Length=strlen (seq1);
+  l2=seq2Length=strlen (seq2);
+  l=(seq1Length+1)*(seq2Length+1)*NumMatrixTypes;
+  if (!forward)
+    {
+      forward=(float*)vcalloc (l, sizeof (float));
+      max_l=l;
+    }
+  else if (max_l<l)
+    {
+      forward=(float*)vrealloc (forward, l*sizeof(float));
+      max_l=l;
+    }
+  for (a=0; a<l; a++)forward[a]=LOG_ZERO;
+ 
+  fw=(float***)vcalloc (ns, sizeof (float**));
+  for (k=0; k<ns; k++)fw[k]=declare_float (l1+1, l2+1);
+  for (i=0; i<=l1; i++)for (j=0; j<=l2; j++)for (k=0; k<ns; k++)fw[k][i][j]=LOG_ZERO;
+  
+  fw[0][1][1]=initialDistribution[0] + matchProb[l2+2];
+  for (k = 0; k <NumInsertStates; k++)
+    {
+      fw[2*k+1][1][0]=initialDistribution[2*k+1] + insProb[0][k][1];
+      fw[2*k+2][0][1]=initialDistribution[2*k+2] + insProb[1][k][1];
+    }
+  for (m=0,i = 0; i <=l1; i++)
+    {
+      for (j = 0; j <= l2; j++, m++)
+	{
+	  if (i > 1 || j > 1)
+	    {
+	      if (i > 0 && j > 0)
+		{
+		  fw[0][i][j]=fw[0][i-1][j-1]+transProb[0][0];
+		  for (k = 1; k < NumMatrixTypes; k++)
+		    {
+		      LOG_PLUS_EQUALS (&fw[0][i][j], fw[k][i-1][j-1] + transProb[k][0]);
+		    }
+		  fw[0][i][j]+= matchProb[m];
+		}
+	      if ( i > 0)
+		{
+		  for (k = 0; k < NumInsertStates; k++)
+		    {
+		      fw[2*k+1][i][j] = insProb[0][k][i] + LOG_ADD (fw[0][i-1][j] + transProb[0][2*k+1],fw[2*k+1][i-1][j] + transProb[2*k+1][2*k+1]);
+		    }
+		}
+	      if (j > 0)
+		{
+		  for (k = 0; k < NumInsertStates; k++)
+		    {
+		      fw[2*k+2][i][j] = insProb[1][k][j] +LOG_ADD (fw[0][i][j-1] + transProb[0][2*k+2],fw[2*k+2][i][j-1] + transProb[2*k+2][2*k+2]);
+		    }
+		}
+	    }
+	}
+    }
+  
+  for (m=0,i=0;i<=l1; i++)
+    for (j=0; j<=l2; j++)
+      for (k=0; k<ns; k++, m++)
+	forward[m]=fw[k][i][j];
+  
+  return forward;
+}
+
+//new
+
+float * backward_proba_pair_wise_test ( char *seq1, char *seq2, int NumMatrixTypes, int NumInsertStates, float **transMat, float *initialDistribution,float *imatchProb, float ***insProb, float **transProb)
+{
+  static float *backward;
+  static int max_l;
+
+
+  int k, i, j,ij, i1j1, i1j, ij1,a, l, seq1Length, seq2Length,l1,l2, m;
+  char c1, c2;
+  char *iter1, *iter2;
+  float ***bw;
+  int ns=NumMatrixTypes;
+  float **matchProb;
+  
+  if (!seq1)
+    {
+      vfree (backward);
+      backward=NULL; max_l=0;
+      return NULL;
+    }
+
+  iter1=seq1-1;
+  iter2=seq2-1;
+  l1=seq1Length=strlen (seq1);
+  l2=seq2Length=strlen (seq2);
+  l=(seq1Length+1)*(seq2Length+1)*NumMatrixTypes;
+
+  if (!backward)
+    {
+      backward=(float*)vcalloc (l, sizeof (float));
+      max_l=l;
+    }
+  else if (max_l<l)
+    {
+      backward=(float*)vrealloc (backward, l*sizeof(float));
+      max_l=l;
+    }
+
+  bw=(float***)vcalloc (ns, sizeof (float**));
+  for (k=0; k<ns; k++)bw[k]=declare_float (l1+2, l2+2);
+  for (i=0; i<=(l1+1); i++)for (j=0; j<=(l2+1); j++)for (k=0; k<ns; k++)bw[k][i][j]=LOG_ZERO;
+  
+  matchProb=declare_float (l1+1, l2+1);
+  for (m=0,i=0;i<=l1;i++)for (j=0; j<=l2; j++, m++)matchProb[i][j]=imatchProb[m];
+
+  for (a=0; a<l; a++)backward[a]=LOG_ZERO;
+
+  bw[0][l1][l2]=initialDistribution[0]+matchProb[l1][l2];
+  for (k = 0; k <NumInsertStates; k++)
+    {
+      bw[2*k+1][l1][l2+1]=initialDistribution[2*k+1] + insProb[0][k][1];
+      bw[2*k+2][l1+1][l2]=initialDistribution[2*k+2] + insProb[1][k][1];
+    }
+ 
+  
+  // compute backward scores
+  for (i = seq1Length+1; i > 0; i--)
+    {
+      for (j = seq2Length+1; j > 0; j--)
+	{
+	  if (i<seq1Length || j<seq2Length)
+	    {
+	      if (i < (seq1Length+1) && (j < seq2Length+1))
+		{
+		  bw[0][i][j]=bw[0][i+1][j+1]+transProb[0][0];
+		  for (k = 1; k < NumMatrixTypes; k++)
+		    {
+		      LOG_PLUS_EQUALS (&bw[0][i][j], bw[k][i+1][j+1] + transProb[0][k]);
+		    }
+		  bw[0][i][j]+=matchProb[i][j];
+		}
+	      if (i < (seq1Length+1))
+		{
+		  for (k = 0; k < NumInsertStates; k++)
+		    {
+		      bw[2*k+1][i][j]= insProb[0][k][i] + LOG_ADD (bw[0][i+1][j] + transProb[2*k+1][0],bw[2*k+1][i+1][j] + transProb[2*k+1][2*k+1]);
+		    }
+		}
+	      if (j < (seq2Length+1))
+		{
+		  for (k = 0; k < NumInsertStates; k++)
+		    {
+		      bw[2*k+2][i][j] = insProb[1][k][j] +LOG_ADD (bw[0][i][j+1] + transProb[2*k+2][0],bw[2*k+2][i][j+1] + transProb[2*k+2][2*k+2]);
+		    }
+		}
+	    }
+	}
+    }
+  for (m=0,i=0;i<=l1; i++)
+    for (j=0; j<=l2; j++)
+      for (k=0; k<ns; k++, m++)
+	backward[m]=bw[k][i][j];
+  return backward;
+}

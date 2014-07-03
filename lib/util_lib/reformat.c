@@ -442,7 +442,10 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +treelist2bs.........Turns a list of tree into a tree with BS support");
 		fprintf ( stdout, "\n     .............cons....Runs consense majoprity rule. Distances are the BS values");
 		fprintf ( stdout, "\n     .............best....identifies the tree with the best support");
-		fprintf ( stdout, "\n     .............first...Reports support for the first tree in the list");  			fprintf ( stdout, "\nMatrix Analysis___________________________________________________");
+		fprintf ( stdout, "\n     .............first...Reports support for the first tree in the list");  			
+		fprintf ( stdout, "\nMatrix Analysis___________________________________________________");
+		fprintf ( stdout, "\n     +aln2proba_mat.......Computes the proba of all mutations on MSA provided in fasta format (i.e. each name is a valid MSA file");
+		
 		fprintf ( stdout, "\n     +aln2mat_diaa........computes a dinucleotide matrix on a list of aln");
 		fprintf ( stdout, "\n     +aln2mat.............computes a log odd matrix. Input is a list of MSA provided in fasta format (i.e. each name is a valid MSA file");
 		fprintf ( stdout, "\n     +seq2lat_mat.........computes a transition matrix on seq provided via -in");
@@ -12919,6 +12922,11 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   aln2mat_diaa (D1->S);
 	 }
+       else if ( strm (action, "aln2proba_mat"))
+	 {
+	   aln2proba_mat(D1->S);
+	 }
+
        else if ( strm (action, "aln2mat"))
 	 {
 	   aln2mat(D1->S);
@@ -13209,6 +13217,80 @@ void aln2mat_diaa (Sequence *S)
 	  }
   myexit (EXIT_SUCCESS);
 }
+void aln2proba_mat (Sequence *S)
+{
+  int a, aa1, aa3;
+  int s1, s2, p;
+  Alignment *A;
+  int **mat;
+  int **m;
+  int *c;
+  int naa=0;
+  int count=0;
+  double Delta=0.00001;
+  int *alp;
+  int tot,u;
+  double observed, expected, f_diaa1, f_diaa2, v;
+  char *balp;
+
+  balp=(char*)vcalloc ( 256, sizeof (char));
+  for (a=0; a<strlen (BLAST_AA_ALPHABET); a++)balp[BLAST_AA_ALPHABET[a]]=a;
+
+  mat=declare_int (256, 256);
+  alp=(int*)vcalloc (256, sizeof (int));
+  for (a=0; a<26; a++)alp[a+'a']=1;
+  alp['b']=0;
+  alp['j']=0;
+  alp['o']=0;
+  alp['u']=0;
+  alp['x']=0;
+  alp['z']=0;
+
+  m=(int**)declare_arrayN (2,sizeof (int),26,26);
+  c=(int*)declare_arrayN  (1,sizeof (int),26);
+  
+  for ( a=0; a< S->nseq; a++)
+    {
+      fprintf ( stderr, "%s\n", S->name[a]);
+      A=main_read_aln (S->name[a],NULL);
+      for (s1=0; s1<A->nseq; s1++) lower_string (A->seq_al[s1]);
+
+      for ( s1=0; s1<A->nseq-1; s1++)
+	for (s2=s1+1; s2<A->nseq; s2++)
+	  {
+	    for (p=0; p<A->len_aln-1; p++)
+	      {
+
+		u =alp[aa1=A->seq_al[s1][p]];
+		u+=alp[aa3=A->seq_al[s2][p]];
+
+		if ( u==2)
+		  {
+		    aa1-='a';aa3-='a';
+
+		    c[aa1]++;
+		    c[aa3]++;
+		    m[aa1][aa3]++;
+		    count+=2;
+		  }
+	      }
+	  }
+      free_aln (A);
+    }
+  fprintf ( stdout, "# PROBABILITY_MATRIX_01\n");
+  naa=26;
+  
+  for (aa1=0; aa1<naa; aa1++)
+      for (aa3=0; aa3<naa; aa3++)
+	  {
+	    u =alp[aa1+'a'];
+	    u+=alp[aa3+'a'];
+	    fprintf (stdout,"%c %c %.5f\n",aa1+'a', aa3+'a', (float)(m[aa1][aa3]+m[aa3][aa1])/(float)count); 
+	  }
+ 
+  myexit (EXIT_SUCCESS);
+}
+
 void aln2mat (Sequence *S)
 {
   int a, aa1, aa3;
