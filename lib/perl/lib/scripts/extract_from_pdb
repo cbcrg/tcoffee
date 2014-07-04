@@ -594,7 +594,7 @@ $structure_file=vtmpnam();
 if ( $debug){print STDERR "\n\tCheck_point #1: $tmp_pdb_file  $structure_file\n";}
 
 $INFILE=vfopen ("$tmp_pdb_file", "r"); 
-$TMP=vfopen ("$structure_file", "w");
+my $TMP=vfopen ("$structure_file", "w");
 
 $print_model=1;
 $in_model=0;
