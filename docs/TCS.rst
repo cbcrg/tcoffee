@@ -147,8 +147,8 @@ Supplement data
 
 	* `yeasts <http://www.ncbi.nlm.nih.gov/pubmed/18218900>`_ [3]_
 	* `subset gene list <http://www.tcoffee.org/Projects/tcs/geneList_YeastToL.txt>`_ : at least one aligner yields a phylogeny topology identical to the canonical yeast ToL
-	* `tips16 <http://molevol.cmima.csic.es/castresana/Gblocks.html>`_ from Gblocks [4]_
-	* `tips32, tips64 <http://trimal.cgenomics.org/>`_ from trimAl [5]_
+	* `tips16 <http://molevol.cmima.csic.es/castresana/data/syst_biol_2007_alignments.tar.Z>`_ from Gblocks [4]_
+	* `tips32, tips64 <ftp://trimal.cgenomics.org/trimal/>`_ from trimAl [5]_
 
 
 .. Note:: Please cite `Chang, J.-M., Tommaso, P. & Notredame, C. TCS: A New Multiple Sequence Alignment Reliability Measure to Estimate Alignment Accuracy and Improve Phylogenetic Tree Reconstruction. Molecular biology and evolution 31, 1625–37 (2014). doi: 10.1093/molbev/msu117 <http://www.ncbi.nlm.nih.gov/pubmed/24694831>`_.
