@@ -2715,12 +2715,11 @@ int evaluate_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, int r2)
 	{
 	  return evaluate_aln_profile_score ( CL, s1,r1, s2, r2);
 	}
-     
+      
       if (r1>0 && r2>0)
 	    {
 	    r1--;
 	    r2--;
-	    
 	    return CL->M[(CL->S)->seq[s1][r1]-'A'][(CL->S)->seq[s2][r2]-'A']*SCORE_K;
 	    }
 	else
@@ -5762,7 +5761,7 @@ Constraint_list * choose_extension_mode ( char *extend_mode, Constraint_list *CL
     }
   else if (  strm ( extend_mode, "matrix"))
     {
-
+      
       CL->evaluate_residue_pair=evaluate_matrix_score;
       CL->get_dp_cost=cw_profile_get_dp_cost;
       CL->normalise=1;

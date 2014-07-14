@@ -193,6 +193,18 @@ int ** tree2cluster (NT_node T, float thres);
 int ** make_sub_tree_list ( NT_node **T, int nseq, int n_node);
 void make_all_sub_tree_list ( NT_node N, int **list, int *n);
 void make_one_sub_tree_list ( NT_node T, int *list);
+
+/*********************************************************************/
+/*                                                                   */
+/*                                   New Tree Parsing                */
+/*                                                                   */
+/*********************************************************************/
+Sequence * get_nexus    (char*file);
+Sequence * get_treelist (char *fname);
+Sequence*get_fasta_tree (char *fname, char *comment_out);
+void output_fasta_tree (char *fname, Alignment*A);
+void output_treelist (char *fname, Alignment*A);
+
 NT_node main_read_tree(char *treefile);
 
 NT_node new_read_tree ( char *teefile);
@@ -253,6 +265,8 @@ int ** treelist2avg_treecmp (NT_node *L, char *file);
 Alignment *treelist2cons (Alignment *T);
 Alignment *tree2node_support      (char *newicktree,Alignment *T);
 float      treelist2avg_node_support (Alignment *T);
+
+int **     treelist2ns (NT_node T,Sequence *B,char *ref);
 Alignment *treelist2node_support (Alignment *T);
 Alignment *treelist2node_support_best (Alignment *T);
 
@@ -265,4 +279,13 @@ Sequence * treelist2sub_seq ( Sequence *S, int f);
 
 int treelist_file2consense (char *tree_file, char *outtree, char *outfile);
 float group2tree_score (Sequence *G, char *nwtree);
+
+NT_node tree2nni (NT_node T, NT_node S);
+int has_nni (NT_node N);
+NT_node nni (NT_node S, int n);
+
+
+NT_node nni (NT_node S, int n);
+int has_nni (NT_node N);
+NT_node tree2nni (NT_node T, NT_node S);
 #endif

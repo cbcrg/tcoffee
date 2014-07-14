@@ -1324,7 +1324,7 @@ int** cl2sorted_diagonals_cs   ( Alignment *A, int *ns, int **ls, Constraint_lis
 int list2nodup_list (Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
 int fill_matrix ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in);
 
-int list2nodup_list ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
+ int list2nodup_list ( Alignment *A, int *ns, int **ls, Constraint_list *CL, int ***list_in, int *n_in)
 {
   int **list;
   int n, a, b, c;

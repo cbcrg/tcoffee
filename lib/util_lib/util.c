@@ -2900,7 +2900,7 @@ char **  string2list2 ( char *string, char *separators)
 	    s=strtok (NULL, separators);
 
 	  }
-
+    
   if ( n==0){vfree(buf); return NULL;}
 
   list=(char**)declare_arrayN (2, sizeof (char), n+2, max_len+1);
@@ -2913,7 +2913,7 @@ char **  string2list2 ( char *string, char *separators)
 	    sprintf (list[n++], "%s",s);
 	    s=strtok (NULL, separators);
 	  }
-
+  
   sprintf (list[0], "%d", n);
 
   vfree (buf);
@@ -6992,7 +6992,7 @@ char *vfgets ( char *buf, FILE *fp)
   l=0;
   c=fgetc (fp);
   
-  if ( (c==EOF))return NULL;
+  if ( (c==EOF)){return NULL;}
   ungetc (c, fp);
     
   while ( (c=fgetc (fp))!='\n' && c!=EOF)

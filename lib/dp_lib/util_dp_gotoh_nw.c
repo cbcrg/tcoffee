@@ -786,7 +786,9 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 	int dim;
 	int ibit=0;
 	int k;
-	int sample=0;//road==0, random tie; road=1: upper road; road=2 lower road;
+	static int sample=0;//road==0, random tie; road=1: upper road; road=2 lower road;
+	static int set_sample;
+	
 	/********Prepare penalties*******/
 	gop=CL->gop*SCORE_K;
 	gep=CL->gep*SCORE_K;
@@ -810,9 +812,12 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 
 /*DO MEMORY ALLOCATION FOR DP*/
 
-
-	sample=atoigetenv ("SAMPLE_DP_4_TCOFFEE");
-
+	if (!set_sample)
+	  {
+	    set_sample=1;
+	    sample=atoigetenv ("SAMPLE_DP_4_TCOFFEE");
+	  }
+	
 	lenal[0]=strlen (A->seq_al[l_s[0][0]]);
 	lenal[1]=strlen (A->seq_al[l_s[1][0]]);
 	len= MAX(lenal[0],lenal[1])+1;

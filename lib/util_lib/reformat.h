@@ -87,7 +87,9 @@ int is_lib_01 (char *name);
 int is_lib_02 (char *name);
 int is_lib_list ( char *name);
 int is_single_seq_weight_file (char *fname);
-int is_newick (char *name);
+int is_treelist(char *name);
+int is_newick  (char *name);
+int is_nexus (char *file);
 
 int is_method ( char *file);
 
@@ -132,7 +134,6 @@ Sequence* get_sequence_dali          ( char *fname);
 Sequence* get_pir_sequence           ( char *fname, char *comment_name);
 Sequence* perl_reformat2fasta        ( char *perl_script, char *file);
 
-Sequence* get_fasta_tree             ( char *fname, char *comment_name);
 Sequence* get_fasta_sequence         ( char *fname, char *comment_name);
 Sequence* get_fasta_sequence_num     ( char *fname, char *comment_name);
 Sequence* get_fasta_sequence_raw     ( char *fname, char *comment_name);
@@ -201,7 +202,6 @@ void output_mult_fasta_seq (char *fname, Alignment*A, int n );
 
 void main_output_fasta_seq ( char *fname, Alignment *A, int header);
 void output_fasta_simple   ( char *name, Sequence *S);
-void output_fasta_tree ( char *fname, Alignment *A);
 void output_fasta_seqS (char *fname, Sequence *S );
 void output_fasta_seq1 (char *fname, Alignment*A );
 void output_fasta_seq2 (char *fname, Alignment*A );

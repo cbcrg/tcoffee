@@ -912,11 +912,15 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 
 		}
 
-
-	else if ( strm (in_format, "treefile_list"))
+	else if (strm  (in_format, "nexus"))
+	  {
+	    D->S=get_nexus(in_file);
+	    D->A=seq2aln(D->S, D->A,NO_PAD);
+	  }
+	else if ( strm (in_format, "treefile_list") || strm(in_format, "treelist"))
 	  {
 
-	    D->S=get_tree_file_list(in_file);
+	    D->S=get_treelist(in_file);
 	    D->A=seq2aln(D->S, D->A,NO_PAD);
 	  }
 	else if ( strm (in_format, "file_list") || strm (in_format, "list"))
@@ -924,6 +928,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	    D->S=get_file_list(in_file);
 	    D->A=seq2aln(D->S, D->A,KEEP_GAP);
 	  }
+	
 	else if ( strm (in_format, "fasta_tree"))
 	  {
 
@@ -933,63 +938,49 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	  }
 	else if ( strm (in_format, "tree_list") || strm (in_format, "treelist"))
 	  {
-	    char **line;
-	    FILE *seq;
-	    int n=0;
-	    char *seq_file;
-	    FILE *fp;
-
-	    seq_file=vtmpnam(NULL);
-	    seq=vfopen (seq_file, "w");
-	    line=file2lines (in_file);
-	    fp=vfopen (seq_file, "w");
-	    for ( n=1; n<atoi(line[0]); n++)
-	      {
-		fprintf ( fp, ">Tree_%d\n%s\n", n,line[n]);
-	      }
-	    vfclose (fp);
-
-	    free_char (line, -1);
-	    return read_data_structure ( "fasta_tree",seq_file,RAD);
+	    D->S=get_treelist (in_file);
+	    D->A=seq2aln(D->S, D->A,NO_PAD);
 	  }
 
 	else if (strm (in_format, "matrix"))
 	  {
 	    D->M=read_matrice (in_file);
 	  }
+	
 	else if (strm4 (in_format, "newick_tree", "newick", "nh", "new_hampshire"))
 	  {
+	   
 	    D->T=main_read_tree (in_file);
 	    D->S=tree2seq(D->T, NULL);
 	    D->A=seq2aln (D->S,D->A, 0);
 	  }
 	else if (strm (in_format, "blast_aln"))
-	        {
-		  if (read_blast_aln (in_file, D->A))
-		  {
-		    D->S=aln2seq(D->A);
-		  }
-		else
-		  {
-		    return NULL;
-		  }
-		}
+	  {
+	    if (read_blast_aln (in_file, D->A))
+	      {
+		D->S=aln2seq(D->A);
+	      }
+	    else
+	      {
+		return NULL;
+	      }
+	  }
 	else if ( strm( in_format,"number_aln"))
-		{
-		read_number_aln (in_file, D->A);
-		D->S=aln2seq(D->A);
-		}
+	  {
+	    read_number_aln (in_file, D->A);
+	    D->S=aln2seq(D->A);
+	  }
 	else if ( strm( in_format,"stockholm_aln"))
-		{
-		read_stockholm_aln (in_file, D->A);
-		D->S=aln2seq(D->A);
-		}
+	  {
+	    read_stockholm_aln (in_file, D->A);
+	    D->S=aln2seq(D->A);
+	  }
 	else if ( strm( in_format,"gotoh_aln"))
-		{
-		read_gotoh_aln (in_file, D->A);
-		D->S=aln2seq(D->A);
-		}
-
+	  {
+	    read_gotoh_aln (in_file, D->A);
+	    D->S=aln2seq(D->A);
+	  }
+	
 	else if ( strm ( in_format, "msf_aln"))
 		{
 		read_msf_aln (in_file, D->A);
@@ -1319,52 +1310,55 @@ char * identify_seq_format ( char *file)
        else format[0]='\0';
 
 
-		int format_val  = 0;
+       int format_val  = 0;
        if ( !check_file_exists(file))
 	 {
 	   fprintf (stderr, "ERROR: %s Does Not Exist [FATAL:%s]\n",file, PROGRAM);
 	   myexit (EXIT_FAILURE);
 	 }
-		else
-
-
-// 	if ( format_is_fasta_seq(file))sprintf ( format, "fasta_seq");
-// 	else if ( format_is_fasta_aln(file,1))
-// 	sprintf ( format, "fasta_aln");
-       if ( is_stockholm_aln (file))sprintf (format, "stockholm_aln");
-       else if ( is_blast_file (file))sprintf ( format, "blast_aln");
-       else if ( is_pdb_file(file))sprintf ( format, "pdb_struc");
-	   else if (format_val = fast_format_determination(file))
-	   {
-		   switch( format_val )
-		   {
-			   case 1 : sprintf ( format, "fasta_seq");
-			   break;
-			   case 2 : sprintf ( format, "fasta_aln");
-			   break;
-			   case 3 : sprintf ( format, "pir_seq");
-			   break;
-			   case 4 : sprintf ( format, "pir_aln");
-			   break;
-		   }
-	   }
-       else if ( format_is_msf      (file))sprintf ( format, "msf_aln");
-//        else if ( format_is_pir_aln  (file))sprintf ( format, "pir_aln");
-//        else if ( format_is_pir_seq  (file))sprintf ( format, "pir_seq");
-       else if ( format_is_oligo    (file))sprintf ( format, "oligo_aln");
-       else if ( format_is_swissprot     (file))sprintf ( format, "swissprot_seq");
-       else if ( format_is_saga     (file))sprintf ( format, "clustal_aln");
-       else if ( format_is_conc_aln (file))sprintf ( format, "conc_aln");
-       else if ( is_lib (file))sprintf ( format, "tc_lib");
-       else if ( is_lib_02 (file))sprintf ( format, "tc_lib_02");
-       else if ( is_newick(file))sprintf ( format, "newick_tree");
-
        else
-	 {
-	   //add_warning ( stderr, "\nThe Format of File: %s was not recognized [SERIOUS:%s]",file, PROGRAM);
-	   ;
-	 }
-// 	 printf("DETERMINED FORMAT: %s\n", format);
+	 
+	 
+	 // 	if ( format_is_fasta_seq(file))sprintf ( format, "fasta_seq");
+	 // 	else if ( format_is_fasta_aln(file,1))
+	 // 	sprintf ( format, "fasta_aln");
+	 if ( is_stockholm_aln (file))sprintf (format, "stockholm_aln");
+	 else if ( is_blast_file (file))sprintf ( format, "blast_aln");
+	 else if ( is_pdb_file(file))sprintf ( format, "pdb_struc");
+	 else if (format_val = fast_format_determination(file))
+	   {
+	     switch( format_val )
+	       {
+	       case 1 : sprintf ( format, "fasta_seq");
+		 break;
+	       case 2 : sprintf ( format, "fasta_aln");
+		 break;
+	       case 3 : sprintf ( format, "pir_seq");
+		 break;
+	       case 4 : sprintf ( format, "pir_aln");
+		 break;
+	       }
+	   }
+	 else if ( format_is_msf      (file))sprintf ( format, "msf_aln");
+       //        else if ( format_is_pir_aln  (file))sprintf ( format, "pir_aln");
+       //        else if ( format_is_pir_seq  (file))sprintf ( format, "pir_seq");
+	 else if ( format_is_oligo    (file))sprintf ( format, "oligo_aln");
+	 else if ( format_is_swissprot     (file))sprintf ( format, "swissprot_seq");
+	 else if ( format_is_saga     (file))sprintf ( format, "clustal_aln");
+	 else if ( format_is_conc_aln (file))sprintf ( format, "conc_aln");
+	 else if ( is_lib (file))sprintf ( format, "tc_lib");
+	 else if ( is_lib_02 (file))sprintf ( format, "tc_lib_02");
+	 else if ( is_treelist (file))sprintf ( format, "treelist");
+	 else if ( is_newick(file))sprintf ( format, "newick_tree");
+         else if ( is_nexus (file))sprintf ( format, "nexus");
+       
+       
+	 else
+	   {
+	     //add_warning ( stderr, "\nThe Format of File: %s was not recognized [SERIOUS:%s]",file, PROGRAM);
+	     ;
+	   }
+       // 	 printf("DETERMINED FORMAT: %s\n", format);
        return format;
        }
 char **identify_list_format ( char **list, int n)
@@ -1857,6 +1851,28 @@ int is_matrix (char *name)
        if ((m=read_matrice (name))!=NULL){free_int (m, -1); return 1;}
        return 0;
        }
+int is_treelist (char *name)
+{
+  int c;
+  FILE *fp;
+  static char *buf=NULL;
+  int cont=1;
+  int n=0;
+  fp=vfopen (name, "r");
+  while ((buf=vfgets(buf, fp)) && cont && n<2)
+    {
+      cont=0;
+      if (buf[0]=='(')
+	{
+	  int l=strlen (buf)-1;
+      	  while (isspace(buf[l]))l--;
+	  if (buf[l]==';'){n++;cont=1;}
+	}
+    }
+  vfclose (fp);
+  if (n>1) return 1;
+  return 0;
+}
 int is_newick (char *name)
    {
      int c;
@@ -1926,6 +1942,16 @@ int is_single_seq_weight_file ( char *name)
   return token_is_in_file ( name, "SINGLE_SEQ_WEIGHT_FORMAT_01");
 
 }
+int is_nexus (char *file)
+{
+  FILE *fp;
+  if ((fp=find_token_in_file_nlines (file, NULL, "#NEXUS",10)))
+    {
+      vfclose (fp);
+      return 1;
+    }
+  return 0;
+}
 int is_stockholm_aln (char *file)
 {
   FILE *fp;
@@ -1959,6 +1985,7 @@ int is_lib_01 (char *name)
 	 else if (token_is_in_file (name, "SEQ_1_TO_N"))return 1;
 	 else return 0;
        }
+
 int is_lib_list ( char *name)
 {
   if ( !check_file_exists (name))return 0;
@@ -3066,18 +3093,22 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 
 		if (!D1)return 1;
 		output_fasta_seq (out_file,D1->A);
-		}
+	  }
+	else if (strm (out_format, "treelist") ||strm (out_format, "nexus") )
+	  {
+	    output_treelist (out_file, D1->A);
+	  }
 	else if (strm (out_format, "fasta_tree") )
-		{
-		if (!D1)return 1;
-		output_fasta_tree (out_file,D1->A);
-		}
-
+	  {
+	    if (!D1)return 1;
+	    output_fasta_tree (out_file,D1->A);
+	  }
+	
 	else if ( strm ( out_format, "gotoh_seq"))
-		{
-		if (!D1)return 1;
-		output_gotoh_seq (out_file,D1->A);
-		}
+	  {
+	    if (!D1)return 1;
+	    output_gotoh_seq (out_file,D1->A);
+	  }
 	else if ( strm (out_format, "fasta_seq1"))
 	        {
 		if (!D1)return 1;
@@ -4443,30 +4474,6 @@ Sequence* get_fasta_sequence_num (char *fname, char *comment_out)
 }
 
 
-Sequence *get_tree_file_list ( char *fname)
-{
-
-  char ***list;
-  char *tmp;
-  int a;
-  FILE *fp;
-
-  tmp=vtmpnam (NULL);
-  list=file2list (fname, "\n");
-  fp=vfopen (tmp, "w");
-  a=0;
-  while (list[a] && !isspace(list[a][1][0]))
-    {
-      char *s;
-      s=file2string (list[a][1]);
-      fprintf ( fp, ">%s\n%s\n", list[a][1], (s)?s:"");
-      a++;
-    }
-  vfclose (fp);
-  free_arrayN((void ***)list, 3);
-  return get_fasta_tree (tmp, NULL);
-}
-
 
 Sequence *get_file_list ( char *fname)
 {
@@ -4492,106 +4499,6 @@ Sequence *get_file_list ( char *fname)
 }
 
 
-Sequence*get_fasta_tree (char *fname, char *comment_out)
-{
-  Sequence *LS;
-    char *buffer;
-    FILE *fp;
-    int a;
-
-    int   c;
-    char *name;
-    int clen=0;
-    int current=0;
-    int p=0;
-    int max;
-    int max_len_seq=0;
-    int min_len_seq=0;
-    int nseq=0, l=0;
-
-
-
-
-    int *sub;
-
-    buffer=(char*)vcalloc (1000, sizeof (char));
-    name=(char*)vcalloc ( 100, sizeof (char));
-
-    nseq=count_n_char_x_in_file(fname, '>');
-    min_len_seq=max=count_n_char_in_file(fname);
-    sub=(int*)vcalloc (max+1, sizeof (int));
-
-    fp=vfopen (fname,"r");
-
-
-    c=fgetc(fp);
-    while (c!=EOF)
-	 	{
-		 if (c=='>')
-			{
-			fscanf_seq_name (fp,name);
-			while ((c=fgetc(fp))!='\n' && c!=EOF);
-			while ((c=fgetc(fp))!='>' && c!=EOF)
-			  if (isgraph(c))
-			    clen++;
-			 max_len_seq=(clen> max_len_seq)?clen: max_len_seq;
-			 min_len_seq=(clen< min_len_seq)?clen: min_len_seq;
-			 clen=0;
-			}
-		else
-		    c=fgetc (fp);
-
-		}
-
-    vfclose (fp);
-    LS=declare_sequence (  min_len_seq,  max_len_seq,nseq);
-
-    LS->nseq=nseq;
-
-    fp=vfopen (fname,"r");
-    current=0;
-    c=fgetc(fp);
-    while (c!=EOF)
-		{
-	 	if (c=='>')
-			{
-
-			fscanf_seq_name (fp,LS->name[current]);
-			l=strlen ( LS->name[current]);
-			if ( LS->name[current][l-1]==','||LS->name[current][l-1]==';')LS->name[current][l-1]='\0';
-			LS->name[current]=translate_name ( LS->name[current]);
-			a=0;
-			while ((c=fgetc(fp))!='\n' && c!=EOF && a<(COMMENT_SIZE-1))LS->seq_comment[current][a++]=c;
-			LS->seq_comment[current][a]='\0';
-
-
-			p=0;
-			while ((c=fgetc(fp))!='>' && c!=EOF)
-			        {
-				  LS->seq[current][p++]=c;
-				}
-
-			LS->seq[current][p]='\0';
-			LS->len[current]=strlen ( LS->seq[current]);
-
-			current++;
-
-			}
-
-		else
-		    c=fgetc ( fp);
-		}
-
-
-    vfclose (fp);
-
-
-    vfree (sub);
-    vfree (name);
-    vfree (buffer);
-
-    return LS;
-}
 
 
 Sequence* get_fasta_sequence_raw (char *fname, char *comment_out)
@@ -6709,22 +6616,7 @@ void output_fasta_seq (char *fname, Alignment*A)
 {
   main_output_fasta_seq (fname, A, HEADER);
 }
-void output_fasta_tree (char *fname, Alignment*A)
-	{
-	int a;
-	FILE *fp;
-	if ( !A || !A->nseq) return;
 
-	if (A->Tree)return  output_fasta_tree (fname, A->Tree);
-	
-	fp=vfopen ( fname, "w");
-	for ( a=0; a< A->nseq; a++)
-	  {
-	    A->seq_al[a]=substitute (A->seq_al[a], "\n", "");
-	    fprintf ( fp, ">%s %s\n%s\n", A->name[a], A->seq_comment[a], A->seq_al[a]);
-	  }
-	vfclose (fp);
-	}
 void main_output_fasta_seq (char *fname, Alignment*A,int header )
 	{
 	int a;
@@ -11351,6 +11243,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   else if (ACTION(1) && strm (ACTION(1), "cons"))treelist2cons (D1->A);
 	   else treelist2node_support (D1->A);
 	 }
+       else if ( strm ( action, "tree2nni"))
+	 {
+	   tree2nni (D1->T, NULL);
+	   myexit (EXIT_SUCCESS);
+	 }
+       else if ( strm ( action, "tree2ns"))
+	 {
+	   treelist2ns (D1->T, D2->S, ACTION(1));
+	 }
+	     
        else if ( strm ( action, "print"))
 	 {
 	   int x;
@@ -14050,6 +13952,10 @@ Sequence *add_file2file_list (char *name, Sequence *S)
   return S;
 
 }
+
+
+
+
 #ifdef DO_PHECOMP
 int parse_phecomp_data (char *in, char *out)
 {

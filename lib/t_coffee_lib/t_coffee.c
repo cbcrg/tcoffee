@@ -98,6 +98,7 @@ static char *get_psicoffee_defaults(char *buf, char *type);
 static char *get_dna_defaults(char *buf, char *type);
 static char *get_cdna_defaults(char *buf, char *type);
 static char *get_repeat_defaults(char *buf, char *type);
+static char *get_sample_defaults(char *buf, char *type);
 static char *get_low_memory_defaults( char *buf, char *type);
 
 static char *get_genepredx_defaults(char *buf, char *type);
@@ -759,19 +760,21 @@ if (t_coffee_defaults_flag)
 	 else if ( strm (special_mode, "3dcoffee"))new_arg=get_3dcoffee_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "expresso"))new_arg=get_expresso_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "repeats"))new_arg=get_repeat_defaults(NULL,lseq_type);
+	 else if ( strm (special_mode, "sample"))new_arg=get_sample_defaults(NULL,lseq_type);
+	 
 	 else if ( strm (special_mode, "psicoffee"))new_arg=get_psicoffee_defaults(NULL,lseq_type);
-	  else if ( strm (special_mode, "procoffee"))new_arg=get_procoffee_defaults(NULL,lseq_type);
-	  else if ( strm (special_mode, "blastr"))new_arg=get_blastr_defaults(NULL,lseq_type);
-
+	 else if ( strm (special_mode, "procoffee"))new_arg=get_procoffee_defaults(NULL,lseq_type);
+	 else if ( strm (special_mode, "blastr"))new_arg=get_blastr_defaults(NULL,lseq_type);
+	 
 	 else if ( strm (special_mode, "accurate") || strm (special_mode, "accurate_slow") || strm (special_mode, "psicoffee_expresso"))new_arg=get_accurate_defaults(NULL, lseq_type);
 	 else if ( strm (special_mode, "accurate4DNA"))new_arg=get_accurate4DNA_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "accurate4RNA"))new_arg=get_accurate4RNA_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "best4RNA"))new_arg=get_best4RNA_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "accurate4PROTEIN"))new_arg=get_accurate4PROTEIN_defaults(NULL,lseq_type);
-
+	 
 	 else if ( strm (special_mode, "low_memory") || strm (special_mode, "memory"))new_arg=get_low_memory_defaults(NULL,lseq_type);
-
-
+	 
+	 
 	 else if ( strm (special_mode, "dna"))new_arg=get_dna_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "cdna"))new_arg=get_dna_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "protein"))new_arg=get_low_memory_defaults(NULL,lseq_type);
@@ -5776,6 +5779,16 @@ char *get_repeat_defaults(char *buf, char *type)
 
      buf=strcat (buf,"-in slow_pair -matrix idmat -out_lib -profile_comparison profile -profile_mode channel_profile_profile -dp_mode myers_miller_pair_wise ");
      /*buf=strcat (buf,"-in ");*/
+     return buf;
+   }
+
+char *get_sample_defaults(char *buf, char *type)
+   {
+
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
+
+     buf=strcat (buf,"-extend_mode matrix -dp_mode gotoh_pair_wise -sample_dp -in Xblosum62mt");
+     
      return buf;
    }
 
