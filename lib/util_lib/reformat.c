@@ -503,6 +503,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     compressed_aln saga_aln        clustal_aln");
 		fprintf ( stdout, "\n     phylip_aln     msf_aln         fasta_aln ");
 		fprintf ( stdout, "\n     pir_aln        stockhom_aln    stockholm");
+		fprintf ( stdout, "\n     score....................Tabulated MSA and sequence Score\n");
 		fprintf ( stdout, "\n     color_html,color_ps......colored using the struc_in file  ");
 		fprintf ( stdout, "\n     color_protogene..........colors codons");
 		fprintf ( stdout, "\n     color_exoset.............mixes conservation (gray) and introns (RGB)");
@@ -2483,11 +2484,13 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  {
 	    int i, x, y;
 	    double **dm;
-	    
-	   
+	    FILE *fp;
+
+	    fp=vfopen (out_file, "w");
+	    fprintf ( fp,"#SCORE_FORMAT_01\n"); 
 	    
 	    if ( strm (out_format, "score_aln") || strm (out_format, "score"))
-	      fprintf (stdout, "%d [SCORE_ALN]\n", (D1->A)->score_aln);
+	      fprintf (fp, "%d [SCORE_ALN]\n", (D1->A)->score_aln);
 	    if ( strm (out_format, "score_seq") || strm (out_format, "score"))
 	      {
 		for (x=0; x<(D1->A)->nseq; x++)
@@ -2502,9 +2505,10 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 		  {
 		    for (x=0; x<(D1->A)->nseq; x++)
 		      for (y=0; y<(D1->A)->nseq; y++)
-			if (x!=y)fprintf (stdout, ">%-20s %-20s %.3f [SCORE_PW]\n", (D1->A)->name[x], (D1->A)->name[y],(float)dm[x][y]);
+			if (x!=y)fprintf (fp, ">%-20s %-20s %.3f [SCORE_PW]\n", (D1->A)->name[x], (D1->A)->name[y],(float)dm[x][y]);
 		  }
 	      }
+	    vfclose (fp);
 	  }
 	else if      ( strncmp (out_format, "score",5)==0 || strm (out_format, "html"))
 	  {
@@ -10441,7 +10445,8 @@ int translate_dna_codon ( char *sequence, char stop)
 	    seq[0]=(seq[0]=='u')?'t':seq[0];
 	    seq[1]=(seq[1]=='u')?'t':seq[1];
 	    seq[2]=(seq[2]=='u')?'t':seq[2];
-	    if ( strm5(seq, "gca", "gcg", "gcc", "gct","gcn"))ret='a';
+	    if (strm (seq, "---"))return '-';
+	    else if ( strm5(seq, "gca", "gcg", "gcc", "gct","gcn"))ret='a';
 	    else if ( strm2(seq, "tgc","tgt"))ret='c';
 	    else if ( strm2(seq, "gac","gat"))ret='d';
 	    else if ( strm2(seq, "gaa","gag"))ret='e';
@@ -10465,7 +10470,10 @@ int translate_dna_codon ( char *sequence, char stop)
 	    else if ( strm (seq, "tgg"))ret='w';
 	    else if ( strm2(seq, "tac","tat"))ret='y';
 	    else if ( strm3(seq, "tag","taa","tga"))ret=stop;
-	    else ret='x';
+	    else 
+	      {
+		ret='x';
+	      }
 
 	    ret= (upper)?toupper(ret):ret;
 	  }

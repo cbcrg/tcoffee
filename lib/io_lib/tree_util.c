@@ -5689,6 +5689,7 @@ int **treelist2ns (NT_node T,Sequence *B,char *ref)
     int *max;
     int *tot;
     int *nr;
+    int *bsr;
     
     S=tree2seq(T, NULL);
     T=recode_tree(T,S);
@@ -5714,16 +5715,24 @@ int **treelist2ns (NT_node T,Sequence *B,char *ref)
 	(NL[a])->bootstrap=0;
       }
     
-    
-    
+    bsr=(int*)vcalloc (B->nseq+1, sizeof (int));
+    bsr[0]=1;
+    for (r=1; r<=B->nseq; r++)
+      {
+	if (check_file_exists (B->name[r-1]))bsr[r]=1;
+	else bsr[r]=0;
+      }
     for (r=1; r<=B->nseq; r++)
       {
 	int nt;
 	char ** list;
 	
+
+	HERE ("-- Process %s", B->name[r-1]);
+	
 	if (!check_file_exists (B->name[r-1]))
 	  {
-	    printf_exit (EXIT_FAILURE,stderr, "%s is not a valid file. treelist2ns takes as input a fasta-like list of files containing trees", B->name[r]);
+	    printf_exit (EXIT_FAILURE,stderr, "%s is not a valid file. treelist2ns takes as input a fasta-like list of files containing trees", B->name[r-1]);
 	  }
 	    
 	list=file2lines (B->name[r-1]);

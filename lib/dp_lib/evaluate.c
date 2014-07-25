@@ -1512,7 +1512,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 	    }
 	}
     }
-
+  
   //compute bs_score
   
   if (tree)fprintf (stderr, "\n");
