@@ -225,6 +225,8 @@ char * output_fasta_sub_aln2 (char *fname, Alignment*A, int *ns, int **ls  );
 
 void ouput_suchard_aln ( char *fname,Alignment*A);
 void output_fasta_aln  ( char *fname, Alignment *A);
+void output_mfasta_aln  ( char *fname, Alignment *A);
+
 void output_xmfa_aln  ( char *fname, Alignment *A);
 void output_msf_aln    ( char *fname,Alignment*B);
 FILE * output_generic_interleaved_aln (FILE *fp, Alignment *B, int line, char gap, char *mode);
@@ -233,6 +235,7 @@ void output_clustal_aln( char *name, Alignment*B);
 void output_strict_clustal_aln( char *name, Alignment*B);
 void output_generic_clustal_aln( char *name, Alignment*B, char *format);
 void output_saga_aln   ( char *name, Alignment*B);
+void output_rphylip_aln ( char *name, Alignment*B);
 void output_phylip_aln ( char *name, Alignment*B);
 void output_mocca_aln  ( char *name, Alignment*B,Alignment*S);
 void output_rnalign    (char *out_file, Alignment*A,Sequence *STRUC);

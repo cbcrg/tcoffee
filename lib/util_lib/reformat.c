@@ -500,9 +500,10 @@ int seq_reformat ( int argc, char **in_argv)
  		fprintf ( stdout, "\n    rna_number");
  		fprintf ( stdout, "\n    alifold");
 		fprintf ( stdout, "\n***********  OUTPUT FORMATS: Alignments ******************");
-		fprintf ( stdout, "\n     compressed_aln saga_aln        clustal_aln");
-		fprintf ( stdout, "\n     phylip_aln     msf_aln         fasta_aln ");
-		fprintf ( stdout, "\n     pir_aln        stockhom_aln    stockholm");
+		fprintf ( stdout, "\n     compressed_aln saga_aln          clustal_aln");
+		fprintf ( stdout, "\n     phylip_aln     relaxed_phylip_aln msf_aln    ");
+		fprintf ( stdout, "\n     pir_aln        stockhom_aln      stockholm");
+		fprintf ( stdout, "\n     fasta_aln      mfasta_aln");
 		fprintf ( stdout, "\n     score....................Tabulated MSA and sequence Score\n");
 		fprintf ( stdout, "\n     color_html,color_ps......colored using the struc_in file  ");
 		fprintf ( stdout, "\n     color_protogene..........colors codons");
@@ -2854,7 +2855,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    EA=(DST->A)=aln2number (DST->A);
 	    A=D1->A;
 	    
-	    
+	   
 	    
 	    if (strstr (out_format, "residue"))target=0;
 	    else target=1;
@@ -2889,7 +2890,10 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 			  B->seq_al[s][B->len_aln]=A->seq_al[s][c];
 		      }
 		  }
-		if (action==2)output_phylip_aln ( out_file,B);
+		if (action==2)
+		  if (strstr (out_format, "fasta"))output_mfasta_aln ( out_file,B);
+		  else if (strstr (out_format, "rphylip"))output_rphylip_aln ( out_file, B);
+		  else output_phylip_aln ( out_file,B);
 		else if (action==3)
 		  {
 		    Alignment *C;
@@ -2906,8 +2910,10 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 			    for (c=0; c<A->nseq; c++)
 			      C->seq_al[c][b]=B->seq_al[c][pos];
 			  }
-		
-			output_phylip_aln ( out_file,C);
+			
+			if (strstr (out_format, "fasta"))output_mfasta_aln ( out_file,C);
+			else if (strstr (out_format, "rphylip"))output_rphylip_aln ( out_file, C);
+			else output_phylip_aln ( out_file,C);
 		      }
 		    free_aln(C);
 		  }
@@ -2943,7 +2949,9 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 			    }
 			}
 		    }
-		output_phylip_aln ( out_file, D1->A);
+		if (strstr (out_format, "fasta"))output_mfasta_aln ( out_file,D1->A);
+		else if (strstr (out_format, "rphylip"))output_rphylip_aln ( out_file, D1->A);
+		else output_phylip_aln ( out_file, D1->A);
 	      }
 	    
 	  }
@@ -2961,7 +2969,12 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    D1->A=filter_aln (D1->A, DST->A, atoi(out_format+6));
 	    output_clustal_aln ( out_file, D1->A);
 	  }
-	
+	else if ( strm3 ( out_format, "rphylip_aln", "rphylip", "rphy"))
+	  {
+	    if (!D1)return 1;
+	    if ( check_file_exists (out_file))remove (out_file);
+	    output_rphylip_aln ( out_file, D1->A);
+	  }
 	else if ( strm3 ( out_format, "phylip_aln", "phylip", "phy"))
 	  {
 	    if (!D1)return 1;
@@ -7083,7 +7096,41 @@ int output_suchard_aln (char *out_file, Alignment *A)
   vfclose (fp);
   myexit (EXIT_SUCCESS);
 }
-
+void output_mfasta_aln (char *fname, Alignment *A )
+{
+	FILE *fp;
+	int a,b,c,l;
+	int line=0;
+	static int rep;
+	
+	line=get_msa_line_length (line, A->len_aln+1);
+	if (check_file_exists(fname)) 
+	  {
+	    fp= vfopen ( fname, "a");//make it possible to output replicates
+	    fprintf (fp, "#Replicate %d\n", rep);
+	    rep ++;
+	  }
+	else
+	  {
+	    fp= vfopen ( fname, "w");
+	    rep=1;
+	  }
+	for ( a=0; a< A->nseq; a++)
+	{
+		fprintf ( fp, ">%s", A->name[a]);
+		if ( A->seq_comment[a][0] && !isblanc (A->seq_comment[a]))
+			fprintf ( fp, " %s", A->seq_comment[a]);
+		fprintf ( fp, "\n");
+		l=strlen (A->seq_al[a]);
+		for (b=0, c=0;b<l; b++, c++)
+		  {
+		    if (line>0 && c==line){fprintf (fp, "\n");c=0;}
+		    fprintf (fp, "%c", GET_CASE(A->residue_case, A->seq_al[a][b]));
+		  }
+		fprintf ( fp, "\n");
+	}
+	vfclose (fp);
+}
 void output_fasta_aln (char *fname, Alignment *A )
 {
 	FILE *fp;
@@ -7606,51 +7653,94 @@ FILE * output_generic_interleaved_aln (FILE *fp, Alignment *B, int line, char ga
     vfree (n_residues);
     return fp;
     }
+
+static int mnl;
+void output_rphylip_aln ( char *name, Alignment *B)
+{
+  mnl=-1;
+  output_phylip_aln (name, B);
+  
+}
+
 void output_phylip_aln ( char *name, Alignment *B)
     {
       int a, b, c, d;
-    FILE *fp;
-
-    int *print_name;
-    static int line=0;
-    line=get_msa_line_length(0, 0);
-    line=60;
-    
-    print_name=(int*)vcalloc ( B->nseq, sizeof (int));
-    if (check_file_exists(name)) fp= vfopen ( name, "a");//make it possible to output replicates
-    else fp= vfopen ( name, "w");
-    
-    fprintf (fp, "%5d  %d\n", B->nseq, B->len_aln);
-    for (a=0; a<B->len_aln; a+=line)
-	   {for (b=0; b<B->nseq; b++)
-	     {if ( print_name[b]==0)
-	     	{
-
-		  fprintf (fp,"%-10.10s ",B->name[b]);
-		  print_name[b]=1;
-		}
-	       else
-		 {
-		   fprintf (fp, "%10.10s ", " ");
-		 }
-
-
-	       for (d=0,c=a;c<a+line && c<B->len_aln;c++, d++)
-		 {
-		   if ( d==10)
-		     {
-		       fprintf ( fp, " ");
-		       d=0;
-		     }
-		   if ( is_gap(B->seq_al[b][c])&& B->seq_al[b][c]!='-' )fprintf (fp,"%c", '-');
-		   else fprintf (fp,"%c",(B->seq_al[b][c]) );
-		 }
-	      fprintf (fp,"\n");
-	      }
-	    fprintf (fp,"\n");
+      FILE *fp;
+      
+      int *print_name;
+      static int line=0;
+      
+      if (!line)
+	{
+	  if (!getenv("ALN_LINE_LENGTH"))cputenv ("ALN_LINE_LENGTH=60");
+	  line=get_msa_line_length(0, 0);
+	}
+      
+      if (mnl==-1)
+	{
+	  for (a=0; a<B->nseq; a++)
+	    {
+	      int nl=(B->name && B->name[a])?strlen (B->name[a]):0;
+	      if (nl>mnl)mnl=nl;
 	    }
-    fprintf (fp,"\n\n");
-    vfclose ( fp);
+	}
+      
+      
+
+
+      print_name=(int*)vcalloc ( B->nseq, sizeof (int));
+      if (check_file_exists(name)) fp= vfopen ( name, "a");//make it possible to output replicates
+      else fp= vfopen ( name, "w");
+      
+      fprintf (fp, "%5d  %d\n", B->nseq, B->len_aln);
+      for (a=0; a<B->len_aln; a+=line)
+	{for (b=0; b<B->nseq; b++)
+	    {
+	      if (!mnl)
+		{
+		  if ( print_name[b]==0)
+		    {
+		      
+		      fprintf (fp,"%-10.10s ",B->name[b]);
+		      print_name[b]=1;
+		    }
+		  else
+		    {
+		      fprintf (fp, "%10.10s ", " ");
+		    }
+		}
+	      else
+		{
+		   if ( print_name[b]==0)
+		    {
+		      
+		      fprintf (fp,"%-*.*s ",mnl,mnl,B->name[b]);
+		      print_name[b]=1;
+		    }
+		  else
+		    {
+		      fprintf (fp, "%*.*s ", mnl, mnl," ");
+		    }
+		}
+	      
+	      for (d=0,c=a;c<a+line && c<B->len_aln;c++, d++)
+		{
+		  if ( d==10)
+		    {
+		      fprintf ( fp, " ");
+		      d=0;
+		    }
+		  if ( is_gap(B->seq_al[b][c])&& B->seq_al[b][c]!='-' )fprintf (fp,"%c", '-');
+		  else fprintf (fp,"%c",(B->seq_al[b][c]) );
+		}
+	      fprintf (fp,"\n");
+	    }
+	  fprintf (fp,"\n");
+	}
+      fprintf (fp,"\n\n");
+      
+      vfclose ( fp);
+      mnl=0;
     }
 
 void output_rnalign (char *out_file, Alignment *A, Sequence *STRUC)

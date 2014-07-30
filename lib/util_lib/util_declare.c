@@ -877,19 +877,35 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	    B->file=copy_char ( A->file,     B->file,     -1,-1);
 	    B->tree_order=copy_char ( A->tree_order,     B->tree_order,     -1,-1);
 	    B->expanded_order=A->expanded_order;
-	    free_char ( B->seq_al, -1);
-	    B->seq_al=declare_char(B->max_n_seq, B->declared_len);
-	    // HERE ("A: MAX_NSEQ=%d %d %d %d",B->nseq, B->max_n_seq, B->declared_len, B->len_aln);
-	    // HERE ("B: MAX_NSEQ=%d %d %d %d",A->nseq, A->max_n_seq, A->declared_len, A->len_aln);
-	   
 	    
-	    for ( a=0; a< nnseq; a++)
+	    //Copy seq_al
+	    free_char ( B->seq_al, -1);
+	    B->seq_al=(char**)vcalloc (B->max_n_seq, sizeof (char*));
+	    for (a=0; a<nnseq; a++)
 	      {
-		for (b=0; b<nlen; b++)B->seq_al[a][b]=A->seq_al[a][b];
-		B->seq_al[a][b]='\0';
+		if (A->seq_al[a])
+		  {
+		    int l=read_array_size_new (A->seq_al[a]);
+		    int l2=MAX(l, B->declared_len);//in case the out MSA must be longuer than the in...
+		    B->seq_al[a]=(char*)vcalloc (l2, sizeof (char));
+		    memcpy(B->seq_al[a], A->seq_al[a], sizeof (char)*l);
+		  }
 	      }
 	    
 
+	    
+	    // B->seq_al=declare_char(B->max_n_seq, B->declared_len);
+	    // HERE ("A: MAX_NSEQ=%d %d %d %d",B->nseq, B->max_n_seq, B->declared_len, B->len_aln);
+	    // HERE ("B: MAX_NSEQ=%d %d %d %d",A->nseq, A->max_n_seq, A->declared_len, A->len_aln);
+	    //
+	    //
+	    //for ( a=0; a< nnseq; a++)
+	    //{
+	    //for (b=0; b<B->declared_len; b++)
+	    //  B->seq_al[a][b]=A->seq_al[a][b];
+	    //}
+	    
+	    
 
 	    B->order=copy_int  ( A->order,    B->order,    -1, -1);
 	    B->S=A->S;
