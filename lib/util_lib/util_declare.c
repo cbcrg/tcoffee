@@ -826,7 +826,7 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
         {
 	  int a, b;
 	  int nnseq;
-	  int nlen;
+	  int nlen, mlen;
 	  /*	  c[100]=10;*/
 
 
@@ -881,20 +881,14 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	    B->seq_al=declare_char(B->max_n_seq, B->declared_len);
 	    // HERE ("A: MAX_NSEQ=%d %d %d %d",B->nseq, B->max_n_seq, B->declared_len, B->len_aln);
 	    // HERE ("B: MAX_NSEQ=%d %d %d %d",A->nseq, A->max_n_seq, A->declared_len, A->len_aln);
+	   
+	    
 	    for ( a=0; a< nnseq; a++)
 	      {
-		if (A->seq_al[a])
-		  {
-		    b=0;
-		    while ((A->seq_al[a][b]))
-		      {
-			B->seq_al[a][b]=A->seq_al[a][b];
-			b++;
-		      }
-		    B->seq_al[a][b]='\0';
-		  }
+		for (b=0; b<nlen; b++)B->seq_al[a][b]=A->seq_al[a][b];
+		B->seq_al[a][b]='\0';
 	      }
-
+	    
 
 
 	    B->order=copy_int  ( A->order,    B->order,    -1, -1);

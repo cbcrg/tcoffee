@@ -222,7 +222,7 @@ Alignment * main_coffee_evaluate_output2 ( Alignment *IN,Constraint_list *CL, co
        else if ( CL->ne==0) return matrix_evaluate_output (IN, CL);
      }
    else if ( strm (mode, "no"))return NULL;
-   else if ( strstr( mode, "triplet"))
+   else if ( strstr( mode, "triplet") || strstr (mode, "tcs"))
      {
        return triplet_coffee_evaluate_output ( IN,CL);
      }
@@ -781,7 +781,6 @@ Alignment * fork_triplet_coffee_evaluate_output ( Alignment *IN,Constraint_list 
 
 		  fscanf (fp, "%d ", &res);
 		  OUT->seq_al[b][a]=res;
-		  
 		}
 	      for (b=0; b<IN->nseq; b++)
 		{

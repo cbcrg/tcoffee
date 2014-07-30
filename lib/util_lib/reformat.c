@@ -2383,6 +2383,8 @@ int output_format_aln ( char *format, Alignment *inA, Alignment *inEA,char *name
 	A =expand_aln(A);
 	EA=expand_number_aln(inA,EA);
 
+	
+	
 
 	if (A && A->expanded_order  )A=reorder_aln ( A, A->expanded_order,A->nseq);
 	if (EA && EA->expanded_order)EA=reorder_aln ( EA, EA->expanded_order,EA->nseq);
@@ -2512,10 +2514,12 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	  }
 	else if      ( strncmp (out_format, "score",5)==0 || strm (out_format, "html"))
 	  {
-	    int a;
+	    int a,l,n;
 	    Alignment *BUF;
 	    
 	    if (!D1)return 1;
+
+	    
 	    if ( !DST)
 	      {
 		fprintf ( stderr,"\n[You Need an evaluation File: Change the output format or use +evaluate][FATAL:%s]\n", PROGRAM);
@@ -2523,8 +2527,15 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	      }
 	    if ( !strm ("html", out_format))while ( out_format[0]!='_' && out_format[0]!='\0' )out_format++;
 	    
+	    //l=(DST->A)->len_aln;
+	    //n=(DST->A)->nseq;
+	    //for (a=0; a<l; a++)HERE ("%s %s %d", out_format,(DST->A)->name[n],(DST->A)->seq_al[(DST->A)->nseq][a]);
+	    
 	    D1->S=aln2seq(D1->A);
 	    BUF=copy_aln (DST->A, NULL);
+	    
+	   
+	    
 	    DST->A=aln2number (DST->A);
 	    
 	    

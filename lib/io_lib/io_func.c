@@ -1922,6 +1922,7 @@ FILE_format* vfclose_html ( FILE_format *fhtml)
 /*****************************************************************************/
 int       output_color_ascii     ( Alignment *B,Alignment *S, char *name)
       {
+
 	output_color_format (B, S, name, vfopen_ascii,print_ascii_string,print_ascii_char,get_rgb_values_ascii, vfclose_ascii);
 	return 1;
       }
@@ -2008,6 +2009,7 @@ int       output_seq_reliability_ascii     ( Alignment *B,Alignment *S, char *na
     {if ( strlen (B->name[a])>max_len)
       max_len= strlen ( (B->name[a]));
     }
+  
 
   fp=vfopen ( name, "w");
   fprintf ( fp, "ALN_SCORE %d\n", S->score_aln);

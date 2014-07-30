@@ -5257,8 +5257,9 @@ get_cl_param(\
 			  output_format_aln ("overaln", A, NULL, over_aln_tmp);
 			  A=main_read_aln (over_aln_tmp,A);
 			}
-
+		      
 		      EA=main_coffee_evaluate_output(A, CL, evaluate_mode);
+		      
 
 		      //correct ascii file
 		      if (clean_overaln)
@@ -5282,7 +5283,9 @@ get_cl_param(\
 		      fprintf (le, "\n\nOUTPUT RESULTS");
 		      if ((CL->S)->nseq>2)
 			le=display_output_filename (le, "GUIDE_TREE","newick", tree_file, CHECK);
-
+		      
+		      
+		      
 		      for ( a=0; a< n_out_aln_format; a++)
 			le=display_output_filename( le,"MSA",out_aln_format[a], tot_out_aln[a], CHECK);
 		      if (CL->ne>0 && out_lib[0]!='\0' && !strm (out_lib, "no"))
