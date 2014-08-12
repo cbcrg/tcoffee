@@ -5721,7 +5721,7 @@ char *** produce_method_file ( char *method)
 	if (method==NULL || strm (method, list[n-1][0])){
 		fp=vfopen (list[n-1][1], "w");
 		fprintf ( fp, "DOC: SARA: pairwise structural RNA aligner [%s]\n", ADDRESS_BUILT_IN);
-		fprintf ( fp, "EXECUTABLE rna_pair\n");
+		fprintf ( fp, "EXECUTABLE rnapdb_pair\n");
 		fprintf ( fp, "EXECUTABLE2 runsara.py\n" );
 		fprintf ( fp, "ALN_MODE   pairwise\n");
 		fprintf ( fp, "OUT_MODE   fL\n");
