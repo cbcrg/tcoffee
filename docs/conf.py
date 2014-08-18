@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'T-Coffee'
+project = u'Tcoffee'
 copyright = u'2014, T-Coffee authors'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -190,7 +190,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 #latex_documents = [
-#  ('index', 'T-Coffee.tex', u'T-Coffee Documentation',
+#  ('index', 'Tcoffee.tex', u'T-Coffee Documentation',
 #   u'Cedric Notredame', 'manual'),
 #]
 
