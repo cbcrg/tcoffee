@@ -291,7 +291,7 @@ sub seq2RNA_template
     my %s, %h ;
     my $result;
     my (@profiles);
-    my ($seq_mode, $pdb_mode);
+    my ($seq_mode, $pdb_mode, $pwd);
     
     #use $seq_mode to estimate the template of sequences WITHOUT a PDB
     #use $pdb_mode to estimate the template of sequences WITH    a PDB
@@ -302,8 +302,7 @@ sub seq2RNA_template
     if (!$pdb_mode){$pdb_mode="find_pair-p";}
     if (!$seq_mode){$seq_mode="RNAplfold";}
     
-    
-
+    my $cwd = cwd();
     &set_temporary_dir ("set",$infile,"seq.pep");
     %s=read_fasta_seq ("seq.pep");
     %pdb_template_h = &read_template_file($pdbfile);
@@ -332,18 +331,22 @@ sub seq2RNA_template
 	  }
 	elsif ($pdb_template_h{$seq} ne "")
 	  {
+	    my $pdbf;
+	    if (-e "$cwd/$pdb_chain"){$pdbf="$cwd/$pdb_chain";}
+	    else {$pdbf="$CACHE$pdb_chain";}
+	    
 
 	    if($pdb_mode eq "x3dna-ssr")
 	      {
-		x3dnassr2lib ("seqfile", "$CACHE$pdb_chain", "$lib_name");
+		x3dnassr2lib ("seqfile", "$pdbf", "$lib_name");
 	      }
 	    elsif ($pdb_mode eq "find_pair-p")
 	      {
-		x3dna_find_pair2lib ("seqfile", "$CACHE$pdb_chain", "$lib_name", "find_pair -p");
+		x3dna_find_pair2lib ("seqfile", "$pdbf", "$lib_name", "find_pair -p");
 	      }
 	    elsif ($pdb_mode eq "find_pair")
 	      {
-		x3dna_find_pair2lib ("seqfile", "$CACHE$pdb_chain", "$lib_name", "find_pair");
+		x3dna_find_pair2lib ("seqfile", "$pdbf", "$lib_name", "find_pair");
 	      }
 	    elsif ($pdb_mode eq "RNAplfold")
 	      {
@@ -1006,75 +1009,82 @@ sub seq2pdb_pair
     myexit ($EXIT_SUCCESS);
   }
 
-sub seq2rnapdb_pair{
-	my ($mode, $pdbfile1, $pdbfile2, $method, $param, $outfile)=@_;
-
-	if ($method eq "runsara.py")
-	{
-	  open(TMP,"<$pdbfile1");
-	  my $count = 0;
-	  my $line;
-	  while (<TMP>)
-	    {
-	      $line = $_;
-	      if ($count ==1)
-		{
-		  last;
-		}
-	      $count += 1;
-	    }
-	  
-	  
-	  $chain1 = substr($line,length($line)-3,1);
-	  
-	  close TMP;
-	  open(TMP,"<$pdbfile2");
-	  my $count = 0;
-	  while (<TMP>)
-	    {
-	      $line = $_;
-	      if ($count ==1)
-		{
-		  last;
-		}
-	      $count += 1;
-	    }
-	  $chain2 = substr($line,length($line)-3,1);
-	  close TMP;
-
-	  $tmp_file=&vtmpnam();
-	  
-	  safe_system("runsara.py $pdbfile1 $chain1 $pdbfile2 $chain2 -s -o $tmp_file --limitation 5000 > /dev/null 2> /dev/null") == 0 or die "sara did not work $!\n";
-	  open(TMP,"<$tmp_file") or die "cannot open the sara tmp file:$!\n";
-	  open(OUT,">$outfile") or die "cannot open the $outfile file:$!\n";
-	  
-	  my $switch = 0;
-	  my $seqNum = 0;
-	  foreach my $line (<TMP>)
-	    {
-	      next unless ($line=~/SARAALI/);
-	      if ($line=~/>/)
-		{
-		  $switch =0;
-		  print OUT ">seq$seqNum\n";
-		  $seqNum++;
-		}
-	      if ($switch < 2){
-		$switch++;
-		next;
+sub seq2rnapdb_pair
+  {
+    my ($mode, $pdbfile1, $pdbfile2, $method, $param, $outfile)=@_;
+    
+    if ($method eq "runsara.py")
+      {
+	my $path=$ENV{PATH};
+	
+	if ($ENV{X3DNA_4_SARA}){$ENV{PATH}="$ENV{X3DNA_4_SARA}:$path";}
+	
+	open(TMP,"<$pdbfile1");
+	my $count = 0;
+	my $line;
+	while (<TMP>)
+	  {
+	    $line = $_;
+	    if ($count ==1)
+	      {
+		last;
 	      }
-	      
-	      if ($line =~/REMARK\s+SARAALI\s+([^\*]+)\*/)
-		{
-		  my $string = $1;
-		  print OUT "$string\n";
-		}
+	    $count += 1;
+	  }
+	
+	
+	$chain1 = substr($line,length($line)-3,1);
+	
+	close TMP;
+	open(TMP,"<$pdbfile2");
+	my $count = 0;
+	while (<TMP>)
+	  {
+	    $line = $_;
+	    if ($count ==1)
+	      {
+		last;
+	      }
+	    $count += 1;
+	  }
+	$chain2 = substr($line,length($line)-3,1);
+	close TMP;
+	
+	$tmp_file=&vtmpnam();
+	
+	safe_system("runsara.py $pdbfile1 $chain1 $pdbfile2 $chain2 -s -o $tmp_file --limitation 5000 > /dev/null 2> /dev/null");
+	if ($ENV{X3DNA_4_SARA}){$ENV{PATH}=$path;}
+	
+	open(TMP,"<$tmp_file") or die "cannot open the sara tmp file:$!\n";
+	open(OUT,">$outfile") or die "cannot open the $outfile file:$!\n";
+	
+	my $switch = 0;
+	my $seqNum = 0;
+	foreach my $line (<TMP>)
+	  {
+	    next unless ($line=~/SARAALI/);
+	    if ($line=~/>/)
+	      {
+		$switch =0;
+		print OUT ">seq$seqNum\n";
+		$seqNum++;
+	      }
+	    if ($switch < 2){
+	      $switch++;
+	      next;
 	    }
-	  close TMP;
-	  close OUT;
-	  unlink($tmp_file);
-	}
+	    
+	    if ($line =~/REMARK\s+SARAALI\s+([^\*]+)\*/)
+	      {
+		my $string = $1;
+		print OUT "$string\n";
+	      }
+	  }
+	close TMP;
+	close OUT;
+	unlink($tmp_file);
       }
+  }
 sub seq2profile_pair
 {
 	my ($mode, $profile1, $profile2, $method, $param, $outfile)=@_;
@@ -2723,20 +2733,24 @@ sub fasta_file1_eq_fasta_file2
 
 
 sub read_template_file
-{
-	my $pdb_templates = @_[0];
-	open (TEMP, "<$pdb_templates");
-	my %temp_h;
-	while (<TEMP>)
-{
-		$line = $_;
- 		$line =~/(\S+)\s(\S+)/;
- 		$temp_h{$1}= $2;
-#   		print  "H: $temp{$1}\n $1 $2";
-}
-	close(TEMP);
-	return %temp_h;
-}
+  {
+    my $pdb_templates = @_[0];
+    my $tmp=new FileHandle;
+    open ($tmp, "<$pdb_templates");
+    my %temp_h;
+    my ($skip,$seq, $temp);
+
+    #supports both a simple [seq pdb] format and the regular fasta like template format
+    while (<$tmp>)
+      {
+	
+	$line = $_;
+	if ($line=~/\>(\S+)\s_._\s(\S+)/){$temp_h{$1}= $2;}
+	elsif ($line =~/(\S+)\s(\S+)/){$temp_h{$1}= $2;}
+      }
+    close($tmp);
+    return %temp_h;
+  }
 
 
 
@@ -2831,12 +2845,13 @@ sub x3dna_find_pair2lib
       #get find_pair contacts
       $command="$pg $pdb simple.output > /dev/null 2>/dev/null";
       safe_system ($command);
+
       if (($command=~/find_pair -p/)){$outfile2="allpairs.ana";}
       else {$outfile2="simple.output";}
       
       if ( !-e $outfile2)
 	{
-	  myexit(flush_error("x3dna failed to compute the secondary structure file $outfile2"));
+	  myexit(flush_error("x3dna failed to compute the secondary structure file $outfile2 for $pdb"));
 	  myexit ($EXIT_FAILURE);
 	}
       

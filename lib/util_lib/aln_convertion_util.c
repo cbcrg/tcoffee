@@ -5678,7 +5678,8 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
     G for genomes (Exoset)
     When alternative templates are given for a sequence, the first one superseeds all the others
   */
-
+  
+  
   /*Fill the sequences*/
   /*1: No template*/
   char buf[1000];
@@ -5825,6 +5826,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 
   else if ( strm (template_list, "RCOFFEE") || strm (template_list, "RNA"))
     {
+      
       //extract structure from sequences if possible otherwise use RNAPlfold
       char *file_struc_calc = vtmpnam (NULL);
       FILE* struc_calc_f =vfopen(file_struc_calc,"w");
@@ -5832,7 +5834,9 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       for (i = 0; i< S->nseq; ++i)
 	{
 	  if (S->T[i]->P)
-	    fprintf(struc_calc_f,"%s %s\n",S->name[i],S->T[i]->P->template_file);
+	    {
+	      fprintf(struc_calc_f,"%s %s\n",S->name[i],S->T[i]->P->template_file);
+	    }
 	  else
 	    fprintf(struc_calc_f,"%s\n",S->name[i]);
 	}
@@ -5848,7 +5852,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
     {
       int a;
       char *p;
-
+      
       //add template
       for (a=0; a< S->nseq; a++)
 	{
@@ -5883,11 +5887,12 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       T=(template_list!=NULL)?get_fasta_sequence (template_list, NULL):S;
       for (a=0; a< T->nseq; a++)
 	{
-
+	  
+	  
 	  char *p;
 	  if ((i=name_is_in_list(T->name[a], S->name, S->nseq, MAXNAMES))!=-1)
 	    {
-
+	      
 	      if (       (p=strstr (T->seq_comment[a], " _P_ ")) && !(S->T[i])->P &&( (S->T[i])->P=fill_P_template (S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _F_ ")) && !(S->T[i])->F &&( (S->T[i])->F=fill_F_template (S->name[i],p,S)))ntemp++;
 	      else if (  (p=strstr (T->seq_comment[a], " _S_ ")) && !(S->T[i])->S &&( (S->T[i])->S=fill_S_template (S->name[i],p,S)))ntemp++;
@@ -6330,14 +6335,14 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   Alignment *A;
   int sim, cov, i;
   char *buf;
-
-
+  
+  
   P=fill_X_template ( name, p, "_P_");
   sprintf (P->template_format , "pdb");
 
   if (!P ||(check_file_exists (P->template_name) && !is_pdb_file (P->template_name) ))
     {
-      //fprintf ( stderr, "Could Not Fill _P_ template for sequence |%s|", name);
+      fprintf ( stderr, "Could Not Fill _P_ template for sequence |%s|", name);
       free_X_template (P);
       return NULL;
     }
