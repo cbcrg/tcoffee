@@ -312,6 +312,8 @@ int batch_main ( int argc, char **argv)
 	char *seq_weight;
 	int do_align;
 	char *evaluate_mode;
+	char *color_mode;
+	int aln_line_length=0;
 	char *method_evaluate_mode;
 	int get_type;
 	/*Post_processing*/
@@ -2606,6 +2608,46 @@ get_cl_param(\
 			    /*Max Value*/ "any"             \
 					  );
  /*PARAMETER PROTOTYPE:    WEIGHT      */
+	       declare_name (color_mode);
+	       get_cl_param(\
+			    /*argc*/      argc             ,\
+			    /*argv*/      argv             ,\
+			    /*output*/    &le              ,\
+			    /*Name*/      "-color_mode"        ,\
+			    /*Flag*/      &garbage        ,\
+			    /*TYPE*/      "S"              ,\
+			    /*OPTIONAL?*/ OPTIONAL         ,\
+			    /*MAX Nval*/  1                ,\
+			    /*DOC*/       "Mode used to produce the color output:new (default) or old  " ,\
+			    /*Parameter*/ &color_mode          ,\
+			    /*Def 1*/    "new"             ,\
+			    /*Def 2*/    "old"             ,\
+			    /*Min_value*/ "any"            ,\
+			    /*Max Value*/ "any"             \
+		   );
+	       if (!strm (color_mode, "default"))cputenv ("COLOR_4_TCOFFEE=%s", color_mode);
+	     
+/*PARAMETER PROTOTYPE:    WEIGHT      */
+	       
+	       get_cl_param(\
+			    /*argc*/      argc             ,\
+			    /*argv*/      argv             ,\
+			    /*output*/    &le              ,\
+			    /*Name*/      "-aln_line_length"        ,\
+			    /*Flag*/      &garbage        ,\
+			    /*TYPE*/      "D"              ,\
+			    /*OPTIONAL?*/ OPTIONAL         ,\
+			    /*MAX Nval*/  1                ,\
+			    /*DOC*/       "Mode used to produce the color output:t_coffee_fast,t_coffee_slow  " ,\
+			    /*Parameter*/ &aln_line_length          ,\
+			    /*Def 1*/    "0"             ,\
+			    /*Def 2*/    "0"             ,\
+			    /*Min_value*/ "any"            ,\
+			    /*Max Value*/ "any"             \
+		   );
+	       if (aln_line_length)cputenv ("ALN_LINE_LENGTH=%d", aln_line_length);
+
+/*PARAMETER PROTOTYPE:    WEIGHT      */
 	       declare_name (evaluate_mode);
 	       get_cl_param(\
 			    /*argc*/      argc             ,\
