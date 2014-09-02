@@ -168,11 +168,11 @@ elsif ( $mode eq "RNA_template")
   }
 elsif ( $mode eq "tm_template")
   {
-    &seq2tm_template ($mode, "", &my_get_opt ( $cl, "-infile=",1,1,"-arch=",1,1,"-psv=",1,1, "-outfile=",1,0,));
+    &seq2tm_template ($mode, "", &my_get_opt ( $cl, "-infile=",1,1,"-arch=",1,1,"-psv=",1,1, "-outfile=",1,0));
   }
 elsif ( $mode eq "psitm_template")
   {
-    &seq2tm_template ($mode,&my_get_opt ( $cl, "-database=",1,0, "-infile=",1,1, "-arch=",1,1,"-psv=",1,1, "-outfile=",1,0,));
+    &seq2tm_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-arch=",1,1,"-psv=",1,1, "-outfile=",1,0,"-database=",1,0));
   }
 elsif ( $mode eq "ssp_template")
   {
@@ -239,7 +239,7 @@ sub seq2ssp_template
 
 sub seq2tm_template
   {
-  my ($mode, $db, $infile,$arch,$psv,$outfile)=@_;
+  my ($mode,$infile,$arch,$psv,$outfile,$db)=@_;
   my %s, %h;
   my $result;
   my (@profiles);
@@ -2342,7 +2342,6 @@ sub seq2msa_tm_prediction
     my ($name, $seq, $db, $infile, $outfile, $arch, $psv)=(@_);
     my (%p,%gseq,%R, $blast_output, %s, $l);
     my $R2=new FileHandle;
-    my $db="uniprot";
     my $method="psitm";
     my $SERVER="EBI";
 
@@ -2427,7 +2426,8 @@ sub run_blast
     my ($name, $method, $db, $infile, $outfile, $run)=(@_);
     if (!$run){$run=1;}
     my $error_log=vtmpnam();
-
+    my $cl_db;
+    
     if (&cache_file("GET",$infile,$name,$method,$db,$outfile,$SERVER) && is_valid_blast_xml ($outfile))
       {return $outfile;}
     else
@@ -2524,16 +2524,13 @@ sub run_blast
 	  }
 	elsif ( $SERVER eq "LOCAL")
 	  {
-
-	    if ($ENV{"BLAST_DB_DIR"})
-	      {
-		$x=$ENV{"BLAST_DB_DIR"};
-		$cl_db="$x$db";
-	      }
-	    else
-	      {
-		$cl_db=$db;
-	      }
+	    if ($ENV{"BLAST_DB_DIR"}) {
+	    	$x=$ENV{"BLAST_DB_DIR"};
+			$cl_db="$x/$db";
+	    }
+	    else{
+			$cl_db=$db;
+	    }
 
         ##
 		## BLAST+ provide different binaries names and CLI options
@@ -2542,11 +2539,10 @@ sub run_blast
 		$path=`which legacy_blast.pl 2>/dev/null`;  
 		$path=`dirname $path`; 
 		chomp($path);
-	    if ($method eq "blastp")
-	      {
-		&check_configuration("legacy_blast.pl");
-		$command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 -j1";
-	      }
+	    if ($method eq "blastp"){
+			&check_configuration("legacy_blast.pl");
+			$command="legacy_blast.pl blastpgp --path $path -d $cl_db -i $infile -o $outfile -m7 -j1";
+	    }
 	    elsif ($method eq "psiblast")
 	      {
 		&check_configuration("legacy_blast.pl");
@@ -2557,6 +2553,7 @@ sub run_blast
 		&check_configuration("legacy_blast.pl");
 		$command="legacy_blast.pl blastall --path $path -p blastn -d $cl_db -i $infile -o $outfile -m7 -W6";
 	      }
+	    print "$command\n";
 	    &safe_system ($command);
 	  }
 	else
