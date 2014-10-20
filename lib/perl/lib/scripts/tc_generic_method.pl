@@ -97,10 +97,11 @@ if (!$EMAIL)
     else {$EMAIL=$REF_EMAIL;}
   }
 
-($maxid,$minid,$mincov)=(&my_get_opt ( $cl, "-maxid=",0,0, "-minid=",0,0,"-mincov=",0,0));
+($maxid,$minid,$mincov,$trim)=(&my_get_opt ( $cl, "-maxid=",0,0, "-minid=",0,0,"-mincov=",0,0, "-trim=",0,0));
 if (!$cl=~/\-maxid\=/){$maxid=95;}
 if (!$cl=~/\-minid\=/){$minid=35;}
 if (!$cl=~/\-mincov\=/){$mincov=80;}
+if (!$cl=~/\-trim\=/){$trim;}
 
 
 
@@ -416,7 +417,6 @@ sub psiblast2profile_template
   my ($mode, $infile, $db, $method, $outfile)=@_;
   my %s, %h, ;
   my ($result,$psiblast_output,$profile_name,@profiles);
-  my $trim=0;
   &set_temporary_dir ("set",$infile,"seq.pep");
   %s=read_fasta_seq ("seq.pep");
   open (R, ">result.aln");
@@ -429,20 +429,27 @@ sub psiblast2profile_template
       close (F);
       $psiblast_output=&run_blast ($s{$seq}{name},$method, $db, "seqfile","outfile");
 
-if ( -e $psiblast_output)
+      if ( -e $psiblast_output)
 	{
 	  %profile=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$psiblast_output);
 	  unlink ($psiblast_output);
-
+	  
 	  $profile_name="$s{$seq}{name}.prf";
 	  $profile_name=&clean_file_name ($profile_name);
 	  unshift (@profiles, $profile_name);
 	  output_profile ($profile_name, \%profile, $trim);
+	  
 	  print stdout "!\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$SERVER/blast/$db][$CACHE_STATUS]\n";
 	  print R ">$s{$seq}{name} _R_ $profile_name\n";
+	  
+	  
 	}
+      
     }
   close (R);
+  
+  
+
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
 }
 sub blast2pdb_template_test
@@ -2232,7 +2239,15 @@ sub output_profile
 
     if ( $trim)
       {
-	&safe_system ("t_coffee -other_pg seq_reformat -in $tmp -action +trim _aln_%%$trim\_K1 -output fasta_aln -out $outfile");
+	
+	if ($trim>0)
+	  {
+	    &safe_system ("t_coffee -other_pg seq_reformat -in $tmp -action +trim _aln_n$trim\_K1 -output fasta_aln -out $outfile");
+	  }
+	else
+	  {
+	    &safe_system ("t_coffee -other_pg seq_reformat -in $tmp -action +trim _aln_%%$trim\_K1 -output fasta_aln -out $outfile");
+	  }
       }
     else
       {

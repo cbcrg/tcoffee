@@ -365,6 +365,7 @@ int batch_main ( int argc, char **argv)
 	int maxlen;
 	int ulimit;
 	/*Thread parameters*/
+	int prot_trim;
 	int prot_min_sim;
 	int prot_max_sim;
 	int prot_min_cov;
@@ -2781,8 +2782,7 @@ get_cl_param(\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 		   );
- set_int_variable ("prot_min_sim", prot_min_sim);
-
+set_int_variable ("prot_min_sim", prot_min_sim);
 get_cl_param(\
 			    /*argc*/      argc             ,\
 			    /*argv*/      argv             ,\
@@ -2795,11 +2795,29 @@ get_cl_param(\
 			    /*DOC*/       "Maximum similarity between a sequence and its BLAST relatives" ,\
 			    /*Parameter*/ &prot_max_sim          ,\
 			    /*Def 1*/     "90"             ,\
-			    /*Def 2*/     "100"             ,\
+			    /*Def 2*/     "50"             ,\
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 		   );
- set_int_variable ("prot_max_sim", prot_max_sim);
+set_int_variable ("prot_max_sim", prot_max_sim);
+
+get_cl_param(\
+			    /*argc*/      argc             ,\
+			    /*argv*/      argv             ,\
+			    /*output*/    &le              ,\
+			    /*Name*/      "-prot_trim"        ,\
+			    /*Flag*/      &prot_trim        ,\
+			    /*TYPE*/      "D"              ,\
+			    /*OPTIONAL?*/ OPTIONAL         ,\
+			    /*MAX Nval*/  1                ,\
+			    /*DOC*/       "Maximum number of sequences to keep when building a profile [0 to keep everything, negative value to keep X%%, positive value to keep X Sequences]" ,\
+			    /*Parameter*/ &prot_trim          ,\
+			    /*Def 1*/     "20"             ,\
+			    /*Def 2*/     "20"             ,\
+			    /*Min_value*/ "any"            ,\
+			    /*Max Value*/ "any"             \
+		   );
+set_int_variable ("prot_trim", prot_trim);
 
 get_cl_param(\
 			    /*argc*/      argc             ,\

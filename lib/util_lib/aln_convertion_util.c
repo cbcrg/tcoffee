@@ -5685,7 +5685,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   char buf[1000];
  
   int PmC,PmI,PMI;
-  int BmC,BmI,BMI;
+  int BmC,BmI,BMI, Trim;
   char *server;
   char *pdb_db,*prot_db;
   char pdb_type[100];
@@ -5705,7 +5705,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
   BmI=get_int_variable ("prot_min_sim");
   BMI=get_int_variable ("prot_max_sim");
   BmC=get_int_variable ("prot_min_cov");
-
+  Trim=get_int_variable("prot_trim");
   
   if (strm (prot_db, "dataset") || strm (prot_db, "self"))
     {
@@ -5784,8 +5784,8 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 
 
       check_blast_is_installed(server);
-
-      sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#psiprofile_template@database#%s@method#psiblast@cache#%s@minid#%d@maxid#%d@mincov#%d@server#%s@type#_R_", prot_db,get_cache_dir(),BmI,BMI,BmC,server);
+    
+      sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#psiprofile_template@database#%s@method#psiblast@cache#%s@minid#%d@maxid#%d@mincov#%d@trim#%d@server#%s@type#_R_", prot_db,get_cache_dir(),BmI,BMI,BmC,Trim,server);
       S=seq2template_seq (S,buf, F);
 
       return S;
@@ -5795,7 +5795,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 
       check_blast_is_installed(server);
 
-      sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#profile_template@database#%s@method#blastp@cache#%s@minid#%d@maxid#%d@mincov#%d@server#%s@type#_R_", prot_db,get_cache_dir(),BmI,BMI,BmC,server);
+      sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#profile_template@database#%s@method#blastp@cache#%s@minid#%d@maxid#%d@mincov#%d@trim#%d@server#%s@type#_R_", prot_db,get_cache_dir(),BmI,BMI,BmC,Trim,server);
       S=seq2template_seq (S,buf, F);
 
       return S;
