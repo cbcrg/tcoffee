@@ -128,7 +128,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n-in2    fname......Second alignment");
 		fprintf ( stdout, "\n-input2 format.....See -input");
 		fprintf ( stdout, "\n-exon_boundaries   obj file");
- 		fprintf ( stdout, "\n-out    fname......Output file (defualt is STDOUT");
+ 		fprintf ( stdout, "\n-out    fname......Output file (default is STDOUT");
  		fprintf ( stdout, "\n-output format.....Output Format, default is fasta_aln");
 		fprintf ( stdout, "\n-struc_in   name...File containing a coded aln");
 		fprintf ( stdout, "\n-struc_in_f format.See -input and output format section");
@@ -530,10 +530,10 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     sim_mat_list.......Produces a list of available matrices\n");
 		fprintf ( stdout, "\n     sim_idscore........makes dp alignment of the sequences using Blosum62mt(prot) or idmat(DNA)");
 		fprintf ( stdout, "\n     sim_idscoreDNA.makes dp alignment of the sequences using idmat");
-		fprintf ( stdout, "\n     sim_sim1(defualt)..Fraction of identical columns overa all columns\n");
-		fprintf ( stdout, "\n     sim_sim2(defualt)..Fraction of identical columns over  shortest seq\n");
-		fprintf ( stdout, "\n     sim_sim3(defualt)..Fraction of identical columns over  longuest seq\n");
-		fprintf ( stdout, "\n     sim_gap1(defualt)..Fraction of ungapped columns\n");
+		fprintf ( stdout, "\n     sim_sim1(default)..Fraction of identical columns overa all columns\n");
+		fprintf ( stdout, "\n     sim_sim2...........Fraction of identical columns over  shortest seq\n");
+		fprintf ( stdout, "\n     sim_sim3...........Fraction of identical columns over  longuest seq\n");
+		fprintf ( stdout, "\n     sim_gap1...........Fraction of ungapped columns\n");
  
 		
 			  
