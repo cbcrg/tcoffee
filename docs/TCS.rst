@@ -1,7 +1,7 @@
 Transitive Consistency Score 
 =============================
 
-TCS is an alignment evaluation score that makes it possible to identify in an MSA the most correct positions. 
+TCS is an alignment evaluation score that makes it possible to identify the most correct positions in an MSA. 
 It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party multiple sequence alignment (including T-Coffee of course!)
 
 
@@ -15,8 +15,8 @@ Evaluate an existing MSA
 
 Outputs: 
 
-* `prot.score_ascii`  displays the score of the MSA, the sequences and theresiues. This fille can be used to further filter your MSA with seq_reformat 
-* ``prot.score_html`` displays a colored version score of the MSA, the sequences and the resiues. 
+* `prot.score_ascii`  displays the score of the MSA, the sequences and the resiues. This file can be used to further filter your MSA with seq_reformat. 
+* ``prot.score_html`` displays a colored version score of the MSA, the sequences and the residues. 
 
 .. warning:: The color code in the score_html indicates the agreement between the library and the considered alignment. It is important to 
  understand that this score does not only depend on the input MSA, but it also depends on the library.
@@ -60,7 +60,7 @@ Outputs:
 * `prot.tcs_replicate_100`  Contains 100 replicates in phylip format with each column drawn with a probability corresponding to its TCS score 
 
 
-Note that all these outpout functions are also compatible with the default T-Coffee when computing an alignment::
+Note that all these output functions are also compatible with the default T-Coffee when computing an alignment::
 
   t_coffee -seq prot.fa -output tcs_weighted, tcs_replicate_100
 
@@ -70,7 +70,7 @@ or with ``seq_reformat`` using a T-Coffee `.score_ascii` file::
 
 
 
-Work with coding DNA
+Working with coding DNA
 --------------------
 
 When working with DNA, it is advisable to first align the sequences at the protein level and later thread back the DNA onto your aligned proteins.
