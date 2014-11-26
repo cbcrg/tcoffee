@@ -5914,10 +5914,14 @@ int run_other_pg ( int argc, char *argv[])
     {
       unpack_all_perl_script (argv[0]+strlen ("unpack_"));
     }
-	else if ( strstr ( argv[0], "fastal"))
-	{
-		return fastal_main(argc, argv);
-	}
+  else if ( strstr ( argv[0], "fastal"))
+    {
+      return fastal_main(argc, argv);
+    }
+  else if ( strstr ( argv[0], "mat2process"))
+    {
+      return mat2process (argc-1, argv+1);
+    }
   else
     {
       return my_system_cl (argc, argv);

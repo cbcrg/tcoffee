@@ -410,8 +410,10 @@ char *list2string2 (char **list, int n, char* sep);
 
 char ** string2list (char *string);
 char ** string2list2(char *string, char *separators);
-int *  string2num_list( char *string);
-int *  string2num_list2( char *string, char *separators);
+int  *  string2num_list( char *string);
+int  *  string2num_list2( char *string, char *separators);
+float*  string2float_list2( char *string, char *separators);
+int  *  string2int_list2( char *string, char *separators);
 char **char_array2number ( char ** array, int n);
 char *char2number ( char * array);
 long atop(char *);
@@ -577,6 +579,7 @@ char ***file2list   (char *name, char *sep);
 char ** file2lines  (char *name);
 char *  file2string (char *name);
 int     file2size   (char *name);
+float **file2float_mat (char * name, char *sep);
 int string2file ( char *file, char *mode, char *string,...);
 char *chomp (char *name);
 int get_cl_param (int argc, char **argv, FILE **fp, const char para_name[], int *set_flag, const char type[], int optional, int max_n_val,const char usage[], ...);
@@ -785,3 +788,5 @@ double**  km_shuffle_data (double **d, double **sd, int n, int r);
 void      km_display_data (double **d, int n, int dim);
 double    km_data2evaluate ( double **d, int n, int dim);
 double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **centroids, int nrounds);
+
+int mat2process (int n, char *flist[]);

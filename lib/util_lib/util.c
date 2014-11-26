@@ -2821,6 +2821,10 @@ int * string2num_list ( char *string)
 }
 int * string2num_list2 ( char *string, char *separators)
 {
+  return string2int_list2 ( string, separators);
+}
+int * string2int_list2 ( char *string, char *separators)
+{
    /*Breaks down a list of numbers separated by any legal separator and put them in an array of the right size*/
   /*Returns list a list of integer*/
   /*Skips non numbers*/
@@ -2852,6 +2856,7 @@ int * string2num_list2 ( char *string, char *separators)
   return NULL;
 
 }
+
 char * list2string  ( char **list, int n)
 {
   return list2string2 ( list, n, " ");
@@ -9748,3 +9753,88 @@ double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **cen
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //
+//                                                                           //
+//                           Log Odd analysis                                //
+///////////////////////////////////////////////////////////////////////////////
+
+int mat2process (int ne, char *flist[])
+{
+  int a,b,c, ng;
+  int *nrep;
+  char *****mat;
+  float  ***fmat;
+  int i, j, e, r;
+  int max=0, curr=0;
+
+  if (ne==0)
+    {
+      fprintf ( stderr, "t_coffee -other_pg mat2process <experiment1> <experiment2>\n\texperiment: text file containing the list of replicates(1/line)\n\treplicates: <genename> <Float value>\n");
+      exit (0);
+    }
+  
+  
+  nrep=(int*)     vcalloc (ne, sizeof  (int));
+  mat =(char*****)vcalloc (ne, sizeof (char****));
+  fmat=(float***) vcalloc (ne, sizeof   (float**));
+  for (a=0; a<ne; a++)
+    {
+      fprintf (stderr,"#Experiment File: %s", flist[a]); 
+      char **exp=file2lines (flist[a]);
+      nrep[a]=atoi(exp[0])-1;
+      mat  [a]=(char****)vcalloc (nrep[a],  sizeof ( char ***));
+      fmat [a]=(float**)vcalloc (nrep[a], sizeof (float*));
+      fprintf (stderr, " Nreplicates: %d\n", nrep[a]);
+      for (b=1; b<nrep[a]; b++)
+	{
+	  ng=0;
+	  fprintf (stderr, "#\tExp %d Rep %d: [%s]",a+1, b, exp[b]);
+	  mat[a][b-1]=file2list(exp[b], " ");
+	  while (mat[a][b-1][ng])ng++;
+	  fprintf(stderr," %d record(s)\n",ng);
+	  fmat[a][b-1]=(float*)vcalloc (ng, sizeof (float));
+	  for (c=0; c<ng; c++)
+	    {
+	      fmat[a][b-1][c]=(float)atof(mat[a][b-1][c][2]);
+	    }
+	}
+    }
+  max=(ng*(ng-1))/2;
+  fprintf ( stdout, "# IndexG1 indexG2 VarianceG1 VarianceG2 VarianceG1-G2 ST\n");
+  for (curr=0,i=0; i<ng; i++)
+    {
+      output_completion (stderr,curr,max,1, "Completed");
+      for (j=i+1; j<ng; j++, curr++)
+	{
+	  float sum_i,sum_j,sum_ij,sum2_i,sum2_j,sum2_ij;
+	  float var_i,var_j,var_ij,st_ij;
+	  
+	  sum_i=sum_j=sum_ij=sum2_i=sum2_j=sum2_ij=0;
+	  var_i=var_j=var_ij=st_ij=0;
+	  
+	  for (e=0; e<ne; e++)
+	    for (r=0; r<nrep[e]-1; r++)
+	      {
+		sum_i +=fmat[e][r][i];
+		sum2_i+=fmat[e][r][i]*fmat[e][r][i];
+		
+		sum_j +=fmat[e][r][j];
+		sum2_j+=fmat[e][r][j]*fmat[e][r][j];
+		
+		sum_ij +=fmat[e][r][i]-fmat[e][r][j];
+		sum2_ij+=(fmat[e][r][i]-fmat[e][r][j])*(fmat[e][r][i]-fmat[e][r][j]);
+	      }
+	  var_i =(sum2_i- (sum_i *sum_i )/ng)/(ng-1);
+	  var_j =(sum2_j- (sum_j *sum_j )/ng)/(ng-1);
+	  var_ij=(sum2_ij-(sum_ij*sum_ij)/ng)/(ng-1);
+	  st_ij=var_ij/(var_i+var_j);
+	  fprintf (stdout, "%4d %4d %.4f %.4f %.4f\n", i+1, j+1, var_i, var_j, var_ij, st_ij);
+	  
+	}
+    }
+  exit (0);
+}
+  
+    
+  
