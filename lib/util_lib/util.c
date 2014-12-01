@@ -9753,10 +9753,11 @@ double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **cen
 }
 
 
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 //                                                                           //
-//                           Log Odd analysis                                //
+//                           Log ratio analysis                              //
 ///////////////////////////////////////////////////////////////////////////////
 
 int mat2process (int ne, char *flist[])
@@ -9786,7 +9787,7 @@ int mat2process (int ne, char *flist[])
       mat  [a]=(char****)vcalloc (nrep[a],  sizeof ( char ***));
       fmat [a]=(float**)vcalloc (nrep[a], sizeof (float*));
       fprintf (stderr, " Nreplicates: %d\n", nrep[a]);
-      for (b=1; b<nrep[a]; b++)
+      for (b=1; b<=nrep[a]; b++)
 	{
 	  ng=0;
 	  fprintf (stderr, "#\tExp %d Rep %d: [%s]",a+1, b, exp[b]);
@@ -9829,12 +9830,12 @@ int mat2process (int ne, char *flist[])
 	  var_j =(sum2_j- (sum_j *sum_j )/ng)/(ng-1);
 	  var_ij=(sum2_ij-(sum_ij*sum_ij)/ng)/(ng-1);
 	  st_ij=var_ij/(var_i+var_j);
-	  fprintf (stdout, "%4d %4d %.4f %.4f %.4f\n", i+1, j+1, var_i, var_j, var_ij, st_ij);
+	  fprintf (stdout, "%4d %4d %.4f %.4f %.4f %.4f\n", i+1, j+1, var_i, var_j, var_ij, st_ij);
 	  
 	}
     }
   exit (0);
 }
-  
+
     
   
