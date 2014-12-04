@@ -5902,7 +5902,7 @@ int run_other_pg ( int argc, char *argv[])
     {
       return aln_compare (argc, argv);
     }
-	else if ( strm (argv[0], "analyse_pdb") || strm (argv[0], "apdb") || strm (argv[0], "irmsd") || strm (argv[0], "trmsd") || strm (argv[0], "strike"))
+  else if ( strm (argv[0], "analyse_pdb") || strm (argv[0], "apdb") || strm (argv[0], "irmsd") || strm (argv[0], "trmsd") || strm (argv[0], "strike"))
     {
       return apdb ( argc, argv);
     }

@@ -2374,7 +2374,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	      */
 	 Pdb_param *pdb_param;
 	 Constraint_list *CL;
-	 int a, b, ncol, npos,n;
+	 int a, b, ncol, npos,npos2,n;
 	 float d1, d2,delta;
 	 int wd1, wd2;
 	 int in_bubble=0;
@@ -2401,13 +2401,15 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 char *struc_tree50;
 	 char *struc_tree0;
 	 char *consense_file;
-
+	 
 	 char *color_struc_tree;
 	 int **score;
 	 int proceed=1;
 	 int **lc;
 	 int used;
 
+	 int *keep;
+	 
 	 if (min_ncol4trmsd<0)
 	   {
 	     min_ncol4trmsd*=-1;
@@ -2418,6 +2420,13 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	     min_ncol4trmsd=A->len_aln-1;
 	   }
 
+	 //prepare the list of positions to keep
+	 
+	
+	
+	 
+
+	 
 	 lc=declare_int (A->nseq, 2);
 	 for (a=0; a<A->nseq; a++)lc[a][0]=a;
 
@@ -2510,16 +2519,61 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	     myexit (fprintf_error(stderr,"No suitable pair of column supporting a tree"));
 	   }
 	 else
-	    fprintf ( stderr, "\n---- Number of usable positions: %d [%.2f %%]\n", npos, ((float)npos*100)/(float)A->len_aln);
+	   fprintf ( stderr, "\n---- Number of usable positions: %d [%.2f %%]\n", npos, ((float)npos*100)/(float)A->len_aln);
 
 	 tl=vfopen (tot_pos_list, "w");
+
+	 //compile list of positions to keep
+	 keep=(int*)vcalloc (A->len_aln, sizeof (int));
+	 for (npos2=0,col1=0; col1<A->len_aln; col1++)
+	   {
+	     if (!gapped && aln_column_contains_gap (A, col1))keep[col1]=0;
+	     else {keep[col1]=1;npos2++;}
+	     
+	   }
+	 
+	 if ((c=atoigetenv ("TRMSD_RANDOM_COLUMNS")))
+	   {
+	     int ** keep1=declare_int (A->len_aln, 2);
+	     for (a=0; a<A->len_aln; a++)keep1[a][0]=a;
+	     
+	     for (col1=0; col1<A->len_aln; col1++)keep1[col1][1]=rand()%10000;
+	     sort_int (keep1, 2, 1,0, A->len_aln-1);
+	     c=(int)(((float)c/(float)100)*(float)(npos2));
+	     for (col1=0; col1<A->len_aln; col1++)if (keep[col1])keep[col1]=2;
+	     
+	     for (npos2=0,col1=0; col1<A->len_aln && npos2<c; col1++)
+	       {
+		 col2=keep1[col1][0];
+		 if (keep[col2]){keep[col2]=1; npos2++;}
+	       }
+	     for (col1=0; col1<A->len_aln; col1++)if (keep[col1]==2)keep[col1]=0;
+	     
+	     free_int (keep1, -1);
+	   }
+
+	 if (getenv ("TRMSD_COLUMNS2FILE"))
+	   {
+	     FILE *fp=vfopen (getenv ("TRMSD_COLUMNS2FILE"), "w");
+	     for (a=0; a< A->nseq; a++)
+	       {
+		 fprintf ( fp, ">%s\n", A->name[a]);
+		 for (b=0; b<A->len_aln; b++)if (keep[b])fprintf (fp, "%c", A->seq_al[a][b]);
+		 fprintf (fp, "\n");
+	       }
+	     vfclose (fp);
+	   }
+	 
+	 if (c) fprintf ( stderr, "\n---- Number of randomly selected position: %d [%.2f %%]\n", npos2, ((float)npos2*100)/(float)A->len_aln);
+	 
 	 for (ncol=0,ntree=0, col1=0; col1< A->len_aln; col1++)
 	   {
 	     int w,tree, cont;
 	     //output_completion (stderr, col1, A->len_aln,1, "Sample Columns");
-	     if (!gapped && aln_column_contains_gap (A, col1))continue;
+	     if (!keep[col1])continue;
 	     for ( cont=1,ntree2=0,col2=0; col2<A->len_aln; col2++)
 	       {
+		 if (atoigetenv ("TRMSD_STRICT")==1)if (!keep[col2])continue;
 		 for (s1=0; s1< A->nseq-1; s1++)
 		   {
 		     rs1=A->order[s1][0];
@@ -2560,7 +2614,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	       }
 	   }
 	 vfclose (tl);
-
+	 vfree (keep);
 	 if (!ntree){fprintf ( stderr, "\nERROR: No suitable pair of column supporting a tree. Consider removing the most distantly related sequences [FATAL]\n"); exit (EXIT_SUCCESS);}
 
 	 score=treelist2avg_treecmp (T1, NULL);
