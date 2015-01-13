@@ -6336,13 +6336,13 @@ char ***file2list ( char *name, char *sep)
   */
   char **lines, ***list;
   int a, n;
-
+  
   lines=file2lines (name);
   if (!lines) return NULL;
+
   else
     {
       n=atoi (lines[0]);
-
       list=(char***)vcalloc ( n+1, sizeof (char**));
       for ( a=1; a<n; a++)
 	{
@@ -9760,21 +9760,22 @@ double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **cen
 //                           Log ratio analysis                              //
 ///////////////////////////////////////////////////////////////////////////////
 
-int mat2process (int ne, char *flist[])
+
+    
+ int mat2process (int ne, char *flist[])
 {
   int a,b,c, ng;
   int *nrep;
   char *****mat;
   float  ***fmat;
   int i, j, e, r;
-  int max=0, curr=0;
+  int max=0, curr=0, er=0;
 
   if (ne==0)
     {
       fprintf ( stderr, "t_coffee -other_pg mat2process <experiment1> <experiment2>\n\texperiment: text file containing the list of replicates(1/line)\n\treplicates: <genename> <Float value>\n");
       exit (0);
     }
-  
   
   nrep=(int*)     vcalloc (ne, sizeof  (int));
   mat =(char*****)vcalloc (ne, sizeof (char****));
@@ -9787,11 +9788,13 @@ int mat2process (int ne, char *flist[])
       mat  [a]=(char****)vcalloc (nrep[a],  sizeof ( char ***));
       fmat [a]=(float**)vcalloc (nrep[a], sizeof (float*));
       fprintf (stderr, " Nreplicates: %d\n", nrep[a]);
+      
       for (b=1; b<=nrep[a]; b++)
 	{
 	  ng=0;
+	  
 	  fprintf (stderr, "#\tExp %d Rep %d: [%s]",a+1, b, exp[b]);
-	  mat[a][b-1]=file2list(exp[b], " ");
+	  mat[a][b-1]=file2list(exp[b], " "); 
 	  while (mat[a][b-1][ng])ng++;
 	  fprintf(stderr," %d record(s)\n",ng);
 	  fmat[a][b-1]=(float*)vcalloc (ng, sizeof (float));
@@ -9800,7 +9803,9 @@ int mat2process (int ne, char *flist[])
 	      fmat[a][b-1][c]=(float)atof(mat[a][b-1][c][2]);
 	    }
 	}
+      er+=nrep[a];
     }
+  
   max=(ng*(ng-1))/2;
   fprintf ( stdout, "# IndexG1 indexG2 VarianceG1 VarianceG2 VarianceG1-G2 ST\n");
   for (curr=0,i=0; i<ng; i++)
@@ -9815,7 +9820,7 @@ int mat2process (int ne, char *flist[])
 	  var_i=var_j=var_ij=st_ij=0;
 	  
 	  for (e=0; e<ne; e++)
-	    for (r=0; r<nrep[e]-1; r++)
+	    for (r=0; r<nrep[e]; r++) //r<nrep[e]-1; r++)
 	      {
 		sum_i +=fmat[e][r][i];
 		sum2_i+=fmat[e][r][i]*fmat[e][r][i];
@@ -9826,16 +9831,13 @@ int mat2process (int ne, char *flist[])
 		sum_ij +=fmat[e][r][i]-fmat[e][r][j];
 		sum2_ij+=(fmat[e][r][i]-fmat[e][r][j])*(fmat[e][r][i]-fmat[e][r][j]);
 	      }
-	  var_i =(sum2_i- (sum_i *sum_i )/ng)/(ng-1);
-	  var_j =(sum2_j- (sum_j *sum_j )/ng)/(ng-1);
-	  var_ij=(sum2_ij-(sum_ij*sum_ij)/ng)/(ng-1);
-	  st_ij=var_ij/(var_i+var_j);
+	  var_i =(sum2_i- (sum_i *sum_i )/er)/(er-1);
+	  var_j =(sum2_j- (sum_j *sum_j )/er)/(er-1);
+	  var_ij=(sum2_ij-(sum_ij*sum_ij)/er)/(er-1);
+	  st_ij=1-var_ij/(var_i+var_j);
 	  fprintf (stdout, "%4d %4d %.4f %.4f %.4f %.4f\n", i+1, j+1, var_i, var_j, var_ij, st_ij);
 	  
 	}
     }
   exit (0);
 }
-
-    
-  
