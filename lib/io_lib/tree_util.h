@@ -263,8 +263,14 @@ int node_sort ( char *name, NT_node T);
 int    treelist2n (NT_node *L);
 int ** treelist2avg_treecmp (NT_node *L, char *file);
 Alignment *treelist2cons (Alignment *T);
-Alignment *tree2node_support      (char *newicktree,Alignment *T);
+Alignment *tree2node_support       (char *newicktree,Alignment *T);
+char      *tree2node_support_simple(char *newicktree,Alignment *T, float*bs);
 float      treelist2avg_node_support (Alignment *T);
+
+Alignment *treelist2bs_compare (Alignment *T, Alignment *T2);
+void compare_bs (char *string, char *T1, char *T2);
+void display_compare_bs (char *string, NT_node t1, NT_node t2, int nseq);
+
 
 int **     treelist2ns (NT_node T,Sequence *B,char *ref);
 Alignment *treelist2node_support (Alignment *T);

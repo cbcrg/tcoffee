@@ -5591,7 +5591,64 @@ Alignment *treelist2node_support_best (Alignment *T)
   vfree (RT);
   return T;
 }
+Alignment *treelist2bs_compare (Alignment *T1, Alignment *T2)
+{
+  int a;
+  
+  if (!T1) return T1;
+  if (!T2) T2=T1;
+  fprintf ( stdout, "#TreeIndex;Node_Count;Node Bootsrap;NormalizedNodeDepth\n");
+  for (a=0; a<T1->nseq; a++)
+    {
+      float bs=0;
 
+      char *t=tree2node_support_simple (T1->seq_al[a], T2, &bs);
+
+      compare_bs (T1->name[a], t, T1->seq_al[a]);
+      vfree (t);
+    }
+  return T1;
+}
+void compare_bs (char *string, char *T1, char *T2)
+{
+  NT_node t1, t2;
+  Sequence *S;
+  t1=newick_string2tree(T1);
+  t2=newick_string2tree(T2);
+  S=tree2seq(t1, NULL);
+  t1=recode_tree (t1,S);
+  t2=recode_tree (t2,S);
+  
+  display_compare_bs (string,t1, t2, S->nseq);
+  free_tree (t1);
+  free_tree(t2);
+  free_sequence (S, S->nseq);
+  
+}
+void display_compare_bs (char *string, NT_node t1, NT_node t2, int nseq)
+{
+  if (!t1) return;
+  
+  else
+    {
+      int a;
+      if (t1->left)
+	{
+	  float depth=0;
+	  for (a=0; a<nseq; a++) 
+	    {
+	      //fprintf ( stdout, "%d", t1->lseq2[a]);
+	      depth+=t1->lseq2[a];
+	    }
+	  
+	  depth=MIN(depth, (nseq-depth))/(nseq/2);
+	  if (depth<1)fprintf ( stdout, "%s;%.4f;%.4f;%.2f\n", string?string:"",t1->bootstrap, t2->bootstrap, depth);
+	}
+      display_compare_bs (string, t1->left ,t2->left,nseq );
+      display_compare_bs (string, t1->right,t2->right,nseq);
+    }
+  return;
+}
 Alignment *treelist2node_support (Alignment *T)
 {
   if (!T) return T;
@@ -5599,8 +5656,17 @@ Alignment *treelist2node_support (Alignment *T)
   
   return tree2node_support (T->seq_al[0], T);
 }
-
-Alignment *tree2node_support (char *newick_tree, Alignment *T)
+NT_node reset_bs2 (NT_node T);
+NT_node reset_bs2 (NT_node T)
+{
+  if (!T) return T;
+  T->bootstrap=0;
+  reset_bs2 (T->left);
+  reset_bs2 (T->right);
+  T->bootstrap=0;
+  return T;
+}
+char*tree2node_support_simple (char *newick_tree, Alignment *T,float *bs)
 {
   NT_node RT, TT;
   Sequence *S;
@@ -5611,6 +5677,8 @@ Alignment *tree2node_support (char *newick_tree, Alignment *T)
   
   S=tree2seq(RT, NULL);
   RT=recode_tree (RT,S);
+  RT=reset_bs2 (RT);
+  
   for (a=0; a<T->nseq; a++)
     {
       TT=newick_string2tree(T->seq_al[a]);
@@ -5620,18 +5688,31 @@ Alignment *tree2node_support (char *newick_tree, Alignment *T)
       free_tree (TT);
     }
   
-  s=(s/(float)(T->nseq-1))*100;
+  
   
   //make sure new tree is not longuer than previous
+  if (bs)bs[0]=s;
   p=tree2string (RT);
+  free_sequence (S, S->nseq);
+  free_tree (RT);
+  return p;
+}
+Alignment *tree2node_support (char *newick_tree, Alignment *T)
+{
+  char *p;
+  float s=0;
+  p=tree2node_support_simple(newick_tree, T, &s);
+  
   T->seq_al[0]=(char*)vrealloc (T->seq_al[0],(strlen (p)+1)*sizeof (char));
   sprintf (T->seq_al[0], "%s",p);
   sprintf (T->name[0], "OriginalDistanceTree");
   sprintf (T->seq_comment[0], "Replicates: %d AverageNodeSupport: %.2f %% Source: seq_reformat", T->nseq, s);
+  s=(s/(float)(T->nseq-1))*100;
   T->score=T->score_aln=(float)s*100;
   T->nseq=1;
+  vfree (p);
   return T;
- }
+}
 float update_node_support (NT_node T1, NT_node T2, int nseq)
 {
   //Trees must have been -prune_tree- and -recode_tree- with the same referecne sequence
@@ -5833,6 +5914,8 @@ int **treelist2ns (NT_node T,Sequence *B,char *ref)
     exit (0);
     return support;
   }
+
+
 
 NT_node treelist2bootstrap ( NT_node *L, char *file)
 {

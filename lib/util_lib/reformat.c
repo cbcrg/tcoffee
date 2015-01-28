@@ -443,6 +443,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     .............cons....Runs consense majoprity rule. Distances are the BS values");
 		fprintf ( stdout, "\n     .............best....identifies the tree with the best support");
 		fprintf ( stdout, "\n     .............first...Reports support for the first tree in the list");  			
+		fprintf ( stdout, "\n     +treelist2bs_compare.Measures node support of all T1 trees in T1 and compares with bs support");
 		fprintf ( stdout, "\nMatrix Analysis___________________________________________________");
 		fprintf ( stdout, "\n     +aln2proba_mat.......Computes the proba of all mutations on MSA provided in fasta format (i.e. each name is a valid MSA file");
 		
@@ -11351,6 +11352,12 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   if (ACTION(1) && strm (ACTION(1), "best"))treelist2node_support_best (D1->A);
 	   else if (ACTION(1) && strm (ACTION(1), "cons"))treelist2cons (D1->A);
 	   else treelist2node_support (D1->A);
+	 }
+       else if ( strm (action, "treelist2bs_compare"))
+	 {
+	   
+	   treelist2bs_compare (D1->A, (D2)?D2->A:NULL);
+	   exit (EXIT_SUCCESS);
 	 }
        else if ( strm ( action, "tree2nni"))
 	 {
