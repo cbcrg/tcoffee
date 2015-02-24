@@ -178,13 +178,14 @@ NT_node reroot_tree ( NT_node TREE, NT_node T);
 NT_node straighten_tree ( NT_node P, NT_node C, float new_dist);
 NT_node unroot_tree ( NT_node T);
 FILE* print_tree_list ( NT_node *T,char *format, FILE *fp);
-FILE* print_tree ( NT_node T,char *format, FILE *fp);
+FILE* print_tree         ( NT_node T,char *format, FILE *fp);
+
 char *tree2string (NT_node T);
 char *tree2file   (NT_node T, char *name, char *mode);
 
 int print_newick_tree ( NT_node T, char *name);
 FILE * rec_print_tree ( NT_node T, FILE *fp);
-
+FILE*  rec_print_tree_shuffle ( NT_node T, FILE *fp);
 
 NT_node find_longest_branch ( NT_node T, NT_node L);
 NT_node shift_root ( NT_node R);
@@ -206,6 +207,7 @@ void output_fasta_tree (char *fname, Alignment*A);
 void output_treelist (char *fname, Alignment*A);
 
 NT_node main_read_tree(char *treefile);
+NT_node quick_read_tree(char *treefile);
 
 NT_node new_read_tree ( char *teefile);
 NT_node new_get_node (NT_node T, FILE *fp);

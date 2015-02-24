@@ -949,7 +949,10 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	  {
 	    D->M=read_matrice (in_file);
 	  }
-	
+	else if (strm (in_format, "quick_newick"))
+	  {
+	    D->T=quick_read_tree (in_file);
+	  }
 	else if (strm4 (in_format, "newick_tree", "newick", "nh", "new_hampshire"))
 	  {
 	   
@@ -3396,8 +3399,12 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 
 
 
-
-	else if ( strm4 (out_format, "newick_tree","newick","binary","nh"))
+	else if ( strm  (out_format, "newick_shuffle"))
+	  {
+	    rec_print_tree_shuffle (D1->T, stdout);
+	    fprintf (stdout, ";\n");
+	  }
+	else if ( strm4 (out_format, "newick_tree","newick","binary","nh") || strm2 (out_format, "quick_newick", "newick_shuffle"))
 	        {
 		 
 		  if (!D1)return 1;
@@ -11185,6 +11192,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   D1->T= seq2dpa_tree(D1->S,"ktup");
 	 }
+      
        else if ( strm (action, "tree2dpatree"))
 	 {
 	   D1->T= tree2dpa_tree(D1->T,(D2 && D2->A)?D2->A:D1->A, const_cast<char*>( (n_actions==1)?"idmat":action_list[1]) );
@@ -11198,7 +11206,6 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   D1->T=unroot_tree(D1->T);
 	 }
-
 
        else if ( strm(action, "treelist2group")|| strm(action, "treelist2groups") )
 	 {

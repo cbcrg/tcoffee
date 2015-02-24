@@ -2332,6 +2332,12 @@ FILE * print_tree ( NT_node T, char *format,FILE *fp)
   free_sequence (S, -1);
   if ( format && strm (format, "binary"))
     fp=display_tree ( T,S->nseq, fp);
+  else if ( strm (format, "shuffle_newick"))
+    {
+      vsrand(0);
+      fp=rec_print_tree_shuffle (T, fp);
+      fprintf ( fp, ";\n");
+    }
   else if ( ! format || strm2 (format, "newick_tree","newick"))
     {
       /*T=balance_tree (T);*/
@@ -2353,6 +2359,55 @@ int print_newick_tree ( NT_node T, char *name)
   fprintf (fp, ";\n");
   vfclose (fp);
   return 1;
+}
+FILE * rec_print_tree_shuffle ( NT_node T, FILE *fp)
+{
+
+  if (!T)return fp;
+
+  if ( T->isseq)
+    {
+      
+      fprintf ( fp, "%s:%.5f",T->name, T->dist);
+    }
+  else
+    {
+      int order=rand()%2;
+      if (order==1)
+	{
+	  
+	  if (T->left && T->right)
+	    {
+	      fprintf ( fp, "(");fp=rec_print_tree_shuffle ( T->left, fp);
+	      fprintf ( fp, ",");fp=rec_print_tree_shuffle ( T->right, fp);
+	      fprintf ( fp, ")");
+	      if (T->parent || T->dist)
+		{
+		  if ( T->bootstrap!=0)fprintf (fp, " %d", (int)T->bootstrap);
+		  fprintf (fp, ":%.5f", T->dist);
+		}
+	    }
+	  else if (T->left)fp=rec_print_tree_shuffle (T->left, fp);
+	  else if (T->right)fp=rec_print_tree_shuffle(T->right, fp);
+	}
+      else
+	{
+	  if (T->left && T->right)
+	    {
+	      fprintf ( fp, "(");fp=rec_print_tree_shuffle ( T->right, fp);
+	      fprintf ( fp, ",");fp=rec_print_tree_shuffle ( T->left, fp);
+	      fprintf ( fp, ")");
+	      if (T->parent || T->dist)
+		{
+		  if ( T->bootstrap!=0)fprintf (fp, " %d", (int)T->bootstrap);
+		  fprintf (fp, ":%.5f", T->dist);
+		}
+	    }
+	  else if (T->right)fp=rec_print_tree_shuffle (T->right, fp);
+	  else if (T->left) fp=rec_print_tree_shuffle(T->left, fp);
+	}
+    }
+  return fp;
 }
 FILE * rec_print_tree ( NT_node T, FILE *fp)
 {
@@ -3576,6 +3631,16 @@ void output_treelist (char *fname, Alignment*A)
 
 
 NT_node check_tree (NT_node T);
+NT_node quick_read_tree(char *treefile)
+{
+  FILE *fp;
+  NT_node T;
+  
+  fp=vfopen (remove_charset_from_file (treefile, " \t\n\r"), "r");
+  T=new_get_node (NULL,fp);
+  vfclose (fp);
+  return T;
+}
 NT_node main_read_tree (char *treefile)
 {
   FILE *fp;
@@ -3589,9 +3654,8 @@ NT_node main_read_tree (char *treefile)
   fp=vfopen (remove_charset_from_file (treefile, " \t\n\r"), "r");
   T=new_get_node (NULL,fp);
   vfclose (fp);
-
+  
   S=tree2seq(T, NULL);
-
   T=recode_tree(T, S);
   free_sequence (S,S->nseq);
   vfree (T->file);
