@@ -4,13 +4,13 @@ use File::Copy;
 use File::Find;
 use strict;
 use DirHandle;
-my ($source,$target,$delay,@filelist,$nfiles, $list, $sleep);
+my ($source,$target,$delay,@filelist,$nfiles, $list, $sleep, $max, $nskip, $tskip);
 
 $source="/Users/cnotredame/MusicPhotosBooksPiano/Audio/music/";
 $target="/Users/cnotredame/Dropbox/personnal/Dropbox.Photos.Librairie.MusiqueLivres.Soft/Audio/music/";
 $sleep="/Users/cnotredame/.sleep.txt";
 $list="DefaultFileList.txt";
-$delay=10;
+$delay=15;
 
 for ($a=0; $a<@ARGV; $a++)
   {
@@ -31,6 +31,10 @@ for ($a=0; $a<@ARGV; $a++)
     elsif ($v eq "-list")
       {
 	$list=$ARGV[++$a];
+      }
+    elsif ($v eq "-max")
+      {
+	$max=$ARGV[++$a];
       }
     elsif (int($v) eq $v)
       {
@@ -61,7 +65,7 @@ if (-e $list)
     while (<F>)
       {
 	my $l=$_;
-	print "SCAN: $l";
+	#print "SCAN: $l";
 	chomp $l;
 	push(@filelist,$l);
       }
@@ -79,7 +83,7 @@ my $nfiles=@filelist;
 my $nq;
 foreach my $f (@filelist)
   {
-    print "QUEUE: $nq out of $nfiles [$f]\n";
+    
     $nq+=queue_file($f, $source, $target);
     
   }
@@ -104,12 +108,23 @@ sub queue_file
     elsif (-f $from)
       {if (!-f $to)
 	 {
-	   copy ("$from", "$to");
-	   my $size=-s $to;
-	   
-	   my $wait=($size/1000000)*$delay;
-	   print "WAIT: $wait seconds (Size=$size). Edit [$sleep] to change this\n";
-	   mysleep ($wait);
+	   my $size=-s $from;
+	   $size/=1000000;
+	   if ($max && $size>$max)
+	     {
+	       $nskip++;
+	       $tskip+=$size;
+	       print "SKIP $f [$size is Too Big][N=$nskip][T=$tskip Mb]\n";
+	     }
+	   else
+	     {
+	       my $p=int (($nq*100)/$nfiles);
+	       print "QUEUE: $nq out of $nfiles [$f] : $p %\n";
+	       copy ("$from", "$to");
+	       my $wait=$size*$delay;
+	       print "WAIT: $wait seconds (Size=$size). Edit [$sleep] to change this\n";
+	       mysleep ($wait);
+	     }
 	 }
      }
     return 1;
@@ -124,12 +139,13 @@ sub mysleep
       {
 	if (-e $sleep)
 	  {
+	    my $t=time();
 	    open (F, "$sleep");
 	    while (<F>){$d=$_;}
 	    close (F);
 	    chomp $d;
 	    unlink $sleep;
-	    print "FORCESLEEP: $d seconds\n";
+	    print "FORCESLEEP: $d seconds ($t)\n";
 	  }
 	if   ($d<=$i){sleep $d; $d=0;}
 	else {sleep $i; $d-=$i;}

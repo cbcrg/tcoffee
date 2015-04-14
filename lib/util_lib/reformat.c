@@ -380,6 +380,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\nTree Analysis___________________________________________________");
 
 
+		fprintf ( stdout, "\n     +newick_suffle..<N>..Randomly swp left and right node when righting N times the -in Tree");
 		fprintf ( stdout, "\n     +tree................Passes information to +evaluate");
 		fprintf ( stdout, "\n     .....................Default: +evaluate returns a tree");
 		fprintf ( stdout, "\n     .....<N>.............+evaluate makes N replicates");
@@ -11332,6 +11333,18 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   print_node_list ( D1->T,(DST)?DST->S:NULL);
 	   myexit (EXIT_SUCCESS);
 	 }
+       else if ( strm(action, "newick_shuffle"))
+	 {
+	   int shuf=atoi (ACTION(1));
+	   int zz;
+	   for (zz=0; zz<shuf; zz++)
+	     {
+	       rec_print_tree_shuffle (D1->T, stdout);
+	       fprintf (stdout, ";\n");
+	     }
+	   myexit(EXIT_SUCCESS);
+	 }
+	   
        else if ( strm(action, "tree_cmp_list") )
 	 {
 	   D1->T=main_compare_trees_list ( D1->T, D2->S, stdout);
