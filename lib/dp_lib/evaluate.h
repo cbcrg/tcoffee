@@ -25,6 +25,7 @@ Alignment * struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *mode
 Alignment * evaluate_tree_group (Alignment *T, Sequence *G);
 Alignment *treealn_evaluate4tcoffee (Alignment *A, Sequence *G);
 
+int  sp_triplet_coffee_evaluate_output2  ( Alignment *IN,Constraint_list *CL, char *fname);
 int slow_coffee_evaluate_sub_aln         ( Alignment *IN,int *ns, int **ls, Constraint_list *CL);
 Alignment * slow_coffee_evaluate_output          ( Alignment *IN,Constraint_list *CL);
 Alignment * non_extended_t_coffee_evaluate_output( Alignment *IN,Constraint_list *CL);

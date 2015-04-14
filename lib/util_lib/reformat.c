@@ -2441,7 +2441,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	else if ( strm (out_format, "sp_lib"))
 	  {
 	    if (!D1) return 1;
-	    sp_triplet_coffee_evaluate_output (D1->A, (D1->A)->CL, out_file);
+	    sp_triplet_coffee_evaluate_output2 (D1->A, (D1->A)->CL, out_file);
 	  }
 	else if (    ( strm (out_format, "aln2lib")))
 	  {
