@@ -157,8 +157,8 @@ Supplement data
 Reference
 ---------------
 
-.. [1] Edgar RC 2004. MUSCLE: multiple sequence alignment with high accuracy and high throughput. Nucleic Acids Res 32: 1792-1797.
+.. [1] Thompson J, Koehl P, Ripp R, Poch O 2005. BAliBASE 3.0: Latest developments of the multiple sequence alignment benchmark. Proteins 61: 127-136.
 .. [2] Edgar RC 2004. MUSCLE: multiple sequence alignment with high accuracy and high throughput. Nucleic Acids Res 32: 1792-1797.
 .. [3] Wong KM, Suchard MA, Huelsenbeck JP 2008. Alignment uncertainty and genomic analysis. Science 319: 473-476.
-.. [4] Wong KM, Suchard MA, Huelsenbeck JP 2008. Alignment uncertainty and genomic analysis. Science 319: 473-476.Talavera G, Castresana J 2007. Improvement of phylogenies after removing divergent and ambiguously aligned blocks from protein sequence alignments. Syst Biol 56: 564-577.
+.. [4] Talavera G, Castresana J 2007. Improvement of phylogenies after removing divergent and ambiguously aligned blocks from protein sequence alignments. Syst Biol 56: 564-577.
 .. [5] Capella-Gutierrez S, Silla-Martinez JM, Gabaldon T 2009. trimAl: a tool for automated alignment trimming in large-scale phylogenetic analyses. BIOINFORMATICS 25: 1972-1973.
