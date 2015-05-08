@@ -298,7 +298,7 @@ void do_system()
 	
 	getstr("\n\nEnter system command",line);
 	if(*line != EOS)
-		system(line);
+	  printf_system_direct("%s",line);
 	fprintf(stdout,"\n\n");
 }
 

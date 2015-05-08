@@ -1753,6 +1753,7 @@ char* getenv4debug (const char * val)
       else if ( getenv ("DEBUG_RECONCILIATION"))check=1;
       else if ( getenv ("DEBUG_TMP_FILE"))check=1;
       else if ( getenv ("DEBUG_TREE"))check=1;
+      else if ( getenv ("DEBUG_SYSTEM"))check=1;
 
      else if ( getenv ("DEBUG_SEQ_REFORMAT") && strm (PROGRAM, "SEQ_REFORMAT"))check=2;
       else if ( getenv ("DEBUG_TCOFFEE") && strm (PROGRAM, "T-COFFEE"))check=2;
@@ -3790,8 +3791,8 @@ int printf_system_direct_check  (char *string, ...)
   int r;
 
   cvsprintf (buf, string);
-
-
+  
+  if (getenv4debug ("DEBUG_SYSTEM")){fprintf ( stderr, "DEBUG_SYSTEM::printf_system_direct_check::%s\n",buf);}
   r=system (buf);
 
   if (r!=EXIT_SUCCESS)
@@ -3810,7 +3811,7 @@ int printf_system_direct  (char *string, ...)
   int r;
 
   cvsprintf (buf, string);
-
+  if (getenv4debug ("DEBUG_SYSTEM")){fprintf ( stderr, "DEBUG_SYSTEM::printf_system_direct::%s\n",buf);}
 
   r=system (buf);
   vfree(buf);
@@ -4119,8 +4120,9 @@ int safe_system (const char * com_in)
     char command[1000];
     static char *com;
 
-
-
+    if (getenv4debug ("DEBUG_SYSTEM")){fprintf ( stderr, "DEBUG_SYSTEM::safe_system::%s\n",com_in);}
+    
+    
     if ( clean_exit_started) return system (com_in);
     if ( com)vfree (com);
     if ( strstr ( com_in, "SCRATCH_FILE"))

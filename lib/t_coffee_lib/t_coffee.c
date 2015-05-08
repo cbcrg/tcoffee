@@ -3982,12 +3982,12 @@ get_cl_param(\
 		       sprintf (command, "rm -rf %s", getenv ("CACHE_4_TCOFFEE")); 
 		       if ( !strstr (command, "cache"))
 			 {
-			   fprintf ( stderr, "For security reasons the cache dir must contain the string cache.\n Your cached data seems to be stored in [%s]\nYou must delete it manually.",getenv ("CACHE_4_TCOFFEE")); 
+			   fprintf ( stderr, "For security reasons the cache dir must contain the string cache.\nYour cached data seems to be stored in [%s]\nYou must delete it manually.",getenv ("CACHE_4_TCOFFEE")); 
 			 }
 		       else
 			 {
-			   HERE ("%s",command);
-			   system (command);
+			   
+			   printf_system_direct ("%s",command);
 			 }
 		     }
 		   if (strstr (clean_list, "all") || strstr (clean_list, "lock"))
@@ -3996,12 +3996,11 @@ get_cl_param(\
 		       sprintf (command, "rm -rf %s", getenv ("LOCKDIR_4_TCOFFEE")); 
 		       if ( !strstr (command, "lck") &&!strstr (command, "lock")  )
 			 {
-			   fprintf ( stderr, "For security reasons the cache dir must contain the string lck.\n Your lock data seems to be stored in [%s]\nYou must delete it manually.",getenv ("LOCKDIR_4_TCOFFEE")); 
+			   fprintf ( stderr, "For security reasons the lock dir must contain the string lck.\nYour lock data seems to be stored in [%s]\nYou must delete it manually.",getenv ("LOCKDIR_4_TCOFFEE")); 
 			 }
 		       else
 			 {
-			   HERE ("%s",command);
-			   system (command);
+			   printf_system_direct ("%S",command);
 			 }
 		       
 		     }
@@ -4010,12 +4009,11 @@ get_cl_param(\
 		       sprintf (command, "rm -rf %s", getenv ("ROOT_TMP_4_TCOFFEE"));
 		       if ( !strstr (command, "tmp"))
 			 {
-			   fprintf ( stderr, "For security reasons the tmp dir must contain the string tmp.\n Your tmp data seems to be stored in [%s]\nYou must delete it manually.",getenv ("ROOT_TMP_4_TCOFFEE")); 
+			   fprintf ( stderr, "For security reasons the tmp dir must contain the string tmp.\nYour tmp data seems to be stored in [%s]\nYou must delete it manually.",getenv ("ROOT_TMP_4_TCOFFEE")); 
 			 }
 		       else
 			 {
-			   HERE ("%s",command);
-			   system (command);
+			   printf_system_direct ("%S",command);
 			 }
 		     }
 		   exit (EXIT_SUCCESS);
