@@ -1,10 +1,14 @@
-3DTree: tree estimation procedure based on the comparison of internal distances
-=============================
+**********
+3DTree
+**********
+
+*Tree estimation procedure based on the comparison of internal distances*
 
 3DTree makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. 3DTree also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
 
 Generating a Tree based on distances
-------------------------
+=====================================
+
 This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored
 
 
@@ -32,7 +36,8 @@ It is possible to control default parameters using the following extended comman
 
 
 Generating a Tree based on contact conservation
-------------------------
+================================================
+
 This option makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate nj trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cut-off of 1.2 A between VdW radius and ignoring the 3 closests neighbors. Columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA).
 
 :: 
@@ -55,7 +60,7 @@ It is possible to control default parameters using the following extended comman
 
 
 Visulizing 3D Conservation
-------------------------
+================================================
 
 This same procedure can be used to visualize either intra-molecular distance conservation or contact conservation
 
@@ -68,8 +73,8 @@ This same procedure can be used to visualize either intra-molecular distance con
 Outputs:
 * ``score_raw``: Tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
 
-Identification of positions that support a given sub-cluster
-------------------------
+Identification of positions 
+=============================
 
 If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificty, etc...), it is possible to estimate which columns yield the best support using the following command,
 
@@ -85,7 +90,7 @@ Output
 
 
 Evaluating Clustering capacities
--------------------------------
+=================================
 
 If you want to check the capacity of an algorithm to bring related sequences within mono-phyletic groups, you should name your sequences according to the group they belong to (XXXX_1, YYYYY_1, ZZZZ_2, KKKK_2, for members of _1 and _2, etc) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group:
 

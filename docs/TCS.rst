@@ -1,13 +1,13 @@
+*******************************
 Transitive Consistency Score 
-=============================
+*******************************
 
 TCS is an alignment evaluation score that makes it possible to identify the most correct positions in an MSA. 
 It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party multiple sequence alignment (including T-Coffee of course!)
 
 
 Evaluate an existing MSA 
-------------------------
-
+==========================
 
 :: 
 
@@ -24,7 +24,7 @@ Outputs:
 .. tip:: The TCS is most informative when used to identify low-scoring portions within an MSA. It is also worth noting that the TCS is not informative when aligning less than five sequences.
   
 Filter unreliable MSA positions
--------------------------------
+================================
 
 :: 
 
@@ -47,8 +47,7 @@ or with ``seq_reformat`` using a T-Coffee `.score_ascii` file::
 
 
 Weight MSA for improved trees
----------------------------------------
-
+==============================
 
 :: 
 
@@ -71,7 +70,7 @@ or with ``seq_reformat`` using a T-Coffee `.score_ascii` file::
 
 
 Working with coding DNA
---------------------
+========================
 
 When working with DNA, it is advisable to first align the sequences at the protein level and later thread back the DNA onto your aligned proteins.
 The filtering must be done in two steps, as shown below. Note that your DNA and protein sequences must have the same name:: 
@@ -91,7 +90,7 @@ This first step produces the TCS evaluation file `prot.score_ascii`::
 
 
 Using different libraries
------------------------------
+===========================
 
 It is possible to change the way TCS reliability is estimated. 
 This can be done by building different T-Coffee libraries. `proba_pair` is the default mode of T-Coffee that runs a pair-HMM to populate the library with residue pairs having the best posterior probabilities.
@@ -109,7 +108,7 @@ This mode runs the orginal default T-Coffee that was combining local and global 
 
 
 Summary of the output flags
------------------------------------
+=============================
 
 ============================ 	================
 Flags        					Description
@@ -126,7 +125,7 @@ Flags        					Description
 
 
 Supplement data
----------------
+==================
 
 #. Documents
 
@@ -155,7 +154,7 @@ Supplement data
 
 
 Reference
----------------
+==================
 
 .. [1] Thompson J, Koehl P, Ripp R, Poch O 2005. BAliBASE 3.0: Latest developments of the multiple sequence alignment benchmark. Proteins 61: 127-136.
 .. [2] Edgar RC 2004. MUSCLE: multiple sequence alignment with high accuracy and high throughput. Nucleic Acids Res 32: 1792-1797.

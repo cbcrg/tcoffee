@@ -18,14 +18,7 @@ Contents:
    TCS
    3DTREE
    problems
-
+   developer
    
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
