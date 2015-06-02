@@ -6209,6 +6209,7 @@ double max_kmcoffee;
 static int aligned;
 static int toalign;
 static int kmk;
+Alignment* km_coffee_align3 (Sequence *S, char *km_tree, int k, char *outfile, int argc, char **argv);
 Alignment* km_coffee_align2 (Sequence *S, char *km_tree, int k, int argc, char **argv);
 Alignment* km_coffee_align1 (char *method,Alignment *A,int mn,int argc, char **argv, int nit,int round);
 Alignment *km_align_profile (Alignment **AL,int n, int argc, char **argv,int nit,int round);
@@ -6298,6 +6299,13 @@ char** km_coffee (int argc, char **argv)
 
 	}
 
+	
+	//Set the default values
+	if (!out_f){declare_name(out_f);sprintf (out_f, "%s.aln", seq_f);}
+	if (!k)k=10;
+	
+	
+
 	if (seq_f==NULL)
 	  {
 	    myexit(fprintf_error (stderr, "Error: with -mode=kmcoffee sequences MUST be provided with -seq"));
@@ -6308,36 +6316,41 @@ char** km_coffee (int argc, char **argv)
 
 
 	if (strm (km_mode, "km_fast"))
-	{
-		if (method == NULL)
-			strcpy(method,"proba_pair");
-		if (km_init == NULL)
-			strcpy(km_init, "distributed");
-		if (k_leaf==0)
-			k_leaf=k;
-		km_coffee_align3(seq_f, k, k_leaf, method, out_f, n_core, gapopen, gapext, km_init );
-	}
+	  {
+	    if (method == NULL)
+	      strcpy(method,"proba_pair");
+	    if (km_init == NULL)
+	      strcpy(km_init, "distributed");
+	    if (k_leaf==0)
+	      k_leaf=k;
+	    km_coffee_align3(seq_f, k, k_leaf, method, out_f, n_core, gapopen, gapext, km_init );
+	  }
 	else
-	{
-	S=main_read_seq (seq_f);
-	F=parse_fname (seq_f);
-	if (!k)k=100;
-	if (S->nseq<=k)k=S->nseq/2;
-
-
-	if (!km_mode || strm (km_mode, "topdown"))
-	{
+	  {
+	    S=main_read_seq (seq_f);
+	    F=parse_fname (seq_f);
+	    if (!k)k=100;
+	    if (S->nseq<=k)k=S->nseq/2;
+	    
+	    
+	    if (!km_mode || strm (km_mode, "topdown"))
+	      {
 		A=seq2aln(S,NULL, RM_GAP);
 		toalign=km_coffee_count (A,k, toalign);
 		km_coffee_align1 (method, A, k, new_argc, new_argv,nit,0);
-	}
-	else if (strm (km_mode, "bottomup"))
-	{
+	      }
+	    else if (strm (km_mode, "bottomup"))
+	      {
 		km_coffee_align2 (S,km_tree,k, new_argc,new_argv);
-	}
-	else
-		myexit(fprintf_error (stderr,"Please specify km_mode (topdown/bottomup/km_fast)!\n"));
-	}
+	      }
+	    else if (strm (km_mode, "updown"))
+	      {
+		km_coffee_align3 (S,km_tree,k, out_f, new_argc,new_argv);
+	      }
+	    
+	    else
+	      myexit(fprintf_error (stderr,"Please specify km_mode (topdown/bottomup/km_fast/updown)!\n"));
+	  }
 	myexit (EXIT_SUCCESS);
 }
 
@@ -6729,6 +6742,43 @@ Alignment * km_coffee_align2 (Sequence *S, char *km_tree, int k, int argc, char 
 	}
 	T=main_read_tree (km_tree2);
 	tree_aln_N(T,S, k, argc, argv);
+	
 	myexit (EXIT_SUCCESS);
 	return NULL;
 }
+
+Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, int argc, char **argv)
+{
+
+  
+  char *km_tree2=vtmpnam (NULL);
+  NT_node T;
+  
+  
+  //This insures that the function aln2cons_cov is used
+  //This insures that  get_tot_prob estimates prf/prf alignments using the cons
+  cputenv ("KM_COFFEE_CONS_COV=1");
+  cputenv ("KM_COFFEE_PRF_CONS=1");
+  
+  
+  if (strm (km_tree, "kmeans")){
+    seq2km_tree (S, km_tree2);}
+  else if (strm (km_tree, "cotree"))
+    seq2co_tree (S, km_tree2);
+  else if (!km_tree)
+    {
+      seq2km_tree (S, km_tree2);
+    }
+  T=main_read_tree (km_tree2);
+  updown_tree_aln (T,S, k, argc, argv);
+  
+  
+  
+  printf_system ("mv %s %s", T->alfile, out_f);
+  display_output_filename(stdout,"MSA","ALN",out_f, CHECK);
+  fprintf (stdout, "\n\n");
+  myexit (EXIT_SUCCESS);
+  return NULL;
+}
+
+//

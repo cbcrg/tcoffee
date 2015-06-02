@@ -128,4 +128,4 @@ Pwfunc get_pair_wise_function (Pwfunc func, char *dp_mode, int *glocal);
 char *build_consensus ( char *seq1, char *seq2, char *dp_mode);
 int fastal (int argv, char **arg);
 int tree_aln_N ( NT_node P, Sequence *S, int N, int argc, char **argv);
-
+int updown_tree_aln (NT_node T, Sequence *S, int max, int argc, char **argv);

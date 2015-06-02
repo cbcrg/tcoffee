@@ -4303,6 +4303,10 @@ char *aln2cons_maj ( Alignment *A, int ns, int *ls, int n_groups, char **group_l
 	return seq;
 	}
 
+
+
+
+
 char *aln2cons_seq ( Alignment *A, int ns, int *ls, int n_groups, char **group_list)
         {
 	char *seq;
@@ -4425,6 +4429,79 @@ Alignment *aln2conservation ( Alignment *A, int threshold,char *seq)
   fprintf ( stdout, "#average conservation: %.2f", tot);
   myexit (EXIT_SUCCESS);
 }
+
+
+char *aln2cons_seq_cov (Alignment *A)
+{
+  int *score;
+  char *cons;
+  int pleft,n,left, a, b;
+  
+
+  cons=(char*)vcalloc (A->len_aln+1, sizeof (int));
+  score=(int*)vcalloc (A->nseq, sizeof (int));
+  left=A->len_aln;
+  
+
+  //1 deal with empty columns --- there should not be any
+  for (a=0; a<A->len_aln; a++)
+    {
+      n=0;
+      for (b=0; b<A->nseq; b++)
+	if (!is_gap(A->seq_al[b][a]))n++;
+      if (n==0)
+	{
+	  cons[a]='-';
+	  left--;
+	}
+    }
+  //add residues from the sequences covering max.
+  while (left>0)
+    {
+      int best_score=0;
+      int best_seq=0;
+      
+      for (a=0; a<A->nseq; a++)score[a]=0;
+      for (a=0; a<A->len_aln; a++)
+	{
+	  if (!cons[a])
+	    {
+	      n=0;
+	      for (b=0; b<A->nseq; b++)
+		{
+		  if (!is_gap(A->seq_al[b][a]))n++;
+		}
+	      for (b=0; b<A->nseq; b++)
+		{
+		  if (!is_gap(A->seq_al[b][a]))
+		    {
+		      score[b]+=n;
+		      if (score[b]>best_score){best_score=score[b];best_seq=b;}
+		    }
+		}
+	    }
+	}
+      
+      for (a=0; a<A->len_aln; a++)
+	{
+	  if (!cons[a] && !is_gap(A->seq_al[best_seq][a]))
+	    {
+	      cons[a]=A->seq_al[best_seq][a];
+	      left--;
+	    }
+	}
+      //for (a=0; a<A->len_aln; a++)fprintf (stderr, "%c", (cons[a])?cons[a]:'.');
+      //fprintf (stderr, "\n");
+      //HERE ("Best_seq=%d Best_score=%d Left=%d", best_seq, best_score, left);
+      if (left==pleft)printf_exit (EXIT_FAILURE, stderr, "\nCould not Build profile consensus::aln2cons_seq_cov [FATAL:%s]", PROGRAM);
+      
+      pleft=left;
+    }
+  vfree(score);
+  return cons;
+}
+		
+
 char *aln2cons_seq_mat ( Alignment *A, char *mat_name)
 {
   return sub_aln2cons_seq_mat (A, A->nseq, NULL, mat_name);
@@ -5182,11 +5259,11 @@ Sequence * add_prf2seq  ( char *file, Sequence *S)
       Sequence *NS;
 
       if (!prf_name){prf_name=(char*)vcalloc ( 100, sizeof (char));}
-      if (file)
+      if (file && !atoigetenv("KM_COFFEE_PRF"))
 	sprintf (prf_name, "%s", file);
       else
 	sprintf (prf_name, "prf_%d", ++n);
-
+      
       if ( !is_aln (file)&& !is_seq (file))return S;
       else
 	{
@@ -5199,7 +5276,16 @@ Sequence * add_prf2seq  ( char *file, Sequence *S)
 	  A=(R->VR)->A;
 	  ((R->VR)->A)->expand=1;
 	  new_seq=declare_char (1,A->len_aln+1);
-	  sprintf ( new_seq[0], "%s",aln2cons_seq_mat(A, "blosum62mt"));
+	  
+	  
+
+
+	  if (atoigetenv("KM_COFFEE_CONS_COV"))
+	    sprintf ( new_seq[0], "%s",aln2cons_seq_cov(A));
+	  else
+	    sprintf ( new_seq[0], "%s",aln2cons_seq_mat(A, "blosum62mt"));
+	  
+	  
 	  NS=fill_sequence_struc(1, new_seq,&prf_name, NULL);
 
 	  S=add_sequence (NS, S, 0);

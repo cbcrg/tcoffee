@@ -1464,14 +1464,16 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
 
 NT_node ** seq2co_tree (Sequence *S, char *tree)
 {
-  static char *seq;
+  char *seq;
   int tot_node;
+  char buf[1000000];
+  
   fprintf ( stderr, "\n-----Compute ClustalOmega Tree: [Start---");
   if (!tree)tree=vtmpnam (NULL);
   if (!seq)seq=vtmpnam (NULL);
   output_fasta_simple (seq, S);
   printf_system ("clustalo --in %s --guidetree-out %s --force>/dev/null 2>/dev/null", seq,tree);
-  fprintf ( stderr, "Done]");
+  fprintf ( stderr, "Done]\n");
   return read_tree (tree, &tot_node, S->nseq, S->name);
 }
 

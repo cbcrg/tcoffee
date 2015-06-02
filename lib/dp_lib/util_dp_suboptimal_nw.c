@@ -907,8 +907,8 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
   static int gtp=0;
   //Pre-computation of the pairwise scores in order to use potential profiles
   //The profiles are vectorized AND Compressed so that the actual alphabet size (proteins/DNA) does not need to be considered
-
-
+  int use_cons=atoigetenv ("KM_COFFEE_PRF_CONS");
+  use_cons=0;
   if (mode==SEQUENCE)
     {
       int s1, s2;
@@ -993,16 +993,24 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
       for (k=0; k<nstates; k++)
 	{
 	  TinsProb[0][k][i]=0;
-	  for (n=0,b=0; b<ns[0]; b++)
+	  if (use_cons)
 	    {
-	      c1=A1->seq_al[ls[0][b]][i-1];
-	      if (c1!='-')
-		{
-		  TinsProb[0][k][i]+=insProb[c1][k];
-		  n++;
-		}
+	      c1=A1->seq_al[A1->nseq][i-1];
+	      if (c1!='-') TinsProb[0][k][i]+=insProb[c1][k];
 	    }
-	  if (n)TinsProb[0][k][i]/=n;
+	  else
+	    {
+	      for (n=0,b=0; b<ns[0]; b++)
+		{
+		  c1=A1->seq_al[ls[0][b]][i-1];
+		  if (c1!='-')
+		    {
+		      TinsProb[0][k][i]+=insProb[c1][k];
+		      n++;
+		    }
+		}
+	      if (n)TinsProb[0][k][i]/=n;
+	    }
 	}
     }
   //Get Ins for J
@@ -1011,58 +1019,98 @@ int get_tot_prob (Alignment *A1,Alignment *A2, int *ns, int **ls, int nstates, f
       for (k=0; k<nstates; k++)
 	{
 	  TinsProb[1][k][j]=0;
-	  for (n=0,b=0; b<ns[1]; b++)
+	  if (use_cons)
 	    {
-	    c2=A2->seq_al[ls[1][b]][j-1];
-	    if (c2!='-')
-	      {
-	      TinsProb[1][k][j]+=insProb[c2][k];
-	      n++;
-	      }
+	      c2=A2->seq_al[A2->nseq][j-1];
+	      if (c2!='-') TinsProb[1][k][j]+=insProb[c2][k];
 	    }
-	  if (n)TinsProb[1][k][j]/=n;
+	  else
+	    {
+	      for (n=0,b=0; b<ns[1]; b++)
+		{
+		  c2=A2->seq_al[ls[1][b]][j-1];
+		  if (c2!='-')
+		    {
+		      TinsProb[1][k][j]+=insProb[c2][k];
+		      n++;
+		    }
+		}
+	      if (n)TinsProb[1][k][j]/=n;
+	    }
 	}
     }
-
+  
   observed=(int*)vcalloc ( 26, sizeof (int));
   VA1=(int***)declare_arrayN (3, sizeof (int),2,26,I);
   for (i=0; i<I; i++)
     {
-      for (index=0, b=0; b<ns[0]; b++)
+      if (use_cons)
 	{
-	  int in;
-	  c1=tolower(A1->seq_al[ls[0][b]][i]);
-	  if ( c1=='-' || c1=='.' || c1=='~')continue;
-	  c1-='a';
-
-	  if (!(in=observed[c1])){in=observed[c1]=++index;}
-
-	  VA1[0][in-1][i]=c1;
-	  VA1[1][in-1][i]++;
+	  c1=tolower(A1->seq_al[A1->nseq][i]);
+	  if ( c1=='-' || c1=='.' || c1=='~') VA1[0][0][i]=-1;
+	  else
+	    {
+	      c1-='a';
+	      VA1[0][0][i]=c1;
+	      VA1[1][0][i]++;
+	      VA1[0][1][i]=-1;
+	    }
 	}
-
-      VA1[0][index][i]=-1;
-      for (b=0; b<26; b++)observed[b]=0;
+      else
+	{
+	  for (index=0, b=0; b<ns[0]; b++)
+	    {
+	      int in;
+	      c1=tolower(A1->seq_al[ls[0][b]][i]);
+	      if ( c1=='-' || c1=='.' || c1=='~')continue;
+	      c1-='a';
+	      
+	      if (!(in=observed[c1])){in=observed[c1]=++index;}
+	      
+	      VA1[0][in-1][i]=c1;
+	      VA1[1][in-1][i]++;
+	    }
+	  
+      
+	  VA1[0][index][i]=-1;
+	  for (b=0; b<26; b++)observed[b]=0;
+	}
     }
 
   VA2=(int***)declare_arrayN (3, sizeof (int),2,26,J);
   for (i=0; i<J; i++)
     {
-      for (index=0, b=0; b<ns[1]; b++)
+      if (use_cons)
 	{
-	  int in;
-
-	  c1=tolower(A2->seq_al[ls[1][b]][i]);
-	  if ( c1=='-')continue;
-	  c1-='a';
-
-	  if (!(in=observed[c1])){in=observed[c1]=++index;}
-
-	  VA2[0][in-1][i]=c1;
-	  VA2[1][in-1][i]++;
+	  c1=tolower(A2->seq_al[A2->nseq][i]);
+	  if ( c1=='-' || c1=='.' || c1=='~')VA2[0][0][i]=-1;
+	  else
+	    {
+	      c1-='a';
+	      VA2[0][0][i]=c1;
+	      VA2[1][0][i]++;
+	      VA2[0][1][i]=-1;
+	    }
 	}
-      VA2[0][index][i]=-1;
-      for (b=0; b<26; b++)observed[b]=0;
+      else
+	{
+	  for (index=0, b=0; b<ns[1]; b++)
+	    {
+	      int in;
+	      
+	      c1=tolower(A2->seq_al[ls[1][b]][i]);
+	      if ( c1=='-')continue;
+	      c1-='a';
+	      
+	      if (!(in=observed[c1])){in=observed[c1]=++index;}
+	      
+	      VA2[0][in-1][i]=c1;
+	      VA2[1][in-1][i]++;
+	    }
+	
+	  VA2[0][index][i]=-1;
+	  for (b=0; b<26; b++)observed[b]=0;
+	}
     }
   vfree (observed);
 

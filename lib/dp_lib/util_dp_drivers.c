@@ -5982,3 +5982,30 @@ int node2file_list (NT_node P, Sequence *S, char *flist)
     }
   return t;
 }
+
+int updown_tree_aln (NT_node T, Sequence *S, int max, int argc, char **argv)
+{
+  
+  if(!T->parent){tree2nleaf(T);}
+  
+
+
+  if (T->nseq==1)return 1;
+  else if (T->nseq>max)
+    {
+      T->leaf =updown_tree_aln (T->left , S,max, argc, argv);
+      T->leaf+=updown_tree_aln (T->right, S,max, argc, argv);
+    }
+  
+  if (T->leaf>1 && (T->leaf>=max || !T->parent))
+    {
+
+     
+      align_node(T,S,argc,argv);
+      T->isseq=1;
+      T->leaf=1;
+    }
+  
+  return T->leaf;
+}
+

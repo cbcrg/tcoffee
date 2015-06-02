@@ -126,8 +126,11 @@ char *aln2cons_seq ( Alignment *A, int ns, int *ls, int n_groups, char **group_l
 char *aln2cons_maj ( Alignment *A, int ns, int *ls, int n_groups, char **group_list);
 Alignment *aln2conservation ( Alignment *A, int threshold,char *seq);
 
+
 char *sub_aln2cons_seq_mat ( Alignment *A,int ns, int *ls, char *mat_name);
 char *aln2cons_seq_mat ( Alignment*A, char *mat_name);
+char *aln2cons_seq_cov ( Alignment*A);
+
 Alignment *aln2short_aln( Alignment *A, char *list, char *nnew, int spacer);
 Sequence  *keep_residues_in_seq ( Sequence *S,char *list, char replacement);
 Alignment *keep_residues_in_aln ( Alignment *A,char *list, char replacement);
