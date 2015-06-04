@@ -6756,11 +6756,12 @@ Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, in
   
   
   //This insures that the function aln2cons_cov is used
+  //cputenv ("KM_COFFEE_CONS_COV=1");
+  
   //This insures that  get_tot_prob estimates prf/prf alignments using the cons
-  cputenv ("KM_COFFEE_CONS_COV=1");
-  cputenv ("KM_COFFEE_PRF_CONS=1");
+  //cputenv ("KM_COFFEE_PRF_CONS=1");
   
-  
+    
   if (strm (km_tree, "kmeans")){
     seq2km_tree (S, km_tree2);}
   else if (strm (km_tree, "cotree"))
@@ -6769,6 +6770,11 @@ Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, in
     {
       seq2km_tree (S, km_tree2);
     }
+  else if (check_file_exists (km_tree))
+    {
+      printf_system ("cp %s %s", km_tree, km_tree2);
+    }
+  	
   T=main_read_tree (km_tree2);
   updown_tree_aln (T,S, k, argc, argv);
   
