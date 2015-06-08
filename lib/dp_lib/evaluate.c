@@ -1164,7 +1164,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   rseq=(int*)vcalloc (A->nseq, sizeof (int));
   for (a=0,s1=0; s1<A->nseq; s1++)
     {
-      rseq[s1]=name_is_in_list (A->name[s1], S->name, S->nseq, 100);
+      rseq[s1]=name_is_in_list (A->name[s1], S->name, S->nseq, MAXNAMES);
       if (rseq[s1]==-1);
       else
 	{
@@ -1961,8 +1961,8 @@ double seq_genepred2acc (Sequence *S, Sequence *PS, char *name)
 
   if ( strm (name, "best"))return genepred2acc (S, PS);
   
-  ref=name_is_in_list (name, S->name, S->nseq, 100);
-  target=name_is_in_list (name, PS->name, PS->nseq, 100);
+  ref=name_is_in_list (name, S->name, S->nseq, MAXNAMES);
+  target=name_is_in_list (name, PS->name, PS->nseq, MAXNAMES);
 
   if ( target==-1 || ref==-1)
     {

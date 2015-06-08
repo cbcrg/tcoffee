@@ -230,6 +230,9 @@ int batch_main ( int argc, char **argv)
 	char **setenv_list;
 	int n_setenv;
 
+	char **export_list;
+	int n_export;
+
 
 	char **template_file_list;
 	int n_template_file;
@@ -1287,7 +1290,7 @@ if ( !do_evaluate)
 			    /*argv*/      argv             ,\
 			    /*output*/    &le              ,\
 			    /*Name*/      "-setenv"        ,\
-			    /*Flag*/      &do_version        ,\
+			    /*Flag*/      &garbage        ,\
 			    /*TYPE*/      "S"              ,\
 			    /*OPTIONAL?*/ OPTIONAL         ,\
 			    /*MAX Nval*/  2                ,\
@@ -1298,6 +1301,27 @@ if ( !do_evaluate)
 			    /*Min_value*/ "0"            ,\
 			    /*Max Value*/ "1"             \
 					  );
+#ifdef XXXX
+/*PARAMETER PROTOTYPE:    VERSION      */
+	       export_list=declare_char (100, STRING);
+	       n_export=get_cl_param(\
+			    /*argc*/      argc             ,\
+			    /*argv*/      argv             ,\
+			    /*output*/    &le              ,\
+			    /*Name*/      "-export"        ,\
+			    /*Flag*/      &garbage        ,\
+			    /*TYPE*/      "S"              ,\
+			    /*OPTIONAL?*/ OPTIONAL         ,\
+			    /*MAX Nval*/  2                ,\
+			    /*DOC*/       "Declares a parameter variable" ,\
+			    /*Parameter*/ export_list          ,	\
+			    /*Def 1*/     "0"             ,		\
+			    /*Def 2*/     "1"             ,		\
+			    /*Min_value*/ "0"            ,		\
+			    /*Max Value*/ "1"				\
+					  );
+#endif	       
+	       
 /*PARAMETER PROTOTYPE:        IN */
 	       template_mode_list=declare_char (100, STRING);
 	       n_template_mode=get_cl_param(			\

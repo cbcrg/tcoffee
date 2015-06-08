@@ -772,7 +772,7 @@ int name_is_in_list ( const char name_in[], char **name_list, int n_name, int le
 
 	/*Note: RETURNS THE Offset of the LAST Occurence of name in name_list*/
 	if ( name_list==NULL || name_in ==NULL) return -1;
-
+	if (len<MAXNAMES) len=MAXNAMES;
 	char name[strlen(name_in)+1];
 	strcpy(name,name_in);
 	
@@ -3710,6 +3710,7 @@ void HERE2 (char *string, ...)
   va_end (ap);
 
 }
+
 void HERE (char *string, ...)
 {
   va_list ap;
@@ -3720,6 +3721,23 @@ void HERE (char *string, ...)
   fprintf ( stderr, "\n");
   va_end (ap);
 
+}
+
+void FHERE (char *file,char *string, ...)
+{
+  va_list ap;
+  FILE *fp;
+  
+  if (strm(file, "stdout"))fp=stdout;
+  else if ( strm (file, "stderr"))fp=stderr;
+  else fp=fopen  (file, "a");
+  
+  va_start (ap, string);  
+  fprintf ( fp, "HERE: ");
+  vfprintf (fp, string, ap);
+  fprintf ( fp, "\n");
+  if (!(fp==stderr) && !(fp==stdout))vfclose (fp);
+  va_end (ap);
 }
 
 
@@ -5717,7 +5735,7 @@ FILE* error_msg(FILE*fp )
        fprintf( fp, "\n\t* \t-4 The Online Doc (%s)                   ", URL);
        
        if ( strm (errorfile, "NO"))
-	    fprintf( fp, "\n\t* \t-5 re-run your CL (see below) with tze -debug option. This will produce a debug file you can send us.");
+	    fprintf( fp, "\n\t* \t-5 re-run your CL (see below) with the -debug option. This will produce a debug file you can send us.");
        else
 	 fprintf( fp, "\n\t* \t-5 Send the file:");
        fprintf (fp, "\n\t*");
@@ -9020,11 +9038,12 @@ void clean_exit ()
 	}
       else
 	{
-
+	  /*
 	  if (isdir(start->name))
 	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : Dir  %s not removed (%d)\n", start->name, getpid());}
 	  else
 	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : File %s not removed (%d)\n", start->name, getpid());}
+	  */
 	}
       b=start;
       start=start->next;
@@ -9069,6 +9088,24 @@ int string_putenv ( char *s)
   v1=(char*)vcalloc ( strlen (s)+1, sizeof (char));
   v2=(char*)vcalloc ( strlen (s)+1, sizeof (char));
 
+
+  
+  //get all the exports
+  p=s;
+  n=0;
+  while ( (p=strstr (p, "-export")))
+    {
+      if (sscanf (p, "-export %s %s", v1,v2)==2)
+	{
+
+	  if (strm (v1, "PATH"))cputenv4path (v2);
+	  else cputenv ( "%s=%s", v1, v2);
+	}
+       p+=strlen ("-export");
+       n++;
+    }
+  
+  //get all the setenv
   p=s;
   n=0;
   while ( (p=strstr (p, "-setenv")))

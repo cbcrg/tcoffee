@@ -249,7 +249,7 @@
 #define MAX_N_LIST       100
 
 #define COMMENT_SIZE     1000
-#define MAXNAMES         100
+#define MAXNAMES         1000
 #define FILENAMELEN 	 500            /* Max. file name length */
 #define MAX_N_PARAM      2000
 #define MAX_PARAM_LEN    200

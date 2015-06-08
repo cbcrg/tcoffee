@@ -502,6 +502,7 @@ pid_t  vwaitpid (pid_t p, int *status, int options);
 
 int evaluate_sys_call_io ( char *out_file, char *com, char *fonc);
 //char *cvsprintf (char *r,char *format, va_list arg_ptr,... );
+void HEREf  (char *file,char *string, ...);
 void HERE  (char *string, ...);
 void HERE2 (char *string, ...);
 void printf_exit  (int exit_code, FILE *fp, char *string, ...);

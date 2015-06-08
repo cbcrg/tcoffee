@@ -1215,6 +1215,10 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	FILE *fp;
 	char command[10000];
 	char *param;
+	static char *sn1, *sn2;
+	
+
+	
 
 	if ( strm (M->executable2, "hhalign"))
 		return hh_pair (M ,in_seq, CL);
@@ -1223,6 +1227,13 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 		fprintf ( stderr, "\nERROR: profile_pair requires a method: thread_pair@EP@executable2@<method> [FATAL:%s]\n", PROGRAM);
 
 
+	if (!sn1)
+	  {
+	    sn1=(char*)vcalloc (100, sizeof(char));
+	    sn2=(char*)vcalloc (100, sizeof(char));
+	    sprintf (sn1, "master1");
+	    sprintf (sn2, "master2");
+	  }
 	sprintf ( seq, "%s", in_seq);
 	atoi(strtok (seq,SEPARATORS));
 	s1=atoi(strtok (NULL,SEPARATORS));
@@ -1231,111 +1242,93 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	A1=seq2R_template_profile(CL->S,s1);
 	A2=seq2R_template_profile(CL->S,s2);
 
-	char *search_name1, *search_name2;
+	
 	prf1_file=vtmpnam (NULL);
 	fp=vfopen (prf1_file, "w");
-	char *cons1, *cons2;
-
+	
+	
 	if ( A1)
-	{
-		cons1 = aln2cons_seq_mat(A1, "blosum62mt");
-		strcpy(search_name1,"seq1");
-		fprintf (fp, ">%s\n%s-\n",(CL->S)->name[s1], aln2cons_seq_mat(A1, "blosum62mt"));
-		for ( a=0; a< A1->nseq; a++)
-			fprintf (fp, ">prf_seq1_%d\n%s-\n", a, A1->seq_al[a]);
-	}
+	  {
+	    
+	    fprintf (fp, ">%s\n%s-\n",sn1, aln2cons_seq_mat(A1, "blosum62mt"));
+	    for ( a=0; a< A1->nseq; a++)
+	      fprintf (fp, ">prf_seq1_%d\n%s-\n", a, A1->seq_al[a]);
+	  }
 	else
-	{
-		fprintf ( fp, ">%s\n%s-\n", (CL->S)->name[s1], (CL->S)->seq[s1]);
-		cons1=(CL->S)->seq[s1];
-		search_name1=(CL->S)->name[s1];
-	}
+	  {
+	    fprintf ( fp, ">%s\n%s-\n",sn1, (CL->S)->seq[s1]);
+	  }
 	vfclose (fp);
-
+	
 	prf2_file=vtmpnam (NULL);
-
 	fp=vfopen (prf2_file, "w");
+	
 	if (A2)
-	{
-		fprintf (fp, ">%s\n%s-\n",(CL->S)->name[s2], aln2cons_seq_mat(A2, "blosum62mt"));
-		for ( a=0; a< A2->nseq; a++)
-			fprintf (fp, ">prf_seq2_%d\n%s-\n", a, A2->seq_al[a]);
-		cons2 =  aln2cons_seq_mat(A2, "blosum62mt");
-		strcpy(search_name2,"seq2");
-	}
+	  {
+	    fprintf (fp, ">%s\n%s-\n",sn2, aln2cons_seq_mat(A2, "blosum62mt"));
+	    for ( a=0; a< A2->nseq; a++)
+	      fprintf (fp, ">prf_seq2_%d\n%s-\n", a, A2->seq_al[a]);
+	  }
 	else
-	{
-		fprintf ( fp, ">%s\n%s-\n", (CL->S)->name[s2], (CL->S)->seq[s2]);
-		cons2=(CL->S)->seq[s2];
-		search_name2=(CL->S)->name[s2];
-	}
+	  {
+	    
+	    fprintf ( fp, ">%s\n%s-\n",sn2, (CL->S)->seq[s2]);
+	  }
 	vfclose (fp);
+	
 	result=vtmpnam (NULL);
 	if ( M->param)
-	{
-		param=(char*)vcalloc(strlen (M->param)+1, sizeof (char));
-		sprintf ( param, "%s", M->param);
-		param=substitute ( param, " ", "");
-		param=substitute ( param, "\n", "");
-	}
-
+	  {
+	    param=(char*)vcalloc(strlen (M->param)+1, sizeof (char));
+	    sprintf ( param, "%s", M->param);
+	    param=substitute ( param, " ", "");
+	    param=substitute ( param, "\n", "");
+	  }
+	
 	sprintf ( command, "tc_generic_method.pl -mode=profile_pair -method=%s %s%s %s%s %s%s -param=%s -tmpdir=%s", M->executable2,M->in_flag,prf1_file, M->in_flag2,prf2_file,M->out_flag, result, param, get_tmp_4_tcoffee());
 	my_system ( command);
-
+	
 	if ( !check_file_exists (result))
-	{
-		fprintf ( stderr, "\n\tprofile_pair/%s failed:\n\t%s\n",M->executable2, command);
-		myexit (EXIT_FAILURE);
-	}
+	  {
+	    fprintf ( stderr, "\n\tprofile_pair/%s failed:\n\t%s\n",M->executable2, command);
+	    myexit (EXIT_FAILURE);
+	  }
 	else if ( is_lib (result))
-	{
-		CL=read_constraint_list_file(CL,result);
-	}
+	  {
+	    CL=read_constraint_list_file(CL,result);
+	  }
 	else if ( is_aln (result))
-	{
-		F=main_read_aln (result, NULL);
-		char *name1, *name2;
-		name1=(CL->S)->name[s1];
-		name2=(CL->S)->name[s2];
-		int j;
-		fp=vfopen (result, "w");
-		a=0;
-		int b=0;
-		fprintf(fp, ">%s\n", name1);
-
-
-		for (j=0; j<F->len_aln;++j)
-		{
-			for (a=0; a<F->nseq; ++a)
-				if ((strstr(F->name[a],search_name1)!=NULL) && (F->seq_al[a][j] != '-'))
-					break;
-			if (a < F->nseq)
-				fprintf(fp, "%c", cons1[b++]);
-			else
-				fprintf(fp, "-");
-		}
-
-		fprintf(fp, "\n>%s\n", name2);
-		b=0;
-		for (j=0; j<F->len_aln;++j)
-		{
-			for (a=0; a<F->nseq; ++a)
-			{
-				if ( (strstr(F->name[a],search_name2)!= NULL) && (F->seq_al[a][j] != '-'))
-					break;
-			}
-			if (a <F->nseq)
-				fprintf(fp, "%c", cons2[b++]);
-			else
-				fprintf(fp, "-");
-		}
-
-		vfclose (fp);
-		free_aln (F);
-		F=main_read_aln (result, NULL);
-		CL=aln2constraint_list (F, CL, "sim");
-		free_aln (F);
-	}
+	  {
+	    int c;
+	    static char *result2=vtmpnam (NULL);
+	    char bufname [10000];
+	    FILE *fp =vfopen (result,  "r");
+	    FILE *fp2=vfopen (result2, "w");
+	    
+	    while ((c=fgetc(fp))!=EOF)
+	      {
+		if (c=='>')
+		  {
+		    fscanf (fp, "%s", bufname);
+		    
+		    if (strm (bufname, sn1) || strm (bufname, sn2))
+		      {
+			fprintf (fp2, ">%s",strm (bufname, sn1)?(CL->S)->name[s1]:(CL->S)->name[s2]);
+			while ((c=fgetc (fp))!=EOF && c!='>'){fprintf (fp2, "%c", c);}
+			fprintf (fp2, "-\n");
+			if (c=='>')ungetc (c, fp);
+			
+		      }
+		  }
+	      }
+	    vfclose (fp);
+	    vfclose (fp2);
+	    
+	    F=main_read_aln (result2, NULL);
+	    
+	    CL=aln2constraint_list (F, CL, "sim");
+	    free_aln (F);
+	  }
 	return CL;
 }
 
@@ -2479,10 +2472,10 @@ NT_node ** make_tree ( Alignment *A,Constraint_list *CL,int gop, int gep,Sequenc
 		distances=declare_int (S->nseq, S->nseq);
 		for (a=0; a< S->nseq; a++)
 		  {
-		    ra=name_is_in_list ((S)->name[a],(CL->S)->name, (CL->S)->nseq, 100);
+		    ra=name_is_in_list ((S)->name[a],(CL->S)->name, (CL->S)->nseq, MAXNAMES);
 		    for ( b=0; b< S->nseq; b++)
 		      {
-			rb=name_is_in_list ((S)->name[b],(CL->S)->name, (CL->S)->nseq, 100);
+			rb=name_is_in_list ((S)->name[b],(CL->S)->name, (CL->S)->nseq, MAXNAMES);
 			distances[a][b]=(CL->DM)->score_similarity_matrix[ra][rb];
 		      }
 		  }
