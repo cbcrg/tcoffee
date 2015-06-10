@@ -509,6 +509,8 @@ Job_TC *submit_lib_job ( Job_TC *job)
 	static char *tdir;
 	static char *cdir;
 	
+
+	
 	if (!tdir)tdir=get_tmp_4_tcoffee();
 	if (!cdir)cdir=get_pwd(NULL);
 
@@ -565,6 +567,7 @@ Job_TC *submit_lib_job ( Job_TC *job)
 	else if ( strm2 (M->out_mode, "fA", "fL"))
 	  {
 
+	    
 	    io->CL= seq2list(job);
 	    if (!io->CL)
 	      {
@@ -611,11 +614,12 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 
   /*Make sure that fname is a method*/
 
-
+ 
   sprintf(fname, "%s", method_name);
 
   if ( fname[0]=='A' || fname[0]=='L')
     {
+      
       method=method_file2TC_method("no_method");
       sprintf ( method->out_mode, "%c", fname[0]);
 
@@ -625,16 +629,19 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
     }
   else if ( fname[0]=='M' && is_in_pre_set_method_list (fname+1))
     {
+      
       preset_method=1;
       fname++;
     }
   else if ( is_in_pre_set_method_list (fname))
     {
+      
       preset_method=1;
     }
   else
     {
       char buf[1000];
+      
       if ( check_file_exists ( fname));
       else if (fname[0]=='M' && check_file_exists(fname+1));
       else
@@ -648,7 +655,7 @@ Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib
 	}
     }
 
-
+  
   method=method_file2TC_method(fname);
   job=print_lib_job (NULL, "param->TCM=%p", method);
   job->jobid=-1;
@@ -1154,7 +1161,7 @@ struct TC_method * method_file2TC_method( char *method)
 	{
 		ungetc ( c, fp);
 		fgets ( line,LONG_STRING, fp);
-
+		
 
 		line=substitute (line, "\n", " ");
 		line=substitute (line, "%s", " ");
@@ -1185,14 +1192,16 @@ struct TC_method * method_file2TC_method( char *method)
 		{
 			sscanf (p, "EXECUTABLE %s", m->executable);
 		}
-		else if ( (p=strstr (line, "IN_FLAG2"    ))) sscanf (p, "IN_FLAG2 %s"   , m->in_flag2);
+		else if ( (p=strstr (line, "METHOD"     ))) sscanf (p, "METHOD %s"   , m->method);
+		else if ( (p=strstr (line, "ALN_MODE"   ))) sscanf (p, "ALN_MODE %s"  , m->aln_mode);
+		else if ( (p=strstr (line, "SMODE"      ))) sscanf (p, "SMODE %s"   , m->smode);
+		else if ( (p=strstr (line, "IN_FLAG2"   ))) sscanf (p, "IN_FLAG2 %s"   , m->in_flag2);
 		else if ( (p=strstr (line, "IN_FLAG"    ))) sscanf (p, "IN_FLAG %s"   , m->in_flag);
 		else if ( (p=strstr (line, "OUT_FLAG"   ))) sscanf (p, "OUT_FLAG %s"  , m->out_flag);
 		else if ( (p=strstr (line, "OUT_MODE"   ))) sscanf (p, "OUT_MODE %s"  , m->out_mode);
-		else if ( (p=strstr (line, "ALN_MODE"   ))) sscanf (p, "ALN_MODE %s"  , m->aln_mode);
 		else if ( (p=strstr (line, "SEQ_TYPE"   ))) sscanf (p, "SEQ_TYPE %s"  , m->seq_type);
 		else if ( (p=strstr (line, "WEIGHT"     ))) sscanf (p, "WEIGHT %s"  , m->weight);
-		else if ( (p=strstr (line, "MATRIX"     ))){ sscanf (p, "MATRIX %s"  , m->matrix);}
+		else if ( (p=strstr (line, "MATRIX"     ))) sscanf (p, "MATRIX %s"  , m->matrix);
 		else if ( (p=strstr (line, "GOP"        ))) sscanf (p, "GOP %d"  , &m->gop);
 		else if ( (p=strstr (line, "GEP"        ))) sscanf (p, "GEP %d"  , &m->gep);
 		else if ( (p=strstr (line, "MAXID"      ))) sscanf (p, "MAXID %d"  , &m->maxid);
@@ -1200,8 +1209,11 @@ struct TC_method * method_file2TC_method( char *method)
 		else if ( (p=strstr (line, "EXTEND_SEQ"      ))) sscanf (p, "EXTEND_SEQ %d"  , &m->extend_seq);
 		else if ( (p=strstr (line, "REVERSE_SEQ"      ))) sscanf (p, "REVERSE_SEQ %d"  , &m->reverse_seq);
 
+		
 
 	}
+	
+	
 	vfclose ( fp);
 
 	return m;
@@ -1228,7 +1240,8 @@ int TC_method2method_file( struct TC_method*m,char *fname )
 	if (m->param1[0])fprintf (fp, "PARAM1 %s\n", m->param1);
 	if (m->param2[0])fprintf (fp, "PARAM1 %s\n", m->param2);
 	if (m->in_flag2[0])fprintf (fp, "IN_FLAG2 %s\n", m->in_flag2);
-
+	if (m->smode[0])fprintf (fp, "SMODE %s\n", m->smode);
+	if (m->method[0])fprintf (fp, "METHOD %s\n", m->method);
 	vfclose ( fp);
 	return 1;
 }
@@ -1243,7 +1256,7 @@ char *make_aln_command(TC_method *m, char *seq, char *aln)
 	sprintf ( buf, "%s %s %s%s %s %s%s %s", m->executable, m->param1, m->in_flag, seq,m->param2, m->out_flag,aln, m->param);
 	command=(char*)vcalloc ( strlen (buf)+100, sizeof (char));
 	sprintf ( command, "%s", buf);
-	//HERE ("%s", command); exit (0);
+	
 
 	command=substitute (command, "&bnsp", " ");
 	command=substitute (command, "no_name", "");
@@ -1544,7 +1557,7 @@ int *extract_entry (Constraint_list *CL)
 
 	if (!entry)entry=(int*)vcalloc (100, sizeof (int));
 	if (!CL){s=0;r=1;l=1; return NULL;}
-
+	
 
 	for (; s<(CL->S)->nseq; s++)
 	  {
@@ -1654,19 +1667,19 @@ int CLisCompacted (Constraint_list *CL, char *t)
 					if (s2==ps2 && r2==pr2)
 					{
 
-						HERE ("%s -- NOT COMPACTED",t);
-						exit(0);
+					  fprintf (stderr,"%s -- NOT COMPACTED",t);
+					  exit(0);
 					}
 					else if ( s2<=ps2 && r2<pr2)
 					{
-						HERE ("%s -- NOT SORTED",t);
-						fprintf ( stderr, "\n");
-						for (c=1; c<CL->residue_index[s1][r1][0]; c++)
-						{
-							fprintf (stderr, "%5d ",CL->residue_index[s1][r1][c]);
-						}
-
-						exit(0);
+					  fprintf (stderr, "%s -- NOT SORTED",t);
+					  fprintf ( stderr, "\n");
+					  for (c=1; c<CL->residue_index[s1][r1][0]; c++)
+					    {
+					      fprintf (stderr, "%5d ",CL->residue_index[s1][r1][c]);
+					    }
+					  
+					  exit(0);
 					}
 				}
 				ps2=s2;
@@ -1683,12 +1696,12 @@ int checkCL (Constraint_list *CL, char *t)
 
 	for (a=0; a<(CL->S)->nseq; a++)
 		for (b=1; b<=(CL->S)->len[a]; b++)
-		{
-			HERE ("%s %4d ==> %d",t,CL->residue_index[a][b][0], CL->residue_index[a][b][0]%ICHUNK);
-		}
-
-
-		if (!CL){HERE ("CL is Not declared");fail=1;}
+		  {
+		    HERE ("%s %4d ==> %d",t,CL->residue_index[a][b][0], CL->residue_index[a][b][0]%ICHUNK);
+		  }
+	
+	
+	if (!CL){HERE ("CL is Not declared");fail=1;}
 		else if ( !CL->S){HERE ("S is not declared in CL");fail=1;}
 		else if ( !CL->residue_index){HERE ("residue index is not declared");fail=1;}
 		else if (read_array_size_new (CL->residue_index)!=(CL->S)->nseq){HERE ("CL not well declared (S)");fail=1;}
@@ -1714,7 +1727,7 @@ int checkCL (Constraint_list *CL, char *t)
 
 			if ( fail)
 			{
-				HERE ("******** CHECKED CL: %s ******", t);
+			  fprintf ( stderr,"******** CHECKED CL: %s ******", t);
 				exit (0);
 			}
 		}
@@ -1771,16 +1784,17 @@ Constraint_list *add_entry2list2 (CLIST_TYPE *entry, Constraint_list *CL)
       myexit (fprintf_error ( stderr, "Library out of bounds: %s::%d vs %s::%d [%d]*", (CL->S)->name[s1], r1, (CL->S)->name[s2], r2,(CL->S)->len[s2] ));
     }
 
-
+  
   i=CL->residue_index[entry[SEQ1]][entry[R1]][0];
   if (entry[INDEX]){return reset_entry (entry, CL, entry[INDEX]); }
-  else if (i==1){insert_entry (entry, CL,1);}
+  else if (i==1){CL=insert_entry (entry, CL,1);}
   else
     {
       i=get_entry_index(entry,CL);
       if (i<0)insert_entry (entry,CL,-i);
       else update_entry (entry, CL, i);
     }
+  
   return CL;
 }
 
@@ -1911,10 +1925,12 @@ Constraint_list *insert_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
 	int s;
 	//inserts a new entry between i-1 and i
 
+	
 	r=(int*)vrealloc (r, (r[0]+ICHUNK)*sizeof (int));
 	CL->residue_index[entry[SEQ1]][entry[R1]]=r;
 	CL->ne++;
-
+	
+	
 	s=r[0]-i;
 	if (bsize<s){vfree(buf); bsize=s;buf=(char*)vcalloc (bsize,sizeof (int));}
 	if (s)memcpy(buf,r+i, s*sizeof (int));
@@ -2598,17 +2614,18 @@ Constraint_list * old_read_constraint_list_file(Constraint_list *CL, char *fname
 	int start=0;
 	
 	NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
-
+	
 	if (!CL)
-	{
-		CL=declare_constraint_list_simple(NS);
-		keepNS=1;
-	}
-
+	  {
+	    CL=declare_constraint_list_simple(NS);
+	    keepNS=1;
+	  }
+	
 
 	index=fix_seq_seq (NS, CL->S);
 	entry=(int*)vcalloc ( CL->entry_len+1, sizeof (int));
-
+	
+	
 
 	fp=vfopen(fname,"r");
 	while ((c=fgetc(fp))!='#' && c!=EOF){line+=(c=='\n')?1:0;}
@@ -2678,12 +2695,13 @@ Constraint_list *read_constraint_list_file(Constraint_list *CL, char *fname)
 {
 	static int ov = -1;
 	if (ov == -1)
-	{
-		if (NULL == getenv ("DEBUG_READ_LIB"))
-			ov = 0;
-		else
-			ov = 1;
-	}
+	  {
+	    if (!getenv ("DEBUG_READ_LIB"))
+	      ov = 0;
+	    else
+	      ov = 1;
+	  }
+	
 	
 	if (ov)
 	  return old_read_constraint_list_file(CL, fname);
@@ -2703,11 +2721,11 @@ Constraint_list *read_constraint_list_file(Constraint_list *CL, char *fname)
 	NS=read_seq_in_n_list (&fname, 1,NULL, NULL);
 
 	if (!CL)
-	{
-		CL=declare_constraint_list_simple(NS);
-		keepNS=1;
-	}
-
+	  {
+	    CL=declare_constraint_list_simple(NS);
+	    keepNS=1;
+	  }
+	
 	index=fix_seq_seq (NS, CL->S);
 	entry=(int*)vcalloc ( CL->entry_len+1, sizeof (int));
 
@@ -3459,7 +3477,7 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int
   int t_s1, t_s2, t_r1, t_r2,x;
   double score;
 
-//   HERE ("%d", nproc);
+
   if (!CL || !CL->residue_index)return CL;
   fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", nproc);
 
@@ -4531,7 +4549,7 @@ char * list2prune_list ( Sequence *S, int **sm)
 	else if (ns>=n)ns=n;
 
 
-	HERE ("NS=%d", ns);
+
 
 
 	keep=(int*)vcalloc (n, sizeof (int));
@@ -4981,7 +4999,6 @@ Distance_matrix *seq2distance_matrix (Constraint_list *CL, Alignment *A,char *mo
 			    else if ( strm (mode, "idscore"))
 			      {
 				score=id=idscore_pairseq (B->seq_al[a], B->seq_al[b], NCL->gop, NCL->gep, NCL->M, sim_mode);
-				//HERE ("%s %d %d ->%d", sim_mode, a, b, (int)id);
 			      }
 			    else if (strm (mode, "ktup"))
 			      {
@@ -5165,7 +5182,7 @@ Constraint_list * rna_lib_extension ( Constraint_list *CL, Constraint_list *R)
 char *** produce_method_file ( char *method)
 {
 	static char ***list;
-	int n=0;
+	int n=0, a;
 	FILE *fp;
 
 	if (!list)
@@ -5398,6 +5415,28 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
+	
+
+
+	sprintf (list[n][0], "proba_prfpair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE profile_pair\n");
+	fprintf ( fp, "EXECUTABLE2 t_coffee\n");
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    -profile1=\n");
+	fprintf ( fp, "IN_FLAG2   -profile2=\n");
+	fprintf ( fp, "PARAM      -method=proba_pair\n");
+	fprintf ( fp, "OUT_FLAG   -outfile=\n");
+	fprintf ( fp, "SEQ_TYPE   R\n");
+	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+	fprintf ( fp, "SUPPORTED  NO");
+	vfclose (fp);}
+	
+
+
 
 	sprintf (list[n][0], "proba_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
@@ -6659,6 +6698,11 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", NCBIBLAST_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", NCBIBLAST_4_TCOFFEE);
 	vfclose (fp);}
+
+
+	for (a=0; a<n; a++)printf_file (list[a][1], "a", "METHOD %s\n", list[a][0]), 
+	  
+	
 
 	list[n]=NULL;
 	return list;

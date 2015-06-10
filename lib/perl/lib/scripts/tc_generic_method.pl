@@ -1098,31 +1098,23 @@ sub seq2profile_pair
 
 
 	if ($method eq "clustalw")
-	{
-		&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
-		`clustalw -profile1=prf1.aln -profile2=prf2.aln -outfile=result.aln`;
-		&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);
-	}
+	  {
+	    `clustalw -profile1=$profile1 -profile2=$profile2 -outfile=$outfile`;
+	  }
 	elsif ( $method eq "clustalo")
-	{
-		`clustalo --p1 $profile1 --p2 $profile2 -o $outfile --force`;
-# 		&set_temporary_dir ("set",$profile1,"prf1.aln",$profile2,"prf2.aln");
-# 		recode_name ("prf1.aln", "code");
-# 		recode_name ("prf2.aln", "code");
-# 		`clustalo --p1 prf1.aln --p2 prf2.aln -o result.aln --force`;
-# 		recode_name ("result.aln");
-# 		&set_temporary_dir ("unset",$mode, $method, "result.aln",$outfile);
-	}
+	  {
+	    `clustalo --p1 $profile1 --p2 $profile2 -o $outfile --force`;
+	  }
 	elsif ( $method eq "hhalign")
-	{
-		hhalign ( $profile1,$profile2,$outfile,$param);
-	}
+	  {
+	    hhalign ( $profile1,$profile2,$outfile,$param);
+	  }
 	else
-	{
-		`$method -profile1=prf1.aln -profile2=prf2.aln -outfile=result.aln $param>x 2>x`;
-	}
+	  {
+	    `$method -profile1=$profile1 -profile2=$profile2 -outfile=$outfile $param> /dev/null 2>/dev/null`;
+	  }
 	myexit ($EXIT_SUCCESS);
-}
+      }
 
 sub pg_is_installed
   {

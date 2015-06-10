@@ -10685,6 +10685,107 @@ Alignment *gap_trim (Alignment *A, int f)
 	vfree (list); free_int (v, -1);
 	return R;
 }
+int*aln2subset_cov (Alignment *A, char *mode, int *n);
+int *aln2subset    (Alignment *A, char *mode, int *n)
+{
+  int a,*list;
+
+
+  if (strm (mode, "cov"))list=aln2subset_cov (A, "cov", n);
+  else if (strm (mode, "all"))
+    {
+      
+      n[0]=A->nseq;
+      list=(int*)vcalloc ( A->nseq, sizeof (int));
+      for (a=0; a<n[0]; a++) list[a]=a;
+    }
+  else
+    {
+      printf_exit (EXIT_FAILURE, stderr, "ERROR: [%s] is an unknown mode of aln2subset [FATAL:%s]\n",mode,PROGRAM);
+    }
+  return list;
+}
+int*aln2subset_cov (Alignment *A, char *mode, int *ns)
+{
+  int *score, *list, *rlist;
+  char *cons;
+  int pleft,n,left, a, b;
+  int *seql;
+  ns[0]=0;
+  list=(int*)vcalloc (A->nseq, sizeof (int));
+  cons=(char*)vcalloc (A->len_aln+1, sizeof (int));
+  score=(int*)vcalloc (A->nseq, sizeof (int));
+  left=A->len_aln;
+  seql=(int*)vcalloc (A->nseq, sizeof(int));
+  
+  
+  //1 deal with empty columns --- there should not be any
+  for (a=0; a<A->len_aln; a++)
+    {
+      n=0;
+      for (b=0; b<A->nseq; b++)
+	if (!is_gap(A->seq_al[b][a]))n++;
+      if (n==0)
+	{
+	  cons[a]='-';
+	  left--;
+	}
+    }
+  //add residues from the sequences covering max.
+  while (left>0)
+    {
+      int best_score=0;
+      int best_seq=0;
+      
+      for (a=0; a<A->nseq; a++)score[a]=0;
+      for (a=0; a<A->len_aln; a++)
+	{
+	  if (!cons[a])
+	    {
+	      n=0;
+	      for (b=0; b<A->nseq; b++)
+		{
+		  if (!seql[b] && !is_gap(A->seq_al[b][a]))n++;
+		}
+	      for (b=0; b<A->nseq; b++)
+		{
+		  if (!seql[b] && !is_gap(A->seq_al[b][a]))
+		    {
+		      score[b]+=n;
+		      if (score[b]>best_score){best_score=score[b];best_seq=b;}
+		    }
+		}
+	    }
+	}
+      seql[best_seq]=1;
+      list[ns[0]++]=best_seq;
+      for (a=0; a<A->len_aln; a++)
+	{
+	  if (!cons[a] && !is_gap(A->seq_al[best_seq][a]))
+	    {
+	      cons[a]=A->seq_al[best_seq][a];
+	      left--;
+	    }
+	}
+      if (left==pleft)
+	{
+	  fprintf ( stderr, "\nCONS: %s\n", cons);
+	  print_aln (A);
+	  printf_exit (EXIT_FAILURE, stderr, "\nCould not Build profile consensus::aln2cons_seq_cov [FATAL:%s]", PROGRAM);
+	}
+      
+      pleft=left;
+    }
+  
+  rlist=(int*)vcalloc (ns[0], sizeof (int));
+  for (a=0; a<ns[0]; a++)rlist[a]=list[a];
+  vfree (list);
+  vfree(score);
+  vfree(cons);
+  vfree (seql);
+  return rlist;
+}
+
 
 
 static int find_worst_seq ( int **sim, int n, int *keep, int max, int direction);

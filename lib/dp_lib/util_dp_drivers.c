@@ -143,11 +143,16 @@ Constraint_list *seq2list     ( Job_TC *job)
       char *weight;
       TC_method *M;
 
-
+      
+      
       M=(job->param)->TCM;
-      mode=M->executable;
-      weight=M->weight;
+      
 
+      if (M->smode && M->smode[0])mode=M->smode;
+      else mode=M->executable;
+
+            
+      weight=M->weight;
       PW_CL=M->PW_CL;
 
       CL=(job->io)->CL;
@@ -253,6 +258,10 @@ Constraint_list *seq2list     ( Job_TC *job)
 	  RCL=plib_msa (CL);
 	}
 /*STRUCTURAL METHODS*/
+       else if (strm (mode, "prf"))
+	 {
+	   RCL=profile_pair_decomposed (M, seq, CL);
+	 }
       else if (strm (mode, "profile_pair") || strm (mode, "hh_pair"))
 	{
 	  RCL=profile_pair (M, seq, CL);
@@ -1205,7 +1214,6 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 // 	return CL;
 // }
 
-
 Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 {
 	char seq[1000];
@@ -1216,8 +1224,6 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	char command[10000];
 	char *param;
 	static char *sn1, *sn2;
-	
-
 	
 
 	if ( strm (M->executable2, "hhalign"))
@@ -1245,6 +1251,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	
 	prf1_file=vtmpnam (NULL);
 	fp=vfopen (prf1_file, "w");
+	
 	
 	
 	if ( A1)
@@ -1331,6 +1338,317 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	  }
 	return CL;
 }
+
+Constraint_list * profile_pair_decomposed (TC_method *M , char *in_seq, Constraint_list *CL)
+{
+  int a,b,c,d, we;
+  int *s, **sub, *ns, ***lu, *entry, *nentry, **lus;
+  char *seq, *input, *output, *param, ***subseq;
+  Alignment **A, *F;
+  Constraint_list *LCL;
+    
+  //declare Start
+  seq=(char*)vcalloc (strlen(in_seq)+1, sizeof(char));
+  s=(int*)vcalloc (2, sizeof (int));
+  A=(Alignment**)vcalloc (2, sizeof (Alignment*));
+  lu=(int***)vcalloc (2, sizeof (int**));
+  sub=(int**)vcalloc (2, sizeof (int*));
+  subseq=(char***)vcalloc (2, sizeof (char**));
+  ns=(int*)vcalloc (2, sizeof (int));
+  input=vtmpnam(NULL);
+  output=vtmpnam (NULL);
+  nentry=(int*)vcalloc (CL->entry_len+1, sizeof (int));
+  //declare End
+  
+      
+  sprintf ( seq, "%s", in_seq);
+  atoi(strtok (seq,SEPARATORS));
+  
+  s[0]=atoi(strtok (NULL,SEPARATORS));
+  s[1]=atoi(strtok (NULL,SEPARATORS));
+  
+  param=NULL;
+  if ( M->param)
+    {
+      param=(char*)vcalloc(strlen (M->param)+1, sizeof (char));
+      sprintf ( param, "%s", M->param);
+      param=substitute ( param, " ", "");
+      param=substitute ( param, "\n", "");
+    }
+  
+  for (a=0; a<2; a++)
+    {
+      int l;
+      if (A[a]=seq2R_template_profile(CL->S,s[a]))
+	{
+	  l=A[a]->len_aln;
+	  sub[a]=aln2subset (A[a],"cov",&ns[a]);
+	  subseq[a]=declare_char (ns[a], l+1);
+	  for (b=0; b<ns[a]; b++)sprintf(subseq[a][b], "%s", A[a]->seq_al[sub[a][b]]);
+	}
+      else
+	{
+	  ns[a]=1;
+	  l=strlen ((CL->S)->seq[s[a]]);
+	  subseq[a]=declare_char (1, l+1);
+	  sprintf (subseq[a][0], "%s",(CL->S)->seq[s[a]]);
+	  
+	}
+      lu[a]=declare_int (ns[a],l+1); 
+      for (b=0; b<ns[a]; b++)
+	{
+	  for (d=0,c=0; c<l; c++)
+	    {
+	      if (!is_gap(subseq[a][b][c]))lu[a][b][++d]=c+1;
+	    }
+	  ungap(subseq[a][b]);
+	}
+      
+    }
+ 
+  //prepare the input file
+  printf_file (input, "w", "");
+  lus=declare_int (ns[0]+ns[1]+1, 2);
+  for (c=0,a=0; a<2; a++)
+    for (b=0; b<ns[a]; b++, c++)
+      {
+	printf_file (input, "a", ">seq_%d\n%s\n", c,subseq[a][b]);
+	lus[c][0]=a;
+	lus[c][1]=b;
+      }
+  printf_system ("t_coffee -seq %s -out_lib %s -lib_only -method %s -outorder=input >/dev/null 2>/dev/null", input, output, M->method);
+  
+  LCL=read_constraint_list_file (NULL, output);
+  extract_entry(NULL);
+  while ((entry=extract_entry(LCL)))
+    {
+      int seq1=entry[SEQ1];
+      int seq2=entry[SEQ2];
+
+      int p1=lus[seq1][0];
+      int p2=lus[seq2][0];
+	
+      if (p1!=p2)
+	{
+	  nentry[SEQ1]=s[p1];
+	  nentry[SEQ2]=s[p2];
+	  nentry[R1]=lu[p1][lus[seq1][1]][entry[R1]];
+	  nentry[R2]=lu[p2][lus[seq2][1]][entry[R2]];
+	  nentry[WE]=entry[WE];
+	  nentry[CONS]=1;
+	  add_entry2list (nentry,CL);
+	}
+    }
+  free_constraint_list (LCL);
+  
+  
+#ifdef OLDSTUFF
+  for (a=0; a<ns[0]; a++)
+    for (b=0; b<ns[1]; b++)
+      {
+	static int *count;
+	Constraint_list *LCL=NULL;
+		
+	printf_file (input, "w",">seq1\n%s\n>seq2\n%s\n",subseq[0][a], subseq[1][b]);
+	printf_system ("t_coffee -seq %s -out_lib %s -lib_only -method %s -outorder=input >/dev/null 2>/dev/null", input, output, M->method);
+	
+	
+	LCL=read_constraint_list_file (NULL, output);
+	
+	extract_entry(NULL);
+	while ((entry=extract_entry(LCL)))
+	  {
+	    //careful: the library is symetrical and sequences indexed 0-N
+	    //carelul the new lib entries come with entry[INDEX] set they cannot be placed back into the main lib
+	    
+	    if (entry[SEQ1]==0)
+	      {
+		nentry[SEQ1]=s[0];
+		nentry[SEQ2]=s[1];
+		nentry[R1]=lu[0][a][entry[R1]];
+		nentry[R2]=lu[1][b][entry[R2]];
+	      }
+	    else
+	      {
+		nentry[SEQ1]=s[1];
+		nentry[SEQ2]=s[0];
+		nentry[R1]=lu[1][b][entry[R1]];
+		nentry[R2]=lu[0][a][entry[R2]];
+	      }
+	    
+	    
+	    nentry[WE]=entry[WE];
+	    nentry[CONS]=1;
+	    add_entry2list (nentry,CL);
+	    
+	  }
+	
+	free_constraint_list_full (LCL);
+      }
+#endif
+//free
+  vfree (seq);
+  vfree (s);
+  vfree (A);
+  free_int (sub, -1);
+  free_int (lus, -1);
+  for (a=0; a<2; a++)
+    {
+      free_int (lu[a], -1);
+      free_char (subseq[a], -1);
+    }
+  vfree (subseq);
+  vfree (input);
+  vfree (output);
+  vfree (lu);
+  vfree (param);
+  vfree (nentry);
+  
+  //free End
+
+  return CL;
+}
+Constraint_list * profile_subset_pair_old (TC_method *M , char *in_seq, Constraint_list *CL)
+{
+  int a,b,c,d, we;
+  int *entry, *s, **sub, *ns, ***lu;
+  char *seq, ***prf, *result, *param;
+  Alignment **A, *F;
+  
+  if ( M->executable2[0]=='\0')
+    fprintf ( stderr, "\nERROR: profile_pair requires a method: thread_pair@EP@executable2@<method> [FATAL:%s]\n", PROGRAM);
+  
+  //declare Start
+  seq=(char*)vcalloc (strlen(in_seq)+1, sizeof(char));
+  entry=(int*)vcalloc (CL->entry_len+1, sizeof (int));
+  s=(int*)vcalloc (2, sizeof (int));
+  A=(Alignment**)vcalloc (2, sizeof (Alignment*));
+  lu=(int***)vcalloc (2, sizeof (int**));
+  sub=(int**)vcalloc (2, sizeof (int*));
+  ns=(int*)vcalloc (2, sizeof (int));
+  result=vtmpnam(NULL);
+  prf=(char***)vcalloc (2, sizeof (char**));
+  result=vtmpnam (NULL);
+  //declare End
+  
+ 
+  
+  sprintf ( seq, "%s", in_seq);
+  atoi(strtok (seq,SEPARATORS));
+  
+  s[0]=atoi(strtok (NULL,SEPARATORS));
+  s[1]=atoi(strtok (NULL,SEPARATORS));
+  
+  param=NULL;
+  if ( M->param)
+    {
+      param=(char*)vcalloc(strlen (M->param)+1, sizeof (char));
+      sprintf ( param, "%s", M->param);
+      param=substitute ( param, " ", "");
+      param=substitute ( param, "\n", "");
+    }
+  
+  for (a=0; a<2; a++)
+    {
+      A[a]=seq2R_template_profile(CL->S,s[a]);
+      
+      sub[a]=aln2subset (A[a],"cov",&ns[a]);
+      lu[a]=declare_int (ns[a],A[a]->len_aln+1); 
+      for (b=0; b<ns[a]; b++)
+	  {
+	    for (d=0,c=0; c<A[a]->len_aln; c++)
+	      {
+		if (!is_gap(A[a]->seq_al[sub[a][b]][c]))lu[a][b][++d]=c+1;
+	      }
+	  }
+    }
+  
+  for (a=0; a<2; a++)
+    {
+
+      prf[a]=(char**)vcalloc (ns[a], sizeof (char*));
+      for (b=0; b<ns[a]; b++)
+	{
+	  FILE *fp;
+	  char *seq=(char*)vcalloc (strlen (A[a]->seq_al[sub[a][b]])+1, sizeof (char));
+	  sprintf (seq, "%s", A[a]->seq_al[sub[a][b]]);
+	  ungap(seq);
+	  
+	  prf[a][b]=vtmpnam(NULL);
+	  fp=vfopen (prf[a][b], "w");
+	  fprintf (fp, ">Seq_%d\n%s\n", a+1, seq);
+	  vfclose (fp);
+	  vfree (seq);
+	}
+    }
+
+
+  entry[SEQ1]=s[0];
+  entry[SEQ2]=s[1];
+  for (a=0; a<ns[0]; a++)
+    for (b=0; b<ns[1]; b++)
+      {
+	int p1=0, p2=0;
+	int we;
+	
+	printf_system ("tc_generic_method.pl -mode=profile_pair -method=%s %s%s %s%s %s%s -param=%s -tmpdir=%s", M->executable2,M->in_flag,prf[0][a], M->in_flag2,prf[1][b],M->out_flag, result, param, get_tmp_4_tcoffee());
+	
+	fprintf (stderr, "tc_generic_method.pl -mode=profile_pair -method=%s %s%s %s%s %s%s -param=%s -tmpdir=%s", M->executable2,M->in_flag,prf[0][a], M->in_flag2,prf[1][b],M->out_flag, result, param, get_tmp_4_tcoffee());
+	
+	F=main_read_aln (result, NULL);
+
+	HERE ("%s %s", F->name[0], F->seq_al[0]);
+	
+	we=aln2sim (F, "idmat");
+	for (c=0; c<F->len_aln; c++)
+	  {
+	    char c1, c2;
+	    int r1, r2;
+
+
+	    c1=F->seq_al[0][c];
+	    c2=F->seq_al[1][c];
+	    
+	    r1=!is_gap(c1);
+	    r2=!is_gap(c2);
+	    
+	    p1+=r1;
+	    p2+=r2;
+	    
+	    if (r1 && r2)
+	      {
+		entry[R1]=lu[0][a][p1];
+		entry[R2]=lu[1][b][p2];
+		entry[WE]=(int)(we*1000);
+		entry[CONS]=1;
+		add_entry2list (entry,CL);
+	      }
+	  }
+	free_aln(F);
+      }	
+
+//free
+  vfree (seq);
+  vfree (entry);
+  vfree (s);
+  vfree (A);
+  free_int (sub, -1);
+  
+  for (a=0; a<2; a++)
+    {
+      free_int (lu[a], -1);
+      free_char (prf[a], -1);
+    }
+  vfree (prf);
+  vfree (lu);
+  vfree (result);
+  vfree (param);
+  //free End
+
+  return CL;
+}
+
+
 
 
 Constraint_list    * pdbid_pair (TC_method *M , char *in_seq, Constraint_list *CL)
@@ -5899,7 +6217,7 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 /****************************************************/
 char * rec_tree_aln_N ( NT_node P,Sequence *S,int N, int argv, char **argc);
 int align_node (NT_node P, Sequence *S,int argc, char **argv);
-int node2file_list (NT_node P,  Sequence *S,char *flist);
+int node2file_list (NT_node P,  Sequence *S,char *flist, char *subtree);
 
 int tree_aln_N ( NT_node P, Sequence *S, int N, int argc, char **argv)
 {
@@ -5944,20 +6262,24 @@ int align_node (NT_node P, Sequence *S,int argc, char **argv)
   if (cl)vfree(cl);
   P->alfile=vtmpnam (NULL);
   printf_file (seq, "w", "");
-  ng=node2file_list (P,S,seq);
+  printf_file (tree, "w", "");
+  
+  ng=node2file_list (P,S,seq,tree);
+  printf_file (tree, "a", ";\n");
+  
   fprintf ( stderr, "\n\tMerge: %5d --- %5d --> %5d seq %5d Groups", (P->left)->nseq, (P->right)->nseq, P->nseq,ng);
-  printf("\n%s -profile FILE::%s -outfile %s -newtree %s >/dev/null 2>/dev/null\n", cl=list2string (argv, argc), seq, P->alfile, tree);
-  return printf_system ("%s -profile FILE::%s -outfile %s -newtree %s >/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
+  printf("\n%s -profile FILE::%s -outfile %s -usetree %s >/dev/null 2>/dev/null\n", cl=list2string (argv, argc), seq, P->alfile, tree);
+  return printf_system ("%s -profile FILE::%s -outfile %s -usetree %s >/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
 }
 
-int node2file_list (NT_node P, Sequence *S, char *flist)
+int node2file_list (NT_node P, Sequence *S, char *flist, char *tree)
 {
   int t=0;
-
+  static int index;
+  
   if (!P)return 0;
   if (P->isseq)
     {
-
       if (P->nseq==1)
 	{
 	  int s;
@@ -5966,12 +6288,23 @@ int node2file_list (NT_node P, Sequence *S, char *flist)
 	  printf_file (P->alfile, "w", ">%s\n%s\n", S->name[s], S->seq[s]);
 	}
       printf_file (flist, "a", "%s\n", P->alfile);
+      printf_file (tree, "a", "%s", P->alfile);
+            
+      index++;
       t=1;
     }
   else
     {
-      t+=node2file_list (P->left,S,flist);
-      t+=node2file_list (P->right,S,flist);
+      if (P->left && P->right)
+	{
+	  printf_file (tree, "a","(");
+	  t+=node2file_list (P->left,S,flist,tree);
+	  printf_file (tree, "a",",");
+	  t+=node2file_list (P->right,S,flist,tree);
+	  printf_file (tree, "a",")");
+	}
+      else if (P->left )t+=node2file_list (P->left ,S,flist,tree);
+      else if (P->right)t+=node2file_list (P->right,S,flist,tree);
     }
   return t;
 }

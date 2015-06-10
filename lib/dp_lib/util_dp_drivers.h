@@ -53,7 +53,10 @@ Constraint_list * align_pdb_pair_2 (char *seq, Constraint_list *CL);
 
 Constraint_list * pdb_pair  ( TC_method*M,char *seq, Constraint_list *CL);
 Constraint_list * pdbid_pair  ( TC_method*M,char *seq, Constraint_list *CL);
-Constraint_list * profile_pair  ( TC_method*M,char *seq, Constraint_list *CL);
+Constraint_list * profile_subset_pair  ( TC_method*M,char *seq, Constraint_list *CL);
+Constraint_list * profile_pair             ( TC_method*M,char *seq, Constraint_list *CL);
+Constraint_list * profile_pair_decomposed  ( TC_method*M,char *seq, Constraint_list *CL);
+
 Constraint_list * thread_pair  ( TC_method*M,char *seq, Constraint_list *CL);
 Constraint_list * thread_pair2 ( TC_method *M,int s1, int s2, Constraint_list *CL);
 Constraint_list * sap_pair (char *seq, char *weight, Constraint_list *CL);

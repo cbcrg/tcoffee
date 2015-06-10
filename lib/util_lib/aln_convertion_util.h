@@ -407,6 +407,7 @@ int aln2gap_trimmed (Alignment *A, int n, char *alnf, char *seqf);
 Alignment *gap_trim (Alignment *A, int f);
 Alignment * master_trimseq( Alignment *A, Sequence *S,char *mode);
 Alignment * trimseq( Alignment *A, Sequence *S, char *mode);
+int *aln2subset (Alignment *A, char *mode, int *n);
 Alignment *simple_trimseq (Alignment *A,Alignment*K, char *mode, char *seq, int **sim);
 Alignment *sim_filter (Alignment *A, char *in_mode, char *seq_list);
 

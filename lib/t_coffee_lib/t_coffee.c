@@ -1301,7 +1301,7 @@ if ( !do_evaluate)
 			    /*Min_value*/ "0"            ,\
 			    /*Max Value*/ "1"             \
 					  );
-#ifdef XXXX
+
 /*PARAMETER PROTOTYPE:    VERSION      */
 	       export_list=declare_char (100, STRING);
 	       n_export=get_cl_param(\
@@ -1320,7 +1320,7 @@ if ( !do_evaluate)
 			    /*Min_value*/ "0"            ,		\
 			    /*Max Value*/ "1"				\
 					  );
-#endif	       
+	       
 	       
 /*PARAMETER PROTOTYPE:        IN */
 	       template_mode_list=declare_char (100, STRING);
@@ -6779,13 +6779,15 @@ Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, in
   NT_node T;
   
   
-  //This insures that the function aln2cons_cov is used
+  //This insures that the function aln2cons_cov is used to generate the consensus
   //cputenv ("KM_COFFEE_CONS_COV=1");
   
-  //This insures that  get_tot_prob estimates prf/prf alignments using the cons
+  //This insures that  get_tot_prob estimates prf/prf alignments using the cons and not the voectorized MSA
   //cputenv ("KM_COFFEE_PRF_CONS=1");
   
-    
+  //Split profiles can be triguered by adding to any method:-method <method>@EP@SMODE@prf
+  //This mode builds the prf/prf library by aligning pw the sequences best covering each prf
+
   if (strm (km_tree, "kmeans")){
     seq2km_tree (S, km_tree2);}
   else if (strm (km_tree, "cotree"))

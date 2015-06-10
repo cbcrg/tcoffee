@@ -2194,9 +2194,16 @@ int vsrand (int val)
     }
   else
     {
-
-      /*Make sure two processes in a row do not get the same time value*/
-      srand ((val==0)?time(NULL):val);
+      unsigned seed;
+      if (val==0)
+	{
+	  //;Used to be 
+	  
+	  if (read(open("/dev/urandom", O_RDONLY), &seed, sizeof (unsigned))) srand(seed);
+	  else srand (getpid()); 
+	}
+      else
+	srand (val);
       initialized=1;
     }
   return 1;
@@ -4681,8 +4688,11 @@ char *get_tmp_4_tcoffee ()
 
       char buf[1000];
       char host[1024];
+      int hn=0;
+      int a;
       gethostname(host, 1023);
-
+      for (a=0; a<strlen (host); a++)hn+=host[a];
+      
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))
 	  {
 		  printf("UNIQUE_DIR_4_TCOFFEE\n");
@@ -4702,7 +4712,11 @@ char *get_tmp_4_tcoffee ()
    if (is_rootpid())
 	{
 	  cputenv ("ROOT_TMP_4_TCOFFEE=%s",  tmp_4_tcoffee);
-	  sprintf (buf, "%s/t_coffee.tmp/tmp.%s.%d/", tmp_4_tcoffee,host,getpid());
+	  if (strstr (tmp_4_tcoffee, "tmp")||strstr (tmp_4_tcoffee, "temp"))
+	    sprintf (buf, "%s/%d%d/", tmp_4_tcoffee,hn,getpid());
+	  else
+	    sprintf (buf, "%s/tmp/%d%d/", tmp_4_tcoffee,hn,getpid());
+	  
 	  sprintf (tmp_4_tcoffee, "%s", buf);
 
 	  my_mkdir(tmp_4_tcoffee);
@@ -5864,7 +5878,7 @@ int vtmpnam_size()
 }
 int get_vtmpnam2_root()
 {
-  int MAX_TMPNAM_ROOT=10000;
+  int MAX_TMPNAM_ROOT=100000;
   static int v;
 
   if (v) ;
@@ -5875,7 +5889,24 @@ int get_vtmpnam2_root()
     }
   return v;
 }
+char *short_tmpnam_2(char *s);
+char *ultrashort_tmpnam_2 (char *s);
+char *long_tmpnam_2 (char *s);
 char *tmpnam_2 (char *s)
+{
+  static int shortn;
+  shortn=2;
+  if (!shortn)
+    {
+      if (atoigetenv ("SHORT_TMPNAME")==1)shortn=1;
+      else if (atoigetenv ("SHORT_TMPNAME")==2)shortn=2;
+      else shortn=-1;
+    }
+  if (shortn==1) return short_tmpnam_2(s);
+  else if ( shortn==2)  return ultrashort_tmpnam_2(s);
+  else  return long_tmpnam_2(s);
+}
+char *long_tmpnam_2 (char *s)
 {
 	static int root;
 	static int file;
@@ -5902,11 +5933,44 @@ char *tmpnam_2 (char *s)
 	if (!s)return NULL;
 	tmpdir=get_tmp_4_tcoffee();
 
-	sprintf (buf, "%s/%s%d_TCtmp%s",tmpdir,root2, file++,set_file2remove_extension (NULL, GET));
+	sprintf (buf, "%s/%s%d%s",tmpdir,root2, file++,set_file2remove_extension (NULL, GET));
 	if ( strlen(buf)>=name_size)s=(char*)vrealloc (s,(strlen(buf)+1)*sizeof (char));
 	sprintf (s, "%s", buf);
 	return s;
 }
+char *ultrashort_tmpnam_2 (char *s)
+{
+	static int root;
+	static int file;
+	char buf[VERY_LONG_STRING];
+	static char root2[VERY_LONG_STRING];
+	static char *tmpdir;
+	static int name_size;
+
+	if ( !root || !s)
+	  {
+	    char *vtmpnam_prefixe;
+	    
+	    name_size=MAX( 2*L_tmpnam, MAXNAMES*2)+1;
+	    root=get_vtmpnam2_root();
+	    sprintf ( root2, "%d%d", root, (int)getpid());
+	    
+	    vtmpnam_prefixe=(char*)vcalloc (strlen (root2)+strlen (get_tmp_4_tcoffee())+2, sizeof (char));
+	    sprintf (vtmpnam_prefixe, "%s/%s", get_tmp_4_tcoffee(), root2);
+	    set_string_variable ("vtmpnam_prefixe1", vtmpnam_prefixe);
+	    set_string_variable ("vtmpnam_prefixe2", root2);
+	    vfree (vtmpnam_prefixe);
+	  }
+	
+	if (!s)return NULL;
+	tmpdir=get_tmp_4_tcoffee();
+
+	sprintf (buf, "%s/%s%d%s",tmpdir,root2, file++,set_file2remove_extension (NULL, GET));
+	if ( strlen(buf)>=name_size)s=(char*)vrealloc (s,(strlen(buf)+1)*sizeof (char));
+	sprintf (s, "%s", buf);
+	return s;
+}
+
 char *short_tmpnam_2(char *s)
 {
   static int root;
