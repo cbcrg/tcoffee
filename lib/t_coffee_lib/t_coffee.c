@@ -6785,8 +6785,11 @@ Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, in
   //This insures that  get_tot_prob estimates prf/prf alignments using the cons and not the voectorized MSA
   //cputenv ("KM_COFFEE_PRF_CONS=1");
   
-  //Split profiles can be triguered by adding to any method:-method <method>@EP@SMODE@prf
-  //This mode builds the prf/prf library by aligning pw the sequences best covering each prf
+  //Split profiles can be triguered by adding to any method:-method <method>@EP@PRFMODE@prf1-2 or3
+  //@EP@PRFMODE@prf1: pick the N sequences covering entirely the prf
+  //@EP@PRFMODE@prf2: make a consensus sequence patching the most covering sequences
+  //@EP@PRFMODE@prf3: make a consensus sequence using blosum62mt
+  
 
   if (strm (km_tree, "kmeans")){
     seq2km_tree (S, km_tree2);}

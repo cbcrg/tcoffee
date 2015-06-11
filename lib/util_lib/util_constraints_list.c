@@ -1194,7 +1194,7 @@ struct TC_method * method_file2TC_method( char *method)
 		}
 		else if ( (p=strstr (line, "METHOD"     ))) sscanf (p, "METHOD %s"   , m->method);
 		else if ( (p=strstr (line, "ALN_MODE"   ))) sscanf (p, "ALN_MODE %s"  , m->aln_mode);
-		else if ( (p=strstr (line, "SMODE"      ))) sscanf (p, "SMODE %s"   , m->smode);
+		else if ( (p=strstr (line, "PRFMODE"    ))) sscanf (p, "PRFMODE %s"   , m->prfmode);
 		else if ( (p=strstr (line, "IN_FLAG2"   ))) sscanf (p, "IN_FLAG2 %s"   , m->in_flag2);
 		else if ( (p=strstr (line, "IN_FLAG"    ))) sscanf (p, "IN_FLAG %s"   , m->in_flag);
 		else if ( (p=strstr (line, "OUT_FLAG"   ))) sscanf (p, "OUT_FLAG %s"  , m->out_flag);
@@ -1240,7 +1240,7 @@ int TC_method2method_file( struct TC_method*m,char *fname )
 	if (m->param1[0])fprintf (fp, "PARAM1 %s\n", m->param1);
 	if (m->param2[0])fprintf (fp, "PARAM1 %s\n", m->param2);
 	if (m->in_flag2[0])fprintf (fp, "IN_FLAG2 %s\n", m->in_flag2);
-	if (m->smode[0])fprintf (fp, "SMODE %s\n", m->smode);
+	if (m->prfmode[0])fprintf (fp, "PRFMODE %s\n", m->prfmode);
 	if (m->method[0])fprintf (fp, "METHOD %s\n", m->method);
 	vfclose ( fp);
 	return 1;

@@ -27,10 +27,10 @@ endif
 #                                                       #
 #########################################################
 
-CC=g++
-
+CC=g++ 
 ifndef CFLAGS
 CFLAGS=-O3 -Wno-write-strings
+#CFLAGS=-g
 endif
 
 ifdef OPENMP
@@ -168,7 +168,6 @@ env:
 	@echo 'LIB_DIR          :' $(LIB_DIR)
 	@echo 'LIBRARY          :' $(LIBRARY)
 	@echo 'DISTRIBUTIONS    :' $(DISTRIBUTIONS)
-	
 
 
 general_distribution:
@@ -180,9 +179,6 @@ general_distribution:
 	mkdir -p $(DISTRIB_DIR)/reference_test
 	echo '' > $(DISTRIB_DIR)/install
 	make -i VERSION=$(VERSION) CC=cc code
-	#make -i VERSION=$(VERSION) CC=cc general_makefile
-	#make -i VERSION=$(VERSION) CC=cc test
-	#make -i VERSION=$(VERSION) CC=cc doc
 	make -i VERSION=$(VERSION) CC=cc license
 
 library_distribution:
@@ -192,8 +188,6 @@ library_distribution:
 	mkdir $(DISTRIBUTIONS)
 	mv lib.tar.gz $(DISTRIBUTIONS)/lib_$(VERSION).tar.gz
 
-	
-	
 empty:
 	-rm *.o_$(OSNAME)
 	tar -cf old_c.tar *.c *.h
@@ -206,19 +200,15 @@ distribute: all
 	echo x > core
 	rm core
 	-rm *.o_$(OSNAME)
-	
 code:
 	echo $(OSNAME) Compilation
 	make clean
 	make CC="g++" $(EXECUTABLE)
-	
 	mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	make copy_sources
-	
 	$(PERL4MAKEFILE_LIB)/tclinkdb2header.pl -infile=$(SCRIPT_LIB)/install.pl -mode=Perl -db=$(KO_LIB)/tclinkdb.txt >$(DISTRIB_DIR)/install
 	cp $(KO_LIB)/tclinkdb.txt $(DISTRIB_DIR)
 	chmod u+x $(DISTRIB_DIR)/install
-	
 
 # 
 # This target copies T-Coffee sources files from the library folder 
@@ -238,8 +228,8 @@ code:
 copy_sources: 
 	-rm -rf folders
 	for it in `cat code_list`; do \
-  	  dir=$(LIB_DIR); \
-  	  entry=$${it/$$dir/}; \
+	  dir=$(LIB_DIR); \
+	  entry=$${it/$$dir/}; \
 	  path=`dirname $$entry`; \
 	  file=`basename $$entry`; \
 	  mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source/$$path; \
@@ -247,22 +237,20 @@ copy_sources:
 	  echo "$$path" >> folders; \
 	done
 
-	# Always add the current and 'data_headers' folders
+# Always add the current and 'data_headers' folders
 	echo "." >> folders
 	echo "data_headers" >> folders
-	
-	# Add the 'header' files
+# Add the 'header' files
 	for path in `cat folders | uniq`; do \
 	  mkdir -p $(DISTRIB_DIR)/$(EXECUTABLE)_source/$$path; \
 	  cp $(LIB_DIR)/$$path/*.h $(DISTRIB_DIR)/$(EXECUTABLE)_source/$$path; \
 	done
-	
-	# Copy these headers that are generated/upodated automatically by the build process
+# Copy these headers that are generated/upodated automatically by the build process
 	cp ./perl_header_lib.h $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	cp ./programmes_define.h $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	cp ./define_header.h $(DISTRIB_DIR)/$(EXECUTABLE)_source
 
- 	# Some missing stuff  	
+# Some missing stuff  	
 	cp $(LIB_DIR)/fortran/TMalign.f $(DISTRIB_DIR)/$(EXECUTABLE)_source
 	cp $(LIB_DIR)/c_make_lib/dist_makefile $(DISTRIB_DIR)/$(EXECUTABLE)_source/makefile
 
@@ -270,7 +258,7 @@ copy_sources:
 license:
 	$(PERL4MAKEFILE_LIB)/make_license.pl -file $(LICENSES)/academic_license.txt -email "$(EMAIL)" -type txt -institute "$(INSTITUTE)" -author "$(AUTHOR)" -date "$(DATE)" -program "$(PROGRAM)" > $(DISTRIB_DIR)/license.txt
 	$(PERL4MAKEFILE_LIB)/make_license.pl -file $(LICENSES)/short_license_utf8.txt -email "$(EMAIL)" -type c -institute "$(INSTITUTE)" -author "$(AUTHOR)" -date "$(DATE)" -program "$(PROGRAM)" > $(DISTRIB_DIR)/short_license.c
-	#$(PERL4MAKEFILE_LIB)/make_license.pl -file $(LICENSES)/short_license.txt -email "$(EMAIL)" -type perl -institute "$(INSTITUTE)" -author "$(AUTHOR)" -date "$(DATE)" -program "$(PROGRAM)" > $(DISTRIB_DIR)/short_license.pl
+#$(PERL4MAKEFILE_LIB)/make_license.pl -file $(LICENSES)/short_license.txt -email "$(EMAIL)" -type perl -institute "$(INSTITUTE)" -author "$(AUTHOR)" -date "$(DATE)" -program "$(PROGRAM)" > $(DISTRIB_DIR)/short_license.pl
 	for file in `find $(DISTRIB_DIR)/$(EXECUTABLE)_source \( -name '*.h' -o -name '*.c' \)` ; do \
 	  cat $(DISTRIB_DIR)/short_license.c $$file > $$file.new; \
 	  mv $$file.new $$file; \
@@ -296,5 +284,4 @@ packing:
 #
 # Include the main T-Coffee makefile
 #
-   
 include ../../compile/makefile 

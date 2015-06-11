@@ -4456,6 +4456,7 @@ char *aln2cons_seq_cov (Alignment *A)
 	}
     }
   //add residues from the sequences covering max.
+  pleft=left;
   while (left>0)
     {
       int best_score=0;
@@ -4481,7 +4482,6 @@ char *aln2cons_seq_cov (Alignment *A)
 		}
 	    }
 	}
-      
       for (a=0; a<A->len_aln; a++)
 	{
 	  if (!cons[a] && !is_gap(A->seq_al[best_seq][a]))
@@ -4490,11 +4490,14 @@ char *aln2cons_seq_cov (Alignment *A)
 	      left--;
 	    }
 	}
-      //for (a=0; a<A->len_aln; a++)fprintf (stderr, "%c", (cons[a])?cons[a]:'.');
-      //fprintf (stderr, "\n");
-      //HERE ("Best_seq=%d Best_score=%d Left=%d", best_seq, best_score, left);
-      if (left==pleft)printf_exit (EXIT_FAILURE, stderr, "\nCould not Build profile consensus::aln2cons_seq_cov [FATAL:%s]", PROGRAM);
       
+      if (left==pleft)
+	{
+	  fprintf ( stderr, "\nCONS: %s\n", cons);
+	  print_aln (A);
+	  printf_exit (EXIT_FAILURE, stderr, "\nCould not Build profile consensus::aln2cons_seq_cov [FATAL:%s]", PROGRAM);
+	}
+	  
       pleft=left;
     }
   vfree(score);
@@ -10732,6 +10735,8 @@ int*aln2subset_cov (Alignment *A, char *mode, int *ns)
 	}
     }
   //add residues from the sequences covering max.
+  
+  pleft=left;
   while (left>0)
     {
       int best_score=0;
@@ -10767,7 +10772,7 @@ int*aln2subset_cov (Alignment *A, char *mode, int *ns)
 	      left--;
 	    }
 	}
-      if (left==pleft)
+      if (left && left==pleft)
 	{
 	  fprintf ( stderr, "\nCONS: %s\n", cons);
 	  print_aln (A);

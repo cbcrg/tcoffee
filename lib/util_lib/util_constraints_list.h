@@ -398,7 +398,7 @@ struct TC_method
   char seq_type[FILENAMELEN+1];
   char weight[FILENAMELEN+1];
   char matrix[FILENAMELEN+1];
-  char smode[FILENAMELEN+1];
+  char prfmode[FILENAMELEN+1];
   char method[FILENAMELEN+1];
   int gop;
   int gep;

@@ -4712,10 +4712,7 @@ char *get_tmp_4_tcoffee ()
    if (is_rootpid())
 	{
 	  cputenv ("ROOT_TMP_4_TCOFFEE=%s",  tmp_4_tcoffee);
-	  if (strstr (tmp_4_tcoffee, "tmp")||strstr (tmp_4_tcoffee, "temp"))
-	    sprintf (buf, "%s/%d%d/", tmp_4_tcoffee,hn,getpid());
-	  else
-	    sprintf (buf, "%s/tmp/%d%d/", tmp_4_tcoffee,hn,getpid());
+	  sprintf (buf, "%s/tco/%d%d/", tmp_4_tcoffee,hn,getpid());
 	  
 	  sprintf (tmp_4_tcoffee, "%s", buf);
 
@@ -7762,8 +7759,8 @@ int my_rmdir ( char *dir_in)
  if (access(dir, F_OK)==-1);
  else
    {
-     if ( strstr (dir, "coffee"))printf_system_direct ( "rm -rf %s", dir);
-     else myexit(fprintf_error ( stderr, "\nERROR: directory %s does not contain 'coffee' [FATAL:%s]", dir, PROGRAM));		}
+     if ( strstr (dir, "tco"))printf_system_direct ( "rm -rf %s", dir);
+     else add_warning(stderr,"directory %s could not be removed - it does not contain the string 'tco'", dir);		}
  vfree (dir);
  return 1;
 }

@@ -4396,8 +4396,7 @@ Sequence* perl_reformat2fasta (char *perl_command, char *fname)
 // }
 
 
-void
-check_seq_name (char *sname)
+void check_seq_name (char *sname)
 {
 
 	char *tmp = strchr(sname, ' ');
@@ -4409,7 +4408,6 @@ check_seq_name (char *sname)
 // 	if (sname[x-1] == '\n')
 // 		sname[MAXNAMES]='\0';
 }
-
 Sequence* get_fasta_sequence_num (char *fname, char *comment_out)
 {
 	Sequence *LS;
