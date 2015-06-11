@@ -6283,7 +6283,7 @@ int align_node (NT_node P, Sequence *S,int argc, char **argv)
   printf_file (tree, "a", ";\n");
   
   fprintf ( stderr, "\n\tMerge: %5d --- %5d --> %5d seq %5d Groups", (P->left)->nseq, (P->right)->nseq, P->nseq,ng);
-  sprintf(buf,"%s -profile FILE::%s -outfile %s -usetree %s -dp_mode myers_miller_pair_wise>/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
+  sprintf(buf,"%s -profile FILE::%s -outfile %s -usetree %s >/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
   
   
   printf_system_direct (buf);
