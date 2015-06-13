@@ -1503,16 +1503,10 @@ Constraint_list * profile_pair_decomposed (TC_method *M , char *in_seq, Constrai
   vfree (seq);
   vfree (s);
   vfree (A);
-  free_int (lus, -1);
-  for (a=0; a<2; a++)
-    {
-      free_int (lu[a], -1);
-      free_char (subseq[a], -1);
-    }
-  vfree (subseq);
+  free_arrayN ((int ***)lus,3);
+  free_arrayN((char***)subseq,3);
   vfree (input);
   vfree (output);
-  vfree (lu);
   vfree (param);
   vfree (nentry);
   
@@ -6091,8 +6085,7 @@ Alignment * sorted_aln(Alignment *A, Constraint_list *CL)
      }
    return A;
 }
-
-
+  
 int co_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 {
   char *aln[2];
@@ -6108,7 +6101,7 @@ int co_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
       for (b=0; b<ns[a]; b++)
 	{
 	  int s=ls[a][b];
-	  fprintf (fp, ">%d\n%s\n",s,A->seq_al[s]);
+	  fprintf (fp, ">%d\n%s-\n",s,A->seq_al[s]);
 	}
       vfclose (fp);
     }
@@ -6269,8 +6262,11 @@ int align_node (NT_node P, Sequence *S,int argc, char **argv)
   char *seq = NULL;
   int ng;
   char *buf;
-  int check_co=0;
 
+  int do_co=0;
+  int run_co=0;
+  int compare_co=0;
+  
   buf=(char*)vcalloc (10000, sizeof (char));
   if (!seq )seq =vtmpnam (NULL);
   if (!tree)tree=vtmpnam (NULL);
@@ -6282,35 +6278,58 @@ int align_node (NT_node P, Sequence *S,int argc, char **argv)
   ng=node2file_list (P,S,seq,tree);
   printf_file (tree, "a", ";\n");
   
+  
+  if (do_co)
+    {
+      Alignment *A1,*A2;
+      char ***l=file2list(seq, "\n");
+      int a;
+      remove ("co");
+      A1=main_read_aln (l[0][1], NULL);
+      printf_file ("prf1", "w", "");
+      for (a=0; a<A1->nseq; a++)printf_file ("prf1","a", ">%s\n%s\n",A1->name[a], A1->seq_al[a]);
+      
+      A2=main_read_aln (l[1][1], NULL);
+      printf_file ("prf2", "w", "");
+      for (a=0; a<A2->nseq; a++)printf_file ("prf2","a", ">%s\n%s\n",A2->name[a], A2->seq_al[a]);
+      
+      sprintf (buf,"clustalo --profile1=prf1 --profile2=prf2 -outfile=co");
+      printf_system_direct (buf);
+      free_arrayN((char***)l, 3);
+      free_aln (A1); free_aln(A2);
+    }
+  
+  
+  
   fprintf ( stderr, "\n\tMerge: %5d --- %5d --> %5d seq %5d Groups", (P->left)->nseq, (P->right)->nseq, P->nseq,ng);
-  sprintf(buf,"%s -profile FILE::%s -outfile %s -usetree %s >/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
   
+  if (run_co)
+    {
+      printf_system_direct ("cp co %s", P->alfile);
+    }
+  else
+    {
+      sprintf(buf,"%s -profile FILE::%s -outfile %s -usetree %s>/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
+      printf_system_direct (buf);
+    }
   
-  printf_system_direct (buf);
   if (!check_file_exists (P->alfile))
     {
       printf_exit ( EXIT_FAILURE, stderr, "ERROR: Could not run %s\n", buf);
     }
   
-  if (check_co)
+  if (compare_co)
     {
       fprintf (stderr, "\n%s\n", buf);
-      compare_clustalo(seq,P->alfile);
+      compare_clustalo("co",P->alfile);
     }
   
   return 1;
-  }
-void compare_clustalo(char *seq, char *tc)
+}
+void compare_clustalo(char *co, char *tc)
 {
   int a;
-  char ***list=file2list(seq, "\n");
-
-  for (a=0; a<2; a++)
-    {
-      printf_system_direct ("t_coffee -other_pg seq_reformat -in %s -output fasta_aln >prf%d", list[a][1], a+1);
-    }
-  printf_system_direct ("clustalo -profile1=prf1 -profile2=prf2 -outfile=co>/dev/null 2>/dev/null");
-  printf_system_direct ("t_coffee -other_pg aln_compare -al1 %s -al2 co", tc);
+  printf_system_direct ("t_coffee -other_pg aln_compare -al1 %s -al2 %s", co,tc);
   
 }
 
@@ -6320,22 +6339,20 @@ void compare_clustalo(char *seq, char *tc)
 int node2file_list (NT_node P, Sequence *S, char *flist, char *tree)
 {
   int t=0;
-  static int index;
   
   if (!P)return 0;
-  if (P->isseq)
+  if (P->nseq==1)
     {
-      if (P->nseq==1)
+      if (P->isseq)
 	{
 	  int s;
-	  s=P->lseq[0];
+	  s=name_is_in_list (P->name, S->name, S->nseq, MAXNAMES+1);
 	  P->alfile=vtmpnam (NULL);
 	  printf_file (P->alfile, "w", ">%s\n%s\n", S->name[s], S->seq[s]);
 	}
       printf_file (flist, "a", "%s\n", P->alfile);
-      printf_file (tree, "a", "%s", P->alfile);
+      printf_file (tree, "a", "%s"   , P->alfile);
             
-      index++;
       t=1;
     }
   else
@@ -6348,8 +6365,8 @@ int node2file_list (NT_node P, Sequence *S, char *flist, char *tree)
 	  t+=node2file_list (P->left,S,flist,tree);
 	  printf_file (tree, "a",")");
 	}
-      else if (P->right)t+=node2file_list (P->right ,S,flist,tree);
-      else if (P->left )t+=node2file_list (P->left,S,flist,tree);
+      else if (P->right )t+=node2file_list (P->right ,S,flist,tree);
+      else if (P->left)t+=node2file_list   (P->left,S,flist,tree);
     }
   return t;
 }
@@ -6359,10 +6376,11 @@ int updown_tree_aln (NT_node T, Sequence *S, int max, int argc, char **argv)
   
   int a;
 
-  if(!T->parent){tree2nleaf(T);}
+  if(!T->parent)
+    {
+      tree2nleaf(T);
+    }
   
-  
-
   if (T->nseq==1)return 1;
   else if (T->nseq>max)
     {
@@ -6372,11 +6390,10 @@ int updown_tree_aln (NT_node T, Sequence *S, int max, int argc, char **argv)
   
   if (T->leaf>1 && (T->leaf>=max || !T->parent))
     {
-
-     
+      
       align_node(T,S,argc,argv);
-      T->isseq=1;
       T->leaf=1;
+      T->nseq=1;
     }
   
   return T->leaf;
