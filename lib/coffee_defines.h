@@ -385,4 +385,7 @@
 #define NULL_6 NULL_4,NULL_2
 #define NULL_7 NULL_5,NULL_2
 
+
+#define PATCH_PRF ""
+//This variable is set so as to compensate a bug in Clustal-Omega
 #endif // -- COFFEE_DEFINES_H

@@ -6354,7 +6354,7 @@ char** km_coffee (int argc, char **argv)
 	    S=main_read_seq (seq_f);
 	    F=parse_fname (seq_f);
 	    if (!k)k=100;
-	    if (S->nseq<=k)k=S->nseq/2;
+	    if (S->nseq<=k)k=S->nseq;
 	    
 	    
 	    if (!km_mode || strm (km_mode, "topdown"))
@@ -6777,7 +6777,7 @@ Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, in
   
   char *km_tree2=vtmpnam (NULL);
   NT_node T;
-  
+  int n;
   
   //This insures that the function aln2cons_cov is used to generate the consensus
   //cputenv ("KM_COFFEE_CONS_COV=1");
@@ -6805,9 +6805,13 @@ Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, in
     }
   	
   T=main_read_tree (km_tree2);
-  updown_tree_aln (T,S, k, argc, argv);
+  updown_tree_aln (T,S, k,&n, argc, argv);
   
   
+  if (!check_file_exists (T->alfile))
+    {
+      printf_exit ( EXIT_FAILURE, stderr, "kmcoffee did not manage to align the provided dataset\n");
+    }
   
   printf_system ("mv %s %s", T->alfile, out_f);
   display_output_filename(stdout,"MSA","ALN",out_f, CHECK);

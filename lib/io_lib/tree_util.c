@@ -1981,7 +1981,7 @@ int tree2nnode ( NT_node R)
 int tree2nleaf (NT_node R)
 {
   if ( !R)return 0;
-  else if (R->leaf==1){return 1;}
+  else if (R->isseq==1){R->nseq=1;return 1;}
   else if (R->right==NULL && R->left==NULL && R->bot==NULL){R->leaf=1; return 1;}
   else
     {
@@ -1991,6 +1991,7 @@ int tree2nleaf (NT_node R)
       n+=tree2nleaf (R->bot);
 
       R->leaf=n;
+      R->nseq=n;
       return n;
     }
 }

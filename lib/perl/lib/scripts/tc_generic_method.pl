@@ -1103,6 +1103,7 @@ sub seq2profile_pair
 	  }
 	elsif ( $method eq "clustalo")
 	  {
+	    
 	    `clustalo --p1 $profile1 --p2 $profile2 -o $outfile --force`;
 	  }
 	elsif ( $method eq "hhalign")

@@ -3476,8 +3476,9 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int
 
   int t_s1, t_s2, t_r1, t_r2,x;
   double score;
+  int normalisation_mode=0;
 
-
+  
   if (!CL || !CL->residue_index)return CL;
   fprintf ( CL->local_stderr, "\nLibrary Relaxation: Multi_proc [%d]\n ", nproc);
 
@@ -3538,7 +3539,13 @@ Constraint_list * fork_relax_constraint_list (Constraint_list *CL, int njobs,int
 			    }
 			  norm2++;
 			}
-		      norm=MIN(norm1,norm2);
+		      if (normalisation_mode==0)
+			norm=MIN(norm1,norm2);
+		      else if (normalisation_mode==1)
+			norm=MAX(norm1,norm2);
+		      else if (normalisation_mode==2)
+			norm=(CL->S)->nseq;
+			      
 		      score=((norm)?score/norm:0);
 		      fprintf (fp, "%d ",(int)(score));
 		    }

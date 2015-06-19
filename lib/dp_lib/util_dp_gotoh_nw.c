@@ -1689,6 +1689,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
   int **sl;
 
   if (!A) return 0;
+  
 
 
 
@@ -1742,6 +1743,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 	  fp=vfopen (pid_tmpfile[j], "w");
 	  for (p1=sl[j][0]; p1<sl[j][1]; p1++)
 	    {
+	      int norm1=0;
 	      for (tot=0,nused=0,si=0;p1>0 && si<ns[0]; si++)
 		{
 		  s=ls [0][si];r=pos[s][p1-1];
@@ -1752,6 +1754,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 		      t_w=CL->residue_index[s][r][a+WE];
 		      if (sl1[t_s])continue;//do not extend within a profile
 
+		      norm1++;
 		      norm[p1]++; 
 		      norm2=0;
 		      for (b=0; b<CL->residue_index[t_s][t_r][0];)
@@ -1763,7 +1766,7 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 			      t_r2=CL->residue_index[t_s][t_r][b+R2];
 			      t_w2=CL->residue_index[t_s][t_r][b+WE];
 			      b+=ICHUNK;
-			      norm2++;
+			      
 			    }
 			  if (sl2[t_s2])
 			    {
@@ -1774,7 +1777,8 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 				{
 				  used_list[nused++]=p2;
 				}
-
+			      
+			      norm2++;
 			      tot+=score;
 			      used[p2][0]+=score;
 			      used[p2][1]++;
@@ -1800,6 +1804,10 @@ int fork_cl2pair_list_ext ( Alignment *A, int *ns, int **ls, Constraint_list *CL
 		      else if (normalisation_mode==1)
 			{
 			  score/=(float)((CL->S)->nseq*nr[0][p1]*nr[1][p2]);
+			}
+		      else if (normalisation_mode==2)
+			{
+			  score/=(CL->S)->nseq;
 			}
 
 		      score*=NORM_F;

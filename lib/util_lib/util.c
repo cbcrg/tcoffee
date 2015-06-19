@@ -6364,14 +6364,23 @@ char **expand_flist (char *file, char **list,int i,int *n, char *tag)
   //expand the content of a file within a list of files;
   //make sure the last element is null (list[n[0]]
   int nl=0;
-  char ***fl=file2list(file, "\n");
+  
+  
+  
+  char ***fl;
   char **nlist;
   int nn=0;
   int a;
-
+  
+  if (!file) return NULL;
+  
+  if (!check_file_exists(file))
+    printf_exit ( EXIT_FAILURE, stderr, "File %s does not exist [util.c::expand_flist]\n",file);
+  
+  fl=file2list(file, "\n");
   while (fl[nl++]);
   nlist=(char**)vcalloc (n[0]+nl+1, sizeof (char*));
-
+ 
   //put the old stuff back
   for (a=0; a<i; a++)
     {
@@ -6403,6 +6412,7 @@ char **expand_flist (char *file, char **list,int i,int *n, char *tag)
     }
   n[0]=nn;
   free_char (list, -1);
+  free_arrayN((char***)fl, 3);
   return nlist;
 }
 
@@ -7986,10 +7996,16 @@ FILE * output_completion ( FILE *fp,int n, int tot, int n_reports, char *string)
 	  
 	  if ( !ref_val && !flag)
 	    {
-	      fprintf (fp, "\n!\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]",(string)?string:"",tot,(tot==1)?100:0, elapsed);
+	      if (elapsed)fprintf (fp, "\n!\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]",(string)?string:"",tot,(tot==1)?100:0, elapsed);
+	      else fprintf (fp, "\n!\t\t[%s][TOT=%5d][%3d %%]",(string)?string:"",tot,(tot==1)?100:0);
 	      flag=1;
 	    }
-	  else if ( n>=tot)fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]\n",(string)?string:"", tot,100, elapsed);
+	  else if ( n>=tot)
+	    {
+	      if (elapsed)fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%][ ELAPSED  TIME: %4d sec.]\n",(string)?string:"", tot,100, elapsed);
+	      else
+		fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%]\n",(string)?string:"", tot,100);
+	    }
 	  else if ( ((n*100)/tot)>ref_val)
 	    {
 	      
@@ -7999,7 +8015,10 @@ FILE * output_completion ( FILE *fp,int n, int tot, int n_reports, char *string)
 	      t=0;
 
 	      elapsed=((float)100-(float)ref_val)*((float)elapsed/(float)ref_val);
-	      fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%][REMAINING TIME: %4d sec.]", (string)?string:"",tot,ref_val, elapsed);
+	      if (elapsed)
+		fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%][REMAINING TIME: %4d sec.]", (string)?string:"",tot,ref_val, elapsed);
+	      else
+		fprintf (fp, "\r!\t\t[%s][TOT=%5d][%3d %%]", (string)?string:"",tot,ref_val);
 	      flag=0;
 	    }
 	  return fp;

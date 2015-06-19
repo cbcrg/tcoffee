@@ -148,6 +148,7 @@ Constraint_list *seq2list     ( Job_TC *job)
       M=(job->param)->TCM;
       
 
+      
       if (M->prfmode && M->prfmode[0])mode=M->prfmode;
       else mode=M->executable;
 
@@ -1118,101 +1119,7 @@ Constraint_list * hh_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 	  return CL;
 	}
 
-//OLD_VERSION
-// Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL)
-// {
-//
-// 	char seq[1000];
-// 	int a, s1, s2;
-// 	char *result,*prf1_file, *prf2_file;
-// 	Alignment *F=NULL, *A1, *A2;
-// 	FILE *fp;
-// 	char command[10000];
-// 	char *param;
-//
-// 	if ( strm (M->executable2, "hhalign"))return hh_pair (M ,in_seq, CL);
-//
-// 	if ( M->executable2[0]=='\0')
-// 		fprintf ( stderr, "\nERROR: profile_pair requires a method: thread_pair@EP@executable2@<method> [FATAL:%s]\n", PROGRAM);
-//
-//
-// 	sprintf ( seq, "%s", in_seq);
-// 	atoi(strtok (seq,SEPARATORS));
-// 	s1=atoi(strtok (NULL,SEPARATORS));
-// 	s2=atoi(strtok (NULL,SEPARATORS));
-//
-// 	A1=seq2R_template_profile(CL->S,s1);
-// 	A2=seq2R_template_profile(CL->S,s2);
-//
-//
-// 	prf1_file=vtmpnam (NULL);
-// 	fp=vfopen (prf1_file, "w");
-// 	if ( A1)
-// 	{
-// 		fprintf (fp, ">%s\n%s-\n",(CL->S)->name[s1], aln2cons_seq_mat(A1, "blosum62mt"));
-// 		for ( a=0; a< A1->nseq; a++)fprintf (fp, ">prf_seq1_%d\n%s-\n", a, A1->seq_al[a]);
-// 	}
-// 	else
-// 	{
-// 		fprintf ( fp, ">%s\n%s-\n", (CL->S)->name[s1], (CL->S)->seq[s1]);
-// 	}
-// 	vfclose (fp);
-//
-// 	prf2_file=vtmpnam (NULL);
-// 	fp=vfopen (prf2_file, "w");
-// 	if (A2)
-// 	{
-// 		fprintf (fp, ">%s\n%s-\n",(CL->S)->name[s2], aln2cons_seq_mat(A2, "blosum62mt"));
-// 		for ( a=0; a< A2->nseq; a++)fprintf (fp, ">prf_seq2_%d\n%s-\n", a, A2->seq_al[a]);
-// 	}
-// 	else
-// 	{
-// 		fprintf ( fp, ">%s\n%s-\n", (CL->S)->name[s2], (CL->S)->seq[s2]);
-// 	}
-// 	vfclose (fp);
-//
-// 	result=vtmpnam (NULL);
-// 	if ( M->param)
-// 	{
-// 		param=vcalloc(strlen (M->param)+1, sizeof (char));
-// 		sprintf ( param, "%s", M->param);
-// 		param=substitute ( param, " ", "");
-// 		param=substitute ( param, "\n", "");
-// 	}
-//
-// 	sprintf ( command, "tc_generic_method.pl -mode=profile_pair -method=%s %s%s %s%s %s%s -param=%s -tmpdir=%s", M->executable2,M->in_flag,prf1_file, M->in_flag2,prf2_file,M->out_flag, result, param, get_tmp_4_tcoffee());
-// 	my_system ( command);
-//
-//
-//
-// 	if ( !check_file_exists (result))
-// 	{
-// 		fprintf ( stderr, "\n\tprofile_pair/%s failed:\n\t%s\n",M->executable2, command);
-// 		myexit (EXIT_FAILURE);
-// 	}
-// 	else if ( is_lib (result))
-// 	{
-// 		CL=read_constraint_list_file(CL,result);
-// 	}
-// 	else if ( is_aln (result))
-// 	{
-// 		F=main_read_aln (result, NULL);
-// 		char *name1, *name2;
-// 		name1=(CL->S)->name[s1];
-// 		name2=(CL->S)->name[s2];
-//
-// 		fp=vfopen (result, "w");
-// 		for ( a=0; a< F->nseq; a++)
-// 			if (strm ( F->name[a], name1) || strm (F->name[a], name2))
-// 				fprintf ( fp, ">%s\n%s\n", F->name[a], F->seq_al[a]);
-// 			vfclose (fp);
-// 		free_aln (F);
-// 		F=main_read_aln (result, NULL);
-// 		CL=aln2constraint_list (F, CL, "sim");
-// 		free_aln (F);
-// 	}
-// 	return CL;
-// }
+
 
 Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL)
 {
@@ -1258,18 +1165,15 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	if ( A1 && A1->nseq>1)
 	  {
 	    char *st=generate_string (A1->len_aln, 'x');
-	    fprintf (fp, ">%s\n%s-\n",sn1,st);
-	    
-	    //fprintf (fp, ">%s\n%s-\n",sn1, aln2cons_seq_mat(A1, "blosum62mt"));
-	    //fprintf (fp, ">%s\n%s-\n",sn1, aln2cons_seq_cov(A1));
+	    fprintf (fp, ">%s\n%s%s\n",sn1,st,PATCH_PRF);
 	    
 	    for ( a=0; a< A1->nseq; a++)
-	      fprintf (fp, ">prf_seq1_%d\n%s-\n", a, A1->seq_al[a]);
+	      fprintf (fp, ">prf_seq1_%d\n%s%s\n", a, A1->seq_al[a], PATCH_PRF);
 	    vfree(st);
 	  }
 	else
 	  {
-	    fprintf ( fp, ">%s\n%s-\n",sn1, (CL->S)->seq[s1]);
+	    fprintf ( fp, ">%s\n%s%s\n",sn1, (CL->S)->seq[s1], PATCH_PRF);
 	  }
 	vfclose (fp);
 	
@@ -1279,19 +1183,16 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	if (A2 && A2->nseq>1)
 	  {
 	    char *st=generate_string (A2->len_aln, 'x');
-	    fprintf (fp, ">%s\n%s-\n",sn2,st);
-	    //fprintf (fp, ">%s\n%s-\n",sn2, aln2cons_seq_mat(A2, "blosum62mt"));
-	    //fprintf (fp, ">%s\n%s-\n",sn2, aln2cons_seq_cov(A2));
-	    
-	    
+	    fprintf (fp, ">%s\n%s%s\n",sn2,st, PATCH_PRF);
+	    	    
 	    for ( a=0; a< A2->nseq; a++)
-	      fprintf (fp, ">prf_seq2_%d\n%s-\n", a, A2->seq_al[a]);
+	      fprintf (fp, ">prf_seq2_%d\n%s%s\n", a, A2->seq_al[a],PATCH_PRF);
 	    vfree (st);
 	  }
 	else
 	  {
 	    
-	    fprintf ( fp, ">%s\n%s-\n",sn2, (CL->S)->seq[s2]);
+	    fprintf ( fp, ">%s\n%s%s\n",sn2, (CL->S)->seq[s2], PATCH_PRF);
 	  }
 	vfclose (fp);
 	
@@ -1304,7 +1205,9 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	    param=substitute ( param, "\n", "");
 	  }
 	
+	
 	sprintf ( command, "tc_generic_method.pl -mode=profile_pair -method=%s %s%s %s%s %s%s -param=%s -tmpdir=%s", M->executable2,M->in_flag,prf1_file, M->in_flag2,prf2_file,M->out_flag, result, param, get_tmp_4_tcoffee());
+
 	my_system ( command);
 	
 	if ( !check_file_exists (result))
@@ -1316,7 +1219,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	  {
 	    CL=read_constraint_list_file(CL,result);
 	  }
-	else if ( is_aln (result))
+	else 
 	  {
 	    int c;
 	    static char *result2=vtmpnam (NULL);
@@ -1392,7 +1295,11 @@ Constraint_list * profile_pair_decomposed (TC_method *M , char *in_seq, Constrai
   char *seq, *input, *output, *param, ***subseq;
   Alignment **A, *F;
   Constraint_list *LCL;
-    
+  //mode:
+  //    prf1: identify the N sequences that best cover each profile and run an all against all pw library
+  //    prf2: replace the profile with a a coverage consensus (i.e. an hybrid between the N sequences of prf1
+  //    prf3: replace the profile with a blosum62mt consensus
+  //    
   //declare Start
   seq=(char*)vcalloc (strlen(in_seq)+1, sizeof(char));
   s=(int*)vcalloc (2, sizeof (int));
@@ -1439,7 +1346,7 @@ Constraint_list * profile_pair_decomposed (TC_method *M , char *in_seq, Constrai
 	      ns[a]=1;
 	      subseq[a]=(char**)vcalloc (1, sizeof(char*));
 	      if      (strm (mode, "prf2"))subseq[a][0]= aln2cons_seq_cov(A[a]);
-	      else if (strm (mode, "prf3"))subseq[a][0]= aln2cons_seq_mat(A[a], "blossum62mt");
+	      else if (strm (mode, "prf3"))subseq[a][0]= aln2cons_seq_mat(A[a], "blosum62mt");
 	    }
 	}
       else
@@ -1475,6 +1382,8 @@ Constraint_list * profile_pair_decomposed (TC_method *M , char *in_seq, Constrai
   printf_system ("t_coffee -seq %s -out_lib %s -lib_only -method %s -outorder=input >/dev/null 2>/dev/null", input, output, M->method);
   
   LCL=read_constraint_list_file (NULL, output);
+  
+  
   extract_entry(NULL);
   while ((entry=extract_entry(LCL)))
     {
@@ -1496,17 +1405,18 @@ Constraint_list * profile_pair_decomposed (TC_method *M , char *in_seq, Constrai
 	}
     }
   free_constraint_list (LCL);
-  
+ 
   
 
 //free
   vfree (seq);
   vfree (s);
   vfree (A);
-  free_arrayN ((int ***)lus,3);
+  free_arrayN ((int ***)lus,2);
+  free_arrayN ((int ***)lu,3);
   free_arrayN((char***)subseq,3);
-  vfree (input);
-  vfree (output);
+  //vfree (input);
+  //vfree (output);
   vfree (param);
   vfree (nentry);
   
@@ -6101,7 +6011,7 @@ int co_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
       for (b=0; b<ns[a]; b++)
 	{
 	  int s=ls[a][b];
-	  fprintf (fp, ">%d\n%s-\n",s,A->seq_al[s]);
+	  fprintf (fp, ">%d\n%s%s\n",s,A->seq_al[s], PATCH_PRF);
 	}
       vfclose (fp);
     }
@@ -6221,7 +6131,7 @@ int hh_pair_wise (Alignment *A, int *ns, int **ls, Constraint_list *CL)
 
 /****************************************************/
 char * rec_tree_aln_N ( NT_node P,Sequence *S,int N, int argv, char **argc);
-int align_node (NT_node P, Sequence *S,int argc, char **argv);
+int align_node (NT_node P, Sequence *S,int maxN, int argc, char **argv);
 int node2file_list (NT_node P,  Sequence *S,char *flist, char *subtree);
 
 int tree_aln_N ( NT_node P, Sequence *S, int N, int argc, char **argv)
@@ -6249,12 +6159,12 @@ char * rec_tree_aln_N ( NT_node P,Sequence *S,int N, int argv, char **argc)
       if (P->left)P->leaf+=(P->left)->leaf;
       if (P->right)P->leaf+=(P->right)->leaf;
     }
-  if (P->leaf>=N || P->parent==NULL){align_node (P,S,argv,argc);P->isseq=1;P->leaf=1;}
+  if (P->leaf>=N || P->parent==NULL){align_node (P,S,0,argv,argc);P->isseq=1;P->leaf=1;}
   return P->alfile;
 
 }
 void compare_clustalo(char *tc, char *seq);
-int align_node (NT_node P, Sequence *S,int argc, char **argv)
+int align_node (NT_node P, Sequence *S,int max, int argc, char **argv)
 {
 
   char *tree = NULL;
@@ -6263,9 +6173,7 @@ int align_node (NT_node P, Sequence *S,int argc, char **argv)
   int ng;
   char *buf;
 
-  int do_co=0;
-  int run_co=0;
-  int compare_co=0;
+  static int curr;
   
   buf=(char*)vcalloc (10000, sizeof (char));
   if (!seq )seq =vtmpnam (NULL);
@@ -6279,59 +6187,25 @@ int align_node (NT_node P, Sequence *S,int argc, char **argv)
   printf_file (tree, "a", ";\n");
   
   
-  if (do_co)
-    {
-      Alignment *A1,*A2;
-      char ***l=file2list(seq, "\n");
-      int a;
-      remove ("co");
-      A1=main_read_aln (l[0][1], NULL);
-      printf_file ("prf1", "w", "");
-      for (a=0; a<A1->nseq; a++)printf_file ("prf1","a", ">%s\n%s\n",A1->name[a], A1->seq_al[a]);
+  
+  
+  
+  
+  //fprintf ( stderr, "\n\tMerge: %5d --- %5d --> %5d seq %5d Groups", (P->left)->nseq, (P->right)->nseq, P->nseq,ng);
+  if(max)output_completion (stderr,++curr,max,1,"Completed");
+  
+  
+  //sprintf(buf,"%s -profile FILE::%s -outfile %s -usetree %s -dp_mode myers_miller_pair_wise>/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
+  
+  
+  sprintf(buf,"%s -profile FILE::%s -inorder=input -outorder=input -outfile %s -usetree %s >/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
+  printf_system_direct (buf);
       
-      A2=main_read_aln (l[1][1], NULL);
-      printf_file ("prf2", "w", "");
-      for (a=0; a<A2->nseq; a++)printf_file ("prf2","a", ">%s\n%s\n",A2->name[a], A2->seq_al[a]);
-      
-      sprintf (buf,"clustalo --profile1=prf1 --profile2=prf2 -outfile=co");
-      printf_system_direct (buf);
-      free_arrayN((char***)l, 3);
-      free_aln (A1); free_aln(A2);
-    }
-  
-  
-  
-  fprintf ( stderr, "\n\tMerge: %5d --- %5d --> %5d seq %5d Groups", (P->left)->nseq, (P->right)->nseq, P->nseq,ng);
-  
-  if (run_co)
-    {
-      printf_system_direct ("cp co %s", P->alfile);
-    }
-  else
-    {
-      sprintf(buf,"%s -profile FILE::%s -outfile %s -usetree %s>/dev/null 2>/dev/null", cl=list2string (argv, argc), seq, P->alfile, tree);
-      printf_system_direct (buf);
-    }
-  
-  if (!check_file_exists (P->alfile))
-    {
-      printf_exit ( EXIT_FAILURE, stderr, "ERROR: Could not run %s\n", buf);
-    }
-  
-  if (compare_co)
-    {
-      fprintf (stderr, "\n%s\n", buf);
-      compare_clustalo("co",P->alfile);
-    }
+  if (!check_file_exists (P->alfile))printf_exit ( EXIT_FAILURE, stderr, "Could not run %s\n", buf);
   
   return 1;
 }
-void compare_clustalo(char *co, char *tc)
-{
-  int a;
-  printf_system_direct ("t_coffee -other_pg aln_compare -al1 %s -al2 %s", co,tc);
-  
-}
+
 
 
 
@@ -6351,7 +6225,7 @@ int node2file_list (NT_node P, Sequence *S, char *flist, char *tree)
 	  printf_file (P->alfile, "w", ">%s\n%s\n", S->name[s], S->seq[s]);
 	}
       printf_file (flist, "a", "%s\n", P->alfile);
-      printf_file (tree, "a", "%s"   , P->alfile);
+      printf_file (tree,  "a", "%s"   , P->alfile);
             
       t=1;
     }
@@ -6360,38 +6234,62 @@ int node2file_list (NT_node P, Sequence *S, char *flist, char *tree)
       if (P->left && P->right)
 	{
 	  printf_file (tree, "a","(");
-	  t+=node2file_list (P->right,S,flist,tree);
-	  printf_file (tree, "a",",");
 	  t+=node2file_list (P->left,S,flist,tree);
+	  printf_file (tree, "a",",");
+	  t+=node2file_list (P->right,S,flist,tree);
 	  printf_file (tree, "a",")");
 	}
-      else if (P->right )t+=node2file_list (P->right ,S,flist,tree);
-      else if (P->left)t+=node2file_list   (P->left,S,flist,tree);
+      else if (P->left )t+=node2file_list (P->left ,S,flist,tree);
+      else if (P->right)t+=node2file_list (P->right,S,flist,tree);
     }
   return t;
 }
 
-int updown_tree_aln (NT_node T, Sequence *S, int max, int argc, char **argv)
+int tree2updown_count (NT_node T,int max, int *n);
+int updown_tree_aln   (NT_node T, Sequence *S, int max,int *n, int argc, char **argv)
 {
-  
   int a;
-
+  
   if(!T->parent)
     {
+      n[0]=0;
+      tree2nleaf(T);
+      tree2updown_count(T,max, n);
       tree2nleaf(T);
     }
   
   if (T->nseq==1)return 1;
   else if (T->nseq>max)
     {
-      T->leaf =updown_tree_aln (T->right , S,max, argc, argv);
-      T->leaf+=updown_tree_aln (T->left  , S,max, argc, argv);
+      T->leaf =updown_tree_aln (T->right , S,max,n, argc, argv);
+      T->leaf+=updown_tree_aln (T->left  , S,max,n, argc, argv);
     }
   
   if (T->leaf>1 && (T->leaf>=max || !T->parent))
     {
       
-      align_node(T,S,argc,argv);
+      align_node(T,S,n[0],argc,argv);
+      T->leaf=1;
+      T->nseq=1;
+    }
+  
+  return T->leaf;
+}
+
+int tree2updown_count (NT_node T,int max, int *n)
+{
+  
+  
+  if (T->nseq==1)return 1;
+  else if (T->nseq>max)
+    {
+      T->leaf =tree2updown_count (T->right ,max, n);
+      T->leaf+=tree2updown_count (T->left  ,max, n);
+    }
+  
+  if (T->leaf>1 && (T->leaf>=max || !T->parent))
+    {
+      n[0]++;
       T->leaf=1;
       T->nseq=1;
     }
