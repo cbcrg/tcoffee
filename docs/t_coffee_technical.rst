@@ -1,6431 +1,4358 @@
-.. raw:: html
-
-   <div class="WordSection1">
-
-.. raw:: html
-
-   <div
-   style="mso-element:frame;mso-element-wrap:no-wrap-beside;mso-height-rule:
-   exactly">
-
-+--------------------------------------------------------------------------+
-| Technical                                                                |
-+--------------------------------------------------------------------------+
-
-.. raw:: html
-
-   </div>
-
-Centre National De LA Recherche scientifique (France)
- CeNTRO De REGULACIO GENOMICA (SPAIN)
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:none;border-top:solid windowtext 1.0pt;
-   mso-border-top-alt:solid windowtext .75pt;padding:1.0pt 0cm 0cm 0cm">
-
-| CÃ©dric Notredame
-|  www.tcoffee.org
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid white 1.0pt;mso-border-alt:
-   solid white .75pt;padding:31.0pt 31.0pt 31.0pt 31.0pt;background:#E5E5E5;
-   mso-shading:windowtext;mso-pattern:gray-10 auto">
-
-| T-Coffee:
-|  Technical Documentation
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:none;border-top:solid windowtext 1.0pt;
-   mso-border-top-alt:solid windowtext .75pt;padding:1.0pt 0cm 0cm 0cm">
-
-Â 
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div class="WordSection2">
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:none;border-bottom:solid gray 1.0pt;
-   mso-border-bottom-alt:solid gray .75pt;padding:0cm 0cm 14.0pt 0cm">
-
-| T-Coffee Technical Documentation
-|  (Version 8.01, July 2009)
-|  www.tcoffee.org
-|  T-Coffee, seq\_reformat
-|  Â PSI-Coffee, 3D-Coffee, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD
-
-.. raw:: html
-
-   </div>
-
-Ã£ CÃ©dric Notredame, Centro de Regulacio Genomica, Centre National de la
-Recherche Scientifique, France
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div class="WordSection3">
-
-`License and Terms of Use. 6 <#_Toc256781539>`__
-
-`T-Coffee is distributed under the Gnu Public License
-6 <#_Toc256781540>`__
-
-`T-Coffee code can be re-used freely. 6 <#_Toc256781541>`__
-
-`T-Coffee can be incorporated in most pipelines: Plug-in/Plug-outâ€¦..
-6 <#_Toc256781542>`__
-
-`Addresses and Contacts. 7 <#_Toc256781543>`__
-
-`Contributors 7 <#_Toc256781544>`__
-
-`Addresses 7 <#_Toc256781545>`__
-
-`Citations. 8 <#_Toc256781546>`__
-
-`T-Coffee 8 <#_Toc256781547>`__
-
-`Mocca. 9 <#_Toc256781548>`__
-
-`CORE. 10 <#_Toc256781549>`__
-
-`Other Contributions 10 <#_Toc256781550>`__
-
-`Bug Reports and Feedback. 10 <#_Toc256781551>`__
-
-`Installation of The T-Coffee Packages. 11 <#_Toc256781552>`__
-
-`Third Party Packages and On Demand Installations 11 <#_Toc256781553>`__
-
-`Standard Installation of T-Coffee 11 <#_Toc256781554>`__
-
-`Unix 11 <#_Toc256781555>`__
-
-`Microsoft Windows/Cygwin. 13 <#_Toc256781556>`__
-
-`MAC osX, Linux 13 <#_Toc256781557>`__
-
-`CLUSTER Installation. 13 <#_Toc256781558>`__
-
-`If you have PDB installed: 13 <#_Toc256781559>`__
-
-`Installing BLAST for T-Coffee 14 <#_Toc256781560>`__
-
-`Why Do I need BLAST with T-Coffee?. 14 <#_Toc256781561>`__
-
-`Using the EBI BLAST Client 14 <#_Toc256781562>`__
-
-`Using the NCBI BLAST Client 15 <#_Toc256781563>`__
-
-`Using another Client 15 <#_Toc256781564>`__
-
-`Using a BLAST local version on UNIX. 16 <#_Toc256781565>`__
-
-`Using a BLAST local version on Windows/cygwin. 17 <#_Toc256781566>`__
-
-`Installing Other Companion Packages 17 <#_Toc256781567>`__
-
-`Installation of PSI-Coffee and Expresso. 19 <#_Toc256781568>`__
-
-`Installation of M-Coffee 19 <#_Toc256781569>`__
-
-`Automated Installation. 19 <#_Toc256781570>`__
-
-`Manual Installation. 20 <#_Toc256781571>`__
-
-`Installation of APDB and iRMSD. 22 <#_Toc256781572>`__
-
-`Installation of tRMSD. 22 <#_Toc256781573>`__
-
-`Installation of seq\_reformat 22 <#_Toc256781574>`__
-
-`Installation of extract\_from\_pdb. 22 <#_Toc256781575>`__
-
-`Installation of 3D-Coffee/Expresso. 23 <#_Toc256781576>`__
-
-`Automated Installation. 23 <#_Toc256781577>`__
-
-`Manual Installation. 23 <#_Toc256781578>`__
-
-`Installing Fugue for T-Coffee 24 <#_Toc256781579>`__
-
-`Installation of R-Coffee 24 <#_Toc256781580>`__
-
-`Automated Installation. 24 <#_Toc256781581>`__
-
-`Manual Installation. 24 <#_Toc256781582>`__
-
-`Installing ProbbonsRNA for R-Coffee 25 <#_Toc256781583>`__
-
-`Installing Consan for R-Coffee 25 <#_Toc256781584>`__
-
-`Quick Start 26 <#_Toc256781585>`__
-
-`T-COFFEE. 26 <#_Toc256781586>`__
-
-`M-Coffee 26 <#_Toc256781587>`__
-
-`Expresso. 27 <#_Toc256781588>`__
-
-`R-Coffee 27 <#_Toc256781589>`__
-
-`iRMSD and APDB. 28 <#_Toc256781590>`__
-
-`tRMSD. 28 <#_Toc256781591>`__
-
-`MOCCA. 29 <#_Toc256781592>`__
-
-`Recent Modifications. 30 <#_Toc256781593>`__
-
-`Reference Manual 31 <#_Toc256781594>`__
-
-`Environment Variables 32 <#_Toc256781595>`__
-
-`http\_proxy\_4\_TCOFFEE. 32 <#_Toc256781596>`__
-
-`email\_4\_TCOFFEE. 32 <#_Toc256781597>`__
-
-`DIR\_4\_TCOFFEE. 32 <#_Toc256781598>`__
-
-`TMP\_4\_TCOFFEE. 32 <#_Toc256781599>`__
-
-`CACHE\_4\_TCOFFEE. 32 <#_Toc256781600>`__
-
-`PLUGINS\_4\_TCOFFEE. 32 <#_Toc256781601>`__
-
-`NO\_ERROR\_REPORT\_4\_TCOFFEE. 32 <#_Toc256781602>`__
-
-`PDB\_DIR. 32 <#_Toc256781603>`__
-
-`NO\_WARNING\_4\_TCOFFEE. 32 <#_Toc256781604>`__
-
-`UNIQUE\_DIR\_4\_TCOFFEE. 33 <#_Toc256781605>`__
-
-`Setting up the T-Coffee environment variables 33 <#_Toc256781606>`__
-
-`Well Behaved Parameters 33 <#_Toc256781607>`__
-
-`Separation. 33 <#_Toc256781608>`__
-
-`Posix 33 <#_Toc256781609>`__
-
-`Entering the right parameters 33 <#_Toc256781610>`__
-
-`Parameters Syntax. 34 <#_Toc256781611>`__
-
-`No Flag. 34 <#_Toc256781612>`__
-
-`-parameters 34 <#_Toc256781613>`__
-
-`-t\_coffee\_defaults 35 <#_Toc256781614>`__
-
-`-mode 35 <#_Toc256781615>`__
-
-`-score [Deprecated] 35 <#_Toc256781616>`__
-
-`-evaluate 36 <#_Toc256781617>`__
-
-`-convert [cw] 36 <#_Toc256781618>`__
-
-`-do\_align [cw] 36 <#_Toc256781619>`__
-
-`Special Parameters 36 <#_Toc256781620>`__
-
-`-version. 36 <#_Toc256781621>`__
-
-`-proxy 36 <#_Toc256781622>`__
-
-`-email 37 <#_Toc256781623>`__
-
-`-check\_configuration. 37 <#_Toc256781624>`__
-
-`-cache 37 <#_Toc256781625>`__
-
-`-update 37 <#_Toc256781626>`__
-
-`-full\_log. 37 <#_Toc256781627>`__
-
-`-plugins 37 <#_Toc256781628>`__
-
-`-other\_pg. 37 <#_Toc256781629>`__
-
-`Input 38 <#_Toc256781630>`__
-
-`Sequence Input 38 <#_Toc256781631>`__
-
-`-infile [cw] 38 <#_Toc256781632>`__
-
-`-in (Cf â€“in from the Method and Library Input section)
-38 <#_Toc256781633>`__
-
-`-get\_type 38 <#_Toc256781634>`__
-
-`-type [cw] 38 <#_Toc256781635>`__
-
-`-seq. 38 <#_Toc256781636>`__
-
-`-seq\_source 39 <#_Toc256781637>`__
-
-`Structure Input 39 <#_Toc256781638>`__
-
-`-pdb. 39 <#_Toc256781639>`__
-
-`Tree Input 39 <#_Toc256781640>`__
-
-`-usetree 39 <#_Toc256781641>`__
-
-`Structures, Sequences Methods and Library Input via the ï‚–in Flag.
-40 <#_Toc256781642>`__
-
-`-in. 40 <#_Toc256781643>`__
-
-`Profile Input 42 <#_Toc256781644>`__
-
-`-profile 42 <#_Toc256781645>`__
-
-`-profile1 [cw] 42 <#_Toc256781646>`__
-
-`-profile2 [cw] 42 <#_Toc256781647>`__
-
-`Alignment Computation. 42 <#_Toc256781648>`__
-
-`Library Computation: Methods 42 <#_Toc256781649>`__
-
-`-lalign\_n\_top. 42 <#_Toc256781650>`__
-
-`-align\_pdb\_param\_file 43 <#_Toc256781651>`__
-
-`-align\_pdb\_hasch\_mode 43 <#_Toc256781652>`__
-
-`Library Computation: Extension. 43 <#_Toc256781653>`__
-
-`-lib\_list [Unsupported] 43 <#_Toc256781654>`__
-
-`-do\_normalise 43 <#_Toc256781655>`__
-
-`-extend. 43 <#_Toc256781656>`__
-
-`-extend\_mode 43 <#_Toc256781657>`__
-
-`-max\_n\_pair 44 <#_Toc256781658>`__
-
-`-seq\_name\_for\_quadruplet 44 <#_Toc256781659>`__
-
-`-compact 44 <#_Toc256781660>`__
-
-`-clean. 44 <#_Toc256781661>`__
-
-`-maximise 44 <#_Toc256781662>`__
-
-`-do\_self 44 <#_Toc256781663>`__
-
-`-seq\_name\_for\_quadruplet 44 <#_Toc256781664>`__
-
-`-weight 44 <#_Toc256781665>`__
-
-`Tree Computation. 45 <#_Toc256781666>`__
-
-`-distance\_matrix\_mode 45 <#_Toc256781667>`__
-
-`-quicktree [CW] 46 <#_Toc256781668>`__
-
-`Pair-wise Alignment Computation. 46 <#_Toc256781669>`__
-
-`-dp\_mode 46 <#_Toc256781670>`__
-
-`-ktuple 47 <#_Toc256781671>`__
-
-`-ndiag. 47 <#_Toc256781672>`__
-
-`-diag\_mode 47 <#_Toc256781673>`__
-
-`-diag\_threshold. 47 <#_Toc256781674>`__
-
-`-sim\_matrix 47 <#_Toc256781675>`__
-
-`-matrix [CW] 48 <#_Toc256781676>`__
-
-`-nomatch. 48 <#_Toc256781677>`__
-
-`-gapopen. 48 <#_Toc256781678>`__
-
-`-gapext 48 <#_Toc256781679>`__
-
-`-fgapopen. 49 <#_Toc256781680>`__
-
-`-fgapext 49 <#_Toc256781681>`__
-
-`-cosmetic\_penalty 49 <#_Toc256781682>`__
-
-`-tg\_mode 49 <#_Toc256781683>`__
-
-`Weighting Schemes 49 <#_Toc256781684>`__
-
-`-seq\_weight 49 <#_Toc256781685>`__
-
-`Multiple Alignment Computation. 50 <#_Toc256781686>`__
-
-`-msa\_mode 50 <#_Toc256781687>`__
-
-`-one2all 50 <#_Toc256781688>`__
-
-`-profile\_comparison. 50 <#_Toc256781689>`__
-
-`-profile\_mode 50 <#_Toc256781690>`__
-
-`Alignment Post-Processing. 51 <#_Toc256781691>`__
-
-`-clean\_aln. 51 <#_Toc256781692>`__
-
-`-clean\_threshold. 51 <#_Toc256781693>`__
-
-`-clean\_iteration. 51 <#_Toc256781694>`__
-
-`-clean\_evaluation\_mode 51 <#_Toc256781695>`__
-
-`-iterate 51 <#_Toc256781696>`__
-
-`CPU Control 52 <#_Toc256781697>`__
-
-`Multithreading. 52 <#_Toc256781698>`__
-
-`-multi\_core 52 <#_Toc256781699>`__
-
-`-n\_core 52 <#_Toc256781700>`__
-
-`Limits 52 <#_Toc256781701>`__
-
-`-mem\_mode 52 <#_Toc256781702>`__
-
-`-ulimit 52 <#_Toc256781703>`__
-
-`-maxlen. 53 <#_Toc256781704>`__
-
-`Aligning more than 100 sequences with DPA. 53 <#_Toc256781705>`__
-
-`-maxnseq. 53 <#_Toc256781706>`__
-
-`-dpa\_master\_aln. 53 <#_Toc256781707>`__
-
-`-dpa\_maxnseq. 53 <#_Toc256781708>`__
-
-`-dpa\_min\_score1. 53 <#_Toc256781709>`__
-
-`-dpa\_min\_score2. 53 <#_Toc256781710>`__
-
-`-dap\_tree [NOT IMPLEMENTED] 54 <#_Toc256781711>`__
-
-`Using Structures 54 <#_Toc256781712>`__
-
-`Generic 54 <#_Toc256781713>`__
-
-`-mode 54 <#_Toc256781714>`__
-
-`-check\_pdb\_status 54 <#_Toc256781715>`__
-
-`3D Coffee: Using SAP. 54 <#_Toc256781716>`__
-
-`Using/finding PDB templates for the Sequences 55 <#_Toc256781717>`__
-
-`-template\_file 55 <#_Toc256781718>`__
-
-`-struc\_to\_use 57 <#_Toc256781719>`__
-
-`Multiple Local Alignments 57 <#_Toc256781720>`__
-
-`-domain/-mocca. 57 <#_Toc256781721>`__
-
-`-start 58 <#_Toc256781722>`__
-
-`-len. 58 <#_Toc256781723>`__
-
-`-scale 58 <#_Toc256781724>`__
-
-`-domain\_interactive [Examples] 58 <#_Toc256781725>`__
-
-`Output Control 59 <#_Toc256781726>`__
-
-`Generic 59 <#_Toc256781727>`__
-
-`Conventions Regarding Filenames 59 <#_Toc256781728>`__
-
-`Identifying the Output files automatically 59 <#_Toc256781729>`__
-
-`-no\_warning. 59 <#_Toc256781730>`__
-
-`Alignments 59 <#_Toc256781731>`__
-
-`-outfile 59 <#_Toc256781732>`__
-
-`-output 60 <#_Toc256781733>`__
-
-`-outseqweight 60 <#_Toc256781734>`__
-
-`-case 60 <#_Toc256781735>`__
-
-`-cpu. 61 <#_Toc256781736>`__
-
-`-outseqweight 61 <#_Toc256781737>`__
-
-`-outorder [cw] 61 <#_Toc256781738>`__
-
-`-inorder [cw] 61 <#_Toc256781739>`__
-
-`-seqnos 61 <#_Toc256781740>`__
-
-`Libraries 62 <#_Toc256781741>`__
-
-`-out\_lib. 62 <#_Toc256781742>`__
-
-`-lib\_only 62 <#_Toc256781743>`__
-
-`Trees 62 <#_Toc256781744>`__
-
-`-newtree 62 <#_Toc256781745>`__
-
-`Reliability Estimation. 62 <#_Toc256781746>`__
-
-`CORE Computation. 62 <#_Toc256781747>`__
-
-`-evaluate\_mode 62 <#_Toc256781748>`__
-
-`Generic Output 63 <#_Toc256781749>`__
-
-`-run\_name 63 <#_Toc256781750>`__
-
-`-quiet 63 <#_Toc256781751>`__
-
-`-align [CW] 63 <#_Toc256781752>`__
-
-`APDB, iRMSD and tRMSD Parameters 63 <#_Toc256781753>`__
-
-`-quiet [Same as T-Coffee] 64 <#_Toc256781754>`__
-
-`-run\_name [Same as T-Coffee] 64 <#_Toc256781755>`__
-
-`-aln. 64 <#_Toc256781756>`__
-
-`-n\_excluded\_nb. 64 <#_Toc256781757>`__
-
-`-maximum\_distance 64 <#_Toc256781758>`__
-
-`-similarity\_threshold. 65 <#_Toc256781759>`__
-
-`-local\_mode 65 <#_Toc256781760>`__
-
-`-filter 65 <#_Toc256781761>`__
-
-`-print\_rapdb [Unsupported] 65 <#_Toc256781762>`__
-
-`-outfile [Same as T-Coffee] 65 <#_Toc256781763>`__
-
-`-color\_mode 65 <#_Toc256781764>`__
-
-`Building a Server 66 <#_Toc256781765>`__
-
-`Environment Variables 66 <#_Toc256781766>`__
-
-`Output of the .dnd file. 67 <#_Toc256781767>`__
-
-`Permissions 67 <#_Toc256781768>`__
-
-`Other Programs 67 <#_Toc256781769>`__
-
-`Formats. 68 <#_Toc256781770>`__
-
-`Parameter files 68 <#_Toc256781771>`__
-
-`Sequence Name Handling. 68 <#_Toc256781772>`__
-
-`Automatic Format Recognition. 69 <#_Toc256781773>`__
-
-`Structures 69 <#_Toc256781774>`__
-
-`RNA Structures 69 <#_Toc256781775>`__
-
-`Sequences 69 <#_Toc256781776>`__
-
-`Alignments 69 <#_Toc256781777>`__
-
-`Libraries 70 <#_Toc256781778>`__
-
-`T-COFFEE\_LIB\_FORMAT\_01. 70 <#_Toc256781779>`__
-
-`T-COFFEE\_LIB\_FORMAT\_02. 71 <#_Toc256781780>`__
-
-`Library List 71 <#_Toc256781781>`__
-
-`Substitution matrices. 71 <#_Toc256781782>`__
-
-`ClustalW Style [Deprecated] 71 <#_Toc256781783>`__
-
-`BLAST Format [Recommended] 72 <#_Toc256781784>`__
-
-`Sequences Weights 72 <#_Toc256781785>`__
-
-`Known Problems. 73 <#_Toc256781786>`__
-
-`Technical Notes. 74 <#_Toc256781787>`__
-
-`Development 74 <#_Toc256781788>`__
-
-`Command Line List 74 <#_Toc256781789>`__
-
-`To Doâ€¦.. 76 <#_Toc256781790>`__
-
-.. raw:: html
-
-   </div>
-
-.. raw:: html
-
-   <div class="WordSection4">
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
-
+#################################
+T-Coffee: Technical Documentation
+#################################
+############################################################################################################################################################################
+T-Coffee Technical Documentation (Version 8.96, July 2010) www.tcoffee.org  T-Coffee, seq_reformat  PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD
+############################################################################################################################################################################
+########################
 License and Terms of Use
+########################
+****************************************************
+T-Coffee is distributed under the Gnu Public License
+****************************************************
+Please make sure you have agreed with the terms of the license attached to the package before using the T-Coffee package or its documentation. T-Coffee is a freeware open source distributed under a GPL license. This means that there are very little restrictions to its use, either in an academic or a non academic environment.
 
-.. raw:: html
 
-   </div>
+***********************************
+T-Coffee code can be re-used freely
+***********************************
+Our philosophy is that code is meant to be re-used, including ours. No permission is needed for the cut and paste of a few functions, although we are always happy to receive pieces of improved code.
 
-Â 
 
-.. rubric:: T-Coffee is distributed under the Gnu Public License
+*******************************************************************
+T-Coffee can be incorporated in most pipelines: Plug-in/Plug-out...
+*******************************************************************
+Our philosophy is to insure that as many methods as possible can be used as plug-ins within T-Coffee. Likewise, we will give as much support as possible to anyone wishing to turn T-Coffee into a plug-in for another method. For more details on how to do this, see the plug-in and the plug-out sections of the Tutorial Manual.
 
-Â 
 
-Please make sure you have agreed with the terms of the license attached
-to the package before using the T-Coffee package or its documentation.
-T-Coffee is a freeware open source distributed under a GPL license. This
-means that there are very little restrictions to its use, either in an
-academic or a non academic environment.
+Again, you do not need our permission to either use T-Coffee (or your method as a plug-in/out) but if you let us know, we will insure the stability of T-Coffee within your system through future releases.
 
-.. rubric:: T-Coffee code can be re-used freely
 
-Our philosophy is that code is meant to be re-used, including ours. No
-permission is needed for the cut and paste of a few functions, although
-we are always happy to receive pieces of improved code.
+The current license only allows for the incorporation of T-Coffee in non-commercial pipelines (i.e. where you do not sell the pipeline, or access to it). If your pipeline is commercial, please get in touch with us.
 
-.. rubric:: T-Coffee can be incorporated in most pipelines:
-   Plug-in/Plug-outâ€¦
 
-Our philosophy is to insure that as many methods as possible can be used
-as plug-ins within T-Coffee. Likewise, we will give as much support as
-possible to anyone wishing to turn T-Coffee into a plug-in for another
-method. For more details on how to do this, see the plug-in and the
-plug-out sections of the Tutorial Manual.
-
-Again, you do not need our permission to either use T-Coffee (or your
-method as a plug-in/out) but if you let us know, we will insure the
-stability of T-Coffee within your system through future releases.
-
-The current license only allows for the incorporation of T-Coffee in
-non-commercial pipelines (i.e. where you do not sell the pipeline, or
-access to it). If your pipeline is commercial, please get in touch with
-us.
-
-Â 
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
-
+######################
 Addresses and Contacts
+######################
+************
+Contributors
+************
+T-coffee is developed, maintained, monitored, used and debugged by a dedicated team that include or have included:
 
-.. raw:: html
 
-   </div>
+            Cédric Notredame, Paolo di Tomasso, Jean-François Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan. Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm
 
-.. rubric:: Contributors
 
-T-coffee is developed, maintained, monitored, used and debugged by a
-dedicated team that include or have included:
+*********
+Addresses
+*********
+We are always very eager to get some user feedback. Please do not hesitate to drop us a line  at: cedric.notredame@europe.com The latest updates of T-Coffee are always available  on: www.tcoffee.org . On this address you will also find a link to some of the online T-Coffee servers, including Tcoffee@igs
 
-Â Â Â Â Â Â Â Â Â Â Â  CÃ©dric Notredame, Fabrice Armougom, Des Higgins, Sebastien
-Moretti, Orla Oâ€™Sullivan. Eamon Oâ€™Toole, Olivier Poirot, Karsten Suhre,
-Iain Wallace, Andreas Wilm
 
-.. rubric:: Addresses
+T-Coffee can be used to automatically check if an updated version is available, however the program will not update automatically, as this can cause endless reproducibility problems.
 
-We are always very eager to get some user feedback. Please do not
-hesitate to drop us a lineÂ  at:
-`cedric.notredame@europe.com <mailto:cedric.notredame@europe.com>`__ The
-latest updates of T-Coffee are always availableÂ  on: www.tcoffee.org .
-On this address you will also find a link to some of the online T-Coffee
-servers, including Tcoffee@igs
 
-Â 
+::
 
-T-Coffee can be used to automatically check if an updated version is
-available, however the program will not update automatically, as this
-can cause endless reproducibility problems.
+  PROMPT: t_coffee -update
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee â€“update
-
-.. raw:: html
-
-   </div>
-
-Â 
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
-
+#########
 Citations
+#########
+It is important that you cite T-Coffee when you use it. Citing us is (almost) like giving us money: it helps us convincing our institutions that what we do is useful and that they should keep paying our salaries and deliver Donuts to our offices from time to time (Not that they ever did it, but it would be nice anyway).
 
-.. raw:: html
 
-   </div>
+Cite the server if you used it, otherwise, cite the original paper from 2000 (No, it was never named 'T-Coffee 2000').
 
-It is important that you cite T-Coffee when you use it. Citing us is
-(almost) like giving us money: it helps us convincing our institutions
-that what we do is useful and that they should keep paying our salaries
-and deliver Donuts to our offices from time to time (Not that they ever
-did it, but it would be nice anyway).
 
-Â 
+Notredame   C, Higgins DG, Heringa J.
 
-Cite the server if you used it, otherwise, cite the original paper from
-2000 (No, it was never named "T-Coffee 2000").
 
-`Notredame C, Higgins DG, Heringa
-J. <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=10964570>`__\ 
+Related Articles,                                                                                                          Links
 
-`Related
-Articles, <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Display&dopt=pubmed_pubmed&from_uid=10964570>`__
-Links
 
-| T-Coffee: A novel method for fast and accurate multiple sequence
-  alignment.
-|  J Mol Biol. 2000 Sep 8;302(1):205-17.
-|  PMID: 10964570 [PubMed - indexed for MEDLINE]
+T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]
+
 
 Other useful publications include:
 
-.. rubric:: T-Coffee
 
-`Claude JB, Suhre K, Notredame C, Claverie JM, Abergel
-C. <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15215460>`__\ 
+********
+T-Coffee
+********
+Claude   JB, Suhre K, Notredame C, Claverie JM, Abergel C.
 
-`Related
-Articles, <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Display&dopt=pubmed_pubmed&from_uid=15215460>`__
-Links
 
-| CaspR: a web server for automated molecular replacement using homology
-  modelling.
-|  Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W606-9.
-|  PMID: 15215460 [PubMed - indexed for MEDLINE]
+Related Articles,                       Links
 
-Â 
 
-`Poirot O, Suhre K, Abergel C, O'Toole E, Notredame
-C. <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15215345>`__\ 
+CaspR: a web server for automated molecular   replacement using homology modelling.   Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W606-9.    PMID: 15215460 [PubMed - indexed for MEDLINE]
 
-`Related
-Articles, <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Display&dopt=pubmed_pubmed&from_uid=15215345>`__
-Links
 
-| 3DCoffee@igs: a web server for combining sequences and structures into
-  a multiple sequence alignment.
-|  Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W37-40.
-|  PMID: 15215345 [PubMed - indexed for MEDLINE]
+Poirot   O, Suhre K, Abergel C, O'Toole E, Notredame C.
 
-Â 
 
-`O'Sullivan O, Suhre K, Abergel C, Higgins DG, Notredame
-C. <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=15201059>`__\ 
+Related Articles,            Links
 
-`Related
-Articles, <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Display&dopt=pubmed_pubmed&from_uid=15201059>`__
-Links
 
-| 3DCoffee: combining protein sequences and structures within multiple
-  sequence alignments.
-|  J Mol Biol. 2004 Jul 2;340(2):385-95.
-|  PMID: 15201059 [PubMed - indexed for MEDLINE]
+3DCoffee@igs: a web server for combining sequences   and structures into a multiple sequence alignment.   Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W37-40.    PMID: 15215345 [PubMed - indexed for MEDLINE]
 
-Â 
 
-`Poirot O, O'Toole E, Notredame
-C. <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=12824354>`__\ 
+O'Sullivan   O, Suhre K, Abergel C, Higgins DG, Notredame C.
 
-`Related
-Articles, <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Display&dopt=pubmed_pubmed&from_uid=12824354>`__
-Links
 
-| Tcoffee@igs: A web server for computing, evaluating and combining
-  multiple sequence alignments.
-|  Nucleic Acids Res. 2003 Jul 1;31(13):3503-6.
-|  PMID: 12824354 [PubMed - indexed for MEDLINE]
+Related Articles,            Links
 
-Â 
 
-`Notredame
-C. <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=11301309>`__\ 
+3DCoffee: combining protein sequences and   structures within multiple sequence alignments.   J Mol Biol. 2004 Jul 2;340(2):385-95.    PMID: 15201059 [PubMed - indexed for MEDLINE]
 
-`Related
-Articles, <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Display&dopt=pubmed_pubmed&from_uid=11301309>`__
-Links
 
-| Mocca: semi-automatic method for domain hunting.
-|  Bioinformatics. 2001 Apr;17(4):373-4.
-|  PMID: 11301309 [PubMed - indexed for MEDLINE]
+Poirot   O, O'Toole E, Notredame C.
 
-Â 
 
-`Notredame C, Higgins DG, Heringa
-J. <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=10964570>`__\ 
+Related Articles,            Links
 
-`Related
-Articles, <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Display&dopt=pubmed_pubmed&from_uid=10964570>`__
-Links
 
-| T-Coffee: A novel method for fast and accurate multiple sequence
-  alignment.
-|  J Mol Biol. 2000 Sep 8;302(1):205-17.
-|  PMID: 10964570 [PubMed - indexed for MEDLINE]
+Tcoffee@igs: A web server for computing,   evaluating and combining multiple sequence alignments.   Nucleic Acids Res. 2003 Jul 1;31(13):3503-6.    PMID: 12824354 [PubMed - indexed for MEDLINE]
 
-Â 
 
-`Notredame C, Holm L, Higgins
-DG. <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=9682054>`__\ 
+Notredame   C.
 
-`Related
-Articles, <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Display&dopt=pubmed_pubmed&from_uid=9682054>`__
-Links
 
-| COFFEE: an objective function for multiple sequence alignments.
-|  Bioinformatics. 1998 Jun;14(5):407-22.
-|  PMID: 9682054 [PubMed - indexed for MEDLINE]
+Related Articles,            Links
 
-Â 
 
-.. rubric:: Mocca
+Mocca: semi-automatic method for domain hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]
 
-`Notredame
-C. <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=pubmed&dopt=Abstract&list_uids=11301309>`__
 
-`Related
-Articles, <http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=Display&dopt=pubmed_pubmed&from_uid=11301309&tool=ExternalSearch>`__
-Links
+Notredame   C, Higgins DG, Heringa J.
 
-Mocca: semi-automatic method for domain hunting.
- Bioinformatics. 2001 Apr;17(4):373-4.
- PMID: 11301309 [PubMed - indexed for MEDLINE]
 
-.. rubric:: CORE
+Related Articles,            Links
 
-`http://www.tcoffee.org/Publications/Pdf/core.pp.pdf <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`__
 
-.. rubric:: Other Contributions
+T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]
 
-We do not mean to steal code, but we will always try to re-use
-pre-existing code whenever that code exists, free of copyright, just
-like we expect people to do with our code. However, whenever this
-happens, we make a point at properly citing the source of the original
-contribution. If ever you recognize a piece of your code improperly
-cited, please drop us a note and we will be happy to correct that.
 
-In the mean time, here are some important pieces of code from other
-packages that have been incorporated within the T-Coffee package. These
-include:
+Notredame   C, Holm L, Higgins DG.
 
-Â Â Â Â Â Â Â Â  -The Sim algorithm of Huang and Miller that given two sequences
-computes the N best scoring local alignments.
 
-Â Â Â Â Â Â Â Â  -The tree reading/computing routines are taken from the
-ClustalW Package, courtesy of Julie Thompson, Des Higgins and Toby
-Gibson (Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid
-Research).
+Related Articles,            Links
 
-Â Â Â Â Â Â Â Â  -The implementation of the algorithm for aligning two sequences
-in linear space was adapted from Myers and Miller, in CABIOS, 1988,
-11-17, vol. 1)
 
-Â Â Â Â Â Â Â Â  -Various techniques and algorithms have been implemented.
-Whenever relevant, the source of the code/algorithm/idea is indicated in
-the corresponding function.
+COFFEE: an objective function for multiple   sequence alignments.   Bioinformatics. 1998 Jun;14(5):407-22.    PMID: 9682054 [PubMed - indexed for MEDLINE]
 
-Â Â Â Â Â Â Â Â  -64 Bits compliance was implemented by Benjamin Sohn,
-Performance Computing Center Stuttgart (HLRS), Germany
 
-Â Â Â Â Â Â Â Â  -David Mathog (Caltech) provided many fixes and useful feedback
-for improving the code and making the whole soft behaving more
-rationally
+*****
+Mocca
+*****
+Notredame C.
 
-.. rubric:: Bug Reports and Feedback
 
-Â Â Â Â Â Â Â Â  -Prof David Jones (UCL) reported and corrected the PDB1K bug
-(now t\_coffee/sap can align PDB sequences longer than 1000 AA).
+Related Articles,            Links
 
-Â Â Â Â Â Â Â Â  -Johan Leckner reported several bugs related to the treatment
-of PDB structures, insuring a consistent behavior between version 1.37
-and current ones.
 
-Â 
+Mocca: semi-automatic method for domain   hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]
 
-Â 
 
-.. raw:: html
+****
+CORE
+****
+http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
 
+*******************
+Other Contributions
+*******************
+We do not mean to steal code, but we will always try to re-use pre-existing code whenever that code exists, free of copyright, just like we expect people to do with our code. However, whenever this happens, we make a point at properly citing the source of the original contribution. If ever you recognize a piece of your code improperly cited, please drop us a note and we will be happy to correct that.
+
+
+In the mean time, here are some important pieces of code from other packages that have been incorporated within the T-Coffee package. These include:
+
+
+         -The Sim algorithm of Huang and Miller that given two sequences computes the N best scoring local alignments.
+
+
+         -The tree reading/computing routines are taken from the ClustalW Package, courtesy of Julie Thompson, Des Higgins and Toby Gibson (Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid Research).
+
+
+         -The implementation of the algorithm for aligning two sequences in linear space was adapted from Myers and Miller, in CABIOS, 1988, 11-17, vol. 1)
+
+
+         -Various techniques and algorithms have been implemented. Whenever relevant, the source of the code/algorithm/idea is indicated in the corresponding function.
+
+
+         -64 Bits compliance was implemented by Benjamin Sohn, Performance Computing Center Stuttgart (HLRS), Germany
+
+
+         -David Mathog (Caltech) provided many fixes and useful feedback for improving the code and making the whole soft behaving more rationally
+
+
+************************
+Bug Reports and Feedback
+************************
+         -Prof David Jones (UCL) reported and corrected the PDB1K bug (now t_coffee/sap can align PDB sequences longer than 1000 AA).
+
+
+         -Johan Leckner reported several bugs related to the treatment of PDB structures, insuring a consistent behavior between version 1.37 and current ones.
+
+
+ 
+
+
+#####################################
 Installation of The T-Coffee Packages
+#####################################
+************************************************
+Third Party Packages and On Demand Installations
+************************************************
+T-Coffee is a complex package that interacts with many other third part software. If you only want a standalone version of T-Coffee, you may install that package on its own. If you want to use a most sophisticated flavor (3dcoffee, expresso, rcofeee, etc...), the installer will try to install all the third party packages required.
 
-.. raw:: html
 
-   </div>
+Note that since version 7.56, T-Coffee will use 'on demand' installation and install the third party packages it needs *when* it needs them. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
 
-.. rubric:: Third Party Packages and On Demand Installations
 
-T-Coffee is a complex package that interacts with many other third part
-software. If you only want a standalone version of T-Coffee, you may
-install that package on its own. If you want to use a most sophisticated
-flavor (3dcoffee, expresso, rcofeee, etc...), the installer will try to
-install all the third party packages required.
+Whenver on-demand installation or automated installation fails because of unforessen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to check the original documentation.
 
-Note that since version 7.56, T-Coffee will use 'on demand' installation
-and install the third party packages it needs \*when\* it needs them.
-This only works for packages not requiring specific licenses and that
-can be installed by the regular installer. Please let us know if you
-would like another third party package to be included.
 
-Whenver on-demand installation or automated installation fails because
-of unforessen system specificities, users should install the third party
-package manually. This documentation gives some tips we have found
-useful, but users are encouraged to check the original documentation.
+*********************************
+Standard Installation of T-Coffee
+*********************************
+======================
+Automated Installation
+======================
+We now recommend that you use the automated installer provided for UNIX or Linux platforms.
 
-.. rubric:: Standard Installation of T-Coffee
 
-.. rubric:: Unix
+-------
+Mac-OsX
+-------
+::
 
-You need to have: gcc, g77, CPAN and an internet connection and your
-root password (to install SOAP). If you cannot log as root, ask (kindly)
-your system manager to install
-`SOAP::Lite <http://search.cpan.org/%7Ebyrne/SOAP-Lite-0.60a/>`__ for
-you. You may do this before or after the installation of T-Coffee. Even
-without SOAP you will still be able to use the basic functions of
-T-Coffee (simplest usage).
+     Click on tge .dmg file
 
-Â 
 
-1.Â Â Â Â Â  \ ``gunzip t_coffee.tar.gz``\ 
 
-2.Â Â Â Â Â  \ ``tar -xvf t_coffee.tar``\ 
+----
+Unix
+----
+::
 
-3.Â Â Â Â Â  \ ``cd t_coffee``\ 
+     rpm -i <rmp>
 
-4.Â Â Â Â Â  \ ``./install t_coffee``\ 
 
-This installation will only install the stand alone T-Coffee. If you
-want to install a specific mode of T-Coffee, you may try the following
-commands that will try to gather all the necessary third party packages.
-Note that a package already found on your system will not be
-re-installed.
 
-.. raw:: html
+====
+Unix
+====
+You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST (http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest)
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-Â Â  ./install t\_coffee
+::
 
-Â Â  ./install mcoffee
+  1.      gunzip t_coffee.tar.gz
 
-Â Â  ./install 3dcoffee
+  2.      tar -xvf t_coffee.tar
 
-Â Â  ./install rcoffee
+  3.      cd t_coffee
 
-Â Â  ./install psicoffee
+  4.      ./install t_coffee
 
-Â 
 
-.. raw:: html
 
-   </div>
+This installation will only install the stand alone T-Coffee. If you want to install a specific mode of T-Coffee, you may try the following commands that will try to gather all the necessary third party packages. Note that a package already found on your system will not be re-installed.
 
-Â 
+
+::
+
+     ./install t_coffee
+
+     ./install mcoffee
+
+     ./install 3dcoffee
+
+     ./install rcoffee
+
+     ./install psicoffee
+
+
 
 Or even
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-Â Â  ./install all
+     ./install all
 
-.. raw:: html
 
-   </div>
 
-Â 
+-All the corresponding executables will be downloaded automatically and installed in
 
--All the corresponding executables will be downloaded automatically and
-installed in
 
-.. raw:: html
+::
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+     $HOME/.t_coffee/plugins
 
-Â Â  $HOME/.t\_coffee/plugins
 
-.. raw:: html
 
-   </div>
+-if you executables are in a different location, give it to T-Coffee using the -plugins flag.
 
-Â 
 
--if you executables are in a different location, give it to T-Coffee
-using the -plugins flag.
+-If the installation of any of the companion package fails, you should install it yourself using the provided link (see below) and following the authors instructions. 
 
--If the installation of any of the companion package fails, you should
-install it yourself using the provided link (see below) and following
-the authors instructions.Â 
 
--If you have not managed to install SOAP::Lite, you can re-install it
-later (from anywhere) following steps 1-2.
+-If you have not managed to install SOAP::Lite, you can re-install it later (from anywhere) following steps 1-2.
 
-Â 
 
--This procedure attempts 3 things: installing and Compiling T-Coffee (C
-program), Installing and compiling
-`TMalign <http://zhang.bioinformatics.ku.edu/TM-align/>`__ (Fortran),
-Installing and compiling
-`SOAP::Lite <http://search.cpan.org/%7Ebyrne/SOAP-Lite-0.60a/>`__\ (Perl
-Module).
+-This procedure attempts 3 things: installing and Compiling T-Coffee (C program), Installing and compiling TMalign (Fortran), Installing and compiling XML::Simple
 
-Â 
 
--If you have never installed SOAP::Lite, CPAN will ask you many
-questions: say Yes to all
+-If you have never installed a perl module before, CPAN will ask you many questions: say Yes to all
 
--If everything went well, the procedure has created in the **bin**
-directory two executables: t\_coffee and TMalign (**Make sure these
-executables are on your $PATH!**)
 
-Â 
+-If everything went well, the procedure has created in the bin directory two executables: t_coffee and TMalign (Make sure these executables are on your $PATH!)
 
-.. rubric:: Microsoft Windows/Cygwin
 
-Install `Cygwin <http://www.cygwin.com>`__
+========================
+Microsoft Windows/Cygwin
+========================
+Install Cygwin
+
 
 Download The Installer (NOT Cygwin/X)
 
+
 Click on view to list ALL the packages
+
 
 Select: gcc-core, make, wget
 
+
 Optional: ssh, xemacs, nano
+
 
 Run mkpasswd in Cywin (as requested when you start cygwin)
 
+
 Install T-Coffee within Cygwin using the Unix procedure
 
-.. rubric:: MAC osX, Linux
 
-Make sure you have the Developer's kit installed (compilers and
-makefile)
+==============
+MAC osX, Linux
+==============
+Make sure you have the Developer's kit installed (compilers and makefile)
+
 
 Follow the Unix Procedure
 
-Â 
 
-.. rubric:: CLUSTER Installation
+====================
+CLUSTER Installation
+====================
+In order to run, T-Coffee must have a value for the http_proxy and for the E-mail. In order to do so you can either:
 
-In order to run, T-Coffee must have a value for the http\_proxy and for
-the E-mail. In order to do so you can either:
 
 export the following values:
 
-export http\_proxy\_4\_TCOFFEE="proxy" or "" if no proxy
 
-export EMAIL\_4\_TCOFFEE="your email"
+export http_proxy_4_TCOFFEE='proxy' or '' if no proxy
+
+
+export EMAIL_4_TCOFFEE='your email'
+
 
 OR
 
-modify the file ~/.t\_coffee/t\_coffee\_env
+
+modify the file ~/.t_coffee/t_coffee_env
+
 
 OR
 
-add to your command line: t\_coffee â€¦. -proxy=<proxy> -email=<email
 
-if you have no proxy: t\_coffee â€¦ -proxy -email=<email>
+add to your command line: t_coffee .... -proxy=<proxy> -email=<email
 
-Â 
 
-Â 
+if you have no proxy: t_coffee ... -proxy -email=<email>
 
-.. rubric:: If you have PDB installed:
 
+==========================
+If you have PDB installed:
+==========================
 Assuming you have a standard PDB installation in your file system
 
-setenv (or export)Â  PDB\_DIR <abs path>/data/structures/all/pdb/
 
-OR
+::
 
-setenv (or export)Â  PDB\_DIR <abs path>/structures/divided/pdb/
+  setenv (or export)  PDB_DIR <abs path>/data/structures/all/pdb/
 
-If you do not have PDB installed, don't worry, t\_coffee will go and
-fetch any structure it needs directly from the PDB repository. It will
-simply be a bit slower than if you had PDB locally.
+  OR
 
-.. rubric:: Installing BLAST for T-Coffee
+  setenv (or export)  PDB_DIR <abs path>/structures/divided/pdb/
 
-BLAST is a program that search sequence databases for homologues of a
-query sequence. It works for proteins and Nucleic Acids. In theory BLAST
-is just a package like any, but in practice things are a bit more
-complex. To run well, BLST requires up to date databases (that can be
-fairly large, like NR or UNIPROT) and a powerful computer.
 
-Fortunately, an increasing number of institutes or companies are now
-providing BLAST clients that run over the net. It means that all you
-need is a small program that send your query to the big server and gets
-the results back. This prevents you from the hassle of installing and
-maintaining BLAST, but of course it is less private and you rely on the
-network and the current load of these busy servers.
 
-Thanks to its interaction with BLAST, T-Coffee can gather structures and
-protein profiles and deliver an alignment significantly more accurate
-than the default you would get with T-Coffee or any similar method.
+If you do not have PDB installed, don't worry, t_coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally.
+
+
+*****************************
+Installing BLAST for T-Coffee
+*****************************
+BLAST is a program that search sequence databases for homologues of a query sequence. It works for proteins and Nucleic Acids. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run well, BLST requires up to date databases (that can be fairly large, like NR or UNIPROT) and a powerful computer.
+
+
+Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
+
+
+Thanks to its interaction with BLAST, T-Coffee can gather structures and protein profiles and deliver an alignment significantly more accurate than the default you would get with T-Coffee or any similar method.
+
 
 Let us go through the various modes available for T-Coffee
 
-Â 
 
-.. rubric:: Why Do I need BLAST with T-Coffee?
+==================================
+Why Do I need BLAST with T-Coffee?
+==================================
+The most accurate modes of T-Coffe scan the databases for templates that they use to align the sequences. There are currently two types of templates for proteins:
 
-The most accurate modes of T-Coffe scan the databases for templates that
-they use to align the sequences. There are currently two types of
-templates for proteins:
 
-structures (PDB) that can be found by a blastp against the PDB database
-and profiles that can be constructed with eiether a blastp or a psiblast
-against nr or uniprot.
+structures (PDB) that can be found by a blastp against the PDB database and profiles that can be constructed with eiether a blastp or a psiblast against nr or uniprot.
+
 
 These templates are automatically built if you use:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-Â Â  t\_coffee <yourseq> -mode expresso
+     t_coffee <yourseq> -mode expresso
 
-.. raw:: html
 
-   </div>
 
-Â Â Â Â Â Â Â Â  that fetches aand uses pdb templates, or
+         that fetches aand uses pdb templates, or
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-Â Â  Â Â Â Â Â Â  t\_coffee <your seq> -mode psicoffee
+            t_coffee <your seq> -mode psicoffee
 
-.. raw:: html
 
-   </div>
 
-Â Â Â Â Â Â Â Â  that fetches and uses profile templates, or
+         that fetches and uses profile templates, or
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-Â Â  Â Â Â Â Â Â  t\_coffee <your seq> -mode accurate
+            t_coffee <your seq> -mode accurate
 
-.. raw:: html
 
-   </div>
 
-Â Â Â Â Â Â Â Â  that does everything and tries to use the best template. Now
-that you see why it is useful let's see how to get BLAST up and running,
-from the easy solution to tailor made ones.
+         that does everything and tries to use the best template. Now that you see why it is useful let's see how to get BLAST up and running, from the easy solution to tailor made ones.
 
-Â 
 
-.. rubric:: Using the EBI BLAST Client
+==========================
+Using the EBI BLAST Client
+==========================
+This is by far the easiest (and the default mode). The perl clients are already incorporated in T-Coffee and all you need is are the proper perl library. In theory, T-Coffee should have already installed these libraries during the standard installation. Yet, this requires having toot access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public psiblast via a web service.
 
-This is by far the easiest (and the default mode). The perl clients are
-already incorporated in T-Coffeem and all you need is the SOAP::Lite
-perl library. In theory, T-Coffee should have already installed this
-library during the standard installation. Yet, this requires having toot
-access. If you did not have it at the time of the installation, or if
-you need your system administrator to install SOAP::Lite, simply follow
-the instruction provided on the website:
 
-Â 
+Whenever you use a T-Coffee mode requiring Blast access, it will ask you for an authentification E-mail. Be Careful! If you provide a fake E-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, or entire institute, or even the entire country or, but I doubt it, the whole universe).
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+===========================
+Using the NCBI BLAST Client
+===========================
+The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSI-BLAST (as a web sevice). A big miss. The NCBI web blast client is a small executable that you should install on your system following the instructions given on this link
 
-Â Â  http://search.cpan.org/~byrne/SOAP-Lite-0.60a
 
-.. raw:: html
+::
 
-   </div>
+  ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
 
-It really is worth the effort, since the EBI is providing one of the
-best webservice available around, and most notably, the only public
-psiblast via a web service.
 
-Â 
 
-Another important point is that the EBI requires your E-mail address to
-process your queries. Normally, T-Coffee should have asked you to
-provide this address. If you have not, or if you have provided a phony
-address, you should correct this by directly editing the file
+Simply go for netbl, download the executable that corresponds to your architecture (cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN.
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+All you will then need to do is to make sure that T-Coffee uses the right client, when you run it.
 
-Â Â  ~/.t\_coffee/email.txt
 
-.. raw:: html
+::
 
-   </div>
+  -blast_server=NCBI
 
-**Be Careful! **\ If you provide a fake E-mail, the EBI may suspend the
-service for all machines associated with your IP address (that could
-mean your entire lab, or entire institute, or even the entire country
-or, but I doubt it, the whole universe).
 
-.. rubric:: Using the NCBI BLAST Client
 
-The NCBI is the next best alternative. In my hand it was always a bit
-slower and most of all, it does not incorporate PSI-BLAST (as a web
-sevice). A big miss. The NCBI web blast client is a small executable
-that you should install on your system following the instructions given
-on this link
+No need for any E-mail here, but you don't get psiblast, and whenever T-Coffee wants to use it, blastp will be used instead.
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+====================
+Using another Client
+====================
+You may have your own client (lucky you). If that is so, all you need is to make sure that this client is complient with the blast command line. If your client is named foo.pl, all you need to to is run T-Coffee with
 
-ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
 
-.. raw:: html
+::
 
-   </div>
+  -blast_server=CLIENT_foo.pl
 
-Simply go for **netbl,** download the executable that corresponds to
-your architecture (cygwin users should go for the win executable).
-Despite all the files that come along the executable blastcl3 is a stand
-alone executable that you can safely move to your $BIN.
 
-All you will then need to do is to make sure that T-Coffee uses the
-right client, when you run it.
 
-.. raw:: html
+Foo will be called as if it were blastpgp, and it is your responsability to make sure it can handle the following command line:
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
--blast\_server=NCBI
+::
 
-.. raw:: html
+  foo.pl -p <method> -d <db> -i <infile> -o <outfile> -m 7
 
-   </div>
 
-No need for any E-mail here, but you don't get psiblast, and whenever
-T-Coffee wants to use it, blastp will be used instead.
-
-.. rubric:: Using another Client
-
-You may have your own client (lucky you). If that is so, all you need is
-to make sure that this client is complient with the blast command line.
-If your client is named foo.pl, all you need to to is run T-Coffee with
-
-.. raw:: html
-
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
-
--blast\_server=CLIENT\_foo.pl
-
-.. raw:: html
-
-   </div>
-
-Foo will be called as if it were blastpgp, and it is your responsability
-to make sure it can handle the following command line:
-
-.. raw:: html
-
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
-
-foo.pl -p <method> -d <db> -i <infile> -o <outfile> -m 7
-
-.. raw:: html
-
-   </div>
 
 method can either be blastp or psiblast.
 
+
 infile is a FASTA file
 
--m7 triggers the XML output. T-Coffee is able to parse both the EBI XML
-output and the NCBI XML output.
 
-Â 
+-m7 triggers the XML output. T-Coffee is able to parse both the EBI XML output and the NCBI XML output.
 
-If foo.pl behaves differently, the easiest will probably be to write a
-wrapper around it so that wrapped\_foo.pl behaves like blastpgp
 
-Â 
+If foo.pl behaves differently, the easiest will probably be to write a wrapper around it so that wrapped_foo.pl behaves like blastpgp
 
-.. rubric:: Using a BLAST local version on UNIX
 
-If you have blastpgp installed, you can run it instead of the remote
-clients by using:
+===================================
+Using a BLAST local version on UNIX
+===================================
+If you have blastpgp installed, you can run it instead of the remote clients by using:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
--blast\_server=LOCAL
+  -blast_server=LOCAL
 
-.. raw:: html
 
-   </div>
 
-Â The documnentation for blastpgp can be found on:
+ The documentation for blastpgp can be found on:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html
+  www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html
 
-.. raw:: html
 
-   </div>
 
 and the package is part of the standard BLAST distribution
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
+  ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
 
-.. raw:: html
 
-   </div>
 
-Depending on your system, your own skills, your requirements and on more
-parameters than I have fingers to count, installing a BLAST server
-suited for your needs can range from a 10 minutes job to an achivement
-spread over several generations. So at this point, you should roam the
-NCBI website for suitable information.
+Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achivement spread over several generations. So at this point, you should roam the NCBI website for suitable information.
 
-If you want to have your own BLAST server to run your own databases, you
-should know that it is possible to control both the database and the
-program used by BLAST:
 
-Â 
+If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST:
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+::
 
--protein\_db: will specify the database used by all the psi-blast modes
+  -protein_db: will specify the database used by all the psi-blast modes
 
--pdb\_db: will specify the database used by the pdb modes
+  -pdb_db: will specify the database used by the pdb modes
 
-.. raw:: html
 
-   </div>
 
-.. rubric:: Using a BLAST local version on Windows/cygwin
+.. warning:: Note that T-Coffee is compliant with BLAST+, the latest NCBI Blast.
 
-For those of you using cygwin, be careful. While cygwin behaves like a
-UNIX system, the BLAST executable required for cygwin (win32) is
-expecting WINDOWS path and not UNIX path. This has three important
-consequences:
+=============================================
+Using a BLAST local version on Windows/cygwin
+=============================================
+------
+BLAST+
+------
+Blast+ is tghe latest NCBI Blast. IT is easier to install. A default installation should be compliant with a default T-Coffee installation.
+
+
+-------------------
+ORIGINAL NCBI BLAST
+-------------------
+For those of you using cygwin, be careful. While cygwin behaves like a UNIX system, the BLAST executable required for cygwin (win32) is expecting WINDOWS path and not UNIX path. This has three important consequences:
+
 
 1- the ncbi file declaring the Data directory must be:
 
-Â Â Â Â Â Â Â Â  C:WINDOWS//ncbi.initÂ  [at the root of your WINDOWS]
 
-2- the address mentionned with this file must be WINDOWS formated, for
-instance, on my system:
+         C:WINDOWS//ncbi.init  [at the root of your WINDOWS]
 
-Data=C:\\cygwin\\home\\notredame\\blast\\data
 
-3- When you pass database addresses to BLAST, these must be in Windows
-format:
+2- the address mentionned with this file must be WINDOWS formated, for instance, on my system:
 
-Â Â Â Â Â Â Â Â  -protein\_db="c:/somewhere/somewhereelse/database"
 
-(using the slash (/) or the andtislash (\\) does not matter on new
-systems but I would reommand against incorporating white spaces.
+Data=C:\cygwin\home\notredame\blast\data
 
-.. rubric:: Installing Other Companion Packages
 
-T-Coffee is meant to interact with as many packages as possible, either
-for aligning or using predictions. If you type
+3- When you pass database addresses to BLAST, these must be in Windows format:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+         -protein_db='c:/somewhere/somewhereelse/database'
 
-Â Â  t\_coffee
 
-.. raw:: html
+(using the slash (/) or the andtislash (\) does not matter on new systems but I would reommand against incorporating white spaces.
 
-   </div>
 
-You will receive a list of supported packages that looks like the next
-table. In theory, most of these packages can be installed by T-Coffee
+***********************************
+Installing Other Companion Packages
+***********************************
+T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type
 
-Â 
 
-.. raw:: html
+::
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+     t_coffee
 
-\*\*\*\*\*\* Pairwise Sequence Alignment Methods:
 
---------------------------------------------
 
-fast\_pairÂ Â Â Â Â Â Â Â Â  built\_in
+You will receive a list of supported packages that looks like the next table. In theory, most of these packages can be installed by T-Coffee and we welcome any reasonnable request.
 
-exon3\_pairÂ Â Â Â Â Â Â Â  built\_in
 
-exon2\_pairÂ Â Â Â Â Â Â Â  built\_in
+::
 
-exon\_pairÂ Â Â Â Â Â Â Â Â  built\_in
+  ****** Pairwise Sequence Alignment Methods:
 
-slow\_pairÂ Â Â Â Â Â Â Â Â  built\_in
+  --------------------------------------------
 
-proba\_pairÂ Â Â Â Â Â Â Â  built\_in
+  fast_pair          built_in
 
-lalign\_id\_pairÂ Â Â Â  built\_in
+  exon3_pair         built_in
 
-seq\_pairÂ Â Â Â Â Â Â Â Â Â  built\_in
+  exon2_pair         built_in
 
-externprofile\_pair built\_in
+  exon_pair          built_in
 
-hh\_pairÂ Â Â Â Â Â Â Â Â Â Â  built\_in
+  slow_pair          built_in
 
-profile\_pairÂ Â Â Â Â Â  built\_in
+  proba_pair         built_in
 
-cdna\_fast\_pairÂ Â Â Â  built\_in
+  lalign_id_pair     built_in
 
-cdna\_cfast\_pairÂ Â Â  built\_in
+  seq_pair           built_in
 
-clustalw\_pairÂ Â Â Â Â  ftp://www.ebi.ac.uk/pub/clustalw
+  externprofile_pair built_in
 
-mafft\_pairÂ Â Â Â Â Â Â Â 
-http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  hh_pair            built_in
 
-mafftjtt\_pairÂ Â Â Â Â 
-http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  profile_pair       built_in
 
-mafftgins\_pairÂ Â Â Â 
-http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  cdna_fast_pair     built_in
 
-dialigntx\_pairÂ Â Â Â  http://dialign-tx.gobics.de/
+  cdna_cfast_pair    built_in
 
-dialignt\_pairÂ Â Â Â Â  http://dialign-t.gobics.de/
+  clustalw_pair      ftp://www.ebi.ac.uk/pub/clustalw
 
-poa\_pairÂ Â Â Â Â Â Â Â Â Â  http://www.bioinformatics.ucla.edu/poa/
+  mafft_pair         http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-probcons\_pairÂ Â Â Â Â  http://probcons.stanford.edu/
+  mafftjtt_pair      http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-muscle\_pairÂ Â Â Â Â Â Â  http://www.drive5.com/muscle/
+  mafftgins_pair     http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-t\_coffee\_pairÂ Â Â Â Â  http://www.tcoffee.org
+  dialigntx_pair     http://dialign-tx.gobics.de/
 
-pcma\_pairÂ Â Â Â Â Â Â Â Â  ftp://iole.swmed.edu/pub/PCMA/
+  dialignt_pair      http://dialign-t.gobics.de/
 
-kalign\_pairÂ Â  Â Â Â Â Â http://msa.cgb.ki.se
+  poa_pair           http://www.bioinformatics.ucla.edu/poa/
 
-amap\_pairÂ Â Â Â Â Â Â Â Â  http://bio.math.berkeley.edu/amap/
+  probcons_pair      http://probcons.stanford.edu/
 
-proda\_pairÂ Â Â Â Â Â Â Â  http://bio.math.berkeley.edu/proda/
+  muscle_pair        http://www.drive5.com/muscle/
 
-prank\_pairÂ Â Â Â Â Â Â Â  http://www.ebi.ac.uk/goldman-srv/prank/
+  t_coffee_pair      http://www.tcoffee.org
 
-consan\_pairÂ Â Â Â Â Â Â  http://selab.janelia.org/software/consan/
+  pcma_pair          ftp://iole.swmed.edu/pub/PCMA/
 
-Â 
+  kalign_pair        http://msa.cgb.ki.se
 
-\*\*\*\*\*\* Pairwise Structural Alignment Methods:
+  amap_pair          http://bio.math.berkeley.edu/amap/
 
---------------------------------------------
+  proda_pair         http://bio.math.berkeley.edu/proda/
 
-align\_pdbpairÂ Â Â Â Â  built\_in
+  prank_pair         http://www.ebi.ac.uk/goldman-srv/prank/
 
-lalign\_pdbpairÂ Â Â Â  built\_in
+  consan_pair        http://selab.janelia.org/software/consan/
 
-extern\_pdbpairÂ Â Â Â  built\_in
+  ****** Pairwise Structural Alignment Methods:
 
-thread\_pairÂ Â Â Â Â Â Â  built\_in
+  --------------------------------------------
 
-fugue\_pairÂ Â Â Â Â Â Â Â  http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+  align_pdbpair      built_in
 
-pdb\_pairÂ Â Â Â Â Â Â Â Â Â  built\_in
+  lalign_pdbpair     built_in
 
-sap\_pairÂ Â Â Â Â Â Â Â Â Â  http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+  extern_pdbpair     built_in
 
-mustang\_pairÂ Â Â Â Â Â  http://www.cs.mu.oz.au/~arun/mustang/
+  thread_pair        built_in
 
-tmalign\_pairÂ Â Â Â Â Â  http://zhang.bioinformatics.ku.edu/TM-align/
+  fugue_pair         http://www-cryst.bioc.cam.ac.uk/fugue/download.html
 
-Â 
+  pdb_pair           built_in
 
-\*\*\*\*\*\* Multiple Sequence Alignment Methods:
+  sap_pair           http://www-cryst.bioc.cam.ac.uk/fugue/download.html
 
---------------------------------------------
+  mustang_pair       http://www.cs.mu.oz.au/~arun/mustang/
 
-clustalw\_msaÂ Â Â Â Â Â  ftp://www.ebi.ac.uk/pub/clustalw
+  tmalign_pair       http://zhang.bioinformatics.ku.edu/TM-align/
 
-mafft\_msaÂ Â Â Â Â Â Â Â Â 
-http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  ****** Multiple Sequence Alignment Methods:
 
-mafftjtt\_msaÂ Â Â Â Â Â 
-http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  --------------------------------------------
 
-mafftgins\_msaÂ Â Â Â Â 
-http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  clustalw_msa       ftp://www.ebi.ac.uk/pub/clustalw
 
-dialigntx\_msaÂ Â Â Â Â  http://dialign-tx.gobics.de/
+  mafft_msa          http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-dialignt\_msaÂ Â Â Â Â Â  http://dialign-t.gobics.de/
+  mafftjtt_msa       http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-poa\_msaÂ Â Â Â Â Â Â Â Â Â Â  http://www.bioinformatics.ucla.edu/poa/
+  mafftgins_msa      http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-probcons\_msaÂ Â Â Â Â Â  http://probcons.stanford.edu/
+  dialigntx_msa      http://dialign-tx.gobics.de/
 
-muscle\_msaÂ Â Â Â Â Â Â Â  http://www.drive5.com/muscle/
+  dialignt_msa       http://dialign-t.gobics.de/
 
-t\_coffee\_msaÂ Â Â Â Â Â  http://www.tcoffee.org
+  poa_msa            http://www.bioinformatics.ucla.edu/poa/
 
-pcma\_msaÂ Â Â Â Â Â Â Â Â Â  ftp://iole.swmed.edu/pub/PCMA/
+  probcons_msa       http://probcons.stanford.edu/
 
-kalign\_msaÂ Â Â Â Â Â Â Â  http://msa.cgb.ki.se
+  muscle_msa         http://www.drive5.com/muscle/
 
-amap\_msaÂ Â Â Â Â Â Â Â  Â Â http://bio.math.berkeley.edu/amap/
+  t_coffee_msa       http://www.tcoffee.org
 
-proda\_msaÂ Â Â Â Â Â Â Â Â  http://bio.math.berkeley.edu/proda/
+  pcma_msa           ftp://iole.swmed.edu/pub/PCMA/
 
-prank\_msaÂ Â Â Â Â Â Â Â Â  http://www.ebi.ac.uk/goldman-srv/prank/
+  kalign_msa         http://msa.cgb.ki.se
 
-Â 
+  amap_msa           http://bio.math.berkeley.edu/amap/
 
-#######Â Â  Prediction Methods available to generate Templates
+  proda_msa          http://bio.math.berkeley.edu/proda/
 
--------------------------------------------------------------
+  prank_msa          http://www.ebi.ac.uk/goldman-srv/prank/
 
-RNAplfoldÂ Â Â Â Â Â Â Â Â  http://www.tbi.univie.ac.at/~ivo/RNA/
+  #######   Prediction Methods available to generate Templates
 
-HMMtopÂ Â Â Â Â Â Â Â Â Â Â Â  www.enzim.hu/hmmtop/
+  -------------------------------------------------------------
 
-GOR4Â Â Â Â Â Â Â Â Â Â Â Â Â Â  http://mig.jouy.inra.fr/logiciels/gorIV/
+  RNAplfold          http://www.tbi.univie.ac.at/~ivo/RNA/
 
-wublast\_clientÂ Â Â Â 
-http://www.ebi.ac.uk/Tools/webservices/services/wublast
+  HMMtop             www.enzim.hu/hmmtop/
 
-blastpgp\_clientÂ Â Â 
-http://www.ebi.ac.uk/Tools/webservices/services/blastpgpÂ Â Â Â Â Â Â Â Â Â Â 
+  GOR4               http://mig.jouy.inra.fr/logiciels/gorIV/
 
-==========================================================
+  wublast_client     http://www.ebi.ac.uk/Tools/webservices/services/wublast
 
-.. raw:: html
+  blastpgp_client    http://www.ebi.ac.uk/Tools/webservices/services/blastpgp           
 
-   </div>
+  ==========================================================
 
-Â 
 
-Â 
 
-.. rubric:: Installation of PSI-Coffee and Expresso
+***************************************
+Installation of PSI-Coffee and Expresso
+***************************************
+PSI-Coffee is a mode of T-Coffee that runs a a Psi-BLAST on each of your sequences and makes a multiple profile alignment. If you do not have any structural information, it is by far the most accurate mode of T-Coffee. To use it, you must have SOAP installed so that the EBI BLAST client can run on your system.
 
-PSI-Coffee is a mode of T-Coffee that runs a a Psi-BLAST on each of your
-sequences and makes a multiple profile alignment. If you do not have any
-structural information, it is by far the most accurate mode of T-Coffee.
-To use it, you must have SOAP installed so that the EBI BLAST client can
-run on your system.
 
-It is a bit slow, but really worth it if your sequences are hard to
-align and if the accuracy of your alignment is important. Â 
+It is a bit slow, but really worth it if your sequences are hard to align and if the accuracy of your alignment is important. 
+
 
 To use this mode, try:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-Â Â  t\_coffee <yoursequence> -mode psicoffee
+     t_coffee <yoursequence> -mode psicoffee
 
-.. raw:: html
 
-   </div>
 
-Note that because PSI-BLAST is time consuming, T-Coffee stores the runs
-in its cache (./tcoffee/cache) so that it does not need to be re-run. It
-means that if you re-align your sequences (or add a few extra
-sequences), things will be considerably faster.
+Note that because PSI-BLAST is time consuming, T-Coffee stores the runs in its cache (./tcoffee/cache) so that it does not need to be re-run. It means that if you re-align your sequences (or add a few extra sequences), things will be considerably faster.
 
-If your installation procedure has managed to compile TMalign, and if
-T-Coffee has access to the EBI BLAST server (or any other server) you
-can also do the following:
 
-.. raw:: html
+If your installation procedure has managed to compile TMalign, and if T-Coffee has access to the EBI BLAST server (or any other server) you can also do the following:
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-Â Â  t\_coffee <yoursequence> -mode expresso
+::
 
-.. raw:: html
+     t_coffee <yoursequence> -mode expresso
 
-   </div>
 
-That will look for structural templates. And if both these modes are
-running fine, then you are ready for the best, the "crÃ¨me de la crÃ¨me":
 
-.. raw:: html
+That will look for structural templates. And if both these modes are running fine, then you are ready for the best, the 'crème de la crème':
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-Â Â  t\_coffee <yoursequence> -mode accurate
+::
 
-.. raw:: html
+     t_coffee <yoursequence> -mode accurate
 
-   </div>
 
-.. rubric:: Installation of M-Coffee
 
-Â 
+************************
+Installation of M-Coffee
+************************
+M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many multiple sequence alignment packages.
 
-M-Coffee is a special mode of T-Coffee that makes it possible to combine
-the output of many multiple sequence alignment packages.
 
-.. rubric:: Automated Installation
-
+======================
+Automated Installation
+======================
 In the T-Coffee distribution, type:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-./install mcoffee
+  ./install mcoffee
 
-.. raw:: html
 
-   </div>
 
-Â 
+In theory, this command should download and install every required package. If, however, it fails, you should switch to the manual installation (see next).
 
-In theory, this command should download and install every required
-package. If, however, it fails, you should switch to the manual
-installation (see next).
 
 By default these packages will be in
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-$HOME/.t\_coffee/plugins
+  $HOME/.t_coffee/plugins
 
-.. raw:: html
 
-   </div>
 
-If you want to have these companion packages in a different directory,
-you can either set the environement variable
+If you want to have these companion packages in a different directory, you can either set the environement variable
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PLUGINS\_4\_TCOFFEE=<plugins dir>
+  setenv PLUGINS_4_TCOFFEE=<plugins dir>
 
-.. raw:: html
 
-   </div>
 
 Or use the command line flag -plugin (over-rides every other setting)
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-t\_coffee ... -plugins=<plugins dir>
+  t_coffee ... -plugins=<plugins dir>
 
-.. raw:: html
 
-   </div>
 
-Â 
+===================
+Manual Installation
+===================
+M-Coffee requires a standard T-Coffee installation (c.f. previous section) and the following packages to be installed on your system:
 
-Â 
 
-.. rubric:: Manual Installation
+        
 
-M-Coffee requires a standard T-Coffee installation (c.f. previous
-section) and the following packages to be installed on your system:
 
-Â Â Â Â Â Â Â Â 
+::
 
-.. raw:: html
+  Package           Where From
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+  ==========================================================
 
-PackageÂ Â Â Â Â Â Â Â Â Â  Where From
+  ClustalW          can interact with t_coffee
 
-==========================================================
+  ----------------------------------------------------------
 
-ClustalWÂ Â Â Â Â Â Â Â Â  can interact with t\_coffee
+  Poa               http://www.bioinformatics.ucla.edu/poa/
 
-----------------------------------------------------------
+  ----------------------------------------------------------
 
-PoaÂ Â Â Â Â Â Â Â Â Â Â Â Â Â  http://www.bioinformatics.ucla.edu/poa/
+  Muscle            http://www.drive5.com
 
-----------------------------------------------------------
+   ----------------------------------------------------------
 
-MuscleÂ Â Â Â Â Â Â Â Â Â Â  http://www.drive5.com
+  ProbCons          http://probcons.stanford.edu/
 
-Â ----------------------------------------------------------
+  ProbConsRNA       http://probcons.stanford.edu/
 
-ProbConsÂ Â Â Â Â Â Â Â Â  http://probcons.stanford.edu/
+  ----------------------------------------------------------
 
-ProbConsRNAÂ Â Â Â Â Â  http://probcons.stanford.edu/
+  MAFFT http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-----------------------------------------------------------
+  ----------------------------------------------------------
 
-MAFFT
-\ `http://www.biophys.kyoto- <http://www.biophys.kyoto-/>`__\ u.ac.jp/~katoh/programs/align/mafft/
+  Dialign-T         http://dialign-t.gobics.de/
 
-----------------------------------------------------------
+  Dialign-TX        http://dialign-tx.gobics.de/
 
-Dialign-TÂ Â Â Â Â Â Â Â 
-\ `http://dialign-t.gobics.de/ <http://dialign-t.gobics.de/>`__\ 
+  ----------------------------------------------------------
 
-Dialign-TXÂ Â Â Â Â Â Â 
-\ `http://dialign-tx.gobics.de/ <http://dialign-t.gobics.de/>`__\ 
+  PCMA              ftp://iole.swmed.edu/pub/PCMA/
 
-----------------------------------------------------------
+  ----------------------------------------------------------
 
-PCMAÂ Â Â Â Â Â Â Â Â Â Â Â Â 
-\ `ftp://iole.swmed.edu/pub/PCMA/ <file://localhost/pub/PCMA>`__\ 
+  kalign            http://msa.cgb.ki.se
 
-----------------------------------------------------------
+  ----------------------------------------------------------
 
-kalignÂ Â Â Â Â Â Â Â Â Â Â  http://msa.cgb.ki.se
+  amap              http://bio.math.berkeley.edu/amap/
 
-----------------------------------------------------------
+  -----------------------------------------------------------
 
-amapÂ Â Â Â Â Â Â Â Â Â Â Â Â  http://bio.math.berkeley.edu/amap/
+  proda_msa        http://bio.math.berkeley.edu/proda/
 
------------------------------------------------------------
+  -----------------------------------------------------------
 
-proda\_msaÂ Â Â Â Â Â Â  http://bio.math.berkeley.edu/proda/
+  prank_msa        http://www.ebi.ac.uk/goldman-srv/prank/
 
------------------------------------------------------------
 
-prank\_msaÂ Â Â Â Â Â Â  http://www.ebi.ac.uk/goldman-srv/prank/
 
-Â 
+In our hands all these packages where very straightforward to compile and install on a standard cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed.
 
-.. raw:: html
 
-   </div>
+Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
 
-Â 
 
-In our hands all these packages where very straightforward to compile
-and install on a standard cygwin or Linux configuration. Just make sure
-you have gcc, the C compiler, properly installed.
+If for some reason, you do not want this directory to be on your path, or you want to specify a precise directory containing the executables, you can use:
 
-Once the package is compiled and ready to use, make sure that the
-executable is on your path, so that t\_coffee can find it automatically.
-Our favorite procedure is to create a bin directory in the home. If you
-do so, make sure this bin is in your path and fill it with all your
-executables (this is a standard Unix practice).
 
-If for some reason, you do not want this directory to be on your path,
-or you want to specify a precise directory containing the executables,
-you can use:
+::
 
-.. raw:: html
+     export PLUGINS_4_TCOFFEE=<dir>
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-Â Â  export PLUGINS\_4\_TCOFFEE=<dir>
 
-.. raw:: html
+By default this directory is set to $HOME/.t_coffee/plugins/$OS, but you can over-ride it with the environement variable or using the flag:
 
-   </div>
 
-By default this directory is set to $HOME/.t\_coffee/plugins/$OS, but
-you can over-ride it with the environement variable or using the flag:
+::
 
-.. raw:: html
+     t_coffee ...-plugins=<dir>
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-Â Â  t\_coffee ...-plugins=<dir>
 
-.. raw:: html
+If you cannot, or do not want to use a single bin directory, you can set the following environment variables to the absolute path values of the executable you want to use. Whenever they are set, these variables will supersede any other declaration. This is a convenient way to experiment with multiple package versions.
 
-   </div>
 
-Â 
+::
 
-If you cannot, or do not want to use a single bin directory, you can set
-the following environment variables to the absolute path values of the
-executable you want to use. Whenever they are set, these variables will
-supersede any other declaration. This is a convenient way to experiment
-with multiple package versions.
+  POA_4_TCOOFFEE CLUSTALW_4_TCOFFEE POA_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOFFEE MUSCLE_4_TCOFFEE DIALIGNT_4_TCOFFEE PRANK_4_TCOFFEE DIALIGNTX_4_TCOFFEE  
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:70.2pt;margin-right:0cm">
 
-POA\_4\_TCOOFFEE
- CLUSTALW\_4\_TCOFFEE
- POA\_4\_TCOFFEE
- TCOFFEE\_4\_TCOFFEE
- MAFFT\_4\_TCOFFEE
- MUSCLE\_4\_TCOFFEE
- DIALIGNT\_4\_TCOFFEE
- PRANK\_4\_TCOFFEE
- DIALIGNTX\_4\_TCOFFEE
- Â 
+For three of these packages, you will need to copy some of the files in a special T-Coffee directory.
 
-.. raw:: html
 
-   </div>
+::
 
-For three of these packages, you will need to copy some of the files in
-a special T-Coffee directory.
+     cp POA_DIR/* ~/.t_coffee/mcoffee/
 
-.. raw:: html
+     cp DIALIGN-T/conf/*  ~/.t_coffee/mcoffee
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+     cp DIALIGN-TX/conf/*  ~/.t_coffee/mcoffee
 
-Â Â  cp POA\_DIR/\* ~/.t\_coffee/mcoffee/
 
-Â Â  cp DIALIGN-T/conf/\*Â  ~/.t\_coffee/mcoffee
-
-Â Â  cp DIALIGN-TX/conf/\*Â  ~/.t\_coffee/mcoffee
-
-.. raw:: html
-
-   </div>
 
 Note that the following files are enough for default usage:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-BLOSUM.diag\_prob\_t10Â Â  BLOSUM75.scrÂ  blosum80\_trunc.matÂ Â Â Â Â Â Â Â Â Â 
+  BLOSUM.diag_prob_t10   BLOSUM75.scr  blosum80_trunc.mat          
 
-dna\_diag\_prob\_100\_exp\_330000Â  dna\_diag\_prob\_200\_exp\_110000
+  dna_diag_prob_100_exp_330000  dna_diag_prob_200_exp_110000
 
-BLOSUM.scrÂ Â Â Â Â Â Â Â Â Â Â Â  BLOSUM90.scrÂ  dna\_diag\_prob\_100\_exp\_110000
+  BLOSUM.scr             BLOSUM90.scr  dna_diag_prob_100_exp_110000
 
-dna\_diag\_prob\_100\_exp\_550000Â  dna\_diag\_prob\_250\_exp\_110000
+  dna_diag_prob_100_exp_550000  dna_diag_prob_250_exp_110000
 
-BLOSUM75.diag\_prob\_t2Â  blosum80.matÂ 
-dna\_diag\_prob\_100\_exp\_220000Â 
+  BLOSUM75.diag_prob_t2  blosum80.mat  dna_diag_prob_100_exp_220000 
 
-dna\_diag\_prob\_150\_exp\_110000Â  dna\_matrix.scr
+  dna_diag_prob_150_exp_110000  dna_matrix.scr
 
-.. raw:: html
 
-   </div>
 
-Â 
+If you would rather have the mcoffee directory in some other location, set the MCOFFEE_4_TCOFFEE environement variable to the propoer directory:
 
-If you would rather have the mcoffee directory in some other location,
-set the MCOFFEE\_4\_TCOFFEE environement variable to the propoer
-directory:
 
-.. raw:: html
+::
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+     setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
 
-Â Â  setenv MCOFFEE\_4\_TCOFFEE <directory containing mcoffee files>
 
-.. raw:: html
 
-   </div>
+******************************
+Installation of APDB and iRMSD
+******************************
+APDB and iRMSD are incorporated in T-Coffee. Once t_coffee is installed, you can invoque these programs by typing:
 
-.. rubric:: Installation of APDB and iRMSD
 
-APDB and iRMSD are incorporated in T-Coffee. Once t\_coffee is
-installed, you can invoque these programs by typing:
+::
 
-.. raw:: html
+     t_coffee -other_pg apdb    t_coffee -other_pg irmsd
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-Â Â  t\_coffee â€“other\_pg apdb
- Â Â  t\_coffee â€“other\_pg irmsd
 
-.. raw:: html
+*********************
+Installation of tRMSD
+*********************
+tRMSD comes along with t_coffee but it also requires the package phylip in order to be functional. Phylip can be obtained from:
 
-   </div>
 
-.. rubric:: Installation of tRMSD
+        
 
-tRMSD comes along with t\_coffee but it also requires the package phylip
-in order to be functional. Phylip can be obtained from:
 
-Â Â Â Â Â Â Â Â 
+::
 
-.. raw:: html
+  Package           Function
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+  ===================================================
 
-PackageÂ Â Â Â Â Â Â Â Â Â  Function
+  ---------------------------------------------------
 
-===================================================
+  Phylip            Phylogenetic tree computation
 
----------------------------------------------------
+                    evolution.genetics.washington.edu/phylip.html
 
-PhylipÂ Â Â Â Â Â Â Â Â Â Â  Phylogenetic tree computation
+  ---------------------------------------------------
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  evolution.genetics.washington.edu/phylip.html
+  t_coffee -other_pg trmsd
 
----------------------------------------------------
 
-.. raw:: html
 
-   </div>
+****************************
+Installation of seq_reformat
+****************************
+Seq_reformat is a reformatting package that is part of t_coffee. To use it (and see the available options), type:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-t\_coffee â€“other\_pg trmsd
+     t_coffee -other_pg seq_reformat
 
-.. raw:: html
 
-   </div>
 
-.. rubric:: 
+********************************
+Installation of extract_from_pdb
+********************************
+Extract_from_pdb is a PDB reformatting package that is part of t_coffee. To use it (and see the available options), type.
 
-Â 
 
-.. rubric:: Installation of seq\_reformat
+::
 
-Seq\_reformat is a reformatting package that is part of t\_coffee. To
-use it (and see the available options), type:
+     t_coffee -other_pg extract_from_pdb -h
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-Â Â  t\_coffee â€“other\_pg seq\_reformat
+Extract_from_pdb requires wget in order to automatically fetch PDB structures.
 
-.. raw:: html
 
-   </div>
+**********************************
+Installation of 3D-Coffee/Expresso
+**********************************
+3D-Coffee/Expresso is a special mode of T-Coffee that makes it possible to combine sequences and structures. The main difference between Expresso and 3D-Coffee is that Expresso fetches the structures itself.
 
-.. rubric:: Installation of extract\_from\_pdb
 
-Extract\_from\_pdb is a PDB reformatting package that is part of
-t\_coffee. To use it (and see the available options), type.
-
-.. raw:: html
-
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
-
-Â Â  t\_coffee â€“other\_pg apdb â€“h
-
-.. raw:: html
-
-   </div>
-
-Extract\_from\_pdb requires wget in order to automatically fetch PDB
-structures.
-
-Â 
-
-.. rubric:: Installation of 3D-Coffee/Expresso
-
-3D-Coffee/Expresso is a special mode of T-Coffee that makes it possible
-to combine sequences and structures. The main difference between
-Expresso and 3D-Coffee is that Expresso fetches the structures itself.
-
-.. rubric:: Automated Installation
-
+======================
+Automated Installation
+======================
 In the T-Coffee distribution, type:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-./install expresso
+  ./install expresso
 
-OR
+  OR
 
-./install 3dcoffee
+  ./install 3dcoffee
 
-.. raw:: html
 
-   </div>
 
-Â 
+In theory, this command should download and install every required package (except fugue). If, however, it fails, you should switch to the manual installation (see next).
 
-In theory, this command should download and install every required
-package (**except fugue**). If, however, it fails, you should switch to
-the manual installation (see next).
 
-.. rubric:: Manual Installation
+===================
+Manual Installation
+===================
+In order to make the most out of T-Coffee, you will need to install the following packages (make sure the executable is named as indicated below):
 
-In order to make the most out of T-Coffee, you will need to install the
-following packages (make sure the executable is named as indicated
-below):
 
-Â Â Â Â Â Â Â Â 
+        
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+::
 
-PackageÂ Â Â Â Â Â Â Â Â Â  Function
+  Package           Function
 
-===================================================
+  ===================================================
 
----------------------------------------------------
+  ---------------------------------------------------
 
-wgetÂ Â Â Â Â Â Â  Â Â Â Â Â  3DCoffee
+  wget              3DCoffee
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Automatic Downloading of Structures
+                    Automatic Downloading of Structures
 
----------------------------------------------------
+  ---------------------------------------------------
 
-sapÂ Â  Â Â Â Â Â  Â Â Â Â Â  structure/structure comparisons
+  sap               structure/structure comparisons
 
-(obtain it from W. Taylor, NIMR-MRC).
+  (obtain it from W. Taylor, NIMR-MRC).
 
----------------------------------------------------
+  ---------------------------------------------------
 
-TMalignÂ Â Â Â Â Â Â Â Â Â  zhang.bioinformatics.ku.edu/TM-align/
+  TMalign           zhang.bioinformatics.ku.edu/TM-align/
 
----------------------------------------------------
+  ---------------------------------------------------
 
-mustangÂ Â Â Â Â Â Â Â Â Â  www.cs.mu.oz.au/~arun/mustang/
+  mustang           www.cs.mu.oz.au/~arun/mustang/
 
----------------------------------------------------
+  ---------------------------------------------------
 
-wublastclientÂ Â Â Â  www.ebi.ac.uk/Tools/webservices/clients/wublast
+  wublastclient     www.ebi.ac.uk/Tools/webservices/clients/wublast
 
----------------------------------------------------
+  ---------------------------------------------------
 
-BlastÂ Â Â Â Â Â  Â Â Â Â Â 
-\ `www.ncbi.nih.nlm.gov <http://www.ncbi.nih.nlm.gov/>`__
+  Blast             www.ncbi.nih.nlm.gov
 
----------------------------------------------------
+  ---------------------------------------------------
 
-Fugue\*Â Â Â Â Â Â Â Â Â Â Â  protein to structure alignment program
+  Fugue*            protein to structure alignment program
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+                    http://www-cryst.bioc.cam.ac.uk/fugue/download.html
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  \*\*\*NOT COMPULSORY\*\*\*
+                    ***NOT COMPULSORY***
 
-.. raw:: html
 
-   </div>
 
-Â 
+Once the package is installed, make sure make sure that the executable is on your path, so that t_coffee can find it automatically.
 
-Once the package is installed, make sure make sure that the executable
-is on your path, so that t\_coffee can find it automatically.
 
-Â 
+The wublast client makes it possible to run BLAST at the EBI without having to install any database locally. It is an ideal solution if you are only using expresso occasionally.
 
-The wublast client makes it possible to run BLAST at the EBI without
-having to install any database locally. It is an ideal solution if you
-are only using expresso occasionally.
 
-Â 
+=============================
+Installing Fugue for T-Coffee
+=============================
+Uses a standard fugue installation. You only need to install the following packages:
 
-.. rubric:: Installing Fugue for T-Coffee
 
-Uses a standard fugue installation. You only need to install the
-following packages:
+ joy, melody, fugueali, sstruc, hbond
 
-Â joy, melody, fugueali, sstruc, hbond
 
 If you have root privileges, you can install the common data in:
 
+
 cp fugue/classdef.dat /data/fugue/SUBST/classdef.dat
+
 
 otherwise
 
-Setenv MELODY\_CLASSDEF=<location>
 
-Setenv MELODY\_SUBST=fugue/allmat.dat
+Setenv MELODY_CLASSDEF=<location>
 
-Â 
+
+Setenv MELODY_SUBST=fugue/allmat.dat
+
+
+ 
+
 
 All the other configuration files must be in the right location.
 
-.. rubric:: Installation of R-Coffee
 
-R-Coffee is a special mode able to align RNA sequences while taking into
-account their secondary structure.
+************************
+Installation of R-Coffee
+************************
+R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure.
 
-.. rubric:: Automated Installation
 
+======================
+Automated Installation
+======================
 In the T-Coffee distribution, type:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-./install rcoffee
+  ./install rcoffee
 
-.. raw:: html
 
-   </div>
 
-Â 
+In theory, this command should download and install every required package (except consan). If, however, it fails, you should switch to the manual installation (see next).
 
-In theory, this command should download and install every required
-package (except **consan**). If, however, it fails, you should switch to
-the manual installation (see next).
 
-.. rubric:: Manual Installation
+===================
+Manual Installation
+===================
+R-Coffee only requires the package Vienna to be installed, in order to compute multiple sequence alignments. To make the best out of it, you should also have all the packages required by M-Coffee
 
-R-Coffee only requires the package Vienna to be installed, in order to
-compute multiple sequence alignments. To make the best out of it, you
-should also have all the packages required by M-Coffee
 
-Â Â Â Â Â Â Â Â 
+        
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+::
 
-PackageÂ Â Â Â Â Â Â Â Â Â  Function
+  Package           Function
 
-===================================================
+  ===================================================
 
----------------------------------------------------
+  ---------------------------------------------------
 
-consanÂ Â Â Â Â Â Â Â Â Â Â  R-Coffee
+  consan            R-Coffee
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Computes highly accurate pairwise Alignments
+                    Computes highly accurate pairwise Alignments
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  \*\*\*NOT COMPULSORY\*\*\*
+                    ***NOT COMPULSORY***
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  selab.janelia.org/software/consan/
+                    selab.janelia.org/software/consan/
 
----------------------------------------------------
+  ---------------------------------------------------
 
-RNAplfoldÂ Â Â Â Â Â Â Â  Computes RNA secondary Structures
+  RNAplfold         Computes RNA secondary Structures
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  www.tbi.univie.ac.at/~ivo/RNA/
+                    www.tbi.univie.ac.at/~ivo/RNA/
 
----------------------------------------------------
+  ---------------------------------------------------
 
-probconsRNAÂ Â Â Â Â Â  probcons.stanford.edu/
+  probconsRNA       probcons.stanford.edu/
 
-Â Â Â Â Â Â Â 
+         
 
----------------------------------------------------
+  ---------------------------------------------------
 
-M-CoffeeÂ Â Â Â Â Â Â Â Â  T-Coffee and the most common MSA Packages
+  M-Coffee          T-Coffee and the most common MSA Packages
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  (cf M-Coffee in this installation guide)
+                    (cf M-Coffee in this installation guide)
 
-.. raw:: html
 
-   </div>
 
-.. rubric:: Installing ProbbonsRNA for R-Coffee
+===================================
+Installing ProbbonsRNA for R-Coffee
+===================================
+Follow the installation procedure, but make sure you rename the probcons executable into probconsRNA.
 
-Follow the installation procedure, but make sure you rename the probcons
-executable into probconsRNA.
 
-.. rubric:: Installing Consan for R-Coffee
+==============================
+Installing Consan for R-Coffee
+==============================
+In order to insure a proper interface beween consan and R-Coffee, you must make sure that the file mix80.mod is in the directory ~/.t_coffee/mcoffee or in the mcoffee directory otherwise declared.
 
-In order to insure a proper interface beween consan and R-Coffee, you
-must make sure that the file mix80.mod is in the directory
-~/.t\_coffee/mcoffee or in the mcoffee directory otherwise declared.
 
-Â 
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
-
+###########
 Quick Start
+###########
+We only give you the very basics here. Please use the Tutorial for more detailed information on how to use our tools.
 
-.. raw:: html
 
-   </div>
+.. warning:: IMPORTANT: All the files mentionned here (sampe_seq...) can be found in the example directory of the distribution.
 
-We only give you the very basics here. Please use the Tutorial for more
-detailed information on how to use our tools.
+********
+T-COFFEE
+********
+Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:0cm 0cm 0cm 0cm;background:#F7CBB7">
+::
 
-IMPORTANT: All the files mentionned here (sampe\_seq...) can be found in
-the example directory of the distribution.
+  PROMPT: t_coffee sample_seq1.fasta 
 
-.. raw:: html
 
-   </div>
-
-.. rubric:: T-COFFEE
-
-Write your sequences in the same file (Swiss-prot, Fasta or Pir) and
-type.
-
-.. raw:: html
-
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
-
-PROMPT: t\_coffee sample\_seq1.fastaÂ 
-
-.. raw:: html
-
-   </div>
 
 This will output two files:
 
-sample\_seq1.aln: your Multiple Sequence Alignment
 
-sample\_seq1.dnd: The Guide tree (newick Format)
+::
 
-.. raw:: html
+  sample_seq1.aln: your Multiple Sequence Alignment
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:0cm 0cm 0cm 0cm;background:#F7CBB7">
+  sample_seq1.dnd: The Guide tree (newick Format)
 
-IMPORTANT:
 
-In theory nucleic acids should be automatically detected and the default
-methods should be adapted appropriately. However, sometimes this may
-fail, either because the sequences are too short or contain too many
-ambiguity codes.
 
-When this happens, you are advised to explicitly set the type of your
-sequences
+.. warning:: IMPORTANT:
 
-NOTE: the â€“mode=dna is not needed or supported anymore
+.. warning:: In theory nucleic acids should be automatically detected and the default methods should be adapted appropriately. However, sometimes this may fail, either because the sequences are too short or contain too many ambiguity codes.
 
-.. raw:: html
+.. warning:: When this happens, you are advised to explicitly set the type of your sequences
 
-   </div>
+.. warning:: NOTE: the -mode=dna is not needed or supported anymore
 
-.. raw:: html
+::
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+  PROMPT: t_coffee sample_dnaseq1.fasta -type=dna
 
-PROMPT: t\_coffee sample\_dnaseq1.fasta â€“type=dna
 
-.. raw:: html
 
-   </div>
+********
+M-Coffee
+********
+M-Coffee is a Meta version of T-Coffee that makes it possible to combine the output of at least eight packages (Muscle, probcons, poa, dialignT, mafft, clustalw, PCMA and T-Coffee).
 
-.. rubric:: M-Coffee
-
-M-Coffee is a Meta version of T-Coffee that makes it possible to combine
-the output of at least eight packages (Muscle, probcons, poa, dialignT,
-mafft, clustalw, PCMA and T-Coffee).
 
 If all these packages are already installed on your machine. You must:
 
-Â 
 
 1-set the following environment variables
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-Â Â  export POA\_DIR=[absolute path of the POA installation dir]
+     export POA_DIR=[absolute path of the POA installation dir]
 
-Â Â  export DIALIGNT\_DIR=[Absolute path of the DIALIGN-T/conf
+     export DIALIGNT_DIR=[Absolute path of the DIALIGN-T/conf
 
-.. raw:: html
 
-   </div>
 
-Once this is done, write your sequences in a file and run: same file
-(Swiss-prot, Fasta or Pir) and type.
+Once this is done, write your sequences in a file and run: same file (Swiss-prot, Fasta or Pir) and type.
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee sample\_seq1.fasta â€“mode mcoffee
+  PROMPT: t_coffee sample_seq1.fasta -mode mcoffee
 
-.. raw:: html
 
-   </div>
 
-If the program starts complaining one package or the other is missing,
-this means you will have to go the hard way and install all these
-packages yourself... Proceed to the M-Coffee section for more detailed
-instructions.
+If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself... Proceed to the M-Coffee section for more detailed instructions.
 
-.. rubric:: Expresso
 
-If you have installed the EBI wublast.pl client, Expresso will BLAST
-your sequences against PDB, identify the best targets and use these to
-align your proteins.
+********
+Expresso
+********
+If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against PDB, identify the best targets and use these to align your proteins.
 
-Â 
 
-.. raw:: html
+::
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+  PROMPT: t_coffee sample_seq1.fasta -mode expresso
 
-PROMPT: t\_coffee sample\_seq1.fasta â€“mode expresso
 
-.. raw:: html
 
-   </div>
+If you did not manage to install all the required structural packages for Expresso, like Fugue or Sap, you can still run expresso by selecting yourself the structural packages you want to use. For instance, if you'd rather use TM-Align than sap, try:
 
-If you did not manage to install all the required structural packages
-for Expresso, like Fugue or Sap, you can still run expresso by selecting
-yourself the structural packages you want to use. For instance, if you'd
-rather use TM-Align than sap, try:
 
-Â Â Â Â Â Â Â Â 
+        
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee sample\_seq1.fasta â€“template\_file EXPRESSO -method
-TMalign\_pair
+  PROMPT: t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair
 
-.. raw:: html
 
-   </div>
 
-Â 
+********
+R-Coffee
+********
+R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures. The best results are obtained by using the consan pairwise method. If you have consan installed:
 
-.. rubric:: R-Coffee
 
-R-Coffee can be used to align RNA sequences, using their RNApfold
-predicted secondary structures. The best results are obtained by using
-the consan pairwise method. If you have consan installed:
+::
 
-.. raw:: html
+  t_coffee sample_rnaseq1.fasta -special_mode rcoffee_consan
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-t\_coffee sample\_rnaseq1.fasta â€“special\_mode rcoffee\_consan
 
-.. raw:: html
+This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode that will run Muscle, Probcons4RNA and MAfft and then use the secondary structures predicted by RNApfold.
 
-   </div>
 
-This will only work if your sequences are short enough (less than 200
-nucleotides). A good alternative is the rmcoffee mode that will run
-Muscle, Probcons4RNA and MAfft and then use the secondary structures
-predicted by RNApfold.
+::
 
-.. raw:: html
+  PROMPT: t_coffee sample_rnaseq1.fasta -mode mrcoffee
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee sample\_rnaseq1.fasta â€“mode mrcoffee
 
-.. raw:: html
+If you want to decide yourself which methods should be combined by R-Coffee, run:
 
-   </div>
 
-Â 
+::
 
-If you want to decide yourself which methods should be combined by
-R-Coffee, run:
+  PROMPT: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee sample\_rnaseq1.fasta â€“mode rcoffee -method
-lalign\_id\_pair slow\_pair
+**************
+iRMSD and APDB
+**************
+All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index ( 1aabA for instance). All the sequences do not need to have a known structure, but at least two need to have it.
 
-.. raw:: html
-
-   </div>
-
-Â 
-
-Â 
-
-.. rubric:: 
-    iRMSD and APDB
-
-All you need is a file containing the alignment of sequences with a
-known structure. These sequences must be named according to their PDB
-ID, followed by the chain index ( 1aabA for instance). All the sequences
-do not need to have a known structure, but at least two need to have it.
 
 Given the alignment:
 
-Â 
 
-.. raw:: html
+::
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:42.55pt;margin-right:0cm">
+  PROMPT: t_coffee -other_pg irmsd -aln 3d_sample4.aln
 
-PROMPT: t\_coffee â€“other\_pg irmsd -aln 3d\_sample4.aln
 
-.. raw:: html
 
-   </div>
+*****
+tRMSD
+*****
+tRMSD is a structure based clustering method using the iRMSD to drive the clustering. The T-RMSD supports all the parameters supported by iRMSD or APDB.
 
-.. rubric:: tRMSD
 
-tRMSD is a structure based clustering method using the iRMSD to drive
-the clustering. The T-RMSD supports all the parameters supported by
-iRMSD or APDB.
+::
 
-Â 
+  PROMPT: t_coffee -other_pg trmsd -aln 3d_sample5.aln -template_file 3d_sample5.template_list
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:42.55pt;margin-right:0cm">
 
-PROMPT: t\_coffee â€“other\_pg trmsd -aln 3d\_sample5.aln -template\_file
-3d\_sample5.template\_list
+3d_sample5.aln is a multiple alignment in which each sequence has a known structure. The file 3d_sample5.template_list is a fasta like file declaring the structure associated with each sequence, in the form:
 
-.. raw:: html
 
-   </div>
+::
 
-3d\_sample5.aln is a multiple alignment in which each sequence has a
-known structure. The file 3d\_sample5.template\_list is a fasta like
-file declaring the structure associated with each sequence, in the form:
+  > <seq_name> _P_ <PDB structure file or name>
 
-.. raw:: html
+  ******* 3d_sample5.template_list ********     
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6;margin-left:0cm;margin-right:1.0cm">
+  >2UWI-3A _P_ 2UWI-3.pdb
 
-> <seq\_name> \_P\_ <PDB structure file or name>
+  >2UWI-2A _P_ 2UWI-2.pdb
 
-.. raw:: html
+  >2UWI-1A _P_ 2UWI-1.pdb
 
-   </div>
+  >2HEY-4R _P_ 2HEY-4.pdb
 
-Â 
+  ...
 
-.. raw:: html
+  **************************************
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
 
-\*\*\*\*\*\*\* 3d\_sample5.template\_list \*\*\*\*\*\*\*\*Â Â Â Â Â 
-
->2UWI-3A \_P\_ 2UWI-3.pdb
-
->2UWI-2A \_P\_ 2UWI-2.pdb
-
->2UWI-1A \_P\_ 2UWI-1.pdb
-
->2HEY-4R \_P\_ 2HEY-4.pdb
-
-...
-
-\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
-
-.. raw:: html
-
-   </div>
-
-Â 
 
 The program then outputs a series of files
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+::
 
-Template Type: [3d\_sample5.template\_list] Mode Or File:
-[3d\_sample5.template\_list] [Start]
+  Template Type: [3d_sample5.template_list] Mode Or File: [3d_sample5.template_list] [Start]
 
-Â Â Â Â Â Â Â Â  [Sample Columns][TOT=Â Â  51][100 %][ELAPSED TIME:Â Â Â  0 sec.]
+           [Sample Columns][TOT=   51][100 %][ELAPSED TIME:    0 sec.]
 
-Â Â Â Â Â Â Â Â  [Tree Cmp][TOT=Â Â  13][ 92 %][ELAPSED TIME:Â Â Â  0 sec.]
+           [Tree Cmp][TOT=   13][ 92 %][ELAPSED TIME:    0 sec.]
 
-Â #### File Type=Â Â  TreeList Format=Â Â Â Â  newick Name=
-3d\_sample5.tot\_pos\_list
+   #### File Type=   TreeList Format=     newick Name= 3d_sample5.tot_pos_list
 
-Â #### File Type=Â Â Â Â Â Â  Tree Format=Â Â Â Â  newick Name=
-3d\_sample5.struc\_tree10
+   #### File Type=       Tree Format=     newick Name= 3d_sample5.struc_tree10
 
-Â #### File Type=Â Â Â Â Â Â  Tree Format=Â Â Â Â  newick Name=
-3d\_sample5.struc\_tree50
+   #### File Type=       Tree Format=     newick Name= 3d_sample5.struc_tree50
 
-Â #### File Type=Â Â Â Â Â Â  Tree Format=Â Â Â Â  newick Name=
-3d\_sample5.struc\_tree100
+   #### File Type=       Tree Format=     newick Name= 3d_sample5.struc_tree100
 
-Â #### File Type= Colored MSA Format= score\_html Name=
-3d\_sample5.struc\_tree.html
+   #### File Type= Colored MSA Format= score_html Name= 3d_sample5.struc_tree.html
 
-Â 
 
-.. raw:: html
 
-   </div>
+3d_sample5.tot_pos_list      is a list of the tRMSD tree associated with every position.
 
-Â 
 
-3d\_sample5.tot\_pos\_list Â Â Â Â  is a list of the tRMSD tree associated
-with every position.
+3d_sample5.struc_tree100   is a consensus tree (phylip/consense) of the trees contained in the previous file. This file is the default output
 
-3d\_sample5.struc\_tree100Â Â  is a consensus tree (phylip/consense) of
-the trees contained in the previous file. **This file is the default
-output**
 
-3d\_sample5.struc\_tree10Â Â Â Â  is a consensus tree (phylip/consense) of
-the 10% trees having the higest average agreement with the rest
+3d_sample5.struc_tree10     is a consensus tree (phylip/consense) of the 10% trees having the higest average agreement with the rest
 
-3d\_sample5.struc\_tree10Â Â Â Â  is a consensus tree (phylip/consense) of
-the 50% trees having the higest average agreement with the rest
 
-3d\_sample5.htmlÂ Â Â Â Â  is a colored version of the output showing in red
-the positions that give the highest support to
-3d\_sample5.struc\_tree100
+3d_sample5.struc_tree10     is a consensus tree (phylip/consense) of the 50% trees having the higest average agreement with the rest
 
-Â 
 
-Â 
+3d_sample5.html      is a colored version of the output showing in red the positions that give the highest support to 3d_sample5.struc_tree100
 
-Â 
 
-.. rubric:: MOCCA
+*****
+MOCCA
+*****
+Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
 
-Write your sequences in the same file (Swiss-prot, Fasta or Pir) and
-type.
 
-.. raw:: html
+::
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+  PROMPT: t_coffee -other_pg mocca sample_seq1.fasta
 
-PROMPT: t\_coffee â€“other\_pg mocca sample\_seq1.fasta
 
-.. raw:: html
 
-   </div>
+This command output one files (<your sequences>.mocca_lib) and starts an interactive menu.
 
-This command output one files (<your sequences>.mocca\_lib) and starts
-an interactive menu.
 
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
-
+####################
 Recent Modifications
+####################
+Warning: This log of recent modifications is not as thorough and accurate as it should be.
 
-.. raw:: html
 
-   </div>
+-9.86 New data structure for the primary library that results in highly improved running times for mcoffee and significantly decreased memory usage.
 
-Warning: This log of recent modifications is not as thorough and
-accurate as it should be.
 
--5.80 Novel assembly algorithm (linked\_pair\_wise) and the primary
-library is now made of probcons style pairwise alignments (proba\_pair)
+-5.80 Novel assembly algorithm (linked_pair_wise) and the primary library is now made of probcons style pairwise alignments (proba_pair)
+
 
 -4.30 and upward: the FAQ has moved into a new tutorial document
 
--4.30 and upward: -in has will be deprecated and replaced by the flags:
--profile,-method,-aln,-seq,-pdb
 
--4.02: -mode=dna is still available but not any more needed or
-supported. Use type=protein or dna if you need to force things
+-4.30 and upward: -in has will be deprecated and replaced by the flags: -profile,-method,-aln,-seq,-pdb
 
-**-**\ 3.28: corrected a bug that prevents short sequences from being
-correctly aligned
+
+-4.02: -mode=dna is still available but not any more needed or supported. Use type=protein or dna if you need to force things
+
+
+-3.28: corrected a bug that prevents short sequences from being correctly aligned
+
 
 -Use of @ as a separator when specifying methods parameters
 
--The most notable modifications have to do with the structure of the
-input. From version 2.20, all files must be tagged to indicate their
-nature (A: alignment, S: Sequence, L: Libraryâ€¦). We are becoming
-stricter, but thatâ€™s for your own goodâ€¦
 
-Another important modification has to do with the flag -matrix: it now
-controls the matrix being used for the computation
+-The most notable modifications have to do with the structure of the input. From version 2.20, all files must be tagged to indicate their nature (A: alignment, S: Sequence, L: Library...). We are becoming stricter, but that's for your own good...
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
+Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation
 
+
+################
 Reference Manual
+################
+This reference manual gives a list of all the flags that can be used to modify the behavior of T-Coffee. For your convenience, we have grouped them according to their nature. To display a list of all the flags used in the version of T-Coffee you are using (along with their default value), type:
 
-.. raw:: html
 
-   </div>
+::
 
-Â 
+  PROMPT: t_coffee
 
-This reference manual gives a list of all the flags that can be used to
-modify the behavior of T-Coffee. For your convenience, we have grouped
-them according to their nature. To display a list of all the flags used
-in the version of T-Coffee you are using (along with their default
-value), type:
 
-.. raw:: html
-
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
-
-PROMPT: t\_coffee
-
-.. raw:: html
-
-   </div>
 
 Or
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee â€“help
+  PROMPT: t_coffee -help
 
-.. raw:: html
 
-   </div>
 
 Or
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee â€“help â€“in
+  PROMPT: t_coffee -help -in
 
-.. raw:: html
 
-   </div>
 
 Or any other parameter
 
-.. rubric:: 
 
-Â 
+*********************
+Environment Variables
+*********************
+It is possible to modify T-Coffee's behavior by setting any of the following environment variables. On the bash shell, use export VAR='value'. On the cshell, use set $VAR='xxx'
 
-.. rubric:: Environment Variables
 
-It is possible to modify T-Coffeeâ€™s behavior by setting any of the
-following environement variables. On the bash shell, use export
-VAR=â€valueâ€. On the cshell, use set $VAR=â€xxxâ€
+====================
+http_proxy_4_TCOFFEE
+====================
+Sets the http_proxy and HTTP_proxy values used by T-Coffee.
 
-.. rubric:: 
 
-Â 
+These values get supersede http_proxy and HTTP_proxy. http_proxy_4_TCOFFEE gets superseded by the command line values (-proxy and -email)
 
-.. rubric:: http\_proxy\_4\_TCOFFEE
-
-Sets the http\_proxy and HTTP\_proxy values used by T-Coffee.
-
-These values get supersede http\_proxy and HTTP\_proxy.
-http\_proxy\_4\_TCOFFEE gets superseded by the command line values
-(-proxy and -email)
 
 If you have no proxy, just set this value to an empty string.
 
-.. rubric:: email\_4\_TCOFFEE
 
-Set the E-mail values provided to web services called upon by T-Coffee.
-Can be over-riden by the flag *-email.*
+===============
+email_4_TCOFFEE
+===============
+Set the E-mail values provided to web services called upon by T-Coffee. Can be over-riden by the flag -email.
 
-.. rubric:: DIR\_4\_TCOFFEE
 
-By default this variable is set to $HOME/.t\_coffee. This is where
-T-Coffee expects to find its cache, tmp dir and possibly any temporary
-data stored by the program.
+=============
+DIR_4_TCOFFEE
+=============
+By default this variable is set to $HOME/.t_coffee. This is where T-Coffee expects to find its cache, tmp dir and possibly any temporary data stored by the program.
 
-.. rubric:: TMP\_4\_TCOFFEE
 
-By default this variable is set to $HOME/.t\_coffee/tmp. This is where
-T-Coffee stores temporary files.
+=============
+TMP_4_TCOFFEE
+=============
+By default this variable is set to $HOME/.t_coffee/tmp. This is where T-Coffee stores temporary files.
 
-.. rubric:: CACHE\_4\_TCOFFEE
 
-By default this variable is set to $HOME/.t\_coffee/cache. This is where
-T-Coffee stores any data expensive to obtain: pdb files, sap
-alignments....
+===============
+CACHE_4_TCOFFEE
+===============
+By default this variable is set to $HOME/.t_coffee/cache. This is where T-Coffee stores any data expensive to obtain: pdb files, sap alignments....
 
-.. rubric:: PLUGINS\_4\_TCOFFEE
 
-By default all the companion packages are searched in the directory
-DIR\_4\_TCOFFEE/plugins/<OS>. This variable overrides the default. This
-variable can also be overriden by the *-plugins* T-Coffee flag
+=================
+PLUGINS_4_TCOFFEE
+=================
+By default all the companion packages are searched in the directory DIR_4_TCOFFEE/plugins/<OS>. This variable overrides the default. This variable can also be overriden by the -plugins T-Coffee flag
 
-.. rubric:: NO\_ERROR\_REPORT\_4\_TCOFFEE
 
-By default this variable is no set. Set it if you do not want the
-program to generate a verbose error output file (useful for running a
-server).
+=========================
+NO_ERROR_REPORT_4_TCOFFEE
+=========================
+By default this variable is no set. Set it if you do not want the program to generate a verbose error output file (useful for running a server).
 
-.. rubric:: PDB\_DIR
 
+=======
+PDB_DIR
+=======
 Indicate the location of your local PDB installation.
 
-.. rubric:: NO\_WARNING\_4\_TCOFFEE
 
+====================
+NO_WARNING_4_TCOFFEE
+====================
 Suppresses all the warnings.
 
-.. rubric:: UNIQUE\_DIR\_4\_TCOFFEE
 
+====================
+UNIQUE_DIR_4_TCOFFEE
+====================
 Sets:
 
-Â Â Â Â Â Â Â Â  DIR\_4\_TCOFFEE
 
-Â Â Â Â Â Â Â Â  CACHE\_4\_TCOFFEE
+         DIR_4_TCOFFEE
 
-Â Â Â Â Â Â Â Â  TMP\_4\_TCOFFEE
 
-Â Â Â Â Â Â Â Â  PLUGINS\_4\_TCOFFEE
+         CACHE_4_TCOFFEE
 
-To the same unique value. The string MUST be a valid directoryÂ Â Â 
 
-Â 
+         TMP_4_TCOFFEE
 
-Â 
 
-.. rubric:: Setting up the T-Coffee environment variables
+         PLUGINS_4_TCOFFEE
 
-T-Coffee can have its own environment file. This environment is kept in
-a file named $HOME/.t\_coffee/t\_coffee\_env and can be edited. The
-value of any legal variable can be modified through that file. For
-instance, here is an example of a configuration file when not requiring
-a proxy.
 
-.. raw:: html
+To the same unique value. The string MUST be a valid directory   
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
 
-http\_proxy\_4\_TCOFFEE=
+*********************************************
+Setting up the T-Coffee environment variables
+*********************************************
+T-Coffee can have its own environment file. This environment is kept in a file named $HOME/.t_coffee/t_coffee_env and can be edited. The value of any legal variable can be modified through that file. For instance, here is an example of a configuration file when not requiring a proxy.
 
-EMAIL\_4\_TCOFFEE=cedric.notredame@europe.com
 
-.. raw:: html
+::
 
-   </div>
+  http_proxy_4_TCOFFEE=
 
-.. raw:: html
+  EMAIL_4_TCOFFEE=cedric.notredame@europe.com
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:0cm 0cm 0cm 0cm;background:#F7CBB7">
 
-IMPORTANT:
 
--proxy, -email >> t\_coffee\_env >> env
+If you want to use a specific configuration file:
 
-Â 
 
-.. raw:: html
+::
 
-   </div>
+  t_coffee ... -setenv ENV_4_TCOFFEE=<location>
 
-Â 
 
-Â 
 
-.. rubric:: Well Behaved Parameters
+In general, you can set any environment variable using the -setenv flag. You can also simply do an export:
 
-.. rubric:: Separation
 
-You can use any kind of separator you want (i.e. ,; <space>=). The
-syntax used in this document is meant to be consistent with that of
-ClustalW. However, in order to take advantage of the automatic filename
-compleation provided by many shells, you can replace â€œ=â€ and â€œ,â€ with a
-space.
+::
 
-.. rubric:: Posix
+  export ENV_4_TCOFFEE=<location>
 
-T-Coffee is not POSIX compliant.
 
-.. rubric:: Entering the right parameters
 
-There are many ways to enter parameters in T-Coffee, see the -parameter
-flag in
+.. warning:: IMPORTANT:
 
-Â 
+.. warning:: export > -setenv > -proxy, -email > t_coffee_env > default  environment
 
-.. raw:: html
+Note that when you use -setenv for PATH, the value you provide is concatenated TO THE BEGINNING of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#FFFF89">
 
-Parameters Priority
+***********************
+Well Behaved Parameters
+***********************
+==========
+Separation
+==========
+You can use any kind of separator you want (i.e. ,; <space>=). The syntax used in this document is meant to be consistent with that of ClustalW. However, in order to take advantage of the automatic filename compleation provided by many shells, you can replace '=' and ',' with a space.
 
-Â 
 
-In general you will not need to use these complicated parameters. Yet,
-if you find yourself typing long command lines on a regular basis, it
-may be worth reading this section.
+=====
+Posix
+=====
+T-Coffee is not POSIX compliant (sorry L).
 
-Â 
 
-One may easily feel confused with the various manners in which the
-parameters can be passed to t\_coffee. The reason for these many
-mechanisms is that they allow several levels of intervention. For
-instance, you may install t\_coffee for all the users and decide that
-the defaults we provide are not the proper onesâ€¦ In this case, you will
-need to make your own t\_coffee\_default file.
+=============================
+Entering the right parameters
+=============================
+There are many ways to enter parameters in T-Coffee, see the -parameter flag in
 
-Â 
 
-Later on, a user may find that he/she needs to keep re-using a specific
-set of parameters, different from those in t\_coffee\_default, hence the
-possibility to write an extra parameter file: parameters. In summary:
+::
 
-Â 
+  Parameters Priority
+  In general you will not need to use these complicated parameters. Yet, if you find yourself typing long command lines on a regular basis, it may be worth reading this section.
+  One may easily feel confused with the various manners in which the parameters can be passed to t_coffee. The reason for these many mechanisms is that they allow several levels of intervention. For instance, you may install t_coffee for all the users and decide that the defaults we provide are not the proper ones... In this case, you will need to make your own t_coffee_default file.
+  Later on, a user may find that he/she needs to keep re-using a specific set of parameters, different from those in t_coffee_default, hence the possibility to write an extra parameter file: parameters. In summary:
+  -parameters > prompt parameters > -t_coffee_defaults > -mode
+  This means that -parameters supersede all the others, while parameters provided via -special mode are the weakest.
 
--parameters > prompt parameters > -t\_coffee\_defaults > -mode
 
-Â 
-
-This means that -*parameters* supersede all the others, while parameters
-provided via -*special mode* are the weakest.
-
-.. raw:: html
-
-   </div>
-
-Â 
-
-Â 
-
-.. rubric:: Parameters Syntax
-
+***************
+Meta-Parameters
+***************
+===============
+Global Behavior
+===============
+-------
 No Flag
+-------
+   *If no flag is used <your sequence> must be the first argument. See format for further information.*
 
-If no flag is used **** *<your sequence>* must be the first argument.
-See format for further information.
+::
 
-.. raw:: html
+  PROMPT: t_coffee sample_seq1.fasta
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee sample\_seq1.fasta
 
-.. raw:: html
+   *Which is equivalent to*
 
-   </div>
+::
 
-Which is equivalent to
+  PROMPT: t_coffee Ssample_seq1.fasta
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee Ssample\_seq1.fasta
+   *When you do so, sample_seq1 is used as a name prefix for every file the program outputs.*
 
-.. raw:: html
-
-   </div>
-
-When you do so, **sample\_seq1** is used as a name prefix for every file
-the program outputs.
-
+-----------
 -parameters
+-----------
+  **Usage: -parameters=parameters_file**
 
-Usage: -parameters=parameters\_file
+   *Default: no parameters file*
 
-Default: no parameters file
+   *Indicates a file containing extra parameters. Parameters read this way behave as if they had been added on the right end of the command line that they either supersede(one value parameter) or complete (list of values). For instance, the following file (parameter.file) could be used*
 
-Indicates a file containing extra parameters. Parameters read this way
-behave as if they had been added on the right end of the command line
-that they either supersede(one value parameter) or complete (list of
-values). For instance, the following file (parameter.file) could be used
+::
 
-.. raw:: html
+  *******sample_param_file.param********  
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+        -in=Ssample_seq1.fasta,Mfast_pair
 
-\*\*\*\*\*\*\*sample\_param\_file.param\*\*\*\*\*\*\*\*Â Â 
+        -output=msf_aln
 
-Â Â Â Â Â  -in=Ssample\_seq1.fasta,Mfast\_pair
+  **************************************
 
-Â Â Â Â Â  -output=msf\_aln
 
-\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
 
-.. raw:: html
+.. note:: Note: This is one of the exceptions (with -infile) where the identifier tag (S,A,L,M...) can be omitted. Any dataset provided this way will be assumed to be a sequence (S). These exceptions have been designed to keep the program compatible with ClustalW.
 
-   </div>
+.. note:: Note: This parameter file can ONLY contain valid parameters. Comments are not allowed. Parameters passed this way will be checked like normal parameters.
 
-Note: This is one of the exceptions (with â€“infile) where the identifier
-tag (S,A,L,Mâ€¦) can be omitted. Any dataset provided this way will be
-assumed to be a sequence (S). These exceptions have been designed to
-keep the program compatible with ClustalW.
+   *Used with:*
 
-Note: This parameter file can ONLY contain valid parameters. Comments
-are not allowed. Parameters passed this way will be checked like normal
-parameters.
+::
 
-Used with:
+  PROMPT: t_coffee -parameters=sample_param_file.param
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee -parameters=sample\_param\_file.param
+   *Will cause t_coffee to apply the fast_pair method onto to the sequences contained in sample_seq.fasta. If you wish, you can also pipe these arguments into t_coffee, by naming the parameter file 'stdin' (as a rule, any file named stdin is expected to receive its content via the stdin)*
 
-.. raw:: html
+::
 
-   </div>
+  cat sample_param_file.param  | t_coffee -parameters=stdin
 
-Will cause t\_coffee to apply the fast\_pair method onto to the
-sequences contained in sample\_seq.fasta. If you wish, you can also pipe
-these arguments into t\_coffee, by naming the parameter file "stdin" (as
-a rule, any file named stdin is expected to receive its content via the
-stdin)
 
-cat sample\_param\_file.paramÂ  \| t\_coffee -parameters=stdin
 
--t\_coffee\_defaults
+------------------
+-t_coffee_defaults
+------------------
+  **Usage: -t_coffee_defaults=<file_name>**
 
-Usage: -t\_coffee\_defaults=<file\_name>
+   *Default: not used.*
 
-Default: not used.
+   *This flag tells the program to use some default parameter file for t_coffee. The format of that file is the same as the one used with -parameters. The file used is either:*
 
-This flag tells the program to use some default parameter file for
-t\_coffee. The format of that file is the same as the one used with
--parameters. The file used is either:
+   *         1. <file name> if a name has been specified*
 
-Â Â Â Â Â Â Â Â  1. <file name> if a name has been specified
+   *         2.  ~/.t_coffee_defaults if no file was specified*
 
-Â Â Â Â Â Â Â Â  2.Â  \ **~/.t\_coffee\_defaults** if no file was specified
+   *         3. The file indicated by the environment variable TCOFFEE_DEFAULTS*
 
-Â Â Â Â Â Â Â Â  3. The file indicated by the environment variable
-**TCOFFEE\_DEFAULTS**
-
+-----
 -mode
+-----
+  **Usage: -mode= hard coded mode**
 
-Usage: -mode= hard coded mode
+   *Default: not used.*
 
-Default: not used.
+   *It indicates that t_coffee will use some hard coded parameters. These include:*
 
-It indicates that t\_coffee will use some hard coded parameters. These
-include:
+   *         quickaln: very fast approximate alignment*
 
-Â Â Â Â Â Â Â Â  \ **quickaln**: very fast approximate alignment
+   *         dali: a mode used to combine dali pairwise alignments*
 
-Â Â Â Â Â Â Â Â  \ **dali**: a mode used to combine dali pairwise alignments
+   *         evaluate: defaults for evaluating an alignment*
 
-Â Â Â Â Â Â Â Â  \ **evaluate**: defaults for evaluating an alignment
+   *         3dcoffee: runs t_coffee with the 3dcoffee parameterization*
 
-Â Â Â Â Â Â Â Â  \ **3dcoffee**: runs t\_coffee with the 3dcoffee
-parameterization
+   *Other modes exist that are not yet fully supported*
 
-Â 
-
-Other modes exist that are not yet fully supported
-
+-------------------
 -score [Deprecated]
+-------------------
+  **Usage: -score**
 
-Usage: -score
+   *Default: not used*
 
-Default: not used
+   *Toggles on the evaluate mode and causes t_coffee to evaluates a precomputed alignment provided via -infile=<alignment>. The flag -output must be set to an appropriate format (i.e. -output=score_ascii, score_html or score_pdf). A better default parameterization is obtained when using the flag -mode=evaluate.*
 
-Toggles on the evaluate mode and causes t\_coffee to evaluates a
-precomputed alignment provided via **-infile=<alignment>**. The flag
-**-output** must be set to an appropriate format (i.e.
--output=score\_ascii, score\_html or score\_pdf). A better default
-parameterization is obtained when using the flag **-mode=evaluate.**
-
+---------
 -evaluate
+---------
+  **Usage: -evaluate**
 
-Usage: -evaluate
+   *Default: not used*
 
-Default: not used
+   *Replaces -score. This flag toggles on the evaluate mode and causes t_coffee to evaluates a pre-computed alignment provided via -infile=<alignment>. The flag -output must be set to an appropriate format (i.e. -output=score_ascii, score_html or score_pdf).*
 
-Replaces â€“score. This flag toggles on the evaluate mode and causes
-t\_coffee to evaluates a pre-computed alignment provided via
-**-infile=<alignment>**. The flag **-output** must be set to an
-appropriate format (i.e. -output=score\_ascii, score\_html or
-score\_pdf).
+   *The main purpose of -evaluate is to let you control every aspect of the evaluation. Yet it is advisable to use pre-defined parameterization: mode=evaluate.*
 
-Â 
+::
 
-The main purpose of â€“evaluate is to let you control every aspect of the
-evaluation. Yet it is advisable to use pre-defined parameterization:
-**mode=evaluate.**
+  PROMPT: t_coffee -infile=sample_aln1.aln -mode=evaluate
 
-.. raw:: html
+  PROMPT: t_coffee -infile=sample_seq1.aln -in  Lsample_lib1.tc_lib -mode=evaluate
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee â€“infile=sample\_aln1.aln -mode=evaluate
 
-PROMPT: t\_coffee â€“infile=sample\_seq1.aln â€“inÂ  Lsample\_lib1.tc\_lib
-â€“mode=evaluate
-
-.. raw:: html
-
-   </div>
-
+-------------
 -convert [cw]
+-------------
+  **Usage: -convert**
 
-Usage: -convert
+   *Default: turned off*
 
-Default: turned off
+   *Toggles on the conversion mode and causes T-Coffee to convert the sequences, alignments, libraries or structures provided via the -infile and -in flags. The output format must be set via the -output flag. This flag can also be used if you simply want to compute a library (i.e. you have an alignment and you want to turn it into a library).*
 
-Toggles on the conversion mode and causes T-Coffee to convert the
-sequences, alignments, libraries or structures provided via the
-**-infile** and **-in** flags. The output format must be set via the
-**-output** flag. This flag can also be used if you simply want to
-compute a library (i.e. you have an alignment and you want to turn it
-into a library).
+   *This flag is ClustalW compliant.*
 
-This flag is ClustalW compliant.
+--------------
+-do_align [cw]
+--------------
+  **Usage:  -do_align**
 
--do\_align [cw]
+   *Default: turned on*
 
-Usage:Â  -do\_align
-
-Default: turned on
-
-.. rubric:: Special Parameters
-
+===============
+Misc Parameters
+===============
+--------
 -version
+--------
+  **Usage: -version**
 
-Usage: -version
+   *Default: not used*
 
-Default: not used
+   *Returns the current version number*
 
-Returns the current version number
-
+------
 -proxy
+------
+  **Usage: -proxy=<proxy>**
 
-Usage: -proxy=<proxy>
+   *Default: not used*
 
-Default: not used
+   *Sets the proxy used by HTTP_proxy AND http_proxy. Setting with the propmpt supersedes ANY other setting.*
 
-Sets the proxy used by HTTP\_proxy AND http\_proxy. Setting with the
-propmpt supersedes ANY other setting.
+   *Note that if you use no proxy, you should set*
 
-Note that if you use no proxy, you should set
+   *         -proxy*
 
-Â Â Â Â Â Â Â Â  -proxy
-
+------
 -email
+------
+  **Usage: -email=<email>**
 
-Usage: -email=<email>
+   *Default: not used*
 
-Default: not used
+   *Sets your email value as provided to web services*
 
-Sets your email value as provided to web services
+--------------------
+-check_configuration
+--------------------
+  **Usage: -check_configuration**
 
--check\_configuration
+   *Default: not used*
 
-Usage: -check\_configuration
+   *Checks your system to determine whether all the programs T-Coffee can interact with are installed.*
 
-Default: not used
-
-Checks your system to determine whether all the programs T-Coffee can
-interact with are installed.
-
+------
 -cache
+------
+  **Usage: -cache=<use, update, ignore, <filename>>**
 
-Usage: -cache=<use, update, ignore, <filename>>
+   *Default: -cache=use*
 
-Default: -cache=use
+   *By default, t_coffee stores in a cache directory, the results of computationally expensive (structural alignment) or network intensive (BLAST search) operations.*
 
-By default, t\_coffee stores in a cache directory, the results of
-computationally expensive (structural alignment) or network intensive
-(BLAST search) operations.
-
+-------
 -update
+-------
+  **Usage: -update**
 
-Usage: -update
+   *Default: turned off*
 
-Default: turned off
+   *Causes a wget access that checks whether the t_coffee version you are using needs updating.*
 
-Causes a wget access that checks whether the t\_coffee version you are
-using needs updating.
+---------
+-full_log
+---------
+  **Usage: -full_log=<filename>**
 
--full\_log
+   *Default: turned off*
 
-Usage: -full\_log=<filename>
+   *Causes t_coffee to output a full log file that contains all the input/output files.*
 
-Default: turned off
-
-Causes t\_coffee to output a full log file that contains all the
-input/output files.
-
+--------
 -plugins
+--------
+  **Usage: -plugins=<dir>**
 
-Usage: -plugins=<dir>
+   *Default: default*
 
-Default: default
+   *Specifies the directory in which the companion packages (other multiple aligners used by M-Coffee, structural aligners, etc...) are kept as an alternative, you can also set the environment variable PLUGINS_4_TCOFFEE*
 
-Specifies the directory in which the companion packages (other multiple
-aligners used by M-Coffee, structural aligners, etcâ€¦) are kept as an
-alternative, you can also set the environment variable
-PLUGINS\_4\_TCOFFEE
+   *The default is ~/.t_coffee/plugins/*
 
-The default is ~/.t\_coffee/plugins/
+---------
+-other_pg
+---------
+  **Usage: -other_pg=<filename>**
 
--other\_pg
+   *Default: turned off*
 
-Usage: -other\_pg=<filename>
+   *Some rumours claim that Tetris is embedded within T-Coffee and could be ran using some special set of commands. We wish to deny these rumours, although we may admit that several interesting reformatting programs are now embedded in t_coffee and can be ran through the -other_pg flag.*
 
-Default: turned off
+::
 
-Some rumours claim that Tetris is embedded within T-Coffee and could be
-ran using some special set of commands. We wish to deny these rumours,
-although we may admit that several interesting reformatting programs are
-now embedded in t\_coffee and can be ran through the â€“other\_pg flag.
+  PROMPT: t_coffee -other_pg=seq_reformat
 
-.. raw:: html
+  PROMPT: t_coffee -other_pg=unpack_all
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+  PROMPT: t_coffee -other_pg=unpack_extract_from_pdb
 
-PROMPT: t\_coffee â€“other\_pg=seq\_reformat
 
-PROMPT: t\_coffee â€“other\_pg=unpack\_all
 
-PROMPT: t\_coffee â€“other\_pg=unpack\_extract\_from\_pdb
-
-.. raw:: html
-
-   </div>
-
-.. rubric:: Input
-
-.. rubric:: Sequence Input
-
+*****
+Input
+*****
+==============
+Sequence Input
+==============
+------------
 -infile [cw]
+------------
+   *To remain compatible with ClustalW, it is possible to indicate the sequences with this flag*
 
-To remain compatible with ClustalW, it is possible to indicate the
-sequences with this flag
+::
 
-.. raw:: html
+  PROMPT: t_coffee -infile=sample_seq1.fasta
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee -infile=sample\_seq1.fasta
 
-.. raw:: html
+.. note:: Note: Common multiple sequence alignments format constitute a valid input format.
 
-   </div>
+.. note:: Note: T-Coffee automatically removes the gaps before doing the alignment. This behaviour is different from that of ClustalW where the gaps are kept.
 
-Note: Common multiple sequence alignments format constitute a valid
-input format.
+------------------------------------------------------
+-in (Cf -in from the Method and Library Input section)
+------------------------------------------------------
+---------
+-get_type
+---------
+  **Usage: -get_type**
 
-Note: T-Coffee automatically removes the gaps \ *before*\  doing the
-alignment. This behaviour is different from that of ClustalW where the
-gaps are kept.
+   *Default: turned off*
 
--in (Cf â€“in from the Method and Library Input section)
+   *Forces t_coffee to identify the sequences type (PROTEIN, DNA).*
 
--get\_type
-
-Usage: -get\_type
-
-Default: turned off
-
-Forces t\_coffee to identify the sequences type (PROTEIN, DNA).
-
+----------
 -type [cw]
+----------
+  **Usage: -type=DNA ¦ PROTEIN¦ DNA_PROTEIN**
 
-Usage: -type=DNA Â¦ PROTEINÂ¦ DNA\_PROTEIN
+   *Default: -type=<automatically set>*
 
-Default: -type=<automatically set>
+   *This flag sets the type of the sequences. If omitted, the type is guessed automatically. This flag is compatible with ClustalW.*
 
-This flag sets the type of the sequences. If omitted, the type is
-guessed automatically. This flag is compatible with ClustalW.
+.. warning:: Warning:  In case of low complexity or short sequences, it is recommended to set the type manually.
 
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:0cm 0cm 0cm 0cm;background:#F7CBB7">
-
-Warning:Â  In case of low complexity or short sequences, it is
-recommended to set the type manually.
-
-.. raw:: html
-
-   </div>
-
+----
 -seq
+----
+  **Usage: -seq=[<P,S><name>,]**
 
-Usage: -seq=[<P,S><name>,]
+   *Default: none*
 
-Default: none
+-seq is now the recommended flag to provide your sequences. It behaves mostly like the -in flag.
 
--seq is now the recommended flag to provide your sequences. It behaves
-mostly like the -in flag.
 
--seq\_source
+-----------
+-seq_source
+-----------
+  **Usage: -seq_source=<ANY or  _LS or LS >**
 
-Usage: -seq\_source=<ANY orÂ  \_LS or LS >
+   *Default: ANY.*
 
-Default: ANY.
+   *You may not want to combine all the provided sequences into a single sequence list. You can do by specifying that you do not want to treat all the -in files as potential sequence sources.*
 
-You may not want to combine all the provided sequences into a single
-sequence list. You can do by specifying that you do not want to treat
-all the â€“in files as potential sequence sources.
+   *-seq_source=_LA indicates that neither sequences provided via the A (Alignment) flag or via the L (Library flag) should be added to the sequence list.*
 
--seq\_source=\_LA indicates that neither sequences provided via the A
-(Alignment) flag or via the L (Library flag) should be added to the
-sequence list.
+   *-seq_source=S means that only sequences provided via the S tag will be considered. All the other sequences will be ignored.*
 
--seq\_source=S means that only sequences provided via the S tag will be
-considered. All the other sequences will be ignored.
+.. note:: Note:  This flag is mostly designed for interactions between T-Coffee and T-CoffeeDPA (the large scale version of T-Coffee).
 
-Note:Â  This flag is mostly designed for interactions between T-Coffee
-and T-CoffeeDPA (the large scale version of T-Coffee).
-
-.. rubric:: Structure Input
-
+===============
+Structure Input
+===============
+----
 -pdb
+----
+  **Usage:  -pdb=<pdbid1>,<pdbid2>...[Max 200]**
 
-Usage: Â -pdb=<pdbid1>,<pdbid2>â€¦[Max 200]
+   *Default: None*
 
-Default: None
+   *Reads or fetch a pdb file. It is possible to specify a chain or even a sub-chain:*
 
-Reads or fetch a pdb file. It is possible to specify a chain or even a
-sub-chain:
+::
 
-PDBID(PDB\_CHAIN)[opt] (FIRST,LAST)[opt]
+  PDBID(PDB_CHAIN)[opt] (FIRST,LAST)[opt]
 
-It is also possible to input structures via the â€“in flag. In that case,
-you will need to use the TAG identifier:
 
--in Ppdb1 Ppdb2â€¦
 
-.. rubric:: Tree Input
+   *It is also possible to input structures via the -in flag. In that case, you will need to use the TAG identifier:*
 
+::
+
+  -in Ppdb1 Ppdb2...
+
+
+
+==========
+Tree Input
+==========
+--------
 -usetree
+--------
+  **Usage: -usetree=<tree file>**
 
-Usage: -usetree=<tree file>
+   *Default: No file specified*
 
-Default: No file specified
+   *Format: newick tree format (ClustalW Style)*
 
-Format: newick tree format (ClustalW Style)
+   *This flag indicates that rather than computing a new dendrogram, t_coffee must use a pre-computed one. The tree files are in phylips format and compatible with ClustalW. In most cases, using a pre-computed tree will halve the computation time required by t_coffee. It is also possible to use trees output by ClustalW, Phylips and any other program.*
 
-This flag indicates that rather than computing a new dendrogram,
-t\_coffee must use a pre-computed one. The tree files are in phylips
-format and compatible with ClustalW. In most cases, using a pre-computed
-tree will halve the computation time required by t\_coffee. It is also
-possible to use trees output by ClustalW, Phylips and any other program.
+================================================================
+Structures, Sequences Methods and Library Input via the -in Flag
+================================================================
+::
 
-.. rubric:: Structures, Sequences Methods and Library Input via the â€“in
-   Flag
+  The -in Flag and its Identifier TAGS
+  <-in> is the real grinder of T-Coffee. Sequences, methods and alignments all pass through so that T-Coffee can turn it all into a single list of constraints (the library). Everything is done automatically with T-Coffee going through each file to extract the sequences it contains. The methods are then applied to the sequences. Pre-compiled constraint list can also be provided. Each file provided via this flag must be preceded with a symbol (Identifier TAG) that indicates its nature to T-Coffee. The TAGs currently supported are the following:
+  P         PDB structure
+  S         for sequences (use it as well to treat an MSA as unaligned sequences)
+  M        Methods used to build the library
+  L         Pre-computed T-Coffee library
+  A         Multiple Alignments that must be turned into a Library
+  X         Substitution matrices.
+  R                     Profiles. This is a legal multiple alignments that will be treated as single sequences (the sequences it contains will not be realigned).
+  If you do not want to use the TAGS, you will need to use the following flags in replacement of -in. Do not use the TAGS when using these flags:
+  -aln                            Alignments   (A)
+  -profile          Profiles          (R)
+  -method         Method          (M)
+  -seq                            Sequences     (S)
+  -lib                             Libraries       (L)
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#FFFF89">
-
-The -in Flag and its Identifier TAGS
-
-Â 
-
-<-in> is the real grinder of T-Coffee. Sequences, methods and alignments
-all pass through so that T-Coffee can turn it all into a single list of
-constraints (the library). Everything is done automatically with
-T-Coffee going through each file to extract the sequences it contains.
-The methods are then applied to the sequences. Pre-compiled constraint
-list can also be provided. Each file provided via this flag must be
-preceded with a symbol (Identifier TAG) that indicates its nature to
-T-Coffee. The TAGs currently supported are the following:
-
-Â 
-
-PÂ Â Â Â Â Â Â Â  PDB structure
-
-S Â Â Â Â Â Â Â  for sequences (use it as well to treat an MSA as unaligned
-sequences)
-
-Â 
-
-M Â Â Â Â Â Â  Methods used to build the library
-
-L Â Â Â Â Â Â Â  Pre-computed T-Coffee library
-
-A Â Â Â Â Â Â Â  Multiple Alignments that must be turned into a Library
-
-Â 
-
-X Â Â Â Â Â Â Â  Substitution matrices.
-
-R Â Â Â Â Â Â Â  Â Â Â Â Â Â Â Â Â Â Â  Profiles. This is a legal multiple alignments that
-will be treated as single sequences (the sequences it contains will not
-be realigned).
-
-Â 
-
-If you do not want to use the TAGS, you will need to use the following
-flags in replacement of -in. Do not use the TAGS when using these flags:
-
-Â 
-
--aln Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Alignments Â  (A)
-
--profileÂ Â Â Â Â Â Â Â Â  Profiles Â Â Â Â Â Â Â Â  (R)
-
--methodÂ Â Â Â Â Â Â Â  Method Â Â Â Â Â Â Â Â  (M)
-
--seqÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Sequences Â Â Â  (S)
-
--libÂ Â Â Â Â  Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  LibrariesÂ Â Â Â Â Â  (L)
-
-.. raw:: html
-
-   </div>
-
+---
 -in
+---
+  **Usage: -in=[<P,S,A,L,M,X><name>,]**
 
-Usage: -in=[<P,S,A,L,M,X><name>,]
+   *Default: -in=Mlalign_id_pair,Mclustalw_pair*
 
-Default: -in=Mlalign\_id\_pair,Mclustalw\_pair
+.. warning:: Note: -in can be replaced with the combined usage of -aln, iprofile, .pdb, .lib, -method.
 
-.. raw:: html
+   *See the box for an explanation of the -in flag. The following argument passed via -in*
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:0cm 0cm 0cm 0cm;background:#F7CBB7">
+::
 
-Note: -in can be replaced with the combined usage of -aln, iprofile,
-.pdb, .lib, -method.
+  PROMPT: t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_id_pair,Lsample_lib1.tc_lib -outfile=outaln
 
-.. raw:: html
 
-   </div>
 
-See the box for an explanation of the -in flag. The following argument
-passed via -in
+   *This command will trigger the following chain of events:*
 
-Â 
+   *1-Gather all the sequences*
 
-.. raw:: html
+   *Sequences within all the provided files are pooled together. Format recognition is automatic. Duplicates are removed (if they have the same name). Duplicates in a single file are only tolerated in FASTA format file, although they will cause sequences to be renamed.*
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *In the above case, the total set of sequences will be made of sequences contained in sequences1.seq, alignment1.aln, alignment2.msf and library.lib, plus the sequences initially gathered  by -infile.*
 
-PROMPT: t\_coffee
--in=Ssample\_seq1.fasta,Asample\_aln1.aln,Asample\_aln2.msf,Mlalign\_id\_pair,Lsample\_lib1.tc\_lib
-â€“outfile=outaln
+   *2-Turn alignments into libraries*
 
-.. raw:: html
+   *alignment1.aln and alignment2.msf will be read and turned into libraries. Another library will be produced by applying the method lalign_id_pair to the set of sequences previously obtained (1). The final library used for the alignment will be the combination of all this information.*
 
-   </div>
+   *Note as well the following rules:*
 
-Â 
+   *1-Order: The order in which sequences, methods, alignments and libraries are fed in is irrelevant.*
 
-This command will trigger the following chain of events:
+   *2-Heterogeneity: There is no need for each element (A, S, L) to contain the same sequences.*
 
-Â 
+   *3-No Duplicate: Each file should contain only one copy of each sequence. Duplicates are only allowed in FASTA files but will cause the sequences to be renamed.*
 
-1-Gather all the sequences
+   *4-Reconciliation: If two files (for instance two alignments) contain different versions of the same sequence due to an indel, a new sequence will be reconstructed and used instead:*
 
-Sequences within all the provided files are pooled together. Format
-recognition is automatic. Duplicates are removed (if they have the same
-name). Duplicates in a single file are only tolerated in FASTA format
-file, although they will cause sequences to be renamed.
+::
 
-In the above case, the total set of sequences will be made of sequences
-contained in sequences1.seq, alignment1.aln, alignment2.msf and
-library.lib, plus the sequences initially gatheredÂ  by -infile.
+  aln 1:hgab1   AAAAABAAAAA
 
-2-Turn alignments into libraries
+  aln 2:hgab1   AAAAAAAAAACCC
 
-alignment1.aln and alignment2.msf will be read and turned into
-libraries. Another library will be produced by applying the method
-lalign\_id\_pair to the set of sequences previously obtained (1). The
-final library used for the alignment will be the combination of all this
-information.
 
-Note as well the following rules:
 
-Â 
+   *will cause the program to reconstruct and use the following sequence*
 
-**1-Order**\ : The order in which sequences, methods, alignments and
-libraries are fed in is irrelevant.
+::
 
-**2-Heterogeneity**\ : There is no need for each element (A, S, L) to
-contain the same sequences.
+  hgab1   AAAAABAAAAACCC
 
-**3-No Duplicate**\ : Each file should contain only one copy of each
-sequence. Duplicates are only allowed in FASTA files but will cause the
-sequences to be renamed.
 
-**4-Reconciliation**\ : If two files (for instance two alignments)
-contain different versions of the same sequence due to an indel, a new
-sequence will be reconstructed and used instead:
 
-aln 1:hgab1 Â  AAAAABAAAAA
+   *This can be useful if you are trying to combine several runs of blast, or structural information where residues may have been deleted. However substitutions are forbidden. If two sequences with the same name cannot be merged, they will cause the program to exit with an information message.*
 
-aln 2:hgab1Â Â  AAAAAAAAAACCC
+   *5-Methods: The method describer can either be built in (See ### for a list of all the available methods) or be a file describing the method to be used. The exact syntax is provided in part 4 of this manual.*
 
-will cause the program to reconstruct and use the following sequence
+   *6-Substitution Matrices: If the method is a substitution matrix (X) then no other type of information should be provided. For instance:*
 
-hgab1Â Â  AAAAABAAAAACCC
+::
 
-This can be useful if you are trying to combine several runs of blast,
-or structural information where residues may have been deleted. However
-substitutions are forbidden. If two sequences with the same name cannot
-be merged, they will cause the program to exit with an information
-message.
+  PROMPT: t_coffee sample_seq1.fasta -in=Xpam250mt  -gapopen=-10  -gapext=-1
 
-**5-Methods**\ : The method describer can either be built in (See ###
-for a list of all the available methods) or be a file describing the
-method to be used. The exact syntax is provided in part 4 of this
-manual.
 
-**6-Substitution Matrices**\ : If the method is a substitution matrix
-(X) then no other type of information should be provided. For instance:
 
-.. raw:: html
+   *This command results in a progressive alignment carried out on the sequences in seqfile. The procedure does not use any more the T-Coffee concistency based algorithm, but switches to a standard progressive alignment algorithm (like ClustalW or Pileup) much less accurate. In this context, appropriate gap penalties should be provided. The matrices are in the file source/matrices.h. Add-Hoc matrices can also be provided by the user (see the matrices format section at the end of this manual).*
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+.. warning:: Warning: Xmatrix does not have the same effect as using the -matrix flag.  The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
 
-PROMPT: t\_coffee sample\_seq1.fasta -in=Xpam250mtÂ  -gapopen=-10Â 
--gapext=-1
-
-.. raw:: html
-
-   </div>
-
-This command results in a progressive alignment carried out on the
-sequences in seqfile. The procedure does not use any more the T-Coffee
-concistency based algorithm, but switches to a standard progressive
-alignment algorithm (like ClustalW or Pileup) much less accurate. In
-this context, appropriate gap penalties should be provided. The matrices
-are in the file source/matrices.h. Add-Hoc matrices can also be provided
-by the user (see the matrices format section at the end of this manual).
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:0cm 0cm 0cm 0cm;background:#F7CBB7">
-
-Warning: Xmatrix does not have the same effect as using the -matrix
-flag.Â  The -matrix defines the matrix that will be used while compiling
-the library while the Xmatrix defines the matrix used when assembling
-the final alignment.
-
-.. raw:: html
-
-   </div>
-
-.. rubric:: Profile Input
-
+=============
+Profile Input
+=============
+--------
 -profile
+--------
+  **Usage: -profile=[<name>,] maximum of 200 profiles.**
 
-Usage: -profile=[<name>,] maximum of 200 profiles.
+   *Default: no default*
 
-Default: no default
+   *This flag causes T-Coffee to treat multiple alignments as a single sequences, thus making it possible to make multiple profile alignments. The profile-profile alignment is controlled by -profile_mode and -profile_comparison. When provided with the -in flag, profiles must be preceded with the letter R.*
 
-This flag causes T-Coffee to treat multiple alignments as a single
-sequences, thus making it possible to make multiple profile alignments.
-The profile-profile alignment is controlled by -profile\_mode and
--profile\_comparison. When provided with the **-in** flag, profiles must
-be preceded with the letter R.
+::
 
-.. raw:: html
+  PROMPT: t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=profile_aln
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+  PROMPT: t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair -outfile=profile_aln
 
-PROMPT: t\_coffee â€“profile sample\_aln1.aln,sample\_aln2.aln
-â€“outfile=profile\_aln
 
-PROMPT: t\_coffee â€“in
-Rsample\_aln1.aln,Rsample\_aln2.aln,Mslow\_pair,Mlalign\_id\_pair
-â€“outfile=profile\_aln
 
-.. raw:: html
+   *Note that when using -template_file, the program will also look for the templates associated with the profiles, even if the profiles have been provided as templates themselves (however it will not look for the template of the profile templates of the profile templates...)*
 
-   </div>
-
-Note that when using â€“template\_file, the program will also look for the
-templates associated with the profiles, even if the profiles have been
-provided as templates themselves (however it will not look for the
-template of the profile templates of the profile templatesâ€¦)
-
+--------------
 -profile1 [cw]
+--------------
+  **Usage: -profile1=[<name>], one name only**
 
-Usage: -profile1=[<name>], one name only
+   *Default: no default*
 
-Default: no default
+   *Similar to the previous one and was provided for compatibility with ClustalW.*
 
-Similar to the previous one and was provided for compatibility with
-ClustalW.
-
+--------------
 -profile2 [cw]
+--------------
+  **Usage: -profile1=[<name>], one name only**
 
-Usage: -profile1=[<name>], one name only
+   *Default: no default*
 
-Default: no default
+   *Similar to the previous one and was provided for compatibility with ClustalW.*
 
-Similar to the previous one and was provided for compatibility with
-ClustalW.
+*********************
+Alignment Computation
+*********************
+============================
+Library Computation: Methods
+============================
+-------------
+-lalign_n_top
+-------------
+  **Usage: -lalign_n_top=<Integer>**
 
-.. rubric:: Alignment Computation
+   *Default: -lalign_n_top=10*
 
-.. rubric:: Library Computation: Methods
+   *Number of alignment reported by the local method (lalign).*
 
--lalign\_n\_top
+---------------------
+-align_pdb_param_file
+---------------------
+   *Unsuported*
 
-Usage: -lalign\_n\_top=<Integer>
+---------------------
+-align_pdb_hasch_mode
+---------------------
+   *Unsuported*
 
-Default: -lalign\_n\_top=10
+==============================
+Library Computation: Extension
+==============================
+-----------------------
+-lib_list [Unsupported]
+-----------------------
+  **Usage:  -lib_list=<filename>**
 
-Number of alignment reported by the local method (lalign).
+   *Default:unset*
 
--align\_pdb\_param\_file
+   *Use this flag if you do not want the library computation to take into account all the possible pairs in your dataset. For instance*
 
-Unsuported
+   *Format:*
 
--align\_pdb\_hasch\_mode
+::
 
-Unsuported
+        2 Name1 name2
 
-.. rubric:: Library Computation: Extension
+        2 Name1 name4
 
--lib\_list [Unsupported]
+        3 Name1 Name2 Name3...
 
-Usage:Â  -lib\_list=<filename>
 
-Default:unset
 
-Use this flag if you do not want the library computation to take into
-account all the possible pairs in your dataset. For instance
+   *         (the line 3 would be used by a multiple alignment method).*
 
-Format:
+-------------
+-do_normalise
+-------------
+  **Usage:  -do_normalise=<0 or a positive value>**
 
-.. raw:: html
+   *Default:-do_normalise=1000*
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+   *Development Only*
 
-Â Â Â Â Â  2 Name1 name2
+   *When using a value different from 0, this flag sets the score of the highest scoring pair to 1000.*
 
-Â Â Â Â Â  2 Name1 name4
-
-Â Â Â Â Â  3 Name1 Name2 Name3â€¦
-
-.. raw:: html
-
-   </div>
-
-Â Â Â Â Â Â Â Â  (the line 3 would be used by a multiple alignment method).
-
--do\_normalise
-
-Usage:Â  -do\_normalise=<0 or a positive value>
-
-Default:-do\_normalise=1000
-
-Development Only
-
-When using a value different from 0, this flag sets the score of the
-highest scoring pair to 1000.
-
+-------
 -extend
+-------
+  **Usage:  -extend=<0,1 or a positive value>**
 
-Usage:Â  -extend=<0,1 or a positive value>
+   *Default:-extend=1*
 
-Default:-extend=1
+   *Development Only*
 
-Development Only
+   *When turned on, this flag indicates that the library extension should be carried out when performing the multiple alignment. If -extend =0, the extension is not made, if it is set to 1, the extension is made on all the pairs in the library. If the extension is set to another positive value, the extension is only carried out on pairs having a weight value superior to the specified limit.*
 
-When turned on, this flag indicates that the library extension should be
-carried out when performing the multiple alignment. If **-extend =0**,
-the extension is not made, if it is set to 1, the extension is made on
-all the pairs in the library. If the extension is set to another
-positive value, the extension is only carried out on pairs having a
-weight value superior to the specified limit.
+------------
+-extend_mode
+------------
+  **Usage:  -extend=<string>**
 
--extend\_mode
+   *Default:-extend=very_fast_triplet*
 
-Usage:Â  -extend=<string>
+   *Warning: Development Only*
 
-Default:-extend=very\_fast\_triplet
+   *Controls the algorithm for matrix extension. Available modes include:*
 
-Warning: Development Only
+   *relative_triplet             Unsupported*
 
-Controls the algorithm for matrix extension. Available modes include:
+   *g_coffee                                  Unsupported*
 
-relative\_tripletÂ Â Â Â Â Â Â Â Â Â Â Â  Unsupported
+   *g_coffee_quadruplets     Unsupported*
 
-g\_coffeeÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Unsupported
+   *fast_triplet                  Fast triplet extension*
 
-g\_coffee\_quadrupletsÂ Â Â Â  Unsupported
+   *very_fast_triplet                       slow triplet extension, limited to the -max_n_pair best sequence pairs when aligning two profiles*
 
-fast\_tripletÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Fast triplet extension
+   *slow_triplet                Exhaustive use of all the triplets*
 
-very\_fast\_tripletÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  slow triplet extension,
-limited to the **-max\_n\_pair** best sequence pairs when aligning two
-profiles
+   *mixt                          Unsupported*
 
-slow\_tripletÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Exhaustive use of all the triplets
+   *quadruplet                  Unsupported*
 
-mixtÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Unsupported
+   *test                            Unsupported*
 
-quadrupletÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Unsupported
+   *matrix                                   Use of the matrix -matrix*
 
-testÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Unsupported
+   *fast_matrix                  Use of the matrix -matrix. Profiles are turned into consensus*
 
-matrixÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Use of the matrix **-matrix**
+-----------
+-max_n_pair
+-----------
+  **Usage:  -max_n_pair=<integer>**
 
-fast\_matrixÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Use of the matrix **-matrix**. Profiles
-are turned into consensus
+   *Default:-extend=10*
 
--max\_n\_pair
+   *Development Only*
 
-Usage:Â  -max\_n\_pair=<integer>
+   *Controls the number of pairs considered by the -extend_mode=very_fast_triplet. Setting it to 0 forces all the pairs to be considered (equivalent to -extend_mode=slow_triplet).*
 
-Default:-extend=10
+------------------------
+-seq_name_for_quadruplet
+------------------------
+  **Usage:  Unsupported**
 
-Development Only
-
-Controls the number of pairs considered by the
-**-extend\_mode**\ =very\_fast\_triplet. Setting it to 0 forces all the
-pairs to be considered (equivalent to
-**-extend\_mode**\ =slow\_triplet).
-
--seq\_name\_for\_quadruplet
-
-Usage:Â  Unsupported
-
+--------
 -compact
+--------
+  **Usage:  Unsupported**
 
-Usage:Â  Unsupported
-
+------
 -clean
+------
+  **Usage:  Unsupported**
 
-Usage:Â  Unsupported
-
+---------
 -maximise
+---------
+  **Usage:  Unsupported**
 
-Usage:Â  Unsupported
+--------
+-do_self
+--------
+  **Usage:  Flag -do_self**
 
--do\_self
+  **Default: No**
 
-Usage:Â  Flag -do\_self
+   *This flag causes the extension to carried out within the sequences (as opposed to between sequences). This is necessary when looking for internal repeats with Mocca.*
 
-Default: No
+------------------------
+-seq_name_for_quadruplet
+------------------------
+  **Usage:  Unsupported**
 
-This flag causes the extension to carried out within the sequences (as
-opposed to between sequences). This is necessary when looking for
-internal repeats with Mocca.
-
--seq\_name\_for\_quadruplet
-
-Usage:Â  Unsupported
-
+-------
 -weight
+-------
+  **Usage:  -weight=<winsimN, sim or sim_<matrix_name or matrix_file> or <integer value>**
 
-Usage:Â  -weight=<winsimN, sim or sim\_<matrix\_name or matrix\_file> or
-<integer value>
+   *Default: -weight=sim*
 
-Default: -weight=sim
+   *Weight defines the way alignments are weighted when turned into a library.  Overweighting can be obtained with the OW<X> weight mode.*
 
-Weight defines the way alignments are weighted when turned into a
-library. Â Overweighting can be obtained with the OW<X> weight mode.
+   *winsimN indicates that the weight assigned to a given pair will be equal to the percent identity within a window of 2N+1 length centered on that pair. For instance winsim10 defines a window of 10 residues around the pair being considered. This gives its own weight to each residue in the output library. In our hands, this type of weighting scheme has not provided any significant improvement over the standard sim value.*
 
-Â 
+::
 
-winsimN indicates that the weight assigned to a given pair will be equal
-to the percent identity within a window of 2N+1 length centered on that
-pair. For instance winsim10 defines a window of 10 residues around the
-pair being considered. This gives its own weight to each residue in the
-output library. In our hands, this type of weighting scheme has not
-provided any significant improvement over the standard sim value.
+  PROMPT: t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee sample\_seq1.fasta -weight=winsim10
-â€“out\_lib=test.tc\_lib
+   *sim indicates that the weight equals the average identity within the sequences containing the matched residues.*
 
-.. raw:: html
+   *OW<X> Will cause the sim weight to be multiplied by X*
 
-   </div>
+   *sim_matrix_name indicates the average identity with two residues regarded as identical when their substitution value is positive. The valid matrices names are in matrices.h (pam250mt) .Matrices not found in this header are considered to be filenames. See the format section for matrices. For instance, -weight=sim_pam250mt indicates that the grouping used for similarity will be the set of classes with positive substitutions.*
 
-sim indicates that the weight equals the average identity within the
-sequences containing the matched residues.
+::
 
-OW<X> Will cause the sim weight to be multiplied by X
+  PROMPT: t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib
 
-sim\_matrix\_name indicates the average identity with two residues
-regarded as identical when their substitution value is positive. The
-valid matrices names are in *matrices.h (pam250mt) .*\ Matrices not
-found in this header are considered to be filenames. See the format
-section for matrices. For instance, *-weight=sim\_pam250mt* indicates
-that the grouping used for similarity will be the set of classes with
-positive substitutions.
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *Other groups include*
 
-PROMPT: t\_coffee sample\_seq1.fasta -weight=winsim10
-â€“out\_lib=test.tc\_lib
+   *sim_clustalw_col ( categories of clustalw marked with :)*
 
-.. raw:: html
+   *sim_clustalw_dot ( categories of clustalw marked with .)*
 
-   </div>
+   *Value indicates that all the pairs found in the alignments must be given the same weight equal to value. This is useful when the alignment one wishes to turn into a library must be given a pre-specified score (for instance if they come from a structure super-imposition program). Value is an integer:*
 
-Other groups include
+::
 
-sim\_clustalw\_col ** ( categories of clustalw marked with :)
+  PROMPT: t_coffee sample_seq1.fasta -weight=1000 -out_lib=test.tc_lib
 
-sim\_clustalw\_dot ( categories of clustalw marked with .)
 
-Value ** indicates that all the pairs found in the alignments must be
-given the same weight equal to value. This is useful when the alignment
-one wishes to turn into a library must be given a pre-specified score
-(for instance if they come from a structure super-imposition program).
-Value is an integer:
 
-.. raw:: html
+================
+Tree Computation
+================
+---------------------
+-distance_matrix_mode
+---------------------
+  **Usage: -distance_matrix_mode=<slow, fast, very_fast>**
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *Default: very_fast*
 
-PROMPT: t\_coffee sample\_seq1.fasta -weight=1000 â€“out\_lib=test.tc\_lib
+   *This flag indicates the method used for computing the distance matrix (distance between every pair of sequences) required for the computation of the dendrogram.*
 
-.. raw:: html
+   *Slow  The chosen dp_mode using the extended library,*
 
-   </div>
+   *fast:              The fasta dp_mode using the extended library.*
 
-.. rubric:: Tree Computation
+   *very_fast        The fasta dp_mode using blosum62mt.*
 
--distance\_matrix\_mode
+   *ktup  Ktup matching (Muscle kind)*
 
-Usage: -distance\_matrix\_mode=<slow, fast, very\_fast>
+   *aln                Read the distances on a precomputed MSA*
 
-Default: very\_fast
-
-This flag indicates the method used for computing the distance matrix
-(distance between every pair of sequences) required for the computation
-of the dendrogram.
-
-**Slow** The chosen dp\_mode using the extended library,
-
-**fast**:Â Â  Â Â Â Â Â Â Â Â Â Â  The fasta dp\_mode using the extended library.
-
-**very\_fast**\ Â Â Â Â Â Â Â  The fasta dp\_mode using blosum62mt.
-
-**ktupÂ  **\ Ktup matching (Muscle kind)
-
-**alnÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â  **\ Read the distances on a precomputed MSA
-
+---------------
 -quicktree [CW]
+---------------
+  **Usage: -quicktree**
 
-Usage: -quicktree
-
-Description: Causes T-Coffee to compute a fast approximate guide tree
+   *Description: Causes T-Coffee to compute a fast approximate guide tree*
 
 This flag is kept for compatibility with ClustalW. It indicates that:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee sample\_seq1.fasta â€“distance\_matrix\_mode=very\_fast
+  PROMPT: t_coffee sample_seq1.fasta -distance_matrix_mode=very_fast
 
-PROMPT: t\_coffee sample\_seq1.fasta â€“quicktree
+  PROMPT: t_coffee sample_seq1.fasta -quicktree
 
-.. raw:: html
 
-   </div>
 
-.. rubric:: Pair-wise Alignment Computation
+===============================
+Pair-wise Alignment Computation
+===============================
+::
 
-Â 
+  Controlling Alignment Computation
+  Most parameters in this section refer to the alignment mode fasta_pair_wise and cfatsa_pair_wise. When using these alignment modes, things proceed as follow:
+  1-Sequences are recoded using a degenerated alphabet provided with <-sim_matrix>
+  2-Recoded sequences are then hashed into ktuples of size <-ktup>
+  3-Dynamic programming runs on the <-ndiag> best diagonals whose score is higher than <-diag_threshold>, the way diagonals are scored is controlled via <-diag_mode> .
+  4-The Dynamic computation is made to optimize either the library scoring scheme (as defined by the -in flag) or a substitution matrix as provided via the -matrix flag. The penalty scheme is defined by -gapopen and -gapext. If -gapopen is undefined, the value defined in -cosmetic_penalty is used instead.
+  5-Terminal gaps are scored according to -tg_mode
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#FFFF89">
+--------
+-dp_mode
+--------
+  **Usage:  -dp_mode=<string>**
 
-Controlling Alignment Computation
+   *Default: -dp_mode=cfasta_fair_wise*
 
-Â 
+   *This flag indicates the type of dynamic programming used by the program:*
 
-Most parameters in this section refer to the alignment mode
-fasta\_pair\_wise and cfatsa\_pair\_wise. When using these alignment
-modes, things proceed as follow:
+::
 
-1-Sequences are recoded using a degenerated alphabet provided with
-<-sim\_matrix>
+  PROMPT: t_coffee sample_seq1.fasta -dp_mode myers_miller_pair_wise
 
-2-Recoded sequences are then hashed into ktuples of size <-ktup>
 
-3-Dynamic programming runs on the <-ndiag> best diagonals whose score is
-higher than <-diag\_threshold>, the way diagonals are scored is
-controlled via <-diag\_mode> .
 
-4-The Dynamic computation is made to optimize either the library scoring
-scheme (as defined by the -in flag) or a substitution matrix as provided
-via the -matrix flag. The penalty scheme is defined by -gapopen and
--gapext. If -gapopen is undefined, the value defined in
--cosmetic\_penalty is used instead.
+   *gotoh_pair_wise: implementation of the gotoh algorithm (quadratic in memory and time)*
 
-5-Terminal gaps are scored according to -tg\_mode
+   *myers_miller_pair_wise: implementation of the Myers and Miller dynamic programming algorithm ( quadratic in time and linear in space). This algorithm is recommended for very long sequences. It is about 2 times slower than gotoh and only accepts tg_mode=1or 2 (i.e. gaps penalized for opening).*
 
-.. raw:: html
+   *fasta_pair_wise: implementation of the fasta algorithm. The sequence is hashed, looking for ktuples words. Dynamic programming is only carried out on the ndiag best scoring diagonals. This is much faster but less accurate than the two previous. This mode is controlled by the parameters -ktuple, -diag_mode and -ndiag*
 
-   </div>
+   *cfasta_pair_wise: c stands for checked. It is the same algorithm. The dynamic programming is made on the ndiag best diagonals, and then on the 2*ndiags, and so on until the scores converge. Complexity will depend on the level of divergence of the sequences, but will usually be L*log(L), with an accuracy comparable to the two first mode ( this was checked on BaliBase). This mode is controlled by the parameters -ktuple, -diag_mode and -ndiag*
 
-Â 
+.. note:: Note: Users may find by looking into the code that other modes with fancy names exists (viterby_pair_wise...) Unless mentioned in this documentation, these modes are not supported.
 
-Â 
-
--dp\_mode
-
-Usage:Â  -dp\_mode=<string>
-
-Default: -dp\_mode=cfasta\_fair\_wise
-
-This flag indicates the type of dynamic programming used by the program:
-
-.. raw:: html
-
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
-
-PROMPT: t\_coffee sample\_seq1.fasta â€“dp\_mode myers\_miller\_pair\_wise
-
-.. raw:: html
-
-   </div>
-
-gotoh\_pair\_wise: implementation of the gotoh algorithm (quadratic in
-memory and time)
-
-myers\_miller\_pair\_wise: implementation of the Myers and Miller
-dynamic programming algorithm ( quadratic in time and linear in space).
-This algorithm is recommended for very long sequences. It is about 2
-times slower than gotoh and only accepts *tg\_mode=1or 2 (i.e. gaps
-penalized for opening).*
-
-fasta\_pair\_wise\ *:* implementation of the fasta algorithm. The
-sequence is hashed, looking for *ktuples* words. Dynamic programming is
-only carried out on the *ndiag* best scoring diagonals. This is much
-faster but less accurate than the two previous. This mode is controlled
-by the parameters **-ktuple, -diag\_mode and -ndiag**
-
-cfasta\_pair\_wise: c stands for checked. It is the same algorithm. The
-dynamic programming is made on the *ndiag* best diagonals, and then on
-the 2\*ndiags, and so on until the scores converge. Complexity will
-depend on the level of divergence of the sequences, but will usually be
-L\*log(L), with an accuracy comparable to the two first mode ( this was
-checked on BaliBase). This mode is controlled by the parameters
-**-ktuple, -diag\_mode and â€“ndiag**
-
-Note: Users may find by looking into the code that other modes with
-fancy names exists (viterby\_pair\_wiseâ€¦) Unless mentioned in this
-documentation, these modes are not supported.
-
+-------
 -ktuple
+-------
+  **Usage:  -ktuple=<value>**
 
-Usage:Â  -ktuple=<value>
+   *Default: -ktuple=1 or 2*
 
-Default: -ktuple=1 or 2
+   *Indicates the ktuple size for cfasta_pair_wise dp_mode and fasta_pair_wise. It is set to 1 for proteins, and 2 for DNA. The alphabet used for protein can be a degenerated version, set with -sim_matrix..*
 
-Indicates the ktuple size for cfasta\_pair\_wise dp\_mode and
-fasta\_pair\_wise. It is set to 1 for proteins, and 2 for DNA. The
-alphabet used for protein can be a degenerated version, set with
-**-sim\_matrix.**.
-
+------
 -ndiag
+------
+  **Usage:  -ndiag=<value>**
 
-Usage:Â  -ndiag=<value>
+   *Default: -ndiag=0*
 
-Default: -ndiag=0
+   *Indicates the number of diagonals used by the fasta_pair_wise algorithm (cf -dp_mode). When  -ndiag=0, n_diag=Log (length of the smallest sequence)+1.*
 
-Indicates the number of diagonals used by the *fasta\_pair\_wise*
-algorithm (cf **-dp\_mode**). WhenÂ  \ **-ndiag=0**, n\_diag=Log (length
-of the smallest sequence)+1.
+.. note:: When -ndiag and -diag_threshold are set, diagonals are selected if and only if they fulfill both conditions.
 
-When â€“ndiag and â€“diag\_threshold are set, diagonals are selected if and
-only if they fulfill both conditions.
+----------
+-diag_mode
+----------
+  **Usage:  -diag_mode=<value>**
 
--diag\_mode
+   *Default: -diag_mode=0*
 
-Usage:Â  -diag\_mode=<value>
+   *Indicates the manner in which diagonals are scored during the fasta hashing.*
 
-Default: -diag\_mode=0
+   *0: indicates that the score of a diagonal is equal to the sum of the scores of the exact matches it contains.*
 
-Indicates the manner in which diagonals are scored during the fasta
-hashing.
+   *1 indicates that this score is set equal to the score of the best uninterrupted segment (useful when dealing with fragments of sequences).*
 
-0: indicates that the score of a diagonal is equal to the sum of the
-scores of the exact matches it contains.
+---------------
+-diag_threshold
+---------------
+  **Usage:  -diag_threshold=<value>**
 
-1 indicates that this score is set equal to the score of the best
-uninterrupted segment (useful when dealing with fragments of sequences).
+   *Default: -diag_threshold=0*
 
--diag\_threshold
+   *Sets the value of the threshold when selecting diagonals.*
 
-Usage:Â  -diag\_threshold=<value>
+   *0: indicates that -ndiag should be used to select the diagonals (cf -ndiag section).*
 
-Default: -diag\_threshold=0
+-----------
+-sim_matrix
+-----------
+  **Usage:  -sim_matrix=<string>**
 
-Sets the value of the threshold when selecting diagonals.
+   *Default: -sim_matrix=vasiliky*
 
-0: indicates that â€“ndiag should be used to select the diagonals (cf
-â€“ndiag section).
+   *Indicates the manner in which the amino acid alphabet is degenerated when hashing in the fasta_pairwise dynamic programming. Standard ClustalW matrices are all valid. They are used to define groups of amino acids having positive substitution values. In T-Coffee, the default is a 13 letter grouping named Vasiliky, with residues grouped as follows:*
 
--sim\_matrix
+::
 
-Usage:Â  -sim\_matrix=<string>
+  rk, de, qh, vilm, fy (other residues kept alone).
 
-Default: -sim\_matrix=vasiliky
 
-Indicates the manner in which the amino acid alphabet is degenerated
-when hashing in the fasta\_pairwise dynamic programming. Standard
-ClustalW matrices are all valid. They are used to define groups of amino
-acids having positive substitution values. In T-Coffee, the default is a
-13 letter grouping named Vasiliky, with residues grouped as follows:
 
-rk, de, qh, vilm, fy (other residues kept alone).
+   *This alphabet is set with the flag -sim_matrix=vasiliky. In order to keep the alphabet non degenerated, -sim_matrix=idmat can be used to retain the standard alphabet.*
 
-This alphabet is set with the flag **-sim\_matrix=vasiliky**. In order
-to keep the alphabet non degenerated, **-sim\_matrix=idmat** can be used
-to retain the standard alphabet.
-
+------------
 -matrix [CW]
+------------
+  **Usage:  -matrix=<blosum62mt>**
 
-Usage:Â  -matrix=<blosum62mt>
+   *Default: -matrix=blosum62mt*
 
-Default: -matrix=blosum62mt
+   *The usage of this flag has been modified from previous versions, due to frequent mistakes in its usage. This flag sets the matrix that will be used by alignment methods within t_coffee (slow_pair, lalign_id_pair). It does not affect external methods (like clustal_pair, clustal_aln...).*
 
-The usage of this flag has been modified from previous versions, due to
-frequent mistakes in its usage. This flag sets the matrix that will be
-used by alignment methods within t\_coffee (slow\_pair,
-lalign\_id\_pair). It does not affect external methods (like
-clustal\_pair, clustal\_alnâ€¦).
+   *Users can also provide their own matrices, using the matrix format described in the appendix.*
 
-Users can also provide their own matrices, using the matrix format
-described in the appendix.
-
+--------
 -nomatch
+--------
+  **Usage:  -nomatch=<positive value>**
 
-Usage:Â  -nomatch=<positive value>
+   *Default: -nomatch=0*
 
-Default: -nomatch=0
+   *Indicates the penalty to associate with a match. When using a library, all matches are positive or equal to 0. Matches equal to 0 are unsupported by the library but non-penalized. Setting nomatch to a non-negative value makes it possible to penalize these null matches and prevent unrelated sequences from being aligned (this can be useful when the alignments are meant to be used for structural modeling).*
 
-Indicates the penalty to associate with a match. When using a library,
-all matches are positive or equal to 0. Matches equal to 0 are
-unsupported by the library but non-penalized. Setting nomatch to a
-non-negative value makes it possible to penalize these null matches and
-prevent unrelated sequences from being aligned (this can be useful when
-the alignments are meant to be used for structural modeling).
-
+--------
 -gapopen
+--------
+  **Usage:  -gapopen=<negative value>**
 
-Usage:Â  -gapopen=<negative value>
+   *Default: -gapopen=0*
 
-Default: -gapopen=0
+   *Indicates the penalty applied for opening a gap. The penalty must be negative. If no value is provided when using a substitution matrix, a value will be automatically computed.*
 
-Indicates the penalty applied for opening a gap. The penalty must be
-negative. If no value is provided when using a substitution matrix, a
-value will be automatically computed.
+   *Here are some guidelines regarding the tuning of gapopen and gapext. In T-Coffee matches get a score between 0 (match) and 1000 (match perfectly consistent with the library). The default cosmetic penalty is set to -50 (5% of a perfect match). If you want to tune -gapoen and see a strong effect, you should therefore consider values between 0 and -1000.*
 
-Here are some guidelines regarding the tuning of gapopen and gapext. In
-T-Coffee matches get a score between 0 (match) and 1000 (match perfectly
-consistent with the library). The default cosmetic penalty is set to -50
-(5% of a perfect match). If you want to tune -gapoen and see a strong
-effect, you should therefore consider values between 0 and -1000.
-
+-------
 -gapext
+-------
+  **Usage:  -gapext=<negative value>**
 
-Usage:Â  -gapext=<negative value>
+   *Default: -gapext=0*
 
-Default: -gapext=0
+   *Indicates the penalty applied for extending a gap (cf -gapopen)*
 
-Indicates the penalty applied for extending a gap (cf **-gapopen**)
-
+---------
 -fgapopen
+---------
+  **Unsupported**
 
-Unsupported
-
+--------
 -fgapext
+--------
+  **Unsupported**
 
-Unsupported
+-----------------
+-cosmetic_penalty
+-----------------
+  **Usage:  -cosmetic_penalty=<negative value>**
 
--cosmetic\_penalty
+   *Default: -cosmetic_penalty=-50*
 
-Usage:Â  -cosmetic\_penalty=<negative value>
+   *Indicates the penalty applied for opening a gap. This penalty is set to a very low value. It will only have an influence on the portions of the alignment that are unalignable. It will not make them more correct, but only more pleasing to the eye ( i.e. Avoid stretches of lonely residues).*
 
-Default: -cosmetic\_penalty=-50
+   *The cosmetic penalty is automatically turned off if a substitution matrix is used rather than a library.*
 
-Indicates the penalty applied for opening a gap. This penalty is set to
-a very low value. It will only have an influence on the portions of the
-alignment that are unalignable. It will not make them more correct, but
-only more pleasing to the eye ( i.e. Avoid stretches of lonely
-residues).
+--------
+-tg_mode
+--------
+  **Usage:  -tg_mode=<0, 1, or 2>**
 
-The cosmetic penalty is automatically turned off if a substitution
-matrix is used rather than a library.
+   *Default: -tg_mode=1*
 
--tg\_mode
+   *0: terminal gaps penalized with -gapopen + -gapext*len*
 
-Usage:Â  -tg\_mode=<0, 1, or 2>
+   *1: terminal gaps penalized with a -gapext*len*
 
-Default: -tg\_mode=1
+   *2: terminal gaps unpenalized.*
 
-0: terminal gaps penalized with -gapopen + -gapext\*len
+=================
+Weighting Schemes
+=================
+-----------
+-seq_weight
+-----------
+  **Usage: -seq_weight=<t_coffee or <file_name>>**
 
-1: terminal gaps penalized with a -gapext\*len
+   *Default: -seq_weight=t_coffee*
 
-2: terminal gaps unpenalized.
+   *These are the individual weights assigned to each sequence. The t_coffee weights try to compensate the bias in consistency caused by redundancy in the sequences.*
 
-Â 
+::
 
-.. rubric:: Weighting Schemes
+           sim(A,B)=%similarity between A and B, between 0 and 1.
 
--seq\_weight
+           weight(A)=1/sum(sim(A,X)^3)
 
-Usage: -seq\_weight=<t\_coffee or <file\_name>>
 
-Default: -seq\_weight=t\_coffee
 
-These are the individual weights assigned to each sequence. The
-t\_coffee weights try to compensate the bias in consistency caused by
-redundancy in the sequences.
+   *Weights are normalized so that their sum equals the number of sequences. They are applied onto the primary library in the following manner:*
 
-Â Â Â Â Â Â Â Â  sim(A,B)=%similarity between A and B, between 0 and 1.
+::
 
-Â Â Â Â Â Â Â Â  weight(A)=1/sum(sim(A,X)^3)
+           res_score(Ax,By)=Min(weight(A), weight(B))*res_score(Ax, By)
 
-Weights are normalized so that their sum equals the number of sequences.
-They are applied onto the primary library in the following manner:
 
-Â Â Â Â Â Â Â Â  res\_score(Ax,By)=Min(weight(A), weight(B))\*res\_score(Ax, By)
 
-These are very simple weights. Their main goal is to prevent a single
-sequence present in many copies to dominate the alignment.
+   *These are very simple weights. Their main goal is to prevent a single sequence present in many copies to dominate the alignment.*
 
-Note: The library output by -out\_lib is the un-weightedÂ  library.
+.. note:: Note: The library output by -out_lib is the un-weighted  library.
 
-Note: Weights can be output using the -outseqweight flag.
+.. note:: Note: Weights can be output using the -outseqweight flag.
 
-Note: You can use your own weights (see the format section).
+.. note:: Note: You can use your own weights (see the format section).
 
-Â 
+==============================
+Multiple Alignment Computation
+==============================
+---------
+-msa_mode
+---------
+  **Usage: -msa_mode=<tree,graph,precomputed>**
 
-.. rubric:: Multiple Alignment Computation
+   *Default: -evaluate_mode=tree*
 
--msa\_mode
+   *Unsupported*
 
-Usage: -msa\_mode=<tree,graph,precomputed>
-
-Default: -evaluate\_mode=tree
-
-Unsupported
-
+--------
 -one2all
+--------
+  **Usage: -one2all=<name>**
 
-Usage: -one2all=<name>
+   *Default: not used*
 
-Default: not used
+   *Will generate a one to all library with respect to the specified sequence and will then align all the sequences in turn to that sequence, in a sequence determined by the order in which the sequences were provided. *
 
-Will generate a one to all library with respect to the specified
-sequence and will then align all the sequences in turn to that sequence,
-in a sequence determined by the order in which the sequences were
-provided.Â 
+   *-profile_comparison =profile, the MSAs provided via -profile are vectorized and the function specified by -profile_comparison is used to make profile profile alignments. In that case, the complexity is NL^2*
 
-**â€“profile\_comparison =profile**, the MSAs provided via â€“profile are
-vectorized and the function specified by â€“profile\_comparison is used to
-make profile profile alignments. In that case, the complexity is NL^2
+-------------------
+-profile_comparison
+-------------------
+  **Usage: -profile_mode=<fullN,profile>**
 
--profile\_comparison
+   *Default: -profile_mode=full50*
 
-Usage: -profile\_mode=<fullN,profile>
+   *The profile mode flag controls the multiple profile alignments in T-Coffee. There are two instances where t_coffee can make multiple profile alignments:*
 
-Default: -profile\_mode=full50
+   *1-When N, the number of sequences is higher than -maxnseq, the program switches to its multiple profile alignment mode (t_coffee_dpa).*
 
-The profile mode flag controls the multiple profile alignments in
-T-Coffee. There are two instances where t\_coffee can make multiple
-profile alignments:
+   *2-When MSAs are provided via the -profile flag or via -profile1 and -profile2.*
 
-1-When N, the number of sequences is higher than **â€“maxnseq,** the
-program switches to its multiple profile alignment mode
-(t\_coffee\_dpa).
+   *In these situations, the -profile_mode value influences the alignment computation, these values are:*
 
-2-When MSAs are provided via the **â€“profile** flag or via **â€“profile1**
-and **â€“profile2**.
+   *-profile_comparison =profile, the MSAs provided via -profile are vectorized and the function specified by -profile_comparison is used to make profile profile alignments. In that case, the complexity is NL^2*
 
-In these situations, the â€“profile\_mode value influences the alignment
-computation, these values are:
+   *-profile_comparison=fullN, N is an integer value that can omitted. Full indicates that given two profiles, the alignment will be based on a library that includes every possible pair of sequences between the two profiles. If N is set, then the library will be restricted to the N most similar pairs of sequences between the two profiles, as judged from a measure made on a pairwise alignment of these two profiles.*
 
-**â€“profile\_comparison =profile**, the MSAs provided via â€“profile are
-vectorized and the function specified by â€“profile\_comparison is used to
-make profile profile alignments. In that case, the complexity is NL^2
+-------------
+-profile_mode
+-------------
+  **Usage: -profile_mode=<cw_profile_profile, muscle_profile_profile, multi_channel>**
 
-**-profile\_comparison=fullN**, N is an integer value that can omitted.
-*Full* indicates that given two profiles, the alignment will be based on
-a library that includes every possible pair of sequences between the two
-profiles. If N is set, then the library will be restricted to the N most
-similar pairs of sequences between the two profiles, as judged from a
-measure made on a pairwise alignment of these two profiles.
+   *Default: -profile_mode=cw_profile_profile*
 
--profile\_mode
+   *When -profile_comparison=profile, this flag selects a profile scoring function.*
 
-Usage: -profile\_mode=<cw\_profile\_profile, muscle\_profile\_profile,
-multi\_channel>
+=========================
+Alignment Post-Processing
+=========================
+----------
+-clean_aln
+----------
+  **Usage:  -clean_aln **
 
-Default: -profile\_mode=cw\_profile\_profile
+   *Default:-clean_aln*
 
-When **â€“profile\_comparison=profile**, this flag selects a profile
-scoring function.
+   *This flag causes T-Coffee to post-process the multiple alignment. Residues that have a reliability score smaller or equal to -clean_threshold (as given by an evaluation that uses -clean_evaluate_mode)  are realigned to the rest of the alignment. Residues with a score higher than the threshold constitute a rigid framework that cannot be altered.*
 
-.. rubric:: Alignment Post-Processing
+   *The cleaning algorithm is greedy. It starts from the top left segment of low constituency residues and works its way left to right, top to bottom along the alignment. You can require this operation to be carried out for several cycles using the -clean_iterations flag.*
 
--clean\_aln
+   *The rationale behind this operation is mostly cosmetic. In order to ensure a decent looking alignment, the gop is set to -20 and the gep to -1. There is no penalty for terminal gaps, and the matrix is blosum62mt.*
 
-Usage:Â  -clean\_alnÂ 
+.. note:: Note: Gaps are always considered to have a reliability score of 0.
 
-Default:-clean\_aln
+.. note:: Note: The use of the cleaning option can result in memory overflow when aligning large sequences,
 
-This flag causes T-Coffee to post-process the multiple alignment.
-Residues that have a reliability score smaller or equal to
--clean\_threshold (as given by an evaluation that uses
--clean\_evaluate\_mode)Â  are realigned to the rest of the alignment.
-Residues with a score higher than the threshold constitute a rigid
-framework that cannot be altered.
+----------------
+-clean_threshold
+----------------
+  **Usage:  -clean_threshold=<0-9> **
 
-The cleaning algorithm is greedy. It starts from the top left segment of
-low constituency residues and works its way left to right, top to bottom
-along the alignment. You can require this operation to be carried out
-for several cycles using the -clean\_iterations flag.
+  **Default:-clean_aln=1**
 
-The rationale behind this operation is mostly cosmetic. In order to
-ensure a decent looking alignment, the gop is set to -20 and the gep to
--1. There is no penalty for terminal gaps, and the matrix is blosum62mt.
+See -clean_aln for details.
 
-Note: Gaps are always considered to have a reliability score of 0.
 
-Note: The use of the cleaning option can result in memory overflow when
-aligning large sequences,
+----------------
+-clean_iteration
+----------------
+  **Usage:  -clean_iteration=<value between 1 and > **
 
--clean\_threshold
+   *Default:-clean_iteration=1*
 
-Usage:Â  -clean\_threshold=<0-9>Â 
+See -clean_aln for details.
 
-Default:-clean\_aln=1
 
-See -clean\_aln for details.
+----------------------
+-clean_evaluation_mode
+----------------------
+  **Usage:  -clean_iteration=<evaluation_mode > **
 
--clean\_iteration
+   *Default:-clean_iteration=t_coffee_non_extended*
 
-Usage:Â  -clean\_iteration=<value between 1 and >Â 
+   *Indicates the mode used for the evaluation that will indicate the segments that should be realigned. See -evaluation_mode for the list of accepted modes.*
 
-Default:-clean\_iteration=1
-
-See -clean\_aln for details.
-
--clean\_evaluation\_mode
-
-Usage:Â  -clean\_iteration=<evaluation\_mode >Â 
-
-Default:-clean\_iteration=t\_coffee\_non\_extended
-
-Indicates the mode used for the evaluation that will indicate the
-segments that should be realigned. See -evaluation\_mode for the list of
-accepted modes.
-
+--------
 -iterate
+--------
+  **Usage: -iterate=<integer>**
 
-Usage: -iterate=<integer>
+   *Default: -iterate=0*
 
-Default: -iterate=0
+   *Sequences are extracted in turn and realigned to the MSA. If iterate is set to -1, each sequence is realigned, otherwise the number of iterations is set by -iterate.*
 
-Sequences are extracted in turn and realigned to the MSA. If iterate is
-set to -1, each sequence is realigned, otherwise the number of
-iterations is set by â€“iterate.
+*****************
+Database Searches
+*****************
+===================================
+BLAST Template Selection Parameters
+===================================
+These parameters are used by T-Coffee when running expresso, accurate and psicoffee
 
-.. rubric:: CPU Control
 
-.. rubric:: Multithreading
+-------------
+-blast_server
+-------------
+  **Usage:  -blast_server= EBI, NCBI or LOCAL_BLAST**
 
--multi\_core
+   *Default: EBI*
 
-Usage:Â  -multi\_core= templates\_jobs\_relax\_msa
+   *Defines whih way BLAST will be used*
 
-Default: 0
+-------------
+-prot_min_sim
+-------------
+  **Usage:  -prot_min_sim= <percent_id>**
 
-template: fetch the templates in a parallel way
+   *Default: 40*
 
-jobs: compute the library
+   *Minimum id for inclusion of a sequence in a psi-blast profile*
 
-relax: extend the library in a parallel way
+-------------
+-prot_max_sim
+-------------
+  **Usage:  -prot_max_sim= <percent_id>**
 
-msa: compute the msa in a parallel way
+   *Default: 90*
 
-Â 
+   *Maximum id for inclusion of a sequence in a psi-blast profile.*
 
-Specifies that the steps of T-Coffee that should be multi threaded. by
-default all relevant steps are parallelized.
+-------------
+-prot_min_cov
+-------------
+  **Usage:  -prot_min_cov= <percent>**
 
-.. raw:: html
+   *Default: 40*
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *Minimum coverage for inclusion of a sequence in a psi-blast profile*
 
-PROMPT: t\_coffee sample\_seq2.fasta -multi\_core jobs
+-----------
+-protein_db
+-----------
+  **Usage:  -protein_db= <BLAST database>**
 
-.. raw:: html
+   *Default: nr*
 
-   </div>
+   *Database used for construction of psi-blast profiles*
 
-In order to prevent the use of the parallel mode it is possible to use:
+------------
+-pdb_min_sim
+------------
+  **Usage:  -pdb_min_sim= <percent_id>**
 
-.. raw:: html
+   *Default: 35*
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *Minimum id for a PDB template to be selected by expresso*
 
-PROMPT: t\_coffee sample\_seq2.fasta -multi\_core no
+------------
+-pdb_max_sim
+------------
+  **Usage:  -pdb_max_sim= <percent_id>**
 
-.. raw:: html
+   *Default: 100*
 
-   </div>
+   *Maximum id for a PDB template to be selected by expresso*
 
-Â 
+------------
+-pdb_min_cov
+------------
+  **Usage:  -pdb_min_cov= <percent>**
 
--n\_core
+   *Default: 50*
 
-Usage:Â  -n\_core= <number of cores>
+   *Minimum coverage for a PDB template to be selected by expresso.*
 
-Default: 0
+-------
+-pdb_db
+-------
+  **Usage:  -protein_db= <BLAST database>**
 
-Default indicates that all cores will be used, as indicated by the
-environment via:
+   *Default: pdb*
 
-.. raw:: html
+   *Database for PDB template to be selected by expresso.*
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+---------
+-pdb_type
+---------
+  **Usage:  -pdb_type= d,n,m,dnm,dn**
 
-PROMPT: t\_coffee sample\_seq2.fasta -multi\_core jobs
+   *Default: d*
 
-.. raw:: html
+   *d: diffraction*
 
-   </div>
+   *n: NMR*
 
-.. rubric:: 
+   *m: model*
 
-Â 
+***********
+CPU Control
+***********
+==============
+Multithreading
+==============
+-----------
+-multi_core
+-----------
+  **Usage:  -multi_core= templates_jobs_relax_msa**
 
-.. rubric:: Limits
+   *Default: 0*
 
--mem\_mode
+   *template: fetch the templates in a parallel way*
 
-Usage:Â  deprecated
+   *jobs: compute the library*
 
+   *relax: extend the library in a parallel way*
+
+   *msa: compute the msa in a parallel way*
+
+   *Specifies that the steps of T-Coffee that should be multi threaded. by default all relevant steps are parallelized.*
+
+::
+
+  PROMPT: t_coffee sample_seq2.fasta -multi_core jobs
+
+
+
+   *In order to prevent the use of the parallel mode it is possible to use:*
+
+::
+
+  PROMPT: t_coffee sample_seq2.fasta -multi_core no
+
+
+
+-------
+-n_core
+-------
+  **Usage:  -n_core= <number of cores>**
+
+   *Default: 0*
+
+   *Default indicates that all cores will be used, as indicated by the environment via:*
+
+::
+
+  PROMPT: t_coffee sample_seq2.fasta -multi_core jobs
+
+
+
+======
+Limits
+======
+---------
+-mem_mode
+---------
+  **Usage:  deprecated**
+
+-------
 -ulimit
+-------
+  **Usage:  -ulimit=<value>**
 
-Usage:Â  -ulimit=<value>
+   *Default: -ulimit=0*
 
-Default: -ulimit=0
+   *Specifies the upper limit of memory usage (in Megabytes). Processes exceeding this limit will automatically exit. A value 0 indicates that no limit applies.*
 
-Specifies the upper limit of memory usage (in Megabytes). Processes
-exceeding this limit will automatically exit. A value 0 indicates that
-no limit applies.
-
+-------
 -maxlen
+-------
+  **Usage:  -maxlen=<value, 0=nolimit>**
 
-Usage:Â  -maxlen=<value, 0=nolimit>
+   *Default: -maxlen=1000*
 
-Default: -maxlen=1000
+   *Indicates the maximum length of the sequences.*
 
-Indicates the maximum length of the sequences.
-
-.. rubric:: Aligning more than 100 sequences with DPA
-
+=========================================
+Aligning more than 100 sequences with DPA
+=========================================
+--------
 -maxnseq
+--------
+  **Usage:  -maxnseq=<value, 0=nolimit>**
 
-Usage:Â  -maxnseq=<value, 0=nolimit>
+   *Default: -maxnseq=50*
 
-Default: -maxnseq=50
+   *Indicates the maximum number of sequences before triggering the use of t_coffee_dpa.*
 
-Indicates the maximum number of sequences before triggering the use of
-t\_coffee\_dpa.
+---------------
+-dpa_master_aln
+---------------
+  **Usage: -dpa_master_aln=<File, method>**
 
--dpa\_master\_aln
+   *Default: -dpa_master_aln=NO*
 
-Usage: -dpa\_master\_aln=<File, method>
+   *When using dpa, t_coffee needs a seed alignment that can be computed using any appropriate method. By default, t_coffee computes a fast approximate alignment.*
 
-Default: -dpa\_master\_aln=NO
+   *A pre-alignment can be provided through this flag, as well as any program using the following syntax:*
 
-When using dpa, t\_coffee needs a seed alignment that can be computed
-using any appropriate method. By default, t\_coffee computes a fast
-approximate alignment.
+::
 
-A pre-alignment can be provided through this flag, as well as any
-program using the following syntax:
+  your_script -in <fasta_file> -out <file_name>
 
-your\_script â€“in <fasta\_file> -out <file\_name>
 
--dpa\_maxnseq
 
-Usage: -dpa\_maxnseq=<integer value>
+------------
+-dpa_maxnseq
+------------
+  **Usage: -dpa_maxnseq=<integer value>**
 
-Default: -dpa\_maxnseq=30
+   *Default: -dpa_maxnseq=30*
 
-Maximum number of sequences aligned simultaneously when DPA is ran.
-Given the tree computed from the master alignment, a node is sent to
-computation if it controls more than **â€“dpa\_maxnseq** OR if it controls
-a pair of sequences having less than **â€“dpa\_min\_score2** percent ID.
+   *Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than -dpa_maxnseq OR if it controls a pair of sequences having less than -dpa_min_score2 percent ID.*
 
--dpa\_min\_score1
+---------------
+-dpa_min_score1
+---------------
+  **Usage: -dpa_min_score1=<integer value>**
 
-Usage: -dpa\_min\_score1=<integer value>
+   *Default: -dpa_min_score1=95*
 
-Default: -dpa\_min\_score1=95
+   *Threshold for not realigning the sequences within the master alignment. Given this alignment and the associated tree, sequences below a node are not realigned if none of them has less than -dpa_min_score1 % identity.*
 
-Threshold for not realigning the sequences within the master alignment.
-Given this alignment and the associated tree, sequences below a node are
-not realigned if none of them has less than **â€“dpa\_min\_score1** %
-identity.
+---------------
+-dpa_min_score2
+---------------
+  **Usage: -dpa_min_score2**
 
--dpa\_min\_score2
+   *Default: -dpa_min_score2*
 
-Usage: -dpa\_min\_score2
+   *Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than -dpa_maxnseq OR if it controls a pair of sequences having less than -dpa_min_score2 percent ID.*
 
-Default: -dpa\_min\_score2
+---------------------------
+-dap_tree [NOT IMPLEMENTED]
+---------------------------
+  **Usage:  -dpa_tree=<filename>**
 
-Maximum number of sequences aligned simultaneously when DPA is ran.
-Given the tree computed from the master alignment, a node is sent to
-computation if it controls more than **â€“dpa\_maxnseq** OR if it controls
-a pair of sequences having less than **â€“dpa\_min\_score2** percent ID.
+   *Default: -unset*
 
--dap\_tree [NOT IMPLEMENTED]
+   *Guide tree used in DPA. This is a newick tree where the distance associated with each node is set to the minimum pairwise distance among all considered sequences.*
 
-Usage:Â  -dpa\_tree=<filename>
-
-Default: -unset
-
-Guide tree used in DPA. This is a newick tree where the distance
-associated with each node is set to the minimum pairwise distance among
-all considered sequences.
-
-.. rubric:: Using Structures
-
-.. rubric:: Generic
-
+****************
+Using Structures
+****************
+=======
+Generic
+=======
+-----
 -mode
+-----
+  **Usage: -mode=3dcoffee**
 
-Usage: -mode=3dcoffee
+   *Default: turned off*
 
-Default: turned off
+   *Runs t_coffee with the 3dcoffee mode (cf next section).*
 
-Runs t\_coffee with the 3dcoffee mode (cf next section).
+-----------------
+-check_pdb_status
+-----------------
+  **Usage: -check_pdb_status**
 
--check\_pdb\_status
+   *Default: turned off*
 
-Usage: -check\_pdb\_status
+   *Forces t_coffee to run extract_from_pdb to check the pdb status of each sequence. This can considerably slow down the program.*
 
-Default: turned off
+====================
+3D Coffee: Using SAP
+====================
+   *It is possible to use t_coffee to compute multiple structural alignments. To do so, ensure that you have the sap program installed.*
 
-Forces t\_coffee to run extract\_from\_pdb to check the pdb status of
-each sequence. This can considerably slow down the program.
+::
 
-Â 
+  PROMPT: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair
 
-.. rubric:: 3D Coffee: Using SAP
 
-It is possible to use t\_coffee to compute multiple structural
-alignments. To do so, ensure that you have the sap program installed.
 
-.. raw:: html
+   *Will combine the pairwise alignments produced by SAP.  There are currently four methods that can be interfaced with t_coffee:*
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *sap_pair: that uses the sap algorithm*
 
-PROMPT: t\_coffee â€“pdb=struc1.pdb,struc2.pdb,struc3.pdb -method
-sap\_pair
+   *align_pdb: uses a t_coffee implementation of sap, not as accurate.*
 
-.. raw:: html
+   *tmaliagn_pair (http://zhang.bioinformatics.ku.edu/TM-align/)*
 
-   </div>
+   *mustang_pair (http://www.cs.mu.oz.au/~arun/mustang)*
 
-Will combine the pairwise alignments produced by SAP.Â  There are
-currently four methods that can be interfaced with t\_coffee:
+   *When providing a PDB file, the computation is only carried out on the first chain of this file. If your original file contains several chain, you should extract the chain you want to work on. You can use t_coffee -other_pg extract_from_pdb or any pdb handling program.*
 
-sap\_pair: that uses the sap algorithm
+   *If you are working with public PDB files, you can use the PDB identifier and specify the chain by adding its index to the identifier (i.e. 1pdbC). If your structure is an NMR structure, you are advised to provide the program with one structure only.*
 
-align\_pdb: uses a t\_coffee implementation of sap, not as accurate.
+   *If you wish to align only a portion of the structure, you should extract it yourself from the pdb file, using t_coffee -other_pg extract_from_pdb or any pdb handling program.*
 
-tmaliagn\_pair (http://zhang.bioinformatics.ku.edu/TM-align/)
+   *You can provide t_coffee with a mixture of sequences and structure. In this case, you should use the special mode:*
 
-mustang\_pair (http://www.cs.mu.oz.au/~arun/mustang)
+::
 
-When providing a PDB file, the computation is only carried out on the
-first chain of this file. If your original file contains several chain,
-you should extract the chain you want to work on. You can use
-**t\_coffee â€“other\_pg extract\_from\_pdb** or any pdb handling program.
+  PROMPT: t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template
 
-If you are working with public PDB files, you can use the PDB identifier
-and specify the chain by adding its index to the identifier (i.e.
-1pdbC). If your structure is an NMR structure, you are advised to
-provide the program with one structure only.
 
-If you wish to align only a portion of the structure, you should extract
-it yourself from the pdb file, using **t\_coffee â€“other\_pg
-extract\_from\_pdb** or any pdb handling program.
 
-You can provide t\_coffee with a mixture of sequences and structure. In
-this case, you should use the special mode:
+=============================================
+Using/finding PDB templates for the Sequences
+=============================================
+--------------
+-template_file
+--------------
+  **Usage: -template_file =**
 
-.. raw:: html
+  **<filename,**
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+  **SCRIPT_scriptame,**
 
-PROMPT: t\_coffee â€“mode 3dcoffee â€“seq 3d\_sample3.fasta -template\_file
-template\_file.template
+  **SELF_TAG**
 
-.. raw:: html
+  **SEQFILE_TAG_filename,**
 
-   </div>
+  **no>**
 
-.. rubric:: Using/finding PDB templates for the Sequences
+   *Default: no*
 
--template\_file
+   *This flag instructs t_coffee on the templates that will be used when combining several types of information. For instance, when using structural information, this file will indicate the structural template that corresponds to your sequences. The identifier T indicates that the file should be a FASTA like file, formatted as follows. There are several ways to pass the templates:*
 
-Usage: -template\_file =
+   *Predefined Modes*
 
-<filename,
+EXPRESSO: will use the EBI server to find _P_ templates
 
-SCRIPT\_scriptame,
-
-SELF\_TAG
-
-SEQFILE\_TAG\_filename,
-
-no>
-
-Default: no
-
-This flag instructs t\_coffee on the templates that will be used when
-combining several types of information. For instance, when using
-structural information, this file will indicate the structural template
-that corresponds to your sequences. The identifier T indicates that the
-file should be a FASTA like file, formatted as follows. There are
-several ways to pass the templates:
-
-Predefined Modes
-
-EXPRESSO: will use the EBI server to find \_P\_ templates
 
 PSIBLAST: will use the EBI sever to find profiles
 
-Â 
 
-File name
+   *File name*
 
-This file contains the sequence/template association it uses a
-FASTA-like format, as follows:
+   *This file contains the sequence/template association it uses a FASTA-like format, as follows:*
 
-.. raw:: html
+::
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+  ><sequence name> _P_ <pdb template>
 
-><sequence name> \_P\_ <pdb template>
+  ><sequence name> _G_ <gene template>
 
-><sequence name> \_G\_ <gene template>
+  ><sequence name> _R_ <MSA template>
 
-><sequence name> \_R\_ <MSA template>
+  ><sequence name> _F_ <RNA Secondary Structure>
 
-><sequence name> \_F\_ <RNA Secondary Structure>
+  ><sequence name> _T_ <Transmembrane Secondary Structure>
 
-><sequence name> \_T\_ <Transmembrane Secondary Structure>
+  ><sequence name> _E_ <Protein Secondary Structure>
 
-><sequence name> \_E\_ <Protein Secondary Structure>
 
-Â 
 
-.. raw:: html
+   *Each template will be used in place of the sequence with the appropriate method. For instance, structural templates will be aligned with sap_pair and the information thus generated will be transferred onto the alignment.*
 
-   </div>
+   *Note the following rule:*
 
-Each template will be used in place of the sequence with the appropriate
-method. For instance, structural templates will be aligned with
-sap\_pair and the information thus generated will be transferred onto
-the alignment.
+   *         -Each sequence can have one template of each type (structural, genomics...)*
 
-Note the following rule:
+   *         -Each sequence can only have one template of a given type*
 
-Â Â Â Â Â Â Â Â  -Each sequence can have one template of each type (structural,
-genomicsâ€¦)
+   *         -Several sequences can share the same template*
 
-Â Â Â Â Â Â Â Â  -Each sequence can only have one template of a given type
+   *         -All the sequences do not need to have a template*
 
-Â Â Â Â Â Â Â Â  -Several sequences can share the same template
+   *The type of template on which a method works is declared with the SEQ_TYPE parameter in the method configuration file:*
 
-Â Â Â Â Â Â Â Â  -All the sequences do not need to have a template
+   *         SEQ_TYPE       S: a method that uses sequences*
 
-The type of template on which a method works is declared with the
-SEQ\_TYPE parameter in the method configuration file:
+   *         SEQ_TYPE       PS: a pairwise method that aligns sequences and structures*
 
-Â Â Â Â Â Â Â Â  SEQ\_TYPEÂ Â Â Â Â Â  S: a method that uses sequences
+   *         SEQ_TYPE       P: a method that aligns structures (sap for instance)*
 
-Â Â Â Â Â Â Â Â  SEQ\_TYPEÂ Â Â Â Â Â  PS: a pairwise method that aligns sequences and
-structures
+   *There are 4 tags identifying the template type:*
 
-Â Â Â Â Â Â Â Â  SEQ\_TYPEÂ Â Â Â Â Â  P: a method that aligns structures (sap for
-instance)
+   *_P_    Structural templates: a pdb identifier OR a pdb file*
 
-There are 4 tags identifying the template type:
+   *_G_   Genomic templates: a protein sequence where boundary amino-acid have been recoded with ( o:0, i:1, j:2)*
 
-\_P\_Â Â Â  Structural templates: a pdb identifier OR a pdb file
+   *_R_   Profile Templates: a file containing a multiple sequence alignment*
 
-\_G\_Â Â  Genomic templates: a protein sequence where boundary amino-acid
-have been recoded with ( o:0, i:1, j:2)
+   *_F_    RNA secondary Structures*
 
-\_R\_Â Â  Profile Templates: a file containing a multiple sequence
-alignment
+   *More than one template file can be provided. There is no need to have one template for every sequence in the dataset.*
 
-\_F\_Â Â Â  RNA secondary Structures
+   *_P_, _G_, and _R_ are known as template TAGS*
 
-Â 
+   *2-SCRIPT_<scriptname>*
 
-More than one template file can be provided. There is no need to have
-one template for every sequence in the dataset.
+   *Indicates that filename is a script that will be used to generate a valid template file. The script will run on a file containing all your sequences using the following syntax:*
 
-\_P\_, \_G\_, and \_R\_ are known as **template TAGS**
+::
 
-2-SCRIPT\_<scriptname>
+  scriptname -infile=<your sequences> -outfile=<template_file>
 
-Indicates that filename is a script that will be used to generate a
-valid template file. The script will run on a file containing all your
-sequences using the following syntax:
 
-scriptname â€“infile=<your sequences> -outfile=<template\_file>
 
-It is also possible to pass some parameters, use @ as a separator and #
-in place of the = sign. For instance, if you want to call the a script
-named blast.pl with the foloowing parameters;
+   *It is also possible to pass some parameters, use @ as a separator and # in place of the = sign. For instance, if you want to call the a script named blast.pl with the foloowing parameters;*
 
-blast.pl -db=pdb -dir=/local/test
+::
 
-Use
+  blast.pl -db=pdb -dir=/local/test
 
-SCRIPT\_blast.pl@db#pdb@dir#/local/test
 
-Bear in mind that the input output flags will then be concatenated to
-this command line so that t\_coffee ends up calling the program using
-the following system call:
 
-blast.pl -db=pdb -dir=/local/test -infile=<some tmp file>
--outfile=<another tmp file>
+   *Use*
 
-Â 
+::
 
-3-SELF\_TAG
+  SCRIPT_blast.pl@db#pdb@dir#/local/test
 
-TAG can take the value of any of the known TAGS (\_S\_, \_G\_, \_P\_).
-SELF indicates that the original name of the sequence will be used to
-fetch the template:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *Bear in mind that the input output flags will then be concatenated to this command line so that t_coffee ends up calling the program using the following system call:*
 
-PROMPT: t\_coffee 3d\_sample2.fasta â€“template\_file SELF\_P\_
+::
 
-.. raw:: html
+  blast.pl -db=pdb -dir=/local/test -infile=<some tmp file> -outfile=<another tmp file>
 
-   </div>
 
-The previous command will work because the sequences in 3d\_sample3 are
-named
 
-4-SEQFILE\_TAG\_filename
+   *3-SELF_TAG*
 
-Use this flag if your templates are in filename, and are named according
-to the sequences. For instance, if your protein sequences have been
-recoded with Exon/Intron information, you should have the recoded
-sequences names according to the original:
+   *TAG can take the value of any of the known TAGS (_S_, _G_, _P_). SELF indicates that the original name of the sequence will be used to fetch the template:*
 
-SEQFILE\_G\_recodedprotein.fasta
+::
 
--struc\_to\_use
+  PROMPT: t_coffee 3d_sample2.fasta -template_file SELF_P_
 
-Usage: -struc\_to\_use=<struc1, struc2â€¦>
 
-Default: -struc\_to\_use=NULL
 
-Restricts the 3Dcoffee to a set of pre-defined structures.
+   *The previous command will work because the sequences in 3d_sample3 are named*
 
-.. rubric:: Multiple Local Alignments
+   *4-SEQFILE_TAG_filename*
 
-It is possible to compute multiple local alignments, using the moca
-routine. MOCA is a routine that allows extracting all the local
-alignments that show some similarity with another predefined fragment.
+   *Use this flag if your templates are in filename, and are named according to the sequences. For instance, if your protein sequences have been recoded with Exon/Intron information, you should have the recoded sequences names according to the original:*
 
-'mocca' is a perl script that calls t-coffee and provides it with the
-appropriate parameters.
+::
 
+  SEQFILE_G_recodedprotein.fasta
+
+
+
+-------------
+-struc_to_use
+-------------
+  **Usage: -struc_to_use=<struc1, struc2...>**
+
+   *Default: -struc_to_use=NULL*
+
+   *Restricts the 3Dcoffee to a set of pre-defined structures.*
+
+***************
+Domain Analysis
+***************
+=========================
+Multiple Local Alignments
+=========================
+It is possible to compute multiple local alignments, using the moca routine. MOCA is a routine that allows extracting all the local alignments that show some similarity with another predefined fragment.
+
+
+'mocca' is a perl script that calls t-coffee and provides it with the appropriate parameters.
+
+
+--------------
 -domain/-mocca
+--------------
+  **Usage: -domain**
 
-Usage: -domain
+   *Default: not set*
 
-Default: not set
+   *This flag indicates that t_coffee will run using the domain mode. All the sequences will be concatenated, and the resulting sequence will be compared to itself using lalign_rs_s_pair mode (lalign of the sequence against itself using keeping the lalign raw score). This step is the most computer intensive, and it is advisable to save the resulting file.*
 
-This flag indicates that t\_coffee will run using the domain mode. All
-the sequences will be concatenated, and the resulting sequence will be
-compared to itself using lalign\_rs\_s\_pair mode (lalign of the
-sequence against itself using keeping the lalign raw score). This step
-is the most computer intensive, and it is advisable to save the
-resulting file.
+::
 
-.. raw:: html
+  PROMPT: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.mocca_lib -domain -start=100 -len=50
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee -in Ssample\_seq1.fasta,Mlalign\_rs\_s\_pair
--out\_lib=sample\_lib1.mocca\_lib -domain -start=100 -len=50
 
-.. raw:: html
+   *This instruction will use the fragment 100-150 on the concatenated sequences, as a template for the extracted repeats. The extraction will only be made once. The library will be placed in the file <lib name>.*
 
-   </div>
+   *If you want, you can test other coordinates for the repeat, such as*
 
-This instruction will use the fragment 100-150 on the concatenated
-sequences, as a template for the extracted repeats. The extraction will
-only be made once. The library will be placed in the file <lib name>.
+::
 
-Â 
+  PROMPT: t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
 
-If you want, you can test other coordinates for the repeat, such as
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *This run will use the fragment 100-160, and will be much faster because it does not need to re-compute the lalign library.*
 
-PROMPT: t\_coffee -in sample\_lib1.mocca\_lib -domain -start=100 -len=60
-
-.. raw:: html
-
-   </div>
-
-This run will use the fragment 100-160, and will be much faster because
-it does not need to re-compute the lalign library.
-
+------
 -start
+------
+  **Usage: -start=<int value>**
 
-Usage: -start=<int value>
+   *Default: not set*
 
-Default: not set
+   *This flag indicates the starting position of the portion of sequence that will be used as a template for the repeat extraction. The value assumes that all the sequences have been concatenated, and is given on the resulting sequence.*
 
-This flag indicates the starting position of the portion of sequence
-that will be used as a template for the repeat extraction. The value
-assumes that all the sequences have been concatenated, and is given on
-the resulting sequence.
-
+----
 -len
+----
+  **Usage: -len=<int value>**
 
-Usage: -len=<int value>
+   *Default: not set*
 
-Default: not set
+   *This flag indicates the length of the portion of sequence that will be used as a template.*
 
-This flag indicates the length of the portion of sequence that will be
-used as a template.
-
+------
 -scale
+------
+  **Usage: -scale=<int value>**
 
-Usage: -scale=<int value>
+   *Default: -scale=-100*
 
-Default: -scale=-100
+   *This flag indicates the value of the threshold for extracting the repeats. The actual threshold is equal to:*
 
-This flag indicates the value of the threshold for extracting the
-repeats. The actual threshold is equal to:
+   *         motif_len*scale*
 
-Â Â Â Â Â Â Â Â  motif\_len\*scale
+   *Increase the scale óIncrease sensitivity ó More alignments( i.e. -50).*
 
-Increase the scale Ã³Increase sensitivity Ã³ More alignments( i.e. -50).
+------------------------------
+-domain_interactive [Examples]
+------------------------------
+  **Usage: -domain_interactive**
 
--domain\_interactive [Examples]
+   *Default: unset*
 
-Usage: -domain\_interactive
+   *Launches an interactive mocca session.*
 
-Default: unset
+::
 
-Launches an interactive mocca session.
+  PROMPT: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60
 
-.. raw:: html
+  TOLB_ECOLI_212_26                      211 SKLAYVTFESGR--SALVIQTLANGAVRQV-ASFPRHNGAPAFSPDGSKLAFA
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+  TOLB_ECOLI_165_218    164 TRIAYVVQTNGGQFPYELRVSDYDGYNQFVVHRSPQPLMSPAWSPDGSKLAYV
 
-PROMPT: t\_coffee -in Lsample\_lib3.tc\_lib,Mlalign\_rs\_s\_pair -domain
--start=100 -len=60
+  TOLB_ECOLI_256_306    255 SKLAFALSKTGS--LNLYVMDLASGQIRQV-TDGRSNNTEPTWFPDSQNLAFT
 
-.. raw:: html
+  TOLB_ECOLI_307_350    306 -------DQAGR--PQVYKVNINGGAPQRI-TWEGSQNQDADVSSDGKFMVMV
 
-   </div>
+  TOLB_ECOLI_351_393    350 -------SNGGQ--QHIAKQDLATGGV-QV-LSSTFLDETPSLAPNGTMVIYS 
 
-.. raw:: html
+                          1           *             *    :          .   .:.  :   
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6;margin-left:0cm;margin-right:1.0cm">
+          MENU: Type Letter Flag[number] and Return: ex |10
 
-TOLB\_ECOLI\_212\_26Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Â Â Â  211
-SKLAYVTFESGR--SALVIQTLANGAVRQV-ASFPRHNGAPAFSPDGSKLAFA
+          |x      -->Set     the START to x
 
-TOLB\_ECOLI\_165\_218Â Â Â  164
-TRIAYVVQTNGGQFPYELRVSDYDGYNQFVVHRSPQPLMSPAWSPDGSKLAYV
+          >x      -->Set     the LEN   to x
 
-TOLB\_ECOLI\_256\_306Â Â Â  255
-SKLAFALSKTGS--LNLYVMDLASGQIRQV-TDGRSNNTEPTWFPDSQNLAFT
+          Cx      -->Set     the sCale to x
 
-TOLB\_ECOLI\_307\_350Â Â Â  306
--------DQAGR--PQVYKVNINGGAPQRI-TWEGSQNQDADVSSDGKFMVMV
+          Sname   -->Save    the  Alignment
 
-TOLB\_ECOLI\_351\_393Â Â Â  350
--------SNGGQ--QHIAKQDLATGGV-QV-LSSTFLDETPSLAPNGTMVIYSÂ 
+          Bx      -->Save    Goes back x it
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  1Â Â Â Â Â Â Â Â Â Â  \*Â Â Â Â Â Â Â Â Â Â Â Â  \*Â Â Â  :Â Â Â Â  Â Â Â Â Â .Â Â 
-.:.Â  :Â Â Â 
+          return  -->Compute the  Alignment
 
-Â 
+          X       -->eXit
 
-Â Â Â Â  Â Â Â MENU: Type Letter Flag[number] and Return: ex \|10
+  [ITERATION   1] [START=211] [LEN= 50] [SCALE=-100]      YOUR CHOICE:
 
-Â Â Â Â Â Â Â  \|xÂ Â Â Â Â  -->SetÂ Â Â Â  the START to x
+  For instance, to set the length of the domain to 40, type:
 
-Â Â Â Â Â Â Â  >xÂ Â Â Â Â  -->SetÂ Â Â Â  the LENÂ Â  to x
+  [ITERATION   1] [START=211] [LEN= 50] [SCALE=-100]      YOUR CHOICE:>40[return]
 
-Â Â Â Â Â Â Â  CxÂ Â Â Â Â  -->SetÂ Â Â Â  the sCale to x
+  [return]
 
-Â Â Â Â Â Â Â  SnameÂ Â  -->SaveÂ Â Â  theÂ  Alignment
+  Which will generate:
 
-Â Â Â Â Â Â Â  BxÂ Â Â Â Â  -->SaveÂ Â Â  Goes back x it
+  TOLB_ECOLI_212_252    211 SKLAYVTFESGRSALVIQTLANGAVRQVASFPRHNGAPAF  251
 
-Â Â Â Â Â Â Â  returnÂ  -->Compute theÂ  Alignment
+  TOLB_ECOLI_256_296    255 SKLAFALSKTGSLNLYVMDLASGQIRQVTDGRSNNTEPTW  295
 
-Â Â Â Â Â Â Â  XÂ Â Â Â Â Â  -->eXit
+  TOLB_ECOLI_300_340    299 QNLAFTSDQAGRPQVYKVNINGGAPQRITWEGSQNQDADV  339
 
-Â 
+  TOLB_ECOLI_344_383    343 KFMVMVSSNGGQQHIAKQDLATGGV-QVLSSTFLDETPSL  382
 
-[ITERATIONÂ Â  1] [START=211] [LEN= 50] [SCALE=-100]Â Â Â Â Â  YOUR CHOICE:
+  TOLB_ECOLI_387_427    386 TMVIYSSSQGMGSVLNLVSTDGRFKARLPATDGQVKFPAW  426
 
-For instance, to set the length of the domain to 40, type:
+                          1   :     :     :           ::         .     40
 
-Â 
+          MENU: Type Letter Flag[number] and Return: ex |10
 
-[ITERATIONÂ Â  1] [START=211] [LEN= 50] [SCALE=-100]Â Â Â Â Â  YOUR
-CHOICE:>40[return]
+          |x      -->Set     the START to x
 
-[return]
+          >x      -->Set     the LEN   to x
 
-Â 
+          Cx      -->Set     the sCale to x
 
-Which will generate:
+          Sname   -->Save    the  Alignment
 
-Â 
+          Bx      -->Save    Goes back x it
 
-TOLB\_ECOLI\_212\_252Â Â Â  211 SKLAYVTFESGRSALVIQTLANGAVRQVASFPRHNGAPAFÂ 
-251
+          return  -->Compute the  Alignment
 
-TOLB\_ECOLI\_256\_296Â Â Â  255 SKLAFALSKTGSLNLYVMDLASGQIRQVTDGRSNNTEPTWÂ 
-295
+          X       -->eXit
 
-TOLB\_ECOLI\_300\_340Â Â Â  299 QNLAFTSDQAGRPQVYKVNINGGAPQRITWEGSQNQDADVÂ 
-339
+  [ITERATION   3] [START=211] [LEN= 40] [SCALE=-100]      YOUR CHOICE:
 
-TOLB\_ECOLI\_344\_383Â Â Â  343 KFMVMVSSNGGQQHIAKQDLATGGV-QVLSSTFLDETPSLÂ 
-382
 
-TOLB\_ECOLI\_387\_427Â Â Â  386 TMVIYSSSQGMGSVLNLVSTDGRFKARLPATDGQVKFPAWÂ 
-426
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  1Â Â  :Â Â Â Â  :Â Â Â Â  :Â Â Â Â Â Â Â Â Â Â  ::Â Â Â Â Â Â Â Â  .Â Â Â Â  40
+   *If you want to indicate the coordinates, relative to a specific sequence, type:*
 
-Â 
+::
 
-Â 
+    |<seq_name>:start
 
-Â 
 
-Â 
 
-Â Â Â Â Â Â Â  MENU: Type Letter Flag[number] and Return: ex \|10
+   *Type S<your name> to save the current alignment, and extract a new motif.*
 
-Â Â Â Â Â Â Â  \|xÂ Â Â Â Â  -->SetÂ Â Â Â  the START to x
+   *Type X when you are done.*
 
-Â Â Â Â Â Â Â  >xÂ Â Â Â Â  -->SetÂ Â Â Â  the LENÂ Â  to x
-
-Â Â Â Â Â Â Â  CxÂ Â Â Â Â  -->SetÂ Â Â Â  the sCale to x
-
-Â Â Â Â Â Â Â  SnameÂ Â  -->SaveÂ Â Â  theÂ  Alignment
-
-Â Â Â Â Â Â Â  BxÂ Â Â Â Â  -->SaveÂ Â Â  Goes back x it
-
-Â Â Â Â Â Â Â  returnÂ  -->Compute theÂ  Alignment
-
-Â Â Â Â Â Â Â  XÂ Â Â Â Â Â  -->eXit
-
-Â 
-
-[ITERATIONÂ Â  3] [START=211] [LEN= 40] [SCALE=-100]Â Â Â Â Â  YOUR CHOICE:
-
-.. raw:: html
-
-   </div>
-
-Â 
-
-If you want to indicate the coordinates, relative to a specific
-sequence, type:
-
-Â  \|<seq\_name>:start
-
-Type S<your name> to save the current alignment, and extract a new
-motif.
-
-Type X when you are done.
-
-.. rubric:: Output Control
-
-.. rubric:: Generic
-
+**************
+Output Control
+**************
+=======
+Generic
+=======
+-------------------------------
 Conventions Regarding Filenames
+-------------------------------
+stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresponding file to be output in stderr or stdout, for an input file, stdin causes the program to requests the corresponding file through pipe. No causes a suppression of the output, as does /dev/null.
 
-stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the
-corresponding file to be output in stderr or stdout, for an input file,
-stdin causes the program to requests the corresponding file through
-pipe. No causes a suppression of the output, as does /dev/null.
 
+------------------------------------------
 Identifying the Output files automatically
+------------------------------------------
+In the t_coffee output, each output appears in a line:
 
-In the t\_coffee output, each output appears in a line:
 
-.. raw:: html
+::
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+  ##### FILENAME <name> TYPE <Type> FORMAT <Format>
 
-##### FILENAME <name> TYPE <Type> FORMAT <Format>
 
-.. raw:: html
 
-   </div>
+-----------
+-no_warning
+-----------
+  **Usage:  -no_warning**
 
--no\_warning
+   *Default: Switched off*
 
-Usage:Â  -no\_warning
+   *Suppresseswarning output.*
 
-Default: Switched off
-
-Suppresseswarning output.\ **
-
-.. rubric:: 
-
-Â 
-
-.. rubric:: Alignments
-
+==========
+Alignments
+==========
+--------
 -outfile
+--------
+  **Usage:  -outfile=<out_aln file,default,no>**
 
-Usage:Â  -outfile=<out\_aln file,default,no>
+Defau TOC \o '1-1' Word did not find any entries for your table of contents.lt:-outfile=default
 
-Default:-outfile=default
 
-Indicates the name of the alignment output by t\_coffee. If the default
-is used, the alignment is named *<your sequences>.aln*
+   *Indicates the name of the alignment output by t_coffee. If the default is used, the alignment is named <your sequences>.aln*
 
+-------
 -output
+-------
+  **Usage:  -output=<format1,format2,...>**
 
-Usage:Â  -output=<format1,format2,...>
+   *Default:-output=clustalw*
 
-Default:-output=clustalw
+   *Indicates the format used for outputting the -outfile.*
 
-Indicates the format used for outputting the -outfile.
+   *Supported formats are:*
 
-Supported formats are:
+   *        *
 
-Â Â Â Â Â Â Â Â 
+   *clustalw_aln, clustalw     : ClustalW format.*
 
-clustalw\_aln, clustalwÂ Â Â Â  : ClustalW format.
+   *gcg, msf_aln                             : MSF alignment.*
 
-gcg, msf\_alnÂ Â Â Â Â  Â Â Â Â Â Â Â Â Â Â Â  Â Â Â Â Â Â Â Â Â Â Â  : MSF alignment.
+   *pir_aln                         : pir alignment.*
 
-pir\_alnÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  : pir alignment.
+   *fasta_aln                       : fasta alignment.*
 
-fasta\_alnÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  : fasta alignment.
+   *phylip                          : Phylip format.*
 
-phylipÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  : Phylip format.
+   *pir_seq                         : pir sequences (no gap).*
 
-pir\_seqÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  : pir sequences (no gap).
+   *fasta_seq                       : fasta sequences (no gap).*
 
-fasta\_seqÂ Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  : fasta sequences (no gap).
+   *                    *
 
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â 
+   *As well as:*
 
-As well as:
+   *score_ascii         : causes the output of a reliability flag*
 
-Â 
+   *score_html        : causes the output to be a reliability plot in HTML*
 
-score\_asciiÂ Â Â Â Â Â Â Â  : causes the output of a reliability flag
+   *score_pdf           : idem in PDF (if ps2pdf is installed on your system).*
 
-score\_htmlÂ Â Â Â Â Â Â  : causes the output to be a reliability plot in HTML
+   *score_ps                       : idem in postscript.*
 
-score\_pdfÂ Â Â Â Â Â Â Â Â Â  : idem in PDF (if ps2pdf is installed on your
-system).
+   *More than one format can be indicated:*
 
-score\_psÂ Â Â Â Â Â Â Â Â Â Â  Â Â Â Â Â Â Â Â Â Â Â  : idem in postscript.
+::
 
-Â 
+  PROMPT: t_coffee sample_seq1.fasta -output=clustalw,gcg, score_html
 
-More than one format can be indicated:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *A publication describing the CORE index is available on:*
 
-PROMPT: t\_coffee sample\_seq1.fasta -output=clustalw,gcg, score\_html
+http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
-.. raw:: html
 
-   </div>
-
-A publication describing the CORE index is available on:
-
-`http://www.tcoffee.org/Publications/Pdf/core.pp.pdf <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`__
-
+-------------
 -outseqweight
+-------------
+  **Usage:  -outseqweight=<filename>**
 
-Usage:Â  -outseqweight=<filename>
+   *Default: not used*
 
-Default: not used
+   *Indicates the name of the file in which the sequences weights should be saved..*
 
-Indicates the name of the file in which the sequences weights should be
-saved..
-
+-----
 -case
+-----
+  **Usage:  -case=<keep,upper,lower>**
 
-Usage:Â  -case=<keep,upper,lower>
+   *Default: -case=keep*
 
-Default: -case=keep
+Instructs the program on the case to be used in the output file (Clustalw uses upper case). The default keeps the case and makes it possible to maintain a mixture of upper and lower case residues.
 
-Instructs the program on the case to be used in the output file
-(Clustalw uses upper case). The default keeps the case and makes it
-possible to maintain a mixture of upper and lower case residues.
 
-If you need to change the case of your file, you can use seq\_reformat:
+If you need to change the case of your file, you can use seq_reformat:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee â€“other\_pg seq\_reformat â€“in sample\_aln1.aln â€“action
-+lower â€“output clustalw
+  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +lower -output clustalw
 
-.. raw:: html
 
-   </div>
 
+----
 -cpu
+----
+  **Usage:  deprecated**
 
-Usage:Â  deprecated
-
+-------------
 -outseqweight
-
+-------------
 Usage: -outseqweight=<name of the file containing the weights applied>
+
 
 Default: -outseqweight=no
 
-Will cause the program to output the weights associated with every
-sequence in the dataset.
 
+Will cause the program to output the weights associated with every sequence in the dataset.
+
+
+--------------
 -outorder [cw]
+--------------
+  **Usage:  -outorder=<input OR aligned OR filename>**
 
-Usage:Â  -outorder=<input OR aligned OR filename>
+   *Default:-outorder=input*
 
-Default:-outorder=input
+   *Sets the order of the sequences in the output alignment: -outorder=input means the sequences are kept in the original order. -outorder=aligned means the sequences come in the order indicated by the tree. This order can be seen as a one-dimensional projection of the tree distances. -outdorder=<filename>Filename is a legal fasta file, whose order will be used in the final alignment.*
 
-Sets the order of the sequences in the output alignment:
-**-outorder=input** means the sequences are kept in the original order.
-**-outorder=aligned** means the sequences come in the order indicated by
-the tree. This order can be seen as a one-dimensional projection of the
-tree distances. **â€“outdorder=<filename>**\ Filename is a legal fasta
-file, whose order will be used in the final alignment.
-
+-------------
 -inorder [cw]
+-------------
+  **Usage:  -inorder=<input OR aligned>**
 
-Usage:Â  -inorder=<input OR aligned>
+   *Default:-inorder=aligned*
 
-Default:-inorder=aligned
+   *Multiple alignments based on dynamic programming depend slightly on the order in which the incoming sequences are provided. To prevent this effect sequences are arbitrarily sorted at the beginning of the program (-inorder=aligned). However, this affects the sequence order within the library. You can switch this off by ststing -inorder=input.*
 
-Multiple alignments based on dynamic programming depend slightly on the
-order in which the incoming sequences are provided. To prevent this
-effect sequences are arbitrarily sorted at the beginning of the program
-(-inorder=aligned). However, this affects the sequence order within the
-library. You can switch this off by ststing â€“inorder=input.
-
+-------
 -seqnos
+-------
+  **Usage:  -seqnos=<on or off>**
 
-Usage:Â  -seqnos=<on or off>
+   *Default:-seqnos=off*
 
-Default:-seqnos=off
+Causes the output alignment to contain residue numbers at the end of each line:
 
-Causes the output alignment to contain residue numbers at the end of
-each line:
 
-.. raw:: html
+::
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+  T-COFFEE
 
-T-COFFEE
+  seq1 aaa---aaaa--------aa 9
 
-seq1 aaa---aaaa--------aa 9
+  seq2 a-----aa-----------a 4
 
-seq2 a-----aa-----------a 4
+  seq1 a-----------------a 11
 
-Â 
+  seq2 aaaaaaaaaaaaaaaaaaa 19
 
-seq1 a-----------------a 11
 
-seq2 aaaaaaaaaaaaaaaaaaa 19
 
-.. raw:: html
+=========
+Libraries
+=========
+Although, it does not necessarily do so explicitly, T-Coffee always end up combining libraries. Libraries are collections of pairs of residues. Given a set of libraries, T-Coffee makes an attempt to assemble the alignment with the highest level of consistence. You can think of the alignment as a timetable. Each library pair would be a request from students or teachers, and the job of T-Coffee would be to assemble the time table that makes as many people as possible happy...
 
-   </div>
 
-.. rubric:: Libraries
+--------
+-out_lib
+--------
+Usage:  -out_lib=<name of the library,default,no>
 
-Although, it does not necessarily do so explicitly, T-Coffee always end
-up combining libraries. Libraries are collections of pairs of residues.
-Given a set of libraries, T-Coffee makes an attempt to assemble the
-alignment with the highest level of consistence. You can think of the
-alignment as a timetable. Each library pair would be a request from
-students or teachers, and the job of T-Coffee would be to assemble the
-time table that makes as many people as possible happyâ€¦
 
--out\_lib
+Default:-out_lib=default
 
-Usage:Â  -out\_lib=<name of the library,default,no>
 
-Default:-out\_lib=default
+   *Sets the name of the library output. Default implies <run_name>.tc_lib*
 
-Â 
+---------
+-lib_only
+---------
+  **Usage:  -lib_only**
 
-Sets the name of the library output. Default implies <run\_name>.tc\_lib
+   *Default: unset*
 
--lib\_only
+   *Causes the program to stop once the library has been computed. Must be used in conjunction with the flag -out_lib*
 
-Usage:Â  -lib\_only
-
-Default: unset
-
-Causes the program to stop once the library has been computed. Must be
-used in conjunction with the flag **â€“out\_lib**
-
-.. rubric:: Trees
-
+=====
+Trees
+=====
+--------
 -newtree
+--------
+  **Usage: -newtree=<tree file>**
 
-Usage: -newtree=<tree file>
+   *Default: No file specified*
 
-Default: No file specified
+   *Indicates the name of the file into which the guide tree will be written. The default will be <sequence_name>.dnd, or <run_name.dnd>. The tree is written in the parenthesis format known as newick or New Hampshire and used by Phylips (see the format section).*
 
-Indicates the name of the file into which the guide tree will be
-written. The default will be <sequence\_name>.dnd, or <run\_name.dnd>.
-The tree is written in the parenthesis format known as newick or New
-Hampshire and used by Phylips (see the format section).
+.. warning:: Do NOT confuse this guide tree with a phylogenetic tree.
 
-.. raw:: html
+**********************
+Reliability Estimation
+**********************
+================
+CORE Computation
+================
+The CORE is an index that indicates the consistency between the library of piarwise alignments and the final multiple alignment. Our experiment indicate that the higher this consistency, the more reliable the alignment. A publication describing the CORE index can be found on:
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:0cm 0cm 0cm 0cm;background:#F7CBB7">
 
-Do NOT confuse this guide tree with a phylogenetic tree.
+http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
-.. raw:: html
 
-   </div>
+--------------
+-evaluate_mode
+--------------
+  **Usage: -evaluate_mode=<t_coffee_fast,t_coffee_slow,t_coffee_non_extended >**
 
-.. rubric:: Reliability Estimation
+   *Default: -evaluate_mode=t_coffee_fast*
 
-.. rubric:: CORE Computation
+   *This flag indicates the mode used to normalize the t_coffee score when computing the reliability score.*
 
-The CORE is an index that indicates the consistency between the library
-of piarwise alignments and the final multiple alignment. Our experiment
-indicate that the higher this consistency, the more reliable the
-alignment. A publication describing the CORE index can be found on:
+   *t_coffee_fast: Normalization is made using the highest score in the MSA. This evaluation mode was validated and in our hands, pairs of residues with a score of 5 or higher have 90 % chances to be correctly aligned to one another.*
 
-\ `http://www.tcoffee.org/Publications/Pdf/core.pp.pdf <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`__\ 
+   *t_coffee_slow: Normalization is made using the library. This usually results in lower score and a scoring scheme more sensitive to the number of sequences in the dataset. Note that this scoring scheme is not any more slower, thanks to the implementation of a faster heuristic algorithm.*
 
--evaluate\_mode
+   *t_coffee_non_extended: the score of each residue is the ratio between the sum of its non extended scores with the column and the sum of all its possible non extended scores.*
 
-Usage:
--evaluate\_mode=<t\_coffee\_fast,t\_coffee\_slow,t\_coffee\_non\_extended
->
+   *These modes will be useful when generating colored version of the output, with the -output flag:*
 
-Default: -evaluate\_mode=t\_coffee\_fast
+::
 
-This flag indicates the mode used to normalize the t\_coffee score when
-computing the reliability score.
+  PROMPT: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_ascii, score_html
 
-*t\_coffee\_fast*: Normalization is made using the highest score in the
-MSA. This evaluation mode was validated and in our hands, pairs of
-residues with a score of 5 or higher have 90 % chances to be correctly
-aligned to one another.
+  PROMPT: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii, score_html
 
-*t\_coffee\_slow:* Normalization is made using the library. This usually
-results in lower score and a scoring scheme more sensitive to the number
-of sequences in the dataset. Note that this scoring scheme is not any
-more slower, thanks to the implementation of a faster heuristic
-algorithm.
+  PROMPT: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html
 
-*t\_coffee\_non\_extended:* the score of each residue is the ratio
-between the sum of its non extended scores with the column and the sum
-of all its possible non extended scores.
 
-These modes will be useful when generating colored version of the
-output, with the **â€“output** flag:
 
-.. raw:: html
+**************
+Generic Output
+**************
+====
+Misc
+====
+---------
+-run_name
+---------
+  **Usage: -run_name=<your run name>**
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+   *Default: no default set*
 
-PROMPT: t\_coffee sample\_seq1.fasta â€“evaluate\_mode t\_coffee\_slow
-â€“output score\_ascii, score\_html
+This flag causes the prefix <your sequences> to be replaced by <your run name> when renaming the default output files.
 
-PROMPT: t\_coffee sample\_seq1.fasta â€“evaluate\_mode t\_coffee\_fast
-â€“output score\_ascii, score\_html
 
-PROMPT: t\_coffee sample\_seq1.fasta â€“evaluate\_mode
-t\_coffee\_non\_extended â€“output score\_ascii, score\_html
-
-.. raw:: html
-
-   </div>
-
-.. rubric:: Generic Output
-
--run\_name
-
-Usage: -run\_name=<your run name>
-
-Default: no default set
-
-This flag causes the prefix <your sequences> to be replaced by <your run
-name> when renaming the default output files.
-
+------
 -quiet
+------
+  **Usage: -quiet=<stderr,stdout,file name OR nothing>.**
 
-Usage: -quiet=<stderr,stdout,file name OR nothing>.
+   *Default:-quiet=stderr*
 
-Default:-quiet=stderr
+   *Redirects the standard output to either a file. -quiet on its own redirect the output to /dev/null.*
 
-Redirects the standard output to either a file. **-quiet** on its own
-redirect the output to /dev/null.
-
+-----------
 -align [CW]
+-----------
+This flag indicates that the program must produce the alignment. It is here for compatibility with ClustalW.
 
-This flag indicates that the program must produce the alignment. It is
-here for compatibility with ClustalW.
 
-.. rubric:: APDB, iRMSD and tRMSD Parameters
+*******************
+Structural Analysis
+*******************
+================================
+APDB, iRMSD and tRMSD Parameters
+================================
+.. warning:: Warning: These flags will only work within the APDB package that can be invoked via the -other_pg parameter of T-Coffee:
 
-Â 
+.. warning::                         t_coffee -other_pg apdb -aln <your aln>
 
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.5pt;
-   padding:0cm 0cm 0cm 0cm;background:#F7CBB7">
-
-Warning: These flags will only work within the APDB package that can be
-invoked via the â€“other\_pg parameter of T-Coffee:
-
-Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  Â t\_coffee â€“other\_pg apdb â€“aln <your aln>
-
-Â 
-
-.. raw:: html
-
-   </div>
-
+-------------------------
 -quiet [Same as T-Coffee]
-
--run\_name [Same as T-Coffee]
-
+-------------------------
+----------------------------
+-run_name [Same as T-Coffee]
+----------------------------
+----
 -aln
+----
+  **Usage: -aln=<file_name>.**
 
-Usage: -aln=<file\_name>.
+   *Default:none*
 
-Default:none
+   *Indicates the name of the file containing the sequences that need to be evaluated. The sequences whose structure is meant to be used must be named according to their PDB identifier.*
 
-Indicates the name of the file containing the sequences that need to be
-evaluated. The sequences whose structure is meant to be used must be
-named according to their PDB identifier.
+   *The format can be FASTA, CLUSTAL or any of the formats supported by T-Coffee. APDB only evaluates residues in capital and ignores those in lower case. If your sequences are in lower case, you can upper case them using seq_reformat:*
 
-The format can be FASTA, CLUSTAL or any of the formats supported by
-T-Coffee. APDB only evaluates residues in capital and ignores those in
-lower case. If your sequences are in lower case, you can upper case them
-using seq\_reformat:
+::
 
-.. raw:: html
+  PROMPT: t_coffee -other_pg seq_reformat -in 3d_sample4.aln -action +upper -output clustalw > 3d_sample4.cw_aln
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee â€“other\_pg seq\_reformat â€“in 3d\_sample4.aln â€“action
-+upper â€“output clustalw > 3d\_sample4.cw\_aln
 
-.. raw:: html
+   *The alignment can then be evaluated using the defaultr of APDB:*
 
-   </div>
+::
 
-The alignment can then be evaluated using the defaultr of APDB:
+  PROMPT: t_coffee -other_pg apdb -aln 3d_sample4.aln
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
 
-PROMPT: t\_coffee â€“other\_pg apdb â€“aln 3d\_sample4.aln
+   *The alignment can contain as many structures as you wish.*
 
-.. raw:: html
+--------------
+-n_excluded_nb
+--------------
+  **Usage: -n_excluded_nb=<integer>.**
 
-   </div>
+   *Default:1*
 
-The alignment can contain as many structures as you wish.
+   *When evaluating the local score of a pair of aligned residues, the residues immediately next to that column should not contribute to the measure. By default the first to the left and first to the right are excluded.*
 
--n\_excluded\_nb
+-----------------
+-maximum_distance
+-----------------
+  **Usage: -maximum_distance=<float>.**
 
-Usage: -n\_excluded\_nb=<integer>.
+   *Default:10*
 
-Default:1
+   *Size of the neighborhood considered around every residue. If .-local_mode is set to sphere, -maximum_distance is the radius of a sphere centered around each residue. If -local_mode is set to window, then -maximum_distance is the size of the half window (i.e. window_size=-maximum_distance*2+1).*
 
-When evaluating the local score of a pair of aligned residues, the
-residues immediately next to that column should not contribute to the
-measure. By default the first to the left and first to the right are
-excluded.
+---------------------
+-similarity_threshold
+---------------------
+  **Usage: -similarity_threshold=<integer>.**
 
--maximum\_distance
+   *Default:70*
 
-Usage: -maximum\_distance=<float>.
+   *Fraction of the neighborhood that must be supportive for a pair of residue to be considered correct in APDB. The neighborhood is a sphere defined by -maximum_distance, and the support is defined by -md_threshold.*
 
-Default:10
+-----------
+-local_mode
+-----------
+  **Usage: -local_mode=<sphere,window>.**
 
-Size of the neighborhood considered around every residue. If
-.-local\_mode is set to sphere, -maximum\_distance is the radius of a
-sphere centered around each residue. If â€“local\_mode is set to window,
-then â€“maximum\_distance is the size of the half window (i.e.
-window\_size=-maximum\_distance\*2+1).
+   *Default:sphere*
 
--similarity\_threshold
+   *Defines the shape of a neighborhood, either as a sphere or as a window.*
 
-Usage: -similarity\_threshold=<integer>.
-
-Default:70
-
-Fraction of the neighborhood that must be supportive for a pair of
-residue to be considered correct in APDB. The neighborhood is a sphere
-defined by â€“maximum\_distance, and the support is defined by
-â€“md\_threshold.
-
--local\_mode
-
-Usage: -local\_mode=<sphere,window>.
-
-Default:sphere
-
-Defines the shape of a neighborhood, either as a sphere or as a window.
-
+-------
 -filter
+-------
+  **Usage: -filter=<0.00-1.00>.**
 
-Usage: -filter=<0.00-1.00>.
+   *Default:1.00*
 
-Default:1.00
+   *Defines the centiles that should be kept when making the local measure. Foir instance, -filter=0.90 means that the the 10 last centiles will be removed from the evaluation. The filtration is carried out on the iRMSD values.*
 
-Defines the centiles that should be kept when making the local measure.
-Foir instance, -filter=0.90 means that the the 10 last centiles will be
-removed from the evaluation. The filtration is carried out on the iRMSD
-values.
+--------------------------
+-print_rapdb [Unsupported]
+--------------------------
+  **Usage: -print_rapdb (FLAG)**
 
--print\_rapdb [Unsupported]
+   *Default:off*
 
-Usage: -print\_rapdb (FLAG)
+   *This causes the prints out of the exact neighborhood of every considered pair of residues.*
 
-Default:off
-
-This causes the prints out of the exact neighborhood of every considered
-pair of residues.
-
+---------------------------
 -outfile [Same as T-Coffee]
+---------------------------
+This flag is meant to control the output name of the colored APDB output. This file will either display the local APDB score or the local iRMD, depending on the value of -color_mode. The default format is defined by -ouptut and is score_html.
 
-This flag is meant to control the output name of the colored APDB
-output. This file will either display the local APDB score or the local
-iRMD, depending on the value of â€“color\_mode. The default format is
-defined by â€“ouptut and is score\_html.
 
--color\_mode
+-----------
+-color_mode
+-----------
+  **Usage: -color_mode=<apdb, irmsd>**
 
-Usage: -color\_mode=<apdb, irmsd>
+   *Default:apdb*
 
-Default:apdb
+This flag is meant to control the colored APDB output (local score). This file will either display the local APDB score or the local iRMD.
 
-This flag is meant to control the colored APDB output (local score).
-This file will either display the local APDB score or the local iRMD.
 
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
-
+#################
 Building a Server
+#################
+We maintain a T-Coffee server (www.tcoffee.org). We will be pleased to provide anyone who wants to set up a similar service with the sources
 
-.. raw:: html
 
-   </div>
+*********************
+Environment Variables
+*********************
+T-Coffee stores a lots of information in locations that may be unsuitable when running a server.
 
-We maintain a T-Coffee server (www.tcoffee.org). We will be pleased to
-provide anyone who wants to set up a similar service with the sources
 
-.. rubric:: Environment Variables
+By default, T-Coffee will generate and rely on the follwing directory structure:
 
-T-Coffee stores a lots of information in locations that may be
-unsuitable when running a server.
 
-By default, T-Coffee will generate and rely on the follwing directory
-structure:
+::
 
-/home/youraccount/Â Â Â Â Â Â Â Â Â  #HOME\_4\_TCOFFEE
+  /home/youraccount/          #HOME_4_TCOFFEE
 
-HOME\_4\_TCOFFEE/.t\_coffee/ Â  #DIR\_4\_TCOFFEE
+  HOME_4_TCOFFEE/.t_coffee/   #DIR_4_TCOFFEE
 
-DIR\_4\_TCOFFEE/cacheÂ Â Â Â Â Â Â Â  #CACHE\_4\_TCOFFEE
+  DIR_4_TCOFFEE/cache         #CACHE_4_TCOFFEE
 
-DIR\_4\_TCOFFEE/tmpÂ Â Â Â Â Â Â Â Â Â  #TMP\_4\_TCOFFEE
+  DIR_4_TCOFFEE/tmp           #TMP_4_TCOFFEE
 
-DIR\_4\_TCOFFEE/methodsÂ Â Â Â Â Â Â Â Â Â Â Â Â  #METHOS\_4\_TCOFFEE
+  DIR_4_TCOFFEE/methods              #METHOS_4_TCOFFEE
 
-DIR\_4\_TCOFFEE/mcoffeeÂ Â Â Â Â Â Â Â Â Â Â Â Â  #MCOFFEE\_4\_TCOFFEE
+  DIR_4_TCOFFEE/mcoffee              #MCOFFEE_4_TCOFFEE
 
-Â 
 
-By default, all these directories are automatically created, following
-the dependencies suggested here.
 
-The first step is the determination of the HOME. By default the program
-tries to use HOME\_4\_TCOFFEE, then the HOME variable and TMP or TEMP if
-HOME is not set on your system or your account. It is your
-responsibility to make sure that one of these variables is set to some
-valid location where the T-Coffee process is allowed to read and write.
+By default, all these directories are automatically created, following the dependencies suggested here.
 
-If no valid location can be found for HOME\_4\_TCOFFEE, the program
-exits. If you are running T-Coffee on a server, we recommend to hard set
-the following locations, where your scratch is a valid location.
 
-Â 
+The first step is the determination of the HOME. By default the program tries to use HOME_4_TCOFFEE, then the HOME variable and TMP or TEMP if HOME is not set on your system or your account. It is your responsibility to make sure that one of these variables is set to some valid location where the T-Coffee process is allowed to read and write.
 
-HOME\_4\_TCOFFEE=â€your scratchâ€
 
-TMP\_4\_TCOFFEE=â€your scratchâ€
+If no valid location can be found for HOME_4_TCOFFEE, the program exits. If you are running T-Coffee on a server, we recommend to hard set the following locations, where your scratch is a valid location.
 
-DIR\_4\_TCOFFEE=â€your scratchâ€
 
-CACHE\_4\_TCOFFEE=â€your scratchâ€
+::
 
-NO\_ERROR\_REPORT\_4\_TCOFFEE=1
+  HOME_4_TCOFFEE='your scratch'
 
-Note thatÂ  it is a good idea to have a cron job that cleans up this
-scratch area, once in a while.
+  TMP_4_TCOFFEE='your scratch'
 
-Â 
+  DIR_4_TCOFFEE='your scratch'
 
-.. rubric:: Output of the .dnd file.
+  CACHE_4_TCOFFEE='your scratch'
 
-A common source of error when running a server: T-Coffee MUST output the
-.dnd file because it re-reads it to carry out the progressive alignment.
-By default T-Coffee outputs this file in the directory where the process
-is running. If the T-Coffee process does not have permission to write in
-that directory, the computation will abort...
+  NO_ERROR_REPORT_4_TCOFFEE=1
+
+
+
+Note that  it is a good idea to have a cron job that cleans up this scratch area, once in a while.
+
+
+************************
+Output of the .dnd file.
+************************
+A common source of error when running a server: T-Coffee MUST output the .dnd file because it re-reads it to carry out the progressive alignment. By default T-Coffee outputs this file in the directory where the process is running. If the T-Coffee process does not have permission to write in that directory, the computation will abort...
+
 
 To avoid this, simply specify the name of the output tree:
 
-Â Â Â Â Â Â Â Â  -newtree=<writable file (usually in /tmp)>
 
-Chose the name so that two processes may not over-write each other dnd
-file.
+         -newtree=<writable file (usually in /tmp)>
 
-.. rubric:: Permissions
 
-The t\_coffee process MUST be allowed to write in some scratch area,
-even when it is ran by Mr nobody... Make sure the /tmp/ partition is not
-protected.
+Chose the name so that two processes may not over-write each other dnd file.
 
-.. rubric:: Other Programs
 
-T-Coffee may call various programs while it runs (lalign2list by
-defaults). Make sure your process knows where to find these executables.
+***********
+Permissions
+***********
+The t_coffee process MUST be allowed to write in some scratch area, even when it is ran by Mr nobody... Make sure the /tmp/ partition is not protected.
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
+**************
+Other Programs
+**************
+T-Coffee may call various programs while it runs (lalign2list by defaults). Make sure your process knows where to find these executables.
 
+
+#######
 Formats
+#######
+***************
+Parameter files
+***************
+Parameter files used with -parameters, -t_coffee_defaults, -dali_defaults... Must contain a valid parameter string where line breaks are allowed. These files cannot contain any comment, the recommended format is one parameter per line:
 
-.. raw:: html
 
-   </div>
+::
 
-.. rubric:: Parameter files
+        <parameter name>=<value1>,<value2>....
 
-Parameter files used with -parameters, -t\_coffee\_defaults,
--dali\_defaults... Must contain a valid parameter string where line
-breaks are allowed. These files cannot contain any comment, the
-recommended format is one parameter per line:
+        <parameter name>=.....
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
 
-Â Â Â Â Â  <parameter name>=<value1>,<value2>....
+**********************
+Sequence Name Handling
+**********************
+Sequence name handling is meant to be fully consistent with ClustalW (Version 1.75). This implies that in some cases the names of your sequences may be edited when coming out of the program. Five rules apply:
 
-Â Â Â Â Â  <parameter name>=.....
 
-.. raw:: html
+.. note:: Naming Your Sequences the Right Way
 
-   </div>
+::
 
-.. rubric:: Sequence Name Handling
+  1-No Space
+  Names that do contain spaces, for instance:
+              >seq1 human_myc
+  will be turned into
+              >seq1
+  It is your responsibility to make sure that the names you provide are not ambiguous after such an editing. This editing is consistent with Clustalw (Version 1.75)
+  2-No Strange Character
+  Some non alphabetical characters are replaced with underscores. These are: ';:()'
+  Other characters are legal and will be kept unchanged. This editing is meant to keep in line with Clustalw (Version 1.75).
+  3-> is NEVER legal (except as a header token in a FASTA file)
+  4-Name length must be below 100 characters, although 15 is recommended for compatibility with other programs.
+  5-Duplicated sequences will be renamed (i.e. sequences with the same name in the same dataset) are allowed but will be renamed according to their original order. When sequences come from multiple sources via the -in flag, consistency of the renaming is not guaranteed. You should avoid duplicated sequences as they will cause your input to differ from your output thus making it difficult to track data.
 
-Sequence name handling is meant to be fully consistent with ClustalW
-(Version 1.75). This implies that in some cases the names of your
-sequences may be edited when coming out of the program. Five rules
-apply:
 
-Â 
+****************************
+Automatic Format Recognition
+****************************
+Most common formats are automatically recognized by t_coffee. See -in and the next section for more details. If your format is not recognized, use readseq or clustalw to switch to another format. We recommend Fasta.
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 1.0pt 1.0pt 1.0pt">
+**********
+Structures
+**********
+PDB format is recognized by T-Coffee. T-Coffee uses extract_from_pdb (cf -other_pg flag). extract_from_pdb is a small embeded module that can be used on its own to extract information from pdb files.
 
-Naming Your Sequences the Right Way
 
-1-No Space
+**************
+RNA Structures
+**************
+RNA structures can either be coded as T-Coffee libraries, with each line indicating two paired residues, or as alifold output. The selex format is also partly supported (see the seq_reformat tutorial on RNA sequences handling).
 
-Names that do contain spaces, for instance:
 
-Â Â Â Â Â Â Â Â Â Â Â  >seq1 human\_myc
+*********
+Sequences
+*********
+Sequences can come in the following formats: fasta, pir, swiss-prot, clustal aln, msf aln and t_coffee aln. These formats are the one automatically recognized. Please replace the '*' sign sometimes used for stop codons with an X.
 
-will be turned into
 
-Â Â Â Â Â Â Â Â Â Â Â  >seq1
+**********
+Alignments
+**********
+Alignments can come in the following formats: msf, ClustalW, Fasta, Pir and t_coffee. The t_coffee format is very similar to the ClustalW format, but slightly more flexible. Any interleaved format with sequence name on each line will be correctly parsed:
 
-It is your responsibility to make sure that the names you provide are
-not ambiguous after such an editing. This editing is consistent with
-Clustalw (Version 1.75)
 
-Â 
+::
 
-2-No Strange Character
+  <empy line>       [Facultative]n
 
-Some non alphabetical characters are replaced with underscores. These
-are: ';:()'
+  <line of text>    [Required]
 
-Other characters are legal and will be kept unchanged. This editing is
-meant to keep in line with Clustalw (Version 1.75).
+  <line of text>               [Facultative]n
 
-Â 
+  <empty line>                 [Required]
 
-3-> is NEVER legal (except as a header token in a FASTA file)
+  <empty line>                 [Facultative]n
 
-Â 
+  <seq1 name><space><seq1>
 
-4-Name length must be below 100 characters, although 15 is recommended
-for compatibility with other programs.
+  <seq2 name><space><seq2>
 
-5-Duplicated sequences will be renamed (i.e. sequences with the same
-name in the same dataset) are allowed but will be renamed according to
-their original order. When sequences come from multiple sources via the
-â€“in flag, consistency of the renaming is not guaranteed. You should
-avoid duplicated sequences as they will cause your input to differ from
-your output thus making it difficult to track data.
+  <seq3 name><space><seq3>
 
-.. raw:: html
+  <empty line>                 [Required]
 
-   </div>
+  <empty line>                 [Facultative]n
 
-.. rubric:: Automatic Format Recognition
+  <seq1 name><space><seq1>
 
-Most common formats are automatically recognized by t\_coffee. See -in
-and the next section for more details. If your format is not recognized,
-use readseq or clustalw to switch to another format. We recommend Fasta.
+  <seq2 name><space><seq2>
 
-.. rubric:: Structures
+  <seq3 name><space><seq3>
 
-PDB format is recognized by T-Coffee. T-Coffee uses extract\_from\_pdb
-(cf â€“other\_pg flag). extract\_from\_pdb is a small embeded module that
-can be used on its own to extract information from pdb files.
+  <empty line>                 [Required]
 
-.. rubric:: RNA Structures
+  <empty line>                 [Facultative]n
 
-RNA structures can either be coded as T-Coffee libraries, with each line
-indicating two paired residues, or as alifold output. The selex format
-is also partly supported (see the seq\_reformat tutorial on RNA
-sequences handling).
 
-.. rubric:: Sequences
 
-Sequences can come in the following formats: fasta, pir, swiss-prot,
-clustal aln, msf aln and t\_coffee aln. These formats are the one
-automatically recognized. Please replace the '\*' sign sometimes used
-for stop codons with an X.
+An empty line is a line that does NOT contain amino-acid. A line that contains the ClustalW annotation (.:*) is empty.
 
-.. rubric:: Alignments
 
-Alignments can come in the following formats: msf, ClustalW, Fasta, Pir
-and t\_coffee. The t\_coffee format is very similar to the ClustalW
-format, but slightly more flexible. Any interleaved format with sequence
-name on each line will be correctly parsed:
+Spaces are forbidden in the name. When the alignment is being read, non character signs are ignored in the sequence field (such as numbers, annotation...).
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+.. note:: Note: a different number of lines in the different blocks will cause the program to crash or hang.
 
-<empy line> Â Â Â Â Â  [Facultative]n
-
-<line of text> Â Â  [Required]
-
-<line of text>Â Â Â Â Â Â Â Â Â Â Â Â Â Â  [Facultative]n
-
-<empty line>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  [Required]
-
-<empty line>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  [Facultative]n
-
-<seq1 name><space><seq1>
-
-<seq2 name><space><seq2>
-
-<seq3 name><space><seq3>
-
-<empty line>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  [Required]
-
-<empty line>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  [Facultative]n
-
-<seq1 name><space><seq1>
-
-<seq2 name><space><seq2>
-
-<seq3 name><space><seq3>
-
-<empty line>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  [Required]
-
-<empty line>Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â Â  [Facultative]n
-
-.. raw:: html
-
-   </div>
-
-An empty line is a line that does NOT contain amino-acid. A line that
-contains the ClustalW annotation (.:\*) is empty.
-
-Spaces are forbidden in the name. When the alignment is being read, non
-character signs are ignored in the sequence field (such as numbers,
-annotationâ€¦).
-
-Note: a different number of lines in the different blocks will cause the
-program to crash or hang.
-
-.. rubric:: Libraries
-
-.. rubric:: T-COFFEE\_LIB\_FORMAT\_01
-
+*********
+Libraries
+*********
+======================
+T-COFFEE_LIB_FORMAT_01
+======================
 This is currently the only supported format.
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+::
 
-!<space> TC\_LIB\_FORMAT\_01
+  !<space> TC_LIB_FORMAT_01
 
-<nseq>
+  <nseq>
 
-<seq1 name> <seq1 length> <seq1>
+  <seq1 name> <seq1 length> <seq1>
 
-<seq2 name> <seq2 length> <seq2>
+  <seq2 name> <seq2 length> <seq2>
 
-<seq3 name> <seq3 length> <seq3>
+  <seq3 name> <seq3 length> <seq3>
 
-!Comment
+  !Comment
 
-(!Comment)n
+  (!Comment)n
 
-#Si1 Si2
+  #Si1 Si2
 
-Ri1 Ri2 V1 (V2, V3)
+  Ri1 Ri2 V1 (V2, V3)
 
-#1 2
+  #1 2
 
-12 13 99 (12/0 vs 13/1, weight 99)
+  12 13 99 (12/0 vs 13/1, weight 99)
 
-12 14 70
+  12 14 70
 
-15 16 56
+  15 16 56
 
-#1 3
+  #1 3
 
-12 13 99
+  12 13 99
 
-12 14 70
+  12 14 70
 
-15 16 56
+  15 16 56
 
-!<space>SEQ\_1\_TO\_N
+  !<space>SEQ_1_TO_N
 
-.. raw:: html
 
-   </div>
 
 Si1: index of Sequence 1
 
+
 Ri1: index of residue 1 in seq1
+
 
 V1: Integer Value: Weight
 
+
 V2, V3: optional values
 
-Note 1: There is a space between the ! And SEQ\_1\_TO\_N
 
-Note 2: The last line (! SEQ\_1\_TO\_N) indicates that:
+.. note:: Note 1: There is a space between the ! And SEQ_1_TO_N
 
-Sequences and residues are numbered from 1 to N, unless the token
-SEQ\_1\_TO\_N is omitted, in which case the sequences are numbered from
-0 to N-1, and residues are from 1 to N.
+.. note:: Note 2: The last line (! SEQ_1_TO_N) indicates that:
 
-Residues do not need to be sorted, and neither do the sequences. The
-same pair can appear several times in the library. For instance, the
-following file would be legal:
+Sequences and residues are numbered from 1 to N, unless the token SEQ_1_TO_N is omitted, in which case the sequences are numbered from 0 to N-1, and residues are from 1 to N.
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+Residues do not need to be sorted, and neither do the sequences. The same pair can appear several times in the library. For instance, the following file would be legal:
 
-#1 2
 
-12 13 99
+::
 
-#1 2
+  #1 2
 
-15 16 99
+  12 13 99
 
-#1 1
+  #1 2
 
-12 14 70
+  15 16 99
 
-.. raw:: html
+  #1 1
 
-   </div>
+  12 14 70
 
-It is also poosible to declare ranges of resdues rather than single
-pairs. For instance, the following:
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+It is also poosible to declare ranges of resdues rather than single pairs. For instance, the following:
 
-#0 1
 
-+BLOCK+Â  10 12 14 99
+::
 
-+BLOCK+Â  15 30 40 99
+  #0 1
 
-#0 2
+  +BLOCK+  10 12 14 99
 
-15 16 99
+  +BLOCK+  15 30 40 99
 
-#0 1
+  #0 2
 
-12 14 70
+  15 16 99
 
-.. raw:: html
+  #0 1
 
-   </div>
+  12 14 70
 
-The first statement BLOCK declares a BLOCK of length 10, that starts on
-position 12 of sequence 1 and position 14 of sequence 2 and where each
-pair of residues within the block has a score of 99. The second BLOCK
-starts on residue 30 of 1, residue 40 of 2 and extends for 15 residues.
 
-Blocks can overalp and be incompatible with one another, just like
-single constraints.
 
-Â 
+The first statement BLOCK declares a BLOCK of length 10, that starts on position 12 of sequence 1 and position 14 of sequence 2 and where each pair of residues within the block has a score of 99. The second BLOCK starts on residue 30 of 1, residue 40 of 2 and extends for 15 residues.
 
-.. rubric:: T-COFFEE\_LIB\_FORMAT\_02
 
-A simpler format is being developed, however it is not yet fully
-supported and is only mentioned here for development purpose.
+Blocks can overalp and be incompatible with one another, just like single constraints.
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+ 
 
-! TC\_LIB\_FORMAT\_02
 
-#S1 SEQ1 [OPTIONAL]
+======================
+T-COFFEE_LIB_FORMAT_02
+======================
+A simpler format is being developed, however it is not yet fully supported and is only mentioned here for development purpose.
 
-#S2 SEQ2 [OPTIONAL]
 
-...
+::
 
-!comment [OPTIONAL]
+  ! TC_LIB_FORMAT_02
 
-S1 R1 Ri1 S2 R2 Ri2 V1 (V2 V3)
+  #S1 SEQ1 [OPTIONAL]
 
-=> N R1 Ri1 S2 R2 Ri2 V1 (V2 V3)
+  #S2 SEQ2 [OPTIONAL]
 
-...
+  ...
 
-.. raw:: html
+  !comment [OPTIONAL]
 
-   </div>
+  S1 R1 Ri1 S2 R2 Ri2 V1 (V2 V3)
+
+  => N R1 Ri1 S2 R2 Ri2 V1 (V2 V3)
+
+  ...
+
+
 
 S1, S2: name of sequence 1 and 2
 
+
 SEQ1: sequence of S1
+
 
 Ri1, Ri2: index of the residues in their respective sequence
 
+
 R1, R2: Residue type
+
 
 V1, V2, V3: integer Values (V2 and V3 are optional)
 
+
 Value1, Value 2 and Value3 are optional.
 
-.. rubric:: Library List
 
-These are lists of pairs of sequences that must be used to compute a
-library. The format is:
+************
+Library List
+************
+These are lists of pairs of sequences that must be used to compute a library. The format is:
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+::
 
-<nseq> <S1> <S2>
+  <nseq> <S1> <S2>
 
-2 hamg2 globav
+  2 hamg2 globav
 
-3 hamgw hemog singa
+  3 hamgw hemog singa
 
-...
+  ...
 
-.. raw:: html
 
-   </div>
 
-.. rubric:: Substitution matrices.
+**********************
+Substitution matrices.
+**********************
+If the required substitution matrix is not available, write your own in a file using the following format:
 
-If the required substitution matrix is not available, write your own in
-a file using the following format:
 
-.. rubric:: ClustalW Style [Deprecated]
+===========================
+ClustalW Style [Deprecated]
+===========================
+::
 
-.. raw:: html
+  # CLUSTALW_MATRIX FORMAT
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+  $
 
-# CLUSTALW\_MATRIX FORMAT
+  v1
 
-$
+  v2 v3
 
-v1
+  v4 v5 v6
 
-v2 v3
+  ...
 
-v4 v5 v6
+  $
 
-...
 
-$
-
-.. raw:: html
-
-   </div>
 
 v1, v2... are integers, possibly negatives.
 
-The order of the amino acids is: ABCDEFGHIKLMNQRSTVWXYZ, which means
-that v1 is the substitution value for A vs A, v2 for A vs B, v3 for B vs
-B, v4 for A vs C and so on.
 
-.. rubric:: BLAST Format [Recommended]
+The order of the amino acids is: ABCDEFGHIKLMNQRSTVWXYZ, which means that v1 is the substitution value for A vs A, v2 for A vs B, v3 for B vs B, v4 for A vs C and so on.
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+==========================
+BLAST Format [Recommended]
+==========================
+::
 
-# BLAST\_MATRIX FORMAT
+  # BLAST_MATRIX FORMAT
 
-# ALPHABET=AGCT
+  # ALPHABET=AGCT
 
-Â A G C T
+   A G C T
 
-A 0 1 2 3
+  A 0 1 2 3
 
-G 0 2 3 4
+  G 0 2 3 4
 
-C 1 1 2 3
+  C 1 1 2 3
 
-...
+  ...
 
-.. raw:: html
 
-   </div>
 
 The alphabet can be freely defined
 
-.. rubric:: Sequences Weights
 
-Create your own weight file, using the -seq\_weight flag:
+*****************
+Sequences Weights
+*****************
+Create your own weight file, using the -seq_weight flag:
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 1.0pt;
-   mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt;
-   background:#E6E6E6">
+::
 
-# SINGLE\_SEQ\_WEIGHT\_FORMAT\_01
+  # SINGLE_SEQ_WEIGHT_FORMAT_01
 
-seq\_name1 v1
+  seq_name1 v1
 
-seq\_name2 v2
+  seq_name2 v2
 
-...
+  ...
 
-.. raw:: html
 
-   </div>
 
-No duplicate allowed. Sequences not included in the set of sequences
-provided to t\_coffee will be ignored. Order is free. V1 is a float.
-Un-weighted sequences will see their weight set to 1.
+No duplicate allowed. Sequences not included in the set of sequences provided to t_coffee will be ignored. Order is free. V1 is a float. Un-weighted sequences will see their weight set to 1.
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
-
+##############
 Known Problems
+##############
+1-Sensitivity to sequence order: It is difficult to implement a MSA algorithm totally insensitive to the order of input of the sequences. In t_coffee, robustness is increased by sorting the sequences alphabetically before aligning them. Beware that this can result in confusing output where sequences with similar name are unexpectedly close to one another in the final alignment.
 
-.. raw:: html
 
-   </div>
+2-Nucleotides sequences with long stretches of Ns will cause problems to lalign, especially when using Mocca. To avoid any problem, filter out these nucleotides before running mocca.
 
-1-Sensitivity to sequence order: It is difficult to implement a MSA
-algorithm totally insensitive to the order of input of the sequences. In
-t\_coffee, robustness is increased by sorting the sequences
-alphabetically before aligning them. Beware that this can result in
-confusing output where sequences with similar name are unexpectedly
-close to one another in the final alignment.
 
-2-Nucleotides sequences with long stretches of Ns will cause problems to
-lalign, especially when using Mocca. To avoid any problem, filter out
-these nucleotides before running mocca.
+3-Stop codons are sometimes coded with '*' in protein sequences. This will cause the program to crash or hang. Please replace the '*' signs with an X.
 
-3-Stop codons are sometimes coded with '\*' in protein sequences. This
-will cause the program to crash or hang. Please replace the '\*' signs
-with an X.
 
-4-Results can differ from one architecture to another, due rounding
-differences. This is caused by the tree estimation procedcure. If you
-want to make sure an alignment is reproducible, you should keep the
-associated dendrogram.
+4-Results can differ from one architecture to another, due rounding differences. This is caused by the tree estimation procedcure. If you want to make sure an alignment is reproducible, you should keep the associated dendrogram.
+
 
 5-Deploying the program on a
 
-.. raw:: html
 
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
-
+###############
 Technical Notes
-
-.. raw:: html
-
-   </div>
-
+###############
 These notes are only meant for internal development.
 
-.. rubric:: Development
 
-The following examples are only meant for internal development, and are
-used to insure stability from release to release
+***********
+Development
+***********
+The following examples are only meant for internal development, and are used to insure stability from release to release
 
-.. rubric:: profile2list
 
+------------
+profile2list
+------------
 prf1: profile containing one structure
+
 
 prf2: profile containing one structure
 
-Â 
 
-.. raw:: html
+::
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+  PROMPT: t_coffee  Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln
 
-PROMPT: t\_coffeeÂ  Rsample\_profile1.aln,Rsample\_profile2.aln
--mode=3dcoffee -outfile=aligned\_prf.aln
 
-Â 
 
-.. raw:: html
+=================
+Command Line List
+=================
+These command lines have been checked before every release (along with the other CL in this documentation:
 
-   </div>
-
-.. rubric:: Command Line List
-
-These command lines have been checked before every release (along with
-the other CL in this documentation:
-
-Â 
 
 -external methods;
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-Â Â  PROMPT: t\_coffee sample\_seq1.fasta
-â€“in=Mclustalw\_pair,Mclustalw\_msa,Mslow\_pair â€“outfile=clustal\_text
+  PROMPT: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text
 
-.. raw:: html
 
-   </div>
 
--fugue\_client
+-fugue_client
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee â€“in Ssample\_seq5.fasta Pstruc4.pdb Mfugue\_pair
+  PROMPT: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair
 
-.. raw:: html
 
-   </div>
 
--A list of command lines kindly provided by James Watson (used to crash
-the pg before version 3.40)
+-A list of command lines kindly provided by James Watson (used to crash the pg before version 3.40)
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee -in Sseq.fas P2PTC Mfugue\_pair
+  PROMPT: t_coffee -in Sseq.fas P2PTC Mfugue_pair
 
-PROMPT: t\_coffee -in S2seqs.fas Mfugue\_pair -template\_file SELF\_P\_
+  PROMPT: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_
 
-PROMPT: t\_coffee -mode 3dcoffee -in Sseq.fas P2PTC
+  PROMPT: t_coffee -mode 3dcoffee -in Sseq.fas P2PTC
 
-PROMPT: t\_coffee -mode 3dcoffee -in S2seqs.fas -template\_file
-SELF\_P\_
+  PROMPT: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_
 
-.. raw:: html
 
-   </div>
 
 -A list of command lines that crashed the program before 3.81
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee sample\_seq6.fasta â€“in Mfast\_pair Msap\_pair
-Mfugue\_pair â€“template\_file template\_file6.template
+  PROMPT: t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_file template_file6.template
 
-.. raw:: html
 
-   </div>
 
-Â Â Â Â Â Â Â Â Â Â Â  -A command line to read â€œrelaxedâ€ pdb files...
+            -A command line to read 'relaxed' pdb files...
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee â€“in Msap\_pair Ssample\_seq7.fasta â€“template\_file
-template\_file7.template â€“weight 1001 â€“out\_lib test\_lib7.tc\_lib
-â€“lib\_only
+  PROMPT: t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.template -weight 1001 -out_lib test_lib7.tc_lib -lib_only
 
-.. raw:: html
 
-   </div>
 
-Â Â Â Â Â Â Â Â Â Â Â  -Parsing of MARNA libraries
+            -Parsing of MARNA libraries
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee â€“in Lmarna.tc\_lib â€“outfile maran.test
+  PROMPT: t_coffee -in Lmarna.tc_lib -outfile maran.test
 
-.. raw:: html
 
-   </div>
 
-Â Â Â Â Â Â Â Â Â Â Â  -Parsing of long sequence lines:
+            -Parsing of long sequence lines:
 
-.. raw:: html
 
-   <div style="mso-element:para-border-div;border-top:solid black 1.0pt;
-   border-left:none;border-bottom:solid black 1.0pt;border-right:none;mso-border-top-alt:
-   solid black .25pt;mso-border-bottom-alt:solid black .25pt;padding:10.0pt 0cm 10.0pt 0cm;
-   background:#FFFFCC;margin-left:2.0cm;margin-right:0cm">
+::
 
-PROMPT: t\_coffee â€“in Asample\_aln5.aln â€“outfile test.aln
+  PROMPT: t_coffee -in Asample_aln5.aln -outfile test.aln
 
-.. raw:: html
 
-   </div>
 
-Â 
-
-.. raw:: html
-
-   <div
-   style="mso-element:para-border-div;border:solid windowtext 3.0pt;
-   padding:1.0pt 4.0pt 1.0pt 4.0pt;background:#CCCCCC;margin-left:0cm;margin-right:
-   4.25pt">
-
-To Doâ€¦
-
-.. raw:: html
-
-   </div>
-
+########
+To Do...
+########
 -implement UPGMA tree computation
 
--implement seq2dpa\_tree
+
+-implement seq2dpa_tree
+
 
 -debug dpa
 
+
 -Reconciliate sequences and template when reading the template
+
 
 -Add the server command lines to the checking procedure
 
-Â 
 
-Â 
-
-Â 
-
-Â 
-
-Â 
-
-.. raw:: html
-
-   </div>

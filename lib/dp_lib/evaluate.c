@@ -1917,7 +1917,7 @@ Alignment *coffee_seq_evaluate_output ( Alignment *IN, Constraint_list *CL)
   
   for (a=0; a<ncycle && CL->ne>min_ne; a++)
     {
-      if (w);free_int (w, -1);
+      free_int (w, -1);
       w=list2residue_total_weight (CL);
       PS=dnaseq2geneseq (S, w);
       nsd=(float)(genepred2sd(PS)/genepred2avg(PS));
@@ -2064,7 +2064,7 @@ Alignment *coffee_seq_evaluate_output_old2 ( Alignment *IN, Constraint_list *CL)
   
   for (a=1; a<ncycle && CL->ne>0; a++)
     {
-      if (w);free_int (w, -1);
+      free_int (w, -1);
       w=list2residue_total_weight (CL);
       CL=relax_constraint_list_4gp (CL);
       fprintf (stderr,"\nRELAX CYCLE: %2d AVG: %5d [%10d] ", a, avg=constraint_list2avg(CL), CL->ne);
