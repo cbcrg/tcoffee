@@ -11,10 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   installation
-   quickstart
-   manual
-   formats
+   t_coffee_technical
+   t_coffee_tutorial
    TCS
    3DTREE
    problems
