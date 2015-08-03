@@ -38,15 +38,13 @@ Addresses and Contacts
 Contributors
 ************
 T-coffee is developed, maintained, monitored, used and debugged by a dedicated team that include or have included:
-
-
-            Cédric Notredame, Paolo di Tomasso, Jean-François Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan. Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm
+Cédric Notredame, Paolo di Tommaso, MAria Chatzou, Jean-François Taly, Cedrik Magis, Ionas Erb, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan. Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm
 
 
 *********
 Addresses
 *********
-We are always very eager to get some user feedback. Please do not hesitate to drop us a line  at: cedric.notredame@europe.com The latest updates of T-Coffee are always available  on: www.tcoffee.org . On this address you will also find a link to some of the online T-Coffee servers, including Tcoffee@igs
+We are always very eager to get some user feedback. Please do not hesitate to drop us a line  at: cedric.notredame@gmail.com The latest updates of T-Coffee are always available  on: www.tcoffee.org . On this address you will also find a link to some of the online T-Coffee servers.
 
 
 T-Coffee can be used to automatically check if an updated version is available, however the program will not update automatically, as this can cause endless reproducibility problems.
@@ -66,14 +64,7 @@ It is important that you cite T-Coffee when you use it. Citing us is (almost) li
 
 Cite the server if you used it, otherwise, cite the original paper from 2000 (No, it was never named 'T-Coffee 2000').
 
-
-Notredame   C, Higgins DG, Heringa J.
-
-
-Related Articles,                                                                                                          Links
-
-
-T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]
+Notredame, C., D.G. Higgins, and J. Heringa, T-Coffee: A novel method for fast and accurate multiple sequence alignment. J Mol Biol, 2000. 302(1): p. 205-17.
 
 
 Other useful publications include:
@@ -82,85 +73,35 @@ Other useful publications include:
 ********
 T-Coffee
 ********
-Claude   JB, Suhre K, Notredame C, Claverie JM, Abergel C.
-
-
-Related Articles,                       Links
-
-
-CaspR: a web server for automated molecular   replacement using homology modelling.   Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W606-9.    PMID: 15215460 [PubMed - indexed for MEDLINE]
-
-
-Poirot   O, Suhre K, Abergel C, O'Toole E, Notredame C.
-
-
-Related Articles,            Links
-
-
-3DCoffee@igs: a web server for combining sequences   and structures into a multiple sequence alignment.   Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W37-40.    PMID: 15215345 [PubMed - indexed for MEDLINE]
-
-
-O'Sullivan   O, Suhre K, Abergel C, Higgins DG, Notredame C.
-
-
-Related Articles,            Links
-
-
-3DCoffee: combining protein sequences and   structures within multiple sequence alignments.   J Mol Biol. 2004 Jul 2;340(2):385-95.    PMID: 15201059 [PubMed - indexed for MEDLINE]
-
-
-Poirot   O, O'Toole E, Notredame C.
-
-
-Related Articles,            Links
-
-
-Tcoffee@igs: A web server for computing,   evaluating and combining multiple sequence alignments.   Nucleic Acids Res. 2003 Jul 1;31(13):3503-6.    PMID: 12824354 [PubMed - indexed for MEDLINE]
-
-
-Notredame   C.
-
-
-Related Articles,            Links
-
-
-Mocca: semi-automatic method for domain hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]
-
-
-Notredame   C, Higgins DG, Heringa J.
-
-
-Related Articles,            Links
-
-
-T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]
-
-
-Notredame   C, Holm L, Higgins DG.
-
-
-Related Articles,            Links
-
-
-COFFEE: an objective function for multiple   sequence alignments.   Bioinformatics. 1998 Jun;14(5):407-22.    PMID: 9682054 [PubMed - indexed for MEDLINE]
-
+Notredame, C., L. Holm, and D.G. Higgins, COFFEE: an objective function for multiple sequence alignments. Bioinformatics, 1998. 14(5): p. 407-22.
+Notredame, C., D.G. Higgins, and J. Heringa, T-Coffee: A novel method for fast and accurate multiple sequence alignment. J Mol Biol, 2000. 302(1): p. 205-17.
+Poirot, O., E. O'Toole, and C. Notredame, Tcoffee@igs: a web server for computing, evaluating and combining multiple sequence alignments. Nucleic Acids Res, 2003. 31(13): p. 3503-6.
+Claude, J.B., et al., CaspR: a web server for automated molecular replacement using homology modelling. Nucleic Acids Res, 2004. 32(Web Server issue): p. W606-9.
+O'Sullivan, O., et al., 3DCoffee: combining protein sequences and structures within multiple sequence alignments. J Mol Biol, 2004. 340(2): p. 385-95.
+Poirot, O., et al., 3DCoffee@igs: a web server for combining sequences and structures into a multiple sequence alignment. Nucleic Acids Res, 2004. 32(Web Server issue): p. W37-40.
+Armougom, F., et al., Expresso: automatic incorporation of structural information in multiple sequence alignments using 3D-Coffee. Nucleic Acids Res, 2006. 34(Web Server issue): p. W604-8.
+Wallace, I.M., et al., M-Coffee: combining multiple sequence alignment methods with T-Coffee. Nucleic Acids Res, 2006. 34(6): p. 1692-9.
+Moretti, S., et al., The M-Coffee web server: a meta-method for computing multiple sequence alignments by combining alternative alignment methods. Nucleic Acids Res, 2007. 35(Web Server issue): p. W645-8.
+Moretti, S., et al., R-Coffee: a web server for accurately aligning noncoding RNA sequences. Nucleic Acids Res, 2008. 36(Web Server issue): p. W10-3.
+Wilm, A., D.G. Higgins, and C. Notredame, R-Coffee: a method for multiple alignment of non-coding RNA. Nucleic Acids Res, 2008. 36(9): p. e52.
+Di Tommaso, P., et al., Cloud-Coffee: implementation of a parallel consistency-based multiple alignment algorithm in the T-Coffee package and its benchmarking on the Amazon Elastic-Cloud. Bioinformatics, 2010. 26(15): p. 1903-4.
+Di Tommaso, P., et al., T-Coffee: a web server for the multiple sequence alignment of protein and RNA sequences using structural information and homology extension. Nucleic Acids Res, 2011. 39(Web Server issue): p. W13-7.
+Di Tommaso, P., et al., SARA-Coffee web server, a tool for the computation of RNA sequence and structure multiple alignments. Nucleic Acids Res, 2014. 42(Web Server issue): p. W356-60.
+Magis, C., et al., T-Coffee: Tree-based consistency objective function for alignment evaluation. Methods Mol Biol, 2014. 1079: p. 117-29.
 
 *****
 Mocca
 *****
 Notredame C.
 
-
-Related Articles,            Links
-
-
-Mocca: semi-automatic method for domain   hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]
+Mocca: semi-automatic method for domain   hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 
 
 
 ****
 CORE
 ****
 http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
+Chang, J.M., P. Tommaso, and C. Notredame, TCS: A new multiple sequence alignment reliability measure to estimate alignment accuracy and improve phylogenetic tree reconstruction. Molecular biology and evolution, 2014.
 
 
 *******************
@@ -3953,7 +3894,7 @@ Alignments can come in the following formats: msf, ClustalW, Fasta, Pir and t_co
 
 
 
-An empty line is a line that does NOT contain amino-acid. A line that contains the ClustalW annotation (.:*) is empty.
+An empty line is a line that does NOT contain amino-acid. A line that contains the ClustalW annotation (.:\*) is empty.
 
 
 Spaces are forbidden in the name. When the alignment is being read, non character signs are ignored in the sequence field (such as numbers, annotation...).
@@ -4248,9 +4189,10 @@ Development
 The following examples are only meant for internal development, and are used to insure stability from release to release
 
 
-------------
+============
 profile2list
-------------
+============
+
 prf1: profile containing one structure
 
 
