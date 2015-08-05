@@ -94,6 +94,7 @@ int residue_pair_relative_extended_list ( Constraint_list *CL, int s1, int r1, i
 /*                                                                                           */
 /*********************************************************************************************/
 int get_dp_cost_blosum_matrix (Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL);
+int get_dp_cost_sankoff_tree  (Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL);
 int get_dp_cost_pam_matrix (Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL);
 int get_dp_cost_pw_matrix (Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL);
 

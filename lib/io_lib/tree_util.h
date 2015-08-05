@@ -124,7 +124,7 @@ NT_node index_tree_node    (NT_node T);
 NT_node simple_recode_tree (NT_node T, int nseq);
 NT_node recode_tree ( NT_node T, Sequence *S);
 int compare_branch2 ( int *b1, int *b2, int n);
-
+NT_node find_node_in_tree (int *key, int nseq, NT_node T);
 /*********************************************************************/
 /*                                                                   */
 /*                                   FJ_tree Computation             */

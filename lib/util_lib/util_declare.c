@@ -961,7 +961,7 @@ Alignment* copy_aln ( Alignment *A, Alignment *B)
 	    /*Deal with Trees*/
 	    //if (A->Tree)
 	    //B->Tree=copy_aln (A->Tree, NULL);
-	    
+	    if (A->tname){B->tname=(char*)vcalloc (strlen (A->tname)+1, sizeof (char)); sprintf (B->tname, "%s", A->tname);}
 	    return B;
 	}
 
@@ -1279,7 +1279,7 @@ Sequence* free_Alignment ( Alignment *LA)
 	  if ( LA->A){free_Alignment (LA->A);LA->A=NULL;}
 	  if ( LA->Tree){free_Alignment (LA->Tree);LA->Tree=NULL;}
 	  if ( LA->RepColList)free_int (LA->RepColList, -1);
-
+	  if (LA->tname)vfree (LA->tname);
 	  vfree ( LA);
 	  return S;
 	}

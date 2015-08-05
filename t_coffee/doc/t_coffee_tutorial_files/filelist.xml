@@ -1,5 +1,6 @@
 <xml xmlns:o="urn:schemas-microsoft-com:office:office">
  <o:MainFile HRef="::t_coffee_tutorial.htm"/>
+ <o:File HRef="themedata.xml"/>
  <o:File HRef="image001.png"/>
  <o:File HRef="image002.gif"/>
  <o:File HRef="image003.png"/>

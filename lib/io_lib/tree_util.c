@@ -3733,6 +3733,26 @@ NT_node simple_recode_tree (NT_node T, int nseq)
     }
   return T;
 }
+NT_node find_node_in_tree (int *key, int nseq, NT_node T)
+{
+  if (!T || !key || !nseq)return NULL;
+  else
+    {
+      int yes,a;
+      NT_node C;
+
+      for (yes=1,a=0; a<nseq; a++)
+	{
+	  if      ( key[a]&& !T->lseq2[a])return NULL;
+	  else if (!key[a]&&  T->lseq2[a])yes=0;
+	}
+      if (yes) return T;
+      else if ((C=find_node_in_tree(key, nseq, T->right)))return C;
+      else if ((C=find_node_in_tree(key, nseq, T->left )))return C;
+      else return NULL;
+    }
+  return NULL;
+}
 
 NT_node recode_tree (NT_node T, Sequence *S)
 {
@@ -4650,7 +4670,7 @@ Split** count_splits( NT_node RT,Sequence *LIST, char *param)
 
 
   if (!param)param=def_param;
-
+  
 
   strget_param (param, "_NB_", "0", "%d", &nb);
   strget_param (param, "_TLIST_", "0", "%d", &tlist);

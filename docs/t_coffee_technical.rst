@@ -4,24 +4,21 @@ T-Coffee: Technical Documentation
 ############################################################################################################################################################################
 T-Coffee Technical Documentation (Version 8.96, July 2010) www.tcoffee.org  T-Coffee, seq_reformat  PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD
 ############################################################################################################################################################################
-########################
+************************
 License and Terms of Use
-########################
-****************************************************
+************************
 T-Coffee is distributed under the Gnu Public License
-****************************************************
+====================================================
 Please make sure you have agreed with the terms of the license attached to the package before using the T-Coffee package or its documentation. T-Coffee is a freeware open source distributed under a GPL license. This means that there are very little restrictions to its use, either in an academic or a non academic environment.
 
 
-***********************************
 T-Coffee code can be re-used freely
-***********************************
+===================================
 Our philosophy is that code is meant to be re-used, including ours. No permission is needed for the cut and paste of a few functions, although we are always happy to receive pieces of improved code.
 
 
-*******************************************************************
 T-Coffee can be incorporated in most pipelines: Plug-in/Plug-out...
-*******************************************************************
+===================================================================
 Our philosophy is to insure that as many methods as possible can be used as plug-ins within T-Coffee. Likewise, we will give as much support as possible to anyone wishing to turn T-Coffee into a plug-in for another method. For more details on how to do this, see the plug-in and the plug-out sections of the Tutorial Manual.
 
 
@@ -31,20 +28,20 @@ Again, you do not need our permission to either use T-Coffee (or your method as 
 The current license only allows for the incorporation of T-Coffee in non-commercial pipelines (i.e. where you do not sell the pipeline, or access to it). If your pipeline is commercial, please get in touch with us.
 
 
-######################
+**********************
 Addresses and Contacts
-######################
-************
+**********************
 Contributors
-************
+============
 T-coffee is developed, maintained, monitored, used and debugged by a dedicated team that include or have included:
-Cédric Notredame, Paolo di Tommaso, MAria Chatzou, Jean-François Taly, Cedrik Magis, Ionas Erb, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan. Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm
 
 
-*********
+            Cédric Notredame, Paolo di Tomasso, Jean-François Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan. Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm
+
+
 Addresses
-*********
-We are always very eager to get some user feedback. Please do not hesitate to drop us a line  at: cedric.notredame@gmail.com The latest updates of T-Coffee are always available  on: www.tcoffee.org . On this address you will also find a link to some of the online T-Coffee servers.
+=========
+We are always very eager to get some user feedback. Please do not hesitate to drop us a line  at: cedric.notredame@europe.com The latest updates of T-Coffee are always available  on: www.tcoffee.org . On this address you will also find a link to some of the online T-Coffee servers, including Tcoffee@igs
 
 
 T-Coffee can be used to automatically check if an updated version is available, however the program will not update automatically, as this can cause endless reproducibility problems.
@@ -56,57 +53,83 @@ T-Coffee can be used to automatically check if an updated version is available, 
 
 
 
-#########
+*********
 Citations
-#########
+*********
 It is important that you cite T-Coffee when you use it. Citing us is (almost) like giving us money: it helps us convincing our institutions that what we do is useful and that they should keep paying our salaries and deliver Donuts to our offices from time to time (Not that they ever did it, but it would be nice anyway).
 
 
 Cite the server if you used it, otherwise, cite the original paper from 2000 (No, it was never named 'T-Coffee 2000').
 
-Notredame, C., D.G. Higgins, and J. Heringa, T-Coffee: A novel method for fast and accurate multiple sequence alignment. J Mol Biol, 2000. 302(1): p. 205-17.
 
+====================================================================================================================================================================== ================================================================================================================================ 
+Notredame   C, Higgins DG, Heringa J.                                                                                                                                  Related Articles,                                                                                                          Links 
+====================================================================================================================================================================== ================================================================================================================================ 
+T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]                                                                                                                                  
+====================================================================================================================================================================== ================================================================================================================================ 
 
 Other useful publications include:
 
 
-********
 T-Coffee
-********
-Notredame, C., L. Holm, and D.G. Higgins, COFFEE: an objective function for multiple sequence alignments. Bioinformatics, 1998. 14(5): p. 407-22.
-Notredame, C., D.G. Higgins, and J. Heringa, T-Coffee: A novel method for fast and accurate multiple sequence alignment. J Mol Biol, 2000. 302(1): p. 205-17.
-Poirot, O., E. O'Toole, and C. Notredame, Tcoffee@igs: a web server for computing, evaluating and combining multiple sequence alignments. Nucleic Acids Res, 2003. 31(13): p. 3503-6.
-Claude, J.B., et al., CaspR: a web server for automated molecular replacement using homology modelling. Nucleic Acids Res, 2004. 32(Web Server issue): p. W606-9.
-O'Sullivan, O., et al., 3DCoffee: combining protein sequences and structures within multiple sequence alignments. J Mol Biol, 2004. 340(2): p. 385-95.
-Poirot, O., et al., 3DCoffee@igs: a web server for combining sequences and structures into a multiple sequence alignment. Nucleic Acids Res, 2004. 32(Web Server issue): p. W37-40.
-Armougom, F., et al., Expresso: automatic incorporation of structural information in multiple sequence alignments using 3D-Coffee. Nucleic Acids Res, 2006. 34(Web Server issue): p. W604-8.
-Wallace, I.M., et al., M-Coffee: combining multiple sequence alignment methods with T-Coffee. Nucleic Acids Res, 2006. 34(6): p. 1692-9.
-Moretti, S., et al., The M-Coffee web server: a meta-method for computing multiple sequence alignments by combining alternative alignment methods. Nucleic Acids Res, 2007. 35(Web Server issue): p. W645-8.
-Moretti, S., et al., R-Coffee: a web server for accurately aligning noncoding RNA sequences. Nucleic Acids Res, 2008. 36(Web Server issue): p. W10-3.
-Wilm, A., D.G. Higgins, and C. Notredame, R-Coffee: a method for multiple alignment of non-coding RNA. Nucleic Acids Res, 2008. 36(9): p. e52.
-Di Tommaso, P., et al., Cloud-Coffee: implementation of a parallel consistency-based multiple alignment algorithm in the T-Coffee package and its benchmarking on the Amazon Elastic-Cloud. Bioinformatics, 2010. 26(15): p. 1903-4.
-Di Tommaso, P., et al., T-Coffee: a web server for the multiple sequence alignment of protein and RNA sequences using structural information and homology extension. Nucleic Acids Res, 2011. 39(Web Server issue): p. W13-7.
-Di Tommaso, P., et al., SARA-Coffee web server, a tool for the computation of RNA sequence and structure multiple alignments. Nucleic Acids Res, 2014. 42(Web Server issue): p. W356-60.
-Magis, C., et al., T-Coffee: Tree-based consistency objective function for alignment evaluation. Methods Mol Biol, 2014. 1079: p. 117-29.
+========
+================================================================================================================================================================================================= ============================================= 
+Claude   JB, Suhre K, Notredame C, Claverie JM, Abergel C.                                                                                                                                        Related Articles,                       Links 
+================================================================================================================================================================================================= ============================================= 
+CaspR: a web server for automated molecular   replacement using homology modelling.   Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W606-9.    PMID: 15215460 [PubMed - indexed for MEDLINE]                                               
+================================================================================================================================================================================================= ============================================= 
 
-*****
+===================================================================================================================================================================================================================== ================================== 
+Poirot   O, Suhre K, Abergel C, O'Toole E, Notredame C.                                                                                                                                                               Related Articles,            Links 
+===================================================================================================================================================================================================================== ================================== 
+3DCoffee@igs: a web server for combining sequences   and structures into a multiple sequence alignment.   Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W37-40.    PMID: 15215345 [PubMed - indexed for MEDLINE]                                    
+===================================================================================================================================================================================================================== ================================== 
+
+==================================================================================================================================================================================== ================================== 
+O'Sullivan   O, Suhre K, Abergel C, Higgins DG, Notredame C.                                                                                                                         Related Articles,            Links 
+==================================================================================================================================================================================== ================================== 
+3DCoffee: combining protein sequences and   structures within multiple sequence alignments.   J Mol Biol. 2004 Jul 2;340(2):385-95.    PMID: 15201059 [PubMed - indexed for MEDLINE]                                    
+==================================================================================================================================================================================== ================================== 
+
+================================================================================================================================================================================================= ================================== 
+Poirot   O, O'Toole E, Notredame C.                                                                                                                                                               Related Articles,            Links 
+================================================================================================================================================================================================= ================================== 
+Tcoffee@igs: A web server for computing,   evaluating and combining multiple sequence alignments.   Nucleic Acids Res. 2003 Jul 1;31(13):3503-6.    PMID: 12824354 [PubMed - indexed for MEDLINE]                                    
+================================================================================================================================================================================================= ================================== 
+
+========================================================================================================================================= ================================== 
+Notredame   C.                                                                                                                            Related Articles,            Links 
+========================================================================================================================================= ================================== 
+Mocca: semi-automatic method for domain hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]                                    
+========================================================================================================================================= ================================== 
+
+====================================================================================================================================================================== ================================== 
+Notredame   C, Higgins DG, Heringa J.                                                                                                                                  Related Articles,            Links 
+====================================================================================================================================================================== ================================== 
+T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]                                    
+====================================================================================================================================================================== ================================== 
+
+========================================================================================================================================================== ================================== 
+Notredame   C, Holm L, Higgins DG.                                                                                                                         Related Articles,            Links 
+========================================================================================================================================================== ================================== 
+COFFEE: an objective function for multiple   sequence alignments.   Bioinformatics. 1998 Jun;14(5):407-22.    PMID: 9682054 [PubMed - indexed for MEDLINE]                                    
+========================================================================================================================================================== ================================== 
+
 Mocca
-*****
-Notredame C.
+=====
+=========================================================================================================================================== ================================== 
+Notredame C.                                                                                                                                Related Articles,            Links 
+=========================================================================================================================================== ================================== 
+Mocca: semi-automatic method for domain   hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]                                    
+=========================================================================================================================================== ================================== 
 
-Mocca: semi-automatic method for domain   hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 
-
-
-****
 CORE
-****
+====
 http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
-Chang, J.M., P. Tommaso, and C. Notredame, TCS: A new multiple sequence alignment reliability measure to estimate alignment accuracy and improve phylogenetic tree reconstruction. Molecular biology and evolution, 2014.
 
 
-*******************
 Other Contributions
-*******************
+===================
 We do not mean to steal code, but we will always try to re-use pre-existing code whenever that code exists, free of copyright, just like we expect people to do with our code. However, whenever this happens, we make a point at properly citing the source of the original contribution. If ever you recognize a piece of your code improperly cited, please drop us a note and we will be happy to correct that.
 
 
@@ -131,9 +154,8 @@ In the mean time, here are some important pieces of code from other packages tha
          -David Mathog (Caltech) provided many fixes and useful feedback for improving the code and making the whole soft behaving more rationally
 
 
-************************
 Bug Reports and Feedback
-************************
+========================
          -Prof David Jones (UCL) reported and corrected the PDB1K bug (now t_coffee/sap can align PDB sequences longer than 1000 AA).
 
 
@@ -143,12 +165,11 @@ Bug Reports and Feedback
  
 
 
-#####################################
+*************************************
 Installation of The T-Coffee Packages
-#####################################
-************************************************
+*************************************
 Third Party Packages and On Demand Installations
-************************************************
+================================================
 T-Coffee is a complex package that interacts with many other third part software. If you only want a standalone version of T-Coffee, you may install that package on its own. If you want to use a most sophisticated flavor (3dcoffee, expresso, rcofeee, etc...), the installer will try to install all the third party packages required.
 
 
@@ -158,36 +179,31 @@ Note that since version 7.56, T-Coffee will use 'on demand' installation and ins
 Whenver on-demand installation or automated installation fails because of unforessen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to check the original documentation.
 
 
-*********************************
 Standard Installation of T-Coffee
-*********************************
-======================
+=================================
 Automated Installation
-======================
+----------------------
 We now recommend that you use the automated installer provided for UNIX or Linux platforms.
 
 
--------
 Mac-OsX
--------
+^^^^^^^
 ::
 
      Click on tge .dmg file
 
 
 
-----
 Unix
-----
+^^^^
 ::
 
      rpm -i <rmp>
 
 
 
-====
 Unix
-====
+----
 You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST (http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest)
 
 
@@ -256,9 +272,8 @@ Or even
 -If everything went well, the procedure has created in the bin directory two executables: t_coffee and TMalign (Make sure these executables are on your $PATH!)
 
 
-========================
 Microsoft Windows/Cygwin
-========================
+------------------------
 Install Cygwin
 
 
@@ -280,18 +295,16 @@ Run mkpasswd in Cywin (as requested when you start cygwin)
 Install T-Coffee within Cygwin using the Unix procedure
 
 
-==============
 MAC osX, Linux
-==============
+--------------
 Make sure you have the Developer's kit installed (compilers and makefile)
 
 
 Follow the Unix Procedure
 
 
-====================
 CLUSTER Installation
-====================
+--------------------
 In order to run, T-Coffee must have a value for the http_proxy and for the E-mail. In order to do so you can either:
 
 
@@ -319,9 +332,8 @@ add to your command line: t_coffee .... -proxy=<proxy> -email=<email
 if you have no proxy: t_coffee ... -proxy -email=<email>
 
 
-==========================
 If you have PDB installed:
-==========================
+--------------------------
 Assuming you have a standard PDB installation in your file system
 
 
@@ -338,9 +350,8 @@ Assuming you have a standard PDB installation in your file system
 If you do not have PDB installed, don't worry, t_coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally.
 
 
-*****************************
 Installing BLAST for T-Coffee
-*****************************
+=============================
 BLAST is a program that search sequence databases for homologues of a query sequence. It works for proteins and Nucleic Acids. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run well, BLST requires up to date databases (that can be fairly large, like NR or UNIPROT) and a powerful computer.
 
 
@@ -353,9 +364,8 @@ Thanks to its interaction with BLAST, T-Coffee can gather structures and protein
 Let us go through the various modes available for T-Coffee
 
 
-==================================
 Why Do I need BLAST with T-Coffee?
-==================================
+----------------------------------
 The most accurate modes of T-Coffe scan the databases for templates that they use to align the sequences. There are currently two types of templates for proteins:
 
 
@@ -392,18 +402,16 @@ These templates are automatically built if you use:
          that does everything and tries to use the best template. Now that you see why it is useful let's see how to get BLAST up and running, from the easy solution to tailor made ones.
 
 
-==========================
 Using the EBI BLAST Client
-==========================
+--------------------------
 This is by far the easiest (and the default mode). The perl clients are already incorporated in T-Coffee and all you need is are the proper perl library. In theory, T-Coffee should have already installed these libraries during the standard installation. Yet, this requires having toot access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public psiblast via a web service.
 
 
 Whenever you use a T-Coffee mode requiring Blast access, it will ask you for an authentification E-mail. Be Careful! If you provide a fake E-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, or entire institute, or even the entire country or, but I doubt it, the whole universe).
 
 
-===========================
 Using the NCBI BLAST Client
-===========================
+---------------------------
 The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSI-BLAST (as a web sevice). A big miss. The NCBI web blast client is a small executable that you should install on your system following the instructions given on this link
 
 
@@ -428,9 +436,8 @@ All you will then need to do is to make sure that T-Coffee uses the right client
 No need for any E-mail here, but you don't get psiblast, and whenever T-Coffee wants to use it, blastp will be used instead.
 
 
-====================
 Using another Client
-====================
+--------------------
 You may have your own client (lucky you). If that is so, all you need is to make sure that this client is complient with the blast command line. If your client is named foo.pl, all you need to to is run T-Coffee with
 
 
@@ -461,9 +468,8 @@ infile is a FASTA file
 If foo.pl behaves differently, the easiest will probably be to write a wrapper around it so that wrapped_foo.pl behaves like blastpgp
 
 
-===================================
 Using a BLAST local version on UNIX
-===================================
+-----------------------------------
 If you have blastpgp installed, you can run it instead of the remote clients by using:
 
 
@@ -507,18 +513,15 @@ If you want to have your own BLAST server to run your own databases, you should 
 
 .. warning:: Note that T-Coffee is compliant with BLAST+, the latest NCBI Blast.
 
-=============================================
 Using a BLAST local version on Windows/cygwin
-=============================================
-------
+---------------------------------------------
 BLAST+
-------
+^^^^^^
 Blast+ is tghe latest NCBI Blast. IT is easier to install. A default installation should be compliant with a default T-Coffee installation.
 
 
--------------------
 ORIGINAL NCBI BLAST
--------------------
+^^^^^^^^^^^^^^^^^^^
 For those of you using cygwin, be careful. While cygwin behaves like a UNIX system, the BLAST executable required for cygwin (win32) is expecting WINDOWS path and not UNIX path. This has three important consequences:
 
 
@@ -543,9 +546,8 @@ Data=C:\cygwin\home\notredame\blast\data
 (using the slash (/) or the andtislash (\) does not matter on new systems but I would reommand against incorporating white spaces.
 
 
-***********************************
 Installing Other Companion Packages
-***********************************
+===================================
 T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type
 
 
@@ -696,9 +698,8 @@ You will receive a list of supported packages that looks like the next table. In
 
 
 
-***************************************
 Installation of PSI-Coffee and Expresso
-***************************************
+=======================================
 PSI-Coffee is a mode of T-Coffee that runs a a Psi-BLAST on each of your sequences and makes a multiple profile alignment. If you do not have any structural information, it is by far the most accurate mode of T-Coffee. To use it, you must have SOAP installed so that the EBI BLAST client can run on your system.
 
 
@@ -735,15 +736,13 @@ That will look for structural templates. And if both these modes are running fin
 
 
 
-************************
 Installation of M-Coffee
-************************
+========================
 M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many multiple sequence alignment packages.
 
 
-======================
 Automated Installation
-======================
+----------------------
 In the T-Coffee distribution, type:
 
 
@@ -783,9 +782,8 @@ Or use the command line flag -plugin (over-rides every other setting)
 
 
 
-===================
 Manual Installation
-===================
+-------------------
 M-Coffee requires a standard T-Coffee installation (c.f. previous section) and the following packages to be installed on your system:
 
 
@@ -920,9 +918,8 @@ If you would rather have the mcoffee directory in some other location, set the M
 
 
 
-******************************
 Installation of APDB and iRMSD
-******************************
+==============================
 APDB and iRMSD are incorporated in T-Coffee. Once t_coffee is installed, you can invoque these programs by typing:
 
 
@@ -932,9 +929,8 @@ APDB and iRMSD are incorporated in T-Coffee. Once t_coffee is installed, you can
 
 
 
-*********************
 Installation of tRMSD
-*********************
+=====================
 tRMSD comes along with t_coffee but it also requires the package phylip in order to be functional. Phylip can be obtained from:
 
 
@@ -959,9 +955,8 @@ tRMSD comes along with t_coffee but it also requires the package phylip in order
 
 
 
-****************************
 Installation of seq_reformat
-****************************
+============================
 Seq_reformat is a reformatting package that is part of t_coffee. To use it (and see the available options), type:
 
 
@@ -971,9 +966,8 @@ Seq_reformat is a reformatting package that is part of t_coffee. To use it (and 
 
 
 
-********************************
 Installation of extract_from_pdb
-********************************
+================================
 Extract_from_pdb is a PDB reformatting package that is part of t_coffee. To use it (and see the available options), type.
 
 
@@ -986,15 +980,13 @@ Extract_from_pdb is a PDB reformatting package that is part of t_coffee. To use 
 Extract_from_pdb requires wget in order to automatically fetch PDB structures.
 
 
-**********************************
 Installation of 3D-Coffee/Expresso
-**********************************
+==================================
 3D-Coffee/Expresso is a special mode of T-Coffee that makes it possible to combine sequences and structures. The main difference between Expresso and 3D-Coffee is that Expresso fetches the structures itself.
 
 
-======================
 Automated Installation
-======================
+----------------------
 In the T-Coffee distribution, type:
 
 
@@ -1011,9 +1003,8 @@ In the T-Coffee distribution, type:
 In theory, this command should download and install every required package (except fugue). If, however, it fails, you should switch to the manual installation (see next).
 
 
-===================
 Manual Installation
-===================
+-------------------
 In order to make the most out of T-Coffee, you will need to install the following packages (make sure the executable is named as indicated below):
 
 
@@ -1070,9 +1061,8 @@ Once the package is installed, make sure make sure that the executable is on you
 The wublast client makes it possible to run BLAST at the EBI without having to install any database locally. It is an ideal solution if you are only using expresso occasionally.
 
 
-=============================
 Installing Fugue for T-Coffee
-=============================
+-----------------------------
 Uses a standard fugue installation. You only need to install the following packages:
 
 
@@ -1100,15 +1090,13 @@ Setenv MELODY_SUBST=fugue/allmat.dat
 All the other configuration files must be in the right location.
 
 
-************************
 Installation of R-Coffee
-************************
+========================
 R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure.
 
 
-======================
 Automated Installation
-======================
+----------------------
 In the T-Coffee distribution, type:
 
 
@@ -1121,9 +1109,8 @@ In the T-Coffee distribution, type:
 In theory, this command should download and install every required package (except consan). If, however, it fails, you should switch to the manual installation (see next).
 
 
-===================
 Manual Installation
-===================
+-------------------
 R-Coffee only requires the package Vienna to be installed, in order to compute multiple sequence alignments. To make the best out of it, you should also have all the packages required by M-Coffee
 
 
@@ -1166,29 +1153,26 @@ R-Coffee only requires the package Vienna to be installed, in order to compute m
 
 
 
-===================================
 Installing ProbbonsRNA for R-Coffee
-===================================
+-----------------------------------
 Follow the installation procedure, but make sure you rename the probcons executable into probconsRNA.
 
 
-==============================
 Installing Consan for R-Coffee
-==============================
+------------------------------
 In order to insure a proper interface beween consan and R-Coffee, you must make sure that the file mix80.mod is in the directory ~/.t_coffee/mcoffee or in the mcoffee directory otherwise declared.
 
 
-###########
+***********
 Quick Start
-###########
+***********
 We only give you the very basics here. Please use the Tutorial for more detailed information on how to use our tools.
 
 
 .. warning:: IMPORTANT: All the files mentionned here (sampe_seq...) can be found in the example directory of the distribution.
 
-********
 T-COFFEE
-********
+========
 Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
 
 
@@ -1223,9 +1207,8 @@ This will output two files:
 
 
 
-********
 M-Coffee
-********
+========
 M-Coffee is a Meta version of T-Coffee that makes it possible to combine the output of at least eight packages (Muscle, probcons, poa, dialignT, mafft, clustalw, PCMA and T-Coffee).
 
 
@@ -1255,9 +1238,8 @@ Once this is done, write your sequences in a file and run: same file (Swiss-prot
 If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself... Proceed to the M-Coffee section for more detailed instructions.
 
 
-********
 Expresso
-********
+========
 If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against PDB, identify the best targets and use these to align your proteins.
 
 
@@ -1279,9 +1261,8 @@ If you did not manage to install all the required structural packages for Expres
 
 
 
-********
 R-Coffee
-********
+========
 R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures. The best results are obtained by using the consan pairwise method. If you have consan installed:
 
 
@@ -1309,9 +1290,8 @@ If you want to decide yourself which methods should be combined by R-Coffee, run
 
 
 
-**************
 iRMSD and APDB
-**************
+==============
 All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index ( 1aabA for instance). All the sequences do not need to have a known structure, but at least two need to have it.
 
 
@@ -1324,9 +1304,8 @@ Given the alignment:
 
 
 
-*****
 tRMSD
-*****
+=====
 tRMSD is a structure based clustering method using the iRMSD to drive the clustering. The T-RMSD supports all the parameters supported by iRMSD or APDB.
 
 
@@ -1397,9 +1376,8 @@ The program then outputs a series of files
 3d_sample5.html      is a colored version of the output showing in red the positions that give the highest support to 3d_sample5.struc_tree100
 
 
-*****
 MOCCA
-*****
+=====
 Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
 
 
@@ -1412,9 +1390,9 @@ Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
 This command output one files (<your sequences>.mocca_lib) and starts an interactive menu.
 
 
-####################
+********************
 Recent Modifications
-####################
+********************
 Warning: This log of recent modifications is not as thorough and accurate as it should be.
 
 
@@ -1445,9 +1423,9 @@ Warning: This log of recent modifications is not as thorough and accurate as it 
 Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation
 
 
-################
+****************
 Reference Manual
-################
+****************
 This reference manual gives a list of all the flags that can be used to modify the behavior of T-Coffee. For your convenience, we have grouped them according to their nature. To display a list of all the flags used in the version of T-Coffee you are using (along with their default value), type:
 
 
@@ -1478,15 +1456,13 @@ Or
 Or any other parameter
 
 
-*********************
 Environment Variables
-*********************
+=====================
 It is possible to modify T-Coffee's behavior by setting any of the following environment variables. On the bash shell, use export VAR='value'. On the cshell, use set $VAR='xxx'
 
 
-====================
 http_proxy_4_TCOFFEE
-====================
+--------------------
 Sets the http_proxy and HTTP_proxy values used by T-Coffee.
 
 
@@ -1496,57 +1472,48 @@ These values get supersede http_proxy and HTTP_proxy. http_proxy_4_TCOFFEE gets 
 If you have no proxy, just set this value to an empty string.
 
 
-===============
 email_4_TCOFFEE
-===============
+---------------
 Set the E-mail values provided to web services called upon by T-Coffee. Can be over-riden by the flag -email.
 
 
-=============
 DIR_4_TCOFFEE
-=============
+-------------
 By default this variable is set to $HOME/.t_coffee. This is where T-Coffee expects to find its cache, tmp dir and possibly any temporary data stored by the program.
 
 
-=============
 TMP_4_TCOFFEE
-=============
+-------------
 By default this variable is set to $HOME/.t_coffee/tmp. This is where T-Coffee stores temporary files.
 
 
-===============
 CACHE_4_TCOFFEE
-===============
+---------------
 By default this variable is set to $HOME/.t_coffee/cache. This is where T-Coffee stores any data expensive to obtain: pdb files, sap alignments....
 
 
-=================
 PLUGINS_4_TCOFFEE
-=================
+-----------------
 By default all the companion packages are searched in the directory DIR_4_TCOFFEE/plugins/<OS>. This variable overrides the default. This variable can also be overriden by the -plugins T-Coffee flag
 
 
-=========================
 NO_ERROR_REPORT_4_TCOFFEE
-=========================
+-------------------------
 By default this variable is no set. Set it if you do not want the program to generate a verbose error output file (useful for running a server).
 
 
-=======
 PDB_DIR
-=======
+-------
 Indicate the location of your local PDB installation.
 
 
-====================
 NO_WARNING_4_TCOFFEE
-====================
+--------------------
 Suppresses all the warnings.
 
 
-====================
 UNIQUE_DIR_4_TCOFFEE
-====================
+--------------------
 Sets:
 
 
@@ -1565,9 +1532,8 @@ Sets:
 To the same unique value. The string MUST be a valid directory   
 
 
-*********************************************
 Setting up the T-Coffee environment variables
-*********************************************
+=============================================
 T-Coffee can have its own environment file. This environment is kept in a file named $HOME/.t_coffee/t_coffee_env and can be edited. The value of any legal variable can be modified through that file. For instance, here is an example of a configuration file when not requiring a proxy.
 
 
@@ -1604,24 +1570,20 @@ In general, you can set any environment variable using the -setenv flag. You can
 Note that when you use -setenv for PATH, the value you provide is concatenated TO THE BEGINNING of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
 
 
-***********************
 Well Behaved Parameters
-***********************
-==========
+=======================
 Separation
-==========
+----------
 You can use any kind of separator you want (i.e. ,; <space>=). The syntax used in this document is meant to be consistent with that of ClustalW. However, in order to take advantage of the automatic filename compleation provided by many shells, you can replace '=' and ',' with a space.
 
 
-=====
 Posix
-=====
+-----
 T-Coffee is not POSIX compliant (sorry L).
 
 
-=============================
 Entering the right parameters
-=============================
+-----------------------------
 There are many ways to enter parameters in T-Coffee, see the -parameter flag in
 
 
@@ -1635,15 +1597,12 @@ There are many ways to enter parameters in T-Coffee, see the -parameter flag in
   This means that -parameters supersede all the others, while parameters provided via -special mode are the weakest.
 
 
-***************
 Meta-Parameters
-***************
 ===============
 Global Behavior
-===============
--------
+---------------
 No Flag
--------
+^^^^^^^
    *If no flag is used <your sequence> must be the first argument. See format for further information.*
 
 ::
@@ -1662,9 +1621,8 @@ No Flag
 
    *When you do so, sample_seq1 is used as a name prefix for every file the program outputs.*
 
------------
 -parameters
------------
+^^^^^^^^^^^
   **Usage: -parameters=parameters_file**
 
    *Default: no parameters file*
@@ -1703,9 +1661,8 @@ No Flag
 
 
 
-------------------
 -t_coffee_defaults
-------------------
+^^^^^^^^^^^^^^^^^^
   **Usage: -t_coffee_defaults=<file_name>**
 
    *Default: not used.*
@@ -1718,9 +1675,8 @@ No Flag
 
    *         3. The file indicated by the environment variable TCOFFEE_DEFAULTS*
 
------
 -mode
------
+^^^^^
   **Usage: -mode= hard coded mode**
 
    *Default: not used.*
@@ -1737,18 +1693,16 @@ No Flag
 
    *Other modes exist that are not yet fully supported*
 
--------------------
 -score [Deprecated]
--------------------
+^^^^^^^^^^^^^^^^^^^
   **Usage: -score**
 
    *Default: not used*
 
    *Toggles on the evaluate mode and causes t_coffee to evaluates a precomputed alignment provided via -infile=<alignment>. The flag -output must be set to an appropriate format (i.e. -output=score_ascii, score_html or score_pdf). A better default parameterization is obtained when using the flag -mode=evaluate.*
 
----------
 -evaluate
----------
+^^^^^^^^^
   **Usage: -evaluate**
 
    *Default: not used*
@@ -1765,9 +1719,8 @@ No Flag
 
 
 
--------------
 -convert [cw]
--------------
+^^^^^^^^^^^^^
   **Usage: -convert**
 
    *Default: turned off*
@@ -1776,28 +1729,24 @@ No Flag
 
    *This flag is ClustalW compliant.*
 
---------------
 -do_align [cw]
---------------
+^^^^^^^^^^^^^^
   **Usage:  -do_align**
 
    *Default: turned on*
 
-===============
 Misc Parameters
-===============
---------
+---------------
 -version
---------
+^^^^^^^^
   **Usage: -version**
 
    *Default: not used*
 
    *Returns the current version number*
 
-------
 -proxy
-------
+^^^^^^
   **Usage: -proxy=<proxy>**
 
    *Default: not used*
@@ -1808,54 +1757,48 @@ Misc Parameters
 
    *         -proxy*
 
-------
 -email
-------
+^^^^^^
   **Usage: -email=<email>**
 
    *Default: not used*
 
    *Sets your email value as provided to web services*
 
---------------------
 -check_configuration
---------------------
+^^^^^^^^^^^^^^^^^^^^
   **Usage: -check_configuration**
 
    *Default: not used*
 
    *Checks your system to determine whether all the programs T-Coffee can interact with are installed.*
 
-------
 -cache
-------
+^^^^^^
   **Usage: -cache=<use, update, ignore, <filename>>**
 
    *Default: -cache=use*
 
    *By default, t_coffee stores in a cache directory, the results of computationally expensive (structural alignment) or network intensive (BLAST search) operations.*
 
--------
 -update
--------
+^^^^^^^
   **Usage: -update**
 
    *Default: turned off*
 
    *Causes a wget access that checks whether the t_coffee version you are using needs updating.*
 
----------
 -full_log
----------
+^^^^^^^^^
   **Usage: -full_log=<filename>**
 
    *Default: turned off*
 
    *Causes t_coffee to output a full log file that contains all the input/output files.*
 
---------
 -plugins
---------
+^^^^^^^^
   **Usage: -plugins=<dir>**
 
    *Default: default*
@@ -1864,9 +1807,8 @@ Misc Parameters
 
    *The default is ~/.t_coffee/plugins/*
 
----------
 -other_pg
----------
+^^^^^^^^^
   **Usage: -other_pg=<filename>**
 
    *Default: turned off*
@@ -1883,15 +1825,12 @@ Misc Parameters
 
 
 
-*****
 Input
-*****
-==============
+=====
 Sequence Input
-==============
-------------
+--------------
 -infile [cw]
-------------
+^^^^^^^^^^^^
    *To remain compatible with ClustalW, it is possible to indicate the sequences with this flag*
 
 ::
@@ -1904,21 +1843,18 @@ Sequence Input
 
 .. note:: Note: T-Coffee automatically removes the gaps before doing the alignment. This behaviour is different from that of ClustalW where the gaps are kept.
 
-------------------------------------------------------
 -in (Cf -in from the Method and Library Input section)
-------------------------------------------------------
----------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 -get_type
----------
+^^^^^^^^^
   **Usage: -get_type**
 
    *Default: turned off*
 
    *Forces t_coffee to identify the sequences type (PROTEIN, DNA).*
 
-----------
 -type [cw]
-----------
+^^^^^^^^^^
   **Usage: -type=DNA ¦ PROTEIN¦ DNA_PROTEIN**
 
    *Default: -type=<automatically set>*
@@ -1927,9 +1863,8 @@ Sequence Input
 
 .. warning:: Warning:  In case of low complexity or short sequences, it is recommended to set the type manually.
 
-----
 -seq
-----
+^^^^
   **Usage: -seq=[<P,S><name>,]**
 
    *Default: none*
@@ -1937,9 +1872,8 @@ Sequence Input
 -seq is now the recommended flag to provide your sequences. It behaves mostly like the -in flag.
 
 
------------
 -seq_source
------------
+^^^^^^^^^^^
   **Usage: -seq_source=<ANY or  _LS or LS >**
 
    *Default: ANY.*
@@ -1952,12 +1886,10 @@ Sequence Input
 
 .. note:: Note:  This flag is mostly designed for interactions between T-Coffee and T-CoffeeDPA (the large scale version of T-Coffee).
 
-===============
 Structure Input
-===============
-----
+---------------
 -pdb
-----
+^^^^
   **Usage:  -pdb=<pdbid1>,<pdbid2>...[Max 200]**
 
    *Default: None*
@@ -1978,12 +1910,10 @@ Structure Input
 
 
 
-==========
 Tree Input
-==========
---------
+----------
 -usetree
---------
+^^^^^^^^
   **Usage: -usetree=<tree file>**
 
    *Default: No file specified*
@@ -1992,9 +1922,8 @@ Tree Input
 
    *This flag indicates that rather than computing a new dendrogram, t_coffee must use a pre-computed one. The tree files are in phylips format and compatible with ClustalW. In most cases, using a pre-computed tree will halve the computation time required by t_coffee. It is also possible to use trees output by ClustalW, Phylips and any other program.*
 
-================================================================
 Structures, Sequences Methods and Library Input via the -in Flag
-================================================================
+----------------------------------------------------------------
 ::
 
   The -in Flag and its Identifier TAGS
@@ -2014,9 +1943,8 @@ Structures, Sequences Methods and Library Input via the -in Flag
   -lib                             Libraries       (L)
 
 
----
 -in
----
+^^^
   **Usage: -in=[<P,S,A,L,M,X><name>,]**
 
    *Default: -in=Mlalign_id_pair,Mclustalw_pair*
@@ -2085,12 +2013,10 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
 .. warning:: Warning: Xmatrix does not have the same effect as using the -matrix flag.  The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
 
-=============
 Profile Input
-=============
---------
+-------------
 -profile
---------
+^^^^^^^^
   **Usage: -profile=[<name>,] maximum of 200 profiles.**
 
    *Default: no default*
@@ -2107,55 +2033,46 @@ Profile Input
 
    *Note that when using -template_file, the program will also look for the templates associated with the profiles, even if the profiles have been provided as templates themselves (however it will not look for the template of the profile templates of the profile templates...)*
 
---------------
 -profile1 [cw]
---------------
+^^^^^^^^^^^^^^
   **Usage: -profile1=[<name>], one name only**
 
    *Default: no default*
 
    *Similar to the previous one and was provided for compatibility with ClustalW.*
 
---------------
 -profile2 [cw]
---------------
+^^^^^^^^^^^^^^
   **Usage: -profile1=[<name>], one name only**
 
    *Default: no default*
 
    *Similar to the previous one and was provided for compatibility with ClustalW.*
 
-*********************
 Alignment Computation
-*********************
-============================
+=====================
 Library Computation: Methods
-============================
--------------
+----------------------------
 -lalign_n_top
--------------
+^^^^^^^^^^^^^
   **Usage: -lalign_n_top=<Integer>**
 
    *Default: -lalign_n_top=10*
 
    *Number of alignment reported by the local method (lalign).*
 
----------------------
 -align_pdb_param_file
----------------------
+^^^^^^^^^^^^^^^^^^^^^
    *Unsuported*
 
----------------------
 -align_pdb_hasch_mode
----------------------
+^^^^^^^^^^^^^^^^^^^^^
    *Unsuported*
 
-==============================
 Library Computation: Extension
-==============================
------------------------
+------------------------------
 -lib_list [Unsupported]
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
   **Usage:  -lib_list=<filename>**
 
    *Default:unset*
@@ -2176,9 +2093,8 @@ Library Computation: Extension
 
    *         (the line 3 would be used by a multiple alignment method).*
 
--------------
 -do_normalise
--------------
+^^^^^^^^^^^^^
   **Usage:  -do_normalise=<0 or a positive value>**
 
    *Default:-do_normalise=1000*
@@ -2187,9 +2103,8 @@ Library Computation: Extension
 
    *When using a value different from 0, this flag sets the score of the highest scoring pair to 1000.*
 
--------
 -extend
--------
+^^^^^^^
   **Usage:  -extend=<0,1 or a positive value>**
 
    *Default:-extend=1*
@@ -2198,9 +2113,8 @@ Library Computation: Extension
 
    *When turned on, this flag indicates that the library extension should be carried out when performing the multiple alignment. If -extend =0, the extension is not made, if it is set to 1, the extension is made on all the pairs in the library. If the extension is set to another positive value, the extension is only carried out on pairs having a weight value superior to the specified limit.*
 
-------------
 -extend_mode
-------------
+^^^^^^^^^^^^
   **Usage:  -extend=<string>**
 
    *Default:-extend=very_fast_triplet*
@@ -2231,9 +2145,8 @@ Library Computation: Extension
 
    *fast_matrix                  Use of the matrix -matrix. Profiles are turned into consensus*
 
------------
 -max_n_pair
------------
+^^^^^^^^^^^
   **Usage:  -max_n_pair=<integer>**
 
    *Default:-extend=10*
@@ -2242,43 +2155,36 @@ Library Computation: Extension
 
    *Controls the number of pairs considered by the -extend_mode=very_fast_triplet. Setting it to 0 forces all the pairs to be considered (equivalent to -extend_mode=slow_triplet).*
 
-------------------------
 -seq_name_for_quadruplet
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
   **Usage:  Unsupported**
 
---------
 -compact
---------
+^^^^^^^^
   **Usage:  Unsupported**
 
-------
 -clean
-------
+^^^^^^
   **Usage:  Unsupported**
 
----------
 -maximise
----------
+^^^^^^^^^
   **Usage:  Unsupported**
 
---------
 -do_self
---------
+^^^^^^^^
   **Usage:  Flag -do_self**
 
   **Default: No**
 
    *This flag causes the extension to carried out within the sequences (as opposed to between sequences). This is necessary when looking for internal repeats with Mocca.*
 
-------------------------
 -seq_name_for_quadruplet
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
   **Usage:  Unsupported**
 
--------
 -weight
--------
+^^^^^^^
   **Usage:  -weight=<winsimN, sim or sim_<matrix_name or matrix_file> or <integer value>**
 
    *Default: -weight=sim*
@@ -2319,12 +2225,10 @@ Library Computation: Extension
 
 
 
-================
 Tree Computation
-================
----------------------
+----------------
 -distance_matrix_mode
----------------------
+^^^^^^^^^^^^^^^^^^^^^
   **Usage: -distance_matrix_mode=<slow, fast, very_fast>**
 
    *Default: very_fast*
@@ -2341,9 +2245,8 @@ Tree Computation
 
    *aln                Read the distances on a precomputed MSA*
 
----------------
 -quicktree [CW]
----------------
+^^^^^^^^^^^^^^^
   **Usage: -quicktree**
 
    *Description: Causes T-Coffee to compute a fast approximate guide tree*
@@ -2359,9 +2262,8 @@ This flag is kept for compatibility with ClustalW. It indicates that:
 
 
 
-===============================
 Pair-wise Alignment Computation
-===============================
+-------------------------------
 ::
 
   Controlling Alignment Computation
@@ -2373,9 +2275,8 @@ Pair-wise Alignment Computation
   5-Terminal gaps are scored according to -tg_mode
 
 
---------
 -dp_mode
---------
+^^^^^^^^
   **Usage:  -dp_mode=<string>**
 
    *Default: -dp_mode=cfasta_fair_wise*
@@ -2398,18 +2299,16 @@ Pair-wise Alignment Computation
 
 .. note:: Note: Users may find by looking into the code that other modes with fancy names exists (viterby_pair_wise...) Unless mentioned in this documentation, these modes are not supported.
 
--------
 -ktuple
--------
+^^^^^^^
   **Usage:  -ktuple=<value>**
 
    *Default: -ktuple=1 or 2*
 
    *Indicates the ktuple size for cfasta_pair_wise dp_mode and fasta_pair_wise. It is set to 1 for proteins, and 2 for DNA. The alphabet used for protein can be a degenerated version, set with -sim_matrix..*
 
-------
 -ndiag
-------
+^^^^^^
   **Usage:  -ndiag=<value>**
 
    *Default: -ndiag=0*
@@ -2418,9 +2317,8 @@ Pair-wise Alignment Computation
 
 .. note:: When -ndiag and -diag_threshold are set, diagonals are selected if and only if they fulfill both conditions.
 
-----------
 -diag_mode
-----------
+^^^^^^^^^^
   **Usage:  -diag_mode=<value>**
 
    *Default: -diag_mode=0*
@@ -2431,9 +2329,8 @@ Pair-wise Alignment Computation
 
    *1 indicates that this score is set equal to the score of the best uninterrupted segment (useful when dealing with fragments of sequences).*
 
----------------
 -diag_threshold
----------------
+^^^^^^^^^^^^^^^
   **Usage:  -diag_threshold=<value>**
 
    *Default: -diag_threshold=0*
@@ -2442,9 +2339,8 @@ Pair-wise Alignment Computation
 
    *0: indicates that -ndiag should be used to select the diagonals (cf -ndiag section).*
 
------------
 -sim_matrix
------------
+^^^^^^^^^^^
   **Usage:  -sim_matrix=<string>**
 
    *Default: -sim_matrix=vasiliky*
@@ -2459,9 +2355,8 @@ Pair-wise Alignment Computation
 
    *This alphabet is set with the flag -sim_matrix=vasiliky. In order to keep the alphabet non degenerated, -sim_matrix=idmat can be used to retain the standard alphabet.*
 
-------------
 -matrix [CW]
-------------
+^^^^^^^^^^^^
   **Usage:  -matrix=<blosum62mt>**
 
    *Default: -matrix=blosum62mt*
@@ -2470,18 +2365,16 @@ Pair-wise Alignment Computation
 
    *Users can also provide their own matrices, using the matrix format described in the appendix.*
 
---------
 -nomatch
---------
+^^^^^^^^
   **Usage:  -nomatch=<positive value>**
 
    *Default: -nomatch=0*
 
    *Indicates the penalty to associate with a match. When using a library, all matches are positive or equal to 0. Matches equal to 0 are unsupported by the library but non-penalized. Setting nomatch to a non-negative value makes it possible to penalize these null matches and prevent unrelated sequences from being aligned (this can be useful when the alignments are meant to be used for structural modeling).*
 
---------
 -gapopen
---------
+^^^^^^^^
   **Usage:  -gapopen=<negative value>**
 
    *Default: -gapopen=0*
@@ -2490,28 +2383,24 @@ Pair-wise Alignment Computation
 
    *Here are some guidelines regarding the tuning of gapopen and gapext. In T-Coffee matches get a score between 0 (match) and 1000 (match perfectly consistent with the library). The default cosmetic penalty is set to -50 (5% of a perfect match). If you want to tune -gapoen and see a strong effect, you should therefore consider values between 0 and -1000.*
 
--------
 -gapext
--------
+^^^^^^^
   **Usage:  -gapext=<negative value>**
 
    *Default: -gapext=0*
 
    *Indicates the penalty applied for extending a gap (cf -gapopen)*
 
----------
 -fgapopen
----------
+^^^^^^^^^
   **Unsupported**
 
---------
 -fgapext
---------
+^^^^^^^^
   **Unsupported**
 
------------------
 -cosmetic_penalty
------------------
+^^^^^^^^^^^^^^^^^
   **Usage:  -cosmetic_penalty=<negative value>**
 
    *Default: -cosmetic_penalty=-50*
@@ -2520,9 +2409,8 @@ Pair-wise Alignment Computation
 
    *The cosmetic penalty is automatically turned off if a substitution matrix is used rather than a library.*
 
---------
 -tg_mode
---------
+^^^^^^^^
   **Usage:  -tg_mode=<0, 1, or 2>**
 
    *Default: -tg_mode=1*
@@ -2533,12 +2421,10 @@ Pair-wise Alignment Computation
 
    *2: terminal gaps unpenalized.*
 
-=================
 Weighting Schemes
-=================
------------
+-----------------
 -seq_weight
------------
+^^^^^^^^^^^
   **Usage: -seq_weight=<t_coffee or <file_name>>**
 
    *Default: -seq_weight=t_coffee*
@@ -2569,21 +2455,18 @@ Weighting Schemes
 
 .. note:: Note: You can use your own weights (see the format section).
 
-==============================
 Multiple Alignment Computation
-==============================
----------
+------------------------------
 -msa_mode
----------
+^^^^^^^^^
   **Usage: -msa_mode=<tree,graph,precomputed>**
 
    *Default: -evaluate_mode=tree*
 
    *Unsupported*
 
---------
 -one2all
---------
+^^^^^^^^
   **Usage: -one2all=<name>**
 
    *Default: not used*
@@ -2592,9 +2475,8 @@ Multiple Alignment Computation
 
    *-profile_comparison =profile, the MSAs provided via -profile are vectorized and the function specified by -profile_comparison is used to make profile profile alignments. In that case, the complexity is NL^2*
 
--------------------
 -profile_comparison
--------------------
+^^^^^^^^^^^^^^^^^^^
   **Usage: -profile_mode=<fullN,profile>**
 
    *Default: -profile_mode=full50*
@@ -2611,21 +2493,18 @@ Multiple Alignment Computation
 
    *-profile_comparison=fullN, N is an integer value that can omitted. Full indicates that given two profiles, the alignment will be based on a library that includes every possible pair of sequences between the two profiles. If N is set, then the library will be restricted to the N most similar pairs of sequences between the two profiles, as judged from a measure made on a pairwise alignment of these two profiles.*
 
--------------
 -profile_mode
--------------
+^^^^^^^^^^^^^
   **Usage: -profile_mode=<cw_profile_profile, muscle_profile_profile, multi_channel>**
 
    *Default: -profile_mode=cw_profile_profile*
 
    *When -profile_comparison=profile, this flag selects a profile scoring function.*
 
-=========================
 Alignment Post-Processing
-=========================
-----------
+-------------------------
 -clean_aln
-----------
+^^^^^^^^^^
   **Usage:  -clean_aln **
 
    *Default:-clean_aln*
@@ -2640,9 +2519,8 @@ Alignment Post-Processing
 
 .. note:: Note: The use of the cleaning option can result in memory overflow when aligning large sequences,
 
-----------------
 -clean_threshold
-----------------
+^^^^^^^^^^^^^^^^
   **Usage:  -clean_threshold=<0-9> **
 
   **Default:-clean_aln=1**
@@ -2650,9 +2528,8 @@ Alignment Post-Processing
 See -clean_aln for details.
 
 
-----------------
 -clean_iteration
-----------------
+^^^^^^^^^^^^^^^^
   **Usage:  -clean_iteration=<value between 1 and > **
 
    *Default:-clean_iteration=1*
@@ -2660,117 +2537,103 @@ See -clean_aln for details.
 See -clean_aln for details.
 
 
-----------------------
 -clean_evaluation_mode
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
   **Usage:  -clean_iteration=<evaluation_mode > **
 
    *Default:-clean_iteration=t_coffee_non_extended*
 
    *Indicates the mode used for the evaluation that will indicate the segments that should be realigned. See -evaluation_mode for the list of accepted modes.*
 
---------
 -iterate
---------
+^^^^^^^^
   **Usage: -iterate=<integer>**
 
    *Default: -iterate=0*
 
    *Sequences are extracted in turn and realigned to the MSA. If iterate is set to -1, each sequence is realigned, otherwise the number of iterations is set by -iterate.*
 
-*****************
 Database Searches
-*****************
-===================================
+=================
 BLAST Template Selection Parameters
-===================================
+-----------------------------------
 These parameters are used by T-Coffee when running expresso, accurate and psicoffee
 
 
--------------
 -blast_server
--------------
+^^^^^^^^^^^^^
   **Usage:  -blast_server= EBI, NCBI or LOCAL_BLAST**
 
    *Default: EBI*
 
    *Defines whih way BLAST will be used*
 
--------------
 -prot_min_sim
--------------
+^^^^^^^^^^^^^
   **Usage:  -prot_min_sim= <percent_id>**
 
    *Default: 40*
 
    *Minimum id for inclusion of a sequence in a psi-blast profile*
 
--------------
 -prot_max_sim
--------------
+^^^^^^^^^^^^^
   **Usage:  -prot_max_sim= <percent_id>**
 
    *Default: 90*
 
    *Maximum id for inclusion of a sequence in a psi-blast profile.*
 
--------------
 -prot_min_cov
--------------
+^^^^^^^^^^^^^
   **Usage:  -prot_min_cov= <percent>**
 
    *Default: 40*
 
    *Minimum coverage for inclusion of a sequence in a psi-blast profile*
 
------------
 -protein_db
------------
+^^^^^^^^^^^
   **Usage:  -protein_db= <BLAST database>**
 
    *Default: nr*
 
    *Database used for construction of psi-blast profiles*
 
-------------
 -pdb_min_sim
-------------
+^^^^^^^^^^^^
   **Usage:  -pdb_min_sim= <percent_id>**
 
    *Default: 35*
 
    *Minimum id for a PDB template to be selected by expresso*
 
-------------
 -pdb_max_sim
-------------
+^^^^^^^^^^^^
   **Usage:  -pdb_max_sim= <percent_id>**
 
    *Default: 100*
 
    *Maximum id for a PDB template to be selected by expresso*
 
-------------
 -pdb_min_cov
-------------
+^^^^^^^^^^^^
   **Usage:  -pdb_min_cov= <percent>**
 
    *Default: 50*
 
    *Minimum coverage for a PDB template to be selected by expresso.*
 
--------
 -pdb_db
--------
+^^^^^^^
   **Usage:  -protein_db= <BLAST database>**
 
    *Default: pdb*
 
    *Database for PDB template to be selected by expresso.*
 
----------
 -pdb_type
----------
+^^^^^^^^^
   **Usage:  -pdb_type= d,n,m,dnm,dn**
 
    *Default: d*
@@ -2781,15 +2644,12 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
    *m: model*
 
-***********
 CPU Control
-***********
-==============
+===========
 Multithreading
-==============
------------
+--------------
 -multi_core
------------
+^^^^^^^^^^^
   **Usage:  -multi_core= templates_jobs_relax_msa**
 
    *Default: 0*
@@ -2818,9 +2678,8 @@ Multithreading
 
 
 
--------
 -n_core
--------
+^^^^^^^
   **Usage:  -n_core= <number of cores>**
 
    *Default: 0*
@@ -2833,47 +2692,40 @@ Multithreading
 
 
 
-======
 Limits
-======
----------
+------
 -mem_mode
----------
+^^^^^^^^^
   **Usage:  deprecated**
 
--------
 -ulimit
--------
+^^^^^^^
   **Usage:  -ulimit=<value>**
 
    *Default: -ulimit=0*
 
    *Specifies the upper limit of memory usage (in Megabytes). Processes exceeding this limit will automatically exit. A value 0 indicates that no limit applies.*
 
--------
 -maxlen
--------
+^^^^^^^
   **Usage:  -maxlen=<value, 0=nolimit>**
 
    *Default: -maxlen=1000*
 
    *Indicates the maximum length of the sequences.*
 
-=========================================
 Aligning more than 100 sequences with DPA
-=========================================
---------
+-----------------------------------------
 -maxnseq
---------
+^^^^^^^^
   **Usage:  -maxnseq=<value, 0=nolimit>**
 
    *Default: -maxnseq=50*
 
    *Indicates the maximum number of sequences before triggering the use of t_coffee_dpa.*
 
----------------
 -dpa_master_aln
----------------
+^^^^^^^^^^^^^^^
   **Usage: -dpa_master_aln=<File, method>**
 
    *Default: -dpa_master_aln=NO*
@@ -2888,69 +2740,60 @@ Aligning more than 100 sequences with DPA
 
 
 
-------------
 -dpa_maxnseq
-------------
+^^^^^^^^^^^^
   **Usage: -dpa_maxnseq=<integer value>**
 
    *Default: -dpa_maxnseq=30*
 
    *Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than -dpa_maxnseq OR if it controls a pair of sequences having less than -dpa_min_score2 percent ID.*
 
----------------
 -dpa_min_score1
----------------
+^^^^^^^^^^^^^^^
   **Usage: -dpa_min_score1=<integer value>**
 
    *Default: -dpa_min_score1=95*
 
    *Threshold for not realigning the sequences within the master alignment. Given this alignment and the associated tree, sequences below a node are not realigned if none of them has less than -dpa_min_score1 % identity.*
 
----------------
 -dpa_min_score2
----------------
+^^^^^^^^^^^^^^^
   **Usage: -dpa_min_score2**
 
    *Default: -dpa_min_score2*
 
    *Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than -dpa_maxnseq OR if it controls a pair of sequences having less than -dpa_min_score2 percent ID.*
 
----------------------------
 -dap_tree [NOT IMPLEMENTED]
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
   **Usage:  -dpa_tree=<filename>**
 
    *Default: -unset*
 
    *Guide tree used in DPA. This is a newick tree where the distance associated with each node is set to the minimum pairwise distance among all considered sequences.*
 
-****************
 Using Structures
-****************
-=======
+================
 Generic
-=======
------
+-------
 -mode
------
+^^^^^
   **Usage: -mode=3dcoffee**
 
    *Default: turned off*
 
    *Runs t_coffee with the 3dcoffee mode (cf next section).*
 
------------------
 -check_pdb_status
------------------
+^^^^^^^^^^^^^^^^^
   **Usage: -check_pdb_status**
 
    *Default: turned off*
 
    *Forces t_coffee to run extract_from_pdb to check the pdb status of each sequence. This can considerably slow down the program.*
 
-====================
 3D Coffee: Using SAP
-====================
+--------------------
    *It is possible to use t_coffee to compute multiple structural alignments. To do so, ensure that you have the sap program installed.*
 
 ::
@@ -2983,12 +2826,10 @@ Generic
 
 
 
-=============================================
 Using/finding PDB templates for the Sequences
-=============================================
---------------
+---------------------------------------------
 -template_file
---------------
+^^^^^^^^^^^^^^
   **Usage: -template_file =**
 
   **<filename,**
@@ -3123,30 +2964,26 @@ PSIBLAST: will use the EBI sever to find profiles
 
 
 
--------------
 -struc_to_use
--------------
+^^^^^^^^^^^^^
   **Usage: -struc_to_use=<struc1, struc2...>**
 
    *Default: -struc_to_use=NULL*
 
    *Restricts the 3Dcoffee to a set of pre-defined structures.*
 
-***************
 Domain Analysis
-***************
-=========================
+===============
 Multiple Local Alignments
-=========================
+-------------------------
 It is possible to compute multiple local alignments, using the moca routine. MOCA is a routine that allows extracting all the local alignments that show some similarity with another predefined fragment.
 
 
 'mocca' is a perl script that calls t-coffee and provides it with the appropriate parameters.
 
 
---------------
 -domain/-mocca
---------------
+^^^^^^^^^^^^^^
   **Usage: -domain**
 
    *Default: not set*
@@ -3171,27 +3008,24 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
    *This run will use the fragment 100-160, and will be much faster because it does not need to re-compute the lalign library.*
 
-------
 -start
-------
+^^^^^^
   **Usage: -start=<int value>**
 
    *Default: not set*
 
    *This flag indicates the starting position of the portion of sequence that will be used as a template for the repeat extraction. The value assumes that all the sequences have been concatenated, and is given on the resulting sequence.*
 
-----
 -len
-----
+^^^^
   **Usage: -len=<int value>**
 
    *Default: not set*
 
    *This flag indicates the length of the portion of sequence that will be used as a template.*
 
-------
 -scale
-------
+^^^^^^
   **Usage: -scale=<int value>**
 
    *Default: -scale=-100*
@@ -3202,9 +3036,8 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
    *Increase the scale óIncrease sensitivity ó More alignments( i.e. -50).*
 
-------------------------------
 -domain_interactive [Examples]
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   **Usage: -domain_interactive**
 
    *Default: unset*
@@ -3297,21 +3130,17 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
    *Type X when you are done.*
 
-**************
 Output Control
-**************
-=======
+==============
 Generic
-=======
--------------------------------
+-------
 Conventions Regarding Filenames
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresponding file to be output in stderr or stdout, for an input file, stdin causes the program to requests the corresponding file through pipe. No causes a suppression of the output, as does /dev/null.
 
 
-------------------------------------------
 Identifying the Output files automatically
-------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In the t_coffee output, each output appears in a line:
 
 
@@ -3321,21 +3150,18 @@ In the t_coffee output, each output appears in a line:
 
 
 
------------
 -no_warning
------------
+^^^^^^^^^^^
   **Usage:  -no_warning**
 
    *Default: Switched off*
 
    *Suppresseswarning output.*
 
-==========
 Alignments
-==========
---------
+----------
 -outfile
---------
+^^^^^^^^
   **Usage:  -outfile=<out_aln file,default,no>**
 
 Defau TOC \o '1-1' Word did not find any entries for your table of contents.lt:-outfile=default
@@ -3343,9 +3169,8 @@ Defau TOC \o '1-1' Word did not find any entries for your table of contents.lt:-
 
    *Indicates the name of the alignment output by t_coffee. If the default is used, the alignment is named <your sequences>.aln*
 
--------
 -output
--------
+^^^^^^^
   **Usage:  -output=<format1,format2,...>**
 
    *Default:-output=clustalw*
@@ -3395,18 +3220,16 @@ Defau TOC \o '1-1' Word did not find any entries for your table of contents.lt:-
 http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
 
--------------
 -outseqweight
--------------
+^^^^^^^^^^^^^
   **Usage:  -outseqweight=<filename>**
 
    *Default: not used*
 
    *Indicates the name of the file in which the sequences weights should be saved..*
 
------
 -case
------
+^^^^^
   **Usage:  -case=<keep,upper,lower>**
 
    *Default: -case=keep*
@@ -3423,14 +3246,12 @@ If you need to change the case of your file, you can use seq_reformat:
 
 
 
-----
 -cpu
-----
+^^^^
   **Usage:  deprecated**
 
--------------
 -outseqweight
--------------
+^^^^^^^^^^^^^
 Usage: -outseqweight=<name of the file containing the weights applied>
 
 
@@ -3440,27 +3261,24 @@ Default: -outseqweight=no
 Will cause the program to output the weights associated with every sequence in the dataset.
 
 
---------------
 -outorder [cw]
---------------
+^^^^^^^^^^^^^^
   **Usage:  -outorder=<input OR aligned OR filename>**
 
    *Default:-outorder=input*
 
    *Sets the order of the sequences in the output alignment: -outorder=input means the sequences are kept in the original order. -outorder=aligned means the sequences come in the order indicated by the tree. This order can be seen as a one-dimensional projection of the tree distances. -outdorder=<filename>Filename is a legal fasta file, whose order will be used in the final alignment.*
 
--------------
 -inorder [cw]
--------------
+^^^^^^^^^^^^^
   **Usage:  -inorder=<input OR aligned>**
 
    *Default:-inorder=aligned*
 
    *Multiple alignments based on dynamic programming depend slightly on the order in which the incoming sequences are provided. To prevent this effect sequences are arbitrarily sorted at the beginning of the program (-inorder=aligned). However, this affects the sequence order within the library. You can switch this off by ststing -inorder=input.*
 
--------
 -seqnos
--------
+^^^^^^^
   **Usage:  -seqnos=<on or off>**
 
    *Default:-seqnos=off*
@@ -3482,15 +3300,13 @@ Causes the output alignment to contain residue numbers at the end of each line:
 
 
 
-=========
 Libraries
-=========
+---------
 Although, it does not necessarily do so explicitly, T-Coffee always end up combining libraries. Libraries are collections of pairs of residues. Given a set of libraries, T-Coffee makes an attempt to assemble the alignment with the highest level of consistence. You can think of the alignment as a timetable. Each library pair would be a request from students or teachers, and the job of T-Coffee would be to assemble the time table that makes as many people as possible happy...
 
 
---------
 -out_lib
---------
+^^^^^^^^
 Usage:  -out_lib=<name of the library,default,no>
 
 
@@ -3499,21 +3315,18 @@ Default:-out_lib=default
 
    *Sets the name of the library output. Default implies <run_name>.tc_lib*
 
----------
 -lib_only
----------
+^^^^^^^^^
   **Usage:  -lib_only**
 
    *Default: unset*
 
    *Causes the program to stop once the library has been computed. Must be used in conjunction with the flag -out_lib*
 
-=====
 Trees
-=====
---------
+-----
 -newtree
---------
+^^^^^^^^
   **Usage: -newtree=<tree file>**
 
    *Default: No file specified*
@@ -3522,21 +3335,18 @@ Trees
 
 .. warning:: Do NOT confuse this guide tree with a phylogenetic tree.
 
-**********************
 Reliability Estimation
-**********************
-================
+======================
 CORE Computation
-================
+----------------
 The CORE is an index that indicates the consistency between the library of piarwise alignments and the final multiple alignment. Our experiment indicate that the higher this consistency, the more reliable the alignment. A publication describing the CORE index can be found on:
 
 
 http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
 
---------------
 -evaluate_mode
---------------
+^^^^^^^^^^^^^^
   **Usage: -evaluate_mode=<t_coffee_fast,t_coffee_slow,t_coffee_non_extended >**
 
    *Default: -evaluate_mode=t_coffee_fast*
@@ -3561,15 +3371,12 @@ http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
 
 
-**************
 Generic Output
-**************
-====
+==============
 Misc
-====
----------
+----
 -run_name
----------
+^^^^^^^^^
   **Usage: -run_name=<your run name>**
 
    *Default: no default set*
@@ -3577,40 +3384,33 @@ Misc
 This flag causes the prefix <your sequences> to be replaced by <your run name> when renaming the default output files.
 
 
-------
 -quiet
-------
+^^^^^^
   **Usage: -quiet=<stderr,stdout,file name OR nothing>.**
 
    *Default:-quiet=stderr*
 
    *Redirects the standard output to either a file. -quiet on its own redirect the output to /dev/null.*
 
------------
 -align [CW]
------------
+^^^^^^^^^^^
 This flag indicates that the program must produce the alignment. It is here for compatibility with ClustalW.
 
 
-*******************
 Structural Analysis
-*******************
-================================
+===================
 APDB, iRMSD and tRMSD Parameters
-================================
+--------------------------------
 .. warning:: Warning: These flags will only work within the APDB package that can be invoked via the -other_pg parameter of T-Coffee:
 
 .. warning::                         t_coffee -other_pg apdb -aln <your aln>
 
--------------------------
 -quiet [Same as T-Coffee]
--------------------------
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 -run_name [Same as T-Coffee]
-----------------------------
-----
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 -aln
-----
+^^^^
   **Usage: -aln=<file_name>.**
 
    *Default:none*
@@ -3635,69 +3435,61 @@ APDB, iRMSD and tRMSD Parameters
 
    *The alignment can contain as many structures as you wish.*
 
---------------
 -n_excluded_nb
---------------
+^^^^^^^^^^^^^^
   **Usage: -n_excluded_nb=<integer>.**
 
    *Default:1*
 
    *When evaluating the local score of a pair of aligned residues, the residues immediately next to that column should not contribute to the measure. By default the first to the left and first to the right are excluded.*
 
------------------
 -maximum_distance
------------------
+^^^^^^^^^^^^^^^^^
   **Usage: -maximum_distance=<float>.**
 
    *Default:10*
 
    *Size of the neighborhood considered around every residue. If .-local_mode is set to sphere, -maximum_distance is the radius of a sphere centered around each residue. If -local_mode is set to window, then -maximum_distance is the size of the half window (i.e. window_size=-maximum_distance*2+1).*
 
----------------------
 -similarity_threshold
----------------------
+^^^^^^^^^^^^^^^^^^^^^
   **Usage: -similarity_threshold=<integer>.**
 
    *Default:70*
 
    *Fraction of the neighborhood that must be supportive for a pair of residue to be considered correct in APDB. The neighborhood is a sphere defined by -maximum_distance, and the support is defined by -md_threshold.*
 
------------
 -local_mode
------------
+^^^^^^^^^^^
   **Usage: -local_mode=<sphere,window>.**
 
    *Default:sphere*
 
    *Defines the shape of a neighborhood, either as a sphere or as a window.*
 
--------
 -filter
--------
+^^^^^^^
   **Usage: -filter=<0.00-1.00>.**
 
    *Default:1.00*
 
    *Defines the centiles that should be kept when making the local measure. Foir instance, -filter=0.90 means that the the 10 last centiles will be removed from the evaluation. The filtration is carried out on the iRMSD values.*
 
---------------------------
 -print_rapdb [Unsupported]
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
   **Usage: -print_rapdb (FLAG)**
 
    *Default:off*
 
    *This causes the prints out of the exact neighborhood of every considered pair of residues.*
 
----------------------------
 -outfile [Same as T-Coffee]
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 This flag is meant to control the output name of the colored APDB output. This file will either display the local APDB score or the local iRMD, depending on the value of -color_mode. The default format is defined by -ouptut and is score_html.
 
 
------------
 -color_mode
------------
+^^^^^^^^^^^
   **Usage: -color_mode=<apdb, irmsd>**
 
    *Default:apdb*
@@ -3705,15 +3497,14 @@ This flag is meant to control the output name of the colored APDB output. This f
 This flag is meant to control the colored APDB output (local score). This file will either display the local APDB score or the local iRMD.
 
 
-#################
+*****************
 Building a Server
-#################
+*****************
 We maintain a T-Coffee server (www.tcoffee.org). We will be pleased to provide anyone who wants to set up a similar service with the sources
 
 
-*********************
 Environment Variables
-*********************
+=====================
 T-Coffee stores a lots of information in locations that may be unsuitable when running a server.
 
 
@@ -3762,9 +3553,8 @@ If no valid location can be found for HOME_4_TCOFFEE, the program exits. If you 
 Note that  it is a good idea to have a cron job that cleans up this scratch area, once in a while.
 
 
-************************
 Output of the .dnd file.
-************************
+========================
 A common source of error when running a server: T-Coffee MUST output the .dnd file because it re-reads it to carry out the progressive alignment. By default T-Coffee outputs this file in the directory where the process is running. If the T-Coffee process does not have permission to write in that directory, the computation will abort...
 
 
@@ -3777,24 +3567,21 @@ To avoid this, simply specify the name of the output tree:
 Chose the name so that two processes may not over-write each other dnd file.
 
 
-***********
 Permissions
-***********
+===========
 The t_coffee process MUST be allowed to write in some scratch area, even when it is ran by Mr nobody... Make sure the /tmp/ partition is not protected.
 
 
-**************
 Other Programs
-**************
+==============
 T-Coffee may call various programs while it runs (lalign2list by defaults). Make sure your process knows where to find these executables.
 
 
-#######
+*******
 Formats
-#######
-***************
+*******
 Parameter files
-***************
+===============
 Parameter files used with -parameters, -t_coffee_defaults, -dali_defaults... Must contain a valid parameter string where line breaks are allowed. These files cannot contain any comment, the recommended format is one parameter per line:
 
 
@@ -3806,9 +3593,8 @@ Parameter files used with -parameters, -t_coffee_defaults, -dali_defaults... Mus
 
 
 
-**********************
 Sequence Name Handling
-**********************
+======================
 Sequence name handling is meant to be fully consistent with ClustalW (Version 1.75). This implies that in some cases the names of your sequences may be edited when coming out of the program. Five rules apply:
 
 
@@ -3830,33 +3616,28 @@ Sequence name handling is meant to be fully consistent with ClustalW (Version 1.
   5-Duplicated sequences will be renamed (i.e. sequences with the same name in the same dataset) are allowed but will be renamed according to their original order. When sequences come from multiple sources via the -in flag, consistency of the renaming is not guaranteed. You should avoid duplicated sequences as they will cause your input to differ from your output thus making it difficult to track data.
 
 
-****************************
 Automatic Format Recognition
-****************************
+============================
 Most common formats are automatically recognized by t_coffee. See -in and the next section for more details. If your format is not recognized, use readseq or clustalw to switch to another format. We recommend Fasta.
 
 
-**********
 Structures
-**********
+==========
 PDB format is recognized by T-Coffee. T-Coffee uses extract_from_pdb (cf -other_pg flag). extract_from_pdb is a small embeded module that can be used on its own to extract information from pdb files.
 
 
-**************
 RNA Structures
-**************
+==============
 RNA structures can either be coded as T-Coffee libraries, with each line indicating two paired residues, or as alifold output. The selex format is also partly supported (see the seq_reformat tutorial on RNA sequences handling).
 
 
-*********
 Sequences
-*********
+=========
 Sequences can come in the following formats: fasta, pir, swiss-prot, clustal aln, msf aln and t_coffee aln. These formats are the one automatically recognized. Please replace the '*' sign sometimes used for stop codons with an X.
 
 
-**********
 Alignments
-**********
+==========
 Alignments can come in the following formats: msf, ClustalW, Fasta, Pir and t_coffee. The t_coffee format is very similar to the ClustalW format, but slightly more flexible. Any interleaved format with sequence name on each line will be correctly parsed:
 
 
@@ -3902,12 +3683,10 @@ Spaces are forbidden in the name. When the alignment is being read, non characte
 
 .. note:: Note: a different number of lines in the different blocks will cause the program to crash or hang.
 
-*********
 Libraries
-*********
-======================
+=========
 T-COFFEE_LIB_FORMAT_01
-======================
+----------------------
 This is currently the only supported format.
 
 
@@ -4019,9 +3798,8 @@ Blocks can overalp and be incompatible with one another, just like single constr
  
 
 
-======================
 T-COFFEE_LIB_FORMAT_02
-======================
+----------------------
 A simpler format is being developed, however it is not yet fully supported and is only mentioned here for development purpose.
 
 
@@ -4063,9 +3841,8 @@ V1, V2, V3: integer Values (V2 and V3 are optional)
 Value1, Value 2 and Value3 are optional.
 
 
-************
 Library List
-************
+============
 These are lists of pairs of sequences that must be used to compute a library. The format is:
 
 
@@ -4081,15 +3858,13 @@ These are lists of pairs of sequences that must be used to compute a library. Th
 
 
 
-**********************
 Substitution matrices.
-**********************
+======================
 If the required substitution matrix is not available, write your own in a file using the following format:
 
 
-===========================
 ClustalW Style [Deprecated]
-===========================
+---------------------------
 ::
 
   # CLUSTALW_MATRIX FORMAT
@@ -4114,9 +3889,8 @@ v1, v2... are integers, possibly negatives.
 The order of the amino acids is: ABCDEFGHIKLMNQRSTVWXYZ, which means that v1 is the substitution value for A vs A, v2 for A vs B, v3 for B vs B, v4 for A vs C and so on.
 
 
-==========================
 BLAST Format [Recommended]
-==========================
+--------------------------
 ::
 
   # BLAST_MATRIX FORMAT
@@ -4138,9 +3912,8 @@ BLAST Format [Recommended]
 The alphabet can be freely defined
 
 
-*****************
 Sequences Weights
-*****************
+=================
 Create your own weight file, using the -seq_weight flag:
 
 
@@ -4159,9 +3932,9 @@ Create your own weight file, using the -seq_weight flag:
 No duplicate allowed. Sequences not included in the set of sequences provided to t_coffee will be ignored. Order is free. V1 is a float. Un-weighted sequences will see their weight set to 1.
 
 
-##############
+**************
 Known Problems
-##############
+**************
 1-Sensitivity to sequence order: It is difficult to implement a MSA algorithm totally insensitive to the order of input of the sequences. In t_coffee, robustness is increased by sorting the sequences alphabetically before aligning them. Beware that this can result in confusing output where sequences with similar name are unexpectedly close to one another in the final alignment.
 
 
@@ -4177,22 +3950,19 @@ Known Problems
 5-Deploying the program on a
 
 
-###############
+***************
 Technical Notes
-###############
+***************
 These notes are only meant for internal development.
 
 
-***********
 Development
-***********
+===========
 The following examples are only meant for internal development, and are used to insure stability from release to release
 
 
-============
 profile2list
-============
-
+------------
 prf1: profile containing one structure
 
 
@@ -4205,9 +3975,8 @@ prf2: profile containing one structure
 
 
 
-=================
 Command Line List
-=================
+-----------------
 These command lines have been checked before every release (along with the other CL in this documentation:
 
 
@@ -4280,9 +4049,9 @@ These command lines have been checked before every release (along with the other
 
 
 
-########
+********
 To Do...
-########
+********
 -implement UPGMA tree computation
 
 

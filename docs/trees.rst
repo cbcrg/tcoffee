@@ -1,6 +1,9 @@
-**********
-3DTree
-**********
+###################
+Tree Reconstruction 
+###################
+********************************************
+Trees Based on Protein 3D Structures: T-RMSD 
+********************************************
 
 *Tree estimation procedure based on the comparison of internal distances*
 

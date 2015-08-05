@@ -4,6 +4,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <ctype.h>
+#include <search.h>
 #include "io_lib_header.h"
 #include "util_lib_header.h"
 #include "define_header.h"
@@ -2466,7 +2467,7 @@ int channel_profile_profile ( int *prf1, int *prf2, Constraint_list *CL)
   
 /*********************************************************************************************/
 /*                                                                                           */
-/*         FUNCTIONS FOR GETING THE COST : (Sequences) ->evaluate_residue_pair               */
+/*         FUNCTIONS FOR GETING THE COST : (Sequences) ->evaluate_residue_pair ::START        */
 /*                                                                                           */
 /*********************************************************************************************/
 int initialize_scoring_scheme (Constraint_list *CL)
@@ -3908,11 +3909,18 @@ int extend_residue_pair ( Constraint_list *CL, int s1, int r1, int s2, int r2)
 	   return (int)(score*SCORE_K);
 	   }
 	}
+
 /*********************************************************************************************/
 /*                                                                                           */
-/*         FUNCTIONS FOR GETTING THE PW COST :  CL->get_dp_cost                              */
+/*         FUNCTIONS FOR GETING THE COST : (Sequences) ->evaluate_residue_pair ::END         */
 /*                                                                                           */
 /*********************************************************************************************/
+/*********************************************************************************************/
+/*                                                                                           */
+/*         FUNCTIONS FOR GETTING THE PW COST :  CL->get_dp_cost::START                       */
+/*                                                                                           */
+/*********************************************************************************************/
+
 int get_dp_cost_blosum_matrix (Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
 {
   int s1, r1, s2, r2;
@@ -3923,7 +3931,7 @@ int get_dp_cost_blosum_matrix (Alignment *A, int**pos1, int ns1, int*list1, int 
   s2=A->order[list2[0]][0];
   r1=pos1[list1[0]][col1];
   r2=pos2[list2[0]][col2];
-
+  
   /*dp cost function: works only with two sequences*/
   
   if ( seq2R_template_profile (CL->S,s1) ||seq2R_template_profile (CL->S,s2))
@@ -3993,14 +4001,6 @@ int get_dp_cost_pw_matrix (Alignment *A, int**pos1, int ns1, int*list1, int col1
   else
     return -CL->nomatch*SCORE_K ;
 }
-
-/*********************************************************************************************/
-/*                                                                                           */
-/*         FUNCTIONS FOR GETTING THE COST :  CL->get_dp_cost                                     */
-/*                                                                                           */
-/*********************************************************************************************/
-
-
 
 int get_cdna_best_frame_dp_cost (Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
     {
@@ -5052,6 +5052,68 @@ int get_domain_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, 
 	return score;
 	} 
 
+int column2sankoff_score (int *lu, NT_node T, int nseq, int **matrix, int gep);
+int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
+	{
+	  int a, s, rs,r;
+	  static NT_node T;
+	  static int *key;
+	  static int **matrix;
+	  
+	  NT_node N;
+	  int gep=-1;
+	  int nseq=(CL->S)->nseq;
+	  int score;
+	  
+	  if (T==NULL)
+	    {
+	      T=main_read_tree (A->tname);
+	      T=recode_tree    (T, (CL->S));
+	      matrix=read_matrice ("blosum62mt");
+	      key=(int*)vcalloc ((CL->S)->nseq, sizeof (int));
+	    }
+
+	  for ( a=0; a< ns1; a++)
+	    {
+	      s=list1[a];
+	      rs=A->order[s][0];
+	      r=pos1[s][col1];
+	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
+	    }
+	  for ( a=0; a< ns2; a++)
+	    {
+	      s=list2[a];
+	      rs=A->order[s][0];
+	      r =pos2[s][col1];
+	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
+	    }
+	  N=find_node_in_tree (key, nseq, T);
+	  score=column2sankoff_score (key, N, nseq, matrix,gep);
+	  for ( a=0; a< ns1; a++)
+	    {
+	      s=list1[a];
+	      rs=A->order[s][0];
+	      r=pos1[s][col1];
+	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
+	    }
+	  for ( a=0; a< ns2; a++)
+	    {
+	      s=list2[a];
+	      rs=A->order[s][0];
+	      r =pos2[s][col1];
+	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
+	    }
+	  return score;
+	}
+int column2sankoff_score (int *lu, NT_node T, int nseq, int **matrix, int gep)
+{
+  return 1;
+}
+/*********************************************************************************************/
+/*                                                                                           */
+/*         FUNCTIONS FOR GETTING THE PW COST :  CL->get_dp_cost::END                         */
+/*                                                                                           */
+/*********************************************************************************************/
 /*********************************************************************************************/
 /*                                                                                           */
 /*         FUNCTIONS FOR ANALYSING AL OR MATRIX                                              */
