@@ -4,7 +4,7 @@ T-Coffee: Technical Documentation:
 *******************
 Documentation Scope
 *******************
-This documentation covers the following packages:T-Coffee, seq_reformat  PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD.
+This documentation covers the following packages:T-Coffee, seq_reformat PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD.
 
 The most up to date version is available from http://www.tcoffee.org.
 
@@ -41,12 +41,12 @@ Contributors
 T-coffee is developed, maintained, monitored, used and debugged by a dedicated team that include or have included:
 
 
-            Cédric Notredame, Paolo di Tomasso, Jean-François Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan. Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm
+ Cdric Notredame, Paolo di Tomasso, Jean-Franois Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan. Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm
 
 
 Addresses
 =========
-We are always very eager to get some user feedback. Please do not hesitate to drop us a line  at: cedric.notredame@europe.com The latest updates of T-Coffee are always available  on: www.tcoffee.org . On this address you will also find a link to some of the online T-Coffee servers, including Tcoffee@igs
+We are always very eager to get some user feedback. Please do not hesitate to drop us a line at: cedric.notredame@europe.com The latest updates of T-Coffee are always available on: www.tcoffee.org . On this address you will also find a link to some of the online T-Coffee servers, including Tcoffee@igs
 
 
 T-Coffee can be used to automatically check if an updated version is available, however the program will not update automatically, as this can cause endless reproducibility problems.
@@ -141,33 +141,33 @@ We do not mean to steal code, but we will always try to re-use pre-existing code
 In the mean time, here are some important pieces of code from other packages that have been incorporated within the T-Coffee package. These include:
 
 
-         -The Sim algorithm of Huang and Miller that given two sequences computes the N best scoring local alignments.
+ -The Sim algorithm of Huang and Miller that given two sequences computes the N best scoring local alignments.
 
 
-         -The tree reading/computing routines are taken from the ClustalW Package, courtesy of Julie Thompson, Des Higgins and Toby Gibson (Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid Research).
+ -The tree reading/computing routines are taken from the ClustalW Package, courtesy of Julie Thompson, Des Higgins and Toby Gibson (Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid Research).
 
 
-         -The implementation of the algorithm for aligning two sequences in linear space was adapted from Myers and Miller, in CABIOS, 1988, 11-17, vol. 1)
+ -The implementation of the algorithm for aligning two sequences in linear space was adapted from Myers and Miller, in CABIOS, 1988, 11-17, vol. 1)
 
 
-         -Various techniques and algorithms have been implemented. Whenever relevant, the source of the code/algorithm/idea is indicated in the corresponding function.
+ -Various techniques and algorithms have been implemented. Whenever relevant, the source of the code/algorithm/idea is indicated in the corresponding function.
 
 
-         -64 Bits compliance was implemented by Benjamin Sohn, Performance Computing Center Stuttgart (HLRS), Germany
+ -64 Bits compliance was implemented by Benjamin Sohn, Performance Computing Center Stuttgart (HLRS), Germany
 
 
-         -David Mathog (Caltech) provided many fixes and useful feedback for improving the code and making the whole soft behaving more rationally
+ -David Mathog (Caltech) provided many fixes and useful feedback for improving the code and making the whole soft behaving more rationally
 
 
 Bug Reports and Feedback
 ========================
-         -Prof David Jones (UCL) reported and corrected the PDB1K bug (now t_coffee/sap can align PDB sequences longer than 1000 AA).
+ -Prof David Jones (UCL) reported and corrected the PDB1K bug (now t_coffee/sap can align PDB sequences longer than 1000 AA).
 
 
-         -Johan Leckner reported several bugs related to the treatment of PDB structures, insuring a consistent behavior between version 1.37 and current ones.
+ -Johan Leckner reported several bugs related to the treatment of PDB structures, insuring a consistent behavior between version 1.37 and current ones.
 
 
- 
+
 
 ****************
 Reference Manual
@@ -263,19 +263,19 @@ UNIQUE_DIR_4_TCOFFEE
 Sets:
 
 
-         DIR_4_TCOFFEE
+ DIR_4_TCOFFEE
 
 
-         CACHE_4_TCOFFEE
+ CACHE_4_TCOFFEE
 
 
-         TMP_4_TCOFFEE
+ TMP_4_TCOFFEE
 
 
-         PLUGINS_4_TCOFFEE
+ PLUGINS_4_TCOFFEE
 
 
-To the same unique value. The string MUST be a valid directory   
+To the same unique value. The string MUST be a valid directory
 
 
 Setting up the T-Coffee environment variables
@@ -311,7 +311,7 @@ In general, you can set any environment variable using the -setenv flag. You can
 
 .. warning:: IMPORTANT:
 
-.. warning:: export > -setenv > -proxy, -email > t_coffee_env > default  environment
+.. warning:: export > -setenv > -proxy, -email > t_coffee_env > default environment
 
 Note that when you use -setenv for PATH, the value you provide is concatenated TO THE BEGINNING of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
 
@@ -377,11 +377,11 @@ No Flag
 
 ::
 
-  *******sample_param_file.param********  
+  *******sample_param_file.param********
 
-        -in=Ssample_seq1.fasta,Mfast_pair
+   -in=Ssample_seq1.fasta,Mfast_pair
 
-        -output=msf_aln
+   -output=msf_aln
 
   **************************************
 
@@ -403,7 +403,7 @@ No Flag
 
 ::
 
-  cat sample_param_file.param  | t_coffee -parameters=stdin
+  cat sample_param_file.param | t_coffee -parameters=stdin
 
 
 
@@ -415,11 +415,11 @@ No Flag
 
    *This flag tells the program to use some default parameter file for t_coffee. The format of that file is the same as the one used with -parameters. The file used is either:*
 
-   *         1. <file name> if a name has been specified*
+   * 1. <file name> if a name has been specified*
 
-   *         2.  ~/.t_coffee_defaults if no file was specified*
+   * 2. ~/.t_coffee_defaults if no file was specified*
 
-   *         3. The file indicated by the environment variable TCOFFEE_DEFAULTS*
+   * 3. The file indicated by the environment variable TCOFFEE_DEFAULTS*
 
 -mode
 ^^^^^
@@ -429,13 +429,13 @@ No Flag
 
    *It indicates that t_coffee will use some hard coded parameters. These include:*
 
-   *         quickaln: very fast approximate alignment*
+   * quickaln: very fast approximate alignment*
 
-   *         dali: a mode used to combine dali pairwise alignments*
+   * dali: a mode used to combine dali pairwise alignments*
 
-   *         evaluate: defaults for evaluating an alignment*
+   * evaluate: defaults for evaluating an alignment*
 
-   *         3dcoffee: runs t_coffee with the 3dcoffee parameterization*
+   * 3dcoffee: runs t_coffee with the 3dcoffee parameterization*
 
    *Other modes exist that are not yet fully supported*
 
@@ -461,7 +461,7 @@ No Flag
 
   PROMPT: t_coffee -infile=sample_aln1.aln -mode=evaluate
 
-  PROMPT: t_coffee -infile=sample_seq1.aln -in  Lsample_lib1.tc_lib -mode=evaluate
+  PROMPT: t_coffee -infile=sample_seq1.aln -in Lsample_lib1.tc_lib -mode=evaluate
 
 
 
@@ -477,7 +477,7 @@ No Flag
 
 -do_align [cw]
 ^^^^^^^^^^^^^^
-  **Usage:  -do_align**
+  **Usage: -do_align**
 
    *Default: turned on*
 
@@ -501,7 +501,7 @@ Misc Parameters
 
    *Note that if you use no proxy, you should set*
 
-   *         -proxy*
+   * -proxy*
 
 -email
 ^^^^^^
@@ -601,13 +601,13 @@ Sequence Input
 
 -type [cw]
 ^^^^^^^^^^
-  **Usage: -type=DNA ¦ PROTEIN¦ DNA_PROTEIN**
+  **Usage: -type=DNA  PROTEIN DNA_PROTEIN**
 
    *Default: -type=<automatically set>*
 
    *This flag sets the type of the sequences. If omitted, the type is guessed automatically. This flag is compatible with ClustalW.*
 
-.. warning:: Warning:  In case of low complexity or short sequences, it is recommended to set the type manually.
+.. warning:: Warning: In case of low complexity or short sequences, it is recommended to set the type manually.
 
 -seq
 ^^^^
@@ -620,7 +620,7 @@ Sequence Input
 
 -seq_source
 ^^^^^^^^^^^
-  **Usage: -seq_source=<ANY or  _LS or LS >**
+  **Usage: -seq_source=<ANY or _LS or LS >**
 
    *Default: ANY.*
 
@@ -630,13 +630,13 @@ Sequence Input
 
    *-seq_source=S means that only sequences provided via the S tag will be considered. All the other sequences will be ignored.*
 
-.. note:: Note:  This flag is mostly designed for interactions between T-Coffee and T-CoffeeDPA (the large scale version of T-Coffee).
+.. note:: Note: This flag is mostly designed for interactions between T-Coffee and T-CoffeeDPA (the large scale version of T-Coffee).
 
 Structure Input
 ---------------
 -pdb
 ^^^^
-  **Usage:  -pdb=<pdbid1>,<pdbid2>...[Max 200]**
+  **Usage: -pdb=<pdbid1>,<pdbid2>...[Max 200]**
 
    *Default: None*
 
@@ -674,19 +674,19 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
   The -in Flag and its Identifier TAGS
   <-in> is the real grinder of T-Coffee. Sequences, methods and alignments all pass through so that T-Coffee can turn it all into a single list of constraints (the library). Everything is done automatically with T-Coffee going through each file to extract the sequences it contains. The methods are then applied to the sequences. Pre-compiled constraint list can also be provided. Each file provided via this flag must be preceded with a symbol (Identifier TAG) that indicates its nature to T-Coffee. The TAGs currently supported are the following:
-  P         PDB structure
-  S         for sequences (use it as well to treat an MSA as unaligned sequences)
-  M        Methods used to build the library
-  L         Pre-computed T-Coffee library
-  A         Multiple Alignments that must be turned into a Library
-  X         Substitution matrices.
-  R                     Profiles. This is a legal multiple alignments that will be treated as single sequences (the sequences it contains will not be realigned).
+  P PDB structure
+  S  for sequences (use it as well to treat an MSA as unaligned sequences)
+  M  Methods used to build the library
+  L  Pre-computed T-Coffee library
+  A  Multiple Alignments that must be turned into a Library
+  X  Substitution matrices.
+  R  Profiles. This is a legal multiple alignments that will be treated as single sequences (the sequences it contains will not be realigned).
   If you do not want to use the TAGS, you will need to use the following flags in replacement of -in. Do not use the TAGS when using these flags:
-  -aln                            Alignments   (A)
-  -profile          Profiles          (R)
-  -method         Method          (M)
-  -seq                            Sequences     (S)
-  -lib                             Libraries       (L)
+  -aln  Alignments  (A)
+  -profile Profiles  (R)
+  -method Method  (M)
+  -seq Sequences  (S)
+  -lib Libraries (L)
 
 
 -in
@@ -711,7 +711,7 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
    *Sequences within all the provided files are pooled together. Format recognition is automatic. Duplicates are removed (if they have the same name). Duplicates in a single file are only tolerated in FASTA format file, although they will cause sequences to be renamed.*
 
-   *In the above case, the total set of sequences will be made of sequences contained in sequences1.seq, alignment1.aln, alignment2.msf and library.lib, plus the sequences initially gathered  by -infile.*
+   *In the above case, the total set of sequences will be made of sequences contained in sequences1.seq, alignment1.aln, alignment2.msf and library.lib, plus the sequences initially gathered by -infile.*
 
    *2-Turn alignments into libraries*
 
@@ -729,9 +729,9 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
 ::
 
-  aln 1:hgab1   AAAAABAAAAA
+  aln 1:hgab1  AAAAABAAAAA
 
-  aln 2:hgab1   AAAAAAAAAACCC
+  aln 2:hgab1 AAAAAAAAAACCC
 
 
 
@@ -739,7 +739,7 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
 ::
 
-  hgab1   AAAAABAAAAACCC
+  hgab1 AAAAABAAAAACCC
 
 
 
@@ -751,13 +751,13 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -in=Xpam250mt  -gapopen=-10  -gapext=-1
+  PROMPT: t_coffee sample_seq1.fasta -in=Xpam250mt -gapopen=-10 -gapext=-1
 
 
 
    *This command results in a progressive alignment carried out on the sequences in seqfile. The procedure does not use any more the T-Coffee concistency based algorithm, but switches to a standard progressive alignment algorithm (like ClustalW or Pileup) much less accurate. In this context, appropriate gap penalties should be provided. The matrices are in the file source/matrices.h. Add-Hoc matrices can also be provided by the user (see the matrices format section at the end of this manual).*
 
-.. warning:: Warning: Xmatrix does not have the same effect as using the -matrix flag.  The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
+.. warning:: Warning: Xmatrix does not have the same effect as using the -matrix flag. The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
 
 Profile Input
 -------------
@@ -819,7 +819,7 @@ Library Computation: Extension
 ------------------------------
 -lib_list [Unsupported]
 ^^^^^^^^^^^^^^^^^^^^^^^
-  **Usage:  -lib_list=<filename>**
+  **Usage: -lib_list=<filename>**
 
    *Default:unset*
 
@@ -829,19 +829,19 @@ Library Computation: Extension
 
 ::
 
-        2 Name1 name2
+   2 Name1 name2
 
-        2 Name1 name4
+   2 Name1 name4
 
-        3 Name1 Name2 Name3...
+   3 Name1 Name2 Name3...
 
 
 
-   *         (the line 3 would be used by a multiple alignment method).*
+   * (the line 3 would be used by a multiple alignment method).*
 
 -do_normalise
 ^^^^^^^^^^^^^
-  **Usage:  -do_normalise=<0 or a positive value>**
+  **Usage: -do_normalise=<0 or a positive value>**
 
    *Default:-do_normalise=1000*
 
@@ -851,7 +851,7 @@ Library Computation: Extension
 
 -extend
 ^^^^^^^
-  **Usage:  -extend=<0,1 or a positive value>**
+  **Usage: -extend=<0,1 or a positive value>**
 
    *Default:-extend=1*
 
@@ -861,7 +861,7 @@ Library Computation: Extension
 
 -extend_mode
 ^^^^^^^^^^^^
-  **Usage:  -extend=<string>**
+  **Usage: -extend=<string>**
 
    *Default:-extend=very_fast_triplet*
 
@@ -869,31 +869,31 @@ Library Computation: Extension
 
    *Controls the algorithm for matrix extension. Available modes include:*
 
-   *relative_triplet             Unsupported*
+   *relative_triplet Unsupported*
 
-   *g_coffee                                  Unsupported*
+   *g_coffee Unsupported*
 
-   *g_coffee_quadruplets     Unsupported*
+   *g_coffee_quadruplets Unsupported*
 
-   *fast_triplet                  Fast triplet extension*
+   *fast_triplet Fast triplet extension*
 
-   *very_fast_triplet                       slow triplet extension, limited to the -max_n_pair best sequence pairs when aligning two profiles*
+   *very_fast_triplet slow triplet extension, limited to the -max_n_pair best sequence pairs when aligning two profiles*
 
-   *slow_triplet                Exhaustive use of all the triplets*
+   *slow_triplet Exhaustive use of all the triplets*
 
-   *mixt                          Unsupported*
+   *mixt Unsupported*
 
-   *quadruplet                  Unsupported*
+   *quadruplet Unsupported*
 
-   *test                            Unsupported*
+   *test Unsupported*
 
-   *matrix                                   Use of the matrix -matrix*
+   *matrix Use of the matrix -matrix*
 
-   *fast_matrix                  Use of the matrix -matrix. Profiles are turned into consensus*
+   *fast_matrix Use of the matrix -matrix. Profiles are turned into consensus*
 
 -max_n_pair
 ^^^^^^^^^^^
-  **Usage:  -max_n_pair=<integer>**
+  **Usage: -max_n_pair=<integer>**
 
    *Default:-extend=10*
 
@@ -903,23 +903,23 @@ Library Computation: Extension
 
 -seq_name_for_quadruplet
 ^^^^^^^^^^^^^^^^^^^^^^^^
-  **Usage:  Unsupported**
+  **Usage: Unsupported**
 
 -compact
 ^^^^^^^^
-  **Usage:  Unsupported**
+  **Usage: Unsupported**
 
 -clean
 ^^^^^^
-  **Usage:  Unsupported**
+  **Usage: Unsupported**
 
 -maximise
 ^^^^^^^^^
-  **Usage:  Unsupported**
+  **Usage: Unsupported**
 
 -do_self
 ^^^^^^^^
-  **Usage:  Flag -do_self**
+  **Usage: Flag -do_self**
 
   **Default: No**
 
@@ -927,15 +927,15 @@ Library Computation: Extension
 
 -seq_name_for_quadruplet
 ^^^^^^^^^^^^^^^^^^^^^^^^
-  **Usage:  Unsupported**
+  **Usage: Unsupported**
 
 -weight
 ^^^^^^^
-  **Usage:  -weight=<winsimN, sim or sim_<matrix_name or matrix_file> or <integer value>**
+  **Usage: -weight=<winsimN, sim or sim_<matrix_name or matrix_file> or <integer value>**
 
    *Default: -weight=sim*
 
-   *Weight defines the way alignments are weighted when turned into a library.  Overweighting can be obtained with the OW<X> weight mode.*
+   *Weight defines the way alignments are weighted when turned into a library. Overweighting can be obtained with the OW<X> weight mode.*
 
    *winsimN indicates that the weight assigned to a given pair will be equal to the percent identity within a window of 2N+1 length centered on that pair. For instance winsim10 defines a window of 10 residues around the pair being considered. This gives its own weight to each residue in the output library. In our hands, this type of weighting scheme has not provided any significant improvement over the standard sim value.*
 
@@ -983,13 +983,13 @@ Tree Computation
 
    *Slow  The chosen dp_mode using the extended library,*
 
-   *fast:              The fasta dp_mode using the extended library.*
+   *fast:  The fasta dp_mode using the extended library.*
 
-   *very_fast        The fasta dp_mode using blosum62mt.*
+   *very_fast The fasta dp_mode using blosum62mt.*
 
-   *ktup  Ktup matching (Muscle kind)*
+   *ktup Ktup matching (Muscle kind)*
 
-   *aln                Read the distances on a precomputed MSA*
+   *aln Read the distances on a precomputed MSA*
 
 -quicktree [CW]
 ^^^^^^^^^^^^^^^
@@ -1023,7 +1023,7 @@ Pair-wise Alignment Computation
 
 -dp_mode
 ^^^^^^^^
-  **Usage:  -dp_mode=<string>**
+  **Usage: -dp_mode=<string>**
 
    *Default: -dp_mode=cfasta_fair_wise*
 
@@ -1047,7 +1047,7 @@ Pair-wise Alignment Computation
 
 -ktuple
 ^^^^^^^
-  **Usage:  -ktuple=<value>**
+  **Usage: -ktuple=<value>**
 
    *Default: -ktuple=1 or 2*
 
@@ -1055,17 +1055,17 @@ Pair-wise Alignment Computation
 
 -ndiag
 ^^^^^^
-  **Usage:  -ndiag=<value>**
+  **Usage: -ndiag=<value>**
 
    *Default: -ndiag=0*
 
-   *Indicates the number of diagonals used by the fasta_pair_wise algorithm (cf -dp_mode). When  -ndiag=0, n_diag=Log (length of the smallest sequence)+1.*
+   *Indicates the number of diagonals used by the fasta_pair_wise algorithm (cf -dp_mode). When -ndiag=0, n_diag=Log (length of the smallest sequence)+1.*
 
 .. note:: When -ndiag and -diag_threshold are set, diagonals are selected if and only if they fulfill both conditions.
 
 -diag_mode
 ^^^^^^^^^^
-  **Usage:  -diag_mode=<value>**
+  **Usage: -diag_mode=<value>**
 
    *Default: -diag_mode=0*
 
@@ -1077,7 +1077,7 @@ Pair-wise Alignment Computation
 
 -diag_threshold
 ^^^^^^^^^^^^^^^
-  **Usage:  -diag_threshold=<value>**
+  **Usage: -diag_threshold=<value>**
 
    *Default: -diag_threshold=0*
 
@@ -1087,7 +1087,7 @@ Pair-wise Alignment Computation
 
 -sim_matrix
 ^^^^^^^^^^^
-  **Usage:  -sim_matrix=<string>**
+  **Usage: -sim_matrix=<string>**
 
    *Default: -sim_matrix=vasiliky*
 
@@ -1103,7 +1103,7 @@ Pair-wise Alignment Computation
 
 -matrix [CW]
 ^^^^^^^^^^^^
-  **Usage:  -matrix=<blosum62mt>**
+  **Usage: -matrix=<blosum62mt>**
 
    *Default: -matrix=blosum62mt*
 
@@ -1113,7 +1113,7 @@ Pair-wise Alignment Computation
 
 -nomatch
 ^^^^^^^^
-  **Usage:  -nomatch=<positive value>**
+  **Usage: -nomatch=<positive value>**
 
    *Default: -nomatch=0*
 
@@ -1121,7 +1121,7 @@ Pair-wise Alignment Computation
 
 -gapopen
 ^^^^^^^^
-  **Usage:  -gapopen=<negative value>**
+  **Usage: -gapopen=<negative value>**
 
    *Default: -gapopen=0*
 
@@ -1131,7 +1131,7 @@ Pair-wise Alignment Computation
 
 -gapext
 ^^^^^^^
-  **Usage:  -gapext=<negative value>**
+  **Usage: -gapext=<negative value>**
 
    *Default: -gapext=0*
 
@@ -1147,7 +1147,7 @@ Pair-wise Alignment Computation
 
 -cosmetic_penalty
 ^^^^^^^^^^^^^^^^^
-  **Usage:  -cosmetic_penalty=<negative value>**
+  **Usage: -cosmetic_penalty=<negative value>**
 
    *Default: -cosmetic_penalty=-50*
 
@@ -1157,7 +1157,7 @@ Pair-wise Alignment Computation
 
 -tg_mode
 ^^^^^^^^
-  **Usage:  -tg_mode=<0, 1, or 2>**
+  **Usage: -tg_mode=<0, 1, or 2>**
 
    *Default: -tg_mode=1*
 
@@ -1179,9 +1179,9 @@ Weighting Schemes
 
 ::
 
-           sim(A,B)=%similarity between A and B, between 0 and 1.
+   sim(A,B)=%similarity between A and B, between 0 and 1.
 
-           weight(A)=1/sum(sim(A,X)^3)
+   weight(A)=1/sum(sim(A,X)^3)
 
 
 
@@ -1189,13 +1189,13 @@ Weighting Schemes
 
 ::
 
-           res_score(Ax,By)=Min(weight(A), weight(B))*res_score(Ax, By)
+   res_score(Ax,By)=Min(weight(A), weight(B))*res_score(Ax, By)
 
 
 
    *These are very simple weights. Their main goal is to prevent a single sequence present in many copies to dominate the alignment.*
 
-.. note:: Note: The library output by -out_lib is the un-weighted  library.
+.. note:: Note: The library output by -out_lib is the un-weighted library.
 
 .. note:: Note: Weights can be output using the -outseqweight flag.
 
@@ -1217,7 +1217,7 @@ Multiple Alignment Computation
 
    *Default: not used*
 
-   *Will generate a one to all library with respect to the specified sequence and will then align all the sequences in turn to that sequence, in a sequence determined by the order in which the sequences were provided. *
+   *Will generate a one to all library with respect to the specified sequence and will then align all the sequences in turn to that sequence, in a sequence determined by the order in which the sequences were provided.*
 
    *-profile_comparison =profile, the MSAs provided via -profile are vectorized and the function specified by -profile_comparison is used to make profile profile alignments. In that case, the complexity is NL^2*
 
@@ -1251,11 +1251,11 @@ Alignment Post-Processing
 -------------------------
 -clean_aln
 ^^^^^^^^^^
-  **Usage:  -clean_aln **
+  **Usage: -clean_aln**
 
    *Default:-clean_aln*
 
-   *This flag causes T-Coffee to post-process the multiple alignment. Residues that have a reliability score smaller or equal to -clean_threshold (as given by an evaluation that uses -clean_evaluate_mode)  are realigned to the rest of the alignment. Residues with a score higher than the threshold constitute a rigid framework that cannot be altered.*
+   *This flag causes T-Coffee to post-process the multiple alignment. Residues that have a reliability score smaller or equal to -clean_threshold (as given by an evaluation that uses -clean_evaluate_mode) are realigned to the rest of the alignment. Residues with a score higher than the threshold constitute a rigid framework that cannot be altered.*
 
    *The cleaning algorithm is greedy. It starts from the top left segment of low constituency residues and works its way left to right, top to bottom along the alignment. You can require this operation to be carried out for several cycles using the -clean_iterations flag.*
 
@@ -1267,7 +1267,7 @@ Alignment Post-Processing
 
 -clean_threshold
 ^^^^^^^^^^^^^^^^
-  **Usage:  -clean_threshold=<0-9> **
+  **Usage: -clean_threshold=<0-9>**
 
   **Default:-clean_aln=1**
 
@@ -1276,7 +1276,7 @@ See -clean_aln for details.
 
 -clean_iteration
 ^^^^^^^^^^^^^^^^
-  **Usage:  -clean_iteration=<value between 1 and > **
+  **Usage: -clean_iteration=<value between 1 and >**
 
    *Default:-clean_iteration=1*
 
@@ -1285,7 +1285,7 @@ See -clean_aln for details.
 
 -clean_evaluation_mode
 ^^^^^^^^^^^^^^^^^^^^^^
-  **Usage:  -clean_iteration=<evaluation_mode > **
+  **Usage: -clean_iteration=<evaluation_mode >**
 
    *Default:-clean_iteration=t_coffee_non_extended*
 
@@ -1308,7 +1308,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -blast_server
 ^^^^^^^^^^^^^
-  **Usage:  -blast_server= EBI, NCBI or LOCAL_BLAST**
+  **Usage: -blast_server= EBI, NCBI or LOCAL_BLAST**
 
    *Default: EBI*
 
@@ -1316,7 +1316,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -prot_min_sim
 ^^^^^^^^^^^^^
-  **Usage:  -prot_min_sim= <percent_id>**
+  **Usage: -prot_min_sim= <percent_id>**
 
    *Default: 40*
 
@@ -1324,7 +1324,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -prot_max_sim
 ^^^^^^^^^^^^^
-  **Usage:  -prot_max_sim= <percent_id>**
+  **Usage: -prot_max_sim= <percent_id>**
 
    *Default: 90*
 
@@ -1332,7 +1332,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -prot_min_cov
 ^^^^^^^^^^^^^
-  **Usage:  -prot_min_cov= <percent>**
+  **Usage: -prot_min_cov= <percent>**
 
    *Default: 40*
 
@@ -1340,7 +1340,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -protein_db
 ^^^^^^^^^^^
-  **Usage:  -protein_db= <BLAST database>**
+  **Usage: -protein_db= <BLAST database>**
 
    *Default: nr*
 
@@ -1348,7 +1348,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -pdb_min_sim
 ^^^^^^^^^^^^
-  **Usage:  -pdb_min_sim= <percent_id>**
+  **Usage: -pdb_min_sim= <percent_id>**
 
    *Default: 35*
 
@@ -1356,7 +1356,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -pdb_max_sim
 ^^^^^^^^^^^^
-  **Usage:  -pdb_max_sim= <percent_id>**
+  **Usage: -pdb_max_sim= <percent_id>**
 
    *Default: 100*
 
@@ -1364,7 +1364,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -pdb_min_cov
 ^^^^^^^^^^^^
-  **Usage:  -pdb_min_cov= <percent>**
+  **Usage: -pdb_min_cov= <percent>**
 
    *Default: 50*
 
@@ -1372,7 +1372,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -pdb_db
 ^^^^^^^
-  **Usage:  -protein_db= <BLAST database>**
+  **Usage: -protein_db= <BLAST database>**
 
    *Default: pdb*
 
@@ -1380,7 +1380,7 @@ These parameters are used by T-Coffee when running expresso, accurate and psicof
 
 -pdb_type
 ^^^^^^^^^
-  **Usage:  -pdb_type= d,n,m,dnm,dn**
+  **Usage: -pdb_type= d,n,m,dnm,dn**
 
    *Default: d*
 
@@ -1396,7 +1396,7 @@ Multithreading
 --------------
 -multi_core
 ^^^^^^^^^^^
-  **Usage:  -multi_core= templates_jobs_relax_msa**
+  **Usage: -multi_core= templates_jobs_relax_msa**
 
    *Default: 0*
 
@@ -1426,7 +1426,7 @@ Multithreading
 
 -n_core
 ^^^^^^^
-  **Usage:  -n_core= <number of cores>**
+  **Usage: -n_core= <number of cores>**
 
    *Default: 0*
 
@@ -1442,11 +1442,11 @@ Limits
 ------
 -mem_mode
 ^^^^^^^^^
-  **Usage:  deprecated**
+  **Usage: deprecated**
 
 -ulimit
 ^^^^^^^
-  **Usage:  -ulimit=<value>**
+  **Usage: -ulimit=<value>**
 
    *Default: -ulimit=0*
 
@@ -1454,7 +1454,7 @@ Limits
 
 -maxlen
 ^^^^^^^
-  **Usage:  -maxlen=<value, 0=nolimit>**
+  **Usage: -maxlen=<value, 0=nolimit>**
 
    *Default: -maxlen=1000*
 
@@ -1464,7 +1464,7 @@ Aligning more than 100 sequences with DPA
 -----------------------------------------
 -maxnseq
 ^^^^^^^^
-  **Usage:  -maxnseq=<value, 0=nolimit>**
+  **Usage: -maxnseq=<value, 0=nolimit>**
 
    *Default: -maxnseq=50*
 
@@ -1512,7 +1512,7 @@ Aligning more than 100 sequences with DPA
 
 -dap_tree [NOT IMPLEMENTED]
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  **Usage:  -dpa_tree=<filename>**
+  **Usage: -dpa_tree=<filename>**
 
    *Default: -unset*
 
@@ -1548,7 +1548,7 @@ Generic
 
 
 
-   *Will combine the pairwise alignments produced by SAP.  There are currently four methods that can be interfaced with t_coffee:*
+   *Will combine the pairwise alignments produced by SAP. There are currently four methods that can be interfaced with t_coffee:*
 
    *sap_pair: that uses the sap algorithm*
 
@@ -1624,31 +1624,31 @@ PSIBLAST: will use the EBI sever to find profiles
 
    *Note the following rule:*
 
-   *         -Each sequence can have one template of each type (structural, genomics...)*
+   * -Each sequence can have one template of each type (structural, genomics...)*
 
-   *         -Each sequence can only have one template of a given type*
+   * -Each sequence can only have one template of a given type*
 
-   *         -Several sequences can share the same template*
+   * -Several sequences can share the same template*
 
-   *         -All the sequences do not need to have a template*
+   * -All the sequences do not need to have a template*
 
    *The type of template on which a method works is declared with the SEQ_TYPE parameter in the method configuration file:*
 
-   *         SEQ_TYPE       S: a method that uses sequences*
+   * SEQ_TYPE S: a method that uses sequences*
 
-   *         SEQ_TYPE       PS: a pairwise method that aligns sequences and structures*
+   * SEQ_TYPE PS: a pairwise method that aligns sequences and structures*
 
-   *         SEQ_TYPE       P: a method that aligns structures (sap for instance)*
+   * SEQ_TYPE P: a method that aligns structures (sap for instance)*
 
    *There are 4 tags identifying the template type:*
 
-   *_P_    Structural templates: a pdb identifier OR a pdb file*
+   *_P_ Structural templates: a pdb identifier OR a pdb file*
 
-   *_G_   Genomic templates: a protein sequence where boundary amino-acid have been recoded with ( o:0, i:1, j:2)*
+   *_G_ Genomic templates: a protein sequence where boundary amino-acid have been recoded with ( o:0, i:1, j:2)*
 
-   *_R_   Profile Templates: a file containing a multiple sequence alignment*
+   *_R_ Profile Templates: a file containing a multiple sequence alignment*
 
-   *_F_    RNA secondary Structures*
+   *_F_ RNA secondary Structures*
 
    *More than one template file can be provided. There is no need to have one template for every sequence in the dataset.*
 
@@ -1778,9 +1778,9 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
    *This flag indicates the value of the threshold for extracting the repeats. The actual threshold is equal to:*
 
-   *         motif_len*scale*
+   * motif_len*scale*
 
-   *Increase the scale óIncrease sensitivity ó More alignments( i.e. -50).*
+   *Increase the scale Increase sensitivity  More alignments( i.e. -50).*
 
 -domain_interactive [Examples]
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1794,73 +1794,73 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
   PROMPT: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60
 
-  TOLB_ECOLI_212_26                      211 SKLAYVTFESGR--SALVIQTLANGAVRQV-ASFPRHNGAPAFSPDGSKLAFA
+  TOLB_ECOLI_212_26  211 SKLAYVTFESGR--SALVIQTLANGAVRQV-ASFPRHNGAPAFSPDGSKLAFA
 
-  TOLB_ECOLI_165_218    164 TRIAYVVQTNGGQFPYELRVSDYDGYNQFVVHRSPQPLMSPAWSPDGSKLAYV
+  TOLB_ECOLI_165_218 164 TRIAYVVQTNGGQFPYELRVSDYDGYNQFVVHRSPQPLMSPAWSPDGSKLAYV
 
-  TOLB_ECOLI_256_306    255 SKLAFALSKTGS--LNLYVMDLASGQIRQV-TDGRSNNTEPTWFPDSQNLAFT
+  TOLB_ECOLI_256_306 255 SKLAFALSKTGS--LNLYVMDLASGQIRQV-TDGRSNNTEPTWFPDSQNLAFT
 
-  TOLB_ECOLI_307_350    306 -------DQAGR--PQVYKVNINGGAPQRI-TWEGSQNQDADVSSDGKFMVMV
+  TOLB_ECOLI_307_350 306 -------DQAGR--PQVYKVNINGGAPQRI-TWEGSQNQDADVSSDGKFMVMV
 
-  TOLB_ECOLI_351_393    350 -------SNGGQ--QHIAKQDLATGGV-QV-LSSTFLDETPSLAPNGTMVIYS 
+  TOLB_ECOLI_351_393 350 -------SNGGQ--QHIAKQDLATGGV-QV-LSSTFLDETPSLAPNGTMVIYS
 
-                          1           *             *    :          .   .:.  :   
+   1 * * : . .:. :
 
-          MENU: Type Letter Flag[number] and Return: ex |10
+   MENU: Type Letter Flag[number] and Return: ex |10
 
-          |x      -->Set     the START to x
+   |x -->Set the START to x
 
-          >x      -->Set     the LEN   to x
+   >x -->Set the LEN to x
 
-          Cx      -->Set     the sCale to x
+   Cx -->Set the sCale to x
 
-          Sname   -->Save    the  Alignment
+   Sname -->Save the Alignment
 
-          Bx      -->Save    Goes back x it
+   Bx -->Save Goes back x it
 
-          return  -->Compute the  Alignment
+   return -->Compute the Alignment
 
-          X       -->eXit
+   X -->eXit
 
-  [ITERATION   1] [START=211] [LEN= 50] [SCALE=-100]      YOUR CHOICE:
+  [ITERATION 1] [START=211] [LEN= 50] [SCALE=-100] YOUR CHOICE:
 
   For instance, to set the length of the domain to 40, type:
 
-  [ITERATION   1] [START=211] [LEN= 50] [SCALE=-100]      YOUR CHOICE:>40[return]
+  [ITERATION 1] [START=211] [LEN= 50] [SCALE=-100] YOUR CHOICE:>40[return]
 
   [return]
 
   Which will generate:
 
-  TOLB_ECOLI_212_252    211 SKLAYVTFESGRSALVIQTLANGAVRQVASFPRHNGAPAF  251
+  TOLB_ECOLI_212_252 211 SKLAYVTFESGRSALVIQTLANGAVRQVASFPRHNGAPAF 251
 
-  TOLB_ECOLI_256_296    255 SKLAFALSKTGSLNLYVMDLASGQIRQVTDGRSNNTEPTW  295
+  TOLB_ECOLI_256_296 255 SKLAFALSKTGSLNLYVMDLASGQIRQVTDGRSNNTEPTW 295
 
-  TOLB_ECOLI_300_340    299 QNLAFTSDQAGRPQVYKVNINGGAPQRITWEGSQNQDADV  339
+  TOLB_ECOLI_300_340 299 QNLAFTSDQAGRPQVYKVNINGGAPQRITWEGSQNQDADV 339
 
-  TOLB_ECOLI_344_383    343 KFMVMVSSNGGQQHIAKQDLATGGV-QVLSSTFLDETPSL  382
+  TOLB_ECOLI_344_383 343 KFMVMVSSNGGQQHIAKQDLATGGV-QVLSSTFLDETPSL 382
 
-  TOLB_ECOLI_387_427    386 TMVIYSSSQGMGSVLNLVSTDGRFKARLPATDGQVKFPAW  426
+  TOLB_ECOLI_387_427 386 TMVIYSSSQGMGSVLNLVSTDGRFKARLPATDGQVKFPAW 426
 
-                          1   :     :     :           ::         .     40
+   1 : : : :: . 40
 
-          MENU: Type Letter Flag[number] and Return: ex |10
+   MENU: Type Letter Flag[number] and Return: ex |10
 
-          |x      -->Set     the START to x
+   |x -->Set the START to x
 
-          >x      -->Set     the LEN   to x
+   >x -->Set the LEN to x
 
-          Cx      -->Set     the sCale to x
+   Cx -->Set the sCale to x
 
-          Sname   -->Save    the  Alignment
+   Sname -->Save the Alignment
 
-          Bx      -->Save    Goes back x it
+   Bx -->Save Goes back x it
 
-          return  -->Compute the  Alignment
+   return -->Compute the Alignment
 
-          X       -->eXit
+   X -->eXit
 
-  [ITERATION   3] [START=211] [LEN= 40] [SCALE=-100]      YOUR CHOICE:
+  [ITERATION 3] [START=211] [LEN= 40] [SCALE=-100] YOUR CHOICE:
 
 
 
@@ -1868,7 +1868,7 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
 ::
 
-    |<seq_name>:start
+   |<seq_name>:start
 
 
 
@@ -1898,7 +1898,7 @@ In the t_coffee output, each output appears in a line:
 
 -no_warning
 ^^^^^^^^^^^
-  **Usage:  -no_warning**
+  **Usage: -no_warning**
 
    *Default: Switched off*
 
@@ -1908,7 +1908,7 @@ Alignments
 ----------
 -outfile
 ^^^^^^^^
-  **Usage:  -outfile=<out_aln file,default,no>**
+  **Usage: -outfile=<out_aln file,default,no>**
 
 Defau TOC \o '1-1' Word did not find any entries for your table of contents.lt:-outfile=default
 
@@ -1917,7 +1917,7 @@ Defau TOC \o '1-1' Word did not find any entries for your table of contents.lt:-
 
 -output
 ^^^^^^^
-  **Usage:  -output=<format1,format2,...>**
+  **Usage: -output=<format1,format2,...>**
 
    *Default:-output=clustalw*
 
@@ -1925,33 +1925,33 @@ Defau TOC \o '1-1' Word did not find any entries for your table of contents.lt:-
 
    *Supported formats are:*
 
-   *        *
+   **
 
-   *clustalw_aln, clustalw     : ClustalW format.*
+   *clustalw_aln, clustalw : ClustalW format.*
 
-   *gcg, msf_aln                             : MSF alignment.*
+   *gcg, msf_aln  : MSF alignment.*
 
-   *pir_aln                         : pir alignment.*
+   *pir_aln : pir alignment.*
 
-   *fasta_aln                       : fasta alignment.*
+   *fasta_aln : fasta alignment.*
 
-   *phylip                          : Phylip format.*
+   *phylip : Phylip format.*
 
-   *pir_seq                         : pir sequences (no gap).*
+   *pir_seq : pir sequences (no gap).*
 
-   *fasta_seq                       : fasta sequences (no gap).*
+   *fasta_seq : fasta sequences (no gap).*
 
-   *                    *
+   **
 
    *As well as:*
 
-   *score_ascii         : causes the output of a reliability flag*
+   *score_ascii : causes the output of a reliability flag*
 
-   *score_html        : causes the output to be a reliability plot in HTML*
+   *score_html : causes the output to be a reliability plot in HTML*
 
-   *score_pdf           : idem in PDF (if ps2pdf is installed on your system).*
+   *score_pdf : idem in PDF (if ps2pdf is installed on your system).*
 
-   *score_ps                       : idem in postscript.*
+   *score_ps : idem in postscript.*
 
    *More than one format can be indicated:*
 
@@ -1968,7 +1968,7 @@ http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
 -outseqweight
 ^^^^^^^^^^^^^
-  **Usage:  -outseqweight=<filename>**
+  **Usage: -outseqweight=<filename>**
 
    *Default: not used*
 
@@ -1976,7 +1976,7 @@ http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
 -case
 ^^^^^
-  **Usage:  -case=<keep,upper,lower>**
+  **Usage: -case=<keep,upper,lower>**
 
    *Default: -case=keep*
 
@@ -1994,7 +1994,7 @@ If you need to change the case of your file, you can use seq_reformat:
 
 -cpu
 ^^^^
-  **Usage:  deprecated**
+  **Usage: deprecated**
 
 -outseqweight
 ^^^^^^^^^^^^^
@@ -2009,7 +2009,7 @@ Will cause the program to output the weights associated with every sequence in t
 
 -outorder [cw]
 ^^^^^^^^^^^^^^
-  **Usage:  -outorder=<input OR aligned OR filename>**
+  **Usage: -outorder=<input OR aligned OR filename>**
 
    *Default:-outorder=input*
 
@@ -2017,7 +2017,7 @@ Will cause the program to output the weights associated with every sequence in t
 
 -inorder [cw]
 ^^^^^^^^^^^^^
-  **Usage:  -inorder=<input OR aligned>**
+  **Usage: -inorder=<input OR aligned>**
 
    *Default:-inorder=aligned*
 
@@ -2025,7 +2025,7 @@ Will cause the program to output the weights associated with every sequence in t
 
 -seqnos
 ^^^^^^^
-  **Usage:  -seqnos=<on or off>**
+  **Usage: -seqnos=<on or off>**
 
    *Default:-seqnos=off*
 
@@ -2053,7 +2053,7 @@ Although, it does not necessarily do so explicitly, T-Coffee always end up combi
 
 -out_lib
 ^^^^^^^^
-Usage:  -out_lib=<name of the library,default,no>
+Usage: -out_lib=<name of the library,default,no>
 
 
 Default:-out_lib=default
@@ -2063,7 +2063,7 @@ Default:-out_lib=default
 
 -lib_only
 ^^^^^^^^^
-  **Usage:  -lib_only**
+  **Usage: -lib_only**
 
    *Default: unset*
 
@@ -2149,7 +2149,7 @@ APDB, iRMSD and tRMSD Parameters
 --------------------------------
 .. warning:: Warning: These flags will only work within the APDB package that can be invoked via the -other_pg parameter of T-Coffee:
 
-.. warning::                         t_coffee -other_pg apdb -aln <your aln>
+.. warning::  t_coffee -other_pg apdb -aln <your aln>
 
 -quiet [Same as T-Coffee]
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -2259,17 +2259,17 @@ By default, T-Coffee will generate and rely on the follwing directory structure:
 
 ::
 
-  /home/youraccount/          #HOME_4_TCOFFEE
+  /home/youraccount/ #HOME_4_TCOFFEE
 
-  HOME_4_TCOFFEE/.t_coffee/   #DIR_4_TCOFFEE
+  HOME_4_TCOFFEE/.t_coffee/  #DIR_4_TCOFFEE
 
-  DIR_4_TCOFFEE/cache         #CACHE_4_TCOFFEE
+  DIR_4_TCOFFEE/cache #CACHE_4_TCOFFEE
 
-  DIR_4_TCOFFEE/tmp           #TMP_4_TCOFFEE
+  DIR_4_TCOFFEE/tmp #TMP_4_TCOFFEE
 
-  DIR_4_TCOFFEE/methods              #METHOS_4_TCOFFEE
+  DIR_4_TCOFFEE/methods #METHOS_4_TCOFFEE
 
-  DIR_4_TCOFFEE/mcoffee              #MCOFFEE_4_TCOFFEE
+  DIR_4_TCOFFEE/mcoffee #MCOFFEE_4_TCOFFEE
 
 
 
@@ -2296,7 +2296,7 @@ If no valid location can be found for HOME_4_TCOFFEE, the program exits. If you 
 
 
 
-Note that  it is a good idea to have a cron job that cleans up this scratch area, once in a while.
+Note that it is a good idea to have a cron job that cleans up this scratch area, once in a while.
 
 
 Output of the .dnd file.
@@ -2307,7 +2307,7 @@ A common source of error when running a server: T-Coffee MUST output the .dnd fi
 To avoid this, simply specify the name of the output tree:
 
 
-         -newtree=<writable file (usually in /tmp)>
+ -newtree=<writable file (usually in /tmp)>
 
 
 Chose the name so that two processes may not over-write each other dnd file.
@@ -2333,9 +2333,9 @@ Parameter files used with -parameters, -t_coffee_defaults, -dali_defaults... Mus
 
 ::
 
-        <parameter name>=<value1>,<value2>....
+   <parameter name>=<value1>,<value2>....
 
-        <parameter name>=.....
+   <parameter name>=.....
 
 
 
@@ -2350,9 +2350,9 @@ Sequence name handling is meant to be fully consistent with ClustalW (Version 1.
 
   1-No Space
   Names that do contain spaces, for instance:
-              >seq1 human_myc
+   >seq1 human_myc
   will be turned into
-              >seq1
+   >seq1
   It is your responsibility to make sure that the names you provide are not ambiguous after such an editing. This editing is consistent with Clustalw (Version 1.75)
   2-No Strange Character
   Some non alphabetical characters are replaced with underscores. These are: ';:()'
@@ -2389,25 +2389,15 @@ Alignments can come in the following formats: msf, ClustalW, Fasta, Pir and t_co
 
 ::
 
-  <empy line>       [Facultative]n
+  <empy line>  [Facultative]n
 
-  <line of text>    [Required]
+  <line of text>  [Required]
 
-  <line of text>               [Facultative]n
+  <line of text> [Facultative]n
 
-  <empty line>                 [Required]
+  <empty line> [Required]
 
-  <empty line>                 [Facultative]n
-
-  <seq1 name><space><seq1>
-
-  <seq2 name><space><seq2>
-
-  <seq3 name><space><seq3>
-
-  <empty line>                 [Required]
-
-  <empty line>                 [Facultative]n
+  <empty line> [Facultative]n
 
   <seq1 name><space><seq1>
 
@@ -2415,9 +2405,19 @@ Alignments can come in the following formats: msf, ClustalW, Fasta, Pir and t_co
 
   <seq3 name><space><seq3>
 
-  <empty line>                 [Required]
+  <empty line> [Required]
 
-  <empty line>                 [Facultative]n
+  <empty line> [Facultative]n
+
+  <seq1 name><space><seq1>
+
+  <seq2 name><space><seq2>
+
+  <seq3 name><space><seq3>
+
+  <empty line> [Required]
+
+  <empty line> [Facultative]n
 
 
 
@@ -2521,9 +2521,9 @@ It is also poosible to declare ranges of resdues rather than single pairs. For i
 
   #0 1
 
-  +BLOCK+  10 12 14 99
+  +BLOCK+ 10 12 14 99
 
-  +BLOCK+  15 30 40 99
+  +BLOCK+ 15 30 40 99
 
   #0 2
 
@@ -2541,7 +2541,7 @@ The first statement BLOCK declares a BLOCK of length 10, that starts on position
 Blocks can overalp and be incompatible with one another, just like single constraints.
 
 
- 
+
 
 
 T-COFFEE_LIB_FORMAT_02
@@ -2643,7 +2643,7 @@ BLAST Format [Recommended]
 
   # ALPHABET=AGCT
 
-   A G C T
+  A G C T
 
   A 0 1 2 3
 
@@ -2717,7 +2717,7 @@ prf2: profile containing one structure
 
 ::
 
-  PROMPT: t_coffee  Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln
+  PROMPT: t_coffee Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln
 
 
 
@@ -2768,7 +2768,7 @@ These command lines have been checked before every release (along with the other
 
 
 
-            -A command line to read 'relaxed' pdb files...
+ -A command line to read 'relaxed' pdb files...
 
 
 ::
@@ -2777,7 +2777,7 @@ These command lines have been checked before every release (along with the other
 
 
 
-            -Parsing of MARNA libraries
+ -Parsing of MARNA libraries
 
 
 ::
@@ -2786,7 +2786,7 @@ These command lines have been checked before every release (along with the other
 
 
 
-            -Parsing of long sequence lines:
+ -Parsing of long sequence lines:
 
 
 ::

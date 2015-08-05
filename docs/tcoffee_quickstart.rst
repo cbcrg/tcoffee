@@ -26,33 +26,33 @@ Proteins
 
   ----------------------------------------------------------------------------
 
-  Very Accurate        t_coffee sample_aln1.fasta -mode accurate
+  Very Accurate   t_coffee sample_aln1.fasta -mode accurate
 
-                       slow, combines structures, sequences and profiles
-
-  ----------------------------------------------------------------------------
-
-  M-Coffee             t_coffee sample_aln1.fasta -mode mcoffee
-
-                       combines most of the existing MSA packages
+     slow, combines structures, sequences and profiles
 
   ----------------------------------------------------------------------------
 
-  3D-Coffee            t_coffee sample_aln1.fasta -mode 3dcoffee
+  M-Coffee t_coffee sample_aln1.fasta -mode mcoffee
 
-                       uses the structure of your sequences if named with PDBID
-
-  ----------------------------------------------------------------------------
-
-  Expresso             t_coffee sample_aln1.fasta -mode expresso
-
-                       finds structures homologous to your sequences
+   combines most of the existing MSA packages
 
   ----------------------------------------------------------------------------
 
-  PSI-Coffee           t_coffee sample_aln1.fasta -mode psicoffee
+  3D-Coffee t_coffee sample_aln1.fasta -mode 3dcoffee
 
-                       enriches your sequence with profile information
+   uses the structure of your sequences if named with PDBID
+
+  ----------------------------------------------------------------------------
+
+  Expresso t_coffee sample_aln1.fasta -mode expresso
+
+   finds structures homologous to your sequences
+
+  ----------------------------------------------------------------------------
+
+  PSI-Coffee t_coffee sample_aln1.fasta -mode psicoffee
+
+   enriches your sequence with profile information
 
   ----------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ DNA
 ===
 ::
 
-  R-Coffee             t_coffee three_cdna.fasta -mode cdna
+  R-Coffee t_coffee three_cdna.fasta -mode cdna
 
 
 
@@ -69,25 +69,25 @@ RNA
 ===
 ::
 
-  Mode                 Command
+  Mode Command
 
   ============================================================================
 
-  R-Coffee             t_coffee sample_rnaseq1.fasta -mode rcoffee
+  R-Coffee t_coffee sample_rnaseq1.fasta -mode rcoffee
 
-                       use the predicted secondary structure of your sequences
-
-  ----------------------------------------------------------------------------
-
-  RM-Coffee            t_coffee sample_rnaseq1.fasta -mode rmcoffee
-
-                       use M-Coffee + secondary structure prediction
+    use the predicted secondary structure of your sequences
 
   ----------------------------------------------------------------------------
 
-  R-Coffee Consan      t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+  RM-Coffee t_coffee sample_rnaseq1.fasta -mode rmcoffee
 
-                       use rcoffee to combine consan alignments. Accurate and Slow
+    use M-Coffee + secondary structure prediction
+
+  ----------------------------------------------------------------------------
+
+  R-Coffee Consan t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+
+      use rcoffee to combine consan alignments. Accurate and Slow
 
 
 
@@ -95,7 +95,7 @@ Memory Fix
 ==========
 ::
 
-  memory               t_coffee sample_aln1.fasta -mode memory
+  memory  t_coffee sample_aln1.fasta -mode memory
 
 
 ***********
@@ -113,7 +113,7 @@ Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta 
+  PROMPT: t_coffee sample_seq1.fasta
 
 
 
@@ -155,9 +155,9 @@ If all these packages are already installed on your machine. You must:
 
 ::
 
-     export POA_DIR=[absolute path of the POA installation dir]
+   export POA_DIR=[absolute path of the POA installation dir]
 
-     export DIALIGNT_DIR=[Absolute path of the DIALIGN-T/conf
+   export DIALIGNT_DIR=[Absolute path of the DIALIGN-T/conf
 
 
 
@@ -187,7 +187,7 @@ If you have installed the EBI wublast.pl client, Expresso will BLAST your sequen
 If you did not manage to install all the required structural packages for Expresso, like Fugue or Sap, you can still run expresso by selecting yourself the structural packages you want to use. For instance, if you'd rather use TM-Align than sap, try:
 
 
-        
+
 
 
 ::
@@ -257,7 +257,7 @@ tRMSD is a structure based clustering method using the iRMSD to drive the cluste
 
   > <seq_name> _P_ <PDB structure file or name>
 
-  ******* 3d_sample5.template_list ********     
+  ******* 3d_sample5.template_list ********
 
   >2UWI-3A _P_ 2UWI-3.pdb
 
@@ -280,35 +280,35 @@ The program then outputs a series of files
 
   Template Type: [3d_sample5.template_list] Mode Or File: [3d_sample5.template_list] [Start]
 
-           [Sample Columns][TOT=   51][100 %][ELAPSED TIME:    0 sec.]
+   [Sample Columns][TOT= 51][100 %][ELAPSED TIME: 0 sec.]
 
-           [Tree Cmp][TOT=   13][ 92 %][ELAPSED TIME:    0 sec.]
+   [Tree Cmp][TOT= 13][ 92 %][ELAPSED TIME: 0 sec.]
 
-   #### File Type=   TreeList Format=     newick Name= 3d_sample5.tot_pos_list
+  #### File Type= TreeList Format= newick Name= 3d_sample5.tot_pos_list
 
-   #### File Type=       Tree Format=     newick Name= 3d_sample5.struc_tree10
+  #### File Type= Tree Format= newick Name= 3d_sample5.struc_tree10
 
-   #### File Type=       Tree Format=     newick Name= 3d_sample5.struc_tree50
+  #### File Type= Tree Format= newick Name= 3d_sample5.struc_tree50
 
-   #### File Type=       Tree Format=     newick Name= 3d_sample5.struc_tree100
+  #### File Type= Tree Format= newick Name= 3d_sample5.struc_tree100
 
-   #### File Type= Colored MSA Format= score_html Name= 3d_sample5.struc_tree.html
-
-
-
-3d_sample5.tot_pos_list      is a list of the tRMSD tree associated with every position.
+  #### File Type= Colored MSA Format= score_html Name= 3d_sample5.struc_tree.html
 
 
-3d_sample5.struc_tree100   is a consensus tree (phylip/consense) of the trees contained in the previous file. This file is the default output
+
+3d_sample5.tot_pos_list  is a list of the tRMSD tree associated with every position.
 
 
-3d_sample5.struc_tree10     is a consensus tree (phylip/consense) of the 10% trees having the higest average agreement with the rest
+3d_sample5.struc_tree100 is a consensus tree (phylip/consense) of the trees contained in the previous file. This file is the default output
 
 
-3d_sample5.struc_tree10     is a consensus tree (phylip/consense) of the 50% trees having the higest average agreement with the rest
+3d_sample5.struc_tree10 is a consensus tree (phylip/consense) of the 10% trees having the higest average agreement with the rest
 
 
-3d_sample5.html      is a colored version of the output showing in red the positions that give the highest support to 3d_sample5.struc_tree100
+3d_sample5.struc_tree10 is a consensus tree (phylip/consense) of the 50% trees having the higest average agreement with the rest
+
+
+3d_sample5.html is a colored version of the output showing in red the positions that give the highest support to 3d_sample5.struc_tree100
 
 
 MOCCA

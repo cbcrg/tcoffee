@@ -28,7 +28,7 @@ Mac-OsX
 ^^^^^^^
 ::
 
-     Click on tge .dmg file
+   Click on tge .dmg file
 
 
 
@@ -36,7 +36,7 @@ Unix
 ^^^^
 ::
 
-     rpm -i <rmp>
+   rpm -i <rmp>
 
 
 
@@ -62,15 +62,15 @@ This installation will only install the stand alone T-Coffee. If you want to ins
 
 ::
 
-     ./install t_coffee
+   ./install t_coffee
 
-     ./install mcoffee
+   ./install mcoffee
 
-     ./install 3dcoffee
+   ./install 3dcoffee
 
-     ./install rcoffee
+   ./install rcoffee
 
-     ./install psicoffee
+   ./install psicoffee
 
 
 
@@ -79,7 +79,7 @@ Or even
 
 ::
 
-     ./install all
+   ./install all
 
 
 
@@ -88,14 +88,14 @@ Or even
 
 ::
 
-     $HOME/.t_coffee/plugins
+   $HOME/.t_coffee/plugins
 
 
 
 -if you executables are in a different location, give it to T-Coffee using the -plugins flag.
 
 
--If the installation of any of the companion package fails, you should install it yourself using the provided link (see below) and following the authors instructions. 
+-If the installation of any of the companion package fails, you should install it yourself using the provided link (see below) and following the authors instructions.
 
 
 -If you have not managed to install SOAP::Lite, you can re-install it later (from anywhere) following steps 1-2.
@@ -177,11 +177,11 @@ Assuming you have a standard PDB installation in your file system
 
 ::
 
-  setenv (or export)  PDB_DIR <abs path>/data/structures/all/pdb/
+  setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
 
   OR
 
-  setenv (or export)  PDB_DIR <abs path>/structures/divided/pdb/
+  setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
 
 
 
@@ -219,29 +219,29 @@ These templates are automatically built if you use:
 
 ::
 
-     t_coffee <yourseq> -mode expresso
+   t_coffee <yourseq> -mode expresso
 
 
 
-         that fetches aand uses pdb templates, or
-
-
-::
-
-            t_coffee <your seq> -mode psicoffee
-
-
-
-         that fetches and uses profile templates, or
+ that fetches aand uses pdb templates, or
 
 
 ::
 
-            t_coffee <your seq> -mode accurate
+    t_coffee <your seq> -mode psicoffee
 
 
 
-         that does everything and tries to use the best template. Now that you see why it is useful let's see how to get BLAST up and running, from the easy solution to tailor made ones.
+ that fetches and uses profile templates, or
+
+
+::
+
+    t_coffee <your seq> -mode accurate
+
+
+
+ that does everything and tries to use the best template. Now that you see why it is useful let's see how to get BLAST up and running, from the easy solution to tailor made ones.
 
 
 Using the EBI BLAST Client
@@ -321,7 +321,7 @@ If you have blastpgp installed, you can run it instead of the remote clients by 
 
 
 
- The documentation for blastpgp can be found on:
+The documentation for blastpgp can be found on:
 
 
 ::
@@ -370,7 +370,7 @@ For those of you using cygwin, be careful. While cygwin behaves like a UNIX syst
 1- the ncbi file declaring the Data directory must be:
 
 
-         C:WINDOWS//ncbi.init  [at the root of your WINDOWS]
+ C:WINDOWS//ncbi.init [at the root of your WINDOWS]
 
 
 2- the address mentionned with this file must be WINDOWS formated, for instance, on my system:
@@ -382,7 +382,7 @@ Data=C:\cygwin\home\notredame\blast\data
 3- When you pass database addresses to BLAST, these must be in Windows format:
 
 
-         -protein_db='c:/somewhere/somewhereelse/database'
+ -protein_db='c:/somewhere/somewhereelse/database'
 
 
 (using the slash (/) or the andtislash (\) does not matter on new systems but I would reommand against incorporating white spaces.
@@ -395,7 +395,7 @@ T-Coffee is meant to interact with as many packages as possible, either for alig
 
 ::
 
-     t_coffee
+   t_coffee
 
 
 
@@ -408,133 +408,133 @@ You will receive a list of supported packages that looks like the next table. In
 
   --------------------------------------------
 
-  fast_pair          built_in
+  fast_pair built_in
 
-  exon3_pair         built_in
+  exon3_pair built_in
 
-  exon2_pair         built_in
+  exon2_pair built_in
 
-  exon_pair          built_in
+  exon_pair built_in
 
-  slow_pair          built_in
+  slow_pair built_in
 
-  proba_pair         built_in
+  proba_pair built_in
 
-  lalign_id_pair     built_in
+  lalign_id_pair built_in
 
-  seq_pair           built_in
+  seq_pair built_in
 
   externprofile_pair built_in
 
-  hh_pair            built_in
+  hh_pair built_in
 
-  profile_pair       built_in
+  profile_pair built_in
 
-  cdna_fast_pair     built_in
+  cdna_fast_pair built_in
 
-  cdna_cfast_pair    built_in
+  cdna_cfast_pair built_in
 
-  clustalw_pair      ftp://www.ebi.ac.uk/pub/clustalw
+  clustalw_pair ftp://www.ebi.ac.uk/pub/clustalw
 
-  mafft_pair         http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  mafft_pair http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-  mafftjtt_pair      http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  mafftjtt_pair http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-  mafftgins_pair     http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  mafftgins_pair http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-  dialigntx_pair     http://dialign-tx.gobics.de/
+  dialigntx_pair http://dialign-tx.gobics.de/
 
-  dialignt_pair      http://dialign-t.gobics.de/
+  dialignt_pair http://dialign-t.gobics.de/
 
-  poa_pair           http://www.bioinformatics.ucla.edu/poa/
+  poa_pair http://www.bioinformatics.ucla.edu/poa/
 
-  probcons_pair      http://probcons.stanford.edu/
+  probcons_pair http://probcons.stanford.edu/
 
-  muscle_pair        http://www.drive5.com/muscle/
+  muscle_pair http://www.drive5.com/muscle/
 
-  t_coffee_pair      http://www.tcoffee.org
+  t_coffee_pair http://www.tcoffee.org
 
-  pcma_pair          ftp://iole.swmed.edu/pub/PCMA/
+  pcma_pair ftp://iole.swmed.edu/pub/PCMA/
 
-  kalign_pair        http://msa.cgb.ki.se
+  kalign_pair http://msa.cgb.ki.se
 
-  amap_pair          http://bio.math.berkeley.edu/amap/
+  amap_pair http://bio.math.berkeley.edu/amap/
 
-  proda_pair         http://bio.math.berkeley.edu/proda/
+  proda_pair http://bio.math.berkeley.edu/proda/
 
-  prank_pair         http://www.ebi.ac.uk/goldman-srv/prank/
+  prank_pair http://www.ebi.ac.uk/goldman-srv/prank/
 
-  consan_pair        http://selab.janelia.org/software/consan/
+  consan_pair http://selab.janelia.org/software/consan/
 
   ****** Pairwise Structural Alignment Methods:
 
   --------------------------------------------
 
-  align_pdbpair      built_in
+  align_pdbpair built_in
 
-  lalign_pdbpair     built_in
+  lalign_pdbpair built_in
 
-  extern_pdbpair     built_in
+  extern_pdbpair built_in
 
-  thread_pair        built_in
+  thread_pair built_in
 
-  fugue_pair         http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+  fugue_pair http://www-cryst.bioc.cam.ac.uk/fugue/download.html
 
-  pdb_pair           built_in
+  pdb_pair built_in
 
-  sap_pair           http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+  sap_pair http://www-cryst.bioc.cam.ac.uk/fugue/download.html
 
-  mustang_pair       http://www.cs.mu.oz.au/~arun/mustang/
+  mustang_pair http://www.cs.mu.oz.au/~arun/mustang/
 
-  tmalign_pair       http://zhang.bioinformatics.ku.edu/TM-align/
+  tmalign_pair http://zhang.bioinformatics.ku.edu/TM-align/
 
   ****** Multiple Sequence Alignment Methods:
 
   --------------------------------------------
 
-  clustalw_msa       ftp://www.ebi.ac.uk/pub/clustalw
+  clustalw_msa ftp://www.ebi.ac.uk/pub/clustalw
 
-  mafft_msa          http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  mafft_msa http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-  mafftjtt_msa       http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  mafftjtt_msa http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-  mafftgins_msa      http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
+  mafftgins_msa http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
 
-  dialigntx_msa      http://dialign-tx.gobics.de/
+  dialigntx_msa http://dialign-tx.gobics.de/
 
-  dialignt_msa       http://dialign-t.gobics.de/
+  dialignt_msa http://dialign-t.gobics.de/
 
-  poa_msa            http://www.bioinformatics.ucla.edu/poa/
+  poa_msa http://www.bioinformatics.ucla.edu/poa/
 
-  probcons_msa       http://probcons.stanford.edu/
+  probcons_msa http://probcons.stanford.edu/
 
-  muscle_msa         http://www.drive5.com/muscle/
+  muscle_msa http://www.drive5.com/muscle/
 
-  t_coffee_msa       http://www.tcoffee.org
+  t_coffee_msa http://www.tcoffee.org
 
-  pcma_msa           ftp://iole.swmed.edu/pub/PCMA/
+  pcma_msa ftp://iole.swmed.edu/pub/PCMA/
 
-  kalign_msa         http://msa.cgb.ki.se
+  kalign_msa http://msa.cgb.ki.se
 
-  amap_msa           http://bio.math.berkeley.edu/amap/
+  amap_msa http://bio.math.berkeley.edu/amap/
 
-  proda_msa          http://bio.math.berkeley.edu/proda/
+  proda_msa http://bio.math.berkeley.edu/proda/
 
-  prank_msa          http://www.ebi.ac.uk/goldman-srv/prank/
+  prank_msa http://www.ebi.ac.uk/goldman-srv/prank/
 
-  #######   Prediction Methods available to generate Templates
+  ####### Prediction Methods available to generate Templates
 
   -------------------------------------------------------------
 
-  RNAplfold          http://www.tbi.univie.ac.at/~ivo/RNA/
+  RNAplfold http://www.tbi.univie.ac.at/~ivo/RNA/
 
-  HMMtop             www.enzim.hu/hmmtop/
+  HMMtop www.enzim.hu/hmmtop/
 
-  GOR4               http://mig.jouy.inra.fr/logiciels/gorIV/
+  GOR4 http://mig.jouy.inra.fr/logiciels/gorIV/
 
-  wublast_client     http://www.ebi.ac.uk/Tools/webservices/services/wublast
+  wublast_client http://www.ebi.ac.uk/Tools/webservices/services/wublast
 
-  blastpgp_client    http://www.ebi.ac.uk/Tools/webservices/services/blastpgp           
+  blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 
   ==========================================================
 
@@ -545,7 +545,7 @@ Installation of PSI-Coffee and Expresso
 PSI-Coffee is a mode of T-Coffee that runs a a Psi-BLAST on each of your sequences and makes a multiple profile alignment. If you do not have any structural information, it is by far the most accurate mode of T-Coffee. To use it, you must have SOAP installed so that the EBI BLAST client can run on your system.
 
 
-It is a bit slow, but really worth it if your sequences are hard to align and if the accuracy of your alignment is important. 
+It is a bit slow, but really worth it if your sequences are hard to align and if the accuracy of your alignment is important.
 
 
 To use this mode, try:
@@ -553,7 +553,7 @@ To use this mode, try:
 
 ::
 
-     t_coffee <yoursequence> -mode psicoffee
+   t_coffee <yoursequence> -mode psicoffee
 
 
 
@@ -565,16 +565,16 @@ If your installation procedure has managed to compile TMalign, and if T-Coffee h
 
 ::
 
-     t_coffee <yoursequence> -mode expresso
+   t_coffee <yoursequence> -mode expresso
 
 
 
-That will look for structural templates. And if both these modes are running fine, then you are ready for the best, the 'crème de la crème':
+That will look for structural templates. And if both these modes are running fine, then you are ready for the best, the 'crme de la crme':
 
 
 ::
 
-     t_coffee <yoursequence> -mode accurate
+   t_coffee <yoursequence> -mode accurate
 
 
 
@@ -629,30 +629,30 @@ Manual Installation
 M-Coffee requires a standard T-Coffee installation (c.f. previous section) and the following packages to be installed on your system:
 
 
-        
+
 
 
 ::
 
-  Package           Where From
+  Package Where From
 
   ==========================================================
 
-  ClustalW          can interact with t_coffee
+  ClustalW can interact with t_coffee
 
   ----------------------------------------------------------
 
-  Poa               http://www.bioinformatics.ucla.edu/poa/
+  Poa http://www.bioinformatics.ucla.edu/poa/
 
   ----------------------------------------------------------
 
-  Muscle            http://www.drive5.com
+  Muscle http://www.drive5.com
 
-   ----------------------------------------------------------
+  ----------------------------------------------------------
 
-  ProbCons          http://probcons.stanford.edu/
+  ProbCons http://probcons.stanford.edu/
 
-  ProbConsRNA       http://probcons.stanford.edu/
+  ProbConsRNA http://probcons.stanford.edu/
 
   ----------------------------------------------------------
 
@@ -660,29 +660,29 @@ M-Coffee requires a standard T-Coffee installation (c.f. previous section) and t
 
   ----------------------------------------------------------
 
-  Dialign-T         http://dialign-t.gobics.de/
+  Dialign-T http://dialign-t.gobics.de/
 
-  Dialign-TX        http://dialign-tx.gobics.de/
-
-  ----------------------------------------------------------
-
-  PCMA              ftp://iole.swmed.edu/pub/PCMA/
+  Dialign-TX http://dialign-tx.gobics.de/
 
   ----------------------------------------------------------
 
-  kalign            http://msa.cgb.ki.se
+  PCMA ftp://iole.swmed.edu/pub/PCMA/
 
   ----------------------------------------------------------
 
-  amap              http://bio.math.berkeley.edu/amap/
+  kalign http://msa.cgb.ki.se
+
+  ----------------------------------------------------------
+
+  amap http://bio.math.berkeley.edu/amap/
 
   -----------------------------------------------------------
 
-  proda_msa        http://bio.math.berkeley.edu/proda/
+  proda_msa http://bio.math.berkeley.edu/proda/
 
   -----------------------------------------------------------
 
-  prank_msa        http://www.ebi.ac.uk/goldman-srv/prank/
+  prank_msa http://www.ebi.ac.uk/goldman-srv/prank/
 
 
 
@@ -697,7 +697,7 @@ If for some reason, you do not want this directory to be on your path, or you wa
 
 ::
 
-     export PLUGINS_4_TCOFFEE=<dir>
+   export PLUGINS_4_TCOFFEE=<dir>
 
 
 
@@ -706,7 +706,7 @@ By default this directory is set to $HOME/.t_coffee/plugins/$OS, but you can ove
 
 ::
 
-     t_coffee ...-plugins=<dir>
+   t_coffee ...-plugins=<dir>
 
 
 
@@ -715,7 +715,7 @@ If you cannot, or do not want to use a single bin directory, you can set the fol
 
 ::
 
-  POA_4_TCOOFFEE CLUSTALW_4_TCOFFEE POA_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOFFEE MUSCLE_4_TCOFFEE DIALIGNT_4_TCOFFEE PRANK_4_TCOFFEE DIALIGNTX_4_TCOFFEE  
+  POA_4_TCOOFFEE CLUSTALW_4_TCOFFEE POA_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOFFEE MUSCLE_4_TCOFFEE DIALIGNT_4_TCOFFEE PRANK_4_TCOFFEE DIALIGNTX_4_TCOFFEE 
 
 
 
@@ -724,11 +724,11 @@ For three of these packages, you will need to copy some of the files in a specia
 
 ::
 
-     cp POA_DIR/* ~/.t_coffee/mcoffee/
+   cp POA_DIR/* ~/.t_coffee/mcoffee/
 
-     cp DIALIGN-T/conf/*  ~/.t_coffee/mcoffee
+   cp DIALIGN-T/conf/* ~/.t_coffee/mcoffee
 
-     cp DIALIGN-TX/conf/*  ~/.t_coffee/mcoffee
+   cp DIALIGN-TX/conf/* ~/.t_coffee/mcoffee
 
 
 
@@ -737,17 +737,17 @@ Note that the following files are enough for default usage:
 
 ::
 
-  BLOSUM.diag_prob_t10   BLOSUM75.scr  blosum80_trunc.mat          
+  BLOSUM.diag_prob_t10 BLOSUM75.scr blosum80_trunc.mat
 
-  dna_diag_prob_100_exp_330000  dna_diag_prob_200_exp_110000
+  dna_diag_prob_100_exp_330000 dna_diag_prob_200_exp_110000
 
-  BLOSUM.scr             BLOSUM90.scr  dna_diag_prob_100_exp_110000
+  BLOSUM.scr BLOSUM90.scr dna_diag_prob_100_exp_110000
 
-  dna_diag_prob_100_exp_550000  dna_diag_prob_250_exp_110000
+  dna_diag_prob_100_exp_550000 dna_diag_prob_250_exp_110000
 
-  BLOSUM75.diag_prob_t2  blosum80.mat  dna_diag_prob_100_exp_220000 
+  BLOSUM75.diag_prob_t2 blosum80.mat dna_diag_prob_100_exp_220000
 
-  dna_diag_prob_150_exp_110000  dna_matrix.scr
+  dna_diag_prob_150_exp_110000 dna_matrix.scr
 
 
 
@@ -756,7 +756,7 @@ If you would rather have the mcoffee directory in some other location, set the M
 
 ::
 
-     setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
+   setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
 
 
 
@@ -767,7 +767,7 @@ APDB and iRMSD are incorporated in T-Coffee. Once t_coffee is installed, you can
 
 ::
 
-     t_coffee -other_pg apdb    t_coffee -other_pg irmsd
+   t_coffee -other_pg apdb  t_coffee -other_pg irmsd
 
 
 
@@ -776,20 +776,20 @@ Installation of tRMSD
 tRMSD comes along with t_coffee but it also requires the package phylip in order to be functional. Phylip can be obtained from:
 
 
-        
+
 
 
 ::
 
-  Package           Function
+  Package Function
 
   ===================================================
 
   ---------------------------------------------------
 
-  Phylip            Phylogenetic tree computation
+  Phylip Phylogenetic tree computation
 
-                    evolution.genetics.washington.edu/phylip.html
+   evolution.genetics.washington.edu/phylip.html
 
   ---------------------------------------------------
 
@@ -804,7 +804,7 @@ Seq_reformat is a reformatting package that is part of t_coffee. To use it (and 
 
 ::
 
-     t_coffee -other_pg seq_reformat
+   t_coffee -other_pg seq_reformat
 
 
 
@@ -815,7 +815,7 @@ Extract_from_pdb is a PDB reformatting package that is part of t_coffee. To use 
 
 ::
 
-     t_coffee -other_pg extract_from_pdb -h
+   t_coffee -other_pg extract_from_pdb -h
 
 
 
@@ -850,50 +850,50 @@ Manual Installation
 In order to make the most out of T-Coffee, you will need to install the following packages (make sure the executable is named as indicated below):
 
 
-        
+
 
 
 ::
 
-  Package           Function
+  Package Function
 
   ===================================================
 
   ---------------------------------------------------
 
-  wget              3DCoffee
+  wget 3DCoffee
 
-                    Automatic Downloading of Structures
+   Automatic Downloading of Structures
 
   ---------------------------------------------------
 
-  sap               structure/structure comparisons
+  sap structure/structure comparisons
 
   (obtain it from W. Taylor, NIMR-MRC).
 
   ---------------------------------------------------
 
-  TMalign           zhang.bioinformatics.ku.edu/TM-align/
+  TMalign zhang.bioinformatics.ku.edu/TM-align/
 
   ---------------------------------------------------
 
-  mustang           www.cs.mu.oz.au/~arun/mustang/
+  mustang www.cs.mu.oz.au/~arun/mustang/
 
   ---------------------------------------------------
 
-  wublastclient     www.ebi.ac.uk/Tools/webservices/clients/wublast
+  wublastclient www.ebi.ac.uk/Tools/webservices/clients/wublast
 
   ---------------------------------------------------
 
-  Blast             www.ncbi.nih.nlm.gov
+  Blast www.ncbi.nih.nlm.gov
 
   ---------------------------------------------------
 
-  Fugue*            protein to structure alignment program
+  Fugue* protein to structure alignment program
 
-                    http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+   http://www-cryst.bioc.cam.ac.uk/fugue/download.html
 
-                    ***NOT COMPULSORY***
+   ***NOT COMPULSORY***
 
 
 
@@ -908,7 +908,7 @@ Installing Fugue for T-Coffee
 Uses a standard fugue installation. You only need to install the following packages:
 
 
- joy, melody, fugueali, sstruc, hbond
+joy, melody, fugueali, sstruc, hbond
 
 
 If you have root privileges, you can install the common data in:
@@ -926,7 +926,7 @@ Setenv MELODY_CLASSDEF=<location>
 Setenv MELODY_SUBST=fugue/allmat.dat
 
 
- 
+
 
 
 All the other configuration files must be in the right location.
@@ -956,42 +956,42 @@ Manual Installation
 R-Coffee only requires the package Vienna to be installed, in order to compute multiple sequence alignments. To make the best out of it, you should also have all the packages required by M-Coffee
 
 
-        
+
 
 
 ::
 
-  Package           Function
+  Package Function
 
   ===================================================
 
   ---------------------------------------------------
 
-  consan            R-Coffee
+  consan R-Coffee
 
-                    Computes highly accurate pairwise Alignments
+   Computes highly accurate pairwise Alignments
 
-                    ***NOT COMPULSORY***
+   ***NOT COMPULSORY***
 
-                    selab.janelia.org/software/consan/
-
-  ---------------------------------------------------
-
-  RNAplfold         Computes RNA secondary Structures
-
-                    www.tbi.univie.ac.at/~ivo/RNA/
+   selab.janelia.org/software/consan/
 
   ---------------------------------------------------
 
-  probconsRNA       probcons.stanford.edu/
+  RNAplfold Computes RNA secondary Structures
 
-         
+   www.tbi.univie.ac.at/~ivo/RNA/
 
   ---------------------------------------------------
 
-  M-Coffee          T-Coffee and the most common MSA Packages
+  probconsRNA probcons.stanford.edu/
 
-                    (cf M-Coffee in this installation guide)
+  
+
+  ---------------------------------------------------
+
+  M-Coffee T-Coffee and the most common MSA Packages
+
+   (cf M-Coffee in this installation guide)
 
 
 
