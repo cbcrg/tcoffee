@@ -11,10 +11,11 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   t_coffee_technical
+   quickstart
    t_coffee_tutorial
-   TCS
-   3DTREE
+   trees
+   t_coffee_technical
+   release_notes
    problems
    developer
    
