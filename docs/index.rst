@@ -12,9 +12,10 @@ Contents:
    :maxdepth: 2
 
    tcoffee_quickstart
+   tcoffee_installation
    tcoffee_manual
    tcoffee_reference
-   trmsd_trees
+   trmsd_manual
    
    tcoffee_release_notes
    tcoffee_problems

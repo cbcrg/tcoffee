@@ -11,13 +11,14 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   quickstart
-   t_coffee_tutorial
-   trees
-   t_coffee_technical
-   release_notes
-   problems
-   developer
+   tcoffee_quickstart
+   tcoffee_manual
+   tcoffee_reference
+   trmsd_trees
+   
+   tcoffee_release_notes
+   tcoffee_problems
+   tcoffee_developer
    
 
 
