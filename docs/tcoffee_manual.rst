@@ -1,6 +1,6 @@
 
 ##########################
-T-Coffee: Tutorial and FAQ
+T-Coffee Tutorial and FAQ
 ##########################
 ****************
 Before You Start
