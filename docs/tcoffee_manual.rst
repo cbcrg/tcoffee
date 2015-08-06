@@ -2711,8 +2711,9 @@ You can then run T-Coffee using your own template file
 
 
 
- Output of the prediction
+Output of the prediction
 ----------------------------
+
 You can output a color coded version of your alignment using the predicted structures
 
 
@@ -3024,8 +3025,9 @@ The CORE index is an estimation of the consistency between your alignment and th
 The format html leads to the output of a file named sproteases_small.html. Open this file. It contains a colorized version of your alignment. In this colorized version, positions that have no concistency with the library are in blue, a little in green, better positions in yellow, then orange, then red. You can expect yellow positions to be entirely correct.
 
 
- Computing the CORE index of any alignment
+Computing the CORE index of any alignment
 -------------------------------------------
+
 You can evaluate any existing alignment with the CORE index. All you need to do is provide that alignment with the -infile flag and specify that you want to evaluate it:
 
 
@@ -3035,8 +3037,9 @@ You can evaluate any existing alignment with the CORE index. All you need to do 
 
 
 
- Filtering Bad Residues
+Filtering Bad Residues
 ------------------------
+
 The local consistency score is between 0 and 9. If you need to build a profile or identify a signature or do some phylogeny, it may be a good idea to remove portions that are too unreliable. Here is how you can do it.
 
 
@@ -3076,8 +3079,9 @@ Removing columns of gaps is just as easy. You simply need to add the switch +rm_
 
 
 
- Filtering Gap Columns
+Filtering Gap Columns
 -----------------------
+
 You may want to remove columns that contain too many gaps. It is just a small variation around the rm_gap switch:
 
 
