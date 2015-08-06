@@ -9,7 +9,7 @@ T-Coffee's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 5
 
    tcoffee_quickstart
    tcoffee_installation
