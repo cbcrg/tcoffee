@@ -113,7 +113,7 @@ Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta
+  $$: t_coffee sample_seq1.fasta
 
 
 
@@ -138,7 +138,7 @@ This will output two files:
 
 ::
 
-  PROMPT: t_coffee sample_dnaseq1.fasta -type=dna
+  $$: t_coffee sample_dnaseq1.fasta -type=dna
 
 
 
@@ -166,7 +166,7 @@ Once this is done, write your sequences in a file and run: same file (Swiss-prot
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -mode mcoffee
+  $$: t_coffee sample_seq1.fasta -mode mcoffee
 
 
 
@@ -180,7 +180,7 @@ If you have installed the EBI wublast.pl client, Expresso will BLAST your sequen
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -mode expresso
+  $$: t_coffee sample_seq1.fasta -mode expresso
 
 
 
@@ -192,7 +192,7 @@ If you did not manage to install all the required structural packages for Expres
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair
+  $$: t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair
 
 
 
@@ -212,7 +212,7 @@ This will only work if your sequences are short enough (less than 200 nucleotide
 
 ::
 
-  PROMPT: t_coffee sample_rnaseq1.fasta -mode mrcoffee
+  $$: t_coffee sample_rnaseq1.fasta -mode mrcoffee
 
 
 
@@ -221,7 +221,8 @@ If you want to decide yourself which methods should be combined by R-Coffee, run
 
 ::
 
-  PROMPT: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pa\
+ ir
 
 
 
@@ -235,7 +236,7 @@ Given the alignment:
 
 ::
 
-  PROMPT: t_coffee -other_pg irmsd -aln 3d_sample4.aln
+  $$: t_coffee -other_pg irmsd -aln 3d_sample4.aln
 
 
 
@@ -246,7 +247,8 @@ tRMSD is a structure based clustering method using the iRMSD to drive the cluste
 
 ::
 
-  PROMPT: t_coffee -other_pg trmsd -aln 3d_sample5.aln -template_file 3d_sample5.template_list
+  $$: t_coffee -other_pg trmsd -aln 3d_sample5.aln -template_file 3d_sample5.tem\
+ plate_list
 
 
 
@@ -278,7 +280,8 @@ The program then outputs a series of files
 
 ::
 
-  Template Type: [3d_sample5.template_list] Mode Or File: [3d_sample5.template_list] [Start]
+  Template Type: [3d_sample5.template_list] Mode Or File: [3d_sample5.template_l\
+ ist] [Start]
 
    [Sample Columns][TOT= 51][100 %][ELAPSED TIME: 0 sec.]
 
@@ -318,7 +321,7 @@ Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
 
 ::
 
-  PROMPT: t_coffee -other_pg mocca sample_seq1.fasta
+  $$: t_coffee -other_pg mocca sample_seq1.fasta
 
 
 

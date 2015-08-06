@@ -22,7 +22,8 @@ Input:
 
 :: 
 
-  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100  +evaluate3D distances +tree2bs first -output newick -out tree.dnd
+  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replic\
+ ates 100  +evaluate3D distances +tree2bs first -output newick -out tree.dnd
 
 
 Outputs: 
@@ -33,7 +34,9 @@ It is possible to control default parameters using the following extended comman
 
 ::
 
-  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick -out tree.dnd
+  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replic\
+ ates 100 gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick\
+  -out tree.dnd
 
 .. warning: sequences without 3D structure will be excluded from the analysis and from the final output
 
@@ -45,7 +48,9 @@ This option makes it possible to estimate a tree while taking into account the v
 
 :: 
 
-  t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates 100  +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
+  t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tre\
+ e replicates 100  +evaluate3D contacts +tree2bs first -output newick -out tree.d\
+ nd
 
 
 Outputs: 
@@ -56,7 +61,8 @@ It is possible to control default parameters using the following extended comman
 
 ::
 
-  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mode nj  +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
+  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mo\
+ de nj  +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
 
 .. warning: the procedure requires at least 1 sequence with a known 3D structure or with contact information.
 
@@ -69,9 +75,12 @@ This same procedure can be used to visualize either intra-molecular distance con
 
 ::
 
-  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_html 
-  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_ascii
-  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_raw
+  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -outp\
+ ut score_html 
+  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -outp\
+ ut score_ascii
+  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -outp\
+ ut score_raw
 
 Outputs:
 * ``score_raw``: Tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
@@ -86,7 +95,9 @@ Input:
 
 ::
 
- seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates columns  +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
+ seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates columns\
+   +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <al\
+ n.html>
 
 Output
 * ``aln.score_html`` Colored version of your MSA indicating the sequences that best contribute to your clustering.
@@ -105,5 +116,6 @@ The tree can be pre-computed
 Or it can be computed on the fly
 :: 
 
-  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100  +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
+  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100  +evaluate\
+ 3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 

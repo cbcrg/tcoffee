@@ -12,6 +12,7 @@ my $l;
 open (F, $ARGV[0]);
 while(<F>){$l.=$_;}close F;
 $l=~s/\\\n //g;
+$l=~s/PROMPT:/\$\$\:/g;
 
 open (T, ">$temp");
 print T "$l";
@@ -57,7 +58,7 @@ else
       }
   }
 close (F);
-
+unlink ($temp);
 sub wrap_box
   {
     my ($string,$size)=@_;

@@ -54,7 +54,7 @@ T-Coffee can be used to automatically check if an updated version is available, 
 
 ::
 
-  PROMPT: t_coffee -update
+  $$: t_coffee -update
 
 
 
@@ -177,7 +177,7 @@ This reference manual gives a list of all the flags that can be used to modify t
 
 ::
 
-  PROMPT: t_coffee
+  $$: t_coffee
 
 
 
@@ -186,7 +186,7 @@ Or
 
 ::
 
-  PROMPT: t_coffee -help
+  $$: t_coffee -help
 
 
 
@@ -195,7 +195,7 @@ Or
 
 ::
 
-  PROMPT: t_coffee -help -in
+  $$: t_coffee -help -in
 
 
 
@@ -336,11 +336,20 @@ There are many ways to enter parameters in T-Coffee, see the -parameter flag in
 ::
 
   Parameters Priority
-  In general you will not need to use these complicated parameters. Yet, if you find yourself typing long command lines on a regular basis, it may be worth reading this section.
-  One may easily feel confused with the various manners in which the parameters can be passed to t_coffee. The reason for these many mechanisms is that they allow several levels of intervention. For instance, you may install t_coffee for all the users and decide that the defaults we provide are not the proper ones... In this case, you will need to make your own t_coffee_default file.
-  Later on, a user may find that he/she needs to keep re-using a specific set of parameters, different from those in t_coffee_default, hence the possibility to write an extra parameter file: parameters. In summary:
+  In general you will not need to use these complicated parameters. Yet, if you \
+ find yourself typing long command lines on a regular basis, it may be worth read\
+ ing this section.
+  One may easily feel confused with the various manners in which the parameters \
+ can be passed to t_coffee. The reason for these many mechanisms is that they all\
+ ow several levels of intervention. For instance, you may install t_coffee for al\
+ l the users and decide that the defaults we provide are not the proper ones... I\
+ n this case, you will need to make your own t_coffee_default file.
+  Later on, a user may find that he/she needs to keep re-using a specific set of\
+  parameters, different from those in t_coffee_default, hence the possibility to \
+ write an extra parameter file: parameters. In summary:
   -parameters > prompt parameters > -t_coffee_defaults > -mode
-  This means that -parameters supersede all the others, while parameters provided via -special mode are the weakest.
+  This means that -parameters supersede all the others, while parameters provide\
+ d via -special mode are the weakest.
 
 
 Meta-Parameters
@@ -353,7 +362,7 @@ No Flag
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta
+  $$: t_coffee sample_seq1.fasta
 
 
 
@@ -361,7 +370,7 @@ No Flag
 
 ::
 
-  PROMPT: t_coffee Ssample_seq1.fasta
+  $$: t_coffee Ssample_seq1.fasta
 
 
 
@@ -395,7 +404,7 @@ No Flag
 
 ::
 
-  PROMPT: t_coffee -parameters=sample_param_file.param
+  $$: t_coffee -parameters=sample_param_file.param
 
 
 
@@ -459,9 +468,9 @@ No Flag
 
 ::
 
-  PROMPT: t_coffee -infile=sample_aln1.aln -mode=evaluate
+  $$: t_coffee -infile=sample_aln1.aln -mode=evaluate
 
-  PROMPT: t_coffee -infile=sample_seq1.aln -in Lsample_lib1.tc_lib -mode=evaluate
+  $$: t_coffee -infile=sample_seq1.aln -in Lsample_lib1.tc_lib -mode=evaluate
 
 
 
@@ -563,11 +572,11 @@ Misc Parameters
 
 ::
 
-  PROMPT: t_coffee -other_pg=seq_reformat
+  $$: t_coffee -other_pg=seq_reformat
 
-  PROMPT: t_coffee -other_pg=unpack_all
+  $$: t_coffee -other_pg=unpack_all
 
-  PROMPT: t_coffee -other_pg=unpack_extract_from_pdb
+  $$: t_coffee -other_pg=unpack_extract_from_pdb
 
 
 
@@ -581,7 +590,7 @@ Sequence Input
 
 ::
 
-  PROMPT: t_coffee -infile=sample_seq1.fasta
+  $$: t_coffee -infile=sample_seq1.fasta
 
 
 
@@ -673,15 +682,23 @@ Structures, Sequences Methods and Library Input via the -in Flag
 ::
 
   The -in Flag and its Identifier TAGS
-  <-in> is the real grinder of T-Coffee. Sequences, methods and alignments all pass through so that T-Coffee can turn it all into a single list of constraints (the library). Everything is done automatically with T-Coffee going through each file to extract the sequences it contains. The methods are then applied to the sequences. Pre-compiled constraint list can also be provided. Each file provided via this flag must be preceded with a symbol (Identifier TAG) that indicates its nature to T-Coffee. The TAGs currently supported are the following:
+  <-in> is the real grinder of T-Coffee. Sequences, methods and alignments all p\
+ ass through so that T-Coffee can turn it all into a single list of constraints (\
+ the library). Everything is done automatically with T-Coffee going through each \
+ file to extract the sequences it contains. The methods are then applied to the s\
+ equences. Pre-compiled constraint list can also be provided. Each file provided \
+ via this flag must be preceded with a symbol (Identifier TAG) that indicates its\
+  nature to T-Coffee. The TAGs currently supported are the following:
   P PDB structure
   S  for sequences (use it as well to treat an MSA as unaligned sequences)
   M  Methods used to build the library
   L  Pre-computed T-Coffee library
   A  Multiple Alignments that must be turned into a Library
   X  Substitution matrices.
-  R  Profiles. This is a legal multiple alignments that will be treated as single sequences (the sequences it contains will not be realigned).
-  If you do not want to use the TAGS, you will need to use the following flags in replacement of -in. Do not use the TAGS when using these flags:
+  R  Profiles. This is a legal multiple alignments that will be treated as singl\
+ e sequences (the sequences it contains will not be realigned).
+  If you do not want to use the TAGS, you will need to use the following flags i\
+ n replacement of -in. Do not use the TAGS when using these flags:
   -aln  Alignments  (A)
   -profile Profiles  (R)
   -method Method  (M)
@@ -701,7 +718,8 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
 ::
 
-  PROMPT: t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_id_pair,Lsample_lib1.tc_lib -outfile=outaln
+  $$: t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_\
+ id_pair,Lsample_lib1.tc_lib -outfile=outaln
 
 
 
@@ -751,7 +769,7 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -in=Xpam250mt -gapopen=-10 -gapext=-1
+  $$: t_coffee sample_seq1.fasta -in=Xpam250mt -gapopen=-10 -gapext=-1
 
 
 
@@ -771,9 +789,9 @@ Profile Input
 
 ::
 
-  PROMPT: t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=profile_aln
+  $$: t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=profile_aln
 
-  PROMPT: t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair -outfile=profile_aln
+  $$: t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair -outfile=profile_aln
 
 
 
@@ -941,7 +959,7 @@ Library Computation: Extension
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib
+  $$: t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib
 
 
 
@@ -953,7 +971,7 @@ Library Computation: Extension
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib
+  $$: t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib
 
 
 
@@ -967,7 +985,7 @@ Library Computation: Extension
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -weight=1000 -out_lib=test.tc_lib
+  $$: t_coffee sample_seq1.fasta -weight=1000 -out_lib=test.tc_lib
 
 
 
@@ -1002,9 +1020,9 @@ This flag is kept for compatibility with ClustalW. It indicates that:
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -distance_matrix_mode=very_fast
+  $$: t_coffee sample_seq1.fasta -distance_matrix_mode=very_fast
 
-  PROMPT: t_coffee sample_seq1.fasta -quicktree
+  $$: t_coffee sample_seq1.fasta -quicktree
 
 
 
@@ -1013,11 +1031,18 @@ Pair-wise Alignment Computation
 ::
 
   Controlling Alignment Computation
-  Most parameters in this section refer to the alignment mode fasta_pair_wise and cfatsa_pair_wise. When using these alignment modes, things proceed as follow:
-  1-Sequences are recoded using a degenerated alphabet provided with <-sim_matrix>
+  Most parameters in this section refer to the alignment mode fasta_pair_wise an\
+ d cfatsa_pair_wise. When using these alignment modes, things proceed as follow:
+  1-Sequences are recoded using a degenerated alphabet provided with <-sim_matri\
+ x>
   2-Recoded sequences are then hashed into ktuples of size <-ktup>
-  3-Dynamic programming runs on the <-ndiag> best diagonals whose score is higher than <-diag_threshold>, the way diagonals are scored is controlled via <-diag_mode> .
-  4-The Dynamic computation is made to optimize either the library scoring scheme (as defined by the -in flag) or a substitution matrix as provided via the -matrix flag. The penalty scheme is defined by -gapopen and -gapext. If -gapopen is undefined, the value defined in -cosmetic_penalty is used instead.
+  3-Dynamic programming runs on the <-ndiag> best diagonals whose score is highe\
+ r than <-diag_threshold>, the way diagonals are scored is controlled via <-diag_\
+ mode> .
+  4-The Dynamic computation is made to optimize either the library scoring schem\
+ e (as defined by the -in flag) or a substitution matrix as provided via the -mat\
+ rix flag. The penalty scheme is defined by -gapopen and -gapext. If -gapopen is \
+ undefined, the value defined in -cosmetic_penalty is used instead.
   5-Terminal gaps are scored according to -tg_mode
 
 
@@ -1031,7 +1056,7 @@ Pair-wise Alignment Computation
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -dp_mode myers_miller_pair_wise
+  $$: t_coffee sample_seq1.fasta -dp_mode myers_miller_pair_wise
 
 
 
@@ -1412,7 +1437,7 @@ Multithreading
 
 ::
 
-  PROMPT: t_coffee sample_seq2.fasta -multi_core jobs
+  $$: t_coffee sample_seq2.fasta -multi_core jobs
 
 
 
@@ -1420,7 +1445,7 @@ Multithreading
 
 ::
 
-  PROMPT: t_coffee sample_seq2.fasta -multi_core no
+  $$: t_coffee sample_seq2.fasta -multi_core no
 
 
 
@@ -1434,7 +1459,7 @@ Multithreading
 
 ::
 
-  PROMPT: t_coffee sample_seq2.fasta -multi_core jobs
+  $$: t_coffee sample_seq2.fasta -multi_core jobs
 
 
 
@@ -1544,7 +1569,7 @@ Generic
 
 ::
 
-  PROMPT: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair
+  $$: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair
 
 
 
@@ -1568,7 +1593,8 @@ Generic
 
 ::
 
-  PROMPT: t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template
+  $$: t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file\
+ .template
 
 
 
@@ -1684,7 +1710,8 @@ PSIBLAST: will use the EBI sever to find profiles
 
 ::
 
-  blast.pl -db=pdb -dir=/local/test -infile=<some tmp file> -outfile=<another tmp file>
+  blast.pl -db=pdb -dir=/local/test -infile=<some tmp file> -outfile=<another tm\
+ p file>
 
 
 
@@ -1694,7 +1721,7 @@ PSIBLAST: will use the EBI sever to find profiles
 
 ::
 
-  PROMPT: t_coffee 3d_sample2.fasta -template_file SELF_P_
+  $$: t_coffee 3d_sample2.fasta -template_file SELF_P_
 
 
 
@@ -1738,7 +1765,8 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
 ::
 
-  PROMPT: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.mocca_lib -domain -start=100 -len=50
+  $$: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.moc\
+ ca_lib -domain -start=100 -len=50
 
 
 
@@ -1748,7 +1776,7 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
 ::
 
-  PROMPT: t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
+  $$: t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
 
 
 
@@ -1792,7 +1820,8 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
 ::
 
-  PROMPT: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len=60
+  $$: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len\
+ =60
 
   TOLB_ECOLI_212_26  211 SKLAYVTFESGR--SALVIQTLANGAVRQV-ASFPRHNGAPAFSPDGSKLAFA
 
@@ -1957,7 +1986,7 @@ Defau TOC \o '1-1' Word did not find any entries for your table of contents.lt:-
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -output=clustalw,gcg, score_html
+  $$: t_coffee sample_seq1.fasta -output=clustalw,gcg, score_html
 
 
 
@@ -1988,7 +2017,8 @@ If you need to change the case of your file, you can use seq_reformat:
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +lower -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +lower -output\
+  clustalw
 
 
 
@@ -2109,11 +2139,12 @@ http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_ascii, score_html
+  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_asci\
+ i, score_html
 
-  PROMPT: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii, score_html
+  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii, score_html
 
-  PROMPT: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html
+  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html
 
 
 
@@ -2167,7 +2198,8 @@ APDB, iRMSD and tRMSD Parameters
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in 3d_sample4.aln -action +upper -output clustalw > 3d_sample4.cw_aln
+  $$: t_coffee -other_pg seq_reformat -in 3d_sample4.aln -action +upper -output \
+ clustalw > 3d_sample4.cw_aln
 
 
 
@@ -2175,7 +2207,7 @@ APDB, iRMSD and tRMSD Parameters
 
 ::
 
-  PROMPT: t_coffee -other_pg apdb -aln 3d_sample4.aln
+  $$: t_coffee -other_pg apdb -aln 3d_sample4.aln
 
 
 
@@ -2353,13 +2385,23 @@ Sequence name handling is meant to be fully consistent with ClustalW (Version 1.
    >seq1 human_myc
   will be turned into
    >seq1
-  It is your responsibility to make sure that the names you provide are not ambiguous after such an editing. This editing is consistent with Clustalw (Version 1.75)
+  It is your responsibility to make sure that the names you provide are not ambi\
+ guous after such an editing. This editing is consistent with Clustalw (Version 1\
+ .75)
   2-No Strange Character
-  Some non alphabetical characters are replaced with underscores. These are: ';:()'
-  Other characters are legal and will be kept unchanged. This editing is meant to keep in line with Clustalw (Version 1.75).
+  Some non alphabetical characters are replaced with underscores. These are: ';:\
+ ()'
+  Other characters are legal and will be kept unchanged. This editing is meant t\
+ o keep in line with Clustalw (Version 1.75).
   3-> is NEVER legal (except as a header token in a FASTA file)
-  4-Name length must be below 100 characters, although 15 is recommended for compatibility with other programs.
-  5-Duplicated sequences will be renamed (i.e. sequences with the same name in the same dataset) are allowed but will be renamed according to their original order. When sequences come from multiple sources via the -in flag, consistency of the renaming is not guaranteed. You should avoid duplicated sequences as they will cause your input to differ from your output thus making it difficult to track data.
+  4-Name length must be below 100 characters, although 15 is recommended for com\
+ patibility with other programs.
+  5-Duplicated sequences will be renamed (i.e. sequences with the same name in t\
+ he same dataset) are allowed but will be renamed according to their original ord\
+ er. When sequences come from multiple sources via the -in flag, consistency of t\
+ he renaming is not guaranteed. You should avoid duplicated sequences as they wil\
+ l cause your input to differ from your output thus making it difficult to track \
+ data.
 
 
 Automatic Format Recognition
@@ -2717,7 +2759,8 @@ prf2: profile containing one structure
 
 ::
 
-  PROMPT: t_coffee Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln
+  $$: t_coffee Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile\
+ =aligned_prf.aln
 
 
 
@@ -2731,7 +2774,8 @@ These command lines have been checked before every release (along with the other
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text
+  $$: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -ou\
+ tfile=clustal_text
 
 
 
@@ -2740,7 +2784,7 @@ These command lines have been checked before every release (along with the other
 
 ::
 
-  PROMPT: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair
+  $$: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair
 
 
 
@@ -2749,13 +2793,13 @@ These command lines have been checked before every release (along with the other
 
 ::
 
-  PROMPT: t_coffee -in Sseq.fas P2PTC Mfugue_pair
+  $$: t_coffee -in Sseq.fas P2PTC Mfugue_pair
 
-  PROMPT: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_
+  $$: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_
 
-  PROMPT: t_coffee -mode 3dcoffee -in Sseq.fas P2PTC
+  $$: t_coffee -mode 3dcoffee -in Sseq.fas P2PTC
 
-  PROMPT: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_
+  $$: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_
 
 
 
@@ -2764,7 +2808,8 @@ These command lines have been checked before every release (along with the other
 
 ::
 
-  PROMPT: t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_file template_file6.template
+  $$: t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_\
+ file template_file6.template
 
 
 
@@ -2773,7 +2818,8 @@ These command lines have been checked before every release (along with the other
 
 ::
 
-  PROMPT: t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.template -weight 1001 -out_lib test_lib7.tc_lib -lib_only
+  $$: t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.te\
+ mplate -weight 1001 -out_lib test_lib7.tc_lib -lib_only
 
 
 
@@ -2782,7 +2828,7 @@ These command lines have been checked before every release (along with the other
 
 ::
 
-  PROMPT: t_coffee -in Lmarna.tc_lib -outfile maran.test
+  $$: t_coffee -in Lmarna.tc_lib -outfile maran.test
 
 
 
@@ -2791,7 +2837,7 @@ These command lines have been checked before every release (along with the other
 
 ::
 
-  PROMPT: t_coffee -in Asample_aln5.aln -outfile test.aln
+  $$: t_coffee -in Asample_aln5.aln -outfile test.aln
 
 
 

@@ -78,7 +78,7 @@ T-Coffee is not an interactive program. It runs from your UNIX or Linux command 
 
 ::
 
-   PROMPT: t_coffee sample_seq1.fasta
+   $$: t_coffee sample_seq1.fasta
 
 
 
@@ -103,7 +103,7 @@ If you want to align closely related sequences, T-Coffee can also be used in a f
 
 ::
 
-   PROMPT: t_coffee sample_seq1.fasta -mode quickaln
+   $$: t_coffee sample_seq1.fasta -mode quickaln
 
 
 
@@ -112,7 +112,7 @@ This mode works by only considering the best diagonals between two sequences. By
 
 ::
 
-   PROMPT: t_coffee sample_seq1.fasta -mode quickaln -ndiag=10
+   $$: t_coffee sample_seq1.fasta -mode quickaln -ndiag=10
 
 
 
@@ -126,7 +126,7 @@ T-Coffee combines methods, and can be made as accurate (and hopefully more) as t
 
 ::
 
-   PROMPT: t_coffee sample_seq1.fasta -mode accurate
+   $$: t_coffee sample_seq1.fasta -mode accurate
 
 
 
@@ -172,7 +172,8 @@ T-Coffee allows you to combine results obtained with several alignment methods. 
 
 ::
 
-  PROMPT: t_coffee -aln=sproteases_small.cw_aln, sproteases_small.muscle, sproteases_small.tc_aln -outfile=combined_aln.aln
+  $$: t_coffee -aln=sproteases_small.cw_aln, sproteases_small.muscle, sproteases\
+ _small.tc_aln -outfile=combined_aln.aln
 
 
 
@@ -183,7 +184,7 @@ You can use T-Coffee to measure the reliability of your Multiple Sequence alignm
 
 ::
 
-  PROMPT: t_coffee -infile=sproteases_small.aln -special_mode=evaluate
+  $$: t_coffee -infile=sproteases_small.aln -special_mode=evaluate
 
 
 
@@ -194,7 +195,7 @@ One of the latest improvements of T-Coffee is to let you combine sequences and s
 
 ::
 
-  PROMPT: t_coffee 3d.fasta -special_mode=expresso
+  $$: t_coffee 3d.fasta -special_mode=expresso
 
 
 
@@ -203,7 +204,7 @@ BLAST will identify the best PDB target for each sequences, and T-Coffee will us
 
 ::
 
-  PROMPT: t_coffee 3d.fasta -special_mode=3dcoffee
+  $$: t_coffee 3d.fasta -special_mode=3dcoffee
 
 
 
@@ -212,7 +213,7 @@ In this case, the sequences must be names according to their PDB targets. All th
 
 ::
 
-  PROMPT: which wget
+  $$: which wget
 
 
 
@@ -223,7 +224,7 @@ Mocca is a special mode of T-Coffee that allows you to extract a series of repea
 
 ::
 
-  PROMPT: t_coffee -other_pg mocca sample_seq1.fasta
+  $$: t_coffee -other_pg mocca sample_seq1.fasta
 
 
 
@@ -283,7 +284,7 @@ T-Coffee comes along with a very powerful reformatting utility named seq_reforma
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat
+  $$: t_coffee -other_pg seq_reformat
 
 
 
@@ -311,7 +312,7 @@ seq_reformat is a reformatting utility. It reads in via the -in and -in2 flags a
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat
+  $$: t_coffee -other_pg seq_reformat
 
 
 
@@ -327,7 +328,8 @@ It can be necessary to change from one MSA format to another. If your sequences 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_aln > sproteases_small.fasta_aln
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_aln\
+  > sproteases_small.fasta_aln
 
 
 
@@ -336,7 +338,8 @@ If you want to turn a clustalw alignment into an alignment having the pileup for
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output msf > sproteases_small.msf
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output msf > spr\
+ oteases_small.msf
 
 
 
@@ -360,7 +363,8 @@ If you want to recover your sequences from some pre-computed alignment, you can 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_seq > sproteases_small.fasta
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_seq\
+  > sproteases_small.fasta
 
 
 
@@ -374,7 +378,8 @@ If you need to change the case of your sequences, you can use more sophisticated
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +lower -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +lower -o\
+ utput clustalw
 
 
 
@@ -388,7 +393,8 @@ If you want to change the case of a specific residue, you can use the flag: +edi
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +upper +edit_residue hmgb_chite 10 lower
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +upper +edit_r\
+ esidue hmgb_chite 10 lower
 
 
 
@@ -399,7 +405,8 @@ If you want to change the case depending on the score, you must either evaluate 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +upper +3evaluate idmat +lower '[5-9]'
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -\
+ action +upper +3evaluate idmat +lower '[5-9]'
 
 
 
@@ -416,7 +423,8 @@ The first thing to do is to generate a list of names that will be used in place 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -output code_name > sproteases_large.code_name
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -output code_na\
+ me > sproteases_large.code_name
 
 
 
@@ -425,7 +433,8 @@ Will create a file where each original name is associated with a coded name (Cxx
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -code sproteases_large.code_name -in sproteases_large.fasta >sproteases_large.coded.fasta
+  $$: t_coffee -other_pg seq_reformat -code sproteases_large.code_name -in sprot\
+ eases_large.fasta >sproteases_large.coded.fasta
 
 
 
@@ -434,7 +443,8 @@ Will code all the names of the original data. You can work with the file sprotea
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -decode sproteases_large.code_name -in sproteases_large.coded.fasta
+  $$: t_coffee -other_pg seq_reformat -decode sproteases_large.code_name -in spr\
+ oteases_large.coded.fasta
 
 
 
@@ -447,7 +457,8 @@ You can color all the residues of your sequences on the fly. For instance, the f
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +3convert a0 -output color_html > colored.html
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -\
+ action +3convert a0 -output color_html > colored.html
 
 
 
@@ -461,7 +472,8 @@ If you want to color a specific residue, you can use the flag: +color_residue <s
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +color_residue hmgb_chite 10 1 -output color_html > color.html
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +color_residue\
+  hmgb_chite 10 1 -output color_html > color.html
 
 
 
@@ -472,7 +484,8 @@ Use the +evaluate flag if you want to color your alignment according to its cons
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +3evaluate pam250mt- output color_html > color.html
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -\
+ action +3evaluate pam250mt- output color_html > color.html
 
 
 
@@ -481,7 +494,8 @@ You can also use the boxshade scoreing scheme:
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action +3evaluate boxshade -output color_html > color.html
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -\
+ action +3evaluate boxshade -output color_html > color.html
 
 
 
@@ -521,7 +535,8 @@ The command
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=clustalw_aln -out=cache.aln -action +convert 'Aa1' '.--' +convert '#0'
+  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=clustalw_aln -\
+ out=cache.aln -action +convert 'Aa1' '.--' +convert '#0'
 
 
 
@@ -548,7 +563,8 @@ This command generates the following alignment (called a cache):
 
 ::
 
-  CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, Len=27
+  CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, L\
+ en=27
 
   B 000101-100000---000100--000
 
@@ -565,7 +581,8 @@ Other alternative are possible. For instance, the following command:
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out=cache.seq -action +convert 'Aa1' '.--' +convert '#0'
+  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out\
+ =cache.seq -action +convert 'Aa1' '.--' +convert '#0'
 
 
 
@@ -597,7 +614,8 @@ where each residue has been replaced with a number according to what was specifi
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out=cache -action +convert 'Aa1' '.--'
+  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out\
+ =cache -action +convert 'Aa1' '.--'
 
   >B
 
@@ -702,7 +720,8 @@ If you have a cache alignment or a cache library, you can use it to color your a
 
 ::
 
-   PROMPT: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6.cache -struc_in_f number_fasta -output=color_html -out=x.html
+   $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6\
+ .cache -struc_in_f number_fasta -output=color_html -out=x.html
 
 
 
@@ -711,7 +730,8 @@ This will produce a colored version readable with any standard web browser, whil
 
 ::
 
-   PROMPT: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6.cache -struc_in_f number_fasta -output=color_pdf -out=x.pdf
+   $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6\
+ .cache -struc_in_f number_fasta -output=color_pdf -out=x.pdf
 
 
 
@@ -725,7 +745,8 @@ You can also use a cache library like the one shown above (sample_lib5.tc_lib):
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_lib5.tc_lib -output=color_html -out=x.html
+  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_lib5.\
+ tc_lib -output=color_html -out=x.html
 
 
 
@@ -761,7 +782,7 @@ As suggested in a previous section, it is possible to evaluate the accuracy of a
 
 ::
 
-  PROMPT: t_coffee -infile sample_aln1.aln -mode evaluate
+  $$: t_coffee -infile sample_aln1.aln -mode evaluate
 
 
 
@@ -773,9 +794,9 @@ In some circumstances, you may also want to evaluate your alignment against a pr
 
 ::
 
-  PROMPT: t_coffee -infile sample_aln1.aln -out_lib sample_aln1.tc_lib -lib_only
+  $$: t_coffee -infile sample_aln1.aln -out_lib sample_aln1.tc_lib -lib_only
 
-  PROMPT: t_coffee -infile sample_aln1.aln -mode evaluate -lib sample_aln1.tc_lib
+  $$: t_coffee -infile sample_aln1.aln -mode evaluate -lib sample_aln1.tc_lib
 
 
 
@@ -789,7 +810,8 @@ It is possible to use seq_reformat in a similar way to infer the local level of 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate idmat -output score_ascii
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate idma\
+ t -output score_ascii
 
 
 
@@ -798,7 +820,8 @@ Or with the following for measuring similarity with a blosum62
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blosum62mt -output score_ascii
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blos\
+ um62mt -output score_ascii
 
 
 
@@ -807,7 +830,8 @@ Finally, it is also possible to display in color the conservation levels:
 
 ::
 
-   PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blosum62mt -output score_html > x.html
+   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blo\
+ sum62mt -output score_html > x.html
 
 
 
@@ -820,7 +844,7 @@ You can remove all the columns containing a certain proportion of gaps. For inst
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +rm_gap 50
+  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +rm_gap 50
 
 
 
@@ -834,7 +858,8 @@ Consider the following alignment (sample_aln7.aln)
 
 ::
 
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 sec, SCORE=0, Nseq=4, Len=28
+  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 se\
+ c, SCORE=0, Nseq=4, Len=28
 
   A CTCCGTGTCTAGGAGT-TTACGTGGAGT
 
@@ -853,7 +878,8 @@ and the following cache (sample_aln7.cache_aln):
 
 ::
 
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 sec, SCORE=0, Nseq=4, Len=28
+  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 se\
+ c, SCORE=0, Nseq=4, Len=28
 
   A 3133212131022021-11032122021
 
@@ -870,7 +896,8 @@ You can turn to lower case all the residues having a score between 1 and 2:
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache_aln -struc_in_f number_aln -action +lower '[1-2]'
+  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.\
+ cache_aln -struc_in_f number_aln -action +lower '[1-2]'
 
   CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.05 sec, SCORE=0, Nseq=4, Len=28
 
@@ -919,7 +946,8 @@ For instance, to selectively turn all the G having a score between 1 and 2, use:
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache_aln -struc_in_f number_aln -action +convert '[1-2]' CX
+  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.\
+ cache_aln -struc_in_f number_aln -action +convert '[1-2]' CX
 
 
 
@@ -930,7 +958,7 @@ To do this, you need an evaluation file that may have been generated with T-Coff
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -output score_ascii, aln
+  $$: t_coffee sample_seq1.fasta -output score_ascii, aln
 
 
 
@@ -939,7 +967,8 @@ Or evaluating a pre-existing alignment
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate blosum62mt -output score_ascii
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate blos\
+ um62mt -output score_ascii
 
 
 
@@ -948,7 +977,8 @@ This generates a score_ascii file that you can then use to filter out the bad bi
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii -struc_in_f number_aln -action +keep '[8-9]'
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.\
+ score_ascii -struc_in_f number_aln -action +keep '[8-9]'
 
 
 
@@ -957,7 +987,8 @@ This command considers the individual score of each residue to trigger the filte
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii -struc_in_f number_aln -action +use_cons +keep '[8-9]'
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.\
+ score_ascii -struc_in_f number_aln -action +use_cons +keep '[8-9]'
 
 
 
@@ -973,7 +1004,8 @@ It is possible to use a score_ascii file ( as produced in the previous section) 
 
 ::
 
-   PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blosum62mt +use_cons +keep '[5-9]'
+   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blo\
+ sum62mt +use_cons +keep '[5-9]'
 
 
 
@@ -990,9 +1022,10 @@ It is also possible to re-use pre-computed score_ascii files, such as those obta
 
 ::
 
-   PROMPT: t_coffee sample_aln1.fasta -output score_ascii -outfile sample1.score_ascii
+   $$: t_coffee sample_aln1.fasta -output score_ascii -outfile sample1.score_asc\
+ ii
 
-   PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -struc_in sample1.score_ascii -struc_in_f number_aln -action +use_cons +keep '[8-9]'
+   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -struc_in sample1.score_ascii -struc_in_f number_aln -action +use_cons +keep '[8-9]'
 
 
 
@@ -1003,7 +1036,8 @@ You can extract any sequence by requesting a specific pattern to be found either
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME KEEP HUMAN -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAM\
+ E KEEP HUMAN -output clustalw
 
 
 
@@ -1012,7 +1046,8 @@ The modifier is '+grep'. NAME indicates that the extraction is made according to
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME REMOVE HUMAN -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAM\
+ E REMOVE HUMAN -output clustalw
 
 
 
@@ -1021,7 +1056,8 @@ Note that HUMAN is case sensitive (Human, HUMAN and hUman will not yield the sam
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep COMMENT KEEP sapiens -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep COM\
+ MENT KEEP sapiens -output clustalw
 
 
 
@@ -1030,7 +1066,8 @@ Will keep all the sequences containing the word sapiens in the comment section. 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME REMOVE '[ILM]K' -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAM\
+ E REMOVE '[ILM]K' -output clustalw
 
 
 
@@ -1044,7 +1081,8 @@ Extracting Two Sequences: If you want to extract several sequences, in order to 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
+ seq_list 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
 
 
 
@@ -1055,7 +1093,8 @@ Removing Columns of Gaps. Removing intermediate sequences results in columns of 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA' +rm_gap
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
+ seq_list 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA' +rm_gap
 
 
 
@@ -1064,7 +1103,8 @@ Extracting Sub sequences: You may want to extract portions of your sequences. Th
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
+ seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap
 
 
 
@@ -1073,7 +1113,9 @@ Keeping the original Sequence Names. Note that your sequences are now renamed ac
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +keep_name +extract_seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +keep_nam\
+ e +extract_seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_g\
+ ap
 
 
 
@@ -1086,7 +1128,8 @@ Removing Two Sequences. If you want to remove several sequences, use rm_seq inst
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +remove_seq 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +remove_s\
+ eq 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
 
 
 
@@ -1097,7 +1140,8 @@ Extracting a Block. If you only want to keep one block in your alignment, use
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block cons 150 200
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
+ block cons 150 200
 
 
 
@@ -1106,7 +1150,8 @@ In this command line, cons indicates that you are counting the positions accordi
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block 'sp|Q03238|GRAM_RAT' 10 200
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
+ block 'sp|Q03238|GRAM_RAT' 10 200
 
 
 
@@ -1117,11 +1162,12 @@ If you have extracted several blocks and you now want to glue them together, you
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block cons 100 120 > block1.aln
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
+ block cons 100 120 > block1.aln
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block cons 150 200 > block2.aln
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block cons 150 200 > block2.aln
 
-  PROMPT: t_coffee -other_pg seq_reformat -in block1.aln -in2 block2.aln -action +cat_aln
+  $$: t_coffee -other_pg seq_reformat -in block1.aln -in2 block2.aln -action +cat_aln
 
 
 
@@ -1136,7 +1182,7 @@ It is easy to measure the level of diversity within your multiple sequence align
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln1.aln -output sim
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -output sim
 
 
 
@@ -1157,7 +1203,8 @@ To be informative, a sequence must contain information the other sequences do no
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_n10 -output fasta_seq
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
+ seq_n10 -output fasta_seq
 
 
 
@@ -1169,7 +1216,8 @@ The argument _n10 means you want to extract the 10 most informative sequences. I
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_N20 -output fasta_seq
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
+ seq_N20 -output fasta_seq
 
 
 
@@ -1180,7 +1228,8 @@ Removing the most similar sequences is often what people have in mind when they 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
+ seq_%%50_
 
 
 
@@ -1194,7 +1243,7 @@ Note the difference of speed between these two command and the previous one:
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in kinases.aln -action +trim _aln_%%50_
+  $$: t_coffee -other_pg seq_reformat -in kinases.aln -action +trim _aln_%%50_
 
   t_coffee -other_pg seq_reformat -in kinases.fasta -action +trim _seq_%%50_
 
@@ -1210,7 +1259,8 @@ Sometimes you want to trim while making sure specific important sequences remain
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50 HUMAN
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
+ seq_%%50 HUMAN
 
 
 
@@ -1222,7 +1272,8 @@ By default, string causes all the sequences whose name it matches to be kept. Yo
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_fCOMMENT '.apiens'
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
+ seq_%%50_fCOMMENT '.apiens'
 
 
 
@@ -1231,7 +1282,8 @@ Will cause all the sequences containing the regular expression '.apiens' in the 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_fSEQ '[MLV][RK]'
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
+ seq_%%50_fSEQ '[MLV][RK]'
 
 
 
@@ -1240,7 +1292,8 @@ You can also specify the sequences you want to keep. To do so, give a fasta file
 
 ::
 
-  PROMPT:t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_small.fasta -action +trim _seq_%%40
+  $$:t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_\
+ small.fasta -action +trim _seq_%%40
 
 
 
@@ -1251,7 +1304,8 @@ Sequences that are too distantly related from the rest of the set will sometimes
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_O40
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
+ seq_%%50_O40
 
 
 
@@ -1274,7 +1328,8 @@ These sequences have 26% identity. This is high enough to make a case for a homo
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_pair.fasta -action +chain > sproteases_chain.fasta
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases\
+ _pair.fasta -action +chain > sproteases_chain.fasta
 
 
 
@@ -1307,7 +1362,8 @@ If your sequences are DNA coding sequences, it is always safer to align them as 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -action +translate -output fasta_seq
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -action +tr\
+ anslate -output fasta_seq
 
 
 
@@ -1318,7 +1374,8 @@ Once your sequences have been aligned, you may want to turn your protein alignme
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sproteases_small.aln -action +thread_dna_on_prot_aln -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sprote\
+ ases_small.aln -action +thread_dna_on_prot_aln -output clustalw
 
 
 
@@ -1334,7 +1391,8 @@ Back-translating means turning a protein sequence into a DNA sequence. If you do
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sproteases_small.aln -action +thread_dna_on_prot_aln -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sprote\
+ ases_small.aln -action +thread_dna_on_prot_aln -output clustalw
 
 
 
@@ -1356,7 +1414,7 @@ If you want to fetch the chain E of the PDB structure 1PPG, you can use:
 
 ::
 
-  PROMPT: t_coffee -other_pg extract_from_pdb -infile 1PPGE
+  $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE
 
 
 
@@ -1367,7 +1425,7 @@ To Fetch the sequence, use:
 
 ::
 
-  PROMPT: t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta
+  $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta
 
 
 
@@ -1404,7 +1462,8 @@ Given an RNA multiple sequence alignment, it is possible to compute the alifold 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +aln2alifold -output stockholm_aln
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +aln2alifol\
+ d -output stockholm_aln
 
 
 
@@ -1412,7 +1471,8 @@ Adding a consensus structure to an alignment
 --------------------------------------------
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +add_alifold -output stockholm_aln
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +add_alifol\
+ d -output stockholm_aln
 
 
 
@@ -1432,7 +1492,8 @@ It is possible to add this secondary structure to an alignment using:
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.alifold -input2 alifold -action +add_alifold -output stockholm_aln
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2\
+ .alifold -input2 alifold -action +add_alifold -output stockholm_aln
 
 
 
@@ -1445,7 +1506,8 @@ It is also possible to stack Stockholm formatted secondary structures:
 
 ::
 
-  PROMPT: seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +add_alifold -output stockholm_aln
+  $$: seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +\
+ add_alifold -output stockholm_aln
 
 
 
@@ -1461,7 +1523,8 @@ Analyzing matching columns
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze stat
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2an\
+ alyze stat
 
 
 
@@ -1470,7 +1533,8 @@ Other arguments can given, to display the list of paired positions and their sta
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2an\
+ alyze list
 
 
 
@@ -1496,7 +1560,8 @@ c : Compensatory mutations
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze aln
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2an\
+ alyze aln
 
 
 
@@ -1505,7 +1570,8 @@ It is possible to turn this output into a colored one using:
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_htm
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2an\
+ alyze color_htm
 
 
 
@@ -1521,7 +1587,8 @@ The folds associated with alternative alignments can be compared. This compariso
 
 ::
 
-  t_coffee -other_pg seq_reformat -in sample_rnaseq2.cw.stk -in2 sample_rnaseq2.tcoffee.stk -action +RNAfold_cmp
+  t_coffee -other_pg seq_reformat -in sample_rnaseq2.cw.stk -in2 sample_rnaseq2.\
+ tcoffee.stk -action +RNAfold_cmp
 
 
 
@@ -1568,7 +1635,8 @@ All these parameters can be concatenated:
 
 ::
 
-   seq_reformat -in <aln> -action +aln2tree _TMODE_upgma_MATRIX_sarmat -output newick
+   seq_reformat -in <aln> -action +aln2tree _TMODE_upgma_MATRIX_sarmat -output n\
+ ewick
 
 
 
@@ -1600,7 +1668,8 @@ You can compare them using:
 
 ::
 
-  seq_reformat -in sample_tree2.dnd -in2 sample_tree3.dnd -action +tree_cmp -output newick
+  seq_reformat -in sample_tree2.dnd -in2 sample_tree3.dnd -action +tree_cmp -out\
+ put newick
 
   tree_cpm|T: 75 W: 71.43 L: 50.50
 
@@ -1659,7 +1728,8 @@ It is possible to scan an alignment and locally measure the similarity between a
 
 ::
 
-  seq_reformat -in <aln> -in2 <reftree> -action +tree_scan _MODE_scan__W_10_ > ph_tree_scan.txt
+  seq_reformat -in <aln> -in2 <reftree> -action +tree_scan _MODE_scan__W_10_ > p\
+ h_tree_scan.txt
 
 
 
@@ -1705,12 +1775,14 @@ And the file sample_seq8.seq
 
 ::
 
-  Note: Sample_seq8 is merely a FASTA file where sequences can be omitted. Sequences can be omitted, but you can also leave them, at your entire convenience.
+  Note: Sample_seq8 is merely a FASTA file where sequences can be omitted. Seque\
+ nces can be omitted, but you can also leave them, at your entire convenience.
 
 
 ::
 
-  seq_reformat -in sample_tree2.dnd -in2 sample_seq8.seq -action +tree_prune -output newick
+  seq_reformat -in sample_tree2.dnd -in2 sample_seq8.seq -action +tree_prune -ou\
+ tput newick
 
   (( A:0.50000, C:0.50000):0.00000, B:0.50000, D:0.99500);
 
@@ -1869,7 +1941,7 @@ PSI-Coffee builds a profile associated with each of your input sequence and then
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -mode psicoffee
+  $$: t_coffee sproteases_small.fasta -mode psicoffee
 
 
 
@@ -1878,7 +1950,7 @@ If you want to go further, and be even slower, you can use the accurate mode tha
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -mode accurate
+  $$: t_coffee sproteases_small.fasta -mode accurate
 
 
 
@@ -1892,7 +1964,7 @@ T-Coffee is meant to be run like ClustalW. This means you can use it like Clusta
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta
+  $$: t_coffee sproteases_small.fasta
 
 
 
@@ -1909,7 +1981,7 @@ If you need to, you can also trigger different ouput formats using the -output f
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -output=clustalw,fasta_aln,msf
+  $$: t_coffee sproteases_small.fasta -output=clustalw,fasta_aln,msf
 
 
 
@@ -1923,7 +1995,7 @@ T-Coffee is not a phylogeny package. Yet, it has some limited abilities to turn 
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -output=clustalw,fasta_aln,msf
+  $$: t_coffee sproteases_small.fasta -output=clustalw,fasta_aln,msf
 
 
 
@@ -1937,7 +2009,8 @@ If your sequences are spread across several datasets, you can give all the files
 
 ::
 
-  PROMPT: t_coffee -seq=sprotease1_small.fasta,sprotease2_small.aln -output=clustalw,fasta_aln,msf
+  $$: t_coffee -seq=sprotease1_small.fasta,sprotease2_small.aln -output=clustalw\
+ ,fasta_aln,msf
 
 
 
@@ -1983,7 +2056,8 @@ To use the fastest possible mode (less accurate) run:
 
 ::
 
-  muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 > sproteases_large.muscle
+  muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 >\
+  sproteases_large.muscle
 
 
 
@@ -2005,7 +2079,7 @@ T-Coffee is not very well gifted for aligning large datasets, but you can give i
 
 ::
 
-  PROMPT: t_coffee sproteases_large.fasta -mode quickaln
+  $$: t_coffee sproteases_large.fasta -mode quickaln
 
 
 
@@ -2016,7 +2090,8 @@ Once you have generated your large alignment, you may nedd/want to shrink it to 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_large.muscle -action +trim _n20 -output > sproteases_large_muscle_trim.aln
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.muscle -action +trim \
+ _n20 -output > sproteases_large_muscle_trim.aln
 
 
 
@@ -2044,11 +2119,11 @@ Unless you have some structural information available, the only way to tell whet
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -matrix=blosum30mt -outfile=b30.aln
+  $$: t_coffee sproteases_small.fasta -matrix=blosum30mt -outfile=b30.aln
 
-  PROMPT: t_coffee sproteases_small.fasta -matrix=blosum80mt -outfile=b80.aln
+  $$: t_coffee sproteases_small.fasta -matrix=blosum80mt -outfile=b80.aln
 
-  PROMPT: t_coffee sproteases_small.fasta -matrix=pam350mt -outfile p350.aln
+  $$: t_coffee sproteases_small.fasta -matrix=pam350mt -outfile p350.aln
 
 
 
@@ -2062,7 +2137,7 @@ If you change the parameters, you will end up with alternative alignemnts. It ca
 
 ::
 
-  PROMPT: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln
+  $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln
 
 
 
@@ -2087,7 +2162,8 @@ Of course, this does not tell you where are the good bits, but you can get this 
 
 ::
 
-  t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_aln_threshold 50
+  t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_\
+ aln_threshold 50
 
   sp|O35205|GRAK_MOUSE M---r----fssw-------ALvslvagvym----------------SSECFHTEIIGGR
 
@@ -2179,7 +2255,8 @@ For an even more drastic display, try:
 
 ::
 
-  t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_aln_threshold 50 -output_aln_modif x
+  t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_\
+ aln_threshold 50 -output_aln_modif x
 
 
 
@@ -2196,7 +2273,7 @@ The default values are -gapopen=-50, -gapext=0. The reasons for these very low v
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -gapopen -100 -gapext -5
+  $$: t_coffee sproteases_small.fasta -gapopen -100 -gapext -5
 
 
 
@@ -2208,7 +2285,7 @@ Two methods are used by default to build the library. One does global pairwise a
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -method=lalign_id_pair,slow_pair
+  $$: t_coffee sproteases_small.fasta -method=lalign_id_pair,slow_pair
 
 
 
@@ -2217,7 +2294,8 @@ Usually you do not need to write it because it is the default, but if you want t
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -method lalign_id_pair@EP@MATRIX@blosum62mt,slow_pair -outfile sproteases_small.b62_aln
+  $$: t_coffee sproteases_small.fasta -method lalign_id_pair@EP@MATRIX@blosum62m\
+ t,slow_pair -outfile sproteases_small.b62_aln
 
 
 
@@ -2252,7 +2330,7 @@ In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages 
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -mode mcoffee -output clustalw, html
+  $$: t_coffee sproteases_small.fasta -mode mcoffee -output clustalw, html
 
 
 
@@ -2267,7 +2345,7 @@ For those using debian, another mode is available
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -mode dmcoffee -output clustalw, html
+  $$: t_coffee sproteases_small.fasta -mode dmcoffee -output clustalw, html
 
 
 
@@ -2341,7 +2419,8 @@ Using the 8 Methods of M-Coffee8 can sometimes be a bit heavy. If you only want 
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa,muscle_msa -output=html
+  $$: t_coffee sproteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_ms\
+ a,muscle_msa -output=html
 
 
 
@@ -2370,7 +2449,8 @@ To combine them into ONE single alignment, use the -aln flag:
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output clustalw html
+  $$: t_coffee sproteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output\
+  clustalw html
 
 
 
@@ -2391,7 +2471,7 @@ Assuming you have a multiple alignment (sproteases_small.aln) here is a simple s
 
 ::
 
-  PROMPT: t_coffee sproteases_oneseq.fasta -profile sproteases_small.aln
+  $$: t_coffee sproteases_oneseq.fasta -profile sproteases_small.aln
 
 
 
@@ -2402,7 +2482,8 @@ You can align as many sequences as you wish to your profile. Likewise, you can h
 
 ::
 
-  PROMPT: t_coffee sequences.fasta -profile=prf1.aln,prf2.aln,prf3.aln -outfile=combined_profiles.aln
+  $$: t_coffee sequences.fasta -profile=prf1.aln,prf2.aln,prf3.aln -outfile=comb\
+ ined_profiles.aln
 
 
 
@@ -2436,7 +2517,7 @@ You will quickly realise that your alignment is not very good and does not show 
 
 ::
 
-  PROMPT: t_coffee sv.fasta
+  $$: t_coffee sv.fasta
 
 
 
@@ -2445,7 +2526,7 @@ The reason why T-Coffee does better than other packages is mostly because it use
 
 ::
 
-  PROMPT: t_coffee sv.fasta -method lalign_id_pair
+  $$: t_coffee sv.fasta -method lalign_id_pair
 
 
 
@@ -2462,7 +2543,7 @@ In theory, the program automatically recognizes DNA sequences and uses appropria
 
 ::
 
-  PROMPT: t_coffee sample_dnaseq1.fasta -type=dna
+  $$: t_coffee sample_dnaseq1.fasta -type=dna
 
 
 
@@ -2474,7 +2555,7 @@ However, if you would rather use your own matrix, use:
 
 ::
 
-  PROMPT: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
+  $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
 
 
 
@@ -2496,7 +2577,7 @@ The test case in three_dna_seq.fasta contains the DNA sequences of three proteas
 
 ::
 
-  PROMPT: t_coffee three_cdna.fasta
+  $$: t_coffee three_cdna.fasta
 
 
 
@@ -2505,7 +2586,7 @@ You can immediately see that many gaps have sizes that are not multiple of 3 (co
 
 ::
 
-  PROMPT: t_coffee three_cdna.fasta -method cdna_fast_pair
+  $$: t_coffee three_cdna.fasta -method cdna_fast_pair
 
 
 
@@ -2514,7 +2595,8 @@ And most importantly, the frameshifts end up at the right place. You can even re
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in three_cdna.aln -action +clean_cdna +translate
+  $$: t_coffee -other_pg seq_reformat -in three_cdna.aln -action +clean_cdna +tr\
+ anslate
 
 
 
@@ -2576,7 +2658,8 @@ Using Expresso
 --------------
 ::
 
-  PROMPT: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file PDB
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
+  PDB
 
 
 
@@ -2601,7 +2684,8 @@ The predictions are then displayed in the files:
 
 ::
 
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgb_chite.ssp
+  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= h\
+ mgb_chite.ssp
 
   #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_trybr.ssp
 
@@ -2654,7 +2738,8 @@ It is possible to use the secondary prediction in order to reward the alignment 
 
 ::
 
-  t_coffee sample_aln.fasta -template_file PSISSP -method_evaluate_mode ssp -method lalign_id_pair slow_pair
+  t_coffee sample_aln.fasta -template_file PSISSP -method_evaluate_mode ssp -met\
+ hod lalign_id_pair slow_pair
 
 
 
@@ -2663,7 +2748,8 @@ Likewise, it is possible to use this information with trans-membrane domains
 
 ::
 
-  t_coffee sample_aln.fasta -template_file PSITM -method_evaluate_mode tm -method lalign_id_pair slow_pair
+  t_coffee sample_aln.fasta -template_file PSITM -method_evaluate_mode tm -metho\
+ d lalign_id_pair slow_pair
 
 
 
@@ -2707,7 +2793,8 @@ You can then run T-Coffee using your own template file
 
 ::
 
-  t_coffee sample_aln.fasta -template_file <template_file> -method_evaluate_mode ssp -method lalign_id_pair slow_pair
+  t_coffee sample_aln.fasta -template_file <template_file> -method_evaluate_mode\
+  ssp -method lalign_id_pair slow_pair
 
 
 
@@ -2744,7 +2831,8 @@ What you want to do is to build a T-Coffee library where sequences with a known 
 
 ::
 
-  PROMPT: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file PDB
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
+  PDB
 
 
 
@@ -2753,7 +2841,8 @@ The option -template_file is here to tell the program how to find the PDB. In th
 
 ::
 
-  PROMPT: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file _SELF_P_
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
+  _SELF_P_
 
 
 
@@ -2768,7 +2857,8 @@ If you have a fugue license, you can also add the fugue method to your run. Fugu
 
 ::
 
-  PROMPT: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair,fugue_pair -template_file _SELF_P_
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair,fugue_pair -te\
+ mplate_file _SELF_P_
 
 
 
@@ -2777,7 +2867,7 @@ This can be written more concisely, using one of T-Coffee special_modes:
 
 ::
 
-   PROMPT: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
+   $$: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
 
 
 
@@ -2786,7 +2876,7 @@ or
 
 ::
 
-   PROMPT: t_coffee three_pdb_two_seq.fasta -mode expresso
+   $$: t_coffee three_pdb_two_seq.fasta -mode expresso
 
 
 
@@ -2815,7 +2905,8 @@ In this file, the first line is telling us that sequence sp|P08246|ELNE_HUMAN is
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -method slow_pair, lalign_id_pair, sap_pair -template_file sproteases_small.template_file
+  $$: t_coffee sproteases_small.fasta -method slow_pair, lalign_id_pair, sap_pai\
+ r -template_file sproteases_small.template_file
 
 
 
@@ -2829,7 +2920,8 @@ If you have two profiles to align, an ideal situation is when your profiles each
 
 ::
 
-  PROMPT: t_coffee -profile=profile1_pdb1.aln, profile2_pdb2.aln -method sap_pair -profile_template_file two_profiles.template_file
+  $$: t_coffee -profile=profile1_pdb1.aln, profile2_pdb2.aln -method sap_pair -p\
+ rofile_template_file two_profiles.template_file
 
 
 
@@ -2868,7 +2960,8 @@ Filter unreliable MSA positions
 
 :: 
 
-  t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
+  t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_fi\
+ lter3, tcs_residue_lower4
 
 Outputs: 
 
@@ -3019,7 +3112,7 @@ The CORE index is an estimation of the consistency between your alignment and th
 
 ::
 
-  PROMPT: t_coffee sproteases_small.fasta -output=clustalw,html
+  $$: t_coffee sproteases_small.fasta -output=clustalw,html
 
 
 
@@ -3034,7 +3127,7 @@ You can evaluate any existing alignment with the CORE index. All you need to do 
 
 ::
 
-  PROMPT: t_coffee -infile=sproteases_small.g10.cw_aln -output=html -score
+  $$: t_coffee -infile=sproteases_small.g10.cw_aln -output=html -score
 
 
 
@@ -3049,7 +3142,7 @@ You will first need to produce a score version of your alignment in machine read
 
 ::
 
-  PROMPT: t_coffee -infile=sproteases_small.g10.cw_aln -output=score_ascii
+  $$: t_coffee -infile=sproteases_small.g10.cw_aln -output=score_ascii
 
 
 
@@ -3058,7 +3151,8 @@ You will then need to use seq_reformat to filter out the portions you are not in
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.g10.cw_aln -struc_in sproteases_small.g10.score_ascii -struc_in_f number_aln -action +keep '[5-9]'
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.g10.cw_aln -struc_in \
+ sproteases_small.g10.score_ascii -struc_in_f number_aln -action +keep '[5-9]'
 
 
 
@@ -3067,7 +3161,9 @@ Not so neat... The reason is that most columns tend to be heterogenous and conta
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.g10.cw_aln -struc_in sproteases_small.g10.score_ascii -struc_in_f number_aln -action +use_cons +keep '[5-9]'
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.g10.cw_aln -struc_in \
+ sproteases_small.g10.score_ascii -struc_in_f number_aln -action +use_cons +keep \
+ '[5-9]'
 
 
 
@@ -3076,7 +3172,9 @@ Removing columns of gaps is just as easy. You simply need to add the switch +rm_
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.g10.cw_aln -struc_in sproteases_small.g10.score_ascii -struc_in_f number_aln -action +use_cons +keep '[5-9]' +rm_gap
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.g10.cw_aln -struc_in \
+ sproteases_small.g10.score_ascii -struc_in_f number_aln -action +use_cons +keep \
+ '[5-9]' +rm_gap
 
 
 
@@ -3088,7 +3186,8 @@ You may want to remove columns that contain too many gaps. It is just a small va
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sproteases_small.g10.cw_aln -struc_in sproteases_small.g10.score_ascii -struc_in_f number_aln -action +rm_gap 50
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.g10.cw_aln -struc_in \
+ sproteases_small.g10.score_ascii -struc_in_f number_aln -action +rm_gap 50
 
 
 
@@ -3147,7 +3246,8 @@ Let us evaluate the alignment produced by Expresso, using the template_file retu
 
 ::
 
-  PROMPT: t_coffee -other_pg irmsd sproteases_small.expresso -template_file sproteases_small.template_file
+  $$: t_coffee -other_pg irmsd sproteases_small.expresso -template_file sproteas\
+ es_small.template_file
 
 
 
@@ -3196,7 +3296,8 @@ In order to identify the most distantly related sequences in a dataset, you can 
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat sproteases_small.fasta -output sim_idscore | grep TOP |sort -rnk3
+  $$: t_coffee -other_pg seq_reformat sproteases_small.fasta -output sim_idscore\
+  | grep TOP |sort -rnk3
 
 
 
@@ -3257,7 +3358,8 @@ You simply need to cut and paste this library in a file and use this file as a l
 
 ::
 
-  PROMPT: t_coffee -infile sproteases_small.aln -lib charge_relay_lib.tc_lib -score -output html
+  $$: t_coffee -infile sproteases_small.aln -lib charge_relay_lib.tc_lib -score \
+ -output html
 
 
 
@@ -3447,7 +3549,7 @@ To request a method, see the -in or the -method flag. For instance, if you wish 
 
 ::
 
-  PROMPT: t_coffee -seq sample_seq1.fasta -method fast_pair,lalign_id_pair
+  $$: t_coffee -seq sample_seq1.fasta -method fast_pair,lalign_id_pair
 
 
 
@@ -3460,7 +3562,8 @@ It is possible to modify on the fly the parameters of hard coded methods:
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GEP@-1
+  $$: t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GE\
+ P@-1
 
 
 
@@ -3483,7 +3586,8 @@ You should know what is the best place for squizing your extra parameters. It wi
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method clustalw_msa@EP@PARAM2@-GAPOPEN%e100%s-GAPEXT%e10
+  $$: t_coffee sample_seq1.fasta -method clustalw_msa@EP@PARAM2@-GAPOPEN%e100%s-\
+ GAPEXT%e10
 
 
 
@@ -3517,7 +3621,7 @@ A special method exists in T-Coffee that can be used to invoke any existing prog
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method=em@clustalw@pairwise
+  $$: t_coffee sample_seq1.fasta -method=em@clustalw@pairwise
 
 
 
@@ -3552,9 +3656,9 @@ For instance if you have ClustalW installed, you can use the following file to r
 
 ::
 
-  PROMPT: t_coffee -other_pg unpack_clustalw_method.tc_method
+  $$: t_coffee -other_pg unpack_clustalw_method.tc_method
 
-  PROMPT: t_coffee -other_pg unpack_generic_method.tc_method
+  $$: t_coffee -other_pg unpack_generic_method.tc_method
 
 
 
@@ -3602,7 +3706,7 @@ The tc_method files are treated like any standard established method in T-Coffee
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method clustalw_method.tc_method
+  $$: t_coffee sample_seq1.fasta -method clustalw_method.tc_method
 
 
 
@@ -3649,9 +3753,9 @@ When you run this method:
 
 ::
 
-  PROMPT: t_coffee -other_pg unpack_generic_method.tc_method
+  $$: t_coffee -other_pg unpack_generic_method.tc_method
 
-  PROMPT: t_coffee sample_seq1.fasta -method generic_method.tc_method
+  $$: t_coffee sample_seq1.fasta -method generic_method.tc_method
 
 
 
@@ -3663,7 +3767,7 @@ will be used to run the script tc_generic_method.pl. The file tc_generic_method.
 
 ::
 
-  PROMPT: t_coffee -other_pg=unpack_tc_generic_method.pl
+  $$: t_coffee -other_pg=unpack_tc_generic_method.pl
 
 
 
@@ -3892,7 +3996,7 @@ If needed you can also modify on the fly the WEIGHT value of your method:
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@OW2
+  $$: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@OW2
 
 
 
@@ -3901,7 +4005,7 @@ Will overweight by a factor 2 the weight of slow_pair.
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@250
+  $$: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@250
 
 
 
@@ -3946,7 +4050,8 @@ If the method you wish to use is not supported, or if you simply have the alignm
 
 ::
 
-  PROMPT: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -outfile=combined_aln.aln
+  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -outfile=combined_aln.al\
+ n
 
 
 
@@ -3963,11 +4068,12 @@ convert your aln into a lib, using the -weight flag:
 
 ::
 
-  PROMPT: t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=sim_pam250mt
+  $$: t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=s\
+ im_pam250mt
 
-  PROMPT: t_coffee -aln sample_aln1.aln -lib test_lib.tc_lib -outfile=outaln
+  $$: t_coffee -aln sample_aln1.aln -lib test_lib.tc_lib -outfile=outaln
 
-  PROMPT: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalign_id_pair -outfile=out_aln
+  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalign_id_pair -outfile=out_aln
 
 
 
@@ -3981,9 +4087,10 @@ You may also want to pre-compute your libraries in order to save them for furthe
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_lib -lib_only
+  $$: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_li\
+ b -lib_only
 
-  PROMPT: t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib -lib_only
+  $$: t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib -lib_only
 
 
 
@@ -3992,7 +4099,8 @@ Once these libraries have been computed, you can then combine tem at your conven
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -lib lalign_id_pair_seq1.tc_lib, slow_pair_seq1.tc_lib
+  $$: t_coffee sample_seq1.fasta -lib lalign_id_pair_seq1.tc_lib, slow_pair_seq1\
+ .tc_lib
 
 
 
@@ -4013,7 +4121,7 @@ A: Your sequences may not be recognized for what they really are. Normally T-Cof
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -type=PROTEIN
+  $$: t_coffee sample_seq1.fasta -type=PROTEIN
 
 
 
@@ -4022,7 +4130,7 @@ A: Costly computation or data gathered over the net is stored by T-Coffee in a c
 
 ::
 
-  PROMPT: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=no
+  $$: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=no
 
 
 
@@ -4031,7 +4139,8 @@ If you do not want to empty your cache, you may also use -cache=update that will
 
 ::
 
-  PROMPT: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=update
+  $$: t_coffee -pdb=struc1.pdb,struc2.pdb,struc3.pdb -method sap_pair -cache=upd\
+ ate
 
 
 
@@ -4066,7 +4175,7 @@ A: You can use a more accurate, slower and less memory hungry dynamic programmin
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -special_mode low_memory
+  $$: t_coffee sample_seq1.fasta -special_mode low_memory
 
 
 
@@ -4075,7 +4184,8 @@ Note that this mode will be much less time efficient than the default, although 
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method=slow_pair,lalign_id_pair -distance_matrix_mode=idscore -dp_mode=myers_miller_pair_wise
+  $$: t_coffee sample_seq1.fasta -method=slow_pair,lalign_id_pair -distance_matr\
+ ix_mode=idscore -dp_mode=myers_miller_pair_wise
 
 
 
@@ -4109,7 +4219,7 @@ A: See the -output option, common output formats are:
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -output=msf,fasta_aln
+  $$: t_coffee sample_seq1.fasta -output=msf,fasta_aln
 
 
 
@@ -4125,7 +4235,7 @@ A: Specify stderr or stdout as output filename, the output will be redirected ac
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -outfile=stdout -out_lib=stdout
+  $$: t_coffee sample_seq1.fasta -outfile=stdout -out_lib=stdout
 
 
 
@@ -4139,7 +4249,7 @@ A: If as a file name, you specify stdin, the content of this file will be expect
 
 ::
 
-  PROMPT: cat sample_seq1.fasta | t_coffee -infile=stdin
+  $$: cat sample_seq1.fasta | t_coffee -infile=stdin
 
 
 
@@ -4148,7 +4258,7 @@ will be equivalent to
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta
+  $$: t_coffee sample_seq1.fasta
 
 
 
@@ -4157,7 +4267,7 @@ If you do not give any argument to t_coffee, they will be expected to come from 
 
 ::
 
-  PROMPT: cat sample_param_file.param | t_coffee -parameters=stdin
+  $$: cat sample_param_file.param | t_coffee -parameters=stdin
 
 
 
@@ -4166,7 +4276,8 @@ For instance:
 
 ::
 
-  PROMPT: echo -seq=sample_seq1.fasta -method=clustalw_pair | t_coffee -parameters=stdin
+  $$: echo -seq=sample_seq1.fasta -method=clustalw_pair | t_coffee -parameters=s\
+ tdin
 
 
 
@@ -4182,7 +4293,7 @@ A: Use the -run_name flag.
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -run_name=guacamole
+  $$: t_coffee sample_seq1.fasta -run_name=guacamole
 
 
 
@@ -4193,11 +4304,11 @@ A: Simply fed your alignment, any way you like, but do not forget to append the 
 
 ::
 
-  PROMPT: t_coffee Ssample_aln1.aln
+  $$: t_coffee Ssample_aln1.aln
 
-  PROMPT: t_coffee -infile=Ssample_aln1.aln
+  $$: t_coffee -infile=Ssample_aln1.aln
 
-  PROMPT: t_coffee -seq=sample_aln1.aln -method=slow_pair,lalign_id_pair -outfile=outaln
+  $$: t_coffee -seq=sample_aln1.aln -method=slow_pair,lalign_id_pair -outfile=outaln
 
 
 
@@ -4211,7 +4322,7 @@ A: use the -lib_only flag
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -out_lib=sample_lib1.tc_lib -lib_only
+  $$: t_coffee sample_seq1.fasta -out_lib=sample_lib1.tc_lib -lib_only
 
 
 
@@ -4225,7 +4336,7 @@ A: use the -lib_only flag
 
 ::
 
-  PROMPT: t_coffee -in=Asample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only
+  $$: t_coffee -in=Asample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only
 
 
 
@@ -4234,7 +4345,8 @@ It is also possible to control the weight associated with this alignment (see th
 
 ::
 
-  PROMPT: t_coffee -aln=sample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only -weight=1000
+  $$: t_coffee -aln=sample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only -weigh\
+ t=1000
 
 
 
@@ -4245,7 +4357,8 @@ A: You cannot concatenate these files on their own. You will have to use t_coffe
 
 ::
 
-  PROMPT: t_coffee -lib=sample_lib1.tc_lib,sample_lib2.tc_lib -lib_only -out_lib=sample_lib3.tc_lib
+  $$: t_coffee -lib=sample_lib1.tc_lib,sample_lib2.tc_lib -lib_only -out_lib=sam\
+ ple_lib3.tc_lib
 
 
 
@@ -4256,7 +4369,7 @@ A: An alignment is ALWAYS considered as a library AND a set of sequences. If you
 
 ::
 
-  PROMPT: t_coffee Ssample_aln1.aln -outfile=outaln
+  $$: t_coffee Ssample_aln1.aln -outfile=outaln
 
 
 
@@ -4270,7 +4383,7 @@ A: This is a problem that has to do with your browser. Instead of requesting the
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -output=score_ps
+  $$: t_coffee sample_seq1.fasta -output=score_ps
 
 
 
@@ -4279,7 +4392,7 @@ or
 
 ::
 
-  PROMPT: t_coffee sample_seq2.fasta -output=score_pdf
+  $$: t_coffee sample_seq2.fasta -output=score_pdf
 
 
 
@@ -4295,7 +4408,7 @@ A: The flag -output accepts more than one parameter. For instance,
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -output=clustalw,html,score_ps,msf
+  $$: t_coffee sample_seq1.fasta -output=clustalw,html,score_ps,msf
 
 
 
@@ -4313,7 +4426,8 @@ A: All these packages are good packages and they sometimes outperform T-Coffee. 
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method muscle_msa,probcons_msa, mafft_msa, lalign_id_pair,slow_pair
+  $$: t_coffee sample_seq1.fasta -method muscle_msa,probcons_msa, mafft_msa, lal\
+ ign_id_pair,slow_pair
 
 
 
@@ -4324,7 +4438,7 @@ A: Normally it can, but check in the log that the program recognises the right t
 
 ::
 
-  PROMPT: t_coffee sample_dnaseq1.fasta -type dna
+  $$: t_coffee sample_dnaseq1.fasta -type dna
 
 
 
@@ -4335,7 +4449,7 @@ A: use the -convert flag
 
 ::
 
-  PROMPT: t_coffee sample_aln1.aln -convert -output=gcg
+  $$: t_coffee sample_aln1.aln -convert -output=gcg
 
 
 
@@ -4349,9 +4463,10 @@ If you want to brutally force some residues to be aligned, you may use as a post
 
 ::
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln seq1 10 seq2 15
+  $$: t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln seq\
+ 1 10 seq2 15
 
-  PROMPT: t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln sample_lib4.tc_lib02
+  $$: t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln sample_lib4.tc_lib02
 
 
 
@@ -4386,7 +4501,8 @@ A: Turn your alignment into a library, forcing the residues to have a very good 
 
 ::
 
-  PROMPT: t_coffee -aln=sample_seq1.aln -weight=1000 -out_lib=sample_seq1.tc_lib -lib_only
+  $$: t_coffee -aln=sample_seq1.aln -weight=1000 -out_lib=sample_seq1.tc_lib -li\
+ b_only
 
 
 
@@ -4395,7 +4511,8 @@ The value 1000 is simply a high value that should make it more likely for the su
 
 ::
 
-  PROMPT: t_coffee -seq=sample_seq1.fasta -lib=sample_seq1.tc_lib -outfile sample_seq1.aln
+  $$: t_coffee -seq=sample_seq1.fasta -lib=sample_seq1.tc_lib -outfile sample_se\
+ q1.aln
 
 
 
@@ -4409,7 +4526,7 @@ A: Use the -usetree=<your own tree> flag.
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -usetree=sample_tree.dnd
+  $$: t_coffee sample_seq1.fasta -usetree=sample_tree.dnd
 
 
 
@@ -4420,7 +4537,7 @@ A: use the fasta_cdna_pair method that compares two cDNA using the best reading 
 
 ::
 
-  PROMPT: t_coffee three_cdna.fasta -method=cdna_fast_pair
+  $$: t_coffee three_cdna.fasta -method=cdna_fast_pair
 
 
 
@@ -4429,7 +4546,7 @@ Notice that in the resulting alignments, all the gaps are of modulo3, except one
 
 ::
 
-  PROMPT: t_coffee three_cdna.fasta
+  $$: t_coffee three_cdna.fasta
 
 
 
@@ -4444,7 +4561,8 @@ A: Simply write in a file the list of sequence groups you want to use:
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -method=clustalw_pair,clustalw_msa -lib_list=sample_list1.lib_list -outfile=test
+  $$: t_coffee sample_seq1.fasta -method=clustalw_pair,clustalw_msa -lib_list=sa\
+ mple_list1.lib_list -outfile=test
 
   ***************sample_list1.lib_list****
 
@@ -4476,7 +4594,7 @@ A: Yes, you simply need to indicate that your alignment is a profile with the R 
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -profile=sample_aln2.aln -outfile tacos
+  $$: t_coffee sample_seq1.fasta -profile=sample_aln2.aln -outfile tacos
 
 
 
@@ -4487,7 +4605,7 @@ A: Yes, you, simply tag your profiles with the letter R and the program will tre
 
 ::
 
-  PROMPT: t_coffee -profile=sample_aln1.fasta,sample_aln2.aln -outfile tacos
+  $$: t_coffee -profile=sample_aln1.fasta,sample_aln2.aln -outfile tacos
 
 
 
@@ -4498,7 +4616,8 @@ A: Yes. As long as the structure sequences are named according to their PDB iden
 
 ::
 
-  PROMPT: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3dcoffee -outfile=aligne_prf.aln
+  $$: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3d\
+ coffee -outfile=aligne_prf.aln
 
 
 
@@ -4512,7 +4631,8 @@ A: This is true. By default the structures are feteched on the net, using RCSB. 
 
 ::
 
-  setenv (or export) PDB_DIR='directory containing the pdb structures' setenv (or export) NO_REMOTE_PDB_DIR=1
+  setenv (or export) PDB_DIR='directory containing the pdb structures' setenv (o\
+ r export) NO_REMOTE_PDB_DIR=1
 
 
 
@@ -4529,7 +4649,8 @@ A: Yes, T-Coffe supports three types of installations:
 
 ::
 
-  setenv (or export) PDB_DIR='directory containing the pdb structures' setenv (or export) NO_REMOTE_PDB_DIR=1
+  setenv (or export) PDB_DIR='directory containing the pdb structures' setenv (o\
+ r export) NO_REMOTE_PDB_DIR=1
 
 
 
@@ -4538,7 +4659,8 @@ A: Yes, T-Coffe supports three types of installations:
 
 ::
 
-  setenv (or export) PDB_DIR='<some absolute path>/data/structures/all/pdb/' setenv (or export) NO_REMOTE_PDB_DIR=1
+  setenv (or export) PDB_DIR='<some absolute path>/data/structures/all/pdb/' set\
+ env (or export) NO_REMOTE_PDB_DIR=1
 
 
 
@@ -4547,7 +4669,8 @@ A: Yes, T-Coffe supports three types of installations:
 
 ::
 
-  setenv (or export) PDB_DIR='<some absolute path>/data/structures/divided/pdb/' setenv (or export) NO_REMOTE_PDB_DIR=1
+  setenv (or export) PDB_DIR='<some absolute path>/data/structures/divided/pdb/'\
+  setenv (or export) NO_REMOTE_PDB_DIR=1
 
 
 
@@ -4580,7 +4703,7 @@ A: T-Coffee can provide you with a measure of consistency among all the methods 
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -output=html
+  $$: t_coffee sample_seq1.fasta -output=html
 
 
 
@@ -4600,7 +4723,8 @@ A: Yes. You may have an alignment produced from any source you like. To evaluate
 
 ::
 
-  PROMPT: t_coffee -infile=sample_aln1.aln -lib=sample_aln1.tc_lib -special_mode=evaluate
+  $$: t_coffee -infile=sample_aln1.aln -lib=sample_aln1.tc_lib -special_mode=eva\
+ luate
 
 
 
@@ -4609,7 +4733,7 @@ If you have no library available, the library will be computed on the fly using 
 
 ::
 
-  PROMPT: t_coffee -infile=sample_aln1.aln -special_mode evaluate
+  $$: t_coffee -infile=sample_aln1.aln -special_mode evaluate
 
 
 
@@ -4620,7 +4744,8 @@ A: Yes. You can treat one of your alignments as a library and compare it with th
 
 ::
 
-  PROMPT: t_coffee -infile=sample_aln1_1.aln -aln=sample_aln1_2.aln -special_mode=evaluate
+  $$: t_coffee -infile=sample_aln1_1.aln -aln=sample_aln1_2.aln -special_mode=ev\
+ aluate
 
 
 
@@ -4629,7 +4754,7 @@ If you have no library available, the library will be computed on the fly using 
 
 ::
 
-  PROMPT: t_coffee -infile=sample_aln1.aln -special_mode evaluate
+  $$: t_coffee -infile=sample_aln1.aln -special_mode evaluate
 
 
 
@@ -4640,7 +4765,7 @@ A: Increase the ktuple size ( up to 4 or 5 for DNA) and up to 3 for proteins.
 
 ::
 
-  PROMPT: t_coffee sample_seq1.fasta -ktuple=3
+  $$: t_coffee sample_seq1.fasta -ktuple=3
 
 
 
@@ -4732,7 +4857,7 @@ T-Coffee can be used to automatically check if an updated version is available, 
 
 ::
 
-  PROMPT: t_coffee -update
+  $$: t_coffee -update
 
 
 
