@@ -247,7 +247,8 @@ sub txt2rst
       }
     elsif ($type eq "faq")
       {
-	print "   **$st**\n\n";
+	my $line=generate_string($len, '-');
+	print "$st\n$line\n\n";
       }
     $ptype=$type;
   }
