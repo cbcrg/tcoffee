@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-T-Coffee's documentation!
-=========================
+T-Coffee and related packages documentation (www.tcoffee.org)
+=============================================================
 
 Contents:
 
