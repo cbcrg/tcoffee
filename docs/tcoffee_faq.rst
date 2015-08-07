@@ -1,6 +1,6 @@
-############
+###
 FAQ
-############
+###
 .. tip:: All the files mentionned here (sample_seq...) can be found in the example directory of the distribution.
 
 ********
