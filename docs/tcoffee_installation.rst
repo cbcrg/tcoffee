@@ -353,7 +353,7 @@ If you want to have your own BLAST server to run your own databases, you should 
 
 
 
-.. warning:: Note that T-Coffee is compliant with BLAST+, the latest NCBI Blast.
+.. tip:: T-Coffee is compliant with BLAST+, the latest NCBI Blast.
 
 Using a BLAST local version on Windows/cygwin
 ---------------------------------------------

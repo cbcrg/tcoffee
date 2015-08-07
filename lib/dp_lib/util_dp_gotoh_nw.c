@@ -789,6 +789,7 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 	static int sample=0;//road==0, random tie; road=1: upper road; road=2 lower road;
 	static int set_sample;
 	
+
 	/********Prepare penalties*******/
 	gop=CL->gop*SCORE_K;
 	gep=CL->gep*SCORE_K;
@@ -902,7 +903,7 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 			    {
 
 			      sub=(CL->get_dp_cost) (A, pos0, ns[0], l_s[0], i-1, pos0, ns[1], l_s[1],j-1,CL);
-
+			      
 			      /*get the best Insertion*/
 			      l_gop=(i==lenal[0] || i==1 )?((TG_MODE==0)?gop:0):gop;
 			      l_gep=(i==lenal[0] || i==1)?((TG_MODE==2)?0:gep):gep;

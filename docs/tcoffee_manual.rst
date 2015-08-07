@@ -150,7 +150,7 @@ This is the normal mode. It is one of the most accurate of its kind, roughly lik
 
 What T-Coffee Can and Cannot do for you ...
 ===========================================
-.. warning:: IMPORTANT: All the files mentioned here (sample_seq...) can be found in the example directory of the distribution.
+.. note:: All the files mentioned here (sample_seq...) can be found in the example directory of the distribution.
 
 (NOT) Fetching Sequences
 ------------------------
@@ -303,7 +303,7 @@ Extract sequences.
 In this section we give you a few examples of things you can do with seq_reformat:
 
 
-.. warning:: Warning: after the flag -other_pg, the T-Coffee flags are not any more recognized. It is like if you were using a different programme
+.. warning:: After the flag -other_pg, the T-Coffee flags are not any more recognized. It is like if you were using a different programme
 
 An overview of seq_reformat
 ---------------------------
@@ -738,7 +738,7 @@ This will produce a colored version readable with any standard web browser, whil
 This will produce a colored version readable with acrobat reader.
 
 
-.. warning:: Warning: ps2pdf must be installed on your system
+.. warning:: ps2pdf must be installed on your system
 
 You can also use a cache library like the one shown above (sample_lib5.tc_lib):
 
@@ -1086,7 +1086,7 @@ Extracting Two Sequences: If you want to extract several sequences, in order to 
 
 
 
-.. warning:: Note the single quotes ('). They are meant to protect the name of your sequence and prevent the UNIX shell to interpret it like an instruction.
+.. note:: Note the single quotes ('). They are meant to protect the name of your sequence and prevent the UNIX shell to interpret it like an instruction.
 
 Removing Columns of Gaps. Removing intermediate sequences results in columns of gaps appearing here and there. Keeping them is convenient if some features are mapped on your alignment. On the other hand, if you want to remove these columns you can use:
 
@@ -1119,7 +1119,7 @@ Keeping the original Sequence Names. Note that your sequences are now renamed ac
 
 
 
-.. warning:: Note: +keep_name must come BEFORE +extract_seq
+.. warning:: +keep_name must come BEFORE +extract_seq
 
 Removing Sequences by Names
 ---------------------------
@@ -1171,7 +1171,7 @@ If you have extracted several blocks and you now want to glue them together, you
 
 
 
-.. warning:: Note: The alignments do not need to have the same number of sequences and the sequences do not need to come in the same order.
+.. note:: The alignments do not need to have the same number of sequences and the sequences do not need to come in the same order.
 
 Analyzing your Multiple Sequence Alignment
 ==========================================
@@ -1194,7 +1194,7 @@ Reducing and improving your dataset
 Large datasets are problematic because they can be difficult to analyze. The problem is that when there are too many sequences, MSA programs tend to become very slow and inaccurate. Furthermore, you will find that large datasets are difficult to display and analyze. In short, the best size for an MSA dataset is between 20 and 40 sequences. This way you have enough sequences to see the effect of evolution, but at the same time the dataset is small enough so that you can visualize your alignment and recompute it as many times as needed.
 
 
-.. warning:: Note: If your sequence dataset is very large, seq_reformat will compute the similarity matrix between your sequences once only. It will then keep it in its cache and re-use it any time you re-use that dataset. In short this means that it will take much longer to run the first time.
+.. note:: Note: If your sequence dataset is very large, seq_reformat will compute the similarity matrix between your sequences once only. It will then keep it in its cache and re-use it any time you re-use that dataset. In short this means that it will take much longer to run the first time.
 
 Extracting the N most informative sequences
 -------------------------------------------
@@ -1496,8 +1496,6 @@ It is possible to add this secondary structure to an alignment using:
  .alifold -input2 alifold -action +add_alifold -output stockholm_aln
 
 
-
-.. warning:: WARNING:
 
 .. warning:: The alifold structure and the alignment MUST be compatible. The function makes no attempt to thread or align the structure. It merely stack it below the MSA.
 
@@ -1899,7 +1897,7 @@ In the rest of this tutorial we give some hints on how to carry out each of thes
 
 
 ================= ====== ===== ======== ======== ======== 
-                  Muscle Mafft ProbCons T-Coffee ClustalW 
+Packages          Muscle Mafft ProbCons T-Coffee ClustalW 
 ================= ====== ===== ======== ======== ======== 
 Accuracy          ++     +++   +++      +++   +        
 <100 Seq.         ++     ++    +++      +++      +        
@@ -1920,7 +1918,7 @@ Table 1. Relative possibilities associated with the main packages (T-Coffee Tuto
 
 
 ===================== ====== ===== ======== ======== ======== 
-                      Muscle Mafft ProbCons T-Coffee ClustalW 
+Packages              Muscle Mafft ProbCons T-Coffee ClustalW 
 ===================== ====== ===== ======== ======== ======== 
 Dist Based Phylogeny  +++    +++   ++       ++   ++       
 ML or MP Phylogeny    ++     +++   +++      +++      ++       
@@ -2302,7 +2300,7 @@ Usually you do not need to write it because it is the default, but if you want t
 This means the library is now computed using the Blosum62mt with lalign, rather than the Blosum50mt. The good news is that when using this matrix, the score of our alignment increases from 48(default) to 50. We may assume this new alignment is more accurate than the previous one.
 
 
-.. warning:: WARNING: It only makes sense to compare the consistency score of alternative alignments when these alignments have been computed using the same methods (lalign_id_pair and slow_pair for instance).
+.. warning:: It only makes sense to compare the consistency score of alternative alignments when these alignments have been computed using the same methods (lalign_id_pair and slow_pair for instance).
 
 Can You Guess The Optimal Parameters?
 -------------------------------------
@@ -2950,8 +2948,7 @@ Outputs:
 * `prot.score_ascii`  displays the score of the MSA, the sequences and the resiues. This file can be used to further filter your MSA with seq_reformat. 
 * ``prot.score_html`` displays a colored version score of the MSA, the sequences and the residues. 
 
-.. warning:: The color code in the score_html indicates the agreement between the library and the considered alignment. It is important to 
- understand that this score does not only depend on the input MSA, but it also depends on the library.
+.. warning:: The color code in the score_html indicates the agreement between the library and the considered alignment. It is important to understand that this score does not only depend on the input MSA, but it also depends on the library.
 
 .. tip:: The TCS is most informative when used to identify low-scoring portions within an MSA. It is also worth noting that the TCS is not informative when aligning less than five sequences.
   
@@ -4105,7 +4102,7 @@ Once these libraries have been computed, you can then combine tem at your conven
 **************************
 Frequently Asked Questions
 **************************
-.. warning:: IMPORTANT: All the files mentionned here (sample_seq...) can be found in the example directory of the distribution.
+.. tip:: All the files mentionned here (sample_seq...) can be found in the example directory of the distribution.
 
 Abnormal Terminations and Wrong Results
 =======================================
@@ -4578,7 +4575,7 @@ Notice that in the resulting alignments, all the gaps are of modulo3, except one
 
 
 
-.. warning:: Note: This method has not yet been fully tested and is only provided 'as-is' with no warranty. Any feedback will be much appreciated.
+.. warning:: This method has not yet been fully tested and is only provided 'as-is' with no warranty. Any feedback will be much appreciated.
 
 Q: I do not want to use all the possible pairs when computing the library
 -------------------------------------------------------------------------
@@ -4837,7 +4834,7 @@ A: If there is no duplicated name in your sequence set, T-Coffee's handling of n
 
 
 
-.. warning:: Warning: The behaviour is undefined when this creates two sequence with a similar names.
+.. warning:: The behaviour is undefined when this creates two sequence with a similar names.
 
 Improving Your Alignment
 ========================
@@ -4914,66 +4911,66 @@ It is important that you cite T-Coffee when you use it. Citing us is (almost) li
 Cite the server if you used it, otherwise, cite the original paper from 2000 (No, it was never named 'T-Coffee 2000').
 
 
-====================================================================================================================================================================== ============================================= 
-Notredame C, Higgins DG, Heringa   J.                                                                                                                                  Related Articles,                       Links 
-====================================================================================================================================================================== ============================================= 
+======================================================================================================================================================================
+Notredame C, Higgins DG, Heringa   J.                                                                                                                                 
+======================================================================================================================================================================
 T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]                                               
-====================================================================================================================================================================== ============================================= 
+======================================================================================================================================================================
 
 Other useful publications include:
 
 
 T-Coffee
 ========
-=================================================================================================================================================================================================== ============================================= 
-Claude JB, Suhre   K, Notredame C, Claverie JM, Abergel C.                                                                                                                                          Related Articles,                       Links 
-=================================================================================================================================================================================================== ============================================= 
+=================================================================================================================================================================================================== 
+Claude JB, Suhre   K, Notredame C, Claverie JM, Abergel C.                                                                                                                                          
+=================================================================================================================================================================================================== 
 CaspR: a web server for   automated molecular replacement using homology modelling.   Nucleic Acids Res. 2004 Jul 1;32(Web Server   issue):W606-9.    PMID: 15215460 [PubMed - indexed for MEDLINE]                                               
-=================================================================================================================================================================================================== ============================================= 
+=================================================================================================================================================================================================== 
 
-======================================================================================================================================================================================================================= ================================== 
-Poirot O, Suhre   K, Abergel C, O'Toole E, Notredame C.                                                                                                                                                                 Related Articles,            Links 
-======================================================================================================================================================================================================================= ================================== 
+======================================================================================================================================================================================================================= 
+Poirot O, Suhre   K, Abergel C, O'Toole E, Notredame C.                                                                                                                                                                 
+======================================================================================================================================================================================================================= 
 3DCoffee@igs: a web server for combining sequences   and structures into a multiple sequence alignment.   Nucleic Acids Res. 2004 Jul 1;32(Web Server   issue):W37-40.    PMID: 15215345 [PubMed - indexed for MEDLINE]                                    
-======================================================================================================================================================================================================================= ================================== 
+======================================================================================================================================================================================================================= 
 
-==================================================================================================================================================================================== ================================== 
-O'Sullivan O, Suhre   K, Abergel C, Higgins DG, Notredame C.                                                                                                                         Related Articles,            Links 
-==================================================================================================================================================================================== ================================== 
+==================================================================================================================================================================================== 
+O'Sullivan O, Suhre   K, Abergel C, Higgins DG, Notredame C.                                                                                                                         
+==================================================================================================================================================================================== 
 3DCoffee: combining protein sequences and   structures within multiple sequence alignments.   J Mol Biol. 2004 Jul 2;340(2):385-95.    PMID: 15201059 [PubMed - indexed for MEDLINE]                                    
-==================================================================================================================================================================================== ================================== 
+==================================================================================================================================================================================== 
 
-================================================================================================================================================================================================= ================================== 
-Poirot O, O'Toole E, Notredame C.                                                                                                                                                                 Related Articles,            Links 
-================================================================================================================================================================================================= ================================== 
+================================================================================================================================================================================================= 
+Poirot O, O'Toole E, Notredame C.                                                                                                                                                                 
+================================================================================================================================================================================================= 
 Tcoffee@igs: A web   server for computing, evaluating and combining multiple sequence alignments.   Nucleic Acids Res. 2003 Jul 1;31(13):3503-6.    PMID: 12824354 [PubMed - indexed for MEDLINE]                                    
-================================================================================================================================================================================================= ================================== 
+================================================================================================================================================================================================= 
 
-=========================================================================================================================================== ================================== 
-Notredame C.                                                                                                                                Related Articles,            Links 
-=========================================================================================================================================== ================================== 
+===========================================================================================================================================
+Notredame C.                                                                                                                               
+===========================================================================================================================================
 Mocca: semi-automatic   method for domain hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]                                    
-=========================================================================================================================================== ================================== 
+===========================================================================================================================================
 
-====================================================================================================================================================================== ================================== 
-Notredame C, Higgins DG, Heringa   J.                                                                                                                                  Related Articles,            Links 
-====================================================================================================================================================================== ================================== 
+====================================================================================================================================================================== 
+Notredame C, Higgins DG, Heringa   J.                                                                                                                                  
+====================================================================================================================================================================== 
 T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]                                    
-====================================================================================================================================================================== ================================== 
+====================================================================================================================================================================== 
 
-========================================================================================================================================================== ================================== 
-Notredame C, Holm L, Higgins DG.                                                                                                                           Related Articles,            Links 
-========================================================================================================================================================== ================================== 
+========================================================================================================================================================== 
+Notredame C, Holm L, Higgins DG.                                                                                                                           
+========================================================================================================================================================== 
 COFFEE: an objective function for multiple   sequence alignments.   Bioinformatics. 1998 Jun;14(5):407-22.    PMID: 9682054 [PubMed - indexed for MEDLINE]                                    
-========================================================================================================================================================== ================================== 
+========================================================================================================================================================== 
 
 Mocca
 =====
-=========================================================================================================================================== ================================== 
-Notredame C.                                                                                                                                Related Articles,            Links 
-=========================================================================================================================================== ================================== 
-Mocca: semi-automatic method for   domain hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]                                    
-=========================================================================================================================================== ================================== 
+===========================================================================================================================================
+Notredame C.                                                                                                                               
+===========================================================================================================================================
+Mocca: semi-automatic method for   domain hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]
+===========================================================================================================================================
 
 CORE
 ====

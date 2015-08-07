@@ -5069,9 +5069,11 @@ get_cl_param(\
 		   if ( A->nseq==1);
 		   else if ( strm ( msa_mode, "sankoff_aln"))
 		     {
-		       
-		       CL->get_dp_cost=get_dp_cost_sankoff_tree;
+		   
+		       //CL->get_dp_cost=get_dp_cost_sankoff_tree;
+		       CL->get_dp_cost=slow_get_dp_cost;
 		       CL->pair_wise=gotoh_pair_wise;
+		       
 		       pc=tree_file;
 		       if ( strm (tree_file, "default") || !check_file_exists (tree_file))
 			 {

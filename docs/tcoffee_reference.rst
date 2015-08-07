@@ -309,8 +309,6 @@ In general, you can set any environment variable using the -setenv flag. You can
 
 
 
-.. warning:: IMPORTANT:
-
 .. warning:: export > -setenv > -proxy, -email > t_coffee_env > default environment
 
 Note that when you use -setenv for PATH, the value you provide is concatenated TO THE BEGINNING of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
@@ -616,7 +614,7 @@ Sequence Input
 
    *This flag sets the type of the sequences. If omitted, the type is guessed automatically. This flag is compatible with ClustalW.*
 
-.. warning:: Warning: In case of low complexity or short sequences, it is recommended to set the type manually.
+.. warning:: In case of low complexity or short sequences, it is recommended to set the type manually.
 
 -seq
 ^^^^
@@ -712,7 +710,7 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
    *Default: -in=Mlalign_id_pair,Mclustalw_pair*
 
-.. warning:: Note: -in can be replaced with the combined usage of -aln, iprofile, .pdb, .lib, -method.
+.. note:: Note: -in can be replaced with the combined usage of -aln, iprofile, .pdb, .lib, -method.
 
    *See the box for an explanation of the -in flag. The following argument passed via -in*
 
@@ -775,7 +773,7 @@ Structures, Sequences Methods and Library Input via the -in Flag
 
    *This command results in a progressive alignment carried out on the sequences in seqfile. The procedure does not use any more the T-Coffee concistency based algorithm, but switches to a standard progressive alignment algorithm (like ClustalW or Pileup) much less accurate. In this context, appropriate gap penalties should be provided. The matrices are in the file source/matrices.h. Add-Hoc matrices can also be provided by the user (see the matrices format section at the end of this manual).*
 
-.. warning:: Warning: Xmatrix does not have the same effect as using the -matrix flag. The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
+.. warning:: **X**matrix does not have the same effect as using the -matrix flag. The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
 
 Profile Input
 -------------
@@ -2178,9 +2176,7 @@ Structural Analysis
 ===================
 APDB, iRMSD and tRMSD Parameters
 --------------------------------
-.. warning:: Warning: These flags will only work within the APDB package that can be invoked via the -other_pg parameter of T-Coffee:
-
-.. warning::  t_coffee -other_pg apdb -aln <your aln>
+.. warning:: These flags will only work within the APDB package that can be invoked via the -other_pg parameter of T-Coffee: t_coffee -other_pg apdb -aln <your aln>
 
 -quiet [Same as T-Coffee]
 ^^^^^^^^^^^^^^^^^^^^^^^^^

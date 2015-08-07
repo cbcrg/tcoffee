@@ -5052,7 +5052,7 @@ int get_domain_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, 
 	return score;
 	} 
 
-int column2sankoff_score (int *lu, NT_node T, int nseq, int **matrix, int gep);
+int* column2sankoff_score (int *lu, NT_node T, int nseq, int **matrix, int gep);
 int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
 	{
 	  int a, s, rs,r;
@@ -5061,10 +5061,11 @@ int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int 
 	  static int **matrix;
 	  
 	  NT_node N;
-	  int gep=-1;
+	  int gep=-10;
 	  int nseq=(CL->S)->nseq;
 	  int score;
-	  
+	  int *sa;
+	 
 	  if (T==NULL)
 	    {
 	      T=main_read_tree (A->tname);
@@ -5072,7 +5073,7 @@ int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int 
 	      matrix=read_matrice ("blosum62mt");
 	      key=(int*)vcalloc ((CL->S)->nseq, sizeof (int));
 	    }
-
+	 
 	  for ( a=0; a< ns1; a++)
 	    {
 	      s=list1[a];
@@ -5087,8 +5088,14 @@ int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int 
 	      r =pos2[s][col1];
 	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
 	    }
+	 
 	  N=find_node_in_tree (key, nseq, T);
-	  score=column2sankoff_score (key, N, nseq, matrix,gep);
+	  
+	  sa=column2sankoff_score (key, N, nseq,matrix,gep);
+	  score=sa[0];
+	  for (a=1; a<=26; a++)score=MAX(sa[a],score);
+	  vfree(sa);
+	  
 	  for ( a=0; a< ns1; a++)
 	    {
 	      s=list1[a];
@@ -5103,11 +5110,62 @@ int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int 
 	      r =pos2[s][col1];
 	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
 	    }
-	  return score;
+	  score*=SCORE_K;
+	  return score*SCORE_K;
 	}
-int column2sankoff_score (int *lu, NT_node T, int nseq, int **matrix, int gep)
+int* column2sankoff_score (int *lu, NT_node T, int nseq, int **c, int gep)
 {
-  return 1;
+  int inf=-999999;
+  if (!T)return NULL;
+  else if (T->isseq)
+    {
+      int *S=(int*)vcalloc (27, sizeof (int));
+      S=(int*)memset ((void*)S,inf, 27*sizeof(int));
+      char r=lu[T->lseq[0]];
+      
+      if (r=='-')S[26]=gep;
+      else
+	{
+	  r=tolower(r)-'a';
+	  S[r]=c[r][r];
+	}
+      return S;
+    }
+  else
+    {
+      int i, j, k;
+      int *S =(int*)vcalloc (27, sizeof (int));
+      int *Sl=column2sankoff_score(lu,T->left , nseq, c, gep);
+      int *Sr=column2sankoff_score(lu,T->right, nseq, c, gep);
+      
+      for (i=0; i<=26; i++)
+	{
+	  int max_j=inf;
+	  int max_k=inf;
+	  int mc;
+	  for (j=0; j<=26;j++)
+	    {
+	      
+	      if (i==26 || j==26)mc=gep;
+	      else mc=c[i][j];
+	      
+	      int v=((Sl[j])==inf)?inf:(mc+Sl[j]);
+	      if (v>max_j)max_j=v;
+	    }
+	  for (k=0; k<=26;k++)
+	    {
+	      if (i==26 || k==26)mc=gep;
+	      else mc=c[i][k];
+	      
+	      int v=(Sr[k]==inf)?inf:(mc+Sr[k]);
+	      if (v>max_k)max_k=v;
+	    }
+	  S[i]=(max_k==inf || max_j==inf)?inf:(max_k+max_j);
+	}
+      vfree(Sl);
+      vfree(Sr);
+      return S;
+    }
 }
 /*********************************************************************************************/
 /*                                                                                           */
