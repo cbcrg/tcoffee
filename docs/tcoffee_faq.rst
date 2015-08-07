@@ -750,6 +750,8 @@ Q: Have I Improved or Not my Alignment?
 ---------------------------------------
 
 A: Using structural information is the only way to establish whether you have improved or not your alignment. The CORE index can also give you some information.
+
+
 ************
 seq_reformat
 ************
