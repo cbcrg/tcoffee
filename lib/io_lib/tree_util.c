@@ -5894,7 +5894,7 @@ int **treelist2ns (NT_node T,Sequence *B,char *ref)
 	char ** list;
 	
 
-	HERE ("-- Process %s", B->name[r-1]);
+	HERE ("--- Process %s", B->name[r-1]);
 	
 	if (!check_file_exists (B->name[r-1]))
 	  {
@@ -5902,6 +5902,8 @@ int **treelist2ns (NT_node T,Sequence *B,char *ref)
 	  }
 	    
 	list=file2lines (B->name[r-1]);
+	if (list==NULL)myexit (fprintf_error (stderr,"File %s is empty",B->name[r-1]));
+	
 	nt=atoi(list[0]);
 	nr[r]=nt-1;
 	for (t=1; t<nt; t++)

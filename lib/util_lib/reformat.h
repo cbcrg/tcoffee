@@ -11,7 +11,7 @@ typedef struct
       NT_node T;
       Constraint_list *CL;
       char format[100];
-      char file[100];
+      char file[10000];
       int rm_gap;
 
 }Sequence_data_struc;

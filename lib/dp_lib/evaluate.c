@@ -5061,7 +5061,7 @@ int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int 
 	  static int **matrix;
 	  
 	  NT_node N;
-	  int gep=-10;
+	  int gep=-1;
 	  int nseq=(CL->S)->nseq;
 	  int score;
 	  int *sa;
@@ -5085,13 +5085,15 @@ int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int 
 	    {
 	      s=list2[a];
 	      rs=A->order[s][0];
-	      r =pos2[s][col1];
+	      r =pos2[s][col2];
 	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
 	    }
-	 
+	  
 	  N=find_node_in_tree (key, nseq, T);
+	  if (!N)return 0;
 	  
 	  sa=column2sankoff_score (key, N, nseq,matrix,gep);
+	  
 	  score=sa[0];
 	  for (a=1; a<=26; a++)score=MAX(sa[a],score);
 	  vfree(sa);
@@ -5110,31 +5112,36 @@ int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int 
 	      r =pos2[s][col1];
 	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
 	    }
-	  score*=SCORE_K;
+	  
 	  return score*SCORE_K;
 	}
 int* column2sankoff_score (int *lu, NT_node T, int nseq, int **c, int gep)
 {
-  int inf=-999999;
-  if (!T)return NULL;
+  int inf=-9999;
+  int *S=(int*)vcalloc (27, sizeof (int));
+  int a;
+  int debug=0;
+  if (!T)
+    {
+      vfree (S);
+      return NULL;
+    }
   else if (T->isseq)
     {
-      int *S=(int*)vcalloc (27, sizeof (int));
-      S=(int*)memset ((void*)S,inf, 27*sizeof(int));
+      for (a=0;a<27; a++)S[a]=inf;
       char r=lu[T->lseq[0]];
       
-      if (r=='-')S[26]=gep;
+      if (r=='-')S[26]=0;
       else
 	{
 	  r=tolower(r)-'a';
 	  S[r]=c[r][r];
 	}
-      return S;
+      //fprintf (stderr,"\nLeaf: %c ", lu[T->lseq[0]]);
     }
   else
     {
       int i, j, k;
-      int *S =(int*)vcalloc (27, sizeof (int));
       int *Sl=column2sankoff_score(lu,T->left , nseq, c, gep);
       int *Sr=column2sankoff_score(lu,T->right, nseq, c, gep);
       
@@ -5146,15 +5153,17 @@ int* column2sankoff_score (int *lu, NT_node T, int nseq, int **c, int gep)
 	  for (j=0; j<=26;j++)
 	    {
 	      
-	      if (i==26 || j==26)mc=gep;
+	      if (i==26 && j==26)mc=0;
+	      else if (i==26 || j==26)mc=gep;
 	      else mc=c[i][j];
 	      
-	      int v=((Sl[j])==inf)?inf:(mc+Sl[j]);
+	      int v=(Sl[j]==inf)?inf:(mc+Sl[j]);
 	      if (v>max_j)max_j=v;
 	    }
 	  for (k=0; k<=26;k++)
 	    {
-	      if (i==26 || k==26)mc=gep;
+	      if (i==26 && k==26)mc=0;
+	      else if (i==26 || k==26)mc=gep;
 	      else mc=c[i][k];
 	      
 	      int v=(Sr[k]==inf)?inf:(mc+Sr[k]);
@@ -5164,8 +5173,18 @@ int* column2sankoff_score (int *lu, NT_node T, int nseq, int **c, int gep)
 	}
       vfree(Sl);
       vfree(Sr);
-      return S;
+      //fprintf (stderr,"\nNode: : ");
     }
+  if (debug)
+    {for (a=0; a<26; a++)
+	{
+	  if (S[a]==inf)fprintf (stderr,"*** ");
+	  else fprintf (stderr,"%3d ", S[a]);
+	}
+      fprintf (stderr, "\n");
+    }
+  return S;
+
 }
 /*********************************************************************************************/
 /*                                                                                           */

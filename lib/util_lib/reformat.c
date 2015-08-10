@@ -77,7 +77,8 @@ int seq_reformat ( int argc, char **in_argv)
 	char ***rename_list=NULL;
 	int code=CODE;
 	char **argv;
-
+	int maxlen;
+	
 	int n_actions=0;
 	int print_format=0;
 	/*INITIALIZATIONS*/
@@ -100,10 +101,12 @@ int seq_reformat ( int argc, char **in_argv)
 	declare_name(out_format);
 	declare_name(rename_file);
 
-
+	maxlen=0;
+	for (a=0; a<argc; a++)
+	  if (strlen (in_argv[a])>maxlen)maxlen=strlen (in_argv[a]);
 	argv=break_list ( in_argv, &argc, "=;, \n");
 
-	action_list=declare_char ( 100, 100);
+	action_list=declare_char (argc+1,maxlen+1);
 
 /*END INITIALIZATION*/
 
@@ -836,8 +839,8 @@ int seq_reformat ( int argc, char **in_argv)
 	  {
 	    D_ST=(Sequence_data_struc*)vcalloc ( 1, sizeof (Sequence_data_struc));
 	  }
-
-	action=declare_char(100, 100);
+	
+	action=declare_char(argc+1, maxlen+1);
 	for ( a=0; a< n_actions;)
 	  {
 	   if (action_list[a][0]!='+')
@@ -904,8 +907,14 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 
 	D->rm_gap=RAD->rm_gap;
 	sprintf ( D->format, "%s", in_format);
-	sprintf ( D->file, "%s", in_file);
+	
 
+	if (strlen (in_file)>10000)
+	  myexit (fprintf_error (stderr,"Pathname exceeds maximum allowd [10000]:\n%s\n",in_file));
+	
+	
+	sprintf ( D->file, "%s", in_file);
+	
 
 
 

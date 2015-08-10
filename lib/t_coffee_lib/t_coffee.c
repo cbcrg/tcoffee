@@ -5070,8 +5070,8 @@ get_cl_param(\
 		   else if ( strm ( msa_mode, "sankoff_aln"))
 		     {
 		   
-		       //CL->get_dp_cost=get_dp_cost_sankoff_tree;
-		       CL->get_dp_cost=slow_get_dp_cost;
+		       CL->get_dp_cost=get_dp_cost_sankoff_tree;
+		       //CL->get_dp_cost=slow_get_dp_cost;
 		       CL->pair_wise=gotoh_pair_wise;
 		       
 		       pc=tree_file;
