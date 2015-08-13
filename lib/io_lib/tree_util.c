@@ -2323,14 +2323,22 @@ char * tree2file (NT_node T, char *name, char *mode)
 }
 FILE * print_tree ( NT_node T, char *format,FILE *fp)
 {
-  Sequence *S;
-
+  return print_ordered_tree (T,NULL, format, fp);
+}
+FILE * print_ordered_tree ( NT_node T, Sequence *S,char *format,FILE *fp)
+{
+  
   tree2nleaf(T);
-  S=tree2seq(T, NULL);
-
-  recode_tree (T, S);
-
-  free_sequence (S, -1);
+  if (!S)
+    {
+      S=tree2seq(T, NULL);
+      recode_tree (T, S);
+      free_sequence (S, -1);
+    }
+  else
+    recode_tree (T, S);
+  
+  
   if ( format && strm (format, "binary"))
     fp=display_tree ( T,S->nseq, fp);
   else if ( strm (format, "shuffle_newick"))
@@ -3740,16 +3748,34 @@ NT_node find_node_in_tree (int *key, int nseq, NT_node T)
     {
       int yes,a;
       NT_node C;
-
+      int debug=0;
+      if (debug)
+	{
+	  fprintf ( stderr, "\n\n");
+	  for (a=0; a<nseq; a++)
+	    fprintf (stderr, "%c", (key[a])?key[a]:'*');
+	  fprintf ( stderr, "\n");
+	  for (a=0; a<nseq; a++)
+	    fprintf (stderr, "%d", T->lseq2[a]);
+	  fprintf ( stderr, "\n");
+	}
       for (yes=1,a=0; a<nseq; a++)
 	{
-	  if      ( key[a]&& !T->lseq2[a])return NULL;
+	  if      ( key[a]&& !T->lseq2[a])
+	    {
+	      return NULL;
+	    }
 	  else if (!key[a]&&  T->lseq2[a])yes=0;
 	}
+
       if (yes) return T;
       else if ((C=find_node_in_tree(key, nseq, T->right)))return C;
       else if ((C=find_node_in_tree(key, nseq, T->left )))return C;
-      else return NULL;
+      else
+	{
+	  HERE ("NOT FOUND AT ALL");
+	  return NULL;
+	}
     }
   return NULL;
 }
@@ -4152,6 +4178,20 @@ NT_node new_declare_tree_node ()
    	return p;
 
 	}
+void display_tree_lseq2 (NT_node T, int n)
+{
+  if (!T) return;
+  else 
+    {
+      int a;
+      for (a=0; a<n; a++)
+	fprintf ( stderr, "%d", T->lseq2[a]);
+      fprintf (stderr, "\n");
+      display_tree_lseq2(T->left,n);
+      display_tree_lseq2(T->right,n);
+    }
+}
+
 int new_display_tree (NT_node T, int n)
 {
   int in;

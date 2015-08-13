@@ -5067,17 +5067,22 @@ get_cl_param(\
 		   /*Chose the right Mode for evaluating Columns*/
 
 		   if ( A->nseq==1);
-		   else if ( strm ( msa_mode, "sankoff_aln"))
+		   else if ( strm ( msa_mode, "etcoffee"))
 		     {
-		   
-		       CL->get_dp_cost=get_dp_cost_sankoff_tree;
 		       //CL->get_dp_cost=slow_get_dp_cost;
+		       if (!CL->M)
+			 {
+			   CL->M=read_matrice ("blosum62mt");
+			 }
+		       if (!CL->gop)CL->gop=-20;
+		       if (!CL->gep)CL->gep=-2;
+		       
+		       CL->get_dp_cost=get_dp_cost_sankoff_tree;
 		       CL->pair_wise=gotoh_pair_wise;
 		       
 		       pc=tree_file;
 		       if ( strm (tree_file, "default") || !check_file_exists (tree_file))
 			 {
-			   
 			   T=make_tree ( A,CL,gop, gep,(CL->S),pc,maximise);
 			 }
 		       else if ( strm (tree_file, "no"))
@@ -5087,6 +5092,7 @@ get_cl_param(\
 			   fprintf ( le, "\nREAD PRECOMPUTED TREE: %s\n", pc);
 			   T=read_tree (pc,&tot_node,(CL->S)->nseq,  (CL->S)->name);
 			 }
+		       vfclose (print_ordered_tree ((T[3][0]),CL->S, "newick",vfopen (pc, "w")));
 		       A->tname=(char*)vcalloc ( strlen (pc)+1, sizeof(char));
 		       sprintf (A->tname, "%s", pc);
 		       SNL=tree_aln ((T[3][0])->left,(T[3][0])->right,A,(CL->S)->nseq, CL);

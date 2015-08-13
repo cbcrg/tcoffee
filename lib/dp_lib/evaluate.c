@@ -5051,9 +5051,13 @@ int get_domain_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, 
 		}
 	return score;
 	} 
-
+int column2sp_score (Sequence *S,int *lu, NT_node T, int nseq, int **c, int gep);
+int  column2et_score         (Sequence *S, int *lu, NT_node T, int nseq, int **c, int gep);
+int* column2sankoff_score_id (int *lu, NT_node T, int nseq, int **c, int gep);
 int* column2sankoff_score (int *lu, NT_node T, int nseq, int **matrix, int gep);
-int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
+int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2,
+
+int col2, Constraint_list *CL)
 	{
 	  int a, s, rs,r;
 	  static NT_node T;
@@ -5061,63 +5065,316 @@ int get_dp_cost_sankoff_tree ( Alignment *A, int**pos1, int ns1, int*list1, int 
 	  static int **matrix;
 	  
 	  NT_node N;
-	  int gep=-1;
+	  int gep=CL->gep;
 	  int nseq=(CL->S)->nseq;
 	  int score;
 	  int *sa;
-	 
+
+	  int sp=0;
+	  int et=0;
+	  int sankoff=1;
+	  int id=0;
+	  
+	  int debug=0;
+	  int cons=-1;
+
 	  if (T==NULL)
 	    {
-	      T=main_read_tree (A->tname);
+	      T=main_read_tree (A->tname);	      
 	      T=recode_tree    (T, (CL->S));
 	      matrix=read_matrice ("blosum62mt");
 	      key=(int*)vcalloc ((CL->S)->nseq, sizeof (int));
+	      //fprintf ( stderr, "\n");
+	      //display_tree_lseq2(T, (CL->S)->nseq);
+	      
 	    }
-	 
+
 	  for ( a=0; a< ns1; a++)
 	    {
 	      s=list1[a];
 	      rs=A->order[s][0];
 	      r=pos1[s][col1];
-	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
+	      key[rs]=(r>0)?(CL->S)->seq[rs][r-1]:'-';
+	      if (debug)
+		{
+		  fprintf (stderr,"[%c]", key[rs]);
+		  if (cons==-1)cons=key[rs];
+		  else if (cons==-2);
+		  else if (cons!=key[rs])cons=-2;
+		}
+
 	    }
+
 	  for ( a=0; a< ns2; a++)
 	    {
 	      s=list2[a];
 	      rs=A->order[s][0];
 	      r =pos2[s][col2];
-	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
+	      key[rs]=(r>0)?(CL->S)->seq[rs][r-1]:'-';
+	      
+	      if (debug)
+		{
+		  fprintf (stderr,"[[%c]]", key[rs]);
+		  if (cons==-1)cons=key[rs];
+		  else if (cons==-2);
+		  else if (cons!=key[rs])cons=-2;
+		}
+	    }
+	  
+	  if (debug)
+	    {
+	      for (a=0; a<nseq; a++)
+		fprintf (stderr, "%c", (key[a])?key[a]:'*');
+	      fprintf ( stderr, "\n");
 	    }
 	  
 	  N=find_node_in_tree (key, nseq, T);
+	  if (N==NULL) 
+	    {
+	      HERE ("incompatible tree");
+	      exit (0);
+	    }
+	  	  
 	  if (!N)return 0;
 	  
-	  sa=column2sankoff_score (key, N, nseq,matrix,gep);
-	  
-	  score=sa[0];
-	  for (a=1; a<=26; a++)score=MAX(sa[a],score);
-	  vfree(sa);
-	  
-	  for ( a=0; a< ns1; a++)
+	  if (sp)
 	    {
-	      s=list1[a];
-	      rs=A->order[s][0];
-	      r=pos1[s][col1];
-	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
+	      
+	      score=column2sp_score(CL->S, key, N, nseq, matrix, gep);
 	    }
-	  for ( a=0; a< ns2; a++)
+	  else if (id)
 	    {
-	      s=list2[a];
-	      rs=A->order[s][0];
-	      r =pos2[s][col1];
-	      key[s]=(r>0)?(CL->S)->seq[s][r-1]:'-';
+	      sa=column2sankoff_score_id (key, N, nseq,matrix,gep);	      
+	      
+	      score=sa[27];
+	      score=score*-1+100;
+	      vfree(sa);
 	    }
 	  
+	  else if (et)
+	    {
+	      score=column2et_score(CL->S, key, N, nseq, matrix, gep);
+	      
+	    }
+	  else if (sankoff)
+	    {
+	      int *sa=column2sankoff_score (key, N, nseq,matrix,gep);
+	      score=sa[0];
+	      for (a=1; a<27; a++)score=MAX(score, sa[a]);
+	      //score-=30;
+	      //fprintf ( stderr, "Pos: %3d %3d -> %4d\n", col1, col2, score);
+	      vfree (sa);
+	    }
+		
+	  for (a=0; a<nseq; a++)key[a]='\0';
 	  return score*SCORE_K;
 	}
+
+int column2sp_score (Sequence *S,int *lu, NT_node T, int nseq, int **c, int gep)
+{
+  int a, b, n, score;
+  
+  for (score=0, n=0,a=0; a<nseq-1; a++)
+    {
+      if (!lu[a])continue;
+      for (b=a+1; b<nseq; b++)
+	{
+	  if (!lu[b]);
+	  else if (lu[a]=='-' && lu[b]=='-');
+	  else if (lu[a]=='-' || lu[b]=='-'){score+=gep;n++;}
+	  else 
+	    {
+	      score+=c[tolower(lu[a])-'a'][tolower(lu[b])-'a'];
+	      n++;
+	    }
+	}
+    }
+  if (n)score/=n;
+  return score;
+}
+
+int column2et_score (Sequence *S,int *lu, NT_node T, int nseq, int **c, int gep)
+{
+  static Alignment *A;
+  static char *treeF;
+  static char *alnF;
+  int a, n, score, line;
+  char ***list;
+  static int hscore;
+  if (!A)
+    {
+      A=declare_Alignment(S);
+      //treeF=vtmpnam (NULL);
+      //alnF=vtmpnam  (NULL);
+      alnF=(char*)vcalloc (100, sizeof(char));
+      treeF=(char*)vcalloc (100, sizeof(char));
+    }
+  
+  sprintf (treeF, "cedricT");
+  sprintf (alnF, "cedricA");
+  
+  vfclose (print_ordered_tree (T,S, "newick", vfopen (treeF, "w")));
+  
+  A->nseq=0;
+  A->len_aln=1;
+  for (n=0,a=0; a<nseq; a++)
+    {
+      if (lu[a])
+	{
+	  A->seq_al[A->nseq][0]=lu[a];
+	  A->seq_al[A->nseq][1]='\0';
+	  sprintf (A->name[A->nseq], "%s", S->name[a]);
+	  A->nseq++;
+	}
+    }
+  output_msf_aln (alnF,A);
+  printf_system ("wetc -p %s -readtree %s >/dev/null 2>/dev/null", alnF, treeF);
+    
+  list=file2list("etc_out.ranks", " ");
+  
+  line=0;
+  while (list && list[line] && list[line][1][0]=='%')line++;
+  
+  score=100*atof(list[line][7]);
+  if (score>hscore)
+    {
+      hscore=score;
+      HERE ("%d", score);
+    }
+  score=2100-score;
+  vfree_all (list);
+  
+  
+  return score;
+}
+  
+int* column2sankoff_score_id (int *lu, NT_node T, int nseq, int **c, int gep)
+{
+  
+  int *S=(int*)vcalloc (28, sizeof (int));
+  int a;
+  int debug=0;
+  
+  if (!T)
+    {
+      vfree (S);
+      return NULL;
+    }
+  else if (T->isseq)
+    {
+      for (a=0;a<27; a++)S[a]=0;
+      char r=lu[T->lseq[0]];
+      
+      if (r=='-')S[26]=1;
+      else
+	{
+	  S[tolower(r)-'a']=1;
+	}
+    }
+  else
+    {
+      int i;
+      int *Sl=column2sankoff_score_id(lu,T->left , nseq, c, gep);
+      int *Sr=column2sankoff_score_id(lu,T->right, nseq, c, gep);
+      
+      for (i=0; i<27; i++)
+	{
+	  int l=Sl[i];
+	  int r=Sr[i];
+
+	  if (l!=r)
+	    {
+	      S[i]=1;
+	      S[27]++;
+	    }
+	  else 
+	    {
+	      S[i]=l;
+	    }
+	}
+      S[27]+=(Sl[27]+Sr[27]);
+      vfree(Sl);
+      vfree(Sr);
+    }
+  return S;
+}
 int* column2sankoff_score (int *lu, NT_node T, int nseq, int **c, int gep)
 {
-  int inf=-9999;
+  int inf=-99999;
+  int *S=(int*)vcalloc (27, sizeof (int));
+  int a;
+  int debug=0;
+  
+ 
+  if (!T)
+    {
+      vfree (S);
+      return NULL;
+    }
+  else if (T->isseq)
+    {
+      
+      for (a=0;a<27; a++)S[a]=inf;
+      char r=lu[T->lseq[0]];
+      if (debug)fprintf (stderr, "R:%c ", r);
+      if (r=='-')S[26]=0;
+      else
+	{
+	  r=tolower(r)-'a';
+	  S[r]=c[r][r];
+	}
+    }
+  else
+    {
+      int i, j, k;
+      int *Sl=column2sankoff_score(lu,T->left , nseq, c, gep);
+      int *Sr=column2sankoff_score(lu,T->right, nseq, c, gep);
+      
+      for (i=0; i<=26; i++)
+	{
+	  int max_j=inf;
+	  int max_k=inf;
+	  int mc;
+	  for (j=0; j<=26;j++)
+	    {
+	      
+	      if (i==26 && j==26)mc=0;
+	      else if (i==26 || j==26)mc=gep;
+	      else mc=c[i][j];
+	      
+	      int v=(Sl[j]==inf)?inf:(10*(mc+Sl[j]))/2;
+	      if (v>max_j)max_j=v;
+	    }
+	  for (k=0; k<=26;k++)
+	    {
+	      if (i==26 && k==26)mc=0;
+	      else if (i==26 || k==26)mc=gep;
+	      else mc=c[i][k];
+	      
+	      int v=(Sr[k]==inf)?inf:(10*(mc+Sr[k]))/2;
+	      if (v>max_k)max_k=v;
+	    }
+	  S[i]=(max_k==inf || max_j==inf)?inf:(max_k+max_j)/2;
+	}
+      vfree(Sl);
+      vfree(Sr);
+    }
+  if (debug)
+    {
+      fprintf(stderr, "S: ");
+      for (a=0; a<=26; a++)
+	if (S[a]==inf)fprintf (stderr, "inf ");
+	else fprintf ( stderr, "%d ", S[a]);
+      fprintf (stderr, "\n"); 
+    }
+  return S;
+}
+
+
+
+int* column2sankoff_score_old (int *lu, NT_node T, int nseq, int **c, int gep)
+{
+  int inf=-99999;
   int *S=(int*)vcalloc (27, sizeof (int));
   int a;
   int debug=0;
@@ -5128,9 +5385,9 @@ int* column2sankoff_score (int *lu, NT_node T, int nseq, int **c, int gep)
     }
   else if (T->isseq)
     {
+      
       for (a=0;a<27; a++)S[a]=inf;
       char r=lu[T->lseq[0]];
-      
       if (r=='-')S[26]=0;
       else
 	{

@@ -3996,6 +3996,7 @@ else fp=stderr;
 }
 
 static NT_node* SNL;
+
 NT_node* tree_aln ( NT_node LT, NT_node RT, Alignment*A, int nseq, Constraint_list *CL)
 {
   int a;
@@ -4095,7 +4096,8 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
   index_tree_node(P);
   initialize_scoring_scheme (CL);
 
-  if ( get_nproc()>1 && strstr (CL->multi_thread, "msa") && !(strstr(CL->dp_mode, "collapse")))
+  
+  if ((!get_int_variable ("n_core")||!get_int_variable ("n_core")>1) && get_nproc()>1 && strstr (CL->multi_thread, "msa") && !(strstr(CL->dp_mode, "collapse")))
     {
       int max_fork;
 
@@ -4122,6 +4124,14 @@ NT_node* local_tree_aln ( NT_node l, NT_node r, Alignment*A,int nseq, Constraint
 	  if (min[a][2]>1)(NL[min[a][0]])->fork=1;
 	}
     }
+  else
+    {
+      printf ("#Single Thread\n");
+      
+    }
+
+  //display_tree_lseq2(P, (CL->S)->nseq);
+  
   free_int (min, -1);
   rec_local_tree_aln (P, A,CL, 1);
   for (a=0; a<P->nseq; a++)sprintf (A->tree_order[a], "%s", (CL->S)->name[P->lseq[a]]);
@@ -4196,9 +4206,7 @@ NT_node rec_local_tree_aln ( NT_node P, Alignment*A, Constraint_list *CL,int pri
       for (a=0;a<R->nseq; a++)
 	fprintf (stderr, "-R%20s %s\n", A->name[R->lseq[a]], A->seq_al[R->lseq[a]]);
     }
-
-
-
+   
   P->score=A->score_aln=score=profile_pair_wise (A,L->nseq, L->lseq,R->nseq,R->lseq,CL);
   A->len_aln=strlen (A->seq_al[P->lseq[0]]);
 

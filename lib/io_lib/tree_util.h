@@ -166,6 +166,8 @@ int tree2nleaf ( NT_node R);
 int tree2nnode ( NT_node R);
 int tree2_nnode_unresolved (NT_node R, int *l);
 
+
+void display_tree_lseq2 (NT_node T,int n);
 FILE* display_tree ( NT_node R, int n, FILE *fp);
 void clear_tree (NT_node T);
 int display_leaf ( NT_node T, FILE *fp);
@@ -179,6 +181,7 @@ NT_node straighten_tree ( NT_node P, NT_node C, float new_dist);
 NT_node unroot_tree ( NT_node T);
 FILE* print_tree_list ( NT_node *T,char *format, FILE *fp);
 FILE* print_tree         ( NT_node T,char *format, FILE *fp);
+FILE* print_ordered_tree ( NT_node T,Sequence *S,char *format, FILE *fp);
 
 char *tree2string (NT_node T);
 char *tree2file   (NT_node T, char *name, char *mode);
