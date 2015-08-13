@@ -3081,6 +3081,7 @@ Supplement data
 
 
 .. Note:: Please cite
+
 	* `Chang, J.-M., Tommaso, P. & Notredame, C. TCS: A New Multiple Sequence Alignment Reliability Measure to Estimate Alignment Accuracy and Improve Phylogenetic Tree Reconstruction. Molecular biology and evolution 31, 1625–37 (2014). <http://www.ncbi.nlm.nih.gov/pubmed/24694831>`_
 	* `Chang, J.-M., Di Tommaso, P., Lefort, V., Gascuel, O. & Notredame, C. TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction. Nucleic Acids Res 43(W1):W3-6 (2015). <http://www.ncbi.nlm.nih.gov/pubmed/25855806>`_.
 
@@ -4224,9 +4225,26 @@ Notredame C.
 Mocca: semi-automatic method for   domain hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]
 ===========================================================================================================================================
 
-CORE
+CORE/TCS
 ====
-http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
+====================================================================================================================================================================== 
+Notredame C, Abergel C.                                                                                                                                 
+====================================================================================================================================================================== 
+2003. Using multiple alignment methods to assess the quality of genomic data analysis. In: Andrade MA, editor. Bioinformatics and genomes: current perspectives. Wymondham (UK): Horizon Scientific Press. p. 30–50.
+http://www.tcoffee.org/Publications/Pdf/core.pp.pdf                                   
+====================================================================================================================================================================== 
+
+========================================================================================================================================================== 
+Chang J-M, Tommaso PD, & Notredame C                                                                                                                          
+========================================================================================================================================================== 
+2014. TCS: A New Multiple Sequence Alignment Reliability Measure to Estimate Alignment Accuracy and Improve Phylogenetic Tree Reconstruction. Molecular Biology and Evolution 31(6):1625-37.                               
+========================================================================================================================================================== 
+
+========================================================================================================================================================== 
+Chang J-M, Tommaso PD*, Lefort V, Gascuel O & Notredame C                                                                                                                          
+========================================================================================================================================================== 
+2015. TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction. Nucleic Acids Research, 43(W1):W3-6. (*These two authors contribute equally)                                  
+========================================================================================================================================================== 
 
 
 Other Contributions
