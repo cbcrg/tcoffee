@@ -8922,35 +8922,38 @@ Alignment *translate_dna_aln (Alignment *A, int frame)
 	   }
 
 	 for ( b=0; b< A->nseq; b++)
-	   for ( a=0; a< A->len_aln;)
-	     {
-
-	       r=translate_dna_codon (A->seq_al[b]+a, 'z');
-	       if (is_gap(r))
-		 {
-		   A->seq_al[b][a++]='-';
-		   A->seq_al[b][a++]='-';
-		   A->seq_al[b][a++]='-';
-		 }
-	       else if ( r=='x')
-		 {
-		   A->seq_al[b][a++]='o';
-		   A->seq_al[b][a++]='-';
-		   A->seq_al[b][a++]='-';
-		 }
-	       else if ( r=='z')
-		 {
-		   A->seq_al[b][a++]='x';
-		   A->seq_al[b][a++]='-';
-		   A->seq_al[b][a++]='-';
-		 }
-	       else
-		 {
-		   A->seq_al[b][a++]=r;
-		   A->seq_al[b][a++]='-';
-		   A->seq_al[b][a++]='-';
-		 }
-	     }
+	   {
+	     for ( a=0; a< A->len_aln;)
+	       {
+		 
+		 r=translate_dna_codon (A->seq_al[b]+a, 'z');
+		 
+		 if (is_gap(r))
+		   {
+		     A->seq_al[b][a++]='-';
+		     A->seq_al[b][a++]='-';
+		     A->seq_al[b][a++]='-';
+		   }
+		 else if ( r=='x' || r=='X')
+		   {
+		     A->seq_al[b][a++]=(r=='x')?'o':'O';
+		     A->seq_al[b][a++]='-';
+		     A->seq_al[b][a++]='-';
+		   }
+		 else if ( r=='z' || r=='Z')
+		   {
+		     A->seq_al[b][a++]=(r=='z')?'x':'X';
+		     A->seq_al[b][a++]='-';
+		     A->seq_al[b][a++]='-';
+		   }
+		 else
+		   {
+		     A->seq_al[b][a++]=r;
+		     A->seq_al[b][a++]='-';
+		     A->seq_al[b][a++]='-';
+		   }
+	       }
+	   }
 	 compress_aln (A);
 
 	 return A;
