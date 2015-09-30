@@ -14,6 +14,7 @@ Contents:
    tcoffee_quickstart
    tcoffee_installation
    tcoffee_manual
+   tcoffee_tutorials
    tcoffee_faq
    tcoffee_reference
    trmsd_manual
