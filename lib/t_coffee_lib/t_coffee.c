@@ -414,6 +414,7 @@ int batch_main ( int argc, char **argv)
 	char *master_mode;
 	Sequence *MASTER_SEQ=NULL;
 	Sequence *TEMP_SEQ=NULL;
+	char *et_mode;
 
 	int blast_maxnseq;
 
@@ -3155,7 +3156,24 @@ declare_name (msa_mode);
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-
+declare_name (et_mode);
+ get_cl_param(\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-et_mode"    ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "S"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "Algorithm used to the et score: id, et, sankoff, sp"          ,\
+			    /*Parameter*/ &et_mode      ,\
+			    /*Def 1*/    "et"      ,\
+			    /*Def 2*/    "et"      ,		\
+			    /*Min_value*/ "any"         ,	\
+			    /*Max Value*/ "any"			\
+					  );
+ 
 declare_name (master_mode);
 get_cl_param(\
 			    /*argc*/      argc          ,\
@@ -5069,6 +5087,7 @@ get_cl_param(\
 		   if ( A->nseq==1);
 		   else if ( strm ( msa_mode, "etcoffee"))
 		     {
+		       set_string_variable ("et_mode", et_mode);
 		       //CL->get_dp_cost=slow_get_dp_cost;
 		       if (!CL->M)
 			 {

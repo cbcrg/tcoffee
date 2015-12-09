@@ -5070,6 +5070,8 @@ int col2, Constraint_list *CL)
 	  int score;
 	  int *sa;
 
+	  static char *mode;
+
 	  int sp=0;
 	  int et=0;
 	  int sankoff=1;
@@ -5077,6 +5079,18 @@ int col2, Constraint_list *CL)
 	  
 	  int debug=0;
 	  int cons=-1;
+
+
+
+	  if (!mode)
+	    {
+	      mode=get_string_variable ("et_mode");
+	      if (!mode)
+		{
+		  mode=(char*)vcalloc (100, sizeof (char));
+		  sprintf (mode, "et");
+		}
+	    }
 
 	  if (T==NULL)
 	    {
@@ -5137,35 +5151,35 @@ int col2, Constraint_list *CL)
 	  	  
 	  if (!N)return 0;
 	  
-	  if (sp)
+	  if (strm (mode, "sp"))
 	    {
-	      
+	      //sp score: debug
 	      score=column2sp_score(CL->S, key, N, nseq, matrix, gep);
 	    }
-	  else if (id)
+	  else if (strm (mode, "id"))
 	    {
+	      //id score based on tree topology
 	      sa=column2sankoff_score_id (key, N, nseq,matrix,gep);	      
-	      
 	      score=sa[27];
 	      score=score*-1+100;
 	      vfree(sa);
 	    }
 	  
-	  else if (et)
+	  else if (strm (mode,"et"))
 	    {
+	      //ET Score based on the sub tree
 	      score=column2et_score(CL->S, key, N, nseq, matrix, gep);
 	      
 	    }
-	  else if (sankoff)
+	  else if (strm (mode, "sankoff"))
 	    {
+	      //Sankoff tree score, cf Felsenstein
 	      int *sa=column2sankoff_score (key, N, nseq,matrix,gep);
 	      score=sa[0];
 	      for (a=1; a<27; a++)score=MAX(score, sa[a]);
-	      //score-=30;
-	      //fprintf ( stderr, "Pos: %3d %3d -> %4d\n", col1, col2, score);
 	      vfree (sa);
 	    }
-		
+	  
 	  for (a=0; a<nseq; a++)key[a]='\0';
 	  return score*SCORE_K;
 	}
@@ -5204,14 +5218,14 @@ int column2et_score (Sequence *S,int *lu, NT_node T, int nseq, int **c, int gep)
   if (!A)
     {
       A=declare_Alignment(S);
-      //treeF=vtmpnam (NULL);
-      //alnF=vtmpnam  (NULL);
-      alnF=(char*)vcalloc (100, sizeof(char));
-      treeF=(char*)vcalloc (100, sizeof(char));
+      treeF=vtmpnam (NULL);
+      alnF=vtmpnam  (NULL);
+      //alnF=(char*)vcalloc (100, sizeof(char));
+      //treeF=(char*)vcalloc (100, sizeof(char));
     }
   
-  sprintf (treeF, "cedricT");
-  sprintf (alnF, "cedricA");
+  //sprintf (treeF, "cedricT");
+  //sprintf (alnF, "cedricA");
   
   vfclose (print_ordered_tree (T,S, "newick", vfopen (treeF, "w")));
   
