@@ -169,7 +169,7 @@ elsif ( $mode eq "RNA_template")
   }
 elsif ( $mode eq "tm_template")
   {
-    &seq2tm_template ($mode, "", &my_get_opt ( $cl, "-infile=",1,1,"-arch=",1,1,"-psv=",1,1, "-outfile=",1,0));
+    &seq2tm_template ($mode,&my_get_opt ( $cl, "-infile=",1,1,"-arch=",1,1,"-psv=",1,1, "-outfile=",1,0));
   }
 elsif ( $mode eq "psitm_template")
   {

@@ -47,11 +47,12 @@ our $MCOFFEE=($ENV{"MCOFFEE_4_TCOFFEE"})?$ENV{"MCOFFEE_4_TCOFFEE"}:"$HOME/.t_cof
 
 if ($mode eq "hmmtop")
   {
+    
     check_configuration ("hmmtop");
     if (-e $arch){$ENV{'HMMTOP_ARCH'}=$arch;}
     elsif (-e $ENV{HMMTOP_ARCH}){$arch=$ENV{HMMTOP_ARCH};}
     elsif (-e "$MCOFFEE/hmmtop.arch"){$arch=$ENV{'HMMTOP_ARCH'}="$MCOFFEE/hmmtop.arch";}
-    elsif (-e "$hmmtop_home/hmmtop.arc"){$arch=$ENV{'HMMTOP_ARCH'}="$hmmtop_home/hmmtop.arc";}
+    elsif (-e "$hmmtop_home/hmmtop.arch"){$arch=$ENV{'HMMTOP_ARCH'}="$hmmtop_home/hmmtop.arch";}
     else {myexit(flush_error ( "Could not find ARCH file for hmmtop"));}
     
     
@@ -60,6 +61,7 @@ if ($mode eq "hmmtop")
     elsif (-e "$MCOFFEE/hmmtop.psv"){$psv=$ENV{'HMMTOP_PSV'}="$MCOFFEE/hmmtop.psv";}
     elsif (-e "$hmmtop_home/hmmtop.psv"){$psv=$ENV{'HMMTOP_PSV'}="$hmmtop_home/hmmtop.psv";}
     else {myexit(flush_error ( "Could not find PSV file for hmmtop"));}
+
   }
 elsif ($mode eq "gor")
   {
@@ -98,12 +100,13 @@ my (%pred, %seq, %predA);
 %seq=read_fasta_seq($fmsq2);
 %seq=fasta2sample(\%seq, $sample);
 
-if (1==2 && $mode eq "hmmtop" && $output eq "cons")
+if (1==2 &&$mode eq "hmmtop" && $output eq "cons")
   {
     fasta2hmmtop_cons($outfile,\%seq);
   }
 else
   {
+   
     %pred=fasta2pred(\%seq, $mode);
     %predA=pred2aln (\%pred, \%seq);
     
@@ -196,7 +199,13 @@ sub fasta2hmmtop_pred
     
 
     output_fasta_seq (\%seq,$tmp_in, "seq");
+
+    
     `hmmtop -if=$tmp_in -sf=FAS -pl 2>/dev/null >$tmp_out`;
+    
+
+    
+    
     open ($o, ">$tmp");
     open ($i, "$tmp_out");
     while (<$i>)

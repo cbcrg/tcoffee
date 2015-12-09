@@ -2616,7 +2616,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 
 	    if (!ns)
 	      {
-		add_warning ( stderr, "Cannot output tm_html:_E_ template file (sec. struc.) is required for this output ", PROGRAM);
+		add_warning ( stderr, "Cannot output sec_html:_E_ template file (sec. struc.) is required for this output ", PROGRAM);
 	      }
 	    output_color_html  ( A, ST, out_file);
 	  }

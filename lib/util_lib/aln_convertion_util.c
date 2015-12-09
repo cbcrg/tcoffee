@@ -5849,10 +5849,11 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
     }
   else if ( strm ( template_list, "TM"))
     {
-
+      
       /*predict transmembrane structure*/
       check_program_is_installed (HMMTOP_4_TCOFFEE,NULL, NULL,HMMTOP_ADDRESS, INSTALL_OR_DIE);
       sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#tm_template@arch#%s/%s@psv#%s/%s@type#_T_",get_mcoffee_4_tcoffee(), "hmmtop.arch", get_mcoffee_4_tcoffee(), "hmmtop.psv");
+      
       S=seq2template_seq (S,buf, F);
       return S;
     }
