@@ -42,7 +42,7 @@ we report in this section. For each part, all command lines have been collected 
 
 Procedures
 ------------
-
+- `Full Tutorial <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/index.html>'_
 - `Installation <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/installation.html>`_
 - `Protein Multiple Sequence Alignments <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/protein-alignment.html>`_
 - `RNA Multiple Sequence Alignments <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/rna-alignment.html>`_
