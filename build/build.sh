@@ -82,10 +82,10 @@ fi
 # default install builder location 
 #
 if [ -z $INSTALLER ]; then 
-	INSTALLER=~/installbuilder/bin/builder
+	INSTALLER=$HOME/installbuilder/bin/builder
 	if [ $OSNAME == "macosx" ]
 	then
-	INSTALLER=~/installbuilder/bin/Builder.app/Contents/MacOS/installbuilder.sh
+	INSTALLER=$HOME/installbuilder/bin/Builder.app/Contents/MacOS/installbuilder.sh
 	fi
 fi
 
@@ -288,6 +288,7 @@ function build_binaries()
 
 	# create t-coffee binaries installation
 	cd $UNTARED
+	./install t_coffee -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin
 	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
     
 	# Check that the binary has successfully compiled 
@@ -317,7 +318,7 @@ function build_binaries()
 	# add extra pack packages 
 	#
 	# + hmmtop
-	cp $BUILD_REPO/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
+	cp $WORKSPACE/tcoffee/build/extra/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
 
 	# + secondary_struc.py (by Carsten)
 	cp $WORKSPACE/tcoffee/build/extra/secondary_struc.py $TCDIR/plugins/$OSNAME/secondary_struc.py
@@ -458,8 +459,7 @@ function tcoffee() {
 	if [ $DO_TEST == 1 ]; then
 	doc_test 
 	fi
-	
-	copy_to_dropbox
+
 } 
 
 
