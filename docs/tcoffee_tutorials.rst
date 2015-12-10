@@ -5,6 +5,9 @@ T-Coffee Tutorials
 Using the T-Coffee Package to Build Multiple Sequence Alignments of Proteins, RNAs, DNA 
 sequences and 3D-Structures.
 
+This documentation is merely a cheat-sheet that recapitulates the material and the command-lines associated with the tutorial. 
+The tutorial itself is adpated from the `T-Coffee Nature Protocol Article <http://www.nature.com/nprot/journal/v6/n11/full/nprot.2011.393.html>` that can be followed step by step on the following site: `Online T-Coffee Tutorial <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/index.html>` 
+
 Introduction
 ---------------
 
@@ -40,8 +43,8 @@ we report in this section. For each part, all command lines have been collected 
 Procedures
 ------------
 
-- Installation
-- Protein Multiple Sequence Alignments
-- RNA Multiple Sequence Alignments
-- Promoter alignments
-- Reformat alignments
+- `Installation <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/installation.html>`
+- `Protein Multiple Sequence Alignments <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/protein-alignment.html>`
+- `RNA Multiple Sequence Alignments <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/rna-alignment.html>`
+- `Promoter alignments <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/promoter-alignment.html>`
+- `Reformat alignments <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/reformating.html>`
