@@ -1,35 +1,14 @@
 machine:
-    java:
-        version: oraclejdk8
+    services:
+        - docker
 dependencies:
   cache_directories:
-    - /home/ubuntu/installbuilder-8.6.0
-    - /home/ubuntu/ncbi-blast-2.2.28+
     - /home/ubuntu/repo
-  pre:
-    - sudo apt-get update --fix-missing && sudo apt-get install -y antiword make gcc gfortran bc wget curl unzip perl-modules libnet-ssleay-perl libcrypt-ssleay-perl libssl-dev libexpat1 libexpat1-dev liblwp-protocol-https-perl || true
-    - sudo wget -q cpanmin.us -O /usr/local/bin/cpanm && sudo chmod +x /usr/local/bin/cpanm
-    - sudo cpanm -n Net::SSLeay
-    - sudo cpanm -n XML::Simple
-    - sudo cpanm -n SOAP::Lite
-    - bash build/install-installbuilder-8.6.0.sh
-    - ln -s $HOME/installbuilder-8.6.0 $HOME/installbuilder
-    - bash build/install-ncbi-blast-2.2.28+.sh
-    - ln -s $HOME/ncbi-blast-2.2.28+ $HOME/ncbi-blast 
-  override:
-    - bash -x build/build.sh tcoffee :
-        environment:
-            OSNAME: linux
-            OSARCH: x64
-            WORKSPACE: /home/ubuntu
-            PERL_MM_USE_DEFAULT: 1
-            PERL_EXTUTILS_AUTOINSTALL: --defaultdeps
 test:
   override:
-    - bash build/build.sh doc_test :
-        environment:
-            OSNAME: linux
-            OSARCH: x64
-            WORKSPACE: /home/ubuntu
+    - docker run -v $HOME/tcoffee:/root/tcoffee -v $HOME/repo:/root/repo -v $HOME/sandbox:/root/sandbox -e DO_TEST=1 cbcrg/holy-tcoffee-build-box:x64 tcoffee/build/build.sh env tcoffee
+  post:
+    - rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/ 
+    - rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/sandbox/test-results/index.html  ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/tests/test-results-linux-x64-$(date +"%Y-%m-%d").html
                   
             
