@@ -1091,6 +1091,7 @@ sub install_source_package
     elsif ( $pg eq "retree")
       {
 	chdir "src";
+	&flush_command ("cp Makefile.unx Makefile");
 	&flush_command ("make $arguments all");
 	&flush_command ("make put");
 	system "cp ../exe/* $BIN";
