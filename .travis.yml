@@ -1,0 +1,27 @@
+os:
+  - osx
+  
+sudo: required
+
+cache:
+  directories:
+  - $HOME/repo  
+  - $HOME/installbuilder-8.6.0 
+  - $HOME/ncbi-blast-2.2.28+
+
+before_install:
+  - build/install-installbuilder-8.6.0.sh
+  - build/install-ncbi-blast-2.2.28+.sh 
+  - ln -s $HOME/installbuilder-8.6.0  $HOME/installbuilder
+  - ln -s $HOME/ncbi-blast-2.2.28+ $HOME/ncbi-blast
+  - build/install-cpan-modules.sh
+  - brew update
+  - brew install antiword
+  - brew tap caskroom/cask
+  - brew cask install java
+  
+env:
+  - OSNAME=macosx OSARCH=x64 DO_TEST=1 PATH=$PATH:$HOME/ncbi-blast-2.2.28+/bin
+
+script: 
+  - WORKSPACE=$(dirname $PWD) bash build/build.sh env tcoffee    

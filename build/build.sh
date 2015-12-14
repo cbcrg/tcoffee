@@ -157,6 +157,9 @@ function env()
 {
   echo "[ env ]"
 
+  echo "- PWD         : $PWD" 
+  echo "- PATH        : $PATH"
+  echo "- HOME        : $HOME"
   echo "- WORKSPACE   : $WORKSPACE"
   echo "- OSNAME      : $OSNAME"
   echo "- OSARCH      : $OSARCH"
@@ -179,7 +182,6 @@ function env()
   echo ". DIST_HOST   : $DIST_HOST"
   echo ". INST_NAME   : $INST_NAME"
   echo ". DO_TEST     : $DO_TEST"
-
 }
 
 #
