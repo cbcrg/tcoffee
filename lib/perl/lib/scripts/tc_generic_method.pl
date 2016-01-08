@@ -478,7 +478,7 @@ sub blast2pdb_template_test
 
 	  if (!&pdb_is_released($pdbid))
 	    {
-	      print stdout "\t\t**$pdbid [PDB NOT RELEASED or WITHDRAWN]\n";
+	      print stdout "\t\t**$pdbid [WARNIG: PDB NOT RELEASED or WITHDRAWN]\n";
 	      $c++;
 	    }
 	  elsif (!&pdb_has_right_type ($pdbid,$type))

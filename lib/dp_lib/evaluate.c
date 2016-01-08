@@ -4123,8 +4123,7 @@ int cw_profile_get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int co
 	  
 	
 	  
-	  
-	  
+	  	  
 	  if (last_tag!=A->random_tag)
 	    {
 	      int n1, n2;
@@ -6052,7 +6051,7 @@ float ** initialise_aa_physico_chemical_property_table (int *n)
 }
 
 /**
- * Set the extension mode. Default seems to be \c very_fast_triplet (??)
+ * Set the extension mode. Default is very_fast_triplet
  *
  * Depending on the \c extend_mode, this functions specifies how the evaluation
  * step has to be performed. I assignes functions to the values
@@ -6170,7 +6169,10 @@ Constraint_list * choose_extension_mode ( char *extend_mode, Constraint_list *CL
     }
   else if (  strm ( extend_mode, "matrix"))
     {
-      
+            
+      if (!CL->M)
+	printf_exit ( EXIT_FAILURE,stderr, "\nERROR: use -in <mat_name> to set the matrix to be used [FATAL]");
+	
       CL->evaluate_residue_pair=evaluate_matrix_score;
       CL->get_dp_cost=cw_profile_get_dp_cost;
       CL->normalise=1;

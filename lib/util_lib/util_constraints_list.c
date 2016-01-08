@@ -2261,9 +2261,9 @@ Constraint_list* read_constraint_list(Constraint_list *CL,char *in_fname,char *i
 	}
 	else if (strm(read_mode, "matrix"))
 	{
-		CL->residue_index=NULL;
-		CL->extend_jit=0;
-		CL->M=read_matrice ( fname);
+	  CL->residue_index=NULL;
+	  CL->extend_jit=0;
+	  CL->M=read_matrice ( fname);
 	}
 	else if ( strm ( read_mode, "structure"))
 	{
