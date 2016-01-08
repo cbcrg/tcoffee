@@ -1453,6 +1453,7 @@ By default, T-Coffee also requires two important PDB files declared using the tw
 
 
 ::
+
   export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
   Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt
 
@@ -1460,6 +1461,7 @@ And
 
 
 ::
+
   export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
   Found at: http://www.rcsb.org/pdb/rest/getUnreleased
 
