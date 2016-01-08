@@ -1451,11 +1451,13 @@ If the file you are looking for is neither in the current directory nor in the l
 
 By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior). 
 
+
 ::
   export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
   Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt
 
 And 
+
 
 ::
   export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
