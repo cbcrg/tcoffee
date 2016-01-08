@@ -1449,6 +1449,22 @@ If the file you are looking for is neither in the current directory nor in the l
   t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta -no_remote_pdb_file
 
 
+By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior). 
+
+::
+  export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
+  Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt
+
+And 
+
+::
+  export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
+  Found at: http://www.rcsb.org/pdb/rest/getUnreleased
+
+.. warning:: Since the file unreleased.xml is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
+	
+
+
 
 ********************************************
 Manipulating RNA sequences with seq_reformat
