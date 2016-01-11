@@ -1221,6 +1221,8 @@ sub get_unrealeased_file
     my $pdb_file  ="$ENV{'PDB_DIR'}/derived_data/unrealeased.xml";
     
     
+    if ($env_file eq "NO" || $env_file eq "No" || $env_file eq "no" || $env_file eq "0"){return "NO";}
+
     if (-z $cache_file){unlink ($cache_file);}#will get updated
     if (-z $env_file){unlink($env_file);}     #will update
     if (-z $pdb_file){$pdb_file="";}          #cannot update
@@ -1353,8 +1355,10 @@ sub remote_is_on_hold
 
     
     $ref_file=&get_unrealeased_file();
+    if ($ref_file eq "NO"){return 0;}
 
-    if ($no_rmote_pdb==1){return 0;}
+
+    if ($no_remote_pdb==1){return 0;}
     if ( $in=~/[^\w\d\:\_]/){return 0;}
     
     $ref_file=&get_unrealeased_file();
