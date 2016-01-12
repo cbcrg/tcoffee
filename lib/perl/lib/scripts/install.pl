@@ -1062,6 +1062,7 @@ sub install_source_package
     #
      elsif ( $pg eq "mustang")
       {
+    if ( $OS=~/macosx/){&flush_command("sed -i '' 's/-traditional -Wall/-Wall/' Makefile  ");}
 	&flush_command ("rm ./bin/*");
 	&flush_command ("make $arguments all");
 
