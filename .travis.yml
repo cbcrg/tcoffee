@@ -16,9 +16,10 @@ before_install:
   - ln -s $HOME/ncbi-blast-2.2.28+ $HOME/ncbi-blast
   - build/install-cpan-modules.sh
   - brew update
-  - brew install antiword
+  - brew install antiword curl ghostscript
   - brew tap caskroom/cask
   - brew cask install java
+  - build/install-argtable2-13.sh
   
 env:
   - OSNAME=macosx OSARCH=x64 DO_TEST=1 PATH=$PATH:$HOME/ncbi-blast-2.2.28+/bin
