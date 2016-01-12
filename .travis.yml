@@ -16,6 +16,7 @@ before_install:
   - ln -s $HOME/ncbi-blast-2.2.28+ $HOME/ncbi-blast
   - build/install-cpan-modules.sh
   - brew update
+  - brew install homebrew/dupes/apple-gcc42 
   - brew install antiword curl ghostscript
   - brew tap caskroom/cask
   - brew cask install java
