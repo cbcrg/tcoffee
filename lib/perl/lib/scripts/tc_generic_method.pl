@@ -157,11 +157,11 @@ elsif ( $mode eq "pdb_template")
 elsif ( $mode eq "profile_template")
   {
 
-    &psiblast2profile_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0));
+    &seq2profile_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0));
   }
 elsif ( $mode eq "psiprofile_template")
   {
-    &psiblast2profile_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0));
+    &seq2profile_template ($mode,&my_get_opt ( $cl, "-infile=",1,1, "-database=",1,0, "-method=",1,0, "-outfile=",1,0));
   }
 elsif ( $mode eq "RNA_template")
   {
@@ -412,6 +412,14 @@ sub psiblast2profile_template_test
 
   die;
 }
+sub seq2profile_template
+    {
+      my ($mode, $infile, $db, $method, $outfile)=@_;
+      if    ($method eq "psiblast"){return psiblast2profile_template ($mode, $infile, $db, $method, $outfile);}
+      elsif ($method eq "blastp")   {return psiblast2profile_template ($mode, $infile, $db, $method, $outfile);}
+      elsif ($method eq "hh")      {return hh2profile_template ($mode, $infile, $db, $method, $outfile);}
+    }
+
 sub psiblast2profile_template
   {
   my ($mode, $infile, $db, $method, $outfile)=@_;
@@ -452,6 +460,45 @@ sub psiblast2profile_template
 
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
 }
+
+sub hh2profile_template
+  {
+
+  #for each sequence, build a profile, in FASTA, with ungapped querry on top  
+  my ($mode, $infile, $db, $method, $outfile)=@_;
+  my %s, %h, ;
+  my ($result,$psiblast_output,$profile_name,@profiles);
+  &set_temporary_dir ("set",$infile,"seq.pep");
+  %s=read_fasta_seq ("seq.pep");
+  open (R, ">result.aln");
+  
+  my $hh=$ENV{"HHSEARCH_4_TCOFFEE"};
+  if (!$hh)
+    {
+      print "ERROR: HHSEARCH_4_TCOFFEE is not set\n";
+      myexit ($EXIT_FAILURE);
+    }
+  
+  #print stdout "\n";
+  foreach $seq (keys(%s))
+    {
+      open (F, ">seqfile");
+      print (F ">$A\n$s{$seq}{seq}\n");
+      close (F);
+      
+      #This function should input a querry and a database and return as output 
+      $profile_name="$s{$seq}{name}.prf";
+      
+      safe_system  ("$hh -name=$s{$seq}{name}-method=search -db=$db -infile=seqfile -outfile=outfile");
+      
+      print stdout "!\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$method/$db][$CACHE_STATUS]\n";
+      print R ">$s{$seq}{name} _R_ $profile_name\n";
+    }
+  close (R);
+  &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
+}
+
+
 sub blast2pdb_template_test
     {
       my ($mode,$infile)=@_;
@@ -1093,29 +1140,29 @@ sub seq2rnapdb_pair
       }
   }
 sub seq2profile_pair
-{
-	my ($mode, $profile1, $profile2, $method, $param, $outfile)=@_;
-
-
-	if ($method eq "clustalw")
-	  {
-	    `clustalw -profile1=$profile1 -profile2=$profile2 -outfile=$outfile`;
-	  }
-	elsif ( $method eq "clustalo")
-	  {
-	    
-	    `clustalo --p1 $profile1 --p2 $profile2 -o $outfile --force`;
-	  }
-	elsif ( $method eq "hhalign")
-	  {
-	    hhalign ( $profile1,$profile2,$outfile,$param);
-	  }
-	else
-	  {
-	    `$method -profile1=$profile1 -profile2=$profile2 -outfile=$outfile $param> /dev/null 2>/dev/null`;
-	  }
-	myexit ($EXIT_SUCCESS);
+  {
+    my ($mode, $profile1, $profile2, $method, $param, $outfile)=@_;
+    
+    
+    if ($method eq "clustalw")
+      {
+	`clustalw -profile1=$profile1 -profile2=$profile2 -outfile=$outfile`;
       }
+    elsif ( $method eq "clustalo")
+      {
+	
+	`clustalo --p1 $profile1 --p2 $profile2 -o $outfile --force`;
+      }
+    elsif ( $method eq "hhalign")
+      {
+	hhalign ( $profile1,$profile2,$outfile,$param);
+      }
+    else
+      {
+	`$method -profile1=$profile1 -profile2=$profile2 -outfile=$outfile $param> /dev/null 2>/dev/null`;
+      }
+    myexit ($EXIT_SUCCESS);
+  }
 
 sub pg_is_installed
   {
@@ -1305,6 +1352,29 @@ sub check_file
       }
     }
 sub hhalign
+  {
+    my ($aln1, $aln2, $outfile, $param)=@_;
+    my $hh=$ENV{"HHALIGN_4_TCOFFEE"};
+    
+    
+    if ($hh)
+      {
+	
+	#external_hhalign
+	# set via HHALIGN_4_TCOFFEE
+	#<pg> -profile1 <fasta_prf with seq1 top> -profile2 <fasta profile with seq2 top> -outfile < fasta alignmentof seq1 and 2 | tc_lib of seq 1 and 2>
+	
+	safe_system ("$hh -method=align -profile1=$profile1 -profile2=$profile2 -outfile=$outfile");
+      }
+    else
+      {
+	&local_hhalign ($aln1, $aln2, $outfile, $param);
+      }
+  }
+
+    
+    
+sub local_hhalign
   {
     my ($aln1, $aln2, $outfile, $param)=@_;
     my $h1, $h2;

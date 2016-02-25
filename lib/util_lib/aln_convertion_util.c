@@ -5868,11 +5868,15 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       S=seq2template_seq (S,buf, F);
       return S;
     }
+  else if (strm ( template_list, "HH"))
+    {
+      sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#psiprofile_template@database#%s@method#hh@cache#%s@minid#%d@maxid#%d@mincov#%d@trim#%d@server#%s@type#_R_", prot_db,get_cache_dir(),BmI,BMI,BmC,Trim,server);
+      S=seq2template_seq (S,buf, F);
 
+      return S;
+    }
   else if (strm ( template_list, "PSIBLAST"))
     {
-
-
       check_blast_is_installed(server);
     
       sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#psiprofile_template@database#%s@method#psiblast@cache#%s@minid#%d@maxid#%d@mincov#%d@trim#%d@server#%s@type#_R_", prot_db,get_cache_dir(),BmI,BMI,BmC,Trim,server);

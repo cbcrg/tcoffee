@@ -1134,7 +1134,7 @@ Constraint_list * profile_pair (TC_method *M , char *in_seq, Constraint_list *CL
 	
 	
 
-	if ( strm (M->executable2, "hhalign"))
+	if ( strm (M->executable2, "hhalign") && !getenv ("HHALIGN_4_TCOFFEE"))
 		return hh_pair (M ,in_seq, CL);
 
 	if ( M->executable2[0]=='\0')

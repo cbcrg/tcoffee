@@ -51,10 +51,6 @@ for ($a=0; $a<@ARGV; $a++)
       {
 	$action=$v;
       }
-    elsif ($v eq "-mp3")
-      {
-	$action=$v;
-      }
     elsif ($v eq "-title")
       {
 	$title=$ARGV[++$a];
@@ -1349,3 +1345,59 @@ sub rename_author_dir
   }
        
 	
+sub rec_flac2mp3
+  {
+    my $d1=shift;
+    my $dh1=new DirHandle;
+    opendir ($dh1, $d1);
+    my @l1=readdir($dh1);
+    closedir($dh1);
+    
+    foreach my $d2 (@l1)
+      {
+	if ($d2 eq "." || $d2 eq "..")
+	  {
+	    ;
+	  }
+	elsif (-d "$d1/$d2")
+	  {
+	    rec_flac2mp3 ("$d1/$d2");
+	  }
+	elsif ( -e 
+	  {
+	    $ren=1;
+	    $out="$in";
+	    $out=~s/mp3\.mp3/mp3/;
+	  }
+	elsif ( $in =~/mp3\.mp3/)
+	  {
+	    $ren=1;
+	    $out="$in";
+	    $out=~s/mp3\.mp3/\.mp3/;
+	  }
+	elsif ( $in =~/mp3.*mp3/)
+	  {
+	    $ren=1;
+	    $out=$in;
+	    $out=~s/mp3//g;
+	    $out="$out\mp3";
+	    
+	    print "$out\n";
+	  }
+	elsif ( $d2 =~/MP3/)
+	  {
+	    $ren=1;
+	    $out=$in;
+	  }
+	
+	    
+	if ($ren)
+	  {
+	    print "--$d1/$d2\n";
+	    print "--$d1/$out\n\n";
+	    
+	    rename("$d1/$d2", "$d1/$out");
+	  }
+      }
+    return ;
+  }
