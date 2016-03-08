@@ -489,7 +489,7 @@ sub hh2profile_template
       #This function should input a querry and a database and return as output 
       $profile_name="$s{$seq}{name}.prf";
       
-      safe_system  ("$hh -name=$s{$seq}{name}-method=search -db=$db -infile=seqfile -outfile=outfile");
+      safe_system  ("$hh -name=$s{$seq}{name} -method=search -db=$db -seq=seqfile -outfile=outfile");
       
       print stdout "!\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$method/$db][$CACHE_STATUS]\n";
       print R ">$s{$seq}{name} _R_ $profile_name\n";
@@ -1364,7 +1364,7 @@ sub hhalign
 	# set via HHALIGN_4_TCOFFEE
 	#<pg> -profile1 <fasta_prf with seq1 top> -profile2 <fasta profile with seq2 top> -outfile < fasta alignmentof seq1 and 2 | tc_lib of seq 1 and 2>
 	
-	safe_system ("$hh -method=align -profile1=$profile1 -profile2=$profile2 -outfile=$outfile");
+	safe_system ("$hh -method=align -profile1=$aln1 -profile2=$aln2 -outfile=$outfile");
       }
     else
       {
