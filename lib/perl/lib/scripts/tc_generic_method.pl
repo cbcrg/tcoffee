@@ -439,7 +439,7 @@ sub psiblast2profile_template
 
       if ( -e $psiblast_output)
 	{
-	  %profile=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$psiblast_output);
+	  my %profile=blast_xml2profile($s{$seq}{name}, $s{$seq}{seq},$maxid, $minid,$mincov,$psiblast_output);
 	  unlink ($psiblast_output);
 	  
 	  $profile_name="$s{$seq}{name}.prf";
@@ -482,22 +482,26 @@ sub hh2profile_template
   #print stdout "\n";
   foreach $seq (keys(%s))
     {
+      my ($profile_name, $nseq);
       open (F, ">seqfile");
       print (F ">$A\n$s{$seq}{seq}\n");
       close (F);
       
-      #This function should input a querry and a database and return as output 
+      #This function should input a querry and a database and return as output a fasta MSA with quesry on top
       $profile_name="$s{$seq}{name}.prf";
+      $profile_name=&clean_file_name ($profile_name);
+      unshift (@profiles, $profile_name);
       
-      safe_system  ("$hh -name=$s{$seq}{name} -method=search -db=$db -seq=seqfile -outfile=outfile");
       
-      print stdout "!\tProcess: >$s{$seq}{name} _R_ $profile_name [$profile{n} Seq.] [$method/$db][$CACHE_STATUS]\n";
+      safe_system  ("$hh -name=$s{$seq}{name} -method=search -db=$db -seq=seqfile -outfile=$profile_name");
+      if (-e $profile_name){$nseq=fasta2nseq($profile_name);}
+      
+      print stdout "!\tProcess: >$s{$seq}{name} _R_ $profile_name [$nseq Seq.] [$method/$db][$CACHE_STATUS]\n";
       print R ">$s{$seq}{name} _R_ $profile_name\n";
     }
   close (R);
   &set_temporary_dir ("unset",$mode, $method,"result.aln",$outfile, @profiles);
 }
-
 
 sub blast2pdb_template_test
     {
@@ -3632,3 +3636,18 @@ sub nw
 	return ($sA,$sB);
       }
       
+sub fasta2nseq
+	{
+	  
+	  my $f=@_[0];
+	  my $nseq;
+
+	  open (F, "$f") or return 0;
+	  while (<F>)
+	    {
+	      if ($_=~/\>/){$nseq++;}
+	    }
+	  close (F);
+	  return $nseq;
+	}
+	
