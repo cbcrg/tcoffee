@@ -155,6 +155,7 @@ int apdb ( int argc, char *argv[])
 	char *strike;
 
 	char *pdb_db;
+	char *pdm;
 	char *prot_db;
 	int min_ncol;
 
@@ -855,6 +856,25 @@ declare_name (prot_blast_server);
 
 
 
+ declare_name (pdm);
+ get_cl_param(\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-dm"    ,\
+			    /*Flag*/      &garbage      ,\
+			    /*TYPE*/      "W_F"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "print distance matrix to file Column_<N>.dm"          ,\
+			    /*Parameter*/&pdm       ,\
+			    /*Def 1*/    "no"      ,\
+			    /*Def 2*/    "yes"      ,\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+		   );
+ if (strm (pdm, "yes"))set_string_variable ("dm", pdm);
+
  declare_name (pdb_db);
  get_cl_param(\
 			    /*argc*/      argc          ,\
@@ -1024,6 +1044,9 @@ declare_name (prot_db);
 		  {
 		    F=parse_fname (aln);
 		  }
+		
+		if ( get_string_variable ("dm"))set_string_variable ("dm", F->name);
+		
 
 		for ( a=0; a< S->nseq; a++)
 		  {
@@ -2351,7 +2374,7 @@ int column_is_suitable4trmsd(int col1,Alignment *A, int **pos, Pdb_param *PP, Co
 
 
 
-NT_node trmsdmat2tree (float **dm, int **count,Alignment *A);
+NT_node trmsdmat2tree (float **dm, int **count,Alignment *A, int colN);
 Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gapped, int min_ncol4trmsd)
      {
 
@@ -2605,7 +2628,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 
 
 
-	     if ((POS[col1]=trmsdmat2tree (dm, count, A)))
+	     if ((POS[col1]=trmsdmat2tree (dm, count, A, col1+1)))
 	       {
 		 T1[ntree]=POS[col1];
 		 fprintf (tl, "\n>Tree_%d Column\n", col1+1);
@@ -2639,7 +2662,7 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 if (print_subtrees)
 	   {
 
-	     if ( (BT0=trmsdmat2tree (tdm, tcount, A)))
+	     if ( (BT0=trmsdmat2tree (tdm, tcount, A, 0)))
 	       {
 		 vfclose (print_tree (BT0,"newick", vfopen (struc_tree0, "w")));
 		 display_output_filename( stderr,"Tree","newick",struc_tree0, CHECK);
@@ -2703,14 +2726,14 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 exit (EXIT_SUCCESS);
 	 return NULL;
      }
-NT_node trmsdmat2tree (float **dm, int **count,Alignment *A)
+NT_node trmsdmat2tree (float **dm, int **count,Alignment *A, int colN)
 {
   float min, max;
   int s1, s2;
   NT_node T;
   int ns;
   int **dm_int;
-
+  char *dataset;
   ns=A->nseq;
   for (s1=0; s1<ns-1; s1++)
     for (s2=s1+1; s2<ns; s2++)
@@ -2725,12 +2748,33 @@ NT_node trmsdmat2tree (float **dm, int **count,Alignment *A)
 	max=MAX(dm[s1][s2], max);
       }
   dm_int=declare_int (ns, ns);
+  
+  
   for (s1=0; s1<A->nseq-1; s1++)
     for (s2=s1+1; s2<A->nseq; s2++)
       {
 	dm_int[s1][s2]=dm_int[s2][s1]=((dm[s1][s2])/(max))*100;
       }
+
+  if ( colN && (dataset=get_string_variable ("dm"))!=NULL)
+    {
+      FILE *dmf;
+      char dmfn[1000];
+      sprintf (dmfn,"%s.column_%d.dm", dataset,colN);
+      dmf=vfopen (dmfn, "w");
+      fprintf (dmf, "%d\n",A->nseq);
+      for (s1=0; s1<A->nseq; s1++)
+	{
+	  fprintf (dmf, "%-20s ", A->name[s1]);
+	  for ( s2=0; s2<A->nseq; s2++)
+	    fprintf (dmf, "%3d ", dm_int[s1][s2]);
+	  fprintf (dmf, "\n"); 
+	}
+      vfclose (dmf);
+    }
+  
   T=compute_std_tree_2(A, dm_int, "_TMODE_upgma");
+    
   free_int (dm_int, -1);
   for (s1=0; s1<ns; s1++)for ( s2=0; s2<ns; s2++){dm[s1][s2]=count[s1][s2]=0;}
   return T;
