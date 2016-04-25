@@ -176,7 +176,8 @@ int seq_reformat ( int argc, char **in_argv)
 
 		fprintf ( stdout, "\n     +backtranslate.......Random Backtranslation");
 		fprintf ( stdout, "\n     +complement..........Produces the reverse complement");
-
+		fprintf ( stdout, "\n     +shuffle.<N>.<n>.<m>.Produces N replicates named <n>.<N>.shuffled.fa");
+		fprintf ( stdout, "\n     .....<m>: seq or aln.Replicates keep gaps (aln) or not (seq). Default is seq");
 		fprintf ( stdout, "\n     +reorder.............Reorders sequences of <in> according to <in2>");
 		fprintf ( stdout, "\n     .........random......Random_order");
 		fprintf ( stdout, "\n     .........tree........Tree Order (in2)");
@@ -11799,10 +11800,13 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       D1->A=RO2;
 	       D1->S=aln2seq(D1->A);
 	 }
-
+       else if ( strm (action, "shuffle"))
+	 {
+	   D1->A=shuffle_aln (D1->A, ATOI_ACTION(1), ACTION(2), ACTION (3));
+	 }
        else if ( strm (action, "reorder"))
 	 {
-
+	   
 	   if ( n_actions==2 && strm (action_list[1], "random"))
 	     {
 	       D1->A=reorder_aln ( D1->A, NULL, (D1->A)->nseq);

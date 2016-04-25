@@ -99,6 +99,8 @@ static char *get_dna_defaults(char *buf, char *type);
 static char *get_cdna_defaults(char *buf, char *type);
 static char *get_repeat_defaults(char *buf, char *type);
 static char *get_sample_defaults(char *buf, char *type);
+static char *get_highlow_defaults(char *buf, char *type);
+
 static char *get_low_memory_defaults( char *buf, char *type);
 
 static char *get_genepredx_defaults(char *buf, char *type);
@@ -768,7 +770,7 @@ if (t_coffee_defaults_flag)
 	 else if ( strm (special_mode, "expresso"))new_arg=get_expresso_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "repeats"))new_arg=get_repeat_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "sample"))new_arg=get_sample_defaults(NULL,lseq_type);
-	 
+	 else if ( strm (special_mode, "highlow"))new_arg=get_highlow_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "psicoffee"))new_arg=get_psicoffee_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "procoffee"))new_arg=get_procoffee_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "blastr"))new_arg=get_blastr_defaults(NULL,lseq_type);
@@ -5926,7 +5928,15 @@ char *get_sample_defaults(char *buf, char *type)
      
      return buf;
    }
+char *get_highlow_defaults(char *buf, char *type)
+   {
 
+     if (buf==NULL)buf=(char*)vcalloc (1000, sizeof (char));
+
+     buf=strcat (buf,"-in Xblosum62mt -dp_mode gotoh_pair_wise_test");
+     
+     return buf;
+   }
 
 
 int check_configuration4program()

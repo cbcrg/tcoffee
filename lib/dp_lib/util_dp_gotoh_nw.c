@@ -1089,7 +1089,322 @@ int gotoh_pair_wise (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
 
 	return score;
 	}
+int gotoh_pair_wise_test (Alignment *A,int*ns, int **l_s,Constraint_list *CL)
+	{
+/*******************************************************************************/
+/*                NEEDLEMAN AND WUNSCH (GOTOH)                                 */
+/*                                                                             */
+/*	makes DP between the the ns[0] sequences and the ns[1]                 */
+/*                                                                             */
+/*	for MODE, see the function  get_dp_cost                                */
+/*******************************************************************************/
+	  
 
+/*TREATMENT OF THE TERMINAL GAP PENALTIES*/
+/*TG_MODE=0---> gop and gep*/
+/*TG_MODE=1---> ---     gep*/
+/*TG_MODE=2---> ---     ---*/
+
+
+	    int TG_MODE;
+	    int l_gop, l_gep;
+	    int gop, gep;
+	    int maximise;
+/*VARIANLES FOR THE MULTIPLE SEQUENCE ALIGNMENT*/
+	int a, b, i, j;
+
+	int *cc;
+	int *dd,*ddg;
+	int   e, eg;
+
+	int lenal[2], len;
+	int t, c=0,s, ch;
+	int sub;
+	int fop;
+	int score=0;
+        int **pos0;
+	static char **al;
+	char **aln;
+	int ala, alb,LEN;
+	char *buffer;
+	char *char_buf;
+/*trace back variables       */
+	static int **trace;
+	static int **bit;
+	int *bi;
+	int *tr;
+	int dim;
+	int ibit=0;
+	int k;
+	static int sample=0;//road==0, random tie; road=1: upper road; road=2 lower road;
+	static int set_sample;
+	
+
+	/********Prepare penalties*******/
+	gop=CL->gop*SCORE_K;
+	gep=CL->gep*SCORE_K;
+	TG_MODE=CL->TG_MODE;
+	maximise=CL->maximise;
+
+
+/********************************/
+/*CLEAN UP AFTER USE*/
+	if ( A==NULL)
+	   {
+	   free_int (trace,-1);
+	   free_int (bit, -1);
+	   trace=NULL;
+	   bit=NULL;
+
+	   free_char (al,-1);
+	   al=NULL;
+	   return 0;
+	   }
+
+/*DO MEMORY ALLOCATION FOR DP*/
+
+	if (!set_sample)
+	  {
+	    set_sample=1;
+	    sample=atoigetenv ("SAMPLE_DP_4_TCOFFEE");
+	  }
+	
+	lenal[0]=strlen (A->seq_al[l_s[0][0]]);
+	lenal[1]=strlen (A->seq_al[l_s[1][0]]);
+	len= MAX(lenal[0],lenal[1])+1;
+
+	buffer=(char*)vcalloc ( 2*len, sizeof (char));
+        al=declare_char (2, 2*len);
+
+	char_buf=(char*) vcalloc (2*len, sizeof (char));
+
+
+	dd =(int*)vcalloc (len, sizeof (int));
+
+
+	cc =(int*) vcalloc (len, sizeof (int));
+	ddg=(int*)vcalloc (len, sizeof (int));
+
+
+
+
+
+	dim=(trace==NULL)?0:read_size_int ( trace,sizeof (int*));
+	trace    =realloc_int ( trace,dim,dim,MAX(0,len-dim), MAX(0,len-dim));
+	bit      =realloc_int ( bit,dim,dim,MAX(0,len-dim), MAX(0,len-dim));
+
+/*END OF MEMORY ALLOCATION*/
+
+
+		/*
+		0(s)   +(dd)
+		  \      |
+		   \     |
+		    \    |
+		     \   |
+		      \  |
+		       \ |
+		        \|
+		-(e)----O
+		*/
+
+	pos0=aln2pos_simple ( A,-1, ns, l_s);
+
+
+	cc[0]=0;
+	tr=trace[0];
+	bi=bit[0];
+	tr[0]=1;
+	for ( j=1; j<=lenal[1]; j++)tr[j]=-1;
+
+	t=(TG_MODE==0)?gop:0;
+
+	gop=0;
+	gep=-1;
+	for (cc[0]=0,j=1; j<=lenal[1]; j++)
+	    {
+
+	    l_gop=(TG_MODE==0)?gop:0;
+	    l_gep=(TG_MODE==2)?0:gep;
+
+	    cc[j]=t=t+l_gep;
+	    dd[j]=  t+  gop;
+	    }
+
+	t=(TG_MODE==0)?gop:0;
+
+	for (i=1; i<=lenal[0];i++)
+			{
+			  tr=trace[i];
+			  bi=bit[i];
+			  s=cc[0];
+
+			  l_gop=(TG_MODE==0)?gop:0;
+			  l_gep=(TG_MODE==2)?0:gep;
+
+
+
+			  cc[0]=c=t=t+l_gep;
+			  e=t+  gop;
+			  tr[0]=1;
+
+
+
+			  for (eg=0,j=1; j<=lenal[1];j++)
+			    {
+
+			      sub=(CL->get_dp_cost) (A, pos0, ns[0], l_s[0], i-1, pos0, ns[1], l_s[1],j-1,CL);
+			      
+			      /*get the best Insertion*/
+			      l_gop=(i==lenal[0] || i==1 )?((TG_MODE==0)?gop:0):gop;
+			      l_gep=(i==lenal[0] || i==1)?((TG_MODE==2)?0:gep):gep;
+
+
+			      if ( a_better_than_b ( e,c+l_gop, maximise))eg++;
+			      else eg=1;
+			      e=best_of_a_b (e, c+l_gop, maximise)+l_gep;
+
+			      /*Get the best deletion*/
+			      l_gop=(j==lenal[1] || j==1)?((TG_MODE==0)?gop:0):gop;
+			      l_gep=(j==lenal[1] || j==1)?((TG_MODE==2)?0:gep):gep;
+
+
+			      if ( a_better_than_b ( dd[j], cc[j]+l_gop, maximise))ddg[j]++;
+			      else ddg[j]=1;
+			      dd[j]=best_of_a_b( dd[j], cc[j]+l_gop,maximise)+l_gep;
+
+			      //if      (dd[j]>=e && dd[j]>=(s+sub)){c=dd[j];fop=1;}
+			      //else if ((s+sub)>=e){c=(s+sub); fop=0;}
+			      //else {c=e; fop=-1;}
+			      
+			      if      (e>=dd[j] && e>=(s+sub)){c=e;fop=-1;}
+			      else if ((s+sub)>=dd[j]){c=(s+sub); fop=0;}
+			      else    {c=dd[j]; fop=1;}
+
+			      bi[j]=0;
+			      if (c==e){bi[j]++;}
+			      if (c==(s+sub)){bi[j]++;}
+			      if (c==(dd[j])){bi[j]++;}
+			      //bi[j]--;
+			      
+			      s=cc[j];
+			      cc[j]=c;
+
+
+
+
+
+			      if ( fop<0)
+				{tr[j]=(TRACE_TYPE)fop*eg;
+				}
+			      else if ( fop>0)
+				{tr[j]=(TRACE_TYPE)fop*ddg[j];
+				}
+			      else if (fop==0)
+				{tr[j]=(TRACE_TYPE)0;
+				}
+			      fop= -2;
+			    }
+
+			}
+
+	score=c;
+
+        i=lenal[0];
+	j=lenal[1];
+	ala=alb=0;
+
+	if (!A->ibit)A->ibit=1; //set the bit counter on
+	while (i>=0 && j>=0 && ((i+j)!=0))
+			{
+			  if ( i==0)
+				k=-1;
+			else if ( j==0)
+				k=1;
+			else if ( j==0 && i==0)
+				k=1;
+			else
+			  {
+			    k=trace[i][j];
+			    A->ibit*=bit[i][j];
+			  }
+
+
+			if (k==0)
+			  {
+
+			    al[0][ala++]=1;
+			    al[1][alb++]=1;
+			    i--;
+			    j--;
+			  }
+			else if (k>0)
+			  {
+
+			    for ( a=0; a< k; a++)
+			      {
+				al[0][ala++]=1;
+				al[1][alb++]=0;
+				i--;
+			      }
+			  }
+			else if (k<0)
+			  {
+
+			    for ( a=0; a>k; a--)
+			      {
+				al[0][ala++]=0;
+				al[1][alb++]=1;
+				j--;
+			      }
+			  }
+			}
+
+	LEN=ala;
+	c=LEN-1;
+
+
+
+	invert_list_char ( al[0], LEN);
+	invert_list_char ( al[1], LEN);
+	if ( A->declared_len<=LEN)A=realloc_aln2  ( A,A->max_n_seq, 2*LEN);
+	aln=A->seq_al;
+
+	for ( c=0; c< 2; c++)
+	    {
+	    for ( a=0; a< ns[c]; a++)
+		{
+		ch=0;
+		for ( b=0; b< LEN; b++)
+		    {
+		    if (al[c][b]==1)
+			char_buf[b]=aln[l_s[c][a]][ch++];
+		    else
+			char_buf[b]='-';
+		   }
+		char_buf[b]='\0';
+		sprintf (aln[l_s[c][a]],"%s", char_buf);
+		}
+	     }
+
+	A->len_aln=LEN;
+	A->nseq=ns[0]+ns[1];
+
+
+	vfree ( cc);
+	vfree (dd);
+	vfree (ddg);
+	vfree (buffer);
+	vfree (char_buf);
+
+	free_char ( al, -1);
+	free_int (pos0, -1);
+
+
+
+
+	return score;
+	}
 
 int get_transition_cost (Alignment *A, int **posi, int ni, int *li, int i, int **posj, int nj, int *lj, int j,Constraint_list *CL);
 int gotoh_pair_wise_lgp_sticky ( Alignment *A, int *ns, int **l_s, Constraint_list *CL)

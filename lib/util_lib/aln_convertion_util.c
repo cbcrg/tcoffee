@@ -6879,7 +6879,9 @@ Alignment * aln2random_order (Alignment *A)
   char **name_list;
 
   name_list=name2random_subset (A->name, A->nseq, A->nseq);
+
   A=reorder_aln (A, name_list, A->nseq);
+
   free_char (name_list, -1);
   return A;
 }
@@ -6953,8 +6955,64 @@ Alignment * aln2scramble_seq (Alignment *A)
   return aln2random_order (A);
 }
 
+Alignment * shuffle_aln ( Alignment *A,int N, char *name_i, char *mode)
+{
+  int **index;
+  int a, b;
+  FILE *fp;
+  FILE *fp2;
+  char *fname;
+  char *name;
+  char *tmp;
 
+  
+  tmp=vtmpnam (NULL);
+  fp2=vfopen (tmp, "w");
+  index=declare_int (A->nseq, 2);
+  
+  if (!name_i){name= (char*)vcalloc (100, sizeof (char)); sprintf (name, "replicate");}
+  else 
+    {
+      name=(char*)vcalloc (strlen (name_i)+1, sizeof(char));
+      sprintf (name, "%s", name_i);
+    }
+  fname=(char*)vcalloc ( strlen (name)+100, sizeof (char));
+  
 
+  if (!mode)
+    for (a=0; a<A->nseq; a++)
+      {
+	ungap (A->seq_al[a]);
+      }
+  
+  
+  for (a=0; a<N; a++)
+    {
+      for (b=0; b<A->nseq; b++)
+	{
+	  index[b][0]=b;
+	  index[b][1]=rand()%(A->nseq*100);
+	}
+      sort_int (index,2,1, 0, A->nseq-1);
+      sprintf (fname, "%s.%d.shuffled.fa",name,a+1);
+      fprintf (fp2,">%s\n", fname);
+      
+      fp=vfopen (fname, "w");
+      for (b=0;b<A->nseq; b++)
+	{
+	  int i=index[b][0];
+	  fprintf (fp,">%s %s\n%s\n", A->name[i], A->seq_comment[i], A->seq_al[i]);
+	}
+      vfclose (fp);
+    }
+  
+  vfclose (fp2);
+  vfree (name); vfree (fname);
+  free_aln (A);
+  A=main_read_aln (tmp, NULL);
+  return A;
+}
+	  
 Alignment * reorder_aln ( Alignment *A, char **name, int nseq)
 {
 	int a,sn;
@@ -6963,34 +7021,35 @@ Alignment * reorder_aln ( Alignment *A, char **name, int nseq)
 	int *tpp_int;
 
 	if ( name==NULL)return aln2random_order(A);
-
-
+	
+	
 	BUF=copy_aln ( A,NULL);
 	for ( a=0; a<nseq; a++)
-	{
-		sn =name_is_in_list ( name[a],BUF->name, A->nseq,STRING);
-		if ( sn==-1)
-		{
-			;
+	  {
+	    sn =name_is_in_list ( name[a],BUF->name, A->nseq,STRING);
+	    if ( sn==-1)
+	      {
+		;
+	      }
+	    else
+	      {
+		SWAPP(A->order[n], BUF->order[sn], tpp_int);
+		sprintf ( A->name[n], "%s", BUF->name[sn]);
+		sprintf ( A->seq_al[n], "%s",BUF->seq_al[sn]);
+		sprintf ( A->seq_comment[n], "%s",  BUF->seq_comment[sn]);
+		n++;
 		}
-		else
-		{
-			SWAPP(A->order[n], BUF->order[sn], tpp_int);
-			sprintf ( A->name[n], "%s", BUF->name[sn]);
-			sprintf ( A->seq_al[n], "%s",BUF->seq_al[sn]);
-			sprintf ( A->seq_comment[n], "%s",  BUF->seq_comment[sn]);
-			n++;
-		}
-	}
-
+	  }
+	
 	for ( a=n; a< A->nseq; a++)
-		A->name[a][0]=A->seq_al[a][0]='\0';
+	  A->name[a][0]=A->seq_al[a][0]='\0';
 	A->nseq=n;
-
+	
 	if ( A->A)A->A=reorder_aln(A->A, name, nseq);
+	
 	free_aln (BUF);
 	return A;
-}
+ }
 
 
 

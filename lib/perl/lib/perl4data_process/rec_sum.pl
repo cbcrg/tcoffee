@@ -22,6 +22,11 @@ foreach $value ( @ARGV)
 	    {
 	    ;
 	    }
+	elsif($value eq "-s")
+	     {
+	       $step=$ARGV[++$np];
+	       $np++;
+	     }
 	elsif($value eq "-print_all")
 	    {
 	    $print_sd=$print_avg=$print_n=$print_sum=1;
@@ -99,6 +104,7 @@ foreach $value ( @ARGV)
 	    print STDOUT "       -i:<Interval size on the X>,...............<Def=0>\n";
 	    print STDOUT "       -i:<0:only one interval>\n";
 	    print STDOUT "       -r:<Range of the X>\n";
+	    print STDOUT "       -s:<Step on the  X, 0 means non sliding bins>\n";
 	    print STDOUT "       -sd: print standard deviation on the Y";
 	    print STDOUT "       -h  : print column header \n";
 	    exit (0);
@@ -137,73 +143,125 @@ if ($file eq "stdin")
 
 
 
-
-if ($interval && $max)
+if ($interval && $step)
   {
-    $interval_size=($max-$min)/$interval;
-  }
-elsif ($interval)
-  {
-    open(F,$file);  
-    my $set_max=0;
-    my $set_min=0;
+    my $nl;
+    open(F,$file);
     while (<F>)
       {
-	my $v=$_;
-	chomp($v);
-	print "--$v--";
+	$line=$_;
 	
-	if ($v<$min ||!$set_min){$set_min=1;$min=$v;}
-	if ($v>$max ||!$set_max){$set_max=1;$max=$v;}
+	if (!/\S/){next;}
+	@list=($line=~/(\S+)/g);
+	$val{$nl}{x}=$list[$x_field];
+	$val{$nl}{y}=$list[$y_field[0]];
+	$nl++
       }
     close (F);
-    print "$min $max uuuu";
-    $interval_size=($max-$min)/$interval;
-  }
-open(F,$file);  
-while (<F>)
-  {
-    $line=$_;
-    if (!/\S/){next;}
-    @list=($line=~/(\S+)/g);
     
-    if ($interval==0){$bin=0;}
-    else{$bin=int (($list[$x_field]-$min)/($interval_size));}
-
-    
-    if ($bin && $bin==$interval){$bin--;}
-    for ( $a=0; $a<$nyf; $a++)
+    for (my $a=$min; $a<($max+$interval); $a+=$step)
       {
-	$sum{$a}{$bin}+=$list[$y_field[$a]];
-	$sum2{$a}{$bin}+=$list[$y_field[$a]]*$list[$y_field[$a]];
-	$n{$a}{$bin}++;
+	my ($avgx, $avgy, $cn);
+	
+	my $rmin=$a-$interval;
+	my $rmax=$a;
+	$cn=0;
+	for (my $b=0; $b<$nl; $b++)
+	  {
+	    my $x=$val{$b}{x};
+	    my $y=$val{$b}{y};
+	    if ($x<=$rmax && $x>=$rmin)
+	      {
+		$avgx+=$x;
+		$avgy+=$y;
+		$cn++;
+		$tcn++;
+		$val{$b}{used}=1;
+	      }
+	  }
+	if ($cn)
+	  {
+	    $avgx/=$cn;
+	    $avgy/=$cn;
+	  }
+	printf "%.3f %.3f %.3f\n", $avgx, $avgy, $avgx-$avgy;
+      }
+    for (my $a=0; $a<$nl; $a++)
+      {
+	if ( !$val{$a}{used})
+	  {
+	    print "---$val{$a}{x}; $val{$a}{y}\n";
+	  }
       }
   }
-
-if (!$interval){$interval=1;}
-for ( $a=0; $a<$interval; $a++)
+else
   {
-    printf ( "%4d %4d ", $interval_size*$a, $interval_size*($a+1));
-    for ( $b=0; $b<$nyf; $b++)	
+    if ($interval && $max)
       {
-	$i=$interval*$a;
-	if ( $n{$b}{$a}==0)
-	  {
-	    $avg=0;
-	    $sd=0;
-	  }
-	else
-	  {
-	    $avg=$sum{$b}{$a}/$n{$b}{$a};
-	    $sd=sqrt($sum2{$b}{$a}*$n{$b}{$a}-$sum{$b}{$a}*$sum{$b}{$a})/($n{$b}{$a}*$n{$b}{$a});
-	  }
-	if ($print_n) {printf "%15.4f ", $n{$b}{$a};}
-	if ($print_sum){printf "%15.4f ", $sum{$b}{$a};}
-	if ($print_avg){printf "%15.4f ", $avg}
-	if ($print_sd) {printf "%15.4f ", $sd;}
+	$interval_size=($max-$min)/$interval;
       }
-    printf ("\n");
+    elsif ($interval)
+      {
+	open(F,$file);  
+	my $set_max=0;
+	my $set_min=0;
+	while (<F>)
+	  {
+	    my $v=$_;
+	    chomp($v);
+	    print "--$v--";
+	    
+	    if ($v<$min ||!$set_min){$set_min=1;$min=$v;}
+	    if ($v>$max ||!$set_max){$set_max=1;$max=$v;}
+	  }
+	close (F);
+	print "$min $max uuuu";
+	$interval_size=($max-$min)/$interval;
+      }
+    open(F,$file);  
+    while (<F>)
+      {
+	$line=$_;
+	if (!/\S/){next;}
+	@list=($line=~/(\S+)/g);
+	
+	if ($interval==0){$bin=0;}
+	else{$bin=int (($list[$x_field]-$min)/($interval_size));}
+	
+	
+	if ($bin && $bin==$interval){$bin--;}
+	for ( $a=0; $a<$nyf; $a++)
+	  {
+	    $sum{$a}{$bin}+=$list[$y_field[$a]];
+	    $sum2{$a}{$bin}+=$list[$y_field[$a]]*$list[$y_field[$a]];
+	    $n{$a}{$bin}++;
+	  }
+      }
+    
+    if (!$interval){$interval=1;}
+    for ( $a=0; $a<$interval; $a++)
+      {
+	printf ( "%4d %4d ", $interval_size*$a, $interval_size*($a+1));
+	for ( $b=0; $b<$nyf; $b++)	
+	  {
+	    $i=$interval*$a;
+	    if ( $n{$b}{$a}==0)
+	      {
+		$avg=0;
+		$sd=0;
+	      }
+	    else
+	      {
+		$avg=$sum{$b}{$a}/$n{$b}{$a};
+		$sd=sqrt($sum2{$b}{$a}*$n{$b}{$a}-$sum{$b}{$a}*$sum{$b}{$a})/($n{$b}{$a}*$n{$b}{$a});
+	      }
+	    if ($print_n) {printf "%15.4f ", $n{$b}{$a};}
+	    if ($print_sum){printf "%15.4f ", $sum{$b}{$a};}
+	    if ($print_avg){printf "%15.4f ", $avg}
+	    if ($print_sd) {printf "%15.4f ", $sd;}
+	  }
+	printf ("\n");
+      }
   }
-
 
 if ( $remove_file){unlink $file;}

@@ -214,8 +214,9 @@ char ** name2random_subset (char **in_name, int n_in, int n_out);
 Alignment * aln2random_order   ( Alignment  *A);
 Alignment * aln2scramble_seq  ( Alignment  *A);
 
+Alignment * shuffle_aln ( Alignment *A,int N, char *name_i, char *mode);
 Alignment * reorder_aln        ( Alignment  *A, char **name, int nseq);
-
+  
 char ** rm_name_tag (char **name, int nseq, char *tag);
 
 /******************************************************************************/

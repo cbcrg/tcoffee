@@ -5543,6 +5543,12 @@ Pwfunc get_pair_wise_function (Pwfunc pw,char *dp_mode, int *glocal)
 	sprintf (dpl[npw], "gotoh_pair_wise");
 	dps[npw]=GLOBAL;
 	npw++;
+	
+	pwl[npw]=gotoh_pair_wise_test;
+	sprintf (dpl[npw], "gotoh_pair_wise_test");
+	dps[npw]=GLOBAL;
+	npw++;
+	
 
 	pwl[npw]=gotoh_pair_wise_lgp;
 	sprintf (dpl[npw], "gotoh_pair_wise_lgp");
