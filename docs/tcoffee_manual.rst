@@ -1297,7 +1297,7 @@ You can also specify the sequences you want to keep. To do so, give a fasta file
 
 
 
-Identifying and Removing Outlayers
+Identifying and Removing Outliers
 ----------------------------------
 Sequences that are too distantly related from the rest of the set will sometimes have very negative effects on the overall alignment. To prevent this, it is advisable not to use them. This can be done when trimming the sequences. For instance,
 
@@ -1309,7 +1309,7 @@ Sequences that are too distantly related from the rest of the set will sometimes
 
 
 
-The symbol _O stands for Outlayers. It will lead to the removal of all the sequences that have less than 40% average accuracy with all the other sequences in the dataset.
+The symbol _O stands for Outliers. It will lead to the removal of all the sequences that have less than 40% average accuracy with all the other sequences in the dataset.
 
 
 Chaining Important Sequences
@@ -1317,7 +1317,7 @@ Chaining Important Sequences
 In order to align two distantly related sequences, most multiple sequence alignment packages perform better when provided with many intermediate sequences that make it possible to 'bridge' your two sequences. The modifier +chain makes it possible to extract from a dataset a subset of intermediate sequences that chain the sequences you are interested in.
 
 
-For instance, le us consider the two sequences:
+For instance, let us consider the two sequences:
 
 
 sp|P21844|MCPT5_MOUSE sp|P29786|TRY3_AEDAE
