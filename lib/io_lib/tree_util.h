@@ -105,7 +105,7 @@ NT_node  tree2collapsed_tree (NT_node T, int n, char **string);
 int main_compare_cog_tree (NT_node T1, char *cogfile);
 int main_compare_aln_tree (NT_node T1, Alignment *A, FILE *fp);
 int compare_aln_tree (NT_node T, Alignment *A, int *n, FILE *fp);
-Alignment * phylotrim (Alignment *A, char *Ns,  char *treemode, char *tempfile);
+Alignment * phylotrim (Alignment *A, NT_node T, char *Ns,  char *treemode, char *tempfile);
 int main_compare_splits (NT_node T1, NT_node T2, char *mode, FILE *fp);
 Tree_sim * tree_cmp( NT_node T1, NT_node T2);
 NT_node tree_scan (Alignment *A,NT_node RT, char *pscan, char *ptree);

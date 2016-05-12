@@ -1170,14 +1170,13 @@ Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **nargl);
 Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **nargl);
 Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narglist, char **arglist);
 
-Alignment * phylotrim (Alignment *A, char *Ns,  char *treemode, char *tempfile)
+Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char *tempfile)
 {
   int N, a, b;
-  NT_node RT;
   char *tmptree;
   char **arglist;
   int narglist=0;
-  
+  int free_rt=0;
  
   if (!Ns)N=1;
   else if (strstr (Ns, "split"))
@@ -1199,8 +1198,13 @@ Alignment * phylotrim (Alignment *A, char *Ns,  char *treemode, char *tempfile)
   arglist[narglist++]=treemode;
   if (tempfile)arglist[narglist++]=tempfile;
   
+  if (!RT)
+    {
+      RT=main_aln2tree(A,narglist, arglist);
+      free_rt=1;
+    }
   tmptree=vtmpnam (NULL);
-  vfclose (print_tree (RT=main_aln2tree(A,narglist, arglist), "newick", vfopen (tmptree, "w")));
+  vfclose (print_tree (RT,"newick", vfopen (tmptree, "w")));
  
   if (N>0)
     {
@@ -1208,7 +1212,7 @@ Alignment * phylotrim (Alignment *A, char *Ns,  char *treemode, char *tempfile)
 	{
 	  A=phylotrim1(A, tmptree,narglist, arglist);
 	}
-      free_tree (RT);
+      
     }
   else
     {
@@ -1250,10 +1254,10 @@ Alignment * phylotrim (Alignment *A, char *Ns,  char *treemode, char *tempfile)
 	  phylotrim2 (A, tmptree, sl[a], 0, narglist, arglist);
 	  phylotrim2 (A, tmptree, sl[a], 1, narglist, arglist);
 	}
-      free_tree (RT);  
+      
       free_int (sl, -1);
     }
-  
+  if (free_rt)free_tree (RT);
   
   myexit (EXIT_SUCCESS);
 }

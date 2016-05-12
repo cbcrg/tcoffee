@@ -12505,7 +12505,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
        else if ( strm (action, "phylotrim"))
 	 {
-	   D1->A=phylotrim (D1->A, ACTION(1), ACTION (2), ACTION (3));
+	   D1->A=phylotrim (D1->A,(D2)?D2->T:NULL, ACTION(1), ACTION (2), ACTION (3));
 
 	   free_sequence (D1->S,(D1->S)->nseq);
 	   D1->S=aln2seq (D1->A);
