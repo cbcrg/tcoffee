@@ -31,7 +31,7 @@ float sap2_neighborhood_match (Constraint_list *CL, int s1, int s2, int r1, int 
 /*                                                                                           */
 /*********************************************************************************************/
 Alignment * analyse_pdb ( Alignment *A, Alignment *ST, char *filename);
-Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *filename, int gapped, int min_ncol);
+Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *prefix, char *output,int gapped, int min_ncol);
 float **** analyse_pdb_residues ( Alignment *A, Constraint_list *CL, Pdb_param *pdb_param);
 
 float square_atom ( Atom *X);

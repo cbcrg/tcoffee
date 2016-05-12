@@ -539,8 +539,8 @@ int main_compare_splits ( NT_node T1, NT_node T2, char *mode,FILE *fp)
   T2=prune_tree (T2, S);
   T2=recode_tree(T2, S);
   
-  sl1=declare_int (10*S->nseq, S->nseq);
-  sl2=declare_int (10*S->nseq, S->nseq);
+  sl1=declare_int (10*S->nseq, S->nseq+1);
+  sl2=declare_int (10*S->nseq, S->nseq+1);
 
   n1=n2=0;
   tree2split_list (T1, S->nseq, sl1, &n1);
@@ -1164,6 +1164,194 @@ int print_node_list (NT_node T, Sequence *RS)
     }
   return 1;
 }
+Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **nargl);
+
+
+Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **nargl);
+Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narglist, char **arglist);
+
+Alignment * phylotrim (Alignment *A, char *Ns,  char *treemode, char *tempfile)
+{
+  int N, a, b;
+  NT_node RT;
+  char *tmptree;
+  char **arglist;
+  int narglist=0;
+  
+ 
+  if (!Ns)N=1;
+  else if (strstr (Ns, "split"))
+    {
+      N=-1;
+    }
+  else if (strstr (Ns, "%"))
+    {
+      sscanf (Ns, "%d%%", &N);
+      N=(A->nseq*100)/N;
+    }
+  else 
+    {
+      N=atoi (Ns);
+      N=MIN(N, ((A->nseq)-3));
+    }
+  
+  arglist=(char**)vcalloc (2, sizeof (char*));
+  arglist[narglist++]=treemode;
+  if (tempfile)arglist[narglist++]=tempfile;
+  
+  tmptree=vtmpnam (NULL);
+  vfclose (print_tree (RT=main_aln2tree(A,narglist, arglist), "newick", vfopen (tmptree, "w")));
+ 
+  if (N>0)
+    {
+      for (a=0; a<N; a++)
+	{
+	  A=phylotrim1(A, tmptree,narglist, arglist);
+	}
+      free_tree (RT);
+    }
+  else
+    {
+      Sequence *S;
+      int ns=0;
+      int **sl;
+      FILE *fp;
+      static char * alnF=vtmpnam (NULL);
+      
+      S=tree2seq(RT, NULL);
+      RT=recode_tree (RT, S);
+      fp=vfopen (alnF, "w");
+      for (a=0; a< S->nseq; a++)
+	{
+	  int i=name_is_in_list (S->name[a], A->name, A->nseq, 100);
+	  if (i>=0)fprintf ( fp, ">%s\n%s\n", A->name[i], A->seq_al[i]);
+	  else
+	    printf_exit (EXIT_FAILURE, stderr, "ERROR: %s is not in the aln [FATAL:%s]\n",S->name[a], PROGRAM);
+	}
+      vfclose (fp);
+      free_aln (A);
+      A=main_read_aln (alnF, NULL);
+      sl=declare_int (10*S->nseq, S->nseq+1);
+      tree2split_list (RT, S->nseq, sl, &ns);
+      
+      //add the leafs to the split list
+      for (a=0; a<A->nseq; a++)
+	{
+	  fprintf ( stdout, ">seq %s\n", A->name [a]);
+	  for (b=0; b<A->nseq; b++)
+	    {
+	      sl[ns][b]=(a==b)?1:0;
+	    }
+	  ns++;
+	}
+
+      for (a=0; a< ns; a++)
+	{
+	  phylotrim2 (A, tmptree, sl[a], 0, narglist, arglist);
+	  phylotrim2 (A, tmptree, sl[a], 1, narglist, arglist);
+	}
+      free_tree (RT);  
+      free_int (sl, -1);
+    }
+  
+  
+  myexit (EXIT_SUCCESS);
+}
+
+
+  
+Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narg, char **argl)
+{
+  Alignment *NA;
+  NT_node RT,NT;
+  Tree_sim *T;
+  int a, b, n;
+  FILE *fp;
+  
+  static char *tmpaln=vtmpnam (NULL);
+  
+  //for (n=0,a=0; a< A->nseq; a++){fprintf (stdout, "%d",(ph==1)?l[a]:1-l[a]);}
+  
+  for (n=0,a=0; a< A->nseq; a++)
+    {
+      n+=(l[a]==ph)?1:0;
+    }
+  //fprintf (stdout," PH: %d N: %d\n", ph, n);
+
+  if (n<3) return A;
+  
+  
+  fp=vfopen (tmpaln, "w");
+  for (a=0; a<A->nseq;a++){if (l[a]==ph)fprintf (fp, ">%s\n%s\n", A->name[a], A->seq_al[a]);}
+  vfclose (fp);
+  
+  NA=main_read_aln (tmpaln, NULL);
+  NT=main_aln2tree (NA, narg, argl);    
+  RT=quick_read_tree (reftree);
+  T=tree_cmp (RT, NT);
+  
+  fprintf (stdout, ">split ");
+  for (a=0; a<A->nseq; a++){fprintf (stdout, "%d",(ph==1)?l[a]:1-l[a]);}
+  fprintf ( stdout, " N: %4d R: %4d RF: %4d\n", n,A->nseq-n, T->rf);
+  
+  
+  vfree (T);
+  free_tree (RT);
+  free_tree (NT);
+  free_aln (NA);
+  
+  return A;
+}
+Alignment * phylotrim1 (Alignment *A, char *reftree, int narg, char **argl)
+{
+  Alignment *NA;
+  NT_node RT,NT;
+  Tree_sim *T;
+  int a, b, n;
+  FILE *fp;
+  int seq, brf;
+  static char *alnF=vtmpnam (NULL);
+
+  seq=brf=0;
+  
+  for (a=0; a< A->nseq; a++)
+    {
+      fp=vfopen (alnF, "w");
+      for (b=0; b<A->nseq; b++)
+	{
+	  if ( a!=b)fprintf (fp, ">%s\n%s\n", A->name[b], A->seq_al[b]);
+	}
+      vfclose (fp);
+      
+      NA=main_read_aln (alnF, NULL);
+      NT=main_aln2tree (NA, narg, argl);    
+      
+      RT=quick_read_tree (reftree);
+      T=tree_cmp (RT, NT);
+      if (T->rf>brf)
+	{
+	  brf=T->rf;
+	  seq=a;
+	}
+      vfree (T);
+      free_aln (NA);
+      free_tree (RT);
+      free_tree (NT);
+    }
+  fprintf ( stdout, ">%s RF: %d\n", A->name[seq], brf);
+  
+  fp=vfopen (alnF, "w");
+  for (b=0; b<A->nseq; b++)
+     {
+       if (b!=seq)fprintf (fp, ">%s\n%s\n", A->name[b], A->seq_al[b]);
+     }
+   vfclose (fp);
+   free_aln (A);
+   return main_read_aln (alnF, NULL);
+}
+
+
+
 NT_node main_compare_trees_list ( NT_node RT, Sequence *S, FILE *fp)
 {
   Tree_sim *T;
@@ -1182,6 +1370,7 @@ NT_node main_compare_trees_list ( NT_node RT, Sequence *S, FILE *fp)
       TL[a]=prune_tree(TL[a],RS);
       TL[a]=recode_tree (TL[a],RS);
       new_compare_trees (RT, TL[a], RS->nseq,T);
+
     }
 
   vfree (T);
@@ -1419,19 +1608,26 @@ void display_node (NT_node N, char *string,int nseq)
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
-
-
+NT_node aln2trmsd_tree (Alignment *A, char *temp);
+NT_node aln2phyml_tree (Alignment *A);
+NT_node main_aln2tree (Alignment *A, int n, char **arg_list)
+{
+  return tree_compute (A, n, arg_list);
+}
 NT_node tree_compute ( Alignment *A, int n, char ** arg_list)
 {
   if (n==0 || strm (arg_list[0], "cw"))
     {
       return compute_cw_tree (A);
     }
+  else if (strm (arg_list[0], "phyml"))
+    return aln2phyml_tree (A); 
   else if ( strm (arg_list[0], "fj"))
     {
       return compute_fj_tree ( NULL, A, (n>=1)?atoi(arg_list[1]):8, (n>=2)?arg_list[2]:NULL);
     }
-
+  else if (strm (arg_list[0], "kmeans"))return aln2km_tree (A, NULL, 1);
+  else if (strm (arg_list[0], "trmsd"))return aln2trmsd_tree (A,arg_list[1]); 
   else if ( ( strm (arg_list[0], "nj")))
     {
       return compute_std_tree (A, n, arg_list);
@@ -1567,6 +1763,60 @@ NT_node similarities_file2tree (char *mat)
   return T;
 }
 
+NT_node aln2trmsd_tree (Alignment *A, char *temp)
+{
+  static char *fname=vtmpnam (NULL);
+  static char *tree=vtmpnam (NULL);
+  
+  output_fasta_aln (fname, A);
+  printf_system ("t_coffee -other_pg trmsd %s -template_file %s -outfile %s -quiet %s", fname, temp, tree,  TO_NULL_DEVICE);
+  return (main_read_tree (tree));
+}
+ 
+NT_node aln2phyml_tree (Alignment *A)
+{
+  char *type;
+  static char *tmpaln=vtmpnam (NULL);
+  char *name;
+  NT_node RT;
+
+  A=get_aln_type (A);
+  type=(A->S)->type;
+  output_phylip_aln (tmpaln, A);
+  
+  /*
+  if ( strstr (type, "DNA") || strstr (type, "RNA"))
+    {
+      printf_system ("phyml -i %s -d nt ", tmpaln);
+    }
+  else
+    printf_system ("phyml -i %s -d aa ", tmpaln);
+  */
+  
+  if ( strstr (type, "DNA") || strstr (type, "RNA"))
+    {
+      printf_system ("phyml -i %s -d nt --quiet %s ", tmpaln, TO_NULL_DEVICE);
+    }
+  else
+    printf_system ("phyml -i %s -d aa --quiet  %s", tmpaln,TO_NULL_DEVICE);
+  
+
+  name=(char *)vcalloc ( strlen (tmpaln)+100, sizeof (char));
+  
+  sprintf (name,"%s_phyml_stats.txt",tmpaln);
+  if ( check_file_exists (name))delete_file (name);
+  else printf_exit ( EXIT_FAILURE,stderr, "ERROR: Failed to compute a PhyMl tree [FATAL:%s]\n", PROGRAM);
+  
+  sprintf (name,"%s_phyml_tree.txt",tmpaln);
+  if ( !check_file_exists (name))
+    printf_exit ( EXIT_FAILURE,stderr, "ERROR: Failed to compute a PhyMl tree [FATAL:%s]\n", PROGRAM);
+  
+  RT=main_read_tree (name);
+  delete_file (name);
+  vfree (name);
+  return RT;
+}
+
 NT_node compute_cw_tree (Alignment *A)
 {
   char *tmp1, *tmp2, tmp3[1000];
@@ -1576,7 +1826,8 @@ NT_node compute_cw_tree (Alignment *A)
 
   sprintf ( tmp3, "%s.ph", tmp1);
   output_clustal_aln (tmp1, A);
-  printf_system ("clustalw -infile=%s -tree -newtree=%s %s ", tmp1,tmp3, TO_NULL_DEVICE);
+  //printf_system ("clustalw -infile=%s -tree -newtree=%s %s ", tmp1,tmp3, TO_NULL_DEVICE);
+  printf_system ("clustalw -infile=%s -tree -newtree=%s ", tmp1,tmp3, TO_NULL_DEVICE);
   printf_system("mv %s %s", tmp3, tmp2);
 
   return main_read_tree(tmp2);

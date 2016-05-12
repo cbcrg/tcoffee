@@ -1363,12 +1363,6 @@ sub rec_flac2mp3
 	  {
 	    rec_flac2mp3 ("$d1/$d2");
 	  }
-	elsif ( -e 
-	  {
-	    $ren=1;
-	    $out="$in";
-	    $out=~s/mp3\.mp3/mp3/;
-	  }
 	elsif ( $in =~/mp3\.mp3/)
 	  {
 	    $ren=1;

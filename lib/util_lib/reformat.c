@@ -353,6 +353,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     ....................._i min identity to seq");
 		fprintf ( stdout, "\n     ....................._C max cov on seq");
 		fprintf ( stdout, "\n     ....................._c min cov on seq");
+		fprintf ( stdout, "\n     +hpylotrim [N|N%%|split] [nj|phyml|trmsd] [trmsd template file]");
 		fprintf ( stdout, "\n     +trim[_aln_%%%%50_n111_N50_T_Fn_fS_pS_max_sim_P0_K0] [string2]");
 		fprintf ( stdout, "\n     ....................._<seq or aln>, aln is assumed");
 		fprintf ( stdout, "\n     ....................._%%%%<max/min_percent_similarity>");
@@ -12501,6 +12502,13 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm (action, "trimRNA"))
 	 {
 	   D1->A=trim_RNA(D1->A, D2->S, ATOI_ACTION(1));
+	 }
+       else if ( strm (action, "phylotrim"))
+	 {
+	   D1->A=phylotrim (D1->A, ACTION(1), ACTION (2), ACTION (3));
+
+	   free_sequence (D1->S,(D1->S)->nseq);
+	   D1->S=aln2seq (D1->A);
 	 }
        else if ( strm (action, "trim"))
 	 {

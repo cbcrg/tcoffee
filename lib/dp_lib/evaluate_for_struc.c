@@ -1111,7 +1111,7 @@ declare_name (prot_db);
 		  }
 		else if ( strm (mode, "msa2tree") || strm (mode, "trmsd"))
 		  {
-		    EA=msa2struc_dist ( A, EA,F->name, gapped, min_ncol);
+		    EA=msa2struc_dist ( A, EA,F->name,outfile, gapped, min_ncol);
 		  }
 		le=display_output_filename ( le, "APDB_RESULT", "APDB_RESULT_FORMAT_01", apdb_outfile, CHECK);
 
@@ -2375,7 +2375,7 @@ int column_is_suitable4trmsd(int col1,Alignment *A, int **pos, Pdb_param *PP, Co
 
 
 NT_node trmsdmat2tree (float **dm, int **count,Alignment *A, int colN);
-Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gapped, int min_ncol4trmsd)
+Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, char *output, int gapped, int min_ncol4trmsd)
      {
 
        int **pos, c;
@@ -2640,20 +2640,36 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, int gap
 	 vfree (keep);
 	 if (!ntree){fprintf ( stderr, "\nERROR: No suitable pair of column supporting a tree. Consider removing the most distantly related sequences [FATAL]\n"); exit (EXIT_SUCCESS);}
 
-	 score=treelist2avg_treecmp (T1, NULL);
-	 display_output_filename( stderr,"TreeList","newick",tot_pos_list, CHECK);
-
-	 if (treelist_file2consense (tot_pos_list, NULL, consense_file))
+	 //consensus tree: hijack all the output formats and print only the consensus tree
+	
+	 if (strm (output, "no"))
 	   {
-	     display_output_filename( stderr,"ConsenseTree","phylip",consense_file, CHECK);
+	     score=treelist2avg_treecmp (T1, NULL);
+	     display_output_filename( stderr,"TreeList","newick",tot_pos_list, CHECK);
+	     
+	     if (treelist_file2consense (tot_pos_list, NULL, consense_file))
+	       {
+		 display_output_filename( stderr,"ConsenseTree","phylip",consense_file, CHECK);
+	       }
+	     else
+	       {
+		 fprintf ( stderr, "\nPhylip is not installed: the program could not produce the consense output. This is not mandatory but useful");
+	       }
 	   }
 	 else
 	   {
-	     fprintf ( stderr, "\nPhylip is not installed: the program could not produce the consense output. This is not mandatory but useful");
+	     if ((BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0)))
+	       {
+		 vfclose (print_tree (BT100,"newick", vfopen (output, "w")));
+		 display_output_filename( stderr,"Tree","newick",output, CHECK);
+	       }
+	     fprintf ( stderr, "\n");
+	     free_int (pos, -1);
+	     exit (EXIT_SUCCESS);
 	   }
-
+	 
+	 //Default outpout
 	 //consensus tree
-
 	 if ((BT100=treelist2filtered_bootstrap (T1, NULL,score, 1.0)))
 	       {
 		 vfclose (print_tree (BT100,"newick", vfopen (struc_tree0, "w")));
