@@ -2600,11 +2600,13 @@ Alignment * msa2struc_dist ( Alignment *A, Alignment *ST, char *results, char *o
 		 for (s1=0; s1< A->nseq-1; s1++)
 		   {
 		     rs1=A->order[s1][0];
-		     if (!pair_res_suitable4trmsd (s1,col1, col2, A, pos, PP, CL, &w))continue;
+		     if (!pair_res_suitable4trmsd (s1,col1, col2, A, pos, PP, CL, &w))
+		       {
+			 continue;
+		       }
 		     for ( s2=s1+1; s2<A->nseq; s2++)
 		       {
 			 if (!pair_res_suitable4trmsd (s2,col1, col2, A, pos, PP, CL, &w))continue;
-
 			 rs2=A->order[s2][0];
 			 real_res1_col1=pos[s1][col1]-1;
 			 real_res1_col2=pos[s1][col2]-1;

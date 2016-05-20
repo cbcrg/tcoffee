@@ -5578,7 +5578,7 @@ void read_number_aln ( char *file_name, Alignment *A)
 		   {
 		     if ( isgraph(c) || is_gap(c))
 		       {if ( isalpha(c))
-			 c=(A->residue_case==2)?c:tolower(c);
+			 c=(A->residue_case==KEEP_CASE)?c:tolower(c);
 
 		       if (!isspace(c))A->seq_al[a][ptr_aln[a]++]=c;
 		       }
@@ -5775,7 +5775,7 @@ Alignment * read_gotoh_aln ( char *fname, Alignment *A)
 	     for (b=0; b<l; b++)
 	     	{
 	     	if ( isgraph (buf2[b]))
-	     	 	A->seq_al[a][ptr_aln[a]++]=(A->residue_case==2)?buf2[b]:tolower (buf2[b]);
+	     	 	A->seq_al[a][ptr_aln[a]++]=(A->residue_case==KEEP_CASE)?buf2[b]:tolower (buf2[b]);
 	     	 }
 	     buf=fgets(buf, VERY_LONG_STRING, fp);
 	     }
@@ -12505,6 +12505,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
        else if ( strm (action, "phylotrim"))
 	 {
+	   
 	   D1->A=phylotrim (D1->A,(D2)?D2->T:NULL, ACTION(1), ACTION (2), ACTION (3));
 
 	   free_sequence (D1->S,(D1->S)->nseq);

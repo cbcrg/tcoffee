@@ -1167,8 +1167,8 @@ int print_node_list (NT_node T, Sequence *RS)
 Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **nargl);
 
 
-Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **nargl);
-Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narglist, char **arglist);
+Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **narglm, char *name, int nt);
+Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narglist, char **arglist, char *name, int nt);
 
 Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char *tempfile)
 {
@@ -1177,7 +1177,12 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
   char **arglist;
   int narglist=0;
   int free_rt=0;
- 
+  char *name;
+
+  name=(char *)vcalloc ( strlen (A->name[0])+strlen(A->name[A->nseq-1])+100, sizeof (char));
+  sprintf (name, "%s%s%d", A->name[0], A->name[A->nseq-1], A->nseq);
+  
+  
   if (!Ns)N=1;
   else if (strstr (Ns, "split"))
     {
@@ -1198,21 +1203,24 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
   arglist[narglist++]=treemode;
   if (tempfile)arglist[narglist++]=tempfile;
   
+  tmptree=vtmpnam (NULL);
   if (!RT)
     {
-      RT=main_aln2tree(A,narglist, arglist);
+      RT=main_aln2tree(A,narglist, arglist, name, 0);
       free_rt=1;
     }
-  tmptree=vtmpnam (NULL);
-  vfclose (print_tree (RT,"newick", vfopen (tmptree, "w")));
- 
+  
+  if (!RT)
+    printf_exit (EXIT_FAILURE, stderr, "ERROR: Could Not Compute the reference tree [FATAL:%s]\n", PROGRAM);
+  else
+    vfclose (print_tree (RT,"newick", vfopen (tmptree, "w")));
+  
   if (N>0)
     {
       for (a=0; a<N; a++)
 	{
-	  A=phylotrim1(A, tmptree,narglist, arglist);
+	  A=phylotrim1(A, tmptree,narglist, arglist, name, a+1);
 	}
-      
     }
   else
     {
@@ -1251,8 +1259,8 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
 
       for (a=0; a< ns; a++)
 	{
-	  phylotrim2 (A, tmptree, sl[a], 0, narglist, arglist);
-	  phylotrim2 (A, tmptree, sl[a], 1, narglist, arglist);
+	  phylotrim2 (A, tmptree, sl[a], 0, narglist, arglist, name, a+1);
+	  phylotrim2 (A, tmptree, sl[a], 1, narglist, arglist, name, a+ns+1);
 	}
       
       free_int (sl, -1);
@@ -1264,24 +1272,22 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
 
 
   
-Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narg, char **argl)
+Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narg, char **argl, char *name, int nt)
 {
-  Alignment *NA;
-  NT_node RT,NT;
+  Alignment *NA=NULL;
+  NT_node RT=NULL,NT=NULL;
   Tree_sim *T;
-  int a, b, n;
+  int a, b, n, rf;
   FILE *fp;
   
   static char *tmpaln=vtmpnam (NULL);
   
-  //for (n=0,a=0; a< A->nseq; a++){fprintf (stdout, "%d",(ph==1)?l[a]:1-l[a]);}
   
   for (n=0,a=0; a< A->nseq; a++)
     {
       n+=(l[a]==ph)?1:0;
     }
-  //fprintf (stdout," PH: %d N: %d\n", ph, n);
-
+  
   if (n<3) return A;
   
   
@@ -1290,23 +1296,31 @@ Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narg, ch
   vfclose (fp);
   
   NA=main_read_aln (tmpaln, NULL);
-  NT=main_aln2tree (NA, narg, argl);    
-  RT=quick_read_tree (reftree);
-  T=tree_cmp (RT, NT);
+  if ((NT=main_aln2tree (NA, narg, argl, name, nt)))    
+    {
+      RT=quick_read_tree (reftree);
+      T=tree_cmp (RT, NT);
+      rf=T->rf;
+      vfree(T);
+    }
+  else
+    {
+      rf=-1;
+    }
   
   fprintf (stdout, ">split ");
   for (a=0; a<A->nseq; a++){fprintf (stdout, "%d",(ph==1)?l[a]:1-l[a]);}
-  fprintf ( stdout, " N: %4d R: %4d RF: %4d\n", n,A->nseq-n, T->rf);
+  fprintf ( stdout, " N: %4d R: %4d RF: %4d\n", n,A->nseq-n, rf);
   
   
-  vfree (T);
+  
   free_tree (RT);
   free_tree (NT);
   free_aln (NA);
   
   return A;
 }
-Alignment * phylotrim1 (Alignment *A, char *reftree, int narg, char **argl)
+Alignment * phylotrim1 (Alignment *A, char *reftree, int narg, char **argl, char *name, int nt)
 {
   Alignment *NA;
   NT_node RT,NT;
@@ -1316,7 +1330,7 @@ Alignment * phylotrim1 (Alignment *A, char *reftree, int narg, char **argl)
   int seq, brf;
   static char *alnF=vtmpnam (NULL);
 
-  seq=brf=0;
+  seq=brf=-1;
   
   for (a=0; a< A->nseq; a++)
     {
@@ -1328,19 +1342,24 @@ Alignment * phylotrim1 (Alignment *A, char *reftree, int narg, char **argl)
       vfclose (fp);
       
       NA=main_read_aln (alnF, NULL);
-      NT=main_aln2tree (NA, narg, argl);    
-      
-      RT=quick_read_tree (reftree);
-      T=tree_cmp (RT, NT);
-      if (T->rf>brf)
+      if (NT=main_aln2tree (NA, narg, argl, name, nt))
 	{
-	  brf=T->rf;
-	  seq=a;
+	  RT=quick_read_tree (reftree);
+	  T=tree_cmp (RT, NT);
+	  if (T->rf>brf)
+	    {
+	      brf=T->rf;
+	      seq=a;
+	    }
+	  vfree (T);
+	  free_aln (NA);
+	  free_tree (RT);
+	  free_tree (NT);
 	}
-      vfree (T);
-      free_aln (NA);
-      free_tree (RT);
-      free_tree (NT);
+      else
+	{
+	  free_aln (NA);
+	}
     }
   fprintf ( stdout, ">%s RF: %d\n", A->name[seq], brf);
   
@@ -1614,9 +1633,36 @@ void display_node (NT_node N, char *string,int nseq)
 /*********************************************************************/
 NT_node aln2trmsd_tree (Alignment *A, char *temp);
 NT_node aln2phyml_tree (Alignment *A);
-NT_node main_aln2tree (Alignment *A, int n, char **arg_list)
+NT_node main_aln2tree (Alignment *A, int n, char **arglist, char *name, int nt)
 {
-  return tree_compute (A, n, arg_list);
+  NT_node T;
+  char *name2;
+  
+  
+
+  if (!name || strm (name, "nocache"))
+    {
+      T=tree_compute (A, n, arglist);
+      return T;
+    }
+  else
+    {
+      name2=(char*)vcalloc (strlen (get_cache_dir ())+strlen (name)+strlen (arglist[0])+100, sizeof (char));
+      sprintf ( name2, "%s%s.%d.%s.nwk", get_cache_dir(), name, nt, arglist[0]);
+      
+      
+      if ( !check_file_exists (name2))
+	{
+	  T=tree_compute (A, n, arglist);
+	  if (T)vfclose (print_tree (T, "newick", vfopen (name2, "w")));
+	}
+      else
+	{
+	  T=main_read_tree (name2);
+	}
+      vfree (name2);
+      return T;
+    }
 }
 NT_node tree_compute ( Alignment *A, int n, char ** arg_list)
 {
@@ -1630,13 +1676,19 @@ NT_node tree_compute ( Alignment *A, int n, char ** arg_list)
     {
       return compute_fj_tree ( NULL, A, (n>=1)?atoi(arg_list[1]):8, (n>=2)?arg_list[2]:NULL);
     }
+  
   else if (strm (arg_list[0], "kmeans"))return aln2km_tree (A, NULL, 1);
   else if (strm (arg_list[0], "trmsd"))return aln2trmsd_tree (A,arg_list[1]); 
   else if ( ( strm (arg_list[0], "nj")))
     {
       return compute_std_tree (A, n, arg_list);
     }
+  else if ( ( strm (arg_list[0], "upgma")))
+    {
+      return compute_std_tree_2(A,NULL, "_TMODE_upgma");
+    }
   else
+    
     return compute_std_tree (A, n, arg_list);
 }
 
@@ -1719,6 +1771,7 @@ NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
     }
 
   //Compute the tree
+  
   if (strm (tmode, "nj"))
     {
 
@@ -1728,6 +1781,7 @@ NT_node compute_std_tree_2 (Alignment *A, int **s, char *cl)
     }
   else if (strm (tmode, "upgma"))
     {
+     
       BT=int_dist2upgma_tree (s,A, A->nseq, tree_name);
       T=main_read_tree (tree_name);
       free_read_tree(BT);
@@ -1771,16 +1825,26 @@ NT_node aln2trmsd_tree (Alignment *A, char *temp)
 {
   static char *fname=vtmpnam (NULL);
   static char *tree=vtmpnam (NULL);
-  
+  NT_node T=NULL;
+
+
+  A->residue_case=KEEP_CASE;
   output_fasta_aln (fname, A);
-  printf_system ("t_coffee -other_pg trmsd %s -template_file %s -outfile %s -quiet %s", fname, temp, tree,  TO_NULL_DEVICE);
-  return (main_read_tree (tree));
+  
+    
+  printf_system ("t_coffee -other_pg trmsd -aln %s -template_file %s -outfile %s -quiet %s", fname, temp, tree,  TO_NULL_DEVICE);
+  //printf_system ("t_coffee -other_pg trmsd -aln %s -template_file %s -outfile %s ", fname, temp, tree);
+  if ( check_file_exists (tree))
+    T=main_read_tree (tree);
+  if (!T) exit (0);
+  
+  return T;
 }
  
 NT_node aln2phyml_tree (Alignment *A)
 {
   char *type;
-  static char *tmpaln=vtmpnam (NULL);
+  char *tmpaln=vtmpnam (NULL);
   char *name;
   NT_node RT;
 
@@ -1797,14 +1861,18 @@ NT_node aln2phyml_tree (Alignment *A)
     printf_system ("phyml -i %s -d aa ", tmpaln);
   */
   
+
+
   if ( strstr (type, "DNA") || strstr (type, "RNA"))
     {
       printf_system ("phyml -i %s -d nt --quiet %s ", tmpaln, TO_NULL_DEVICE);
     }
   else
-    printf_system ("phyml -i %s -d aa --quiet  %s", tmpaln,TO_NULL_DEVICE);
-  
-
+    {
+      printf_system ( "phyml -i %s -o tlr --rand_start --n_rand_starts 5 -d aa -b -1 -s BEST --quiet %s", tmpaln, TO_NULL_DEVICE);
+      //printf_system ("phyml -i %s -d aa --quiet  %s", tmpaln,TO_NULL_DEVICE);
+    }
+    
   name=(char *)vcalloc ( strlen (tmpaln)+100, sizeof (char));
   
   sprintf (name,"%s_phyml_stats.txt",tmpaln);
