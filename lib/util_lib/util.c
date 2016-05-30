@@ -8610,6 +8610,35 @@ int my_isnumber(char c, int base)
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Hash function
 ////////////////////////////////////////////////////////////////////////////////////////////
+int file2diff (char *file1, char *file2)
+{
+  FILE *fp1, *fp2;
+  int c1, c2;
+
+  if (!check_file_exists (file1))return -1;
+  if (!check_file_exists (file2))return -1;
+  
+  
+
+  fp1=vfopen (file1, "r");
+  if (!fp1) return -1;
+
+  fp2=vfopen (file2, "r");
+  if (!fp2) return -1;
+  
+  c1=c2=0;
+  while ((c1==c2) && c1!=EOF)
+    {
+      c1=fgetc (fp1);
+      c2=fgetc (fp2);
+    }
+  
+  vfclose (fp1); vfclose (fp2);
+  if (c1!=c2)return 1;
+  return 0;
+}
+  
+  
 unsigned long hash_file(char* file)  //returns the hash value for key
     {
       // Calculate a hash value by the division method:

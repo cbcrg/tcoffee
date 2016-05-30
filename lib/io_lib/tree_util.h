@@ -134,7 +134,7 @@ NT_node find_node_in_tree (int *key, int nseq, NT_node T);
 /*********************************************************************/
 
 NT_node similarities_file2tree (char *mat);
-NT_node main_aln2tree( Alignment *A, int n, char ** arg_list, char *name, int nt);
+NT_node main_aln2tree( Alignment *A, int n, char ** arg_list, char *name);
 NT_node tree_compute ( Alignment *A, int n, char ** arg_list);
 static NT_node compute_std_tree (Alignment *A, int n, char **arg_list);
 NT_node compute_std_tree_2 (Alignment *A, int **s, char *arg_list);

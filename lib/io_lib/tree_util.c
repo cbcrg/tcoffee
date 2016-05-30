@@ -1167,8 +1167,8 @@ int print_node_list (NT_node T, Sequence *RS)
 Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **nargl);
 
 
-Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **narglm, char *name, int nt);
-Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narglist, char **arglist, char *name, int nt);
+Alignment * phylotrim1 (Alignment *A, char *reftree,int narg,char **narglm, char *name);
+Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narglist, char **arglist, char *name);
 
 Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char *tempfile)
 {
@@ -1206,7 +1206,7 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
   tmptree=vtmpnam (NULL);
   if (!RT)
     {
-      RT=main_aln2tree(A,narglist, arglist, name, 0);
+      RT=main_aln2tree(A,narglist, arglist, name);
       free_rt=1;
     }
   
@@ -1215,11 +1215,12 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
   else
     vfclose (print_tree (RT,"newick", vfopen (tmptree, "w")));
   
+  
   if (N>0)
     {
       for (a=0; a<N; a++)
 	{
-	  A=phylotrim1(A, tmptree,narglist, arglist, name, a+1);
+	  A=phylotrim1(A, tmptree,narglist, arglist, name);
 	}
     }
   else
@@ -1231,6 +1232,7 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
       static char * alnF=vtmpnam (NULL);
       
       S=tree2seq(RT, NULL);
+      
       RT=recode_tree (RT, S);
       fp=vfopen (alnF, "w");
       for (a=0; a< S->nseq; a++)
@@ -1259,8 +1261,8 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
 
       for (a=0; a< ns; a++)
 	{
-	  phylotrim2 (A, tmptree, sl[a], 0, narglist, arglist, name, a+1);
-	  phylotrim2 (A, tmptree, sl[a], 1, narglist, arglist, name, a+ns+1);
+	  phylotrim2 (A, tmptree, sl[a], 0, narglist, arglist, name);
+	  phylotrim2 (A, tmptree, sl[a], 1, narglist, arglist, name);
 	}
       
       free_int (sl, -1);
@@ -1272,7 +1274,7 @@ Alignment * phylotrim (Alignment *A, NT_node RT, char *Ns,  char *treemode, char
 
 
   
-Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narg, char **argl, char *name, int nt)
+Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narg, char **argl, char *name)
 {
   Alignment *NA=NULL;
   NT_node RT=NULL,NT=NULL;
@@ -1296,7 +1298,7 @@ Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narg, ch
   vfclose (fp);
   
   NA=main_read_aln (tmpaln, NULL);
-  if ((NT=main_aln2tree (NA, narg, argl, name, nt)))    
+  if ((NT=main_aln2tree (NA, narg, argl, name)))    
     {
       RT=quick_read_tree (reftree);
       T=tree_cmp (RT, NT);
@@ -1320,7 +1322,7 @@ Alignment * phylotrim2 (Alignment *A, char *reftree,int *l, int ph, int narg, ch
   
   return A;
 }
-Alignment * phylotrim1 (Alignment *A, char *reftree, int narg, char **argl, char *name, int nt)
+Alignment * phylotrim1 (Alignment *A, char *reftree, int narg, char **argl, char *name)
 {
   Alignment *NA;
   NT_node RT,NT;
@@ -1342,7 +1344,7 @@ Alignment * phylotrim1 (Alignment *A, char *reftree, int narg, char **argl, char
       vfclose (fp);
       
       NA=main_read_aln (alnF, NULL);
-      if (NT=main_aln2tree (NA, narg, argl, name, nt))
+      if (NT=main_aln2tree (NA, narg, argl, name))
 	{
 	  RT=quick_read_tree (reftree);
 	  T=tree_cmp (RT, NT);
@@ -1633,10 +1635,11 @@ void display_node (NT_node N, char *string,int nseq)
 /*********************************************************************/
 NT_node aln2trmsd_tree (Alignment *A, char *temp);
 NT_node aln2phyml_tree (Alignment *A);
-NT_node main_aln2tree (Alignment *A, int n, char **arglist, char *name, int nt)
+NT_node main_aln2tree (Alignment *A, int n, char **arglist, char *name)
 {
   NT_node T;
-  char *name2;
+  char *CacheAln;
+  char *CacheTree;
   
   
 
@@ -1647,20 +1650,36 @@ NT_node main_aln2tree (Alignment *A, int n, char **arglist, char *name, int nt)
     }
   else
     {
-      name2=(char*)vcalloc (strlen (get_cache_dir ())+strlen (name)+strlen (arglist[0])+100, sizeof (char));
-      sprintf ( name2, "%s%s.%d.%s.nwk", get_cache_dir(), name, nt, arglist[0]);
+      static char *tmpA=vtmpnam(NULL);
+      long int HV;
+      
+      output_fasta_aln (tmpA,A);
+      HV=hash_file (tmpA);
       
       
-      if ( !check_file_exists (name2))
+      CacheAln=(char* )vcalloc (strlen (get_cache_dir ())+100+strlen (arglist[0])+100, sizeof (char));
+      CacheTree=(char*)vcalloc (strlen (get_cache_dir ())+100+strlen (arglist[0])+100, sizeof (char));
+      sprintf (CacheAln, "%s/%ld.%s.aln", get_cache_dir(),HV, arglist[0]);
+      sprintf (CacheTree,"%s/%ld.%s.nwk", get_cache_dir(),HV, arglist[0]);
+      
+      //HERE ("\nALN: %s (%d)\nTree %s(%d)\nDiff: %d", CacheAln, file_exists (NULL,CacheAln),CacheTree,file_exists (NULL,CacheTree),file2diff (CacheAln, tmpA));
+      
+      if (!file_exists (NULL,CacheAln) || !file_exists (NULL,CacheTree)|| file2diff (CacheAln, tmpA))
 	{
+	  //HERE ("Compute");
+	  printf_system ("cp %s %s", tmpA, CacheAln);
 	  T=tree_compute (A, n, arglist);
-	  if (T)vfclose (print_tree (T, "newick", vfopen (name2, "w")));
+	  if (T)vfclose (print_tree (T, "newick", vfopen (CacheTree, "w")));
+	  free_tree (T);
 	}
       else
 	{
-	  T=main_read_tree (name2);
+	  //HERE ("Cache");
+	  ;
 	}
-      vfree (name2);
+      T=main_read_tree (CacheTree);
+      vfree (CacheAln);
+      vfree (CacheTree);
       return T;
     }
 }
