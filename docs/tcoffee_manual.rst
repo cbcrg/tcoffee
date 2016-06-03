@@ -1066,8 +1066,8 @@ Will keep all the sequences containing the word sapiens in the comment section. 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAM\
- E REMOVE '[ILM]K' -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep SEQ\
+  REMOVE '[ILM]K' -output clustalw
 
 
 
