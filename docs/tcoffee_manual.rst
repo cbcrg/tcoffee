@@ -32,10 +32,10 @@ Getting the Example Files of the Tutorial
 We encourage you to try all the following examples with your own sequences/structures. If you want to try with ours, you can get the material from the example directory of the distribution. If you do not know where this file leaves or if you do not have access to it, the simplest thing to do is to:
 
 
-1-    download T-Coffee's latest version from www.tcoffee.org (Follow the link to the T-Coffee Home Page)
+1-    download T-Coffee's latest version from www.tcoffee.org (follow the link to the T-Coffee Home Page)
 
 
-2-    Download the latest distribution
+2-    download the latest distribution
 
 
 3-    gunzip <distrib>.tar.gz
@@ -92,7 +92,7 @@ Yes, at www.tcoffee.org
 
 Is T-Coffee different from ClustalW?
 ------------------------------------
-According to several benchmarks, T-Coffee appears to be more accurate than ClustalW. Yet, this increased accuracy comes at a price: T-Coffee is slower than Clustal (about N times fro N Sequences).
+According to several benchmarks, T-Coffee appears to be more accurate than ClustalW. Yet, this increased accuracy comes at a price: T-Coffee is slower than Clustal (about N times for N Sequences).
 
 
 If you are familiar with ClustalW, or if you run a ClustalW server, you will find that we have made some efforts to ensure as much compatibility as possible between ClustalW and T-COFFEE. Whenever it was relevant, we have kept the flag names and the flag syntax of ClustalW. Yet, you will find that T-Coffee also has many extra possibilities...
@@ -150,14 +150,11 @@ This is the normal mode. It is one of the most accurate of its kind, roughly lik
 
 What T-Coffee Can and Cannot do for you ...
 ===========================================
-.. note:: All the files mentioned here (sample_seq...) can be found in the example directory of the distribution.
+.. note:: All the files mentioned here (e.g. sample_seq) can be found in the example directory of the distribution.
 
 (NOT) Fetching Sequences
 ------------------------
-T-Coffee will NOT fetch sequences for you: you must select the sequences you want to align before hand. We suggest you use any BLAST server and format your sequences in FASTA so that T-COFFEE can use them easily. The expasy BLAST server (www.expasy.ch) provides a nice interface for integrating database searches.
-
-
-Yet, the new modes of
+T-Coffee will NOT fetch sequences for you: you must select the sequences you want to align beforehand. We suggest you use any BLAST server and format your sequences in FASTA so that T-COFFEE can use them easily. The expasy BLAST server (www.expasy.ch) provides a nice interface for integrating database searches.
 
 
 Aligning Sequences
@@ -179,7 +176,7 @@ T-Coffee allows you to combine results obtained with several alignment methods. 
 
 Evaluating Alignments
 ---------------------
-You can use T-Coffee to measure the reliability of your Multiple Sequence alignment. If you want to find out about that, read the FAQ or the documentation for the -output flag.
+You can use T-Coffee to measure the reliability of your Multiple Sequence Alignment. If you want to find out about that, read the FAQ or the documentation for the -output flag.
 
 
 ::
@@ -190,7 +187,7 @@ You can use T-Coffee to measure the reliability of your Multiple Sequence alignm
 
 Combining Sequences and Structures
 ----------------------------------
-One of the latest improvements of T-Coffee is to let you combine sequences and structures, so that your alignments are of higher quality. You need to have sap package installed to fully benefit of this facility. If you have the EBI BLAST client installed (see installation procedure), you can run the following:
+One of the latest improvements of T-Coffee is to let you combine sequences and structures, so that your alignments are of higher quality. You need to have the sap package installed to fully benefit of this facility. If you have the EBI BLAST client installed (see installation procedure), you can run the following:
 
 
 ::
@@ -219,7 +216,7 @@ In this case, the sequences must be names according to their PDB targets. All th
 
 Identifying Occurrences of a Motif: Mocca
 -----------------------------------------
-Mocca is a special mode of T-Coffee that allows you to extract a series of repeats from a single sequence or a set of sequences. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. If you want to use Mocca, simply type:
+Mocca is a special mode of T-Coffee that allows you to extract a serie of repeats from a single sequence or a set of sequences. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. If you want to use Mocca, simply type:
 
 
 ::
@@ -263,7 +260,7 @@ Each of these constraints comes with a weight and in the end, the T-Coffee algor
 You can generate this list of constraints however you like. You may even provide it yourself, forcing important residues to be aligned by giving them high weights (see the FAQ). For your convenience, T-Coffee can generate (this is the default) its own list by making all the possible global pairwise alignments, and the 10 best local alignments associated with each pair of sequences. Each pair of residues observed aligned in these pairwise alignments becomes a line in the library.
 
 
-Yet be aware that nothing forces you to use this library and that you could build it using other methods (see the FAQ). In protein language, T-COFEE is synonymous for freedom, the freedom of being aligned however you fancy ( I was a Tryptophan in some previous life).
+Yet be aware that nothing forces you to use this library and that you could build it using other methods (see the FAQ). In protein language, T-COFFEE is synonymous for freedom, the freedom of being aligned however you fancy (I was a Tryptophan in some previous life).
 
 
 
@@ -350,7 +347,7 @@ Dealing with Non-automatically recognized formats
 
 ::
 
-   -in_f msf_aln for intance
+   -in_f msf_aln for instance
 
 
 
@@ -546,7 +543,7 @@ The conversion will proceed as follows:
 -conv indicates the filters for character conversion:
 
 
- - will remain -
+ The gaps "-" will remain
 
 
  A and a will be turned into 1
@@ -858,8 +855,8 @@ Consider the following alignment (sample_aln7.aln)
 
 ::
 
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 se\
- c, SCORE=0, Nseq=4, Len=28
+  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 sec
+, SCORE=0, Nseq=4, Len=28
 
   A CTCCGTGTCTAGGAGT-TTACGTGGAGT
 
@@ -878,8 +875,8 @@ and the following cache (sample_aln7.cache_aln):
 
 ::
 
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 se\
- c, SCORE=0, Nseq=4, Len=28
+  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 sec
+, SCORE=0, Nseq=4, Len=28
 
   A 3133212131022021-11032122021
 
@@ -899,7 +896,8 @@ You can turn to lower case all the residues having a score between 1 and 2:
   $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.\
  cache_aln -struc_in_f number_aln -action +lower '[1-2]'
 
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.05 sec, SCORE=0, Nseq=4, Len=28
+  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.05 sec
+, SCORE=0, Nseq=4, Len=28
 
   A CtCCgtgtCtAggAgt-ttACgtggAgt
 
@@ -972,7 +970,7 @@ Or evaluating a pre-existing alignment
 
 
 
-This generates a score_ascii file that you can then use to filter out the bad bits in your alignement:
+This generates a score_ascii file that you can then use to filter out the bad bits in your alignment:
 
 
 ::
@@ -1025,7 +1023,8 @@ It is also possible to re-use pre-computed score_ascii files, such as those obta
    $$: t_coffee sample_aln1.fasta -output score_ascii -outfile sample1.score_asc\
  ii
 
-   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -struc_in sample1.score_ascii -struc_in_f number_aln -action +use_cons +keep '[8-9]'
+   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -struc_in sample1.sco\
+ re_ascii -struc_in_f number_aln -action +use_cons +keep '[8-9]'
 
 
 
@@ -1076,7 +1075,7 @@ Will extract all the sequences containing the pattern [ILM]K.
 
 Extracting Sequences by Names
 -----------------------------
-Extracting Two Sequences: If you want to extract several sequences, in order to make a subset. You can do the following:
+Extracting two sequences: If you want to extract several sequences, in order to make a subset, you can do the following:
 
 
 ::
@@ -1088,7 +1087,7 @@ Extracting Two Sequences: If you want to extract several sequences, in order to 
 
 .. note:: Note the single quotes ('). They are meant to protect the name of your sequence and prevent the UNIX shell to interpret it like an instruction.
 
-Removing Columns of Gaps. Removing intermediate sequences results in columns of gaps appearing here and there. Keeping them is convenient if some features are mapped on your alignment. On the other hand, if you want to remove these columns you can use:
+Removing columns of gaps. Removing intermediate sequences results in columns of gaps appearing here and there. Keeping them is convenient if some features are mapped on your alignment. On the other hand, if you want to remove these columns you can use:
 
 
 ::
@@ -1098,7 +1097,7 @@ Removing Columns of Gaps. Removing intermediate sequences results in columns of 
 
 
 
-Extracting Sub sequences: You may want to extract portions of your sequences. This is possible if you specify the coordinates after the sequences name:
+Extracting subsequences: You may want to extract portions of your sequences. This is possible if you specify the coordinates after the sequences name:
 
 
 ::
@@ -1108,7 +1107,7 @@ Extracting Sub sequences: You may want to extract portions of your sequences. Th
 
 
 
-Keeping the original Sequence Names. Note that your sequences are now renamed according to the extraction coordinates. You can keep the original names by using the +keep_name modifier:
+Keeping the original sequence names. Note that your sequences are now renamed according to the extraction coordinates. You can keep the original names by using the +keep_name modifier:
 
 
 ::
@@ -1165,7 +1164,8 @@ If you have extracted several blocks and you now want to glue them together, you
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
  block cons 100 120 > block1.aln
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block cons 150 200 > block2.aln
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
+ block cons 150 200 > block2.aln
 
   $$: t_coffee -other_pg seq_reformat -in block1.aln -in2 block2.aln -action +cat_aln
 
@@ -1196,9 +1196,9 @@ Large datasets are problematic because they can be difficult to analyze. The pro
 
 .. note:: Note: If your sequence dataset is very large, seq_reformat will compute the similarity matrix between your sequences once only. It will then keep it in its cache and re-use it any time you re-use that dataset. In short this means that it will take much longer to run the first time.
 
-Extracting the N most informative sequences
+Extracting the Y most informative sequences
 -------------------------------------------
-To be informative, a sequence must contain information the other sequences do not contain. The N most informative sequences are the N sequences that are as different as possible to one another, given the initial dataset.
+To be informative, a sequence must contain information the other sequences do not contain. The Y most informative sequences are the Y (number or pourcentage) sequences that are as different as possible to one another, given the initial dataset.
 
 
 ::
@@ -1206,12 +1206,10 @@ To be informative, a sequence must contain information the other sequences do no
   $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
  seq_n10 -output fasta_seq
 
+The argument n10 means you want to extract the 10 most informative sequences. The argument to trim include _seq_, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generaly more accurate to use unaligned sequences.
 
 
-The arguments to trim include _seq_ . It means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generaly more accurate to use unaligned sequences.
-
-
-The argument _n10 means you want to extract the 10 most informative sequences. If you would rather extract the 20% most informative sequences, use
+If you would rather extract a pourcentage than a number of sequences, for instance the 20% most informative sequences, use the argument N20:
 
 
 ::
@@ -1235,7 +1233,7 @@ Removing the most similar sequences is often what people have in mind when they 
 
 Speeding up the process
 -----------------------
-If you start form unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the _seq_ with _aln_
+If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the _seq_ with _aln_
 
 
 Note the difference of speed between these two command and the previous one:
@@ -1252,9 +1250,9 @@ Note the difference of speed between these two command and the previous one:
 Of course, using the MSA will mean that you rely on a more approximate estimation of sequence similarity.
 
 
-Forcing Specific Sequences to be kept
+Forcing specific sequences to be kept
 -------------------------------------
-Sometimes you want to trim while making sure specific important sequences remain in your dataset. You can do so by providing trim with a string. Trim will keep all the sequences whose name contains the string. For instance, if you want to force trim to keep all the sequences that contain the word HUMAN, no matter how similar they are to one another, you can run the following command:
+Sometimes you want to trim while making sure specific or important sequences remain in your dataset. You can do so by providing trim with a string. Trim will keep all the sequences whose name contains the string. For instance, if you want to force trim to keep all the sequences that contain the word HUMAN, no matter how similar they are to one another, you can run the following command:
 
 
 ::
@@ -1299,7 +1297,7 @@ You can also specify the sequences you want to keep. To do so, give a fasta file
 
 Identifying and Removing Outliers
 ----------------------------------
-Sequences that are too distantly related from the rest of the set will sometimes have very negative effects on the overall alignment. To prevent this, it is advisable not to use them. This can be done when trimming the sequences. For instance,
+Sequences that are too distantly related from the rest of the set will sometimes have very negative effects on the overall alignment. To prevent this, it is advisable not to use them. This can be done when trimming the sequences, for instance:
 
 
 ::
@@ -1320,7 +1318,8 @@ In order to align two distantly related sequences, most multiple sequence alignm
 For instance, let us consider the two sequences:
 
 
-sp|P21844|MCPT5_MOUSE sp|P29786|TRY3_AEDAE
+sp|P21844|MCPT5_MOUSE
+sp|P29786|TRY3_AEDAE
 
 
 These sequences have 26% identity. This is high enough to make a case for a homology relationship between them, but this is too low to blindly trust any pairwise alignment. With the names of the two sequences written in the file sproteases_pair.fasta, run the following command:
@@ -1340,13 +1339,15 @@ This will generate a dataset of 21 sequences, whith the following chain of simil
 
   N: 21 Lower: 40 Sim: 25 DELTA: 15
 
-  #sp|P21844|MCPT5_MOUSE -->93 -->sp|P50339|MCPT3_RAT -->85 -->sp|P50341|MCPT2_MERUN -->72 -->sp|P52195|MCPT1_PAPHA -->98 -->sp|P56435|MCPT1_MACFA -->97 -->sp|P23946|MCPT1_HUMAN -->8
-
-  1 -->sp|P21842|MCPT1_CANFA -->77 -->sp|P79204|MCPT2_SHEEP -->60 -->sp|P21812|MCPT4_MOUSE -->90 -->sp|P09650|MCPT1_RAT -->83 -->sp|P50340|MCPT1_MERUN -->73 -->sp|P11034|MCPT1_MOUSE
-
-  -->76 -->sp|P00770|MCPT2_RAT -->71 -->sp|P97592|MCPT4_RAT -->66 -->sp|Q00356|MCPTX_MOUSE -->97 -->sp|O35164|MCPT9_MOUSE -->61 -->sp|P15119|MCPT2_MOUSE -->50 -->sp|Q06606|GRZ2_RAT -
-
-  ->54 -->sp|P80931|MCT1A_SHEEP -->40 -->sp|Q90629|TRY3_CHICK -->41 -->sp|P29786|TRY3_AEDAE
+  #sp|P21844|MCPT5_MOUSE -->93 -->sp|P50339|MCPT3_RAT -->85 -->sp|P50341|MCPT2_M\
+  ERUN -->72 -->sp|P52195|MCPT1_PAPHA -->98 -->sp|P56435|MCPT1_MACFA -->97 -->sp\
+  |P23946|MCPT1_HUMAN -->81 -->sp|P21842|MCPT1_CANFA -->77 -->sp|P79204|MCPT2_SH\
+  EEP -->60 -->sp|P21812|MCPT4_MOUSE -->90 -->sp|P09650|MCPT1_RAT -->83 -->sp|P5\
+  0340|MCPT1_MERUN -->73 -->sp|P11034|MCPT1_MOUSE-->76 -->sp|P00770|MCPT2_RAT --\
+  >71 -->sp|P97592|MCPT4_RAT -->66 -->sp|Q00356|MCPTX_MOUSE -->97 -->sp|O35164|M\
+  CPT9_MOUSE -->61 -->sp|P15119|MCPT2_MOUSE -->50 -->sp|Q06606|GRZ2_RAT -->54 --\
+  >sp|P80931|MCT1A_SHEEP -->40 -->sp|Q90629|TRY3_CHICK -->41 -->sp|P29786|TRY3_A\
+  EDAE
 
 
 
@@ -1355,9 +1356,9 @@ This is probably the best way to generate a high quality alignment of your two s
 
 Manipulating DNA sequences
 ==========================
-Translating DNA sequences into Proteins
----------------------------------------
-If your sequences are DNA coding sequences, it is always safer to align them as proteins. Seq_reformat makes it easy for you to translate your sequences:
+Translating DNA sequences into proteins sequences
+-------------------------------------------------
+If your sequences are DNA coding sequences, it is always safer to align them as proteins. The seq_reformat option makes it easy for you to translate your sequences:
 
 
 ::
@@ -1367,7 +1368,7 @@ If your sequences are DNA coding sequences, it is always safer to align them as 
 
 
 
-Back-Translation With the Bona-Fide DNA sequences
+Back-translation with the bona-fide DNA sequences
 -------------------------------------------------
 Once your sequences have been aligned, you may want to turn your protein alignment back into a DNA alignment, either to do phylogeny, or maybe in order to design PCR probes. To do so, use the following command:
 
@@ -1379,14 +1380,14 @@ Once your sequences have been aligned, you may want to turn your protein alignme
 
 
 
-Finding the Bona-Fide Sequences for the Back-Translation
+Finding the bona-fide sequences for the back-translation
 --------------------------------------------------------
 Use the online server Protogene, available from www.tcoffee.org.
 
 
-Guessing Your Back Translation
+Guessing your back translation
 ------------------------------
-Back-translating means turning a protein sequence into a DNA sequence. If you do not have the original DNA sequence, this operation will not be exact, owing to the fact that the genetic code is degenerated. Yet, if a random-back translation is fine with you, you can use the following command.
+Back-translating means turning a protein sequence into a DNA sequence. If you do not have the original DNA sequence, this operation will not be exact, owing to the fact that the genetic code is degenerated. Yet, if a random back-translation is fine with you, you can use the following command.
 
 
 ::
@@ -1396,7 +1397,7 @@ Back-translating means turning a protein sequence into a DNA sequence. If you do
 
 
 
-In this process, codons are chosen randomly. For instance, if an amino-acid has four codons, the back-translation process will randomly select one of these. If you need more sophisticated back-translations that take into account the codon bias, we suggest you use more specific tools like: alpha.dmi.unict.it/~ctnyu/bbocushelp.html
+In this process, codons are chosen randomly. For instance, if an aminoacid has four codons, the back-translation process will randomly select one of these. If you need more sophisticated back-translations that take into account the codon bias, we suggest you use more specific tools like: alpha.dmi.unict.it/~ctnyu/bbocushelp.html
 
 
 Fetching a Structure
@@ -1404,7 +1405,7 @@ Fetching a Structure
 There are many reasons why you may need a structure. T-Coffee contains a powerful utility named extract_from_pdb that makes it possible to fetch the PDB coordinates of a structure or its FASTA sequence without requiring a local installation.
 
 
-By default, extract_from_pdb will start looking for the structure in the current directory; it will then look it up locally (PDB_DIR) and eventually try to fetch it from the web (via a wget to www.rcsb.org). All these settings can be customized using environment variables (see the last section).
+By default, the option extract_from_pdb will start looking for the structure in the current directory; it will then look it up locally (PDB_DIR) and eventually try to fetch it from the web (via a wget to www.rcsb.org). All these settings can be customized using environment variables (see the last section).
 
 
 Fetching a PDB structure
@@ -1561,19 +1562,15 @@ Visualizing compensatory mutations
 The following command will output a color coded version of your alignment with matching columns indicated as follows:
 
 
- I: Incompatible pair (i.e. at least one pair is not WC)
-
+I: incompatible pair (i.e. at least one pair is not WC)
 
 N: pairs are Gus or WC
 
+W: all pairs are Watson
 
-W: All pairs are Watson
+c: compensatory mutations
 
-
-c : Compensatory mutations
-
-
- C: WC compensatory mutations
+C: WC compensatory mutations
 
 
 ::
@@ -1709,25 +1706,25 @@ Please consider the following aspects when exploiting these results:
 -The comparison is made on the unrooted trees
 
 
-T: Fraction of the branches conserved between the two trees. This is obtained by considering the split induced by each branch and by checking whether that split is found in both trees
+-T: Fraction of the branches conserved between the two trees. This is obtained by considering the split induced by each branch and by checking whether that split is found in both trees
 
 
-W: Fraction of the branches conserved between the two trees. Each branch is weighted with MIN the minimum number of leaf on its left or right (Number leaf left, Number leaf Right)
+-W: Fraction of the branches conserved between the two trees. Each branch is weighted with MIN the minimum number of leaf on its left or right (Number leaf left, Number leaf Right)
 
 
-L: Fraction of branch length difference between the two considered trees.
+-L: Fraction of branch length difference between the two considered trees.
 
 
-The last portion of the output contains a tree where distances have been replaced by the number of leaf under the considered node
+-The last portion of the output contains a tree where distances have been replaced by the number of leaf under the considered node
 
 
-Positive values (i.e. 2, 5) indicate a node common to both trees and correspond to MIN.
+-Positive values (i.e. 2, 5) indicate a node common to both trees and correspond to MIN.
 
 
-Negative values indicate a node found in tree1 but not in tree2
+-Negative values indicate a node found in tree1 but not in tree2
 
 
-The higher this value, the deeper the node.
+-The higher this value, the deeper the node.
 
 
 You can extract this tree for further usage by typing:
@@ -1739,9 +1736,9 @@ You can extract this tree for further usage by typing:
 
 
 
-Scanning Phylogenetic Trees
+Scanning phylogenetic trees
 ===========================
-It is possible to scan an alignment and locally measure the similarity between an estimated local tree and some reference tree provided from an external source (or computed on the fly). The following command:
+It is possible to scan an alignment and locally measure the similarity between an estimated local tree and some reference tree provided from an external source (or computed on the fly) using the following command:
 
 
 ::
@@ -1762,7 +1759,7 @@ For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be
 
 
 
-Pruning Phylogenetic Trees
+Pruning phylogenetic trees
 ==========================
 Pruning removes leaves from an existing tree and recomputes distances so that no information is lost
 
@@ -1793,8 +1790,8 @@ And the file sample_seq8.seq
 
 ::
 
-  Note: Sample_seq8 is merely a FASTA file where sequences can be omitted. Seque\
- nces can be omitted, but you can also leave them, at your entire convenience.
+  Note: Sample_seq8 is merely a FASTA file where sequences can be omitted, but  \
+  you can also leave them, at your entire convenience.
 
 
 ::
@@ -1809,11 +1806,11 @@ And the file sample_seq8.seq
 *************************************
 Building Multiple Sequence Alignments
 *************************************
-How to generate The Alignment You Need?
+How to generate the alignment you need?
 =======================================
-What is a Good Alignment?
+What is a good alignment?
 -------------------------
-This is a trick question. A good alignment is an alignment that makes it possible to do good biology. If you want to reconstruct a phylogeny, a good alignment will be an alignment leading to an accurate reconstruction.
+This is a tricky question. A good alignment is an alignment that makes it possible to do good biology. If you want to reconstruct a phylogeny, a good alignment will be an alignment leading to an accurate reconstruction.
 
 
 In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions.
@@ -1822,13 +1819,13 @@ In practice, the alignment community has become used to measuring the accuracy o
 Unfortunately it is not easy to establish structure based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
 
 
- Above 40% identity (within the reference datasets), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
+ -Above 40% identity (within the reference datasets), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
 
 
- Below 40% accuracy within the reference datasets, the reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies seem to indicate that consistency based methods (T-Coffee, Mafft-slow and ProbCons) have an edge over traditional methods.
+ -Below 40% accuracy within the reference datasets, the reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies seem to indicate that consistency based methods (T-Coffee, Mafft-slow and ProbCons) have an edge over traditional methods.
 
 
-When dealing with distantly related sequences, the only way to produce reliable alignments is to us structural information. T-Coffee provides many facilities to do so in a seamless fashion. Several important factors need to be taken into account when selecting an alignment method:
+When dealing with distantly related sequences, the only way to produce reliable alignments is to use structural information. T-Coffee provides many facilities to do so in a seamless fashion. Several important factors need to be taken into account when selecting an alignment method:
 
 
 -The best methods are not always doing best. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
@@ -1840,7 +1837,7 @@ When dealing with distantly related sequences, the only way to produce reliable 
 Last, but not least, bear in mind that these methods have only been evaluated by comparison with reference structure based sequence alignments. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
 
 
-The Main Methods and their Scope
+The main methods and their scope
 --------------------------------
 There are many MSA packages around. The main ones are ClustalW, Muscle, Mafft, T-Coffee and ProbCons. You can almost forget about the other packages, as there is virtually nothing you could do with them that you will not be able to do with these packages.
 
@@ -1853,7 +1850,7 @@ ClustalW: everywhere you look
 ClustalW is still the most widely used multiple sequence alignment package. Yet things are gradually changing as recent tests have consistently shown that ClustalW is neither the most accurate nor the fastest package around. This being said, ClustalW is everywhere and if your sequences are similar enough, it should deliver a fairly reasonable alignment.
 
 
-Mafft and Muscle: Aligning Many Sequences
+Mafft and Muscle: Aligning many sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you have many sequences to align Muscle or Mafft are the obvious choice. Mafft is often described as the fastest and the most efficient. This is not entirely true. In its fast mode (FFT-NS-1), Mafft is similar to Muscle and although it is fairly accurate it is about 5 points less accurate than the consistency based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) Mafft uses local alignments and consistency. It becomes much more accurate but also slower, and more sensitive to the number of sequences.
 
@@ -1885,7 +1882,7 @@ However they may not be suitable for more refined application such as
 In that case you may need to use more accurate methods
 
 
-T-Coffee and ProbCons: Slow and Accurate
+T-Coffee and ProbCons: slow and accurate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 T-Coffee works by first assembling a library and then by turning this library into an alignment. The library is a list of potential pairs of residues. All of them are not compatible and the job of the algorithm is to make sure that as many possible constraints as possible find their way into the final alignment. Each library line is a constraint and the purpose is to assemble the alignment that accommodates the more all the constraints.
 
@@ -1908,7 +1905,7 @@ All these packages are ideal for the following applications:
  -3D Prediction
 
 
-Choosing The Right Package
+Choosing the right package
 --------------------------
 Each available package has something to go for it. It is just a matter of knowing what you want to do. T-Coffee is probably the most versatile, but it comes at a price and it is currently slower than many alternative packages.
 
@@ -1950,9 +1947,9 @@ Secondary Structure P +++    +++   ++       ++       ++
 Table 2. Most Suitable Appplications of each package (T-Coffee Tutorial, C. Notredame, www.tcoffee.org). In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
 
 
-Computing Multiple Sequence Alignments With T-Coffee
+Computing Multiple Sequence Alignments with T-Coffee
 ====================================================
-Computing Very accurate (but slow) alignments with PSI-Coffee
+Computing very accurate (but slow) alignments with PSI-Coffee
 -------------------------------------------------------------
 PSI-Coffee builds a profile associated with each of your input sequence and then makes a multiple profile alignment. If you do not have any structure, it is the most accurate mode of T-Coffee.
 
@@ -1975,7 +1972,7 @@ If you want to go further, and be even slower, you can use the accurate mode tha
 It is probably one of the most accurate way of aligning sequences currently available.
 
 
-A Simple Multiple Sequence Alignment
+A simple Multiple Sequence Alignment
 ------------------------------------
 T-Coffee is meant to be run like ClustalW. This means you can use it like ClustalW for most simple applications. For instance, the following instruction
 
@@ -1992,7 +1989,7 @@ This instruction will compute a multiple sequence alignment of your sequences, u
 The program will also output a file named sproteases_small.dnd that contains the guide tree used to assemble the progressive alignment.
 
 
-Controlling the Output Format
+Controlling the output format
 -----------------------------
 If you need to, you can also trigger different ouput formats using the -output flag:
 
@@ -2006,7 +2003,7 @@ If you need to, you can also trigger different ouput formats using the -output f
 You can specify as many formats as you want.
 
 
-Computing a Phylogenetic tree
+Computing a phylogenetic tree
 -----------------------------
 T-Coffee is not a phylogeny package. Yet, it has some limited abilities to turn your MSA into a phylogenetic tree. This tree is a Neighbor Joining Phylogenetic tree, very similar to the one you could compute using ClustalW.
 
@@ -2020,7 +2017,7 @@ T-Coffee is not a phylogeny package. Yet, it has some limited abilities to turn 
 The phylogenetic tree is the file with the ph extension. Never use the .dnd tree in place of a genuine phylogenetic tree. The phylogenetic tree output by T-Coffee is only an indication. You should produce a bootstrapped phylogenetic tree using packages like Phylip (bioweb.pasteur.fr/seqanal/phylogeny/phylip-uk.html). You can visualize your tree using online tree drawing programs like phylodendron (iubio.bio.indiana.edu/treeapp/treeprint-form.html).
 
 
-Using Several Datasets
+Using several datasets
 ----------------------
 If your sequences are spread across several datasets, you can give all the files via the -seq flag:
 
@@ -2040,7 +2037,7 @@ Sequences with the same name between two files are assumed to be the same sequen
 
 .. warning:: You should make sure that there are no duplicates in your alignment, especially when providing multiple datasets.
 
-How Good is Your Alignment
+How good is your alignment
 --------------------------
 Later in this tutorial we show you how to estimate the accuracy of your alignment. Before we go into details, you should know that the number that comes on the first line of the header (in ClustalW format) is the score of your alignment.
 
@@ -2058,7 +2055,7 @@ You can run T-Coffee online at www.tcoffee.org. Use the regular or the advanced 
 
 Aligning Many Sequences
 =======================
-Aligning Very Large Datasets with Muscle
+Aligning very large datasets with muscle
 ----------------------------------------
 T-Coffee is not a good choice if you are dealing with very large datasets, use Mafft or Muscle. To align a large dataset with Muscle, try:
 
@@ -2079,7 +2076,7 @@ To use the fastest possible mode (less accurate) run:
 
 
 
-Aligning Very Large Alignments with Mafft
+Aligning very large alignments with Mafft
 -----------------------------------------
 The fastest mode with Mafft can be achieved using:
 
@@ -2090,7 +2087,7 @@ The fastest mode with Mafft can be achieved using:
 
 
 
-Aligning Very Large Alignments with T-Coffee
+Aligning very large alignments with T-Coffee
 --------------------------------------------
 T-Coffee is not very well gifted for aligning large datasets, but you can give it a try using a special option that generates approximate alignments. These alignments should roughly have the same accuracy as ClustalW. They are acceptable for sequences more than 40% identical.
 
@@ -2101,9 +2098,9 @@ T-Coffee is not very well gifted for aligning large datasets, but you can give i
 
 
 
-Shrinking Large Alignments With T-Coffee
+Shrinking large alignments with T-Coffee
 ----------------------------------------
-Once you have generated your large alignment, you may nedd/want to shrink it to a smaller one, that will be (hopefuly) as informative and easier to manipulate. For that purpose, use the trim option (described in detail in the first section of this document).
+Once you have generated your large alignment, you may need/want to shrink it to a smaller one, that will be (hopefully) as informative and easier to manipulate. For that purpose, use the trim option (described in detail in the first section of this document).
 
 
 ::
@@ -2129,7 +2126,7 @@ By default, these alignments are computed using a Blosum62 matrix, but you can u
 Pam matrices: These matrices are allegedly less accurate than the blosum. The index is correlated to the evolutionary distances. You should therefore use the pam350mt to align very distantly related sequences.
 
 
-Blosum matrices: These matrices are allegedly the most accurate. The index is correlated to the maximum percent identity within the sequences used to estimate the matrix. You should therefore use the Blosum30mt to align very distantly related sequences. Blosum matrices are biased toward protein core regions. This may explain why theses matrices tend to give better alignments, since by design they can capture the most evolutionary resilient signal contained in proteins.
+Blosum matrices: These matrices are allegedly the most accurate. The index is correlated to the maximum percent identity within the sequences used to estimate the matrix. You should therefore use the Blosum30mt to align very distantly related sequences. Blosum matrices are biased toward protein core regions. This may explain why these matrices tend to give better alignments, since by design they can capture the most evolutionary resilient signal contained in proteins.
 
 
 Unless you have some structural information available, the only way to tell whether your alignment has improved or not is to look at the score. For instance, if you compute the two following alignments:
@@ -2148,9 +2145,9 @@ Unless you have some structural information available, the only way to tell whet
 You will get two alignments that have roughly the same score but are different. You can still use these two alternative alignments by comparing them to identify regions that have been aligned identically by the two matrices. These regions are usually more trustworthy.
 
 
-Comparing Two Alternative Alignments
+Comparing two alternative alignments
 ------------------------------------
-If you change the parameters, you will end up with alternative alignemnts. It can be interesting to compare them quantitatively. T-Coffee comes along with an alignment comparison module named aln_compare. You can use it to estimate the amount of difference between your two alignments:
+If you change the parameters, you will end up with alternative alignments. It can be interesting to compare them quantitatively. T-Coffee comes along with an alignment comparison module named aln_compare. You can use it to estimate the amount of difference between your two alignments:
 
 
 ::
@@ -2183,85 +2180,82 @@ Of course, this does not tell you where are the good bits, but you can get this 
   t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_\
  aln_threshold 50
 
-  sp|O35205|GRAK_MOUSE M---r----fssw-------ALvslvagvym----------------SSECFHTEIIGGR
+  sp|O35205|GRAK_MOUSE 	M---r----fssw-------ALvslvagvym----------------SSECFHTEIIGGR
 
-  sp|Q7YRZ7|GRAA_BOVIN M--ni----pfpf--sfppaIClllipgvfp----------------vs---cEGIIGGN
+  sp|Q7YRZ7|GRAA_BOVIN	M--ni----pfpf--sfppaIClllipgvfp----------------vs---cEGIIGGN
 
-  sp|P08884|GRAE_MOUSE M--------ppv----------lilltlllp----------------l-GAGAEEIIGGH
+  sp|P08884|GRAE_MOUSE 	M--------ppv----------lilltlllp----------------l-GAGAEEIIGGH
 
-  sp|Q06606|GRZ2_RAT M--------flf----------lfflvailp----------------v-NTEGGEIIWGT
+  sp|Q06606|GRZ2_RAT    M--------flf----------lfflvailp----------------v-NTEGGEIIWGT
 
-  sp|P21844|MCPT5_MOUSE M---h----llt----------lhllllllg----------------s-STKAGEIIGGT
+  sp|P21844|MCPT5_MOUSE	M---h----llt----------lhllllllg----------------s-STKAGEIIGGT
 
-  sp|P03953|CFAD_MOUSE M---h----ssvy-------fvalvilgaav----------------CAAQPRGRILGGQ
+  sp|P03953|CFAD_MOUSE 	M---h----ssvy-------fvalvilgaav----------------CAAQPRGRILGGQ
 
-  sp|P00773|ELA1_RAT M---l----rflv--F----ASlvlyghstq----------------DFPETNARVVGGA
+  sp|P00773|ELA1_RAT 	M---l----rflv--F----ASlvlyghstq----------------DFPETNARVVGGA
 
-  sp|Q00871|CTRB1_PENVA MIgkl----slll--V----CVavasgnpaagkpwhwKSPKPLVDPRIHVNATPRIVGGV
+  sp|Q00871|CTRB1_PENVA	MIgkl----slll--V----CVavasgnpaagkpwhwKSPKPLVDPRIHVNATPRIVGGV
 
-  sp|P08246|ELNE_HUMAN M--tlGR--rlac--L----FLacvlpalll----------------GGTALASEIVGGR
+  sp|P08246|ELNE_HUMAN 	M--tlGR--rlac--L----FLacvlpalll----------------GGTALASEIVGGR
 
-  sp|P20160|CAP7_HUMAN M--t-----rltv--L----ALlagllassr----------------AGSSPLLDIVGGR
+  sp|P20160|CAP7_HUMAN 	M--t-----rltv--L----ALlagllassr----------------AGSSPLLDIVGGR
 
-  sp|P80015|CAP7_PIG -------------------------------------------------------IVGGR
+  sp|P80015|CAP7_PIG 	-------------------------------------------------------IVGGR
 
-  sp|Q03238|GRAM_RAT l-------------------LLllalktlwa----------------VGNRFEAQIIGGR
+  sp|Q03238|GRAM_RAT 	l-------------------LLllalktlwa----------------VGNRFEAQIIGGR
 
-  sp|P00757|KLKB4_MOUSE M-----------w-------flilflalslggid-------------AAPP-----vqsq
+  sp|P00757|KLKB4_MOUSE	M-----------w-------flilflalslggid-------------AAPP-----vqsq
 
-  sp|Q6H321|KLK2_HORSE M-----------w-------flvlcldlslgetg-------------ALPPIQSRIIGGW
+  sp|Q6H321|KLK2_HORSE 	M-----------w-------flvlcldlslgetg-------------ALPPIQSRIIGGW
 
-  sp|Q91VE3|KLK7_MOUSE M---------gvw-------llslitvllslale-------------tag-QGERIIDGY
+  sp|Q91VE3|KLK7_MOUSE 	M---------gvw-------llslitvllslale-------------tag-QGERIIDGY
 
-  sp|Q9Y5K2|KLK4_HUMAN M-ataGN--pwgw-------flgylilgvag-sl-------------vsg-SCSQIINGE
+  sp|Q9Y5K2|KLK4_HUMAN 	M-ataGN--pwgw-------flgylilgvag-sl-------------vsg-SCSQIINGE
 
-  sp|P29786|TRY3_AEDAE M-------nqflfVSF---------calldsakvsaa------------tLSSGRIVGGF
+  sp|P29786|TRY3_AEDAE 	M-------nqflfVSF---------calldsakvsaa------------tLSSGRIVGGF
 
-  sp|P35037|TRY3_ANOGA M---iSNKiaillAVLvvav----acaqarvaqqhrsVQALPRFLPRPKYDVGHRIVGGF
+  sp|P35037|TRY3_ANOGA 	M---iSNKiaillAVLvvav----acaqarvaqqhrsVQALPRFLPRPKYDVGHRIVGGF
 
-  sp|P07338|CTRB1_RAT M--a------flwlvs---------cfalvgatfgcg---vptiqpv--LTGLSRIVNGE
+  sp|P07338|CTRB1_RAT 	M--a------flwlvs---------cfalvgatfgcg---vptiqpv--LTGLSRIVNGE
 
-   : .
 
-  sp|O35205|GRAK_MOUSE EVQPHSRPFMASIQYR----SKHICGGVLIHPQWVLTAAHCYSWFprGHSPTVVLGAHSL
+  sp|O35205|GRAK_MOUS	EVQPHSRPFMASIQYR----SKHICGGVLIHPQWVLTAAHCYSWFprGHSPTVVLGAHSL
 
-  sp|Q7YRZ7|GRAA_BOVIN EVAPHTRRYMALIK------GLKLCAGALIKENWVLTAAHCDlk----GNPQVILGAHST
+  sp|Q7YRZ7|GRAA_BOVIN 	EVAPHTRRYMALIK------GLKLCAGALIKENWVLTAAHCDlk----GNPQVILGAHST
 
-  sp|P08884|GRAE_MOUSE VVKPHSRPYMAFVKSVDIEGNRRYCGGFLVQDDFVLTAAHCRN-----RTMTVTLGAHNI
+  sp|P08884|GRAE_MOUSE 	VVKPHSRPYMAFVKSVDIEGNRRYCGGFLVQDDFVLTAAHCRN-----RTMTVTLGAHNI
 
-  sp|Q06606|GRZ2_RAT ESKPHSRPYMAFIKFYDSNSEPHHCGGFLVAKDIVMTAAHCNG-----RNIKVTLGAHNI
+  sp|Q06606|GRZ2_RAT	ESKPHSRPYMAFIKFYDSNSEPHHCGGFLVAKDIVMTAAHCNG-----RNIKVTLGAHNI
 
-  sp|P21844|MCPT5_MOUSE ECIPHSRPYMAYLEIVTSENYLSACSGFLIRRNFVLTAAHCAG-----RSITVLLGAHNK
+  sp|P21844|MCPT5_MOUSE	ECIPHSRPYMAYLEIVTSENYLSACSGFLIRRNFVLTAAHCAG-----RSITVLLGAHNK
 
-  sp|P03953|CFAD_MOUSE EAAAHARPYMASVQVN----GTHVCGGTLLDEQWVLSAAHCMDGVtdDDSVQVLLGAHSL
+  sp|P03953|CFAD_MOUSE	EAAAHARPYMASVQVN----GTHVCGGTLLDEQWVLSAAHCMDGVtdDDSVQVLLGAHSL
 
-  sp|P00773|ELA1_RAT EARRNSWPSQISLQYLSggswyHTCGGTLIRRNWVMTAAHCVSSQm---TFRVVVGDHNL
+  sp|P00773|ELA1_RAT	EARRNSWPSQISLQYLSggswyHTCGGTLIRRNWVMTAAHCVSSQm---TFRVVVGDHNL
 
-  sp|Q00871|CTRB1_PENVA EATPHSWPHQAALFId----DMYFCGGSLISSEWVLTAAHCMDGAg---FVEVVLGAHNI
+  sp|Q00871|CTRB1_PENVA	EATPHSWPHQAALFId----DMYFCGGSLISSEWVLTAAHCMDGAg---FVEVVLGAHNI
 
-  sp|P08246|ELNE_HUMAN RARPHAWPFMVSLQLr----GGHFCGATLIAPNFVMSAAHCVANVNV-RAVRVVLGAHNL
+  sp|P08246|ELNE_HUMAN	RARPHAWPFMVSLQLr----GGHFCGATLIAPNFVMSAAHCVANVNV-RAVRVVLGAHNL
 
-  sp|P20160|CAP7_HUMAN KARPRQFPFLASIQNq----GRHFCGGALIHARFVMTAASCFQSQNP-GVSTVVLGAYDL
+  sp|P20160|CAP7_HUMAN	KARPRQFPFLASIQNq----GRHFCGGALIHARFVMTAASCFQSQNP-GVSTVVLGAYDL
 
-  sp|P80015|CAP7_PIG RAQPQEFPFLASIQKq----GRPFCAGALVHPRFVLTAASCFRGKNS-GSASVVLGAYDL
+  sp|P80015|CAP7_PIG 	RAQPQEFPFLASIQKq----GRPFCAGALVHPRFVLTAASCFRGKNS-GSASVVLGAYDL
 
-  sp|Q03238|GRAM_RAT EAVPHSRPYMVSLQNT----KSHMCGGVLVHQKWVLTAAHCLSEP--LQQLKLVFGLHSL
+  sp|Q03238|GRAM_RAT 	EAVPHSRPYMVSLQNT----KSHMCGGVLVHQKWVLTAAHCLSEP--LQQLKLVFGLHSL
 
-  sp|P00757|KLKB4_MOUSE vdcENSQPWHVAVYRF----NKYQCGGVLLDRNWVLTAAHCYN-----DKYQVWLGKNNF
+  sp|P00757|KLKB4_MOUSE	vdcENSQPWHVAVYRF----NKYQCGGVLLDRNWVLTAAHCYN-----DKYQVWLGKNNF
 
-  sp|Q6H321|KLK2_HORSE ECEKHSKPWQVAVYHQ----GHFQCGGVLVHPQWVLTAAHCMS-----DDYQIWLGRHNL
+  sp|Q6H321|KLK2_HORSE	ECEKHSKPWQVAVYHQ----GHFQCGGVLVHPQWVLTAAHCMS-----DDYQIWLGRHNL
 
-  sp|Q91VE3|KLK7_MOUSE KCKEGSHPWQVALLKG----NQLHCGGVLVDKYWVLTAAHCKM-----GQYQVQLGSDKI
+  sp|Q91VE3|KLK7_MOUSE	KCKEGSHPWQVALLKG----NQLHCGGVLVDKYWVLTAAHCKM-----GQYQVQLGSDKI
 
-  sp|Q9Y5K2|KLK4_HUMAN DCSPHSQPWQAALVME----NELFCSGVLVHPQWVLSAAHCFQ-----NSYTIGLGLHSL
+  sp|Q9Y5K2|KLK4_HUMAN	DCSPHSQPWQAALVME----NELFCSGVLVHPQWVLSAAHCFQ-----NSYTIGLGLHSL
 
-  sp|P29786|TRY3_AEDAE QIDIAEVPHQVSLQRS----GRHFCGGSIISPRWVLTRAHCTTNTDP-AAYTIRAGStd-
+  sp|P29786|TRY3_AEDAE	QIDIAEVPHQVSLQRS----GRHFCGGSIISPRWVLTRAHCTTNTDP-AAYTIRAGStd-
 
-  sp|P35037|TRY3_ANOGA EIDVSETPYQVSLQYF----NSHRCGGSVLNSKWILTAAHCTVNLQP-SSLAVRLGSsr-
+  sp|P35037|TRY3_ANOGA	EIDVSETPYQVSLQYF----NSHRCGGSVLNSKWILTAAHCTVNLQP-SSLAVRLGSsr-
 
-  sp|P07338|CTRB1_RAT DAIPGSWPWQVSLQDKt---gfHFCGGSLISEDWVVTAAHCGVKT----SDVVVAGEFDQ
-
-   : *.. :: ::: * * : *
+  sp|P07338|CTRB1_RAT	DAIPGSWPWQVSLQDKt---gfHFCGGSLISEDWVVTAAHCGVKT----SDVVVAGEFDQ
 
 
 
@@ -2278,7 +2272,7 @@ For an even more drastic display, try:
 
 
 
-Changing Gap Penalties
+Changing gap penalties
 ----------------------
 Gap penalties are the core of the matter when it comes to multiple sequence alignments. An interesting feature of T-Coffee is that it does not really need such penalties when assembling the MSA, because in theory the penalties have already been applied when computing the library. This is the theory, as in practice penalties can help improve the quality of the alignment.
 
@@ -2298,7 +2292,7 @@ The default values are -gapopen=-50, -gapext=0. The reasons for these very low v
 This gap penalty is only applied at the alignment level (i.e. after the library was computed). If you want to change the gap penalties of the methods used to build the library, you will need to go deeper into the core of the matter...
 
 
-Two methods are used by default to build the library. One does global pairwise alignments and is named slow_pair, the other is named lalign_id_pair and and produces local alignments. These methods are specified via the -method flag. The default of this flag is:
+Two methods are used by default to build the library. One does global pairwise alignments and is named slow_pair, the other is named lalign_id_pair and produces local alignments. These methods are specified via the -method flag. The default of this flag is:
 
 
 ::
@@ -2307,7 +2301,7 @@ Two methods are used by default to build the library. One does global pairwise a
 
 
 
-Usually you do not need to write it because it is the default, but if you want to change the default parameters of the constituting methods, you will need to do so explicitely. The default for lalign_id_pair is gop=-10, GEP=-4, MATRIX=blosum50mt. The default for slow_pair is: GOP=-10, GEP=-1 and MATRIX=blosum62mt. If you want to change this, try:
+Usually you do not need to write it because it is the default, but if you want to change the default parameters of the constituting methods, you will need to do so explicitely. The default for lalign_id_pair are: GOP=-10, GEP=-4, MATRIX=blosum50mt. The default for slow_pair are: GOP=-10, GEP=-1 and MATRIX=blosum62mt. If you want to change this, try:
 
 
 ::
@@ -2317,17 +2311,17 @@ Usually you do not need to write it because it is the default, but if you want t
 
 
 
-This means the library is now computed using the Blosum62mt with lalign, rather than the Blosum50mt. The good news is that when using this matrix, the score of our alignment increases from 48(default) to 50. We may assume this new alignment is more accurate than the previous one.
+This means the library is now computed using the Blosum62mt with lalign, rather than the Blosum50mt. The good news is that when using this matrix, the score of our alignment increases from 48 (default) to 50. We may assume this new alignment is more accurate than the previous one.
 
 
 .. warning:: It only makes sense to compare the consistency score of alternative alignments when these alignments have been computed using the same methods (lalign_id_pair and slow_pair for instance).
 
-Can You Guess The Optimal Parameters?
+Can you guess the optimal parameters?
 -------------------------------------
-It is a trick question, but the general answer is NO. The matrix and the gap penalties are simplistic attempts at modeling evolution. While the matrices do a reasonable job, the penalties are simply inappropriate: they should have a value that depends on the structure of the protein and a uniform value cannot be good enough. Yet, since we do not have better we must use them...
+It is a tricky question, but the general answer is NO. The matrix and the gap penalties are simplistic attempts at modeling evolution. While the matrices do a reasonable job, the penalties are simply inappropriate: they should have a value that depends on the structure of the protein and a uniform value cannot be good enough. Yet, since we do not have better we must use them...
 
 
-In practice, this means that parameter optimality is a very add-hoc business. It will change from one dataset to the next and there is no simple way to predict which matrix and which penalty will do better. The problem is also that even after your alignment has been computed, it is not always easy to tell whether your new parameters have improved or degraded your MSA. There is no systematic way to evaluate an MSA.
+In practice, this means that parameter optimality is a very ad-hoc business. It will change from one dataset to the next and there is no simple way to predict which matrix and which penalty will do better. The problem is also that even after your alignment has been computed, it is not always easy to tell whether your new parameters have improved or degraded your MSA. There is no systematic way to evaluate an MSA.
 
 
 In general, people visually evaluate the alignment, count the number of identical columns and consider that one more conserved column is good news. If you are lucky you may know a few functional features that you expect to see aligned. If you are very lucky, you will have one structure and you can check the gaps fall in the loops. If you are extremely lucky, you will have two structures and you can assess the quality of your MSA.
@@ -2336,12 +2330,12 @@ In general, people visually evaluate the alignment, count the number of identica
 An advantage of T-Coffee is the fact that the overall score of the alignment (i.e. the consistency with the library) is correlated with the overall accuracy. In other words, if you alignment score increases, its accuracy probably increases also. All this being said, consistency is merely an empirical way of estimating the change of parameters and it does not have the predictive power of a BLAST E-Value.
 
 
-Using Many Methods at once
+Using many methods at once
 ==========================
-One of the most common situation when building multiple sequence alignments is to have several alignments produced by several alternative methods, and not knowing which one to choose. In this section, we show you that you can use M-Coffee to combine your many alignments into one single alignment. We show you here that you can either let T-Coffee compute all the multiple sequence alignments and combine them into one, or you can specify the methods you want to combine. M-Coffee is not always the best methods, but extensive benchmarks on BaliBase, Prefab and Homstrad have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine pre-computed alignments.
+One of the most common situation when building multiple sequence alignments is to have several alignments produced by several alternative methods, and not knowing which one to choose. In this section, we show you that you can use M-Coffee to combine your many alignments into one single alignment. We show you here that you can either let T-Coffee compute all the multiple sequence alignments and combine them into one, or you can specify the methods you want to combine. M-Coffee is not always the best method, but extensive benchmarks on BaliBase, Prefab and Homstrad have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine pre-computed alignments.
 
 
-Using All the Methods at the Same Time: M-Coffee
+Using all the methods at the same time: M-Coffee
 ------------------------------------------------
 In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages to be installed (see documentation). The following command:
 
@@ -2430,7 +2424,7 @@ The alignment is colored according to its consistency with all the MSA used to c
 Overall this alignment has a score of 80, which means that it is 80% consistent with the entire collection. This is a fairly high index, which means you can probably trust your alignment (at least where it is red).
 
 
-Using Selected Methods to Compute your MSA
+Using selected methods to compute your MSA
 -------------------------------------------
 Using the 8 Methods of M-Coffee8 can sometimes be a bit heavy. If you only want to use a subset of your favorite methods, you should know that each of these methods is available via the -method flag. For instance, to combine MAFFT, Muscle, t_coffee and ProbCons, you can use:
 
@@ -2445,7 +2439,7 @@ Using the 8 Methods of M-Coffee8 can sometimes be a bit heavy. If you only want 
 This will result in a computation where all the specified methods are mixed together
 
 
-Combining pre-Computed Alignments
+Combining pre-computed alignments
 ---------------------------------
 You may have a bunch of alignments that you have either pre-computed, or assembled manually or received from a colleague. You can also combine these alignments. For instance, let us imagine we generated 4 alignments with ClustalW using different gap penalties:
 
@@ -2475,14 +2469,14 @@ To combine them into ONE single alignment, use the -aln flag:
 As before, the score indicates a high level of consistency (91%) between all these alignments. This is an indication that the final alignment is probably correct.
 
 
-Aligning Profiles
+Aligning profiles
 =================
 Sometimes, it is better to pre-align a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets
 
 
-Using Profiles as templates
+Using profiles as templates
 ---------------------------
-Aligning One sequence to a Profile
+Aligning one sequence to a profile
 ----------------------------------
 Assuming you have a multiple alignment (sproteases_small.aln) here is a simple strategy to align one sequence to your profile:
 
@@ -2493,7 +2487,7 @@ Assuming you have a multiple alignment (sproteases_small.aln) here is a simple s
 
 
 
-Aligning Many Sequences to a Profile
+Aligning many sequences to a profile
 ------------------------------------
 You can align as many sequences as you wish to your profile. Likewise, you can have as many profiles as you want. For instance, the following:
 
@@ -2511,7 +2505,7 @@ Will make a multiple alignment of 3 profiles and 5 sequences. You can mix sequen
 Methods supporting full profile information are: lalign_id_pair, slow_pair and proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
 
 
-Aligning Other Types of Sequences
+Aligning other types of sequences
 =================================
 Splicing variants
 -----------------
@@ -2585,7 +2579,7 @@ Aligning RNA sequences
 RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, smart people have thought about this. If you are interested in RNA, check: http://www.bio.inf.uni-jena.de/Software/MARNA/.
 
 
-Noisy Coding DNA Sequences...
+Noisy coding DNA sequences...
 -----------------------------
 When dealing with coding DNA, the right thing to do is to translate your DNA sequence and thread the DNA onto the protein alignment if you really need some DNA. However, sometimes, your cDNA may not be so clean that you can easily translate it (frameshifts and so on). Whenever this happens, try (no warranty) the following special method.
 
@@ -2622,12 +2616,12 @@ And most importantly, the frameshifts end up at the right place. You can even re
 
 
 **************************************************************************************
-Combining Protein 2D and 3D Structural Information in your Multiple Sequence Alignment
+Combining protein 2D and 3D structural information in your Multiple Sequence Alignment
 **************************************************************************************
 Using structural information when aligning sequences is very useful. The reason is that structures diverge slower than sequences. As a consequence, one may still find a discernable homology between two sequences that have been diverging for so long that their sequences have evolved beyond recognition. Yet, when assembling the correct structure based MSA, you will realize that these sequences contain key conserved residues that a simple alignment procedure was unable to reveal. We show you in this section how to make the best of T-Coffee tools to incorporate structural information in your alignment.
 
 
-If you are in a Hurry: Expresso
+If you are in a hurry: Expresso
 ===============================
 What is Expresso?
 -----------------
@@ -2681,12 +2675,12 @@ Using Expresso
 
 
 
-Using Secondary Structure Predictions:
+Using secondary structure predictions:
 ======================================
 T-Coffee can be used to predict secondary structures and transmembrane domains. For secondary structure predictions, the current implementation is only able to run GOR on either single sequences or on a bunch of homologues found by BLAST.
 
 
-Single Sequence prediction
+Single sequence prediction
 --------------------------
 To make a secondary structure prediction with GOR, run the following. In this command line SSP is a hard coded mode. It prompts the computation of predicted secondary structures.
 
@@ -2702,8 +2696,7 @@ The predictions are then displayed in the files:
 
 ::
 
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= h\
- mgb_chite.ssp
+  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgb_chite.ssp
 
   #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_trybr.ssp
 
@@ -2726,7 +2719,7 @@ Transmembrane structures can be carried out with:
 
 
 
-Multiple Sequence Predictions
+Multiple sequences predictions
 -----------------------------
 Used this way, the method will produce for each sequence a secondary prediction file. GOR is a single sequence with a relatively low accuracy. It is possible to increase the accuracy by coupling BLAST and GOR, this can be achieved with the following command:
 
@@ -2837,9 +2830,9 @@ A similar result can be obtained with trans-membrane regions:
 
 
 
-Aligning Sequences and Structures
+Aligning sequences and structures
 =================================
-Mixing Sequences and Structures
+Mixing sequences and structures
 -------------------------------
 Gather your sequences in the same file. Name your structures according to their PDB identifier. The file three_pdb_two_seq.fasta contains five sequences, three are the sequences of PDB structures and two are regular sequences.
 
@@ -2898,7 +2891,7 @@ or
 
 
 
-Using Sequences only
+Using sequences only
 --------------------
 What often happens is that you have already built a dataset with sequences that are very similar to PDB sequences but not exactly identical. It may even be the case that the real sequence and the PDB one do not match exactly because of some genetic engineering on the structure. In this case, you have no structure whose sequence is exactly similar to the sequences in your dataset. All you need to do is to declare the equivalence sequences/structures and run T-Coffee, just like Expresso does.
 
@@ -2931,7 +2924,7 @@ In this file, the first line is telling us that sequence sp|P08246|ELNE_HUMAN is
 When you run this once, T-Coffee goes and fetches the structures. It will then align them using sap. It takes a lot of time to fetch structures, and it takes even more time to align them with sap. This is why T-Coffee saves these important intermediate results in a special location called the cache. By default, your cache is in ~/.t_coffee/cache, it is a good idea to empty it from time to time...
 
 
-Aligning Profile using Structural Information
+Aligning profile using structural information
 =============================================
 If you have two profiles to align, an ideal situation is when your profiles each contain one or more structures. These structures will guide the alignment of the profiles, even if they contain very distally related sequences. We have prepared two such profiles (prf1_pdb1.aln, prf2_pdb2.aln). You have two choices here. All you need is a template file that declares which sequences have a known structure. If you only want to align sequences, you can try:
 
@@ -2944,7 +2937,7 @@ If you have two profiles to align, an ideal situation is when your profiles each
 
 
 ****************************
-How Good Is Your Alignment ?
+How good is your alignment ?
 ****************************
 There are three strategies for evaluating your alignment. Structure is a killer. If you have two structures available for your protein family, you are in an ideal situation and you can use the iRMSD. If you don't, you are left with the option of using sequence based methods like the CORE index and the TCS. These do pretty well in the CORE regions, but can be limited in the loops. Another killer, less often at hand, is the use of functional information. If you know some residues MUST be aligned because they are functionally related, you can easily set up an evaluation procedure using T-Coffee.
 
@@ -2965,7 +2958,7 @@ Evaluate an existing MSA
 
 Outputs: 
 
-* `prot.score_ascii`  displays the score of the MSA, the sequences and the resiues. This file can be used to further filter your MSA with seq_reformat. 
+* `prot.score_ascii`  displays the score of the MSA, the sequences and the residues. This file can be used to further filter your MSA with seq_reformat. 
 * ``prot.score_html`` displays a colored version score of the MSA, the sequences and the residues. 
 
 .. warning:: The color code in the score_html indicates the agreement between the library and the considered alignment. It is important to understand that this score does not only depend on the input MSA, but it also depends on the library.
@@ -2986,13 +2979,14 @@ Outputs:
 * `prot.tcs_column_filter3`   All columns with a TCS score lower than 3 are filtered out 
 * `prot.tcs_residue_lower4`   All residues with a TCS score lower than 3 are lower cased
   
-Note that all these outpout functions are also compatible with the default T-Coffee when computing an alignment::
+Note that all these output functions are also compatible with the default T-Coffee when computing an alignment::
 
   t_coffee -seq prot.fa -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
 
 or with ``seq_reformat`` using a T-Coffee `.score_ascii` file:: 
 
-  t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc_in_f number_aln -output tcs_residue_filter3
+  t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc\
+  _in_f number_aln -output tcs_residue_filter3
   
 
 
@@ -3015,7 +3009,8 @@ Note that all these output functions are also compatible with the default T-Coff
 
 or with ``seq_reformat`` using a T-Coffee `.score_ascii` file:: 
 
-  t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc_in_f number_aln -output tcs_weighted
+  t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc\
+  _in_f number_aln -output tcs_weighted
 
 
 
@@ -3029,11 +3024,13 @@ The filtering must be done in two steps, as shown below. Note that your DNA and 
 
 This first step produces the TCS evaluation file `prot.score_ascii`::
  
-  t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_ascii -struc_in_f number_aln -output tcs_replicate_100 -out dna.replicates
+  t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_\
+  ascii -struc_in_f number_aln -output tcs_replicate_100 -out dna.replicates
   
 `dna.replicates` 100 DNA replicates with positions selected according to their AA TCS score::
 
-  t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_ascii -struc_in_f number_aln -output tcs_column_filter5 -out dna.filter  
+  t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_\
+  ascii -struc_in_f number_aln -output tcs_column_filter5 -out dna.filter  
 
 `dna.filtered` DNA positions filtered according to their TCS column score
 
@@ -3046,15 +3043,18 @@ It is possible to change the way TCS reliability is estimated.
 This can be done by building different T-Coffee libraries. `proba_pair` is the default mode of T-Coffee that runs a pair-HMM to populate the library with residue pairs having the best posterior probabilities.
 The following instructions will do this:: 
 
-  t_coffee -infile prot.aln -evaluate -method proba_pair -output score_ascii, aln, score_html
+  t_coffee -infile prot.aln -evaluate -method proba_pair -output score_ascii, al\
+  n, score_html
 
 This mode runs a series of fast multiple aligners. It is very fast and used by `ENSEMBL Compara <http://www.ensembl.org/info/genome/compara/index.html>`_:: 
 
-  t_coffee -infile prot.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa -output score_ascii, aln, score_html
+  t_coffee -infile prot.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa -o\
+  utput score_ascii, aln, score_html
 
 This mode runs the orginal default T-Coffee that was combining local and global alignments:: 
 
-  t_coffee -infile prot.aln -evaluate -method clustalw_pair,lalign_id_pair -output score_ascii, aln, score_html
+  t_coffee -infile prot.aln -evaluate -method clustalw_pair,lalign_id_pair -outp\
+  ut score_ascii, aln, score_html
 
 
 Summary of the output flags
@@ -3119,12 +3119,12 @@ Reference
 
 
 
-Evaluating Alignments with The CORE index
+Evaluating alignments with The CORE index
 =========================================
 
 Note that this procedure is now being deprecated and is meant to be replaced by the TCS procedure outlined in the above section
 
-Computing the Local CORE Index
+Computing the local CORE index
 ------------------------------
 The CORE index is an estimation of the consistency between your alignment and the computed library. The higher the consistency, the better the alignment. The score reported with every T-Coffee alignment is the concistency score. However, if you want to go further and estimate the local concistency (known as the CORE index). Simply request one extra output:
 
@@ -3150,7 +3150,7 @@ You can evaluate any existing alignment with the CORE index. All you need to do 
 
 
 
-Filtering Bad Residues
+Filtering bad residues
 ------------------------
 
 The local consistency score is between 0 and 9. If you need to build a profile or identify a signature or do some phylogeny, it may be a good idea to remove portions that are too unreliable. Here is how you can do it.
@@ -3197,7 +3197,7 @@ Removing columns of gaps is just as easy. You simply need to add the switch +rm_
 
 
 
-Filtering Gap Columns
+Filtering gap columns
 -----------------------
 
 You may want to remove columns that contain too many gaps. It is just a small variation around the rm_gap switch:
@@ -3213,7 +3213,7 @@ You may want to remove columns that contain too many gaps. It is just a small va
 Will remove all the columns containing 40% or more gaps.
 
 
-Evaluating an Alignment Using Structural Information: APDB and iRMSD
+Evaluating an alignment using structural information: APDB and iRMSD
 ====================================================================
 What is the iRMSD?
 ------------------
@@ -3223,7 +3223,7 @@ APDB and the iRMSD are two closely related measures meant to evaluate the accura
 Although it may seem that the iRMSD was an attempt to get free iPODs from Apple, it is not (or at least we never got the iPODs). The iRMSD is a special RMSD (It stands for intra-catener) where the alignments are evaluated using the structural information of the sequences with known structures.
 
 
-The strength of the iRMSD is its independence from a specific superposition models. When using the iRMSD to evaluate the score of a sequence alignment, one does not need to superpose the two structures and deduce a sequence alignment that will then be compared with the target alignment. In practice, we use a Normalized version of the iRMSD, the NiRMSD that makes it possible to compare alternative alignments of different length. From a structural point of view, the iRMSD has a meaning very similar to the iRMSD and it beahaves in a similar fashion from a numerical point of view (similar ranges in Angstroms).
+The strength of the iRMSD is its independence from a specific superposition models. When using the iRMSD to evaluate the score of a sequence alignment, one does not need to superpose the two structures and deduce a sequence alignment that will then be compared with the target alignment. In practice, we use a Normalized version of the iRMSD, the NiRMSD that makes it possible to compare alternative alignments of different length. From a structural point of view, the iRMSD has a meaning very similar to the iRMSD and it behaves in a similar fashion from a numerical point of view (similar ranges in Angstroms).
 
 
 The first step of APDB is to measure the distances between the Ca of each residue and its neighbors. Neighborhood is defined as a sphere of radius -maximum_distance (10 by default). However, by setting -local_mode to 'window', the sphere can be replaced with a window of 1/2 size '-maximum_distance' residues.
@@ -3232,7 +3232,7 @@ The first step of APDB is to measure the distances between the Ca of each residu
 Given two aligned residues (X and Y on the Figure) the iRMSD measure is an attempt to estimate the neighborhood support for the XY alignment. This is done by measuring the difference of distances between X and Y and every other pair of aligned residues within the same sphere (W and Z on Figure 1). The iRMSD is obtained by measuring the average Root Mean Square of these differences of distances. The lower the iRMSD, the better the alignment. However, an alignment can obtain a good iRMSD by simply having few aligned residues. To avoid this, the program also reports the NiRMSD= MIN(L1,L2)*iRMSD/Number Considered columns.
 
 
-How to Efficiently Use Structural Information
+How to efficiently use structural information
 ---------------------------------------------
 When it comes to evaluating Multiple Sequence Alignments, nothing beats structural information. To use the methods we describe here, you will need to have at least two structures, similar enough (>60%) to two sequences in your dataset.
 
@@ -3258,7 +3258,7 @@ Here an outline of the best way to proceed:
 If S1 and S2 are almost similar, it means your distantly related structures were well aligned, and you can expect the intermediate sequences to be well aligned as well. If S2 is much better than S1, you can expect the structures to be well aligned in the second alignment, while there is no guaranty that the alignment of the intermediate sequences has improved as well, although in practice it often does
 
 
-Evaluating an Alignment With the iRMSD Package
+Evaluating an alignment with the iRMSD package
 ----------------------------------------------
 Let us evaluate the alignment produced by Expresso, using the template_file returned by expresso:
 
@@ -3290,7 +3290,7 @@ This will deliver a long output. The most interesting bit is at the bottom:
 APDB is an older measure, less robust than the iRMSD and it is an attempt to estimate the fraction of pairs of residues whose alignment seems to be correct form a structural point of view. The higher APDB, the better the alignment, the lower the NiRMSD, the better the alignment.
 
 
-Evaluating Alternative Alignments
+Evaluating alternative alignments
 ---------------------------------
 The strength of structure based alignments is that they make it possible to compare alternative alignments. In this case let us consider:
 
@@ -3356,13 +3356,15 @@ Any kind of Feature can easily be turned into an evaluation grid. For instance, 
 
   2
 
-  sp|P21844|MCPT5_MOUSE 247 MHLLTLHLLLLLLGSSTKAGEIIGGTECIPHSRPYMAYLEIVTSENYLSACSGFLIRRNFVLTAAHCAGRSITVLLGAHNKTSKEDTWQKLEVEKQFLHPKYDENLVVHDIMLLKLKEKAKLTLGVGTLPLSANFNFIPPGRMCRAVGWGRTNV
+  sp|P21844|MCPT5_MOUSE 247 MHLLTLHLLLLLLGSSTKAGEIIGGTECIPHSRPYMAYLEIVTSENYLSACS\
+  GFLIRRNFVLTAAHCAGRSITVLLGAHNKTSKEDTWQKLEVEKQFLHPKYDENLVVHDIMLLKLKEKAKLTLGVGTLP\
+  LSANFNFIPPGRMCRAVGWGRTNVNEPASDTLQEVKMRLQEPQACKHFTSFRHNSQLCVGNPKKMQNVYKGDSGGPLL\
+  CAGIAQGIASYVHRNAKPPAVFTRISHYRPWINKILREN
 
-  NEPASDTLQEVKMRLQEPQACKHFTSFRHNSQLCVGNPKKMQNVYKGDSGGPLLCAGIAQGIASYVHRNAKPPAVFTRISHYRPWINKILREN
-
-  sp|P29786|TRY3_AEDAE 254 MNQFLFVSFCALLDSAKVSAATLSSGRIVGGFQIDIAEVPHQVSLQRSGRHFCGGSIISPRWVLTRAHCTTNTDPAAYTIRAGSTDRTNGGIIVKVKSVIPHPQYNGDTYNYDFSLLELDESIGFSRSIEAIALPDASETVADGAMCTVSGWGDT
-
-  KNVFEMNTLLRAVNVPSYNQAECAAALVNVVPVTEQMICAGYAAGGKDSCQGDSGGPLVSGDKLVGVVSWGKGCALPNLPGVYARVSTVRQWIREVSEV
+  sp|P29786|TRY3_AEDAE 254 MNQFLFVSFCALLDSAKVSAATLSSGRIVGGFQIDIAEVPHQVSLQRSGRHFC\
+  GGSIISPRWVLTRAHCTTNTDPAAYTIRAGSTDRTNGGIIVKVKSVIPHPQYNGDTYNYDFSLLELDESIGFSRSIEA\
+  IALPDASETVADGAMCTVSGWGDTKNVFEMNTLLRAVNVPSYNQAECAAALVNVVPVTEQMICAGYAAGGKDSCQGDS\
+  GGPLVSGDKLVGVVSWGKGCALPNLPGVYARVSTVRQWIREVSEV
 
   #1 2
 
@@ -3383,12 +3385,12 @@ You simply need to cut and paste this library in a file and use this file as a l
 
 
 ****************************************
-Integrating External Methods In T-Coffee
+Integrating external methods In T-Coffee
 ****************************************
 The real power of T-Coffee is its ability to seamlessly combine many methods into one. While we try to integrate as many methods as we can in the default distribution, we do not have the means to be exhaustive and if you desperately need your favourite method to be integrated, you will need to bite the bullet ...
 
 
-What Are The Methods Already Integrated in T-Coffee
+What are the methods already integrated in T-Coffee
 ===================================================
 Although, it does not necessarily do so explicitly, T-Coffee always end up combining libraries. Libraries are collections of pairs of residues. Given a set of libraries, T-Coffee makes an attempt to assemble the alignment with the highest level of consistence. You can think of the alignment as a timetable. Each library pair would be a request from students or teachers, and the job of T-Coffee would be to assemble the time table that makes as many people as possible happy...
 
@@ -3396,42 +3398,42 @@ Although, it does not necessarily do so explicitly, T-Coffee always end up combi
 In T-Coffee, methods replace the students/professors as constraints generators. These methods can be any standard/non standard alignment methods that can be used to generate alignments (pairwise, most of the time). These alignments can be viewed as collections of constraints that must be fit within the final alignment. Of course, the constraints do not have to agree with one another...
 
 
-This section shows you what are the vailable method in T-Coffee, and how you can add your own methods, either through direct parameterization or via a perl script. There are two kinds of methods: the internal and the external. For the internal methods, you simply need to have T-Coffee up and running. The external methods will require you to instal a package.
+This section shows you what are the vailable method in T-Coffee, and how you can add your own methods, either through direct parameterization or via a perl script. There are two kinds of methods: the internal and the external. For the internal methods, you simply need to have T-Coffee up and running. The external methods will require you to install a package.
 
 
 List of INTERNAL Methods
 ------------------------
-Built in methods methods can be requested using the following names. To
+Built in methods can be requested using the following names:
 
 
-proba_pair Adpated from Probcons, this method [the current default] uses a pair HMM to compute a pairwise alignment with a bi-phasic gap penalty.
+-proba_pair: Adapted from Probcons, this method [the current default] uses a pair HMM to compute a pairwise alignment with a bi-phasic gap penalty.
 
 
-fast_pair Makes a global fasta style pairwise alignment. For proteins, matrix=blosum62mt, gep=-1, gop=-10, ktup=2. For DNA, matrix=idmat (id=10), gep=-1, gop=-20, ktup=5. Each pair of residue is given a score function of the weighting mode defined by -weight.
+-fast_pair: Makes a global fasta style pairwise alignment. For proteins, matrix=blosum62mt, gep=-1, gop=-10, ktup=2. For DNA, matrix=idmat (id=10), gep=-1, gop=-20, ktup=5. Each pair of residue is given a score function of the weighting mode defined by -weight.
 
 
-slow_pair Identical to fast pair, but does a full dynamic programming, using the myers and miller algorithm. This method is recommended if your sequences are distantly related.
+-slow_pair: Identical to fast pair, but does a full dynamic programming, using the myers and miller algorithm. This method is recommended if your sequences are distantly related.
 
 
-ifast_pair
+-ifast_pair
 
 
-islow_pair  Makes a global fasta alignmnet using the previously computed pairs as a library. `i` stands for iterative. Each pair of residue is given a score function of the weighting mode defined by -weight. The Library used for the computation is the one computed before the method is used. The resullt is therefore dependant on the order in methods and library are set via the -in flag.
+-islow_pair:  Makes a global fasta alignmnet using the previously computed pairs as a library. `i` stands for iterative. Each pair of residue is given a score function of the weighting mode defined by -weight. The Library used for the computation is the one computed before the method is used. The resullt is therefore dependant on the order in methods and library are set via the -in flag.
 
 
-align_pdb_pair Uses the align_pdb routine to align two structures. The pairwise scores are those returnes by the align_pdb program. If a structure is missing, fast_pair is used instead. Each pair of residue is given a score function defined by align_pdb. [UNSUPORTED]
+-align_pdb_pair: Uses the align_pdb routine to align two structures. The pairwise scores are those returnes by the align_pdb program. If a structure is missing, fast_pair is used instead. Each pair of residue is given a score function defined by align_pdb. [UNSUPPORTED]
 
 
-lalign_id_pair Uses the ten top non intersecting local alignments, as delivered by lalign. Each alignement is weighted with its average percent identity.
+-lalign_id_pair: Uses the ten top non intersecting local alignments, as delivered by lalign. Each alignement is weighted with its average percent identity.
 
 
-lalign_rs_s_pair Same as above but does also does self comparison and uses the lalign raw_score (s stands for self). This is needed when extracting repeats.
+-lalign_rs_s_pair: Same as above but does also does self comparison and uses the lalign raw_score (s stands for self). This is needed when extracting repeats.
 
 
-Matrix Amy matrix can be requested. Simply indicate as a method the name of the matrix preceded with an X (i.e. Xpam250mt). If you indicate such a matrix, all the other methods will simply be ignored, and a standard fast progressive alignment will be computed. If you want to change the substitution matrix used by the methods, use the -matrix flag.
+-Matrix Amy: matrix can be requested, simply indicate as a method the name of the matrix preceded with an X (i.e. Xpam250mt). If you indicate such a matrix, all the other methods will simply be ignored, and a standard fast progressive alignment will be computed. If you want to change the substitution matrix used by the methods, use the -matrix flag.
 
 
-cdna_fast_pair This method computes the pairwise alignment of two cDNA sequences. It is a fast_pair alignment that only takes into account the amino-acid similarity and uses different penalties for amino-acid insertions and frameshifts. This alignment is turned into a library where matched nucleotides receive a score equql to the average level of identity at the amino-acid level. This mode is intended to clean cDNA obtained from ESTs, or to align pseudo-genes.
+-cdna_fast_pair: This method computes the pairwise alignment of two cDNA sequences. It is a fast_pair alignment that only takes into account the amino-acid similarity and uses different penalties for amino-acid insertions and frameshifts. This alignment is turned into a library where matched nucleotides receive a score equql to the average level of identity at the amino-acid level. This mode is intended to clean cDNA obtained from ESTs, or to align pseudo-genes.
 
 
 WARNING: This method is currently unsuported.
@@ -3439,9 +3441,9 @@ WARNING: This method is currently unsuported.
 
 PLUG-INs:List OF EXTERNAL METHODS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Plug-In: Using Methods Integrated in T-Coffee
+Plug-In: Using methods integrated in T-Coffee
 ---------------------------------------------
-The following methods are external. They correspond to packages developped by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to ad an extra interface. The following table lists the methods that can be used as plug-ins:
+The following methods are external. They correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. The following table lists the methods that can be used as plug-ins:
 
 
 ::
