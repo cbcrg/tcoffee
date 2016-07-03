@@ -2,10 +2,10 @@
 T-Coffee Tutorials
 *******************
 
-Using the T-Coffee Package to Build Multiple Sequence Alignments of Proteins, RNAs, DNA 
-sequences and 3D-Structures.
+Using the T-Coffee package to build Multiple Sequence Alignments of proteins, RNAs, DNA 
+sequences and 3D structures.
 
-This documentation is merely a cheat-sheet that recapitulates the material and the command-lines associated with the tutorial. 
+This documentation is merely a cheat-sheet that recapitulates the material and the command lines associated with the tutorial. 
 The tutorial itself is adpated from the `T-Coffee Nature Protocol Article <http://www.nature.com/nprot/journal/v6/n11/full/nprot.2011.393.html>`_ that can be followed step by step on the following site: `Online T-Coffee Tutorial <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/index.html>`_ 
 
 Introduction
