@@ -215,8 +215,7 @@ If you want to decide yourself which methods should be combined by R-Coffee, run
 
 ::
 
-  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pa\
- ir
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair
 
 
 
@@ -241,9 +240,7 @@ tRMSD is a structure based clustering method using the iRMSD to drive the cluste
 
 ::
 
-  $$: t_coffee -other_pg trmsd -aln 3d_sample5.aln -template_file 3d_sample5.tem\
- plate_list
-
+  $$: t_coffee -other_pg trmsd -aln 3d_sample5.aln -template_file 3d_sample5.template_list
 
 
 3d_sample5.aln is a multiple alignment in which each sequence has a known structure. The file 3d_sample5.template_list is a fasta like file declaring the structure associated with each sequence, in the form:
