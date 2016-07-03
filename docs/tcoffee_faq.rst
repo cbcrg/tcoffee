@@ -559,7 +559,7 @@ A: Yes. As long as the structure sequences are named according to their PDB iden
 Q: T-Coffee becomes very slow when combining sequences and structures.
 ----------------------------------------------------------------------
 
-A: This is true. By default the structures are feteched on the net, using RCSB. The problem arises when T-Coffee looks for the structure of sequences WITHOUT structures. One solution is to install PDB locally. In that case you will need to set two environment variables:
+A: This is true. By default the structures are fetched through the net using RCSB. The problem arises when T-Coffee looks for the structure of sequences WITHOUT structures. One solution is to install the PDB database locally. In that case you will need to set two environment variables:
 
 
 
@@ -577,10 +577,10 @@ Interestingly, the observation that sequences without structures are those that 
 Q: Can I use a local installation of PDB?
 -----------------------------------------
 
-A: Yes, T-Coffe supports three types of installations:
+A: Yes, T-Coffee supports three types of installations:
 
 
- -an add-hoc installation where all your structures are in a directory, under the form pdbid.pdb or pdbid.id.Z or pdbid.pdb.gz. In that case, all you need to do is set the environement variables correctly:
+-an ad-hoc installation where all your structures are in a directory, under the form pdbid.pdb or pdbid.id.Z or pdbid.pdb.gz. In that case, all you need to do is set the environement variables correctly:
 
 
 ::
@@ -590,7 +590,7 @@ A: Yes, T-Coffe supports three types of installations:
 
 
 
- -a standard pdb installation using the all section of pdb. In that case, you must set the variables to:
+-a standard pdb installation using the all section of pdb. In that case, you must set the variables to:
 
 
 ::
@@ -600,7 +600,7 @@ A: Yes, T-Coffe supports three types of installations:
 
 
 
- -a standard pdb installation using the divided section of pdb:
+-a standard pdb installation using the divided section of pdb:
 
 
 ::
