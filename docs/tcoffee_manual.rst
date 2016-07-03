@@ -4173,12 +4173,10 @@ References
 It is important that you cite T-Coffee when you use it. Citing us is (almost) like giving us money: it helps us convincing our institutions that what we do is useful and that they should keep paying our salaries and deliver Donuts to our offices from time to time (Not that they ever did it, but it would be nice anyway).
 
 
-Cite the server if you used it, otherwise, cite the original paper from 2000 (No, it was never named 'T-Coffee 2000').
+Cite the server if you used it, otherwise, cite the original paper from 2000 (No, it was never named 'T-Coffee 2000'):
 
-
-=====================================================================================================================================
 Notredame C, Higgins DG, Heringa   J.                                                                                               
-=====================================================================================================================================
+======================================================================================================================================================================
 ======================================================================================================================================================================
 T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]                                               
 ======================================================================================================================================================================
@@ -4232,7 +4230,7 @@ COFFEE: an objective function for multiple   sequence alignments.   Bioinformati
 
 
 CORE/TCS
-====
+========
 ====================================================================================================================================================================== 
 Notredame C, Abergel C.                                                                                                                                 
 ====================================================================================================================================================================== 
