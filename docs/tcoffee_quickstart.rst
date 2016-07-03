@@ -90,7 +90,8 @@ RNA
 
                        use rcoffee to combine consan alignments (accurate/slow)
 
-
+  ----------------------------------------------------------------------------
+  
 
 Memory Fix
 ==========
@@ -105,7 +106,7 @@ Quick Start
 We only give you the very basics here. Please use the Tutorial for more detailed information on how to use our tools.
 
 
-.. warning:: IMPORTANT: All the files mentionned here (sampe_seq...) can be found in the example directory of the distribution.
+.. warning:: IMPORTANT: All the files mentionned here (e.g. sample_seq) can be found in the example directory of the distribution.
 
 T-Coffee
 ========
@@ -129,13 +130,7 @@ This will output two files:
 
 
 
-.. warning:: IMPORTANT:
-
-.. warning:: In theory nucleic acids should be automatically detected and the default methods should be adapted appropriately. However, sometimes this may fail, either because the sequences are too short or contain too many ambiguity codes.
-
-.. warning:: When this happens, you are advised to explicitly set the type of your sequences
-
-.. warning:: NOTE: the -mode=dna is not needed or supported anymore
+.. warning:: IMPORTANT: In theory nucleic acids should be automatically detected and the default methods should be adapted appropriately. However, sometimes this may fail, either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences. NOTE: the -mode=dna is not needed or supported anymore
 
 ::
 
@@ -151,7 +146,7 @@ M-Coffee is a Meta version of T-Coffee that makes it possible to combine the out
 If all these packages are already installed on your machine. You must:
 
 
-1-set the following environment variables
+1-Set the following environment variables
 
 
 ::
@@ -162,7 +157,7 @@ If all these packages are already installed on your machine. You must:
 
 
 
-Once this is done, write your sequences in a file and run: same file (Swiss-prot, Fasta or Pir) and type.
+2-Write your sequences in a file and run: same file (Swiss-prot, Fasta or Pir) and type.
 
 
 ::
@@ -189,8 +184,6 @@ If you did not manage to install all the required structural packages for Expres
 
 
 
-
-
 ::
 
   $$: t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair
@@ -204,11 +197,11 @@ R-Coffee can be used to align RNA sequences, using their RNApfold predicted seco
 
 ::
 
-  t_coffee sample_rnaseq1.fasta -special_mode rcoffee_consan
+  $$: t_coffee sample_rnaseq1.fasta -special_mode rcoffee_consan
 
 
 
-This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode that will run Muscle, Probcons4RNA and MAfft and then use the secondary structures predicted by RNApfold.
+This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode that will run Muscle, Probcons4RNA and MAfft and then use the secondary structures predicted by RNApfold:
 
 
 ::
@@ -232,7 +225,7 @@ iRMSD and APDB
 All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index ( 1aabA for instance). All the sequences do not need to have a known structure, but at least two need to have it.
 
 
-Given the alignment:
+Given the alignment, use the following command:
 
 
 ::
@@ -317,7 +310,7 @@ The program then outputs a series of files
 
 MOCCA
 =====
-Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
+Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type:
 
 
 ::
