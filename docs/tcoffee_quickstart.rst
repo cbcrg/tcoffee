@@ -62,7 +62,7 @@ DNA
 ===
 ::
 
-  R-Coffee t_coffee three_cdna.fasta -mode cdna
+  R-Coffee             t_coffee three_cdna.fasta -mode cdna
 
 
 
