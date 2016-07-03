@@ -1,47 +1,39 @@
 #####################
 T-Coffee Installation
 #####################
+
 ******************
-Default procedures
+Default Procedures
 ******************
+
 This section describes the installation procedures relevant for the most standard use of T-Coffee.
 
-Third Party Packages and On Demand Installations
+Third party packages and on demand installations
 ================================================
-T-Coffee is a complex package that interacts with many other third part software. If you only want a standalone version of T-Coffee, you may install that package on its own. If you want to use a most sophisticated flavor (3dcoffee, expresso, rcofeee, etc...), the installer will try to install all the third party packages required.
+T-Coffee is a complex package that interacts with many other third part software. If you only want a standalone version of T-Coffee, you may install that package on its own. If you want to use a most sophisticated flavor (3D-Coffee, Expresso, R-Cofeee, etc...), the installer will try to install all the third party packages required.
 
 
-Note that since version 7.56, T-Coffee will use 'on demand' installation and install the third party packages it needs *when* it needs them. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
+Note that since version 7.56, T-Coffee will use 'on demand' installation and install the third party packages it needs when it needs them. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
 
 
-Whenver on-demand installation or automated installation fails because of unforessen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to check the original documentation.
+Whenever on demand installation or automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to check the original documentation.
 
 
-Standard Installation of T-Coffee
+Standard installation of T-Coffee
 =================================
-Automated Installation
+
+Automated installation
 ----------------------
-We now recommend that you use the automated installer provided for UNIX or Linux platforms.
+We now recommend that you use the automated installer provided for Unix or Linux platforms.
 
 
-Mac-OsX
-^^^^^^^
-::
-
-   Click on tge .dmg file
-
-
-
-Unix
-^^^^
+Unix/Linux
+^^^^^^^^^^
 ::
 
    rpm -i <rmp>
 
 
-
-Unix
-----
 You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST (http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest)
 
 
@@ -74,7 +66,7 @@ This installation will only install the stand alone T-Coffee. If you want to ins
 
 
 
-Or even
+Or even:
 
 
 ::
@@ -83,7 +75,7 @@ Or even
 
 
 
--All the corresponding executables will be downloaded automatically and installed in
+All the corresponding executables will be downloaded automatically and installed in:
 
 
 ::
@@ -92,86 +84,74 @@ Or even
 
 
 
--if you executables are in a different location, give it to T-Coffee using the -plugins flag.
+-If you executables are in a different location, give it to T-Coffee using the -plugins flag.
 
-
--If the installation of any of the companion package fails, you should install it yourself using the provided link (see below) and following the authors instructions.
-
+-If the installation of any of the package fails, you should install it yourself using the provided link (see below) and following the authors instructions.
 
 -If you have not managed to install SOAP::Lite, you can re-install it later (from anywhere) following steps 1-2.
 
+-This procedure attempts 3 things: installing and compiling T-Coffee (C program), installing and compiling TMalign (Fortran), installing and compiling XML::Simple.
 
--This procedure attempts 3 things: installing and Compiling T-Coffee (C program), Installing and compiling TMalign (Fortran), Installing and compiling XML::Simple
+-If you have never installed a perl module before, CPAN will ask you many questions: say Yes to all.
 
-
--If you have never installed a perl module before, CPAN will ask you many questions: say Yes to all
-
-
--If everything went well, the procedure has created in the bin directory two executables: t_coffee and TMalign (Make sure these executables are on your $PATH!)
+-If everything went well, the procedure has created in the bin directory two executables: t_coffee and TMalign (Make sure these executables are on your $PATH)
 
 
-Microsoft Windows/Cygwin
-------------------------
-Install Cygwin
+Mac OS X
+^^^^^^^^
+Make sure you have the developer's kit installed (compilers and makefile) and follow the Unix procedure.
+
+::
+
+   Click on the .dmg file
 
 
-Download The Installer (NOT Cygwin/X)
+Microsoft Windows (Cygwin)
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+T-Coffee doesn't run on Windows; in order to be able to run T-Coffee you need to install a Linux environment such as Cygwin:
 
-Click on view to list ALL the packages
+::
 
+  1.      Install Cygwin
 
-Select: gcc-core, make, wget
+  2.      Download the installer (NOT Cygwin/X)
 
+  3.      Click on view to list ALL the packages
 
-Optional: ssh, xemacs, nano
+  4.      Select: gcc-core, make, wget
 
+  5.      Optional: ssh, xemacs, nano
 
-Run mkpasswd in Cywin (as requested when you start cygwin)
+  6.      Run mkpasswd in Cygwin (as requested when you start Cygwin)
 
-
-Install T-Coffee within Cygwin using the Unix procedure
-
-
-MAC osX, Linux
---------------
-Make sure you have the Developer's kit installed (compilers and makefile)
-
-
-Follow the Unix Procedure
+  7.      Install T-Coffee within Cygwin using the Unix procedure
 
 
 CLUSTER Installation
---------------------
-In order to run, T-Coffee must have a value for the http_proxy and for the E-mail. In order to do so you can either:
+^^^^^^^^^^^^^^^^^^^^
+In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so you can either:
 
 
 export the following values:
 
-
 export http_proxy_4_TCOFFEE='proxy' or '' if no proxy
-
 
 export EMAIL_4_TCOFFEE='your email'
 
 
 OR
 
-
 modify the file ~/.t_coffee/t_coffee_env
-
 
 OR
 
-
-add to your command line: t_coffee .... -proxy=<proxy> -email=<email
-
-
-if you have no proxy: t_coffee ... -proxy -email=<email>
+add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
+(if you have no proxy: t_coffee ... -proxy -email=<email>)
 
 
-If you have PDB installed:
---------------------------
+If you have the PDB database installed:
+---------------------------------------
 Assuming you have a standard PDB installation in your file system
 
 
@@ -187,9 +167,11 @@ Assuming you have a standard PDB installation in your file system
 
 If you do not have PDB installed, don't worry, t_coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally.
 
+
 *******************
 Advanced Procedures
 *******************
+
 These procedures are not needed for default usage of T-Coffee. You will only need to install these packages for specific puposes.
 
 Installing BLAST for T-Coffee
