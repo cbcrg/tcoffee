@@ -20,39 +20,40 @@ Proteins
 
                        use the output.html to estimate the MSA accuracy
   ----------------------------------------------------------------------------
+ 
   Very Fast            t_coffee sample_seq1.fasta -mode quickaln
 
                        lower -ndiag if the sequences are very similar
 
   ----------------------------------------------------------------------------
 
-  Very Accurate   t_coffee sample_aln1.fasta -mode accurate
+  Very Accurate        t_coffee sample_aln1.fasta -mode accurate
 
-     slow, combines structures, sequences and profiles
-
-  ----------------------------------------------------------------------------
-
-  M-Coffee t_coffee sample_aln1.fasta -mode mcoffee
-
-   combines most of the existing MSA packages
+                       slow, combines structures, sequences and profiles
 
   ----------------------------------------------------------------------------
 
-  3D-Coffee t_coffee sample_aln1.fasta -mode 3dcoffee
+  M-Coffee             t_coffee sample_aln1.fasta -mode mcoffee
 
-   uses the structure of your sequences if named with PDBID
-
-  ----------------------------------------------------------------------------
-
-  Expresso t_coffee sample_aln1.fasta -mode expresso
-
-   finds structures homologous to your sequences
+                       combines most of the existing MSA packages
 
   ----------------------------------------------------------------------------
 
-  PSI-Coffee t_coffee sample_aln1.fasta -mode psicoffee
+  3D-Coffee            t_coffee sample_aln1.fasta -mode 3dcoffee
 
-   enriches your sequence with profile information
+                       uses the structure of your sequences named with PDBID
+
+  ----------------------------------------------------------------------------
+
+  Expresso             t_coffee sample_aln1.fasta -mode expresso
+
+                       finds structures homologous to your sequences
+
+  ----------------------------------------------------------------------------
+
+  PSI-Coffee           t_coffee sample_aln1.fasta -mode psicoffee
+
+                       enriches your sequence with profile information
 
   ----------------------------------------------------------------------------
 
@@ -73,21 +74,21 @@ RNA
 
   ============================================================================
 
-  R-Coffee t_coffee sample_rnaseq1.fasta -mode rcoffee
+  R-Coffee             t_coffee sample_rnaseq1.fasta -mode rcoffee
 
-    use the predicted secondary structure of your sequences
-
-  ----------------------------------------------------------------------------
-
-  RM-Coffee t_coffee sample_rnaseq1.fasta -mode rmcoffee
-
-    use M-Coffee + secondary structure prediction
+                       use the predicted secondary structure of your sequences
 
   ----------------------------------------------------------------------------
 
-  R-Coffee Consan t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+  RM-Coffee            t_coffee sample_rnaseq1.fasta -mode rmcoffee
 
-      use rcoffee to combine consan alignments. Accurate and Slow
+                       use M-Coffee + secondary structure prediction
+
+  ----------------------------------------------------------------------------
+
+  R-Coffee Consan      t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+
+                       use rcoffee to combine consan alignments (accurate/slow)
 
 
 
@@ -106,7 +107,7 @@ We only give you the very basics here. Please use the Tutorial for more detailed
 
 .. warning:: IMPORTANT: All the files mentionned here (sampe_seq...) can be found in the example directory of the distribution.
 
-T-COFFEE
+T-Coffee
 ========
 Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
 
