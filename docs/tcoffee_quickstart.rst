@@ -146,7 +146,7 @@ M-Coffee is a Meta version of T-Coffee that makes it possible to combine the out
 If all these packages are already installed on your machine. You must:
 
 
-1-Set the following environment variables
+1-Set the following environment variables:
 
 
 ::
@@ -157,7 +157,7 @@ If all these packages are already installed on your machine. You must:
 
 
 
-2-Write your sequences in a file and run: same file (Swiss-prot, Fasta or Pir) and type.
+2-Write your sequences in a file and run: same file (Swiss-prot, Fasta or Pir) and type:
 
 
 ::
@@ -171,7 +171,7 @@ If the program starts complaining one package or the other is missing, this mean
 
 Expresso
 ========
-If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against PDB, identify the best targets and use these to align your proteins.
+If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against the PDB database, identify the best targets and use these to align your proteins.
 
 
 ::
@@ -271,8 +271,7 @@ The program then outputs a series of files
 
 ::
 
-  Template Type: [3d_sample5.template_list] Mode Or File: [3d_sample5.template_l\
- ist] [Start]
+  Template Type: [3d_sample5.template_list] Mode Or File: [3d_sample5.template_list] [Start]
 
    [Sample Columns][TOT= 51][100 %][ELAPSED TIME: 0 sec.]
 
@@ -290,16 +289,16 @@ The program then outputs a series of files
 
 
 
-3d_sample5.tot_pos_list  is a list of the tRMSD tree associated with every position.
+3d_sample5.tot_pos_list is a list of the tRMSD tree associated with every position.
 
 
-3d_sample5.struc_tree100 is a consensus tree (phylip/consense) of the trees contained in the previous file. This file is the default output
+3d_sample5.struc_tree100 is a consensus tree (phylip/consense) of the trees contained in the previous file. This file is the default output.
 
 
-3d_sample5.struc_tree10 is a consensus tree (phylip/consense) of the 10% trees having the higest average agreement with the rest
+3d_sample5.struc_tree10 is a consensus tree (phylip/consense) of the 10% trees having the higest average agreement with the rest.
 
 
-3d_sample5.struc_tree10 is a consensus tree (phylip/consense) of the 50% trees having the higest average agreement with the rest
+3d_sample5.struc_tree10 is a consensus tree (phylip/consense) of the 50% trees having the higest average agreement with the rest.
 
 
 3d_sample5.html is a colored version of the output showing in red the positions that give the highest support to 3d_sample5.struc_tree100
