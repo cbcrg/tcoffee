@@ -315,7 +315,6 @@ Reformatting your data
 ======================
 
 
-
 Changing MSA formats
 --------------------
 It can be necessary to change from one MSA format to another. If your sequences are in ClustalW format and you want to turn them into fasta, while keeping the gaps, try
@@ -520,8 +519,6 @@ Let us consider the following file:
   D CTTCGT-AGTCGT---TTAAGA--ca-
 
   A CTCCGTgTCTAGGagtTTACGTggAGT
-
-   * * * * *
 
 
 
@@ -853,8 +850,8 @@ Consider the following alignment (sample_aln7.aln)
 
 ::
 
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 sec
-, SCORE=0, Nseq=4, Len=28
+  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04\
+  sec, SCORE=0, Nseq=4, Len=28
 
   A CTCCGTGTCTAGGAGT-TTACGTGGAGT
 
@@ -864,8 +861,6 @@ Consider the following alignment (sample_aln7.aln)
 
   C -TTAAGGTCC---AGATTGCGGAGC---
 
-   * .. .* * . *:
-
 
 
 and the following cache (sample_aln7.cache_aln):
@@ -873,8 +868,8 @@ and the following cache (sample_aln7.cache_aln):
 
 ::
 
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04 sec
-, SCORE=0, Nseq=4, Len=28
+  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04\
+  sec, SCORE=0, Nseq=4, Len=28
 
   A 3133212131022021-11032122021
 
@@ -894,8 +889,8 @@ You can turn to lower case all the residues having a score between 1 and 2:
   $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.\
  cache_aln -struc_in_f number_aln -action +lower '[1-2]'
 
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.05 sec
-, SCORE=0, Nseq=4, Len=28
+  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.05\
+  sec, SCORE=0, Nseq=4, Len=28
 
   A CtCCgtgtCtAggAgt-ttACgtggAgt
 
@@ -904,8 +899,6 @@ You can turn to lower case all the residues having a score between 1 and 2:
   D CttCgt----AgtCgt-ttAAgACA---
 
   C -ttAAggtCC---AgAttgCggAgC---
-
-   * .. .* * . *:
 
 
 
