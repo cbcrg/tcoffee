@@ -2,9 +2,9 @@
 Quick Start
 ###########
 .. note::All the files mentionned here (sampe_seq...) can be found in the example directory of the distribution.
-**********
-One Liners
-**********
+*******************
+Basic Command Lines
+*******************
 
 Proteins
 ========
