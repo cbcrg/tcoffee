@@ -521,7 +521,6 @@ Let us consider the following file:
   A CTCCGTgTCTAGGagtTTACGTggAGT
 
 
-
 The command
 
 
@@ -986,7 +985,7 @@ Extracting portions of dataset
 Extracting portions of a dataset is something very frequently needed. You may need to extract all the sequences that contain the word human in their name, or you may want all the sequences containing a simple motif. We show you here how to do a couple of these things.
 
 
-Extracting The high scoring blocks
+Extracting the high scoring blocks
 ----------------------------------
 It is possible to use a score_ascii file ( as produced in the previous section) in order to extract high scoring portions of an alignment. For instance, the following command:
 
@@ -1286,7 +1285,7 @@ You can also specify the sequences you want to keep. To do so, give a fasta file
 
 
 
-Identifying and Removing Outliers
+Identifying and removing outliers
 ----------------------------------
 Sequences that are too distantly related from the rest of the set will sometimes have very negative effects on the overall alignment. To prevent this, it is advisable not to use them. This can be done when trimming the sequences, for instance:
 
@@ -1301,7 +1300,7 @@ Sequences that are too distantly related from the rest of the set will sometimes
 The symbol _O stands for Outliers. It will lead to the removal of all the sequences that have less than 40% average accuracy with all the other sequences in the dataset.
 
 
-Chaining Important Sequences
+Chaining important sequences
 ----------------------------
 In order to align two distantly related sequences, most multiple sequence alignment packages perform better when provided with many intermediate sequences that make it possible to 'bridge' your two sequences. The modifier +chain makes it possible to extract from a dataset a subset of intermediate sequences that chain the sequences you are interested in.
 
@@ -1309,8 +1308,7 @@ In order to align two distantly related sequences, most multiple sequence alignm
 For instance, let us consider the two sequences:
 
 
-sp|P21844|MCPT5_MOUSE
-sp|P29786|TRY3_AEDAE
+sp|P21844|MCPT5_MOUSE and sp|P29786|TRY3_AEDAE
 
 
 These sequences have 26% identity. This is high enough to make a case for a homology relationship between them, but this is too low to blindly trust any pairwise alignment. With the names of the two sequences written in the file sproteases_pair.fasta, run the following command:
@@ -1412,7 +1410,7 @@ If you want to fetch the chain E of the PDB structure 1PPG, you can use:
 
 Fetching the sequence of a PDB structure
 ----------------------------------------
-To Fetch the sequence, use:
+To fetch the sequence, use:
 
 
 ::
@@ -1441,7 +1439,7 @@ If the file you are looking for is neither in the current directory nor in the l
   t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta -no_remote_pdb_file
 
 
-By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior). 
+By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior): 
 
 
 ::
@@ -1449,7 +1447,7 @@ By default, T-Coffee also requires two important PDB files declared using the tw
   export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
   Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt
 
-And 
+and:
 
 
 ::
@@ -1819,13 +1817,13 @@ Unfortunately it is not easy to establish structure based standards of truth. Se
 When dealing with distantly related sequences, the only way to produce reliable alignments is to use structural information. T-Coffee provides many facilities to do so in a seamless fashion. Several important factors need to be taken into account when selecting an alignment method:
 
 
--The best methods are not always the best. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
+ -The best methods are not always the best. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
 
 
--The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
+ -The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
 
 
-- Last but not least, bear in mind that these methods have only been evaluated by comparison with reference structure based sequence alignments. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
+ -Last but not least, bear in mind that these methods have only been evaluated by comparison with reference structure based sequence alignments. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
 
 
 The main methods and their scope
@@ -1855,7 +1853,7 @@ The alignments generated using the fast modes of these programs will be very sui
  -Secondary structure predictions
 
 
-However they may not be suitable for more refined application such as
+However they may not be suitable for more refined application such as:
 
 
  -Profile construction
@@ -1907,7 +1905,7 @@ In the rest of this tutorial we give some hints on how to carry out each of thes
 ================= ====== ===== ======== ======== ======== 
 Packages          Muscle Mafft ProbCons T-Coffee ClustalW 
 ================= ====== ===== ======== ======== ======== 
-Accuracy          ++     +++   +++      +++   +        
+Accuracy          ++     +++   +++      +++      +        
 <100 Seq.         ++     ++    +++      +++      +        
 >100 Seq.         +++    +++   -        +        +        
 Remote Homologues ++     +++   +++      +++      +        
@@ -1928,7 +1926,7 @@ Table 1. Relative possibilities associated with the main packages (T-Coffee Tuto
 ===================== ====== ===== ======== ======== ======== 
 Packages              Muscle Mafft ProbCons T-Coffee ClustalW 
 ===================== ====== ===== ======== ======== ======== 
-Dist Based Phylogeny  +++    +++   ++       ++   ++       
+Dist Based Phylogeny  +++    +++   ++       ++       ++       
 ML or MP Phylogeny    ++     +++   +++      +++      ++       
 Profile Construction  ++     +++   +++      +++      ++       
 3D Modeling           ++     ++    ++       +++      +        
@@ -2033,7 +2031,7 @@ How good is your alignment
 Later in this tutorial we show you how to estimate the accuracy of your alignment. Before we go into details, you should know that the number that comes on the first line of the header (in ClustalW format) is the score of your alignment.
 
 
-CLUSTAL FORMAT for T-COFFEE Version_4.32 [http://www.tcoffee.org], CPU=19.06 sec, SCORE=37, Nseq=19, Len=341
+::CLUSTAL FORMAT for T-COFFEE Version_4.32 [http://www.tcoffee.org], CPU=19.06 sec, SCORE=37, Nseq=19, Len=341
 
 
 You can use this value to compare alternative alignments of the same sequences. Alignments with a score higher than 40 are usually pretty good.
@@ -2258,7 +2256,7 @@ For an even more drastic display, try:
 
 ::
 
-  t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_\
+  $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_\
  aln_threshold 50 -output_aln_modif x
 
 
@@ -2706,7 +2704,7 @@ Transmembrane structures can be carried out with:
 
 ::
 
-  t_coffee sample_aln.fasta -template_file TM
+  $$: t_coffee sample_aln.fasta -template_file TM
 
 
 
@@ -2717,7 +2715,7 @@ Used this way, the method will produce for each sequence a secondary prediction 
 
 ::
 
-  t_coffee sample_aln.fasta -template_file PSISSP
+  $$: t_coffee sample_aln.fasta -template_file PSISSP
 
 
 
@@ -2729,7 +2727,7 @@ A similar output can be obtained for Transmembrane segment predictions:
 
 ::
 
-  t_coffee sample_aln.fasta -template_file PSITM
+  $$: t_coffee sample_aln.fasta -template_file PSITM
 
 
 
@@ -2740,7 +2738,7 @@ It is possible to use the secondary prediction in order to reward the alignment 
 
 ::
 
-  t_coffee sample_aln.fasta -template_file PSISSP -method_evaluate_mode ssp -met\
+  $$: t_coffee sample_aln.fasta -template_file PSISSP -method_evaluate_mode ssp -met\
  hod lalign_id_pair slow_pair
 
 
@@ -2750,7 +2748,7 @@ Likewise, it is possible to use this information with trans-membrane domains
 
 ::
 
-  t_coffee sample_aln.fasta -template_file PSITM -method_evaluate_mode tm -metho\
+  $$: t_coffee sample_aln.fasta -template_file PSITM -method_evaluate_mode tm -metho\
  d lalign_id_pair slow_pair
 
 
@@ -2795,7 +2793,7 @@ You can then run T-Coffee using your own template file
 
 ::
 
-  t_coffee sample_aln.fasta -template_file <template_file> -method_evaluate_mode\
+  $$: t_coffee sample_aln.fasta -template_file <template_file> -method_evaluate_mode\
   ssp -method lalign_id_pair slow_pair
 
 
@@ -2808,7 +2806,7 @@ You can output a color coded version of your alignment using the predicted struc
 
 ::
 
-  t_coffee sample_aln.fasta -template_file PSISSP -output sec_html
+  $$: t_coffee sample_aln.fasta -template_file PSISSP -output sec_html
 
 
 
@@ -2817,7 +2815,7 @@ A similar result can be obtained with trans-membrane regions:
 
 ::
 
-  t_coffee sample_aln.fasta -template_file PSITM -output tm_html
+  $$: t_coffee sample_aln.fasta -template_file PSITM -output tm_html
 
 
 
@@ -2945,7 +2943,7 @@ Evaluate an existing MSA
 
 :: 
 
-  t_coffee -infile prot.aln -evaluate -output score_ascii, aln, score_html
+  $$: t_coffee -infile prot.aln -evaluate -output score_ascii, aln, score_html
 
 Outputs: 
 
@@ -2961,7 +2959,7 @@ Filter unreliable MSA positions
 
 :: 
 
-  t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_fi\
+  $$: t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_fi\
  lter3, tcs_residue_lower4
 
 Outputs: 
@@ -2972,11 +2970,11 @@ Outputs:
   
 Note that all these output functions are also compatible with the default T-Coffee when computing an alignment::
 
-  t_coffee -seq prot.fa -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
+  $$: t_coffee -seq prot.fa -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
 
 or with ``seq_reformat`` using a T-Coffee `.score_ascii` file:: 
 
-  t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc\
+  $$: t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc\
   _in_f number_aln -output tcs_residue_filter3
   
 
@@ -2986,7 +2984,7 @@ Weight MSA for improved trees
 
 :: 
 
-  t_coffee -infile prot.aln -evaluate -output tcs_weighted, tcs_replicate_100
+  $$: t_coffee -infile prot.aln -evaluate -output tcs_weighted, tcs_replicate_100
 
 Outputs: 
 
@@ -2996,11 +2994,11 @@ Outputs:
 
 Note that all these output functions are also compatible with the default T-Coffee when computing an alignment::
 
-  t_coffee -seq prot.fa -output tcs_weighted, tcs_replicate_100
+  $$: t_coffee -seq prot.fa -output tcs_weighted, tcs_replicate_100
 
 or with ``seq_reformat`` using a T-Coffee `.score_ascii` file:: 
 
-  t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc\
+  $$: t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc\
   _in_f number_aln -output tcs_weighted
 
 
@@ -3011,16 +3009,16 @@ Working with coding DNA
 When working with DNA, it is advisable to first align the sequences at the protein level and later thread back the DNA onto your aligned proteins.
 The filtering must be done in two steps, as shown below. Note that your DNA and protein sequences must have the same name:: 
 
-  t_coffee -infile prot.aln -evaluate -output score_ascii
+  $$: t_coffee -infile prot.aln -evaluate -output score_ascii
 
 This first step produces the TCS evaluation file `prot.score_ascii`::
  
-  t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_\
+  $$: t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_\
   ascii -struc_in_f number_aln -output tcs_replicate_100 -out dna.replicates
   
 `dna.replicates` 100 DNA replicates with positions selected according to their AA TCS score::
 
-  t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_\
+  $$: t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_\
   ascii -struc_in_f number_aln -output tcs_column_filter5 -out dna.filter  
 
 `dna.filtered` DNA positions filtered according to their TCS column score
@@ -3034,35 +3032,35 @@ It is possible to change the way TCS reliability is estimated.
 This can be done by building different T-Coffee libraries. `proba_pair` is the default mode of T-Coffee that runs a pair-HMM to populate the library with residue pairs having the best posterior probabilities.
 The following instructions will do this:: 
 
-  t_coffee -infile prot.aln -evaluate -method proba_pair -output score_ascii, al\
+  $$: t_coffee -infile prot.aln -evaluate -method proba_pair -output score_ascii, al\
   n, score_html
 
 This mode runs a series of fast multiple aligners. It is very fast and used by `ENSEMBL Compara <http://www.ensembl.org/info/genome/compara/index.html>`_:: 
 
-  t_coffee -infile prot.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa -o\
+  $$: t_coffee -infile prot.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa -o\
   utput score_ascii, aln, score_html
 
 This mode runs the orginal default T-Coffee that was combining local and global alignments:: 
 
-  t_coffee -infile prot.aln -evaluate -method clustalw_pair,lalign_id_pair -outp\
+  $$: t_coffee -infile prot.aln -evaluate -method clustalw_pair,lalign_id_pair -outp\
   ut score_ascii, aln, score_html
 
 
 Summary of the output flags
 ---------------------------
 
-============================ 	================
-Flags        			Description
-============================ 	================
--output=score_ascii	    	outputs a TCS evaluation file
--output=score_html		contains ascii format in html format
--output=score_pdf		will transfer score_html into pdf format
--output=sp_ascii		is a format reporting the TCS score of every aligned pair in the target MSA
--output=tcs_residue_filter_N	Removes all residues with a TCS score lower than `N`
--output=tcs_columns_filter_N	Removes all columns with a TCS score lower than `N`
--output=tcs_weighted	 	Outputs phylip format with duplicated columns according to their TCS score
--output=tcs_replicate_N	 	Generates `N` phylip replicates, with columns drawn according to their TCS score
-============================ 	================
+============================  ================
+Flags        		      Description
+============================  ================
+-output=score_ascii	      outputs a TCS evaluation file
+-output=score_html	      contains ascii format in html format
+-output=score_pdf	      will transfer score_html into pdf format
+-output=sp_ascii	      is a format reporting the TCS score of every aligned pair in the target MSA
+-output=tcs_residue_filter_N  removes all residues with a TCS score lower than `N`
+-output=tcs_columns_filter_N  removes all columns with a TCS score lower than `N`
+-output=tcs_weighted	      outputs phylip format with duplicated columns according to their TCS score
+-output=tcs_replicate_N	      generates `N` phylip replicates with columns drawn according to their TCS score
+============================  ================
 
 
 Supplement data
@@ -3392,7 +3390,7 @@ In T-Coffee, methods replace the students/professors as constraints generators. 
 This section shows you what are the vailable method in T-Coffee, and how you can add your own methods, either through direct parameterization or via a perl script. There are two kinds of methods: the internal and the external. For the internal methods, you simply need to have T-Coffee up and running. The external methods will require you to install a package.
 
 
-List of INTERNAL Methods
+List of INTERNAL methods
 ------------------------
 Built in methods can be requested using the following names:
 
@@ -3430,7 +3428,7 @@ Built in methods can be requested using the following names:
 WARNING: This method is currently unsuported.
 
 
-Plug-ins:list OF EXTERNAL methods
+List of EXTERNAL methods (plug-ins)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Plug-in: using methods integrated in T-Coffee
 ---------------------------------------------
@@ -3490,10 +3488,10 @@ The following methods are external. They correspond to packages developed by oth
 Once installed, most of these methods can be used as either pairwise or multiple alignment methods. Note that all these methods use Blosum62 as a default.
 
 
-clustalw_pair Uses clustalw (default parameters) to align two sequences. Each pair of residue is given a score function of the weighting mode defined by -weight.
+clustalw_pair uses clustalw (default parameters) to align two sequences. Each pair of residue is given a score function of the weighting mode defined by -weight.
 
 
-clustalw_msa Makes a multiple alignment using ClustalW and adds it to the library. Each pair of residue is given a score function of the weighting mode defined by -weight.
+clustalw_msa makes a multiple alignment using ClustalW and adds it to the library. Each pair of residue is given a score function of the weighting mode defined by -weight.
 
 
 probcons_pair Probcons package: probcons.stanford.edu/.
@@ -3532,10 +3530,10 @@ dialignt_pair dialignt package
 dialignt_msa pcma package
 
 
-sap_pair Uses sap to align two structures. Each pair of residue is given a score function defined by sap. You must have sap installed on your system to use this method.
+sap_pair Uues sap to align two structures. Each pair of residue is given a score function defined by sap. You must have sap installed on your system to use this method.
 
 
-fugue_pair Uses a standard fugue installation to make a sequence /structure alignment. Fugue installation must be standard. It does not have to include all the fugue packages but only:
+fugue_pair uses a standard fugue installation to make a sequence /structure alignment. Fugue installation must be standard. It does not have to include all the fugue packages but only:
 
 
 1- joy, melody, fugueali, sstruc, hbond
@@ -3565,9 +3563,9 @@ To request a method, see the -in or the -method flag. For instance, if you wish 
 
 
 
-Modifying the parameters of Internal and External Methods
+Modifying the parameters of internal and external Methods
 =========================================================
-Internal Methods
+Internal Mmthods
 ----------------
 It is possible to modify on the fly the parameters of hard coded methods:
 
@@ -3582,7 +3580,7 @@ It is possible to modify on the fly the parameters of hard coded methods:
 EP stands for Extra parameters. These parameters will superseed any other parameters.
 
 
-External Methods
+External methods
 ----------------
 External methods receive a command line built with the information provided via the parameter file (see next heading). It is possible to produce such a parameter file and to modify it in order to modify the commands passed to the methods.
 
@@ -4024,7 +4022,7 @@ Will overweight by a factor 2 the weight of slow_pair.
 Will cause every pair of slow_pair to have a weight equal to 250
 
 
-Plug-out: Using T-Coffee as a plug-in
+Plug-out: using T-Coffee as a plug-in
 =====================================
 Just because it enjoys enslaving other methods as plug-ins, does not mean that T-Coffee does not enjoy being incorporated within other packages. We try to give as much support as possible to anyone who wishes to incorporate T-Coffee in an alignment pipeline.
 
@@ -4050,12 +4048,12 @@ We currently support:
 
 
 
-Creating Your Own T-Coffee Libraries
+Creating your own T-Coffee libraries
 ====================================
 If the method you want to use is not integrated, or impossible to integrate, you can generate your own libraries, either directly or by turning existing alignments into libraries. You may also want to precompute your libraries, in order to combine them at your convenience.
 
 
-Using Pre-Computed Alignments
+Using pre-computed alignments
 -----------------------------
 If the method you wish to use is not supported, or if you simply have the alignments, the simplest thing to do is to generate yourself the pairwise/multiple alignments, in FASTA, ClustalW, msf or Pir format and feed them into t_coffee using the -in flag:
 
@@ -4178,8 +4176,9 @@ It is important that you cite T-Coffee when you use it. Citing us is (almost) li
 Cite the server if you used it, otherwise, cite the original paper from 2000 (No, it was never named 'T-Coffee 2000').
 
 
-======================================================================================================================================================================
-Notredame C, Higgins DG, Heringa   J.                                                                                                                                 
+=====================================================================================================================================
+Notredame C, Higgins DG, Heringa   J.                                                                                               
+=====================================================================================================================================
 ======================================================================================================================================================================
 T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]                                               
 ======================================================================================================================================================================
