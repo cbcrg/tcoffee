@@ -4,7 +4,7 @@ T-Coffee: Technical Documentation:
 *******************
 Documentation Scope
 *******************
-This documentation covers the following packages:T-Coffee, seq_reformat PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD.
+This documentation covers the following packages:T-Coffee, seq_reformat, PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD.
 
 The most up to date version is available from http://www.tcoffee.org.
 
@@ -12,6 +12,7 @@ The most up to date version is available from http://www.tcoffee.org.
 ************************
 License and Terms of Use
 ************************
+
 T-Coffee is distributed under the Gnu Public License
 ====================================================
 Please make sure you have agreed with the terms of the license attached to the package before using the T-Coffee package or its documentation. T-Coffee is a freeware open source distributed under a GPL license. This means that there are very little restrictions to its use, either in an academic or a non academic environment.
@@ -36,12 +37,13 @@ The current license only allows for the incorporation of T-Coffee in non-commerc
 **********************
 Addresses and Contacts
 **********************
+
 Contributors
 ============
 T-coffee is developed, maintained, monitored, used and debugged by a dedicated team that include or have included:
 
 
- Cdric Notredame, Paolo di Tomasso, Jean-Franois Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan. Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm
+ Cedric Notredame, Paolo di Tommaso, Jean-François Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan, Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm.
 
 
 Addresses
@@ -61,76 +63,64 @@ T-Coffee can be used to automatically check if an updated version is available, 
 *********
 Citations
 *********
-It is important that you cite T-Coffee when you use it. Citing us is (almost) like giving us money: it helps us convincing our institutions that what we do is useful and that they should keep paying our salaries and deliver Donuts to our offices from time to time (Not that they ever did it, but it would be nice anyway).
+It is important that you cite T-Coffee when you use it. Citing us is (almost) like giving us money: it helps us convincing our institutions that what we do is useful and that they should keep paying our salaries and deliver donuts to our offices from time to time (Not that they ever did it, but it would be nice anyway).
 
 
 Cite the server if you used it, otherwise, cite the original paper from 2000 (No, it was never named 'T-Coffee 2000').
 
 
-====================================================================================================================================================================== ================================================================================================================================ 
-Notredame   C, Higgins DG, Heringa J.                                                                                                                                  Related Articles,                                                                                                          Links 
-====================================================================================================================================================================== ================================================================================================================================ 
-T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]                                                                                                                                  
-====================================================================================================================================================================== ================================================================================================================================ 
+Notredame C., Higgins D.G., Heringa J.
+======================================
+T-Coffee: A novel method for fast and accurate multiple sequence alignment. J. Mol. Biol. 2000 Sep 8;302(1):205-17. PMID: 10964570
+==================================================================================================================================
 
 Other useful publications include:
 
 
-T-Coffee
-========
-================================================================================================================================================================================================= ============================================= 
-Claude   JB, Suhre K, Notredame C, Claverie JM, Abergel C.                                                                                                                                        Related Articles,                       Links 
-================================================================================================================================================================================================= ============================================= 
-CaspR: a web server for automated molecular   replacement using homology modelling.   Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W606-9.    PMID: 15215460 [PubMed - indexed for MEDLINE]                                               
-================================================================================================================================================================================================= ============================================= 
+Claude JB, Suhre   K, Notredame C, Claverie JM, Abergel C.
+==========================================================
+CaspR: a web server for automated molecular replacement using homology modelling. Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W606-9.                                            
+==============================================================================================================================================
 
-===================================================================================================================================================================================================================== ================================== 
-Poirot   O, Suhre K, Abergel C, O'Toole E, Notredame C.                                                                                                                                                               Related Articles,            Links 
-===================================================================================================================================================================================================================== ================================== 
-3DCoffee@igs: a web server for combining sequences   and structures into a multiple sequence alignment.   Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W37-40.    PMID: 15215345 [PubMed - indexed for MEDLINE]                                    
-===================================================================================================================================================================================================================== ================================== 
+Poirot O, Suhre   K, Abergel C, O'Toole E, Notredame C.
+=======================================================
+3DCoffee@igs: a web server for combining sequences and structures into a multiple sequence alignment. Nucleic Acids Res. 2004 Jul 1;32(Web Server issue):W37-40. PMID: 15215345                                 
+=================================================================================================================================================================================
 
-==================================================================================================================================================================================== ================================== 
-O'Sullivan   O, Suhre K, Abergel C, Higgins DG, Notredame C.                                                                                                                         Related Articles,            Links 
-==================================================================================================================================================================================== ================================== 
-3DCoffee: combining protein sequences and   structures within multiple sequence alignments.   J Mol Biol. 2004 Jul 2;340(2):385-95.    PMID: 15201059 [PubMed - indexed for MEDLINE]                                    
-==================================================================================================================================================================================== ================================== 
+O'Sullivan O, Suhre   K, Abergel C, Higgins DG, Notredame C.
+============================================================
+3DCoffee: combining protein sequences and structures within multiple sequence alignments. J. Mol. Biol. 2004 Jul 2;340(2):385-95.    PMID: 15201059                                   
+===================================================================================================================================================
 
-================================================================================================================================================================================================= ================================== 
-Poirot   O, O'Toole E, Notredame C.                                                                                                                                                               Related Articles,            Links 
-================================================================================================================================================================================================= ================================== 
-Tcoffee@igs: A web server for computing,   evaluating and combining multiple sequence alignments.   Nucleic Acids Res. 2003 Jul 1;31(13):3503-6.    PMID: 12824354 [PubMed - indexed for MEDLINE]                                    
-================================================================================================================================================================================================= ================================== 
+Poirot O, O'Toole E, Notredame C.
+=================================
+Tcoffee@igs: a web server for computing, evaluating and combining multiple sequence alignments. Nucleic Acids Res. 2003 Jul 1;31(13):3503-6. PMID: 12824354                                   
+=============================================================================================================================================================
 
-========================================================================================================================================= ================================== 
-Notredame   C.                                                                                                                            Related Articles,            Links 
-========================================================================================================================================= ================================== 
-Mocca: semi-automatic method for domain hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]                                    
-========================================================================================================================================= ================================== 
+Notredame C.
+============
+Mocca: semi-automatic method for domain hunting. Bioinformatics. 2001 Apr;17(4):373-4. PMID: 11301309
+=====================================================================================================
 
-====================================================================================================================================================================== ================================== 
-Notredame   C, Higgins DG, Heringa J.                                                                                                                                  Related Articles,            Links 
-====================================================================================================================================================================== ================================== 
-T-Coffee: A novel method for fast and accurate   multiple sequence alignment.   J Mol Biol. 2000 Sep 8;302(1):205-17.    PMID: 10964570 [PubMed - indexed for MEDLINE]                                    
-====================================================================================================================================================================== ================================== 
+Notredame C, Holm L, Higgins DG.
+================================
+COFFEE: an objective function for multiple sequence alignments. Bioinformatics. 1998 Jun;14(5):407-22. PMID: 968205
+===================================================================================================================
 
-========================================================================================================================================================== ================================== 
-Notredame   C, Holm L, Higgins DG.                                                                                                                         Related Articles,            Links 
-========================================================================================================================================================== ================================== 
-COFFEE: an objective function for multiple   sequence alignments.   Bioinformatics. 1998 Jun;14(5):407-22.    PMID: 9682054 [PubMed - indexed for MEDLINE]                                    
-========================================================================================================================================================== ================================== 
+Notredame C, Abergel C.
+=======================
+2003. Using multiple alignment methods to assess the quality of genomic data analysis. In: Andrade MA, editor. Bioinformatics and genomes: current perspectives. Wymondham (UK): Horizon Scientific Press. p. 30–50. http://www.tcoffee.org/Publications/Pdf/core.pp.pdf                                   
+===============================================================================================================================================================================================================================================================================
 
-Mocca
-=====
-=========================================================================================================================================== ================================== 
-Notredame C.                                                                                                                                Related Articles,            Links 
-=========================================================================================================================================== ================================== 
-Mocca: semi-automatic method for domain   hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]                                    
-=========================================================================================================================================== ================================== 
+Chang J-M, Tommaso PD, & Notredame C.
+=====================================
+2014. TCS: a new Multiple Sequence Alignment reliability measure to estimate alignment accuracy and improve phylogenetic tree reconstruction. Molecular Biology and Evolution. 31(6):1625-37.                               
+=================================================================================================================================================================================================== 
 
-CORE
-====
-http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
+Chang J-M, Tommaso PD*, Lefort V, Gascuel O & Notredame C.
+==========================================================
+2015. TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction. Nucleic Acids Research. 43(W1):W3-6. (*These two authors contribute equally)                                  
+================================================================================================================================================================================
 
 
 Other Contributions
@@ -165,8 +155,6 @@ Bug Reports and Feedback
 
 
  -Johan Leckner reported several bugs related to the treatment of PDB structures, insuring a consistent behavior between version 1.37 and current ones.
-
-
 
 
 ****************
@@ -314,7 +302,7 @@ In general, you can set any environment variable using the -setenv flag. You can
 Note that when you use -setenv for PATH, the value you provide is concatenated TO THE BEGINNING of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
 
 
-Well Behaved Parameters
+Well behaved parameters
 =======================
 Separation
 ----------
@@ -328,26 +316,14 @@ T-Coffee is not POSIX compliant (sorry L).
 
 Entering the right parameters
 -----------------------------
-There are many ways to enter parameters in T-Coffee, see the -parameter flag in
-
+There are many ways to enter parameters in T-Coffee, see the -parameter flag in. Parameters priority: In general you will not need to use these complicated parameters. Yet, if you find yourself typing long command lines on a regular basis, it may be worth reading this section. One may easily feel confused with the various manners in which the parameters can be passed to t_coffee. The reason for these many mechanisms is that they allow several levels of intervention. For instance, you may install t_coffee for all the users and decide that the defaults we provide are not the proper ones... In this case, you will need to make your own t_coffee_default file. Later on, a user may find that he/she needs to keep re-using a specific set of parameters, different from those in t_coffee_default, hence the possibility to write an extra parameter file: parameters. In summary:
 
 ::
 
-  Parameters Priority
-  In general you will not need to use these complicated parameters. Yet, if you \
- find yourself typing long command lines on a regular basis, it may be worth read\
- ing this section.
-  One may easily feel confused with the various manners in which the parameters \
- can be passed to t_coffee. The reason for these many mechanisms is that they all\
- ow several levels of intervention. For instance, you may install t_coffee for al\
- l the users and decide that the defaults we provide are not the proper ones... I\
- n this case, you will need to make your own t_coffee_default file.
-  Later on, a user may find that he/she needs to keep re-using a specific set of\
-  parameters, different from those in t_coffee_default, hence the possibility to \
- write an extra parameter file: parameters. In summary:
   -parameters > prompt parameters > -t_coffee_defaults > -mode
-  This means that -parameters supersede all the others, while parameters provide\
- d via -special mode are the weakest.
+  
+
+This means that -parameters supersede all the others, while parameters provided via -special mode are the weakest.
 
 
 Meta-Parameters
