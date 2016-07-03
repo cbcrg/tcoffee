@@ -627,12 +627,14 @@ If you make extensive modifications, I would appreciate you send me the correcte
 By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior): 
 
 ::
+
   export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
   Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt
 
 and...
 
 ::
+ 
   export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
   Found at: http://www.rcsb.org/pdb/rest/getUnreleased
 
