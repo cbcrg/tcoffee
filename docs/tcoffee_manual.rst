@@ -2,32 +2,33 @@
 ###############
 T-Coffee Manual
 ###############
-****************
-Before You Start
-****************
+*******************
+Before You Start...
+*******************
+
 Foreword
 ========
-A lot of the stuff presented here emanates form two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the callanques. Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
+Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-This Document contains two main sections. The first one is a tutorial, where we go from simple things to more complicated and show you how to use all the subtleties of T-Coffee. We have tried to put as many of these functionalities on the web (www.tcoffee.org) but if you need to do something special and highly reproducible, the Command Line is the only way. 
+This Document contains two main sections. The first one is a tutorial, where we go from simple applications to more complicated ones, and show you how to use all the subtleties of T-Coffee. We have tried to put as many of these functionalities on the web (www.tcoffee.org) but if you need to do something special and highly reproducible, the "command line" is the only way. 
 
 
-Pre-Requisite
-=============
+Prerequisite
+============
 This tutorial relies on the assumption that you have installed T-Coffee, version 6.18 or higher.
 
 
-T-Coffee is a freeware open source running on all Unix-like platforms, including MAC-osX and Cygwin. All the relevant information for installing T-Coffee is contained in the Technical Documentation (tcoffee_technical.doc in the doc directory.)
+T-Coffee is a freeware open source running on all Unix-like platforms, including MacOS X and Cygwin. All the relevant information for installing T-Coffee is contained in the Technical Documentation (tcoffee_technical.doc in the doc directory.)
 
 
-T-Coffee cannot run on the Microsoft Windows shell. If you need to run T -Coffee on windows, start by installing cygwin (www.cygwin.com). Cygwin is a freeware open source that makes it possible to run a unix-like command line on your Microsoft Windows PC without having to reboot. Cygwin is free of charge and very easy to install. Yet, as the first installation requires downloading substantial amounts of data, you should make sure you have access to a broad-band connection.
+T-Coffee cannot run on the Microsoft Windows shell. If you need to run T-Coffee on Windows, start by installing cygwin (www.cygwin.com). Cygwin is a freeware open source that makes it possible to run a Unix-like command line on your Microsoft Windows PC without having to reboot. Cygwin is free of charge and very easy to install. Yet, as the first installation requires downloading substantial amounts of data, you should make sure you have access to a broad-band connection.
 
 
-In the course of this tutorial, we expect you to use a unix-like command line shell. If you work on Cygwin, this means clicking on the cygwin icon and typing commands in the window that appears. If you don't want to bother with command line stuff, try using the online tcoffee webserver at: www.tcoffee.org
+In the course of this tutorial, we expect you to use a Unix-like command line shell. If you work on Cygwin, this means clicking on the cygwin icon and typing commands in the window that appears. If you don't want to bother with command line, try using the online tcoffee webserver at: www.tcoffee.org
 
 
-Getting the Example Files of the Tutorial
+Getting the example files of the tutorial
 =========================================
 We encourage you to try all the following examples with your own sequences/structures. If you want to try with ours, you can get the material from the example directory of the distribution. If you do not know where this file leaves or if you do not have access to it, the simplest thing to do is to:
 
@@ -35,23 +36,20 @@ We encourage you to try all the following examples with your own sequences/struc
 1-    download T-Coffee's latest version from www.tcoffee.org (follow the link to the T-Coffee Home Page)
 
 
-2-    download the latest distribution
+2-    gunzip <distrib>.tar.gz
 
 
-3-    gunzip <distrib>.tar.gz
+3-    tar -xvf <distrib>.tar
 
 
-4-    tar -xvf <distrib>.tar
-
-
-5-    go into <distrib>/example
+4-    go into <distrib>/example
 
 
 This is all you need to do to run ALL the examples provided in this tutorial.
 
 
 *******************
-What Is  T-COFFEE ?
+What is  T-COFFEE ?
 *******************
 What is T-Coffee?
 =================
@@ -60,7 +58,7 @@ Before going deep into the core of the matter, here are a few words to quickly e
 
 What does it do?
 ----------------
-T-Coffee is a multiple sequence alignment program: given a set of sequences previously gathered using database search programs like BLAST, FASTA or Smith and Waterman, T-Coffee will produce a multiple sequence alignment. To use T-Coffee you must already have your sequences ready.
+T-Coffee is a multiple sequence alignment program: given a set of sequences previously gathered using database search programs like BLAST, FASTA or Smith and Waterman, T-Coffee will produce a Multiple Sequence Alignment (MSA). To use T-Coffee you must already have your sequences ready.
 
 
 T-Coffee can also be used to compare alignments, reformat them or evaluate them using structural information, it is the mode known as seq_reformat.
@@ -73,7 +71,7 @@ T-Coffee will align nucleic and protein sequences alike. It will be able to use 
 
 How can I use it?
 -----------------
-T-Coffee is not an interactive program. It runs from your UNIX or Linux command line and you must provide it with the correct parameters. If you do not like typing commands, here is the simplest available mode where T-Coffee only needs the name of the sequence file:
+T-Coffee is not an interactive program. It runs from your Unix or Linux command line and you must provide it with the correct parameters. If you do not like typing commands, here is the simplest available mode where T-Coffee only needs the name of the sequence file:
 
 
 ::
@@ -85,8 +83,8 @@ T-Coffee is not an interactive program. It runs from your UNIX or Linux command 
 Installing and using T-Coffee requires a minimum acquaintance with the Linux/Unix operating system. If you feel this is beyond your computer skills, we suggest you use one of the available online servers.
 
 
-Is There an Online Server
--------------------------
+Is there an online webserver
+----------------------------
 Yes, at www.tcoffee.org
 
 
@@ -95,7 +93,7 @@ Is T-Coffee different from ClustalW?
 According to several benchmarks, T-Coffee appears to be more accurate than ClustalW. Yet, this increased accuracy comes at a price: T-Coffee is slower than Clustal (about N times for N Sequences).
 
 
-If you are familiar with ClustalW, or if you run a ClustalW server, you will find that we have made some efforts to ensure as much compatibility as possible between ClustalW and T-COFFEE. Whenever it was relevant, we have kept the flag names and the flag syntax of ClustalW. Yet, you will find that T-Coffee also has many extra possibilities...
+If you are familiar with ClustalW, or if you run a ClustalW server, you will find that we have made some efforts to ensure as much compatibility as possible between ClustalW and T-Coffee. Whenever it was relevant, we have kept the flag names and the flag syntax of ClustalW. Yet, you will find that T-Coffee also has many extra possibilities...
 
 
 If you want to align closely related sequences, T-Coffee can also be used in a fast mode, much faster than ClustalW, and about as accurate:
@@ -142,27 +140,27 @@ This mode is very slow but also very accurate. On average this mode is about 10 
 
 
 
-This is the normal mode. It is one of the most accurate of its kind, roughly like Probcons.
+This is the normal mode. It is one of the most accurate of its kind, roughly like ProbCons.
 
 
 
 
 
-What T-Coffee Can and Cannot do for you ...
+What T-Coffee can and cannot do for you ...
 ===========================================
 .. note:: All the files mentioned here (e.g. sample_seq) can be found in the example directory of the distribution.
 
-(NOT) Fetching Sequences
+(NOT) Fetching sequences
 ------------------------
 T-Coffee will NOT fetch sequences for you: you must select the sequences you want to align beforehand. We suggest you use any BLAST server and format your sequences in FASTA so that T-COFFEE can use them easily. The expasy BLAST server (www.expasy.ch) provides a nice interface for integrating database searches.
 
 
-Aligning Sequences
+Aligning sequences
 ------------------
 T-Coffee will compute (or at least try to compute!) accurate multiple alignments of DNA, RNA or Protein sequences.
 
 
-Combining Alignments
+Combining alignments
 --------------------
 T-Coffee allows you to combine results obtained with several alignment methods. For instance if you have an alignment coming from ClustalW, an other alignment coming from Dialign, and a structural alignment of some of your sequences, T-Coffee will combine all that information and produce a new multiple sequence alignment having the best agreement with all these methods (see the FAQ for more details)
 
@@ -174,7 +172,7 @@ T-Coffee allows you to combine results obtained with several alignment methods. 
 
 
 
-Evaluating Alignments
+Evaluating alignments
 ---------------------
 You can use T-Coffee to measure the reliability of your Multiple Sequence Alignment. If you want to find out about that, read the FAQ or the documentation for the -output flag.
 
@@ -185,7 +183,7 @@ You can use T-Coffee to measure the reliability of your Multiple Sequence Alignm
 
 
 
-Combining Sequences and Structures
+Combining sequences and structures
 ----------------------------------
 One of the latest improvements of T-Coffee is to let you combine sequences and structures, so that your alignments are of higher quality. You need to have the sap package installed to fully benefit of this facility. If you have the EBI BLAST client installed (see installation procedure), you can run the following:
 
@@ -214,7 +212,7 @@ In this case, the sequences must be names according to their PDB targets. All th
 
 
 
-Identifying Occurrences of a Motif: Mocca
+Identifying occurrences of a motif: Mocca
 -----------------------------------------
 Mocca is a special mode of T-Coffee that allows you to extract a serie of repeats from a single sequence or a set of sequences. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. If you want to use Mocca, simply type:
 
@@ -228,7 +226,7 @@ Mocca is a special mode of T-Coffee that allows you to extract a serie of repeat
 The program needs some time to compute a library and it will then prompt you with an interactive menu. Follow the instructions.
 
 
-How Does T-Coffee works
+How does T-Coffee works
 =======================
 If you only want to make a standard multiple alignments, you may skip these explanations. But if you want to do more sophisticated things, these few indications may help before you start reading the doc and the papers.
 
@@ -272,9 +270,9 @@ Preparing Your Data: Reformatting and Trimming With seq_reformat
 Nothing is more frustrating than downloading important data and realizing you need to format it *before* using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you will realize that you have spend the whole day adding carriage return to each line in your files.
 
 
-Seq_reformat
-============
-Accessing the T-Coffee Reformatting Utility
+The seq_reformat mode
+=====================
+Accessing the T-Coffee reformatting utility
 -------------------------------------------
 T-Coffee comes along with a very powerful reformatting utility named seq_reformat. You can use seq_reformat by invoking the t_coffee shell.
 
@@ -285,22 +283,22 @@ T-Coffee comes along with a very powerful reformatting utility named seq_reforma
 
 
 
-This will output the online flag usage of seq_reformat. Seq_reformat recognizes automatically the most common formats. You can use it to:
+This will output the online flag usage of seq_reformat, it recognizes automatically the most common formats. You can use it to:
 
 
-Reformat your sequences.
+ -reformat your sequences
 
 
-extract sub-portions of alignments
+ -extract sub-portions of alignments
 
 
-Extract sequences.
+ -extract sequences
 
 
 In this section we give you a few examples of things you can do with seq_reformat:
 
 
-.. warning:: After the flag -other_pg, the T-Coffee flags are not any more recognized. It is like if you were using a different programme
+.. warning:: After the flag -other_pg, the T-Coffee flags are not any more recognized; it is like if you were using a different program.
 
 An overview of seq_reformat
 ---------------------------
@@ -340,7 +338,7 @@ If you want to turn a clustalw alignment into an alignment having the pileup for
 
 
 
-Dealing with Non-automatically recognized formats
+Dealing with non-automatically recognized formats
 -------------------------------------------------
  Format recognition is not 100% full proof. Occasionally you will have to inform the program about the nature of the file you are trying to reformat:
 
@@ -351,7 +349,7 @@ Dealing with Non-automatically recognized formats
 
 
 
-Automated Sequence Edition
+Automated sequence edition
 ==========================
 Removing the gaps from an alignment
 -----------------------------------
@@ -410,7 +408,7 @@ If you want to change the case depending on the score, you must either evaluate 
 Will lower the case of every residue identical to more than 50% of the residue in its column.
 
 
-Protecting Important Sequence Names
+Protecting important sequence names
 ===================================
 Few programs support long sequence names. Sometimes, when going through some pipeline the names of your sequences can be damaged (truncated or modified). To avoid this, seq_reformat contains a utility that can automatically rename your sequences into a form that will be machine friendly, while making it easy to return to the human friendly form.
 
@@ -445,7 +443,7 @@ Will code all the names of the original data. You can work with the file sprotea
 
 
 
-Colouring/Editing Residues in an Alignment
+Colouring/Editing residues in an alignment
 ==========================================
 Coloring specific types of residues
 -----------------------------------
@@ -496,7 +494,7 @@ You can also use the boxshade scoreing scheme:
 
 
 
-Colouring/Editing residues in an Alignment Using a Cache
+Colouring/Editing residues in an alignment using a Cache
 ========================================================
 Overview
 --------
@@ -506,7 +504,7 @@ To color an alignment, two files are needed: the alignment (aln) and the cache (
 In the cache, the colors of each residue are declared with a number between 0 and 9. Undeclared residues will appear without any color in the final alignment.
 
 
-Preparing a Sequence or Alignment Cache
+Preparing a sequence or alignment cache
 ---------------------------------------
 Let us consider the following file:
 
@@ -632,7 +630,7 @@ where each residue has been replaced with a number according to what was specifi
 
 
 
-Preparing a Library Cache
+Preparing a library cache
 -------------------------
 The Library is a special format used by T-Coffee to declare special relationships between pairs of residues. The cache library format can also be used to declare the color of specific residues in an alignment. For instance, the following file
 
@@ -710,7 +708,7 @@ It is also possible to use the BLOCK operator when defining the library (c.f. te
 The number right after BLOCK indicates the block length (10). The two next numbers (1 1) indicate the position of the first element in the block. The last value is the color.
 
 
-Coloring an Alignment using a cache
+Coloring an alignment using a cache
 -----------------------------------
 If you have a cache alignment or a cache library, you can use it to color your alignment and either make a post script, html or PDF output. For instance, if you use the file cache.seq:
 
@@ -832,7 +830,7 @@ Finally, it is also possible to display in color the conservation levels:
 
 
 
-Selective Reformatting
+Selective reformatting
 ======================
 Removing gapped columns
 -----------------------
@@ -990,12 +988,12 @@ This command considers the individual score of each residue to trigger the filte
 
 
 
-Extracting Portions of Dataset
+Extracting portions of dataset
 ==============================
 Extracting portions of a dataset is something very frequently needed. You may need to extract all the sequences that contain the word human in their name, or you may want all the sequences containing a simple motif. We show you here how to do a couple of these things.
 
 
-Extracting The High Scoring Blocks
+Extracting The high scoring blocks
 ----------------------------------
 It is possible to use a score_ascii file ( as produced in the previous section) in order to extract high scoring portions of an alignment. For instance, the following command:
 
@@ -1028,7 +1026,7 @@ It is also possible to re-use pre-computed score_ascii files, such as those obta
 
 
 
-Extracting Sequences According to a Pattern
+Extracting sequences according to a pattern
 -------------------------------------------
 You can extract any sequence by requesting a specific pattern to be found either in the name, the comment or the sequence. For instance, if you want to extract all the sequences whose name contain the word HUMAN:
 
@@ -1073,7 +1071,7 @@ Will keep all the sequences containing the word sapiens in the comment section. 
 Will extract all the sequences containing the pattern [ILM]K.
 
 
-Extracting Sequences by Names
+Extracting sequences by names
 -----------------------------
 Extracting two sequences: If you want to extract several sequences, in order to make a subset, you can do the following:
 
@@ -1120,9 +1118,9 @@ Keeping the original sequence names. Note that your sequences are now renamed ac
 
 .. warning:: +keep_name must come BEFORE +extract_seq
 
-Removing Sequences by Names
+Removing sequences by names
 ---------------------------
-Removing Two Sequences. If you want to remove several sequences, use rm_seq instead of keep_seq.
+Removing two sequences. If you want to remove several sequences, use rm_seq instead of keep_seq:
 
 
 ::
@@ -1132,9 +1130,9 @@ Removing Two Sequences. If you want to remove several sequences, use rm_seq inst
 
 
 
-Extracting Blocks Within Alignment
-----------------------------------
-Extracting a Block. If you only want to keep one block in your alignment, use
+Extracting blocks within an alignment
+-------------------------------------
+Extracting a block. If you only want to keep one block in your alignment, use:
 
 
 ::
@@ -1154,7 +1152,7 @@ In this command line, cons indicates that you are counting the positions accordi
 
 
 
-Concatenating Alignments
+Concatenating alignments
 ------------------------
 If you have extracted several blocks and you now want to glue them together, you can use the cat_aln function
 
@@ -1400,7 +1398,7 @@ Back-translating means turning a protein sequence into a DNA sequence. If you do
 In this process, codons are chosen randomly. For instance, if an aminoacid has four codons, the back-translation process will randomly select one of these. If you need more sophisticated back-translations that take into account the codon bias, we suggest you use more specific tools like: alpha.dmi.unict.it/~ctnyu/bbocushelp.html
 
 
-Fetching a Structure
+Fetching a structure
 ====================
 There are many reasons why you may need a structure. T-Coffee contains a powerful utility named extract_from_pdb that makes it possible to fetch the PDB coordinates of a structure or its FASTA sequence without requiring a local installation.
 
@@ -1419,7 +1417,7 @@ If you want to fetch the chain E of the PDB structure 1PPG, you can use:
 
 
 
-Fetching The Sequence of a PDB structure
+Fetching the sequence of a PDB structure
 ----------------------------------------
 To Fetch the sequence, use:
 
@@ -1472,7 +1470,7 @@ And
 
 
 ********************************************
-Manipulating RNA sequences with seq_reformat
+Manipulating RNA Sequences With seq_reformat
 ********************************************
 Producing a Stockholm output: adding predicted secondary structures
 ===================================================================
@@ -1611,7 +1609,7 @@ The top of the output (@@lines) summarizes the results that are displayed on the
 
 
 *************************************************
-Phylogenetic Trees Manipulation with seq_reformat
+Phylogenetic Trees Manipulation With seq_reformat
 *************************************************
 Producing phylogenetic trees
 ============================
@@ -1828,13 +1826,13 @@ Unfortunately it is not easy to establish structure based standards of truth. Se
 When dealing with distantly related sequences, the only way to produce reliable alignments is to use structural information. T-Coffee provides many facilities to do so in a seamless fashion. Several important factors need to be taken into account when selecting an alignment method:
 
 
--The best methods are not always doing best. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
+-The best methods are not always the best. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
 
 
--Secondly, the difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
+-The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
 
 
-Last, but not least, bear in mind that these methods have only been evaluated by comparison with reference structure based sequence alignments. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
+- Last but not least, bear in mind that these methods have only been evaluated by comparison with reference structure based sequence alignments. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
 
 
 The main methods and their scope
@@ -1850,7 +1848,7 @@ ClustalW: everywhere you look
 ClustalW is still the most widely used multiple sequence alignment package. Yet things are gradually changing as recent tests have consistently shown that ClustalW is neither the most accurate nor the fastest package around. This being said, ClustalW is everywhere and if your sequences are similar enough, it should deliver a fairly reasonable alignment.
 
 
-Mafft and Muscle: Aligning many sequences
+Mafft and Muscle: aligning many sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you have many sequences to align Muscle or Mafft are the obvious choice. Mafft is often described as the fastest and the most efficient. This is not entirely true. In its fast mode (FFT-NS-1), Mafft is similar to Muscle and although it is fairly accurate it is about 5 points less accurate than the consistency based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) Mafft uses local alignments and consistency. It becomes much more accurate but also slower, and more sensitive to the number of sequences.
 
@@ -2053,7 +2051,7 @@ Doing it over the WWW
 You can run T-Coffee online at www.tcoffee.org. Use the regular or the advanced form of the T-Coffee server.
 
 
-Aligning Many Sequences
+Aligning many sequences
 =======================
 Aligning very large datasets with muscle
 ----------------------------------------
@@ -2115,7 +2113,7 @@ Modifying the default parameters of T-Coffee
 The main parameters of T-Coffee are similar to those of ClustalW. They include the substitution matrix and the gap penalties. In general, T-Coffee's default is adequate. If, however, you are not satisfied with the default parameters, we encourage you to change the following parameters. Interestingly, most of what we say here holds reasonably well for ClustalW.
 
 
-Changing the Substitution Matrix
+Changing the substitution matrix
 --------------------------------
 T-Coffee only uses the substitution matrix to make the pairwise alignments that go into the library. These are all the global alignments of every possible pair of sequences, and the ten best local alignments associated with every pair of sequences.
 
@@ -2369,7 +2367,7 @@ kalign, poa, muscle, probcons, mafft, dialing-T, and T-Coffee.
 
 ::
 
-  Package Where From
+  Package where from
 
   ==========================================================
 
@@ -2616,7 +2614,7 @@ And most importantly, the frameshifts end up at the right place. You can even re
 
 
 **************************************************************************************
-Combining protein 2D and 3D structural information in your Multiple Sequence Alignment
+Combining Protein 2D and 3D Structural Information In Your Multiple Sequence Alignment
 **************************************************************************************
 Using structural information when aligning sequences is very useful. The reason is that structures diverge slower than sequences. As a consequence, one may still find a discernable homology between two sequences that have been diverging for so long that their sequences have evolved beyond recognition. Yet, when assembling the correct structure based MSA, you will realize that these sequences contain key conserved residues that a simple alignment procedure was unable to reveal. We show you in this section how to make the best of T-Coffee tools to incorporate structural information in your alignment.
 
@@ -2810,7 +2808,7 @@ You can then run T-Coffee using your own template file
 
 
 Output of the prediction
-----------------------------
+------------------------
 
 You can output a color coded version of your alignment using the predicted structures
 
@@ -2937,7 +2935,7 @@ If you have two profiles to align, an ideal situation is when your profiles each
 
 
 ****************************
-How good is your alignment ?
+How Good Is Your Alignment ?
 ****************************
 There are three strategies for evaluating your alignment. Structure is a killer. If you have two structures available for your protein family, you are in an ideal situation and you can use the iRMSD. If you don't, you are left with the option of using sequence based methods like the CORE index and the TCS. These do pretty well in the CORE regions, but can be limited in the loops. Another killer, less often at hand, is the use of functional information. If you know some residues MUST be aligned because they are functionally related, you can easily set up an evaluation procedure using T-Coffee.
 
@@ -3343,9 +3341,9 @@ This sim_idscore indicates that every pair of sequences will need to be aligned 
 
 
 
-Evaluating an Alignment according to your own Criterion
+Evaluating an alignment according to your own criterion
 =======================================================
-Establishing Your Own Criterion
+Establishing your own criterion
 -------------------------------
 Any kind of Feature can easily be turned into an evaluation grid. For instance, the protease sequences we have been using here have a well characterized binding site. A possible evaluation can be made as follows. let us consider the Swissprot annotation of the two most distantly related sequences. These two sequences contain the electron relay system of the proteases. We can use it to build an evaluation library: in P29786, the first Histidine is at position 68, while in P21844 this Histidine is on position 66. We can therefore build a library that will check whether these residues are properly aligned in any MSA. The library will look like this:
 
@@ -3385,7 +3383,7 @@ You simply need to cut and paste this library in a file and use this file as a l
 
 
 ****************************************
-Integrating external methods In T-Coffee
+Integrating External Methods In T-Coffee
 ****************************************
 The real power of T-Coffee is its ability to seamlessly combine many methods into one. While we try to integrate as many methods as we can in the default distribution, we do not have the means to be exhaustive and if you desperately need your favourite method to be integrated, you will need to bite the bullet ...
 
@@ -3439,9 +3437,9 @@ Built in methods can be requested using the following names:
 WARNING: This method is currently unsuported.
 
 
-PLUG-INs:List OF EXTERNAL METHODS
+Plug-ins:list OF EXTERNAL methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Plug-In: Using methods integrated in T-Coffee
+Plug-in: using methods integrated in T-Coffee
 ---------------------------------------------
 The following methods are external. They correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. The following table lists the methods that can be used as plug-ins:
 
@@ -3630,7 +3628,7 @@ the next filed is the parameter itself, where:
 Of course, you must know the command line of the program you are trying to modify (clustalw in this case).
 
 
-Integrating External Methods
+Integrating external methods
 ============================
 If the method you need is not already included in T-Coffee, you will need to integrate it yourself. We give you here some guidelines on how to do so.
 
@@ -3733,10 +3731,10 @@ The tc_method files are treated like any standard established method in T-Coffee
 
 Managing a collection of method files
 -------------------------------------
-It may be convenient to store all the method files in a single location on your system. By default, t_coffee will go looking into the directory ~/.t_coffee/methods/. You can change this by either modifying the METHODS_4_TCOFFEE in define_headers.h (and recompile) or by modifying the envoronement variable METHODS_4_TCOFFEE.
+It may be convenient to store all the method files in a single location on your system. By default, t_coffee will go looking into the directory ~/.t_coffee/methods/. You can change this by either modifying the METHODS_4_TCOFFEE in define_headers.h (and recompile) or by modifying the environement variable METHODS_4_TCOFFEE.
 
 
-Advanced Method Integration
+Advanced method integration
 ===========================
 It may sometimes be difficult to customize the program you want to use through a tc_method file. In that case, you may rather use an external perl_script to run your external application. This can easily be achieved using the generic_method.tc_method file.
 
@@ -3794,7 +3792,7 @@ will be used to run the script tc_generic_method.pl. The file tc_generic_method.
 
 .. note:: Note: If there is a copy of that script in your local directory, that copy will be used in place of the internal copy of T-Coffee.
 
-The Mother of All method files...
+The mother of all method files...
 ---------------------------------
 ::
 
@@ -3896,13 +3894,13 @@ The Mother of All method files...
 
   *External methods:
 
-  * aln -> alignmnent File (Fasta or ClustalW Format)
+  * aln -> Alignmnent file (Fasta or ClustalW Format)
 
   * lib-> Library file (TC_LIB_FORMAT_01)
 
   *Internal Methods:
 
-  * fL -> Internal Function returning a Lib (Librairie)
+  * fL -> Internal Function returning a Lib (Library)
 
   * fA -> Internal Function returning an Alignmnent
 
@@ -4004,7 +4002,7 @@ The Mother of All method files...
 
 
 
-Weighting your Method
+Weighting your method
 ---------------------
 By default, the alignment produced by your method will be weighted according to its percent identity. However, this can be customized via the WEIGHT parameter.
 
@@ -4033,9 +4031,9 @@ Will overweight by a factor 2 the weight of slow_pair.
 Will cause every pair of slow_pair to have a weight equal to 250
 
 
-Plug-Out: Using T-Coffee as a Plug-In
+Plug-out: Using T-Coffee as a plug-in
 =====================================
-Just because it enjoys enslaving other methods as plug-ins, does not mean that T-Coffee does not enjoy being incorporated within other packages. We try to give as much support as possible to anyone who wishes to incorportae T-Coffee in an alignment pipeline.
+Just because it enjoys enslaving other methods as plug-ins, does not mean that T-Coffee does not enjoy being incorporated within other packages. We try to give as much support as possible to anyone who wishes to incorporate T-Coffee in an alignment pipeline.
 
 
 If you want to do so, please work out some way to incorporate T-Coffee in your script . If you need some help along the ways, do not hesitate to ask, as we will always be happy to either give assistance, or even modify the package so that it accomodates as many needs as possible.
@@ -4076,7 +4074,7 @@ If the method you wish to use is not supported, or if you simply have the alignm
 
 
 
-Customizing the Weighting Scheme
+Customizing the weighting scheme
 --------------------------------
 The previous integration method forces you to use the same weighting scheme for each alignment and the rest of the libraries generated on the fly. This weighting scheme is based on global pairwise sequence identity. If you want to use a more specific weighting scheme with a given method, you should either:
 
@@ -4094,11 +4092,12 @@ convert your aln into a lib, using the -weight flag:
 
   $$: t_coffee -aln sample_aln1.aln -lib test_lib.tc_lib -outfile=outaln
 
-  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalign_id_pair -outfile=out_aln
+  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalig\
+  n_id_pair -outfile=out_aln
 
 
 
-Generating Your Own Libraries
+Generating your own libraries
 -----------------------------
 This is suitable if you have local alignments, or very detailed information about your potential residue pairs, or if you want to use a very specific weighting scheme. You will need to generate your own libraries, using the format described in the last section.
 
@@ -4115,7 +4114,7 @@ You may also want to pre-compute your libraries in order to save them for furthe
 
 
 
-Once these libraries have been computed, you can then combine tem at your convenience in a single MSA. Of course you can decide to only use the local or the global library
+Once these libraries have been computed, you can then combine them at your convenience in a single MSA. Of course you can decide to only use the local or the global library
 
 
 ::
@@ -4133,7 +4132,7 @@ Contributors
 T-coffee is developed, maintained, monitored, used and debugged by a dedicated team that include:
 
 
- Cdric Notredame
+Cedric Notredame
 
 
 Fabrice Armougom
@@ -4239,13 +4238,6 @@ Notredame C, Holm L, Higgins DG.
 COFFEE: an objective function for multiple   sequence alignments.   Bioinformatics. 1998 Jun;14(5):407-22.    PMID: 9682054 [PubMed - indexed for MEDLINE]                                    
 ========================================================================================================================================================== 
 
-Mocca
-=====
-===========================================================================================================================================
-Notredame C.                                                                                                                               
-===========================================================================================================================================
-Mocca: semi-automatic method for   domain hunting.   Bioinformatics. 2001 Apr;17(4):373-4.    PMID: 11301309 [PubMed - indexed for MEDLINE]
-===========================================================================================================================================
 
 CORE/TCS
 ====
@@ -4269,7 +4261,7 @@ Chang J-M, Tommaso PD*, Lefort V, Gascuel O & Notredame C
 ========================================================================================================================================================== 
 
 
-Other Contributions
+Other contributions
 ===================
 We do not mean to steal code, but we will always try to re-use pre-existing code whenever that code exists, free of copyright, just like we expect people to do with our code. However, whenever this happens, we make a point at properly citing the source of the original contribution. If ever you recognize a piece of your code improperly cited, please drop us a note and we will be happy to correct that.
 
@@ -4283,22 +4275,22 @@ In the mean time, here are some important pieces of code from other packages tha
 -The Sim algorithm of Huang and Miller that given two sequences computes the N best scoring local alignments.
 
 
- -The tree reading/computing routines are taken from the ClustalW Package, courtesy of Julie Thompson, Des Higgins and Toby Gibson (Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid Research).
+-The tree reading/computing routines are taken from the ClustalW Package, courtesy of Julie Thompson, Des Higgins and Toby Gibson (Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid Research).
 
 
- -The implementation of the algorithm for aligning two sequences in linear space was adapted from Myers and Miller, in CABIOS, 1988, 11-17, vol. 1)
+-The implementation of the algorithm for aligning two sequences in linear space was adapted from Myers and Miller, in CABIOS, 1988, 11-17, vol. 1)
 
 
- -Various techniques and algorithms have been implemented. Whenever relevant, the source of the code/algorithm/idea is indicated in the corresponding function.
+-Various techniques and algorithms have been implemented. Whenever relevant, the source of the code/algorithm/idea is indicated in the corresponding function.
 
 
- -64 Bits compliance was implemented by Benjamin Sohn, Performance Computing Center Stuttgart (HLRS), Germany.
+-64 Bits compliance was implemented by Benjamin Sohn, Performance Computing Center Stuttgart (HLRS), Germany.
 
 
 An enormous thanks to these people who believe in free open source code..
 
 
-Bug Reports and Feedback
+Bug reports and feedback
 ========================
  -Prof David Jones (UCL) reported and corrected the PDB1K bug (now t_coffee/sap can align PDB sequences longer than 1000 AA).
 
