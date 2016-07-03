@@ -1,13 +1,13 @@
-###
-FAQ
-###
-.. tip:: All the files mentionned here (sample_seq...) can be found in the example directory of the distribution.
+################
+FAQ for T-Coffee
+################
+.. tip:: All the files mentioned here (e.g. sample_seq) can be found in the example directory of the distribution.
 
-********
-T-Coffee
-********
+
+***************************************
 Abnormal Terminations and Wrong Results
-=======================================
+***************************************
+
 Q: The program keeps crashing when I give my sequences.
 -------------------------------------------------------
 
@@ -81,7 +81,7 @@ A: You can use a more accurate, slower and less memory hungry dynamic programmin
 
 
 
-Note that this mode will be much less time efficient than the default, although it may be slightly more accurate. In practice the parameterization associate with special mode turns off every memory expensive heuristic within T-Coffee. For version 2.11 this amounts to
+Note that this mode will be much less time efficient than the default, although it may be slightly more accurate. In practice the parameterization associate with special mode turns off every memory expensive heuristic within T-Coffee.
 
 
 ::
@@ -93,10 +93,11 @@ Note that this mode will be much less time efficient than the default, although 
 
 If you keep running out of memory, you may also want to lower -maxnseq, to ensure that t_coffee_dpa will be used.
 
-
+********************
 Input/Output control
-====================
-Q: How many sequences can t_coffee handle?
+********************
+
+Q: How many sequences can T_Coffee handle?
 ------------------------------------------
 
 A: T-Coffee is limited to a maximum of 50 sequences. Above this number, the program automatically switches to a heuristic mode, named DPA, where DPA stands for Double Progressive Alignment.
@@ -150,7 +151,7 @@ A: Specify stderr or stdout as output filename, the output will be redirected ac
 This instruction will output the tree (in new hampshire format) and the alignment to stdout.
 
 
-Q: Is it possible to pipe stuff INTO t_coffee?
+Q: Is it possible to pipe stuff into T_Coffee?
 ----------------------------------------------
 
 A: If as a file name, you specify stdin, the content of this file will be expected throught pipe:
@@ -162,7 +163,7 @@ A: If as a file name, you specify stdin, the content of this file will be expect
 
 
 
-will be equivalent to
+will be equivalent to:
 
 
 ::
@@ -196,10 +197,11 @@ Q: Can I read my parameters from a file?
 A: See the well behaved parameters section.
 
 
+
 Q: I want to decide myself on the name of the output files !!!
 --------------------------------------------------------------
 
-A: Use the -run_name flag.
+A: Use the -run_name flag:
 
 
 ::
@@ -230,7 +232,7 @@ This means that the gaps will be reset and that the alignment you provide will n
 Q: I only want to produce a library.
 ------------------------------------
 
-A: use the -lib_only flag
+A: use the -lib_only flag:
 
 
 ::
@@ -245,7 +247,7 @@ Please, note that the previous usage supersedes the use of the -convert flag. It
 Q: I want to turn an alignment into a library.
 ----------------------------------------------
 
-A: use the -lib_only flag
+A: use the -lib_only flag:
 
 
 ::
@@ -254,7 +256,7 @@ A: use the -lib_only flag
 
 
 
-It is also possible to control the weight associated with this alignment (see the -weight section).
+It is also possible to control the weight associated with this alignment (see the -weight section):
 
 
 ::
@@ -267,7 +269,7 @@ It is also possible to control the weight associated with this alignment (see th
 Q: I want to concatenate two libraries.
 ---------------------------------------
 
-A: You cannot concatenate these files on their own. You will have to use t_coffee. Assume you want to combine tc_lib1.tc_lib and tc_lib2.tc_lib.
+A: You cannot concatenate these files on their own. You will have to use t_coffee. Assume you want to combine tc_lib1.tc_lib and tc_lib2.tc_lib:
 
 
 ::
@@ -280,7 +282,7 @@ A: You cannot concatenate these files on their own. You will have to use t_coffe
 Q: What happens to the gaps when an alignment is fed to T-Coffee?
 -----------------------------------------------------------------
 
-A: An alignment is ALWAYS considered as a library AND a set of sequences. If you want your alignment to be considered as a library only, use the S identifier.
+A: An alignment is ALWAYS considered as a library AND a set of sequences. If you want your alignment to be considered as a library only, use the S identifier:
 
 
 ::
@@ -322,7 +324,7 @@ A: see the next question
 Q: I would like to output more than one alignment format at the same time.
 --------------------------------------------------------------------------
 
-A: The flag -output accepts more than one parameter. For instance,
+A: The flag -output accepts more than one parameter. For instance:
 
 
 ::
@@ -366,7 +368,7 @@ A: Normally it can, but check in the log that the program recognises the right t
 Q: I do not want to compute the alignment.
 ------------------------------------------
 
-A: use the -convert flag
+A: use the -convert flag:
 
 
 ::
@@ -415,7 +417,7 @@ We do not recommend imposing hard constraints on an alignment, and it is much mo
 Q: I would like to use structural alignments.
 ---------------------------------------------
 
-See the section Using structures in Multiple Sequence Alignments, or see the question I want to build my own libraries.
+See the section "Using structures in Multiple Sequence Alignments", or see the question I want to build my own libraries.
 
 
 Q: I want to build my own libraries.
@@ -447,7 +449,7 @@ If you only want some of these residues to be aligned, or want to give them indi
 Q: I want to use my own tree.
 -----------------------------
 
-A: Use the -usetree=<your own tree> flag.
+A: Use the -usetree=<your own tree> flag:
 
 
 ::
@@ -459,7 +461,7 @@ A: Use the -usetree=<your own tree> flag.
 Q: I want to align coding DNA.
 ------------------------------
 
-A: use the fasta_cdna_pair method that compares two cDNA using the best reading frame and taking frameshifts into account.
+A: Use the fasta_cdna_pair method that compares two cDNA using the best reading frame and taking frameshifts into account:
 
 
 ::
@@ -514,13 +516,14 @@ Q: There are duplicates or quasi-duplicates in my set.
 
 A: If you can remove them, this will make the program run faster, otherwise, the t_coffee scoring scheme should be able to avoid over-weighting of over-represented sequences.
 
+*****************************
+Using Structures and Profiles
+*****************************
 
-Using structures and profiles
-=============================
 Q: Can I align sequences to a profile with T-Coffee?
 ----------------------------------------------------
 
-A: Yes, you simply need to indicate that your alignment is a profile with the R tag..
+A: Yes, you simply need to indicate that your alignment is a profile with the R tag:
 
 
 ::
@@ -529,10 +532,10 @@ A: Yes, you simply need to indicate that your alignment is a profile with the R 
 
 
 
-Q: Can I align sequences Two or More Profiles?
+Q: Can I align sequences two or more profiles?
 ----------------------------------------------
 
-A: Yes, you, simply tag your profiles with the letter R and the program will treat them like standard sequences.
+A: Yes, you, simply tag your profiles with the letter R and the program will treat them like standard sequences:
 
 
 ::
@@ -544,7 +547,7 @@ A: Yes, you, simply tag your profiles with the letter R and the program will tre
 Q: Can I align two profiles according to the structures they contain?
 ---------------------------------------------------------------------
 
-A: Yes. As long as the structure sequences are named according to their PDB identifier
+A: Yes. As long as the structure sequences are named according to their PDB identifier:
 
 
 ::
@@ -559,8 +562,6 @@ Q: T-Coffee becomes very slow when combining sequences and structures.
 
 A: This is true. By default the structures are feteched on the net, using RCSB. The problem arises when T-Coffee looks for the structure of sequences WITHOUT structures. One solution is to install PDB locally. In that case you will need to set two environment variables:
 
-
- 
 
 
 ::
@@ -590,7 +591,7 @@ A: Yes, T-Coffe supports three types of installations:
 
 
 
--A standard pdb installation using the all section of pdb. In that case, you must set the variables to:
+ -a standard pdb installation using the all section of pdb. In that case, you must set the variables to:
 
 
 ::
@@ -600,7 +601,7 @@ A: Yes, T-Coffe supports three types of installations:
 
 
 
--A standard pdb installation using the divided section of pdb:
+ -a standard pdb installation using the divided section of pdb:
 
 
 ::
@@ -624,13 +625,13 @@ You can then edit the script to suit your needs. T-Coffee will use your edited v
 
 If you make extensive modifications, I would appreciate you send me the corrected file so that I can incorporate it in the next distribution.
 
-By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior). 
+By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior): 
 
 ::
   export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
   Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt
 
-And 
+and...
 
 ::
   export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
@@ -638,12 +639,14 @@ And
 
 .. warning:: Since the file unreleased.xml is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
 
-Alignment evaluation
-====================
+********************
+Alignment Evaluation
+********************
+
 Q: How good is my alignment?
 ----------------------------
 
-A: see what is the color index?
+A: see what is the color index !!!
 
 
 Q: What is that color index?
@@ -714,7 +717,7 @@ If you have no library available, the library will be computed on the fly using 
 Q: I am aligning sequences with long regions of very good overlap.
 ------------------------------------------------------------------
 
-A: Increase the ktuple size ( up to 4 or 5 for DNA) and up to 3 for proteins.
+A: Increase the ktuple size ( up to 4 or 5 for DNA) and up to 3 for proteins:
 
 
 ::
@@ -752,8 +755,10 @@ A: If there is no duplicated name in your sequence set, T-Coffee's handling of n
 
 .. warning:: The behaviour is undefined when this creates two sequence with a similar names.
 
-Improving your alignment
-========================
+************************
+Improving Your Alignment
+************************
+
 Q: How can I edit my alignment manually?
 ----------------------------------------
 
