@@ -59,9 +59,7 @@ Q: The program is crashing.
 
 A: If you get the message:
 
-
-:: 
- FAILED TO ALLOCATE REQUIRED MEMORY
+FAILED TO ALLOCATE REQUIRED MEMORY
 
 
 See the next question.
