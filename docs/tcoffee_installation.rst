@@ -333,29 +333,32 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 
 1- the NCBI file declaring the sata directory must be:
 
-
+::
  C:WINDOWS//ncbi.init [at the root of your WINDOWS]
+
 
 
 2- the address mentioned with this file must be WINDOWS formated, for instance, on my system:
 
+::
+ Data=C:\cygwin\home\notredame\blast\data
 
-Data=C:\cygwin\home\notredame\blast\data
 
 
 3- the database addresses to BLAST must be in Windows format:
 
-
+::
  -protein_db='c:/somewhere/somewhereelse/database'
+
 
 
 (using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.
 
 
 
-**************************************
-Installing Other Packages for T-Coffee
-**************************************
+***************************
+Other Packages for T-Coffee
+***************************
 
 T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type
 
