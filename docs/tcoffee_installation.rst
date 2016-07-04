@@ -339,9 +339,9 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 
 
 
-*******************
-Advanced Procedures
-*******************
+******************************
+T-Coffee Advanced Installation
+******************************
 
 These procedures are not needed for default usage of T-Coffee. You will only need to install these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type:
 
