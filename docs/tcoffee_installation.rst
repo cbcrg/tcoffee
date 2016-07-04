@@ -358,11 +358,12 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 
 
 
-***************************
-Other Packages for T-Coffee
-***************************
 
-T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type
+*******************
+Advanced Procedures
+*******************
+
+These procedures are not needed for default usage of T-Coffee. You will only need to install these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type:
 
 
 ::
@@ -583,6 +584,20 @@ If you would rather have the mcoffee directory in some other location, set the M
    setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
 
 
+Configuration for PDB (installed locally)
+=========================================
+If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally. 
+If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using the following commands:
+
+::
+
+  setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
+
+  OR
+
+  setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
+
+
 
 Installation of tRMSD
 =====================
@@ -604,7 +619,6 @@ tRMSD comes along with t_coffee but it also requires the package phylip in order
   ---------------------------------------------------
 
   t_coffee -other_pg trmsd
-
 
 
 Installation of 3D-Coffee/Expresso
