@@ -494,28 +494,59 @@ You will receive a list of supported packages that looks like the next table. In
 
 In our hands all these packages where very straightforward to compile and install on a standard cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed.
 
-
 Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
 
 
-If for some reason, you do not want this directory to be on your path, or you want to specify a precise directory containing the executables, you can use:
 
+Installation of M-Coffee
+========================
+M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many Multiple Sequence Alignment packages.
+
+
+Automated Installation
+----------------------
+In the T-Coffee distribution, type:
+
+::
+
+  ./install mcoffee
+
+
+In theory, this command should download and install every required package. If, however, it fails, you should switch to the manual installation.
+
+
+Manual Installation
+-------------------
+
+By default all the packages will be in the following folder:
+
+::
+
+  $HOME/.t_coffee/plugins
+
+
+If you want to have these packages in a different directory, you can either set the environement variable:
+
+::
+
+  setenv PLUGINS_4_TCOFFEE=<plugins dir>
+
+
+or use the command line flag -plugin (overrides every other setting):
+
+::
+
+  t_coffee ... -plugins=<plugins dir>
+
+
+If for some reason, you do not want this directory to be on your path, or you want to specify a precise directory containing the executables, you can use:
 
 ::
 
    export PLUGINS_4_TCOFFEE=<dir>
 
 
-
-By default this directory is set to $HOME/.t_coffee/plugins/$OS, but you can override it with the environement variable or using the flag:
-
-::
-
-   t_coffee ...-plugins=<dir>
-
-
 If you cannot, or do not want to use a single bin directory, you can set the following environment variables to the absolute path values of the executable you want to use. Whenever they are set, these variables will supersede any other declaration. This is a convenient way to experiment with multiple package versions:
-
 
 ::
 
@@ -523,9 +554,7 @@ If you cannot, or do not want to use a single bin directory, you can set the fol
   DIALIGNT_4_TCOFFEE PRANK_4_TCOFFEE DIALIGNTX_4_TCOFFEE 
 
 
-
 For three of these packages, you will need to copy some of the files in a special T-Coffee directory:
-
 
 ::
 
@@ -536,9 +565,7 @@ For three of these packages, you will need to copy some of the files in a specia
    cp DIALIGN-TX/conf/* ~/.t_coffee/mcoffee
 
 
-
 Note that the following files are enough for default usage:
-
 
 ::
 
@@ -555,9 +582,7 @@ Note that the following files are enough for default usage:
   dna_diag_prob_150_exp_110000 dna_matrix.scr
 
 
-
 If you would rather have the mcoffee directory in some other location, set the MCOFFEE_4_TCOFFEE environement variable to the propoer directory:
-
 
 ::
 
