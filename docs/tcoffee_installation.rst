@@ -6,17 +6,16 @@ T-Coffee Installation
 T-Coffee Standard Installation
 ******************************
 
-This section describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems.
+This section describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems. The procedure is quite straightforward, contact us if you have any problem.
+
 
 Third party packages and on-demand installations
 ================================================
-T-Coffee is a complex package that interacts with many other third part softwares. If you only want a stand-alone version of T-Coffee, you may install that package on its own with all its dependencies. If you want to use a most sophisticated flavor (3D-Coffee, Expresso, R-Cofeee, etc...), the installer will try to install all the third party packages required.
+T-Coffee is a complex package that interacts with many other third part softwares. If you only want a stand-alone version of T-Coffee, you may install that package on its own with all its dependencies. If you want to use a most sophisticated flavor (3D-Coffee, Expresso, R-Cofeee, etc...), the installer will have to install all the third party packages required.
 
+Note that since version 7.56, T-Coffee uses on-demand installation and install the third party packages it needs. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
 
-Note that since version 7.56, T-Coffee will use on-demand installation and install the third party packages it needs. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
-
-
-Whenever on-demand installation or automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to check the original documentation.
+Whenever on demand installation or automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to check the original documentation.
 
 
 Standard installation of T-Coffee
@@ -24,14 +23,14 @@ Standard installation of T-Coffee
 
 Automated installation
 ----------------------
-We now recommend that you use the automated installer provided for Unix or Linux platforms. You first have to download any T-Coffee installer from the T-Coffee website.
+We now recommend that you use the automated installer provided for Unix or Linux platforms. You first have to download the T-Coffee installer corresponding to your system from the T-Coffee website and then follow the adequate procedure.
 
 
 Unix/Linux
 ^^^^^^^^^^
 ::
 
-   rpm -i <rmp>
+   rpm -i <rpm>
 
 
 You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST (http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest)
@@ -65,7 +64,6 @@ This installation will only install the stand alone T-Coffee. If you want to ins
    ./install psicoffee
 
 
-
 Or even:
 
 
@@ -83,18 +81,17 @@ All the corresponding executables will be downloaded automatically and installed
    $HOME/.t_coffee/plugins
 
 
+- If you executables are in a different location, give it to T-Coffee using the -plugins flag.
 
--If you executables are in a different location, give it to T-Coffee using the -plugins flag.
+- If the installation of any of the package fails, you should install it yourself using the provided link (see below) and following the authors instructions.
 
--If the installation of any of the package fails, you should install it yourself using the provided link (see below) and following the authors instructions.
+- If you have not managed to install SOAP::Lite, you can re-install it later (from anywhere) following steps 1-2.
 
--If you have not managed to install SOAP::Lite, you can re-install it later (from anywhere) following steps 1-2.
+- This procedure attempts 3 things: installing and compiling T-Coffee (C program), installing and compiling TMalign (Fortran), installing and compiling XML::Simple.
 
--This procedure attempts 3 things: installing and compiling T-Coffee (C program), installing and compiling TMalign (Fortran), installing and compiling XML::Simple.
+- If you have never installed a perl module before, CPAN will ask you many questions: say Yes to all.
 
--If you have never installed a perl module before, CPAN will ask you many questions: say Yes to all.
-
--If everything went well, the procedure has created in the bin directory two executables: t_coffee and TMalign (Make sure these executables are on your $PATH)
+- If everything went well, the procedure has created in the bin directory two executables: t_coffee and TMalign (Make sure these executables are on your $PATH)
 
 
 Mac OS X
@@ -103,7 +100,7 @@ Make sure you have the developer's kit installed (compilers and makefile) and fo
 
 ::
 
-   Click on the .dmg file
+   Click on the .dmg file and follow the installation procedure
 
 
 Microsoft Windows (Cygwin)
@@ -150,10 +147,17 @@ add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
 (if you have no proxy: t_coffee ... -proxy -email=<email>)
 
 
-If you have the PDB database installed:
----------------------------------------
-Assuming you have a standard PDB installation in your file system
+*******************
+Advanced Procedures
+*******************
 
+These procedures are not needed for default usage of T-Coffee. You will only need to install these packages for specific puposes.
+
+
+Configuration for PDB (installed locally)
+=========================================
+If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally. 
+If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using the following commands:
 
 ::
 
@@ -165,38 +169,17 @@ Assuming you have a standard PDB installation in your file system
 
 
 
-If you do not have PDB installed, don't worry, t_coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally.
-
-
-*******************
-Advanced Procedures
-*******************
-
-These procedures are not needed for default usage of T-Coffee. You will only need to install these packages for specific puposes.
-
 Installing BLAST for T-Coffee
 =============================
-BLAST is a program that search sequence databases for homologues of a query sequence. It works for proteins and Nucleic Acids. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run well, BLST requires up to date databases (that can be fairly large, like NR or UNIPROT) and a powerful computer.
-
+BLAST is a program that searches sequence databases for homologues of a query sequence. It works for proteins and nucleic acids alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run well, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer.
 
 Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
 
-
-Thanks to its interaction with BLAST, T-Coffee can gather structures and protein profiles and deliver an alignment significantly more accurate than the default you would get with T-Coffee or any similar method.
-
-
-Let us go through the various modes available for T-Coffee
-
+Thanks to its interaction with BLAST, T-Coffee can gather structures and protein profiles and deliver an alignment significantly more accurate than the default you would get with T-Coffee or any similar method. Let us go through the various modes available for T-Coffee
 
 Why Do I need BLAST with T-Coffee?
 ----------------------------------
-The most accurate modes of T-Coffe scan the databases for templates that they use to align the sequences. There are currently two types of templates for proteins:
-
-
-structures (PDB) that can be found by a blastp against the PDB database and profiles that can be constructed with eiether a blastp or a psiblast against nr or uniprot.
-
-
-These templates are automatically built if you use:
+The most accurate modes of T-Coffee scan the databases for templates that they use to align the sequences. There are currently two types of templates for proteins: 1) structures (PDB) that can be found by a blastp against the PDB database and 2) profiles that can be constructed using either a BLASTP or a PSIBLAST against n.r. or UniProt. These templates are automatically built if you use the following modes:
 
 
 ::
@@ -204,8 +187,7 @@ These templates are automatically built if you use:
    t_coffee <yourseq> -mode expresso
 
 
-
- that fetches aand uses pdb templates, or
+that fetches and uses structural templates (PDB), or
 
 
 ::
@@ -213,8 +195,7 @@ These templates are automatically built if you use:
     t_coffee <your seq> -mode psicoffee
 
 
-
- that fetches and uses profile templates, or
+that fetches and uses profile templates, or
 
 
 ::
@@ -222,8 +203,7 @@ These templates are automatically built if you use:
     t_coffee <your seq> -mode accurate
 
 
-
- that does everything and tries to use the best template. Now that you see why it is useful let's see how to get BLAST up and running, from the easy solution to tailor made ones.
+that does everything and tries to use the best template. Now that you see why it is useful, let's see how to get BLAST up and running, from the easy solution to tailor-made ones.
 
 
 Using the EBI BLAST Client
