@@ -147,30 +147,10 @@ add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
 
 
 
-*******************
-Advanced Procedures
-*******************
+*************************
+Using BLAST With T-Coffee
+*************************
 
-These procedures are not needed for default usage of T-Coffee. You will only need to install these packages for specific puposes.
-
-
-Configuration for PDB (installed locally)
-=========================================
-If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally. 
-If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using the following commands:
-
-::
-
-  setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
-
-  OR
-
-  setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
-
-
-
-Using BLAST with T-Coffee
-=========================
 BLAST is a program that searches sequence databases for homologues of a query sequence. It works for proteins and nucleic acids alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run well, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer.
 
 Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
