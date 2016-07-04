@@ -664,31 +664,18 @@ In order to make the most out of T-Coffee, you will need to install the followin
   ---------------------------------------------------
 
   wget 3DCoffee
-
    Automatic Downloading of Structures
-
   ---------------------------------------------------
-
   sap structure/structure comparisons
-
   (obtain it from W. Taylor, NIMR-MRC).
-
   ---------------------------------------------------
-
   TMalign zhang.bioinformatics.ku.edu/TM-align/
-
   ---------------------------------------------------
-
   mustang www.cs.mu.oz.au/~arun/mustang/
-
   ---------------------------------------------------
-
   wublastclient www.ebi.ac.uk/Tools/webservices/clients/wublast
-
   ---------------------------------------------------
-
   Blast www.ncbi.nih.nlm.gov
-
   ---------------------------------------------------
 
   Fugue* protein to structure alignment program
@@ -715,20 +702,18 @@ joy, melody, fugueali, sstruc, hbond
 
 If you have root privileges, you can install the common data in:
 
+::
 
 cp fugue/classdef.dat /data/fugue/SUBST/classdef.dat
 
 
 otherwise
 
+::
 
 Setenv MELODY_CLASSDEF=<location>
 
-
 Setenv MELODY_SUBST=fugue/allmat.dat
-
-
-
 
 
 All the other configuration files must be in the right location.
@@ -749,7 +734,6 @@ In the T-Coffee distribution, type:
   ./install rcoffee
 
 
-
 In theory, this command should download and install every required package (except consan). If, however, it fails, you should switch to the manual installation (see next).
 
 
@@ -765,31 +749,19 @@ R-Coffee only requires the package Vienna to be installed, in order to compute m
   ===================================================
 
   ---------------------------------------------------
-
   consan R-Coffee
-
-   Computes highly accurate pairwise Alignments
-
-   ***NOT COMPULSORY***
-
-   selab.janelia.org/software/consan/
-
+  Computes highly accurate pairwise Alignments
+  ***NOT COMPULSORY***
+  selab.janelia.org/software/consan/
   ---------------------------------------------------
-
   RNAplfold Computes RNA secondary Structures
-
-   www.tbi.univie.ac.at/~ivo/RNA/
-
+  www.tbi.univie.ac.at/~ivo/RNA/
   ---------------------------------------------------
-
   probconsRNA probcons.stanford.edu/
-
-  
   ---------------------------------------------------
 
   M-Coffee T-Coffee and the most common MSA Packages
-
-   (cf M-Coffee in this installation guide)
+  (cf M-Coffee in this installation guide)
 
 
 
