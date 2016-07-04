@@ -2,21 +2,21 @@
 T-Coffee Installation
 #####################
 
-******************
-Default Procedures
-******************
+******************************
+T-Coffee Standard Installation
+******************************
 
-This section describes the installation procedures relevant for the most standard use of T-Coffee.
+This section describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems.
 
-Third party packages and on demand installations
+Third party packages and on-demand installations
 ================================================
-T-Coffee is a complex package that interacts with many other third part software. If you only want a standalone version of T-Coffee, you may install that package on its own. If you want to use a most sophisticated flavor (3D-Coffee, Expresso, R-Cofeee, etc...), the installer will try to install all the third party packages required.
+T-Coffee is a complex package that interacts with many other third part softwares. If you only want a stand-alone version of T-Coffee, you may install that package on its own with all its dependencies. If you want to use a most sophisticated flavor (3D-Coffee, Expresso, R-Cofeee, etc...), the installer will try to install all the third party packages required.
 
 
-Note that since version 7.56, T-Coffee will use 'on demand' installation and install the third party packages it needs when it needs them. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
+Note that since version 7.56, T-Coffee will use on-demand installation and install the third party packages it needs. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
 
 
-Whenever on demand installation or automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to check the original documentation.
+Whenever on-demand installation or automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to check the original documentation.
 
 
 Standard installation of T-Coffee
@@ -24,7 +24,7 @@ Standard installation of T-Coffee
 
 Automated installation
 ----------------------
-We now recommend that you use the automated installer provided for Unix or Linux platforms.
+We now recommend that you use the automated installer provided for Unix or Linux platforms. You first have to download any T-Coffee installer from the T-Coffee website.
 
 
 Unix/Linux
