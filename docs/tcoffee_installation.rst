@@ -334,6 +334,7 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 1- the NCBI file declaring the sata directory must be:
 
 ::
+
  C:WINDOWS//ncbi.init [at the root of your WINDOWS]
 
 
@@ -341,13 +342,14 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 2- the address mentioned with this file must be WINDOWS formated, for instance, on my system:
 
 ::
- Data=C:\cygwin\home\notredame\blast\data
 
+ Data=C:\cygwin\home\notredame\blast\data
 
 
 3- the database addresses to BLAST must be in Windows format:
 
 ::
+
  -protein_db='c:/somewhere/somewhereelse/database'
 
 
@@ -509,61 +511,6 @@ You will receive a list of supported packages that looks like the next table. In
   ==========================================================
 
 
-
-::
-
-  Package Where From
-
-  ==========================================================
-
-  ClustalW can interact with t_coffee
-
-  ----------------------------------------------------------
-
-  Poa http://www.bioinformatics.ucla.edu/poa/
-
-  ----------------------------------------------------------
-
-  Muscle http://www.drive5.com
-
-  ----------------------------------------------------------
-
-  ProbCons http://probcons.stanford.edu/
-
-  ProbConsRNA http://probcons.stanford.edu/
-
-  ----------------------------------------------------------
-
-  MAFFT http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-
-  ----------------------------------------------------------
-
-  Dialign-T http://dialign-t.gobics.de/
-
-  Dialign-TX http://dialign-tx.gobics.de/
-
-  ----------------------------------------------------------
-
-  PCMA ftp://iole.swmed.edu/pub/PCMA/
-
-  ----------------------------------------------------------
-
-  kalign http://msa.cgb.ki.se
-
-  ----------------------------------------------------------
-
-  amap http://bio.math.berkeley.edu/amap/
-
-  -----------------------------------------------------------
-
-  proda_msa http://bio.math.berkeley.edu/proda/
-
-  -----------------------------------------------------------
-
-  prank_msa http://www.ebi.ac.uk/goldman-srv/prank/
-
-
-
 In our hands all these packages where very straightforward to compile and install on a standard cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed.
 
 
@@ -579,26 +526,24 @@ If for some reason, you do not want this directory to be on your path, or you wa
 
 
 
-By default this directory is set to $HOME/.t_coffee/plugins/$OS, but you can over-ride it with the environement variable or using the flag:
-
+By default this directory is set to $HOME/.t_coffee/plugins/$OS, but you can override it with the environement variable or using the flag:
 
 ::
 
    t_coffee ...-plugins=<dir>
 
 
-
-If you cannot, or do not want to use a single bin directory, you can set the following environment variables to the absolute path values of the executable you want to use. Whenever they are set, these variables will supersede any other declaration. This is a convenient way to experiment with multiple package versions.
+If you cannot, or do not want to use a single bin directory, you can set the following environment variables to the absolute path values of the executable you want to use. Whenever they are set, these variables will supersede any other declaration. This is a convenient way to experiment with multiple package versions:
 
 
 ::
 
-  POA_4_TCOOFFEE CLUSTALW_4_TCOFFEE POA_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOF\
- FEE MUSCLE_4_TCOFFEE DIALIGNT_4_TCOFFEE PRANK_4_TCOFFEE DIALIGNTX_4_TCOFFEE 
+  POA_4_TCOFFEE CLUSTALW_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOFFEE MUSCLE_4_TCOFFEE
+  DIALIGNT_4_TCOFFEE PRANK_4_TCOFFEE DIALIGNTX_4_TCOFFEE 
 
 
 
-For three of these packages, you will need to copy some of the files in a special T-Coffee directory.
+For three of these packages, you will need to copy some of the files in a special T-Coffee directory:
 
 
 ::
@@ -636,7 +581,6 @@ If you would rather have the mcoffee directory in some other location, set the M
 ::
 
    setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
-
 
 
 
