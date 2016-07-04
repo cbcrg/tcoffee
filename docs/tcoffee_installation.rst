@@ -129,13 +129,11 @@ CLUSTER Installation
 ^^^^^^^^^^^^^^^^^^^^
 In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so you can either:
 
-
 export the following values:
 
 export http_proxy_4_TCOFFEE='proxy' or '' if no proxy
 
 export EMAIL_4_TCOFFEE='your email'
-
 
 OR
 
@@ -145,6 +143,8 @@ OR
 
 add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
 (if you have no proxy: t_coffee ... -proxy -email=<email>)
+
+
 
 
 *******************
@@ -169,15 +169,16 @@ If you prefer to have access to a local installation of the PDB in your file sys
 
 
 
-Installing BLAST for T-Coffee
-=============================
+Using BLAST with T-Coffee
+=========================
 BLAST is a program that searches sequence databases for homologues of a query sequence. It works for proteins and nucleic acids alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run well, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer.
 
 Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
 
 Thanks to its interaction with BLAST, T-Coffee can gather structures and protein profiles and deliver an alignment significantly more accurate than the default you would get with T-Coffee or any similar method. Let us go through the various modes available for T-Coffee
 
-Why Do I need BLAST with T-Coffee?
+
+Why do I need BLAST with T-Coffee?
 ----------------------------------
 The most accurate modes of T-Coffee scan the databases for templates that they use to align the sequences. There are currently two types of templates for proteins: 1) structures (PDB) that can be found by a blastp against the PDB database and 2) profiles that can be constructed using either a BLASTP or a PSIBLAST against n.r. or UniProt. These templates are automatically built if you use the following modes:
 
@@ -208,15 +209,15 @@ that does everything and tries to use the best template. Now that you see why it
 
 Using the EBI BLAST Client
 --------------------------
-This is by far the easiest (and the default mode). The perl clients are already incorporated in T-Coffee and all you need is are the proper perl library. In theory, T-Coffee should have already installed these libraries during the standard installation. Yet, this requires having toot access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public psiblast via a web service.
+This is by far the easiest (and the default mode). The perl clients are already incorporated in T-Coffee and all you need is are the proper PERL library. In theory, T-Coffee should have already installed these libraries during the standard installation. Yet, this requires having root access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public PSIBLAST via a web service.
 
 
-Whenever you use a T-Coffee mode requiring Blast access, it will ask you for an authentification E-mail. Be Careful! If you provide a fake E-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, or entire institute, or even the entire country or, but I doubt it, the whole universe).
+Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification E-mail. Be Careful! If you provide a fake E-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, or even the entire country or, but I doubt it, the whole universe).
 
 
 Using the NCBI BLAST Client
 ---------------------------
-The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSI-BLAST (as a web sevice). A big miss. The NCBI web blast client is a small executable that you should install on your system following the instructions given on this link
+The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSIBLAST (as a websevice). A big miss. The NCBI web BLAST client is a small executable that you should install on your system following the instructions given on this link
 
 
 ::
@@ -225,7 +226,7 @@ The NCBI is the next best alternative. In my hand it was always a bit slower and
 
 
 
-Simply go for netbl, download the executable that corresponds to your architecture (cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN.
+Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN.
 
 
 All you will then need to do is to make sure that T-Coffee uses the right client, when you run it.
@@ -237,12 +238,12 @@ All you will then need to do is to make sure that T-Coffee uses the right client
 
 
 
-No need for any E-mail here, but you don't get psiblast, and whenever T-Coffee wants to use it, blastp will be used instead.
+No need for any E-mail here, but you don't get PSIBLAST, and whenever T-Coffee wants to use it, BLASTP will be used instead.
 
 
 Using another Client
 --------------------
-You may have your own client (lucky you). If that is so, all you need is to make sure that this client is complient with the blast command line. If your client is named foo.pl, all you need to to is run T-Coffee with
+You may have your own client (lucky you). If that is so, all you need is to make sure that this client is complient with the BLAST command line. If your client is named foo.pl, all you need to to is run T-Coffee with:
 
 
 ::
@@ -251,7 +252,7 @@ You may have your own client (lucky you). If that is so, all you need is to make
 
 
 
-Foo will be called as if it were blastpgp, and it is your responsability to make sure it can handle the following command line:
+Foo will be called as if it were BLASTPGP, and it is your responsability to make sure it can handle the following command line:
 
 
 ::
@@ -260,21 +261,21 @@ Foo will be called as if it were blastpgp, and it is your responsability to make
 
 
 
-method can either be blastp or psiblast.
+- method can either be blastp or psiblast.
 
 
-infile is a FASTA file
+- infile is a FASTA file
 
 
--m7 triggers the XML output. T-Coffee is able to parse both the EBI XML output and the NCBI XML output.
+- -m 7 triggers the XML output. T-Coffee is able to parse both the EBI XML output and the NCBI XML output.
 
 
-If foo.pl behaves differently, the easiest will probably be to write a wrapper around it so that wrapped_foo.pl behaves like blastpgp
+If foo.pl behaves differently, the easiest will probably be to write a wrapper around it so that wrapped_foo.pl behaves like BLASTPGP.
 
 
-Using a BLAST local version on UNIX
+Using a BLAST local version on Unix
 -----------------------------------
-If you have blastpgp installed, you can run it instead of the remote clients by using:
+If you have BLASTPGP installed, you can run it instead of the remote clients by using:
 
 
 ::
@@ -292,7 +293,7 @@ The documentation for blastpgp can be found on:
 
 
 
-and the package is part of the standard BLAST distribution
+and the package is part of the standard BLAST distribution:
 
 
 ::
@@ -301,7 +302,7 @@ and the package is part of the standard BLAST distribution
 
 
 
-Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achivement spread over several generations. So at this point, you should roam the NCBI website for suitable information.
+Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achievement spread over several generations. So at this point, you should roam the NCBI website for suitable information.
 
 
 If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST:
@@ -309,13 +310,13 @@ If you want to have your own BLAST server to run your own databases, you should 
 
 ::
 
-  -protein_db: will specify the database used by all the psi-blast modes
+  -protein_db: will specify the database used by all the PSIBLAST modes of T-Coffee
 
-  -pdb_db: will specify the database used by the pdb modes
-
+  -pdb_db: will specify the database used by the structural modesof T-Coffee
 
 
 .. tip:: T-Coffee is compliant with BLAST+, the latest NCBI Blast.
+
 
 Using a BLAST local version on Windows/cygwin
 ---------------------------------------------
