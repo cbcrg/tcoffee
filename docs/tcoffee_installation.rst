@@ -303,12 +303,12 @@ Using a BLAST local version on Windows/Cygwin
 =============================================
 
 BLAST+
-^^^^^^
+------
 BLAST+ is the latest NCBI BLASTt. It is easier to install. A default installation should be compliant with a default T-Coffee installation.
 
 
 Original NCBI BLAST
-^^^^^^^^^^^^^^^^^^^
+-------------------
 For those of you using Cygwin, be careful. While Cygwin behaves like a Unix system, the BLAST executable required for Cygwin (win32) is expecting Windows paths and not Unix paths. This has three important consequences:
 
 
@@ -620,7 +620,7 @@ tRMSD comes along with t_coffee but it also requires the package phylip in order
 
   Phylip Phylogenetic tree computation
 
-   evolution.genetics.washington.edu/phylip.html
+  evolution.genetics.washington.edu/phylip.html
 
   ---------------------------------------------------
 
@@ -660,31 +660,42 @@ In order to make the most out of T-Coffee, you will need to install the followin
 
   Package Function
 
-  ===================================================
+  =============================================================
 
-  ---------------------------------------------------
+  -------------------------------------------------------------
 
   wget 3DCoffee
-   Automatic Downloading of Structures
-  ---------------------------------------------------
+  Automatic downloading of structures
+   
+  -------------------------------------------------------------
+  
   sap structure/structure comparisons
-  (obtain it from W. Taylor, NIMR-MRC).
-  ---------------------------------------------------
+  (obtain it from W. Taylor, NIMR-MRC)
+  
+  -------------------------------------------------------------
+ 
   TMalign zhang.bioinformatics.ku.edu/TM-align/
-  ---------------------------------------------------
+  
+  -------------------------------------------------------------
+  
   mustang www.cs.mu.oz.au/~arun/mustang/
-  ---------------------------------------------------
+  
+  -------------------------------------------------------------
+  
   wublastclient www.ebi.ac.uk/Tools/webservices/clients/wublast
-  ---------------------------------------------------
+  
+  -------------------------------------------------------------
+  
   Blast www.ncbi.nih.nlm.gov
-  ---------------------------------------------------
+  
+  -------------------------------------------------------------
 
-  Fugue* protein to structure alignment program
-
-   http://www-cryst.bioc.cam.ac.uk/fugue/download.html
+  Fugue protein to structure alignment program
+  http://www-cryst.bioc.cam.ac.uk/fugue/download.html
 
    ***NOT COMPULSORY***
-
+   
+  -------------------------------------------------------------
 
 
 Once the package is installed, make sure make sure that the executable is on your path, so that t_coffee can find it automatically.
@@ -705,12 +716,14 @@ If you have root privileges, you can install the common data in:
 
 ::
 
-cp fugue/classdef.dat /data/fugue/SUBST/classdef.dat
+
+ cp fugue/classdef.dat /data/fugue/SUBST/classdef.dat
 
 
 otherwise
 
 ::
+
 
 Setenv MELODY_CLASSDEF=<location>
 
