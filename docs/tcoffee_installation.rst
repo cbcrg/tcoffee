@@ -706,15 +706,7 @@ The wublast client makes it possible to run BLAST at the EBI without having to i
 
 Installing Fugue for T-Coffee
 -----------------------------
-Uses a standard fugue installation. You only need to install the following packages:
-
-::
-
-joy, melody, fugueali, sstruc, hbond
-
-
-
-If you have root privileges, you can install the common data in:
+Uses a standard fugue installation. You only need to install the following packages: joy, melody, fugueali, sstruc, hbond. If you have root privileges, you can install the common data in:
 
 ::
 
@@ -728,6 +720,8 @@ otherwise:
 
 
 Setenv MELODY_CLASSDEF=<location>
+
+
 Setenv MELODY_SUBST=fugue/allmat.dat
 
 
@@ -778,7 +772,7 @@ R-Coffee only requires the package Vienna to be installed, in order to compute m
   
   ---------------------------------------------------
   
-  probconsRNA probcons.stanford.edu/
+  ProbConsRNA probcons.stanford.edu/
   
   ---------------------------------------------------
 
