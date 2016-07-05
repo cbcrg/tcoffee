@@ -196,7 +196,7 @@ Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an 
 
 
 
-Using the NCBI BLAST Client
+Using the NCBI BLAST client
 ===========================
 The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSIBLAST (as a websevice). A big miss. The NCBI web BLAST client is a small executable that you should install on your system following the instructions given on this link
 
@@ -618,7 +618,7 @@ tRMSD comes along with t_coffee but it also requires the package phylip in order
 
   ---------------------------------------------------
 
-  Phylip Phylogenetic tree computation
+  Phylip phylogenetic tree computation
 
   evolution.genetics.washington.edu/phylip.html
 
@@ -670,7 +670,7 @@ In order to make the most out of T-Coffee, you will need to install the followin
   -------------------------------------------------------------
   
   sap structure/structure comparisons
-  (obtain it from W. Taylor, NIMR-MRC)
+  Obtained from W. Taylor, NIMR-MRC
   
   -------------------------------------------------------------
  
@@ -708,8 +708,10 @@ Installing Fugue for T-Coffee
 -----------------------------
 Uses a standard fugue installation. You only need to install the following packages:
 
+::
 
 joy, melody, fugueali, sstruc, hbond
+
 
 
 If you have root privileges, you can install the common data in:
@@ -720,14 +722,14 @@ If you have root privileges, you can install the common data in:
  cp fugue/classdef.dat /data/fugue/SUBST/classdef.dat
 
 
-otherwise
+otherwise:
 
 ::
 
 
 Setenv MELODY_CLASSDEF=<location>
-
 Setenv MELODY_SUBST=fugue/allmat.dat
+
 
 
 All the other configuration files must be in the right location.
@@ -763,21 +765,28 @@ R-Coffee only requires the package Vienna to be installed, in order to compute m
   ===================================================
 
   ---------------------------------------------------
-  consan R-Coffee
-  Computes highly accurate pairwise Alignments
-  ***NOT COMPULSORY***
+  
+  consan computes highly accurate pairwise alignments
   selab.janelia.org/software/consan/
+  
+  ***NOT COMPULSORY***
+    
   ---------------------------------------------------
-  RNAplfold Computes RNA secondary Structures
+  
+  RNAplfold computes RNA secondary structures
   www.tbi.univie.ac.at/~ivo/RNA/
+  
   ---------------------------------------------------
+  
   probconsRNA probcons.stanford.edu/
+  
   ---------------------------------------------------
 
   M-Coffee T-Coffee and the most common MSA Packages
   (cf M-Coffee in this installation guide)
 
-
+  ---------------------------------------------------
+  
 
 Installing ProbConsRNA for R-Coffee
 -----------------------------------
