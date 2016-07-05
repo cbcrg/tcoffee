@@ -15,7 +15,7 @@ T-Coffee is a complex package that interacts with many other third part software
 
 Note that since version 7.56, T-Coffee uses on-demand installation and install the third party packages it needs. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
 
-Whenever on demand installation or automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to check the original documentation.
+Whenever on-demand installation or automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
 
 Standard installation of T-Coffee
@@ -23,7 +23,7 @@ Standard installation of T-Coffee
 
 Automated installation
 ----------------------
-We now recommend that you use the automated installer provided for Unix or Linux platforms. You first have to download the T-Coffee installer corresponding to your system from the T-Coffee website and then follow the adequate procedure.
+We now recommend that you use the automated installer provided for Unix or Linux platforms. In any case, you first have to download the T-Coffee installer corresponding to your system from the T-Coffee website and then follow the adequate procedure.
 
 
 Unix/Linux
@@ -189,7 +189,7 @@ that does everything and tries to use the best template. Now that you see why it
 
 Using the EBI BLAST client
 ==========================
-This is by far the easiest (and the default mode). The perl clients are already incorporated in T-Coffee and all you need is are the proper PERL library. In theory, T-Coffee should have already installed these libraries during the standard installation. Yet, this requires having root access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public PSIBLAST via a web service. Note that because PSIBLAST is time consuming, T-Coffee stores the runs in its cache (./tcoffee/cache) so that it does not need to be re-run. It means that if you re-align your sequences (or add a few extra sequences), things will be considerably faster.
+This is by far the easiest (and the default mode). The perl clients are already incorporated in T-Coffee and all you need are the proper PERL libraries. In theory, T-Coffee should have already installed these libraries during the standard installation. Yet, this requires having root access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public PSIBLAST via a web service. Note that because PSIBLAST is time consuming, T-Coffee stores the runs in its cache (./tcoffee/cache) so that it does not need to be re-run. It means that if you re-align your sequences (or add a few extra sequences), things will be considerably faster.
 
 
 Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification E-mail. Be Careful! If you provide a fake E-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, or even the entire country or, but I doubt it, the whole universe). 
@@ -198,7 +198,7 @@ Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an 
 
 Using the NCBI BLAST client
 ===========================
-The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSIBLAST (as a websevice). A big miss. The NCBI web BLAST client is a small executable that you should install on your system following the instructions given on this link
+The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSIBLAST (as a websevice). A big miss! The NCBI web BLAST client is a small executable that you should install on your system following the instructions given on this link:
 
 
 ::
@@ -304,7 +304,7 @@ Using a BLAST local version on Windows/Cygwin
 
 BLAST+
 ------
-BLAST+ is the latest NCBI BLASTt. It is easier to install. A default installation should be compliant with a default T-Coffee installation.
+BLAST+ is the latest NCBI BLAST. It is easier to install. A default installation should be compliant with a default T-Coffee installation.
 
 
 Original NCBI BLAST
@@ -344,7 +344,7 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 T-Coffee Advanced Installation
 ******************************
 
-These procedures are not needed for default usage of T-Coffee. You will only need to install these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type:
+These procedures are not needed for default usage of T-Coffee. You will only need to install/configure these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type:
 
 
 ::
@@ -493,7 +493,7 @@ You will receive a list of supported packages that looks like the next table. In
   ==========================================================
 
 
-In our hands all these packages where very straightforward to compile and install on a standard cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed.
+In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed.
 
 Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
 
@@ -504,7 +504,7 @@ Installation of M-Coffee
 M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many Multiple Sequence Alignment packages.
 
 
-Automated Installation
+Automated installation
 ----------------------
 In the T-Coffee distribution, type:
 
@@ -516,7 +516,7 @@ In the T-Coffee distribution, type:
 In theory, this command should download and install every required package. If, however, it fails, you should switch to the manual installation.
 
 
-Manual Installation
+Manual installation
 -------------------
 
 By default all the packages will be in the following folder:
@@ -566,6 +566,13 @@ For three of these packages, you will need to copy some of the files in a specia
    cp DIALIGN-TX/conf/* ~/.t_coffee/mcoffee
 
 
+If you would rather have the mcoffee directory in some other location, set the MCOFFEE_4_TCOFFEE environement variable to the propoer directory:
+
+::
+
+   setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
+   
+
 Note that the following files are enough for default usage:
 
 ::
@@ -583,15 +590,9 @@ Note that the following files are enough for default usage:
   dna_diag_prob_150_exp_110000 dna_matrix.scr
 
 
-If you would rather have the mcoffee directory in some other location, set the MCOFFEE_4_TCOFFEE environement variable to the propoer directory:
-
-::
-
-   setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
-
-
 Configuration for PDB (installed locally)
 =========================================
+For all the structural modes of T-Coffee (Expresso, 3D-Coffee, tRMSD, iRMSD, etc...), access to structural information is mandatory. You can do so either by having a database installed locally on your own system or by accessing the PDB through the webserver.
 If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally. 
 If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using the following commands:
 
@@ -655,7 +656,6 @@ Manual Installation
 In order to make the most out of T-Coffee, you will need to install the following packages (make sure the executable is named as indicated below):
 
 
-
 ::
 
   Package Function
@@ -698,15 +698,15 @@ In order to make the most out of T-Coffee, you will need to install the followin
   -------------------------------------------------------------
 
 
-Once the package is installed, make sure make sure that the executable is on your path, so that t_coffee can find it automatically.
+Once the package is installed, make sure make sure that the executable is on your path, so that T-Coffee can find it automatically.
 
 
-The wublast client makes it possible to run BLAST at the EBI without having to install any database locally. It is an ideal solution if you are only using expresso occasionally.
+The wublast client makes it possible to run BLAST at the EBI without having to install any database locally. It is an ideal solution if you are only using Expresso occasionally.
 
 
 Installing Fugue for T-Coffee
 -----------------------------
-Uses a standard fugue installation. You only need to install the following packages: joy, melody, fugueali, sstruc, hbond. If you have root privileges, you can install the common data in:
+Uses a standard Fugue installation. You only need to install the following packages: joy, melody, fugueali, sstruc, hbond. If you have root privileges, you can install the common data in:
 
 ::
 
@@ -719,11 +719,9 @@ otherwise:
 ::
 
 
-Setenv MELODY_CLASSDEF=<location>
+ Setenv MELODY_CLASSDEF=<location>
 
-
-Setenv MELODY_SUBST=fugue/allmat.dat
-
+ Setenv MELODY_SUBST=fugue/allmat.dat
 
 
 All the other configuration files must be in the right location.
@@ -734,7 +732,7 @@ Installation of R-Coffee
 R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure.
 
 
-Automated Installation
+Automated installation
 ----------------------
 In the T-Coffee distribution, type:
 
@@ -744,12 +742,12 @@ In the T-Coffee distribution, type:
   ./install rcoffee
 
 
-In theory, this command should download and install every required package (except consan). If, however, it fails, you should switch to the manual installation (see next).
+In theory, this command should download and install every required package (except Consan). If, however, it fails, you should switch to the manual installation (see next).
 
 
-Manual Installation
+Manual installation
 -------------------
-R-Coffee only requires the package Vienna to be installed, in order to compute multiple sequence alignments. To make the best out of it, you should also have all the packages required by M-Coffee
+R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee.
 
 
 ::
@@ -760,7 +758,7 @@ R-Coffee only requires the package Vienna to be installed, in order to compute m
 
   ---------------------------------------------------
   
-  consan computes highly accurate pairwise alignments
+  Consan computes highly accurate pairwise alignments
   selab.janelia.org/software/consan/
   
   ***NOT COMPULSORY***
@@ -789,6 +787,6 @@ Follow the installation procedure, but make sure you rename the probcons executa
 
 Installing Consan for R-Coffee
 ------------------------------
-In order to insure a proper interface beween consan and R-Coffee, you must make sure that the file mix80.mod is in the directory ~/.t_coffee/mcoffee or in the mcoffee directory otherwise declared.
+In order to insure a proper interface bewteen Consan and R-Coffee, you must make sure that the file mix80.mod is in the directory ~/.t_coffee/mcoffee or in the mcoffee directory otherwise declared.
 
 
