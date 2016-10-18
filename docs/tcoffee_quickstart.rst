@@ -3,15 +3,15 @@ Quick Start
 ###########
 
 
-.. warning:: All the files mentionned here (e.g. sample_seq) can be found in the example directory of the distribution.
+.. warning:: This part is designed to have an quick overview of T-Coffee alignment procedures; go to the T-Coffee manual for a more detailed description and available options for a given mode. All the files mentionned here (e.g. sample_seq) can be found in the example directory of the distribution. 
 
 
 ***************************
 Basic Command Lines (-mode)
 ***************************
 
-Proteins sequences
-==================
+Protein sequences
+=================
 ::
 
   ----------------------------------------------------------------------------
@@ -20,7 +20,7 @@ Proteins sequences
                        use the output.html to visualize the MSA accuracy
   ----------------------------------------------------------------------------
   Fast                 t_coffee sample_seq1.fasta -mode quickaln
-
+  (Quickaln)
                        lower -ndiag if the sequences are very similar
   ----------------------------------------------------------------------------
   Consistent           t_coffee sample_aln1.fasta -mode mcoffee
@@ -101,7 +101,7 @@ We only give you the very basics here. Please use the Tutorial for more detailed
 
 T-Coffee
 ========
-Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type.
+Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type:
 
 
 ::
@@ -115,9 +115,9 @@ This will output two files:
 
 ::
 
-  sample_seq1.aln: your Multiple Sequence Alignment
+  sample_seq1.aln: your Multiple Sequence Alignment (MSA)
 
-  sample_seq1.dnd: The Guide tree (newick Format)
+  sample_seq1.dnd: The Guide tree (Newick format)
 
 
 
