@@ -13,6 +13,7 @@ Basic Command Lines (-mode)
 Proteins sequences
 ==================
 ::
+
   ----------------------------------------------------------------------------
   Default              t_coffee sample_seq1.fasta
   (T-Coffee)
@@ -43,6 +44,7 @@ Proteins sequences
 DNA sequences
 =============
 ::
+
   ----------------------------------------------------------------------------
   Default              t_coffee three_cdna.fasta
   (T-Coffee)
@@ -61,6 +63,7 @@ DNA sequences
 RNA sequences
 =============
 ::
+
   ----------------------------------------------------------------------------
   Default              t_coffee sample_rnaseq1.fasta
   (T-Coffee)
