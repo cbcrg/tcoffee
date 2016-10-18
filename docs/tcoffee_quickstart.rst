@@ -3,7 +3,7 @@ Quick Start
 ###########
 
 
-.. warning:: This part is designed to have an quick overview of T-Coffee alignment procedures. All the files mentioned here can be found in the example directory of the distribution. Go to the T-Coffee manual for a more detailed description and available options for a given mode. Go to the T-Coffee tutorial for a practical training on T-Coffee alignment and other functions. If you use a particular mode of T-Coffee, please use the specified citation for publication.
+.. warning:: This part is designed to have an quick overview of T-Coffee alignment procedures. All the files mentioned here can be found in the example directory of the distribution. If you use a particular mode of T-Coffee, please use the specified citation for publication.
 
 
 ***************************
@@ -102,14 +102,15 @@ Memory Fix
 
 
 **********************
-Starting with T-Coffee
+Starting With T-Coffee
 **********************
-We only give you the very basics here. Please use the Tutorial for more detailed information on how to use our tools.
+
+.. warning:: We only give you the very basics here, please go to the T-Coffee manual for a more detailed description and available options for the different tools. You can also try the T-Coffee tutorial for a practical training on T-Coffee alignment and other functions using applied examples on published research data.
 
 
 T-Coffee
 ========
-Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type:
+Write your sequences (protein, DNA or RNA) in the same file in one of the following format: Swiss-prot, Fasta or Pir; then run T-Coffee with the following command:
 
 
 ::
@@ -118,18 +119,19 @@ Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type:
 
 
 
-This will output two files:
+This will output three files:
 
 
 ::
 
-  sample_seq1.aln: your Multiple Sequence Alignment (MSA)
+  sample_seq1.aln: your Multiple Sequence Alignment (Clustal format by default)
 
   sample_seq1.dnd: The Guide tree (Newick format)
+  
+  sample_seq1.html: The color coded MSA according to T-Coffee consistency color scheme (html)
 
 
-
-.. warning:: IMPORTANT: In theory nucleic acids should be automatically detected and the default methods should be adapted appropriately. However, sometimes this may fail, either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag -type. NOTE: the -mode=dna is not needed or supported anymore
+In principle, the type of the sequences should be automatically detected and the default methods should be adapted accordingly. However sometimes this may fail, either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag -type. (Note: the flag -mode=dna is not needed or supported anymore).
 
 ::
 
@@ -139,7 +141,7 @@ This will output two files:
 
 M-Coffee
 ========
-M-Coffee is a Meta version of T-Coffee that makes it possible to combine the output of at least eight packages (Muscle, probcons, poa, dialignT, mafft, clustalw, PCMA and T-Coffee).
+M-Coffee is a meta version of T-Coffee that makes it possible to combine the output of a combination of eight packages (Muscle, probcons, poa, dialignT, mafft, clustalw, PCMA and T-Coffee).
 
 
 If all these packages are already installed on your machine. You must:
@@ -156,7 +158,7 @@ If all these packages are already installed on your machine. You must:
 
 
 
-2) Write your sequences in a file and run T-Coffee using this file (Swiss-prot, Fasta or Pir) with:
+2) Write your sequences in a file and run T-Coffee using this file (format: Swiss-prot, Fasta or Pir) with:
 
 
 ::
@@ -170,7 +172,7 @@ If the program starts complaining one package or the other is missing, this mean
 
 Expresso
 ========
-If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against the PDB database, identify the best targets and use these to align your proteins using the following commandline:
+If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against the PDB database, identify the best targets and use them to align your proteins using the following command:
 
 
 ::
