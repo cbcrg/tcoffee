@@ -3,7 +3,7 @@ Quick Start
 ###########
 
 
-.. warning:: This part is designed to have an quick overview of T-Coffee alignment procedures. All the files mentioned here can be found in the example directory of the distribution. If you use a particular mode of T-Coffee, please use the specified citation for publication.
+.. prelim:: This part is designed to have an quick overview of T-Coffee alignment procedures. All the files mentioned here can be found in the example directory of the distribution. If you use a particular mode of T-Coffee, please use the specified citation for publication.
 
 
 ***************************
