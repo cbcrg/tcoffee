@@ -3,12 +3,12 @@ Quick Start
 ###########
 
 
-.. note:: This part is designed to have an quick overview of T-Coffee alignment procedures. All the files mentioned here can be found in the example directory of the distribution. If you use a particular mode of T-Coffee, please use the specified citation for publication.
-
-
 ***************************
 Basic Command Lines (-mode)
 ***************************
+
+.. warning:: This part is designed to have an quick overview of T-Coffee alignment procedures. All the files mentioned here can be found in the example directory of the distribution. If you use a particular mode of T-Coffee, please use the specified citation for publication.
+
 
 Protein sequences
 =================
@@ -89,6 +89,7 @@ RNA sequences
                        
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
+
 
 
 **********************
