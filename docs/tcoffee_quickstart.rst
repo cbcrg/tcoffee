@@ -77,17 +77,17 @@ RNA sequences
   Structural 2D        t_coffee sample_rnaseq1.fasta -mode rcoffee
   (R-Coffee)           use the predicted secondary structure
   
-  Citation: Wilm et al., Nycleic Acids Res. (2008)            PMID:18420654
+  Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
   Structural 3D        t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
   (R-Coffee Consan)    use R-Coffee to combine consan structural alignments 
   
-  Citation: Wilm et al., Nycleic Acids Res. (2008)            PMID:18420654
+  Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
   Accurate             t_coffee sample_rnaseq1.fasta -mode rmcoffee
   (RM-Coffee)          use M-Coffee + secondary structure prediction
                        
-  Citation: Wilm et al., Nycleic Acids Res. (2008)            PMID:18420654
+  Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
 
   
@@ -137,7 +137,7 @@ In principle, the type of the sequences should be automatically detected and the
 
   $$: t_coffee sample_dnaseq1.fasta -type=dna
 
-
+Citation: Notredame et al., JMB (2000), PMID:10964570
 
 M-Coffee
 ========
@@ -169,6 +169,7 @@ If all these packages are already installed on your machine. You must:
 
 If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself... Proceed to the M-Coffee section for more detailed instructions.
 
+Citation: Wallace et al., Nucleic Acids Res. (2006), PMID:16556910
 
 Expresso
 ========
@@ -189,7 +190,7 @@ If you did not manage to install all the required structural packages for Expres
 
   $$: t_coffee sample_seq1.fasta -template_file expresso -method TMalign_pair
 
-
+Citation: Armougom et al. Nucleic Acids Res. (2006), PMID:16845081
 
 R-Coffee
 ========
@@ -218,22 +219,22 @@ If you want to select yourself which methods should be combined by R-Coffee, run
 
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair
 
-
+Citation: Wilm et al., Nucleic Acids Res. (2008), PMID:18420654
 
 iRMSD and APDB
 ==============
-All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index ( 1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the following command:
+All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the following command:
 
 
 ::
 
   $$: t_coffee -other_pg irmsd -aln 3d_sample4.aln
 
+Citation: Armougom et al., Bioinformatics (2006), PMID:16873492
 
-
-tRMSD
+T-RMSD
 =====
-tRMSD is a structure based clustering method using the iRMSD to drive the clustering. The T-RMSD supports all the parameters supported by iRMSD or APDB.
+T-RMSD is a structure based clustering method using the iRMSD to drive the structural clustering of your sequences with an available structure. The T-RMSD supports all the parameters supported by iRMSD or APDB. To run T-RMSD, type:
 
 
 ::
@@ -270,10 +271,11 @@ The program then outputs a series of files:
 3d_sample5.struc_tree.consensus_output is a schematic representation of the results (it's better to use a tree viewer)
 3d_sample5.struc_tree.consensus is the final consensus structural tree 
 
+Citation: Magis et al., JMB (2010), PMID:20471393 and/or Magis et al., Trends Biochem. Sci. (2012), PMID:22789664
 
 MOCCA
 =====
-Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type:
+MOCCA is a specific tool in T-Coffee designed to deal with highly divergent protein repeats.  Write your sequences in the same file (format: Swiss-prot, Fasta or Pir) and type:
 
 
 ::
@@ -281,6 +283,6 @@ Write your sequences in the same file (Swiss-prot, Fasta or Pir) and type:
   $$: t_coffee -other_pg mocca sample_seq1.fasta
 
 
-
 This command output one files (<your sequences>.mocca_lib) and starts an interactive menu.
 
+Citation: Notredame, Bioinformatis (2001), PMID:11301309
