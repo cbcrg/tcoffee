@@ -140,6 +140,7 @@ In principle, the type of the sequences should be automatically detected and the
 
 .. Citation:: Notredame et al., JMB (2000), PMID:10964570
 
+
 M-Coffee
 ========
 M-Coffee is a meta version of T-Coffee that makes it possible to combine the output of a combination of eight packages (Muscle, probcons, poa, dialignT, mafft, clustalw, PCMA and T-Coffee).
@@ -173,6 +174,7 @@ If the program starts complaining one package or the other is missing, this mean
 
 .. Citation:: Wallace et al., Nucleic Acids Res. (2006), PMID:16556910
 
+
 Expresso
 ========
 If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against the PDB database, identify the best targets and use them to align your proteins using the following command:
@@ -194,6 +196,7 @@ If you did not manage to install all the required structural packages for Expres
 
 
 .. Citation:: Armougom et al. Nucleic Acids Res. (2006), PMID:16845081
+
 
 R-Coffee
 ========
@@ -225,6 +228,7 @@ If you want to select yourself which methods should be combined by R-Coffee, run
 
 .. Citation:: Wilm et al., Nucleic Acids Res. (2008), PMID:18420654
 
+
 iRMSD and APDB
 ==============
 All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the following command:
@@ -236,6 +240,7 @@ All you need is a file containing the alignment of sequences with a known struct
 
 
 .. Citation:: Armougom et al., Bioinformatics (2006), PMID:16873492
+
 
 T-RMSD
 =====
@@ -279,6 +284,7 @@ The program then outputs a series of files:
 
 .. Citation:: Magis et al., JMB (2010), PMID:20471393 and/or Magis et al., Trends Biochem. Sci. (2012), PMID:22789664
 
+
 MOCCA
 =====
 MOCCA is a specific tool in T-Coffee designed to deal with highly divergent protein repeats.  Write your sequences in the same file (format: Swiss-prot, Fasta or Pir) and type:
@@ -293,3 +299,4 @@ This command output one files (<your sequences>.mocca_lib) and starts an interac
 
 
 .. Citation:: Notredame, Bioinformatis (2001), PMID:11301309
+
