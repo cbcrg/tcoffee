@@ -11,7 +11,6 @@ Proteins
 ::
 
   Mode Command
-
   ============================================================================
 
   ----------------------------------------------------------------------------
@@ -62,6 +61,11 @@ DNA
 ===
 ::
 
+
+  Mode Command
+  ============================================================================
+
+  ----------------------------------------------------------------------------
   R-Coffee             t_coffee three_cdna.fasta -mode cdna
 
 
@@ -71,9 +75,9 @@ RNA
 ::
 
   Mode Command
-
   ============================================================================
 
+  ----------------------------------------------------------------------------
   R-Coffee             t_coffee sample_rnaseq1.fasta -mode rcoffee
 
                        use the predicted secondary structure of your sequences
@@ -100,9 +104,10 @@ Memory Fix
   memory  t_coffee sample_aln1.fasta -mode memory
 
 
-***********
-Quick Start
-***********
+
+**********************
+Starting with T-Coffee
+**********************
 We only give you the very basics here. Please use the Tutorial for more detailed information on how to use our tools.
 
 
@@ -130,7 +135,7 @@ This will output two files:
 
 
 
-.. warning:: IMPORTANT: In theory nucleic acids should be automatically detected and the default methods should be adapted appropriately. However, sometimes this may fail, either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences. NOTE: the -mode=dna is not needed or supported anymore
+.. warning:: IMPORTANT: In theory nucleic acids should be automatically detected and the default methods should be adapted appropriately. However, sometimes this may fail, either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag -type. NOTE: the -mode=dna is not needed or supported anymore
 
 ::
 
@@ -146,7 +151,7 @@ M-Coffee is a Meta version of T-Coffee that makes it possible to combine the out
 If all these packages are already installed on your machine. You must:
 
 
-1-Set the following environment variables:
+1) Set the following environment variables:
 
 
 ::
@@ -157,7 +162,7 @@ If all these packages are already installed on your machine. You must:
 
 
 
-2-Write your sequences in a file and run: same file (Swiss-prot, Fasta or Pir) and type:
+2) Write your sequences in a file and run T-Coffee using this file (Swiss-prot, Fasta or Pir) with:
 
 
 ::
@@ -171,7 +176,7 @@ If the program starts complaining one package or the other is missing, this mean
 
 Expresso
 ========
-If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against the PDB database, identify the best targets and use these to align your proteins.
+If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against the PDB database, identify the best targets and use these to align your proteins using the following commandline:
 
 
 ::
@@ -180,19 +185,19 @@ If you have installed the EBI wublast.pl client, Expresso will BLAST your sequen
 
 
 
-If you did not manage to install all the required structural packages for Expresso, like Fugue or Sap, you can still run expresso by selecting yourself the structural packages you want to use. For instance, if you'd rather use TM-Align than sap, try:
+If you did not manage to install all the required structural packages for Expresso you can still run eEpresso by selecting yourself the structural packages you want to use. For instance, if you'd rather use TM-Align than sap, try:
 
 
 
 ::
 
-  $$: t_coffee sample_seq1.fasta -template_file EXPRESSO -method TMalign_pair
+  $$: t_coffee sample_seq1.fasta -template_file expresso -method TMalign_pair
 
 
 
 R-Coffee
 ========
-R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures. The best results are obtained by using the consan pairwise method. If you have consan installed:
+R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures. The best results are obtained by using the consan pairwise method. If you have consan installed, run:
 
 
 ::
@@ -201,16 +206,16 @@ R-Coffee can be used to align RNA sequences, using their RNApfold predicted seco
 
 
 
-This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode that will run Muscle, Probcons4RNA and MAfft and then use the secondary structures predicted by RNApfold:
+This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode that will run Muscle, Probcons4RNA and Mafft and then use the secondary structures predicted by RNApfold:
 
 
 ::
 
-  $$: t_coffee sample_rnaseq1.fasta -mode mrcoffee
+  $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
 
 
 
-If you want to decide yourself which methods should be combined by R-Coffee, run:
+If you want to select yourself which methods should be combined by R-Coffee, run:
 
 
 ::
@@ -221,10 +226,7 @@ If you want to decide yourself which methods should be combined by R-Coffee, run
 
 iRMSD and APDB
 ==============
-All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index ( 1aabA for instance). All the sequences do not need to have a known structure, but at least two need to have it.
-
-
-Given the alignment, use the following command:
+All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index ( 1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the following command:
 
 
 ::
@@ -265,43 +267,12 @@ tRMSD is a structure based clustering method using the iRMSD to drive the cluste
   **************************************
 
 
+The program then outputs a series of files:
 
-The program then outputs a series of files
-
-
-::
-
-  Template Type: [3d_sample5.template_list] Mode Or File: [3d_sample5.template_list] [Start]
-
-   [Sample Columns][TOT= 51][100 %][ELAPSED TIME: 0 sec.]
-
-   [Tree Cmp][TOT= 13][ 92 %][ELAPSED TIME: 0 sec.]
-
-  #### File Type= TreeList Format= newick Name= 3d_sample5.tot_pos_list
-
-  #### File Type= Tree Format= newick Name= 3d_sample5.struc_tree10
-
-  #### File Type= Tree Format= newick Name= 3d_sample5.struc_tree50
-
-  #### File Type= Tree Format= newick Name= 3d_sample5.struc_tree100
-
-  #### File Type= Colored MSA Format= score_html Name= 3d_sample5.struc_tree.html
-
-
-
-3d_sample5.tot_pos_list is a list of the tRMSD tree associated with every position.
-
-
-3d_sample5.struc_tree100 is a consensus tree (phylip/consense) of the trees contained in the previous file. This file is the default output.
-
-
-3d_sample5.struc_tree10 is a consensus tree (phylip/consense) of the 10% trees having the higest average agreement with the rest.
-
-
-3d_sample5.struc_tree10 is a consensus tree (phylip/consense) of the 50% trees having the higest average agreement with the rest.
-
-
-3d_sample5.html is a colored version of the output showing in red the positions that give the highest support to 3d_sample5.struc_tree100
+3d_sample5.struc_tree.list is a list of the tRMSD tree associated with every position columns
+3d_sample5.struc_tree.html is a colored output showing columns accordingg to their support to the tree (red: high, blue: low)
+3d_sample5.struc_tree.consensus_output is a schematic representation of the results (it's better to use a tree viewer)
+3d_sample5.struc_tree.consensus is the final consensus structural tree 
 
 
 MOCCA
