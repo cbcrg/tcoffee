@@ -183,7 +183,24 @@ If you did not manage to install all the required structural packages for Expres
   $$: t_coffee sample_seq1.fasta -template_file expresso -method TMalign_pair
 
 
-.. note:: Please cite: Armougom, F., Moretti, S., Poirot, O., Audic, S., Dumas, P., Schaeli, B., Keduas, V., Notredame. C. Expresso: automatic incorporation of structural information in multiple sequence alignments using 3D-Coffe3e. Nucleic Acids Res., 34:W604-W608 (2006), PMID:16845081
+.. note:: Please cite: Armougom, F., Moretti, S., Poirot, O., Audic, S., Dumas, P., Schaeli, B., Keduas, V., Notredame. C. Expresso: automatic incorporation of structural information in multiple sequence alignments using 3D-Coffee. Nucleic Acids Res., 34:W604-W608 (2006), PMID:16845081
+
+
+MOCCA
+=====
+MOCCA is a specific tool in T-Coffee designed to deal with highly divergent protein repeats.  Write your sequences in the same file (format: Swiss-prot, Fasta or Pir) and type:
+
+
+::
+
+  $$: t_coffee -other_pg mocca sample_seq1.fasta
+
+
+This command output one files (<your sequences>.mocca_lib) and starts an interactive menu.
+
+
+.. note:: Please cite: Notredame, C. MOCCA: semi-automatic method for domain hunting. Bioinformatics, 17(4):373-374 (2001), PMID:11301309
+
 
 Pro-Coffee
 ==========
@@ -204,6 +221,7 @@ In order to adjust the quality of the alignment, Pro-Coffee allows you to modify
 
 
 .. note:: Please cite: Erb, I., González-Vallinas, J.R., Bussotti, G., Blanco, E., Eyras, E., Notredame, C. Use of ChIP-Seq data for the design of a multiple promoter-alignment method. Nucleic Acids Res., 40(7):e52 (2012), PMID:22230796.
+
 
 R-Coffee
 ========
@@ -272,10 +290,6 @@ T-RMSD is a structure based clustering method using the iRMSD to drive the struc
 
   >2UWI-2A _P_ 2UWI-2.pdb
 
-  >2UWI-1A _P_ 2UWI-1.pdb
-
-  >2HEY-4R _P_ 2HEY-4.pdb
-
   ...
 
   **************************************
@@ -292,18 +306,15 @@ The program then outputs a series of files:
 .. note:: Please cite: Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. T-RMSD: a fine-grained, structure based classification method and its application to the functional characterization of TNF receptors. J. Mol. Biol., 400(3):605-617 (2010), PMID:20471393 and/or Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. An improved understanding of TNFL/TNFR interactions using structure-based classifications. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
 
 
-MOCCA
-=====
-MOCCA is a specific tool in T-Coffee designed to deal with highly divergent protein repeats.  Write your sequences in the same file (format: Swiss-prot, Fasta or Pir) and type:
+TCS
+===
+
+to be done...
 
 
-::
+STRIKE
+======
 
-  $$: t_coffee -other_pg mocca sample_seq1.fasta
+to be done...
 
-
-This command output one files (<your sequences>.mocca_lib) and starts an interactive menu.
-
-
-.. note:: Please cite: Notredame, C. MOCCA: semi-automatic method for domain hunting. Bioinformatics, 17(4):373-374 (2001), PMID:11301309
 
