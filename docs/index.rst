@@ -11,8 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 5
 
-   tcoffee_quickstart
    tcoffee_installation
+   tcoffee_quickstart
    tcoffee_manual
    tcoffee_tutorials
    tcoffee_faq
