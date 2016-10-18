@@ -16,28 +16,33 @@ Protein sequences
 
   ----------------------------------------------------------------------------
   Default              t_coffee sample_seq1.fasta
-  (T-Coffee)
                        use the output.html to visualize the MSA accuracy
+                       
+  Citation: Notredame et al., JMB (2000)                      PMID:10964570  
+            Magis et al., Methods Mol. Biol. (2014)           PMID:24170398
   ----------------------------------------------------------------------------
   Fast                 t_coffee sample_seq1.fasta -mode quickaln
-  (Quickaln)
                        lower -ndiag if the sequences are very similar
-  ----------------------------------------------------------------------------
-  Consistent           t_coffee sample_aln1.fasta -mode mcoffee
-  (M-Coffee)
-                       combines the most common existing MSA packages
-  ----------------------------------------------------------------------------
-  Structural           t_coffee sample_aln1.fasta -mode expresso
-  (Expresso)
-                       finds structures homologous to your sequences
-  ----------------------------------------------------------------------------
-  Homology             t_coffee sample_aln1.fasta -mode psicoffee
-  (PSI-Coffee)
-                       enriches your dataset with homologous sequences
+
   ---------------------------------------------------------------------------- 
   Accurate             t_coffee sample_aln1.fasta -mode accurate
-  (Accurate)
                        combines structures, sequences and profiles
+                       
+  ----------------------------------------------------------------------------
+  Consistent           t_coffee sample_aln1.fasta -mode mcoffee
+  (M-Coffee)           combines the most common existing MSA packages
+
+  Citation: Wallace et al., Nucleic Acids Res. (2006)         PMID:16556910
+  ----------------------------------------------------------------------------
+  Structural           t_coffee sample_aln1.fasta -mode expresso
+  (Expresso)           finds structures homologous to your sequences
+
+  Citation: Armougom et al. Nucleic Acids Res. (2006)         PMID:16845081
+  ----------------------------------------------------------------------------
+  Homology             t_coffee sample_aln1.fasta -mode psicoffee
+  (PSI-Coffee)         enriches your dataset with homologous sequences
+  
+  Citation: Chang et al., BMC Bioinformatics (2012)           PMID:22536955
   ----------------------------------------------------------------------------
 
 
@@ -46,13 +51,16 @@ DNA sequences
 ::
 
   ----------------------------------------------------------------------------
-  Default              t_coffee three_cdna.fasta
-  (T-Coffee)
+  Default              t_coffee sample_seq1.fasta
                        use the output.html to visualize the MSA accuracy
+                       
+  Citation: Notredame et al., JMB (2000)                      PMID:10964570  
+            Magis et al., Methods Mol. Biol. (2014)           PMID:24170398
   ----------------------------------------------------------------------------
   Functional           t_coffee three_cdna.fasta -mode procoffee
-  (Pro-Coffee)
-                       increases accuracy of functional DNA regions
+  (Pro-Coffee)         increases accuracy of functional DNA regions
+  
+  Citation: Erb et al., Nucleic Acids Res. (2012)             PMID:22230796
   ----------------------------------------------------------------------------  
   Non Functional       t_coffee three_cdna.fasta -mode cdna
   
@@ -65,21 +73,26 @@ RNA sequences
 ::
 
   ----------------------------------------------------------------------------
-  Default              t_coffee sample_rnaseq1.fasta
-  (T-Coffee)
+  Default              t_coffee sample_seq1.fasta
                        use the output.html to visualize the MSA accuracy
+                       
+  Citation: Notredame et al., JMB (2000)                      PMID:10964570  
+            Magis et al., Methods Mol. Biol. (2014)           PMID:24170398
   ----------------------------------------------------------------------------
   Structural 2D        t_coffee sample_rnaseq1.fasta -mode rcoffee
-  (R-Coffee)
-                       use the predicted secondary structure of your sequences
+  (R-Coffee)           use the predicted secondary structure
+  
+  Citation: Wilm et al., Nycleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
   Structural 3D        t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
-  (R-Coffee Consan)
-                       use rcoffee to combine consan structural alignments 
+  (R-Coffee Consan)    use R-Coffee to combine consan structural alignments 
+  
+  Citation: Dowell et al., BMC Bioinformatics (2006)          PMID:16952317
   ----------------------------------------------------------------------------
   Accurate             t_coffee sample_rnaseq1.fasta -mode rmcoffee
-  (RM-Coffee)
-                       use M-Coffee + secondary structure prediction
+  (RM-Coffee)          use M-Coffee + secondary structure prediction
+                       
+  Citation: Wilm et al., Nycleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
 
   
