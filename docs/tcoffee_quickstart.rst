@@ -3,15 +3,15 @@ Quick Start
 ###########
 
 
-.. warning:: IMPORTANT: All the files mentionned here (e.g. sample_seq) can be found in the example directory of the distribution.
+.. warning:: All the files mentionned here (e.g. sample_seq) can be found in the example directory of the distribution.
 
 
 *******************
 Basic Command Lines
 *******************
 
-Proteins
-========
+Proteins sequences
+==================
 ::
 
   Mode Command
@@ -19,7 +19,7 @@ Proteins
 
   ----------------------------------------------------------------------------
 
-  Regular              t_coffee sample_seq1.fasta
+  Regular              *t_coffee sample_seq1.fasta*
 
                        use the output.html to estimate the MSA accuracy
   ----------------------------------------------------------------------------
@@ -61,8 +61,8 @@ Proteins
   ----------------------------------------------------------------------------
 
 
-DNA
-===
+DNA sequences
+=============
 ::
 
 
@@ -74,8 +74,8 @@ DNA
 
 
 
-RNA
-===
+RNA sequences
+=============
 ::
 
   Mode Command
