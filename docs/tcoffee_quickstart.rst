@@ -298,5 +298,5 @@ MOCCA is a specific tool in T-Coffee designed to deal with highly divergent prot
 This command output one files (<your sequences>.mocca_lib) and starts an interactive menu.
 
 
-Citation: Notredame, Bioinformatis (2001), PMID:11301309
+Citation: Notredame, Bioinformatics (2001), PMID:11301309
 
