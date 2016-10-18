@@ -13,88 +13,72 @@ Basic Command Lines (-mode)
 Proteins sequences
 ==================
 ::
-
   ----------------------------------------------------------------------------
-
-  Regular              *t_coffee sample_seq1.fasta*
-
-                       use the output.html to estimate the MSA accuracy
+  Default              t_coffee sample_seq1.fasta
+  (T-Coffee)
+                       use the output.html to visualize the MSA accuracy
   ----------------------------------------------------------------------------
- 
-  Very Fast            t_coffee sample_seq1.fasta -mode quickaln
+  Fast                 t_coffee sample_seq1.fasta -mode quickaln
 
                        lower -ndiag if the sequences are very similar
-
   ----------------------------------------------------------------------------
-
-  Very Accurate        t_coffee sample_aln1.fasta -mode accurate
-
-                       slow, combines structures, sequences and profiles
-
+  Consistent           t_coffee sample_aln1.fasta -mode mcoffee
+  (M-Coffee)
+                       combines the most common existing MSA packages
   ----------------------------------------------------------------------------
-
-  M-Coffee             t_coffee sample_aln1.fasta -mode mcoffee
-
-                       combines most of the existing MSA packages
-
-  ----------------------------------------------------------------------------
-
-  3D-Coffee            t_coffee sample_aln1.fasta -mode 3dcoffee
-
-                       uses the structure of your sequences named with PDBID
-
-  ----------------------------------------------------------------------------
-
-  Expresso             t_coffee sample_aln1.fasta -mode expresso
-
+  Structural           t_coffee sample_aln1.fasta -mode expresso
+  (Expresso)
                        finds structures homologous to your sequences
-
   ----------------------------------------------------------------------------
-
-  PSI-Coffee           t_coffee sample_aln1.fasta -mode psicoffee
-
-                       enriches your sequence with profile information
-
+  Homology             t_coffee sample_aln1.fasta -mode psicoffee
+  (PSI-Coffee)
+                       enriches your dataset with homologous sequences
+  ---------------------------------------------------------------------------- 
+  Accurate             t_coffee sample_aln1.fasta -mode accurate
+  (Accurate)
+                       combines structures, sequences and profiles
   ----------------------------------------------------------------------------
 
 
 DNA sequences
 =============
 ::
-
   ----------------------------------------------------------------------------
-  
-  Pro-Coffee           t_coffee three_cdna.fasta -mode procoffee
-  
+  Default              t_coffee three_cdna.fasta
+  (T-Coffee)
+                       use the output.html to visualize the MSA accuracy
   ----------------------------------------------------------------------------
+  Functional           t_coffee three_cdna.fasta -mode procoffee
+  (Pro-Coffee)
+                       increases accuracy of functional DNA regions
+  ----------------------------------------------------------------------------  
+  Non Functional       t_coffee three_cdna.fasta -mode cdna
   
-  R-Coffee             t_coffee three_cdna.fasta -mode cdna
-  
+                       "to be defined"
   ----------------------------------------------------------------------------
 
 
 RNA sequences
 =============
 ::
-
   ----------------------------------------------------------------------------
-  R-Coffee             t_coffee sample_rnaseq1.fasta -mode rcoffee
-
+  Default              t_coffee sample_rnaseq1.fasta
+  (T-Coffee)
+                       use the output.html to visualize the MSA accuracy
+  ----------------------------------------------------------------------------
+  Structural 2D        t_coffee sample_rnaseq1.fasta -mode rcoffee
+  (R-Coffee)
                        use the predicted secondary structure of your sequences
-
   ----------------------------------------------------------------------------
-
-  RM-Coffee            t_coffee sample_rnaseq1.fasta -mode rmcoffee
-
+  Structural 3D        t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+  (R-Coffee Consan)
+                       use rcoffee to combine consan structural alignments 
+  ----------------------------------------------------------------------------
+  Accurate             t_coffee sample_rnaseq1.fasta -mode rmcoffee
+  (RM-Coffee)
                        use M-Coffee + secondary structure prediction
-
   ----------------------------------------------------------------------------
 
-  R-Coffee Consan      t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
-
-                       use rcoffee to combine consan alignments (accurate/slow)
-
-  ----------------------------------------------------------------------------
   
 
 Memory Fix
@@ -103,8 +87,7 @@ Memory Fix
 
   memory  t_coffee sample_aln1.fasta -mode memory
 
-
-
+  "to be defined"
 
 
 **********************
