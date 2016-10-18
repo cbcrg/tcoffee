@@ -82,7 +82,7 @@ RNA sequences
   Structural 3D        t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
   (R-Coffee Consan)    use R-Coffee to combine consan structural alignments 
   
-  Citation: Dowell et al., BMC Bioinformatics (2006)          PMID:16952317
+  Citation: Wilm et al., Nycleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
   Accurate             t_coffee sample_rnaseq1.fasta -mode rmcoffee
   (RM-Coffee)          use M-Coffee + secondary structure prediction
