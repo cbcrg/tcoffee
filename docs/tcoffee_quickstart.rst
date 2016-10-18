@@ -1,7 +1,11 @@
 ###########
 Quick Start
 ###########
-.. note::All the files mentionned here (sampe_seq...) can be found in the example directory of the distribution.
+
+
+.. warning:: IMPORTANT: All the files mentionned here (e.g. sample_seq) can be found in the example directory of the distribution.
+
+
 *******************
 Basic Command Lines
 *******************
@@ -105,13 +109,13 @@ Memory Fix
 
 
 
+
+
 **********************
 Starting with T-Coffee
 **********************
 We only give you the very basics here. Please use the Tutorial for more detailed information on how to use our tools.
 
-
-.. warning:: IMPORTANT: All the files mentionned here (e.g. sample_seq) can be found in the example directory of the distribution.
 
 T-Coffee
 ========
