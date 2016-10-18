@@ -3,7 +3,11 @@ Quick Start
 ###########
 
 
-.. warning:: This part is designed to have an quick overview of T-Coffee alignment procedures; go to the T-Coffee manual for a more detailed description and available options for a given mode. All the files mentionned here (e.g. sample_seq) can be found in the example directory of the distribution. 
+.. warning:: This part is designed to have an quick overview of T-Coffee alignment procedures.
+1) All the files mentioned here can be found in the example directory of the distribution.
+2) Go to the T-Coffee manual for a more detailed description and available options for a given mode.
+3) Go to the T-Coffee tutorial for a practical training on T-Coffee alignment and other functions.
+4) If you use a particular mode of T-Coffe, please use the specified citation for publication.
 
 
 ***************************
@@ -19,15 +23,16 @@ Protein sequences
                        use the output.html to visualize the MSA accuracy
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
-            Magis et al., Methods Mol. Biol. (2014)           PMID:24170398
   ----------------------------------------------------------------------------
   Fast                 t_coffee sample_seq1.fasta -mode quickaln
                        lower -ndiag if the sequences are very similar
 
+  Citation: Notredame et al., JMB (2000)                      PMID:10964570
   ---------------------------------------------------------------------------- 
   Accurate             t_coffee sample_aln1.fasta -mode accurate
                        combines structures, sequences and profiles
                        
+  Citation: Notredame et al., JMB (2000)                      PMID:10964570
   ----------------------------------------------------------------------------
   Consistent           t_coffee sample_aln1.fasta -mode mcoffee
   (M-Coffee)           combines the most common existing MSA packages
@@ -55,17 +60,12 @@ DNA sequences
                        use the output.html to visualize the MSA accuracy
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
-            Magis et al., Methods Mol. Biol. (2014)           PMID:24170398
   ----------------------------------------------------------------------------
   Functional           t_coffee three_cdna.fasta -mode procoffee
   (Pro-Coffee)         increases accuracy of functional DNA regions
   
   Citation: Erb et al., Nucleic Acids Res. (2012)             PMID:22230796
   ----------------------------------------------------------------------------  
-  Non Functional       t_coffee three_cdna.fasta -mode cdna
-  
-                       "to be defined"
-  ----------------------------------------------------------------------------
 
 
 RNA sequences
@@ -77,7 +77,6 @@ RNA sequences
                        use the output.html to visualize the MSA accuracy
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
-            Magis et al., Methods Mol. Biol. (2014)           PMID:24170398
   ----------------------------------------------------------------------------
   Structural 2D        t_coffee sample_rnaseq1.fasta -mode rcoffee
   (R-Coffee)           use the predicted secondary structure
