@@ -1,11 +1,11 @@
-###########
-Quick Start
-###########
+######################
+Starting with T-Coffee
+######################
 
 
-***************************
-Basic Command Lines (-mode)
-***************************
+******************************
+Basic Command Lines (or modes)
+******************************
 
 .. warning:: This part is designed to have an quick overview of T-Coffee alignment procedures. All the files mentioned here can be found in the example directory of the distribution. If you use a particular mode of T-Coffee, please use the specified citation for publication.
 
@@ -52,7 +52,7 @@ DNA sequences
 ::
 
   ----------------------------------------------------------------------------
-  Default              t_coffee sample_seq1.fasta
+  Default              t_coffee three_cdna.fasta
                        use the output.html to visualize the MSA accuracy
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
@@ -69,7 +69,7 @@ RNA sequences
 ::
 
   ----------------------------------------------------------------------------
-  Default              t_coffee sample_seq1.fasta
+  Default              t_coffee sample_rnaseq1.fasta
                        use the output.html to visualize the MSA accuracy
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
@@ -92,9 +92,9 @@ RNA sequences
 
 
 
-**********************
-Starting With T-Coffee
-**********************
+********************************
+Brief Overview of T-Coffee Tools
+********************************
 
 .. warning:: We only give you the very basics here, please go to the T-Coffee manual for a more detailed description and available options for the different tools. You can also try the T-Coffee tutorial for a practical training on T-Coffee alignment and other functions using applied examples on published research data.
 
@@ -129,15 +129,12 @@ This will output three files:
   $$: t_coffee sample_dnaseq1.fasta -type=dna
 
 
-.. note:: please cite Notredame et al., JMB (2000), PMID:10964570
+.. note:: Please cite: Notredame, C., Higgins, D.G., Heringa, J. T-Coffee: a novel method for fast and accurate multiple sequence alignment. J. Mol. Biol., 302(1):205-217 (2000), PMID:10964570
 
 
 M-Coffee
 ========
-M-Coffee is a meta version of T-Coffee that makes it possible to combine the output of a combination of eight packages (Muscle, probcons, poa, dialignT, mafft, clustalw, PCMA and T-Coffee).
-
-
-If all these packages are already installed on your machine. You must:
+M-Coffee is a meta version of T-Coffee that makes it possible to combine the output of a combination of eight packages (MUSCLE, ProbCons, POA, DIALIGN-T, MAFFT, ClustalW, PCMA and T-Coffee). If all these packages are already installed on your machine. You must:
 
 
 1) Set the following environment variables:
@@ -163,7 +160,7 @@ If all these packages are already installed on your machine. You must:
 If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself... Proceed to the M-Coffee section for more detailed instructions.
 
 
-.. note:: Citation: Wallace et al., Nucleic Acids Res. (2006), PMID:16556910
+.. note:: Please cite: Wallace, I.M., O'Sullivan, O., Higgins, D.G., Notredame, C. M-Coffee: combining multiple sequence alignment methods with T-Coffee. Nucleic Acids Res., 34(6):1692-1699 (2006), PMID:16556910
 
 
 Expresso
@@ -177,7 +174,7 @@ If you have installed the EBI wublast.pl client, Expresso will BLAST your sequen
 
 
 
-If you did not manage to install all the required structural packages for Expresso you can still run eEpresso by selecting yourself the structural packages you want to use. For instance, if you'd rather use TM-Align than sap, try:
+If you did not manage to install all the required structural packages for Expresso you can still run it by selecting yourself the structural packages you want to use. For instance, if you'd rather use TM-align than SAP, try:
 
 
 
@@ -186,8 +183,27 @@ If you did not manage to install all the required structural packages for Expres
   $$: t_coffee sample_seq1.fasta -template_file expresso -method TMalign_pair
 
 
-.. note:: Citation: Armougom et al. Nucleic Acids Res. (2006), PMID:16845081
+.. note:: Please cite: Armougom, F., Moretti, S., Poirot, O., Audic, S., Dumas, P., Schaeli, B., Keduas, V., Notredame. C. Expresso: automatic incorporation of structural information in multiple sequence alignments using 3D-Coffe3e. Nucleic Acids Res., 34:W604-W608 (2006), PMID:16845081
 
+Pro-Coffee
+==========
+Pro-Coffee is a particular mode of T-Coffee designed to align specific functional DNA sequences, in particular regulatory regions. To run Pro-Coffee by default, type:
+
+
+::
+
+  $$: t_coffee three_cdna.fasta -mode procoffee
+  
+
+In order to adjust the quality of the alignment, Pro-Coffee allows you to modify gap penalties (gap-opening and/or gap-extension); to do so, use the following commandline:
+
+
+::
+
+  $$: t_coffee three_cdna.fasta -method promo_pair@EP@GOP@-60@GEP@-1
+
+
+.. note:: Please cite: Erb, I., González-Vallinas, J.R., Bussotti, G., Blanco, E., Eyras, E., Notredame, C. Use of ChIP-Seq data for the design of a multiple promoter-alignment method. Nucleic Acids Res., 40(7):e52 (2012), PMID:22230796.
 
 R-Coffee
 ========
@@ -200,7 +216,7 @@ R-Coffee can be used to align RNA sequences, using their RNApfold predicted seco
 
 
 
-This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode that will run Muscle, Probcons4RNA and Mafft and then use the secondary structures predicted by RNApfold:
+This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode that will run MUSCLE, ProbCons4RNA and MAFFT and then use the secondary structures predicted by RNApfold:
 
 
 ::
@@ -217,7 +233,7 @@ If you want to select yourself which methods should be combined by R-Coffee, run
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair
 
 
-.. note:: Citation: Wilm et al., Nucleic Acids Res. (2008), PMID:18420654
+.. note:: Please cite: Wilm, A., Higgins, D.G., Notredame, C. R-Coffee: a method for multiple alignment of non-coding RNA. Nucleic Acids Res., 36(9):e52 (2008), PMID:18420654
 
 
 iRMSD and APDB
@@ -230,7 +246,7 @@ All you need is a file containing the alignment of sequences with a known struct
   $$: t_coffee -other_pg irmsd -aln 3d_sample4.aln
 
 
-.. note:: Citation: Armougom et al., Bioinformatics (2006), PMID:16873492
+.. note:: Please cite: Armougom, F., Moretti, S., Keduas, V., Notredame, C. The iRMSD: a local measure of sequence alignment accuracy using structural information. Bioinformatics, 22(14):e35-e39 (2006), PMID:16873492
 
 
 T-RMSD
@@ -273,7 +289,7 @@ The program then outputs a series of files:
 3d_sample5.struc_tree.consensus is the final consensus structural tree 
 
 
-.. note:: Citation: Magis et al., JMB (2010), PMID:20471393 and/or Magis et al., Trends Biochem. Sci. (2012), PMID:22789664
+.. note:: Please cite: Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. T-RMSD: a fine-grained, structure based classification method and its application to the functional characterization of TNF receptors. J. Mol. Biol., 400(3):605-617 (2010), PMID:20471393 and/or Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. An improved understanding of TNFL/TNFR interactions using structure-based classifications. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
 
 
 MOCCA
@@ -289,5 +305,5 @@ MOCCA is a specific tool in T-Coffee designed to deal with highly divergent prot
 This command output one files (<your sequences>.mocca_lib) and starts an interactive menu.
 
 
-.. note:: Citation: Notredame, Bioinformatics (2001), PMID:11301309
+.. note:: Please cite: Notredame, C. MOCCA: semi-automatic method for domain hunting. Bioinformatics, 17(4):373-374 (2001), PMID:11301309
 
