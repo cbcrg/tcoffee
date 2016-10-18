@@ -90,16 +90,6 @@ RNA sequences
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
 
-  
-
-Memory Fix
-==========
-::
-
-  memory  t_coffee sample_aln1.fasta -mode memory
-
-  "to be defined"
-
 
 **********************
 Starting With T-Coffee
