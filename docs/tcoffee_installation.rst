@@ -28,7 +28,7 @@ We now recommend that you use the automated installer provided for Unix or Linux
 
 Unix/Linux
 ^^^^^^^^^^
-You need to have: gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules: LWP and XML::Simple, needed to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/> and then follow this procedure:
+You need to have: gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules: LWP and XML to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/>, then follow this procedure:
 
 
 
