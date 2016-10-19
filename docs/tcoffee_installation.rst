@@ -23,12 +23,12 @@ Standard installation of T-Coffee
 
 Automated installation
 ----------------------
-We now recommend that you use the automated installer provided for Unix or Linux platforms. In any case, you first have to download the T-Coffee installer corresponding to your system from the T-Coffee website <http://tcoffee.org/Packages/> and then follow the adequate procedure <http://www.ebi.ac.uk/Tools/>.
+We now recommend that you use the automated installer provided for Unix or Linux platforms. In any case, you first have to download the T-Coffee installer corresponding to your system from the T-Coffee website <http://tcoffee.org/Packages/> and then follow the adequate procedure.
 
 
 Unix/Linux
 ^^^^^^^^^^
-You need to have: gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules: LWP and XML to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/>, then follow this procedure:
+You need to have: gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules: LWP and XML to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>, then follow this procedure:
 
 
 
