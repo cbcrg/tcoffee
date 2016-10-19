@@ -28,26 +28,26 @@ We now recommend that you use the automated installer provided for Unix or Linux
 
 Unix/Linux
 ^^^^^^^^^^
-You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST (<http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>). Follow this procedure:
+You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>. Follow this procedure:
 
 
 ::
 
   1. Download the installer package corresponding to your system from:
-     <http://tcoffee.org/Packages/Stable/Latest/linux/>
+     http://tcoffee.org/Packages/Stable/Latest/linux/
 
   2. Grant execution permission to the downloaded file with the following command:
-  \**chmod +x T-COFFEE_installer_"version_x".bin**\
+     chmod +x T-COFFEE_installer_"version_x".bin
 
   3. Launch the installation wizard with
-  \**./T-COFFEE_installer_"version_x".bin**\
+     ./T-COFFEE_installer_"version_x".bin
 
   4. Follow the wizard instructions and complete the installation
   
   5. Open a new terminal session to be sure that your environment is updated
   
   6. Type the following command to verify the installation was successful:
-  \**t_coffee -version**\
+     t_coffee -version
  
 
 Mac OS X
@@ -57,7 +57,7 @@ Make sure you have the developer's kit installed (compilers and makefile) and fo
 ::
 
   1. Download the installer package from:
-     <http://tcoffee.org/Packages/Stable/Latest/macosx/>. 
+     http://tcoffee.org/Packages/Stable/Latest/macosx/ 
      With Mac OSX 10.5.x (Leopard) and earlier versions, users have to use the 32-bit
      installer version; with Mac OSX 10.6.x (Snow Leopard) and above, users have to use 
      the 64-bit installer version.
@@ -71,7 +71,7 @@ Make sure you have the developer's kit installed (compilers and makefile) and fo
   5. Open a new terminal session to be sure that your environment is updated
   
   6. Type the following command to verify the installation was successful:
-     \**t_coffee -version**\
+     t_coffee -version
 
 
 Microsoft Windows (Cygwin)
@@ -99,6 +99,8 @@ Compiling from source
 ^^^^^^^^^^^^^^^^^^^^^
 You can also compile T-Coffee using the source code following the procedure: 
 
+::
+
   1. Follow the instructions from the T-Coffee Google code in order to retrieve the source code: 
      <http://code.google.com/p/tcoffee/source/checkout>
   
@@ -109,26 +111,27 @@ You can also compile T-Coffee using the source code following the procedure:
 
 CLUSTER Installation
 ^^^^^^^^^^^^^^^^^^^^
-In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so you can either:
+In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so you, can perform any of the following options:
 
+::
+
+1)
 export the following values:
-export http_proxy_4_TCOFFEE='proxy' or '' if no proxy
+export http_proxy_4_TCOFFEE='proxy' (or '' if no proxy)
 export EMAIL_4_TCOFFEE='your email'
 
-OR
-
+2)
 modify the file ~/.t_coffee/t_coffee_env
 
-OR
-
+3)
 add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
 (if you have no proxy: t_coffee ... -proxy -email=<email>)
 
 
 
-*************************
-Using BLAST With T-Coffee
-*************************
+******************
+T-Coffee and BLAST
+******************
 
 BLAST is a program that searches sequence databases for homologues of a query sequence. It works for proteins and nucleic acids alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run well, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer.
 
