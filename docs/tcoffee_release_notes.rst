@@ -1,7 +1,7 @@
 #############
 Release Notes
 #############
-Warning: This log of recent modifications is not as thorough and accurate as it should be.
+.. Warning:: This log of recent modifications is not as thorough and accurate as it should be.
 
 
 -9.86 New data structure for the primary library that results in highly improved running times for mcoffee and significantly decreased memory usage.
