@@ -28,7 +28,7 @@ We now recommend that you use the automated installer provided for Unix or Linux
 
 Unix/Linux
 ^^^^^^^^^^
-You need to have: gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules: LWP and XML::Simple, needed to use the services provided by the EBI via REST http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest/ and then follow this procedure:
+You need to have: gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules: LWP and XML::Simple, needed to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/> and then follow this procedure: (http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest)
 
 
 
@@ -102,7 +102,7 @@ You can also compile T-Coffee using the source code following the procedure:
 ::
 
   1. Follow the instructions from the T-Coffee Google code in order to retrieve the source code: 
-     http://code.google.com/p/tcoffee/source/checkout
+     http://code.google.com/p/tcoffee/source/checkout (no longer available)
   
   2. Compile the T-Coffee source distribution package on your target system. It will require the
      GNU development tools (gcc, g77 or gfortran, make), the Perl interpreter, CPAN and the root
