@@ -6,12 +6,12 @@ T-Coffee Installation
 T-Coffee Standard Installation
 ******************************
 
-This section describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems. The procedure is quite straightforward, contact us if you have any problem.
+.. Important:: This section describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on Windows without a Unix environment. The procedure is quite straightforward, contact us if you have any problem.
 
 
 Third party packages and on-demand installations
 ================================================
-T-Coffee is a complex package that interacts with many other third part softwares. If you only want a stand-alone version of T-Coffee, you may install that package on its own with all its dependencies. If you want to use a most sophisticated flavor (3D-Coffee, Expresso, R-Cofeee, etc...), the installer will have to install all the third party packages required.
+T-Coffee is a complex package that interacts with many other third part softwares. If you only want a stand-alone version of T-Coffee, you may install that package on its own with all its dependencies. If you want to use a most sophisticated flavor (3D-Coffee/Expresso, R-Coffee, etc...), the installer will have to install all the third party packages required.
 
 Note that since version 7.56, T-Coffee uses on-demand installation and install the third party packages it needs. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
 
@@ -23,106 +23,85 @@ Standard installation of T-Coffee
 
 Automated installation
 ----------------------
-We now recommend that you use the automated installer provided for Unix or Linux platforms. In any case, you first have to download the T-Coffee installer corresponding to your system from the T-Coffee website and then follow the adequate procedure.
+We now recommend that you use the automated installer provided for Unix or Linux platforms. In any case, you first have to download the T-Coffee installer corresponding to your system from the T-Coffee website <http://tcoffee.org/Packages/> and then follow the adequate procedure.
 
 
 Unix/Linux
 ^^^^^^^^^^
-::
-
-   rpm -i <rpm>
-
-
-You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST (http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest)
+You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST (http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest). Follow this procedure:
 
 
 ::
 
-  1.      gunzip t_coffee.tar.gz
+  1. Download the installer package corresponding to your system from <http://tcoffee.org/Packages/Stable/Latest/linux/>
 
-  2.      tar -xvf t_coffee.tar
+  2. Grant execution permission to the downloaded file with the following command:
+  **chmod +x T-COFFEE_installer_"version_x".bin**
 
-  3.      cd t_coffee
+  3. Launch the installation wizard with
+  **./T-COFFEE_installer_"version_x".bin**
 
-  4.      ./install t_coffee
-
-
-
-This installation will only install the stand alone T-Coffee. If you want to install a specific mode of T-Coffee, you may try the following commands that will try to gather all the necessary third party packages. Note that a package already found on your system will not be re-installed.
-
-
-::
-
-   ./install t_coffee
-
-   ./install mcoffee
-
-   ./install 3dcoffee
-
-   ./install rcoffee
-
-   ./install psicoffee
-
-
-Or even:
-
-
-::
-
-   ./install all
-
-
-
-All the corresponding executables will be downloaded automatically and installed in:
-
-
-::
-
-   $HOME/.t_coffee/plugins
-
-
-- If you executables are in a different location, give it to T-Coffee using the -plugins flag.
-
-- If the installation of any of the package fails, you should install it yourself using the provided link (see below) and following the authors instructions.
-
-- If you have not managed to install SOAP::Lite, you can re-install it later (from anywhere) following steps 1-2.
-
-- This procedure attempts 3 things: installing and compiling T-Coffee (C program), installing and compiling TMalign (Fortran), installing and compiling XML::Simple.
-
-- If you have never installed a perl module before, CPAN will ask you many questions: say Yes to all.
-
-- If everything went well, the procedure has created in the bin directory two executables: t_coffee and TMalign (Make sure these executables are on your $PATH)
-
+  4. Follow the wizard instructions and complete the installation
+  
+  5. Open a new terminal session to be sure that your environment is updated
+  
+  6. Type the following command to verify the installation was successful:
+  **t_coffee -version**
+ 
 
 Mac OS X
 ^^^^^^^^
-Make sure you have the developer's kit installed (compilers and makefile) and follow the Unix procedure.
+Make sure you have the developer's kit installed (compilers and makefile) and follow this procedure:
 
 ::
 
-   Click on the .dmg file and follow the installation procedure
+  1. Download the installer package from <http://tcoffee.org/Packages/Stable/Latest/macosx/>. With Mac OSX 10.5.x
+     (Leopard) and earlier versions, users have to use the 32-bit installer version; with Mac OSX 10.6.x (Snow Leopard) and
+     above, users have to use the 64-bit installer version.
+
+  2. Double-click on the DMG file to open it
+   
+  3. Double-click on the installer icon (within the mounted image) to start the installation
+   
+  4. Follow the wizard instructions and complete the installation
+   
+  5. Open a new terminal session to be sure that your environment is updated
+  
+  6. Type the following command to verify the installation was successful:
+     **t_coffee -version**
 
 
 Microsoft Windows (Cygwin)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-T-Coffee doesn't run on Windows; in order to be able to run T-Coffee you need to install a Linux environment such as Cygwin:
+T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to install a Linux environment such as a virtualbox or Cygwin. Then follow the procedure:
 
 ::
 
-  1.      Install Cygwin
+  1. Install Cygwin
 
-  2.      Download the installer (NOT Cygwin/X)
+  2. Download the installer (NOT Cygwin/X)
 
-  3.      Click on view to list ALL the packages
+  3. Click on view to list ALL the packages
 
-  4.      Select: gcc-core, make, wget
+  4. Select: gcc-core, make, wget
 
-  5.      Optional: ssh, xemacs, nano
+  5. Optional: ssh, xemacs, nano
 
-  6.      Run mkpasswd in Cygwin (as requested when you start Cygwin)
+  6. Run mkpasswd in Cygwin (as requested when you start Cygwin)
 
-  7.      Install T-Coffee within Cygwin using the Unix procedure
+  7. Install T-Coffee within Cygwin using the Unix procedure
+
+
+Compiling from source 
+^^^^^^^^^^^^^^^^^^^^^
+You can also compile T-Coffee using the source code following the procedure: 
+
+  1. Follow the instructions from the T-Coffee Google code in order to retrieve the source code: 
+     <http://code.google.com/p/tcoffee/source/checkout>
+  
+  2. Compile the T-Coffee source distribution package on your target system. It will require the GNU development tools 
+     (gcc, g77 or gfortran, make), the Perl interpreter, CPAN and the root user privileges. 
+
 
 
 CLUSTER Installation
@@ -130,9 +109,7 @@ CLUSTER Installation
 In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so you can either:
 
 export the following values:
-
 export http_proxy_4_TCOFFEE='proxy' or '' if no proxy
-
 export EMAIL_4_TCOFFEE='your email'
 
 OR
@@ -143,7 +120,6 @@ OR
 
 add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
 (if you have no proxy: t_coffee ... -proxy -email=<email>)
-
 
 
 
