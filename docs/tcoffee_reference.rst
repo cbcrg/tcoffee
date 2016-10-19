@@ -34,23 +34,6 @@ Again, you do not need our permission to either use T-Coffee (or your method as 
 The current license only allows for the incorporation of T-Coffee in non-commercial pipelines (i.e. where you do not sell the pipeline, or access to it). If your pipeline is commercial, please get in touch with us.
 
 
-**********************
-Addresses and Contacts
-**********************
-
-Contributors
-============
-T-coffee is developed, maintained, monitored, used and debugged by a dedicated team that include or have included:
-
-
- Cedric Notredame, Paolo di Tommaso, Jean-François Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, Orla O'Sullivan, Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm.
-
-
-Addresses
-=========
-We are always very eager to get some user feedback. Please do not hesitate to drop us a line at: cedric.notredame@europe.com The latest updates of T-Coffee are always available on: www.tcoffee.org . On this address you will also find a link to some of the online T-Coffee servers, including Tcoffee@igs
-
-
 T-Coffee can be used to automatically check if an updated version is available, however the program will not update automatically, as this can cause endless reproducibility problems.
 
 
