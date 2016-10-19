@@ -17,11 +17,9 @@ Contents:
    tcoffee_tutorials
    tcoffee_faq
    tcoffee_reference
-   trmsd_manual
+   tcoffee_adresses_and_contacts
    
    tcoffee_release_notes
-   tcoffee_problems
-   tcoffee_developer
    
 
 
