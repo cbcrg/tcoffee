@@ -28,25 +28,26 @@ We now recommend that you use the automated installer provided for Unix or Linux
 
 Unix/Linux
 ^^^^^^^^^^
-You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST (http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest). Follow this procedure:
+You need to have: gcc, g77, CPAN and an internet connection and your root password. You will also need the two following perl modules: LWP and XML::Simple. These are needed if you want to use the web services provided by the EBI via REST (<http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>). Follow this procedure:
 
 
 ::
 
-  1. Download the installer package corresponding to your system from <http://tcoffee.org/Packages/Stable/Latest/linux/>
+  1. Download the installer package corresponding to your system from:
+     <http://tcoffee.org/Packages/Stable/Latest/linux/>
 
   2. Grant execution permission to the downloaded file with the following command:
-  **chmod +x T-COFFEE_installer_"version_x".bin**
+  \**chmod +x T-COFFEE_installer_"version_x".bin**\
 
   3. Launch the installation wizard with
-  **./T-COFFEE_installer_"version_x".bin**
+  \**./T-COFFEE_installer_"version_x".bin**\
 
   4. Follow the wizard instructions and complete the installation
   
   5. Open a new terminal session to be sure that your environment is updated
   
   6. Type the following command to verify the installation was successful:
-  **t_coffee -version**
+  \**t_coffee -version**\
  
 
 Mac OS X
@@ -55,9 +56,11 @@ Make sure you have the developer's kit installed (compilers and makefile) and fo
 
 ::
 
-  1. Download the installer package from <http://tcoffee.org/Packages/Stable/Latest/macosx/>. With Mac OSX 10.5.x
-     (Leopard) and earlier versions, users have to use the 32-bit installer version; with Mac OSX 10.6.x (Snow Leopard) and
-     above, users have to use the 64-bit installer version.
+  1. Download the installer package from:
+     <http://tcoffee.org/Packages/Stable/Latest/macosx/>. 
+     With Mac OSX 10.5.x (Leopard) and earlier versions, users have to use the 32-bit
+     installer version; with Mac OSX 10.6.x (Snow Leopard) and above, users have to use 
+     the 64-bit installer version.
 
   2. Double-click on the DMG file to open it
    
@@ -68,7 +71,7 @@ Make sure you have the developer's kit installed (compilers and makefile) and fo
   5. Open a new terminal session to be sure that your environment is updated
   
   6. Type the following command to verify the installation was successful:
-     **t_coffee -version**
+     \**t_coffee -version**\
 
 
 Microsoft Windows (Cygwin)
