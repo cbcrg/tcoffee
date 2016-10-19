@@ -560,37 +560,20 @@ R-Coffee only requires the package Vienna to be installed, in order to compute M
 
 ::
 
+  ---------------------------------------------------  
+  Consan (***NOT COMPULSORY***)
+  selab.janelia.org/software/consan/    
   ---------------------------------------------------
-  
-  Consan computes highly accurate pairwise alignments
-  selab.janelia.org/software/consan/
-  
-  ***NOT COMPULSORY***
-    
-  ---------------------------------------------------
-  
   RNAplfold computes RNA secondary structures
   www.tbi.univie.ac.at/~ivo/RNA/
-  
   ---------------------------------------------------
-  
-  ProbConsRNA probcons.stanford.edu/
-  
-  ---------------------------------------------------
-
-  M-Coffee T-Coffee and the most common MSA Packages
-  (cf M-Coffee in this installation guide)
-
+  ProbConsRNA
+  http://www.probcons.stanford.edu/ 
   ---------------------------------------------------
   
 
-Installing ProbConsRNA for R-Coffee
------------------------------------
-Follow the installation procedure, but make sure you rename the probcons executable into probconsRNA.
+.. Note:: Regarding ProbConsRNA, make sure you rename the probcons executable into ProbConsRNA.
 
-
-Installing Consan for R-Coffee
-------------------------------
-In order to insure a proper interface bewteen Consan and R-Coffee, you must make sure that the file mix80.mod is in the directory ~/.t_coffee/mcoffee or in the mcoffee directory otherwise declared.
+.. Note:: In order to insure a proper interface bewteen Consan and R-Coffee, make sure that the file mix80.mod is in the directory ~/.t_coffee/mcoffee or in the mcoffee directory otherwise declared.
 
 
