@@ -11,26 +11,20 @@ T-Coffee Standard Installation
 
 Third party packages and on-demand installations
 ================================================
-T-Coffee is a complex package that interacts with many other third part softwares. If you only want a stand-alone version of T-Coffee, you may install that package on its own with all its dependencies. If you want to use a most sophisticated flavor (3D-Coffee/Expresso, R-Coffee, etc...), the installer will have to install all the third party packages required.
+T-Coffee is a complex package that interacts with many other third party softwares. Since version 7.56, T-Coffee uses on-demand installation and install the third party packages it needs, on your computer, for the different T-Coffee options to run correctly. Please let us know if you would like another third party package to be included.
 
-Note that since version 7.56, T-Coffee uses on-demand installation and install the third party packages it needs. This only works for packages not requiring specific licenses and that can be installed by the regular installer. Please let us know if you would like another third party package to be included.
-
-Whenever on-demand installation or automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
+Whenever the automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
 
 Standard installation of T-Coffee
 =================================
 
-Automated installation
-----------------------
-We now recommend that you use the automated installer provided for Unix or Linux platforms. In any case, you first have to download the T-Coffee installer corresponding to your system from the T-Coffee website <http://tcoffee.org/Packages/> and then follow the adequate procedure.
+.. Note:: We now recommend that you use the automated installer provided for Unix or Linux platforms. In any case, you first have to download the T-Coffee installer corresponding to your system from the T-Coffee website and then follow the procedure corresponding to your operative system.
 
 
 Unix/Linux
-^^^^^^^^^^
-You need to have: gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules: LWP and XML to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>, then follow this procedure:
-
-
+----------
+You need to have gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules: LWP and XML to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>, then follow this procedure:
 
 ::
 
@@ -52,7 +46,7 @@ You need to have: gcc, g77, CPAN, an internet connection and the root password. 
  
 
 Mac OS X
-^^^^^^^^
+--------
 Make sure you have the developer's kit installed (compilers and makefile) and follow this procedure:
 
 ::
@@ -75,8 +69,8 @@ Make sure you have the developer's kit installed (compilers and makefile) and fo
 
 
 Windows (Cygwin)
-^^^^^^^^^^^^^^^^
-T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to install a Linux environment such as a virtualbox or Cygwin. Then follow the procedure:
+----------------
+T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to install a Linux environment such as a virtualbox or Cygwin. If you use Cygwin, follow this procedure:
 
 ::
 
@@ -96,8 +90,8 @@ T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to
 
 
 Compiling from source 
-^^^^^^^^^^^^^^^^^^^^^
-You can also compile T-Coffee using the source code following the procedure: 
+---------------------
+You can also compile T-Coffee using the source code following these steps: 
 
 ::
 
@@ -111,7 +105,7 @@ You can also compile T-Coffee using the source code following the procedure:
 
 
 CLUSTER Installation
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so you, can perform any of the following options:
 
 ::
@@ -197,9 +191,9 @@ Foo will be called as if it were BLASTPGP, and it is your responsability to make
 ::
 
   foo.pl -p <method> -d <db> -i <infile> -o <outfile> -m 7
-  - "method" can either be blastp or psiblast
-  - "infile" is a FASTA file
-  - "-m 7" triggers the XML output, T-Coffee parses both the EBI XML and the NCBI XML outputs
+  "method" can either be blastp or psiblast
+  "infile" is a FASTA file
+  "-m 7" triggers the XML output, T-Coffee parses both the EBI XML and the NCBI XML outputs
 
 
 If foo.pl behaves differently, the easiest will probably be to write a wrapper around it so that wrapped_foo.pl behaves like BLASTPGP.
@@ -213,7 +207,6 @@ If you have BLASTPGP installed, you can run it instead of the remote clients by 
 ::
 
   -blast_server=LOCAL
-
 
 
 The documentation for BLASTPGP can be found on <http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html> and the package is part of the standard BLAST distribution at <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>. Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achievement spread over several generations. So at this point, you should roam the NCBI website for suitable information. If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST:
@@ -235,7 +228,7 @@ Using a BLAST local version on Windows/Cygwin
 
 BLAST+
 ------
-BLAST+ is the latest NCBI BLAST. It is easier to install. A default installation should be compliant with a default T-Coffee installation.
+BLAST+ is the latest NCBI BLAST. It is easier to install; a default installation should be compliant with a default T-Coffee installation.
 
 
 Original NCBI BLAST
@@ -256,8 +249,6 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 
 
 .. Warning:: using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.
-
-
 
 
 ******************************
@@ -413,9 +404,7 @@ You will receive a list of supported packages that looks like the next table. In
   ==========================================================
 
 
-In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed.
-
-Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
+In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed. Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
 
 
 
