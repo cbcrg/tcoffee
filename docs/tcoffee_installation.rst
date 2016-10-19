@@ -169,13 +169,7 @@ Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an 
 
 Using the NCBI BLAST client
 ===========================
-The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSIBLAST (as a websevice). A big miss! The NCBI web BLAST client is a small executable that you should install on your system following the instructions given on this link <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>
-
-
-Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN.
-
-
-All you then need to do is to make sure that T-Coffee uses the right client; when you run T-Coffee, specify the client in the command line with:
+The NCBI is the next best alternative, however in my hands it was always a bit slower and, most of all, it does not incorporate PSI-BLAST as a webservice. A big miss! The NCBI web BLAST client is a small executable that you should install on your system. To do so, you just have to follow the instructions given on this link <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>. Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN. All you then need to do is to make sure that T-Coffee uses the right client; when you run T-Coffee, specify the client in the command line with:
 
 
 ::
@@ -183,7 +177,7 @@ All you then need to do is to make sure that T-Coffee uses the right client; whe
   -blast_server=NCBI
 
 
-No need for any E-mail here, but you don't get PSIBLAST, and whenever T-Coffee wants to use it, BLASTP will be used instead.
+.. Warning:: No need for any E-mail here, but you don't get PSI-BLAST, and whenever T-Coffee wants to use it, BLASTP will be used instead.
 
 
 Using another client
@@ -203,9 +197,9 @@ Foo will be called as if it were BLASTPGP, and it is your responsability to make
 ::
 
   foo.pl -p <method> -d <db> -i <infile> -o <outfile> -m 7
-  - method can either be blastp or psiblast
-  - infile is a FASTA file
-  - -m 7 triggers the XML output, T-Coffee parses both the EBI XML and the NCBI XML outputs
+  - "method" can either be blastp or psiblast
+  - "infile" is a FASTA file
+  - "-m 7" triggers the XML output, T-Coffee parses both the EBI XML and the NCBI XML outputs
 
 
 If foo.pl behaves differently, the easiest will probably be to write a wrapper around it so that wrapped_foo.pl behaves like BLASTPGP.
@@ -248,31 +242,20 @@ Original NCBI BLAST
 -------------------
 For those of you using Cygwin, be careful. While Cygwin behaves like a Unix system, the BLAST executable required for Cygwin (win32) is expecting Windows paths and not Unix paths. This has three important consequences:
 
-
-1- the NCBI file declaring the sata directory must be:
-
 ::
 
- C:WINDOWS//ncbi.init [at the root of your WINDOWS]
+  1. The NCBI file declaring the sata directory must be:
+     C:WINDOWS//ncbi.init [at the root of your WINDOWS]
+
+  2. The address mentioned with this file must be WINDOWS formated, for instance, on my system:
+     Data=C:\cygwin\home\notredame\blast\data
+
+  3. The database addresses to BLAST must be in Windows format:
+     -protein_db='c:/somewhere/somewhereelse/database'
 
 
 
-2- the address mentioned with this file must be WINDOWS formated, for instance, on my system:
-
-::
-
- Data=C:\cygwin\home\notredame\blast\data
-
-
-3- the database addresses to BLAST must be in Windows format:
-
-::
-
- -protein_db='c:/somewhere/somewhereelse/database'
-
-
-
-(using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.
+.. Warning:: using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.
 
 
 
