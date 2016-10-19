@@ -2,9 +2,9 @@
 T-Coffee Installation
 #####################
 
-******************************
-T-Coffee Standard Installation
-******************************
+*********************
+Standard Installation
+*********************
 
 .. Important:: This section describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on Windows without a Unix environment. The procedure is quite straightforward, contact us if you have any problem.
 
@@ -103,7 +103,6 @@ You can also compile T-Coffee using the source code as indicated:
      user privileges. 
 
 
-
 CLUSTER Installation
 --------------------
 In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform any of the following options:
@@ -121,9 +120,9 @@ In order to run, T-Coffee must have a value for the http_proxy and for the e-mai
 
 
 
-******************
-T-Coffee and BLAST
-******************
+************************************
+T-Coffee special relation with BLAST
+************************************
 
 BLAST is a program that searches sequence databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer.
 
@@ -250,9 +249,9 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 .. Attention:: using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.
 
 
-******************************
-T-Coffee Advanced Installation
-******************************
+*********************
+Advanced Installation
+*********************
 
 These procedures are not needed for default usage of T-Coffee. You will only need to install/configure these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type:
 
@@ -263,7 +262,7 @@ These procedures are not needed for default usage of T-Coffee. You will only nee
 
 
 
-You will receive a list of supported packages that looks like the next table. In theory, most of these packages can be installed by T-Coffee and we welcome any reasonnable request.
+You will receive a list of supported packages that looks like the next table. In theory, most of these packages can be installed by T-Coffee and we welcome any reasonable request.
 
 
 ::
@@ -333,13 +332,13 @@ You will receive a list of supported packages that looks like the next table. In
   ####### Prediction Methods available to generate Templates
   -------------------------------------------------------------
   RNAplfold http://www.tbi.univie.ac.at/~ivo/RNA/
-  HMMtop www.enzim.hu/hmmtop/
+  HMMtop http://www.enzim.hu/hmmtop/
   GOR4 http://mig.jouy.inra.fr/logiciels/gorIV/
   wublast_client http://www.ebi.ac.uk/Tools/webservices/services/wublast
   blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 
 
-In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed. Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
+.. Note:: In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed. Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
 
 
 
