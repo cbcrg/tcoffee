@@ -120,9 +120,9 @@ In order to run, T-Coffee must have a value for the http_proxy and for the e-mai
 
 
 
-************************************
-T-Coffee special relation with BLAST
-************************************
+******************
+T-Coffee and BLAST
+******************
 
 BLAST is a program that searches sequence databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer.
 
