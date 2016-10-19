@@ -254,6 +254,9 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 Advanced Installation
 *********************
 
+T-Coffee packages
+=================
+
 These procedures are not needed for default usage of T-Coffee. You will only need to install/configure these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. If you type:
 
 ::
@@ -339,8 +342,13 @@ You will receive a list of supported packages that looks like the next table. In
 .. Note:: In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed. Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
 
 
+Structural modes of T-Coffee
+============================
+3D-Coffee/Expresso are special modes of T-Coffee that makes it possible to combine sequences and structures to generate more accurate alignment. The main difference between Expresso and 3D-Coffee is that Expresso fetches the structures itself. T-Coffee proposes also other tools (iRMSD/APDB, T-RMSD) requiring access to structural information from the PDB database.
+
+
 Configuration for PDB (installed locally)
-=========================================
+-----------------------------------------
 For all the structural modes of T-Coffee (Expresso, 3D-Coffee, tRMSD, iRMSD, etc...), access to structural information is mandatory. You can do so either by having a database installed locally on your own system or by accessing the PDB through the webserver. If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally. If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using the following commands:
 
 ::
@@ -350,6 +358,83 @@ For all the structural modes of T-Coffee (Expresso, 3D-Coffee, tRMSD, iRMSD, etc
   OR
 
   setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
+
+
+Automated Installation
+----------------------
+In the T-Coffee distribution, type:
+
+
+::
+
+  ./install expresso
+
+  OR
+
+  ./install 3dcoffee
+
+
+
+In theory, this command should download and install every required package (except fugue). If, however, it fails, you should switch to the manual installation (see next).
+
+
+Manual Installation
+-------------------
+In order to make the most out of T-Coffee, you will need to install the following packages (make sure the executable is named as indicated below):
+
+::
+
+  -------------------------------------------------------------  
+  SAP
+  Obtained from W. Taylor, NIMR-MRC  
+  -------------------------------------------------------------
+  TMalign 
+  http://www.zhang.bioinformatics.ku.edu/TM-align/ 
+  -------------------------------------------------------------
+  MUSTANG
+  http://www.cs.mu.oz.au/~arun/mustang/ 
+  ------------------------------------------------------------- 
+  wublastclient
+  http://www.ebi.ac.uk/Tools/webservices/clients/wublast
+  -------------------------------------------------------------
+  BLAST
+  http://www.ncbi.nih.nlm.gov 
+  -------------------------------------------------------------
+  Fugue (***NOT COMPULSORY***)
+  http://www-cryst.bioc.cam.ac.uk/fugue/download.html               
+  -------------------------------------------------------------
+
+
+Once the package is installed, make sure make sure that the executable is on your path, so that T-Coffee can find it automatically.
+
+
+.. Note:: The wublast client makes it possible to run BLAST at the EBI without having to install any database locally. It is an ideal solution if you are only using Expresso occasionally.
+
+
+Installing Fugue for 3D-Coffee
+------------------------------
+Uses a standard Fugue installation. You only need to install the following packages: joy, melody, fugueali, sstruc, hbond. If you have root privileges, you can install the common data in:
+
+::
+
+ cp fugue/classdef.dat /data/fugue/SUBST/classdef.dat
+
+
+otherwise:
+
+::
+
+ Setenv MELODY_CLASSDEF=<location>
+
+ Setenv MELODY_SUBST=fugue/allmat.dat
+
+
+All the other configuration files must be in the right location.
+
+
+T-RMSD mandatory packages
+-------------------------
+T-RMSD comes along with t_coffee but it also requires the package phylip in order to be functional. Phylip can be obtained from <http://www.evolution.genetics.washington.edu/phylip.html>. 
 
 
 Installation of M-Coffee
@@ -440,91 +525,6 @@ Note that the following files are enough for default usage:
   BLOSUM75.diag_prob_t2 blosum80.mat dna_diag_prob_100_exp_220000
 
   dna_diag_prob_150_exp_110000 dna_matrix.scr
-
-
-Installation of T-RMSD
-======================
-T-RMSD comes along with t_coffee but it also requires the package phylip in order to be functional. Phylip can be obtained from <http://www.evolution.genetics.washington.edu/phylip.html>. 
-
-
-Installation of 3D-Coffee/Expresso
-==================================
-3D-Coffee/Expresso is a special mode of T-Coffee that makes it possible to combine sequences and structures. The main difference between Expresso and 3D-Coffee is that Expresso fetches the structures itself.
-
-
-Automated Installation
-----------------------
-In the T-Coffee distribution, type:
-
-
-::
-
-  ./install expresso
-
-  OR
-
-  ./install 3dcoffee
-
-
-
-In theory, this command should download and install every required package (except fugue). If, however, it fails, you should switch to the manual installation (see next).
-
-
-Manual Installation
--------------------
-In order to make the most out of T-Coffee, you will need to install the following packages (make sure the executable is named as indicated below):
-
-
-::
-
-  -------------------------------------------------------------  
-  SAP
-  Obtained from W. Taylor, NIMR-MRC  
-  -------------------------------------------------------------
-  TMalign 
-  http://www.zhang.bioinformatics.ku.edu/TM-align/ 
-  -------------------------------------------------------------
-  MUSTANG
-  http://www.cs.mu.oz.au/~arun/mustang/ 
-  ------------------------------------------------------------- 
-  wublastclient
-  http://www.ebi.ac.uk/Tools/webservices/clients/wublast
-  -------------------------------------------------------------
-  BLAST
-  http://www.ncbi.nih.nlm.gov 
-  -------------------------------------------------------------
-  Fugue (***NOT COMPULSORY***)
-  http://www-cryst.bioc.cam.ac.uk/fugue/download.html               
-  -------------------------------------------------------------
-
-
-Once the package is installed, make sure make sure that the executable is on your path, so that T-Coffee can find it automatically.
-
-
-.. Note:: The wublast client makes it possible to run BLAST at the EBI without having to install any database locally. It is an ideal solution if you are only using Expresso occasionally.
-
-
-Installing Fugue for T-Coffee
------------------------------
-Uses a standard Fugue installation. You only need to install the following packages: joy, melody, fugueali, sstruc, hbond. If you have root privileges, you can install the common data in:
-
-::
-
-
- cp fugue/classdef.dat /data/fugue/SUBST/classdef.dat
-
-
-otherwise:
-
-::
-
-
- Setenv MELODY_CLASSDEF=<location>
-
- Setenv MELODY_SUBST=fugue/allmat.dat
-
-
-All the other configuration files must be in the right location.
 
 
 Installation of R-Coffee
