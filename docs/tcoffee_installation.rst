@@ -120,9 +120,9 @@ In order to run, T-Coffee must have a value for the http_proxy and for the e-mai
      export http_proxy_4_TCOFFEE='proxy' (or '' if no proxy)
      export EMAIL_4_TCOFFEE='your email'
      
-  2. modify the file ~/.t_coffee/t_coffee_env
+  2. Modify the file ~/.t_coffee/t_coffee_env
   
-  3. add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
+  3. Add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
      (if you have no proxy: t_coffee ... -proxy -email=<email>)
 
 
@@ -146,25 +146,16 @@ The most accurate modes of T-Coffee scan the databases for templates that they u
 ::
 
    t_coffee <yourseq> -mode expresso
+   that fetches and uses structural templates 
 
-
-that fetches and uses structural templates (PDB), or
-
-
-::
-
-    t_coffee <your seq> -mode psicoffee
-
-
-that fetches and uses profile templates, or
-
-
-::
-
-    t_coffee <your seq> -mode accurate
-
-
-that does everything and tries to use the best template. Now that you see why it is useful, let's see how to get BLAST up and running, from the easy solution to tailor-made ones.
+   t_coffee <your seq> -mode psicoffee
+   that fetches and uses profile templates
+   
+   t_coffee <your seq> -mode accurate
+   that does everything and tries to use the best templates, structure or profile 
+   
+   
+Now that you see why it is useful, let's see how to get BLAST up and running, from the easy solution to tailor-made ones.
 
 
 Using the EBI BLAST client
@@ -178,13 +169,7 @@ Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an 
 
 Using the NCBI BLAST client
 ===========================
-The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSIBLAST (as a websevice). A big miss! The NCBI web BLAST client is a small executable that you should install on your system following the instructions given on this link:
-
-
-::
-
-  ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
-
+The NCBI is the next best alternative. In my hand it was always a bit slower and most of all, it does not incorporate PSIBLAST (as a websevice). A big miss! The NCBI web BLAST client is a small executable that you should install on your system following the instructions given on this link <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>
 
 
 Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN.
@@ -218,16 +203,9 @@ Foo will be called as if it were BLASTPGP, and it is your responsability to make
 ::
 
   foo.pl -p <method> -d <db> -i <infile> -o <outfile> -m 7
-
-
-
-- method can either be blastp or psiblast.
-
-
-- infile is a FASTA file
-
-
-- -m 7 triggers the XML output. T-Coffee is able to parse both the EBI XML output and the NCBI XML output.
+  - method can either be blastp or psiblast
+  - infile is a FASTA file
+  - -m 7 triggers the XML output, T-Coffee parses both the EBI XML and the NCBI XML outputs
 
 
 If foo.pl behaves differently, the easiest will probably be to write a wrapper around it so that wrapped_foo.pl behaves like BLASTPGP.
@@ -244,28 +222,7 @@ If you have BLASTPGP installed, you can run it instead of the remote clients by 
 
 
 
-The documentation for BLASTPGP can be found on:
-
-
-::
-
-  www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html
-
-
-
-and the package is part of the standard BLAST distribution:
-
-
-::
-
-  ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
-
-
-
-Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achievement spread over several generations. So at this point, you should roam the NCBI website for suitable information.
-
-
-If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST:
+The documentation for BLASTPGP can be found on <http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html> and the package is part of the standard BLAST distribution at <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>. Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achievement spread over several generations. So at this point, you should roam the NCBI website for suitable information. If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST:
 
 
 ::
