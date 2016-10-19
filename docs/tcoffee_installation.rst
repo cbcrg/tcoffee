@@ -103,8 +103,9 @@ You can also compile T-Coffee using the source code following the procedure:
   1. Follow the instructions from the T-Coffee Google code in order to retrieve the source code: 
      <http://code.google.com/p/tcoffee/source/checkout>
   
-  2. Compile the T-Coffee source distribution package on your target system. It will require the GNU development tools 
-     (gcc, g77 or gfortran, make), the Perl interpreter, CPAN and the root user privileges. 
+  2. Compile the T-Coffee source distribution package on your target system. It will require the
+     GNU development tools (gcc, g77 or gfortran, make), the Perl interpreter, CPAN and the root
+     user privileges. 
 
 
 
