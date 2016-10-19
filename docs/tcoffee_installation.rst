@@ -247,7 +247,7 @@ For those of you using Cygwin, be careful. While Cygwin behaves like a Unix syst
 
 
 
-.. Warning:: using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.
+.. Attention:: using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.
 
 
 ******************************
@@ -269,138 +269,74 @@ You will receive a list of supported packages that looks like the next table. In
 ::
 
   ****** Pairwise Sequence Alignment Methods:
-
   --------------------------------------------
-
   fast_pair built_in
-
   exon3_pair built_in
-
   exon2_pair built_in
-
   exon_pair built_in
-
   slow_pair built_in
-
   proba_pair built_in
-
   lalign_id_pair built_in
-
   seq_pair built_in
-
   externprofile_pair built_in
-
   hh_pair built_in
-
   profile_pair built_in
-
   cdna_fast_pair built_in
-
   cdna_cfast_pair built_in
-
   clustalw_pair ftp://www.ebi.ac.uk/pub/clustalw
-
   mafft_pair http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-
   mafftjtt_pair http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-
   mafftgins_pair http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-
   dialigntx_pair http://dialign-tx.gobics.de/
-
   dialignt_pair http://dialign-t.gobics.de/
-
   poa_pair http://www.bioinformatics.ucla.edu/poa/
-
   probcons_pair http://probcons.stanford.edu/
-
   muscle_pair http://www.drive5.com/muscle/
-
   t_coffee_pair http://www.tcoffee.org
-
   pcma_pair ftp://iole.swmed.edu/pub/PCMA/
-
   kalign_pair http://msa.cgb.ki.se
-
   amap_pair http://bio.math.berkeley.edu/amap/
-
   proda_pair http://bio.math.berkeley.edu/proda/
-
   prank_pair http://www.ebi.ac.uk/goldman-srv/prank/
-
   consan_pair http://selab.janelia.org/software/consan/
 
   ****** Pairwise Structural Alignment Methods:
-
   --------------------------------------------
-
   align_pdbpair built_in
-
   lalign_pdbpair built_in
-
   extern_pdbpair built_in
-
   thread_pair built_in
-
   fugue_pair http://www-cryst.bioc.cam.ac.uk/fugue/download.html
-
   pdb_pair built_in
-
   sap_pair http://www-cryst.bioc.cam.ac.uk/fugue/download.html
-
   mustang_pair http://www.cs.mu.oz.au/~arun/mustang/
-
   tmalign_pair http://zhang.bioinformatics.ku.edu/TM-align/
 
   ****** Multiple Sequence Alignment Methods:
-
   --------------------------------------------
-
   clustalw_msa ftp://www.ebi.ac.uk/pub/clustalw
-
   mafft_msa http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-
   mafftjtt_msa http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-
   mafftgins_msa http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-
   dialigntx_msa http://dialign-tx.gobics.de/
-
   dialignt_msa http://dialign-t.gobics.de/
-
   poa_msa http://www.bioinformatics.ucla.edu/poa/
-
   probcons_msa http://probcons.stanford.edu/
-
   muscle_msa http://www.drive5.com/muscle/
-
   t_coffee_msa http://www.tcoffee.org
-
   pcma_msa ftp://iole.swmed.edu/pub/PCMA/
-
   kalign_msa http://msa.cgb.ki.se
-
   amap_msa http://bio.math.berkeley.edu/amap/
-
   proda_msa http://bio.math.berkeley.edu/proda/
-
   prank_msa http://www.ebi.ac.uk/goldman-srv/prank/
 
   ####### Prediction Methods available to generate Templates
-
   -------------------------------------------------------------
-
   RNAplfold http://www.tbi.univie.ac.at/~ivo/RNA/
-
   HMMtop www.enzim.hu/hmmtop/
-
   GOR4 http://mig.jouy.inra.fr/logiciels/gorIV/
-
   wublast_client http://www.ebi.ac.uk/Tools/webservices/services/wublast
-
   blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
-
-  ==========================================================
 
 
 In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed. Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
@@ -514,26 +450,9 @@ If you prefer to have access to a local installation of the PDB in your file sys
 
 
 
-Installation of tRMSD
-=====================
-tRMSD comes along with t_coffee but it also requires the package phylip in order to be functional. Phylip can be obtained from:
-
-
-::
-
-  Package Function
-
-  ===================================================
-
-  ---------------------------------------------------
-
-  Phylip phylogenetic tree computation
-
-  evolution.genetics.washington.edu/phylip.html
-
-  ---------------------------------------------------
-
-  t_coffee -other_pg trmsd
+Installation of T-RMSD
+======================
+T-RMSD comes along with t_coffee but it also requires the package phylip in order to be functional. Phylip can be obtained from <http://www.evolution.genetics.washington.edu/phylip.html>. 
 
 
 Installation of 3D-Coffee/Expresso
@@ -566,18 +485,14 @@ In order to make the most out of T-Coffee, you will need to install the followin
 
 ::
 
-  Package Function
-
-  =============================================================
-
-  -------------------------------------------------------------
+-------------------------------------------------------------
 
   wget 3DCoffee
   Automatic downloading of structures
    
   -------------------------------------------------------------
   
-  sap structure/structure comparisons
+  SAP structure/structure comparisons
   Obtained from W. Taylor, NIMR-MRC
   
   -------------------------------------------------------------
@@ -659,10 +574,6 @@ R-Coffee only requires the package Vienna to be installed, in order to compute M
 
 
 ::
-
-  Package Function
-
-  ===================================================
 
   ---------------------------------------------------
   
