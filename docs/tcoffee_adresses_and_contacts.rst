@@ -22,15 +22,14 @@ package. These include:
 ::
 
 
--TMalign package from Zhang, Jeffrey and Skolnik (NAR, 2005, 33:2303)
--The Sim algorithm of Huang and Miller that given two sequences computes the N best scoring local alignments.
--The tree reading/computing routines are taken from the ClustalW Package, courtesy of Julie Thompson, Des Higgins and Toby Gibson
-(Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid Research).
--The implementation of the algorithm for aligning two sequences in linear space was adapted from Myers and Miller,
-in CABIOS,1988, 11-17, vol. 1.
--Various techniques and algorithms have been implemented. Whenever relevant, the source of the code/algorithm/idea is indicated
+- TMalign package from Zhang, Jeffrey and Skolnik (NAR, 2005, 33:2303)
+- The Sim algorithm of Huang and Miller that given two sequences computes the N best scoring local alignments.
+- The tree reading/computing routines are taken from the ClustalW Package, courtesy of Julie Thompson, Des Higgins and 
+Toby Gibson (Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid Research).
+- The implementation of the algorithm for aligning two sequences in linear space was adapted from Myers and Miller, in      CABIOS,1988, 11-17, vol. 1.
+- Various techniques and algorithms have been implemented. Whenever relevant, the source of the code/algorithm/idea is indicated
 in the corresponding function.
--64 Bits compliance was implemented by Benjamin Sohn, Performance Computing Center Stuttgart (HLRS), Germany.
+- 64 Bits compliance was implemented by Benjamin Sohn, Performance Computing Center Stuttgart (HLRS), Germany.
 An enormous thanks to these people who believe in free open source code..
 
 
