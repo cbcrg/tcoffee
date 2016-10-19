@@ -24,7 +24,7 @@ Standard installation of T-Coffee
 
 Unix/Linux
 ----------
-You need to have gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules: LWP and XML to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>, then follow this procedure:
+You need to have gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules, LWP and XML, to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>, then follow this procedure:
 
 ::
 
@@ -47,7 +47,7 @@ You need to have gcc, g77, CPAN, an internet connection and the root password. Y
 
 Mac OS X
 --------
-Make sure you have the developer's kit installed (compilers and makefile) and follow this procedure:
+Make sure you have the developer's kit installed (compilers and makefile) and proceed as follows:
 
 ::
 
@@ -70,7 +70,7 @@ Make sure you have the developer's kit installed (compilers and makefile) and fo
 
 Windows (Cygwin)
 ----------------
-T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to install a Linux environment such as a virtualbox or Cygwin. If you use Cygwin, follow this procedure:
+T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to install a Linux environment such as a virtualbox or Cygwin. If you use Cygwin, follow these different steps:
 
 ::
 
@@ -91,7 +91,7 @@ T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to
 
 Compiling from source 
 ---------------------
-You can also compile T-Coffee using the source code following these steps: 
+You can also compile T-Coffee using the source code as indicated: 
 
 ::
 
@@ -106,7 +106,7 @@ You can also compile T-Coffee using the source code following these steps:
 
 CLUSTER Installation
 --------------------
-In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so you, can perform any of the following options:
+In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform any of the following options:
 
 ::
 
@@ -149,16 +149,15 @@ The most accurate modes of T-Coffee scan the databases for templates that they u
    that does everything and tries to use the best templates, structure or profile 
    
    
-Now that you see why it is useful, let's see how to get BLAST up and running, from the easy solution to tailor-made ones.
+Now that you see why it is useful, let's see how to get BLAST up and running, from the easy solution to tailored ones.
 
 
 Using the EBI BLAST client
 ==========================
-This is by far the easiest (and the default mode). The perl clients are already incorporated in T-Coffee and all you need are the proper PERL libraries. In theory, T-Coffee should have already installed these libraries during the standard installation. Yet, this requires having root access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public PSIBLAST via a web service. Note that because PSIBLAST is time consuming, T-Coffee stores the runs in its cache (./tcoffee/cache) so that it does not need to be re-run. It means that if you re-align your sequences (or add a few extra sequences), things will be considerably faster.
+This is by far the easiest way (and the default mode). The perl clients are already incorporated in T-Coffee and all you need are the proper PERL libraries. In theory, T-Coffee should have already installed these libraries during the standard installation, yet, this requires having root access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public PSI-BLAST via a webservice. Note that because PSI-BLAST is time consuming, T-Coffee stores the runs in its cache (./tcoffee/cache) so that it does not need to be re-run. It means that if you re-align your sequences (or add a few extra sequences), things will be considerably faster.
 
 
-Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification E-mail. Be Careful! If you provide a fake E-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, or even the entire country or, but I doubt it, the whole universe). 
-
+.. Attention:: Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification e-mail. Be Careful! If you provide a fake e-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, even the entire country or, but I doubt it, the whole universe). 
 
 
 Using the NCBI BLAST client
@@ -171,7 +170,7 @@ The NCBI is the next best alternative, however in my hands it was always a bit s
   -blast_server=NCBI
 
 
-.. Warning:: No need for any E-mail here, but you don't get PSI-BLAST, and whenever T-Coffee wants to use it, BLASTP will be used instead.
+.. Attention:: No need for any e-mail here, but you don't get PSI-BLAST, and whenever T-Coffee wants to use it, BLASTP will be used instead.
 
 
 Using another client
