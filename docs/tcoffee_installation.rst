@@ -485,46 +485,31 @@ In order to make the most out of T-Coffee, you will need to install the followin
 
 ::
 
--------------------------------------------------------------
-
-  wget 3DCoffee
-  Automatic downloading of structures
-   
+  -------------------------------------------------------------  
+  SAP
+  Obtained from W. Taylor, NIMR-MRC  
   -------------------------------------------------------------
-  
-  SAP structure/structure comparisons
-  Obtained from W. Taylor, NIMR-MRC
-  
+  TMalign 
+  http://www.zhang.bioinformatics.ku.edu/TM-align/ 
   -------------------------------------------------------------
- 
-  TMalign zhang.bioinformatics.ku.edu/TM-align/
-  
+  MUSTANG
+  http://www.cs.mu.oz.au/~arun/mustang/ 
+  ------------------------------------------------------------- 
+  WUBLASTclient
+  http://www.ebi.ac.uk/Tools/webservices/clients/wublast
   -------------------------------------------------------------
-  
-  mustang www.cs.mu.oz.au/~arun/mustang/
-  
+  BLAST
+  http://www.ncbi.nih.nlm.gov 
   -------------------------------------------------------------
-  
-  wublastclient www.ebi.ac.uk/Tools/webservices/clients/wublast
-  
-  -------------------------------------------------------------
-  
-  Blast www.ncbi.nih.nlm.gov
-  
-  -------------------------------------------------------------
-
-  Fugue protein to structure alignment program
-  http://www-cryst.bioc.cam.ac.uk/fugue/download.html
-
-   ***NOT COMPULSORY***
-   
+  Fugue (***NOT COMPULSORY***)
+  http://www-cryst.bioc.cam.ac.uk/fugue/download.html               
   -------------------------------------------------------------
 
 
 Once the package is installed, make sure make sure that the executable is on your path, so that T-Coffee can find it automatically.
 
 
-The wublast client makes it possible to run BLAST at the EBI without having to install any database locally. It is an ideal solution if you are only using Expresso occasionally.
+.. Note:: The wublast client makes it possible to run BLAST at the EBI without having to install any database locally. It is an ideal solution if you are only using Expresso occasionally.
 
 
 Installing Fugue for T-Coffee
