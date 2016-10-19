@@ -7,7 +7,7 @@ Starting with T-Coffee
 Basic Command Lines (or modes)
 ******************************
 
-.. warning:: This part is designed to have an quick overview of T-Coffee alignment procedures. All the files mentioned here can be found in the example directory of the distribution. If you use a particular mode of T-Coffee, please use the specified citation for publication.
+.. important:: This part is a quick overview on how to run T-Coffee alignment using predefined procedures or "modes". All the files mentioned here can be found in the example directory of the distribution (currently under modification). If you use a specific mode of T-Coffee, please use the corresponding citation for publication.
 
 
 Protein sequences
@@ -75,14 +75,19 @@ RNA sequences
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
   ----------------------------------------------------------------------------
   Structural 2D        t_coffee sample_rnaseq1.fasta -mode rcoffee
-  (R-Coffee)           use the predicted secondary structure
+  (R-Coffee)           uses the predicted secondary structure
+  
+  Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
+  ----------------------------------------------------------------------------
+  Structural 1D/3D     t_coffee sample_rnaseq1.fasta -mode 
+  (R-Coffee Consan)    uses R-Coffee to combine Consan structural alignments 
   
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
   Structural 3D        t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
-  (R-Coffee Consan)    use R-Coffee to combine consan structural alignments 
+  (SARA-Coffee)        uses 3D structure of RNA to align sequences 
   
-  Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
+  Citation: Kemena et al., Bioinformatics (2013)              PMID:23449094       
   ----------------------------------------------------------------------------
   Accurate             t_coffee sample_rnaseq1.fasta -mode rmcoffee
   (RM-Coffee)          use M-Coffee + secondary structure prediction
@@ -96,12 +101,12 @@ RNA sequences
 Brief Overview of T-Coffee Tools
 ********************************
 
-.. warning:: We only give you the very basics here, please go to the T-Coffee manual for a more detailed description and available options for the different tools. You can also try the T-Coffee tutorial for a practical training on T-Coffee alignment and other functions using applied examples on published research data.
+.. important:: We only give you the very basics here, please go to the T-Coffee manual for a more detailed description and available options for the different tools. You can also try the T-Coffee tutorial for a practical training on T-Coffee alignment and other functions using applied examples on published research data.
 
 
 T-Coffee
 ========
-Write your sequences (protein, DNA or RNA) in the same file in one of the following format: Swiss-prot, Fasta or Pir; then run T-Coffee with the following command:
+Write or copy all your sequences (protein, DNA or RNA) in a given text file using one of the following format: Swiss-Prot, FASTA or PIR; then run T-Coffee with the following command line:
 
 
 ::
@@ -122,7 +127,7 @@ This will output three files:
   sample_seq1.html : the color coded MSA according to T-Coffee consistency color scheme (html)
 
 
-.. tip:: In principle, the type of the sequences should be automatically detected and the default methods should be adapted accordingly. However sometimes this may fail, either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag -type. (Note: the flag -mode=dna is not needed or supported anymore).
+.. tip:: In principle, the type of the sequences is automatically detected and the default methods adapted accordingly. Sometimes, however, this may fail either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag -type.
 
 ::
 
@@ -134,21 +139,7 @@ This will output three files:
 
 M-Coffee
 ========
-M-Coffee is a meta version of T-Coffee that makes it possible to combine the output of a combination of eight packages (MUSCLE, ProbCons, POA, DIALIGN-T, MAFFT, ClustalW, PCMA and T-Coffee). If all these packages are already installed on your machine. You must:
-
-
-1) Set the following environment variables:
-
-
-::
-
-   export POA_DIR=[absolute path of the POA installation dir]
-
-   export DIALIGNT_DIR=[Absolute path of the DIALIGN-T/conf
-
-
-
-2) Write your sequences in a file and run T-Coffee using this file (format: Swiss-prot, Fasta or Pir) with:
+M-Coffee is a meta version of T-Coffee that combines the output of eight aligners (MUSCLE, ProbCons, POA, DIALIGN-T, MAFFT, ClustalW, PCMA and T-Coffee); when installing T-Coffee, all required packages are automatically installed on your computer. To use M-Coffee, write your sequences in a file (format: Swiss-Prot, FASTA or PIR) and run the following command line:
 
 
 ::
@@ -156,8 +147,20 @@ M-Coffee is a meta version of T-Coffee that makes it possible to combine the out
   $$: t_coffee sample_seq1.fasta -mode mcoffee
 
 
+M-Coffee is a predefined combination of different types of aligners; there is a faster version called fm-Coffee which combines the fastest aligners (Kalign, MUSCLE and MAFFT):
 
-If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself... Proceed to the M-Coffee section for more detailed instructions.
+::
+
+  $$: t_coffee sample_seq1.fasta -mode fmcoffee
+
+Also, the user can make its own combination of aligners included in T-Coffee by specifying the list of packages to be combined; here is an example of T-Coffee combining ClustalW, Kalign and ProbCons:
+
+::
+
+  $$: t_coffee sample_seq1.fasta -method clustalw_pair, kalign_pair, probcons_pair
+  
+  
+If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself...Proceed to the **T-Coffee Installation** section for more detailed instructions.
 
 
 .. note:: Please cite: Wallace, I.M., O'Sullivan, O., Higgins, D.G., Notredame, C. M-Coffee: combining multiple sequence alignment methods with T-Coffee. Nucleic Acids Res., 34(6):1692-1699 (2006), PMID:16556910
@@ -165,7 +168,7 @@ If the program starts complaining one package or the other is missing, this mean
 
 Expresso
 ========
-If you have installed the EBI wublast.pl client, Expresso will BLAST your sequences against the PDB database, identify the best targets and use them to align your proteins using the following command:
+The default installation of T-Coffee provides you with the EBI wublast.pl client required to run Expresso. Using this, Expresso will BLAST your sequences against the PDB database, identify the best targets and use them to align your proteins using a structural aligner. Run Expresso with the following command:
 
 
 ::
@@ -174,8 +177,7 @@ If you have installed the EBI wublast.pl client, Expresso will BLAST your sequen
 
 
 
-If you did not manage to install all the required structural packages for Expresso you can still run it by selecting yourself the structural packages you want to use. For instance, if you'd rather use TM-align than SAP, try:
-
+If all the required structural packages for Expresso were not installed or if you want to select another structural aligner, you can select the structural package you want to use. For instance, if can use TM-align rather than SAP:
 
 
 ::
@@ -188,7 +190,7 @@ If you did not manage to install all the required structural packages for Expres
 
 MOCCA
 =====
-MOCCA is a specific tool in T-Coffee designed to deal with highly divergent protein repeats.  Write your sequences in the same file (format: Swiss-prot, Fasta or Pir) and type:
+MOCCA is a specific tool in T-Coffee designed to deal with highly divergent protein repeats.  Write your sequences in the same file and type:
 
 
 ::
@@ -212,7 +214,7 @@ Pro-Coffee is a particular mode of T-Coffee designed to align specific functiona
   $$: t_coffee three_cdna.fasta -mode procoffee
   
 
-In order to adjust the quality of the alignment, Pro-Coffee allows you to modify gap penalties (gap-opening and/or gap-extension); to do so, use the following commandline:
+In order to adjust the quality of the alignment, Pro-Coffee allows you to modify gap penalties (gap-opening and/or gap-extension) using the following command line:
 
 
 ::
@@ -225,7 +227,7 @@ In order to adjust the quality of the alignment, Pro-Coffee allows you to modify
 
 R-Coffee
 ========
-R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures. The best results are obtained by using the consan pairwise method. If you have consan installed, run:
+R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures. The best results are obtained by using the Consan pairwise method. If you have Consan installed, run:
 
 
 ::
@@ -256,12 +258,19 @@ If you want to select yourself which methods should be combined by R-Coffee, run
 
 iRMSD and APDB
 ==============
-All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the following command:
+iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignment using structural information. All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the following command:
 
 
 ::
 
-  $$: t_coffee -other_pg irmsd -aln 3d_sample4.aln
+  $$: t_coffee -other_pg irmsd -aln 3d_sample5.aln
+
+
+If the names of the sequences do not correspond to the PDB name, then the user have to declare the correspondence between sequences and structures in a template file (cf. **T-Coffee Manual** section):
+
+::
+
+  $$: t_coffee -other_pg irmsd -aln 3d_sample5.aln -template_file 3d_sample5.template_file
 
 
 .. note:: Please cite: Armougom, F., Moretti, S., Keduas, V., Notredame, C. The iRMSD: a local measure of sequence alignment accuracy using structural information. Bioinformatics, 22(14):e35-e39 (2006), PMID:16873492
@@ -269,7 +278,7 @@ All you need is a file containing the alignment of sequences with a known struct
 
 T-RMSD
 =====
-T-RMSD is a structure based clustering method using the iRMSD to drive the structural clustering of your sequences with an available structure. The T-RMSD supports all the parameters supported by iRMSD or APDB. To run T-RMSD, type:
+T-RMSD is a structure based clustering method using the iRMSD to drive the structural clustering of your aligned sequences with an available structure. The T-RMSD supports all the parameters supported by iRMSD or APDB. To run T-RMSD, type:
 
 
 ::
