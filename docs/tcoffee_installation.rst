@@ -74,8 +74,8 @@ Make sure you have the developer's kit installed (compilers and makefile) and fo
      t_coffee -version
 
 
-Microsoft Windows (Cygwin)
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Windows (Cygwin)
+^^^^^^^^^^^^^^^^
 T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to install a Linux environment such as a virtualbox or Cygwin. Then follow the procedure:
 
 ::
@@ -102,7 +102,7 @@ You can also compile T-Coffee using the source code following the procedure:
 ::
 
   1. Follow the instructions from the T-Coffee Google code in order to retrieve the source code: 
-     <http://code.google.com/p/tcoffee/source/checkout>
+     http://code.google.com/p/tcoffee/source/checkout
   
   2. Compile the T-Coffee source distribution package on your target system. It will require the
      GNU development tools (gcc, g77 or gfortran, make), the Perl interpreter, CPAN and the root
@@ -116,17 +116,14 @@ In order to run, T-Coffee must have a value for the http_proxy and for the e-mai
 
 ::
 
-1)
-export the following values:
-export http_proxy_4_TCOFFEE='proxy' (or '' if no proxy)
-export EMAIL_4_TCOFFEE='your email'
-
-2)
-modify the file ~/.t_coffee/t_coffee_env
-
-3)
-add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
-(if you have no proxy: t_coffee ... -proxy -email=<email>)
+  1. Export the following values:
+     export http_proxy_4_TCOFFEE='proxy' (or '' if no proxy)
+     export EMAIL_4_TCOFFEE='your email'
+     
+  2. modify the file ~/.t_coffee/t_coffee_env
+  
+  3. add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
+     (if you have no proxy: t_coffee ... -proxy -email=<email>)
 
 
 
@@ -134,7 +131,7 @@ add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
 T-Coffee and BLAST
 ******************
 
-BLAST is a program that searches sequence databases for homologues of a query sequence. It works for proteins and nucleic acids alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run well, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer.
+BLAST is a program that searches sequence databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer.
 
 Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
 
