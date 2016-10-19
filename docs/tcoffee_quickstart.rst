@@ -79,15 +79,10 @@ RNA sequences
   
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
-  Structural 1D/3D     t_coffee sample_rnaseq1.fasta -mode 
+  Structural 3D     t_coffee sample_rnaseq1.fasta -mode 
   (R-Coffee Consan)    uses R-Coffee to combine Consan structural alignments 
   
-  Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
-  ----------------------------------------------------------------------------
-  Structural 3D        t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
-  (SARA-Coffee)        uses 3D structure of RNA to align sequences 
-  
-  Citation: Kemena et al., Bioinformatics (2013)              PMID:23449094       
+  Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654   
   ----------------------------------------------------------------------------
   Accurate             t_coffee sample_rnaseq1.fasta -mode rmcoffee
   (RM-Coffee)          use M-Coffee + secondary structure prediction
@@ -134,7 +129,7 @@ This will output three files:
   $$: t_coffee sample_dnaseq1.fasta -type=dna
 
 
-.. note:: Please cite: Notredame, C., Higgins, D.G., Heringa, J. T-Coffee: a novel method for fast and accurate multiple sequence alignment. J. Mol. Biol., 302(1):205-217 (2000), PMID:10964570
+.. note:: Please cite: Notredame, C., Higgins, D.G., Heringa, J. T-Coffee: a novel method for fast and accurate multiple sequence alignment. J. Mol. Biol., 302(1):205-217 (2000), PMID:10964570 and/or Magis, C., Taly, J.-F., Bussotti, G., Chang, J.M., Di Tommaso, P., Erb, I., Espinosa-Carrasco, J., Notredame, C. T-Coffee: tree-based consistency objective function for alignment evaluation. Methods Mol. Biol., 1079:117-129 (2014), PMID:24170398
 
 
 M-Coffee
@@ -326,4 +321,9 @@ STRIKE
 
 to be done...
 
+
+SARA-Coffee
+===========
+
+to be done...
 
