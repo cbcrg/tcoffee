@@ -56,8 +56,7 @@ Make sure you have the developer's kit installed (compilers and makefile) and fo
 
 ::
 
-  1. Download the installer package from:
-     http://tcoffee.org/Packages/Stable/Latest/macosx/ 
+  1. Download the installer package from: http://tcoffee.org/Packages/Stable/Latest/macosx/ 
      With Mac OSX 10.5.x (Leopard) and earlier versions, users have to use the 32-bit
      installer version; with Mac OSX 10.6.x (Snow Leopard) and above, users have to use 
      the 64-bit installer version.
