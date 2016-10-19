@@ -4233,58 +4233,6 @@ Once these libraries have been computed, you can then combine them at your conve
 
 
 
-**********************
-Addresses and Contacts
-**********************
-Contributors
-============
-T-coffee is developed, maintained, monitored, used and debugged by a dedicated team that include:
-
-
-Cedric Notredame
-
-
-Fabrice Armougom
-
-
-Des Higgins
-
-
-Sebastien Moretti
-
-
-Orla O'Sullivan
-
-
-Eamon O'Toole
-
-
-Olivier Poirot
-
-
-Karsten Suhre
-
-
-Vladimir Keduas
-
-
-Iain Wallace
-
-
-Addresses
-=========
-We are always very eager to get some user feedback. Please do not hesitate to drop us a line at: cedric.notredame@europe.com The latest updates of T-Coffee are always available on: www.tcoffee.org . On this address you will also find a link to some of the online T-Coffee servers, including Tcoffee@igs
-
-
-T-Coffee can be used to automatically check if an updated version is available, however the program will not update automatically, as this can cause endless reproducibility problems.
-
-
-::
-
-  $$: t_coffee -update
-
-
-
 **********
 References
 **********
@@ -4352,44 +4300,6 @@ Chang J-M, Tommaso PD*, Lefort V, Gascuel O & Notredame C.
 ==========================================================
 2015. TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction. Nucleic Acids Research. 43(W1):W3-6. (*These two authors contribute equally)                                  
 ================================================================================================================================================================================
-
-
-Other contributions
-===================
-We do not mean to steal code, but we will always try to re-use pre-existing code whenever that code exists, free of copyright, just like we expect people to do with our code. However, whenever this happens, we make a point at properly citing the source of the original contribution. If ever you recognize a piece of your code improperly cited, please drop us a note and we will be happy to correct that.
-
-
-In the mean time, here are some important pieces of code from other packages that have been incorporated within the T-Coffee package. These include:
-
-
--TM-align package from Zhang, Jeffrey and Skolnik (NAR, 2005, 33:2303)
-
-
--The Sim algorithm of Huang and Miller that given two sequences computes the N best scoring local alignments.
-
-
--The tree reading/computing routines are taken from the ClustalW Package, courtesy of Julie Thompson, Des Higgins and Toby Gibson (Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid Research).
-
-
--The implementation of the algorithm for aligning two sequences in linear space was adapted from Myers and Miller, in CABIOS, 1988, 11-17, vol. 1)
-
-
--Various techniques and algorithms have been implemented. Whenever relevant, the source of the code/algorithm/idea is indicated in the corresponding function.
-
-
--64 Bits compliance was implemented by Benjamin Sohn, Performance Computing Center Stuttgart (HLRS), Germany.
-
-
-An enormous thanks to these people who believe in free open source code..
-
-
-Bug reports and feedback
-========================
- -Prof David Jones (UCL) reported and corrected the PDB1K bug (now t_coffee/sap can align PDB sequences longer than 1000 AA).
-
-
- -Johan Leckner reported several bugs related to the treatment of PDB structures, insuring a consistent behavior between version 1.37 and current ones.
-
 
 
 
