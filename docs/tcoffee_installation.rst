@@ -13,7 +13,7 @@ Third party packages and on-demand installations
 ================================================
 T-Coffee is a complex package that interacts with many other third party softwares. Since version 7.56, T-Coffee uses on-demand installation and install the third party packages it needs, on your computer, for the different T-Coffee options to run correctly. Please let us know if you would like another third party package to be included.
 
-Whenever the automated installation fails because of unforeseen system specificities, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
+Whenever the automated installation fails because of unforeseen system specificities, users should install the third party package manually (\**cf. Advanced Installation**\). This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
 
 Standard installation of T-Coffee
