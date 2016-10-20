@@ -6,6 +6,8 @@ T-Coffee Manual
 Before You Start...
 *******************
 
+.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. Examples are for now unavailable but you are welcome to follow the section T-Coffee Tutorial which contains all the required data to get used to T-Coffee in a command line mode. This message will be removed as soon as the maintenance is over. 
+
 Foreword
 ========
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
