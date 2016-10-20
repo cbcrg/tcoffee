@@ -6,42 +6,25 @@ T-Coffee Manual
 Before You Start...
 *******************
 
-.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. Examples are for now unavailable but you are welcome to follow the section T-Coffee Tutorial which contains all the required data to get used to T-Coffee in a command line mode. This message will be removed as soon as the maintenance is over. 
+.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. The example files can be found here: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. You can also use examples associated with their corresponding command lines from the section T-Coffee Tutorial published in Nature Protocols (2011). This message will be removed as soon as the maintenance is over. 
+
 
 Foreword
 ========
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-This Document contains two main sections. The first one is a tutorial, where we go from simple applications to more complicated ones, and show you how to use all the subtleties of T-Coffee. We have tried to put as many of these functionalities on the web (www.tcoffee.org) but if you need to do something special and highly reproducible, the "command line" is the only way. 
+.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and range from simple applications to more complicated ones. We have tried to put as many of these functionalities on the webserver (<http://www.tcoffee.org>) but not all are available except by using "command lines", also, if you need to do something special and highly reproducible, the "command line" is the only way. In the course of this manual, we expect you to use a Unix-like command line shell. If you don't want to bother with command line, try using the online tcoffee webserver at: <http://www.tcoffee.org>.
 
 
 Prerequisite
 ============
-This manual relies on the assumption that you have installed T-Coffee, version 6.18 or higher. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on the Microsoft Windows shell. If you need to run T-Coffee on Windows, start by installing cygwin (www.cygwin.com). Cygwin is a freeware open source that makes it possible to run a Unix-like command line on your Microsoft Windows PC without having to reboot. Cygwin is free of charge and very easy to install. Yet, as the first installation requires downloading substantial amounts of data, you should make sure you have access to a broad-band connection. All the relevant information for installing T-Coffee is contained in the previous section **T-Coffee Installation**.
-
-
-.. Important:: In the course of this manual, we expect you to use a Unix-like command line shell. If you don't want to bother with command line, try using the online tcoffee webserver at: <http://www.tcoffee.org>.
+This manual relies on the assumption that you have installed T-Coffee, version 6.18 or higher. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on the Microsoft Windows shell. If you need to run T-Coffee on Windows, start by installing cygwin (<http://www.cygwin.com>). Cygwin is a freeware open source that makes it possible to run a Unix-like command line on your Microsoft Windows PC without having to reboot. Cygwin is free of charge and very easy to install. Yet, as the first installation requires downloading substantial amounts of data, you should make sure you have access to a broad-band connection. All the relevant information for installing T-Coffee is contained in the previous section **T-Coffee Installation**.
 
 
 Getting the example files of the manual
 =======================================
-We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, you can get the material from the example directory of the distribution. If you do not know where this file leaves or if you do not have access to it, the simplest thing to do is to:
-
-
-1-    download T-Coffee's latest version from www.tcoffee.org (follow the link to the T-Coffee Home Page)
-
-
-2-    gunzip <distrib>.tar.gz
-
-
-3-    tar -xvf <distrib>.tar
-
-
-4-    go into <distrib>/example
-
-
-This is all you need to do to run ALL the examples provided in this tutorial.
+We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available at: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. This is all you need to do to run ALL the examples provided in this manual.
 
 
 *******************
