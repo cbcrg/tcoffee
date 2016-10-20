@@ -1,13 +1,14 @@
-######################
-Starting with T-Coffee
-######################
+###########
+Quick Start
+###########
 
 
 ******************************
 Basic Command Lines (or modes)
 ******************************
+.. Danger:: The T-Coffee documentation is currently under maintenance so the example files are not available; feel free to use your data or to use data from the section T-Coffee Tutorial. This is temporary and everything will be working when this message will be removed. Thanks for your understanding.
 
-.. important:: This part is a quick overview on how to run T-Coffee alignment using predefined procedures or "modes". All the files mentioned here can be found in the example directory of the distribution (currently under modification). If you use a specific mode of T-Coffee, please use the corresponding citation for publication.
+.. important:: This part is a quick overview on how to run T-Coffee alignment using predefined procedures or "modes". All the files mentioned here can be found in the example directory of the distribution (currently under maintenance). If you use a specific mode of T-Coffee, please use the corresponding citation for publication. For more details about T-Coffee usage, refer to the section **T-Coffee Manual**.
 
 
 Protein sequences
