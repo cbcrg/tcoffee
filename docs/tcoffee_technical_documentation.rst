@@ -1,12 +1,10 @@
-#################################
-T-Coffee: Technical Documentation 
-#################################
-*******************
-Documentation Scope
-*******************
-This documentation covers the following packages:T-Coffee, seq_reformat, PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD.
+################################
+T-Coffee Technical Documentation 
+################################
 
-The most up to date version is available from http://www.tcoffee.org.
+.. Note:: This documentation covers the following packages:T-Coffee, seq_reformat, PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD. 
+
+The most up to date version is available from <http://www.tcoffee.org>.
 
 
 ************************
@@ -96,40 +94,6 @@ Chang J-M, Tommaso PD*, Lefort V, Gascuel O & Notredame C.
 2015. TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction. Nucleic Acids Research. 43(W1):W3-6. (*These two authors contribute equally)                                  
 
 
-Other Contributions
-===================
-We do not mean to steal code, but we will always try to re-use pre-existing code whenever that code exists, free of copyright, just like we expect people to do with our code. However, whenever this happens, we make a point at properly citing the source of the original contribution. If ever you recognize a piece of your code improperly cited, please drop us a note and we will be happy to correct that.
-
-
-In the mean time, here are some important pieces of code from other packages that have been incorporated within the T-Coffee package. These include:
-
-
- -The Sim algorithm of Huang and Miller that given two sequences computes the N best scoring local alignments.
-
-
- -The tree reading/computing routines are taken from the ClustalW Package, courtesy of Julie Thompson, Des Higgins and Toby Gibson (Thompson, Higgins, Gibson, 1994, 4673-4680,vol. 22, Nucleic Acid Research).
-
-
- -The implementation of the algorithm for aligning two sequences in linear space was adapted from Myers and Miller, in CABIOS, 1988, 11-17, vol. 1)
-
-
- -Various techniques and algorithms have been implemented. Whenever relevant, the source of the code/algorithm/idea is indicated in the corresponding function.
-
-
- -64 Bits compliance was implemented by Benjamin Sohn, Performance Computing Center Stuttgart (HLRS), Germany
-
-
- -David Mathog (Caltech) provided many fixes and useful feedback for improving the code and making the whole soft behaving more rationally
-
-
-Bug reports and feedback
-========================
- -Prof David Jones (UCL) reported and corrected the PDB1K bug (now t_coffee/sap can align PDB sequences longer than 1000 AA).
-
-
- -Johan Leckner reported several bugs related to the treatment of PDB structures, insuring a consistent behavior between version 1.37 and current ones.
- 
- -Enrico Bonatesta reported several mistakes in the T-Coffee tutorial and provided feedbacks about its readibility.
 
 
 ****************
