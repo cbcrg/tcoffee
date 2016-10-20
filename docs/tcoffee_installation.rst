@@ -6,14 +6,14 @@ T-Coffee Installation
 Standard Installation
 *********************
 
-.. Important:: This section describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on Windows without a Unix environment. The procedure is quite straightforward, contact us if you have any problem.
+.. Important:: This section describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on Windows without a Unix-like environment such as Cygwin. The procedure is quite straightforward, so don't hesitate to contact us if you have any problem.
 
 
 Third party packages and on-demand installations
 ================================================
 T-Coffee is a complex package that interacts with many other third party softwares. Since version 7.56, T-Coffee uses on-demand installation and install the third party packages it needs, on your computer, for the different T-Coffee options to run correctly. Please let us know if you would like another third party package to be included.
 
-Whenever the automated installation fails because of unforeseen system specificities, users should install the third party package manually (\**cf. Advanced Installation**\). This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
+Whenever the automated installation fails because of unforeseen system specificities, users should install the third party package manually (**cf. Advanced Installation**). This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
 
 Standard installation of T-Coffee
@@ -103,7 +103,7 @@ You can also compile T-Coffee using the source code as indicated:
      user privileges. 
 
 
-CLUSTER Installation
+Cluster Installation
 --------------------
 In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform any of the following options:
 
