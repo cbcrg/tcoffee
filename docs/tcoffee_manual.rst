@@ -16,21 +16,15 @@ This Document contains two main sections. The first one is a tutorial, where we 
 
 Prerequisite
 ============
-This tutorial relies on the assumption that you have installed T-Coffee, version 6.18 or higher.
+This tutorial relies on the assumption that you have installed T-Coffee, version 6.18 or higher. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on the Microsoft Windows shell. If you need to run T-Coffee on Windows, start by installing cygwin (www.cygwin.com). Cygwin is a freeware open source that makes it possible to run a Unix-like command line on your Microsoft Windows PC without having to reboot. Cygwin is free of charge and very easy to install. Yet, as the first installation requires downloading substantial amounts of data, you should make sure you have access to a broad-band connection. All the relevant information for installing T-Coffee is contained in the previous section \**T-Coffee Installation**\.
 
 
-T-Coffee is a freeware open source running on all Unix-like platforms, including MacOS X and Cygwin. All the relevant information for installing T-Coffee is contained in the Technical Documentation (tcoffee_technical.doc in the doc directory.)
+.. Important:: In the course of this manual, we expect you to use a Unix-like command line shell. If you don't want to bother with command line, try using the online tcoffee webserver at: <http://www.tcoffee.org>.
 
 
-T-Coffee cannot run on the Microsoft Windows shell. If you need to run T-Coffee on Windows, start by installing cygwin (www.cygwin.com). Cygwin is a freeware open source that makes it possible to run a Unix-like command line on your Microsoft Windows PC without having to reboot. Cygwin is free of charge and very easy to install. Yet, as the first installation requires downloading substantial amounts of data, you should make sure you have access to a broad-band connection.
-
-
-In the course of this tutorial, we expect you to use a Unix-like command line shell. If you work on Cygwin, this means clicking on the cygwin icon and typing commands in the window that appears. If you don't want to bother with command line, try using the online tcoffee webserver at: www.tcoffee.org
-
-
-Getting the example files of the tutorial
-=========================================
-We encourage you to try all the following examples with your own sequences/structures. If you want to try with ours, you can get the material from the example directory of the distribution. If you do not know where this file leaves or if you do not have access to it, the simplest thing to do is to:
+Getting the example files of the manual
+=======================================
+We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, you can get the material from the example directory of the distribution. If you do not know where this file leaves or if you do not have access to it, the simplest thing to do is to:
 
 
 1-    download T-Coffee's latest version from www.tcoffee.org (follow the link to the T-Coffee Home Page)
