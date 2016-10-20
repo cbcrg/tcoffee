@@ -22,9 +22,10 @@ Prerequisite
 This manual relies on the assumption that you have installed T-Coffee, version 6.18 or higher. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on the Microsoft Windows shell. If you need to run T-Coffee on Windows, start by installing cygwin (<http://www.cygwin.com>). Cygwin is a freeware open source that makes it possible to run a Unix-like command line on your Microsoft Windows PC without having to reboot. Cygwin is free of charge and very easy to install. Yet, as the first installation requires downloading substantial amounts of data, you should make sure you have access to a broad-band connection. All the relevant information for installing T-Coffee is contained in the previous section **T-Coffee Installation**.
 
 
-Getting the example files of the manual
-=======================================
+Trying T-Coffee...
+==================
 We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available at: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. This is all you need to do to run ALL the examples provided in this manual.
+
 
 
 *******************
@@ -40,7 +41,7 @@ What does it do?
 T-Coffee is mainly a Multiple Sequence Alignment program: given a set of sequences previously gathered using database search programs like BLAST, FASTA or Smith and Waterman, T-Coffee will produce a Multiple Sequence Alignment (MSA). To use T-Coffee you must already have your sequences ready.
 
 
-T-Coffee is also bundle with a collection of tools and third party software allowing you to perform a wide range of different tasks, from aligning, reformatting, evaluating, sequences and alignment.
+T-Coffee is also bundled with a collection of tools and third party softwares allowing you to perform a wide range of different tasks, from aligning, reformatting, evaluating, sequences and alignments alike, and more...
 
 
 What can it align?
@@ -112,27 +113,28 @@ To be honest, a short answer will be that there is only one thing T-Coffee canno
 
 What T-Coffee can do
 --------------------
-T-Coffee is not just a simple aligner program, it comes with multiple tools and third party software increasing the range of it's possibilities; here is a non exhaustive list of tasks T-Coffee can do:
+T-Coffee is not just a simple aligner program, it comes with multiple tools and third party softwares increasing the range of its possibilities; here is a non exhaustive list of tasks T-Coffee can do:
 
 **T-Coffee can compute (or at least try to compute!) accurate Multiple Sequence Alignments of DNA, RNA or Protein sequences**. Several modes and options are available and will be presented all along this manual. The default T-Coffee accepts any kind of sequence, although some modes are specific to a given type of sequence.
 
-**T-Coffee can help you to reformat, trim, clean, cut, color your input (sequences, structures...) or output (alignments, trees...) data**; meaning that once you have a dataset ready, you can always modify it using T-Coffee command line (-other_pg seq_reformat).
+**T-Coffee can help you to reformat, trim, clean, cut, color your input (sequences, structures...) or output (alignments, trees...) data**; meaning that once you have your data ready, you can always modify them using T-Coffee command line (-other_pg seq_reformat).
 
-**T-Coffee allows you to combine results obtained with several alignment methods** (see the section **FAQ for T-Coffee** for more details). For instance if you have an alignment coming from ClustalW, another from Dialign, and a structural alignment of some of your sequences, T-Coffee can combine all these MSAs to produce a new Multiple Sequence Alignment having the best agreement with all these methods:
+**T-Coffee allows you to combine results obtained with several alignment methods** (see the section **FAQ for T-Coffee** for more details). For instance if you have an alignment coming from ClustalW, another from Dialign, and a structural alignment of some of your sequences, T-Coffee can combine all these MSAs to produce a new Multiple Sequence Alignment having the best agreement with all these methods.
 
 **One of the latest improvements of T-Coffee is to let you combine sequences and structures**, so that your alignments are of higher quality. You need to have the SAP package installed to fully benefit of this facility (or to use another structural alignment method). 
 
 .. warning:: For this case, operations are carried out using wget. If wget is not installed on your system, you can get it for free from (<http://www.wget.org>). To make sure wget is installed on your system, type **which wget**
 
-**MOCCA** (a mode of T-Coffee) **allows you to extract a serie of repeats from a single sequence or a set of sequences**. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. If you want to use MOCCA, simply type:
+**T-Coffee allows you to extract a serie of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. 
 
-.. note:: The program needs some time to compute a library and it will then prompt you with an interactive menu. Follow the instructions.
+.. note:: MOCCA needs some time to compute a library and then prompt you with an interactive menu. You just have to follow the instructions.
 
-**T-Coffee can be used to measure the reliability of your Multiple Sequence Alignment**. If you want to find out about that, read the section **FAQ for T-Coffee** or the **Technical Documentation** (-output flag). More details will be given in the subsection **How Good Is Your Alignment**. A fast way to evaluate a given alignment can be achieved with the following command line, which will deliver an ASCII file of the consistency score (normalized from 0 to 9) of each position and column of your alignment:
+**T-Coffee can be used to measure the reliability of your Multiple Sequence Alignment**. If you want to find out about that, read the section **FAQ for T-Coffee** or the **Technical Documentation** (-output flag). More details will be given in the subsection **How Good Is Your Alignment**.
 
 **T-Coffee can be used to compare alternative alignment**; in case you generate several alignments of the same sequences, you can compare theses alignments using the most common scores (Sum-of-Pairs or Column Score) using command lines (-other_pg aln_compare).
 
-And probably many more options we will discover all along this manual !
+
+And probably many more options we will discover together all along this manual !
 
 
 How does T-Coffee works
@@ -145,6 +147,7 @@ Given a standard library, it is not possible to have all the residues aligned at
 
 
 ::
+
   Line 1 says:
   Residue 1 of seq A with Residue 5 of seq B,
   ...
@@ -169,9 +172,7 @@ Preparing Your Data: Reformatting and Trimming With seq_reformat
 
 The seq_reformat mode
 =====================
-Accessing the T-Coffee reformatting utility
--------------------------------------------
-T-Coffee comes along with a very powerful reformatting utility named seq_reformat. You can use seq_reformat by invoking the t_coffee shell.
+T-Coffee comes along with a very powerful reformatting utility named seq_reformat. You can use seq_reformat by invoking the t_coffee shell:
 
 
 ::
@@ -179,33 +180,9 @@ T-Coffee comes along with a very powerful reformatting utility named seq_reforma
   $$: t_coffee -other_pg seq_reformat
 
 
+This will output the online flag usage of seq_reformat meaning a complete list of things seq_reformat can do for you. The seq_reformat is a reformatting utility so it recognizes automatically the most common formats (FASTA, Swiss-Prot,ClustalW, MSF, Phylip...). It reads in via the -in and -in2 flags and outputs in whatever specified format via the -output flag. In the meantime, you can use the flag '-action' to modify your data, using any of the flag. In this section we give you a few examples of things you can do with seq_reformat.
 
-This will output the online flag usage of seq_reformat, it recognizes automatically the most common formats. You can use it to:
-
-
- -reformat your sequences
-
-
- -extract sub-portions of alignments
-
-
- -extract sequences
-
-
-In this section we give you a few examples of things you can do with seq_reformat:
-
-
-.. warning:: After the flag -other_pg, the T-Coffee flags are not any more recognized; it is like if you were using a different program.
-
-An overview of seq_reformat
----------------------------
-seq_reformat is a reformatting utility. It reads in via the -in and -in2 flags and outputs in whatever specified format via the -output flag. In the meantime, you can use the flag '-action' to modify your data, using any of the flag. If you want a complete list of things seq_reformat can do for you, try:
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat
-
+.. danger:: After the flag -other_pg, the common T-Coffee flags are not anymore recognized; it is like if you were using a different program.
 
 
 Reformatting your data
