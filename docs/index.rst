@@ -16,7 +16,7 @@ Contents:
    tcoffee_manual
    tcoffee_tutorials
    tcoffee_faq
-   tcoffee_reference
+   tcoffee_technical_documentation
   
    tcoffee_adresses_and_contacts
    tcoffee_release_notes
