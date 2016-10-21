@@ -241,21 +241,21 @@ Protecting important sequence names
 ===================================
 Only few programs support long sequence names, and sometimes, when going through some pipeline the names of your sequences can be truncated or modified. To avoid this, seq_reformat contains a utility that can automatically rename your sequences into a form that will be machine-friendly, while making it easy to return to the human-friendly form.
 
-1) The first thing to do is to generate a list of names that will be used in place of the long original name of the sequences:
+1) **Create a code list**: The first thing to do is to generate a list of names that will be used in place of the long original name of the sequences:
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -output \
       code_name > sproteases_large.code_name
 
-2) It will create a file where each original name is associated with a coded name (Cxxxx). You can then use this file to either code or decode your dataset using the following command:
+2) **Code your data** This will create a file where each original name is associated with a coded name (Cxxxx). You can then use this file to either code your dataset using the following command:
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -code sproteases_large.code_name -in \
       sproteases_large.fasta > sproteases_large.coded.fasta
 
-3) This will code all the names of the original data. You can work with the file sproteases_large.coded.fasta, and when you are done, you can decode the names of your sequences using:
+3) **Decode your data**: Then you can work with the file sproteases_large.coded.fasta and when you are done, you can decode the names of your sequences with the following command line:
 
 ::
 
@@ -268,7 +268,6 @@ Colouring/Editing residues in an alignment
 Coloring specific types of residues
 -----------------------------------
 You can color all the residues of your sequences on the fly. For instance, the following command:
-
 
 ::
 
@@ -284,18 +283,15 @@ Coloring a specific residue of a specific sequence
 --------------------------------------------------
 If you want to color a specific residue, you can use the flag: +color_residue <sequence> <residue #> <color #>. If you have more than one residue to color, you can put all the coordinates in a file, (one coordinate per line). Spans are not yet supported.
 
-
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +color_residue\
   hmgb_chite 10 1 -output color_html > color.html
 
 
-
 Coloring according to the conservation
 --------------------------------------
 Use the +evaluate flag if you want to color your alignment according to its conservation level
-
 
 ::
 
