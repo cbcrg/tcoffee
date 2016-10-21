@@ -83,11 +83,11 @@ Notredame C, Abergel C.
 2003. Using multiple alignment methods to assess the quality of genomic data analysis. In: Andrade MA, editor. Bioinformatics and genomes: current perspectives. Wymondham (UK): Horizon Scientific Press. p. 30–50. http://www.tcoffee.org/Publications/Pdf/core.pp.pdf                                   
 
 
-Chang J-M, Tommaso PD, & Notredame C.
+Chang JM, Tommaso PD, & Notredame C.
 2014. TCS: a new Multiple Sequence Alignment reliability measure to estimate alignment accuracy and improve phylogenetic tree reconstruction. Molecular Biology and Evolution. 31(6):1625-37.                               
 
 
-Chang J-M, Tommaso PD, Lefort V, Gascuel O & Notredame C.
+Chang JM\*, Tommaso PD\*, Lefort V, Gascuel O & Notredame C.
 2015. TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction. Nucleic Acids Research. 43(W1):W3-6. (*These two authors contribute equally)                                  
 
 
