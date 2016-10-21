@@ -1,8 +1,6 @@
-################
-FAQ for T-Coffee
-################
-.. tip:: All the files mentioned here (e.g. sample_seq) can be found in the example directory of the distribution.
-
+###
+FAQ
+###
 
 ***************************************
 Abnormal Terminations and Wrong Results
