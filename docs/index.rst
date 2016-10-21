@@ -21,6 +21,6 @@ Contents:
    tcoffee_references
    tcoffee_adresses_and_contacts
    tcoffee_release_notes
-   
+   tcoffee_license
 
 
