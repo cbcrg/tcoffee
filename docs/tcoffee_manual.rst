@@ -6,7 +6,7 @@ T-Coffee Manual
 Before You Start...
 *******************
 
-.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. The example files can be found here: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. You can also use examples associated with their corresponding command lines from the section T-Coffee Tutorial published in Nature Protocols (2011). This message will be removed as soon as the maintenance is over. 
+.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. For now, the example files can be found here: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. You can also use examples associated with their corresponding command lines from the section T-Coffee Tutorial published in Nature Protocols (2011). This message will be removed as soon as the maintenance is over. 
 
 
 Foreword
@@ -14,17 +14,17 @@ Foreword
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and range from simple applications to more complicated ones. We have tried to put as many of these functionalities on the webserver but not all are available except by using "command lines", also, if you need to do something special and highly reproducible, the "command line" is the only way. In the course of this manual, we expect you to use a Unix-like command line shell. If you don't want to bother with command line, try using the online tcoffee webserver at: <http://www.tcoffee.org> or <http://tcoffee.crg.cat/apps/tcoffee/index.html>.
+.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more complicated ones. We have tried to put as many of these functionalities on the webserver but not all are available except by using "command lines", also, **if you need to do something special and highly reproducible, the "command line" is the only way**. In the course of this manual, we expect you to use a Unix-like command line shell. All the example files can be found here: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>.  If you don't want to bother with command line, try using the online tcoffee webserver at: <http://www.tcoffee.org> or <http://tcoffee.crg.cat/apps/tcoffee/index.html>.
 
 
-Prerequisite
-============
-This manual relies on the assumption that you have installed T-Coffee, version 6.18 or higher. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on the Microsoft Windows shell. If you need to run T-Coffee on Windows, start by installing cygwin (<http://www.cygwin.com>). Cygwin is a freeware open source that makes it possible to run a Unix-like command line on your Microsoft Windows PC without having to reboot. Cygwin is free of charge and very easy to install. Yet, as the first installation requires downloading substantial amounts of data, you should make sure you have access to a broad-band connection. All the relevant information for installing T-Coffee is contained in the previous section **T-Coffee Installation**.
+Prerequisite for using T-Coffee
+===============================
+This manual relies on the assumption that you have installed T-Coffee, version 6.18 or higher. All the relevant information for installing T-Coffee is contained in the previous section **T-Coffee Installation**. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on Windows except by using Cygwin, a freeware open source allowing to run a Unix-like command line on Windows (<https://www.cygwin.com/>). Cygwin is free of charge and easy to install, yet, as the first installation requires downloading substantial amounts of data, make sure you have access to a broad-band connection. A better option and a more stable one would be to install a Unix-like virtualbox on your computer using Windows.
 
 
-Trying T-Coffee...
-==================
-We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available at: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. This is all you need to do to run ALL the examples provided in this manual.
+Trying T-Coffee...it's not painful!
+===================================
+We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available at: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. It contains all you need to run ALL the examples provided in this manual.
 
 
 
@@ -40,18 +40,19 @@ What does it do?
 ----------------
 T-Coffee is mainly a Multiple Sequence Alignment program: given a set of sequences previously gathered using database search programs like BLAST, FASTA or Smith and Waterman, T-Coffee will produce a Multiple Sequence Alignment (MSA). To use T-Coffee you must already have your sequences ready.
 
-
-T-Coffee is also bundled with a collection of tools and third party softwares allowing you to perform a wide range of different tasks, from aligning, reformatting, evaluating, sequences and alignments alike, and more...
+T-Coffee is also bundled with a collection of tools and third party software allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
 
 
 What can it align?
 ------------------
-T-Coffee will align nucleic and protein sequences alike. It will be able to use structural information for protein or RNA sequences with a known structure. On a new PC mid of the range, T-Coffee will align up to a 100 sequences, about 1000 amino acid long. 
+T-Coffee will align nucleic acid (DNA and RNA) and protein sequences alike. T-Coffee is also able to use other type of information such as structural information (for protein or RNA sequences with a known structure) or sequence profiles.
+
+.. Hint:: To have an idea, on an average PC, T-Coffee can easily align up to a 100-200 sequences, about 1000 amino acid long. 
 
 
 How can I use it?
 -----------------
-T-Coffee is not an interactive program. It runs from your Unix or Linux command line and you must provide it with the correct parameters. If you do not like typing commands, you can still use the T-Coffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>.
+T-Coffee is not an interactive program. It runs from your Unix or Linux command line and you must provide it with the correct parameters and syntax. If you do not like typing commands, you can still use the T-Coffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>.
 
 .. Tip:: Installing and using T-Coffee requires a minimum acquaintance with the Linux/Unix operating system. If you feel this is beyond your computer skills, we suggest you use one of the available online servers.
 
@@ -63,44 +64,29 @@ Yes, at <http://www.tcoffee.org> or <http://tcoffee.crg.cat/apps/tcoffee/index.h
 
 Is T-Coffee different from ClustalW?
 ------------------------------------
-According to several benchmarks, T-Coffee appears to be more accurate than ClustalW. Yet, this increased accuracy comes at a price: T-Coffee is slower than ClustalW (about N times for N Sequences).
+According to several benchmarks, T-Coffee is on overall more accurate than ClustalW, but this increased accuracy comes at a price: **T-Coffee (default mode) is slower than ClustalW** (about N times for N Sequences). If you are familiar with ClustalW or if you run a ClustalW server, you will find that we have made some efforts to ensure as much compatibility as possible between ClustalW and T-Coffee. Whenever it was relevant, we have kept the flag names and the flag syntax of ClustalW. Yet, you will find that T-Coffee also has many extra possibilities...
 
-If you are familiar with ClustalW, or if you run a ClustalW server, you will find that we have made some efforts to ensure as much compatibility as possible between ClustalW and T-Coffee. Whenever it was relevant, we have kept the flag names and the flag syntax of ClustalW. Yet, you will find that T-Coffee also has many extra possibilities...
-
-If you want to align closely related sequences, T-Coffee can also be used in a fast mode, much faster than ClustalW, and about as accurate:
-
+If you want to align closely related sequences, **T-Coffee can also be used in a fast mode (command 1), much faster than ClustalW, and about as accurate**. This mode works by only considering the best diagonals between two sequences, and by default all the diagonals with substitution score >0 are considered, but you can lower this to reduce the running time (command 2). That will only consider the top 10 diagonals. This will be very useful if you have long and very similar sequences to align (DNA for instance).
 
 ::
 
+   Command 1:
    $$: t_coffee sample_seq1.fasta -mode quickaln
-
-
-
-This mode works by only considering the best diagonals between two sequences. By default all the diagonals having a substitution score >0 are considered, but you can lower this by specifying:
-
-
-::
-
+   
+   Command 2:
    $$: t_coffee sample_seq1.fasta -mode quickaln -ndiag=10
-
-
-
-That will only consider the top 10 diagonals. This will be very useful if you have long and very similar sequences to align (DNA for instance).
 
 
 Is T-Coffee very accurate?
 --------------------------
-T-Coffee combines methods, and can be made as accurate (and hopefully more) as the methods it combines. This "accurate" mode is very slow but also very accurate; on average this mode is about 10 % more accurate than normal aligners on sequences less than 30% similar. So if you need a very accurate alignment (and you have the full package installed with SOAP), just run:
-
+T-Coffee can combines (many) methods, and can be made as accurate (and hopefully more) as the methods it combines. This "accurate" mode is very slow but also very accurate; on average this mode is about 10 % more accurate than normal aligners on sequences less than 30% similar. So if you need a very accurate alignment (and you have the full package installed with SOAP), just run:
 
 ::
 
    $$: t_coffee sample_seq1.fasta -mode accurate
 
 
-
 .. warning:: If you cannot run this job, go to the section of the **T-Coffee Installation** (T-Coffee and BLAST); you don't necessary need to install BLAST locally but you must have access to a remote server (EBI or NCBI).
-
 
 
 What T-Coffee can and cannot do for you ...
@@ -113,7 +99,7 @@ To be honest, a short answer will be that there is only one thing T-Coffee canno
 
 What T-Coffee can do
 --------------------
-T-Coffee is not just a simple aligner program, it comes with multiple tools and third party softwares increasing the range of its possibilities; here is a non exhaustive list of tasks T-Coffee can do:
+T-Coffee is not just a simple aligner program, it comes with multiple tools and third party software increasing the range of its possibilities; here is a non exhaustive list of tasks T-Coffee can do:
 
 **T-Coffee can compute (or at least try to compute!) accurate Multiple Sequence Alignments of DNA, RNA or Protein sequences**. Several modes and options are available and will be presented all along this manual. The default T-Coffee accepts any kind of sequence, although some modes are specific to a given type of sequence.
 
@@ -141,10 +127,9 @@ How does T-Coffee works
 =======================
 If you only want to make a standard multiple alignments, you may skip these explanations. But if you want to do more sophisticated things, these few indications may help before you start reading the doc and the papers.
 
-When you run T-Coffee, the first thing it does is to compute a library. The library is a list of pairs of residues that could be aligned. It is like a christmas list: you can ask anything you fancy, but it is down to Santa Claus to assemble a collection of Toys that won't get him stuck at the airport, while going through the metal detector.
+When you run T-Coffee, the first thing it does is to compute a library. The library is a list of pairs of residues that could be aligned. It is like a christmas list: you can ask anything you fancy, but it is down to Santa Claus to assemble a collection of toys that won't get him stuck at the airport, while going through the metal detector.
 
 Given a standard library, it is not possible to have all the residues aligned at the same time because all the lines of the library may not agree. For instance:
-
 
 ::
 
@@ -173,7 +158,6 @@ Preparing Your Data: Reformatting and Trimming With seq_reformat
 The seq_reformat mode
 =====================
 T-Coffee comes along with a very powerful reformatting utility named seq_reformat. You can use seq_reformat by invoking the t_coffee shell:
-
 
 ::
 
