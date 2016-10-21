@@ -1,6 +1,6 @@
-########################
-License and Terms of Use 
-########################
+######################
+License & Terms of Use 
+######################
 
 
 **T-Coffee is distributed under the Gnu Public License**
