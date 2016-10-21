@@ -29,7 +29,7 @@ We encourage you to try the following examples with your own sequences/structure
 
 
 *******************
-What is  T-COFFEE ?
+What is  T-Coffee ?
 *******************
 What is T-Coffee?
 =================
