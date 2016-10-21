@@ -1,6 +1,6 @@
-########################
-References and Citations 
-########################
+######################
+References & Citations 
+######################
 
 
 .. Note:: It is important that you cite T-Coffee when you use it. Citing us is (almost) like giving us money: it helps us convincing our institutions that what we do is useful and that they should keep paying our salaries and deliver donuts to our offices from time to time (Not that they ever did it, but it would be nice anyway).
