@@ -3,19 +3,18 @@ License and Terms of Use
 ########################
 
 
+**T-Coffee is distributed under the Gnu Public License**
 
-T-Coffee is distributed under the Gnu Public License
-====================================================
 Please make sure you have agreed with the terms of the license attached to the package before using the T-Coffee package or its documentation. T-Coffee is a freeware open source distributed under a GPL license. This means that there are very little restrictions to its use, either in an academic or a non academic environment.
 
 
-T-Coffee code can be re-used freely
-===================================
+**T-Coffee code can be re-used freely**
+
 Our philosophy is that code is meant to be re-used, including ours. No permission is needed for the cut and paste of a few functions, although we are always happy to receive pieces of improved code.
 
 
-T-Coffee can be incorporated in most pipelines: Plug-in/Plug-out...
-===================================================================
+**T-Coffee can be incorporated in most pipelines: Plug-in/Plug-out...**
+
 Our philosophy is to insure that as many methods as possible can be used as plug-ins within T-Coffee. Likewise, we will give as much support as possible to anyone wishing to turn T-Coffee into a plug-in for another method. For more details on how to do this, see the plug-in and the plug-out sections of the Tutorial Manual.
 
 
