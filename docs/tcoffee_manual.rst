@@ -218,7 +218,6 @@ Changing the case of specific residues
 --------------------------------------
 If you want to change the case of a specific residue, you can use the flag: +edit_residue <sequence> <residue #> <lower|upper|symbol>. If you have more than one residue to modify, wrtie all the coordinates in a file (one coordinate per line) as spans are not yet supported; then give the file to T-Coffee
 
-
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +upper \
@@ -228,9 +227,9 @@ If you want to change the case of a specific residue, you can use the flag: +edi
       +edit_residue <your file containing coordinates>
 
 
-Changing the case depending on the score
+Changing the case depending on the score (under maintenance)
 ----------------------------------------
-If you want to change the case depending on the score, you must either evaluate your alignment, or provide a cache (see next section for more information about the "cache"). If you want to evaluate on-the-fly, just try:
+If you want to change the case depending on the score, you must either evaluate your alignment, or provide a cache (see next section for more information about the "cache"). For example, this command line will upper the case of all residue then lower the case of every residue more than 50% identical to other residues in the same column:
 
 ::
 
@@ -238,43 +237,30 @@ If you want to change the case depending on the score, you must either evaluate 
       +evaluate idmat +lower '[5-9]'
 
 
-
-Will lower the case of every residue identical to more than 50% of the residue in its column.
-
-
 Protecting important sequence names
 ===================================
-Few programs support long sequence names. Sometimes, when going through some pipeline the names of your sequences can be damaged (truncated or modified). To avoid this, seq_reformat contains a utility that can automatically rename your sequences into a form that will be machine friendly, while making it easy to return to the human friendly form.
+Only few programs support long sequence names, and sometimes, when going through some pipeline the names of your sequences can be truncated or modified. To avoid this, seq_reformat contains a utility that can automatically rename your sequences into a form that will be machine-friendly, while making it easy to return to the human-friendly form.
 
-
-The first thing to do is to generate a list of names that will be used in place of the long original name of the sequences. For instance:
-
+1) The first thing to do is to generate a list of names that will be used in place of the long original name of the sequences:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -output code_na\
- me > sproteases_large.code_name
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -output \
+      code_name > sproteases_large.code_name
 
-
-
-Will create a file where each original name is associated with a coded name (Cxxxx). You can then use this file to either code or decode your dataset. For instance, the following command:
-
+2) It will create a file where each original name is associated with a coded name (Cxxxx). You can then use this file to either code or decode your dataset using the following command:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -code sproteases_large.code_name -in sprot\
- eases_large.fasta >sproteases_large.coded.fasta
+  $$: t_coffee -other_pg seq_reformat -code sproteases_large.code_name -in \
+      sproteases_large.fasta > sproteases_large.coded.fasta
 
-
-
-Will code all the names of the original data. You can work with the file sproteases_large.coded.fasta, and when you are done, you can de-code the names of your sequences using:
-
+3) This will code all the names of the original data. You can work with the file sproteases_large.coded.fasta, and when you are done, you can decode the names of your sequences using:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -decode sproteases_large.code_name -in spr\
- oteases_large.coded.fasta
-
+  $$: t_coffee -other_pg seq_reformat -decode sproteases_large.code_name -in \
+      sproteases_large.coded.fasta
 
 
 Colouring/Editing residues in an alignment
