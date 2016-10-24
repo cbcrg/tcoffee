@@ -16,101 +16,35 @@ This reference manual gives a list of all the flags that can be used to modify t
 ::
 
   $$: t_coffee
-
-
-
-Or
-
-
-::
-
+  or 
   $$: t_coffee -help
-
-
-
-Or
-
-
-::
-
+  or
   $$: t_coffee -help -in
-
-
-
-Or any other parameter
-
+  
 
 Environment Variables
 =====================
-It is possible to modify T-Coffee's behavior by setting any of the following environment variables. On the bash shell, use export VAR='value'. On the cshell, use set $VAR='xxx'
+It is possible to modify T-Coffee's behavior by setting any of the following environment variables. On the bash shell, use export VAR='value'; On the cshell, use set $VAR='xxx'.
 
+**http_proxy_4_TCOFFEE**: Sets the http_proxy and HTTP_proxy values used by T-Coffee. These values get supersede http_proxy and HTTP_proxy. http_proxy_4_TCOFFEE gets superseded by the command line values (-proxy and -email). If you have no proxy, just set this value to an empty string.
 
-http_proxy_4_TCOFFEE
---------------------
-Sets the http_proxy and HTTP_proxy values used by T-Coffee.
+**email_4_TCOFFEE**: Sets the E-mail values provided to web services called upon by T-Coffee. Can be over-riden by the flag -email.
 
+**DIR_4_TCOFFEE**: By default this variable is set to $HOME/.t_coffee. This is where T-Coffee expects to find its cache, tmp dir and possibly any temporary data stored by the program.
 
-These values get supersede http_proxy and HTTP_proxy. http_proxy_4_TCOFFEE gets superseded by the command line values (-proxy and -email)
+**TMP_4_TCOFFEE**: By default this variable is set to $HOME/.t_coffee/tmp. This is where T-Coffee stores temporary files.
 
+**CACHE_4_TCOFFEE**: By default this variable is set to $HOME/.t_coffee/cache. This is where T-Coffee stores any data expensive to obtain: pdb files, sap alignments....
 
-If you have no proxy, just set this value to an empty string.
+**PLUGINS_4_TCOFFEE**: By default all the companion packages are searched in the directory DIR_4_TCOFFEE/plugins/<OS>. This variable overrides the default. This variable can also be overriden by the -plugins T-Coffee flag.
 
+**NO_ERROR_REPORT_4_TCOFFEE**: By default this variable is no set. Set it if you do not want the program to generate a verbose error output file (useful for running a server).
 
-email_4_TCOFFEE
----------------
-Set the E-mail values provided to web services called upon by T-Coffee. Can be over-riden by the flag -email.
+**PDB_DIR**:Indicate the location of your local PDB installation.
 
+**NO_WARNING_4_TCOFFEE**: Suppresses all the warnings.
 
-DIR_4_TCOFFEE
--------------
-By default this variable is set to $HOME/.t_coffee. This is where T-Coffee expects to find its cache, tmp dir and possibly any temporary data stored by the program.
-
-
-TMP_4_TCOFFEE
--------------
-By default this variable is set to $HOME/.t_coffee/tmp. This is where T-Coffee stores temporary files.
-
-
-CACHE_4_TCOFFEE
----------------
-By default this variable is set to $HOME/.t_coffee/cache. This is where T-Coffee stores any data expensive to obtain: pdb files, sap alignments....
-
-
-PLUGINS_4_TCOFFEE
------------------
-By default all the companion packages are searched in the directory DIR_4_TCOFFEE/plugins/<OS>. This variable overrides the default. This variable can also be overriden by the -plugins T-Coffee flag
-
-
-NO_ERROR_REPORT_4_TCOFFEE
--------------------------
-By default this variable is no set. Set it if you do not want the program to generate a verbose error output file (useful for running a server).
-
-
-PDB_DIR
--------
-Indicate the location of your local PDB installation.
-
-
-NO_WARNING_4_TCOFFEE
---------------------
-Suppresses all the warnings.
-
-
-UNIQUE_DIR_4_TCOFFEE
---------------------
-Sets:
-
-
- DIR_4_TCOFFEE
-
-
- CACHE_4_TCOFFEE
-
-
- TMP_4_TCOFFEE
-
-
- PLUGINS_4_TCOFFEE
+**UNIQUE_DIR_4_TCOFFEE** Sets: DIR_4_TCOFFEE, CACHE_4_TCOFFEE, TMP_4_TCOFFEE, PLUGINS_4_TCOFFEE
 
 
 To the same unique value. The string MUST be a valid directory
