@@ -869,7 +869,7 @@ Once your sequences have been aligned, you may want to turn your protein alignme
  ases_small.aln -action +thread_dna_on_prot_aln -output clustalw
 
 
-Finding the bona-fide sequences for the back-translation
+Finding the bona-fide sequences for the back-translation (under maintenance)
 --------------------------------------------------------
 Use the online server Protogene, available from <http://www.tcoffee.org>.
 
@@ -881,12 +881,11 @@ Back-translating means turning a protein sequence into a DNA sequence. If you do
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sprote\
- ases_small.aln -action +thread_dna_on_prot_aln -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sproteases_small.aln \
+      -action +thread_dna_on_prot_aln -output clustalw
 
 
-In this process, codons are chosen randomly. For instance, if an aminoacid has four codons, the back-translation process will randomly select one of these. If you need more sophisticated back-translations that take into account the codon bias, we suggest you use more specific tools like: alpha.dmi.unict.it/~ctnyu/bbocushelp.html
-
+In this process, codons are chosen randomly. For instance, if an aminoacid has four codons, the back-translation process will randomly select one of these. If you need more sophisticated back-translations that take into account the codon bias, we suggest you use more specific tools like: <http://alpha.dmi.unict.it/~ctnyu/bbocushelp.html>.
 
 
 ============================================
@@ -948,8 +947,8 @@ It is also possible to stack Stockholm formatted secondary structures:
 
 
 
-Analyzing an RNAalifold secondary structure prediction
-------------------------------------------------------
+Analyzing a RNAalifold secondary structure prediction
+-----------------------------------------------------
 the following commands can either be applied on a Stockholm or a standard MSA. In the second case (standard MSA) the secondary structure will be automatically re-computed by alifold.
 
 
@@ -981,13 +980,9 @@ The following command will output a color coded version of your alignment with m
 
 
 I: incompatible pair (i.e. at least one pair is not WC)
-
 N: pairs are Gus or WC
-
 W: all pairs are Watson
-
 c: compensatory mutations
-
 C: WC compensatory mutations
 
 
@@ -996,10 +991,7 @@ C: WC compensatory mutations
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2an\
  alyze aln
 
-
-
 It is possible to turn this output into a colored one using:
-
 
 ::
 
