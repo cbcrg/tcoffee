@@ -888,7 +888,6 @@ Back-translating means turning a protein sequence into a DNA sequence. If you do
 In this process, codons are chosen randomly. For instance, if an aminoacid has four codons, the back-translation process will randomly select one of these. If you need more sophisticated back-translations that take into account the codon bias, we suggest you use more specific tools like: <http://alpha.dmi.unict.it/~ctnyu/bbocushelp.html>.
 
 
-============================================
 Manipulating RNA Sequences With seq_reformat
 ============================================
 Producing a Stockholm output: adding predicted secondary structures
@@ -1013,16 +1012,14 @@ The folds associated with alternative alignments can be compared. This compariso
  tcoffee.stk -action +RNAfold_cmp
 
 
-
 The top of the output (@@lines) summarizes the results that are displayed on the -in alignment. If the provided alignments do not have a fold, this fold will be estimated with alifold.
 
 
-=================================================
 Phylogenetic Trees Manipulation With seq_reformat
 =================================================
 Producing phylogenetic trees
 ----------------------------
-Seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering:
+The seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering:
 
 
 Given a multiple sequence alignment, it is possible to compute either a UPGM or an NJ tree:
@@ -1031,7 +1028,6 @@ Given a multiple sequence alignment, it is possible to compute either a UPGM or 
 ::
 
   seq_reformat -in <aln> -action +aln2tree -output newick
-
 
 
 Will use an identity matrix to compare your sequences and will output an unrooted NJ tree in newick format. If you want to produce a rooted UPGMA tree:
