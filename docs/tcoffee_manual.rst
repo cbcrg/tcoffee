@@ -163,9 +163,10 @@ This will output the online flag usage of seq_reformat meaning a complete list o
 
 .. danger:: After the flag -other_pg, the common T-Coffee flags are not recognized anymore; it is like if you were using a different program.
 
-
-Reformatting your data
-======================
+Modifying the format of your data
+=================================
+Changing the sequence format
+----------------------------
 Sometimes it may be necessary to change from one format to another, for instance when using another software which recognize only a given format. T-Coffee recognize most common alignment formats and you can find all input or output format recognized by T-Coffee by simply typing:
 
 ::
@@ -195,9 +196,6 @@ It is possible to reformat unaligned or aligned sequences alike although changin
 
 .. Warning:: Format recognition is not 100% full proof; occasionally you will have to inform the program about the nature of the file you are trying to reformat with " -input msf_aln -output fasta_aln" for instance.
 
-
-Automated sequence edition
-==========================
 Changing the case
 -----------------
 Changing the case of your sequences
@@ -263,9 +261,9 @@ Only few programs support long sequence names, and sometimes, when going through
 
 
 Colouring/Editing residues in an alignment
-==========================================
+------------------------------------------
 Coloring specific types of residues
------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 You can color all the residues of your sequences on the fly. For instance, the following command:
 
 ::
@@ -279,7 +277,7 @@ will color all the As in color 0 (blue).
 
 
 Coloring a specific residue of a specific sequence
---------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you want to color a specific residue, you can use the flag: +color_residue <sequence> <residue #> <color #>. If you have more than one residue to color, you can put all the coordinates in a file, (one coordinate per line). Spans are not yet supported.
 
 ::
@@ -289,7 +287,7 @@ If you want to color a specific residue, you can use the flag: +color_residue <s
 
 
 Coloring according to the conservation
---------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Use the +evaluate flag if you want to color your alignment according to its conservation level
 
 ::
@@ -310,9 +308,7 @@ You can also use the boxshade scoreing scheme:
 
 
 Colouring/Editing residues in an alignment using a Cache
-========================================================
-Overview
---------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 To color an alignment, two files are needed: the alignment (aln) and the cache (cache). The cache is a file where residues to be colored are declared along with the colors. Nine different colors are currently supported. They are set by default but can be modified by the user (see last changing default colors). The cache can either look like a standard sequence or alignment file (see below) or like a standard T-Coffee library (see next section). In this section we show you how to specifically modify your original sequences to turn them into a cache.
 
 
@@ -320,7 +316,7 @@ In the cache, the colors of each residue are declared with a number between 0 an
 
 
 Preparing a sequence or alignment cache
----------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Let us consider the following file:
 
 
@@ -415,7 +411,7 @@ where each residue has been replaced with a number according to what was specifi
 
 
 Preparing a library cache
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 The Library is a special format used by T-Coffee to declare special relationships between pairs of residues. The cache library format can also be used to declare the color of specific residues in an alignment. For instance, the following file
 
 
@@ -472,7 +468,7 @@ The number right after BLOCK indicates the block length (10). The two next numbe
 
 
 Coloring an alignment using a cache
------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you have a cache alignment or a cache library, you can use it to color your alignment and either make a post script, html or PDF output. For instance, if you use the file cache.seq:
 
 
@@ -509,7 +505,7 @@ You can also use a cache library like the one shown above (sample_lib5.tc_lib):
 
 
 Changing the default colors
-===========================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Colors are hard coded in the program, but if you wish, you can change them, simply create a file named:
 
 
@@ -531,239 +527,113 @@ That is used to declare the color values:
 This indicates that the value 0 in the cache corresponds now to #FFAA00 in html, and in RGB 1, 0.2 and 0. The name of the file (seq_reformat.color) is defined in: programmes_define.h, COLOR_FILE. And can be changed before compilation. By default, the file is searched in the current directory
 
 
-Selective reformatting
-======================
+Modifying The Data itself...
+=============================
+Selectively modifying residues
+------------------------------
+The selective modification of residues/sequences/columns is achieved using the flag +action (within the seq_reformat tool) and one or several modifier listed here:
+
+::
+  Options:
+  - +upper: to uppercase your residues (seen previously)
+  - +lower: to lowercase your residues (seen previously)
+  - +switchcase: to selectively toggle the case of your residues
+  - +keep: to only keep the residues within the range
+  - +use_cons +keep: to only keep the columns within the range
+  - +remove: to remove the residues within the range
+  - +convert: to only convert the residues within the range
+  - +grep: to select a given string of character
+  - +rm_gap: to remove columns containing gaps
+
+
+Converting residues
+-------------------
+It is possible for instance to selectively convert all  given characters in a sequence (residues or nucleic acids alike) into another one, for example all G's having a score between 1 and 2 by using the command line:
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache_aln\ 
+      -struc_in_f number_aln -action +convert '[1-2]' CX
+ 
+
 Removing gapped columns
 -----------------------
-You can remove all the columns containing a certain proportion of gaps. For instance:
+You can also remove all the columns containing a given proportion of gaps; for instance the following command will delete all the residues occurring in a column that contains 50% or more gaps (use 1 to delete residues from columns having 1 gap or more):
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +rm_gap 50
 
 
-Will delete all the residues occurring in a column that contains 50% or more gaps (use 1 to delete residues from columns having 1 gap or more).
-
-
-Selectively turn some residues to lower case
---------------------------------------------
-Consider the following alignment (sample_aln7.aln)
-
-
-::
-
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04\
-  sec, SCORE=0, Nseq=4, Len=28
-
-  A CTCCGTGTCTAGGAGT-TTACGTGGAGT
-  B CTGAGA----AGCCGCCTGAGGTCG---
-  D CTTCGT----AGTCGT-TTAAGACA---
-  C -TTAAGGTCC---AGATTGCGGAGC---
-
-
-and the following cache (sample_aln7.cache_aln):
-
-
-::
-
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.04\
-  sec, SCORE=0, Nseq=4, Len=28
-
-  A 3133212131022021-11032122021
-  B 312020----023323312022132---
-  D 311321----021321-11002030---
-  C -110022133---020112322023---
-
-
-You can turn to lower case all the residues having a score between 1 and 2:
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.\
- cache_aln -struc_in_f number_aln -action +lower '[1-2]'
-
-  CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.05\
-  sec, SCORE=0, Nseq=4, Len=28
-
-  A CtCCgtgtCtAggAgt-ttACgtggAgt
-  B CtgAgA----AgCCgCCtgAggtCg---
-  D CttCgt----AgtCgt-ttAAgACA---
-  C -ttAAggtCC---AgAttgCggAgC---
-
-
-::
-
-  Note: that residues not concerned will keep their original case
-
-
-Selectively modifying residues
-------------------------------
-The range operator is supported by three other important modifiers:
-
-
- -upper: to uppercase your residues
-
-
- -lower: to lowercase your residues
-
-
- -switchcase: to selectively toggle the case of your residues
-
-
- -keep: to only keep the residues within the range
-
-
- -remove: to remove the residues within the range
-
-
- -convert: to only convert the residues within the range.
-
-
-For instance, to selectively turn all the G having a score between 1 and 2, use:
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.\
- cache_aln -struc_in_f number_aln -action +convert '[1-2]' CX
-
-
-
-Keeping only the best portion of an alignment
----------------------------------------------
-To do this, you need an evaluation file that may have been generated with T-Coffee, either running a de-novo alignment
-
-
-::
-
-  $$: t_coffee sample_seq1.fasta -output score_ascii, aln
-
-
-
-Or evaluating a pre-existing alignment
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate blos\
- um62mt -output score_ascii
-
-
-
-This generates a score_ascii file that you can then use to filter out the bad bits in your alignment:
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.\
- score_ascii -struc_in_f number_aln -action +keep '[8-9]'
-
-
-
-This command considers the individual score of each residue to trigger the filtering. It is also possible to do this according to the whole column. Simply add the '+use_cons' flag.
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.\
- score_ascii -struc_in_f number_aln -action +use_cons +keep '[8-9]'
-
-
-
 Extracting portions of dataset
-==============================
-Extracting portions of a dataset is something very frequently needed. You may need to extract all the sequences that contain the word human in their name, or you may want all the sequences containing a simple motif. We show you here how to do a couple of these things.
-
-
-Extracting the high scoring blocks
-----------------------------------
-It is possible to use a score_ascii file ( as produced in the previous section) in order to extract high scoring portions of an alignment. For instance, the following command:
-
+------------------------------
+Extracting portions of a dataset is something very frequently needed. You may need to extract all the sequences that contain the word human in their name, or you may want all the sequences containing a simple motif. We show you here how to do a couple of these things. To do this, you need an evaluation file that may have been generated with T-Coffee, either running a de-novo alignment (command 1) or evaluating a preexisting alignment (command 2):
 
 ::
 
-   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blo\
- sum62mt +use_cons +keep '[5-9]'
+  Command 1:
+  $$: t_coffee sample_seq1.fasta -output score_ascii, aln
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate \
+      blosum62mt -output score_ascii
 
-
-
-will keep all the residues having a column conservation score between 5 and 9
-
-
-::
-
-  Note: Don't forget the simple quotes! (')
-
-
-It is also possible to re-use pre-computed score_ascii files, such as those obtained when computing a T-Coffee multiple alignment. For instance, the following series of command will make it possible to extract the positions having a consistency score between 6 and 9:
-
+This generates a score_ascii file that you can then use to filter out the bad bits in your alignment considering the individual score of each residue to trigger the filtering (command 3), or according to the whole column score by simply add the '+use_cons' flag (command 4). The commands 3 and 4 will keep only residues and columns having a score between 6 and 9:
 
 ::
 
-   $$: t_coffee sample_aln1.fasta -output score_ascii -outfile sample1.score_asc\
- ii
+  Command 3:
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii \
+      -struc_in_f number_aln -action +keep '[6-9]'
+  Command 4:
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii \
+      -struc_in_f number_aln -action +use_cons +keep '[6-9]'
 
-   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -struc_in sample1.sco\
- re_ascii -struc_in_f number_aln -action +use_cons +keep '[8-9]'
 
+It is also possible to use a score_ascii file (as produced in the previous section) in order to extract high scoring portions of an alignment on-the-fly using the following command:
+
+::
+
+   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blosum62mt \
+       +use_cons +keep '[5-9]'
+
+
+.. warning:: Don't forget the simple quotes! (')
 
 
 Extracting sequences according to a pattern
 -------------------------------------------
-You can extract any sequence by requesting a specific pattern to be found either in the name, the comment or the sequence. For instance, if you want to extract all the sequences whose name contain the word HUMAN:
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAM\
- E KEEP HUMAN -output clustalw
-
-
-
-The modifier is '+grep'. NAME indicates that the extraction is made according to the sequences names, and KEEP means that you will keep all the sequences containing the string HUMAN. If you wanted to remove all the sequences whose name contains the word HUMAN, you should have typed:
-
+You can extract any sequence by requesting a specific pattern to be found either in the name (NAME), the comment (COMMENT) or the sequence (SEQ) using the modifier is '+grep'. For instance, if you want to extract all the sequences whose name contain the word HUMAN. NAME/COMMENT/SEQ indicates that the extraction/removal is made according to the sequences names, the comment section or the sequence itself, and KEEP/REMOVE means that you will keep/remove all the sequences containing the string HUMAN. Here are some examples:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAM\
- E REMOVE HUMAN -output clustalw
-
-
-
-Note that HUMAN is case sensitive (Human, HUMAN and hUman will not yield the same results). You can also select the sequences according to some pattern found in their COMMENT section or directly in the sequence. For instance
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep COM\
- MENT KEEP sapiens -output clustalw
-
-
-
-Will keep all the sequences containing the word sapiens in the comment section. Last but not least, you should know that the pattern can be any perl legal regular expression (See www.comp.leeds.ac.uk/Perl/matching.html for some background on regular expressions). For instance:
-
-
-::
-
+  To keep sequences containing HUMAN in the name:
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME \
+      KEEP HUMAN -output clustalw
+  To remove sequences containing HUMAN in the name:
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME \
+      REMOVE HUMAN -output clustalw
+  To keep sequence which contain sapiens in the comment:
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep COMMENT \
+      KEEP sapiens -output clustalw
+  To remove sequences containing the pattern [ILM]K:
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep SEQ\
   REMOVE '[ILM]K' -output clustalw
 
 
+.. important:: you should know that the pattern can be any perl legal regular expression (<http://www.comp.leeds.ac.uk/Perl/matching.html> for some background on regular expressions). 
 
-Will extract all the sequences containing the pattern [ILM]K.
+.. caution:: This option is case sensitive (Human, HUMAN and hUman will not yield the same results). Careful about the case !!!
 
 
-Extracting sequences by names
------------------------------
+Extracting/Removing sequences by names
+--------------------------------------
 Extracting two sequences: If you want to extract several sequences, in order to make a subset, you can do the following:
 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
- seq_list 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
-
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list \
+      'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
 
 
 .. note:: Note the single quotes ('). They are meant to protect the name of your sequence and prevent the UNIX shell to interpret it like an instruction.
@@ -773,19 +643,16 @@ Removing columns of gaps. Removing intermediate sequences results in columns of 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
- seq_list 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA' +rm_gap
-
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list \
+      'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA' +rm_gap
 
 
 Extracting subsequences: You may want to extract portions of your sequences. This is possible if you specify the coordinates after the sequences name:
 
-
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
- seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap
-
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq \
+      'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap
 
 
 Keeping the original sequence names. Note that your sequences are now renamed according to the extraction coordinates. You can keep the original names by using the +keep_name modifier:
@@ -793,24 +660,19 @@ Keeping the original sequence names. Note that your sequences are now renamed ac
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +keep_nam\
- e +extract_seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_g\
- ap
-
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +keep_name \
+      +extract_seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap
 
 
 .. warning:: +keep_name must come BEFORE +extract_seq
 
-Removing sequences by names
----------------------------
-Removing two sequences. If you want to remove several sequences, use rm_seq instead of keep_seq:
 
+Removing two sequences. If you want to remove several sequences, use rm_seq instead of keep_seq:
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +remove_s\
  eq 'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
-
 
 
 Extracting blocks within an alignment
@@ -820,9 +682,8 @@ Extracting a block. If you only want to keep one block in your alignment, use:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
- block cons 150 200
-
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
+      cons 150 200
 
 
 In this command line, cons indicates that you are counting the positions according to the consensus of the alignment (i.e. the positions correspond to the columns # of the alignment). If you want to extract your block relatively to a specific sequence, you should replace cons with this sequence name. For instance:
@@ -834,7 +695,6 @@ In this command line, cons indicates that you are counting the positions accordi
  block 'sp|Q03238|GRAM_RAT' 10 200
 
 
-
 Concatenating alignments
 ------------------------
 If you have extracted several blocks and you now want to glue them together, you can use the cat_aln function
@@ -842,59 +702,44 @@ If you have extracted several blocks and you now want to glue them together, you
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
- block cons 100 120 > block1.aln
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
+      cons 100 120 > block1.aln
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
- block cons 150 200 > block2.aln
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
+      cons 150 200 > block2.aln
 
   $$: t_coffee -other_pg seq_reformat -in block1.aln -in2 block2.aln -action +cat_aln
-
 
 
 .. note:: The alignments do not need to have the same number of sequences and the sequences do not need to come in the same order.
 
 
-
-
-Reducing and improving your dataset
-===================================
-Large datasets are problematic because they can be difficult to analyze. The problem is that when there are too many sequences, MSA programs tend to become very slow and inaccurate. Furthermore, you will find that large datasets are difficult to display and analyze. In short, the best size for an MSA dataset is between 20 and 40 sequences. This way you have enough sequences to see the effect of evolution, but at the same time the dataset is small enough so that you can visualize your alignment and recompute it as many times as needed.
-
-
-.. note:: Note: If your sequence dataset is very large, seq_reformat will compute the similarity matrix between your sequences once only. It will then keep it in its cache and re-use it any time you re-use that dataset. In short this means that it will take much longer to run the first time.
-
 Extracting the Y most informative sequences
 -------------------------------------------
-To be informative, a sequence must contain information the other sequences do not contain. The Y most informative sequences are the Y (number or pourcentage) sequences that are as different as possible to one another, given the initial dataset.
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
- seq_n10 -output fasta_seq
-
-The argument n10 means you want to extract the 10 most informative sequences. The argument to trim include _seq_, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generaly more accurate to use unaligned sequences.
-
-
-If you would rather extract a pourcentage than a number of sequences, for instance the 20% most informative sequences, use the argument N20:
-
+Large datasets are problematic because they can be difficult to align and analyze. The problem is that when there are too many sequences, MSA programs tend to become very slow and inaccurate. Furthermore, you will find that large datasets are difficult to display and analyze. In short, the best size for an MSA dataset is between 20 to 40 sequences; this way you have enough sequences to see the effect of evolution, but at the same time the dataset is small enough so that you can visualize your alignment and recompute it as many times as needed. To be informative, a sequence must contain information the other sequences do not contain. The Y most informative sequences are the Y (number or pourcentage) sequences that are as different as possible to one another, given the initial dataset. To do so, you can use the flag +trim followed by your criteria for extracting the sequences (nXX for a number of sequences and NXX for a pourcentage of sequences). The following commands will extract the 10 most informative sequences (command 1) or the 20% of most informative sequences (command 2):
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
- seq_N20 -output fasta_seq
+  Command 1:
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_n10 \
+      -output fasta_seq
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_N20 \
+      -output fasta_seq
+
+
+.. important:: The argument to trim include _seq_, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generaly more accurate to use unaligned sequences.
+
+.. note:: Note: If your sequence dataset is very large, seq_reformat will compute the similarity matrix between your sequences once only. It will then keep it in its cache and re-use it any time you re-use that dataset. In short this means that it will take much longer to run the first time.
 
 
 Extracting all the sequences less than X% identical
 ---------------------------------------------------
 Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the trim option. For instance, to generate a dataset where no pair of sequences has more than 50% identity, use:
 
-
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
- seq_%%50_
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_
 
 If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the _seq_ with _aln_
 
@@ -919,10 +764,7 @@ Sequences that are too distantly related from the rest of the set will sometimes
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
- seq_%%50_O40
-
-
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_O40
 
 The symbol _O stands for Outliers. It will lead to the removal of all the sequences that have less than 40% average accuracy with all the other sequences in the dataset.
 
@@ -934,9 +776,8 @@ Sometimes you want to trim while making sure specific or important sequences rem
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
- seq_%%50 HUMAN
-
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim \
+      _seq_%%50 HUMAN
 
 
 When you give this command, the program will first make sure that all the HUMAN sequences are kept and it will then assemble your 50% dataset while keeping the HUMAN sequences. Note that string is a perl regular expression.
@@ -947,17 +788,16 @@ By default, string causes all the sequences whose name it matches to be kept. Yo
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
- seq_%%50_fCOMMENT '.apiens'
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim \
+      _seq_%%50_fCOMMENT '.apiens'
 
 
 Will cause all the sequences containing the regular expression '.apiens' in the comment to be kept. The _f symbol before COMMENT stands for '_field' If you want to make a selection on the sequences:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
- seq_%%50_fSEQ '[MLV][RK]'
-
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim \
+      _seq_%%50_fSEQ '[MLV][RK]'
 
 
 You can also specify the sequences you want to keep. To do so, give a fasta file containing the name of these sequences via the -in2 file
@@ -965,17 +805,13 @@ You can also specify the sequences you want to keep. To do so, give a fasta file
 
 ::
 
-  $$:t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_\
- small.fasta -action +trim _seq_%%40
+  $$:t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_small.fasta \
+     -action +trim _seq_%%40
 
 
 Chaining important sequences
 ----------------------------
-In order to align two distantly related sequences, most multiple sequence alignment packages perform better when provided with many intermediate sequences that make it possible to 'bridge' your two sequences. The modifier +chain makes it possible to extract from a dataset a subset of intermediate sequences that chain the sequences you are interested in.
-
-
-For instance, let us consider the two sequences:
-
+In order to align two distantly related sequences, most multiple sequence alignment packages perform better when provided with many intermediate sequences that make it possible to 'bridge' your two sequences. The modifier +chain makes it possible to extract from a dataset a subset of intermediate sequences that chain the sequences you are interested in. For instance, let us consider the two sequences:
 
 sp|P21844|MCPT5_MOUSE and sp|P29786|TRY3_AEDAE
 
@@ -985,12 +821,10 @@ These sequences have 26% identity. This is high enough to make a case for a homo
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases\
- _pair.fasta -action +chain > sproteases_chain.fasta
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_pair.fasta \
+      -action +chain > sproteases_chain.fasta
 
-
-
-This will generate a dataset of 21 sequences, whith the following chain of similarity between your two sequences:
+This will generate a dataset of 21 sequences, with the following chain of similarity between your two sequences:
 
 
 ::
@@ -1009,7 +843,7 @@ This will generate a dataset of 21 sequences, whith the following chain of simil
 
 
 
-This is probably the best way to generate a high quality alignment of your two sequences when using a progressive method like ClustalW, T-Coffee, Muscle or Mafft.
+This is probably the best way to generate a high quality alignment of your two sequences when using a progressive method like ClustalW, T-Coffee, MUSCLE or MAFFT.
 
 
 Manipulating DNA sequences
