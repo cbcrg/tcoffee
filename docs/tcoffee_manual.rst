@@ -133,9 +133,10 @@ You can generate this list of constraints the way you like. You may even provide
 ********************************************************
 Preparing Your Data: Reformatting, Trimming, and more... 
 ********************************************************
-
-The seq_reformat tool: introduction
-===================================
+The reformatting utility: seq_reformat
+======================================
+General introduction
+--------------------
 Nothing is more frustrating than downloading important data and realizing you need to format it **before** using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results, especially a very powerful reformatting utility named **seq_reformat**. You can use seq_reformat by invoking the t_coffee shell:
 
 ::
@@ -143,9 +144,30 @@ Nothing is more frustrating than downloading important data and realizing you ne
   $$: t_coffee -other_pg seq_reformat
 
 
-This will output the online flag usage of seq_reformat meaning a complete list of things seq_reformat can do for you. The seq_reformat is a reformatting utility so it recognizes automatically the most common formats (FASTA, Swiss-Prot,ClustalW, MSF, Phylip...). It reads in via the -in and -in2 flags and outputs in whatever specified format via the -output flag. In the meantime, you can use the flag '-action' to perform a wide range of modification on your data. In this section we give you quite a lot of different examples of you can do with **"-other_pg seq_reformat"**.
+This will output the online flag usage of seq_reformat meaning a complete list of things seq_reformat can do for you. The seq_reformat is a reformatting utility so it recognizes automatically the most common formats (FASTA, Swiss-Prot,ClustalW, MSF, Phylip...). It reads in via the **-in** and/or **-in2** flags and outputs in whatever specified format via the **-output** flag. In the meantime, you can use the flag **-action** to perform a wide range of modification on your data. In this section we give you quite a lot of different examples of you can do with **"-other_pg seq_reformat"**.
 
 .. danger:: After the flag -other_pg, the common T-Coffee flags are not recognized anymore; it is like if you were using a different program.
+
+Modification options
+--------------------
+In order to perform different modifications on your data, the seq_reformat utility has to be followed by the flag -action, several examples will be given in the next section. The selective modification of residues/sequences/columns is achieved using the flag -action (within the seq_reformat tool) and one or several modifiers listed here (this list is not exhaustive):
+
+::
+  Options:
+  - **+upper**: to uppercase your residues (seen previously)
+  - **+lower**: to lowercase your residues (seen previously)
+  - **+switchcase**: to selectively toggle the case of your residues
+  - **+keep**: to only keep the residues within the range
+  - **+use_cons +keep**: to only keep the columns within the range
+  - **+remove**: to remove the residues within the range
+  - **+convert**: to only convert the residues within the range
+  - **+grep**: to select a given string of character
+  - **+rm_gap**: to remove columns containing gaps
+  - etc...
+  
+Using a "cache" file
+--------------------
+Several option can be performed easily by using what we call a cache (or cache file).
 
 
 Modifying the format of your data
@@ -157,7 +179,6 @@ Sometimes it may be necessary to change from one format to another, for instance
 ::
 
   $$: t_coffee -other_pg seq_reformat 
-  
   
 It is possible to reformat unaligned or aligned sequences alike although changing the alignment format is probably more interesting in order to use other applications; unaligned sequences format flags are generally preceded by the suffix "_seq" and aligned sequences flags by the suffix "_aln". This also allows you to transform any alignment into unaligned sequences by removing the gaps. Here are some examples on how to change the format of your data:
 
@@ -174,7 +195,6 @@ It is possible to reformat unaligned or aligned sequences alike although changin
   From aligned to unaligned sequences:
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_seq >\
       sproteases_small.fa
-
 
 .. Warning:: Format recognition is not 100% full proof; occasionally you will have to inform the program about the nature of the file you are trying to reformat with " -input msf_aln -output fasta_aln" for instance.
 
@@ -249,16 +269,12 @@ Colouring/Editing residues in an alignment
 ------------------------------------------
 Coloring specific types of residues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-You can color all the residues of your sequences on the fly. For instance, the following command:
+You can color all the residues of your sequences on the fly. For instance, the following command will color all the A's in color 0 (blue).
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -\
- action +3convert a0 -output color_html > colored.html
-
-
-
-will color all the As in color 0 (blue).
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln \
+      -action +3convert a0 -output color_html > colored.html
 
 
 Coloring a specific residue of a specific sequence
@@ -510,21 +526,6 @@ This indicates that the value 0 in the cache corresponds now to #FFAA00 in html,
 
 Modifying the data itself...
 =============================
-The selective modification of residues/sequences/columns is achieved using the flag +action (within the seq_reformat tool) and one or several modifier listed here:
-
-::
-  Options:
-  - +upper: to uppercase your residues (seen previously)
-  - +lower: to lowercase your residues (seen previously)
-  - +switchcase: to selectively toggle the case of your residues
-  - +keep: to only keep the residues within the range
-  - +use_cons +keep: to only keep the columns within the range
-  - +remove: to remove the residues within the range
-  - +convert: to only convert the residues within the range
-  - +grep: to select a given string of character
-  - +rm_gap: to remove columns containing gaps
-
-
 Modifiying sequences in your dataset
 ------------------------------------
 Converting residues
@@ -850,7 +851,7 @@ Once your sequences have been aligned, you may want to turn your protein alignme
 
 Finding the bona-fide sequences for the back-translation (under maintenance)
 --------------------------------------------------------
-Use the online server Protogene, available from <http://www.tcoffee.org>.
+Use the online server Protogene, available from <http://tcoffee.vital-it.ch/apps/tcoffee/do:protogene>.
 
 
 Guessing your back translation
@@ -908,20 +909,19 @@ It is possible to add this secondary structure to an alignment using:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2\
- .alifold -input2 alifold -action +add_alifold -output stockholm_aln
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.alifold \ 
+      -input2 alifold -action +add_alifold -output stockholm_aln
 
 
 
-.. warning:: The alifold structure and the alignment MUST be compatible. The function makes no attempt to thread or align the structure. It merely stack it below the MSA.
+.. warning:: The alifold structure and the alignment MUST be compatible. The function makes no attempt to thread or align the structure, it merely stacks it below the MSA.
 
 It is also possible to stack Stockholm formatted secondary structures:
 
-
 ::
 
-  $$: seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +\
- add_alifold -output stockholm_aln
+  $$: seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +add_alifold \
+      -output stockholm_aln
 
 
 
@@ -932,14 +932,11 @@ the following commands can either be applied on a Stockholm or a standard MSA. I
 
 Analyzing matching columns
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-+alifold2cov_stat will estimate the number of pairs of columns that are perfect Watson and Crick, those that are neutral (including a GU) and those that include correlated mutations. The WCcomp are the compensated mutations maintaining WC base pairing
-
+The option +alifold2cov_stat will estimate the number of pairs of columns that are perfect Watson and Crick, those that are neutral (including a GU) and those that include correlated mutations. The WCcomp are the compensated mutations maintaining WC base pairing.
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2an\
- alyze stat
-
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze stat
 
 
 Other arguments can given, to display the list of paired positions and their status (compensated, Watson, etc)
@@ -947,16 +944,12 @@ Other arguments can given, to display the list of paired positions and their sta
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2an\
- alyze list
-
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list
 
 
 Visualizing compensatory mutations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The following command will output a color coded version of your alignment with matching columns indicated as follows:
-
-
 I: incompatible pair (i.e. at least one pair is not WC)
 N: pairs are Gus or WC
 W: all pairs are Watson
@@ -966,15 +959,13 @@ C: WC compensatory mutations
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2an\
- alyze aln
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze aln
 
 It is possible to turn this output into a colored one using:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2an\
- alyze color_htm
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_htm
 
 
 .. warning:: Handling gapped columns: by default gapped column are ignored but they can be included by adding the tag -usegap
@@ -987,8 +978,8 @@ The folds associated with alternative alignments can be compared. This compariso
 
 ::
 
-  t_coffee -other_pg seq_reformat -in sample_rnaseq2.cw.stk -in2 sample_rnaseq2.\
- tcoffee.stk -action +RNAfold_cmp
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.cw.stk -in2 sample_rnaseq2.tcoffee.stk  \
+      -action +RNAfold_cmp
 
 
 The top of the output (@@lines) summarizes the results that are displayed on the -in alignment. If the provided alignments do not have a fold, this fold will be estimated with alifold.
@@ -1006,7 +997,7 @@ Given a multiple sequence alignment, it is possible to compute either a UPGM or 
 
 ::
 
-  seq_reformat -in <aln> -action +aln2tree -output newick
+ $$:  t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree -output newick
 
 
 Will use an identity matrix to compare your sequences and will output an unrooted NJ tree in newick format. If you want to produce a rooted UPGMA tree:
@@ -1014,7 +1005,7 @@ Will use an identity matrix to compare your sequences and will output an unroote
 
 ::
 
-  seq_reformat -in <aln> -action +aln2tree _TMODE_upgma -output newick
+  $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _TMODE_upgma -output newick
 
 
 
@@ -1023,7 +1014,7 @@ If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for
 
 ::
 
-   seq_reformat -in <aln> -action +aln2tree _MATRIX_sarmat -output newick
+   $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _MATRIX_sarmat -output newick
 
 
 
@@ -1032,9 +1023,8 @@ All these parameters can be concatenated:
 
 ::
 
-   seq_reformat -in <aln> -action +aln2tree _TMODE_upgma_MATRIX_sarmat -output n\
- ewick
-
+   $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
+       -output newick
 
 
 Bootstrap facilities will also be added at some point ... For now we recommend you use Phylip if you need some serious phylogeny...
@@ -1042,7 +1032,7 @@ Bootstrap facilities will also be added at some point ... For now we recommend y
 
 Comparing two phylogenetic trees
 --------------------------------
-Consider the following file (sample_tree1.dnd)
+Consider the following file (sample_tree1.dnd):
 
 
 ::
@@ -1050,7 +1040,7 @@ Consider the following file (sample_tree1.dnd)
   (( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
 
 
-and the file sample_tree3.dnd.
+and the file sample_tree3.dnd:
 
 ::
 
@@ -1061,8 +1051,8 @@ You can compare them using:
 
 ::
 
-  seq_reformat -in sample_tree2.dnd -in2 sample_tree3.dnd -action +tree_cmp -out\
- put newick
+  $$: t_coffee -other_pg seq_reformat -in sample_tree2.dnd -in2 sample_tree3.dnd -action  \
+      +tree_cmp -output newick
 
   tree_cpm|T: 75 W: 71.43 L: 50.50
   tree_cpm|8 Nodes in T1 with 5 Sequences
@@ -1101,7 +1091,7 @@ It is possible to scan an alignment and locally measure the similarity between a
 
 ::
 
-  seq_reformat -in <aln> -in2 <reftree> -action +tree_scan _MODE_scan__W_10_ > p\
+  $$ :t_coffee -other_pg seq_reformat -in <aln> -in2 <reftree> -action +tree_scan _MODE_scan__W_10_ > p\
  h_tree_scan.txt
 
 
@@ -1144,8 +1134,8 @@ And the file sample_seq8.seq
 
 ::
 
-  seq_reformat -in sample_tree2.dnd -in2 sample_seq8.seq -action +tree_prune -ou\
- tput newick
+  $$: t_coffee -other_pg seq_reformat -in sample_tree2.dnd -in2 sample_seq8.seq -action \
+      +tree_prune -output newick
 
   (( A:0.50000, C:0.50000):0.00000, B:0.50000, D:0.99500);
 
@@ -1219,37 +1209,28 @@ What is a good alignment?
 -------------------------
 This is a tricky question. A good alignment is an alignment that makes it possible to do good biology. If you want to reconstruct a phylogeny, a good alignment will be an alignment leading to an accurate reconstruction.
 
+In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions. Unfortunately it is not easy to establish structure based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
 
-In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions.
+::
 
+  1) Above 40% identity (within the reference datasets), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
 
-Unfortunately it is not easy to establish structure based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
-
-
- -Above 40% identity (within the reference datasets), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
-
-
- -Below 40% accuracy within the reference datasets, the reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies seem to indicate that consistency based methods (T-Coffee, Mafft-slow and ProbCons) have an edge over traditional methods.
-
+  2) Below 40% accuracy within the reference datasets, the reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies seem to indicate that consistency based methods (T-Coffee, Mafft-slow and ProbCons) have an edge over traditional methods.
 
 When dealing with distantly related sequences, the only way to produce reliable alignments is to use structural information. T-Coffee provides many facilities to do so in a seamless fashion. Several important factors need to be taken into account when selecting an alignment method:
 
+::
 
- -The best methods are not always the best. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
+  1) The best methods are not always the best. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
 
+  2)The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
 
- -The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
-
-
- -Last but not least, bear in mind that these methods have only been evaluated by comparison with reference structure based sequence alignments. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
+  3) Last but not least, bear in mind that these methods have only been evaluated by comparison with reference structure based sequence alignments. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
 
 
 The main methods and their scope
 --------------------------------
-There are many MSA packages around. The main ones are ClustalW, Muscle, Mafft, T-Coffee and ProbCons. You can almost forget about the other packages, as there is virtually nothing you could do with them that you will not be able to do with these packages.
-
-
-These packages offer a complex trade-off between speed, accuracy and versatility.
+There are many MSA packages around, the most common ones being ClustalW, MUSCLE, MAFFT, T-Coffee and ProbCons; amongst the latest ones, you can find phylogeny-aware aligners (PRANK and SATé) and improved consistency-based aligners (MSAProbs). You can almost forget about the other packages, as there is virtually nothing you could do with them that you will not be able to do with these packages. These packages offer a complex trade-off between speed, accuracy and versatility.
 
 
 ClustalW: everywhere you look
@@ -1257,36 +1238,23 @@ ClustalW: everywhere you look
 ClustalW is still the most widely used multiple sequence alignment package. Yet things are gradually changing as recent tests have consistently shown that ClustalW is neither the most accurate nor the fastest package around. This being said, ClustalW is everywhere and if your sequences are similar enough, it should deliver a fairly reasonable alignment.
 
 
-Mafft and Muscle: aligning many sequences
+MAFFT and MUSCLE: aligning many sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you have many sequences to align Muscle or Mafft are the obvious choice. Mafft is often described as the fastest and the most efficient. This is not entirely true. In its fast mode (FFT-NS-1), Mafft is similar to Muscle and although it is fairly accurate it is about 5 points less accurate than the consistency based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) Mafft uses local alignments and consistency. It becomes much more accurate but also slower, and more sensitive to the number of sequences.
+If you have many sequences to align MUSCLE or MAFFT are the obvious choice. MAFFT is often described as the fastest and the most efficient. This is not entirely true, in its fast mode (FFT-NS-1), MAFFT is similar to MUSCLE and although it is fairly accurate, about 5 points less accurate than the consistency-based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) MAFFT uses local alignments and consistency, however, it becomes much more accurate but also slower, and more sensitive to the number of sequences.
 
 
 The alignments generated using the fast modes of these programs will be very suitable for several important applications such as:
-
-
- -Distance based phylogenetic reconstruction (NJ trees)
-
-
+ -Distance-based phylogenetic reconstruction (NJ trees)
  -Secondary structure predictions
 
 
 However they may not be suitable for more refined application such as:
-
-
  -Profile construction
-
-
  -Structure Modeling
-
-
  -3D structure prediction
-
-
  -Function analysis
 
-
-In that case you may need to use more accurate methods
+In that case you may need to use more accurate methods !!
 
 
 T-Coffee and ProbCons: slow and accurate
@@ -1294,34 +1262,22 @@ T-Coffee and ProbCons: slow and accurate
 T-Coffee works by first assembling a library and then by turning this library into an alignment. The library is a list of potential pairs of residues. All of them are not compatible and the job of the algorithm is to make sure that as many possible constraints as possible find their way into the final alignment. Each library line is a constraint and the purpose is to assemble the alignment that accommodates the more all the constraints.
 
 
-It is very much like building a high school schedule, where each teachers says something 'I need my Monday morning', 'I can't come on Thursday afternoon', and so on. In the end you want a schedule that makes everybody happy, if possible.The nice thing about the library is that it can be used as a media to combine as many methods as one wishes. It is just a matter of generating the right constraints with the right method and compile them into the library.
-
-
-ProbCons and Mafft (L-INS-i) uses a similar algorithm, but with a Bayesian twist in the case of Probcons. In practice, however, probcons and T-Coffee give very similar results and have similar running time. Mafft is significantly faster.
+It is very much like building a high school schedule, where each teachers says something 'I need my Monday morning', 'I can't come on Thursday afternoon', and so on. In the end you want a schedule that makes everybody happy, if possible.The nice thing about the library is that it can be used as a media to combine as many methods as one wishes. It is just a matter of generating the right constraints with the right method and compile them into the library. ProbCons and MAFFT (L-INS-i) uses a similar algorithm, but with a Bayesian twist in the case of Probcons. In practice, however, ProbCons and T-Coffee give very similar results and have similar running time. MAFFT is significantly faster.
 
 
 All these packages are ideal for the following applications:
-
-
  -Profile reconstruction
-
-
  -Function analysis
-
-
  -3D Prediction
 
 
 Choosing the right package
 --------------------------
-Each available package has something to go for it. It is just a matter of knowing what you want to do. T-Coffee is probably the most versatile, but it comes at a price and it is currently slower than many alternative packages.
-
-
-In the rest of this tutorial we give some hints on how to carry out each of these applications with T-Coffee.
+Each available package has something to go for it. It is just a matter of knowing what you want to do. T-Coffee is probably the most versatile, but it comes at a price and it is currently slower than many alternative packages. In the rest of this tutorial we give some hints on how to carry out each of these applications with T-Coffee.
 
 
 ================= ====== ===== ======== ======== ======== 
-Packages          Muscle Mafft ProbCons T-Coffee ClustalW 
+Packages          MUSCLE MAFFT ProbCons T-Coffee ClustalW 
 ================= ====== ===== ======== ======== ======== 
 Accuracy          ++     +++   +++      +++      +        
 <100 Seq.         ++     ++    +++      +++      +        
@@ -1342,7 +1298,7 @@ Table 1. Relative possibilities associated with the main packages (T-Coffee Tuto
 
 
 ===================== ====== ===== ======== ======== ======== 
-Packages              Muscle Mafft ProbCons T-Coffee ClustalW 
+Packages              MUSCLE MAFFT ProbCons T-Coffee ClustalW 
 ===================== ====== ===== ======== ======== ======== 
 Dist Based Phylogeny  +++    +++   ++       ++       ++       
 ML or MP Phylogeny    ++     +++   +++      +++      ++       
