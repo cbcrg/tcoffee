@@ -37,7 +37,7 @@ What is T-Coffee?
 
 What does it do?
 ----------------
-T-Coffee is mainly a Multiple Sequence Alignment program: given a set of sequences previously gathered using database search programs like BLAST, FASTA or Smith and Waterman, T-Coffee will produce a Multiple Sequence Alignment (MSA). To use T-Coffee you must already have your sequences ready. T-Coffee is also bundled with a collection of tools and third party software allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
+T-Coffee is mainly a Multiple Sequence Alignment program: given a set of sequences previously gathered using database search programs like BLAST, FASTA or Smith and Waterman, T-Coffee will produce a Multiple Sequence Alignment (MSA). To use T-Coffee you must already have your sequences ready. T-Coffee is also bundled with a collection of tools (usually called using the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
 
 
 What can it align?
