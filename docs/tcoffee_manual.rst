@@ -63,7 +63,7 @@ Is T-Coffee different from ClustalW?
 ------------------------------------
 According to several benchmarks, T-Coffee is on overall more accurate than ClustalW, but this increased accuracy comes at a price: **T-Coffee (default mode) is slower than ClustalW** (about N times for N Sequences). If you are familiar with ClustalW or if you run a ClustalW server, you will find that we have made some efforts to ensure as much compatibility as possible between ClustalW and T-Coffee. Whenever it was relevant, we have kept the flag names and the flag syntax of ClustalW. Yet, you will find that T-Coffee also has many extra possibilities...
 
-If you want to align closely related sequences, **T-Coffee can also be used in a fast mode** (command 1),**much faster than ClustalW, and about as accurate**. This mode works by only considering the best diagonals between two sequences, and by default all the diagonals with substitution score >0 are considered, but you can lower this to reduce the running time (command 2). That will only consider the top 10 diagonals. This will be very useful if you have long and very similar sequences to align (DNA for instance).
+If you want to align closely related sequences, **T-Coffee can also be used in a fast mode ,much faster than ClustalW, and about as accurate** (command 1). This mode works by only considering the best diagonals between two sequences, and by default all the diagonals with substitution score >0 are considered, but you can lower this to reduce the running time (command 2). That will only consider the top 10 diagonals. This will be very useful if you have long and very similar sequences to align (DNA for instance).
 
 ::
 
@@ -104,9 +104,9 @@ T-Coffee is not just a simple aligner program, it comes with multiple tools and 
 
 **T-Coffee allows you to combine results obtained with several alignment methods** (see the section **FAQ for T-Coffee** for more details). For instance if you have an alignment coming from ClustalW, another from Dialign, and a structural alignment of some of your sequences, T-Coffee can combine all these MSAs to produce a new Multiple Sequence Alignment having the best agreement with all these methods.
 
-**One of the latest improvements of T-Coffee is to let you combine sequences and structures**, so that your alignments are of higher quality. You need to have the SAP package installed to fully benefit of this facility (or to use another structural alignment method). 
+**One of the most important improvement of T-Coffee is to let you combine sequences and structures**, so that your alignments are of higher quality. You need to have the SAP package installed to fully benefit of this facility (or to use another structural alignment method). 
 
-.. warning:: For this case, operations are carried out using wget. If wget is not installed on your system, you can get it for free from (<http://www.wget.org>). To make sure wget is installed on your system, type **which wget**
+.. warning:: In this particular T-Coffee mode, operations are carried out using the function "wget". If "wget" is not installed on your system, you can get it for free from (<http://www.wget.org>). To make sure wget is installed on your system, type **which wget**.
 
 **T-Coffee allows you to extract a serie of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. 
 
@@ -120,8 +120,8 @@ T-Coffee is not just a simple aligner program, it comes with multiple tools and 
 And probably many more options we will discover together all along this manual !
 
 
-How does T-Coffee works
-=======================
+How does T-Coffee alignment works
+=================================
 If you only want to make a standard multiple alignments, you may skip these explanations. But if you want to do more sophisticated things, these few indications may help before you start reading the doc and the papers.
 
 When you run T-Coffee, the first thing it does is to compute a library. The library is a list of pairs of residues that could be aligned. It is like a christmas list: you can ask anything you fancy, but it is down to Santa Claus to assemble a collection of toys that won't get him stuck at the airport, while going through the metal detector.
@@ -145,16 +145,14 @@ You can generate this list of constraints the way you like. You may even provide
 .. note:: Be aware that nothing forces you to use a given library and that you could build it using other methods. In protein language, **T-Coffee is synonymous for freedom, the freedom of being aligned however you fancy** (I was a Tryptophan in some previous life).
 
 
+
 ****************************************************************
 Preparing Your Data: Reformatting and Trimming With seq_reformat
 ****************************************************************
 
-.. warning:: Nothing is more frustrating than downloading important data and realizing you need to format it **before** using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files.
-
-
-The seq_reformat mode
-=====================
-T-Coffee comes along with a very powerful reformatting utility named seq_reformat. You can use seq_reformat by invoking the t_coffee shell:
+The seq_reformat mode: introduction
+===================================
+Nothing is more frustrating than downloading important data and realizing you need to format it **before** using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results. T-Coffee comes along with a very powerful reformatting utility named seq_reformat. You can use seq_reformat by invoking the t_coffee shell:
 
 ::
 
@@ -175,15 +173,15 @@ Sometimes it may be necessary to change from one format to another, for instance
   $$: t_coffee -other_pg seq_reformat 
   
   
-It is possible to reformat unaligned or aligned sequences alike although changing the alignment format is probably more interesting to be able to use other applications; unaligned sequences format are generally preceded by the suffix "_seq" and aligned sequences by the suffix "_aln". This also allows you to reformat an alignment into unaligned sequences by removing the gaps. Here are some examples on how to change the format of your data:
+It is possible to reformat unaligned or aligned sequences alike although changing the alignment format is probably more interesting in order to use other applications; unaligned sequences format flags are generally preceded by the suffix "_seq" and aligned sequences flags by the suffix "_aln". This also allows you to reformat an alignment into unaligned sequences by removing the gaps. Here are some examples on how to change the format of your data:
 
 ::
 
-  For unaligned sequences (FASTA to PIR)
+  For unaligned sequences (e.g. FASTA to PIR)
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.fa -output pir_seq >\
       sproteases_small.fasta_aln
   
-  For alignements (ClustalW to FASTA and ClustalW to MSF)
+  For alignements (e.g. ClustalW to FASTA and ClustalW to MSF)
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_aln >\
       sproteases_small.fasta_aln
 
@@ -200,8 +198,10 @@ It is possible to reformat unaligned or aligned sequences alike although changin
 
 Automated sequence edition
 ==========================
+Changing the case
+-----------------
 Changing the case of your sequences
------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you need to change the case of your sequences, you can use more sophisticated functions embedded in seq_reformat. We call these modifiers, and they are accessed via the -action flag. For instance, to write our sequences in lower case:
 
 ::
@@ -214,7 +214,7 @@ If you need to change the case of your sequences, you can use more sophisticated
 
 
 Changing the case of specific residues
---------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you want to change the case of a specific residue, you can use the flag: +edit_residue <sequence> <residue #> <lower|upper|symbol>. If you have more than one residue to modify, wrtie all the coordinates in a file (one coordinate per line) as spans are not yet supported; then give the file to T-Coffee
 
 ::
@@ -227,7 +227,7 @@ If you want to change the case of a specific residue, you can use the flag: +edi
 
 
 Changing the case depending on the score (under maintenance)
-----------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you want to change the case depending on the score, you must either evaluate your alignment, or provide a cache (see next section for more information about the "cache"). For example, this command line will upper the case of all residue then lower the case of every residue more than 50% identical to other residues in the same column:
 
 ::
@@ -237,7 +237,7 @@ If you want to change the case depending on the score, you must either evaluate 
 
 
 Protecting important sequence names
-===================================
+-----------------------------------
 Only few programs support long sequence names, and sometimes, when going through some pipeline the names of your sequences can be truncated or modified. To avoid this, seq_reformat contains a utility that can automatically rename your sequences into a form that will be machine-friendly, while making it easy to return to the human-friendly form.
 
 1) **Create a code list**: The first thing to do is to generate a list of names that will be used in place of the long original name of the sequences:
@@ -247,7 +247,7 @@ Only few programs support long sequence names, and sometimes, when going through
   $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -output \
       code_name > sproteases_large.code_name
 
-2) **Code your data** This will create a file where each original name is associated with a coded name (Cxxxx). You can then use this file to either code your dataset using the following command:
+2) **Code your data**: This will create a file where each original name is associated with a coded name (Cxxxx). You can then use this file to either code your dataset using the following command:
 
 ::
 
@@ -329,11 +329,8 @@ Let us consider the following file:
   CLUSTAL FORMAT
 
   B CTGAGA-AGCCGC---CTGAGG--TCG
-
   C TTAAGG-TCCAGA---TTGCGG--AGC
-
   D CTTCGT-AGTCGT---TTAAGA--ca-
-
   A CTCCGTgTCTAGGagtTTACGTggAGT
 
 
@@ -354,19 +351,13 @@ The conversion will proceed as follows:
 
 
  The gaps "-" will remain
-
-
  A and a will be turned into 1
-
-
  All the other symbols (#) will be turned into 0.
-
 
 -action +convert, indicates the actions that must be carried out on the alignment before it is output into cache.
 
 
 This command generates the following alignment (called a cache):
-
 
 ::
 
@@ -374,17 +365,13 @@ This command generates the following alignment (called a cache):
  en=27
 
   B 000101-100000---000100--000
-
   C 001100-000101---000000--100
-
   D 000000-100000---001101--01-
-
   A 000000000010010000100000100
 
 
 
 Other alternative are possible. For instance, the following command:
-
 
 ::
 
@@ -399,21 +386,13 @@ will produce the following file cache_seq
 ::
 
   >B
-
   000101100000000100000
-
   >C
-
   001100000101000000100
-
   >D
-
   00000010000000110101
-
   >A
-
   000000000010010000100000100
-
 
 
 where each residue has been replaced with a number according to what was specified by conv. Note that it is not necessary to replace EVERY residue with a code. For instance, the following file would also be suitable as a cache:
@@ -425,19 +404,12 @@ where each residue has been replaced with a number according to what was specifi
  =cache -action +convert 'Aa1' '.--'
 
   >B
-
   CTG1G11GCCGCCTG1GGTCG
-
   >C
-
   TT11GGTCC1G1TTGCGG1GC
-
   >D
-
   CTTCGT1GTCGTTT11G1c1
-
   >A
-
   CTCCGTgTCT1GG1gtTT1CGTgg1GT
 
 
@@ -454,36 +426,25 @@ The Library is a special format used by T-Coffee to declare special relationship
   4
 
   A 27 CTCCGTgTCTAGGagtTTACGTggAGT
-
   B 21 CTGAGAAGCCGCCTGAGGTCG
-
   C 21 TTAAGGTCCAGATTGCGGAGC
-
   D 20 CTTCGTAGTCGTTTAAGAca
 
   #1 1
-
    1 1 3
-
    4 4 5
-
   #3 3
-
    6 6 1
-
    9 9 4
-
+   
   ! CPU 240
-
   ! SEQ_1_TO_N
-
 
 
 sample_lib5.tc_lib declares that residue 1 of sequence 3 will be receive color 6, while residue 20 of sequence 4 will receive color 20. Note that the sequence number and the residue index are duplicated, owing to the recycling of this format from its original usage.
 
 
 It is also possible to use the BLOCK operator when defining the library (c.f. technical doc, library format). For instance:
-
 
 ::
 
@@ -492,29 +453,19 @@ It is also possible to use the BLOCK operator when defining the library (c.f. te
   4
 
   A 27 CTCCGTgTCTAGGagtTTACGTggAGT
-
   B 21 CTGAGAAGCCGCCTGAGGTCG
-
   C 21 TTAAGGTCCAGATTGCGGAGC
-
   D 20 CTTCGTAGTCGTTTAAGAca
 
   #1 1
-
    +BLOCK+ 10 1 1 3
-
    +BLOCK+ 5 15 15 5
-
   #3 3
-
    6 6 1
-
    9 9 4
 
   ! CPU 240
-
   ! SEQ_1_TO_N
-
 
 
 The number right after BLOCK indicates the block length (10). The two next numbers (1 1) indicate the position of the first element in the block. The last value is the color.
@@ -580,79 +531,15 @@ That is used to declare the color values:
 This indicates that the value 0 in the cache corresponds now to #FFAA00 in html, and in RGB 1, 0.2 and 0. The name of the file (seq_reformat.color) is defined in: programmes_define.h, COLOR_FILE. And can be changed before compilation. By default, the file is searched in the current directory
 
 
-Evaluating an alignment and producing a cache
-=============================================
-Evaluating an alignment with T-Coffee
--------------------------------------
-As suggested in a previous section, it is possible to evaluate the accuracy of any alignment using a T-Coffee library. The simplest way to do that is to compute a default library and evaluate the target alignment against this library:
-
-
-::
-
-  $$: t_coffee -infile sample_aln1.aln -mode evaluate
-
-
-
-This command will output a file named sample_aln1.score_asccii that can then be used to either evaluate the local accuracy of the alignment or automatically filter it using the seq_reformat utility.
-
-
-In some circumstances, you may also want to evaluate your alignment against a pre-computed library. This can be easily achieved:
-
-
-::
-
-  $$: t_coffee -infile sample_aln1.aln -out_lib sample_aln1.tc_lib -lib_only
-
-  $$: t_coffee -infile sample_aln1.aln -mode evaluate -lib sample_aln1.tc_lib
-
-
-
-When using this last command, the reference library will be the one provided by the user. The local score thus reported is the CORE index.
-
-
-Evaluating the level of conservation with a substitution matrix
----------------------------------------------------------------
-It is possible to use seq_reformat in a similar way to infer the local level of identity, either using an identity matrix or with any regular matrix, in which case, every residue with a substitution score higher than 0 is counted as an identity. This can be achieved as follows for identity measure:
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate idma\
- t -output score_ascii
-
-
-
-Or with the following for measuring similarity with a blosum62
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blos\
- um62mt -output score_ascii
-
-
-
-Finally, it is also possible to display in color the conservation levels:
-
-
-::
-
-   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blo\
- sum62mt -output score_html > x.html
-
-
-
 Selective reformatting
 ======================
 Removing gapped columns
 -----------------------
 You can remove all the columns containing a certain proportion of gaps. For instance:
 
-
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +rm_gap 50
-
 
 
 Will delete all the residues occurring in a column that contains 50% or more gaps (use 1 to delete residues from columns having 1 gap or more).
@@ -669,13 +556,9 @@ Consider the following alignment (sample_aln7.aln)
   sec, SCORE=0, Nseq=4, Len=28
 
   A CTCCGTGTCTAGGAGT-TTACGTGGAGT
-
   B CTGAGA----AGCCGCCTGAGGTCG---
-
   D CTTCGT----AGTCGT-TTAAGACA---
-
   C -TTAAGGTCC---AGATTGCGGAGC---
-
 
 
 and the following cache (sample_aln7.cache_aln):
@@ -687,13 +570,9 @@ and the following cache (sample_aln7.cache_aln):
   sec, SCORE=0, Nseq=4, Len=28
 
   A 3133212131022021-11032122021
-
   B 312020----023323312022132---
-
   D 311321----021321-11002030---
-
   C -110022133---020112322023---
-
 
 
 You can turn to lower case all the residues having a score between 1 and 2:
@@ -708,13 +587,9 @@ You can turn to lower case all the residues having a score between 1 and 2:
   sec, SCORE=0, Nseq=4, Len=28
 
   A CtCCgtgtCtAggAgt-ttACgtggAgt
-
   B CtgAgA----AgCCgCCtgAggtCg---
-
   D CttCgt----AgtCgt-ttAAgACA---
-
   C -ttAAggtCC---AgAttgCggAgC---
-
 
 
 ::
@@ -979,20 +854,7 @@ If you have extracted several blocks and you now want to glue them together, you
 
 .. note:: The alignments do not need to have the same number of sequences and the sequences do not need to come in the same order.
 
-Analyzing your Multiple Sequence Alignment
-==========================================
-Estimating the diversity in your alignment
-------------------------------------------
-It is easy to measure the level of diversity within your multiple sequence alignment. The following command:
 
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -output sim
-
-
-
-Will output all the pairwise identities, as well as the average level of identity between each sequence and the others. You can sort and grep in order to select the sequences you are interested in.
 
 
 Reducing and improving your dataset
@@ -1024,7 +886,6 @@ If you would rather extract a pourcentage than a number of sequences, for instan
  seq_N20 -output fasta_seq
 
 
-
 Extracting all the sequences less than X% identical
 ---------------------------------------------------
 Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the trim option. For instance, to generate a dataset where no pair of sequences has more than 50% identity, use:
@@ -1035,10 +896,6 @@ Removing the most similar sequences is often what people have in mind when they 
   $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
  seq_%%50_
 
-
-
-Speeding up the process
------------------------
 If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the _seq_ with _aln_
 
 
@@ -1052,8 +909,22 @@ Note the difference of speed between these two command and the previous one:
   t_coffee -other_pg seq_reformat -in kinases.fasta -action +trim _seq_%%50_
 
 
-
 Of course, using the MSA will mean that you rely on a more approximate estimation of sequence similarity.
+
+
+Identifying and removing outliers
+----------------------------------
+Sequences that are too distantly related from the rest of the set will sometimes have very negative effects on the overall alignment. To prevent this, it is advisable not to use them. This can be done when trimming the sequences, for instance:
+
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
+ seq_%%50_O40
+
+
+
+The symbol _O stands for Outliers. It will lead to the removal of all the sequences that have less than 40% average accuracy with all the other sequences in the dataset.
 
 
 Forcing specific sequences to be kept
@@ -1080,9 +951,7 @@ By default, string causes all the sequences whose name it matches to be kept. Yo
  seq_%%50_fCOMMENT '.apiens'
 
 
-
 Will cause all the sequences containing the regular expression '.apiens' in the comment to be kept. The _f symbol before COMMENT stands for '_field' If you want to make a selection on the sequences:
-
 
 ::
 
@@ -1098,22 +967,6 @@ You can also specify the sequences you want to keep. To do so, give a fasta file
 
   $$:t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_\
  small.fasta -action +trim _seq_%%40
-
-
-
-Identifying and removing outliers
-----------------------------------
-Sequences that are too distantly related from the rest of the set will sometimes have very negative effects on the overall alignment. To prevent this, it is advisable not to use them. This can be done when trimming the sequences, for instance:
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _\
- seq_%%50_O40
-
-
-
-The symbol _O stands for Outliers. It will lead to the removal of all the sequences that have less than 40% average accuracy with all the other sequences in the dataset.
 
 
 Chaining important sequences
@@ -1172,11 +1025,9 @@ If your sequences are DNA coding sequences, it is always safer to align them as 
  anslate -output fasta_seq
 
 
-
 Back-translation with the bona-fide DNA sequences
 -------------------------------------------------
 Once your sequences have been aligned, you may want to turn your protein alignment back into a DNA alignment, either to do phylogeny, or maybe in order to design PCR probes. To do so, use the following command:
-
 
 ::
 
@@ -1184,10 +1035,9 @@ Once your sequences have been aligned, you may want to turn your protein alignme
  ases_small.aln -action +thread_dna_on_prot_aln -output clustalw
 
 
-
 Finding the bona-fide sequences for the back-translation
 --------------------------------------------------------
-Use the online server Protogene, available from www.tcoffee.org.
+Use the online server Protogene, available from <http://www.tcoffee.org>.
 
 
 Guessing your back translation
@@ -1201,88 +1051,17 @@ Back-translating means turning a protein sequence into a DNA sequence. If you do
  ases_small.aln -action +thread_dna_on_prot_aln -output clustalw
 
 
-
 In this process, codons are chosen randomly. For instance, if an aminoacid has four codons, the back-translation process will randomly select one of these. If you need more sophisticated back-translations that take into account the codon bias, we suggest you use more specific tools like: alpha.dmi.unict.it/~ctnyu/bbocushelp.html
 
 
-Fetching a structure
-====================
-There are many reasons why you may need a structure. T-Coffee contains a powerful utility named extract_from_pdb that makes it possible to fetch the PDB coordinates of a structure or its FASTA sequence without requiring a local installation.
 
-
-By default, the option extract_from_pdb will start looking for the structure in the current directory; it will then look it up locally (PDB_DIR) and eventually try to fetch it from the web (via a wget to www.rcsb.org). All these settings can be customized using environment variables (see the last section).
-
-
-Fetching a PDB structure
-------------------------
-If you want to fetch the chain E of the PDB structure 1PPG, you can use:
-
-
-::
-
-  $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE
-
-
-
-Fetching the sequence of a PDB structure
-----------------------------------------
-To fetch the sequence, use:
-
-
-::
-
-  $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta
-
-
-
-Will fetch the fasta sequence.
-
-
-Adapting extract_from_pdb to your own environment
--------------------------------------------------
-If you have the PDB installed locally, simply set the variable PDB_DIR to the absolute location of the directory in which the PDB is installed. The PDB can either be installed in its divided form or in its full form.
-
-
-If the file you are looking for is neither in the current directory nor in the local PDB version, extract_from_pdb will try to fetch it from rcsb. If you do not want this to happen, you should either set the environment variable NO_REMOTE_PDB_DIR to 1 or use the -no_remote_pdb_dir flag:
-
-
-::
-
-  export NO_REMOTE_PDB_FILE=1
-
-  or
-
-  t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta -no_remote_pdb_file
-
-
-By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior): 
-
-
-::
-
-  export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
-  Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt
-
-and:
-
-
-::
-
-  export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
-  Found at: http://www.rcsb.org/pdb/rest/getUnreleased
-
-.. warning:: Since the file unreleased.xml is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
-	
-
-
-
-********************************************
+============================================
 Manipulating RNA Sequences With seq_reformat
-********************************************
+============================================
 Producing a Stockholm output: adding predicted secondary structures
-===================================================================
+-------------------------------------------------------------------
 Producing a consensus structure
--------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Given an RNA multiple sequence alignment, it is possible to compute the alifold (Vienna package) consensus secondary structure and output in in stockholm:
 
 
@@ -1294,7 +1073,7 @@ Given an RNA multiple sequence alignment, it is possible to compute the alifold 
 
 
 Adding a consensus structure to an alignment
---------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +add_alifol\
@@ -1303,7 +1082,7 @@ Adding a consensus structure to an alignment
 
 
 Adding a pre-computed consensus structure to an alignment
----------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The file sample_rnaseq2.aalifold contains the raw output of the alifold program captured as follows:
 
 
@@ -1336,12 +1115,12 @@ It is also possible to stack Stockholm formatted secondary structures:
 
 
 Analyzing an RNAalifold secondary structure prediction
-======================================================
+------------------------------------------------------
 the following commands can either be applied on a Stockholm or a standard MSA. In the second case (standard MSA) the secondary structure will be automatically re-computed by alifold.
 
 
 Analyzing matching columns
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 +alifold2cov_stat will estimate the number of pairs of columns that are perfect Watson and Crick, those that are neutral (including a GU) and those that include correlated mutations. The WCcomp are the compensated mutations maintaining WC base pairing
 
 
@@ -1363,7 +1142,7 @@ Other arguments can given, to display the list of paired positions and their sta
 
 
 Visualizing compensatory mutations
-----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The following command will output a color coded version of your alignment with matching columns indicated as follows:
 
 
@@ -1394,14 +1173,11 @@ It is possible to turn this output into a colored one using:
  alyze color_htm
 
 
-
-Handling gapped columns
------------------------
-by default gapped column are ignored but they can be included by adding the tag usegap
+.. warning:: Handling gapped columns: by default gapped column are ignored but they can be included by adding the tag -usegap
 
 
 Comparing alternative folds
-===========================
+---------------------------
 The folds associated with alternative alignments can be compared. This comparison involves counting how many identical pairs of residues are predicted on each sequence in one fold and in the other. The folds can either be provided via Stockholm alignments
 
 
@@ -1415,11 +1191,11 @@ The folds associated with alternative alignments can be compared. This compariso
 The top of the output (@@lines) summarizes the results that are displayed on the -in alignment. If the provided alignments do not have a fold, this fold will be estimated with alifold.
 
 
-*************************************************
+=================================================
 Phylogenetic Trees Manipulation With seq_reformat
-*************************************************
+=================================================
 Producing phylogenetic trees
-============================
+----------------------------
 Seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering:
 
 
@@ -1464,7 +1240,7 @@ Bootstrap facilities will also be added at some point ... For now we recommend y
 
 
 Comparing two phylogenetic trees
-================================
+--------------------------------
 Consider the following file (sample_tree1.dnd)
 
 
@@ -1473,18 +1249,14 @@ Consider the following file (sample_tree1.dnd)
   (( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
 
 
-
 and the file sample_tree3.dnd.
-
 
 ::
 
   (( E:0.50000, C:0.50000):0.00000,( A:0.00500, B:0.00500):0.99000, D:0.50000);
 
 
-
 You can compare them using:
-
 
 ::
 
@@ -1492,43 +1264,24 @@ You can compare them using:
  put newick
 
   tree_cpm|T: 75 W: 71.43 L: 50.50
-
   tree_cpm|8 Nodes in T1 with 5 Sequences
-
   tree_cmp|T: ratio of identical nodes
-
   tree_cmp|W: ratio of identical nodes weighted with the min Nseq below node
-
   tree_cmp|L: average branch length similarity
 
   (( A:1.00000, C:1.00000):-2.00000,( D:1.00000, E:1.00000):-2.00000, B:1.00000);
-
 
 
 Please consider the following aspects when exploiting these results:
 
 
 -The comparison is made on the unrooted trees
-
-
 -T: Fraction of the branches conserved between the two trees. This is obtained by considering the split induced by each branch and by checking whether that split is found in both trees
-
-
 -W: Fraction of the branches conserved between the two trees. Each branch is weighted with MIN the minimum number of leaf on its left or right (Number leaf left, Number leaf Right)
-
-
 -L: Fraction of branch length difference between the two considered trees.
-
-
 -The last portion of the output contains a tree where distances have been replaced by the number of leaf under the considered node
-
-
 -Positive values (i.e. 2, 5) indicate a node common to both trees and correspond to MIN.
-
-
 -Negative values indicate a node found in tree1 but not in tree2
-
-
 -The higher this value, the deeper the node.
 
 
@@ -1540,9 +1293,8 @@ You can extract this tree for further usage by typing:
    cat outfile | grep -v 'tree_cmp'
 
 
-
 Scanning phylogenetic trees
-===========================
+---------------------------
 It is possible to scan an alignment and locally measure the similarity between an estimated local tree and some reference tree provided from an external source (or computed on the fly) using the following command:
 
 
@@ -1560,12 +1312,9 @@ For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be
 
   P: <position> <block start> <blck_end> <block score> <block Length>
 
-  
-
-
-
+ 
 Pruning phylogenetic trees
-==========================
+--------------------------
 Pruning removes leaves from an existing tree and recomputes distances so that no information is lost
 
 
@@ -1584,19 +1333,12 @@ And the file sample_seq8.seq
 ::
 
   >A
-
   >B
-
   >C
-
   >D
 
 
-
-::
-
-  Note: Sample_seq8 is merely a FASTA file where sequences can be omitted, but  \
-  you can also leave them, at your entire convenience.
+.. note:: Sample_seq8 is merely a FASTA file where sequences can be omitted, but you can also leave them, at your entire convenience.
 
 
 ::
@@ -1605,125 +1347,6 @@ And the file sample_seq8.seq
  tput newick
 
   (( A:0.50000, C:0.50000):0.00000, B:0.50000, D:0.99500);
-
-
-********************************************
-Trees Based on Protein 3D Structures: T-RMSD 
-********************************************
-
-*Tree estimation procedure based on the comparison of internal distances*
-
-3DTree makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. 3DTree also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
-
-Generating a Tree based on distances
-=====================================
-
-This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored
-
-
-Input:
-
-* ``aln``: Multiple Sequence Alignment in FASTA, MSA or MSF
-* ``template``: FASTA name list with templates: ``>name _P_ template``
-
-:: 
-
-  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replic\
- ates 100  +evaluate3D distances +tree2bs first -output newick -out tree.dnd
-
-
-Outputs: 
-
-* ``tree.dnd``: Tree in newick format with bootstrap support   
-
-It is possible to control default parameters using the following extended command line
-
-::
-
-  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replic\
- ates 100 gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick\
-  -out tree.dnd
-
-.. warning: sequences without 3D structure will be excluded from the analysis and from the final output
-
-
-Generating a Tree based on contact conservation
-================================================
-
-This option makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate nj trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cut-off of 1.2 A between VdW radius and ignoring the 3 closests neighbors. Columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA).
-
-:: 
-
-  t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tre\
- e replicates 100  +evaluate3D contacts +tree2bs first -output newick -out tree.d\
- nd
-
-
-Outputs: 
-
-* ``tree.dnd``: Tree in newick format  
-
-It is possible to control default parameters using the following extended command line:
-
-::
-
-  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mo\
- de nj  +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
-
-.. warning: the procedure requires at least 1 sequence with a known 3D structure or with contact information.
-
-
-
-Visulizing 3D Conservation
-================================================
-
-This same procedure can be used to visualize either intra-molecular distance conservation or contact conservation
-
-::
-
-  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -outp\
- ut score_html 
-  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -outp\
- ut score_ascii
-  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -outp\
- ut score_raw
-
-Outputs:
-* ``score_raw``: Tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
-
-Identification of positions 
-=============================
-
-If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificty, etc...), it is possible to estimate which columns yield the best support using the following command,
-
-Input:
-* ``group.fasta``: A Fasta formatted list of the sequences that form the group whose support you want to analyze
-
-::
-
- seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates columns\
-   +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <al\
- n.html>
-
-Output
-* ``aln.score_html`` Colored version of your MSA indicating the sequences that best contribute to your clustering.
-
-
-Evaluating Clustering capacities
-=================================
-
-If you want to check the capacity of an algorithm to bring related sequences within mono-phyletic groups, you should name your sequences according to the group they belong to (XXXX_1, YYYYY_1, ZZZZ_2, KKKK_2, for members of _1 and _2, etc) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group:
-
-The tree can be pre-computed
-:: 
-
-  seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
-
-Or it can be computed on the fly
-:: 
-
-  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100  +evaluate\
- 3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
 
 *************************************
@@ -3304,6 +2927,125 @@ You simply need to cut and paste this library in a file and use this file as a l
 
   $$: t_coffee -infile sproteases_small.aln -lib charge_relay_lib.tc_lib -score \
  -output html
+
+
+********************************************
+Trees Based on Protein 3D Structures: T-RMSD 
+********************************************
+
+*Tree estimation procedure based on the comparison of internal distances*
+
+3DTree makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. 3DTree also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
+
+Generating a Tree based on distances
+=====================================
+
+This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored
+
+
+Input:
+
+* ``aln``: Multiple Sequence Alignment in FASTA, MSA or MSF
+* ``template``: FASTA name list with templates: ``>name _P_ template``
+
+:: 
+
+  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replic\
+ ates 100  +evaluate3D distances +tree2bs first -output newick -out tree.dnd
+
+
+Outputs: 
+
+* ``tree.dnd``: Tree in newick format with bootstrap support   
+
+It is possible to control default parameters using the following extended command line
+
+::
+
+  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replic\
+ ates 100 gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick\
+  -out tree.dnd
+
+.. warning: sequences without 3D structure will be excluded from the analysis and from the final output
+
+
+Generating a Tree based on contact conservation
+================================================
+
+This option makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate nj trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cut-off of 1.2 A between VdW radius and ignoring the 3 closests neighbors. Columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA).
+
+:: 
+
+  t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tre\
+ e replicates 100  +evaluate3D contacts +tree2bs first -output newick -out tree.d\
+ nd
+
+
+Outputs: 
+
+* ``tree.dnd``: Tree in newick format  
+
+It is possible to control default parameters using the following extended command line:
+
+::
+
+  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mo\
+ de nj  +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
+
+.. warning: the procedure requires at least 1 sequence with a known 3D structure or with contact information.
+
+
+
+Visulizing 3D Conservation
+================================================
+
+This same procedure can be used to visualize either intra-molecular distance conservation or contact conservation
+
+::
+
+  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -outp\
+ ut score_html 
+  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -outp\
+ ut score_ascii
+  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -outp\
+ ut score_raw
+
+Outputs:
+* ``score_raw``: Tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
+
+Identification of positions 
+=============================
+
+If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificty, etc...), it is possible to estimate which columns yield the best support using the following command,
+
+Input:
+* ``group.fasta``: A Fasta formatted list of the sequences that form the group whose support you want to analyze
+
+::
+
+ seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates columns\
+   +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <al\
+ n.html>
+
+Output
+* ``aln.score_html`` Colored version of your MSA indicating the sequences that best contribute to your clustering.
+
+
+Evaluating Clustering capacities
+=================================
+
+If you want to check the capacity of an algorithm to bring related sequences within mono-phyletic groups, you should name your sequences according to the group they belong to (XXXX_1, YYYYY_1, ZZZZ_2, KKKK_2, for members of _1 and _2, etc) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group:
+
+The tree can be pre-computed
+:: 
+
+  seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
+
+Or it can be computed on the fly
+:: 
+
+  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100  +evaluate\
+ 3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
 
 
