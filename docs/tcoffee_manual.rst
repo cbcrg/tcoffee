@@ -153,7 +153,7 @@ Modification options
 In order to perform different modifications on your data, the seq_reformat utility has to be followed by the flag -action, several examples will be given in the next section. The selective modification of residues/sequences/columns is achieved using the flag -action (within the seq_reformat tool) and one or several modifiers listed here (this list is not exhaustive):
 
 ::
-  
+
 Options:
   - **+upper**: to uppercase your residues (seen previously)
   - **+lower**: to lowercase your residues (seen previously)
@@ -165,6 +165,7 @@ Options:
   - **+grep**: to select a given string of character
   - **+rm_gap**: to remove columns containing gaps
   - etc...
+  
   
 Using a "cache" file
 --------------------
