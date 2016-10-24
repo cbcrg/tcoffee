@@ -5,7 +5,7 @@ T-Coffee Main Documentation
 Before You Start...
 *******************
 
-.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. For now, the example files can be found here: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. You can also use examples associated with their corresponding command lines from the section T-Coffee Tutorial published in Nature Protocols (2011). This message will be removed as soon as the maintenance is over. 
+.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. For now, the example files can be found here on github: `Example files <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. You can also use examples associated with their corresponding command lines from the section T-Coffee Tutorial published in Nature Protocols (2011). This message will be removed as soon as the maintenance is over. 
 
 
 Foreword
@@ -13,7 +13,7 @@ Foreword
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more complicated ones. We have tried to put as many of these functionalities on the webserver but not all are available except by using "command lines", also, **if you need to do something sophisticated and/or highly reproducible, the command line is the only way**. In the course of this manual, we expect you to use a Unix-like command line shell. All the example files can be found here: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>.  If you don't want to bother with command line, try using the online tcoffee webserver at: <http://www.tcoffee.org> or <http://tcoffee.crg.cat/apps/tcoffee/index.html>.
+.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more complicated ones. We have tried to put as many of these functionalities on the webserver but not all are available except by using "command lines", also, **if you need to do something sophisticated and/or highly reproducible, the command line is the only way**. In the course of this manual, we expect you to use a Unix-like command line shell. All the example files can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_.  If you don't want to bother with command line, try using the online tcoffee webserver at: <http://www.tcoffee.org> or <http://tcoffee.crg.cat/apps/tcoffee/index.html>.
 
 
 Prerequisite for using T-Coffee
@@ -21,8 +21,8 @@ Prerequisite for using T-Coffee
 This manual relies on the assumption that you have installed T-Coffee, version 6.18 or higher. All the relevant information for installing T-Coffee is contained in the previous section **T-Coffee Installation**. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on Windows except by using Cygwin, a freeware open source allowing to run a Unix-like command line on Windows (<https://www.cygwin.com/>). Cygwin is free of charge and easy to install, yet, as the first installation requires downloading substantial amounts of data, make sure you have access to a broad-band connection. A better option and a more stable one would be to install a Unix-like virtualbox on your computer using Windows.
 
 
-Trying T-Coffee...it's not painful!
-===================================
+Have a try...it's not painful!
+==============================
 We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available at: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. It contains all you need to run ALL the examples provided in this manual.
 
 
@@ -37,7 +37,7 @@ What is T-Coffee?
 
 What does it do?
 ----------------
-T-Coffee is mainly a Multiple Sequence Alignment program: given a set of sequences previously gathered using database search programs like BLAST, FASTA or Smith and Waterman, T-Coffee will produce a Multiple Sequence Alignment (MSA). To use T-Coffee you must already have your sequences ready. T-Coffee is also bundled with a collection of tools (usually called using the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
+T-Coffee is mainly a Multiple Sequence Alignment program: given a set of sequences previously gathered using database search programs like BLAST, FASTA or Smith and Waterman, T-Coffee will produce a Multiple Sequence Alignment (MSA). To use T-Coffee you must already have your sequences ready. T-Coffee is also bundled with a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
 
 
 What can it align?
@@ -49,7 +49,7 @@ T-Coffee will align nucleic acid (DNA and RNA) and protein sequences alike. T-Co
 
 How can I use it?
 -----------------
-T-Coffee is not an interactive program. It runs from your Unix or Linux command line and you must provide it with the correct parameters and syntax. If you do not like typing commands, you can still use the T-Coffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>.
+T-Coffee is not an interactive program. It runs from your Unix or Linux command line and you must provide it with the correct parameters and syntax. If you do not like typing commands, you can still use the T-Coffee webserver `here <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_.
 
 .. Tip:: Installing and using T-Coffee requires a minimum acquaintance with the Linux/Unix operating system. If you feel this is beyond your computer skills, we suggest you use one of the available online servers.
 
@@ -61,29 +61,13 @@ Yes, at <http://www.tcoffee.org> or <http://tcoffee.crg.cat/apps/tcoffee/index.h
 
 Is T-Coffee different from ClustalW?
 ------------------------------------
-According to several benchmarks, T-Coffee is on overall more accurate than ClustalW, but this increased accuracy comes at a price: **T-Coffee (default mode) is slower than ClustalW** (about N times for N Sequences). If you are familiar with ClustalW or if you run a ClustalW server, you will find that we have made some efforts to ensure as much compatibility as possible between ClustalW and T-Coffee. Whenever it was relevant, we have kept the flag names and the flag syntax of ClustalW. Yet, you will find that T-Coffee also has many extra possibilities...
-
-If you want to align closely related sequences, **T-Coffee can also be used in a fast mode ,much faster than ClustalW, and about as accurate** (command 1). This mode works by only considering the best diagonals between two sequences, and by default all the diagonals with substitution score >0 are considered, but you can lower this to reduce the running time (command 2). That will only consider the top 10 diagonals. This will be very useful if you have long and very similar sequences to align (DNA for instance).
-
-::
-
-   Command 1:
-   $$: t_coffee sample_seq1.fasta -mode quickaln
-   
-   Command 2:
-   $$: t_coffee sample_seq1.fasta -mode quickaln -ndiag=10
+According to several benchmarks, T-Coffee is on overall more accurate than ClustalW, but this increased accuracy comes at a price: **T-Coffee (default mode) is slower than ClustalW** (about N times for N Sequences). Still, if you want to align closely related sequences, **T-Coffee can also be used in a fast mode ,much faster than ClustalW, and about as accurate** (cf. section **Building Multiple Sequence Alignment**). If you are familiar with ClustalW or if you run a ClustalW server, you will find that we have made some efforts to ensure as much compatibility as possible between ClustalW and T-Coffee. Whenever it was relevant, we have kept the flag names and the flag syntax of ClustalW. Yet, you will find that T-Coffee also has many extra possibilities...
 
 
 Is T-Coffee very accurate?
 --------------------------
-T-Coffee can combines (many) methods, and can be made as accurate (and hopefully more) as the methods it combines. This "accurate" mode is very slow but also very accurate; on average this mode is about 10 % more accurate than normal aligners on sequences less than 30% similar. So if you need a very accurate alignment (and you have the full package installed with SOAP), just run:
+T-Coffee belongs to the class of consistency-based aligners which currently correspond to the most accurate algorithms available (e.g. ProbCons, MSAprobs...). In addition, T-Coffee can combines (many) methods, and can be made as accurate (and hopefully more) as the methods it combines. For instance, the "accurate" mode of T-Coffee is very slow but also very accurate; on average this mode is about 10 % more accurate than normal aligners on sequences less than 30% similar. So if you need a very accurate alignment go to section **Building Multiple Sequence Alignment**.
 
-::
-
-   $$: t_coffee sample_seq1.fasta -mode accurate
-
-
-.. warning:: If you cannot run this job, go to the section of the **T-Coffee Installation** (T-Coffee and BLAST); you don't necessary need to install BLAST locally but you must have access to a remote server (EBI or NCBI).
 
 
 What T-Coffee can and cannot do for you ...
@@ -120,11 +104,11 @@ T-Coffee is not just a simple aligner program, it comes with multiple tools and 
 And probably many more options we will discover together all along this manual !
 
 
-How does T-Coffee alignment works
-=================================
-If you only want to make a standard multiple alignments, you may skip these explanations. But if you want to do more sophisticated things, these few indications may help before you start reading the doc and the papers.
+How does T-Coffee alignment works?
+==================================
+If you only want to make a standard Multiple Sequence Alignment, you may skip these explanations. But if you want to do more sophisticated things, these few indications may help before you start reading the documentation and the different articles. 
 
-When you run T-Coffee, the first thing it does is to compute a library. The library is a list of pairs of residues that could be aligned. It is like a christmas list: you can ask anything you fancy, but it is down to Santa Claus to assemble a collection of toys that won't get him stuck at the airport, while going through the metal detector.
+When you run T-Coffee, the first thing it does is to compute a library. The library is a list of pairs of residues that could be aligned; it is like a christmas list: you can ask anything you fancy, but it is down to Santa Claus to assemble a collection of toys that won't get him stuck at the airport, while going through the metal detector. 
 
 Given a standard library, it is not possible to have all the residues aligned at the same time because all the lines of the library may not agree. For instance:
 
@@ -152,55 +136,54 @@ Preparing Your Data: Reformatting, Trimming, and more...
 
 The seq_reformat tool: introduction
 ===================================
-Nothing is more frustrating than downloading important data and realizing you need to format it **before** using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results. T-Coffee comes along with a very powerful reformatting utility named seq_reformat. You can use seq_reformat by invoking the t_coffee shell:
+Nothing is more frustrating than downloading important data and realizing you need to format it **before** using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results, especially a very powerful reformatting utility named **seq_reformat**. You can use seq_reformat by invoking the t_coffee shell:
 
 ::
 
   $$: t_coffee -other_pg seq_reformat
 
 
-This will output the online flag usage of seq_reformat meaning a complete list of things seq_reformat can do for you. The seq_reformat is a reformatting utility so it recognizes automatically the most common formats (FASTA, Swiss-Prot,ClustalW, MSF, Phylip...). It reads in via the -in and -in2 flags and outputs in whatever specified format via the -output flag. In the meantime, you can use the flag '-action' to modify your data, using any of the flag. In this section we give you quite a lot of different examples of you can do with **"-seq_reformat"**.
+This will output the online flag usage of seq_reformat meaning a complete list of things seq_reformat can do for you. The seq_reformat is a reformatting utility so it recognizes automatically the most common formats (FASTA, Swiss-Prot,ClustalW, MSF, Phylip...). It reads in via the -in and -in2 flags and outputs in whatever specified format via the -output flag. In the meantime, you can use the flag '-action' to perform a wide range of modification on your data. In this section we give you quite a lot of different examples of you can do with **"-other_pg seq_reformat"**.
 
 .. danger:: After the flag -other_pg, the common T-Coffee flags are not recognized anymore; it is like if you were using a different program.
+
 
 Modifying the format of your data
 =================================
 Changing the sequence format
 ----------------------------
-Sometimes it may be necessary to change from one format to another, for instance when using another software which recognize only a given format. T-Coffee recognize most common alignment formats and you can find all input or output format recognized by T-Coffee by simply typing:
+Sometimes it may be necessary to change from one format to another, for instance when using another software which recognize only a given format. T-Coffee recognizes most common alignment formats and you can find all input or output format recognized by T-Coffee by simply typing:
 
 ::
 
   $$: t_coffee -other_pg seq_reformat 
   
   
-It is possible to reformat unaligned or aligned sequences alike although changing the alignment format is probably more interesting in order to use other applications; unaligned sequences format flags are generally preceded by the suffix "_seq" and aligned sequences flags by the suffix "_aln". This also allows you to reformat an alignment into unaligned sequences by removing the gaps. Here are some examples on how to change the format of your data:
+It is possible to reformat unaligned or aligned sequences alike although changing the alignment format is probably more interesting in order to use other applications; unaligned sequences format flags are generally preceded by the suffix "_seq" and aligned sequences flags by the suffix "_aln". This also allows you to transform any alignment into unaligned sequences by removing the gaps. Here are some examples on how to change the format of your data:
 
 ::
 
-  For unaligned sequences (e.g. FASTA to PIR)
+  For unaligned sequences (e.g. FASTA to PIR):
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.fa -output pir_seq >\
       sproteases_small.fasta_aln
   
-  For alignements (e.g. ClustalW to FASTA and ClustalW to MSF)
+  For alignements (e.g. ClustalW to MSF):
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_aln >\
       sproteases_small.fasta_aln
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output msf_aln >\ 
-      sproteases_small.msf
       
-  From aligned to unaligned sequences 
+  From aligned to unaligned sequences:
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_seq >\
       sproteases_small.fa
 
 
 .. Warning:: Format recognition is not 100% full proof; occasionally you will have to inform the program about the nature of the file you are trying to reformat with " -input msf_aln -output fasta_aln" for instance.
 
+
 Changing the case
 -----------------
 Changing the case of your sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you need to change the case of your sequences, you can use more sophisticated functions embedded in seq_reformat. We call these modifiers, and they are accessed via the -action flag. For instance, to write our sequences in lower case:
+If you need to change the case of your sequences, you can use more sophisticated functions embedded in seq_reformat. We call these modifiers, and they are accessed via the **"-action"** flag. For instance, to write our sequences in lower case:
 
 ::
 
@@ -213,7 +196,7 @@ If you need to change the case of your sequences, you can use more sophisticated
 
 Changing the case of specific residues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you want to change the case of a specific residue, you can use the flag: +edit_residue <sequence> <residue #> <lower|upper|symbol>. If you have more than one residue to modify, wrtie all the coordinates in a file (one coordinate per line) as spans are not yet supported; then give the file to T-Coffee
+If you want to change the case of a specific residue, you can use the flag: +edit_residue <sequence> <residue #> <lower|upper|symbol>. If you have more than one residue to modify, write all the coordinates in a text file (one coordinate per line) as spans are not yet supported; then give the file to T-Coffee
 
 ::
 
@@ -222,6 +205,8 @@ If you want to change the case of a specific residue, you can use the flag: +edi
       
   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +upper \ 
       +edit_residue <your file containing coordinates>
+
+.. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
 
 Changing the case depending on the score (under maintenance)
@@ -234,8 +219,8 @@ If you want to change the case depending on the score, you must either evaluate 
       +evaluate idmat +lower '[5-9]'
 
 
-Protecting important sequence names
------------------------------------
+Keeping/Protecting your sequence names
+--------------------------------------
 Only few programs support long sequence names, and sometimes, when going through some pipeline the names of your sequences can be truncated or modified. To avoid this, seq_reformat contains a utility that can automatically rename your sequences into a form that will be machine-friendly, while making it easy to return to the human-friendly form.
 
 1) **Create a code list**: The first thing to do is to generate a list of names that will be used in place of the long original name of the sequences:
@@ -2324,11 +2309,8 @@ The first step is to fill up a template file that contains an explicit declarati
 ::
 
   >sp|P08246|ELNE_HUMAN _P_ 1PPGE
-
   >sp|P20160|CAP7_HUMAN _P_ 1AE5
-
   >sp|P00757|KLKB4_MOUSE _P_ 1SGFX
-
   >sp|Q6H321|KLK2_HORSE _P_ 1GVZA
 
 
