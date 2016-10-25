@@ -13,7 +13,7 @@ Foreword
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more complicated ones. We have tried to put as many of these functionalities on the webserver but not all are available except by using "command lines", also, **if you need to do something sophisticated and/or highly reproducible, the command line is the only way**. In the course of this manual, we expect you to use a Unix-like command line shell. All the example files can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_.  If you don't want to bother with command line, try using the online tcoffee webserver at: <http://www.tcoffee.org> or <http://tcoffee.crg.cat/apps/tcoffee/index.html>.
+.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more complicated ones. We have tried to put as many of these functionalities on the webserver but not all are available except by using "command lines", also, **if you need to do something sophisticated and/or highly reproducible, the command line is the only way**. In the course of this manual, we expect you to use a Unix-like command line shell. All the example files can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. If you don't want to bother with command line, try using our online latest `tcoffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or via the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_.
 
 
 Prerequisite for using T-Coffee
@@ -23,7 +23,7 @@ This manual relies on the assumption that you have installed T-Coffee, version 6
 
 Have a try...it's not painful!
 ==============================
-We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available on our github repository :`example files <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. It contains everything you need to run ALL the examples provided in this manual.
+We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. It contains everything you need to run ALL the examples provided in this manual.
 
 
 
