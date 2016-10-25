@@ -320,7 +320,7 @@ If you want to color a specific residue/nucleotide, you can use the flag **+colo
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +color_residue \
-  hmgb_chite 10 1 -output color_html > color.html
+      hmgb_chite 10 1 -output color_html > color.html
 
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
@@ -340,7 +340,7 @@ You can also use the boxshade scoring scheme:
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -\
- action +3evaluate boxshade -output color_html > color.html
+      action +3evaluate boxshade -output color_html > color.html
 
 
 Colouring/Editing residues in an alignment using a Cache
@@ -371,8 +371,8 @@ The command
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=clustalw_aln -\
- out=cache.aln -action +convert 'Aa1' '.--' +convert '#0'
+  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=clustalw_aln \
+      -out=cache.aln -action +convert 'Aa1' '.--' +convert '#0'
 
 
 
@@ -393,27 +393,21 @@ This command generates the following alignment (called a cache):
 
 ::
 
-  CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, L\
- en=27
-
+  CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, Len=27
   B 000101-100000---000100--000
   C 001100-000101---000000--100
   D 000000-100000---001101--01-
   A 000000000010010000100000100
 
-
-
 Other alternative are possible. For instance, the following command:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out\
- =cache.seq -action +convert 'Aa1' '.--' +convert '#0'
-
+  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out=cache.seq \
+      -action +convert 'Aa1' '.--' +convert '#0'
 
 
 will produce the following file cache_seq
-
 
 ::
 
@@ -432,8 +426,8 @@ where each residue has been replaced with a number according to what was specifi
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out\
- =cache -action +convert 'Aa1' '.--'
+  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out=cache \
+      -action +convert 'Aa1' '.--'
 
   >B
   CTG1G11GCCGCCTG1GGTCG
@@ -506,22 +500,17 @@ Coloring an alignment using a cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you have a cache alignment or a cache library, you can use it to color your alignment and either make a post script, html or PDF output. For instance, if you use the file cache.seq:
 
-
 ::
 
-   $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6\
- .cache -struc_in_f number_fasta -output=color_html -out=x.html
-
-
+   $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6.cache \
+       -struc_in_f number_fasta -output=color_html -out=x.html
 
 This will produce a colored version readable with any standard web browser, while:
 
-
 ::
 
-   $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6\
- .cache -struc_in_f number_fasta -output=color_pdf -out=x.pdf
-
+   $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6.cache \
+       -struc_in_f number_fasta -output=color_pdf -out=x.pdf
 
 
 This will produce a colored version readable with acrobat reader.
@@ -531,11 +520,10 @@ This will produce a colored version readable with acrobat reader.
 
 You can also use a cache library like the one shown above (sample_lib5.tc_lib):
 
-
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_lib5.\
- tc_lib -output=color_html -out=x.html
+  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_lib5.tc_lib \
+      -output=color_html -out=x.html
  
 
 Modifying the data itself...
@@ -544,11 +532,11 @@ Modifiying sequences in your dataset
 ------------------------------------
 Converting residues
 ^^^^^^^^^^^^^^^^^^^
-It is possible for instance to selectively convert all  given characters in a sequence (residues or nucleic acids alike) into another one, for example all G's having a score between 1 and 2 by using the command line:
+It is possible for instance to selectively convert all given characters in a sequence (residues or nucleic acids alike) into another one, for example all G's having a score between 1 and 2 by using the command line:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache_aln\ 
+  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache_aln \ 
       -struc_in_f number_aln -action +convert '[1-2]' CX
  
 
@@ -561,20 +549,23 @@ You can extract any sequence by requesting a specific pattern to be found either
   To keep sequences containing HUMAN in the name:
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME \
       KEEP HUMAN -output clustalw
+
   To remove sequences containing HUMAN in the name:
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME \
       REMOVE HUMAN -output clustalw
+
   To keep sequence which contain sapiens in the comment:
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep COMMENT \
       KEEP sapiens -output clustalw
+ 
   To remove sequences containing the pattern [ILM]K:
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep SEQ\
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep SEQ \
   REMOVE '[ILM]K' -output clustalw
 
 
-.. important:: you should know that the pattern can be any perl legal regular expression (<http://www.comp.leeds.ac.uk/Perl/matching.html> for some background on regular expressions). 
+.. important:: you should know that the pattern can be any perl legal regular expression, you can visit this  `page <http://www.comp.leeds.ac.uk/Perl/matching.html>`_ for some background on regular expressions. 
 
-.. caution:: This option is case sensitive (Human, HUMAN and hUman will not yield the same results). Careful about the case !!!
+.. caution:: This option is case sensitive (Human, HUMAN and hUman will not yield the same results). Be careful !!!
 
 
 Extracting/Removing sequences by names
@@ -626,7 +617,7 @@ Removing two sequences. If you want to remove several sequences, use rm_seq inst
 
 Extracting the Y most informative sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Large datasets are problematic because they can be difficult to align and analyze. The problem is that when there are too many sequences, MSA programs tend to become very slow and inaccurate. Furthermore, you will find that large datasets are difficult to display and analyze. In short, the best size for an MSA dataset is between 20 to 40 sequences; this way you have enough sequences to see the effect of evolution, but at the same time the dataset is small enough so that you can visualize your alignment and recompute it as many times as needed. To be informative, a sequence must contain information the other sequences do not contain. The Y most informative sequences are the Y (number or pourcentage) sequences that are as different as possible to one another, given the initial dataset. To do so, you can use the flag +trim followed by your criteria for extracting the sequences (nXX for a number of sequences and NXX for a pourcentage of sequences). The following commands will extract the 10 most informative sequences (command 1) or the 20% of most informative sequences (command 2):
+Large datasets are problematic because they can be difficult to align and analyze. The problem is that when there are too many sequences, MSA programs tend to become very slow and inaccurate. Furthermore, you will find that large datasets are difficult to display and analyze. In short, the best size for an MSA dataset is between 20 to 40 sequences; this way you have enough sequences to see the effect of evolution, but at the same time the dataset is small enough so that you can visualize your alignment and recompute it as many times as needed. To be informative, a sequence must contain information the other sequences do not contain. The Y most informative sequences are the Y (number or pourcentage) sequences that are as different as possible to one another, given the initial dataset. To do so, you can use the flag **+trim** followed by your criteria for extracting the sequences (nXX for a number of sequences and NXX for a pourcentage of sequences). The following commands will extract the 10 most informative sequences (command 1) or the 20% of most informative sequences (command 2):
 
 ::
 
