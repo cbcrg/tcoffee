@@ -56,7 +56,7 @@ T-Coffee is not an interactive program. It runs from your Unix or Linux command 
 
 Is there an online webserver?
 -----------------------------
-Yes, at `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_ which contains the all the necessary links to our latest  `webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ !
+Yes, at `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_ which contains all the necessary links to our latest  `webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ !
 
 
 Is T-Coffee different from ClustalW?
@@ -90,7 +90,7 @@ T-Coffee is not only just an aligner program, it comes with multiple tools and t
 
 **One of the most important improvement of T-Coffee is to let you combine sequences and structures**, so that your alignments are of higher quality. You need to have the SAP package installed to fully benefit of this facility (or to use another structural alignment method). 
 
-.. warning:: In this particular T-Coffee mode, operations are carried out using the function "wget". If "wget" is not installed on your system, you can get it for free from  `wget <http://www.wget.org>`_. To make sure wget is installed on your system, type **which wget**.
+.. warning:: In this particular T-Coffee mode, operations are carried out using the function "wget". If "wget" is not installed on your system, you can get it for free from  `wget download <http://www.wget.org>`_. To make sure wget is installed on your system, type **which wget**.
 
 **T-Coffee allows you to extract a serie of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. 
 
