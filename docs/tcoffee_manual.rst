@@ -137,7 +137,7 @@ The reformatting utility: seq_reformat
 ======================================
 General introduction
 --------------------
-Nothing is more frustrating than downloading important data and realizing you need to format it **before** using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results, especially a very powerful reformatting utility named **seq_reformat**. You can use seq_reformat by invoking the t_coffee shell:
+Nothing is more frustrating than downloading important data and realizing you need to format it before using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results, especially a very powerful reformatting utility named **seq_reformat**. You can use seq_reformat by invoking the t_coffee shell:
 
 ::
 
@@ -192,7 +192,7 @@ Modifying the format of your data
 =================================
 Changing the sequence format
 ----------------------------
-Sometimes it may be necessary to change from one format to another, for instance when using another software which recognize only a given format. T-Coffee recognizes most common alignment formats and you can find all input or output format recognized by T-Coffee by simply typing:
+Sometimes it may be necessary to change from one format to another, for instance when using another software which recognize only a given format. T-Coffee recognizes most common alignment formats and you can find the list of all input or output format recognized by simply typing:
 
 ::
 
@@ -221,7 +221,7 @@ Changing the case
 -----------------
 Changing the case of your sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you need to change the case of your sequences, you can use different modifiers embedded in seq_reformat. They are accessed via the **"-action"** flag. For instance, to write our sequences in lower case:
+If you need to change the case of your sequences, you can use different modifiers embedded in seq_reformat. They are accessed via the **-action** flag. For instance, to write your sequences in lower case:
 
 ::
 
@@ -292,39 +292,50 @@ Only few programs support long sequence names, and sometimes, when going through
 
 Colouring/Editing residues in an alignment
 ------------------------------------------
-Coloring specific types of residues
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-You can color all the residues of your sequences on the fly. For instance, the following command will color all the A's in color 0 (blue).
+Changing the default colors
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Colors are hard coded in the program, but if you wish, you can change them by simply creating a file named ``seq_reformat.color`` that is used to declare the color values. The name of the file (seq_reformat.color) is defined in programmes_define.h, COLOR_FILE and can be changed before compilation. By default, the file is searched in the current directory. For example, the following line written in ``seq_reformat.color`` indicates that the value 0 in the cache corresponds now to #FFAA00 in html, and in RGB 1, 0.2 and 0. 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln \
-      -action +3convert a0 -output color_html > colored.html
+  0 #FFAA00 1 0.2 0
+
+
+Coloring specific types of residues/nucleic acids
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+You can color all the residues of your sequences on-the-fly; for instance, the following command line will color all the a's in color 0 (blue):
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +3convert a0 \
+      -output color_html > colored.html
+
+.. warning:: This option is case sensitive so the case of the residues or nucleotides should be the same in the command line (in this command line, only a lower case will be colored). 
 
 
 Coloring a specific residue of a specific sequence
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you want to color a specific residue, you can use the flag: +color_residue <sequence> <residue #> <color #>. If you have more than one residue to color, you can put all the coordinates in a file, (one coordinate per line). Spans are not yet supported.
+If you want to color a specific residue/nucleotide, you can use the flag **+color_residue <sequence> <residue #> <color #>**. If you have more than one residue to color, you can put all the coordinates in a file, (one coordinate per line). Spans are not yet supported.
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +color_residue\
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +color_residue \
   hmgb_chite 10 1 -output color_html > color.html
 
+.. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
 Coloring according to the conservation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Use the +evaluate flag if you want to color your alignment according to its conservation level
+Use the +evaluate flag if you want to color your alignment according to its conservation level:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -\
- action +3evaluate pam250mt- output color_html > color.html
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action \
+      +3evaluate pam250mt- output color_html > color.html
 
 
 
-You can also use the boxshade scoreing scheme:
-
+You can also use the boxshade scoring scheme:
 
 ::
 
@@ -334,7 +345,7 @@ You can also use the boxshade scoreing scheme:
 
 Colouring/Editing residues in an alignment using a Cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To color an alignment, two files are needed: the alignment (aln) and the cache (cache). The cache is a file where residues to be colored are declared along with the colors. Nine different colors are currently supported. They are set by default but can be modified by the user (see last changing default colors). The cache can either look like a standard sequence or alignment file (see below) or like a standard T-Coffee library (see next section). In this section we show you how to specifically modify your original sequences to turn them into a cache.
+In this particular case, the cache is a file where residues to be colored are declared along with the colors. Nine different colors are currently supported. They are set by default but can be modified by the user. The cache can either look like a standard sequence or alignment file (see below) or like a standard T-Coffee library (see next section). In this section we show you how to specifically modify your original sequences to turn them into a cache.
 
 
 In the cache, the colors of each residue are declared with a number between 0 and 9. Undeclared residues will appear without any color in the final alignment.
@@ -525,29 +536,7 @@ You can also use a cache library like the one shown above (sample_lib5.tc_lib):
 
   $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_lib5.\
  tc_lib -output=color_html -out=x.html
-
-
-Changing the default colors
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Colors are hard coded in the program, but if you wish, you can change them, simply create a file named:
-
-
-::
-
-   seq_reformat.color
-
-
-
-That is used to declare the color values:
-
-
-::
-
-  0 #FFAA00 1 0.2 0
-
-
-This indicates that the value 0 in the cache corresponds now to #FFAA00 in html, and in RGB 1, 0.2 and 0. The name of the file (seq_reformat.color) is defined in: programmes_define.h, COLOR_FILE. And can be changed before compilation. By default, the file is searched in the current directory
-
+ 
 
 Modifying the data itself...
 =============================
