@@ -144,13 +144,13 @@ Nothing is more frustrating than downloading important data and realizing you ne
   $$: t_coffee -other_pg seq_reformat
 
 
-This will output the online flag usage of seq_reformat meaning a complete list of things seq_reformat can do for you. The seq_reformat is a reformatting utility so it recognizes automatically the most common formats (FASTA, Swiss-Prot,ClustalW, MSF, Phylip...). It reads in via the **-in** and/or **-in2** flags and outputs in whatever specified format via the **-output** flag. In the meantime, you can use the flag **-action** to perform a wide range of modification on your data. In this section we give you quite a lot of different examples of you can do with **"-other_pg seq_reformat"**.
+This will output the online flag usage of seq_reformat meaning a complete list of things seq_reformat can do for you. The seq_reformat is a reformatting utility so it recognizes automatically the most common formats (FASTA, Swiss-Prot,ClustalW, MSF, Phylip...). It reads the input file(s) via the **-in** and **-in2** flags and outputs in whatever specified format via the **-output** flag. In the meantime, you can use the flag **-action** to perform a wide range of modification on your data. In this section we give you quite a lot of different examples of you can do with **seq_reformat**.
 
 .. danger:: After the flag -other_pg, the common T-Coffee flags are not recognized anymore; it is like if you were using a different program.
 
 Modification options
 --------------------
-In order to perform different modifications on your data, the seq_reformat utility has to be followed by the flag -action, several examples will be given in the next section. The selective modification of residues/sequences/columns is achieved using the flag -action (within the seq_reformat tool) and one or several modifiers listed here (this list is not exhaustive):
+In order to perform different modifications on your data (residues/sequences/columns...), the seq_reformat utility has to be followed by the flag **-action** (within the seq_reformat tool) and one or several modifiers listed here (this list is not exhaustive):
 
 :: 
 
@@ -164,14 +164,30 @@ In order to perform different modifications on your data, the seq_reformat utili
   - +convert        : to only convert the residues within the range
   - +grep           : to select a given string of character
   - +rm_gap         : to remove columns containing gaps
-  - and more.
+  - etc...
  
   
 Using a "cache" file
 --------------------
-Several option can be performed easily by using what we call a cache (or cache file).
+Several option can be performed easily by using what we call a cache (or cache file). A cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix-based evalution (blosum62nt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is rather practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
 
+::
 
+  Evaluating the T-Coffee CORE index during the alignment procedure:
+  $$: t_coffee sample_aln1.fasta -output=score_ascii
+
+  Evaluating the T-Coffee CORE index of a given alignment:
+  $$: t_coffee -infile sample_aln1.aln -mode evaluate
+
+  Using an identity matrix:
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate \
+      idmat -output score_ascii
+
+  Using a substitution matrix:
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate \
+      blosum62mt -output score_ascii
+      
+      
 Modifying the format of your data
 =================================
 Changing the sequence format
@@ -205,7 +221,7 @@ Changing the case
 -----------------
 Changing the case of your sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you need to change the case of your sequences, you can use more sophisticated functions embedded in seq_reformat. We call these modifiers, and they are accessed via the **"-action"** flag. For instance, to write our sequences in lower case:
+If you need to change the case of your sequences, you can use different modifiers embedded in seq_reformat. They are accessed via the **"-action"** flag. For instance, to write our sequences in lower case:
 
 ::
 
@@ -231,15 +247,22 @@ If you want to change the case of a specific residue, you can use the flag: +edi
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
 
-Changing the case depending on the score (under maintenance)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you want to change the case depending on the score, you must either evaluate your alignment, or provide a cache (see next section for more information about the "cache"). For example, this command line will upper the case of all residue then lower the case of every residue more than 50% identical to other residues in the same column:
+Changing the case with a cache
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you want to change the case depending on the score, you must either evaluate your alignment, or provide a cache. For example, this command line will upper the case of all residue then lower the case of every residue more than 50% identical to other residues in the same column:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +upper \
+  Using a cache on-the-fly:
+  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +upper \
       +evaluate idmat +lower '[5-9]'
-
+      
+  Using a cache file previously computed (2 steps):
+  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +evaluate \
+      idmat -output score_ascii > sample_aln7.cache
+  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache \
+      -struc_in number_aln -action +upper '[5-9]'
+  
 
 Keeping/Protecting your sequence names
 --------------------------------------
