@@ -542,7 +542,7 @@ It is possible for instance to selectively convert all given characters in a seq
 
 Extracting sequences according to a pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-You can extract any sequence by requesting a specific pattern to be found either in the name (NAME), the comment (COMMENT) or the sequence (SEQ) using the modifier is '+grep'. For instance, if you want to extract all the sequences whose name contain the word HUMAN. NAME/COMMENT/SEQ indicates that the extraction/removal is made according to the sequences names, the comment section or the sequence itself, and KEEP/REMOVE means that you will keep/remove all the sequences containing the string HUMAN. Here are some examples:
+You can extract any sequence by requesting a specific pattern to be found either in the name (NAME), the comment (COMMENT) or the sequence (SEQ) using the modifier is '+grep'. For instance, if you want to extract all the sequences whose name contain the word HUMAN, the flag NAME/COMMENT/SEQ indicates that the modification is made according to the sequences names, the comment section or the sequence itself, and the flag KEEP/REMOVE means that you will keep/remove all the sequences containing the string HUMAN. Here are some examples:
 
 ::
 
@@ -568,51 +568,41 @@ You can extract any sequence by requesting a specific pattern to be found either
 .. caution:: This option is case sensitive (Human, HUMAN and hUman will not yield the same results). Be careful !!!
 
 
-Extracting/Removing sequences by names
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Extracting two sequences: If you want to extract several sequences, in order to make a subset, you can do the following:
+Extracting/Removing specific sequences by names
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you want to extract (command 1) or remove (command 2) several sequences in order to make a subset, you can specify a list of sequences by their full name:
 
 ::
 
+  Command 1: keep sequences
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list \
       'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
 
+  Command 2: remove sequences
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +remove_seq \
+      'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
 
-.. note:: Note the single quotes ('). They are meant to protect the name of your sequence and prevent the UNIX shell to interpret it like an instruction.
 
-Removing columns of gaps. Removing intermediate sequences results in columns of gaps appearing here and there. Keeping them is convenient if some features are mapped on your alignment. On the other hand, if you want to remove these columns you can use:
+.. note:: Note the single quotes (') are mandatory as they are meant to protect the name of your sequence and prevent the UNIX shell to interpret it like an instruction.
+
+Once sequences are extracted or removed, some columns may remain containing only gaps, but it is possible to simply remove empty columns from the resulting dataset (command 3), and even extract specific blocks for the selected sequences either keeping the exact same name (command 4) or the name of the specific blocks extracted (command 5):
 
 ::
 
+  Command 3: removing empty columns
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list \
       'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA' +rm_gap
 
-
-Extracting subsequences: You may want to extract portions of your sequences. This is possible if you specify the coordinates after the sequences name:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq \
-      'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap
-
-
-Keeping the original sequence names. Note that your sequences are now renamed according to the extraction coordinates. You can keep the original names by using the +keep_name modifier:
-
-::
-
+  Command 4: keeping the initial name after extracting specific blocks and removing empty columns
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +keep_name \
       +extract_seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap
 
+  Command 5: renaming sequences according to the extracted blocks and removing empty columns
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq \
+      'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap 
 
-.. warning:: +keep_name must come BEFORE +extract_seq
 
-
-Removing two sequences. If you want to remove several sequences, use rm_seq instead of keep_seq:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +remove_seq \
-      'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
+.. hint:: The tag **+keep_name** must come BEFORE the tag **+extract_seq**.
 
 
 Extracting the Y most informative sequences
@@ -629,50 +619,41 @@ Large datasets are problematic because they can be difficult to align and analyz
       -output fasta_seq
 
 
-.. important:: The argument to trim include _seq_, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generaly more accurate to use unaligned sequences.
+.. hint:: The argument to trim include _seq_, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generaly more accurate to use unaligned sequences.
 
-.. note:: Note: If your sequence dataset is very large, seq_reformat will compute the similarity matrix between your sequences once only. It will then keep it in its cache and re-use it any time you re-use that dataset. In short this means that it will take much longer to run the first time.
+.. note:: For very large dataset, seq_reformat will compute the similarity matrix between your sequences once only. It will then store it in its cache to be reused any time you run on the same dataset. In short this means that it will take much longer to run the first time, but be much faster if you need to rerun it.
 
 
 Extracting all the sequences less than X% identical
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the trim option. For instance, to generate a dataset where no pair of sequences has more than 50% identity, use:
+Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the **+trim option**. For instance, you can generate a dataset where no pair of sequences has more than 50% identity either from a dataset of unaligned sequences (command 1) or from any given alignment (command 2). If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the _seq_ with _aln_. Just run the following command lines to see the difference un runtime:
 
 ::
 
+  Command 1: unaligned sequences
   $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_
 
-If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the _seq_ with _aln_
+  Command 2: aligned sequences
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _aln_%%50_
 
-
-Note the difference of speed between these two command and the previous one:
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in kinases.aln -action +trim _aln_%%50_
-
-  t_coffee -other_pg seq_reformat -in kinases.fasta -action +trim _seq_%%50_
-
-
-Of course, using the MSA will mean that you rely on a more approximate estimation of sequence similarity.
+.. note:: Using aligned sequences results in a fastest trimming, however, it also means that you rely on a more approximate estimation of sequence similarity.
 
 
 Identifying and removing outliers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Sequences that are too distantly related from the rest of the set will sometimes have very negative effects on the overall alignment. To prevent this, it is advisable not to use them. This can be done when trimming the sequences, for instance:
-
+Sequences that are too distantly related from the rest of the set will sometimes have very negative effects on the overall alignment; To prevent this, it is advisable not to use them. The next command line will lead to the removal of all the sequences where no pair of sequences has more than 50% identity and have less than 40% average accuracy with all the other sequences in the dataset (the symbol _O standing for Outliers): 
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_O40
 
-The symbol _O stands for Outliers. It will lead to the removal of all the sequences that have less than 40% average accuracy with all the other sequences in the dataset.
+
+.. hint:: This particular option is quite powerful as it allows you to decide both inferior and superior tresholds for trimming your dataset based on pairwise identity score, and therefore you can dissect your dataset according to different ranges of identity values. Be careful not to remove too many sequences ;-)
 
 
 Forcing specific sequences to be kept
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Sometimes you want to trim while making sure specific or important sequences remain in your dataset. You can do so by providing trim with a string. Trim will keep all the sequences whose name contains the string. For instance, if you want to force trim to keep all the sequences that contain the word HUMAN, no matter how similar they are to one another, you can run the following command:
+Sometimes you want to trim while making sure specific or important sequences remain in your dataset. You can do so by providing the **+trim** option with a pattern: it will keep all the sequences whose name contains the given string. For example, if you want to keep all "HUMAN" sequences, no matter how similar they are to one another, you can run the following command:
 
 
 ::
@@ -712,13 +693,7 @@ You can also specify the sequences you want to keep. To do so, give a fasta file
 
 Chaining important sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-In order to align two distantly related sequences, most multiple sequence alignment packages perform better when provided with many intermediate sequences that make it possible to 'bridge' your two sequences. The modifier +chain makes it possible to extract from a dataset a subset of intermediate sequences that chain the sequences you are interested in. For instance, let us consider the two sequences:
-
-sp|P21844|MCPT5_MOUSE and sp|P29786|TRY3_AEDAE
-
-
-These sequences have 26% identity. This is high enough to make a case for a homology relationship between them, but this is too low to blindly trust any pairwise alignment. With the names of the two sequences written in the file sproteases_pair.fasta, run the following command:
-
+In order to align two distantly related sequences, most multiple sequence alignment packages perform better when provided with many intermediate sequences that make it possible to 'bridge' your two sequences. The modifier **+chain** makes it possible to extract from a dataset a subset of intermediate sequences that chain the sequences you are interested in. For instance, let us consider the two sequences "sp|P21844|MCPT5_MOUSE" and "sp|P29786|TRY3_AEDAE" having 26% identity. This is high enough to make a case for a homology relationship between them, but this is too low to blindly trust any pairwise alignment. With the names of the two sequences written in the file sproteases_pair.fasta, run the following command:
 
 ::
 
@@ -726,7 +701,6 @@ These sequences have 26% identity. This is high enough to make a case for a homo
       -action +chain > sproteases_chain.fasta
 
 This will generate a dataset of 21 sequences, with the following chain of similarity between your two sequences:
-
 
 ::
 
@@ -765,6 +739,7 @@ Extracting portions of a dataset is something very frequently needed. You may ne
 
   Command 1:
   $$: t_coffee sample_seq1.fasta -output score_ascii, aln
+  
   Command 2:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate \
       blosum62mt -output score_ascii
@@ -789,33 +764,30 @@ It is also possible to use a score_ascii file (as produced in the previous secti
        +use_cons +keep '[5-9]'
 
 
-.. warning:: Don't forget the simple quotes! (')
+.. warning:: Don't forget the simple quotes ('), it's mandatory !!!
 
 
 Extracting blocks within an alignment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Extracting a block. If you only want to keep one block in your alignment, use:
-
+In case you want to extracting a specific block of your alignment for instance to remove poorly resolved regions, remove your alignments boudnaries or to extract specific domains, you can do so with the modified **+extract_block**. In this command line, the option **cons** (command 1) indicates that you are counting the positions according to the consensus of the alignment (i.e. the positions correspond to the columns # of the alignment). If you want to extract your block relatively to a specific sequence, you should replace cons with this sequence name (command 2).
 
 ::
 
+  Command 1: extract block from MSA
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
       cons 150 200
 
+  Command 2: extract_block relative to a give sequence of the MSA
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
+      'sp|Q03238|GRAM_RAT' 10 200
 
-In this command line, cons indicates that you are counting the positions according to the consensus of the alignment (i.e. the positions correspond to the columns # of the alignment). If you want to extract your block relatively to a specific sequence, you should replace cons with this sequence name. For instance:
 
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_\
- block 'sp|Q03238|GRAM_RAT' 10 200
+.. tip:: It may be sometimes difficult to know where starts the blocks you are interested in except by counting manually the number of column. You can also make some tries by modifying the boundaries until you get the block you want and then redirect the result into the output file name of your choice. 
 
 
 Concatenating alignments
 ^^^^^^^^^^^^^^^^^^^^^^^^
-If you have extracted several blocks and you now want to glue them together, you can use the cat_aln function
-
+If you have extracted several blocks generated using the previous command and you want to glue them together, you can use the **+cat_aln** modifier:
 
 ::
 
