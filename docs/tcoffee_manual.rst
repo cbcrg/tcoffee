@@ -966,8 +966,8 @@ It is possible to scan an alignment and locally measure the similarity between a
 
 ::
 
-  $$ :t_coffee -other_pg seq_reformat -in <aln> -in2 <reftree> -action +tree_scan _MODE_scan__W_10_ > p\
- h_tree_scan.txt
+  $$ :t_coffee -other_pg seq_reformat -in <aln> -in2 <reftree> -action +tree_scan \
+      _MODE_scan__W_10_ > ph_tree_scan.txt
 
 For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be extracted, for each of these block a tree will be estimated and the similarity of that tree with the reference tree will be estimated with cmp_tree. For each position, the tree giving the best fit will be reported, along with the size of the block leading to that tree:
 
@@ -1050,69 +1050,57 @@ How to generate the alignment you need?
 =======================================
 What is a good alignment?
 -------------------------
-This is a tricky question. A good alignment is an alignment that makes it possible to do good biology. If you want to reconstruct a phylogeny, a good alignment will be an alignment leading to an accurate reconstruction.
+This is a tricky question, a proper answer would be  **a good alignment is an alignment that makes it possible to do good biology**. In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions. Unfortunately it is not easy to establish structure based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
 
-In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions. Unfortunately it is not easy to establish structure based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
+  1) **Above 40% identity** (within the reference dataset), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
 
-::
-
-  1) Above 40% identity (within the reference datasets), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
-
-  2) Below 40% accuracy within the reference datasets, the reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies seem to indicate that consistency based methods (T-Coffee, Mafft-slow and ProbCons) have an edge over traditional methods.
+  2) **Below 40% identity** (within the reference dataset), allthe reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies seem to indicate that consistency based methods (T-Coffee, ProbCons, MAFFT-slow or MSAProbs) have an edge over traditional methods.
 
 When dealing with distantly related sequences, the only way to produce reliable alignments is to use structural information. T-Coffee provides many facilities to do so in a seamless fashion. Several important factors need to be taken into account when selecting an alignment method:
 
-::
+  1) **The best methods are not always the best**. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
 
-  1) The best methods are not always the best. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
+  2) **The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high**. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
 
-  2)The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
-
-  3) Last but not least, bear in mind that these methods have only been evaluated by comparison with reference structure based sequence alignments. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
+  3) **Keep in mind that these methods have only been evaluated by comparison with reference alignments (benchmarks)**. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
 
 
 The main methods and their scope
 --------------------------------
-There are many MSA packages around, the most common ones being ClustalW, MUSCLE, MAFFT, T-Coffee and ProbCons; amongst the latest ones, you can find phylogeny-aware aligners (PRANK and SATé) and improved consistency-based aligners (MSAProbs). You can almost forget about the other packages, as there is virtually nothing you could do with them that you will not be able to do with these packages. These packages offer a complex trade-off between speed, accuracy and versatility.
+There are many MSA packages around, the most common ones being ClustalW, MUSCLE, MAFFT, T-Coffee and ProbCons; amongst the latest ones, you can find phylogeny-aware aligners (PRANK and SATé) and modifed/improved consistency-based aligners (MSAProbs). You can almost forget about the other packages, as there is virtually nothing you could do with them that you will not be able to do with these packages. All these packages offer a complex trade-off between speed, accuracy and versatility.
 
 
 ClustalW: everywhere you look
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ClustalW is still the most widely used multiple sequence alignment package. Yet things are gradually changing as recent tests have consistently shown that ClustalW is neither the most accurate nor the fastest package around. This being said, ClustalW is everywhere and if your sequences are similar enough, it should deliver a fairly reasonable alignment.
+ClustalW is still the most widely used Multiple Sequence Alignment package. Yet things are changing fast and different tests have consistently shown that ClustalW is neither the most accurate nor the fastest package around. This being said, ClustalW is everywhere and if your sequences are similar enough, it should deliver a fairly reasonable alignment.
 
 
 MAFFT and MUSCLE: aligning many sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you have many sequences to align MUSCLE or MAFFT are the obvious choice. MAFFT is often described as the fastest and the most efficient. This is not entirely true, in its fast mode (FFT-NS-1), MAFFT is similar to MUSCLE and although it is fairly accurate, about 5 points less accurate than the consistency-based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) MAFFT uses local alignments and consistency, however, it becomes much more accurate but also slower, and more sensitive to the number of sequences.
+If you have many sequences to align MUSCLE or MAFFT are the obvious choice. MAFFT is often described as the fastest and the most efficient. This is not entirely true, in its fast mode (FFT-NS-1), MAFFT is similar to MUSCLE and although it is fairly accurate, about 5 points less accurate than the consistency-based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) MAFFT uses local alignments and consistency, however, it becomes much more accurate but also slower, and more sensitive to the number of sequences. More recently, we have seen growing the number of **(ultra) large scale** aligners such as ClustalO, PASTA, UPP, and we hope soon the large scale version of T-Coffee (called MEGA-Coffee).
 
+**Suitable for**:
+ - Distance-based phylogenetic reconstruction (NJ trees)
+ - Secondary structure prediction
 
-The alignments generated using the fast modes of these programs will be very suitable for several important applications such as:
- -Distance-based phylogenetic reconstruction (NJ trees)
- -Secondary structure predictions
-
-
-However they may not be suitable for more refined application such as:
- -Profile construction
- -Structure Modeling
- -3D structure prediction
- -Function analysis
-
-In that case you may need to use more accurate methods !!
+**Not suitable for**:
+ - Profile construction
+ - Structure modeling
+ - 3D prediction
+ - Function analysis
 
 
 T-Coffee and ProbCons: slow and accurate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 T-Coffee works by first assembling a library and then by turning this library into an alignment. The library is a list of potential pairs of residues. All of them are not compatible and the job of the algorithm is to make sure that as many possible constraints as possible find their way into the final alignment. Each library line is a constraint and the purpose is to assemble the alignment that accommodates the more all the constraints.
 
-
 It is very much like building a high school schedule, where each teachers says something 'I need my Monday morning', 'I can't come on Thursday afternoon', and so on. In the end you want a schedule that makes everybody happy, if possible.The nice thing about the library is that it can be used as a media to combine as many methods as one wishes. It is just a matter of generating the right constraints with the right method and compile them into the library. ProbCons and MAFFT (L-INS-i) uses a similar algorithm, but with a Bayesian twist in the case of Probcons. In practice, however, ProbCons and T-Coffee give very similar results and have similar running time. MAFFT is significantly faster.
 
-
-All these packages are ideal for the following applications:
- -Profile reconstruction
- -Function analysis
- -3D Prediction
-
+**Suited for**:
+ - Profile reconstruction
+ - Structure modeling
+ - Function analysis
+ - 3D prediction
 
 Choosing the right package
 --------------------------
@@ -1122,11 +1110,11 @@ Each available package has something to go for it. It is just a matter of knowin
 ================= ====== ===== ======== ======== ======== 
 Packages          MUSCLE MAFFT ProbCons T-Coffee ClustalW 
 ================= ====== ===== ======== ======== ======== 
-Accuracy          ++     +++   +++      +++      +        
-<100 Seq.         ++     ++    +++      +++      +        
->100 Seq.         +++    +++   -        +        +        
-Remote Homologues ++     +++   +++      +++      +        
-MSA vs Seq.       -      -              +++      +++      
+Accuracy          ++     +++   +++      +++      \+        
+<100 Seq.         ++     ++    +++      +++      \+        
+>100 Seq.         +++    +++   \-       \+       \+        
+Remote Homologues ++     +++   +++      +++      \+        
+MSA vs Seq.       -      -     +++      +++      +++      
 MSA vs MSA        -      -     -        +++      +++      
 >2 MSAs           -      -     -        +++      -        
 Seq. vs Struc.    -      -     -        +++      +        
@@ -1137,7 +1125,7 @@ Evaluation        -      -     +        +++      -
 Speed             +++    +++   +        +        ++       
 ================= ====== ===== ======== ======== ======== 
 
-Table 1. Relative possibilities associated with the main packages (T-Coffee Tutorial, C. Notredame, www.tcoffee.org). In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
+Table 1. Relative possibilities associated with the main packages. In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
 
 
 ===================== ====== ===== ======== ======== ======== 
@@ -1147,10 +1135,10 @@ Dist Based Phylogeny  +++    +++   ++       ++       ++
 ML or MP Phylogeny    ++     +++   +++      +++      ++       
 Profile Construction  ++     +++   +++      +++      ++       
 3D Modeling           ++     ++    ++       +++      +        
-Secondary Structure P +++    +++   ++       ++       ++       
+2D Predictions        +++    +++   ++       ++       ++       
 ===================== ====== ===== ======== ======== ======== 
 
-Table 2. Most Suitable Appplications of each package (T-Coffee Tutorial, C. Notredame, www.tcoffee.org). In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
+Table 2. Most Suitable Appplications of each package. In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
 
 
 Computing Multiple Sequence Alignments with T-Coffee
