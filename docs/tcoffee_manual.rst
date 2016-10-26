@@ -925,7 +925,7 @@ If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for
        -output newick
 
 
-.. warning:: Bootstrap facilities will also be added at some point... For now we recommend you use Phylip if you need some serious phylogeny !
+.. warning:: Bootstrap facilities will also be added at some point...We recommend you to use `Phylip <http://evolution.genetics.washington.edu/phylip.html>`_ or any other specific phylogenetic software (PhyML, RAxML, MrBayes, etc...) if you need some serious phylogeny !
 
 
 Comparing two phylogenetic trees
@@ -1046,23 +1046,23 @@ By default, T-Coffee also requires two important PDB files declared using the tw
 *************************************
 Building Multiple Sequence Alignments
 *************************************
-How to generate the alignment you need?
-=======================================
+General comments on alignments and aligners
+===========================================
 What is a good alignment?
 -------------------------
 This is a tricky question, a proper answer would be  **a good alignment is an alignment that makes it possible to do good biology**. In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions. Unfortunately it is not easy to establish structure based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
 
-  1) **Above 40% identity** (within the reference dataset), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
+  - **Above 40% identity** (within the reference dataset), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
 
-  2) **Below 40% identity** (within the reference dataset), allthe reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies seem to indicate that consistency based methods (T-Coffee, ProbCons, MAFFT-slow or MSAProbs) have an edge over traditional methods.
+  - **Below 40% identity** (within the reference dataset), allthe reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies seem to indicate that consistency based methods (T-Coffee, ProbCons, MAFFT-slow or MSAProbs) have an edge over traditional methods.
 
 When dealing with distantly related sequences, the only way to produce reliable alignments is to use structural information. T-Coffee provides many facilities to do so in a seamless fashion. Several important factors need to be taken into account when selecting an alignment method:
 
-  1) **The best methods are not always the best**. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
+  - **The best methods are not always the best**. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
 
-  2) **The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high**. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
+  - **The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high**. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
 
-  3) **Keep in mind that these methods have only been evaluated by comparison with reference alignments (benchmarks)**. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
+  - **Keep in mind that these methods have only been evaluated by comparison with reference alignments (benchmarks)**. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
 
 
 The main methods and their scope
@@ -1114,15 +1114,15 @@ Accuracy          ++     +++   +++      +++      \+
 <100 Seq.         ++     ++    +++      +++      \+        
 >100 Seq.         +++    +++   \-       \+       \+        
 Remote Homologues ++     +++   +++      +++      \+        
-MSA vs Seq.       -      -     +++      +++      +++      
-MSA vs MSA        -      -     -        +++      +++      
->2 MSAs           -      -     -        +++      -        
-Seq. vs Struc.    -      -     -        +++      +        
-Splicing Var.     -      +++   -        +++      -        
-Reformat          -      -     -        +++      ++       
-Phylogeny         -      -     -        +        ++       
-Evaluation        -      -     +        +++      -        
-Speed             +++    +++   +        +        ++       
+MSA vs Seq.       \-     \-    +++      +++      +++      
+MSA vs MSA        \-     \-    \-       +++      +++      
+>2 MSAs           \-     \-    \-       +++      \-        
+Seq. vs Struc.    \-     \-    \-       +++      \+        
+Splicing Var.     \-     +++   \-       +++      \-        
+Reformat          \-     \-    \-       +++      ++       
+Phylogeny         \-     \-    \-       \+       ++       
+Evaluation        \-     \-    \+       \+++     \-        
+Speed             +++    +++   \+       \+       ++       
 ================= ====== ===== ======== ======== ======== 
 
 Table 1. Relative possibilities associated with the main packages. In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
@@ -1134,38 +1134,15 @@ Packages              MUSCLE MAFFT ProbCons T-Coffee ClustalW
 Dist Based Phylogeny  +++    +++   ++       ++       ++       
 ML or MP Phylogeny    ++     +++   +++      +++      ++       
 Profile Construction  ++     +++   +++      +++      ++       
-3D Modeling           ++     ++    ++       +++      +        
+3D Modeling           ++     ++    ++       +++      \+        
 2D Predictions        +++    +++   ++       ++       ++       
 ===================== ====== ===== ======== ======== ======== 
 
 Table 2. Most Suitable Appplications of each package. In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
 
 
-Computing Multiple Sequence Alignments with T-Coffee
-====================================================
-Computing very accurate (but slow) alignments with PSI-Coffee
--------------------------------------------------------------
-PSI-Coffee builds a profile associated with each of your input sequence and then makes a multiple profile alignment. If you do not have any structure, it is the most accurate mode of T-Coffee.
-
-
-::
-
-  $$: t_coffee sproteases_small.fasta -mode psicoffee
-
-
-
-If you want to go further, and be even slower, you can use the accurate mode that will combine profile and structural information
-
-
-::
-
-  $$: t_coffee sproteases_small.fasta -mode accurate
-
-
-
-It is probably one of the most accurate way of aligning sequences currently available.
-
-
+Computing simple MSA with T-Coffee (default)
+============================================
 A simple Multiple Sequence Alignment
 ------------------------------------
 T-Coffee is meant to be run like ClustalW. This means you can use it like ClustalW for most simple applications. For instance, the following instruction
@@ -1175,41 +1152,10 @@ T-Coffee is meant to be run like ClustalW. This means you can use it like Clusta
 
   $$: t_coffee sproteases_small.fasta
 
-
-
-This instruction will compute a multiple sequence alignment of your sequences, using the default mode of T-Coffee. It will output the alignment on the screen and in a file named sproteases_small.aln. This file contains your alignment in ClustalW format.
-
-
-The program will also output a file named sproteases_small.dnd that contains the guide tree used to assemble the progressive alignment.
-
-
-Controlling the output format
------------------------------
-If you need to, you can also trigger different ouput formats using the -output flag:
-
-
-::
-
   $$: t_coffee sproteases_small.fasta -output=clustalw,fasta_aln,msf
-
-
-
-You can specify as many formats as you want.
-
-
-Computing a phylogenetic tree
------------------------------
-T-Coffee is not a phylogeny package. Yet, it has some limited abilities to turn your MSA into a phylogenetic tree. This tree is a Neighbor Joining Phylogenetic tree, very similar to the one you could compute using ClustalW.
-
-
-::
-
-  $$: t_coffee sproteases_small.fasta -output=clustalw,fasta_aln,msf
-
-
-
-The phylogenetic tree is the file with the ph extension. Never use the .dnd tree in place of a genuine phylogenetic tree. The phylogenetic tree output by T-Coffee is only an indication. You should produce a bootstrapped phylogenetic tree using packages like Phylip (bioweb.pasteur.fr/seqanal/phylogeny/phylip-uk.html). You can visualize your tree using online tree drawing programs like phylodendron (iubio.bio.indiana.edu/treeapp/treeprint-form.html).
-
+  
+ 
+This instruction will compute a multiple sequence alignment of your sequences, using the default mode of T-Coffee. It will output the alignment on the screen and in a file named sproteases_small.aln. This file contains your alignment in ClustalW format. The program will also output a file named sproteases_small.dnd that contains the guide tree used to assemble the progressive alignment.
 
 Using several datasets
 ----------------------
@@ -1218,110 +1164,27 @@ If your sequences are spread across several datasets, you can give all the files
 
 ::
 
-  $$: t_coffee -seq=sprotease1_small.fasta,sprotease2_small.aln -output=clustalw\
- ,fasta_aln,msf
+  $$: t_coffee -seq=sprotease1_small.fasta,sprotease2_small.aln -output=clustalw,fasta_aln,msf
 
-
-
-Note that you can give as many file as you want (the limit is 200) and that the files can be in any format. If you give an alignment, the gaps will be reset and your alignment will only provide sequences.
-
-
-Sequences with the same name between two files are assumed to be the same sequence. If their sequences differ, they will be aligned and replaced by the consensus of that alignment. This process is known as sequence reconciliation.
+Note that you can give as many file as you want (the limit is 200) and that the files can be in any format. If you give an alignment, the gaps will be reset and your alignment will only provide sequences. Sequences with the same name between two files are assumed to be the same sequence. If their sequences differ, they will be aligned and replaced by the consensus of that alignment. This process is known as sequence reconciliation.
 
 
 .. warning:: You should make sure that there are no duplicates in your alignment, especially when providing multiple datasets.
 
-How good is your alignment
---------------------------
-Later in this tutorial we show you how to estimate the accuracy of your alignment. Before we go into details, you should know that the number that comes on the first line of the header (in ClustalW format) is the score of your alignment.
-
-
-::CLUSTAL FORMAT for T-COFFEE Version_4.32 [http://www.tcoffee.org], CPU=19.06 sec, SCORE=37, Nseq=19, Len=341
-
-
-You can use this value to compare alternative alignments of the same sequences. Alignments with a score higher than 40 are usually pretty good.
-
-
-Doing it over the WWW
----------------------
-You can run T-Coffee online at www.tcoffee.org. Use the regular or the advanced form of the T-Coffee server.
-
-
-Aligning many sequences
-=======================
-Aligning very large datasets with muscle
-----------------------------------------
-T-Coffee is not a good choice if you are dealing with very large datasets, use Mafft or Muscle. To align a large dataset with Muscle, try:
-
-
-::
-
-  muscle -infile sproteases_large.fasta > sproteases_large.muscle
-
-
-
-To use the fastest possible mode (less accurate) run:
-
-
-::
-
-  muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 >\
-  sproteases_large.muscle
-
-
-
-Aligning very large alignments with Mafft
------------------------------------------
-The fastest mode with Mafft can be achieved using:
-
-
-::
-
-  mafft --retree 2 input > output
-
-
-
-Aligning very large alignments with T-Coffee
---------------------------------------------
-T-Coffee is not very well gifted for aligning large datasets, but you can give it a try using a special option that generates approximate alignments. These alignments should roughly have the same accuracy as ClustalW. They are acceptable for sequences more than 40% identical.
-
-
-::
-
-  $$: t_coffee sproteases_large.fasta -mode quickaln
-
-
-
-Shrinking large alignments with T-Coffee
-----------------------------------------
-Once you have generated your large alignment, you may need/want to shrink it to a smaller one, that will be (hopefully) as informative and easier to manipulate. For that purpose, use the trim option (described in detail in the first section of this document).
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.muscle -action +trim \
- _n20 -output > sproteases_large_muscle_trim.aln
-
-
-
 Modifying the default parameters of T-Coffee
-============================================
+--------------------------------------------
 The main parameters of T-Coffee are similar to those of ClustalW. They include the substitution matrix and the gap penalties. In general, T-Coffee's default is adequate. If, however, you are not satisfied with the default parameters, we encourage you to change the following parameters. Interestingly, most of what we say here holds reasonably well for ClustalW.
 
 
 Changing the substitution matrix
---------------------------------
-T-Coffee only uses the substitution matrix to make the pairwise alignments that go into the library. These are all the global alignments of every possible pair of sequences, and the ten best local alignments associated with every pair of sequences.
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+T-Coffee only uses the substitution matrix to make the pairwise alignments that go into the library. These are all the global alignments of every possible pair of sequences, and the ten best local alignments associated with every pair of sequences. 
 
 By default, these alignments are computed using a Blosum62 matrix, but you can use any matrix you fancy instead, including: pam120mt, pam160mt, pam250mt, pam350mt, blosum30mt, blosum40mt, blosum45mt, blosum50mt, blosum55mt, blosum62mt, blosum80mt, or even user-provided matrices in the BLAST format, as described in the technical manual.
 
-
-Pam matrices: These matrices are allegedly less accurate than the blosum. The index is correlated to the evolutionary distances. You should therefore use the pam350mt to align very distantly related sequences.
-
+PAM matrices: These matrices are allegedly less accurate than the blosum. The index is correlated to the evolutionary distances. You should therefore use the pam350mt to align very distantly related sequences.
 
 Blosum matrices: These matrices are allegedly the most accurate. The index is correlated to the maximum percent identity within the sequences used to estimate the matrix. You should therefore use the Blosum30mt to align very distantly related sequences. Blosum matrices are biased toward protein core regions. This may explain why these matrices tend to give better alignments, since by design they can capture the most evolutionary resilient signal contained in proteins.
-
 
 Unless you have some structural information available, the only way to tell whether your alignment has improved or not is to look at the score. For instance, if you compute the two following alignments:
 
@@ -1329,18 +1192,15 @@ Unless you have some structural information available, the only way to tell whet
 ::
 
   $$: t_coffee sproteases_small.fasta -matrix=blosum30mt -outfile=b30.aln
-
   $$: t_coffee sproteases_small.fasta -matrix=blosum80mt -outfile=b80.aln
-
   $$: t_coffee sproteases_small.fasta -matrix=pam350mt -outfile p350.aln
-
 
 
 You will get two alignments that have roughly the same score but are different. You can still use these two alternative alignments by comparing them to identify regions that have been aligned identically by the two matrices. These regions are usually more trustworthy.
 
 
 Comparing two alternative alignments
-------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you change the parameters, you will end up with alternative alignments. It can be interesting to compare them quantitatively. T-Coffee comes along with an alignment comparison module named aln_compare. You can use it to estimate the amount of difference between your two alignments:
 
 
@@ -1349,18 +1209,13 @@ If you change the parameters, you will end up with alternative alignments. It ca
   $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln
 
 
-
 This comparison will return the following result:
 
 
 ::
-
   *****************************************************
-
   seq1 seq2 Sim [ALL] Tot
-
   b30 19 32.6 93.7 [100.0] [40444]
-
 
 
 Where 93.7 is the percentage of similarity (sums of pairs) between the two alignments. It means that when considering every pair of aligned residues in b30 (40444), the program found that 93.7% of these pairs could be found in the alignment p350.aln.
@@ -1368,89 +1223,7 @@ Where 93.7 is the percentage of similarity (sums of pairs) between the two align
 
 Of course, this does not tell you where are the good bits, but you can get this information with the same program:
 
-
-::
-
-  t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_\
- aln_threshold 50
-
-  sp|O35205|GRAK_MOUSE 	M---r----fssw-------ALvslvagvym----------------SSECFHTEIIGGR
-
-  sp|Q7YRZ7|GRAA_BOVIN	M--ni----pfpf--sfppaIClllipgvfp----------------vs---cEGIIGGN
-
-  sp|P08884|GRAE_MOUSE 	M--------ppv----------lilltlllp----------------l-GAGAEEIIGGH
-
-  sp|Q06606|GRZ2_RAT    M--------flf----------lfflvailp----------------v-NTEGGEIIWGT
-
-  sp|P21844|MCPT5_MOUSE	M---h----llt----------lhllllllg----------------s-STKAGEIIGGT
-
-  sp|P03953|CFAD_MOUSE 	M---h----ssvy-------fvalvilgaav----------------CAAQPRGRILGGQ
-
-  sp|P00773|ELA1_RAT 	M---l----rflv--F----ASlvlyghstq----------------DFPETNARVVGGA
-
-  sp|Q00871|CTRB1_PENVA	MIgkl----slll--V----CVavasgnpaagkpwhwKSPKPLVDPRIHVNATPRIVGGV
-
-  sp|P08246|ELNE_HUMAN 	M--tlGR--rlac--L----FLacvlpalll----------------GGTALASEIVGGR
-
-  sp|P20160|CAP7_HUMAN 	M--t-----rltv--L----ALlagllassr----------------AGSSPLLDIVGGR
-
-  sp|P80015|CAP7_PIG 	-------------------------------------------------------IVGGR
-
-  sp|Q03238|GRAM_RAT 	l-------------------LLllalktlwa----------------VGNRFEAQIIGGR
-
-  sp|P00757|KLKB4_MOUSE	M-----------w-------flilflalslggid-------------AAPP-----vqsq
-
-  sp|Q6H321|KLK2_HORSE 	M-----------w-------flvlcldlslgetg-------------ALPPIQSRIIGGW
-
-  sp|Q91VE3|KLK7_MOUSE 	M---------gvw-------llslitvllslale-------------tag-QGERIIDGY
-
-  sp|Q9Y5K2|KLK4_HUMAN 	M-ataGN--pwgw-------flgylilgvag-sl-------------vsg-SCSQIINGE
-
-  sp|P29786|TRY3_AEDAE 	M-------nqflfVSF---------calldsakvsaa------------tLSSGRIVGGF
-
-  sp|P35037|TRY3_ANOGA 	M---iSNKiaillAVLvvav----acaqarvaqqhrsVQALPRFLPRPKYDVGHRIVGGF
-
-  sp|P07338|CTRB1_RAT 	M--a------flwlvs---------cfalvgatfgcg---vptiqpv--LTGLSRIVNGE
-
-
-  sp|O35205|GRAK_MOUS	EVQPHSRPFMASIQYR----SKHICGGVLIHPQWVLTAAHCYSWFprGHSPTVVLGAHSL
-
-  sp|Q7YRZ7|GRAA_BOVIN 	EVAPHTRRYMALIK------GLKLCAGALIKENWVLTAAHCDlk----GNPQVILGAHST
-
-  sp|P08884|GRAE_MOUSE 	VVKPHSRPYMAFVKSVDIEGNRRYCGGFLVQDDFVLTAAHCRN-----RTMTVTLGAHNI
-
-  sp|Q06606|GRZ2_RAT	ESKPHSRPYMAFIKFYDSNSEPHHCGGFLVAKDIVMTAAHCNG-----RNIKVTLGAHNI
-
-  sp|P21844|MCPT5_MOUSE	ECIPHSRPYMAYLEIVTSENYLSACSGFLIRRNFVLTAAHCAG-----RSITVLLGAHNK
-
-  sp|P03953|CFAD_MOUSE	EAAAHARPYMASVQVN----GTHVCGGTLLDEQWVLSAAHCMDGVtdDDSVQVLLGAHSL
-
-  sp|P00773|ELA1_RAT	EARRNSWPSQISLQYLSggswyHTCGGTLIRRNWVMTAAHCVSSQm---TFRVVVGDHNL
-
-  sp|Q00871|CTRB1_PENVA	EATPHSWPHQAALFId----DMYFCGGSLISSEWVLTAAHCMDGAg---FVEVVLGAHNI
-
-  sp|P08246|ELNE_HUMAN	RARPHAWPFMVSLQLr----GGHFCGATLIAPNFVMSAAHCVANVNV-RAVRVVLGAHNL
-
-  sp|P20160|CAP7_HUMAN	KARPRQFPFLASIQNq----GRHFCGGALIHARFVMTAASCFQSQNP-GVSTVVLGAYDL
-
-  sp|P80015|CAP7_PIG 	RAQPQEFPFLASIQKq----GRPFCAGALVHPRFVLTAASCFRGKNS-GSASVVLGAYDL
-
-  sp|Q03238|GRAM_RAT 	EAVPHSRPYMVSLQNT----KSHMCGGVLVHQKWVLTAAHCLSEP--LQQLKLVFGLHSL
-
-  sp|P00757|KLKB4_MOUSE	vdcENSQPWHVAVYRF----NKYQCGGVLLDRNWVLTAAHCYN-----DKYQVWLGKNNF
-
-  sp|Q6H321|KLK2_HORSE	ECEKHSKPWQVAVYHQ----GHFQCGGVLVHPQWVLTAAHCMS-----DDYQIWLGRHNL
-
-  sp|Q91VE3|KLK7_MOUSE	KCKEGSHPWQVALLKG----NQLHCGGVLVDKYWVLTAAHCKM-----GQYQVQLGSDKI
-
-  sp|Q9Y5K2|KLK4_HUMAN	DCSPHSQPWQAALVME----NELFCSGVLVHPQWVLSAAHCFQ-----NSYTIGLGLHSL
-
-  sp|P29786|TRY3_AEDAE	QIDIAEVPHQVSLQRS----GRHFCGGSIISPRWVLTRAHCTTNTDP-AAYTIRAGStd-
-
-  sp|P35037|TRY3_ANOGA	EIDVSETPYQVSLQYF----NSHRCGGSVLNSKWILTAAHCTVNLQP-SSLAVRLGSsr-
-
-  sp|P07338|CTRB1_RAT	DAIPGSWPWQVSLQDKt---gfHFCGGSLISEDWVVTAAHCGVKT----SDVVVAGEFDQ
-
+  t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_aln_threshold 50
 
 
 This is the alignment al1, but residues that have lost more than 50% of their pairing partner between the two alignments are now in lower case. In the section of this tutorial entitled comparing alignments, we show you more sophisticated ways to do this comparison.
@@ -1467,7 +1240,7 @@ For an even more drastic display, try:
 
 
 Changing gap penalties
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 Gap penalties are the core of the matter when it comes to multiple sequence alignments. An interesting feature of T-Coffee is that it does not really need such penalties when assembling the MSA, because in theory the penalties have already been applied when computing the library. This is the theory, as in practice penalties can help improve the quality of the alignment.
 
 
@@ -1511,17 +1284,74 @@ This means the library is now computed using the Blosum62mt with lalign, rather 
 .. warning:: It only makes sense to compare the consistency score of alternative alignments when these alignments have been computed using the same methods (lalign_id_pair and slow_pair for instance).
 
 Can you guess the optimal parameters?
--------------------------------------
-It is a tricky question, but the general answer is NO. The matrix and the gap penalties are simplistic attempts at modeling evolution. While the matrices do a reasonable job, the penalties are simply inappropriate: they should have a value that depends on the structure of the protein and a uniform value cannot be good enough. Yet, since we do not have better we must use them...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+It is a tricky question, but the general answer is NO. The matrix and the gap penalties are simplistic attempts at modeling evolution. While the matrices do a reasonable job, the penalties are simply inappropriate: they should have a value that depends on the structure of the protein and a uniform value cannot be good enough. Yet, since we do not have better we must use them...In practice, this means that parameter optimality is a very ad-hoc business. It will change from one dataset to the next and there is no simple way to predict which matrix and which penalty will do better. The problem is also that even after your alignment has been computed, it is not always easy to tell whether your new parameters have improved or degraded your MSA. There is no systematic way to evaluate an MSA.
 
 
-In practice, this means that parameter optimality is a very ad-hoc business. It will change from one dataset to the next and there is no simple way to predict which matrix and which penalty will do better. The problem is also that even after your alignment has been computed, it is not always easy to tell whether your new parameters have improved or degraded your MSA. There is no systematic way to evaluate an MSA.
+In general, people visually evaluate the alignment, count the number of identical columns and consider that one more conserved column is good news. If you are lucky you may know a few functional features that you expect to see aligned. If you are very lucky, you will have one structure and you can check the gaps fall in the loops. If you are extremely lucky, you will have two structures and you can assess the quality of your MSA. An advantage of T-Coffee is the fact that the overall score of the alignment (i.e. the consistency with the library) is correlated with the overall accuracy. In other words, if you alignment score increases, its accuracy probably increases also. All this being said, consistency is merely an empirical way of estimating the change of parameters and it does not have the predictive power of a BLAST E-Value.
+
+How good is your alignment
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+Later in this tutorial we show you how to estimate the accuracy of your alignment. Before we go into details, you should know that the number that comes on the first line of the header (in ClustalW format) is the score of your alignment.
 
 
-In general, people visually evaluate the alignment, count the number of identical columns and consider that one more conserved column is good news. If you are lucky you may know a few functional features that you expect to see aligned. If you are very lucky, you will have one structure and you can check the gaps fall in the loops. If you are extremely lucky, you will have two structures and you can assess the quality of your MSA.
+::CLUSTAL FORMAT for T-COFFEE Version_4.32 [http://www.tcoffee.org], CPU=19.06 sec, SCORE=37, Nseq=19, Len=341
 
 
-An advantage of T-Coffee is the fact that the overall score of the alignment (i.e. the consistency with the library) is correlated with the overall accuracy. In other words, if you alignment score increases, its accuracy probably increases also. All this being said, consistency is merely an empirical way of estimating the change of parameters and it does not have the predictive power of a BLAST E-Value.
+You can use this value to compare alternative alignments of the same sequences. Alignments with a score higher than 40 are usually pretty good.
+
+
+Aligning large datasets
+=======================
+Aligning very large datasets with MUSCLE
+----------------------------------------
+T-Coffee is not a good choice if you are dealing with very large datasets, use MAFFT or MUSCLE. To align a large dataset with MUSCLE, try:
+
+::
+
+  muscle -infile sproteases_large.fasta > sproteases_large.muscle
+
+
+
+To use the fastest possible mode (less accurate) run:
+
+
+::
+
+  muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 >\
+  sproteases_large.muscle
+
+Aligning very large alignments with MAFFT
+-----------------------------------------
+The fastest mode with MAFFT can be achieved using:
+
+
+::
+
+  mafft --retree 2 input > output
+
+
+Aligning very large alignments with T-Coffee
+--------------------------------------------
+T-Coffee is not very well gifted for aligning large datasets, but you can give it a try using a special option that generates approximate alignments. These alignments should roughly have the same accuracy as ClustalW. They are acceptable for sequences more than 40% identical.
+
+
+::
+
+  $$: t_coffee sproteases_large.fasta -mode quickaln
+
+
+Shrinking large alignments with T-Coffee
+----------------------------------------
+Once you have generated your large alignment, you may need/want to shrink it to a smaller one, that will be (hopefully) as informative and easier to manipulate. For that purpose, use the trim option (described in detail in the first section of this document).
+
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.muscle -action +trim \
+ _n20 -output > sproteases_large_muscle_trim.aln
+
+
 
 
 Using many methods at once
@@ -1540,10 +1370,7 @@ In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages 
 
 
 
-Will compute a Multiple Sequence Alignment with the following MSA packages:
-
-
-clustalw, poa, muscle, probcons, mafft, dialing-T, pcma and T-Coffee.
+Will compute a Multiple Sequence Alignment with the following MSA packages: clustalw, poa, muscle, probcons, mafft, dialing-T, pcma and T-Coffee.
 
 
 For those using debian, another mode is available
@@ -1554,74 +1381,35 @@ For those using debian, another mode is available
   $$: t_coffee sproteases_small.fasta -mode dmcoffee -output clustalw, html
 
 
-
-Will compute a Multiple Sequence Alignment with the following MSA packages:
-
-
-kalign, poa, muscle, probcons, mafft, dialing-T, and T-Coffee.
-
+Will compute a Multiple Sequence Alignment with the following MSA packages: kalign, poa, muscle, probcons, mafft, dialing-T, and T-Coffee.
 
 ::
 
   Package where from
-
   ==========================================================
-
   ClustalW can interact with t_coffee
-
   ----------------------------------------------------------
-
-  Poa  http://www.bioinformatics.ucla.edu/poa/
-
+  POA  http://www.bioinformatics.ucla.edu/poa/
   ----------------------------------------------------------
-
-  Muscle http://www.bioinformatics.ucla.edu/poa/
-
+  MUSCLE http://www.bioinformatics.ucla.edu/poa/
   ----------------------------------------------------------
-
   ProbCons http://probcons.stanford.edu/
-
   ----------------------------------------------------------
-
   MAFFT http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-
   ----------------------------------------------------------
-
   Dialign-T http://dialign-t.gobics.de/
-
   ----------------------------------------------------------
-
   PCMA ftp://iole.swmed.edu/pub/PCMA/
-
   ----------------------------------------------------------
-
-  T-Coffee www.tcoffee.org
-
-  ----------------------------------------------------------
-
   Kalign  msa.cgb.ki.se/cgi-bin/msa.cgi
-
   ----------------------------------------------------------
 
-  amap bio.math.berkeley.edu/amap/
-
-  ----------------------------------------------------------
-
-
-
-When this is done, all the alignments will be combined into one. If you open the file sproteases_small.html with your favorite web browser, you will see a colored version of your alignment.
-
-
-The alignment is colored according to its consistency with all the MSA used to compute it. Regions in red have a high consistency and you can expect them to be fairly accurate. Regions in green/blue have the lowest consistency and you should not trust them.
-
-
-Overall this alignment has a score of 80, which means that it is 80% consistent with the entire collection. This is a fairly high index, which means you can probably trust your alignment (at least where it is red).
+When this is done, all the alignments will be combined into one. If you open the file sproteases_small.html with your favorite web browser, you will see a colored version of your alignment. The alignment is colored according to its consistency with all the MSA used to compute it. Regions in red have a high consistency and you can expect them to be fairly accurate. Regions in green/blue have the lowest consistency and you should not trust them. Overall this alignment has a score of 80, which means that it is 80% consistent with the entire collection. This is a fairly high index, which means you can probably trust your alignment (at least where it is red).
 
 
 Using selected methods to compute your MSA
 -------------------------------------------
-Using the 8 Methods of M-Coffee8 can sometimes be a bit heavy. If you only want to use a subset of your favorite methods, you should know that each of these methods is available via the -method flag. For instance, to combine MAFFT, Muscle, t_coffee and ProbCons, you can use:
-
+Using the 8 Methods of M-Coffee8 can sometimes be a bit heavy. If you only want to use a subset of your favorite methods, you should know that each of these methods is available via the -method flag. For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
 
 ::
 
@@ -1633,22 +1421,16 @@ Using the 8 Methods of M-Coffee8 can sometimes be a bit heavy. If you only want 
 This will result in a computation where all the specified methods are mixed together
 
 
-Combining pre-computed alignments
----------------------------------
+Combining precomputed alignments
+--------------------------------
 You may have a bunch of alignments that you have either pre-computed, or assembled manually or received from a colleague. You can also combine these alignments. For instance, let us imagine we generated 4 alignments with ClustalW using different gap penalties:
-
 
 ::
 
   clustalw -infile=sproteases_small.fasta -gapopen=0 -outfile=g0.aln
-
   clustalw -infile=sproteases_small.fasta -gapopen=-5 -outfile=g5.aln
-
   clustalw -infile=sproteases_small.fasta -gapopen=-10 -outfile=g10.aln
-
   clustalw -infile=sproteases_small.fasta -gapopen=-15 -outfile=g15.aln
-
-
 
 To combine them into ONE single alignment, use the -aln flag:
 
@@ -1657,7 +1439,6 @@ To combine them into ONE single alignment, use the -aln flag:
 
   $$: t_coffee sproteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output\
   clustalw html
-
 
 
 As before, the score indicates a high level of consistency (91%) between all these alignments. This is an indication that the final alignment is probably correct.
