@@ -112,18 +112,14 @@ Write or copy all your sequences (protein, DNA or RNA) in a given text file usin
 
 
 This will output three files:
+ - ``sample_seq1.aln`` : your multiple sequence alignment (Clustal format by default)
 
-
-::
-
-  sample_seq1.aln  : your multiple sequence alignment (Clustal format by default)
-
-  sample_seq1.dnd  : the guide tree (Newick format)
+ - ``sample_seq1.dnd`` : the guide tree (Newick format)
   
-  sample_seq1.html : the color coded MSA according to T-Coffee consistency color scheme (html)
+ - ``sample_seq1.html`` : the color coded MSA according to T-Coffee consistency color scheme (html)
 
 
-.. tip:: In principle, the type of the sequences is automatically detected and the default methods adapted accordingly. Sometimes, however, this may fail either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag -type.
+.. tip:: In principle, the type of the sequences is automatically detected and the default methods adapted accordingly. Sometimes, however, this may fail either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag **-type**.
 
 ::
 
