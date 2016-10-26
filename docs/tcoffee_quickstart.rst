@@ -290,13 +290,9 @@ T-RMSD is a structure based clustering method using the iRMSD to drive the struc
   > <seq_name> _P_ <PDB structure file or name>
 
   ******* 3d_sample5.template_list ********
-
   >2UWI-3A _P_ 2UWI-3.pdb
-
   >2UWI-2A _P_ 2UWI-2.pdb
-
   ...
-
   **************************************
 
 
