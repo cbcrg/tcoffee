@@ -339,12 +339,12 @@ You can also use the boxshade scoring scheme:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -\
-      action +3evaluate boxshade -output color_html > color.html
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action \
+      +3evaluate boxshade -output color_html > color.html
 
 
-Colouring/Editing residues in an alignment using a Cache
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Coloring/Editing residues in an alignment using a Cache
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In this particular case, the cache is a file where residues to be colored are declared along with the colors. Nine different colors are currently supported. They are set by default but can be modified by the user. The cache can either look like a standard sequence or alignment file (see below) or like a standard T-Coffee library (see next section). In this section we show you how to specifically modify your original sequences to turn them into a cache.
 
 
@@ -560,7 +560,7 @@ You can extract any sequence by requesting a specific pattern to be found either
  
   To remove sequences containing the pattern [ILM]K:
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep SEQ \
-  REMOVE '[ILM]K' -output clustalw
+      REMOVE '[ILM]K' -output clustalw
 
 
 .. important:: you should know that the pattern can be any perl legal regular expression, you can visit this  `page <http://www.comp.leeds.ac.uk/Perl/matching.html>`_ for some background on regular expressions. 
@@ -583,7 +583,7 @@ If you want to extract (command 1) or remove (command 2) several sequences in or
       'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
 
 
-.. note:: Note the single quotes (') are mandatory as they are meant to protect the name of your sequence and prevent the UNIX shell to interpret it like an instruction.
+.. note:: Note the single quotes (') are mandatory as they are meant to protect the name of your sequence and prevent the Unix shell to interpret it like an instruction.
 
 Once sequences are extracted or removed, some columns may remain containing only gaps, but it is possible to simply remove empty columns from the resulting dataset (command 3), and even extract specific blocks for the selected sequences either keeping the exact same name (command 4) or the name of the specific blocks extracted (command 5):
 
@@ -605,9 +605,9 @@ Once sequences are extracted or removed, some columns may remain containing only
 .. hint:: The tag **+keep_name** must come BEFORE the tag **+extract_seq**.
 
 
-Extracting the Y most informative sequences
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Large datasets are problematic because they can be difficult to align and analyze. The problem is that when there are too many sequences, MSA programs tend to become very slow and inaccurate. Furthermore, you will find that large datasets are difficult to display and analyze. In short, the best size for an MSA dataset is between 20 to 40 sequences; this way you have enough sequences to see the effect of evolution, but at the same time the dataset is small enough so that you can visualize your alignment and recompute it as many times as needed. To be informative, a sequence must contain information the other sequences do not contain. The Y most informative sequences are the Y (number or pourcentage) sequences that are as different as possible to one another, given the initial dataset. To do so, you can use the flag **+trim** followed by your criteria for extracting the sequences (nXX for a number of sequences and NXX for a pourcentage of sequences). The following commands will extract the 10 most informative sequences (command 1) or the 20% of most informative sequences (command 2):
+Extracting the most informative sequences
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Large datasets are problematic because they can be difficult to align and analyze, MSA programs tend to become very slow and inaccurate. In short, the best size for an MSA dataset would be between 20 to 40 sequences to have enough sequences to see the effect of evolution, but in the same time small enough so that you can visualize your alignment and recompute it as many times as needed. More important than its size, a good dataset have to be informative, when each sequence contains information the others do not have. The most informative sequences are the sequences that are as different as possible to one another, within your dataset. You can extract the most informative sequences using flag **+trim** followed by the number of sequences you wish to keep ("n" for a number and "N" for a pourcentage). The following commands will extract the 10 most informative sequences (command 1) or the 20% of most informative sequences (command 2):
 
 ::
 
@@ -624,9 +624,11 @@ Large datasets are problematic because they can be difficult to align and analyz
 .. note:: For very large dataset, seq_reformat will compute the similarity matrix between your sequences once only. It will then store it in its cache to be reused any time you run on the same dataset. In short this means that it will take much longer to run the first time, but be much faster if you need to rerun it.
 
 
-Extracting all the sequences less than X% identical
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the **+trim option**. For instance, you can generate a dataset where no pair of sequences has more than 50% identity either from a dataset of unaligned sequences (command 1) or from any given alignment (command 2). If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the _seq_ with _aln_. Just run the following command lines to see the difference un runtime:
+Extracting/Removing sequences with the % identity
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Removing too identical sequences (redundant)
+""""""""""""""""""""""""""""""""""""""""""""
+Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the **+trim option**. For instance, you can generate a dataset where no pair of sequences has more than 50% identity either from a dataset of unaligned sequences (command 1) or from any given alignment (command 2). If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the "_seq_" with "_aln_". Just run the following command lines to see the difference un runtime:
 
 ::
 
@@ -638,52 +640,35 @@ Removing the most similar sequences is often what people have in mind when they 
 
 .. note:: Using aligned sequences results in a fastest trimming, however, it also means that you rely on a more approximate estimation of sequence similarity.
 
-
-Identifying and removing outliers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Sequences that are too distantly related from the rest of the set will sometimes have very negative effects on the overall alignment; To prevent this, it is advisable not to use them. The next command line will lead to the removal of all the sequences where no pair of sequences has more than 50% identity and have less than 40% average accuracy with all the other sequences in the dataset (the symbol _O standing for Outliers): 
+Removing too different sequences (outliers)
+"""""""""""""""""""""""""""""""""""""""""""
+Sequences that are too distantly related from the rest of the set (called outliers) may have very negative effects on the overall alignment; to prevent this, it is advisable not to use them. The next command line will lead to the removal of all the sequences where no pair of sequences has less than 30% average accuracy with all the other sequences in the dataset (the symbol "_O" stands for Outliers) and more than 80% identity: 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_O40
-
+  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%80_O30
 
 .. hint:: This particular option is quite powerful as it allows you to decide both inferior and superior tresholds for trimming your dataset based on pairwise identity score, and therefore you can dissect your dataset according to different ranges of identity values. Be careful not to remove too many sequences ;-)
 
-
 Forcing specific sequences to be kept
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Sometimes you want to trim while making sure specific or important sequences remain in your dataset. You can do so by providing the **+trim** option with a pattern: it will keep all the sequences whose name contains the given string. For example, if you want to keep all "HUMAN" sequences, no matter how similar they are to one another, you can run the following command:
-
+"""""""""""""""""""""""""""""""""""""
+Sometimes you want to trim based on identity while making sure specific/important sequences remain in your dataset. You can do so by providing a pattern ("_f" for field) : it will keep all the sequences whose name contains the given string ("_fNAME", "_fCOMMENT" or "_fSEQ", f standing for field). Here are some examples corresponding to the different protected fields while removing all sequences above 50% identity: 
 
 ::
 
+  Keep all HUMAN sequences    
   $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim \
-      _seq_%%50 HUMAN
+      _seq_%%50_fNAME HUMAN
 
-
-When you give this command, the program will first make sure that all the HUMAN sequences are kept and it will then assemble your 50% dataset while keeping the HUMAN sequences. Note that string is a perl regular expression.
-
-
-By default, string causes all the sequences whose name it matches to be kept. You can also make sure that sequences whose COMMENT or SEQUENCE matches string are kept. For instance, the following line
-
-
-::
-
+  Keep all sequences containing ".apiens"
   $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim \
       _seq_%%50_fCOMMENT '.apiens'
 
-
-Will cause all the sequences containing the regular expression '.apiens' in the comment to be kept. The _f symbol before COMMENT stands for '_field' If you want to make a selection on the sequences:
-
-::
-
+  Keep all sequences containing residues
   $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim \
       _seq_%%50_fSEQ '[MLV][RK]'
 
-
-You can also specify the sequences you want to keep. To do so, give a fasta file containing the name of these sequences via the -in2 file
-
+You can also specify the sequences you want to keep by giving another fasta file containing the name of these sequences via the flag **-in2**:
 
 ::
 
