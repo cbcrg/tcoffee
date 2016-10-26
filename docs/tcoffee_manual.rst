@@ -626,9 +626,8 @@ Large datasets are problematic because they can be difficult to align and analyz
 
 Extracting/Removing sequences with the % identity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Removing too identical sequences (redundant)
-""""""""""""""""""""""""""""""""""""""""""""
-Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the **+trim option**. For instance, you can generate a dataset where no pair of sequences has more than 50% identity either from a dataset of unaligned sequences (command 1) or from any given alignment (command 2). If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the "_seq_" with "_aln_". Just run the following command lines to see the difference un runtime:
+**Removing too identical sequences (redundant)**
+Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the **+trim** option. For instance, you can generate a dataset where no pair of sequences has more than 50% identity either from a dataset of unaligned sequences (command 1) or from any given alignment (command 2). If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the "_seq_" with "_aln_". Just run the following command lines to see the difference un runtime:
 
 ::
 
@@ -640,8 +639,7 @@ Removing the most similar sequences is often what people have in mind when they 
 
 .. note:: Using aligned sequences results in a fastest trimming, however, it also means that you rely on a more approximate estimation of sequence similarity.
 
-Removing too different sequences (outliers)
-"""""""""""""""""""""""""""""""""""""""""""
+**Removing too different sequences (outliers)**
 Sequences that are too distantly related from the rest of the set (called outliers) may have very negative effects on the overall alignment; to prevent this, it is advisable not to use them. The next command line will lead to the removal of all the sequences where no pair of sequences has less than 30% average accuracy with all the other sequences in the dataset (the symbol "_O" stands for Outliers) and more than 80% identity: 
 
 ::
@@ -650,8 +648,7 @@ Sequences that are too distantly related from the rest of the set (called outlie
 
 .. hint:: This particular option is quite powerful as it allows you to decide both inferior and superior tresholds for trimming your dataset based on pairwise identity score, and therefore you can dissect your dataset according to different ranges of identity values. Be careful not to remove too many sequences ;-)
 
-Forcing specific sequences to be kept
-"""""""""""""""""""""""""""""""""""""
+**Forcing specific sequences to be kept**
 Sometimes you want to trim based on identity while making sure specific/important sequences remain in your dataset. You can do so by providing a pattern ("_f" for field) : it will keep all the sequences whose name contains the given string ("_fNAME", "_fCOMMENT" or "_fSEQ", f standing for field). Here are some examples corresponding to the different protected fields while removing all sequences above 50% identity: 
 
 ::
@@ -716,9 +713,9 @@ You can also remove all the columns containing a given proportion of gaps; for i
   $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +rm_gap 50
 
 
-Extracting portions of dataset
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Extracting portions of a dataset is something very frequently needed. You may need to extract all the sequences that contain the word human in their name, or you may want all the sequences containing a simple motif. We show you here how to do a couple of these things. To do this, you need an evaluation file that may have been generated with T-Coffee, either running a de-novo alignment (command 1) or evaluating a preexisting alignment (command 2):
+Extracting specific columns 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Extracting portions of a dataset is something very frequently needed. You may need to extract all the sequences that contain the word human in their name, or you may want all the sequences containing a simple motif. We show you here how to do a couple of these things. To do this, you need an evaluation file that may have been generated with T-Coffee, either running a *de novo* alignment (command 1) or evaluating a preexisting alignment (command 2):
 
 ::
 
@@ -752,8 +749,8 @@ It is also possible to use a score_ascii file (as produced in the previous secti
 .. warning:: Don't forget the simple quotes ('), it's mandatory !!!
 
 
-Extracting blocks within an alignment
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Extracting entire blocks
+^^^^^^^^^^^^^^^^^^^^^^^^
 In case you want to extracting a specific block of your alignment for instance to remove poorly resolved regions, remove your alignments boudnaries or to extract specific domains, you can do so with the modified **+extract_block**. In this command line, the option **cons** (command 1) indicates that you are counting the positions according to the consensus of the alignment (i.e. the positions correspond to the columns # of the alignment). If you want to extract your block relatively to a specific sequence, you should replace cons with this sequence name (command 2).
 
 ::
@@ -770,8 +767,8 @@ In case you want to extracting a specific block of your alignment for instance t
 .. tip:: It may be sometimes difficult to know where starts the blocks you are interested in except by counting manually the number of column. You can also make some tries by modifying the boundaries until you get the block you want and then redirect the result into the output file name of your choice. 
 
 
-Concatenating alignments
-^^^^^^^^^^^^^^^^^^^^^^^^
+Concatenating blocks or MSAs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you have extracted several blocks generated using the previous command and you want to glue them together, you can use the **+cat_aln** modifier:
 
 ::
