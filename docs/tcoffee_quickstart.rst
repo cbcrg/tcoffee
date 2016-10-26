@@ -6,7 +6,7 @@ Quick Start
 ******************************
 Basic Command Lines (or modes)
 ******************************
-.. Danger:: The T-Coffee documentation is currently under maintenance, the example files can be found here: <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>. You can also use examples associated with their corresponding command lines from the section **T-Coffee Tutorial** published in Nature Protocols (2011). This is temporary and everything will be working when this message will be removed. Thanks for your understanding.
+.. Danger:: The T-Coffee documentation is currently under maintenance, the example files can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. You can also use examples associated with their corresponding command lines from the section **T-Coffee Tutorial** published in Nature Protocols (2011). This is temporary and everything will be working when this message will be removed. Thanks for your understanding.
 
 .. important:: This part is a quick overview on how to run T-Coffee alignment using predefined procedures or "modes". All the files mentioned here can be found in the example directory of the distribution (currently under maintenance). If you use a specific mode of T-Coffee, please use the corresponding citation for publication. Refer to the section **T-Coffee Manual** for more details about T-Coffee usage and tools.
 
