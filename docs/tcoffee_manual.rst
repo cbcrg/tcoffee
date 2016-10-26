@@ -627,6 +627,7 @@ Large datasets are problematic because they can be difficult to align and analyz
 Extracting/Removing sequences with the % identity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 **Removing too identical sequences (redundant)**
+
 Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the **+trim** option. For instance, you can generate a dataset where no pair of sequences has more than 50% identity either from a dataset of unaligned sequences (command 1) or from any given alignment (command 2). If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the "_seq_" with "_aln_". Just run the following command lines to see the difference un runtime:
 
 ::
@@ -640,6 +641,7 @@ Removing the most similar sequences is often what people have in mind when they 
 .. note:: Using aligned sequences results in a fastest trimming, however, it also means that you rely on a more approximate estimation of sequence similarity.
 
 **Removing too different sequences (outliers)**
+
 Sequences that are too distantly related from the rest of the set (called outliers) may have very negative effects on the overall alignment; to prevent this, it is advisable not to use them. The next command line will lead to the removal of all the sequences where no pair of sequences has less than 30% average accuracy with all the other sequences in the dataset (the symbol "_O" stands for Outliers) and more than 80% identity: 
 
 ::
@@ -649,6 +651,7 @@ Sequences that are too distantly related from the rest of the set (called outlie
 .. hint:: This particular option is quite powerful as it allows you to decide both inferior and superior tresholds for trimming your dataset based on pairwise identity score, and therefore you can dissect your dataset according to different ranges of identity values. Be careful not to remove too many sequences ;-)
 
 **Forcing specific sequences to be kept**
+
 Sometimes you want to trim based on identity while making sure specific/important sequences remain in your dataset. You can do so by providing a pattern ("_f" for field) : it will keep all the sequences whose name contains the given string ("_fNAME", "_fCOMMENT" or "_fSEQ", f standing for field). Here are some examples corresponding to the different protected fields while removing all sequences above 50% identity: 
 
 ::
@@ -787,122 +790,79 @@ If you have extracted several blocks generated using the previous command and yo
 
 Manipulating DNA sequences
 ==========================
-Translating DNA sequences into proteins sequences
--------------------------------------------------
-If your sequences are DNA coding sequences, it is always safer to align them as proteins. The seq_reformat option makes it easy for you to translate your sequences:
-
+Translating DNA sequences into protein sequences
+------------------------------------------------
+If your sequences are DNA coding sequences, it is often safer and more accurate to align them as proteins (as protein sequences are more conserved than their corresponding DNA sequence). The seq_reformat option makes it easy for you to translate your sequences:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -action +tr\
- anslate -output fasta_seq
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -action \
+      +translate -output fasta_seq
 
 
-Back-translation with the bona-fide DNA sequences
--------------------------------------------------
+Back-translation with the *bona fide* DNA sequences
+---------------------------------------------------
 Once your sequences have been aligned, you may want to turn your protein alignment back into a DNA alignment, either to do phylogeny, or maybe in order to design PCR probes. To do so, use the following command:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sprote\
- ases_small.aln -action +thread_dna_on_prot_aln -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 \
+      sproteases_small.aln -action +thread_dna_on_prot_aln -output clustalw
 
 
-Finding the bona-fide sequences for the back-translation (under maintenance)
---------------------------------------------------------
-Use the online server Protogene, available from <http://tcoffee.vital-it.ch/apps/tcoffee/do:protogene>.
-
-
-Guessing your back translation
-------------------------------
-Back-translating means turning a protein sequence into a DNA sequence. If you do not have the original DNA sequence, this operation will not be exact, owing to the fact that the genetic code is degenerated. Yet, if a random back-translation is fine with you, you can use the following command.
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 sproteases_small.aln \
-      -action +thread_dna_on_prot_aln -output clustalw
-
-
-In this process, codons are chosen randomly. For instance, if an aminoacid has four codons, the back-translation process will randomly select one of these. If you need more sophisticated back-translations that take into account the codon bias, we suggest you use more specific tools like: <http://alpha.dmi.unict.it/~ctnyu/bbocushelp.html>.
+Finding the *bona fide* sequences for the back-translation
+----------------------------------------------------------
+Use the online server `ProtoGen <http://tcoffee.vital-it.ch/apps/tcoffee/do:protogene>`_.
 
 
 Manipulating RNA Sequences 
 ==========================
 Producing a Stockholm output: adding predicted secondary structures
 -------------------------------------------------------------------
-Producing a consensus structure
+Producing/Adding a consensus structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Given an RNA multiple sequence alignment, it is possible to compute the alifold (Vienna package) consensus secondary structure and output in in stockholm:
-
+Given an RNA multiple sequence alignment, it is possible to compute (command 1) or add (command 2) the alifold (Vienna package) consensus secondary structure and output in in stockholm:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +aln2alifol\
- d -output stockholm_aln
+  Command 1:
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +aln2alifold \
+      -output stockholm_aln
+  Command 2: 
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +add_alifold \
+      -output stockholm_aln
 
-
-
-Adding a consensus structure to an alignment
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +add_alifol\
- d -output stockholm_aln
-
-
-
-Adding a pre-computed consensus structure to an alignment
+Adding a precomputed consensus structure to an alignment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The file sample_rnaseq2.aalifold contains the raw output of the alifold program captured as follows:
-
-
-::
-
-  RNAalifold <sample_rnaseq2.aln > sample_rnaseq2.alifold
-
-
-
-It is possible to add this secondary structure to an alignment using:
-
+The file sample_rnaseq2.alifold contains the raw output of the alifold program produced via the RNAalifold `webserver <http://rna.tbi.univie.ac.at/cgi-bin/RNAalifold.cgi>`_ or captured with the command "RNAalifold <sample_rnaseq2.aln > sample_rnaseq2.alifold". It is possible to add this secondary structure to an alignment (command 1) and to stack Stockholm formatted secondary structures (command 2):
 
 ::
 
+  Command 1:
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.alifold \ 
-      -input2 alifold -action +add_alifold -output stockholm_aln
-
-
-
-.. warning:: The alifold structure and the alignment MUST be compatible. The function makes no attempt to thread or align the structure, it merely stacks it below the MSA.
-
-It is also possible to stack Stockholm formatted secondary structures:
-
-::
-
+      -input2 alifold -action +add_alifold -output stockholm_aln  
+  Command 2:
   $$: seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +add_alifold \
       -output stockholm_aln
 
 
+.. warning:: The alifold structure and the alignment MUST be compatible. The function makes no attempt to thread or align the structure, it merely stacks it below the MSA.
 
 Analyzing a RNAalifold secondary structure prediction
 -----------------------------------------------------
-the following commands can either be applied on a Stockholm or a standard MSA. In the second case (standard MSA) the secondary structure will be automatically re-computed by alifold.
+The following commands can either be applied on a Stockholm or a standard MSA. In the second case (standard MSA) the secondary structure will be automatically recomputed by alifold.
 
 
 Analyzing matching columns
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-The option +alifold2cov_stat will estimate the number of pairs of columns that are perfect Watson and Crick, those that are neutral (including a GU) and those that include correlated mutations. The WCcomp are the compensated mutations maintaining WC base pairing.
+The option **+alifold2cov_stat** will estimate the number of pairs of columns that are perfect Watson and Crick pairings, those that are neutral (including a GU) and those that include correlated mutations (command 1). The WCcomp are the compensated mutations maintaining WC base pairing. Other arguments can given, to display the list of paired positions and their status (compensated, Watson, etc...) use command 2:
 
 ::
 
+  Command 1:
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze stat
-
-
-Other arguments can given, to display the list of paired positions and their status (compensated, Watson, etc)
-
-
-::
-
+  
+  Command 2 (display list of options)
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list
 
 
@@ -915,148 +875,101 @@ W: all pairs are Watson
 c: compensatory mutations
 C: WC compensatory mutations
 
-
 ::
 
+  Standard alignment:
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze aln
-
-It is possible to turn this output into a colored one using:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_htm
+  
+  Color coded alignment:
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_html
 
 
-.. warning:: Handling gapped columns: by default gapped column are ignored but they can be included by adding the tag -usegap
+.. warning:: Handling gapped columns: by default gapped column are ignored but they can be included by adding the tag **-usegap**.
 
 
 Comparing alternative folds
 ---------------------------
-The folds associated with alternative alignments can be compared. This comparison involves counting how many identical pairs of residues are predicted on each sequence in one fold and in the other. The folds can either be provided via Stockholm alignments
-
+The folds associated with alternative alignments can be compared. This comparison involves counting how many identical pairs of residues are predicted on each sequence in one fold and in the other. The top of the output (@@lines) summarizes the results that are displayed on the input alignment; if the provided alignment do not have a fold, this fold will be estimated with alifold. The folds can be provided as Stockholm alignments:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.cw.stk -in2 sample_rnaseq2.tcoffee.stk  \
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.cw.stk -in2 sample_rnaseq2.tcoffee.stk \
       -action +RNAfold_cmp
-
-
-The top of the output (@@lines) summarizes the results that are displayed on the -in alignment. If the provided alignments do not have a fold, this fold will be estimated with alifold.
 
 
 Phylogenetic Trees Manipulation
 ===============================
 Producing phylogenetic trees
 ----------------------------
-The seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering:
-
-
-Given a multiple sequence alignment, it is possible to compute either a UPGM or an NJ tree:
-
+The seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering. Given a multiple sequence alignment, it is possible to compute either a UPGM or an NJ tree. The following commands use an identity matrix to compare your sequences and will output an unrooted NJ tree in newick format (command 1) or a rooted UPGMA tree (command 2):
 
 ::
 
- $$:  t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree -output newick
+  Command 1:
+  $$:  t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree -output newick
 
-
-Will use an identity matrix to compare your sequences and will output an unrooted NJ tree in newick format. If you want to produce a rooted UPGMA tree:
-
-
-::
-
+  Command 2:
   $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _TMODE_upgma -output newick
 
 
-
-If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for instance), you can use a different matrix to compute the pairwise distances:
-
-
-::
-
-   $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _MATRIX_sarmat -output newick
-
-
-
-All these parameters can be concatenated:
+If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for instance), you can use a different matrix to compute the pairwise distances (command 3), and all these parameters can be concatenated (command 4):
 
 
 ::
 
-   $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
+  Command 3:
+  $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _MATRIX_sarmat -output newick
+
+  Command 4:
+  $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
        -output newick
 
 
-Bootstrap facilities will also be added at some point ... For now we recommend you use Phylip if you need some serious phylogeny...
+.. warning:: Bootstrap facilities will also be added at some point... For now we recommend you use Phylip if you need some serious phylogeny !
 
 
 Comparing two phylogenetic trees
 --------------------------------
-Consider the following file (sample_tree1.dnd):
-
-
-::
-
-  (( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
-
-
-and the file sample_tree3.dnd:
+A real interesting option is the ability to compare two trees (unrooted) returning some ofthe most common scores used for this including the famous Robinson-Foulds ;-)
 
 ::
 
-  (( E:0.50000, C:0.50000):0.00000,( A:0.00500, B:0.00500):0.99000, D:0.50000);
-
-
-You can compare them using:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_tree2.dnd -in2 sample_tree3.dnd -action  \
+  $$: t_coffee -other_pg seq_reformat -in sample_tree2.dnd -in2 sample_tree3.dnd -action \
       +tree_cmp -output newick
 
-  tree_cpm|T: 75 W: 71.43 L: 50.50
-  tree_cpm|8 Nodes in T1 with 5 Sequences
-  tree_cmp|T: ratio of identical nodes
-  tree_cmp|W: ratio of identical nodes weighted with the min Nseq below node
-  tree_cmp|L: average branch length similarity
-
-  (( A:1.00000, C:1.00000):-2.00000,( D:1.00000, E:1.00000):-2.00000, B:1.00000);
-
-
-Please consider the following aspects when exploiting these results:
+  #tree_cmp|T: 33 W: 20.00 L: 14.88 RF: 2 N: 9 S: 5
+  #tree_cmp_def|T: ratio of identical nodes
+  #tree_cmp_def|W: ratio of identical nodes weighted with the min Nseq below node
+  #tree_cmp_def|L: average branch length similarity
+  #tree_cmp_def|RF: Robinson and Foulds
+  #tree_cmp_def|N: number of Nodes in T1 [unrooted]
+  #tree_cmp_def|S: number of Sequences in T1
 
 
--The comparison is made on the unrooted trees
--T: Fraction of the branches conserved between the two trees. This is obtained by considering the split induced by each branch and by checking whether that split is found in both trees
--W: Fraction of the branches conserved between the two trees. Each branch is weighted with MIN the minimum number of leaf on its left or right (Number leaf left, Number leaf Right)
--L: Fraction of branch length difference between the two considered trees.
--The last portion of the output contains a tree where distances have been replaced by the number of leaf under the considered node
--Positive values (i.e. 2, 5) indicate a node common to both trees and correspond to MIN.
--Negative values indicate a node found in tree1 but not in tree2
--The higher this value, the deeper the node.
+The output scores in more details:
+- T: Fraction of the branches conserved between the two trees. This is obtained by considering the split induced by each branch and by checking whether that split is found in both trees
+- W: Fraction of the branches conserved between the two trees. Each branch is weighted with MIN the minimum number of leaf on its left or right (Number leaf left, Number leaf Right)
+- L: Fraction of branch length difference between the two considered trees.
+
+The last line contains a tree where distances have been replaced by the number of leaf under the considered node:
+- Positive values indicate a node common to both trees and correspond to MIN.
+- Negative values indicate a node found in tree1 but not in tree2
+- The higher this value, the deeper the node.
 
 
-You can extract this tree for further usage by typing:
-
-
-::
-
-   cat outfile | grep -v 'tree_cmp'
+.. tip:: You can extract this tree for further usage by typing **cat outfile | grep -v 'tree_cmp'**
 
 
 Scanning phylogenetic trees
 ---------------------------
-It is possible to scan an alignment and locally measure the similarity between an estimated local tree and some reference tree provided from an external source (or computed on the fly) using the following command:
-
+It is possible to scan an alignment and locally measure the similarity between an estimated local tree and some reference tree provided from an external source (or computed on-the-fly) using the following command:
 
 ::
 
   $$ :t_coffee -other_pg seq_reformat -in <aln> -in2 <reftree> -action +tree_scan _MODE_scan__W_10_ > p\
  h_tree_scan.txt
 
-
-
 For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be extracted, for each of these block a tree will be estimated and the similarity of that tree with the reference tree will be estimated with cmp_tree. For each position, the tree giving the best fit will be reported, along with the size of the block leading to that tree:
-
 
 ::
 
@@ -1065,31 +978,20 @@ For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be
  
 Pruning phylogenetic trees
 --------------------------
-Pruning removes leaves from an existing tree and recomputes distances so that no information is lost
-
-
-Consider the file sample_tree2.dnd:
-
+Pruning removes leaves from an existing tree and recomputes distances so that no information is lost. Consider the files sample_tree2.dnd and the file sample_seq8.seq:
 
 ::
 
+  sample_tree2.dnd
   (( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
-
-
-
-And the file sample_seq8.seq
-
-
-::
-
+ 
+  sample_seq8.seq
   >A
   >B
   >C
   >D
 
-
 .. note:: Sample_seq8 is merely a FASTA file where sequences can be omitted, but you can also leave them, at your entire convenience.
-
 
 ::
 
@@ -1103,39 +1005,26 @@ Manipulating structure files (PDB)
 ==================================
 Extracting a structure
 ----------------------
-There are many reasons why you may need a structure. T-Coffee contains a powerful utility named extract_from_pdb that makes it possible to fetch the PDB coordinates of a structure or its FASTA sequence without requiring a local installation. By default, the option extract_from_pdb will start looking for the structure in the current directory; it will then look it up locally (PDB_DIR) and eventually try to fetch it from the web (via a wget to www.rcsb.org). All these settings can be customized using environment variables (see the last section).
-
-If you want to fetch the chain E of the PDB structure 1PPG, you can use:
-
+There are many reasons why you may need a structure. T-Coffee contains a powerful utility named **extract_from_pdb** that makes it possible to fetch the PDB coordinates of a structure or its FASTA sequence without requiring a local installation. By default, the option **extract_from_pdb will** start looking for the structure in the current directory; it will then look it up locally (PDB_DIR) and eventually try to fetch it from the web (via a wget to www.rcsb.org). All these settings can be customized using environment variables (see next section). For instance if you want to fetch the chain E of the PDB structure 1PPG and/or its sequence in FASTA format, you can use:
 
 ::
 
+  Fetch the structure:
   $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE
 
-To fetch the sequence, use:
-
-::
-
+  Fetch the correpsonding sequence:
   $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta
-
-
-Will fetch the fasta sequence.
 
 
 Adapting extract_from_pdb to your own environment
 -------------------------------------------------
-If you have the PDB installed locally, simply set the variable PDB_DIR to the absolute location of the directory in which the PDB is installed. The PDB can either be installed in its divided form or in its full form.
-
-
-If the file you are looking for is neither in the current directory nor in the local PDB version, extract_from_pdb will try to fetch it from rcsb. If you do not want this to happen, you should either set the environment variable NO_REMOTE_PDB_DIR to 1 or use the -no_remote_pdb_dir flag:
+If you have the PDB installed locally, simply set the variable PDB_DIR to the absolute location of the directory in which the PDB is installed. The PDB can either be installed in its divided form or in its full form. If the file you are looking for is neither in the current directory nor in the local PDB version, extract_from_pdb will try to fetch it from rcsb. If you do not want this to happen, you should either set the environment variable NO_REMOTE_PDB_DIR to 1 or use the **-no_remote_pdb_dir** flag:
 
 
 ::
 
   export NO_REMOTE_PDB_FILE=1
-
-  or
-
+  
   t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta -no_remote_pdb_file
 
 
@@ -1145,18 +1034,13 @@ By default, T-Coffee also requires two important PDB files declared using the tw
 ::
 
   export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
-  Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt
-
-and:
-
-
-::
-
+  (Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt)
+  
   export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
-  Found at: http://www.rcsb.org/pdb/rest/getUnreleased
+  (Found at: http://www.rcsb.org/pdb/rest/getUnreleased)
 
-.. warning:: Since the file unreleased.xml is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
 
+.. warning:: Since the file ``unreleased.xml`` is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
 
 
 *************************************
