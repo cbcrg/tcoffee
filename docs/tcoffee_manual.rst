@@ -1138,35 +1138,63 @@ Profile Construction  ++     +++   +++      +++      ++
 Table 2. Most Suitable Appplications of each package. In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
 
 
-Computing simple MSA with T-Coffee (default)
-============================================
-A simple Multiple Sequence Alignment
-------------------------------------
-T-Coffee default mode will simply compute a Multiple Sequence Alignment of the sequences you provided in input. It will display the final MSA on the screen and in several files according to the format you asked (by default, the MSA is stored in a file .aln in ClustalW format). The headline of the alignment file contains important information such as the version of T-Coffee used, the CPU time, the overall consistency score (normalized to 100 or 1000 depending on the version of T-Coffee) and the total length of the MSA: it is quite practical to have a quick glance at the result. 
+Computing simple MSA with T-Coffee 
+==================================
+A simple Multiple Sequence Alignment (default)
+----------------------------------------------
+T-Coffee default mode will simply compute a Multiple Sequence Alignment of the sequences you provided in input (command 1). It will display the final MSA on the screen and in several files according to the format you asked in command 2 (by default, the MSA is stored in a file .aln in ClustalW format). The headline of the alignment file contains important information such as the version of T-Coffee used, the CPU time, the overall consistency score (normalized to 100 or 1000 depending on the version of T-Coffee) and the total length of the MSA: it is quite practical to have a quick glance at the result. 
 
 ::
 
+  Command 1: default MSA
   $$: t_coffee sproteases_small.fasta
 
+  Command 2: default MSA, multiple output files
   $$: t_coffee sproteases_small.fasta -output=clustalw,fasta_aln,msf
   
 Each time you run T-Coffee, 3 files are always generated:
-- the alignment:	``sproteases_small.aln``
-- the guide tree:	``sproteases_small.dnd``
-- the colored MSA:	``sproteases_small.html``
+
+ - the alignment:	``sproteases_small.aln``
+ - the guide tree:	``sproteases_small.dnd``
+ - the colored MSA:	``sproteases_small.html``
 
 .. warning:: the guide tree is not a phylogenetic tree, it is used in the alignment process for clustering the sequences. 
 
-.. tip:: you can visualize the colored html file with any browser/software you prefer. The display of the sequences should be aligned and formatted; if not, use another browser, it works quite well with Firefox, Safari, etc... If you need to do more sophisticated modifications on your MSA, we recommend tu use `Jalview <http://www.jalview.org/>`_ which incorporate the T-Coffee color scheme.
+.. tip:: you can visualize the colored html file with any browser/software you prefer. The display of the sequences should be aligned and formatted; if not, use another browser, it works quite well with Firefox, Safari, etc... If you need to do more sophisticated modifications on your MSA, we recommend to use `Jalview <http://www.jalview.org/>`_ which incorporate the T-Coffee color scheme.
 
 
-Aligning several datasets
--------------------------
-If your sequences are spread across several datasets, you can give all the files you want (the limit is 200) via the flag **-seq**, and in any format you want. Just know that 1) if you give an alignment, the gaps will be reset and your alignment will only provide sequences, 2) sequences with the same name between two files are assumed to be the same sequence, 3) ff their sequences differ, they will be aligned and replaced by the consensus of that alignment (process known as sequence reconciliation). To align multiple datasets, just run:
+Aligning multiple datasets/Combining multiple MSAs
+--------------------------------------------------
+If your sequences are spread across several datasets, you can give all the files you want (the limit is 200) via the flag **-seq**, and in any format you want. Just know that 1) if you give an alignment, the gaps will be reset and your alignment will only provide sequences, 2) sequences with the same name between two files are assumed to be the same sequence, 3) ff their sequences differ, they will be aligned and replaced by the consensus of that alignment (process known as sequence reconciliation). To align multiple datasets:
 
 ::
 
   $$: t_coffee -seq=sprotease1_small.fasta,sprotease2_small.aln -output=clustalw,fasta_aln,msf
+
+
+You may also have a bunch of alignments (with the same sequences) that you have either precomputed, assembled manually or received from a colleague. You can also combine these alignments. For instance, let us imagine we generated 4 alignments with ClustalW using different gap penalties. To combine them into ONE single alignment, use the **-aln** flag. The final score indicates a high level of consistency (91%) between all these MSAs, meaning that the final MSA is probably correct.
+
+::
+
+  Your 4 different MSAs:
+  clustalw -infile=sproteases_small.fasta -gapopen=0 -outfile=g0.aln
+  clustalw -infile=sproteases_small.fasta -gapopen=-5 -outfile=g5.aln
+  clustalw -infile=sproteases_small.fasta -gapopen=-10 -outfile=g10.aln
+  clustalw -infile=sproteases_small.fasta -gapopen=-15 -outfile=g15.aln
+
+  Combining multiple MSAs:
+  $$: t_coffee sproteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output\
+  clustalw html
+
+
+Estimating the diversity in your alignment
+------------------------------------------
+It is easy to measure the level of diversity within your multiple sequence alignment. Will output all the pairwise identities, as well as the average level of identity between each sequence and the others. You can sort and grep in order to select the sequences you are interested in.
+
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -output sim
 
 
 Comparing alternative alignments
@@ -1214,11 +1242,11 @@ Changing the substitution matrix
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 T-Coffee only uses the substitution matrix to make the pairwise alignments that go into the library. These are all the global alignments of every possible pair of sequences, and the ten best local alignments associated with every pair of sequences. 
 
-- By default, these alignments are computed using a Blosum62 matrix, but you can use any matrix you fancy instead, including: pam120mt, pam160mt, pam250mt, pam350mt, blosum30mt, blosum40mt, blosum45mt, blosum50mt, blosum55mt, blosum62mt, blosum80mt, or even user-provided matrices in the BLAST format, as described in the technical manual.
+ - By default, these alignments are computed using a Blosum62 matrix, but you can use any matrix you fancy instead, including: pam120mt, pam160mt, pam250mt, pam350mt, blosum30mt, blosum40mt, blosum45mt, blosum50mt, blosum55mt, blosum62mt, blosum80mt, or even user-provided matrices in the BLAST format, as described in the technical manual.
 
-- PAM matrices: These matrices are allegedly less accurate than the blosum. The index is correlated to the evolutionary distances. You should therefore use the pam350mt to align very distantly related sequences.
+ - PAM matrices: These matrices are allegedly less accurate than the blosum. The index is correlated to the evolutionary distances. You should therefore use the pam350mt to align very distantly related sequences.
 
-- Blosum matrices: These matrices are allegedly the most accurate. The index is correlated to the maximum percent identity within the sequences used to estimate the matrix. You should therefore use the Blosum30mt to align very distantly related sequences. Blosum matrices are biased toward protein core regions. This may explain why these matrices tend to give better alignments, since by design they can capture the most evolutionary resilient signal contained in proteins.
+ - Blosum matrices: These matrices are allegedly the most accurate. The index is correlated to the maximum percent identity within the sequences used to estimate the matrix. You should therefore use the Blosum30mt to align very distantly related sequences. Blosum matrices are biased toward protein core regions. This may explain why these matrices tend to give better alignments, since by design they can capture the most evolutionary resilient signal contained in proteins.
 
 Unless you have some structural information available, the only way to tell whether your alignment has improved or not is to look at the score. For instance, if you compute the two following alignments:
 
@@ -1239,28 +1267,25 @@ The penalties can be changed via the flags **-gapopen** for the gap opening pena
 
   $$: t_coffee sproteases_small.fasta -gapopen -100 -gapext -5
 
-This gap penalty is only applied at the alignment level (i.e. after the library was computed). If you want to change the gap penalties of the methods used to build the library, you will need to go deeper...Two methods are used by default to build the library. One does global pairwise alignments and is named slow_pair, the other is named lalign_id_pair and produces local alignments. These methods are specified via the -method flag. The default of this flag is:
+This gap penalty is only applied at the alignment level (i.e. after the library was computed). If you want to change the gap penalties of the methods used to build the library, you will need to go deeper...Two methods are used by default to build the library (command 1). One does global pairwise alignments and is named slow_pair, the other is named lalign_id_pair and produces local alignments. These methods are specified via the **-method** flag. Usually you do not need to write it because it is the default, but if you want to change the default parameters of the constituting methods (command 2), you will need to do so explicitly (the default parameters are for lalign_id_pair **GOP=-10, GEP=-4, MATRIX=blosum50mt** and for slow_pair **GOP=-10, GEP=-1 and MATRIX=blosum62mt**. Using the command 2, the library is now computed using the Blosum62mt with lalign, rather than the Blosum50mt; the good news is that when using this matrix, the score of our alignment increases from 48 to 50. We assume this new alignment is therefore more accurate than the previous one.
 
 ::
 
+  Command 1: default T-Coffee
   $$: t_coffee sproteases_small.fasta -method=lalign_id_pair,slow_pair
 
-Usually you do not need to write it because it is the default, but if you want to change the default parameters of the constituting methods, you will need to do so explicitely. The default for lalign_id_pair are: GOP=-10, GEP=-4, MATRIX=blosum50mt. The default for slow_pair are: GOP=-10, GEP=-1 and MATRIX=blosum62mt. If you want to change this, try:
+  Command 2: modifiying the parameters
+  $$: t_coffee sproteases_small.fasta -method lalign_id_pair@EP@MATRIX@blosum62mt, \
+      slow_pair -outfile sproteases_small.b62_aln
 
-::
-
-  $$: t_coffee sproteases_small.fasta -method lalign_id_pair@EP@MATRIX@blosum62m\
- t,slow_pair -outfile sproteases_small.b62_aln
-
-This means the library is now computed using the Blosum62mt with lalign, rather than the Blosum50mt. The good news is that when using this matrix, the score of our alignment increases from 48 (default) to 50. We may assume this new alignment is more accurate than the previous one.
 
 .. warning:: It only makes sense to compare the consistency score of alternative alignments when these alignments have been computed using the same methods (lalign_id_pair and slow_pair for instance).
 
 
-Aligning large datasets
-=======================
-Aligning very large datasets with MUSCLE
-----------------------------------------
+Aligning (very) large datasets
+==============================
+Aligning (very) large datasets with MUSCLE
+------------------------------------------
 T-Coffee is not a good choice if you are dealing with very large datasets, use MAFFT or MUSCLE. To align a large dataset with MUSCLE, try:
 
 ::
@@ -1269,140 +1294,76 @@ T-Coffee is not a good choice if you are dealing with very large datasets, use M
   muscle -infile sproteases_large.fasta > sproteases_large.muscle
   
   Fast mode (less accurate)
-  muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 > sproteases_large.muscle
+  muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
+  > sproteases_large.muscle
 
 
-Aligning very large alignments with MAFFT
+Aligning (very) large datasets with MAFFT
 -----------------------------------------
 The fastest mode with MAFFT can be achieved using: **mafft --retree 2 input > output**.
 
 
-Aligning very large alignments with T-Coffee
---------------------------------------------
-T-Coffee is not very well gifted for aligning large datasets, but you can give it a try using a special option that generates approximate alignments. These alignments should roughly have the same accuracy as ClustalW. They are acceptable for sequences more than 40% identical.
-
+Aligning (very) large alignments with T-Coffee
+----------------------------------------------
+T-Coffee is not very well gifted for aligning large datasets (for now), but you can give it a try using a special option that generates approximate fast alignments (command 1). These MSAs should roughly have the same accuracy as ClustalW, and are quite acceptable for sequences more than 40% identical. This mode works by only considering the best diagonals between two sequences, and by default all the diagonals with substitution score >0 are considered, but you can lower this to reduce the running time (command 2). That will only consider the top 10 diagonals. This will be very useful if you have long and very similar sequences to align (DNA for instance).
 
 ::
 
+  Command 1:
   $$: t_coffee sproteases_large.fasta -mode quickaln
 
+  Command 2:
+   $$: t_coffee sample_seq1.fasta -mode quickaln -ndiag=10
 
-Shrinking large alignments with T-Coffee
-----------------------------------------
-Once you have generated your large alignment, you may need/want to shrink it to a smaller one, that will be (hopefully) as informative and easier to manipulate. For that purpose, use the trim option (described in detail in the first section of this document).
+Another alternative to align large datasets is a special mode of T-Coffee, fm-Coffee (command 3), derived from M-Coffee (see next section) and designed to be fast and able to handle large datasets (it is used for example in Ensembl). To do so, T-Coffee used three different fast aligners: MAFFT, MUSCLE and Kalign. 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.muscle -action +trim \
- _n20 -output > sproteases_large_muscle_trim.aln
+  Command 3:
+  $$: t_coffee sproteases_large.fasta -mode fmcoffee
+
+.. tip:: Once you have your large MSA, you can always shrink/trim them using reformatting options (see previous section) for instance by extraction the most informative sequences or by defining %identity cut-off.
+
+.. note:: In the last 10 years, a special effort have been made to improve large scale alignment leading to the development of few new methods among which Clustal Omega, PASTA, UPP and we hope soon a MEGA-Coffee aligner. These methods are not incorporated in T-Coffee so if your datasets are really large (>5000 sequences) don't hesitate to use these methods instead.
 
 
 Using many methods at once
 ==========================
-One of the most common situation when building multiple sequence alignments is to have several alignments produced by several alternative methods, and not knowing which one to choose. In this section, we show you that you can use M-Coffee to combine your many alignments into one single alignment. We show you here that you can either let T-Coffee compute all the multiple sequence alignments and combine them into one, or you can specify the methods you want to combine. M-Coffee is not always the best method, but extensive benchmarks on BaliBase, Prefab and Homstrad have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine pre-computed alignments.
+One of the most common situation when building MSAs is to have several alignments produced by different alternative methods, and not knowing which one to choose. In this section, we show you how to use M-Coffee to combine many alignments into one single alignment, or how you can specify only the methods you want. M-Coffee is not always the best method, but extensive benchmarks on BaliBase, Prefab and Homstrad have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine precomputed alignments.
 
 
 Using all the methods at the same time: M-Coffee
 ------------------------------------------------
-In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages to be installed (see documentation). The following command:
-
+In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages to be installed (see **T-Coffee Installation** and section **Integrating External Methods in T-Coffee**). If you did a default installation, all the software you need should be there. M-Coffee is a special mode of T-Coffee that you can call using the flag **-mode mcoffee**. It will align your sequence using 8 different aligners: ClustalW, POA, MUSCLE, ProbCons, MAFFT, Dialing-T, PCMA and T-Coffee:
 
 ::
 
   $$: t_coffee sproteases_small.fasta -mode mcoffee -output clustalw, html
 
 
-
-Will compute a Multiple Sequence Alignment with the following MSA packages: clustalw, poa, muscle, probcons, mafft, dialing-T, pcma and T-Coffee.
-
-
-For those using debian, another mode is available
-
-
-::
-
-  $$: t_coffee sproteases_small.fasta -mode dmcoffee -output clustalw, html
-
-
-Will compute a Multiple Sequence Alignment with the following MSA packages: kalign, poa, muscle, probcons, mafft, dialing-T, and T-Coffee.
-
-::
-
-  Package where from
-  ==========================================================
-  ClustalW can interact with t_coffee
-  ----------------------------------------------------------
-  POA  http://www.bioinformatics.ucla.edu/poa/
-  ----------------------------------------------------------
-  MUSCLE http://www.bioinformatics.ucla.edu/poa/
-  ----------------------------------------------------------
-  ProbCons http://probcons.stanford.edu/
-  ----------------------------------------------------------
-  MAFFT http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-  ----------------------------------------------------------
-  Dialign-T http://dialign-t.gobics.de/
-  ----------------------------------------------------------
-  PCMA ftp://iole.swmed.edu/pub/PCMA/
-  ----------------------------------------------------------
-  Kalign  msa.cgb.ki.se/cgi-bin/msa.cgi
-  ----------------------------------------------------------
-
-When this is done, all the alignments will be combined into one. If you open the file sproteases_small.html with your favorite web browser, you will see a colored version of your alignment. The alignment is colored according to its consistency with all the MSA used to compute it. Regions in red have a high consistency and you can expect them to be fairly accurate. Regions in green/blue have the lowest consistency and you should not trust them. Overall this alignment has a score of 80, which means that it is 80% consistent with the entire collection. This is a fairly high index, which means you can probably trust your alignment (at least where it is red).
-
+When this is done, all the alignments will be combined into one. If you open the file sproteases_small.html with your favorite web browser, you will see a colored version of your alignment: the alignment is colored according to the consistency of the different methods used. Regions in red have a high consistency, so all the methods agree and you can expect them to be fairly accurate. Regions in green/blue have the lowest consistency, meaning that all the methods deliver different alignment in these regions and you should not trust them. Overall this alignment has a score of 80, which means that it is 80% consistent with the entire collection. This is a fairly high index, which means you can probably trust your alignment (at least where it is red).
 
 Using selected methods to compute your MSA
 -------------------------------------------
-Using the 8 Methods of M-Coffee8 can sometimes be a bit heavy. If you only want to use a subset of your favorite methods, you should know that each of these methods is available via the -method flag. For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
+Using the 8 Methods of M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the **-method flag**. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
 
 ::
 
-  $$: t_coffee sproteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_ms\
- a,muscle_msa -output=html
+  $$: t_coffee sproteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa, \
+      muscle_msa -output=html
 
 
-
-This will result in a computation where all the specified methods are mixed together
-
-
-Combining precomputed alignments
---------------------------------
-You may have a bunch of alignments that you have either pre-computed, or assembled manually or received from a colleague. You can also combine these alignments. For instance, let us imagine we generated 4 alignments with ClustalW using different gap penalties:
-
-::
-
-  clustalw -infile=sproteases_small.fasta -gapopen=0 -outfile=g0.aln
-  clustalw -infile=sproteases_small.fasta -gapopen=-5 -outfile=g5.aln
-  clustalw -infile=sproteases_small.fasta -gapopen=-10 -outfile=g10.aln
-  clustalw -infile=sproteases_small.fasta -gapopen=-15 -outfile=g15.aln
-
-To combine them into ONE single alignment, use the -aln flag:
-
-
-::
-
-  $$: t_coffee sproteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output\
-  clustalw html
-
-
-As before, the score indicates a high level of consistency (91%) between all these alignments. This is an indication that the final alignment is probably correct.
-
-
-Aligning profiles
+Aligning profiles 
 =================
-Sometimes, it is better to pre-align a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets
+Sometimes, it is better to prealign a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets
 
-
-Using profiles as templates
----------------------------
 Aligning one sequence to a profile
 ----------------------------------
 Assuming you have a multiple alignment (sproteases_small.aln) here is a simple strategy to align one sequence to your profile:
 
-
 ::
 
   $$: t_coffee sproteases_oneseq.fasta -profile sproteases_small.aln
-
 
 
 Aligning many sequences to a profile
@@ -1417,10 +1378,16 @@ You can align as many sequences as you wish to your profile. Likewise, you can h
 
 
 
-Will make a multiple alignment of 3 profiles and 5 sequences. You can mix sequences and profiles in any proportion you like. You can also use all the methods you want although you should be aware that when using external methods (see the external method section in this tutorial), the profile is replaced with its consensus sequence, which will not be quite as accurate.
+Will make a multiple alignment of 3 profiles and 5 sequences. You can mix sequences and profiles in any proportion you like. You can also use all the methods you want although you should be aware that when using external methods (see the external method section in this tutorial), the profile is replaced with its consensus sequence, which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair and proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
 
 
-Methods supporting full profile information are: lalign_id_pair, slow_pair and proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
+Computing very accurate (but slow) alignments with PSI-Coffee
+-------------------------------------------------------------
+PSI-Coffee is currently the most accurate mode of T-Coffee and also the slowest; its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment. In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences.
+
+::
+
+  $$: t_coffee sproteases_small.fasta -mode psicoffee
 
 
 Aligning other types of sequences
