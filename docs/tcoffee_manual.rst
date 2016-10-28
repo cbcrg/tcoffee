@@ -1344,8 +1344,6 @@ In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages 
 
 The final MSA is a combination of all methods. The alignment is colored with the T-Coffee consistency color scheme, but in this case the colors will reflect the consistency between methods: 1) regions in red have a high consistency, so all the methods agree and you can expect them to be fairly accurate, 2) regions in green/blue have the lowest consistency, meaning that all the methods deliver different alignment in these regions and you should not trust them. Overall this alignment has a score of 951 (1000 being the max), which means that it is roughly 95% consistent with the entire collection; this is a fairly high index meaning that you can trust your alignment. 
 
-.. warning:: Some values are given here as an indication, however, depending on the T-Coffee version you are using these values may not be exactly equal. 
-
 Using selected methods to compute your MSA
 -------------------------------------------
 Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the **-method flag**. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
@@ -1357,37 +1355,37 @@ Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you 
 
 Aligning profiles 
 =================
-Sometimes, it is better to prealign a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets
+Sometimes, it is better to prealign a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets.
 
-Aligning one sequence to a profile
+Aligning sequence(s) to profile(s)
 ----------------------------------
-Assuming you have a multiple alignment (sproteases_small.aln) here is a simple strategy to align one sequence to your profile:
+Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) here is a simple strategy to align sequence(s) to your profile(s). It can align a variable number of sequences from 1 to N, with a variable number of profiles from 1 ot N: you can mix sequences and profiles in any proportion you like. 
 
 ::
 
+  Adding one sequence to your MSA:
   $$: t_coffee sproteases_oneseq.fasta -profile sproteases_small.aln
 
+  Adding many sequences to many profiles:
+  $$: t_coffee sequences.fasta -profile=prf1.aln,prf2.aln,prf3.aln -outfile=combined_profiles.aln
 
-Aligning many sequences to a profile
-------------------------------------
-You can align as many sequences as you wish to your profile. Likewise, you can have as many profiles as you want. For instance, the following:
+.. warning:: You can also use all the methods you want but be aware when using external methods that profiles are nto always supported. When it is not, it is replaced with its consensus sequence which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair, proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
 
-::
-
-  $$: t_coffee sequences.fasta -profile=prf1.aln,prf2.aln,prf3.aln -outfile=comb\
- ined_profiles.aln
-
-Will make a multiple alignment of 3 profiles and 5 sequences. You can mix sequences and profiles in any proportion you like. You can also use all the methods you want although you should be aware that when using external methods (see the external method section in this tutorial), the profile is replaced with its consensus sequence, which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair and proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
-
-
-Computing very accurate (but slow) alignments with PSI-Coffee
--------------------------------------------------------------
-PSI-Coffee is currently the most accurate mode of T-Coffee and also the slowest; its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment. In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences.
+Computing very accurate (but slow) alignments with PSI/TM-Coffee
+-----------------------------------------------------------------
+PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced databse of TM proteins and also including a prediction of transmembran domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_.
 
 ::
 
+  Command 1: PSI-Coffee
   $$: t_coffee sproteases_small.fasta -mode psicoffee
+  
+  Command 2: TM-Coffee
+  $$: t_coffee sproteases_small.fasta -mode psicoffee -blast_server <LOCAL> -protein_db <database>
+      -template_file PSITM
 
+
+.. warning:: PSI/TM-Coffee requires BLAST and a database to search. If you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. Also, for TM-Coffee, the reduced database has to be installed locally otherwise you are just running PSI-Coffee.
 
 Using protein 2D/3D structural information 
 ==========================================
