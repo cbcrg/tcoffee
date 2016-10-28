@@ -1370,13 +1370,10 @@ Aligning many sequences to a profile
 ------------------------------------
 You can align as many sequences as you wish to your profile. Likewise, you can have as many profiles as you want. For instance, the following:
 
-
 ::
 
   $$: t_coffee sequences.fasta -profile=prf1.aln,prf2.aln,prf3.aln -outfile=comb\
  ined_profiles.aln
-
-
 
 Will make a multiple alignment of 3 profiles and 5 sequences. You can mix sequences and profiles in any proportion you like. You can also use all the methods you want although you should be aware that when using external methods (see the external method section in this tutorial), the profile is replaced with its consensus sequence, which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair and proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
 
@@ -1390,8 +1387,241 @@ PSI-Coffee is currently the most accurate mode of T-Coffee and also the slowest;
   $$: t_coffee sproteases_small.fasta -mode psicoffee
 
 
-Aligning other types of sequences
-=================================
+Using protein 2D/3D structural information 
+==========================================
+Using structural information when aligning sequences is very useful. The reason is that structures diverge slower than sequences. As a consequence, one may still find a discernable homology between two sequences that have been diverging for so long that their sequences have evolved beyond recognition. Yet, when assembling the correct structure based MSA, you will realize that these sequences contain key conserved residues that a simple alignment procedure was unable to reveal. We show you in this section how to make the best of T-Coffee tools to incorporate structural information in your alignment.
+
+
+Using 3D structures: Expresso/3D-Coffee
+---------------------------------------
+What is Expresso?
+^^^^^^^^^^^^^^^^^
+Expresso is the latest T-Coffee mode. It is not yet available for local installation, but you can run it from the www.tcoffee.org server. The principle of Expresso is simple: the server runs a BLAST between every sequence in your query against the PDB database. If it finds a structure similar enough to a sequence in your dataset (>60% identity), it will use that structure as a template for your sequence. Template files look something like:
+
+::
+
+  >sp|P08246|ELNE_HUMAN _P_ 1PPGE
+  >sp|P20160|CAP7_HUMAN _P_ 1AE5
+  >sp|P00757|KLKB4_MOUSE _P_ 1SGFX
+  >sp|Q6H321|KLK2_HORSE _P_ 1GVZA
+  ...
+
+In a template file, _P_ indicates that the template is of type structure (P for PDB). Template files can be generated manually or automatically by the Expresso server. Whenever possible t_coffee will then align your sequences using the structural information contained in the templates. If it encounters enough structures (as shown here) it will produce a genuine structure based sequence alignment.
+
+
+Using Expresso
+^^^^^^^^^^^^^^
+::
+
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
+  PDB
+
+
+Using secondary structure predictions
+-------------------------------------
+T-Coffee can be used to predict secondary structures and transmembrane domains. For secondary structure predictions, the current implementation is only able to run GOR on either single sequences or on a bunch of homologues found by BLAST.
+
+Single sequence prediction
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+To make a secondary structure prediction with GOR, run the following. In this command line SSP is a hard coded mode. It prompts the computation of predicted secondary structures.
+
+::
+
+  t_coffee sample_aln.fasta -template_file SSP
+
+The predictions are then displayed in the files:
+
+::
+
+  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgb_chite.ssp
+  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_trybr.ssp
+  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_trybr3.ssp
+  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_wheat.ssp
+  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_wheat2.ssp
+  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgt_mouse.ssp
+
+Transmembrane structures can be carried out with:
+
+::
+
+  $$: t_coffee sample_aln.fasta -template_file TM
+
+Multiple sequences predictions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Used this way, the method will produce for each sequence a secondary prediction file. GOR is a single sequence with a relatively low accuracy. It is possible to increase the accuracy by coupling BLAST and GOR, this can be achieved with the following command:
+
+::
+
+  $$: t_coffee sample_aln.fasta -template_file PSISSP
+
+When doing so, the predictions for each sequence are obtained by averaging the GOR predictions on every homologue as reported by a BLAST against NR. By default the BLAST is done remotely at the NCBI using the blastpgp web service of the EBI. A similar output can be obtained for Transmembrane segment predictions:
+
+::
+
+  $$: t_coffee sample_aln.fasta -template_file PSITM
+
+
+Incorporation of the prediction in the alignment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+It is possible to use the secondary prediction in order to reward the alignment of similar elements
+
+::
+
+  $$: t_coffee sample_aln.fasta -template_file PSISSP -method_evaluate_mode ssp -method \
+      lalign_id_pair slow_pair
+
+Likewise, it is possible to use this information with trans-membrane domains
+
+::
+
+  $$: t_coffee sample_aln.fasta -template_file PSITM -method_evaluate_mode tm -method \
+      lalign_id_pair slow_pair
+
+The overall effect is very crude and amounts to over-weighting by 30% the score obtained when matching two residues in a similar secondary structure state. The net consequence is that residues in similar predicted states tend to be aligned more easily.
+
+
+Using other secondary structure predictions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you have your own predictions, you can use them. All you need is to produce a template file where the file containing the secondary structure prediction is declared along with the sequence:
+
+::
+
+  >hmgl_wheat _E_ hmgl_wheat.ssp
+  >hmgb_chite _E_ hmgb_chite.ssp
+  >hmgl_trybr3 _E_ hmgl_trybr3.ssp
+  >hmgl_wheat2 _E_ hmgl_wheat2.ssp
+  >hmgt_mouse _E_ hmgt_mouse.ssp
+  >hmgl_trybr _E_ hmgl_trybr.ssp
+
+where each template looks like this:
+
+::
+
+  >hmgl_wheat
+
+  CCCCCCCCCCCCHHHHHHHCCCCCCCCCHHHHHHHHHHHHHHHCCCCHHHHHHHHHHHHHHHCE
+
+You can then run T-Coffee using your own template file
+
+::
+
+  $$: t_coffee sample_aln.fasta -template_file <template_file> -method_evaluate_mode \
+      ssp -method lalign_id_pair slow_pair
+
+Output of the prediction
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can output a color coded version of your alignment using the predicted structures
+
+
+::
+
+  $$: t_coffee sample_aln.fasta -template_file PSISSP -output sec_html
+
+A similar result can be obtained with trans-membrane regions:
+
+
+::
+
+  $$: t_coffee sample_aln.fasta -template_file PSITM -output tm_html
+
+
+Aligning sequences and structures
+---------------------------------
+Mixing sequences and structures
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Gather your sequences in the same file. Name your structures according to their PDB identifier. The file three_pdb_two_seq.fasta contains five sequences, three are the sequences of PDB structures and two are regular sequences.
+
+
+What you want to do is to build a T-Coffee library where sequences with a known structures are aligned with a structure alignment program (like sap) while the other sequences are aligned using regular T-Coffee methods. You can achieve this with the following command:
+
+::
+
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
+  PDB
+
+The option -template_file is here to tell the program how to find the PDB. In that case. EXPRESSO means that a remote BLAST (the EBI BLAST) will be used to identify the best targets. If your sequences are already named according to their PDB name, you can use:
+
+::
+
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
+  _SELF_P_
+
+_SELF_ means that the PDB identifier is the name of the sequences, while _P_ is an indication that the template is indeed a PDB. These indications are necessary for T-Coffee to fetch the relevant structures. The good news is that you do not need to have PDB installed locally as T-Coffee will automatically fetch the structures directly from RCSB (the home of PDB). Of course, if your dataset only contains structures, your alignment becomes a structural alignment. If you have a fugue license, you can also add the fugue method to your run. Fugue will align the structures with sequences whose structure is unknown (this is called threading).
+
+::
+
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair,fugue_pair -te\
+ mplate_file _SELF_P_
+
+This can be written more concisely, using one of T-Coffee special_modes:
+
+::
+
+   $$: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
+
+   $$: t_coffee three_pdb_two_seq.fasta -mode expresso
+
+
+Using sequences only
+^^^^^^^^^^^^^^^^^^^^
+What often happens is that you have already built a dataset with sequences that are very similar to PDB sequences but not exactly identical. It may even be the case that the real sequence and the PDB one do not match exactly because of some genetic engineering on the structure. In this case, you have no structure whose sequence is exactly similar to the sequences in your dataset. All you need to do is to declare the equivalence sequences/structures and run T-Coffee, just like Expresso does. The first step is to fill up a template file that contains an explicit declaration of the structures corresponding to your sequences. The format is very simple and fasta-like. You can use the file: sproteases_small.template_file
+
+::
+
+  >sp|P08246|ELNE_HUMAN _P_ 1PPGE
+  >sp|P20160|CAP7_HUMAN _P_ 1AE5
+  >sp|P00757|KLKB4_MOUSE _P_ 1SGFX
+  >sp|Q6H321|KLK2_HORSE _P_ 1GVZA
+
+
+In this file, the first line is telling us that sequence sp|P08246|ELNE_HUMAN is associated with the structural template 1PPGE. The sequence and the structure do not need to be identical although we recommend using structural templates more than 60% identical with your actual sequences (i.e. similar enough so that they generate a non ambiguous alignment). If your template file is ready, all you need to do is run the following command.
+
+::
+
+  $$: t_coffee sproteases_small.fasta -method slow_pair, lalign_id_pair, sap_pai\
+ r -template_file sproteases_small.template_file
+
+When you run this once, T-Coffee goes and fetches the structures. It will then align them using sap. It takes a lot of time to fetch structures, and it takes even more time to align them with sap. This is why T-Coffee saves these important intermediate results in a special location called the cache. By default, your cache is in ~/.t_coffee/cache, it is a good idea to empty it from time to time...
+
+
+Aligning profile using structural information
+---------------------------------------------
+If you have two profiles to align, an ideal situation is when your profiles each contain one or more structures. These structures will guide the alignment of the profiles, even if they contain very distally related sequences. We have prepared two such profiles (prf1_pdb1.aln, prf2_pdb2.aln). You have two choices here. All you need is a template file that declares which sequences have a known structure. If you only want to align sequences, you can try:
+
+::
+
+  $$: t_coffee -profile=profile1_pdb1.aln, profile2_pdb2.aln -method sap_pair \
+      -profile_template_file two_profiles.template_file
+
+
+Aligning RNA sequences (to be done...)
+======================
+RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, smart people have thought about this. If you are interested in RNA, check: http://www.bio.inf.uni-jena.de/Software/MARNA/.
+
+Aligning DNA sequences (to be done...)
+======================
+Aligning DNA sequences
+----------------------
+Multiple Sequence Alignment methods are not at their best when aligning DNA sequences. Whenever you can, try using a local multiple sequence alignment package like the Gibbs sampler. Yet if you believe your DNA sequence are homologous over their entire length, you can use T-Coffee.
+
+
+In theory, the program automatically recognizes DNA sequences and uses appropriate methods, yet adding the -type=dna flag cannot do any harm...
+
+::
+
+  $$: t_coffee sample_dnaseq1.fasta -type=dna
+
+
+
+The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. In practice, any time it encounters dna, the program will try to use '4dna' version of the requested methods. These methods have lower penalties and are better suited for dealing with nucleic acid sequences. However, if you would rather use your own matrix, use:
+
+::
+
+  $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
+
+Where you should replace idmat with your own matrix, in BLAST format (see the format section of the Reference Manual).
+
 Splicing variants
 -----------------
 Splicing variants are especially challenging for most MSA programs. This is because the splicing variants need very long gaps to be inserted, while most programs attempt to match as many symbols as possible.
@@ -1402,421 +1632,46 @@ Standard programs like ClustalW or Muscle are not good at dealing with this situ
 
 For instance, if you try muscle on the following dataset:
 
-
 ::
 
   muscle -in sv.fasta -clw
 
-
-
 You will quickly realise that your alignment is not very good and does not show where the alternative splicing coocurs. On the other hand, if you use T-Coffee, things become much clearer
-
 
 ::
 
   $$: t_coffee sv.fasta
 
-
-
 The reason why T-Coffee does better than other packages is mostly because it uses local information (lalign_id_pair) and is therefore less sensitive to long gaps. If the default mode does not work for your dataset, you can try to be a bit more aggressive and only use local information to compute your library:
-
 
 ::
 
   $$: t_coffee sv.fasta -method lalign_id_pair
 
-
-
-Of course, the most distantly related your sequences, the harder the alignment of splicing variants
-
-
-Aligning DNA sequences
-----------------------
-Multiple Sequence Alignment methods are not at their best when aligning DNA sequences. Whenever you can, try using a local multiple sequence alignment package like the Gibbs sampler. Yet if you believe your DNA sequence are homologous over their entire length, you can use T-Coffee.
-
-
-In theory, the program automatically recognizes DNA sequences and uses appropriate methods, yet adding the -type=dna flag cannot do any harm...
-
-
-::
-
-  $$: t_coffee sample_dnaseq1.fasta -type=dna
-
-
-
-The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. In practice, any time it encounters dna, the program will try to use '4dna' version of the requested methods. These methods have lower penalties and are better suited for dealing with nucleic acid sequences.
-
-
-However, if you would rather use your own matrix, use:
-
-
-::
-
-  $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
-
-
-
-Where you should replace idmat with your own matrix, in BLAST format (see the format section of the Reference Manual).
-
-
-Aligning RNA sequences
-----------------------
-RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, smart people have thought about this. If you are interested in RNA, check: http://www.bio.inf.uni-jena.de/Software/MARNA/.
-
+Of course, the most distantly related your sequences, the harder the alignment of splicing variants.
 
 Noisy coding DNA sequences...
 -----------------------------
-When dealing with coding DNA, the right thing to do is to translate your DNA sequence and thread the DNA onto the protein alignment if you really need some DNA. However, sometimes, your cDNA may not be so clean that you can easily translate it (frameshifts and so on). Whenever this happens, try (no warranty) the following special method.
-
-
-The test case in three_dna_seq.fasta contains the DNA sequences of three proteases with a couple of frameshifts here and there. If you make a regular alignment of these sequences
-
+When dealing with coding DNA, the right thing to do is to translate your DNA sequence and thread the DNA onto the protein alignment if you really need some DNA. However, sometimes, your cDNA may not be so clean that you can easily translate it (frameshifts and so on). Whenever this happens, try (no warranty) the following special method. The test case in three_dna_seq.fasta contains the DNA sequences of three proteases with a couple of frameshifts here and there. If you make a regular alignment of these sequences
 
 ::
 
   $$: t_coffee three_cdna.fasta
 
-
-
 You can immediately see that many gaps have sizes that are not multiple of 3 (codon size). Most of the information is lost. On the other hand, when using an appropriate alignment method that takes into account all the frames at the same time, we get something much more meaningful:
-
 
 ::
 
   $$: t_coffee three_cdna.fasta -method cdna_fast_pair
 
-
-
 And most importantly, the frameshifts end up at the right place. You can even recover the corrected protein sequence using a special mode of seq_reformat:
-
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -in three_cdna.aln -action +clean_cdna +tr\
  anslate
 
-
-
 +clean cdna is a small HMM that loops through each sequence and select the frame in order to maximize the similarity within the alignment.
-
-
-**************************************************************************************
-Combining Protein 2D and 3D Structural Information In Your Multiple Sequence Alignment
-**************************************************************************************
-Using structural information when aligning sequences is very useful. The reason is that structures diverge slower than sequences. As a consequence, one may still find a discernable homology between two sequences that have been diverging for so long that their sequences have evolved beyond recognition. Yet, when assembling the correct structure based MSA, you will realize that these sequences contain key conserved residues that a simple alignment procedure was unable to reveal. We show you in this section how to make the best of T-Coffee tools to incorporate structural information in your alignment.
-
-
-If you are in a hurry: Expresso
-===============================
-What is Expresso?
------------------
-Expresso is the latest T-Coffee mode. It is not yet available for local installation, but you can run it from the www.tcoffee.org server. The principle of Expresso is simple: the server runs a BLAST between every sequence in your query against the PDB database. If it finds a structure similar enough to a sequence in your dataset (>60% identity), it will use that structure as a template for your sequence.
-
-
-Template files look something like:
-
-
-::
-
-  >sp|P08246|ELNE_HUMAN _P_ 1PPGE
-
-  >sp|P20160|CAP7_HUMAN _P_ 1AE5
-
-  >sp|P00757|KLKB4_MOUSE _P_ 1SGFX
-
-  >sp|Q6H321|KLK2_HORSE _P_ 1GVZA
-
-  >sp|P00773|ELA1_RAT _P_ 2D26C
-
-  >sp|Q00871|CTRB1_PENVA _P_ 1AZZB
-
-  >sp|P21844|MCPT5_MOUSE _P_ 1NN6A
-
-  >sp|O35205|GRAK_MOUSE _P_ 1MZDA
-
-  >sp|P07338|CTRB1_RAT _P_ 2CGAB
-
-  >sp|P80015|CAP7_PIG _P_ 1FY3A
-
-  >sp|P03953|CFAD_MOUSE _P_ 1FDPD
-
-  >sp|Q7YRZ7|GRAA_BOVIN _P_ 1OP8F
-
-  >sp|Q06606|GRZ2_RAT _P_ 1EUFA
-
-  >sp|P08884|GRAE_MOUSE _P_ 1FI8B
-
-
-
-In a template file, _P_ indicates that the template is of type structure (P for PDB). Template files can be generated manually or automatically by the Expresso server. Whenever possible t_coffee will then align your sequences using the structural information contained in the templates. If it encounters enough structures (as shown here) it will produce a genuine structure based sequence alignment.
-
-
-Using Expresso
---------------
-::
-
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
-  PDB
-
-
-
-Using secondary structure predictions:
-======================================
-T-Coffee can be used to predict secondary structures and transmembrane domains. For secondary structure predictions, the current implementation is only able to run GOR on either single sequences or on a bunch of homologues found by BLAST.
-
-
-Single sequence prediction
---------------------------
-To make a secondary structure prediction with GOR, run the following. In this command line SSP is a hard coded mode. It prompts the computation of predicted secondary structures.
-
-
-::
-
-  t_coffee sample_aln.fasta -template_file SSP
-
-
-
-The predictions are then displayed in the files:
-
-
-::
-
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgb_chite.ssp
-
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_trybr.ssp
-
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_trybr3.ssp
-
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_wheat.ssp
-
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_wheat2.ssp
-
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgt_mouse.ssp
-
-
-
-Transmembrane structures can be carried out with:
-
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file TM
-
-
-
-Multiple sequences predictions
------------------------------
-Used this way, the method will produce for each sequence a secondary prediction file. GOR is a single sequence with a relatively low accuracy. It is possible to increase the accuracy by coupling BLAST and GOR, this can be achieved with the following command:
-
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file PSISSP
-
-
-
-When doing so, the predictions for each sequence are obtained by averaging the GOR predictions on every homologue as reported by a BLAST against NR. By default the BLAST is done remotely at the NCBI using the blastpgp web service of the EBI.
-
-
-A similar output can be obtained for Transmembrane segment predictions:
-
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file PSITM
-
-
-
-Incorporation of the prediction in the alignment
-------------------------------------------------
-It is possible to use the secondary prediction in order to reward the alignment of similar elements
-
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file PSISSP -method_evaluate_mode ssp -met\
- hod lalign_id_pair slow_pair
-
-
-
-Likewise, it is possible to use this information with trans-membrane domains
-
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file PSITM -method_evaluate_mode tm -metho\
- d lalign_id_pair slow_pair
-
-
-
-The overall effect is very crude and amounts to over-weighting by 30% the score obtained when matching two residues in a similar secondary structure state. The net consequence is that residues in similar predicted states tend to be aligned more easily.
-
-
-Using other secondary structure predictions
--------------------------------------------
-If you have your own predictions, you can use them. All you need is to produce a template file where the file containing the secondary structure prediction is declared along with the sequence:
-
-
-::
-
-  >hmgl_wheat _E_ hmgl_wheat.ssp
-
-  >hmgb_chite _E_ hmgb_chite.ssp
-
-  >hmgl_trybr3 _E_ hmgl_trybr3.ssp
-
-  >hmgl_wheat2 _E_ hmgl_wheat2.ssp
-
-  >hmgt_mouse _E_ hmgt_mouse.ssp
-
-  >hmgl_trybr _E_ hmgl_trybr.ssp
-
-
-
-where each template looks like this:
-
-
-::
-
-  >hmgl_wheat
-
-  CCCCCCCCCCCCHHHHHHHCCCCCCCCCHHHHHHHHHHHHHHHCCCCHHHHHHHHHHHHHHHCE
-
-
-
-You can then run T-Coffee using your own template file
-
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file <template_file> -method_evaluate_mode\
-  ssp -method lalign_id_pair slow_pair
-
-
-
-Output of the prediction
-------------------------
-
-You can output a color coded version of your alignment using the predicted structures
-
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file PSISSP -output sec_html
-
-
-
-A similar result can be obtained with trans-membrane regions:
-
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file PSITM -output tm_html
-
-
-
-Aligning sequences and structures
-=================================
-Mixing sequences and structures
--------------------------------
-Gather your sequences in the same file. Name your structures according to their PDB identifier. The file three_pdb_two_seq.fasta contains five sequences, three are the sequences of PDB structures and two are regular sequences.
-
-
-What you want to do is to build a T-Coffee library where sequences with a known structures are aligned with a structure alignment program (like sap) while the other sequences are aligned using regular T-Coffee methods. You can achieve this with the following command:
-
-
-::
-
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
-  PDB
-
-
-
-The option -template_file is here to tell the program how to find the PDB. In that case. EXPRESSO means that a remote BLAST (the EBI BLAST) will be used to identify the best targets. If your sequences are already named according to their PDB name, you can use:
-
-
-::
-
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
-  _SELF_P_
-
-
-
-_SELF_ means that the PDB identifier is the name of the sequences, while _P_ is an indication that the template is indeed a PDB. These indications are necessary for T-Coffee to fetch the relevant structures.
-
-
-The good news is that you do not need to have PDB installed locally as T-Coffee will automatically fetch the structures directly from RCSB (the home of PDB). Of course, if your dataset only contains structures, your alignment becomes a structural alignment.
-
-
-If you have a fugue license, you can also add the fugue method to your run. Fugue will align the structures with sequences whose structure is unknown (this is called threading).
-
-
-::
-
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair,fugue_pair -te\
- mplate_file _SELF_P_
-
-
-
-This can be written more concisely, using one of T-Coffee special_modes:
-
-
-::
-
-   $$: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
-
-
-
-or
-
-
-::
-
-   $$: t_coffee three_pdb_two_seq.fasta -mode expresso
-
-
-
-Using sequences only
---------------------
-What often happens is that you have already built a dataset with sequences that are very similar to PDB sequences but not exactly identical. It may even be the case that the real sequence and the PDB one do not match exactly because of some genetic engineering on the structure. In this case, you have no structure whose sequence is exactly similar to the sequences in your dataset. All you need to do is to declare the equivalence sequences/structures and run T-Coffee, just like Expresso does.
-
-
-The first step is to fill up a template file that contains an explicit declaration of the structures corresponding to your sequences. The format is very simple and fasta-like. You can use the file: sproteases_small.template_file
-
-
-::
-
-  >sp|P08246|ELNE_HUMAN _P_ 1PPGE
-  >sp|P20160|CAP7_HUMAN _P_ 1AE5
-  >sp|P00757|KLKB4_MOUSE _P_ 1SGFX
-  >sp|Q6H321|KLK2_HORSE _P_ 1GVZA
-
-
-
-In this file, the first line is telling us that sequence sp|P08246|ELNE_HUMAN is associated with the structural template 1PPGE. The sequence and the structure do not need to be identical although we recommend using structural templates more than 60% identical with your actual sequences (i.e. similar enough so that they generate a non ambiguous alignment). If your template file is ready, all you need to do is run the following command.
-
-
-::
-
-  $$: t_coffee sproteases_small.fasta -method slow_pair, lalign_id_pair, sap_pai\
- r -template_file sproteases_small.template_file
-
-
-
-When you run this once, T-Coffee goes and fetches the structures. It will then align them using sap. It takes a lot of time to fetch structures, and it takes even more time to align them with sap. This is why T-Coffee saves these important intermediate results in a special location called the cache. By default, your cache is in ~/.t_coffee/cache, it is a good idea to empty it from time to time...
-
-
-Aligning profile using structural information
-=============================================
-If you have two profiles to align, an ideal situation is when your profiles each contain one or more structures. These structures will guide the alignment of the profiles, even if they contain very distally related sequences. We have prepared two such profiles (prf1_pdb1.aln, prf2_pdb2.aln). You have two choices here. All you need is a template file that declares which sequences have a known structure. If you only want to align sequences, you can try:
-
-
-::
-
-  $$: t_coffee -profile=profile1_pdb1.aln, profile2_pdb2.aln -method sap_pair -p\
- rofile_template_file two_profiles.template_file
-
-
 
 ****************************
 How Good Is Your Alignment ?
@@ -2081,6 +1936,8 @@ This sim_idscore indicates that every pair of sequences will need to be aligned 
   TOP 9 7 27.00 sp|Q91VE3|KLK7_MOUSE sp|P08246|ELNE_HUMAN 27.00
   TOP 16 2 26.00 sp|P29786|TRY3_AEDAE sp|P21844|MCPT5_MOUSE 26.00
 
+Evaluating alternative alignments with STRIKE (to be done...)
+=============================================
 
 
 Evaluating an alignment according to your own criterion
@@ -2122,56 +1979,48 @@ You simply need to cut and paste this library in a file and use this file as a l
  -output html
 
 
+************************************
+Trees Based on Protein 3D Structures
+************************************
 
-********************************************
-Trees Based on Protein 3D Structures: T-RMSD 
-********************************************
-
-*Tree estimation procedure based on the comparison of internal distances*
-
-T-RMSD makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. T-RMSD also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
+This section describes tree estimation procedure based on the comparison of internal distances. One particular mode (T-RMSD) have been develop for this purpose only however, there are many other options to do so. On the other hand,T-RMSD makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. T-RMSD also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
 
 Generating a tree based on structural distances
 ===============================================
-This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored
+This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored.
 
+::
 
+  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 
+      +evaluate3D distances +tree2bs first -output newick -out tree.dnd
+  
 Input:
 
-* ``aln``: Multiple Sequence Alignment in FASTA, MSA or MSF
-* ``template``: FASTA name list with templates: ``>name _P_ template``
-
-:: 
-
-  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replic\
- ates 100  +evaluate3D distances +tree2bs first -output newick -out tree.dnd
-
+ - ``aln``: Multiple Sequence Alignment in FASTA, MSA or MSF
+ - ``template``: FASTA name list with templates: >name _P_ template
 
 Output: 
 
-* ``tree.dnd``: Tree in newick format with bootstrap support   
+ -  ``tree.dnd``: Tree in newick format with bootstrap support   
 
 It is possible to control default parameters using the following extended command line
 
 ::
 
-  t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replic\
- ates 100 gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick\
-  -out tree.dnd
-
-.. warning: sequences without 3D structure will be excluded from the analysis and from the final output
+  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
+      gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick -out tree.dnd
 
 
-Generating a Tree based on contact conservation
+.. warning:: sequences without 3D structure will be excluded from the analysis and from the final output.
+
+Generating a tree based on contact conservation
 ================================================
-
 This option makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate nj trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cut-off of 1.2 A between VdW radius and ignoring the 3 closests neighbors. Columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA).
 
 :: 
 
-  t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tre\
- e replicates 100  +evaluate3D contacts +tree2bs first -output newick -out tree.d\
- nd
+  $$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates 100 \
+      +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
 
 
 Output: 
@@ -2182,12 +2031,10 @@ It is possible to control default parameters using the following extended comman
 
 ::
 
-  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 gap 0.5 mo\
- de nj  +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
+  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
+      gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
 
 .. warning: the procedure requires at least 1 sequence with a known 3D structure or with contact information.
-
-
 
 Visulizing 3D Conservation
 ==========================
@@ -2196,31 +2043,31 @@ This same procedure can be used to visualize either intramolecular distance cons
 
 ::
 
-  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_html 
-  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_ascii
-  seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D distances -output score_raw
+  $$: t_coffee -other_pg seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D \
+      distances -output score_html 
+  $$: t_coffee -other_pg seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D \
+      distances -output score_ascii
+  $$: t_coffee -other_pg seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D \
+      distances -output score_raw
 
 Output:
-* ``score_raw``: Tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
-
+ - ``score_raw``: Tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
 
 Identification of positions 
 ===========================
 
 If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificty, etc...), it is possible to estimate which columns yield the best support using the following command,
 
-Input:
-* ``group.fasta``: A Fasta formatted list of the sequences that form the group whose support you want to analyze
-
 ::
 
- seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates columns\
-   +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <al\
- n.html>
+  $$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates \
+      columns +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
+
+Input:
+ - ``group.fasta``: A FASTA formatted list of the sequences that form the group whose support you want to analyze
 
 Output:
-* ``aln.score_html`` Colored version of your MSA indicating the sequences that best contribute to your clustering.
-
+ - ``aln.score_html`` Colored version of your MSA indicating the sequences that best contribute to your clustering.
 
 Evaluating Clustering capacities
 =================================
@@ -2230,14 +2077,13 @@ If you want to check the capacity of an algorithm to bring related sequences wit
 The tree can be pre-computed
 :: 
 
-  seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
+  $$: t_coffee -other_pg seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
 
 Or it can be computed on the fly
 :: 
 
-  seq_reformat -in <aln> -in2 <template> -action +tree replicates 100  +evaluate\
- 3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
-
+  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
+      +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
 
 ****************************************
