@@ -1426,14 +1426,31 @@ To use Expresso, you have different option from an entirely automated procedure 
 
 .. warning:: If you are providing Expresso with your own structures, you have to specify the path in the template file or have them in your current working directory. 
 
+.. tip:: By default, structures fetch by Expresso are stored in your local ~/.t_coffee/cache/ allowing Expresso to run faster if you reuse similar structures. Don't forget to empty it from time to time, especially if you are using Expresso frequently otherwise your folder is just getting bigger and bigger (similar comment can be done for any template-based mode of T-Coffee).
+
+
 Aligning sequences and structures
 ---------------------------------
+Mixing sequence profile and structure templates
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you want to go further, and be even slower, you can use the accurate mode that will combine profile and structural information. If no structure is available, the template will be a profile (similar to PSI-Coffee, see subsection **Aligning Profiles**). It is probably one of the most accurate way of aligning sequences currently available as it tries to get as much information as possible.
+
+::
+
+  $$: t_coffee sproteases_small.fasta -mode accurate
+
+Aligning profile using structural information
+---------------------------------------------
+If you have two profiles to align, an ideal situation is when your profiles each contain one or more structures. These structures will guide the alignment of the profiles, even if they contain very distally related sequences. We have prepared two such profiles (prf1_pdb1.aln, prf2_pdb2.aln). You have two choices here. All you need is a template file that declares which sequences have a known structure. If you only want to align sequences, you can try:
+
+::
+
+  $$: t_coffee -profile=profile1_pdb1.aln, profile2_pdb2.aln -method sap_pair \
+      -profile_template_file two_profiles.template_file
+      
 Mixing sequences and structures
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Gather your sequences in the same file. Name your structures according to their PDB identifier. The file three_pdb_two_seq.fasta contains five sequences, three are the sequences of PDB structures and two are regular sequences.
-
-
-What you want to do is to build a T-Coffee library where sequences with a known structures are aligned with a structure alignment program (like sap) while the other sequences are aligned using regular T-Coffee methods. You can achieve this with the following command:
+Gather your sequences in the same file. Name your structures according to their PDB identifier. The file three_pdb_two_seq.fasta contains five sequences, three are the sequences of PDB structures and two are regular sequences. What you want to do is to build a T-Coffee library where sequences with a known structures are aligned with a structure alignment program (like sap) while the other sequences are aligned using regular T-Coffee methods. You can achieve this with the following command:
 
 ::
 
@@ -1461,39 +1478,6 @@ This can be written more concisely, using one of T-Coffee special_modes:
    $$: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
 
    $$: t_coffee three_pdb_two_seq.fasta -mode expresso
-
-
-Using sequences only
-^^^^^^^^^^^^^^^^^^^^
-What often happens is that you have already built a dataset with sequences that are very similar to PDB sequences but not exactly identical. It may even be the case that the real sequence and the PDB one do not match exactly because of some genetic engineering on the structure. In this case, you have no structure whose sequence is exactly similar to the sequences in your dataset. All you need to do is to declare the equivalence sequences/structures and run T-Coffee, just like Expresso does. The first step is to fill up a template file that contains an explicit declaration of the structures corresponding to your sequences. The format is very simple and fasta-like. You can use the file: sproteases_small.template_file
-
-::
-
-  >sp|P08246|ELNE_HUMAN _P_ 1PPGE
-  >sp|P20160|CAP7_HUMAN _P_ 1AE5
-  >sp|P00757|KLKB4_MOUSE _P_ 1SGFX
-  >sp|Q6H321|KLK2_HORSE _P_ 1GVZA
-
-
-In this file, the first line is telling us that sequence sp|P08246|ELNE_HUMAN is associated with the structural template 1PPGE. The sequence and the structure do not need to be identical although we recommend using structural templates more than 60% identical with your actual sequences (i.e. similar enough so that they generate a non ambiguous alignment). If your template file is ready, all you need to do is run the following command.
-
-::
-
-  $$: t_coffee sproteases_small.fasta -method slow_pair, lalign_id_pair, sap_pai\
- r -template_file sproteases_small.template_file
-
-When you run this once, T-Coffee goes and fetches the structures. It will then align them using sap. It takes a lot of time to fetch structures, and it takes even more time to align them with sap. This is why T-Coffee saves these important intermediate results in a special location called the cache. By default, your cache is in ~/.t_coffee/cache, it is a good idea to empty it from time to time...
-
-
-Aligning profile using structural information
----------------------------------------------
-If you have two profiles to align, an ideal situation is when your profiles each contain one or more structures. These structures will guide the alignment of the profiles, even if they contain very distally related sequences. We have prepared two such profiles (prf1_pdb1.aln, prf2_pdb2.aln). You have two choices here. All you need is a template file that declares which sequences have a known structure. If you only want to align sequences, you can try:
-
-::
-
-  $$: t_coffee -profile=profile1_pdb1.aln, profile2_pdb2.aln -method sap_pair \
-      -profile_template_file two_profiles.template_file
-
 
 Using secondary structure predictions
 -------------------------------------
