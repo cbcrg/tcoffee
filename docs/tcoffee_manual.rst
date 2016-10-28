@@ -13,7 +13,7 @@ Foreword
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more complicated ones. We have tried to put as many of these functionalities on the webserver but not all are available except by using "command lines", also, **if you need to do something sophisticated and/or highly reproducible, the command line is the only way**. In the course of this manual, we expect you to use a Unix-like command line shell. All the example files can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. If you don't want to bother with command line, try using our online latest `tcoffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or via the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_.
+.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more complicated ones. We have tried to put as many of these functionalities on the webserver but not all are available except by using "command lines", also, **if you need to do something sophisticated and/or highly reproducible, the command line is the only way**. In the course of this manual, we expect you to use a Unix-like command line shell. All the example files can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. Also, all values given in this manual where obtained obtained over time with different version of the T-Coffee package, they are just an indication...and depending on the version of T-Coffee you are using, these values can be slightly different. If you don't want to bother with command line, try using our online latest `tcoffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or via the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_.
 
 
 Prerequisite for using T-Coffee
@@ -1052,30 +1052,30 @@ What is a good alignment?
 -------------------------
 This is a tricky question, a good answer would be  **"a good alignment is an alignment that makes it possible to do good biology"**. In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions. Unfortunately it is not easy to establish structure-based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
 
-  - **Above 40% identity** (within the reference dataset), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
+  - **Above 40% identity**, all the reference collections do agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
 
-  - **Below 40% identity** (within the reference dataset), allthe reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies seem to indicate that consistency based methods (T-Coffee, ProbCons, MAFFT-slow or MSAProbs) have an edge over traditional methods.
+  - **Below 40% identity**, all the reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies indicate that consistency-based methods (T-Coffee, ProbCons, MAFFT-slow or MSAProbs) have an edge over traditional methods.
 
 When dealing with distantly related sequences, the only way to produce reliable alignments is to use structural information. T-Coffee provides many facilities to do so in a seamless fashion. Several important factors need to be taken into account when selecting an alignment method:
 
   - **The best methods are not always the best**. Given a difficult dataset, the best method is only more likely to deliver the best alignment, but there is no guaranty it will do so. It is very much like betting on the horse with the best odds.
 
-  - **The difference in accuracy (as measured on reference datasets) between all the available methods is not incredibly high**. It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
+  - **The difference in accuracy between all the available methods is not incredibly high** (as measured on reference datasets). It is unclear whether this is an artifact caused by the use of 'easy' reference alignments, or whether this is a reality. The only thing that can change dramatically the accuracy of the alignment is the use of structural information.
 
   - **Keep in mind that these methods have only been evaluated by comparison with reference alignments (benchmarks)**. This is merely one criterion among many. In theory, these methods should be evaluated for their ability to produce alignments that lead to accurate trees, good profiles or good models. Unfortunately, these evaluation procedures do not yet exist.
 
 
 The main methods and their scope
 --------------------------------
-There are many MSA packages around, the most common ones being ClustalW, MUSCLE, MAFFT, T-Coffee and ProbCons; amongst the latest ones, you can find phylogeny-aware aligners (PRANK and SATé) and modifed/improved consistency-based aligners (MSAProbs). You can almost forget about the other packages, as there is virtually nothing you could do with them that you will not be able to do with these packages. All these packages offer a complex trade-off between speed, accuracy and versatility.
+.. note:: There are many MSA packages around, the most common ones being ClustalW, MUSCLE, MAFFT, T-Coffee and ProbCons; amongst the latest ones, you can find phylogeny-aware aligners (PRANK and SATé) and modifed/improved consistency-based aligners (MSAProbs). You can almost forget about the other packages, as there is virtually nothing you could do with them that you will not be able to do with these packages. All these packages offer a complex trade-off between speed, accuracy and versatility.
 
-ClustalW is everywhere you look...
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ClustalW is really everywhere...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ClustalW is still the most widely used Multiple Sequence Alignment package. Yet things are changing fast and different tests have consistently shown that ClustalW is neither the most accurate nor the fastest package around. This being said, ClustalW is everywhere and if your sequences are similar enough, it should deliver a fairly reasonable alignment.
 
 MAFFT/MUSCLE to align big datasets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you have many sequences to align MUSCLE or MAFFT are the obvious choice. MAFFT is often described as the fastest and the most efficient. This is not entirely true, in its fast mode (FFT-NS-1), MAFFT is similar to MUSCLE and although it is fairly accurate, about 5 points less accurate than the consistency-based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) MAFFT uses local alignments and consistency, however, it becomes much more accurate but also slower, and more sensitive to the number of sequences. More recently, we have seen growing the number of **(ultra) large scale** aligners such as ClustalO, PASTA, UPP, and we hope soon the large scale version of T-Coffee (called MEGA-Coffee).
+If you have many sequences to align MUSCLE or MAFFT are the obvious choice. MAFFT is often described as the fastest and the most efficient. This is not entirely true, in its fast mode (FFT-NS-1), MAFFT is similar to MUSCLE and although it is fairly accurate, about 5 points less accurate than the consistency-based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) MAFFT uses local alignments and consistency, however, it becomes much more accurate but also slower, and more sensitive to the number of sequences. More recently, we have seen growing the number of **(ultra) large scale** aligners such as Clustal Omega, PASTA, UPP, and we hope soon the large scale version of T-Coffee (called MEGA-Coffee).
 
 **Suitable for**:
  - Distance-based phylogenetic reconstruction (NJ trees)
@@ -1089,9 +1089,7 @@ If you have many sequences to align MUSCLE or MAFFT are the obvious choice. MAFF
 
 T-Coffee/ProbCons, slow but accurate !!!
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-T-Coffee works by first assembling a library and then by turning this library into an alignment. The library is a list of potential pairs of residues. All of them are not compatible and the job of the algorithm is to make sure that as many possible constraints as possible find their way into the final alignment. Each library line is a constraint and the purpose is to assemble the alignment that accommodates the more all the constraints.
-
-It is very much like building a high school schedule, where each teachers says something 'I need my Monday morning', 'I can't come on Thursday afternoon', and so on. In the end you want a schedule that makes everybody happy, if possible.The nice thing about the library is that it can be used as a media to combine as many methods as one wishes. It is just a matter of generating the right constraints with the right method and compile them into the library. ProbCons and MAFFT (L-INS-i) uses a similar algorithm, but with a Bayesian twist in the case of Probcons. In practice, however, ProbCons and T-Coffee give very similar results and have similar running time. MAFFT is significantly faster.
+T-Coffee works by first assembling a library and then by turning this library into an alignment. The library is a list of potential pairs of residues. All of them are not compatible and the job of the algorithm is to make sure that as many possible constraints as possible find their way into the final alignment: it is very much like trying to choose a meeting date, and each one says something like 'I need my Monday morning', 'I can't come on Thursday afternoon', and so on. In the end you want a schedule that makes everybody happy, if possible. The nice thing about the library is that it can be used as a media to combine as many methods as one wishes. It is just a matter of generating the right constraints with the right method and compile them into the library. ProbCons and MAFFT (L-INS-i) uses a similar algorithm, but with a Bayesian twist in the case of ProbCons. In practice, however, ProbCons and T-Coffee give very similar results and have similar running time. MAFFT is significantly faster.
 
 **Suited for**:
  - Profile reconstruction
@@ -1101,7 +1099,7 @@ It is very much like building a high school schedule, where each teachers says s
 
 Choosing the right package (without flipping a coin !)
 ------------------------------------------------------
-Each available package has something to go for it, it is just a matter of knowing what you want to do !! T-Coffee is probably the most versatile, but it comes at a price and it is currently slower than many alternative packages. In the rest of this tutorial we give some hints on how to carry out each of these applications with T-Coffee.
+Each available package has something to go for it, it is just a matter of knowing what you want to do !! T-Coffee is probably the most versatile, but it comes at a price, its default aligner being currently slower than many alternative packages. In the rest of this tutorial we give some hints on how to carry out each of these applications within the T-Coffee framework.
 
 
 ================= ====== ===== ======== ======== ======== 
@@ -1142,7 +1140,7 @@ Computing simple MSA with T-Coffee
 ==================================
 A simple Multiple Sequence Alignment (default)
 ----------------------------------------------
-T-Coffee default mode will simply compute a Multiple Sequence Alignment of the sequences you provided in input (command 1). It will display the final MSA on the screen and in several files according to the format you asked in command 2 (by default, the MSA is stored in a file .aln in ClustalW format). The headline of the alignment file contains important information such as the version of T-Coffee used, the CPU time, the overall consistency score (normalized to 100 or 1000 depending on the version of T-Coffee) and the total length of the MSA: it is quite practical to have a quick glance at the result. 
+T-Coffee default mode will simply compute a Multiple Sequence Alignment of the sequences you provided in input (command 1). It will display the final MSA on the screen and in several files according to the format you asked with command 2 (by default, the MSA is stored in a file .aln in ClustalW format). The headline of the alignment file contains important information such as the version of T-Coffee used, the CPU time, the overall consistency score (normalized to 100 or 1000 depending on the version of T-Coffee) and the total length of the MSA: it is quite practical to have a quick glance at the result. 
 
 ::
 
@@ -1154,14 +1152,13 @@ T-Coffee default mode will simply compute a Multiple Sequence Alignment of the s
   
 Each time you run T-Coffee, 3 files are always generated:
 
- - the alignment:	``sproteases_small.aln``
- - the guide tree:	``sproteases_small.dnd``
- - the colored MSA:	``sproteases_small.html``
+ - ``sproteases_small.aln``: the alignment in ClustalW format
+ - ``sproteases_small.dnd``: the guide tree in Newick format
+ - ``sproteases_small.html``: the colored MSA in html format
 
 .. warning:: the guide tree is not a phylogenetic tree, it is used in the alignment process for clustering the sequences. 
 
 .. tip:: you can visualize the colored html file with any browser/software you prefer. The display of the sequences should be aligned and formatted; if not, use another browser, it works quite well with Firefox, Safari, etc... If you need to do more sophisticated modifications on your MSA, we recommend to use `Jalview <http://www.jalview.org/>`_ which incorporate the T-Coffee color scheme.
-
 
 Aligning multiple datasets/Combining multiple MSAs
 --------------------------------------------------
@@ -1189,8 +1186,7 @@ You may also have a bunch of alignments (with the same sequences) that you have 
 
 Estimating the diversity in your alignment
 ------------------------------------------
-It is easy to measure the level of diversity within your multiple sequence alignment. Will output all the pairwise identities, as well as the average level of identity between each sequence and the others. You can sort and grep in order to select the sequences you are interested in.
-
+It is easy to measure the level of diversity within your MSA with the **-output** option of **seq_reformat**, it will output all the pairwise identities, as well as the average level of identity between each sequence and the others. There are two possibilities given that your input are unaligned sequences or not: **-output sim_idscore** realign your sequences pairwise so it can accept unaligned or aligned sequences alike; **-output sim** computes the identity using the sequences as they are in your input file so it is only suited for MSAs. You can after redirect, sort and grep the output in order to select the sequences you are interested in.
 
 ::
 
@@ -1214,13 +1210,15 @@ This comparison will return the following result:
   seq1       seq2          Sim   [ALL]           Tot  
   b80           19         33.5    89.5 [100.0]   [ 8958]
 
-The interpretation of this output is as follow: b80 is the reference MSA, it contains 19 sequences with an average identity of 33.5%, and is 89.5% identical to the second MSA b30.aln (8958 pairs to be precise). Of course, this does not tell you where are the good bits, but you can get this information for instance residues that have lost more than 50% of their pairing partner between the two alignments are now in lower case.
+The interpretation of this output is as follow: b80 is the reference MSA, it contains 19 sequences with an average identity of 33.5%, and is 89.5% identical to the second MSA b30.aln (8958 pairs to be precise). Of course, this does not tell you where are the good bits, but you can get this information for instance residues that have lost more than 50% of their pairing partner between the two alignments are in lower case (command 1) or converted in any character you want (command 2).
 
 :: 
 
+  Command 1:
   $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln \
       -output_aln_threshold 50
 
+  Command 2:
   $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln \
       -output_aln_threshold 50 -output_aln_modif x
 
@@ -1242,11 +1240,11 @@ Changing the substitution matrix
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 T-Coffee only uses the substitution matrix to make the pairwise alignments that go into the library. These are all the global alignments of every possible pair of sequences, and the ten best local alignments associated with every pair of sequences. 
 
- - By default, these alignments are computed using a Blosum62 matrix, but you can use any matrix you fancy instead, including: pam120mt, pam160mt, pam250mt, pam350mt, blosum30mt, blosum40mt, blosum45mt, blosum50mt, blosum55mt, blosum62mt, blosum80mt, or even user-provided matrices in the BLAST format, as described in the technical manual.
+ - By default, these alignments are computed using a Blosum62 matrix, but you can use any matrix you fancy instead, including: pam120mt, pam160mt, pam250mt, pam350mt, blosum30mt, blosum40mt, blosum45mt, blosum50mt, blosum55mt, blosum62mt, blosum80mt, or even user-provided matrices in the BLAST format (see **T-Coffee Technical Documentation**).
 
- - PAM matrices: These matrices are allegedly less accurate than the blosum. The index is correlated to the evolutionary distances. You should therefore use the pam350mt to align very distantly related sequences.
+ - PAM matrices: These matrices are allegedly less accurate than the Blosum. The index is correlated to the evolutionary distances, you should therefore use the pam350mt to align very distantly related sequences.
 
- - Blosum matrices: These matrices are allegedly the most accurate. The index is correlated to the maximum percent identity within the sequences used to estimate the matrix. You should therefore use the Blosum30mt to align very distantly related sequences. Blosum matrices are biased toward protein core regions. This may explain why these matrices tend to give better alignments, since by design they can capture the most evolutionary resilient signal contained in proteins.
+ - Blosum matrices: These matrices are allegedly the most accurate. The index is correlated to the maximum percent identity within the sequences used to estimate the matrix. you should therefore use the blosum30mt to align very distantly related sequences. Blosum matrices are biased toward protein core regions, explaining why these matrices tend to give better alignments, since by design, they can capture the most evolutionary resilient signal contained in proteins.
 
 Unless you have some structural information available, the only way to tell whether your alignment has improved or not is to look at the score. For instance, if you compute the two following alignments:
 
@@ -1255,11 +1253,11 @@ Unless you have some structural information available, the only way to tell whet
   $$: t_coffee sproteases_small.fasta -matrix=blosum30mt -outfile=b30.aln
   $$: t_coffee sproteases_small.fasta -matrix=blosum80mt -outfile=b80.aln
 
-You will get two alignments that have roughly the same score but are different. You can still use these two alternative alignments by comparing them to identify regions that have been aligned identically by the two matrices. These regions are usually more trustworthy.
+You will get two alignments that have roughly the same score but are slightly different. You can still use these two alternative alignments by comparing them to identify regions that have been aligned identically by the two matrices. These regions are usually more trustworthy.
 
 Changing gap penalties
 ^^^^^^^^^^^^^^^^^^^^^^
-.. important:: Gap penalties are the core of the matter when it comes to multiple sequence alignments. An interesting feature of T-Coffee is that it does not really need such penalties when assembling the MSA, because in theory the penalties have already been applied when computing the library. This is the theory, as in practice penalties can help improve the quality of the alignment.
+.. important:: Gap penalties are the core of the matter when it comes to MSAs. An interesting feature of T-Coffee is that it does not really need such penalties when assembling the MSA, because in theory the penalties have already been applied when computing the library. This is the theory, as in practice penalties can help improve the quality of the alignment.
 
 The penalties can be changed via the flags **-gapopen** for the gap opening penalty and via **-gapext** for the gap extension penalty. The range for gapopen are [-500,-5000], the range for the extension should rather be [-1,-10]. These values do not refer to a substitution matrix, but rather to the values range of the consistency estimation (i.e. ratio) normalized to 10000 for a maximum consistency. The default values are **-gapopen=-50, -gapext=0**. The reasons for these very low values are that they are meant to be cosmetic only, since a trademark of T-Coffee (inherited from Dialign) is not to need explicit penalties. Yet, we know for a fact that alignments with higher gap penalties often look nicer (for publications) and are sometimes more accurate. For instance, you can try:
 
@@ -1286,26 +1284,31 @@ Aligning (very) large datasets
 ==============================
 Aligning (very) large datasets with MUSCLE
 ------------------------------------------
-T-Coffee is not a good choice if you are dealing with very large datasets, use MAFFT or MUSCLE. To align a large dataset with MUSCLE, try:
+To run MUSCLE you can try one of the following command; don't hesitate to MUSCLE tutorial or help to get more information.
 
 ::
 
-  Default mode
+  Default mode:
   muscle -infile sproteases_large.fasta > sproteases_large.muscle
   
-  Fast mode (less accurate)
+  Fast mode (less accurate):
   muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
   > sproteases_large.muscle
 
-
 Aligning (very) large datasets with MAFFT
 -----------------------------------------
-The fastest mode with MAFFT can be achieved using: **mafft --retree 2 input > output**.
+MAFFT is can align large datasets by default however it is better to use the fastest mode with MAFFT using the **retree** parameter; don't hesitate to MAFFT tutorial or help to get more information.
 
+::
+  
+  Default mode:
+  mafft input > output
+  Fast mode:
+  mafft --retree 2 input > output
 
 Aligning (very) large alignments with T-Coffee
 ----------------------------------------------
-T-Coffee is not very well gifted for aligning large datasets (for now), but you can give it a try using a special option that generates approximate fast alignments (command 1). These MSAs should roughly have the same accuracy as ClustalW, and are quite acceptable for sequences more than 40% identical. This mode works by only considering the best diagonals between two sequences, and by default all the diagonals with substitution score >0 are considered, but you can lower this to reduce the running time (command 2). That will only consider the top 10 diagonals. This will be very useful if you have long and very similar sequences to align (DNA for instance).
+T-Coffee is not very well gifted for aligning large datasets (for now), but you can give it a try using a special option that generates approximate fast alignments (command 1). These MSAs should roughly have the same accuracy as ClustalW, and are quite acceptable for sequences more than 40% identical. This mode works by only considering the best diagonals between two sequences, and by default all the diagonals with substitution score >0 are considered. You can lower this value with the flag **-ndiag** to reduce the running time (command 2). This will be very useful if you have long and very similar sequences to align (DNA for instance).
 
 ::
 
@@ -1331,7 +1334,6 @@ Using many methods at once
 ==========================
 One of the most common situation when building MSAs is to have several alignments produced by different alternative methods, and not knowing which one to choose. In this section, we show you how to use M-Coffee to combine many alignments into one single alignment, or how you can specify only the methods you want. M-Coffee is not always the best method, but extensive benchmarks on BaliBase, Prefab and Homstrad have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine precomputed alignments.
 
-
 Using all the methods at the same time: M-Coffee
 ------------------------------------------------
 In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages to be installed (see **T-Coffee Installation** and section **Integrating External Methods in T-Coffee**). If you did a default installation, all the software you need should be there. M-Coffee is a special mode of T-Coffee that you can call using the flag **-mode mcoffee**. It will align your sequence using 8 different aligners: ClustalW, POA, MUSCLE, ProbCons, MAFFT, Dialing-T, PCMA and T-Coffee:
@@ -1340,18 +1342,18 @@ In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages 
 
   $$: t_coffee sproteases_small.fasta -mode mcoffee -output clustalw, html
 
+The final MSA is a combination of all methods. The alignment is colored with the T-Coffee consistency color scheme, but in this case the colors will reflect the consistency between methods: 1) regions in red have a high consistency, so all the methods agree and you can expect them to be fairly accurate, 2) regions in green/blue have the lowest consistency, meaning that all the methods deliver different alignment in these regions and you should not trust them. Overall this alignment has a score of 951 (1000 being the max), which means that it is roughly 95% consistent with the entire collection; this is a fairly high index meaning that you can trust your alignment. 
 
-When this is done, all the alignments will be combined into one. If you open the file sproteases_small.html with your favorite web browser, you will see a colored version of your alignment: the alignment is colored according to the consistency of the different methods used. Regions in red have a high consistency, so all the methods agree and you can expect them to be fairly accurate. Regions in green/blue have the lowest consistency, meaning that all the methods deliver different alignment in these regions and you should not trust them. Overall this alignment has a score of 80, which means that it is 80% consistent with the entire collection. This is a fairly high index, which means you can probably trust your alignment (at least where it is red).
+.. warning:: Some values are given here as an indication, however, depending on the T-Coffee version you are using these values may not be exactly equal. 
 
 Using selected methods to compute your MSA
 -------------------------------------------
-Using the 8 Methods of M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the **-method flag**. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
+Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the **-method flag**. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
 
 ::
 
   $$: t_coffee sproteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa, \
       muscle_msa -output=html
-
 
 Aligning profiles 
 =================
