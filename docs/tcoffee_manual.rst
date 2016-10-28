@@ -1050,7 +1050,7 @@ General comments on alignments and aligners
 ===========================================
 What is a good alignment?
 -------------------------
-This is a tricky question, a proper answer would be  **a good alignment is an alignment that makes it possible to do good biology**. In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions. Unfortunately it is not easy to establish structure based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
+This is a tricky question, a good answer would be  **"a good alignment is an alignment that makes it possible to do good biology"**. In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions. Unfortunately it is not easy to establish structure-based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
 
   - **Above 40% identity** (within the reference dataset), all the reference collections agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
 
@@ -1142,8 +1142,7 @@ Computing simple MSA with T-Coffee (default)
 ============================================
 A simple Multiple Sequence Alignment
 ------------------------------------
-T-Coffee is meant to be run like ClustalW. This means you can use it like ClustalW for most simple applications. For instance, the following instruction
-
+T-Coffee default mode will simply compute a Multiple Sequence Alignment of the sequences you provided in input. It will display the final MSA on the screen and in several files according to the format you asked (by default, the MSA is stored in a file .aln in ClustalW format). The headline of the alignment file contains important information such as the version of T-Coffee used, the CPU time, the overall consistency score (normalized to 100 or 1000 depending on the version of T-Coffee) and the total length of the MSA: it is quite practical to have a quick glance at the result. 
 
 ::
 
@@ -1151,22 +1150,65 @@ T-Coffee is meant to be run like ClustalW. This means you can use it like Clusta
 
   $$: t_coffee sproteases_small.fasta -output=clustalw,fasta_aln,msf
   
- 
-This instruction will compute a multiple sequence alignment of your sequences, using the default mode of T-Coffee. It will output the alignment on the screen and in a file named sproteases_small.aln. This file contains your alignment in ClustalW format. The program will also output a file named sproteases_small.dnd that contains the guide tree used to assemble the progressive alignment.
+Each time you run T-Coffee, 3 files are always generated:
+- the alignment:	``sproteases_small.aln``
+- the guide tree:	``sproteases_small.dnd``
+- the colored MSA:	``sproteases_small.html``
+
+.. warning:: the guide tree is not a phylogenetic tree, it is used in the alignment process for clustering the sequences. 
+
+.. tip:: you can visualize the colored html file with any browser/software you prefer. The display of the sequences should be aligned and formatted; if not, use another browser, it works quite well with Firefox, Safari, etc... If you need to do more sophisticated modifications on your MSA, we recommend tu use `Jalview <http://www.jalview.org/>`_ which incorporate the T-Coffee color scheme.
 
 
-Using several datasets
-----------------------
-If your sequences are spread across several datasets, you can give all the files via the **-seq flag**. You can give as many file as you want (the limit is 200) and in any format you want, know that 1) if you give an alignment, the gaps will be reset and your alignment will only provide sequences, 2) sequences with the same name between two files are assumed to be the same sequence, 3) ff their sequences differ, they will be aligned and replaced by the consensus of that alignment (process known as sequence reconciliation). To align multiple datasets, just run:
+Aligning several datasets
+-------------------------
+If your sequences are spread across several datasets, you can give all the files you want (the limit is 200) via the flag **-seq**, and in any format you want. Just know that 1) if you give an alignment, the gaps will be reset and your alignment will only provide sequences, 2) sequences with the same name between two files are assumed to be the same sequence, 3) ff their sequences differ, they will be aligned and replaced by the consensus of that alignment (process known as sequence reconciliation). To align multiple datasets, just run:
 
 ::
 
   $$: t_coffee -seq=sprotease1_small.fasta,sprotease2_small.aln -output=clustalw,fasta_aln,msf
 
 
+Comparing alternative alignments
+--------------------------------
+If you change the parameters, you will end up with alternative alignments. It can be interesting to compare them quantitatively. T-Coffee comes along with an alignment comparison module named **aln_compare**. You can use it to estimate the amount of difference between your two alignments either using the Sum-of-Pair score or the column score using the flag **-compare_mode** (sp or column). By default aln_compare returns the SoP score:
+
+::
+
+  $$: t_coffee -other_pg aln_compare -al1 b80.aln -al2 b30.aln -compare_mode sp
+
+
+This comparison will return the following result:
+
+::
+
+  *****************************************************
+  seq1       seq2          Sim   [ALL]           Tot  
+  b80           19         33.5    89.5 [100.0]   [ 8958]
+
+The interpretation of this output is as follow: b80 is the reference MSA, it contains 19 sequences with an average identity of 33.5%, and is 89.5% identical to the second MSA b30.aln (8958 pairs to be precise). Of course, this does not tell you where are the good bits, but you can get this information for instance residues that have lost more than 50% of their pairing partner between the two alignments are now in lower case.
+
+:: 
+
+  $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln \
+      -output_aln_threshold 50
+
+  $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln \
+      -output_aln_threshold 50 -output_aln_modif x
+
+
+.. tip:: This option is particularly interesting if you are modifying the default parameters of T-Coffee and want to monitor the effects of your modifications. 
+
+
 Modifying the default parameters of T-Coffee
 --------------------------------------------
-The main parameters of T-Coffee are similar to those of ClustalW, including a substitution matrix and some gap penalties. In general, T-Coffee's default is adequate. If, however, you are not satisfied with the default parameters, we encourage you to change the following parameters. Interestingly, most of what we say here holds reasonably well for ClustalW.
+.. note:: The main parameters of T-Coffee are similar to those of ClustalW, including a substitution matrix and some gap penalties. In general, T-Coffee's default is adequate. If, however, you are not satisfied with the default parameters, we encourage you to change the following parameters. Interestingly, most of what we say here holds reasonably well for ClustalW.
+
+Can you guess the optimal parameters?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Here is another tricky question...and the general answer is NO. The matrix and the gap penalties are simplistic attempts at modeling evolution. While the matrices do a reasonable job, the penalties are simply inappropriate: they should have a value that depends on the structure of the protein and a uniform value cannot be good enough. Yet, since we do not have better we must use them...In practice, this means that parameter optimality is a very *ad hoc* business. It will change from one dataset to the next and there is no simple way to predict which matrix and which penalty will do better. The problem is also that even after your alignment has been computed, it is not always easy to tell whether your new parameters have improved or degraded your MSA. 
+
+There is no systematic way to evaluate an MSA. In general, people visually evaluate the alignment, count the number of identical columns and consider that one more conserved column is good news. If you are lucky you may know a few functional features that you expect to see aligned. If you are very lucky, you will have one structure and you can check the gaps fall in the loops. If you are extremely lucky, you will have two structures and you can assess the quality of your MSA. An advantage of T-Coffee is the fact that the overall score of the alignment (i.e. the consistency with the library) is correlated with the overall accuracy. In other words, if you alignment score increases, its accuracy probably increases also. All this being said, consistency is merely an empirical way of estimating the change of parameters and it does not have the predictive power of a BLAST E-Value.
 
 Changing the substitution matrix
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1187,96 +1229,32 @@ Unless you have some structural information available, the only way to tell whet
 
 You will get two alignments that have roughly the same score but are different. You can still use these two alternative alignments by comparing them to identify regions that have been aligned identically by the two matrices. These regions are usually more trustworthy.
 
-
-Comparing two alternative alignments
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you change the parameters, you will end up with alternative alignments. It can be interesting to compare them quantitatively. T-Coffee comes along with an alignment comparison module named **aln_compare**. You can use it to estimate the amount of difference between your two alignments either using the Sum-of_Pair score or the column score using the flag **-compare_mode** (sp or column); by default aln_compare returns the SoP score:
-
-::
-
-  $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -compare_mode sp
-
-
-This comparison will return the following result:
-
-::
-
-  *****************************************************
-  seq1       seq2          Sim   [ALL]           Tot  
-  b80           19         33.5    89.5 [100.0]   [ 8958]
-
-Where 89.5 is the percentage of similarity (sums of pairs) between the two alignments. It means that when considering every pair of aligned residues in b30 (40444), the program found that 93.7% of these pairs could be found in the alignment p350.aln.
-
-
-Of course, this does not tell you where are the good bits, but you can get this information with the same program:
-
-  t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_aln_threshold 50
-
-
-This is the alignment al1, but residues that have lost more than 50% of their pairing partner between the two alignments are now in lower case. In the section of this tutorial entitled comparing alignments, we show you more sophisticated ways to do this comparison.
-
-
-For an even more drastic display, try:
-
-
-::
-
-  $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln \
-      -output_aln_threshold 50 -output_aln_modif x
-
 Changing gap penalties
 ^^^^^^^^^^^^^^^^^^^^^^
-Gap penalties are the core of the matter when it comes to multiple sequence alignments. An interesting feature of T-Coffee is that it does not really need such penalties when assembling the MSA, because in theory the penalties have already been applied when computing the library. This is the theory, as in practice penalties can help improve the quality of the alignment.
+.. important:: Gap penalties are the core of the matter when it comes to multiple sequence alignments. An interesting feature of T-Coffee is that it does not really need such penalties when assembling the MSA, because in theory the penalties have already been applied when computing the library. This is the theory, as in practice penalties can help improve the quality of the alignment.
 
-
-The penalties can be changed via the flags **-gapopen** for the gap opening penalty and via **-gapext** for the gap extension penalty. The range for gapopen are [-500,--5000], the range for the extension should rather be [-1, -10]. These values do not refer to a substitution matrix, but rather to the values range of the concistensy estimation (i.e. a ratio) normalized to 10000 for a maximum consistency.
-
-
-The default values are **-gapopen=-50, -gapext=0**. The reasons for these very low values are that they are meant to be cosmetic only, since a trademark of T-Coffee (inherited from Dialign) is not to need explicit penalties. Yet, we know for a fact that alignments with higher gap penalties often look nicer (for publications) and are sometimes more accurate. For instance, you can try:
+The penalties can be changed via the flags **-gapopen** for the gap opening penalty and via **-gapext** for the gap extension penalty. The range for gapopen are [-500,-5000], the range for the extension should rather be [-1,-10]. These values do not refer to a substitution matrix, but rather to the values range of the consistency estimation (i.e. ratio) normalized to 10000 for a maximum consistency. The default values are **-gapopen=-50, -gapext=0**. The reasons for these very low values are that they are meant to be cosmetic only, since a trademark of T-Coffee (inherited from Dialign) is not to need explicit penalties. Yet, we know for a fact that alignments with higher gap penalties often look nicer (for publications) and are sometimes more accurate. For instance, you can try:
 
 ::
 
   $$: t_coffee sproteases_small.fasta -gapopen -100 -gapext -5
 
-
-This gap penalty is only applied at the alignment level (i.e. after the library was computed). If you want to change the gap penalties of the methods used to build the library, you will need to go deeper into the core of the matter...
-
-Two methods are used by default to build the library. One does global pairwise alignments and is named slow_pair, the other is named lalign_id_pair and produces local alignments. These methods are specified via the -method flag. The default of this flag is:
+This gap penalty is only applied at the alignment level (i.e. after the library was computed). If you want to change the gap penalties of the methods used to build the library, you will need to go deeper...Two methods are used by default to build the library. One does global pairwise alignments and is named slow_pair, the other is named lalign_id_pair and produces local alignments. These methods are specified via the -method flag. The default of this flag is:
 
 ::
 
   $$: t_coffee sproteases_small.fasta -method=lalign_id_pair,slow_pair
 
-
 Usually you do not need to write it because it is the default, but if you want to change the default parameters of the constituting methods, you will need to do so explicitely. The default for lalign_id_pair are: GOP=-10, GEP=-4, MATRIX=blosum50mt. The default for slow_pair are: GOP=-10, GEP=-1 and MATRIX=blosum62mt. If you want to change this, try:
-
 
 ::
 
   $$: t_coffee sproteases_small.fasta -method lalign_id_pair@EP@MATRIX@blosum62m\
  t,slow_pair -outfile sproteases_small.b62_aln
 
-
-
 This means the library is now computed using the Blosum62mt with lalign, rather than the Blosum50mt. The good news is that when using this matrix, the score of our alignment increases from 48 (default) to 50. We may assume this new alignment is more accurate than the previous one.
 
-
 .. warning:: It only makes sense to compare the consistency score of alternative alignments when these alignments have been computed using the same methods (lalign_id_pair and slow_pair for instance).
-
-Can you guess the optimal parameters?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Here is another tricky question...and the general answer is NO. The matrix and the gap penalties are simplistic attempts at modeling evolution. While the matrices do a reasonable job, the penalties are simply inappropriate: they should have a value that depends on the structure of the protein and a uniform value cannot be good enough. Yet, since we do not have better we must use them...In practice, this means that parameter optimality is a very *ad hoc* business. It will change from one dataset to the next and there is no simple way to predict which matrix and which penalty will do better. The problem is also that even after your alignment has been computed, it is not always easy to tell whether your new parameters have improved or degraded your MSA. 
-
-There is no systematic way to evaluate an MSA. In general, people visually evaluate the alignment, count the number of identical columns and consider that one more conserved column is good news. If you are lucky you may know a few functional features that you expect to see aligned. If you are very lucky, you will have one structure and you can check the gaps fall in the loops. If you are extremely lucky, you will have two structures and you can assess the quality of your MSA. An advantage of T-Coffee is the fact that the overall score of the alignment (i.e. the consistency with the library) is correlated with the overall accuracy. In other words, if you alignment score increases, its accuracy probably increases also. All this being said, consistency is merely an empirical way of estimating the change of parameters and it does not have the predictive power of a BLAST E-Value.
-
-How good is your alignment
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-Later in this tutorial we show you how to estimate the accuracy of your alignment. Before we go into details, you should know that the number that comes on the first line of the header (in ClustalW format) is the score of your alignment.
-
-::CLUSTAL FORMAT for T-COFFEE Version_4.32 [http://www.tcoffee.org], CPU=19.06 sec, SCORE=37, Nseq=19, Len=341
-
-
-You can use this value to compare alternative alignments of the same sequences. Alignments with a score higher than 40 are usually pretty good.
 
 
 Aligning large datasets
@@ -1287,15 +1265,12 @@ T-Coffee is not a good choice if you are dealing with very large datasets, use M
 
 ::
 
+  Default mode
   muscle -infile sproteases_large.fasta > sproteases_large.muscle
+  
+  Fast mode (less accurate)
+  muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 > sproteases_large.muscle
 
-
-To use the fastest possible mode (less accurate) run:
-
-::
-
-  muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 >\
-  sproteases_large.muscle
 
 Aligning very large alignments with MAFFT
 -----------------------------------------
@@ -1315,7 +1290,6 @@ T-Coffee is not very well gifted for aligning large datasets, but you can give i
 Shrinking large alignments with T-Coffee
 ----------------------------------------
 Once you have generated your large alignment, you may need/want to shrink it to a smaller one, that will be (hopefully) as informative and easier to manipulate. For that purpose, use the trim option (described in detail in the first section of this document).
-
 
 ::
 
