@@ -220,7 +220,7 @@ R-Coffee can be used to align RNA sequences, using their RNApfold predicted seco
 
 ::
 
-  $$: t_coffee sample_rnaseq1.fasta -special_mode rcoffee_consan
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
 
 
 
@@ -238,7 +238,7 @@ If you want to select yourself which methods should be combined by R-Coffee, run
 
 ::
 
-  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair slow_pair
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair,slow_pair
 
 
 .. note:: Please cite: Wilm, A., Higgins, D.G., Notredame, C. **R-Coffee: a method for multiple alignment of non-coding RNA**. Nucleic Acids Res., 36(9):e52 (2008), PMID:18420654
@@ -251,45 +251,45 @@ iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignmen
 
 ::
 
-  $$: t_coffee -other_pg irmsd -aln 3d_sample5.aln
+  $$: t_coffee -other_pg irmsd sample_3Dseq1.aln
 
 
 If the names of the sequences do not correspond to the PDB name, then the user have to declare the correspondence between sequences and structures in a template file (cf. **T-Coffee Manual** section):
 
 ::
 
-  $$: t_coffee -other_pg irmsd -aln 3d_sample5.aln -template_file 3d_sample5.template_file
+  $$: t_coffee -other_pg irmsd sample_3Dseq1.aln -template_file sample_3Dseq1.template
 
 
 .. note:: Please cite: Armougom, F., Moretti, S., Keduas, V., Notredame, C. **The iRMSD: a local measure of sequence alignment accuracy using structural information**. Bioinformatics, 22(14):e35-e39 (2006), PMID:16873492
 
 
 T-RMSD
-=====
+======
 T-RMSD is a structure based clustering method using the iRMSD to drive the structural clustering of your aligned sequences with an available structure. The T-RMSD supports all the parameters supported by iRMSD or APDB. To run T-RMSD, type:
 
 ::
 
-  $$: t_coffee -other_pg trmsd -aln 3d_sample5.aln -template_file 3d_sample5.template_list
+  $$: t_coffee -other_pg trmsd sample_3Dseq1.aln -template_file sample_3Dseq1.template
 
 
-The file ``3d_sample5.aln`` is a MSA in which each sequence has a known structure. T-RMSD also requires a template file  ``3d_sample5.template_list``, a FASTA-like file declaring the structure associated with each sequence. This file should have the following format:
+The file ``sample_3Dseq1.aln`` is a MSA in which each sequence has a known structure. T-RMSD also requires a template file  ``sample_3Dseq1.template``, a FASTA-like file declaring the structure associated with each sequence. This file should have the following format:
 
 ::
 
   > <seq_name> _P_ <PDB structure file or name>
 
-  ******* 3d_sample5.template_list ********
-  >2UWI-3A _P_ 2UWI-3.pdb
-  >2UWI-2A _P_ 2UWI-2.pdb
+  ******* sample_3Dseq1.template *******
+  >TNFR10-2  _P_ 1D4V2.pdb
+  >TNFR10-3  _P_ 1D4V3.pdb
   ...
   **************************************
 
 The program then outputs a series of files:
-- ``3d_sample5.struc_tree.list``: list of the tRMSD tree associated with every position columns
-- ``3d_sample5.struc_tree.html``: colored columns according to the support to the tree (red=high/blue=low)
-- ``3d_sample5.struc_tree.consensus_output``: schematic display of the results
-- ``3d_sample5.struc_tree.consensus``: final consensus structural tree 
+- ``sample_3Dseq1.struc_tree.list``: list of the tRMSD tree associated with every position columns
+- ``sample_3Dseq1.struc_tree.html``: colored columns according to the support to the tree (red=high/blue=low)
+- ``sample_3Dseq1.struc_tree.consensus_output``: schematic display of the results
+- ``sample_3Dseq1.struc_tree.consensus``: final consensus structural tree 
 
 
 .. note:: Please cite: Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. **T-RMSD: a fine-grained, structure based classification method and its application to the functional characterization of TNF receptors**. J. Mol. Biol., 400(3):605-617 (2010), PMID:20471393 and/or Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. **An improved understanding of TNFL/TNFR interactions using structure-based classifications**. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
