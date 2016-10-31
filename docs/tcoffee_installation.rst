@@ -6,22 +6,16 @@ T-Coffee Installation
 ************
 Installation
 ************
-.. important:: This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on any Windows version without using a Unix-like environment (i.e. Cygwin) or a Linux virtualbox. The procedure is quite easy, so don't hesitate to contact us if you have any problem.
+This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on any Windows version without using a Unix-like environment (i.e. Cygwin) or a Linux virtualbox. The procedure is quite easy, so don't hesitate to contact us if you have any problem.
 
+.. Note:: We now recommend that you use the automated installer provided on the T-Coffee `webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_, just click on **Download**. Several options are possible: 1) the **latest stable version** (**recommended**), 2) the **latest beta version** (still under testing), 3) our archives and **older versions** (deprecated, in that case the current installation procedure won't work).Then you will just have to download the T-Coffee installer corresponding to your operative system and then **follow the corresponding procedure**.
 
 Third party packages/Dependencies
 =================================
 T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). Since version 7.56, T-Coffee install on your computer all the third party packages and also setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
-
-Standard installation of T-Coffee
-=================================
-
-.. Note:: We now recommend that you use the automated installer provided on the T-Coffee `webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_, just click on **Download**. Several options are possible: 1) the **latest stable version** (**recommended**), 2) the **latest beta version** (still under testing), 3) our archives and **older versions** (deprecated, in that case the current installation procedure won't work).Then you will just have to download the T-Coffee installer corresponding to your operative system and then **follow the corresponding procedure**.
-
-
 Unix/Linux
-----------
+==========
 You need to have gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules, LWP and XML, to use the services provided by the `EBI <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>`_, then follow this procedure:
 
 ::
@@ -44,7 +38,7 @@ You need to have gcc, g77, CPAN, an internet connection and the root password. Y
  
 
 Mac OS X
---------
+========
 Make sure you have the developer's kit installed (compilers and makefile) and proceed as follows:
 
 ::
@@ -67,7 +61,7 @@ Make sure you have the developer's kit installed (compilers and makefile) and pr
 
 
 Windows (Cygwin)
-----------------
+================
 T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to install a Linux environment such as a virtualbox or Cygwin. If you have a Linux virtualbox, follow the Unix/Linux procedure; If you use Cygwin, follow these different steps:
 
 ::
@@ -87,7 +81,7 @@ T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to
   7. Install T-Coffee within Cygwin using the Unix procedure
 
 Cluster Installation
---------------------
+====================
 In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform any of the following options:
 
 ::
@@ -101,19 +95,35 @@ In order to run, T-Coffee must have a value for the http_proxy and for the e-mai
   3. Add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
      (if you have no proxy: t_coffee ... -proxy -email=<email>)
 
+Compiling from source
+=====================
+T-Coffee compilation requires the following tools installed on your system **make**, **gcc-c++**, **g77**, **Perl** and **CPAN**. Clone the git repository on your computer with the following command: 
+
+::
+
+  git clone git@github.com:cbcrg/tcoffee.git tcoffee
+      
+Make sure you have installed the required dependencies listed above. When done, move in the project root folder named **tcoffee** and enter the following commands:     
+
+::
+
+  cd compile
+  make t_coffee
+    
+The binary will be automatically copied to the path specified by the environment variable **$USER_BIN** (check that it exists before run the make command).
+
 
 ******************
 BLAST and T-Coffee
 ******************
-
-BLAST is a program that searches sequence databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer. Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
+BLAST is a program that searches sequence databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like nr or UniProt) and a powerful computer. Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
 
 **Thanks to its interaction with BLAST, T-Coffee can gather more information and deliver alignments significantly more accurate than the default T-Coffee or any similar method. Let us go through the various modes available for T-Coffee...**
 
 
 Why do I need BLAST with T-Coffee?
 ==================================
-The most accurate modes of T-Coffee scan the databases for templates that they use to align the sequences; let's see how to get BLAST up and running, from the easy solution to tailored ones. There are currently two types of templates for proteins: **1) structures** (PDB) that can be found by a blastp against the PDB database and **2) profiles** that can be constructed using either a BLASTP or a PSIBLAST against n.r. or UniProt. These templates are automatically built if you use the following modes:
+The most accurate modes of T-Coffee scan the databases for templates that they use to align the sequences; let's see how to get BLAST up and running, from the easy solution to tailored ones. There are currently two types of templates for proteins: **1) structures** (PDB) that can be found by a blastp against the PDB database and **2) profiles** that can be constructed using either a BLASTP or a PSIBLAST against nr or UniProt. These templates are automatically built if you use the following modes:
 
 ::
 
@@ -126,12 +136,12 @@ The most accurate modes of T-Coffee scan the databases for templates that they u
    To fetch everything possible and get the best templates, structure or profile:
    $$: t_coffee <your seq> -mode accurate
    
-
+   
 Using the EBI BLAST client
 ==========================
-This is by far the easiest way (and the default mode). The perl clients are already incorporated in T-Coffee and all you need are the proper PERL libraries. In theory, T-Coffee should have already installed these libraries during the standard installation, yet, this requires having root access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public PSI-BLAST via a webservice. Note that because PSI-BLAST is time consuming, T-Coffee stores the runs in its cache (**./tcoffee/cache**) so that it does not need to be rerun. It means that if you realign your sequences (or add a few extra sequences), things will be considerably faster.
+This is by far the easiest way (and the default mode). The PERL clients are already incorporated in T-Coffee and all you need are the proper PERL libraries. In theory, T-Coffee should have already installed these libraries during the standard installation, yet, this requires having root access. It really is worth the effort, since the EBI is providing one of the best webservice available around, and most notably, the only public PSI-BLAST via a webservice. Note that because PSI-BLAST is time consuming, T-Coffee stores the runs in its cache (**./tcoffee/cache**) so that it does not need to be rerun. It means that if you realign your sequences (or add a few extra sequences), things will be considerably faster.
 
-.. danger:: Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification e-mail. Be Careful! If you provide a fake e-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, even the entire country or, but I doubt it, the whole universe). 
+.. danger:: Whenever you use a T-Coffee mode requiring BLAST access, it will ask you for an authentification e-mail. Be extra careful!!! If you provide a fake e-mail, the EBI may suspend the service for all machines associated with your IP address (that could mean your entire lab, entire institute, even the entire country or, but I doubt it, the whole universe). 
 
 .. tip:: Files in the cache are never erased so be careful to empty the cache from time to time otherwise it's just getting bigger and bigger...
 
@@ -190,12 +200,15 @@ Troubleshooting
 Third party packages
 ====================
 
-These procedures are not needed for default usage of T-Coffee. You will only need to install/configure these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. You will receive a list of supported packages that looks like the next table if you type:
+These procedures are not needed for default usage of T-Coffee. You will only need to install/configure these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. You will receive a list of supported packages that looks like the next table if you simply type t_coffee:
 
 ::
 
-   t_coffee
+  Command:
+  $$: t_coffee
 
+  Display the list of supported packages:
+ 
   ****** Pairwise Sequence Alignment Methods:
   --------------------------------------------
   fast_pair built_in
@@ -286,10 +299,25 @@ T-RMSD comes along with T_Coffee but it also requires the package phylip in orde
 
 M-Coffee parameters
 ===================
-M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many Multiple Sequence Alignment packages. By default all the packages will be in the following folder **$HOME/.t_coffee/plugins/linux/**. If you want to have these packages in a different directory, you can either set the environement variable **setenv PLUGINS_4_TCOFFEE=<plugins dir>** or use the flag **-plugin** (overrides every other setting). If for some reason, you do not want this directory to be on your path, or you want to specify a precise directory containing the executables, you can use **export PLUGINS_4_TCOFFEE=<dir>**. You can also set the following environment variables to the absolute path of the executable you want to use (POA_4_TCOFFEE CLUSTALW_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOFFEE MUSCLE_4_TCOFFEE DIALIGNT_4_TCOFFEE PRANK_4_TCOFFEE DIALIGNTX_4_TCOFFEE): whenever they are set, these variables will supersede any other declaration. This is a convenient way to experiment with multiple package versions. If you would rather have the mcoffee directory in some other location, set the MCOFFEE_4_TCOFFEE environement variable to the proper directory: **setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>**.
-   
+M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many Multiple Sequence Alignment packages. By default all the packages will be in the following folder **$HOME/.t_coffee/plugins/linux/**. If you want to have these packages in a different directory, you can either set the environment variable (command 1) or use the flag **-plugin** (overrides every other setting). If for some reason, you do not want this directory to be on your path or you want to specify a precise directory containing the executables, you can use command 2. You can also set the following environment variables to the absolute path of the executable you want to use command 3: whenever they are set these variables will supersede any other declaration. This is a convenient way to experiment with multiple package versions. If you would rather have the mcoffee directory in some other location, set the MCOFFEE_4_TCOFFEE environement variable to the proper directory (command 4).
 
-.. note:: The following files are enough for default usage:
+::
+
+  Command 1: set the environment variable
+  setenv PLUGINS_4_TCOFFEE=<plugins dir>
+  
+  Command 2: specify the directory
+  export PLUGINS_4_TCOFFEE=<dir>
+  
+  Command 3:
+  POA_4_TCOFFEE CLUSTALW_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOFFEE \
+  MUSCLE_4_TCOFFEE DIALIGNT_4_TCOFFEE PRANK_4_TCOFFEE DIALIGNTX_4_TCOFFEE
+  
+  Command 4:
+  setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
+  
+ 
+To be able to run M-Coffee, these following files are enough for a default usage:
 
 ::
 
@@ -311,7 +339,7 @@ R-Coffee is a special mode able to align RNA sequences while taking into account
   Consan (***NOT COMPULSORY***)
   selab.janelia.org/software/consan/    
   ---------------------------------------------------
-  RNAplfold computes RNA secondary structures
+  RNAplfold
   www.tbi.univie.ac.at/~ivo/RNA/
   ---------------------------------------------------
   ProbConsRNA
