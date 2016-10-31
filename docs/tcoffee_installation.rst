@@ -1,7 +1,7 @@
 #####################
 T-Coffee Installation
 #####################
-.. note:: This chapter has been fully updated in 10/2016; installation of T-Coffee versions lower than version 9.03 may be deprecated.
+.. warning:: This chapter has been fully updated in 10/2016; installation of T-Coffee versions lower than version 9.03 may be deprecated.
 
 ************
 Installation
