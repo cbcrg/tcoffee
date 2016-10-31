@@ -6,7 +6,7 @@ Quick Start
 ******************************
 Basic Command Lines (or modes)
 ******************************
-.. important:: This part is a quick overview on how to run T-Coffee alignment using predefined procedures or "modes". All the files mentioned here can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. You can also use examples associated with their corresponding command lines from the section **T-Coffee Tutorial** published in Nature Protocols (2011). If you use a specific mode of T-Coffee, please use the corresponding citation for publication. Refer to the section **T-Coffee Manual** for more details about T-Coffee usage and tools.
+.. important:: This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned here can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. You can also use examples associated with their corresponding command lines from the section **T-Coffee Tutorial** published in Nature Protocols (2011). If you use a specific mode of T-Coffee, please use the corresponding citation for publication. Refer to the section **T-Coffee Manual** for more details about T-Coffee usage and tools.
 
 
 Protein sequences
@@ -95,7 +95,7 @@ RNA sequences
 Brief Overview of T-Coffee Tools
 ********************************
 
-.. important:: We only give you the very basics here, please go to the **T-Coffee manual** for a more detailed description and available options for the different tools. You can also try the **T-Coffee tutorial** for a practical training on T-Coffee alignment and other functions using applied examples on published research data.
+.. note:: We only give you the very basics here, please go to the **T-Coffee manual** for a more detailed description and available options for the different tools. You can also try the **T-Coffee tutorial** for a practical training on T-Coffee alignment and other functions using applied examples on published research data.
 
 
 T-Coffee
@@ -150,7 +150,7 @@ Also, the user can make its own combination of aligners included in T-Coffee by 
   $$: t_coffee sample_seq1.fasta -method clustalw_pair, kalign_pair, probcons_pair
   
   
-If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself...Proceed to the **T-Coffee Installation** section for more detailed instructions.
+.. warning:: If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself...
 
 
 .. note:: Please cite: Wallace, I.M., O'Sullivan, O., Higgins, D.G., Notredame, C. **M-Coffee: combining multiple sequence alignment methods with T-Coffee**. Nucleic Acids Res., 34(6):1692-1699 (2006), PMID:16556910
@@ -270,14 +270,12 @@ T-RMSD
 =====
 T-RMSD is a structure based clustering method using the iRMSD to drive the structural clustering of your aligned sequences with an available structure. The T-RMSD supports all the parameters supported by iRMSD or APDB. To run T-RMSD, type:
 
-
 ::
 
   $$: t_coffee -other_pg trmsd -aln 3d_sample5.aln -template_file 3d_sample5.template_list
 
 
-3d_sample5.aln is a multiple alignment in which each sequence has a known structure. The file 3d_sample5.template_list is a fasta like file declaring the structure associated with each sequence, in the form:
-
+The file ``3d_sample5.aln`` is a MSA in which each sequence has a known structure. T-RMSD also requires a template file  ``3d_sample5.template_list``, a FASTA-like file declaring the structure associated with each sequence. This file should have the following format:
 
 ::
 
@@ -289,13 +287,11 @@ T-RMSD is a structure based clustering method using the iRMSD to drive the struc
   ...
   **************************************
 
-
 The program then outputs a series of files:
-
-3d_sample5.struc_tree.list is a list of the tRMSD tree associated with every position columns
-3d_sample5.struc_tree.html is a colored output showing columns accordingg to their support to the tree (red: high, blue: low)
-3d_sample5.struc_tree.consensus_output is a schematic representation of the results (it's better to use a tree viewer)
-3d_sample5.struc_tree.consensus is the final consensus structural tree 
+- ``3d_sample5.struc_tree.list``: list of the tRMSD tree associated with every position columns
+- ``3d_sample5.struc_tree.html``: colored columns according to the support to the tree (red=high/blue=low)
+- ``3d_sample5.struc_tree.consensus_output``: schematic display of the results
+- ``3d_sample5.struc_tree.consensus``: final consensus structural tree 
 
 
 .. note:: Please cite: Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. **T-RMSD: a fine-grained, structure based classification method and its application to the functional characterization of TNF receptors**. J. Mol. Biol., 400(3):605-617 (2010), PMID:20471393 and/or Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. **An improved understanding of TNFL/TNFR interactions using structure-based classifications**. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
@@ -312,9 +308,4 @@ STRIKE
 
 to be done...
 
-
-SARA-Coffee
-===========
-
-to be done...
 
