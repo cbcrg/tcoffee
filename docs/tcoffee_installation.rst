@@ -160,9 +160,10 @@ You may have your own client (lucky you). If that is so, all you need is to make
 ::
 
   foo.pl -p <method> -d <db> -i <infile> -o <outfile> -m 7
-  "method" can either be blastp or psiblast
-  "infile" is a FASTA file
-  "-m 7" triggers the XML output, T-Coffee parses both the EBI XML and the NCBI XML outputs
+
+  - "method"  : can either be blastp or psiblast
+  - "infile"  : is a FASTA file
+  - "-m 7"    : triggers the XML output, T-Coffee parses both the EBI XML and the NCBI XML outputs
 
 .. tip:: If foo.pl behaves differently, the easiest will probably be to write a wrapper around it so that wrapped_foo.pl behaves like BLASTPGP.
 
@@ -176,7 +177,6 @@ If you have BLASTPGP installed, you can run it instead of the remote clients by 
 
 Using a BLAST local version on Windows/Cygwin
 =============================================
-
 BLAST+ is the latest NCBI BLAST. It is easier to install; a default installation should be compliant with a default T-Coffee installation. For those of you using Cygwin, be careful: while Cygwin behaves like a Unix system, the BLAST executable required for Cygwin (win32) is expecting Windows paths and not Unix paths. This has three important consequences:
 
 ::
@@ -199,7 +199,6 @@ Troubleshooting
 
 Third party packages
 ====================
-
 These procedures are not needed for default usage of T-Coffee. You will only need to install/configure these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. You will receive a list of supported packages that looks like the next table if you simply type t_coffee:
 
 ::
@@ -282,20 +281,15 @@ These procedures are not needed for default usage of T-Coffee. You will only nee
 .. note:: In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed. Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
 
 
-Structural modes of T-Coffee
+Structural modes (using PDB)
 ============================
-Configuration for PDB (installed locally)
------------------------------------------
 Expresso/3D-Coffee are special modes of T-Coffee that makes it possible to combine sequences and structures to generate more accurate alignment. T-Coffee proposes also other tools (iRMSD/APDB, T-RMSD, etc...) requiring access to structural information. **For all the structural modes/tools, access to structural information is mandatory**: you can do so either by having a database installed locally on your own system or by accessing the PDB through the webserver. If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository, it will simply be a bit slower. If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using one of the following commands:
 
   - setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
 
   - setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
 
-T-RMSD mandatory packages
--------------------------
-T-RMSD comes along with T_Coffee but it also requires the package phylip in order to be functional. If you need more information about the different Phylip package, information can be obtained `here <http://www.evolution.genetics.washington.edu/phylip.html>`_. 
-
+The T-RMSD tools comes along with T_Coffee package in order to build clustering based on structure. In iaddition to structural information, it also requires the package Phylip, containing lots of phylogenetic tree reconstruction tools. If you need more information about the different Phylip tools, information can be obtained `here <http://www.evolution.genetics.washington.edu/phylip.html>`_. 
 
 M-Coffee parameters
 ===================
@@ -334,17 +328,11 @@ About R-Coffee...
 R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure. R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee.
 
 ::
+ 
+  - Consan (***NOT COMPULSORY***) from selab.janelia.org/software/consan/    
+  - RNAplfold from www.tbi.univie.ac.at/~ivo/RNA/
+  - ProbConsRNA from http://www.probcons.stanford.edu/ 
 
-  ---------------------------------------------------  
-  Consan (***NOT COMPULSORY***)
-  selab.janelia.org/software/consan/    
-  ---------------------------------------------------
-  RNAplfold
-  www.tbi.univie.ac.at/~ivo/RNA/
-  ---------------------------------------------------
-  ProbConsRNA
-  http://www.probcons.stanford.edu/ 
-  ---------------------------------------------------
   
 .. Note:: Regarding ProbConsRNA, make sure you rename the probcons executable into ProbConsRNA.
 
