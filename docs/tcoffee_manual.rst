@@ -130,9 +130,9 @@ You can generate this list of constraints the way you like. You may even provide
 
 
 
-********************************************************
-Preparing Your Data: Reformatting, Trimming, and more... 
-********************************************************
+*******************************************************
+Preparing Your Data: Reformatting, Trimming and More... 
+*******************************************************
 The reformatting utility: seq_reformat
 ======================================
 General introduction
