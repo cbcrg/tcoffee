@@ -286,10 +286,10 @@ The file ``sample_3Dseq1.aln`` is a MSA in which each sequence has a known struc
   **************************************
 
 The program then outputs a series of files:
-- ``sample_3Dseq1.struc_tree.list``: list of the tRMSD tree associated with every position columns
-- ``sample_3Dseq1.struc_tree.html``: colored columns according to the support to the tree (red=high/blue=low)
-- ``sample_3Dseq1.struc_tree.consensus_output``: schematic display of the results
-- ``sample_3Dseq1.struc_tree.consensus``: final consensus structural tree 
+ - ``sample_3Dseq1.struc_tree.list``: list of the tRMSD tree associated with every position columns
+ - ``sample_3Dseq1.struc_tree.html``: colored columns according to the support to the tree (red=high/blue=low)
+ - ``sample_3Dseq1.struc_tree.consensus_output``: schematic display of the results
+ - ``sample_3Dseq1.struc_tree.consensus``: final consensus structural tree 
 
 
 .. note:: Please cite: Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. **T-RMSD: a fine-grained, structure based classification method and its application to the functional characterization of TNF receptors**. J. Mol. Biol., 400(3):605-617 (2010), PMID:20471393 and/or Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. **An improved understanding of TNFL/TNFR interactions using structure-based classifications**. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
