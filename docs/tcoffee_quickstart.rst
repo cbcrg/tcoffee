@@ -24,22 +24,22 @@ Protein sequences
 
   Citation: Notredame et al., JMB (2000)                      PMID:10964570
   ---------------------------------------------------------------------------- 
-  Accurate             t_coffee sample_aln1.fasta -mode accurate
+  Accurate             t_coffee sample_seq1.fasta -mode accurate
                        combines structures, sequences and profiles
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570
   ----------------------------------------------------------------------------
-  Consistent           t_coffee sample_aln1.fasta -mode mcoffee
+  Consistent           t_coffee sample_seq1.fasta -mode mcoffee
   (M-Coffee)           combines the most common existing MSA packages
 
   Citation: Wallace et al., Nucleic Acids Res. (2006)         PMID:16556910
   ----------------------------------------------------------------------------
-  Structural           t_coffee sample_aln1.fasta -mode expresso
+  Structural           t_coffee sample_seq1.fasta -mode expresso
   (Expresso)           finds structures homologous to your sequences
 
   Citation: Armougom et al. Nucleic Acids Res. (2006)         PMID:16845081
   ----------------------------------------------------------------------------
-  Homology             t_coffee sample_aln1.fasta -mode psicoffee
+  Homology             t_coffee sample_seq1.fasta -mode psicoffee
   (PSI-Coffee)         enriches your dataset with homologous sequences
   
   Citation: Chang et al., BMC Bioinformatics (2012)           PMID:22536955
@@ -51,12 +51,12 @@ DNA sequences
 ::
 
   ----------------------------------------------------------------------------
-  Default              t_coffee three_cdna.fasta
+  Default              t_coffee sample_dnaseq1.fasta
                        use the output.html to visualize the MSA accuracy
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
   ----------------------------------------------------------------------------
-  Functional           t_coffee three_cdna.fasta -mode procoffee
+  Functional           t_coffee sample_dnaseq1.fasta -mode procoffee
   (Pro-Coffee)         increases accuracy of functional DNA regions
   
   Citation: Erb et al., Nucleic Acids Res. (2012)             PMID:22230796
@@ -78,7 +78,7 @@ RNA sequences
   
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
-  Structural 3D     t_coffee sample_rnaseq1.fasta -mode 
+  Structural 3D        t_coffee sample_rnaseq1.fasta -mode 
   (R-Coffee Consan)    uses R-Coffee to combine Consan structural alignments 
   
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654   
@@ -110,11 +110,9 @@ Write or copy all your sequences (protein, DNA or RNA) in a given text file usin
 
 
 This will output three files:
- - ``sample_seq1.aln`` : your multiple sequence alignment (Clustal format by default)
-
- - ``sample_seq1.dnd`` : the guide tree (Newick format)
-  
- - ``sample_seq1.html`` : the color coded MSA according to T-Coffee consistency color scheme (html)
+ - ``sample_seq1.aln`` : multiple sequence alignment (ClustalW format by default)
+ - ``sample_seq1.dnd`` : guide tree (Newick format) 
+ - ``sample_seq1.html`` : colored MSA according to T-Coffee consistency color scheme (html)
 
 
 .. tip:: In principle, the type of the sequences is automatically detected and the default methods adapted accordingly. Sometimes, however, this may fail either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag **-type**.
@@ -201,7 +199,7 @@ Pro-Coffee is a particular mode of T-Coffee designed to align specific functiona
 
 ::
 
-  $$: t_coffee three_cdna.fasta -mode procoffee
+  $$: t_coffee sampe_dnaseq1.fasta -mode procoffee
   
 
 In order to adjust the quality of the alignment, Pro-Coffee allows you to modify gap penalties (gap-opening and/or gap-extension) using the following command line:
@@ -209,7 +207,7 @@ In order to adjust the quality of the alignment, Pro-Coffee allows you to modify
 
 ::
 
-  $$: t_coffee three_cdna.fasta -method promo_pair@EP@GOP@-60@GEP@-1
+  $$: t_coffee sample_dnaseq1.fasta -method promo_pair@EP@GOP@-60@GEP@-1
 
 
 .. note:: Please cite: Erb, I., González-Vallinas, J.R., Bussotti, G., Blanco, E., Eyras, E., Notredame, C. **Use of ChIP-Seq data for the design of a multiple promoter-alignment method**. Nucleic Acids Res., 40(7):e52 (2012), PMID:22230796.
