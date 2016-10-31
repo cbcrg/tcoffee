@@ -301,8 +301,8 @@ M-Coffee is a special mode of T-Coffee that makes it possible to combine the out
   dna_diag_prob_150_exp_110000 dna_matrix.scr
 
 
-Installation of R-Coffee
-========================
+About R-Coffee...
+=================
 R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure. R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee.
 
 ::
@@ -320,5 +320,5 @@ R-Coffee is a special mode able to align RNA sequences while taking into account
   
 .. Note:: Regarding ProbConsRNA, make sure you rename the probcons executable into ProbConsRNA.
 
-.. Note:: In order to insure a proper interface bewteen Consan and R-Coffee, make sure that the file mix80.mod is in the directory ~/.t_coffee/mcoffee or in the mcoffee directory otherwise declared.
+.. Note:: In order to insure a proper interface bewteen Consan and R-Coffee, make sure that the file mix80.mod is in the directory **~/.t_coffee/mcoffee** or in the mcoffee directory otherwise declared.
 
