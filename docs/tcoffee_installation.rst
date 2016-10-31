@@ -2,15 +2,15 @@
 T-Coffee Installation
 #####################
 
-*********************
-Standard Installation
-*********************
+************
+Installation
+************
 
 .. Important:: This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on any Windows version without using a Unix-like environment (i.e. Cygwin) or a Linux virtualbox. The procedure is quite easy, so don't hesitate to contact us if you have any problem.
 
 
-Third party packages and dependencies
-=====================================
+Third party packages/Dependencies
+=================================
 T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). Since version 7.56, T-Coffee install on your computer all the third party packages and also setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
 
@@ -88,7 +88,7 @@ T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to
 
 Cluster Installation
 --------------------
-In order to run, T-Coffee must have a value for the http_proxy and for the E-mail. In order to do so, you can perform any of the following options:
+In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform any of the following options:
 
 ::
 
@@ -103,19 +103,17 @@ In order to run, T-Coffee must have a value for the http_proxy and for the E-mai
 
 
 ******************
-T-Coffee and BLAST
+BLAST and T-Coffee
 ******************
 
-BLAST is a program that searches sequence databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer.
+BLAST is a program that searches sequence databases for homologues of a query sequence. It works for protein and nucleic acid sequences alike. In theory BLAST is just a package like any, but in practice things are a bit more complex. To run correctly, BLAST requires up-to-date databases (that can be fairly large, like n.r. or UniProt) and a powerful computer. Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
 
-Fortunately, an increasing number of institutes or companies are now providing BLAST clients that run over the net. It means that all you need is a small program that send your query to the big server and gets the results back. This prevents you from the hassle of installing and maintaining BLAST, but of course it is less private and you rely on the network and the current load of these busy servers.
-
-Thanks to its interaction with BLAST, T-Coffee can gather structures and protein profiles and deliver an alignment significantly more accurate than the default you would get with T-Coffee or any similar method. Let us go through the various modes available for T-Coffee
+**Thanks to its interaction with BLAST, T-Coffee can gather more information and deliver alignments significantly more accurate than the default T-Coffee or any similar method. Let us go through the various modes available for T-Coffee...**
 
 
 Why do I need BLAST with T-Coffee?
 ==================================
-The most accurate modes of T-Coffee scan the databases for templates that they use to align the sequences; let's see how to get BLAST up and running, from the easy solution to tailored ones. There are currently two types of templates for proteins: 1) structures (PDB) that can be found by a blastp against the PDB database and 2) profiles that can be constructed using either a BLASTP or a PSIBLAST against n.r. or UniProt. These templates are automatically built if you use the following modes:
+The most accurate modes of T-Coffee scan the databases for templates that they use to align the sequences; let's see how to get BLAST up and running, from the easy solution to tailored ones. There are currently two types of templates for proteins: **1) structures** (PDB) that can be found by a blastp against the PDB database and **2) profiles** that can be constructed using either a BLASTP or a PSIBLAST against n.r. or UniProt. These templates are automatically built if you use the following modes:
 
 ::
 
@@ -142,7 +140,7 @@ Using the NCBI BLAST client
 ===========================
 The NCBI is the next best alternative, however in my hands it was always a bit slower and, most of all, it does not incorporate PSI-BLAST as a webservice. A big miss! The NCBI web BLAST client is a small executable that you should install on your system. To do so, you just have to follow the instructions given on this `link <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>`_. Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN. All you then need to do is to make sure that T-Coffee uses the right client; when you run T-Coffee, specify the client in the command line with the flag **-blast_server=NCBI**.
 
-.. Attention:: No need for any E-mail here, but you don't get PSI-BLAST, and whenever T-Coffee wants to use it, BLASTP will be used instead.
+.. Attention:: No need for any e-mail here, but you don't get PSI-BLAST, and whenever T-Coffee wants to use it, BLASTP will be used instead.
 
 
 Using another client
@@ -182,15 +180,15 @@ BLAST+ is the latest NCBI BLAST. It is easier to install; a default installation
   3. The database addresses to BLAST must be in Windows format:
      -protein_db='c:/somewhere/somewhereelse/database'
 
-.. Attention:: using the slash (/) or the antislash (\) does not matter on new systems but I would recommend against incorporating white spaces.
+.. attention:: Using the slash (/) or the antislash (\\) does not matter on new systems but I would recommend against incorporating white spaces.
 
 
 ***************
 Troubleshooting
 ***************
 
-T-Coffee packages
-=================
+Third party packages
+====================
 
 These procedures are not needed for default usage of T-Coffee. You will only need to install/configure these packages for specific purposes. T-Coffee is meant to interact with as many packages as possible, either for aligning or using predictions. You will receive a list of supported packages that looks like the next table if you type:
 
@@ -268,25 +266,18 @@ These procedures are not needed for default usage of T-Coffee. You will only nee
   wublast_client http://www.ebi.ac.uk/Tools/webservices/services/wublast
   blastpgp_client http://www.ebi.ac.uk/Tools/webservices/services/blastpgp
 
-
 .. note:: In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed. Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
 
 
 Structural modes of T-Coffee
 ============================
-Expresso/3D-Coffee are special modes of T-Coffee that makes it possible to combine sequences and structures to generate more accurate alignment. The main difference between Expresso and 3D-Coffee is that Expresso fetches the structures itself. T-Coffee proposes also other tools (iRMSD/APDB, T-RMSD, etc...) requiring access to structural information from the PDB database.
-
-
 Configuration for PDB (installed locally)
 -----------------------------------------
-For all the structural modes of T-Coffee (Expresso, 3D-Coffee, T-RMSD, iRMSD, etc...), access to structural information is mandatory. You can do so either by having a database installed locally on your own system or by accessing the PDB through the webserver. If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository. It will simply be a bit slower than if you had PDB locally. If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using one of the following commands:
+Expresso/3D-Coffee are special modes of T-Coffee that makes it possible to combine sequences and structures to generate more accurate alignment. T-Coffee proposes also other tools (iRMSD/APDB, T-RMSD, etc...) requiring access to structural information. **For all the structural modes/tools, access to structural information is mandatory**: you can do so either by having a database installed locally on your own system or by accessing the PDB through the webserver. If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository, it will simply be a bit slower. If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using one of the following commands:
 
-::
+  - setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
 
-  setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
-
-  setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
-
+  - setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
 
 T-RMSD mandatory packages
 -------------------------
