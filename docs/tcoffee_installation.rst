@@ -6,25 +6,23 @@ T-Coffee Installation
 Standard Installation
 *********************
 
-.. Important:: This section describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on Windows without a Unix-like environment such as Cygwin. The procedure is quite straightforward, so don't hesitate to contact us if you have any problem.
+.. Important:: This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on any Windows version without using a Unix-like environment (i.e. Cygwin) or a linux virtualbox. The procedure is quite easy, so don't hesitate to contact us if you have any problem.
 
 
-Third party packages and on-demand installations
-================================================
-T-Coffee is a complex package that interacts with many other third party softwares. Since version 7.56, T-Coffee uses on-demand installation and install the third party packages it needs, on your computer, for the different T-Coffee options to run correctly. Please let us know if you would like another third party package to be included.
-
-Whenever the automated installation fails because of unforeseen system specificities, users should install the third party package manually (**cf. Advanced Installation**). This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
+Third party packages and dependencies
+=====================================
+T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). Since version 7.56, T-Coffee install on your computer all the third party packages and also setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
 
 Standard installation of T-Coffee
 =================================
 
-.. Note:: We now recommend that you use the automated installer provided for Unix or Linux platforms. In any case, you first have to download the T-Coffee installer corresponding to your system from the T-Coffee website and then follow the procedure corresponding to your operative system.
+.. Note:: We now recommend that you use the automated installer provided on the T-Coffee `webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_, just click on **Download**. Several options are possible: 1) the latest stable version (**recommended**), 2) the latest beta version (still under testing), 3) our archives and older versions (deprecated, in that case the current installation procedure won't work).Then you will just have to download the T-Coffee installer corresponding to your operative system and then follow the corresponding procedure.
 
 
 Unix/Linux
 ----------
-You need to have gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules, LWP and XML, to use the services provided by the EBI <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>, then follow this procedure:
+You need to have gcc, g77, CPAN, an internet connection and the root password. You also need the following perl modules, LWP and XML, to use the services provided by the `EBI <http://www.ebi.ac.uk/Tools/webservices/tutorials/02_rest>`_, then follow this procedure:
 
 ::
 
@@ -88,24 +86,9 @@ T-Coffee doesn't run on Windows, in order to be able to run T-Coffee you need to
 
   7. Install T-Coffee within Cygwin using the Unix procedure
 
-
-Compiling from source 
----------------------
-You can also compile T-Coffee using the source code as indicated: 
-
-::
-
-  1. Follow the instructions from the T-Coffee Google code in order to retrieve the source code: 
-     http://code.google.com/p/tcoffee/source/checkout (no longer available)
-  
-  2. Compile the T-Coffee source distribution package on your target system. It will require the
-     GNU development tools (gcc, g77 or gfortran, make), the Perl interpreter, CPAN and the root
-     user privileges. 
-
-
 Cluster Installation
 --------------------
-In order to run, T-Coffee must have a value for the http_proxy and for the e-mail. In order to do so, you can perform any of the following options:
+In order to run, T-Coffee must have a value for the http_proxy and for the E-mail. In order to do so, you can perform any of the following options:
 
 ::
 
@@ -117,7 +100,6 @@ In order to run, T-Coffee must have a value for the http_proxy and for the e-mai
   
   3. Add to your command line: t_coffee .... -proxy=<proxy> -email=<email>
      (if you have no proxy: t_coffee ... -proxy -email=<email>)
-
 
 
 ******************
@@ -161,7 +143,7 @@ This is by far the easiest way (and the default mode). The perl clients are alre
 
 Using the NCBI BLAST client
 ===========================
-The NCBI is the next best alternative, however in my hands it was always a bit slower and, most of all, it does not incorporate PSI-BLAST as a webservice. A big miss! The NCBI web BLAST client is a small executable that you should install on your system. To do so, you just have to follow the instructions given on this link <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>. Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN. All you then need to do is to make sure that T-Coffee uses the right client; when you run T-Coffee, specify the client in the command line with:
+The NCBI is the next best alternative, however in my hands it was always a bit slower and, most of all, it does not incorporate PSI-BLAST as a webservice. A big miss! The NCBI web BLAST client is a small executable that you should install on your system. To do so, you just have to follow the instructions given on this `link <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>`_. Simply go for netbl, download the executable that corresponds to your architecture (Cygwin users should go for the win executable). Despite all the files that come along the executable blastcl3 is a stand alone executable that you can safely move to your $BIN. All you then need to do is to make sure that T-Coffee uses the right client; when you run T-Coffee, specify the client in the command line with:
 
 
 ::
@@ -169,22 +151,19 @@ The NCBI is the next best alternative, however in my hands it was always a bit s
   -blast_server=NCBI
 
 
-.. Attention:: No need for any e-mail here, but you don't get PSI-BLAST, and whenever T-Coffee wants to use it, BLASTP will be used instead.
+.. Attention:: No need for any E-mail here, but you don't get PSI-BLAST, and whenever T-Coffee wants to use it, BLASTP will be used instead.
 
 
 Using another client
 ====================
 You may have your own client (lucky you). If that is so, all you need is to make sure that this client is complient with the BLAST command line. If your client is named foo.pl, all you need to do is run T-Coffee command line with:
 
-
 ::
 
   -blast_server=CLIENT_foo.pl
 
 
-
 Foo will be called as if it were BLASTPGP, and it is your responsability to make sure it can handle the following command line:
-
 
 ::
 
@@ -201,24 +180,14 @@ Using a BLAST local version on Unix
 ===================================
 If you have BLASTPGP installed, you can run it instead of the remote clients by using in your command line:
 
-
 ::
 
   -blast_server=LOCAL
 
 
-The documentation for BLASTPGP can be found on <http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html> and the package is part of the standard BLAST distribution at <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>. Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achievement spread over several generations. So at this point, you should roam the NCBI website for suitable information. If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST:
+The documentation for BLASTPGP can be found `here <http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/blastpgp.html>`_ and the package is part of the standard BLAST `distribution <ftp://ftp.ncbi.nih.gov/blast/executables/LATEST>`_. Depending on your system, your own skills, your requirements and on more parameters than I have fingers to count, installing a BLAST server suited for your needs can range from a 10 minutes job to an achievement spread over several generations. So at this point, you should roam the NCBI website for suitable information. If you want to have your own BLAST server to run your own databases, you should know that it is possible to control both the database and the program used by BLAST using T-Coffee flags  **-protein_db** (will specify the database used by all the PSI-BLAST modes) and **-pdb_db** (will specify the database used by the structural modes)
 
-
-::
-
-  -protein_db: will specify the database used by all the PSI-BLAST modes of T-Coffee
-
-  -pdb_db: will specify the database used by the structural modes of T-Coffee
-
-
-.. tip:: T-Coffee is compliant with BLAST+, the latest NCBI Blast.
-
+.. tip:: T-Coffee is compliant with BLAST+, the latest NCBI BLAST.
 
 
 Using a BLAST local version on Windows/Cygwin
@@ -359,129 +328,14 @@ For all the structural modes of T-Coffee (Expresso, 3D-Coffee, tRMSD, iRMSD, etc
 
   setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
 
-
-Automated Installation
-----------------------
-In the T-Coffee distribution, type:
-
-
-::
-
-  ./install expresso
-
-  OR
-
-  ./install 3dcoffee
-
-
-
-In theory, this command should download and install every required package (except fugue). If, however, it fails, you should switch to the manual installation (see next).
-
-
-Manual Installation
--------------------
-In order to make the most out of T-Coffee, you will need to install the following packages (make sure the executable is named as indicated below):
-
-::
-
-  -------------------------------------------------------------  
-  SAP
-  Obtained from W. Taylor, NIMR-MRC  
-  -------------------------------------------------------------
-  TMalign 
-  http://www.zhang.bioinformatics.ku.edu/TM-align/ 
-  -------------------------------------------------------------
-  MUSTANG
-  http://www.cs.mu.oz.au/~arun/mustang/ 
-  ------------------------------------------------------------- 
-  wublastclient
-  http://www.ebi.ac.uk/Tools/webservices/clients/wublast
-  -------------------------------------------------------------
-  BLAST
-  http://www.ncbi.nih.nlm.gov 
-  -------------------------------------------------------------
-  Fugue (***NOT COMPULSORY***)
-  http://www-cryst.bioc.cam.ac.uk/fugue/download.html               
-  -------------------------------------------------------------
-
-
-Once the package is installed, make sure make sure that the executable is on your path, so that T-Coffee can find it automatically.
-
-
-.. Note:: The wublast client makes it possible to run BLAST at the EBI without having to install any database locally. It is an ideal solution if you are only using Expresso occasionally.
-
-
-Installing Fugue for 3D-Coffee
-------------------------------
-Uses a standard Fugue installation. You only need to install the following packages: joy, melody, fugueali, sstruc, hbond. If you have root privileges, you can install the common data in:
-
-::
-
- cp fugue/classdef.dat /data/fugue/SUBST/classdef.dat
-
-
-otherwise:
-
-::
-
- Setenv MELODY_CLASSDEF=<location>
-
- Setenv MELODY_SUBST=fugue/allmat.dat
-
-
-All the other configuration files must be in the right location.
-
-
 T-RMSD mandatory packages
 -------------------------
-T-RMSD comes along with t_coffee but it also requires the package phylip in order to be functional. Phylip can be obtained from <http://www.evolution.genetics.washington.edu/phylip.html>. 
+T-RMSD comes along with T_Coffee but it also requires the package phylip in order to be functional. If you need more information about the different Phylip package, information can be obtained `here <http://www.evolution.genetics.washington.edu/phylip.html>`_. 
 
 
 Installation of M-Coffee
 ========================
-M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many Multiple Sequence Alignment packages.
-
-Automated installation
-----------------------
-In the T-Coffee distribution, type:
-
-::
-
-  ./install mcoffee
-
-
-In theory, this command should download and install every required package. If, however, it fails, you should switch to the manual installation.
-
-
-Manual installation
--------------------
-
-By default all the packages will be in the following folder:
-
-::
-
-  $HOME/.t_coffee/plugins
-
-
-If you want to have these packages in a different directory, you can either set the environement variable:
-
-::
-
-  setenv PLUGINS_4_TCOFFEE=<plugins dir>
-
-
-or use the command line flag -plugin (overrides every other setting):
-
-::
-
-  t_coffee ... -plugins=<plugins dir>
-
-
-If for some reason, you do not want this directory to be on your path, or you want to specify a precise directory containing the executables, you can use:
-
-::
-
-   export PLUGINS_4_TCOFFEE=<dir>
+M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many Multiple Sequence Alignment packages. By default all the packages will be in the following folder **$HOME/.t_coffee/plugins/linux** If you want to have these packages in a different directory, you can either set the environement variable **setenv PLUGINS_4_TCOFFEE=<plugins dir>** or use the command line flag **-plugin** (overrides every other setting). If for some reason, you do not want this directory to be on your path, or you want to specify a precise directory containing the executables, you can use **export PLUGINS_4_TCOFFEE=<dir>**.
 
 
 If you cannot, or do not want to use a single bin directory, you can set the following environment variables to the absolute path values of the executable you want to use. Whenever they are set, these variables will supersede any other declaration. This is a convenient way to experiment with multiple package versions:
@@ -515,40 +369,16 @@ Note that the following files are enough for default usage:
 ::
 
   BLOSUM.diag_prob_t10 BLOSUM75.scr blosum80_trunc.mat
-
   dna_diag_prob_100_exp_330000 dna_diag_prob_200_exp_110000
-
   BLOSUM.scr BLOSUM90.scr dna_diag_prob_100_exp_110000
-
   dna_diag_prob_100_exp_550000 dna_diag_prob_250_exp_110000
-
   BLOSUM75.diag_prob_t2 blosum80.mat dna_diag_prob_100_exp_220000
-
   dna_diag_prob_150_exp_110000 dna_matrix.scr
 
 
 Installation of R-Coffee
 ========================
-R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure.
-
-
-Automated installation
-----------------------
-In the T-Coffee distribution, type:
-
-
-::
-
-  ./install rcoffee
-
-
-In theory, this command should download and install every required package (except Consan). If, however, it fails, you should switch to the manual installation (see next).
-
-
-Manual installation
--------------------
-R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee.
-
+R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure. R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee.
 
 ::
 
@@ -563,9 +393,7 @@ R-Coffee only requires the package Vienna to be installed, in order to compute M
   http://www.probcons.stanford.edu/ 
   ---------------------------------------------------
   
-
 .. Note:: Regarding ProbConsRNA, make sure you rename the probcons executable into ProbConsRNA.
 
 .. Note:: In order to insure a proper interface bewteen Consan and R-Coffee, make sure that the file mix80.mod is in the directory ~/.t_coffee/mcoffee or in the mcoffee directory otherwise declared.
-
 
