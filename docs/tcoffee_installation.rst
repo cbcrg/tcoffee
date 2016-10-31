@@ -1,12 +1,12 @@
 #####################
 T-Coffee Installation
 #####################
+.. note:: This chapter has been fully updated in 10/2016; Installation of T-Coffee versions lower than version 9.03 are no longer described.
 
 ************
 Installation
 ************
-
-.. Important:: This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on any Windows version without using a Unix-like environment (i.e. Cygwin) or a Linux virtualbox. The procedure is quite easy, so don't hesitate to contact us if you have any problem.
+.. important:: This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on any Windows version without using a Unix-like environment (i.e. Cygwin) or a Linux virtualbox. The procedure is quite easy, so don't hesitate to contact us if you have any problem.
 
 
 Third party packages/Dependencies
