@@ -138,15 +138,15 @@ In order to perform different modifications on your data (residues/sequences/col
 :: 
 
   Options:
-  - \**+upper**          : to uppercase your residues
-  - +lower          : to lowercase your residues
-  - +switchcase     : to selectively toggle the case of your residues
-  - +keep           : to only keep the residues within the range
-  - +use_cons +keep : to only keep the columns within the range
-  - +remove         : to remove the residues within the range
-  - +convert        : to only convert the residues within the range
-  - +grep           : to select a given string of character
-  - +rm_gap         : to remove columns containing gaps
+  - \*\*+upper\*\*	: to uppercase your residues
+  - +lower		: to lowercase your residues
+  - +switchcase		: to selectively toggle the case of your residues
+  - +keep		: to only keep the residues within the range
+  - +use_cons +keep	: to only keep the columns within the range
+  - +remove		: to remove the residues within the range
+  - +convert		: to only convert the residues within the range
+  - +grep		: to select a given string of character
+  - +rm_gap		: to remove columns containing gaps
   - etc...
  
   
