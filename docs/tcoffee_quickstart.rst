@@ -6,7 +6,7 @@ Quick Start
 ******************************
 Basic Command Lines (or modes)
 ******************************
-.. important:: This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned here can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. You can also use examples associated with their corresponding command lines from the section **T-Coffee Tutorial** published in Nature Protocols (2011). If you use a specific mode of T-Coffee, please use the corresponding citation for publication. Refer to the section **T-Coffee Manual** for more details about T-Coffee usage and tools.
+.. important:: This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. You can also use examples associated with their corresponding command lines from the section **T-Coffee Tutorial** published in Nature Protocols (2011). Refer to the section **T-Coffee Manual** for more technical details about T-Coffee usage and tools. If you use a specific mode or tools of T-Coffee, please use the corresponding citation for publication (see **References and Citations**), otherwise cite T-Coffee. 
 
 
 Protein sequences
@@ -78,7 +78,7 @@ RNA sequences
   
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
-  Structural 3D        t_coffee sample_rnaseq1.fasta -mode 
+  Structural 3D        t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
   (R-Coffee Consan)    uses R-Coffee to combine Consan structural alignments 
   
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654   
@@ -156,7 +156,7 @@ Also, the user can make its own combination of aligners included in T-Coffee by 
 
 Expresso
 ========
-The default installation of T-Coffee provides you with the EBI wublast.pl client required to run Expresso. Using this, Expresso will BLAST your sequences against the PDB database, identify the best targets and use them to align your proteins using a structural aligner. Run Expresso with the following command:
+The default installation of T-Coffee provides you with the EBI wublast.pl client required to run Expresso. Using this, Expresso will BLAST your sequences against the PDB database, identify the best targets (by default X-RAY structures, minimum 35% identical to your sequences) and use them to align your proteins using a structural aligner. Expresso automatically generates a template file (``<your file name>_pdb1.template_list``) that can be used for further use. Run Expresso with the following command:
 
 
 ::
@@ -246,20 +246,28 @@ If you want to select yourself which methods should be combined by R-Coffee, run
 
 iRMSD and APDB
 ==============
-iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignment using structural information. All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the following command:
-
+iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignment using structural information. All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the command 1 if your sequences and structures have the same name; otherwise you have to declare the correspondence between sequences and structures in a template file (command 2).
 
 ::
 
+  Command 1:
   $$: t_coffee -other_pg irmsd sample_3Dseq1.aln
 
+  Command 2:
+  $$: t_coffee -other_pg irmsd sample_3Dseq1.aln -template_file sample_3Dseq1.template
 
-If the names of the sequences do not correspond to the PDB name, then the user have to declare the correspondence between sequences and structures in a template file (cf. **T-Coffee Manual** section):
+
+A template file is a FASTA-like file declaring the structure associated with each sequence. This file should have the following format:
 
 ::
 
-  $$: t_coffee -other_pg irmsd sample_3Dseq1.aln -template_file sample_3Dseq1.template
+  > <seq_name> _P_ <PDB structure file or name>
 
+  ******* sample_3Dseq1.template *******
+  >TNFR10-2  _P_ 1D4V2.pdb
+  >TNFR10-3  _P_ 1D4V3.pdb
+  ...
+  **************************************
 
 .. note:: Please cite: Armougom, F., Moretti, S., Keduas, V., Notredame, C. **The iRMSD: a local measure of sequence alignment accuracy using structural information**. Bioinformatics, 22(14):e35-e39 (2006), PMID:16873492
 
@@ -273,24 +281,11 @@ T-RMSD is a structure based clustering method using the iRMSD to drive the struc
   $$: t_coffee -other_pg trmsd sample_3Dseq1.aln -template_file sample_3Dseq1.template
 
 
-The file ``sample_3Dseq1.aln`` is a MSA in which each sequence has a known structure. T-RMSD also requires a template file  ``sample_3Dseq1.template``, a FASTA-like file declaring the structure associated with each sequence. This file should have the following format:
-
-::
-
-  > <seq_name> _P_ <PDB structure file or name>
-
-  ******* sample_3Dseq1.template *******
-  >TNFR10-2  _P_ 1D4V2.pdb
-  >TNFR10-3  _P_ 1D4V3.pdb
-  ...
-  **************************************
-
 The program then outputs a series of files:
- - ``sample_3Dseq1.struc_tree.list`` : list of the tRMSD tree associated with every position columns
- - ``sample_3Dseq1.struc_tree.html`` : colored columns according to the support to the tree (red=high/blue=low)
- - ``sample_3Dseq1.struc_tree.consensus_output`` : schematic display of the results
- - ``sample_3Dseq1.struc_tree.consensus`` : final consensus structural tree 
-
+ - ``sample_3Dseq1.struc_tree.list`` : list of the tRMSD tree associated with every position columns.
+ - ``sample_3Dseq1.struc_tree.html`` : colored columns according to the support to the tree (red=high/blue=low).
+ - ``sample_3Dseq1.struc_tree.consensus_output`` : schematic display of the results.
+ - ``sample_3Dseq1.struc_tree.consensus`` : final consensus structural tree.
 
 .. note:: Please cite: Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. **T-RMSD: a fine-grained, structure based classification method and its application to the functional characterization of TNF receptors**. J. Mol. Biol., 400(3):605-617 (2010), PMID:20471393 and/or Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. **An improved understanding of TNFL/TNFR interactions using structure-based classifications**. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
 
