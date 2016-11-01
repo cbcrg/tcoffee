@@ -117,7 +117,7 @@ You can generate this list of constraints the way you like. You may even provide
 *******************************************************
 Preparing Your Data: Reformatting, Trimming and More... 
 *******************************************************
-.. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual ! Also, when redirecting your results using **-output** (or other flag requirng options) you can either use or not the symbol "=" to specify your options. If you use the correct flag in a strict way, T-Coffee will always work fine, but you have some degrees of freedom ;-).
+.. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual ! Also, when redirecting your results using **-output** (or other flag requiring options) you can either use or not the symbol "=" to specify your options. If you use the correct flag in a strict way, T-Coffee will always work fine, but you have some degrees of freedom ;-).
 
 The reformatting utility: seq_reformat
 ======================================
@@ -133,7 +133,7 @@ This will output the online flag usage of seq_reformat meaning a complete list o
 
 .. danger:: After the flag **-other_pg**, the common T-Coffee flags are not recognized anymore; it is like if you were using a different program.
 
-.. tip:: When using T-Coffee seq_reformat, command line may become quite long...a practical way to handle this is to create in your .bashrc an alias to call directly seq_format. For example, write in your .bashrc: **alias reformat='t_coffee -other_pg seq_reformat'**. You can now call seq_reformat by tiping **reformat**.
+.. tip:: When using T-Coffee seq_reformat, command line may become quite long...a practical way to handle this is to create in your .bashrc an alias to call directly seq_reformat. For example, write in your .bashrc: **alias reformat='t_coffee -other_pg seq_reformat'**. You can now call seq_reformat by tiping **reformat**.
 
 
 Modification options
@@ -157,6 +157,8 @@ In order to perform different modifications on your data (residues/sequences/col
   
 Using a "cache" file
 --------------------
+What is a cache in T-Coffee?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Several option can be performed easily by using what we call a cache (or cache file). A cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding; for instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix-based evalution (blosum62nt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is rather practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
 
 ::
@@ -174,10 +176,118 @@ Several option can be performed easily by using what we call a cache (or cache f
   Using a substitution matrix:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate \
       blosum62mt -output=score_ascii
-      
+
+Preparing a sequence or alignment cache
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Let us consider the following file:
+
+::
+
+  CLUSTAL FORMAT
+  B CTGAGA-AGCCGC---CTGAGG--TCG
+  C TTAAGG-TCCAGA---TTGCGG--AGC
+  D CTTCGT-AGTCGT---TTAAGA--ca-
+  A CTCCGTgTCTAGGagtTTACGTggAGT
+
+The following command will convert your alignment according to the given parameters: the gaps "-" will remain, all A and a will be turned into 1 and all the other symbols (#) will be turned into 0. The flag **-action +convert** indicates the actions that must be carried out on the alignment before it is output into cache.
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -output=clustalw_aln -out=cache.aln \
+      -action +convert 'Aa1' '.--' +convert '#0'
+
+  This command generates the following alignment (called a cache):
+  CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, Len=27
+  B 000101-100000---000100--000
+  C 001100-000101---000000--100
+  D 000000-100000---001101--01-
+  A 000000000010010000100000100
+
+Other alternative are possible. For instance, the following command:
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -output=fasta_seq -out=cache.seq \
+      -action +convert 'Aa1' '.--' +convert '#0'
+
+  This command will produce the following file cache.seq
+  >B
+  000101100000000100000
+  >C
+  001100000101000000100
+  >D
+  00000010000000110101
+  >A
+  000000000010010000100000100
+
+Preparing a library cache (under maintenance...)
+^^^^^^^^^^^^^^^^^^^^^^^^^
+The library is a special format used by T-Coffee to declare relationships between pairs of residues. The cache library format can also be used to declare for instance the color of specific residues in an alignment. For instance, the following file
+``sample_dnaseq3.tc_lib`` declares that residue 1 of sequence 3 will be receive color 6, while residue 20 of sequence 4 will receive color 20. Note that the sequence number and the residue index are duplicated, owing to the recycling of this format from its original usage.
+
+::
+
+  ! TC_LIB_FORMAT_01
+  4
+  A 27 CTCCGTgTCTAGGagtTTACGTggAGT
+  B 21 CTGAGAAGCCGCCTGAGGTCG
+  C 21 TTAAGGTCCAGATTGCGGAGC
+  D 20 CTTCGTAGTCGTTTAAGAca
+  #1 1
+   1 1 3
+   4 4 5
+  #3 3
+   6 6 1
+   9 9 4   
+  ! CPU 240
+  ! SEQ_1_TO_N
+
+It is also possible to use the BLOCK operator when defining the library (see **Technical Documentation**). The number right after BLOCK indicates the block length (10). The two next numbers (1 1) indicate the position of the first element in the block. The last value is the color.
+
+::
+
+  ! TC_LIB_FORMAT_01
+  4
+  A 27 CTCCGTgTCTAGGagtTTACGTggAGT
+  B 21 CTGAGAAGCCGCCTGAGGTCG
+  C 21 TTAAGGTCCAGATTGCGGAGC
+  D 20 CTTCGTAGTCGTTTAAGAca
+  #1 1
+   +BLOCK+ 10 1 1 3
+   +BLOCK+ 5 15 15 5
+  #3 3
+   6 6 1
+   9 9 4
+  ! CPU 240
+  ! SEQ_1_TO_N
       
 Modifying the format of your data
 =================================
+Keeping/Protecting your sequence names
+--------------------------------------
+Only few programs support long sequence names, and sometimes, when going through some pipeline the names of your sequences can be truncated or modified. To avoid this, seq_reformat contains a utility that can automatically rename your sequences into a form that will be machine-friendly, while making it easy to return to the human-friendly form.
+
+1) **Create a code list**: The first thing to do is to generate a list of names that will be used in place of the long original name of the sequences:
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -output \
+      code_name > proteases_large.code_name
+
+2) **Code your data**: This will create a file where each original name is associated with a coded name (Cxxx). You can then use this file to either code your dataset using the following command:
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -code proteases_large.code_name -in \
+      proteases_large.fasta > proteases_large.coded.fasta
+
+3) **Decode your data**: Then you can work with the file sproteases_large.coded.fasta and when you are done, you can decode the names of your sequences with the following command line:
+
+::
+
+  $$: t_coffee -other_pg seq_reformat -decode proteases_large.code_name -in \
+      proteases_large.coded.fasta
+
 Changing the sequence format
 ----------------------------
 Sometimes it may be necessary to change from one format to another, for instance when using another software which recognize only a given format. T-Coffee recognizes most common alignment formats and you can find the list of all input or output format recognized by simply typing:
@@ -248,33 +358,6 @@ If you want to change the case depending on the score, you must either evaluate 
   $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \
       -action +upper '[5-9]' (under maintenance...)
   
-
-Keeping/Protecting your sequence names
---------------------------------------
-Only few programs support long sequence names, and sometimes, when going through some pipeline the names of your sequences can be truncated or modified. To avoid this, seq_reformat contains a utility that can automatically rename your sequences into a form that will be machine-friendly, while making it easy to return to the human-friendly form.
-
-1) **Create a code list**: The first thing to do is to generate a list of names that will be used in place of the long original name of the sequences:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -output \
-      code_name > proteases_large.code_name
-
-2) **Code your data**: This will create a file where each original name is associated with a coded name (Cxxx). You can then use this file to either code your dataset using the following command:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -code proteases_large.code_name -in \
-      proteases_large.fasta > proteases_large.coded.fasta
-
-3) **Decode your data**: Then you can work with the file sproteases_large.coded.fasta and when you are done, you can decode the names of your sequences with the following command line:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -decode proteases_large.code_name -in \
-      proteases_large.coded.fasta
-
-
 Colouring/Editing residues in an alignment
 ------------------------------------------
 Changing the default colors
@@ -322,148 +405,6 @@ Use the +evaluate flag if you want to color your alignment according to its cons
   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +3evaluate boxshade \
       -output color_html > color_cons_box.html
 
-
-Preparing a sequence or alignment cache
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Let us consider the following file:
-
-::
-
-  CLUSTAL FORMAT
-
-  B CTGAGA-AGCCGC---CTGAGG--TCG
-  C TTAAGG-TCCAGA---TTGCGG--AGC
-  D CTTCGT-AGTCGT---TTAAGA--ca-
-  A CTCCGTgTCTAGGagtTTACGTggAGT
-
-The command
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=clustalw_aln \
-      -out=cache.aln -action +convert 'Aa1' '.--' +convert '#0'
-
-
-
-The conversion will proceed as follows:
-
-
--conv indicates the filters for character conversion:
-
-
- The gaps "-" will remain
- A and a will be turned into 1
- All the other symbols (#) will be turned into 0.
-
--action +convert, indicates the actions that must be carried out on the alignment before it is output into cache.
-
-This command generates the following alignment (called a cache):
-
-::
-
-  CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, Len=27
-  B 000101-100000---000100--000
-  C 001100-000101---000000--100
-  D 000000-100000---001101--01-
-  A 000000000010010000100000100
-
-Other alternative are possible. For instance, the following command:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out=cache.seq \
-      -action +convert 'Aa1' '.--' +convert '#0'
-
-
-will produce the following file cache_seq
-
-::
-
-  >B
-  000101100000000100000
-  >C
-  001100000101000000100
-  >D
-  00000010000000110101
-  >A
-  000000000010010000100000100
-
-
-where each residue has been replaced with a number according to what was specified by conv. Note that it is not necessary to replace EVERY residue with a code. For instance, the following file would also be suitable as a cache:
-
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -output=fasta_seq -out=cache \
-      -action +convert 'Aa1' '.--'
-
-  >B
-  CTG1G11GCCGCCTG1GGTCG
-  >C
-  TT11GGTCC1G1TTGCGG1GC
-  >D
-  CTTCGT1GTCGTTT11G1c1
-  >A
-  CTCCGTgTCT1GG1gtTT1CGTgg1GT
-
-
-Preparing a library cache
-^^^^^^^^^^^^^^^^^^^^^^^^^
-The Library is a special format used by T-Coffee to declare special relationships between pairs of residues. The cache library format can also be used to declare the color of specific residues in an alignment. For instance, the following file
-
-
-::
-
-  ! TC_LIB_FORMAT_01
-
-  4
-
-  A 27 CTCCGTgTCTAGGagtTTACGTggAGT
-  B 21 CTGAGAAGCCGCCTGAGGTCG
-  C 21 TTAAGGTCCAGATTGCGGAGC
-  D 20 CTTCGTAGTCGTTTAAGAca
-
-  #1 1
-   1 1 3
-   4 4 5
-  #3 3
-   6 6 1
-   9 9 4
-   
-  ! CPU 240
-  ! SEQ_1_TO_N
-
-
-sample_lib5.tc_lib declares that residue 1 of sequence 3 will be receive color 6, while residue 20 of sequence 4 will receive color 20. Note that the sequence number and the residue index are duplicated, owing to the recycling of this format from its original usage.
-
-
-It is also possible to use the BLOCK operator when defining the library (c.f. technical doc, library format). For instance:
-
-::
-
-  ! TC_LIB_FORMAT_01
-
-  4
-
-  A 27 CTCCGTgTCTAGGagtTTACGTggAGT
-  B 21 CTGAGAAGCCGCCTGAGGTCG
-  C 21 TTAAGGTCCAGATTGCGGAGC
-  D 20 CTTCGTAGTCGTTTAAGAca
-
-  #1 1
-   +BLOCK+ 10 1 1 3
-   +BLOCK+ 5 15 15 5
-  #3 3
-   6 6 1
-   9 9 4
-
-  ! CPU 240
-  ! SEQ_1_TO_N
-
-
-The number right after BLOCK indicates the block length (10). The two next numbers (1 1) indicate the position of the first element in the block. The last value is the color.
-
-
 Coloring an alignment using a cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 If you have a cache alignment or a cache library, you can use it to color your alignment and either make a post script, html or PDF output. For instance, if you use the file cache.seq:
@@ -494,8 +435,8 @@ It is possible for instance to selectively convert all given characters in a seq
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache_aln \ 
-      -struc_in_f number_aln -action +convert '[1-2]' CX
+  $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \ 
+      -struc_in_f number_aln -action +convert '[1-2]' GX
  
 
 Extracting sequences according to a pattern
@@ -505,19 +446,19 @@ You can extract any sequence by requesting a specific pattern to be found either
 ::
 
   To keep sequences containing HUMAN in the name:
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +grep NAME \
       KEEP HUMAN -output clustalw
 
   To remove sequences containing HUMAN in the name:
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep NAME \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +grep NAME \
       REMOVE HUMAN -output clustalw
 
   To keep sequence which contain sapiens in the comment:
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep COMMENT \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +grep COMMENT \
       KEEP sapiens -output clustalw
  
   To remove sequences containing the pattern [ILM]K:
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +grep SEQ \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +grep SEQ \
       REMOVE '[ILM]K' -output clustalw
 
 
@@ -533,13 +474,12 @@ If you want to extract (command 1) or remove (command 2) several sequences in or
 ::
 
   Command 1: keep sequences
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +extract_seq_list \
       'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
 
   Command 2: remove sequences
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +remove_seq \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +remove_seq \
       'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
-
 
 .. note:: Note the single quotes (') are mandatory as they are meant to protect the name of your sequence and prevent the Unix shell to interpret it like an instruction.
 
@@ -548,20 +488,18 @@ Once sequences are extracted or removed, some columns may remain containing only
 ::
 
   Command 3: removing empty columns
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq_list \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +extract_seq_list \
       'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA' +rm_gap
 
   Command 4: keeping the initial name after extracting specific blocks and removing empty columns
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +keep_name \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +keep_name \
       +extract_seq 'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap
 
   Command 5: renaming sequences according to the extracted blocks and removing empty columns
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_seq \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +extract_seq \
       'sp|P29786|TRY3_AEDAE' 20 200 'sp|P35037|TRY3_ANOGA' 10 150 +rm_gap 
 
-
 .. hint:: The tag **+keep_name** must come BEFORE the tag **+extract_seq**.
-
 
 Extracting the most informative sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -570,17 +508,15 @@ Large datasets are problematic because they can be difficult to align and analyz
 ::
 
   Command 1:
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_n10 \
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim _seq_n10 \
       -output fasta_seq
   Command 2:
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_N20 \
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim _seq_N20 \
       -output fasta_seq
-
 
 .. hint:: The argument to trim include _seq_, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generaly more accurate to use unaligned sequences.
 
 .. note:: For very large dataset, seq_reformat will compute the similarity matrix between your sequences once only. It will then store it in its cache to be reused any time you run on the same dataset. In short this means that it will take much longer to run the first time, but be much faster if you need to rerun it.
-
 
 Extracting/Removing sequences with the % identity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -591,10 +527,10 @@ Removing the most similar sequences is often what people have in mind when they 
 ::
 
   Command 1: unaligned sequences
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%50_
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim _seq_%%50_
 
   Command 2: aligned sequences
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _aln_%%50_
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim _aln_%%50_
 
 .. note:: Using aligned sequences results in a fastest trimming, however, it also means that you rely on a more approximate estimation of sequence similarity.
 
@@ -604,7 +540,7 @@ Sequences that are too distantly related from the rest of the set (called outlie
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim _seq_%%80_O30
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim _seq_%%80_O30
 
 .. hint:: This particular option is quite powerful as it allows you to decide both inferior and superior tresholds for trimming your dataset based on pairwise identity score, and therefore you can dissect your dataset according to different ranges of identity values. Be careful not to remove too many sequences ;-)
 
@@ -615,22 +551,22 @@ Sometimes you want to trim based on identity while making sure specific/importan
 ::
 
   Keep all HUMAN sequences    
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim \
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim \
       _seq_%%50_fNAME HUMAN
 
   Keep all sequences containing ".apiens"
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim \
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim \
       _seq_%%50_fCOMMENT '.apiens'
 
   Keep all sequences containing residues
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -action +trim \
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim \
       _seq_%%50_fSEQ '[MLV][RK]'
 
 You can also specify the sequences you want to keep by giving another fasta file containing the name of these sequences via the flag **-in2**:
 
 ::
 
-  $$:t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_small.fasta \
+  $$:t_coffee -other_pg seq_reformat -in proteases_large.fasta -in2 proteases_small.fasta \
      -action +trim _seq_%%40
 
 
@@ -640,15 +576,14 @@ In order to align two distantly related sequences, most multiple sequence alignm
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -in2 sproteases_pair.fasta \
-      -action +chain > sproteases_chain.fasta
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -in2 proteases_pair.fasta \
+      -action +chain > proteases_chain.fasta
 
-This will generate a dataset of 21 sequences, with the following chain of similarity between your two sequences:
+This will generate a dataset of 21 sequences, with the following chain of similarity between your two sequences. This is probably the best way to generate a high quality alignment of your two sequences when using a progressive method like ClustalW, T-Coffee, MUSCLE or MAFFT.
 
 ::
 
   N: 21 Lower: 40 Sim: 25 DELTA: 15
-
   #sp|P21844|MCPT5_MOUSE -->93 -->sp|P50339|MCPT3_RAT -->85 -->sp|P50341|MCPT2_M\
   ERUN -->72 -->sp|P52195|MCPT1_PAPHA -->98 -->sp|P56435|MCPT1_MACFA -->97 -->sp\
   |P23946|MCPT1_HUMAN -->81 -->sp|P21842|MCPT1_CANFA -->77 -->sp|P79204|MCPT2_SH\
@@ -659,10 +594,6 @@ This will generate a dataset of 21 sequences, with the following chain of simila
   >sp|P80931|MCT1A_SHEEP -->40 -->sp|Q90629|TRY3_CHICK -->41 -->sp|P29786|TRY3_A\
   EDAE
 
-This is probably the best way to generate a high quality alignment of your two sequences when using a progressive method like ClustalW, T-Coffee, MUSCLE or MAFFT.
-
-
-
 Modifying columns/blocks in your dataset
 ----------------------------------------
 Removing gapped columns
@@ -672,7 +603,6 @@ You can also remove all the columns containing a given proportion of gaps; for i
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +rm_gap 50
-
 
 Extracting specific columns 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
