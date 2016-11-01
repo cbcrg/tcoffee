@@ -117,6 +117,8 @@ You can generate this list of constraints the way you like. You may even provide
 *******************************************************
 Preparing Your Data: Reformatting, Trimming and More... 
 *******************************************************
+.. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual ! Also, when redirecting your results using **-output** (or other flag requirng options) you can either use or not the symbol "=" to specify your options. If you use the correct flag in a strict way, T-Coffee will always work fine, but you have some degrees of freedom ;-).
+
 The reformatting utility: seq_reformat
 ======================================
 General introduction
@@ -131,6 +133,9 @@ This will output the online flag usage of seq_reformat meaning a complete list o
 
 .. danger:: After the flag **-other_pg**, the common T-Coffee flags are not recognized anymore; it is like if you were using a different program.
 
+.. tip:: When using T-Coffee seq_reformat, command line may become quite long...a practical way to handle this is to create in your .bashrc an alias to call directly seq_format. For example, write in your .bashrc: **alias reformat='t_coffee -other_pg seq_reformat'**. You can now call seq_reformat by tiping **reformat**.
+
+
 Modification options
 --------------------
 In order to perform different modifications on your data (residues/sequences/columns...), the seq_reformat utility has to be followed by the flag **-action** (within the seq_reformat tool) and one or several modifiers listed here (this list is not exhaustive):
@@ -138,7 +143,7 @@ In order to perform different modifications on your data (residues/sequences/col
 :: 
 
   Options:
-  - \*\*+upper\*\*	: to uppercase your residues
+  - +upper		: to uppercase your residues
   - +lower		: to lowercase your residues
   - +switchcase		: to selectively toggle the case of your residues
   - +keep		: to only keep the residues within the range
@@ -152,23 +157,23 @@ In order to perform different modifications on your data (residues/sequences/col
   
 Using a "cache" file
 --------------------
-Several option can be performed easily by using what we call a cache (or cache file). A cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix-based evalution (blosum62nt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is rather practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
+Several option can be performed easily by using what we call a cache (or cache file). A cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding; for instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix-based evalution (blosum62nt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is rather practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
 
 ::
 
   Evaluating the T-Coffee CORE index during the alignment procedure:
-  $$: t_coffee sample_aln1.fasta -output=score_ascii
+  $$: t_coffee sample_seq1.fasta -output=score_ascii
 
-  Evaluating the T-Coffee CORE index of a given alignment:
-  $$: t_coffee -infile sample_aln1.aln -mode evaluate
+  Evaluating the T-Coffee CORE index of a given alignment (-infile is mandatory):
+  $$: t_coffee -infile sample_seq1.aln -mode evaluate
 
   Using an identity matrix:
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate \
-      idmat -output score_ascii
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate \
+      idmat -output=score_ascii
 
   Using a substitution matrix:
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate \
-      blosum62mt -output score_ascii
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate \
+      blosum62mt -output=score_ascii
       
       
 Modifying the format of your data
@@ -186,19 +191,18 @@ It is possible to reformat unaligned or aligned sequences alike although changin
 ::
 
   For unaligned sequences (e.g. FASTA to PIR):
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.fa -output pir_seq >\
-      sproteases_small.fasta_aln
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.fasta -output pir_seq >\
+      proteases_small.pir_seq
   
   For alignements (e.g. ClustalW to MSF):
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_aln >\
-      sproteases_small.fasta_aln
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -output fasta_aln >\
+      proteases_small.fasta_aln
       
   From aligned to unaligned sequences:
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -output fasta_seq >\
-      sproteases_small.fa
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -output fasta_seq >\
+      proteases_small.fasta
 
-.. Warning:: Format recognition is not 100% full proof; occasionally you will have to inform the program about the nature of the file you are trying to reformat with " -input msf_aln -output fasta_aln" for instance.
-
+.. Warning:: Format recognition is not 100% full proof; occasionally you will have to inform the program about the nature of the file you are trying to reformat with **-input msf_aln -output fasta_aln** for instance.
 
 Changing the case
 -----------------
@@ -208,27 +212,24 @@ If you need to change the case of your sequences, you can use different modifier
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +lower\
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +lower\
       -output clustalw
-
 
 .. hint:: No prize for guessing that +upper will do exactly the opposite...
 
-
 Changing the case of specific residues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you want to change the case of a specific residue, you can use the flag: +edit_residue <sequence> <residue #> <lower|upper|symbol>. If you have more than one residue to modify, write all the coordinates in a text file (one coordinate per line) as spans are not yet supported; then give the file to T-Coffee
+If you want to change the case of a specific residue, you can use the flag: **+edit_residue <sequence> <residue #> <lower|upper|symbol>**. If you have more than one residue to modify, write all the coordinates in a text file (one coordinate per line) as spans are not yet supported; then give the file to T-Coffee
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +upper \
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \
       +edit_residue hmgb_chite 10 lower
       
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +upper \ 
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \ 
       +edit_residue <your file containing coordinates>
 
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
-
 
 Changing the case with a cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -237,14 +238,15 @@ If you want to change the case depending on the score, you must either evaluate 
 ::
 
   Using a cache on-the-fly:
-  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +upper \
+  $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -action +upper \
       +evaluate idmat +lower '[5-9]'
       
   Using a cache file previously computed (2 steps):
-  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +evaluate \
-      idmat -output score_ascii > sample_aln7.cache
-  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -struc_in sample_aln7.cache \
-      -struc_in number_aln -action +upper '[5-9]'
+  $$: t_coffee -other_pg seq_reformat -in sample_dnaseq.aln -action +evaluate \
+      idmat -output=score_ascii > sample_dnaseq2.cache
+      
+  $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \
+      -action +upper '[5-9]' (under maintenance...)
   
 
 Keeping/Protecting your sequence names
@@ -255,22 +257,22 @@ Only few programs support long sequence names, and sometimes, when going through
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_large.fasta -output \
-      code_name > sproteases_large.code_name
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -output \
+      code_name > proteases_large.code_name
 
-2) **Code your data**: This will create a file where each original name is associated with a coded name (Cxxxx). You can then use this file to either code your dataset using the following command:
+2) **Code your data**: This will create a file where each original name is associated with a coded name (Cxxx). You can then use this file to either code your dataset using the following command:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -code sproteases_large.code_name -in \
-      sproteases_large.fasta > sproteases_large.coded.fasta
+  $$: t_coffee -other_pg seq_reformat -code proteases_large.code_name -in \
+      proteases_large.fasta > proteases_large.coded.fasta
 
 3) **Decode your data**: Then you can work with the file sproteases_large.coded.fasta and when you are done, you can decode the names of your sequences with the following command line:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -decode sproteases_large.code_name -in \
-      sproteases_large.coded.fasta
+  $$: t_coffee -other_pg seq_reformat -decode proteases_large.code_name -in \
+      proteases_large.coded.fasta
 
 
 Colouring/Editing residues in an alignment
@@ -283,15 +285,14 @@ Colors are hard coded in the program, but if you wish, you can change them by si
 
   0 #FFAA00 1 0.2 0
 
-
 Coloring specific types of residues/nucleic acids
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 You can color all the residues of your sequences on-the-fly; for instance, the following command line will color all the a's in color 0 (blue):
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +3convert a0 \
-      -output color_html > colored.html
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +3convert a0 \
+      -output color_html > color_type.html
 
 .. warning:: This option is case sensitive so the case of the residues or nucleotides should be the same in the command line (in this command line, only a lower case will be colored). 
 
@@ -302,42 +303,29 @@ If you want to color a specific residue/nucleotide, you can use the flag **+colo
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +color_residue \
-      hmgb_chite 10 1 -output color_html > color.html
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +color_residue \
+      hmgb_chite 10 1 -output color_html > color_residue.html
 
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
 Coloring according to the conservation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Use the +evaluate flag if you want to color your alignment according to its conservation level:
+Use the +evaluate flag if you want to color your alignment according to its conservation level or using the boxshade scoring scheme:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action \
-      +3evaluate pam250mt- output color_html > color.html
+  Conservation color scheme:
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +3evaluate pam250mt \
+      -output color_html > color_cons.html
 
-
-
-You can also use the boxshade scoring scheme:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -in3 sample_aln1.aln -action \
-      +3evaluate boxshade -output color_html > color.html
-
-
-Coloring/Editing residues in an alignment using a Cache
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-In this particular case, the cache is a file where residues to be colored are declared along with the colors. Nine different colors are currently supported. They are set by default but can be modified by the user. The cache can either look like a standard sequence or alignment file (see below) or like a standard T-Coffee library (see next section). In this section we show you how to specifically modify your original sequences to turn them into a cache.
-
-
-In the cache, the colors of each residue are declared with a number between 0 and 9. Undeclared residues will appear without any color in the final alignment.
+  Boxshade color scheme:
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +3evaluate boxshade \
+      -output color_html > color_cons_box.html
 
 
 Preparing a sequence or alignment cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Let us consider the following file:
-
 
 ::
 
@@ -348,9 +336,7 @@ Let us consider the following file:
   D CTTCGT-AGTCGT---TTAAGA--ca-
   A CTCCGTgTCTAGGagtTTACGTggAGT
 
-
 The command
-
 
 ::
 
@@ -370,7 +356,6 @@ The conversion will proceed as follows:
  All the other symbols (#) will be turned into 0.
 
 -action +convert, indicates the actions that must be carried out on the alignment before it is output into cache.
-
 
 This command generates the following alignment (called a cache):
 
@@ -485,29 +470,19 @@ If you have a cache alignment or a cache library, you can use it to color your a
 
 ::
 
-   $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6.cache \
-       -struc_in_f number_fasta -output=color_html -out=x.html
+   Produces a html file:
+   $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -struc_in=sample_dnaseq3.cache \
+       -struc_in_f number_fasta -output=color_html -out=color_dnaseq3.html
 
-This will produce a colored version readable with any standard web browser, while:
+  Produces a pdf file:
+   $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -struc_in=sample_dnaseq3.cache \
+       -struc_in_f number_fasta -output=color_pdf -out=color_dnaseq3.pdf
 
-::
-
-   $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_aln6.cache \
-       -struc_in_f number_fasta -output=color_pdf -out=x.pdf
-
-
-This will produce a colored version readable with acrobat reader.
-
-
+  Produces an output using a library:
+  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_dnaseq3.tc_lib \
+      -output=color_html -out=color_dnaseq3_lib.html (under maintenance...)
+      
 .. warning:: ps2pdf must be installed on your system
-
-You can also use a cache library like the one shown above (sample_lib5.tc_lib):
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_lib5.tc_lib \
-      -output=color_html -out=x.html
- 
 
 Modifying the data itself...
 =============================
