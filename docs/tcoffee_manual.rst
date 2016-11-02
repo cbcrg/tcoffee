@@ -997,6 +997,20 @@ Table 2. Most Suitable Appplications of each package. In any of the situations c
 
 Computing simple MSA with T-Coffee 
 ==================================
+CPUs, warnings and verbose
+--------------------------
+T-Coffee aligner is by default parallelized, meaning that it can use multiple cores when running on a cluster or a computer. By default, T-Coffee will use all available processors to run, but you can allocate the number of cores you want with the flag **-multi_core** or **n_core** and by specifying the number of cores you want. The **multi_core** can accept **no** as a parameter and then run using a single core...It might not be a problem when using reformatting options but it will when running alignments, making T-Coffee really slow !!!
+
+::
+
+  Using a single core:
+  $$: t_coffee -in <your sequences> -multi_core=no
+  
+  Using 12 cores:
+  $$: t_coffee -in <your sequences> -n_core=12
+  
+Also when running T-Coffee, it displays a lot of information directly on screening while running from general information, options, results, warnings...if you want, you can reduce the display using **-no_warning** to remove all the warnings, or even more strict using **-quiet** removing any display while running T-Coffee.
+
 A simple Multiple Sequence Alignment (default)
 ----------------------------------------------
 T-Coffee default mode will simply compute a Multiple Sequence Alignment of the sequences you provided in input (command 1). It will display the final MSA on the screen and in several files according to the format you asked with command 2 (by default, the MSA is stored in a file .aln in ClustalW format). The headline of the alignment file contains important information such as the version of T-Coffee used, the CPU time, the overall consistency score (normalized to 100 or 1000 depending on the version of T-Coffee) and the total length of the MSA: it is quite practical to have a quick glance at the result. 
@@ -1004,16 +1018,16 @@ T-Coffee default mode will simply compute a Multiple Sequence Alignment of the s
 ::
 
   Command 1: default MSA
-  $$: t_coffee sproteases_small.fasta
+  $$: t_coffee proteases_small.fasta
 
   Command 2: default MSA, multiple output files
-  $$: t_coffee sproteases_small.fasta -output=clustalw,fasta_aln,msf
+  $$: t_coffee proteases_small.fasta -output=clustalw,fasta_aln,msf
   
 Each time you run T-Coffee, 3 files are always generated:
 
- - ``sproteases_small.aln``: the alignment in ClustalW format
- - ``sproteases_small.dnd``: the guide tree in Newick format
- - ``sproteases_small.html``: the colored MSA in html format
+ - ``proteases_small.aln``: the alignment in ClustalW format
+ - ``proteases_small.dnd``: the guide tree in Newick format
+ - ``proteases_small.html``: the colored MSA in html format
 
 .. warning:: the guide tree is not a phylogenetic tree, it is used in the alignment process for clustering the sequences. 
 
@@ -1025,7 +1039,7 @@ If your sequences are spread across several datasets, you can give all the files
 
 ::
 
-  $$: t_coffee -seq=sprotease1_small.fasta,sprotease2_small.aln -output=clustalw,fasta_aln,msf
+  $$: t_coffee -seq=protease1_small.fasta,protease2_small.aln -output=clustalw,fasta_aln,msf
 
 
 You may also have a bunch of alignments (with the same sequences) that you have either precomputed, assembled manually or received from a colleague. You can also combine these alignments. For instance, let us imagine we generated 4 alignments with ClustalW using different gap penalties. To combine them into ONE single alignment, use the **-aln** flag. The final score indicates a high level of consistency (91%) between all these MSAs, meaning that the final MSA is probably correct.
@@ -1033,15 +1047,14 @@ You may also have a bunch of alignments (with the same sequences) that you have 
 ::
 
   Your 4 different MSAs:
-  clustalw -infile=sproteases_small.fasta -gapopen=0 -outfile=g0.aln
-  clustalw -infile=sproteases_small.fasta -gapopen=-5 -outfile=g5.aln
-  clustalw -infile=sproteases_small.fasta -gapopen=-10 -outfile=g10.aln
-  clustalw -infile=sproteases_small.fasta -gapopen=-15 -outfile=g15.aln
+  clustalw -infile=proteases_small.fasta -gapopen=0 -outfile=g0.aln
+  clustalw -infile=proteases_small.fasta -gapopen=-5 -outfile=g5.aln
+  clustalw -infile=proteases_small.fasta -gapopen=-10 -outfile=g10.aln
+  clustalw -infile=proteases_small.fasta -gapopen=-15 -outfile=g15.aln
 
   Combining multiple MSAs:
-  $$: t_coffee sproteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output\
+  $$: t_coffee proteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output\
   clustalw html
-
 
 Estimating the diversity in your alignment
 ------------------------------------------
@@ -1049,7 +1062,7 @@ It is easy to measure the level of diversity within your MSA with the **-output*
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -output sim
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -output sim
 
 
 Comparing alternative alignments
@@ -1081,9 +1094,7 @@ The interpretation of this output is as follow: b80 is the reference MSA, it con
   $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln \
       -output_aln_threshold 50 -output_aln_modif x
 
-
 .. tip:: This option is particularly interesting if you are modifying the default parameters of T-Coffee and want to monitor the effects of your modifications. 
-
 
 Modifying the default parameters of T-Coffee
 --------------------------------------------
@@ -1109,8 +1120,8 @@ Unless you have some structural information available, the only way to tell whet
 
 ::
 
-  $$: t_coffee sproteases_small.fasta -matrix=blosum30mt -outfile=b30.aln
-  $$: t_coffee sproteases_small.fasta -matrix=blosum80mt -outfile=b80.aln
+  $$: t_coffee proteases_small.fasta -matrix=blosum30mt -outfile=b30.aln
+  $$: t_coffee proteases_small.fasta -matrix=blosum80mt -outfile=b80.aln
 
 You will get two alignments that have roughly the same score but are slightly different. You can still use these two alternative alignments by comparing them to identify regions that have been aligned identically by the two matrices. These regions are usually more trustworthy.
 
@@ -1122,19 +1133,18 @@ The penalties can be changed via the flags **-gapopen** for the gap opening pena
 
 ::
 
-  $$: t_coffee sproteases_small.fasta -gapopen -100 -gapext -5
+  $$: t_coffee proteases_small.fasta -gapopen -100 -gapext -5
 
 This gap penalty is only applied at the alignment level (i.e. after the library was computed). If you want to change the gap penalties of the methods used to build the library, you will need to go deeper...Two methods are used by default to build the library (command 1). One does global pairwise alignments and is named slow_pair, the other is named lalign_id_pair and produces local alignments. These methods are specified via the **-method** flag. Usually you do not need to write it because it is the default, but if you want to change the default parameters of the constituting methods (command 2), you will need to do so explicitly (the default parameters are for lalign_id_pair **GOP=-10, GEP=-4, MATRIX=blosum50mt** and for slow_pair **GOP=-10, GEP=-1 and MATRIX=blosum62mt**. Using the command 2, the library is now computed using the Blosum62mt with lalign, rather than the Blosum50mt; the good news is that when using this matrix, the score of our alignment increases from 48 to 50. We assume this new alignment is therefore more accurate than the previous one.
 
 ::
 
   Command 1: default T-Coffee
-  $$: t_coffee sproteases_small.fasta -method=lalign_id_pair,slow_pair
+  $$: t_coffee proteases_small.fasta -method=lalign_id_pair,slow_pair
 
   Command 2: modifiying the parameters
-  $$: t_coffee sproteases_small.fasta -method lalign_id_pair@EP@MATRIX@blosum62mt, \
-      slow_pair -outfile sproteases_small.b62_aln
-
+  $$: t_coffee proteases_small.fasta -method lalign_id_pair@EP@MATRIX@blosum62mt, \
+      slow_pair -outfile proteases_small.b62_aln
 
 .. warning:: It only makes sense to compare the consistency score of alternative alignments when these alignments have been computed using the same methods (lalign_id_pair and slow_pair for instance).
 
@@ -1148,7 +1158,7 @@ To run MUSCLE you can try one of the following command; don't hesitate to MUSCLE
 ::
 
   Default mode:
-  muscle -infile sproteases_large.fasta > sproteases_large.muscle
+  muscle -in proteases_large.fasta > proteases_large.muscle
   
   Fast mode (less accurate):
   muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
@@ -1172,7 +1182,7 @@ T-Coffee is not very well gifted for aligning large datasets (for now), but you 
 ::
 
   Command 1:
-  $$: t_coffee sproteases_large.fasta -mode quickaln
+  $$: t_coffee proteases_large.fasta -mode quickaln
 
   Command 2:
    $$: t_coffee sample_seq1.fasta -mode quickaln -ndiag=10
@@ -1182,7 +1192,7 @@ Another alternative to align large datasets is a special mode of T-Coffee, fm-Co
 ::
 
   Command 3:
-  $$: t_coffee sproteases_large.fasta -mode fmcoffee
+  $$: t_coffee proteases_large.fasta -mode fmcoffee
 
 .. tip:: Once you have your large MSA, you can always shrink/trim them using reformatting options (see previous section) for instance by extraction the most informative sequences or by defining %identity cut-off.
 
@@ -1199,7 +1209,7 @@ In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages 
 
 ::
 
-  $$: t_coffee sproteases_small.fasta -mode mcoffee -output clustalw, html
+  $$: t_coffee proteases_small.fasta -mode mcoffee -output clustalw, html
 
 The final MSA is a combination of all methods. The alignment is colored with the T-Coffee consistency color scheme, but in this case the colors will reflect the consistency between methods: 1) regions in red have a high consistency, so all the methods agree and you can expect them to be fairly accurate, 2) regions in green/blue have the lowest consistency, meaning that all the methods deliver different alignment in these regions and you should not trust them. Overall this alignment has a score of 951 (1000 being the max), which means that it is roughly 95% consistent with the entire collection; this is a fairly high index meaning that you can trust your alignment. 
 
@@ -1209,7 +1219,7 @@ Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you 
 
 ::
 
-  $$: t_coffee sproteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa, \
+  $$: t_coffee proteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa, \
       muscle_msa -output=html
 
 Aligning profiles 
@@ -1223,7 +1233,7 @@ Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) her
 ::
 
   Adding one sequence to your MSA:
-  $$: t_coffee sproteases_oneseq.fasta -profile sproteases_small.aln
+  $$: t_coffee proteases_oneseq.fasta -profile proteases_small.aln
 
   Adding many sequences to many profiles:
   $$: t_coffee sequences.fasta -profile=prf1.aln,prf2.aln,prf3.aln -outfile=combined_profiles.aln
@@ -1237,10 +1247,10 @@ PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest.
 ::
 
   Command 1: PSI-Coffee
-  $$: t_coffee sproteases_small.fasta -mode psicoffee
+  $$: t_coffee proteases_small.fasta -mode psicoffee
   
   Command 2: TM-Coffee
-  $$: t_coffee sproteases_small.fasta -mode psicoffee -blast_server <LOCAL> -protein_db <database>
+  $$: t_coffee proteases_small.fasta -mode psicoffee -blast_server <LOCAL> -protein_db <database>
       -template_file PSITM
 
 
@@ -1261,8 +1271,6 @@ Expresso/3D-Coffee is one of the most recent improvement of T-Coffee. The princi
 
   >sp|P08246|ELNE_HUMAN _P_ 1PPGE
   >sp|P20160|CAP7_HUMAN _P_ 1AE5
-  >sp|P00757|KLKB4_MOUSE _P_ 1SGFX
-  >sp|Q6H321|KLK2_HORSE _P_ 1GVZA
   ...
 
 
