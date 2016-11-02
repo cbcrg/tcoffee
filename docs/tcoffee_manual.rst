@@ -727,10 +727,9 @@ Analyzing a RNAalifold secondary structure prediction
 -----------------------------------------------------
 The following commands can either be applied on a Stockholm or a standard MSA. In the second case (standard MSA) the secondary structure will be automatically recomputed by alifold.
 
-
 Analyzing matching columns
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-The option **+alifold2cov_stat** will estimate the number of pairs of columns that are perfect Watson and Crick pairings, those that are neutral (including a GU) and those that include correlated mutations (command 1). The WCcomp are the compensated mutations maintaining WC base pairing. Other arguments can given, to display the list of paired positions and their status (compensated, Watson, etc...) use command 2:
+The option **+alifold2analyze** will estimate the number of pairs of columns that are perfect Watson and Crick pairings, those that are neutral (including a GU) and those that include correlated mutations (command 1). The WCcomp are the compensated mutations maintaining WC base pairing. Other arguments can given, to display the list of paired positions and their status (compensated, Watson, etc...) use command 2:
 
 ::
 
@@ -739,7 +738,6 @@ The option **+alifold2cov_stat** will estimate the number of pairs of columns th
   
   Command 2 (display list of options)
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list
-
 
 Visualizing compensatory mutations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -758,9 +756,7 @@ C: WC compensatory mutations
   Color coded alignment:
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_html
 
-
 .. warning:: Handling gapped columns: by default gapped column are ignored but they can be included by adding the tag **-usegap**.
-
 
 Comparing alternative folds
 ---------------------------
@@ -786,9 +782,7 @@ The seq_reformat is NOT a phylogeny package, yet over the time it has accumulate
   Command 2:
   $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _TMODE_upgma -output newick
 
-
 If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for instance), you can use a different matrix to compute the pairwise distances (command 3), and all these parameters can be concatenated (command 4):
-
 
 ::
 
@@ -799,9 +793,7 @@ If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for
   $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
        -output newick
 
-
 .. warning:: Bootstrap facilities will also be added at some point...We recommend you to use `Phylip <http://evolution.genetics.washington.edu/phylip.html>`_ or any other specific phylogenetic software (PhyML, RAxML, MrBayes, etc...) if you need some serious phylogeny !
-
 
 Comparing two phylogenetic trees
 --------------------------------
@@ -809,7 +801,7 @@ A real interesting option is the ability to compare two trees (unrooted) returni
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_tree2.dnd -in2 sample_tree3.dnd -action \
+  $$: t_coffee -other_pg seq_reformat -in sample_tree1.dnd -in2 sample_tree2.dnd -action \
       +tree_cmp -output newick
 
   #tree_cmp|T: 33 W: 20.00 L: 14.88 RF: 2 N: 9 S: 5
@@ -819,7 +811,6 @@ A real interesting option is the ability to compare two trees (unrooted) returni
   #tree_cmp_def|RF: Robinson and Foulds
   #tree_cmp_def|N: number of Nodes in T1 [unrooted]
   #tree_cmp_def|S: number of Sequences in T1
-
 
 The output scores in more details:
 - T: Fraction of the branches conserved between the two trees. This is obtained by considering the split induced by each branch and by checking whether that split is found in both trees
@@ -831,9 +822,7 @@ The last line contains a tree where distances have been replaced by the number o
 - Negative values indicate a node found in tree1 but not in tree2
 - The higher this value, the deeper the node.
 
-
 .. tip:: You can extract this tree for further usage by typing **cat outfile | grep -v 'tree_cmp'**
-
 
 Scanning phylogenetic trees
 ---------------------------
@@ -850,37 +839,36 @@ For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be
 
   P: <position> <block start> <blck_end> <block score> <block Length>
 
- 
 Pruning phylogenetic trees
 --------------------------
-Pruning removes leaves from an existing tree and recomputes distances so that no information is lost. Consider the files sample_tree2.dnd and the file sample_seq8.seq:
+Pruning removes leaves from an existing tree and recomputes distances so that no information is lost. Consider the files ``sample_tree1.dnd`` and the file ``sample_fake.seq``:
 
 ::
 
-  sample_tree2.dnd
+  sample_tree1.dnd
   (( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
  
-  sample_seq8.seq
+  sample_fake.seq
   >A
   >B
   >C
   >D
 
-.. note:: Sample_seq8 is merely a FASTA file where sequences can be omitted, but you can also leave them, at your entire convenience.
+.. note:: The file ``sample_fake.seq`` is merely a ersatz FASTA file where sequences can be omitted, but you can also leave them, at your entire convenience.
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_tree2.dnd -in2 sample_seq8.seq -action \
+  $$: t_coffee -other_pg seq_reformat -in sample_tree1.dnd -in2 sample_fake.seq -action \
       +tree_prune -output newick
 
-  (( A:0.50000, C:0.50000):0.00000, B:0.50000, D:0.99500);
+  (( A:0.50000, C:0.50000):0.00000, B:0.50000, D:0.99500); (under maintenance...)
 
 
 Manipulating structure files (PDB)
 ==================================
 Extracting a structure
 ----------------------
-There are many reasons why you may need a structure. T-Coffee contains a powerful utility named **extract_from_pdb** that makes it possible to fetch the PDB coordinates of a structure or its FASTA sequence without requiring a local installation. By default, the option **extract_from_pdb will** start looking for the structure in the current directory; it will then look it up locally (PDB_DIR) and eventually try to fetch it from the web (via a wget to www.rcsb.org). All these settings can be customized using environment variables (see next section). For instance if you want to fetch the chain E of the PDB structure 1PPG and/or its sequence in FASTA format, you can use:
+There are many reasons why you may need a structure. T-Coffee contains a powerful utility named **extract_from_pdb** that makes it possible to fetch the PDB coordinates of a structure or its FASTA sequence without requiring a local installation. By default, the option **extract_from_pdb will** start looking for the structure in the current directory; it will then look it up locally (PDB_DIR) and eventually try to fetch it from the web (via a wget to the `PDB <http://www.rcsb.org>`_). All these settings can be customized using environment variables (see next paragraph). For instance if you want to fetch the chain E of the PDB structure 1PPG and/or its sequence in FASTA format, you can use:
 
 ::
 
@@ -890,21 +878,17 @@ There are many reasons why you may need a structure. T-Coffee contains a powerfu
   Fetch the correpsonding sequence:
   $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta
 
-
 Adapting extract_from_pdb to your own environment
 -------------------------------------------------
 If you have the PDB installed locally, simply set the variable PDB_DIR to the absolute location of the directory in which the PDB is installed. The PDB can either be installed in its divided form or in its full form. If the file you are looking for is neither in the current directory nor in the local PDB version, extract_from_pdb will try to fetch it from rcsb. If you do not want this to happen, you should either set the environment variable NO_REMOTE_PDB_DIR to 1 or use the **-no_remote_pdb_dir** flag:
-
 
 ::
 
   export NO_REMOTE_PDB_FILE=1
   
-  t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta -no_remote_pdb_file
-
+  $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta -no_remote_pdb_file
 
 By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior):
-
 
 ::
 
