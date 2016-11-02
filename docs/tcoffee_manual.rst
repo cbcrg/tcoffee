@@ -438,7 +438,6 @@ It is possible for instance to selectively convert all given characters in a seq
   $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \ 
       -struc_in_f number_aln -action +convert '[1-2]' GX
  
-
 Extracting sequences according to a pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 You can extract any sequence by requesting a specific pattern to be found either in the name (NAME), the comment (COMMENT) or the sequence (SEQ) using the modifier is '+grep'. For instance, if you want to extract all the sequences whose name contain the word HUMAN, the flag NAME/COMMENT/SEQ indicates that the modification is made according to the sequences names, the comment section or the sequence itself, and the flag KEEP/REMOVE means that you will keep/remove all the sequences containing the string HUMAN. Here are some examples:
@@ -461,11 +460,9 @@ You can extract any sequence by requesting a specific pattern to be found either
   $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +grep SEQ \
       REMOVE '[ILM]K' -output clustalw
 
-
 .. important:: you should know that the pattern can be any perl legal regular expression, you can visit this  `page <http://www.comp.leeds.ac.uk/Perl/matching.html>`_ for some background on regular expressions. 
 
 .. caution:: This option is case sensitive (Human, HUMAN and hUman will not yield the same results). Be careful !!!
-
 
 Extracting/Removing specific sequences by names
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -569,7 +566,6 @@ You can also specify the sequences you want to keep by giving another fasta file
   $$:t_coffee -other_pg seq_reformat -in proteases_large.fasta -in2 proteases_small.fasta \
      -action +trim _seq_%%40
 
-
 Chaining important sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In order to align two distantly related sequences, most multiple sequence alignment packages perform better when provided with many intermediate sequences that make it possible to 'bridge' your two sequences. The modifier **+chain** makes it possible to extract from a dataset a subset of intermediate sequences that chain the sequences you are interested in. For instance, let us consider the two sequences "sp|P21844|MCPT5_MOUSE" and "sp|P29786|TRY3_AEDAE" having 26% identity. This is high enough to make a case for a homology relationship between them, but this is too low to blindly trust any pairwise alignment. With the names of the two sequences written in the file sproteases_pair.fasta, run the following command:
@@ -602,7 +598,7 @@ You can also remove all the columns containing a given proportion of gaps; for i
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln7.aln -action +rm_gap 50
+  $$: t_coffee -other_pg seq_reformat -in sample_dnaseq3.aln -action +rm_gap 50
 
 Extracting specific columns 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -615,34 +611,29 @@ Extracting portions of a dataset is something very frequently needed. You may ne
   
   Command 2:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate \
-      blosum62mt -output score_ascii
+      blosum62mt -output score_ascii > sample_seq1_blosum62.score_ascii
 
-This generates a score_ascii file that you can then use to filter out the bad bits in your alignment considering the individual score of each residue to trigger the filtering (command 3), or according to the whole column score by simply add the '+use_cons' flag (command 4). The commands 3 and 4 will keep only residues and columns having a score between 6 and 9:
+This generates a score_ascii file that you can then use to filter out the bad bits in your alignment considering the individual score of each residue to trigger the filtering (command 3), or according to the whole column score by simply add the '+use_cons' flag (command 4). This last command can also be run on-the-fly with command 5. The commands 3/4/5 will keep only residues and/or columns having a score between 6 and 9.
 
 ::
 
   Command 3:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii \
       -struc_in_f number_aln -action +keep '[6-9]'
+
   Command 4:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii \
       -struc_in_f number_aln -action +use_cons +keep '[6-9]'
 
-
-It is also possible to use a score_ascii file (as produced in the previous section) in order to extract high scoring portions of an alignment on-the-fly using the following command:
-
-::
-
-   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blosum62mt \
-       +use_cons +keep '[5-9]'
-
+  Command 5
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +evaluate blosum62mt \
+       +use_cons +keep '[6-9]'
 
 .. warning:: Don't forget the simple quotes ('), it's mandatory !!!
 
-
 Extracting entire blocks
 ^^^^^^^^^^^^^^^^^^^^^^^^
-In case you want to extracting a specific block of your alignment for instance to remove poorly resolved regions, remove your alignments boudnaries or to extract specific domains, you can do so with the modified **+extract_block**. In this command line, the option **cons** (command 1) indicates that you are counting the positions according to the consensus of the alignment (i.e. the positions correspond to the columns # of the alignment). If you want to extract your block relatively to a specific sequence, you should replace cons with this sequence name (command 2).
+In case you want to extract a specific block of your alignment, for instance to remove poorly resolved regions, delimit your alignments boundaries or to extract domains, you can do so with the option **+extract_block**. In command 1, the option **cons** indicates that you are counting the positions according to the consensus of the alignment (i.e. the positions correspond to the columns # of the alignment). If you want to extract your block relatively to a specific sequence, you should replace cons with this sequence name (command 2).
 
 ::
 
@@ -654,9 +645,7 @@ In case you want to extracting a specific block of your alignment for instance t
   $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
       'sp|Q03238|GRAM_RAT' 10 200
 
-
 .. tip:: It may be sometimes difficult to know where starts the blocks you are interested in except by counting manually the number of column. You can also make some tries by modifying the boundaries until you get the block you want and then redirect the result into the output file name of your choice. 
-
 
 Concatenating blocks or MSAs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -672,7 +661,6 @@ If you have extracted several blocks generated using the previous command and yo
 
   $$: t_coffee -other_pg seq_reformat -in block1.aln -in2 block2.aln -action +cat_aln
 
-
 .. note:: The alignments do not need to have the same number of sequences and the sequences do not need to come in the same order.
 
 
@@ -684,9 +672,8 @@ If your sequences are DNA coding sequences, it is often safer and more accurate 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -action \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small_dna.fasta -action \
       +translate -output fasta_seq
-
 
 Back-translation with the *bona fide* DNA sequences
 ---------------------------------------------------
@@ -696,7 +683,6 @@ Once your sequences have been aligned, you may want to turn your protein alignme
 
   $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 \
       sproteases_small.aln -action +thread_dna_on_prot_aln -output clustalw
-
 
 Finding the *bona fide* sequences for the back-translation
 ----------------------------------------------------------
@@ -716,6 +702,7 @@ Given an RNA multiple sequence alignment, it is possible to compute (command 1) 
   Command 1:
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +aln2alifold \
       -output stockholm_aln
+
   Command 2: 
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +add_alifold \
       -output stockholm_aln
@@ -729,10 +716,10 @@ The file sample_rnaseq2.alifold contains the raw output of the alifold program p
   Command 1:
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.alifold \ 
       -input2 alifold -action +add_alifold -output stockholm_aln  
+
   Command 2:
   $$: seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +add_alifold \
       -output stockholm_aln
-
 
 .. warning:: The alifold structure and the alignment MUST be compatible. The function makes no attempt to thread or align the structure, it merely stacks it below the MSA.
 
