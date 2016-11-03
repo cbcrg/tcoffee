@@ -117,7 +117,7 @@ You can generate this list of constraints the way you like. You may even provide
 *******************************************************
 Preparing Your Data: Reformatting, Trimming and More... 
 *******************************************************
-.. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual ! Also, when redirecting your results using **-output** (or other flag requiring options) you can either use or not the symbol "=" to specify your options. If you use the correct flag in a strict way, T-Coffee will always work fine, but you have some degrees of freedom ;-).
+.. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual. When multiple input files are given, flags are mandatory (**-in/-in2**, **-al1/-al2**, etc...) Also, when redirecting your results using **-output** (or other flag requiring options) you can either use or not the symbol "=" to specify your options. If you use the correct flag in a strict way, T-Coffee will always work fine, but you have some degrees of freedom ;-).
 
 The reformatting utility: seq_reformat
 ======================================
@@ -997,8 +997,8 @@ Table 2. Most Suitable Appplications of each package. In any of the situations c
 
 Computing simple MSA with T-Coffee 
 ==================================
-CPUs, warnings and verbose
---------------------------
+General considerations
+----------------------
 T-Coffee aligner is by default parallelized, meaning that it can use multiple cores when running on a cluster or a computer. By default, T-Coffee will use all available processors to run, but you can allocate the number of cores you want with the flag **-multi_core** or **n_core** and by specifying the number of cores you want. The **multi_core** can accept **no** as a parameter and then run using a single core...It might not be a problem when using reformatting options but it will when running alignments, making T-Coffee really slow !!!
 
 ::
@@ -1161,8 +1161,8 @@ To run MUSCLE you can try one of the following command; don't hesitate to MUSCLE
   muscle -in proteases_large.fasta > proteases_large.muscle
   
   Fast mode (less accurate):
-  muscle -in sproteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
-  > sproteases_large.muscle
+  muscle -in proteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
+  > proteases_large.muscle
 
 Aligning (very) large datasets with MAFFT
 -----------------------------------------
@@ -1185,7 +1185,7 @@ T-Coffee is not very well gifted for aligning large datasets (for now), but you 
   $$: t_coffee proteases_large.fasta -mode quickaln
 
   Command 2:
-   $$: t_coffee sample_seq1.fasta -mode quickaln -ndiag=10
+   $$: t_coffee proteases_large.fasta -mode quickaln -ndiag=10
 
 Another alternative to align large datasets is a special mode of T-Coffee, fm-Coffee (command 3), derived from M-Coffee (see next section) and designed to be fast and able to handle large datasets (it is used for example in Ensembl). To do so, T-Coffee used three different fast aligners: MAFFT, MUSCLE and Kalign. 
 
@@ -1201,7 +1201,11 @@ Another alternative to align large datasets is a special mode of T-Coffee, fm-Co
 
 Using many methods at once
 ==========================
-One of the most common situation when building MSAs is to have several alignments produced by different alternative methods, and not knowing which one to choose. In this section, we show you how to use M-Coffee to combine many alignments into one single alignment, or how you can specify only the methods you want. M-Coffee is not always the best method, but extensive benchmarks on BaliBase, Prefab and Homstrad have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine precomputed alignments.
+One of the most common situation when building MSAs is to have several alignments produced by different alternative methods, and not knowing which one to choose. In this section, we show you how to use M-Coffee to combine many alignments into one single alignment, or how you can specify only the methods you want. M-Coffee is not always the best method, but extensive benchmarks on BAliBASE, PREFAB and HOMSTRAD have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine precomputed alignments. 
+
+Using third party aligner through T-Coffee
+------------------------------------------
+T-Coffee is installed along with many aligners necessary to run M-Coffee for instance, and many more. If you type **t_coffee**, it will display on the screen the different t_coffee options and all the methods included. If you look carefully, you will see that most of the methods exist under two denominations: 1) xxx_msa or 2) xxx_pair. In the first case, it means that T-Coffee will use the specified method to run your MSA, so you can easily have a ClustalW or a MAFFT alignment using T-Coffee. In the second case, you ask T-Coffee to align every pair of sequence with the specified methods, the final MSA will be computed using the T-Coffee consistency between all the pairs. Go to the **Integrating External Methods in T-Coffee** if you want more information.
 
 Using all the methods at the same time: M-Coffee
 ------------------------------------------------
@@ -1253,30 +1257,46 @@ PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest.
   $$: t_coffee proteases_small.fasta -mode psicoffee -blast_server <LOCAL> -protein_db <database>
       -template_file PSITM
 
-
 .. warning:: PSI/TM-Coffee requires BLAST and a database to search. If you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. Also, for TM-Coffee, the reduced database has to be installed locally otherwise you are just running PSI-Coffee.
 
 Using protein 2D/3D structural information 
 ==========================================
 Using structural information when aligning sequences is very useful. The reason is that structures diverge slower than sequences. As a consequence, one may still find a discernable homology between two sequences that have been diverging for a long time beyond recognition using their corresponding structure. Yet, when assembling a structure-based MSA, you will realize that these sequences contain key conserved residues that a simple alignment procedure was unable to reveal. We show you in this section how to make the best of T-Coffee tools to incorporate structural information in your alignment.
 
-
 Using 3D structures: Expresso/3D-Coffee
 ---------------------------------------
 What is Expresso/3D-Coffee?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Expresso/3D-Coffee is one of the most recent improvement of T-Coffee. The principle is simple: the server runs a BLAST between every sequence in your query against the PDB database. If it finds a structure similar enough to a sequence in your dataset, it will use that structure as a template for your sequence. Templates are stored in a template file. Template files can be generated manually or automatically by the Expresso. The difference between 3D-Coffee and Expresso lies on how it fetches the structure: using Expresso, the procedure is entirely automated but can be controlled by the user; using 3D-Coffee is more tricky as the name of the sequences should correspond to the structure file name. At the end of this step, whenever there are enough templates (minimum of two obviously), Expresso will align sequences using the structural information, otherwise sequences will be aligned using the T-Coffee aligner. A template file format looks like this:  
+Expresso/3D-Coffee is one of the most recent improvement of T-Coffee. The principle is simple: the server runs a BLAST between every sequence in your query against the PDB database. If it finds a structure similar enough to a sequence in your dataset, it will use that structure as a template for your sequence. Templates are stored in a template file. Template files can be generated manually or automatically by the Expresso. The difference between 3D-Coffee and Expresso lies on how it fetches the structure: using Expresso (command 1), the procedure is entirely automated but can be controlled by the user; using 3D-Coffee is more tricky as the name of the sequences should correspond to the structure file name (command 2): "_SELF_" means that the PDB identifier is the name of the sequences. The good news is that you do not need to have PDB installed locally as T-Coffee will automatically fetch the structures directly from RCSB (the home of PDB). At the end whenever there are enough templates (minimum of two obviously), it will align sequences using the structural information, otherwise sequences will be aligned using the standard T-Coffee aligner.  Of course, if your dataset only contains structures, your alignment becomes a structural alignment.
+
+::
+
+  Command 1: Expresso
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
+  PDB
+  $$: t_coffee three_pdb_two_seq.fasta -mode expresso
+
+  Command 2: 3D-Coffee
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
+  _SELF_
+  $$: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
+
+Using Expresso
+^^^^^^^^^^^^^^
+To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. The parameters for the template selection are: 
+ - the type of structure (diffraction "d" or NMR "n") with the tag **-pdb_type**
+ - the coverage (% between 0 and 100) between your query sequence and the template with the tag **-pdb_min_cov**
+ - the identity (% between 0 and 100) between your query sequence and the template with the tag **-pdb_min_sim**. 
+
+When running Expresso, the template file with the following format is automatically created (so you can reuse it for other applications):
 
 ::
 
   >sp|P08246|ELNE_HUMAN _P_ 1PPGE
   >sp|P20160|CAP7_HUMAN _P_ 1AE5
   ...
-
-
-Using Expresso
-^^^^^^^^^^^^^^
-To use Expresso, you have different option from an entirely automated procedure to a tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. The main parameters concern the type of structure (diffraction "d" or NMR "n") with the tag **-pdb_type**, the coverage (% between 0 and 100) between your query sequence and the template with the tag **-pdb_min_cov**, the identity (% between 0 and 100) between your query sequence and the template with the tag **-pdb_min_sim**. Expresso uses BLAST so either you provide your own client with the tag **-blast** or use the default one. It also requires the PDB database that you can install locally and specify its path via the flag **-pdb_db**; by default, it will run on the remote PDB but your results will not be reproducible as the PDB is regularly updated. If you want to control the structure files associated with your sequences, you can provide your own template file with the tag **-template_file** with the same format presented before. Finally, by default, Expresso uses the SAP structural aligner for historical reasons but you can choose alternative aligner(s) installed (at least one has to be a structural aligner); you can give any combination of methods with the flag **-method**. At the end, all the structures identified by Expresso are stored in your cache directory (~/.t_coffee/cache/); you can choose to have the structure directly in your working directory by using the flag **-cache=$PWD**. To summarize, you can either run Expresso blindly and it will do a pretty good job (command 1), or you can have everything under control (commands 2 and 3): 
+  
+Expresso needs BLAST so either you provide your own client with the tag **-blast** or use the default one. It also requires the PDB database that you can install locally and specify its path via the flag **-pdb_db**; by default, it will run on the remote PDB but your results will not be reproducible as the PDB is regularly updated. If you want to control the structure files associated with your sequences, you can provide your own template file with the tag **-template_file** with the same format presented before. Finally, by default, Expresso uses the SAP structural aligner for historical reasons but you can choose alternative aligner(s) installed (at least one has to be a structural aligner); you can give any combination of methods with the flag **-method**. At the end, all the structures identified by Expresso are stored in your cache directory (~/.t_coffee/cache/); you can choose to have the structure directly in your working directory by using the flag **-cache=$PWD**. To summarize, you can either run Expresso blindly and it will do a pretty good job (command 1), or you can have everything under control (commands 2 and 3): 
 
 ::
 
@@ -1295,7 +1315,6 @@ To use Expresso, you have different option from an entirely automated procedure 
 
 .. tip:: By default, structures fetch by Expresso are stored in your local ~/.t_coffee/cache/ allowing Expresso to run faster if you reuse similar structures. Don't forget to empty it from time to time, especially if you are using Expresso frequently otherwise your folder is just getting bigger and bigger (similar comment can be done for any template-based mode of T-Coffee).
 
-
 Aligning sequences and structures
 ---------------------------------
 Mixing sequence profile and structure templates
@@ -1304,47 +1323,17 @@ If you want to go further, and be even slower, you can use the accurate mode tha
 
 ::
 
-  $$: t_coffee sproteases_small.fasta -mode accurate
+  $$: t_coffee proteases_small.fasta -mode accurate
 
 Aligning profile using structural information
----------------------------------------------
-If you have two profiles to align, an ideal situation is when your profiles each contain one or more structures. These structures will guide the alignment of the profiles, even if they contain very distally related sequences. We have prepared two such profiles (prf1_pdb1.aln, prf2_pdb2.aln). You have two choices here. All you need is a template file that declares which sequences have a known structure. If you only want to align sequences, you can try:
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you have two profiles to align, an ideal situation is when your profiles each contain one or more structures. These structures will guide the alignment of the profiles, even if they contain very distally related sequences. All you need is a template file that declares which sequences have a known structure. If you only want to align sequences, you can try:
 
 ::
 
   $$: t_coffee -profile=profile1_pdb1.aln, profile2_pdb2.aln -method sap_pair \
       -profile_template_file two_profiles.template_file
-      
-Mixing sequences and structures
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Gather your sequences in the same file. Name your structures according to their PDB identifier. The file three_pdb_two_seq.fasta contains five sequences, three are the sequences of PDB structures and two are regular sequences. What you want to do is to build a T-Coffee library where sequences with a known structures are aligned with a structure alignment program (like sap) while the other sequences are aligned using regular T-Coffee methods. You can achieve this with the following command:
-
-::
-
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
-  PDB
-
-The option -template_file is here to tell the program how to find the PDB. In that case. EXPRESSO means that a remote BLAST (the EBI BLAST) will be used to identify the best targets. If your sequences are already named according to their PDB name, you can use:
-
-::
-
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
-  _SELF_P_
-
-_SELF_ means that the PDB identifier is the name of the sequences, while _P_ is an indication that the template is indeed a PDB. These indications are necessary for T-Coffee to fetch the relevant structures. The good news is that you do not need to have PDB installed locally as T-Coffee will automatically fetch the structures directly from RCSB (the home of PDB). Of course, if your dataset only contains structures, your alignment becomes a structural alignment. If you have a fugue license, you can also add the fugue method to your run. Fugue will align the structures with sequences whose structure is unknown (this is called threading).
-
-::
-
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair,fugue_pair -te\
- mplate_file _SELF_P_
-
-This can be written more concisely, using one of T-Coffee special_modes:
-
-::
-
-   $$: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
-
-   $$: t_coffee three_pdb_two_seq.fasta -mode expresso
+     
 
 Using secondary structure predictions
 -------------------------------------
@@ -1352,88 +1341,69 @@ T-Coffee can be used to predict secondary structures and transmembrane domains. 
 
 Single sequence prediction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-To make a secondary structure prediction with GOR, run the following. In this command line SSP is a hard coded mode. It prompts the computation of predicted secondary structures.
+To make a secondary structure prediction with GOR, run the following. In this command line SSP is a hard coded mode. It prompts the computation of predicted secondary structures. Used this way, the method will produce for each sequence a secondary prediction file (<sequence_name>.ssp). GOR is a single sequence with a relatively low accuracy. It is possible to increase the accuracy by coupling BLAST and GOR (command 2). When doing so, the predictions for each sequence are obtained by averaging the GOR predictions on every homologue as reported by a BLAST against nr. By default the BLAST is done remotely at the NCBI using the blastpgp web service of the EBI. Transmembrane structures can also be carried out simply, or following the same previous strategy (command 3 and 4).
 
 ::
 
-  Command:
-  t_coffee sample_aln.fasta -template_file SSP
+  Command 1: (under maintenance...)
+  $$: t_coffee sample_seq1.fasta -template_file SSP
   
-  Output files:
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgb_chite.ssp
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_trybr.ssp
-  #### File Type= Template Protein Secondary Structure Format= fasta_seq Name= hmgl_trybr3.ssp
-  ...
+  Command 2: (under maintenance...)
+  $$: t_coffee sample_seq1.fasta -template_file PSISSP
 
-Used this way, the method will produce for each sequence a secondary prediction file. GOR is a single sequence with a relatively low accuracy. It is possible to increase the accuracy by coupling BLAST and GOR, this can be achieved with the following command. When doing so, the predictions for each sequence are obtained by averaging the GOR predictions on every homologue as reported by a BLAST against NR. By default the BLAST is done remotely at the NCBI using the blastpgp web service of the EBI. 
+  Command 3:
+  $$: t_coffee sample_seq1.fasta -template_file TM
 
-::
-
-  $$: t_coffee sample_aln.fasta -template_file PSISSP
-  
-
-Transmembrane structures can also be carried out simply, or following the same previous strategy:
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file TM
-
-  $$: t_coffee sample_aln.fasta -template_file PSITM
-
+  Command 4:
+  $$: t_coffee sample_seq1.fasta -template_file PSITM
 
 Incorporation of the prediction in the alignment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-It is possible to use the secondary prediction or the transmembrane domains prediction in order to reward the alignment of similar elements:
+It is possible to use the secondary prediction (command 1) or the transmembrane domains prediction (command 2) in order to reward the alignment of similar elements:
 
 ::
 
-  $$: t_coffee sample_aln.fasta -template_file PSISSP -method_evaluate_mode ssp -method \
+  Command 1:
+  $$: t_coffee sample_seq1.fasta -template_file PSISSP -method_evaluate_mode ssp -method \
       lalign_id_pair slow_pair
 
-  $$: t_coffee sample_aln.fasta -template_file PSITM -method_evaluate_mode tm -method \
+  Command 2:
+  $$: t_coffee sample_seq1.fasta -template_file PSITM -method_evaluate_mode tm -method \
       lalign_id_pair slow_pair
 
-The overall effect is very crude and amounts to overweighting by 30% the score obtained when matching two residues in a similar secondary structure state. The net consequence is that residues in similar predicted states tend to be aligned more easily.
+The overall effect is very crude and can go up to overweighting by 30% the score obtained when matching two residues in a similar secondary structure state. The net consequence is that residues in similar predicted states tend to be aligned more easily.
 
 Using other secondary structure predictions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you have your own predictions, you can use them. All you need is to produce a template file where the file containing the secondary structure prediction is declared along with the sequence:
+If you have your own predictions, you can use them to run T-Coffee providing you give your own template file, where the file containing the secondary structure prediction is declared along with the sequence (with _E_).
 
 ::
 
+  Command line:
+  $$: t_coffee sample_seq1.fasta -template_file <template_file> -method_evaluate_mode \
+      ssp -method lalign_id_pair slow_pair  
+      
+  Format of the template file:     
   >hmgl_wheat _E_ hmgl_wheat.ssp
   >hmgb_chite _E_ hmgb_chite.ssp
   >hmgl_trybr3 _E_ hmgl_trybr3.ssp
   ...
 
-where each template looks like this:
-
-::
-
+  Format of the prediction file:
   >hmgl_wheat
-
   CCCCCCCCCCCCHHHHHHHCCCCCCCCCHHHHHHHHHHHHHHHCCCCHHHHHHHHHHHHHHHCE
 
-You can then run T-Coffee using your own template file
-
-::
-
-  $$: t_coffee sample_aln.fasta -template_file <template_file> -method_evaluate_mode \
-      ssp -method lalign_id_pair slow_pair
 
 Output of the prediction
 ^^^^^^^^^^^^^^^^^^^^^^^^
-
-You can output a color coded version of your alignment using the predicted structures
+You can output a color coded version of your alignment using the predicted structures or with transmembrane regions:
 
 ::
 
+  Secondary structure prediction:
   $$: t_coffee sample_aln.fasta -template_file PSISSP -output sec_html
 
-A similar result can be obtained with trans-membrane regions:
-
-::
-
+  Transmembrane regions prediction:
   $$: t_coffee sample_aln.fasta -template_file PSITM -output tm_html
 
 
