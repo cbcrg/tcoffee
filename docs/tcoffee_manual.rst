@@ -1417,20 +1417,23 @@ MSA methods are not at their best when aligning DNA sequences. Whenever you can,
 
   $$: t_coffee sample_dnaseq1.fasta -type=dna
 
-The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. In practice, any time it encounters DNA, the program will try to use '4dna' version of the requested methods. These methods have lower penalties and are better suited for dealing with nucleic acid sequences. However, if you would rather use your own matrix, use the following command where you should replace idmat with your own matrix in BLAST format.
+The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. In practice, any time it encounters DNA, the program will try to use '4dna' version of the requested methods. These methods have lower penalties and are better suited for dealing with nucleic acid sequences. However, if you would rather use your own matrix, use the following command where you should replace **idmat** with your own matrix in BLAST format.
 
 ::
 
   $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
 
-Splicing variants
------------------
-Splicing variants are especially challenging for most MSA programs, because the splicing variants need very long gaps to be inserted, and most programs attempt to match as many symbols as possible. Standard programs like ClustalW or MUSCLE are not good at dealing with this situation and in our experience, the only programs that can do something with splice variants are those using local information like some flavors of MAFFT and T-Coffee. For instance, if you try muscle on the following dataset with the command 1, you will quickly realize your alignment is not very good and does not show where the alternative splicing coocurs. On the other hand, if you use T-Coffee (command 2), things become much clearer. The reason why T-Coffee does better than other packages is mostly because it uses local information (lalign_id_pair) and is therefore less sensitive to long gaps. If the default mode does not work for your dataset, you can try to be a bit more aggressive and only use local information to compute your library (command 3). Of course, the most distantly related your sequences, the harder the alignment of splicing variants.
+Aligning promoter regions: Pro-Coffee (under maintenance...)
+-------------------------------------
+
+Splice variants
+---------------
+Splice variants are especially challenging for most MSA programs, because the splicing variants need very long gaps to be inserted, and most programs attempt to match as many symbols as possible. Standard programs like ClustalW or MUSCLE are not good at dealing with this situation and in our experience, the only programs that can do something with splice variants are those using local information like some flavors of MAFFT and T-Coffee. For instance, if you try muscle on the following dataset with the command 1, you will quickly realize your alignment is not very good and does not show where the alternative splicing coocurs. On the other hand, if you use T-Coffee (command 2), things become much clearer. The reason why T-Coffee does better than other packages is mostly because it uses local information (lalign_id_pair) and is therefore less sensitive to long gaps. If the default mode does not work for your dataset, you can try to be a bit more aggressive and only use local information to compute your library (command 3). Of course, the most distantly related your sequences, the harder the alignment of splice variants.
 
 ::
 
   Command 1: using MUSCLE
-  muscle -in sv.fasta -clw
+  muscle -in sv.fasta -clw -out sv_muscle.aln
   
   Command 2: using T-Coffee
   $$: t_coffee sv.fasta
@@ -1458,7 +1461,6 @@ When dealing with coding DNA, the right thing to do is to translate your DNA seq
 How Good Is Your Alignment ?
 ****************************
 There are three strategies for evaluating your alignment. Structure is a killer so if you have at least two structures available for your protein family, you are in an ideal situation and you can use the iRMSD. If you only have one structure available, we developped STRIKE to compare alternative alignment. If you don't have any structure, you are left with the option of using sequence based methods like the CORE index and the TCS. These do pretty well in the CORE regions, but can be limited in the loops. Another killer, less often at hand, is the use of functional information. If you know some residues MUST be aligned because they are functionally related, you can easily set up an evaluation procedure using T-Coffee.
-
 
 Transitive Consistency Score - TCS 
 ==================================
