@@ -154,7 +154,6 @@ In order to perform different modifications on your data (residues/sequences/col
   - +rm_gap		: to remove columns containing gaps
   - etc...
  
-  
 Using a "cache" file
 --------------------
 What is a cache in T-Coffee?
@@ -358,8 +357,8 @@ If you want to change the case depending on the score, you must either evaluate 
   $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \
       -action +upper '[5-9]' (under maintenance...)
   
-Colouring/Editing residues in an alignment
-------------------------------------------
+Coloring/Editing residues in an alignment
+-----------------------------------------
 Changing the default colors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Colors are hard coded in the program, but if you wish, you can change them by simply creating a file named ``seq_reformat.color`` that is used to declare the color values. The name of the file (seq_reformat.color) is defined in programmes_define.h, COLOR_FILE and can be changed before compilation. By default, the file is searched in the current directory. For example, the following line written in ``seq_reformat.color`` indicates that the value 0 in the cache corresponds now to #FFAA00 in html, and in RGB 1, 0.2 and 0. 
@@ -426,7 +425,7 @@ If you have a cache alignment or a cache library, you can use it to color your a
 .. warning:: ps2pdf must be installed on your system
 
 Modifying the data itself...
-=============================
+============================
 Modifiying sequences in your dataset
 ------------------------------------
 Converting residues
@@ -694,7 +693,7 @@ Manipulating RNA Sequences
 Producing a Stockholm output: adding predicted secondary structures
 -------------------------------------------------------------------
 Producing/Adding a consensus structure
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Given an RNA multiple sequence alignment, it is possible to compute (command 1) or add (command 2) the alifold (Vienna package) consensus secondary structure and output in in stockholm:
 
 ::
@@ -960,7 +959,6 @@ Choosing the right package (without flipping a coin !)
 ------------------------------------------------------
 Each available package has something to go for it, it is just a matter of knowing what you want to do !! T-Coffee is probably the most versatile, but it comes at a price, its default aligner being currently slower than many alternative packages. In the rest of this tutorial we give some hints on how to carry out each of these applications within the T-Coffee framework.
 
-
 ================= ====== ===== ======== ======== ======== 
 Packages          MUSCLE MAFFT ProbCons T-Coffee ClustalW 
 ================= ====== ===== ======== ======== ======== 
@@ -980,7 +978,6 @@ Speed             +++    +++   \+       \+       ++
 ================= ====== ===== ======== ======== ======== 
 
 Table 1. Relative possibilities associated with the main packages. In any of the situations corresponding to each table line, (+++) indicates that the method is the best suited, (++) indicates that the method is not optimal but behaves reasonably well, (+) indicates that it is possible but not recommended (-) indicates that the option is not available.
-
 
 ===================== ====== ===== ======== ======== ======== 
 Packages              MUSCLE MAFFT ProbCons T-Coffee ClustalW 
@@ -1011,8 +1008,8 @@ T-Coffee aligner is by default parallelized, meaning that it can use multiple co
   
 Also when running T-Coffee, it displays a lot of information directly on screening while running from general information, options, results, warnings...if you want, you can reduce the display using **-no_warning** to remove all the warnings, or even more strict using **-quiet** removing any display while running T-Coffee.
 
-A simple Multiple Sequence Alignment (default)
-----------------------------------------------
+Computing a simple MSA (default T-Coffee)
+-----------------------------------------
 T-Coffee default mode will simply compute a Multiple Sequence Alignment of the sequences you provided in input (command 1). It will display the final MSA on the screen and in several files according to the format you asked with command 2 (by default, the MSA is stored in a file .aln in ClustalW format). The headline of the alignment file contains important information such as the version of T-Coffee used, the CPU time, the overall consistency score (normalized to 100 or 1000 depending on the version of T-Coffee) and the total length of the MSA: it is quite practical to have a quick glance at the result. 
 
 ::
@@ -1029,9 +1026,9 @@ Each time you run T-Coffee, 3 files are always generated:
  - ``proteases_small.dnd``: the guide tree in Newick format
  - ``proteases_small.html``: the colored MSA in html format
 
-.. warning:: the guide tree is not a phylogenetic tree, it is used in the alignment process for clustering the sequences. 
+.. warning:: The guide tree is not a phylogenetic tree, it is used in the alignment process for clustering the sequences. 
 
-.. tip:: you can visualize the colored html file with any browser/software you prefer. The display of the sequences should be aligned and formatted; if not, use another browser, it works quite well with Firefox, Safari, etc... If you need to do more sophisticated modifications on your MSA, we recommend to use `Jalview <http://www.jalview.org/>`_ which incorporate the T-Coffee color scheme.
+.. tip:: You can visualize the colored html file with any browser/software you prefer. The display of the sequences should be aligned and formatted; if not, use another browser, it works quite well with Firefox, Safari, etc... If you need to do more sophisticated modifications on your MSA, we recommend to use `Jalview <http://www.jalview.org/>`_ which incorporate the T-Coffee color scheme.
 
 Aligning multiple datasets/Combining multiple MSAs
 --------------------------------------------------
@@ -1203,13 +1200,13 @@ Using many methods at once
 ==========================
 One of the most common situation when building MSAs is to have several alignments produced by different alternative methods, and not knowing which one to choose. In this section, we show you how to use M-Coffee to combine many alignments into one single alignment, or how you can specify only the methods you want. M-Coffee is not always the best method, but extensive benchmarks on BAliBASE, PREFAB and HOMSTRAD have shown that it delivers the best alignment 2 times out of 3. If you do not want to use the methods provided by M-Coffee, you can also combine precomputed alignments. 
 
-Using third party aligner through T-Coffee
-------------------------------------------
-T-Coffee is installed along with many aligners necessary to run M-Coffee for instance, and many more. If you type **t_coffee**, it will display on the screen the different t_coffee options and all the methods included. If you look carefully, you will see that most of the methods exist under two denominations: 1) xxx_msa or 2) xxx_pair. In the first case, it means that T-Coffee will use the specified method to run your MSA, so you can easily have a ClustalW or a MAFFT alignment using T-Coffee. In the second case, you ask T-Coffee to align every pair of sequence with the specified methods, the final MSA will be computed using the T-Coffee consistency between all the pairs. Go to the **Integrating External Methods in T-Coffee** if you want more information.
+Using third party aligner via T-Coffee
+--------------------------------------
+T-Coffee is installed along with many aligners necessary to run M-Coffee for instance, and many more. If you type **t_coffee**, it will display on the screen the different t_coffee options and all the methods included. If you look carefully, you will see that most of the methods exist under two denominations: 1) **xxx_msa** or 2) **xxx_pair**. In the first case, it means that T-Coffee will use the specified method to run your MSA, so you can easily have a ClustalW or a MAFFT alignment using T-Coffee. In the second case, you ask T-Coffee to align every pair of sequence with the specified methods, the final MSA will be computed using the T-Coffee consistency between all the pairs. Go to the **Integrating External Methods in T-Coffee** if you want more information.
 
 Using all the methods at the same time: M-Coffee
 ------------------------------------------------
-In M-Coffee, M stands for Meta. To use M-Coffee, you will need several packages to be installed (see **T-Coffee Installation** and section **Integrating External Methods in T-Coffee**). If you did a default installation, all the software you need should be there. M-Coffee is a special mode of T-Coffee that you can call using the flag **-mode mcoffee**. It will align your sequence using 8 different aligners: ClustalW, POA, MUSCLE, ProbCons, MAFFT, Dialing-T, PCMA and T-Coffee:
+To use M-Coffee (M stands for Meta aligner), you will need several packages to be installed (see **T-Coffee Installation** and section **Integrating External Methods in T-Coffee**). If you did a default installation, all the software you need should be there. M-Coffee is a special mode of T-Coffee that you can call using the flag **-mode mcoffee**. It will align your sequence using 8 different aligners: ClustalW, POA, MUSCLE, ProbCons, MAFFT, Dialing-T, PCMA and T-Coffee:
 
 ::
 
@@ -1219,7 +1216,7 @@ The final MSA is a combination of all methods. The alignment is colored with the
 
 Using selected methods to compute your MSA
 -------------------------------------------
-Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the **-method flag**. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
+Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you only want to use a subset of your favorite methods, you should know that each of these methods is available via the **-method** flag. You can make all the combination you want !!! For instance, to combine MAFFT, MUSCLE, T-Coffee and ProbCons, you can use:
 
 ::
 
@@ -1267,26 +1264,25 @@ Using 3D structures: Expresso/3D-Coffee
 ---------------------------------------
 What is Expresso/3D-Coffee?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Expresso/3D-Coffee is one of the most recent improvement of T-Coffee. The principle is simple: the server runs a BLAST between every sequence in your query against the PDB database. If it finds a structure similar enough to a sequence in your dataset, it will use that structure as a template for your sequence. Templates are stored in a template file. Template files can be generated manually or automatically by the Expresso. The difference between 3D-Coffee and Expresso lies on how it fetches the structure: using Expresso (command 1), the procedure is entirely automated but can be controlled by the user; using 3D-Coffee is more tricky as the name of the sequences should correspond to the structure file name (command 2): "_SELF_" means that the PDB identifier is the name of the sequences. The good news is that you do not need to have PDB installed locally as T-Coffee will automatically fetch the structures directly from RCSB (the home of PDB). At the end whenever there are enough templates (minimum of two obviously), it will align sequences using the structural information, otherwise sequences will be aligned using the standard T-Coffee aligner.  Of course, if your dataset only contains structures, your alignment becomes a structural alignment.
+Expresso/3D-Coffee is probably one of the most important improvement of T-Coffee. The principle is simple: the server runs a BLAST between every sequence in your query against the PDB database and finds a structure similar in sequence which will be used as a template for aligning your sequence. Templates are stored in a template file, which can be generated manually or automatically by the Expresso. The difference between 3D-Coffee and Expresso lies on how it fetches the structure: using Expresso (command 1), the procedure is entirely automated but can be controlled by the user; using 3D-Coffee is more tricky as the name of the sequences should correspond to the structure file name (command 2): **_SELF_** means that the PDB identifier is the name of the sequences. The good news is that you do not need to have PDB installed locally as T-Coffee will automatically fetch the structures directly from RCSB (the home of PDB). At the end whenever there are enough templates (minimum of two obviously), it will align sequences using the structural information, otherwise sequences will be aligned using the standard T-Coffee aligner.  Of course, if your dataset only contains structures, your alignment becomes a structural alignment.
 
 ::
 
-  Command 1: Expresso
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
-  PDB
+  Command 1: two ways of running Expresso
   $$: t_coffee three_pdb_two_seq.fasta -mode expresso
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file PDB
 
-  Command 2: 3D-Coffee
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file\
-  _SELF_
+
+  Command 2: two ways of running 3D-Coffee
   $$: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
+  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file _SELF_
 
 Using Expresso
 ^^^^^^^^^^^^^^
 To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. The parameters for the template selection are: 
- - the type of structure (diffraction "d" or NMR "n") with the tag **-pdb_type**
- - the coverage (% between 0 and 100) between your query sequence and the template with the tag **-pdb_min_cov**
- - the identity (% between 0 and 100) between your query sequence and the template with the tag **-pdb_min_sim**. 
+ - **-pdb_type**: the type of structure (diffraction "d" or NMR "n")
+ - **-pdb_min_cov**: the coverage (% between 0 and 100) between your query sequence and the template
+ - **-pdb_min_sim**: the identity (% between 0 and 100) between your query sequence and the template 
 
 When running Expresso, the template file with the following format is automatically created (so you can reuse it for other applications):
 
@@ -1396,7 +1392,7 @@ If you have your own predictions, you can use them to run T-Coffee providing you
 
 Output of the prediction
 ^^^^^^^^^^^^^^^^^^^^^^^^
-You can output a color coded version of your alignment using the predicted structures or with transmembrane regions:
+You can output a color coded version of your alignment using the secondary predicted structure or transmembrane regions predictions:
 
 ::
 
@@ -1409,81 +1405,54 @@ You can output a color coded version of your alignment using the predicted struc
 
 Aligning RNA sequences (to be done...)
 ======================
-RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, smart people have thought about this. If you are interested in RNA, check: http://www.bio.inf.uni-jena.de/Software/MARNA/.
+RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, smart people have thought about this. If you are interested in RNA, have a look `there <http://www.bio.inf.uni-jena.de/Software/MARNA/>`_.
 
 Aligning DNA sequences (to be done...)
 ======================
 Aligning DNA sequences
 ----------------------
-Multiple Sequence Alignment methods are not at their best when aligning DNA sequences. Whenever you can, try using a local multiple sequence alignment package like the Gibbs sampler. Yet if you believe your DNA sequence are homologous over their entire length, you can use T-Coffee.
-
-
-In theory, the program automatically recognizes DNA sequences and uses appropriate methods, yet adding the -type=dna flag cannot do any harm...
+MSA methods are not at their best when aligning DNA sequences. Whenever you can, try using a local MSA package like the Gibbs sampler; yet if you believe your DNA sequence are homologous over their entire length, you can use T-Coffee. In theory, the program automatically recognizes DNA sequences and uses appropriate methods, yet adding the -type=dna flag cannot do any harm...
 
 ::
 
   $$: t_coffee sample_dnaseq1.fasta -type=dna
 
-
-
-The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. In practice, any time it encounters dna, the program will try to use '4dna' version of the requested methods. These methods have lower penalties and are better suited for dealing with nucleic acid sequences. However, if you would rather use your own matrix, use:
+The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. In practice, any time it encounters DNA, the program will try to use '4dna' version of the requested methods. These methods have lower penalties and are better suited for dealing with nucleic acid sequences. However, if you would rather use your own matrix, use the following command where you should replace idmat with your own matrix in BLAST format.
 
 ::
 
   $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
 
-Where you should replace idmat with your own matrix, in BLAST format (see the format section of the Reference Manual).
-
 Splicing variants
 -----------------
-Splicing variants are especially challenging for most MSA programs. This is because the splicing variants need very long gaps to be inserted, while most programs attempt to match as many symbols as possible.
-
-
-Standard programs like ClustalW or Muscle are not good at dealing with this situation and in our experience, the only programs that can do something with splice variants are those using local information like some flavors of Mafft and T-Coffee .
-
-
-For instance, if you try muscle on the following dataset:
+Splicing variants are especially challenging for most MSA programs, because the splicing variants need very long gaps to be inserted, and most programs attempt to match as many symbols as possible. Standard programs like ClustalW or MUSCLE are not good at dealing with this situation and in our experience, the only programs that can do something with splice variants are those using local information like some flavors of MAFFT and T-Coffee. For instance, if you try muscle on the following dataset with the command 1, you will quickly realize your alignment is not very good and does not show where the alternative splicing coocurs. On the other hand, if you use T-Coffee (command 2), things become much clearer. The reason why T-Coffee does better than other packages is mostly because it uses local information (lalign_id_pair) and is therefore less sensitive to long gaps. If the default mode does not work for your dataset, you can try to be a bit more aggressive and only use local information to compute your library (command 3). Of course, the most distantly related your sequences, the harder the alignment of splicing variants.
 
 ::
 
+  Command 1: using MUSCLE
   muscle -in sv.fasta -clw
-
-You will quickly realise that your alignment is not very good and does not show where the alternative splicing coocurs. On the other hand, if you use T-Coffee, things become much clearer
-
-::
-
+  
+  Command 2: using T-Coffee
   $$: t_coffee sv.fasta
 
-The reason why T-Coffee does better than other packages is mostly because it uses local information (lalign_id_pair) and is therefore less sensitive to long gaps. If the default mode does not work for your dataset, you can try to be a bit more aggressive and only use local information to compute your library:
-
-::
-
+  Command 3: using only local information
   $$: t_coffee sv.fasta -method lalign_id_pair
-
-Of course, the most distantly related your sequences, the harder the alignment of splicing variants.
 
 Noisy coding DNA sequences...
 -----------------------------
-When dealing with coding DNA, the right thing to do is to translate your DNA sequence and thread the DNA onto the protein alignment if you really need some DNA. However, sometimes, your cDNA may not be so clean that you can easily translate it (frameshifts and so on). Whenever this happens, try (no warranty) the following special method. The test case in three_dna_seq.fasta contains the DNA sequences of three proteases with a couple of frameshifts here and there. If you make a regular alignment of these sequences
+When dealing with coding DNA, the right thing to do is to translate your DNA sequence and thread the DNA onto the protein alignment if you really need some DNA. However, sometimes, your cDNA may not be so clean that you can easily translate it (frameshifts and so on). Whenever this happens, try (no warranty) the following special method. The test case in three_dna_seq.fasta contains the DNA sequences of three proteases with a couple of frameshifts here and there. If you make a regular alignment of these sequences (command 1) you see that many gaps have sizes that are not multiple of 3 (codon size). When using an appropriate alignment method that takes into account all the frames at the same time, we get something much more meaningful (command 2). At the end, you can even recover the corrected protein sequence (command 3) using a special option **+clean cdna**, a small HMM that loops through each sequence and select the frame in order to maximize the similarity within the alignment (part of the **seq_reformat** utility).
 
 ::
 
+  Command 1: Default alignment
   $$: t_coffee three_cdna.fasta
 
-You can immediately see that many gaps have sizes that are not multiple of 3 (codon size). Most of the information is lost. On the other hand, when using an appropriate alignment method that takes into account all the frames at the same time, we get something much more meaningful:
-
-::
-
+  Command 2: Special mode for cDNA
   $$: t_coffee three_cdna.fasta -method cdna_fast_pair
 
-And most importantly, the frameshifts end up at the right place. You can even recover the corrected protein sequence using a special mode of seq_reformat:
+  Command 3: Recovering your protein sequences
+  $$: t_coffee -other_pg seq_reformat -in three_cdna.aln -action +clean_cdna +translate
 
-::
-
-  $$: t_coffee -other_pg seq_reformat -in three_cdna.aln -action +clean_cdna +tr\
- anslate
-
-+clean cdna is a small HMM that loops through each sequence and select the frame in order to maximize the similarity within the alignment.
 
 ****************************
 How Good Is Your Alignment ?
