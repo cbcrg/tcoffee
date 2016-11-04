@@ -97,11 +97,9 @@ Brief Overview of T-Coffee Tools
 
 .. note:: We only give you the very basics here, please go to the **T-Coffee manual** for a more detailed description and available options for the different tools. You can also try the **T-Coffee tutorial** for a practical training on T-Coffee alignment and other functions using applied examples on published research data.
 
-
 T-Coffee
 ========
 Write or copy all your sequences (protein, DNA or RNA) in a given text file using one of the following format: Swiss-Prot, FASTA or PIR; then run T-Coffee with the following command line:
-
 
 ::
 
@@ -128,7 +126,6 @@ This will output three files:
 M-Coffee
 ========
 M-Coffee is a meta version of T-Coffee that combines the output of eight aligners (MUSCLE, ProbCons, POA, DIALIGN-T, MAFFT, ClustalW, PCMA and T-Coffee); when installing T-Coffee, all required packages are automatically installed on your computer. To use M-Coffee, write your sequences in a file (format: Swiss-Prot, FASTA or PIR) and run the following command line:
-
 
 ::
 
@@ -158,7 +155,6 @@ Expresso
 ========
 The default installation of T-Coffee provides you with the EBI wublast.pl client required to run Expresso. Using this, Expresso will BLAST your sequences against the PDB database, identify the best targets (by default X-RAY structures, minimum 35% identical to your sequences) and use them to align your proteins using a structural aligner. Expresso automatically generates a template file (``<your file name>_pdb1.template_list``) that can be used for further use. Run Expresso with the following command:
 
-
 ::
 
   $$: t_coffee sample_seq1.fasta -mode expresso
@@ -166,7 +162,6 @@ The default installation of T-Coffee provides you with the EBI wublast.pl client
 
 
 If all the required structural packages for Expresso were not installed or if you want to select another structural aligner, you can select the structural package you want to use. For instance, if can use TM-align rather than SAP:
-
 
 ::
 
@@ -176,26 +171,9 @@ If all the required structural packages for Expresso were not installed or if yo
 .. note:: Please cite: Armougom, F., Moretti, S., Poirot, O., Audic, S., Dumas, P., Schaeli, B., Keduas, V., Notredame. C. **Expresso: automatic incorporation of structural information in multiple sequence alignments using 3D-Coffee**. Nucleic Acids Res., 34:W604-W608 (2006), PMID:16845081
 
 
-MOCCA
-=====
-MOCCA is a specific tool in T-Coffee designed to deal with highly divergent protein repeats.  Write your sequences in the same file and type:
-
-
-::
-
-  $$: t_coffee -other_pg mocca sample_seq1.fasta
-
-
-This command output one files (<your sequences>.mocca_lib) and starts an interactive menu.
-
-
-.. note:: Please cite: Notredame, C. **MOCCA: semi-automatic method for domain hunting**. Bioinformatics, 17(4):373-374 (2001), PMID:11301309
-
-
 Pro-Coffee
 ==========
 Pro-Coffee is a particular mode of T-Coffee designed to align specific functional DNA sequences, in particular regulatory regions. To run Pro-Coffee by default, type:
-
 
 ::
 
@@ -209,40 +187,29 @@ In order to adjust the quality of the alignment, Pro-Coffee allows you to modify
 
   $$: t_coffee sample_dnaseq1.fasta -method promo_pair@EP@GOP@-60@GEP@-1
 
-
 .. note:: Please cite: Erb, I., González-Vallinas, J.R., Bussotti, G., Blanco, E., Eyras, E., Notredame, C. **Use of ChIP-Seq data for the design of a multiple promoter-alignment method**. Nucleic Acids Res., 40(7):e52 (2012), PMID:22230796.
-
 
 R-Coffee
 ========
-R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures. The best results are obtained by using the Consan pairwise method. If you have Consan installed, run:
-
+R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures. The best results are obtained by using the Consan pairwise method. If you have Consan installed (under maintenance...), run:
 
 ::
 
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
 
-
-
 This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode that will run MUSCLE, ProbCons4RNA and MAFFT and then use the secondary structures predicted by RNApfold:
-
 
 ::
 
   $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
 
-
-
 If you want to select yourself which methods should be combined by R-Coffee, run:
-
 
 ::
 
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair,slow_pair
 
-
 .. note:: Please cite: Wilm, A., Higgins, D.G., Notredame, C. **R-Coffee: a method for multiple alignment of non-coding RNA**. Nucleic Acids Res., 36(9):e52 (2008), PMID:18420654
-
 
 iRMSD and APDB
 ==============
@@ -255,7 +222,6 @@ iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignmen
 
   Command 2:
   $$: t_coffee -other_pg irmsd sample_3Dseq1.aln -template_file sample_3Dseq1.template
-
 
 A template file is a FASTA-like file declaring the structure associated with each sequence. This file should have the following format:
 
@@ -270,7 +236,6 @@ A template file is a FASTA-like file declaring the structure associated with eac
   **************************************
 
 .. note:: Please cite: Armougom, F., Moretti, S., Keduas, V., Notredame, C. **The iRMSD: a local measure of sequence alignment accuracy using structural information**. Bioinformatics, 22(14):e35-e39 (2006), PMID:16873492
-
 
 T-RMSD
 ======
@@ -289,16 +254,17 @@ The program then outputs a series of files:
 
 .. note:: Please cite: Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. **T-RMSD: a fine-grained, structure based classification method and its application to the functional characterization of TNF receptors**. J. Mol. Biol., 400(3):605-617 (2010), PMID:20471393 and/or Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. **An improved understanding of TNFL/TNFR interactions using structure-based classifications**. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
 
-
 TCS
 ===
+TCS is an alignment evaluation score that makes it possible to identify the most correct positions in an MSA. 
+It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party MSA (including T-Coffee MSA of course!). 
 
-to be done...
+It's usage is a bit tricky as it comes with a lot of different options, go to the **T-Coffee Main Documentation**, section **How Good Is Your Alignment** to have all the details about TCS.
 
+.. note:: Please cite: Chang, J.-M., Di Tommaso, P., Notredame, C. **TCS: A new multiple sequence alignment reliability measure to estimate alignment accuracy and improve phylogenetic tree reconstruction**. Mol. Biol. Evol., 31(6), 1625–1637 (2014), PMID:24694831 and/or Chang, J.-M., Di Tommaso, P., Lefort, V., Gascuel, O., Notredame, C. **TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction**. Nucleic Acids Res., 43(W1):W3-6 (2015), PMID:25855806
 
 STRIKE
 ======
-
-to be done...
+Under maintenance on the webserver or the T-Coffee package...
 
 
