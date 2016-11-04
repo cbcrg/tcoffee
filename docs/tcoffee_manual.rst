@@ -5,7 +5,7 @@ T-Coffee Main Documentation
 Before You Start...
 *******************
 
-.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. For now, the example files can be found here on github: `example files <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. This message will be removed as soon as the maintenance is over. 
+.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. This message will be removed as soon as the maintenance is over. 
 
 
 Foreword
@@ -35,13 +35,15 @@ What is T-Coffee?
 
 What does it do?
 ----------------
-T-Coffee is 1) mainly a Multiple Sequence Alignment program: given a set of sequences previously gathered (using database search programs like BLAST, Ensembl...), T-Coffee will produce a Multiple Sequence Alignment (MSA); 2) also a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
+T-Coffee has two components allowing you to perform different tasks:
+ 1) mainly it is a Multiple Sequence Alignment program. Given a dataset of sequences previously gathered (using database search programs like BLAST, Ensembl, whatever...), T-Coffee will produce a Multiple Sequence Alignment (MSA), refer to the section **Building Your Multiple Sequence Alignments** for more details.
+ 2) also a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
 
 What can it align?
 ------------------
-T-Coffee will align nucleic acid (DNA and RNA) and protein sequences alike. T-Coffee is also able to use other type of information such as secondary and tertiary structure information (for protein or RNA sequences with a known/predicted structure), sequence profiles trees....
+T-Coffee will align nucleic acid (DNA and RNA) and protein sequences alike. T-Coffee is also able to use other type of information such as secondary and tertiary structure information (for protein or RNA sequences with a known/predicted structure), sequence profiles, trees....
 
-.. Hint:: To have an idea, on an average PC, T-Coffee can easily align up to a 100-200 sequences, about 1000 amino acid long. 
+.. Hint:: To have an rough idea, on an average computer, T-Coffee can easily align up to a 200 sequences, about 1000 amino acid long in about ~20min. Never try to align more than 1000 sequences without using T-Coffee fast modes !!!
 
 How can I use it?
 -----------------
@@ -82,9 +84,11 @@ T-Coffee is not only just an aligner program, it comes with multiple tools and t
 
 .. warning:: In this particular T-Coffee mode, operations are carried out using the function "wget". If "wget" is not installed on your system, you can get it for free from  `wget download <http://www.wget.org>`_. To make sure wget is installed on your system, type **which wget**.
 
+
  - **T-Coffee allows you to extract a serie of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. 
 
 .. note:: MOCCA needs some time to compute a library and then prompt you with an interactive menu. You just have to follow the instructions.
+
 
  - **T-Coffee can be used to measure the reliability of your Multiple Sequence Alignment**. If you want to find out about that, read the section **FAQ for T-Coffee** or the **Technical Documentation** (-output flag). More details will be given anyway in this manual in the section **How Good Is Your Alignment?**.
 
