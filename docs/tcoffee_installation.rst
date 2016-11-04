@@ -280,17 +280,6 @@ These procedures are not needed for default usage of T-Coffee. You will only nee
 
 .. note:: In our hands all these packages where very straightforward to compile and install on a standard Cygwin or Linux configuration. Just make sure you have gcc, the C compiler, properly installed. Once the package is compiled and ready to use, make sure that the executable is on your path, so that t_coffee can find it automatically. Our favorite procedure is to create a bin directory in the home. If you do so, make sure this bin is in your path and fill it with all your executables (this is a standard Unix practice).
 
-
-Structural modes (using PDB)
-============================
-Expresso/3D-Coffee are special modes of T-Coffee that makes it possible to combine sequences and structures to generate more accurate alignment. T-Coffee proposes also other tools (iRMSD/APDB, T-RMSD, etc...) requiring access to structural information. **For all the structural modes/tools, access to structural information is mandatory**: you can do so either by having a database installed locally on your own system or by accessing the PDB through the webserver. If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository, it will simply be a bit slower. If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using one of the following commands:
-
-  - setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
-
-  - setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
-
-The T-RMSD tools comes along with T_Coffee package in order to build clustering based on structure. In iaddition to structural information, it also requires the package Phylip, containing lots of phylogenetic tree reconstruction tools. If you need more information about the different Phylip tools, information can be obtained `here <http://www.evolution.genetics.washington.edu/phylip.html>`_. 
-
 M-Coffee parameters
 ===================
 M-Coffee is a special mode of T-Coffee that makes it possible to combine the output of many Multiple Sequence Alignment packages. By default all the packages will be in the following folder **$HOME/.t_coffee/plugins/linux/**. If you want to have these packages in a different directory, you can either set the environment variable (command 1) or use the flag **-plugin** (overrides every other setting). If for some reason, you do not want this directory to be on your path or you want to specify a precise directory containing the executables, you can use command 2. You can also set the following environment variables to the absolute path of the executable you want to use command 3: whenever they are set these variables will supersede any other declaration. This is a convenient way to experiment with multiple package versions. If you would rather have the mcoffee directory in some other location, set the MCOFFEE_4_TCOFFEE environement variable to the proper directory (command 4).
@@ -322,6 +311,15 @@ To be able to run M-Coffee, these following files are enough for a default usage
   BLOSUM75.diag_prob_t2 blosum80.mat dna_diag_prob_100_exp_220000
   dna_diag_prob_150_exp_110000 dna_matrix.scr
 
+Structural modes (using PDB)
+============================
+Expresso/3D-Coffee are special modes of T-Coffee that makes it possible to combine sequences and structures to generate more accurate alignment. T-Coffee proposes also other tools (iRMSD/APDB, T-RMSD, etc...) requiring access to structural information. **For all the structural modes/tools, access to structural information is mandatory**: you can do so either by having a database installed locally on your own system or by accessing the PDB through the webserver. If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository, it will simply be a bit slower. If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using one of the following commands:
+
+  - setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
+
+  - setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
+
+The T-RMSD tools comes along with T_Coffee package in order to build clustering based on structure. In iaddition to structural information, it also requires the package Phylip, containing lots of phylogenetic tree reconstruction tools. If you need more information about the different Phylip tools, information can be obtained `here <http://www.evolution.genetics.washington.edu/phylip.html>`_. 
 
 About R-Coffee...
 =================
