@@ -36,8 +36,8 @@ What is T-Coffee?
 What does it do?
 ----------------
 T-Coffee has two components allowing you to perform different tasks:
- 1) mainly it is a Multiple Sequence Alignment program. Given a dataset of sequences previously gathered (using database search programs like BLAST, Ensembl, whatever...), T-Coffee will produce a Multiple Sequence Alignment (MSA), refer to the section **Building Your Multiple Sequence Alignments** for more details.
- 2) also a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
+1) mainly it is a Multiple Sequence Alignment program. Given a dataset of sequences previously gathered (using database search programs like BLAST, Ensembl, whatever...), T-Coffee will produce a Multiple Sequence Alignment (MSA), refer to the section **Building Your Multiple Sequence Alignments** for more details.
+2) also a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
 
 What can it align?
 ------------------
@@ -82,6 +82,8 @@ T-Coffee is not only just an aligner program, it comes with multiple tools and t
 
  - **One of the most important improvement of T-Coffee is to let you combine sequences and structures**, so that your alignments are of higher quality. You need to have the SAP package installed to fully benefit of this facility (or to use another structural alignment method). 
  
+.. warning:: Some options are carried out using the function "wget". If "wget" is not installed on your system, you can get it for free from `wget download <http://www.wget.org>`_. Just type **wget** to be sure it is installed.
+
  - **T-Coffee allows you to extract a serie of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. MOCCA needs some time to compute a library and then prompt you with an interactive menu. You just have to follow the instructions.
 
  - **T-Coffee can be used to measure the reliability of your Multiple Sequence Alignment**. If you want to find out about that, read the section **FAQ for T-Coffee** or the **Technical Documentation** (-output flag). More details will be given anyway in this manual in the section **How Good Is Your Alignment?**.
@@ -89,8 +91,6 @@ T-Coffee is not only just an aligner program, it comes with multiple tools and t
  - **T-Coffee can be used to compare alternative alignment**; in case you generate several alignments of the same sequences, you can compare these alignments using the most common scores (Sum-of-Pairs or Column Score). In case you have reference alignments, you can directly benchmark your method by comparing your MSAs to your references.
 
 And probably many more options we will discover together all along this manual !
-
-.. warning:: Some options are carried out using the function "wget". If "wget" is not installed on your system, you can get it for free from `wget download <http://www.wget.org>`_. Just type **wget** to be sure it is installed.
 
 
 How does T-Coffee alignment works?
