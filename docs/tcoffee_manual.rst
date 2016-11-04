@@ -158,7 +158,7 @@ Using a "cache" file
 --------------------
 What is a cache in T-Coffee?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Several option can be performed easily by using what we call a cache (or cache file). A cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding; for instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix-based evalution (blosum62nt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is rather practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
+Several option can be performed easily by using what we call a cache (or cache file). A cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding; for instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix-based evalution (blosum62mt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is quite practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
 
 ::
 
@@ -178,7 +178,7 @@ Several option can be performed easily by using what we call a cache (or cache f
 
 Preparing a sequence or alignment cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Let us consider the following file:
+Let us consider the following alignment:
 
 ::
 
@@ -300,15 +300,15 @@ It is possible to reformat unaligned or aligned sequences alike although changin
 ::
 
   For unaligned sequences (e.g. FASTA to PIR):
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.fasta -output pir_seq >\
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.fasta -output pir_seq > \
       proteases_small.pir_seq
   
   For alignements (e.g. ClustalW to MSF):
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -output fasta_aln >\
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -output fasta_aln > \
       proteases_small.fasta_aln
       
   From aligned to unaligned sequences:
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -output fasta_seq >\
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -output fasta_seq > \
       proteases_small.fasta
 
 .. Warning:: Format recognition is not 100% full proof; occasionally you will have to inform the program about the nature of the file you are trying to reformat with **-input msf_aln -output fasta_aln** for instance.
@@ -321,7 +321,7 @@ If you need to change the case of your sequences, you can use different modifier
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +lower\
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +lower \
       -output clustalw
 
 .. hint:: No prize for guessing that +upper will do exactly the opposite...
@@ -351,7 +351,7 @@ If you want to change the case depending on the score, you must either evaluate 
       +evaluate idmat +lower '[5-9]'
       
   Using a cache file previously computed (2 steps):
-  $$: t_coffee -other_pg seq_reformat -in sample_dnaseq.aln -action +evaluate \
+  $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -action +evaluate \
       idmat -output=score_ascii > sample_dnaseq2.cache
       
   $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \
@@ -419,10 +419,10 @@ If you have a cache alignment or a cache library, you can use it to color your a
        -struc_in_f number_fasta -output=color_pdf -out=color_dnaseq3.pdf
 
   Produces an output using a library:
-  $$: t_coffee -other_pg seq_reformat -in=sample_aln6.aln -struc_in=sample_dnaseq3.tc_lib \
+  $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -struc_in=sample_dnaseq3.tc_lib \
       -output=color_html -out=color_dnaseq3_lib.html (under maintenance...)
       
-.. warning:: ps2pdf must be installed on your system
+.. warning:: The script **ps2pdf** must be installed on your system for these options.
 
 Modifying the data itself...
 ============================
