@@ -247,8 +247,8 @@ T-RMSD is a structure based clustering method using the iRMSD to drive the struc
 
 
 The program then outputs a series of files:
- - ``sample_3Dseq1.struc_tree.list`` : list of the tRMSD tree associated with every position columns.
- - ``sample_3Dseq1.struc_tree.html`` : colored columns according to the support to the tree (red=high/blue=low).
+ - ``sample_3Dseq1.struc_tree.list`` : list of the trees associated with every position.
+ - ``sample_3Dseq1.struc_tree.html`` : colored columns according to the support to the tree.
  - ``sample_3Dseq1.struc_tree.consensus_output`` : schematic display of the results.
  - ``sample_3Dseq1.struc_tree.consensus`` : final consensus structural tree.
 
