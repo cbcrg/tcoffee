@@ -81,14 +81,10 @@ T-Coffee is not only just an aligner program, it comes with multiple tools and t
  - **T-Coffee allows you to combine results obtained with several alignment methods** (see the section **FAQ for T-Coffee** and **Building Multiple Sequence Alignment** for more details). T-Coffee can virtually combine all these MSAs you have to produce a new Multiple Sequence Alignment having the best agreement with all these methods you tried.
 
  - **One of the most important improvement of T-Coffee is to let you combine sequences and structures**, so that your alignments are of higher quality. You need to have the SAP package installed to fully benefit of this facility (or to use another structural alignment method). 
-
+ 
 .. warning:: In this particular T-Coffee mode, operations are carried out using the function "wget". If "wget" is not installed on your system, you can get it for free from  `wget download <http://www.wget.org>`_. To make sure wget is installed on your system, type **which wget**.
 
-
- - **T-Coffee allows you to extract a serie of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. 
-
-.. note:: MOCCA needs some time to compute a library and then prompt you with an interactive menu. You just have to follow the instructions.
-
+ - **T-Coffee allows you to extract a serie of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. MOCCA needs some time to compute a library and then prompt you with an interactive menu. You just have to follow the instructions.
 
  - **T-Coffee can be used to measure the reliability of your Multiple Sequence Alignment**. If you want to find out about that, read the section **FAQ for T-Coffee** or the **Technical Documentation** (-output flag). More details will be given anyway in this manual in the section **How Good Is Your Alignment?**.
 
