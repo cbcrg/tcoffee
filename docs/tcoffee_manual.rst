@@ -81,8 +81,6 @@ T-Coffee is not only just an aligner program, it comes with multiple tools and t
  - **T-Coffee allows you to combine results obtained with several alignment methods** (see the section **FAQ for T-Coffee** and **Building Multiple Sequence Alignment** for more details). T-Coffee can virtually combine all these MSAs you have to produce a new Multiple Sequence Alignment having the best agreement with all these methods you tried.
 
  - **One of the most important improvement of T-Coffee is to let you combine sequences and structures**, so that your alignments are of higher quality. You need to have the SAP package installed to fully benefit of this facility (or to use another structural alignment method). 
- 
-.. warning:: Some options are carried out using the function "wget". If "wget" is not installed on your system, you can get it for free from `wget download <http://www.wget.org>`_. Just type **wget** to be sure it is installed.
 
  - **T-Coffee allows you to extract a serie of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. MOCCA needs some time to compute a library and then prompt you with an interactive menu. You just have to follow the instructions.
 
@@ -91,6 +89,8 @@ T-Coffee is not only just an aligner program, it comes with multiple tools and t
  - **T-Coffee can be used to compare alternative alignment**; in case you generate several alignments of the same sequences, you can compare these alignments using the most common scores (Sum-of-Pairs or Column Score). In case you have reference alignments, you can directly benchmark your method by comparing your MSAs to your references.
 
 And probably many more options we will discover together all along this manual !
+
+.. warning:: Some options are carried out using the function "wget". If "wget" is not installed on your system, you can get it for free from `wget download <http://www.wget.org>`_. Just type **wget** to be sure it is installed.
 
 
 How does T-Coffee alignment works?
