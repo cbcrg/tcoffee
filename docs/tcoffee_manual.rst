@@ -1495,7 +1495,7 @@ For more information on filtering/trimming an alignment using the CORE index sco
 Transitive Consistency Score - TCS 
 ----------------------------------
 TCS is an alignment evaluation score that makes it possible to identify the most correct positions in an MSA. 
-It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party MSA (including T-Coffee MSA of course!)
+It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party MSA (including T-Coffee MSA of course!).
 
 Evaluate an existing MSA 
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1516,8 +1516,8 @@ Filter unreliable MSA positions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 :: 
 
-  $$: t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_filter3 \
-      , tcs_residue_lower4
+  $$: t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_filter3, \
+      tcs_residue_lower4
 
 Output file: 
 
@@ -1527,9 +1527,13 @@ Output file:
   
 Note that all these output functions are also compatible with the default T-Coffee when computing an alignment:
 
+::
+
   $$: t_coffee -seq prot.fa -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
 
 or with **seq_reformat** using a T-Coffee .score_ascii file:: 
+
+::
 
   $$: t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc_in_f \
       number_aln -output tcs_residue_filter3
