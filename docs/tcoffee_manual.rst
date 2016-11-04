@@ -901,9 +901,9 @@ By default, T-Coffee also requires two important PDB files declared using the tw
 .. warning:: Since the file ``unreleased.xml`` is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
 
 
-*************************************
-Building Multiple Sequence Alignments
-*************************************
+******************************************
+Building Your Multiple Sequence Alignments
+******************************************
 General comments on alignments and aligners
 ===========================================
 What is a good alignment?
@@ -1407,6 +1407,7 @@ Aligning RNA sequences (to be done...)
 ======================
 RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, smart people have thought about this. If you are interested in RNA, have a look `there <http://www.bio.inf.uni-jena.de/Software/MARNA/>`_.
 
+
 Aligning DNA sequences (to be done...)
 ======================
 Aligning DNA sequences
@@ -1457,20 +1458,47 @@ When dealing with coding DNA, the right thing to do is to translate your DNA seq
   $$: t_coffee -other_pg seq_reformat -in three_cdna.aln -action +clean_cdna +translate
 
 
+
 ****************************
 How Good Is Your Alignment ?
 ****************************
-There are three strategies for evaluating your alignment. Structure is a killer so if you have at least two structures available for your protein family, you are in an ideal situation and you can use the iRMSD. If you only have one structure available, we developped STRIKE to compare alternative alignment. If you don't have any structure, you are left with the option of using sequence based methods like the CORE index and the TCS. These do pretty well in the CORE regions, but can be limited in the loops. Another killer, less often at hand, is the use of functional information. If you know some residues MUST be aligned because they are functionally related, you can easily set up an evaluation procedure using T-Coffee.
+There are three possible strategies for evaluating your alignment of protein sequences:
+
+ 1) **Sequence based methods** like the CORE index and the TCS if you don't have any structure (quite often). These last ones do pretty well in the core regions of an alignment (which can correspond to protein domains, fold, structural elements, etc...) but can be limited in more variable regions (which can correspond to loops, disordered regions, etc...).
+ 2) **Structure is a killer**, so if you have at least two structures available for your protein family, you are in an ideal situation and you can use the iRMSD. If you only have one structure available, we developped STRIKE to compare alternative alignment.
+ 3) **Another killer is the use of functional information**, but it is much less often at hand. If you know some residues MUST be aligned because they are functionally related. As the information is scarce and not standard, there is no automated procedure specifically designed for this kind of analysis but you can still setup an evaluation procedure with T-Coffee.
+
+
+Sequence-based Methods
+======================
+The CORE index
+--------------
+
+.. note:: The CORE index is the basis of T-Coffee estimation of the consistency, however for evaluating alignment we recommend to use the TCS procedure describe in the next section. 
+
+Computing the local CORE index
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The CORE index is an estimation of the consistency between your alignment and the computed library. The higher the consistency, the better the alignment. The score reported with every T-Coffee alignment is the concistency score (depending on the version it can be normalized to 100 or 1000). If you want to go further and estimate the local concistency (known as the CORE index), an html file is automatically created each time you run T-Coffee; it is colored version of your alignment where residues are colored according to their consistency score, from blue (low consistency) to red (high consistency). It is not full proof but in principle you can expect positions with a score above 6 to be correctly aligned.
+
+Computing the CORE index of any alignment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can evaluate any existing alignment with the CORE index. All you need to do is provide that alignment with the -infile flag and specify that you want to evaluate it:
+
+::
+
+  $$: t_coffee -infile=sproteases_small.g10.cw_aln -output=html -score
+
+For more information on filtering/trimming an alignment using the CORE index score, refer to the subsection **Preparing Your Data: Reformatting, Trimming an more.../Modifying the data itself**.
+
 
 Transitive Consistency Score - TCS 
-==================================
+----------------------------------
 TCS is an alignment evaluation score that makes it possible to identify the most correct positions in an MSA. 
 It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party MSA (including T-Coffee MSA of course!)
 
-
 Evaluate an existing MSA 
-------------------------
-
+^^^^^^^^^^^^^^^^^^^^^^^^
 :: 
 
   $$: t_coffee -infile prot.aln -evaluate -output score_ascii, aln, score_html
@@ -1485,8 +1513,7 @@ Output files:
 .. tip:: The TCS is most informative when used to identify low-scoring portions within an MSA. It is also worth noting that the TCS is not informative when aligning less than five sequences.
   
 Filter unreliable MSA positions
--------------------------------
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 :: 
 
   $$: t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_filter3 \
@@ -1506,11 +1533,9 @@ or with **seq_reformat** using a T-Coffee .score_ascii file::
 
   $$: t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc_in_f \
       number_aln -output tcs_residue_filter3
-  
 
 Weight MSA for improved trees
------------------------------
-
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 :: 
 
   $$: t_coffee -infile prot.aln -evaluate -output tcs_weighted, tcs_replicate_100
@@ -1530,9 +1555,8 @@ or with **seq_reformat** using a T-Coffee .score_ascii file::
   $$: t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc_in_f \
       number_aln -output tcs_weighted
 
-
 Working with coding DNA
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 When working with DNA, it is advisable to first align the sequences at the protein level and later thread back the DNA onto your aligned proteins. The filtering must be done in two steps, as shown below. Note that your DNA and protein sequences must have the same name::
 
@@ -1550,10 +1574,8 @@ The dna.replicates option: 100 DNA replicates with positions selected according 
 
 The dna.filtered option: DNA positions filtered according to their TCS column score
 
-
 Using different libraries
--------------------------
-
+^^^^^^^^^^^^^^^^^^^^^^^^^
 It is possible to change the way TCS reliability is estimated. This can be done by building different T-Coffee libraries. The proba_pair is the default aligner of T-Coffee that runs a pair-HMM to populate the library with residue pairs having the best posterior probabilities. The following instructions will do this: 
 
   $$: t_coffee -infile prot.aln -evaluate -method proba_pair -output score_ascii, aln, score_html
@@ -1569,80 +1591,38 @@ This mode runs the orginal default T-Coffee that was combining local and global 
       score_ascii, aln, score_html
 
 
-Summary of the output flags
----------------------------
-
+Summary of the output options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ============================  ================
 Flags        		      Description
 ============================  ================
--output=score_ascii	      outputs a TCS evaluation file
--output=score_html	      contains ascii format in html format
--output=score_pdf	      will transfer score_html into pdf format
--output=sp_ascii	      format reporting the TCS score of every aligned pair in the target MSA
--output=tcs_residue_filter_N  removes all residues with a TCS score lower than `N`
--output=tcs_columns_filter_N  removes all columns with a TCS score lower than `N`
--output=tcs_weighted	      phylip format with duplicated columns according to their TCS score
--output=tcs_replicate_N	      generates `N` replicates with columns drawn according to their TCS score
+**score_ascii**	              outputs a TCS evaluation file
+**score_html**	      	      contains ascii format in html format
+**score_pdf**	      	      will transfer score_html into pdf format
+**sp_ascii**	      	      format reporting the TCS score of every aligned pair in the target MSA
+**tcs_residue_filter_N**      removes all residues with a TCS score lower than `N`
+**tcs_columns_filter_N**      removes all columns with a TCS score lower than `N`
+**tcs_weighted**	      phylip format with duplicated columns according to their TCS score
+**tcs_replicate_N**	      generates `N` replicates of columns drawn according to their TCS score
 ============================  ================
 
 
-.. Note:: Please cite
-
-	* `Chang, J.-M., Tommaso, P. & Notredame, C. TCS: A New Multiple Sequence Alignment Reliability Measure to Estimate Alignment Accuracy and Improve Phylogenetic Tree Reconstruction. Molecular biology and evolution 31, 1625–37 (2014). <http://www.ncbi.nlm.nih.gov/pubmed/24694831>`_
-	* `Chang, J.-M., Di Tommaso, P., Lefort, V., Gascuel, O. & Notredame, C. TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction. Nucleic Acids Res 43(W1):W3-6 (2015). <http://www.ncbi.nlm.nih.gov/pubmed/25855806>`_.
-
-
-Evaluating alignments with The CORE index
-=========================================
-
-.. note:: This procedure is now being deprecated and is meant to be replaced by the TCS procedure outlined in the above section
-
-Computing the local CORE index
-------------------------------
-The CORE index is an estimation of the consistency between your alignment and the computed library. The higher the consistency, the better the alignment. The score reported with every T-Coffee alignment is the concistency score. However, if you want to go further and estimate the local concistency (known as the CORE index). Simply request one extra output:
-
-::
-
-  $$: t_coffee sproteases_small.fasta -output=clustalw,html
-
-
-The format html leads to the output of a file named sproteases_small.html. Open this file. It contains a colorized version of your alignment. In this colorized version, positions that have no concistency with the library are in blue, a little in green, better positions in yellow, then orange, then red. You can expect yellow positions to be entirely correct.
-
-
-Computing the CORE index of any alignment
--------------------------------------------
-
-You can evaluate any existing alignment with the CORE index. All you need to do is provide that alignment with the -infile flag and specify that you want to evaluate it:
-
-::
-
-  $$: t_coffee -infile=sproteases_small.g10.cw_aln -output=html -score
-
-
-For more information on filtering/trimming an alignment using the CORE index score, refer to the subsection **Preparing Your Data: Reformatting, Trimming an more.../Modifying the data itself**.
-
-
-Evaluating an alignment using structural information: APDB and iRMSD
-====================================================================
-What is the iRMSD?
-------------------
-APDB and the iRMSD are two closely related measures meant to evaluate the accuracy of a sequence alignment without using a structure based reference alignment. The iRMSD is a follow up of the APDB measure and we now recommend using the iRMSD rather than APDB.
-
-
-Although it may seem that the iRMSD was an attempt to get free iPODs from Apple, it is not (or at least we never got the iPODs). The iRMSD is a special RMSD (standing for intra-molecular distances based RMSD) where the alignments are evaluated using the structural information of the sequences with known structures.
-
+Structural evaluation of MSAs
+=============================
+APDB/iRMSD
+----------
+What is the APDB/iRMSD?
+^^^^^^^^^^^^^^^^^^^^^^^
+APDB and the iRMSD are two closely related measures meant to evaluate the accuracy of a sequence alignment without using a structure based reference alignment. The iRMSD is a follow up of the APDB measure and we now recommend using the iRMSD rather than APDB. Although it may seem that the iRMSD was an attempt to get free iPODs from Apple, it is not (or at least we never got the iPODs). The iRMSD is a special RMSD (standing for intra-molecular distances based RMSD) where the alignments are evaluated using the structural information of the sequences with known structures.
 
 The strength of the iRMSD is its independence from a specific superposition models. When using the iRMSD to evaluate the score of a sequence alignment, one does not need to superpose the two structures and deduce a sequence alignment that will then be compared with the target alignment. In practice, we use a Normalized version of the iRMSD, the NiRMSD that makes it possible to compare alternative alignments of different length. From a structural point of view, the iRMSD has a meaning very similar to the iRMSD and it behaves in a similar fashion from a numerical point of view (similar ranges in Angstroms).
 
-
 The first step of APDB is to measure the distances between the Ca of each residue and its neighbors. Neighborhood is defined as a sphere of radius -maximum_distance (10 by default). However, by setting -local_mode to 'window', the sphere can be replaced with a window of 1/2 size '-maximum_distance' residues.
-
 
 Given two aligned residues (X and Y on the Figure) the iRMSD measure is an attempt to estimate the neighborhood support for the XY alignment. This is done by measuring the difference of distances between X and Y and every other pair of aligned residues within the same sphere (W and Z on Figure 1). The iRMSD is obtained by measuring the average Root Mean Square of these differences of distances. The lower the iRMSD, the better the alignment. However, an alignment can obtain a good iRMSD by simply having few aligned residues. To avoid this, the program also reports the NiRMSD= MIN(L1,L2)*iRMSD/Number Considered columns.
 
-
 How to efficiently use structural information
----------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 When it comes to evaluating Multiple Sequence Alignments, nothing beats structural information. To use the methods we describe here, you will need to have at least two structures, similar enough (>60%) to two sequences in your dataset. Here an outline of the best way to proceed:
 
 1) Make sure you include two structures whose sequences are so distantly related that most of the other sequences are intermediates.
@@ -1653,11 +1633,9 @@ When it comes to evaluating Multiple Sequence Alignments, nothing beats structur
 
 If S1 and S2 are almost similar, it means your distantly related structures were well aligned, and you can expect the intermediate sequences to be well aligned as well. If S2 is much better than S1, you can expect the structures to be well aligned in the second alignment, while there is no guaranty that the alignment of the intermediate sequences has improved as well, although in practice it often does
 
-
 Evaluating an alignment with the iRMSD package
-----------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Let us evaluate the alignment produced by Expresso, using the template_file returned by expresso:
-
 
 ::
 
@@ -1673,14 +1651,11 @@ This will deliver a long output. The most interesting bit is at the bottom:
    TOTAL iRMSD: 0.71 Angs
    TOTAL NiRMSD: 1.33 Angs
 
-
 APDB is an older measure, less robust than the iRMSD and it is an attempt to estimate the fraction of pairs of residues whose alignment seems to be correct form a structural point of view. The higher APDB, the better the alignment, the lower the NiRMSD, the better the alignment.
 
-
 Evaluating alternative alignments
----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The strength of structure based alignments is that they make it possible to compare alternative alignments. In this case let us consider:
-
 
 ======== ========================= ====== 
 Method   File                      NiRMSD 
@@ -1696,7 +1671,7 @@ As expected, Expresso delivers the best alignment from a structural point of vie
 
 
 Identifying the most distantly related sequences in your dataset
-----------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In order to identify the most distantly related sequences in a dataset, you can use the seq_reformat utility, in order to compare all the sequences two by two and pick up the two having the lowest level of identity:
 
 ::
@@ -1706,7 +1681,6 @@ In order to identify the most distantly related sequences in a dataset, you can 
 
 
 This sim_idscore indicates that every pair of sequences will need to be aligned when estimating the similarity. The ouput (below) indicates that the two sequences having the lowest level of identity are AEDAE and MOUSE. It may not be a bad idea to choose these sequences (if possible) for evaluating your MSA.
-
 
 ::
 
@@ -1720,7 +1694,7 @@ This sim_idscore indicates that every pair of sequences will need to be aligned 
   TOP 16 2 26.00 sp|P29786|TRY3_AEDAE sp|P21844|MCPT5_MOUSE 26.00
 
 Evaluating alternative alignments with STRIKE (to be done...)
-=============================================
+-------------------------------------------------------------
 
 
 Evaluating an alignment according to your own criterion
@@ -1733,23 +1707,17 @@ Any kind of Feature can easily be turned into an evaluation grid. For instance, 
 ::
 
   ! TC_LIB_FORMAT_01
-
   2
-
   sp|P21844|MCPT5_MOUSE 247 MHLLTLHLLLLLLGSSTKAGEIIGGTECIPHSRPYMAYLEIVTSENYLSACS\
   GFLIRRNFVLTAAHCAGRSITVLLGAHNKTSKEDTWQKLEVEKQFLHPKYDENLVVHDIMLLKLKEKAKLTLGVGTLP\
   LSANFNFIPPGRMCRAVGWGRTNVNEPASDTLQEVKMRLQEPQACKHFTSFRHNSQLCVGNPKKMQNVYKGDSGGPLL\
   CAGIAQGIASYVHRNAKPPAVFTRISHYRPWINKILREN
-
   sp|P29786|TRY3_AEDAE 254 MNQFLFVSFCALLDSAKVSAATLSSGRIVGGFQIDIAEVPHQVSLQRSGRHFC\
   GGSIISPRWVLTRAHCTTNTDPAAYTIRAGSTDRTNGGIIVKVKSVIPHPQYNGDTYNYDFSLLELDESIGFSRSIEA\
   IALPDASETVADGAMCTVSGWGDTKNVFEMNTLLRAVNVPSYNQAECAAALVNVVPVTEQMICAGYAAGGKDSCQGDS\
   GGPLVSGDKLVGVVSWGKGCALPNLPGVYARVSTVRQWIREVSEV
-
   #1 2
-
    66 68 100
-
   ! SEQ_1_TO_N
 
 
@@ -1758,14 +1726,13 @@ You simply need to cut and paste this library in a file and use this file as a l
 
 ::
 
-  $$: t_coffee -infile sproteases_small.aln -lib charge_relay_lib.tc_lib -score \
- -output html
+  $$: t_coffee -infile proteases_small.aln -lib charge_relay_lib.tc_lib -score \
+     -output html
 
 
 ************************************
 Trees Based on Protein 3D Structures
 ************************************
-
 This section describes tree estimation procedure based on the comparison of internal distances. One particular mode (T-RMSD) have been develop for this purpose only however, there are many other options to do so. On the other hand,T-RMSD makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. T-RMSD also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
 
 Generating a tree based on structural distances
