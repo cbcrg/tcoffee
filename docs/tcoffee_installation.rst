@@ -321,8 +321,8 @@ Expresso/3D-Coffee are special modes of T-Coffee that makes it possible to combi
 
 The T-RMSD tools comes along with T_Coffee package in order to build clustering based on structure. In iaddition to structural information, it also requires the package Phylip, containing lots of phylogenetic tree reconstruction tools. If you need more information about the different Phylip tools, information can be obtained `here <http://www.evolution.genetics.washington.edu/phylip.html>`_. 
 
-About R-Coffee...
-=================
+R-Coffee associated packages
+============================
 R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure. R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee.
 
 ::
