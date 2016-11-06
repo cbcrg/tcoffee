@@ -1575,15 +1575,15 @@ You can evaluate any existing alignment with the CORE index. All you need to do 
 
   $$: t_coffee -infile=proteases_small_g10.aln -output=html -score
 
-Transitive Consistency Score - TCS 
+Transitive Consistency Score (TCS) 
 ----------------------------------
 TCS is an alignment evaluation score that makes it possible to identify the most correct positions in an MSA. 
 It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party MSA (including T-Coffee MSA of course!).
 
 .. warning:: TCS has been incorporated to T-Coffee recently, it means that not all distribution have the TCS implemented; you should install one the latest stable version of T-Coffee to have the TCS along with T-Coffee.
 
-Evaluate an existing MSA 
-^^^^^^^^^^^^^^^^^^^^^^^^
+Evaluating an existing MSA 
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 The TCS is most informative when used to identify low-scoring portions within an MSA. It is also worth noting that the TCS is not informative when aligning less than five sequences.
 
 :: 
@@ -1597,8 +1597,8 @@ Output files:
 
 .. warning:: The color code in the score_html indicates the agreement between the library and the considered alignment. It is important to understand that this score does not only depend on the input MSA, but it also depends on the library.
 
-Filter unreliable MSA positions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Filtering unreliable MSA positions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TCS allows you to filter out from your alignment regions that appears unreliable according to the consistency score; the filtering can be made at the residue level or the column level:
 
 :: 
@@ -1623,8 +1623,8 @@ Note that all these output functions are also compatible with the default T-Coff
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in prot.score_ascii -struc_in_f \
       number_aln -output tcs_residue_filter3
 
-Weight MSA for improved trees
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Weighting MSA for improved trees
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 One cool trick about TCS is the possibility to deliver weigthed MSA, where each columns is multiplied according to its consistency score; this appears to be particularly useful to build phylogenetic tree. Phylogenetic trees are evaluated using a bootstrap score so each column as the same weight, no matter its relevance, in the case of weighted TCS, the more reliable columns are more represented, therefore improving the support of informative and reliable positions of your MSA. 
 
 :: 
@@ -1685,16 +1685,16 @@ The dna.filtered option: DNA positions filtered according to their TCS column sc
 Summary of the output options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ============================  ================
-Flags        		      Description
+Flags        		               Description
 ============================  ================
-**score_ascii**	              outputs a TCS evaluation file
-**score_html**	      	        contains ascii format in html format
-**score_pdf**	      	         will transfer score_html into pdf format
-**sp_ascii**	      	          format reporting the TCS score of every aligned pair in the target MSA
-**tcs_residue_filter_N**      removes all residues with a TCS score lower than `N`
-**tcs_columns_filter_N**      removes all columns with a TCS score lower than `N`
-**tcs_weighted**	             phylip format with duplicated columns according to their TCS score
-**tcs_replicate_N**	          generates `N` replicates of columns drawn according to their TCS score
+**score_ascii**	              Outputs a TCS evaluation file
+**score_html**	      	        Contains ascii format in html format
+**score_pdf**	      	         Transfers score_html into pdf format
+**sp_ascii**	      	          Reports the TCS score of every aligned pair in the target MSA
+**tcs_residue_filter_N**      Removes all residues with a TCS score lower than `N`
+**tcs_columns_filter_N**      Removes all columns with a TCS score lower than `N`
+**tcs_weighted**	             Phylip format with duplicated columns according to their TCS score
+**tcs_replicate_N**	          Generates `N` replicates of columns drawn according to their TCS score
 ============================  ================
 
 
@@ -1720,29 +1720,28 @@ When it comes to evaluating Multiple Sequence Alignments, nothing beats structur
 2) Align your sequences without using the structural information (i.e. t_coffee, muscle...).
 3) Evaluate your alignment with iRMSD (see later in this section); the score will be S1.
 4) Realign your sequences, but this time using structural information (Expresso).
-5) Measure the score of that alignment; the score wil be S2.
+5) Measure the score of that alignment; the score will be S2.
 
 If S1 and S2 are almost similar, it means your distantly related structures were well aligned, and you can expect the intermediate sequences to be well aligned as well. If S2 is much better than S1, you can expect the structures to be well aligned in the second alignment, while there is no guaranty that the alignment of the intermediate sequences has improved as well, although in practice it often does
 
 Evaluating an alignment with the iRMSD package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Let us evaluate the alignment produced by Expresso, using the template_file returned by expresso:
+Let us evaluate the alignment produced by Expresso, using the template_file returned by Expresso. Evaluating the MSA with iRMSD will deliver a long output (all pairs are compareD), the most interesting bit is at the bottom with the global iRMSD score in angstrom (NiRMSD is just the iRMSD score normalized to the length of the MSA). 
 
 ::
 
-  $$: t_coffee -other_pg irmsd sproteases_small.expresso -template_file sproteases_small.template_file
+  Running the iRMSD:
+  $$: t_coffee -other_pg irmsd proteases_small.expresso -template_file \
+      proteases_small.template_file
 
-This will deliver a long output. The most interesting bit is at the bottom:
+  Output of the iRMSD:
+  TOTAL for the Full MSA
+  TOTAL EVALUATED: 52.90 %
+  TOTAL APDB:      81.59 %  
+  TOTAL iRMSD:     0.71 Angs
+  TOTAL NiRMSD:    1.33 Angs
 
-::
-
-  #TOTAL for the Full MSA
-   TOTAL EVALUATED: 52.90 %
-   TOTAL APDB: 81.59 %  
-   TOTAL iRMSD: 0.71 Angs
-   TOTAL NiRMSD: 1.33 Angs
-
-APDB is an older measure, less robust than the iRMSD and it is an attempt to estimate the fraction of pairs of residues whose alignment seems to be correct form a structural point of view. The higher APDB, the better the alignment, the lower the NiRMSD, the better the alignment.
+.. note:: APDB is an older measure, less robust than the iRMSD and it is an attempt to estimate the fraction of pairs of residues whose alignment seems to be correct form a structural point of view. The higher APDB, the better the alignment, the lower the NiRMSD, the better the alignment.
 
 Evaluating alternative alignments
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1761,37 +1760,12 @@ MUSCLE   sproteases_small.muscle   1.34
 As expected, Expresso delivers the best alignment from a structural point of view. This makes sense, since Expresso explicitely USES structural information. The other figures show us that the structural based alignment is only marginally better than most sequences based alignments. Muscle seems to have a small edge here although the reality is that all these figures are impossible to distinguish with the notable exception of ClustalW
 
 
-Identifying the most distantly related sequences in your dataset
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-In order to identify the most distantly related sequences in a dataset, you can use the seq_reformat utility, in order to compare all the sequences two by two and pick up the two having the lowest level of identity:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat sproteases_small.fasta -output sim_idscore\
-      | grep TOP |sort -rnk3
+Evaluating alternative alignments with STRIKE (under maintenance...)
+---------------------------------------------
 
 
-This sim_idscore indicates that every pair of sequences will need to be aligned when estimating the similarity. The ouput (below) indicates that the two sequences having the lowest level of identity are AEDAE and MOUSE. It may not be a bad idea to choose these sequences (if possible) for evaluating your MSA.
-
-::
-
-  ...
-  TOP 16 10 28.00 sp|P29786|TRY3_AEDAE sp|Q6H321|KLK2_HORSE 28.00
-  TOP 16 7 28.00 sp|P29786|TRY3_AEDAE sp|P08246|ELNE_HUMAN 28.00
-  TOP 16 1 28.00 sp|P29786|TRY3_AEDAE sp|P08884|GRAE_MOUSE 28.00
-  TOP 15 14 27.00 sp|P80015|CAP7_PIG sp|P00757|KLKB4_MOUSE 27.00
-  TOP 12 9 27.00 sp|P20160|CAP7_HUMAN sp|Q91VE3|KLK7_MOUSE 27.00
-  TOP 9 7 27.00 sp|Q91VE3|KLK7_MOUSE sp|P08246|ELNE_HUMAN 27.00
-  TOP 16 2 26.00 sp|P29786|TRY3_AEDAE sp|P21844|MCPT5_MOUSE 26.00
-
-Evaluating alternative alignments with STRIKE (to be done...)
--------------------------------------------------------------
-
-
-Evaluating an alignment according to your own criterion
-=======================================================
-Establishing your own criterion
--------------------------------
+Evaluating a MSA according to your own criterion
+================================================
 Any kind of Feature can easily be turned into an evaluation grid. For instance, the protease sequences we have been using here have a well characterized binding site. A possible evaluation can be made as follows. let us consider the Swissprot annotation of the two most distantly related sequences. These two sequences contain the electron relay system of the proteases. We can use it to build an evaluation library: in P29786, the first Histidine is at position 68, while in P21844 this Histidine is on position 66. We can therefore build a library that will check whether these residues are properly aligned in any MSA. The library will look like this:
 
 
@@ -1814,18 +1788,17 @@ Any kind of Feature can easily be turned into an evaluation grid. For instance, 
 
 You simply need to cut and paste this library in a file and use this file as a library to measure the concistency between your alignment and the correspondances declared in your library. The following command line also makes it possible to visualy display the agreement between your sequences and the library.
 
-
 ::
 
   $$: t_coffee -infile proteases_small.aln -lib charge_relay_lib.tc_lib -score \
-     -output html
+      -output html
 
 
 ******************************
 Downstream Analysis using MSAs
 ******************************
 
-Trees/Clustering baseb on protein 3D structures
+Trees/Clustering based on protein 3D structures
 ===============================================
 This section describes tree estimation procedure based on the comparison of internal distances. One particular mode (T-RMSD) have been develop for this purpose only however, there are many other options to do so. On the other hand,T-RMSD makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. T-RMSD also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
 
@@ -1859,124 +1832,98 @@ It is possible to control default parameters using the following extended comman
 
 Generating a tree based on contact conservation
 -----------------------------------------------
-This option makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate nj trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cut-off of 1.2 A between VdW radius and ignoring the 3 closests neighbors. Columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA).
+The following option (command 1) makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate NJ trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cutoff of 1.2 A between VdW radius and ignoring the 3 closest neighbors; columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA). The output file is ``tree.dnd`` is a tree in newick format. It is possible to control default parameters using the following extended command line (command 2).
 
 :: 
 
-  $$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates 100 \
-      +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
+  Command 1:
+  $$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree \
+      replicates 100 +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
 
-
-Output: 
-
-* ``tree.dnd``: Tree in newick format  
-
-It is possible to control default parameters using the following extended command line:
-
-::
-
+  Command 2:
   $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
 
-.. warning: the procedure requires at least 1 sequence with a known 3D structure or with contact information.
+.. warning:: The procedure requires at least 1 sequence with a known 3D structure or with contact information.
 
 Visulizing 3D Conservation
 --------------------------
-
-This same procedure can be used to visualize either intramolecular distance conservation or contact conservation:
+This same procedure can be used to visualize either intramolecular distance conservation or contact conservation.  The output file ``score_raw`` is a tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D \
-      distances -output score_html 
-  $$: t_coffee -other_pg seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D \
-      distances -output score_ascii
-  $$: t_coffee -other_pg seq_reformat -in CRD.aln -in2 CRD.template -action +evaluate3D \
-      distances -output score_raw
-
-Output:
- - ``score_raw``: Tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
+      -action +evaluate3D distances -output score_html 
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
+      -action +evaluate3D distances -output score_ascii 
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
+      -action +evaluate3D distances -output score_raw (under maintenance...)
 
 Identification of positions 
 ---------------------------
 
-If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificty, etc...), it is possible to estimate which columns yield the best support using the following command,
+If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificity, etc...), it is possible to estimate which columns yield the best support using the following command. The input ``group.fasta`` is a FASTA formatted list of the sequences that form the group whose support you want to analyze; the output ``aln.score_html`` is a colored version of your MSA indicating the sequences that best contribute to your clustering.
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates \
       columns +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
 
-Input:
- - ``group.fasta``: A FASTA formatted list of the sequences that form the group whose support you want to analyze
-
-Output:
- - ``aln.score_html`` Colored version of your MSA indicating the sequences that best contribute to your clustering.
-
 Evaluating Clustering capacities
 --------------------------------
+If you want to check the capacity of an algorithm to bring related sequences within mono-phyletic groups, you should name your sequences according to the group they belong to (XXXX_1, YYYYY_1, ZZZZ_2, KKKK_2, for members of _1 and _2, etc) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group. The tree can be precomputed (command 1) or it can be computed on the fly (command 2).
 
-If you want to check the capacity of an algorithm to bring related sequences within mono-phyletic groups, you should name your sequences according to the group they belong to (XXXX_1, YYYYY_1, ZZZZ_2, KKKK_2, for members of _1 and _2, etc) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group:
-
-The tree can be pre-computed
 :: 
 
+  Command 1: precomputed tree
   $$: t_coffee -other_pg seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
 
-Or it can be computed on the fly
-:: 
-
+  Command 2: computed on the fly....
   $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
 Others...
 =========
-To be done...
+Under maintenance...
+
+
 
 ****************************************
 Integrating External Methods In T-Coffee
 ****************************************
-The real power of T-Coffee is its ability to seamlessly combine many methods into one. While we try to integrate as many methods as we can in the default distribution, we do not have the means to be exhaustive and if you desperately need your favourite method to be integrated, you will need to bite the bullet ...
+.. note:: The real power of T-Coffee is its ability to seamlessly combine many methods into one. While we try to integrate as many methods as we can in the default distribution, we do not have the means to be exhaustive and if you desperately need your favorite method to be integrated, you will need to bite the bullet ...
 
-
-What are the methods already integrated in T-Coffee
-===================================================
+What are the methods already integrated in T-Coffee?
+====================================================
 Although, it does not necessarily do so explicitly, T-Coffee always end up combining libraries. Libraries are collections of pairs of residues. Given a set of libraries, T-Coffee makes an attempt to assemble the alignment with the highest level of consistence. You can think of the alignment as a timetable. Each library pair would be a request from students or teachers, and the job of T-Coffee would be to assemble the time table that makes as many people as possible happy...
-
 
 In T-Coffee, methods replace the students/professors as constraints generators. These methods can be any standard/non standard alignment methods that can be used to generate alignments (pairwise, most of the time). These alignments can be viewed as collections of constraints that must be fit within the final alignment. Of course, the constraints do not have to agree with one another...
 
-
 This section shows you what are the vailable method in T-Coffee, and how you can add your own methods, either through direct parameterization or via a perl script. There are two kinds of methods: the internal and the external. For the internal methods, you simply need to have T-Coffee up and running. The external methods will require you to install a package.
-
 
 List of INTERNAL methods
 ------------------------
 Built in methods can be requested using the following names:
 
--proba_pair: Adapted from Probcons, this method [the current default] uses a pair HMM to compute a pairwise alignment with a bi-phasic gap penalty.
+- proba_pair: adapted from ProbCons, this method (the current default) uses a pair HMM to compute a pairwise alignment with a biphasic gap penalty.
 
--fast_pair: Makes a global fasta style pairwise alignment. For proteins, matrix=blosum62mt, gep=-1, gop=-10, ktup=2. For DNA, matrix=idmat (id=10), gep=-1, gop=-20, ktup=5. Each pair of residue is given a score function of the weighting mode defined by -weight.
+- fast_pair: makes a global fasta style pairwise alignment. For proteins: **matrix=blosum62mt, gep=-1, gop=-10, ktup=2**. For DNA, **matrix=idmat (id=10), gep=-1, gop=-20, ktup=5**. Each pair of residue is given a score function of the weighting mode defined by **-weight**.
 
--slow_pair: Identical to fast pair, but does a full dynamic programming, using the myers and miller algorithm. This method is recommended if your sequences are distantly related.
+- slow_pair: identical to fast pair, but does a full dynamic programming, using the myers and miller algorithm. This method is recommended if your sequences are distantly related.
 
--ifast_pair
+- ifast_pair: iterative fast_pair.
 
--islow_pair:  Makes a global fasta alignmnet using the previously computed pairs as a library. `i` stands for iterative. Each pair of residue is given a score function of the weighting mode defined by -weight. The Library used for the computation is the one computed before the method is used. The resullt is therefore dependant on the order in methods and library are set via the -in flag.
+- islow_pair: makes a global fasta alignmnet using the previously computed pairs as a library. `i` stands for iterative. Each pair of residue is given a score function of the weighting mode defined by **-weight**. The library used for the computation is the one computed before the method is used. The result is therefore dependent on the order in methods and library are set via the **-in** flag.
 
--align_pdb_pair: Uses the align_pdb routine to align two structures. The pairwise scores are those returnes by the align_pdb program. If a structure is missing, fast_pair is used instead. Each pair of residue is given a score function defined by align_pdb. [UNSUPPORTED]
+- align_pdb_pair: uses the **align_pdb** routine to align two structures. The pairwise scores are those returnes by the **align_pdb** program. If a structure is missing, fast_pair is used instead. Each pair of residue is given a score function defined by align_pdb. [UNSUPPORTED]
 
--lalign_id_pair: Uses the ten top non intersecting local alignments, as delivered by lalign. Each alignement is weighted with its average percent identity.
+- lalign_id_pair: uses the ten top non intersecting local alignments, as delivered by lalign. Each alignement is weighted with its average percent identity.
 
--lalign_rs_s_pair: Same as above but does also does self comparison and uses the lalign raw_score (s stands for self). This is needed when extracting repeats.
+- lalign_rs_s_pair: Same as above but does also does self comparison and uses the lalign raw_score (s stands for self). This is needed when extracting repeats. [UNSUPPORTED]
 
--Matrix Amy: matrix can be requested, simply indicate as a method the name of the matrix preceded with an X (i.e. Xpam250mt). If you indicate such a matrix, all the other methods will simply be ignored, and a standard fast progressive alignment will be computed. If you want to change the substitution matrix used by the methods, use the -matrix flag.
+- Matrix Amy: matrix can be requested, simply indicate as a method the name of the matrix preceded with an X (i.e. Xpam250mt). If you indicate such a matrix, all the other methods will simply be ignored, and a standard fast progressive alignment will be computed. If you want to change the substitution matrix used by the methods, use the **-matrix** flag.
 
--cdna_fast_pair: This method computes the pairwise alignment of two cDNA sequences. It is a fast_pair alignment that only takes into account the amino-acid similarity and uses different penalties for amino-acid insertions and frameshifts. This alignment is turned into a library where matched nucleotides receive a score equql to the average level of identity at the amino-acid level. This mode is intended to clean cDNA obtained from ESTs, or to align pseudo-genes.
-
-
-.. warning:: This last method is currently no longer supported.
-
+- cdna_fast_pair: this method computes the pairwise alignment of two cDNA sequences. It is a fast_pair alignment that only takes into account the amino-acid similarity and uses different penalties for amino-acid insertions and frameshifts. This alignment is turned into a library where matched nucleotides receive a score equql to the average level of identity at the amino-acid level. This mode is intended to clean cDNA obtained from ESTs, or to align pseudo-genes. [UNSUPPORTED]
 
 List of EXTERNAL methods (plug-ins)
 -----------------------------------
