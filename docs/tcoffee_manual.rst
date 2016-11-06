@@ -1495,8 +1495,8 @@ The type declaration (or its automatic detection) triggers the use of the approp
 
   $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
 
-Aligning promoter regions: Pro-Coffee
--------------------------------------
+Pro-Coffee: Aligning functional DNA regions
+-------------------------------------------
 Pro-Coffee is a MSA method specifically designed for promoter regions or other orthologous DNA regions containing functional elements (enchancers for instance). Pro-Coffee takes nearest-neighbour nucleotide correlations into account when aligning DNA sequence. For this it first translates sequences into a dinucleotide alphabet and then does the alignment using a specifically designed dinucleotide substitution matrix. This matrix was constructed from binding sites alignments from the Transfac database. A benchmark on multispecies ChIP-seq data shows that validated binding sites will be better aligned than when using off-the-shelf methods. To run Pro-Coffee is easy by defaults (command 1), however the user can change empirically all gap parameters in order to improve the MSA (command 2). By default, parameters were optimized on benchmarks (GOP=-60/GEP=-1) but as every dataset is different you may want to see for yourself. Once your alignment is done, you can always use reformatting options in order to extract the regions of interest (command 3).
 
 ::
@@ -1554,6 +1554,7 @@ There are three possible strategies for evaluating your alignment of protein seq
  2) **Structure is a killer**, so if you have at least two structures available for your protein family, you are in an ideal situation and you can use the iRMSD. If you only have one structure available, we developped STRIKE to compare alternative alignment.
  3) **Another killer is the use of functional information**, but it is much less often at hand. If you know some residues MUST be aligned because they are functionally related. As the information is scarce and not standard, there is no automated procedure specifically designed for this kind of analysis but you can still setup an evaluation procedure with T-Coffee.
 
+.. note:: Most of evalution methods are designed for protein sequences (specially structure based methods), however, T-Coffee via the TCS/CORE index offers some possibilities to evaluate also DNA alignments.
 
 Sequence-based Methods
 ======================
@@ -1568,38 +1569,38 @@ The CORE index is an estimation of the consistency between your alignment and th
 
 Computing the CORE index of any alignment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You can evaluate any existing alignment with the CORE index. All you need to do is provide that alignment with the -infile flag and specify that you want to evaluate it:
+You can evaluate any existing alignment with the CORE index. All you need to do is provide that alignment with the -infile flag and specify that you want to evaluate it. For more information on filtering/trimming an alignment using the CORE index score, refer to the subsection **Preparing Your Data: Reformatting, Trimming an more.../Modifying the data itself**.
 
 ::
 
-  $$: t_coffee -infile=sproteases_small.g10.cw_aln -output=html -score
-
-For more information on filtering/trimming an alignment using the CORE index score, refer to the subsection **Preparing Your Data: Reformatting, Trimming an more.../Modifying the data itself**.
-
+  $$: t_coffee -infile=proteases_small_g10.aln -output=html -score
 
 Transitive Consistency Score - TCS 
 ----------------------------------
 TCS is an alignment evaluation score that makes it possible to identify the most correct positions in an MSA. 
 It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party MSA (including T-Coffee MSA of course!).
 
+.. warning:: TCS has been incorporated to T-Coffee recently, it means that not all distribution have the TCS implemented; you should install one the latest stable version of T-Coffee to have the TCS along with T-Coffee.
+
 Evaluate an existing MSA 
 ^^^^^^^^^^^^^^^^^^^^^^^^
+The TCS is most informative when used to identify low-scoring portions within an MSA. It is also worth noting that the TCS is not informative when aligning less than five sequences.
+
 :: 
 
-  $$: t_coffee -infile prot.aln -evaluate -output score_ascii, aln, score_html
+  $$: t_coffee -infile sample_seq1.aln -evaluate -output=score_ascii,aln,score_html
 
 Output files: 
 
-* ``prot.score_ascii``  displays the score of the MSA, the sequences and the residues. This file can be used to further filter your MSA with seq_reformat. 
-* ``prot.score_html`` displays a colored version score of the MSA, the sequences and the residues. 
+* ``sample_seq1.score_ascii``  displays the score of the MSA, the sequences and the residues. 
+* ``sample_seq1.score_html`` displays a colored version score of the MSA, the sequences and the residues. 
 
 .. warning:: The color code in the score_html indicates the agreement between the library and the considered alignment. It is important to understand that this score does not only depend on the input MSA, but it also depends on the library.
 
-.. tip:: The TCS is most informative when used to identify low-scoring portions within an MSA. It is also worth noting that the TCS is not informative when aligning less than five sequences.
-  
 Filter unreliable MSA positions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TCS allows you to filter out from your alignment regions that appears unreliable according to the consistency score; the filtering can be made at the residue level or the column level:
+
 :: 
 
   $$: t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_filter3, \
@@ -1607,47 +1608,64 @@ Filter unreliable MSA positions
 
 Output file: 
 
-* ``prot.tcs_residue_filter3``  All residues with a TCS score lower than 3 are filtered out 
-* ``prot.tcs_column_filter3``   All columns with a TCS score lower than 3 are filtered out 
-* ``prot.tcs_residue_lower4``   All residues with a TCS score lower than 3 are lower cased
+* ``sample_seq1.tcs_residue_filter3``  All residues with a TCS score lower than 3 are filtered out 
+* ``sample_seq1.tcs_column_filter3``   All columns with a TCS score lower than 3 are filtered out 
+* ``sample_seq1.tcs_residue_lower4``   All residues with a TCS score lower than 3 are lower cased
   
-Note that all these output functions are also compatible with the default T-Coffee when computing an alignment:
+Note that all these output functions are also compatible with the default T-Coffee (command 1) when computing an alignment or with **seq_reformat** (command ") using a T-Coffee .score_ascii file.
 
 ::
 
-  $$: t_coffee -seq prot.fa -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
+  Command 1:
+  $$: t_coffee -seq sample_seq1.fa -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
 
-or with **seq_reformat** using a T-Coffee .score_ascii file:: 
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc_in_f \
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in prot.score_ascii -struc_in_f \
       number_aln -output tcs_residue_filter3
 
 Weight MSA for improved trees
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+One cool trick about TCS is the possibility to deliver weigthed MSA, where each columns is multiplied according to its consistency score; this appears to be particularly useful to build phylogenetic tree. Phylogenetic trees are evaluated using a bootstrap score so each column as the same weight, no matter its relevance, in the case of weighted TCS, the more reliable columns are more represented, therefore improving the support of informative and reliable positions of your MSA. 
+
 :: 
 
-  $$: t_coffee -infile prot.aln -evaluate -output tcs_weighted, tcs_replicate_100
+  $$: t_coffee -infile sample_seq1.aln -evaluate -output tcs_weighted, tcs_replicate_100
 
 Output files: 
 
-* ``prot.tcs_weighted``       All columns are duplicated according to their TCS score 
-* ``prot.tcs_replicate_100``  Contains 100 replicates in phylip format with each column drawn with a probability corresponding to its TCS score 
+* ``sample_seq1.tcs_weighted``       All columns are duplicated according to their TCS score 
+* ``sample_seq1.tcs_replicate_100``  Contains 100 replicates in phylip format with each column drawn with a probability corresponding to its TCS score 
 
+Note that all these output functions are also compatible with the default T-Coffee (command 1) when computing an alignment or with **seq_reformat** (command 2) using a T-Coffee .score_ascii file.
 
-Note that all these output functions are also compatible with the default T-Coffee when computing an alignment:
+::
 
-  $$: t_coffee -seq prot.fa -output tcs_weighted, tcs_replicate_100
+  Command 1:
+  $$: t_coffee -seq sample_Seq1.fa -output tcs_weighted, tcs_replicate_100
 
-or with **seq_reformat** using a T-Coffee .score_ascii file::
-
-  $$: t_coffee -other_pg seq_reformat -in prot.aln -struc_in prot.score_ascii -struc_in_f \
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in prot.score_ascii -struc_in_f \
       number_aln -output tcs_weighted
 
-Working with coding DNA
-^^^^^^^^^^^^^^^^^^^^^^^
+Using different libraries for TCS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+It is possible to change the way TCS reliability is estimated. This can be done by building different T-Coffee libraries. The proba_pair is the default aligner of T-Coffee that runs a pair-HMM to populate the library with residue pairs having the best posterior probabilities (command 1). You can also combine local and global alignners (command 2). There is also a fast alternative by using a special mode to run a series of fast multiple aligners; it is very fast and used by `ENSEMBL Compara <http://www.ensembl.org/info/genome/compara/index.html>`_ (command 3)
 
+::
+
+  Command 1:
+  $$: t_coffee -infile sample_seq1.aln -evaluate -method proba_pair -output score_ascii, aln, score_html
+
+  Command 2:
+  $$: t_coffee -infile prot.aln -evaluate -method probapair,lalign_id_pair -output score_ascii, \
+      aln, score_html
+      
+  Command 3:
+  $$: t_coffee -infile sample_seq1.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa -output \
+      score_ascii, aln, score_html
+    
+Working with coding DNA (under maintenance...)
+^^^^^^^^^^^^^^^^^^^^^^^
 When working with DNA, it is advisable to first align the sequences at the protein level and later thread back the DNA onto your aligned proteins. The filtering must be done in two steps, as shown below. Note that your DNA and protein sequences must have the same name::
 
   $$: t_coffee -infile prot.aln -evaluate -output score_ascii
@@ -1664,36 +1682,19 @@ The dna.replicates option: 100 DNA replicates with positions selected according 
 
 The dna.filtered option: DNA positions filtered according to their TCS column score
 
-Using different libraries
-^^^^^^^^^^^^^^^^^^^^^^^^^
-It is possible to change the way TCS reliability is estimated. This can be done by building different T-Coffee libraries. The proba_pair is the default aligner of T-Coffee that runs a pair-HMM to populate the library with residue pairs having the best posterior probabilities. The following instructions will do this: 
-
-  $$: t_coffee -infile prot.aln -evaluate -method proba_pair -output score_ascii, aln, score_html
-
-This mode runs a series of fast multiple aligners; it is very fast and used by `ENSEMBL Compara <http://www.ensembl.org/info/genome/compara/index.html>`_:
-
-  $$: t_coffee -infile prot.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa -output \
-      score_ascii, aln, score_html
-
-This mode runs the orginal default T-Coffee that was combining local and global alignments::
-
-  $$: t_coffee -infile prot.aln -evaluate -method clustalw_pair,lalign_id_pair -output \
-      score_ascii, aln, score_html
-
-
 Summary of the output options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ============================  ================
 Flags        		      Description
 ============================  ================
 **score_ascii**	              outputs a TCS evaluation file
-**score_html**	      	      contains ascii format in html format
-**score_pdf**	      	      will transfer score_html into pdf format
-**sp_ascii**	      	      format reporting the TCS score of every aligned pair in the target MSA
+**score_html**	      	        contains ascii format in html format
+**score_pdf**	      	         will transfer score_html into pdf format
+**sp_ascii**	      	          format reporting the TCS score of every aligned pair in the target MSA
 **tcs_residue_filter_N**      removes all residues with a TCS score lower than `N`
 **tcs_columns_filter_N**      removes all columns with a TCS score lower than `N`
-**tcs_weighted**	      phylip format with duplicated columns according to their TCS score
-**tcs_replicate_N**	      generates `N` replicates of columns drawn according to their TCS score
+**tcs_weighted**	             phylip format with duplicated columns according to their TCS score
+**tcs_replicate_N**	          generates `N` replicates of columns drawn according to their TCS score
 ============================  ================
 
 
