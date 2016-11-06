@@ -13,17 +13,17 @@ Foreword
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more elaborated ones. We have tried to put as many of these functionalities on the webserver and we plan to incorporate even more in the future, but currently not all are available and sometimes we had to set up some limitations for practical reasons. Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**. In the course of this manual, we expect you to use a Unix-like shell commands running on given example files that you can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. Also, all values given in this manual were obtained obtained over time with different version of the T-Coffee package, they are just an indication...and depending on the version of T-Coffee you are using, these values can be slightly different. If you don't want to bother with command line, try using our online latest `tcoffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or via the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_.
+.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more elaborated ones. We have tried to put as many of these functionalities on the webserver and we plan to incorporate even more in the future, but currently not all are available and sometimes we had to set up some limitations for practical reasons. Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**. In the course of this manual, we expect you to use a Unix-like shell commands running on given example files that you can find `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. Also, all values given in this manual were obtained obtained over time with different version of the T-Coffee package, they are just an indication...and depending on the version of T-Coffee you are using, these values can be slightly different. If you don't want to bother with command line, try using our online latest `tcoffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or via the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_.
 
 
 Prerequisite for using T-Coffee
 ===============================
-This manual relies on the assumption that you have installed T-Coffee, version 9.03 or higher (preferably the latest stable version). All the relevant information for installing T-Coffee is contained in the previous chapter **T-Coffee Installation**. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on Windows except by using Cygwin, a freeware open source allowing to run a Unix-like command line on Windows (`Cygwin download <https://www.cygwin.com/>`_). Cygwin is free of charge and easy to install, yet, as the first installation requires downloading substantial amounts of data, make sure you have access to a broad-band connection. A better option and a more stable one would be to install a Unix-like virtualbox on your computer using Windows.
+This manual relies on the assumption that you have installed T-Coffee, version 9.03 or higher (preferably the latest stable version). All the relevant information for installing T-Coffee is contained in the previous chapter **T-Coffee Installation**. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on Windows except by using Cygwin, a freeware open source allowing to run a Unix-like command line on Windows (`download <https://www.cygwin.com/>`_). Cygwin is free of charge and easy to install, yet, as the first installation requires downloading substantial amounts of data, make sure you have access to a broad-band connection. A better option and a more stable one would be to install a Unix-like virtualbox on your computer using Windows.
 
 
 Have a try...it's not painful!
 ==============================
-We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. It contains everything you need to run ALL the examples provided in this manual.
+We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. It contains everything you need to run ALL the examples provided in this manual. In the future starting with the next T-Coffee stable version, all example files will be included in the T-Coffee distribution (~/tcoffee/Version_11.XX/examples/).
 
 
 *******************
@@ -36,8 +36,8 @@ What is T-Coffee?
 What does it do?
 ----------------
 T-Coffee has two components allowing you to perform different tasks:
-- mainly it is a Multiple Sequence Alignment program. Given a dataset of sequences previously gathered (using database search programs like BLAST, Ensembl, whatever...), T-Coffee will produce a Multiple Sequence Alignment (MSA), refer to the section **Building Your Multiple Sequence Alignments** for more details.
-- also it is a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
+ - mainly it is a Multiple Sequence Alignment program. Given a dataset of sequences previously gathered (using database search programs like BLAST, Ensembl, whatever...), T-Coffee will produce a Multiple Sequence Alignment (MSA), refer to the section **Building Your Multiple Sequence Alignments** for more details.
+ - also it is a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
 
 What can it align?
 ------------------
@@ -107,23 +107,21 @@ When you run T-Coffee, the first thing it does is to compute a library. The libr
   Line 100 says:
   Residue 1 of seq A with Residue 29 of seq B,
 
-Each of these constraints comes with a weight and in the end, the T-Coffee algorithm tries to generate the multiple alignment that contains constraints whose sum of weights yields the highest score. In other words, it tries to make happy as many constraints as possible (replace the word constraint with, friends, relatives, collaborators... and you will know exactly what we mean).
+Each of these constraints comes with a weight and in the end, the T-Coffee algorithm tries to generate the multiple alignment that contains constraints whose sum of weights yields the highest score. In other words, it tries to make happy as many constraints as possible (replace the word constraint with, friends, relatives, collaborators... and you will know exactly what we mean). You can generate this list of constraints the way you like. You may even provide it yourself, forcing important residues to be aligned by giving them high weights (see **FAQ for T-Coffee**). For your convenience, T-Coffee can generate (by default) its own list by making all the possible global pairwise alignments, and the 10 best local alignments associated with each pair of sequences. Each pair of residues observed aligned in these pairwise alignments becomes a line in the library.
 
-You can generate this list of constraints the way you like. You may even provide it yourself, forcing important residues to be aligned by giving them high weights (see **FAQ for T-Coffee**). For your convenience, T-Coffee can generate (by default) its own list by making all the possible global pairwise alignments, and the 10 best local alignments associated with each pair of sequences. Each pair of residues observed aligned in these pairwise alignments becomes a line in the library.
-
-.. note:: Be aware that nothing forces you to use a given library and that you could build it using other methods. In protein language, **T-Coffee is synonymous for freedom, the freedom of being aligned however you fancy** (I was a Tryptophan in some previous life).
+.. note:: Be aware that nothing forces you to use a given library and that you could build it using other methods. In protein language, **T-Coffee is synonymous for freedom, the freedom of being aligned however you fancy** (I was probably a Tryptophan in some previous life).
 
 
 *******************************************************
 Preparing Your Data: Reformatting, Trimming and More... 
 *******************************************************
-.. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual. When multiple input files are given, flags are mandatory (**-in/-in2**, **-al1/-al2**, etc...) Also, when redirecting your results using **-output** (or other flag requiring options) you can either use or not the symbol "=" to specify your options. If you use the correct flag in a strict way, T-Coffee will always work fine, but you have some degrees of freedom ;-).
+.. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual. When multiple input files are given, flags are mandatory (**-in/-in2**, **-al1/-al2**, etc...). Usually, options are indicated via the symbol "=" (i.e **-output=html**) but it is not mandatory, it's just recommended. If you use a correct/strict flag usage, T-Coffee will always work fine, but you have some degrees of freedom ;-).
 
 The reformatting utility: seq_reformat
 ======================================
 General introduction
 --------------------
-Nothing is more frustrating than downloading important data and realizing you need to format it before using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results, especially a very powerful reformatting utility named **seq_reformat**. You can use seq_reformat by invoking the t_coffee shell:
+Nothing is more frustrating than downloading important data and realizing you need to format it before using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results, especially a very powerful reformatting utility named **seq_reformat**. You can use **seq_reformat** by invoking the t_coffee shell:
 
 ::
 
@@ -134,7 +132,6 @@ This will output the online flag usage of seq_reformat meaning a complete list o
 .. danger:: After the flag **-other_pg**, the common T-Coffee flags are not recognized anymore; it is like if you were using a different program.
 
 .. tip:: When using T-Coffee seq_reformat, command line may become quite long...a practical way to handle this is to create in your .bashrc an alias to call directly seq_reformat. For example, write in your .bashrc: **alias reformat='t_coffee -other_pg seq_reformat'**. You can now call seq_reformat by tiping **reformat**.
-
 
 Modification options
 --------------------
@@ -158,7 +155,7 @@ Using a "cache" file
 --------------------
 What is a cache in T-Coffee?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Several option can be performed easily by using what we call a cache (or cache file). A cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding; for instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix-based evalution (blosum62mt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is quite practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
+Several option can be performed easily by using what we call a cache (or cache file). In T-Coffee, a cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding scheme. For instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix-based evalution (blosum62mt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is quite practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
 
 ::
 
@@ -176,26 +173,24 @@ Several option can be performed easily by using what we call a cache (or cache f
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate \
       blosum62mt -output=score_ascii
 
-Preparing a sequence or alignment cache
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Let us consider the following alignment:
+Preparing a sequence/alignment cache
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The following command will convert your alignment according to the given parameters: the gaps "-" will remain, all A and a will be turned into 1 and all the other symbols (#) will be turned into 0. The flag **-action +convert** indicates the actions that must be carried out on the alignment before it is output into cache.
 
 ::
 
+  1) Initial alignment:
   CLUSTAL FORMAT
   B CTGAGA-AGCCGC---CTGAGG--TCG
   C TTAAGG-TCCAGA---TTGCGG--AGC
   D CTTCGT-AGTCGT---TTAAGA--ca-
   A CTCCGTgTCTAGGagtTTACGTggAGT
 
-The following command will convert your alignment according to the given parameters: the gaps "-" will remain, all A and a will be turned into 1 and all the other symbols (#) will be turned into 0. The flag **-action +convert** indicates the actions that must be carried out on the alignment before it is output into cache.
-
-::
-
+  2) Command line:
   $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -output=clustalw_aln -out=cache.aln \
       -action +convert 'Aa1' '.--' +convert '#0'
 
-  This command generates the following alignment (called a cache):
+  3) Cache generated:
   CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, Len=27
   B 000101-100000---000100--000
   C 001100-000101---000000--100
@@ -206,10 +201,11 @@ Other alternative are possible. For instance, the following command:
 
 ::
 
+  1) Command line:
   $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -output=fasta_seq -out=cache.seq \
       -action +convert 'Aa1' '.--' +convert '#0'
 
-  This command will produce the following file cache.seq
+  2) Generate the file cache.seq:
   >B
   000101100000000100000
   >C
@@ -264,7 +260,7 @@ Modifying the format of your data
 =================================
 Keeping/Protecting your sequence names
 --------------------------------------
-Only few programs support long sequence names, and sometimes, when going through some pipeline the names of your sequences can be truncated or modified. To avoid this, seq_reformat contains a utility that can automatically rename your sequences into a form that will be machine-friendly, while making it easy to return to the human-friendly form.
+Only few programs support long sequence names, and sometimes, when going through some pipeline the names of your sequences can be truncated or modified. To avoid this, **seq_reformat** contains a utility that can automatically rename your sequences into a form that will be machine-friendly, while making it easy to return to the human-friendly form.
 
 1) **Create a code list**: The first thing to do is to generate a list of names that will be used in place of the long original name of the sequences:
 
@@ -289,13 +285,7 @@ Only few programs support long sequence names, and sometimes, when going through
 
 Changing the sequence format
 ----------------------------
-Sometimes it may be necessary to change from one format to another, for instance when using another software which recognize only a given format. T-Coffee recognizes most common alignment formats and you can find the list of all input or output format recognized by simply typing:
-
-::
-
-  $$: t_coffee -other_pg seq_reformat 
-  
-It is possible to reformat unaligned or aligned sequences alike although changing the alignment format is probably more interesting in order to use other applications; unaligned sequences format flags are generally preceded by the suffix "_seq" and aligned sequences flags by the suffix "_aln". This also allows you to transform any alignment into unaligned sequences by removing the gaps. Here are some examples on how to change the format of your data:
+Sometimes it may be necessary to change from one format to another, for instance when using another software which recognize only a given format. T-Coffee recognizes most common alignment formats and you can find the list of all input or output format recognized by simply typing **t_coffee -other_pg seq_reformat** without any input file(s). It is possible to reformat unaligned or aligned sequences alike although changing the alignment format is probably more interesting in order to use other applications; unaligned sequences format flags are generally preceded by the suffix **"_seq"** and aligned sequences flags by the suffix **"_aln"**. This also allows you to transform any alignment into unaligned sequences by removing the gaps. Here are some examples on how to change the format of your data:
 
 ::
 
@@ -324,7 +314,7 @@ If you need to change the case of your sequences, you can use different modifier
   $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +lower \
       -output clustalw
 
-.. hint:: No prize for guessing that +upper will do exactly the opposite...
+.. hint:: No prize for guessing that **+upper** will do exactly the opposite...
 
 Changing the case of specific residues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -346,7 +336,7 @@ If you want to change the case depending on the score, you must either evaluate 
 
 ::
 
-  Using a cache on-the-fly:
+  Using a cache on the fly:
   $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -action +upper \
       +evaluate idmat +lower '[5-9]'
       
@@ -355,13 +345,13 @@ If you want to change the case depending on the score, you must either evaluate 
       idmat -output=score_ascii > sample_dnaseq2.cache
       
   $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \
-      -action +upper '[5-9]' (under maintenance...)
+      -action +lower '[1-2]'
   
 Coloring/Editing residues in an alignment
 -----------------------------------------
 Changing the default colors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Colors are hard coded in the program, but if you wish, you can change them by simply creating a file named ``seq_reformat.color`` that is used to declare the color values. The name of the file (seq_reformat.color) is defined in programmes_define.h, COLOR_FILE and can be changed before compilation. By default, the file is searched in the current directory. For example, the following line written in ``seq_reformat.color`` indicates that the value 0 in the cache corresponds now to #FFAA00 in html, and in RGB 1, 0.2 and 0. 
+Colors are hard coded in the program, but if you wish, you can change them by simply creating a file named ``seq_reformat.color`` that is used to declare the color values. The name of the file (``seq_reformat.color``) is defined in ``programmes_define.h``, COLOR_FILE and can be changed before compilation. By default, the file is searched in the current directory. For example, the following line written in ``seq_reformat.color`` indicates that the value 0 in the cache corresponds now to #FFAA00 in html, and in RGB 1, 0.2 and 0. 
 
 ::
 
@@ -369,7 +359,7 @@ Colors are hard coded in the program, but if you wish, you can change them by si
 
 Coloring specific types of residues/nucleic acids
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-You can color all the residues of your sequences on-the-fly; for instance, the following command line will color all the a's in color 0 (blue):
+You can color all the residues of your sequences on the fly; for instance, the following command line will color all the a's in color 0 (blue):
 
 ::
 
@@ -377,7 +367,6 @@ You can color all the residues of your sequences on-the-fly; for instance, the f
       -output color_html > color_type.html
 
 .. warning:: This option is case sensitive so the case of the residues or nucleotides should be the same in the command line (in this command line, only a lower case will be colored). 
-
 
 Coloring a specific residue of a specific sequence
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -612,7 +601,7 @@ Extracting portions of a dataset is something very frequently needed. You may ne
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +evaluate \
       blosum62mt -output score_ascii > sample_seq1_blosum62.score_ascii
 
-This generates a score_ascii file that you can then use to filter out the bad bits in your alignment considering the individual score of each residue to trigger the filtering (command 3), or according to the whole column score by simply add the '+use_cons' flag (command 4). This last command can also be run on-the-fly with command 5. The commands 3/4/5 will keep only residues and/or columns having a score between 6 and 9.
+This generates a score_ascii file that you can then use to filter out the bad bits in your alignment considering the individual score of each residue to trigger the filtering (command 3), or according to the whole column score by simply add the **+use_cons** flag (command 4). This last command can also be run on the fly with command 5. The commands 3/4/5 will keep only residues and/or columns having a score between 6 and 9.
 
 ::
 
