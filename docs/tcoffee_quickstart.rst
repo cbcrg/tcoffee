@@ -211,8 +211,17 @@ If you want to select yourself which methods should be combined by R-Coffee, run
 
 .. note:: Please cite: Wilm, A., Higgins, D.G., Notredame, C. **R-Coffee: a method for multiple alignment of non-coding RNA**. Nucleic Acids Res., 36(9):e52 (2008), PMID:18420654
 
-iRMSD and APDB
-==============
+TCS
+===
+TCS is an alignment evaluation score that makes it possible to identify the most correct positions in an MSA. 
+It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party MSA (including T-Coffee MSA of course!). 
+
+It's usage is a bit tricky as it comes with a lot of different options, go to the **T-Coffee Main Documentation**, section **How Good Is Your Alignment** to have all the details about TCS.
+
+.. note:: Please cite: Chang, J.-M., Di Tommaso, P., Notredame, C. **TCS: A new multiple sequence alignment reliability measure to estimate alignment accuracy and improve phylogenetic tree reconstruction**. Mol. Biol. Evol., 31(6), 1625–1637 (2014), PMID:24694831 and/or Chang, J.-M., Di Tommaso, P., Lefort, V., Gascuel, O., Notredame, C. **TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction**. Nucleic Acids Res., 43(W1):W3-6 (2015), PMID:25855806
+
+iRMSD/APDB
+==========
 iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignment using structural information. All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the command 1 if your sequences and structures have the same name; otherwise you have to declare the correspondence between sequences and structures in a template file (command 2).
 
 ::
@@ -237,6 +246,10 @@ A template file is a FASTA-like file declaring the structure associated with eac
 
 .. note:: Please cite: Armougom, F., Moretti, S., Keduas, V., Notredame, C. **The iRMSD: a local measure of sequence alignment accuracy using structural information**. Bioinformatics, 22(14):e35-e39 (2006), PMID:16873492
 
+STRIKE
+======
+Under maintenance on the webserver or the T-Coffee package...
+
 T-RMSD
 ======
 T-RMSD is a structure based clustering method using the iRMSD to drive the structural clustering of your aligned sequences with an available structure. The T-RMSD supports all the parameters supported by iRMSD or APDB. To run T-RMSD, type:
@@ -253,18 +266,3 @@ The program then outputs a series of files:
  - ``sample_3Dseq1.struc_tree.consensus`` : final consensus structural tree.
 
 .. note:: Please cite: Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. **T-RMSD: a fine-grained, structure based classification method and its application to the functional characterization of TNF receptors**. J. Mol. Biol., 400(3):605-617 (2010), PMID:20471393 and/or Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. **An improved understanding of TNFL/TNFR interactions using structure-based classifications**. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
-
-TCS
-===
-TCS is an alignment evaluation score that makes it possible to identify the most correct positions in an MSA. 
-It has been shown that these positions are the most likely to be structuraly correct and also the most informative when estimating phylogenetic trees. The TCS evaluation and filtering procedure is implemented in the T-Coffee package and can be used to evaluate and filter any third party MSA (including T-Coffee MSA of course!). 
-
-It's usage is a bit tricky as it comes with a lot of different options, go to the **T-Coffee Main Documentation**, section **How Good Is Your Alignment** to have all the details about TCS.
-
-.. note:: Please cite: Chang, J.-M., Di Tommaso, P., Notredame, C. **TCS: A new multiple sequence alignment reliability measure to estimate alignment accuracy and improve phylogenetic tree reconstruction**. Mol. Biol. Evol., 31(6), 1625–1637 (2014), PMID:24694831 and/or Chang, J.-M., Di Tommaso, P., Lefort, V., Gascuel, O., Notredame, C. **TCS: a web server for multiple sequence alignment evaluation and phylogenetic reconstruction**. Nucleic Acids Res., 43(W1):W3-6 (2015), PMID:25855806
-
-STRIKE
-======
-Under maintenance on the webserver or the T-Coffee package...
-
-
