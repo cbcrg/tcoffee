@@ -61,7 +61,7 @@ According to several benchmarks, T-Coffee is on overall much more accurate than 
 
 Is T-Coffee very accurate?
 --------------------------
-T-Coffee belongs to the category of consistency-based aligners which currently corresponds to the most accurate algorithms available (e.g. ProbCons, MSAprobs...). In addition, T-Coffee can combines (many) methods and therefore be as accurate (and hopefully more) as the methods it combines. For instance, the "accurate" mode of T-Coffee is very slow but also very accurate; on average this mode was shown to be 10 % more accurate than normal aligners on sequences less than 30% similar. If you need a very accurate alignment go to section **Building Multiple Sequence Alignment**.
+T-Coffee belongs to the category of consistency based aligners which currently corresponds to the most accurate algorithms available (e.g. ProbCons, MSAprobs...). In addition, T-Coffee can combines (many) methods and therefore be as accurate (and hopefully more) as the methods it combines. For instance, the "accurate" mode of T-Coffee is very slow but also very accurate; on average this mode was shown to be 10 % more accurate than normal aligners on sequences less than 30% similar. If you need a very accurate alignment go to section **Building Multiple Sequence Alignment**.
 
 
 What T-Coffee can and cannot do for you ...
@@ -155,7 +155,7 @@ Using a "cache" file
 --------------------
 What is a cache in T-Coffee?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Several option can be performed easily by using what we call a cache (or cache file). In T-Coffee, a cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding scheme. For instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix-based evalution (blosum62mt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is quite practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
+Several option can be performed easily by using what we call a cache (or cache file). In T-Coffee, a cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding scheme. For instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix based evalution (blosum62mt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is quite practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
 
 ::
 
@@ -507,7 +507,7 @@ Extracting/Removing sequences with the % identity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 **Removing too identical sequences (redundant)**
 
-Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the **+trim** option. For instance, you can generate a dataset where no pair of sequences has more than 50% identity either from a dataset of unaligned sequences (command 1) or from any given alignment (command 2). If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the "_seq_" with "_aln_". Just run the following command lines to see the difference un runtime:
+Removing the most similar sequences is often what people have in mind when they talk about removing redundancy. You can do so using the **+trim** option. For instance, you can generate a dataset where no pair of sequences has more than 50% identity either from a dataset of unaligned sequences (command 1) or from any given alignment (command 2). If you start from unaligned sequences, the removal of redundancy can be slow. If your sequences have already been aligned using a fast method, you can take advantage of this by replacing the **"_seq_"** with **"_aln_"**. Just run the following command lines to see the difference un runtime:
 
 ::
 
@@ -531,7 +531,7 @@ Sequences that are too distantly related from the rest of the set (called outlie
 
 **Forcing specific sequences to be kept**
 
-Sometimes you want to trim based on identity while making sure specific/important sequences remain in your dataset. You can do so by providing a pattern ("_f" for field) : it will keep all the sequences whose name contains the given string ("_fNAME", "_fCOMMENT" or "_fSEQ", f standing for field). Here are some examples corresponding to the different protected fields while removing all sequences above 50% identity: 
+Sometimes you want to trim based on identity while making sure specific/important sequences remain in your dataset. You can do so by providing a pattern (**"_f"** for field) : it will keep all the sequences whose name contains the given string (**"_fNAME"**, **"_fCOMMENT"** or **"_fSEQ"**). Here are some examples corresponding to the different protected fields while removing all sequences above 50% identity: 
 
 ::
 
@@ -656,7 +656,7 @@ Manipulating DNA sequences
 ==========================
 Translating DNA sequences into protein sequences
 ------------------------------------------------
-If your sequences are DNA coding sequences, it is often safer and more accurate to align them as proteins (as protein sequences are more conserved than their corresponding DNA sequence). The seq_reformat option makes it easy for you to translate your sequences:
+If your sequences are DNA coding sequences, it is often safer and more accurate to align them as proteins (as protein sequences are more conserved than their corresponding DNA sequence). The **seq_reformat** options make it easy for you to translate your sequences:
 
 ::
 
@@ -760,7 +760,7 @@ Phylogenetic Trees Manipulation
 ===============================
 Producing phylogenetic trees
 ----------------------------
-The seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering. Given a multiple sequence alignment, it is possible to compute either a UPGM or an NJ tree. The following commands use an identity matrix to compare your sequences and will output an unrooted NJ tree in newick format (command 1) or a rooted UPGMA tree (command 2):
+The seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering. Given a multiple sequence alignment, it is possible to compute either a UPGMA or an NJ tree. The following commands use an identity matrix to compare your sequences and will output an unrooted NJ tree in newick format (command 1) or a rooted UPGMA tree (command 2):
 
 ::
 
@@ -897,11 +897,11 @@ General comments on alignments and aligners
 ===========================================
 What is a good alignment?
 -------------------------
-This is a tricky question, a good answer would be  **"a good alignment is an alignment that makes it possible to do good biology"**. In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions. Unfortunately it is not easy to establish structure-based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
+This is a tricky question, a good answer would be  **"a good alignment is an alignment that makes it possible to do good biology"**. In practice, the alignment community has become used to measuring the accuracy of alignment methods using structures. Structures are relatively easy to align correctly, even when the sequences have diverged quite a lot. The most common usage is therefore to compare structure based alignments with their sequence based counterpart and to evaluate the accuracy of the method using these criterions. Unfortunately it is not easy to establish structure based standards of truth. Several of these exist and they do not necessarily agree. To summarize, the situation is as roughly as follows:
 
   - **Above 40% identity**, all the reference collections do agree with one another and all the established methods give roughly the same results. These alignments can be trusted blindly.
 
-  - **Below 40% identity**, all the reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies indicate that consistency-based methods (T-Coffee, ProbCons, MAFFT-slow or MSAProbs) have an edge over traditional methods.
+  - **Below 40% identity**, all the reference collections stop agreeing and the methods do not give consistent results. In this area of similarity it is not necessarily easy to determine who is right and who is wrong, although most studies indicate that consistency based methods (T-Coffee, ProbCons, MAFFT-slow or MSAProbs) have an edge over traditional methods.
 
 When dealing with distantly related sequences, the only way to produce reliable alignments is to use structural information. T-Coffee provides many facilities to do so in a seamless fashion. Several important factors need to be taken into account when selecting an alignment method:
 
@@ -914,7 +914,7 @@ When dealing with distantly related sequences, the only way to produce reliable 
 
 The main methods and their scope
 --------------------------------
-.. note:: There are many MSA packages around, the most common ones being ClustalW, MUSCLE, MAFFT, T-Coffee and ProbCons; amongst the latest ones, you can find phylogeny-aware aligners (PRANK and SATé) and modifed/improved consistency-based aligners (MSAProbs). You can almost forget about the other packages, as there is virtually nothing you could do with them that you will not be able to do with these packages. All these packages offer a complex trade-off between speed, accuracy and versatility.
+.. note:: There are many MSA packages around, the most common ones being ClustalW, MUSCLE, MAFFT, T-Coffee and ProbCons; amongst the latest ones, you can find phylogeny aware aligners (PRANK and SATé) and modifed/improved consistency based aligners (MSAProbs). You can almost forget about the other packages, as there is virtually nothing you could do with them that you will not be able to do with these packages. All these packages offer a complex trade-off between speed, accuracy and versatility.
 
 ClustalW is really everywhere...
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -922,7 +922,7 @@ ClustalW is still the most widely used Multiple Sequence Alignment package. Yet 
 
 MAFFT/MUSCLE to align big datasets
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you have many sequences to align MUSCLE or MAFFT are the obvious choice. MAFFT is often described as the fastest and the most efficient. This is not entirely true, in its fast mode (FFT-NS-1), MAFFT is similar to MUSCLE and although it is fairly accurate, about 5 points less accurate than the consistency-based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) MAFFT uses local alignments and consistency, however, it becomes much more accurate but also slower, and more sensitive to the number of sequences. More recently, we have seen growing the number of **(ultra) large scale** aligners such as Clustal Omega, PASTA, UPP, and we hope soon the large scale version of T-Coffee (called MEGA-Coffee).
+If you have many sequences to align MUSCLE or MAFFT are the obvious choice. MAFFT is often described as the fastest and the most efficient. This is not entirely true, in its fast mode (FFT-NS-1), MAFFT is similar to MUSCLE and although it is fairly accurate, about 5 points less accurate than the consistency based packages (ProbCons and T-Coffee). In its most accurate mode (L-INS-i) MAFFT uses local alignments and consistency, however, it becomes much more accurate but also slower, and more sensitive to the number of sequences. More recently, we have seen growing the number of **(ultra) large scale** aligners such as Clustal Omega, PASTA, UPP, and we hope soon the large scale version of T-Coffee (called MEGA-Coffee).
 
 **Suitable for**:
  - Distance-based phylogenetic reconstruction (NJ trees)
@@ -1039,8 +1039,7 @@ You may also have a bunch of alignments (with the same sequences) that you have 
   $: clustalw -infile=proteases_small.fasta -gapopen=-15 -outfile=g15.aln
 
   Combining multiple MSAs:
-  $$: t_coffee proteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output\
-  clustalw html
+  $$: t_coffee proteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output=clustalw,html
 
 Estimating the diversity in your alignment
 ------------------------------------------
@@ -1212,6 +1211,7 @@ Using the 8 methods predefined in M-Coffee can sometimes be a bit heavy, if you 
   $$: t_coffee proteases_small.fasta -method=t_coffee_msa,mafft_msa,probcons_msa, \
       muscle_msa -output=html
 
+
 Aligning profiles 
 =================
 Sometimes, it is better to prealign a subset of your sequences, and then to use this small alignment as a master for adding sequences (sequence to profile alignment) or even to align several profiles together if your protein family contains distantly related groups. T-Coffee contains most of the facilities available in ClustalW to deal with profiles, and the strategy we outline here can be used to deal with large datasets.
@@ -1247,7 +1247,7 @@ PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest.
 
 Using protein 2D/3D structural information 
 ==========================================
-Using structural information when aligning sequences is very useful. The reason is that structures diverge slower than sequences. As a consequence, one may still find a discernable homology between two sequences that have been diverging for a long time beyond recognition using their corresponding structure. Yet, when assembling a structure-based MSA, you will realize that these sequences contain key conserved residues that a simple alignment procedure was unable to reveal. We show you in this section how to make the best of T-Coffee tools to incorporate structural information in your alignment.
+Using structural information when aligning sequences is very useful. The reason is that structures diverge slower than sequences. As a consequence, one may still find a discernable homology between two sequences that have been diverging for a long time beyond recognition using their corresponding structure. Yet, when assembling a structure based MSA, you will realize that these sequences contain key conserved residues that a simple alignment procedure was unable to reveal. We show you in this section how to make the best of T-Coffee tools to incorporate structural information in your alignment.
 
 Using 3D structures: Expresso/3D-Coffee
 ---------------------------------------
@@ -1298,7 +1298,7 @@ Expresso needs BLAST so either you provide your own client with the tag **-blast
 
 .. warning:: If you are providing Expresso with your own structures, you have to specify the path in the template file or have them in your current working directory. 
 
-.. tip:: By default, structures fetch by Expresso are stored in your local ~/.t_coffee/cache/ allowing Expresso to run faster if you reuse similar structures. Don't forget to empty it from time to time, especially if you are using Expresso frequently otherwise your folder is just getting bigger and bigger (similar comment can be done for any template-based mode of T-Coffee).
+.. tip:: By default, structures fetch by Expresso are stored in your local ~/.t_coffee/cache/ allowing Expresso to run faster if you reuse similar structures. Don't forget to empty it from time to time, especially if you are using Expresso frequently otherwise your folder is just getting bigger and bigger (similar comment can be done for any template based mode of T-Coffee).
 
 Aligning sequences and structures
 ---------------------------------
@@ -1378,7 +1378,6 @@ If you have your own predictions, you can use them to run T-Coffee providing you
   >hmgl_wheat
   CCCCCCCCCCCCHHHHHHHCCCCCCCCCHHHHHHHHHHHHHHHCCCCHHHHHHHHHHHHHHHCE
 
-
 Output of the prediction
 ^^^^^^^^^^^^^^^^^^^^^^^^
 You can output a color coded version of your alignment using the secondary predicted structure or transmembrane regions predictions:
@@ -1392,17 +1391,41 @@ You can output a color coded version of your alignment using the secondary predi
   $$: t_coffee sample_aln.fasta -template_file PSITM -output tm_html
 
 
-Aligning RNA sequences (to be done...)
+Aligning RNA sequences 
 ======================
 RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, we have developped specific modes and tools for RNA alignment and analysis (see subsection **Manipulating RNA Sequences** for more details). If you are interested in RNA, have a look `there <http://www.bio.inf.uni-jena.de/Software/MARNA/>`_.
 
-R-Coffee
---------
-To be done...
+R-Coffee, many possibilities
+----------------------------
+Introduction
+^^^^^^^^^^^^
+R-Coffee is the special mode of T-Coffee developped to handle specifically RNA sequences. It has been proven far more accurate than T-Coffee default, because of its specific design. It can be run as a standalone aligner (using secondary structure prediction) or using third party software.
 
-RM-Coffee
----------
-To be done...
+R-Coffee: aligning RNA sequences
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+R-Coffee uses predicted secondary structures via the software RNApfold, in order to improve RNA alignments. Running R-Coffee by default is rather simple (command 1) but as for T-Coffee, you can also specify the methods you prefer (command 2):
+
+::
+
+  Command 1: R-Coffee default
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee
+ 
+  Command 2: R-Coffee selected methods
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair,slow_pair
+
+Improving R-Coffee
+^^^^^^^^^^^^^^^^^^
+There are two modes we proposed to improve R-Coffee alignments: 1) using the best method for RNA sequences (namely Consan), 2) combining many methods to achieve a better reliability (RM-Coffee).
+
+::
+
+  Using Consan (best):
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+  
+  Using multiple methods:
+  $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
+
+.. tip:: In order to know if a RNA MSA is better than another one, the best is to visualize the compensatory mutations of the secondary structure: have a look at the subsection **Manipulating RNA Sequence4s**.
 
 Using SARA-Coffee
 -----------------
@@ -1455,7 +1478,8 @@ SARA-Coffee is also distributed as a Docker container. This will allow you to ru
 
 .. Note:: this command assumes your input file is located in the working directory. If this is not the case, you will need to mount the input file path accordingly. 
 
-Aligning DNA sequences (to be done...)
+
+Aligning DNA sequences
 ======================
 Aligning DNA sequences
 ----------------------
@@ -1471,8 +1495,23 @@ The type declaration (or its automatic detection) triggers the use of the approp
 
   $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
 
-Aligning promoter regions: Pro-Coffee (under maintenance...)
+Aligning promoter regions: Pro-Coffee
 -------------------------------------
+Pro-Coffee is a MSA method specifically designed for promoter regions or other orthologous DNA regions containing functional elements (enchancers for instance). Pro-Coffee takes nearest-neighbour nucleotide correlations into account when aligning DNA sequence. For this it first translates sequences into a dinucleotide alphabet and then does the alignment using a specifically designed dinucleotide substitution matrix. This matrix was constructed from binding sites alignments from the Transfac database. A benchmark on multispecies ChIP-seq data shows that validated binding sites will be better aligned than when using off-the-shelf methods. To run Pro-Coffee is easy by defaults (command 1), however the user can change empirically all gap parameters in order to improve the MSA (command 2). By default, parameters were optimized on benchmarks (GOP=-60/GEP=-1) but as every dataset is different you may want to see for yourself. Once your alignment is done, you can always use reformatting options in order to extract the regions of interest (command 3).
+
+::
+
+  Command 1: Pro-Coffee default
+  $$: t_coffee –seq c18orf19.fa –mode procoffee
+
+  Command 2: Pro-Coffee parameters
+  t_coffee –seq c18orf19.fa -method promo_pair@EP@GOP@-60@GEP@-1
+
+  Command 3: Extracting regions
+  $$: tcoffee -other_pg seq_reformat -in c18orf19.aln -action extract_block \
+      ′ENSG00000177150′ 1852 1983 > c18orf19_chipseq.aln
+
+.. tip:: If you want more details, we suggest you follow the chapter **T-Coffee Tutorial (Practical Examples)** published in Natrue Protocols (2011).
 
 Splice variants
 ---------------
