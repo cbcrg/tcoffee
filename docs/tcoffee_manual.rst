@@ -1033,10 +1033,10 @@ You may also have a bunch of alignments (with the same sequences) that you have 
 ::
 
   Your 4 different MSAs:
-  clustalw -infile=proteases_small.fasta -gapopen=0 -outfile=g0.aln
-  clustalw -infile=proteases_small.fasta -gapopen=-5 -outfile=g5.aln
-  clustalw -infile=proteases_small.fasta -gapopen=-10 -outfile=g10.aln
-  clustalw -infile=proteases_small.fasta -gapopen=-15 -outfile=g15.aln
+  $: clustalw -infile=proteases_small.fasta -gapopen=0 -outfile=g0.aln
+  $: clustalw -infile=proteases_small.fasta -gapopen=-5 -outfile=g5.aln
+  $: clustalw -infile=proteases_small.fasta -gapopen=-10 -outfile=g10.aln
+  $: clustalw -infile=proteases_small.fasta -gapopen=-15 -outfile=g15.aln
 
   Combining multiple MSAs:
   $$: t_coffee proteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output\
@@ -1144,10 +1144,10 @@ To run MUSCLE you can try one of the following command; don't hesitate to MUSCLE
 ::
 
   Default mode:
-  muscle -in proteases_large.fasta > proteases_large.muscle
+  $: muscle -in proteases_large.fasta > proteases_large.muscle
   
   Fast mode (less accurate):
-  muscle -in proteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
+  $: muscle -in proteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
   > proteases_large.muscle
 
 Aligning (very) large datasets with MAFFT
@@ -1157,9 +1157,9 @@ MAFFT is can align large datasets by default however it is better to use the fas
 ::
   
   Default mode:
-  mafft input > output
+  $: mafft input > output
   Fast mode:
-  mafft --retree 2 input > output
+  $: mafft --retree 2 input > output
 
 Aligning (very) large alignments with T-Coffee
 ----------------------------------------------
@@ -1419,30 +1419,39 @@ Follow the procedure:
   2) Install or update vagrant from: http://www.vagrantup.com
 
   3) Clone the sara-coffee virtual machine (this project) in a convenient location
-     $ git clone https://github.com/cbcrg/sara-coffee-vm.git
+     $: git clone https://github.com/cbcrg/sara-coffee-vm.git
      
   4) Enter the sara-coffee-vm folder and launch vagrant
-     $ cd sara-coffee-vm/
-     $ vagrant up  
+     $: cd sara-coffee-vm/
+     $: vagrant up  
 
 The first time you run it, it will automatically download the virtual machine and all the packages required by SARA-Coffee. It may take some minutes to complete, so be patient. When it boots up and the configuration steps are terminated, login into the VM instance:
 
 ::
 
   1) Login in VM:
-     $ vagrant ssh
+     $: vagrant ssh
   
   2) Go to SARA-Coffee:
-     $ cd sara_coffee_package/
+     $: cd sara_coffee_package/
      
   3) Run SARA-Coffee:
-     $ ./sara_coffee.sh <input file> <output file>
+     $: ./sara_coffee.sh <input file> <output file>
      
 The folder '/vagrant/' is shared between the Sara-Coffee virtual and your local machine. On your local machine, this folder is the one in which you started vagrant (i.e. sara-coffee-vm). When finished, stop the VM using the command **vagrant halt** or **vagrant destroy**, depending if you want to temporary stop the execution or delete permanently the VM with all its files.   
 
 Docker image for SARA-Coffee
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-SARA-Coffee is also distributed as a Docker container. This will allow you to run it without having to install and configure each single dependency packages. If you have Docker installed simply pull the SARA-Coffee container by using the command **docker pull cbcrg/saracoffee**. To run SARA-Coffee use the following command line **docker run -v $PWD:$PWD -w $PWD cbcrg/saracoffee <input> <output>**
+SARA-Coffee is also distributed as a Docker container. This will allow you to run it without having to install and configure each single dependency packages. If you have Docker installed simply pull the SARA-Coffee container by using the command 1 and run SARA-Coffee using the command 2:
+
+::
+
+  Command 1: Pull SARA-Coffee container
+  $: docker pull cbcrg/saracoffee**.  
+  
+  Command 2: Run SARA-Coffee
+  $: docker run -v $PWD:$PWD -w $PWD cbcrg/saracoffee <input> <output>**
+
 
 .. Note:: this command assumes your input file is located in the working directory. If this is not the case, you will need to mount the input file path accordingly. 
 
@@ -1472,7 +1481,7 @@ Splice variants are especially challenging for most MSA programs, because the sp
 ::
 
   Command 1: using MUSCLE
-  muscle -in sv.fasta -clw -out sv_muscle.aln
+  $: muscle -in sv.fasta -clw -out sv_muscle.aln
   
   Command 2: using T-Coffee
   $$: t_coffee sv.fasta
