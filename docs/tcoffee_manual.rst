@@ -1394,8 +1394,57 @@ You can output a color coded version of your alignment using the secondary predi
 
 Aligning RNA sequences (to be done...)
 ======================
-RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, smart people have thought about this. If you are interested in RNA, have a look `there <http://www.bio.inf.uni-jena.de/Software/MARNA/>`_.
+RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, we have developped specific modes and tools for RNA alignment and analysis (see subsection **Manipulating RNA Sequences** for more details). If you are interested in RNA, have a look `there <http://www.bio.inf.uni-jena.de/Software/MARNA/>`_.
 
+R-Coffee
+--------
+To be done...
+
+RM-Coffee
+---------
+To be done...
+
+Using SARA-Coffee
+-----------------
+SARA-Coffee is a structure based multiple RNA aligner. This is a new algorithm that joins the pairwise RNA structure alignments performed by SARA with the multiple sequence T-Coffee framework. Since setting up the SARA-Coffee dependencies (T-Coffee, `SARA <http://structure.biofold.org/sara/>`_, `X3DNA <http://x3dna.org/>`_, `Numpy <http://www.numpy.org/>`_, `Biopython <http://biopython.org/>`_, Perl, Python 2.7) can be tricky we provide a self-contained Vagrant VM, which downloads and configures all the required pieces of software for you. 
+
+Installing SARA-Coffee VM
+^^^^^^^^^^^^^^^^^^^^^^^^^
+Follow the procedure:
+
+::
+
+  1) Install or update virtual box from https://www.virtualbox.org/wiki/Downloads
+
+  2) Install or update vagrant from: http://www.vagrantup.com
+
+  3) Clone the sara-coffee virtual machine (this project) in a convenient location
+     $ git clone https://github.com/cbcrg/sara-coffee-vm.git
+     
+  4) Enter the sara-coffee-vm folder and launch vagrant
+     $ cd sara-coffee-vm/
+     $ vagrant up  
+
+The first time you run it, it will automatically download the virtual machine and all the packages required by SARA-Coffee. It may take some minutes to complete, so be patient. When it boots up and the configuration steps are terminated, login into the VM instance:
+
+::
+
+  1) Login in VM:
+     $ vagrant ssh
+  
+  2) Go to SARA-Coffee:
+     $ cd sara_coffee_package/
+     
+  3) Run SARA-Coffee:
+     $ ./sara_coffee.sh <input file> <output file>
+     
+The folder '/vagrant/' is shared between the Sara-Coffee virtual and your local machine. On your local machine, this folder is the one in which you started vagrant (i.e. sara-coffee-vm). When finished, stop the VM using the command **vagrant halt** or **vagrant destroy**, depending if you want to temporary stop the execution or delete permanently the VM with all its files.   
+
+Docker image for SARA-Coffee
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SARA-Coffee is also distributed as a Docker container. This will allow you to run it without having to install and configure each single dependency packages. If you have Docker installed simply pull the SARA-Coffee container by using the command **docker pull cbcrg/saracoffee**. To run SARA-Coffee use the following command line **docker run -v $PWD:$PWD -w $PWD cbcrg/saracoffee <input> <output>**
+
+.. Note:: this command assumes your input file is located in the working directory. If this is not the case, you will need to mount the input file path accordingly. 
 
 Aligning DNA sequences (to be done...)
 ======================
