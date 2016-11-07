@@ -1,12 +1,12 @@
 ###########
 Quick Start
 ###########
-.. warning:: This chapter has been fully updated in 10/2016. All T-Coffee modes/tools should be valid for version 9.03 and above; it is not guaranteed for lower versions of T-Coffee.
+.. note:: This chapter has been fully updated in 11/2016. All T-Coffee modes/tools should be valid for version 9.03 and above; it is not guaranteed for lower versions of T-Coffee.
 
 ******************************
 Basic Command Lines (or modes)
 ******************************
-.. important:: This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. You can also use examples associated with their corresponding command lines from the section **T-Coffee Tutorial** published in Nature Protocols (2011). Refer to the section **T-Coffee Manual** for more technical details about T-Coffee usage and tools. If you use a specific mode or tools of T-Coffee, please use the corresponding citation for publication (see **References and Citations**), otherwise cite T-Coffee. 
+.. important:: This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. You can also use examples associated with their corresponding command lines from the subsection **Tutorial (practical examples)** published in Nature Protocols (2011). Refer to the section **T-Coffee Manual** for more technical details about T-Coffee usage and tools. If you use a specific mode or tools of T-Coffee, please use the corresponding citation for publication (see **References and Citations**), otherwise cite T-Coffee. 
 
 
 Protein sequences
@@ -127,28 +127,21 @@ This will output three files:
 
 M-Coffee
 --------
-M-Coffee is a meta version of T-Coffee that combines the output of eight aligners (MUSCLE, ProbCons, POA, DIALIGN-T, MAFFT, ClustalW, PCMA and T-Coffee); when installing T-Coffee, all required packages are automatically installed on your computer. To use M-Coffee, write your sequences in a file (format: Swiss-Prot, FASTA or PIR) and run the following command line:
+M-Coffee is a meta version of T-Coffee that combines the output of eight aligners (MUSCLE, ProbCons, POA, DIALIGN-T, MAFFT, ClustalW, PCMA and T-Coffee); when installing T-Coffee, all required packages are automatically installed on your computer. To use M-Coffee, write your sequences in a file (format: Swiss-Prot, FASTA or PIR) and run the following command 1. M-Coffee is a predefined combination of different types of aligners; there is a faster version called fm-Coffee (command 2) which combines the fastest aligners (Kalign, MUSCLE and MAFFT). Finally, the user can make its own combination of aligners included in T-Coffee by specifying the list of packages to be combined; here is an example of T-Coffee combining ClustalW, Kalign and ProbCons (command 3).
 
 ::
 
+  Command 1: running M-Coffee
   $$: t_coffee sample_seq1.fasta -mode mcoffee
 
-
-M-Coffee is a predefined combination of different types of aligners; there is a faster version called fm-Coffee which combines the fastest aligners (Kalign, MUSCLE and MAFFT):
-
-::
-
+  Command 2: running fm-Coffee
   $$: t_coffee sample_seq1.fasta -mode fmcoffee
 
-Also, the user can make its own combination of aligners included in T-Coffee by specifying the list of packages to be combined; here is an example of T-Coffee combining ClustalW, Kalign and ProbCons:
-
-::
-
+  Command 3: user defined multiple methodes
   $$: t_coffee sample_seq1.fasta -method clustalw_pair, kalign_pair, probcons_pair
   
   
 .. warning:: If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself...
-
 
 .. note:: Please cite: Wallace, I.M., O'Sullivan, O., Higgins, D.G., Notredame, C. **M-Coffee: combining multiple sequence alignment methods with T-Coffee**. Nucleic Acids Res., 34(6):1692-1699 (2006), PMID:16556910
 
@@ -162,7 +155,6 @@ The default installation of T-Coffee provides you with the EBI wublast.pl client
   $$: t_coffee sample_seq1.fasta -mode expresso
 
 
-
 If all the required structural packages for Expresso were not installed or if you want to select another structural aligner, you can select the structural package you want to use. For instance, if can use TM-align rather than SAP:
 
 ::
@@ -174,40 +166,34 @@ If all the required structural packages for Expresso were not installed or if yo
 
 R-Coffee
 --------
-R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures. The best results are obtained by using the Consan pairwise method. If you have Consan installed (under maintenance...), run:
+R-Coffee can be used to align RNA sequences, using their RNApfold predicted secondary structures (command 1). The best results are obtained by using the Consan pairwise method. If you have Consan installed (under maintenance...), you get access to one of the most accurate mode of R-Coffee (command 2). This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode (command 3) that will run MUSCLE, ProbCons4RNA and MAFFT and then use the secondary structures predicted by RNApfold. Finally, you can also select yourself which methods should be combined by R-Coffee (command 4).
 
 ::
 
+  Command 1: R-Coffee
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee
+  
+  Command 2: R-Coffee + Consan
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
 
-This will only work if your sequences are short enough (less than 200 nucleotides). A good alternative is the rmcoffee mode that will run MUSCLE, ProbCons4RNA and MAFFT and then use the secondary structures predicted by RNApfold:
-
-::
-
+  Command 3: RM-Coffee
   $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
 
-If you want to select yourself which methods should be combined by R-Coffee, run:
-
-::
-
+  Command 4: user defined R-Coffee
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee -method lalign_id_pair,slow_pair
 
 .. note:: Please cite: Wilm, A., Higgins, D.G., Notredame, C. **R-Coffee: a method for multiple alignment of non-coding RNA**. Nucleic Acids Res., 36(9):e52 (2008), PMID:18420654
 
 Pro-Coffee
 ----------
-Pro-Coffee is a particular mode of T-Coffee designed to align specific functional DNA sequences, in particular regulatory regions. To run Pro-Coffee by default, type:
+Pro-Coffee is a particular mode of T-Coffee designed to align specific functional DNA sequences, in particular regulatory regions. To run Pro-Coffee by default, just use command 1. In order to adjust the quality of the alignment, Pro-Coffee allows you to modify gap penalties (gap-opening and/or gap-extension) with specific flags (command 2).
 
 ::
 
+  Command 1: Pro-Coffee default
   $$: t_coffee sampe_dnaseq1.fasta -mode procoffee
-  
 
-In order to adjust the quality of the alignment, Pro-Coffee allows you to modify gap penalties (gap-opening and/or gap-extension) using the following command line:
-
-
-::
-
+  Command 2: Pro-Coffee with modified parameters
   $$: t_coffee sample_dnaseq1.fasta -method promo_pair@EP@GOP@-60@GEP@-1
 
 .. note:: Please cite: Erb, I., González-Vallinas, J.R., Bussotti, G., Blanco, E., Eyras, E., Notredame, C. **Use of ChIP-Seq data for the design of a multiple promoter-alignment method**. Nucleic Acids Res., 40(7):e52 (2012), PMID:22230796.
