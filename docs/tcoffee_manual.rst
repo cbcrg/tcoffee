@@ -1896,15 +1896,13 @@ Integrating External Methods In T-Coffee
 
 What are the methods already integrated in T-Coffee?
 ====================================================
-Although, it does not necessarily do so explicitly, T-Coffee always end up combining libraries. Libraries are collections of pairs of residues. Given a set of libraries, T-Coffee makes an attempt to assemble the alignment with the highest level of consistence. You can think of the alignment as a timetable. Each library pair would be a request from students or teachers, and the job of T-Coffee would be to assemble the time table that makes as many people as possible happy...
+Although, it does not necessarily do so explicitly, T-Coffee always end up combining libraries (collections of pairs of residues). Given a set of libraries, T-Coffee makes an attempt to assemble the alignment with the highest level of consistence. You can think of the alignment as a timetable, each library pair being a request from students or teachers, and the job of T-Coffee would be to assemble the time table that makes as many people as possible happy...In T-Coffee, methods replace the students/professors to generate constraints. These methods can be any standard/non standard alignment methods that can be used to generate alignments (pairwise, most of the time). These alignments can be viewed as collections of constraints that must be fit within the final alignment. Of course, the constraints do not have to agree with one another...
 
-In T-Coffee, methods replace the students/professors as constraints generators. These methods can be any standard/non standard alignment methods that can be used to generate alignments (pairwise, most of the time). These alignments can be viewed as collections of constraints that must be fit within the final alignment. Of course, the constraints do not have to agree with one another...
+This section shows you what are the available method in T-Coffee, and how you can add your own methods either through direct parameterization or via a perl script. There are two kinds of methods: the internal and the external. For the internal methods, you simply need to have T-Coffee up and running. The external methods are generally installed with T-Coffee (when using the installer), but if you have problems with some packages, refer to the **T-Coffee Installation** chapter.
 
-This section shows you what are the vailable method in T-Coffee, and how you can add your own methods, either through direct parameterization or via a perl script. There are two kinds of methods: the internal and the external. For the internal methods, you simply need to have T-Coffee up and running. The external methods will require you to install a package.
-
-List of INTERNAL methods
-------------------------
-Built in methods can be requested using the following names:
+List of INTERNAL methods (built-in)
+-----------------------------------
+INTERNAL methods can be requested using the following names:
 
 - **proba_pair**: adapted from ProbCons, this method (the current default) uses a pair HMM to compute a pairwise alignment with a biphasic gap penalty.
 
@@ -1924,13 +1922,13 @@ Built in methods can be requested using the following names:
 
 - **Matrix Amy**: matrix can be requested, simply indicate as a method the name of the matrix preceded with an X (i.e. Xpam250mt). If you indicate such a matrix, all the other methods will simply be ignored, and a standard fast progressive alignment will be computed. If you want to change the substitution matrix used by the methods, use the **-matrix** flag.
 
-- **cdna_fast_pair**: this method computes the pairwise alignment of two cDNA sequences. It is a fast_pair alignment that only takes into account the amino-acid similarity and uses different penalties for amino-acid insertions and frameshifts. This alignment is turned into a library where matched nucleotides receive a score equql to the average level of identity at the amino-acid level. This mode is intended to clean cDNA obtained from ESTs, or to align pseudo-genes. [UNSUPPORTED]
+- **cdna_fast_pair**: this method computes the pairwise alignment of two cDNA sequences. It is a fast_pair alignment that only takes into account the aminoacid similarity with different penalties for insertions and frameshifts. This alignment is turned into a library where matched nucleotides receive a score equal to the average level of identity at the aminoacid level. This mode is intended to clean cDNA obtained from ESTs or to align pseudo-genes. [UNSUPPORTED]
 
-List of EXTERNAL methods (plug-ins)
+List of EXTERNAL methods (plug-in)
 -----------------------------------
-The following methods are external. They correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. To have a complete list of the methods that can be used as plug-ins, just type **t_coffee** in a terminal, it will we displayed on your screen. Most of these methods can be used as either pairwise (**<method>_pair**) or multiple alignment methods (**<method>_msa**); note that all these methods use Blosum62 as a default. 
+EXTERNAL methods correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. To have a complete list of the methods that can be used as plug-ins, just type **t_coffee** in a terminal, it will we displayed on your screen. Most of these methods can be used as either pairwise (**<method>_pair**) or multiple alignment methods (**<method>_msa**); note that all these methods use Blosum62 as a default. 
 
-One package is a bit different; **fugue_pair** uses a standard fugue installation to make a sequence/structure alignment. Fugue installation must be standard, but it does not have to include all the fugue packages but only:
+One package is a bit different; **fugue_pair** uses a standard FUGUE installation to make a sequence/structure alignment. Installation must be standard but it does not have to include all the FUGUE packages but only:
 
 ::
 
@@ -1945,7 +1943,7 @@ One package is a bit different; **fugue_pair** uses a standard fugue installatio
 
 Modifying the parameters of internal and external Methods
 =========================================================
-Internal Methods
+INTERNAL Methods
 ----------------
 It is possible to modify on the fly the parameters of hard coded methods (**EP** stands for Extra parameters). These parameters will superseed any other parameters.
 
@@ -1954,12 +1952,11 @@ It is possible to modify on the fly the parameters of hard coded methods (**EP**
   $$: t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GEP@-1
 
 
-External methods
+EXTERNAL methods
 ----------------
 External methods receive a command line built with the information provided via the parameter file (see next heading). It is possible to produce such a parameter file and to modify it in order to modify the commands passed to the methods. The passed command is built as follows:
 
 ::
-
 
   $: <EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
 
@@ -1969,8 +1966,7 @@ You should know what is the best place for squizing your extra parameters. It wi
 
 ::
 
-  $$: t_coffee sample_seq1.fasta -method clustalw_msa@EP@PARAM2@-GAPOPEN%e100%s-\
- GAPEXT%e10
+  $$: t_coffee sample_seq1.fasta -method clustalw_msa@EP@PARAM2@-GAPOPEN%e100%s-GAPEXT%e10
   
   <@EP>: indicates that you will pass an extra parameter
   <@PARAM1>: is the name of this parameter
@@ -1978,47 +1974,37 @@ You should know what is the best place for squizing your extra parameters. It wi
   <%e>: replaces the equal sign
 
 
-Integrating external methods
+Integrating EXTERNAL methods
 ============================
 If the method you need is not already included in T-Coffee, you will need to integrate it yourself. We give you here some guidelines on how to do so.
 
-Direct access to external methods
+Direct access to EXTERNAL methods
 ---------------------------------
-A special method exists in T-Coffee that can be used to invoke any existing program:
+A special method exists in T-Coffee that can be used to invoke any existing program (command 1): in this context, Clustalw is a method that can be ran with the command 2. Here is just an example but ClustalW can be replaced with any method using a similar syntax. If the program you want to use cannot be run this way, you can either write a perl wrapper that fits the bill or write a tc_method file adapted to your program (cf. next section). This special method (**em** for external method) uses a particular syntax (command 3)
 
 ::
 
+  Command 1: T-Coffee using ClustalW
   $$: t_coffee sample_seq1.fasta -method=em@clustalw@pairwise
 
-In this context, Clustalw is a method that can be ran with the following command line:
+  Command 2: ClustalW command
+  $: method -infile=<infile> -outfile=<outfile>
+
+  Command 3: Syntax for EXTERNAL methods
+  $: em@<method>@<aln_mode:pairwises_pairwise|multiple>
 
 
-::
-
-  method -infile=<infile> -outfile=<outfile>
-
-
-Clustalw can be replaced with any method using a similar syntax. If the program you want to use cannot be run this way, you can either write a perl wrapper that fits the bill or write a tc_method file adapted to your program (cf next section). This special method (em, external method) uses the following syntax:
-
-::
-
-  em@<method>@<aln_mode:pairwises_pairwise|multiple>
-
-
-Customizing an external method (with parameters) for T-Coffee
+Customizing an EXTERNAL method (with parameters for T-Coffee)
 -------------------------------------------------------------
-T-Coffee can run external methods, using a tc_method file that can be used in place of an established method. Two such files are incorporated in T-Coffee. You can dump them and customize them according to your needs. For instance if you have ClustalW installed, you can use the following file to run the
+T-Coffee can run EXTERNAL method using a ``tc_method`` file that can be used in place of an established method. Two such files are incorporated in T-Coffee. You can dump them and customize them according to your needs. The first file is a very straightforward example on how to have t_coffee to run Clustalw with a set of parameters you may be interested in. Note that **ALN_MODE** instructs T_Coffee to run ClustalW on every pair of sequences
 
 ::
 
+  Box 1: 
+  1) Getting the configuration file:
   $$: t_coffee -other_pg unpack_clustalw_method.tc_method
 
-  $$: t_coffee -other_pg unpack_generic_method.tc_method
-
-The second file (generic_method.tc_method) contains many hints on how to customize your new method. The first file is a very straightforward example on how to have t_coffee to run Clustalw with a set of parameters you may be interested in:
-
-::
-
+  2) Format of the configuration:
   *TC_METHOD_FORMAT_01
 
   ***************clustalw_method.tc_method*********
@@ -2030,35 +2016,33 @@ The second file (generic_method.tc_method) contains many hints on how to customi
   PARAM -gapopen=-10
   SEQ_TYPE S
   *************************************************
+  
+  3) The configuration file will cause T-Coffee to emit the following system call:
+  $: clustalw -INFILE=tmpfile1 -OUTFILE=tmpfile2 -gapopen=-10
 
-
-This configuration file will cause T-Coffee to emit the following system call:
-
-::
-
-  clustalw -INFILE=tmpfile1 -OUTFILE=tmpfile2 -gapopen=-10
-
-
-Note that ALN_MODE instructs t_coffee to run clustalw on every pair of sequences (cf generic_method.tc_method for more details). The tc_method files are treated like any standard established method in T-Coffee. For instance, if the file clustalw_method.tc_method is in your current directory, run:
-
-::
-
+  4) Running ClustalW via T-Coffee (in your working DIR):
   $$: t_coffee sample_seq1.fasta -method clustalw_method.tc_method
+  
+The second file (``generic_method.tc_method``) contains many hints on how to customize your new method (box 2).  (cf. ``generic_method.tc_method`` for more details). The tc_method files are treated like any standard established method in T-Coffee.
+
+::
+ 
+  Box 2:
+  Using any generic method
+  $$: t_coffee -other_pg unpack_generic_method.tc_method
 
 Managing a collection of method files
 -------------------------------------
-It may be convenient to store all the method files in a single location on your system. By default, t_coffee will go looking into the directory ~/.t_coffee/methods/. You can change this by either modifying the METHODS_4_TCOFFEE in define_headers.h (and recompile) or by modifying the environement variable METHODS_4_TCOFFEE.
+It may be convenient to store all the method files in a single location on your system. By default, T-Coffee will go looking into the directory ~/.t_coffee/methods/. You can change this by either modifying the **METHODS_4_TCOFFEE** in ``define_headers.h`` (and recompile) or by modifying the environement variable **METHODS_4_TCOFFEE****.
 
 
 Advanced method integration
 ===========================
-It may sometimes be difficult to customize the program you want to use through a tc_method file. In that case, you may rather use an external perl_script to run your external application. This can easily be achieved using the generic_method.tc_method file.
-
+It may sometimes be difficult to customize the program you want to use through a ``tc_method file``. In that case, you may rather use an external perl_script to run your external application. This can easily be achieved using the ``generic_method.tc_method`` file.
 
 ::
 
   *TC_METHOD_FORMAT_01
-
   ***************generic_method.tc_method*********
   EXECUTABLE tc_generic_method.pl
   ALN_MODE pairwise
@@ -2088,7 +2072,6 @@ T-Coffee runs the script tc_generic_method.pl on your data. It also provides the
 
 
 .. note:: If there is a copy of that script in your local directory, that copy will be used in place of the internal copy of T-Coffee.
-
 
 The mother of all method files...
 ---------------------------------
@@ -2197,7 +2180,6 @@ The mother of all method files...
   * END *
   *******************************************************
 
-
 Weighting your method
 ---------------------
 By default, the alignment produced by your method will be weighted according to its percent identity. However, this can be customized via the WEIGHT parameter. The WEIGHT parameter supports all the values of the -weight flag. The only difference is that the -weight value thus declared will only be applied onto your method. If needed you can also modify on the fly the WEIGHT value of your method:
@@ -2219,33 +2201,20 @@ Will cause every pair of slow_pair to have a weight equal to 250
 
 Plug-out: using T-Coffee as a plug-in
 =====================================
-Just because it enjoys enslaving other methods as plug-ins, does not mean that T-Coffee does not enjoy being incorporated within other packages. We try to give as much support as possible to anyone who wishes to incorporate T-Coffee in an alignment pipeline. If you want to do so, please work out some way to incorporate T-Coffee in your script . If you need some help along the ways, do not hesitate to ask, as we will always be happy to either give assistance, or even modify the package so that it accomodates as many needs as possible. Once that procedure is over, set aside a couple of input files with the correct parameterisation and send them to us. These will be included as a distribution test, to insure that any further distribution remains compliant with your application. We currently support:
-
-::
-
-  Package Where From
-  ==============================================================
-  Marna  http://www.bio.inf.unijena.de/Software/MARNA/download
-  --------------------------------------------------------------
-
+Just because it enjoys enslaving other methods as plug-ins, does not mean that T-Coffee does not enjoy being incorporated within other packages. We try to give as much support as possible to anyone who wishes to incorporate T-Coffee in an alignment pipeline. If you want to do so, please work out some way to incorporate T-Coffee in your script . If you need some help along the ways, do not hesitate to ask, as we will always be happy to either give assistance, or even modify the package so that it accomodates as many needs as possible. Once that procedure is over, set aside a couple of input files with the correct parameterisation and send them to us. These will be included as a distribution test, to insure that any further distribution remains compliant with your application. We currently support `Marna  <http://www.bio.inf.unijena.de/Software/MARNA/download>`_.
 
 
 Creating your own T-Coffee libraries
 ====================================
 If the method you want to use is not integrated, or impossible to integrate, you can generate your own libraries, either directly or by turning existing alignments into libraries. You may also want to precompute your libraries, in order to combine them at your convenience.
 
-
-Using pre-computed alignments
+Using precomputed alignments
 -----------------------------
 If the method you wish to use is not supported, or if you simply have the alignments, the simplest thing to do is to generate yourself the pairwise/multiple alignments, in FASTA, ClustalW, msf or Pir format and feed them into t_coffee using the -in flag:
 
-
 ::
 
-  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -outfile=combined_aln.al\
- n
-
-
+  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -outfile=combined_aln.aln
 
 Customizing the weighting scheme
 --------------------------------
@@ -2260,46 +2229,26 @@ convert your aln into a lib, using the -weight flag:
 
 ::
 
-  $$: t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=s\
- im_pam250mt
+  $$: t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=sim_pam250mt
 
   $$: t_coffee -aln sample_aln1.aln -lib test_lib.tc_lib -outfile=outaln
 
-  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalig\
-  n_id_pair -outfile=out_aln
-
+  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalign_id_pair -outfile=out_aln
 
 
 Generating your own libraries
 -----------------------------
-This is suitable if you have local alignments, or very detailed information about your potential residue pairs, or if you want to use a very specific weighting scheme. You will need to generate your own libraries, using the format described in the last section.
-
-
-You may also want to pre-compute your libraries in order to save them for further use. For instance, in the following example, we generate the local and the global libraries and later re-use them for combination into a multiple alignment.
-
+This is suitable if you have local alignments, or very detailed information about your potential residue pairs, or if you want to use a very specific weighting scheme. You will need to generate your own libraries, using the format described in the last section. You may also want to pre-compute your libraries in order to save them for further use. For instance, in the following example, we generate the local and the global libraries and later re-use them for combination into a multiple alignment.
 
 ::
 
-  $$: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_li\
- b -lib_only
+  $$: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_lib -lib_only
 
   $$: t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib -lib_only
 
-
-
 Once these libraries have been computed, you can then combine them at your convenience in a single MSA. Of course you can decide to only use the local or the global library
-
 
 ::
 
   $$: t_coffee sample_seq1.fasta -lib lalign_id_pair_seq1.tc_lib, slow_pair_seq1\
  .tc_lib
-
-
-
-
-
-
-
-
-
