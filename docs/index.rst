@@ -15,7 +15,6 @@ Contents:
    tcoffee_quickstart
    tcoffee_manual
    tcoffee_technical_documentation
-   tcoffee_tutorials
 
    tcoffee_faq
    tcoffee_release_notes  
