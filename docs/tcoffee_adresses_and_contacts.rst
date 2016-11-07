@@ -50,5 +50,4 @@ Bug reports and feedback
 ********
 Adresses
 ********
-We are always very eager to get some user feedback. Please do not hesitate to drop us a line at cedric.notredame@europe.com. 
-The latest updates of T-Coffee are always available on our `website <http://www.tcoffee.org>`_. where you will also find links to all the online T-Coffee servers.
+The T-Coffee group is currently at the Centre for Genomic Regulation (CRG), programme of Bioinformatics and Genomics (BiG), in Barcelona (PRBB, 88 calle del Doctor Aiguader, 08003, Barcelona). We are always very eager to get some user feedback, so please do not hesitate to drop us a line at cedric.notredame@crg.eu. The latest updates of T-Coffee are always available on our `group webpage <http://www.tcoffee.org>`_ where you will also find links to all the online T-Coffee servers.
