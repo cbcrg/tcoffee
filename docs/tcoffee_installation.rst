@@ -1,7 +1,7 @@
 #####################
 T-Coffee Installation
 #####################
-.. note:: This chapter has been fully updated in 10/2016; installation of T-Coffee versions lower than version 9.03 may be deprecated.
+.. note:: This chapter has been fully updated in 11/2016; the installation of T-Coffee versions lower than version 9.03 may now be deprecated. Contact if you need to install an older version !
 
 ************
 Installation
@@ -12,7 +12,7 @@ This chapter describes the installation procedures relevant for a standard use o
 
 Third party packages/Dependencies
 =================================
-T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). All available versions on the server, starting from version 9.03) install on your computer all the third party packages and also setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
+T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). All available versions on the server (starting from version 9.03) install on your computer all the third party packages and setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
 Unix/Linux
 ==========
@@ -325,9 +325,8 @@ The T-RMSD tools comes along with T_Coffee package in order to build clustering 
 
 R-Coffee associated packages
 ============================
-R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure. R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee.
-
-  - Consan (***NOT COMPULSORY***) from `Eddy/Riva laboratory <http://eddylab.org/software/consan/>`_.    
+R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure. R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee:
+  - Consan from `Eddy/Riva laboratory <http://eddylab.org/software/consan/>`_.    
   - RNAplfold from the `Vienna package <http://www.tbi.univie.ac.at/RNA/>`_.
   - ProbConsRNA from `Stanford <http://probcons.stanford.edu/download.html>`_.
   
