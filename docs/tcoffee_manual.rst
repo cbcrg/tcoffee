@@ -1906,170 +1906,89 @@ List of INTERNAL methods
 ------------------------
 Built in methods can be requested using the following names:
 
-- proba_pair: adapted from ProbCons, this method (the current default) uses a pair HMM to compute a pairwise alignment with a biphasic gap penalty.
+- **proba_pair**: adapted from ProbCons, this method (the current default) uses a pair HMM to compute a pairwise alignment with a biphasic gap penalty.
 
-- fast_pair: makes a global fasta style pairwise alignment. For proteins: **matrix=blosum62mt, gep=-1, gop=-10, ktup=2**. For DNA, **matrix=idmat (id=10), gep=-1, gop=-20, ktup=5**. Each pair of residue is given a score function of the weighting mode defined by **-weight**.
+- **fast_pair**: makes a global fasta style pairwise alignment. For proteins: **matrix=blosum62mt, gep=-1, gop=-10, ktup=2**. For DNA, **matrix=idmat (id=10), gep=-1, gop=-20, ktup=5**. Each pair of residue is given a score function of the weighting mode defined by **-weight**.
 
-- slow_pair: identical to fast pair, but does a full dynamic programming, using the myers and miller algorithm. This method is recommended if your sequences are distantly related.
+- **slow_pair**: identical to fast pair, but does a full dynamic programming, using the myers and miller algorithm. This method is recommended if your sequences are distantly related.
 
-- ifast_pair: iterative fast_pair.
+- **ifast_pair**: iterative fast_pair.
 
-- islow_pair: makes a global fasta alignmnet using the previously computed pairs as a library. `i` stands for iterative. Each pair of residue is given a score function of the weighting mode defined by **-weight**. The library used for the computation is the one computed before the method is used. The result is therefore dependent on the order in methods and library are set via the **-in** flag.
+- **islow_pair**: makes a global fasta alignmnet using the previously computed pairs as a library. `i` stands for iterative. Each pair of residue is given a score function of the weighting mode defined by **-weight**. The library used for the computation is the one computed before the method is used. The result is therefore dependent on the order in methods and library are set via the **-in** flag.
 
-- align_pdb_pair: uses the **align_pdb** routine to align two structures. The pairwise scores are those returnes by the **align_pdb** program. If a structure is missing, fast_pair is used instead. Each pair of residue is given a score function defined by align_pdb. [UNSUPPORTED]
+- **align_pdb_pair**: uses the **align_pdb** routine to align two structures. The pairwise scores are those returnes by the **align_pdb** program. If a structure is missing, fast_pair is used instead. Each pair of residue is given a score function defined by align_pdb. [UNSUPPORTED]
 
-- lalign_id_pair: uses the ten top non intersecting local alignments, as delivered by lalign. Each alignement is weighted with its average percent identity.
+- **lalign_id_pair**: uses the ten top non intersecting local alignments, as delivered by lalign. Each alignement is weighted with its average percent identity.
 
-- lalign_rs_s_pair: Same as above but does also does self comparison and uses the lalign raw_score (s stands for self). This is needed when extracting repeats. [UNSUPPORTED]
+- **lalign_rs_s_pair**: Same as above but does also does self comparison and uses the lalign raw_score (s stands for self). This is needed when extracting repeats. [UNSUPPORTED]
 
-- Matrix Amy: matrix can be requested, simply indicate as a method the name of the matrix preceded with an X (i.e. Xpam250mt). If you indicate such a matrix, all the other methods will simply be ignored, and a standard fast progressive alignment will be computed. If you want to change the substitution matrix used by the methods, use the **-matrix** flag.
+- **Matrix Amy**: matrix can be requested, simply indicate as a method the name of the matrix preceded with an X (i.e. Xpam250mt). If you indicate such a matrix, all the other methods will simply be ignored, and a standard fast progressive alignment will be computed. If you want to change the substitution matrix used by the methods, use the **-matrix** flag.
 
-- cdna_fast_pair: this method computes the pairwise alignment of two cDNA sequences. It is a fast_pair alignment that only takes into account the amino-acid similarity and uses different penalties for amino-acid insertions and frameshifts. This alignment is turned into a library where matched nucleotides receive a score equql to the average level of identity at the amino-acid level. This mode is intended to clean cDNA obtained from ESTs, or to align pseudo-genes. [UNSUPPORTED]
+- **cdna_fast_pair**: this method computes the pairwise alignment of two cDNA sequences. It is a fast_pair alignment that only takes into account the amino-acid similarity and uses different penalties for amino-acid insertions and frameshifts. This alignment is turned into a library where matched nucleotides receive a score equql to the average level of identity at the amino-acid level. This mode is intended to clean cDNA obtained from ESTs, or to align pseudo-genes. [UNSUPPORTED]
 
 List of EXTERNAL methods (plug-ins)
 -----------------------------------
-The following methods are external. They correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. The following table lists the methods that can be used as plug-ins:
+The following methods are external. They correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. To have a complete list of the methods that can be used as plug-ins, just type **t_coffee** in a terminal, it will we displayed on your screen. Most of these methods can be used as either pairwise (**<method>_pair**) or multiple alignment methods (**<method>_msa**); note that all these methods use Blosum62 as a default. 
 
-
-::
-
-  Package Where From
-  =====================================================================
-  ClustalW can interact with t_coffee
-  ---------------------------------------------------------------------
-  POA  http://www.bioinformatics.ucla.edu/poa/
-  ---------------------------------------------------------------------
-  MUSCLE http://www.bioinformatics.ucla.edu/poa/
-  ---------------------------------------------------------------------
-  ProbCons http://probcons.stanford.edu/
-  ---------------------------------------------------------------------
-  MAFFT http://www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/
-  ---------------------------------------------------------------------
-  Dialign-T http://dialign-t.gobics.de/
-  ---------------------------------------------------------------------
-  PCMA ftp://iole.swmed.edu/pub/PCMA/
-  ---------------------------------------------------------------------
-  SAP obtained from W. Taylor, NIMR-MRC
-  ---------------------------------------------------------------------
-  BLAST  http://www.ncbi.nih.nlm.gov
-  ---------------------------------------------------------------------
-  Fugue http://www-cryst.bioc.cam.ac.uk/fugue/download.html
-  ---------------------------------------------------------------------
-
-Once installed, most of these methods can be used as either pairwise or multiple alignment methods. Note that all these methods use Blosum62 as a default. 
-clustalw_pair uses clustalw (default parameters) to align two sequences. Each pair of residue is given a score function of the weighting mode defined by -weight. 
-clustalw_msa makes a multiple alignment using ClustalW and adds it to the library. Each pair of residue is given a score function of the weighting mode defined by -weight.
-
-probcons_pair Probcons package: probcons.stanford.edu/.
-probcons_msa idem.
-
-muscle_pair Muscle package www.drive5.com/muscle/ .
-muscle_msa idem.
-
-mafft_pair www.biophys.kyoto-u.ac.jp/~katoh/programs/align/mafft/ .
-mafft_msa idem.
-
-pcma_msa pcma package
-pcma_pair pcma package
-
-poa_msa poa package
-poa_pair poa package
-
-dialignt_pair dialignt package
-dialignt_msa pcma package
-
-
-sap_pair uses SAP to align two structures. Each pair of residue is given a score function defined by sap. You must have sap installed on your system to use this method.
-
-fugue_pair uses a standard fugue installation to make a sequence /structure alignment. Fugue installation must be standard. It does not have to include all the fugue packages but only:
-
-1- joy, melody, fugueali, sstruc, hbond
-2-copy fugue/classdef.dat /data/fugue/SUBST/classdef.dat
-
-OR
-
-Setenv MELODY_CLASSDEF=<location>
-Setenv MELODY_SUBST=fugue/allmat.dat
-
-
-All the configuration files must be in the right location. To request a method, see the -in or the -method flag. For instance, if you wish to request the use of fast_pair and lalign_id_pair (the current default):
+One package is a bit different; **fugue_pair** uses a standard fugue installation to make a sequence/structure alignment. Fugue installation must be standard, but it does not have to include all the fugue packages but only:
 
 ::
 
-  $$: t_coffee -seq sample_seq1.fasta -method fast_pair,lalign_id_pair
+  Required packages:
+  1) joy, melody, fugueali, sstruc, hbond
+  2) copy fugue/classdef.dat /data/fugue/SUBST/classdef.dat
+
+  Configuration:
+  $: setenv MELODY_CLASSDEF=<location>
+  $: setenv MELODY_SUBST=fugue/allmat.dat
 
 
 Modifying the parameters of internal and external Methods
 =========================================================
 Internal Methods
 ----------------
-It is possible to modify on the fly the parameters of hard coded methods:
-
+It is possible to modify on the fly the parameters of hard coded methods (**EP** stands for Extra parameters). These parameters will superseed any other parameters.
 
 ::
 
-  $$: t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GE\
- P@-1
-
-
-
-EP stands for Extra parameters. These parameters will superseed any other parameters.
+  $$: t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GEP@-1
 
 
 External methods
 ----------------
-External methods receive a command line built with the information provided via the parameter file (see next heading). It is possible to produce such a parameter file and to modify it in order to modify the commands passed to the methods.
+External methods receive a command line built with the information provided via the parameter file (see next heading). It is possible to produce such a parameter file and to modify it in order to modify the commands passed to the methods. The passed command is built as follows:
+
+::
 
 
-The passed command is built as follows:
+  $: <EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
 
 
-<EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
-
-
-You should know what is the best place for squizing your extra parameters. It will depend on the application, although PARAM2 is usually a good guess. Now if you want, for instance to modify the gap penalty of clustalw, you can try the following:
+You should know what is the best place for squizing your extra parameters. It will depend on the application, although PARAM2 is usually a good guess. Now if you want, for instance to modify the gap penalty of clustalw, you can try the following (of course, you must know the command line of the program you are trying to modify (clustalw in this case):
 
 
 ::
 
   $$: t_coffee sample_seq1.fasta -method clustalw_msa@EP@PARAM2@-GAPOPEN%e100%s-\
  GAPEXT%e10
-
-
-
-@EP is here to indicate that you will pass an extra parameter
-
-
-@PARAM1 is the name of this parameter
-
-
-the next filed is the parameter itself, where:
-
-
-%s replace spaces
-
-
-%e replaces the equal sign
-
-
-Of course, you must know the command line of the program you are trying to modify (clustalw in this case).
+  
+  <@EP>: indicates that you will pass an extra parameter
+  <@PARAM1>: is the name of this parameter
+  <%s>: replaces spaces
+  <%e>: replaces the equal sign
 
 
 Integrating external methods
 ============================
 If the method you need is not already included in T-Coffee, you will need to integrate it yourself. We give you here some guidelines on how to do so.
 
-
 Direct access to external methods
 ---------------------------------
 A special method exists in T-Coffee that can be used to invoke any existing program:
 
-
 ::
 
   $$: t_coffee sample_seq1.fasta -method=em@clustalw@pairwise
-
-
 
 In this context, Clustalw is a method that can be ran with the following command line:
 
@@ -2079,26 +1998,16 @@ In this context, Clustalw is a method that can be ran with the following command
   method -infile=<infile> -outfile=<outfile>
 
 
-
-Clustalw can be replaced with any method using a similar syntax. If the program you want to use cannot be run this way, you can either write a perl wrapper that fits the bill or write a tc_method file adapted to your program (cf next section).
-
-
-This special method (em, external method) uses the following syntax:
-
+Clustalw can be replaced with any method using a similar syntax. If the program you want to use cannot be run this way, you can either write a perl wrapper that fits the bill or write a tc_method file adapted to your program (cf next section). This special method (em, external method) uses the following syntax:
 
 ::
 
   em@<method>@<aln_mode:pairwises_pairwise|multiple>
 
 
-
 Customizing an external method (with parameters) for T-Coffee
 -------------------------------------------------------------
-T-Coffee can run external methods, using a tc_method file that can be used in place of an established method. Two such files are incorporated in T-Coffee. You can dump them and customize them according to your needs:
-
-
-For instance if you have ClustalW installed, you can use the following file to run the
-
+T-Coffee can run external methods, using a tc_method file that can be used in place of an established method. Two such files are incorporated in T-Coffee. You can dump them and customize them according to your needs. For instance if you have ClustalW installed, you can use the following file to run the
 
 ::
 
@@ -2106,10 +2015,7 @@ For instance if you have ClustalW installed, you can use the following file to r
 
   $$: t_coffee -other_pg unpack_generic_method.tc_method
 
-
-
 The second file (generic_method.tc_method) contains many hints on how to customize your new method. The first file is a very straightforward example on how to have t_coffee to run Clustalw with a set of parameters you may be interested in:
-
 
 ::
 
@@ -2126,23 +2032,18 @@ The second file (generic_method.tc_method) contains many hints on how to customi
   *************************************************
 
 
-
 This configuration file will cause T-Coffee to emit the following system call:
-
 
 ::
 
   clustalw -INFILE=tmpfile1 -OUTFILE=tmpfile2 -gapopen=-10
 
 
-
 Note that ALN_MODE instructs t_coffee to run clustalw on every pair of sequences (cf generic_method.tc_method for more details). The tc_method files are treated like any standard established method in T-Coffee. For instance, if the file clustalw_method.tc_method is in your current directory, run:
-
 
 ::
 
   $$: t_coffee sample_seq1.fasta -method clustalw_method.tc_method
-
 
 Managing a collection of method files
 -------------------------------------
