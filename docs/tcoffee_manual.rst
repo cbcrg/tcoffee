@@ -1894,6 +1894,7 @@ Integrating External Methods In T-Coffee
 ****************************************
 .. note:: The real power of T-Coffee is its ability to seamlessly combine many methods into one. While we try to integrate as many methods as we can in the default distribution, we do not have the means to be exhaustive and if you desperately need your favorite method to be integrated, you will need to bite the bullet ...
 
+
 What are the methods already integrated in T-Coffee?
 ====================================================
 Although, it does not necessarily do so explicitly, T-Coffee always end up combining libraries (collections of pairs of residues). Given a set of libraries, T-Coffee makes an attempt to assemble the alignment with the highest level of consistence. You can think of the alignment as a timetable, each library pair being a request from students or teachers, and the job of T-Coffee would be to assemble the time table that makes as many people as possible happy...In T-Coffee, methods replace the students/professors to generate constraints. These methods can be any standard/non standard alignment methods that can be used to generate alignments (pairwise, most of the time). These alignments can be viewed as collections of constraints that must be fit within the final alignment. Of course, the constraints do not have to agree with one another...
@@ -1941,7 +1942,7 @@ One package is a bit different; **fugue_pair** uses a standard FUGUE installatio
   $: setenv MELODY_SUBST=fugue/allmat.dat
 
 
-Modifying the parameters of internal and external Methods
+Modifying the parameters of INTERNAL and EXTERNAL Methods
 =========================================================
 INTERNAL Methods
 ----------------
@@ -1961,7 +1962,7 @@ External methods receive a command line built with the information provided via 
   $: <EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
 
 
-You should know what is the best place for squizing your extra parameters. It will depend on the application, although PARAM2 is usually a good guess. Now if you want, for instance to modify the gap penalty of clustalw, you can try the following (of course, you must know the command line of the program you are trying to modify (clustalw in this case):
+You should know what is the best place for squizing your extra parameters. It will depend on the application, although PARAM2 is usually a good guess. Now if you want, for instance to modify the gap penalty of clustalw, you can try the following (of course, you must know the command line of the program you are trying to modify (ClustalW in this case):
 
 
 ::
@@ -1978,9 +1979,9 @@ Integrating EXTERNAL methods
 ============================
 If the method you need is not already included in T-Coffee, you will need to integrate it yourself. We give you here some guidelines on how to do so.
 
-Direct access to EXTERNAL methods
----------------------------------
-A special method exists in T-Coffee that can be used to invoke any existing program (command 1): in this context, Clustalw is a method that can be ran with the command 2. Here is just an example but ClustalW can be replaced with any method using a similar syntax. If the program you want to use cannot be run this way, you can either write a perl wrapper that fits the bill or write a tc_method file adapted to your program (cf. next section). This special method (**em** for external method) uses a particular syntax (command 3)
+Accessing EXTERNAL methods
+--------------------------
+A special method exists in T-Coffee that can be used to invoke any existing program (command 1): for instance, ClustalwWis a method that can be ran with the command 2. Here is just an example but ClustalW can be replaced with any method using a similar syntax. If the program you want to use cannot be run this way, you can either write a perl wrapper that fits the bill or write a ``tc_method`` file adapted to your program (cf. next section). This special method (**em** for external method) uses a particular syntax (command 3).
 
 ::
 
@@ -1993,18 +1994,16 @@ A special method exists in T-Coffee that can be used to invoke any existing prog
   Command 3: Syntax for EXTERNAL methods
   $: em@<method>@<aln_mode:pairwises_pairwise|multiple>
 
-
 Customizing an EXTERNAL method (with parameters for T-Coffee)
 -------------------------------------------------------------
-T-Coffee can run EXTERNAL method using a ``tc_method`` file that can be used in place of an established method. Two such files are incorporated in T-Coffee. You can dump them and customize them according to your needs. The first file is a very straightforward example on how to have t_coffee to run Clustalw with a set of parameters you may be interested in. Note that **ALN_MODE** instructs T_Coffee to run ClustalW on every pair of sequences
+T-Coffee can run EXTERNAL method using a ``tc_method`` file that can be used in place of an established method. Two such files are incorporated in T-Coffee (``clustalw_method.tc_method`` and ``generic_method.tc_method``). You can dump them and customize them according to your needs. The first file is a very straightforward example on how to run Clustalw via T-Coffee with a set of parameters you may be interested in. Note that **ALN_MODE** instructs T_Coffee to run ClustalW on every pair of sequences. The second file is detailed in the next section.
 
 ::
 
-  Box 1: 
   1) Getting the configuration file:
   $$: t_coffee -other_pg unpack_clustalw_method.tc_method
 
-  2) Format of the configuration:
+  2) Format of the configuration file:
   *TC_METHOD_FORMAT_01
 
   ***************clustalw_method.tc_method*********
@@ -2023,13 +2022,6 @@ T-Coffee can run EXTERNAL method using a ``tc_method`` file that can be used in 
   4) Running ClustalW via T-Coffee (in your working DIR):
   $$: t_coffee sample_seq1.fasta -method clustalw_method.tc_method
   
-The second file (``generic_method.tc_method``) contains many hints on how to customize your new method (box 2).  (cf. ``generic_method.tc_method`` for more details). The tc_method files are treated like any standard established method in T-Coffee.
-
-::
- 
-  Box 2:
-  Using any generic method
-  $$: t_coffee -other_pg unpack_generic_method.tc_method
 
 Managing a collection of method files
 -------------------------------------
@@ -2037,11 +2029,15 @@ It may be convenient to store all the method files in a single location on your 
 
 
 Advanced method integration
-===========================
-It may sometimes be difficult to customize the program you want to use through a ``tc_method file``. In that case, you may rather use an external perl_script to run your external application. This can easily be achieved using the ``generic_method.tc_method`` file.
+---------------------------
+It may sometimes be difficult to customize the program you want to use through a ``tc_method file``. In that case, you may rather use an external perl_script to run your external application. This can easily be achieved using the ``generic_method.tc_method`` file which contains many hints on how to customize your new method. The ``tc_method`` files are treated like any standard established method in T-Coffee.
 
 ::
+ 
+  1) Using any generic method
+  $$: t_coffee -other_pg unpack_generic_method.tc_method
 
+  2) Format of the configuration file:
   *TC_METHOD_FORMAT_01
   ***************generic_method.tc_method*********
   EXECUTABLE tc_generic_method.pl
@@ -2055,26 +2051,19 @@ It may sometimes be difficult to customize the program you want to use through a
   *************************************************
   * Note: &amp;bsnp can be used to for white spaces
 
-When you run this method:
-
-
-::
-
-  $$: t_coffee -other_pg unpack_generic_method.tc_method
+  3) Run the method: 
   $$: t_coffee sample_seq1.fasta -method generic_method.tc_method
 
 
-T-Coffee runs the script tc_generic_method.pl on your data. It also provides the script with parameters. In this case -method clustalw indicates that the script should run clustalw on your data. The script tc_generic_method.pl is incorporated in t_coffee. Over the time, this script will be the place where novel methods will be integrated. It will be used to run the script tc_generic_method.pl. The file tc_generic_method.pl is a perl file, automatically generated by t_coffee. Over the time this file will make it possible to run all available methods. You can dump the script using the following command:
-
-::
-
-  $$: t_coffee -other_pg=unpack_tc_generic_method.pl
-
+T-Coffee runs the script tc_generic_method.pl on your data. It also provides the script with parameters. In the case **-method clustalw** indicates that the script should run ClustalW on your data. Over the time, this script will be the place where novel methods will be integrated and make it possible to run any available method. It will be used to run the script **tc_generic_method.pl**, a perl script automatically generated by T-Coffee. Over the time this file will 
 
 .. note:: If there is a copy of that script in your local directory, that copy will be used in place of the internal copy of T-Coffee.
 
+
 The mother of all method files...
 ---------------------------------
+Here is the mother of all configuration file for T-Coffee: 
+
 ::
 
   *TC_METHOD_FORMAT_01
@@ -2182,21 +2171,15 @@ The mother of all method files...
 
 Weighting your method
 ---------------------
-By default, the alignment produced by your method will be weighted according to its percent identity. However, this can be customized via the WEIGHT parameter. The WEIGHT parameter supports all the values of the -weight flag. The only difference is that the -weight value thus declared will only be applied onto your method. If needed you can also modify on the fly the WEIGHT value of your method:
+By default, the alignment produced by your method will be weighted according to its percent identity. However, this can be customized via the **WEIGHT** parameter, which supports all the values of the **-weight** flag. The only difference is that the **-weight** value thus declared will only be applied onto your method. If needed you can also modify on the fly the WEIGHT value of your method:
 
 ::
 
+  Overweight by a factor 2 the weight of slow_pair:
   $$: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@OW2
-  
-
-Will overweight by a factor 2 the weight of slow_pair.
-
-::
-
+ 
+  Causeevery pair of slow_pair to have a weight equal to 250:
   $$: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@250
-
-
-Will cause every pair of slow_pair to have a weight equal to 250
 
 
 Plug-out: using T-Coffee as a plug-in
@@ -2206,7 +2189,7 @@ Just because it enjoys enslaving other methods as plug-ins, does not mean that T
 
 Creating your own T-Coffee libraries
 ====================================
-If the method you want to use is not integrated, or impossible to integrate, you can generate your own libraries, either directly or by turning existing alignments into libraries. You may also want to precompute your libraries, in order to combine them at your convenience.
+If the method you want to use is not integrated or impossible to integrate, you can generate your own libraries, either directly or by turning existing alignments into libraries. You may also want to precompute your libraries, in order to combine them at your convenience.
 
 Using precomputed alignments
 -----------------------------
