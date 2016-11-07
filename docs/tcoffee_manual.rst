@@ -113,7 +113,7 @@ Each of these constraints comes with a weight and in the end, the T-Coffee algor
 
 
 *******************************************************
-Preparing Your Data: Reformatting, Trimming and More... 
+Preparing Your Data: Reformatting, Trimming And More... 
 *******************************************************
 .. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual. When multiple input files are given, flags are mandatory (**-in/-in2**, **-al1/-al2**, etc...). Usually, options are indicated via the symbol "=" (i.e **-output=html**) but it is not mandatory, it's just recommended. If you use a correct/strict flag usage, T-Coffee will always work fine, but you have some degrees of freedom ;-).
 
@@ -1796,7 +1796,7 @@ You simply need to cut and paste this library in a file and use this file as a l
 
 
 ******************************
-Downstream Analysis using MSAs
+Downstream Analysis Using MSAs
 ******************************
 
 Trees/Clustering based on protein 3D structures
@@ -1889,9 +1889,9 @@ Under maintenance...
 
 
 
-****************************************
-Integrating External Methods In T-Coffee
-****************************************
+*************************************
+INTERNAL/EXTERNAL Methods In T-Coffee
+*************************************
 .. note:: The real power of T-Coffee is its ability to seamlessly combine many methods into one. While we try to integrate as many methods as we can in the default distribution, we do not have the means to be exhaustive and if you desperately need your favorite method to be integrated, you will need to bite the bullet ...
 
 
