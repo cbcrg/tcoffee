@@ -1,6 +1,6 @@
-####################################
-Contacts, Adresses and Contributions
-####################################
+##################################
+Contacts, Adresses & Contributions
+##################################
 
 **********
 Contact us
@@ -14,26 +14,26 @@ Adresses
 The T-Coffee group is currently at the Centre for Genomic Regulation (CRG), programme of Bioinformatics and Genomics (BiG), in Barcelona (PRBB, 88 calle del Doctor Aiguader, 08003, Barcelona). We are always very eager to get some user feedback, so please do not hesitate to drop us a line at cedric.notredame@crg.eu. The latest updates of T-Coffee are always available on our `group webpage <http://www.tcoffee.org>`_ where you will also find links to all the online T-Coffee servers.
 
 
-******************
-Main contributions
-******************
+*************
+Contributions
+*************
+Main Contributions
+==================
 T-coffee is developed, maintained, monitored, used and debugged by a dedicated team that include or have included:
 
 
 Cedric Notredame, Paolo di Tommaso, Jean-François Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, 
 Orla O'Sullivan, Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm, Vladimir Keduas.
 
-
-*******************
 Other Contributions
-*******************
+===================
 We do not mean to steal code, but we will always try to re-use pre-existing code whenever that code exists, free of copyright, 
 just like we expect people to do with our code. However, whenever this happens, we make a point at properly citing the source 
 of the original contribution. If ever you recognize a piece of your code improperly cited, please drop us a note and we will be 
 happy to correct that.
 
 Softwares
-=========
+---------
 In the mean time, here are some important pieces of code from other packages that have been incorporated within the T-Coffee 
 package. These include:
 
@@ -48,10 +48,12 @@ package. These include:
 An enormous thanks to these people who believe in free open source code.
 
 Bug reports and feedback
-========================
+------------------------
  - Prof David Jones (UCL) reported and corrected the PDB1K bug (now t_coffee/sap can align PDB sequences longer than 1000 AA).
 
  - Johan Leckner reported several bugs related to the treatment of PDB structures, insuring a consistent behavior between version 1.37 and current ones.
  
  - Enrico Bonatesta reported several mistakes in the T-Coffee tutorial and provided feedbacks about its readibility.
+ 
+ - ...and to everyone else who send us their feedbacks and suggestions helping us to improve T-Coffee.
  
