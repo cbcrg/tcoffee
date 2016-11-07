@@ -272,9 +272,9 @@ The program then outputs a series of files:
 .. note:: Please cite: Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. **T-RMSD: a fine-grained, structure based classification method and its application to the functional characterization of TNF receptors**. J. Mol. Biol., 400(3):605-617 (2010), PMID:20471393 and/or Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. **An improved understanding of TNFL/TNFR interactions using structure-based classifications**. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
 
 
-**************************************
-T-Coffee Tutorial (Practical Examples)
-**************************************
+*****************************
+Tutorial (Practical Examples)
+*****************************
 
 .. note:: This documentation is merely a cheat-sheet that recapitulates the material and the command lines associated with the manual. This tutorial itself is adpated from the `T-Coffee Nature Protocols Article <http://www.nature.com/nprot/journal/v6/n11/full/nprot.2011.393.html>`_ that can be followed step by step on the following `website <http://www.tcoffee.org/Projects/tcoffee/workshops/tcoffeetutorials/index.html>`_ 
 
