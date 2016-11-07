@@ -1,11 +1,18 @@
 ####################################
-Adresses, Contacts and Contributions
+Contacts, Adresses and Contributions
 ####################################
 
 **********
 Contact us
 **********
 If you have any problem, question, suggestion or else, contact Cedric Notredame by mail at cedric.notredame@crg.eu or at the T-Coffee group tcoffee@googlegroups.com.
+
+
+********
+Adresses
+********
+The T-Coffee group is currently at the Centre for Genomic Regulation (CRG), programme of Bioinformatics and Genomics (BiG), in Barcelona (PRBB, 88 calle del Doctor Aiguader, 08003, Barcelona). We are always very eager to get some user feedback, so please do not hesitate to drop us a line at cedric.notredame@crg.eu. The latest updates of T-Coffee are always available on our `group webpage <http://www.tcoffee.org>`_ where you will also find links to all the online T-Coffee servers.
+
 
 ******************
 Main contributions
@@ -15,6 +22,7 @@ T-coffee is developed, maintained, monitored, used and debugged by a dedicated t
 
 Cedric Notredame, Paolo di Tommaso, Jean-François Taly, Cedrik Magis, Fabrice Armougom, Des Higgins, Sebastien Moretti, 
 Orla O'Sullivan, Eamon O'Toole, Olivier Poirot, Karsten Suhre, Iain Wallace, Andreas Wilm, Vladimir Keduas.
+
 
 *******************
 Other Contributions
@@ -47,7 +55,3 @@ Bug reports and feedback
  
  - Enrico Bonatesta reported several mistakes in the T-Coffee tutorial and provided feedbacks about its readibility.
  
-********
-Adresses
-********
-The T-Coffee group is currently at the Centre for Genomic Regulation (CRG), programme of Bioinformatics and Genomics (BiG), in Barcelona (PRBB, 88 calle del Doctor Aiguader, 08003, Barcelona). We are always very eager to get some user feedback, so please do not hesitate to drop us a line at cedric.notredame@crg.eu. The latest updates of T-Coffee are always available on our `group webpage <http://www.tcoffee.org>`_ where you will also find links to all the online T-Coffee servers.
