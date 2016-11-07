@@ -1,18 +1,18 @@
 #####################
 T-Coffee Installation
 #####################
-.. warning:: This chapter has been fully updated in 10/2016; installation of T-Coffee versions lower than version 9.03 may be deprecated.
+.. note:: This chapter has been fully updated in 10/2016; installation of T-Coffee versions lower than version 9.03 may be deprecated.
 
 ************
 Installation
 ************
 This chapter describes the installation procedures relevant for a standard use of T-Coffee on the most common operative systems: Unix/Linux and Mac OS. T-Coffee cannot be installed on any Windows version without using a Unix-like environment (i.e. Cygwin) or a Linux virtualbox. The procedure is quite easy, so don't hesitate to contact us if you have any problem.
 
-.. Note:: We now recommend that you use the automated installer provided on the T-Coffee `webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_, just click on **Download**. Several options are possible: 1) the **latest stable version** (**recommended**), 2) the **latest beta version** (still under testing), 3) our archives and **older versions** (deprecated, in that case the current installation procedure won't work).Then you will just have to download the T-Coffee installer corresponding to your operative system and then **follow the corresponding procedure**.
+.. Note:: We now recommend that you use the automated installer provided on the T-Coffee `webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_, just click on **Download**. Several options are possible: 1) the **latest stable version** (**recommended**), 2) the **latest beta version** (still under testing), 3) our archives and **older versions** (deprecated, in that case the current installation procedure won't work...but it's in case you need to reproduce old results). Then you will just have to download the T-Coffee installer corresponding to your operative system and then **follow the corresponding procedure**.
 
 Third party packages/Dependencies
 =================================
-T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). Since version 7.56, T-Coffee install on your computer all the third party packages and also setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
+T-Coffee is a complex package that interacts with many other third party software and/or servers (such as BLAST, see next section). All available versions on the server, starting from version 9.03) install on your computer all the third party packages and also setup the variables required for the different T-Coffee options to run correctly. Whenever the automated installation fails because of unforeseen system specificities, **don't hesitate to contact us**. If the installation was successfull with the exception of some packages, users should install the third party package manually. This documentation gives some tips we have found useful, but users are encouraged to send their feedbacks and share their experiences in order to improve this documentation.
 
 Unix/Linux
 ==========
@@ -24,17 +24,17 @@ You need to have gcc, g77, CPAN, an internet connection and the root password. Y
      http://tcoffee.org/Packages/Stable/Latest/linux/
 
   2. Grant execution permission to the downloaded file with the following command:
-     chmod +x T-COFFEE_installer_"version_x".bin
+     $: chmod +x T-COFFEE_installer_"version_x".bin
 
   3. Launch the installation wizard with
-     ./T-COFFEE_installer_"version_x".bin
+     $: ./T-COFFEE_installer_"version_x".bin
 
   4. Follow the wizard instructions and complete the installation
   
   5. Open a new terminal session to be sure that your environment is updated
   
   6. Type the following command to verify the installation was successful:
-     t_coffee -version
+     $$: t_coffee -version
  
 
 Mac OS X
@@ -57,7 +57,7 @@ Make sure you have the developer's kit installed (compilers and makefile) and pr
   5. Open a new terminal session to be sure that your environment is updated
   
   6. Type the following command to verify the installation was successful:
-     t_coffee -version
+     $$: t_coffee -version
 
 
 Windows (Cygwin)
@@ -87,8 +87,8 @@ In order to run, T-Coffee must have a value for the http_proxy and for the e-mai
 ::
 
   1. Export the following values:
-     export http_proxy_4_TCOFFEE='proxy' (or '' if no proxy)
-     export EMAIL_4_TCOFFEE='your email'
+     $: export http_proxy_4_TCOFFEE='proxy' (or '' if no proxy)
+     $: export EMAIL_4_TCOFFEE='your email'
      
   2. Modify the file ~/.t_coffee/t_coffee_env
   
@@ -101,14 +101,14 @@ T-Coffee compilation requires the following tools installed on your system **mak
 
 ::
 
-  git clone git@github.com:cbcrg/tcoffee.git tcoffee
+  $: git clone git@github.com:cbcrg/tcoffee.git tcoffee
       
 Make sure you have installed the required dependencies listed above. When done, move in the project root folder named **tcoffee** and enter the following commands:     
 
 ::
 
-  cd compile
-  make t_coffee
+  $: cd compile
+  $: make t_coffee
     
 The binary will be automatically copied to the path specified by the environment variable **$USER_BIN** (check that it exists before run the make command).
 
@@ -159,11 +159,11 @@ You may have your own client (lucky you). If that is so, all you need is to make
 
 ::
 
-  foo.pl -p <method> -d <db> -i <infile> -o <outfile> -m 7
+  $: foo.pl -p <method> -d <db> -i <infile> -o <outfile> -m 7
 
-  - "method"  : can either be blastp or psiblast
-  - "infile"  : is a FASTA file
-  - "-m 7"    : triggers the XML output, T-Coffee parses both the EBI XML and the NCBI XML outputs
+  "method"  : can either be blastp or psiblast
+  "infile"  : is a FASTA file
+  "-m 7"    : triggers the XML output, T-Coffee parses both the EBI XML and the NCBI XML outputs
 
 .. tip:: If foo.pl behaves differently, the easiest will probably be to write a wrapper around it so that wrapped_foo.pl behaves like BLASTPGP.
 
@@ -287,17 +287,17 @@ M-Coffee is a special mode of T-Coffee that makes it possible to combine the out
 ::
 
   Command 1: set the environment variable
-  setenv PLUGINS_4_TCOFFEE=<plugins dir>
+  $: setenv PLUGINS_4_TCOFFEE=<plugins dir>
   
   Command 2: specify the directory
-  export PLUGINS_4_TCOFFEE=<dir>
+  $: export PLUGINS_4_TCOFFEE=<dir>
   
   Command 3:
-  POA_4_TCOFFEE CLUSTALW_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOFFEE \
+  $: POA_4_TCOFFEE CLUSTALW_4_TCOFFEE TCOFFEE_4_TCOFFEE MAFFT_4_TCOFFEE \
   MUSCLE_4_TCOFFEE DIALIGNT_4_TCOFFEE PRANK_4_TCOFFEE DIALIGNTX_4_TCOFFEE
   
   Command 4:
-  setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
+  $: setenv MCOFFEE_4_TCOFFEE <directory containing mcoffee files>
   
  
 To be able to run M-Coffee, these following files are enough for a default usage:
@@ -315,9 +315,11 @@ Structural modes (using PDB)
 ============================
 Expresso/3D-Coffee are special modes of T-Coffee that makes it possible to combine sequences and structures to generate more accurate alignment. T-Coffee proposes also other tools (iRMSD/APDB, T-RMSD, etc...) requiring access to structural information. **For all the structural modes/tools, access to structural information is mandatory**: you can do so either by having a database installed locally on your own system or by accessing the PDB through the webserver. If you do not have PDB installed, don't worry, T_Coffee will go and fetch any structure it needs directly from the PDB repository, it will simply be a bit slower. If you prefer to have access to a local installation of the PDB in your file system, you have to indicate to T-Coffee their location in your system using one of the following commands:
 
-  - setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
+::
 
-  - setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
+  $: setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
+
+  $: setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
 
 The T-RMSD tools comes along with T_Coffee package in order to build clustering based on structure. In iaddition to structural information, it also requires the package Phylip, containing lots of phylogenetic tree reconstruction tools. If you need more information about the different Phylip tools, information can be obtained `here <http://www.evolution.genetics.washington.edu/phylip.html>`_. 
 
@@ -325,12 +327,9 @@ R-Coffee associated packages
 ============================
 R-Coffee is a special mode able to align RNA sequences while taking into account their secondary structure. R-Coffee only requires the package Vienna to be installed, in order to compute Multiple Sequence Alignments. To make the best out of it, you should also have all the packages required by M-Coffee.
 
-::
- 
-  - Consan (***NOT COMPULSORY***) from selab.janelia.org/software/consan/    
-  - RNAplfold from www.tbi.univie.ac.at/~ivo/RNA/
-  - ProbConsRNA from http://www.probcons.stanford.edu/ 
-
+  - Consan (***NOT COMPULSORY***) from `Eddy/Riva laboratory <http://eddylab.org/software/consan/>`_.    
+  - RNAplfold from the `Vienna package <http://www.tbi.univie.ac.at/RNA/>`_.
+  - ProbConsRNA from `Stanford <http://probcons.stanford.edu/download.html>`_.
   
 .. Note:: Regarding ProbConsRNA, make sure you rename the probcons executable into ProbConsRNA.
 
