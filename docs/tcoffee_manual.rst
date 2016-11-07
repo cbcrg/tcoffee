@@ -5,7 +5,7 @@ T-Coffee Main Documentation
 Before You Start...
 *******************
 
-.. Danger:: T-Coffee Manual is currently under heavy maintenance in order to update all the latest T-Coffee developments and tools but also to increase its readibility. This message will be removed as soon as the maintenance is over. 
+.. Note:: The T-Coffee Manual has been intensively modified and updated (11/2016), incorporating all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering...). If you have any suggestion or correction, contact us...we receive any feedback gladly !
 
 
 Foreword
