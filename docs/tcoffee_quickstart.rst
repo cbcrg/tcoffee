@@ -90,7 +90,6 @@ RNA sequences
   ----------------------------------------------------------------------------
 
 
-
 ********************************
 Brief Overview of T-Coffee Tools
 ********************************
@@ -108,12 +107,10 @@ Write or copy all your sequences (protein, DNA or RNA) in a given text file usin
   $$: t_coffee sample_seq1.fasta
 
 
-
 This will output three files:
  - ``sample_seq1.aln`` : multiple sequence alignment (ClustalW format by default)
  - ``sample_seq1.dnd`` : guide tree (Newick format) 
  - ``sample_seq1.html`` : colored MSA according to T-Coffee consistency color scheme (html)
-
 
 .. tip:: In principle, the type of the sequences is automatically detected and the default methods adapted accordingly. Sometimes, however, this may fail either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag **-type**.
 
