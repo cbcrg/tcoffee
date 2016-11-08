@@ -2,9 +2,7 @@
 T-Coffee Technical Documentation 
 ################################
 
-.. Note:: This documentation covers the following packages:T-Coffee, seq_reformat, PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD. 
-
-The most up to date version is available from <http://www.tcoffee.org>.
+.. Note:: This documentation covers the following packages:T-Coffee, seq_reformat, PSI-Coffee, 3D-Coffee, Expresso, M-Coffee, R-Coffee, APDB, iRMSD, T-RMSD. The most up to date version is available from our `webpage <http://www.tcoffee.org>`_.
 
 
 ****************
@@ -22,8 +20,10 @@ This reference manual gives a list of all the flags that can be used to modify t
   $$: t_coffee -help -in
   
 
-Environment Variables
+Environment variables
 =====================
+List of variables
+-----------------
 It is possible to modify T-Coffee's behavior by setting any of the following environment variables. On the bash shell, use export VAR='value'; On the cshell, use set $VAR='xxx'.
 
 **http_proxy_4_TCOFFEE**: Sets the http_proxy and HTTP_proxy values used by T-Coffee. These values get supersede http_proxy and HTTP_proxy. http_proxy_4_TCOFFEE gets superseded by the command line values (-proxy and -email). If you have no proxy, just set this value to an empty string.
@@ -46,40 +46,28 @@ It is possible to modify T-Coffee's behavior by setting any of the following env
 
 **UNIQUE_DIR_4_TCOFFEE** Sets: DIR_4_TCOFFEE, CACHE_4_TCOFFEE, TMP_4_TCOFFEE, PLUGINS_4_TCOFFEE
 
-
 To the same unique value. The string MUST be a valid directory
 
-
-Setting up the T-Coffee environment variables
-=============================================
+Setting up the environment variables
+------------------------------------
 T-Coffee can have its own environment file. This environment is kept in a file named $HOME/.t_coffee/t_coffee_env and can be edited. The value of any legal variable can be modified through that file. For instance, here is an example of a configuration file when not requiring a proxy.
-
 
 ::
 
   http_proxy_4_TCOFFEE=
-
   EMAIL_4_TCOFFEE=cedric.notredame@europe.com
 
-
-
 If you want to use a specific configuration file:
-
 
 ::
 
   t_coffee ... -setenv ENV_4_TCOFFEE=<location>
 
-
-
 In general, you can set any environment variable using the -setenv flag. You can also simply do an export:
-
 
 ::
 
   export ENV_4_TCOFFEE=<location>
-
-
 
 .. warning:: export > -setenv > -proxy, -email > t_coffee_env > default environment
 
@@ -92,11 +80,9 @@ Separation
 ----------
 You can use any kind of separator you want (i.e. ,; <space>=). The syntax used in this document is meant to be consistent with that of ClustalW. However, in order to take advantage of the automatic filename compleation provided by many shells, you can replace '=' and ',' with a space.
 
-
 Posix
 -----
 T-Coffee is not POSIX compliant (sorry L).
-
 
 Entering the right parameters
 -----------------------------
@@ -106,7 +92,6 @@ There are many ways to enter parameters in T-Coffee, see the -parameter flag in.
 
   -parameters > prompt parameters > -t_coffee_defaults > -mode
   
-
 This means that -parameters supersede all the others, while parameters provided via -special mode are the weakest.
 
 
@@ -114,79 +99,13 @@ Meta-Parameters
 ===============
 Global Behavior
 ---------------
-No Flag
+no flag
 ^^^^^^^
-   *If no flag is used <your sequence> must be the first argument. See format for further information.*
+If no flag is used <your sequence> must be the first argument. See format for further information. When you do so, sample_seq1 is used as a name prefix for every file the program outputs.
 
 ::
 
   $$: t_coffee sample_seq1.fasta
-
-
-
-   *Which is equivalent to*
-
-::
-
-  $$: t_coffee Ssample_seq1.fasta
-
-
-
-   *When you do so, sample_seq1 is used as a name prefix for every file the program outputs.*
-
--parameters
-^^^^^^^^^^^
-  **Usage: -parameters=parameters_file**
-
-   *Default: no parameters file*
-
-   *Indicates a file containing extra parameters. Parameters read this way behave as if they had been added on the right end of the command line that they either supersede(one value parameter) or complete (list of values). For instance, the following file (parameter.file) could be used*
-
-::
-
-  *******sample_param_file.param********
-
-   -in=Ssample_seq1.fasta,Mfast_pair
-
-   -output=msf_aln
-
-  **************************************
-
-
-
-.. note:: Note: This is one of the exceptions (with -infile) where the identifier tag (S,A,L,M...) can be omitted. Any dataset provided this way will be assumed to be a sequence (S). These exceptions have been designed to keep the program compatible with ClustalW.
-
-.. note:: Note: This parameter file can ONLY contain valid parameters. Comments are not allowed. Parameters passed this way will be checked like normal parameters.
-
-   *Used with:*
-
-::
-
-  $$: t_coffee -parameters=sample_param_file.param
-
-
-
-   *Will cause t_coffee to apply the fast_pair method onto to the sequences contained in sample_seq.fasta. If you wish, you can also pipe these arguments into t_coffee, by naming the parameter file 'stdin' (as a rule, any file named stdin is expected to receive its content via the stdin)*
-
-::
-
-  cat sample_param_file.param | t_coffee -parameters=stdin
-
-
-
--t_coffee_defaults
-^^^^^^^^^^^^^^^^^^
-  **Usage: -t_coffee_defaults=<file_name>**
-
-   *Default: not used.*
-
-   *This flag tells the program to use some default parameter file for t_coffee. The format of that file is the same as the one used with -parameters. The file used is either:*
-
-   * 1. <file name> if a name has been specified*
-
-   * 2. ~/.t_coffee_defaults if no file was specified*
-
-   * 3. The file indicated by the environment variable TCOFFEE_DEFAULTS*
 
 -mode
 ^^^^^
@@ -205,6 +124,52 @@ No Flag
    * 3dcoffee: runs t_coffee with the 3dcoffee parameterization*
 
    *Other modes exist that are not yet fully supported*
+   
+-parameters
+^^^^^^^^^^^
+  **Usage: -parameters=parameters_file**
+
+   *Default: no parameters file*
+
+   *Indicates a file containing extra parameters. Parameters read this way behave as if they had been added on the right end of the command line that they either supersede(one value parameter) or complete (list of values). For instance, the following file (parameter.file) could be used*
+
+::
+
+  *******sample_param_file.param********
+   -in=Ssample_seq1.fasta,Mfast_pair
+   -output=msf_aln
+  **************************************
+
+.. note:: Note: This is one of the exceptions (with -infile) where the identifier tag (S,A,L,M...) can be omitted. Any dataset provided this way will be assumed to be a sequence (S). These exceptions have been designed to keep the program compatible with ClustalW.
+
+.. note:: Note: This parameter file can ONLY contain valid parameters. Comments are not allowed. Parameters passed this way will be checked like normal parameters.
+
+   *Used with:*
+
+::
+
+  $$: t_coffee -parameters=sample_param_file.param
+
+
+   *Will cause t_coffee to apply the fast_pair method onto to the sequences contained in sample_seq.fasta. If you wish, you can also pipe these arguments into t_coffee, by naming the parameter file 'stdin' (as a rule, any file named stdin is expected to receive its content via the stdin)*
+
+::
+
+  cat sample_param_file.param | t_coffee -parameters=stdin
+
+-t_coffee_defaults
+^^^^^^^^^^^^^^^^^^
+  **Usage: -t_coffee_defaults=<file_name>**
+
+   *Default: not used.*
+
+   *This flag tells the program to use some default parameter file for t_coffee. The format of that file is the same as the one used with -parameters. The file used is either:*
+
+   * 1. <file name> if a name has been specified*
+
+   * 2. ~/.t_coffee_defaults if no file was specified*
+
+   * 3. The file indicated by the environment variable TCOFFEE_DEFAULTS*
 
 -score [Deprecated]
 ^^^^^^^^^^^^^^^^^^^
@@ -229,8 +194,6 @@ No Flag
   $$: t_coffee -infile=sample_aln1.aln -mode=evaluate
 
   $$: t_coffee -infile=sample_seq1.aln -in Lsample_lib1.tc_lib -mode=evaluate
-
-
 
 -convert [cw]
 ^^^^^^^^^^^^^
@@ -335,7 +298,6 @@ Misc Parameters
   $$: t_coffee -other_pg=unpack_all
 
   $$: t_coffee -other_pg=unpack_extract_from_pdb
-
 
 
 Input
