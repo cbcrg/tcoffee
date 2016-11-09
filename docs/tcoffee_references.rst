@@ -69,7 +69,7 @@ Poirot, O., O'Toole, E., Notredame, C. **Tcoffee@igs: a web server for computing
 T-Coffee Tools For MSA Evaluation
 *********************************
 
-Chang J-M, Tommaso PD, & Notredame C. **TCS: a new Multiple Sequence Alignment reliability measure to estimate alignment accuracy and improve phylogenetic tree reconstruction**. Molecular Biology and Evolution, 31(6):1625-37 (2014). PMID:
+Chang, J.-M., Tommaso, P., Notredame, C. **TCS: a new Multiple Sequence Alignment reliability measure to estimate alignment accuracy and improve phylogenetic tree reconstruction**. Molecular Biology and Evolution, 31(6):1625-37 (2014). PMID:
 
 Magis, C., van der Sloot, A.M., Serrano, L., Notredame, C. **An improved understanding of TNFL/TNFR interactions using structure-based classifications**. Trends Biochem. Sci., 37(9):353-363 (2012), PMID:22789664
 
