@@ -23,7 +23,7 @@ This manual relies on the assumption that you have installed T-Coffee, version 9
 
 Have a try...it's not painful!
 ==============================
-We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. It contains everything you need to run ALL the examples provided in this manual. In the future starting with the next T-Coffee stable version, all example files will be included in the T-Coffee distribution (~/tcoffee/Version_11.XX/examples/).
+We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. It contains everything you need to run ALL the examples provided in this manual. In the future starting with the next T-Coffee stable version, all example files will be included in the T-Coffee distribution (~/tcoffee/Version_11.XX/examples/).
 
 
 *******************
