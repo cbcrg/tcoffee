@@ -1551,13 +1551,13 @@ How Good Is Your Alignment ?
 ****************************
 There are three possible strategies for evaluating your alignment of protein sequences:
 
- 1) **Sequence based methods** like the CORE index and the TCS if you don't have any structure (quite often). These last ones do pretty well in the core regions of an alignment (which can correspond to protein domains, fold, structural elements, etc...) but can be limited in more variable regions (which can correspond to loops, disordered regions, etc...).
+ 1) **Sequence based methods** like the CORE index and the TCS if you don't have any structure (quite often). These do pretty well in the core regions of an alignment (which can correspond to protein domains, fold, structural elements, etc...) but can be limited in more variable regions (which can correspond to loops, disordered regions, etc...).
  2) **Structure is a killer**, so if you have at least two structures available for your protein family, you are in an ideal situation and you can use the iRMSD. If you only have one structure available, we developped STRIKE to compare alternative alignment.
  3) **Another killer is the use of functional information**, but it is much less often at hand. If you know some residues MUST be aligned because they are functionally related. As the information is scarce and not standard, there is no automated procedure specifically designed for this kind of analysis but you can still setup an evaluation procedure with T-Coffee.
 
-.. note:: Most of evalution methods are designed for protein sequences (specially structure based methods), however, T-Coffee via the TCS/CORE index offers some possibilities to evaluate also DNA alignments.
+.. note:: Most of evalution methods are designed for protein sequences (notably structure based methods), however, T-Coffee via the TCS/CORE index offers some possibilities to evaluate also DNA alignments.
 
-Sequence-based Methods
+Sequence Based Methods
 ======================
 The CORE index
 --------------
