@@ -13,6 +13,7 @@ Contents:
 
    tcoffee_installation
    tcoffee_quickstart
+   tcoffee_webserver
    tcoffee_manual
    tcoffee_technical_documentation
 
