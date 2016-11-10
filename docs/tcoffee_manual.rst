@@ -1655,7 +1655,8 @@ It is possible to change the way TCS reliability is estimated. This can be done 
 ::
 
   Command 1:
-  $$: t_coffee -infile sample_seq1.aln -evaluate -method proba_pair -output score_ascii, aln, score_html
+  $$: t_coffee -infile sample_seq1.aln -evaluate -method proba_pair -output score_ascii, \
+      aln, score_html
 
   Command 2:
   $$: t_coffee -infile prot.aln -evaluate -method probapair,lalign_id_pair -output score_ascii, \
@@ -1667,21 +1668,22 @@ It is possible to change the way TCS reliability is estimated. This can be done 
     
 Working with coding DNA (under maintenance...)
 ^^^^^^^^^^^^^^^^^^^^^^^
-When working with DNA, it is advisable to first align the sequences at the protein level and later thread back the DNA onto your aligned proteins. The filtering must be done in two steps, as shown below. Note that your DNA and protein sequences must have the same name::
+When working with DNA, it is advisable to first align the sequences at the protein level and later thread back the DNA onto your aligned proteins. The filtering must be done in two steps, as shown below. Note that your DNA and protein sequences must have the same name. This first step produces the TCS evaluation file ``sample_prot_thread.score_ascii`` (command 1). Then, the **-out dna.replicates** option produces 100 DNA replicates with positions selected according to their aminoacid TCS score (command 2). Finally, the **-out dna.filtered** option will filter the DNA alignment according to their TCS column score.
 
-  $$: t_coffee -infile prot.aln -evaluate -output score_ascii
+::
 
-This first step produces the TCS evaluation file ``prot.score_ascii``:
- 
-  $$: t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_ascii \
-      -struc_in_f number_aln -output tcs_replicate_100 -out dna.replicates
+  Command 1: evaluating the protein MSA
+  $$: t_coffee -infile sample_prot_thread.aln -evaluate -output score_ascii
+
+  Command 2: generating replicates for DNA 
+  $$: t_coffee -other_pg seq_reformat -in sample_prot_thread.aln -in2 sample_dna_thread.fasta \
+      -struc_in sample_prot_thread.score_ascii -struc_in_f number_aln -output tcs_replicate_100 \
+      -out dna.replicates
   
-The dna.replicates option: 100 DNA replicates with positions selected according to their aminoacid TCS score::
-
-  $$: t_coffee -other_pg seq_reformat -in prot.aln -in2 dna.fa -struc_in prot.score_\
-  ascii -struc_in_f number_aln -output tcs_column_filter5 -out dna.filter  
-
-The dna.filtered option: DNA positions filtered according to their TCS column score
+  Command 3: filtering out according to the TCS score
+  $$: t_coffee -other_pg seq_reformat -in sample_prot_thread.aln -in2 sample_dna_thread.fa \
+      -struc_in sample_prot_thread.score_ascii -struc_in_f number_aln -output tcs_column_filter5 \
+      -out dna.filter  
 
 Summary of the output options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1890,7 +1892,7 @@ Under maintenance...
 
 
 *************************************
-INTERNAL/EXTERNAL Methods In T-Coffee
+Internal/External Methods In T-Coffee
 *************************************
 .. note:: The real power of T-Coffee is its ability to seamlessly combine many methods into one. While we try to integrate as many methods as we can in the default distribution, we do not have the means to be exhaustive and if you desperately need your favorite method to be integrated, you will need to bite the bullet ...
 
