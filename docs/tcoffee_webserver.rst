@@ -36,10 +36,10 @@ Expresso (using 3D structures)
 
 ::
 
-$#: t_coffee -in=data_93c5fbb0.in -mode=expresso -blast=LOCAL -pdb_db=/db/pdb/derived_data_format \
-    /blast/2016-01-01/pdb_seqres.fa -evaluate_mode=t_coffee_slow -output=score_html clustalw_aln \
-    fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=off -outorder=input \
-    -run_name=result -multi_core=4 -quiet=stdout
+$#: t_coffee -in=data_93c5fbb0.in -mode=expresso -blast=LOCAL -pdb_db=/db/pdb/derived_data\
+    _format/blast/2016-01-01/pdb_seqres.fa -evaluate_mode=t_coffee_slow -output=score_html \
+    clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos \
+    off -outorder=input -run_name=result -multi_core=4 -quiet=stdout
 
 
 M-Coffee (combining multiple methods)
