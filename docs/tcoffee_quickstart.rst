@@ -6,7 +6,7 @@ Quick Start
 ******************************
 Basic Command Lines (or modes)
 ******************************
-.. important:: This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned can be found `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. You can also use examples associated with their corresponding command lines from the subsection **Tutorial (practical examples)** published in Nature Protocols (2011). Refer to the section **T-Coffee Manual** for more technical details about T-Coffee usage and tools. If you use a specific mode or tools of T-Coffee, please use the corresponding citation for publication (see **References and Citations**), otherwise cite T-Coffee. 
+.. important:: This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned can be found `here <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. You can also use examples associated with their corresponding command lines from the subsection **Tutorial (practical examples)** published in Nature Protocols (2011). Refer to the section **T-Coffee Manual** for more technical details about T-Coffee usage and tools. If you use a specific mode or tools of T-Coffee, please use the corresponding citation for publication (see **References and Citations**), otherwise cite T-Coffee. 
 
 
 Protein sequences
