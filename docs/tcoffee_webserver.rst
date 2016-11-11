@@ -40,8 +40,8 @@ Expresso (using 3D structures)
 
   $#: t_coffee -in=data_93c5fbb0.in -mode=expresso -blast=LOCAL -pdb_db=/db/pdb/derived_data_\
       format/blast/2016-01-01/pdb_seqres.fa -evaluate_mode=t_coffee_slow -output=score_html \
-      clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=off \
-      -outorder=input -run_name=result -multi_core=4 -quiet=stdout
+      clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos= \
+      off -outorder=input -run_name=result -multi_core=4 -quiet=stdout
 
 
 M-Coffee (combining multiple methods)
@@ -51,8 +51,8 @@ M-Coffee (combining multiple methods)
 
   $#: t_coffee -in=data_93c5fbb0.in  Mpcma_msa Mmafft_msa Mclustalw_msa Mdialigntx_msa Mpoa_msa \
       Mmuscle_msa Mprobcons_msa Mt_coffee_msa -output=score_html clustalw_aln fasta_aln score_ascii \
-      phylip -tree -maxnseq=150 -maxlen=2500 -case=upper -seqnos=off -outorder=input -run_name=result \
-      -multi_core=4 -quiet=stdout
+      phylip -tree -maxnseq=150 -maxlen=2500 -case=upper -seqnos=off -outorder=input -run_name \
+      =result -multi_core=4 -quiet=stdout
       
     
 PSI/TM-Coffee (transmembrane proteins)
@@ -61,15 +61,15 @@ Two options are available (in addition to the choice of the database): without t
 
 ::
 
-$#: tmcoffee.sh -in data_9df741d4.in -mode psicoffee -blast_server LOCAL --search-db 'UniRef50 \
-    -- Very Fast/Rough' --search-type '' -prot_min_sim 50 -prot_max_sim 90 -prot_min_cov 70 --search-out \ 
-    'clustalw_aln fasta_aln score_ascii phylip score_html' -maxnseq 1000 -maxlen 5000 -case upper -seqnos \
-    off -outorder input -run_name result -multi_core 4 -quiet=stdout
+  $#: tmcoffee.sh -in data_9df741d4.in -mode psicoffee -blast_server LOCAL --search-db 'UniRef50 \
+      -- Very Fast/Rough' --search-type '' -prot_min_sim 50 -prot_max_sim 90 -prot_min_cov 70 \
+      --search-out 'clustalw_aln fasta_aln score_ascii phylip score_html' -maxnseq 1000 -maxlen \
+      5000 -case upper -seqnos=off -outorder input -run_name result -multi_core 4 -quiet=stdout
 
 $#: tmcoffee.sh -in data_9df741d4.in -mode psicoffee -blast_server LOCAL --search-db 'UniRef50 \
-    -- Very Fast/Rough' --search-type 'transmembrane' -prot_min_sim 50 -prot_max_sim 90 -prot_min_cov 70 \
-    --search-out 'clustalw_aln fasta_aln score_ascii phylip score_html' -maxnseq 1000 -maxlen 5000 -case \
-    upper -seqnos off -outorder input -run_name result -multi_core 4 -quiet=stdout
+    -- Very Fast/Rough' --search-type 'transmembrane' -prot_min_sim 50 -prot_max_sim 90 -prot_min_cov \
+    70 --search-out 'clustalw_aln fasta_aln score_ascii phylip score_html' -maxnseq 1000 -maxlen 5000 \
+    -case upper -seqnos off -outorder input -run_name result -multi_core 4 -quiet=stdout
 
 
 PSI-Coffee (homology extension)
@@ -77,9 +77,9 @@ PSI-Coffee (homology extension)
 
 ::
 
-$#: t_coffee -in=data_93c5fbb0.in -mode=psicoffee -blast=LOCAL -protein_db=/db/ncbi/201511/blast/db/nr.fa \
-    -output=score_html clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper \
-    -seqnos=off -outorder=input -run_name=result -multi_core=4 -quiet=stdout
+    $#: t_coffee -in=data_93c5fbb0.in -mode=psicoffee -blast=LOCAL -protein_db=/db/ncbi/201511/blast/ \
+        db/nr.fa -output=score_html clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 \
+        -case=upper -seqnos=off -outorder=input -run_name=result -multi_core=4 -quiet=stdout
 
 
 *************
@@ -90,10 +90,10 @@ R-Coffee (using 2D prediction)
 
 ::
 
-  $#: t_coffee -in=data_29091222.in -method=mafft_msa muscle_msa probconsRNA_msa -output=score_html \
-      clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=off \
-      -outorder=input -run_name=result -tree -special_mode=rcoffee -method_limits=consan_pair 5 150 \
-      -multi_core=4 -quiet=stdout
+  $#: t_coffee -in=data_29091222.in -method=mafft_msa muscle_msa probconsRNA_msa -output= \
+      score_html clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper \
+      -seqnos=off -outorder=input -run_name=result -tree -special_mode=rcoffee -method_limits=consan_pair \
+      5 150 -multi_core=4 -quiet=stdout
       
 SARA-Coffee (using 3D structures)
 ==============================
@@ -107,8 +107,8 @@ SARA-Coffee (using 3D structures)
   (cd $CACHE_4_TCOFFEE; ln -s /data/www-cn/sara_coffee_package/pdb_entry_type.txt);
   $#: t_coffee -in data_3e6e7aec.in -method sara_pair -template_file \
       /data/www-cn/sara_coffee_package/TEMPLATEFILE,RNA -extend_mode rna2 -relax_lib 0 -transform \
-      dna2rna -run_name=result -output score_html clustalw_aln -case=upper -seqnos=off -outorder=input \
-     -multi_core=4 -pdb_min_sim 0 -quiet stdout
+      dna2rna -run_name=result -output score_html clustalw_aln -case=upper -seqnos=off -outorder= \
+      input -multi_core=4 -pdb_min_sim 0 -quiet stdout
  
  
 RM-Coffee (combining multiple methods) (uner maintenance...)
