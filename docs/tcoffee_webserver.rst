@@ -16,17 +16,17 @@ The central part of the web server is the T-Coffee aligner, you can use it to al
       -run_name=result -multi_core=4 -quiet=stdout
 
 
-
- - **-mode=regular**: uses the internal **proba_pair** aligner
- - **-output**: specifies the output file format you require
- - **-maxnseq**: restriction on the number of sequences, max=150
- - **-maxlength**: restriction on the length of your sequences, max=1000
- - **-case=upper**: all residues/nucleotids will be upper case
- - **-seqnos=off**: the size of the sequences is not indicated on the MSA
- - **-outorder=input**: orders the sequences in the final MSA as in the input dataset 
- - **-run_name**: name of the job on the cluster
- - **-multi_core=4**: uses only 4 cores on your server when running the job
- - **-quiet=stdout**: standard verbose output
+The different options correspond to:
+  - **-mode=regular**: uses the internal **proba_pair** aligner
+  - **-output**: specifies the output file format you require
+  - **-maxnseq**: restriction on the number of sequences, max=150
+  - **-maxlength**: restriction on the length of your sequences, max=1000
+  - **-case=upper**: all residues/nucleotids will be upper case
+  - **-seqnos=off**: the size of the sequences is not indicated on the MSA
+  - **-outorder=input**: orders the sequences in the final MSA as in the input dataset 
+  - **-run_name**: name of the job on the cluster
+  - **-multi_core=4**: uses only 4 cores on your server when running the job
+  - **-quiet=stdout**: standard verbose output
  
 *****************
 Protein Sequences
@@ -36,7 +36,7 @@ Expresso (using 3D structures)
 
 ::
 
-$#: t_coffee -in=data_93c5fbb0.in -mode=expresso -blast=LOCAL -pdb_db=/db/pdb/derived_data_format\
+$#: t_coffee -in=data_93c5fbb0.in -mode=expresso -blast=LOCAL -pdb_db=/db/pdb/derived_data_format \
 /blast/2016-01-01/pdb_seqres.fa -evaluate_mode=t_coffee_slow -output=score_html clustalw_aln \
 fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=off -outorder=input \
 -run_name=result -multi_core=4 -quiet=stdout
