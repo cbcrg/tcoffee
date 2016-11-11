@@ -75,7 +75,9 @@ PSI-Coffee (homology extension)
 
 ::
 
-$#: 
+$#: t_coffee -in=data_93c5fbb0.in -mode=psicoffee -blast=LOCAL -protein_db=/db/ncbi/201511/blast/db/nr.fa \
+    -output=score_html clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper \
+    -seqnos=off -outorder=input -run_name=result -multi_core=4 -quiet=stdout
 
 
 *************
@@ -84,17 +86,38 @@ RNA Sequences
 R-Coffee (using 2D prediction)
 ==============================
 
+::
+
+  $#: t_coffee -in=data_29091222.in -method=mafft_msa muscle_msa probconsRNA_msa -output=score_html \
+      clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen=2500 -case=upper -seqnos=off \
+      -outorder=input -run_name=result -tree -special_mode=rcoffee -method_limits=consan_pair 5 150 \
+      -multi_core=4 -quiet=stdout
+      
 SARA-Coffee (using 3D structures)
 ==============================
 
-RM-Coffee (combining multiple methods)
+::
+
+  export X3DNA=/data/www-cn/sara_coffee_package/X3DNA; 
+  export PDB_DIR=/data/www-cn/sara_coffee_package/PDBdir/; 
+  export NO_REMOTE_PDB_DIR=1; 
+  unset MAFFT_BINARIES;
+  (cd $CACHE_4_TCOFFEE; ln -s /data/www-cn/sara_coffee_package/pdb_entry_type.txt);
+  $#: t_coffee -in data_3e6e7aec.in -method sara_pair -template_file \
+      /data/www-cn/sara_coffee_package/TEMPLATEFILE,RNA -extend_mode rna2 -relax_lib 0 -transform \
+      dna2rna -run_name=result -output score_html clustalw_aln -case=upper -seqnos=off -outorder=input \
+     -multi_core=4 -pdb_min_sim 0 -quiet stdout
+ 
+ 
+RM-Coffee (combining multiple methods) (uner maintenance...)
 ======================================
+
 
 
 *************
 DNA Sequences
 *************
-M-Coffee (combining multiple methods)
+M-Coffee (combining multiple methods) (under maintenance...)
 =====================================
 
 Pro-Coffee (homologous promoter regions)
