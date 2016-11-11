@@ -124,6 +124,11 @@ M-Coffee (combining multiple methods) (under maintenance...)
 
 Pro-Coffee (homologous promoter regions)
 ========================================
+::
+
+  $#: t_coffee -in=data_476efe5f.in -mode=procoffee -output=score_html clustalw_aln fasta_aln \
+      score_ascii phylip -maxnseq=150 -maxlen=10000 -case=upper -seqnos=off -outorder=input \
+      -run_name=result -multi_core=4 -quiet=stdout
 
 
 ****************
