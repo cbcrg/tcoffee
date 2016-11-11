@@ -6,6 +6,21 @@ T-Coffee Web Server
 
 In this chapter we describe briefly the available T-Coffee web servers and their usage (command lines and examples files); if you need more advanced options, you should use the T-Coffee package via command lines. The web server is a reduced version of the T-Coffee package, containing all T-Coffee modes for aligning protein, RNA or DNA sequences; it also contains the evaluation and downstream analysis tools (TCS, iRMSD/APDB, STRIKE, T-RMSD). Currently, all reformatting utilities are not available on the web server, however, you can choose some reformatting options related to the ouput format. Here we present briefly the webserver and the T-Coffee commands it contains.
 
+*******
+General
+*******
+Most of the following command lines used by the web server contains lots of different options called with flags; here is a summary of the options common to all comand lines:
+  - **-in**: your input file
+  - **-output**: specifies the output files you require
+  - **-maxnseq**: maximum number of sequences you can run (variable depending on the mode)
+  - **-maxlength**: maximum length of your sequences (variable depending on the mode)
+  - **-case=upper**: all residues/nucleotids will be upper case
+  - **-seqnos=off**: the size of the sequences is not indicated on the MSA
+  - **-outorder=input**: orders the sequences in the final MSA as in the input dataset 
+  - **-run_name**: name of the job on the cluster
+  - **-multi_core=4**: uses only 4 cores on your server when running the job
+  - **-quiet=stdout**: standard verbose output
+ 
 *******************
 T-Coffee Simple MSA
 *******************
@@ -17,18 +32,6 @@ The central part of the web server is the T-Coffee aligner, you can use it to al
       score_ascii phylip -maxnseq=150 -maxlen=10000 -case=upper -seqnos=off -outorder=input \
       -run_name=result -multi_core=4 -quiet=stdout
 
-
-The different options correspond to:
-  - **-mode=regular**: uses the internal **proba_pair** aligner
-  - **-output**: specifies the output file format you require
-  - **-maxnseq**: restriction on the number of sequences, max=150
-  - **-maxlength**: restriction on the length of your sequences, max=1000
-  - **-case=upper**: all residues/nucleotids will be upper case
-  - **-seqnos=off**: the size of the sequences is not indicated on the MSA
-  - **-outorder=input**: orders the sequences in the final MSA as in the input dataset 
-  - **-run_name**: name of the job on the cluster
-  - **-multi_core=4**: uses only 4 cores on your server when running the job
-  - **-quiet=stdout**: standard verbose output
  
 *****************
 Protein Sequences
@@ -78,9 +81,10 @@ PSI-Coffee (homology extension)
 
 ::
 
-    $#: t_coffee -in=data_93c5fbb0.in -mode=psicoffee -blast=LOCAL -protein_db=/db/ncbi/201511/blast/ \
-        db/nr.fa -output=score_html clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 -maxlen \
-        =2500 -case=upper -seqnos=off -outorder=input -run_name=result -multi_core=4 -quiet=stdout
+    $#: t_coffee -in=data_93c5fbb0.in -mode=psicoffee -blast=LOCAL -protein_db=/db/ncbi/201511/ \
+        blast/db/nr.fa -output=score_html clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 \
+        -maxlen=2500 -case=upper -seqnos=off -outorder=input -run_name=result -multi_core=4 \
+        -quiet=stdout
 
 
 *************
@@ -98,6 +102,7 @@ R-Coffee (using 2D prediction)
       
 SARA-Coffee (using 3D structures)
 ==============================
+SARA-Coffee is a bit complicated to run, it uses several third party packages and is run through a script and environment variables we set up; here is what it looks like: 
 
 ::
 
@@ -111,10 +116,8 @@ SARA-Coffee (using 3D structures)
       dna2rna -run_name=result -output score_html clustalw_aln -case=upper -seqnos=off -outorder= \
       input -multi_core=4 -pdb_min_sim 0 -quiet stdout
  
- 
 RM-Coffee (combining multiple methods) (uner maintenance...)
 ======================================
-
 
 
 *************
@@ -138,18 +141,39 @@ Evaluation Tools
 TCS (Transitive Consistency Score)
 ==================================
 
+::
 
-iRMSD/APDB (MSA structural evaluation)
+  $#: tcs.sh -infile data_a98d61a6.in -in Mproba_pair -score 1 -output clustalw_aln fasta_aln \
+      phylip score_ascii tcs_weighted tcs_replicate score_html -maxnseq 1000 -maxlen 8000 \
+      -seqnos=off -run_name result -multi_core 4 --filter-type column --filter-min 4 --filter-max \
+      9 --filter-gap yes -quiet=stdout
+
+iRMSD/APDB (MSA structural evaluation) (under maintenance...)
 ======================================
 
+::
 
+  $#: t_coffee -other_pg apdb -aln data_c7151320.in -apdb_outfile default -outfile default \
+      -io_format hsg3 -output score_html -maximum_distance 10 -md_threshold 2.0 -similarity_ \
+      threshold 70 -template_file EXPRESSO -run_name result -quiet stdout
+      
 T-RMSD (structural clustering)
 ==============================
 
+::
+
+  $#: t_coffee -in=data_b89d3438.in -mode=expresso -cache=$PWD -blast=LOCAL -pdb_db=/db/pdb/ \
+  derived_data_format/blast/2016-01-01/pdb_seqres.fa -evaluate_mode=t_coffee_slow -output=aln \
+  score_html -maxnseq=150 -maxlen=2500 -case=upper -outorder=input -run_name=result -multi_core=4 \
+  -quiet=stdout; t_coffee -other_pg trmsd result.aln -template_file result_pdb1.template_list \
+  -output color_html 2>&1; [ -e result.struc_tree.consensus ]
 
 STRIKE (MSA evaluation with single structure) (under maintenance...)
 =============================================
 
+::
+
+  $#: t_coffee -other_pg strike data_c13dc0db.in -template_file PDB
 
 
 
