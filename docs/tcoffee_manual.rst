@@ -1607,12 +1607,14 @@ TCS allows you to filter out from your alignment regions that appears unreliable
   $$: t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_filter3, \
       tcs_residue_lower4
 
-Output file: 
+Output files: 
 
 * ``sample_seq1.tcs_residue_filter3``  All residues with a TCS score lower than 3 are filtered out 
 * ``sample_seq1.tcs_column_filter3``   All columns with a TCS score lower than 3 are filtered out 
-* ``sample_seq1.tcs_residue_lower4``   All residues with a TCS score lower than 3 are lower cased
-  
+* ``sample_seq1.tcs_residue_lower4``   All residues with a TCS score lower than 3 are in lower case
+
+.. warning:: The TCS will create output files containing your results; if you rerun similar jobs or with the same name, TCS will not overwrite the previous outputs but append the new results in the already existing files.
+
 Note that all these output functions are also compatible with the default T-Coffee (command 1) when computing an alignment or with **seq_reformat** (command 2) using a T-Coffee .score_ascii file.
 
 ::
@@ -1642,7 +1644,7 @@ Note that all these output functions are also compatible with the default T-Coff
 ::
 
   Command 1:
-  $$: t_coffee -seq sample_Seq1.fa -output tcs_weighted, tcs_replicate_100
+  $$: t_coffee -seq sample_seq1.fa -output tcs_weighted, tcs_replicate_100
 
   Command 2:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in prot.score_ascii -struc_in_f \
