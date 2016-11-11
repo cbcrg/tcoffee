@@ -1613,7 +1613,7 @@ Output file:
 * ``sample_seq1.tcs_column_filter3``   All columns with a TCS score lower than 3 are filtered out 
 * ``sample_seq1.tcs_residue_lower4``   All residues with a TCS score lower than 3 are lower cased
   
-Note that all these output functions are also compatible with the default T-Coffee (command 1) when computing an alignment or with **seq_reformat** (command ") using a T-Coffee .score_ascii file.
+Note that all these output functions are also compatible with the default T-Coffee (command 1) when computing an alignment or with **seq_reformat** (command 2) using a T-Coffee .score_ascii file.
 
 ::
 
@@ -1666,7 +1666,7 @@ It is possible to change the way TCS reliability is estimated. This can be done 
   $$: t_coffee -infile sample_seq1.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa -output \
       score_ascii, aln, score_html
     
-Working with coding DNA (under maintenance...)
+Working with coding DNA
 ^^^^^^^^^^^^^^^^^^^^^^^
 When working with DNA, it is advisable to first align the sequences at the protein level and later thread back the DNA onto your aligned proteins. The filtering must be done in two steps, as shown below. Note that your DNA and protein sequences must have the same name. This first step produces the TCS evaluation file ``sample_prot_thread.score_ascii`` (command 1). Then, the **-out dna.replicates** option produces 100 DNA replicates with positions selected according to their aminoacid TCS score (command 2). Finally, the **-out dna.filtered** option will filter the DNA alignment according to their TCS column score.
 
