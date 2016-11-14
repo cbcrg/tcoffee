@@ -34,13 +34,12 @@ You can use any kind of separator you want (i.e. ,; <space>=). The syntax used i
 
 Entering the right parameters
 -----------------------------
-There are many ways to enter parameters in T-Coffee, see the **-parameters** flag. In general you will not need to use these complicated parameters, yet, if you find yourself typing long command lines on a regular basis, it may be worth reading this section. One may easily feel confused with the various manners in which the parameters can be passed to T-Coffee. The reason for these many mechanisms is that they allow several levels of intervention. For instance, you may install T-Coffee for all the users and decide that the defaults we provide are not the proper ones...In this case, you will need to make your own ``t_coffee_default`` file. Later on, a user may find that he/she needs to keep reusing a specific set of parameters, different from those in t_coffee_default, hence the possibility to write an extra parameter file with the flag **-parameters**. In summary:
+There are many ways to enter parameters in T-Coffee, see the **-parameters** flag. In general you will not need to use these complicated parameters, yet, if you find yourself typing long command lines on a regular basis, it may be worth reading this section. One may easily feel confused with the various manners in which the parameters can be passed to T-Coffee. The reason for these many mechanisms is that they allow several levels of intervention. For instance, you may install T-Coffee for all the users and decide that the defaults we provide are not the proper ones...In this case, you will need to make your own ``t_coffee_default`` file. Later on, a user may find that he/she needs to keep reusing a specific set of parameters, different from those in t_coffee_default, hence the possibility to write an extra parameter file with the flag **-parameters**. In summary, this means that **-parameters** supersede all the other options, while parameters provided via **-mode** are the weakest:
 
 ::
 
   -parameters > prompt parameters > -t_coffee_defaults > -mode
   
-This means that **-parameters** supersede all the other options, while parameters provided via **-mode** are the weakest.
 
 Environment variables
 =====================
@@ -102,6 +101,8 @@ Global behavior
  - **-parameters**
 *Input needs to be a file containing extra parameters for T-Coffee. Parameters read this way behave as if they had been added on the right end of the command line that they either supersede (one value parameter) or complete (list of values). Here is an example of usage that will cause T-Coffee to apply the* **fast_pair** *method onto the sequences contained in* ``sample_seq1.fasta``. *If you wish, you can also pipe these arguments into T-Coffee by naming the parameter file 'stdin' (as a rule, any file named stdin is expected to receive its content via the stdin)*
 
+.. warning:: This parameter file can ONLY contain valid parameters; comments are not allowed. Parameters passed this way will be checked like normal parameters.
+
 ::
 
   $$: t_coffee -parameters=sample_file.param
@@ -112,11 +113,6 @@ Global behavior
    -in=Ssample_seq1.fasta,Mfast_pair
    -output=msf_aln
   **************************************
-
-.. warning:: This parameter file can ONLY contain valid parameters; comments are not allowed. Parameters passed this way will be checked like normal parameters.
-
-
-
 
  - **-t_coffee_defaults**
 *Input needs to be a file; it will tells the program to use some default parameter file for T-Coffee. The format of that file is the same as the one used with* **-parameters**. *The file used is either:*
