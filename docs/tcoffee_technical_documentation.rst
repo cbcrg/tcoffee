@@ -202,24 +202,26 @@ The **-in** common usageis: **-in=[<P,S,A,L,M,X><name>]**. *By default: -in=Mlal
 
 .. note:: Note: -in can be replaced with the combined usage of -aln, iprofile, .pdb, .lib, -method.
 
-   *See the box for an explanation of the -in flag. The following argument passed via -in*
+*See the box for an explanation of the -in flag. The following argument passed via -in*
 
 ::
 
-  $$: t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_\
- id_pair,Lsample_lib1.tc_lib -outfile=outaln
+  $$: t_coffee -in=Ssample_seq1.fasta,Asample_aln1.aln,Asample_aln2.msf,Mlalign_id_pair, \
+      Lsample_lib1.tc_lib -outfile=outaln
 
 
-*This command will trigger the following chain of events: *
+This command will trigger the following chain of events:
+
 1) *Gather all the sequences. Sequences within all the provided files are pooled together. Format recognition is automatic. Duplicates are removed (if they have the same name). Duplicates in a single file are only tolerated in FASTA format file, although they will cause sequences to be renamed.In the above case, the total set of sequences will be made of sequences contained in sequences1.seq, alignment1.aln, alignment2.msf and library.lib, plus the sequences initially gathered by -infile.*
 
 2) *Turn alignments into libraries. alignment1.aln and alignment2.msf will be read and turned into libraries. Another library will be produced by applying the method lalign_id_pair to the set of sequences previously obtained (1). The final library used for the alignment will be the combination of all this information.*
 
 *Note as well the following rules:*
-*1-Order: The order in which sequences, methods, alignments and libraries are fed in is irrelevant.*
-*2-Heterogeneity: There is no need for each element (A, S, L) to contain the same sequences.*
-*3-No Duplicate: Each file should contain only one copy of each sequence. Duplicates are only allowed in FASTA files but will cause the sequences to be renamed.*
-*4-Reconciliation: If two files (for instance two alignments) contain different versions of the same sequence due to an indel, a new sequence will be reconstructed and used instead. This can be useful if you are trying to combine several runs of blast, or structural information where residues may have been deleted. However substitutions are forbidden. If two sequences with the same name cannot be merged, they will cause the program to exit with an information message.*
+
+1) Order: The order in which sequences, methods, alignments and libraries are fed in is irrelevant.
+2) Heterogeneity: There is no need for each element (A, S, L) to contain the same sequences.
+3) No Duplicate: Each file should contain only one copy of each sequence. Duplicates are only allowed in FASTA files but will cause the sequences to be renamed.
+4) Reconciliation: If two files (for instance two alignments) contain different versions of the same sequence due to an indel, a new sequence will be reconstructed and used instead. This can be useful if you are trying to combine several runs of blast, or structural information where residues may have been deleted. However substitutions are forbidden. If two sequences with the same name cannot be merged, they will cause the program to exit with an information message.
 
 ::
 
@@ -228,15 +230,15 @@ The **-in** common usageis: **-in=[<P,S,A,L,M,X><name>]**. *By default: -in=Mlal
   consensus:  hgab1 AAAAABAAAAACCC
 
 
-*5-Methods: The method describer can either be built in (See ### for a list of all the available methods) or be a file describing the method to be used. The exact syntax is provided in part 4 of this manual.*
-*6-Substitution Matrices: If the method is a substitution matrix (X) then no other type of information should be provided. This command results in a progressive alignment carried out on the sequences in seqfile. The procedure does not use any more the T-Coffee concistency based algorithm, but switches to a standard progressive alignment algorithm (like ClustalW or Pileup) much less accurate. In this context, appropriate gap penalties should be provided. The matrices are in the file source/matrices.h. Ad Hoc matrices can also be provided by the user (see the matrices format section at the end of this manual).*
+5) Methods: The method describer can either be built in (See ### for a list of all the available methods) or be a file describing the method to be used. The exact syntax is provided in part 4 of this manual.
+6) Substitution Matrices: If the method is a substitution matrix (X) then no other type of information should be provided. This command results in a progressive alignment carried out on the sequences in seqfile. The procedure does not use any more the T-Coffee concistency based algorithm, but switches to a standard progressive alignment algorithm (like ClustalW or Pileup) much less accurate. In this context, appropriate gap penalties should be provided. The matrices are in the file ``source/matrices.h``. *Ad Hoc* matrices can also be provided by the user (see the matrices format section at the end of this manual).
 
 ::
 
   $$: t_coffee sample_seq1.fasta -in=Xpam250mt -gapopen=-10 -gapext=-1
 
    
-.. warning:: **X** matrix does not have the same effect as using the -matrix flag. The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
+.. warning:: The matrix **X** does not have the same effect as using the **-matrix** flag, which defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
 
 Other sequence input flags
 --------------------------
@@ -248,15 +250,15 @@ Other sequence input flags
   $$: t_coffee -infile=sample_seq1.fasta
 
 
+
  - **-get_type**
 *Forces t_coffee to identify the sequences type (PROTEIN, DNA).*
 
  - **-type [cw]**
+.. warning:: In case of low complexity or short sequences, it is recommended to set the type manually.
 
   **Usage: -type=DNA  PROTEIN DNA_PROTEIN**
 *Default: -type=<automatically set>*. *This flag sets the type of the sequences. If omitted, the type is guessed automatically. This flag is compatible with ClustalW.*
-
-.. warning:: In case of low complexity or short sequences, it is recommended to set the type manually.
 
 
  - **-seq**
@@ -290,10 +292,11 @@ The common usage is: **-profile=[<name>,] maximum of 200 profiles.** *This flag 
 
   $$: t_coffee -profile sample_aln1.aln,sample_aln2.aln -outfile=profile_aln
 
-  $$: t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair -outfile=profile_aln
-
-
- - **-profile1 [cw]**
+  $$: t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair \
+      -outfile=profile_aln
+  
+  
+  - **-profile1 [cw]**
 The common usage is: **-profile1=[<name>], one name only**. *Default: no default*. *Similar to the previous one and was provided for compatibility with ClustalW.*
 
  - **-profile2 [cw]**
@@ -304,145 +307,63 @@ Alignment Computation
 =====================
 Library Computation: Methods
 ----------------------------
--lalign_n_top
-^^^^^^^^^^^^^
-  **Usage: -lalign_n_top=<Integer>**
+- **-lalign_n_top**
 
-   *Default: -lalign_n_top=10*
+Common usage: **-lalign_n_top=<Integer>**. *Default: -lalign_n_top=10*. *Number of alignment reported by the local method (lalign).*
 
-   *Number of alignment reported by the local method (lalign).*
+ - **-align_pdb_param_file** [Unsupported]
 
--align_pdb_param_file
-^^^^^^^^^^^^^^^^^^^^^
-   *Unsuported*
+ - **-align_pdb_hasch_mode** [Unsupported]
 
--align_pdb_hasch_mode
-^^^^^^^^^^^^^^^^^^^^^
-   *Unsuported*
 
 Library Computation: Extension
 ------------------------------
--lib_list [Unsupported]
-^^^^^^^^^^^^^^^^^^^^^^^
-  **Usage: -lib_list=<filename>**
+ - **-lib_list** [Unsupported]
 
-   *Default:unset*
-
-   *Use this flag if you do not want the library computation to take into account all the possible pairs in your dataset. For instance*
+Common usage: **-lib_list=<filename>**. *Default:unset*. *Use this flag if you do not want the library computation to take into account all the possible pairs in your dataset. For instance*
 
    *Format:*
 
 ::
 
    2 Name1 name2
-
    2 Name1 name4
-
    3 Name1 Name2 Name3...
-
-
-
    * (the line 3 would be used by a multiple alignment method).*
 
--do_normalise
-^^^^^^^^^^^^^
-  **Usage: -do_normalise=<0 or a positive value>**
+ - **-do_normalise**
+Common uage: **-do_normalise=<0 or a positive value>**. *Default:-do_normalise=1000*. *Development Only*. *When using a value different from 0, this flag sets the score of the highest scoring pair to 1000.*
 
-   *Default:-do_normalise=1000*
+ - **-extend**
+Common usage: **-extend=<0,1 or a positive value>**. *Default:-extend=1*. *Development Only*. *When turned on, this flag indicates that the library extension should be carried out when performing the multiple alignment. If -extend =0, the extension is not made, if it is set to 1, the extension is made on all the pairs in the library. If the extension is set to another positive value, the extension is only carried out on pairs having a weight value superior to the specified limit.*
 
-   *Development Only*
+ - **-extend_mode**
+  **Usage: -extend=<string>**. *Default:-extend=very_fast_triplet*. *Warning: Development Only*. *Controls the algorithm for matrix extension. Available modes include:relative_triplet Unsupported*, *g_coffee Unsupported*, *g_coffee_quadruplets Unsupported*, *fast_triplet Fast triplet extension*, *very_fast_triplet slow triplet extension, limited to the -max_n_pair best sequence pairs when aligning two profiles*, *slow_triplet Exhaustive use of all the triplets*, *mixt Unsupported*, *quadruplet Unsupported*, *test Unsupported*, *matrix Use of the matrix -matrix*, *fast_matrix Use of the matrix -matrix. Profiles are turned into consensus*
 
-   *When using a value different from 0, this flag sets the score of the highest scoring pair to 1000.*
+ - **-max_n_pair**
 
--extend
-^^^^^^^
-  **Usage: -extend=<0,1 or a positive value>**
-
-   *Default:-extend=1*
-
-   *Development Only*
-
-   *When turned on, this flag indicates that the library extension should be carried out when performing the multiple alignment. If -extend =0, the extension is not made, if it is set to 1, the extension is made on all the pairs in the library. If the extension is set to another positive value, the extension is only carried out on pairs having a weight value superior to the specified limit.*
-
--extend_mode
-^^^^^^^^^^^^
-  **Usage: -extend=<string>**
-
-   *Default:-extend=very_fast_triplet*
-
-   *Warning: Development Only*
-
-   *Controls the algorithm for matrix extension. Available modes include:*
-
-   *relative_triplet Unsupported*
-
-   *g_coffee Unsupported*
-
-   *g_coffee_quadruplets Unsupported*
-
-   *fast_triplet Fast triplet extension*
-
-   *very_fast_triplet slow triplet extension, limited to the -max_n_pair best sequence pairs when aligning two profiles*
-
-   *slow_triplet Exhaustive use of all the triplets*
-
-   *mixt Unsupported*
-
-   *quadruplet Unsupported*
-
-   *test Unsupported*
-
-   *matrix Use of the matrix -matrix*
-
-   *fast_matrix Use of the matrix -matrix. Profiles are turned into consensus*
-
--max_n_pair
-^^^^^^^^^^^
   **Usage: -max_n_pair=<integer>**
-
    *Default:-extend=10*
-
    *Development Only*
-
    *Controls the number of pairs considered by the -extend_mode=very_fast_triplet. Setting it to 0 forces all the pairs to be considered (equivalent to -extend_mode=slow_triplet).*
 
--seq_name_for_quadruplet
-^^^^^^^^^^^^^^^^^^^^^^^^
-  **Usage: Unsupported**
+ - **-seq_name_for_quadruplet** [Unsupported]
 
--compact
-^^^^^^^^
-  **Usage: Unsupported**
+ - **-compact** [Unsupported]
 
--clean
-^^^^^^
-  **Usage: Unsupported**
+ - **-clean** [Unsupported]
 
--maximise
-^^^^^^^^^
-  **Usage: Unsupported**
+ - **-maximise** [Unsupported]
 
--do_self
-^^^^^^^^
-  **Usage: Flag -do_self**
+ - **-do_self**
+**Default: No**
+*This flag causes the extension to carried out within the sequences (as opposed to between sequences). This is necessary when looking for internal repeats with Mocca.*
 
-  **Default: No**
-
-   *This flag causes the extension to carried out within the sequences (as opposed to between sequences). This is necessary when looking for internal repeats with Mocca.*
-
--seq_name_for_quadruplet
-^^^^^^^^^^^^^^^^^^^^^^^^
-  **Usage: Unsupported**
-
--weight
-^^^^^^^
-  **Usage: -weight=<winsimN, sim or sim_<matrix_name or matrix_file> or <integer value>**
-
-   *Default: -weight=sim*
-
-   *Weight defines the way alignments are weighted when turned into a library. Overweighting can be obtained with the OW<X> weight mode.*
-
-   *winsimN indicates that the weight assigned to a given pair will be equal to the percent identity within a window of 2N+1 length centered on that pair. For instance winsim10 defines a window of 10 residues around the pair being considered. This gives its own weight to each residue in the output library. In our hands, this type of weighting scheme has not provided any significant improvement over the standard sim value.*
+ - **-weight**
+Common usage: **-weight=<winsimN, sim or sim_<matrix_name or matrix_file> or <integer value>**
+*Default: -weight=sim*
+*Weight defines the way alignments are weighted when turned into a library. Overweighting can be obtained with the OW<X> weight mode.*
+*winsimN indicates that the weight assigned to a given pair will be equal to the percent identity within a window of 2N+1 length centered on that pair. For instance winsim10 defines a window of 10 residues around the pair being considered. This gives its own weight to each residue in the output library. In our hands, this type of weighting scheme has not provided any significant improvement over the standard sim value.*
 
 ::
 
@@ -451,9 +372,7 @@ Library Computation: Extension
 
 
    *sim indicates that the weight equals the average identity within the sequences containing the matched residues.*
-
    *OW<X> Will cause the sim weight to be multiplied by X*
-
    *sim_matrix_name indicates the average identity with two residues regarded as identical when their substitution value is positive. The valid matrices names are in matrices.h (pam250mt) .Matrices not found in this header are considered to be filenames. See the format section for matrices. For instance, -weight=sim_pam250mt indicates that the grouping used for similarity will be the set of classes with positive substitutions.*
 
 ::
@@ -461,13 +380,9 @@ Library Computation: Extension
   $$: t_coffee sample_seq1.fasta -weight=winsim10 -out_lib=test.tc_lib
 
 
-
    *Other groups include*
-
    *sim_clustalw_col ( categories of clustalw marked with :)*
-
    *sim_clustalw_dot ( categories of clustalw marked with .)*
-
    *Value indicates that all the pairs found in the alignments must be given the same weight equal to value. This is useful when the alignment one wishes to turn into a library must be given a pre-specified score (for instance if they come from a structure super-imposition program). Value is an integer:*
 
 ::
@@ -478,32 +393,19 @@ Library Computation: Extension
 
 Tree Computation
 ----------------
--distance_matrix_mode
-^^^^^^^^^^^^^^^^^^^^^
+ - **-distance_matrix_mode**
+
   **Usage: -distance_matrix_mode=<slow, fast, very_fast>**
-
    *Default: very_fast*
-
    *This flag indicates the method used for computing the distance matrix (distance between every pair of sequences) required for the computation of the dendrogram.*
-
    *Slow  The chosen dp_mode using the extended library,*
-
    *fast:  The fasta dp_mode using the extended library.*
-
    *very_fast The fasta dp_mode using blosum62mt.*
-
    *ktup Ktup matching (Muscle kind)*
-
    *aln Read the distances on a precomputed MSA*
 
--quicktree [CW]
-^^^^^^^^^^^^^^^
-  **Usage: -quicktree**
-
-   *Description: Causes T-Coffee to compute a fast approximate guide tree*
-
-This flag is kept for compatibility with ClustalW. It indicates that:
-
+ - **-quicktree [cw]**
+*Description: Causes T-Coffee to compute a fast approximate guide tree*. This flag is kept for compatibility with ClustalW. It indicates that:
 
 ::
 
@@ -512,304 +414,189 @@ This flag is kept for compatibility with ClustalW. It indicates that:
   $$: t_coffee sample_seq1.fasta -quicktree
 
 
+Pairwise Alignment Computation
+------------------------------
+Controlling Alignment Computation. Most parameters in this section refer to the alignment mode fasta_pair_wise and cfatsa_pair_wise. When using these alignment modes, things proceed as follow:
 
-Pair-wise Alignment Computation
--------------------------------
-::
-
-  Controlling Alignment Computation
-  Most parameters in this section refer to the alignment mode fasta_pair_wise an\
- d cfatsa_pair_wise. When using these alignment modes, things proceed as follow:
-  1-Sequences are recoded using a degenerated alphabet provided with <-sim_matri\
- x>
-  2-Recoded sequences are then hashed into ktuples of size <-ktup>
-  3-Dynamic programming runs on the <-ndiag> best diagonals whose score is highe\
- r than <-diag_threshold>, the way diagonals are scored is controlled via <-diag_\
- mode> .
-  4-The Dynamic computation is made to optimize either the library scoring schem\
- e (as defined by the -in flag) or a substitution matrix as provided via the -mat\
- rix flag. The penalty scheme is defined by -gapopen and -gapext. If -gapopen is \
- undefined, the value defined in -cosmetic_penalty is used instead.
-  5-Terminal gaps are scored according to -tg_mode
+1) Sequences are recoded using a degenerated alphabet provided with **-sim_matrix**
+2) Recoded sequences are then hashed into ktuples of size <-ktup>
+3) Dynamic programming runs on the <-ndiag> best diagonals whose score is higher than **-diag_threshold**, the way diagonals are scored is controlled via **-diag_mode**.
+4) The Dynamic computation is made to optimize either the library scoring scheme (as defined by the **-in** flag) or a substitution matrix as provided via the **-matrix** flag. The penalty scheme is defined by **-gapopen** and **-gapext**. If **-gapopen** is undefined, the value defined in **-cosmetic_penalty** is used instead.
+5) Terminal gaps are scored according to **-tg_mode**.
 
 
--dp_mode
-^^^^^^^^
-  **Usage: -dp_mode=<string>**
-
-   *Default: -dp_mode=cfasta_fair_wise*
-
-   *This flag indicates the type of dynamic programming used by the program:*
+ - **-dp_mode**
+**Usage: -dp_mode=<string>**
+*Default: -dp_mode=cfasta_fair_wise*
+*This flag indicates the type of dynamic programming used by the program:*
 
 ::
 
   $$: t_coffee sample_seq1.fasta -dp_mode myers_miller_pair_wise
 
 
-
    *gotoh_pair_wise: implementation of the gotoh algorithm (quadratic in memory and time)*
-
    *myers_miller_pair_wise: implementation of the Myers and Miller dynamic programming algorithm ( quadratic in time and linear in space). This algorithm is recommended for very long sequences. It is about 2 times slower than gotoh and only accepts tg_mode=1or 2 (i.e. gaps penalized for opening).*
-
    *fasta_pair_wise: implementation of the fasta algorithm. The sequence is hashed, looking for ktuples words. Dynamic programming is only carried out on the ndiag best scoring diagonals. This is much faster but less accurate than the two previous. This mode is controlled by the parameters -ktuple, -diag_mode and -ndiag*
-
    *cfasta_pair_wise: c stands for checked. It is the same algorithm. The dynamic programming is made on the ndiag best diagonals, and then on the 2*ndiags, and so on until the scores converge. Complexity will depend on the level of divergence of the sequences, but will usually be L*log(L), with an accuracy comparable to the two first mode ( this was checked on BaliBase). This mode is controlled by the parameters -ktuple, -diag_mode and -ndiag*
 
 .. note:: Note: Users may find by looking into the code that other modes with fancy names exists (viterby_pair_wise...) Unless mentioned in this documentation, these modes are not supported.
 
--ktuple
-^^^^^^^
-  **Usage: -ktuple=<value>**
+ - **-ktuple**
+**Usage: -ktuple=<value>**
+*Default: -ktuple=1 or 2*
+*Indicates the ktuple size for cfasta_pair_wise dp_mode and fasta_pair_wise. It is set to 1 for proteins, and 2 for DNA. The alphabet used for protein can be a degenerated version, set with -sim_matrix..*
 
-   *Default: -ktuple=1 or 2*
-
-   *Indicates the ktuple size for cfasta_pair_wise dp_mode and fasta_pair_wise. It is set to 1 for proteins, and 2 for DNA. The alphabet used for protein can be a degenerated version, set with -sim_matrix..*
-
--ndiag
-^^^^^^
-  **Usage: -ndiag=<value>**
-
-   *Default: -ndiag=0*
-
-   *Indicates the number of diagonals used by the fasta_pair_wise algorithm (cf -dp_mode). When -ndiag=0, n_diag=Log (length of the smallest sequence)+1.*
+ - **-ndiag**
+**Usage: -ndiag=<value>**
+*Default: -ndiag=0*
+*Indicates the number of diagonals used by the fasta_pair_wise algorithm (cf -dp_mode). When -ndiag=0, n_diag=Log (length of the smallest sequence)+1.*
 
 .. note:: When -ndiag and -diag_threshold are set, diagonals are selected if and only if they fulfill both conditions.
 
--diag_mode
-^^^^^^^^^^
-  **Usage: -diag_mode=<value>**
+ - **-diag_mode**
+**Usage: -diag_mode=<value>**
+*Default: -diag_mode=0*
+*Indicates the manner in which diagonals are scored during the fasta hashing.*
+*0: indicates that the score of a diagonal is equal to the sum of the scores of the exact matches it contains.*
+*1 indicates that this score is set equal to the score of the best uninterrupted segment (useful when dealing with fragments of sequences).*
 
-   *Default: -diag_mode=0*
+ - **-diag_threshold**
+**Usage: -diag_threshold=<value>**
+*Default: -diag_threshold=0*
+*Sets the value of the threshold when selecting diagonals.*
+*0: indicates that -ndiag should be used to select the diagonals (cf -ndiag section).*
 
-   *Indicates the manner in which diagonals are scored during the fasta hashing.*
-
-   *0: indicates that the score of a diagonal is equal to the sum of the scores of the exact matches it contains.*
-
-   *1 indicates that this score is set equal to the score of the best uninterrupted segment (useful when dealing with fragments of sequences).*
-
--diag_threshold
-^^^^^^^^^^^^^^^
-  **Usage: -diag_threshold=<value>**
-
-   *Default: -diag_threshold=0*
-
-   *Sets the value of the threshold when selecting diagonals.*
-
-   *0: indicates that -ndiag should be used to select the diagonals (cf -ndiag section).*
-
--sim_matrix
-^^^^^^^^^^^
-  **Usage: -sim_matrix=<string>**
-
-   *Default: -sim_matrix=vasiliky*
-
-   *Indicates the manner in which the amino acid alphabet is degenerated when hashing in the fasta_pairwise dynamic programming. Standard ClustalW matrices are all valid. They are used to define groups of amino acids having positive substitution values. In T-Coffee, the default is a 13 letter grouping named Vasiliky, with residues grouped as follows:*
+ - **-sim_matrix**
+**Usage: -sim_matrix=<string>**
+*Default: -sim_matrix=vasiliky*
+*Indicates the manner in which the amino acid alphabet is degenerated when hashing in the fasta_pairwise dynamic programming. Standard ClustalW matrices are all valid. They are used to define groups of amino acids having positive substitution values. In T-Coffee, the default is a 13 letter grouping named Vasiliky, with residues grouped as follows:*
 
 ::
 
   rk, de, qh, vilm, fy (other residues kept alone).
 
 
+*This alphabet is set with the flag -sim_matrix=vasiliky. In order to keep the alphabet non degenerated, -sim_matrix=idmat can be used to retain the standard alphabet.*
 
-   *This alphabet is set with the flag -sim_matrix=vasiliky. In order to keep the alphabet non degenerated, -sim_matrix=idmat can be used to retain the standard alphabet.*
+ - **-matrix [cw]**
+**Usage: -matrix=<blosum62mt>**
+*Default: -matrix=blosum62mt*
+*The usage of this flag has been modified from previous versions, due to frequent mistakes in its usage. This flag sets the matrix that will be used by alignment methods within t_coffee (slow_pair, lalign_id_pair). It does not affect external methods (like clustal_pair, clustal_aln...).*
+*Users can also provide their own matrices, using the matrix format described in the appendix.*
 
--matrix [CW]
-^^^^^^^^^^^^
-  **Usage: -matrix=<blosum62mt>**
+ - **-nomatch**
+**Usage: -nomatch=<positive value>**
+*Default: -nomatch=0*
+*Indicates the penalty to associate with a match. When using a library, all matches are positive or equal to 0. Matches equal to 0 are unsupported by the library but non-penalized. Setting nomatch to a non-negative value makes it possible to penalize these null matches and prevent unrelated sequences from being aligned (this can be useful when the alignments are meant to be used for structural modeling).*
 
-   *Default: -matrix=blosum62mt*
+ - **-gapopen**
+**Usage: -gapopen=<negative value>**
+*Default: -gapopen=0*
+*Indicates the penalty applied for opening a gap. The penalty must be negative. If no value is provided when using a substitution matrix, a value will be automatically computed.*
+*Here are some guidelines regarding the tuning of gapopen and gapext. In T-Coffee matches get a score between 0 (match) and 1000 (match perfectly consistent with the library). The default cosmetic penalty is set to -50 (5% of a perfect match). If you want to tune -gapoen and see a strong effect, you should therefore consider values between 0 and -1000.*
 
-   *The usage of this flag has been modified from previous versions, due to frequent mistakes in its usage. This flag sets the matrix that will be used by alignment methods within t_coffee (slow_pair, lalign_id_pair). It does not affect external methods (like clustal_pair, clustal_aln...).*
+ - **-gapext**
+**Usage: -gapext=<negative value>**
+*Default: -gapext=0*
+*Indicates the penalty applied for extending a gap (cf -gapopen)*
 
-   *Users can also provide their own matrices, using the matrix format described in the appendix.*
+ - **-fgapopen** [Unsupported]
 
--nomatch
-^^^^^^^^
-  **Usage: -nomatch=<positive value>**
+ - **-fgapext** [Unsupported]
 
-   *Default: -nomatch=0*
+ - **-cosmetic_penalty**
+**Usage: -cosmetic_penalty=<negative value>**
+*Default: -cosmetic_penalty=-50*
+*Indicates the penalty applied for opening a gap. This penalty is set to a very low value. It will only have an influence on the portions of the alignment that are unalignable. It will not make them more correct, but only more pleasing to the eye ( i.e. Avoid stretches of lonely residues).*
+*The cosmetic penalty is automatically turned off if a substitution matrix is used rather than a library.*
 
-   *Indicates the penalty to associate with a match. When using a library, all matches are positive or equal to 0. Matches equal to 0 are unsupported by the library but non-penalized. Setting nomatch to a non-negative value makes it possible to penalize these null matches and prevent unrelated sequences from being aligned (this can be useful when the alignments are meant to be used for structural modeling).*
-
--gapopen
-^^^^^^^^
-  **Usage: -gapopen=<negative value>**
-
-   *Default: -gapopen=0*
-
-   *Indicates the penalty applied for opening a gap. The penalty must be negative. If no value is provided when using a substitution matrix, a value will be automatically computed.*
-
-   *Here are some guidelines regarding the tuning of gapopen and gapext. In T-Coffee matches get a score between 0 (match) and 1000 (match perfectly consistent with the library). The default cosmetic penalty is set to -50 (5% of a perfect match). If you want to tune -gapoen and see a strong effect, you should therefore consider values between 0 and -1000.*
-
--gapext
-^^^^^^^
-  **Usage: -gapext=<negative value>**
-
-   *Default: -gapext=0*
-
-   *Indicates the penalty applied for extending a gap (cf -gapopen)*
-
--fgapopen
-^^^^^^^^^
-  **Unsupported**
-
--fgapext
-^^^^^^^^
-  **Unsupported**
-
--cosmetic_penalty
-^^^^^^^^^^^^^^^^^
-  **Usage: -cosmetic_penalty=<negative value>**
-
-   *Default: -cosmetic_penalty=-50*
-
-   *Indicates the penalty applied for opening a gap. This penalty is set to a very low value. It will only have an influence on the portions of the alignment that are unalignable. It will not make them more correct, but only more pleasing to the eye ( i.e. Avoid stretches of lonely residues).*
-
-   *The cosmetic penalty is automatically turned off if a substitution matrix is used rather than a library.*
-
--tg_mode
-^^^^^^^^
-  **Usage: -tg_mode=<0, 1, or 2>**
-
-   *Default: -tg_mode=1*
-
-   *0: terminal gaps penalized with -gapopen + -gapext*len*
-
-   *1: terminal gaps penalized with a -gapext*len*
-
-   *2: terminal gaps unpenalized.*
+ - **-tg_mode**
+**Usage: -tg_mode=<0, 1, or 2>**
+*Default: -tg_mode=1*
+*0: terminal gaps penalized with -gapopen + -gapext*len*
+*1: terminal gaps penalized with a -gapext*len*
+*2: terminal gaps unpenalized.*
 
 Weighting Schemes
 -----------------
--seq_weight
-^^^^^^^^^^^
-  **Usage: -seq_weight=<t_coffee or <file_name>>**
-
-   *Default: -seq_weight=t_coffee*
-
-   *These are the individual weights assigned to each sequence. The t_coffee weights try to compensate the bias in consistency caused by redundancy in the sequences.*
+ - **-seq_weight**
+**Usage: -seq_weight=<t_coffee or <file_name>>**
+*Default: -seq_weight=t_coffee*
+*These are the individual weights assigned to each sequence. The t_coffee weights try to compensate the bias in consistency caused by redundancy in the sequences.*
 
 ::
 
    sim(A,B)=%similarity between A and B, between 0 and 1.
-
    weight(A)=1/sum(sim(A,X)^3)
 
-
-
-   *Weights are normalized so that their sum equals the number of sequences. They are applied onto the primary library in the following manner:*
+*Weights are normalized so that their sum equals the number of sequences. They are applied onto the primary library in the following manner:*
 
 ::
 
    res_score(Ax,By)=Min(weight(A), weight(B))*res_score(Ax, By)
 
 
+*These are very simple weights. Their main goal is to prevent a single sequence present in many copies to dominate the alignment.*
 
-   *These are very simple weights. Their main goal is to prevent a single sequence present in many copies to dominate the alignment.*
+.. note:: 1) The library output by -out_lib is the un-weighted library. 2) Weights can be output using the -outseqweight flag. 3) You can use your own weights (see the format section).
 
-.. note:: Note: The library output by -out_lib is the un-weighted library.
-
-.. note:: Note: Weights can be output using the -outseqweight flag.
-
-.. note:: Note: You can use your own weights (see the format section).
 
 Multiple Alignment Computation
 ------------------------------
--msa_mode
-^^^^^^^^^
-  **Usage: -msa_mode=<tree,graph,precomputed>**
+ - **-msa_mode** [Unsupported]
+**Usage: -msa_mode=<tree,graph,precomputed>**
+*Default: -evaluate_mode=tree*
 
-   *Default: -evaluate_mode=tree*
+ - **-one2all**
+**Usage: -one2all=<name>**
+*Default: not used*
+*Will generate a one to all library with respect to the specified sequence and will then align all the sequences in turn to that sequence, in a sequence determined by the order in which the sequences were provided.*
+*-profile_comparison =profile, the MSAs provided via -profile are vectorized and the function specified by -profile_comparison is used to make profile profile alignments. In that case, the complexity is NL^2*
 
-   *Unsupported*
+ - **-profile_comparison**
+**Usage: -profile_mode=<fullN,profile>**
+*Default: -profile_mode=full50*
+*The profile mode flag controls the multiple profile alignments in T-Coffee. There are two instances where t_coffee can make multiple profile alignments:*
+*1-When N, the number of sequences is higher than -maxnseq, the program switches to its multiple profile alignment mode (t_coffee_dpa).*
+*2-When MSAs are provided via the -profile flag or via -profile1 and -profile2.*
+*In these situations, the -profile_mode value influences the alignment computation, these values are:*
+*-profile_comparison =profile, the MSAs provided via -profile are vectorized and the function specified by -profile_comparison is used to make profile profile alignments. In that case, the complexity is NL^2*
+*-profile_comparison=fullN, N is an integer value that can omitted. Full indicates that given two profiles, the alignment will be based on a library that includes every possible pair of sequences between the two profiles. If N is set, then the library will be restricted to the N most similar pairs of sequences between the two profiles, as judged from a measure made on a pairwise alignment of these two profiles.*
 
--one2all
-^^^^^^^^
-  **Usage: -one2all=<name>**
-
-   *Default: not used*
-
-   *Will generate a one to all library with respect to the specified sequence and will then align all the sequences in turn to that sequence, in a sequence determined by the order in which the sequences were provided.*
-
-   *-profile_comparison =profile, the MSAs provided via -profile are vectorized and the function specified by -profile_comparison is used to make profile profile alignments. In that case, the complexity is NL^2*
-
--profile_comparison
-^^^^^^^^^^^^^^^^^^^
-  **Usage: -profile_mode=<fullN,profile>**
-
-   *Default: -profile_mode=full50*
-
-   *The profile mode flag controls the multiple profile alignments in T-Coffee. There are two instances where t_coffee can make multiple profile alignments:*
-
-   *1-When N, the number of sequences is higher than -maxnseq, the program switches to its multiple profile alignment mode (t_coffee_dpa).*
-
-   *2-When MSAs are provided via the -profile flag or via -profile1 and -profile2.*
-
-   *In these situations, the -profile_mode value influences the alignment computation, these values are:*
-
-   *-profile_comparison =profile, the MSAs provided via -profile are vectorized and the function specified by -profile_comparison is used to make profile profile alignments. In that case, the complexity is NL^2*
-
-   *-profile_comparison=fullN, N is an integer value that can omitted. Full indicates that given two profiles, the alignment will be based on a library that includes every possible pair of sequences between the two profiles. If N is set, then the library will be restricted to the N most similar pairs of sequences between the two profiles, as judged from a measure made on a pairwise alignment of these two profiles.*
-
--profile_mode
-^^^^^^^^^^^^^
-  **Usage: -profile_mode=<cw_profile_profile, muscle_profile_profile, multi_channel>**
-
-   *Default: -profile_mode=cw_profile_profile*
-
-   *When -profile_comparison=profile, this flag selects a profile scoring function.*
+ - **-profile_mode**
+**Usage: -profile_mode=<cw_profile_profile, muscle_profile_profile, multi_channel>**
+*Default: -profile_mode=cw_profile_profile*
+*When -profile_comparison=profile, this flag selects a profile scoring function.*
 
 Alignment Post-Processing
 -------------------------
--clean_aln
-^^^^^^^^^^
-  **Usage: -clean_aln**
+ - **-clean_aln**
+**Usage: -clean_aln**
+*Default:-clean_aln*
+*This flag causes T-Coffee to post-process the multiple alignment. Residues that have a reliability score smaller or equal to -clean_threshold (as given by an evaluation that uses -clean_evaluate_mode) are realigned to the rest of the alignment. Residues with a score higher than the threshold constitute a rigid framework that cannot be altered.*
+*The cleaning algorithm is greedy. It starts from the top left segment of low constituency residues and works its way left to right, top to bottom along the alignment. You can require this operation to be carried out for several cycles using the -clean_iterations flag.*
+*The rationale behind this operation is mostly cosmetic. In order to ensure a decent looking alignment, the gop is set to -20 and the gep to -1. There is no penalty for terminal gaps, and the matrix is blosum62mt.*
 
-   *Default:-clean_aln*
+.. warning:: Gaps are always considered to have a reliability score of 0. The use of the cleaning option can result in memory overflow when aligning large sequences,
 
-   *This flag causes T-Coffee to post-process the multiple alignment. Residues that have a reliability score smaller or equal to -clean_threshold (as given by an evaluation that uses -clean_evaluate_mode) are realigned to the rest of the alignment. Residues with a score higher than the threshold constitute a rigid framework that cannot be altered.*
+ - **-clean_threshold**
+**Usage: -clean_threshold=<0-9>**
+*Default:-clean_aln=1*. See -clean_aln for details.
 
-   *The cleaning algorithm is greedy. It starts from the top left segment of low constituency residues and works its way left to right, top to bottom along the alignment. You can require this operation to be carried out for several cycles using the -clean_iterations flag.*
+ - **-clean_iteration**
+**Usage: -clean_iteration=<value between 1 and >**
+*Default:-clean_iteration=1*. See -clean_aln for details.
 
-   *The rationale behind this operation is mostly cosmetic. In order to ensure a decent looking alignment, the gop is set to -20 and the gep to -1. There is no penalty for terminal gaps, and the matrix is blosum62mt.*
+ - **-clean_evaluation_mode**
+**Usage: -clean_iteration=<evaluation_mode >**
+*Default:-clean_iteration=t_coffee_non_extended*
+*Indicates the mode used for the evaluation that will indicate the segments that should be realigned. See -evaluation_mode for the list of accepted modes.*
 
-.. note:: Note: Gaps are always considered to have a reliability score of 0.
-
-.. note:: Note: The use of the cleaning option can result in memory overflow when aligning large sequences,
-
--clean_threshold
-^^^^^^^^^^^^^^^^
-  **Usage: -clean_threshold=<0-9>**
-
-  **Default:-clean_aln=1**
-
-See -clean_aln for details.
-
-
--clean_iteration
-^^^^^^^^^^^^^^^^
-  **Usage: -clean_iteration=<value between 1 and >**
-
-   *Default:-clean_iteration=1*
-
-See -clean_aln for details.
-
-
--clean_evaluation_mode
-^^^^^^^^^^^^^^^^^^^^^^
-  **Usage: -clean_iteration=<evaluation_mode >**
-
-   *Default:-clean_iteration=t_coffee_non_extended*
-
-   *Indicates the mode used for the evaluation that will indicate the segments that should be realigned. See -evaluation_mode for the list of accepted modes.*
-
--iterate
-^^^^^^^^
-  **Usage: -iterate=<integer>**
-
-   *Default: -iterate=0*
-
-   *Sequences are extracted in turn and realigned to the MSA. If iterate is set to -1, each sequence is realigned, otherwise the number of iterations is set by -iterate.*
+ - **-iterate**
+**Usage: -iterate=<integer>**
+*Default: -iterate=0*
+*Sequences are extracted in turn and realigned to the MSA. If iterate is set to -1, each sequence is realigned, otherwise the number of iterations is set by -iterate.*
 
 Database Searches
 =================
