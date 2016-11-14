@@ -34,7 +34,7 @@ You can use any kind of separator you want (i.e. ,; <space>=). The syntax used i
 
 Entering the right parameters
 -----------------------------
-There are many ways to enter parameters in T-Coffee, see the **-parameters** flag. In general you will not need to use these complicated parameters, yet, if you find yourself typing long command lines on a regular basis, it may be worth reading this section. One may easily feel confused with the various manners in which the parameters can be passed to T-Coffee. The reason for these many mechanisms is that they allow several levels of intervention. For instance, you may install T-Coffee for all the users and decide that the defaults we provide are not the proper ones... In this case, you will need to make your own t_coffee_default file. Later on, a user may find that he/she needs to keep reusing a specific set of parameters, different from those in t_coffee_default, hence the possibility to write an extra parameter file: parameters. In summary:
+There are many ways to enter parameters in T-Coffee, see the **-parameters** flag. In general you will not need to use these complicated parameters, yet, if you find yourself typing long command lines on a regular basis, it may be worth reading this section. One may easily feel confused with the various manners in which the parameters can be passed to T-Coffee. The reason for these many mechanisms is that they allow several levels of intervention. For instance, you may install T-Coffee for all the users and decide that the defaults we provide are not the proper ones...In this case, you will need to make your own ``t_coffee_default`` file. Later on, a user may find that he/she needs to keep reusing a specific set of parameters, different from those in t_coffee_default, hence the possibility to write an extra parameter file with the flag **-parameters**. In summary:
 
 ::
 
@@ -71,29 +71,23 @@ It is possible to modify T-Coffee's behavior by setting any of the following env
 
 Setting up the environment variables
 ------------------------------------
-T-Coffee can have its own environment file. This environment is kept in a file named $HOME/.t_coffee/t_coffee_env and can be edited. The value of any legal variable can be modified through that file. For instance, here is an example of a configuration file when not requiring a proxy.
+T-Coffee can have its own environment file. This environment is kept in a file named ``$HOME/.t_coffee/t_coffee_env`` and can be edited. The value of any legal variable can be modified through that file. For instance, here are some examples of 1) using a configuration file when not requiring a proxy, 2) setting up any environment variable using the **-setenv** or 3) simply using an export.
 
 ::
 
+  1) No proxy
   $: http_proxy_4_TCOFFEE=
   $: EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
 
-If you want to use a specific configuration file:
+  2) Using 'setenv'
+  $$: t_coffee ... -setenv ENV_4_TCOFFEE=<location>
 
-::
-
-  $: t_coffee ... -setenv ENV_4_TCOFFEE=<location>
-
-In general, you can set any environment variable using the -setenv flag. You can also simply do an export:
-
-::
-
+  3) Using 'export'
   $: export ENV_4_TCOFFEE=<location>
 
-.. warning:: export > -setenv > -proxy, -email > t_coffee_env > default environment
+.. hint:: export > -setenv > -proxy, -email > t_coffee_env > default environment
 
-Note that when you use -setenv for PATH, the value you provide is concatenated TO THE BEGINNING of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
-
+.. note:: When you use **-setenv** for PATH, the value you provide is concatenated TO THE BEGINNING of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
 
 Meta Parameters
 ===============
@@ -106,7 +100,7 @@ Global Behavior
 *A T-Coffee mode is a hard coded mode command line calling to specific options predetermined and optimized. By default, they are not used and should be called upon. Here are some examples: expresso, mcoffee, rcoffee, evaluate, accurate, procoffee... These modes have been designed to deliver the best results possible for a specific task; they can work without any parameters but can be controled and modified extensively with extra parameters.*
 
  - **-parameters**
-*Input needs to be a file containing extra parameters for T-Coffee. Parameters read this way behave as if they had been added on the right end of the command line that they either supersede (one value parameter) or complete (list of values). Here is an example of usage that will cause T-Coffee to apply the* **fast_pair** *method onto the sequences contained in ``sample_seq1.fasta``. If you wish, you can also pipe these arguments into T-Coffee by naming the parameter file 'stdin' (as a rule, any file named stdin is expected to receive its content via the stdin)*
+*Input needs to be a file containing extra parameters for T-Coffee. Parameters read this way behave as if they had been added on the right end of the command line that they either supersede (one value parameter) or complete (list of values). Here is an example of usage that will cause T-Coffee to apply the* **fast_pair** *method onto the sequences contained in* ``sample_seq1.fasta``. *If you wish, you can also pipe these arguments into T-Coffee by naming the parameter file 'stdin' (as a rule, any file named stdin is expected to receive its content via the stdin)*
 
 ::
 
@@ -124,15 +118,16 @@ Global Behavior
 
 .. warning:: This parameter file can ONLY contain valid parameters. Comments are not allowed. Parameters passed this way will be checked like normal parameters.
 
+
  - **-t_coffee_defaults**
-*Input needs to be a file; it will tells the program to use some default parameter file for t_coffee. The format of that file is the same as the one used with* **-parameters**. *The file used is either:*
+*Input needs to be a file; it will tells the program to use some default parameter file for T-Coffee. The format of that file is the same as the one used with* **-parameters**. *The file used is either:*
 
  1) <file name> if a name has been specified
  2) ~/.t_coffee_defaults if no file was specified
  3) The file indicated by the environment variable TCOFFEE_DEFAULTS
 
  - **-evaluate**
-*Replaces the former flag* **-score** *which is no longer supported. This flag toggles on the evaluate mode and causes T-Coffee to evaluate a precomputed MSA provided via* **-infile=<MSA>**. *The main purpose of this flag is to let you control every aspect of the evaluation, yet it is advisable to use predefined parameterization* **-mode=evaluate**. *The flag* **-output** *must be set to an appropriate format* (refer to the subsection **Alignments Flags**).
+*Replaces the former flag* **-score** *which is no longer supported. This flag toggles on the evaluate mode and causes T-Coffee to evaluate a precomputed MSA provided via* **-infile=<MSA>**. *The main purpose of this flag is to let you control every aspect of the evaluation, yet it is advisable to use predefined parameterization* **-mode=evaluate**. *The flag* **-output** *must be set to an appropriate format (refer to the subsection 'Alignments Flags').*
 
 ::
 
@@ -141,84 +136,39 @@ Global Behavior
   $$: t_coffee -infile=sample_seq1.aln -in Lsample_lib1.tc_lib -mode=evaluate
 
 
+
  - **-convert [cw]**  
 *By default, is turned off. It toggles on the conversion mode and causes T-Coffee to convert the sequences, alignments, libraries or structures provided via the -infile and -in flags. The output format must be set via the -output flag. This flag can also be used if you simply want to compute a library (i.e. you have an alignment and you want to turn it into a library). This flag is ClustalW compliant.*
 
 
 Misc Parameters
 ---------------
--version
-^^^^^^^^
-  **Usage: -version**
+ - **-version**
+*Returns the current version number*
 
-   *Default: not used*
-   *Returns the current version number*
+ - **-proxy**
+*Sets the proxy used by HTTP_proxy AND http_proxy. Setting with the propmpt supersedes ANY other setting. Note that if you use no proxy, you should set* **-proxy**.
 
--proxy
-^^^^^^
-  **Usage: -proxy=<proxy>**
+ - **-email**
+*Sets your email value as provided to web services*
 
-   *Default: not used*
-   *Sets the proxy used by HTTP_proxy AND http_proxy. Setting with the propmpt supersedes ANY other setting.*
-   *Note that if you use no proxy, you should set*
-   * -proxy*
+ - **-check_configuration**
+*Checks your system to determine whether all the programs T-Coffee can interact with are installed or not.*
 
--email
-^^^^^^
-  **Usage: -email=<email>**
+ - **-cache**
+*By default, t_coffee stores in a cache directory, the results of computationally expensive (structural alignment) or network intensive (BLAST search) operations. The usage is the following:* **-cache=<use, update, ignore, <filename>**.
 
-   *Default: not used*
-   *Sets your email value as provided to web services*
+ - **-update**
+*Causes a wget access that checks whether the t_coffee version you are using needs updating.*
 
--check_configuration
-^^^^^^^^^^^^^^^^^^^^
-  **Usage: -check_configuration**
+ - **-full_log**
+*Requires a file name as parameter; it causes t_coffee to output a full log file that contains all the input/output files.*
 
-   *Default: not used*
+ - **-plugins**
+*The input parameter has to be a directory; the directory is where all third pirty packages used by T-Coffee are kept as an alternative, you can also set the environment variable PLUGINS_4_TCOFFEE. The default directory is ~/.t_coffee/plugins/.*
 
-   *Checks your system to determine whether all the programs T-Coffee can interact with are installed.*
-
--cache
-^^^^^^
-  **Usage: -cache=<use, update, ignore, <filename>>**
-
-   *Default: -cache=use*
-
-   *By default, t_coffee stores in a cache directory, the results of computationally expensive (structural alignment) or network intensive (BLAST search) operations.*
-
--update
-^^^^^^^
-  **Usage: -update**
-
-   *Default: turned off*
-
-   *Causes a wget access that checks whether the t_coffee version you are using needs updating.*
-
--full_log
-^^^^^^^^^
-  **Usage: -full_log=<filename>**
-
-   *Default: turned off*
-
-   *Causes t_coffee to output a full log file that contains all the input/output files.*
-
--plugins
-^^^^^^^^
-  **Usage: -plugins=<dir>**
-
-   *Default: default*
-
-   *Specifies the directory in which the companion packages (other multiple aligners used by M-Coffee, structural aligners, etc...) are kept as an alternative, you can also set the environment variable PLUGINS_4_TCOFFEE*
-
-   *The default is ~/.t_coffee/plugins/*
-
--other_pg
-^^^^^^^^^
-  **Usage: -other_pg=<filename>**
-
-   *Default: turned off*
-
-   *Some rumours claim that Tetris is embedded within T-Coffee and could be ran using some special set of commands. We wish to deny these rumours, although we may admit that several interesting reformatting programs are now embedded in t_coffee and can be ran through the -other_pg flag.*
+ - **-other_pg**
+*Some rumours claim that Tetris is embedded within T-Coffee and could be ran using some special set of commands. We wish to deny these rumours, although we may admit that several interesting reformatting programs are now embedded in T-Coffee and can be ran through the* **-other_pg** *flag. Among these other programs you can find seq_reformat, aln_compare, extract_from_pdb, irmsd, etc...*
 
 ::
 
@@ -231,128 +181,26 @@ Misc Parameters
 
 Input
 =====
-Sequence Input
---------------
--infile [cw]
-^^^^^^^^^^^^
-   *To remain compatible with ClustalW, it is possible to indicate the sequences with this flag*
+The most important -in flag
+---------------------------
+The -in Flag and its Identifier TAGS <-in> is the real grinder of T-Coffee. Sequences, methods and alignments all pass through so that T-Coffee can turn it all into a single list of constraints (the library). Everything is done automatically with T-Coffee going through each file to extract the sequences it contains. The methods are then applied to the sequences. Pre-compiled constraint list can also be provided. Each file provided via this flag must be preceded with a symbol (Identifier TAG) that indicates its nature to T-Coffee. The TAGs currently supported are the following:
 
 ::
 
-  $$: t_coffee -infile=sample_seq1.fasta
-
-
-
-.. note:: Note: Common multiple sequence alignments format constitute a valid input format.
-
-.. note:: Note: T-Coffee automatically removes the gaps before doing the alignment. This behaviour is different from that of ClustalW where the gaps are kept.
-
--in (Cf -in from the Method and Library Input section)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
--get_type
-^^^^^^^^^
-  **Usage: -get_type**
-
-   *Default: turned off*
-
-   *Forces t_coffee to identify the sequences type (PROTEIN, DNA).*
-
--type [cw]
-^^^^^^^^^^
-  **Usage: -type=DNA  PROTEIN DNA_PROTEIN**
-
-   *Default: -type=<automatically set>*
-
-   *This flag sets the type of the sequences. If omitted, the type is guessed automatically. This flag is compatible with ClustalW.*
-
-.. warning:: In case of low complexity or short sequences, it is recommended to set the type manually.
-
--seq
-^^^^
-  **Usage: -seq=[<P,S><name>,]**
-
-   *Default: none*
-
--seq is now the recommended flag to provide your sequences. It behaves mostly like the -in flag.
-
-
--seq_source
-^^^^^^^^^^^
-  **Usage: -seq_source=<ANY or _LS or LS >**
-
-   *Default: ANY.*
-
-   *You may not want to combine all the provided sequences into a single sequence list. You can do by specifying that you do not want to treat all the -in files as potential sequence sources.*
-
-   *-seq_source=_LA indicates that neither sequences provided via the A (Alignment) flag or via the L (Library flag) should be added to the sequence list.*
-
-   *-seq_source=S means that only sequences provided via the S tag will be considered. All the other sequences will be ignored.*
-
-.. note:: Note: This flag is mostly designed for interactions between T-Coffee and T-CoffeeDPA (the large scale version of T-Coffee).
-
-Structure Input
----------------
--pdb
-^^^^
-  **Usage: -pdb=<pdbid1>,<pdbid2>...[Max 200]**
-
-   *Default: None*
-
-   *Reads or fetch a pdb file. It is possible to specify a chain or even a sub-chain:*
-
-::
-
-  PDBID(PDB_CHAIN)[opt] (FIRST,LAST)[opt]
-
-
-
-   *It is also possible to input structures via the -in flag. In that case, you will need to use the TAG identifier:*
-
-::
-
-  -in Ppdb1 Ppdb2...
-
-
-
-Tree Input
-----------
--usetree
-^^^^^^^^
-  **Usage: -usetree=<tree file>**
-
-   *Default: No file specified*
-
-   *Format: newick tree format (ClustalW Style)*
-
-   *This flag indicates that rather than computing a new dendrogram, t_coffee must use a pre-computed one. The tree files are in phylips format and compatible with ClustalW. In most cases, using a pre-computed tree will halve the computation time required by t_coffee. It is also possible to use trees output by ClustalW, Phylips and any other program.*
-
-Structures, Sequences Methods and Library Input via the -in Flag
-----------------------------------------------------------------
-::
-
-  The -in Flag and its Identifier TAGS
-  <-in> is the real grinder of T-Coffee. Sequences, methods and alignments all p\
- ass through so that T-Coffee can turn it all into a single list of constraints (\
- the library). Everything is done automatically with T-Coffee going through each \
- file to extract the sequences it contains. The methods are then applied to the s\
- equences. Pre-compiled constraint list can also be provided. Each file provided \
- via this flag must be preceded with a symbol (Identifier TAG) that indicates its\
-  nature to T-Coffee. The TAGs currently supported are the following:
-  P PDB structure
+  P  PDB structure
   S  for sequences (use it as well to treat an MSA as unaligned sequences)
   M  Methods used to build the library
   L  Pre-computed T-Coffee library
   A  Multiple Alignments that must be turned into a Library
   X  Substitution matrices.
-  R  Profiles. This is a legal multiple alignments that will be treated as singl\
- e sequences (the sequences it contains will not be realigned).
-  If you do not want to use the TAGS, you will need to use the following flags i\
- n replacement of -in. Do not use the TAGS when using these flags:
-  -aln  Alignments  (A)
-  -profile Profiles  (R)
-  -method Method  (M)
-  -seq Sequences  (S)
-  -lib Libraries (L)
+  R  Profiles. 
+  
+This is a legal multiple alignments that will be treated as single sequences (the sequences it contains will not be realigned). If you do not want to use the TAGS, you will need to use the following flags in replacement of -in. Do not use the TAGS when using these flags:
+ - aln:  Alignments  (A)
+ - profile: Profiles  (R)
+ - method: Method  (M)
+ - seq: Sequences  (S)
+ - lib: Libraries (L)
 
 
 -in
@@ -371,60 +219,85 @@ Structures, Sequences Methods and Library Input via the -in Flag
  id_pair,Lsample_lib1.tc_lib -outfile=outaln
 
 
+*This command will trigger the following chain of events: *
+1) *Gather all the sequences. Sequences within all the provided files are pooled together. Format recognition is automatic. Duplicates are removed (if they have the same name). Duplicates in a single file are only tolerated in FASTA format file, although they will cause sequences to be renamed.In the above case, the total set of sequences will be made of sequences contained in sequences1.seq, alignment1.aln, alignment2.msf and library.lib, plus the sequences initially gathered by -infile.*
 
-   *This command will trigger the following chain of events:*
+2) *Turn alignments into libraries. alignment1.aln and alignment2.msf will be read and turned into libraries. Another library will be produced by applying the method lalign_id_pair to the set of sequences previously obtained (1). The final library used for the alignment will be the combination of all this information.*
 
-   *1-Gather all the sequences*
-
-   *Sequences within all the provided files are pooled together. Format recognition is automatic. Duplicates are removed (if they have the same name). Duplicates in a single file are only tolerated in FASTA format file, although they will cause sequences to be renamed.*
-
-   *In the above case, the total set of sequences will be made of sequences contained in sequences1.seq, alignment1.aln, alignment2.msf and library.lib, plus the sequences initially gathered by -infile.*
-
-   *2-Turn alignments into libraries*
-
-   *alignment1.aln and alignment2.msf will be read and turned into libraries. Another library will be produced by applying the method lalign_id_pair to the set of sequences previously obtained (1). The final library used for the alignment will be the combination of all this information.*
-
-   *Note as well the following rules:*
-
-   *1-Order: The order in which sequences, methods, alignments and libraries are fed in is irrelevant.*
-
-   *2-Heterogeneity: There is no need for each element (A, S, L) to contain the same sequences.*
-
-   *3-No Duplicate: Each file should contain only one copy of each sequence. Duplicates are only allowed in FASTA files but will cause the sequences to be renamed.*
-
-   *4-Reconciliation: If two files (for instance two alignments) contain different versions of the same sequence due to an indel, a new sequence will be reconstructed and used instead:*
+*Note as well the following rules:*
+*1-Order: The order in which sequences, methods, alignments and libraries are fed in is irrelevant.*
+*2-Heterogeneity: There is no need for each element (A, S, L) to contain the same sequences.*
+*3-No Duplicate: Each file should contain only one copy of each sequence. Duplicates are only allowed in FASTA files but will cause the sequences to be renamed.*
+*4-Reconciliation: If two files (for instance two alignments) contain different versions of the same sequence due to an indel, a new sequence will be reconstructed and used instead:*
 
 ::
 
   aln 1:hgab1  AAAAABAAAAA
-
   aln 2:hgab1 AAAAAAAAAACCC
 
-
-
-   *will cause the program to reconstruct and use the following sequence*
-
-::
-
+  will cause the program to reconstruct and use the following sequence:
   hgab1 AAAAABAAAAACCC
-
 
 
    *This can be useful if you are trying to combine several runs of blast, or structural information where residues may have been deleted. However substitutions are forbidden. If two sequences with the same name cannot be merged, they will cause the program to exit with an information message.*
 
-   *5-Methods: The method describer can either be built in (See ### for a list of all the available methods) or be a file describing the method to be used. The exact syntax is provided in part 4 of this manual.*
-
-   *6-Substitution Matrices: If the method is a substitution matrix (X) then no other type of information should be provided. For instance:*
+*5-Methods: The method describer can either be built in (See ### for a list of all the available methods) or be a file describing the method to be used. The exact syntax is provided in part 4 of this manual.*
+*6-Substitution Matrices: If the method is a substitution matrix (X) then no other type of information should be provided. For instance:*
 
 ::
 
   $$: t_coffee sample_seq1.fasta -in=Xpam250mt -gapopen=-10 -gapext=-1
 
-
-
    *This command results in a progressive alignment carried out on the sequences in seqfile. The procedure does not use any more the T-Coffee concistency based algorithm, but switches to a standard progressive alignment algorithm (like ClustalW or Pileup) much less accurate. In this context, appropriate gap penalties should be provided. The matrices are in the file source/matrices.h. Add-Hoc matrices can also be provided by the user (see the matrices format section at the end of this manual).*
 
 .. warning:: **X**matrix does not have the same effect as using the -matrix flag. The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
+
+Sequence Input
+--------------
+ - **-infile [cw]**
+*To remain compatible with ClustalW, it is possible to indicate the sequences with this flag*
+
+::
+
+  $$: t_coffee -infile=sample_seq1.fasta
+
+.. note:: Common multiple sequence alignments format constitute a valid input format.
+
+.. note:: Note: T-Coffee automatically removes the gaps before doing the alignment. This behaviour is different from that of ClustalW where the gaps are kept.
+
+ - **-in** (cf. -in from the Method and Library Input section)
+
+ - **-get_type**
+*Forces t_coffee to identify the sequences type (PROTEIN, DNA).*
+
+ - **-type [cw]**
+
+  **Usage: -type=DNA  PROTEIN DNA_PROTEIN**
+*Default: -type=<automatically set>*. *This flag sets the type of the sequences. If omitted, the type is guessed automatically. This flag is compatible with ClustalW.*
+
+.. warning:: In case of low complexity or short sequences, it is recommended to set the type manually.
+
+ - **-seq**
+
+The common usage is **-seq=[<P,S><name>]**. The flag -seq is now the recommended flag to provide your sequences; it behaves mostly like the -in flag.
+
+ - **-seq_source**
+
+The common usage is **-seq_source=<ANY or _LS or LS >**. *You may not want to combine all the provided sequences into a single sequence list. You can do by specifying that you do not want to treat all the -in files as potential sequence sources.The flag -seq_source=_LA indicates that neither sequences provided via the A (Alignment) flag or via the L (Library flag) should be added to the sequence list. The flag -seq_source=S means that only sequences provided via the S tag will be considered. All the other sequences will be ignored.*
+
+.. note:: Note: This flag is mostly designed for interactions between T-Coffee and T-CoffeeDPA (the large scale version of T-Coffee).
+
+Structure Input
+---------------
+ - **-pdb**
+The common usage is **-pdb=<pdbid1>,<pdbid2>...[Max 200]** *It reads or fetch a pdb file. It is possible to specify a chain or even a sub-chain: PDBID(PDB_CHAIN)[opt] (FIRST,LAST)[opt]. It is also possible to input structures via the -in flag. In that case, you will need to use the TAG identifier: -in Ppdb1 Ppdb2...*
+
+
+Tree Input
+----------
+ - **-usetree**
+*The common usage is* **-usetree=<tree file>**. *Default: No file specified. Format: newick tree format (ClustalW Style). This flag indicates that rather than computing a new dendrogram, t_coffee must use a pre-computed one. The tree files are in phylips format and compatible with ClustalW. In most cases, using a pre-computed tree will halve the computation time required by t_coffee. It is also possible to use trees output by ClustalW, Phylips and any other program.*
+
 
 Profile Input
 -------------
