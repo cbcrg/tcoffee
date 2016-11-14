@@ -5,13 +5,16 @@ T-Coffee Technical Documentation
 .. Note:: This documentation covers the T-Coffee different flag usage; it describes how to use different T-Coffee options, with their format and restrictions. The most up to date version is available from our `webpage <http://www.tcoffee.org>`_.
 
 
-*******************
-General Information
-*******************
-T-Coffee general behavior
-=========================
+************************************
+T-Coffee Flags, Options & Parameters
+************************************
+.. warning:: T-Coffee is not POSIX compliant (sorry !!!).
 
-.. warning:: T-Coffee is not POSIX compliant (sorry L).
+T-Coffee general information
+============================
+Syntax of T-Coffee commands
+---------------------------
+About the syntax of T-Coffee command lines, just for you to know that T-Coffee is quite flexible, you can use any kind of separator you want (i.e. , ; <space> =). The syntax used in this document is meant to be consistent with that of ClustalW. However, in order to take advantage of the automatic filename compleation provided by many shells, you can replace '=' and ',' with a space.
 
 T-Coffee flags
 --------------
@@ -28,9 +31,6 @@ This documentation gives a list of all the flags that can be used to modify the 
   Command 3:
   $$: t_coffee -help -<flag>
  
-Syntax of T-Coffee commands
----------------------------
-You can use any kind of separator you want (i.e. ,; <space>=). The syntax used in this document is meant to be consistent with that of ClustalW. However, in order to take advantage of the automatic filename compleation provided by many shells, you can replace '=' and ',' with a space.
 
 Entering the right parameters
 -----------------------------
@@ -70,7 +70,7 @@ It is possible to modify T-Coffee's behavior by setting any of the following env
 
 Setting up the environment variables
 ------------------------------------
-T-Coffee can have its own environment file. This environment is kept in a file named ``$HOME/.t_coffee/t_coffee_env`` and can be edited. The value of any legal variable can be modified through that file. For instance, here are some examples of 1) using a configuration file when not requiring a proxy, 2) setting up any environment variable using the **-setenv** or 3) simply using an export.
+T-Coffee can have its own environment file. This environment is kept in a file named ``t_coffee_env`` in the folder $HOME/.t_coffee/ and can be edited. The value of any legal variable can be modified through that file. For instance, here are some examples of 1) using a configuration file when not requiring a proxy, 2) setting up any environment variable using the **-setenv** or 3) simply using an export.
 
 ::
 
@@ -88,18 +88,18 @@ T-Coffee can have its own environment file. This environment is kept in a file n
 
 .. note:: When you use **-setenv** for PATH, the value you provide is concatenated TO THE BEGINNING of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
 
-Meta Parameters
+Meta-parameters
 ===============
-Global behavior
----------------
- - **no flag**
-*If no flag is provided, your sequence datset must be the first argument; when you do so, the name of your file is used as a name prefix for every output file of the program (changing the extension according to the type of result).*
+Global parameters
+-----------------
+- **no flag**
+If no flag is provided, your sequence dataset must be the first argument. When you do so, the name of your file is used as a name prefix for every output file of the program (changing the extension according to the type of result).
 
- - **-mode**
-*A T-Coffee mode is a hard coded mode command line calling to specific options predetermined and optimized. By default, they are not used and should be called upon. Here are some examples: expresso, mcoffee, rcoffee, evaluate, accurate, procoffee... These modes have been designed to deliver the best results possible for a specific task; they can work without any parameters but can be controled and modified extensively with extra parameters.*
+- **-mode**
+A T-Coffee mode is a hard coded mode command line calling to specific options predetermined and optimized. By default, they are not used and should be called upon. Here are some examples: expresso, mcoffee, rcoffee, evaluate, accurate, procoffee... These modes have been designed to deliver the best results possible for a specific task; they can work without any parameters but can be controled and modified extensively with extra parameters.
 
- - **-parameters**
-*Input needs to be a file containing extra parameters for T-Coffee. Parameters read this way behave as if they had been added on the right end of the command line that they either supersede (one value parameter) or complete (list of values). Here is an example of usage that will cause T-Coffee to apply the* **fast_pair** *method onto the sequences contained in* ``sample_seq1.fasta``. *If you wish, you can also pipe these arguments into T-Coffee by naming the parameter file 'stdin' (as a rule, any file named stdin is expected to receive its content via the stdin)*
+- **-parameters**
+The input has to be a file containing extra parameters for T-Coffee. Parameters read this way behave as if they had been added on the right end of the command line that they either supersede (one value parameter) or complete (list of values). Here is an example of usage that will cause T-Coffee to apply the* **fast_pair** *method onto the sequences contained in ``sample_seq1.fasta``. If you wish, you can also pipe these arguments into T-Coffee by naming the parameter file 'stdin' (as a rule, any file named stdin is expected to receive its content via the stdin).
 
 .. warning:: This parameter file can ONLY contain valid parameters; comments are not allowed. Parameters passed this way will be checked like normal parameters.
 
@@ -114,15 +114,15 @@ Global behavior
    -output=msf_aln
   **************************************
 
- - **-t_coffee_defaults**
-*Input needs to be a file; it will tells the program to use some default parameter file for T-Coffee. The format of that file is the same as the one used with* **-parameters**. *The file used is either:*
+- **-t_coffee_defaults**
+The input has to be a file; it will tells the program to use some default parameter file for T-Coffee. The format of that file is the same as the one used with* **-parameters**. The file used is either:
 
- 1) <file name> if a name has been specified
- 2) ~/.t_coffee_defaults if no file was specified
- 3) The file indicated by the environment variable TCOFFEE_DEFAULTS
+1) <file name> if a name has been specified
+2) ~/.t_coffee_defaults if no file was specified
+3) The file indicated by the environment variable TCOFFEE_DEFAULTS
 
- - **-evaluate**
-*Replaces the former flag* **-score** *which is no longer supported. This flag toggles on the evaluate mode and causes T-Coffee to evaluate a precomputed MSA provided via* **-infile=<MSA>**. *The main purpose of this flag is to let you control every aspect of the evaluation, yet it is advisable to use predefined parameterization* **-mode=evaluate**. *The flag* **-output** *must be set to an appropriate format (refer to the subsection 'Alignments Flags').*
+- **-evaluate**
+Replaces the former flag* **-score** *which is no longer supported. This flag toggles on the evaluate mode and causes T-Coffee to evaluate a precomputed MSA provided via **-infile=<MSA>**. The main purpose of this flag is to let you control every aspect of the evaluation, yet it is advisable to use predefined parameterization **-mode=evaluate**. The flag **-output** must be set to an appropriate format (refer to the subsection 'Alignments Flags').
 
 ::
 
@@ -131,15 +131,14 @@ Global behavior
   $$: t_coffee -infile=sample_seq1.aln -in Lsample_lib1.tc_lib -mode=evaluate
 
 
-
- - **-convert [cw]**  
-*By default, is turned off. It toggles on the conversion mode and causes T-Coffee to convert the sequences, alignments, libraries or structures provided via the -infile and -in flags. The output format must be set via the -output flag. This flag can also be used if you simply want to compute a library (i.e. you have an alignment and you want to turn it into a library). This flag is ClustalW compliant.*
+- **-convert [cw]**  
+By default, is turned off. It toggles on the conversion mode and causes T-Coffee to convert the sequences, alignments, libraries or structures provided via the **-infile** and **-in** flags. The output format must be set via the **-output** flag. This flag can also be used if you simply want to compute a library (i.e. you have an alignment and you want to turn it into a library). This option is ClustalW compliant.
 
 
 Misc parameters
 ---------------
- - **-version**
-*Returns the current version number*
+- **-version**
+Returns the current version number of T-Coffee you are using.
 
  - **-proxy**
 *Sets the proxy used by HTTP_proxy AND http_proxy. Setting with the propmpt supersedes ANY other setting. Note that if you use no proxy, you should set* **-proxy**.
