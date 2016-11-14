@@ -113,10 +113,8 @@ Global Behavior
    -output=msf_aln
   **************************************
 
-
-.. note:: This is one of the exceptions (with **-infile**) where the identifier tag (S,A,L,M...) can be omitted. Any dataset provided this way will be assumed to be a sequence (S). These exceptions have been designed to keep the program compatible with ClustalW.
-
 .. warning:: This parameter file can ONLY contain valid parameters. Comments are not allowed. Parameters passed this way will be checked like normal parameters.
+.. note:: This is one of the exceptions (with **-infile**) where the identifier tag (S,A,L,M...) can be omitted. Any dataset provided this way will be assumed to be a sequence (S). These exceptions have been designed to keep the program compatible with ClustalW.
 
 
  - **-t_coffee_defaults**
