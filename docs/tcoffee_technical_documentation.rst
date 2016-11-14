@@ -91,7 +91,7 @@ T-Coffee can have its own environment file. This environment is kept in a file n
 
 Meta Parameters
 ===============
-Global Behavior
+Global behavior
 ---------------
  - **no flag**
 *If no flag is provided, your sequence datset must be the first argument; when you do so, the name of your file is used as a name prefix for every output file of the program (changing the extension according to the type of result).*
@@ -139,7 +139,7 @@ Global Behavior
 *By default, is turned off. It toggles on the conversion mode and causes T-Coffee to convert the sequences, alignments, libraries or structures provided via the -infile and -in flags. The output format must be set via the -output flag. This flag can also be used if you simply want to compute a library (i.e. you have an alignment and you want to turn it into a library). This flag is ClustalW compliant.*
 
 
-Misc Parameters
+Misc parameters
 ---------------
  - **-version**
 *Returns the current version number*
@@ -179,9 +179,9 @@ Misc Parameters
 
 Input
 =====
-The most important -in flag
+The most important "-in" flag
 ---------------------------
-The -in Flag and its Identifier TAGS <-in> is the real grinder of T-Coffee. Sequences, methods and alignments all pass through so that T-Coffee can turn it all into a single list of constraints (the library). Everything is done automatically with T-Coffee going through each file to extract the sequences it contains. The methods are then applied to the sequences. Pre-compiled constraint list can also be provided. Each file provided via this flag must be preceded with a symbol (Identifier TAG) that indicates its nature to T-Coffee. The TAGs currently supported are the following:
+The -in flag and its Identifier TAGS <-in> is the real grinder of T-Coffee. Sequences, methods and alignments all pass through so that T-Coffee can turn it all into a single list of constraints (the library). Everything is done automatically with T-Coffee going through each file to extract the sequences it contains. The methods are then applied to the sequences. Pre-compiled constraint list can also be provided. Each file provided via this flag must be preceded with a symbol (Identifier TAG) that indicates its nature to T-Coffee. The TAGs currently supported are the following:
 
 ::
 
@@ -201,11 +201,7 @@ This is a legal multiple alignments that will be treated as single sequences (th
  - lib: Libraries (L)
 
 
--in
-^^^
-  **Usage: -in=[<P,S,A,L,M,X><name>,]**
-
-   *Default: -in=Mlalign_id_pair,Mclustalw_pair*
+The **-in** common usageis: **-in=[<P,S,A,L,M,X><name>]**. *By default: -in=Mlalign_id_pair,Mclustalw_pair*
 
 .. note:: Note: -in can be replaced with the combined usage of -aln, iprofile, .pdb, .lib, -method.
 
@@ -226,44 +222,34 @@ This is a legal multiple alignments that will be treated as single sequences (th
 *1-Order: The order in which sequences, methods, alignments and libraries are fed in is irrelevant.*
 *2-Heterogeneity: There is no need for each element (A, S, L) to contain the same sequences.*
 *3-No Duplicate: Each file should contain only one copy of each sequence. Duplicates are only allowed in FASTA files but will cause the sequences to be renamed.*
-*4-Reconciliation: If two files (for instance two alignments) contain different versions of the same sequence due to an indel, a new sequence will be reconstructed and used instead:*
+*4-Reconciliation: If two files (for instance two alignments) contain different versions of the same sequence due to an indel, a new sequence will be reconstructed and used instead. This can be useful if you are trying to combine several runs of blast, or structural information where residues may have been deleted. However substitutions are forbidden. If two sequences with the same name cannot be merged, they will cause the program to exit with an information message.*
 
 ::
 
-  aln 1:hgab1  AAAAABAAAAA
-  aln 2:hgab1 AAAAAAAAAACCC
+  aln 1:      hgab1 AAAAABAAAAA
+  aln 2:      hgab1 AAAAAAAAAACCC
+  consensus:  hgab1 AAAAABAAAAACCC
 
-  will cause the program to reconstruct and use the following sequence:
-  hgab1 AAAAABAAAAACCC
-
-
-   *This can be useful if you are trying to combine several runs of blast, or structural information where residues may have been deleted. However substitutions are forbidden. If two sequences with the same name cannot be merged, they will cause the program to exit with an information message.*
 
 *5-Methods: The method describer can either be built in (See ### for a list of all the available methods) or be a file describing the method to be used. The exact syntax is provided in part 4 of this manual.*
-*6-Substitution Matrices: If the method is a substitution matrix (X) then no other type of information should be provided. For instance:*
+*6-Substitution Matrices: If the method is a substitution matrix (X) then no other type of information should be provided. This command results in a progressive alignment carried out on the sequences in seqfile. The procedure does not use any more the T-Coffee concistency based algorithm, but switches to a standard progressive alignment algorithm (like ClustalW or Pileup) much less accurate. In this context, appropriate gap penalties should be provided. The matrices are in the file source/matrices.h. Ad Hoc matrices can also be provided by the user (see the matrices format section at the end of this manual).*
 
 ::
 
   $$: t_coffee sample_seq1.fasta -in=Xpam250mt -gapopen=-10 -gapext=-1
 
-   *This command results in a progressive alignment carried out on the sequences in seqfile. The procedure does not use any more the T-Coffee concistency based algorithm, but switches to a standard progressive alignment algorithm (like ClustalW or Pileup) much less accurate. In this context, appropriate gap penalties should be provided. The matrices are in the file source/matrices.h. Add-Hoc matrices can also be provided by the user (see the matrices format section at the end of this manual).*
+   
+.. warning:: **X** matrix does not have the same effect as using the -matrix flag. The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
 
-.. warning:: **X**matrix does not have the same effect as using the -matrix flag. The -matrix defines the matrix that will be used while compiling the library while the Xmatrix defines the matrix used when assembling the final alignment.
-
-Sequence Input
---------------
+Other sequence input flags
+--------------------------
  - **-infile [cw]**
-*To remain compatible with ClustalW, it is possible to indicate the sequences with this flag*
+*To remain compatible with ClustalW, it is possible to indicate the sequences with this flag. Common multiple sequence alignments format constitute a valid input format. T-Coffee automatically removes the gaps before doing the alignment. This behaviour is different from that of ClustalW where the gaps are kept.*
 
 ::
 
   $$: t_coffee -infile=sample_seq1.fasta
 
-.. note:: Common multiple sequence alignments format constitute a valid input format.
-
-.. note:: Note: T-Coffee automatically removes the gaps before doing the alignment. This behaviour is different from that of ClustalW where the gaps are kept.
-
- - **-in** (cf. -in from the Method and Library Input section)
 
  - **-get_type**
 *Forces t_coffee to identify the sequences type (PROTEIN, DNA).*
@@ -275,6 +261,7 @@ Sequence Input
 
 .. warning:: In case of low complexity or short sequences, it is recommended to set the type manually.
 
+
  - **-seq**
 
 The common usage is **-seq=[<P,S><name>]**. The flag -seq is now the recommended flag to provide your sequences; it behaves mostly like the -in flag.
@@ -283,7 +270,7 @@ The common usage is **-seq=[<P,S><name>]**. The flag -seq is now the recommended
 
 The common usage is **-seq_source=<ANY or _LS or LS >**. *You may not want to combine all the provided sequences into a single sequence list. You can do by specifying that you do not want to treat all the -in files as potential sequence sources.The flag -seq_source=_LA indicates that neither sequences provided via the A (Alignment) flag or via the L (Library flag) should be added to the sequence list. The flag -seq_source=S means that only sequences provided via the S tag will be considered. All the other sequences will be ignored.*
 
-.. note:: Note: This flag is mostly designed for interactions between T-Coffee and T-CoffeeDPA (the large scale version of T-Coffee).
+.. note:: This flag is mostly designed for interactions between T-Coffee and T-CoffeeDPA (the large scale version of T-Coffee).
 
 Structure Input
 ---------------
@@ -291,21 +278,16 @@ Structure Input
 The common usage is **-pdb=<pdbid1>,<pdbid2>...[Max 200]** *It reads or fetch a pdb file. It is possible to specify a chain or even a sub-chain: PDBID(PDB_CHAIN)[opt] (FIRST,LAST)[opt]. It is also possible to input structures via the -in flag. In that case, you will need to use the TAG identifier: -in Ppdb1 Ppdb2...*
 
 
-Tree Input
-----------
+Tree input files
+----------------
  - **-usetree**
 *The common usage is* **-usetree=<tree file>**. *Default: No file specified. Format: newick tree format (ClustalW Style). This flag indicates that rather than computing a new dendrogram, t_coffee must use a pre-computed one. The tree files are in phylips format and compatible with ClustalW. In most cases, using a pre-computed tree will halve the computation time required by t_coffee. It is also possible to use trees output by ClustalW, Phylips and any other program.*
 
 
-Profile Input
--------------
--profile
-^^^^^^^^
-  **Usage: -profile=[<name>,] maximum of 200 profiles.**
-
-   *Default: no default*
-
-   *This flag causes T-Coffee to treat multiple alignments as a single sequences, thus making it possible to make multiple profile alignments. The profile-profile alignment is controlled by -profile_mode and -profile_comparison. When provided with the -in flag, profiles must be preceded with the letter R.*
+Profile input files
+-------------------
+ - **-profile**
+The common usage is: **-profile=[<name>,] maximum of 200 profiles.** *This flag causes T-Coffee to treat multiple alignments as a single sequences, thus making it possible to make multiple profile alignments. The profile-profile alignment is controlled by -profile_mode and -profile_comparison. When provided with the -in flag, profiles must be preceded with the letter R. Note that when using -template_file, the program will also look for the templates associated with the profiles, even if the profiles have been provided as templates themselves (however it will not look for the template of the profile templates of the profile templates...)*
 
 ::
 
@@ -314,24 +296,12 @@ Profile Input
   $$: t_coffee -in Rsample_aln1.aln,Rsample_aln2.aln,Mslow_pair,Mlalign_id_pair -outfile=profile_aln
 
 
+ - **-profile1 [cw]**
+The common usage is: **-profile1=[<name>], one name only**. *Default: no default*. *Similar to the previous one and was provided for compatibility with ClustalW.*
 
-   *Note that when using -template_file, the program will also look for the templates associated with the profiles, even if the profiles have been provided as templates themselves (however it will not look for the template of the profile templates of the profile templates...)*
+ - **-profile2 [cw]**
+The common usage is: **-profile1=[<name>], one name only**. *Default: no default*. *Similar to the previous one and was provided for compatibility with ClustalW.*
 
--profile1 [cw]
-^^^^^^^^^^^^^^
-  **Usage: -profile1=[<name>], one name only**
-
-   *Default: no default*
-
-   *Similar to the previous one and was provided for compatibility with ClustalW.*
-
--profile2 [cw]
-^^^^^^^^^^^^^^
-  **Usage: -profile1=[<name>], one name only**
-
-   *Default: no default*
-
-   *Similar to the previous one and was provided for compatibility with ClustalW.*
 
 Alignment Computation
 =====================
