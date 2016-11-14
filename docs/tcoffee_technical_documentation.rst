@@ -6,9 +6,9 @@ T-Coffee Technical Documentation
 
 .. warning:: T-Coffee is not POSIX compliant (sorry !!!).
 
-************************************
-T-Coffee Flags, Options & Parameters
-************************************
+***************************
+T-Coffee Flags & Parameters
+***************************
 T-Coffee general information
 ============================
 Syntax of T-Coffee commands
