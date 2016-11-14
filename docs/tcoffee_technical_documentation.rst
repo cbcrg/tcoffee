@@ -1242,89 +1242,9 @@ This flag is meant to control the output name of the colored APDB output. This f
 This flag is meant to control the colored APDB output (local score). This file will either display the local APDB score or the local iRMD.
 
 
-*****************
-Building a Server
-*****************
-We maintain a T-Coffee server (www.tcoffee.org). We will be pleased to provide anyone who wants to set up a similar service with the sources
-
-
-Environment Variables
-=====================
-T-Coffee stores a lots of information in locations that may be unsuitable when running a server.
-
-
-By default, T-Coffee will generate and rely on the follwing directory structure:
-
-
-::
-
-  /home/youraccount/ #HOME_4_TCOFFEE
-
-  HOME_4_TCOFFEE/.t_coffee/  #DIR_4_TCOFFEE
-
-  DIR_4_TCOFFEE/cache #CACHE_4_TCOFFEE
-
-  DIR_4_TCOFFEE/tmp #TMP_4_TCOFFEE
-
-  DIR_4_TCOFFEE/methods #METHOS_4_TCOFFEE
-
-  DIR_4_TCOFFEE/mcoffee #MCOFFEE_4_TCOFFEE
-
-
-
-By default, all these directories are automatically created, following the dependencies suggested here.
-
-
-The first step is the determination of the HOME. By default the program tries to use HOME_4_TCOFFEE, then the HOME variable and TMP or TEMP if HOME is not set on your system or your account. It is your responsibility to make sure that one of these variables is set to some valid location where the T-Coffee process is allowed to read and write.
-
-
-If no valid location can be found for HOME_4_TCOFFEE, the program exits. If you are running T-Coffee on a server, we recommend to hard set the following locations, where your scratch is a valid location.
-
-
-::
-
-  HOME_4_TCOFFEE='your scratch'
-
-  TMP_4_TCOFFEE='your scratch'
-
-  DIR_4_TCOFFEE='your scratch'
-
-  CACHE_4_TCOFFEE='your scratch'
-
-  NO_ERROR_REPORT_4_TCOFFEE=1
-
-
-
-Note that it is a good idea to have a cron job that cleans up this scratch area, once in a while.
-
-
-Output of the .dnd file.
-========================
-A common source of error when running a server: T-Coffee MUST output the .dnd file because it re-reads it to carry out the progressive alignment. By default T-Coffee outputs this file in the directory where the process is running. If the T-Coffee process does not have permission to write in that directory, the computation will abort...
-
-
-To avoid this, simply specify the name of the output tree:
-
-
- -newtree=<writable file (usually in /tmp)>
-
-
-Chose the name so that two processes may not over-write each other dnd file.
-
-
-Permissions
-===========
-The t_coffee process MUST be allowed to write in some scratch area, even when it is ran by Mr nobody... Make sure the /tmp/ partition is not protected.
-
-
-Other Programs
-==============
-T-Coffee may call various programs while it runs (lalign2list by defaults). Make sure your process knows where to find these executables.
-
-
-*******
-Formats
-*******
+*******************************
+T-Coffee Parameter Files Format 
+*******************************
 Parameter files
 ===============
 Parameter files used with -parameters, -t_coffee_defaults, -dali_defaults... Must contain a valid parameter string where line breaks are allowed. These files cannot contain any comment, the recommended format is one parameter per line:
@@ -1649,10 +1569,89 @@ Create your own weight file, using the -seq_weight flag:
 No duplicate allowed. Sequences not included in the set of sequences provided to t_coffee will be ignored. Order is free. V1 is a float. Un-weighted sequences will see their weight set to 1.
 
 
+
 ***************
 Technical Notes
 ***************
 These notes are only meant for internal development.
+
+Building A T-Coffee Server 
+==========================
+We maintain a T-Coffee server (www.tcoffee.org). We will be pleased to provide anyone who wants to set up a similar service with the sources
+
+
+Environment Variables
+---------------------
+T-Coffee stores a lots of information in locations that may be unsuitable when running a server.
+
+
+By default, T-Coffee will generate and rely on the follwing directory structure:
+
+
+::
+
+  /home/youraccount/ #HOME_4_TCOFFEE
+
+  HOME_4_TCOFFEE/.t_coffee/  #DIR_4_TCOFFEE
+
+  DIR_4_TCOFFEE/cache #CACHE_4_TCOFFEE
+
+  DIR_4_TCOFFEE/tmp #TMP_4_TCOFFEE
+
+  DIR_4_TCOFFEE/methods #METHOS_4_TCOFFEE
+
+  DIR_4_TCOFFEE/mcoffee #MCOFFEE_4_TCOFFEE
+
+
+
+By default, all these directories are automatically created, following the dependencies suggested here.
+
+
+The first step is the determination of the HOME. By default the program tries to use HOME_4_TCOFFEE, then the HOME variable and TMP or TEMP if HOME is not set on your system or your account. It is your responsibility to make sure that one of these variables is set to some valid location where the T-Coffee process is allowed to read and write.
+
+
+If no valid location can be found for HOME_4_TCOFFEE, the program exits. If you are running T-Coffee on a server, we recommend to hard set the following locations, where your scratch is a valid location.
+
+
+::
+
+  HOME_4_TCOFFEE='your scratch'
+
+  TMP_4_TCOFFEE='your scratch'
+
+  DIR_4_TCOFFEE='your scratch'
+
+  CACHE_4_TCOFFEE='your scratch'
+
+  NO_ERROR_REPORT_4_TCOFFEE=1
+
+
+
+Note that it is a good idea to have a cron job that cleans up this scratch area, once in a while.
+
+
+Output of the .dnd file.
+------------------------
+A common source of error when running a server: T-Coffee MUST output the .dnd file because it re-reads it to carry out the progressive alignment. By default T-Coffee outputs this file in the directory where the process is running. If the T-Coffee process does not have permission to write in that directory, the computation will abort...
+
+
+To avoid this, simply specify the name of the output tree:
+
+
+ -newtree=<writable file (usually in /tmp)>
+
+
+Chose the name so that two processes may not over-write each other dnd file.
+
+
+Permissions
+-----------
+The t_coffee process MUST be allowed to write in some scratch area, even when it is ran by Mr nobody... Make sure the /tmp/ partition is not protected.
+
+
+Other Programs
+--------------
+T-Coffee may call various programs while it runs (lalign2list by defaults). Make sure your process knows where to find these executables.
 
 
 Known Problems
