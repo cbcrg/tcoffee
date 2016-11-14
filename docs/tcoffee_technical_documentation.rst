@@ -2240,34 +2240,26 @@ Create your own weight file, using the -seq_weight flag:
 No duplicate allowed. Sequences not included in the set of sequences provided to t_coffee will be ignored. Order is free. V1 is a float. Un-weighted sequences will see their weight set to 1.
 
 
-**************
-Known Problems
-**************
-1-Sensitivity to sequence order: It is difficult to implement a MSA algorithm totally insensitive to the order of input of the sequences. In t_coffee, robustness is increased by sorting the sequences alphabetically before aligning them. Beware that this can result in confusing output where sequences with similar name are unexpectedly close to one another in the final alignment.
-
-
-2-Nucleotides sequences with long stretches of Ns will cause problems to lalign, especially when using Mocca. To avoid any problem, filter out these nucleotides before running mocca.
-
-
-3-Stop codons are sometimes coded with '*' in protein sequences. This will cause the program to crash or hang. Please replace the '*' signs with an X.
-
-
-4-Results can differ from one architecture to another, due rounding differences. This is caused by the tree estimation procedcure. If you want to make sure an alignment is reproducible, you should keep the associated dendrogram.
-
-
-5-Deploying the program on a
-
-
 ***************
 Technical Notes
 ***************
 These notes are only meant for internal development.
 
 
+Known Problems
+==============
+ 1) Sensitivity to sequence order: it is difficult to implement a MSA algorithm totally insensitive to the order of input of the sequences. In T-Coffee, robustness is increased by sorting the sequences alphabetically before aligning them. Beware that this can result in confusing output where sequences with similar name are unexpectedly close to one another in the final alignment.
+
+ 2) Nucleotides sequences with long stretches of Ns will cause problems to lalign, especially when using Mocca. To avoid any problem, filter out these nucleotides before running mocca.
+
+ 3) Stop codons are sometimes coded with \* in protein sequences, this will cause the program to crash or hang. Please replace the all \* signs with an X.
+
+ 4) Results can differ from one architecture to another, due rounding differences. This is caused by the tree estimation procedcure. If you want to make sure an alignment is reproducible, you should keep the associated dendrogram.
+
+
 Development
 ===========
 The following examples are only meant for internal development, and are used to insure stability from release to release
-
 
 profile2list
 ------------
@@ -2282,15 +2274,11 @@ prf2: profile containing one structure
   $$: t_coffee Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile\
  =aligned_prf.aln
 
-
-
 Command Line List
 -----------------
 These command lines have been checked before every release (along with the other CL in this documentation:
 
-
 -external methods;
-
 
 ::
 
@@ -2298,33 +2286,24 @@ These command lines have been checked before every release (along with the other
  tfile=clustal_text
 
 
-
 -fugue_client
-
 
 ::
 
   $$: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair
 
 
-
 -A list of command lines kindly provided by James Watson (used to crash the pg before version 3.40)
-
 
 ::
 
   $$: t_coffee -in Sseq.fas P2PTC Mfugue_pair
-
   $$: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_
-
   $$: t_coffee -mode 3dcoffee -in Sseq.fas P2PTC
-
   $$: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_
 
 
-
 -A list of command lines that crashed the program before 3.81
-
 
 ::
 
@@ -2332,9 +2311,7 @@ These command lines have been checked before every release (along with the other
  file template_file6.template
 
 
-
  -A command line to read 'relaxed' pdb files...
-
 
 ::
 
@@ -2342,40 +2319,27 @@ These command lines have been checked before every release (along with the other
  mplate -weight 1001 -out_lib test_lib7.tc_lib -lib_only
 
 
-
  -Parsing of MARNA libraries
-
 
 ::
 
   $$: t_coffee -in Lmarna.tc_lib -outfile maran.test
 
 
-
  -Parsing of long sequence lines:
-
 
 ::
 
   $$: t_coffee -in Asample_aln5.aln -outfile test.aln
 
 
-
-********
-To Do...
-********
--implement UPGMA tree computation
-
-
--implement seq2dpa_tree
-
-
--debug dpa
-
-
--Reconciliate sequences and template when reading the template
-
-
--Add the server command lines to the checking procedure
+To do list
+==========
+Here are some improvement we are planning to do:
+ - implement UPGMA tree computation
+ - implement seq2dpa_tree
+ - debug dpa
+ - reconciliate sequences and template when reading the template
+ - add the server command lines to the checking procedure
 
 
