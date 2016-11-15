@@ -133,7 +133,6 @@ Replaces the former flag **-score** which is no longer supported. This flag togg
 - **-convert [cw]**  
 By default, is turned off. It toggles on the conversion mode and causes T-Coffee to convert the sequences, alignments, libraries or structures provided via the **-infile** and **-in** flags. The output format must be set via the **-output** flag. This flag can also be used if you simply want to compute a library (i.e. you have an alignment and you want to turn it into a library). This option is ClustalW compliant.
 
-
 Misc parameters
 ---------------
 - **-version**
@@ -178,24 +177,25 @@ The **-in** flag and its identifier TAGs **are the real grinder of T-Coffee**. S
 
 ::
 
-  P  PDB structure
-  S  Sequences (aligned or unaligned sequences)
-  M  Methods used to build the library
-  L  Precomputed T-Coffee library
-  A  Alignments that must be turned into a Library
-  X  Substitution matrices
-  R  Profiles
+  P : PDB structure
+  S : Sequences (aligned or unaligned sequences)
+  M : Methods used to build the library
+  L : Precomputed T-Coffee library
+  A : Alignments that must be turned into a Library
+  X : Substitution matrices
+  R : Profiles
  
+If you do not want to use the TAGS, you will need to use the following flags in replacement. Do not use the TAGS when using these flags.
+::
 
-If you do not want to use the TAGS, you will need to use the following flags in replacement. Do not use the TAGS when using these flags:
- - **-aln**:      Alignments  (A)
- - **-profile**:  Profiles    (R)
- - **-method**:   Method      (M)
- - **-seq**:      Sequences   (S)
- - **-lib**:      Libraries   (L)
+ -aln     : Alignments  (A)
+ -profile : Profiles    (R)
+ -method  : Method      (M)
+ -seq     : Sequences   (S)
+ -lib     : Libraries   (L)
 
 
-.. note::  **-in** can be replaced with the combined usage of -aln, iprofile, .pdb, .lib, -method [under evaluation].
+.. note:: The flag **-in** can be replaced with the combined usage of -aln, iprofile, .pdb, .lib, -method [under evaluation].
 
 
 ::
