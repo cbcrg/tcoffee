@@ -2,7 +2,7 @@
 T-Coffee Technical Documentation 
 ################################
 
-.. note:: This documentation covers the T-Coffee different parameters usage; it describes how to use different T-Coffee flags and options, with their respective format and limitations (not that we want to limit anything...). The most up to date version is available from our `webpage <http://www.tcoffee.org>`_. Everything described here should be working for for all versions, but there is a trade-off between new options present in the most recent versions and old options now deprecated, unsupported or substituted by new ones (don't worry, it will specified in the documentation).
+.. note:: This documentation covers the T-Coffee different parameters usage; it describes how to use different T-Coffee flags and options, with their respective format and limitations (not that we want to limit anything...). The most up to date version is available from our `webpage <http://www.tcoffee.org>`_. Everything described here should be working for all versions, yet there is a trade-off between new options present in the most recent versions and old options now deprecated, unsupported or substituted by new ones (don't worry, it will specified in the documentation).
 
 .. warning:: T-Coffee is not POSIX compliant (sorry !!!).
 
