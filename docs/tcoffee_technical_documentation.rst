@@ -186,17 +186,11 @@ Some rumours claim that Tetris is embedded within T-Coffee and could be ran usin
 
 Verbose parameters
 ^^^^^^^^^^^^^^^^^^
-- **-run_name** (usage:**-run_name=<your run name>**)
-This flag causes the prefix <your sequences> to be replaced by <your run name> when renaming the default output files.
-
 - **-quiet** (usage:**-quiet=<stderr,stdout,file name OR nothing>**/default:**-quiet=stderr**)
 This control the verbose mode of T-Coffee from the display on the screen or to redirect to a given file; **-quiet** on its own redirect the output to /dev/null.
 
 - **-no_warning** (usage:**-no_warning=<yes,no>**/default: switched off)
 Suppresses all warning output of the verbose mode.
-
-- **-align** [cw]
-This flag indicates that the program must produce the alignment. It is here for compatibility with ClustalW.
 
 
 Input
@@ -564,7 +558,7 @@ Sequences are extracted in turn and realigned to the MSA. If **-iterate** is set
 
 Output 
 ======
-stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresponding file to be output in stderr or stdout, for an input file, stdin causes the program to requests the corresponding file through pipe. No causes a suppression of the output, as does /dev/null. In the t_coffee output, each output appears in a line:
+stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresponding file to be output in stderr or stdout, for an input file, stdin causes the program to requests the corresponding file through pipe. No causes a suppression of the output, as does /dev/null. In the T-Coffee output, each output appears in a line:
 
 
 ::
@@ -573,26 +567,33 @@ stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresp
 
 Output files, format & names
 ----------------------------
+- **-run_name** (usage:**-run_name=<your run name>**)
+This flag causes the prefix <your sequences> to be replaced by <your run name> when renaming the default output files.
+
+- **-align** [cw]
+This flag indicates that the program MUST produce an alignment. It is here for compatibility with ClustalW.
+
 - **-outfile** (usage:**-outfile=<out_aln,file,default,no>**)
 Indicates the name of the alignment output by T-Coffee. If the default is used, the alignment is named <your sequences>.aln.
 
 - **output** (usage:**-output=<format1,format2,...>**/default:**-output=clustalw**)
-Indicates the format used for outputting the resulting alignment; more than one format can be indicated. The supported formats are: 
-clustalw_aln, clustalw : ClustalW format
-gcg, msf_aln  : MSF alignment
-pir_aln : pir alignment
-fasta_aln : fasta alignment
-phylip : Phylip format
-pir_seq : pir sequences (no gap)
-fasta_seq : fasta sequences (no gap)
+Indicates the format used for outputting the resulting alignment; more than one format can be indicated. The supported input/output formats are listed below (**_seq** for unaligned sequences and **_aln** for aligned sequences). The scoring output files rely mainly on the T-Coffee CORE index (you can find more `here <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_).
 
-As well as:
-score_ascii : causes the output of a reliability flag
-score_html : causes the output to be a reliability plot in HTML
-score_pdf : idem in PDF (if ps2pdf is installed on your system)
-score_ps : idem in postscript
+::
 
-http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
+  Sequence format:
+  - clustalw_aln, clustalw
+  - gcg
+  - msf_aln 
+  - pir_aln, pir_seq
+  - fasta_aln, fasta_seq
+  - phylip
+  
+  Output format:
+  - score_ascii : causes the output of a reliability flag
+  - score_html  : causes the output to be a reliability plot in HTML
+  - score_pdf   : idem in PDF (if ps2pdf is installed on your system)
+  - score_ps    : idem in postscript
 
 - **-seqnos** (usage:**-seqnos=<on,off>**/default:**-seqnos=off**)
 Causes the output alignment to contain the number of residue at the end of each line.
@@ -646,7 +647,7 @@ Indicates the name of the file into which the guide tree will be written. The de
 .. warning:: Do NOT confuse this guide tree with a phylogenetic tree.
 
 
-Template Based T-Coffee Modes
+Template based T-Coffee modes
 =============================
 Database searches parameters
 ----------------------------
