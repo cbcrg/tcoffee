@@ -558,12 +558,18 @@ Sequences are extracted in turn and realigned to the MSA. If **-iterate** is set
 
 Output 
 ======
-stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresponding file to be output in stderr or stdout, for an input file, stdin causes the program to requests the corresponding file through pipe. No causes a suppression of the output, as does /dev/null. In the T-Coffee output, each output appears in a line:
+Those names, stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresponding file to be output in stderr or stdout; for an input file, stdin causes the program to requests the corresponding file through pipe. No causes a suppression of the output, as does /dev/null. In the T-Coffee output (displayed on screen), the output results appear in the following format (last lines displayed once the job is done):
 
 
 ::
 
-  ##### FILENAME <name> TYPE <Type> FORMAT <Format>
+  OUTPUT RESULTS
+  ##### File Type= <type> Format= <format> Name <filename> 
+  
+  File Type: can be GUIDE TREE, MSA, etc...
+  Format   : can be newick, html, aln, etc...
+  Name     : the prefix is the name of the input file; the extension corresponds to the type and format. 
+
 
 Output files, format & names
 ----------------------------
