@@ -71,13 +71,14 @@ T-Coffee can have its own environment file, kept in a file named ``t_coffee_env`
 
 .. note:: When you use **-setenv** for PATH, the value you provide is concatenated at the beginning of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
 
-CPU Control
+CPU control
 -----------
 Multithreading
 ^^^^^^^^^^^^^^
 - **-multi_core** (usage:**-multi_core=templates_jobs_relax_msa**/default=0)
 
-Specifies that the steps of T-Coffee that should be multithreaded; by default all relevant steps are parallelized:
+
+Specifies that T-Coffee  should be multithreaded or ot; by default all relevant steps are parallelized.
   - template: fetch the templates in a parallel way
   - jobs: compute the library
   - relax: extend the library in a parallel way
@@ -330,7 +331,7 @@ Development only. Controls the algorithm for matrix extension. Available SUPPORT
 - **-max_n_pair** (usage:**-max_n_pair=<integer>**/default:**-extend=10**) 
 Development only. Controls the number of pairs considered by the **-extend_mode=very_fast_triplet**. Setting it to 0 forces all the pairs to be considered equivalent to **-extend_mode=slow_triplet**).
 
-- **-weight** (usage:**-weight=<winsimN, sim or sim_<matrix_name,matrix_file> or <integer value>**/default:**-weight=sim**)
+- **-weight** (usage:**-weight=<winsimN,sim,sim_<matrix_name,matrix_file>,<integer>** / default:**-weight=sim**)
 Weight defines the way alignments are weighted when turned into a library. Overweighting can be obtained with the OW<X> weight mode; winsimN indicates that the weight assigned to a given pair will be equal to the percent identity within a window of 2N+1 length centered on that pair. For instance winsim10 defines a window of 10 residues around the pair being considered. This gives its own weight to each residue in the output library. However, in our hands, this type of weighting scheme has not provided any significant improvement over the standard sim value (the value indicates that all the pairs found in the alignments must be given the same weight equal to value). This is useful when the alignment one wishes to turn into a library must be given a prespecified score (for instance if they come from a structure superimposition program). 
 
 ::
@@ -342,12 +343,10 @@ Weight defines the way alignments are weighted when turned into a library. Overw
   $$: t_coffee sample_seq1.fasta -weight=sim_pam250mt -out_lib=test.tc_lib
 
 
-Options are:
+Several options are available...
   - sim             : indicates that the weight equals the average identity within the sequences containing the matched residues.
   - OW<X>           : will cause the sim weight to be multiplied by X.
   - sim_matrix_name : indicates the average identity with two residues regarded as identical when their substitution value is positive. The valid matrices names are in ``matrices.h`` (pam250mt). Matrices not found in this header are considered to be filenames (Refer to the next section about matrices). For instance, -weight=sim_pam250mt indicates that the grouping used for similarity will be the set of classes with positive substitutions.
-  
-Others include:
   - sim_clustalw_col: categories of clustalw marked with ":".
   - sim_clustalw_dot: categories of clustalw marked with ".".
 
