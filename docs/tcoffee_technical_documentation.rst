@@ -76,46 +76,31 @@ CPU Control
 Multithreading
 ^^^^^^^^^^^^^^
 - **-multi_core** (usage:**-multi_core=templates_jobs_relax_msa**/default=0)
-Options are:
+
+Specifies that the steps of T-Coffee that should be multithreaded; by default all relevant steps are parallelized:
   - template: fetch the templates in a parallel way
   - jobs: compute the library
   - relax: extend the library in a parallel way
   - msa: compute the msa in a parallel way
   - no: not parallelized
-Specifies that the steps of T-Coffee that should be multithreaded; by default all relevant steps are parallelized.
+
 
 - **-n_core** (usage:**-n_core= <number of cores>**/default: 0)
 Default indicates that all cores will be used as indicated by the environment.
 
 Limits
 ^^^^^^
-- **-mem_mode** [Deprecated]
-
-- **-ulimit** (usage:**-ulimit=<value>**/default:**-ulimit=0**)
-Specifies the upper limit of memory usage (in Megabytes) and processes exceeding this limit will automatically exit. A value 0 indicates that no limit applies.
-
 - **-maxlen** (usage:**-maxlen=<value, 0=nolimit>**/default:**-maxlen=1000**)
 Indicates the maximum length of the sequences. 
 
 - **-maxnseq** (usage:**-maxnseq=<value,0=nolimit>**/default:**-maxnseq=??**)
 Indicates the maximum number of the sequences. 
 
-Aligning more than 100 sequences with DPA [Unsupported]
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- - **-dpa_master_aln** (usage:**-dpa_master_aln=<File, method>**/default:**-dpa_master_aln=NO**)
- When using DPA, T-Coffee needs a seed alignment that can be computed using any appropriate method. By default, T-Coffee computes a fast approximate alignment. 
+- **-ulimit** (usage:**-ulimit=<value>**/default:**-ulimit=0**)
+Specifies the upper limit of memory usage (in Megabytes) and processes exceeding this limit will automatically exit. A value 0 indicates that no limit applies.
 
-- **-dpa_maxnseq** (usage:**-dpa_maxnseq=<integer value>**/default:**-dpa_maxnseq=30**)
-Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than **-dpa_maxnseq** OR if it controls a pair of sequences having less than **-dpa_min_score2** percent ID.
+- **-mem_mode** [Deprecated]
 
-- **-dpa_min_score1** (usage:**-dpa_min_score1=<integer value>**/default:**-dpa_min_score1=95**)
-Threshold for not realigning the sequences within the master alignment. Given this alignment and the associated tree, sequences below a node are not realigned if none of them has less than -dpa_min_score1 % identity.*
-
-- **-dpa_min_score2** (usage:**-dpa_min_score2**/default:**-dpa_min_score2**)
-Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than **-dpa_maxnseq** OR if it controls a pair of sequences having less than **-dpa_min_score2** percent ID.
-
-- **-dpa_tree** (usage:**-dpa_tree=<filename>**) [Not implemented]
-Guide tree used in DPA; this is a newick tree where the distance associated with each node is set to the minimum pairwise distance among all considered sequences.
 
 Meta-parameters
 ---------------
@@ -198,8 +183,8 @@ Some rumours claim that Tetris is embedded within T-Coffee and could be ran usin
   $$: t_coffee -other_pg=unpack_all
   $$: t_coffee -other_pg=unpack_extract_from_pdb
 
-Output parameters
-^^^^^^^^^^^^^^^^^
+Verbose parameters
+^^^^^^^^^^^^^^^^^^
 - **-run_name** (usage:**-run_name=<your run name>**)
 This flag causes the prefix <your sequences> to be replaced by <your run name> when renaming the default output files.
 
@@ -324,8 +309,8 @@ Alignment Computation
 =====================
 Library computation: methods and extension
 ------------------------------------------
-Methods
-^^^^^^^
+Although it does not necessarily do so explicitly, T-Coffee always end up combining libraries. Libraries are collections of pairs of residues. Given a set of libraries, T-Coffee tries to assemble the alignment with the highest level of consistency. You can think of the alignment as a list of constraints; the job of T-Coffee is to satisfy as many constraints as possible.
+
 - **-lalign_n_top** (usage:**-lalign_n_top=<Integer>**/default:**-lalign_n_top=10**)
 Number of alignment reported by the local method (lalign).
 
@@ -333,8 +318,6 @@ Number of alignment reported by the local method (lalign).
 
 - **-align_pdb_hasch_mode** [Unsupported]
 
-Extension
-^^^^^^^^^
 - **-do_normalise** (usage:**-do_normalise=<0 or a positive value>**/default:**-do_normalise=1000**)
 Development Only. When using a value different from 0, this flag sets the score of the highest scoring pair to 1000.
 
@@ -346,7 +329,6 @@ Development only. Controls the algorithm for matrix extension. Available SUPPORT
 
 - **-max_n_pair** (usage:**-max_n_pair=<integer>**/default:**-extend=10**) 
 Development only. Controls the number of pairs considered by the **-extend_mode=very_fast_triplet**. Setting it to 0 forces all the pairs to be considered equivalent to **-extend_mode=slow_triplet**).
-
 
 - **-weight** (usage:**-weight=<winsimN, sim or sim_<matrix_name,matrix_file> or <integer value>**/default:**-weight=sim**)
 Weight defines the way alignments are weighted when turned into a library. Overweighting can be obtained with the OW<X> weight mode; winsimN indicates that the weight assigned to a given pair will be equal to the percent identity within a window of 2N+1 length centered on that pair. For instance winsim10 defines a window of 10 residues around the pair being considered. This gives its own weight to each residue in the output library. However, in our hands, this type of weighting scheme has not provided any significant improvement over the standard sim value (the value indicates that all the pairs found in the alignments must be given the same weight equal to value). This is useful when the alignment one wishes to turn into a library must be given a prespecified score (for instance if they come from a structure superimposition program). 
@@ -383,7 +365,6 @@ Use this flag if you do not want the library computation to take into account al
 
 - **-do_self** [Unsupported]
 This flag causes the extension to carried out within the sequences (as opposed to between sequences). This is necessary when looking for internal repeats with Mocca.
-
 
 Tree computation
 ----------------
@@ -513,6 +494,57 @@ The profile mode flag controls the multiple profile alignments in T-Coffee. Ther
 - **-msa_mode** (usage:**-msa_mode=<tree,graph,precomputed>**/default:**-evaluate_mode=tree**) [Unsupported]
 
 
+Aligment of more than 100 sequences with DPA [Unsupported]
+--------------------------------------------
+- **-dpa_master_aln** (usage:**-dpa_master_aln=<File, method>**/default:**-dpa_master_aln=NO**)
+ When using DPA, T-Coffee needs a seed alignment that can be computed using any appropriate method. By default, T-Coffee computes a fast approximate alignment. 
+
+- **-dpa_maxnseq** (usage:**-dpa_maxnseq=<integer value>**/default:**-dpa_maxnseq=30**)
+Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than **-dpa_maxnseq** OR if it controls a pair of sequences having less than **-dpa_min_score2** percent ID.
+
+- **-dpa_min_score1** (usage:**-dpa_min_score1=<integer value>**/default:**-dpa_min_score1=95**)
+Threshold for not realigning the sequences within the master alignment. Given this alignment and the associated tree, sequences below a node are not realigned if none of them has less than -dpa_min_score1 % identity.*
+
+- **-dpa_min_score2** (usage:**-dpa_min_score2**/default:**-dpa_min_score2**)
+Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than **-dpa_maxnseq** OR if it controls a pair of sequences having less than **-dpa_min_score2** percent ID.
+
+- **-dpa_tree** (usage:**-dpa_tree=<filename>**) [Not implemented]
+Guide tree used in DPA; this is a newick tree where the distance associated with each node is set to the minimum pairwise distance among all considered sequences.
+
+Multiple l ocal alignments [Unsupported]
+-------------------------
+It is possible to compute multiple local alignments, using the moca routine. MOCCA is a routine that allows extracting all the local alignments that show some similarity with another predefined fragment. MOCCA is a perl script that calls T-Coffee and provides the appropriate parameters.
+
+- **-domain/-mocca** (**Usage: -domain**)
+This flag indicates that t_coffee will run using the domain mode. All the sequences will be concatenated, and the resulting sequence will be compared to itself using lalign_rs_s_pair mode (lalign of the sequence against itself using keeping the lalign raw score). This step is the most computer intensive, and it is advisable to save the resulting file.
+
+::
+
+  $$: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.moc\
+ ca_lib -domain -start=100 -len=50
+
+This instruction will use the fragment 100-150 on the concatenated sequences, as a template for the extracted repeats. The extraction will only be made once. The library will be placed in the file <lib name>. If you want, you can test other coordinates for the repeat, such as:
+
+::
+
+  $$: t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
+
+This run will use the fragment 100-160, and will be much faster because it does not need to recompute the lalign library.
+
+- **-start** (usage:**-start=<int value>**)
+This flag indicates the starting position of the portion of sequence that will be used as a template for the repeat extraction. The value assumes that all the sequences have been concatenated, and is given on the resulting sequence.
+
+- **-len** (usage:**-len=<integer>**)
+This flag indicates the length of the portion of sequence that will be used as a template.
+
+- **-scale** (usage:**-scale=<int value>**/default:**-scale=-100**)
+This flag indicates the value of the threshold for extracting the repeats. The actual threshold is equal to -motif_len*scale
+Increase the scale Increase sensitivity  More alignments( i.e. -50).
+
+- **-domain_interactive** [Examples]
+Launches an interactive MOCCA session.
+
+
 Alignment post-processing
 -------------------------
 - **-clean_aln**
@@ -540,9 +572,8 @@ stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresp
 
   ##### FILENAME <name> TYPE <Type> FORMAT <Format>
 
-
-Alignments
-----------
+Output files, format & names
+----------------------------
 - **-outfile** (usage:**-outfile=<out_aln,file,default,no>**)
 Indicates the name of the alignment output by T-Coffee. If the default is used, the alignment is named <your sequences>.aln.
 
@@ -564,14 +595,35 @@ score_ps : idem in postscript
 
 http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
 
+- **-seqnos** (usage:**-seqnos=<on,off>**/default:**-seqnos=off**)
+Causes the output alignment to contain the number of residue at the end of each line.
 
+Evaluation files
+----------------
+The CORE is an index that indicates the consistency between the library of piarwise alignments and the final multiple alignment. Our experiment indicate that the higher this consistency, the more reliable the alignment. A publication describing the CORE index can be found here `<http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_. All these modes will be useful when generating colored version of the output, with the **-output** flag (cf. Chapter **T-Coffee Main Documentation, Section Preparing Your Data**).
+
+- **-evaluate_mode** (usage:**-evaluate_mode=<t_coffee_fast,t_coffee_slow,t_coffee_non_extended >**/default:t_coffee_fast)
+This flag indicates the mode used to normalize the T-Coffee score when computing the reliability score:
+  - **t_coffee_fast**: Normalization is made using the highest score in the MSA. This evaluation mode was validated and in our hands, pairs of residues with a score of 5 or higher have 90 % chances to be correctly aligned to one another.
+  - **t_coffee_slow**: Normalization is made using the library. This usually results in lower score and a scoring scheme more sensitive to the number of sequences in the dataset. Note that this scoring scheme is not any more slower, thanks to the implementation of a faster heuristic algorithm.
+  - **t_coffee_non_extended**: the score of each residue is the ratio between the sum of its non extended scores with the column and the sum of all its possible non extended scores.
+
+
+::
+
+  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_ascii, score_html
+
+  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii, score_html
+
+  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html
+  
+Alignments
+----------
 - **-outseqweight** (usage:**-outseqweight=<filename>**/default:no)
 Indicates the name of the file in which the sequences weights should be saved...
 
 - **-case** (usage:**-case=<keep,upper,lower>**/default:**-case=keep**)
 Instructs the program on the case to be used in the output file (Clustalw uses upper case). The default keeps the case and makes it possible to maintain a mixture of upper and lower case residues. If you need to change the case of your file, refers to the **T-Coffee Main Documentation**.
-
-- **-cpu** [Deprecated]
 
 - **-outorder** (usage:**-outorder=<input OR aligned OR filename>**/default:**-outorder=input**/[cw])
 Sets the order of the sequences in the output alignment; by default, the sequences are kept in the original order of the input dataset. Using **-outorder=aligned** means the sequences come in the order indicated by the tree; this order can be seen as a one dimensional projection of the tree distances. It is also possible to provide a file (a legal FASTA file) whose order will be used in the final MSA via **-outdorder=<filename>**.
@@ -579,70 +631,26 @@ Sets the order of the sequences in the output alignment; by default, the sequenc
 - **-inorder** (usage:**-inorder=<input OR aligned>**/default:**-inorder=aligned**/[cw]
 MSAs based on dynamic programming depend slightly on the order in which the incoming sequences are provided. To prevent this effect sequences are arbitrarily sorted at the beginning of the program (**-inorder=aligned**). However, this affects the sequence order within the library. You can switch this off by stating **-inorder=input**.
 
-- **-seqnos** (usage:**-seqnos=<on,off>**/default:**-seqnos=off**)
-Causes the output alignment to contain the number of residue at the end of each line.
+- **-cpu** [Deprecated]
 
-
-Libraries
----------
-Although, it does not necessarily do so explicitly, T-Coffee always end up combining libraries. Libraries are collections of pairs of residues. Given a set of libraries, T-Coffee makes an attempt to assemble the alignment with the highest level of consistence. You can think of the alignment as a timetable. Each library pair would be a request from students or teachers, and the job of T-Coffee would be to assemble the time table that makes as many people as possible happy...
-
-
+Librairies & trees
+------------------
 - **-out_lib** (usage:**-out_lib=<name of the library,default,no>**/default:**-out_lib=default**)
 Sets the name of the library output. Default implies <run_name>.tc_lib.
 
 - **-lib_only**
 Causes the program to stop once the library has been computed. Must be used in conjunction with the flag **-out_lib**.
 
-Trees
------
--newtree (uUsage:**-newtree=<tree file>**)
+- **-newtree** (usage:**-newtree=<tree file>**)
 Indicates the name of the file into which the guide tree will be written. The default will be <sequence_name>.dnd, or <run_name.dnd>. The tree is written in the parenthesis format known as newick or New Hampshire and used by Phylips (see the format section).*
 
 .. warning:: Do NOT confuse this guide tree with a phylogenetic tree.
 
 
-Reliability Estimation
-======================
-CORE Computation
-----------------
-The CORE is an index that indicates the consistency between the library of piarwise alignments and the final multiple alignment. Our experiment indicate that the higher this consistency, the more reliable the alignment. A publication describing the CORE index can be found on:
-
-
-http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
-
-
--evaluate_mode
-^^^^^^^^^^^^^^
-  **Usage: -evaluate_mode=<t_coffee_fast,t_coffee_slow,t_coffee_non_extended >**
-
-   *Default: -evaluate_mode=t_coffee_fast*
-
-   *This flag indicates the mode used to normalize the t_coffee score when computing the reliability score.*
-
-   *t_coffee_fast: Normalization is made using the highest score in the MSA. This evaluation mode was validated and in our hands, pairs of residues with a score of 5 or higher have 90 % chances to be correctly aligned to one another.*
-
-   *t_coffee_slow: Normalization is made using the library. This usually results in lower score and a scoring scheme more sensitive to the number of sequences in the dataset. Note that this scoring scheme is not any more slower, thanks to the implementation of a faster heuristic algorithm.*
-
-   *t_coffee_non_extended: the score of each residue is the ratio between the sum of its non extended scores with the column and the sum of all its possible non extended scores.*
-
-   *These modes will be useful when generating colored version of the output, with the -output flag:*
-
-::
-
-  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_asci\
- i, score_html
-
-  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii, score_html
-
-  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html
-
-
-
-Database Searches
-=================
-Template selection parameters
------------------------------
+Template Based T-Coffee Modes
+=============================
+Database searches parameters
+----------------------------
 These parameters are used when running template based modes of T-Coffee such as EXPRESSO (3D), PSI-Cofee (homology extension), TM/PSI-Coffee (homology extension/reduced databases), or accurate (mixture of profile and 3D templates).
 
 - **-blast_server** (sage:**-blast_server= EBI,NCBI or LOCAL**/default:*blast_server=EBI**)
@@ -676,18 +684,15 @@ Maximum % identity for a PDB template to be selected by EXPRESSO.
 Minimum coverage for a PDB template to be selected by EXPRESSO.
 
 
-Using Structures
-================
-Generic
--------
--mode
-^^^^^
+Using structures
+----------------
+- **-mode**
   **Usage: -mode=3dcoffee**
    *Default: turned off*
    *Runs t_coffee with the 3dcoffee mode (cf next section).*
 
--check_pdb_status
-^^^^^^^^^^^^^^^^^
+- **-check_pdb_status**
+
   **Usage: -check_pdb_status**
    *Default: turned off*
    *Forces t_coffee to run extract_from_pdb to check the pdb status of each sequence. This can considerably slow down the program.*
@@ -718,7 +723,7 @@ Generic
  .template
 
 
-Using/finding PDB templates for the Sequences
+Using/finding PDB templates for the sequences
 ---------------------------------------------
 - **-template_file**
 Usage: -template_file =*<filename,SCRIPT_scriptame,SELF_TAG,SEQFILE_TAG_filename,no>**, *Default: no*, *This flag instructs t_coffee on the templates that will be used when combining several types of information. For instance, when using structural information, this file will indicate the structural template that corresponds to your sequences. The identifier T indicates that the file should be a FASTA like file, formatted as follows. There are several ways to pass the templates:*
@@ -812,150 +817,12 @@ PSIBLAST: will use the EBI sever to find profiles
 - **-struc_to_use**
 Usage: -struc_to_use=<struc1, struc2...>**, *Default: -struc_to_use=NULL*, *Restricts the 3Dcoffee to a set of pre-defined structures.*
 
-Domain Analysis
-===============
-Multiple Local Alignments
--------------------------
-It is possible to compute multiple local alignments, using the moca routine. MOCA is a routine that allows extracting all the local alignments that show some similarity with another predefined fragment.
 
-
-'mocca' is a perl script that calls t-coffee and provides it with the appropriate parameters.
-
-
--domain/-mocca
-^^^^^^^^^^^^^^
-  **Usage: -domain**
-
-   *Default: not set*
-
-   *This flag indicates that t_coffee will run using the domain mode. All the sequences will be concatenated, and the resulting sequence will be compared to itself using lalign_rs_s_pair mode (lalign of the sequence against itself using keeping the lalign raw score). This step is the most computer intensive, and it is advisable to save the resulting file.*
-
-::
-
-  $$: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.moc\
- ca_lib -domain -start=100 -len=50
-
-
-
-   *This instruction will use the fragment 100-150 on the concatenated sequences, as a template for the extracted repeats. The extraction will only be made once. The library will be placed in the file <lib name>.*
-
-   *If you want, you can test other coordinates for the repeat, such as*
-
-::
-
-  $$: t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
-
-
-
-   *This run will use the fragment 100-160, and will be much faster because it does not need to re-compute the lalign library.*
-
--start
-^^^^^^
-  **Usage: -start=<int value>**
-
-   *Default: not set*
-
-   *This flag indicates the starting position of the portion of sequence that will be used as a template for the repeat extraction. The value assumes that all the sequences have been concatenated, and is given on the resulting sequence.*
-
--len
-^^^^
-  **Usage: -len=<int value>**
-
-   *Default: not set*
-
-   *This flag indicates the length of the portion of sequence that will be used as a template.*
-
--scale
-^^^^^^
-  **Usage: -scale=<int value>**
-
-   *Default: -scale=-100*
-
-   *This flag indicates the value of the threshold for extracting the repeats. The actual threshold is equal to:*
-
-   * motif_len*scale*
-
-   *Increase the scale Increase sensitivity  More alignments( i.e. -50).*
-
--domain_interactive [Examples]
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  **Usage: -domain_interactive**
-
-   *Default: unset*
-
-   *Launches an interactive mocca session.*
-
-::
-
-  $$: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len\
- =60
-
-  TOLB_ECOLI_212_26  211 SKLAYVTFESGR--SALVIQTLANGAVRQV-ASFPRHNGAPAFSPDGSKLAFA
-  TOLB_ECOLI_165_218 164 TRIAYVVQTNGGQFPYELRVSDYDGYNQFVVHRSPQPLMSPAWSPDGSKLAYV
-  TOLB_ECOLI_256_306 255 SKLAFALSKTGS--LNLYVMDLASGQIRQV-TDGRSNNTEPTWFPDSQNLAFT
-  TOLB_ECOLI_307_350 306 -------DQAGR--PQVYKVNINGGAPQRI-TWEGSQNQDADVSSDGKFMVMV
-  TOLB_ECOLI_351_393 350 -------SNGGQ--QHIAKQDLATGGV-QV-LSSTFLDETPSLAPNGTMVIYS
-   1 * * : . .:. :
-
-   MENU: Type Letter Flag[number] and Return: ex |10
-   |x -->Set the START to x
-   >x -->Set the LEN to x
-   Cx -->Set the sCale to x
-   Sname -->Save the Alignment
-   Bx -->Save Goes back x it
-   return -->Compute the Alignment
-   X -->eXit
-
-  [ITERATION 1] [START=211] [LEN= 50] [SCALE=-100] YOUR CHOICE:
-  For instance, to set the length of the domain to 40, type:
-  [ITERATION 1] [START=211] [LEN= 50] [SCALE=-100] YOUR CHOICE:>40[return]
-  [return]
-
-  Which will generate:
-
-  TOLB_ECOLI_212_252 211 SKLAYVTFESGRSALVIQTLANGAVRQVASFPRHNGAPAF 251
-  TOLB_ECOLI_256_296 255 SKLAFALSKTGSLNLYVMDLASGQIRQVTDGRSNNTEPTW 295
-  TOLB_ECOLI_300_340 299 QNLAFTSDQAGRPQVYKVNINGGAPQRITWEGSQNQDADV 339
-  TOLB_ECOLI_344_383 343 KFMVMVSSNGGQQHIAKQDLATGGV-QVLSSTFLDETPSL 382
-  TOLB_ECOLI_387_427 386 TMVIYSSSQGMGSVLNLVSTDGRFKARLPATDGQVKFPAW 426
-   1 : : : :: . 40
-
-   MENU: Type Letter Flag[number] and Return: ex |10
-
-   |x -->Set the START to x
-   >x -->Set the LEN to x
-   Cx -->Set the sCale to x
-   Sname -->Save the Alignment
-   Bx -->Save Goes back x it
-   return -->Compute the Alignment
-   X -->eXit
-
-  [ITERATION 3] [START=211] [LEN= 40] [SCALE=-100] YOUR CHOICE:
-
-
-   *If you want to indicate the coordinates, relative to a specific sequence, type:*
-
-::
-
-   |<seq_name>:start
-
-
-   *Type S<your name> to save the current alignment, and extract a new motif.*
-
-   *Type X when you are done.*
-
-
-
-Structural Analysis
-===================
-APDB, iRMSD and tRMSD Parameters
+APDB, iRMSD and T-RMSD Parameters
 --------------------------------
-.. warning:: These flags will only work within the APDB package that can be invoked via the -other_pg parameter of T-Coffee: t_coffee -other_pg apdb -aln <your aln>
+.. warning:: These flags will only work within the APDB package that can be invoked via the **-other_pg** parameter of T-Coffee: t_coffee -other_pg apdb -aln <your aln>
 
--quiet [Same as T-Coffee]
-^^^^^^^^^^^^^^^^^^^^^^^^^
--run_name [Same as T-Coffee]
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 -aln
 ^^^^
   **Usage: -aln=<file_name>.**
@@ -983,85 +850,32 @@ APDB, iRMSD and tRMSD Parameters
 
    *The alignment can contain as many structures as you wish.*
 
--n_excluded_nb
-^^^^^^^^^^^^^^
-  **Usage: -n_excluded_nb=<integer>.**
+- **-n_excluded_nb** (usage:**-n_excluded_nb=<integer>**/default:1)
+When evaluating the local score of a pair of aligned residues, the residues immediately next to that column should not contribute to the measure. By default the first to the left and first to the right are excluded.
 
-   *Default:1*
+- **-maximum_distance** (usage:**-maximum_distance=<float>**/default:10)
+Size of the neighborhood considered around every residue. If .-local_mode is set to sphere, -maximum_distance is the radius of a sphere centered around each residue. If -local_mode is set to window, then -maximum_distance is the size of the half window (i.e. window_size=-maximum_distance*2+1).
 
-   *When evaluating the local score of a pair of aligned residues, the residues immediately next to that column should not contribute to the measure. By default the first to the left and first to the right are excluded.*
+- **-similarity_threshold** (usage: **-similarity_threshold=<integer>**/default:70)
+Fraction of the neighborhood that must be supportive for a pair of residue to be considered correct in APDB. The neighborhood is a sphere defined by -maximum_distance, and the support is defined by **-md_threshold**.
 
--maximum_distance
-^^^^^^^^^^^^^^^^^
-  **Usage: -maximum_distance=<float>.**
+- **-local_mode** (usage:**-local_mode=<sphere,window>**/default:sphere)
+Defines the shape of a neighborhood, either as a sphere or as a window.
 
-   *Default:10*
+- **-filter** (usage:**-filter=<0.00-1.00>**/default:1.00)
+Defines the centiles that should be kept when making the local measure. Foir instance, -filter=0.90 means that the the 10 last centiles will be removed from the evaluation. The filtration is carried out on the iRMSD values.
 
-   *Size of the neighborhood considered around every residue. If .-local_mode is set to sphere, -maximum_distance is the radius of a sphere centered around each residue. If -local_mode is set to window, then -maximum_distance is the size of the half window (i.e. window_size=-maximum_distance*2+1).*
+- **print_rapdb** (usage:**-print_rapdb (FLAG)**/default:off) [Unsupported] 
+This causes the prints out of the exact neighborhood of every considered pair of residues.
 
--similarity_threshold
-^^^^^^^^^^^^^^^^^^^^^
-  **Usage: -similarity_threshold=<integer>.**
-
-   *Default:70*
-
-   *Fraction of the neighborhood that must be supportive for a pair of residue to be considered correct in APDB. The neighborhood is a sphere defined by -maximum_distance, and the support is defined by -md_threshold.*
-
--local_mode
-^^^^^^^^^^^
-  **Usage: -local_mode=<sphere,window>.**
-
-   *Default:sphere*
-
-   *Defines the shape of a neighborhood, either as a sphere or as a window.*
-
--filter
-^^^^^^^
-  **Usage: -filter=<0.00-1.00>.**
-
-   *Default:1.00*
-
-   *Defines the centiles that should be kept when making the local measure. Foir instance, -filter=0.90 means that the the 10 last centiles will be removed from the evaluation. The filtration is carried out on the iRMSD values.*
-
--print_rapdb [Unsupported]
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-  **Usage: -print_rapdb (FLAG)**
-
-   *Default:off*
-
-   *This causes the prints out of the exact neighborhood of every considered pair of residues.*
-
--outfile [Same as T-Coffee]
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-This flag is meant to control the output name of the colored APDB output. This file will either display the local APDB score or the local iRMD, depending on the value of -color_mode. The default format is defined by -ouptut and is score_html.
-
-
--color_mode
-^^^^^^^^^^^
-  **Usage: -color_mode=<apdb, irmsd>**
-
-   *Default:apdb*
-
-This flag is meant to control the colored APDB output (local score). This file will either display the local APDB score or the local iRMD.
+-color_mode (usage:**-color_mode=<apdb,irmsd>**/default:apdb)
+This flag is meant to control the colored APDB output (local score). This file will either display the local APDB score or the local iRSMD.
 
 
 *******************************
 T-Coffee Parameter Files Format 
 *******************************
-Parameter files
-===============
-Parameter files used with -parameters, -t_coffee_defaults, -dali_defaults... Must contain a valid parameter string where line breaks are allowed. These files cannot contain any comment, the recommended format is one parameter per line:
-
-
-::
-
-   <parameter name>=<value1>,<value2>....
-
-   <parameter name>=.....
-
-
-
-Sequence Name Handling
+Sequence name handling
 ======================
 Sequence name handling is meant to be fully consistent with ClustalW (Version 1.75). This implies that in some cases the names of your sequences may be edited when coming out of the program. Five rules apply:
 
@@ -1094,29 +908,25 @@ Sequence name handling is meant to be fully consistent with ClustalW (Version 1.
  data.
 
 
-Automatic Format Recognition
+Automatic format recognition
 ============================
-Most common formats are automatically recognized by t_coffee. See -in and the next section for more details. If your format is not recognized, use readseq or clustalw to switch to another format. We recommend Fasta.
-
-
-Structures
-==========
-PDB format is recognized by T-Coffee. T-Coffee uses extract_from_pdb (cf -other_pg flag). extract_from_pdb is a small embeded module that can be used on its own to extract information from pdb files.
-
-
-RNA Structures
-==============
-RNA structures can either be coded as T-Coffee libraries, with each line indicating two paired residues, or as alifold output. The selex format is also partly supported (see the seq_reformat tutorial on RNA sequences handling).
-
+Most common formats are automatically recognized by t_coffee. See -in and the next section for more details. If your format is not recognized, use readseq or clustalw to switch to another format. We recommend FASTA.
 
 Sequences
-=========
+---------
 Sequences can come in the following formats: fasta, pir, swiss-prot, clustal aln, msf aln and t_coffee aln. These formats are the one automatically recognized. Please replace the '*' sign sometimes used for stop codons with an X.
 
+Structures
+----------
+PDB format is recognized by T-Coffee. T-Coffee uses extract_from_pdb (cf -other_pg flag). extract_from_pdb is a small embeded module that can be used on its own to extract information from pdb files.
+
+RNA Structures
+--------------
+RNA structures can either be coded as T-Coffee libraries, with each line indicating two paired residues, or as alifold output. The selex format is also partly supported (see the seq_reformat tutorial on RNA sequences handling).
 
 Alignments
-==========
-Alignments can come in the following formats: msf, ClustalW, Fasta, Pir and t_coffee. The t_coffee format is very similar to the ClustalW format, but slightly more flexible. Any interleaved format with sequence name on each line will be correctly parsed:
+----------
+Alignments can come in the following formats: msf, ClustalW, FASTA, PIR and T-Coffee. The T-Coffee format is very similar to the ClustalW format, but slightly more flexible. Any interleaved format with sequence name on each line will be correctly parsed:
 
 
 ::
@@ -1138,13 +948,10 @@ Alignments can come in the following formats: msf, ClustalW, Fasta, Pir and t_co
   <empty line> [Facultative]n
 
 
-An empty line is a line that does NOT contain amino-acid. A line that contains the ClustalW annotation (.:\*) is empty.
+An empty line is a line that does NOT contain amino-acid. A line that contains the ClustalW annotation (.:\*) is empty. Spaces are forbidden in the name. When the alignment is being read, non character signs are ignored in the sequence field (such as numbers, annotation...).
 
+.. note:: A different number of lines in the different blocks will cause the program to crash or hang.
 
-Spaces are forbidden in the name. When the alignment is being read, non character signs are ignored in the sequence field (such as numbers, annotation...).
-
-
-.. note:: Note: a different number of lines in the different blocks will cause the program to crash or hang.
 
 Libraries
 =========
@@ -1175,67 +982,42 @@ This is currently the only supported format.
   !<space>SEQ_1_TO_N
 
 
-
 Si1: index of Sequence 1
 Ri1: index of residue 1 in seq1
 V1: Integer Value: Weight
 V2, V3: optional values
 
 
-.. note:: Note 1: There is a space between the ! And SEQ_1_TO_N
+.. note:: 1) There is a space between the ! And SEQ_1_TO_N, and 2)The last line (! SEQ_1_TO_N) indicates that:
 
-.. note:: Note 2: The last line (! SEQ_1_TO_N) indicates that:
-
-Sequences and residues are numbered from 1 to N, unless the token SEQ_1_TO_N is omitted, in which case the sequences are numbered from 0 to N-1, and residues are from 1 to N.
-
-
-Residues do not need to be sorted, and neither do the sequences. The same pair can appear several times in the library. For instance, the following file would be legal:
+Sequences and residues are numbered from 1 to N, unless the token SEQ_1_TO_N is omitted, in which case the sequences are numbered from 0 to N-1, and residues are from 1 to N. Residues do not need to be sorted, and neither do the sequences. The same pair can appear several times in the library. For instance, the following file would be legal:
 
 
 ::
 
   #1 2
-
   12 13 99
-
   #1 2
-
   15 16 99
-
   #1 1
-
   12 14 70
 
 
-
-It is also poosible to declare ranges of resdues rather than single pairs. For instance, the following:
+It is also possible to declare ranges of residues rather than single pairs. For instance, the following:
 
 
 ::
 
   #0 1
-
   +BLOCK+ 10 12 14 99
-
   +BLOCK+ 15 30 40 99
-
   #0 2
-
   15 16 99
-
   #0 1
-
   12 14 70
 
 
-
-The first statement BLOCK declares a BLOCK of length 10, that starts on position 12 of sequence 1 and position 14 of sequence 2 and where each pair of residues within the block has a score of 99. The second BLOCK starts on residue 30 of 1, residue 40 of 2 and extends for 15 residues.
-
-
-Blocks can overalp and be incompatible with one another, just like single constraints.
-
-
-
+The first statement BLOCK declares a BLOCK of length 10, that starts on position 12 of sequence 1 and position 14 of sequence 2 and where each pair of residues within the block has a score of 99. The second BLOCK starts on residue 30 of 1, residue 40 of 2 and extends for 15 residues. Blocks can overalp and be incompatible with one another, just like single constraints.
 
 
 T-COFFEE_LIB_FORMAT_02
@@ -1246,113 +1028,72 @@ A simpler format is being developed, however it is not yet fully supported and i
 ::
 
   ! TC_LIB_FORMAT_02
-
   #S1 SEQ1 [OPTIONAL]
-
   #S2 SEQ2 [OPTIONAL]
-
   ...
-
   !comment [OPTIONAL]
-
   S1 R1 Ri1 S2 R2 Ri2 V1 (V2 V3)
-
   => N R1 Ri1 S2 R2 Ri2 V1 (V2 V3)
-
   ...
-
 
 
 S1, S2: name of sequence 1 and 2
-
-
 SEQ1: sequence of S1
-
-
 Ri1, Ri2: index of the residues in their respective sequence
-
-
 R1, R2: Residue type
-
-
 V1, V2, V3: integer Values (V2 and V3 are optional)
-
-
 Value1, Value 2 and Value3 are optional.
 
-
 Library List
-============
+------------
 These are lists of pairs of sequences that must be used to compute a library. The format is:
 
 
 ::
 
   <nseq> <S1> <S2>
-
   2 hamg2 globav
-
   3 hamgw hemog singa
-
   ...
 
 
-
-Substitution matrices.
-======================
+Substitution matrices
+=====================
 If the required substitution matrix is not available, write your own in a file using the following format:
 
 
-ClustalW Style [Deprecated]
+ClustalW style [Deprecated]
 ---------------------------
 ::
 
   # CLUSTALW_MATRIX FORMAT
-
   $
-
   v1
-
   v2 v3
-
   v4 v5 v6
-
   ...
-
   $
 
 
-
-v1, v2... are integers, possibly negatives.
-
-
-The order of the amino acids is: ABCDEFGHIKLMNQRSTVWXYZ, which means that v1 is the substitution value for A vs A, v2 for A vs B, v3 for B vs B, v4 for A vs C and so on.
+v1, v2... are integers, possibly negatives. The order of the amino acids is: ABCDEFGHIKLMNQRSTVWXYZ, which means that v1 is the substitution value for A vs A, v2 for A vs B, v3 for B vs B, v4 for A vs C and so on.
 
 
-BLAST Format [Recommended]
+BLAST format [Recommended]
 --------------------------
+The alphabet can be freely defined
+
 ::
 
   # BLAST_MATRIX FORMAT
-
   # ALPHABET=AGCT
-
   A G C T
-
   A 0 1 2 3
-
   G 0 2 3 4
-
   C 1 1 2 3
-
   ...
 
 
-
-The alphabet can be freely defined
-
-
-Sequences Weights
+Sequences weights
 =================
 Create your own weight file, using the -seq_weight flag:
 
@@ -1360,16 +1101,24 @@ Create your own weight file, using the -seq_weight flag:
 ::
 
   # SINGLE_SEQ_WEIGHT_FORMAT_01
-
   seq_name1 v1
-
   seq_name2 v2
-
   ...
 
 
+No duplicate allowed. Sequences not included in the set of sequences provided to T-Coffee will be ignored. Order is free. V1 is a float. Unweighted sequences will see their weight set to 1.
 
-No duplicate allowed. Sequences not included in the set of sequences provided to t_coffee will be ignored. Order is free. V1 is a float. Un-weighted sequences will see their weight set to 1.
+
+Parameter files
+===============
+Parameter files used with -parameters, -t_coffee_defaults, -dali_defaults... Must contain a valid parameter string where line breaks are allowed. These files cannot contain any comment, the recommended format is one parameter per line:
+
+
+::
+
+   <parameter name>=<value1>,<value2>....
+
+   <parameter name>=.....
 
 
 
@@ -1378,7 +1127,7 @@ Technical Notes
 ***************
 These notes are only meant for internal development.
 
-Building A T-Coffee Server 
+Building a T-Coffee server 
 ==========================
 We maintain a T-Coffee server (www.tcoffee.org). We will be pleased to provide anyone who wants to set up a similar service with the sources
 
@@ -1394,40 +1143,23 @@ By default, T-Coffee will generate and rely on the follwing directory structure:
 ::
 
   /home/youraccount/ #HOME_4_TCOFFEE
-
   HOME_4_TCOFFEE/.t_coffee/  #DIR_4_TCOFFEE
-
   DIR_4_TCOFFEE/cache #CACHE_4_TCOFFEE
-
   DIR_4_TCOFFEE/tmp #TMP_4_TCOFFEE
-
   DIR_4_TCOFFEE/methods #METHOS_4_TCOFFEE
-
   DIR_4_TCOFFEE/mcoffee #MCOFFEE_4_TCOFFEE
 
 
-
-By default, all these directories are automatically created, following the dependencies suggested here.
-
-
-The first step is the determination of the HOME. By default the program tries to use HOME_4_TCOFFEE, then the HOME variable and TMP or TEMP if HOME is not set on your system or your account. It is your responsibility to make sure that one of these variables is set to some valid location where the T-Coffee process is allowed to read and write.
-
-
-If no valid location can be found for HOME_4_TCOFFEE, the program exits. If you are running T-Coffee on a server, we recommend to hard set the following locations, where your scratch is a valid location.
+By default, all these directories are automatically created, following the dependencies suggested here. The first step is the determination of the HOME. By default the program tries to use HOME_4_TCOFFEE, then the HOME variable and TMP or TEMP if HOME is not set on your system or your account. It is your responsibility to make sure that one of these variables is set to some valid location where the T-Coffee process is allowed to read and write. If no valid location can be found for HOME_4_TCOFFEE, the program exits. If you are running T-Coffee on a server, we recommend to hard set the following locations, where your scratch is a valid location.
 
 
 ::
 
   HOME_4_TCOFFEE='your scratch'
-
   TMP_4_TCOFFEE='your scratch'
-
   DIR_4_TCOFFEE='your scratch'
-
   CACHE_4_TCOFFEE='your scratch'
-
   NO_ERROR_REPORT_4_TCOFFEE=1
-
 
 
 Note that it is a good idea to have a cron job that cleans up this scratch area, once in a while.
@@ -1435,21 +1167,12 @@ Note that it is a good idea to have a cron job that cleans up this scratch area,
 
 Output of the .dnd file.
 ------------------------
-A common source of error when running a server: T-Coffee MUST output the .dnd file because it re-reads it to carry out the progressive alignment. By default T-Coffee outputs this file in the directory where the process is running. If the T-Coffee process does not have permission to write in that directory, the computation will abort...
-
-
-To avoid this, simply specify the name of the output tree:
-
-
- -newtree=<writable file (usually in /tmp)>
-
-
-Chose the name so that two processes may not over-write each other dnd file.
+A common source of error when running a server: T-Coffee MUST output the .dnd file because it re-reads it to carry out the progressive alignment. By default T-Coffee outputs this file in the directory where the process is running. If the T-Coffee process does not have permission to write in that directory, the computation will abort...To avoid this, simply specify the name of the output tree (refers to the **T-Coffee Parameters & Flags**, in the **Output** subsection about trees). Choose the name so that two processes may not over-write each other dnd file.
 
 
 Permissions
 -----------
-The t_coffee process MUST be allowed to write in some scratch area, even when it is ran by Mr nobody... Make sure the /tmp/ partition is not protected.
+The T-Coffee process MUST be allowed to write in some scratch area, even when it is ran by Mr nobody... Make sure the /tmp/ partition is not protected.
 
 
 Other Programs
@@ -1475,15 +1198,12 @@ The following examples are only meant for internal development, and are used to 
 profile2list
 ------------
 prf1: profile containing one structure
-
-
 prf2: profile containing one structure
 
 
 ::
 
-  $$: t_coffee Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile\
-      =aligned_prf.aln
+  $$: t_coffee Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile =aligned_prf.aln
 
 Command Line List
 -----------------
@@ -1493,8 +1213,7 @@ These command lines have been checked before every release (along with the other
 
 ::
 
-  $$: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -ou\
- tfile=clustal_text
+  $$: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text
 
 
 -fugue_client
