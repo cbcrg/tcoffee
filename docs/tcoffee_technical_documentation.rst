@@ -11,8 +11,8 @@ T-Coffee Parameters & Flags
 ***************************
 T-Coffee general information
 ============================
-Syntax of T-Coffee commands
----------------------------
+General syntax 
+---------------
 About the syntax of T-Coffee command lines, just for you to know that T-Coffee is quite flexible, you can use any kind of separator you want (i.e. , ; <space> =). The syntax used in this document is meant to be consistent with that of ClustalW. However, in order to take advantage of the automatic filename compleation provided by many shells, you can replace '=' and ',' with a space.
 
 T-Coffee flags
@@ -30,45 +30,29 @@ This documentation gives a list of all the flags that can be used to modify the 
   Command 3:
   $$: t_coffee -help -<flag>
  
-
-Entering the right parameters
------------------------------
+Setting up the parameters
+-------------------------
 There are many ways to enter parameters in T-Coffee, see the **-parameters** flag. In general you will not need to use these complicated parameters, yet, if you find yourself typing long command lines on a regular basis, it may be worth reading this section. One may easily feel confused with the various manners in which the parameters can be passed to T-Coffee. The reason for these many mechanisms is that they allow several levels of intervention. For instance, you may install T-Coffee for all the users and decide that the defaults we provide are not the proper ones...In this case, you will need to make your own ``t_coffee_default`` file. Later on, a user may find that he/she needs to keep reusing a specific set of parameters, different from those in t_coffee_default, hence the possibility to write an extra parameter file with the flag **-parameters**. In summary, this means that **-parameters** supersede all the other options, while parameters provided via **-mode** are the weakest:
 
 ::
 
   Priorities: "-parameters" > "prompt parameters" > "-t_coffee_defaults" > "-mode"
   
+Setting up the variables
+------------------------
+It is possible to modify T-Coffee's behavior by setting any of the following environment variables. With the bash shell, use **export VAR='value'**; with the cshell, use **set $VAR='value'**. Here is a list of variables in T-Coffee:
 
-Environment variables
-=====================
-List of variables
------------------
-It is possible to modify T-Coffee's behavior by setting any of the following environment variables. With the bash shell, use **export VAR='value'**; with the cshell, use **set $VAR='value'**.
+ - **http_proxy_4_TCOFFEE**: sets the http_proxy and HTTP_proxy values used by T-Coffee. These values supersede http_proxy and HTTP_proxy while http_proxy_4_TCOFFEE gets superseded by the command line values **-proxy** and **-email**; if you have no proxy, just set this value to an empty string.
+ - **email_4_TCOFFEE**: sets the E-mail values provided to web services called upon by T-Coffee; can be overriden by the flag **-email**.
+ - **DIR_4_TCOFFEE**: by default this variable is set to $HOME/.t_coffee; this is where T-Coffee expects to find its cache, tmp dir and possibly any temporary data stored by the program.
+ - **TMP_4_TCOFFEE**: by default this variable is set to $HOME/.t_coffee/tmp; this is where T-Coffee stores temporary files.
+ - **CACHE_4_TCOFFEE**: by default this variable is set to $HOME/.t_coffee/cache; this is where T-Coffee stores any data expensive to obtain: PDB files, structural alignments...
+ - **PLUGINS_4_TCOFFEE**: by default all the third party packages are searched in the directory DIR_4_TCOFFEE/plugins/<OS>. This variable overrides the default but can also be overriden by the **-plugins** flag.
+ - **NO_ERROR_REPORT_4_TCOFFEE**: by default this variable is no set; set it if you do not want the program to generate a verbose error output file (useful for running a server).
+ - **PDB_DIR**:indicate the location of your local PDB installation.
+ - **NO_WARNING_4_TCOFFEE**: suppresses all the warnings.
+ - **UNIQUE_DIR_4_TCOFFEE**: sets all DIR_4_TCOFFEE, CACHE_4_TCOFFEE, TMP_4_TCOFFEE, PLUGINS_4_TCOFFEE
 
-- **http_proxy_4_TCOFFEE**: sets the http_proxy and HTTP_proxy values used by T-Coffee. These values supersede http_proxy and HTTP_proxy while http_proxy_4_TCOFFEE gets superseded by the command line values **-proxy** and **-email**; if you have no proxy, just set this value to an empty string.
-
-- **email_4_TCOFFEE**: sets the E-mail values provided to web services called upon by T-Coffee; can be overriden by the flag **-email**.
-
-- **DIR_4_TCOFFEE**: by default this variable is set to $HOME/.t_coffee; this is where T-Coffee expects to find its cache, tmp dir and possibly any temporary data stored by the program.
-
-- **TMP_4_TCOFFEE**: by default this variable is set to $HOME/.t_coffee/tmp; this is where T-Coffee stores temporary files.
-
-- **CACHE_4_TCOFFEE**: by default this variable is set to $HOME/.t_coffee/cache; this is where T-Coffee stores any data expensive to obtain: PDB files, structural alignments...
-
-- **PLUGINS_4_TCOFFEE**: by default all the third party packages are searched in the directory DIR_4_TCOFFEE/plugins/<OS>. This variable overrides the default but can also be overriden by the **-plugins** flag.
-
-- **NO_ERROR_REPORT_4_TCOFFEE**: by default this variable is no set; set it if you do not want the program to generate a verbose error output file (useful for running a server).
-
-- **PDB_DIR**:indicate the location of your local PDB installation.
-
-- **NO_WARNING_4_TCOFFEE**: suppresses all the warnings.
-
-- **UNIQUE_DIR_4_TCOFFEE**: sets all DIR_4_TCOFFEE, CACHE_4_TCOFFEE, TMP_4_TCOFFEE, PLUGINS_4_TCOFFEE
-
-
-Setting up the environment variables
-------------------------------------
 T-Coffee can have its own environment file, kept in a file named ``t_coffee_env`` in the folder $HOME/.t_coffee/ and can be edited (under maintenance...). The value of any legal variable can be modified through that file. For instance, here are some examples of 1) using a configuration file when not requiring a proxy, 2) setting up any environment variable using the **-setenv** or 3) simply using an export.
 
 ::
@@ -87,10 +71,56 @@ T-Coffee can have its own environment file, kept in a file named ``t_coffee_env`
 
 .. note:: When you use **-setenv** for PATH, the value you provide is concatenated at the beginning of the current PATH value. This way you can force T-Coffee to use a specific version of an aligner.
 
+CPU Control
+-----------
+Multithreading
+^^^^^^^^^^^^^^
+- **-multi_core** (usage:**-multi_core=templates_jobs_relax_msa**/default=0)
+Options are:
+  - template: fetch the templates in a parallel way
+  - jobs: compute the library
+  - relax: extend the library in a parallel way
+  - msa: compute the msa in a parallel way
+  - no: not parallelized
+Specifies that the steps of T-Coffee that should be multithreaded; by default all relevant steps are parallelized.
+
+- **-n_core** (usage:**-n_core= <number of cores>**/default: 0)
+Default indicates that all cores will be used as indicated by the environment.
+
+Limits
+^^^^^^
+- **-mem_mode** [Deprecated]
+
+- **-ulimit** (usage:**-ulimit=<value>**/default:**-ulimit=0**)
+Specifies the upper limit of memory usage (in Megabytes) and processes exceeding this limit will automatically exit. A value 0 indicates that no limit applies.
+
+- **-maxlen** (usage:**-maxlen=<value, 0=nolimit>**/default:**-maxlen=1000**)
+Indicates the maximum length of the sequences. 
+
+- **-maxnseq** (usage:**-maxnseq=<value,0=nolimit>**/default:**-maxnseq=??**)
+Indicates the maximum number of the sequences. 
+
+Aligning more than 100 sequences with DPA [Unsupported]
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ - **-dpa_master_aln** (usage:**-dpa_master_aln=<File, method>**/default:**-dpa_master_aln=NO**)
+ When using DPA, T-Coffee needs a seed alignment that can be computed using any appropriate method. By default, T-Coffee computes a fast approximate alignment. 
+
+- **-dpa_maxnseq** (usage:**-dpa_maxnseq=<integer value>**/default:**-dpa_maxnseq=30**)
+Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than **-dpa_maxnseq** OR if it controls a pair of sequences having less than **-dpa_min_score2** percent ID.
+
+- **-dpa_min_score1** (usage:**-dpa_min_score1=<integer value>**/default:**-dpa_min_score1=95**)
+Threshold for not realigning the sequences within the master alignment. Given this alignment and the associated tree, sequences below a node are not realigned if none of them has less than -dpa_min_score1 % identity.*
+
+- **-dpa_min_score2** (usage:**-dpa_min_score2**/default:**-dpa_min_score2**)
+Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than **-dpa_maxnseq** OR if it controls a pair of sequences having less than **-dpa_min_score2** percent ID.
+
+- **-dpa_tree** (usage:**-dpa_tree=<filename>**) [Not implemented]
+Guide tree used in DPA; this is a newick tree where the distance associated with each node is set to the minimum pairwise distance among all considered sequences.
+
 Meta-parameters
-===============
+---------------
 Global parameters
------------------
+^^^^^^^^^^^^^^^^^
 - **no flag**
 If no flag is provided, your sequence dataset must be the first argument. When you do so, the name of your file is used as a name prefix for every output file of the program (changing the extension according to the type of result).
 
@@ -134,7 +164,7 @@ Replaces the former flag **-score** which is no longer supported. This flag togg
 By default, is turned off. It toggles on the conversion mode and causes T-Coffee to convert the sequences, alignments, libraries or structures provided via the **-infile** and **-in** flags. The output format must be set via the **-output** flag. This flag can also be used if you simply want to compute a library (i.e. you have an alignment and you want to turn it into a library). This option is ClustalW compliant.
 
 Misc parameters
----------------
+^^^^^^^^^^^^^^^
 - **-version**
 Returns the current version number of T-Coffee you are using.
 
@@ -521,64 +551,6 @@ Usage: -protein_db= <BLAST database>**, *Default: pdb*, *Database for PDB templa
 - **-pdb_type**
 Usage: -pdb_type= d,n,m,dnm,dn**, *Default: d*, *d: diffraction*, *n: NMR*, *m: model*
 
-CPU Control
-===========
-Multithreading
---------------
-- **-multi_core**
-Usage: -multi_core= templates_jobs_relax_msa**
-*Default: 0*
-*template: fetch the templates in a parallel way*
-*jobs: compute the library*
-*relax: extend the library in a parallel way*
-*msa: compute the msa in a parallel way*
-*Specifies that the steps of T-Coffee that should be multi threaded. by default all relevant steps are parallelized.*
-
-::
-
-  $$: t_coffee sample_seq2.fasta -multi_core jobs
-
-  $$: t_coffee sample_seq2.fasta -multi_core no
-
-
-- **-n_core**
-Usage: -n_core= <number of cores>**, *Default: 0*, *Default indicates that all cores will be used, as indicated by the environment.
-
-
-Limits
-------
-- **-mem_mode** [Deprecated]
-
-- **-ulimit**
-Usage: -ulimit=<value>**, *Default: -ulimit=0*, *Specifies the upper limit of memory usage (in Megabytes). Processes exceeding this limit will automatically exit. A value 0 indicates that no limit applies.*
-
-- **-maxlen**
-Usage: -maxlen=<value, 0=nolimit>**, *Default: -maxlen=1000*, *Indicates the maximum length of the sequences.*
-
-Aligning more than 100 sequences with DPA
------------------------------------------
-- **-maxnseq**
-Usage: -maxnseq=<value, 0=nolimit>**, *Default: -maxnseq=50*, *Indicates the maximum number of sequences before triggering the use of t_coffee_dpa.*
-
--dpa_master_aln
-Usage: -dpa_master_aln=<File, method>**, *Default: -dpa_master_aln=NO*, *When using dpa, T-Coffee needs a seed alignment that can be computed using any appropriate method. By default, t_coffee computes a fast approximate alignment. A pre-alignment can be provided through this flag, as well as any program using the following syntax:*
-
-::
-
-  your_script -in <fasta_file> -out <file_name>
-
-
-- **-dpa_maxnseq**
-Usage: -dpa_maxnseq=<integer value>**, *Default: -dpa_maxnseq=30*, *Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than -dpa_maxnseq OR if it controls a pair of sequences having less than -dpa_min_score2 percent ID.*
-
-- **-dpa_min_score1**
-Usage: -dpa_min_score1=<integer value>**, *Default: -dpa_min_score1=95*, *Threshold for not realigning the sequences within the master alignment. Given this alignment and the associated tree, sequences below a node are not realigned if none of them has less than -dpa_min_score1 % identity.*
-
-- **-dpa_min_score2**
-Usage: -dpa_min_score2**, *Default: -dpa_min_score2*, *Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than -dpa_maxnseq OR if it controls a pair of sequences having less than -dpa_min_score2 percent ID.*
-
-- **-dpa_tree** [NOT IMPLEMENTED]
-Usage: -dpa_tree=<filename>**, *Default: -unset*, *Guide tree used in DPA. This is a newick tree where the distance associated with each node is set to the minimum pairwise distance among all considered sequences.*
 
 Using Structures
 ================
