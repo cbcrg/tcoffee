@@ -1773,7 +1773,7 @@ Evaluating alternative alignments with STRIKE (under maintenance...)
 
 Evaluating a MSA according to your own criterion
 ================================================
-Any kind of Feature can easily be turned into an evaluation grid. For instance, the protease sequences we have been using here have a well characterized binding site. A possible evaluation can be made as follows. let us consider the Swissprot annotation of the two most distantly related sequences. These two sequences contain the electron relay system of the proteases. We can use it to build an evaluation library: in P29786, the first Histidine is at position 68, while in P21844 this Histidine is on position 66. We can therefore build a library that will check whether these residues are properly aligned in any MSA. The library will look like this:
+Any kind of Feature can easily be turned into an evaluation grid. For instance, the protease sequences we have been using here have a well characterized binding site. A possible evaluation can be made as follows: let us consider the UniProt annotation of the two distantly related sequences; these two sequences contain the electron relay system of the proteases. We can use it to build an evaluation library: in P29786 (TRY3_AEDAE) the Histidine residue is at position 68 while in P21844 (MCPT5_MOUSE) the functionally equivalent Histidine residue is at position 66. We can therefore build a library that will check whether these two residues are properly aligned in any MSA. The library will look like this:
 
 
 ::
@@ -1789,11 +1789,11 @@ Any kind of Feature can easily be turned into an evaluation grid. For instance, 
   IALPDASETVADGAMCTVSGWGDTKNVFEMNTLLRAVNVPSYNQAECAAALVNVVPVTEQMICAGYAAGGKDSCQGDS\
   GGPLVSGDKLVGVVSWGKGCALPNLPGVYARVSTVRQWIREVSEV
   #1 2
-   66 68 100
+  66 68 100
   ! SEQ_1_TO_N
 
 
-You simply need to cut and paste this library in a file and use this file as a library to measure the concistency between your alignment and the correspondances declared in your library. The following command line also makes it possible to visualy display the agreement between your sequences and the library.
+You simply need to cut and paste this library in a file and use this file to measure the concistency between your alignment and the correspondances declared in your library. The following command line also makes it possible to visually display the agreement between your sequences and the library.
 
 ::
 
@@ -1805,9 +1805,9 @@ You simply need to cut and paste this library in a file and use this file as a l
 Downstream Analysis Using MSAs
 ******************************
 
-Trees/Clustering based on protein 3D structures
+Clustering/Trees based on protein 3D structures
 ===============================================
-This section describes tree estimation procedure based on the comparison of internal distances. One particular mode (T-RMSD) have been develop for this purpose only however, there are many other options to do so. On the other hand,T-RMSD makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. T-RMSD also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
+This section describes tree estimation procedure based on the comparison of intramolecular distances. One particular mode (T-RMSD) have been develop for this purpose yet there are many other options to do so. On the other hand,T-RMSD makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity between protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. T-RMSD also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
 
 Generating a tree based on structural distances
 -----------------------------------------------
@@ -1820,8 +1820,8 @@ This option makes it possible to estimate a tree while taking into account the v
   
 Input:
 
- - ``aln``: Multiple Sequence Alignment in FASTA, MSA or MSF
- - ``template``: FASTA name list with templates: >name _P_ template
+ - ``xxx.aln``: Multiple Sequence Alignment in FASTA, MSA or MSF
+ - ``xxx.template``: FASTA name list with templates: >name _P_ template
 
 Output: 
 
@@ -1835,7 +1835,7 @@ It is possible to control default parameters using the following extended comman
       gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick -out tree.dnd
 
 
-.. warning:: sequences without 3D structure will be excluded from the analysis and from the final output.
+.. warning:: Sequences without 3D structure will be excluded from the analysis and from the final output.
 
 Generating a tree based on contact conservation
 -----------------------------------------------
@@ -2082,7 +2082,7 @@ Here is the mother of all configuration file for T-Coffee:
   *
   * t_coffee -in Mgeneric_method.method
   *
-  * The method is passed to the shell using the following
+  *The method is passed to the shell using the following
   *call:
   *<EXECUTABLE><IN_FLAG><seq_file><OUT_FLAG><outname><PARAM>
   *
@@ -2199,11 +2199,13 @@ The previous integration method forces you to use the same weighting scheme for 
 
 ::
 
-  $$: t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=sim_pam250mt
+  $$: t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=sim_pam250mt \
+      -outfile=out_aln
+      
+  $$: t_coffee -aln sample_aln1.aln -lib=test_lib.tc_lib -outfile=outaln
 
-  $$: t_coffee -aln sample_aln1.aln -lib test_lib.tc_lib -outfile=outaln
-
-  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalign_id_pair -outfile=out_aln
+  $$: t_coffee -aln=sample_aln1.aln,sample_aln2.aln -method=fast_pair,lalign_id_pair \
+      -outfile=out_aln
 
 
 Generating your own libraries
@@ -2216,7 +2218,8 @@ This is suitable if you have local alignments, or very detailed information abou
   $$: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_lib -lib_only
 
   Command 2:
-  $$: t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib -lib_only
+  $$: t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib \
+      -lib_only
 
   Command 3:
   $$: t_coffee sample_seq1.fasta -lib lalign_id_pair_seq1.tc_lib, slow_pair_seq1.tc_lib
