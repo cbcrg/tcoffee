@@ -1629,7 +1629,7 @@ Note that all these output functions are also compatible with the default T-Coff
       tcs_residue_lower4
 
   Command 2:
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii  \
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii \
       -struc_in_f number_aln -output tcs_residue_filter3
 
 Weighting MSA for improved trees
@@ -1684,7 +1684,7 @@ When working with DNA, it is advisable to first align the sequences at the prote
   $$: t_coffee -infile sample_prot_thread.aln -evaluate -output score_ascii
 
   Command 2: generating replicates for DNA 
-  $$: t_coffee -other_pg seq_reformat -in sample_prot_thread.aln -in2 sample_dna_thread.fasta \
+  $$: t_coffee -other_pg seq_reformat -in sample_prot_thread.aln -in2 sample_dna_thread.fa \
       -struc_in sample_prot_thread.score_ascii -struc_in_f number_aln -output tcs_replicate_100 \
       -out dna.replicates
   
@@ -1715,60 +1715,56 @@ APDB/iRMSD
 ----------
 What is the APDB/iRMSD?
 ^^^^^^^^^^^^^^^^^^^^^^^
-APDB and the iRMSD are two closely related measures meant to evaluate the accuracy of a sequence alignment without using a structure based reference alignment. The iRMSD is a follow up of the APDB measure and we now recommend using the iRMSD rather than APDB. Although it may seem that the iRMSD was an attempt to get free iPODs from Apple, it is not (or at least we never got the iPODs). The iRMSD is a special RMSD (standing for intra-molecular distances based RMSD) where the alignments are evaluated using the structural information of the sequences with known structures.
+APDB and the iRMSD are two closely related measures meant to evaluate the accuracy of a MSAt without using a structure based reference alignment. The iRMSD is a follow up of the APDB measure and we now recommend using the iRMSD rather than APDB. Although it may seem that the iRMSD was an attempt to get free iPODs from Apple, it is not (or at least we never got the iPODs). The iRMSD is a special RMSD (standing for intramolecular distances based RMSD) where the alignments are evaluated using the structural information of the sequences with known structures.
 
-The strength of the iRMSD is its independence from a specific superposition models. When using the iRMSD to evaluate the score of a sequence alignment, one does not need to superpose the two structures and deduce a sequence alignment that will then be compared with the target alignment. In practice, we use a Normalized version of the iRMSD, the NiRMSD that makes it possible to compare alternative alignments of different length. From a structural point of view, the iRMSD has a meaning very similar to the iRMSD and it behaves in a similar fashion from a numerical point of view (similar ranges in Angstroms).
+The strength of the iRMSD is its independence from a specific superposition models. When using the iRMSD to evaluate the score of a MSA, one does not need to superpose the two structures and deduce a sequence alignment that will then be compared with the target alignment. Given two aligned residues (X and Y) the iRMSD score is an attempt to estimate the neighborhood support for the XY alignment. This is done by measuring the difference of distances between X and Y and every other pair of aligned residues within the same sphere (W and Z). The iRMSD is obtained by measuring the average Root Mean Square (RMS) of these differences of distances. The first step of APDB/iRMSD is to measure the distances between the Ca (carbon alpha) of each residue and its neighbors. Neighborhood is defined as a sphere of radius ***-maximum_distance** (10 by default). However, by setting **-local_mode** to 'window', the sphere can be replaced with a window of 1/2 size **-maximum_distance** residues. 
 
-The first step of APDB is to measure the distances between the Ca of each residue and its neighbors. Neighborhood is defined as a sphere of radius -maximum_distance (10 by default). However, by setting -local_mode to 'window', the sphere can be replaced with a window of 1/2 size '-maximum_distance' residues.
+The lower the iRMSD, the better the alignment. Yet, an alignment can obtain a good iRMSD score by simply having few aligned residues. To avoid this, the program also reports a normalized version of the iRMSD, the NiRMSD= MIN(L1,L2)*iRMSD/Number considered columns. It is recommended to use the NiRMSD to compare alternative alignments of different length. From a structural point of view, the NiRMSD has a meaning very similar to the iRMSD and it behaves in a similar fashion from a numerical point of view (similar ranges in Angstroms).
 
-Given two aligned residues (X and Y on the Figure) the iRMSD measure is an attempt to estimate the neighborhood support for the XY alignment. This is done by measuring the difference of distances between X and Y and every other pair of aligned residues within the same sphere (W and Z on Figure 1). The iRMSD is obtained by measuring the average Root Mean Square of these differences of distances. The lower the iRMSD, the better the alignment. However, an alignment can obtain a good iRMSD by simply having few aligned residues. To avoid this, the program also reports the NiRMSD= MIN(L1,L2)*iRMSD/Number Considered columns.
+.. note:: APDB is an older measure less robust than the iRMSD; it is an attempt to estimate the fraction of pairs of residues whose alignment seems to be correct form a structural point of view. The higher APDB, the better the alignment, and conversely the lower the NiRMSD, the better the alignment.
 
-How to efficiently use structural information
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-When it comes to evaluating Multiple Sequence Alignments, nothing beats structural information. To use the methods we describe here, you will need to have at least two structures, similar enough (>60%) to two sequences in your dataset. Here an outline of the best way to proceed:
+How to efficiently use structural information?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+When it comes to evaluating MSAs, nothing is better than structural information. To use the methods we describe here, you will need to have at least two structures, similar enough (>60%) to sequences contained in your dataset. Here an outline of the best way to proceed:
 
-1) Make sure you include two structures whose sequences are so distantly related that most of the other sequences are intermediates.
-2) Align your sequences without using the structural information (i.e. t_coffee, muscle...).
-3) Evaluate your alignment with iRMSD (see later in this section); the score will be S1.
-4) Realign your sequences, but this time using structural information (Expresso).
-5) Measure the score of that alignment; the score will be S2.
+ 1) Make sure you include two structures whose sequences are so distantly related that most of the other sequences are intermediates.
+ 2) Align your sequences without using the structural information (i.e. T-Coffee, MUSCLE...).
+ 3) Evaluate your alignment with iRMSD/NiRMSD (see later in this section); the score will be S1.
+ 4) Realign your sequences, but this time using structural information (Expresso).
+ 5) Measure the score of that alignment; the score will be S2.
 
 If S1 and S2 are almost similar, it means your distantly related structures were well aligned, and you can expect the intermediate sequences to be well aligned as well. If S2 is much better than S1, you can expect the structures to be well aligned in the second alignment, while there is no guaranty that the alignment of the intermediate sequences has improved as well, although in practice it often does
 
 Evaluating an alignment with the iRMSD package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Let us evaluate the alignment produced by Expresso, using the template_file returned by Expresso. Evaluating the MSA with iRMSD will deliver a long output (all pairs are compareD), the most interesting bit is at the bottom with the global iRMSD score in angstrom (NiRMSD is just the iRMSD score normalized to the length of the MSA). 
+Let us evaluate the alignment produced by Expresso using the template file it returns. Evaluating the MSA with iRMSD will deliver a long output (all pairs are compared), the most interesting bit is at the bottom with the global iRMSD score in Angstrom (NiRMSD is the iRMSD score normalized to the length of the MSA). 
 
 ::
 
   Running the iRMSD:
-  $$: t_coffee -other_pg irmsd proteases_small.expresso -template_file \
-      proteases_small.template_file
+  $$: t_coffee -other_pg irmsd proteases_small.aln -template_file proteases_small_pdb1.template_list
 
-  Output of the iRMSD:
-  TOTAL for the Full MSA
-  TOTAL EVALUATED: 52.90 %
-  TOTAL APDB:      81.59 %  
-  TOTAL iRMSD:     0.71 Angs
-  TOTAL NiRMSD:    1.33 Angs
-
-.. note:: APDB is an older measure, less robust than the iRMSD and it is an attempt to estimate the fraction of pairs of residues whose alignment seems to be correct form a structural point of view. The higher APDB, the better the alignment, the lower the NiRMSD, the better the alignment.
+  Output of the iRMSD evaluation:
+   	TOTAL     EVALUATED :  50.17 %  
+ 	  TOTAL     APDB      :  83.44 %  
+ 	  TOTAL     iRMSD     :   0.67 Angs
+ 	  TOTAL     NiRMSD    :   1.34 Angs
 
 Evaluating alternative alignments
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The strength of structure based alignments is that they make it possible to compare alternative alignments. In this case let us consider:
+The strength of structure based alignments is that they make it possible to compare alternative alignments. In this case let us consider the following results in the table below (APDB in %, iRMSD/NiRMSD in Angstroms, and the evaluated columns in %). As expected, Expresso delivers the best alignment from a structural point of view. This makes sense, since Expresso explicitely USES structural information. The other figures show us that the structural based alignment is only marginally better than most sequences based alignments, yet with the notable exception of ClustalW.
 
-======== ========================= ====== 
-Method   File                      NiRMSD 
-======== ========================= ====== 
-Expresso sproteases_small.expresso 1.33  
-T-Coffee sproteases_small.tc_aln   1.35  
-ClustalW sproteases_small.cw_aln   1.52  
-MAFFT    sproteases_small.mafft    1.36  
-MUSCLE   sproteases_small.muscle   1.34  
-======== ========================= ====== 
-
-As expected, Expresso delivers the best alignment from a structural point of view. This makes sense, since Expresso explicitely USES structural information. The other figures show us that the structural based alignment is only marginally better than most sequences based alignments. Muscle seems to have a small edge here although the reality is that all these figures are impossible to distinguish with the notable exception of ClustalW
+======== ======== ======== ========= =========
+ Method   APDB(%) iRMSD(A) NiRMSD(A) Eval. (%)
+======== ======== ======== ========= =========
+Expresso   83.44    0.67     1.34      50.17
+T-Coffee   83.11    0.68     1.35      50.29
+M-Coffee   83.08    0.68     1.36      50.00
+ProbCons   83.10    0.68     1.35      50.28
+MAFFT      82.99    0.68     1.35      50.25
+Kalign     82.42    0.69     1.38      50.02
+ClustalW   80.62    0.73     1.47      49.55
+======== ======== ======== ========= =========
 
 
 Evaluating alternative alignments with STRIKE (under maintenance...)
