@@ -2174,10 +2174,10 @@ By default, the alignment produced by your method will be weighted according to 
 
 ::
 
-  Overweight by a factor 2 the weight of slow_pair:
+  Increases by a factor 2 the weight of slow_pair:
   $$: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@OW2
  
-  Causeevery pair of slow_pair to have a weight equal to 250:
+  Causes every pair of slow_pair to have a weight equal to 250:
   $$: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@250
 
 Managing a collection of method files
@@ -2199,27 +2199,27 @@ The previous integration method forces you to use the same weighting scheme for 
 
 ::
 
+  $$: t_coffee -aln=sample_aln1.aln,sample_aln2.aln -method=fast_pair,lalign_id_pair \
+      -outfile=out_aln
+      
   $$: t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=sim_pam250mt \
       -outfile=out_aln
       
   $$: t_coffee -aln sample_aln1.aln -lib=test_lib.tc_lib -outfile=outaln
 
-  $$: t_coffee -aln=sample_aln1.aln,sample_aln2.aln -method=fast_pair,lalign_id_pair \
-      -outfile=out_aln
-
 
 Generating your own libraries
 -----------------------------
-This is suitable if you have local alignments, or very detailed information about your potential residue pairs, or if you want to use a very specific weighting scheme. You will need to generate your own libraries using the format described in the last section. You may also want to precompute your libraries in order to save them for further use. For instance, in the following example, we generate the global (command 1) and the local (command 2) libraries and later reuse them for combination into a multiple alignment. Once these libraries have been computed, you can then combine them at your convenience in a single MSA (command 3). Of course you can decide to only use the local or the global library.
+This is suitable if you have local alignments, or very detailed information about your potential residue pairs, or if you want to use a very specific weighting scheme. You will need to generate your own libraries using the format described in the last section. You may also want to precompute your libraries in order to save them for further use. For instance, in the following example, we generate the local (command 1) and the global (command 2) libraries and later reuse them for combination into a multiple alignment. Once these libraries have been computed, you can then combine them at your convenience in a single MSA (command 3). Of course you can decide to only use the local or the global library.
 
 ::
 
   Command 1:
-  $$: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_lib -lib_only
-
-  Command 2:
   $$: t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib \
       -lib_only
+
+  Command 2:
+  $$: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_lib -lib_only
 
   Command 3:
   $$: t_coffee sample_seq1.fasta -lib lalign_id_pair_seq1.tc_lib, slow_pair_seq1.tc_lib
