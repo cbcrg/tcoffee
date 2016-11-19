@@ -5,7 +5,7 @@ T-Coffee Main Documentation
 Before You Start...
 *******************
 
-.. Note:: The T-Coffee Manual has been intensively modified and updated (11/2016), incorporating all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering...). If you have any suggestion or correction, contact us...we receive any feedback gladly !
+.. Note:: The T-Coffee Manual has been intensively modified and updated (11/2016), incorporating all the latest development of the past years (including PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, contact us...we welcome any feedback!
 
 
 Foreword
@@ -13,7 +13,7 @@ Foreword
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more elaborated ones. We have tried to put as many of these functionalities on the webserver and we plan to incorporate even more in the future, but currently not all are available and sometimes we had to set up some limitations for practical reasons. Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**. In the course of this manual, we expect you to use a Unix-like shell commands running on given example files that you can find `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. Also, all values given in this manual were obtained over time with different version of the T-Coffee package, they are just an indication...and depending on the version of T-Coffee you are using, these values can be slightly different. If you don't want to bother with command line, try using our online latest `tcoffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or via the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_.
+.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee. It ranges from simple applications to more elaborated ones. We have tried to put as many of these functionalities on the webserver and we plan to incorporate even more in the future, but currently not all are available and sometimes we had to set up some limitations for practical reasons. In the course of this manual, we expect you to use a Unix-like shell commands running on example files you can find `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. Note that all values/results given in this manual may have been obtained with different versions of T-Coffee, they are just an indication. Depending on the version of T-Coffee you are using, these results may slightly differ. Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**, but if you don't want to bother with command line you can use our ` web server <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or different links on the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_.
 
 
 Prerequisite for using T-Coffee
@@ -23,7 +23,7 @@ This manual relies on the assumption that you have installed T-Coffee, version 9
 
 Have a try...it's not painful!
 ==============================
-We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. It contains everything you need to run ALL the examples provided in this manual. In the future starting with the next T-Coffee stable version, all example files will be included in the T-Coffee distribution (~/tcoffee/Version_11.XX/examples/).
+We encourage you to try all the following examples presented here with your own sequences/structures. If you want to try with ours, they are available on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. It contains everything you need to run ALL the examples provided in this manual. In the future starting with the next T-Coffee beta version, all files will be included in the T-Coffee distribution (~/tcoffee/Version_11.XX/examples/).
 
 
 *******************
@@ -31,19 +31,19 @@ What is  T-Coffee ?
 *******************
 What is T-Coffee?
 =================
-**T-Coffee stands for Tree based Consistency Objective Function For alignment Evaluation**, it is primarily a multiple sequence alignment method but it also provides a collection of useful tools presented in this manual. Before going deep into the core of the matter, here are a few words to quickly explain some of the things T-Coffee will do for you.
+**T-Coffee means "Tree based Consistency Objective Function For alignment Evaluation"**. It is primarily a Multiple Sequence Alignment (MSA) method but it also provides a collection of useful tools presented in this manual. Before going deep into the core of the matter, here are a few words to briefly explain the things T-Coffee can do !
 
 What does it do?
 ----------------
 T-Coffee has two components allowing you to perform different tasks:
- - mainly it is a Multiple Sequence Alignment program. Given a dataset of sequences previously gathered (using database search programs like BLAST, Ensembl, whatever...), T-Coffee will produce a Multiple Sequence Alignment (MSA), refer to the section **Building Your Multiple Sequence Alignments** for more details.
- - also it is a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
+ - mainly it is a Multiple Sequence Alignment method. Given a dataset of sequences previously gathered using database search programs (like BLAST, Ensembl, etc...), T-Coffee will produce a Multiple Sequence Alignment (MSA) (refer to the section **Building Your Multiple Sequence Alignments** for more details).
+ - also it is a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) able to perform a wide range of operations such as aligning accurately, reformatting data, evaluating results, comparing methods and many more...
 
 What can it align?
 ------------------
-T-Coffee will align nucleic acid (DNA and RNA) and protein sequences alike. T-Coffee is also able to use other type of information such as secondary and tertiary structure information (for protein or RNA sequences with a known/predicted structure), sequence profiles, trees....
+T-Coffee will align nucleic acid (DNA and RNA) and protein sequences alike. T-Coffee is also able to use other type of information such as secondary/tertiary structure information (for protein or RNA sequences with a known/predicted structure), sequence profiles, trees...
 
-.. Hint:: To have a rough idea, on an average computer, T-Coffee can easily align up to a 200 sequences, about 1000 amino acid long in about ~20min. Never try to align more than 1000 sequences without using T-Coffee fast modes !!!
+.. Hint:: To have a rough idea, on an average computer, T-Coffee can easily align up to a 200 sequences, about 1000 amino acid long in about ~20min. It is better to avoid aligning more than 1000 sequences without using a cluster or T-Coffee fast modes !!!
 
 How can I use it?
 -----------------
