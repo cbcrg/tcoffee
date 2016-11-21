@@ -832,27 +832,21 @@ For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be
 
 Pruning phylogenetic trees
 --------------------------
-Pruning removes leaves from an existing tree and recomputes distances so that no information is lost. Consider the files ``sample_tree1.dnd`` and the file ``sample_fake.seq``:
+Pruning removes leaves from an existing tree and recomputes distances so that no information is lost. To do this with T-Coffee you need two input files: a tree file in the Newick format and a FASTA-like file where sequences can be omitted, but you can also leave them, at your entire convenience. The second file is merely a list of the sequences to be kept when pruning the tree. The resulting tree will contain only the sequences specified in the list.
 
 ::
 
-  sample_tree1.dnd
-  (( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
- 
-  sample_fake.seq
-  >A
-  >B
-  >C
-  >D
+  Tree file: "sample_3Dseq1.tree"
+  ((((TNFR10-2:0.04546,TNFR16-2:0.06640)...,TNFR4-2:0.05255) 45:0.00848); \
+  
+  FASTA-like file: "sample_3Dseq1.fake"
+  >TNFR2-2
+  >TNFR4-4
+  ...
 
-.. note:: The file ``sample_fake.seq`` is merely a ersatz FASTA file where sequences can be omitted, but you can also leave them, at your entire convenience.
-
-::
-
+  Pruning the tree:
   $$: t_coffee -other_pg seq_reformat -in sample_tree1.dnd -in2 sample_fake.seq -action \
       +tree_prune -output newick
-
-  (( A:0.50000, C:0.50000):0.00000, B:0.50000, D:0.99500); (under maintenance...)
 
 
 Manipulating structure files (PDB)
@@ -1267,8 +1261,8 @@ Expresso/3D-Coffee is probably one of the most important improvement of T-Coffee
 
 
   Command 2: two ways of running 3D-Coffee (under maintenance...)
-  $$: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file _SELF_
+  $$: t_coffee three_pdb.fasta -mode 3dcoffee
+  $$: t_coffee three_pdb.fasta -method sap_pair,slow_pair -template_file _SELF_P_
 
 Using Expresso
 ^^^^^^^^^^^^^^
