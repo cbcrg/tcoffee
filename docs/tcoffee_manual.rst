@@ -1,13 +1,13 @@
 ###########################
 T-Coffee Main Documentation
 ###########################
-*******************
-Before You Start...
-*******************
 
 .. Note:: The T-Coffee Manual has been intensively modified and updated (11/2016), incorporating all the latest development of the past years (including PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, contact us...we welcome any feedback!
 
 
+*******************
+Before You Start...
+*******************
 Foreword
 ========
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
@@ -112,9 +112,9 @@ Each of these constraints comes with a weight and in the end, the T-Coffee algor
 .. note:: Be aware that nothing forces you to use a given library and that you could build it using other methods. In protein language, **T-Coffee is synonymous for freedom, the freedom of being aligned however you fancy** (I was probably a Tryptophan in some previous life).
 
 
-*******************************************************
-Preparing Your Data: Reformatting, Trimming And More... 
-*******************************************************
+*******************
+Preparing Your Data
+*******************
 .. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual. When multiple input files are given, flags are mandatory (**-in/-in2**, **-al1/-al2**, etc...). Usually, options are indicated via the symbol "=" (i.e **-output=html**) but it is not mandatory, it's just recommended. If you use a correct/strict flag usage, T-Coffee will always work fine, but you have some degrees of freedom ;-).
 
 The reformatting utility: seq_reformat
@@ -893,9 +893,9 @@ By default, T-Coffee also requires two important PDB files declared using the tw
 .. warning:: Since the file ``unreleased.xml`` is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
 
 
-******************************************
-Building Your Multiple Sequence Alignments
-******************************************
+***********************
+Aligning Your Sequences
+***********************
 General comments on alignments and aligners
 ===========================================
 What is a good alignment?
@@ -1551,9 +1551,9 @@ When dealing with coding DNA, the right thing to do is to translate your DNA seq
 
 
 
-****************************
-How Good Is Your Alignment ?
-****************************
+*************************
+Evaluating Your Alignment
+*************************
 There are three possible strategies for evaluating your alignment of protein sequences:
 
  1) **Sequence based methods** like the CORE index and the TCS if you don't have any structure (quite often). These do pretty well in the core regions of an alignment (which can correspond to protein domains, fold, structural elements, etc...) but can be limited in more variable regions (which can correspond to loops, disordered regions, etc...).
