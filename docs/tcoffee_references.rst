@@ -34,9 +34,9 @@ Notredame, C., Higgins, D.G., Heringa, J. **T-Coffee: A novel method for fast an
 Notredame, C., Holm, L., Higgins, D.G. **COFFEE: an objective function for multiple sequence alignments**. Bioinformatics, 14(5):407-422 (1998). PMID: 968205
 
 
-***************************
-T-Coffee Webserver versions
-***************************
+********************
+T-Coffee Web Servers
+********************
 
 Floden, E.W., Tommaso, P.D., Chatzou, M., Magis, C., Notredame, C., Chang, J.-M. **PSI/TM-Coffee: a web server for fasta accurate multiple sequence alignments of regular and transmembrane proteins using homology extension on reduced databases**. Nucleic Acids Res., 44(W1):W339-W343 (2016). PMID:27106060
 
@@ -53,6 +53,8 @@ Di Tommaso, P., Moretti, S., Xenarios, I., Orobitg, M., Montanyola, A., Chang, J
 Moretti, S., Wilm, A., Higgins, D.G., Xenarios, I., Notredame, C. **R-Coffee: a web server for accurately aligning noncoding RNA sequences**., Nucleic Acids Res., 36(Web Server issue):W10-W13 (2008). PMID:18483080
 
 Moretti, S., Armougom, F., Wallace, I.M., Higgins, D.G., Jongeneel, C.V., Notredame, C. **The M-Coffee web server: a meta-method for computing multiple sequence alignments by combining alternative alignment methods**. Nucleic Acids Res., 35(Web Server issue):W645-W648 (2007). PMID:17526519
+
+Moretti, S., Reinier, F., Poirot, O., Armougom, F., Audic, S., Keduas, V., Notredame, C. **PROTOGENE: turning amino acid alignments into bona fide CDS nucleotide alignments**. Nucleic Acids Res., 34(Web server issue):W600-W603 (2006), PMID:16845080
 
 Armougom, F., Moretti, S., Keduas, V., Notredame, C. **The iRMSD: a local measure of sequence alignment accuracy using structural information**. Bioinformatics, 22(14):e35-e39 (2006). PMID:16873492
 
@@ -80,6 +82,29 @@ Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. **T-RMS
 Armougom, F., Moretti, S., Keduas, V., Notredame, C. **The iRMSD: a local measure of sequence alignment accuracy using structural information**. Bioinformatics, 22(14):e35-e39 (2006), PMID:16873492
 
 
+**************************
+Using MSAs / Related Works
+**************************
+
+Erb, I., Notredame, C. **How should we measure proportionality on relative gene expression data?**. Theory Biosci., 135(1-2):21-36 (2016), PMID26762323
+
+Earl, D., Nguyen, N., Hickey, G., Harris, R.S., Fitzgerald, S., Beal, K. Seledtsov, I., Raney, B.J., Clawson, H., Kim, J., Kemena, C., Chang, J.-M., Erb, I., Poliakov, A., Hou, M., Herrero, J., Kent, W.J., Solovyev, V., Darling, A.E., Ma, J., Notredame, C., Brudno, M., Dubchak, I., Haussler, D., Paten, B. **Alignathon: a competitive assessment of whole-geome alignment methods**. Genome Res., 24(12):2077-2089 (2014), PMID:25273068
+
+Bussotti, G., Notredame, C., Enright, A.J. **Detecting and comparing non-coding RNAs in the high-throughput era**. Int. J. Mol. Sci., 14(8):15423-15458 (2013), PMID:23887659
+
+Chang, J.-M., Taly, J.-F., Erb, I., Sung, T.Y., Hsu, W.L. Tang, C.Y., Notredame, C., Su, E.C. **Efficient and interpretable prediction of protein functional classes by correspondence analysis and compact set relations**. PLoS One, 8(10):e75542 (2013), PMID:24146760
+
+Breen, M.S., Kemena, C., Vlasov, P.K., Notredame, C., Kondrashov, F.A. **Epistasis as the primary factor in molecular evolution**. Nature, 490(7421), 535-538 (2012), PMID:23064225
+
+Lin, H.N., Notredame, C., Chang, J.-M., Sung, T.Y., Hsu, W.L. **Improving the alignment quality of consistency based aligners with an evaluation function using synonymous protein words**. PLoS One, 6(12):e27872, (2011), PMID:22163274
+
+Coll, O., Villalba, A., Bussotti, G., Notredame, C., Gebauer, F. **A novel, noncanonical mechanism of cytoplasmic polyadenylation operates in Drosophila embryogenesis**. Genes Dev., 24(2):129-134 (2010), PMID:20080951
+
+Rausch, T., Emde, A.K., Weese, D., Döring, A., Notredame, C., Reinert, K. **Segment-based multiple sequence alignment**. Bioinformatics, 24(16):i187-i192 (2008), PMID:18689823
+
+Dietmann, S:, Park, J., Notredame, C., Heger, A., Lappe, M., Holm, L. **A fully automatic evolutionary classification of protein folds: Dali Domain Dictionary version 3**. Nucleic Acids Res., 29(1):55-57 (2001), PMID:11125048
+
+
 
 *************************************
 Reviews, Protocols, Briefings & Books
@@ -96,6 +121,8 @@ Notredame, C. **Computing multiple sequence/structure alignments with the T-Coff
 Kemena, C., Notredame, C. **Upcoming challenges for multiple sequence alignment methods in the high-throughput era**. Bioinformatics, 25(19):2455-2465 (2009). PMID:19648142
 
 Notredame, C. **Recent evolutions of multiple sequence alignment algorithms**. PLoS Comput. Biol., 3(8):e123 (2007). PMID:17784778
+
+Notredame, C., Suhre, K. **Computing multiple sequence/structure alignments with the T-Coffee package**. Curr. Protoc. Bioinformatics, Chapter 3:Unit 3.8 (2004), PMID:18428722
 
 Notredame, C., Abergel, C. **Using multiple alignment methods to assess the quality of genomic data analysis**. In: Andrade MA, editor. Bioinformatics and genomes: current perspectives. Wymondham (UK): Horizon Scientific Press,30–50 (2003).   
 
