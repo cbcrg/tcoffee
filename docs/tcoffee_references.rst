@@ -116,9 +116,9 @@ Dietmann, S:, Park, J., Notredame, C., Heger, A., Lappe, M., Holm, L. **A fully 
 
 
 
-*************************************
-Reviews, Protocols, Briefings & Books
-*************************************
+**************************
+Reviews, Briefings & Books
+**************************
 
 Chatzou, M., Magis, C., Chang, J.-M., Kemena, C., Bussotti, G., Erb, I., Notredame, C. **Multiple sequence alignment modeling: methods and applications**. Brief Bioinform., pii: bbv099 (2015). PMID:26615024
 
