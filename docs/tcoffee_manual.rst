@@ -1801,9 +1801,9 @@ You simply need to cut and paste this library in a file and use this file to mea
       -output html
 
 
-******************************
-Downstream Analysis Using MSAs
-******************************
+*******************
+Downstream Analysis
+*******************
 
 Clustering/Trees based on protein 3D structures
 ===============================================
@@ -1915,9 +1915,9 @@ The TCS
 The TCS was described in the previous subsection as it is mainly an evaluation tool. It has however several option that are relevant for downstream analysis such weighting and/or trimming MSA for phylogenetic reconstruction. It was demonstrated that TCS was able to improve phylogenetic reconstruction, you are welcome to look at the publication for more details.
 
 
-*************************************
-Internal/External Methods In T-Coffee
-*************************************
+*************************
+Internal/External Methods 
+*************************
 .. note:: The real power of T-Coffee is its ability to seamlessly combine many methods into one. While we try to integrate as many methods as we can in the default distribution, we do not have the means to be exhaustive and if you desperately need your favorite method to be integrated, you will need to bite the bullet ...
 
 
