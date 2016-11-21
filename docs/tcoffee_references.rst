@@ -9,7 +9,7 @@ Citations & References
 Comparative Genomics & Biology
 ******************************
 
-Erb, I., Notredame, C. **How should we measure proportionality on relative gene expression data?**. Theory Biosci., 135(1-2):21-36 (2016), PMID26762323
+Erb, I., Notredame, C. **How should we measure proportionality on relative gene expression data?** Theory Biosci., 135(1-2):21-36 (2016), PMID26762323
 
 Catuara-Solarz, S., Espinosa-Carrasco, J., Erb, I., Langohr, K., Gonzalez, J.R., Notredame, C., Dierssen, M. **Combined treatment with environmental enrichment and (-)-epigallocatchin-3-gallate ameliorates learning deficits and hippocampal alterations in a mouse model of Down syndrome**. eNeuro., 3(5)(2015) pii:ENEURO.0103, PMID:27844057
 
