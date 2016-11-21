@@ -1494,12 +1494,12 @@ MSA methods are not at their best when aligning DNA sequences. Whenever you can,
 
   $$: t_coffee sample_dnaseq1.fasta -type=dna
 
-The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. In practice, any time it encounters DNA, the program will try to use '4dna' version of the requested methods. These methods have lower penalties and are better suited for dealing with nucleic acid sequences. However, if you would rather use your own matrix, use the following command where you should replace **idmat** with your own matrix in BLAST format.
+The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. However, if you would rather use your own matrix, use the following command where you should replace **idmat** with your own matrix in BLAST format.
 
 ::
 
-  Under maintenance...
-  $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
+  $$: t_coffee sample_dnaseq1.fasta -in Mcdna_fast_pair@EP@MATRIX@idmat
+
 
 Pro-Coffee: Aligning functional DNA regions
 -------------------------------------------
