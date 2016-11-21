@@ -5,13 +5,17 @@ Citations & References
 .. Note:: It is important that you cite T-Coffee when you use it. Citing us is (almost) like giving us money: it helps us convincing our institutions that what we do is useful and that they should keep paying our salaries and deliver donuts to our offices from time to time (Not that they ever did it, but it would be nice anyway). Cite the approriate web server if you use one, otherwise, cite the original paper from 2000 (By the way...NOOO, it was never named 'T-Coffee 2000').
 
 
-********************
-Comparative Genomics
-********************
+******************************
+Comparative Genomics & Biology
+******************************
 
 Erb, I., Notredame, C. **How should we measure proportionality on relative gene expression data?**. Theory Biosci., 135(1-2):21-36 (2016), PMID26762323
 
+Catuara-Solarz, S., Espinosa-Carrasco, J., Erb, I., Langohr, K., Gonzalez, J.R., Notredame, C., Dierssen, M. **Combined treatment with environmental enrichment and (-)-epigallocatchin-3-gallate ameliorates learning deficits and hippocampal alterations in a mouse model of Down syndrome**. eNeuro., 3(5)(2015) pii:ENEURO.0103, PMID:27844057
+
 Di Tommaso, P., Palumbo, E., Chatzou, M., Prieto, P.,Heuer, M.L., Notredame, C. **The impact of Docker containers on ther performance of genomic pipelines**. PeerJ., 3:e1273 (2015), PMID:26421241
+
+Catuara-Solarz, S., Espinosa-Carrasco, J., Erb, I., Langohr, K., Notredame, C., Gonzalez, J.R., Dierssen, M. **Principal component analysis of the effects of environmental enrichment and (-)-epigallocatchin-3-gallate on age-associated learning deficits in a mouse model of Down syndrome**. Front Behav. Neurosci., 9:330 (2015), PMID:26696850
 
 Earl, D., Nguyen, N., Hickey, G., Harris, R.S., Fitzgerald, S., Beal, K. Seledtsov, I., Raney, B.J., Clawson, H., Kim, J., Kemena, C., Chang, J.-M., Erb, I., Poliakov, A., Hou, M., Herrero, J., Kent, W.J., Solovyev, V., Darling, A.E., Ma, J., Notredame, C., Brudno, M., Dubchak, I., Haussler, D., Paten, B. **Alignathon: a competitive assessment of whole-geome alignment methods**. Genome Res., 24(12):2077-2089 (2014), PMID:25273068
 
