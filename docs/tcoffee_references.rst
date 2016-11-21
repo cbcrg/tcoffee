@@ -82,9 +82,9 @@ Magis, C., Stricher, F., van der Sloot, A.M., Serrano, L., Notredame, C. **T-RMS
 Armougom, F., Moretti, S., Keduas, V., Notredame, C. **The iRMSD: a local measure of sequence alignment accuracy using structural information**. Bioinformatics, 22(14):e35-e39 (2006), PMID:16873492
 
 
-**********************************
-Related Works & Other Publications
-**********************************
+*************
+Related Works
+*************
 
 Erb, I., Notredame, C. **How should we measure proportionality on relative gene expression data?**. Theory Biosci., 135(1-2):21-36 (2016), PMID26762323
 
