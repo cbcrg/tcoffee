@@ -1811,65 +1811,64 @@ This section describes tree estimation procedure based on the comparison of intr
 
 Generating a tree based on structural distances
 -----------------------------------------------
-This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored.
+This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following command (command 1) will generate a 100 replicate NJ trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored. It is possible to control the defautl parameters (command 2).
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 
-      +evaluate3D distances +tree2bs first -output newick -out tree.dnd
-  
-Input:
-
- - ``xxx.aln``: Multiple Sequence Alignment in FASTA, MSA or MSF
- - ``xxx.template``: FASTA name list with templates: >name _P_ template
-
-Output: 
-
- -  ``tree.dnd``: Tree in newick format with bootstrap support   
-
-It is possible to control default parameters using the following extended command line
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
-      gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick -out tree.dnd
+  Command 1:
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +tree replicates 100 +evaluate3D distances +tree2bs first -output newick -out tree.dnd
+ 
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +tree replicates 100 gap 0.5 mode nj +evaluate3D distances 15 +tree2bs first -output \
+      newick -out tree.dnd
+      
+Input/Output files
+ - ``sample_3Dseq1.aln``: a MSA in FASTA, ClustalW or MSF
+ - ``sample_3Dseq1.template``: a template file (corresponding structure for each sequence)
+ - ``tree.dnd``: output a tree in newick format with bootstrap support   
 
 
 .. warning:: Sequences without 3D structure will be excluded from the analysis and from the final output.
 
+
 Generating a tree based on contact conservation
 -----------------------------------------------
-The following option (command 1) makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate NJ trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cutoff of 1.2 A between VdW radius and ignoring the 3 closest neighbors; columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA). The output file is ``tree.dnd`` is a tree in newick format. It is possible to control default parameters using the following extended command line (command 2).
+The following option (command 1) makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate NJ trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cutoff of 1.2 A between Van der Waals radius and ignoring the 3 closest neighbors; columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA). The output file is ``tree.dnd`` is a tree in newick format. It is possible to control default parameters using the following extended command line (command 2).
 
 :: 
 
   Command 1:
-  $$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree \
-      replicates 100 +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +tree replicates 100 +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
 
   Command 2:
-  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
-      gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +tree replicates 100 gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output \
+      newick -out tree.dnd
 
 .. warning:: The procedure requires at least 1 sequence with a known 3D structure or with contact information.
 
 Visulizing 3D Conservation
 --------------------------
-This same procedure can be used to visualize either intramolecular distance conservation or contact conservation.  The output file ``score_raw`` is a tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
+This same procedure can be used to visualize either intramolecular distance conservation or contact conservation.  The output file ``score_raw`` is a tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment. The flag **-out** specifies the name of the output file containing the results (you can give the name you want, but if you read the documentation so far, you already know it...). 
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-      -action +evaluate3D distances -output score_html 
+      -action +evaluate3D distances -output score_html -out out.html
+      
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-      -action +evaluate3D distances -output score_ascii 
+      -action +evaluate3D distances -output score_ascii -out out.ascii
+      
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-      -action +evaluate3D distances -output score_raw (under maintenance...)
+      -action +evaluate3D distances -output score_raw -out out.tab
 
 Identification of positions 
 ---------------------------
 
-If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificity, etc...), it is possible to estimate which columns yield the best support using the following command. The input ``group.fasta`` is a FASTA formatted list of the sequences that form the group whose support you want to analyze; the output ``aln.score_html`` is a colored version of your MSA indicating the sequences that best contribute to your clustering.
+If you have a well defined subgroup of sequences (domains having the same function, same specificity, etc...), it is possible to estimate which columns yield the best support using the following command. The input ``group.fasta`` is a FASTA formatted list of the sequences that form the group whose support you want to analyze; the output ``aln.score_html`` is a colored version of your MSA indicating the sequences that best contribute to your clustering.
 
 ::
 
@@ -1878,7 +1877,7 @@ If you have a well defined sub-group of sequences (i.e. domains having the same 
 
 Evaluating Clustering capacities
 --------------------------------
-If you want to check the capacity of an algorithm to bring related sequences within mono-phyletic groups, you should name your sequences according to the group they belong to (XXXX_1, YYYYY_1, ZZZZ_2, KKKK_2, for members of _1 and _2, etc) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group. The tree can be precomputed (command 1) or it can be computed on the fly (command 2).
+If you want to check the capacity of an algorithm to bring related sequences within monophyletic groups, you should name your sequences according to the group they belong to (XXXX_1 for members of group 1; YYYY_2, for members of group 2; etc...) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group. The tree can be precomputed (command 1) or it can be computed on the fly (command 2).
 
 :: 
 
