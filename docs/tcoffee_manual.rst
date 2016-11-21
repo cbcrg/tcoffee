@@ -1811,7 +1811,7 @@ This section describes tree estimation procedure based on the comparison of intr
 
 Generating a tree based on structural distances
 -----------------------------------------------
-This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following command (command 1) will generate a 100 replicate NJ trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored. It is possible to control the defautl parameters (command 2).
+This option makes it possible to estimate a tree while taking into account the variation of intramolecular distances within the considered sequences. It requires in input an alignment (FASTA, MSF, ClustalW...) and a template file (structure files associated with the query sequences). The following command (command 1) will generate a 100 replicate NJ trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored. It is possible to control the defautl parameters (command 2). The ouput file will be a tree in the Newick format with bootstrap supports.
 
 ::
 
@@ -1824,18 +1824,13 @@ This option makes it possible to estimate a tree while taking into account the v
       +tree replicates 100 gap 0.5 mode nj +evaluate3D distances 15 +tree2bs first -output \
       newick -out tree.dnd
       
-Input/Output files
- - ``sample_3Dseq1.aln``: a MSA in FASTA, ClustalW or MSF
- - ``sample_3Dseq1.template``: a template file (corresponding structure for each sequence)
- - ``tree.dnd``: output a tree in newick format with bootstrap support   
-
 
 .. warning:: Sequences without 3D structure will be excluded from the analysis and from the final output.
 
 
 Generating a tree based on contact conservation
 -----------------------------------------------
-The following option (command 1) makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate NJ trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cutoff of 1.2 A between Van der Waals radius and ignoring the 3 closest neighbors; columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA). The output file is ``tree.dnd`` is a tree in newick format. It is possible to control default parameters using the following extended command line (command 2).
+The following option (command 1) makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate NJ trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cutoff of 1.2 A between Van der Waals radius and ignoring the 3 closest neighbors; columns with less than 50% residues are ignored. For sequences without 3D information, the STRIKE contact potential is used instead (Watson and Crick base pairing propensity for RNA). The output file will be a tree in Newick format. It is possible to control default parameters using the following extended command line (command 2).
 
 :: 
 
@@ -1848,11 +1843,12 @@ The following option (command 1) makes it possible to estimate a tree while taki
       +tree replicates 100 gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output \
       newick -out tree.dnd
 
+
 .. warning:: The procedure requires at least 1 sequence with a known 3D structure or with contact information.
 
-Visulizing 3D Conservation
---------------------------
-This same procedure can be used to visualize either intramolecular distance conservation or contact conservation.  The output file ``score_raw`` is a tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment. The flag **-out** specifies the name of the output file containing the results (you can give the name you want, but if you read the documentation so far, you already know it...). 
+Visualizing contact/distance conservation
+-----------------------------------------
+This same procedure can be used to visualize either intramolecular distance conservation or contact conservation.  The output option **score_raw** generate a tabulated dump of the numerical values associated with every residue, sequence and column of the considered alignment. The flag **-out** specifies the name of the output file containing the results (you can give the name you want, but if you read the documentation so far, you already know it...). 
 
 ::
 
@@ -1865,17 +1861,17 @@ This same procedure can be used to visualize either intramolecular distance cons
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
       -action +evaluate3D distances -output score_raw -out out.tab
 
-Identification of positions 
----------------------------
-
-If you have a well defined subgroup of sequences (domains having the same function, same specificity, etc...), it is possible to estimate which columns yield the best support using the following command. The input ``group.fasta`` is a FASTA formatted list of the sequences that form the group whose support you want to analyze; the output ``aln.score_html`` is a colored version of your MSA indicating the sequences that best contribute to your clustering.
+Visualizing informative positions 
+---------------------------------
+If you have a well defined subgroup of sequences (domains having the same function, same specificity, etc...), it is possible to estimate which columns yield the best support using the following command. The input are an alignment of your sequences, a template file containing the list of structure files to use as templates and a FASTA file of the sequences that form the group whose support you want to analyze. The output will be a colored version of your MSA indicating the sequences that best contribute to your clustering.
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates \
-      columns +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
+      -action +tree replicates columns +evaluate3D  distances +evaluateTree group_3Dseq1.fasta \
+      -output score_html -out aln.html
 
-Evaluating Clustering capacities
+Evaluating clustering capacities (under maintenance...)
 --------------------------------
 If you want to check the capacity of an algorithm to bring related sequences within monophyletic groups, you should name your sequences according to the group they belong to (XXXX_1 for members of group 1; YYYY_2, for members of group 2; etc...) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group. The tree can be precomputed (command 1) or it can be computed on the fly (command 2).
 
@@ -1884,14 +1880,39 @@ If you want to check the capacity of an algorithm to bring related sequences wit
   Command 1: precomputed tree
   $$: t_coffee -other_pg seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
 
-  Command 2: computed on the fly....
+  Command 2: computed on the fly
   $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
-Others...
-=========
-Under maintenance...
+The T-RMSD
+==========
+What is the T-RMSD?
+-------------------
+T-RMSD (Tree based on Root Mean Square Deviation) is a structure based clustering method using the iRMSD to drive the structural clustering of your aligned sequences with available structures. The T-RMSD supports all the parameters supported by iRMSD or APDB. T-RMSD  is a distance RMSD (dRMSD) based method which generate Structural Trees (analogue to phylogenetic tree) to determine fine-grained structural variations associated with a given Multiple Sequence Alignment (generated by the user using the method of is choice). The specificity of T-RMSD compared to other structural comparison methods stems from its capacity to generate a structural tree with values equivalent bootstrap values supporting the structural clustering. Such clustering is achieved by the construction of matrixes of distances, calculated between equivalent residues as defined by the ungapped columns of the given MSA. The resulting matrixes are then combined using the CONSENSE program from the Phylip package to generate a consensus structural tree with equivalent bootstrap values supporting each node (from 0 to 100; 100 indicating that all positions support the clustering). 
 
+Generating a structural tree with support values
+------------------------------------------------
+T-RMSD is a special modof T-Coffee. To run T-RMSD, you just need a MSA (generated the way you want) and a template file; you need one structure for each sequence, otherwise these sequences will be excluded from the final results. There are several output files: 
+
+ - ``<input name>.struc_tree.list``: list of all individual trees (one per ungapped column)
+ - ``<input name>.struc_tree.consense_output``: basic consensus tree rendering
+ - ``<input name>.struc_tree.consensus``: resulting structural tree with support (Newick)
+ - ``<input name>.struc_tree.html``: colored MSA according to the contribution to the clustering
+ 
+::
+
+  $$: t_coffee -other_pg trmsd -aln sample_3Dseq1.aln -template_file sample_3Dseq1.template
+  
+
+.. hint:: Another important information displayed only on screen is the number of usable positions used to build the clustering. If your alignment is too gappy, this percentage will be low and the resulting clustering may not be accurate nor informative; in the previous example, 28.57% of the MSA will be used. 
+
+Visualizing the structural clustering
+-------------------------------------
+T-Coffee have limited tree visualization capacities, yet the T-RMSD delivers two relevant files in this matter: the first one is a basic rendering of the tree with the support values for each node (``<input name>.struc_tree.list``), the second one is a colored html of the MSA where columns are colored according to their individual support to the final consensus tree (``<input name>.struc_tree.html``). If you want to visualize/modify the resulting tree, we recommend to use a dedicated tree viewer such as `PhyloWidget <http://www.phylowidget.org/>`_. By default PhyloWidget is used by the T-RMSD web server, but as the format is standard (Newick format) you can use any viewer you want (iTOL, ETE, FigTree, Phylodendron, etc...)
+
+The TCS
+=======
+The TCS was described in the previous subsection as it is mainly an evaluation tool. It has however several option that are relevant for downstream analysis such weighting and/or trimming MSA for phylogenetic reconstruction. It was demonstrated that TCS was able to improve phylogenetic reconstruction, you are welcome to look at the publication for more details.
 
 
 *************************************
@@ -1908,7 +1929,7 @@ This section shows you what are the available method in T-Coffee, and how you ca
 
 INTERNAL methods (built-in)
 ---------------------------
-INTERNAL methods can be requested using the following names:
+Internal methods can be requested using the following names:
 
 - **proba_pair**: adapted from ProbCons, this method (the current default) uses a pair HMM to compute a pairwise alignment with a biphasic gap penalty.
 
@@ -1932,7 +1953,7 @@ INTERNAL methods can be requested using the following names:
 
 EXTERNAL methods (plug-in)
 --------------------------
-EXTERNAL methods correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. To have a complete list of the methods that can be used as plug-ins, just type **t_coffee** in a terminal, it will we displayed on your screen. Most of these methods can be used as either pairwise (**<method>_pair**) or multiple alignment methods (**<method>_msa**); note that all these methods use Blosum62 as a default. 
+External methods correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. To have a complete list of the methods that can be used as plug-ins, just type **t_coffee** in a terminal, it will we displayed on your screen. Most of these methods can be used as either pairwise (**<method>_pair**) or multiple alignment methods (**<method>_msa**); note that all these methods use Blosum62 as a default. 
 
 One package is a bit different; **fugue_pair** uses a standard FUGUE installation to make a sequence/structure alignment. Installation must be standard but it does not have to include all the FUGUE packages but only:
 
@@ -1949,7 +1970,7 @@ One package is a bit different; **fugue_pair** uses a standard FUGUE installatio
 
 Modifying the parameters of INTERNAL/EXTERNAL methods
 =====================================================
-INTERNAL methods
+Internal methods
 ----------------
 It is possible to modify on the fly the parameters of hard coded methods (**EP** stands for Extra parameters). These parameters will superseed any other parameters.
 
@@ -1958,7 +1979,7 @@ It is possible to modify on the fly the parameters of hard coded methods (**EP**
   $$: t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GEP@-1
 
 
-EXTERNAL methods
+External methods
 ----------------
 External methods receive a command line built with the information provided via the parameter file (see next heading). It is possible to produce such a parameter file and to modify it in order to modify the commands passed to the methods. The passed command is built as follows:
 
@@ -1984,7 +2005,7 @@ Integrating EXTERNAL methods
 ============================
 If the method you need is not already included in T-Coffee, you will need to integrate it yourself. We give you here some guidelines on how to do so.
 
-Accessing EXTERNAL methods
+Accessing external methods
 --------------------------
 A special method exists in T-Coffee that can be used to invoke any existing program (command 1): for instance, ClustalwWis a method that can be ran with the command 2. Here is just an example but ClustalW can be replaced with any method using a similar syntax. If the program you want to use cannot be run this way, you can either write a perl wrapper that fits the bill or write a ``tc_method`` file adapted to your program (cf. next section). This special method (**em** for external method) uses a particular syntax (command 3).
 
@@ -1999,9 +2020,9 @@ A special method exists in T-Coffee that can be used to invoke any existing prog
   Command 3: Syntax for EXTERNAL methods
   $: em@<method>@<aln_mode:pairwises_pairwise|multiple>
 
-Customizing an EXTERNAL method 
+Customizing an external method 
 ------------------------------
-T-Coffee can run EXTERNAL method using a ``tc_method`` file that can be used in place of an established method. Two such files are incorporated in T-Coffee (``clustalw_method.tc_method`` and ``generic_method.tc_method``). You can dump them and customize them according to your needs. The first file is a very straightforward example on how to run Clustalw via T-Coffee with a set of parameters you may be interested in. Note that **ALN_MODE** instructs T_Coffee to run ClustalW on every pair of sequences. The second file is detailed in the next section.
+T-Coffee can run external method using a ``tc_method`` file that can be used in place of an established method. Two such files are incorporated in T-Coffee (``clustalw_method.tc_method`` and ``generic_method.tc_method``). You can dump them and customize them according to your needs. The first file is a very straightforward example on how to run Clustalw via T-Coffee with a set of parameters you may be interested in. Note that **ALN_MODE** instructs T_Coffee to run ClustalW on every pair of sequences. The second file is detailed in the next section.
 
 ::
 
