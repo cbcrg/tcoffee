@@ -32,7 +32,7 @@ What is  T-Coffee ?
 *******************
 What is T-Coffee?
 =================
-T-Coffee stands for **"Tree based Consistency Objective Function For alignment Evaluation"**. It is mainly/primarily a Multiple Sequence Alignment (MSA) method but it also provides a collection of useful/powerful tools presented in this manual. Before going deep into the core of the matter, here are a few words to briefly explain the things T-Coffee can do except preparing your coffee !!!
+T-Coffee stands for **"Tree based Consistency Objective Function For alignment Evaluation"**. It is mainly/primarily a Multiple Sequence Alignment (MSA) method but it also provides a collection of useful/powerful tools presented in this manual. Before going deep into the core of the matter, here are a few words to briefly explain the things T-Coffee can do !!!
 
 What does it do?
 ----------------
