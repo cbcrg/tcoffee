@@ -20,7 +20,7 @@ This manual relies on the assumption that you have installed T-Coffee, version 9
 
 Let's have a try...
 ===================
-This manual is made to help you discover (nearly) all subtleties of T-Coffee, from simple applications to sophisticated ones. In the course of this manual, we expect you to use a Unix-like shell commands running on example files. Be aware that all the values/results given in this manual were obtained with different versions of T-Coffee; depending on the version of T-Coffee you are using, these results may slightly differ. For all the commands provided in this manual, we have created a set of examples files you can find on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. We encourage you to try all these examples which are controlled cases, and also to try these commands with your own data. In the future starting with the next T-Coffee beta version, all these examples files will be included in the T-Coffee distribution (~/tcoffee/Version_11.XX/examples/).
+This manual is made to help you discover (nearly) all subtleties of T-Coffee, from simple applications to sophisticated ones. In the course of this manual, we expect you to use a Unix-like shell commands running on example files. Be aware that all the values/results given in this manual were obtained with different versions of T-Coffee; depending on the version of T-Coffee you are using, these results may slightly differ. For all the commands provided in this manual, we have created a set of examples files you can find on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. We encourage you to try all these examples which are controlled cases, and also to try these commands with your own data. In the future starting with the next T-Coffee beta version, all these examples files will be included in the T-Coffee distribution (~/tcoffee/Version.../examples/).
 
 
 .. important:: Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**, but if you don't want to bother with command line you can use our `web server <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or different links on the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_. We have tried to put as many of T-Coffee functionalities on the webserver and we plan to incorporate even more in the future, but for now some options are not available or limited. 
@@ -32,7 +32,7 @@ What is  T-Coffee ?
 *******************
 What is T-Coffee?
 =================
-**T-Coffee means "Tree based Consistency Objective Function For alignment Evaluation"**. It is primarily a Multiple Sequence Alignment (MSA) method but it also provides a collection of useful tools presented in this manual. Before going deep into the core of the matter, here are a few words to briefly explain the things T-Coffee can do !
+T-Coffee stands for **"Tree based Consistency Objective Function For alignment Evaluation"**. It is mainly/primarily a Multiple Sequence Alignment (MSA) method but it also provides a collection of useful/powerful tools presented in this manual. Before going deep into the core of the matter, here are a few words to briefly explain the things T-Coffee can do except preparing your coffee !!!
 
 What does it do?
 ----------------
