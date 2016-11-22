@@ -2,7 +2,7 @@
 T-Coffee Main Documentation
 ###########################
 
-.. Note:: The T-Coffee Manual has been intensively modified and updated (11/2016), incorporating all the latest development of the past years (including PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, contact us...we welcome any feedback!
+.. Note:: The T-Coffee Manual has been modified and updated (11/2016), to improve its readibility and to incorporate all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, contact us...we welcome any feedback!
 
 
 *******************
@@ -13,18 +13,19 @@ Foreword
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-This manual is made to help you discover (nearly) all subtleties of T-Coffee. It ranges from simple applications to more elaborated ones. We have tried to put as many of these functionalities on the webserver and we plan to incorporate even more in the future, but currently not all are available and sometimes we had to set up some limitations for practical reasons. In the course of this manual, we expect you to use a Unix-like shell commands running on example files you can find `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. Note that all values/results given in this manual may have been obtained with different versions of T-Coffee, they are just an indication. Depending on the version of T-Coffee you are using, these results may slightly differ. Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**, but if you don't want to bother with command line you can use our `web server <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or different links on the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_.
-
-
 Prerequisite for using T-Coffee
 ===============================
 This manual relies on the assumption that you have installed T-Coffee, version 9.03 or higher (preferably the latest stable version). All the relevant information for installing T-Coffee is contained in the previous chapter **T-Coffee Installation**. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on Windows except by using Cygwin, a freeware open source allowing to run a Unix-like command line on Windows (`download <https://www.cygwin.com/>`_). Cygwin is free of charge and easy to install, yet, as the first installation requires downloading substantial amounts of data, make sure you have access to a broad-band connection. A better option and a more stable one would be to install a Unix-like virtualbox on your computer using Windows.
 
 
-Have a try...it's not painful!
-==============================
-We encourage you to try all the following examples presented here with your own sequences/structures. If you want to try with ours, they are available on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. It contains everything you need to run ALL the examples provided in this manual. In the future starting with the next T-Coffee beta version, all files will be included in the T-Coffee distribution (~/tcoffee/Version_11.XX/examples/).
+Let's have a try...
+===================
+This manual is made to help you discover (nearly) all subtleties of T-Coffee, from simple applications to sophisticated ones. In the course of this manual, we expect you to use a Unix-like shell commands running on example files. Be aware that all the values/results given in this manual were obtained with different versions of T-Coffee; depending on the version of T-Coffee you are using, these results may slightly differ. For all the commands provided in this manual, we have created a set of examples files you can find on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. We encourage you to try all these examples which are controlled cases, and also to try these commands with your own data. In the future starting with the next T-Coffee beta version, all these examples files will be included in the T-Coffee distribution (~/tcoffee/Version_11.XX/examples/).
 
+
+.. important:: Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**, but if you don't want to bother with command line you can use our `web server <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or different links on the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_. We have tried to put as many of T-Coffee functionalities on the webserver and we plan to incorporate even more in the future, but for now some options are not available or limited. 
+
+.. tip:: All T-Coffee commands are indicated with a tag "$$:". To run the commands from the documentation, you can just copy/paste (without the tag $$:) from the web page to your terminal. 
 
 *******************
 What is  T-Coffee ?
