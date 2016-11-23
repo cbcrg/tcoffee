@@ -1239,18 +1239,18 @@ Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) her
 
 Computing very accurate (but slow) alignments with PSI/TM-Coffee
 -----------------------------------------------------------------
-PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced databse of TM proteins and also including a prediction of transmembran domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_.
+PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced database of TM proteins and also including a prediction of transmembran domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_. If you want to specify a local BLAST version and a local database of your choice, just add to your command line the flags **-blast_server** and **-protein_db** and the corresponding paths.
 
 ::
 
   Command 1: PSI-Coffee
   $$: t_coffee proteases_small.fasta -mode psicoffee
   
-  Command 2: TM-Coffee
-  $$: t_coffee proteases_small.fasta -mode psicoffee -blast_server <LOCAL> -protein_db <database>
-      -template_file PSITM (under evaluation...)
+  Command 2: TM-Coffee (add -protein_db to specify in which database to search)
+  $$: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM
+  
 
-.. warning:: PSI/TM-Coffee requires BLAST and a database to search. If you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. Also, for TM-Coffee, the reduced database has to be installed locally otherwise you are just running PSI-Coffee.
+.. warning:: PSI/TM-Coffee requires BLAST and a database to search; if you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. More importantly, if you don't specify a reduced database for TM-Coffee, it will run on nr and be equal to PSI-Coffee.
 
 
 Using protein 2D/3D structural information 
@@ -1259,9 +1259,25 @@ Using structural information when aligning sequences is very useful. The reason 
 
 Using 3D structures: Expresso/3D-Coffee
 ---------------------------------------
-What is Expresso/3D-Coffee?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Expresso/3D-Coffee is probably one of the most important improvement of T-Coffee. The principle is simple: the server runs a BLAST between every sequence in your query against the PDB database and finds a structure similar in sequence which will be used as a template for aligning your sequence. Templates are stored in a template file, which can be generated manually or automatically by the Expresso. The difference between 3D-Coffee and Expresso lies on how it fetches the structure: using Expresso (command 1), the procedure is entirely automated but can be controlled by the user; using 3D-Coffee is more tricky as the name of the sequences should correspond to the structure file name (command 2): **_SELF_** means that the PDB identifier is the name of the sequences. The good news is that you do not need to have PDB installed locally as T-Coffee will automatically fetch the structures directly from RCSB (the home of PDB). At the end whenever there are enough templates (minimum of two obviously), it will align sequences using the structural information, otherwise sequences will be aligned using the standard T-Coffee aligner.  Of course, if your dataset only contains structures, your alignment becomes a structural alignment.
+Requirements to run Expresso/3D-Coffee
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Expresso needs BLAST so either you provide your own client with the tag **-blast**; it also requires the PDB database that you can specify via the flag **-pdb_db**. The good news is that it is not mandatory to have BLAST or the PDB installed locally as T-Coffee will automatically fetch the structures directly from RCSB (the home of PDB) using EBI BLAST. At the end whenever there are enough templates (minimum of two obviously), it will align sequences using the structural information, otherwise sequences will be aligned using the standard T-Coffee aligner.  Of course, if your dataset only contains structures, your alignment becomes a structural alignment. 
+
+How does Expresso/3D-Coffee work?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Expresso/3D-Coffee is probably one of the most important improvement of T-Coffee. The principle is simple: 1) it first runs a BLAST for every sequence in your dataset against the PDB and finds (or not) a structure similar in sequence to be used as a template for structurally aligning your sequence, 2) the correspondence between the query sequences and the templates are stored in a template file which is automatically generated by Expresso. Here lies the difference between 3D-Coffee and Expresso: when running Expresso, fetching structures and creating the template file are automated (so you can reuse it for other applications) while using 3D-Coffee is a bit more tricky as it requires the name of the sequences to correspond to the structure file name (and it does not fetch or create anything for you). Of course, you can create and use your own template with the tag **-template_file** with the same format presented here. 
+
+::
+
+  >sp|P08246|ELNE_HUMAN  _P_ 1PPGE
+  >sp|P20160|CAP7_HUMAN  _P_ 1AE5
+  ...
+
+.. tip:: The PDB files used as a template should be in the current directory, otherwise you have to declare in the template file the whole path to find your templates.
+
+Running Expresso/3D-Coffee
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+Both Expresso (command 1) and 3D-Coffee (command 2) are modes of T-Coffee you can call with the flag **-mode**; the correspond to a preestablished configuration with default parameters. The template selection is indicated with the flag **-template_file**: with Expresso "PDB" means BLAST will run remotely on the PDB, with 3D-Coffee "_SELF_P_" means that the PDB identifier is the name of the sequence (so there is no need to run BLAST). As you can see in commands 1/2, SAP (sap_pair) is the default structural aligner but you can choose alternative aligner(s) installed. You can give any combination of methods with the flag **-method**, but at least one has to be a structural aligner (command 3). You can also specify local installations of BLAST and PDB (command 4) **which is highly recommended if you want reproducible results**.
 
 ::
 
@@ -1270,44 +1286,29 @@ Expresso/3D-Coffee is probably one of the most important improvement of T-Coffee
   $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file PDB
 
 
-  Command 2: two ways of running 3D-Coffee (under maintenance...)
+  Command 2: two ways of running 3D-Coffee
   $$: t_coffee three_pdb.fasta -mode 3dcoffee
   $$: t_coffee three_pdb.fasta -method sap_pair,slow_pair -template_file _SELF_P_
 
-Using Expresso
-^^^^^^^^^^^^^^
-To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. The parameters for the template selection are the following.
-
- - **-pdb_type**: the type of structure (diffraction "d" or NMR "n")
- - **-pdb_min_cov**: the coverage (% between 0 and 100) between your query sequence and the template
- - **-pdb_min_sim**: the identity (% between 0 and 100) between your query sequence and the template 
-
-When running Expresso, the template file with the following format is automatically created (so you can reuse it for other applications):
-
-::
-
-  >sp|P08246|ELNE_HUMAN _P_ 1PPGE
-  >sp|P20160|CAP7_HUMAN _P_ 1AE5
-  ...
-  
-Expresso needs BLAST so either you provide your own client with the tag **-blast** or use the default one. It also requires the PDB database that you can install locally and specify its path via the flag **-pdb_db**; by default, it will run on the remote PDB but your results will not be reproducible as the PDB is regularly updated. If you want to control the structure files associated with your sequences, you can provide your own template file with the tag **-template_file** with the same format presented before. Finally, by default, Expresso uses the SAP structural aligner for historical reasons but you can choose alternative aligner(s) installed (at least one has to be a structural aligner); you can give any combination of methods with the flag **-method**. At the end, all the structures identified by Expresso are stored in your cache directory (~/.t_coffee/cache/); you can choose to have the structure directly in your working directory by using the flag **-cache=$PWD**. To summarize, you can either run Expresso blindly and it will do a pretty good job (command 1), or you can have everything under control (commands 2 and 3): 
-
-::
-
-  Command 1: Default Expresso
-  $$: t_coffee three_pdb_two_seq.fasta -mode expresso
-  
-  Command 2: Running Expresso using a local BLAST/PDB 
-  $$: t_coffee three_pdb_two_seq.fasta -mode expresso -blast=LOCAL -pdb_db=<PDB> \
-      -pdb_type d -pdb_min_sim 95 -pdb_min cov 90 -cache $PWD 
-  
   Command 3: Choosing your own templates and methods
   $$: t_coffee three_pdb_two_seq.fasta -method mustang_pair,slow_pair -template_file \
       three_pdb_two_seq_pdb1.template_list
-
-.. warning:: If you are providing Expresso with your own structures, you have to specify the path in the template file or have them in your current working directory. 
+      
+  Command 4: Running Expresso using a local BLAST/PDB 
+  $$: t_coffee three_pdb_two_seq.fasta -mode expresso -blast=LOCAL -pdb_db=<PDB> \
+      -pdb_type d -pdb_min_sim 95 -pdb_min cov 90 -cache $PWD 
 
 .. tip:: By default, structures fetch by Expresso are stored in your local ~/.t_coffee/cache/ allowing Expresso to run faster if you reuse similar structures. Don't forget to empty it from time to time, especially if you are using Expresso frequently otherwise your folder is just getting bigger and bigger (similar comment can be done for any template based mode of T-Coffee).
+At the end, all the structures identified by Expresso are stored in your cache directory (~/.t_coffee/cache/); you can choose to have the structure directly in your working directory by using the flag **-cache=$PWD**. 
+
+Template paramaters 
+^^^^^^^^^^^^^^^^^^^
+To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. You can have an exhaustive list in the **T-Coffee Technical Documentation** (subsection **Template based T-Coffee modes**) yet the most important parameters for the template selection are the following:
+
+ - **-pdb_type**    : the type of structure ("d" for diffraction/XRAY or "n" NMR structures)
+ - **-pdb_min_cov** : the coverage (% between 0 and 100) between your query sequence and the template
+ - **-pdb_min_sim** : the identity (% between 0 and 100) between your query sequence and the template 
+
 
 Aligning sequences and structures
 ---------------------------------
