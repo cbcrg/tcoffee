@@ -2,7 +2,7 @@
 T-Coffee Main Documentation
 ###########################
 
-.. Note:: The T-Coffee Manual has been modified and updated (11/2016), to improve its readibility and to incorporate all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, contact us...we welcome any feedback!
+.. Note:: The T-Coffee Documentation has been modified and updated, november 2016, to improve its readibility and incorporate all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, contact us...we welcome any feedback!
 
 
 *******************
@@ -15,17 +15,15 @@ Most of the work presented here emanates from two summer schools that were tenta
 
 Prerequisite for using T-Coffee
 ===============================
-This manual relies on the assumption that you have installed T-Coffee, version 9.03 or higher (preferably the latest stable version). All the relevant information for installing T-Coffee is contained in the previous chapter **T-Coffee Installation**. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on Windows except by using Cygwin, a freeware open source allowing to run a Unix-like command line on Windows (`download <https://www.cygwin.com/>`_). Cygwin is free of charge and easy to install, yet, as the first installation requires downloading substantial amounts of data, make sure you have access to a broad-band connection. A better option and a more stable one would be to install a Unix-like virtualbox on your computer using Windows.
+This documentation relies on the assumption that you have installed T-Coffee, version 9.03 or higher (preferably the latest stable version). T-Coffee is a freeware open source running on all Unix-like platforms including Mac OS X, woever, it cannot run on Windows except by using Cygwin, a freeware open source allowing to run a Unix-like command line on Windows (`download <https://www.cygwin.com/>`_). A better option for Windows users would be to install a Unix-like virtualbox on your computer. All the relevant information for installing T-Coffee is contained in the previous chapter **T-Coffee Installation**.
 
 
 Let's have a try...
 ===================
-This manual is made to help you discover (nearly) all subtleties of T-Coffee, from simple applications to sophisticated ones. In the course of this manual, we expect you to use a Unix-like shell commands running on example files. Be aware that all the values/results given in this manual were obtained with different versions of T-Coffee; depending on the version of T-Coffee you are using, these results may slightly differ. For all the commands provided in this manual, we have created a set of examples files you can find on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. We encourage you to try all these examples which are controlled cases, and also to try these commands with your own data. In the future starting with the next T-Coffee beta version, all these examples files will be included in the T-Coffee distribution (~/tcoffee/Version.../examples/).
-
+This manual is made to help you discover (nearly) all subtleties of T-Coffee, from default applications to sophisticated ones. All along this documentation, we expect you to use Unix-like shell commands running on prepared example files we have created, that  you can find on our github repository for now: `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. All T-Coffee commands are indicated with a tag "$$:"; to run the commands from the documentation, you can just copy/paste (without the tag "$$:") from the web page to your terminal. We encourage you to try all these examples which are controlled cases, and also to try these commands with your own data. In the future, all these examples files will be included in the T-Coffee distribution (~/tcoffee/Version.../examples/). Also, be aware that all the values/results given in this manual were obtained with different versions of T-Coffee; depending on the version of T-Coffee you are using, these results may slightly differ.
 
 .. important:: Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**, but if you don't want to bother with command line you can use our `web server <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or different links on the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_. We have tried to put as many of T-Coffee functionalities on the webserver and we plan to incorporate even more in the future, but for now some options are not available or limited. 
 
-.. tip:: All T-Coffee commands are indicated with a tag "$$:". To run the commands from the documentation, you can just copy/paste (without the tag $$:) from the web page to your terminal. 
 
 *******************
 What is  T-Coffee ?
