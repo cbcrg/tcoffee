@@ -330,7 +330,7 @@ If you want to change the case of a specific residue, you can use the flag: **+e
       +edit_residue hmgb_chite 10 lower
       
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \ 
-      +edit_residue <your file containing coordinates>
+      +edit_residue sample_seq1.list
 
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
@@ -368,7 +368,7 @@ You can color all the residues of your sequences on the fly; for instance, the f
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +3convert a0 \
-      -output color_html > color_type.html
+      -output color_html > sample_seq1_color.html
 
 .. warning:: This option is case sensitive so the case of the residues or nucleotides should be the same in the command line (in this command line, only a lower case will be colored). 
 
@@ -379,8 +379,12 @@ If you want to color a specific residue/nucleotide, you can use the flag **+colo
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +color_residue \
-      hmgb_chite 10 1 -output color_html > color_residue.html
+      hmgb_chite 10 1 -output color_html > sample_seq1_single.html
 
+
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +color_residue \
+      sample_seq1_color.list -output color_html > sample_seq1_all.html
+      
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
 Coloring according to the conservation
@@ -556,7 +560,7 @@ You can also specify the sequences you want to keep by giving another fasta file
 ::
 
   $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -in2 proteases_small.fasta \
-     -action +trim _seq_%%40
+      -action +trim _seq_%%40
 
 Chaining important sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -719,26 +723,15 @@ Analyzing a RNAalifold secondary structure prediction
 -----------------------------------------------------
 The following commands can either be applied on a Stockholm or a standard MSA. In the second case (standard MSA) the secondary structure will be automatically recomputed by alifold.
 
-Analyzing matching columns
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-The option **+alifold2analyze** will estimate the number of pairs of columns that are perfect Watson and Crick pairings, those that are neutral (including a GU) and those that include correlated mutations (command 1). The WCcomp are the compensated mutations maintaining WC base pairing. Other arguments can given, to display the list of paired positions and their status (compensated, Watson, etc...) use command 2:
-
-::
-
-  Command 1:
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze stat
-  
-  Command 2 (display list of options)
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list
-
 Visualizing compensatory mutations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The following command will output a color coded version of your alignment with matching columns indicated as follows:
-I: incompatible pair (i.e. at least one pair is not WC)
-N: pairs are Gus or WC
-W: all pairs are Watson
-c: compensatory mutations
-C: WC compensatory mutations
+
+ - I: incompatible pair (i.e. at least one pair is not WC)
+ - N: pairs are Gus or WC
+ - W: all pairs are Watson
+ - c: compensatory mutations
+ - C: WC compensatory mutations
 
 ::
 
@@ -749,6 +742,19 @@ C: WC compensatory mutations
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_html
 
 .. warning:: Handling gapped columns: by default gapped column are ignored but they can be included by adding the tag **-usegap**.
+
+Analyzing matching columns
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+The option **+alifold2analyze** will estimate the number of pairs of columns that are perfect Watson and Crick pairings, those that are neutral (including a GU) and those that include correlated mutations (command 1). The WCcomp are the compensated mutations maintaining WC base pairing. Other arguments can given, to display the list of paired positions and their status (compensated, Watson, etc...) use command 2:
+
+::
+
+  Command 1:
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze stat
+  
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list
+
 
 Comparing alternative folds
 ---------------------------
@@ -764,24 +770,27 @@ Phylogenetic Trees Manipulation
 ===============================
 Producing phylogenetic trees
 ----------------------------
-The seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering. Given a multiple sequence alignment, it is possible to compute either a UPGMA or an NJ tree. The following commands use an identity matrix to compare your sequences and will output an unrooted NJ tree in newick format (command 1) or a rooted UPGMA tree (command 2):
+The seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering. Given a multiple sequence alignment, it is possible to compute either a UPGMA or an NJ tree. The following commands use an identity matrix to compare your sequences and will output an unrooted NJ tree in Newick format (command 1) or a rooted UPGMA tree (command 2):
 
 ::
 
   Command 1:
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree -output newick
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree -output newick \
+      -out sample_seq1_tree_nj.nwk
 
   Command 2:
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma -output newick
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma  \
+      -output newick -out sample_seq1_tree_upgma.nwk
 
 If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for instance), you can use a different matrix to compute the pairwise distances (command 3), and all these parameters can be concatenated (command 4):
 
 ::
 
-  Command 3:
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _MATRIX_sarmat -output newick
+  Command 3: (under maintenance)
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _MATRIX_sarmat \
+      -output newick
 
-  Command 4:
+  Command 4: (under maintenance)
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
        -output newick
 
@@ -846,7 +855,7 @@ Pruning removes leaves from an existing tree and recomputes distances so that no
   ...
 
   Pruning the tree:
-  $$: t_coffee -other_pg seq_reformat -in sample_tree1.dnd -in2 sample_fake.seq -action \
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.tree -in2 sample_3Dseq1.fake -action \
       +tree_prune -output newick
 
 
