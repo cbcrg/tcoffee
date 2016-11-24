@@ -1,29 +1,28 @@
 ###########################
 T-Coffee Main Documentation
 ###########################
+
+.. Note:: The T-Coffee Documentation has been modified and updated, november 2016, to improve its readibility and incorporate all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, contact us...we welcome any feedback!
+
+
 *******************
 Before You Start...
 *******************
-
-.. Note:: The T-Coffee Manual has been intensively modified and updated (11/2016), incorporating all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering...). If you have any suggestion or correction, contact us...we receive any feedback gladly !
-
-
 Foreword
 ========
 Most of the work presented here emanates from two summer schools that were tentatively called the 'Prosite Workshops' and were held in Marseille, in 2001 and 2002. These workshops were mostly an excuse to go rambling and swimming in the creeks of Cassis (Calanques). Yet, when we got tired of lazing in the sun, we eventually did a bit of work to chill out. Most of our experiments were revolving around the development of sequence analysis tools. Many of the most advanced ideas in T-Coffee were launched during these fruitful sessions. Participants included Phillip Bucher, Laurent Falquet, Marco Pagni, Alexandre Gattiker, Nicolas Hulo, Christian Siegfried, Anne-Lise Veuthey, Virginie Leseau, Lorenzo Ceruti and Cedric Notredame.
 
 
-.. Note:: This manual is made to help you discover (nearly) all subtleties of T-Coffee and ranges from simple applications to more elaborated ones. We have tried to put as many of these functionalities on the webserver and we plan to incorporate even more in the future, but currently not all are available and sometimes we had to set up some limitations for practical reasons. Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**. In the course of this manual, we expect you to use a Unix-like shell commands running on given example files that you can find `here <https://github.com/cbcrg/tcoffee/tree/master/t_coffee/doc_test/data>`_. Also, all values given in this manual were obtained obtained over time with different version of the T-Coffee package, they are just an indication...and depending on the version of T-Coffee you are using, these values can be slightly different. If you don't want to bother with command line, try using our online latest `tcoffee webserver <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or via the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_.
-
-
 Prerequisite for using T-Coffee
 ===============================
-This manual relies on the assumption that you have installed T-Coffee, version 9.03 or higher (preferably the latest stable version). All the relevant information for installing T-Coffee is contained in the previous chapter **T-Coffee Installation**. T-Coffee is a freeware open source running on all Unix-like platforms, including Mac OS X and Cygwin. T-Coffee cannot run on Windows except by using Cygwin, a freeware open source allowing to run a Unix-like command line on Windows (`download <https://www.cygwin.com/>`_). Cygwin is free of charge and easy to install, yet, as the first installation requires downloading substantial amounts of data, make sure you have access to a broad-band connection. A better option and a more stable one would be to install a Unix-like virtualbox on your computer using Windows.
+This documentation relies on the assumption that you have installed T-Coffee, version 9.03 or higher (preferably the latest stable version). T-Coffee is a freeware open source running on all Unix-like platforms including Mac OS X, woever, it cannot run on Windows except by using Cygwin, a freeware open source allowing to run a Unix-like command line on Windows (`download <https://www.cygwin.com/>`_). A better option for Windows users would be to install a Unix-like virtualbox on your computer. All the relevant information for installing T-Coffee is contained in the previous chapter **T-Coffee Installation**.
 
 
-Have a try...it's not painful!
-==============================
-We encourage you to try the following examples with your own sequences/structures. If you want to try with ours, they are available on our github repository : `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. It contains everything you need to run ALL the examples provided in this manual. In the future starting with the next T-Coffee stable version, all example files will be included in the T-Coffee distribution (~/tcoffee/Version_11.XX/examples/).
+Let's have a try...
+===================
+This manual is made to help you discover (nearly) all subtleties of T-Coffee, from default applications to sophisticated ones. All along this documentation, we expect you to use Unix-like shell commands running on prepared example files we have created, that  you can find on our github repository for now: `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. All T-Coffee commands are indicated with a tag "$$:"; to run the commands from the documentation, you can just copy/paste (without the tag "$$:") from the web page to your terminal. We encourage you to try all these examples which are controlled cases, and also to try these commands with your own data. In the future, all these examples files will be included in the T-Coffee distribution (~/tcoffee/Version.../examples/). Also, be aware that all the values/results given in this manual were obtained with different versions of T-Coffee; depending on the version of T-Coffee you are using, these results may slightly differ.
+
+.. important:: Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**, but if you don't want to bother with command line you can use our `web server <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or different links on the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_. We have tried to put as many of T-Coffee functionalities on the webserver and we plan to incorporate even more in the future, but for now some options are not available or limited. 
 
 
 *******************
@@ -31,19 +30,19 @@ What is  T-Coffee ?
 *******************
 What is T-Coffee?
 =================
-**T-Coffee stands for Tree based Consistency Objective Function For alignment Evaluation**, it is primarily a multiple sequence alignment method but it also provides a collection of useful tools presented in this manual. Before going deep into the core of the matter, here are a few words to quickly explain some of the things T-Coffee will do for you.
+T-Coffee stands for **"Tree based Consistency Objective Function For alignment Evaluation"**. It is mainly/primarily a Multiple Sequence Alignment (MSA) method but it also provides a collection of useful/powerful tools presented in this manual. Before going deep into the core of the matter, here are a few words to briefly explain the things T-Coffee can do !!!
 
 What does it do?
 ----------------
 T-Coffee has two components allowing you to perform different tasks:
- - mainly it is a Multiple Sequence Alignment program. Given a dataset of sequences previously gathered (using database search programs like BLAST, Ensembl, whatever...), T-Coffee will produce a Multiple Sequence Alignment (MSA), refer to the section **Building Your Multiple Sequence Alignments** for more details.
- - also it is a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) allowing you to perform a wide range of different tasks, such as aligning, reformatting, evaluating your data, and more...
+ - mainly it is a Multiple Sequence Alignment method. Given a dataset of sequences previously gathered using database search programs (like BLAST, Ensembl, etc...), T-Coffee will produce a Multiple Sequence Alignment (MSA) (refer to the section **Building Your Multiple Sequence Alignments** for more details).
+ - also it is a collection of tools (usually called with the flag **-other_pg "tools"**) and third party software (cf. section **Integrating External Methods in T-Coffee**) able to perform a wide range of operations such as aligning accurately, reformatting data, evaluating results, comparing methods and many more...
 
 What can it align?
 ------------------
-T-Coffee will align nucleic acid (DNA and RNA) and protein sequences alike. T-Coffee is also able to use other type of information such as secondary and tertiary structure information (for protein or RNA sequences with a known/predicted structure), sequence profiles, trees....
+T-Coffee will align nucleic acid (DNA and RNA) and protein sequences alike. T-Coffee is also able to use other type of information such as secondary/tertiary structure information (for protein or RNA sequences with a known/predicted structure), sequence profiles, trees...
 
-.. Hint:: To have an rough idea, on an average computer, T-Coffee can easily align up to a 200 sequences, about 1000 amino acid long in about ~20min. Never try to align more than 1000 sequences without using T-Coffee fast modes !!!
+.. Hint:: To have a rough idea, on an average computer, T-Coffee can easily align up to a 200 sequences, about 1000 amino acid long in about ~20min. It is better to avoid aligning more than 1000 sequences without using a cluster or T-Coffee fast modes !!!
 
 How can I use it?
 -----------------
@@ -61,7 +60,7 @@ According to several benchmarks, T-Coffee is on overall much more accurate than 
 
 Is T-Coffee very accurate?
 --------------------------
-T-Coffee belongs to the category of consistency based aligners which currently corresponds to the most accurate algorithms available (e.g. ProbCons, MSAprobs...). In addition, T-Coffee can combines (many) methods and therefore be as accurate (and hopefully more) as the methods it combines. For instance, the "accurate" mode of T-Coffee is very slow but also very accurate; on average this mode was shown to be 10 % more accurate than normal aligners on sequences less than 30% similar. If you need a very accurate alignment go to section **Building Multiple Sequence Alignment**.
+T-Coffee belongs to the category of consistency based aligners which currently corresponds to the most accurate algorithms available (e.g. ProbCons, MSAprobs...). In addition, T-Coffee can combine (many) methods and therefore be as accurate (and hopefully more) as the methods it combines. For instance, the "accurate" mode of T-Coffee is very slow but also very accurate; on average this mode was shown to be 10 % more accurate than normal aligners on sequences less than 30% similar. If you need a very accurate alignment go to section **Building Multiple Sequence Alignment**.
 
 
 What T-Coffee can and cannot do for you ...
@@ -82,7 +81,7 @@ T-Coffee is not only just an aligner program, it comes with multiple tools and t
 
  - **One of the most important improvement of T-Coffee is to let you combine sequences and structures**, so that your alignments are of higher quality. You need to have the SAP package installed to fully benefit of this facility (or to use another structural alignment method). 
 
- - **T-Coffee allows you to extract a serie of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. MOCCA needs some time to compute a library and then prompt you with an interactive menu. You just have to follow the instructions.
+ - **T-Coffee allows you to extract a collection of repeats from a single sequence or a set of sequences** using MOCCA. In other words, if you know the coordinates of one copy of a repeat, you can extract all the other occurrences. MOCCA needs some time to compute a library and then prompt you with an interactive menu. You just have to follow the instructions.
 
  - **T-Coffee can be used to measure the reliability of your Multiple Sequence Alignment**. If you want to find out about that, read the section **FAQ for T-Coffee** or the **Technical Documentation** (-output flag). More details will be given anyway in this manual in the section **How Good Is Your Alignment?**.
 
@@ -112,16 +111,16 @@ Each of these constraints comes with a weight and in the end, the T-Coffee algor
 .. note:: Be aware that nothing forces you to use a given library and that you could build it using other methods. In protein language, **T-Coffee is synonymous for freedom, the freedom of being aligned however you fancy** (I was probably a Tryptophan in some previous life).
 
 
-*******************************************************
-Preparing Your Data: Reformatting, Trimming And More... 
-*******************************************************
+*******************
+Preparing Your Data
+*******************
 .. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual. When multiple input files are given, flags are mandatory (**-in/-in2**, **-al1/-al2**, etc...). Usually, options are indicated via the symbol "=" (i.e **-output=html**) but it is not mandatory, it's just recommended. If you use a correct/strict flag usage, T-Coffee will always work fine, but you have some degrees of freedom ;-).
 
 The reformatting utility: seq_reformat
 ======================================
 General introduction
 --------------------
-Nothing is more frustrating than downloading important data and realizing you need to format it before using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spend the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results, especially a very powerful reformatting utility named **seq_reformat**. You can use **seq_reformat** by invoking the t_coffee shell:
+Nothing is more frustrating than downloading important data and realizing you need to format it before using it. In general, you should avoid manual reformatting: it is by essence inconsistent and will get you into trouble. It will also get you depressed when you realize that you have spent the whole day adding carriage return to each line in your files. T-Coffee comes with several tools to reformat/trim/clean/select your input data but also your output results, especially a very powerful reformatting utility named **seq_reformat**. You can use **seq_reformat** by invoking the t_coffee shell:
 
 ::
 
@@ -155,7 +154,7 @@ Using a "cache" file
 --------------------
 What is a cache in T-Coffee?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Several option can be performed easily by using what we call a cache (or cache file). In T-Coffee, a cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding scheme. For instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix based evalution (blosum62mt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is quite practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
+Several options can be performed easily by using what we call a cache (or cache file). In T-Coffee, a cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding scheme. For instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix based evalution (blosum62mt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is quite practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
 
 ::
 
@@ -175,27 +174,29 @@ Several option can be performed easily by using what we call a cache (or cache f
 
 Preparing a sequence/alignment cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The following command will convert your alignment according to the given parameters: the gaps "-" will remain, all A and a will be turned into 1 and all the other symbols (#) will be turned into 0. The flag **-action +convert** indicates the actions that must be carried out on the alignment before it is output into cache.
+The following command will convert your alignment according to the given parameters: all A/a will be turned into 1, the gaps "-" will be conserved and all the other symbols (#) will be turned into 0. The flag **-action +convert** indicates the actions that must be carried out on the alignment before it is output into cache.
 
 ::
 
   1) Initial alignment:
   CLUSTAL FORMAT
-  B CTGAGA-AGCCGC---CTGAGG--TCG
-  C TTAAGG-TCCAGA---TTGCGG--AGC
-  D CTTCGT-AGTCGT---TTAAGA--ca-
-  A CTCCGTgTCTAGGagtTTACGTggAGT
+  A CTCCGTgTCTAGGagt-TTACGTggAGT
+  B CTGAGA----AGCCGCCTGAGGTCG---
+  D CTTCGT----AGTCGT-TTAAGAca---
+  C -TTAAGGTCC---AGATTGCGGAGC---
+
 
   2) Command line:
   $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -output=clustalw_aln -out=cache.aln \
-      -action +convert 'Aa1' '.--' +convert '#0'
+      -action +convert 'Aa1' '.-' '#0'
 
   3) Cache generated:
-  CLUSTAL FORMAT for SEQ_REFORMAT Version 1.00, CPU=0.00 sec, SCORE=0, Nseq=4, Len=27
-  B 000101-100000---000100--000
-  C 001100-000101---000000--100
-  D 000000-100000---001101--01-
-  A 000000000010010000100000100
+  CLUSTAL W (1.83) multiple sequence alignment
+  A 0000000000100100-00100000100
+  B 000101----100000000100000---
+  D 000000----100000-00110101---
+  C -001100000---101000000100---
+
 
 Other alternative are possible. For instance, the following command:
 
@@ -203,22 +204,23 @@ Other alternative are possible. For instance, the following command:
 
   1) Command line:
   $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -output=fasta_seq -out=cache.seq \
-      -action +convert 'Aa1' '.--' +convert '#0'
+      -action +convert 'Aa1' '.-' '#0'
 
   2) Generate the file cache.seq:
-  >B
-  000101100000000100000
-  >C
-  001100000101000000100
-  >D
-  00000010000000110101
   >A
-  000000000010010000100000100
+  0000000000100100000100000100
+  >B
+  0001010000100000000100000000
+  >D
+  0000000000100000000110101000
+  >C
+  0001100000000101000000100000
+
 
 Preparing a library cache (under maintenance...)
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 The library is a special format used by T-Coffee to declare relationships between pairs of residues. The cache library format can also be used to declare for instance the color of specific residues in an alignment. For instance, the following file
-``sample_dnaseq3.tc_lib`` declares that residue 1 of sequence 3 will be receive color 6, while residue 20 of sequence 4 will receive color 20. Note that the sequence number and the residue index are duplicated, owing to the recycling of this format from its original usage.
+``sample_dnaseq3.tc_lib`` declares that residue X of sequence X will be receive color X, while residue X of sequence X will receive color X. Note that the sequence number and the residue index are duplicated, owing to the recycling of this format from its original usage.
 
 ::
 
@@ -325,8 +327,13 @@ If you want to change the case of a specific residue, you can use the flag: **+e
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \
       +edit_residue hmgb_chite 10 lower
       
+<<<<<<< HEAD
   ##: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \ 
       +edit_residue <your file containing coordinates>
+=======
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \ 
+      +edit_residue sample_seq1.list
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
@@ -345,7 +352,7 @@ If you want to change the case depending on the score, you must either evaluate 
       idmat -output=score_ascii > sample_dnaseq2.cache
       
   $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \
-      -action +lower '[1-2]'
+     -struc_in_f number_aln -action +lower '[5-9]'
   
 Coloring/Editing residues in an alignment
 -----------------------------------------
@@ -364,7 +371,7 @@ You can color all the residues of your sequences on the fly; for instance, the f
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +3convert a0 \
-      -output color_html > color_type.html
+      -output color_html > sample_seq1_color.html
 
 .. warning:: This option is case sensitive so the case of the residues or nucleotides should be the same in the command line (in this command line, only a lower case will be colored). 
 
@@ -375,8 +382,12 @@ If you want to color a specific residue/nucleotide, you can use the flag **+colo
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +color_residue \
-      hmgb_chite 10 1 -output color_html > color_residue.html
+      hmgb_chite 10 1 -output color_html > sample_seq1_single.html
 
+
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +color_residue \
+      sample_seq1_color.list -output color_html > sample_seq1_all.html
+      
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
 Coloring according to the conservation
@@ -419,12 +430,17 @@ Modifiying sequences in your dataset
 ------------------------------------
 Converting residues
 ^^^^^^^^^^^^^^^^^^^
-It is possible for instance to selectively convert all given characters in a sequence (residues or nucleic acids alike) into another one, for example all G's having a score between 1 and 2 by using the command line:
+It is possible for instance to selectively convert all given characters in a sequence (residues or nucleic acids alike) into another one, for example all G's having a score between 5 and 9 by using the command line:
 
 ::
 
+<<<<<<< HEAD
   #$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \ 
       -struc_in_f number_aln -action +convert '[1-2]' GX
+=======
+  $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \ 
+      -struc_in_f number_aln -action +convert '[5-9]' GX
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
  
 Extracting sequences according to a pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -433,22 +449,22 @@ You can extract any sequence by requesting a specific pattern to be found either
 ::
 
   To keep sequences containing HUMAN in the name:
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +grep NAME \
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.aln -action +grep NAME \
       KEEP HUMAN -output clustalw
 
   To remove sequences containing HUMAN in the name:
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +grep NAME \
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.aln -action +grep NAME \
       REMOVE HUMAN -output clustalw
 
   To keep sequence which contain sapiens in the comment:
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +grep COMMENT \
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +grep COMMENT \
       KEEP sapiens -output clustalw
  
   To remove sequences containing the pattern [ILM]K:
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +grep SEQ \
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.aln -action +grep SEQ \
       REMOVE '[ILM]K' -output clustalw
 
-.. important:: you should know that the pattern can be any perl legal regular expression, you can visit this  `page <http://www.comp.leeds.ac.uk/Perl/matching.html>`_ for some background on regular expressions. 
+.. important:: You should know that the pattern can be any perl legal regular expression, you can visit this  `page <http://www.comp.leeds.ac.uk/Perl/matching.html>`_ for some background on regular expressions. 
 
 .. caution:: This option is case sensitive (Human, HUMAN and hUman will not yield the same results). Be careful !!!
 
@@ -459,11 +475,11 @@ If you want to extract (command 1) or remove (command 2) several sequences in or
 ::
 
   Command 1: keep sequences
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +extract_seq_list \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.fasta -action +extract_seq_list \
       'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
 
   Command 2: remove sequences
-  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +remove_seq \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.fasta -action +remove_seq \
       'sp|P29786|TRY3_AEDAE' 'sp|P35037|TRY3_ANOGA'
 
 .. note:: Note the single quotes (') are mandatory as they are meant to protect the name of your sequence and prevent the Unix shell to interpret it like an instruction.
@@ -488,7 +504,7 @@ Once sequences are extracted or removed, some columns may remain containing only
 
 Extracting the most informative sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Large datasets are problematic because they can be difficult to align and analyze, MSA programs tend to become very slow and inaccurate. In short, the best size for an MSA dataset would be between 20 to 40 sequences to have enough sequences to see the effect of evolution, but in the same time small enough so that you can visualize your alignment and recompute it as many times as needed. More important than its size, a good dataset have to be informative, when each sequence contains information the others do not have. The most informative sequences are the sequences that are as different as possible to one another, within your dataset. You can extract the most informative sequences using flag **+trim** followed by the number of sequences you wish to keep ("n" for a number and "N" for a pourcentage). The following commands will extract the 10 most informative sequences (command 1) or the 20% of most informative sequences (command 2):
+Large datasets are problematic because they can be difficult to align and analyze, MSA programs tend to become very slow and inaccurate. In short, the best size for an MSA dataset would be between 20 to 40 sequences to have enough sequences to see the effect of evolution, but in the same time small enough so that you can visualize your alignment and recompute it as many times as needed. More important than its size, a good dataset have to be informative, when each sequence contains information the others do not have. The most informative sequences are the sequences that are as different as possible to one another, within your dataset. You can extract the most informative sequences using flag **+trim** followed by the number of sequences you wish to keep ("n" for a number and "N" for a perrcentage). The following commands will extract the 10 most informative sequences (command 1) or the 20% of most informative sequences (command 2):
 
 ::
 
@@ -499,7 +515,7 @@ Large datasets are problematic because they can be difficult to align and analyz
   $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim _seq_N20 \
       -output fasta_seq
 
-.. hint:: The argument to trim include _seq_, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generaly more accurate to use unaligned sequences.
+.. hint:: The argument to trim include _seq_, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generally more accurate to use unaligned sequences.
 
 .. note:: For very large dataset, seq_reformat will compute the similarity matrix between your sequences once only. It will then store it in its cache to be reused any time you run on the same dataset. In short this means that it will take much longer to run the first time, but be much faster if you need to rerun it.
 
@@ -551,8 +567,8 @@ You can also specify the sequences you want to keep by giving another fasta file
 
 ::
 
-  $$:t_coffee -other_pg seq_reformat -in proteases_large.fasta -in2 proteases_small.fasta \
-     -action +trim _seq_%%40
+  $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -in2 proteases_small.fasta \
+      -action +trim _seq_%%40
 
 Chaining important sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -626,11 +642,11 @@ In case you want to extract a specific block of your alignment, for instance to 
 ::
 
   Command 1: extract block from MSA
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +extract_block \
       cons 150 200
 
   Command 2: extract_block relative to a give sequence of the MSA
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +extract_block \
       'sp|Q03238|GRAM_RAT' 10 200
 
 .. tip:: It may be sometimes difficult to know where starts the blocks you are interested in except by counting manually the number of column. You can also make some tries by modifying the boundaries until you get the block you want and then redirect the result into the output file name of your choice. 
@@ -641,10 +657,10 @@ If you have extracted several blocks generated using the previous command and yo
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +extract_block \
       cons 100 120 > block1.aln
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small.aln -action +extract_block \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +extract_block \
       cons 150 200 > block2.aln
 
   $$: t_coffee -other_pg seq_reformat -in block1.aln -in2 block2.aln -action +cat_aln
@@ -669,8 +685,8 @@ Once your sequences have been aligned, you may want to turn your protein alignme
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -in2 \
-      sproteases_small.aln -action +thread_dna_on_prot_aln -output clustalw
+  $$: t_coffee -other_pg seq_reformat -in proteases_small_dna.fasta -in2 \
+      proteases_small.aln -action +thread_dna_on_prot_aln -output clustalw
 
 Finding the *bona fide* sequences for the back-translation
 ----------------------------------------------------------
@@ -683,7 +699,7 @@ Producing a Stockholm output: adding predicted secondary structures
 -------------------------------------------------------------------
 Producing/Adding a consensus structure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Given an RNA multiple sequence alignment, it is possible to compute (command 1) or add (command 2) the alifold (Vienna package) consensus secondary structure and output in in stockholm:
+Given an RNA multiple sequence alignment, it is possible to compute (command 1) or add (command 2) the alifold (Vienna package) consensus secondary structure and output in stockholm:
 
 ::
 
@@ -706,8 +722,13 @@ The file sample_rnaseq2.alifold contains the raw output of the alifold program p
       -input2 alifold -action +add_alifold -output stockholm_aln  
 
   Command 2:
+<<<<<<< HEAD
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +add_alifold \
       -output stockholm_aln
+=======
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk \
+      -action +add_alifold -output stockholm_aln
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 .. warning:: The alifold structure and the alignment MUST be compatible. The function makes no attempt to thread or align the structure, it merely stacks it below the MSA.
 
@@ -715,26 +736,15 @@ Analyzing a RNAalifold secondary structure prediction
 -----------------------------------------------------
 The following commands can either be applied on a Stockholm or a standard MSA. In the second case (standard MSA) the secondary structure will be automatically recomputed by alifold.
 
-Analyzing matching columns
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-The option **+alifold2analyze** will estimate the number of pairs of columns that are perfect Watson and Crick pairings, those that are neutral (including a GU) and those that include correlated mutations (command 1). The WCcomp are the compensated mutations maintaining WC base pairing. Other arguments can given, to display the list of paired positions and their status (compensated, Watson, etc...) use command 2:
-
-::
-
-  Command 1:
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze stat
-  
-  Command 2 (display list of options)
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list
-
 Visualizing compensatory mutations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The following command will output a color coded version of your alignment with matching columns indicated as follows:
-I: incompatible pair (i.e. at least one pair is not WC)
-N: pairs are Gus or WC
-W: all pairs are Watson
-c: compensatory mutations
-C: WC compensatory mutations
+
+ - I: incompatible pair (i.e. at least one pair is not WC)
+ - N: pairs are Gus or WC
+ - W: all pairs are Watson
+ - c: compensatory mutations
+ - C: WC compensatory mutations
 
 ::
 
@@ -745,6 +755,19 @@ C: WC compensatory mutations
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -action +alifold2analyze color_html
 
 .. warning:: Handling gapped columns: by default gapped column are ignored but they can be included by adding the tag **-usegap**.
+
+Analyzing matching columns
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+The option **+alifold2analyze** will estimate the number of pairs of columns that are perfect Watson and Crick pairings, those that are neutral (including a GU) and those that include correlated mutations (command 1). The WCcomp are the compensated mutations maintaining WC base pairing. Other arguments can given, to display the list of paired positions and their status (compensated, Watson, etc...) use command 2:
+
+::
+
+  Command 1:
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze stat
+  
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.stk -action +alifold2analyze list
+
 
 Comparing alternative folds
 ---------------------------
@@ -760,25 +783,43 @@ Phylogenetic Trees Manipulation
 ===============================
 Producing phylogenetic trees
 ----------------------------
-The seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering. Given a multiple sequence alignment, it is possible to compute either a UPGMA or an NJ tree. The following commands use an identity matrix to compare your sequences and will output an unrooted NJ tree in newick format (command 1) or a rooted UPGMA tree (command 2):
+The seq_reformat is NOT a phylogeny package, yet over the time it has accumulated a few functions that make it possible to compute simple phylogenetic trees, or similar types of clustering. Given a multiple sequence alignment, it is possible to compute either a UPGMA or an NJ tree. The following commands use an identity matrix to compare your sequences and will output an unrooted NJ tree in Newick format (command 1) or a rooted UPGMA tree (command 2):
 
 ::
 
   Command 1:
+<<<<<<< HEAD
   $$:  t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree -output newick
 
   Command 2:
   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree _TMODE_upgma -output newick
+=======
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree -output newick \
+      -out sample_seq1_tree_nj.nwk
+
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma  \
+      -output newick -out sample_seq1_tree_upgma.nwk
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for instance), you can use a different matrix to compute the pairwise distances (command 3), and all these parameters can be concatenated (command 4):
 
 ::
 
+<<<<<<< HEAD
   Command 3:
   $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree _MATRIX_sarmat -output newick
 
   Command 4:
   #$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
+=======
+  Command 3: (under maintenance)
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _MATRIX_sarmat \
+      -output newick
+
+  Command 4: (under maintenance)
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
        -output newick
 
 .. warning:: Bootstrap facilities will also be added at some point...We recommend you to use `Phylip <http://evolution.genetics.washington.edu/phylip.html>`_ or any other specific phylogenetic software (PhyML, RAxML, MrBayes, etc...) if you need some serious phylogeny !
@@ -814,42 +855,36 @@ The last line contains a tree where distances have been replaced by the number o
 
 Scanning phylogenetic trees
 ---------------------------
-It is possible to scan an alignment and locally measure the similarity between an estimated local tree and some reference tree provided from an external source (or computed on-the-fly) using the following command:
+It is possible to scan an alignment and locally measure the similarity between an estimated local tree and some reference tree provided from an external source (or computed on the fly) using the following command:
 
 ::
 
-  $$ :t_coffee -other_pg seq_reformat -in <aln> -in2 <reftree> -action +tree_scan \
-      _MODE_scan__W_10_ > ph_tree_scan.txt
+  $$ : t_coffee -other_pg seq_reformat -in sample_seq1.aln -in2 sample_seq1_tree.nwk -action \
+       +tree_scan _MODE_scan__W_10_ > ph_tree_scan.txt (under maintenance...)
 
 For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be extracted, for each of these block a tree will be estimated and the similarity of that tree with the reference tree will be estimated with cmp_tree. For each position, the tree giving the best fit will be reported, along with the size of the block leading to that tree:
 
 ::
 
-  P: <position> <block start> <blck_end> <block score> <block Length>
+  P: <position> <block start> <block_end> <block score> <block Length>
 
 Pruning phylogenetic trees
 --------------------------
-Pruning removes leaves from an existing tree and recomputes distances so that no information is lost. Consider the files ``sample_tree1.dnd`` and the file ``sample_fake.seq``:
+Pruning removes leaves from an existing tree and recomputes distances so that no information is lost. To do this with T-Coffee you need two input files: a tree file in the Newick format and a FASTA-like file where sequences can be omitted, but you can also leave them, at your entire convenience. The second file is merely a list of the sequences to be kept when pruning the tree. The resulting tree will contain only the sequences specified in the list.
 
 ::
 
-  sample_tree1.dnd
-  (( A:0.50000, C:0.50000):0.00000,( D:0.00500, E:0.00500):0.99000, B:0.50000);
- 
-  sample_fake.seq
-  >A
-  >B
-  >C
-  >D
+  Tree file: "sample_3Dseq1.tree"
+  ((((TNFR10-2:0.04546,TNFR16-2:0.06640)...,TNFR4-2:0.05255) 45:0.00848); \
+  
+  FASTA-like file: "sample_3Dseq1.fake"
+  >TNFR2-2
+  >TNFR4-4
+  ...
 
-.. note:: The file ``sample_fake.seq`` is merely a ersatz FASTA file where sequences can be omitted, but you can also leave them, at your entire convenience.
-
-::
-
-  $$: t_coffee -other_pg seq_reformat -in sample_tree1.dnd -in2 sample_fake.seq -action \
+  Pruning the tree:
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.tree -in2 sample_3Dseq1.fake -action \
       +tree_prune -output newick
-
-  (( A:0.50000, C:0.50000):0.00000, B:0.50000, D:0.99500); (under maintenance...)
 
 
 Manipulating structure files (PDB)
@@ -872,7 +907,7 @@ If you have the PDB installed locally, simply set the variable PDB_DIR to the ab
 
 ::
 
-  export NO_REMOTE_PDB_FILE=1
+  $: export NO_REMOTE_PDB_FILE=1
   
   $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta -no_remote_pdb_file
 
@@ -880,19 +915,19 @@ By default, T-Coffee also requires two important PDB files declared using the tw
 
 ::
 
-  export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
+  $: export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
   (Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt)
   
-  export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
+  $: export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
   (Found at: http://www.rcsb.org/pdb/rest/getUnreleased)
 
 
 .. warning:: Since the file ``unreleased.xml`` is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
 
 
-******************************************
-Building Your Multiple Sequence Alignments
-******************************************
+***********************
+Aligning Your Sequences
+***********************
 General comments on alignments and aligners
 ===========================================
 What is a good alignment?
@@ -985,12 +1020,16 @@ Computing simple MSA with T-Coffee
 ==================================
 General considerations
 ----------------------
-T-Coffee aligner is by default parallelized, meaning that it can use multiple cores when running on a cluster or a computer. By default, T-Coffee will use all available processors to run, but you can allocate the number of cores you want with the flag **-multi_core** or **n_core** and by specifying the number of cores you want. The **multi_core** can accept **no** as a parameter and then run using a single core...It might not be a problem when using reformatting options but it will when running alignments, making T-Coffee really slow !!!
+T-Coffee aligner is by default parallelized, meaning that it can use multiple cores when running on a cluster or a computer. By default, T-Coffee will use all available processors to run, but you can parallelize the differents steps and allocate the number of cores you want with the flag **-multi_core** or **n_core**. For more details, refer to the chapter **T-Coffee Technical Documentation**, subsection **CPU control**. 
 
 ::
 
   Using a single core:
+<<<<<<< HEAD
   $$: t_coffee -in sample_seq1.fasta -multi_core=no
+=======
+  $$: t_coffee -in sample_seq1.fasta -multi_core=msa
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
   
   Using 12 cores:
   $$: t_coffee -in sample_seq1.fasta -n_core=12
@@ -1025,7 +1064,11 @@ If your sequences are spread across several datasets, you can give all the files
 
 ::
 
+<<<<<<< HEAD
   $$: t_coffee -seq=proteases1_small.fasta, small.aln -output=clustalw,fasta_aln,msf
+=======
+  $$: t_coffee -seq=proteases1_small.fasta,proteases2_small.aln -output=clustalw,fasta_aln,msf
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 
 You may also have a bunch of alignments (with the same sequences) that you have either precomputed, assembled manually or received from a colleague. You can also combine these alignments. For instance, let us imagine we generated 4 alignments with ClustalW using different gap penalties. To combine them into ONE single alignment, use the **-aln** flag. The final score indicates a high level of consistency (91%) between all these MSAs, meaning that the final MSA is probably correct.
@@ -1179,7 +1222,7 @@ Another alternative to align large datasets is a special mode of T-Coffee, fm-Co
   Command 3:
   $$: t_coffee proteases_large.fasta -mode fmcoffee
 
-.. tip:: Once you have your large MSA, you can always shrink/trim them using reformatting options (see previous section) for instance by extraction the most informative sequences or by defining %identity cut-off.
+.. tip:: Once you have your large MSA, you can always shrink/trim it using reformatting options (see previous section) for instance by extracting the most informative sequences or by defining a % identity cut-off.
 
 .. note:: In the last 10 years, a special effort have been made to improve large scale alignment leading to the development of few new methods among which Clustal Omega, PASTA, UPP and we hope soon a MEGA-Coffee aligner. These methods are not incorporated in T-Coffee so if your datasets are really large (>5000 sequences) don't hesitate to use these methods instead.
 
@@ -1232,18 +1275,24 @@ Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) her
 
 Computing very accurate (but slow) alignments with PSI/TM-Coffee
 -----------------------------------------------------------------
-PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced databse of TM proteins and also including a prediction of transmembran domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_.
+PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest. Its principle is rather simple: it associates every sequence with a profile of homologous sequences gathered using BLAST on a sequence database (nr by default). PSI-Coffee then uses the profiles instead of the initial sequences to makes a multiple profile alignment (command 1). In a last step, your profiles are replaced by their initial query sequence from your initial dataset and returns a MSA of your sequences. PSI-Coffee can also use reduced database instead of nr (installed locally) in order to speed-up the process. A special mode, TM-Coffee, exists using PSI-Coffee but specialized to align transmembrane proteins using a reduced database of TM proteins and also including a prediction of transmembran domains with the flag **-template_file PSITM** (command 2). It is much faster as the search database is limited to known transmembrane protein, however, it applies in only specific cases unlike PSI-Coffee which is a general method. You can find more information about TM-Coffee `here <http://tcoffee.crg.cat/apps/tcoffee/tutorial_tmcoffee.html>`_. If you want to specify a local BLAST version and a local database of your choice, just add to your command line the flags **-blast_server** and **-protein_db** and the corresponding paths.
 
 ::
 
   Command 1: PSI-Coffee
   $$: t_coffee proteases_small.fasta -mode psicoffee
   
+<<<<<<< HEAD
   Command 2: TM-Coffee
   ##: t_coffee proteases_small.fasta -mode psicoffee -blast_server <LOCAL> -protein_db <database>
       -template_file PSITM
+=======
+  Command 2: TM-Coffee (add -protein_db to specify in which database to search)
+  $$: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM
+  
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
-.. warning:: PSI/TM-Coffee requires BLAST and a database to search. If you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. Also, for TM-Coffee, the reduced database has to be installed locally otherwise you are just running PSI-Coffee.
+.. warning:: PSI/TM-Coffee requires BLAST and a database to search; if you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. More importantly, if you don't specify a reduced database for TM-Coffee, it will run on nr and be equal to PSI-Coffee.
 
 
 Using protein 2D/3D structural information 
@@ -1252,9 +1301,25 @@ Using structural information when aligning sequences is very useful. The reason 
 
 Using 3D structures: Expresso/3D-Coffee
 ---------------------------------------
-What is Expresso/3D-Coffee?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Expresso/3D-Coffee is probably one of the most important improvement of T-Coffee. The principle is simple: the server runs a BLAST between every sequence in your query against the PDB database and finds a structure similar in sequence which will be used as a template for aligning your sequence. Templates are stored in a template file, which can be generated manually or automatically by the Expresso. The difference between 3D-Coffee and Expresso lies on how it fetches the structure: using Expresso (command 1), the procedure is entirely automated but can be controlled by the user; using 3D-Coffee is more tricky as the name of the sequences should correspond to the structure file name (command 2): **_SELF_** means that the PDB identifier is the name of the sequences. The good news is that you do not need to have PDB installed locally as T-Coffee will automatically fetch the structures directly from RCSB (the home of PDB). At the end whenever there are enough templates (minimum of two obviously), it will align sequences using the structural information, otherwise sequences will be aligned using the standard T-Coffee aligner.  Of course, if your dataset only contains structures, your alignment becomes a structural alignment.
+Requirements to run Expresso/3D-Coffee
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Expresso needs BLAST you provide with the tag **-blast** and it also requires the PDB database you can specify via the flag **-pdb_db**. The good news is that it is not mandatory to have BLAST or the PDB installed locally as T-Coffee can automatically fetch the structures directly from RCSB (the home of PDB) using EBI BLAST web service. 
+
+How does Expresso/3D-Coffee work?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Expresso/3D-Coffee is probably one of the most important improvement of T-Coffee. The principle is simple: 1) it first runs a BLAST for every sequence in your dataset against the PDB and finds (or not) a structure similar in sequence (35% identity by default) to be used as a template for structurally aligning your sequence, 2) the correspondence between the query sequences and the templates are stored in a template file which is automatically generated by Expresso. Here lies the difference between 3D-Coffee and Expresso: when running Expresso, fetching structures and creating the template file are automated (so you can reuse it for other applications) while using 3D-Coffee is a bit more tricky as it requires the name of the sequences to correspond to the structure file name (and it does not fetch or create anything for you). Of course, you can create and use your own template with the tag **-template_file** with the same format presented here. At the end, whenever there are enough templates (minimum of two obviously), it will align sequences using the structural information, otherwise sequences will be aligned using the standard T-Coffee aligner.  Of course, if your dataset only contains structures, your alignment becomes a structural alignment. 
+
+::
+
+  >sp|P08246|ELNE_HUMAN  _P_ 1PPGE
+  >sp|P20160|CAP7_HUMAN  _P_ 1AE5
+  ...
+
+.. tip:: The PDB files used as a template should be in the current directory, otherwise you have to declare in the template file the whole path to find your templates.
+
+Running Expresso/3D-Coffee
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+Both Expresso (command 1) and 3D-Coffee (command 2) are modes of T-Coffee you can call with the flag **-mode**; the correspond to a preestablished configuration with default parameters. The template selection is indicated with the flag **-template_file** followed by either **PDB** (means BLAST will run remotely on the PDB) or **_SELF_P_** (means that the PDB identifier is the name of the sequence so there is no need to run BLAST) or a template file of your choice. As you can see in commands 1 and2, SAP (sap_pair) is the default structural aligner but you can choose alternative aligner(s) installed. You can give any combination of methods with the flag **-method**, but at least one has to be a structural aligner (command 3). You can also specify local installations of BLAST and PDB (command 4) **which is highly recommended if you want reproducible results**.
 
 ::
 
@@ -1263,29 +1328,7 @@ Expresso/3D-Coffee is probably one of the most important improvement of T-Coffee
   $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file PDB
 
 
-  Command 2: two ways of running 3D-Coffee
-  $$: t_coffee three_pdb_two_seq.fasta -mode 3dcoffee
-  $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file _SELF_
-
-Using Expresso
-^^^^^^^^^^^^^^
-To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. The parameters for the template selection are: 
- - **-pdb_type**: the type of structure (diffraction "d" or NMR "n")
- - **-pdb_min_cov**: the coverage (% between 0 and 100) between your query sequence and the template
- - **-pdb_min_sim**: the identity (% between 0 and 100) between your query sequence and the template 
-
-When running Expresso, the template file with the following format is automatically created (so you can reuse it for other applications):
-
-::
-
-  >sp|P08246|ELNE_HUMAN _P_ 1PPGE
-  >sp|P20160|CAP7_HUMAN _P_ 1AE5
-  ...
-  
-Expresso needs BLAST so either you provide your own client with the tag **-blast** or use the default one. It also requires the PDB database that you can install locally and specify its path via the flag **-pdb_db**; by default, it will run on the remote PDB but your results will not be reproducible as the PDB is regularly updated. If you want to control the structure files associated with your sequences, you can provide your own template file with the tag **-template_file** with the same format presented before. Finally, by default, Expresso uses the SAP structural aligner for historical reasons but you can choose alternative aligner(s) installed (at least one has to be a structural aligner); you can give any combination of methods with the flag **-method**. At the end, all the structures identified by Expresso are stored in your cache directory (~/.t_coffee/cache/); you can choose to have the structure directly in your working directory by using the flag **-cache=$PWD**. To summarize, you can either run Expresso blindly and it will do a pretty good job (command 1), or you can have everything under control (commands 2 and 3): 
-
-::
-
+<<<<<<< HEAD
   Command 1: Default Expresso
   $$: t_coffee three_pdb_two_seq.fasta -mode expresso
   
@@ -1296,10 +1339,30 @@ Expresso needs BLAST so either you provide your own client with the tag **-blast
   Command 3: Choosing your own templates and methods
   ##: t_coffee three_pdb_two_seq.fasta -method mustang_pair,slow_pair -template_file \
       <your template>
+=======
+  Command 2: two ways of running 3D-Coffee
+  $$: t_coffee three_pdb.fasta -mode 3dcoffee
+  $$: t_coffee three_pdb.fasta -method sap_pair,slow_pair -template_file _SELF_P_
 
-.. warning:: If you are providing Expresso with your own structures, you have to specify the path in the template file or have them in your current working directory. 
+  Command 3: Choosing your own templates and methods
+  $$: t_coffee three_pdb_two_seq.fasta -method mustang_pair,slow_pair -template_file \
+      three_pdb_two_seq_pdb1.template_list
+      
+  Command 4: Running Expresso using a local BLAST/PDB 
+  $$: t_coffee three_pdb_two_seq.fasta -mode expresso -blast=LOCAL -pdb_db=<PDB> \
+      -pdb_type d -pdb_min_sim 95 -pdb_min cov 90 -cache $PWD 
 
-.. tip:: By default, structures fetch by Expresso are stored in your local ~/.t_coffee/cache/ allowing Expresso to run faster if you reuse similar structures. Don't forget to empty it from time to time, especially if you are using Expresso frequently otherwise your folder is just getting bigger and bigger (similar comment can be done for any template based mode of T-Coffee).
+.. tip:: By default, structures and structural pairwise alignments are stored in your local ~/.t_coffee/cache/ allowing Expresso to run faster if you reuse similar structures; you can choose to have all these files directly in your working directory by using **-cache=$PWD**. Don't forget to empty your cache directory from time to time otherwise your folder is just getting bigger and bigger (similar comment can be done for any template based mode of T-Coffee). 
+
+Template search paramaters 
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. You can have an exhaustive list in the **T-Coffee Technical Documentation** (subsection **Template based T-Coffee modes**) yet the most important parameters for the template selection are the following:
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
+ - **-pdb_type**    : the type of structure ("d" for diffraction/XRAY or "n" NMR structures)
+ - **-pdb_min_cov** : the minimum coverage between query sequence and template (% between 0-100)
+ - **-pdb_min_sim** : the minimum identity between query sequence and template (% between 0-100)
+
 
 Aligning sequences and structures
 ---------------------------------
@@ -1349,15 +1412,17 @@ It is possible to use the secondary prediction (command 1) or the transmembrane 
 
 ::
 
-  Command 1:
+  Command 1: (under maintenance...)
   $$: t_coffee sample_seq1.fasta -template_file PSISSP -method_evaluate_mode ssp -method \
-      lalign_id_pair slow_pair
+      lalign_id_pair
 
   Command 2:
   $$: t_coffee sample_seq1.fasta -template_file PSITM -method_evaluate_mode tm -method \
-      lalign_id_pair slow_pair
+      lalign_id_pair
 
 The overall effect is very crude and can go up to overweighting by 30% the score obtained when matching two residues in a similar secondary structure state. The net consequence is that residues in similar predicted states tend to be aligned more easily.
+
+.. hint:: In that case, the flag **-method** can only accept one single method
 
 Using other secondary structure predictions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1365,9 +1430,15 @@ If you have your own predictions, you can use them to run T-Coffee providing you
 
 ::
 
+<<<<<<< HEAD
   Command line:
   ##: t_coffee sample_seq1.fasta -template_file <template_file> -method_evaluate_mode \
       ssp -method lalign_id_pair slow_pair  
+=======
+  Command line: (under maintenance...)
+  $$: t_coffee sample_seq1.fasta -template_file sample_seq1_ssp.template -method_evaluate_mode \
+      ssp -method lalign_id_pair
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
       
   Format of the template file:     
   >hmgl_wheat _E_ hmgl_wheat.ssp
@@ -1385,11 +1456,19 @@ You can output a color coded version of your alignment using the secondary predi
 
 ::
 
+<<<<<<< HEAD
   Secondary structure prediction:
   $$: t_coffee sample_aln1.fasta -template_file PSISSP -output sec_html
 
   Transmembrane regions prediction:
   $$: t_coffee sample_aln1.fasta -template_file PSITM -output tm_html
+=======
+  Secondary structure prediction: (under maintenance...)
+  $$: t_coffee sample_seq1.fasta -template_file PSISSP -output sec_html
+
+  Transmembrane regions prediction: 
+  $$: t_coffee sample_seq1.fasta -template_file PSITM -output tm_html
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 
 Aligning RNA sequences 
@@ -1420,8 +1499,13 @@ There are two modes we proposed to improve R-Coffee alignments: 1) using the bes
 
 ::
 
+<<<<<<< HEAD
   Using Consan (best):
   #$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+=======
+  Using Consan (best): (under maintenance...)
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
   
   Using multiple methods:
   $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
@@ -1490,11 +1574,16 @@ MSA methods are not at their best when aligning DNA sequences. Whenever you can,
 
   $$: t_coffee sample_dnaseq1.fasta -type=dna
 
-The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. In practice, any time it encounters DNA, the program will try to use '4dna' version of the requested methods. These methods have lower penalties and are better suited for dealing with nucleic acid sequences. However, if you would rather use your own matrix, use the following command where you should replace **idmat** with your own matrix in BLAST format.
+The type declaration (or its automatic detection) triggers the use of the appropriate substitution matrix in most of the methods. However, if you would rather use your own matrix, use the following command where you should replace **idmat** with your own matrix in BLAST format.
 
 ::
 
+<<<<<<< HEAD
   $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair@EP@MATRIX@idmat
+=======
+  $$: t_coffee sample_dnaseq1.fasta -in Mcdna_fast_pair@EP@MATRIX@idmat
+
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 Pro-Coffee: Aligning functional DNA regions
 -------------------------------------------
@@ -1506,11 +1595,15 @@ Pro-Coffee is a MSA method specifically designed for promoter regions or other o
   $$: t_coffee -seq c18orf19.fa -mode procoffee
 
   Command 2: Pro-Coffee parameters
-  t_coffee –seq c18orf19.fa -method promo_pair@EP@GOP@-60@GEP@-1
+  $$: t_coffee -seq c18orf19.fa -method promo_pair@EP@GOP@-60@GEP@-1
 
   Command 3: Extracting regions
   $$: t_coffee -other_pg seq_reformat -in c18orf19.aln -action +extract_block \
+<<<<<<< HEAD
       ENSG00000177150 1852 1983 > c18orf19_chipseq.aln
+=======
+      'ENSG00000177150' 1852 1983 > c18orf19_chipseq.aln
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 .. tip:: If you want more details, we suggest you follow the subsection **Quick Start, Tutorial (Practical Examples)** published in Nature Protocols (2011) or refer to the original article.
 
@@ -1546,9 +1639,9 @@ When dealing with coding DNA, the right thing to do is to translate your DNA seq
 
 
 
-****************************
-How Good Is Your Alignment ?
-****************************
+*************************
+Evaluating Your Alignment
+*************************
 There are three possible strategies for evaluating your alignment of protein sequences:
 
  1) **Sequence based methods** like the CORE index and the TCS if you don't have any structure (quite often). These do pretty well in the core regions of an alignment (which can correspond to protein domains, fold, structural elements, etc...) but can be limited in more variable regions (which can correspond to loops, disordered regions, etc...).
@@ -1604,8 +1697,8 @@ TCS allows you to filter out from your alignment regions that appears unreliable
 
 :: 
 
-  $$: t_coffee -infile prot.aln -evaluate -output tcs_residue_filter3, tcs_column_filter3, \
-      tcs_residue_lower4
+  $$: t_coffee -infile sample_seq1.aln -evaluate -output tcs_residue_filter3, \
+      tcs_column_filter3,tcs_residue_lower4
 
 Output files: 
 
@@ -1620,11 +1713,16 @@ Note that all these output functions are also compatible with the default T-Coff
 ::
 
   Command 1:
+<<<<<<< HEAD
   $$: t_coffee -seq sample_seq1.fasta -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
+=======
+  $$: t_coffee -seq sample_seq1.fasta -output tcs_residue_filter3, tcs_column_filter3, \
+      tcs_residue_lower4
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
   Command 2:
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in prot.score_ascii -struc_in_f \
-      number_aln -output tcs_residue_filter3
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii \
+      -struc_in_f number_aln -output tcs_residue_filter3
 
 Weighting MSA for improved trees
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1647,8 +1745,8 @@ Note that all these output functions are also compatible with the default T-Coff
   $$: t_coffee -seq sample_seq1.fasta -output tcs_weighted, tcs_replicate_100
 
   Command 2:
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in prot.score_ascii -struc_in_f \
-      number_aln -output tcs_weighted
+  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii \
+      -struc_in_f number_aln -output tcs_weighted
 
 Using different libraries for TCS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1661,12 +1759,17 @@ It is possible to change the way TCS reliability is estimated. This can be done 
       aln, score_html
 
   Command 2:
+<<<<<<< HEAD
   $$: t_coffee -infile prot.aln -evaluate -method proba_pair,lalign_id_pair -output score_ascii, \
       aln, score_html
+=======
+  $$: t_coffee -infile sample_seq1.aln -evaluate -method proba_pair,lalign_id_pair \
+      -output score_ascii,aln, score_html
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
       
   Command 3:
-  $$: t_coffee -infile sample_seq1.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa -output \
-      score_ascii, aln, score_html
+  $$: t_coffee -infile sample_seq1.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa \
+      -output score_ascii, aln, score_html
     
 Working with coding DNA
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -1709,60 +1812,61 @@ APDB/iRMSD
 ----------
 What is the APDB/iRMSD?
 ^^^^^^^^^^^^^^^^^^^^^^^
-APDB and the iRMSD are two closely related measures meant to evaluate the accuracy of a sequence alignment without using a structure based reference alignment. The iRMSD is a follow up of the APDB measure and we now recommend using the iRMSD rather than APDB. Although it may seem that the iRMSD was an attempt to get free iPODs from Apple, it is not (or at least we never got the iPODs). The iRMSD is a special RMSD (standing for intra-molecular distances based RMSD) where the alignments are evaluated using the structural information of the sequences with known structures.
+APDB and the iRMSD are two closely related measures meant to evaluate the accuracy of a MSAt without using a structure based reference alignment. The iRMSD is a follow up of the APDB measure and we now recommend using the iRMSD rather than APDB. Although it may seem that the iRMSD was an attempt to get free iPODs from Apple, it is not (or at least we never got the iPODs). The iRMSD is a special RMSD (standing for intramolecular distances based RMSD) where the alignments are evaluated using the structural information of the sequences with known structures.
 
-The strength of the iRMSD is its independence from a specific superposition models. When using the iRMSD to evaluate the score of a sequence alignment, one does not need to superpose the two structures and deduce a sequence alignment that will then be compared with the target alignment. In practice, we use a Normalized version of the iRMSD, the NiRMSD that makes it possible to compare alternative alignments of different length. From a structural point of view, the iRMSD has a meaning very similar to the iRMSD and it behaves in a similar fashion from a numerical point of view (similar ranges in Angstroms).
+The strength of the iRMSD is its independence from a specific superposition models. When using the iRMSD to evaluate the score of a MSA, one does not need to superpose the two structures and deduce a sequence alignment that will then be compared with the target alignment. Given two aligned residues (X and Y) the iRMSD score is an attempt to estimate the neighborhood support for the XY alignment. This is done by measuring the difference of distances between X and Y and every other pair of aligned residues within the same sphere (W and Z). The iRMSD is obtained by measuring the average Root Mean Square (RMS) of these differences of distances. The first step of APDB/iRMSD is to measure the distances between the Ca (carbon alpha) of each residue and its neighbors. Neighborhood is defined as a sphere of radius ***-maximum_distance** (10 by default). However, by setting **-local_mode** to 'window', the sphere can be replaced with a window of 1/2 size **-maximum_distance** residues. 
 
-The first step of APDB is to measure the distances between the Ca of each residue and its neighbors. Neighborhood is defined as a sphere of radius -maximum_distance (10 by default). However, by setting -local_mode to 'window', the sphere can be replaced with a window of 1/2 size '-maximum_distance' residues.
+The lower the iRMSD, the better the alignment. Yet, an alignment can obtain a good iRMSD score by simply having few aligned residues. To avoid this, the program also reports a normalized version of the iRMSD, the NiRMSD= MIN(L1,L2)*iRMSD/Number considered columns. It is recommended to use the NiRMSD to compare alternative alignments of different length. From a structural point of view, the NiRMSD has a meaning very similar to the iRMSD and it behaves in a similar fashion from a numerical point of view (similar ranges in Angstroms).
 
-Given two aligned residues (X and Y on the Figure) the iRMSD measure is an attempt to estimate the neighborhood support for the XY alignment. This is done by measuring the difference of distances between X and Y and every other pair of aligned residues within the same sphere (W and Z on Figure 1). The iRMSD is obtained by measuring the average Root Mean Square of these differences of distances. The lower the iRMSD, the better the alignment. However, an alignment can obtain a good iRMSD by simply having few aligned residues. To avoid this, the program also reports the NiRMSD= MIN(L1,L2)*iRMSD/Number Considered columns.
+.. note:: APDB is an older measure less robust than the iRMSD; it is an attempt to estimate the fraction of pairs of residues whose alignment seems to be correct form a structural point of view. The higher APDB, the better the alignment, and conversely the lower the NiRMSD, the better the alignment.
 
-How to efficiently use structural information
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-When it comes to evaluating Multiple Sequence Alignments, nothing beats structural information. To use the methods we describe here, you will need to have at least two structures, similar enough (>60%) to two sequences in your dataset. Here an outline of the best way to proceed:
+How to efficiently use structural information?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+When it comes to evaluating MSAs, nothing is better than structural information. To use the methods we describe here, you will need to have at least two structures, similar enough (>60%) to sequences contained in your dataset. Here an outline of the best way to proceed:
 
-1) Make sure you include two structures whose sequences are so distantly related that most of the other sequences are intermediates.
-2) Align your sequences without using the structural information (i.e. t_coffee, muscle...).
-3) Evaluate your alignment with iRMSD (see later in this section); the score will be S1.
-4) Realign your sequences, but this time using structural information (Expresso).
-5) Measure the score of that alignment; the score will be S2.
+ 1) Make sure you include two structures whose sequences are so distantly related that most of the other sequences are intermediates.
+ 2) Align your sequences without using the structural information (i.e. T-Coffee, MUSCLE...).
+ 3) Evaluate your alignment with iRMSD/NiRMSD (see later in this section); the score will be S1.
+ 4) Realign your sequences, but this time using structural information (Expresso).
+ 5) Measure the score of that alignment; the score will be S2.
 
 If S1 and S2 are almost similar, it means your distantly related structures were well aligned, and you can expect the intermediate sequences to be well aligned as well. If S2 is much better than S1, you can expect the structures to be well aligned in the second alignment, while there is no guaranty that the alignment of the intermediate sequences has improved as well, although in practice it often does
 
 Evaluating an alignment with the iRMSD package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Let us evaluate the alignment produced by Expresso, using the template_file returned by Expresso. Evaluating the MSA with iRMSD will deliver a long output (all pairs are compareD), the most interesting bit is at the bottom with the global iRMSD score in angstrom (NiRMSD is just the iRMSD score normalized to the length of the MSA). 
+Let us evaluate the alignment produced by Expresso using the template file it returns. Evaluating the MSA with iRMSD will deliver a long output (all pairs are compared), the most interesting bit is at the bottom with the global iRMSD score in Angstrom (NiRMSD is the iRMSD score normalized to the length of the MSA). 
 
 ::
 
   Running the iRMSD:
+<<<<<<< HEAD
   $$: t_coffee -other_pg irmsd sproteases_small.expresso -template_file \
       sproteases_small.template_file
+=======
+  $$: t_coffee -other_pg irmsd proteases_small.aln -template_file proteases_small.template
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
-  Output of the iRMSD:
-  TOTAL for the Full MSA
-  TOTAL EVALUATED: 52.90 %
-  TOTAL APDB:      81.59 %  
-  TOTAL iRMSD:     0.71 Angs
-  TOTAL NiRMSD:    1.33 Angs
-
-.. note:: APDB is an older measure, less robust than the iRMSD and it is an attempt to estimate the fraction of pairs of residues whose alignment seems to be correct form a structural point of view. The higher APDB, the better the alignment, the lower the NiRMSD, the better the alignment.
+  Result of the iRMSD evaluation:
+  TOTAL     EVALUATED :  50.17 %  
+ 	TOTAL     APDB      :  83.44 %  
+ 	TOTAL     iRMSD     :  0.67 Angs
+ 	TOTAL     NiRMSD    :  1.34 Angs
 
 Evaluating alternative alignments
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The strength of structure based alignments is that they make it possible to compare alternative alignments. In this case let us consider:
+The strength of structure based alignments is that they make it possible to compare alternative alignments. In this case let us consider the following results in the table below (APDB in %, iRMSD/NiRMSD in Angstroms, and the evaluated columns in %). As expected, Expresso delivers the best alignment from a structural point of view. This makes sense, since Expresso explicitely USES structural information. The other figures show us that the structural based alignment is only marginally better than most sequences based alignments, yet with the notable exception of ClustalW.
 
-======== ========================= ====== 
-Method   File                      NiRMSD 
-======== ========================= ====== 
-Expresso sproteases_small.expresso 1.33  
-T-Coffee sproteases_small.tc_aln   1.35  
-ClustalW sproteases_small.cw_aln   1.52  
-MAFFT    sproteases_small.mafft    1.36  
-MUSCLE   sproteases_small.muscle   1.34  
-======== ========================= ====== 
-
-As expected, Expresso delivers the best alignment from a structural point of view. This makes sense, since Expresso explicitely USES structural information. The other figures show us that the structural based alignment is only marginally better than most sequences based alignments. Muscle seems to have a small edge here although the reality is that all these figures are impossible to distinguish with the notable exception of ClustalW
+======== ======== ======== ========= =========
+ Method   APDB(%) iRMSD(A) NiRMSD(A) Eval. (%)
+======== ======== ======== ========= =========
+Expresso   83.44    0.67     1.34      50.17
+T-Coffee   83.11    0.68     1.35      50.29
+M-Coffee   83.08    0.68     1.36      50.00
+ProbCons   83.10    0.68     1.35      50.28
+MAFFT      82.99    0.68     1.35      50.25
+Kalign     82.42    0.69     1.38      50.02
+ClustalW   80.62    0.73     1.47      49.55
+======== ======== ======== ========= =========
 
 
 Evaluating alternative alignments with STRIKE (under maintenance...)
@@ -1771,7 +1875,7 @@ Evaluating alternative alignments with STRIKE (under maintenance...)
 
 Evaluating a MSA according to your own criterion
 ================================================
-Any kind of Feature can easily be turned into an evaluation grid. For instance, the protease sequences we have been using here have a well characterized binding site. A possible evaluation can be made as follows. let us consider the Swissprot annotation of the two most distantly related sequences. These two sequences contain the electron relay system of the proteases. We can use it to build an evaluation library: in P29786, the first Histidine is at position 68, while in P21844 this Histidine is on position 66. We can therefore build a library that will check whether these residues are properly aligned in any MSA. The library will look like this:
+Any kind of Feature can easily be turned into an evaluation grid. For instance, the protease sequences we have been using here have a well characterized binding site. A possible evaluation can be made as follows: let us consider the UniProt annotation of the two distantly related sequences; these two sequences contain the electron relay system of the proteases. We can use it to build an evaluation library: in P29786 (TRY3_AEDAE) the Histidine residue is at position 68 while in P21844 (MCPT5_MOUSE) the functionally equivalent Histidine residue is at position 66. We can therefore build a library that will check whether these two residues are properly aligned in any MSA. The library will look like this:
 
 
 ::
@@ -1787,11 +1891,11 @@ Any kind of Feature can easily be turned into an evaluation grid. For instance, 
   IALPDASETVADGAMCTVSGWGDTKNVFEMNTLLRAVNVPSYNQAECAAALVNVVPVTEQMICAGYAAGGKDSCQGDS\
   GGPLVSGDKLVGVVSWGKGCALPNLPGVYARVSTVRQWIREVSEV
   #1 2
-   66 68 100
+  66 68 100
   ! SEQ_1_TO_N
 
 
-You simply need to cut and paste this library in a file and use this file as a library to measure the concistency between your alignment and the correspondances declared in your library. The following command line also makes it possible to visualy display the agreement between your sequences and the library.
+You simply need to cut and paste this library in a file and use this file to measure the concistency between your alignment and the correspondances declared in your library. The following command line also makes it possible to visually display the agreement between your sequences and the library.
 
 ::
 
@@ -1799,16 +1903,17 @@ You simply need to cut and paste this library in a file and use this file as a l
       -output html
 
 
-******************************
-Downstream Analysis Using MSAs
-******************************
+*******************
+Downstream Analysis
+*******************
 
-Trees/Clustering based on protein 3D structures
+Clustering/Trees based on protein 3D structures
 ===============================================
-This section describes tree estimation procedure based on the comparison of internal distances. One particular mode (T-RMSD) have been develop for this purpose only however, there are many other options to do so. On the other hand,T-RMSD makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity bewtween protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. T-RMSD also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
+This section describes tree estimation procedure based on the comparison of intramolecular distances. One particular mode (T-RMSD) have been develop for this purpose yet there are many other options to do so. On the other hand,T-RMSD makes it possible to estimate a tree using either contact conservation or differences in internal distances as a measure of similarity between protein or RNA sequences. The trees thus estimated can be bootsrapped or further analyzed like regular phylogenetic trees. T-RMSD also makes it possible to estimate the local support of any structural alignment (i.e. each individual column) for either a full tree or any pre-defined sub-group contained within the dataset. 
 
 Generating a tree based on structural distances
 -----------------------------------------------
+<<<<<<< HEAD
 This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored.
 
 ::
@@ -1831,71 +1936,140 @@ It is possible to control default parameters using the following extended comman
 
   #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick -out tree.dnd
+=======
+This option makes it possible to estimate a tree while taking into account the variation of intramolecular distances within the considered sequences. It requires in input an alignment (FASTA, MSF, ClustalW...) and a template file (structure files associated with the query sequences). The following command (command 1) will generate a 100 replicate NJ trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored. It is possible to control the defautl parameters (command 2). The ouput will be a tree in the Newick format with bootstrap supports.
 
+::
 
-.. warning:: sequences without 3D structure will be excluded from the analysis and from the final output.
+  Command 1:
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +tree replicates 100 +evaluate3D distances +tree2bs first -output newick
+ 
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +tree replicates 100 gap 0.5 mode nj +evaluate3D distances 15 +tree2bs first -output newick
+      
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
+.. warning:: Sequences without 3D structure will be excluded from the analysis and from the final output.
+
 
 Generating a tree based on contact conservation
 -----------------------------------------------
-The following option (command 1) makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate NJ trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cutoff of 1.2 A between VdW radius and ignoring the 3 closest neighbors; columns with less than 50% residues are ignored. For sequences without 3D information, the strike contact potential is used instead (Watson and crick base pairing propensity for RNA). The output file is ``tree.dnd`` is a tree in newick format. It is possible to control default parameters using the following extended command line (command 2).
+The following option (command 1) makes it possible to estimate a tree while taking into account the variation of contact conservation within the considered sequences. This call will generate a 100 replicate NJ trees using as a distance metrics the fraction of contacts conserved between pairs of aligned residues, at a maximum cutoff of 1.2 A between Van der Waals radius and ignoring the 3 closest neighbors; columns with less than 50% residues are ignored. For sequences without 3D information, the STRIKE contact potential is used instead (Watson and Crick base pairing propensity for RNA). The output will be a tree in Newick format. It is possible to control default parameters using the following extended command line (command 2).
 
 :: 
 
   Command 1:
+<<<<<<< HEAD
   #$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree \
       replicates 100 +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
 
   Command 2:
   #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
+=======
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +tree replicates 100 +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
+
+  Command 2:
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +tree replicates 100 gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output \
+      newick -out tree.dnd
+
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 .. warning:: The procedure requires at least 1 sequence with a known 3D structure or with contact information.
 
-Visulizing 3D Conservation
---------------------------
-This same procedure can be used to visualize either intramolecular distance conservation or contact conservation.  The output file ``score_raw`` is a tabulated dump of the numerical values associated with every residue, every sequence and every column of the considered alignment.
+Visualizing contact/distance conservation
+-----------------------------------------
+This same procedure can be used to visualize either intramolecular distance conservation or contact conservation.  The output option **score_raw** generate a tabulated dump of the numerical values associated with every residue, sequence and column of the considered alignment. The flag **-out** specifies the name of the output file containing the results (you can give the name you want, but if you read the documentation so far, you already know it...). 
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-      -action +evaluate3D distances -output score_html 
+      -action +evaluate3D distances -output score_html -out out.html
+      
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-      -action +evaluate3D distances -output score_ascii 
+      -action +evaluate3D distances -output score_ascii -out out.ascii
+      
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
+<<<<<<< HEAD
       -action +evaluate3D distances -output score_raw
 
 Identification of positions 
 ---------------------------
+=======
+      -action +evaluate3D distances -output score_raw -out out.tab
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
-If you have a well defined sub-group of sequences (i.e. domains having the same function, same specificity, etc...), it is possible to estimate which columns yield the best support using the following command. The input ``group.fasta`` is a FASTA formatted list of the sequences that form the group whose support you want to analyze; the output ``aln.score_html`` is a colored version of your MSA indicating the sequences that best contribute to your clustering.
+Visualizing informative positions 
+---------------------------------
+If you have a well defined subgroup of sequences (domains having the same function, same specificity, etc...), it is possible to estimate which columns yield the best support using the following command. The input are an alignment of your sequences, a template file containing the list of structure files to use as templates and a FASTA file of the sequences that form the group whose support you want to analyze. The output will be a colored version of your MSA indicating the sequences that best contribute to your clustering.
 
 ::
 
+<<<<<<< HEAD
   #$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates \
       columns +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
+=======
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
+      -action +tree replicates columns +evaluate3D  distances +evaluateTree group_3Dseq1.fasta \
+      -output score_html -out out_aln.html
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
-Evaluating Clustering capacities
+Evaluating clustering capacities (under maintenance...)
 --------------------------------
-If you want to check the capacity of an algorithm to bring related sequences within mono-phyletic groups, you should name your sequences according to the group they belong to (XXXX_1, YYYYY_1, ZZZZ_2, KKKK_2, for members of _1 and _2, etc) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group. The tree can be precomputed (command 1) or it can be computed on the fly (command 2).
+If you want to check the capacity of an algorithm to bring related sequences within monophyletic groups, you should name your sequences according to the group they belong to (XXXX_1 for members of group 1; YYYY_2, for members of group 2; etc...) and use the following evaluation procedure. The output will be the number of monophyletic groups containing sequences belonging to the same group. The tree can be precomputed (command 1) or it can be computed on the fly (command 2).
 
 :: 
 
   Command 1: precomputed tree
   #$: t_coffee -other_pg seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
 
+<<<<<<< HEAD
   Command 2: computed on the fly....
   #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
+=======
+  Command 2: computed on the fly
+  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
+>>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
       +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
-Others...
-=========
-Under maintenance...
+The T-RMSD
+==========
+What is the T-RMSD?
+-------------------
+T-RMSD (Tree based on Root Mean Square Deviation) is a structure based clustering method using the iRMSD to drive the structural clustering of your aligned sequences with available structures. The T-RMSD supports all the parameters supported by iRMSD or APDB. T-RMSD  is a distance RMSD (dRMSD) based method which generate Structural Trees (analogue to phylogenetic tree) to determine fine-grained structural variations associated with a given Multiple Sequence Alignment (generated by the user using the method of is choice). The specificity of T-RMSD compared to other structural comparison methods stems from its capacity to generate a structural tree with values equivalent bootstrap values supporting the structural clustering. Such clustering is achieved by the construction of matrixes of distances, calculated between equivalent residues as defined by the ungapped columns of the given MSA. The resulting matrixes are then combined using the CONSENSE program from the Phylip package to generate a consensus structural tree with equivalent bootstrap values supporting each node (from 0 to 100; 100 indicating that all positions support the clustering). 
+
+Generating a structural tree with support values
+------------------------------------------------
+T-RMSD is a special modof T-Coffee. To run T-RMSD, you just need a MSA (generated the way you want) and a template file; you need one structure for each sequence, otherwise these sequences will be excluded from the final results. There are several output files: 
+
+ - ``<input name>.struc_tree.list``: list of all individual trees (one per ungapped column)
+ - ``<input name>.struc_tree.consense_output``: basic consensus tree rendering
+ - ``<input name>.struc_tree.consensus``: resulting structural tree with support (Newick)
+ - ``<input name>.struc_tree.html``: colored MSA according to the contribution to the clustering
+ 
+::
+
+  $$: t_coffee -other_pg trmsd -aln sample_3Dseq1.aln -template_file sample_3Dseq1.template
+  
+
+.. hint:: Another important information displayed only on screen is the number of usable positions used to build the clustering. If your alignment is too gappy, this percentage will be low and the resulting clustering may not be accurate nor informative; in the previous example, 28.57% of the MSA will be used. 
+
+Visualizing the structural clustering
+-------------------------------------
+T-Coffee have limited tree visualization capacities, yet the T-RMSD delivers two relevant files in this matter: the first one is a basic rendering of the tree with the support values for each node (``<input name>.struc_tree.list``), the second one is a colored html of the MSA where columns are colored according to their individual support to the final consensus tree (``<input name>.struc_tree.html``). If you want to visualize/modify the resulting tree, we recommend to use a dedicated tree viewer such as `PhyloWidget <http://www.phylowidget.org/>`_. By default PhyloWidget is used by the T-RMSD web server, but as the format is standard (Newick format) you can use any viewer you want (iTOL, ETE, FigTree, Phylodendron, etc...)
+
+The TCS
+=======
+The TCS was described in the previous subsection as it is mainly an evaluation tool. It has however several option that are relevant for downstream analysis such weighting and/or trimming MSA for phylogenetic reconstruction. It was demonstrated that TCS was able to improve phylogenetic reconstruction, you are welcome to look at the publication for more details.
 
 
-
-*************************************
-Internal/External Methods In T-Coffee
-*************************************
+*************************
+Internal/External Methods 
+*************************
 .. note:: The real power of T-Coffee is its ability to seamlessly combine many methods into one. While we try to integrate as many methods as we can in the default distribution, we do not have the means to be exhaustive and if you desperately need your favorite method to be integrated, you will need to bite the bullet ...
 
 
@@ -1907,7 +2081,7 @@ This section shows you what are the available method in T-Coffee, and how you ca
 
 INTERNAL methods (built-in)
 ---------------------------
-INTERNAL methods can be requested using the following names:
+Internal methods can be requested using the following names:
 
 - **proba_pair**: adapted from ProbCons, this method (the current default) uses a pair HMM to compute a pairwise alignment with a biphasic gap penalty.
 
@@ -1931,7 +2105,7 @@ INTERNAL methods can be requested using the following names:
 
 EXTERNAL methods (plug-in)
 --------------------------
-EXTERNAL methods correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. To have a complete list of the methods that can be used as plug-ins, just type **t_coffee** in a terminal, it will we displayed on your screen. Most of these methods can be used as either pairwise (**<method>_pair**) or multiple alignment methods (**<method>_msa**); note that all these methods use Blosum62 as a default. 
+External methods correspond to packages developed by other groups that you may want to run within T-Coffee. We are very open to extending these options and we welcome any request to add an extra interface. To have a complete list of the methods that can be used as plug-ins, just type **t_coffee** in a terminal, it will we displayed on your screen. Most of these methods can be used as either pairwise (**<method>_pair**) or multiple alignment methods (**<method>_msa**); note that all these methods use Blosum62 as a default. 
 
 One package is a bit different; **fugue_pair** uses a standard FUGUE installation to make a sequence/structure alignment. Installation must be standard but it does not have to include all the FUGUE packages but only:
 
@@ -1948,7 +2122,7 @@ One package is a bit different; **fugue_pair** uses a standard FUGUE installatio
 
 Modifying the parameters of INTERNAL/EXTERNAL methods
 =====================================================
-INTERNAL methods
+Internal methods
 ----------------
 It is possible to modify on the fly the parameters of hard coded methods (**EP** stands for Extra parameters). These parameters will superseed any other parameters.
 
@@ -1957,7 +2131,7 @@ It is possible to modify on the fly the parameters of hard coded methods (**EP**
   $$: t_coffee sample_seq1.fasta -method slow_pair@EP@MATRIX@pam250mt@GOP@-10@GEP@-1
 
 
-EXTERNAL methods
+External methods
 ----------------
 External methods receive a command line built with the information provided via the parameter file (see next heading). It is possible to produce such a parameter file and to modify it in order to modify the commands passed to the methods. The passed command is built as follows:
 
@@ -1983,7 +2157,7 @@ Integrating EXTERNAL methods
 ============================
 If the method you need is not already included in T-Coffee, you will need to integrate it yourself. We give you here some guidelines on how to do so.
 
-Accessing EXTERNAL methods
+Accessing external methods
 --------------------------
 A special method exists in T-Coffee that can be used to invoke any existing program (command 1): for instance, ClustalwWis a method that can be ran with the command 2. Here is just an example but ClustalW can be replaced with any method using a similar syntax. If the program you want to use cannot be run this way, you can either write a perl wrapper that fits the bill or write a ``tc_method`` file adapted to your program (cf. next section). This special method (**em** for external method) uses a particular syntax (command 3).
 
@@ -1998,9 +2172,9 @@ A special method exists in T-Coffee that can be used to invoke any existing prog
   Command 3: Syntax for EXTERNAL methods
   ##: em@<method>@<aln_mode:pairwises_pairwise|multiple>
 
-Customizing an EXTERNAL method 
+Customizing an external method 
 ------------------------------
-T-Coffee can run EXTERNAL method using a ``tc_method`` file that can be used in place of an established method. Two such files are incorporated in T-Coffee (``clustalw_method.tc_method`` and ``generic_method.tc_method``). You can dump them and customize them according to your needs. The first file is a very straightforward example on how to run Clustalw via T-Coffee with a set of parameters you may be interested in. Note that **ALN_MODE** instructs T_Coffee to run ClustalW on every pair of sequences. The second file is detailed in the next section.
+T-Coffee can run external method using a ``tc_method`` file that can be used in place of an established method. Two such files are incorporated in T-Coffee (``clustalw_method.tc_method`` and ``generic_method.tc_method``). You can dump them and customize them according to your needs. The first file is a very straightforward example on how to run Clustalw via T-Coffee with a set of parameters you may be interested in. Note that **ALN_MODE** instructs T_Coffee to run ClustalW on every pair of sequences. The second file is detailed in the next section.
 
 ::
 
@@ -2080,7 +2254,7 @@ Here is the mother of all configuration file for T-Coffee:
   *
   * t_coffee -in Mgeneric_method.method
   *
-  * The method is passed to the shell using the following
+  *The method is passed to the shell using the following
   *call:
   *<EXECUTABLE><IN_FLAG><seq_file><OUT_FLAG><outname><PARAM>
   *
@@ -2172,10 +2346,10 @@ By default, the alignment produced by your method will be weighted according to 
 
 ::
 
-  Overweight by a factor 2 the weight of slow_pair:
+  Increases by a factor 2 the weight of slow_pair:
   $$: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@OW2
  
-  Causeevery pair of slow_pair to have a weight equal to 250:
+  Causes every pair of slow_pair to have a weight equal to 250:
   $$: t_coffee sample_seq1.fasta -method slow_pair@WEIGHT@250
 
 Managing a collection of method files
@@ -2197,24 +2371,25 @@ The previous integration method forces you to use the same weighting scheme for 
 
 ::
 
+  $$: t_coffee -aln=sample_aln1.aln,sample_aln2.aln -method=fast_pair,lalign_id_pair
+      
   $$: t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=sim_pam250mt
-
-  $$: t_coffee -aln sample_aln1.aln -lib test_lib.tc_lib -outfile=outaln
-
-  $$: t_coffee -aln=sample_aln1_1.aln,sample_aln1_2.aln -method= fast_pair,lalign_id_pair -outfile=out_aln
+      
+  $$: t_coffee -aln sample_aln1.aln -lib=test_lib.tc_lib 
 
 
 Generating your own libraries
 -----------------------------
-This is suitable if you have local alignments, or very detailed information about your potential residue pairs, or if you want to use a very specific weighting scheme. You will need to generate your own libraries using the format described in the last section. You may also want to precompute your libraries in order to save them for further use. For instance, in the following example, we generate the global (command 1) and the local (command 2) libraries and later reuse them for combination into a multiple alignment. Once these libraries have been computed, you can then combine them at your convenience in a single MSA (command 3). Of course you can decide to only use the local or the global library.
+This is suitable if you have local alignments, or very detailed information about your potential residue pairs, or if you want to use a very specific weighting scheme. You will need to generate your own libraries using the format described in the last section. You may also want to precompute your libraries in order to save them for further use. For instance, in the following example, we generate the local (command 1) and the global (command 2) libraries and later reuse them for combination into a multiple alignment. Once these libraries have been computed, you can then combine them at your convenience in a single MSA (command 3). Of course you can decide to only use the local or the global library.
 
 ::
 
   Command 1:
-  $$: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_lib -lib_only
+  $$: t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib \
+      -lib_only
 
   Command 2:
-  $$: t_coffee sample_seq1.fasta -method lalign_id_pair -out_lib lalign_id_pair_seq1.tc_lib -lib_only
+  $$: t_coffee sample_seq1.fasta -method slow_pair -out_lib slow_pair_seq1.tc_lib -lib_only
 
   Command 3:
   $$: t_coffee sample_seq1.fasta -lib lalign_id_pair_seq1.tc_lib, slow_pair_seq1.tc_lib
