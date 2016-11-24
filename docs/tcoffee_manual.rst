@@ -327,13 +327,9 @@ If you want to change the case of a specific residue, you can use the flag: **+e
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \
       +edit_residue hmgb_chite 10 lower
       
-<<<<<<< HEAD
-  ##: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \ 
-      +edit_residue <your file containing coordinates>
-=======
+
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \ 
       +edit_residue sample_seq1.list
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
 
@@ -434,13 +430,9 @@ It is possible for instance to selectively convert all given characters in a seq
 
 ::
 
-<<<<<<< HEAD
-  #$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \ 
-      -struc_in_f number_aln -action +convert '[1-2]' GX
-=======
   $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \ 
       -struc_in_f number_aln -action +convert '[5-9]' GX
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
  
 Extracting sequences according to a pattern
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -722,13 +714,8 @@ The file sample_rnaseq2.alifold contains the raw output of the alifold program p
       -input2 alifold -action +add_alifold -output stockholm_aln  
 
   Command 2:
-<<<<<<< HEAD
-  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +add_alifold \
-      -output stockholm_aln
-=======
   $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk \
       -action +add_alifold -output stockholm_aln
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 .. warning:: The alifold structure and the alignment MUST be compatible. The function makes no attempt to thread or align the structure, it merely stacks it below the MSA.
 
@@ -788,38 +775,23 @@ The seq_reformat is NOT a phylogeny package, yet over the time it has accumulate
 ::
 
   Command 1:
-<<<<<<< HEAD
-  $$:  t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree -output newick
-
-  Command 2:
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree _TMODE_upgma -output newick
-=======
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree -output newick \
       -out sample_seq1_tree_nj.nwk
 
   Command 2:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma  \
       -output newick -out sample_seq1_tree_upgma.nwk
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for instance), you can use a different matrix to compute the pairwise distances (command 3), and all these parameters can be concatenated (command 4):
 
 ::
 
-<<<<<<< HEAD
-  Command 3:
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree _MATRIX_sarmat -output newick
-
-  Command 4:
-  #$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
-=======
   Command 3: (under maintenance)
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _MATRIX_sarmat \
       -output newick
 
   Command 4: (under maintenance)
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
        -output newick
 
 .. warning:: Bootstrap facilities will also be added at some point...We recommend you to use `Phylip <http://evolution.genetics.washington.edu/phylip.html>`_ or any other specific phylogenetic software (PhyML, RAxML, MrBayes, etc...) if you need some serious phylogeny !
@@ -1025,11 +997,7 @@ T-Coffee aligner is by default parallelized, meaning that it can use multiple co
 ::
 
   Using a single core:
-<<<<<<< HEAD
-  $$: t_coffee -in sample_seq1.fasta -multi_core=no
-=======
   $$: t_coffee -in sample_seq1.fasta -multi_core=msa
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
   
   Using 12 cores:
   $$: t_coffee -in sample_seq1.fasta -n_core=12
@@ -1064,11 +1032,7 @@ If your sequences are spread across several datasets, you can give all the files
 
 ::
 
-<<<<<<< HEAD
-  $$: t_coffee -seq=proteases1_small.fasta, small.aln -output=clustalw,fasta_aln,msf
-=======
   $$: t_coffee -seq=proteases1_small.fasta,proteases2_small.aln -output=clustalw,fasta_aln,msf
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 
 You may also have a bunch of alignments (with the same sequences) that you have either precomputed, assembled manually or received from a colleague. You can also combine these alignments. For instance, let us imagine we generated 4 alignments with ClustalW using different gap penalties. To combine them into ONE single alignment, use the **-aln** flag. The final score indicates a high level of consistency (91%) between all these MSAs, meaning that the final MSA is probably correct.
@@ -1282,15 +1246,9 @@ PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest.
   Command 1: PSI-Coffee
   $$: t_coffee proteases_small.fasta -mode psicoffee
   
-<<<<<<< HEAD
-  Command 2: TM-Coffee
-  ##: t_coffee proteases_small.fasta -mode psicoffee -blast_server <LOCAL> -protein_db <database>
-      -template_file PSITM
-=======
   Command 2: TM-Coffee (add -protein_db to specify in which database to search)
   $$: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM
   
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 .. warning:: PSI/TM-Coffee requires BLAST and a database to search; if you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. More importantly, if you don't specify a reduced database for TM-Coffee, it will run on nr and be equal to PSI-Coffee.
 
@@ -1328,18 +1286,7 @@ Both Expresso (command 1) and 3D-Coffee (command 2) are modes of T-Coffee you ca
   $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file PDB
 
 
-<<<<<<< HEAD
-  Command 1: Default Expresso
-  $$: t_coffee three_pdb_two_seq.fasta -mode expresso
-  
-  Command 2: Running Expresso using a local BLAST/PDB 
-  ##: t_coffee three_pdb_two_seq.fasta -mode expresso -blast=LOCAL -pdb_db=<PDB> \
-      -pdb_type d -pdb_min_sim 95 -pdb_min cov 90 -cache $PWD 
-  
-  Command 3: Choosing your own templates and methods
-  ##: t_coffee three_pdb_two_seq.fasta -method mustang_pair,slow_pair -template_file \
-      <your template>
-=======
+
   Command 2: two ways of running 3D-Coffee
   $$: t_coffee three_pdb.fasta -mode 3dcoffee
   $$: t_coffee three_pdb.fasta -method sap_pair,slow_pair -template_file _SELF_P_
@@ -1357,7 +1304,6 @@ Both Expresso (command 1) and 3D-Coffee (command 2) are modes of T-Coffee you ca
 Template search paramaters 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. You can have an exhaustive list in the **T-Coffee Technical Documentation** (subsection **Template based T-Coffee modes**) yet the most important parameters for the template selection are the following:
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
  - **-pdb_type**    : the type of structure ("d" for diffraction/XRAY or "n" NMR structures)
  - **-pdb_min_cov** : the minimum coverage between query sequence and template (% between 0-100)
@@ -1430,15 +1376,10 @@ If you have your own predictions, you can use them to run T-Coffee providing you
 
 ::
 
-<<<<<<< HEAD
-  Command line:
-  ##: t_coffee sample_seq1.fasta -template_file <template_file> -method_evaluate_mode \
-      ssp -method lalign_id_pair slow_pair  
-=======
+
   Command line: (under maintenance...)
   $$: t_coffee sample_seq1.fasta -template_file sample_seq1_ssp.template -method_evaluate_mode \
       ssp -method lalign_id_pair
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
       
   Format of the template file:     
   >hmgl_wheat _E_ hmgl_wheat.ssp
@@ -1456,19 +1397,13 @@ You can output a color coded version of your alignment using the secondary predi
 
 ::
 
-<<<<<<< HEAD
-  Secondary structure prediction:
-  $$: t_coffee sample_aln1.fasta -template_file PSISSP -output sec_html
 
-  Transmembrane regions prediction:
-  $$: t_coffee sample_aln1.fasta -template_file PSITM -output tm_html
-=======
   Secondary structure prediction: (under maintenance...)
   $$: t_coffee sample_seq1.fasta -template_file PSISSP -output sec_html
 
   Transmembrane regions prediction: 
   $$: t_coffee sample_seq1.fasta -template_file PSITM -output tm_html
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
 
 
 Aligning RNA sequences 
@@ -1499,13 +1434,10 @@ There are two modes we proposed to improve R-Coffee alignments: 1) using the bes
 
 ::
 
-<<<<<<< HEAD
-  Using Consan (best):
-  #$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
-=======
+
   Using Consan (best): (under maintenance...)
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
   
   Using multiple methods:
   $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
@@ -1578,12 +1510,9 @@ The type declaration (or its automatic detection) triggers the use of the approp
 
 ::
 
-<<<<<<< HEAD
-  $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair@EP@MATRIX@idmat
-=======
+
   $$: t_coffee sample_dnaseq1.fasta -in Mcdna_fast_pair@EP@MATRIX@idmat
 
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 Pro-Coffee: Aligning functional DNA regions
 -------------------------------------------
@@ -1599,11 +1528,8 @@ Pro-Coffee is a MSA method specifically designed for promoter regions or other o
 
   Command 3: Extracting regions
   $$: t_coffee -other_pg seq_reformat -in c18orf19.aln -action +extract_block \
-<<<<<<< HEAD
-      ENSG00000177150 1852 1983 > c18orf19_chipseq.aln
-=======
+
       'ENSG00000177150' 1852 1983 > c18orf19_chipseq.aln
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 .. tip:: If you want more details, we suggest you follow the subsection **Quick Start, Tutorial (Practical Examples)** published in Nature Protocols (2011) or refer to the original article.
 
@@ -1713,12 +1639,9 @@ Note that all these output functions are also compatible with the default T-Coff
 ::
 
   Command 1:
-<<<<<<< HEAD
-  $$: t_coffee -seq sample_seq1.fasta -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
-=======
+
   $$: t_coffee -seq sample_seq1.fasta -output tcs_residue_filter3, tcs_column_filter3, \
       tcs_residue_lower4
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
   Command 2:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in sample_seq1.score_ascii \
@@ -1759,13 +1682,9 @@ It is possible to change the way TCS reliability is estimated. This can be done 
       aln, score_html
 
   Command 2:
-<<<<<<< HEAD
-  $$: t_coffee -infile prot.aln -evaluate -method proba_pair,lalign_id_pair -output score_ascii, \
-      aln, score_html
-=======
+
   $$: t_coffee -infile sample_seq1.aln -evaluate -method proba_pair,lalign_id_pair \
       -output score_ascii,aln, score_html
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
       
   Command 3:
   $$: t_coffee -infile sample_seq1.aln -evaluate -method mafft_msa,kalign_msa,muscle_msa \
@@ -1839,12 +1758,9 @@ Let us evaluate the alignment produced by Expresso using the template file it re
 ::
 
   Running the iRMSD:
-<<<<<<< HEAD
-  $$: t_coffee -other_pg irmsd sproteases_small.expresso -template_file \
-      sproteases_small.template_file
-=======
+
   $$: t_coffee -other_pg irmsd proteases_small.aln -template_file proteases_small.template
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
 
   Result of the iRMSD evaluation:
   TOTAL     EVALUATED :  50.17 %  
@@ -1913,30 +1829,7 @@ This section describes tree estimation procedure based on the comparison of intr
 
 Generating a tree based on structural distances
 -----------------------------------------------
-<<<<<<< HEAD
-This option makes it possible to estimate a tree while taking into account the variation of intra-molecular distances within the considered sequences. The following call will generate a 100 replicate nj trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored.
 
-::
-
-  #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 
-      +evaluate3D distances +tree2bs first -output newick -out tree.dnd
-  
-Input:
-
- - ``aln``: Multiple Sequence Alignment in FASTA, MSA or MSF
- - ``template``: FASTA name list with templates: >name _P_ template
-
-Output: 
-
- -  ``tree.dnd``: Tree in newick format with bootstrap support   
-
-It is possible to control default parameters using the following extended command line
-
-::
-
-  #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
-      gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick -out tree.dnd
-=======
 This option makes it possible to estimate a tree while taking into account the variation of intramolecular distances within the considered sequences. It requires in input an alignment (FASTA, MSF, ClustalW...) and a template file (structure files associated with the query sequences). The following command (command 1) will generate a 100 replicate NJ trees using the difference of distances between pairs of aligned residues, at a maximum cut-off of 15A. Columns with less than 50% residues are ignored. It is possible to control the defautl parameters (command 2). The ouput will be a tree in the Newick format with bootstrap supports.
 
 ::
@@ -1949,7 +1842,7 @@ This option makes it possible to estimate a tree while taking into account the v
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
       +tree replicates 100 gap 0.5 mode nj +evaluate3D distances 15 +tree2bs first -output newick
       
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
 
 .. warning:: Sequences without 3D structure will be excluded from the analysis and from the final output.
 
@@ -1961,14 +1854,7 @@ The following option (command 1) makes it possible to estimate a tree while taki
 :: 
 
   Command 1:
-<<<<<<< HEAD
-  #$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree \
-      replicates 100 +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
 
-  Command 2:
-  #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
-      gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
-=======
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
       +tree replicates 100 +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
 
@@ -1977,7 +1863,7 @@ The following option (command 1) makes it possible to estimate a tree while taki
       +tree replicates 100 gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output \
       newick -out tree.dnd
 
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
 
 .. warning:: The procedure requires at least 1 sequence with a known 3D structure or with contact information.
 
@@ -1994,14 +1880,9 @@ This same procedure can be used to visualize either intramolecular distance cons
       -action +evaluate3D distances -output score_ascii -out out.ascii
       
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-<<<<<<< HEAD
-      -action +evaluate3D distances -output score_raw
 
-Identification of positions 
----------------------------
-=======
       -action +evaluate3D distances -output score_raw -out out.tab
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
 
 Visualizing informative positions 
 ---------------------------------
@@ -2009,14 +1890,11 @@ If you have a well defined subgroup of sequences (domains having the same functi
 
 ::
 
-<<<<<<< HEAD
-  #$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates \
-      columns +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
-=======
+
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
       -action +tree replicates columns +evaluate3D  distances +evaluateTree group_3Dseq1.fasta \
       -output score_html -out out_aln.html
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
+
 
 Evaluating clustering capacities (under maintenance...)
 --------------------------------
@@ -2027,13 +1905,9 @@ If you want to check the capacity of an algorithm to bring related sequences wit
   Command 1: precomputed tree
   #$: t_coffee -other_pg seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
 
-<<<<<<< HEAD
-  Command 2: computed on the fly....
-  #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
-=======
+
   Command 2: computed on the fly
   $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
       +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
 The T-RMSD
