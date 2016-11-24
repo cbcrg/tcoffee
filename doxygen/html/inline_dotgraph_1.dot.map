@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="\ref fork_read_n_constraint_list" title="fork_read_n_constraint_list()" alt="" coords="27,65,229,114"/>
-<area shape="rect" id="node7" href="\ref read_constraint_list" title="read_constraint_list()" alt="" coords="613,65,768,114"/>
-<area shape="rect" id="node10" href="\ref undump_constraint_list" title="undump_constraint_list()" alt="" coords="411,65,589,114"/>
-<area shape="rect" id="graph2" href="\ref read_n_constraint_list" title="read_n_constraint_list()" alt="" coords="16,16,389,221"/>
-<area shape="rect" id="graph3" href="\ref fork_read_n_constraint_list" title="fork_read_n_constraint_list()" alt="" coords="400,16,779,221"/>
-<area shape="rect" id="graph5" href="\ref name_of_cluster" alt="" coords="789,55,955,124"/>
-</map>

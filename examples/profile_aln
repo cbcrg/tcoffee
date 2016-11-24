@@ -1,0 +1,52 @@
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=729, Nseq=10, Len=184 
+
+hmgb_chite      ---adkpkrplsa-------------------------------------
+hmgt_mouse      -----kpkrprsa-------------------------------------
+hmgl_wheat      --dpnkpkrapsa-------------------------------------
+hmgl_trybr      kkdsnapkramts-------------------------------------
+1cms            --GEVASVPLTNYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCK
+4pep            ----IGDEPLENYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCS
+4ape            -STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETT
+3app            AASGVATNTPTAN-DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTELP
+2apr            AGVGTVPMTDYGN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCT
+1cms_1          -----------------YTGSLHWVPVTVQQYWQFTVDS---VTISGVVV
+                                                                  
+
+hmgb_chite      ------------------ym------------------------------
+hmgt_mouse      ------------------yn------------------------------
+hmgl_wheat      ------------------ff------------------------------
+hmgl_trybr      ------------------fm------------------------------
+1cms            SNACKNHQRFDPR-KSSTFQNLGKPLSIHYGTG-SMQGILGYDTVTVSNI
+4pep            SLACSDHNQFNPD-DSSTFEATSQELSITYGTG-SMTGILGYDTVQVGGI
+4ape            ASEVDGQTIYTPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGL
+3app            ASQQSGHSVYNP--SATGKELSGYTWSISYGDGSSASGNVFTDSVTVGGV
+2apr            NCG-SGQTKYDPN-QSSTYQADGRTWSISYGDGSSASGILAKDNVNLGGL
+1cms_1          ACEGGCQAILDTG-TSKLVGPSSDILNIQQAIG-ATQNQYGEFDIDCDNL
+                                                                  
+
+hmgb_chite      lwlnsaresikrenpdfk-vtevakkggelwrglkd--kseweakaatak
+hmgt_mouse      iyvsesfqeakddsaqgk-----lklvneawknlspeekqayiqlakddr
+hmgl_wheat      vfmgefreefkqknpknksvaavgkaagerwkslsesekapyvakanklk
+hmgl_trybr      ffssdfrskhs-----dlsivemskaagaawkelgpeerkvyeemaekdk
+1cms            VDIQQTVGLSTQEPGDVFTYAEFDGILGMAYPSLASEY---SIPVFDNMM
+4pep            SDTNQIFGLSETEPGSFLYYAPFDGILGLAYPSISASG---ATPVFDNLW
+4ape            TVTGQAVESAKKVSSSFTEDSTIDGLLGLAFSTLNTVSPTQQKTFFDNAK
+3app            TAHGQAVQAAQQISAQFQQDTNNDGLLGLAFSSINTVQPQSQTTFFDTVK
+2apr            LIKGQTIELAKREAASFASGPN-DGLLGLGFDTITTVR--GVKTPMDNLI
+1cms_1          SYMPTVVFEINGKMYPLTPSAYTSQDQGFCTSGFQSEN------HSQKWI
+                                           .     :                
+
+hmgb_chite      qn-------yiralqeyerngg------------
+hmgt_mouse      ir-------ydnemksweeqmae-----------
+hmgl_wheat      ge-------ynkaiaaynkgesa-----------
+hmgl_trybr      er-------ykrem--------------------
+1cms            NRHLVAQDLFSVYMDRNGQE--SMLTLGAIDPSY
+4pep            DQGLVSQDLFSVYLSSNDDSG-SVVLLGGIDSSY
+4ape            AS--LDSPVFTADLGYHAPG---TYNFGFIDTTA
+3app            SS--LAQPLFAVALKHQQPG---VYDFGFIDSSK
+2apr            SQGLISRPIFGVYLGKAKNGGGGEYIFGGYDSTK
+1cms_1          LGDVFIREYYSVFDRANNLVG----LAKAI----
+                         :                        
+
+
+

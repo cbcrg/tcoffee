@@ -1,0 +1,631 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -other_pg seq_reformat -in c18orf19.aln -action +extract_block ENSG00000177150 1852 1983 > c18orf19_chipseq.aln</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+CLUSTAL W (1.83) multiple sequence alignment
+
+ENSG00000177150     GTCACACTCACCAGCACAGCCAAACGCGATTCTGTTTGCGGAAACGGCGG
+ENSMUSG00000038121  GCCACACTCACCCACACAGTCATCCACGATTCTGTTTGCGGAAACGCCGG
+ENSCAFG00000000173  CCTTCAATCACCGTTCTTCAAA----------------------------
+ENSBTAG00000009141  CCCCACACTTACCTACCAGCCATCCGCGACTCTGTTTGCGGAAGCGGCG-
+ENSGALG00000013887  GCTACTCAC-CCAGCACAGCCCTCCGCCATCCTGTTTGCGGAAGTGACGC
+                        . .   .*   . :  ..                            
+
+ENSG00000177150     CCCGCGCCACGCGTGTCTGCTTACGTCACTTCCGGAGGTGCGAGAGTCAC
+ENSMUSG00000038121  CCGGAGCCACGCGTGCCTTGTTACGTCACTTCCGGGGAGTGCGCCCGGGA
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  -CCACGCCACGCGCGCGCTATGACGCCACTTCCGGAGAG-CGCGGGTCGC
+ENSGALG00000013887  CTCTACCGCGGAG---------ACGTCACATCCGGGGGGGCGAAGACGAC
+                                                                      
+
+ENSG00000177150     GTGGAGACGGTCAGGCGAGAGTGCCGCGACG
+ENSMUSG00000038121  C------------------------------
+ENSCAFG00000000173  -------------------------------
+ENSBTAG00000009141  TTGGCCCGGAATCCCGAGTCCCGGCGTGCCG
+ENSGALG00000013887  ACTGCGCACGCGCGCGGTAGGAACTCGGACT
+                                                   
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>c18orf19.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: procoffee ], CPU=0.02 sec, SCORE=499, Nseq=5, Len=3596 
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  CCATCAAGGCCTCTCAGCTGCTGCAACCACAAGTAGAAAACTACAGTAAC
+                                                                      
+
+ENSG00000177150     ------------------------------------------------AG
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  ATCCCGATTGTTGGCAGCTGCTTTCTGTGTAATCACTTATCTACACCCTT
+                                                                      
+
+ENSG00000177150     GTGGAGGTGGGCAGATCACTTGAGGTCAGGAG------------------
+ENSMUSG00000038121  -------------GAATTTTATTCATGGTCTA------------------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  AGGCTACACAAGAGCAATGTATTATTTGTCCATCTAAACCTGATCCCAAA
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  TGAACTCCATTAAAAAGATGAAAGGGTGCTTCTACCACAACAAAGGGTAT
+                                                                      
+
+ENSG00000177150     TTCTAGACCAGCCTGGCCAACATAGTGAAACCCCGTCTCTACCAAAAACA
+ENSMUSG00000038121  TACTTTCACAGATTGGCTGTCATA---AAATGCATTCAATACCATAAA--
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  ---------------------------------------------TAG--
+ENSGALG00000013887  TACTTTCCCAGACTGCTTAAATTA---AAATGTAGTAAAAATTACAAA--
+                                                                      
+
+ENSG00000177150     CAAAAATCAGCCGGGCATGGTGATGTGCGCCTGTAATCCCAGC-------
+ENSMUSG00000038121  ----------------ATGATTAAGAATGTCTAGAATCCAATG-------
+ENSCAFG00000000173  --------------------------------ACTTGCCTAGA-------
+ENSBTAG00000009141  ----------------GTCCTTACTGTTTCTGTCCTTTATTGC-------
+ENSGALG00000013887  ----------------CAGAGAAACAAAGCATTAGGTTGAAAAGATTTTA
+                                                                      
+
+ENSG00000177150     -----------------TACTCGGGAGGCTGAGGCATGAGAATCGCTTGA
+ENSMUSG00000038121  -----------------TCACATGGCTCCATGATGGAGCCCTTTACCTGA
+ENSCAFG00000000173  -----------------TTTTATTGTTCCTGAAGCCTGTTCGTTCCAGAG
+ENSBTAG00000009141  -----------------GCCCATCTTTCCATGAAGTGTTCCCTTGGAATC
+ENSGALG00000013887  AAGTTGCATTTAAATATTTCCAGGGGTTAAAATTAGACCAGATGAGAAAA
+                                                              *       
+
+ENSG00000177150     ACCC---------------------------GGGAGGTGGAGGTTGCAGT
+ENSMUSG00000038121  TACACAGGGATGCAATGGCTCTCACCTCAAGGGGAATAGGAGATAGTTTA
+ENSCAFG00000000173  TACGTACGCTAGTACTCCGTCTGTACTTGCCATCTACTTTTACTTGTATT
+ENSBTAG00000009141  TCTAATTTCCTTGAAGAGATCTCTAGTC--------TTTCCTATTCTATT
+ENSGALG00000013887  CAGCATTATTTTCTACAAACCCGTACACAATAAGAGACAGACTTATATAA
+                                                               *      
+
+ENSG00000177150     GAGCTGAGATCAAGCCACTGCACTCCGGCCTGGGCGACAGAGCAAGGCTC
+ENSMUSG00000038121  TTCTCGAGCCAAATTTCGTGACAATGACTAAGGGACTCAGATTCAGGTTA
+ENSCAFG00000000173  CGTCTGAAACAGGTTTGTTCCTTGAAATCCTAGGAGTCTTACTGTATGTA
+ENSBTAG00000009141  GTCTTCCTCTATTTCTTTGTTCACTTACGAAGGTTTTCTTATCTCTCCTT
+ENSGALG00000013887  AAGACTGCTTCTCCTTTTCACCCTTCAGTCAGGAAGGCAAATATTTTCTG
+                                                    *    *  *       * 
+
+ENSG00000177150     CGTCACACACACACACACACACACACACAAAAAAAAAAAAAAAAAAAAAA
+ENSMUSG00000038121  CTAAAATTCCATGTTCTAACACAGTAACCATTCCAGTAAGTTATATAGTT
+ENSCAFG00000000173  TATGTCATCAATATTGTGATTACCTTTGCAAGTCTGTAGAGTT--GCATT
+ENSBTAG00000009141  AGTAT------TGTTTGGACACTGTATTCAGTTAAGTACATCTTTCCTTT
+ENSGALG00000013887  CTGCTCCTACATAGTCTAAAGCAGAAAG----GGGACAAACACAAAAGAA
+                                      *                  *            
+
+ENSG00000177150     AAAAAAAAAGATGCTGATGAGGATGCAGGATGCAGAAAAGGGGGAACACT
+ENSMUSG00000038121  GCAGAAGAAA----------------------------------------
+ENSCAFG00000000173  GT------------------------------------CACTAGCCATTG
+ENSBTAG00000009141  TC------------------------------------------------
+ENSGALG00000013887  ACAAGAGAAA----------------------------------------
+                                                                      
+
+ENSG00000177150     TGTACACTGTTAGG-------GAGAACGTAAATTAGCACAGCCACTAA--
+ENSMUSG00000038121  ---------------------GAAGTCATAAATCCAGACACTTCTCAA--
+ENSCAFG00000000173  CCCGTATGTTGTCATTTGAATTAATTCTAATTTTCATTTGTAATTTAA--
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  ---------------------GCATCTCCAAACCTTTCGGTTTGTTAACA
+                                                                      
+
+ENSG00000177150     ----TTTACATACTGGGAAAAGTATGATGGAGGTTCTTCAAAAAACAA--
+ENSMUSG00000038121  ----ATACATTGGTGGAAGCATCAGGTAGGTGGGTCACAGAAAGGCAA--
+ENSCAFG00000000173  ----AGTTAATTTTA-------------------------------AG--
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  AACCATACTGAAGAGGATGCACTTCCTAGAGTTTTCTAAGTTTTACAATA
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  TTTTATTCAGGAAGTGAAAGGACAAATTATCTTAGGGACGAACCTCTCAC
+                                                                      
+
+ENSG00000177150     -------------------------AAAAT-----------------AGA
+ENSMUSG00000038121  -------------------------GCAAATCTCAGCTACAGGAACCAGA
+ENSCAFG00000000173  -------------------------TTAAAAGTTAATTTAATGGGCCTTA
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  GCACAGATAACTAGAATAACATACAGAATAACTCAGCATACAAAACACAC
+                                                                      
+
+ENSG00000177150     ACTAGTGCTATTGAGATGAGTTTCTTCTATATTCTGGTTGTTAATCCCCT
+ENSMUSG00000038121  TGCTATCTGACAGAATCCTTTACCTTTTATTAGTTGGTCAGAACCAGGGA
+ENSCAFG00000000173  TTTTCCTTGAGGCG---------CTTTTATCCTGTGTCTTACATATGGAA
+ENSBTAG00000009141  ---------------TCCTTTGCTTTTCGCTTCTCTTCTTTTTTCAGCTA
+ENSGALG00000013887  TGACTTCTACTGACCCTCTTTCTCTTCTTTAAGTCCAGCATAACTTCTGC
+                                            **                        
+
+ENSG00000177150     GTCCGATGAACAGTTTTGCAAATCTGGGTACAGATCCAAAAGAAGGGAAA
+ENSMUSG00000038121  TCTGTTTGTACATTCTAAAGGATTTACCTAATGGTCACACAAATGTCAGG
+ENSCAFG00000000173  GCCATTTGCTGGACCTAGAGAAATGACCTCCAAATTCATATTGTCAGATG
+ENSBTAG00000009141  TTTGTAAGGCCTCTGTTTAGTCTCTTTCAAATGTTCTCA--GGCTTCAGA
+ENSGALG00000013887  ACCCACTATAC-----------------------TGCAACAAAGCTACCC
+                                                      *               
+
+ENSG00000177150     TCAGTATATCTAAGAAATATCTGCA-----GTCTCAAGTTTATTCACA--
+ENSMUSG00000038121  TCACGTAAAGAGCAAAATAAATGACAAGGGGACTAAAGATGGACCAAG--
+ENSCAFG00000000173  TGACCTGTCTATAGGAGATTATGATTTATTAGGTCTGGATGGAGACCAGG
+ENSBTAG00000009141  TGAAATGGGAGGGTAAAAAAATAAATGGACAAGAATTTATTAAGCCAC--
+ENSGALG00000013887  ACAAGTTCACACTGACATTCTGTTAAAATGAACAATACTCACCGGAAC--
+                      *                                               
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  AATCAGGTTTTTCAAACCATCTCTTCTTTGTCTCAACATCCCCAACCTGC
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  CATGATTCTGATGCATAGCCAGTTTTGGAAACCACTAGCCCAGAGATTGG
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  TTTCTAGGAGAACAAAGAAGTCAAAGTAAAAGTACTTAAGTAATTAAGGA
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  CTTTTTCTTTTTTTTTAAGATTTTATTTACTTATTCATGAGAGACACAGA
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  GAGGCAGAGACACAGGCAGAGGGAGAAGCGGGCTCCATGCAGGGAGCCCG
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  ACGTGGGACTCAATCCCAGGTCTCCAGGATCACACCCTGGGCTGAAAGCA
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  GTGCTAAACCACTGGGCCACCCTGACTGCCCAGTAATTAAGGACTTAATA
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     ----------------ATAGTCAAGATATGGAATCAA-------------
+ENSMUSG00000038121  ----------------ATAATCAGAATCTGGACTTGCAACACTCCACCTT
+ENSCAFG00000000173  ATTTTTCTCTATGGCTTTTCTTTGTTGTTTAATATTTAAGTCAT------
+ENSBTAG00000009141  ----------------TCAACAAGTTCAGTGAAGTACTACAGAGAAGCTC
+ENSGALG00000013887  ----------------TTTCTTAGGAGGTTCATCTTCAACATCTGCTATA
+                                                   *                  
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  A---------------------TCCAAATCACTCAAGT------------
+ENSCAFG00000000173  ------------------------TAATTGAAGCACCTGTTACCATCTCT
+ENSBTAG00000009141  AATAAGGGACTGTATGAATTAGTCCTCAAGAAGTTGAT------------
+ENSGALG00000013887  T---------------------TCCTTTTCAGGCCACTGCCCTGATCACC
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  GTGGGTATTATTTTATTTTATTTTAGTTTTTTTGGTTGTTAACTGGTCTG
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  ACTAGCAAGCTTTTTCTCATTTTCAGTGGAGTGCGCTGTACCTGAAGTTG
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  -----------TCCAAAGACCACCAAGATTCTAAAAATCAATCAATAGCT
+ENSCAFG00000000173  AACCTTCAGATTGTTACTTGTCACCGACTACTTTTCATT--------GCA
+ENSBTAG00000009141  -----------TCCCCCCCACCCCAGGCTTCTTTTTTTTTTCCGCAGGGA
+ENSGALG00000013887  AGCTATTGCCTTCCAAATTGACACCTGAATCTGTCTCTGAAGCATGAGAC
+                                                                      
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  CTGGGGTCCCAGCTTCCTTCCAGGAATTCTTGTTCACAAGGGCACACTCT
+ENSCAFG00000000173  GCAATCTCCAGTATCATCTTTAAAGTTTC-----------------CTGG
+ENSBTAG00000009141  GTGGGGGCTACTCTCTAGTTGTGGTATACCCGCTTCTCATTGCAGTGGCT
+ENSGALG00000013887  GTTCTCTCCACTTCTTCATCCAAACTCTT-----------------CTCT
+                                                                      
+
+ENSG00000177150     ----------------CCTAAGCGT-----------TCATCAACAGAT--
+ENSMUSG00000038121  AGCTCTGAGTTTGATCCCTAGCTTC-----------GCATCAACACCT--
+ENSCAFG00000000173  GAGCCTATTTTTTGCAAGATGTGTA-----------GTTTC---------
+ENSBTAG00000009141  TCTCTTGTTGTGGAGCATAGGCTTCAGGGTGCCCAGGCTTCAGTAGCTGA
+ENSGALG00000013887  ACTTCCTTTTCTTCAGTCTTGGTTA-----------AGTCAGCCATTT--
+                                                                      
+
+ENSG00000177150     -----------------------------------------GAATAAAGA
+ENSMUSG00000038121  -----------------------------------------ACAATAATA
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  GGCACATGGGCTCAGTAGTTATGGTTCCCTGGCTCCAGAGTACAGTCTCA
+ENSGALG00000013887  -----------------------------------------TTGACAGGT
+                                                                      
+
+ENSG00000177150     TAAT-----------GTAGCATATATACACAATGGAATATTAGTC-----
+ENSMUSG00000038121  AAACTATCAGCAATGGTATTGAAAATACTTAAAGAGAGATGAGTT-----
+ENSCAFG00000000173  -ATT-----------TTATGATTTATGTGCATTGTGCTATTGGATTATCT
+ENSBTAG00000009141  AAAGTTGTGGCACAGGAGCTTAGCCACTTCATGGCATGATGGAT------
+ENSGALG00000013887  TAAACTCCCTACCTGTTGATCAAAATAAAAAACTACAGAGAAAAA-----
+                     *                            *       *           
+
+ENSG00000177150     --------------------------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  GTGAGAGCCTGATAAGAACTGATGTTAACTATTAATTAGGGAGGGGTGAG
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     -------ATTAAAAAGAATGAAATCCTGTCATTTGCAACAACATGGATGA
+ENSMUSG00000038121  -------GATGGAACAATGCAGAAGGAAATTTATGGTAATAAGTAGAGTG
+ENSCAFG00000000173  TCAGGGAATTAATATCATATAGGGACAGTTCATTAAATGGACATTTTTGT
+ENSBTAG00000009141  -----------------------------------------ATTCCCAGA
+ENSGALG00000013887  -------AGATCTACTGTTAGCACTGAATTTAACACTCTCCCGAT-----
+                                                                      
+
+ENSG00000177150     AACCGGATGTCATTATGTTAACTGAAATAAGCCAGGCACATG--------
+ENSMUSG00000038121  ACAGGGAGTTCGTTGTTTGTACCTGCAATCACACTGTAACTT--------
+ENSCAFG00000000173  GTAATGATAGACAACTTTGTACTCCCAGTCAACAAATATTCA--------
+ENSBTAG00000009141  TCAGGGATGGAACTCATGTCTCCTGCGTTGGCAAGCGAATTCTTTACCAC
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     ------------AAGACAATATCATGTTGTTACTCATGTGGGAGCTAA--
+ENSMUSG00000038121  ------------GACTCACAGTAATCAAGATATTCTAAAGGGATACCC--
+ENSCAFG00000000173  ------------TGTAAAATAGAGTATTTGTATTTATTGGATTGCTAA--
+ENSBTAG00000009141  TGAGCCACCAGGGAAGGCCAGTCTTCAAGAAGTTTACAACTGATACACGA
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     ----AAATGTGGACCTGATGGAGGTAAAGAGTGGATTGGTGGTTACCAC-
+ENSMUSG00000038121  ----AAATCT----CTTGAGCTGTTAAATTGTTGAAACAATGAACACCA-
+ENSCAFG00000000173  ----TTCGTTGGAGTGCTAACTCATATTGATTCTTATTTAGTATACAGTT
+ENSBTAG00000009141  CTTAAAATGT----TGGGCTGTATTATTCAAACCAGAGAAGAAAAAGCA-
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     ---------------------------------AGACTGGGAAGGGTAGC
+ENSMUSG00000038121  ---------------------------------AAATAAGGGAAGTAGAG
+ENSCAFG00000000173  TAAAAAAATGAAATCATCTATTCACAATATAGTAGAAGTAGTAAGGTAAC
+ENSBTAG00000009141  ---------------------------------AAAGTCGGAAAATTAGT
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     AGGAAGAGGAGCGGGATGAAGAAGAGAAATTGGTTAATGGGTACAAAAAA
+ENSMUSG00000038121  TGGGAGGGGAGAGGGAGAGGGAGGGAA----GGAGAGAAGGAAGTGGGGG
+ENSCAFG00000000173  TGGTGTAGGGTGGGGATAGAGAATGGTATTCAGGTGGTGCTGCCTGATAC
+ENSBTAG00000009141  GAGATTCCGCAAATTCAGAACCTGAAA----GTTACGAAGTGTTCCAACA
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     CCCCAGAAGAAATAAAATCTAGTGCCTGATAG------------------
+ENSMUSG00000038121  GAGAGGAAAAAATGAATATTCCCCTAGGAACT------------------
+ENSCAFG00000000173  TGAGAGAA------------------------------------------
+ENSBTAG00000009141  GAATAAGAAATAAATTTGTTTAATGGAATGGGTAAAAACAAGAGACTCTA
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     --TACAGTGGGGTGGACA-----------CAGTTAACAATAACTTATTGT
+ENSMUSG00000038121  --TTATGCTGAGAGACGG-----------GAAAGGAGCAAGCCAAAAGGC
+ENSCAFG00000000173  ------------TGGAAT-----------TGATTTGCCATATAGTAATGC
+ENSBTAG00000009141  AATCAGGAAGGGTTTCAAGGGCTATTAACTTTCATTGTCCAAGGTTTGAG
+ENSGALG00000013887  --TACACGAATGATCTTC-----------CATCATACTACTACCATTATA
+                                                                      
+
+ENSG00000177150     GTAGTTCAAAATAGCTAAAAGAAAAATTGGAATGTTCCC-AACATAAAGA
+ENSMUSG00000038121  GTAGTGAGACCACCTTACAAGAAACAACGGAAGCCCAGG-CAAAGACGGG
+ENSCAFG00000000173  ATACTATAATTCTGTTTTATTAGTGGGGAAACCTATGTC-TAGAGAAGCT
+ENSBTAG00000009141  GTAACAAGATATTAGTAAGTGACAAAACAAGAATTGAATCAAAGAGGAAA
+ENSGALG00000013887  AAACTAACACATGCCTTTGTCACAAACAACGCGCAGCGC-AGACTTCAGA
+                      *     *      *     *                            
+
+ENSG00000177150     TAAATGTTTGAGATGACAAATATCCCAATTGCCCTGATTTAGTCGTTACA
+ENSMUSG00000038121  TAATTGAAGGCAGGACCACA-----CTTTGGCCAGGTTGCATTCTTCTTG
+ENSCAFG00000000173  AGGTAATTTGCTCAAAATAATCCCACTGTTAGCTTAGTTGGGTCTGTCTT
+ENSBTAG00000009141  AAAATTACCCAGAAACGTAATTTTCTAAATAACTGTTTAAAATGATTA--
+ENSGALG00000013887  TTTGCATAGCTGTAATAAAATACATGGAATTTCAAAGTACTCTCATTACA
+                                       *            *    *    *       
+
+ENSG00000177150     CATTGTATGCATGTATCAAAGTATCACC----------------------
+ENSMUSG00000038121  CCTTCTAGTTAAACCTCACCCTCATTTC----------------------
+ENSCAFG00000000173  ATTCCAAAGACTATATT----------------C----------------
+ENSBTAG00000009141  ----T---------------------------------------------
+ENSGALG00000013887  GTAAGAACAAACGTAGGTAAAGCTTTATCCTTCACGCATGAGTCTTCCAC
+                                                                      
+
+ENSG00000177150     --------------TGCACCTGCAAATATG--------------------
+ENSMUSG00000038121  --------------AAGACCCACAAAGATGGAAGGGTTACTGGATGGCTA
+ENSCAFG00000000173  --------------------TTTTAAAATT--------------------
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  AGTTATCTTTCTTGATTAACCTGCAAACTTCCA----------TTGGGTT
+                                                                      
+
+ENSG00000177150     TGCAACTTCTATGTATCAATTTAACAAATTGGGGGAAAAAAAACCCAAAC
+ENSMUSG00000038121  TGTCTGCACCACCTCCCAATTTCACATAG---------------------
+ENSCAFG00000000173  AAATTATACTGTCTTACATTATCTAAAAAAAAA----CAAAAAACAAAAC
+ENSBTAG00000009141  --------CTAGTAATCATTTTCCTAATAAGG----AAATAAAACTGGCT
+ENSGALG00000013887  TGAGACCATAACCACCCTCTTCCCTCCAG---------------------
+                                    *  *                              
+
+ENSG00000177150     CAAACTCAAAGTGGAATAATGAAAACACTCCATAGGGAAGAGAGCTGTCC
+ENSMUSG00000038121  ---------------------------------AGTGAAATCTCCTTTTC
+ENSCAFG00000000173  AAAACAAAAACAAA-------------------AAACAAAAAAA------
+ENSBTAG00000009141  TTAATTTCAAATAA-------------------AACGATGTAACTTTTCC
+ENSGALG00000013887  ---------------------------------AACCTAACCTACA----
+                                                     *                
+
+ENSG00000177150     CTCAGAATCTTCAAGAAACCTTCGAAAGGTGGTCGACTGACATGGAGATG
+ENSMUSG00000038121  CTGCTTTTCATTATGAATTCGTCTCTTTTTACTGGCTGACTGGGGTGGCG
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  CTGGCTATAATTAATTCTCTCTGGAAATGTAGTATCT-------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     GACACGCGATAAAT-----AACCACACGAACATTTCGACCCGGCTTTCCA
+ENSMUSG00000038121  GAAGTGTGCTTGATGGGGTAAGCACAGGCCAGGACCGCTCCATAAGTTCA
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  -------------------------------------------AAACTCA
+ENSGALG00000013887  --------------------------------AGCCACTTTATATTTAGA
+                                                                      
+
+ENSG00000177150     GTCACACCTCCGAAGCAAGCTATGTCTCTGCGTCATTTCAGCTCCTCAGG
+ENSMUSG00000038121  GTAGCGACTCAAGTAAATCATTTTTCCTGCTCATCTCTGTTTGTGGCTGC
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  CTATTGAGAATAAAAGTTAATTTATATTTATCTGTGACATTTCCACCAAC
+ENSGALG00000013887  AACACAAACCAACGGAATGCTTCAAATTAGTGAGCTTACCTTTTAACGTC
+                                                                      
+
+ENSG00000177150     GTA-------------------------------------------CGAG
+ENSMUSG00000038121  TAG-------------------------------------------CTCA
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  GAAACGTTCCACAGACAATTCGATCAGAATAAGCGACACAGATTTCCAAA
+ENSGALG00000013887  ACG-----------------------------------------------
+                                                                      
+
+ENSG00000177150     CGAGCAGGCCGCCAGGGCCGCCGGGATAAAGCCCAAGCGGGATAAGCTCT
+ENSMUSG00000038121  TGGTCAGGC-----------------------------------------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  CGACCCAACAGATGGATAAGACTGTGAGAGTCCAAGCTGAGTAATGAGTT
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     AAGTCCCGACCCGCCCGCTTGACCCTC-----TACCACGGGGCCCGAGAG
+ENSMUSG00000038121  ATGATCTCACGGACCACCTTGACTGTC-----TACAGCGGGGTGCAAGCC
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  AGGTCCCGACACAAAAGGTTTGCCTCTCGGGAACCCTCAGGGAAGGACTG
+ENSGALG00000013887  ------TCATTTCCATCAAACACAGAA-----AACAGGATGTTTTATAGA
+                                                                      
+
+ENSG00000177150     GACGC-ACAGAGGCGAGAAGGGACTTCTCCAGCCAAGTTCAC--------
+ENSMUSG00000038121  AATGAAACGGAAAGGGGAAAGCATCTCTCCGACTAAGTTCAT--------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  AGTCG-ACAGGTACAAGAAGGCGCATAAACGACCAAACTTGCCTCTCGGT
+ENSGALG00000013887  AAGGAATTTTCAACGTCAATGATGGGTTCTGAACTTTGCCAA--------
+                                                                      
+
+ENSG00000177150     ----------CCCCTCCG-TCATTAGCGCGGCCTGTTACTCAACCTCTGG
+ENSMUSG00000038121  ----------CGGTTCCCATCCCGGGCCCAGCCTTTTGCCCAACCTTTGG
+ENSCAFG00000000173  ---------------------------------------CAAACCTTTTA
+ENSBTAG00000009141  GATCTGCGCAGCAGTCACACCCGAGGTTCAGGTGTGAGCCCTCCACCGGG
+ENSGALG00000013887  ----------GAGTACCCACGATGTCTCCACTAACACCAGGAGCCCTCAG
+                                                               *      
+
+ENSG00000177150     TTC-------AGGTTTCCGAAGCG--------------------------
+ENSMUSG00000038121  GTC-------AGGGTCCTACGGCA--------------------------
+ENSCAFG00000000173  GTT-------ACCTGGAAAAGTCT--------------------------
+ENSBTAG00000009141  CTG-------AGGGCTGGAGCTCAAGCAGGTGAGCGCTACGCCGGACCCA
+ENSGALG00000013887  CTGCGTCTATACTCTCCTAACCCC--------------------------
+                     *        *           *                           
+
+ENSG00000177150     ----------------------CCGCTGAAGACAAACCTGCGGACCCCAC
+ENSMUSG00000038121  ----------------------GTGCCCCAGACAGAACAAACCCTCTCTG
+ENSCAFG00000000173  ----------------------CTCTACTTACCAACCAAAAACATATGTG
+ENSBTAG00000009141  CAGGTGGGCCGATGGTGTCCTCGGACTCGAGGACGCACCGAGCCGCCCCA
+ENSGALG00000013887  ----------------------ACGTGCAGTGCAGCACATCGCTGCCACA
+                                                                      
+
+ENSG00000177150     GCCCCT-----------------------CCCCAGCACGG----------
+ENSMUSG00000038121  GCTCCCAACATGTC----TCCGGCCCATCCCTCATCACAG----------
+ENSCAFG00000000173  ATTTATAATTTTAT----ATAGTTTAGT----------------------
+ENSBTAG00000009141  GCACCGCACGGCTCAGGTTCCGGCCCACCACGCAGGGCAG----------
+ENSGALG00000013887  GGGCTCACCGAGGC----TCCAGCCCTCCCCACAGCACCCTTAGCAAGCA
+                                                                      
+
+ENSG00000177150     ----CCCTGGGGCG---------------CGAGCTGGAGCAGCTCTTCGA
+ENSMUSG00000038121  ----CCCTTCGGCC---------------CTAGCAGAAAGAAGCAC---A
+ENSCAFG00000000173  ------CAAAAGGC---------------ATTGTAGAAAAAAAAAT---G
+ENSBTAG00000009141  ----GCGGCCGGCCGCTCCGGTAGACGGCCGGGCCTGAAGCGGCTC---T
+ENSGALG00000013887  GGGCCCATGCTCCC---------------CAACCAGGCAGCTGTAG---A
+                                                                      
+
+ENSG00000177150     GCTGCTTCTCCCACCCGGGCTCGCCCAGTCTGGAGGAGGAACAGCGCCCG
+ENSMUSG00000038121  GGATCTTGTCCTCCCTGGGCTACTGTGGTCTGGAGGAGCAACAGCACCCA
+ENSCAFG00000000173  GTACTTTGT---------------------------ATCAACTACTTATC
+ENSBTAG00000009141  CGGACCTCTCGAACCCGGGCTGGGTCCAAGCAGAGGGGCGTCAGCAGCCG
+ENSGALG00000013887  AGCTACTTGCGCAGCGGCGCGGCTCCCGACTGACCGCCAGGCC-------
+                          *                                  *        
+
+ENSG00000177150     CCC----ACCCCAAGGAGTTCCCATTTTCCTTGGGACTGAGGACACAAGG
+ENSMUSG00000038121  CCGTCTCAAGACAAGCAGTATCCACACTGCTTCCGGCTATGGGCACAA--
+ENSCAFG00000000173  AGACTTTAACAGTTGTATTAATAACTTATTTGATGCTTATTTAAATGA--
+ENSBTAG00000009141  CCGAAGTGGCACAGCCAGTGGTTGGAATGCCCCTTCC-------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     CAATAGACCCACGCG-----------------------------------
+ENSMUSG00000038121  -TAAATCCCACCAAG-----------------------------------
+ENSCAFG00000000173  -TATATTTTAGTAAGATTTTTAAATCGTAGTATGTTCAGACTATATACCT
+ENSBTAG00000009141  --------------------------------------------------
+ENSGALG00000013887  --------------------------------------------------
+                                                                      
+
+ENSG00000177150     ---------------------------TTGGGTAGTGAAGCACAGGGCTA
+ENSMUSG00000038121  ---------------------------CAAGGACCGGAGGCAGGAGGCTA
+ENSCAFG00000000173  TAACATTAATTTCTGTGGATTTGGTAGCAATGTCTGTCTGTTACTTCCTA
+ENSBTAG00000009141  -------------------------------------ACGCCGGCGGCCA
+ENSGALG00000013887  ---------------------------CAGGGCCCAACGGCCGCCTGTCT
+                                                           *          
+
+ENSG00000177150     ATGCGAAGTGAGCCCATGTCAGGGGTGGGAGTGCCAG----TTCCACCCC
+ENSMUSG00000038121  ACGAGTAACGATCCCAGCCAGGAGTCCCGGCGTTCAGGCTATCTCTGCTC
+ENSCAFG00000000173  ATGGTTAATGAT---------------------------------TTATT
+ENSBTAG00000009141  CCGCTACACA----------------------------------------
+ENSGALG00000013887  CCCCGCACTGCTACCTGCCCGCCCCCACCGCCAGGCCGTTG---------
+                                                                      
+
+ENSG00000177150     TCCACGGCGGCCGAGGGACAAACACAAAGAAAGGAAGGGCCG--------
+ENSMUSG00000038121  TTAAATACACAAGATTTAAGACAAAGAGGCAAGGAAAGGCCA--------
+ENSCAFG00000000173  TTTAAGTGGATTGGTTTAAAATAGAAATCTATGTATAGTCTAATTTTTTT
+ENSBTAG00000009141  -----------------------------CAAAGACGTAGCC--------
+ENSGALG00000013887  -----------------------------------------A--------
+                                                                      
+
+ENSG00000177150     ---------------------GAGTTCCAGCCGTCACACTCACCAGCACA
+ENSMUSG00000038121  ---------------------GAACGCCGAACGCCACACTCACCCACACA
+ENSCAFG00000000173  TTTTTTTATCTAGTCTTTGTAGAAGCTGAAATCCTTCAATCACCGTTCTT
+ENSBTAG00000009141  ---------------------CAGCGCCGCGACCCCACACTTACCTACCA
+ENSGALG00000013887  ---------------------GAAAGACGCGCGCTACTCAC-CCAGCACA
+                                          *                    *      
+
+ENSG00000177150     GCCAAACGCGATTCTGTTTGCGGAAACGGCGGCCCGCGCCACGCGTGTCT
+ENSMUSG00000038121  GTCATCCACGATTCTGTTTGCGGAAACGCCGGCCGGAGCCACGCGTGCCT
+ENSCAFG00000000173  CAAA----------------------------------------------
+ENSBTAG00000009141  GCCATCCGCGACTCTGTTTGCGGAAGCGGCG--CCACGCCACGCGCGCGC
+ENSGALG00000013887  GCCCTCCGCCATCCTGTTTGCGGAAGTGACGCCTCTACCGCGGAG-----
+                                                                      
+
+ENSG00000177150     GCTTACGTCACTTCCGGAGGTGCGAGAGTCACGTGGAGACGGTCAGGCGA
+ENSMUSG00000038121  TGTTACGTCACTTCCGGGGAGTGCGCCCGGGAC-----------------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  TATGACGCCACTTCCGGAGAG-CGCGGGTCGCTTGGCCCGGAATCCCGAG
+ENSGALG00000013887  ----ACGTCACATCCGGGGGGGCGAAGACGACACTGCGCACGCGCGCGGT
+                                                                      
+
+ENSG00000177150     GAGTGCCGCGACGCACGT--------------------------------
+ENSMUSG00000038121  ------------------------------TT------------------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  TCCCGGCGTGCCGCGCGC--------------------------------
+ENSGALG00000013887  AGGAACTCGGACTCGTTTTGCGGCAGAGACTACGAGTCCCAGAAGGCCGC
+                                                                      
+
+ENSG00000177150     ----CCTCCGCGCCGG----------------------------------
+ENSMUSG00000038121  --------------------------------------------------
+ENSCAFG00000000173  --------------------------------------------------
+ENSBTAG00000009141  ----GGCGTGCGGAGGGCGACGGCTCGAAGGGACGCAAGAGCCTGGTTGG
+ENSGALG00000013887  GCGCGGGGGCGGGAGCGCC-------------------------------
+                                                                      
+
+ENSG00000177150     ----------------------------------------------
+ENSMUSG00000038121  ----------------------------------------------
+ENSCAFG00000000173  ----------------------------------------------
+ENSBTAG00000009141  AGGGACGGCGTGGCGGGCGGGTGGGAGGCTGGTCGCCTGAGCCCAG
+ENSGALG00000013887  ----------------------------------------------
+                                                                  
+
+
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+XDG_DATA_HOME=/Users/cnotredame/.local/share
+MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
+ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/kt/h6f_8ns945v8sm8l744hnqkw0000gn/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.2Gm1mQlBr6/Render
+TERM_PROGRAM_VERSION=361.1
+OSNAME=macosx
+PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=3B4D2C5E-2D85-426C-8E4A-6C0F1A72994B
+METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
+ac_cv_path_INTLTOOL_PERL=/usr/bin/perl
+http_proxy=
+HTTP_proxy=
+SGML_CATALOG_FILES=/sw/etc/sgml/catalog
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.c5EYh3QWDe/Listeners
+__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
+XDG_CONFIG_DIRS=/sw/etc/xdg
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/subversion/bin:/opt/local/bin/:/Library/Frameworks/Python.framework/Versions/Current/bin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+XML_CATALOG_FILES=/sw/etc/xml/catalog
+DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/doc/tmp
+CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=yes
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+XDG_CONFIG_HOME=/Users/cnotredame/.config
+DUMP_4_TCOFFEE=t_coffee.53.dump
+HTTP_PROXY=
+XDG_CACHE_HOME=/Users/cnotredame/.cache
+PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
+MAFFT_BINARIES=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/plugins/macosx/
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+XDG_DATA_DIRS=/sw/share
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.I3Kakd635Y/org.macosforge.xquartz:0
+NUMBER_OF_PROCESSORS=4
+ALL_proxy=
+PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
+LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/291076627/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.53.dump</DumpFile>
+</DumpIO>

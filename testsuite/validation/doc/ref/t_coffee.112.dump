@@ -1,0 +1,184 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in prot.score_ascii -struc_in_f number_aln -output tcs_weighted</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+    4  346
+hmgb_chite ------aaaa dddddkkkkk kpppppppkk kkkkkrrrrr rrpppppppl lllllllsss
+hmgt_mouse ---------- -----kkkkk kpppppppkk kkkkkrrrrr rrpppppppr rrrrrrrsss
+hmgl_wheat ----ddpppp nnnnnkkkkk kpppppppkk kkkkkrrrrr rraaaaaaap pppppppsss
+hmgl_trybr kkkkddssss nnnnnaaaaa apppppppkk kkkkkrrrrr rraaaaaaam mmmmmmmttt
+
+           sssssaaaaa aaayyyyyyy ymmmmmmmml lllllllwww wwwwwlllll llnnnnnnss
+           sssssaaaaa aaayyyyyyy ynnnnnnnni iiiiiiiyyy yyyyyvvvvv vvssssssee
+           sssssaaaaa aaafffffff fffffffffv vvvvvvvfff fffffmmmmm mmggggggee
+           tttttsssss sssfffffff fmmmmmmmmf ffffffffff fffffsssss ssssssssdd
+
+           sssaaaarrr reeesssiii kkkrreennp pddffkk--v vvtttteeee vvvvaaaakk
+           eeessssfff fqqqeeeaaa kkkddddssa aqqggkk--l ll-------- --------kk
+           eeeffffrrr reeeeeefff kkkqqkknnp pkknnkkssv vvaaaaaaaa vvvvggggkk
+           dddffffrrr rssskkkhhh sss------- -dd--llssi iivvvveeee mmmmsssskk
+
+           kkkkkkkkgg ggggggggge eeeellllll wwwwwrrrrr ggggglllll kkkkddd---
+           kkklllllvv vvvnnnnnne eeeeaaaaaa wwwwwkkkkk nnnnnlllll sssspppeee
+           kkkaaaaaaa aaagggggge eeeerrrrrr wwwwwkkkkk ssssslllll sssseeesss
+           kkkaaaaaaa aaagggggga aaaaaaaaaa wwwwwkkkkk eeeeelllll ggggpppeee
+
+           ---kkkssse eeewwwweee eaaaakkkka aaaaaaattt taaaakkkkq qqqnnnnyyy
+           eeekkkqqqa aaayyyyiii iqqqqlllla aaakkkkddd dddddrrrri iiirrrryyy
+           eeekkkaaap pppyyyyvvv vaaaakkkka aaannnnkkk kllllkkkkg gggeeeeyyy
+           eeerrrkkkv vvvyyyyeee eeeeemmmma aaaeeeekkk kddddkkkke eeerrrryyy
+
+           yiiiirrrrr aaaaalllll lqqqeeeyyy eerrnnnggg ggg---
+           yddddnnnnn eeeeemmmmm mkkkssswww eeeeqqqmmm aaaeee
+           ynnnnkkkkk aaaaaiiiii iaaaaaayyy nnkkgggeee sssaaa
+           ykkkkrrrrr eeeeemmmmm m--------- ---------- ------
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_3.12, CPU=0.64 sec, SCORE=44, Nseq=4, Len=81 
+
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpdfk-vtevakkggelwrglkd--kseweak
+hmgt_mouse      -----kpkrprsayniyvsesfqeakddsaqgk-l----klvneawknlspeekqayiql
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvak
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhs----d-lsivemskaagaawkelgpeerkvyeem
+                      ***. ::: .: ..  .. .    .   :    *  .  *: *    :  :   
+
+hmgb_chite      aatakqnyiralqeyerngg-
+hmgt_mouse      akddrirydnemksweeqmae
+hmgl_wheat      anklkgeynkaiaaynkgesa
+hmgl_trybr      aekdkerykrem---------
+                *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>prot.score_ascii</name>
+<content>
+T-COFFEE, Version_11.00 (Version_11.00)
+Cedric Notredame 
+CPU TIME:0 sec.
+SCORE=395
+*
+ BAD AVG GOOD
+*
+hmgb_chite   :  39
+hmgt_mouse   :  37
+hmgl_wheat   :  37
+hmgl_trybr   :  40
+cons         :  39
+
+hmgb_chite   ---566666777788877655433333333222-34344555655554
+hmgt_mouse   -----5666666677776644433332222222-----3445555544
+hmgl_wheat   --4556666677788887665533332222222234444555555444
+hmgl_trybr   24344576777778777765443333-----33345445555556555
+cons         111345666677777776543322221111111123333444545444
+
+
+hmgb_chite   432--223333333334444456643444553-
+hmgt_mouse   433333334444444444445545333334443
+hmgl_wheat   433333344444433344444556333334444
+hmgl_trybr   544333444444444333334557---------
+cons         432222233333333333333445222112222
+
+
+
+
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+XDG_DATA_HOME=/Users/cnotredame/.local/share
+MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
+ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/kt/h6f_8ns945v8sm8l744hnqkw0000gn/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.2Gm1mQlBr6/Render
+TERM_PROGRAM_VERSION=361.1
+OSNAME=macosx
+PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=3B4D2C5E-2D85-426C-8E4A-6C0F1A72994B
+METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
+ac_cv_path_INTLTOOL_PERL=/usr/bin/perl
+http_proxy=
+HTTP_proxy=
+SGML_CATALOG_FILES=/sw/etc/sgml/catalog
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.c5EYh3QWDe/Listeners
+__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
+XDG_CONFIG_DIRS=/sw/etc/xdg
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/subversion/bin:/opt/local/bin/:/Library/Frameworks/Python.framework/Versions/Current/bin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+ALN_LINE_LENGTH=60
+_=/usr/bin/printenv
+XML_CATALOG_FILES=/sw/etc/xml/catalog
+DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/doc/tmp
+CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=yes
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+XDG_CONFIG_HOME=/Users/cnotredame/.config
+DUMP_4_TCOFFEE=t_coffee.112.dump
+HTTP_PROXY=
+XDG_CACHE_HOME=/Users/cnotredame/.cache
+PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
+MAFFT_BINARIES=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/plugins/macosx/
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+XDG_DATA_DIRS=/sw/share
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.I3Kakd635Y/org.macosforge.xquartz:0
+NUMBER_OF_PROCESSORS=4
+ALL_proxy=
+PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
+LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/291080444/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.112.dump</DumpFile>
+</DumpIO>

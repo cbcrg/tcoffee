@@ -1,2 +1,0 @@
-fprintf ( stderr, "myfile is here"); fprintf ( stdou, " and not");
-aaa[a+(a->aa)->z[asddff][2][3]+b[4] ]=25;
