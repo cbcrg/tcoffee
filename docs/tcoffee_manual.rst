@@ -325,7 +325,7 @@ If you want to change the case of a specific residue, you can use the flag: **+e
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \
       +edit_residue hmgb_chite 10 lower
       
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \ 
+  ##: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +upper \ 
       +edit_residue <your file containing coordinates>
 
 .. warning:: If you give a list of coordinates, it has to be a Unix text file (not a word document).
@@ -404,14 +404,14 @@ If you have a cache alignment or a cache library, you can use it to color your a
        -struc_in_f number_fasta -output=color_html -out=color_dnaseq3.html
 
   Produces a pdf file:
-   $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -struc_in=sample_dnaseq3.cache \
+   ##: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -struc_in=sample_dnaseq3.cache \
        -struc_in_f number_fasta -output=color_pdf -out=color_dnaseq3.pdf
 
   Produces an output using a library:
   $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -struc_in=sample_dnaseq3.tc_lib \
-      -output=color_html -out=color_dnaseq3_lib.html (under maintenance...)
+      -output=color_html -out=color_dnaseq3_lib.html
       
-.. warning:: The script **ps2pdf** must be installed on your system for these options.
+.. warning:: The script **ps2pdf** must be installed on your system for the pdf options.
 
 Modifying the data itself...
 ============================
@@ -423,7 +423,7 @@ It is possible for instance to selectively convert all given characters in a seq
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \ 
+  #$: t_coffee -other_pg seq_reformat -in sample_dnaseq2.aln -struc_in sample_dnaseq2.cache \ 
       -struc_in_f number_aln -action +convert '[1-2]' GX
  
 Extracting sequences according to a pattern
@@ -660,7 +660,7 @@ If your sequences are DNA coding sequences, it is often safer and more accurate 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in proteases_small_dna.fasta -action \
+  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -action \
       +translate -output fasta_seq
 
 Back-translation with the *bona fide* DNA sequences
@@ -706,7 +706,7 @@ The file sample_rnaseq2.alifold contains the raw output of the alifold program p
       -input2 alifold -action +add_alifold -output stockholm_aln  
 
   Command 2:
-  $$: seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +add_alifold \
+  $$: t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.cons.stk -action +add_alifold \
       -output stockholm_aln
 
 .. warning:: The alifold structure and the alignment MUST be compatible. The function makes no attempt to thread or align the structure, it merely stacks it below the MSA.
@@ -765,20 +765,20 @@ The seq_reformat is NOT a phylogeny package, yet over the time it has accumulate
 ::
 
   Command 1:
-  $$:  t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree -output newick
+  $$:  t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree -output newick
 
   Command 2:
-  $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _TMODE_upgma -output newick
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree _TMODE_upgma -output newick
 
 If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for instance), you can use a different matrix to compute the pairwise distances (command 3), and all these parameters can be concatenated (command 4):
 
 ::
 
   Command 3:
-  $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _MATRIX_sarmat -output newick
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree _MATRIX_sarmat -output newick
 
   Command 4:
-  $$: t_coffee -other_pg seq_reformat -in <aln> -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
+  #$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
        -output newick
 
 .. warning:: Bootstrap facilities will also be added at some point...We recommend you to use `Phylip <http://evolution.genetics.washington.edu/phylip.html>`_ or any other specific phylogenetic software (PhyML, RAxML, MrBayes, etc...) if you need some serious phylogeny !
@@ -990,10 +990,10 @@ T-Coffee aligner is by default parallelized, meaning that it can use multiple co
 ::
 
   Using a single core:
-  $$: t_coffee -in <your sequences> -multi_core=no
+  $$: t_coffee -in sample_seq1.fasta -multi_core=no
   
   Using 12 cores:
-  $$: t_coffee -in <your sequences> -n_core=12
+  $$: t_coffee -in sample_seq1.fasta -n_core=12
   
 Also when running T-Coffee, it displays a lot of information directly on screening while running from general information, options, results, warnings...if you want, you can reduce the display using **-no_warning** to remove all the warnings, or even more strict using **-quiet** removing any display while running T-Coffee.
 
@@ -1025,7 +1025,7 @@ If your sequences are spread across several datasets, you can give all the files
 
 ::
 
-  $$: t_coffee -seq=protease1_small.fasta,protease2_small.aln -output=clustalw,fasta_aln,msf
+  $$: t_coffee -seq=proteases1_small.fasta, small.aln -output=clustalw,fasta_aln,msf
 
 
 You may also have a bunch of alignments (with the same sequences) that you have either precomputed, assembled manually or received from a colleague. You can also combine these alignments. For instance, let us imagine we generated 4 alignments with ClustalW using different gap penalties. To combine them into ONE single alignment, use the **-aln** flag. The final score indicates a high level of consistency (91%) between all these MSAs, meaning that the final MSA is probably correct.
@@ -1033,10 +1033,10 @@ You may also have a bunch of alignments (with the same sequences) that you have 
 ::
 
   Your 4 different MSAs:
-  $: clustalw -infile=proteases_small.fasta -gapopen=0 -outfile=g0.aln
-  $: clustalw -infile=proteases_small.fasta -gapopen=-5 -outfile=g5.aln
-  $: clustalw -infile=proteases_small.fasta -gapopen=-10 -outfile=g10.aln
-  $: clustalw -infile=proteases_small.fasta -gapopen=-15 -outfile=g15.aln
+  ##: clustalw -infile=proteases_small.fasta -gapopen=0 -outfile=g0.aln
+  ##: clustalw -infile=proteases_small.fasta -gapopen=-5 -outfile=g5.aln
+  ##: clustalw -infile=proteases_small.fasta -gapopen=-10 -outfile=g10.aln
+  ##: clustalw -infile=proteases_small.fasta -gapopen=-15 -outfile=g15.aln
 
   Combining multiple MSAs:
   $$: t_coffee proteases_small.fasta -aln g0.aln g5.aln g10.aln g15.aln -output=clustalw,html
@@ -1240,7 +1240,7 @@ PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest.
   $$: t_coffee proteases_small.fasta -mode psicoffee
   
   Command 2: TM-Coffee
-  $$: t_coffee proteases_small.fasta -mode psicoffee -blast_server <LOCAL> -protein_db <database>
+  ##: t_coffee proteases_small.fasta -mode psicoffee -blast_server <LOCAL> -protein_db <database>
       -template_file PSITM
 
 .. warning:: PSI/TM-Coffee requires BLAST and a database to search. If you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. Also, for TM-Coffee, the reduced database has to be installed locally otherwise you are just running PSI-Coffee.
@@ -1290,11 +1290,11 @@ Expresso needs BLAST so either you provide your own client with the tag **-blast
   $$: t_coffee three_pdb_two_seq.fasta -mode expresso
   
   Command 2: Running Expresso using a local BLAST/PDB 
-  $$: t_coffee three_pdb_two_seq.fasta -mode expresso -blast=LOCAL -pdb_db=<PDB> \
+  ##: t_coffee three_pdb_two_seq.fasta -mode expresso -blast=LOCAL -pdb_db=<PDB> \
       -pdb_type d -pdb_min_sim 95 -pdb_min cov 90 -cache $PWD 
   
   Command 3: Choosing your own templates and methods
-  $$: t_coffee three_pdb_two_seq.fasta -method mustang_pair,slow_pair -template_file \
+  ##: t_coffee three_pdb_two_seq.fasta -method mustang_pair,slow_pair -template_file \
       <your template>
 
 .. warning:: If you are providing Expresso with your own structures, you have to specify the path in the template file or have them in your current working directory. 
@@ -1366,7 +1366,7 @@ If you have your own predictions, you can use them to run T-Coffee providing you
 ::
 
   Command line:
-  $$: t_coffee sample_seq1.fasta -template_file <template_file> -method_evaluate_mode \
+  ##: t_coffee sample_seq1.fasta -template_file <template_file> -method_evaluate_mode \
       ssp -method lalign_id_pair slow_pair  
       
   Format of the template file:     
@@ -1386,10 +1386,10 @@ You can output a color coded version of your alignment using the secondary predi
 ::
 
   Secondary structure prediction:
-  $$: t_coffee sample_aln.fasta -template_file PSISSP -output sec_html
+  $$: t_coffee sample_aln1.fasta -template_file PSISSP -output sec_html
 
   Transmembrane regions prediction:
-  $$: t_coffee sample_aln.fasta -template_file PSITM -output tm_html
+  $$: t_coffee sample_aln1.fasta -template_file PSITM -output tm_html
 
 
 Aligning RNA sequences 
@@ -1421,7 +1421,7 @@ There are two modes we proposed to improve R-Coffee alignments: 1) using the bes
 ::
 
   Using Consan (best):
-  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+  #$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
   
   Using multiple methods:
   $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
@@ -1494,7 +1494,7 @@ The type declaration (or its automatic detection) triggers the use of the approp
 
 ::
 
-  $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair4dna@EP@MATRIX@idmat
+  $$: t_coffee sample_dnaseq1.fasta -in Mlalign_id_pair@EP@MATRIX@idmat
 
 Pro-Coffee: Aligning functional DNA regions
 -------------------------------------------
@@ -1503,14 +1503,14 @@ Pro-Coffee is a MSA method specifically designed for promoter regions or other o
 ::
 
   Command 1: Pro-Coffee default
-  $$: t_coffee –seq c18orf19.fa –mode procoffee
+  $$: t_coffee -seq c18orf19.fa -mode procoffee
 
   Command 2: Pro-Coffee parameters
   t_coffee –seq c18orf19.fa -method promo_pair@EP@GOP@-60@GEP@-1
 
   Command 3: Extracting regions
-  $$: tcoffee -other_pg seq_reformat -in c18orf19.aln -action extract_block \
-      ′ENSG00000177150′ 1852 1983 > c18orf19_chipseq.aln
+  $$: t_coffee -other_pg seq_reformat -in c18orf19.aln -action +extract_block \
+      ENSG00000177150 1852 1983 > c18orf19_chipseq.aln
 
 .. tip:: If you want more details, we suggest you follow the subsection **Quick Start, Tutorial (Practical Examples)** published in Nature Protocols (2011) or refer to the original article.
 
@@ -1620,7 +1620,7 @@ Note that all these output functions are also compatible with the default T-Coff
 ::
 
   Command 1:
-  $$: t_coffee -seq sample_seq1.fa -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
+  $$: t_coffee -seq sample_seq1.fasta -output tcs_residue_filter3, tcs_column_filter3, tcs_residue_lower4
 
   Command 2:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in prot.score_ascii -struc_in_f \
@@ -1644,7 +1644,7 @@ Note that all these output functions are also compatible with the default T-Coff
 ::
 
   Command 1:
-  $$: t_coffee -seq sample_seq1.fa -output tcs_weighted, tcs_replicate_100
+  $$: t_coffee -seq sample_seq1.fasta -output tcs_weighted, tcs_replicate_100
 
   Command 2:
   $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -struc_in prot.score_ascii -struc_in_f \
@@ -1661,7 +1661,7 @@ It is possible to change the way TCS reliability is estimated. This can be done 
       aln, score_html
 
   Command 2:
-  $$: t_coffee -infile prot.aln -evaluate -method probapair,lalign_id_pair -output score_ascii, \
+  $$: t_coffee -infile prot.aln -evaluate -method proba_pair,lalign_id_pair -output score_ascii, \
       aln, score_html
       
   Command 3:
@@ -1678,7 +1678,7 @@ When working with DNA, it is advisable to first align the sequences at the prote
   $$: t_coffee -infile sample_prot_thread.aln -evaluate -output score_ascii
 
   Command 2: generating replicates for DNA 
-  $$: t_coffee -other_pg seq_reformat -in sample_prot_thread.aln -in2 sample_dna_thread.fasta \
+  $$: t_coffee -other_pg seq_reformat -in sample_prot_thread.aln -in2 sample_dna_thread.fa \
       -struc_in sample_prot_thread.score_ascii -struc_in_f number_aln -output tcs_replicate_100 \
       -out dna.replicates
   
@@ -1736,8 +1736,8 @@ Let us evaluate the alignment produced by Expresso, using the template_file retu
 ::
 
   Running the iRMSD:
-  $$: t_coffee -other_pg irmsd proteases_small.expresso -template_file \
-      proteases_small.template_file
+  $$: t_coffee -other_pg irmsd sproteases_small.expresso -template_file \
+      sproteases_small.template_file
 
   Output of the iRMSD:
   TOTAL for the Full MSA
@@ -1813,7 +1813,7 @@ This option makes it possible to estimate a tree while taking into account the v
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 
+  #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 
       +evaluate3D distances +tree2bs first -output newick -out tree.dnd
   
 Input:
@@ -1829,7 +1829,7 @@ It is possible to control default parameters using the following extended comman
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
+  #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       gap 0.5 mode nj  +evaluate3D distances 15 +tree2bs first -output newick -out tree.dnd
 
 
@@ -1842,11 +1842,11 @@ The following option (command 1) makes it possible to estimate a tree while taki
 :: 
 
   Command 1:
-  $$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree \
+  #$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree \
       replicates 100 +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
 
   Command 2:
-  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
+  #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       gap 0.5 mode nj +evaluate3D contacts 1.2 3 +tree2bs first -output newick -out tree.dnd
 
 .. warning:: The procedure requires at least 1 sequence with a known 3D structure or with contact information.
@@ -1862,7 +1862,7 @@ This same procedure can be used to visualize either intramolecular distance cons
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
       -action +evaluate3D distances -output score_ascii 
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-      -action +evaluate3D distances -output score_raw (under maintenance...)
+      -action +evaluate3D distances -output score_raw
 
 Identification of positions 
 ---------------------------
@@ -1871,7 +1871,7 @@ If you have a well defined sub-group of sequences (i.e. domains having the same 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates \
+  #$: t_coffee -other_pg seq_reformat -in <seq.aln> -in2 <seq.template> -action +tree replicates \
       columns +evaluate3D  distances +evaluateTree <group.fasta> -output score_html -out <aln.html>
 
 Evaluating Clustering capacities
@@ -1881,10 +1881,10 @@ If you want to check the capacity of an algorithm to bring related sequences wit
 :: 
 
   Command 1: precomputed tree
-  $$: t_coffee -other_pg seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
+  #$: t_coffee -other_pg seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
 
   Command 2: computed on the fly....
-  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
+  #$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
 Others...
@@ -1990,13 +1990,13 @@ A special method exists in T-Coffee that can be used to invoke any existing prog
 ::
 
   Command 1: T-Coffee using ClustalW
-  $$: t_coffee sample_seq1.fasta -method=em@clustalw@pairwise
+  #$: t_coffee sample_seq1.fasta -method=em@clustalw@pairwise
 
   Command 2: ClustalW command
-  $: method -infile=<infile> -outfile=<outfile>
+  ##: method -infile=<infile> -outfile=<outfile>
 
   Command 3: Syntax for EXTERNAL methods
-  $: em@<method>@<aln_mode:pairwises_pairwise|multiple>
+  ##: em@<method>@<aln_mode:pairwises_pairwise|multiple>
 
 Customizing an EXTERNAL method 
 ------------------------------
@@ -2050,7 +2050,7 @@ It may sometimes be difficult to customize the program you want to use through a
   * Note: &amp;bsnp can be used to for white spaces
 
   3) Run the method: 
-  $$: t_coffee sample_seq1.fasta -method generic_method.tc_method
+  #$: t_coffee sample_seq1.fasta -method generic_method.tc_method
 
 
 T-Coffee runs the script tc_generic_method.pl on your data. It also provides the script with parameters. In the case **-method clustalw** indicates that the script should run ClustalW on your data. Over the time, this script will be the place where novel methods will be integrated and make it possible to run any available method. It will be used to run the script **tc_generic_method.pl**, a perl script automatically generated by T-Coffee. Over the time this file will 

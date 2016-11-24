@@ -171,7 +171,7 @@ R-Coffee can be used to align RNA sequences, using their RNApfold predicted seco
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee
   
   Command 2: R-Coffee + Consan
-  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+  #$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
 
   Command 3: RM-Coffee
   $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
@@ -188,7 +188,7 @@ Pro-Coffee is a particular mode of T-Coffee designed to align specific functiona
 ::
 
   Command 1: Pro-Coffee default
-  $$: t_coffee sampe_dnaseq1.fasta -mode procoffee
+  $$: t_coffee sample_dnaseq1.fasta -mode procoffee
 
   Command 2: Pro-Coffee with modified parameters
   $$: t_coffee sample_dnaseq1.fasta -method promo_pair@EP@GOP@-60@GEP@-1

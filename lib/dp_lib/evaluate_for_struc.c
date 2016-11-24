@@ -1071,12 +1071,14 @@ declare_name (prot_db);
 		  }
 
 		A=declare_aln (S);
-
-
 		A->residue_case=KEEP_CASE;
 		A=main_read_aln(aln, A);
-		EA=copy_aln (A, EA);
 		A->CL=CL;
+				
+			
+		EA=copy_aln (A, EA);
+		
+		
 
 		if ( strm (apdb_outfile, "default"))
 		  sprintf ( apdb_outfile, "%s.apdb_result", F->name);

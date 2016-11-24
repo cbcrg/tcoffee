@@ -7,7 +7,7 @@ AUTHOR=Cedric Notredame
 DATE=$(shell date '+%d %b %Y - %H:%M')
 DISTRIBUTION_ADDRESS=www.tcoffee.org/Packages
 INSTITUTE=Centro de Regulacio Genomica
-EMAIL=cedric.notredame@europe.com
+EMAIL=cedric.notredame@gmail.com
 
 
 #
@@ -29,8 +29,8 @@ endif
 
 CC=g++ 
 ifndef CFLAGS
-CFLAGS=-O3 -Wno-write-strings
-#CFLAGS=-g
+#CFLAGS=-O3 -Wno-write-strings
+CFLAGS=-g
 endif
 
 ifdef OPENMP

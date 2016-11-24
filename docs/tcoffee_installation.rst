@@ -128,13 +128,13 @@ The most accurate modes of T-Coffee scan the databases for templates that they u
 ::
 
    To fetches and uses structural templates:
-   $$: t_coffee <yourseq> -mode expresso
+   ##: t_coffee <yourseq> -mode expresso
 
    To fetches and uses profile templates:
-   $$: t_coffee <your seq> -mode psicoffee
+   ##: t_coffee <your seq> -mode psicoffee
    
    To fetch everything possible and get the best templates, structure or profile:
-   $$: t_coffee <your seq> -mode accurate
+   ##: t_coffee <your seq> -mode accurate
    
    
 Using the EBI BLAST client

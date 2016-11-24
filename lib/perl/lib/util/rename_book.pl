@@ -1,9 +1,13 @@
 #!/usr/bin/env perl
+use File::Copy::Recursive qw(fcopy rcopy dircopy fmove rmove dirmove);
 use Cwd;
 use File::Copy;
+
 use DirHandle;
 my $dir;
 my $target_dir;
+
+
 
 for ($a=0; $a<@ARGV; $a++)
   {
@@ -13,6 +17,25 @@ for ($a=0; $a<@ARGV; $a++)
       {
 	$dir="$ARGV[++$a]/";
       }
+    elsif ( $v eq "-undo" || $v eq "undo")
+      {
+	my $n;
+	my (@l);
+	open F , ".undo";
+	while (<F>)
+	  {
+	    $l[$n]=$_;
+	    chomp($l[$n]);
+	    $n++;
+	  }
+	close (F);
+	
+	for (my $a=0; $a<$n; $a+=2)
+	  {
+	    my_rename ($l[$a+1], $l[$a]);
+	  }
+	unlink (".undo");
+      }
     elsif ($v eq "-target_dir")
       {
 	$target_dir=$ARGV[++$a];
@@ -21,7 +44,25 @@ for ($a=0; $a<@ARGV; $a++)
       {
 	$action="-$ARGV[++$a]";
       }
-    
+    elsif ($v eq "-daemonsync")
+      {
+	my $duration=500;
+	
+	if ($ARGV[$a+1]){$duration=$ARGV[$a+1];}
+	
+	while (1==1)
+	  {
+	    sleep ($duration);
+	    print "Sync - sleep $durantion sec.\n";
+	    &dirsync;
+	  }
+      }
+    elsif ($v eq "-dirsync")
+      {
+	$action=$v;
+	$from_dir=$ARGV[++$a];
+	$to_dir=$ARGV[++$a];
+      }
     elsif ($v eq "-replace")
       {
 	$action=$v;
@@ -32,6 +73,11 @@ for ($a=0; $a<@ARGV; $a++)
       {
 	$action=$v;
 	$addbefore=$ARGV[++$a];
+      }
+    elsif ($v eq "-removebeforeN")
+      {
+	$action=$v;
+	$RBN=$ARGV[++$a];
       }
     elsif ($v eq "-addafter")
       {
@@ -61,7 +107,7 @@ for ($a=0; $a<@ARGV; $a++)
       }
   }
 
-
+if (-e ".undo"){unlink (".undo");}
 
 if (!$dir){$dir=getcwd;}
 if (!$target_dir){$target_dir=getcwd;}
@@ -87,7 +133,6 @@ elsif    ($action eq "-clean_itune")
     chdir ("..");
     rec_clean_itune($d1);
     chdir ($d1);
-    
   }
 elsif    ($action eq "-itune")
   {
@@ -282,6 +327,61 @@ elsif       ($action eq "-unrar")
 	  }
       }
 
+elsif($action eq "-invertdate")
+      {
+	
+	my $num;
+	my $ep;
+	foreach my $f (@file1)
+	  {
+	    my $from=$f;
+	    if (($from=~/^(\d\d)\D+(\d\d)\D+(\d\d\d\d)(.*)/))
+	      {
+		my $year=$3;
+		my $month=$2;
+		my $day=$1;
+		my $name=$4;
+
+		print "DAY=$day\n";
+		my $to="$year\-$month\-$day $name";
+		$to=~s/  / /g;
+		&my_rename ($from,$to);
+	      }
+	  }
+      }
+elsif($action eq "-renumberseries")
+      {
+	print "\nseries";
+	my $num;
+	my $ep;
+	foreach my $f (@file1)
+	  {
+	    my $from=$f;
+	    $num++;
+	    if ($num<10){$ep="s01e00$num";}
+	    elsif ($num<100){$ep="s01e0$num";}
+	    else {$ep="s01e$num";}
+	    $to=$ep."-$f";
+	    &my_rename ($from,$to);
+	  }
+      }
+elsif($action eq "-series")
+      {
+	print "\nseries";
+	foreach my $f (@file1)
+	  {
+	    my $from=$f;
+	    $from=~/(\d+)(.*)\.([^.]*)/;
+	    my $num=$1;
+	    my $rest=$2;
+	    my $ext=$3;
+	    $rest=~s/^\s+//;
+	    my $to="S01E$num$rest\.$ext";
+	    if ($num)
+	      {&my_rename ($from,$to);}
+	    
+	  }
+      }
 elsif($action eq "-mp3")
       {
 	print "\nmp3";
@@ -357,6 +457,91 @@ elsif($action eq "-renumber")
 	      }
 	  }
       }
+
+
+elsif       ($action eq "-dirsync")
+  {
+    dirsync();
+    die;
+    #first use: create .looup.tx in the $to_dir that contains the list of the files to ignore
+    #Every file or dir in this list will not be synced
+    my $press_dir="/Users/cnotredame/Dropbox/presse";
+    if (!$from_dir){$from_dir="/Volumes/Movies2/movies/Download2.raw/";}
+    if (!$to_dir)   {$to_dir  ="/Volumes/Movies3/Download/download.raw/";}
+    my $ignore="$to_dir/.sync.ignore.txt";
+    
+    my $dh1=new DirHandle;
+    my (%hd1, %hd2);
+    opendir ($dh1, "$from_dir");
+    my @l1=readdir($dh1);
+    
+    if ( -e $ignore)
+      {
+	open F,"$ignore";
+	while (<F>)
+	  {
+	    my $l=$_;
+	    chomp ($l);
+	    $hd2{$l}=1;
+	  }
+	close F;
+      }
+    
+    foreach my $f (@l1)
+      {
+	if (-d "$from_dir/$f" && ($f=~/(^j\d+)/ || $f=~/(^J\d+)/))
+	  {
+	    
+	    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+	    $year+=1900;
+	    my $date;
+	    my $press=new DirHandle;
+	    opendir ($press, "$from_dir/$f");
+	    my @pl=readdir($press);
+	    foreach my $a (@pl)
+	      {
+		my ($m,$mn,$d, $day);
+		if ($a=~/.*\s(\d+)\s+(\S+)\s+($year).*/)
+		  {
+		    $d=$1;$d++;$d--;
+		    $m=$2;
+		    $day=($d<10)?"0$d":"$d";
+		    print "$a\n";
+		    lc($m);
+		    if    ($m =~/janvier/)  {$mn="01";}
+		    elsif ($m =~/vrier/)    {$mn="02";}
+		    elsif ($m =~/mars/)     {$mn="03";}
+		    elsif ($m =~/avril/)    {$mn="04";}
+		    elsif ($m =~/mai/)      {$mn="05";}
+		    elsif ($m =~/juin/)     {$mn="06";}
+		    elsif ($m =~/juillet/)  {$mn="07";}
+		    elsif ($m =~/ut/)       {$mn="08";}
+		    elsif ($m =~/septembre/){$mn="09";}
+		    elsif ($m =~/octobre/)  {$mn="10";}
+		    elsif ($m =~/novembre/) {$mn="11";}
+		    elsif ($m =~/cembre/)   {$mn="12";}
+		  }
+		if ($mn)
+		  {
+		    $date="$year\_$mn\_$day";
+		    rcopy ("$from_dir/$f", "$press_dir/$date");
+		    if ($f && -d "$from_dir/$f" && $f ne "." && $f ne "..")
+		      {system "rm -r $from_dir/$f";}
+		    last;
+		  }
+	      }
+	  }
+      	elsif ($f ne "." && $f ne ".." && !$hd2{$f})
+	  {
+	    $hd2{$f}=1;
+	    print "rcopy (\"$from_dir/$f\", \"$to_dir\")\n";
+	    rcopy ("$from_dir/$f", "$to_dir/$f");
+	    open F,">>$ignore";
+	    print F "$f\n";
+	    close (F);
+	  }
+      }
+  }
 elsif       ($action eq "-addbefore" || $action eq "-addafter")
       {
 	print "\n";
@@ -372,6 +557,20 @@ elsif       ($action eq "-addbefore" || $action eq "-addafter")
 		    print("mv  \"$from\"  \"$to\"\n");
 		    &my_rename ($from,$to);
 		  }
+	      }
+	  }
+      }
+elsif       ($action eq "-removebeforeN")
+      {
+	print "\n";
+	foreach my $f (@file1)
+	  {
+	    if (!$title || $f=~/$title/)
+	      {
+		my $from=$f;
+		$from=~/(.{$RBN})(.*)/;
+		$to=$2;
+		&my_rename ($from,$to);
 	      }
 	  }
       }
@@ -786,8 +985,19 @@ sub my_rename
   {
     my $f=shift;
     my $s=shift;
-
-    rename ($f, $s);
+    my $d=shift;
+    if ($d)
+      {
+	print "\nRename\n\t$f\n\t$s\n";
+      }
+    else
+      {
+	open (F, ">.undo");
+	print F "$f\$s\n";
+	close (F);
+	
+	rename ($f, $s);
+      }
   }
 sub dump_cfg
   {
@@ -1394,4 +1604,134 @@ sub rec_flac2mp3
 	  }
       }
     return ;
+  }
+sub dirsync
+  {
+    my ($from_dir, $to_dir)=@_;
+    #first use: create .looup.tx in the $to_dir that contains the list of the files to ignore
+    #Every file or dir in this list will not be synced
+    my $press_dir="/Users/cnotredame/Dropbox/presse";
+    if (!$from_dir){$from_dir="/Volumes/Movies2/movies/Download2.raw/";}
+    if (!$to_dir)   {$to_dir  ="/Volumes/Movies3/Download/download.raw/";}
+    my $ignore="$to_dir/.sync.ignore.txt";
+    
+    opendir (DIR, "$from_dir");
+    my @l1=readdir(DIR);
+    closedir (DIR);
+    if ( -e $ignore)
+      {
+	open F,"$ignore";
+	while (<F>)
+	  {
+	    my $l=$_;
+	    chomp ($l);
+	    $hd2{$l}=1;
+	  }
+	close F;
+      }
+    
+    foreach my $f (@l1)
+      {
+	
+	my $from="$from_dir/$f";
+	if (-d "$from" && ($f=~/(^j\d+)/ || $f=~/(^J\d+)/))
+	  {
+	    my ($d, $m, $year);
+	    opendir (DIR, "$from");
+	    my @pl=readdir(DIR);
+	    closedir (DIR);
+	    my $mn;
+	    
+	    foreach my $j (@pl)
+	      {
+		if ($j=~/.*\s(\d+)\s+(\S+)\s+(\d+).*/)
+		  {
+		    
+		    $d=$1;
+		    $m=$2;
+		    $year=$3;
+		    
+		    $m=($m<10)?"0$m":"$m";
+		    $year=($year<100)?"20$year":$year;
+		    $day=($d<10)?"0$d":"$d";
+		    
+
+		    lc($m);
+		    if    ($m =~/janvier/)  {$mn="01";}
+		    elsif ($m =~/vrier/)    {$mn="02";}
+		    elsif ($m =~/mars/)     {$mn="03";}
+		    elsif ($m =~/avril/)    {$mn="04";}
+		    elsif ($m =~/mai/)      {$mn="05";}
+		    elsif ($m =~/juin/)     {$mn="06";}
+		    elsif ($m =~/juillet/)  {$mn="07";}
+		    elsif ($m =~/ao/)       {$mn="08";}
+		    elsif ($m =~/septembre/){$mn="09";}
+		    elsif ($m =~/octobre/)  {$mn="10";}
+		    elsif ($m =~/novembre/) {$mn="11";}
+		    elsif ($m =~/cembre/)   {$mn="12";}
+		  }
+	      }
+	    if ($mn)
+	      {
+		my $to="$press_dir/$year\_$mn\_$day";
+		
+		if (!-d $to){system ("mkdir $to");}
+		print "##Sync: $f  $from => $to\n";
+		opendir (DIR, $from);
+		my @jl=readdir(DIR);
+		closedir (DIR);
+		foreach my $j (@jl)
+		  {
+		    if ($j ne "." && $j ne "..")
+		      {
+			print " --- sync $j => $to\n";
+			copy ("$from/$j", "$to");
+		      }
+		    
+		  }
+		if ($f && -d "$from" && $f ne "." && $f ne "..")
+		  {
+		    system "rm -r $from";
+		  }
+	      }
+	  }
+	elsif (-d "$from" && ($f=~/^EN(\d\d\d\d)(\d\d)(\d\d)/))
+	  {
+	    my $year=$1;
+	    my $mn=$2;
+	    my $day=$3;
+	    
+	    my ($year,$mn,$day)=($1,$2,$3);
+	    my $date="$year\_$mn\_$day";
+	    my $from="$from_dir/$f";
+	    my $to="$press_dir/$date";
+	    if (!-d $to){system ("mkdir $to");}
+	    opendir (DIR, "$from");
+	    my @jl=readdir(DIR);
+	    closedir (DIR);
+	    print "##Sync: $f $from => $to\n";
+	    if (!-d $to){system ("mkdir $to");}
+	    foreach my $j (@jl)
+	      {
+		if ($j ne "." && $j ne "..")
+		   {
+		     print " --- sync $j => $to\n";
+		     copy ("$from/$j", "$to");
+		   }
+	      }
+	    if ($f && -d "$from" && $f ne "." && $f ne "..")
+	      {
+		system "rm -r $from";
+	      }
+	  }
+      	elsif ($f ne "." && $f ne ".." && !$hd2{$f})
+	  {
+	    $hd2{$f}=1;
+	    print "rcopy (\"$from_dir/$f\", \"$to_dir\")\n";
+	    rcopy ("$from_dir/$f", "$to_dir/$f");
+	    open F,">>$ignore";
+	    print F "$f\n";
+	    close (F);
+	  }
+      }
   }

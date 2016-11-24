@@ -854,13 +854,14 @@ int quantile (int argc, char *argv[])
 
   if (strm (argv[1], "stdin"))
     {
-      name=vtmpnam(NULL);
-      fp=vfopen (name, "w");
-      while ( (c=fgetc(stdin))!=EOF)
-	{
-	  fprintf ( fp, "%c", c);
-	}
-      vfclose (fp);
+      name=capture_stdin();
+      //name=vtmpnam(NULL);
+      //fp=vfopen (name, "w");
+      //while ( (c=fgetc(stdin))!=EOF)
+      //{
+      //  fprintf ( fp, "%c", c);
+      //}
+      //vfclose (fp);
     }
   else
     name=argv[1];
@@ -1821,6 +1822,7 @@ char *get_pwd ( char *name)
     sprintf(name, "%s", cwd);
   else
     perror("getcwd() error");
+  return name;
 }
 
 
@@ -4724,7 +4726,6 @@ char *get_tmp_4_tcoffee ()
        substitute (tmp_4_tcoffee, "//", "/");
        substitute (tmp_4_tcoffee, "//", "/");
     }
-
   return tmp_4_tcoffee;
 }
 char *get_cache_4_tcoffee ()
@@ -5270,16 +5271,12 @@ int string_variable_isset (char *name)
   if (store_string_variable (name,NULL, ISSET)==NULL)return 0;
   else return 1;
 }
-char* set_string_variable (const char name_in[], char * v)
+char* set_string_variable (char *name, char * v)
 {
-  char name[strlen(name_in)+1];
-  strcpy(name,name_in);
   return store_string_variable (name, v, SET);
 }
-char * get_string_variable (const char name_in[])
+char * get_string_variable (char *name)
 {
-  char name[strlen(name_in)+1];
-  strcpy(name,name_in);
   return store_string_variable (name,NULL, GET);
 }
 char* unset_string_variable (char *name)
@@ -5325,10 +5322,12 @@ char* store_string_variable (char *name, char* v, int mode)
 	  val_array=(char**)vrealloc (val_array, (n+1)*sizeof (char*));
 	}
       name_array[n]=(char*)vcalloc ( strlen (name)+1, sizeof (char));
-      val_array[n]=(char*)vcalloc ( strlen (v)+1, sizeof (char));
-
+      
+      val_array[n]=(char*)vcalloc ( ((v)?strlen (v):0)+1, sizeof (char));
+      
+	
       sprintf ( name_array[n], "%s", name);
-      sprintf ( val_array[n], "%s", v);
+      if (v)sprintf ( val_array[n], "%s", v);
       n++;
 
       return v;
@@ -5454,12 +5453,12 @@ char * get_proxy_from_env ()
   else if ((proxy=getenv ("http_proxy_4_TCOFFEE")));
   else if ((proxy=get_string_variable ("proxy")));//use default T-Coffee proxy
   else if ( getenv ("HTTP_proxy") && getenv ("http_proxy")){return getenv ("HTTP_proxy");}//get environement proxy
-  else if ((proxy=getenv ("HTTP_proxy")));//id
-  else if ((proxy=getenv ("http_proxy")));//id
-  else if ((proxy=getenv ("HTTP_PROXY")));//id
-  else if ((proxy=getenv ("ALL_proxy")));//id
-  else if ((proxy=getenv ("all_proxy")));//id
-  else if ((proxy=getenv ("ALL_PROXY")));//id
+  else if ((proxy=getenv ("HTTP_proxy")));
+  else if ((proxy=getenv ("http_proxy")));
+  else if ((proxy=getenv ("HTTP_PROXY")));
+  else if ((proxy=getenv ("ALL_proxy")));
+  else if ((proxy=getenv ("all_proxy")));
+  else if ((proxy=getenv ("ALL_PROXY")));
 
   if (proxy)set_proxy(proxy);
   else
@@ -5582,85 +5581,255 @@ FILE* email_msg(FILE*fp)
 
 void update_error_dir()
 {
-
-
   ;
-
-
-
 }
-void dump_tcoffee(char *target, char *nature)
-{
-  char **list, *s;
-  int a=0;
-  FILE *fp;
-  char *f;
-  char *out_list;
 
+char *capture_stdin ()
+{
+  static char *file;
+  
+  if (file);
+  else
+    {
+      int c;
+      FILE *fp;
+
+      file=vtmpnam (NULL);
+      fp=fopen (file, "w");
+      while ( read(STDIN_FILENO, &c, 1) > 0)
+	{
+	  fprintf ( fp, "%c", c);
+	}
+      fclose (fp);
+    }
+  return file;
+}
+
+
+static int fe;
+static char *stderr_file;
+char* redirect_stderr (char *file);
+void reset_stderr ();
+fpos_t pos_stderr;
+char* redirect_stderr (char *file)
+{
+    
+    
+
+    
+    
+    if (file)
+      {
+	stderr_file=(char*)vcalloc (strlen (file)+1, sizeof (char));
+	sprintf (stderr_file, "%s", file);
+      }
+    else
+      {
+	stderr_file=(char*)vcalloc ( 100, sizeof (char*));
+	sprintf (stderr_file, "stderr.%d", getpid());
+      }
+    
+    //stdin must be captured before messing up with stdout
+   
+    
+    fflush(stderr);
+    fgetpos(stderr, &pos_stderr);
+    fe = dup(fileno(stderr));
+    freopen(stderr_file, "w", stderr);
+    return stderr_file;
+}
+
+
+void reset_stderr ()
+{
+
+  fflush(stderr);
+    dup2(fe, fileno(stderr));
+    close(fe);
+    clearerr(stderr);
+    fsetpos(stderr, &pos_stderr); 
+    
+}
+
+      
+static int fd;
+static char *stdout_file;
+char* redirect_stdout (char *file);
+void  reset_stdout ();
+static fpos_t pos_stdout;
+char* redirect_stdout ( char *file)
+{
+    
+    fpos_t pos;
+    
+    if (file)
+      {
+	stdout_file=(char*)vcalloc (strlen (file)+1, sizeof (char));
+	sprintf (stdout_file, "%s", file);
+      }
+    else
+      {
+	stdout_file=(char*)vcalloc ( 100, sizeof (char*));
+	sprintf (stdout_file, "stdout.%d", getpid());
+      }
+    
+   
+    
+    fflush(stdout);
+    fgetpos(stdout, &pos_stdout);
+    fd = dup(fileno(stdout));
+    freopen(stdout_file, "w", stdout);
+    
+    return stdout_file;
+}
+
+
+void reset_stdout ()
+{
+
+    
+    
+    fflush(stdout);
+    dup2(fd, fileno(stdout));
+    close(fd);
+    clearerr(stdout);
+    fsetpos(stdout, &pos_stdout); 
+    
+}
+
+char *dump_io_start (char *dump)
+{
+  static int dump_io_started;
+  static char *dump_output_file_list;
+  char *f;
+  
+  if (! dump && dump_io_started) return dump_output_file_list;
+  
+  
+  if (!dump)dump=getenv ("DUMP_4_TCOFFEE");
+  if (!dump || strm (dump, "no") || strm (dump, "NO"))return NULL;
+  else if (dump && !dump_io_started && check_file_exists (dump))return NULL;
   
 
+	   
+  set_string_variable ("dump_output_file_list", (dump_output_file_list=vtmpnam(NULL)));
+  set_string_variable ("dump",dump);
+  
+  if (!getenv ("DEBUG_IODUMP"))
+    {
+      string2file_direct (dump_output_file_list, "a", "%s w\n", redirect_stdout (NULL)); 
+      string2file_direct (dump_output_file_list, "a", "%s w\n", redirect_stderr (NULL)); 
+    }
+  dump_io_started=1;	   
+  return dump_output_file_list;;
+}
+void dump_io(char *target, char *nature)
+{
+  static int dump_io_done;
+  FILE *fp;
+
+
+  
+  if (!target ||dump_io_done ||!dump_io_start (NULL) ) return;
+  
+  reset_stdout ();
+  reset_stderr ();
+  
   if ((fp=fopen (target, "w")))
     {
-      fprintf (fp, "<T-CoffeeApplicationDump>\n<nature>%s</nature>\n", nature);
+      char ***list;
+      char *f;
+      int n;
+      
+
+      fprintf (fp, "<DumpIO>\n<nature>%s</nature>\n", nature);
       fprintf (fp, "<program>%s</program>\n", PROGRAM);
       fprintf (fp, "<version>%s</version>\n",VERSION);
       fprintf (fp, "<build>%s</build>\n",BUILD_INFO);
       if ((f=strstr (in_cl, "-dump")))f[0]='\0';
-      fprintf (fp, "<cl>%s</cl>\n",in_cl);
+      
+      if (get_string_variable ("-other_pg"))
+	fprintf (fp, "<cl>t_coffee -other_pg %s</cl>\n",in_cl);
+      else 
+	fprintf (fp, "<cl>%s</cl>\n",in_cl);
+      
       fprintf (fp, "<stack>\n");
       stack_msg(fp);
       fprintf (fp, "</stack>\n<warning>\n");
       warning_msg (fp);
       fprintf (fp, "</warning>\n");
-
-      //dump input
-      list=string2list (in_cl);
-      out_list=file2string (get_string_variable ("dump_output_file_list"));
-
-      for (a=1; a<atoi (list[0]); a++)
+      
+      
+      n=0;
+      list=file2list (dump_io_start (NULL), "\n ");
+      
+      while (list && list[n])
 	{
-	  FILE *fp2;
-	  char c;
-	  s=list[a];
-	  if (out_list && estrstr(out_list, "#%s#",s))continue;
-	  if (file_exists (NULL,s))
+	  char *file=list[n][1];
+	  char *mode=list[n][2];
+	  int skip=0;
+	  if (file_exists (NULL,file) && ! strstr (file, "/tmp/") && ! strstr (file, "/lck/") && !strm (mode, "a")) 
 	    {
-	      fp2=fopen (s, "r");
-	      fprintf (fp, "<file>\n<stream>input</stream>\n");
-	      fprintf (fp, "<name>%s</name>\n",s);
-	      fprintf (fp, "<content>\n");
-	      while ((c=fgetc(fp2))!=EOF)fprintf ( fp, "%c", c);
-	      fclose (fp2);
-	      fprintf (fp, "</content>\n</file>\n");
+	      int a;
+	      
+	      for (a=0; a<n; a++)
+		{
+		  if ( strm (file, list[a][1]) && strm (mode, list[a][2])){skip=1; continue;}
+		}
+	      
+	      if (!skip)
+		{
+		  FILE *fp2;
+		  int c;
+		  if (strm (mode, "r"))
+		    fprintf (fp, "<file>\n<stream>input</stream>\n");
+		  else if ( strm (mode, "w"))
+		    fprintf (fp, "<file>\n<stream>output</stream>\n");
+		  else 
+		    continue;
+		  if ( strstr (file, "stdout"))
+		       fprintf (fp, "<name>stdout</name>\n");
+		  else if ( strstr (file, "stderr"))
+		       fprintf (fp, "<name>stderr</name>\n");
+		  else
+		    fprintf (fp, "<name>%s</name>\n",file);
+		  
+		  fprintf (fp, "<content>\n");
+		  
+		  fp2=fopen (file, "r");
+		  while ((c=fgetc(fp2))!=EOF)fprintf ( fp, "%c", c);
+		  fclose (fp2);
+		  
+		  fprintf (fp, "</content>\n</file>\n");
+		}
 	    }
-	}
-      //dump output
-      if ((f=get_string_variable ("dump_output_file")))
-	{
-	  FILE *fp2;
-	  char c;
-
-	  if ((fp2=fopen (f, "r"))!=NULL)
-	    {
-	      while ((c=fgetc (fp2))!=EOF)fprintf (fp, "%c",c);
-	      fclose (fp2);
-	    }
-
+	  n++;
 	}
 
+      free_arrayN ((void ***)list, 3);
+      
       fprintf (fp, "<environement>\n");
       fclose (fp);
       printf_system_direct("printenv >> %s", target);
       fp=fopen (target, "a");
-      fprintf (fp, "</environement>\n</T-CoffeeApplicationDump>");
+      fprintf (fp, "</environement>\n");
+      fprintf (fp, "<DumpStatus>OK</DumpStatus>\n");
+      fprintf (fp, "<DumpFile>%s</DumpFile>\n", target);
+      fprintf (fp, "</DumpIO>\n");
       fclose (fp);
-
-      fprintf ( stderr, "\n#----- Dumped File: %s\n",target);
+      dump_io_done=1;
     }
-  else fprintf ( stderr, "\n#----- Could NOT Produce Dump File: %s -- Sorry \n", target);
-
-
+  
+  
+  if (!dump_io_done)fprintf ( stderr, "\n#----- Could NOT Produce Dump File: %s -- Sorry \n", target);
+  remove (stdout_file);
+  remove (stderr_file);
+  dump_io_done=1;
+  
 }
+
+
+
 void dump_error_file()
 {
   char target[1000];
@@ -5675,7 +5844,7 @@ void dump_error_file()
   sprintf ( target, "%s",getenv("ERRORFILE_4_TCOFFEE"));
   if (strstr (target, "NO"));
   else
-    dump_tcoffee (target, "error");
+    dump_io (target, "error");
   
   return;
 
@@ -5722,7 +5891,7 @@ void dump_error_file()
       fprintf ( stderr, "\n#----- Dumped ErrorFile: %s\n",target);
     }
   else fprintf ( stderr, "\n#----- Could NOT Dumpe ErrorFile: %s -- Sorry \n", target);
-
+  
 }
 
 
@@ -6149,7 +6318,8 @@ void ignore_cache()
 
 }
 
-FILE *fopenN   ( char *fname, char *mode, int max_n_tries, int delay);
+FILE * fopenN   ( char *fname, char *mode, int max_n_tries, int delay);
+FILE * myfopen (char *name, char *mode);
 FILE * vfopen  ( char *name_in, char *mode)
     {
     FILE *fp;
@@ -6191,7 +6361,7 @@ FILE * vfopen  ( char *name_in, char *mode)
 
     if (name==NULL ||strm5 ( name, "no","NO","No","NULL","/dev/null") || strm2 (name, "no_file", "NO_FILE"))
     		{
- 		if ( NFP==NULL)NFP=fopen (NULL_DEVICE, mode);
+ 		if ( NFP==NULL)NFP=myfopen (NULL_DEVICE, mode);
  		return NFP;
  		}
     
@@ -6199,19 +6369,25 @@ FILE * vfopen  ( char *name_in, char *mode)
     else if ( strm3 (name,"stdout","STDOUT","Stdout"))return stdout;
     else if ( strm3 ( name, "stdin","STDIN","Stdin"))
 	{
+	  
 	  if (!stdin_file)
 	    {
-	      stdin_file=vtmpnam (NULL);
-	      tmp_fp=vfopen ( stdin_file, "w");
-	      while ( (c=fgetc(stdin))!=EOF)fprintf (tmp_fp, "%c", c);
-	      vfclose ( tmp_fp);
+	      stdin_file=capture_stdin();
+	      //stdin_file=vtmpnam (NULL);
+	      //tmp_fp=vfopen ( stdin_file, "w");
+	      //while ( (c=fgetc(stdin))!=EOF)
+	      //{
+	      //  fprintf (tmp_fp, "%c", c);
+	      //}
+	      //vfclose ( tmp_fp);
 	    }
+	  
 	  return vfopen (stdin_file, "r");
 	}
 
     else if ( strm (name, "") && (strm (mode, "w") ||strm (mode, "a")) )return stdout;
     else if ( strm (name, "") && strm (mode, "r"))return stdin;
-    else if ( (fp= fopen ( name, mode))==NULL)
+    else if ( (fp= myfopen ( name, mode))==NULL)
     		{
 		if ( strcmp (mode, "r")==0 && cache_used==0)
 		  {
@@ -6260,14 +6436,34 @@ FILE * vfopen  ( char *name_in, char *mode)
 
     return NULL;
     }
-FILE *fopenN   ( char *fname, char *mode, int max_n_tries, int delay)
+
+
+FILE *myfopen (char *name, char *mode)
+{
+  char *dump_output_file_list=dump_io_start(NULL);
+  if (dump_output_file_list)
+    {
+      
+      FILE *fp;
+      
+      fp=fopen (dump_output_file_list , "a");
+      fprintf  (fp, "%s %s\n", name, mode);
+      
+      fclose (fp);
+    }
+  
+
+  return fopen (name, mode);
+}
+      
+FILE *fopenN  ( char *fname, char *mode, int max_n_tries, int delay)
 {
   FILE *fp;
   int a;
 
   for (a=0; a< max_n_tries; a++)
     {
-      if ((fp=fopen (fname, mode))) return fp;
+      if ((fp=myfopen (fname, mode))) return fp;
       else sleep (delay);
       HERE ("---- failed opening: %s", fname);
     }
@@ -6421,7 +6617,7 @@ char ***file2list ( char *name, char *sep)
 {
   /*Rturns an array where
     list[0]: first line
-    list[0][0]: number of words
+    list[0][0]: number of words (written as a string)
     list[0][1]:first word;
     list[n]=NULL
   */
@@ -6463,6 +6659,20 @@ char **file2lines (char *name)
       return lines;
     }
 }
+int string2file_direct (char *file, char *mode, char *string,...)
+{
+  FILE *fp;
+  va_list ap;
+
+  if (!file) return 0;
+  else if ( !mode) return 0;
+  else if ( !(fp=fopen (file, mode)))return 0;
+  va_start (ap, string);
+  vfprintf (fp, string, ap);
+  fclose (fp);
+  va_end (ap);
+  return 1;
+}
 int string2file (char *file, char *mode, char *string,...)
 {
   FILE *fp;
@@ -6483,7 +6693,7 @@ char *file2string (char *name)
   FILE*fp;
   char *string;
   int a, c;
-
+  
   if (!name || !file_exists (NULL,name))return NULL;
   else
     {
@@ -6504,6 +6714,7 @@ char *file2string (char *name)
 	}
       else return NULL;
       string[a]='\0';
+      
       return string;
     }
 }
@@ -7088,7 +7299,7 @@ char *vfgets ( char *buf, FILE *fp)
   l=0;
   c=fgetc (fp);
   
-  if ( (c==EOF)){return NULL;}
+  if (c==EOF){return NULL;}
   ungetc (c, fp);
     
   while ( (c=fgetc (fp))!='\n' && c!=EOF)
@@ -7621,42 +7832,7 @@ FILE * display_output_filename ( FILE *io, char *type, char *format, char *name,
       fprintf ( io, "\n\t#### File Type= %-15s Format= %-15s Name= %s",type, format, name );
       io=display_output_filename ( io,type,format,name, DUMP);
     }
-  else if (check_output==DUMP)
-    {
-
-      FILE *out;
-      FILE *fp;
-      if ((f=get_string_variable ("dump_output_file")))
-	{
-	  char c;
-	  char *list;
-
-	  if ((list=get_string_variable ("dump_output_file_list")))
-	     {
-	       fp=fopen (list, "a");
-	       fprintf (fp, "##%s##",name);
-	       fclose (fp);
-	     }
-
-	  if ((out=fopen (f, "a"))!=NULL)
-	    {
-	      fprintf (out, "<file>\n");
-	      fprintf (out,"<stream>output</stream>\n");
-	      fprintf (out,"<type>%s</type>\n", type);
-	      fprintf (out, "<format>%s</format>\n", format);
-	      fprintf (out, "<name>%s</name>\n", name);
-	      fprintf (out, "<content>\n");
-	      if ((fp=fopen (name, "r"))!=NULL)
-		{
-		  while ((c=fgetc (fp))!=EOF){fprintf(out, "%c",c);}
-		  fclose (fp);
-		}
-	      fprintf (out,"</content>\n</file>\n");
-	      fclose (out);
-	    }
-	}
-
-    }
+  
   return io;
 }
 
@@ -9005,25 +9181,24 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
   set_proxy(get_proxy_from_env());
   set_email(get_email_from_env ());
 
+  //prepare dump if needed
+  dump_io_start (NULL);
+  
   //pipe_in
   for (a=1, stdi=0; a<in_argc[0]; a++)
 	{
 	  if ( (strm ( out_argv[a], "stdin") || strm (out_argv[a], "STDIN")) && stdi==0)
 	    {
 	      char *file;
-	      FILE *fp, *fp_stdi;
-
+	      FILE *fp;
+	      
 	      if ( stdi==0)
 		{
-		  file=vtmpnam (NULL);
+		  
+		  file=capture_stdin ();
 		  vfree (out_argv[a]);
 		  out_argv[a]=(char*)vcalloc ( strlen (file)+1, sizeof (char));
 		  sprintf (out_argv[a], "%s", file);
-		  fp_stdi=vfopen ("stdin", "r");
-		  fp=vfopen (file, "w");
-		  while ( (c=fgetc (fp_stdi))!=EOF)fprintf (fp, "%c", c);
-		  vfclose (fp);
-		  vfclose (fp_stdi);
 		  stdi=1;
 		}
 	      else if ( stdi ==1)
@@ -9032,7 +9207,7 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
 		}
 	    }
 	}
-
+  
   return out_argv;
 }
 void signal_exit (int)
@@ -9056,14 +9231,14 @@ void clean_exit ()
 {
   Tmpname *b;
   char *tmp;
-  char *f;
+  
   Tmpname *start;
   int debug;
 
   clean_exit_started=1;//prevent new locks
   start=tmpname;
   //1-start killing all the children
-
+  
 
   //3-update error lock if needed
   if (has_error_lock())//Update error lock
@@ -9074,7 +9249,7 @@ void clean_exit ()
       //
     }
 
-
+  
   if (is_rootpid())
     {
 
@@ -9106,16 +9281,10 @@ void clean_exit ()
 	}
       else
 	print_exit_success_message();
-
-      if ( (f=get_string_variable ("dump")))
-	{
-	  dump_tcoffee (f, "standard dump");
-	  //unset_string_variable ("dump");
-	  //unset_string_variable ("dump_output_file");
-	  //display_output_filename (stdout, "DUMP", "DUMP_4_TCOFFEE",f, CHECK);
-	}
-
-
+      
+      //Dump the io if requested
+      dump_io (get_string_variable ("dump"), "standard dump");
+      
       lock (getpid(), LLOCK, LRELEASE, "");
       lock (getpid(), LWARNING, LRELEASE, "");
       lock (getpid(), LERROR, LRELEASE, "");
@@ -9124,13 +9293,13 @@ void clean_exit ()
 
 
 
-
+  
 
   //Remove all temporary files
   debug=(atoigetenv ("DEBUG_TMP_FILE"));
 
 
-
+  
   while ( start && start->name)
     {
       if (!debug)
@@ -9158,13 +9327,15 @@ void clean_exit ()
       start=start->next;
       //vfree(b->name);vfree(b);
     }
+  
   if (!debug && is_rootpid())my_rmdir (get_tmp_4_tcoffee());
 
-
+  
   //Remove the lock
   //lock (getpid(), LLOCK, LRELEASE,NULL); Now keep the lock unless it is a parent process
 
   //UNIQUE TERMINATION FOR EVERYBODY!!!!!!
+  
   return;
 }
 

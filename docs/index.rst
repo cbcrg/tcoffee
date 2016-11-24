@@ -20,6 +20,7 @@ Contents:
    tcoffee_faq
    
    tcoffee_references
+   tcoffee_documentation_validation
    tcoffee_adresses_and_contacts
    tcoffee_license
 

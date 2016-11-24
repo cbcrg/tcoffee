@@ -581,6 +581,7 @@ char ** file2lines  (char *name);
 char *  file2string (char *name);
 int     file2size   (char *name);
 float **file2float_mat (char * name, char *sep);
+int string2file_direct (char *file, char *mode, char *string,...);
 int string2file ( char *file, char *mode, char *string,...);
 char *chomp (char *name);
 int get_cl_param (int argc, char **argv, FILE **fp, const char para_name[], int *set_flag, const char type[], int optional, int max_n_val,const char usage[], ...);
@@ -590,9 +591,10 @@ char *get_t_coffee_environement (char *file);
 char *set_path_4_plugins (char *);
 int add_package2_tcoffee_env (char *package);
 
-void dump (char *dump_file, char *dump_nature);
-void dump_error_file();
-void update_error_dir();
+char *dump_io_start (char *dump);
+void  dump_io (char *dump_file, char *dump_nature);
+void  dump_error_file();
+void  update_error_dir();
 
 FILE* stack_msg(FILE *fp);
 FILE* install_msg(FILE *fp);
@@ -618,8 +620,8 @@ int   fcputenv (char *,char *, char*, ...);
 char *file_putenv (char *file);
 int check_dir_getenv ( char *string);
 
-char* set_string_variable (const char var[], char* v);
-char* get_string_variable (const char var[]);
+char* set_string_variable (char *key, char* v);
+char* get_string_variable (char *key);
 char* unset_string_variable (char *var);
 char* store_string_variable (char *var, char * v, int mode);
 
@@ -659,6 +661,9 @@ char * get_cache_dir();
 void update_cache ();
 void ignore_cache();
 
+
+
+char *capture_stdin ();
 FILE * vfopen ( char *name, char *mode);
 FILE * vfclose (FILE *fp);
 int echo ( char *string, char *fname);

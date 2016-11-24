@@ -230,9 +230,8 @@ A: Simply fed your alignment, any way you like, but do not forget to append the 
 
 ::
 
-  $$: t_coffee Ssample_aln1.aln
+  $$: t_coffee sample_aln1.aln -in proba_pair
 
-  $$: t_coffee -infile=Ssample_aln1.aln
 
   $$: t_coffee -seq=sample_aln1.aln -method=slow_pair,lalign_id_pair -outfile=outaln
 
@@ -318,12 +317,12 @@ A: This is a problem that has to do with your browser. Instead of requesting the
 
 
 
-or
+or score_pdf if you have ps2pdf installed
 
 
 ::
 
-  $$: t_coffee sample_seq2.fasta -output=score_pdf
+  ##: t_coffee sample_seq2.fasta -output=score_pdf
 
 
 
@@ -702,7 +701,7 @@ If you have no library available, the library will be computed on the fly using 
 
 ::
 
-  $$: t_coffee -infile=sample_aln1.aln -special_mode evaluate
+  $$: t_coffee -infile=sample_aln1.aln -evaluate -method proba_pair
 
 
 

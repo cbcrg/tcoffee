@@ -25,10 +25,10 @@ This documentation gives a list of all the flags that can be used to modify the 
   $$: t_coffee
   
   Command 2: 
-  $$: t_coffee -help
+  $#: t_coffee -help
   
   Command 3:
-  $$: t_coffee -help -<flag>
+  $#: t_coffee -help -<flag>
  
 
 Entering the right parameters
@@ -78,10 +78,10 @@ T-Coffee can have its own environment file, kept in a file named ``t_coffee_env`
   $: EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
 
   2) Using 'setenv'
-  $$: t_coffee ... -setenv ENV_4_TCOFFEE=<location>
+  ##: t_coffee ... -setenv ENV_4_TCOFFEE=<location>
 
   3) Using 'export'
-  $: export ENV_4_TCOFFEE=<location>
+  ##: export ENV_4_TCOFFEE=<location>
 
 .. hint:: Priorities: "export" > "-setenv" > "-proxy,-email" > "t_coffee_env" > "default environment"
 
@@ -104,7 +104,7 @@ The input has to be a file containing extra parameters for T-Coffee. Parameters 
 
 ::
 
-  $$: t_coffee -parameters=sample_file.param
+  $$: t_coffee -parameters=sample_param_file.param
   or
   $: cat sample_file.param | t_coffee -parameters=stdin
   
@@ -125,7 +125,7 @@ Replaces the former flag **-score** which is no longer supported. This flag togg
 
 ::
 
-  $$: t_coffee -infile=sample_aln1.aln -mode=evaluate
+  $$: t_coffee -infile=sample_aln1.aln -mode=evaluate -method proba_pair
 
   $$: t_coffee -infile=sample_seq1.aln -in Lsample_lib1.tc_lib -mode=evaluate
 
@@ -757,7 +757,7 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
 ::
 
-  $$: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.moc\
+  ##: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.moc\
  ca_lib -domain -start=100 -len=50
 
 
@@ -768,7 +768,7 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
 ::
 
-  $$: t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
+  ##: t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
 
 
 
@@ -812,7 +812,7 @@ It is possible to compute multiple local alignments, using the moca routine. MOC
 
 ::
 
-  $$: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len\
+  ##: t_coffee -in Lsample_lib3.tc_lib,Mlalign_rs_s_pair -domain -start=100 -len\
  =60
 
   TOLB_ECOLI_212_26  211 SKLAYVTFESGR--SALVIQTLANGAVRQV-ASFPRHNGAPAFSPDGSKLAFA
@@ -981,8 +981,8 @@ If you need to change the case of your file, you can use seq_reformat:
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +lower -output\
-  clustalw
+  $$: t_coffee -other_pg seq_reformat -in sample_aln1.aln -action +lower -output \
+   clustalw
 
 
 
@@ -1670,7 +1670,7 @@ prf2: profile containing one structure
 
 ::
 
-  $$: t_coffee Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile\
+  $$: t_coffee -profile sample_profile1.aln,sample_profile2.aln -mode=3dcoffee -outfile\
       =aligned_prf.aln
 
 Command Line List
@@ -1685,32 +1685,17 @@ These command lines have been checked before every release (along with the other
  tfile=clustal_text
 
 
--fugue_client
-
-::
-
-  $$: t_coffee -in Ssample_seq5.fasta Pstruc4.pdb Mfugue_pair
-
-
 -A list of command lines kindly provided by James Watson (used to crash the pg before version 3.40)
 
 ::
 
-  $$: t_coffee -in Sseq.fas P2PTC Mfugue_pair
-  $$: t_coffee -in S2seqs.fas Mfugue_pair -template_file SELF_P_
+
   $$: t_coffee -mode 3dcoffee -in Sseq.fas P2PTC
   $$: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_
 
 
--A list of command lines that crashed the program before 3.81
 
-::
-
-  $$: t_coffee sample_seq6.fasta -in Mfast_pair Msap_pair Mfugue_pair -template_\
- file template_file6.template
-
-
- -A command line to read 'relaxed' pdb files...
+-A command line to read 'relaxed' pdb files...
 
 ::
 
@@ -1718,14 +1703,7 @@ These command lines have been checked before every release (along with the other
  mplate -weight 1001 -out_lib test_lib7.tc_lib -lib_only
 
 
- -Parsing of MARNA libraries
-
-::
-
-  $$: t_coffee -in Lmarna.tc_lib -outfile maran.test
-
-
- -Parsing of long sequence lines:
+-Parsing of long sequence lines:
 
 ::
 

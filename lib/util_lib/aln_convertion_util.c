@@ -1723,6 +1723,8 @@ char * seq2pdb   (Sequence *S)
 {
   set_blast_default_values();
   S->nseq=1;
+
+  
   S=seq2template_seq (S, "PDB", NULL);
   return seq2P_pdb_id(S,0);
 }
@@ -5896,7 +5898,6 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
     }
   else if ( strm ( template_list, "EXPRESSO") || strm (template_list, "PDB"))
     {
-      
       check_blast_is_installed(server);
       
       int isRNA = 0;
@@ -5915,7 +5916,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 	  sprintf ( buf, "SCRIPT_tc_generic_method.pl@mode#pdb_template@database#%s@method#blastp@cache#%s@minid#%d@maxid#%d@mincov#%d@server#%s@type#_P_@pdb_type#%s",pdb_db, get_cache_dir(),PmI,PMI,PmC, server,pdb_type);
 	}
       
-      return seq2template_seq (S,buf, F);
+       return seq2template_seq (S,buf, F);
     }
 
   else if ( strm (template_list, "RCOFFEE") || strm (template_list, "RNA"))
@@ -5978,6 +5979,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       Sequence *T;
       int a, i;
       int ntemp=0;
+
       T=(template_list!=NULL)?get_fasta_sequence (template_list, NULL):S;
       for (a=0; a< T->nseq; a++)
 	{
@@ -6108,8 +6110,9 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
       vfree (temp_file);
       vfree (pid_list);
       vfree (seq_file);
-
+      
       free_aln (A);
+      
       if ( check_file_exists (outfile) && format_is_fasta(outfile))
 	{
 	  S=seq2template_seq (S, outfile, F);
@@ -6122,7 +6125,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 	  add_warning (stderr, "Could not Run %s to find templates[%s](Forked mode)\n",command, PROGRAM);
 	  return NULL;
 	}
-
+      
       vfree (command);
       return S;
     }
@@ -6430,18 +6433,21 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   int sim, cov, i;
   char *buf;
   
-  
+ 
   P=fill_X_template ( name, p, "_P_");
+  
   sprintf (P->template_format , "pdb");
 
   if (!P ||(check_file_exists (P->template_name) && !is_pdb_file (P->template_name) ))
     {
+
       fprintf ( stderr, "Could Not Fill _P_ template for sequence |%s|", name);
       free_X_template (P);
       return NULL;
     }
   else if ( check_file_exists (P->template_name))
     {
+
       sprintf ( P->template_file, "%s", P->template_name);
       buf=path2filename (P->template_name);
       if (P->template_name!=buf)
@@ -6455,6 +6461,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
        char *st;
 
        st=is_pdb_struc (P->template_name);
+
        if (st)
 	 {
 	   if (st!=P->template_file)sprintf ( P->template_file, "%s", st);
@@ -6463,7 +6470,7 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
 
   /*Make a first run to fix relaxed PDB files*/
   buf=fix_pdb_file (P->template_file);
-
+  
   if ( buf!=P->template_file)
   {
 

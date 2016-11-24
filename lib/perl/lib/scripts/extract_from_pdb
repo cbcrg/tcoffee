@@ -1789,7 +1789,7 @@ if (!$no_remote_pdb_dir)
 	
 	$compressed_tmp_file_name="$tmp_pdb_file.$netcompression";
 	
-	if ($netcompression && -B $compressed_tmp_file_name)
+	if ($netcompression && -B $compressed_tmp_file_name && $attempt<5)
 	  {
 	    my $r;
 	    &debug_print ("\n\tFile Found Remotely");

@@ -202,7 +202,7 @@ void guide_tree(char *fname, double **saga_tmat, char **saga_seq_name, int saga_
         	
         nj_tree(standard_tree, nseqs);
         
-        fp=fopen ( fname, "w");
+        fp=vfopen ( fname, "w");
         print_phylip_tree(standard_tree,fp,FALSE);
 
         vfree(left_branch);

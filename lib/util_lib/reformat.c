@@ -1187,10 +1187,10 @@ Sequence  * main_read_seq ( char *name)
        Alignment *A=NULL;
        int a;
 
+       
 
        format=identify_seq_format (name);
-
-
+       
        if ( getenv4debug ("DEBUG_REFORMAT"))fprintf ( stderr, "\n\nFormat %s\n", format);
 
 
@@ -1233,11 +1233,12 @@ Sequence  * main_read_seq ( char *name)
 Alignment * main_read_aln ( char *name, Alignment *A)
        {
        int a;
-
+       
        static char *format;
        Sequence *S=NULL;
        Sequence *IN_SEQ;
 
+       
 
        if ( !name)return NULL;
        else if (!check_file_exists(name))
@@ -1247,7 +1248,8 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	   else if ( name[0]=='S') name++;/*Line Added for the -convert flag of T-Coffee*/
 	 }
 
-
+       
+       
        if (!A)A=declare_aln(NULL);
        format=identify_seq_format (name);
 
@@ -1258,6 +1260,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	   read_aln ( name, A);
 
 	 }
+       
        else if (format && strm (format, "conc_aln"))A=input_conc_aln (name,NULL);
        else if (format &&strm(format, "msf_aln"  ))read_msf_aln ( name, A);
        else if (format &&strm(format, "blast_aln"))read_blast_aln (name, A);
@@ -1310,6 +1313,8 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	 compress_aln (A);
 	 for ( a=0; a< A->nseq; a++) sprintf ( A->file[a], "%s", name);
 	 A=clean_aln (A);
+	 
+	 
 	 return A;
        }
 
@@ -1417,6 +1422,7 @@ char * name2type_name ( char *name)
 	char mode;
 	
 
+
 	new_name=(char*)vcalloc ( strlen (name)+2, sizeof (char));
 	sprintf ( new_name, "%s", name);
 
@@ -1430,6 +1436,7 @@ char * name2type_name ( char *name)
 	    sprintf ( new_name, "%c%s", mode,name);
 	    
 	  }
+
 	return new_name;
 }
 
@@ -1631,6 +1638,7 @@ char*  is_pdb_struc ( char *name)
      else if (is_pdb_file(file_name2)){r=file_name2;}
      else if (is_pdb_name (name))
        {
+	 //printf_system ("extract_from_pdb -netfile \'%s\' > %s/%s",name, get_cache_dir(), file_name2);
 	 printf_system ("extract_from_pdb -netfile \'%s\' > %s/%s 2>/dev/null",name, get_cache_dir(), file_name2);
 	 if ( is_pdb_file(file_name2))r=file_name2;
 	 else r=NULL;

@@ -513,6 +513,7 @@ int batch_main ( int argc, char **argv)
 
 	if (argc>=3 && strm (argv[1], "-other_pg"))
 	  {
+	    set_string_variable ("-other_pg", "set");
 	    //standard_initialisation (NULL,NULL);
 	    return run_other_pg (argc-2, argv+2);
 	  }
@@ -3962,13 +3963,8 @@ get_cl_param(\
 			    /*Max Value*/ "any"           \
 			   );
 
-	       if (!strm (dump, "no"))
-		 {
-		   set_string_variable ("dump_output_file", vtmpnam (NULL));
-		   set_string_variable ("dump_output_file_list", vtmpnam (NULL));
-
-		   set_string_variable ("dump",dump);
-		 }
+	       dump_io_start (dump);
+	       
 
 	       display=100;
 	       get_cl_param(\
@@ -4001,10 +3997,10 @@ get_cl_param(\
 
 
 	       /**
-	        * If T-Coffee is invoked without any arguments,
+	        * If T-Coffee is invoked without any arguments or with dump
 	        * it displays the available method names through ::display_method_names and exits.
 	        */
-	       if (argc==1  )
+	       if (argc==1 || (strm (argv[1], "-dump") && argc <=3))
 		 {
 		   display_method_names ("display", stdout);
 		   return EXIT_SUCCESS;
@@ -4077,7 +4073,9 @@ get_cl_param(\
 	       if ( infile[0] && !do_evaluate)
 		   {
 		   sprintf ( list_file[n_list++], "%s",infile);
+		   
 		   }
+	       
 /*DO EVALUATE: The aln to evaluate must be provided via -infile*/
 	       else  if (do_evaluate)
 	           {
@@ -4097,8 +4095,7 @@ get_cl_param(\
 		       }
 		     else sprintf ( list_file[n_list++], "S%s",infile);
 		   }
-
-
+	       
 	       /**
 	        *  Array \c list_file[] contains the names of all input files like sequences, profiles and templates,
 	        *  but also methods.
@@ -4119,7 +4116,7 @@ get_cl_param(\
 
 		   if ( do_evaluate || do_convert)sprintf ( infile, "%s",seq_list[0]);
 		 }
-
+	       
 	       /*EXPAND -in*/
 	       /*Introduce the sequences from the -profile flag*/
 	       if ( profile1 && profile1[0])
@@ -4154,16 +4151,21 @@ get_cl_param(\
 		       sprintf ( list_file[n_list++], "R%s",profile_list[a]);
 		     }
 		 }
+	       
+	       
 	       /*Introduce the sequences from the -seq flag*/
 	       for (a=0; a<n_seq_list; a++)
 		 {
+		   //
+
 		   if (check_file_exists(seq_list[a]))
 		     sprintf (list_file[n_list++], "S%s",seq_list[a]);
-		   else if ( check_file_exists (seq_list[a]+1))
+		   else if ( check_file_exists (seq_list[a]+1) && seq_list[a][0]=='S')
 		     sprintf (list_file[n_list++], "%s",seq_list[a]);
 		   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s does not exist [FATAL]",seq_list[a]);
 
 		 }
+	       
 	       /*introduce the alignments from the -aln flag*/
 	       //Important: Must be introduced AFTER the profiles
 	       for (a=0; a<n_aln_file_list; a++)
@@ -4196,6 +4198,7 @@ get_cl_param(\
 		   free_sequence (ExS, ExS->nseq);
 		   free_aln (ExA);
 		 }
+	       	       
 	       /*FETCH THE STRUCTURES INTRODUCED WITH -pdb and add them to -in*/
 	       if ( n_pdb)
 		 {
@@ -4214,7 +4217,7 @@ get_cl_param(\
 			 }
 		     }
 		 }
-
+	      
 	       /*Check That Enough Methods/Libraries/Alignments Have been Chiped in*/
 
 	       if (list_file)
@@ -4248,16 +4251,16 @@ get_cl_param(\
 		     }
 		   vfree (nn);
 		 }
-
+	      
 /*FILL THE F STRUCTURE (Contains Information for Output names For the defaults)*/
-
+	        
 	       if (n_list==0 || argc<=1)
 		 {
 		   fprintf ( stderr, "\nERROR: You have NOT provided enough arguments [FATAL:%s]", PROGRAM);
 		   myexit (EXIT_FAILURE);
 		 }
 
-
+	       
 	    /**
 	     * Check the content of each input file and report possible errors.
 	     */
@@ -4318,8 +4321,8 @@ get_cl_param(\
 		      }
 
 		  }
-
-
+	        
+	       
 	       /*Get Structures*/
 	       for ( a=0; a< n_list; a++)
 		 {
@@ -4342,7 +4345,7 @@ get_cl_param(\
 
 
 	       identify_list_format      (list_file, n_list);
-
+	       
 
 	       /**
 	        * First non-error output: List the Input files, which are usually a sequence
@@ -4372,7 +4375,7 @@ get_cl_param(\
 		     else fprintf (le, "\n");
 		   }
 
-
+	       
 /*CONVERT, ALIGN OR EVALUATE: CHOSE THE RIGHT VERB*/
 	       /*Set the Hierarchy of the verbs*/
 	       /*The first one decides...*/
@@ -4452,7 +4455,7 @@ get_cl_param(\
 		      sprintf ( tot_out_aln[a]   ,"%s%s.%s", F->path  ,out_aln, out_aln_format[a]);
 		  }
 
-
+	       
 
 	       if ( F && strm ( out_lib  , "default"))sprintf ( out_lib   ,"%s%s.tc_lib",F->path     , F->name);
 
@@ -4475,10 +4478,10 @@ get_cl_param(\
 /*                           Input Sequences and Library                                               */
 /*                                                                                                     */
 /*******************************************************************************************************/
-
+	      
 	       set_methods_limits (method_limits,n_method_limits,list_file, n_list, &maxnseq, &maxlen);
 	       /*Set Global Values*/
-
+	      
 
 
 
@@ -4492,8 +4495,9 @@ get_cl_param(\
 	        *       As far as I know, it's main purpose is the method \b blastr_pair which is used in the special mode blastr.
 	        *       See the source code of ::precompute_blast_db for mmore information.
 	        * */
-
+	       
 	       S=read_seq_in_n_list   (list_file, n_list, type,seq_source);
+	       
 	       if (maxnseq!=-1 && S->nseq>maxnseq)
 		 {
 		   printf_exit ( EXIT_FAILURE,stderr, "\nNumber of sequences (%d) exceeds the allowed maximum (%d) [FATAL:%s]", S->nseq,maxnseq, PROGRAM);
@@ -4642,9 +4646,11 @@ get_cl_param(\
 
 
 		       fprintf ( le, "\n\tTemplate Type: [%s] Mode Or File: [%s] [Start", template_type2type_name(template_file_list[a]), template_file_list[a]);
+		       
+		       
 		       S=seq2template_seq(S, template_file_list[a], F);
 		       fprintf ( le, "]");
-
+		       
 		       if (S==NULL)
 			 {
 			   add_warning (stderr, "\nImpossible to find %s Templates\nCheck that your blast server is properly installed [See documentation][FATAL:%s]\n", template_file_list[a],PROGRAM);

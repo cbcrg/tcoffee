@@ -188,7 +188,7 @@ elsif ( $mode eq "psissp_template")
 
 else
   {
-    myexit(flush_error( "$mode iss an unknown mode of tc_generic_method.pl"));
+    myexit(flush_error( "$mode is an unknown mode of tc_generic_method.pl"));
   }
 myexit ($EXIT_SUCCESS);
 

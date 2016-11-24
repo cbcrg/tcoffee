@@ -506,14 +506,17 @@ Job_TC *submit_lib_job ( Job_TC *job)
 	Job_param_TC *p;
 	Job_io_TC *io;
 	TC_method *M;
-	static char *tdir;
-	static char *cdir;
+	static char *tdir=NULL;
+	static char *cdir=NULL;
 	
 
 	
 	if (!tdir)tdir=get_tmp_4_tcoffee();
 	if (!cdir)cdir=get_pwd(NULL);
-
+	  
+	tdir=get_tmp_4_tcoffee();
+	cdir=get_pwd(NULL);
+	
 	p=job->param;
 	io=job->io;
 	M=(job->param)->TCM;
@@ -2374,9 +2377,18 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 			static char *buf;
 			char *lname;
 			if (buf)vfree (buf);
-
-
-			buf=name2type_name(fname[a]);mode=buf[0];lname=buf+1;
+			
+			//prevent silly bug when the file Sname also exists...		    
+			if (fname[a][0]=='S' && file_exists(NULL, fname[a]+1))
+			  {
+			    buf=(char*)vcalloc (strlen (fname[a])+1, sizeof(char));
+			    sprintf (buf, "%s", fname[a]);
+			  }
+			else
+			  buf=name2type_name(fname[a]);
+			
+			mode=buf[0];lname=buf+1;
+			
 			if (is_seq_source ('A', mode, SeqMode))
 			  {
 
@@ -2419,8 +2431,10 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 			else if (is_seq_source ('S', mode, SeqMode))
 			  {
 				/*1 Try with my routines (read t_coffee and MSF)*/
-				if ( (A=main_read_aln ( lname, NULL))!=NULL)
+			    
+			    if ( (A=main_read_aln ( lname, NULL))!=NULL)
 				{
+				  
 
 					S1=aln2seq(A);
 					free_aln(A);
@@ -2437,68 +2451,69 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 				if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nSequence Error in %s [FATAL:%s]\n",lname,PROGRAM); myexit(EXIT_FAILURE);}
 
 				free_sequence (S1,S1->nseq);
+				
 
-			}
+			  }
 			else if (is_seq_source ('L', mode, SeqMode))
-			{
-
-				read_seq_in_list (lname,&nseq,&sequences,&seq_name, &genome_co);
-				S1=fill_sequence_struc ( nseq, sequences, seq_name, genome_co);
-
-				if (genome_co != NULL)
-				{
-					for ( b=0; b< S1->nseq; b++)
-						vfree(genome_co[b].seg_name);
- 				}
-				nseq=0;
-
-				vfree(genome_co);
-				free_char (sequences, -1);
-				free_char ( seq_name, -1);
-				sequences=NULL;
-				seq_name=NULL;
-				S1=seq2unique_name_seq (S1);
-
-				if ((S=merge_seq( S1, S))==NULL)
-				{
-					fprintf ( stderr, "\nSequence Error in %s [FATAL:%s]\n",lname,PROGRAM);
-					myexit(EXIT_FAILURE);
-				}
-				free_sequence(S1, S1->nseq);
-			}
-
+			  {
+			    
+			    read_seq_in_list (lname,&nseq,&sequences,&seq_name, &genome_co);
+			    S1=fill_sequence_struc ( nseq, sequences, seq_name, genome_co);
+			    
+			    if (genome_co != NULL)
+			      {
+				for ( b=0; b< S1->nseq; b++)
+				  vfree(genome_co[b].seg_name);
+			      }
+			    nseq=0;
+			    
+			    vfree(genome_co);
+			    free_char (sequences, -1);
+			    free_char ( seq_name, -1);
+			    sequences=NULL;
+			    seq_name=NULL;
+			    S1=seq2unique_name_seq (S1);
+			    
+			    if ((S=merge_seq( S1, S))==NULL)
+			      {
+				fprintf ( stderr, "\nSequence Error in %s [FATAL:%s]\n",lname,PROGRAM);
+				myexit(EXIT_FAILURE);
+			      }
+			    free_sequence(S1, S1->nseq);
+			  }
+			
 			else if ( !strchr ( "ALSMXPRWG", mode))
-			{
-				myexit (fprintf_error ( stderr, "%s is neither a file nor a method [FATAL:%s]\n", lname));
-			}
+			  {
+			    myexit (fprintf_error ( stderr, "%s is neither a file nor a method [FATAL:%s]\n", lname));
+			  }
 		}
-
+		
 		S=remove_empty_sequence (S);
-
-
+		
+		
 		if ( type && type[0] )sprintf ( S->type, "%s", type);
 		else S=get_sequence_type (S);
 
 		if ( strm (S->type, "PROTEIN_DNA"))
-		{
-			for ( a=0; a< S->nseq; a++)
-			{
-				if (strm ( get_string_type ( S->seq[a]), "DNA") ||strm ( get_string_type ( S->seq[a]), "RNA")  );
-				else if ( strm ( get_string_type ( S->seq[a]), "PROTEIN"))
-				{
-					S->seq[a]=thread_aa_seq_on_dna_seq (S->seq[a]);
-					S->len[a]=strlen (S->seq[a]);
-					S->max_len=MAX(S->max_len, S->len[a]);
-				}
-			}
-		}
-
-
-
+		  {
+		    for ( a=0; a< S->nseq; a++)
+		      {
+			if (strm ( get_string_type ( S->seq[a]), "DNA") ||strm ( get_string_type ( S->seq[a]), "RNA")  );
+			else if ( strm ( get_string_type ( S->seq[a]), "PROTEIN"))
+			  {
+			    S->seq[a]=thread_aa_seq_on_dna_seq (S->seq[a]);
+			    S->len[a]=strlen (S->seq[a]);
+			    S->max_len=MAX(S->max_len, S->len[a]);
+			  }
+		      }
+		  }
+		
+		
+		
 		return S;
 	}
-
-
+	
+	
 
 	return NULL;
 }
@@ -5533,6 +5548,42 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
 	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
 	vfclose (fp);}
+
+
+
+	//Llaign RS_S PAIR for Mocca
+	sprintf (list[n][0], "lalign_rs_s_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "DOC local alignment reporting the N best pairwise local alignments\n");
+	fprintf ( fp, "EXECUTABLE lalign_id_pair\n");
+	fprintf ( fp, "ALN_MODE   s_pairwise\n");
+	fprintf ( fp, "OUT_MODE   fL\n");
+	fprintf ( fp, "IN_FLAG    no_name\n");
+	fprintf ( fp, "OUT_FLAG   no_name\n");
+	if ( strm (retrieve_seq_type(), "DNA") || strm (retrieve_seq_type(), "RNA"))
+	{
+		fprintf ( fp, "MATRIX     dna_idmat\n");
+		fprintf ( fp, "GOP   -10\n");
+		fprintf ( fp, "GEP   -1\n");
+	}
+	else
+	{
+		fprintf ( fp, "MATRIX     blosum50mt\n");
+		fprintf ( fp, "GOP   -10\n");
+		fprintf ( fp, "GEP   -4\n");
+	}
+	fprintf ( fp, "MAXID  100\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", ADDRESS_BUILT_IN);
+	fprintf ( fp, "PROGRAM    %s\n", PROGRAM_BUILT_IN);
+	vfclose (fp);}
+
+
+
+
+
+
 
 	sprintf (list[n][0], "align_pdbpair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
