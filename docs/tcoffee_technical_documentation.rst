@@ -504,7 +504,7 @@ Maximum number of sequences aligned simultaneously when DPA is ran. Given the tr
 - **-dpa_tree** (usage:**-dpa_tree=<filename>**) [Not implemented]
 Guide tree used in DPA; this is a newick tree where the distance associated with each node is set to the minimum pairwise distance among all considered sequences.
 
-Multiple l ocal alignments [Unsupported]
+Multiple local alignments [Unsupported]
 -------------------------
 It is possible to compute multiple local alignments, using the moca routine. MOCCA is a routine that allows extracting all the local alignments that show some similarity with another predefined fragment. MOCCA is a perl script that calls T-Coffee and provides the appropriate parameters.
 
@@ -513,14 +513,14 @@ This flag indicates that t_coffee will run using the domain mode. All the sequen
 
 ::
 
-  $$: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.moc\
+  $#: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.moc\
  ca_lib -domain -start=100 -len=50
 
 This instruction will use the fragment 100-150 on the concatenated sequences, as a template for the extracted repeats. The extraction will only be made once. The library will be placed in the file <lib name>. If you want, you can test other coordinates for the repeat, such as:
 
 ::
 
-  $$: t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
+  $#: t_coffee -in sample_lib1.mocca_lib -domain -start=100 -len=60
 
 This run will use the fragment 100-160, and will be much faster because it does not need to recompute the lalign library.
 
@@ -1481,12 +1481,9 @@ prf2: profile containing one structure
 
 ::
 
-<<<<<<< HEAD
+
   $$: t_coffee -profile sample_profile1.aln,sample_profile2.aln -mode=3dcoffee -outfile\
       =aligned_prf.aln
-=======
-  $$: t_coffee Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile =aligned_prf.aln
->>>>>>> 12840539ed288c9d21121c2f7a7d1898a9ce403c
 
 Command Line List
 -----------------

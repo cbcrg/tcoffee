@@ -3,21 +3,10 @@
 <program>T-COFFEE</program>
 <version>Version_11.00</version>
 <build>Version_11.00</build>
-<cl>t_coffee sample_seq1.fasta -template_file expresso -method TMalign_pair</cl>
+<cl>t_coffee sample_seq1.fasta -run_name=guacamole</cl>
 <stack>
 </stack>
 <warning>
-
-
-*************************************************************************************************
-*                        MESSAGES RECAPITULATION                                    
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-*************************************************************************************************
 </warning>
 <file>
 <stream>output</stream>
@@ -49,7 +38,7 @@ hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
 PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
 -full_log      	S	[0] 
 -genepred_score	S	[0] 	nsd
--run_name      	S	[0] 
+-run_name      	S	[1] 	guacamole
 -mem_mode      	S	[0] 	mem
 -extend        	D	[1] 	1 
 -extend_mode   	S	[0] 	very_fast_triplet
@@ -59,7 +48,7 @@ PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
 -clean         	S	[0] 	no
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
--template_file 	S	[1] 	expresso
+-template_file 	S	[0] 
 -setenv        	S	[0] 	0
 -export        	S	[0] 	0
 -template_mode 	S	[0] 
@@ -70,7 +59,7 @@ PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
 -seq           	S	[1] 	sample_seq1.fasta
 -aln           	S	[0] 
 -method_limits 	S	[0] 
--method        	S	[1] 	TMalign_pair
+-method        	S	[0] 
 -lib           	S	[0] 
 -profile       	S	[0] 
 -profile1      	S	[0] 
@@ -211,14 +200,11 @@ PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -226,8 +212,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
 
 	Multi Core Mode: 4 processors:
-	0 
--run_local_script	D	[0] 	0 
+al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -247,14 +232,11 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -263,20 +245,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-	0 
--run_local_script	D	[0] 	0 
+	--- Process Method/Library/Aln Ssample_seq1.fastaal_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -296,14 +265,11 @@ pid 88586 -- Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], pro
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -312,20 +278,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-	0 
--run_local_script	D	[0] 	0 
+	--- Process Method/Library/Aln Ssample_seq1.fastaal_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -345,14 +298,11 @@ pid 88586 -- Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], pro
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -361,20 +311,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-	0 
--run_local_script	D	[0] 	0 
+	--- Process Method/Library/Aln Ssample_seq1.fastaal_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -394,14 +331,11 @@ pid 88586 -- Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], pro
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -410,20 +344,7 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-
-pid 88586 -- Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-	0 
--run_local_script	D	[0] 	0 
+	--- Process Method/Library/Aln Ssample_seq1.fastaal_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -443,14 +364,11 @@ pid 88586 -- Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], pro
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -460,9 +378,54 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [4]
+ al_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -472,8 +435,7 @@ MANUAL PENALTIES: gapopen=0 gapext=0
 
 Library Relaxation: Multi_proc [4]
  
-!		[Relax Library][TOT=    1][100 %]	0 
--run_local_script	D	[0] 	0 
+!		[Relax Library][TOT=    1][100 %]al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -493,14 +455,11 @@ Library Relaxation: Multi_proc [4]
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -510,9 +469,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -521,8 +480,7 @@ MANUAL PENALTIES: gapopen=0 gapext=0
 	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
- 	0 
--run_local_script	D	[0] 	0 
+ al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -542,14 +500,11 @@ Library Relaxation: Multi_proc [4]
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -559,9 +514,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -570,8 +525,7 @@ MANUAL PENALTIES: gapopen=0 gapext=0
 	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
- 	0 
--run_local_script	D	[0] 	0 
+ al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -591,14 +545,11 @@ Library Relaxation: Multi_proc [4]
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -608,58 +559,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [1904]
-
-Library Relaxation: Multi_proc [4]
- 	0 
--run_local_script	D	[0] 	0 
--plugins       	S	[0] 	default
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--dump          	S	[0] 	no
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 4 processors:
-
-	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
-	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -684,8 +586,7 @@ Group    2: hmgl_trybr
 Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
-	0 
--run_local_script	D	[0] 	0 
+al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -705,14 +606,11 @@ Group    4: hmgt_mouse
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -722,9 +620,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -749,8 +647,7 @@ Group    2: hmgl_trybr
 Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
-	0 
--run_local_script	D	[0] 	0 
+al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -770,14 +667,11 @@ Group    4: hmgt_mouse
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -787,9 +681,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -815,8 +709,7 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:88594]	0 
--run_local_script	D	[0] 	0 
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:1452]al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -836,14 +729,11 @@ Group    4: hmgt_mouse
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -853,9 +743,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -881,8 +771,7 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:88595]	0 
--run_local_script	D	[0] 	0 
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:1453]al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -902,14 +791,11 @@ Group    4: hmgt_mouse
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -919,9 +805,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -946,8 +832,7 @@ Group    2: hmgl_trybr
 Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
-	0 
--run_local_script	D	[0] 	0 
+al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -967,14 +852,11 @@ Group    4: hmgt_mouse
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -984,9 +866,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -1012,12 +894,11 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:88581][Forked]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:1438][Forked]
 
 
 !		[Final Evaluation][TOT=   20][  0 %]!		[Final Evaluation][TOT=   20][ 10 %]!		[Final Evaluation][TOT=   20][ 15 %]!		[Final Evaluation][TOT=   20][ 20 %]!		[Final Evaluation][TOT=   20][ 25 %]!		[Final Evaluation][TOT=   20][ 30 %]!		[Final Evaluation][TOT=   20][ 35 %]!		[Final Evaluation][TOT=   20][ 40 %]!		[Final Evaluation][TOT=   20][ 45 %]!		[Final Evaluation][TOT=   20][ 50 %]!		[Final Evaluation][TOT=   20][ 55 %]!		[Final Evaluation][TOT=   20][ 60 %]!		[Final Evaluation][TOT=   20][ 65 %]!		[Final Evaluation][TOT=   20][ 70 %]!		[Final Evaluation][TOT=   20][ 75 %]!		[Final Evaluation][TOT=   20][ 80 %]!		[Final Evaluation][TOT=   20][ 85 %]!		[Final Evaluation][TOT=   20][ 90 %]!		[Final Evaluation][TOT=   20][ 95 %]!		[Final Evaluation][TOT=   20][100 %]
-	0 
--run_local_script	D	[0] 	0 
+al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -1037,14 +918,11 @@ Group    4: hmgt_mouse
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -1054,9 +932,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -1082,10 +960,9 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:88581][Forked]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:1438][Forked]
 
-	0 
--run_local_script	D	[0] 	0 
+al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -1105,14 +982,11 @@ Group    4: hmgt_mouse
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -1122,9 +996,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -1150,10 +1024,9 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:88581][Forked]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:1438][Forked]
 
-	0 
--run_local_script	D	[0] 	0 
+al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -1173,14 +1046,11 @@ Group    4: hmgt_mouse
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -1190,9 +1060,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -1218,10 +1088,9 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:88581][Forked]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:1438][Forked]
 
-	0 
--run_local_script	D	[0] 	0 
+al_script	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -1241,14 +1110,11 @@ Group    4: hmgt_mouse
 
 INPUT FILES
 	Input File (S) sample_seq1.fasta  Format fasta_seq
-	Input File (M) TMalign_pair 
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [expresso] Mode Or File: [expresso] [Start]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
   Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
   Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
@@ -1258,9 +1124,9 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 	Multi Core Mode: 4 processors:
 
 	--- Process Method/Library/Aln Ssample_seq1.fasta
-	--- Process Method/Library/Aln MTMalign_pair
+	--- Process Method/Library/Aln Mproba_pair
 	xxx Retrieved Ssample_seq1.fasta
-	xxx Retrieved MTMalign_pair
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
@@ -1286,32 +1152,21 @@ Group    3: hmgl_wheat
 Group    4: hmgt_mouse
 
 
-	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:88581][Forked]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:1438][Forked]
 
 
 
 
 OUTPUT RESULTS
-	#### File Type= GUIDE_TREE      Format= newick          Name= sample_seq1.dnd
-	#### File Type= MSA             Format= aln             Name= sample_seq1.aln
-	#### File Type= MSA             Format= html            Name= sample_seq1.html
+	#### File Type= GUIDE_TREE      Format= newick          Name= guacamole.dnd
+	#### File Type= MSA             Format= aln             Name= guacamole.aln
+	#### File Type= MSA             Format= html            Name= guacamole.html
 
-# Command Line: t_coffee sample_seq1.fasta -template_file expresso -method TMalign_pair  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 29.368 Mb, Max= 30.305 Mb
+# Command Line: t_coffee sample_seq1.fasta -run_name guacamole  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.362 Mb, Max= 30.299 Mb
 # Results Produced with T-COFFEE Version_11.00 (Version_11.00)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
-
-
-*************************************************************************************************
-*                        MESSAGES RECAPITULATION                                    
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-88586 -- INFORMATION: Method TMalign cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-*************************************************************************************************
 </content>
 </file>
 <file>
@@ -1334,7 +1189,7 @@ ekapyvakanklkgeynkaiaaynkgesa
 </file>
 <file>
 <stream>output</stream>
-<name>sample_seq1.dnd</name>
+<name>guacamole.dnd</name>
 <content>
 (
 (
@@ -1347,7 +1202,7 @@ hmgt_mouse:0.14750);
 </file>
 <file>
 <stream>input</stream>
-<name>sample_seq1.dnd</name>
+<name>guacamole.dnd</name>
 <content>
 (
 (
@@ -1360,7 +1215,7 @@ hmgt_mouse:0.14750);
 </file>
 <file>
 <stream>output</stream>
-<name>sample_seq1.aln</name>
+<name>guacamole.aln</name>
 <content>
 CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=834, Nseq=4, Len=81 
 
@@ -1382,7 +1237,7 @@ hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
 </file>
 <file>
 <stream>output</stream>
-<name>sample_seq1.html</name>
+<name>guacamole.html</name>
 <content>
 <html>
 <style>
@@ -1407,69 +1262,64 @@ SPAN.valueink {background: 000000}
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
-XDG_DATA_HOME=/Users/cnotredame/.local/share
 MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
 ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
 SHELL=/bin/bash
 TERM=xterm-256color
-TMPDIR=/var/folders/kt/h6f_8ns945v8sm8l744hnqkw0000gn/T/
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gn/T/
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.2Gm1mQlBr6/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.SiIg4fhsUe/Render
 TERM_PROGRAM_VERSION=361.1
 OSNAME=macosx
 PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=3B4D2C5E-2D85-426C-8E4A-6C0F1A72994B
+TERM_SESSION_ID=4AE051C3-8915-4749-A74A-58BE21C3378D
 METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
-ac_cv_path_INTLTOOL_PERL=/usr/bin/perl
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
 http_proxy=
 HTTP_proxy=
-SGML_CATALOG_FILES=/sw/etc/sgml/catalog
 USER=cnotredame
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.c5EYh3QWDe/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.Mk8QjV3nUO/Listeners
 __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
-XDG_CONFIG_DIRS=/sw/etc/xdg
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/subversion/bin:/opt/local/bin/:/Library/Frameworks/Python.framework/Versions/Current/bin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
-XML_CATALOG_FILES=/sw/etc/xml/catalog
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
 PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/doc/tmp
 CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.57JD6DDqrn/unix_domain_listener
 XPC_FLAGS=0x0
-VERSIONER_PERL_PREFER_32_BIT=yes
+VERSIONER_PERL_PREFER_32_BIT=no
 XPC_SERVICE_NAME=0
 ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-XDG_CONFIG_HOME=/Users/cnotredame/.config
 DUMP_4_TCOFFEE=t_coffee.224.dump
 HTTP_PROXY=
-XDG_CACHE_HOME=/Users/cnotredame/.cache
 PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
 MAFFT_BINARIES=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/plugins/macosx/
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
-XDG_DATA_DIRS=/sw/share
 LC_CTYPE=UTF-8
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.I3Kakd635Y/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.Mc5njvMIsW/org.macosforge.xquartz:0
 NUMBER_OF_PROCESSORS=4
 ALL_proxy=
 PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
 LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
-TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/291088581/
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/15981438/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>

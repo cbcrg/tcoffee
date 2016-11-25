@@ -3,7 +3,7 @@
 <program>T-COFFEE</program>
 <version>Version_11.00</version>
 <build>Version_11.00</build>
-<cl>t_coffee -other_pg seq_reformat -in proteases_small.fasta -output pir_seq > proteases_small.pir_seq</cl>
+<cl>t_coffee -other_pg seq_reformat -in proteases_small.aln -action +lower -output clustalw</cl>
 <stack>
 </stack>
 <warning>
@@ -12,172 +12,157 @@
 <stream>output</stream>
 <name>stdout</name>
 <content>
->P1;sp|Q06606|GRZ2_RAT
-	 Granzyme-like protein 2 precursor (EC 3.4.21.-) (GLP-2) (Granzyme-like protein II) (GLP II) (Mast cell protease X) (rMCP-X) (rMCP-10) - Rattus norvegicus (Rat).
-MFLFLFFLVAILPVNTEGGEIIWGTESKPHSRPYMAFIKFYDSNSEPHHC
-GGFLVAKDIVMTAAHCNGRNIKVTLGAHNIKKQENTQVISVVKAKPHENY
-DRDSHFNDIMLLKLERKAQLNGVVKTIALPRSQDWVKPGQVCTVAGWGRL
-ANCTSSNTLQEVNLEVQKGQKCQDMSEDYNDSIQLCVGNPSEGKATGKGD
-SGGPFVCDGVAQGIVSYRLCTGTLPRVFTRISSFIPWIQKTMKVLQQS
-*
->P1;sp|P08884|GRAE_MOUSE
-	 Granzyme E precursor (EC 3.4.21.-) (Cytotoxic cell protease 3) (CCP3) (CTL serine protease 2) (D12) (Cytotoxic serine protease 2) (MCSP2) - Mus musculus (Mouse).
-MPPVLILLTLLLPLGAGAEEIIGGHVVKPHSRPYMAFVKSVDIEGNRRYC
-GGFLVQDDFVLTAAHCRNRTMTVTLGAHNIKAKEETQQIIPVAKAIPHPD
-YNATAFFSDIMLLKLESKAKRTKAVRPLKLPRPNARVKPGDVCSVAGWGS
-RSINDTKASARLREAQLVIQEDEECKKRFRHYTETTEICAGDLKKIKTPF
-KGDSGGPLVCDNKAYGLLAYAKNRTISSGVFTKIVHFLPWISRNMKLL
-*
->P1;sp|P21844|MCPT5_MOUSE
-	 Mast cell protease 5 precursor (EC 3.4.21.-) (MMCP-5) (Mast cell chymase 1) - Mus musculus (Mouse).
-MHLLTLHLLLLLLGSSTKAGEIIGGTECIPHSRPYMAYLEIVTSENYLSA
-CSGFLIRRNFVLTAAHCAGRSITVLLGAHNKTSKEDTWQKLEVEKQFLHP
-KYDENLVVHDIMLLKLKEKAKLTLGVGTLPLSANFNFIPPGRMCRAVGWG
-RTNVNEPASDTLQEVKMRLQEPQACKHFTSFRHNSQLCVGNPKKMQNVYK
-GDSGGPLLCAGIAQGIASYVHRNAKPPAVFTRISHYRPWINKILREN
-*
->P1;sp|O35205|GRAK_MOUSE
-	 Granzyme K precursor (EC 3.4.21.-) - Mus musculus (Mouse).
-MRFSSWALVSLVAGVYMSSECFHTEIIGGREVQPHSRPFMASIQYRSKHI
-CGGVLIHPQWVLTAAHCYSWFPRGHSPTVVLGAHSLSKNEPMKQTFEIKK
-FIPFSRLQSGSASHDIMLIKLRTAAELNKNVQLLHLGSKNYLRDGTKCQV
-TGWGTTKPDLLTASDTLREVTVTIISRKRCNSQSYYNHKPVITKDMICAG
-DARGQKDSCKGDSGGPLICKGIFHALVSQGYKCGIAKKPGIYTLLTKKYQ
-TWIKSKLAPSRAH
-*
->P1;sp|Q9Y5K2|KLK4_HUMAN
-	 Kallikrein-4 precursor (EC 3.4.21.-) (Prostase) (Kallikrein-like protein 1) (KLK-L1) (Enamel matrix serine proteinase 1) - Homo sapiens (Human).
-MATAGNPWGWFLGYLILGVAGSLVSGSCSQIINGEDCSPHSQPWQAALVM
-ENELFCSGVLVHPQWVLSAAHCFQNSYTIGLGLHSLEADQEPGSQMVEAS
-LSVRHPEYNRPLLANDLMLIKLDESVSESDTIRSISIASQCPTAGNSCLV
-SGWGLLANGRMPTVLQCVNVSVVSEEVCSKLYDPLYHPSMFCAGGGQDQK
-DSCNGDSGGPLICNGYLQGLVSFGKAPCGQVGVPGVYTNLCKFTEWIEKT
-VQAS
-*
->P1;sp|Q7YRZ7|GRAA_BOVIN
-	 Granzyme A precursor (EC 3.4.21.78) - Bos taurus (Bovine).
-MNIPFPFSFPPAICLLLIPGVFPVSCEGIIGGNEVAPHTRRYMALIKGLK
-LCAGALIKENWVLTAAHCDLKGNPQVILGAHSTSHKEKLDQVFSIKKAIP
-YPCFDPQTFEGDLQLLQLEGKATMTKAVGILQLPRTEDDVKPHTKCHVAG
-WGSTKKDACQMSNALREANVTVIDRKICNDAQHYNFNPVIDLSMICAGGR
-KGEDDSCEGDSGSPLICDNVFRGVTSFGKCGNPQKPGIYILLTKKHLNWI
-KKTIAGAI
-*
->P1;sp|Q00871|CTRB1_PENVA
-	 Chymotrypsin BI precursor (EC 3.4.21.1) - Penaeus vannamei (Penoeid shrimp) (European white shrimp).
-MIGKLSLLLVCVAVASGNPAAGKPWHWKSPKPLVDPRIHVNATPRIVGGV
-EATPHSWPHQAALFIDDMYFCGGSLISSEWVLTAAHCMDGAGFVEVVLGA
-HNIRQNEASQVSITSTDFFTHENWNSWLLTNDIALIRLPSPVSLNSNIKT
-VKLPSSDVSVGTTVTPTGWGRPSDSASGISDVLRQVNVPVMTNADCDSVY
-GIVGDGVVCIDGTGGKSTCNGDSGGPLNLNGMTYGITSFGSSAGCEKGYP
-AAFTRVYYYLDWIQQKTGVTP
-*
->P1;sp|P08246|ELNE_HUMAN
-	 Leukocyte elastase precursor (EC 3.4.21.37) (Elastase-2) (Neutrophil elastase) (PMN elastase) (Bone marrow serine protease) (Medullasin) (Human leukocyte elastase) (HLE) - Homo sapiens (Human).
-MTLGRRLACLFLACVLPALLLGGTALASEIVGGRRARPHAWPFMVSLQLR
-GGHFCGATLIAPNFVMSAAHCVANVNVRAVRVVLGAHNLSRREPTRQVFA
-VQRIFENGYDPVNLLNDIVILQLNGSATINANVQVAQLPAQGRRLGNGVQ
-CLAMGWGLLGRNRGIASVLQELNVTVVTSLCRRSNVCTLVRGRQAGVCFG
-DSGSPLVCNGLIHGIASFVRGGCASGLYPDAFAPVAQFVNWIDSIIQRSE
-DNPCPHPRDPDPASRTH
-*
->P1;sp|P03953|CFAD_MOUSE
-	 Complement factor D precursor (EC 3.4.21.46) (C3 convertase activator) (Properdin factor D) (Adipsin) (28 kDa protein, adipocyte) - Mus musculus (Mouse).
-MHSSVYFVALVILGAAVCAAQPRGRILGGQEAAAHARPYMASVQVNGTHV
-CGGTLLDEQWVLSAAHCMDGVTDDDSVQVLLGAHSLSAPEPYKRWYDVQS
-VVPHPGSRPDSLEDDLILFKLSQNASLGPHVRPLPLQYEDKEVEPGTLCD
-VAGWGVVTHAGRRPDVLHQLRVSIMNRTTCNLRTYHDGVVTINMMCAESN
-RRDTCRGDSGSPLVCGDAVEGVVTWGSRVCGNGKKPGVYTRVSSYRMWIE
-NITNGNMTS
-*
->P1;sp|Q91VE3|KLK7_MOUSE
-	 Kallikrein-7 precursor (EC 3.4.21.-) (Stratum corneum chymotryptic enzyme) (Thymopsin) - Mus musculus (Mouse).
-MGVWLLSLITVLLSLALETAGQGERIIDGYKCKEGSHPWQVALLKGNQLH
-CGGVLVDKYWVLTAAHCKMGQYQVQLGSDKIGDQSAQKIKATKSFRHPGY
-STKTHVNDIMLVRLDEPVKMSSKVEAVQLPEHCEPPGTSCTVSGWGTTTS
-PDVTFPSDLMCSDVKLISSRECKKVYKDLLGKTMLCAGIPDSKTNTCNGD
-SGGPLVCNDTLQGLVSWGTYPCGQPNDPGVYTQVCKYKRWVMETMKTHR
-*
->P1;sp|Q6H321|KLK2_HORSE
-	 Kallikrein-1E2 precursor (EC 3.4.21.35) (Glandular kallikrein) (HPK) - Equus caballus (Horse).
-MWFLVLCLDLSLGETGALPPIQSRIIGGWECEKHSKPWQVAVYHQGHFQC
-GGVLVHPQWVLTAAHCMSDDYQIWLGRHNLSEDEDTAQFHQVSDSFLDPQ
-FDLSLLKKKYLRPYDDISHDLMLLRLAQPARITDAVKILDLPTQEPKLGS
-TCYTSGWGLISTFTNRGSGTLQCVELRLQSNEKCARAYPEKMTEFVLCAT
-HRDDSGSICLGDSGGALICDGVFQGITSWGYSECADFNDNFVFTKVMPHL
-KWIKETIEKNS
-*
->P1;sp|Q03238|GRAM_RAT
-	 Granzyme M precursor (EC 3.4.21.-) (Met-ase) (Natural killer cell granular protease) (RNK-Met-1) (Fragment) - Rattus norvegicus (Rat).
-LLLLLALKTLWAVGNRFEAQIIGGREAVPHSRPYMVSLQNTKSHMCGGVL
-VHQKWVLTAAHCLSEPLQQLKLVFGLHSLHDPQDPGLTFYIKQAIKHPGY
-NLKYENDLALLKLDGRVKPSKNVKPLALPRKPRDKPAEGSRCSTAGWGIT
-HQRGQLAKSLQELDLRLLDTRMCNNSRFWNGVLTDSMLCLKAGAKGQAPC
-KGDSGGPLVCGKGKVDGILSFSSKNCTDIFKPTVATAVAPYSSWIRKVIG
-RWSPQPLT
-*
->P1;sp|P20160|CAP7_HUMAN
-	 Azurocidin precursor (Cationic antimicrobial protein CAP37) (Heparin- binding protein) (HBP) - Homo sapiens (Human).
-MTRLTVLALLAGLLASSRAGSSPLLDIVGGRKARPRQFPFLASIQNQGRH
-FCGGALIHARFVMTAASCFQSQNPGVSTVVLGAYDLRRRERQSRQTFSIS
-SMSENGYDPQQNLNDLMLLQLDREANLTSSVTILPLPLQNATVEAGTRCQ
-VAGWGSQRSGGRLSRFPRFVNVTVTPEDQCRPNNVCTGVLTRRGGICNGD
-GGTPLVCEGLAHGVASFSLGPCGRGPDFFTRVALFRDWIDGVLNNPGPGP
-A
-*
->P1;sp|P07338|CTRB1_RAT
-	 Chymotrypsinogen B precursor (EC 3.4.21.1) [Contains: Chymotrypsin B chain A; Chymotrypsin B chain B; Chymotrypsin B chain C] - Rattus norvegicus (Rat).
-MAFLWLVSCFALVGATFGCGVPTIQPVLTGLSRIVNGEDAIPGSWPWQVS
-LQDKTGFHFCGGSLISEDWVVTAAHCGVKTSDVVVAGEFDQGSDEENIQV
-LKIAQVFKNPKFNMFTVRNDITLLKLATPAQFSETVSAVCLPNVDDDFPP
-GTVCATTGWGKTKYNALKTPEKLQQAALPIVSEADCKKSWGSKITDVMTC
-AGASGVSSCMGDSGGPLVCQKDGVWTLAGIVSWGSGVCSTSTPAVYSRVT
-ALMPWVQQILEAN
-*
->P1;sp|P00757|KLKB4_MOUSE
-	 Kallikrein 1-related peptidase-like b4 precursor (7S nerve growth factor alpha chain) (Alpha-NGF) - Mus musculus (Mouse).
-MWFLILFLALSLGGIDAAPPVQSQVDCENSQPWHVAVYRFNKYQCGGVLL
-DRNWVLTAAHCYNDKYQVWLGKNNFLEDEPSDQHRLVSKAIPHPDFNMSL
-LNEHTPQPEDDYSNDLMLLRLSKPADITDVVKPITLPTEEPKLGSTCLAS
-GWGSTTPIKFKYPDDLQCVNLKLLPNEDCDKAHEMKVTDAMLCAGEMDGG
-SYTCEHDSGGPLICDGILQGITSWGPEPCGEPTEPSVYTKLIKFSSWIRE
-TMANNP
-*
->P1;sp|P80015|CAP7_PIG
-	 Azurocidin (Cationic antimicrobial protein CAP37) (Heparin-binding protein) (HBP) - Sus scrofa (Pig).
-IVGGRRAQPQEFPFLASIQKQGRPFCAGALVHPRFVLTAASCFRGKNSGS
-ASVVLGAYDLRQQEQSRQTFSIRSISQNGYDPRQNLNDVLLLQLDREARL
-TPSVALVPLPPQNATVEAGTNCQVAGWGTQRLRRLFSRFPRVLNVTVTSN
-PCLPRDMCIGVFSRRGRISQGDRGTPLVCNGLAQGVASFLRRRFRRSSGF
-FTRVALFRNWIDSVLNNPP
-*
->P1;sp|P29786|TRY3_AEDAE
-	 Trypsin 3A1 precursor (EC 3.4.21.4) - Aedes aegypti (Yellowfever mosquito).
-MNQFLFVSFCALLDSAKVSAATLSSGRIVGGFQIDIAEVPHQVSLQRSGR
-HFCGGSIISPRWVLTRAHCTTNTDPAAYTIRAGSTDRTNGGIIVKVKSVI
-PHPQYNGDTYNYDFSLLELDESIGFSRSIEAIALPDASETVADGAMCTVS
-GWGDTKNVFEMNTLLRAVNVPSYNQAECAAALVNVVPVTEQMICAGYAAG
-GKDSCQGDSGGPLVSGDKLVGVVSWGKGCALPNLPGVYARVSTVRQWIRE
-VSEV
-*
->P1;sp|P35037|TRY3_ANOGA
-	 Trypsin-3 precursor (EC 3.4.21.4) - Anopheles gambiae (African malaria mosquito).
-MISNKIAILLAVLVVAVACAQARVAQQHRSVQALPRFLPRPKYDVGHRIV
-GGFEIDVSETPYQVSLQYFNSHRCGGSVLNSKWILTAAHCTVNLQPSSLA
-VRLGSSRHASGGTVVRVARVLEHPNYDDSTIDYDFSLMELESELTFSDVV
-QPVSLPDQDEAVEDGTMTIVSGWGNTQSAAESNAILRAANVPTVNQKECT
-IAYSSSGGITDRMLCAGYKRGGKDACQGDSGGPLVVDGKLVGVVSWGFGC
-AMPGYPGVYARVAVVRDWVRENSGA
-*
->P1;sp|P00773|ELA1_RAT
-	 Elastase-1 precursor (EC 3.4.21.36) - Rattus norvegicus (Rat).
-MLRFLVFASLVLYGHSTQDFPETNARVVGGAEARRNSWPSQISLQYLSGG
-SWYHTCGGTLIRRNWVMTAAHCVSSQMTFRVVVGDHNLSQNDGTEQYVSV
-QKIMVHPTWNSNNVAAGYDIALLRLAQSVTLNNYVQLAVLPQEGTILANN
-NPCYITGWGRTRTNGQLSQTLQQAYLPSVDYSICSSSSYWGSTVKTTMVC
-AGGDGVRSGCQGDSGGPLHCLVNGQYSVHGVTSFVSSMGCNVSKKPTVFT
-RVSAYISWMNNVIAYT
-*
+CLUSTAL W (1.83) multiple sequence alignment
+
+sp|Q06606|GRZ2_RAT     mflfl---f---f-----lvail-pvnt----------------------
+sp|P08884|GRAE_MOUSE   mppvl---i---l-----ltlll-plga----------------------
+sp|P21844|MCPT5_MOUSE  mhllt---l---h-----llllllgsst----------------------
+sp|O35205|GRAK_MOUSE   mrfss---w---a-----lvslvagvym-s-s------------------
+sp|Q9Y5K2|KLK4_HUMAN   matagnpwg---w----flgylilgvag-slv------------------
+sp|Q7YRZ7|GRAA_BOVIN   mnipf---p---fsfppaiclllipgvf----------------------
+sp|Q00871|CTRB1_PENVA  migkl---s---l----llvcvavasgnpaag----kpwhwkspkplvdp
+sp|P08246|ELNE_HUMAN   mtlgr---rlacl----flacvlpal--llgg------------------
+sp|P03953|CFAD_MOUSE   mhssv---y---f-----valvilgaav-c-a------------------
+sp|Q91VE3|KLK7_MOUSE   mgvw----l---l----slitvllsla--let------------------
+sp|Q6H321|KLK2_HORSE   mwfl----v---l----c-ldlslget--gal------------------
+sp|Q03238|GRAM_RAT     lllll---a---l-----ktlwa-vgnr----------------------
+sp|P20160|CAP7_HUMAN   mtrlt---v---l----allagllas--srag------------------
+sp|P07338|CTRB1_RAT    maflwl-----------vscfalvgatfgcgvptiq--------------
+sp|P00757|KLKB4_MOUSE  mwfl----i---l----f-lalslggi--daa------------------
+sp|P80015|CAP7_PIG     --------------------------------------------------
+sp|P29786|TRY3_AEDAE   mnqflf-----------vsfcalldsakvsaa------------------
+sp|P35037|TRY3_ANOGA   misnki-----------aillavlvvavacaqarvaqqhrsvqalprflp
+sp|P00773|ELA1_RAT     mlrfl---v---f-----aslvlyghst-qdf------------------
+                                                                         
+
+sp|Q06606|GRZ2_RAT     -----eggeiiwgteskphsrpymafikfydsnsephhcggflvakdivm
+sp|P08884|GRAE_MOUSE   -----gaeeiigghvvkphsrpymafvksvdiegnrrycggflvqddfvl
+sp|P21844|MCPT5_MOUSE  -----kageiiggteciphsrpymayleivtsenylsacsgflirrnfvl
+sp|O35205|GRAK_MOUSE   ---ecfhteiiggrevqphsrpfmasiqyr----skhicggvlihpqwvl
+sp|Q9Y5K2|KLK4_HUMAN   ---sgscsqiingedcsphsqpwqaalvme----nelfcsgvlvhpqwvl
+sp|Q7YRZ7|GRAA_BOVIN   ---pvscegiiggnevaphtrrymalik------glklcagalikenwvl
+sp|Q00871|CTRB1_PENVA  rihvnatprivggveatphswphqaalfid----dmyfcggslissewvl
+sp|P08246|ELNE_HUMAN   ---talaseivggrrarphawpfmvslqlr----gghfcgatliapnfvm
+sp|P03953|CFAD_MOUSE   ---aqprgrilggqeaaaharpymasvqvn----gthvcggtlldeqwvl
+sp|Q91VE3|KLK7_MOUSE   ---agqgeriidgykckegshpwqvallkg----nqlhcggvlvdkywvl
+sp|Q6H321|KLK2_HORSE   ---ppiqsriiggwecekhskpwqvavyhq----ghfqcggvlvhpqwvl
+sp|Q03238|GRAM_RAT     -----feaqiiggreavphsrpymvslqn----tkshmcggvlvhqkwvl
+sp|P20160|CAP7_HUMAN   ---ssplldivggrkarprqfpflasiqnq----grhfcggaliharfvm
+sp|P07338|CTRB1_RAT    -pvltglsrivngedaipgswpwqvslqdk---tgfhfcggslisedwvv
+sp|P00757|KLKB4_MOUSE  --------ppvqsqvdcensqpwhvavyrf----nkyqcggvlldrnwvl
+sp|P80015|CAP7_PIG     ---------ivggrraqpqefpflasiqkq----grpfcagalvhprfvl
+sp|P29786|TRY3_AEDAE   ---tlssgrivggfqidiaevphqvslqrs----grhfcggsiisprwvl
+sp|P35037|TRY3_ANOGA   rpkydvghrivggfeidvsetpyqvslqyf----nshrcggsvlnskwil
+sp|P00773|ELA1_RAT     ---petnarvvggaearrnswpsqislqylsggswyhtcggtlirrnwvm
+                                 : .             :           *.. ::    ::
+
+sp|Q06606|GRZ2_RAT     taahcngr-----nikvtlgahnikk-qen-t-qvisvvkakphenydrd
+sp|P08884|GRAE_MOUSE   taahcrnr-----tmtvtlgahnika-kee-tqqiipvakaiphpdynat
+sp|P21844|MCPT5_MOUSE  taahcagr-----sitvllgahnkts-ked-twqklevekqflhpkyden
+sp|O35205|GRAK_MOUSE   taahcyswfprghsptvvlgahslsk-nep-mkqtfeikkfipfsrlqsg
+sp|Q9Y5K2|KLK4_HUMAN   saahcfqn-----sytiglglhsleadqep-gsqmveaslsvrhpeynrp
+sp|Q7YRZ7|GRAA_BOVIN   taahcdlk----gnpqvilgahstsh-kek-ldqvfsikkaipypcfdpq
+sp|Q00871|CTRB1_PENVA  taahcmdga---gfvevvlgahnirq-nea-sqvsitstdffthenwnsw
+sp|P08246|ELNE_HUMAN   saahcvanv-nvravrvvlgahnlsr-rep-trqvfavqr-ifengydpv
+sp|P03953|CFAD_MOUSE   saahcmdgvtdddsvqvllgahslsa-pep-ykrwydvqsvvphpgsrpd
+sp|Q91VE3|KLK7_MOUSE   taahckmg-----qyqvqlgsdkig-dqs---aqkikatksfrhpgystk
+sp|Q6H321|KLK2_HORSE   taahcmsd-----dyqiwlgrhnlse-ded-taqfhqvsdsfldpqfdls
+sp|Q03238|GRAM_RAT     taahclsep--lqqlklvfglhslhd-pqd-pgltfyikqaikhpgynl-
+sp|P20160|CAP7_HUMAN   taascfqsq-npgvstvvlgaydlrr-rerqsrqtfsiss-msengydpq
+sp|P07338|CTRB1_RAT    taahcgvkt-sd---vvvagefdqgs-dee-niqvlkiaqvfknpkfnmf
+sp|P00757|KLKB4_MOUSE  taahcynd-----kyqvwlgknnfle-dep-sdqhrlvskaiphpdfnms
+sp|P80015|CAP7_PIG     taascfrgk-nsgsasvvlgaydlrq-qeq-srqtfsirs-isqngydpr
+sp|P29786|TRY3_AEDAE   trahcttnt-dpaaytiragst---d-rtn-ggiivkvksviphpqyngd
+sp|P35037|TRY3_ANOGA   taahctvnl-qpsslavrlgss---r-has-ggtvvrvarvlehpnydds
+sp|P00773|ELA1_RAT     taahcvssq---mtfrvvvgdhnlsq-ndg-teqyvsvqkimvhptwnsn
+                       : * *           :  *                              
+
+sp|Q06606|GRZ2_RAT     -----------sh--fndimllklerkaqlngvvktialprsqd-wvkpg
+sp|P08884|GRAE_MOUSE   -----------af--fsdimllkleskakrtkavrplklprpna-rvkpg
+sp|P21844|MCPT5_MOUSE  -----------lv--vhdimllklkekakltlgvgtlplsanfn-fippg
+sp|O35205|GRAK_MOUSE   -----------sa--shdimliklrtaaelnknvqllhlgskn--ylrdg
+sp|Q9Y5K2|KLK4_HUMAN   -----------ll--andlmlikldesvsesdtirsisiasqc---ptag
+sp|Q7YRZ7|GRAA_BOVIN   -----------tf--egdlqllqlegkatmtkavgilqlprted-dvkph
+sp|Q00871|CTRB1_PENVA  -----------ll--tndialirlpspvslnsniktvklpssd---vsvg
+sp|P08246|ELNE_HUMAN   -----------nl--lndivilqlngsatinanvqvaqlpaqgr-rlgng
+sp|P03953|CFAD_MOUSE   -----------sl--eddlilfklsqnaslgphvrplplqyedk-evepg
+sp|Q91VE3|KLK7_MOUSE   -----------th--vndimlvrldepvkmsskveavqlpehc---eppg
+sp|Q6H321|KLK2_HORSE   llkkkylrpyddi--shdlmllrlaqparitdavkildlptqe---pklg
+sp|Q03238|GRAM_RAT     -----------ky--endlallkldgrvkpsknvkplalprkprdkpaeg
+sp|P20160|CAP7_HUMAN   -----------qn--lndlmllqldreanltssvtilplplqna-tveag
+sp|P07338|CTRB1_RAT    -----------tv--rnditllklatpaqfsetvsavclpnvdd-dfppg
+sp|P00757|KLKB4_MOUSE  llnehtpqpeddy--sndlmllrlskpaditdvvkpitlptee---pklg
+sp|P80015|CAP7_PIG     -----------qn--lndvlllqldrearltpsvalvplppqna-tveag
+sp|P29786|TRY3_AEDAE   -----------ty--nydfslleldesigfsrsieaialpdase-tvadg
+sp|P35037|TRY3_ANOGA   -----------ti--dydfslmeleseltfsdvvqpvslpdqde-avedg
+sp|P00773|ELA1_RAT     -----------nvaagydiallrlaqsvtlnnyvqlavlpqegt-ilann
+                                        *. :..*         :    :           
+
+sp|Q06606|GRZ2_RAT     qvctvagwgrla-nc-tssntlqevnlevqkgqkcqdms----edyndsi
+sp|P08884|GRAE_MOUSE   dvcsvagwgsrsindtkasarlreaqlviqedeeckkrf----rhytett
+sp|P21844|MCPT5_MOUSE  rmcravgwgrtnvn-epasdtlqevkmrlqepqackhf-----tsfrhns
+sp|O35205|GRAK_MOUSE   tkcqvtgwgttkpdlltasdtlrevtvtiisrkrcnsqsyynhkpvitkd
+sp|Q9Y5K2|KLK4_HUMAN   nsclvsgwgllan-g-rmptvlqcvnvsvvseevcskly----dplyhps
+sp|Q7YRZ7|GRAA_BOVIN   tkchvagwgstkkdacqmsnalreanvtvidrkicndaqhynfnpvidls
+sp|Q00871|CTRB1_PENVA  ttvtptgwgrpsdsasgisdvlrqvnvpvmtnadcdsvy----g-ivgdg
+sp|P08246|ELNE_HUMAN   vqclamgwgllgrn-rgiasvlqelnvtvvts-lcrr------------s
+sp|P03953|CFAD_MOUSE   tlcdvagwgvvtha-grrpdvlhqlrvsimnrttcnlrtyh--dgvvtin
+sp|Q91VE3|KLK7_MOUSE   tsctvsgwgtttspdvtfpsdlmcsdvklissreckkvy----kdllgkt
+sp|Q6H321|KLK2_HORSE   stcytsgwglistftnrgsgtlqcvelrlqsnekcaray----pekmtef
+sp|Q03238|GRAM_RAT     srcstagwgithqrg-qlakslqeldlrlldtrmcnnsrfw--ngvltds
+sp|P20160|CAP7_HUMAN   trcqvagwgsqrsg-grlsrfprfvnvtvtpedqcrp------------n
+sp|P07338|CTRB1_RAT    tvcattgwgktkynalktpeklqqaalpivseadckkswg----skitdv
+sp|P00757|KLKB4_MOUSE  stclasgwgsttpikfkypddlqcvnlkllpnedcdkah----emkvtda
+sp|P80015|CAP7_PIG     tncqvagwgtqrlr-rlfsrfprvlnvtvtsn-pclp------------r
+sp|P29786|TRY3_AEDAE   amctvsgwgdtknv-femntllravnvpsynqaecaaalvn--vvpvteq
+sp|P35037|TRY3_ANOGA   tmtivsgwgntqsa-aesnailraanvptvnqkectiayss--sggitdr
+sp|P00773|ELA1_RAT     npcyitgwgrtrtn-gqlsqtlqqaylpsvdysicssssyw--gstvktt
+                             ***                 :       *               
+
+sp|Q06606|GRZ2_RAT     qlcvgnpsegkatgkgdsggpfvcd--g----vaqgivsyrlc----tgt
+sp|P08884|GRAE_MOUSE   eicagdlkkiktpfkgdsggplvcd--n----kaygllayakn----rti
+sp|P21844|MCPT5_MOUSE  qlcvgnpkkmqnvykgdsggpllca--g----iaqgiasyvhr----nak
+sp|O35205|GRAK_MOUSE   micagdargqkdsckgdsggplick--g----ifhalvsqgyk--cgiak
+sp|Q9Y5K2|KLK4_HUMAN   mfcagggqdqkdscngdsggplicn--g----ylqglvsfgka-pcgqvg
+sp|Q7YRZ7|GRAA_BOVIN   micaggrkgeddscegdsgsplicd--n----vfrgvtsfgk---cgnpq
+sp|Q00871|CTRB1_PENVA  vvcidg-tggkstcngdsggplnln--g----mtygitsfgss-agcekg
+sp|P08246|ELNE_HUMAN   nvctlvrgrqagvcfgdsgsplvcn--g----lihgiasfvrg-gcasgl
+sp|P03953|CFAD_MOUSE   mmcaes--nrrdtcrgdsgsplvcg--d----avegvvtwgsr-vcgngk
+sp|Q91VE3|KLK7_MOUSE   mlcagipdsktntcngdsggplvcn--d----tlqglvswgty-pcgqpn
+sp|Q6H321|KLK2_HORSE   vlcathrddsgsiclgdsggalicd--g----vfqgitswgys-ecadfn
+sp|Q03238|GRAM_RAT     mlclkagakgqapckgdsggplvcgk-g----kvdgilsfssk-nctdif
+sp|P20160|CAP7_HUMAN   nvctgvltrrggicngdggtplvce--g----lahgvasfslg-pcg--r
+sp|P07338|CTRB1_RAT    mtcaga--sgvsscmgdsggplvcq--kdgvwtlagivswgsg--vcsts
+sp|P00757|KLKB4_MOUSE  mlcagemdggsytcehdsggplicd--g----ilqgitswgpe-pcgept
+sp|P80015|CAP7_PIG     dmcigvfsrrgrisqgdrgtplvcn--g----laqgvasflrr-rfr--r
+sp|P29786|TRY3_AEDAE   micagyaaggkdscqgdsggplvsg--d----klvgvvswgkg--calpn
+sp|P35037|TRY3_ANOGA   mlcagykrggkdacqgdsggplvvd--g----klvgvvswgfg--campg
+sp|P00773|ELA1_RAT     mvcagg-dgvrsgcqgdsggplhclvngqy--svhgvtsfvssmgcnvsk
+                         *             * * .:             .: :           
+
+sp|Q06606|GRZ2_RAT     lprvftris-sfipwiqktmkv---------------lqqs
+sp|P08884|GRAE_MOUSE   ssgvftkiv-hflpwisrnm------------------kll
+sp|P21844|MCPT5_MOUSE  ppavftris-hyrpwinkil------------------ren
+sp|O35205|GRAK_MOUSE   kpgiytlltkkyqtwiksklap---------------srah
+sp|Q9Y5K2|KLK4_HUMAN   vpgvytnlc-kftewiektvq------------------as
+sp|Q7YRZ7|GRAA_BOVIN   kpgiyilltkkhlnwikktia-----------------gai
+sp|Q00871|CTRB1_PENVA  ypaaftrvy-yyldwiqqktg-----------------vtp
+sp|P08246|ELNE_HUMAN   ypdafapva-qfvnwidsiiqrsednpcphprdpdpasrth
+sp|P03953|CFAD_MOUSE   kpgvytrvs-syrmwienitng---------------nmts
+sp|Q91VE3|KLK7_MOUSE   dpgvytqvc-kykrwvmetmk-----------------thr
+sp|Q6H321|KLK2_HORSE   dnfvftkvm-phlkwiketie-----------------kns
+sp|Q03238|GRAM_RAT     kptvatava-pysswirkvigrws----p--------qplt
+sp|P20160|CAP7_HUMAN   gpdfftrva-lfrdwidgvlnnp-------------gpgpa
+sp|P07338|CTRB1_RAT    tpavysrvt-almpwvqqil------------------ean
+sp|P00757|KLKB4_MOUSE  epsvytkli-kfsswiretma-----------------nnp
+sp|P80015|CAP7_PIG     ssgfftrva-lfrnwidsvln-----------------npp
+sp|P29786|TRY3_AEDAE   lpgvyarvs-tvrqwirevs-------------------ev
+sp|P35037|TRY3_ANOGA   ypgvyarva-vvrdwvrens-------------------ga
+sp|P00773|ELA1_RAT     kptvftrvs-ayiswmnnvi------------------ayt
+                              :      *:                         
+
+
+
 </content>
 </file>
 <file>
@@ -188,202 +173,136 @@ RVSAYISWMNNVIAYT
 </file>
 <file>
 <stream>input</stream>
-<name>proteases_small.fasta</name>
+<name>proteases_small.aln</name>
 <content>
->sp|Q06606|GRZ2_RAT	 Granzyme-like protein 2 precursor (EC 3.4.21.-) (GLP-2) (Granzyme-like protein II) (GLP II) (Mast cell protease X) (rMCP-X) (rMCP-10) - Rattus norvegicus (Rat).
-MFLFLFFLVAILPVNTEGGEIIWGTESKPHSRPYMAFIKFYDSNSEPHHC
-GGFLVAKDIVMTAAHCNGRNIKVTLGAHNIKKQENTQVISVVKAKPHENY
-DRDSHFNDIMLLKLERKAQLNGVVKTIALPRSQDWVKPGQVCTVAGWGRL
-ANCTSSNTLQEVNLEVQKGQKCQDMSEDYNDSIQLCVGNPSEGKATGKGD
-SGGPFVCDGVAQGIVSYRLCTGTLPRVFTRISSFIPWIQKTMKVLQQS
->sp|P08884|GRAE_MOUSE	 Granzyme E precursor (EC 3.4.21.-) (Cytotoxic cell protease 3) (CCP3) (CTL serine protease 2) (D12) (Cytotoxic serine protease 2) (MCSP2) - Mus musculus (Mouse).
-MPPVLILLTLLLPLGAGAEEIIGGHVVKPHSRPYMAFVKSVDIEGNRRYC
-GGFLVQDDFVLTAAHCRNRTMTVTLGAHNIKAKEETQQIIPVAKAIPHPD
-YNATAFFSDIMLLKLESKAKRTKAVRPLKLPRPNARVKPGDVCSVAGWGS
-RSINDTKASARLREAQLVIQEDEECKKRFRHYTETTEICAGDLKKIKTPF
-KGDSGGPLVCDNKAYGLLAYAKNRTISSGVFTKIVHFLPWISRNMKLL
->sp|P21844|MCPT5_MOUSE	 Mast cell protease 5 precursor (EC 3.4.21.-) (MMCP-5) (Mast cell chymase 1) - Mus musculus (Mouse).
-MHLLTLHLLLLLLGSSTKAGEIIGGTECIPHSRPYMAYLEIVTSENYLSA
-CSGFLIRRNFVLTAAHCAGRSITVLLGAHNKTSKEDTWQKLEVEKQFLHP
-KYDENLVVHDIMLLKLKEKAKLTLGVGTLPLSANFNFIPPGRMCRAVGWG
-RTNVNEPASDTLQEVKMRLQEPQACKHFTSFRHNSQLCVGNPKKMQNVYK
-GDSGGPLLCAGIAQGIASYVHRNAKPPAVFTRISHYRPWINKILREN
->sp|O35205|GRAK_MOUSE	 Granzyme K precursor (EC 3.4.21.-) - Mus musculus (Mouse).
-MRFSSWALVSLVAGVYMSSECFHTEIIGGREVQPHSRPFMASIQYRSKHI
-CGGVLIHPQWVLTAAHCYSWFPRGHSPTVVLGAHSLSKNEPMKQTFEIKK
-FIPFSRLQSGSASHDIMLIKLRTAAELNKNVQLLHLGSKNYLRDGTKCQV
-TGWGTTKPDLLTASDTLREVTVTIISRKRCNSQSYYNHKPVITKDMICAG
-DARGQKDSCKGDSGGPLICKGIFHALVSQGYKCGIAKKPGIYTLLTKKYQ
-TWIKSKLAPSRAH
->sp|Q9Y5K2|KLK4_HUMAN	 Kallikrein-4 precursor (EC 3.4.21.-) (Prostase) (Kallikrein-like protein 1) (KLK-L1) (Enamel matrix serine proteinase 1) - Homo sapiens (Human).
-MATAGNPWGWFLGYLILGVAGSLVSGSCSQIINGEDCSPHSQPWQAALVM
-ENELFCSGVLVHPQWVLSAAHCFQNSYTIGLGLHSLEADQEPGSQMVEAS
-LSVRHPEYNRPLLANDLMLIKLDESVSESDTIRSISIASQCPTAGNSCLV
-SGWGLLANGRMPTVLQCVNVSVVSEEVCSKLYDPLYHPSMFCAGGGQDQK
-DSCNGDSGGPLICNGYLQGLVSFGKAPCGQVGVPGVYTNLCKFTEWIEKT
-VQAS
->sp|Q7YRZ7|GRAA_BOVIN	 Granzyme A precursor (EC 3.4.21.78) - Bos taurus (Bovine).
-MNIPFPFSFPPAICLLLIPGVFPVSCEGIIGGNEVAPHTRRYMALIKGLK
-LCAGALIKENWVLTAAHCDLKGNPQVILGAHSTSHKEKLDQVFSIKKAIP
-YPCFDPQTFEGDLQLLQLEGKATMTKAVGILQLPRTEDDVKPHTKCHVAG
-WGSTKKDACQMSNALREANVTVIDRKICNDAQHYNFNPVIDLSMICAGGR
-KGEDDSCEGDSGSPLICDNVFRGVTSFGKCGNPQKPGIYILLTKKHLNWI
-KKTIAGAI
->sp|Q00871|CTRB1_PENVA	 Chymotrypsin BI precursor (EC 3.4.21.1) - Penaeus vannamei (Penoeid shrimp) (European white shrimp).
-MIGKLSLLLVCVAVASGNPAAGKPWHWKSPKPLVDPRIHVNATPRIVGGV
-EATPHSWPHQAALFIDDMYFCGGSLISSEWVLTAAHCMDGAGFVEVVLGA
-HNIRQNEASQVSITSTDFFTHENWNSWLLTNDIALIRLPSPVSLNSNIKT
-VKLPSSDVSVGTTVTPTGWGRPSDSASGISDVLRQVNVPVMTNADCDSVY
-GIVGDGVVCIDGTGGKSTCNGDSGGPLNLNGMTYGITSFGSSAGCEKGYP
-AAFTRVYYYLDWIQQKTGVTP
->sp|P08246|ELNE_HUMAN	 Leukocyte elastase precursor (EC 3.4.21.37) (Elastase-2) (Neutrophil elastase) (PMN elastase) (Bone marrow serine protease) (Medullasin) (Human leukocyte elastase) (HLE) - Homo sapiens (Human).
-MTLGRRLACLFLACVLPALLLGGTALASEIVGGRRARPHAWPFMVSLQLR
-GGHFCGATLIAPNFVMSAAHCVANVNVRAVRVVLGAHNLSRREPTRQVFA
-VQRIFENGYDPVNLLNDIVILQLNGSATINANVQVAQLPAQGRRLGNGVQ
-CLAMGWGLLGRNRGIASVLQELNVTVVTSLCRRSNVCTLVRGRQAGVCFG
-DSGSPLVCNGLIHGIASFVRGGCASGLYPDAFAPVAQFVNWIDSIIQRSE
-DNPCPHPRDPDPASRTH
->sp|P03953|CFAD_MOUSE	 Complement factor D precursor (EC 3.4.21.46) (C3 convertase activator) (Properdin factor D) (Adipsin) (28 kDa protein, adipocyte) - Mus musculus (Mouse).
-MHSSVYFVALVILGAAVCAAQPRGRILGGQEAAAHARPYMASVQVNGTHV
-CGGTLLDEQWVLSAAHCMDGVTDDDSVQVLLGAHSLSAPEPYKRWYDVQS
-VVPHPGSRPDSLEDDLILFKLSQNASLGPHVRPLPLQYEDKEVEPGTLCD
-VAGWGVVTHAGRRPDVLHQLRVSIMNRTTCNLRTYHDGVVTINMMCAESN
-RRDTCRGDSGSPLVCGDAVEGVVTWGSRVCGNGKKPGVYTRVSSYRMWIE
-NITNGNMTS
->sp|Q91VE3|KLK7_MOUSE	 Kallikrein-7 precursor (EC 3.4.21.-) (Stratum corneum chymotryptic enzyme) (Thymopsin) - Mus musculus (Mouse).
-MGVWLLSLITVLLSLALETAGQGERIIDGYKCKEGSHPWQVALLKGNQLH
-CGGVLVDKYWVLTAAHCKMGQYQVQLGSDKIGDQSAQKIKATKSFRHPGY
-STKTHVNDIMLVRLDEPVKMSSKVEAVQLPEHCEPPGTSCTVSGWGTTTS
-PDVTFPSDLMCSDVKLISSRECKKVYKDLLGKTMLCAGIPDSKTNTCNGD
-SGGPLVCNDTLQGLVSWGTYPCGQPNDPGVYTQVCKYKRWVMETMKTHR
->sp|Q6H321|KLK2_HORSE	 Kallikrein-1E2 precursor (EC 3.4.21.35) (Glandular kallikrein) (HPK) - Equus caballus (Horse).
-MWFLVLCLDLSLGETGALPPIQSRIIGGWECEKHSKPWQVAVYHQGHFQC
-GGVLVHPQWVLTAAHCMSDDYQIWLGRHNLSEDEDTAQFHQVSDSFLDPQ
-FDLSLLKKKYLRPYDDISHDLMLLRLAQPARITDAVKILDLPTQEPKLGS
-TCYTSGWGLISTFTNRGSGTLQCVELRLQSNEKCARAYPEKMTEFVLCAT
-HRDDSGSICLGDSGGALICDGVFQGITSWGYSECADFNDNFVFTKVMPHL
-KWIKETIEKNS
->sp|Q03238|GRAM_RAT	 Granzyme M precursor (EC 3.4.21.-) (Met-ase) (Natural killer cell granular protease) (RNK-Met-1) (Fragment) - Rattus norvegicus (Rat).
-LLLLLALKTLWAVGNRFEAQIIGGREAVPHSRPYMVSLQNTKSHMCGGVL
-VHQKWVLTAAHCLSEPLQQLKLVFGLHSLHDPQDPGLTFYIKQAIKHPGY
-NLKYENDLALLKLDGRVKPSKNVKPLALPRKPRDKPAEGSRCSTAGWGIT
-HQRGQLAKSLQELDLRLLDTRMCNNSRFWNGVLTDSMLCLKAGAKGQAPC
-KGDSGGPLVCGKGKVDGILSFSSKNCTDIFKPTVATAVAPYSSWIRKVIG
-RWSPQPLT
->sp|P20160|CAP7_HUMAN	 Azurocidin precursor (Cationic antimicrobial protein CAP37) (Heparin- binding protein) (HBP) - Homo sapiens (Human).
-MTRLTVLALLAGLLASSRAGSSPLLDIVGGRKARPRQFPFLASIQNQGRH
-FCGGALIHARFVMTAASCFQSQNPGVSTVVLGAYDLRRRERQSRQTFSIS
-SMSENGYDPQQNLNDLMLLQLDREANLTSSVTILPLPLQNATVEAGTRCQ
-VAGWGSQRSGGRLSRFPRFVNVTVTPEDQCRPNNVCTGVLTRRGGICNGD
-GGTPLVCEGLAHGVASFSLGPCGRGPDFFTRVALFRDWIDGVLNNPGPGP
-A
->sp|P07338|CTRB1_RAT	 Chymotrypsinogen B precursor (EC 3.4.21.1) [Contains: Chymotrypsin B chain A; Chymotrypsin B chain B; Chymotrypsin B chain C] - Rattus norvegicus (Rat).
-MAFLWLVSCFALVGATFGCGVPTIQPVLTGLSRIVNGEDAIPGSWPWQVS
-LQDKTGFHFCGGSLISEDWVVTAAHCGVKTSDVVVAGEFDQGSDEENIQV
-LKIAQVFKNPKFNMFTVRNDITLLKLATPAQFSETVSAVCLPNVDDDFPP
-GTVCATTGWGKTKYNALKTPEKLQQAALPIVSEADCKKSWGSKITDVMTC
-AGASGVSSCMGDSGGPLVCQKDGVWTLAGIVSWGSGVCSTSTPAVYSRVT
-ALMPWVQQILEAN
->sp|P00757|KLKB4_MOUSE	 Kallikrein 1-related peptidase-like b4 precursor (7S nerve growth factor alpha chain) (Alpha-NGF) - Mus musculus (Mouse).
-MWFLILFLALSLGGIDAAPPVQSQVDCENSQPWHVAVYRFNKYQCGGVLL
-DRNWVLTAAHCYNDKYQVWLGKNNFLEDEPSDQHRLVSKAIPHPDFNMSL
-LNEHTPQPEDDYSNDLMLLRLSKPADITDVVKPITLPTEEPKLGSTCLAS
-GWGSTTPIKFKYPDDLQCVNLKLLPNEDCDKAHEMKVTDAMLCAGEMDGG
-SYTCEHDSGGPLICDGILQGITSWGPEPCGEPTEPSVYTKLIKFSSWIRE
-TMANNP
->sp|P80015|CAP7_PIG	 Azurocidin (Cationic antimicrobial protein CAP37) (Heparin-binding protein) (HBP) - Sus scrofa (Pig).
-IVGGRRAQPQEFPFLASIQKQGRPFCAGALVHPRFVLTAASCFRGKNSGS
-ASVVLGAYDLRQQEQSRQTFSIRSISQNGYDPRQNLNDVLLLQLDREARL
-TPSVALVPLPPQNATVEAGTNCQVAGWGTQRLRRLFSRFPRVLNVTVTSN
-PCLPRDMCIGVFSRRGRISQGDRGTPLVCNGLAQGVASFLRRRFRRSSGF
-FTRVALFRNWIDSVLNNPP
->sp|P29786|TRY3_AEDAE	 Trypsin 3A1 precursor (EC 3.4.21.4) - Aedes aegypti (Yellowfever mosquito).
-MNQFLFVSFCALLDSAKVSAATLSSGRIVGGFQIDIAEVPHQVSLQRSGR
-HFCGGSIISPRWVLTRAHCTTNTDPAAYTIRAGSTDRTNGGIIVKVKSVI
-PHPQYNGDTYNYDFSLLELDESIGFSRSIEAIALPDASETVADGAMCTVS
-GWGDTKNVFEMNTLLRAVNVPSYNQAECAAALVNVVPVTEQMICAGYAAG
-GKDSCQGDSGGPLVSGDKLVGVVSWGKGCALPNLPGVYARVSTVRQWIRE
-VSEV
->sp|P35037|TRY3_ANOGA	 Trypsin-3 precursor (EC 3.4.21.4) - Anopheles gambiae (African malaria mosquito).
-MISNKIAILLAVLVVAVACAQARVAQQHRSVQALPRFLPRPKYDVGHRIV
-GGFEIDVSETPYQVSLQYFNSHRCGGSVLNSKWILTAAHCTVNLQPSSLA
-VRLGSSRHASGGTVVRVARVLEHPNYDDSTIDYDFSLMELESELTFSDVV
-QPVSLPDQDEAVEDGTMTIVSGWGNTQSAAESNAILRAANVPTVNQKECT
-IAYSSSGGITDRMLCAGYKRGGKDACQGDSGGPLVVDGKLVGVVSWGFGC
-AMPGYPGVYARVAVVRDWVRENSGA
->sp|P00773|ELA1_RAT	 Elastase-1 precursor (EC 3.4.21.36) - Rattus norvegicus (Rat).
-MLRFLVFASLVLYGHSTQDFPETNARVVGGAEARRNSWPSQISLQYLSGG
-SWYHTCGGTLIRRNWVMTAAHCVSSQMTFRVVVGDHNLSQNDGTEQYVSV
-QKIMVHPTWNSNNVAAGYDIALLRLAQSVTLNNYVQLAVLPQEGTILANN
-NPCYITGWGRTRTNGQLSQTLQQAYLPSVDYSICSSSSYWGSTVKTTMVC
-AGGDGVRSGCQGDSGGPLHCLVNGQYSVHGVTSFVSSMGCNVSKKPTVFT
-RVSAYISWMNNVIAYT
+CLUSTAL FORMAT for T-COFFEE Version_9.01 [http://www.tcoffee.org] [MODE:  ], CPU=0.01 sec, SCORE=80, Nseq=19, Len=341 
+
+sp|Q06606|GRZ2_RAT     MFLFL---F---F-----LVAIL-PVNT---------------------------EGGEIIWGTESKPHSRPYMAFIKFYDSNSEPHHCGGFLVAKDIVMTAAHCNGR-----NIKVTLGAHNIKK-QEN-T-QVISVVKAKPHENYDRD----------
+sp|P08884|GRAE_MOUSE   MPPVL---I---L-----LTLLL-PLGA---------------------------GAEEIIGGHVVKPHSRPYMAFVKSVDIEGNRRYCGGFLVQDDFVLTAAHCRNR-----TMTVTLGAHNIKA-KEE-TQQIIPVAKAIPHPDYNAT----------
+sp|P21844|MCPT5_MOUSE  MHLLT---L---H-----LLLLLLGSST---------------------------KAGEIIGGTECIPHSRPYMAYLEIVTSENYLSACSGFLIRRNFVLTAAHCAGR-----SITVLLGAHNKTS-KED-TWQKLEVEKQFLHPKYDEN----------
+sp|O35205|GRAK_MOUSE   MRFSS---W---A-----LVSLVAGVYM-S-S---------------------ECFHTEIIGGREVQPHSRPFMASIQYR----SKHICGGVLIHPQWVLTAAHCYSWFPRGHSPTVVLGAHSLSK-NEP-MKQTFEIKKFIPFSRLQSG----------
+sp|Q9Y5K2|KLK4_HUMAN   MATAGNPWG---W----FLGYLILGVAG-SLV---------------------SGSCSQIINGEDCSPHSQPWQAALVME----NELFCSGVLVHPQWVLSAAHCFQN-----SYTIGLGLHSLEADQEP-GSQMVEASLSVRHPEYNRP----------
+sp|Q7YRZ7|GRAA_BOVIN   MNIPF---P---FSFPPAICLLLIPGVF-------------------------PVSCEGIIGGNEVAPHTRRYMALIK------GLKLCAGALIKENWVLTAAHCDLK----GNPQVILGAHSTSH-KEK-LDQVFSIKKAIPYPCFDPQ----------
+sp|Q00871|CTRB1_PENVA  MIGKL---S---L----LLVCVAVASGNPAAG----KPWHWKSPKPLVDPRIHVNATPRIVGGVEATPHSWPHQAALFID----DMYFCGGSLISSEWVLTAAHCMDGA---GFVEVVLGAHNIRQ-NEA-SQVSITSTDFFTHENWNSW----------
+sp|P08246|ELNE_HUMAN   MTLGR---RLACL----FLACVLPAL--LLGG---------------------TALASEIVGGRRARPHAWPFMVSLQLR----GGHFCGATLIAPNFVMSAAHCVANV-NVRAVRVVLGAHNLSR-REP-TRQVFAVQR-IFENGYDPV----------
+sp|P03953|CFAD_MOUSE   MHSSV---Y---F-----VALVILGAAV-C-A---------------------AQPRGRILGGQEAAAHARPYMASVQVN----GTHVCGGTLLDEQWVLSAAHCMDGVTDDDSVQVLLGAHSLSA-PEP-YKRWYDVQSVVPHPGSRPD----------
+sp|Q91VE3|KLK7_MOUSE   MGVW----L---L----SLITVLLSLA--LET---------------------AGQGERIIDGYKCKEGSHPWQVALLKG----NQLHCGGVLVDKYWVLTAAHCKMG-----QYQVQLGSDKIG-DQS---AQKIKATKSFRHPGYSTK----------
+sp|Q6H321|KLK2_HORSE   MWFL----V---L----C-LDLSLGET--GAL---------------------PPIQSRIIGGWECEKHSKPWQVAVYHQ----GHFQCGGVLVHPQWVLTAAHCMSD-----DYQIWLGRHNLSE-DED-TAQFHQVSDSFLDPQFDLSLLKKKYLRPY
+sp|Q03238|GRAM_RAT     LLLLL---A---L-----KTLWA-VGNR---------------------------FEAQIIGGREAVPHSRPYMVSLQN----TKSHMCGGVLVHQKWVLTAAHCLSEP--LQQLKLVFGLHSLHD-PQD-PGLTFYIKQAIKHPGYNL-----------
+sp|P20160|CAP7_HUMAN   MTRLT---V---L----ALLAGLLAS--SRAG---------------------SSPLLDIVGGRKARPRQFPFLASIQNQ----GRHFCGGALIHARFVMTAASCFQSQ-NPGVSTVVLGAYDLRR-RERQSRQTFSISS-MSENGYDPQ----------
+sp|P07338|CTRB1_RAT    MAFLWL-----------VSCFALVGATFGCGVPTIQ---------------PVLTGLSRIVNGEDAIPGSWPWQVSLQDK---TGFHFCGGSLISEDWVVTAAHCGVKT-SD---VVVAGEFDQGS-DEE-NIQVLKIAQVFKNPKFNMF----------
+sp|P00757|KLKB4_MOUSE  MWFL----I---L----F-LALSLGGI--DAA--------------------------PPVQSQVDCENSQPWHVAVYRF----NKYQCGGVLLDRNWVLTAAHCYND-----KYQVWLGKNNFLE-DEP-SDQHRLVSKAIPHPDFNMSLLNEHTPQPE
+sp|P80015|CAP7_PIG     -----------------------------------------------------------IVGGRRAQPQEFPFLASIQKQ----GRPFCAGALVHPRFVLTAASCFRGK-NSGSASVVLGAYDLRQ-QEQ-SRQTFSIRS-ISQNGYDPR----------
+sp|P29786|TRY3_AEDAE   MNQFLF-----------VSFCALLDSAKVSAA---------------------TLSSGRIVGGFQIDIAEVPHQVSLQRS----GRHFCGGSIISPRWVLTRAHCTTNT-DPAAYTIRAGST---D-RTN-GGIIVKVKSVIPHPQYNGD----------
+sp|P35037|TRY3_ANOGA   MISNKI-----------AILLAVLVVAVACAQARVAQQHRSVQALPRFLPRPKYDVGHRIVGGFEIDVSETPYQVSLQYF----NSHRCGGSVLNSKWILTAAHCTVNL-QPSSLAVRLGSS---R-HAS-GGTVVRVARVLEHPNYDDS----------
+sp|P00773|ELA1_RAT     MLRFL---V---F-----ASLVLYGHST-QDF---------------------PETNARVVGGAEARRNSWPSQISLQYLSGGSWYHTCGGTLIRRNWVMTAAHCVSSQ---MTFRVVVGDHNLSQ-NDG-TEQYVSVQKIMVHPTWNSN----------
+                                                                                   : .             :           *.. ::    ::: * *           :  *                                        
+
+sp|Q06606|GRZ2_RAT     -SH--FNDIMLLKLERKAQLNGVVKTIALPRSQD-WVKPGQVCTVAGWGRLA-NC-TSSNTLQEVNLEVQKGQKCQDMS----EDYNDSIQLCVGNPSEGKATGKGDSGGPFVCD--G----VAQGIVSYRLC----TGTLPRVFTRIS-SFIPWIQKTM
+sp|P08884|GRAE_MOUSE   -AF--FSDIMLLKLESKAKRTKAVRPLKLPRPNA-RVKPGDVCSVAGWGSRSINDTKASARLREAQLVIQEDEECKKRF----RHYTETTEICAGDLKKIKTPFKGDSGGPLVCD--N----KAYGLLAYAKN----RTISSGVFTKIV-HFLPWISRNM
+sp|P21844|MCPT5_MOUSE  -LV--VHDIMLLKLKEKAKLTLGVGTLPLSANFN-FIPPGRMCRAVGWGRTNVN-EPASDTLQEVKMRLQEPQACKHF-----TSFRHNSQLCVGNPKKMQNVYKGDSGGPLLCA--G----IAQGIASYVHR----NAKPPAVFTRIS-HYRPWINKIL
+sp|O35205|GRAK_MOUSE   -SA--SHDIMLIKLRTAAELNKNVQLLHLGSKN--YLRDGTKCQVTGWGTTKPDLLTASDTLREVTVTIISRKRCNSQSYYNHKPVITKDMICAGDARGQKDSCKGDSGGPLICK--G----IFHALVSQGYK--CGIAKKPGIYTLLTKKYQTWIKSKL
+sp|Q9Y5K2|KLK4_HUMAN   -LL--ANDLMLIKLDESVSESDTIRSISIASQC---PTAGNSCLVSGWGLLAN-G-RMPTVLQCVNVSVVSEEVCSKLY----DPLYHPSMFCAGGGQDQKDSCNGDSGGPLICN--G----YLQGLVSFGKA-PCGQVGVPGVYTNLC-KFTEWIEKTV
+sp|Q7YRZ7|GRAA_BOVIN   -TF--EGDLQLLQLEGKATMTKAVGILQLPRTED-DVKPHTKCHVAGWGSTKKDACQMSNALREANVTVIDRKICNDAQHYNFNPVIDLSMICAGGRKGEDDSCEGDSGSPLICD--N----VFRGVTSFGK---CGNPQKPGIYILLTKKHLNWIKKTI
+sp|Q00871|CTRB1_PENVA  -LL--TNDIALIRLPSPVSLNSNIKTVKLPSSD---VSVGTTVTPTGWGRPSDSASGISDVLRQVNVPVMTNADCDSVY----G-IVGDGVVCIDG-TGGKSTCNGDSGGPLNLN--G----MTYGITSFGSS-AGCEKGYPAAFTRVY-YYLDWIQQKT
+sp|P08246|ELNE_HUMAN   -NL--LNDIVILQLNGSATINANVQVAQLPAQGR-RLGNGVQCLAMGWGLLGRN-RGIASVLQELNVTVVTS-LCRR------------SNVCTLVRGRQAGVCFGDSGSPLVCN--G----LIHGIASFVRG-GCASGLYPDAFAPVA-QFVNWIDSII
+sp|P03953|CFAD_MOUSE   -SL--EDDLILFKLSQNASLGPHVRPLPLQYEDK-EVEPGTLCDVAGWGVVTHA-GRRPDVLHQLRVSIMNRTTCNLRTYH--DGVVTINMMCAES--NRRDTCRGDSGSPLVCG--D----AVEGVVTWGSR-VCGNGKKPGVYTRVS-SYRMWIENIT
+sp|Q91VE3|KLK7_MOUSE   -TH--VNDIMLVRLDEPVKMSSKVEAVQLPEHC---EPPGTSCTVSGWGTTTSPDVTFPSDLMCSDVKLISSRECKKVY----KDLLGKTMLCAGIPDSKTNTCNGDSGGPLVCN--D----TLQGLVSWGTY-PCGQPNDPGVYTQVC-KYKRWVMETM
+sp|Q6H321|KLK2_HORSE   DDI--SHDLMLLRLAQPARITDAVKILDLPTQE---PKLGSTCYTSGWGLISTFTNRGSGTLQCVELRLQSNEKCARAY----PEKMTEFVLCATHRDDSGSICLGDSGGALICD--G----VFQGITSWGYS-ECADFNDNFVFTKVM-PHLKWIKETI
+sp|Q03238|GRAM_RAT     -KY--ENDLALLKLDGRVKPSKNVKPLALPRKPRDKPAEGSRCSTAGWGITHQRG-QLAKSLQELDLRLLDTRMCNNSRFW--NGVLTDSMLCLKAGAKGQAPCKGDSGGPLVCGK-G----KVDGILSFSSK-NCTDIFKPTVATAVA-PYSSWIRKVI
+sp|P20160|CAP7_HUMAN   -QN--LNDLMLLQLDREANLTSSVTILPLPLQNA-TVEAGTRCQVAGWGSQRSG-GRLSRFPRFVNVTVTPEDQCRP------------NNVCTGVLTRRGGICNGDGGTPLVCE--G----LAHGVASFSLG-PCG--RGPDFFTRVA-LFRDWIDGVL
+sp|P07338|CTRB1_RAT    -TV--RNDITLLKLATPAQFSETVSAVCLPNVDD-DFPPGTVCATTGWGKTKYNALKTPEKLQQAALPIVSEADCKKSWG----SKITDVMTCAGA--SGVSSCMGDSGGPLVCQ--KDGVWTLAGIVSWGSG--VCSTSTPAVYSRVT-ALMPWVQQIL
+sp|P00757|KLKB4_MOUSE  DDY--SNDLMLLRLSKPADITDVVKPITLPTEE---PKLGSTCLASGWGSTTPIKFKYPDDLQCVNLKLLPNEDCDKAH----EMKVTDAMLCAGEMDGGSYTCEHDSGGPLICD--G----ILQGITSWGPE-PCGEPTEPSVYTKLI-KFSSWIRETM
+sp|P80015|CAP7_PIG     -QN--LNDVLLLQLDREARLTPSVALVPLPPQNA-TVEAGTNCQVAGWGTQRLR-RLFSRFPRVLNVTVTSN-PCLP------------RDMCIGVFSRRGRISQGDRGTPLVCN--G----LAQGVASFLRR-RFR--RSSGFFTRVA-LFRNWIDSVL
+sp|P29786|TRY3_AEDAE   -TY--NYDFSLLELDESIGFSRSIEAIALPDASE-TVADGAMCTVSGWGDTKNV-FEMNTLLRAVNVPSYNQAECAAALVN--VVPVTEQMICAGYAAGGKDSCQGDSGGPLVSG--D----KLVGVVSWGKG--CALPNLPGVYARVS-TVRQWIREVS
+sp|P35037|TRY3_ANOGA   -TI--DYDFSLMELESELTFSDVVQPVSLPDQDE-AVEDGTMTIVSGWGNTQSA-AESNAILRAANVPTVNQKECTIAYSS--SGGITDRMLCAGYKRGGKDACQGDSGGPLVVD--G----KLVGVVSWGFG--CAMPGYPGVYARVA-VVRDWVRENS
+sp|P00773|ELA1_RAT     -NVAAGYDIALLRLAQSVTLNNYVQLAVLPQEGT-ILANNNPCYITGWGRTRTN-GQLSQTLQQAYLPSVDYSICSSSSYW--GSTVKTTMVCAGG-DGVRSGCQGDSGGPLHCLVNGQY--SVHGVTSFVSSMGCNVSKKPTVFTRVS-AYISWMNNVI
+                              *. :..*         :    :                 ***                 :       *                 *             * * .:             .: :                  :      *:    
+
+sp|Q06606|GRZ2_RAT     KV---------------LQQS
+sp|P08884|GRAE_MOUSE   ------------------KLL
+sp|P21844|MCPT5_MOUSE  ------------------REN
+sp|O35205|GRAK_MOUSE   AP---------------SRAH
+sp|Q9Y5K2|KLK4_HUMAN   Q------------------AS
+sp|Q7YRZ7|GRAA_BOVIN   A-----------------GAI
+sp|Q00871|CTRB1_PENVA  G-----------------VTP
+sp|P08246|ELNE_HUMAN   QRSEDNPCPHPRDPDPASRTH
+sp|P03953|CFAD_MOUSE   NG---------------NMTS
+sp|Q91VE3|KLK7_MOUSE   K-----------------THR
+sp|Q6H321|KLK2_HORSE   E-----------------KNS
+sp|Q03238|GRAM_RAT     GRWS----P--------QPLT
+sp|P20160|CAP7_HUMAN   NNP-------------GPGPA
+sp|P07338|CTRB1_RAT    ------------------EAN
+sp|P00757|KLKB4_MOUSE  A-----------------NNP
+sp|P80015|CAP7_PIG     N-----------------NPP
+sp|P29786|TRY3_AEDAE   -------------------EV
+sp|P35037|TRY3_ANOGA   -------------------GA
+sp|P00773|ELA1_RAT     ------------------AYT
+                                            
+
+
+
 </content>
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
-XDG_DATA_HOME=/Users/cnotredame/.local/share
 MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
 ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
 SHELL=/bin/bash
 TERM=xterm-256color
-TMPDIR=/var/folders/kt/h6f_8ns945v8sm8l744hnqkw0000gn/T/
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gn/T/
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.2Gm1mQlBr6/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.SiIg4fhsUe/Render
 TERM_PROGRAM_VERSION=361.1
 OSNAME=macosx
 PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=3B4D2C5E-2D85-426C-8E4A-6C0F1A72994B
+TERM_SESSION_ID=4AE051C3-8915-4749-A74A-58BE21C3378D
 METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
-ac_cv_path_INTLTOOL_PERL=/usr/bin/perl
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
 http_proxy=
 HTTP_proxy=
-SGML_CATALOG_FILES=/sw/etc/sgml/catalog
 USER=cnotredame
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.c5EYh3QWDe/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.Mk8QjV3nUO/Listeners
 __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
-XDG_CONFIG_DIRS=/sw/etc/xdg
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/subversion/bin:/opt/local/bin/:/Library/Frameworks/Python.framework/Versions/Current/bin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
-XML_CATALOG_FILES=/sw/etc/xml/catalog
 DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
 PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/doc/tmp
 CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.57JD6DDqrn/unix_domain_listener
 XPC_FLAGS=0x0
-VERSIONER_PERL_PREFER_32_BIT=yes
+VERSIONER_PERL_PREFER_32_BIT=no
 XPC_SERVICE_NAME=0
 ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
 PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-XDG_CONFIG_HOME=/Users/cnotredame/.config
 DUMP_4_TCOFFEE=t_coffee.76.dump
 HTTP_PROXY=
-XDG_CACHE_HOME=/Users/cnotredame/.cache
 PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
 MAFFT_BINARIES=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/plugins/macosx/
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
-XDG_DATA_DIRS=/sw/share
 LC_CTYPE=UTF-8
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.I3Kakd635Y/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.Mc5njvMIsW/org.macosforge.xquartz:0
 NUMBER_OF_PROCESSORS=4
 ALL_proxy=
 PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
 LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
-TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/291078977/
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/159889393/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>

@@ -30,7 +30,7 @@ my $clean;
 
 my $redo_failed;
 my $failed;
-my $clf;
+my $run;
 my $rep;
 my $cw=cwd();
 my $mode="new";#will only run the new ones
@@ -47,7 +47,7 @@ $dir{failed}  ="$cw/testsuite/validation/doc/failed/";
 
 if ($ARGV[0] eq "-help")
   {
-    print "doc2check\n";
+    print "doc2test.pl\n";
     print "Automaticly checks t_coffee command lines\n";
     print "The github dir structure is expected by default\n";
     print "tcoffee/\n";
@@ -65,7 +65,12 @@ if ($ARGV[0] eq "-help")
     print "To check All the commands against the references, use -mode validate\n";
     print "flags:\n";
     
-    print "     -command     <file containing a list of commands, for test purpose>\n";
+    print "     -run           doc|ref|<dump>|<file>|<string>\n";
+    print "                    doc       : run all Commands in 'grep <-pattern> /docs/*.rst'\n";
+    print "                    ref       : run all the dumps in /refs/*.dump\n";
+    print "                    <dump>    : run the dump (can be a dir of dumps)\n";
+    print "                    <file>    : run each line as a command\n";
+    print "                    <string>  : run the string as a command\n";
     print "     -pattern       pattern used to recognize the command lines [def=**]\n";
     print "                    pattern will be treated as a regexp if -regexp is set\n";
     print "     -regexp        flag that causes pattern to be treated as a perl regexp\n";
@@ -103,9 +108,9 @@ for (my $a=0; $a<=$#ARGV; $a++)
   {
     
     
-    if ($ARGV[$a]=~/-command/)
+    if ($ARGV[$a]=~/-run/)
       {
-	$clf=$ARGV[++$a];
+	$run=$ARGV[++$a];
       }
     elsif ($ARGV[$a]=~/-pattern/)
       {
@@ -210,16 +215,7 @@ if (!$doclog){$doclog="$dir{log}/doc.log";}
 
 #1-minimum checks
 
-if (!-d $dir{docs})
-  {
-    print STDERR "ERROR: The $dir{docs} file must be set to the dir containing the doc in .rst format [FATAL]\n";
-    die;
-  }
-if (!-d $dir{examples})
-  {
-    print STDERR "ERROR: The $dir{examples} file must must be set to the dir containing the examples [FATAL]\n";
-    die;
-  }
+
 
 # 2 - create the directory structure if needed
 foreach my $d (keys (%dir))
@@ -257,12 +253,16 @@ if ($reset==1)
 # 2 - get the command line file
 
 my @rstlist;
-if (!$clf)
+my @dumplist;
+my $run_dump;
+if (!$run || $run eq "doc")
   {
-   opendir (DIR, $dir{docs});
-   my @list=readdir (DIR);
-   closedir (DIR);
-   foreach my $rst (@list)
+    check_dir ($dir{docs});
+    check_dir ($dir{examples});
+       
+    
+    my @list=dir2file_list($dir{docs}, "rst");
+    foreach my $rst (@list)
      {
        my $f="$dir{docs}/$rst";
        if ($rst=~/.*\.rst$/)
@@ -272,9 +272,22 @@ if (!$clf)
 	 }
      }
  }
-else
+elsif ($run eq "ref" || (-e $run && isdump($run)))
   {
-    open (F, "$clf");
+    check_dir ($dir{ref});
+    my @list=dir2file_list($dir{ref}, "dump");
+    foreach my $d (@list)
+      {
+	$d="$dir{ref}/$d";
+	my $com=dump2cl($d);
+	$cl{$com}{0}{refdump}=$d;
+	push @rstlist, $com;
+      }
+    $run_dump=1;
+  }
+elsif (-e $run)
+  {
+    open (F, "$run");
     while(<F>)
       {
 	my $l=$_;
@@ -283,12 +296,15 @@ else
 	
 	if (($line=~/\S/))
 	  {
-	    $cl{$line}{0}{"doc"}=$line;
+	    $cl{$line}{0}{doc}=$line;
 	  }
       }
     close (F);
   }
-
+else
+  {
+    $cl{$run}{0}{"doc"}=$run;
+  }
 
 #dump the documentation
 
@@ -302,14 +318,17 @@ if ($clean)
     mygit_add ($dir{examples});
     exit;
   }
-
-system ("cp $dir{examples}/* $dir{tmp}");
-clean_examples ($dir{tmp}, $doclog);
-
-# 4 - get the command lines in the reference and in the failed
 my $num;
-$num=dir2dump (\%cl,\%dir,"ref", $num); 
-$num=dir2dump (\%cl,\%dir,"failed", $num); 
+if (!$run_dump)
+  {
+    system ("cp $dir{examples}/* $dir{tmp}");
+    clean_examples ($dir{tmp}, $doclog);
+    $num=dir2dump (\%cl,\%dir,"ref", $num); 
+    $num=dir2dump (\%cl,\%dir,"failed", $num); 
+  }
+# 4 - get the command lines in the reference and in the failed
+
+
 
 #display_command (\%cl);
 #die;
@@ -340,43 +359,41 @@ foreach my $com (sort (keys (%cl)))
     my $dump;
     my $dump_num;
     my $ref=$cl{$com}{0}{ref};
-    my $doc=$cl{$com}{0}{doc};
+    my $doc  =$cl{$com}{0}{doc};
+    my $refdump=$cl{$com}{0}{refdump};
     my $failed=$cl{$com}{0}{failed};
     my $run=0;
 
     if (!($com=~/\S/)){next;}
 
-
-    if (!$ref)
-      {
-	$num++;
-	$dump="t_coffee.$num.dump";
-	$dump_num=$num;
-	
-      }
-    elsif ($doc && $ref)
-      {
-	$dump="$ref";
-	$dump=~/t_coffee\.(\d+)\.dump/;
-	$dump_num=$1;
-      }
-
-
-    #if ($cl{$com}{0}{doc}}{$cl{$com}{0}{doc}=$dump;}
-
-
     my $shell_com=$com;
-
+    if ($refdump)
+      {
+	$run=1;
+      }
+    else
+      {
+	if (!$ref)
+	  {
+	    $num++;
+	    $dump="t_coffee.$num.dump";
+	    $dump_num=$num;
+	  }
+	elsif ($doc && $ref)
+	  {
+	    $dump="$ref";
+	    $dump=~/t_coffee\.(\d+)\.dump/;
+	    $dump_num=$1;
+	  }
+	if    ($mode eq "new")   {if (!$ref)   {$run=1;}}
+	elsif ($mode eq "failed"){if ( $failed){$run=1;}}
+	else  {$run=1;}
+      }
+    
     if ($pg ne "t_coffee")
       {
 	$shell_com=~s/t_coffee/$pg/g;
       }
-    
-    #decide which jobs will run
-    $run=0;
-    if    ($mode eq "new")   {if (!$ref)   {$run=1;}}
-    elsif ($mode eq "failed"){if ( $failed){$run=1;}}
-    else  {$run=1;}
     
     $count++;
     if ($run)
@@ -386,21 +403,29 @@ foreach my $com (sort (keys (%cl)))
 	
 	$tot_tot++;
 	$cl{$com}{run}=1;
-	%R=dump2report($com,"ref", \%cl);
 	
 	
-	$shell=system ("export DUMP_4_TCOFFEE=$dump;$shell_com >/dev/null 2>/dev/null");
+	if ($refdump)
+	  {
+	    %R=dump2report($refdump);
+	    $shell=dump2run($shell_com, $refdump, $dump);
+	  }
+	else
+	  {
+	    %R=dump2report($ref);
+	    $shell=system ("export DUMP_4_TCOFFEE=$dump;$shell_com >/dev/null 2>/dev/null");
+	  }
 	
-	%D=dump2report($com,"doc", \%cl);
+	%D=dump2report($dump);
 	compare_reports (\%R, \%D);
-	if ($shell || $D{error} || $D{MissingOutput})
+	if (!$run_dump && ($shell || $D{error} || $D{MissingOutput}))
 	  {
 	    #refresh the example files
 	    system ("rm $dir{tmp}/*");
 	    system ("cp $dir{examples}/* $dir{tmp}");
 	    clean_examples ($dir{tmp}, $doclog);
 	    $shell=system ("export DUMP_4_TCOFFEE=$dump;$shell_com >/dev/null 2>/dev/null");
-	    %D=dump2report($com,"doc", \%cl);
+	    %D=dump2report($dump);
 	    compare_reports (\%R, \%D);
 	  }
 
@@ -528,7 +553,6 @@ foreach my $rst (@rstlist)
 	      }
 	  }
       }
-    $report.="## SUMMARY -- TOT: $tot FAILURE: $failure WARNING: $warning SUCCESS: $success -- $rst\n";
   }
 print "$report";
 open (LOG, ">>$log");print (LOG "$report");close (LOG);
@@ -724,13 +748,45 @@ sub compare_reports
       }
     return;
   }
+sub dump2run
+  {
+    my ($idump, $odump, $com)=@_;
+    
+    my $dir=random_string();
+    system ("mkdir $dir");
+    chdir  ($dir);
+    
+
+    if (!$com){$com=dump2cl($idump);}
+    my %ref=xml2tag_list ($idump, "file");
+      
+    for (my $i=0; $i<$ref{n};$i++)
+	{
+	  my $stream=xmltag2value($ref{$i}{body},"stream");
+	  my $name=xmltag2value($ref{$i}{body},"name");
+	  my $content=xmltag2value($ref{$i}{body},"content");
+	  
+	  if ($stream eq "input")
+	    {
+	      open (F, ">%s", $name);
+	      print F "$content";
+	      close (F);
+	      
+	      if ($name eq "stdin"){$com="cat stdin | $com";}
+	    }
+	}
+    my $shell=system ("export DUMP_4_TCOFFEE=$odump;$com >/dev/null 2>/dev/null");
+    system ("rm *");
+    chdir ("..");
+    system ("rmdir $dir");
+    return $shell;
+  }
+  
 sub dump2report
   {
-      my ($com, $type, $cl)=@_;
-      my %R;  
-      my $dump=$cl->{$com}{0}{$type};
+      my ($dump)=shift;
       
-      if (!$dump){return %R;}
+      if (!$dump || -e $dump){return %R;}
       
       my %ref=xml2tag_list ($dump, "file");
       
@@ -975,7 +1031,15 @@ sub xml2tag_list
     return %tag;
   }
 
-
+sub isdump
+    {
+      my $f=shift;
+      open (F, "$f");
+      <F>;
+      my $l=$_;
+      return $l=~/DumpIO/;
+    }
+    
 sub file_contains
   {
     my ($file, $tag, $max)=(@_);
@@ -1171,3 +1235,31 @@ sub dir2file_list
        return @nl;
      }
      
+sub random_string
+       {
+	 my $l=shift;
+
+	 if (!$l){$l=10;}
+	 my $ret;
+	 my $s="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+	 my @l=split (//,$s);
+	 for (my $a=0; $a<$l; $a++)
+	   {
+	     my $c=int(rand($#l+1));
+	     $ret.=$l[$c];
+	   }
+	 print "Random: $ret\n";
+	 return $ret;
+       }
+sub check_dir
+       {
+	 my $dir=shift;
+
+	 if (!-d $dir)
+
+	    {
+	      print STDERR "ERROR: $dir could not be found. In default mode run tze script from the repository root [FATAL]\n";
+	      die;
+	    }
+	 return;
+       }

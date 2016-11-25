@@ -787,11 +787,11 @@ If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for
 ::
 
   Command 3: (under maintenance)
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _MATRIX_sarmat \
+  $#: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _MATRIX_sarmat \
       -output newick
 
   Command 4: (under maintenance)
-  $$: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
+  $#: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
        -output newick
 
 .. warning:: Bootstrap facilities will also be added at some point...We recommend you to use `Phylip <http://evolution.genetics.washington.edu/phylip.html>`_ or any other specific phylogenetic software (PhyML, RAxML, MrBayes, etc...) if you need some serious phylogeny !
@@ -840,7 +840,7 @@ For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be
 
   P: <position> <block start> <block_end> <block score> <block Length>
 
-Pruning phylogenetic trees
+Pruning phylogenetic trees [Under maintenance]
 --------------------------
 Pruning removes leaves from an existing tree and recomputes distances so that no information is lost. To do this with T-Coffee you need two input files: a tree file in the Newick format and a FASTA-like file where sequences can be omitted, but you can also leave them, at your entire convenience. The second file is merely a list of the sequences to be kept when pruning the tree. The resulting tree will contain only the sequences specified in the list.
 
@@ -855,7 +855,7 @@ Pruning removes leaves from an existing tree and recomputes distances so that no
   ...
 
   Pruning the tree:
-  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.tree -in2 sample_3Dseq1.fake -action \
+  $#: t_coffee -other_pg seq_reformat -in sample_3Dseq1.tree -in2 group_3Dseq1.fasta -action \
       +tree_prune -output newick
 
 
@@ -1296,7 +1296,7 @@ Both Expresso (command 1) and 3D-Coffee (command 2) are modes of T-Coffee you ca
       three_pdb_two_seq_pdb1.template_list
       
   Command 4: Running Expresso using a local BLAST/PDB 
-  $$: t_coffee three_pdb_two_seq.fasta -mode expresso -blast=LOCAL -pdb_db=<PDB> \
+  ##: t_coffee three_pdb_two_seq.fasta -mode expresso -blast=LOCAL -pdb_db=<PDB> \
       -pdb_type d -pdb_min_sim 95 -pdb_min cov 90 -cache $PWD 
 
 .. tip:: By default, structures and structural pairwise alignments are stored in your local ~/.t_coffee/cache/ allowing Expresso to run faster if you reuse similar structures; you can choose to have all these files directly in your working directory by using **-cache=$PWD**. Don't forget to empty your cache directory from time to time otherwise your folder is just getting bigger and bigger (similar comment can be done for any template based mode of T-Coffee). 
@@ -1436,7 +1436,7 @@ There are two modes we proposed to improve R-Coffee alignments: 1) using the bes
 
 
   Using Consan (best): (under maintenance...)
-  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+  $#: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
 
   
   Using multiple methods:
@@ -1907,7 +1907,7 @@ If you want to check the capacity of an algorithm to bring related sequences wit
 
 
   Command 2: computed on the fly
-  $$: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
+  ##: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
       +evaluate3D  distances 15 +tree2bs first +tree2collapse groups 4 +print nseq -output no
 
 The T-RMSD

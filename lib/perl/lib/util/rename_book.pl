@@ -489,7 +489,7 @@ elsif       ($action eq "-dirsync")
     
     foreach my $f (@l1)
       {
-	if (-d "$from_dir/$f" && ($f=~/(^j\d+)/ || $f=~/(^J\d+)/))
+	if (-d "$from_dir/$f" && ($f=~/(^j\d+.*)/ || $f=~/(^J\d+.*)/))
 	  {
 	    
 	    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();

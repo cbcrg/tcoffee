@@ -3,7 +3,7 @@
 <program>T-COFFEE</program>
 <version>Version_11.00</version>
 <build>Version_11.00</build>
-<cl>t_coffee sv.fasta -method lalign_id_pair</cl>
+<cl>t_coffee sample_seq1.fasta -template_file TM</cl>
 <stack>
 </stack>
 <warning>
@@ -12,79 +12,21 @@
 <stream>output</stream>
 <name>stdout</name>
 <content>
-CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=566, Nseq=4, Len=581 
+!	Process: >hmgl_trybr _T_ hmgl_trybr.tmp
+!	Process: >hmgl_wheat _T_ hmgl_wheat.tmp
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=834, Nseq=4, Len=81 
 
-Q8CAN2_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-Q9D630_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-CJ033_MOUSE     M-------------------------------------------------
-CJ033_HUMAN     MAASGRGLCKAVAASPFPAWRRDNTEARGGLKPEYDAVVIGAGHNGLVAA
-                *                                                 
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhs----d-lsivemskaagaawkelg
+hmgt_mouse      -----kpkrprsayniyvsesfqeak----d-dsaqgklklvneawknls
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+                      ***. ::: .: ..  .. .    .  .     *  .  *: * 
 
-Q8CAN2_MOUSE    AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQICT
-Q9D630_MOUSE    AYLQRLGVNTAVFERRHVIGGARVTEEIIPGFKFSRASYLLSLLRPQICT
-CJ033_MOUSE     --------------------------------------------------
-CJ033_HUMAN     AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQIYT
-                                                                  
-
-Q8CAN2_MOUSE    DLELK-------------VD-RLAWPGGW---------------------
-Q9D630_MOUSE    DLELKKHGLKLHLRDPYSFTPMLEEGTLNRLPRSLLLGTDMAANQKEISQ
-CJ033_MOUSE     --------------------------------------------------
-CJ033_HUMAN     DLELKKHGLRLHLRNPYSFTPMLEEGAGSKVPRCLLLGTDMAENQKQIAQ
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    FSRKDAQVGKVSGD------------------------------------
-CJ033_MOUSE     ----------------KRLVLAIDPLLDAAPVDTTAFHHGSLLQRLGALS
-CJ033_HUMAN     FSQKDAQVFPKYEEFMHRLALAIDPLLDAAPVDMAAFQHGSLLQRMRSLS
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     TLKPLLKAGRTLGAQLPQYCEVLTAPISKVLDQWFESEPLKATLATDAVI
-CJ033_HUMAN     TLKPLLKAGRILGAQLPRYYEVLTAPITKVLDQWFESEPLKATLATDAVI
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     GAMTSPHTPGSGYVLLHHVMGSLEGTQGAWSYVQGGMGALSDAIASSAAT
-CJ033_HUMAN     GAMTSPHTPGSGYVLLHHVMGGLEGMQGAWGYVQGGMGALSDAIASSATT
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     RGASIFTEKTVAKVQVNSEGRVQGVTLQDGEEVRSRVVLSCASPQVTFLE
-CJ033_HUMAN     HGASIFTEKTVAKVQVNSEGCVQGVVLEDGTEVRSKMVLSNTSPQITFLK
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     LTPQEWLPGAFVKRISQLDTQSPVTKINVAVDRLPNFQAAPNAPGDQPQG
-CJ033_HUMAN     LTPQEWLPEEFLERISQLDTRSPVTKINVAVDRLPSFLAAPNAPRGQPLP
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     HHQCSIHLNCEDTLLLHQAFEDAKGGLPSQKPMIELCIPSSLDPTLAPPG
-CJ033_HUMAN     HHQCSIHLNCEDTLLLHQAFEDAMDGLPSHRPVIELCIPSSLDPTLAPPG
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     CHVVSLFTQYTPYTLAGGKVWNEQEKNTYADKVFDCIEAYAPGFKRSVLA
-CJ033_HUMAN     CHVVSLFTQYMPYTLAGGKAWDEQERDAYADRVFDCIEVYAPGFKDSVVG
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     RDILTPPDLERIFRLPGGNIFHGAMSLDQLYFARPVPQHSDYRCPVQGLY
-CJ033_HUMAN     RDILTPPDLERIFGLPGGNIFHCAMSLDQLYFARPVPLHSGYRCPLQGLY
-                                                                  
-
-Q8CAN2_MOUSE    -------------------------------
-Q9D630_MOUSE    -------------------------------
-CJ033_MOUSE     LCGSGAHPGGGVMGAAGRNAAHVVFRDLKNM
-CJ033_HUMAN     LCGSGAHPGGGVMGAAGRNAAHVAFRDLKSM
-                                               
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgb_chite      --dkseweakaatakqnyiralqeyerng-g
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+                  ::  :   *   : .* . :         
 
 
 
@@ -108,7 +50,7 @@ PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
 -clean         	S	[0] 	no
 -do_self       	FL	[0] 	0
 -do_normalise  	D	[0] 	1000 
--template_file 	S	[0] 
+-template_file 	S	[1] 	TM
 -setenv        	S	[0] 	0
 -export        	S	[0] 	0
 -template_mode 	S	[0] 
@@ -116,10 +58,10 @@ PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
 -remove_template_file	D	[0] 	0 
 -profile_template_file	S	[0] 
 -in            	S	[0] 
--seq           	S	[1] 	sv.fasta
+-seq           	S	[1] 	sample_seq1.fasta
 -aln           	S	[0] 
 -method_limits 	S	[0] 
--method        	S	[1] 	lalign_id_pair
+-method        	S	[0] 
 -lib           	S	[0] 
 -profile       	S	[0] 
 -profile1      	S	[0] 
@@ -259,20 +201,17 @@ PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+Looking For Sequence Templates:
 
-	Multi Core Mode: 4 processors:
-cript	D	[0] 	0 
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -291,21 +230,17 @@ cript	D	[0] 	0
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+Looking For Sequence Templates:
 
-	Multi Core Mode: 4 processors:
-
-	--- Process Method/Library/Aln Ssv.fastacript	D	[0] 	0 
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -324,21 +259,17 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
-INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+Looking For Sequence Templates:
 
-	Multi Core Mode: 4 processors:
-
-	--- Process Method/Library/Aln Ssv.fastacript	D	[0] 	0 
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -357,21 +288,29 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
-
-	--- Process Method/Library/Aln Ssv.fastacript	D	[0] 	0 
+pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -390,21 +329,30 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fastacript	D	[0] 	0 
+	--- Process Method/Library/Aln Ssample_seq1.fastapt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -423,34 +371,169 @@ INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fastapt	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fastapt	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fastapt	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
  
-!		[Relax Library][TOT=    1][100 %]cript	D	[0] 	0 
+!		[Relax Library][TOT=    1][100 %]pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -469,33 +552,42 @@ Library Relaxation: Multi_proc [4]
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
- cript	D	[0] 	0 
+ pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -514,33 +606,42 @@ Library Relaxation: Multi_proc [4]
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
- cript	D	[0] 	0 
+ pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -559,33 +660,42 @@ Library Relaxation: Multi_proc [4]
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
- cript	D	[0] 	0 
+ pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -604,34 +714,43 @@ Library Relaxation: Multi_proc [4]
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
  
-Relaxation Summary: [3710]--->[3710]
+Relaxation Summary: [1904]--->[1461]
 
 
 
@@ -641,12 +760,12 @@ MAKE GUIDE TREE
 	[MODE=nj][DONE]
 
 PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
 
-cript	D	[0] 	0 
+pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -665,34 +784,43 @@ cript	D	[0] 	0
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
  
-Relaxation Summary: [3710]--->[3710]
+Relaxation Summary: [1904]--->[1461]
 
 
 
@@ -702,13 +830,12 @@ MAKE GUIDE TREE
 	[MODE=nj][DONE]
 
 PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
 
-
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:88862]cript	D	[0] 	0 
+pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -727,34 +854,43 @@ Group    4: Q9D630_MOUSE
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
  
-Relaxation Summary: [3710]--->[3710]
+Relaxation Summary: [1904]--->[1461]
 
 
 
@@ -764,14 +900,13 @@ MAKE GUIDE TREE
 	[MODE=nj][DONE]
 
 PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
 
 
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:88862]
-	Group    6: [Group    5 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  581][PID:88862]cript	D	[0] 	0 
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:2434]pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -790,34 +925,43 @@ Group    4: Q9D630_MOUSE
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
  
-Relaxation Summary: [3710]--->[3710]
+Relaxation Summary: [1904]--->[1461]
 
 
 
@@ -827,18 +971,13 @@ MAKE GUIDE TREE
 	[MODE=nj][DONE]
 
 PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
 
 
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:88862]
-	Group    6: [Group    5 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  581][PID:88862]
-	Group    7: [Group    2 (   1 seq)] with [Group    6 (   3 seq)]-->[Len=  581][PID:88862]
-
-
-!		[Final Evaluation][TOT=  145][  0 %]!		[Final Evaluation][TOT=  145][  1 %]!		[Final Evaluation][TOT=  145][  2 %]!		[Final Evaluation][TOT=  145][  3 %]!		[Final Evaluation][TOT=  145][  4 %]!		[Final Evaluation][TOT=  145][  5 %]!		[Final Evaluation][TOT=  145][  6 %]!		[Final Evaluation][TOT=  145][  7 %]!		[Final Evaluation][TOT=  145][  8 %]!		[Final Evaluation][TOT=  145][  9 %]!		[Final Evaluation][TOT=  145][ 10 %]!		[Final Evaluation][TOT=  145][ 11 %]!		[Final Evaluation][TOT=  145][ 12 %]!		[Final Evaluation][TOT=  145][ 13 %]!		[Final Evaluation][TOT=  145][ 14 %]!		[Final Evaluation][TOT=  145][ 15 %]!		[Final Evaluation][TOT=  145][ 16 %]!		[Final Evaluation][TOT=  145][ 17 %]!		[Final Evaluation][TOT=  145][ 18 %]!		[Final Evaluation][TOT=  145][ 19 %]!		[Final Evaluation][TOT=  145][ 20 %]!		[Final Evaluation][TOT=  145][ 21 %]!		[Final Evaluation][TOT=  145][ 22 %]!		[Final Evaluation][TOT=  145][ 23 %]!		[Final Evaluation][TOT=  145][ 24 %]!		[Final Evaluation][TOT=  145][ 25 %]!		[Final Evaluation][TOT=  145][ 26 %]!		[Final Evaluation][TOT=  145][ 27 %]!		[Final Evaluation][TOT=  145][ 28 %]!		[Final Evaluation][TOT=  145][ 29 %]!		[Final Evaluation][TOT=  145][ 30 %]!		[Final Evaluation][TOT=  145][ 31 %]!		[Final Evaluation][TOT=  145][ 32 %]!		[Final Evaluation][TOT=  145][ 33 %]!		[Final Evaluation][TOT=  145][ 34 %]!		[Final Evaluation][TOT=  145][ 35 %]!		[Final Evaluation][TOT=  145][ 36 %]!		[Final Evaluation][TOT=  145][ 37 %]!		[Final Evaluation][TOT=  145][ 38 %]!		[Final Evaluation][TOT=  145][ 39 %]!		[Final Evaluation][TOT=  145][ 40 %]!		[Final Evaluation][TOT=  145][ 41 %]!		[Final Evaluation][TOT=  145][ 42 %]!		[Final Evaluation][TOT=  145][ 43 %]!		[Final Evaluation][TOT=  145][ 44 %]!		[Final Evaluation][TOT=  145][ 45 %]!		[Final Evaluation][TOT=  145][ 46 %]!		[Final Evaluation][TOT=  145][ 47 %]!		[Final Evaluation][TOT=  145][ 48 %]!		[Final Evaluation][TOT=  145][ 49 %]!		[Final Evaluation][TOT=  145][ 50 %]!		[Final Evaluation][TOT=  145][ 51 %]!		[Final Evaluation][TOT=  145][ 52 %]!		[Final Evaluation][TOT=  145][ 53 %]!		[Final Evaluation][TOT=  145][ 54 %]!		[Final Evaluation][TOT=  145][ 55 %]!		[Final Evaluation][TOT=  145][ 56 %]!		[Final Evaluatcript	D	[0] 	0 
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:2435]pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -857,34 +996,43 @@ Group    4: Q9D630_MOUSE
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
  
-Relaxation Summary: [3710]--->[3710]
+Relaxation Summary: [1904]--->[1461]
 
 
 
@@ -894,18 +1042,12 @@ MAKE GUIDE TREE
 	[MODE=nj][DONE]
 
 PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
 
-
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:88862]
-	Group    6: [Group    5 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  581][PID:88862]
-	Group    7: [Group    2 (   1 seq)] with [Group    6 (   3 seq)]-->[Len=  581][PID:88862]
-
-ion][TOT=  145][ 57 %]!		[Final Evaluation][TOT=  145][ 58 %]!		[Final Evaluation][TOT=  145][ 59 %]!		[Final Evaluation][TOT=  145][ 60 %]!		[Final Evaluation][TOT=  145][ 61 %]!		[Final Evaluation][TOT=  145][ 62 %]!		[Final Evaluation][TOT=  145][ 63 %]!		[Final Evaluation][TOT=  145][ 64 %]!		[Final Evaluation][TOT=  145][ 65 %]!		[Final Evaluation][TOT=  145][ 66 %]!		[Final Evaluation][TOT=  145][ 67 %]!		[Final Evaluation][TOT=  145][ 68 %]!		[Final Evaluation][TOT=  145][ 69 %]!		[Final Evaluation][TOT=  145][ 70 %]!		[Final Evaluation][TOT=  145][ 71 %]!		[Final Evaluation][TOT=  145][ 72 %]!		[Final Evaluation][TOT=  145][ 73 %]!		[Final Evaluation][TOT=  145][ 74 %]!		[Final Evaluation][TOT=  145][ 75 %]!		[Final Evaluation][TOT=  145][ 76 %]!		[Final Evaluation][TOT=  145][ 77 %]!		[Final Evaluation][TOT=  145][ 78 %]!		[Final Evaluation][TOT=  145][ 79 %]!		[Final Evaluation][TOT=  145][ 80 %]!		[Final Evaluation][TOT=  145][ 81 %]!		[Final Evaluation][TOT=  145][ 82 %]!		[Final Evaluation][TOT=  145][ 83 %]!		[Final Evaluation][TOT=  145][ 84 %]!		[Final Evaluation][TOT=  145][ 85 %]!		[Final Evaluation][TOT=  145][ 86 %]!		[Final Evaluation][TOT=  145][ 87 %]!		[Final Evaluation][TOT=  145][ 88 %]!		[Final Evaluation][TOT=  145][ 89 %]!		[Final Evaluation][TOT=  145][ 90 %]!		[Final Evaluation][TOT=  145][ 91 %]!		[Final Evaluation][TOT=  145][ 92 %]!		[Final Evaluation][TOT=  145][ 93 %]!		[Final Evaluation][TOT=  145][ 94 %]!		[Final Evaluation][TOT=  145][ 95 %]!		[Final Evaluation][TOT=  145][ 96 %]!		[Final Evaluation][TOT=  145][ 97 %]!		[Final Evaluation][TOT=  145][ 98 %]!		[Final Evaluation][TOT=  145][ 99 %]!		[Final Evaluation][TOT=  145][100 %]
-cript	D	[0] 	0 
+pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -924,34 +1066,43 @@ cript	D	[0] 	0
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
  
-Relaxation Summary: [3710]--->[3710]
+Relaxation Summary: [1904]--->[1461]
 
 
 
@@ -961,17 +1112,17 @@ MAKE GUIDE TREE
 	[MODE=nj][DONE]
 
 PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
 
 
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:88862]
-	Group    6: [Group    5 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  581][PID:88862]
-	Group    7: [Group    2 (   1 seq)] with [Group    6 (   3 seq)]-->[Len=  581][PID:88862]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:2293][Forked]
 
-cript	D	[0] 	0 
+
+!		[Final Evaluation][TOT=   20][  0 %]!		[Final Evaluation][TOT=   20][ 10 %]!		[Final Evaluation][TOT=   20][ 15 %]!		[Final Evaluation][TOT=   20][ 20 %]!		[Final Evaluation][TOT=   20][ 25 %]!		[Final Evaluation][TOT=   20][ 30 %]!		[Final Evaluation][TOT=   20][ 35 %]!		[Final Evaluation][TOT=   20][ 40 %]!		[Final Evaluation][TOT=   20][ 45 %]!		[Final Evaluation][TOT=   20][ 50 %]!		[Final Evaluation][TOT=   20][ 55 %]!		[Final Evaluation][TOT=   20][ 60 %]!		[Final Evaluation][TOT=   20][ 65 %]!		[Final Evaluation][TOT=   20][ 70 %]!		[Final Evaluation][TOT=   20][ 75 %]!		[Final Evaluation][TOT=   20][ 80 %]!		[Final Evaluation][TOT=   20][ 85 %]!		[Final Evaluation][TOT=   20][ 90 %]!		[Final Evaluation][TOT=   20][ 95 %]!		[Final Evaluation][TOT=   20][100 %]
+pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -990,34 +1141,43 @@ cript	D	[0] 	0
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
  
-Relaxation Summary: [3710]--->[3710]
+Relaxation Summary: [1904]--->[1461]
 
 
 
@@ -1027,17 +1187,15 @@ MAKE GUIDE TREE
 	[MODE=nj][DONE]
 
 PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
 
 
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:88862]
-	Group    6: [Group    5 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  581][PID:88862]
-	Group    7: [Group    2 (   1 seq)] with [Group    6 (   3 seq)]-->[Len=  581][PID:88862]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:2293][Forked]
 
-cript	D	[0] 	0 
+pt	D	[0] 	0 
 -plugins       	S	[0] 	default
 -proxy         	S	[0] 	unset
 -email         	S	[0] 
@@ -1056,34 +1214,43 @@ cript	D	[0] 	0
 -display       	D	[0] 	100 
 
 INPUT FILES
-	Input File (S) sv.fasta  Format fasta_seq
-	Input File (M) lalign_id_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
 
 Identify Master Sequences [no]:
 
 Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
 INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
-  Input File sv.fasta     Seq CJ033_HUMAN  Length  581 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq CJ033_MOUSE  Length  416 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q8CAN2_MOUSE Length  115 type PROTEIN Struct Unchecked
-  Input File sv.fasta     Seq Q9D630_MOUSE Length  164 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
 
 	Multi Core Mode: 4 processors:
 
-	--- Process Method/Library/Aln Ssv.fasta
-	--- Process Method/Library/Aln Mlalign_id_pair
-	xxx Retrieved Ssv.fasta
-	xxx Retrieved Mlalign_id_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
 
 	All Methods Retrieved
 
 MANUAL PENALTIES: gapopen=0 gapext=0
 
-	Library Total Size: [3710]
+	Library Total Size: [1904]
 
 Library Relaxation: Multi_proc [4]
  
-Relaxation Summary: [3710]--->[3710]
+Relaxation Summary: [1904]--->[1461]
 
 
 
@@ -1093,26 +1260,175 @@ MAKE GUIDE TREE
 	[MODE=nj][DONE]
 
 PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: CJ033_HUMAN
-Group    2: CJ033_MOUSE
-Group    3: Q8CAN2_MOUSE
-Group    4: Q9D630_MOUSE
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
 
 
-	Group    5: [Group    3 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=  164][PID:88862]
-	Group    6: [Group    5 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=  581][PID:88862]
-	Group    7: [Group    2 (   1 seq)] with [Group    6 (   3 seq)]-->[Len=  581][PID:88862]
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:2293][Forked]
+
+pt	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:2293][Forked]
+
+pt	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [TM] Mode Or File: [TM] [Start
+	------ Fetch Templates [Multi Core Mode 4 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgb_chite.tmp, File=hmgb_chite.tmp
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_trybr.tmp, File=hmgl_trybr.tmp
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgl_wheat.tmp, File=hmgl_wheat.tmp
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Protein Transmembrane Topology: Template=hmgt_mouse.tmp, File=hmgt_mouse.tmp
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:2293][Forked]
 
 
 
 
 OUTPUT RESULTS
-	#### File Type= GUIDE_TREE      Format= newick          Name= sv.dnd
-	#### File Type= MSA             Format= aln             Name= sv.aln
-	#### File Type= MSA             Format= html            Name= sv.html
+	#### File Type= GUIDE_TREE      Format= newick          Name= sample_seq1.dnd
+	#### File Type= MSA             Format= aln             Name= sample_seq1.aln
+	#### File Type= MSA             Format= html            Name= sample_seq1.html
+	#### File Type= Template_List   Format= fasta_seq       Name= sample_seq1_tmp1.3.template_list
+	#### File Type= Template Protein Transmembrane Topology Format= fasta_seq       Name= hmgb_chite.tmp
+	#### File Type= Template Protein Transmembrane Topology Format= fasta_seq       Name= hmgl_trybr.tmp
+	#### File Type= Template Protein Transmembrane Topology Format= fasta_seq       Name= hmgl_wheat.tmp
+	#### File Type= Template Protein Transmembrane Topology Format= fasta_seq       Name= hmgt_mouse.tmp
 
-# Command Line: t_coffee sv.fasta -method lalign_id_pair  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 30.716 Mb, Max= 31.760 Mb
+# Command Line: t_coffee sample_seq1.fasta -template_file TM  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.420 Mb, Max= 31.231 Mb
 # Results Produced with T-COFFEE Version_11.00 (Version_11.00)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
@@ -1120,145 +1436,117 @@ OUTPUT RESULTS
 </file>
 <file>
 <stream>input</stream>
-<name>sv.fasta</name>
+<name>sample_seq1.fasta</name>
 <content>
->Q8CAN2_MOUSE
-MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQICT
-DLELKVDRLAWPGGW
->Q9D630_MOUSE
-MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-AYLQRLGVNTAVFERRHVIGGARVTEEIIPGFKFSRASYLLSLLRPQICT
-DLELKKHGLKLHLRDPYSFTPMLEEGTLNRLPRSLLLGTDMAANQKEISQ
-FSRKDAQVGKVSGD
->CJ033_MOUSE
-MKRLVLAIDPLLDAAPVDTTAFHHGSLLQRLGALSTLKPLLKAGRTLGAQ
-LPQYCEVLTAPISKVLDQWFESEPLKATLATDAVIGAMTSPHTPGSGYVL
-LHHVMGSLEGTQGAWSYVQGGMGALSDAIASSAATRGASIFTEKTVAKVQ
-VNSEGRVQGVTLQDGEEVRSRVVLSCASPQVTFLELTPQEWLPGAFVKRI
-SQLDTQSPVTKINVAVDRLPNFQAAPNAPGDQPQGHHQCSIHLNCEDTLL
-LHQAFEDAKGGLPSQKPMIELCIPSSLDPTLAPPGCHVVSLFTQYTPYTL
-AGGKVWNEQEKNTYADKVFDCIEAYAPGFKRSVLARDILTPPDLERIFRL
-PGGNIFHGAMSLDQLYFARPVPQHSDYRCPVQGLYLCGSGAHPGGGVMGA
-AGRNAAHVVFRDLKNM
->CJ033_HUMAN
-MAASGRGLCKAVAASPFPAWRRDNTEARGGLKPEYDAVVIGAGHNGLVAA
-AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQIYT
-DLELKKHGLRLHLRNPYSFTPMLEEGAGSKVPRCLLLGTDMAENQKQIAQ
-FSQKDAQVFPKYEEFMHRLALAIDPLLDAAPVDMAAFQHGSLLQRMRSLS
-TLKPLLKAGRILGAQLPRYYEVLTAPITKVLDQWFESEPLKATLATDAVI
-GAMTSPHTPGSGYVLLHHVMGGLEGMQGAWGYVQGGMGALSDAIASSATT
-HGASIFTEKTVAKVQVNSEGCVQGVVLEDGTEVRSKMVLSNTSPQITFLK
-LTPQEWLPEEFLERISQLDTRSPVTKINVAVDRLPSFLAAPNAPRGQPLP
-HHQCSIHLNCEDTLLLHQAFEDAMDGLPSHRPVIELCIPSSLDPTLAPPG
-CHVVSLFTQYMPYTLAGGKAWDEQERDAYADRVFDCIEVYAPGFKDSVVG
-RDILTPPDLERIFGLPGGNIFHCAMSLDQLYFARPVPLHSGYRCPLQGLY
-LCGSGAHPGGGVMGAAGRNAAHVAFRDLKSM
-</content>
-</file>
-<file>
-<stream>output</stream>
-<name>sv.dnd</name>
-<content>
-(
-(
-CJ033_HUMAN:-0.01500,
-CJ033_MOUSE:0.13500)
-:0.11000,
-Q8CAN2_MOUSE:0.01500,
-Q9D630_MOUSE:0.02500);
+>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
 </content>
 </file>
 <file>
 <stream>input</stream>
-<name>sv.dnd</name>
+<name>sample_seq1_tmp1.3.template_list</name>
 <content>
-(
-(
-CJ033_HUMAN:-0.01500,
-CJ033_MOUSE:0.13500)
-:0.11000,
-Q8CAN2_MOUSE:0.01500,
-Q9D630_MOUSE:0.02500);
+>hmgb_chite  _T_ hmgb_chite.tmp
+>hmgl_trybr  _T_ hmgl_trybr.tmp
+>hmgl_wheat  _T_ hmgl_wheat.tmp
+>hmgt_mouse  _T_ hmgt_mouse.tmp
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgb_chite.tmp</name>
+<content>
+>hmgb_chite
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgl_trybr.tmp</name>
+<content>
+>hmgl_trybr
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgl_wheat.tmp</name>
+<content>
+>hmgl_wheat
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgt_mouse.tmp</name>
+<content>
+>hmgt_mouse
+IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
 </content>
 </file>
 <file>
 <stream>output</stream>
-<name>sv.aln</name>
+<name>sample_seq1_tmp1.3.template_list</name>
 <content>
-CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=566, Nseq=4, Len=581 
+>hmgb_chite  _T_ hmgb_chite.tmp
+>hmgl_trybr  _T_ hmgl_trybr.tmp
+>hmgl_wheat  _T_ hmgl_wheat.tmp
+>hmgt_mouse  _T_ hmgt_mouse.tmp
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.dnd</name>
+<content>
+(
+(
+hmgb_chite:0.14250,
+hmgl_wheat:0.14750)
+:0.00750,
+hmgl_trybr:0.13250,
+hmgt_mouse:0.14750);
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.dnd</name>
+<content>
+(
+(
+hmgb_chite:0.14250,
+hmgl_wheat:0.14750)
+:0.00750,
+hmgl_trybr:0.13250,
+hmgt_mouse:0.14750);
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=834, Nseq=4, Len=81 
 
-Q8CAN2_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-Q9D630_MOUSE    MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAA
-CJ033_MOUSE     M-------------------------------------------------
-CJ033_HUMAN     MAASGRGLCKAVAASPFPAWRRDNTEARGGLKPEYDAVVIGAGHNGLVAA
-                *                                                 
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhs----d-lsivemskaagaawkelg
+hmgt_mouse      -----kpkrprsayniyvsesfqeak----d-dsaqgklklvneawknls
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+                      ***. ::: .: ..  .. .    .  .     *  .  *: * 
 
-Q8CAN2_MOUSE    AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQICT
-Q9D630_MOUSE    AYLQRLGVNTAVFERRHVIGGARVTEEIIPGFKFSRASYLLSLLRPQICT
-CJ033_MOUSE     --------------------------------------------------
-CJ033_HUMAN     AYLQRLGVNTAVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQIYT
-                                                                  
-
-Q8CAN2_MOUSE    DLELK-------------VD-RLAWPGGW---------------------
-Q9D630_MOUSE    DLELKKHGLKLHLRDPYSFTPMLEEGTLNRLPRSLLLGTDMAANQKEISQ
-CJ033_MOUSE     --------------------------------------------------
-CJ033_HUMAN     DLELKKHGLRLHLRNPYSFTPMLEEGAGSKVPRCLLLGTDMAENQKQIAQ
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    FSRKDAQVGKVSGD------------------------------------
-CJ033_MOUSE     ----------------KRLVLAIDPLLDAAPVDTTAFHHGSLLQRLGALS
-CJ033_HUMAN     FSQKDAQVFPKYEEFMHRLALAIDPLLDAAPVDMAAFQHGSLLQRMRSLS
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     TLKPLLKAGRTLGAQLPQYCEVLTAPISKVLDQWFESEPLKATLATDAVI
-CJ033_HUMAN     TLKPLLKAGRILGAQLPRYYEVLTAPITKVLDQWFESEPLKATLATDAVI
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     GAMTSPHTPGSGYVLLHHVMGSLEGTQGAWSYVQGGMGALSDAIASSAAT
-CJ033_HUMAN     GAMTSPHTPGSGYVLLHHVMGGLEGMQGAWGYVQGGMGALSDAIASSATT
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     RGASIFTEKTVAKVQVNSEGRVQGVTLQDGEEVRSRVVLSCASPQVTFLE
-CJ033_HUMAN     HGASIFTEKTVAKVQVNSEGCVQGVVLEDGTEVRSKMVLSNTSPQITFLK
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     LTPQEWLPGAFVKRISQLDTQSPVTKINVAVDRLPNFQAAPNAPGDQPQG
-CJ033_HUMAN     LTPQEWLPEEFLERISQLDTRSPVTKINVAVDRLPSFLAAPNAPRGQPLP
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     HHQCSIHLNCEDTLLLHQAFEDAKGGLPSQKPMIELCIPSSLDPTLAPPG
-CJ033_HUMAN     HHQCSIHLNCEDTLLLHQAFEDAMDGLPSHRPVIELCIPSSLDPTLAPPG
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     CHVVSLFTQYTPYTLAGGKVWNEQEKNTYADKVFDCIEAYAPGFKRSVLA
-CJ033_HUMAN     CHVVSLFTQYMPYTLAGGKAWDEQERDAYADRVFDCIEVYAPGFKDSVVG
-                                                                  
-
-Q8CAN2_MOUSE    --------------------------------------------------
-Q9D630_MOUSE    --------------------------------------------------
-CJ033_MOUSE     RDILTPPDLERIFRLPGGNIFHGAMSLDQLYFARPVPQHSDYRCPVQGLY
-CJ033_HUMAN     RDILTPPDLERIFGLPGGNIFHCAMSLDQLYFARPVPLHSGYRCPLQGLY
-                                                                  
-
-Q8CAN2_MOUSE    -------------------------------
-Q9D630_MOUSE    -------------------------------
-CJ033_MOUSE     LCGSGAHPGGGVMGAAGRNAAHVVFRDLKNM
-CJ033_HUMAN     LCGSGAHPGGGVMGAAGRNAAHVAFRDLKSM
-                                               
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgb_chite      --dkseweakaatakqnyiralqeyerng-g
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+                  ::  :   *   : .* . :         
 
 
 
@@ -1266,7 +1554,7 @@ CJ033_HUMAN     LCGSGAHPGGGVMGAAGRNAAHVAFRDLKSM
 </file>
 <file>
 <stream>output</stream>
-<name>sv.html</name>
+<name>sample_seq1.html</name>
 <content>
 <html>
 <style>
@@ -1286,74 +1574,69 @@ SPAN.value9 {background: #FFC8C8}
 SPAN.valuedefault {}
 SPAN.valuegap {}
 SPAN.valueink {background: 000000}
-</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=566</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value6>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;63</span><br><span class=value6>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;61</span><br><span class=value4>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;48</span><br><span class=value5>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;56</span><br><span class=value56>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;56</span><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value6>MAAGGRGLIRA</span><span class=value9>LHSSPC</span><span class=value7>PT</span><span class=value6>WKRAQSGANGRLKPEY</span><span class=value7>D</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value6>MAAGGRGLIRA</span><span class=value9>LHSSPC</span><span class=value7>PT</span><span class=value6>WKRAQS</span><span class=value5>G</span><span class=value6>ANGRLKP</span><span class=value7>EYD</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>M</span><span class=valuegap>-----------------------------------</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>MAASGRGLCKA</span><span class=value9>VAASPF</span><span class=value8>PA</span><span class=value7>W</span><span class=value6>RRDN</span><span class=value5>TE</span><span class=value6>A</span><span class=value5>RG</span><span class=value6>GLKPEY</span><span class=value7>D</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value7>AVV</span><span class=value6>IG</span><span class=value5>AGHNG</span><span class=value6>LVA</span><span class=value5>A</span><span class=value7>AYLQRLG</span><span class=value8>VNTAVFERR</span><span class=value7>HVIGG</span><span class=value8>A</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value7>AVV</span><span class=value6>IG</span><span class=value5>AGHNG</span><span class=value6>L</span><span class=value5>VAA</span><span class=value7>AYLQRLG</span><span class=value8>VNTAVFERR</span><span class=value7>HVIGG</span><span class=value8>A</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>AVV</span><span class=value5>IGAGHNGLVAA</span><span class=value7>AY</span><span class=value6>LQRL</span><span class=value7>G</span><span class=value9>VNTAVFERR</span><span class=value7>HVIGG</span><span class=value9>A</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value8>AVT</span><span class=value6>EEIIPGFKFSRASYLLSLLRPQI</span><span class=value7>C</span><span class=value6>TDLELK</span><span class=valuegap>---</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value8>RVT</span><span class=value6>EEIIPGFKFS</span><span class=value5>R</span><span class=value6>ASYLLSLLRPQI</span><span class=value7>C</span><span class=value6>TDLE</span><span class=value5>L</span><span class=value6>K</span><span class=value7>KH</span><span class=value6>G</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AVT</span><span class=value6>EEIIPGFKFS</span><span class=value5>R</span><span class=value6>ASYLLSLL</span><span class=value5>RPQI</span><span class=value7>Y</span><span class=value6>TDLELK</span><span class=value8>KHG</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------</span><span class=value5>VD</span><span class=valuegap>-</span><span class=value5>RL</span><span class=value6>AWPGG</span><span class=value9>W</span><span class=valuegap>---------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value7>LKLHLRDPY</span><span class=value5>S</span><span class=value6>FT</span><span class=value5>P</span><span class=value6>MLEEG</span><span class=value7>T</span><span class=value8>LNRLPR</span><span class=value9>SLLLGTDMAAN</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>LRLHLRNPY</span><span class=value5>SFTP</span><span class=value6>MLEEGAGSKVPR</span><span class=value7>C</span><span class=value8>LLLGTDMAEN</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=value8>QKE</span><span class=value9>IS</span><span class=value4>Q</span><span class=value5>FS</span><span class=value4>R</span><span class=value5>KD</span><span class=value4>AQV</span><span class=value3>G</span><span class=value9>KVSGD</span><span class=valuegap>----------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------</span><span class=value9>KRL</span><span class=value8>VLAIDPLLDAA</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>QKQ</span><span class=value9>IA</span><span class=value7>QFSQKDAQV</span><span class=value8>FPKYEEF</span><span class=value6>M</span><span class=value8>HRL</span><span class=value7>ALAIDPL</span><span class=value8>LDAA</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>PVDT</span><span class=value9>TAFHHGS</span><span class=value8>L</span><span class=value4>LQRL</span><span class=value3>G</span><span class=value4>ALSTLKP</span><span class=value6>LL</span><span class=value4>K</span><span class=value5>AG</span><span class=value4>RT</span><span class=value5>LGA</span><span class=value4>QL</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>P</span><span class=value7>VDMAAFQHGS</span><span class=value6>L</span><span class=value5>LQRM</span><span class=value4>R</span><span class=value5>SLS</span><span class=value4>TLKP</span><span class=value5>LLKAGR</span><span class=value6>ILG</span><span class=value7>A</span><span class=value6>QL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value4>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>PQY</span><span class=value5>C</span><span class=value6>EVLTAP</span><span class=value7>ISKV</span><span class=value8>LDQ</span><span class=value9>WFESEPL</span><span class=value7>KATLATDAV</span><span class=value8>IGA</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>PR</span><span class=value7>YY</span><span class=value6>EVLTAP</span><span class=value7>ITKVLDQ</span><span class=value8>WFESEPL</span><span class=value7>KATLATDAV</span><span class=value8>IG</span><span class=value7>A</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>MTSPHTP</span><span class=value9>GSGYVLLH</span><span class=value6>HVMGS</span><span class=value9>LEGTQG</span><span class=value5>A</span><span class=value4>WS</span><span class=value3>YVQGG</span><span class=value4>MG</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>M</span><span class=value8>TSPHTP</span><span class=value9>GSGYVLLH</span><span class=value4>H</span><span class=value5>VMGG</span><span class=value9>LEGMQG</span><span class=value8>A</span><span class=value5>WGY</span><span class=value4>VQGG</span><span class=value7>MG</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>A</span><span class=value5>LSDAIA</span><span class=value4>SSAATRG</span><span class=value9>ASIFTEKTVAKVQVNSEGRVQG</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>ALSDAIASSATTHG</span><span class=value9>ASIFTEKTVAKVQVNSEGCVQG</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>VTLQDGEEV</span><span class=value4>RSRVVLSCASPQVTFLEL</span><span class=value8>TP</span><span class=value5>QEWLPGA</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>VVLEDGTEV</span><span class=value4>RSKMVLSNTSPQI</span><span class=value6>TFLKL</span><span class=value9>TP</span><span class=value8>QEWLPE</span><span class=value7>E</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>F</span><span class=value5>VK</span><span class=value4>RISQL</span><span class=value6>DTQSPV</span><span class=value4>T</span><span class=value5>KINVA</span><span class=value6>VDRL</span><span class=value7>PNFQAAPNAP</span><span class=value8>G</span><span class=value9>D</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>F</span><span class=value6>LERI</span><span class=value5>S</span><span class=value6>QLDTRSPV</span><span class=value4>TKINV</span><span class=value5>AVDRL</span><span class=value6>PSFL</span><span class=value7>AAPNAP</span><span class=value8>R</span><span class=value9>G</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>QPQGHHQCSIHLNCEDTLLLHQA</span><span class=value6>FE</span><span class=value5>D</span><span class=value6>AKG</span><span class=value5>G</span><span class=value6>L</span><span class=value5>PSQKP</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>QPLPHHQCSIHLN</span><span class=value8>CEDTL</span><span class=value7>L</span><span class=value8>LHQA</span><span class=value7>FEDAMDG</span><span class=value6>LPSH</span><span class=value5>RP</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>MI</span><span class=value6>E</span><span class=value5>LCIPSS</span><span class=value7>LD</span><span class=value9>P</span><span class=value7>TLAPPG</span><span class=value9>CHVVSLFTQYTPYTLAGG</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>VIELCIPSS</span><span class=value6>LD</span><span class=value7>P</span><span class=value6>TL</span><span class=value7>APPG</span><span class=value9>CHVVSLFTQYMPYTLAGG</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>KVWNEQEKNTYADKVFDCI</span><span class=value4>EAYAPGFK</span><span class=value3>RS</span><span class=value4>VLA</span><span class=value5>RDIL</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>KAWDEQERDAYADRVFDCI</span><span class=value4>EVYAPGFKD</span><span class=value3>S</span><span class=value4>VVG</span><span class=value5>RDIL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>TPP</span><span class=value5>DLERIFRLPGGNIFHGAMSLDQL</span><span class=value8>YFARPV</span><span class=value9>PQHS</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>TPP</span><span class=value5>DLERIFGLPGGNIFHCAMSLDQL</span><span class=value8>YFARPV</span><span class=value9>PLHS</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------------------</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>DYRCPVQGLYLCGSG</span><span class=value8>AHPG</span><span class=value6>G</span><span class=value9>GVMGAAGRNAAHVVFR</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GYRCPLQGLYLCGSG</span><span class=value7>AHPG</span><span class=value9>GGVMGAAGRNAAHVAFR</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>Q8CAN2_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><br><span class=valuedefault>Q9D630_MOUSE&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><br><span class=valuedefault>CJ033_MOUSE&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>DLKNM</span><br><span class=valuedefault>CJ033_HUMAN&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>DLKSM</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=834</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value8>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;84</span><br><span class=value8>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;83</span><br><span class=value8>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;84</span><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;83</span><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value5>k</span><span class=value7>k</span><span class=value8>d</span><span class=value9>snapkramtsfmff</span><span class=value8>ss</span><span class=value7>d</span><span class=value6>frs</span><span class=value5>khs</span><span class=valuegap>----</span><span class=value5>d</span><span class=valuegap>-</span><span class=value5>l</span><span class=value6>si</span><span class=value7>vem</span><span class=value8>s</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>kpkrprsayniyv</span><span class=value8>s</span><span class=value7>e</span><span class=value6>sfq</span><span class=value5>eak</span><span class=valuegap>----</span><span class=value5>d</span><span class=valuegap>-</span><span class=value5>ds</span><span class=value6>aqgk</span><span class=value7>l</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value8>a</span><span class=value9>dkpkrplsaymlwl</span><span class=value8>ns</span><span class=value7>ar</span><span class=value6>esi</span><span class=value5>k</span><span class=value4>renp</span><span class=value5>d</span><span class=valuegap>-</span><span class=value5>f</span><span class=value6>kv</span><span class=value7>tev</span><span class=value8>a</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value6>d</span><span class=value8>p</span><span class=value9>nkpkrapsaffvfm</span><span class=value8>ge</span><span class=value7>fr</span><span class=value6>eef</span><span class=value5>k</span><span class=value4>qknp</span><span class=value5>k</span><span class=value3>n</span><span class=value4>k</span><span class=value5>s</span><span class=value6>v</span><span class=value7>aav</span><span class=value8>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;***.&nbsp;:::&nbsp;.:&nbsp;</span><span class=value8>.</span><span class=value7>.</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>.</span><span class=value4>.&nbsp;.</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>.</span><span class=value1>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>.&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagaawkel</span><span class=value8>g</span><span class=value6>pe</span><span class=value7>er</span><span class=value8>k</span><span class=value9>vyeemaekdkerykrem</span><span class=valuegap>------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value8>kl</span><span class=value9>vneawknl</span><span class=value8>s</span><span class=value6>pe</span><span class=value7>ek</span><span class=value8>qa</span><span class=value9>y</span><span class=value8>i</span><span class=value9>qla</span><span class=value8>k</span><span class=value9>ddrirydnemk</span><span class=value8>sw</span><span class=value6>e</span><span class=value5>e</span><span class=value6>q</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>kkggelwrgl</span><span class=value7>k</span><span class=valuegap>--</span><span class=value6>dk</span><span class=value7>se</span><span class=value8>we</span><span class=value9>akaat</span><span class=value8>akq</span><span class=value9>nyiralq</span><span class=value7>e</span><span class=value8>ye</span><span class=value7>r</span><span class=value6>n</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagerwksl</span><span class=value8>s</span><span class=value6>ese</span><span class=value7>k</span><span class=value8>ap</span><span class=value9>yvakanklkgeynkaiaay</span><span class=value7>n</span><span class=value6>k</span><span class=value5>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value9>&nbsp;&nbsp;.&nbsp;&nbsp;*:&nbsp;*</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>:</span><span class=value7>:&nbsp;</span><span class=value8>&nbsp;:&nbsp;</span><span class=value9>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.*&nbsp;.&nbsp;:</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value5>m</span><span class=value4>a</span><span class=value5>e</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value5>g</span><span class=valuegap>-</span><span class=value4>g</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value5>e</span><span class=value4>s</span><span class=value5>a</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><br><br><br><br><br><br></body></html>
 </content>
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
-XDG_DATA_HOME=/Users/cnotredame/.local/share
 MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
 ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
 SHELL=/bin/bash
 TERM=xterm-256color
-TMPDIR=/var/folders/kt/h6f_8ns945v8sm8l744hnqkw0000gn/T/
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gn/T/
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.2Gm1mQlBr6/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.SiIg4fhsUe/Render
 TERM_PROGRAM_VERSION=361.1
 OSNAME=macosx
 PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=3B4D2C5E-2D85-426C-8E4A-6C0F1A72994B
+TERM_SESSION_ID=4AE051C3-8915-4749-A74A-58BE21C3378D
 METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
-ac_cv_path_INTLTOOL_PERL=/usr/bin/perl
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
 http_proxy=
 HTTP_proxy=
-SGML_CATALOG_FILES=/sw/etc/sgml/catalog
 USER=cnotredame
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.c5EYh3QWDe/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.Mk8QjV3nUO/Listeners
 __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
-XDG_CONFIG_DIRS=/sw/etc/xdg
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/subversion/bin:/opt/local/bin/:/Library/Frameworks/Python.framework/Versions/Current/bin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
-XML_CATALOG_FILES=/sw/etc/xml/catalog
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
 PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/doc/tmp
 CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.57JD6DDqrn/unix_domain_listener
 XPC_FLAGS=0x0
-VERSIONER_PERL_PREFER_32_BIT=yes
+VERSIONER_PERL_PREFER_32_BIT=no
 XPC_SERVICE_NAME=0
 ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-XDG_CONFIG_HOME=/Users/cnotredame/.config
 DUMP_4_TCOFFEE=t_coffee.233.dump
 HTTP_PROXY=
-XDG_CACHE_HOME=/Users/cnotredame/.cache
 PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
 MAFFT_BINARIES=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/plugins/macosx/
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
-XDG_DATA_DIRS=/sw/share
 LC_CTYPE=UTF-8
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.I3Kakd635Y/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.Mc5njvMIsW/org.macosforge.xquartz:0
 NUMBER_OF_PROCESSORS=4
 ALL_proxy=
 PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
 LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
-TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/291088862/
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/15982293/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>

@@ -11,11 +11,11 @@
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-74799 -- WARNING: _P_ Template | seq | Could Not Be Found
+85603 -- WARNING: _P_ Template | seq | Could Not Be Found
 
-74799 -- WARNING: _P_ Template | seq | Could Not Be Found
+85603 -- WARNING: _P_ Template | seq | Could Not Be Found
 
-74833 -- INFORMATION: Method  cannot be applied to [2PTCE vs seq], proba_pair will be used instead
+85637 -- INFORMATION: Method  cannot be applied to [2PTCE vs seq], proba_pair will be used instead
 *************************************************************************************************
 </warning>
 <file>
@@ -226,11 +226,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -271,11 +271,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -287,7 +287,7 @@ INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-pid 74833 -- Method  cannot be applied to [2PTCE vs seq], proba_pair will be used instead
+pid 85637 -- Method  cannot be applied to [2PTCE vs seq], proba_pair will be used instead
 	[0] 	0 
 -run_local_script	D	[0] 	0 
 -plugins       	S	[0] 	default
@@ -317,11 +317,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -333,7 +333,7 @@ INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-pid 74833 -- Method  cannot be applied to [2PTCE vs seq], proba_pair will be used instead
+pid 85637 -- Method  cannot be applied to [2PTCE vs seq], proba_pair will be used instead
 	[0] 	0 
 -run_local_script	D	[0] 	0 
 -plugins       	S	[0] 	default
@@ -363,11 +363,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -420,11 +420,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -477,11 +477,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -534,11 +534,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -591,11 +591,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -661,11 +661,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -703,10 +703,83 @@ Group    1: 2PTCE
 Group    2: seq
 
 
-	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:74799]
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:85603]
 
 
-!		[Final Evaluation][TOT=   60][  0 %]!		[Final Evaluation][TOT=   60][  3 %]!		[Final Evaluation][TOT=   60][  5 %]!		[Final Evaluation][TOT=   60][  6 %]!		[Final Evaluation][TOT=   60][  8 %]!		[Final Evaluation][TOT=   60][ 10 %]!		[Final Evaluation][TOT=   60][ 11 %]!		[Final Evaluation][TOT=   60][ 13 %]!		[Final Evaluation][TOT=   60][ 15 %]!		[Final Evaluation][TOT=   60][ 16 %]!		[Final Evaluation][TOT=   60][ 18 %]!		[Final Evaluation][TOT=   60][ 20 %]!		[Final Evaluation][TOT=   60][ 21 %]!		[Final Evaluation][TOT=   60][ 23 %]!		[Final Evaluation][TOT=   60][ 25 %]!		[Final Evaluation][TOT=   60][ 26 %]!		[Final Evaluation][TOT=   60][ 28 %]!		[Final Evaluation][TOT=   60][ 30 %]!		[Final Evaluation][TOT=   60][ 31 %]!		[Final Evaluation][TOT=   60][ 33 %]!		[Final Evaluation][TOT=   60][ 35 %]!		[Final Evaluation][TOT=   60][ 36 %]!		[Final Evaluation][TOT=   60][ 38 %]!		[Final Evaluation][TOT=   60][ 40 %]!		[Final Evaluation][TOT=   60][ 41 %]!		[Final Evaluation][TOT=   60][ 43 %]!		[Final Evaluation][TOT=   60][ 45 %]!		[Final Evaluation][TOT=   60][ 46 %]!		[Final Evaluation][TOT=   60][ 48 %]!		[Final Evaluation][TOT=   60][ 50 %]!		[Final Evaluation][TOT=   60][ 51 %]!		[Final Evaluation][TOT=   60][ 53 %]!		[Final Evaluation][TOT=   60][ 55 %]!		[Final Evaluation][TOT=   60][ 56 %]!		[Final Evaluation][TOT=   60][ 58 %]!		[Final Evaluation][TOT=   60][ 60 %]!		[Final Evaluation][TOT=   60][ 61 %]!		[Final Evaluation][TOT=   60][ 63 %]!		[Final Evaluation][TOT=   60][ 65 %]!		[Final Evaluation][TOT=   60][ 66 %]!		[Final Evaluation][TOT=   60][ 68 %]!		[Final Evaluation][TOT=   60][ 70 %]!		[Final Evaluation][TOT=   60][ 71 %]!		[Final Evaluation][TOT=   60][ 73 %]!		[Final Evaluation][TOT=   60][ 75 %]!		[Final Evaluation][TOT=   60][ 76 %]!		[Final Evaluation][TOT=   60][ 78 %]!		[Final Evaluation][TOT=   60][ 80 %]!		[Final Evaluation][TOT=   60][ 81 %]!		[Final Evaluation][TOT=   60][ 83 %]!		[Final Evaluation][TOT=   60][ 85 %]!		[Final Evaluation][TOT=   60][ 86 %]!		[Final Evaluation][TOT=   60][ 88 %]!		[Final Evaluation][TOT=   60][ 90 %]!		[Final Evaluation][TOT=   60][ 91 %]!		[Final Evaluation][TOT=   60][ 93 %]!		[Final Evaluation][TOT=   60][ 95 %]!		[Final Evaluation][TOT=   60][ 96 %]!		[Final Evaluation][TOT=   60][ 98 %]!		[Final Evaluation][TOT=   60][100 %]
+!		[Final Evaluation][TOT=   60][  0 %]!		[Final Evaluation][TOT=   60][  3 %]!		[Final Evaluation][TOT=   60][  5 %]!		[Final Evaluation][TOT=   60][  6 %]!		[Final Evaluation][TOT=   60][  8 %]!		[Final Evaluation][TOT=   60][ 10 %]!		[Final Evaluation][TOT=   60][ 11 %]!		[Final Evaluation][TOT=   60][ 13 %]!		[Final Evaluation][TOT=   60][ 15 %]!		[Final Evaluation][TOT=   60][ 16 %]!		[Final Evaluation][TOT=   60][ 18 %]!		[Final Evaluation][TOT=   60][ 20 %]!		[Final Evaluation][TOT=   60][ 21 %]!		[Final Evaluation][TOT=   60][ 23 %]!		[Final Evaluation][TOT=   60][ 25 %]!		[Final Evaluation][TOT=   60][ 26 %]!		[Final Evaluation][TOT=   60][ 28 %]!		[Final Evaluation][TOT=   60][ 30 %]!		[Final Evaluation][TOT=   60][ 31 %]!		[Final Evaluation][TOT=   60][ 33 %]!		[Final Evaluation][TOT=   60][ 35 %]!		[Final Evaluation][TOT=   60][ 36 %]!		[Final Evaluation][TOT=   60][ 38 %]!		[Final Evaluation][TOT=   60][ 40 %]!		[Final Evaluation][TOT=   60][ 41 %]!		[Final Evaluation][TOT=   60][ 43 %]!		[Final Evaluation][TOT=   60][ 45 %]!		[Final Evaluation][TOT=   60][ 46 %]!		[Final Evaluation][TOT=   60][ 48 %]!		[Final Evaluation][TOT=   60][ 50 %]!		[Final Evaluation][TOT=   60][ 51 %]!		[Final Evaluation][TOT=   60][ 53 %]!		[Final Evaluation][TOT=   60][ 55 %]!		[Final Evaluation][TOT=   60][ 56 %]!		[Final Evaluation][TOT=   60][ 58 %]!		[Final Evaluation][TOT=   60][ 60 %]!		[Final Evaluation][TOT=   60][ 61 %]!		[Final Evaluation][TOT=   60][ 63 %]!		[Final Evaluation][TOT=   60][ 65 %]!		[Final Evaluation][TOT=   60][ 66 %]!		[Final Evaluation][TOT=   60][ 68 %]!		[Final Evaluation][TOT=   60][ 70 %]!		[Final Evaluation][TOT=   60][ 71 %]!		[Final Evaluation][TOT=   60][ 73 %]!		[Final Evaluation][TOT=   60][ 75 %]!		[Final Evaluation][TOT=   60][ 76 %]!		[Final Evaluation][TOT=   60][ 78 %]!		[Final Evaluation][TOT=   60][ 80 %]!		[Final Evaluation][TOT=   60][ 81 %]!		[Final Evaluation][TOT=   60][ 83 %]!		[Final Evaluation][TOT=   60][ 85 %]!		[Final Evaluation][TOT=   60][ 86 %]!		[Final Evaluation][TOT=   60][ 88 %]!		[Final Evaluation][TOT=   60][ 90 %]!		[Final Evaluation][TOT=   60][ 91 %]!		[Final Evaluation][TOT=   60][ 93 %]!		[Final Evaluation][TOT=   60][ 95 %]!		[Final E	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) sap_pair 
+	Input File (S) 2seqs.fas  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 85603 -- _P_ Template | seq | Could Not Be Found
+
+]
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 85603 -- _P_ Template | seq | Could Not Be Found
+
+]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File 2seqs.fas Seq 2PTCE Length  223 type PROTEIN Struct Unchecked
+	PDB struc: Template=2PTCE, File=2PTCE.pdb
+  Input File 2seqs.fas Seq seq   Length  241 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Msap_pair
+	--- Process Method/Library/Aln S2seqs.fas
+	xxx Retrieved S2seqs.fas
+	xxx Retrieved Msap_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [768]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [768]--->[587]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 2PTCE
+Group    2: seq
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:85603]
+
+valuation][TOT=   60][ 96 %]!		[Final Evaluation][TOT=   60][ 98 %]!		[Final Evaluation][TOT=   60][100 %]
 	[0] 	0 
 -run_local_script	D	[0] 	0 
 -plugins       	S	[0] 	default
@@ -736,11 +809,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -778,153 +851,7 @@ Group    1: 2PTCE
 Group    2: seq
 
 
-	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:74799]
-
-	[0] 	0 
--run_local_script	D	[0] 	0 
--plugins       	S	[0] 	default
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--dump          	S	[0] 	no
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (M) sap_pair 
-	Input File (S) 2seqs.fas  Format fasta_seq
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
-
-]
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
-
-]
-Looking For Profile  Templates
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
-INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
-  Input File 2seqs.fas Seq 2PTCE Length  223 type PROTEIN Struct Unchecked
-	PDB struc: Template=2PTCE, File=2PTCE.pdb
-  Input File 2seqs.fas Seq seq   Length  241 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 4 processors:
-
-	--- Process Method/Library/Aln Msap_pair
-	--- Process Method/Library/Aln S2seqs.fas
-	xxx Retrieved S2seqs.fas
-	xxx Retrieved Msap_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [768]
-
-Library Relaxation: Multi_proc [4]
- 
-Relaxation Summary: [768]--->[587]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: 2PTCE
-Group    2: seq
-
-
-	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:74799]
-
-	[0] 	0 
--run_local_script	D	[0] 	0 
--plugins       	S	[0] 	default
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--dump          	S	[0] 	no
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (M) sap_pair 
-	Input File (S) 2seqs.fas  Format fasta_seq
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
-
-]
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
-
-]
-Looking For Profile  Templates
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
-INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
-  Input File 2seqs.fas Seq 2PTCE Length  223 type PROTEIN Struct Unchecked
-	PDB struc: Template=2PTCE, File=2PTCE.pdb
-  Input File 2seqs.fas Seq seq   Length  241 type PROTEIN Struct Unchecked
-
-	Multi Core Mode: 4 processors:
-
-	--- Process Method/Library/Aln Msap_pair
-	--- Process Method/Library/Aln S2seqs.fas
-	xxx Retrieved S2seqs.fas
-	xxx Retrieved Msap_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [768]
-
-Library Relaxation: Multi_proc [4]
- 
-Relaxation Summary: [768]--->[587]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: 2PTCE
-Group    2: seq
-
-
-	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:74799]
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:85603]
 
 	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -955,11 +882,11 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74799 -- _P_ Template | seq | Could Not Be Found
+pid 85603 -- _P_ Template | seq | Could Not Be Found
 
 ]
 Looking For Profile  Templates
@@ -997,7 +924,80 @@ Group    1: 2PTCE
 Group    2: seq
 
 
-	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:74799]
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:85603]
+
+	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) sap_pair 
+	Input File (S) 2seqs.fas  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 85603 -- _P_ Template | seq | Could Not Be Found
+
+]
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 85603 -- _P_ Template | seq | Could Not Be Found
+
+]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File 2seqs.fas Seq 2PTCE Length  223 type PROTEIN Struct Unchecked
+	PDB struc: Template=2PTCE, File=2PTCE.pdb
+  Input File 2seqs.fas Seq seq   Length  241 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Msap_pair
+	--- Process Method/Library/Aln S2seqs.fas
+	xxx Retrieved S2seqs.fas
+	xxx Retrieved Msap_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [768]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [768]--->[587]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 2PTCE
+Group    2: seq
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  242][PID:85603]
 
 
 
@@ -1007,7 +1007,7 @@ OUTPUT RESULTS
 	#### File Type= MSA             Format= html            Name= 2seqs.html
 
 # Command Line: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 31.563 Mb, Max= 32.423 Mb
+# T-COFFEE Memory Usage: Current= 31.849 Mb, Max= 32.709 Mb
 # Results Produced with T-COFFEE Version_11.00 (Version_11.00)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
@@ -1015,11 +1015,11 @@ OUTPUT RESULTS
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-74799 -- WARNING: _P_ Template | seq | Could Not Be Found
+85603 -- WARNING: _P_ Template | seq | Could Not Be Found
 
-74799 -- WARNING: _P_ Template | seq | Could Not Be Found
+85603 -- WARNING: _P_ Template | seq | Could Not Be Found
 
-74833 -- INFORMATION: Method  cannot be applied to [2PTCE vs seq], proba_pair will be used instead
+85637 -- INFORMATION: Method  cannot be applied to [2PTCE vs seq], proba_pair will be used instead
 *************************************************************************************************
 </content>
 </file>
@@ -1053,23 +1053,32 @@ REMARK The header refers to the original entry
 REMARK The sequence from the original file has been taken in the field: ATOM
 REMARK extract_from_pdb, 2001, 2002, 2003, 2004, 2005 2006 (c) CNRS and Cedric Notredame
 REMARK Contains Coordinates of: 
-SEQRES   1 E  220  ILE VAL GLY GLY TYR THR CYS GLY ALA ASN THR VAL PRO 
-SEQRES   2 E  220  TYR GLN VAL SER LEU ASN SER GLY TYR HIS PHE CYS GLY 
-SEQRES   3 E  220  GLY SER LEU ILE ASN SER GLN TRP VAL VAL SER ALA ALA 
-SEQRES   4 E  220  HIS CYS TYR LYS SER GLY ILE GLN VAL ARG LEU GLY GLU 
-SEQRES   5 E  220  ASP ASN ILE ASN VAL VAL GLU GLY ASN GLU GLN PHE ILE 
-SEQRES   6 E  220  SER ALA SER LYS SER ILE VAL HIS PRO SER TYR ASN SER 
-SEQRES   7 E  220  ASN THR LEU ASN ASN ASP ILE MET LEU ILE LYS LEU LYS 
-SEQRES   8 E  220  SER ALA ALA SER LEU ASN SER ARG VAL ALA SER ILE SER 
-SEQRES   9 E  220  LEU PRO THR SER CYS ALA SER ALA GLY THR GLN CYS LEU 
-SEQRES  10 E  220  ILE SER GLY TRP GLY ASN THR LYS SER SER GLY THR SER 
-SEQRES  11 E  220  TYR PRO ASP VAL LEU LYS CYS LEU LYS ALA PRO ILE LEU 
-SEQRES  12 E  220  SER ASP SER SER CYS LYS SER ALA TYR PRO GLY GLN ILE 
-SEQRES  13 E  220  THR SER ASN MET PHE CYS ALA TYR LEU GLU GLY LYS ASP 
-SEQRES  14 E  220  SER CYS GLN GLY ASP SER GLY GLY PRO VAL VAL CYS SER 
-SEQRES  15 E  220  GLY LYS LEU GLN GLY ILE VAL SER TRP GLY SER GLY CYS 
-SEQRES  16 E  220  GLN LYS ASN LYS PRO GLY VAL TYR THR LYS VAL CYS ASN 
-SEQRES  17 E  220  TYR VAL SER TRP ILE LYS GLN THR ILE ALA SER ASN 
+SEQRES   1 E  331  ILE VAL GLY GLY TYR THR CYS GLY ALA ASN THR VAL PRO 
+SEQRES   2 E  331  TYR GLN VAL SER LEU ASN SER GLY TYR HIS PHE CYS GLY 
+SEQRES   3 E  331  GLY SER LEU ILE ASN SER GLN TRP VAL VAL SER ALA ALA 
+SEQRES   4 E  331  HIS CYS TYR LYS SER GLY ILE GLN VAL ARG LEU GLY GLU 
+SEQRES   5 E  331  ASP ASN ILE ASN VAL VAL GLU GLY ASN GLU GLN PHE ILE 
+SEQRES   6 E  331  SER ALA SER LYS SER ILE VAL HIS PRO SER TYR ASN SER 
+SEQRES   7 E  331  ASN THR LEU ASN ASN ASP ILE MET LEU ILE LYS LEU LYS 
+SEQRES   8 E  331  SER ALA ALA SER LEU ASN SER ARG VAL ALA SER ILE SER 
+SEQRES   9 E  331  LEU PRO THR SER CYS ALA SER ALA GLY THR GLN CYS LEU 
+SEQRES  10 E  331  ILE SER GLY TRP GLY ASN THR LYS SER SER GLY THR SER 
+SEQRES  11 E  331  TYR PRO ASP VAL LEU LYS CYS LEU LYS ALA PRO ILE LEU 
+SEQRES  12 E  331  SER ASP SER SER CYS LYS SER ALA TYR PRO GLY GLN ILE 
+SEQRES  13 E  331  THR SER ASN MET PHE CYS ALA TYR LEU GLU GLY LYS ASP 
+SEQRES  14 E  331  SER CYS GLN GLY ASP SER GLY GLY PRO VAL VAL CYS SER 
+SEQRES  15 E  331  GLY LYS LEU GLN GLY ILE VAL SER TRP GLY SER GLY CYS 
+SEQRES  16 E  331  GLN LYS ASN LYS PRO GLY VAL TYR THR LYS VAL CYS ASN 
+SEQRES  17 E  331  TYR VAL SER TRP ILE LYS GLN THR ILE ALA SER ASN ALA 
+SEQRES  18 E  331  SER ILE SER LEU PRO THR CYS ALA ALA GLY THR GLN CYS 
+SEQRES  19 E  331  LEU ILE SER GLY TRP GLY ASN THR LYS GLY THR TYR PRO 
+SEQRES  20 E  331  ASP VAL LEU LYS CYS LEU LYS ALA PRO ILE LEU SER ASP 
+SEQRES  21 E  331  SER SER CYS LYS ALA TYR PRO GLY GLN ILE THR SER ASN 
+SEQRES  22 E  331  MET PHE CYS ALA TYR GLU LYS ASP CYS GLN GLY ASP SER 
+SEQRES  23 E  331  GLY GLY PRO VAL VAL CYS SER GLY LYS LEU GLN GLY ILE 
+SEQRES  24 E  331  VAL SER TRP GLY SER GLY CYS GLN LYS ASN LYS PRO GLY 
+SEQRES  25 E  331  VAL TYR THR LYS VAL CYS ASN TYR VAL SER TRP ILE LYS 
+SEQRES  26 E  331  GLN THR ILE ALA SER ASN 
 ATOM      1  N   ILE E   1      18.871  65.715  12.731  1.00 21.86
 ATOM      2  CA  ILE E   1      19.782  64.969  13.587  1.00 21.86
 ATOM      3  C   ILE E   1      21.173  64.987  12.945  1.00 21.86
@@ -2686,6 +2695,815 @@ ATOM   1613  CG  ASN E 220      -9.167  68.908  25.933  1.00 28.31
 ATOM   1614  OD1 ASN E 220      -9.491  70.090  25.678  1.00 28.31
 ATOM   1615  ND2 ASN E 220      -8.611  68.589  27.082  1.00 28.31
 ATOM   1616  OXT ASN E 220     -11.309  64.888  24.359  1.00 29.09
+ATOM   1617  CA  ALA E 221       2.039  52.646  16.536  1.00 33.45
+ATOM   1618  C   ALA E 221       2.282  53.755  17.550  1.00 33.45
+ATOM   1619  O   ALA E 221       2.938  54.762  17.190  1.00 33.45
+ATOM   1620  CB  ALA E 221       3.012  51.486  16.779  1.00 33.45
+ATOM   1621  N   SER E 222       1.747  53.648  18.733  1.00 29.12
+ATOM   1622  CA  SER E 222       1.981  54.725  19.679  1.00 29.12
+ATOM   1623  C   SER E 222       3.039  54.364  20.703  1.00 29.12
+ATOM   1624  O   SER E 222       3.667  53.283  20.581  1.00 29.12
+ATOM   1625  CB  SER E 222       0.685  55.140  20.374  1.00 29.12
+ATOM   1626  OG  SER E 222       0.331  54.072  21.227  1.00 36.29
+ATOM   1627  N   ILE E 223       3.447  55.361  21.455  1.00 23.45
+ATOM   1628  CA  ILE E 223       4.541  55.209  22.432  1.00 23.45
+ATOM   1629  C   ILE E 223       3.967  55.327  23.833  1.00 23.45
+ATOM   1630  O   ILE E 223       2.972  56.085  24.050  1.00 23.45
+ATOM   1631  CB  ILE E 223       5.757  56.164  22.167  1.00 23.45
+ATOM   1632  CG1 ILE E 223       7.080  55.727  22.870  1.00 19.09
+ATOM   1633  CG2 ILE E 223       5.484  57.646  22.466  1.00 19.09
+ATOM   1634  CD1 ILE E 223       7.473  54.283  22.496  1.00 19.09
+ATOM   1635  N   SER E 224       4.476  54.483  24.715  1.00 24.17
+ATOM   1636  CA  SER E 224       4.040  54.519  26.116  1.00 24.17
+ATOM   1637  C   SER E 224       4.607  55.721  26.829  1.00 24.17
+ATOM   1638  O   SER E 224       5.806  56.059  26.642  1.00 24.17
+ATOM   1639  CB  SER E 224       4.508  53.300  26.887  1.00 24.17
+ATOM   1640  OG  SER E 224       4.363  52.154  26.022  1.00 48.42
+ATOM   1641  N   LEU E 225       3.759  56.336  27.609  1.00 27.39
+ATOM   1642  CA  LEU E 225       4.244  57.318  28.563  1.00 27.39
+ATOM   1643  C   LEU E 225       5.011  56.627  29.687  1.00 27.39
+ATOM   1644  O   LEU E 225       4.588  55.540  30.153  1.00 27.39
+ATOM   1645  CB  LEU E 225       3.050  58.038  29.188  1.00 27.39
+ATOM   1646  CG  LEU E 225       2.471  59.054  28.210  1.00 30.72
+ATOM   1647  CD1 LEU E 225       1.492  59.923  28.999  1.00 30.72
+ATOM   1648  CD2 LEU E 225       3.607  59.926  27.627  1.00 30.72
+ATOM   1649  N   PRO E 226       6.003  57.279  30.224  1.00 34.45
+ATOM   1650  CA  PRO E 226       6.780  56.742  31.332  1.00 34.45
+ATOM   1651  C   PRO E 226       6.016  56.669  32.661  1.00 34.45
+ATOM   1652  O   PRO E 226       5.201  57.570  33.007  1.00 34.45
+ATOM   1653  CB  PRO E 226       7.912  57.765  31.565  1.00 34.45
+ATOM   1654  CG  PRO E 226       7.477  59.066  30.909  1.00 24.37
+ATOM   1655  CD  PRO E 226       6.310  58.693  29.969  1.00 24.37
+ATOM   1656  N   THR E 227       6.490  55.760  33.489  1.00 43.02
+ATOM   1657  CA  THR E 227       6.067  55.662  34.889  1.00 43.02
+ATOM   1658  C   THR E 227       7.013  56.420  35.778  1.00 43.02
+ATOM   1659  O   THR E 227       6.545  57.263  36.580  1.00 43.02
+ATOM   1660  CB  THR E 227       6.153  54.219  35.327  1.00 43.02
+ATOM   1661  OG1 THR E 227       7.231  53.659  34.556  1.00 46.66
+ATOM   1662  CG2 THR E 227       4.826  53.504  35.017  1.00 46.66
+ATOM   1663  N   CYS E 228      10.875  58.849  35.844  1.00 29.16
+ATOM   1664  CA  CYS E 228      11.957  59.524  35.131  1.00 29.16
+ATOM   1665  C   CYS E 228      13.216  58.700  34.901  1.00 29.16
+ATOM   1666  O   CYS E 228      13.751  58.069  35.850  1.00 29.16
+ATOM   1667  CB  CYS E 228      12.395  60.685  35.976  1.00 29.16
+ATOM   1668  SG  CYS E 228      11.058  61.809  36.281  1.00 28.39
+ATOM   1669  N   ALA E 229      13.803  58.887  33.749  1.00 32.91
+ATOM   1670  CA  ALA E 229      15.123  58.319  33.500  1.00 32.91
+ATOM   1671  C   ALA E 229      16.232  59.008  34.299  1.00 32.91
+ATOM   1672  O   ALA E 229      16.219  60.255  34.465  1.00 32.91
+ATOM   1673  CB  ALA E 229      15.450  58.329  32.003  1.00 32.91
+ATOM   1674  N   ALA E 230      20.613  59.768  34.596  1.00 23.55
+ATOM   1675  CA  ALA E 230      21.849  59.944  33.860  1.00 23.55
+ATOM   1676  C   ALA E 230      22.502  58.632  33.430  1.00 23.55
+ATOM   1677  O   ALA E 230      22.404  57.580  34.124  1.00 23.55
+ATOM   1678  CB  ALA E 230      22.857  60.821  34.595  1.00 23.55
+ATOM   1679  N   GLY E 231      22.921  58.628  32.199  1.00 23.49
+ATOM   1680  CA  GLY E 231      23.507  57.433  31.634  1.00 23.49
+ATOM   1681  C   GLY E 231      22.554  56.463  30.956  1.00 23.49
+ATOM   1682  O   GLY E 231      23.031  55.562  30.213  1.00 23.49
+ATOM   1683  N   THR E 232      21.267  56.765  31.052  1.00 22.75
+ATOM   1684  CA  THR E 232      20.294  56.040  30.192  1.00 22.75
+ATOM   1685  C   THR E 232      20.517  56.352  28.715  1.00 22.75
+ATOM   1686  O   THR E 232      20.524  57.546  28.304  1.00 22.75
+ATOM   1687  CB  THR E 232      18.854  56.394  30.596  1.00 22.75
+ATOM   1688  OG1 THR E 232      18.780  56.160  32.007  1.00 22.62
+ATOM   1689  CG2 THR E 232      17.838  55.472  29.893  1.00 22.62
+ATOM   1690  N   GLN E 233      20.690  55.315  27.941  1.00 26.80
+ATOM   1691  CA  GLN E 233      20.804  55.499  26.502  1.00 26.80
+ATOM   1692  C   GLN E 233      19.429  55.512  25.839  1.00 26.80
+ATOM   1693  O   GLN E 233      18.579  54.649  26.166  1.00 26.80
+ATOM   1694  CB  GLN E 233      21.683  54.423  25.848  1.00 26.80
+ATOM   1695  CG  GLN E 233      22.894  55.111  25.172  1.00 43.02
+ATOM   1696  CD  GLN E 233      23.256  54.369  23.883  1.00 43.02
+ATOM   1697  OE1 GLN E 233      22.386  53.657  23.322  1.00  0.00
+ATOM   1698  NE2 GLN E 233      24.547  54.301  23.629  1.00  0.00
+ATOM   1699  N   CYS E 234      19.197  56.546  25.086  1.00 19.40
+ATOM   1700  CA  CYS E 234      17.922  56.852  24.406  1.00 19.40
+ATOM   1701  C   CYS E 234      18.036  56.953  22.882  1.00 19.40
+ATOM   1702  O   CYS E 234      19.110  57.283  22.317  1.00 19.40
+ATOM   1703  CB  CYS E 234      17.536  58.220  24.959  1.00 19.40
+ATOM   1704  SG  CYS E 234      17.314  58.239  26.752  1.00 24.84
+ATOM   1705  N   LEU E 235      16.896  56.870  22.258  1.00 25.29
+ATOM   1706  CA  LEU E 235      16.759  57.125  20.827  1.00 25.29
+ATOM   1707  C   LEU E 235      16.046  58.441  20.497  1.00 25.29
+ATOM   1708  O   LEU E 235      14.845  58.660  20.814  1.00 25.29
+ATOM   1709  CB  LEU E 235      16.038  55.930  20.176  1.00 25.29
+ATOM   1710  CG  LEU E 235      16.182  55.954  18.654  1.00 19.68
+ATOM   1711  CD1 LEU E 235      17.642  55.687  18.230  1.00 19.68
+ATOM   1712  CD2 LEU E 235      15.224  54.923  18.014  1.00 19.68
+ATOM   1713  N   ILE E 236      16.773  59.272  19.819  1.00 24.64
+ATOM   1714  CA  ILE E 236      16.293  60.530  19.285  1.00 24.64
+ATOM   1715  C   ILE E 236      16.158  60.460  17.767  1.00 24.64
+ATOM   1716  O   ILE E 236      17.060  59.905  17.104  1.00 24.64
+ATOM   1717  CB  ILE E 236      17.256  61.636  19.698  1.00 24.64
+ATOM   1718  CG1 ILE E 236      17.784  61.373  21.118  1.00 18.47
+ATOM   1719  CG2 ILE E 236      16.629  63.030  19.556  1.00 18.47
+ATOM   1720  CD1 ILE E 236      18.609  62.528  21.686  1.00 18.47
+ATOM   1721  N   SER E 237      14.991  60.756  17.239  1.00 24.00
+ATOM   1722  CA  SER E 237      14.731  60.620  15.790  1.00 24.00
+ATOM   1723  C   SER E 237      14.162  61.900  15.205  1.00 24.00
+ATOM   1724  O   SER E 237      13.608  62.732  15.970  1.00 24.00
+ATOM   1725  CB  SER E 237      13.841  59.408  15.497  1.00 24.00
+ATOM   1726  OG  SER E 237      12.665  59.454  16.326  1.00 25.16
+ATOM   1727  N   GLY E 238      14.347  62.118  13.924  1.00 16.24
+ATOM   1728  CA  GLY E 238      13.760  63.337  13.302  1.00 16.24
+ATOM   1729  C   GLY E 238      14.195  63.531  11.851  1.00 16.24
+ATOM   1730  O   GLY E 238      15.156  62.864  11.430  1.00 16.24
+ATOM   1731  N   TRP E 239      13.561  64.458  11.154  1.00 16.60
+ATOM   1732  CA  TRP E 239      13.877  64.888   9.777  1.00 16.60
+ATOM   1733  C   TRP E 239      14.623  66.210   9.686  1.00 16.60
+ATOM   1734  O   TRP E 239      14.473  66.949   8.685  1.00 16.60
+ATOM   1735  CB  TRP E 239      12.569  65.023   8.946  1.00 16.60
+ATOM   1736  CG  TRP E 239      12.005  63.636   8.547  1.00 18.42
+ATOM   1737  CD1 TRP E 239      12.389  62.794   7.563  1.00 18.42
+ATOM   1738  CD2 TRP E 239      10.921  63.010   9.168  1.00 18.42
+ATOM   1739  NE1 TRP E 239      11.616  61.631   7.598  1.00 18.42
+ATOM   1740  CE2 TRP E 239      10.751  61.762   8.542  1.00 18.42
+ATOM   1741  CE3 TRP E 239      10.091  63.445  10.209  1.00 18.42
+ATOM   1742  CZ2 TRP E 239       9.738  60.885   8.916  1.00 18.42
+ATOM   1743  CZ3 TRP E 239       9.079  62.564  10.587  1.00 18.42
+ATOM   1744  CH2 TRP E 239       8.896  61.313   9.969  1.00 18.42
+ATOM   1745  N   GLY E 240      15.270  66.613  10.739  1.00 22.05
+ATOM   1746  CA  GLY E 240      15.894  67.930  10.788  1.00 22.05
+ATOM   1747  C   GLY E 240      17.319  67.922  10.230  1.00 22.05
+ATOM   1748  O   GLY E 240      17.767  66.922   9.605  1.00 22.05
+ATOM   1749  N   ASN E 241      17.942  69.064  10.315  1.00 20.11
+ATOM   1750  CA  ASN E 241      19.260  69.315   9.710  1.00 20.11
+ATOM   1751  C   ASN E 241      20.338  68.304  10.114  1.00 20.11
+ATOM   1752  O   ASN E 241      20.417  67.860  11.300  1.00 20.11
+ATOM   1753  CB  ASN E 241      19.686  70.755  10.044  1.00 20.11
+ATOM   1754  CG  ASN E 241      20.790  71.271   9.125  1.00 14.37
+ATOM   1755  OD1 ASN E 241      21.396  70.501   8.330  1.00 14.37
+ATOM   1756  ND2 ASN E 241      21.150  72.502   9.417  1.00 14.37
+ATOM   1757  N   THR E 242      21.102  67.860   9.127  1.00 24.24
+ATOM   1758  CA  THR E 242      22.120  66.840   9.407  1.00 24.24
+ATOM   1759  C   THR E 242      23.558  67.351   9.430  1.00 24.24
+ATOM   1760  O   THR E 242      24.512  66.547   9.626  1.00 24.24
+ATOM   1761  CB  THR E 242      21.987  65.650   8.483  1.00 24.24
+ATOM   1762  OG1 THR E 242      22.320  66.010   7.139  1.00 19.11
+ATOM   1763  CG2 THR E 242      20.595  64.990   8.572  1.00 19.11
+ATOM   1764  N   LYS E 243      23.669  68.662   9.268  1.00 25.84
+ATOM   1765  CA  LYS E 243      24.964  69.371   9.291  1.00 25.84
+ATOM   1766  C   LYS E 243      25.102  70.248  10.517  1.00 25.84
+ATOM   1767  O   LYS E 243      24.200  71.081  10.763  1.00 25.84
+ATOM   1768  CB  LYS E 243      25.094  70.339   8.095  1.00 25.84
+ATOM   1769  CG  LYS E 243      25.251  69.614   6.748  1.00 28.76
+ATOM   1770  CD  LYS E 243      26.142  68.373   6.844  1.00 28.76
+ATOM   1771  CE  LYS E 243      26.502  67.820   5.456  1.00  0.00
+ATOM   1772  NZ  LYS E 243      27.322  66.613   5.608  1.00  0.00
+ATOM   1773  N   GLY E 244      26.399  74.429   8.365  1.00 43.71
+ATOM   1774  CA  GLY E 244      25.774  74.121   7.077  1.00 43.71
+ATOM   1775  C   GLY E 244      24.363  73.557   7.190  1.00 43.71
+ATOM   1776  O   GLY E 244      23.675  73.736   8.224  1.00 43.71
+ATOM   1777  N   THR E 245      23.868  73.151   6.050  1.00 37.93
+ATOM   1778  CA  THR E 245      22.477  72.764   5.876  1.00 37.93
+ATOM   1779  C   THR E 245      22.300  71.544   4.984  1.00 37.93
+ATOM   1780  O   THR E 245      22.606  71.603   3.767  1.00 37.93
+ATOM   1781  CB  THR E 245      21.722  73.945   5.267  1.00 37.93
+ATOM   1782  OG1 THR E 245      21.976  75.075   6.106  1.00 38.74
+ATOM   1783  CG2 THR E 245      20.208  73.673   5.220  1.00 38.74
+ATOM   1784  N   TYR E 246      19.011  68.757   4.793  1.00 34.18
+ATOM   1785  CA  TYR E 246      17.813  68.157   5.345  1.00 34.18
+ATOM   1786  C   TYR E 246      17.512  66.852   4.625  1.00 34.18
+ATOM   1787  O   TYR E 246      17.783  66.713   3.403  1.00 34.18
+ATOM   1788  CB  TYR E 246      16.619  69.116   5.196  1.00 34.18
+ATOM   1789  CG  TYR E 246      16.706  70.364   6.082  1.00 32.33
+ATOM   1790  CD1 TYR E 246      16.264  70.274   7.379  1.00 32.33
+ATOM   1791  CD2 TYR E 246      17.226  71.555   5.610  1.00 32.33
+ATOM   1792  CE1 TYR E 246      16.374  71.366   8.234  1.00 32.33
+ATOM   1793  CE2 TYR E 246      17.343  72.646   6.458  1.00 32.33
+ATOM   1794  CZ  TYR E 246      16.932  72.540   7.785  1.00 32.33
+ATOM   1795  OH  TYR E 246      17.158  73.618   8.733  1.00 32.33
+ATOM   1796  N   PRO E 247      17.364  65.808   5.364  1.00 23.36
+ATOM   1797  CA  PRO E 247      17.275  64.478   4.728  1.00 23.36
+ATOM   1798  C   PRO E 247      15.863  64.162   4.193  1.00 23.36
+ATOM   1799  O   PRO E 247      14.852  64.723   4.667  1.00 23.36
+ATOM   1800  CB  PRO E 247      17.513  63.514   5.885  1.00 23.36
+ATOM   1801  CG  PRO E 247      17.236  64.312   7.192  1.00 12.48
+ATOM   1802  CD  PRO E 247      17.274  65.801   6.815  1.00 12.48
+ATOM   1803  N   ASP E 248      15.736  63.132   3.411  1.00 32.27
+ATOM   1804  CA  ASP E 248      14.464  62.633   2.870  1.00 32.27
+ATOM   1805  C   ASP E 248      13.799  61.646   3.816  1.00 32.27
+ATOM   1806  O   ASP E 248      12.586  61.786   4.127  1.00 32.27
+ATOM   1807  CB  ASP E 248      14.777  61.870   1.576  1.00 32.27
+ATOM   1808  CG  ASP E 248      15.210  62.892   0.543  1.00 52.87
+ATOM   1809  OD1 ASP E 248      14.725  64.049   0.625  1.00 52.87
+ATOM   1810  OD2 ASP E 248      15.750  62.517  -0.531  1.00 52.87
+ATOM   1811  N   VAL E 249      14.637  60.731   4.274  1.00 26.50
+ATOM   1812  CA  VAL E 249      14.295  59.686   5.223  1.00 26.50
+ATOM   1813  C   VAL E 249      14.609  60.024   6.675  1.00 26.50
+ATOM   1814  O   VAL E 249      15.336  61.005   6.939  1.00 26.50
+ATOM   1815  CB  VAL E 249      14.950  58.368   4.798  1.00 26.50
+ATOM   1816  CG1 VAL E 249      14.586  58.115   3.334  1.00 24.67
+ATOM   1817  CG2 VAL E 249      16.468  58.355   5.047  1.00 24.67
+ATOM   1818  N   LEU E 250      13.986  59.299   7.579  1.00 19.98
+ATOM   1819  CA  LEU E 250      14.113  59.552   9.003  1.00 19.98
+ATOM   1820  C   LEU E 250      15.490  59.125   9.577  1.00 19.98
+ATOM   1821  O   LEU E 250      16.086  58.042   9.304  1.00 19.98
+ATOM   1822  CB  LEU E 250      12.920  58.809   9.652  1.00 19.98
+ATOM   1823  CG  LEU E 250      12.746  59.046  11.171  1.00 17.94
+ATOM   1824  CD1 LEU E 250      12.365  60.489  11.545  1.00 17.94
+ATOM   1825  CD2 LEU E 250      11.859  57.974  11.821  1.00 17.94
+ATOM   1826  N   LYS E 251      16.024  60.019  10.364  1.00 26.98
+ATOM   1827  CA  LYS E 251      17.309  59.848  11.045  1.00 26.98
+ATOM   1828  C   LYS E 251      17.249  59.621  12.550  1.00 26.98
+ATOM   1829  O   LYS E 251      16.254  60.066  13.167  1.00 26.98
+ATOM   1830  CB  LYS E 251      18.214  61.019  10.662  1.00 26.98
+ATOM   1831  CG  LYS E 251      18.949  60.521   9.417  1.00 33.12
+ATOM   1832  CD  LYS E 251      19.595  61.618   8.605  1.00 33.12
+ATOM   1833  CE  LYS E 251      20.590  60.924   7.646  1.00 33.12
+ATOM   1834  NZ  LYS E 251      19.961  59.772   6.935  1.00 33.12
+ATOM   1835  N   CYS E 252      18.114  58.722  13.038  1.00 27.28
+ATOM   1836  CA  CYS E 252      18.139  58.167  14.420  1.00 27.28
+ATOM   1837  C   CYS E 252      19.492  58.346  15.094  1.00 27.28
+ATOM   1838  O   CYS E 252      20.512  58.560  14.408  1.00 27.28
+ATOM   1839  CB  CYS E 252      17.792  56.675  14.459  1.00 27.28
+ATOM   1840  SG  CYS E 252      16.042  56.246  14.265  1.00 24.98
+ATOM   1841  N   LEU E 253      19.474  58.486  16.391  1.00 17.95
+ATOM   1842  CA  LEU E 253      20.677  58.747  17.214  1.00 17.95
+ATOM   1843  C   LEU E 253      20.500  58.184  18.608  1.00 17.95
+ATOM   1844  O   LEU E 253      19.452  58.451  19.239  1.00 17.95
+ATOM   1845  CB  LEU E 253      20.902  60.253  17.362  1.00 17.95
+ATOM   1846  CG  LEU E 253      22.260  60.668  17.982  1.00 22.51
+ATOM   1847  CD1 LEU E 253      23.516  60.329  17.111  1.00 22.51
+ATOM   1848  CD2 LEU E 253      22.211  62.149  18.412  1.00 22.51
+ATOM   1849  N   LYS E 254      21.455  57.394  19.045  1.00 22.76
+ATOM   1850  CA  LYS E 254      21.502  56.950  20.455  1.00 22.76
+ATOM   1851  C   LYS E 254      22.392  57.879  21.257  1.00 22.76
+ATOM   1852  O   LYS E 254      23.430  58.304  20.714  1.00 22.76
+ATOM   1853  CB  LYS E 254      22.004  55.511  20.584  1.00 22.76
+ATOM   1854  CG  LYS E 254      21.118  54.671  19.650  1.00 39.41
+ATOM   1855  CD  LYS E 254      21.503  53.198  19.605  1.00 39.41
+ATOM   1856  CE  LYS E 254      20.572  52.413  18.667  1.00 39.41
+ATOM   1857  NZ  LYS E 254      20.956  50.997  18.620  1.00  0.00
+ATOM   1858  N   ALA E 255      21.814  58.502  22.228  1.00 24.33
+ATOM   1859  CA  ALA E 255      22.469  59.552  23.005  1.00 24.33
+ATOM   1860  C   ALA E 255      22.016  59.350  24.431  1.00 24.33
+ATOM   1861  O   ALA E 255      20.985  58.639  24.630  1.00 24.33
+ATOM   1862  CB  ALA E 255      21.993  60.949  22.633  1.00 24.33
+ATOM   1863  N   PRO E 256      22.920  59.535  25.354  1.00 24.67
+ATOM   1864  CA  PRO E 256      22.580  59.169  26.729  1.00 24.67
+ATOM   1865  C   PRO E 256      22.015  60.416  27.412  1.00 24.67
+ATOM   1866  O   PRO E 256      22.410  61.575  27.075  1.00 24.67
+ATOM   1867  CB  PRO E 256      23.944  58.851  27.369  1.00 24.67
+ATOM   1868  CG  PRO E 256      24.989  59.706  26.573  1.00 19.48
+ATOM   1869  CD  PRO E 256      24.347  59.910  25.176  1.00 19.48
+ATOM   1870  N   ILE E 257      21.297  60.187  28.458  1.00 24.19
+ATOM   1871  CA  ILE E 257      20.821  61.275  29.336  1.00 24.19
+ATOM   1872  C   ILE E 257      21.958  61.801  30.215  1.00 24.19
+ATOM   1873  O   ILE E 257      22.718  61.004  30.812  1.00 24.19
+ATOM   1874  CB  ILE E 257      19.626  60.737  30.187  1.00 24.19
+ATOM   1875  CG1 ILE E 257      18.442  60.366  29.240  1.00 21.18
+ATOM   1876  CG2 ILE E 257      19.182  61.712  31.296  1.00 21.18
+ATOM   1877  CD1 ILE E 257      17.101  60.078  29.969  1.00 21.18
+ATOM   1878  N   LEU E 258      22.158  63.094  30.187  1.00 31.82
+ATOM   1879  CA  LEU E 258      23.219  63.779  30.951  1.00 31.82
+ATOM   1880  C   LEU E 258      22.732  64.156  32.328  1.00 31.82
+ATOM   1881  O   LEU E 258      21.512  64.160  32.600  1.00 31.82
+ATOM   1882  CB  LEU E 258      23.809  65.074  30.311  1.00 31.82
+ATOM   1883  CG  LEU E 258      24.458  64.900  28.907  1.00 27.84
+ATOM   1884  CD1 LEU E 258      25.254  66.155  28.552  1.00 27.84
+ATOM   1885  CD2 LEU E 258      25.335  63.651  28.743  1.00 27.84
+ATOM   1886  N   SER E 259      23.685  64.400  33.165  1.00 30.01
+ATOM   1887  CA  SER E 259      23.406  64.688  34.538  1.00 30.01
+ATOM   1888  C   SER E 259      22.983  66.145  34.718  1.00 30.01
+ATOM   1889  O   SER E 259      23.472  67.089  34.037  1.00 30.01
+ATOM   1890  CB  SER E 259      24.640  64.333  35.405  1.00 30.01
+ATOM   1891  OG  SER E 259      25.553  65.434  35.387  1.00 25.21
+ATOM   1892  N   ASP E 260      22.049  66.334  35.589  1.00 32.20
+ATOM   1893  CA  ASP E 260      21.576  67.695  35.828  1.00 32.20
+ATOM   1894  C   ASP E 260      22.707  68.687  36.079  1.00 32.20
+ATOM   1895  O   ASP E 260      22.606  69.896  35.750  1.00 32.20
+ATOM   1896  CB  ASP E 260      20.630  67.650  37.041  1.00 32.20
+ATOM   1897  CG  ASP E 260      20.407  69.029  37.648  1.00 33.43
+ATOM   1898  OD1 ASP E 260      19.209  69.385  37.779  1.00  0.00
+ATOM   1899  OD2 ASP E 260      21.328  69.346  38.539  1.00  0.00
+ATOM   1900  N   SER E 261      23.744  68.190  36.666  1.00 27.79
+ATOM   1901  CA  SER E 261      24.819  69.088  37.075  1.00 27.79
+ATOM   1902  C   SER E 261      25.626  69.554  35.895  1.00 27.79
+ATOM   1903  O   SER E 261      25.794  70.780  35.720  1.00 27.79
+ATOM   1904  CB  SER E 261      25.750  68.384  38.056  1.00 27.79
+ATOM   1905  OG  SER E 261      24.969  67.826  39.130  1.00 52.52
+ATOM   1906  N   SER E 262      25.895  68.613  35.035  1.00 30.90
+ATOM   1907  CA  SER E 262      26.574  68.942  33.777  1.00 30.90
+ATOM   1908  C   SER E 262      25.694  69.742  32.808  1.00 30.90
+ATOM   1909  O   SER E 262      26.181  70.693  32.138  1.00 30.90
+ATOM   1910  CB  SER E 262      27.091  67.648  33.118  1.00 30.90
+ATOM   1911  OG  SER E 262      26.017  66.731  32.798  1.00 34.61
+ATOM   1912  N   CYS E 263      24.399  69.508  32.853  1.00 23.90
+ATOM   1913  CA  CYS E 263      23.478  70.313  32.057  1.00 23.90
+ATOM   1914  C   CYS E 263      23.486  71.784  32.496  1.00 23.90
+ATOM   1915  O   CYS E 263      23.473  72.725  31.670  1.00 23.90
+ATOM   1916  CB  CYS E 263      22.065  69.695  32.185  1.00 23.90
+ATOM   1917  SG  CYS E 263      20.844  70.220  30.947  1.00 25.31
+ATOM   1918  N   LYS E 264      23.501  71.973  33.776  1.00 26.35
+ATOM   1919  CA  LYS E 264      23.491  73.334  34.339  1.00 26.35
+ATOM   1920  C   LYS E 264      24.844  74.041  34.206  1.00 26.35
+ATOM   1921  O   LYS E 264      24.895  75.276  33.946  1.00 26.35
+ATOM   1922  CB  LYS E 264      23.022  73.293  35.813  1.00 26.35
+ATOM   1923  CG  LYS E 264      21.560  72.829  35.985  1.00 32.99
+ATOM   1924  CD  LYS E 264      21.081  72.760  37.455  1.00 32.99
+ATOM   1925  CE  LYS E 264      19.581  72.383  37.575  1.00 32.99
+ATOM   1926  NZ  LYS E 264      19.244  72.054  38.964  1.00  0.00
+ATOM   1927  N   ALA E 265      26.672  73.327  31.355  1.00 21.07
+ATOM   1928  CA  ALA E 265      26.608  73.686  29.948  1.00 21.07
+ATOM   1929  C   ALA E 265      25.746  74.911  29.715  1.00 21.07
+ATOM   1930  O   ALA E 265      26.170  75.821  28.970  1.00 21.07
+ATOM   1931  CB  ALA E 265      26.252  72.506  29.018  1.00 21.07
+ATOM   1932  N   TYR E 266      24.648  75.064  30.448  1.00 22.48
+ATOM   1933  CA  TYR E 266      23.838  76.284  30.226  1.00 22.48
+ATOM   1934  C   TYR E 266      23.451  76.990  31.505  1.00 22.48
+ATOM   1935  O   TYR E 266      22.354  76.706  32.044  1.00 22.48
+ATOM   1936  CB  TYR E 266      22.521  75.977  29.467  1.00 22.48
+ATOM   1937  CG  TYR E 266      22.716  75.248  28.108  1.00 20.78
+ATOM   1938  CD1 TYR E 266      22.729  73.870  28.045  1.00 20.78
+ATOM   1939  CD2 TYR E 266      22.861  75.980  26.943  1.00 20.78
+ATOM   1940  CE1 TYR E 266      22.888  73.217  26.813  1.00 20.78
+ATOM   1941  CE2 TYR E 266      22.997  75.338  25.703  1.00 20.78
+ATOM   1942  CZ  TYR E 266      23.002  73.965  25.632  1.00 20.78
+ATOM   1943  OH  TYR E 266      23.171  73.306  24.329  1.00 20.78
+ATOM   1944  N   PRO E 267      24.365  77.712  32.084  1.00 28.94
+ATOM   1945  CA  PRO E 267      24.132  78.336  33.377  1.00 28.94
+ATOM   1946  C   PRO E 267      22.909  79.230  33.445  1.00 28.94
+ATOM   1947  O   PRO E 267      22.703  80.160  32.628  1.00 28.94
+ATOM   1948  CB  PRO E 267      25.391  79.147  33.715  1.00 28.94
+ATOM   1949  CG  PRO E 267      26.427  78.793  32.652  1.00 30.60
+ATOM   1950  CD  PRO E 267      25.741  77.867  31.649  1.00 30.60
+ATOM   1951  N   GLY E 268      22.121  78.950  34.428  1.00 33.39
+ATOM   1952  CA  GLY E 268      20.944  79.773  34.711  1.00 33.39
+ATOM   1953  C   GLY E 268      19.743  79.552  33.792  1.00 33.39
+ATOM   1954  O   GLY E 268      18.887  80.468  33.696  1.00 33.39
+ATOM   1955  N   GLN E 269      19.782  78.480  33.031  1.00 33.80
+ATOM   1956  CA  GLN E 269      18.794  78.260  31.986  1.00 33.80
+ATOM   1957  C   GLN E 269      18.122  76.891  32.052  1.00 33.80
+ATOM   1958  O   GLN E 269      17.232  76.576  31.212  1.00 33.80
+ATOM   1959  CB  GLN E 269      19.472  78.430  30.604  1.00 33.80
+ATOM   1960  CG  GLN E 269      19.864  79.879  30.281  1.00 44.49
+ATOM   1961  CD  GLN E 269      20.935  79.796  29.201  1.00 44.49
+ATOM   1962  OE1 GLN E 269      22.137  80.031  29.476  1.00 44.49
+ATOM   1963  NE2 GLN E 269      20.548  79.298  28.054  1.00 44.49
+ATOM   1964  N   ILE E 270      18.553  76.055  32.962  1.00 33.01
+ATOM   1965  CA  ILE E 270      17.862  74.756  33.005  1.00 33.01
+ATOM   1966  C   ILE E 270      16.879  74.752  34.168  1.00 33.01
+ATOM   1967  O   ILE E 270      17.203  75.342  35.227  1.00 33.01
+ATOM   1968  CB  ILE E 270      18.890  73.608  33.097  1.00 33.01
+ATOM   1969  CG1 ILE E 270      19.939  73.647  31.956  1.00 18.36
+ATOM   1970  CG2 ILE E 270      18.344  72.209  33.460  1.00 18.36
+ATOM   1971  CD1 ILE E 270      19.328  73.802  30.540  1.00 18.36
+ATOM   1972  N   THR E 271      15.658  74.329  33.909  1.00 17.79
+ATOM   1973  CA  THR E 271      14.637  74.280  34.953  1.00 17.79
+ATOM   1974  C   THR E 271      14.469  72.816  35.253  1.00 17.79
+ATOM   1975  O   THR E 271      15.179  71.994  34.616  1.00 17.79
+ATOM   1976  CB  THR E 271      13.304  74.815  34.416  1.00 17.79
+ATOM   1977  OG1 THR E 271      12.710  73.895  33.461  1.00 16.48
+ATOM   1978  CG2 THR E 271      13.517  76.184  33.763  1.00 16.48
+ATOM   1979  N   SER E 272      13.574  72.541  36.162  1.00 28.04
+ATOM   1980  CA  SER E 272      13.383  71.166  36.629  1.00 28.04
+ATOM   1981  C   SER E 272      12.617  70.309  35.627  1.00 28.04
+ATOM   1982  O   SER E 272      12.542  69.068  35.761  1.00 28.04
+ATOM   1983  CB  SER E 272      12.663  71.225  37.983  1.00 28.04
+ATOM   1984  OG  SER E 272      11.653  72.217  37.886  1.00 36.44
+ATOM   1985  N   ASN E 273      12.126  70.989  34.616  1.00 28.25
+ATOM   1986  CA  ASN E 273      11.399  70.360  33.504  1.00 28.25
+ATOM   1987  C   ASN E 273      12.259  70.194  32.255  1.00 28.25
+ATOM   1988  O   ASN E 273      11.731  69.777  31.186  1.00 28.25
+ATOM   1989  CB  ASN E 273      10.240  71.267  33.140  1.00 28.25
+ATOM   1990  CG  ASN E 273       9.348  71.347  34.365  1.00 24.20
+ATOM   1991  OD1 ASN E 273       8.885  70.284  34.846  1.00 24.20
+ATOM   1992  ND2 ASN E 273       8.952  72.556  34.666  1.00 24.20
+ATOM   1993  N   MET E 274      13.558  70.400  32.422  1.00 28.92
+ATOM   1994  CA  MET E 274      14.504  70.142  31.302  1.00 28.92
+ATOM   1995  C   MET E 274      15.456  68.993  31.575  1.00 28.92
+ATOM   1996  O   MET E 274      15.944  68.868  32.724  1.00 28.92
+ATOM   1997  CB  MET E 274      15.300  71.423  30.943  1.00 28.92
+ATOM   1998  CG  MET E 274      14.344  72.560  30.508  1.00 14.04
+ATOM   1999  SD  MET E 274      15.082  74.169  30.325  1.00 14.04
+ATOM   2000  CE  MET E 274      13.609  75.178  30.234  1.00 14.04
+ATOM   2001  N   PHE E 275      15.942  68.364  30.523  1.00 22.03
+ATOM   2002  CA  PHE E 275      17.198  67.641  30.692  1.00 22.03
+ATOM   2003  C   PHE E 275      18.124  67.795  29.498  1.00 22.03
+ATOM   2004  O   PHE E 275      17.655  68.410  28.519  1.00 22.03
+ATOM   2005  CB  PHE E 275      16.989  66.182  31.091  1.00 22.03
+ATOM   2006  CG  PHE E 275      16.311  65.338  30.015  1.00 25.21
+ATOM   2007  CD1 PHE E 275      17.062  64.483  29.246  1.00 25.21
+ATOM   2008  CD2 PHE E 275      14.939  65.407  29.856  1.00 25.21
+ATOM   2009  CE1 PHE E 275      16.442  63.692  28.302  1.00 25.21
+ATOM   2010  CE2 PHE E 275      14.315  64.607  28.920  1.00 25.21
+ATOM   2011  CZ  PHE E 275      15.064  63.749  28.144  1.00 25.21
+ATOM   2012  N   CYS E 276      19.359  67.303  29.589  1.00 15.69
+ATOM   2013  CA  CYS E 276      20.383  67.323  28.522  1.00 15.69
+ATOM   2014  C   CYS E 276      20.738  65.893  28.171  1.00 15.69
+ATOM   2015  O   CYS E 276      20.625  64.997  29.045  1.00 15.69
+ATOM   2016  CB  CYS E 276      21.710  67.990  28.953  1.00 15.69
+ATOM   2017  SG  CYS E 276      21.714  69.801  29.141  1.00 27.12
+ATOM   2018  N   ALA E 277      20.911  65.685  26.896  1.00 17.51
+ATOM   2019  CA  ALA E 277      21.302  64.398  26.309  1.00 17.51
+ATOM   2020  C   ALA E 277      22.275  64.676  25.185  1.00 17.51
+ATOM   2021  O   ALA E 277      22.164  65.725  24.515  1.00 17.51
+ATOM   2022  CB  ALA E 277      20.137  63.543  25.744  1.00 17.51
+ATOM   2023  N   TYR E 278      26.508  64.370  23.774  1.00 23.68
+ATOM   2024  CA  TYR E 278      27.968  64.131  23.858  1.00 23.68
+ATOM   2025  C   TYR E 278      28.737  65.437  23.985  1.00 23.68
+ATOM   2026  O   TYR E 278      28.487  66.386  23.204  1.00 23.68
+ATOM   2027  CB  TYR E 278      28.483  63.417  22.608  1.00 23.68
+ATOM   2028  CG  TYR E 278      27.841  62.040  22.423  1.00 24.68
+ATOM   2029  CD1 TYR E 278      26.638  61.944  21.746  1.00 24.68
+ATOM   2030  CD2 TYR E 278      28.422  60.916  22.958  1.00 24.68
+ATOM   2031  CE1 TYR E 278      25.983  60.737  21.626  1.00 24.68
+ATOM   2032  CE2 TYR E 278      27.771  59.683  22.827  1.00 24.68
+ATOM   2033  CZ  TYR E 278      26.538  59.602  22.171  1.00 24.68
+ATOM   2034  OH  TYR E 278      25.823  58.335  22.045  1.00 24.68
+ATOM   2035  N   GLU E 279      31.502  66.085  23.647  1.00 31.07
+ATOM   2036  CA  GLU E 279      32.436  66.387  22.565  1.00 31.07
+ATOM   2037  C   GLU E 279      31.832  66.934  21.266  1.00 31.07
+ATOM   2038  O   GLU E 279      32.568  67.542  20.455  1.00 31.07
+ATOM   2039  CB  GLU E 279      33.455  65.275  22.322  1.00 31.07
+ATOM   2040  CG  GLU E 279      32.842  64.077  21.581  1.00 45.48
+ATOM   2041  CD  GLU E 279      33.992  63.158  21.192  1.00 45.48
+ATOM   2042  OE1 GLU E 279      34.609  62.522  22.083  1.00  0.00
+ATOM   2043  OE2 GLU E 279      34.373  63.241  19.933  1.00  0.00
+ATOM   2044  N   LYS E 280      27.185  64.795  17.405  1.00 26.35
+ATOM   2045  CA  LYS E 280      25.937  64.019  17.482  1.00 26.35
+ATOM   2046  C   LYS E 280      24.905  64.809  18.264  1.00 26.35
+ATOM   2047  O   LYS E 280      25.188  65.143  19.441  1.00 26.35
+ATOM   2048  CB  LYS E 280      26.179  62.729  18.293  1.00 26.35
+ATOM   2049  CG  LYS E 280      27.263  61.901  17.622  1.00 25.91
+ATOM   2050  CD  LYS E 280      27.378  60.515  18.242  1.00 25.91
+ATOM   2051  CE  LYS E 280      28.169  59.598  17.304  1.00 25.91
+ATOM   2052  NZ  LYS E 280      28.172  58.230  17.834  1.00  0.00
+ATOM   2053  N   ASP E 281      23.814  65.196  17.626  1.00 24.74
+ATOM   2054  CA  ASP E 281      22.785  66.016  18.305  1.00 24.74
+ATOM   2055  C   ASP E 281      21.501  66.073  17.467  1.00 24.74
+ATOM   2056  O   ASP E 281      21.497  65.769  16.248  1.00 24.74
+ATOM   2057  CB  ASP E 281      23.351  67.437  18.441  1.00 24.74
+ATOM   2058  CG  ASP E 281      22.757  68.227  19.606  1.00 23.47
+ATOM   2059  OD1 ASP E 281      23.089  69.429  19.800  1.00 23.47
+ATOM   2060  OD2 ASP E 281      21.821  67.736  20.287  1.00 23.47
+ATOM   2061  N   CYS E 282      18.733  68.856  15.781  1.00 24.54
+ATOM   2062  CA  CYS E 282      18.968  70.189  15.208  1.00 24.54
+ATOM   2063  C   CYS E 282      17.658  70.744  14.658  1.00 24.54
+ATOM   2064  O   CYS E 282      16.705  69.925  14.682  1.00 24.54
+ATOM   2065  CB  CYS E 282      20.018  69.960  14.073  1.00 24.54
+ATOM   2066  SG  CYS E 282      20.906  71.431  13.539  1.00 20.85
+ATOM   2067  N   GLN E 283      17.647  71.989  14.081  1.00 19.04
+ATOM   2068  CA  GLN E 283      16.472  72.578  13.430  1.00 19.04
+ATOM   2069  C   GLN E 283      15.707  71.615  12.505  1.00 19.04
+ATOM   2070  O   GLN E 283      16.343  70.818  11.781  1.00 19.04
+ATOM   2071  CB  GLN E 283      16.928  73.795  12.626  1.00 19.04
+ATOM   2072  CG  GLN E 283      17.076  75.036  13.503  1.00 21.89
+ATOM   2073  CD  GLN E 283      18.232  74.860  14.469  1.00 21.89
+ATOM   2074  OE1 GLN E 283      19.352  74.528  14.022  1.00 21.89
+ATOM   2075  NE2 GLN E 283      18.048  75.495  15.592  1.00 21.89
+ATOM   2076  N   GLY E 284      14.424  71.447  12.775  1.00 18.28
+ATOM   2077  CA  GLY E 284      13.621  70.387  12.153  1.00 18.28
+ATOM   2078  C   GLY E 284      13.146  69.280  13.100  1.00 18.28
+ATOM   2079  O   GLY E 284      12.235  68.465  12.728  1.00 18.28
+ATOM   2080  N   ASP E 285      13.955  69.113  14.157  1.00 13.77
+ATOM   2081  CA  ASP E 285      13.835  67.977  15.088  1.00 13.77
+ATOM   2082  C   ASP E 285      12.856  68.229  16.221  1.00 13.77
+ATOM   2083  O   ASP E 285      12.274  67.223  16.714  1.00 13.77
+ATOM   2084  CB  ASP E 285      15.190  67.495  15.684  1.00 13.77
+ATOM   2085  CG  ASP E 285      15.952  66.670  14.637  1.00 20.96
+ATOM   2086  OD1 ASP E 285      17.168  66.901  14.433  1.00 20.96
+ATOM   2087  OD2 ASP E 285      15.297  66.100  13.730  1.00 20.96
+ATOM   2088  N   SER E 286      12.612  69.519  16.499  1.00 14.81
+ATOM   2089  CA  SER E 286      11.673  69.958  17.575  1.00 14.81
+ATOM   2090  C   SER E 286      10.358  69.209  17.650  1.00 14.81
+ATOM   2091  O   SER E 286       9.746  68.980  16.600  1.00 14.81
+ATOM   2092  CB  SER E 286      11.303  71.422  17.492  1.00 14.81
+ATOM   2093  OG  SER E 286      12.340  72.168  18.119  1.00  9.54
+ATOM   2094  N   GLY E 287       9.948  68.836  18.829  1.00 16.13
+ATOM   2095  CA  GLY E 287       8.683  68.130  19.041  1.00 16.13
+ATOM   2096  C   GLY E 287       8.809  66.619  19.031  1.00 16.13
+ATOM   2097  O   GLY E 287       7.913  65.948  19.565  1.00 16.13
+ATOM   2098  N   GLY E 288       9.838  66.114  18.364  1.00 18.87
+ATOM   2099  CA  GLY E 288      10.093  64.682  18.280  1.00 18.87
+ATOM   2100  C   GLY E 288      10.677  64.050  19.557  1.00 18.87
+ATOM   2101  O   GLY E 288      10.926  64.753  20.582  1.00 18.87
+ATOM   2102  N   PRO E 289      10.598  62.734  19.521  1.00 23.99
+ATOM   2103  CA  PRO E 289      10.777  61.835  20.670  1.00 23.99
+ATOM   2104  C   PRO E 289      12.242  61.713  21.111  1.00 23.99
+ATOM   2105  O   PRO E 289      13.137  61.473  20.262  1.00 23.99
+ATOM   2106  CB  PRO E 289      10.363  60.422  20.159  1.00 23.99
+ATOM   2107  CG  PRO E 289      10.314  60.494  18.622  1.00 11.94
+ATOM   2108  CD  PRO E 289      10.293  61.986  18.281  1.00 11.94
+ATOM   2109  N   VAL E 290      12.391  61.551  22.407  1.00 18.79
+ATOM   2110  CA  VAL E 290      13.519  60.893  23.056  1.00 18.79
+ATOM   2111  C   VAL E 290      12.962  59.697  23.832  1.00 18.79
+ATOM   2112  O   VAL E 290      12.267  59.900  24.849  1.00 18.79
+ATOM   2113  CB  VAL E 290      14.193  61.906  23.970  1.00 18.79
+ATOM   2114  CG1 VAL E 290      15.476  61.345  24.677  1.00 13.49
+ATOM   2115  CG2 VAL E 290      14.508  63.182  23.141  1.00 13.49
+ATOM   2116  N   VAL E 291      13.104  58.515  23.284  1.00 18.28
+ATOM   2117  CA  VAL E 291      12.525  57.280  23.824  1.00 18.28
+ATOM   2118  C   VAL E 291      13.567  56.347  24.463  1.00 18.28
+ATOM   2119  O   VAL E 291      14.535  55.872  23.813  1.00 18.28
+ATOM   2120  CB  VAL E 291      11.801  56.565  22.684  1.00 18.28
+ATOM   2121  CG1 VAL E 291      11.379  55.161  23.074  1.00 13.19
+ATOM   2122  CG2 VAL E 291      10.615  57.395  22.181  1.00 13.19
+ATOM   2123  N   CYS E 292      13.431  56.162  25.741  1.00 21.37
+ATOM   2124  CA  CYS E 292      14.382  55.393  26.539  1.00 21.37
+ATOM   2125  C   CYS E 292      13.687  54.177  27.128  1.00 21.37
+ATOM   2126  O   CYS E 292      12.752  54.332  27.954  1.00 21.37
+ATOM   2127  CB  CYS E 292      14.949  56.297  27.657  1.00 21.37
+ATOM   2128  SG  CYS E 292      15.294  58.025  27.192  1.00 30.59
+ATOM   2129  N   SER E 293      14.098  53.028  26.674  1.00 36.57
+ATOM   2130  CA  SER E 293      13.575  51.736  27.142  1.00 36.57
+ATOM   2131  C   SER E 293      12.066  51.707  26.986  1.00 36.57
+ATOM   2132  O   SER E 293      11.313  51.471  27.961  1.00 36.57
+ATOM   2133  CB  SER E 293      13.982  51.468  28.619  1.00 36.57
+ATOM   2134  OG  SER E 293      15.408  51.520  28.743  1.00  0.00
+ATOM   2135  N   GLY E 294      11.674  52.057  25.790  1.00 30.76
+ATOM   2136  CA  GLY E 294      10.298  51.978  25.287  1.00 30.76
+ATOM   2137  C   GLY E 294       9.389  53.074  25.778  1.00 30.76
+ATOM   2138  O   GLY E 294       8.150  52.974  25.617  1.00 30.76
+ATOM   2139  N   LYS E 295       9.929  53.958  26.573  1.00 21.50
+ATOM   2140  CA  LYS E 295       9.069  54.952  27.177  1.00 21.50
+ATOM   2141  C   LYS E 295       9.469  56.334  26.720  1.00 21.50
+ATOM   2142  O   LYS E 295      10.645  56.517  26.331  1.00 21.50
+ATOM   2143  CB  LYS E 295       9.009  54.845  28.738  1.00 21.50
+ATOM   2144  CG  LYS E 295       8.105  53.650  29.092  1.00 39.05
+ATOM   2145  CD  LYS E 295       8.216  53.202  30.546  1.00 39.05
+ATOM   2146  CE  LYS E 295       7.242  52.066  30.901  1.00  0.00
+ATOM   2147  NZ  LYS E 295       7.395  51.719  32.319  1.00  0.00
+ATOM   2148  N   LEU E 296       8.499  57.194  26.589  1.00 28.30
+ATOM   2149  CA  LEU E 296       8.766  58.525  26.055  1.00 28.30
+ATOM   2150  C   LEU E 296       9.281  59.454  27.156  1.00 28.30
+ATOM   2151  O   LEU E 296       8.487  59.969  27.980  1.00 28.30
+ATOM   2152  CB  LEU E 296       7.520  59.105  25.317  1.00 28.30
+ATOM   2153  CG  LEU E 296       7.680  60.567  24.839  1.00 16.87
+ATOM   2154  CD1 LEU E 296       8.655  60.690  23.652  1.00 16.87
+ATOM   2155  CD2 LEU E 296       6.314  61.223  24.569  1.00 16.87
+ATOM   2156  N   GLN E 297      10.594  59.642  27.203  1.00 18.41
+ATOM   2157  CA  GLN E 297      11.208  60.500  28.222  1.00 18.41
+ATOM   2158  C   GLN E 297      11.262  61.988  27.868  1.00 18.41
+ATOM   2159  O   GLN E 297      11.395  62.881  28.755  1.00 18.41
+ATOM   2160  CB  GLN E 297      12.591  59.938  28.677  1.00 18.41
+ATOM   2161  CG  GLN E 297      12.509  58.544  29.394  1.00 23.13
+ATOM   2162  CD  GLN E 297      11.656  58.630  30.671  1.00 23.13
+ATOM   2163  OE1 GLN E 297      11.449  59.725  31.253  1.00 23.13
+ATOM   2164  NE2 GLN E 297      11.440  57.510  31.282  1.00 23.13
+ATOM   2165  N   GLY E 298      11.382  62.263  26.605  1.00 15.52
+ATOM   2166  CA  GLY E 298      11.768  63.622  26.221  1.00 15.52
+ATOM   2167  C   GLY E 298      11.083  64.128  24.957  1.00 15.52
+ATOM   2168  O   GLY E 298      10.716  63.311  24.086  1.00 15.52
+ATOM   2169  N   ILE E 299      11.107  65.431  24.808  1.00 23.43
+ATOM   2170  CA  ILE E 299      10.710  66.111  23.580  1.00 23.43
+ATOM   2171  C   ILE E 299      11.860  67.007  23.110  1.00 23.43
+ATOM   2172  O   ILE E 299      12.395  67.796  23.934  1.00 23.43
+ATOM   2173  CB  ILE E 299       9.387  66.909  23.764  1.00 23.43
+ATOM   2174  CG1 ILE E 299       8.201  66.028  24.227  1.00 19.33
+ATOM   2175  CG2 ILE E 299       9.010  67.738  22.523  1.00 19.33
+ATOM   2176  CD1 ILE E 299       7.026  66.859  24.819  1.00 19.33
+ATOM   2177  N   VAL E 300      12.295  66.807  21.871  1.00 15.80
+ATOM   2178  CA  VAL E 300      13.334  67.677  21.318  1.00 15.80
+ATOM   2179  C   VAL E 300      12.961  69.153  21.417  1.00 15.80
+ATOM   2180  O   VAL E 300      11.867  69.562  20.978  1.00 15.80
+ATOM   2181  CB  VAL E 300      13.721  67.261  19.871  1.00 15.80
+ATOM   2182  CG1 VAL E 300      14.783  68.204  19.265  1.00 17.49
+ATOM   2183  CG2 VAL E 300      14.158  65.785  19.744  1.00 17.49
+ATOM   2184  N   SER E 301      13.747  69.924  22.134  1.00 16.27
+ATOM   2185  CA  SER E 301      13.406  71.329  22.399  1.00 16.27
+ATOM   2186  C   SER E 301      14.352  72.447  21.893  1.00 16.27
+ATOM   2187  O   SER E 301      13.935  73.394  21.166  1.00 16.27
+ATOM   2188  CB  SER E 301      13.103  71.462  23.904  1.00 16.27
+ATOM   2189  OG  SER E 301      12.650  72.778  24.159  1.00 12.69
+ATOM   2190  N   TRP E 302      15.514  72.547  22.483  1.00 20.40
+ATOM   2191  CA  TRP E 302      16.447  73.649  22.181  1.00 20.40
+ATOM   2192  C   TRP E 302      17.919  73.258  22.442  1.00 20.40
+ATOM   2193  O   TRP E 302      18.166  72.100  22.864  1.00 20.40
+ATOM   2194  CB  TRP E 302      16.017  74.976  22.888  1.00 20.40
+ATOM   2195  CG  TRP E 302      16.157  74.908  24.423  1.00 29.98
+ATOM   2196  CD1 TRP E 302      15.284  74.393  25.307  1.00 29.98
+ATOM   2197  CD2 TRP E 302      17.225  75.393  25.207  1.00 29.98
+ATOM   2198  NE1 TRP E 302      15.768  74.552  26.619  1.00 29.98
+ATOM   2199  CE2 TRP E 302      16.893  75.159  26.568  1.00 29.98
+ATOM   2200  CE3 TRP E 302      18.412  76.024  24.859  1.00 29.98
+ATOM   2201  CZ2 TRP E 302      17.716  75.539  27.625  1.00 29.98
+ATOM   2202  CZ3 TRP E 302      19.237  76.415  25.939  1.00 29.98
+ATOM   2203  CH2 TRP E 302      18.902  76.183  27.276  1.00 29.98
+ATOM   2204  N   GLY E 303      18.861  74.152  22.160  1.00 25.31
+ATOM   2205  CA  GLY E 303      20.311  74.013  22.404  1.00 25.31
+ATOM   2206  C   GLY E 303      21.087  75.260  21.985  1.00 25.31
+ATOM   2207  O   GLY E 303      20.494  76.127  21.303  1.00 25.31
+ATOM   2208  N   SER E 304      22.409  75.265  22.119  1.00 23.56
+ATOM   2209  CA  SER E 304      23.222  76.338  21.461  1.00 23.56
+ATOM   2210  C   SER E 304      23.785  75.845  20.156  1.00 23.56
+ATOM   2211  O   SER E 304      24.718  74.982  20.154  1.00 23.56
+ATOM   2212  CB  SER E 304      24.383  76.953  22.314  1.00 23.56
+ATOM   2213  OG  SER E 304      25.192  77.792  21.476  1.00  0.00
+ATOM   2214  N   GLY E 305      23.023  76.136  19.114  1.00 18.75
+ATOM   2215  CA  GLY E 305      23.317  75.517  17.818  1.00 18.75
+ATOM   2216  C   GLY E 305      23.096  74.024  17.882  1.00 18.75
+ATOM   2217  O   GLY E 305      22.208  73.549  18.638  1.00 18.75
+ATOM   2218  N   CYS E 306      23.853  73.318  17.113  1.00 24.90
+ATOM   2219  CA  CYS E 306      23.673  71.881  17.064  1.00 24.90
+ATOM   2220  C   CYS E 306      25.040  71.228  17.044  1.00 24.90
+ATOM   2221  O   CYS E 306      25.887  71.626  16.192  1.00 24.90
+ATOM   2222  CB  CYS E 306      22.945  71.458  15.760  1.00 24.90
+ATOM   2223  SG  CYS E 306      21.429  72.358  15.286  1.00 25.32
+ATOM   2224  N   GLN E 307      27.549  71.208  18.750  1.00 24.24
+ATOM   2225  CA  GLN E 307      28.684  71.936  19.354  1.00 24.24
+ATOM   2226  C   GLN E 307      29.314  71.349  20.632  1.00 24.24
+ATOM   2227  O   GLN E 307      28.678  70.589  21.400  1.00 24.24
+ATOM   2228  CB  GLN E 307      28.367  73.419  19.547  1.00 24.24
+ATOM   2229  CG  GLN E 307      28.225  74.146  18.184  1.00 25.32
+ATOM   2230  CD  GLN E 307      27.577  75.509  18.425  1.00 25.32
+ATOM   2231  OE1 GLN E 307      27.791  76.132  19.496  1.00  0.00
+ATOM   2232  NE2 GLN E 307      26.801  75.943  17.451  1.00  0.00
+ATOM   2233  N   LYS E 308      30.621  71.510  20.774  1.00 24.55
+ATOM   2234  CA  LYS E 308      31.366  70.857  21.881  1.00 24.55
+ATOM   2235  C   LYS E 308      30.960  71.585  23.154  1.00 24.55
+ATOM   2236  O   LYS E 308      30.693  72.809  23.067  1.00 24.55
+ATOM   2237  CB  LYS E 308      32.910  70.958  21.624  1.00 24.55
+ATOM   2238  CG  LYS E 308      33.761  70.216  22.671  1.00  0.00
+ATOM   2239  CD  LYS E 308      35.265  70.477  22.467  1.00  0.00
+ATOM   2240  CE  LYS E 308      36.117  69.832  23.576  1.00  0.00
+ATOM   2241  NZ  LYS E 308      37.532  70.175  23.387  1.00  0.00
+ATOM   2242  N   ASN E 309      30.679  70.838  24.203  1.00 29.18
+ATOM   2243  CA  ASN E 309      30.238  71.348  25.520  1.00 29.18
+ATOM   2244  C   ASN E 309      28.863  71.978  25.559  1.00 29.18
+ATOM   2245  O   ASN E 309      28.567  72.705  26.545  1.00 29.18
+ATOM   2246  CB  ASN E 309      31.165  72.442  26.092  1.00 29.18
+ATOM   2247  CG  ASN E 309      32.574  71.884  26.285  1.00 47.67
+ATOM   2248  OD1 ASN E 309      32.700  70.757  26.832  1.00 47.67
+ATOM   2249  ND2 ASN E 309      33.449  72.369  25.415  1.00 47.67
+ATOM   2250  N   LYS E 310      28.091  71.793  24.500  1.00 28.23
+ATOM   2251  CA  LYS E 310      26.706  72.282  24.488  1.00 28.23
+ATOM   2252  C   LYS E 310      25.736  71.221  23.969  1.00 28.23
+ATOM   2253  O   LYS E 310      25.417  71.176  22.752  1.00 28.23
+ATOM   2254  CB  LYS E 310      26.621  73.495  23.577  1.00 28.23
+ATOM   2255  CG  LYS E 310      27.542  74.648  24.001  1.00 24.92
+ATOM   2256  CD  LYS E 310      27.970  75.391  22.726  1.00 24.92
+ATOM   2257  CE  LYS E 310      28.780  76.664  23.027  1.00  0.00
+ATOM   2258  NZ  LYS E 310      29.215  77.282  21.767  1.00  0.00
+ATOM   2259  N   PRO E 311      25.358  70.326  24.840  1.00 26.59
+ATOM   2260  CA  PRO E 311      24.496  69.207  24.447  1.00 26.59
+ATOM   2261  C   PRO E 311      23.121  69.762  24.083  1.00 26.59
+ATOM   2262  O   PRO E 311      22.781  70.865  24.584  1.00 26.59
+ATOM   2263  CB  PRO E 311      24.338  68.345  25.735  1.00 26.59
+ATOM   2264  CG  PRO E 311      24.940  69.143  26.920  1.00 19.85
+ATOM   2265  CD  PRO E 311      25.628  70.382  26.312  1.00 19.85
+ATOM   2266  N   GLY E 312      22.298  68.988  23.395  1.00 19.97
+ATOM   2267  CA  GLY E 312      20.879  69.348  23.259  1.00 19.97
+ATOM   2268  C   GLY E 312      20.135  69.333  24.599  1.00 19.97
+ATOM   2269  O   GLY E 312      20.377  68.384  25.389  1.00 19.97
+ATOM   2270  N   VAL E 313      19.146  70.214  24.708  1.00 13.83
+ATOM   2271  CA  VAL E 313      18.097  70.317  25.748  1.00 13.83
+ATOM   2272  C   VAL E 313      16.664  69.910  25.351  1.00 13.83
+ATOM   2273  O   VAL E 313      16.216  70.129  24.198  1.00 13.83
+ATOM   2274  CB  VAL E 313      18.039  71.728  26.355  1.00 13.83
+ATOM   2275  CG1 VAL E 313      17.367  71.608  27.728  1.00 15.00
+ATOM   2276  CG2 VAL E 313      19.448  72.334  26.515  1.00 15.00
+ATOM   2277  N   TYR E 314      16.067  69.087  26.211  1.00 22.21
+ATOM   2278  CA  TYR E 314      14.825  68.339  26.034  1.00 22.21
+ATOM   2279  C   TYR E 314      13.839  68.567  27.180  1.00 22.21
+ATOM   2280  O   TYR E 314      14.264  68.574  28.366  1.00 22.21
+ATOM   2281  CB  TYR E 314      15.138  66.830  26.025  1.00 22.21
+ATOM   2282  CG  TYR E 314      16.026  66.497  24.822  1.00 25.81
+ATOM   2283  CD1 TYR E 314      15.454  66.246  23.589  1.00 25.81
+ATOM   2284  CD2 TYR E 314      17.401  66.522  24.959  1.00 25.81
+ATOM   2285  CE1 TYR E 314      16.259  66.030  22.470  1.00 25.81
+ATOM   2286  CE2 TYR E 314      18.216  66.326  23.844  1.00 25.81
+ATOM   2287  CZ  TYR E 314      17.648  66.086  22.603  1.00 25.81
+ATOM   2288  OH  TYR E 314      18.501  65.910  21.460  1.00 25.81
+ATOM   2289  N   THR E 315      12.565  68.534  26.855  1.00 18.20
+ATOM   2290  CA  THR E 315      11.481  68.557  27.864  1.00 18.20
+ATOM   2291  C   THR E 315      11.397  67.222  28.594  1.00 18.20
+ATOM   2292  O   THR E 315      11.305  66.152  27.936  1.00 18.20
+ATOM   2293  CB  THR E 315      10.148  68.860  27.167  1.00 18.20
+ATOM   2294  OG1 THR E 315      10.314  70.095  26.470  1.00 18.78
+ATOM   2295  CG2 THR E 315       8.986  68.977  28.199  1.00 18.78
+ATOM   2296  N   LYS E 316      11.427  67.310  29.916  1.00 23.83
+ATOM   2297  CA  LYS E 316      11.322  66.179  30.859  1.00 23.83
+ATOM   2298  C   LYS E 316       9.891  65.678  31.016  1.00 23.83
+ATOM   2299  O   LYS E 316       9.161  66.231  31.881  1.00 23.83
+ATOM   2300  CB  LYS E 316      11.832  66.636  32.242  1.00 23.83
+ATOM   2301  CG  LYS E 316      12.300  65.486  33.156  1.00 34.77
+ATOM   2302  CD  LYS E 316      12.791  66.128  34.473  1.00 34.77
+ATOM   2303  CE  LYS E 316      13.736  65.231  35.313  1.00 34.77
+ATOM   2304  NZ  LYS E 316      14.173  65.972  36.504  1.00  0.00
+ATOM   2305  N   VAL E 317       9.524  64.789  30.070  1.00 22.75
+ATOM   2306  CA  VAL E 317       8.177  64.247  29.879  1.00 22.75
+ATOM   2307  C   VAL E 317       7.592  63.596  31.125  1.00 22.75
+ATOM   2308  O   VAL E 317       6.370  63.696  31.359  1.00 22.75
+ATOM   2309  CB  VAL E 317       8.115  63.284  28.671  1.00 22.75
+ATOM   2310  CG1 VAL E 317       6.750  62.580  28.571  1.00 18.16
+ATOM   2311  CG2 VAL E 317       8.414  64.061  27.370  1.00 18.16
+ATOM   2312  N   CYS E 318       8.449  62.982  31.900  1.00 25.42
+ATOM   2313  CA  CYS E 318       8.044  62.299  33.120  1.00 25.42
+ATOM   2314  C   CYS E 318       7.386  63.251  34.120  1.00 25.42
+ATOM   2315  O   CYS E 318       6.478  62.810  34.863  1.00 25.42
+ATOM   2316  CB  CYS E 318       9.221  61.525  33.781  1.00 25.42
+ATOM   2317  SG  CYS E 318      10.556  62.570  34.463  1.00 24.24
+ATOM   2318  N   ASN E 319       7.638  64.550  34.038  1.00 18.69
+ATOM   2319  CA  ASN E 319       6.909  65.477  34.925  1.00 18.69
+ATOM   2320  C   ASN E 319       5.463  65.765  34.525  1.00 18.69
+ATOM   2321  O   ASN E 319       4.901  66.755  35.074  1.00 18.69
+ATOM   2322  CB  ASN E 319       7.590  66.857  34.964  1.00 18.69
+ATOM   2323  CG  ASN E 319       8.905  66.767  35.716  1.00 32.13
+ATOM   2324  OD1 ASN E 319       9.321  65.642  36.058  1.00 32.13
+ATOM   2325  ND2 ASN E 319       9.687  67.803  35.592  1.00 32.13
+ATOM   2326  N   TYR E 320       5.097  65.312  33.332  1.00 19.75
+ATOM   2327  CA  TYR E 320       3.863  65.832  32.696  1.00 19.75
+ATOM   2328  C   TYR E 320       2.740  64.813  32.653  1.00 19.75
+ATOM   2329  O   TYR E 320       1.730  65.137  32.007  1.00 19.75
+ATOM   2330  CB  TYR E 320       4.093  66.454  31.315  1.00 19.75
+ATOM   2331  CG  TYR E 320       4.908  67.757  31.465  1.00 19.27
+ATOM   2332  CD1 TYR E 320       4.289  68.931  31.809  1.00 19.27
+ATOM   2333  CD2 TYR E 320       6.274  67.723  31.327  1.00 19.27
+ATOM   2334  CE1 TYR E 320       5.040  70.085  32.033  1.00 19.27
+ATOM   2335  CE2 TYR E 320       7.032  68.868  31.539  1.00 19.27
+ATOM   2336  CZ  TYR E 320       6.417  70.027  31.893  1.00 19.27
+ATOM   2337  OH  TYR E 320       7.213  71.159  32.109  1.00 19.27
+ATOM   2338  N   VAL E 321       3.034  63.582  33.036  1.00 25.17
+ATOM   2339  CA  VAL E 321       2.195  62.415  32.660  1.00 25.17
+ATOM   2340  C   VAL E 321       0.736  62.610  33.078  1.00 25.17
+ATOM   2341  O   VAL E 321      -0.234  62.259  32.355  1.00 25.17
+ATOM   2342  CB  VAL E 321       2.776  61.042  33.168  1.00 25.17
+ATOM   2343  CG1 VAL E 321       1.818  59.849  33.017  1.00 24.93
+ATOM   2344  CG2 VAL E 321       4.086  60.618  32.477  1.00 24.93
+ATOM   2345  N   SER E 322       0.616  63.114  34.263  1.00 26.15
+ATOM   2346  CA  SER E 322      -0.642  63.317  34.908  1.00 26.15
+ATOM   2347  C   SER E 322      -1.432  64.338  34.113  1.00 26.15
+ATOM   2348  O   SER E 322      -2.621  64.094  33.784  1.00 26.15
+ATOM   2349  CB  SER E 322      -0.383  63.841  36.347  1.00 26.15
+ATOM   2350  OG  SER E 322       0.427  62.901  37.063  1.00  0.00
+ATOM   2351  N   TRP E 323      -0.730  65.407  33.777  1.00 22.11
+ATOM   2352  CA  TRP E 323      -1.271  66.519  32.991  1.00 22.11
+ATOM   2353  C   TRP E 323      -1.696  66.032  31.618  1.00 22.11
+ATOM   2354  O   TRP E 323      -2.786  66.401  31.125  1.00 22.11
+ATOM   2355  CB  TRP E 323      -0.315  67.707  32.886  1.00 22.11
+ATOM   2356  CG  TRP E 323      -0.903  68.794  31.945  1.00 26.68
+ATOM   2357  CD1 TRP E 323      -1.837  69.710  32.235  1.00 26.68
+ATOM   2358  CD2 TRP E 323      -0.607  69.014  30.590  1.00 26.68
+ATOM   2359  NE1 TRP E 323      -2.107  70.525  31.125  1.00 26.68
+ATOM   2360  CE2 TRP E 323      -1.376  70.126  30.168  1.00 26.68
+ATOM   2361  CE3 TRP E 323       0.248  68.359  29.727  1.00 26.68
+ATOM   2362  CZ2 TRP E 323      -1.280  70.658  28.893  1.00 26.68
+ATOM   2363  CZ3 TRP E 323       0.341  68.896  28.445  1.00 26.68
+ATOM   2364  CH2 TRP E 323      -0.381  70.009  28.039  1.00 26.68
+ATOM   2365  N   ILE E 324      -0.938  65.130  31.077  1.00 25.24
+ATOM   2366  CA  ILE E 324      -1.246  64.644  29.749  1.00 25.24
+ATOM   2367  C   ILE E 324      -2.481  63.744  29.758  1.00 25.24
+ATOM   2368  O   ILE E 324      -3.442  63.950  28.972  1.00 25.24
+ATOM   2369  CB  ILE E 324      -0.019  63.903  29.205  1.00 25.24
+ATOM   2370  CG1 ILE E 324       1.179  64.877  28.956  1.00 15.61
+ATOM   2371  CG2 ILE E 324      -0.429  63.146  27.932  1.00 15.61
+ATOM   2372  CD1 ILE E 324       2.535  64.173  28.655  1.00 15.61
+ATOM   2373  N   LYS E 325      -2.499  62.804  30.663  1.00 22.84
+ATOM   2374  CA  LYS E 325      -3.649  61.904  30.829  1.00 22.84
+ATOM   2375  C   LYS E 325      -4.979  62.608  31.108  1.00 22.84
+ATOM   2376  O   LYS E 325      -6.029  62.279  30.488  1.00 22.84
+ATOM   2377  CB  LYS E 325      -3.325  61.007  32.000  1.00 22.84
+ATOM   2378  CG  LYS E 325      -2.550  59.803  31.484  1.00 36.37
+ATOM   2379  CD  LYS E 325      -1.710  59.177  32.605  1.00 36.37
+ATOM   2380  CE  LYS E 325      -1.467  57.704  32.254  1.00 36.37
+ATOM   2381  NZ  LYS E 325      -2.747  56.984  32.424  1.00 36.37
+ATOM   2382  N   GLN E 326      -4.907  63.610  31.917  1.00 23.12
+ATOM   2383  CA  GLN E 326      -6.106  64.325  32.205  1.00 23.12
+ATOM   2384  C   GLN E 326      -6.532  65.256  31.093  1.00 23.12
+ATOM   2385  O   GLN E 326      -7.774  65.392  30.912  1.00 23.12
+ATOM   2386  CB  GLN E 326      -6.014  65.115  33.523  1.00 23.12
+ATOM   2387  CG  GLN E 326      -7.387  65.678  34.001  1.00 22.99
+ATOM   2388  CD  GLN E 326      -8.336  64.645  34.640  1.00 22.99
+ATOM   2389  OE1 GLN E 326      -7.968  63.451  34.778  1.00 22.99
+ATOM   2390  NE2 GLN E 326      -9.608  64.963  34.534  1.00 22.99
+ATOM   2391  N   THR E 327      -5.543  65.807  30.364  1.00 24.17
+ATOM   2392  CA  THR E 327      -5.853  66.659  29.181  1.00 24.17
+ATOM   2393  C   THR E 327      -6.406  65.876  27.991  1.00 24.17
+ATOM   2394  O   THR E 327      -7.472  66.233  27.438  1.00 24.17
+ATOM   2395  CB  THR E 327      -4.681  67.550  28.755  1.00 24.17
+ATOM   2396  OG1 THR E 327      -4.347  68.319  29.904  1.00 23.46
+ATOM   2397  CG2 THR E 327      -5.067  68.527  27.619  1.00 23.46
+ATOM   2398  N   ILE E 328      -5.847  64.721  27.752  1.00 20.49
+ATOM   2399  CA  ILE E 328      -6.405  63.841  26.730  1.00 20.49
+ATOM   2400  C   ILE E 328      -7.845  63.446  27.080  1.00 20.49
+ATOM   2401  O   ILE E 328      -8.716  63.398  26.173  1.00 20.49
+ATOM   2402  CB  ILE E 328      -5.555  62.535  26.547  1.00 20.49
+ATOM   2403  CG1 ILE E 328      -4.276  62.645  25.688  1.00 27.78
+ATOM   2404  CG2 ILE E 328      -6.381  61.396  25.939  1.00 27.78
+ATOM   2405  CD1 ILE E 328      -3.545  63.983  25.792  1.00 27.78
+ATOM   2406  N   ALA E 329      -8.089  63.153  28.344  1.00 26.09
+ATOM   2407  CA  ALA E 329      -9.391  62.562  28.773  1.00 26.09
+ATOM   2408  C   ALA E 329     -10.519  63.580  28.804  1.00 26.09
+ATOM   2409  O   ALA E 329     -11.701  63.196  28.688  1.00 26.09
+ATOM   2410  CB  ALA E 329      -9.284  61.927  30.168  1.00 26.09
+ATOM   2411  N   SER E 330     -10.175  64.844  28.857  1.00 18.30
+ATOM   2412  CA  SER E 330     -11.228  65.838  28.931  1.00 18.30
+ATOM   2413  C   SER E 330     -11.288  66.776  27.736  1.00 18.30
+ATOM   2414  O   SER E 330     -11.690  67.952  27.879  1.00 18.30
+ATOM   2415  CB  SER E 330     -11.170  66.621  30.234  1.00 18.30
+ATOM   2416  OG  SER E 330      -9.880  67.212  30.434  1.00 33.89
+ATOM   2417  N   ASN E 331     -10.841  66.283  26.607  1.00 23.66
+ATOM   2418  CA  ASN E 331     -10.874  67.057  25.358  1.00 23.66
+ATOM   2419  C   ASN E 331     -11.271  66.144  24.222  1.00 23.66
+ATOM   2420  O   ASN E 331     -11.551  66.665  23.129  1.00 23.66
+ATOM   2421  CB  ASN E 331      -9.517  67.741  24.986  1.00 23.66
+ATOM   2422  CG  ASN E 331      -9.167  68.908  25.933  1.00 28.31
+ATOM   2423  OD1 ASN E 331      -9.491  70.090  25.678  1.00 28.31
+ATOM   2424  ND2 ASN E 331      -8.611  68.589  27.082  1.00 28.31
+ATOM   2425  OXT ASN E 331     -11.309  64.888  24.359  1.00 29.09
 
 </content>
 </file>
@@ -2701,7 +3519,7 @@ EXTRACT_FROM_PDB: NO RESULT for seq
 <stream>output</stream>
 <name>2seqs.aln</name>
 <content>
-CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.01 sec, SCORE=966, Nseq=2, Len=242 
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=966, Nseq=2, Len=242 
 
 2PTCE           IVGGYTCGANTVPYQVSLNS--GYHFCGGSLINSQWVVSAAHCYKS--GI
 seq             IVGGQECKDGECPWQALLINEENEGFCGGTILSEFYILTAAHCLYQAKRF
@@ -2754,69 +3572,64 @@ SPAN.valueink {background: 000000}
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
-XDG_DATA_HOME=/Users/cnotredame/.local/share
 MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
 ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
 SHELL=/bin/bash
 TERM=xterm-256color
-TMPDIR=/var/folders/kt/h6f_8ns945v8sm8l744hnqkw0000gn/T/
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gn/T/
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.2Gm1mQlBr6/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.SiIg4fhsUe/Render
 TERM_PROGRAM_VERSION=361.1
 OSNAME=macosx
 PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=3B4D2C5E-2D85-426C-8E4A-6C0F1A72994B
+TERM_SESSION_ID=4AE051C3-8915-4749-A74A-58BE21C3378D
 METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
-ac_cv_path_INTLTOOL_PERL=/usr/bin/perl
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
 http_proxy=
 HTTP_proxy=
-SGML_CATALOG_FILES=/sw/etc/sgml/catalog
 USER=cnotredame
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.c5EYh3QWDe/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.Mk8QjV3nUO/Listeners
 __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
-XDG_CONFIG_DIRS=/sw/etc/xdg
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/subversion/bin:/opt/local/bin/:/Library/Frameworks/Python.framework/Versions/Current/bin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
-XML_CATALOG_FILES=/sw/etc/xml/catalog
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
 PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/doc/tmp
 CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.57JD6DDqrn/unix_domain_listener
 XPC_FLAGS=0x0
-VERSIONER_PERL_PREFER_32_BIT=yes
+VERSIONER_PERL_PREFER_32_BIT=no
 XPC_SERVICE_NAME=0
 ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-XDG_CONFIG_HOME=/Users/cnotredame/.config
 DUMP_4_TCOFFEE=t_coffee.34.dump
 HTTP_PROXY=
-XDG_CACHE_HOME=/Users/cnotredame/.cache
 PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
 MAFFT_BINARIES=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/plugins/macosx/
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
-XDG_DATA_DIRS=/sw/share
 LC_CTYPE=UTF-8
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.I3Kakd635Y/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.Mc5njvMIsW/org.macosforge.xquartz:0
 NUMBER_OF_PROCESSORS=4
 ALL_proxy=
 PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
 LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
-TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/291074799/
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/159885603/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>

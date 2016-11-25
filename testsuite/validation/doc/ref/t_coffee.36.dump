@@ -11,38 +11,38 @@
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-74918 -- WARNING: _P_ Template | hmgb_chite | Could Not Be Found
+85722 -- WARNING: _P_ Template | hmgb_chite | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | hmgl_trybr | Could Not Be Found
+85722 -- WARNING: _P_ Template | hmgl_trybr | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | hmgl_wheat | Could Not Be Found
+85722 -- WARNING: _P_ Template | hmgl_wheat | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | hmgt_mouse | Could Not Be Found
+85722 -- WARNING: _P_ Template | hmgt_mouse | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | seq_1cms | Could Not Be Found
+85722 -- WARNING: _P_ Template | seq_1cms | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | seq_3app | Could Not Be Found
+85722 -- WARNING: _P_ Template | seq_3app | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | seq_4ape | Could Not Be Found
+85722 -- WARNING: _P_ Template | seq_4ape | Could Not Be Found
 
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
 *************************************************************************************************
 </warning>
 <file>
@@ -269,25 +269,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -337,25 +337,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -375,41 +375,41 @@ INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
 0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -440,25 +440,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -478,41 +478,41 @@ INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
 0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -543,25 +543,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -581,41 +581,41 @@ INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
 0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -646,25 +646,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -684,41 +684,41 @@ INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
 0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -749,25 +749,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -787,41 +787,41 @@ INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
 
 	Multi Core Mode: 4 processors:
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
 
-pid 74994 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+pid 85799 -- Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
 0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
@@ -852,25 +852,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -933,105 +933,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
-
-]
-	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
-Looking For Profile  Templates
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
-INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
-  Input File 3d_sample3.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq seq_1cms   Length  175 type PROTEIN Struct Unchecked
-	PDB struc: Template=1cms, File=1cms.pdb
-  Input File 3d_sample3.fasta Seq seq_3app   Length  174 type PROTEIN Struct Unchecked
-	PDB struc: Template=3app, File=3app.pdb
-  Input File 3d_sample3.fasta Seq seq_4ape   Length  178 type PROTEIN Struct Unchecked
-	PDB struc: Template=4ape, File=4ape.pdb
-
-	Multi Core Mode: 4 processors:
-
-	--- Process Method/Library/Aln Msap_pair
-	--- Process Method/Library/Aln S3d_sample3.fasta
-	xxx Retrieved S3d_sample3.fasta
-	xxx Retrieved Msap_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [9908]
-
-Library Relaxation: Multi_proc [4]
- 0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--plugins       	S	[0] 	default
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--dump          	S	[0] 	no
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (M) sap_pair 
-	Input File (S) 3d_sample3.fasta  Format fasta_seq
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1093,25 +1013,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1173,25 +1093,105 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
+
+]
+	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
+INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
+  Input File 3d_sample3.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq seq_1cms   Length  175 type PROTEIN Struct Unchecked
+	PDB struc: Template=1cms, File=1cms.pdb
+  Input File 3d_sample3.fasta Seq seq_3app   Length  174 type PROTEIN Struct Unchecked
+	PDB struc: Template=3app, File=3app.pdb
+  Input File 3d_sample3.fasta Seq seq_4ape   Length  178 type PROTEIN Struct Unchecked
+	PDB struc: Template=4ape, File=4ape.pdb
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Msap_pair
+	--- Process Method/Library/Aln S3d_sample3.fasta
+	xxx Retrieved S3d_sample3.fasta
+	xxx Retrieved Msap_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9908]
+
+Library Relaxation: Multi_proc [4]
+ 0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) sap_pair 
+	Input File (S) 3d_sample3.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1272,25 +1272,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1371,125 +1371,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
-
-]
-	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
-Looking For Profile  Templates
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
-INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
-  Input File 3d_sample3.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq seq_1cms   Length  175 type PROTEIN Struct Unchecked
-	PDB struc: Template=1cms, File=1cms.pdb
-  Input File 3d_sample3.fasta Seq seq_3app   Length  174 type PROTEIN Struct Unchecked
-	PDB struc: Template=3app, File=3app.pdb
-  Input File 3d_sample3.fasta Seq seq_4ape   Length  178 type PROTEIN Struct Unchecked
-	PDB struc: Template=4ape, File=4ape.pdb
-
-	Multi Core Mode: 4 processors:
-
-	--- Process Method/Library/Aln Msap_pair
-	--- Process Method/Library/Aln S3d_sample3.fasta
-	xxx Retrieved S3d_sample3.fasta
-	xxx Retrieved Msap_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [9908]
-
-Library Relaxation: Multi_proc [4]
- 
-Relaxation Summary: [9908]--->[7249]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: hmgb_chite
-Group    2: hmgl_trybr
-Group    3: hmgl_wheat
-Group    4: hmgt_mouse
-Group    5: seq_1cms
-Group    6: seq_3app
-Group    7: seq_4ape
-
-
-	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:75004]0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--plugins       	S	[0] 	default
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--dump          	S	[0] 	no
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (M) sap_pair 
-	Input File (S) 3d_sample3.fasta  Format fasta_seq
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1541,8 +1441,7 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:75004]
-	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:75004]0] 
+	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:85810]0] 
 -no_warning    	D	[0] 	0 
 -run_local_script	D	[0] 	0 
 -plugins       	S	[0] 	default
@@ -1572,25 +1471,228 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
+
+]
+	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
+INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
+  Input File 3d_sample3.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq seq_1cms   Length  175 type PROTEIN Struct Unchecked
+	PDB struc: Template=1cms, File=1cms.pdb
+  Input File 3d_sample3.fasta Seq seq_3app   Length  174 type PROTEIN Struct Unchecked
+	PDB struc: Template=3app, File=3app.pdb
+  Input File 3d_sample3.fasta Seq seq_4ape   Length  178 type PROTEIN Struct Unchecked
+	PDB struc: Template=4ape, File=4ape.pdb
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Msap_pair
+	--- Process Method/Library/Aln S3d_sample3.fasta
+	xxx Retrieved S3d_sample3.fasta
+	xxx Retrieved Msap_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9908]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9908]--->[7249]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+Group    5: seq_1cms
+Group    6: seq_3app
+Group    7: seq_4ape
+
+
+	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:85810]
+	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:85810]0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) sap_pair 
+	Input File (S) 3d_sample3.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
+
+]
+	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
+Looking For Profile  Templates
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
+INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
+  Input File 3d_sample3.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+  Input File 3d_sample3.fasta Seq seq_1cms   Length  175 type PROTEIN Struct Unchecked
+	PDB struc: Template=1cms, File=1cms.pdb
+  Input File 3d_sample3.fasta Seq seq_3app   Length  174 type PROTEIN Struct Unchecked
+	PDB struc: Template=3app, File=3app.pdb
+  Input File 3d_sample3.fasta Seq seq_4ape   Length  178 type PROTEIN Struct Unchecked
+	PDB struc: Template=4ape, File=4ape.pdb
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Msap_pair
+	--- Process Method/Library/Aln S3d_sample3.fasta
+	xxx Retrieved S3d_sample3.fasta
+	xxx Retrieved Msap_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9908]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9908]--->[7249]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+Group    5: seq_1cms
+Group    6: seq_3app
+Group    7: seq_4ape
+
+
+	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:85810]
+	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:85810]
+	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:85810]0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) sap_pair 
+	Input File (S) 3d_sample3.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
+
+
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1671,127 +1773,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
-
-]
-	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
-Looking For Profile  Templates
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start]
-INPUT SEQUENCES: 7 SEQUENCES  [PROTEIN]
-  Input File 3d_sample3.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
-  Input File 3d_sample3.fasta Seq seq_1cms   Length  175 type PROTEIN Struct Unchecked
-	PDB struc: Template=1cms, File=1cms.pdb
-  Input File 3d_sample3.fasta Seq seq_3app   Length  174 type PROTEIN Struct Unchecked
-	PDB struc: Template=3app, File=3app.pdb
-  Input File 3d_sample3.fasta Seq seq_4ape   Length  178 type PROTEIN Struct Unchecked
-	PDB struc: Template=4ape, File=4ape.pdb
-
-	Multi Core Mode: 4 processors:
-
-	--- Process Method/Library/Aln Msap_pair
-	--- Process Method/Library/Aln S3d_sample3.fasta
-	xxx Retrieved S3d_sample3.fasta
-	xxx Retrieved Msap_pair
-
-	All Methods Retrieved
-
-MANUAL PENALTIES: gapopen=0 gapext=0
-
-	Library Total Size: [9908]
-
-Library Relaxation: Multi_proc [4]
- 
-Relaxation Summary: [9908]--->[7249]
-
-
-
-UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
-
-MAKE GUIDE TREE 
-	[MODE=nj][DONE]
-
-PROGRESSIVE_ALIGNMENT [Tree Based]
-Group    1: hmgb_chite
-Group    2: hmgl_trybr
-Group    3: hmgl_wheat
-Group    4: hmgt_mouse
-Group    5: seq_1cms
-Group    6: seq_3app
-Group    7: seq_4ape
-
-
-	Group    8: [Group    4 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=   76][PID:75004]
-	Group    9: [Group    8 (   2 seq)] with [Group    1 (   1 seq)]-->[Len=   80][PID:75004]
-	Group   10: [Group    3 (   1 seq)] with [Group    9 (   3 seq)]-->[Len=   81][PID:75004]0] 
--no_warning    	D	[0] 	0 
--run_local_script	D	[0] 	0 
--plugins       	S	[0] 	default
--proxy         	S	[0] 	unset
--email         	S	[0] 
--clean_overaln 	D	[0] 	0 
--overaln_param 	S	[0] 
--overaln_mode  	S	[0] 
--overaln_model 	S	[0] 
--overaln_threshold	D	[0] 	0 
--overaln_target	D	[0] 	0 
--overaln_P1    	D	[0] 	0 
--overaln_P2    	D	[0] 	0 
--overaln_P3    	D	[0] 	0 
--overaln_P4    	D	[0] 	0 
--exon_boundaries	S	[0] 
--dump          	S	[0] 	no
--display       	D	[0] 	100 
-
-INPUT FILES
-	Input File (M) sap_pair 
-	Input File (S) 3d_sample3.fasta  Format fasta_seq
-
-Identify Master Sequences [no]:
-
-Master Sequences Identified
-Looking For Sequence Templates:
-
-	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
-
-
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1872,25 +1872,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -1971,25 +1971,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -2041,7 +2041,7 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:74918][Forked]
+	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:85722][Forked]
 
 
 !		[Final Evaluation][TOT=   45][  0 %]!		[Final Evaluation][TOT=   45][  4 %]!		[Final Evaluation][TOT=   45][  6 %]!		[Final Evaluation][TOT=   45][  8 %]!		[Final Evaluation][TOT=   45][ 11 %]!		[Final Evaluation][TOT=   45][ 13 %]!		[Final Evaluation][TOT=   45][ 15 %]!		[Final Evaluation][TOT=   45][ 17 %]!		[Final Evaluation][TOT=   45][ 20 %]!		[Final Evaluation][TOT=   45][ 22 %]!		[Final Evaluation][TOT=   45][ 24 %]!		[Final Evaluation][TOT=   45][ 26 %]!		[Final Evaluation][TOT=   45][ 28 %]!		[Final Evaluation][TOT=   45][ 31 %]!		[Final Evaluation][TOT=   45][ 33 %]!		[Final Evaluation][TOT=   45][ 35 %]!		[Final Evaluation][TOT=   45][ 37 %]!		[Final Evaluation][TOT=   45][ 40 %]!		[Final Evaluation][TOT=   45][ 42 %]!		[Final Evaluation][TOT=   45][ 44 %]!		[Final Evaluation][TOT=   45][ 46 %]!		[Final Evaluation][TOT=   45][ 48 %]!		[Final Evaluation][TOT=   45][ 51 %]!		[Final Evaluation][TOT=   45][ 53 %]!		[Final Evaluation][TOT=   45][ 55 %]!		[Final Evaluation][TOT=   45][ 57 %]!		[Final Evaluation][TOT=   45][ 60 %]!		[Final Evaluation][TOT=   45][ 62 %]!		[Final Evaluation][TOT=   45][ 64 %]!		[Final Evaluation][TOT=   45][ 66 %]!		[Final Evaluation][TOT=   45][ 68 %]!		[Final Evaluation][TOT=   45][ 71 %]!		[Final Evaluation][TOT=   45][ 73 %]!		[Final Evaluation][TOT=   45][ 75 %]!		[Final Evaluation][TOT=   45][ 77 %]!		[Final Evaluation][TOT=   45][ 80 %]!		[Final Evaluation][TOT=   45][ 82 %]!		[Final Evaluation][TOT=   45][ 84 %]!		[Final Evaluation][TOT=   45][ 86 %]!		[Final Evaluation][TOT=   45][ 88 %]!		[Final Evaluation][TOT=   45][ 91 %]!		[Final Evaluation][TOT=   45][ 93 %]!		[Final Evaluation][TOT=   45][ 95 %]!		[Final Evaluation][TOT=   45][ 97 %]!		[Final Evaluation][TOT=   45][100 %]
@@ -2075,25 +2075,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -2145,7 +2145,7 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:74918][Forked]
+	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:85722][Forked]
 
 0] 
 -no_warning    	D	[0] 	0 
@@ -2177,25 +2177,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -2247,7 +2247,7 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:74918][Forked]
+	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:85722][Forked]
 
 0] 
 -no_warning    	D	[0] 	0 
@@ -2279,25 +2279,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -2349,7 +2349,7 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:74918][Forked]
+	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:85722][Forked]
 
 0] 
 -no_warning    	D	[0] 	0 
@@ -2381,25 +2381,25 @@ Master Sequences Identified
 Looking For Sequence Templates:
 
 	Template Type: [PDB struc] Mode Or File: [SELF_P_] [Start
-pid 74918 -- _P_ Template | hmgb_chite | Could Not Be Found
+pid 85722 -- _P_ Template | hmgb_chite | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_trybr | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_trybr | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgl_wheat | Could Not Be Found
+pid 85722 -- _P_ Template | hmgl_wheat | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | hmgt_mouse | Could Not Be Found
+pid 85722 -- _P_ Template | hmgt_mouse | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_1cms | Could Not Be Found
+pid 85722 -- _P_ Template | seq_1cms | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_3app | Could Not Be Found
+pid 85722 -- _P_ Template | seq_3app | Could Not Be Found
 
 
-pid 74918 -- _P_ Template | seq_4ape | Could Not Be Found
+pid 85722 -- _P_ Template | seq_4ape | Could Not Be Found
 
 ]
 	Template Type: [template_file.template] Mode Or File: [template_file.template] [Start]
@@ -2451,7 +2451,7 @@ Group    6: seq_3app
 Group    7: seq_4ape
 
 
-	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:74918][Forked]
+	Group   13: [Group   12 (   3 seq)] with [Group   10 (   4 seq)]-->[Len=  183][PID:85722][Forked]
 
 
 
@@ -2463,7 +2463,7 @@ OUTPUT RESULTS
 	#### File Type= Template_List   Format= fasta_seq       Name= template_file.template
 
 # Command Line: t_coffee -mode 3dcoffee -seq 3d_sample3.fasta -template_file template_file.template  [PROGRAM:T-COFFEE]
-# T-COFFEE Memory Usage: Current= 33.399 Mb, Max= 34.566 Mb
+# T-COFFEE Memory Usage: Current= 33.399 Mb, Max= 34.567 Mb
 # Results Produced with T-COFFEE Version_11.00 (Version_11.00)
 # T-COFFEE is available from http://www.tcoffee.org
 # Register on: https://groups.google.com/group/tcoffee/
@@ -2471,38 +2471,38 @@ OUTPUT RESULTS
 
 *************************************************************************************************
 *                        MESSAGES RECAPITULATION                                    
-74918 -- WARNING: _P_ Template | hmgb_chite | Could Not Be Found
+85722 -- WARNING: _P_ Template | hmgb_chite | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | hmgl_trybr | Could Not Be Found
+85722 -- WARNING: _P_ Template | hmgl_trybr | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | hmgl_wheat | Could Not Be Found
+85722 -- WARNING: _P_ Template | hmgl_wheat | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | hmgt_mouse | Could Not Be Found
+85722 -- WARNING: _P_ Template | hmgt_mouse | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | seq_1cms | Could Not Be Found
+85722 -- WARNING: _P_ Template | seq_1cms | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | seq_3app | Could Not Be Found
+85722 -- WARNING: _P_ Template | seq_3app | Could Not Be Found
 
-74918 -- WARNING: _P_ Template | seq_4ape | Could Not Be Found
+85722 -- WARNING: _P_ Template | seq_4ape | Could Not Be Found
 
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
-74994 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_trybr], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgl_wheat], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs hmgt_mouse], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_1cms], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_3app], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgb_chite vs seq_4ape], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgl_wheat], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs hmgt_mouse], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_1cms], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_3app], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_trybr vs seq_4ape], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs hmgt_mouse], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_1cms], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_3app], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgl_wheat vs seq_4ape], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_1cms], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_3app], proba_pair will be used instead
+85799 -- INFORMATION: Method  cannot be applied to [hmgt_mouse vs seq_4ape], proba_pair will be used instead
 *************************************************************************************************
 </content>
 </file>
@@ -13496,9 +13496,9 @@ END
 <stream>input</stream>
 <name>/Users/cnotredame/.t_coffee/cache//1cms_3app.sap_results</name>
 <content>
- file1 = 20441_1.3130.sap_tmp
+ file1 = 50418_1.4839.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 20441_2.995.sap_tmp
+ file2 = 50418_2.3496.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -13508,7 +13508,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 44 residues selected
 Cycle 5, 53 residues selected
 
- score = 12511.968750
+ score = 12512.033203
 
 Percent sel on aln =  100.00
 Percent aln in sel =   31.55
@@ -13680,32 +13680,32 @@ Percent aln in sel =   31.55
   S  172  71.6 173 P  
   S  173  62.6 174 S  
  *K  174  87.7 175 Y* 
-20441_2.995.sap_tmp Weighted RMSd =   0.801 over 168 atoms 125.265762 20829.080078  26.8 82.556313
-20441_2.995.sap_tmp Un-weighted RMSd =   0.863 over best 94 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   0.986 over best 110 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.037 over best 120 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.059 over best 127 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.227 over best 138 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.271 over best 145 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.388 over best 149 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.413 over best 150 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.476 over best 157 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.512 over best 160 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.513 over best 160 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.599 over best 165 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.713 over best 166 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.720 over best 168 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.721 over best 167 atoms ( 20829.080078   26.8 )
-20441_2.995.sap_tmp Un-weighted RMSd =   1.720 over all 168 matched atoms 125.265762 20829.080078   26.8 82.556313
+50418_2.3496.sap_tmp Weighted RMSd =     nan over 168 atoms nan 20829.080078  26.8 nan
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over best 0 atoms ( 20829.080078   26.8 )
+50418_2.3496.sap_tmp Un-weighted RMSd =     nan over all 168 matched atoms nan 20829.080078   26.8 nan
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame/.t_coffee/cache//1cms_4ape.sap_results</name>
 <content>
- file1 = 20441_1.5072.sap_tmp
+ file1 = 50418_1.6312.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 20441_2.1014.sap_tmp
+ file2 = 50418_2.2897.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -13715,7 +13715,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 45 residues selected
 Cycle 5, 53 residues selected
 
- score = 13354.708008
+ score = 13317.736328
 
 Percent sel on aln =  100.00
 Percent aln in sel =   30.99
@@ -13890,32 +13890,32 @@ Percent aln in sel =   30.99
   T  173  41.7 173 P  
   T  174  83.2 174 S  
   A  175 108.0 175 Y* 
-20441_2.1014.sap_tmp Weighted RMSd =   0.803 over 171 atoms 130.039169 22469.740234  29.2 79.828087
-20441_2.1014.sap_tmp Un-weighted RMSd =   0.830 over best 98 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   0.938 over best 115 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.137 over best 123 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.239 over best 130 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.242 over best 135 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.261 over best 137 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.324 over best 143 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.423 over best 149 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.531 over best 156 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.624 over best 161 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.685 over best 164 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.750 over best 168 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.766 over best 170 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
-20441_2.1014.sap_tmp Un-weighted RMSd =   1.776 over all 171 matched atoms 130.039169 22469.740234   29.2 79.828087
+50418_2.2897.sap_tmp Weighted RMSd =   0.803 over 171 atoms 130.039169 22469.740234  29.2 79.828087
+50418_2.2897.sap_tmp Un-weighted RMSd =   0.830 over best 98 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   0.938 over best 115 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.137 over best 123 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.239 over best 130 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.242 over best 135 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.261 over best 137 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.324 over best 143 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.423 over best 149 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.531 over best 156 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.624 over best 161 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.685 over best 164 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.750 over best 168 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.766 over best 170 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.776 over best 171 atoms ( 22469.740234   29.2 )
+50418_2.2897.sap_tmp Un-weighted RMSd =   1.776 over all 171 matched atoms 130.039169 22469.740234   29.2 79.828087
 </content>
 </file>
 <file>
 <stream>input</stream>
 <name>/Users/cnotredame/.t_coffee/cache//3app_4ape.sap_results</name>
 <content>
- file1 = 20441_1.9992.sap_tmp
+ file1 = 50418_1.9080.sap_tmp
  prot1->Compound =  CHAIN: A;                                                  
- file2 = 20441_2.8592.sap_tmp
+ file2 = 50418_2.8648.sap_tmp
  prot2->Compound =  CHAIN: A;                                                  
 ARNDCQEGHILKMFPSTWYVBZX
 matrix constant = 8
@@ -13925,7 +13925,7 @@ Cycle 3, 36 residues selected
 Cycle 4, 44 residues selected
 Cycle 5, 53 residues selected
 
- score = 19448.984375
+ score = 19424.804688
 
 Percent sel on aln =  100.00
 Percent aln in sel =   30.99
@@ -14100,23 +14100,23 @@ Percent aln in sel =   30.99
   T  173  69.7 172 S  
   T  174  87.1 173 S  
   A  175 128.5 174 K* 
-20441_2.8592.sap_tmp Weighted RMSd =   0.617 over 171 atoms 146.521652 37015.902344  59.1 91.949593
-20441_2.8592.sap_tmp Un-weighted RMSd =   0.651 over best 123 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   0.863 over best 149 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   0.941 over best 156 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.017 over best 162 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.014 over best 164 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.007 over best 167 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
-20441_2.8592.sap_tmp Un-weighted RMSd =   1.075 over all 171 matched atoms 146.521652 37015.902344   59.1 91.949593
+50418_2.8648.sap_tmp Weighted RMSd =   0.617 over 171 atoms 146.521652 37015.902344  59.1 91.949593
+50418_2.8648.sap_tmp Un-weighted RMSd =   0.651 over best 123 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   0.863 over best 149 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   0.941 over best 156 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.017 over best 162 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.014 over best 164 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.007 over best 167 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.005 over best 168 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.003 over best 169 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.075 over best 171 atoms ( 37015.902344   59.1 )
+50418_2.8648.sap_tmp Un-weighted RMSd =   1.075 over all 171 matched atoms 146.521652 37015.902344   59.1 91.949593
 </content>
 </file>
 <file>
@@ -14167,7 +14167,7 @@ seq_4ape:0.09500)
 <stream>output</stream>
 <name>3d_sample3.aln</name>
 <content>
-CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.01 sec, SCORE=425, Nseq=7, Len=183 
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: 3dcoffee ], CPU=0.00 sec, SCORE=425, Nseq=7, Len=183 
 
 seq_1cms        GEVASVPLTNYL--DSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCK
 seq_4ape        STG-SATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETT
@@ -14236,69 +14236,64 @@ SPAN.valueink {background: 000000}
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
-XDG_DATA_HOME=/Users/cnotredame/.local/share
 MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
 ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
 SHELL=/bin/bash
 TERM=xterm-256color
-TMPDIR=/var/folders/kt/h6f_8ns945v8sm8l744hnqkw0000gn/T/
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gn/T/
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.2Gm1mQlBr6/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.SiIg4fhsUe/Render
 TERM_PROGRAM_VERSION=361.1
 OSNAME=macosx
 PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=3B4D2C5E-2D85-426C-8E4A-6C0F1A72994B
+TERM_SESSION_ID=4AE051C3-8915-4749-A74A-58BE21C3378D
 METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
-ac_cv_path_INTLTOOL_PERL=/usr/bin/perl
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
 http_proxy=
 HTTP_proxy=
-SGML_CATALOG_FILES=/sw/etc/sgml/catalog
 USER=cnotredame
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.c5EYh3QWDe/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.Mk8QjV3nUO/Listeners
 __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
-XDG_CONFIG_DIRS=/sw/etc/xdg
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/subversion/bin:/opt/local/bin/:/Library/Frameworks/Python.framework/Versions/Current/bin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
-XML_CATALOG_FILES=/sw/etc/xml/catalog
 COLOR_4_TCOFFEE=new
 DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
 PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/doc/tmp
 CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.57JD6DDqrn/unix_domain_listener
 XPC_FLAGS=0x0
-VERSIONER_PERL_PREFER_32_BIT=yes
+VERSIONER_PERL_PREFER_32_BIT=no
 XPC_SERVICE_NAME=0
 ERRORFILE_4_TCOFFEE=NO
 PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-XDG_CONFIG_HOME=/Users/cnotredame/.config
 DUMP_4_TCOFFEE=t_coffee.36.dump
 HTTP_PROXY=
-XDG_CACHE_HOME=/Users/cnotredame/.cache
 PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
 MAFFT_BINARIES=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/plugins/macosx/
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
-XDG_DATA_DIRS=/sw/share
 LC_CTYPE=UTF-8
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.I3Kakd635Y/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.Mc5njvMIsW/org.macosforge.xquartz:0
 NUMBER_OF_PROCESSORS=4
 ALL_proxy=
 PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
 LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
-TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/291074918/
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/159885722/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>

@@ -3,7 +3,7 @@
 <program>T-COFFEE</program>
 <version>Version_11.00</version>
 <build>Version_11.00</build>
-<cl>t_coffee -other_pg seq_reformat -in sample_rnaseq2.cw.stk -in2 sample_rnaseq2.tcoffee.stk -action +RNAfold_cmp</cl>
+<cl>t_coffee -other_pg seq_reformat -in sample_dnaseq3.aln -action +rm_gap 50</cl>
 <stack>
 </stack>
 <warning>
@@ -12,93 +12,16 @@
 <stream>output</stream>
 <name>stdout</name>
 <content>
-@@ Seq: OTTHUMT00000006707 Overalp: 100.00 Al1: 100.00 Al2: 100.00 
-@@ Seq: OTTHUMT00000043281 Overalp: 100.00 Al1: 100.00 Al2: 100.00 
-@@ Seq: OTTHUMT00000007987 Overalp: 92.89 Al1: 93.33 Al2: 92.45 
-@@ Seq: Tot Overalp: 97.64 
-# STOCKHOLM 1.0
+CLUSTAL W (1.83) multiple sequence alignment
 
-OTTHUMT00000006707  uacGGAAGCU.UUAGG6666UGCUC6666ACCCGAAACUAGA6666A666
-OTTHUMT00000043281  .aucccagcuacucgg6666....c6666gcaggagaau.ca6666a666
-OTTHUMT00000007987  ...............G0G00GCUCU0000CCCGAAACUAGAC0000C00.
-#=GC SS_cons        ................((((.....((((.............)))).)))
+A               CTCCGTAGGagtTTACGTgg
+B               CTGAGAAGCCGCTGAGGTCG
+D               CTTCGTAGTCGTTTAAGAca
+C               -TTAAG---AGATGCGGAGC
+                 * ..    .* * . *:  
 
-OTTHUMT00000006707  6AA666ACACA6666666666AA.....6.....................
-OTTHUMT00000043281  6gg666gcaga6666666666a.gccga6.....................
-OTTHUMT00000007987  0AA666ACACA6666666666AAGGCGA6ACugucugcuggugggaugcu
-#=GC SS_cons        )..(((.....((((((((((.......(.....................
 
-OTTHUMT00000006707  ..6U6666AUGU6666U6666AAU66666.....666ACGUUU6.....6
-OTTHUMT00000043281  ..6u6666cccc6666c6666gcc66666gacag666aagacu6caucu6
-OTTHUMT00000007987  gg6U6666ACGU6666U6666AAU66666.....666ACGUUU6.....6
-#=GC SS_cons        ..(.((((....)))).))))...(((((.....(((......(.....(
 
-OTTHUMT00000006707  66C66G.AGCAU6666666U66666666CC...CUCCCU66666.....6
-OTTHUMT00000043281  66a66aaauaaa6666666U66666666GGAUGCUGUAU66666UCAAG6
-OTTHUMT00000007987  66C66G.AGCAU6666666U66666666CC...CUCCCU66666.....6
-#=GC SS_cons        ((.((.......(((((((.((((((((...........))))).....)
-
-OTTHUMT00000006707  6666U6666CCU66ACACU.G.66CU6666UGU6666AU.....CUC.66
-OTTHUMT00000043281  6666U6666CAA66AAAAUUGA66AU6666gau6666auccaaacucA66
-OTTHUMT00000007987  6666U6666CCU66ACACU.G.66CU6666UGU6666AU.....CUC.66
-#=GC SS_cons        ((((.((((...((........))..))))...))))...........))
-
-OTTHUMT00000006707  U666666....6CACCUGA.......66C6....666CA....UACA666
-OTTHUMT00000043281  U666666CCCC6C.CCUGCCCCAGGA66G6GGAG666GAACGUUGCA666
-OTTHUMT00000007987  U666666....6CACCUGA.......66C6....666CA....UACA666
-#=GC SS_cons        .))))))....)..............)).)....)))..........)))
-
-OTTHUMT00000006707  6A..66666....C..66666CU6A666GG..AACA.....66666AACU
-OTTHUMT00000043281  6GAG66666AACGCAG66666CA6A666GGGGAACCGgaaa66666accu
-OTTHUMT00000007987  6A..66666....C..66666CU6A666GG..AACA.....66666AACU
-#=GC SS_cons        )...(((((.......(((((..(.(((.............)))((....
-
-OTTHUMT00000006707  ...66UUCA6UC66666A66666GUA66..66GCCCU66A666666U...
-OTTHUMT00000043281  uuu66cagg6ua66666a66666ggg66cu66ucuua66g666666caac
-OTTHUMT00000007987  ...66UUCU6UC66666A66666GUA66..66GCCCU66A666666U...
-#=GC SS_cons        ...))....)..))))).)))))...))..)).....)).))))))....
-
-OTTHUMT00000006707  .UAGAgc.caug66666666a......a6666ucuuucauuuu6666aac
-OTTHUMT00000043281  auauacaaaaag66666666acagagau6666acuuuaguauu6666acc
-OTTHUMT00000007987  .UAGAGc.caug66666666a......a6666ucuuucauuuu6666aac
-#=GC SS_cons        ............((((((((........((((...........))))...
-
-OTTHUMT00000006707  aua..aaau666666666666a..cuuu.uuuccua666u66.....666
-OTTHUMT00000043281  auaggaaaa666666666666auacauuuuauguuc666a66augaa666
-OTTHUMT00000007987  aua..aaau666666666666a..cuuu.uuuccua666u66.....666
-#=GC SS_cons        .........((((((((((((...............))).)).....)))
-
-OTTHUMT00000006707  6666ua66666666.aucu666ug.caugaaucuu....uuuguau..au
-OTTHUMT00000043281  6666uu66666666caugg666UAAGACGACUCCAGGGCUGUGUACGGAA
-OTTHUMT00000007987  6666ua66666666.aucu666............................
-#=GC SS_cons        ))))..)))))))).....)))............................
-
-OTTHUMT00000006707  guu..ggaauauccuuaagauaagg......ccccagaacuaaaaguacc
-OTTHUMT00000043281  GUUCAGGGACAGAAUC.AGUUGAGGCUGUUCCACCUGAGCCUAAGCUUCC
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  .cugucaaa.g...ggug.......a..gcauuuCCG.............
-OTTHUMT00000043281  UCUGCUGUAUGUCGGGAAUCAGGUGGGGGCCAAGCGAGAUCACCACAGUG
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  ...GUUC.CCCUGCUGUGCUUUGCUGCGUUGUUCUCCC............
-OTTHUMT00000043281  CAGGC.CAGUGUGC.....AGGGCACAGGUGGGCACCAGGGAGGGGACGC
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  .CUGCUGCAACGUUCUCACUCCACAAUCCUGGGGCAGG.UAGGGG.A...
-OTTHUMT00000043281  CGCACAGCCCCAUGCUCUCGCCAAAAACGUGCAGCACAAUUU.GGAAGAA
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  ....GGCCCAGCug..aguuuggaucauaauccu...gaaagacaca
-OTTHUMT00000043281  AACAUUUCCAUCUGUUAAUAAAGAGCAAGGGCCUCUGGUCAUAAGUG
-OTTHUMT00000007987  .....................................ugcau..gaa
-#=GC SS_cons        ...............................................
-
-//
 </content>
 </file>
 <file>
@@ -109,246 +32,79 @@ OTTHUMT00000007987  .....................................ugcau..gaa
 </file>
 <file>
 <stream>input</stream>
-<name>sample_rnaseq2.cw.stk</name>
+<name>sample_dnaseq3.aln</name>
 <content>
-# STOCKHOLM 1.0
+CLUSTAL FORMAT for T-COFFEE Version_4.62 [http://www.tcoffee.org], CPU=0.28 sec, SCORE=42, Nseq=4, Len=28 
 
-OTTHUMT00000006707  uacGGAAGCU.UUAGGGAGGUGCUCUGAGACCCGAAACUAGACUCGACUU
-OTTHUMT00000043281  .aucccagcuacucgggagg....cugaggcaggagaau.cacuugaacc
-OTTHUMT00000007987  ...............GAGGUGCUCUGAGACCCGAAACUAGACUCGACUU.
-#=GC SS_cons        ................((((.....((((.............)))).)))
+A               CTCCGTgTCTAGGagt-TTACGTggAGT
+B               CTGAGA----AGCCGCCTGAGGTCG---
+D               CTTCGT----AGTCGT-TTAAGAca---
+C               -TTAAGGTCC---AGATTGCGGAGC---
+                 *            *  *   *      
 
-OTTHUMT00000006707  UAACAGACACAGACGACCCUGAA.....G.....................
-OTTHUMT00000043281  cgggaggcagagguugcaguga.gccgag.....................
-OTTHUMT00000007987  UAACAGACACAGACGACCCUGAAGGCGAGACugucugcuggugggaugcu
-#=GC SS_cons        )..(((.....((((((((((.......(.....................
 
-OTTHUMT00000006707  ..AUGGAAAUGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
-OTTHUMT00000043281  ..aucgcaccccugcacuccagccugggugacagagcaagacuccaucuc
-OTTHUMT00000007987  ggAUGGAAACGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
-#=GC SS_cons        ..(.((((....)))).))))...(((((.....(((......(.....(
 
-OTTHUMT00000006707  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
-OTTHUMT00000043281  aaaaaaaauaaaggaaaUAUGCGUCGUUGGAUGCUGUAUGACAAUCAAGC
-OTTHUMT00000007987  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
-#=GC SS_cons        ((.((.......(((((((.((((((((...........))))).....)
-
-OTTHUMT00000006707  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
-OTTHUMT00000043281  UACUUAUAACAAACAAAAUUGAGAAUGAAGgauuaugauccaaacucAGC
-OTTHUMT00000007987  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
-#=GC SS_cons        ((((.((((...((........))..))))...))))...........))
-
-OTTHUMT00000006707  UUGGCCC....CCACCUGA.......UUCC....UGACA....UACAGCA
-OTTHUMT00000043281  UGGGCCUCCCCUC.CCUGCCCCAGGAUUGUGGAGUGAGAACGUUGCAGCA
-OTTHUMT00000007987  UUGGCCC....CCACCUGA.......UUCC....CGACA....UACAGCA
-#=GC SS_cons        .))))))....)..............)).)....)))..........)))
-
-OTTHUMT00000006707  GA..GGAAG....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
-OTTHUMT00000043281  GGAGAGAACAACGCAGCAAAGCACAGCAGGGGAACCGgaaaugcucaccu
-OTTHUMT00000007987  GA..GGAAC....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
-#=GC SS_cons        )...(((((.......(((((..(.(((.............)))((....
-
-OTTHUMT00000006707  ...GAUUCAGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
-OTTHUMT00000043281  uuugacaggguacuuuuaguucuggggccuuaucuuaaggauauuccaac
-OTTHUMT00000007987  ...GAUUCUGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
-#=GC SS_cons        ...))....)..))))).)))))...))..)).....)).))))))....
-
-OTTHUMT00000006707  .UAGAgc.caugauuuauuua......acuguucuuucauuuuacagaac
-OTTHUMT00000043281  auauacaaaaagauucaugcacagagauauguacuuuaguauuauuuacc
-OTTHUMT00000007987  .UAGAGc.caugauuuauuua......acuguucuuucauuuuacagaac
-#=GC SS_cons        ............((((((((........((((...........))))...
-
-OTTHUMT00000006707  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
-OTTHUMT00000043281  auaggaaaaaaguuggaaacaauacauuuuauguucuguaaaaugaaaga
-OTTHUMT00000007987  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
-#=GC SS_cons        .........((((((((((((...............))).)).....)))
-
-OTTHUMT00000006707  auacuaaaguaaau.aucucugug.caugaaucuu....uuuguau..au
-OTTHUMT00000043281  acaguuaaauaaaucauggCUCUAAGACGACUCCAGGGCUGUGUACGGAA
-OTTHUMT00000007987  auacuaaaguaaau.aucucug............................
-#=GC SS_cons        ))))..)))))))).....)))............................
-
-OTTHUMT00000006707  guu..ggaauauccuuaagauaagg......ccccagaacuaaaaguacc
-OTTHUMT00000043281  GUUCAGGGACAGAAUC.AGUUGAGGCUGUUCCACCUGAGCCUAAGCUUCC
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  .cugucaaa.g...ggug.......a..gcauuuCCG.............
-OTTHUMT00000043281  UCUGCUGUAUGUCGGGAAUCAGGUGGGGGCCAAGCGAGAUCACCACAGUG
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  ...GUUC.CCCUGCUGUGCUUUGCUGCGUUGUUCUCCC............
-OTTHUMT00000043281  CAGGC.CAGUGUGC.....AGGGCACAGGUGGGCACCAGGGAGGGGACGC
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  .CUGCUGCAACGUUCUCACUCCACAAUCCUGGGGCAGG.UAGGGG.A...
-OTTHUMT00000043281  CGCACAGCCCCAUGCUCUCGCCAAAAACGUGCAGCACAAUUU.GGAAGAA
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  ....GGCCCAGCug..aguuuggaucauaauccu...gaaagacaca
-OTTHUMT00000043281  AACAUUUCCAUCUGUUAAUAAAGAGCAAGGGCCUCUGGUCAUAAGUG
-OTTHUMT00000007987  .....................................ugcau..gaa
-#=GC SS_cons        ...............................................
-
-//
-</content>
-</file>
-<file>
-<stream>input</stream>
-<name>sample_rnaseq2.tcoffee.stk</name>
-<content>
-# STOCKHOLM 1.0
-
-OTTHUMT00000006707  uacGGAAGCU.UUAGGGAGGUGCUCUGAGACCCGAAACUAGACUCGACUU
-OTTHUMT00000043281  .aucccagcuacucgggagg....cugaggcaggagaau.cacuugaacc
-OTTHUMT00000007987  ................GAGGUGCUCUGAGACCCGAAACUAGACUCGACUU
-#=GC SS_cons        ................((((.....((((.............)))).)))
-
-OTTHUMT00000006707  UAACAGACACAGACGACCCUGAA.....G.....................
-OTTHUMT00000043281  cgggaggcagagguugcaguga.gccgag.....................
-OTTHUMT00000007987  UAACAGACACAGACGACCCUGAAGGCGAGACugucugcuggugggaugcu
-#=GC SS_cons        )..(((.....((((((((((.......(.....................
-
-OTTHUMT00000006707  ..AUGGAAAUGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
-OTTHUMT00000043281  ..aucgcaccccugcacuccagccugggugacagagcaagacuccaucuc
-OTTHUMT00000007987  ggAUGGAAACGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
-#=GC SS_cons        ..(.((((....)))).))))...(((((.....(((......(.....(
-
-OTTHUMT00000006707  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
-OTTHUMT00000043281  aaaaaaaauaaaggaaaUAUGCGUCGUUGGAUGCUGUAUGACAAUCAAGC
-OTTHUMT00000007987  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
-#=GC SS_cons        ((.((.......(((((((.((((((((...........))))).....)
-
-OTTHUMT00000006707  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
-OTTHUMT00000043281  UACUUAUAACAAACAAAAUUGAGAAUGAAGgauuaugauccaaacucAGC
-OTTHUMT00000007987  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
-#=GC SS_cons        ((((.((((...((........))..))))...))))...........))
-
-OTTHUMT00000006707  UUGGCCC....CCACCUGA.......UUCC....UGACA....UACAGCA
-OTTHUMT00000043281  UGGGCCUCCCCUC.CCUGCCCCAGGAUUGUGGAGUGAGAACGUUGCAGCA
-OTTHUMT00000007987  UUGGCCC....CCACCUGA.......UUCC....CGACA....UACAGCA
-#=GC SS_cons        .))))))....)..............)).)....)))..........)))
-
-OTTHUMT00000006707  GA..GGAAG....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
-OTTHUMT00000043281  GGAGAGAACAACGCAGCAAAGCACAGCAGGGGAACCGgaaaugcucaccu
-OTTHUMT00000007987  GA..GGAAC....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
-#=GC SS_cons        )...(((((.......(((((..(.(((.............)))((....
-
-OTTHUMT00000006707  ...GAUUCAGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
-OTTHUMT00000043281  uuugacaggguacuuuuaguucuggggccuuaucuuaaggauauuccaac
-OTTHUMT00000007987  ...GAUUCUGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
-#=GC SS_cons        ...))....)..))))).)))))...))..)).....)).))))))....
-
-OTTHUMT00000006707  .UAGAgc.caugauuuauuua......acuguucuuucauuuuacagaac
-OTTHUMT00000043281  auauacaaaaagauucaugcacagagauauguacuuuaguauuauuuacc
-OTTHUMT00000007987  .UAGAGc.caugauuuauuua......acuguucuuucauuuuacagaac
-#=GC SS_cons        ............((((((((........((((...........))))...
-
-OTTHUMT00000006707  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
-OTTHUMT00000043281  auaggaaaaaaguuggaaacaauacauuuuauguucuguaaaaugaaaga
-OTTHUMT00000007987  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
-#=GC SS_cons        .........((((((((((((...............))).)).....)))
-
-OTTHUMT00000006707  auacuaaaguaaau.aucucugug.caugaaucuu....uuuguau..au
-OTTHUMT00000043281  acaguuaaauaaaucauggCUCUAAGACGACUCCAGGGCUGUGUACGGAA
-OTTHUMT00000007987  auacuaaaguaaau.aucucug............................
-#=GC SS_cons        ))))..)))))))).....)))............................
-
-OTTHUMT00000006707  guu..ggaauauccuuaagauaagg......ccccagaacuaaaaguacc
-OTTHUMT00000043281  GUUCAGGGACAGAAUC.AGUUGAGGCUGUUCCACCUGAGCCUAAGCUUCC
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  .cugucaaa.g...ggug.......a..gcauuuCCG.............
-OTTHUMT00000043281  UCUGCUGUAUGUCGGGAAUCAGGUGGGGGCCAAGCGAGAUCACCACAGUG
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  ...GUUC.CCCUGCUGUGCUUUGCUGCGUUGUUCUCCC............
-OTTHUMT00000043281  CAGGC.CAGUGUGC.....AGGGCACAGGUGGGCACCAGGGAGGGGACGC
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  .CUGCUGCAACGUUCUCACUCCACAAUCCUGGGGCAGG.UAGGGG.A...
-OTTHUMT00000043281  CGCACAGCCCCAUGCUCUCGCCAAAAACGUGCAGCACAAUUU.GGAAGAA
-OTTHUMT00000007987  ..................................................
-#=GC SS_cons        ..................................................
-
-OTTHUMT00000006707  ....GGCCCAGCug..aguuuggaucauaauccu...gaaagacaca
-OTTHUMT00000043281  AACAUUUCCAUCUGUUAAUAAAGAGCAAGGGCCUCUGGUCAUAAGUG
-OTTHUMT00000007987  .....................................ugcau..gaa
-#=GC SS_cons        ...............................................
-
-//
 </content>
 </file>
 <environement>
 HOME_4_TCOFFEE=/Users/cnotredame/
-MANPATH=/sw/share/man:/usr/share/man:/usr/local/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
 TERM_PROGRAM=Apple_Terminal
-XDG_DATA_HOME=/Users/cnotredame/.local/share
 MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
 ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
 SHELL=/bin/bash
 TERM=xterm-256color
-TMPDIR=/var/folders/kt/h6f_8ns945v8sm8l744hnqkw0000gn/T/
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gn/T/
 PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
-Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.2Gm1mQlBr6/Render
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.SiIg4fhsUe/Render
 TERM_PROGRAM_VERSION=361.1
 OSNAME=macosx
 PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
 PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
-TERM_SESSION_ID=3B4D2C5E-2D85-426C-8E4A-6C0F1A72994B
+TERM_SESSION_ID=4AE051C3-8915-4749-A74A-58BE21C3378D
 METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
-ac_cv_path_INTLTOOL_PERL=/usr/bin/perl
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
 http_proxy=
 HTTP_proxy=
-SGML_CATALOG_FILES=/sw/etc/sgml/catalog
 USER=cnotredame
-SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.c5EYh3QWDe/Listeners
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.Mk8QjV3nUO/Listeners
 __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
 ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
-XDG_CONFIG_DIRS=/sw/etc/xdg
 all_proxy=
 ALL_PROXY=
 HTTP_proxy_4_TCOFFEE=
-PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/subversion/bin:/opt/local/bin/:/Library/Frameworks/Python.framework/Versions/Current/bin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
 _=/usr/bin/printenv
-XML_CATALOG_FILES=/sw/etc/xml/catalog
 DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
 PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/doc/tmp
 CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
 X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.57JD6DDqrn/unix_domain_listener
 XPC_FLAGS=0x0
-VERSIONER_PERL_PREFER_32_BIT=yes
+VERSIONER_PERL_PREFER_32_BIT=no
 XPC_SERVICE_NAME=0
 ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
 PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
 SHLVL=3
 HOME=/Users/cnotredame
-XDG_CONFIG_HOME=/Users/cnotredame/.config
 DUMP_4_TCOFFEE=t_coffee.100.dump
 HTTP_PROXY=
-XDG_CACHE_HOME=/Users/cnotredame/.cache
 PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
 MAFFT_BINARIES=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/plugins/macosx/
 BIN=/Users/cnotredame/bin/macosx
 LOGNAME=cnotredame
 EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
-XDG_DATA_DIRS=/sw/share
 LC_CTYPE=UTF-8
 EMAIL=cedric.notredame@gmail.com
 UPDATED_ENV_4_TCOFFEE=1
 INFOPATH=/sw/share/info:/sw/info:/usr/share/info
-DISPLAY=/private/tmp/com.apple.launchd.I3Kakd635Y/org.macosforge.xquartz:0
+DISPLAY=/private/tmp/com.apple.launchd.Mc5njvMIsW/org.macosforge.xquartz:0
 NUMBER_OF_PROCESSORS=4
 ALL_proxy=
 PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
 LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
-TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/291080238/
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/159892177/
 USER_BIN=/Users/cnotredame/bin/macosx
 SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
 </environement>

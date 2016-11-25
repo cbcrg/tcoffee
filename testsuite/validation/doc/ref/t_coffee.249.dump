@@ -1,0 +1,2026 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee three_pdb_two_seq.fasta -method mustang_pair,slow_pair -template_file three_pdb_two_seq_pdb1.template_list</cl>
+<stack>
+</stack>
+<warning>
+
+
+*************************************************************************************************
+*                        MESSAGES RECAPITULATION                                    
+3004 -- INFORMATION: Method mustang cannot be applied to [1FI8B vs 1NN6A], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1FI8B vs 1PPGE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1FI8B vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1FI8B vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1NN6A vs 1PPGE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1NN6A vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1NN6A vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1PPGE vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1PPGE vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [sp_P35034_TRYP_PLEPL vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+*************************************************************************************************
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=875, Nseq=5, Len=267 
+
+sp_Q7JIG6_KLK15_SAGOE  MWLLLPLSF--LLTSTAQDGGKLLEGEECAPHSQPWQVALYE----RGRF
+1PPGE                  ----------------------IVGGRRARPHAWPFMVSLQL----RGGH
+1NN6A                  ------------------------GGTECKPHSRPYMAYLEIVTSNGPSK
+1FI8B                  ----------------------IIGGHEAKPHSRPYMAYLQI---MYGSK
+sp_P35034_TRYP_PLEPL   MRLLALLLMVGAAVAVPREDGRIIGGHECAAHSRPFMASLN-----YGYH
+                                                * .. .*: *: . *          
+
+sp_Q7JIG6_KLK15_SAGOE  NCGASLISPHWVLSAAHCQSR--FMRVRLGEHNLRKRDGPEQLRTASRVI
+1PPGE                  FCGATLIAPNFVMSAAHCVAN-VNVRVVLGAHNLSRREPTRQVFAVQRIF
+1NN6A                  FCGGFLIRRNFVLTAAHCAGR--SITVTLGAHNITEEEDTWQKLEVIKQF
+1FI8B                  KCGGFLIREDFVLTAAHCSGS--KIQV-LGAHNIKEQEKMQQIIPVVKII
+sp_P35034_TRYP_PLEPL   FCGGVLINNQWVLSVAHCWYNPYAMQVMLGEHDLRKFEGTEQLMKTDTII
+                        **. **  .:*::.***      : * ** *:: . :   *   .   :
+
+sp_Q7JIG6_KLK15_SAGOE  PHPRYEARSHRHDIMLLRLVQPARLTPQVRPVVLPTRC--PHPGEACVVS
+1PPGE                  E-NGYDPVNLLNDIVILQLNGSATINANVQVAQLPAQGRRLGNGVQCLAM
+1NN6A                  RHPKYNTSTLHHDIMLLKLKEKASLTLAVGTLPFPSQFNFVPPGRMCRVA
+1FI8B                  PHPAYNSKTISNDIMLLKLKSKAKRSSAVKPLNLPRRNVKVKPGDVCYVA
+sp_P35034_TRYP_PLEPL   WHPNYDYQTLDLTSCSSSSTILWKVTHAVAPIPLPTSC--PVAGTPCSVS
+                           *:  .                .  *    :*        *  * . 
+
+sp_Q7JIG6_KLK15_SAGOE  GWGLVSHNEPGTTGRPQSQVSLPDTLHCANISIISDASCDKNYPG-RLTN
+1PPGE                  GWGLLGRNRGI-----------ASVLQELNVTVVTSLCRRS---------
+1NN6A                  GWGRTGVLKPG-----------SDTLQEVKLRLMDPQACSH-FRD-FDHN
+1FI8B                  GWGKLGPMGKY-----------SDTLQEVELTVQEDQKCES-LKNYFDKA
+sp_P35034_TRYP_PLEPL   GWGNTARDGD--------EVYLPTLLQCMDVPIVDEEQCMKSYPD-MISP
+                       ***  .                .  *:  .: :                 
+
+sp_Q7JIG6_KLK15_SAGOE  TMVCAGAEGRGAESCEGDSGGPLVCGGILQGIVSWGDVPCDNTTKPGVYT
+1PPGE                  -NVCTLVR--QAGVCFGDSGSPLVCNGLIHGIASFVRGGC-SGLYPDAFA
+1NN6A                  LQLCVGNP--RKTAFKGDSGGPLLCAGVAQGIVSYGRS---DAKPPAVFT
+1FI8B                  NEICADPK--IRASFRGDSGGPLVCKKVAAGIVSYGQN---DGSTPRAFT
+sp_P35034_TRYP_PLEPL   RMVCAGFMDGSRDACNGDSGSPLVCRGEVYGLVSWGQGC-AQPNYPGVYV
+                         :*.           ****.**:*     *:.*:      .   * .:.
+
+sp_Q7JIG6_KLK15_SAGOE  KVCRYVKWIRETMKR-N
+1PPGE                  PVAQFVNWIDSIIQ---
+1NN6A                  RISHYRPWINQILQA-N
+1FI8B                  KVSTFLSWIKKTMKK--
+sp_P35034_TRYP_PLEPL   KLCEFLGWIERTLEAYP
+                        :. :  **   ::   
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[1] 	three_pdb_two_seq_pdb1.template_list
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[1] 	three_pdb_two_seq.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[1] 	mustang_pair	slow_pair
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pairrna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pairrna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pairrna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pairrna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pairrna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1NN6A], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [sp_P35034_TRYP_PLEPL vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1NN6A], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [sp_P35034_TRYP_PLEPL vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1NN6A], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [sp_P35034_TRYP_PLEPL vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1NN6A], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [sp_P35034_TRYP_PLEPL vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1NN6A], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1FI8B vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs 1PPGE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1NN6A vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [1PPGE vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+
+pid 3004 -- Method mustang cannot be applied to [sp_P35034_TRYP_PLEPL vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+!		[Relax Library][TOT=    1][100 %]rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+
+	Group    7: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  225][PID:3019]rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+
+	Group    6: [Group    4 (   1 seq)] with [Group    5 (   1 seq)]-->[Len=  260][PID:3018]rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+
+	Group    7: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  225][PID:3019]
+	Group    8: [Group    3 (   1 seq)] with [Group    7 (   2 seq)]-->[Len=  228][PID:3019]rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+
+	Group    9: [Group    8 (   3 seq)] with [Group    6 (   2 seq)]-->[Len=  267][PID:2999][Forked]
+
+
+!		[Final Evaluation][TOT=   66][  0 %]!		[Final Evaluation][TOT=   66][  3 %]!		[Final Evaluation][TOT=   66][  4 %]!		[Final Evaluation][TOT=   66][  6 %]!		[Final Evaluation][TOT=   66][  7 %]!		[Final Evaluation][TOT=   66][  9 %]!		[Final Evaluation][TOT=   66][ 10 %]!		[Final Evaluation][TOT=   66][ 12 %]!		[Final Evaluation][TOT=   66][ 13 %]!		[Final Evaluation][TOT=   66][ 15 %]!		[Final Evaluation][TOT=   66][ 16 %]!		[Final Evaluation][TOT=   66][ 18 %]!		[Final Evaluation][TOT=   66][ 19 %]!		[Final Evaluation][TOT=   66][ 21 %]!		[Final Evaluation][TOT=   66][ 22 %]!		[Final Evaluation][TOT=   66][ 24 %]!		[Final Evaluation][TOT=   66][ 25 %]!		[Final Evaluation][TOT=   66][ 27 %]!		[Final Evaluation][TOT=   66][ 28 %]!		[Final Evaluation][TOT=   66][ 30 %]!		[Final Evaluation][TOT=   66][ 31 %]!		[Final Evaluation][TOT=   66][ 33 %]!		[Final Evaluation][TOT=   66][ 34 %]!		[Final Evaluation][TOT=   66][ 36 %]!		[Final Evaluation][TOT=   66][ 37 %]!		[Final Evaluation][TOT=   66][ 39 %]!		[Final Evaluation][TOT=   66][ 40 %]!		[Final Evaluation][TOT=   66][ 42 %]!		[Final Evaluation][TOT=   66][ 43 %]!		[Final Evaluation][TOT=   66][ 45 %]!		[Final Evaluation][TOT=   66][ 46 %]!		[Final Evaluation][TOT=   66][ 48 %]!		[Final Evaluation][TOT=   66][ 50 %]!		[Final Evaluation][TOT=   66][ 51 %]!		[Final Evaluation][TOT=   66][ 53 %]!		[Final Evaluation][TOT=   66][ 54 %]!		[Final Evaluation][TOT=   66][ 56 %]!		[Final Evaluation][TOT=   66][ 57 %]!		[Final Evaluation][TOT=   66][ 59 %]!		[Final Evaluation][TOT=   66][ 60 %]!		[Final Evaluation][TOT=   66][ 62 %]!		[Final Evaluation][TOT=   66][ 63 %]!		[Final Evaluation][TOT=   66][ 65 %]!		[Final Evaluation][TOT=   66][ 66 %]!		[Final Evaluation][TOT=   66][ 68 %]!		[Final Evaluation][TOT=   66][ 69 %]!		[Final Evaluation][TOT=   66][ 71 %]!		[Final Evaluation][TOT=   66][ 72 %]!		[Final Evaluation][TOT=   66][ 74 %]!		[Final Evaluation][TOT=   66][ 75 %]!		[Final Evaluation][TOT=   66][ 77 %]!		[Final Evaluation][TOT=   66][ 78 %]!		[Final Evaluation][TOT=   66][ 80 %]!		[Final Evaluation][TOT=   66][ 81 %]!		[Final Evaluation][TOT=   66][ 83 %]!		[Final Evaluation][TOT=   66][ 84 %]!		[Final Evaluation][TOT=   66][ 86 %]!		[Final Evaluation][TOT=   66][ 87 %]!		[Final Evaluation][TOT=   66][ 89 %]!		[Final Evaluation][TOT=   66][ 90 %]!		[Final Evaluation][TOT=   66][ 92 %]!		[Final Evaluation][TOT=   66][ 93 %]!		[Final Evaluation][TOT=   66][ 95 %]!		[Final Evaluation][TOT=   66][ 96 %]!		[Final Evaluation][TOT=   66][ 98 %]!		[Final Evaluation][TOT=   66][100 %]
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+
+	Group    9: [Group    8 (   3 seq)] with [Group    6 (   2 seq)]-->[Len=  267][PID:2999][Forked]
+
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+
+	Group    9: [Group    8 (   3 seq)] with [Group    6 (   2 seq)]-->[Len=  267][PID:2999][Forked]
+
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+
+	Group    9: [Group    8 (   3 seq)] with [Group    6 (   2 seq)]-->[Len=  267][PID:2999][Forked]
+
+rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) three_pdb_two_seq.fasta  Format fasta_seq
+	Input File (M) mustang_pair 
+	Input File (M) slow_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [three_pdb_two_seq_pdb1.template_list] Mode Or File: [three_pdb_two_seq_pdb1.template_list] [Start]
+INPUT SEQUENCES: 5 SEQUENCES  [PROTEIN]
+  Input File three_pdb_two_seq.fasta Seq 1FI8B                 Length  220 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1NN6A                 Length  222 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq 1PPGE                 Length  212 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_P35034_TRYP_PLEPL  Length  250 type PROTEIN Struct Unchecked
+  Input File three_pdb_two_seq.fasta Seq sp_Q7JIG6_KLK15_SAGOE Length  255 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 4 processors:
+
+	--- Process Method/Library/Aln Sthree_pdb_two_seq.fasta
+	--- Process Method/Library/Aln Mmustang_pair
+	--- Process Method/Library/Aln Mslow_pair
+	xxx Retrieved Sthree_pdb_two_seq.fasta
+	xxx Retrieved Mslow_pair
+	xxx Retrieved Mmustang_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [9102]
+
+Library Relaxation: Multi_proc [4]
+ 
+Relaxation Summary: [9102]--->[7227]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: 1FI8B
+Group    2: 1NN6A
+Group    3: 1PPGE
+Group    4: sp_P35034_TRYP_PLEPL
+Group    5: sp_Q7JIG6_KLK15_SAGOE
+
+
+	Group    9: [Group    8 (   3 seq)] with [Group    6 (   2 seq)]-->[Len=  267][PID:2999][Forked]
+
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= three_pdb_two_seq.dnd
+	#### File Type= MSA             Format= aln             Name= three_pdb_two_seq.aln
+	#### File Type= MSA             Format= html            Name= three_pdb_two_seq.html
+
+# Command Line: t_coffee three_pdb_two_seq.fasta -method mustang_pair slow_pair -template_file three_pdb_two_seq_pdb1.template_list  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 30.273 Mb, Max= 31.451 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+
+
+*************************************************************************************************
+*                        MESSAGES RECAPITULATION                                    
+3004 -- INFORMATION: Method mustang cannot be applied to [1FI8B vs 1NN6A], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1FI8B vs 1PPGE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1FI8B vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1FI8B vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1NN6A vs 1PPGE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1NN6A vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1NN6A vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1PPGE vs sp_P35034_TRYP_PLEPL], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [1PPGE vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+3004 -- INFORMATION: Method mustang cannot be applied to [sp_P35034_TRYP_PLEPL vs sp_Q7JIG6_KLK15_SAGOE], proba_pair will be used instead
+*************************************************************************************************
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>three_pdb_two_seq.fasta</name>
+<content>
+>sp_Q7JIG6_KLK15_SAGOE Kallikrein-15 precursor (EC 3.4.21.-) - Saguinus oedipus (Cotton-top tamarin).
+MWLLLPLSFLLTSTAQDGGKLLEGEECAPHSQPWQVALYERGRFNCGASLISPHWVLSAA
+HCQSRFMRVRLGEHNLRKRDGPEQLRTASRVIPHPRYEARSHRHDIMLLRLVQPARLTPQ
+VRPVVLPTRCPHPGEACVVSGWGLVSHNEPGTTGRPQSQVSLPDTLHCANISIISDASCD
+KNYPGRLTNTMVCAGAEGRGAESCEGDSGGPLVCGGILQGIVSWGDVPCDNTTKPGVYTK
+VCRYVKWIRETMKRN
+>1PPGE
+IVGGRRARPHAWPFMVSLQLRGGHFCGATLIAPNFVMSAAHCVANVNVRVVLGAHNLSRR
+EPTRQVFAVQRIFENGYDPVNLLNDIVILQLNGSATINANVQVAQLPAQGRRLGNGVQCL
+AMGWGLLGRNRGIASVLQELNVTVVTSLCRRSNVCTLVRQAGVCFGDSGSPLVCNGLIHG
+IASFVRGGCSGLYPDAFAPVAQFVNWIDSIIQ
+>1NN6A
+GGTECKPHSRPYMAYLEIVTSNGPSKFCGGFLIRRNFVLTAAHCAGRSITVTLGAHNITE
+EEDTWQKLEVIKQFRHPKYNTSTLHHDIMLLKLKEKASLTLAVGTLPFPSQFNFVPPGRM
+CRVAGWGRTGVLKPGSDTLQEVKLRLMDPQACSHFRDFDHNLQLCVGNPRKTAFKGDSGG
+PLLCAGVAQGIVSYGRSDAKPPAVFTRISHYRPWINQILQAN
+>1FI8B
+IIGGHEAKPHSRPYMAYLQIMYGSKKCGGFLIREDFVLTAAHCSGSKIQVLGAHNIKEQE
+KMQQIIPVVKIIPHPAYNSKTISNDIMLLKLKSKAKRSSAVKPLNLPRRNVKVKPGDVCY
+VAGWGKLGPMGKYSDTLQEVELTVQEDQKCESLKNYFDKANEICADPKIRASFRGDSGGP
+LVCKKVAAGIVSYGQNDGSTPRAFTKVSTFLSWIKKTMKK
+>sp_P35034_TRYP_PLEPL Trypsin precursor (EC 3.4.21.4) - Pleuronectes platessa (Plaice).
+MRLLALLLMVGAAVAVPREDGRIIGGHECAAHSRPFMASLNYGYHFCGGVLINNQWVLSV
+AHCWYNPYAMQVMLGEHDLRKFEGTEQLMKTDTIIWHPNYDYQTLDLTSCSSSSTILWKV
+THAVAPIPLPTSCPVAGTPCSVSGWGNTARDGDEVYLPTLLQCMDVPIVDEEQCMKSYPD
+MISPRMVCAGFMDGSRDACNGDSGSPLVCRGEVYGLVSWGQGCAQPNYPGVYVKLCEFLG
+WIERTLEAYP
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>three_pdb_two_seq.dnd</name>
+<content>
+(
+(
+(
+1FI8B:0.12500,
+1NN6A:0.12500)
+:0.00875,
+1PPGE:0.14125)
+:0.00375,
+sp_P35034_TRYP_PLEPL:0.14375,
+sp_Q7JIG6_KLK15_SAGOE:0.13625);
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>three_pdb_two_seq.dnd</name>
+<content>
+(
+(
+(
+1FI8B:0.12500,
+1NN6A:0.12500)
+:0.00875,
+1PPGE:0.14125)
+:0.00375,
+sp_P35034_TRYP_PLEPL:0.14375,
+sp_Q7JIG6_KLK15_SAGOE:0.13625);
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>three_pdb_two_seq.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.01 sec, SCORE=875, Nseq=5, Len=267 
+
+sp_Q7JIG6_KLK15_SAGOE  MWLLLPLSF--LLTSTAQDGGKLLEGEECAPHSQPWQVALYE----RGRF
+1PPGE                  ----------------------IVGGRRARPHAWPFMVSLQL----RGGH
+1NN6A                  ------------------------GGTECKPHSRPYMAYLEIVTSNGPSK
+1FI8B                  ----------------------IIGGHEAKPHSRPYMAYLQI---MYGSK
+sp_P35034_TRYP_PLEPL   MRLLALLLMVGAAVAVPREDGRIIGGHECAAHSRPFMASLN-----YGYH
+                                                * .. .*: *: . *          
+
+sp_Q7JIG6_KLK15_SAGOE  NCGASLISPHWVLSAAHCQSR--FMRVRLGEHNLRKRDGPEQLRTASRVI
+1PPGE                  FCGATLIAPNFVMSAAHCVAN-VNVRVVLGAHNLSRREPTRQVFAVQRIF
+1NN6A                  FCGGFLIRRNFVLTAAHCAGR--SITVTLGAHNITEEEDTWQKLEVIKQF
+1FI8B                  KCGGFLIREDFVLTAAHCSGS--KIQV-LGAHNIKEQEKMQQIIPVVKII
+sp_P35034_TRYP_PLEPL   FCGGVLINNQWVLSVAHCWYNPYAMQVMLGEHDLRKFEGTEQLMKTDTII
+                        **. **  .:*::.***      : * ** *:: . :   *   .   :
+
+sp_Q7JIG6_KLK15_SAGOE  PHPRYEARSHRHDIMLLRLVQPARLTPQVRPVVLPTRC--PHPGEACVVS
+1PPGE                  E-NGYDPVNLLNDIVILQLNGSATINANVQVAQLPAQGRRLGNGVQCLAM
+1NN6A                  RHPKYNTSTLHHDIMLLKLKEKASLTLAVGTLPFPSQFNFVPPGRMCRVA
+1FI8B                  PHPAYNSKTISNDIMLLKLKSKAKRSSAVKPLNLPRRNVKVKPGDVCYVA
+sp_P35034_TRYP_PLEPL   WHPNYDYQTLDLTSCSSSSTILWKVTHAVAPIPLPTSC--PVAGTPCSVS
+                           *:  .                .  *    :*        *  * . 
+
+sp_Q7JIG6_KLK15_SAGOE  GWGLVSHNEPGTTGRPQSQVSLPDTLHCANISIISDASCDKNYPG-RLTN
+1PPGE                  GWGLLGRNRGI-----------ASVLQELNVTVVTSLCRRS---------
+1NN6A                  GWGRTGVLKPG-----------SDTLQEVKLRLMDPQACSH-FRD-FDHN
+1FI8B                  GWGKLGPMGKY-----------SDTLQEVELTVQEDQKCES-LKNYFDKA
+sp_P35034_TRYP_PLEPL   GWGNTARDGD--------EVYLPTLLQCMDVPIVDEEQCMKSYPD-MISP
+                       ***  .                .  *:  .: :                 
+
+sp_Q7JIG6_KLK15_SAGOE  TMVCAGAEGRGAESCEGDSGGPLVCGGILQGIVSWGDVPCDNTTKPGVYT
+1PPGE                  -NVCTLVR--QAGVCFGDSGSPLVCNGLIHGIASFVRGGC-SGLYPDAFA
+1NN6A                  LQLCVGNP--RKTAFKGDSGGPLLCAGVAQGIVSYGRS---DAKPPAVFT
+1FI8B                  NEICADPK--IRASFRGDSGGPLVCKKVAAGIVSYGQN---DGSTPRAFT
+sp_P35034_TRYP_PLEPL   RMVCAGFMDGSRDACNGDSGSPLVCRGEVYGLVSWGQGC-AQPNYPGVYV
+                         :*.           ****.**:*     *:.*:      .   * .:.
+
+sp_Q7JIG6_KLK15_SAGOE  KVCRYVKWIRETMKR-N
+1PPGE                  PVAQFVNWIDSIIQ---
+1NN6A                  RISHYRPWINQILQA-N
+1FI8B                  KVSTFLSWIKKTMKK--
+sp_P35034_TRYP_PLEPL   KLCEFLGWIERTLEAYP
+                        :. :  **   ::   
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>three_pdb_two_seq.html</name>
+<content>
+<html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=875</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value8>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;86</span><br><span class=value8>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;86</span><br><span class=value8>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;86</span><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><br><span class=valuedefault>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=value8>M</span><span class=value9>W</span><span class=value8>LLLPLSF</span><span class=valuegap>--</span><span class=value8>LLTS</span><span class=value9>TAQDGGKLLEGEECAPHS</span><br><span class=valuedefault>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------</span><span class=value9>IVGGRRARPHA</span><br><span class=valuedefault>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------</span><span class=value9>GGTECKPHS</span><br><span class=valuedefault>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------</span><span class=value9>IIGGHEAKPHS</span><br><span class=valuedefault>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=value8>M</span><span class=value9>R</span><span class=value8>LLALLLMVGAAVAVP</span><span class=value9>REDGRIIGGHECAAHS</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;..&nbsp;.*:</span><br><br><br><span class=valuedefault>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=value9>QPWQV</span><span class=value8>A</span><span class=value7>L</span><span class=value5>Y</span><span class=value3>E</span><span class=valuegap>----</span><span class=value4>R</span><span class=value5>G</span><span class=value6>R</span><span class=value7>F</span><span class=value9>NCGASLISPHWVLSAA</span><br><span class=valuedefault>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>WPFMVS</span><span class=value8>L</span><span class=value6>Q</span><span class=value4>L</span><span class=valuegap>----</span><span class=value4>R</span><span class=value5>G</span><span class=value6>G</span><span class=value7>H</span><span class=value9>FCGATLIAPNFVMSAA</span><br><span class=valuedefault>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>RPYMAY</span><span class=value8>L</span><span class=value7>E</span><span class=value4>I</span><span class=value2>VTSN</span><span class=value4>G</span><span class=value5>P</span><span class=value6>S</span><span class=value8>K</span><span class=value9>FCGGFLIRRNFVLTAA</span><br><span class=valuedefault>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>RPYMAY</span><span class=value8>L</span><span class=value6>Q</span><span class=value4>I</span><span class=valuegap>---</span><span class=value2>M</span><span class=value4>Y</span><span class=value5>G</span><span class=value6>S</span><span class=value8>K</span><span class=value9>KCGGFLIREDFVLTAA</span><br><span class=valuedefault>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=value9>RPFMA</span><span class=value8>S</span><span class=value7>L</span><span class=value5>N</span><span class=valuegap>-----</span><span class=value4>Y</span><span class=value5>G</span><span class=value6>Y</span><span class=value7>H</span><span class=value9>FCGGVLINNQWVLSVA</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;*:&nbsp;.</span><span class=value8>&nbsp;</span><span class=value7>*</span><span class=value5>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;**.&nbsp;**&nbsp;&nbsp;.:*::.*</span><br><br><br><span class=valuedefault>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=value9>HC</span><span class=value8>Q</span><span class=value6>S</span><span class=value5>R</span><span class=valuegap>--</span><span class=value5>F</span><span class=value6>M</span><span class=value7>RVR</span><span class=value9>LGEHNLRKRDGPEQLRTAS</span><span class=value8>RV</span><br><span class=valuedefault>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>HCV</span><span class=value6>A</span><span class=value4>N</span><span class=valuegap>-</span><span class=value2>V</span><span class=value5>NV</span><span class=value7>RVV</span><span class=value9>LGAHNLSRREPTRQVFA</span><span class=value8>VQR</span><span class=value7>I</span><br><span class=valuedefault>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>HC</span><span class=value8>A</span><span class=value6>G</span><span class=value5>R</span><span class=valuegap>--</span><span class=value5>S</span><span class=value6>IT</span><span class=value7>VT</span><span class=value9>LGAHNITEEEDTWQKLEVI</span><span class=value8>KQ</span><br><span class=valuedefault>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>HC</span><span class=value7>S</span><span class=value6>G</span><span class=value4>S</span><span class=valuegap>--</span><span class=value5>KIQ</span><span class=value6>V</span><span class=valuegap>-</span><span class=value9>LGAHNIKEQEKMQQIIPVVK</span><span class=value8>I</span><br><span class=valuedefault>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=value9>HCW</span><span class=value7>Y</span><span class=value4>N</span><span class=value2>PY</span><span class=value5>A</span><span class=value6>M</span><span class=value7>QVM</span><span class=value9>LGEHDLRKFEGTEQLMKTDT</span><span class=value8>I</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>**</span><span class=value8>&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>:</span><span class=value6>&nbsp;*&nbsp;</span><span class=value9>**&nbsp;*::&nbsp;.&nbsp;:&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;.</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=value8>I</span><span class=value7>P</span><span class=value6>H</span><span class=value8>P</span><span class=value9>RYEARSH</span><span class=value8>RH</span><span class=value7>DIMLLR</span><span class=value6>L</span><span class=value7>VQPA</span><span class=value8>RL</span><span class=value9>TPQVR</span><span class=value8>PV</span><br><span class=valuedefault>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>F</span><span class=value5>E</span><span class=valuegap>-</span><span class=value5>N</span><span class=value7>G</span><span class=value9>YDPVNL</span><span class=value8>LN</span><span class=value7>DIVILQLNGSA</span><span class=value8>TIN</span><span class=value9>AN</span><span class=value8>VQVA</span><br><span class=valuedefault>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>F</span><span class=value7>R</span><span class=value6>H</span><span class=value8>P</span><span class=value9>KYNTSTL</span><span class=value8>HH</span><span class=value7>DIML</span><span class=value6>LKLK</span><span class=value7>EKA</span><span class=value8>SLT</span><span class=value9>LAVG</span><span class=value8>TL</span><br><span class=valuedefault>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>I</span><span class=value7>P</span><span class=value6>H</span><span class=value8>P</span><span class=value9>AYNSKTI</span><span class=value8>SN</span><span class=value7>DIML</span><span class=value6>LKL</span><span class=value7>KSKA</span><span class=value8>KR</span><span class=value9>SSAVKPL</span><br><span class=valuedefault>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=value8>I</span><span class=value7>W</span><span class=value6>H</span><span class=value8>P</span><span class=value9>NYDYQT</span><span class=value8>L</span><span class=value6>DL</span><span class=value5>TSC</span><span class=value4>SSSSTI</span><span class=value5>L</span><span class=value6>W</span><span class=value7>KV</span><span class=value8>T</span><span class=value9>H</span><span class=value8>AVAPI</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>:&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>*:&nbsp;&nbsp;.&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>.&nbsp;&nbsp;</span><span class=value8>*&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=value8>VLPT</span><span class=value7>R</span><span class=value6>C</span><span class=valuegap>--</span><span class=value5>P</span><span class=value6>H</span><span class=value8>P</span><span class=value9>GEACVVSGWGLVS</span><span class=value8>HNE</span><span class=value7>P</span><span class=value5>G</span><span class=value3>TTGR</span><br><span class=valuedefault>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>QLP</span><span class=value7>AQ</span><span class=value6>G</span><span class=value4>RR</span><span class=value6>L</span><span class=value7>G</span><span class=value9>NGVQCLAMGWGLLG</span><span class=value8>R</span><span class=value7>NR</span><span class=value6>G</span><span class=value5>I</span><span class=valuegap>----</span><br><span class=valuedefault>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>PFPS</span><span class=value7>QF</span><span class=value4>NF</span><span class=value6>V</span><span class=value7>P</span><span class=value9>PGRMCRVAGWGRTG</span><span class=value8>V</span><span class=value7>LK</span><span class=value6>P</span><span class=value5>G</span><span class=valuegap>----</span><br><span class=valuedefault>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>N</span><span class=value8>LPR</span><span class=value7>R</span><span class=value6>N</span><span class=value4>VK</span><span class=value6>V</span><span class=value7>K</span><span class=value9>PGDVCYVAGWGKL</span><span class=value8>GP</span><span class=value7>M</span><span class=value6>G</span><span class=value5>KY</span><span class=valuegap>----</span><br><span class=valuedefault>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=value7>PLPT</span><span class=value6>S</span><span class=value5>C</span><span class=valuegap>--</span><span class=value5>P</span><span class=value6>V</span><span class=value8>A</span><span class=value9>GTPCSVSGWGNTA</span><span class=value7>RD</span><span class=value6>G</span><span class=value5>D</span><span class=valuegap>-----</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;:*</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>*&nbsp;&nbsp;*&nbsp;.&nbsp;***&nbsp;&nbsp;</span><span class=value8>.&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=value3>PQS</span><span class=value4>Q</span><span class=value3>VS</span><span class=value4>L</span><span class=value6>P</span><span class=value7>DTLHCA</span><span class=value8>NISII</span><span class=value7>S</span><span class=value6>DAS</span><span class=value5>CD</span><span class=value4>K</span><span class=value3>N</span><span class=value4>YPG</span><span class=valuegap>-</span><span class=value4>RL</span><br><span class=valuedefault>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><span class=value7>AS</span><span class=value8>VL</span><span class=value9>QELNVT</span><span class=value8>V</span><span class=value7>V</span><span class=value6>T</span><span class=value5>S</span><span class=value4>L</span><span class=value3>CRRS</span><span class=valuegap>-------</span><br><span class=valuedefault>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><span class=value6>S</span><span class=value7>DT</span><span class=value8>LQEVKLRLM</span><span class=value7>D</span><span class=value6>P</span><span class=value5>QAC</span><span class=value4>SH</span><span class=valuegap>-</span><span class=value3>FR</span><span class=value4>D</span><span class=valuegap>-</span><span class=value4>FD</span><br><span class=valuedefault>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------</span><span class=value7>S</span><span class=value8>DTL</span><span class=value9>QEVELTV</span><span class=value8>Q</span><span class=value7>E</span><span class=value6>DQ</span><span class=value5>K</span><span class=value6>C</span><span class=value5>E</span><span class=value4>S</span><span class=valuegap>-</span><span class=value3>LKN</span><span class=value2>Y</span><span class=value3>FD</span><br><span class=valuedefault>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value3>EVYL</span><span class=value6>P</span><span class=value7>T</span><span class=value8>LLQC</span><span class=value9>MDVPI</span><span class=value8>V</span><span class=value7>D</span><span class=value6>E</span><span class=value5>EQCM</span><span class=value4>K</span><span class=value3>S</span><span class=value4>YPD</span><span class=valuegap>-</span><span class=value4>MI</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value6>.</span><span class=value7>&nbsp;&nbsp;</span><span class=value8>*:&nbsp;&nbsp;.:&nbsp;:&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=value4>TN</span><span class=value5>T</span><span class=value7>M</span><span class=value8>VCAG</span><span class=value6>A</span><span class=value5>E</span><span class=value3>G</span><span class=value2>R</span><span class=value4>G</span><span class=value5>A</span><span class=value7>E</span><span class=value8>S</span><span class=value9>CEGDSGGPLVCGGILQG</span><br><span class=valuedefault>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value4>N</span><span class=value6>VCT</span><span class=value5>L</span><span class=value4>VR</span><span class=valuegap>--</span><span class=value4>Q</span><span class=value5>A</span><span class=value6>G</span><span class=value7>V</span><span class=value8>C</span><span class=value9>FGDSGSPLVCNGLIHG</span><br><span class=valuedefault>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>HN</span><span class=value6>L</span><span class=value7>Q</span><span class=value8>LCV</span><span class=value7>G</span><span class=value5>N</span><span class=value4>P</span><span class=valuegap>--</span><span class=value4>R</span><span class=value5>K</span><span class=value6>T</span><span class=value7>A</span><span class=value9>FKGDSGGPLLCAGVAQG</span><br><span class=valuedefault>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>KAN</span><span class=value6>E</span><span class=value8>ICA</span><span class=value6>D</span><span class=value5>PK</span><span class=valuegap>--</span><span class=value4>I</span><span class=value5>R</span><span class=value6>A</span><span class=value7>S</span><span class=value9>FRGDSGGPLVCKKVAAG</span><br><span class=valuedefault>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=value4>S</span><span class=value5>PR</span><span class=value7>M</span><span class=value8>VCA</span><span class=value7>G</span><span class=value6>F</span><span class=value5>M</span><span class=value2>DG</span><span class=value4>S</span><span class=value5>R</span><span class=value7>D</span><span class=value8>A</span><span class=value9>CNGDSGSPLVCRGEVYG</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value7>:</span><span class=value8>*</span><span class=value7>.</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;****.**:*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><br><br><br><span class=valuedefault>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=value9>IVSWGD</span><span class=value7>V</span><span class=value3>PC</span><span class=value2>D</span><span class=value4>N</span><span class=value5>T</span><span class=value6>T</span><span class=value8>K</span><span class=value9>PGVYTKVCRYVKWIRETMK</span><br><span class=valuedefault>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>IASFV</span><span class=value8>R</span><span class=value7>G</span><span class=value4>G</span><span class=value2>C</span><span class=valuegap>-</span><span class=value4>S</span><span class=value5>G</span><span class=value6>L</span><span class=value8>Y</span><span class=value9>PDAFAPVAQFVNWIDSIIQ</span><br><span class=valuedefault>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>IVSYG</span><span class=value8>R</span><span class=value5>S</span><span class=valuegap>---</span><span class=value5>DAK</span><span class=value7>P</span><span class=value9>PAVFTRISHYRPWINQILQ</span><br><span class=valuedefault>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>IVSYG</span><span class=value7>Q</span><span class=value5>N</span><span class=valuegap>---</span><span class=value5>DG</span><span class=value6>S</span><span class=value7>T</span><span class=value9>PRAFTKVSTFLSWIKKTMK</span><br><span class=valuedefault>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=value9>LVSWG</span><span class=value8>Q</span><span class=value6>G</span><span class=value3>C</span><span class=valuegap>-</span><span class=value2>A</span><span class=value5>QP</span><span class=value7>N</span><span class=value8>Y</span><span class=value9>PGVYVKLCEFLGWIERTLE</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>:.*:&nbsp;</span><span class=value8>&nbsp;</span><span class=value6>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value4>.&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>*&nbsp;.:.&nbsp;:.&nbsp;:&nbsp;&nbsp;**&nbsp;&nbsp;&nbsp;::</span><br><br><br><span class=valuedefault>sp_Q7JIG6_KLK15&nbsp;&nbsp;&nbsp;</span><span class=value8>R</span><span class=valuegap>-</span><span class=value6>N</span><br><span class=valuedefault>1PPGE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><br><span class=valuedefault>1NN6A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>A</span><span class=valuegap>-</span><span class=value5>N</span><br><span class=valuedefault>1FI8B&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>K</span><span class=valuegap>--</span><br><span class=valuedefault>sp_P35034_TRYP_&nbsp;&nbsp;&nbsp;</span><span class=value9>A</span><span class=value4>Y</span><span class=value9>P</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value3>&nbsp;</span><span class=value5>&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
+ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gn/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.SiIg4fhsUe/Render
+TERM_PROGRAM_VERSION=361.1
+OSNAME=macosx
+PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=4AE051C3-8915-4749-A74A-58BE21C3378D
+METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.Mk8QjV3nUO/Listeners
+__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/doc/tmp
+CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.57JD6DDqrn/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=t_coffee.249.dump
+HTTP_PROXY=
+PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
+MAFFT_BINARIES=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/plugins/macosx/
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.Mc5njvMIsW/org.macosforge.xquartz:0
+NUMBER_OF_PROCESSORS=4
+ALL_proxy=
+PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
+LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/15982999/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.249.dump</DumpFile>
+</DumpIO>
