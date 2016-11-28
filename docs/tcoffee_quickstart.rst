@@ -99,7 +99,7 @@ RNA sequences
   Structural 3D (R-Coffee combined with Consan structural alignments)
   ----------------------------------------------------------------------------  
   
-  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+  $#: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
 
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654   
   ----------------------------------------------------------------------------
@@ -114,26 +114,26 @@ RNA sequences
 ********************************
 Brief Overview of T-Coffee Tools
 ********************************
-
-.. note:: We only give you the very basics here, please go to the **T-Coffee manual** for a more detailed description and available options for the different tools. You can also try the **T-Coffee tutorial** for a practical training on T-Coffee alignment and other functions using applied examples on published research data.
+We only give you the very basics here, please go to the **T-Coffee Main Documentation** for a more detailed description. You can also try the **T-Coffee tutorial** for a practical training on T-Coffee alignment and other tools using applied examples on published research data.
 
 Alignment methods
 =================
 T-Coffee
 --------
-Write or copy all your sequences (protein, DNA or RNA) in a given text file using one of the following format: Swiss-Prot, FASTA or PIR; then run T-Coffee with the following command line:
+Write or copy all your sequences (protein, DNA or RNA) in a given text file using one of the following format: Swiss-Prot, FASTA or PIR. Run T-Coffee with the following command line:
 
 ::
 
   $$: t_coffee sample_seq1.fasta
 
 
-This will output three files:
- - ``sample_seq1.aln`` : multiple sequence alignment (ClustalW format by default)
- - ``sample_seq1.dnd`` : guide tree (Newick format) 
- - ``sample_seq1.html`` : colored MSA according to T-Coffee consistency color scheme (html)
+When aligning, T-Coffee will always at least generate three files:
 
-.. tip:: In principle, the type of the sequences is automatically detected and the default methods adapted accordingly. Sometimes, however, this may fail either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag **-type**.
+ - ``sample_seq1.aln``  : Multiple Sequence Alignment (ClustalW format by default)
+ - ``sample_seq1.dnd``  : guide tree (Newick format) 
+ - ``sample_seq1.html`` : colored MSA according to consistency (html format)
+
+In principle, the type of the sequences is automatically detected and the default methods adapted accordingly. Sometimes, however, this may fail either because the sequences are too short or contain too many ambiguity codes. When this happens, you are advised to explicitly set the type of your sequences using the flag **-type**.
 
 ::
 
@@ -166,18 +166,15 @@ M-Coffee is a meta version of T-Coffee that combines the output of eight aligner
 
 Expresso
 --------
-The default installation of T-Coffee provides you with the EBI wublast.pl client required to run Expresso. Using this, Expresso will BLAST your sequences against the PDB database, identify the best targets (by default X-RAY structures, minimum 35% identical to your sequences) and use them to align your proteins using a structural aligner. Expresso automatically generates a template file (``<your file name>_pdb1.template_list``) that can be used for further use. Run Expresso with the following command:
+The default installation of T-Coffee provides you with the EBI wublast.pl client required to run Expresso ) command 1). Using this, Expresso will BLAST your sequences against the PDB database, identify the best targets (by default X-RAY structures, minimum 35% identical to your sequences) and use them to align your proteins using a structural aligner. Expresso automatically generates a template file (``<your file name>_pdb1.template_list``) that can be used for further use. If all the required structural packages for Expresso are not installed or if you want to select another structural aligner, you can select the structural package you want to use, for instance, if can use TM-align rather than SAP (command 2).
 
 ::
 
+  Command 1: 
   $$: t_coffee sample_seq1.fasta -mode expresso
 
-
-If all the required structural packages for Expresso were not installed or if you want to select another structural aligner, you can select the structural package you want to use. For instance, if can use TM-align rather than SAP:
-
-::
-
-  $$: t_coffee sample_seq1.fasta -template_file expresso -method TMalign_pair
+  Command 2:
+  $$: t_coffee sample_seq1.fasta -template_file PDB -method TMalign_pair
 
 
 .. note:: Please cite: Armougom, F., Moretti, S., Poirot, O., Audic, S., Dumas, P., Schaeli, B., Keduas, V., Notredame. C. **Expresso: automatic incorporation of structural information in multiple sequence alignments using 3D-Coffee**. Nucleic Acids Res., 34:W604-W608 (2006), PMID:16845081
@@ -192,7 +189,7 @@ R-Coffee can be used to align RNA sequences, using their RNApfold predicted seco
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee
   
   Command 2: R-Coffee + Consan
-  #$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+  $#: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
 
   Command 3: RM-Coffee
   $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
@@ -230,11 +227,11 @@ It's usage is a bit tricky as it comes with a lot of different options, go to th
 
 iRMSD/APDB (MSA structural evaluation)
 --------------------------------------
-iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignment using structural information. All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for instance). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the command 1 if your sequences and structures have the same name; otherwise you have to declare the correspondence between sequences and structures in a template file (command 2).
+iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignment using structural information. All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for example). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the command 1 if your sequences and structures have the same name (in this example, names are different therefore it will output a simple sequence based MSA ); otherwise you have to declare the correspondence between sequences and structures in a template file (command 2).
 
 ::
 
-  Command 1:
+  Command 1: 
   $$: t_coffee -other_pg irmsd sample_3Dseq1.aln
 
   Command 2:
@@ -269,7 +266,7 @@ T-RMSD is a structure based clustering method using the iRMSD to drive the struc
 
 The program then outputs a series of files:
  - ``sample_3Dseq1.struc_tree.list`` : list of the trees associated with every position.
- - ``sample_3Dseq1.struc_tree.html`` : colored columns according to the support to the tree.
+ - ``sample_3Dseq1.struc_tree.html`` : colored columns supporting the tree.
  - ``sample_3Dseq1.struc_tree.consensus_output`` : schematic display of the results.
  - ``sample_3Dseq1.struc_tree.consensus`` : final consensus structural tree.
 
