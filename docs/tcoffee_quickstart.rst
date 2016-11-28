@@ -1,12 +1,12 @@
 ###########
 Quick Start
 ###########
-.. note:: This chapter has been fully updated in 11/2016. All T-Coffee modes/tools should be valid for version 9.03 and above; it is not guaranteed for lower versions of T-Coffee.
+.. warning:: This chapter has been extensively updated in 11/2016. All T-Coffee modes/tools/commands should be valid for version 9.03 and above, but it is not guaranteed for lower versions of T-Coffee.
 
 ******************************
 Basic Command Lines (or modes)
 ******************************
-.. important:: This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned can be found `here <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. You can also use examples associated with their corresponding command lines from the subsection **Tutorial (practical examples)** published in Nature Protocols (2011). Refer to the section **T-Coffee Manual** for more technical details about T-Coffee usage and tools. If you use a specific mode or tools of T-Coffee, please use the corresponding citation for publication (see **References and Citations**), otherwise cite T-Coffee. 
+This chapter is a quick overview on how to run T-Coffee alignment using predefined procedures we call "modes". All the files mentioned can be found `here <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. You can also use examples associated with their corresponding command lines from the subsection **Tutorial (practical examples)** published in Nature Protocols (2011). Refer to the section **T-Coffee Manual** for more technical details about T-Coffee usage and tools. Please, use the corresponding citation when using a specific mode or tools of T-Coffee (see **References and Citations**) otherwise cite T-Coffee. 
 
 
 Protein sequences
@@ -14,36 +14,47 @@ Protein sequences
 ::
 
   ----------------------------------------------------------------------------
-  Default              t_coffee sample_seq1.fasta
-                       use the output.html to visualize the MSA accuracy
-                       
-  Citation: Notredame et al., JMB (2000)                      PMID:10964570  
+  Default              
   ----------------------------------------------------------------------------
-  Fast                 t_coffee sample_seq1.fasta -mode quickaln
-                       lower -ndiag if the sequences are very similar
-
-  Citation: Notredame et al., JMB (2000)                      PMID:10964570
-  ---------------------------------------------------------------------------- 
-  Accurate             t_coffee sample_seq1.fasta -mode accurate
-                       combines structures, sequences and profiles
+  
+  $$: t_coffee sample_seq1.fasta
+                                              
+  Citation: Notredame et al., JMB (2000)                      PMID:10964570   
+  ----------------------------------------------------------------------------
+  Fast                 
+  ----------------------------------------------------------------------------  
+  
+  $$: t_coffee sample_seq1.fasta -mode quickaln
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570
   ----------------------------------------------------------------------------
-  Consistent           t_coffee sample_seq1.fasta -mode mcoffee
-  (M-Coffee)           combines the most common existing MSA packages
+  Consistent (M-Coffee combines the most common MSA packages)
+  ----------------------------------------------------------------------------
+  
+  $$: t_coffee sample_seq1.fasta -mode mcoffee      
 
   Citation: Wallace et al., Nucleic Acids Res. (2006)         PMID:16556910
   ----------------------------------------------------------------------------
-  Structural           t_coffee sample_seq1.fasta -mode expresso
-  (Expresso)           finds structures homologous to your sequences
+  Structure (Expresso finds structures homologous to your sequences)         
+  ----------------------------------------------------------------------------
+  
+  $$: t_coffee sample_seq1.fasta -mode expresso
 
   Citation: Armougom et al. Nucleic Acids Res. (2006)         PMID:16845081
   ----------------------------------------------------------------------------
-  Homology             t_coffee sample_seq1.fasta -mode psicoffee
-  (PSI-Coffee)         enriches your dataset with homologous sequences
+  Homology (PSI-Coffee enriches your dataset with homologous sequences)
+  ----------------------------------------------------------------------------
+  
+  $$: t_coffee sample_seq1.fasta -mode psicoffee
   
   Citation: Chang et al., BMC Bioinformatics (2012)           PMID:22536955
   ----------------------------------------------------------------------------
+  Accurate (combines Structures and Homology)            
+  ----------------------------------------------------------------------------  
+
+  $$: t_coffee sample_seq1.fasta -mode accurate
+                                             
+  Citation: Notredame et al., JMB (2000)                      PMID:10964570
 
 
 DNA sequences
