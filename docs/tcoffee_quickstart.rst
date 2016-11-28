@@ -89,14 +89,14 @@ RNA sequences
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
   ----------------------------------------------------------------------------
-  Structural 2D (R-Coffee uses predicted secondary structures)        
+  Structure 2D (R-Coffee uses predicted secondary structures)        
   ----------------------------------------------------------------------------
   
   $$: t_coffee sample_rnaseq1.fasta -mode rcoffee
   
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
-  Structural 3D (R-Coffee combined with Consan structural alignments)
+  Structure 3D (R-Coffee combined with Consan structural alignments)
   ----------------------------------------------------------------------------  
   
   $#: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
@@ -158,7 +158,7 @@ M-Coffee is a meta version of T-Coffee that combines the output of eight aligner
   Command 3: user defined multiple methodes
   $$: t_coffee sample_seq1.fasta -method clustalw_pair, kalign_pair, probcons_pair
   
-  
+
 .. warning:: If the program starts complaining one package or the other is missing, this means you will have to go the hard way and install all these packages yourself...
 
 .. note:: Please cite: Wallace, I.M., O'Sullivan, O., Higgins, D.G., Notredame, C. **M-Coffee: combining multiple sequence alignment methods with T-Coffee**. Nucleic Acids Res., 34(6):1692-1699 (2006), PMID:16556910
@@ -166,7 +166,7 @@ M-Coffee is a meta version of T-Coffee that combines the output of eight aligner
 
 Expresso
 --------
-The default installation of T-Coffee provides you with the EBI wublast.pl client required to run Expresso ) command 1). Using this, Expresso will BLAST your sequences against the PDB database, identify the best targets (by default X-RAY structures, minimum 35% identical to your sequences) and use them to align your proteins using a structural aligner. Expresso automatically generates a template file (``<your file name>_pdb1.template_list``) that can be used for further use. If all the required structural packages for Expresso are not installed or if you want to select another structural aligner, you can select the structural package you want to use, for instance, if can use TM-align rather than SAP (command 2).
+The default installation of T-Coffee provides you with the EBI wublast.pl client required to run Expresso ) command 1). Using this, Expresso will BLAST your sequences against the PDB database, identify the best targets (by default X-RAY structures, minimum 35% identical to your sequences) and use them to align your proteins using a structural aligner. If all the required structural packages for Expresso are not installed or if you want to select another structural aligner, you can select the structural package you want to use, for instance, if can use TM-align rather than SAP (command 2).
 
 ::
 
@@ -176,6 +176,19 @@ The default installation of T-Coffee provides you with the EBI wublast.pl client
   Command 2:
   $$: t_coffee sample_seq1.fasta -template_file PDB -method TMalign_pair
 
+
+This correspondence between sequences and structures (templates) is declared in a FASTA-like file we call template file. Expresso automatically generates the template file (``<your file name>_pdb1.template_list``) that can be reused for applications, but you can also provide your own with the following format. This template file should have the following format:
+
+::
+
+  > <seq_name> _P_ <PDB structure file or name>
+
+  ******* sample_3Dseq1.template *******
+  >TNFR10-2  _P_ 1D4V2.pdb
+  >TNFR10-3  _P_ 1D4V3.pdb
+  ...
+  **************************************
+  
 
 .. note:: Please cite: Armougom, F., Moretti, S., Poirot, O., Audic, S., Dumas, P., Schaeli, B., Keduas, V., Notredame. C. **Expresso: automatic incorporation of structural information in multiple sequence alignments using 3D-Coffee**. Nucleic Acids Res., 34:W604-W608 (2006), PMID:16845081
 
@@ -227,8 +240,7 @@ It's usage is a bit tricky as it comes with a lot of different options, go to th
 
 iRMSD/APDB (MSA structural evaluation)
 --------------------------------------
-iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignment using structural information. All you need is a file containing the alignment of sequences with a known structure. These sequences must be named according to their PDB ID, followed by the chain index (1aabA for example). All the sequences do not need to have a known structure, but at least two is required. Given the alignment, use the command 1 if your sequences and structures have the same name (in this example, names are different therefore it will output a simple sequence based MSA ); otherwise you have to declare the correspondence between sequences and structures in a template file (command 2).
-
+iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignment using structural information. All you need is a file containing the alignment of sequences with a known structure ("template file"; see Expresso). If you don't provide a template file, these sequences must be named according to their PDB ID, followed by the chain index (1aabA for example). In the first example (command 1) names are different therefore it won't deliver any result. In that case, you should declare the correspondence between sequences and structures using your own template file (command 2). All the sequences do not need to have a known structure, but at least two is required otherwise it won't deliver any result. 
 ::
 
   Command 1: 
@@ -237,17 +249,6 @@ iRMSD/APDB is not an alignment tool, it is an evalution tool of a given alignmen
   Command 2:
   $$: t_coffee -other_pg irmsd sample_3Dseq1.aln -template_file sample_3Dseq1.template
 
-A template file is a FASTA-like file declaring the structure associated with each sequence. This file should have the following format:
-
-::
-
-  > <seq_name> _P_ <PDB structure file or name>
-
-  ******* sample_3Dseq1.template *******
-  >TNFR10-2  _P_ 1D4V2.pdb
-  >TNFR10-3  _P_ 1D4V3.pdb
-  ...
-  **************************************
 
 .. note:: Please cite: Armougom, F., Moretti, S., Keduas, V., Notredame, C. **The iRMSD: a local measure of sequence alignment accuracy using structural information**. Bioinformatics, 22(14):e35-e39 (2006), PMID:16873492
 
