@@ -13,15 +13,14 @@ Contents:
 
    tcoffee_installation
    tcoffee_quickstart
-   tcoffee_manual
+   tcoffee_main_documentation
    tcoffee_technical_documentation
    tcoffee_webserver
    
    tcoffee_faq
    
-   tcoffee_references
-   tcoffee_documentation_validation
-   tcoffee_adresses_and_contacts
+   tcoffee_citations_references
+   tcoffee_contacts_adresses
    tcoffee_license
 
 

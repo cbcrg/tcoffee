@@ -2,7 +2,7 @@
 T-Coffee Main Documentation
 ###########################
 
-.. Note:: The T-Coffee Documentation has been modified and updated, november 2016, to improve its readibility and incorporate all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, contact us...we welcome any feedback!
+.. warning:: This chapter has been extensively updated in 11/2016. We improved its readibility and incorporate all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, don't hesitate to contact us.
 
 
 *******************
@@ -20,7 +20,7 @@ This documentation relies on the assumption that you have installed T-Coffee, ve
 
 Let's have a try...
 ===================
-This manual is made to help you discover (nearly) all subtleties of T-Coffee, from default applications to sophisticated ones. All along this documentation, we expect you to use Unix-like shell commands running on prepared example files we have created, that  you can find on our github repository for now: `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_. All T-Coffee commands are indicated with a tag "$$:"; to run the commands from the documentation, you can just copy/paste (without the tag "$$:") from the web page to your terminal. We encourage you to try all these examples which are controlled cases, and also to try these commands with your own data. In the future, all these examples files will be included in the T-Coffee distribution (~/tcoffee/Version.../examples/). Also, be aware that all the values/results given in this manual were obtained with different versions of T-Coffee; depending on the version of T-Coffee you are using, these results may slightly differ.
+This manual is made to help you discover (nearly) all subtleties of T-Coffee, from default applications to sophisticated ones. All along this documentation, we expect you to use Unix-like shell commands running on prepared example files we have created. For now you can find all these files on our github repository for now: `example files <https://github.com/cbcrg/tcoffee/tree/master/examples>`_; however in the future they will be included in the T-Coffee distribution (~/tcoffee/Version.../examples/). All T-Coffee commands indicated with a tag "$$:" are currently up and running; just copy/paste these commands from the documentation (without the tag "$$:") to your terminal provided you previously downloaded the example files. We encourage you to try all these examples which are controlled cases, and also to try these commands with your own data files. All T-Coffee commands indicated with a tag "$#:" are currently under maintenance. Also, be aware that all the values/results given in this manual were obtained with different versions of T-Coffee; depending on the version of T-Coffee you are using, these results may slightly differ.
 
 .. important:: Using T-Coffee package via "command lines" is the best/only way  **if you need to do something sophisticated and/or highly reproducible**, but if you don't want to bother with command line you can use our `web server <http://tcoffee.crg.cat/apps/tcoffee/index.html>`_ or different links on the `Cedric Notredame's lab homepage <http://www.tcoffee.org>`_. We have tried to put as many of T-Coffee functionalities on the webserver and we plan to incorporate even more in the future, but for now some options are not available or limited. 
 
@@ -114,7 +114,7 @@ Each of these constraints comes with a weight and in the end, the T-Coffee algor
 *******************
 Preparing Your Data
 *******************
-.. important:: T-Coffee tools/modes are called using different flags...the general syntax is quite simple and also allows some flexibility. For instance you can give your input file to T-Coffee either without any flag (T-Coffee recognizes the format most of the time), or use **-in** or **-seq** (for unaligned sequences) or **-aln** (for aligned sequences); in some cases, the flag is mandatory, such as **-infile**, don't worry it will be specified in this manual. When multiple input files are given, flags are mandatory (**-in/-in2**, **-al1/-al2**, etc...). Usually, options are indicated via the symbol "=" (i.e **-output=html**) but it is not mandatory, it's just recommended. If you use a correct/strict flag usage, T-Coffee will always work fine, but you have some degrees of freedom ;-).
+.. important:: About the syntax of T-Coffee command lines, just for you to know that it is quite flexible, for instance you can use any kind of separator you want (i.e. , ; <space> =). The syntax used in this document is meant to be consistent with that of ClustalW. However, in order to take advantage of the automatic filename completion provided by many shells, you can replace '=' and ',' with a space. Also, T-Coffee tools/modes are called using different flags to specify input/output files, parameters, modifiers, etc...Some flags are not always mandatory, however, if you use a correct/strict flag usage T-Coffee will always work fine; you just have some degrees of freedom ;-).
 
 The reformatting utility: seq_reformat
 ======================================
@@ -134,7 +134,7 @@ This will output the online flag usage of seq_reformat meaning a complete list o
 
 Modification options
 --------------------
-In order to perform different modifications on your data (residues/sequences/columns...), the seq_reformat utility has to be followed by the flag **-action** (within the seq_reformat tool) and one or several modifiers listed here (this list is not exhaustive):
+In order to perform different modifications on your data (residues/sequences/columns...), the **seq_reformat** utility can be followed by the flag **-action** and one or several modifiers listed here (this list is not exhaustive):
 
 :: 
 
@@ -154,7 +154,7 @@ Using a "cache" file
 --------------------
 What is a cache in T-Coffee?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Several options can be performed easily by using what we call a cache (or cache file). In T-Coffee, a cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding scheme. For instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **How Good Is Your Alignment?**) or a matrix based evalution (blosum62mt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is quite practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
+Several options can be performed easily by using what we call a cache (or cache file). In T-Coffee, a cache is a file containing an alternate version of your alignment where each position of the alignment is replaced by an alternative coding scheme. For instance each residue can be replaced by a score previously evaluated: this score can be the T-Coffee CORE index (cf. section **Evaluating Your Alignment**) or a matrix based evalution (blosum62mt or identity matrix). Then, when performing any modification or reformatting of your alignments, you can just specify the range of positions to be modified according to their respective scores within the cache. We will see some example especially regarding the modification of format of a given alignment; it is not mandatory to use a cache but it is quite practical. To generate a cache before any reformatting using a given evaluation score, you can use one of the following possible option:
 
 ::
 
@@ -198,7 +198,7 @@ The following command will convert your alignment according to the given paramet
   C -001100000---101000000100---
 
 
-Other alternative are possible. For instance, the following command:
+Other alternative are possible, for instance generating a cache for unaligned sequences (**-in** can refer to an alignment or unaligned sequences):
 
 ::
 
@@ -217,29 +217,10 @@ Other alternative are possible. For instance, the following command:
   0001100000000101000000100000
 
 
-Preparing a library cache (under maintenance...)
+Preparing a library cache
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 The library is a special format used by T-Coffee to declare relationships between pairs of residues. The cache library format can also be used to declare for instance the color of specific residues in an alignment. For instance, the following file
-``sample_dnaseq3.tc_lib`` declares that residue X of sequence X will be receive color X, while residue X of sequence X will receive color X. Note that the sequence number and the residue index are duplicated, owing to the recycling of this format from its original usage.
-
-::
-
-  ! TC_LIB_FORMAT_01
-  4
-  A 27 CTCCGTgTCTAGGagtTTACGTggAGT
-  B 21 CTGAGAAGCCGCCTGAGGTCG
-  C 21 TTAAGGTCCAGATTGCGGAGC
-  D 20 CTTCGTAGTCGTTTAAGAca
-  #1 1
-   1 1 3
-   4 4 5
-  #3 3
-   6 6 1
-   9 9 4   
-  ! CPU 240
-  ! SEQ_1_TO_N
-
-It is also possible to use the BLOCK operator when defining the library (see **Technical Documentation**). The number right after BLOCK indicates the block length (10). The two next numbers (1 1) indicate the position of the first element in the block. The last value is the color.
+``sample_dnaseq3.tc_lib`` declares which residue of which sequence will receive which color. Note that the sequence number and the residue index are duplicated, owing to the recycling of this format from its original usage. It is also possible to use the BLOCK operator when defining the library (see **Technical Documentation**). The number right after BLOCK indicates the block length (10). The two next numbers (1 1) indicate the position of the first element in the block. The last value is the color.
 
 ::
 
@@ -309,14 +290,14 @@ Changing the case
 -----------------
 Changing the case of your sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you need to change the case of your sequences, you can use different modifiers embedded in seq_reformat. They are accessed via the **-action** flag. For instance, to write your sequences in lower case:
+If you need to change the case of your sequences, you can use different modifiers embedded in **seq_reformat**. They are accessed via the **-action** flag. For instance, to write your sequences in lower case:
 
 ::
 
   $$: t_coffee -other_pg seq_reformat -in proteases_small.aln -action +lower \
       -output clustalw
 
-.. hint:: No prize for guessing that **+upper** will do exactly the opposite...
+.. tip:: No prize for guessing that **+upper** will do exactly the opposite...
 
 Changing the case of specific residues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -358,6 +339,7 @@ Colors are hard coded in the program, but if you wish, you can change them by si
 
 ::
 
+  Format for hard coded colors in T-Coffee:
   0 #FFAA00 1 0.2 0
 
 Coloring specific types of residues/nucleic acids
@@ -411,7 +393,7 @@ If you have a cache alignment or a cache library, you can use it to color your a
        -struc_in_f number_fasta -output=color_html -out=color_dnaseq3.html
 
   Produces a pdf file:
-   ##: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -struc_in=sample_dnaseq3.cache \
+   $$: t_coffee -other_pg seq_reformat -in=sample_dnaseq3.aln -struc_in=sample_dnaseq3.cache \
        -struc_in_f number_fasta -output=color_pdf -out=color_dnaseq3.pdf
 
   Produces an output using a library:
@@ -507,9 +489,9 @@ Large datasets are problematic because they can be difficult to align and analyz
   $$: t_coffee -other_pg seq_reformat -in proteases_large.fasta -action +trim _seq_N20 \
       -output fasta_seq
 
-.. hint:: The argument to trim include _seq_, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generally more accurate to use unaligned sequences.
+.. hint:: The argument to trim include **_seq_**, it means your sequences are provided unaligned. If your sequences are already aligned, you do not need to provide this parameter. It is generally more accurate to use unaligned sequences.
 
-.. note:: For very large dataset, seq_reformat will compute the similarity matrix between your sequences once only. It will then store it in its cache to be reused any time you run on the same dataset. In short this means that it will take much longer to run the first time, but be much faster if you need to rerun it.
+.. note:: For very large dataset, **seq_reformat** will compute the similarity matrix between your sequences once only. It will then store it in its cache to be reused any time you run on the same dataset. In short this means that it will take much longer to run the first time, but be much faster if you need to rerun it.
 
 Extracting/Removing sequences with the % identity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -668,7 +650,7 @@ If your sequences are DNA coding sequences, it is often safer and more accurate 
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sproteases_small_dna.fasta -action \
+  $$: t_coffee -other_pg seq_reformat -in proteases_small_dna.fasta -action \
       +translate -output fasta_seq
 
 Back-translation with the *bona fide* DNA sequences
@@ -786,13 +768,13 @@ If your data is not data sequence, but a matrix of 1 and Os (i.e. SAR matrix for
 
 ::
 
-  Command 3: (under maintenance)
-  $#: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _MATRIX_sarmat \
-      -output newick
+  Command 3:
+  $#: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree \
+      _MATRIX_sarmat -output newick
 
-  Command 4: (under maintenance)
-  $#: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree _TMODE_upgma_MATRIX_sarmat \
-       -output newick
+  Command 4:
+  $#: t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree \
+      _TMODE_upgma_MATRIX_sarmat -output newick
 
 .. warning:: Bootstrap facilities will also be added at some point...We recommend you to use `Phylip <http://evolution.genetics.washington.edu/phylip.html>`_ or any other specific phylogenetic software (PhyML, RAxML, MrBayes, etc...) if you need some serious phylogeny !
 
@@ -813,15 +795,18 @@ A real interesting option is the ability to compare two trees (unrooted) returni
   #tree_cmp_def|N: number of Nodes in T1 [unrooted]
   #tree_cmp_def|S: number of Sequences in T1
 
-The output scores in more details:
-- T: Fraction of the branches conserved between the two trees. This is obtained by considering the split induced by each branch and by checking whether that split is found in both trees
-- W: Fraction of the branches conserved between the two trees. Each branch is weighted with MIN the minimum number of leaf on its left or right (Number leaf left, Number leaf Right)
-- L: Fraction of branch length difference between the two considered trees.
+About the output scores in more details:
+
+ - T: Fraction of the branches conserved between the two trees. This is obtained by considering the split induced by each branch and by checking whether that split is found in both trees.
+ - W: Fraction of the branches conserved between the two trees. Each branch is weighted with MIN, the minimum number of leaf on its left or right.
+ - L: Fraction of branch length difference between the two considered trees.
+ - RF: is the standard Robinson-Foulds value when comparing trees.
 
 The last line contains a tree where distances have been replaced by the number of leaf under the considered node:
-- Positive values indicate a node common to both trees and correspond to MIN.
-- Negative values indicate a node found in tree1 but not in tree2
-- The higher this value, the deeper the node.
+
+ - Positive values indicate a node common to both trees and correspond to MIN.
+ - Negative values indicate a node found in tree1 but not in tree2.
+ - The higher this value, the deeper the node.
 
 .. tip:: You can extract this tree for further usage by typing **cat outfile | grep -v 'tree_cmp'**
 
@@ -831,8 +816,8 @@ It is possible to scan an alignment and locally measure the similarity between a
 
 ::
 
-  $$ : t_coffee -other_pg seq_reformat -in sample_seq1.aln -in2 sample_seq1_tree.nwk -action \
-       +tree_scan _MODE_scan__W_10_ > ph_tree_scan.txt (under maintenance...)
+  $# : t_coffee -other_pg seq_reformat -in sample_seq1.aln -in2 sample_seq1_tree.nwk -action \
+       +tree_scan _MODE_scan__W_10_ > ph_tree_scan.txt
 
 For each position of the alignment, W*2 blocks of size 2*1+1 up to W*2+1 will be extracted, for each of these block a tree will be estimated and the similarity of that tree with the reference tree will be estimated with cmp_tree. For each position, the tree giving the best fit will be reported, along with the size of the block leading to that tree:
 
@@ -855,7 +840,7 @@ Pruning removes leaves from an existing tree and recomputes distances so that no
   ...
 
   Pruning the tree:
-  $#: t_coffee -other_pg seq_reformat -in sample_3Dseq1.tree -in2 group_3Dseq1.fasta -action \
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.tree -in2 sample_3Dseq1.fasta -action \
       +tree_prune -output newick
 
 
@@ -879,22 +864,24 @@ If you have the PDB installed locally, simply set the variable PDB_DIR to the ab
 
 ::
 
-  $: export NO_REMOTE_PDB_FILE=1
+  Setting up the environment:
+  ##: export NO_REMOTE_PDB_FILE=1
   
+  Running PDB extract:
   $$: t_coffee -other_pg extract_from_pdb -infile 1PPGE -fasta -no_remote_pdb_file
 
 By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior):
 
 ::
 
-  $: export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
+  ##: export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
   (Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt)
-  
-  $: export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
+  and
+  ##: export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
   (Found at: http://www.rcsb.org/pdb/rest/getUnreleased)
 
 
-.. warning:: Since the file ``unreleased.xml`` is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
+.. warning:: Since the file ``unreleased.xml`` is not part of the PDB distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
 
 
 ***********************
@@ -1072,9 +1059,10 @@ This comparison will return the following result:
 
   *****************************************************
   seq1       seq2          Sim   [ALL]           Tot  
-  b80           19         33.5    89.5 [100.0]   [ 8958]
+  b80           19         33.6    94.2 [100.0]   [79686]
 
-The interpretation of this output is as follow: b80 is the reference MSA, it contains 19 sequences with an average identity of 33.5%, and is 89.5% identical to the second MSA b30.aln (8958 pairs to be precise). Of course, this does not tell you where are the good bits, but you can get this information for instance residues that have lost more than 50% of their pairing partner between the two alignments are in lower case (command 1) or converted in any character you want (command 2).
+
+The interpretation of this output is as follow: b80 is the reference MSA, it contains 19 sequences with an average identity of 33.6%, and is 94.2% identical to the second MSA b30.aln (79686 pairs to be precise). Of course, this does not tell you where are the good bits, but you can get this information for instance residues that have lost more than 50% of their pairing partner between the two alignments are in lower case (command 1) or converted in any character you want (command 2).
 
 :: 
 
@@ -1150,10 +1138,10 @@ To run MUSCLE you can try one of the following command; don't hesitate to MUSCLE
 ::
 
   Default mode:
-  $: muscle -in proteases_large.fasta > proteases_large.muscle
+  ##: muscle -in proteases_large.fasta > proteases_large.muscle
   
   Fast mode (less accurate):
-  $: muscle -in proteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
+  ##: muscle -in proteases_large.fasta -maxiters 1 -diags -sv -distance1 kbit20_3 \
   > proteases_large.muscle
 
 Aligning (very) large datasets with MAFFT
@@ -1163,9 +1151,9 @@ MAFFT is can align large datasets by default however it is better to use the fas
 ::
   
   Default mode:
-  $: mafft input > output
+  ##: mafft input > output
   Fast mode:
-  $: mafft --retree 2 input > output
+  ##: mafft --retree 2 input > output
 
 Aligning (very) large alignments with T-Coffee
 ----------------------------------------------
