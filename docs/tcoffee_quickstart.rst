@@ -62,16 +62,19 @@ DNA sequences
 ::
 
   ----------------------------------------------------------------------------
-  Default              t_coffee sample_dnaseq1.fasta
-                       use the output.html to visualize the MSA accuracy
+  Default              
+  ----------------------------------------------------------------------------
+
+  $$: t_coffee sample_dnaseq1.fasta                    
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
   ----------------------------------------------------------------------------
-  Functional           t_coffee sample_dnaseq1.fasta -mode procoffee
-  (Pro-Coffee)         increases accuracy of functional DNA regions
-  
-  Citation: Erb et al., Nucleic Acids Res. (2012)             PMID:22230796
+  Functional (Pro-Coffee increases accuracy of functional DNA regions )        
   ----------------------------------------------------------------------------  
+  
+  $$: t_coffee sample_dnaseq1.fasta -mode procoffee
+
+  Citation: Erb et al., Nucleic Acids Res. (2012)             PMID:22230796
 
 
 RNA sequences
@@ -79,26 +82,33 @@ RNA sequences
 ::
 
   ----------------------------------------------------------------------------
-  Default              t_coffee sample_rnaseq1.fasta
-                       use the output.html to visualize the MSA accuracy
+  Default              
+  ----------------------------------------------------------------------------
+  
+  $$: t_coffee sample_rnaseq1.fasta                    
                        
   Citation: Notredame et al., JMB (2000)                      PMID:10964570  
   ----------------------------------------------------------------------------
-  Structural 2D        t_coffee sample_rnaseq1.fasta -mode rcoffee
-  (R-Coffee)           uses the predicted secondary structure
+  Structural 2D (R-Coffee uses predicted secondary structures)        
+  ----------------------------------------------------------------------------
+  
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee
   
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
   ----------------------------------------------------------------------------
-  Structural 3D        t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
-  (R-Coffee Consan)    uses R-Coffee to combine Consan structural alignments 
+  Structural 3D (R-Coffee combined with Consan structural alignments)
+  ----------------------------------------------------------------------------  
   
+  $$: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
+
   Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654   
   ----------------------------------------------------------------------------
-  Accurate             t_coffee sample_rnaseq1.fasta -mode rmcoffee
-  (RM-Coffee)          use M-Coffee + secondary structure prediction
-                       
-  Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
+  Accurate (RM-Coffee use M-Coffee and secondary structure predictions)             
   ----------------------------------------------------------------------------
+  
+  $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
+                  
+  Citation: Wilm et al., Nucleic Acids Res. (2008)            PMID:18420654
 
 
 ********************************
