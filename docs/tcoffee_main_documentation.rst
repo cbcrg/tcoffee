@@ -1185,7 +1185,7 @@ One of the most common situation when building MSAs is to have several alignment
 
 Using third party aligner via T-Coffee
 --------------------------------------
-T-Coffee is installed along with many aligners necessary to run M-Coffee for instance, and many more. If you type **t_coffee**, it will display on the screen the different t_coffee options and all the methods included. If you look carefully, you will see that most of the methods exist under two denominations: 1) **xxx_msa** or 2) **xxx_pair**. In the first case, it means that T-Coffee will use the specified method to run your MSA, so you can easily have a ClustalW or a MAFFT alignment using T-Coffee. In the second case, you ask T-Coffee to align every pair of sequence with the specified methods, the final MSA will be computed using the T-Coffee consistency between all the pairs. Go to the **Integrating External Methods in T-Coffee** if you want more information.
+T-Coffee is installed along with many aligners necessary to run M-Coffee for instance, and many more. If you type **t_coffee**, it will display on the screen the different t_coffee options and all the methods included. If you look carefully, you will see that most of the methods exist under two denominations: 1) **<method>_msa** or 2) **<method>_pair**. In the first case, it means that T-Coffee will use the specified method to run your MSA, so you can easily have a ClustalW or a MAFFT alignment using T-Coffee. In the second case, you ask T-Coffee to align every pair of sequence with the specified methods, the final MSA will be computed using the T-Coffee consistency between all the pairs. Go to the **Integrating External Methods in T-Coffee** if you want more information.
 
 Using all the methods at the same time: M-Coffee
 ------------------------------------------------
@@ -1221,7 +1221,7 @@ Assuming you have multiple alignment(s) (sproteases_small.aln) or profile(s) her
   $$: t_coffee proteases_oneseq.fasta -profile proteases_small.aln
 
   Adding many sequences to many profiles:
-  $$: t_coffee sequences.fasta -profile=prf1.aln,prf2.aln,prf3.aln -outfile=combined_profiles.aln
+  $$: t_coffee -profile=prf1.aln,prf2.aln,prf3.aln -outfile=combined_profiles.aln
 
 .. warning:: You can also use all the methods you want but be aware when using external methods that profiles are nto always supported. When it is not, it is replaced with its consensus sequence which will not be quite as accurate. Methods supporting full profile information are: lalign_id_pair, slow_pair, proba_pair, clustalw_pair and clustalw_msa. All the other methods (internal or external) treat the profile as a consensus (less accurate).
 
@@ -1234,8 +1234,8 @@ PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest.
   Command 1: PSI-Coffee
   $$: t_coffee proteases_small.fasta -mode psicoffee
   
-  Command 2: TM-Coffee (add -protein_db to specify in which database to search)
-  $$: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM
+  Command 2: TM-Coffee
+  ##: t_coffee proteases_small.fasta -mode psicoffee -template_file PSITM -protein_db <database>
   
 
 .. warning:: PSI/TM-Coffee requires BLAST and a database to search; if you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. More importantly, if you don't specify a reduced database for TM-Coffee, it will run on nr and be equal to PSI-Coffee.
@@ -1273,8 +1273,6 @@ Both Expresso (command 1) and 3D-Coffee (command 2) are modes of T-Coffee you ca
   $$: t_coffee three_pdb_two_seq.fasta -mode expresso
   $$: t_coffee three_pdb_two_seq.fasta -method sap_pair,slow_pair -template_file PDB
 
-
-
   Command 2: two ways of running 3D-Coffee
   $$: t_coffee three_pdb.fasta -mode 3dcoffee
   $$: t_coffee three_pdb.fasta -method sap_pair,slow_pair -template_file _SELF_P_
@@ -1293,9 +1291,9 @@ Template search paramaters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 To use Expresso, you have different option from an entirely automated procedure to tailored procedure, by selecting either your own structures or by defining different criteria for the template selection. You can have an exhaustive list in the **T-Coffee Technical Documentation** (subsection **Template based T-Coffee modes**) yet the most important parameters for the template selection are the following:
 
- - **-pdb_type**    : the type of structure ("d" for diffraction/XRAY or "n" NMR structures)
- - **-pdb_min_cov** : the minimum coverage between query sequence and template (% between 0-100)
- - **-pdb_min_sim** : the minimum identity between query sequence and template (% between 0-100)
+ - **-pdb_type**    : type of structure ("d" for diffraction/XRAY or "n" NMR structures)
+ - **-pdb_min_cov** : minimum coverage between query sequence and template (from 0-100%)
+ - **-pdb_min_sim** : minimum identity between query sequence and template (from 0-100%)
 
 
 Aligning sequences and structures
@@ -1328,11 +1326,11 @@ To make a secondary structure prediction with GOR, run the following. In this co
 
 ::
 
-  Command 1: (under maintenance...)
-  $$: t_coffee sample_seq1.fasta -template_file SSP
+  Command 1: 
+  $#: t_coffee sample_seq1.fasta -template_file SSP
   
-  Command 2: (under maintenance...)
-  $$: t_coffee sample_seq1.fasta -template_file PSISSP
+  Command 2: 
+  $#: t_coffee sample_seq1.fasta -template_file PSISSP
 
   Command 3:
   $$: t_coffee sample_seq1.fasta -template_file TM
@@ -1346,8 +1344,8 @@ It is possible to use the secondary prediction (command 1) or the transmembrane 
 
 ::
 
-  Command 1: (under maintenance...)
-  $$: t_coffee sample_seq1.fasta -template_file PSISSP -method_evaluate_mode ssp -method \
+  Command 1:
+  $#: t_coffee sample_seq1.fasta -template_file PSISSP -method_evaluate_mode ssp -method \
       lalign_id_pair
 
   Command 2:
@@ -1365,8 +1363,8 @@ If you have your own predictions, you can use them to run T-Coffee providing you
 ::
 
 
-  Command line: (under maintenance...)
-  $$: t_coffee sample_seq1.fasta -template_file sample_seq1_ssp.template -method_evaluate_mode \
+  Command line:
+  $#: t_coffee sample_seq1.fasta -template_file sample_seq1_ssp.template -method_evaluate_mode \
       ssp -method lalign_id_pair
       
   Format of the template file:     
@@ -1386,8 +1384,8 @@ You can output a color coded version of your alignment using the secondary predi
 ::
 
 
-  Secondary structure prediction: (under maintenance...)
-  $$: t_coffee sample_seq1.fasta -template_file PSISSP -output sec_html
+  Secondary structure prediction:
+  $#: t_coffee sample_seq1.fasta -template_file PSISSP -output sec_html
 
   Transmembrane regions prediction: 
   $$: t_coffee sample_seq1.fasta -template_file PSITM -output tm_html
