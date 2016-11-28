@@ -405,7 +405,8 @@ int batch_main ( int argc, char **argv)
 
 	/*Cache*/
 	char * cache;
-
+	int print_cache;
+	
 	/*align_pdb*/
 	char *align_pdb_param_file;
 	char *align_pdb_hasch_mode;
@@ -3030,7 +3031,7 @@ declare_name (prot_db);
 			    /*MAX Nval*/  1             ,\
 			    /*DOC*/       "ND"          ,\
  			    /*Parameter*/&prot_db       ,\
-	 		    /*Def 1*/    "uniprot"      ,\
+	 		    /*Def 1*/    "uniref50"      ,\
 			    /*Def 2*/    "default"      ,\
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
@@ -3075,7 +3076,7 @@ declare_name (prot_db);
 		   );
 
 declare_name (cache);
- get_cl_param(\
+get_cl_param(\
 			    /*argc*/      argc          ,\
 			    /*argv*/      argv          ,\
 			    /*output*/    &le           ,\
@@ -3091,6 +3092,23 @@ declare_name (cache);
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
+get_cl_param(\
+			    /*argc*/      argc          ,\
+			    /*argv*/      argv          ,\
+			    /*output*/    &le           ,\
+			    /*Name*/      "-print_cache"    ,\
+			    /*Flag*/      &print_cache      ,\
+			    /*TYPE*/      "FL"         ,\
+			    /*OPTIONAL?*/ OPTIONAL      ,\
+			    /*MAX Nval*/  1             ,\
+			    /*DOC*/       "print the cache dir to stdout and exit\n",\
+			    /*Parameter*/ &print_cache       ,		\
+			    /*Def 1*/    "0"      ,\
+			    /*Def 2*/    "1"      ,\
+			    /*Min_value*/ "any"         ,\
+			    /*Max Value*/ "any"          \
+		   );
+
 declare_name (align_pdb_param_file);
  get_cl_param(\
 			    /*argc*/      argc          ,\
@@ -4007,6 +4025,12 @@ get_cl_param(\
 		 }
 	       get_cl_param( argc, argv,&le, NULL,NULL,NULL,0,0,NULL);
 	       prepare_cache (cache);
+
+	       if (print_cache)
+		 {
+		   fprintf (stdout, "%s\n", get_cache_dir());
+		   myexit (EXIT_SUCCESS);
+		 }
 
 /*******************************************************************************************************/
 /*                                                                                                     */

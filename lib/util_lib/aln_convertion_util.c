@@ -6057,7 +6057,7 @@ Sequence * seq2template_seq ( Sequence *S, char *template_list, Fname *F)
 
       nproc=get_nproc();
       //max_nproc=2*nproc;
-      max_nproc=20; //EBI recommended maximum
+      max_nproc=10; //EBI recommended maximum
       script=substitute(script, "@", " -");
       script=substitute(script, "#", "=");
 

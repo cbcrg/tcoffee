@@ -69,6 +69,10 @@ for ($a=0; $a<@ARGV; $a++)
 	$string_in=$ARGV[++$a];
 	$string_out=$ARGV[++$a];
       }
+    elsif ($v eq "-fix_movie_names")
+      {
+	$action=$v;
+      }
     elsif ($v eq "-addbefore")
       {
 	$action=$v;
@@ -798,6 +802,52 @@ elsif    ($action eq "-replace")
 		&my_rename ($from,$to);
 	      }
 	  }
+      }
+  }
+elsif    ($action eq "-fix_movie_names")
+  {
+    print "\n";
+    foreach my $f (@file1)
+      {
+	if ($f=~/(.*)(19\d\d)(.*)\.([^.]*)/)
+	  {
+	    
+	    my $t=$1;
+	    my $y=$2;
+	    my $ext=$4;
+	    
+	    if (!($f=~/\(\d\d\d\d\)/))
+		{
+		  
+		  $t=~s/\(//g;
+		  $t=~s/\)//g;
+		  $t=~s/\./ /g;
+		  $t=~s/\_/ /g;
+		  $t=~s/  / /g;
+		  
+		  print "$f\n";
+		  my $f2="$t ($y).$ext";
+		  $f2=~s/  / /g;
+		  print "$f2\n\n";
+		  my $input;
+		  while (<STDIN>)
+		    {
+		      $input=$_;
+		      print "[$input]\n";
+		      last;
+		    }
+		  if ($input eq "y\n")
+		    {
+		      print "##copy\n\n";
+		      rename $f, $f2;
+		    }
+		  else
+		    {
+		      print "skip\n";
+		    }
+		}
+	  }
+	
       }
   }
 

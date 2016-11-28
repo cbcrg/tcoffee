@@ -2550,7 +2550,7 @@ sub run_blast
 	    if ($db eq "uniprot"){$db1="uniprotkb";}
 	    else {$db1=$db;}
 
-	   
+	    
 	    if ($cl_method =~/wu/)
 	      {
 		$cl_method=~s/wu//;
@@ -2562,12 +2562,42 @@ sub run_blast
 	      {
 		if ( $cl_method =~/psiblast/){$cl_method ="blastp -j5";}
 		$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile>/dev/null 2>$error_log";
+		#DEBUG
+		#$command="t_coffee -other_pg ncbiblast_lwp.pl --email $EMAIL -D $db1 -p $cl_method --outfile $outfile --align 5 --stype protein $infile";
+		
+		my $maxrun=5;#number of crashes accepetd
+		my $nrun;
+		my $keep_going=1;
+		while ($keep_going)
+		  {
+		    
+		    #print "----- $command [$nrun]\n";
+		    $nrun++;
+		    $keep_going=0;
+		    &safe_system ( $command,5);
+		    
+		    my $success=0;
+		    $success =$success || -e "$outfile.out.xml";
+		    $success =$success || -e "$outfile.xml.xml";
+		    $success =$success || -e "$outfile.out..xml";
+		    $success =$success || -e "$outfile.xml..xml";
+		    
+		    if (!$success && ($nrun<$maxrun || -e "$outfile.out.txt"))
+		      {
+			$keep_going=1;
+			add_warning($$,$$,"[ncbiblast_lwp.pl] [$command] failed to produce xml output -- will ne tried again [$nrun]");
+		      }
+		  }
+		
+		if (-e "$outfile.out.xml") {`mv $outfile.out.xml $outfile`;}
+		elsif (-e "$outfile.xml.xml"){`mv $outfile.xml.xml $outfile`;}
+		elsif (-e "$outfile.out..xml") {`mv $outfile.out..xml $outfile`;}
+		elsif (-e "$outfile.xml..xml"){`mv $outfile.xml..xml $outfile`;}
+		else
+		  {
+		    add_warning($$,$$,"[ncbiblast_lwp.pl] [$command] failed to produce xml output");
+		  }
 	      }
-	    &safe_system ( $command,5);
-	    if (-e "$outfile.out.xml") {`mv $outfile.out.xml $outfile`;}
-	    elsif (-e "$outfile.xml.xml"){`mv $outfile.xml.xml $outfile`;}
-	    elsif (-e "$outfile.out..xml") {`mv $outfile.out..xml $outfile`;}
-	    elsif (-e "$outfile.xml..xml"){`mv $outfile.xml..xml $outfile`;}
 	  }
 	elsif ($SERVER eq "NCBI")
 	  {
@@ -2635,7 +2665,6 @@ sub run_blast
 		&check_configuration("legacy_blast.pl");
 		$command="legacy_blast.pl blastall --path $path -p blastn -d $cl_db -i $infile -o $outfile -m7 -W6";
 	      }
-	    print "$command\n";
 	    &safe_system ($command);
 	  }
 	else

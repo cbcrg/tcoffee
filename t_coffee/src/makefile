@@ -30,7 +30,7 @@ endif
 CC=g++ 
 ifndef CFLAGS
 #CFLAGS=-O3 -Wno-write-strings
-CFLAGS=-g
+CFLAGS=-g -w
 endif
 
 ifdef OPENMP

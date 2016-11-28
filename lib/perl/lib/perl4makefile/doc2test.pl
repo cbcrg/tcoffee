@@ -21,76 +21,77 @@ my $GIT=1;
 my $max=0;
 my $pattern='$$';
 my $log ;
-my $doclog;
+my $docslog;
 my $regexp;
 my $reset;
 my $stop_on_failed;
-my $purge;
 my $clean;
 
-my $redo_failed;
+
 my $failed;
-my $run;
 my $rep;
 my $cw=cwd();
 my $mode="new";#will only run the new ones
-
 my $pg="t_coffee";
 
 $dir{examples}="$cw/examples/";
 $dir{docs}    ="$cw/docs/";
-$dir{tmp}     ="$cw/testsuite/validation/doc/tmp/";
-$dir{ref}     ="$cw/testsuite/validation/doc/ref/";
-$dir{latest}  ="$cw/testsuite/validation/doc/latest/";
-$dir{log}     ="$cw/testsuite/validation/doc/log/";
-$dir{failed}  ="$cw/testsuite/validation/doc/failed/";
+$dir{tmp}     ="$cw/testsuite/validation/docs/tmp/";
+$dir{ref}     ="$cw/testsuite/validation/docs/ref/";
+$dir{latest}  ="$cw/testsuite/validation/docs/latest/";
+$dir{log}     ="$cw/testsuite/validation/docs/log/";
+$dir{failed}  ="$cw/testsuite/validation/docs/failed/";
+
+
 
 if ($ARGV[0] eq "-help")
   {
-    print "doc2test.pl\n";
+    print "docs2test.pl\n";
     print "Automaticly checks t_coffee command lines\n";
     print "The github dir structure is expected by default\n";
     print "tcoffee/\n";
-    print "       /docs     -> contains rst doc\n";
+    print "       /docs     -> contains rst docs\n";
     print "       /examples -> contains the reference files\n";
-    print "       /testsuite/validation/doc/\n"; 
-    print "       /testsuite/validation/doc/tmp    -> computation\n";
-    print "       /testsuite/validation/doc/ref    -> succesful dumps\n";
-    print "       /testsuite/validation/doc/failed -> unsuccesful dumps\n";
+    print "       /testsuite/validation/docs/\n"; 
+    print "       /testsuite/validation/docs/tmp    -> computation\n";
+    print "       /testsuite/validation/docs/ref    -> succesful dumps\n";
+    print "       /testsuite/validation/docs/failed -> unsuccesful dumps\n";
     print "\n";
-    print "Commands are extracted from the .rst files contained in <-doc>\n";
+    print "Commands are extracted from the .rst files contained in <-docs>\n";
     print "Commands are recognised as any line starting with <-pattern>\n";
     print "Duplicated commands are checked only once\n";
     print "By default the program only checks the new commands (-mode=new) \n";
     print "To check All the commands against the references, use -mode validate\n";
+    print "Dumps are containers containing the CL and the input files\n";
     print "flags:\n";
-    
-    print "     -run           doc|ref|<dump>|<file>|<string>\n";
-    print "                    doc       : run all Commands in 'grep <-pattern> /docs/*.rst'\n";
-    print "                    ref       : run all the dumps in /refs/*.dump\n";
-    print "                    <dump>    : run the dump (can be a dir of dumps)\n";
-    print "                    <file>    : run each line as a command\n";
-    print "                    <string>  : run the string as a command\n";
     print "     -pattern       pattern used to recognize the command lines [def=**]\n";
     print "                    pattern will be treated as a regexp if -regexp is set\n";
     print "     -regexp        flag that causes pattern to be treated as a perl regexp\n";
     print "     -pg            specify the path of the version of T-Coffee (optional)\n";
     print "     -log           default: validation.log\n";
-    print "     -doclog        default: doc.log\n";
-    print "     -mode=<action> new|update|failed\n";
+    print "     -docslog        default: docs.log\n";
+    print "     -mode=<action> new|update|failed|check\n";
     print "                    new    : check ONLY CL w/o ref/dump and create ref/dump\n";
     print "                    update : check ALL  CL or create new ref/dum\n";
     print "                    failed : run   ONLY FAILURE as found /failed\n";
-    print "     -reset         delete all /ref and /failed dumps before running mode\n";
-    print "     -compile       stop at every FAILURE\n";
-    print "     -clean         removes unused /ref/dumps, /failed/dumps and /examples files\n";
+    print "                    check  : run   from dumps in ref";
     
+    print "     -reset         delete all the dumps [CAUTION]\n";
+    print "     -stop          stop at every FAILURE\n";
+    print "     -clean         examples|dumps\n";
+    print "                    examples: removes files in /examples/ not used by /docs [CAUTION]\n";
+    print "                    dump:     removes files dumps not used by /docs [CAUTION]\n";
     
     print "     -rep           specifies a root repository\n";
-    print "     -example_dir   directory containing the sample files\n"; 
-    print "     -docs_dir      directory containing the .rst files\n"; 
-    print "     -ref_dir       directory containing the reference dump\n"; 
-    print "     -run_dir       tmp directory\n";
+    print "     -example       directory containing the sample files\n"; 
+    print "     -docs          directory containing the .rst files\n";
+    print "                    OR .rst file\n";
+    print "                    OR file containing CLs (one per line)\n";
+    print "     -ref           directory containing the reference dumps\n";
+    print "                    OR dump file\n";
+    print "     -failed        directory containing all the failed dumps\n";
+    print "     -tmp           tmp directory\n";
+    print "     -latest        latest directory\n";
     
     print "     -max           max number of CL to check [DEBUG]\n";
     print "     -help          display this help message\n";
@@ -108,11 +109,7 @@ for (my $a=0; $a<=$#ARGV; $a++)
   {
     
     
-    if ($ARGV[$a]=~/-run/)
-      {
-	$run=$ARGV[++$a];
-      }
-    elsif ($ARGV[$a]=~/-pattern/)
+    if ($ARGV[$a]=~/-pattern/)
       {
 	$pattern=$ARGV[++$a];
       }
@@ -124,13 +121,13 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$reset=1;
       }
-    elsif ($ARGV[$a]=~/-stop_on_failed/)
+    elsif ($ARGV[$a]=~/-stop/)
       {
 	$stop_on_failed=1;
       }
     elsif ($ARGV[$a]=~/-clean/)
       {
-	$clean=1;
+	$clean=$ARGV[++$a];;
       }
     elsif ($ARGV[$a]=~/-max/)
       {
@@ -144,34 +141,27 @@ for (my $a=0; $a<=$#ARGV; $a++)
       {
 	$log=$ARGV[++$a];
       }
-    elsif ($ARGV[$a]=~/-doclog/)
+    elsif ($ARGV[$a]=~/-docslog/)
       {
-	$doclog=$ARGV[++$a];
+	$docslog=$ARGV[++$a];
       }
-    elsif ($ARGV[$a]=~/-mode/)
-      {
-	#default: new      => will only run the new CL
-	#         validate => will check everything
-	$mode=$ARGV[++$a];
-      }
-    
-    elsif ($ARGV[$a]=~/-example_dir/)
+    elsif ($ARGV[$a]=~/-example/)
       {
 	$dir{examples}=$ARGV[++$a];
       }
-    elsif ($ARGV[$a]=~/-failed_dir/)
+    elsif ($ARGV[$a]=~/-failed/)
       {
 	$dir{failed}=$ARGV[++$a];
       }
-    elsif ($ARGV[$a]=~/-docs_dir/)
+    elsif ($ARGV[$a]=~/-docs/)
       {
 	$dir{docs}=$ARGV[++$a];
       }
-    elsif ($ARGV[$a]=~/-tmp_dir/)
+    elsif ($ARGV[$a]=~/-tmp/)
       {
 	$dir{tmp}=$ARGV[++$a];
       }
-    elsif ($ARGV[$a]=~/-ref_dir/)
+    elsif ($ARGV[$a]=~/-ref/)
       {
 	$dir{ref}=$ARGV[++$a];
       }
@@ -210,7 +200,7 @@ if ($rep)
   }
 if (!$log){$log="$dir{log}/validation.log";}
 open (LOG, ">$log");close (LOG);
-if (!$doclog){$doclog="$dir{log}/doc.log";}
+if (!$docslog){$docslog="$dir{log}/docs.log";}
 
 
 #1-minimum checks
@@ -220,12 +210,26 @@ if (!$doclog){$doclog="$dir{log}/doc.log";}
 # 2 - create the directory structure if needed
 foreach my $d (keys (%dir))
   {
-    if (!-d $dir{$d})
+    if (!-d $dir{$d} && !-e $dir{$d} && $d ne "docs")
       {
 	print "create $dir{$d}\n"; 
-	system ("mkdir -p $dir{$d}");
+	system ("mkdir -p $dir{$d}");	
       }
   }
+# turn relative path into absolute paths
+foreach my $d (keys (%dir))
+  {
+    $dir{$d}=rpath2apath($dir{$d});
+  }
+
+   
+my $examplesD=$dir{examples};
+my $docsD=$dir{docs};
+my $tmpD=$dir{tmp};
+my $refD=$dir{ref};
+my $latestD=$dir{latest};
+my $logD=$dir{log};
+my $failedD=$dir{failed};
 
 # reset
 if ($reset==1)
@@ -252,86 +256,136 @@ if ($reset==1)
 
 # 2 - get the command line file
 
-my @rstlist;
-my @dumplist;
-my $run_dump;
-if (!$run || $run eq "doc")
+if ($mode eq "failed" || $mode eq "check")
   {
-    check_dir ($dir{docs});
-    check_dir ($dir{examples});
-       
-    
-    my @list=dir2file_list($dir{docs}, "rst");
-    foreach my $rst (@list)
-     {
-       my $f="$dir{docs}/$rst";
-       if ($rst=~/.*\.rst$/)
-	 {
-	   rst2cl($f, \%cl);
-	   push @rstlist, $f;
-	 }
-     }
- }
-elsif ($run eq "ref" || (-e $run && isdump($run)))
-  {
-    check_dir ($dir{ref});
-    my @list=dir2file_list($dir{ref}, "dump");
-    foreach my $d (@list)
-      {
-	$d="$dir{ref}/$d";
-	my $com=dump2cl($d);
-	$cl{$com}{0}{refdump}=$d;
-	push @rstlist, $com;
-      }
-    $run_dump=1;
+    $docsD=$dir{docs}="";
+    $examplesD=$dir{examples}="";
   }
-elsif (-e $run)
+
+
+if ($docsD)
   {
-    open (F, "$run");
-    while(<F>)
+    check_dir ($examplesD);
+    
+    if (-d $docsD && isrst ($docsD))
+       {
+	 my @list;
+	 if (-d $docsD)
+	   {
+	     @list=dir2file_list($docsD, "\.rst\$");
+	     @list=add_before_list ("$docsD/", @list);
+	   }
+	 else
+	   {
+	     @list=($docsD);
+	   }
+	 foreach my $f (@list)
+	   {
+	     rst2cl($f, \%cl);
+	   }
+       }
+    elsif (-e $docsD)
       {
-	my $l=$_;
-	$l=~/\s*(\S.*\S)\s*/;
-	my $line=$1;
-	
-	if (($line=~/\S/))
+	my $lineN;
+	open (F, $dir{docs});
+	while(<F>)
 	  {
-	    $cl{$line}{0}{doc}=$line;
+	    my $l=$_;
+	    if (!$l=~/\#\#/)
+	      {
+		$l=~/\s*(\S.*\S)\s*/;
+		my $line=$1;
+		
+		if (($line=~/\S/))
+		  {
+		    my $n=$cl{$line}{docs}{n}++;
+		    $cl{$line}{docs} {$n}{command}=$line;
+		    $cl{$line}{docs} {$n}{source}=$docsD;
+		    $cl{$line}{docs} {$n}{line}=$lineN;
+		  }
+		$lineN++;
+	      }
 	  }
       }
-    close (F);
+    else
+      {
+	#param is a CL
+	$cl{$docsD}{docs}{n}++;
+	$cl{$docsD}{docs}{0}{command}=$docsD;
+      }
   }
-else
+if ($refD)
   {
-    $cl{$run}{0}{"doc"}=$run;
+    my @list;
+    if (-d $refD)
+      {
+	my @l1=dir2file_list($refD);
+	foreach my $dump (@l1)
+	  {
+	    my $dump="$refD/$dump";
+	    if (isdump ($dump))
+	      {
+		push @list, $dump;
+	      }
+	  }
+      }
+    elsif (isdump ($refD))
+      {
+	push @list, $refD;
+      }
+    elsif (-e $refD && !isdump($refD))
+      {
+	print "ERROR --- $refD is not a valid dumpfile\n";
+	die;
+      }
+    foreach my $d (@list)
+      {
+	refdump2cl($d, \%cl, "ref");
+      }
   }
+
+if ($failedD)
+  {
+    my @list;
+    if (-d $failedD)
+      {
+	my @l1=dir2file_list($failedD);
+	foreach my $dump (@l1)
+	  {
+	    my $dump="$failedD/$dump";
+	    if (isdump ($dump))
+	      {
+		push @list, $dump;
+	      }
+	  }
+      }
+    elsif (isdump ($failedD))
+      {
+	push @list, $failedD;
+      }
+    elsif (-e $failedD  && !isdump($failedD))
+      {
+	print "ERROR --- $failedD is not a valid dumpfile\n";
+	die;
+      }
+    foreach my $d (@list)
+      {
+	refdump2cl($d, \%cl, "failed");
+      }
+  }
+
 
 #dump the documentation
-
-docdump (\%cl, $doclog);
+docdump (\%cl, $docslog);
 
 
 # 3 - get the examples in the tmp dir
-if ($clean)
+if ($clean eq "examples")
   {
-    clean_examples ($dir{examples}, $doclog);
+    clean_examples ($dir{examples}, $docslog);
     mygit_add ($dir{examples});
     exit;
   }
-my $num;
-if (!$run_dump)
-  {
-    system ("cp $dir{examples}/* $dir{tmp}");
-    clean_examples ($dir{tmp}, $doclog);
-    $num=dir2dump (\%cl,\%dir,"ref", $num); 
-    $num=dir2dump (\%cl,\%dir,"failed", $num); 
-  }
-# 4 - get the command lines in the reference and in the failed
-
-
-
-#display_command (\%cl);
-#die;
 
 # 5 - initialize the report
 my $report;
@@ -350,106 +404,117 @@ chdir ($dir{tmp});
 my (%R, %D);
 my  @com_list=keys (%cl);
 my $n_com=$#com_list+1;
-my $count=1;
-my $shell;
+my $data;
 my ($tot_failure, $tot_success, $tot_warning, $tot_tot);
 $tot_failure=$tot_warning=$tot_success=$tot_tot=0;
+my $dump_num;
+
+
+my $com_index;
+my $synced;
 foreach my $com (sort (keys (%cl)))
   {
-    my $dump;
-    my $dump_num;
-    my $ref=$cl{$com}{0}{ref};
-    my $doc  =$cl{$com}{0}{doc};
-    my $refdump=$cl{$com}{0}{refdump};
-    my $failed=$cl{$com}{0}{failed};
-    my $run=0;
-
-    if (!($com=~/\S/)){next;}
-
-    my $shell_com=$com;
-    if ($refdump)
+    my $shell_com;
+    my $run;
+    my $shell;
+    my $success=0;
+    
+    my $ref   =$cl{$com}{ref}{n};
+    my $rdump =$cl{$com}{ref}{0}{file};
+    my $doc   =$cl{$com}{doc}{n};
+    my $failed=$cl{$com}{failed}{n};
+    my $fdump =$cl{$com}{failed}{0}{file};
+    my $ndump;
+    my %R=dump2report($rdump);
+    my %D;
+    
+    
+    
+    my %cl2;
+    my $n2=0;
+    foreach my $l ("doc", "failed", "ref")
       {
-	$run=1;
+	for (my $n=0; $n<$cl{$com}{$l}{n}; $n++)
+	  {
+	    $n2=$cl2{n}++;
+	    $cl2{$n2}{source}=$cl{$com}{$l}{$n}{source};
+	    $cl2{$n2}{line}=$cl{$com}{$l}{$n}{line};
+	  }
+      }
+    
+
+    $com_index++;
+    if ($rdump)
+      {
+	$ndump=path2name($rdump);
       }
     else
       {
-	if (!$ref)
-	  {
-	    $num++;
-	    $dump="t_coffee.$num.dump";
-	    $dump_num=$num;
-	  }
-	elsif ($doc && $ref)
-	  {
-	    $dump="$ref";
-	    $dump=~/t_coffee\.(\d+)\.dump/;
-	    $dump_num=$1;
-	  }
-	if    ($mode eq "new")   {if (!$ref)   {$run=1;}}
-	elsif ($mode eq "failed"){if ( $failed){$run=1;}}
-	else  {$run=1;}
+	my $r=random_string (10);
+	$ndump="t_coffee.$com_index.$r.dump";
       }
     
-    if ($pg ne "t_coffee")
+    
+    
+    $shell_com=$com;
+    if ($pg ne "t_coffee"){$shell_com=~s/t_coffee/$pg/g;}
+    
+    
+    $run=1;
+    if (($mode eq "new" && !$ref) || ($mode eq "update" && !$doc))
       {
-	$shell_com=~s/t_coffee/$pg/g;
+	if (!$synced){$synced=syncfiles($examplesD, $tmpD);}
+	$shell=system4tc ("export DUMP_4_TCOFFEE=$ndump;$shell_com >/dev/null 2>/dev/null");
+	%D=dump2report($ndump);
+	if ($shell || $D{error} || $D{MissingOutput})
+	  {
+	    print "### Refresh TMP\n";
+	    syncfiles ($examplesD, $tmpD);
+	    $shell=system4tc ("export DUMP_4_TCOFFEE=$ndump;$shell_com >/dev/null 2>/dev/null");
+	  }
       }
-    
-    $count++;
+    elsif ($mode eq "check")
+      {
+	$shell=dump2run ($rdump, $ndump, $shell_com);
+      }
+    elsif ($mode eq "failed" && $failed)
+      {
+	$shell=dump2run ($fdump, $ndump, $shell_com);
+      }
+    else
+      {
+	$run=0;
+      }
+	
     if ($run)
       {
-	my $success;
+	$tot_tot++;
+	$dump_num++;
+	$cl{$com}{run}=1;
 	if ($max && $tot_tot>=$max){last;}
 	
-	$tot_tot++;
-	$cl{$com}{run}=1;
-	
-	
-	if ($refdump)
-	  {
-	    %R=dump2report($refdump);
-	    $shell=dump2run($shell_com, $refdump, $dump);
-	  }
-	else
-	  {
-	    %R=dump2report($ref);
-	    $shell=system ("export DUMP_4_TCOFFEE=$dump;$shell_com >/dev/null 2>/dev/null");
-	  }
-	
-	%D=dump2report($dump);
+	%D=dump2report($rdump);
 	compare_reports (\%R, \%D);
-	if (!$run_dump && ($shell || $D{error} || $D{MissingOutput}))
-	  {
-	    #refresh the example files
-	    system ("rm $dir{tmp}/*");
-	    system ("cp $dir{examples}/* $dir{tmp}");
-	    clean_examples ($dir{tmp}, $doclog);
-	    $shell=system ("export DUMP_4_TCOFFEE=$dump;$shell_com >/dev/null 2>/dev/null");
-	    %D=dump2report($dump);
-	    compare_reports (\%R, \%D);
-	  }
-
 	
-	if (! -e $dump)
+	if (!-e $ndump)
 	  {
-	    open (F, ">$dump");
-	    print F "<dumpIO><cl>$com</cl><stack>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</stack><file><stream>output</stream><name>stderr</name><content>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</content></file></dumpIO>\n";
-	    close(F);
+	    open (F, ">$ndump");
+	    print F "<DumpIO><cl>$com</cl><stack>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</stack><file><stream>output</stream><name>stderr</name><content>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</content></file></DumpIO>\n";
+	    close (F);
 	  }
 	else
 	  {
-	    substitute_cl4dump($dump,$com);
+	    substitute_cl4dump($ndump,$com);
 	  }
-
-#Prepare the report	
+	
 	$report="";	
 	if ($D{error} || $D{MissingOutput})
 	  {
 	    $tot_failure++;
 	    $cl{$com}{status}="failure";
-	    for (my $a=0; $a< $cl{$com}{n}; $a++)
+	    for (my $a=0; $a< $cl2{n}; $a++)
 	      {
-		$report.="##FAILURE [$dump_num] -- COM -- $com -- Manual: $cl{$com}{$a}{file} -- Line: $cl{$com}{$a}{line} -- $dump\n";
+		$report.="##FAILURE [$dump_num] -- COM -- $com -- Manual: $cl2{$a}{source} -- Line: $cl2{$a}{line} -- $ndump\n";
 	      }
 	    if ($D{error})
 	      {
@@ -479,9 +544,9 @@ foreach my $com (sort (keys (%cl)))
 	  {
 	    $tot_failure++;
 	    $cl{$com}{status}="failure";
-	    for (my $a=0; $a< $cl{$com}{n}; $a++)
+	    for (my $a=0; $a< $cl2{n}; $a++)
 	      {
-		$report.="##FAILURE [$dump_num] -- COM -- $com -- Manual: $cl{$com}{$a}{file} -- Line: $cl{$com}{$a}{line} -- dump: $dump\n";
+		$report.="##FAILURE [$dump_num] -- COM -- $com -- Manual: $cl2{$a}{source} -- Line: $cl{$a}{line} -- dump: $ndump\n";
 	      }
 	    $report .="##FAILURE [$dump_num] -- SHELL ERROR -- Check the Command Line Syntax\n";
 	    
@@ -491,9 +556,9 @@ foreach my $com (sort (keys (%cl)))
 	    $tot_warning++;
 	    $cl{$com}{status}="warning";
 	    $success=1;
-	    for (my $a=0; $a< $cl{$com}{n}; $a++)
+	    for (my $a=0; $a< $cl2{n}; $a++)
 	      {
-		$report.="##WARNING [$dump_num] -- COM -- $com -- Manual: $cl{$com}{$a}{file} -- Line: $cl{$com}{$a}{line} -- dump: $dump\n";
+		$report.="##WARNING [$dump_num] -- COM -- $com -- Manual: $cl2{$a}{source} -- Line: $cl2{$a}{line} -- dump: $ndump\n";
 	      }
 	  }
 	else
@@ -501,30 +566,45 @@ foreach my $com (sort (keys (%cl)))
 	    $tot_success++;
 	    $cl{$com}{status}="success";
 	    $success=1;
-	    for (my $a=0; $a< $cl{$com}{n}; $a++)
+	    for (my $a=0; $a< $cl2{n}; $a++)
 	      {
-		$report.="##SUCCESS [$dump_num] -- COM -- $com -- Manual: $cl{$com}{$a}{file} -- Line: $cl{$com}{$a}{line} -- dump: $dump\n";
+		$report.="##SUCCESS [$dump_num] -- COM -- $com -- Manual: $cl2{$a}{source} -- Line: $cl2{$a}{line} -- dump: $ndump\n";
+		open (F, ">>$ndump");
+		print F "<ref>\n<source>$cl2{$a}{source}</source>\n<line>$cl2{$a}{line}</line>\n</ref>\n";
+		close (F);
 	      }
 	  }
-
-	print "##$count Out of $n_com\n$report";
+	
+	print "##$com_index Out of $n_com\n$report";
 	open (LOG, ">>$log");print (LOG "$report");close (LOG);
-
-
+	
+	
 	
 
 	if ($success)
 	  {
-	    if (!$ref)   {mymove ($dump,$dir{ref});}
-	    else {mymove ($dump,$dir{latest});}
-	    if ($failed) {purgedir4dump($dir{"failed"}, $com);}
+	    purgedir4dump($dir{"failed"}, $com);
+	    if    ($mode eq "new")   {mymove ($ndump,$dir{ref});}
+	    elsif ($mode eq "update")
+	      {
+		if (!$ref){mymove ($ndump,$dir{ref});}
+		else {mymove ($ndump,$dir{latest});}
+	      }
+	    elsif ($mode eq "failed")
+	      {
+		mymove ($ndump,$dir{ref});
+		
+	      }
+	    elsif ($mode eq "check")
+	      {
+		unlink ($ndump);
+	      }
 	  }
 	elsif (!$success)
 	  {
-	    mymove ($dump,$dir{failed});
+	    if (!$failed){mymove ($ndump,$dir{failed});}
+	    if ( $stop_on_failed){exit;}
 	  }
-	
-	if (!$success && $stop_on_failed){exit;}
       }
   }
 
@@ -532,7 +612,8 @@ foreach my $com (sort (keys (%cl)))
 #Finalize the report
 
 $report="## SUMMARY -- COMPLETE -- TOT: $tot_tot FAILURE: $tot_failure WARNING: $tot_warning SUCCESS: $tot_success\n";
-foreach my $rst (@rstlist)
+
+foreach my $rst (cl2source (\%cl))
   {
     my ($failure, $success, $warning, $tot);
     $tot=$failure=$warning=$success=0;
@@ -542,7 +623,7 @@ foreach my $rst (@rstlist)
 	  {
 	    for (my $a=0; $a<$cl{$com}{n}; $a++)
 	      {
-		if ($cl{$com}{$a}{file} eq $rst)
+		if ($cl{$com}{$a}{source} eq $rst)
 		  {
 		    if    ($cl{$com}{status} eq "failure"){$failure++;}
 		    elsif ($cl{$com}{status} eq "warning"){$warning++;}
@@ -556,9 +637,43 @@ foreach my $rst (@rstlist)
   }
 print "$report";
 open (LOG, ">>$log");print (LOG "$report");close (LOG);
-purge(\%cl, \%dir);
+if ($clean=~/dump/)
+  {
+    purge(\%cl, \%dir);
+  }
+elsif ($clean=~/ref/)
+  {
 
-die;
+    foreach my $com (sort (keys (%cl)))
+      {
+	if (($cl{$com}{ref}{n} && !$cl{$com}{docs}{n}) )
+	  {
+
+	    for (my $i=0; $i<$cl{$com}{ref}{n}; $i++)
+	      {
+		my $dump=$cl{$com}{ref}{$i}{file};
+		myunlink ($dump);
+	      }
+	  }
+      }
+  }
+elsif ($clean=~/failed/)
+  {
+
+    foreach my $com (sort (keys (%cl)))
+      {
+	if (($cl{$com}{ref}{n} && $cl{$com}{failed}{n}) || (!$cl{$com}{docs}{n}) )
+	  {
+
+	    for (my $i=0; $i<$cl{$com}{failed}{n}; $i++)
+	      {
+		my $dump=$cl{$com}{failed}{$i}{file};
+		myunlink ($dump);
+	      }
+	  }
+      }
+  }
+exit;
 
 #end main block
 sub docdump
@@ -569,10 +684,10 @@ sub docdump
     
     foreach my $c (keys (%{$cl}))
       {
-	for (my $a=0; $a<$cl->{$c}{n}; $a++)
+	for (my $a=0; $a<$cl->{$c}{doc}{n}; $a++)
 	  {
-	    my $rst=$cl->{$c}{$a}{file};
-	    my $line=$cl->{$c}{$a}{line};
+	    my $rst= $cl->{$c}{doc}{$a}{source};
+	    my $line=$cl->{$c}{doc}{$a}{line};
 	    $new{$rst}{$line}=$c;
 	  }
       }
@@ -582,7 +697,7 @@ sub docdump
 	print F "## File: $file\n";
 	foreach my $l (sort {$a <=> $b} (keys(%{$new{$file}})))
 	  {
-	    printf F "Line: %-4d --- $new{$file}{$l}\n", $l;
+	    printf F "## Line: %-4d --- \n$new{$file}{$l}\n", $l;
 	  }
       }
     close (F);
@@ -658,7 +773,7 @@ sub clean_examples
 sub purge
   {
     my ($cl, $dir)=@_;
-    my $purge;
+    my $npurged;
     
     print "Purge deprecated Command Lines ...\n";
     foreach my $d ( keys (%{$dir}))
@@ -673,15 +788,16 @@ sub purge
 	    if ($dump=~/\.dump/)
 	      {
 		my $com=dump2cl($dump);
-		if (!$cl->{$com}{0}{doc})
+		if (!$cl->{$com}{doc}{n})
 		  {
 		    print "-----  Purge $dump\n";
-		    myunlink ("$dump");
+		    myunlink ($dump);
+		    $npurged++;
 		  }
 	      }
 	  }
       }
-    return $purge;
+    return $npurged;
   }
 
 
@@ -748,37 +864,58 @@ sub compare_reports
       }
     return;
   }
+sub system4tc
+    {
+      my $com=shift;
+      system ("t_coffee -clean >/dev/null 2>/dev/null");
+      return system ($com);
+    }
+    
 sub dump2run
   {
     my ($idump, $odump, $com)=@_;
     
     my $dir=random_string();
+
     system ("mkdir $dir");
     chdir  ($dir);
     
-
     if (!$com){$com=dump2cl($idump);}
+
+    
+
+    if ($com =~/.*\|(.*)/)
+      {
+	$com=$1;
+      }
     my %ref=xml2tag_list ($idump, "file");
-      
+    
+
     for (my $i=0; $i<$ref{n};$i++)
 	{
+	  
 	  my $stream=xmltag2value($ref{$i}{body},"stream");
 	  my $name=xmltag2value($ref{$i}{body},"name");
 	  my $content=xmltag2value($ref{$i}{body},"content");
+	  $content=~s/$RETURN/\n/g;
+	  
 	  
 	  if ($stream eq "input")
 	    {
-	      open (F, ">%s", $name);
+	      open (F, ">$name");
 	      print F "$content";
 	      close (F);
 	      
 	      if ($name eq "stdin"){$com="cat stdin | $com";}
 	    }
 	}
-    my $shell=system ("export DUMP_4_TCOFFEE=$odump;$com >/dev/null 2>/dev/null");
+
+    my $shell=system4tc ("export DUMP_4_TCOFFEE=$odump;$com >/dev/null 2>/dev/null");
     system ("rm *");
     chdir ("..");
+    
     system ("rmdir $dir");
+    
     return $shell;
   }
   
@@ -852,6 +989,45 @@ sub wraptext
     return $ret;
   }
 
+sub refdump2cl
+  {
+    my ($dump, $cl, $type)=@_;
+    
+    if (!-e $dump || !isdump($dump)){return;}
+    my $com=dump2cl($dump);
+    
+
+    my %h=xml2tag_list ($dump, "ref");
+    if (!$h{n}){$h{n}=1;}
+    for (my $i=0; $i<$h{n};$i++)
+	{
+	  my $n=$cl->{$com}{$type}{n}++;
+	  my $source=xmltag2value($h{$i}{body},"source");
+	  my $line=xmltag2value($h{$i}{body},"line");
+	  $cl->{$com}{$type}{$n}{command}=$com;
+	  $cl->{$com}{$type}{$n}{file}=$dump;
+	  $cl->{$com}{$type}{$n}{line}=$line;
+	  $cl->{$com}{$type}{$n}{source}=$source;
+	  
+	}
+    return $com;
+  }
+sub cl2source
+    {
+      my $cl=shift;
+      my %h;
+
+      foreach my $com (keys (%{$cl}))
+	{
+	  for (my $i=0; $i< $cl->{$com}{n}; $i++)
+	    {
+	      my $file=$cl->{$com}{$i}{source};
+	      $h{$file}=1;
+	    }
+	}
+      return keys (%h);
+    }
+      
 sub dump2cl
    {
      my ($file)=@_;
@@ -909,10 +1085,10 @@ sub rst2cl
 	      $command=clean_command($command);
 	      
 	      
-	      my $n=$cl->{$command}{n}++;
-	      $cl->{$command}{$n}{doc}=$command;
-	      $cl->{$command}{$n}{file}=$rst;
-	      $cl->{$command}{$n}{line}=$clineN;
+	      my $n=$cl->{$command}{doc}{n}++;
+	      $cl->{$command}{doc}{$n}{command}=$command;
+	      $cl->{$command}{doc}{$n}{source}   =$rst;
+	      $cl->{$command}{doc}{$n}{line}   =$clineN;
 	      $command="";
 	    }
 	}
@@ -951,7 +1127,7 @@ sub display_command
 	  {
 	    for (my $a=0; $a< $cl{$com}{n}; $a++)
 	     {
-	       print "#D [$com] -- $cl->{$com}{$a}{file} -- $cl->{$com}{$a}{line}\n";
+	       print "#D [$com] -- $cl->{$com}{$a}{source} -- $cl->{$com}{$a}{line}\n";
 	     }
 	    if ($cl{$com}{0}{ref})
 	      {
@@ -968,6 +1144,51 @@ sub xmltag2value
     %TAG=xml2tag_list ($string_in, $tag);
     return $TAG{0}{body};
   }
+sub xml2tag_list_test
+ { 
+   my ($string_in,$tag)=@_;
+   my ($tag_in, $tag_out, $string, $tag_in1, $tag_in2);
+   my (@l, $in, $n, $t);
+   my %tag;
+   my $r1=random_string (20);
+   my $r2=random_string (20);
+   my $r3=random_string (20);
+   my $r4=random_string (20);
+   
+
+   my $tag_in="<$tag>";
+   my $tag_out="<\/$tag>";
+   my $tag_inR=" $r1 ";
+   my $tag_outR=" $r2 ";
+   my $openR=" $r3 ";
+   my $closeR=" $r4 ";
+   
+   
+   if (-e $string_in)
+     {
+       $string=&file2string ($string_in);
+     }
+   else
+     {
+       $string=$string_in;
+     }
+   
+   $string=~s/$tag_in/$tag_inR/g;
+   $string=~s/$tag_out/$tag_outR/g;
+   $string=~s/\</$openR/g;
+   $string=~s/\>/$closeR/g;
+   $string=~s/$tag_inR/\</g;
+   $string=~s/$tag_outR/\>/g;
+   
+   my @l=($string=~/\<([^>]+)\>/g);
+   foreach my $e (@l)
+     {
+       $e=~s/$openR/\</g;
+       $e=~s/$closeR/\>/g;
+       $tag{$tag{n}++}{body}=$e;
+     }
+   return %tag;
+ }
 
 sub xml2tag_list
   {
@@ -984,8 +1205,8 @@ sub xml2tag_list
       {
 	$string=$string_in;
       }
-   
-    
+    my $cwd=$cw;
+        
     $tag_in1="<$tag ";
     $tag_in2="<$tag>";
     $tag_out="/$tag>";
@@ -996,18 +1217,14 @@ sub xml2tag_list
     @l=($string=~/(\<[^>]+\>)/g);
     $tag{n}=0;
     $in=0;$n=-1;
-
-
-
+    
     foreach $t (@l)
       {
-	
 	$t=~s/<#//;
 	$t=~s/#>//;
 
 	if ( $t=~/$tag_in1/ || $t=~/$tag_in2/)
 	  {
-
 	    $in=1;
 	    $tag{$tag{n}}{open}=$t;
 	    $n++;
@@ -1031,15 +1248,55 @@ sub xml2tag_list
     return %tag;
   }
 
-sub isdump
+sub file_isdump
     {
       my $f=shift;
+      if (!-e $f) {return 0;}
       open (F, "$f");
-      <F>;
-      my $l=$_;
-      return $l=~/DumpIO/;
+      while (<F>)
+	{
+	  my $l=$_;
+	  close (F);
+	  return $l=~/DumpIO/;
+	}
+    }
+sub isdump
+    {
+      my $f1=shift;
+      if (-d $f1)
+	{
+	  my @l=dir2file_list ($f1);
+	  foreach my $f2 (@l)
+	    {
+	      if (file_isdump ("$f1/$f2")){return 1;}
+	    }
+	  return 0;
+	}
+      else
+	{
+	  return file_isdump ($f1);
+	}
+    }
+sub isrst
+    {
+      my $f1=shift;
+      if (-d $f1)
+	{
+	  my @l=dir2file_list ($f1);
+	  foreach my $f2 (@l)
+	    {
+	      if ($f2=~/\.rst$/) {return 1;}
+	    }
+	  return 0;
+	}
+      else
+	{
+	  return ($f1=~/\.rst$/);
+	}
     }
     
+
+
 sub file_contains
   {
     my ($file, $tag, $max)=(@_);
@@ -1228,7 +1485,10 @@ sub dir2file_list
 	 {
 	   if ($f ne "." && $f ne "..")
 	     {
-	       if ($pattern && $f=~/$pattern/){push (@nl,$f);}
+	       if ($pattern)
+		 {
+		   if ($f=~/$pattern/){push (@nl,$f);}
+		 }
 	       else {{push (@nl,$f);}}
 	     }
 	 }
@@ -1248,18 +1508,85 @@ sub random_string
 	     my $c=int(rand($#l+1));
 	     $ret.=$l[$c];
 	   }
-	 print "Random: $ret\n";
 	 return $ret;
        }
 sub check_dir
        {
 	 my $dir=shift;
 
-	 if (!-d $dir)
-
-	    {
-	      print STDERR "ERROR: $dir could not be found. In default mode run tze script from the repository root [FATAL]\n";
-	      die;
-	    }
+	 if (!-d $dir && !-e $dir)
+	   
+	   {
+	     print STDERR "ERROR: $dir could not be found. In default mode run the script from the repository root [FATAL]\n";
+	     die;
+	   }
 	 return;
        }
+     
+sub add_before_list
+       {
+	 my ($add,@list)=@_;
+	 for (my $a=0; $a<=$#list; $a++)
+	   {
+	     $list[$a]=$add.$list[$a];
+	   }
+	 return @list;
+       }
+sub add_after_list
+      {
+	my (@list, $add)=@_;
+	for (my $a=0; $a<=$#list; $a++)
+	  {
+	    $list[$a]=$list[$a].$add;
+	  }
+	return @list;
+      }	 
+sub syncfiles
+    {
+      my ($from, $to)=@_;
+      if (!-d $from || !-d $to){return;}
+      my $n=0;
+      
+      system ("rm $to/*");
+      my @list=dir2file_list($from);
+      foreach my $f (@list)
+	{
+	  $f="$from/$f";
+	  if ( -e $f && !-d $f)
+	    {$n++;
+	     copy ($f, $to);
+	   }
+	}
+      return $n;
+    }
+sub path2name
+      {
+	my $f=shift;
+	if (!($f=~/\//)){return $f;}
+	else
+	  {
+	    $f =~/.*\/([^\/]+)/;
+	    return $1;
+	  }
+      }
+sub rpath2apath
+      {
+	my $f=shift;
+	my $cw=cwd();
+	
+	if ($f=~/^\//)
+	  {
+	    return $f;
+	  }
+	elsif ($f=~/^\.\/(.*)/)
+	  {
+	    
+	    return "$cw/$1";
+	  }
+	else
+	  {
+	    return "$cw/$f";
+	  }
+      }
+	  
+

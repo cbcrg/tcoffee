@@ -855,13 +855,6 @@ int quantile (int argc, char *argv[])
   if (strm (argv[1], "stdin"))
     {
       name=capture_stdin();
-      //name=vtmpnam(NULL);
-      //fp=vfopen (name, "w");
-      //while ( (c=fgetc(stdin))!=EOF)
-      //{
-      //  fprintf ( fp, "%c", c);
-      //}
-      //vfclose (fp);
     }
   else
     name=argv[1];
@@ -5601,7 +5594,9 @@ char *capture_stdin ()
 	  fprintf ( fp, "%c", c);
 	}
       fclose (fp);
+      set_string_variable ("stdin", file);
     }
+
   return file;
 }
 
@@ -5759,7 +5754,17 @@ void dump_io(char *target, char *nature)
       warning_msg (fp);
       fprintf (fp, "</warning>\n");
       
+
+      if (get_string_variable ("stdin"))
+	{
+	  char *d=dump_io_start(NULL);
+	  FILE *fp;
       
+	  fp=fopen (d, "a");
+	  fprintf  (fp, "stdin r\n");
+	  fclose (fp);
+	}
+
       n=0;
       list=file2list (dump_io_start (NULL), "\n ");
       
@@ -5768,7 +5773,7 @@ void dump_io(char *target, char *nature)
 	  char *file=list[n][1];
 	  char *mode=list[n][2];
 	  int skip=0;
-	  if (file_exists (NULL,file) && ! strstr (file, "/tmp/") && ! strstr (file, "/lck/") && !strm (mode, "a")) 
+	  if (strm (file, "stdin") || (file_exists (NULL,file) && ! strstr (file, "/tmp/") && ! strstr (file, "/lck/") && !strm (mode, "a"))) 
 	    {
 	      int a;
 	      
@@ -5794,7 +5799,8 @@ void dump_io(char *target, char *nature)
 		  else
 		    fprintf (fp, "<name>%s</name>\n",file);
 		  
-		  fprintf (fp, "<content>\n");
+		  fprintf (fp, "<content>");
+		  if (strm (file, "stdin"))file=get_string_variable ("stdin");
 		  
 		  fp2=fopen (file, "r");
 		  while ((c=fgetc(fp2))!=EOF)fprintf ( fp, "%c", c);
@@ -6370,18 +6376,7 @@ FILE * vfopen  ( char *name_in, char *mode)
     else if ( strm3 ( name, "stdin","STDIN","Stdin"))
 	{
 	  
-	  if (!stdin_file)
-	    {
-	      stdin_file=capture_stdin();
-	      //stdin_file=vtmpnam (NULL);
-	      //tmp_fp=vfopen ( stdin_file, "w");
-	      //while ( (c=fgetc(stdin))!=EOF)
-	      //{
-	      //  fprintf (tmp_fp, "%c", c);
-	      //}
-	      //vfclose ( tmp_fp);
-	    }
-	  
+	  if (!stdin_file)stdin_file=capture_stdin();
 	  return vfopen (stdin_file, "r");
 	}
 
