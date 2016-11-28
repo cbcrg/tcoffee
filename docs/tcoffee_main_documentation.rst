@@ -2,7 +2,7 @@
 T-Coffee Main Documentation
 ###########################
 
-.. Note:: The T-Coffee Documentation has been modified and updated, november 2016, to improve its readibility and incorporate all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, contact us...we welcome any feedback!
+.. Note:: This chapter has been extensively updated in 11/2016. We improved its readibility and incorporate all the latest development of the past years (PSI/TM-Coffee for homology extension based MSAs, Pro-Coffee for functional DNA, R-Coffee/SARA-Coffee for RNA, TCS and STRIKE for evaluating MSAs, T-RMSD for structural clustering). If you have any suggestion or correction, don't hesitate to contact us.
 
 
 *******************
