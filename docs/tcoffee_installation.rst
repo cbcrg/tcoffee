@@ -125,7 +125,7 @@ Why do I need BLAST with T-Coffee?
 The most accurate modes of T-Coffee scan the databases for templates that they use to align the sequences. Let's see how to get BLAST up and running, from the easy solution to tailored ones. There are currently two types of templates for proteins: 
 
  1) **structures**, that can be found by a BLASTP against the PDB database.
- 2) **profiles**, that can be constructed using either a BLASTP or a PSI-BLAST against nr or UniProt. 
+ 2) **profiles**, constructed using BLASTP or PSI-BLAST against nr or UniProt. 
  
 Don't worry, these templates are automatically built by T-Coffee when using one of the following modes:
 
@@ -325,11 +325,11 @@ Expresso/3D-Coffee are special modes of T-Coffee that allow to combine sequences
 
 ::
 
-  Using a local version of the PDB databse:
-  ##: setenv (or export) PDB_DIR <abs path>/data/structures/all/pdb/
-  ##: setenv (or export) PDB_DIR <abs path>/structures/divided/pdb/
+  Using a local version of the PDB database:
+  ##: setenv (or export) PDB_DIR <PATH>/data/structures/all/pdb/
+  ##: setenv (or export) PDB_DIR <PATH>/structures/divided/pdb/
 
-The T-RMSD tools comes along with T_Coffee package in order to build clustering based on structure. In addition to structural information, it also requires the package Phylip, containing lots of phylogenetic tree reconstruction tools. If you need more information about the different Phylip tools, information can be obtained `here <http://www.evolution.genetics.washington.edu/phylip.html>`_. 
+The T-RMSD tools comes along with T_Coffee package in order to build clustering based on structure. In addition to structural information it also requires the package Phylip, containing lots of phylogenetic tree reconstruction tools. If you need more information about the different Phylip tools, information can be obtained `here <http://www.evolution.genetics.washington.edu/phylip.html>`_. 
 
 R-Coffee associated packages
 ============================
