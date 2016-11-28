@@ -10,6 +10,7 @@ In this chapter we describe briefly the available T-Coffee web servers and their
 General
 *******
 Most of the following command lines used by the web server contains lots of different options called with flags; here is a summary of the options common to all comand lines:
+
   - **-in**: your input file
   - **-output**: specifies the output files you require
   - **-maxnseq**: maximum number of sequences you can run (variable depending on the mode)
@@ -70,10 +71,10 @@ Two options are available (in addition to the choice of the database): without t
       =5000 -case upper -seqnos=off -outorder input -run_name result -multi_core 4 -quiet=stdout
 
   $#: tmcoffee.sh -in data_9df741d4.in -mode psicoffee -blast_server LOCAL --search-db 'UniRef50 \
-    -- Very Fast/Rough' --search-type 'transmembrane' -prot_min_sim 50 -prot_max_sim 90 \
-    -prot_min_cov 70 --search-out 'clustalw_aln fasta_aln score_ascii phylip score_html' -maxnseq \
-    1000 -maxlen 5000 -case upper -seqnos off -outorder input -run_name result -multi_core 4 \
-    -quiet=stdout
+      -- Very Fast/Rough' --search-type 'transmembrane' -prot_min_sim 50 -prot_max_sim 90 \
+      -prot_min_cov 70 --search-out 'clustalw_aln fasta_aln score_ascii phylip score_html' -maxnseq \
+      1000 -maxlen 5000 -case upper -seqnos off -outorder input -run_name result -multi_core 4 \
+      -quiet=stdout
 
 
 PSI-Coffee (homology extension)
@@ -81,10 +82,10 @@ PSI-Coffee (homology extension)
 
 ::
 
-    $#: t_coffee -in=data_93c5fbb0.in -mode=psicoffee -blast=LOCAL -protein_db=/db/ncbi/201511/ \
-        blast/db/nr.fa -output=score_html clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 \
-        -maxlen=2500 -case=upper -seqnos=off -outorder=input -run_name=result -multi_core=4 \
-        -quiet=stdout
+  $#: t_coffee -in=data_93c5fbb0.in -mode=psicoffee -blast=LOCAL -protein_db=/db/ncbi/201511/ \
+      blast/db/nr.fa -output=score_html clustalw_aln fasta_aln score_ascii phylip -maxnseq=150 \
+      -maxlen=2500 -case=upper -seqnos=off -outorder=input -run_name=result -multi_core=4 \
+      -quiet=stdout
 
 
 *************
@@ -106,25 +107,26 @@ SARA-Coffee is a bit complicated to run, it uses several third party packages an
 
 ::
 
-  export X3DNA=/data/www-cn/sara_coffee_package/X3DNA; 
-  export PDB_DIR=/data/www-cn/sara_coffee_package/PDBdir/; 
-  export NO_REMOTE_PDB_DIR=1; 
-  unset MAFFT_BINARIES;
+  ##: export X3DNA=/data/www-cn/sara_coffee_package/X3DNA; 
+  ##: export PDB_DIR=/data/www-cn/sara_coffee_package/PDBdir/; 
+  ##: export NO_REMOTE_PDB_DIR=1; 
+  ##: unset MAFFT_BINARIES;
   (cd $CACHE_4_TCOFFEE; ln -s /data/www-cn/sara_coffee_package/pdb_entry_type.txt);
   $#: t_coffee -in data_3e6e7aec.in -method sara_pair -template_file \
       /data/www-cn/sara_coffee_package/TEMPLATEFILE,RNA -extend_mode rna2 -relax_lib 0 -transform \
       dna2rna -run_name=result -output score_html clustalw_aln -case=upper -seqnos=off -outorder= \
       input -multi_core=4 -pdb_min_sim 0 -quiet stdout
  
-RM-Coffee (combining multiple methods) (uner maintenance...)
+RM-Coffee (combining multiple methods) 
 ======================================
-
+Not yet available...
 
 *************
 DNA Sequences
 *************
-M-Coffee (combining multiple methods) (under maintenance...)
+M-Coffee (combining multiple methods) 
 =====================================
+For now, M-Coffee by default is the same for DNA, RNA and protein sequences alike. There is no specific M-Coffee for DNA sequences.
 
 Pro-Coffee (homologous promoter regions)
 ========================================
@@ -163,10 +165,10 @@ T-RMSD (structural clustering)
 ::
 
   $#: t_coffee -in=data_b89d3438.in -mode=expresso -cache=$PWD -blast=LOCAL -pdb_db=/db/pdb/ \
-  derived_data_format/blast/2016-01-01/pdb_seqres.fa -evaluate_mode=t_coffee_slow -output=aln \
-  score_html -maxnseq=150 -maxlen=2500 -case=upper -outorder=input -run_name=result -multi_core=4 \
-  -quiet=stdout; t_coffee -other_pg trmsd result.aln -template_file result_pdb1.template_list \
-  -output color_html 2>&1; [ -e result.struc_tree.consensus ]
+      derived_data_format/blast/2016-01-01/pdb_seqres.fa -evaluate_mode=t_coffee_slow -output= \
+      aln score_html -maxnseq=150 -maxlen=2500 -case=upper -outorder=input -run_name=result \
+      -multi_core=4 -quiet=stdout; t_coffee -other_pg trmsd result.aln -template_file \
+      result_pdb1.template_list -output color_html 2>&1; [ -e result.struc_tree.consensus ]
 
 STRIKE (MSA evaluation with single structure) (under maintenance...)
 =============================================
