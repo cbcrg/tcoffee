@@ -20,7 +20,7 @@ Contents:
    tcoffee_faq
    
    tcoffee_citations_references
-   tcoffee_adresses_and_contacts
+   tcoffee_contacts_adresses
    tcoffee_license
 
 
