@@ -1240,6 +1240,8 @@ PSI-Coffee is currently the most accurate mode of T-Coffee but also the slowest.
 
 .. warning:: PSI/TM-Coffee requires BLAST and a database to search; if you don't have BLAST installed locally, it will use the BLAST default of T-Coffee. More importantly, if you don't specify a reduced database for TM-Coffee, it will run on nr and be equal to PSI-Coffee.
 
+.. hint:: When running PSI/TM-Coffee, T-Coffee will use the BLAST EBI by default; it can happen that the web service is unavailable from time to time, T-Coffee will return a warning asking you to use NCBI BLAST instead. You can either do that or wait and rerun your job later on.
+
 
 Using protein 2D/3D structural information 
 ==========================================
@@ -1322,7 +1324,7 @@ T-Coffee can be used to predict secondary structures and transmembrane domains. 
 
 Single sequence prediction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
-To make a secondary structure prediction with GOR, run the following. In this command line SSP is a hard coded mode. It prompts the computation of predicted secondary structures. Used this way, the method will produce for each sequence a secondary prediction file (<sequence_name>.ssp). GOR is a single sequence with a relatively low accuracy. It is possible to increase the accuracy by coupling BLAST and GOR (command 2). When doing so, the predictions for each sequence are obtained by averaging the GOR predictions on every homologue as reported by a BLAST against nr. By default the BLAST is done remotely at the NCBI using the blastpgp web service of the EBI. Transmembrane structures can also be carried out simply, or following the same previous strategy (command 3 and 4).
+To make a secondary structure prediction T-Coffee used the GOR software. In the command line **-template_file=SSP** is a hard coded mode which prompts the computation of predicted secondary structures. Used this way, the method will produce for each sequence a secondary prediction file (``<sequence_name>.ssp``). GOR run on single sequences with a relatively low accuracy, which can be increased by coupling it with BLAST (command 2). When doing so, the predictions for each sequence are obtained by averaging the GOR predictions on every homologue as reported by a BLAST against nr. By default the BLAST is done remotely at the NCBI using the BLASTPGP web service of the EBI. Transmembrane structures can also be carried out simply, or following the same previous strategy (command 3 and 4).
 
 ::
 
@@ -1363,7 +1365,7 @@ If you have your own predictions, you can use them to run T-Coffee providing you
 ::
 
 
-  Command line:
+  Command:
   $#: t_coffee sample_seq1.fasta -template_file sample_seq1_ssp.template -method_evaluate_mode \
       ssp -method lalign_id_pair
       
@@ -1394,13 +1396,13 @@ You can output a color coded version of your alignment using the secondary predi
 
 Aligning RNA sequences 
 ======================
-RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, we have developped specific modes and tools for RNA alignment and analysis (see subsection **Manipulating RNA Sequences** for more details). If you are interested in RNA, have a look `there <http://www.bio.inf.uni-jena.de/Software/MARNA/>`_.
+RNA sequences are very important and almost every-where these days. The main property of RNA sequences is to have a secondary structure that can be used to guide the alignment. While the default T-Coffee has no special RNA alignment method incorporated in, we have developped specific modes and tools for RNA alignment and analysis (see subsection **Manipulating RNA Sequences** for more details).
 
 R-Coffee, many possibilities
 ----------------------------
 Introduction
 ^^^^^^^^^^^^
-R-Coffee is the special mode of T-Coffee developped to handle specifically RNA sequences. It has been proven far more accurate than T-Coffee default, because of its specific design. It can be run as a standalone aligner (using secondary structure prediction) or using third party software.
+R-Coffee is the special mode of T-Coffee developped to handle specifically RNA sequences. It has been proven far more accurate than T-Coffee default because of its specific design. It can be run as a standalone aligner (using secondary structure prediction) or using third party software.
 
 R-Coffee: aligning RNA sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1420,15 +1422,14 @@ There are two modes we proposed to improve R-Coffee alignments: 1) using the bes
 
 ::
 
-
-  Using Consan (best): (under maintenance...)
+  Using Consan (best):
   $#: t_coffee sample_rnaseq1.fasta -mode rcoffee_consan
 
-  
+ 
   Using multiple methods:
   $$: t_coffee sample_rnaseq1.fasta -mode rmcoffee
 
-.. tip:: In order to know if a RNA MSA is better than another one, the best is to visualize the compensatory mutations of the secondary structure: have a look at the subsection **Manipulating RNA Sequence4s**.
+.. tip:: In order to know if a RNA alignment is better than another one, the best is to visualize the compensatory mutations of the secondary structure: look at the subsection **Manipulating RNA Sequences**.
 
 Using SARA-Coffee
 -----------------
@@ -1445,24 +1446,24 @@ Follow the procedure:
   2) Install or update vagrant from: http://www.vagrantup.com
 
   3) Clone the sara-coffee virtual machine (this project) in a convenient location
-     $: git clone https://github.com/cbcrg/sara-coffee-vm.git
+     ##: git clone https://github.com/cbcrg/sara-coffee-vm.git
      
   4) Enter the sara-coffee-vm folder and launch vagrant
-     $: cd sara-coffee-vm/
-     $: vagrant up  
+     ##: cd sara-coffee-vm/
+     ##: vagrant up  
 
 The first time you run it, it will automatically download the virtual machine and all the packages required by SARA-Coffee. It may take some minutes to complete, so be patient. When it boots up and the configuration steps are terminated, login into the VM instance:
 
 ::
 
   1) Login in VM:
-     $: vagrant ssh
+     ##: vagrant ssh
   
   2) Go to SARA-Coffee:
-     $: cd sara_coffee_package/
+     ##: cd sara_coffee_package/
      
   3) Run SARA-Coffee:
-     $: ./sara_coffee.sh <input file> <output file>
+     ##: ./sara_coffee.sh <input file> <output file>
      
 The folder '/vagrant/' is shared between the Sara-Coffee virtual and your local machine. On your local machine, this folder is the one in which you started vagrant (i.e. sara-coffee-vm). When finished, stop the VM using the command **vagrant halt** or **vagrant destroy**, depending if you want to temporary stop the execution or delete permanently the VM with all its files.   
 
@@ -1473,10 +1474,10 @@ SARA-Coffee is also distributed as a Docker container. This will allow you to ru
 ::
 
   Command 1: Pull SARA-Coffee container
-  $: docker pull cbcrg/saracoffee**.  
+  ##: docker pull cbcrg/saracoffee**.  
   
   Command 2: Run SARA-Coffee
-  $: docker run -v $PWD:$PWD -w $PWD cbcrg/saracoffee <input> <output>**
+  ##: docker run -v $PWD:$PWD -w $PWD cbcrg/saracoffee <input> <output>**
 
 
 .. Note:: this command assumes your input file is located in the working directory. If this is not the case, you will need to mount the input file path accordingly. 
@@ -1486,7 +1487,7 @@ Aligning DNA sequences
 ======================
 Aligning DNA sequences
 ----------------------
-MSA methods are not at their best when aligning DNA sequences. Whenever you can, try using a local MSA package like the Gibbs sampler; yet if you believe your DNA sequence are homologous over their entire length, you can use T-Coffee. In theory, the program automatically recognizes DNA sequences and uses appropriate methods, yet adding the -type=dna flag cannot do any harm...
+MSA methods are not at their best when aligning DNA sequences. Whenever you can, try using a local MSA package like the Gibbs sampler; yet if you believe your DNA sequence are homologous over their entire length, you can use T-Coffee. In theory, the program automatically recognizes DNA sequences and uses appropriate methods, yet adding the **-type=dna flag** cannot do any harm...
 
 ::
 
@@ -1514,7 +1515,6 @@ Pro-Coffee is a MSA method specifically designed for promoter regions or other o
 
   Command 3: Extracting regions
   $$: t_coffee -other_pg seq_reformat -in c18orf19.aln -action +extract_block \
-
       'ENSG00000177150' 1852 1983 > c18orf19_chipseq.aln
 
 .. tip:: If you want more details, we suggest you follow the subsection **Quick Start, Tutorial (Practical Examples)** published in Nature Protocols (2011) or refer to the original article.
@@ -1526,7 +1526,7 @@ Splice variants are especially challenging for most MSA programs, because the sp
 ::
 
   Command 1: using MUSCLE
-  $: muscle -in sv.fasta -clw -out sv_muscle.aln
+  ##: muscle -in sv.fasta -clw -out sv_muscle.aln
   
   Command 2: using T-Coffee
   $$: t_coffee sv.fasta
@@ -1566,7 +1566,6 @@ Sequence Based Methods
 ======================
 The CORE index
 --------------
-
 .. note:: The CORE index is the basis of T-Coffee estimation of the consistency, however for evaluating alignment we recommend to use the TCS procedure describe in the next section. 
 
 Computing the local CORE index
@@ -1620,12 +1619,11 @@ Output files:
 
 .. warning:: The TCS will create output files containing your results; if you rerun similar jobs or with the same name, TCS will not overwrite the previous outputs but append the new results in the already existing files.
 
-Note that all these output functions are also compatible with the default T-Coffee (command 1) when computing an alignment or with **seq_reformat** (command 2) using a T-Coffee .score_ascii file.
+All these output functions are also compatible with the default T-Coffee (command 1) when computing an alignment or with **seq_reformat** (command 2) using a T-Coffee ``<name>.score_ascii file``.
 
 ::
 
   Command 1:
-
   $$: t_coffee -seq sample_seq1.fasta -output tcs_residue_filter3, tcs_column_filter3, \
       tcs_residue_lower4
 
@@ -1668,7 +1666,6 @@ It is possible to change the way TCS reliability is estimated. This can be done 
       aln, score_html
 
   Command 2:
-
   $$: t_coffee -infile sample_seq1.aln -evaluate -method proba_pair,lalign_id_pair \
       -output score_ascii,aln, score_html
       
@@ -1729,13 +1726,13 @@ How to efficiently use structural information?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 When it comes to evaluating MSAs, nothing is better than structural information. To use the methods we describe here, you will need to have at least two structures, similar enough (>60%) to sequences contained in your dataset. Here an outline of the best way to proceed:
 
- 1) Make sure you include two structures whose sequences are so distantly related that most of the other sequences are intermediates.
- 2) Align your sequences without using the structural information (i.e. T-Coffee, MUSCLE...).
- 3) Evaluate your alignment with iRMSD/NiRMSD (see later in this section); the score will be S1.
- 4) Realign your sequences, but this time using structural information (Expresso).
+ 1) Try to include two structures with distantly related sequences, the other sequences being intermediates.
+ 2) Align your sequences without using the structural information (i.e. T-Coffee, MUSCLE, MAFFT...).
+ 3) Evaluate your alignment with iRMSD/NiRMSD (see later in this section); give this alignment the score S1.
+ 4) Realign your sequences but this time using structural information with Expresso.
  5) Measure the score of that alignment; the score will be S2.
 
-If S1 and S2 are almost similar, it means your distantly related structures were well aligned, and you can expect the intermediate sequences to be well aligned as well. If S2 is much better than S1, you can expect the structures to be well aligned in the second alignment, while there is no guaranty that the alignment of the intermediate sequences has improved as well, although in practice it often does
+If S1 and S2 are almost similar, it means your distantly related structures were well aligned and you can expect the intermediate sequences to be well aligned as well. If S2 is much better than S1, you can expect the structures to be well aligned in the second alignment, while there is no guarantee that the alignment of the intermediate sequences has improved as well, although in practice it often does.
 
 Evaluating an alignment with the iRMSD package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1744,9 +1741,7 @@ Let us evaluate the alignment produced by Expresso using the template file it re
 ::
 
   Running the iRMSD:
-
   $$: t_coffee -other_pg irmsd proteases_small.aln -template_file proteases_small.template
-
 
   Result of the iRMSD evaluation:
   TOTAL     EVALUATED :  50.17 %  
@@ -1771,13 +1766,14 @@ ClustalW   80.62    0.73     1.47      49.55
 ======== ======== ======== ========= =========
 
 
-Evaluating alternative alignments with STRIKE (under maintenance...)
+Evaluating alternative alignments with STRIKE 
 ---------------------------------------------
+To be done...
 
 
 Evaluating a MSA according to your own criterion
 ================================================
-Any kind of Feature can easily be turned into an evaluation grid. For instance, the protease sequences we have been using here have a well characterized binding site. A possible evaluation can be made as follows: let us consider the UniProt annotation of the two distantly related sequences; these two sequences contain the electron relay system of the proteases. We can use it to build an evaluation library: in P29786 (TRY3_AEDAE) the Histidine residue is at position 68 while in P21844 (MCPT5_MOUSE) the functionally equivalent Histidine residue is at position 66. We can therefore build a library that will check whether these two residues are properly aligned in any MSA. The library will look like this:
+Any kind of feature can easily be turned into an evaluation grid. For instance, the protease sequences we have been using here have a well characterized binding site. A possible evaluation can be made as follows: let us consider the UniProt annotation of the two distantly related sequences; these two sequences contain the electron relay system of the proteases. We can use it to build an evaluation library: in P29786 (TRY3_AEDAE) the Histidine residue is at position 68 while in P21844 (MCPT5_MOUSE) the functionally equivalent Histidine residue is at position 66. We can therefore build a library that will check whether these two residues are properly aligned in any MSA. The library will look like this:
 
 
 ::
@@ -1840,7 +1836,6 @@ The following option (command 1) makes it possible to estimate a tree while taki
 :: 
 
   Command 1:
-
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
       +tree replicates 100 +evaluate3D contacts +tree2bs first -output newick -out tree.dnd
 
@@ -1866,7 +1861,6 @@ This same procedure can be used to visualize either intramolecular distance cons
       -action +evaluate3D distances -output score_ascii -out out.ascii
       
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-
       -action +evaluate3D distances -output score_raw -out out.tab
 
 
@@ -1875,7 +1869,6 @@ Visualizing informative positions
 If you have a well defined subgroup of sequences (domains having the same function, same specificity, etc...), it is possible to estimate which columns yield the best support using the following command. The input are an alignment of your sequences, a template file containing the list of structure files to use as templates and a FASTA file of the sequences that form the group whose support you want to analyze. The output will be a colored version of your MSA indicating the sequences that best contribute to your clustering.
 
 ::
-
 
   $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
       -action +tree replicates columns +evaluate3D  distances +evaluateTree group_3Dseq1.fasta \
@@ -1889,8 +1882,7 @@ If you want to check the capacity of an algorithm to bring related sequences wit
 :: 
 
   Command 1: precomputed tree
-  #$: t_coffee -other_pg seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
-
+  ##: t_coffee -other_pg seq_reformat -in <tree> +tree2collapse groups 4 +print nseq -output no
 
   Command 2: computed on the fly
   ##: t_coffee -other_pg seq_reformat -in <aln> -in2 <template> -action +tree replicates 100 \
@@ -1909,7 +1901,7 @@ T-RMSD is a special modof T-Coffee. To run T-RMSD, you just need a MSA (generate
  - ``<input name>.struc_tree.list``: list of all individual trees (one per ungapped column)
  - ``<input name>.struc_tree.consense_output``: basic consensus tree rendering
  - ``<input name>.struc_tree.consensus``: resulting structural tree with support (Newick)
- - ``<input name>.struc_tree.html``: colored MSA according to the contribution to the clustering
+ - ``<input name>.struc_tree.html``: colored MSA according to the contribution to the clusterin#
  
 ::
 
@@ -1976,8 +1968,8 @@ One package is a bit different; **fugue_pair** uses a standard FUGUE installatio
   2) copy fugue/classdef.dat /data/fugue/SUBST/classdef.dat
 
   Configuration:
-  $: setenv MELODY_CLASSDEF=<location>
-  $: setenv MELODY_SUBST=fugue/allmat.dat
+  ##: setenv MELODY_CLASSDEF=<location>
+  ##: setenv MELODY_SUBST=fugue/allmat.dat
 
 
 Modifying the parameters of INTERNAL/EXTERNAL methods
@@ -1997,7 +1989,7 @@ External methods receive a command line built with the information provided via 
 
 ::
 
-  $: <EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
+  ##: <EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
 
 
 You should know what is the best place for squizing your extra parameters. It will depend on the application, although PARAM2 is usually a good guess. Now if you want, for instance to modify the gap penalty of clustalw, you can try the following (of course, you must know the command line of the program you are trying to modify (ClustalW in this case):
@@ -2007,10 +1999,10 @@ You should know what is the best place for squizing your extra parameters. It wi
 
   $$: t_coffee sample_seq1.fasta -method clustalw_msa@EP@PARAM2@-GAPOPEN%e100%s-GAPEXT%e10
   
-  <@EP>: indicates that you will pass an extra parameter
-  <@PARAM1>: is the name of this parameter
-  <%s>: replaces spaces
-  <%e>: replaces the equal sign
+  <@EP>     : indicates that you will pass an extra parameter
+  <@PARAM1> : is the name of this parameter
+  <%s>      : replaces spaces
+  <%e>      : replaces the equal sign
 
 
 Integrating EXTERNAL methods
@@ -2024,7 +2016,7 @@ A special method exists in T-Coffee that can be used to invoke any existing prog
 ::
 
   Command 1: T-Coffee using ClustalW
-  #$: t_coffee sample_seq1.fasta -method=em@clustalw@pairwise
+  $$: t_coffee sample_seq1.fasta -method=em@clustalw@pairwise
 
   Command 2: ClustalW command
   ##: method -infile=<infile> -outfile=<outfile>
@@ -2055,7 +2047,7 @@ T-Coffee can run external method using a ``tc_method`` file that can be used in 
   *************************************************
   
   3) The configuration file will cause T-Coffee to emit the following system call:
-  $: clustalw -INFILE=tmpfile1 -OUTFILE=tmpfile2 -gapopen=-10
+  ##: clustalw -INFILE=tmpfile1 -OUTFILE=tmpfile2 -gapopen=-10
 
   4) Running ClustalW via T-Coffee (in your working DIR):
   $$: t_coffee sample_seq1.fasta -method clustalw_method.tc_method
@@ -2084,10 +2076,10 @@ It may sometimes be difficult to customize the program you want to use through a
   * Note: &amp;bsnp can be used to for white spaces
 
   3) Run the method: 
-  #$: t_coffee sample_seq1.fasta -method generic_method.tc_method
+  $$: t_coffee sample_seq1.fasta -method generic_method.tc_method
 
 
-T-Coffee runs the script tc_generic_method.pl on your data. It also provides the script with parameters. In the case **-method clustalw** indicates that the script should run ClustalW on your data. Over the time, this script will be the place where novel methods will be integrated and make it possible to run any available method. It will be used to run the script **tc_generic_method.pl**, a perl script automatically generated by T-Coffee. Over the time this file will 
+T-Coffee runs the script **tc_generic_method.pl** on your data. It also provides the script with parameters. In the case **-method clustalw** indicates that the script should run ClustalW on your data. Over the time, this script will be the place where novel methods will be integrated and make it possible to run any available method. It will be used to run the script **tc_generic_method.pl**, a perl script automatically generated by T-Coffee.
 
 .. note:: If there is a copy of that script in your local directory, that copy will be used in place of the internal copy of T-Coffee.
 
@@ -2227,16 +2219,19 @@ If the method you wish to use is not supported, or if you simply have the alignm
 
 Customizing the weighting scheme
 --------------------------------
-The previous integration method forces you to use the same weighting scheme for each alignment and the rest of the libraries generated on the fly. This weighting scheme is based on global pairwise sequence identity. If you want to use a more specific weighting scheme with a given method, you should either generate your own library (cf next section) or convert your aln into a lib, using the **-weight** flag. Here are some examples:
+The previous integration method forces you to use the same weighting scheme for each alignment and the rest of the libraries generated on the fly. This weighting scheme is based on global pairwise sequence identity. If you want to use a more specific weighting scheme with a given method, you should either generate your own library (command 1) or convert your alignment into a library (command 2), or use the **-weight** flag (command 3).
 
 ::
 
+  Command 1:
   $$: t_coffee -aln=sample_aln1.aln,sample_aln2.aln -method=fast_pair,lalign_id_pair
-      
+
+  Command 2:
+  $$: t_coffee -aln sample_aln1.aln -lib=test_lib.tc_lib 
+  
+  Command 3:
   $$: t_coffee -aln sample_aln1.aln -out_lib=test_lib.tc_lib -lib_only -weight=sim_pam250mt
       
-  $$: t_coffee -aln sample_aln1.aln -lib=test_lib.tc_lib 
-
 
 Generating your own libraries
 -----------------------------
