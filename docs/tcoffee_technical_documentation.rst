@@ -1155,17 +1155,19 @@ Before the realease of a new T-Coffee version, many command lines in the documen
 
 Introducing a new command to test
 =================================
-Tests are systematically carried out on all the command lines that start with the symbol $$. Other command lines starting with different symbols are not checked. The two other types of command lines identifiers are:
+In this documentation you will find three types of command lines some of which are up and running on the examples files. Whenever adding a new command, input files must be added to the repository directory ./examples/. New commands can be also be built using the existing files, or they can depend on files newly added to the repository. Here are the three types of command lines you will fine in the documentation:
 
-- **$#: t_coffee**
-For a command that could be tested but will not be, either for the sake of time or because it is currently unstable. When a new release needs to be urgently made available because of a critical fix, it is advisable to comment out this way non critical command lines failing the test.
+- **$$: t_coffee...**
+Corresponds to all command that will be tested systematically in a programmatic manner. Other command lines starting with different symbols are not checked.
 
+- **$#: t_coffee...**
+Corresponds to a command that could be tested but will not be, either for the sake of time or because it is currently unstable. When a new release needs to be urgently made available because of a critical fix, it is advisable to comment out this way non critical command lines failing the test.
 
-- **##: t_coffee**
+- **##: t_coffee...**
 These commands are never tested, either because they contain system dependant information or non programmatic information.
 
 
-Whenever adding a new command, input files must be added to the repository directory ./examples/. New commands can be also be built using the existing files, or they can depend on files newly added to the repository.
+
 
 Checking the documentation
 ==========================
