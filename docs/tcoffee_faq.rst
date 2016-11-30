@@ -214,7 +214,7 @@ A: All these packages are good packages and they sometimes outperform T-Coffee. 
 
 ::
 
-  $$: t_coffee sample_seq1.fasta -method muscle_msa,probcons_msa, mafft_msa, lalign_id_pair,slow_pair
+  $$: t_coffee sample_seq1.fasta -method muscle_msa,probcons_msa,mafft_msa,lalign_id_pair,slow_pair
 
 
 Q: Can T_Coffee align nucleic acids ???
@@ -276,8 +276,7 @@ The value 1000 is simply a high value that should make it more likely for the su
 
 ::
 
-  $$: t_coffee -seq=sample_seq1.fasta -lib=sample_seq1.tc_lib -outfile sample_se\
- q1.aln
+  $$: t_coffee -seq=sample_seq1.fasta -lib=sample_seq1.tc_lib -outfile sample_seq1.aln
 
 
 If you only want some of these residues to be aligned, or want to give them individual weights, you will have to edit the library file yourself or use the -force_aln option (cf FAQ: I would like to force some residues to be aligned). A value of N*N * 1000 (N being the number of sequences) usually ensure the respect of a constraint.
@@ -322,7 +321,7 @@ A: Simply write in a file the list of sequence groups you want to use:
 
 ::
 
-  $$: t_coffee sample_seq1.fasta -method=clustalw_pair,clustalw_msa -lib_list=sample_list1.lib_list -outfile=test
+  $$: t_coffee sample_seq1.fasta -method=clustalw_pair,clustalw_msa -lib_list=sample_list1.lib_list
 
   Format of the list of libraries:
   ***************sample_list1.lib_list****
@@ -349,32 +348,28 @@ A: Yes, you simply need to indicate that your alignment is a profile with the R 
 
 ::
 
-  $$: t_coffee sample_seq1.fasta -profile=sample_aln2.aln -outfile tacos
+  $$: t_coffee sample_seq1.fasta -profile=sample_aln2.aln -outfile chewbacca
 
 
 Q: Can I align sequences two or more profiles?
 ----------------------------------------------
-
 A: Yes, you, simply tag your profiles with the letter R and the program will treat them like standard sequences:
 
 
 ::
 
-  $$: t_coffee -profile=sample_aln1.fasta,sample_aln2.aln -outfile tacos
+  $$: t_coffee -profile=sample_aln1.fasta,sample_aln2.aln -outfile han_solo
 
 
 
 Q: Can I align two profiles according to the structures they contain?
 ---------------------------------------------------------------------
-
-A: Yes. As long as the structure sequences are named according to their PDB identifier:
-
+A: Yes, as long as the structure sequences are named according to their PDB identifier:
 
 ::
 
-  $$: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3\
- dcoffee -outfile=aligne_prf.aln
-
+  $$: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3dcoffee \
+      -outfile=aligne_prf.aln
 
 
 Q: T-Coffee becomes very slow when combining sequences and structures.
@@ -386,10 +381,9 @@ A: This is true. By default the structures are fetched through the net using RCS
 
 ::
 
-  setenv (or export) PDB_DIR='directory containing the pdb structures' setenv (\
- or export) NO_REMOTE_PDB_DIR=1
-
-
+  Variables to set up:
+  ##: setenv (or export) PDB_DIR='directory containing the pdb structures' 
+  ##: setenv (or export) NO_REMOTE_PDB_DIR=1
 
 
 Interestingly, the observation that sequences without structures are those that take the most time to be checked is a reminder of the strongest rational argument that I know of against torture: any innocent would require the maximum amount of torture to establish his/her innocence, which sounds...ahem...strange., and at least inneficient. Then again I was never struck by the efficiency of the Bush administration.
@@ -397,11 +391,9 @@ Interestingly, the observation that sequences without structures are those that 
 
 Q: Can I use a local installation of PDB?
 -----------------------------------------
-
 A: Yes, T-Coffee supports three types of installations:
 
-
--an ad-hoc installation where all your structures are in a directory, under the form pdbid.pdb or pdbid.id.Z or pdbid.pdb.gz. In that case, all you need to do is set the environement variables correctly:
+ - an *ad hoc* installation where all your structures are in a directory, under the form pdbid.pdb or pdbid.id.Z or pdbid.pdb.gz. In that case, all you need to do is set the environement variables correctly:
 
 
 ::
@@ -411,7 +403,7 @@ A: Yes, T-Coffee supports three types of installations:
 
 
 
--a standard pdb installation using the all section of pdb. In that case, you must set the variables to:
+ - a standard pdb installation using the all section of pdb. In that case, you must set the variables to:
 
 
 ::
@@ -421,14 +413,14 @@ A: Yes, T-Coffee supports three types of installations:
 
 
 
--a standard pdb installation using the divided section of pdb:
+ - a standard PDB installation using the divided section of pdb:
 
 
 ::
 
-  setenv (or export) PDB_DIR='<some absolute path>/data/structures/divided/pdb/\
- ' setenv (or export) NO_REMOTE_PDB_DIR=1
-
+  Setting up the PDB:
+  ##: setenv (or export) PDB_DIR='<some absolute path>/data/structures/divided/pdb/
+  ##: setenv (or export) NO_REMOTE_PDB_DIR=1
 
 
 If you need to do more clever things, you should know that all the PDB manipulation is made in T-Coffee by a perl script named extract_from_pdb. You can extract this script from T-Coffee:
@@ -439,9 +431,7 @@ If you need to do more clever things, you should know that all the PDB manipulat
   t_coffee -other_pg unpack_extract_from_pdb  chmod u+x extract_from_pdb
 
 
-
 You can then edit the script to suit your needs. T-Coffee will use your edited version if it is in the current directory. It will issue a warning that it used a local version.
-
 
 If you make extensive modifications, I would appreciate you send me the corrected file so that I can incorporate it in the next distribution.
 
@@ -449,15 +439,12 @@ By default, T-Coffee also requires two important PDB files declared using the tw
 
 ::
 
-  export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
   Found at: ftp://ftp.wwpdb.org/pub/pdb/derived_data/pdb_entry_type.txt
-
-and...
-
-::
+  ##: export PDB_ENTRY_TYPE_FILE=<location of the file pdb_entry_type.txt>
  
-  export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
-  Found at: http://www.rcsb.org/pdb/rest/getUnreleased
+  Found at: http://www.rcsb.org/pdb/rest/getUnreleased  
+  ##: export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
+
 
 .. warning:: Since the file unreleased.xml is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
 
