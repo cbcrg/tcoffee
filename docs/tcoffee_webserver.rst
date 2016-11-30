@@ -72,9 +72,9 @@ Two options are available (in addition to the choice of the database): without t
 
   $#: tmcoffee.sh -in data_9df741d4.in -mode psicoffee -blast_server LOCAL --search-db 'UniRef50 \
       -- Very Fast/Rough' --search-type 'transmembrane' -prot_min_sim 50 -prot_max_sim 90 \
-      -prot_min_cov 70 --search-out 'clustalw_aln fasta_aln score_ascii phylip score_html' -maxnseq \
-      1000 -maxlen 5000 -case upper -seqnos off -outorder input -run_name result -multi_core 4 \
-      -quiet=stdout
+      -prot_min_cov 70 --search-out 'clustalw_aln fasta_aln score_ascii phylip score_html' 
+      -maxnseq 1000 -maxlen 5000 -case upper -seqnos off -outorder input -run_name result º
+      -multi_core 4 -quiet=stdout
 
 
 PSI-Coffee (homology extension)
@@ -111,7 +111,8 @@ SARA-Coffee is a bit complicated to run, it uses several third party packages an
   ##: export PDB_DIR=/data/www-cn/sara_coffee_package/PDBdir/; 
   ##: export NO_REMOTE_PDB_DIR=1; 
   ##: unset MAFFT_BINARIES;
-  (cd $CACHE_4_TCOFFEE; ln -s /data/www-cn/sara_coffee_package/pdb_entry_type.txt);
+  ##: cd $CACHE_4_TCOFFEE
+  ##: ln -s /data/www-cn/sara_coffee_package/pdb_entry_type.txt);
   $#: t_coffee -in data_3e6e7aec.in -method sara_pair -template_file \
       /data/www-cn/sara_coffee_package/TEMPLATEFILE,RNA -extend_mode rna2 -relax_lib 0 -transform \
       dna2rna -run_name=result -output score_html clustalw_aln -case=upper -seqnos=off -outorder= \
@@ -145,7 +146,7 @@ TCS (Transitive Consistency Score)
 
 ::
 
-  $#: tcs.sh -infile data_a98d61a6.in -in Mproba_pair -score 1 -output clustalw_aln fasta_aln \
+  ##: tcs.sh -infile data_a98d61a6.in -in Mproba_pair -score 1 -output clustalw_aln fasta_aln \
       phylip score_ascii tcs_weighted tcs_replicate score_html -maxnseq 1000 -maxlen 8000 \
       -seqnos=off -run_name result -multi_core 4 --filter-type column --filter-min 4 --filter-max \
       9 --filter-gap yes -quiet=stdout
