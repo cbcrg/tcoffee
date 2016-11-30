@@ -258,7 +258,6 @@ This procedure follows specific rules within T-Coffee; be carefull with the foll
 
 - **Methods**: the method describer can either be built-in or be a file describing the method to be used (see chapter **T-Coffee Main Documentation, Internal/External Methods In T-Coffee** for more information). The exact syntax is provided later in this technical documentation.
 
-
 Sequence input flags
 --------------------
 - **-infile** (usage:**-infile=<filename>**) [cw]
@@ -299,6 +298,104 @@ This flag causes T-Coffee to treat multiple alignments as a single sequences, th
 
 - **-profile1**/**-profile2** (usage:**-profile1=[<prf1>]**/**-profile2=[<prf2>]**/one name only/) [cw]
 It is similar to the previous command and was provided for compatibility with ClustalW.It accepts only one name in as parameter.
+
+
+Output(s)
+=========
+Those names, stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresponding file to be output in stderr or stdout; for an input file, stdin causes the program to requests the corresponding file through pipe. No causes a suppression of the output, as does /dev/null. In the T-Coffee output (displayed on screen), the output results appear in the following format (last lines displayed once the job is done):
+
+
+::
+
+  OUTPUT RESULTS
+  ##### File Type= <type> Format= <format> Name <filename> 
+  
+  File Type: can be GUIDE TREE, MSA, etc...
+  Format   : can be newick, html, aln, etc...
+  Name     : prefix is the name of the input, extension corresponds to the type & format.
+
+
+Output files, format & names
+----------------------------
+- **-run_name** (usage:**-run_name=<your run name>**)
+This flag causes the prefix <your sequences> to be replaced by <your run name> when renaming the default output files.
+
+- **-align** [cw]
+This flag indicates that the program MUST produce an alignment. It is here for compatibility with ClustalW.
+
+- **-outfile** (usage:**-outfile=[out_aln,file,default,no]**)
+Indicates the name of the alignment output by T-Coffee. If the default is used, the alignment is named <your sequences>.aln.
+
+- **output** (usage:**-output=[format1,format2,...]**/default:**-output=clustalw**)
+Indicates the format used for the output of the resulting alignment; more than one format can be indicated. The supported input/output formats are listed below. The scoring output files rely mainly on the T-Coffee CORE index (you can find more information `here <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_).
+
+::
+
+  Sequence format:
+  - clustalw_aln, clustalw
+  - gcg
+  - msf_aln 
+  - pir_aln, pir_seq
+  - fasta_aln, fasta_seq
+  - phylip
+  
+  Output format:
+  - score_ascii : causes the output of a reliability flag
+  - score_html  : causes the output to be a reliability plot in HTML
+  - score_pdf   : idem in PDF (if ps2pdf is installed on your system)
+  - score_ps    : idem in postscript
+
+- **-seqnos** (usage:**-seqnos=[on,off]**/default:**-seqnos=off**)
+Causes the output alignment to contain the number of residue at the end of each line.
+
+Evaluation files
+----------------
+The CORE is an index that indicates the consistency between the library of piarwise alignments and the final multiple alignment. Our experiment indicate that the higher this consistency, the more reliable the alignment. A publication describing the CORE index can be found here `<http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_. All these modes will be useful when generating colored version of the output, with the **-output** flag (cf. Chapter **T-Coffee Main Documentation, Section Preparing Your Data**).
+
+- **-evaluate_mode** (usage:**-evaluate_mode=<t_coffee_fast,t_coffee_slow,t_coffee_non_extended >**/default:**-evaluate_mode=t_coffee_fast**)
+This flag indicates the mode used to normalize the T-Coffee score when computing the reliability score. Several options are possible: 
+
+  - **t_coffee_fast**: Normalization is made using the highest score in the MSA. This evaluation mode was validated and in our hands, pairs of residues with a score of 5 or higher have 90 % chances to be correctly aligned to one another.
+  - **t_coffee_slow**: Normalization is made using the library. This usually results in lower score and a scoring scheme more sensitive to the number of sequences in the dataset. Note that this scoring scheme is not any more slower, thanks to the implementation of a faster heuristic algorithm.
+  - **t_coffee_non_extended**: the score of each residue is the ratio between the sum of its non extended scores with the column and the sum of all its possible non extended scores.
+
+::
+
+  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_ascii
+
+  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii
+
+  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii
+ 
+ 
+Alignments
+----------
+- **-outseqweight** (usage:**-outseqweight=<filename>**/default:none)
+Indicates the name of the file in which the sequences weights should be saved...
+
+- **-case** (usage:**-case=[keep,upper,lower]**/default:**-case=keep**)
+Instructs the program on the case to be used in the output file (Clustalw uses upper case). The default keeps the case and makes it possible to maintain a mixture of upper and lower case residues. If you need to change the case of your file, refers to the **T-Coffee Main Documentation**.
+
+- **-outorder** (usage:**-outorder=[input,aligned,filename]**/default:**-outorder=input**) [cw]
+Sets the order of the sequences in the output alignment; by default, the sequences are kept in the original order of the input dataset. Using **-outorder=aligned** means the sequences come in the order indicated by the tree; this order can be seen as a one dimensional projection of the tree distances. It is also possible to provide a file (a legal FASTA file) whose order will be used in the final MSA via **-outdorder=<filename>**.
+
+- **-inorder** (usage:**-inorder=[input,aligned]**/default:**-inorder=aligned**) [cw]
+MSAs based on dynamic programming depend slightly on the order in which the incoming sequences are provided. To prevent this effect sequences are arbitrarily sorted at the beginning of the program (**-inorder=aligned**). However, this affects the sequence order within the library. You can switch this off by stating **-inorder=input**.
+
+- **-cpu** [Deprecated]
+
+Librairies & trees
+------------------
+- **-out_lib** (usage:**-out_lib=[name of the library,default,no]**/default:**-out_lib=default**)
+Sets the name of the library output. Default implies <run_name>.tc_lib.
+
+- **-lib_only**
+Causes the program to stop once the library has been computed. Must be used in conjunction with the flag **-out_lib**.
+
+- **-newtree** (usage:**-newtree=<tree file>**)
+Indicates the name of the file into which the guide tree will be written. The default will be ``<sequence_name>.dnd``, or ``<run_name.dnd>``. The tree is written in the parenthesis format known as Newick or New Hampshire and used by Phylip.
+
+.. warning:: Do NOT confuse this guide tree with a phylogenetic tree.
 
 
 Alignment Computation
@@ -491,8 +588,8 @@ When **-profile_comparison=profile**, this flag selects a profile scoring functi
 - **-msa_mode** (usage:**-msa_mode=[tree,graph,precomputed]**/default:**-evaluate_mode=tree**) [Unsupported]
 
 
-Aligment of more than 100 sequences with DPA [Unsupported]
---------------------------------------------
+Large scale aligment computation [Unsupported]
+----------------------------------------------
 - **-dpa_master_aln** (usage:**-dpa_master_aln=[file, method]**/default:**-dpa_master_aln=NO**) [Unsupported]
  When using DPA, T-Coffee needs a seed alignment that can be computed using any appropriate method. By default, T-Coffee computes a fast approximate alignment. 
 
@@ -509,8 +606,8 @@ Maximum number of sequences aligned simultaneously when DPA is ran. Given the tr
 Guide tree used in DPA; this is a newick tree where the distance associated with each node is set to the minimum pairwise distance among all considered sequences.
 
 
-Multiple local alignments with MOCCA [Unsupported]
-------------------------------------
+Local alignments computation [Unsupported]
+------------------------------------------
 It is possible to compute multiple local alignments, using the moca routine. MOCCA is a routine that allows extracting all the local alignments that show some similarity with another predefined fragment. MOCCA is a perl script that calls T-Coffee and provides the appropriate parameters.
 
 - **-domain/-mocca** (usage:**-domain**) [Unsupported]
@@ -559,104 +656,6 @@ Indicates the mode used for the evaluation that will indicate the segments that 
 
 - **-iterate** (usage: **-iterate=[integer]**/default:**-iterate=0**)
 Sequences are extracted in turn and realigned to the MSA. If **-iterate** is set to -1, each sequence is realigned; otherwise the number of iterations is set by **-iterate**.
-
-
-Output 
-======
-Those names, stdout, stderr, stdin, no, /dev/null are valid filenames. They cause the corresponding file to be output in stderr or stdout; for an input file, stdin causes the program to requests the corresponding file through pipe. No causes a suppression of the output, as does /dev/null. In the T-Coffee output (displayed on screen), the output results appear in the following format (last lines displayed once the job is done):
-
-
-::
-
-  OUTPUT RESULTS
-  ##### File Type= <type> Format= <format> Name <filename> 
-  
-  File Type: can be GUIDE TREE, MSA, etc...
-  Format   : can be newick, html, aln, etc...
-  Name     : prefix is the name of the input, extension corresponds to the type & format.
-
-
-Output files, format & names
-----------------------------
-- **-run_name** (usage:**-run_name=<your run name>**)
-This flag causes the prefix <your sequences> to be replaced by <your run name> when renaming the default output files.
-
-- **-align** [cw]
-This flag indicates that the program MUST produce an alignment. It is here for compatibility with ClustalW.
-
-- **-outfile** (usage:**-outfile=[out_aln,file,default,no]**)
-Indicates the name of the alignment output by T-Coffee. If the default is used, the alignment is named <your sequences>.aln.
-
-- **output** (usage:**-output=[format1,format2,...]**/default:**-output=clustalw**)
-Indicates the format used for the output of the resulting alignment; more than one format can be indicated. The supported input/output formats are listed below. The scoring output files rely mainly on the T-Coffee CORE index (you can find more information `here <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_).
-
-::
-
-  Sequence format:
-  - clustalw_aln, clustalw
-  - gcg
-  - msf_aln 
-  - pir_aln, pir_seq
-  - fasta_aln, fasta_seq
-  - phylip
-  
-  Output format:
-  - score_ascii : causes the output of a reliability flag
-  - score_html  : causes the output to be a reliability plot in HTML
-  - score_pdf   : idem in PDF (if ps2pdf is installed on your system)
-  - score_ps    : idem in postscript
-
-- **-seqnos** (usage:**-seqnos=[on,off]**/default:**-seqnos=off**)
-Causes the output alignment to contain the number of residue at the end of each line.
-
-Evaluation files
-----------------
-The CORE is an index that indicates the consistency between the library of piarwise alignments and the final multiple alignment. Our experiment indicate that the higher this consistency, the more reliable the alignment. A publication describing the CORE index can be found here `<http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_. All these modes will be useful when generating colored version of the output, with the **-output** flag (cf. Chapter **T-Coffee Main Documentation, Section Preparing Your Data**).
-
-- **-evaluate_mode** (usage:**-evaluate_mode=<t_coffee_fast,t_coffee_slow,t_coffee_non_extended >**/default:**-evaluate_mode=t_coffee_fast**)
-This flag indicates the mode used to normalize the T-Coffee score when computing the reliability score. Several options are possible: 
-
-  - **t_coffee_fast**: Normalization is made using the highest score in the MSA. This evaluation mode was validated and in our hands, pairs of residues with a score of 5 or higher have 90 % chances to be correctly aligned to one another.
-  - **t_coffee_slow**: Normalization is made using the library. This usually results in lower score and a scoring scheme more sensitive to the number of sequences in the dataset. Note that this scoring scheme is not any more slower, thanks to the implementation of a faster heuristic algorithm.
-  - **t_coffee_non_extended**: the score of each residue is the ratio between the sum of its non extended scores with the column and the sum of all its possible non extended scores.
-
-::
-
-  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_slow -output score_ascii
-
-  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_ascii
-
-  $$: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii
- 
- 
-Alignments
-----------
-- **-outseqweight** (usage:**-outseqweight=<filename>**/default:none)
-Indicates the name of the file in which the sequences weights should be saved...
-
-- **-case** (usage:**-case=[keep,upper,lower]**/default:**-case=keep**)
-Instructs the program on the case to be used in the output file (Clustalw uses upper case). The default keeps the case and makes it possible to maintain a mixture of upper and lower case residues. If you need to change the case of your file, refers to the **T-Coffee Main Documentation**.
-
-- **-outorder** (usage:**-outorder=[input,aligned,filename]**/default:**-outorder=input**) [cw]
-Sets the order of the sequences in the output alignment; by default, the sequences are kept in the original order of the input dataset. Using **-outorder=aligned** means the sequences come in the order indicated by the tree; this order can be seen as a one dimensional projection of the tree distances. It is also possible to provide a file (a legal FASTA file) whose order will be used in the final MSA via **-outdorder=<filename>**.
-
-- **-inorder** (usage:**-inorder=[input,aligned]**/default:**-inorder=aligned**) [cw]
-MSAs based on dynamic programming depend slightly on the order in which the incoming sequences are provided. To prevent this effect sequences are arbitrarily sorted at the beginning of the program (**-inorder=aligned**). However, this affects the sequence order within the library. You can switch this off by stating **-inorder=input**.
-
-- **-cpu** [Deprecated]
-
-Librairies & trees
-------------------
-- **-out_lib** (usage:**-out_lib=[name of the library,default,no]**/default:**-out_lib=default**)
-Sets the name of the library output. Default implies <run_name>.tc_lib.
-
-- **-lib_only**
-Causes the program to stop once the library has been computed. Must be used in conjunction with the flag **-out_lib**.
-
-- **-newtree** (usage:**-newtree=<tree file>**)
-Indicates the name of the file into which the guide tree will be written. The default will be ``<sequence_name>.dnd``, or ``<run_name.dnd>``. The tree is written in the parenthesis format known as Newick or New Hampshire and used by Phylip.
-
-.. warning:: Do NOT confuse this guide tree with a phylogenetic tree.
 
 
 Template based T-Coffee modes
@@ -775,14 +774,9 @@ Use this flag if your templates are in filename, and are named according to the 
 Restricts the 3D-Coffee to a set of predefined structures.
 
 
-APDB parameters
-==============
-The alignment can then be evaluated using the default of APDB:
-
-::
-
-  $$: t_coffee -other_pg apdb -aln 3d_sample4.aln
-
+Using structure for MSA evaluation
+----------------------------------
+MSA can be evaluated using structures with T-Coffee special mode APDB/iRMSD (see **T-Coffee Main Documentation**). The requirements to run these modes are similar to running a structure based MSA with Expresso/3D-Coffee. Here we describe the different parameters associated with the APDB mode.
 
 - **-n_excluded_nb** (usage:**-n_excluded_nb=[integer]**/default:1)
 When evaluating the local score of a pair of aligned residues, the residues immediately next to that column should not contribute to the measure. By default the first to the left and first to the right are excluded.
