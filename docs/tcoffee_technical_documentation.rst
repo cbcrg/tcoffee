@@ -1155,7 +1155,7 @@ Before the realease of a new T-Coffee version, many command lines in the documen
 
 Introducing a new command to test
 =================================
-In this documentation you will find three types of command lines some of which are up and running on the examples files. Whenever adding a new command, input files must be added to the repository directory ./examples/. New commands can be also be built using the existing files, or they can depend on files newly added to the repository. Here are the three types of command lines you will fine in the documentation:
+In this documentation you will find three types of command lines some of which are up and running on the examples files. Whenever adding a new command, input files must be added to the repository directory ./examples/. New commands can be also be built using the existing files, or they can depend on files newly added to the repository. Here are the three different flag types of command lines you will fine in the documentation "$$", "$#" and "##":
 
 - **$$: t_coffee...**
 Corresponds to all command that will be tested systematically in a programmatic manner. Other command lines starting with different symbols are not checked.
