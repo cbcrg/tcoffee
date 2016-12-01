@@ -421,7 +421,7 @@ Improving/Evaluating Your MSAs
 ******************************
 Q: How can I edit my alignment manually?
 ----------------------------------------
-A: We recommend to use Jalview, a free program for MSA editing that you can find `here http//:www.jalview.org`_.
+A: We recommend to use Jalview, a free program for MSA editing that you can find `here <http://www.jalview.org>`_.
 
 Q: Have I improved or not my alignment?
 ---------------------------------------
