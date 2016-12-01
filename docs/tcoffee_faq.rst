@@ -2,9 +2,9 @@
 FAQ
 ###
 
-***************************************
-Abnormal Terminations and Wrong Results
-***************************************
+*******************************
+Abnormal Terminations & Results
+*******************************
 
 Q: The program keeps crashing when I give my sequences
 ------------------------------------------------------
@@ -28,17 +28,16 @@ Q: The default alignment is not good enough
 --------------------------------------------
 A: see next question
 
-Q: The alignment contains obvious mistakes.
--------------------------------------------
-
+Q: The alignment contains obvious mistakes
+------------------------------------------
 A: This happens with most multiple alignment procedures. However, wrong alignments are sometimes caused by bugs or an implementation mistake. Please report the most unexpected results to the authors.
 
-Q: The program is crashing.
----------------------------
+Q: The program is crashing
+--------------------------
 A: If you get the message **FAILED TO ALLOCATE REQUIRED MEMORY** refer to the next question. Otherwise, if the program crashes check whether you are using the right syntax. If the problem persists, contact us.
 
-Q: I am running out of memory.
-------------------------------
+Q: I am running out of memory
+-----------------------------
 A: You can use a more accurate, slower and less memory hungry dynamic programming mode called myers_miller_pair_wise (command 1). Note that this mode will be much less time efficient than the default, although it may be slightly more accurate. In practice the parameterization associate with special mode turns off every memory expensive heuristic within T-Coffee (command 2). If you keep running out of memory, you may also want to reduce the number of sequences using **-maxnseq**.
 
 ::
