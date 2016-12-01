@@ -433,7 +433,7 @@ A: Refers to the **T-Coffee Main Documentation**, section **Evaluating Your Alig
 
 Q: What is that color index?
 ----------------------------
-A: T-Coffee can provide you with a measure of consistency among all the methods used. An html file is produced by default each time you run an alignment. This html file is a colored version of your MSA that you can visualize with any common browser. As alternatives, you can use **score_ps** (postscript), **score_pdf** (pdf file) or **score_ascii** (text file). you want more information about the CORE index represented by this color index, have a look at this `chapter http://www.tcoffee.org/Publications/Pdf/core.pp.pdf`_.
+A: T-Coffee can provide you with a measure of consistency among all the methods used. An html file is produced by default each time you run an alignment. This html file is a colored version of your MSA that you can visualize with any common browser. As alternatives, you can use **score_ps** (postscript), **score_pdf** (pdf file) or **score_ascii** (text file). you want more information about the CORE index represented by this color index, have a look at this `chapter <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_.
 
 Q: Can I evaluate alignments NOT produced with T-Coffee?
 --------------------------------------------------------
@@ -480,7 +480,6 @@ Release Notes
 *************
 
 .. Warning:: This log of modifications is not as thorough and accurate as it should be...but it's a beginning !
-
 - 11.00+: extensive update of the documentation, examples; addition of the latest T-Coffee modes (PSI-Coffee, SARA-Coffee, Pro-Coffee, STRIKE, T-RMSD...); creation of an automated procedure for checking command lines from the documentation **doc2test.pl**.
 - 9.86 New data structure for the primary library that results in highly improved running times for mcoffee and significantly decreased memory usage.
 - 5.80 Novel assembly algorithm (linked_pair_wise) and the primary library is now made of probcons style pairwise alignments (proba_pair)
