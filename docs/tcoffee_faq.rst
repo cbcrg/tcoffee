@@ -64,11 +64,11 @@ A: Yes, by setting **-no_warning**.
 
 Q: How many ways to pass parameters to t_coffee?
 ------------------------------------------------
-A: Refer to the **T-Coffee Techinical Documentation**, Section **T-Coffee Parameters & Flags**. 
+A: Refer to the **T-Coffee Technical Documentation**, Section **T-Coffee Parameters & Flags**. 
 
 Q: How can I change the default output format?
 ----------------------------------------------
-A: See the **-output** option in the **T-Coffee Main Dcoumentation**; nearly all common output formats are recognized by T-Coffee.
+A: See the **-output** option in the **T-Coffee Main Documentation**; nearly all common output formats are recognized by T-Coffee.
 
 Q: My sequences are slightly different between all the alignments.
 ------------------------------------------------------------------
@@ -233,16 +233,18 @@ A: use the **-convert** flag. This command will read the .aln file and turn it i
 
 Q: I would like to force some residues to be aligned (under maintenance...)
 ----------------------------------------------------
-If you want to brutally force some residues to be aligned, you may use as a post processing, the **force_aln** function of **seq_reformat**:
+If you want to brutally force some residues to be aligned, you may use as a post processing, the **+force_aln** function of **seq_reformat**. You can either specify single (command 1) or multiple constraints using a TC_LIB_FORMAT_02 file (command 2). When giving more than one constraint, these will be applied one after the other in the order they are provided. This greedy procedure means that the Nth constraint may disrupt the (N-1)th previously imposed constraint, hence the importance of forcing the constraints in the right order, with the most important coming last. We do not recommend imposing hard constraints on an alignment, and it is much more advisable to use the soft constraints provided by standard T-Coffee libraries (cf. **T-Coffee Technical Documentation**, subsection **Creating your own T-Coffee libraries**).
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln seq 1 10 seq2 15
+  Command 1: single constraint
+  $$: t_coffee -other_pg seq_reformat -in sample_aln3.aln -action +force_aln seq1 5 seq2 6
+  
+  Command 2: multiple constraints
+  $$: t_coffee -other_pg seq_reformat -in sample_aln3.aln -action +force_aln sample_lib3.tc_lib02
 
-  $$: t_coffee -other_pg seq_reformat -in sample_aln4.aln -action +force_aln sample_lib4.tc_lib02
 
-
-sample_lib4.tc_lib02 is a T-Coffee library using the tc_lib02 format:
+The TC_LIB_FORMAT_02 is still experimental and unsupported. It can only be used in the context of the force_aln function described here. The tc_lib02 format is as follow:
 
 ::
 
@@ -250,16 +252,9 @@ sample_lib4.tc_lib02 is a T-Coffee library using the tc_lib02 format:
   SeqX resY ResY_index  SeqZ ResZ ResZ_index
 
 
-.. warning:: The TC_LIB_FORMAT_02 is still experimental and unsupported. It can only be used in the context of the force_aln function described here.
 
-Given more than one constraint, these will be applied one after the other, in the order they are provided. This greedy procedure means that the Nth constraint may disrupt the (N-1)th previously imposed constraint, hence the importance of forcing the constraints in the right order, with the most important coming last.
-
-
-We do not recommend imposing hard constraints on an alignment, and it is much more advisable to use the soft constraints provided by standard t_coffee libraries (cf. building your own libraries section)
-
-
-Q: I would like to use structural alignments.
----------------------------------------------
+Q: I would like to use structural alignments
+--------------------------------------------
 Refer to the **T-Coffee Main Documentation and/or T-Coffee Technical Documentation**.
 
 
@@ -288,24 +283,19 @@ A: Use the **-usetree=<your own tree>** flag:
 
 ::
 
-  $$: t_coffee sample_seq1.fasta -usetree=sample_tree.dnd
+  $$: t_coffee sample_seq1.fasta -usetree=sample_seq1_tree_nj.nwk
 
 
 Q: I want to align coding DNA.
 ------------------------------
-A: Use the **fasta_cdna_pair** method that compares two cDNA using the best reading frame and taking frameshifts into account:
+A: Use the **fasta_cdna_pair** method that compares two cDNA using the best reading frame and taking frameshifts into account. Notice that in the resulting alignments (command 1), all the gaps are of modulo3, except one small gap in the first line of sequence hmgl_trybr. This is a frameshift made on purpose. You can realign the same sequences while ignoring their coding potential and treating them like standard DNA (command 2).
 
 ::
 
+  Command 1:
   $$: t_coffee three_cdna.fasta -method=cdna_fast_pair
 
-
-
-Notice that in the resulting alignments, all the gaps are of modulo3, except one small gap in the first line of sequence hmgl_trybr. This is a framshift, made on purpose. You can realign the same sequences while ignoring their coding potential and treating them like standard DNA:
-
-
-::
-
+  Command 2:
   $$: t_coffee three_cdna.fasta
 
 
@@ -317,7 +307,7 @@ See next question.
 
 Q: I only want to use specific pairs to compute the library.
 ------------------------------------------------------------
-A: Simply write in a file the list of sequence groups you want to use:
+A: Simply write in a file the list of sequence groups you want to use. Pairwise methods (slow_pair, proba_pair, <method>_pair...) will only be applied to list of pairs of sequences, while multiple methods (clustalw_msa, mafft_msa, <method_msa...) will be applied to any dataset having more than two sequences.
 
 ::
 
@@ -332,11 +322,9 @@ A: Simply write in a file the list of sequence groups you want to use:
   ***************sample_list1.lib_list****
 
 
-.. note:: Pairwise methods (slow_pair...) will only be applied to list of pairs of sequences, while multiple methods (clustalw_aln) will be applied to any dataset having more than two sequences.
-
 Q: There are duplicates or quasi-duplicates in my set.
 ------------------------------------------------------
-A: If you can remove them, this will make the program run faster, otherwise, the T-Coffee scoring scheme should be able to avoid overweighting of overrepresented sequences.
+A: If you can remove them, this will make the program run faster, otherwise the T-Coffee scoring scheme should be able to avoid overweighting of overrepresented sequences.
 
 
 *****************************
@@ -358,7 +346,7 @@ A: Yes, you, simply tag your profiles with the letter R and the program will tre
 
 ::
 
-  $$: t_coffee -profile=sample_aln1.fasta,sample_aln2.aln -outfile han_solo
+  $$: t_coffee -profile=sample_aln1.aln,sample_aln2.aln -outfile han_solo
 
 
 
@@ -368,16 +356,12 @@ A: Yes, as long as the structure sequences are named according to their PDB iden
 
 ::
 
-  $$: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3dcoffee \
-      -outfile=aligne_prf.aln
+  $$: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3dcoffee
 
 
-Q: T-Coffee becomes very slow when combining sequences and structures.
-----------------------------------------------------------------------
-
+Q: T-Coffee becomes very slow when combining sequences and structures
+---------------------------------------------------------------------
 A: This is true. By default the structures are fetched through the net using RCSB. The problem arises when T-Coffee looks for the structure of sequences WITHOUT structures. One solution is to install the PDB database locally. In that case you will need to set two environment variables:
-
-
 
 ::
 
@@ -386,35 +370,31 @@ A: This is true. By default the structures are fetched through the net using RCS
   ##: setenv (or export) NO_REMOTE_PDB_DIR=1
 
 
-Interestingly, the observation that sequences without structures are those that take the most time to be checked is a reminder of the strongest rational argument that I know of against torture: any innocent would require the maximum amount of torture to establish his/her innocence, which sounds...ahem...strange., and at least inneficient. Then again I was never struck by the efficiency of the Bush administration.
-
+Interestingly, the observation that sequences without structures are those that take the most time to be checked is a reminder of the strongest rational argument that I know of against torture: any innocent would require the maximum amount of torture to establish his/her innocence, which sounds...hummmm...strange.. Then again I was never struck by the efficiency of the Bush Jr administration.
 
 Q: Can I use a local installation of PDB?
 -----------------------------------------
 A: Yes, T-Coffee supports three types of installations:
 
- - an *ad hoc* installation where all your structures are in a directory, under the form pdbid.pdb or pdbid.id.Z or pdbid.pdb.gz. In that case, all you need to do is set the environement variables correctly:
-
-
-::
-
-  setenv (or export) PDB_DIR='directory containing the pdb structures' setenv (\
- or export) NO_REMOTE_PDB_DIR=1
-
-
-
- - a standard pdb installation using the all section of pdb. In that case, you must set the variables to:
-
+- *Ad hoc* installation where all your structures are in a directory under the form pdbid.pdb, pdbid.id.Z or pdbid.pdb.gz. In that case, all you need to do is set the environement variables correctly:
 
 ::
 
-  setenv (or export) PDB_DIR='<some absolute path>/data/structures/all/pdb/' se\
- tenv (or export) NO_REMOTE_PDB_DIR=1
+  Setting up variable
+  ##: setenv (or export) PDB_DIR='directory containing the pdb structures' 
+  ##: setenv (or export) NO_REMOTE_PDB_DIR=1
 
 
+- Full standard PDB installation using the all section of PDB. In that case, you must set the variables to:
 
- - a standard PDB installation using the divided section of pdb:
+::
 
+  Setting up variable
+  ##: setenv (or export) PDB_DIR='<some absolute path>/data/structures/all/pdb/' 
+  ##: setenv (or export) NO_REMOTE_PDB_DIR=1
+
+
+- Reduced standard PDB installation using the divided section of pdb:
 
 ::
 
@@ -423,19 +403,7 @@ A: Yes, T-Coffee supports three types of installations:
   ##: setenv (or export) NO_REMOTE_PDB_DIR=1
 
 
-If you need to do more clever things, you should know that all the PDB manipulation is made in T-Coffee by a perl script named extract_from_pdb. You can extract this script from T-Coffee:
-
-
-::
-
-  t_coffee -other_pg unpack_extract_from_pdb  chmod u+x extract_from_pdb
-
-
-You can then edit the script to suit your needs. T-Coffee will use your edited version if it is in the current directory. It will issue a warning that it used a local version.
-
-If you make extensive modifications, I would appreciate you send me the corrected file so that I can incorporate it in the next distribution.
-
-By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior): 
+If you need to do more clever things, you should know that all the PDB manipulation is made in T-Coffee by a perl script named **extract_from_pdb**. You can then edit the script to suit your needs; T-Coffee will use your edited version if it is in the current directory and issue a warning that it used a local version. If you make extensive modifications, I would appreciate you send me the corrected file so that I can incorporate it in the next distribution. By default, T-Coffee also requires two important PDB files declared using the two following variables. These variables do not need to be set if the considered files are in the cache directory (default behavior): 
 
 ::
 
@@ -446,105 +414,53 @@ By default, T-Coffee also requires two important PDB files declared using the tw
   ##: export PDB_UNREALEASED_FILE=<location of the file unrealeased.xml>
 
 
-.. warning:: Since the file unreleased.xml is not part of the pdb distribution, T-Coffee will make an attempt to obtain it even when using the NO_REMOTE_PDB_DIR=1 mode. You must therefore make sure that the file PDB_UNREALEASED_FILE is pointing to is read and write.
+.. warning:: Since the file ``unreleased.xml`` is not part of the PDB distribution, T-Coffee will make an attempt to obtain it even when using the **NO_REMOTE_PDB_DIR=1 mode**. You must therefore make sure that the file ``PDB_UNREALEASED_FILE`` is pointing to is read and write.
 
 
-************************
-Improving Your Alignment
-************************
-
+******************************
+Improving/Evaluating Your MSAs
+******************************
 Q: How can I edit my alignment manually?
 ----------------------------------------
-
-A: Use jalview, a Java online MSA editor: www.jalview.org
-
+A: We recommend to use Jalview, a free program for MSA editing that you can find `here http//:www.jalview.org`_.
 
 Q: Have I improved or not my alignment?
 ---------------------------------------
-
-A: Using structural information is the only way to establish whether you have improved or not your alignment. The CORE index can also give you some information.
-
-
-********************
-Alignment Evaluation
-********************
+A: Using structural information is the only way to establish whether you have improved or not your alignment. The CORE index can also give you some information. Refers to the **T-Coffee Main Documentation**, section **Evaluating Your Alignment**.
 
 Q: How good is my alignment?
 ----------------------------
-
-A: see what is the color index !!!
-
+A: Refers to the **T-Coffee Main Documentation**, section **Evaluating Your Alignment**. Or just look at the color index ;-)
 
 Q: What is that color index?
 ----------------------------
-
-A: T-Coffee can provide you with a measure of consistency among all the methods used. You can produce such an output using:
-
-
-::
-
-  $$: t_coffee sample_seq1.fasta -output=html
-
-
-
-This will compute your_seq.score_html that you can view using netscape. An alternative is to use score_ps or score_pdf that can be viewed using ghostview or acroread, score_ascii will give you an alignment that can be parsed as a text file.
-
-
-A book chapter describing the CORE index is available on:
-
-
-http://www.tcoffee.org/Publications/Pdf/core.pp.pdf
-
+A: T-Coffee can provide you with a measure of consistency among all the methods used. An html file is produced by default each time you run an alignment. This html file is a colored version of your MSA that you can visualize with any common browser. As alternatives, you can use **score_ps** (postscript), **score_pdf** (pdf file) or **score_ascii** (text file). you want more information about the CORE index represented by this color index, have a look at this `chapter http://www.tcoffee.org/Publications/Pdf/core.pp.pdf`_.
 
 Q: Can I evaluate alignments NOT produced with T-Coffee?
 --------------------------------------------------------
-
-A: Yes. You may have an alignment produced from any source you like. To evaluate it do:
-
+A: Yes !! You may have an alignment produced from any source you like. If you have no library available, the library will be computed on the fly but this can take some time depending on your sample size.
 
 ::
 
-  $$: t_coffee -infile=sample_aln1.aln -lib=sample_aln1.tc_lib -special_mode=eva\
- luate
+  With a library:
+  $$: t_coffee -infile=sample_aln1.aln -lib=sample_aln1.tc_lib -special_mode=evaluate
 
-
-
-If you have no library available, the library will be computed on the fly using the following command. This can take some time, depending on your sample size. To monitor the progress in a situation where the default library is being built, use:
-
-
-::
-
+  Without a library:
   $$: t_coffee -infile=sample_aln1.aln -evaluate -method proba_pair
-
 
 
 Q: Can I compare two alignments?
 --------------------------------
-
-A: Yes. You can treat one of your alignments as a library and compare it with the second alignment:
-
+A: Yes. You can treat one of your alignments as a library and compare it with the second alignment. 
 
 ::
 
-  $$: t_coffee -infile=sample_aln1_1.aln -aln=sample_aln1_2.aln -special_mode=ev\
- aluate
+  $$: t_coffee -infile=sample_aln1_1.aln -aln=sample_aln1_2.aln -special_mode=evaluate
 
 
-
-If you have no library available, the library will be computed on the fly using the following command. This can take some time, depending on your sample size. To monitor the progress in a situation where the default library is being built, use:
-
-
-::
-
-  $$: t_coffee -infile=sample_aln1.aln -special_mode evaluate
-
-
-
-Q: I am aligning sequences with long regions of very good overlap.
-------------------------------------------------------------------
-
-A: Increase the ktuple size ( up to 4 or 5 for DNA) and up to 3 for proteins:
-
+Q: I am aligning sequences with long regions of very good overlap
+-----------------------------------------------------------------
+A: Increase the ktuple size (up to 4-5 for DNA) and up to 3 for proteins. This will speed up the program. It can be very useful, especially when aligning ESTs.
 
 ::
 
@@ -552,28 +468,12 @@ A: Increase the ktuple size ( up to 4 or 5 for DNA) and up to 3 for proteins:
 
 
 
-This will speed up the program. It can be very useful, especially when aligning ESTs.
-
-
 Q: Why is T-Coffee changing the names of my sequences!!!!
 ---------------------------------------------------------
-
-A: If there is no duplicated name in your sequence set, T-Coffee's handling of names is consistent with Clustalw, (Cf Sequence Name Handling in the Format section). If your dataset contains sequences with identical names, these will automatically be renamed to:
-
-
-::
-
-  ************************
-  >seq1
-  >seq1
-  ************************
-  >seq1
-  >seq1_1
-  ************************
+A: If there is no duplicated name in your sequence set, T-Coffee handles names similarly to Clustalw. If your dataset contains sequences with identical names, these will automatically be renamed by adding an index (integer) to duplicated names even if there are more than 2. Also be careful, if there are spaces in your names, whatever comes after the space is not read.
 
 
-
-.. warning:: The behaviour is undefined when this creates two sequence with a similar names.
+.. danger:: The behaviour is undefined when this creates two sequence with a similar names.
 
 
 *************
@@ -582,11 +482,12 @@ Release Notes
 
 .. Warning:: This log of modifications is not as thorough and accurate as it should be...but it's a beginning !
 
- - 9.86 New data structure for the primary library that results in highly improved running times for mcoffee and significantly decreased memory usage.
- - 5.80 Novel assembly algorithm (linked_pair_wise) and the primary library is now made of probcons style pairwise alignments (proba_pair)
- - 4.30 and upward: the FAQ has moved into a new tutorial document; -in has will be deprecated and replaced by the flags: -profile,-method,-aln,-seq,-pdb
- - 4.02: -mode=dna is still available but not any more needed or supported. Use type=protein or dna if you need to force things
- - 3.28: corrected a bug that prevents short sequences from being correctly aligned
- - Use of @ as a separator when specifying methods parameters
- - The most notable modifications have to do with the structure of the input. From version 2.20, all files must be tagged to indicate their nature (A: alignment, S: Sequence, L: Library...). We are becoming stricter, but that's for your own good... Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation
+- 11.00+: extensive update of the documentation, examples; addition of the latest T-Coffee modes (PSI-Coffee, SARA-Coffee, Pro-Coffee, STRIKE, T-RMSD...); creation of an automated procedure for checking command lines from the documentation **doc2test.pl**.
+- 9.86 New data structure for the primary library that results in highly improved running times for mcoffee and significantly decreased memory usage.
+- 5.80 Novel assembly algorithm (linked_pair_wise) and the primary library is now made of probcons style pairwise alignments (proba_pair)
+- 4.30 and upward: the FAQ has moved into a new tutorial document; **-in** can be replaced by the flags **-profile,-method,-aln,-seq,-pdb**.
+- 4.02: **-mode=dna** is still available but not any more needed or supported. Use **-type=protein or dna** if you need to force things
+- 3.28: corrected a bug that prevents short sequences from being correctly aligned
+- Use of @ as a separator when specifying methods parameters
+- The most notable modifications have to do with the structure of the input. From version 2.20, all files must be tagged to indicate their nature (A: alignment, S: Sequence, L: Library...). We are becoming stricter, but that's for your own good... Another important modification has to do with the flag -matrix: it now controls the matrix being used for the computation
  
