@@ -1,0 +1,11 @@
+#!/usr/bin/env perl
+
+while (<>)	
+	{
+	s/\=cc/123456789/g;
+	s/\bcc/\$\(CC\)/g;
+	s/123456789/\=cc/g;
+	print $_;
+	}
+
+

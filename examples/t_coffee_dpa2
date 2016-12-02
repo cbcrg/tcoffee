@@ -1,0 +1,228 @@
+#!/usr/bin/env perl
+
+$DEBUG=1;
+$dpa_nseq=10;
+$dpa_sim=0;
+if (!@ARGV)
+  {
+    `t_coffee`;
+    exit (0);
+  }
+foreach $arg (@ARGV)
+  {
+    $arg_list.=" $arg";
+  }
+$max_nseq=10;
+($seq0, $arg_list)=&extract_val_from_arg_list("^",$arg_list);
+($seq1, $arg_list)=&extract_val_from_arg_list("-seq",$arg_list);
+($seq2, $arg_list)=&extract_val_from_arg_list("-in",$arg_list, "KEEP");
+($seq3, $arg_list)=&extract_val_from_arg_list("-infile",$arg_list);
+$in_seq=$seq0." ".$seq1." ".$seq2." ".$seq3;
+
+$seq=vtmpnam();
+`t_coffee $in_seq -convert -output fasta_seq -outfile=$seq`;
+
+
+($dpa_nseq, $arg_list)=&extract_val_from_arg_list("-dpa_nseq",$arg_list);
+($master_aln, $arg_list)=&extract_val_from_arg_list("-master_aln",$arg_list);
+($sim_matrix, $arg_list)=&extract_val_from_arg_list("-sim_matrix",$arg_list);
+($core_seq, $arg_list)=&extract_val_from_arg_list("-core_seq",$arg_list);
+($dpa_sim, $arg_list)=&extract_val_from_arg_list("-dpa_sim",$arg_list);
+($run_name, $arg_list)=&extract_val_from_arg_list("-run_name",$arg_list);
+($output, $arg_list)=&extract_val_from_arg_list("-output",$arg_list);
+
+
+
+if (!$sim_mat && !$master_aln)#Compute the fast alignment
+  {
+    $ref_aln=vtmpnam();
+    `t_coffee -seq=$seq -very_fast -outfile=$ref_aln -quiet`;
+    
+  }
+
+if (!$sim_mat)
+  {
+    $sim_mat=vtmpnam();
+    `seq_reformat -in $ref_aln -output sim > $sim_mat`;
+  }
+
+if ( !$core_seq)
+  {
+    $core_seq=vtmpnam();
+    `seq_reformat -in $ref_aln -action +trimTC N$max_nseq -output fasta_seq > $core_seq`;
+  }
+@core_name=`seq_reformat -in $core_seq -output name `; 
+
+@tot_name=`seq_reformat -in $seq -output name `;
+
+foreach $s (@core_name){$s=~s/\s//g;$hcore{$s}=1;}
+foreach $s (@tot_name){$s=~s/\s//g;}
+print STDERR "T-Coffee_dpa:\n";
+print STDERR "\tTOTAL  SEQ: @tot_name\n";
+print STDERR "\tCHOSEN SEQ: @core_name\n";
+
+
+
+open (F, $sim_mat);
+while ( <F>)
+  {
+    @l=($_=~/(\b[\S]+\b)/g);
+    if (($l[0] eq "TOP" || $l[0] eq "BOT"))
+      {
+	$s1=$l[1];$s2=$l[2];$v=$l[3];
+	if ($hcore{$s1} && !$hcore{$s2})
+	  {
+	    if (!$hseq{$s2}{"sim"} || $v>$hseq{$s2}{"sim"})
+	      {
+		$hseq{$s2}{"sim"}=$v;$hseq{$s2}{"seq"}=$s1;
+	      }
+	  }
+      }
+  }
+close (F);
+foreach $s (@tot_name)
+  {
+
+    if ( !$hseq{$s}{"seq"}){;}
+    else
+      {
+	$s2=$hseq{$s}{"seq"};
+	$v=$hseq{$s}{"sim"};
+		
+	if ($v>$dpa_sim)
+	  {
+	    $hseq{$s}{'used'}=1;
+	    $seq_list{$s2}{$seq_list{$s2}{'nseq'}++}=$s;
+	  }
+      }
+  }
+foreach $s (@core_name){$seq_list{$s}{$seq_list{$s}{'nseq'}++}=$s;$hseq{$s}{'used'}=1;}
+foreach $s (@tot_name){if (!$hseq{$s}{'used'}){$seq_list{'unused'}{$seq_list{'unused'}{'nseq'}++}=$s;}}
+
+
+$n=0;
+foreach $s (@core_name)
+  {
+    $ng++;
+    $n=$seq_list{$s}{'nseq'};
+    for (@g_list=(), $a=0; $a<$n; $a++){@g_list=(@g_list,$seq_list{$s}{$a});}
+
+    $g_seq=vtmpnam();
+    $g_aln=vtmpnam();
+    
+    print STDERR "Group $ng: $#g_list Seq: @g_list: ";
+    
+    
+    `seq_reformat -in $seq -action +lower +keep_name +extract_seq  @g_list -output fasta_seq > $g_seq`;
+    
+    
+    if ( $#g_list==0)
+      {
+	print STDERR "[No aln]\n";
+	$g_aln=$g_seq;
+      }
+    elsif ($#g_list<$max_nseq) 
+      {
+	print STDERR "[t_coffee]\n";
+	`t_coffee $g_seq -outfile=$g_aln -quiet $arg_list`;
+      }
+    else
+      {
+	print STDERR "[t_coffee_dpa]\n";
+	`t_coffee_dpa2 $g_seq -outfile=$g_aln $arg_list -sim_matrix $sim_matrix -dpa_nseq $dpa_nseq`;
+      }
+    @profile_list=(@profile_list, $g_aln);
+  }
+
+
+print "UNUSED $seq_list{'unused'}{'nseq'}";
+
+if ($seq_list{'unused'}{'nseq'})
+    {
+      $prf=vtmpnam();
+      
+      `t_coffee -profile @profile_list $arg_list -outfile=$prf -quiet`;
+      $n=$seq_list{"unused"}{'nseq'};
+      $new_seq=vtmpnam();
+      $new_prf=vtmpnam();
+      for ($a=0; $a<$n-1; $a++)
+	{
+	  $s=$seq_list{"unused"}{$a};
+	  print STDERR "\nADD Sequence $s";
+	  
+	  `seq_reformat -in $seq -action +lower +keep_name +extract_seq $s  -output fasta_seq > $new_seq`;
+	  `t_coffee -profile $prf $new_seq $arg_list -outfile=$new_prf`;
+	  `cp $new_prf $prf`;
+	}
+      $s=$seq_list{"unused"}{$a};
+      `seq_reformat -in $seq -action +lower +keep_name +extract_seq $s  -output fasta_seq > $new_seq`;
+      @profile_list=($prf, $new_seq);
+    }
+    
+      
+if ($run_name){$arg_list.=" -run_name $run_name";}
+else 
+  {
+    $in_seq=~/([\w-]+)/;
+    $arg_list.=" -run_name $1";
+  }
+if ( $output){$arg_list.=" -output $output ";}
+
+`t_coffee -profile @profile_list $arg_list`;
+
+
+&clean (@tmp_file_list);
+
+
+sub vtmpnam
+  {
+    my $tmp_file_name;
+    $tmp_name_counter++;
+    $tmp_file_name="tmp_file_$tmp_name_counter\_Pid$$";
+    $tmp_file_list[$ntmp_file++]=$tmp_file_name;
+    return $tmp_file_name;
+  }
+sub clean
+  {
+  my @fl=@_;
+  my $file;
+  return;
+
+  foreach $file ( @fl)
+    {
+      if ( -e $file){unlink($file);}
+    }
+}
+sub extract_val_from_arg_list
+  {
+    my $arg=@_[0];
+    my $arg_list=@_[1];
+    my $keep_flag=@_[2];
+    #protect
+    $arg_list=~s/\s-/ \@/g;
+    $arg=~s/-/\@/g;
+    
+    #search
+    if ($arg eq "^")
+      {
+	$arg_list=~/^([^@]*)/;
+	$val=$1;
+      }
+    else
+      {$arg_list=~/$arg ([^@]*)/;$val=$1;}
+    
+    #remove the parsed sequence if needed
+    if ($val && $keep_flag ne "KEEP")
+      {
+	if ( $arg eq "^"){$arg_list=~s/$val/ /;}
+	else {$arg_list=~s/($arg [^@]*)/ /;}
+      }
+	
+    #unprotect
+    $arg_list=~s/\@/-/g;
+    $arg=~s/\@/-/g;
+    
+    return $val, $arg_list;
+  }
+
+
