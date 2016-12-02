@@ -1107,14 +1107,15 @@ prf2: profile containing one structure
 
 These command lines have been checked before every release along with the other command lines in this documentation.
 
-  - external methods:
+1) External methods:
 
 ::
 
   $$: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=text
 
 
-  - list of command lines kindly provided by James Watson (used to crash the pg before version 3.40).
+
+2) List of command lines provided by James Watson used to crash T-Coffee before version 3.40:
 
 ::
 
@@ -1123,7 +1124,7 @@ These command lines have been checked before every release along with the other 
 
 
 
-  - command line to read 'relaxed' PDB files...
+3) Command line to read 'relaxed' PDB files...
 
 ::
 
@@ -1131,7 +1132,7 @@ These command lines have been checked before every release along with the other 
       -weight 1000 -out_lib sample_3Dseq1.tc_lib -lib_only
 
 
-  - Parsing of long sequence lines:
+4) Parsing of long sequence lines:
 
 ::
 
