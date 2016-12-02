@@ -1132,7 +1132,7 @@ These command lines have been checked before every release along with the other 
       -weight 1000 -out_lib sample_3Dseq1.tc_lib -lib_only
 
 
-4) Parsing of long sequence lines:
+4) Parsing long sequence lines:
 
 ::
 
