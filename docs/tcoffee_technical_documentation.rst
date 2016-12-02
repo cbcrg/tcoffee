@@ -121,7 +121,7 @@ The input has to be a file containing extra parameters for T-Coffee. Parameters 
   $$: t_coffee -parameters=sample_param_file.param
   
   Command 2: sending parameters to T-Coffee
-  ##: cat sample_file.param | t_coffee -parameters=stdin
+  $$: cat sample_param_file.param | t_coffee -parameters=stdin
   
   **********sample_file.param***********
    -in=Ssample_seq1.fasta,Mfast_pair
@@ -350,9 +350,9 @@ Causes the output alignment to contain the number of residue at the end of each 
 
 Evaluation files
 ----------------
-The CORE is an index that indicates the consistency between the library of piarwise alignments and the final multiple alignment. Our experiment indicate that the higher this consistency, the more reliable the alignment. A publication describing the CORE index can be found here `<http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_. All these modes will be useful when generating colored version of the output, with the **-output** flag (cf. Chapter **T-Coffee Main Documentation, Section Preparing Your Data**).
+The CORE is an index that indicates the consistency between the library of piarwise alignments and the final multiple alignment. Our experiment indicate that the higher this consistency, the more reliable the alignment. A publication describing the CORE index can be found `here <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_. All these modes will be useful when generating colored version of the output, with the **-output** flag (cf. Chapter **T-Coffee Main Documentation, Section Preparing Your Data**).
 
-- **-evaluate_mode** (usage:**-evaluate_mode=<t_coffee_fast,t_coffee_slow,t_coffee_non_extended >**/default:**-evaluate_mode=t_coffee_fast**)
+- **-evaluate_mode** (usage:**-evaluate_mode=<t_coffee_fast,t_coffee_slow,t_coffee_non_extended>**/default:**-evaluate_mode=t_coffee_fast**)
 This flag indicates the mode used to normalize the T-Coffee score when computing the reliability score. Several options are possible: 
 
   - **t_coffee_fast**: Normalization is made using the highest score in the MSA. This evaluation mode was validated and in our hands, pairs of residues with a score of 5 or higher have 90 % chances to be correctly aligned to one another.
@@ -387,7 +387,7 @@ MSAs based on dynamic programming depend slightly on the order in which the inco
 Librairies & trees
 ------------------
 - **-out_lib** (usage:**-out_lib=[name of the library,default,no]**/default:**-out_lib=default**)
-Sets the name of the library output. Default implies <run_name>.tc_lib.
+Sets the name of the library output. Default implies ``<run_name>.tc_lib``.
 
 - **-lib_only**
 Causes the program to stop once the library has been computed. Must be used in conjunction with the flag **-out_lib**.
@@ -559,7 +559,7 @@ Indicates the penalty applied for extending a gap. The penalty must be negative.
 
 .. hint:: Here are some guidelines regarding the tuning of **-gapopen** and **-gapext**. In T-Coffee matches get a score between 0 (match) and 1000 (match perfectly consistent with the library). The default cosmetic penalty is set to -50 (5% of a perfect match). If you want to tune **-gaopen** and see a strong effect, you should therefore consider values between 0 and -1000.
 
--**-cosmetic_penalty** (usage:**-cosmetic_penalty=[negative value]**/default:**-cosmetic_penalty=-50**)
+- **-cosmetic_penalty** (usage:**-cosmetic_penalty=[negative value]**/default:**-cosmetic_penalty=-50**)
 Indicates the penalty applied for opening a gap. This penalty is set to a very low value, it will only have an influence on the portions of the alignment that are unalignable. It will not make them more correct but only more pleasing to the eye (avoid stretches of lonely residues). The cosmetic penalty is automatically turned off if a substitution matrix is used rather than a library.
 
 - **-tg_mode** (usage:**-tg_mode=[0,1 or 2]**/default:**-tg_mode=1**)
@@ -615,8 +615,8 @@ This flag indicates that T-Coffee will run using the domain mode. All the sequen
 
 ::
 
-  $#: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.moc\
- ca_lib -domain -start=100 -len=50
+  $#: t_coffee -in Ssample_seq1.fasta,Mlalign_rs_s_pair -out_lib=sample_lib1.mocca_lib \
+      -domain -start=100 -len=50
 
 This instruction will use the fragment 100-150 on the concatenated sequences, as a template for the extracted repeats. The extraction will only be made once. The library will be placed in the file <lib name>. If you want, you can test other coordinates for the repeat, such as:
 
@@ -658,8 +658,8 @@ Indicates the mode used for the evaluation that will indicate the segments that 
 Sequences are extracted in turn and realigned to the MSA. If **-iterate** is set to -1, each sequence is realigned; otherwise the number of iterations is set by **-iterate**.
 
 
-Template based T-Coffee modes
-=============================
+Template based modes
+====================
 Database searches parameters
 ----------------------------
 These parameters are used when running template based modes of T-Coffee such as EXPRESSO (3D), PSI-Cofee (homology extension), TM/PSI-Coffee (homology extension/reduced databases), or accurate (mixture of profile and 3D templates).
@@ -697,7 +697,7 @@ Minimum coverage for a PDB template to be selected by Expresso.
 
 Using structures
 ----------------
-- **-mode** (usage:**-mode=[3dcoffee,expresso])
+- **-mode** (usage:**-mode=[3dcoffee,expresso]**)
 Refer to the **T-Coffee Main Documentation** for the structural modes of T-Coffee.
 
 - **-check_pdb_status**
@@ -709,6 +709,8 @@ Using/finding PDB templates for the sequences
 - **-template_file** (usage:**-template_file =[<filename>,<SCRIPT_scriptname>,SELF_TAG_,SEQFILE_TAG_<filename>,PDB,no>**)
 This flag instructs T-Coffee on the templates that will be used when combining several types of information. For instance, when using structural information, this file will indicate the structural template that corresponds to your sequences. Each template will be used in place of the sequence with the appropriate method. The identifier T indicates that the file should be a FASTA-like file, formatted as follows. There are several ways to pass the templates, the format of the template file being as followed "<sequence name> <TAG> <template name>":
 
+  1) Using a "filename":
+  
 ::
 
   Template file format:
@@ -735,40 +737,39 @@ The type of template on which a method works is declared with the SEQ_TYPE param
  - SEQ_TYPE P: a method that aligns structures (SAP for instance)
 
 
-SCRIPT_<scriptname>
+  2) Using "SCRIPT_<scriptname>"
+  
 Indicates that filename is a script that will be used to generate a valid template file. The script will run on a file containing all your sequences using the following syntax:
 
 ::
 
+  Running using a script:
   ##: scriptname -infile=<your sequences> -outfile=<template_file>
 
-It is also possible to pass some parameters, use @ as a separator and # in place of the = sign. For instance, if you want to call the a script named blast.pl with the following parameters. Bear in mind that the input output flags will then be concatenated to this command line so that t_coffee ends up calling the program using the following system call.
+It is also possible to pass some parameters, use @ as a separator and # in place of the = sign. For instance, if you want to call the a script named **blast.pl** with the following parameters. Bear in mind that the input/output flags will then be concatenated to this command line so that T-Coffee ends up calling the program using the following system call.
 
 ::
 
-  blast.pl -db=pdb -dir=/local/test
-  SCRIPT_blast.pl@db#pdb@dir#/local/test
-  blast.pl -db=pdb -dir=/local/test -infile=<some tmp file> -outfile=<another tmp file>
+  Running blast.pl:
+  ##: blast.pl -db=pdb -dir=/local/test
+  ##: SCRIPT_blast.pl@db#pdb@dir#/local/test
+  ##: blast.pl -db=pdb -dir=/local/test -infile=<some tmp file> -outfile=<another tmp file>
 
 
 
-
-SELF_TAG
+  3) Using "SELF_TAG"
+  
 TAG can take the value of any of the known TAGS (_S_, _G_, _P_). SELF indicates that the original name of the sequence will be used to fetch the template. The previous command will work because the sequences in 3d_sample3 are named...
 
 ::
 
-  $$: t_coffee 3d_sample2.fasta -template_file SELF_P_
+  $$: t_coffee three_pdb.fasta -template_file SELF_P_
 
 
 
-SEQFILE_TAG_filename
-Use this flag if your templates are in filename, and are named according to the sequences. For instance, if your protein sequences have been recoded with Exon/Intron information, you should have the recoded sequences names according to the original:
-
-::
-
-  SEQFILE_G_recodedprotein.fasta
-
+  4) Using "SEQFILE_TAG_filename"
+  
+Use this flag if your templates are in filename, and are named according to the sequences. For instance, if your protein sequences have been recoded with Exon/Intron information, you should have the recoded sequences names according to the original ``SEQFILE_G_recodedprotein.fasta``.
 
 - **-struc_to_use** (usage:**-struc_to_use=[struc1, struc2...]**/ Default:none)
 Restricts the 3D-Coffee to a set of predefined structures.
@@ -807,35 +808,24 @@ Sequence name handling
 ======================
 Sequence name handling is meant to be fully consistent with ClustalW (Version 1.75). This implies that in some cases the names of your sequences may be edited when coming out of the program. Five rules apply:
 
-  1) No space
-It is your responsibility to make sure that the names you provide are not ambiguous after such an editing. This editing is consistent with Clustalw (Version 1..75)
-  Names that do contain spaces, for instance:
-   >seq1 human_myc will be turned into >seq1
-  
-  2) No strange character
-Some non alphabetical characters are replaced with underscores. These are: ';:()'. Other characters are legal and will be kept unchanged. This editing is meant to keep in line with Clustalw (Version 1.75).
-  
-  3) > is NEVER legal (except as a header token in a FASTA file)
-  4) Name length must be below 100 characters, although 15 is recommended for compatibility with other programs.
-  5) Duplicated sequences will be renamed (i.e. sequences with the same name in the same dataset) are allowed but will be renamed according to their original order. When sequences come from multiple sources via the -in flag, consistency of the renaming is not guaranteed. You should avoid duplicated sequences as they will cause your input to differ from your output thus making it difficult to track data.
+  1) **No space**: It is your responsibility to make sure that the names you provide are not ambiguous after such an editing. This editing is consistent with Clustalw (Version 1..75). For instance, sequences with spaces ">seq1 human_myc"  will be turned into ">seq1". 
+  2) **No strange character**: Some non alphabetical characters are replaced with underscores. These are: ';:()'. Other characters are legal and will be kept unchanged. This editing is meant to keep in line with Clustalw (Version 1.75).
+  3) **> is NEVER legal** (except as a header token in a FASTA file)
+  4) **Name length must be below 100 characters**, although 15 is recommended for compatibility with other programs.
+  5) **Duplicated sequences will be renamed** (i.e. sequences with the same name in the same dataset) are allowed but will be renamed according to their original order. When sequences come from multiple sources via the **-in** flag, consistency of the renaming is not guaranteed. You should avoid duplicated sequences as they will cause your input to differ from your output thus making it difficult to track data.
 
 
 Automatic format recognition
 ============================
 Most common formats are automatically recognized by t_coffee. See -in and the next section for more details. If your format is not recognized, use readseq or clustalw to switch to another format. We recommend FASTA.
 
-- Sequences:
-Sequences can come in the following formats: fasta, pir, swiss-prot, clustal aln, msf aln and t_coffee aln. These formats are the one automatically recognized. Please replace the '*' sign sometimes used for stop codons with an X.
+- **Sequences**: Sequences can come in the following formats: fasta, pir, swiss-prot, clustal aln, msf aln and t_coffee aln. These formats are the one automatically recognized. Please replace the '*' sign sometimes used for stop codons with an X.
 
-- Structures:
-PDB format is recognized by T-Coffee. T-Coffee uses extract_from_pdb (cf -other_pg flag). extract_from_pdb is a small embeded module that can be used on its own to extract information from pdb files.
+- **Structures**: PDB format is recognized by T-Coffee. T-Coffee uses extract_from_pdb (cf -other_pg flag). extract_from_pdb is a small embeded module that can be used on its own to extract information from pdb files.
 
--RNA Structures:
-RNA structures can either be coded as T-Coffee libraries, with each line indicating two paired residues, or as alifold output. The selex format is also partly supported (see the seq_reformat tutorial on RNA sequences handling).
+- **RNA Structures**: RNA structures can either be coded as T-Coffee libraries, with each line indicating two paired residues, or as alifold output. The selex format is also partly supported (see the seq_reformat tutorial on RNA sequences handling).
 
--Alignments:
-Alignments can come in the following formats: msf, ClustalW, FASTA, PIR and T-Coffee. The T-Coffee format is very similar to the ClustalW format, but slightly more flexible. Any interleaved format with sequence name on each line will be correctly parsed:
-
+- **Alignments**: Alignments can come in the following formats: msf, ClustalW, FASTA, PIR and T-Coffee. The T-Coffee format is very similar to the ClustalW format, but slightly more flexible. Any interleaved format with sequence name on each line will be correctly parsed:
 
 ::
 
@@ -895,10 +885,7 @@ V1: Integer Value: Weight
 V2, V3: optional values
 
 
-.. note:: 1) There is a space between the ! And SEQ_1_TO_N, and 2)The last line (! SEQ_1_TO_N) indicates that:
-
-Sequences and residues are numbered from 1 to N, unless the token SEQ_1_TO_N is omitted, in which case the sequences are numbered from 0 to N-1, and residues are from 1 to N. Residues do not need to be sorted, and neither do the sequences. The same pair can appear several times in the library. For instance, the following file would be legal:
-
+Note that here is a space between the ! And SEQ_1_TO_N...and the last line (! SEQ_1_TO_N) indicates that sequences and residues are numbered from 1 to N, unless the token SEQ_1_TO_N is omitted, in which case the sequences are numbered from 0 to N-1, and residues are from 1 to N. Residues do not need to be sorted, and neither do the sequences. The same pair can appear several times in the library. For instance, the following file would be legal:
 
 ::
 
@@ -911,7 +898,6 @@ Sequences and residues are numbered from 1 to N, unless the token SEQ_1_TO_N is 
 
 
 It is also possible to declare ranges of residues rather than single pairs. For instance, the following:
-
 
 ::
 
@@ -931,7 +917,6 @@ T-COFFEE_LIB_FORMAT_02
 ----------------------
 A simpler format is being developed, however it is not yet fully supported and is only mentioned here for development purpose.
 
-
 ::
 
   ! TC_LIB_FORMAT_02
@@ -944,17 +929,21 @@ A simpler format is being developed, however it is not yet fully supported and i
   ...
 
 
-S1, S2: name of sequence 1 and 2
-SEQ1: sequence of S1
-Ri1, Ri2: index of the residues in their respective sequence
-R1, R2: Residue type
-V1, V2, V3: integer Values (V2 and V3 are optional)
+S1,S2: name of sequence 1 and 2.
+
+SEQ1: sequence of S1.
+
+Ri1, Ri2: index of the residues in their respective sequence.
+
+R1, R2: Residue type.
+
+V1, V2, V3: integer Values (V2 and V3 are optional).
+
 Value1, Value 2 and Value3 are optional.
 
 Library List
 ------------
 These are lists of pairs of sequences that must be used to compute a library. The format is:
-
 
 ::
 
@@ -966,7 +955,7 @@ These are lists of pairs of sequences that must be used to compute a library. Th
 
 Substitution matrices
 =====================
-If the required substitution matrix is not available, write your own in a file using the following format:
+If the required substitution matrix is not available, write your own in a file using one of the following format.
 
 BLAST format [Recommended]
 --------------------------
@@ -1042,17 +1031,18 @@ Environment Variables
 T-Coffee stores a lots of information in locations that may be unsuitable when running a server.
 
 
-By default, T-Coffee will generate and rely on the follwing directory structure:
+By default, T-Coffee will generate and rely on the following directory structure:
 
 
 ::
 
-  /home/youraccount/ #HOME_4_TCOFFEE
-  HOME_4_TCOFFEE/.t_coffee/  #DIR_4_TCOFFEE
-  DIR_4_TCOFFEE/cache #CACHE_4_TCOFFEE
-  DIR_4_TCOFFEE/tmp #TMP_4_TCOFFEE
-  DIR_4_TCOFFEE/methods #METHOS_4_TCOFFEE
-  DIR_4_TCOFFEE/mcoffee #MCOFFEE_4_TCOFFEE
+  Directory structure:
+  ##: /home/your account/ #HOME_4_TCOFFEE
+  ##: HOME_4_TCOFFEE/.t_coffee/  #DIR_4_TCOFFEE
+  ##: DIR_4_TCOFFEE/cache #CACHE_4_TCOFFEE
+  ##: DIR_4_TCOFFEE/tmp #TMP_4_TCOFFEE
+  ##: DIR_4_TCOFFEE/methods #METHOS_4_TCOFFEE
+  ##: DIR_4_TCOFFEE/mcoffee #MCOFFEE_4_TCOFFEE
 
 
 By default, all these directories are automatically created, following the dependencies suggested here. The first step is the determination of the HOME. By default the program tries to use HOME_4_TCOFFEE, then the HOME variable and TMP or TEMP if HOME is not set on your system or your account. It is your responsibility to make sure that one of these variables is set to some valid location where the T-Coffee process is allowed to read and write. If no valid location can be found for HOME_4_TCOFFEE, the program exits. If you are running T-Coffee on a server, we recommend to hard set the following locations, where your scratch is a valid location.
@@ -1060,14 +1050,16 @@ By default, all these directories are automatically created, following the depen
 
 ::
 
-  HOME_4_TCOFFEE='your scratch'
-  TMP_4_TCOFFEE='your scratch'
-  DIR_4_TCOFFEE='your scratch'
-  CACHE_4_TCOFFEE='your scratch'
-  NO_ERROR_REPORT_4_TCOFFEE=1
+  T-Coffee server configuration:
+  
+  ##: HOME_4_TCOFFEE='your scratch'
+  ##: TMP_4_TCOFFEE='your scratch'
+  ##: DIR_4_TCOFFEE='your scratch'
+  ##: CACHE_4_TCOFFEE='your scratch'
+  ##: NO_ERROR_REPORT_4_TCOFFEE=1
 
 
-Note that it is a good idea to have a cron job that cleans up this scratch area, once in a while.
+Note that it is a good idea to have a cron job that cleans up this scratch area once in a while.
 
 
 Output of the .dnd file.
@@ -1098,54 +1090,52 @@ Known Problems
 
 Development
 ===========
-The following examples are only meant for internal development, and are used to insure stability from release to release
+The following examples are only meant for internal development and are used to insure stability from release to release.
 
-profile2list
-------------
+- **profile to list**
+
 prf1: profile containing one structure
 prf2: profile containing one structure
 
-
 ::
 
 
-  $$: t_coffee -profile sample_profile1.aln,sample_profile2.aln -mode=3dcoffee -outfile\
-      =aligned_prf.aln
-
-Command Line List
------------------
-These command lines have been checked before every release (along with the other CL in this documentation:
-
--external methods;
-
-::
-
-  $$: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text
+  $#: t_coffee -profile sample_profile1.aln,sample_profile2.aln -mode=3dcoffee
 
 
--A list of command lines kindly provided by James Watson (used to crash the pg before version 3.40)
+- **command line list**
+
+These command lines have been checked before every release along with the other command lines in this documentation.
+
+  - external methods:
 
 ::
 
-
-  $$: t_coffee -mode 3dcoffee -in Sseq.fas P2PTC
-  $$: t_coffee -mode 3dcoffee -in S2seqs.fas -template_file SELF_P_
+  $$: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=text
 
 
-
--A command line to read 'relaxed' pdb files...
+  - list of command lines kindly provided by James Watson (used to crash the pg before version 3.40).
 
 ::
 
-  $$: t_coffee -in Msap_pair Ssample_seq7.fasta -template_file template_file7.te\
- mplate -weight 1001 -out_lib test_lib7.tc_lib -lib_only
+  $$: t_coffee -mode 3dcoffee -in Sthree_pdb.fasta P1PPG
+  $$: t_coffee -mode 3dcoffee -in Sthree_pdb.fasta -template_file SELF_P_
 
 
--Parsing of long sequence lines:
+
+  - command line to read 'relaxed' PDB files...
 
 ::
 
-  $$: t_coffee -in Asample_aln5.aln -outfile test.aln
+  $$: t_coffee -in Msap_pair Ssample_3Dseq1.fasta -template_file sample_3Dseq1.template \
+      -weight 1000 -out_lib sample_3Dseq1.tc_lib -lib_only
+
+
+  - Parsing of long sequence lines:
+
+::
+
+  $$: t_coffee -in Aproteases_large.aln -outfile test.aln
 
 
 *************
