@@ -1115,7 +1115,7 @@ These command lines have been checked before every release along with the other 
 
 
 
-2) List of command lines provided by James Watson used to crash T-Coffee before version 3.40:
+2) List of command lines provided by James Watson to crash T-Coffee before version 3.40:
 
 ::
 
