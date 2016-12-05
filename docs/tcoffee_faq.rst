@@ -190,7 +190,7 @@ A: This is a problem that has to do with your browser. Instead of requesting the
 
 Q: I want to output an html file and a regular file
 ---------------------------------------------------
-A: see the next question
+A: See the next question.
 
 
 Q: I would like to output more than one alignment format at the same time
@@ -230,7 +230,7 @@ A: use the **-convert** flag. This command will read the .aln file and turn it i
   $$: t_coffee sample_aln1.aln -convert -output=gcg
 
 
-Q: I would like to force some residues to be aligned (under maintenance...)
+Q: I would like to force some residues to be aligned
 ----------------------------------------------------
 If you want to brutally force some residues to be aligned, you may use as a post processing, the **+force_aln** function of **seq_reformat**. You can either specify single (command 1) or multiple constraints using a TC_LIB_FORMAT_02 file (command 2). When giving more than one constraint, these will be applied one after the other in the order they are provided. This greedy procedure means that the Nth constraint may disrupt the (N-1)th previously imposed constraint, hence the importance of forcing the constraints in the right order, with the most important coming last. We do not recommend imposing hard constraints on an alignment, and it is much more advisable to use the soft constraints provided by standard T-Coffee libraries (cf. **T-Coffee Technical Documentation**, subsection **Creating your own T-Coffee libraries**).
 
@@ -285,8 +285,8 @@ A: Use the **-usetree=<your own tree>** flag:
   $$: t_coffee sample_seq1.fasta -usetree=sample_seq1_tree_nj.nwk
 
 
-Q: I want to align coding DNA.
-------------------------------
+Q: I want to align coding DNA
+-----------------------------
 A: Use the **fasta_cdna_pair** method that compares two cDNA using the best reading frame and taking frameshifts into account. Notice that in the resulting alignments (command 1), all the gaps are of modulo3, except one small gap in the first line of sequence hmgl_trybr. This is a frameshift made on purpose. You can realign the same sequences while ignoring their coding potential and treating them like standard DNA (command 2).
 
 ::
@@ -300,12 +300,12 @@ A: Use the **fasta_cdna_pair** method that compares two cDNA using the best read
 
 .. warning:: This method has not yet been fully tested and is only provided 'as-is' with no warranty. Any feedback will be much appreciated.
 
-Q: I do not want to use all the possible pairs when computing the library.
---------------------------------------------------------------------------
+Q: I do not want to use all the possible pairs when computing the library
+-------------------------------------------------------------------------
 See next question.
 
-Q: I only want to use specific pairs to compute the library.
-------------------------------------------------------------
+Q: I only want to use specific pairs to compute the library
+-----------------------------------------------------------
 A: Simply write in a file the list of sequence groups you want to use. Pairwise methods (slow_pair, proba_pair, <method>_pair...) will only be applied to list of pairs of sequences, while multiple methods (clustalw_msa, mafft_msa, <method_msa...) will be applied to any dataset having more than two sequences.
 
 ::
@@ -338,7 +338,7 @@ A: Yes, you simply need to indicate that your alignment is a profile with the R 
   $$: t_coffee sample_seq1.fasta -profile=sample_aln2.aln -outfile chewbacca
 
 
-Q: Can I align sequences two or more profiles?
+Q: Can I align sequences two or more profiles? (under maintenance)
 ----------------------------------------------
 A: Yes, you, simply tag your profiles with the letter R and the program will treat them like standard sequences:
 
@@ -433,7 +433,7 @@ A: Refers to the **T-Coffee Main Documentation**, section **Evaluating Your Alig
 
 Q: What is that color index?
 ----------------------------
-A: T-Coffee can provide you with a measure of consistency among all the methods used. An html file is produced by default each time you run an alignment. This html file is a colored version of your MSA that you can visualize with any common browser. As alternatives, you can use **score_ps** (postscript), **score_pdf** (pdf file) or **score_ascii** (text file). you want more information about the CORE index represented by this color index, have a look at this `chapter <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_.
+A: T-Coffee can provide you with a measure of consistency among all the methods used. An html file is produced by default each time you run an alignment. This html file is a colored version of your MSA that you can visualize with any common browser. As alternatives, you can use **score_ps** (postscript), **score_pdf** (pdf file) or **score_ascii** (text file). If you want more information about the CORE index represented by this color index, have a look at this `chapter <http://www.tcoffee.org/Publications/Pdf/core.pp.pdf>`_.
 
 Q: Can I evaluate alignments NOT produced with T-Coffee?
 --------------------------------------------------------
