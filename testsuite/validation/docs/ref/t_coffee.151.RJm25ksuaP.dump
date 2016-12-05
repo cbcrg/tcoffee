@@ -1,0 +1,4474 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -seq sample_seq1.fasta -output tcs_weighted, tcs_replicate_100</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=834, Nseq=4, Len=81 
+
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhs----d-lsivemskaagaawkelgpeerkvyeemaekdkerykrem---------
+hmgt_mouse      -----kpkrprsayniyvsesfqeak----d-dsaqgklklvneawknlspeekqayiqlakddrirydnemksweeqmae
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk--dkseweakaatakqnyiralqeyerng-g
+hmgl_wheat      --dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvakanklkgeynkaiaaynkgesa
+                      ***. ::: .: ..  .. .    .  .     *  .  *: *   ::  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[1] 	sample_seq1.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[1] 	tcs_weighted	tcs_replicate_100
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:14532]	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:14531]	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+
+!		[Final Evaluation][TOT=    3][  0 %]!		[Final Evaluation][TOT=    3][ 66 %]!		[Final Evaluation][TOT=    3][100 %]
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:14495][Forked]
+
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= sample_seq1.dnd
+	#### File Type= MSA             Format= tcs_weighted    Name= sample_seq1.tcs_weighted
+	#### File Type= MSA             Format= tcs_replicate_100 Name= sample_seq1.tcs_replicate_100
+
+# Command Line: t_coffee -seq sample_seq1.fasta -output tcs_weighted tcs_replicate_100  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.211 Mb, Max= 30.258 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.fasta</name>
+<content>
+>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.dnd</name>
+<content>
+(
+(
+hmgb_chite:0.14250,
+hmgl_wheat:0.14750)
+:0.00750,
+hmgl_trybr:0.13250,
+hmgt_mouse:0.14750);
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.dnd</name>
+<content>
+(
+(
+hmgb_chite:0.14250,
+hmgl_wheat:0.14750)
+:0.00750,
+hmgl_trybr:0.13250,
+hmgt_mouse:0.14750);
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.tcs_weighted</name>
+<content>
+    4  637
+hmgl_trybr kkkkkkdddd dssssssssn nnnnnnnnaa aaaaaaaapp ppppppppkk kkkkkkkkrr rrrrrrrraa aaaaaaaamm mmmmmmmmtt ttttttttss ssssssssff ffffffffmm mmmmmmmmff ffffffffff ffffffffss ssssssssss
+hmgt_mouse ---------- ---------- --------kk kkkkkkkkpp ppppppppkk kkkkkkkkrr rrrrrrrrpp pppppppprr rrrrrrrrss ssssssssaa aaaaaaaayy yyyyyyyynn nnnnnnnnii iiiiiiiiyy yyyyyyyyvv vvvvvvvvss
+hmgb_chite ---------- -aaaaaaaad ddddddddkk kkkkkkkkpp ppppppppkk kkkkkkkkrr rrrrrrrrpp ppppppppll llllllllss ssssssssaa aaaaaaaayy yyyyyyyymm mmmmmmmmll llllllllww wwwwwwwwll llllllllnn
+hmgl_wheat ------dddd dppppppppn nnnnnnnnkk kkkkkkkkpp ppppppppkk kkkkkkkkrr rrrrrrrraa aaaaaaaapp ppppppppss ssssssssaa aaaaaaaaff ffffffffff ffffffffvv vvvvvvvvff ffffffffmm mmmmmmmmgg
+
+           sssssssddd dddddfffff ffrrrrrrrs ssssskkkkk hhhhhsssss ---------- --ddddd--l llllssssss iiiiiivvvv vvveeeeeee mmmmmmmsss sssssskkkk kkkkkaaaaa aaaaaaaaaa aaaaaggggg gggggaaaaa
+           ssssssseee eeeeesssss ssfffffffq qqqqqeeeee aaaaakkkkk ---------- --ddddd--d ddddssssss aaaaaaqqqq qqqggggggg kkkkkkklll llllllkkkk kkkkklllll lllllvvvvv vvvvvnnnnn nnnnneeeee
+           nnnnnnnsss sssssaaaaa aarrrrrrre eeeeesssss iiiiikkkkk rrreeennnp ppddddd--f ffffkkkkkk vvvvvvtttt ttteeeeeee vvvvvvvaaa aaaaaakkkk kkkkkkkkkk kkkkkggggg gggggggggg gggggeeeee
+           gggggggeee eeeeefffff ffrrrrrrre eeeeeeeeee fffffkkkkk qqqkkknnnp ppkkkkknnk kkkkssssss vvvvvvaaaa aaaaaaaaaa vvvvvvvggg ggggggkkkk kkkkkaaaaa aaaaaaaaaa aaaaaggggg gggggeeeee
+
+           aaaaaaaaaa aaaaawwwww wwwwwkkkkk kkkkkeeeee eeeeelllll lllllggggg gggppppppp eeeeeeeeee eeerrrrrrr rkkkkkkkkv vvvvvvvvyy yyyyyyyeee eeeeeeeeee eeeeeemmmm mmmmmmaaaa aaaaaaeeee
+           eeeeeaaaaa aaaaawwwww wwwwwkkkkk kkkkknnnnn nnnnnlllll lllllsssss sssppppppp eeeeeeeeee eeekkkkkkk kqqqqqqqqa aaaaaaaayy yyyyyyyiii iiiiiiqqqq qqqqqqllll llllllaaaa aaaaaakkkk
+           eeeeelllll lllllwwwww wwwwwrrrrr rrrrrggggg ggggglllll lllllkkkkk kkk------- ------dddd dddkkkkkkk ksssssssse eeeeeeeeww wwwwwwweee eeeeeeaaaa aaaaaakkkk kkkkkkaaaa aaaaaaaaaa
+           eeeeerrrrr rrrrrwwwww wwwwwkkkkk kkkkksssss ssssslllll lllllsssss ssseeeeeee sssssseeee eeekkkkkkk kaaaaaaaap ppppppppyy yyyyyyyvvv vvvvvvaaaa aaaaaakkkk kkkkkkaaaa aaaaaannnn
+
+           eeeeeekkkk kkkkkkdddd ddddddkkkk kkkkkkeeee eeeeeerrrr rrrrrryyyy yyyyyykkkk kkkkkkrrrr rrrrrreeee eeeeeemmmm mmmmmm---- ---------- ---------- ---------- ---------- -------
+           kkkkkkdddd dddddddddd ddddddrrrr rrrrrriiii iiiiiirrrr rrrrrryyyy yyyyyydddd ddddddnnnn nnnnnneeee eeeeeemmmm mmmmmmkkkk kkkkksssss ssswwwwwww weeeeeeeee eeqqqqmmmm aaaeeee
+           aaaaaatttt ttttttaaaa aaaaaakkkk kkkkkkqqqq qqqqqqnnnn nnnnnnyyyy yyyyyyiiii iiiiiirrrr rrrrrraaaa aaaaaallll llllllqqqq qqqqqeeeee eeeyyyyyyy yeeeeeerrr rrnnnngggg ---gggg
+           nnnnnnkkkk kkkkkkllll llllllkkkk kkkkkkgggg ggggggeeee eeeeeeyyyy yyyyyynnnn nnnnnnkkkk kkkkkkaaaa aaaaaaiiii iiiiiiaaaa aaaaaaaaaa aaayyyyyyy ynnnnnnkkk kkggggeeee sssaaaa
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.tcs_replicate_100</name>
+<content>
+    4  81
+hmgl_trybr tpfsrs--g- df-kypsegk ydsapkakfd -hveey-rep ma-efkkkmk fdameag-lk amffwrrkpg shmmnnk-yl s
+hmgt_mouse spiqfqsssa dsekypsknq y-lkpdvkyd -aqeqykkqp lkeqyqdkkk iellgkswld amyiwnnkps aalr--dmyd l
+hmgb_chite s-lereeek- dagkwpnags y-ak-igkya eitdawqka- kkrawsirvk lskkekkylt alylwrrr-k aiklddigwf a
+hmgl_wheat severeaass kfakypgnga ydgkenakfl kfaeayakae kkkafankvk veakaksylk aifvwkkkes afkpnnneyk g
+
+
+
+    4  81
+hmgl_trybr re-eadfpym ryikr-py-a kdksalsadp rssrds-sle gwl-eveegd aydapdmkm- -ykspheeds hs-y-ysras d
+hmgt_mouse nqwip-spyr nyakf-pywa kdkqvlalep nvkr-lksli swdeeagisd eydkpelela kyevpakedl asey-ylrl- e
+hmgb_chite rayep-apwl rwvkrppyya kdreglaks- rlkn-aqkle kwfrdeeekd ewakpsksk- qwsl-iadaa ikewnwanka s
+hmgl_wheat kayvadfpyp kyvkrppyya kkkealaaee kmkedgaslv swkkepavsk eylkpekeks ayemefnelg fsnynygeap e
+
+
+
+    4  81
+hmgl_trybr -dpdy-atme pefesesavv aeetmsesag resdkskkam kpekksd-iv -raepk-mkr kfekpmping sefmfraeee k
+hmgt_mouse wdp-y-asri piiglevkqa lkesnqn-as fqsdrqdklm kpiq-ve-aa areepdelrr eyedpkpa-s sninyfanee e
+hmgb_chite yap-yraslq pqlea-lkte kadsmegaak rakdketrkl k-qs-lsrve -ne-ptgkkn sy-t-vpvdk kglmwrlg-a s
+hmgl_wheat ylpdyqaspg pgvagsmkap anesfespas raskkekkai kega-meqvp seespkakke efskevpvns ssvffrrssa e
+
+
+
+    4  81
+hmgl_trybr prek-yvekf kmmy-s-kay farl-sr--k skdfay-kwa aeskkvseee seedfsgtsk ref-m-erkk gltaskagem m
+hmgt_mouse preeeyqiky klmy-larly ypnd-snawd qqdikyekwa aesqkaaene qiieyvssvk reiem-indk nlsakdengr n
+hmgb_chite -nasrwterw kklyea-kkw yprfenr-yi esalkyekwl a-nsreadg- eqqsylkslr r-lrlrqrtk glsaktegel m
+hmgl_wheat eeaekyavkf kkiykgskay fakkkgksyn ealvkynkwr asgakpaess eggefmssmk rsvkiqgkkk glsakkegap f
+
+
+
+    4  81
+hmgl_trybr d-kmfsmaef rmeef-atrn rmfar-nksf lsmgsk-srl wweffnsaf- keandspkrg esre-kmear akrhdkdaee a
+hmgt_mouse dw-rysllns knneymasr- kkylrs-ely lqrslkkanl wwkyy-aaye die-ekpekn nqnqqerevr vkkaeddaie a
+hmgb_chite ay-lwnkkga kmg-yglsnd kvyknedsay lelkakqarl wwaywdaayg tqedskpskg geranslagr gkkisidle- l
+hmgl_wheat ly-pfgkasf kfssfersen kvfaeanegf lepsgkaakl wwnffnaafa kgenekpekg sekagepaar akkfenkrvs r
+
+
+
+    4  81
+hmgl_trybr kadldskftf earwsges-k rmarvkm-t- aeyglmsr-s seeasmkmwa -afldvspks -s-rmsesey des-mkfase k
+hmgt_mouse ka-ldlqysy klrwlnkked nrefqklas- eiysdl-raa kkiasr-rwk aeylda-pqv svsnmqi-gy eilekrya-q q
+hmgb_chite rl-laasysw akrwagakei rlertkk-sn eeykfkar-a kaelkl-lwk -eylaea-sl elerleeaew sqaevkylaa s
+hmgl_wheat krdllgafsf narwggnknn kperakkssn evyskkprsa knvrsp-pwk sefllppeam amakievpay eggnvkfrpa a
+
+
+
+    4  81
+hmgl_trybr krrvkleehd mr-yk-ierp raartiaagy vathshe-kr -kd-aemkf- -mpars-tna kkaferkmhr adamsskrep s
+hmgt_mouse -frakliia- lkwyk-anrp raensakany qesavaes-f wr-aenkdi- srparqms-v -kkykfklak pdlrl-drep a
+hmgb_chite -rnekleei- kkywrnvgnp naersvkagy tesiliae-r yk--egvilr elplregsdg -kkwarrkik pdklaatnap a
+hmgl_wheat -repklvvfd kkyyknvsep eaeksvkagy aesfmfaa-r ykdsesvnvq apprreesna -kkfnrkkfk akapgpkeap a
+
+
+
+    4  81
+hmgl_trybr mrhaieawaa esr-rggmkm ssvskkrles ryatmrydav rs--raalsk dmkw-fkakp peetyr-kra akvarke-sg k
+hmgt_mouse mfaaaiewak esrsrnnmrr -vavqdrlka rylsnrydla raksrpal-e drkw-seldp piisyredne lralrdn-ls q
+hmgb_chite lrilveewak dnrergglkl alelstrlaa nwksmnyake naqerpllas alrw-askip -eqsyrrtre kkekntgnak s
+hmgl_wheat irfrvvewak egrarggikp pmpmakrlna eyasfeylap eaaararlpe lpkwnfeanp evgsyrkkke akpaeksngs a
+
+
+
+    4  81
+hmgl_trybr kkf-sesesv rfraaaam-k asempaemns p-nsfm-g-a p-eaky-lkl akpfkyerry fsfsvrwasa svrayeeyse f
+hmgt_mouse erskanvilq fifakvem-- lakmpank-v p--lsnasee p-qldykddd lepieyinry ivssakwave vqrkyqeyak y
+hmgb_chite skaqagleat rlrlkgel-- kaalplgvdl ppdaam-kee ppakiyqfif ks-lswqrry llanekwale ltnkyaayaa w
+hmgl_wheat ekfaasmvga rvrrkaein- aaniprsvnm ppngffssne ppaanyaknk aeeveygkry vmfgpkwame maekyaayan f
+
+
+
+    4  81
+hmgl_trybr esrmaae-py ry-eaga--- le-esmprra elpslpeead ktfaarkefe ekfeladdkh mpemieem-s emv-saktfr -
+hmgt_mouse qarmvai-py kyweese-ke lgkqslprnl glpvlpkged kssppnreii qdielvdeqa lpekannrea nrqksarsyr w
+hmgb_chite aanlglqp-w kyyaekeeqg leqank-rrk el-llpaeed ksapprkdlq aildlgdssi kpavvgglra gltqnlkswr y
+hmgl_wheat aaeiargpey kyyaesekaa laaagkerka alemlpnaek ksfaakkevg anvelakeaf kpavvsspka spaagrksfr y
+
+
+
+    4  81
+hmgl_trybr --srkmkeav egin--emkk ytsdgele-y v-mrmfekfk fkyayeea-d hk-gvmssmk rdkeenrsmf mmkf-d-ma- a
+hmgt_mouse keakklkilq esa-qwen-d ysadnklemy aelrlseryk sryaykilwd arknakvkre rdeie-rvms knkys-klve e
+hmgb_chite qeakrkkqkt dkvdny-m-t ysaagaldgw egknkadkyk akwayaekya ikqgevlkls rasq-drlla vmkye-qkge e
+hmgl_wheat anakkkkgaa esvngysf-k ysalgnleey pakekfekfk fkyaynvayl fkagpvmkpe rlegsnrmif vfkfadakan e
+
+
+
+    4  81
+hmgl_trybr drkda-grpm mysek-krsr fwaaaaamsk de-fsys-ks -kssgkkga- -saaekpnlk et-masyese kmakatfsrm t
+hmgt_mouse drkdessrpm myqik--nsf swllvvvn-k de-ysyvsdq kdvvsdqsam e-aenkp-dk nsmmlkyisq knveesyarm s
+hmgb_chite ankdeeknpl lyeqrr-rnr awkkgggmak aa-wnylete qtllktskag ralegkpdfk gsglkkyena kmgsesyanl s
+hmgl_wheat lekkeasepi iyegkq-kgr fwaaaaafpk lanfgymake akmmskasae kpreskpnkk sseiakyvga kfaeesfaei s
+
+
+
+    4  81
+hmgl_trybr rdevlrwefe -ses-dmvfm rkamaevswk aaerepfskg tmmrkr-aes maymy-epra arkkaeshmr erkkkekglg r
+hmgt_mouse n-kqlrwqse -lise-nasm rklrkiqqwe legfepildn snmrknsaeq llynyaepfe vr-dpe-akn ekkrkedndn n
+hmgb_chite r-atlnwaad paene-meal nrklketews keeraplatg smlnrreade kkymw-apre gn-ipaaivr akkkr-tgfg r
+hmgl_wheat kdnalewafe pgvgndfpfi ekapkvaewe aearapvgkg sfiekkaaee kayfysapre ae-naapfvk akkkkskgkg k
+
+
+
+    4  81
+hmgl_trybr r-ksedskke s-emmafgfr gksrskt-he kgvyklkftm -ameamraak f-easssphe sfsenm-gva hdsasknrer r
+hmgt_mouse rsrsedsdkk keknnaysyr ndsfldseae dnayddkisl evliamkkad yeivsklpak vsve-n-sqv ad-psd-nek r
+hmgb_chite rekk-antka kgammawkwr ginraisgid igewifrlsk egkqalkkli wgqgkka-ia laladmnktg idapnidrak n
+hmgl_wheat raksslgkkn kanffafsfr gngrgnsafe ngpynkkvsk nakgaikkrn fagaskgefn mfmanfnsaa fkpagnnkak e
+
+
+
+    4  81
+hmgl_trybr fmkkr-fein skf-ea-l-e ysdkrk-akr dslr-wpfhk ssfws-kysn akme-meekk erk-mmp--- dfdaeyd-em a
+hmgt_mouse ilqdreiia- -qseiv-dse yq-rkdkadk dadrkwpyak slywlwkyk- akkkerqeqq errmnlp-wk didkiy-eik p
+hmgb_chite lkstrrlevd asagegefea we-kkiqlik dafrqwpwik naywaykykd akvarlaass drkgmk-eyq aldkqy-gev p
+hmgl_wheat vkakrkvvvn pafavakkaa yedkknarnk kakrawpffk ggfwgykykn akvnkpaaaa erkefkekya lvkkgydavv a
+
+
+
+    4  81
+hmgl_trybr kaefgepage kvat--edfk tefmaafeee yfrsrkaehe agdsersark sdlkama-a- msemp-dmmg aep-mdfss- -
+hmgt_mouse keesnkplnq kaass-kesd sninvksnkq ysfskdpqai end-eflvkr vddkkme-v- rvekp-elrs eepsldyasw w
+hmgb_chite ke-agapkga kelserasat sglmgkagaa warkktpaie egdadragkk lafkklengn ll-v-esklk edpekawany y
+hmgl_wheat kesfgnpaga kprsaqnefk ssvfakfsna yfrskkaafv egkpergakk mlkkkienan pmsvekekps eepaklfagy y
+
+
+
+    4  81
+hmgl_trybr aeeskherk- anv-r-fkf- srs-eedktf easskeaad- skasdaspra svrme-r-as maksa-ffvk veem-mss-a k
+hmgt_mouse eig-daefrw e-akkeskiw -r-eneersi ka-adevve- ldvadpspkl -afrqsrqas nekqaksyqk aigrmnkv-k d
+hmgb_chite eqeaii-rky edeqkgakly anaegasksl aaaataggs- atgaapnpkk aerlaernan mekeaqawtr eqelgmklek t
+hmgl_wheat egapnfsrky enpakafkvy pepnsaeksv napakaaaen gkaalagpka pprpaargag fekeaaffak pgapefkmkk k
+
+
+
+    4  81
+hmgl_trybr kdpkakeger eedatm-agr masseear-d vaeksse-rk farkwarkas esemvirede dkh-eekdkk larrsegeyw f
+hmgt_mouse kdpqekknir kgeksn-lsn nesknnanqd aenraaeekr yvfkwakdkv isinaargei e-akinkdkr lafnsineyw y
+hmgb_chite kapsekagqr aesksmrkkr mekkggarna eegkaaagkk ygrkwlkikl qnqmevnesq s-iqqgkark larrnqgaww w
+hmgl_wheat klpaeknggr naeksfqask feskssakgl peskaaaakk farkwrknkm gggfpveaeg e-fagsklkk larkgggayw f
+
+
+
+    4  81
+hmgl_trybr ldnkkme-ks skrflvkina aygdasgrpa hkmdswymep rkaaka-aap ykmsvaasfw lpdd-kreea lkhadgma-m a
+hmgt_mouse ld-dkkewdl qdrylqea-p kyn-pqnrpp aqmdlwyrnp kdvvkkwvap yqmaapvviw dpedwdneel lkak-nnkel p
+hmgb_chite ladtrv-yta etnwltsvdp kyg-pegrpp isldawylg- kiggkkyglp wslaepgllw f-sdytraak lrik-gmkek p
+hmgl_wheat llnkkvsykg ekeflaevna kygdaegrpa faikgwypse knaakkyarp yaiapaamvw keekykkaaa lkfkdgfknk a
+
+
+
+    4  81
+hmgl_trybr ksakmhlsa- mmskfs-pka kkedkv-eld erss-s-sa- ekpar-regy mfgrdmlkr- dmanrmmfes ankfyaekrf e
+hmgt_mouse qsprradsae lrvky-ep-e qkidqqaidd ira-ms-las gkpak-riny nynr-rl-rs dlp-rnkyev p-rsyaidfy q
+hmgb_chite skpklifklr kllkyaep-e srqast-efa qraagkeaae erpakrnegy mwgr-ll-ne akpdnmvydl pdkayletry a
+hmgl_wheat asakpfksrk kpmkfpnp-e akglaasvkl grapeskgaa akpakqevgy ffgrdpl-ea lkanefvfem ankfyrvkrf a
+
+
+
+    4  81
+hmgl_trybr evfveksafd snamkvmars smna-efama rgkdfdekye efesmemmvm --mpgseeae ssdfalvkmp lar-ge-ede a
+hmgt_mouse nqyageveye s-vkdamkfv vk-a-eipmv rnd-ydgkye eykslerlak wempssiilq sseyvladrp lpr-newidq p
+hmgb_chite gtyeeslews kdgvielkrl lvdlpdlplg ngi-wderyd awakk-lkev yglpkneqka kkswgleil- lpnrgdyeda p
+hmgl_wheat safpaemefe snavnpikrm mvnrpevaia egndfkakye afnskspkpv yaipsgvgaa ssefalpnpe laeqgeyvka a
+
+
+
+    4  81
+hmgl_trybr serssatmm- effredke-s sapeydasmw eaky-pmaea awgdahmmsm sgsamkssia k-ske-emmw msppgk-edn -
+hmgt_mouse qirsqlsnms nsinkdkqev sppqydasrw naeyeprpep kwneearr-r snkan-q-aa kw-dqanmnw rsppsqkid- s
+hmgb_chite eerkeksmle galraaragl kppawaaklw glswe-lpap kwgseillal kgklm-eavl ryaia-glmw lnp-ksqqad e
+hmgl_wheat evrseasfia sfvknlkaam sapaylaspw sreynepaaa kwgeefpppp sgkrf-epvr kypnassifw pgpesaagln a
+
+
+
+    4  81
+hmgl_trybr twdekdammk kkemarpgsy plrragfkf- ra-sdylgeh mkseemm-fr remgms-mr- y--rffaekl f--a-rmyrv a
+hmgt_mouse swekrdkmlq kdkkvrpn-y pdrfknyds- naevdylnka reaeilleir kennnvekr- yqknysaedl imqlennyrq a
+hmgb_chite swsakdklks rtavgnpgaw -fnrkgwiap rleldylgai lsaaqkkeln kamgmlrvrr ynqrwaaatl lgnkermwnt l
+hmgl_wheat swenkkkika kknvaepgpy ekerkgfnfp krnmkylgnf peaagkknve kafgfmkvrq ygakffaakl vegankfyea r
+
+
+
+    4  81
+hmgl_trybr esdaknrafa efwklegavs eksfefgia- -e-kare--m aea-ymr-ge eksskpfta- maaaikele- edsf-kkske -
+hmgt_mouse nsdkk-rkia eswdlisvas kqvyeinake mi-danekkn livqyrn-se qks-qpysl- nakaargdi- eevy--eqke k
+hmgb_chite gkakrdrkll aawilqkgen aslw-lgvke geriaraqqm kqgnwlr-kd akkaspwsk- mlklvkefqe dslyr-seka q
+hmgl_wheat sslkknrkvr afwnlgsapg namfsvgvkn evqnakaaaf agagypknse akspapfsan frkrvkakgk eemfq-eeka a
+
+
+
+    4  81
+hmgl_trybr tssfksekme aaea-da-gk --fsfmklrw gk-enm-aw- layssynefr e-vra-tmek vfaefkepir -rmerrafgd -
+hmgt_mouse slqyksgemk eaepmda-sd qwyasnklkw sdee-r-aw- dpysvy-ksk i-anewsred aiaeydkpaf wrkerkayn- s
+hmgb_chite saeykkesla elapgalpki nyyaamrlkw kieadlnlwe fpynlydaak enereysl-i eladyia-vr ynvarkawg- e
+hmgl_wheat sgefksaein eraaelrpsn gyfaffklkw snnanpnrwk kaygmynnfk vnpkeyspsn pvaefnnevr yevarkafgd a
+
+
+
+    4  81
+hmgl_trybr fket-kstds eepkr-rkkl afklhmrwrm ekefkrrtdf geakmkasfk kkrsdg-mas ayef-lmead -saeyeamfy l
+hmgt_mouse ykeskqssev inpkrkfkel vykdalrwfn nkeydkrsdy niakrqvlyd kqra-nenps vyiyslmkad sqvkyiekiy d
+hmgb_chite yk-sqskssl qgpknqrksl gwkfikrwrm grdytknsay gearlsgayi ksra-grmpn gwqyellaaa eegayeevlw f
+hmgl_wheat fkssaassem gspkearkel afkkfkrwrf skefkkeslf gvakpaagfn karadgkfag aygfalinal aeanyvevvy k
+
+
+
+    4  81
+hmgl_trybr rswasaaefd s-gamsskks dskrkemkke safdpmeaaf eyflsfmem- mmaaeepees kea-yadvsr kktf-param -
+hmgt_mouse fkwllpaqyd smsamsldkq dsdkenrrdi akydplepai eyslssmera nmlkekpkns qiaeypdakf desyepenel e
+hmgb_chite rkwkaplawa ngkllnatke aktksglktq akwa-kapll ayalkalal- mlkkda-agk sqlewpaekr isswr-erek e
+hmgl_wheat rkwagarafl gesriggkke lskkespkkg akflekaarv ayflsfiaps fiakenenss agrnyalpkr nesfkeekek n
+
+
+
+    4  81
+hmgl_trybr eemr-dkrme ymmegeytn- rdf-sm-rer sfdyke-ary savyesevvg lgnkmderka k-f-vseekv rfvstawda- i
+hmgt_mouse iekr-ekrme ylkineys-e rdi-kmkfgk sydy-islny laayeanqqs dn-qmdnrqk kayaaviida kiqqspwdek a
+hmgb_chite edvnpskrla ykvqgdwsdr rdlrklqrek nydw-eekry aaeydagttk fgdsldgnsk r-w-eleete kltespwaeq v
+hmgl_wheat vevepekria ykvggeysnk rkvqkiarak gfky-vaaky gapyeasaas kgnaikseak ksfspmvvkp kvaesawlea v
+
+
+
+    4  81
+hmgl_trybr -aaemy-slv -ee-snkdek krdns-kall ewspkvkk-v m-hrkr-kay nvnma-eska efk-lvkkmm adksmkttae k
+hmgt_mouse weeiky-klq enqwk-q-ee qrd-kmqpll nwapea-qaa rwar-keqay -q-me-eakv iikmdqqkrl pedlndssee -
+hmgb_chite yeeevynklt egaykds-as sradkgspll gwapse-s-e lyin-kesay dtdle-aarg qlkgftsklk pstamtssea -
+hmgl_wheat yeevvynkla nsayknadae arlnkeaall swapep-asp pyfe-knaay nanienaaka gvkekaakpk aekgfkssea -
+
+
+
+    4  81
+hmgl_trybr elawkgaaa- -mt-yemsea grh-ikspya ermeesi-al vg-egysffk emfpmksrdm dafsksrskl m-y-kmekem -
+hmgt_mouse edpwdneppq kkseyelqkl nrakakapyk ifkiisa-vl qnaenysiyk klsplqvndm -kild-nkkd mkyqkkirer e
+hmgb_chite dfpwigeppn qvsgydkeak griqvka-wk ervqqkvrgl tg-dgynlwk akapkslrdl -klaiarkkf lqynrvqk-l r
+hmgl_wheat ekawngeaag avsayekena grfavkaeyk vrvggsvqal agsegygvfk nkfpkamkki dkvgnpkkkk iaygkvgksp k
+
+
+
+    4  81
+hmgl_trybr aysav-ew-a kv-p-a-vle ka-rprk-ay --espfskeg mw-mpefkpk teagaah-kk yk-rekkp-k vfravdtvwr p
+hmgt_mouse lysaaekw-a kqwp-kwalg qa-kprksly keespsskes nwmrpgsqpd silnlaaekd yksfikqpmk ayraqdsawf p
+hmgb_chite kynlegawpa rtypekyele slnkpnrekw qg-n-ankak mwgl-easpi sqkgkligri wrerqrspgr eyratasewr -
+hmgl_wheat aygrpanwpa kaypkkypla arnkpekaay aasgefgkas fwepeafapn sgagarfakn ykargkapek pfraalspwr e
+
+
+
+    4  81
+hmgl_trybr vrpskvkrsa kkwevkkap- essfen-aea ss-fge-mmf matsresmeg kneasekesv asekra-eym -vdfasrsea a
+hmgt_mouse arpvkaqkqe edwiakkapa gkayq--vna avkynnqrns lassfillen r-ikvekiaa ekekkleeyn mqdiaaraea a
+hmgb_chite erplreskee siweekkap- ekawad-gga alqwggnlma klsnrqakdg kdqkl-keae ekakkkg-wm gtalaaraaa a
+hmgl_wheat prpmkpakee enwvpkkaps akafannasa amafgsgpff krsgrggkeg kngkmskvap ekakkaasyf ealvaaraaa a
+
+
+
+    4  81
+hmgl_trybr kkrers-ksk srreafefyk s--stmakaf mrakdsakme gkafwsasfd pkkeemdake aaykrragav mrnemek-kp s
+hmgt_mouse ddkirsedlq srkevyeyyk a-essrvepi rnkddvpdne sqvyw-elid pkdnemdlee aayrfkpneq nr-kkndakp l
+hmgb_chite ttkqrngias knkagyayyk arekslgspl lrktalpimd ksgwwaeald -ktgalaksa alykrkpget mrdavgt-kp a
+hmgl_wheat kkkgrganga sekaafafyk aqnsspaeav pkkklmanfe saafwpegvk ekksailaea arykrkagea frnnvskskp g
+
+
+
+    4  81
+hmgl_trybr kam-effkar pn-gmye-fs d-msyyryds ldeefrysaa waggh-fdak seraaeivae armaevfged asrekmysae k
+hmgt_mouse den-giidar p-enkyimya e-n-yyny-- ddenirylkl wannaqy-kk sgnleiaqag ernpkqised klre-kysei d
+hmgb_chite temnellilr -degvwegya s-mayyry-a fa-glryakk wagginy-kk nerkeqvtae ermpatlkad kar--vwneq t
+hmgl_wheat kefnavvnrr enngvyvefa enfpyykydp klssvrygka waggfgfdkk gakaegvaaa erfanavsak kgrs-vygeg k
+
+
+
+    4  81
+hmgl_trybr kfasakyfrk egdesrmmak asrv-tklks kmeferevar eflmfmelmk --rrefktra gsdngm-efm aymfylsvep s
+hmgt_mouse dyaqakyifk indevrnmak kvka-sklqs kknyqfiqer nslmymidmk aenkeidsna nk--sl-gim eynyydaaip q
+hmgb_chite twaearwlrk egdalnmlar klkersklsn kvgyarqter gallylqflr -erkdlisrl gk-dkkrell eymyyfaeqp e
+hmgl_wheat kfaeakyvrk vgkamefiak kmkpqsklag kvsfargaer sflifigkik snkkevnskr gkdnskqavi eyffykapgp e
+
+
+
+    4  81
+hmgl_trybr enmpeea-r- ae-ark-err f-nwrgewsk yd-nrma-ek hsaekkmkei eymrvfffel neysdmrste mard-avsas e
+hmgt_mouse e-npkgvqfq vqaefrkirr ss-wnnqwsd yeq-nla-qr asegdrndna eykkqsiyil -ky-dlrqse nvndwaavev e
+hmgb_chite adm-aegnrn ga-erkqern aedwrgawki ysndrklnak ineetkmtgv -yvktalyql dayaaknesd mgrayaelel -
+hmgl_wheat anfenaagrg aaserkavre fanwkgawsn yegnkkrnak fgeakkfksv syvkafvfgl nnyplkeese faklyapmem s
+
+
+
+    4  81
+hmgl_trybr afsyektefm --karsrfag epgmrs--ef nr-a--afkv erekrkkkep -sk-akkamf efsas-aead eaylam-tee e
+hmgt_mouse py-ynesiil seqkrsnias gpnnrqs-ey -r-kwmlyra erqknk-dkp -vdkadelni qyqks-pia- neydklasnk k
+hmgb_chite pyaygssqlk eesknkrllk epgmreeeay drnkygkyke anarrr-ta- -ltqliskml awekknpql- geyfkk-sga a
+hmgl_wheat afpysesgvk anakeskvrs apgfreakaf nrnkyeafkp aeakkk-kne nmkarneafv afeksnagrd seykkksssn n
+
+
+
+    4  81
+hmgl_trybr dkg-gasmaw r-r-ksr-kr -d-dee-ksf i-s-l-wepf f--t-keaas sfemwrs-ak tadgmfaemv -fkslefykr m
+hmgt_mouse -ksssvvraw rqreksr-dr aesdgk-kky a-sqdswips ya-sedgkps vyenwr-eak spdnnyaqma ayqkdeyydf n
+hmgb_chite -kkekgllaw nnnrknretr -sedeaprky vnnnfewepa w-esetekpn ly-mwrarak spagmwlale -wskf-yytr m
+hmgl_wheat dksasampaw egekkgrkkr seakanpkkf vnggkawvpf fsksnkakag mfsfwrpkak salgffraip sfakksfykr f
+
+
+
+    4  81
+hmgl_trybr kaefrkkpae skedmrvyya mpesamaafk adlrkkrkpi e-skkassis hskarmptsk natgaenark y-mfmgmnkr f
+hmgt_mouse -visr-epak qdedrrqyyk mpqvakalyr aedkkkkdpa iekedlvsaa aqepkmpssd -psnai-vkq y-lylsl-dr i
+hmgb_chite -gqar-spaa ei-alntyyk lpallvlkyk asfkrrki-v egksiklnva iespkl-ski dpsgaedgks yrkykkkdir l
+hmgl_wheat -agfr-epan enslpeayyk ipamrvrafk aekkkkknev vakenamgva feeakiessn nasgavnaka yqkfksknnr v
+
+
+
+    4  81
+hmgl_trybr sgaamsple- ekpemy-vgv seiaepfr-m nmermasdam erskkfkker e-fka-temk hndfyp-m-k makkeraggk d
+hmgt_mouse snalrlpdek gkpemykqna veaeqpyrkk -neklpadvr qnqddyrdif ekskaasimk a-dyyp-msr radkikansk d
+hmgb_chite nglklapfaq ekpalyqtge laveapwnqv dmakkpaagl areiiwkier -qakl-sqlk iddwwprlek latkekagkk a
+hmgl_wheat ggrapgpkaa akpaiyaagp maveapfeav nfakkaalap akennfknvr safkrssgik fnkfypqiak pakkvkagsk l
+
+
+
+    4  81
+hmgl_trybr fatf-fkrmg msnm-mr-fm p-agrf-mek krkfasa-sl vkee-k-yef eyftayakp- msanv-mr-a aedsefaimk k
+hmgt_mouse ilsseyknrs na-kknrkil pweski-red -reylslqvl akkisdeyiy nyyslyldp- laa-qekrwa eeesgiparr q
+hmgb_chite lksarwkrlk madvqmnqlk pyekklelai -rswkkknll ekaeetryey gywskykipe kaldtrvnya edsnelpvlk s
+hmgl_wheat vasfkfkkps fanvafeavk pyeskvkpan -refasagml pknvakkyvf syfsayanpk karnakveya eeegavavpk a
+
+
+
+    4  81
+hmgl_trybr evk-mkaprk rsh-ars--s y-amsmsr-m em-svmhmrm sfssfkkeft -sma-kdmaf -mdkeyk-ea skekseksva i
+hmgt_mouse qadsnrvpnr n-akefl--a yeanslqrsn nlslararfn -yqlyrriys sanl-qelvi kr-dnykeel a-eklekvaa a
+hmgb_chite aeiemkgprk raiqeraeea yelmkkenem gkeaelilrm ayeaykkews eamkpsskgl ql-igwkeak a-draaklea v
+hmgl_wheat apnafkapkk kpfaergkka ynrfskeeaf skagppfprf pfegfkkvfs aafapaekav apdnsyknaa a-ekgakmpa v
+
+
+
+    4  81
+hmgl_trybr pevtskmake -ke-eakaak easvetmmek gakderks-w -kwedfkrek rwfekamm-n kdemlksskr kgmksmsass a
+hmgt_mouse peasvekkdq q-qknvkalk klsqesmriq sakeknqssw w-wk-yerid kwye-prm-- q-nndea-kr ksnklnvaq- e
+hmgb_chite -aeslsvkia n-aqggklkr akntasllqs klrsarsnew y-wa-ysret kwwa-pllrd s-gmfsaarr rkmkamlaea e
+hmgl_wheat eapsmevkna g-aasakrak nagaasipga srkenkagaw y-wndfervk kwfa-apiqn adsfkeapkr ksfkgfmaep e
+
+
+
+    4  81
+hmgl_trybr -re-msprda saeeetemdk aimekv-eep amd-ka-esv mervdakkag kfafmye-ka dyske-emkk aysn-wyfeg r
+hmgt_mouse skikl-pkdp slknisimd- vanerqweip pldkqawqvq meraearkas ksksmykwka -yvriegldq pys--wyyis r
+hmgb_chite ekqqkapkdp kkagqsqla- gvmdkty-ep pkaqslyalt l-nesakkak kakalyayrl -wlkerekts pwndnwywek n
+hmgl_wheat akgakppkka sansgsgil- avfekaysvp aklaaryama isepeakkas kfkfiynykr dymkvkakka aygnnwyfvs e
+
+
+
+    4  81
+hmgl_trybr drrtkeeeia mmaerkarey e-rkvma-m- effkmkyv-t refeemaeys aeg-eskkfp rm--eyrlss mfpr-kiaef v
+hmgt_mouse dnnsdieiae mraqrrpkny k-rralamk- isidkkyqms nesqineeya ainsnvqeyp kr-keyrlva liprkdaaky a
+hmgb_chite arrsiqaqve llaankpkgy arrkekagvr qaltvkwtgs raaaemeaya aegeglsswp klpqayrlla klprqtvlaw e
+hmgl_wheat lkksngagve ipaaekaksy nqrkpkaevq gfvkvkyaes kafavfeaya avgasmaefp kppaayrlma kvprakvrnf p
+
+
+
+    4  81
+hmgl_trybr g-saegsreh gmvpepeg-k stdgtkkepf amsaeaf-es dr-sereeee redafspmks sfgasdr-f- kadaasissd k
+hmgt_mouse nevannanqa smapipqnkd qs-nsddkpy enaaqaywi- efs-ereign kqday-prdq qsnv-ef-yq keelasav-d r
+hmgb_chite ggllggarai kle-q-agqi es-gsiia-y emaaaawyea sreaandeeg kaaaya-lte eaggasrewn kesklnvlaa k
+hmgl_wheat gamrsgakaf sipegeagan esdgsnnnef efaaaafyvp erapaeevas kalafpepke efgaperkfg keeargvmpl k
+
+
+
+    4  81
+hmgl_trybr vevgrek-ai dr-e-krlwf kakdmke-kg rwsaskmmma lalpramgrw kkmffknngr eha-eearef -mkaananpk k
+hmgt_mouse ananrikeva erwiserdwy rpkdldiwrs rwse-knnra lvlpfamnnw qdlyik--nr qaleenkrky kkqep-p-pk q
+hmgb_chite egegnekegv snyqesrfwy kpkdktqykk nwneakmmla lgl-rllgrw stkylkddgn aikeagkray qvsepdpd-k s
+hmgl_wheat pspgevknav eeygaerkwf kakkkkgyks ewgepkffpa lalerrigkw akkfvknnge afanaskrnf avaeananek a
+
+
+
+    4  81
+hmgl_trybr syaateefag ed-ykg-kds dymi-nlkrk e-lfaadpma ergeassehy pma-vlrsam eedgyrsmkr -pfee---ev e
+hmgt_mouse sylasenyvn edsydsadds dymae-lkkq iqlseaepma ensnasviay pnaqalrval endnyfqnkf kpyeqemwiq q
+hmgb_chite nyklsagygg aaeytk-idn aylvedlkks qnlaeaspla drkgaklqiw pmlnelrlak agagyremkr qpy-aggyqt a
+hmgl_wheat gyarsasfag alaykssnkg lyivnnlkka gglfeaepia ekssasmgfy pfrgplrmak aslgyrefkr apfsaaeyga a
+
+
+
+    4  81
+hmgl_trybr rls-sengry afrnms-ske dpraermkea temagkded- egrrpae--- ksrwsnaram ser-sskafr pda-fpeeka a
+hmgt_mouse nlvsse-nky vik-r--lke dpnkgnrkia snnlskdq-e nnffpegsks qskwl-ekvn aqr-aldayn pdleypnnke a
+hmgb_chite rllenadgky glkdlarard d-rkerlkel sgmkkkda-g ggrr-eeeqe skkwadekgm aanpaailwr -akrypggke l
+hmgl_wheat klmagangky avknppqgke kekkakpkvr ssfaskkada sgrreeaaaa askwgnekaf aaepagnrfk elakfpsske r
+
+
+
+    4  81
+hmgl_trybr a-t-adyrrm -w-keaksee -lpnrfpekm -mtflegsrh rfyy-esmd- --pamkma-a ---ssm-eke mpapefdk-d n
+hmgt_mouse aws-leyrrr -wedivqqqe mlp-rypgen ersylinlna kyyyeeal-s -eperklakp kk-avmkiki rpppkid-kd -
+hmgb_chite ays-ksyrnl pwetegsea- glpdnw-esm glswlegari kwywgdak-e pg-elkkaqp qqnallqqkq lpppala-qa d
+hmgl_wheat aysnaeyrep pwnkvaaeas elpnefeaef apsflvggkf kfyyaeakda paeepkkaaa aanamiagkg ppapnvl-al n
+
+
+
+    4  81
+hmgl_trybr lkr--seerk rrrp-fktae seraassehf ykmlefeaa- m-sekadfea ptmsaaeal- sfakkwmrpr egyvr-fsa- m
+hmgt_mouse ddkseakird rrfp-i-sae seraaqqiay ydrlqiklpk ks-qkl-yia pslsalnkde qyakrwlkpr nnyafsiqpq r
+hmgb_chite fikegaaqri nrrpel-saa karlaeeqiy ytllalakpq veaakk-yea psknakgkfe ewakkwkkpn ggyerelepn l
+hmgl_wheat knkaaangrn errpkv-saa sarraeegff ykplavnaaa vapakadfva pskgaaskkn efakkwkkpe sgypraveag p
+
+
+
+    4  81
+hmgl_trybr dfyw-vf-et ia-m-lrlkk fmm-sdfkas -akkdv-was ykfmesrgr- nmskalria- eespdaayns -krsammefs y
+hmgt_mouse eiywwqyeks akemslklqk yrkqldyrvv kakddq-wva ydylkafnrs -rakplnav- egapdaly-- krnaalkisk y
+hmgb_chite slywytygas vkelelklsr wlvnadykgl qakidtrwga wiwkaargne dlakplrvgn deapdlkwda qkralkvqak y
+hmgl_wheat evywyafans vknialklak fpvggkfkam aaknkaqwaa ynfknargea npakalkvan eaapkraynp akkarkvgfk y
+
+
+
+    4  81
+hmgl_trybr eakyvymnst vese-mfe-i ersy-ads-e mafmyrraka evyrge-yas ffketkeaka syrearwkmk mefe-dk-es d
+hmgt_mouse gv-yayl-as anqiemskwa irsy-kds-k naynynnv-p qayrnkeya- yidnseeeqk synnkkw-nk reiemdqmqs -
+hmgb_chite eg-yewkdas egeqglaayv enny-kdnpa mawmwrrg-p aewrgagyla wligss-esk nyrgkkw-mr lalagasgan -
+hmgl_wheat aa-ypyknas psegaifnyv vegynkkgpn faffykka-a apyrgnayrp fvnsseseak gykskkw-fk pavaelaeag d
+
+
+
+    4  81
+hmgl_trybr -a-eeddfke kyla--a-mf aflrsdrfpr skeradrkkk mrlksekskm sevr-kfeki ymwalfysse ndaerkdlre k
+hmgt_mouse kveneeei-g kydpqeamns pylradrypr kknfaek-kq krldqnd-kr qkqnkkykda ynwelsyqsg -deekrelre r
+hmgb_chite qgeg-ssl-e ryfpngagma pylradnwpr kkgrask-rs vrltegiarl eatrqrwaiv ymwelayeke dae-kkslna k
+hmgl_wheat aansseev-a kykagaaeff aflrakefpr kksraek-ka vrlkesnpkp enakakfnnv yfwelfyesa nleskkelea k
+
+
+
+    4  81
+hmgl_trybr fkfrvrmser l-m-ked-tm p-dkklahan mmy-essh-- mr-psgiaew vewfedyeyd mksgfpmasy kkfaskpmed -
+hmgt_mouse yqirarklqn daksqidwsn pkddqlkae- rly-ilaase nfwpksapew qqwyneyiyd lranypmvsy kqyvskplkd -
+hmgb_chite wslrenvaar f-veseaysm pqatslkied lkwrqaaiee mry-kkvpdw tawygsyewd kkagwplgky kswgnrpkaa n
+hmgl_wheat favrpevgak ksvaavlysf palkalkfen pkyqggafan fryeksvaew aawfseyvyk kkagfpiasy kafagkpknl n
+
+
+
+    4  81
+hmgl_trybr te-smsdmke eekaa-agin asdlseafkp arfgfvekre skeaarakal depespgms- kkf-dgksma tsa-e-kksl d
+hmgt_mouse snekrvem-q eidppkpsa- p-elseayqp anynsqikfi s-qpprpeel dqpqspsns- rdiednkvra ssasnsddsd d
+hmgb_chite sgekllsl-a dqippqpkvd paslkaays- lrygatqrrq n-appnpsel da-akpkmnr ktlrdgklla skaegeitnf d
+hmgl_wheat ssnkpmei-a egnaaaasvn apelsaafae rkfgfagkrg g-aaaeaeel kaeaspsfgq kkvkkgkmpa ssaasankgk k
+
+
+
+    4  81
+hmgl_trybr et-aaapmlg afeledsevy ayy-meym-s emagfpddds yise-s-p-d kpfyadr-a- ryprldrtee kamyffet-m l
+hmgt_mouse isevappldn ayilne-eqy kyyekeynwq ellsipdeda yasee-epkd -psykdfek- fyprdensek evryyyqs-l l
+hmgb_chite eseglppkfg lwelgsaaty kywgv-ymye dkkklpasaa yvk-eaepqd -pawkargke rwpnfsrsda sglwyyasnk l
+hmgl_wheat vsnarapkkg rfvlsepaay kyyavsyfye ekasvplela yvssnpnpak -pfyklrakk rypekeksen eapyffasnk l
+
+
+
+    4  81
+hmgl_trybr -dks-rk-ea sikmapr-ky rspaa-yryl fsapmvkkhl se-a-dfsk- -tsnfkatkt mksfevkem- rsesfymae- g
+hmgt_mouse -dd-skekia qarraprqdy fvpke-ykyl i-lprqrkal sqekkdi-dq esq-irvsks lqsyiqqqme faksyyreqm n
+hmgb_chite naiaeksqea evklaprnty rlpkepykwl lakpltkkil naekqalatn esedlkgsks ksnyqtsale raanwwleag g
+hmgl_wheat nlnpakeava evkpaprgky rmpkepykyl vpappakkfl gankalvpkg nsenvkasks kagfgaaain rangfypeae g
+
+
+
+    4  81
+hmgl_trybr efkkay-rmg k-reyfdkme rrssgrrrel lalwskfvea sskp-fleeg kkdnearmel ksnhksgpas ekrrgpi-rr a
+hmgt_mouse kyddey-knn ksrqyidkrg rfaasrfred lllwkkiaie vskpesdgin rqd-elnnnl qv-adsnppq nkkrspawrf l
+hmgb_chite awiiewekmg kenayldrle nraaknrrdf lklwkkleqe lnkpeafeqg ksadakrmgl slditkgppe gkkrk-vyrr k
+hmgl_wheat nfnneykkfg kaeayvkkpa eraaserrek lalwkkvpge mgkpnfkagg kalnaakfsl amnfksgpae skkrsevyrr a
+
+
+
+    4  81
+hmgl_trybr esh--kefse kvesapaldn seyssie-ak rammamaasg slfreadlsp gedfesream dar-vmmkke le-lgemfae -
+hmgt_mouse e-askdeiln daesapale- aqysqaq-vk nlnnvrklln -dykeaddkp nndyeakean dvkmannrqe dkmlnikski -
+hmgb_chite aaieqtalag ie-nlpalsd aawnevapgk rkmmglkkag afwkdaafkp ggayaak-lm agkgemmksd faglgevakq n
+hmgl_wheat apfaakavgs npsgrpalen aaygevapak kaffapkagg pkfkealkkp gslfaaksrf lakepffkae knelgvvfkg n
+
+
+
+    4  81
+hmgl_trybr rifefaw-am kakyfmnksv kmaapsp-ls kfegrsaesr aren--e-pf agsakn-eke mvkekapmee hllaewrspf a
+hmgt_mouse kaieslwmkl dakysl-ksa krapplpell eiesrskqvr arq-wmkapi aslvr-ag-n mqdikkprkg adlpgwrspy v
+hmgb_chite kvlaakwgkk tlkyakdkke klap-a-rla slakrnkalr lradyga-pl akagkd-e-g ltiqkkplae iflpewrn-y g
+hmgl_wheat kvvafawekk krkyfknksp kpaaegeklg evasrgkamr rranyenspv asgaknsa-s iangkkppna fklaawrgef a
+
+
+
+    4  81
+hmgl_trybr -yemkdetrk alm-vasrka fervseaase -ep-v--kas feaeegfgde mm-raaker- ktfmrrasgs kdrmmfeve- s
+hmgt_mouse -yemq-esrk klkwav-nea skrqaeeekk ekpwa-eqva ieaennysdn nl-fpe-ir- ksyrrrvan- edkrkieaee v
+hmgb_chite pyals-asrr klvyegarsl aartadeeka ra-yeeesga l-adggykdg mkrrpe-err ksylrngaga saklvl-ear l
+hmgl_wheat pyaiadasrk klvypapker fnraaeeekn kneypknaaa vsaesgfsks fkqrae-vrq ksfpreaagp elkpvvspak m
+
+
+
+    4  81
+hmgl_trybr keearsalsr aepsg-deee tdafeeeak- eemmsperde ksvkp--ema kkyksepmfd safrakemar adrafeasvf v
+hmgt_mouse kinlnavlvn pgpvsmdkni sdlskkeaqw kilkspnree rsqdpesgle edydviprid akynvknrvr pefeyevaqs a
+hmgb_chite kegkragllr peplkgaagq sdkaaaalsy aqkvk-gnsa kkti-reeke siytle-lld akyrgrglgn psrewagata e
+hmgl_wheat kvsakaalmk aapmselnsg skafnnaray ngkvseseea ksanekaake enykmvepvk akfkakspae aerefaaaaf p
+
+
+
+    4  81
+hmgl_trybr espkassyga rkkkfvsskr wflawegkn- aermlyapaa fakaspkegv krekfffmp- rgtsmaksfe ketfkg--mm a
+hmgt_mouse ivpkvqayse rqdriqsldf wilpwnsd-e aifrdyapap ildkspkqnq kriqyiimp- nssvlekvie kgsskn-anm v
+hmgb_chite el-rgeawke nstkltkair wllpwgktde lqrlfyl-lp lktknpkagt kreswlllpr rkslkekll- kesargp-ml g
+hmgl_wheat vmekaeayse eakkvasgnr wvlawssknn rgrpkyrera vakkgpkaga krvafvvipq kssmkekmvs kasfkgpsfi a
+
+
+
+    4  81
+hmgl_trybr -stksassae amk--lwskt ets-eyeyah fasikemy-k emkskvdk-k kelkedesae e-r-kyemde sd-eklkkag f
+hmgt_mouse --s-vlqvae prd-sdwsqs isseiygypa yvlakkmyek nnqlkadkkk eqldkdeapi n-ferykldk adsedlkqan y
+hmgb_chite pas-lkelld plt-efwnss eskreyewpi wgavralygk gmsareakqk saltad-apq gnrgkyakaa adeatlrsag y
+hmgl_wheat pps-maemre apknakwgas vsskvyayaf fagvkniyak sfagkplkak ealknksaag snrakynkln akaaklkaag f
+
+
+
+    4  81
+hmgl_trybr mdyesfamh- kveyakgmsk skihmnridk ekemmaeaks -yyressvae esef-g-r-a egfaka-des keredpemav e
+hmgt_mouse reye-iana- daqyvqsnlk ldaal-nadk n-qkmaie-- kyykqvsqee i-ki-n-fwp isia-p-dil refndpellq e
+hmgb_chite lsyaallmie teaygskmak aivikdrvak g-avlaee-a qywkalktea qaalegrryp qkll-pnaea kdrgdpakkt -
+hmgl_wheat peyapvrffk kpayaasfgk gnvfknkvlk s-aviave-p ayykamsaea gpnvkgqrya gsvr-anlvg kerskpakaa s
+
+
+
+    4  81
+hmgl_trybr fmaernef-r slsryaaaml de--fse-gf eyetaeme-s lnyrepieke asaskakdkk eg-lms-mr- sanrikdyek a
+hmgt_mouse sklnr-eiar -lqkyekvnl eiwky-imni iyqseengks l-ynkpaikn vlvlkaker- nnkdllemrk se-rardyid e
+hmgb_chite avkgndal-r alekwekgml sqyqyaqggl eyasedmeqn ldyra-vqkg gagakaksk- ggqfkaglnq nedrvkayei e
+hmgl_wheat fvasenavsr plekyekafl egyafpgegv vyaseefaag lnyknevgks agagkakek- sgakkgaiea genrvklyvn e
+
+
+
+    4  81
+hmgl_trybr si-lrdsfga ekaakamdvf arsfdnsma- k-krldeyaf krs-gsgear -fyfgf-aes e-sdseskar pifwsedra- e
+hmgt_mouse aaelrd-ysp kkkprvndqi knvyd--nae dmkrleeyli rfsknsnikn qyyyns-ana n-a-aisder paiwqidnvk k
+hmgb_chite avrlnaaykp akkpkgmatl krlwddamar tgknls-wkl krkqgngekr nyywgaplga gra-aqkien pvlweeargq a
+hmgl_wheat avklelpfsa nkkakaflav kkmfknpfak kekelesyav krsagggvkk gfyfgfprsa sqadagsnee pvvwevlkaa n
+
+
+
+    4  81
+hmgl_trybr kryey-rfad y-lkres-et m-dvvmwwpa sartksm-pe swakeyemer -akvyewidm raseea-rme ywmswgd-es h
+hmgt_mouse krykyersad ysldrgvees r-daarwwpl skksrknqpq kwa-gyglef wpqqygwa-r rvsnikenrn ywnlwsesgs a
+hmgb_chite krwawerald yelirelras l-deelww-k kkkskkmn-a kwa-eyekar ypstyewv-l ngngekrrlg wwmawkseen i
+hmgl_wheat krynynrfrk yalnramkas pnkpppwwea skkskkfgea kwa-ayakar yaaayawvdp eagsvkkkps ywfgwseaag f
+
+
+
+    4  81
+hmgl_trybr l-aefafyka preskemysd lr-dfvmmsa aaevlaamke fgypkkakmt akdkrakkse skksay-egs kkmekammmk t
+hmgt_mouse d-kkilsyke prkarery-d dkqdyarnav aaiadpplrk ynypqqkdks addrkkkdsq kdevay-qnv krlgdlrmkk s
+hmgb_chite f-kalkawre -raakalwaa fknayelmag llqefppkka wgypsskivs atakkkrtna kisllw-agl rkkeikllvr s
+hmgl_wheat knknvafyke ernakapypl kkglfppfaa rrgpkaakkn fgypaaknvs aklkkkkkga knemrynagm kkkanapivk s
+
+
+
+    4  81
+hmgl_trybr tm-nakgm-r sfpaklmgys maawggegds esedfykrer s-l-eskeas km--kvke-e -fkaaklma- fssdskskrs r
+hmgt_mouse sks-k-sm-f vspvrdmsyv rakwssks-q kvqdsydnkf selsnsenkv rnesrakn-n wyrakklmk- iqldvkvkkq n
+hmgb_chite svedk-klnr la-gkflkyl lakwkkak-e alaaayirar nglegksgkl kmrekergpg yykakkllkp leaalklrke r
+hmgl_wheat svank-sinr mfeakkisym pakwssnsde nmalfynknr galasseskm kfkakpksps yfkakklikp veglmkmkke k
+
+
+
+    4  81
+hmgl_trybr kl-vvgs-sl erar-kksyk k-smfsvk-a eaee-dk-ak esrmafkaaa dasnaaffy- dar--kpkdm mkfse-a-ds d
+hmgt_mouse klsqqs-w-l efvk-kesyq kmakyvadek ieeke-kakk n-rraydkel dkl-vasiy- dere-rpddn kkysnea--- d
+hmgb_chite klettkayal argkersnws rgavwleiek qedar-k-kr ganlaytkek akadgaalwe denrpkpiam vkwngelr-a a
+hmgl_wheat klaaaspypl arakkkegya keavfmpnnk geenkdkskk spepafkkea lkgnaafvyk keekpkpnlf vkfgsnrqdp l
+
+
+
+    4  81
+hmgl_trybr rpr-enryke mkasa-hpfa svrfhddaee ak-edgskae kef---yse- -gkr-aerda avgdraave- fseaekawfn a
+hmgt_mouse npfke-fyre nelsa-apya -arsaddaee adeeds-kai rqy-ewysnm esqnwkkrda aqsdfvvqee ylqakdvwi- a
+hmgb_chite rprqddrykd msknani-wl aenaiaaaaa liraakaklq kaweeywkgg rksrykanaa atkarggtdg waalatgwld l
+hmgl_wheat kpraenryke feaganfefr ppeffllaaa rnkalspkrg kafknyysse ksakyknela aaslraaaea fgarnkawvn r
+
+
+
+    4  81
+hmgl_trybr dmsses-yfm alhr-dk-me k-efkmkrek r-lffsgfak nekk-vfrem yamsmgmakk sra-aemkap stskls-rms e
+hmgt_mouse elvakqeyyl elafwdd-kk qknydkqfqd nqliylsypd -ikkqqyril yvlvlnlldk kreakikqpp lsqdls-nna i
+hmgb_chite sklaaegwyk eliryatpva sqgytvsrat rnllwakwpt dekkntwnqk wgklkgkkik kne-kqvsp- aseilkerma e
+hmgl_wheat ekmaneayfk elfrylkpvn aasfkvarak kglvfgsfak nvkkgafegk yakmkgkank keeskgvaae gsenlskkfa v
+
+
+
+    4  81
+hmgl_trybr kemmk-k-yk kknseyek-m -ae-dk-vll -hrygergkk amwkg--rr- e-fa--vies -p--m-seen gksmekkrra e
+hmgt_mouse dqknkq-myk ed-qiyqkek epqkdk-adl -afysirsrd knwkn-kfnq qsyewwaae- ep--mkake- sqvrirkrra i
+hmgb_chite iavmkn-gyk stdeqyarev rpaqaknefl -irykqnkkt kmwkgeqrrn aeyeyyevda epenlqaa-d ksllqkrnrl q
+hmgl_wheat navfkg-eyk eknegyaknv kaaalknpkl nfrysgeskk kfwkgkarkg aafeyypvep npkniaansn sampgkkerr g
+
+
+
+    4  81
+hmgl_trybr rk-ia-n-kt -mldmlakfk tkkdkyepkm sa-afkw-am ga-aderssy -mdrkkrvsl kvmmseye-f -sk-eykfam a
+hmgt_mouse nkaaew-eqs kllellekik sddedyepdk laeeikw-an naakdqkqsy kkdndkkaal kakraeyiss wlrwnyqikm k
+hmgb_chite rr-veydess qklsklerlr siistwa-iv aaeelrwrlm gl-kaakeny qvartrkeal kevla-weea yakygwslkl k
+hmgl_wheat kksveynnas akleklekvk snnekyaenv ganevkwqrf grsklakegy avlkkkkpal kpvpasyvaf ygkysyavki k
+
+
+
+    4  81
+hmgl_trybr -mr-fvpyem sfgswsmfsm sekfhe-we- v--lme-pay dg-amakkdr -a-k-s-fre fwkvfkrdiy -fsdmsalei y
+hmgt_mouse mkrwyqpyen -ssawqmivn skkiakswes ae-lmeepvy dnevledqdr kksk-sksni ywdaidfeay wyl-laelea y
+hmgb_chite gvnyyt-ydm aakawelllm nakliaewae ee-lldr-gw agrgketsar qkekenqarq wwteltrsvy yya-kaelav w
+hmgl_wheat eveyfaeyef pfsaweivmf gnkvfnawaa pnnliekeay lgkakekalr akakkgafkg fwkpvkrevy yfgdkaelav y
+
+
+
+    4  81
+hmgl_trybr eae---mfye wavmykl-rs -ky-ekav-- srldkaykee k-ske-rm-e e-da-ekwsa l-gsfdease apmpgw-gkn d
+hmgt_mouse eaeasemyyi wvanyklwrl mkyei-eqee anlddaydii d-vkeknnwq esdlsikwaa l-naidkkqn apmpswanr- e
+hmgb_chite ald-erlwyq wgemwklyna gkygq-etrr arlailyiqe tnlkdqrmya -eakeerwal lrgaldakeg aplpkw-gkd s
+hmgl_wheat aresakifyg wapfyklyeg ekyag-eakk akllnryngv knmkeakfya salaavkwar lqgavknkes apipswsgkn e
+
+
+
+    4  81
+hmgl_trybr spt-k-apkm mspkenmyse alklfdkape rle-krstk- fmy-sar-sa feammrdpm- rfklekaren speas-yasm a
+hmgt_mouse lpse-kapkr nlpke-nylk elqlyeqapi rlk-krssk- slyeavr-va ykpmkfepr- ry-lnkerq- spkp-eyplm a
+hmgb_chite apsr-ql-kl ma-kddmwaa elslyssape rlanrnnskp akyeagrnll yaplvrspln nw-lgrenad npapagwpal a
+hmgl_wheat gpsk-arekp fgekenfygn elalfeaapv rlnnkegskp fkynaarnmr fnaivreppn ef-lskeean gpnapayagi a
+
+
+
+    4  81
+hmgl_trybr gvyasfdfdf avfmsyktk- gprpmff-gf vm-akfeves kwmsstkeik mrsreadr-k fatts-emgk sk-feeaksm -
+hmgt_mouse sayaaydydi kailvyesk- nprplyskss anseryiaga dwmass-nak mnsrnkermd iassvsgrsr qk-iqilrsm -
+hmgb_chite keylawawdl kelklyssrn g-r-kyaqka emeekyqeea iwlans-gvr lrnrgksngi lassleelkk ernlaekknl -
+hmgl_wheat spyraflfkv kpvkmyeskn gerekffasf pfaekfgpaa nwiags-svk ikgrskeeen vassmaapsk eknvavakgi n
+
+
+
+    4  81
+hmgl_trybr sdeskreler ekkdkemkg- vm-e-afmst sed-tak-eg ksfasrmlm- -ladlnegy- adae-mfamd myarlreykr r
+hmgt_mouse sdilkridik nkddden-ne qr-ikpylss aq-ssldkis qsyaarkdnm -lpdd-esy- a-kkwnian- kyvkdkiy-r r
+hmgb_chite naeaknefqk griaiam-gg tleeqpwkks aa-esktqqk skwlarvfmg -lpafdakyp a-kaymlam- vygkfkqy-r n
+hmgl_wheat glvgkevkgk sknlnaf-ga apkvaafkss aadasakags asfrarvkfe nlalknasyp adknyfvafd vyakkkgy-r e
+
+
+
+    4  81
+hmgl_trybr kknfmtfm-k krgiarlkte f-s-kemrek f-ysk-gyke vsvkekngvm ssmaaeerkr mkenklams- eessksfek- k
+hmgt_mouse kd-yrsilek krsaknldsi seaekemfek y-ysqmnyrn qlakir-nan s-nepqgr-f neq-qdprqe qilsdvyerk k
+hmgb_chite ktdwlslkgr rrkvkrlise agagkalrak weynsggykg taekqkdgem namepaer-r msadsfpleg aeakilyakq k
+hmgl_wheat kknfpsvkak krsvkklnsv faaakairak fkygaegyks agpkgkngpf gpfeaaar-r feanakapea avgsnmfaka k
+
+
+
+    4  81
+hmgl_trybr pndefp-ss- aatrale-rr nvsgalaaie lkdsrdft-s g-rmlpssem sakldasy-e grsva-gmgr --kfewskny f
+hmgt_mouse p-dnypeka- avskplk-nr -asnalaeak lkd-r-ys-k nsnllpqlgn sadl-vvyee skaqa-nmnr -qdiiwsk-y s
+hmgb_chite pddgwpekan lgskplarrn dengllaeva lkaar-yspk gerklpeaem nlil-glyed kkataeglgn rnilewkkdy a
+hmgl_wheat pnksfpnkan raskalnqke npggrlaevn lklprdfspk gakklpegaf grnldamyne skaaakgige qgnvvwskny f
+
+
+
+    4  81
+hmgl_trybr sif-gkfsam -stkmgkmam aaveema-fp dgkee--mss mfetlrma-k saekskmada atfake-fes vmedrfyyee a
+hmgt_mouse saywndikam kssernrrkl lpakinpayp dsknek-msa myeslrllwd see-srnlde asykrieyiq qln-niyyke l
+hmgb_chite kvwygtlkal qksslgklkk kpeaqmp-wp dkkgdqnlna lydslnkkyt nea-nkmkae lsykkqewqe tkg-rlywaa k
+hmgl_wheat svfygkvkai assepgkpkk aapngfasfp kskseaniga ifeslekayk gea-gkfale rsfkkgnfge aksdkvyyna a
+
+
+
+    4  81
+hmgl_trybr dv-skssmnr dfprp-krkm yaakaaetka yeen-efkee mevswmksdk ekvkkfgskr kamesfaeai skkytemana w
+hmgt_mouse -q--qaqn-n dyprperfdn yeadlkesra yie-keseig niaswlel-k edakkinskf dpnkviveaa -rkysekl-a w
+hmgb_chite -t-asaemdr aypnpekrtm weatkkdskl wqadqdasqe meenwksa-k -tekrlgnkr tpmallg-lv akkws-vkdl w
+hmgl_wheat danpaaefnk lfpepnkrkf yeakakeskr yganaefega fvpgwkegdk skpkkvggkr kafnmvasrv pkkyssvanr w
+
+
+
+    4  81
+hmgl_trybr kiff-gym-- amsesalp-r kkmkma-kkk -vs-ldeswr syaeeskkam rv-aw-drsk yvgfmakev- kkkgvsrevy e
+hmgt_mouse qasyknynke krvesldper kdmdma-kqd eqs-leiswr qykenlk-er ramawqdnl- yqnylkkeqm kdqsqqrnqy i
+hmgb_chite svayqgwmqe kllakkfprn ktlill-ksi rtnrlsqnwn ewkdgak-el negawndra- ytgykkkdtg rtsktergtw e
+hmgl_wheat avffagyfan kpmasakpke kkinirnkan kagqleggwe eykesgk-ep epeawgkkg- yagfkkkeae kkasaersay v
+
+
+
+    4  81
+hmgl_trybr fdkaragysl erakkmepli ekasmaeaek sfas-gkr-- mnkk-ravsm y-yaskeask mlesermass asimpaseyk f
+hmgt_mouse yddknanyal ikkdkngpla qkpqmegvek sia--ndr-k k-qkaraqvk ywyksdnakk mlklirml-s vlarplqiyk y
+hmgb_chite wdtkragyal ekkikmeplv akpeleegak nllapgtnnq vdsr-ratlv yyykntgakr llaaerlkan gavlpkeqyr w
+hmgl_wheat fkkkkagyal vkknkfaplv akaeieaaak gvrppgkena vnaksraamv yyykgksakk ilngvriapg agvppaegyk f
+
+
+
+    4  81
+hmgl_trybr elpermeks- kmeppk-pe- emkrasmsrk grdeedvamk akmeeakeye sssefmslfs fkfee-rsar ssvrpre-kl e
+hmgt_mouse ilpkrmgqvs kmippdmpe- ekrrvsrsrd sndkqeapm- kkmieadiyk -qviyladys ydinekrspr ssqfprekrl i
+hmgb_chite elpanlesle rlep-igpar dvkngnlkrt krdaasepl- krlqdltewa aelqwkafyn wtlg-qnkpn kntrpraqkl e
+hmgl_wheat vlpneiaama kivpenepaq evkeagpsrk skknaepai- kkigerkvyn pemgfkakfg fkvssaesae sgarpraakl v
+
+
+
+    4  81
+hmgl_trybr r--amaer-s -dwaewskkd fmaga-a-ms krfdigadmw ytefvkafkg aridakfaar ffamtfeerr rhsep-esss m
+hmgt_mouse resanaekkv sdwegwldqd ymaskkeala dkidanadrw ysgiarayqn anadvkskar isaksiekkr fasipenlaq m
+hmgb_chite neeamaakql eaweewatsd wlakkqe-ka tklavgldlw wselekaysg lrvdgkaklr laavslaakr rine-ggaae l
+hmgl_wheat enaafaakam alweawgkak fiaskaeska kkvlvgrkpw ysavpkafag rkvkakfkrr vfavsvankr rfgveasgae i
+
+
+
+    4  81
+hmgl_trybr kfifaeadsy pksg-eaede keeykesrtm k--stesmgg evvms-edmt dfm-pdseka ideaaedyk- d-ea--srmr d
+hmgt_mouse dyaiaiedly prlnwqvqdn kkeykelnsl dkassialss gaqmv-qdrs dim-pdvnev aeglaeeykw dkqaksaklf d
+hmgb_chite tyvlaqeaaw pkagyagadg kaaykaarsk iq-nsqakkk eetlleaals dllnpdlgsg vsekldswky dqaaqeakkr a
+hmgl_wheat kfvvagelgy pkggyaaaks knaykagksk nasgsgakss apaimkalps kvinpkmsea veaareeyky kaaaaaakkr l
+
+
+
+    4  81
+hmgl_trybr sldammriwk kkkheals-e a--sr-awfr e-am-feyv- sarsrkemae m-easaees- maememarsf mlmnekdhar -
+hmgt_mouse aldelrrawe drragelawe ae-sn-ewyn g-vnksgyas var-reekvn reelseik-m lagnikvrsi rll-ikdakr e
+hmgb_chite alaeklnvws tkkieelayd lernr-ewyr eegmqaeyee llnansdvgg lg-kneqaag klemevgrnl llkderdikn e
+hmgl_wheat allekpevwe kkkfaelaye rnqgknewfk akafafaypa mrepeeevas pasagegnpe krafvvargv plknvkkfke n
+
+
+
+    4  81
+hmgl_trybr frlrskwdmp aekkgaagke ekaymarkam arnkkrswsk tnfsmkaegp ssnrssdeda rfgrkafema fdgwgm--mr s
+hmgt_mouse yrlkakw-np aq--navsdi ikeyrkfkpr ef-k-fvwqk s-yvrrainp sq-nvs-edp rsnnkeyirv idswsl--kr -
+hmgb_chite ynlkakw-m- aa--glgkie qkeylkrkpl erdk-rlwek sdwllkaeg- kedrln-dap nagrkeyelg ldkwkknevn a
+hmgl_wheat felkakwdfe aa--grasnv gkeypkrkap ernk-rmwek snfmpkavge senkmgdela efgkkefvpa vkswsknkve p
+
+
+
+    4  81
+hmgl_trybr rftrke-fma deeekmtd-e -evefm-eek mkr-erlamr k-rseraask esaskkseem ysdy-dldyg aamkekffk- k
+hmgt_mouse nysrkgkynk -nee-rsd-q eiqesnwqid lqrenkdemk kkfsefvkar kaevddlinr ysdy-dldyn avkrieysk- k
+hmgb_chite rwsnreqymk -gda-lsaea get-amyaei ksregkfelk rqrnargkak aaeltiaqgl wkayedlayg lgvkqsyakn k
+hmgl_wheat kfsekaaffk dsea-pslka avasffyavn karnskkeik kargarakak naemknggsp yslykkllyg ravkgeffkn k
+
+
+
+    4  81
+hmgl_trybr fllakk-skk da-rriavk- dkkpyes-mv agsedesass farskyeag- gkk--gkska klesrenwkt -pmmffe-a- k
+hmgt_mouse illakkwskk -lsnnalaes edkpykvena knsq-ivk-k ikna-yelsk ndrkkndskk -lesfq-wds spnmyikka- d
+hmgb_chite llllkkynkk -kerrvkese sikpwaleme kgna-elkak lkra-ydkkq gikqqgtnkk -l-nradwts epmlwlaqan i
+hmgl_wheat vllrkkygkk daakkvapea enkpynmnfp kggadvmkpk vkka-yeasa gnkaagkgkk -lsgranwks apfifvnaan n
+
+
+
+    4  81
+hmgl_trybr sfv-ffmkes r---mkssaf feamkesklk e-massmakg rsmkrrge-r lsamwe-raw k-wer--kwl msrmfseere -
+hmgt_mouse ksa-iynkkv k-smlq-sey snvndk-rlk kmlek-laqn rqmdfksger lsarwiekew k-wirskkwl rsnryakiki e
+hmgb_chite kaeelwmral knegksaney aggmiaaklk agkekaklsg nelirkkerr lnalweekew krwqneqrwl lkrlwaaqkq g
+hmgl_wheat kfpkvffknm knaekapgef fsafnnpklk nekekpkrag eeinrksakr lgapwvnkew kqwgeaakwl pskpfangkg a
+
+
+
+    4  81
+hmgl_trybr ftasykves- gdkidgsmdr narsdkkyme ynaaaen-fm -dlgsyakas ake-rgamfs f-dfwenkr- ddmllsrsmn l
+hmgt_mouse ysalykqg-k ndkaenqm-n -vrvdkkyle y-keli-syr wdlnaykkaa ede-rnenyv ysdywi-qr- ddrddsflm- l
+hmgb_chite wsaawkteaq gdrvsgel-r dgnlakkwka wdkekqdewl yalgaykraa eidnrgemyl yedwwqdsnn aalffkrald l
+hmgl_wheat fsagykaapa gkkvegeidk naemlkkyka ynkeagnafp yllgaykkaa enenrgeffm fakfwgnaen llpkksrgin l
+
+
+
+    4  81
+hmgl_trybr m-fykkddsy p-srl--fkr kraakready srmafksvke smla-saksk v--ek-yeam eerkssew-s -grv--sake d
+hmgt_mouse kqsykddd-y pe-rlkwydf -kel-niedy afmlykqakg lrdle-l-ve q-wedwyill eqrkakewqa snfqk-lvkk d
+hmgb_chite vnayktddaw -eanlqywtr -kek-rqeay arlkwkeeke alfkeak-ls teyaiyyekk darrakdwna egrtqpagka a
+hmgl_wheat vgfykkkkpy enpelayfkr -kea-kgely ariafkepka gpkanpa-me akyanyyvak earkakewga agraapgakn l
+
+
+
+    4  81
+hmgl_trybr ekek-ykkei frem-ewr-d mkpkaaes-e eekekeevda kesseaksad asrdkmklkk fsr-mrveyr ewk--aady- e
+hmgt_mouse ikireyqqga srnm-ewnwd mkpelei-sn ekqqqinqdk dqalqeesvd psnedkdlkr ykkerfaqyr kwreeaedye q
+hmgb_chite qkqkeyssev arglnawrya lkpskeqaeg aasasegtdk taaaaesngd pkrstvtlkk wkkelreawr awkgeledye a
+hmgl_wheat gkgknyaaav frsinawkyl ikpeaegpas anaaavsakk kaagaeegak askekvklkk fkknprpayr nwkanrekyn a
+
+
+
+    4  81
+hmgl_trybr -slsm-ryae pywn-mdegr gmkgfsfwfm hdkege-kvl arsfkgmm-k p-kspsakdn -rvekpasrf avssn-eket f
+hmgt_mouse ellkneryae pyw-emdksn srdsysywyr aekesiqdal arlsdnnl-d pkkspsadd- arqekplari aa-s-eieqs y
+hmgb_chite ealkmgryla pywdrlaakr kltkykywwl israkqntel anaaigmkri -qkk-natad -rtdkpkanl aeandrqsas y
+hmgl_wheat nglkfaryra pywnkilnsk spksfsfwfp fekasggkpl aegfngfkqn eaksegakln sraekpaaev appgnkgeas f
+
+
+
+    4  81
+hmgl_trybr ksskkageim eea-kdkemp rkf-esdfk- ismmsaheke saseekryek -e-ag-dimf mgaehaaefa mmpv--efev v
+hmgt_mouse easddeseal qnp-qedenp kdyeeadids asnl-kaqdi lvsee-nyek kespskdary ksviaeaeie klpa-ekyia q
+hmgb_chite santtekdvk agpessiamp kiyraaalie vnmkakiate agn-a-ryak q-epkqdvlw vkgeieadle vkpeeeawqe t
+hmgl_wheat eagkkesevk asakaenafp knfkaalvna vgfkpkfakv gagsa-kyak asaasakvpf vsavfeaeve vkppknnfgp a
+
+
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/users/cn/cmagis/
+ORBIT_SOCKETDIR=/tmp/orbit-cmagis
+HOSTNAME=brasil
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+GIO_LAUNCHED_DESKTOP_FILE_PID=13637
+MCOFFEE_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//mcoffee/
+GPG_AGENT_INFO=/tmp/seahorse-3oGFZj/S.gpg-agent:13286:1;
+ROOT_TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/
+TERM=xterm
+SHELL=/bin/bash
+XDG_SESSION_COOKIE=78ca754cf49d9d17b2c0859500000020-1472467836.368722-1926617865
+HISTSIZE=1000
+PERL5LIB=:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/perl/lib/perl5
+GTK_RC_FILES=/etc/gtk/gtkrc:/users/cn/cmagis/.gtkrc-1.2-gnome2
+WINDOWID=33313398
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+METHODS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//methods/
+IMSETTINGS_MODULE=none
+http_proxy=
+HTTP_proxy=
+USER=cmagis
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-y1Hwrp/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-y1Hwrp/socket
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/13210,unix/unix:/tmp/.ICE-unix/13210
+USERNAME=cmagis
+ENV_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//.t_coffee_env
+GIO_LAUNCHED_DESKTOP_FILE=/users/cn/cmagis/Desktop/gnome-terminal.desktop
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+DESKTOP_SESSION=gnome
+MAIL=/var/spool/mail/cmagis
+PATH=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/users/cn/cmagis/bin:/users/cn/cmagis/bin
+_=/usr/bin/printenv
+ALN_LINE_LENGTH=160
+QT_IM_MODULE=xim
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/
+PWD=/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/users/cn/cmagis/.t_coffee/cache//
+XMODIFIERS=@im=none
+GDM_KEYBOARD_LAYOUT=us	intl
+GNOME_KEYRING_PID=13200
+LANG=en_US.UTF-8
+KDE_IS_PRELINKED=1
+GDM_LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+KDEDIRS=/usr
+GDMSESSION=gnome
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HISTCONTROL=ignoredups
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/
+SHLVL=4
+HOME=/users/cn/cmagis
+DUMP_4_TCOFFEE=t_coffee.151.RJm25ksuaP.dump
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+HTTP_PROXY=
+MAFFT_BINARIES=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/plugins/linux/
+LOGNAME=cmagis
+CVS_RSH=ssh
+EMAIL_4_TCOFFEE=cedrik.magis@crg.es
+QTLIB=/usr/lib64/qt-3.3/lib
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-H13VKolxki,guid=b1ccb896c3103c0a8fe39b81000001d2
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+EMAIL=cedrik.magis@crg.es
+UPDATED_ENV_4_TCOFFEE=1
+WINDOWPATH=1
+DISPLAY=:0.0
+ALL_proxy=
+PROXY_4_TCOFFEE=cedrik.magis@crg.es
+LOCKDIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/lck//
+G_BROKEN_FILENAMES=1
+TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/tco/63714495/
+XAUTHORITY=/var/run/gdm/auth-for-cmagis-E59HTd/database
+COLORTERM=gnome-terminal
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.151.RJm25ksuaP.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>1652</line>
+</ref>

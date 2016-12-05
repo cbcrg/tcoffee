@@ -1,0 +1,309 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -other_pg seq_reformat -in sample_prot_thread.aln -in2 sample_dna_thread.fa -struc_in sample_prot_thread.score_ascii -struc_in_f number_aln -output tcs_column_filter5 -out dna.filter</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_prot_thread.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00.0c7a5d3 [http://www.tcoffee.org] [MODE:  ], CPU=0.01 sec, SCORE=857, Nseq=7, Len=315 
+
+sp|Q06606|GRZ2_RAT     MFLF---------------------------L-------FFLVAILPV-NTEGGEIIWGTESKPHSRPYMAFIKFYDSNSEPHHCGGFLVAKDIVMTAAHCNG-----R-NIKVTLGAHNIKKQENT-QVISVVKAKPHENYDRDSHFNDIMLLKLERKA
+sp|P08884|GRAE_MOUSE   MPPV---------------------------L-------ILLTLLLPL-GAGAEEIIGGHVVKPHSRPYMAFVKSVDIEGNRRYCGGFLVQDDFVLTAAHCRN-----R-TMTVTLGAHNIKAKEETQQIIPVAKAIPHPDYNATAFFSDIMLLKLESKA
+sp|P21844|MCPT5_MOUSE  MHLL---------------------------T------LHLLLLLLGS-STKAGEIIGGTECIPHSRPYMAYLEIVTSENYLSACSGFLIRRNFVLTAAHCAG-----R-SITVLLGAHNKTSKEDTWQKLEVEKQFLHPKYDENLVVHDIMLLKLKEKA
+sp|O35205|GRAK_MOUSE   MRFSS--W--ALVSLVAGVYM--SS------------------------ECFHTEIIGGREVQPHSRPFMASIQYR----SKHICGGVLIHPQWVLTAAHCYSWFPRGH-SPTVVLGAHSLSKNEPMKQTFEIKKFIPFSRLQSGSASHDIMLIKLRTAA
+sp|Q7YRZ7|GRAA_BOVIN   MNIP---------------------------FPFSFPPAICLLLIPGVFPVSCEGIIGGNEVAPHTRRYMALIKG------LKLCAGALIKENWVLTAAHCDL-----KGNPQVILGAHSTSHKEKLDQVFSIKKAIPYPCFDPQTFEGDLQLLQLEGKA
+sp|Q00871|CTRB1_PENVA  MIGKL--S-----LLLVCVAVASGNPAAGKPWHWKSPKPL---VDPRIHVNATPRIVGGVEATPHSWPHQAALFID----DMYFCGGSLISSEWVLTAAHCMDG---AG-FVEVVLGAHNIRQNEASQVSITSTDFFTHENWNSWLLTNDIALIRLPSPV
+sp|P08246|ELNE_HUMAN   MTLGRRLACLFLACVLPALLL--GG------------------------TALASEIVGGRRARPHAWPFMVSLQLR----GGHFCGATLIAPNFVMSAAHCVANV-NVR-AVRVVLGAHNLSRREPTRQVFAVQRIF-ENGYDPVNLLNDIVILQLNGSA
+                       *                                                      *: *    **:  . . :           *.. *:  : *::****            * ****.   .*     :           :      *: :::*   .
+
+sp|Q06606|GRZ2_RAT     QLNGVVKTIALPRSQDWVKPGQVCTVAGWGRLA-N-CTSSNTLQEVNLEVQKGQKCQDMSE----DYNDSIQLCVGNPSEGKATGKGDSGGPFVCDGVAQGIVSYRLC---TGTLPRVFTRIS-SFIPWIQKTMKVLQQ---------------S
+sp|P08884|GRAE_MOUSE   KRTKAVRPLKLPRPNARVKPGDVCSVAGWGSRSINDTKASARLREAQLVIQEDEECKKRFR----HYTETTEICAGDLKKIKTPFKGDSGGPLVCDNKAYGLLAYAKN---RTISSGVFTKIV-HFLPWISRNMKL------------------L
+sp|P21844|MCPT5_MOUSE  KLTLGVGTLPLSANFNFIPPGRMCRAVGWGRTNVN-EPASDTLQEVKMRLQEPQACKHFTS-----FRHNSQLCVGNPKKMQNVYKGDSGGPLLCAGIAQGIASYVHR---NAKPPAVFTRIS-HYRPWINKILRE------------------N
+sp|O35205|GRAK_MOUSE   ELNKNVQLLHLGSKN-YLRDGTKCQVTGWGTTKPDLLTASDTLREVTVTIISRKRCNSQSYYNHKPVITKDMICAGDARGQKDSCKGDSGGPLICKGIFHALVSQGYKC-GIAKKPGIYTLLTKKYQTWIKSKLAPSRA---------------H
+sp|Q7YRZ7|GRAA_BOVIN   TMTKAVGILQLPRTEDDVKPHTKCHVAGWGSTKKDACQMSNALREANVTVIDRKICNDAQHYNFNPVIDLSMICAGGRKGEDDSCEGDSGSPLICDNVFRGVTSFGKCG--NPQKPGIYILLTKKHLNWIKKTIAGA-----------------I
+sp|Q00871|CTRB1_PENVA  SLNSNIKTVKLPSSD--VSVGTTVTPTGWGRPSDSASGISDVLRQVNVPVMTNADCDSVYGIV-----GDGVVCIDG-TGGKSTCNGDSGGPLNLNGMTYGITSFGSSAGCEKGYPAAFTRVY-YYLDWIQQKTGV---------------T--P
+sp|P08246|ELNE_HUMAN   TINANVQVAQLPAQGRRLGNGVQCLAMGWGLLGRNR-GIASVLQELNVTVVTS-LCR------------RSNVCTLVRGRQAGVCFGDSGSPLVCNGLIHGIASFVRGGCASGLYPDAFAPVA-QFVNWIDSIIQRSEDNPCPHPRDPDPASRTH
+                         .  :    *      :         ***    .    :  *::  : :     *                :*            ****.*:   .   .: :           .  :  :   .  **.                        
+
+
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_dna_thread.fa</name>
+<content>
+>sp|Q06606|GRZ2_RAT
+atgttcttattccttttcttcttggtcgccatactaccggtgaacacaga
+gggtggtgaaataatctgggggacagaatccaagccacattcccgccctt
+acatggctttcataaaattttatgattccaactcagagccgcatcactgc
+gggggcttcctcgtagctaaggacatagtcatgaccgcggctcattgcaa
+tggtcgtaacataaaagtcactctgggcgcccataatattaagaagcagg
+aaaacacacaagtgattagtgtggttaaggccaagccacacgaaaactac
+gaccgtgactcccacttcaacgatataatgttgttgaagcttgaacgaaa
+ggcccaattaaatggagtagtgaaaacgattgctctcccacgtagccagg
+attgggttaagcctggtcaagtctgcactgtggccggatggggacggcta
+gcgaattgtacgagctctaacaccctccaggaagtcaaccttgaggtcca
+aaagggtcagaaatgccaagatatgagcgaagactacaatgacagtattc
+aattgtgcgtgggtaatcccagcgaggggaaagcgactggtaaaggggat
+agtggagggccatttgtgtgcgacggcgttgcacagggtatagtcagtta
+ccggttgtgtactggtacacttccgcgtgttttcacgcgtatctcctcat
+tcatcccgtggatacaaaagactatgaaagttttacagcagtcc
+>sp|P08884|GRAE_MOUSE
+atgccacccgtactcatactcctgactcttttacttccgctcggagcagg
+agccgaagaaattataggtggtcacgtagtgaaacctcactccagaccct
+acatggcattcgtaaaatcggtagacattgaagggaacagacggtattgt
+ggcggcttcctggtgcaagacgacttcgtactgacagcagctcattgccg
+caatcgcactatgaccgtcaccctgggagcgcacaacatcaaggctaaag
+aggagactcagcagatcatccctgttgctaaagcgattccgcatccagac
+tacaacgcaaccgcattcttctcagatataatgcttctcaagctagagtc
+gaaggccaaaaggaccaaggctgtaaggccgctaaaacttcctcgaccca
+atgcccgggtcaaacccggcgatgtatgttcagtcgcggggtggggtagc
+agatctattaatgacaccaaagcatccgctaggttacgagaagctcagct
+ggttattcaggaggatgaggagtgcaaaaagcggttccgccattacacag
+agaccacggaaatctgcgcgggtgatcttaaaaagataaagacaccattc
+aagggggactctggaggacctcttgtctgtgacaataaggcctacggact
+ccttgcctacgcgaagaatagaaccatctccagcggtgtgttcacaaaga
+tcgtgcatttcttgccgtggattagtagaaatatgaagctgttg
+>sp|P21844|MCPT5_MOUSE
+atgcatctgctaacgttacatttacttctactattactcggtagctccac
+taaggcgggtgagatcattggcggcactgaatgtataccgcattcgaggc
+catatatggcctatcttgagatcgtgacttcagagaactacttgtctgcc
+tgctcggggttcctcataaggcggaacttcgtcctaacagctgctcattg
+tgccgggagatccataacggtcctcctgggtgcacataacaagacctcca
+aagaagacacctggcagaagttggaggtcgaaaaacaatttcttcatcca
+aagtacgacgaaaaccttgttgtacatgatattatgctcttaaagctcaa
+ggaaaaggctaagctcaccctgggcgtcgggactttgccgctttcggcca
+attttaactttatcccacccggtcgcatgtgccgcgcggttggttggggc
+cgtaccaatgtcaacgagcccgcgagcgacaccttgcaggaggttaaaat
+gaggttacaggaacctcaagcgtgtaaacatttcacttccttcagacata
+attcacagttatgtgtaggcaacccgaaaaagatgcagaacgtatataaa
+ggcgacagcgggggtccactactttgcgcaggaattgcgcaaggcatagc
+atcatatgtacaccggaacgcgaagcccccggcagtctttaccagaatct
+cgcattacagaccttggataaacaaaattttgcgagagaac
+>sp|O35205|GRAK_MOUSE
+atgcgattttcttcttgggcactggttagtttggtagcaggcgtttacat
+gtcaagcgaatgttttcacactgaaatcatcggtgggagagaggtacagc
+ctcattcgagaccattcatggcatcgattcagtacagaagtaaacatatc
+tgtgggggtgtccttatccacccgcagtgggtcctgacagcagcgcactg
+ttactcgtggtttccacggggccacagcccgaccgtagtgctcggagccc
+acagcctatcgaagaatgaacccatgaaacaaacattcgagattaaaaaa
+ttcatcccattttcccgactgcaatcagggtccgcttcgcacgatattat
+gcttatcaaattaaggaccgcggcggagttgaataaaaatgtccaactcc
+tgcatctaggtagtaagaattacctaagagacggaactaaatgtcaagta
+acgggctggggcactaccaagccggacctcttaacagcatctgacacgtt
+aagagaagtaaccgtgacgatcattagtcgtaaaaggtgtaactctcagt
+cgtactataaccacaagcccgtaattaccaaggatatgatctgcgcaggg
+gatgctagaggccagaaggatagctgtaaaggtgatagcggcggtccctt
+aatctgtaaagggatattccacgcacttgttagtcaaggatataaatgtg
+ggattgcgaaaaaacccggaatatacacactcttaactaagaaatatcaa
+acgtggataaaatctaaactggccccttcgagggcgcac
+>sp|Q7YRZ7|GRAA_BOVIN
+atgaacattccatttccgttctcctttcctcctgcgatatgtctcctcct
+gatccccggtgtctttcccgttagctgtgagggcatcataggggggaatg
+aggtcgcgcctcacactcgaaggtatatggcgttgataaaaggactgaag
+ctttgcgccggcgcactaatcaaagagaactgggtccttaccgccgcaca
+ctgtgacttaaagggaaatcctcaagtcatcctaggggcccattctacca
+gtcataaggaaaagctcgaccaggtgtttagcatcaaaaaggccatcccc
+tatccctgctttgatccacaaaccttcgaaggcgatctccaacttcttca
+gctggaagggaaggcgaccatgacgaaggccgtaggcatactgcaactac
+caagaaccgaggacgacgtgaagcctcacacaaaatgtcacgtggcaggt
+tggggttccacaaaaaaagatgcatgccagatgtcgaatgccttgaggga
+ggcgaatgtaacagtcatcgatcgaaaaatctgtaacgatgcccaacatt
+acaacttcaaccctgttattgatctctccatgatttgcgctggcggaaga
+aagggagaggatgattcgtgtgagggagactccggctccccgctgatatg
+cgacaatgtttttcggggagtcacttcatttggtaagtgtggaaacccgc
+agaaaccgggcatctatatacttcttaccaagaaacatttaaattggatt
+aaaaaaaccatagctggagctatc
+>sp|Q00871|CTRB1_PENVA
+atgatagggaagttatctctactgcttgtgtgtgttgcggtagcgtccgg
+aaacccagcggctgggaaaccttggcactggaagtcccctaagcccttgg
+tggacccacgcatacacgtgaacgcaactccaagaatcgtggggggggtt
+gaggccactccgcattcctggcctcatcaggctgccttgtttattgatga
+tatgtacttctgtggggggtcactgatctcatcagagtgggtacttacag
+cagcacactgcatggatggtgcagggtttgtggaagtggtgctgggcgcg
+cataacattagacagaatgaagcaagccaggtctctattacgagcactga
+tttttttacccacgaaaattggaatagttggctcttgactaacgatatcg
+ctttgatacggttaccaagcccagtgtccttgaacagtaatattaaaaca
+gttaagttgcccagttcagatgtaagtgttggtaccacagtgacgcctac
+gggttggggaaggccaagtgattcagcgtcaggcatcagcgacgtcctca
+gacaggtaaatgtgcctgtaatgacgaacgcagactgtgattctgtttat
+ggcatagtgggtgacggtgtggtttgcatagatggtactggggggaaatc
+tacctgtaatggagactcaggtggtccactcaacctcaatggaatgacgt
+atggcataacatctttcggctcgtctgcaggctgcgaaaaaggttacccc
+gctgctttcactcgcgtatactattacttagattggattcagcaaaaaac
+tggggtaacaccg
+>sp|P08246|ELNE_HUMAN
+atgaccctaggcaggcgtctggcatgtttgttccttgcttgcgtacttcc
+cgcacttttactcggcggcactgcattggcctcggaaatcgtgggtggcc
+gtagggcgagaccccatgcatggccctttatggtgtccctccagctgcgt
+gggggtcatttttgtggcgcaactcttattgcccctaatttcgttatgag
+tgcagcccattgtgtagcgaacgtgaatgtccgggcagtaagagtggttc
+tgggggctcacaatctgtcacgccgtgagccgacgcgacaagtcttcgcg
+gtccaacgaatattcgagaatggttacgacccagtaaacctattgaatga
+catcgtcattcttcaattaaacgggagtgcgactataaatgcaaacgtcc
+aagtcgctcagcttcccgcgcaggggcgtaggcttggaaacggtgtgcaa
+tgtttggctatgggctggggtctactgggccgtaatcgaggcattgcgtc
+tgtcttgcaagaacttaacgttaccgttgtcaccagcttgtgcaggagat
+ctaacgtgtgcactctagtacggggtcggcaggccggggtgtgtttcggc
+gattcgggtagtcctctggtatgcaacggtctaattcatggaattgcctc
+ctttgtgagaggtggatgcgcttcaggactatatcccgatgcgttcgccc
+ccgtggcacagttcgttaattggatcgattcaataatccaaagaagtgaa
+gataatccatgcccacatcctagggatcccgaccctgcgagtaggactca
+t
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_prot_thread.score_ascii</name>
+<content>
+T-COFFEE, Version_11.00 (Version_11.00)
+Cedric Notredame 
+CPU TIME:0 sec.
+SCORE=857
+*
+ BAD AVG GOOD
+*
+sp|Q06606|GRZ2_RAT      :  86
+sp|P08884|GRAE_MOUSE    :  87
+sp|P21844|MCPT5_MOUSE   :  87
+sp|O35205|GRAK_MOUSE    :  85
+sp|Q7YRZ7|GRAA_BOVIN    :  86
+sp|Q00871|CTRB1_PENVA   :  84
+sp|P08246|ELNE_HUMAN    :  84
+cons                    :  85
+
+sp|Q06606|GRZ2_RAT      7432---------------------------1-------122222222-233468999999999999999998764333357999999999999999999964-----5-68999999999988876-5677777777899999999999999999999
+sp|P08884|GRAE_MOUSE    7532---------------------------1-------111221122-233468999999999999999998754222246999999999999999999965-----5-6799999999999998878888888877889999999999999999999
+sp|P21844|MCPT5_MOUSE   7532---------------------------1------1111122222-333468999999999999999999864222246999999999999999999964-----5-6899999999999998877888888777889999999999999999999
+sp|O35205|GRAK_MOUSE    75331--1--11111111111--11------------------------234578999999999999999998754----46899999999999999999975221125-7899999999999998878888888787889999999999999999999
+sp|Q7YRZ7|GRAA_BOVIN    9753---------------------------21121111111111112122335799999999999999998753------5789999999999999999974-----315799999999999998877888888777889999999999999999999
+sp|Q00871|CTRB1_PENVA   86321--1-----111111111111111234445677644---444442233469999999999999999988654----468999999999999999999741---13-6899999999999998877788888777889999999999999999999
+sp|P08246|ELNE_HUMAN    864411111111111111111--12------------------------344568999999999999999998764----4689999999999999999998621-125-789999999999999987777776655-568999999999999999999
+cons                    753210000000000000111001100000010000000111111111022346899999999999999998865422124689999999999999999997410011406899999999999998877788877777789999999999999999999
+
+
+sp|Q06606|GRZ2_RAT      9999999999999876578899999999999875-4-3568999999999999878886543----2223446888766677789999999999999999999998644---445689998877-799999998764222---------------3
+sp|P08884|GRAE_MOUSE    99999999999998765789999999999999975544678899999999999888885433----2334456888776677889999999999999999999999754---344577898887-799999998754------------------2
+sp|P21844|MCPT5_MOUSE   999999999999987657889999999999998655-4678999999999999878986544-----334557998776678899999999999999999999998754---344689998877-799999986654------------------2
+sp|O35205|GRAK_MOUSE    9999999999998654-588999999999999975545678999999999999878876543222223334568887766778999999999999999999999986432-13446888988762789999987655323---------------4
+sp|Q7YRZ7|GRAA_BOVIN    99999999999998765788999999999999975545788999999999999878876544221123345679987766778899999999999999999999997542--34467888876527899999876542-----------------2
+sp|Q00871|CTRB1_PENVA   9999999999999754--6778889999999997554578999999999999988887644322-----445678754-455689999999999999999999999864211233688888877-899999987554---------------1--2
+sp|P08246|ELNE_HUMAN    9999999999999876578899999999999987553-5678999999999865-454------------345787664556789999999999999999999999753211345788998877-7999999876653222354968964335666
+cons                    999999999999976556888999999999998655346789999999999988778764331111122345688866566778999999999999999999999874311133468899887627999999876542110000900900000222
+
+
+
+
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/users/cn/cmagis/
+ORBIT_SOCKETDIR=/tmp/orbit-cmagis
+HOSTNAME=brasil
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+GIO_LAUNCHED_DESKTOP_FILE_PID=13637
+MCOFFEE_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//mcoffee/
+GPG_AGENT_INFO=/tmp/seahorse-3oGFZj/S.gpg-agent:13286:1;
+ROOT_TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/
+TERM=xterm
+SHELL=/bin/bash
+XDG_SESSION_COOKIE=78ca754cf49d9d17b2c0859500000020-1472467836.368722-1926617865
+HISTSIZE=1000
+PERL5LIB=:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/perl/lib/perl5
+GTK_RC_FILES=/etc/gtk/gtkrc:/users/cn/cmagis/.gtkrc-1.2-gnome2
+WINDOWID=33313398
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+METHODS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//methods/
+IMSETTINGS_MODULE=none
+http_proxy=
+HTTP_proxy=
+USER=cmagis
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-y1Hwrp/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-y1Hwrp/socket
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/13210,unix/unix:/tmp/.ICE-unix/13210
+USERNAME=cmagis
+ENV_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//.t_coffee_env
+GIO_LAUNCHED_DESKTOP_FILE=/users/cn/cmagis/Desktop/gnome-terminal.desktop
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+DESKTOP_SESSION=gnome
+MAIL=/var/spool/mail/cmagis
+PATH=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/users/cn/cmagis/bin:/users/cn/cmagis/bin
+_=/usr/bin/printenv
+ALN_LINE_LENGTH=160
+QT_IM_MODULE=xim
+DIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/
+PWD=/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/users/cn/cmagis/.t_coffee/cache//
+XMODIFIERS=@im=none
+GDM_KEYBOARD_LAYOUT=us	intl
+GNOME_KEYRING_PID=13200
+LANG=en_US.UTF-8
+KDE_IS_PRELINKED=1
+GDM_LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+KDEDIRS=/usr
+GDMSESSION=gnome
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HISTCONTROL=ignoredups
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/
+SHLVL=4
+HOME=/users/cn/cmagis
+DUMP_4_TCOFFEE=t_coffee.99.kjxCyTb7Ez.dump
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+HTTP_PROXY=
+MAFFT_BINARIES=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/plugins/linux/
+LOGNAME=cmagis
+CVS_RSH=ssh
+EMAIL_4_TCOFFEE=cedrik.magis@crg.es
+QTLIB=/usr/lib64/qt-3.3/lib
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-H13VKolxki,guid=b1ccb896c3103c0a8fe39b81000001d2
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+EMAIL=cedrik.magis@crg.es
+UPDATED_ENV_4_TCOFFEE=1
+WINDOWPATH=1
+DISPLAY=:0.0
+ALL_proxy=
+PROXY_4_TCOFFEE=cedrik.magis@crg.es
+LOCKDIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/lck//
+G_BROKEN_FILENAMES=1
+TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/tco/63710982/
+XAUTHORITY=/var/run/gdm/auth-for-cmagis-E59HTd/database
+COLORTERM=gnome-terminal
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.99.kjxCyTb7Ez.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>1691</line>
+</ref>

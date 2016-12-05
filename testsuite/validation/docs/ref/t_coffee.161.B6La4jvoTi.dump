@@ -1,0 +1,3480 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee proteases_oneseq.fasta -profile proteases_small.aln</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=0, Nseq=20, Len=402 
+
+sp|P08861|ELA3B_HUMAN  mmlrllsslllvavasg-----------------------------------ygppssrpssrvvngedavpyswpwqvslqyeksg-------sfyhtcggsliapdwvvtaghciss----------------swtyqvvlgeydravkeg--peqvi
+sp|Q06606|GRZ2_RAT     -------------------------------------------mflflfflvailpvnteggeiiwgteskphsrpymafik---fy----dsnsephhcggflvakdivmtaahc----ng-------r----nik---vtlgahni---kkqe-ntq-
+sp|P08884|GRAE_MOUSE   -------------------------m--------ppvlilltlllplgagaeeii-----ggh-----vvkphsrpymafvk---svdiegnr----rycggflvqddfvltaahc----rn-------r----tmt---vtlgahni---kake-etqq
+sp|P21844|MCPT5_MOUSE  ------------------------mh--------lltlhllllllgsstkageii-----ggt-----eciphsrpymayleivtse----ny-l--sacsgflirrnfvltaahc----ag-------r----sit---vllgahnk---tske-dtwq
+sp|O35205|GRAK_MOUSE   --------------------mrfssw--------alvslvagvymssecfhteii-----ggr-----evqphsrpfmasiq---yr----sk----hicggvlihpqwvltaahc----y-swfprg-h----spt---vvlgahsl---skne-pmkq
+sp|Q9Y5K2|KLK4_HUMAN   ---------------matagnpwgwf--------lgylilgvagslvsgscsqii-----nge-----dcsphsqpwqaalv---me----ne----lfcsgvlvhpqwvlsaahc----fq-------n----syt---iglglhsl-ead-qe-pgsq
+sp|Q7YRZ7|GRAA_BOVIN   -----------------mnipfpfsf--------ppaiclllipgvfpvscegii-----ggn-----evaphtrrymalik--gl------k-----lcagalikenwvltaahc----dlk------g----npq---vilgahst---shke-kldq
+sp|Q00871|CTRB1_PENVA  migklslllvcvavasgnpaagkpwh--------wkspkplvdprihvnatpriv-----ggv-----eatphswphqaalf---id----dm----yfcggslissewvltaahc----md-------g--agfv---evvlgahni---rqnea-sqv
+sp|P08246|ELNE_HUMAN   ----------------mtlgrrlacl--------flacvlpalllggtalaseiv-----ggr-----rarphawpfmvslq---lr----gg----hfcgatliapnfvmsaahc----van------v----nvravrvvlgahnl---srre-ptrq
+sp|P03953|CFAD_MOUSE   --------------------mhssvy--------fvalvilgaavcaaqprgril-----ggq-----eaaaharpymasvq---vn----gt----hvcggtlldeqwvlsaahc----mdgvtddd------svq---vllgahsl---sape-pykr
+sp|Q91VE3|KLK7_MOUSE   --------------------mgvwll--------slitvllslaletagqgerii-----dgy-----kckegshpwqvall---kg----nq----lhcggvlvdkywvltaahc----km-------g----qyq---vqlgsdki---gdq---saq
+sp|Q6H321|KLK2_HORSE   ---------------------mwflv--------lcldlslgetgalppiqsrii-----ggw-----ecekhskpwqvavy---hq----gh----fqcggvlvhpqwvltaahc----ms-------d----dyq---iwlgrhnl---sede-dtaq
+sp|Q03238|GRAM_RAT     -------------------------l--------llllalktlwavgnrfeaqii-----ggr-----eavphsrpymvslq---nt----ks----hmcggvlvhqkwvltaahc----lse----plq----qlk---lvfglhslhdpqdp----gl
+sp|P20160|CAP7_HUMAN   -------------------mtrltvl--------allagllassragssplldiv-----ggr-----karprqfpflasiq---nq----gr----hfcggaliharfvmtaasc----fqs---qnpg----vs---tvvlgaydl---rrrerqsrq
+sp|P07338|CTRB1_RAT    --------------------maflwlvscfalvgatfgcgvptiqpvltglsriv-----nge-----daipgswpwqvslq---dk---tgf----hfcggslisedwvvtaahc----gvk------ts----dv---vvagefdq---gsde-eniq
+sp|P00757|KLKB4_MOUSE  ----------------------------------mwflilflalslggidaappv-----qsq-----vdcensqpwhvavy---rf----nk----yqcggvlldrnwvltaahc----yn-------d----kyq---vwlgknnf---lede-psdq
+sp|P80015|CAP7_PIG     -----------------------------------------------------iv-----ggr-----raqpqefpflasiq---kq----gr----pfcagalvhprfvltaasc----frg---knsg----sa---svvlgaydl---rqqe-qsrq
+sp|P29786|TRY3_AEDAE   ------mnqflfvsfcalldsakvsa--------------------atlssgriv-----ggf-----qidiaevphqvslq--rsg-----r----hfcggsiisprwvltrahc----tt-------ntdpaayt---iragstd----rtng-gi--
+sp|P35037|TRY3_ANOGA   -----misnkiaillavlvvavacaqarvaqqhrsvqalprflprpkydvghriv-----ggf-----eidvsetpyqvslq--yfn-----s----hrcggsvlnskwiltaahctvnlqp-------ss----la---vrlgssr----hasg-gt--
+sp|P00773|ELA1_RAT     -------------------mlrflvf--------aslvlyghstqdfpetnarvv-----gga-----earrnswpsqislq---ylsggswy----htcggtlirrnwvmtaahc----vss------q----mtf--rvvvgdhnl---sqnd-gteq
+                                                                                    .                  :                  *.. ::    ::: . *                        :  *                
+
+sp|P08861|ELA3B_HUMAN  pinsgdlfvhplwnrsc--------------vacgndialiklsrsaqlgdavqlaslppagd-----ilpnetpcyitgwgrlytngplp------------dklqeallpvvdyehcsr-----wnwwgssvkktmvcaggd----------irsgcn
+sp|Q06606|GRZ2_RAT     visvvkakphenydr-----------dsh-----fndimllklerkaqlngvvktia-lp--rsq-dw-vkpgqvctvagwgr-----lan-c-t--s-snt---lqevnlevqkgqkcqd----mse--dynd-siqlcvg--npse--g--k--atgk
+sp|P08884|GRAE_MOUSE   iipvakaiphpdyna-----------taf-----fsdimllkleskakrtkavrplk-lp--rpn-ar-vkpgdvcsvagwgsrsindt-----------kasarlreaqlviqedeeckk----rfr--hy-tetteicag--dlkk--i--k--tpfk
+sp|P21844|MCPT5_MOUSE  klevekqflhpkyde-----------nlv-----vhdimllklkekakltlgvgtlp-ls--an-fnf-ippgrmcravgwgr-----tnvne-p--a-sdt---lqevkmrlqepqackh-----ft--sfrh-nsqlcvg--npkk--m--q--nvyk
+sp|O35205|GRAK_MOUSE   tfeikkfipfsrlqs-----------gsa-----shdimliklrtaaelnknvqllh-lg--s--kny-lrdgtkcqvtgwgt-----tkpdllt--a-sdt---lrevtvtiisrkrcns--qsyynhkpvit-kdmicag--d--a--r--gqkdsck
+sp|Q9Y5K2|KLK4_HUMAN   mveaslsvrhpeyn-----------rpll-----andlmlikldesvsesdtirsis-ia--s---qc-ptagnsclvsgwgl-----la--ngr--m-ptv---lqcvnvsvvseevcsk----lyd--plyh-psmfcag--g--g--qdqk--dscn
+sp|Q7YRZ7|GRAA_BOVIN   vfsikkaipypcfdp-----------qtf-----egdlqllqlegkatmtkavgilq-lp--rt-edd-vkphtkchvagwgs-----tkkdacq--m-sna---lreanvtvidrkicnd--aqhynfnpvid-lsmicag--g--r--k--geddsce
+sp|Q00871|CTRB1_PENVA  sitstdffthenwns-----------wll-----tndialirlpspvslnsniktvk-lp--s---sd-vsvgttvtptgwgr-----psdsasg--i-sdv---lrqvnvpvmtnadcds----vyg---ivg-dgvvcid--g--t--g--g-kstcn
+sp|P08246|ELNE_HUMAN   vfavqrifen-gydp-----------vnl-----lndivilqlngsatinanvqvaq-lp--aq-grr-lgngvqclamgwgl-----lgrnr-g--i-asv---lqelnvtvvt-slc--------------r-rsnvctl--v--rgrq--a--gvcf
+sp|P03953|CFAD_MOUSE   wydvqsvvphpgsrp-----------dsl-----eddlilfklsqnaslgphvrplplqy-----edkevepgtlcdvagwgv-----vthag-r--r-pdv---lhqlrvsimnrttcnl--rtyhd--gvvt-inmmcae--s--n--r--r--dtcr
+sp|Q91VE3|KLK7_MOUSE   kikatksfrhpgys-----------tkth-----vndimlvrldepvkmsskveavq-lp--e---hc-eppgtsctvsgwgt-----ttspdvt--f-psd---lmcsdvklissreckk----vyk--dllg-ktmlcag--i--p--dskt--ntcn
+sp|Q6H321|KLK2_HORSE   fhqvsdsfldpqfdlsllkkkylrpyddi-----shdlmllrlaqparitdavkild-lp--t---qe-pklgstcytsgwgl-----istftnr--g-sgt---lqcvelrlqsnekcar----ayp--ekmt-efvlcathrd--d----sg--sicl
+sp|Q03238|GRAM_RAT     tfyikqaikhpgynl------------ky-----endlallkldgrvkpsknvkpla-lp--rkprdk-paegsrcstagwgi-----thqrg-q--l-aks---lqeldlrlldtrmcnn--srfwn--gvlt-dsmlclk--agak--g--q--apck
+sp|P20160|CAP7_HUMAN   tfsissmsen-gydp-----------qqn-----lndlmllqldreanltssvtilp-lp--lq-nat-veagtrcqvagwgs-----qrsgg-r--l-srf---prfvnvtvtpedqc--------------r-pnnvctg--v--ltrr--g--gicn
+sp|P07338|CTRB1_RAT    vlkiaqvfknpkf----------------nmftvrnditllklatpaqfsetvsavc-lp--nvd-dd-fppgtvcattgwgk-----tky---nalktpek---lqqaalpivseadck----kswg--skit-dvmtcag--a--s--g--v--sscm
+sp|P00757|KLKB4_MOUSE  hrlvskaiphpdfnmsllnehtpqpeddy-----sndlmllrlskpaditdvvkpit-lp--t---ee-pklgstclasgwgs-----ttpikfk--y-pdd---lqcvnlkllpnedcdk----ahe--mkvt-damlcag--e--m--dggs--ytce
+sp|P80015|CAP7_PIG     tfsirsisqn-gydp-----------rqn-----lndvlllqldrearltpsvalvp-lp--pq-nat-veagtncqvagwgt-----qrlr--r--lfsrf---prvlnvtvt-snpc--------------l-prdmcig--v--fsrr--g--risq
+sp|P29786|TRY3_AEDAE   ivkvksviphpqyn---------gdtyny-------dfslleldesigfsrsieaia-lpdase---t-vadgamctvsgwgd-----t-knv-f---emnt--llravnvpsynqaecaaalvnvvp----vt-eqmicag--y--aa-g--g-kdscq
+sp|P35037|TRY3_ANOGA   vvrvarvlehpnyd-----------dstid-----ydfslmeleseltfsdvvqpvs-lp--dqd-ea-vedgtmtivsgwgn-----tqsa--a---esna--ilraanvptvnqkect----iaysssggit-drmlcag--y--krgg--k--dacq
+sp|P00773|ELA1_RAT     yvsvqkimvhptwns-----------nnv---aagydiallrlaqsvtlnnyvqlav-lp--qe-gti-lannnpcyitgwgr-----trtng-q--l-sqt---lqqaylpsvdysicss--ssywg--stvk-ttmvcag--g--d-gv--r--sgcq
+                                                           *. :..*         :                          ***                            :       *                    *                    
+
+sp|P08861|ELA3B_HUMAN  gdsggplncptedg-gwqvhgvtsfvsa-fgcn----trrkptvftrvs-afidwieetias-------------------h
+sp|Q06606|GRZ2_RAT     gdsggpfvcd----g--vaqgivsyrl-c-tg-t----l-p-rvftriss-fipwiqktmk--vlqqs--------------
+sp|P08884|GRAE_MOUSE   gdsggplvcd----n--kaygllayak-n----rti-ss-g--vftkivh-flpwisrnmkl-l------------------
+sp|P21844|MCPT5_MOUSE  gdsggpllca----g--iaqgiasyvh-r-na-k------ppavftrish-yrpwinkilren-------------------
+sp|O35205|GRAK_MOUSE   gdsggplick----g--ifhalvsqgy-k--c-g-i-akkp-giytlltkkyqtwiksklapsrah----------------
+sp|Q9Y5K2|KLK4_HUMAN   gdsggplicn------gylqglvsfgk--apcgq-v-gv-p-gvytnlck-ftewiektvqa-s------------------
+sp|Q7YRZ7|GRAA_BOVIN   gdsgsplicd------nvfrgvtsfg----kc-g-n-pqkp-giyilltkkhlnwikktiagai------------------
+sp|Q00871|CTRB1_PENVA  gdsggplnln------gmtygitsfgs-sagc-e-k-gy-p-aaftrvyy-yldwiqqktgvtp------------------
+sp|P08246|ELNE_HUMAN   gdsgsplvcn------glihgiasfvr-g-gcas-g-ly-p-dafapvaq-fvnwidsiiq-rsednpcphprdpdpasrth
+sp|P03953|CFAD_MOUSE   gdsgsplvcg----d--avegvvtwgs-r-vc-g-n-gkkp-gvytrvss-yrmwienitngnmts----------------
+sp|Q91VE3|KLK7_MOUSE   gdsggplvcn------dtlqglvswgt--ypcgq-p-nd-p-gvytqvck-ykrwvmetmkthr------------------
+sp|Q6H321|KLK2_HORSE   gdsggalicd------gvfqgitswgy--sec-a-d-fndn-fvftkvmp-hlkwiketiekns------------------
+sp|Q03238|GRAM_RAT     gdsggplvcg----k-gkvdgilsfss-k-nc-tdi-fk-p-tvatavap-ysswirkvigr-wspqplt------------
+sp|P20160|CAP7_HUMAN   gdggtplvce------glahgvasfsl-g-pc-g-r--g-p-dfftrval-frdwidgvlnnpgpgpa--------------
+sp|P07338|CTRB1_RAT    gdsggplvcqkd--gvwtlagivswgs-g-vc-s-t-st-p-avysrvta-lmpwvqqilean-------------------
+sp|P00757|KLKB4_MOUSE  hdsggplicd------gilqgitswgp--epc-g-epte-p-svytklik-fsswiretmannp------------------
+sp|P80015|CAP7_PIG     gdrgtplvcn------glaqgvasflr-r-rf-r-r--s-s-gfftrval-frnwidsvlnnpp------------------
+sp|P29786|TRY3_AEDAE   gdsggplvsg------dklvgvvswgk-g--c-a-l-pnlp-gvyarvst-vrqwirevsev--------------------
+sp|P35037|TRY3_ANOGA   gdsggplvvd------gklvgvvswgf-g-ca-m-p-gy-p-gvyarvav-vrdwvrensga--------------------
+sp|P00773|ELA1_RAT     gdsggplhclvngqy--svhgvtsfvssm-gc-nvs-kk-p-tvftrvsa-yiswmnnviayt-------------------
+                        * * .:             .: :                       :      *:                          
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[1] 	proteases_oneseq.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[1] 	proteases_small.aln
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+
+!		[Final Evaluation][TOT=   16][  0 %]!		[Final Evaluation][TOT=   16][ 12 %]!		[Final Evaluation][TOT=   16][ 18 %]!		[Final Evaluation][TOT=   16][ 25 %]!		[Final Evaluation][TOT=   16][ 31 %]!		[Final Evaluation][TOT=   16][ 37 %]!		[Final Evaluation][TOT=   16][ 43 %]!		[Final Evaluation][TOT=   16][ 50 %]!		[Final Evaluation][TOT=   16][ 56 %]!		[Final Evaluation][TOT=   16][ 62 %]!		[Final Evaluation][TOT=   16][ 68 %]!		[Final Evaluation][TOT=   16][ 75 %]!		[Final Evaluation][TOT=   16][ 81 %]!		[Final Evaluation][TOT=   16][ 87 %]!		[Final Evaluation][TOT=   16][ 93 %]!		[Final Evaluation][TOT=   16][100 %]
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) proteases_small.aln  Format clustal_aln
+	Input File (S) proteases_oneseq.fasta  Format fasta_seq
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                       Seq proteases_small.aln   Length  402 type PROTEIN Struct Unchecked
+	Profile: Template=proteases_small.aln, File=proteases_small.aln
+  Input File proteases_oneseq.fasta Seq sp|P08861|ELA3B_HUMAN Length  270 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rproteases_small.aln
+	--- Process Method/Library/Aln Sproteases_oneseq.fasta
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Sproteases_oneseq.fasta
+	xxx Retrieved Rproteases_small.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2064]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [2064]--->[1060]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: proteases_small.aln
+Group    2: sp|P08861|ELA3B_HUMAN
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  402][PID:15435]
+
+
+
+
+OUTPUT RESULTS
+	#### File Type= MSA             Format= aln             Name= proteases_oneseq.aln
+	#### File Type= MSA             Format= html            Name= proteases_oneseq.html
+	#### File Type= Template Profile Format= fasta_aln       Name= proteases_small.aln
+
+# Command Line: t_coffee proteases_oneseq.fasta -profile proteases_small.aln  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 32.244 Mb, Max= 33.366 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>proteases_small.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: accurate ], CPU=1.13 sec, SCORE=970, Nseq=19, Len=402 
+
+sp|Q06606|GRZ2_RAT     -------------------------------------------MFLFLFFLVAILPVNTEGGEIIWGTESKPHSRPYMAFIK---FY----DSNSEPHHCGGFLVAKDIVMTAAHC----NG-------R----NIK---VTLGAHNI---KKQE-NTQ-
+sp|P08884|GRAE_MOUSE   -------------------------M--------PPVLILLTLLLPLGAGAEEII-----GGH-----VVKPHSRPYMAFVK---SVDIEGNR----RYCGGFLVQDDFVLTAAHC----RN-------R----TMT---VTLGAHNI---KAKE-ETQQ
+sp|P21844|MCPT5_MOUSE  ------------------------MH--------LLTLHLLLLLLGSSTKAGEII-----GGT-----ECIPHSRPYMAYLEIVTSE----NY-L--SACSGFLIRRNFVLTAAHC----AG-------R----SIT---VLLGAHNK---TSKE-DTWQ
+sp|O35205|GRAK_MOUSE   --------------------MRFSSW--------ALVSLVAGVYMSSECFHTEII-----GGR-----EVQPHSRPFMASIQ---YR----SK----HICGGVLIHPQWVLTAAHC----Y-SWFPRG-H----SPT---VVLGAHSL---SKNE-PMKQ
+sp|Q9Y5K2|KLK4_HUMAN   ---------------MATAGNPWGWF--------LGYLILGVAGSLVSGSCSQII-----NGE-----DCSPHSQPWQAALV---ME----NE----LFCSGVLVHPQWVLSAAHC----FQ-------N----SYT---IGLGLHSL-EAD-QE-PGSQ
+sp|Q7YRZ7|GRAA_BOVIN   -----------------MNIPFPFSF--------PPAICLLLIPGVFPVSCEGII-----GGN-----EVAPHTRRYMALIK--GL------K-----LCAGALIKENWVLTAAHC----DLK------G----NPQ---VILGAHST---SHKE-KLDQ
+sp|Q00871|CTRB1_PENVA  MIGKLSLLLVCVAVASGNPAAGKPWH--------WKSPKPLVDPRIHVNATPRIV-----GGV-----EATPHSWPHQAALF---ID----DM----YFCGGSLISSEWVLTAAHC----MD-------G--AGFV---EVVLGAHNI---RQNEA-SQV
+sp|P08246|ELNE_HUMAN   ----------------MTLGRRLACL--------FLACVLPALLLGGTALASEIV-----GGR-----RARPHAWPFMVSLQ---LR----GG----HFCGATLIAPNFVMSAAHC----VAN------V----NVRAVRVVLGAHNL---SRRE-PTRQ
+sp|P03953|CFAD_MOUSE   --------------------MHSSVY--------FVALVILGAAVCAAQPRGRIL-----GGQ-----EAAAHARPYMASVQ---VN----GT----HVCGGTLLDEQWVLSAAHC----MDGVTDDD------SVQ---VLLGAHSL---SAPE-PYKR
+sp|Q91VE3|KLK7_MOUSE   --------------------MGVWLL--------SLITVLLSLALETAGQGERII-----DGY-----KCKEGSHPWQVALL---KG----NQ----LHCGGVLVDKYWVLTAAHC----KM-------G----QYQ---VQLGSDKI---GDQ---SAQ
+sp|Q6H321|KLK2_HORSE   ---------------------MWFLV--------LCLDLSLGETGALPPIQSRII-----GGW-----ECEKHSKPWQVAVY---HQ----GH----FQCGGVLVHPQWVLTAAHC----MS-------D----DYQ---IWLGRHNL---SEDE-DTAQ
+sp|Q03238|GRAM_RAT     -------------------------L--------LLLLALKTLWAVGNRFEAQII-----GGR-----EAVPHSRPYMVSLQ---NT----KS----HMCGGVLVHQKWVLTAAHC----LSE----PLQ----QLK---LVFGLHSLHDPQDP----GL
+sp|P20160|CAP7_HUMAN   -------------------MTRLTVL--------ALLAGLLASSRAGSSPLLDIV-----GGR-----KARPRQFPFLASIQ---NQ----GR----HFCGGALIHARFVMTAASC----FQS---QNPG----VS---TVVLGAYDL---RRRERQSRQ
+sp|P07338|CTRB1_RAT    --------------------MAFLWLVSCFALVGATFGCGVPTIQPVLTGLSRIV-----NGE-----DAIPGSWPWQVSLQ---DK---TGF----HFCGGSLISEDWVVTAAHC----GVK------TS----DV---VVAGEFDQ---GSDE-ENIQ
+sp|P00757|KLKB4_MOUSE  ----------------------------------MWFLILFLALSLGGIDAAPPV-----QSQ-----VDCENSQPWHVAVY---RF----NK----YQCGGVLLDRNWVLTAAHC----YN-------D----KYQ---VWLGKNNF---LEDE-PSDQ
+sp|P80015|CAP7_PIG     -----------------------------------------------------IV-----GGR-----RAQPQEFPFLASIQ---KQ----GR----PFCAGALVHPRFVLTAASC----FRG---KNSG----SA---SVVLGAYDL---RQQE-QSRQ
+sp|P29786|TRY3_AEDAE   ------MNQFLFVSFCALLDSAKVSA--------------------ATLSSGRIV-----GGF-----QIDIAEVPHQVSLQ--RSG-----R----HFCGGSIISPRWVLTRAHC----TT-------NTDPAAYT---IRAGSTD----RTNG-GI--
+sp|P35037|TRY3_ANOGA   -----MISNKIAILLAVLVVAVACAQARVAQQHRSVQALPRFLPRPKYDVGHRIV-----GGF-----EIDVSETPYQVSLQ--YFN-----S----HRCGGSVLNSKWILTAAHCTVNLQP-------SS----LA---VRLGSSR----HASG-GT--
+sp|P00773|ELA1_RAT     -------------------MLRFLVF--------ASLVLYGHSTQDFPETNARVV-----GGA-----EARRNSWPSQISLQ---YLSGGSWY----HTCGGTLIRRNWVMTAAHC----VSS------Q----MTF--RVVVGDHNL---SQND-GTEQ
+                                                                             :      .                  :                  *.. ::    ::: * *                        :  *                
+
+sp|Q06606|GRZ2_RAT     VISVVKAKPHENYDR-----------DSH-----FNDIMLLKLERKAQLNGVVKTIA-LP--RSQ-DW-VKPGQVCTVAGWGR-----LAN-C-T--S-SNT---LQEVNLEVQKGQKCQD----MSE--DYND-SIQLCVG--NPSE--G--K--ATGK
+sp|P08884|GRAE_MOUSE   IIPVAKAIPHPDYNA-----------TAF-----FSDIMLLKLESKAKRTKAVRPLK-LP--RPN-AR-VKPGDVCSVAGWGSRSINDT-----------KASARLREAQLVIQEDEECKK----RFR--HY-TETTEICAG--DLKK--I--K--TPFK
+sp|P21844|MCPT5_MOUSE  KLEVEKQFLHPKYDE-----------NLV-----VHDIMLLKLKEKAKLTLGVGTLP-LS--AN-FNF-IPPGRMCRAVGWGR-----TNVNE-P--A-SDT---LQEVKMRLQEPQACKH-----FT--SFRH-NSQLCVG--NPKK--M--Q--NVYK
+sp|O35205|GRAK_MOUSE   TFEIKKFIPFSRLQS-----------GSA-----SHDIMLIKLRTAAELNKNVQLLH-LG--S--KNY-LRDGTKCQVTGWGT-----TKPDLLT--A-SDT---LREVTVTIISRKRCNS--QSYYNHKPVIT-KDMICAG--D--A--R--GQKDSCK
+sp|Q9Y5K2|KLK4_HUMAN   MVEASLSVRHPEYN-----------RPLL-----ANDLMLIKLDESVSESDTIRSIS-IA--S---QC-PTAGNSCLVSGWGL-----LA--NGR--M-PTV---LQCVNVSVVSEEVCSK----LYD--PLYH-PSMFCAG--G--G--QDQK--DSCN
+sp|Q7YRZ7|GRAA_BOVIN   VFSIKKAIPYPCFDP-----------QTF-----EGDLQLLQLEGKATMTKAVGILQ-LP--RT-EDD-VKPHTKCHVAGWGS-----TKKDACQ--M-SNA---LREANVTVIDRKICND--AQHYNFNPVID-LSMICAG--G--R--K--GEDDSCE
+sp|Q00871|CTRB1_PENVA  SITSTDFFTHENWNS-----------WLL-----TNDIALIRLPSPVSLNSNIKTVK-LP--S---SD-VSVGTTVTPTGWGR-----PSDSASG--I-SDV---LRQVNVPVMTNADCDS----VYG---IVG-DGVVCID--G--T--G--G-KSTCN
+sp|P08246|ELNE_HUMAN   VFAVQRIFEN-GYDP-----------VNL-----LNDIVILQLNGSATINANVQVAQ-LP--AQ-GRR-LGNGVQCLAMGWGL-----LGRNR-G--I-ASV---LQELNVTVVT-SLC--------------R-RSNVCTL--V--RGRQ--A--GVCF
+sp|P03953|CFAD_MOUSE   WYDVQSVVPHPGSRP-----------DSL-----EDDLILFKLSQNASLGPHVRPLPLQY-----EDKEVEPGTLCDVAGWGV-----VTHAG-R--R-PDV---LHQLRVSIMNRTTCNL--RTYHD--GVVT-INMMCAE--S--N--R--R--DTCR
+sp|Q91VE3|KLK7_MOUSE   KIKATKSFRHPGYS-----------TKTH-----VNDIMLVRLDEPVKMSSKVEAVQ-LP--E---HC-EPPGTSCTVSGWGT-----TTSPDVT--F-PSD---LMCSDVKLISSRECKK----VYK--DLLG-KTMLCAG--I--P--DSKT--NTCN
+sp|Q6H321|KLK2_HORSE   FHQVSDSFLDPQFDLSLLKKKYLRPYDDI-----SHDLMLLRLAQPARITDAVKILD-LP--T---QE-PKLGSTCYTSGWGL-----ISTFTNR--G-SGT---LQCVELRLQSNEKCAR----AYP--EKMT-EFVLCATHRD--D----SG--SICL
+sp|Q03238|GRAM_RAT     TFYIKQAIKHPGYNL------------KY-----ENDLALLKLDGRVKPSKNVKPLA-LP--RKPRDK-PAEGSRCSTAGWGI-----THQRG-Q--L-AKS---LQELDLRLLDTRMCNN--SRFWN--GVLT-DSMLCLK--AGAK--G--Q--APCK
+sp|P20160|CAP7_HUMAN   TFSISSMSEN-GYDP-----------QQN-----LNDLMLLQLDREANLTSSVTILP-LP--LQ-NAT-VEAGTRCQVAGWGS-----QRSGG-R--L-SRF---PRFVNVTVTPEDQC--------------R-PNNVCTG--V--LTRR--G--GICN
+sp|P07338|CTRB1_RAT    VLKIAQVFKNPKF----------------NMFTVRNDITLLKLATPAQFSETVSAVC-LP--NVD-DD-FPPGTVCATTGWGK-----TKY---NALKTPEK---LQQAALPIVSEADCK----KSWG--SKIT-DVMTCAG--A--S--G--V--SSCM
+sp|P00757|KLKB4_MOUSE  HRLVSKAIPHPDFNMSLLNEHTPQPEDDY-----SNDLMLLRLSKPADITDVVKPIT-LP--T---EE-PKLGSTCLASGWGS-----TTPIKFK--Y-PDD---LQCVNLKLLPNEDCDK----AHE--MKVT-DAMLCAG--E--M--DGGS--YTCE
+sp|P80015|CAP7_PIG     TFSIRSISQN-GYDP-----------RQN-----LNDVLLLQLDREARLTPSVALVP-LP--PQ-NAT-VEAGTNCQVAGWGT-----QRLR--R--LFSRF---PRVLNVTVT-SNPC--------------L-PRDMCIG--V--FSRR--G--RISQ
+sp|P29786|TRY3_AEDAE   IVKVKSVIPHPQYN---------GDTYNY-------DFSLLELDESIGFSRSIEAIA-LPDASE---T-VADGAMCTVSGWGD-----T-KNV-F---EMNT--LLRAVNVPSYNQAECAAALVNVVP----VT-EQMICAG--Y--AA-G--G-KDSCQ
+sp|P35037|TRY3_ANOGA   VVRVARVLEHPNYD-----------DSTID-----YDFSLMELESELTFSDVVQPVS-LP--DQD-EA-VEDGTMTIVSGWGN-----TQSA--A---ESNA--ILRAANVPTVNQKECT----IAYSSSGGIT-DRMLCAG--Y--KRGG--K--DACQ
+sp|P00773|ELA1_RAT     YVSVQKIMVHPTWNS-----------NNV---AAGYDIALLRLAQSVTLNNYVQLAV-LP--QE-GTI-LANNNPCYITGWGR-----TRTNG-Q--L-SQT---LQQAYLPSVDYSICSS--SSYWG--STVK-TTMVCAG--G--D-GV--R--SGCQ
+                                                           *. :..*         :                          ***                            :       *                    *                    
+
+sp|Q06606|GRZ2_RAT     GDSGGPFVCD----G--VAQGIVSYRL-C-TG-T----L-P-RVFTRISS-FIPWIQKTMK--VLQQS--------------
+sp|P08884|GRAE_MOUSE   GDSGGPLVCD----N--KAYGLLAYAK-N----RTI-SS-G--VFTKIVH-FLPWISRNMKL-L------------------
+sp|P21844|MCPT5_MOUSE  GDSGGPLLCA----G--IAQGIASYVH-R-NA-K------PPAVFTRISH-YRPWINKILREN-------------------
+sp|O35205|GRAK_MOUSE   GDSGGPLICK----G--IFHALVSQGY-K--C-G-I-AKKP-GIYTLLTKKYQTWIKSKLAPSRAH----------------
+sp|Q9Y5K2|KLK4_HUMAN   GDSGGPLICN------GYLQGLVSFGK--APCGQ-V-GV-P-GVYTNLCK-FTEWIEKTVQA-S------------------
+sp|Q7YRZ7|GRAA_BOVIN   GDSGSPLICD------NVFRGVTSFG----KC-G-N-PQKP-GIYILLTKKHLNWIKKTIAGAI------------------
+sp|Q00871|CTRB1_PENVA  GDSGGPLNLN------GMTYGITSFGS-SAGC-E-K-GY-P-AAFTRVYY-YLDWIQQKTGVTP------------------
+sp|P08246|ELNE_HUMAN   GDSGSPLVCN------GLIHGIASFVR-G-GCAS-G-LY-P-DAFAPVAQ-FVNWIDSIIQ-RSEDNPCPHPRDPDPASRTH
+sp|P03953|CFAD_MOUSE   GDSGSPLVCG----D--AVEGVVTWGS-R-VC-G-N-GKKP-GVYTRVSS-YRMWIENITNGNMTS----------------
+sp|Q91VE3|KLK7_MOUSE   GDSGGPLVCN------DTLQGLVSWGT--YPCGQ-P-ND-P-GVYTQVCK-YKRWVMETMKTHR------------------
+sp|Q6H321|KLK2_HORSE   GDSGGALICD------GVFQGITSWGY--SEC-A-D-FNDN-FVFTKVMP-HLKWIKETIEKNS------------------
+sp|Q03238|GRAM_RAT     GDSGGPLVCG----K-GKVDGILSFSS-K-NC-TDI-FK-P-TVATAVAP-YSSWIRKVIGR-WSPQPLT------------
+sp|P20160|CAP7_HUMAN   GDGGTPLVCE------GLAHGVASFSL-G-PC-G-R--G-P-DFFTRVAL-FRDWIDGVLNNPGPGPA--------------
+sp|P07338|CTRB1_RAT    GDSGGPLVCQKD--GVWTLAGIVSWGS-G-VC-S-T-ST-P-AVYSRVTA-LMPWVQQILEAN-------------------
+sp|P00757|KLKB4_MOUSE  HDSGGPLICD------GILQGITSWGP--EPC-G-EPTE-P-SVYTKLIK-FSSWIRETMANNP------------------
+sp|P80015|CAP7_PIG     GDRGTPLVCN------GLAQGVASFLR-R-RF-R-R--S-S-GFFTRVAL-FRNWIDSVLNNPP------------------
+sp|P29786|TRY3_AEDAE   GDSGGPLVSG------DKLVGVVSWGK-G--C-A-L-PNLP-GVYARVST-VRQWIREVSEV--------------------
+sp|P35037|TRY3_ANOGA   GDSGGPLVVD------GKLVGVVSWGF-G-CA-M-P-GY-P-GVYARVAV-VRDWVRENSGA--------------------
+sp|P00773|ELA1_RAT     GDSGGPLHCLVNGQY--SVHGVTSFVSSM-GC-NVS-KK-P-TVFTRVSA-YISWMNNVIAYT-------------------
+                        * * .:             .: :                       :      *:                          
+
+
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>proteases_oneseq.fasta</name>
+<content>
+>sp|P08861|ELA3B_HUMAN
+MMLRLLSSLLLVAVASGYGPPSSRPSSRVVNGEDAVPYSWPWQVSLQYEK
+SGSFYHTCGGSLIAPDWVVTAGHCISSSWTYQVVLGEYDRAVKEGPEQVI
+PINSGDLFVHPLWNRSCVACGNDIALIKLSRSAQLGDAVQLASLPPAGDI
+LPNETPCYITGWGRLYTNGPLPDKLQEALLPVVDYEHCSRWNWWGSSVKK
+TMVCAGGDIRSGCNGDSGGPLNCPTEDGGWQVHGVTSFVSAFGCNTRRKP
+TVFTRVSAFIDWIEETIASH
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>proteases_oneseq.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.02 sec, SCORE=0, Nseq=20, Len=402 
+
+sp|P08861|ELA3B_HUMAN  mmlrllsslllvavasg-----------------------------------ygppssrpssrvvngedavpyswpwqvslqyeksg-------sfyhtcggsliapdwvvtaghciss----------------swtyqvvlgeydravkeg--peqvi
+sp|Q06606|GRZ2_RAT     -------------------------------------------mflflfflvailpvnteggeiiwgteskphsrpymafik---fy----dsnsephhcggflvakdivmtaahc----ng-------r----nik---vtlgahni---kkqe-ntq-
+sp|P08884|GRAE_MOUSE   -------------------------m--------ppvlilltlllplgagaeeii-----ggh-----vvkphsrpymafvk---svdiegnr----rycggflvqddfvltaahc----rn-------r----tmt---vtlgahni---kake-etqq
+sp|P21844|MCPT5_MOUSE  ------------------------mh--------lltlhllllllgsstkageii-----ggt-----eciphsrpymayleivtse----ny-l--sacsgflirrnfvltaahc----ag-------r----sit---vllgahnk---tske-dtwq
+sp|O35205|GRAK_MOUSE   --------------------mrfssw--------alvslvagvymssecfhteii-----ggr-----evqphsrpfmasiq---yr----sk----hicggvlihpqwvltaahc----y-swfprg-h----spt---vvlgahsl---skne-pmkq
+sp|Q9Y5K2|KLK4_HUMAN   ---------------matagnpwgwf--------lgylilgvagslvsgscsqii-----nge-----dcsphsqpwqaalv---me----ne----lfcsgvlvhpqwvlsaahc----fq-------n----syt---iglglhsl-ead-qe-pgsq
+sp|Q7YRZ7|GRAA_BOVIN   -----------------mnipfpfsf--------ppaiclllipgvfpvscegii-----ggn-----evaphtrrymalik--gl------k-----lcagalikenwvltaahc----dlk------g----npq---vilgahst---shke-kldq
+sp|Q00871|CTRB1_PENVA  migklslllvcvavasgnpaagkpwh--------wkspkplvdprihvnatpriv-----ggv-----eatphswphqaalf---id----dm----yfcggslissewvltaahc----md-------g--agfv---evvlgahni---rqnea-sqv
+sp|P08246|ELNE_HUMAN   ----------------mtlgrrlacl--------flacvlpalllggtalaseiv-----ggr-----rarphawpfmvslq---lr----gg----hfcgatliapnfvmsaahc----van------v----nvravrvvlgahnl---srre-ptrq
+sp|P03953|CFAD_MOUSE   --------------------mhssvy--------fvalvilgaavcaaqprgril-----ggq-----eaaaharpymasvq---vn----gt----hvcggtlldeqwvlsaahc----mdgvtddd------svq---vllgahsl---sape-pykr
+sp|Q91VE3|KLK7_MOUSE   --------------------mgvwll--------slitvllslaletagqgerii-----dgy-----kckegshpwqvall---kg----nq----lhcggvlvdkywvltaahc----km-------g----qyq---vqlgsdki---gdq---saq
+sp|Q6H321|KLK2_HORSE   ---------------------mwflv--------lcldlslgetgalppiqsrii-----ggw-----ecekhskpwqvavy---hq----gh----fqcggvlvhpqwvltaahc----ms-------d----dyq---iwlgrhnl---sede-dtaq
+sp|Q03238|GRAM_RAT     -------------------------l--------llllalktlwavgnrfeaqii-----ggr-----eavphsrpymvslq---nt----ks----hmcggvlvhqkwvltaahc----lse----plq----qlk---lvfglhslhdpqdp----gl
+sp|P20160|CAP7_HUMAN   -------------------mtrltvl--------allagllassragssplldiv-----ggr-----karprqfpflasiq---nq----gr----hfcggaliharfvmtaasc----fqs---qnpg----vs---tvvlgaydl---rrrerqsrq
+sp|P07338|CTRB1_RAT    --------------------maflwlvscfalvgatfgcgvptiqpvltglsriv-----nge-----daipgswpwqvslq---dk---tgf----hfcggslisedwvvtaahc----gvk------ts----dv---vvagefdq---gsde-eniq
+sp|P00757|KLKB4_MOUSE  ----------------------------------mwflilflalslggidaappv-----qsq-----vdcensqpwhvavy---rf----nk----yqcggvlldrnwvltaahc----yn-------d----kyq---vwlgknnf---lede-psdq
+sp|P80015|CAP7_PIG     -----------------------------------------------------iv-----ggr-----raqpqefpflasiq---kq----gr----pfcagalvhprfvltaasc----frg---knsg----sa---svvlgaydl---rqqe-qsrq
+sp|P29786|TRY3_AEDAE   ------mnqflfvsfcalldsakvsa--------------------atlssgriv-----ggf-----qidiaevphqvslq--rsg-----r----hfcggsiisprwvltrahc----tt-------ntdpaayt---iragstd----rtng-gi--
+sp|P35037|TRY3_ANOGA   -----misnkiaillavlvvavacaqarvaqqhrsvqalprflprpkydvghriv-----ggf-----eidvsetpyqvslq--yfn-----s----hrcggsvlnskwiltaahctvnlqp-------ss----la---vrlgssr----hasg-gt--
+sp|P00773|ELA1_RAT     -------------------mlrflvf--------aslvlyghstqdfpetnarvv-----gga-----earrnswpsqislq---ylsggswy----htcggtlirrnwvmtaahc----vss------q----mtf--rvvvgdhnl---sqnd-gteq
+                                                                                    .                  :                  *.. ::    ::: . *                        :  *                
+
+sp|P08861|ELA3B_HUMAN  pinsgdlfvhplwnrsc--------------vacgndialiklsrsaqlgdavqlaslppagd-----ilpnetpcyitgwgrlytngplp------------dklqeallpvvdyehcsr-----wnwwgssvkktmvcaggd----------irsgcn
+sp|Q06606|GRZ2_RAT     visvvkakphenydr-----------dsh-----fndimllklerkaqlngvvktia-lp--rsq-dw-vkpgqvctvagwgr-----lan-c-t--s-snt---lqevnlevqkgqkcqd----mse--dynd-siqlcvg--npse--g--k--atgk
+sp|P08884|GRAE_MOUSE   iipvakaiphpdyna-----------taf-----fsdimllkleskakrtkavrplk-lp--rpn-ar-vkpgdvcsvagwgsrsindt-----------kasarlreaqlviqedeeckk----rfr--hy-tetteicag--dlkk--i--k--tpfk
+sp|P21844|MCPT5_MOUSE  klevekqflhpkyde-----------nlv-----vhdimllklkekakltlgvgtlp-ls--an-fnf-ippgrmcravgwgr-----tnvne-p--a-sdt---lqevkmrlqepqackh-----ft--sfrh-nsqlcvg--npkk--m--q--nvyk
+sp|O35205|GRAK_MOUSE   tfeikkfipfsrlqs-----------gsa-----shdimliklrtaaelnknvqllh-lg--s--kny-lrdgtkcqvtgwgt-----tkpdllt--a-sdt---lrevtvtiisrkrcns--qsyynhkpvit-kdmicag--d--a--r--gqkdsck
+sp|Q9Y5K2|KLK4_HUMAN   mveaslsvrhpeyn-----------rpll-----andlmlikldesvsesdtirsis-ia--s---qc-ptagnsclvsgwgl-----la--ngr--m-ptv---lqcvnvsvvseevcsk----lyd--plyh-psmfcag--g--g--qdqk--dscn
+sp|Q7YRZ7|GRAA_BOVIN   vfsikkaipypcfdp-----------qtf-----egdlqllqlegkatmtkavgilq-lp--rt-edd-vkphtkchvagwgs-----tkkdacq--m-sna---lreanvtvidrkicnd--aqhynfnpvid-lsmicag--g--r--k--geddsce
+sp|Q00871|CTRB1_PENVA  sitstdffthenwns-----------wll-----tndialirlpspvslnsniktvk-lp--s---sd-vsvgttvtptgwgr-----psdsasg--i-sdv---lrqvnvpvmtnadcds----vyg---ivg-dgvvcid--g--t--g--g-kstcn
+sp|P08246|ELNE_HUMAN   vfavqrifen-gydp-----------vnl-----lndivilqlngsatinanvqvaq-lp--aq-grr-lgngvqclamgwgl-----lgrnr-g--i-asv---lqelnvtvvt-slc--------------r-rsnvctl--v--rgrq--a--gvcf
+sp|P03953|CFAD_MOUSE   wydvqsvvphpgsrp-----------dsl-----eddlilfklsqnaslgphvrplplqy-----edkevepgtlcdvagwgv-----vthag-r--r-pdv---lhqlrvsimnrttcnl--rtyhd--gvvt-inmmcae--s--n--r--r--dtcr
+sp|Q91VE3|KLK7_MOUSE   kikatksfrhpgys-----------tkth-----vndimlvrldepvkmsskveavq-lp--e---hc-eppgtsctvsgwgt-----ttspdvt--f-psd---lmcsdvklissreckk----vyk--dllg-ktmlcag--i--p--dskt--ntcn
+sp|Q6H321|KLK2_HORSE   fhqvsdsfldpqfdlsllkkkylrpyddi-----shdlmllrlaqparitdavkild-lp--t---qe-pklgstcytsgwgl-----istftnr--g-sgt---lqcvelrlqsnekcar----ayp--ekmt-efvlcathrd--d----sg--sicl
+sp|Q03238|GRAM_RAT     tfyikqaikhpgynl------------ky-----endlallkldgrvkpsknvkpla-lp--rkprdk-paegsrcstagwgi-----thqrg-q--l-aks---lqeldlrlldtrmcnn--srfwn--gvlt-dsmlclk--agak--g--q--apck
+sp|P20160|CAP7_HUMAN   tfsissmsen-gydp-----------qqn-----lndlmllqldreanltssvtilp-lp--lq-nat-veagtrcqvagwgs-----qrsgg-r--l-srf---prfvnvtvtpedqc--------------r-pnnvctg--v--ltrr--g--gicn
+sp|P07338|CTRB1_RAT    vlkiaqvfknpkf----------------nmftvrnditllklatpaqfsetvsavc-lp--nvd-dd-fppgtvcattgwgk-----tky---nalktpek---lqqaalpivseadck----kswg--skit-dvmtcag--a--s--g--v--sscm
+sp|P00757|KLKB4_MOUSE  hrlvskaiphpdfnmsllnehtpqpeddy-----sndlmllrlskpaditdvvkpit-lp--t---ee-pklgstclasgwgs-----ttpikfk--y-pdd---lqcvnlkllpnedcdk----ahe--mkvt-damlcag--e--m--dggs--ytce
+sp|P80015|CAP7_PIG     tfsirsisqn-gydp-----------rqn-----lndvlllqldrearltpsvalvp-lp--pq-nat-veagtncqvagwgt-----qrlr--r--lfsrf---prvlnvtvt-snpc--------------l-prdmcig--v--fsrr--g--risq
+sp|P29786|TRY3_AEDAE   ivkvksviphpqyn---------gdtyny-------dfslleldesigfsrsieaia-lpdase---t-vadgamctvsgwgd-----t-knv-f---emnt--llravnvpsynqaecaaalvnvvp----vt-eqmicag--y--aa-g--g-kdscq
+sp|P35037|TRY3_ANOGA   vvrvarvlehpnyd-----------dstid-----ydfslmeleseltfsdvvqpvs-lp--dqd-ea-vedgtmtivsgwgn-----tqsa--a---esna--ilraanvptvnqkect----iaysssggit-drmlcag--y--krgg--k--dacq
+sp|P00773|ELA1_RAT     yvsvqkimvhptwns-----------nnv---aagydiallrlaqsvtlnnyvqlav-lp--qe-gti-lannnpcyitgwgr-----trtng-q--l-sqt---lqqaylpsvdysicss--ssywg--stvk-ttmvcag--g--d-gv--r--sgcq
+                                                           *. :..*         :                          ***                            :       *                    *                    
+
+sp|P08861|ELA3B_HUMAN  gdsggplncptedg-gwqvhgvtsfvsa-fgcn----trrkptvftrvs-afidwieetias-------------------h
+sp|Q06606|GRZ2_RAT     gdsggpfvcd----g--vaqgivsyrl-c-tg-t----l-p-rvftriss-fipwiqktmk--vlqqs--------------
+sp|P08884|GRAE_MOUSE   gdsggplvcd----n--kaygllayak-n----rti-ss-g--vftkivh-flpwisrnmkl-l------------------
+sp|P21844|MCPT5_MOUSE  gdsggpllca----g--iaqgiasyvh-r-na-k------ppavftrish-yrpwinkilren-------------------
+sp|O35205|GRAK_MOUSE   gdsggplick----g--ifhalvsqgy-k--c-g-i-akkp-giytlltkkyqtwiksklapsrah----------------
+sp|Q9Y5K2|KLK4_HUMAN   gdsggplicn------gylqglvsfgk--apcgq-v-gv-p-gvytnlck-ftewiektvqa-s------------------
+sp|Q7YRZ7|GRAA_BOVIN   gdsgsplicd------nvfrgvtsfg----kc-g-n-pqkp-giyilltkkhlnwikktiagai------------------
+sp|Q00871|CTRB1_PENVA  gdsggplnln------gmtygitsfgs-sagc-e-k-gy-p-aaftrvyy-yldwiqqktgvtp------------------
+sp|P08246|ELNE_HUMAN   gdsgsplvcn------glihgiasfvr-g-gcas-g-ly-p-dafapvaq-fvnwidsiiq-rsednpcphprdpdpasrth
+sp|P03953|CFAD_MOUSE   gdsgsplvcg----d--avegvvtwgs-r-vc-g-n-gkkp-gvytrvss-yrmwienitngnmts----------------
+sp|Q91VE3|KLK7_MOUSE   gdsggplvcn------dtlqglvswgt--ypcgq-p-nd-p-gvytqvck-ykrwvmetmkthr------------------
+sp|Q6H321|KLK2_HORSE   gdsggalicd------gvfqgitswgy--sec-a-d-fndn-fvftkvmp-hlkwiketiekns------------------
+sp|Q03238|GRAM_RAT     gdsggplvcg----k-gkvdgilsfss-k-nc-tdi-fk-p-tvatavap-ysswirkvigr-wspqplt------------
+sp|P20160|CAP7_HUMAN   gdggtplvce------glahgvasfsl-g-pc-g-r--g-p-dfftrval-frdwidgvlnnpgpgpa--------------
+sp|P07338|CTRB1_RAT    gdsggplvcqkd--gvwtlagivswgs-g-vc-s-t-st-p-avysrvta-lmpwvqqilean-------------------
+sp|P00757|KLKB4_MOUSE  hdsggplicd------gilqgitswgp--epc-g-epte-p-svytklik-fsswiretmannp------------------
+sp|P80015|CAP7_PIG     gdrgtplvcn------glaqgvasflr-r-rf-r-r--s-s-gfftrval-frnwidsvlnnpp------------------
+sp|P29786|TRY3_AEDAE   gdsggplvsg------dklvgvvswgk-g--c-a-l-pnlp-gvyarvst-vrqwirevsev--------------------
+sp|P35037|TRY3_ANOGA   gdsggplvvd------gklvgvvswgf-g-ca-m-p-gy-p-gvyarvav-vrdwvrensga--------------------
+sp|P00773|ELA1_RAT     gdsggplhclvngqy--svhgvtsfvssm-gc-nvs-kk-p-tvftrvsa-yiswmnnviayt-------------------
+                        * * .:             .: :                       :      *:                          
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>proteases_oneseq.html</name>
+<content>
+<html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=905</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>sp|P08861|ELA3B&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;94</span><br><span class=value8>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=value8>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;87</span><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><br><span class=valuedefault>sp|P08861|ELA3B&nbsp;&nbsp;&nbsp;</span><span class=value9>mmlrllsslllvavasg</span><span class=valuegap>-----------------------------------</span><span class=value9>ygppssrpssrvvngedavpyswpwqvslqyeksg</span><span class=valuegap>-------</span><span class=value9>sfyhtcggsliapdwvvtaghciss</span><span class=valuegap>----------------</span><span class=value9>swtyqvvlg</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------------------------------</span><span class=value9>mflflffl</span><span class=value8>vailp</span><span class=value9>vnteggeiiwgteskphsrpymafik</span><span class=valuegap>---</span><span class=value9>fy</span><span class=valuegap>----</span><span class=value9>dsnsephhcggflvakdivmtaahc</span><span class=valuegap>----</span><span class=value9>ng</span><span class=valuegap>-------</span><span class=value9>r</span><span class=valuegap>----</span><span class=value9>nik</span><span class=valuegap>---</span><span class=value9>vtlg</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------------</span><span class=value9>m</span><span class=valuegap>--------</span><span class=value9>ppvlilltlllplgaga</span><span class=value8>eeii</span><span class=valuegap>-----</span><span class=value9>ggh</span><span class=valuegap>-----</span><span class=value9>vvkphsrpymafvk</span><span class=valuegap>---</span><span class=value9>svdiegnr</span><span class=valuegap>----</span><span class=value9>rycggflvqddfvltaahc</span><span class=valuegap>----</span><span class=value9>rn</span><span class=valuegap>-------</span><span class=value9>r</span><span class=valuegap>----</span><span class=value9>tmt</span><span class=valuegap>---</span><span class=value9>vtlg</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------</span><span class=value9>mh</span><span class=valuegap>--------</span><span class=value9>lltlhllllllgsstka</span><span class=value8>geii</span><span class=valuegap>-----</span><span class=value9>ggt</span><span class=valuegap>-----</span><span class=value9>eciphsrpymayleivtse</span><span class=valuegap>----</span><span class=value9>ny</span><span class=valuegap>-</span><span class=value9>l</span><span class=valuegap>--</span><span class=value9>sacsgflirrnfvltaahc</span><span class=valuegap>----</span><span class=value9>ag</span><span class=valuegap>-------</span><span class=value9>r</span><span class=valuegap>----</span><span class=value9>sit</span><span class=valuegap>---</span><span class=value9>vllg</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value9>mrfssw</span><span class=valuegap>--------</span><span class=value9>alvslvagvymssecfh</span><span class=value8>teii</span><span class=valuegap>-----</span><span class=value9>ggr</span><span class=valuegap>-----</span><span class=value9>evqphsrpfmasiq</span><span class=valuegap>---</span><span class=value9>yr</span><span class=valuegap>----</span><span class=value9>sk</span><span class=valuegap>----</span><span class=value9>hicggvlihpqwvltaahc</span><span class=valuegap>----</span><span class=value9>y</span><span class=valuegap>-</span><span class=value9>swfprg</span><span class=valuegap>-</span><span class=value9>h</span><span class=valuegap>----</span><span class=value9>spt</span><span class=valuegap>---</span><span class=value9>vvlg</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------</span><span class=value9>mat</span><span class=value8>ag</span><span class=value9>npwgwf</span><span class=valuegap>--------</span><span class=value9>lgylilgvagslvsgsc</span><span class=value8>sqii</span><span class=valuegap>-----</span><span class=value9>nge</span><span class=valuegap>-----</span><span class=value9>dcsphsqpwqaalv</span><span class=valuegap>---</span><span class=value9>me</span><span class=valuegap>----</span><span class=value9>ne</span><span class=valuegap>----</span><span class=value9>lfcsgvlvhpqwvlsaahc</span><span class=valuegap>----</span><span class=value9>fq</span><span class=valuegap>-------</span><span class=value9>n</span><span class=valuegap>----</span><span class=value9>syt</span><span class=valuegap>---</span><span class=value9>iglg</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----------------</span><span class=value9>m</span><span class=value8>ni</span><span class=value9>pfpfsf</span><span class=valuegap>--------</span><span class=value9>ppaiclllipgvfpvsc</span><span class=value8>egii</span><span class=valuegap>-----</span><span class=value9>ggn</span><span class=valuegap>-----</span><span class=value9>evaphtrrymalik</span><span class=valuegap>--</span><span class=value9>gl</span><span class=valuegap>------</span><span class=value9>k</span><span class=valuegap>-----</span><span class=value9>lcagalikenwvltaahc</span><span class=valuegap>----</span><span class=value9>dlk</span><span class=valuegap>------</span><span class=value9>g</span><span class=valuegap>----</span><span class=value9>npq</span><span class=valuegap>---</span><span class=value9>vilg</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>migklslllvcvavasgn</span><span class=value8>pa</span><span class=value9>agkpwh</span><span class=valuegap>--------</span><span class=value9>wkspkplvdprihvnat</span><span class=value8>priv</span><span class=valuegap>-----</span><span class=value9>ggv</span><span class=valuegap>-----</span><span class=value9>eatphswphqaalf</span><span class=valuegap>---</span><span class=value9>id</span><span class=valuegap>----</span><span class=value9>dm</span><span class=valuegap>----</span><span class=value9>yfcggslissewvltaahc</span><span class=valuegap>----</span><span class=value9>md</span><span class=valuegap>-------</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>agfv</span><span class=valuegap>---</span><span class=value9>evvlg</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------</span><span class=value9>mt</span><span class=value8>lg</span><span class=value9>rrlacl</span><span class=valuegap>--------</span><span class=value9>flacvlpalllggtala</span><span class=value8>seiv</span><span class=valuegap>-----</span><span class=value9>ggr</span><span class=valuegap>-----</span><span class=value9>rarphawpfmvslq</span><span class=valuegap>---</span><span class=value9>lr</span><span class=valuegap>----</span><span class=value9>gg</span><span class=valuegap>----</span><span class=value9>hfcgatliapnfvmsaahc</span><span class=valuegap>----</span><span class=value9>van</span><span class=valuegap>------</span><span class=value9>v</span><span class=valuegap>----</span><span class=value9>nvravrvvlg</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value9>mhssvy</span><span class=valuegap>--------</span><span class=value9>fvalvilgaavcaaqpr</span><span class=value8>gril</span><span class=valuegap>-----</span><span class=value9>ggq</span><span class=valuegap>-----</span><span class=value9>eaaaharpymasvq</span><span class=valuegap>---</span><span class=value9>vn</span><span class=valuegap>----</span><span class=value9>gt</span><span class=valuegap>----</span><span class=value9>hvcggtlldeqwvlsaahc</span><span class=valuegap>----</span><span class=value9>mdgvtddd</span><span class=valuegap>------</span><span class=value9>svq</span><span class=valuegap>---</span><span class=value9>vllg</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value9>mgvwll</span><span class=valuegap>--------</span><span class=value9>slitvllslaletagqg</span><span class=value8>erii</span><span class=valuegap>-----</span><span class=value9>dgy</span><span class=valuegap>-----</span><span class=value9>kckegshpwqvall</span><span class=valuegap>---</span><span class=value9>kg</span><span class=valuegap>----</span><span class=value9>nq</span><span class=valuegap>----</span><span class=value9>lhcggvlvdkywvltaahc</span><span class=valuegap>----</span><span class=value9>km</span><span class=valuegap>-------</span><span class=value9>g</span><span class=valuegap>----</span><span class=value9>qyq</span><span class=valuegap>---</span><span class=value9>vqlg</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------</span><span class=value9>mwflv</span><span class=valuegap>--------</span><span class=value9>lcldlslgetgalppiq</span><span class=value8>srii</span><span class=valuegap>-----</span><span class=value9>ggw</span><span class=valuegap>-----</span><span class=value9>ecekhskpwqvavy</span><span class=valuegap>---</span><span class=value9>hq</span><span class=valuegap>----</span><span class=value9>gh</span><span class=valuegap>----</span><span class=value9>fqcggvlvhpqwvltaahc</span><span class=valuegap>----</span><span class=value9>ms</span><span class=valuegap>-------</span><span class=value9>d</span><span class=valuegap>----</span><span class=value9>dyq</span><span class=valuegap>---</span><span class=value9>iwlg</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------------</span><span class=value9>l</span><span class=valuegap>--------</span><span class=value9>llllalktlwavgnrfe</span><span class=value8>aqii</span><span class=valuegap>-----</span><span class=value9>ggr</span><span class=valuegap>-----</span><span class=value9>eavphsrpymvslq</span><span class=valuegap>---</span><span class=value9>nt</span><span class=valuegap>----</span><span class=value9>ks</span><span class=valuegap>----</span><span class=value9>hmcggvlvhqkwvltaahc</span><span class=valuegap>----</span><span class=value9>lse</span><span class=valuegap>----</span><span class=value9>plq</span><span class=valuegap>----</span><span class=value9>qlk</span><span class=valuegap>---</span><span class=value9>lvfg</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------</span><span class=value8>m</span><span class=value9>trltvl</span><span class=valuegap>--------</span><span class=value9>allagllassragsspl</span><span class=value8>ldiv</span><span class=valuegap>-----</span><span class=value9>ggr</span><span class=valuegap>-----</span><span class=value9>karprqfpflasiq</span><span class=valuegap>---</span><span class=value9>nq</span><span class=valuegap>----</span><span class=value9>gr</span><span class=valuegap>----</span><span class=value9>hfcggaliharfvmtaasc</span><span class=valuegap>----</span><span class=value9>fqs</span><span class=valuegap>---</span><span class=value9>qnpg</span><span class=valuegap>----</span><span class=value9>vs</span><span class=valuegap>---</span><span class=value9>tvvlg</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value9>maflwlvscfalvgatfgcgvptiqpvltgl</span><span class=value8>sriv</span><span class=valuegap>-----</span><span class=value9>nge</span><span class=valuegap>-----</span><span class=value9>daipgswpwqvslq</span><span class=valuegap>---</span><span class=value9>dk</span><span class=valuegap>---</span><span class=value9>tgf</span><span class=valuegap>----</span><span class=value9>hfcggslisedwvvtaahc</span><span class=valuegap>----</span><span class=value9>gvk</span><span class=valuegap>------</span><span class=value9>ts</span><span class=valuegap>----</span><span class=value9>dv</span><span class=valuegap>---</span><span class=value9>vvag</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------------------------</span><span class=value9>mwflilflalslggida</span><span class=value8>appv</span><span class=valuegap>-----</span><span class=value9>qsq</span><span class=valuegap>-----</span><span class=value9>vdcensqpwhvavy</span><span class=valuegap>---</span><span class=value9>rf</span><span class=valuegap>----</span><span class=value9>nk</span><span class=valuegap>----</span><span class=value9>yqcggvlldrnwvltaahc</span><span class=valuegap>----</span><span class=value9>yn</span><span class=valuegap>-------</span><span class=value9>d</span><span class=valuegap>----</span><span class=value9>kyq</span><span class=valuegap>---</span><span class=value9>vwlg</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----------------------------------------------------</span><span class=value8>iv</span><span class=valuegap>-----</span><span class=value9>ggr</span><span class=valuegap>-----</span><span class=value9>raqpqefpflasiq</span><span class=valuegap>---</span><span class=value9>kq</span><span class=valuegap>----</span><span class=value9>gr</span><span class=valuegap>----</span><span class=value9>pfcagalvhprfvltaasc</span><span class=valuegap>----</span><span class=value9>frg</span><span class=valuegap>---</span><span class=value9>knsg</span><span class=valuegap>----</span><span class=value9>sa</span><span class=valuegap>---</span><span class=value9>svvlg</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>mnqflfvsfcal</span><span class=value8>ld</span><span class=value9>sakvsa</span><span class=valuegap>--------------------</span><span class=value9>atlss</span><span class=value8>griv</span><span class=valuegap>-----</span><span class=value9>ggf</span><span class=valuegap>-----</span><span class=value9>qidiaevphqvslq</span><span class=valuegap>--</span><span class=value9>rsg</span><span class=valuegap>-----</span><span class=value9>r</span><span class=valuegap>----</span><span class=value9>hfcggsiisprwvltrahc</span><span class=valuegap>----</span><span class=value9>tt</span><span class=valuegap>-------</span><span class=value9>ntdpaayt</span><span class=valuegap>---</span><span class=value9>irag</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>misnkiaillavl</span><span class=value8>vv</span><span class=value9>avacaqarvaqqhrsvqalprflprpkydvg</span><span class=value8>hriv</span><span class=valuegap>-----</span><span class=value9>ggf</span><span class=valuegap>-----</span><span class=value9>eidvsetpyqvslq</span><span class=valuegap>--</span><span class=value9>yfn</span><span class=valuegap>-----</span><span class=value9>s</span><span class=valuegap>----</span><span class=value9>hrcggsvlnskwiltaahctvnlqp</span><span class=valuegap>-------</span><span class=value9>ss</span><span class=valuegap>----</span><span class=value9>la</span><span class=valuegap>---</span><span class=value9>vrlg</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------</span><span class=value8>m</span><span class=value9>lrflvf</span><span class=valuegap>--------</span><span class=value9>aslvlyghstqdfpetn</span><span class=value8>arvv</span><span class=valuegap>-----</span><span class=value9>gga</span><span class=valuegap>-----</span><span class=value9>earrnswpsqislq</span><span class=valuegap>---</span><span class=value9>ylsggswy</span><span class=valuegap>----</span><span class=value9>htcggtlirrnwvmtaahc</span><span class=valuegap>----</span><span class=value9>vss</span><span class=valuegap>------</span><span class=value9>q</span><span class=valuegap>----</span><span class=value9>mtf</span><span class=valuegap>--</span><span class=value9>rvvvg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value9>&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;*..&nbsp;::&nbsp;&nbsp;&nbsp;&nbsp;:::&nbsp;.&nbsp;*&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;:&nbsp;&nbsp;*</span><br><br><br><span class=valuedefault>sp|P08861|ELA3B&nbsp;&nbsp;&nbsp;</span><span class=value9>eyd</span><span class=value8>ravk</span><span class=value7>eg</span><span class=valuegap>--</span><span class=value7>peq</span><span class=value8>vipin</span><span class=value9>sgdlfvhplwnrsc</span><span class=valuegap>--------------</span><span class=value9>vacgndialiklsrsaqlgdavqlaslpp</span><span class=value8>agd</span><span class=valuegap>-----</span><span class=value9>ilpnetpcyitgwgrlytngplp</span><span class=valuegap>------------</span><span class=value9>dklqeallpvvdyehcsr</span><span class=valuegap>-----</span><span class=value9>wn</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>ahni</span><span class=valuegap>---</span><span class=value8>k</span><span class=value7>kqe</span><span class=valuegap>-</span><span class=value7>ntq</span><span class=valuegap>-</span><span class=value8>visv</span><span class=value9>vkakphenydr</span><span class=valuegap>-----------</span><span class=value9>dsh</span><span class=valuegap>-----</span><span class=value9>fndimllklerkaqlngvvktia</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>rs</span><span class=value9>q</span><span class=valuegap>-</span><span class=value8>dw</span><span class=valuegap>-</span><span class=value9>vkpgqvctvagwgr</span><span class=valuegap>-----</span><span class=value9>lan</span><span class=valuegap>-</span><span class=value9>c</span><span class=valuegap>-</span><span class=value9>t</span><span class=valuegap>--</span><span class=value9>s</span><span class=valuegap>-</span><span class=value9>snt</span><span class=valuegap>---</span><span class=value9>lqevnlevqkgqkcqd</span><span class=valuegap>----</span><span class=value9>mse</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>ahni</span><span class=valuegap>---</span><span class=value8>k</span><span class=value7>ake</span><span class=valuegap>-</span><span class=value7>etq</span><span class=value8>qiipv</span><span class=value9>akaiphpdyna</span><span class=valuegap>-----------</span><span class=value9>taf</span><span class=valuegap>-----</span><span class=value9>fsdimllkleskakrtkavrplk</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>rp</span><span class=value9>n</span><span class=valuegap>-</span><span class=value8>ar</span><span class=valuegap>-</span><span class=value9>vkpgdvcsvagwgsrsindt</span><span class=valuegap>-----------</span><span class=value9>kasarlreaqlviqedeeckk</span><span class=valuegap>----</span><span class=value9>rfr</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>ahnk</span><span class=valuegap>---</span><span class=value8>t</span><span class=value7>ske</span><span class=valuegap>-</span><span class=value7>dtw</span><span class=value8>qklev</span><span class=value9>ekqflhpkyde</span><span class=valuegap>-----------</span><span class=value9>nlv</span><span class=valuegap>-----</span><span class=value9>vhdimllklkekakltlgvgtlp</span><span class=valuegap>-</span><span class=value9>ls</span><span class=valuegap>--</span><span class=value8>an</span><span class=valuegap>-</span><span class=value8>fnf</span><span class=valuegap>-</span><span class=value9>ippgrmcravgwgr</span><span class=valuegap>-----</span><span class=value9>tnvne</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>--</span><span class=value9>a</span><span class=valuegap>-</span><span class=value9>sdt</span><span class=valuegap>---</span><span class=value9>lqevkmrlqepqackh</span><span class=valuegap>-----</span><span class=value9>ft</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>ahsl</span><span class=valuegap>---</span><span class=value8>s</span><span class=value7>kne</span><span class=valuegap>-</span><span class=value7>pmk</span><span class=value8>qtfei</span><span class=value9>kkfipfsrlqs</span><span class=valuegap>-----------</span><span class=value9>gsa</span><span class=valuegap>-----</span><span class=value9>shdimliklrtaaelnknvqllh</span><span class=valuegap>-</span><span class=value9>lg</span><span class=valuegap>--</span><span class=value8>s</span><span class=valuegap>--</span><span class=value8>kny</span><span class=valuegap>-</span><span class=value9>lrdgtkcqvtgwgt</span><span class=valuegap>-----</span><span class=value9>tkpdllt</span><span class=valuegap>--</span><span class=value9>a</span><span class=valuegap>-</span><span class=value9>sdt</span><span class=valuegap>---</span><span class=value9>lrevtvtiisrkrcns</span><span class=valuegap>--</span><span class=value9>qsyyn</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value9>lhsl</span><span class=valuegap>-</span><span class=value8>ead</span><span class=valuegap>-</span><span class=value7>qe</span><span class=valuegap>-</span><span class=value7>pgs</span><span class=value8>qmvea</span><span class=value9>slsvrhpeyn</span><span class=valuegap>-----------</span><span class=value9>rpll</span><span class=valuegap>-----</span><span class=value9>andlmlikldesvsesdtirsis</span><span class=valuegap>-</span><span class=value9>ia</span><span class=valuegap>--</span><span class=value8>s</span><span class=valuegap>---</span><span class=value8>qc</span><span class=valuegap>-</span><span class=value9>ptagnsclvsgwgl</span><span class=valuegap>-----</span><span class=value9>la</span><span class=valuegap>--</span><span class=value9>ngr</span><span class=valuegap>--</span><span class=value9>m</span><span class=valuegap>-</span><span class=value9>ptv</span><span class=valuegap>---</span><span class=value9>lqcvnvsvvseevcsk</span><span class=valuegap>----</span><span class=value9>lyd</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>ahst</span><span class=valuegap>---</span><span class=value8>s</span><span class=value7>hke</span><span class=valuegap>-</span><span class=value7>kld</span><span class=value8>qvfsi</span><span class=value9>kkaipypcfdp</span><span class=valuegap>-----------</span><span class=value9>qtf</span><span class=valuegap>-----</span><span class=value9>egdlqllqlegkatmtkavgilq</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>rt</span><span class=valuegap>-</span><span class=value8>edd</span><span class=valuegap>-</span><span class=value9>vkphtkchvagwgs</span><span class=valuegap>-----</span><span class=value9>tkkdacq</span><span class=valuegap>--</span><span class=value9>m</span><span class=valuegap>-</span><span class=value9>sna</span><span class=valuegap>---</span><span class=value9>lreanvtvidrkicnd</span><span class=valuegap>--</span><span class=value9>aqhyn</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>ahni</span><span class=valuegap>---</span><span class=value8>r</span><span class=value7>qnea</span><span class=valuegap>-</span><span class=value7>sq</span><span class=value8>vsits</span><span class=value9>tdffthenwns</span><span class=valuegap>-----------</span><span class=value9>wll</span><span class=valuegap>-----</span><span class=value9>tndialirlpspvslnsniktvk</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>s</span><span class=valuegap>---</span><span class=value8>sd</span><span class=valuegap>-</span><span class=value9>vsvgttvtptgwgr</span><span class=valuegap>-----</span><span class=value9>psdsasg</span><span class=valuegap>--</span><span class=value9>i</span><span class=valuegap>-</span><span class=value9>sdv</span><span class=valuegap>---</span><span class=value9>lrqvnvpvmtnadcds</span><span class=valuegap>----</span><span class=value9>vyg</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>ahnl</span><span class=valuegap>---</span><span class=value8>s</span><span class=value7>rre</span><span class=valuegap>-</span><span class=value7>ptr</span><span class=value8>qvfav</span><span class=value9>qrifen</span><span class=valuegap>-</span><span class=value9>gydp</span><span class=valuegap>-----------</span><span class=value9>vnl</span><span class=valuegap>-----</span><span class=value9>lndivilqlngsatinanvqvaq</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>aq</span><span class=valuegap>-</span><span class=value8>grr</span><span class=valuegap>-</span><span class=value9>lgngvqclamgwgl</span><span class=valuegap>-----</span><span class=value9>lgrnr</span><span class=valuegap>-</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>i</span><span class=valuegap>-</span><span class=value9>asv</span><span class=valuegap>---</span><span class=value9>lqelnvtvvt</span><span class=valuegap>-</span><span class=value9>slc</span><span class=valuegap>---------</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value9>ahsl</span><span class=valuegap>---</span><span class=value8>s</span><span class=value7>ape</span><span class=valuegap>-</span><span class=value7>pyk</span><span class=value8>rwydv</span><span class=value9>qsvvphpgsrp</span><span class=valuegap>-----------</span><span class=value9>dsl</span><span class=valuegap>-----</span><span class=value9>eddlilfklsqnaslgphvrplplqy</span><span class=valuegap>-----</span><span class=value8>edke</span><span class=value9>vepgtlcdvagwgv</span><span class=valuegap>-----</span><span class=value9>vthag</span><span class=valuegap>-</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>r</span><span class=valuegap>-</span><span class=value9>pdv</span><span class=valuegap>---</span><span class=value9>lhqlrvsimnrttcnl</span><span class=valuegap>--</span><span class=value9>rtyhd</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value9>sdki</span><span class=valuegap>---</span><span class=value8>g</span><span class=value7>dq</span><span class=valuegap>---</span><span class=value7>sa</span><span class=value8>qkika</span><span class=value9>tksfrhpgys</span><span class=valuegap>-----------</span><span class=value9>tkth</span><span class=valuegap>-----</span><span class=value9>vndimlvrldepvkmsskveavq</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>e</span><span class=valuegap>---</span><span class=value8>hc</span><span class=valuegap>-</span><span class=value9>eppgtsctvsgwgt</span><span class=valuegap>-----</span><span class=value9>ttspdvt</span><span class=valuegap>--</span><span class=value9>f</span><span class=valuegap>-</span><span class=value9>psd</span><span class=valuegap>---</span><span class=value9>lmcsdvklissreckk</span><span class=valuegap>----</span><span class=value9>vyk</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value9>rhnl</span><span class=valuegap>---</span><span class=value8>s</span><span class=value7>ede</span><span class=valuegap>-</span><span class=value7>dta</span><span class=value8>qfhqv</span><span class=value9>sdsfldpqfdls</span><span class=value8>ll</span><span class=value9>kkkylrpyddi</span><span class=valuegap>-----</span><span class=value9>shdlmllrlaqparitdavkild</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>t</span><span class=valuegap>---</span><span class=value8>qe</span><span class=valuegap>-</span><span class=value9>pklgstcytsgwgl</span><span class=valuegap>-----</span><span class=value9>istftnr</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>sgt</span><span class=valuegap>---</span><span class=value9>lqcvelrlqsnekcar</span><span class=valuegap>----</span><span class=value9>ayp</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value9>lhslh</span><span class=value8>dpq</span><span class=value7>dp</span><span class=valuegap>----</span><span class=value7>g</span><span class=value8>ltfyi</span><span class=value9>kqaikhpgynl</span><span class=valuegap>------------</span><span class=value9>ky</span><span class=valuegap>-----</span><span class=value9>endlallkldgrvkpsknvkpla</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>rk</span><span class=value9>p</span><span class=value8>rdk</span><span class=valuegap>-</span><span class=value9>paegsrcstagwgi</span><span class=valuegap>-----</span><span class=value9>thqrg</span><span class=valuegap>-</span><span class=value9>q</span><span class=valuegap>--</span><span class=value9>l</span><span class=valuegap>-</span><span class=value9>aks</span><span class=valuegap>---</span><span class=value9>lqeldlrlldtrmcnn</span><span class=valuegap>--</span><span class=value9>srfwn</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>aydl</span><span class=valuegap>---</span><span class=value8>r</span><span class=value7>rrerqsr</span><span class=value8>qtfsi</span><span class=value9>ssmsen</span><span class=valuegap>-</span><span class=value9>gydp</span><span class=valuegap>-----------</span><span class=value9>qqn</span><span class=valuegap>-----</span><span class=value9>lndlmllqldreanltssvtilp</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>lq</span><span class=valuegap>-</span><span class=value8>nat</span><span class=valuegap>-</span><span class=value9>veagtrcqvagwgs</span><span class=valuegap>-----</span><span class=value9>qrsgg</span><span class=valuegap>-</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>l</span><span class=valuegap>-</span><span class=value9>srf</span><span class=valuegap>---</span><span class=value9>prfvnvtvtpedqc</span><span class=valuegap>---------</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>efdq</span><span class=valuegap>---</span><span class=value8>g</span><span class=value7>sde</span><span class=valuegap>-</span><span class=value7>eni</span><span class=value8>qvlki</span><span class=value9>aqvfknpkf</span><span class=valuegap>----------------</span><span class=value9>n</span><span class=value8>mf</span><span class=value9>tvrnditllklatpaqfsetvsavc</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>nv</span><span class=value9>d</span><span class=valuegap>-</span><span class=value8>dd</span><span class=valuegap>-</span><span class=value9>fppgtvcattgwgk</span><span class=valuegap>-----</span><span class=value9>tky</span><span class=valuegap>---</span><span class=value9>nalktpek</span><span class=valuegap>---</span><span class=value9>lqqaalpivseadck</span><span class=valuegap>----</span><span class=value9>kswg</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value9>knnf</span><span class=valuegap>---</span><span class=value8>l</span><span class=value7>ede</span><span class=valuegap>-</span><span class=value7>psd</span><span class=value8>qhrlv</span><span class=value9>skaiphpdfnms</span><span class=value8>ll</span><span class=value9>nehtpqpeddy</span><span class=valuegap>-----</span><span class=value9>sndlmllrlskpaditdvvkpit</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>t</span><span class=valuegap>---</span><span class=value8>ee</span><span class=valuegap>-</span><span class=value9>pklgstclasgwgs</span><span class=valuegap>-----</span><span class=value9>ttpikfk</span><span class=valuegap>--</span><span class=value9>y</span><span class=valuegap>-</span><span class=value9>pdd</span><span class=valuegap>---</span><span class=value9>lqcvnlkllpnedcdk</span><span class=valuegap>----</span><span class=value9>ahe</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>aydl</span><span class=valuegap>---</span><span class=value8>r</span><span class=value7>qqe</span><span class=valuegap>-</span><span class=value7>qsr</span><span class=value8>qtfsi</span><span class=value9>rsisqn</span><span class=valuegap>-</span><span class=value9>gydp</span><span class=valuegap>-----------</span><span class=value9>rqn</span><span class=valuegap>-----</span><span class=value9>lndvlllqldrearltpsvalvp</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>pq</span><span class=valuegap>-</span><span class=value8>nat</span><span class=valuegap>-</span><span class=value9>veagtncqvagwgt</span><span class=valuegap>-----</span><span class=value9>qrlr</span><span class=valuegap>--</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>lfsrf</span><span class=valuegap>---</span><span class=value9>prvlnvtvt</span><span class=valuegap>-</span><span class=value9>snpc</span><span class=valuegap>---------</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>std</span><span class=valuegap>----</span><span class=value8>r</span><span class=value7>tng</span><span class=valuegap>-</span><span class=value7>gi</span><span class=valuegap>--</span><span class=value8>ivkv</span><span class=value9>ksviphpqyn</span><span class=valuegap>---------</span><span class=value9>gdtyny</span><span class=valuegap>-------</span><span class=value9>dfslleldesigfsrsieaia</span><span class=valuegap>-</span><span class=value9>lp</span><span class=value8>dase</span><span class=valuegap>---</span><span class=value8>t</span><span class=valuegap>-</span><span class=value9>vadgamctvsgwgd</span><span class=valuegap>-----</span><span class=value9>t</span><span class=valuegap>-</span><span class=value9>knv</span><span class=valuegap>-</span><span class=value9>f</span><span class=valuegap>---</span><span class=value9>emnt</span><span class=valuegap>--</span><span class=value9>llravnvpsynqaecaaalvnvvp</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>ssr</span><span class=valuegap>----</span><span class=value8>h</span><span class=value7>asg</span><span class=valuegap>-</span><span class=value7>gt</span><span class=valuegap>--</span><span class=value8>vvrv</span><span class=value9>arvlehpnyd</span><span class=valuegap>-----------</span><span class=value9>dstid</span><span class=valuegap>-----</span><span class=value9>ydfslmeleseltfsdvvqpvs</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>dq</span><span class=value9>d</span><span class=valuegap>-</span><span class=value8>ea</span><span class=valuegap>-</span><span class=value9>vedgtmtivsgwgn</span><span class=valuegap>-----</span><span class=value9>tqsa</span><span class=valuegap>--</span><span class=value9>a</span><span class=valuegap>---</span><span class=value9>esna</span><span class=valuegap>--</span><span class=value9>ilraanvptvnqkect</span><span class=valuegap>----</span><span class=value9>iays</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>dhnl</span><span class=valuegap>---</span><span class=value8>s</span><span class=value7>qnd</span><span class=valuegap>-</span><span class=value7>gte</span><span class=value8>qyvsv</span><span class=value9>qkimvhptwns</span><span class=valuegap>-----------</span><span class=value9>nnv</span><span class=valuegap>---</span><span class=value9>aagydiallrlaqsvtlnnyvqlav</span><span class=valuegap>-</span><span class=value9>lp</span><span class=valuegap>--</span><span class=value8>qe</span><span class=valuegap>-</span><span class=value8>gti</span><span class=valuegap>-</span><span class=value9>lannnpcyitgwgr</span><span class=valuegap>-----</span><span class=value9>trtng</span><span class=valuegap>-</span><span class=value9>q</span><span class=valuegap>--</span><span class=value9>l</span><span class=valuegap>-</span><span class=value9>sqt</span><span class=valuegap>---</span><span class=value9>lqqaylpsvdysicss</span><span class=valuegap>--</span><span class=value9>ssywg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;*.&nbsp;:..*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class=value8>&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|P08861|ELA3B&nbsp;&nbsp;&nbsp;</span><span class=value9>wwgssvkktmvcaggd</span><span class=valuegap>----------</span><span class=value9>irsgcngdsggplncpt</span><span class=value8>edg</span><span class=valuegap>-</span><span class=value8>g</span><span class=value9>wqvhgvtsfv</span><span class=value8>sa</span><span class=valuegap>-</span><span class=value8>f</span><span class=value9>gcn</span><span class=valuegap>----</span><span class=value9>trrkptvftrv</span><span class=value8>s</span><span class=valuegap>-</span><span class=value8>a</span><span class=value9>fidwieetias</span><span class=valuegap>-------------------</span><span class=value9>h</span><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>dynd</span><span class=valuegap>-</span><span class=value9>siqlcvg</span><span class=valuegap>--</span><span class=value9>npse</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>k</span><span class=valuegap>--</span><span class=value9>atgkgdsggpfvcd</span><span class=valuegap>----</span><span class=value8>g</span><span class=valuegap>--</span><span class=value9>vaqgivsyr</span><span class=value8>l</span><span class=valuegap>-</span><span class=value8>c</span><span class=valuegap>-</span><span class=value9>tg</span><span class=valuegap>-</span><span class=value9>t</span><span class=valuegap>----</span><span class=value9>l</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>rvftri</span><span class=value8>s</span><span class=value7>s</span><span class=valuegap>-</span><span class=value9>fipwiqktmk</span><span class=valuegap>--</span><span class=value9>vlqqs</span><span class=valuegap>--------------</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>hy</span><span class=valuegap>-</span><span class=value9>tetteicag</span><span class=valuegap>--</span><span class=value9>dlkk</span><span class=valuegap>--</span><span class=value9>i</span><span class=valuegap>--</span><span class=value9>k</span><span class=valuegap>--</span><span class=value9>tpfkgdsggplvcd</span><span class=valuegap>----</span><span class=value8>n</span><span class=valuegap>--</span><span class=value9>kaygllaya</span><span class=value8>k</span><span class=valuegap>-</span><span class=value8>n</span><span class=valuegap>----</span><span class=value9>rti</span><span class=valuegap>-</span><span class=value9>ss</span><span class=valuegap>-</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>vftki</span><span class=value8>v</span><span class=value7>h</span><span class=valuegap>-</span><span class=value9>flpwisrnmk</span><span class=value8>l</span><span class=valuegap>-</span><span class=value9>l</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>sfrh</span><span class=valuegap>-</span><span class=value9>nsqlcvg</span><span class=valuegap>--</span><span class=value9>npkk</span><span class=valuegap>--</span><span class=value9>m</span><span class=valuegap>--</span><span class=value9>q</span><span class=valuegap>--</span><span class=value9>nvykgdsggpllca</span><span class=valuegap>----</span><span class=value8>g</span><span class=valuegap>--</span><span class=value9>iaqgiasyv</span><span class=value8>h</span><span class=valuegap>-</span><span class=value8>r</span><span class=valuegap>-</span><span class=value9>na</span><span class=valuegap>-</span><span class=value9>k</span><span class=valuegap>------</span><span class=value9>ppavftri</span><span class=value8>s</span><span class=value7>h</span><span class=valuegap>-</span><span class=value9>yrpwinkilr</span><span class=value8>en</span><span class=valuegap>-------------------</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>hkpvit</span><span class=valuegap>-</span><span class=value9>kdmicag</span><span class=valuegap>--</span><span class=value9>d</span><span class=valuegap>--</span><span class=value9>a</span><span class=valuegap>--</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>gqkdsckgdsggplick</span><span class=valuegap>----</span><span class=value8>g</span><span class=valuegap>--</span><span class=value9>ifhalvsqg</span><span class=value8>y</span><span class=valuegap>-</span><span class=value8>k</span><span class=valuegap>--</span><span class=value9>c</span><span class=valuegap>-</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>i</span><span class=valuegap>-</span><span class=value9>akkp</span><span class=valuegap>-</span><span class=value9>giytll</span><span class=value8>t</span><span class=value7>k</span><span class=value8>k</span><span class=value9>yqtwikskla</span><span class=value8>ps</span><span class=value9>rah</span><span class=valuegap>----------------</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>plyh</span><span class=valuegap>-</span><span class=value9>psmfcag</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>qdqk</span><span class=valuegap>--</span><span class=value9>dscngdsggplicn</span><span class=valuegap>------</span><span class=value9>gylqglvsfg</span><span class=value8>k</span><span class=valuegap>--</span><span class=value8>a</span><span class=value9>pcgq</span><span class=valuegap>-</span><span class=value9>v</span><span class=valuegap>-</span><span class=value9>gv</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>gvytnl</span><span class=value8>c</span><span class=value7>k</span><span class=valuegap>-</span><span class=value9>ftewiektvq</span><span class=value8>a</span><span class=valuegap>-</span><span class=value9>s</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>fnpvid</span><span class=valuegap>-</span><span class=value9>lsmicag</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>k</span><span class=valuegap>--</span><span class=value9>geddscegdsgsplicd</span><span class=valuegap>------</span><span class=value9>nvfrgvtsfg</span><span class=valuegap>----</span><span class=value9>kc</span><span class=valuegap>-</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>n</span><span class=valuegap>-</span><span class=value9>pqkp</span><span class=valuegap>-</span><span class=value9>giyill</span><span class=value8>t</span><span class=value7>k</span><span class=value8>k</span><span class=value9>hlnwikktia</span><span class=value8>ga</span><span class=value9>i</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>ivg</span><span class=valuegap>-</span><span class=value9>dgvvcid</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>t</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>kstcngdsggplnln</span><span class=valuegap>------</span><span class=value9>gmtygitsfg</span><span class=value8>s</span><span class=valuegap>-</span><span class=value8>sa</span><span class=value9>gc</span><span class=valuegap>-</span><span class=value9>e</span><span class=valuegap>-</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>gy</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>aaftrv</span><span class=value8>y</span><span class=value7>y</span><span class=valuegap>-</span><span class=value9>yldwiqqktg</span><span class=value8>vt</span><span class=value9>p</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>r</span><span class=valuegap>-</span><span class=value9>rsnvctl</span><span class=valuegap>--</span><span class=value9>v</span><span class=valuegap>--</span><span class=value9>rgrq</span><span class=valuegap>--</span><span class=value9>a</span><span class=valuegap>--</span><span class=value9>gvcfgdsgsplvcn</span><span class=valuegap>------</span><span class=value9>glihgiasfv</span><span class=value8>r</span><span class=valuegap>-</span><span class=value8>g</span><span class=valuegap>-</span><span class=value9>gcas</span><span class=valuegap>-</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>ly</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>dafapv</span><span class=value8>a</span><span class=value7>q</span><span class=valuegap>-</span><span class=value9>fvnwidsiiq</span><span class=valuegap>-</span><span class=value8>r</span><span class=value9>sednpcphprdpdpasr</span><span class=value8>th</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>gvvt</span><span class=valuegap>-</span><span class=value9>inmmcae</span><span class=valuegap>--</span><span class=value9>s</span><span class=valuegap>--</span><span class=value9>n</span><span class=valuegap>--</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>dtcrgdsgsplvcg</span><span class=valuegap>----</span><span class=value8>d</span><span class=valuegap>--</span><span class=value9>avegvvtwg</span><span class=value8>s</span><span class=valuegap>-</span><span class=value8>r</span><span class=valuegap>-</span><span class=value9>vc</span><span class=valuegap>-</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>n</span><span class=valuegap>-</span><span class=value9>gkkp</span><span class=valuegap>-</span><span class=value9>gvytrv</span><span class=value8>s</span><span class=value7>s</span><span class=valuegap>-</span><span class=value9>yrmwienitn</span><span class=value8>gn</span><span class=value9>mts</span><span class=valuegap>----------------</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>dllg</span><span class=valuegap>-</span><span class=value9>ktmlcag</span><span class=valuegap>--</span><span class=value9>i</span><span class=valuegap>--</span><span class=value9>p</span><span class=valuegap>--</span><span class=value9>dskt</span><span class=valuegap>--</span><span class=value9>ntcngdsggplvcn</span><span class=valuegap>------</span><span class=value9>dtlqglvswg</span><span class=value8>t</span><span class=valuegap>--</span><span class=value8>y</span><span class=value9>pcgq</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>nd</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>gvytqv</span><span class=value8>c</span><span class=value7>k</span><span class=valuegap>-</span><span class=value9>ykrwvmetmk</span><span class=value8>th</span><span class=value9>r</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>ekmt</span><span class=valuegap>-</span><span class=value9>efvlcathrd</span><span class=valuegap>--</span><span class=value9>d</span><span class=valuegap>----</span><span class=value9>sg</span><span class=valuegap>--</span><span class=value9>siclgdsggalicd</span><span class=valuegap>------</span><span class=value9>gvfqgitswg</span><span class=value8>y</span><span class=valuegap>--</span><span class=value8>s</span><span class=value9>ec</span><span class=valuegap>-</span><span class=value9>a</span><span class=valuegap>-</span><span class=value9>d</span><span class=valuegap>-</span><span class=value9>fndn</span><span class=valuegap>-</span><span class=value9>fvftkv</span><span class=value8>m</span><span class=value7>p</span><span class=valuegap>-</span><span class=value9>hlkwiketie</span><span class=value8>kn</span><span class=value9>s</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>gvlt</span><span class=valuegap>-</span><span class=value9>dsmlclk</span><span class=valuegap>--</span><span class=value9>agak</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>q</span><span class=valuegap>--</span><span class=value9>apckgdsggplvcg</span><span class=valuegap>----</span><span class=value8>k</span><span class=valuegap>-</span><span class=value9>gkvdgilsfs</span><span class=value8>s</span><span class=valuegap>-</span><span class=value8>k</span><span class=valuegap>-</span><span class=value9>nc</span><span class=valuegap>-</span><span class=value9>tdi</span><span class=valuegap>-</span><span class=value9>fk</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>tvatav</span><span class=value8>a</span><span class=value7>p</span><span class=valuegap>-</span><span class=value9>ysswirkvig</span><span class=value8>r</span><span class=valuegap>-</span><span class=value9>wspqplt</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>r</span><span class=valuegap>-</span><span class=value9>pnnvctg</span><span class=valuegap>--</span><span class=value9>v</span><span class=valuegap>--</span><span class=value9>ltrr</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>gicngdggtplvce</span><span class=valuegap>------</span><span class=value9>glahgvasfs</span><span class=value8>l</span><span class=valuegap>-</span><span class=value8>g</span><span class=valuegap>-</span><span class=value9>pc</span><span class=valuegap>-</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>dfftrv</span><span class=value8>a</span><span class=value7>l</span><span class=valuegap>-</span><span class=value9>frdwidgvln</span><span class=value8>np</span><span class=value9>gpgpa</span><span class=valuegap>--------------</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>skit</span><span class=valuegap>-</span><span class=value9>dvmtcag</span><span class=valuegap>--</span><span class=value9>a</span><span class=valuegap>--</span><span class=value9>s</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>v</span><span class=valuegap>--</span><span class=value9>sscmgdsggplvcqk</span><span class=value8>d</span><span class=valuegap>--</span><span class=value8>gv</span><span class=value9>wtlagivswg</span><span class=value8>s</span><span class=valuegap>-</span><span class=value8>g</span><span class=valuegap>-</span><span class=value9>vc</span><span class=valuegap>-</span><span class=value9>s</span><span class=valuegap>-</span><span class=value9>t</span><span class=valuegap>-</span><span class=value9>st</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>avysrv</span><span class=value8>t</span><span class=value7>a</span><span class=valuegap>-</span><span class=value9>lmpwvqqile</span><span class=value8>an</span><span class=valuegap>-------------------</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>mkvt</span><span class=valuegap>-</span><span class=value9>damlcag</span><span class=valuegap>--</span><span class=value9>e</span><span class=valuegap>--</span><span class=value9>m</span><span class=valuegap>--</span><span class=value9>dggs</span><span class=valuegap>--</span><span class=value9>ytcehdsggplicd</span><span class=valuegap>------</span><span class=value9>gilqgitswg</span><span class=value8>p</span><span class=valuegap>--</span><span class=value8>e</span><span class=value9>pc</span><span class=valuegap>-</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>epte</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>svytkl</span><span class=value8>i</span><span class=value7>k</span><span class=valuegap>-</span><span class=value9>fsswiretma</span><span class=value8>nn</span><span class=value9>p</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>l</span><span class=valuegap>-</span><span class=value9>prdmcig</span><span class=valuegap>--</span><span class=value9>v</span><span class=valuegap>--</span><span class=value9>fsrr</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>risqgdrgtplvcn</span><span class=valuegap>------</span><span class=value9>glaqgvasfl</span><span class=value8>r</span><span class=valuegap>-</span><span class=value8>r</span><span class=valuegap>-</span><span class=value9>rf</span><span class=valuegap>-</span><span class=value9>r</span><span class=valuegap>-</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>s</span><span class=valuegap>-</span><span class=value9>s</span><span class=valuegap>-</span><span class=value9>gfftrv</span><span class=value8>a</span><span class=value7>l</span><span class=valuegap>-</span><span class=value9>frnwidsvln</span><span class=value8>np</span><span class=value9>p</span><span class=valuegap>------------------</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>vt</span><span class=valuegap>-</span><span class=value9>eqmicag</span><span class=valuegap>--</span><span class=value9>y</span><span class=valuegap>--</span><span class=value9>aa</span><span class=valuegap>-</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>-</span><span class=value9>kdscqgdsggplvsg</span><span class=valuegap>------</span><span class=value9>dklvgvvswg</span><span class=value8>k</span><span class=valuegap>-</span><span class=value8>g</span><span class=valuegap>--</span><span class=value9>c</span><span class=valuegap>-</span><span class=value9>a</span><span class=valuegap>-</span><span class=value9>l</span><span class=valuegap>-</span><span class=value9>pnlp</span><span class=valuegap>-</span><span class=value9>gvyarv</span><span class=value8>s</span><span class=value7>t</span><span class=valuegap>-</span><span class=value9>vrqwirevse</span><span class=value8>v</span><span class=valuegap>--------------------</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>ssggit</span><span class=valuegap>-</span><span class=value9>drmlcag</span><span class=valuegap>--</span><span class=value9>y</span><span class=valuegap>--</span><span class=value9>krgg</span><span class=valuegap>--</span><span class=value9>k</span><span class=valuegap>--</span><span class=value9>dacqgdsggplvvd</span><span class=valuegap>------</span><span class=value9>gklvgvvswg</span><span class=value8>f</span><span class=valuegap>-</span><span class=value8>g</span><span class=valuegap>-</span><span class=value9>ca</span><span class=valuegap>-</span><span class=value9>m</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>gy</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>gvyarv</span><span class=value8>a</span><span class=value7>v</span><span class=valuegap>-</span><span class=value9>vrdwvrensg</span><span class=value8>a</span><span class=valuegap>--------------------</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>stvk</span><span class=valuegap>-</span><span class=value9>ttmvcag</span><span class=valuegap>--</span><span class=value9>g</span><span class=valuegap>--</span><span class=value9>d</span><span class=valuegap>-</span><span class=value9>gv</span><span class=valuegap>--</span><span class=value9>r</span><span class=valuegap>--</span><span class=value9>sgcqgdsggplhclv</span><span class=value8>ngqy</span><span class=valuegap>--</span><span class=value9>svhgvtsfv</span><span class=value8>ssm</span><span class=valuegap>-</span><span class=value9>gc</span><span class=valuegap>-</span><span class=value9>nvs</span><span class=valuegap>-</span><span class=value9>kk</span><span class=valuegap>-</span><span class=value9>p</span><span class=valuegap>-</span><span class=value9>tvftrv</span><span class=value8>s</span><span class=value7>a</span><span class=valuegap>-</span><span class=value9>yiswmnnvia</span><span class=value8>yt</span><span class=valuegap>-------------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*&nbsp;.:&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;.:&nbsp;:&nbsp;</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;*:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value5>&nbsp;</span><span class=value1>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/users/cn/cmagis/
+ORBIT_SOCKETDIR=/tmp/orbit-cmagis
+HOSTNAME=brasil
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+GIO_LAUNCHED_DESKTOP_FILE_PID=13637
+MCOFFEE_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//mcoffee/
+GPG_AGENT_INFO=/tmp/seahorse-3oGFZj/S.gpg-agent:13286:1;
+ROOT_TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/
+TERM=xterm
+SHELL=/bin/bash
+XDG_SESSION_COOKIE=78ca754cf49d9d17b2c0859500000020-1472467836.368722-1926617865
+HISTSIZE=1000
+PERL5LIB=:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/perl/lib/perl5
+GTK_RC_FILES=/etc/gtk/gtkrc:/users/cn/cmagis/.gtkrc-1.2-gnome2
+WINDOWID=33313398
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+METHODS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//methods/
+IMSETTINGS_MODULE=none
+http_proxy=
+HTTP_proxy=
+USER=cmagis
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-y1Hwrp/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-y1Hwrp/socket
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/13210,unix/unix:/tmp/.ICE-unix/13210
+USERNAME=cmagis
+ENV_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//.t_coffee_env
+GIO_LAUNCHED_DESKTOP_FILE=/users/cn/cmagis/Desktop/gnome-terminal.desktop
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+DESKTOP_SESSION=gnome
+MAIL=/var/spool/mail/cmagis
+PATH=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/users/cn/cmagis/bin:/users/cn/cmagis/bin
+_=/usr/bin/printenv
+ALN_LINE_LENGTH=160
+QT_IM_MODULE=xim
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/
+PWD=/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/users/cn/cmagis/.t_coffee/cache//
+XMODIFIERS=@im=none
+GDM_KEYBOARD_LAYOUT=us	intl
+GNOME_KEYRING_PID=13200
+LANG=en_US.UTF-8
+KDE_IS_PRELINKED=1
+GDM_LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+KDEDIRS=/usr
+GDMSESSION=gnome
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HISTCONTROL=ignoredups
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/
+SHLVL=4
+HOME=/users/cn/cmagis
+DUMP_4_TCOFFEE=t_coffee.161.B6La4jvoTi.dump
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+HTTP_PROXY=
+MAFFT_BINARIES=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/plugins/linux/
+LOGNAME=cmagis
+CVS_RSH=ssh
+EMAIL_4_TCOFFEE=cedrik.magis@crg.es
+QTLIB=/usr/lib64/qt-3.3/lib
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-H13VKolxki,guid=b1ccb896c3103c0a8fe39b81000001d2
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+EMAIL=cedrik.magis@crg.es
+UPDATED_ENV_4_TCOFFEE=1
+WINDOWPATH=1
+DISPLAY=:0.0
+ALL_proxy=
+PROXY_4_TCOFFEE=cedrik.magis@crg.es
+LOCKDIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/lck//
+G_BROKEN_FILENAMES=1
+TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/tco/63715435/
+XAUTHORITY=/var/run/gdm/auth-for-cmagis-E59HTd/database
+COLORTERM=gnome-terminal
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.161.B6La4jvoTi.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>1221</line>
+</ref>

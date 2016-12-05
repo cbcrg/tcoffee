@@ -1,0 +1,4017 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -infile=sample_aln1.aln -evaluate -method proba_pair</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=479, Nseq=10, Len=201 
+
+hmgb_chite      ---adkpkrplsay----------------------mlwln-saresi------------------krenpdfkv-tevak-kgge---lwr------------------------------glk--dkseweaka------------------------
+hmgt_mouse      -----kpkrprsay----------------------niyvsesfq-ea----------------------kddsa-qgklk-lvne---awk------------------------------nlspeekqayiqla------------------------
+hmgl_wheat      --dpnkpkrapsaf----------------------fvfmg-efreef------------------kqknpknksvaavgk-aage---rwk------------------------------slsesekapyvaka------------------------
+hmgl_trybr      kkdsnapkramtsf----------------------mff-ssdfrskh----------------------sdlsi-vemsk-aaga---awk------------------------------elgpeerkvyeema------------------------
+1cms            --GE-VASVPLTNYL-DSQYFGKIYL------GTPPQEFT-VLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGK---PLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFDGILGMAYPSLASEY-S--IPV
+4pep            -----IGDEPLENYL-DTEYFGTIGI------GTPAQDFT-VIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQ---ELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFDGILGLAYPSISASG-A--TPV
+4ape            -STGSATTTPIDS-L-DDAYITPVQI------GTPAQTLN-LDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGA---TWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTIDGLLGLAFSTLNTVSPTQQKTF
+3app            AASGVATNTPTAN---DEEYITPVTI------G--GTTLN-LNFDTGSADLWVFSTELPASQQSGHSVYNPSATG---K-E-LSGY---TWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNNDGLLGLAFSSINTVQPQSQTTF
+2apr            --AG-VGTVPMTDYGNDIEYYGQVTI------GTPGKKFN-LDFDTGSSDLWIASTLCTNCG-SGQTKYDPNQSS---TYQ-ADGR---TWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASGPN-DGLLGLGFDTITTVRGV--KTP
+1cms_1          -YTGSLHWVPVTVQQYWQFTVDSVTISGVVVACEGGCQAI---LDTGTSKLVGPSSD----------ILNIQQAI---GAT---QNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTSQDQGFCTSGFQSENHSQKWI------LGDVF-------
+                         .                                                                                                                                                      
+
+hmgb_chite      ------at--akqnyiralqe---yerngg-----------
+hmgt_mouse      ------kd--drirydnemks---weeqmae----------
+hmgl_wheat      ------nk--lkgeynkaiaa---ynkgesa----------
+hmgl_trybr      ------ek--dkerykrem----------------------
+1cms            FDNMMNRHLVAQDLFSVYM-D---RNGQESMLTLGAIDPSY
+4pep            FDNLWDQGLVSQDLFSVYL-S-SNDD-SGSVVLLGGIDSSY
+4ape            FDN--AKASLDSPVFTADL-G---YH-APGTYNFGFIDTTA
+3app            FDT--VKSSLAQPLFAVAL-K---HQ-QPGVYDFGFIDSSK
+2apr            MDNLISQGLISRPIFGVYL-GKAKNG-GGGEYIFGGYDSTK
+1cms_1          ----------IREYYSVFD-R-A-NN-LVGL------AKAI
+                              :                          
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[1] 	proba_pair
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[1] 	sample_aln1.aln
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.alnl_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+!		[Final Evaluation][TOT=    8][  0 %]!		[Final Evaluation][TOT=    8][ 25 %]!		[Final Evaluation][TOT=    8][ 37 %]!		[Final Evaluation][TOT=    8][ 50 %]!		[Final Evaluation][TOT=    8][ 62 %]!		[Final Evaluation][TOT=    8][ 75 %]!		[Final Evaluation][TOT=    8][ 87 %]!		[Final Evaluation][TOT=    8][100 %]
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+l_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_aln1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Ssample_aln1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_aln1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [28496]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [28496]--->[17467]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+
+
+OUTPUT RESULTS
+	#### File Type= MSA             Format= aln             Name= sample_aln1.aln
+	#### File Type= MSA             Format= html            Name= sample_aln1.html
+
+# Command Line: t_coffee -infile sample_aln1.aln -evaluate -method proba_pair  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.540 Mb, Max= 31.305 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln1.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=479, Nseq=10, Len=201 
+
+hmgb_chite      ---adkpkrplsay----------------------mlwln-saresi------------------krenpdfkv-tevak-kgge---lwr------------------------------glk--dkseweaka------------------------
+hmgt_mouse      -----kpkrprsay----------------------niyvsesfq-ea----------------------kddsa-qgklk-lvne---awk------------------------------nlspeekqayiqla------------------------
+hmgl_wheat      --dpnkpkrapsaf----------------------fvfmg-efreef------------------kqknpknksvaavgk-aage---rwk------------------------------slsesekapyvaka------------------------
+hmgl_trybr      kkdsnapkramtsf----------------------mff-ssdfrskh----------------------sdlsi-vemsk-aaga---awk------------------------------elgpeerkvyeema------------------------
+1cms            --GE-VASVPLTNYL-DSQYFGKIYL------GTPPQEFT-VLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGK---PLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFDGILGMAYPSLASEY-S--IPV
+4pep            -----IGDEPLENYL-DTEYFGTIGI------GTPAQDFT-VIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQ---ELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFDGILGLAYPSISASG-A--TPV
+4ape            -STGSATTTPIDS-L-DDAYITPVQI------GTPAQTLN-LDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGA---TWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTIDGLLGLAFSTLNTVSPTQQKTF
+3app            AASGVATNTPTAN---DEEYITPVTI------G--GTTLN-LNFDTGSADLWVFSTELPASQQSGHSVYNPSATG---K-E-LSGY---TWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNNDGLLGLAFSSINTVQPQSQTTF
+2apr            --AG-VGTVPMTDYGNDIEYYGQVTI------GTPGKKFN-LDFDTGSSDLWIASTLCTNCG-SGQTKYDPNQSS---TYQ-ADGR---TWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASGPN-DGLLGLGFDTITTVRGV--KTP
+1cms_1          -YTGSLHWVPVTVQQYWQFTVDSVTISGVVVACEGGCQAI---LDTGTSKLVGPSSD----------ILNIQQAI---GAT---QNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTSQDQGFCTSGFQSENHSQKWI------LGDVF-------
+                         .                                                                                                                                                      
+
+hmgb_chite      ------at--akqnyiralqe---yerngg-----------
+hmgt_mouse      ------kd--drirydnemks---weeqmae----------
+hmgl_wheat      ------nk--lkgeynkaiaa---ynkgesa----------
+hmgl_trybr      ------ek--dkerykrem----------------------
+1cms            FDNMMNRHLVAQDLFSVYM-D---RNGQESMLTLGAIDPSY
+4pep            FDNLWDQGLVSQDLFSVYL-S-SNDD-SGSVVLLGGIDSSY
+4ape            FDN--AKASLDSPVFTADL-G---YH-APGTYNFGFIDTTA
+3app            FDT--VKSSLAQPLFAVAL-K---HQ-QPGVYDFGFIDSSK
+2apr            MDNLISQGLISRPIFGVYL-GKAKNG-GGGEYIFGGYDSTK
+1cms_1          ----------IREYYSVFD-R-A-NN-LVGL------AKAI
+                              :                          
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_aln1.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=479, Nseq=10, Len=201 
+
+hmgb_chite      ---adkpkrplsay----------------------mlwln-saresi------------------krenpdfkv-tevak-kgge---lwr------------------------------glk--dkseweaka------------------------
+hmgt_mouse      -----kpkrprsay----------------------niyvsesfq-ea----------------------kddsa-qgklk-lvne---awk------------------------------nlspeekqayiqla------------------------
+hmgl_wheat      --dpnkpkrapsaf----------------------fvfmg-efreef------------------kqknpknksvaavgk-aage---rwk------------------------------slsesekapyvaka------------------------
+hmgl_trybr      kkdsnapkramtsf----------------------mff-ssdfrskh----------------------sdlsi-vemsk-aaga---awk------------------------------elgpeerkvyeema------------------------
+1cms            --GE-VASVPLTNYL-DSQYFGKIYL------GTPPQEFT-VLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGK---PLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFDGILGMAYPSLASEY-S--IPV
+4pep            -----IGDEPLENYL-DTEYFGTIGI------GTPAQDFT-VIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQ---ELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFDGILGLAYPSISASG-A--TPV
+4ape            -STGSATTTPIDS-L-DDAYITPVQI------GTPAQTLN-LDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGA---TWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTIDGLLGLAFSTLNTVSPTQQKTF
+3app            AASGVATNTPTAN---DEEYITPVTI------G--GTTLN-LNFDTGSADLWVFSTELPASQQSGHSVYNPSATG---K-E-LSGY---TWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNNDGLLGLAFSSINTVQPQSQTTF
+2apr            --AG-VGTVPMTDYGNDIEYYGQVTI------GTPGKKFN-LDFDTGSSDLWIASTLCTNCG-SGQTKYDPNQSS---TYQ-ADGR---TWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASGPN-DGLLGLGFDTITTVRGV--KTP
+1cms_1          -YTGSLHWVPVTVQQYWQFTVDSVTISGVVVACEGGCQAI---LDTGTSKLVGPSSD----------ILNIQQAI---GAT---QNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTSQDQGFCTSGFQSENHSQKWI------LGDVF-------
+                         .                                                                                                                                                      
+
+hmgb_chite      ------at--akqnyiralqe---yerngg-----------
+hmgt_mouse      ------kd--drirydnemks---weeqmae----------
+hmgl_wheat      ------nk--lkgeynkaiaa---ynkgesa----------
+hmgl_trybr      ------ek--dkerykrem----------------------
+1cms            FDNMMNRHLVAQDLFSVYM-D---RNGQESMLTLGAIDPSY
+4pep            FDNLWDQGLVSQDLFSVYL-S-SNDD-SGSVVLLGGIDSSY
+4ape            FDN--AKASLDSPVFTADL-G---YH-APGTYNFGFIDTTA
+3app            FDT--VKSSLAQPLFAVAL-K---HQ-QPGVYDFGFIDSSK
+2apr            MDNLISQGLISRPIFGVYL-GKAKNG-GGGEYIFGGYDSTK
+1cms_1          ----------IREYYSVFD-R-A-NN-LVGL------AKAI
+                              :                          
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_aln1.html</name>
+<content>
+<html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=479</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value2>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;27</span><br><span class=value2>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;27</span><br><span class=value2>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;28</span><br><span class=value3>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;30</span><br><span class=value5>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;54</span><br><span class=value5>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;55</span><br><span class=value5>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;53</span><br><span class=value5>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;52</span><br><span class=value5>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;54</span><br><span class=value2>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;24</span><br><span class=value47>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;47</span><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value2>ad</span><span class=value4>kpk</span><span class=value5>rplsa</span><span class=value4>y</span><span class=valuegap>----------------------</span><span class=value3>m</span><span class=value2>lwln</span><span class=valuegap>-</span><span class=value2>saresi</span><span class=valuegap>------------------</span><span class=value2>k</span><span class=value3>ren</span><span class=value4>p</span><span class=value3>dfkv</span><span class=valuegap>-</span><span class=value2>te</span><span class=value3>va</span><span class=value4>k</span><span class=valuegap>-</span><span class=value4>kgge</span><span class=valuegap>---</span><span class=value4>lwr</span><span class=valuegap>------------------------------</span><span class=value3>glk</span><span class=valuegap>--</span><span class=value3>dkse</span><span class=value4>w</span><span class=value3>e</span><span class=value4>a</span><span class=value3>k</span><span class=value4>a</span><span class=valuegap>--------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value3>kpk</span><span class=value4>rprsay</span><span class=valuegap>----------------------</span><span class=value3>niy</span><span class=value2>vs</span><span class=value1>e</span><span class=value2>sfq</span><span class=valuegap>-</span><span class=value2>ea</span><span class=valuegap>----------------------</span><span class=value2>k</span><span class=value3>d</span><span class=value2>d</span><span class=value3>s</span><span class=value2>a</span><span class=valuegap>-</span><span class=value2>qg</span><span class=value3>klk</span><span class=valuegap>-</span><span class=value3>l</span><span class=value4>vne</span><span class=valuegap>---</span><span class=value4>awk</span><span class=valuegap>------------------------------</span><span class=value4>n</span><span class=value5>ls</span><span class=value4>peekqayiql</span><span class=value3>a</span><span class=valuegap>--------------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value2>dpn</span><span class=value3>kpkr</span><span class=value4>a</span><span class=value3>p</span><span class=value4>saf</span><span class=valuegap>----------------------</span><span class=value3>fvfm</span><span class=value2>g</span><span class=valuegap>-</span><span class=value3>efre</span><span class=value2>ef</span><span class=valuegap>------------------</span><span class=value2>k</span><span class=value3>qk</span><span class=value4>np</span><span class=value3>knk</span><span class=value2>s</span><span class=value1>v</span><span class=value2>aa</span><span class=value3>v</span><span class=value4>gk</span><span class=valuegap>-</span><span class=value4>a</span><span class=value5>age</span><span class=valuegap>---</span><span class=value5>rwk</span><span class=valuegap>------------------------------</span><span class=value4>s</span><span class=value5>l</span><span class=value4>sesekapyv</span><span class=value3>aka</span><span class=valuegap>--------------</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value2>kkdsn</span><span class=value3>apkr</span><span class=value4>amts</span><span class=value3>f</span><span class=valuegap>----------------------</span><span class=value3>m</span><span class=value4>ff</span><span class=valuegap>-</span><span class=value1>s</span><span class=value4>sd</span><span class=value5>frskh</span><span class=valuegap>----------------------</span><span class=value2>sdlsi</span><span class=valuegap>-</span><span class=value2>vems</span><span class=value3>k</span><span class=valuegap>-</span><span class=value3>a</span><span class=value4>a</span><span class=value5>g</span><span class=value4>a</span><span class=valuegap>---</span><span class=value4>awk</span><span class=valuegap>------------------------------</span><span class=value3>e</span><span class=value4>l</span><span class=value3>gpeerkvyeema</span><span class=valuegap>--------------</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value2>GE</span><span class=valuegap>-</span><span class=value4>VAS</span><span class=value5>VPLT</span><span class=value4>NY</span><span class=value3>L</span><span class=valuegap>-</span><span class=value4>D</span><span class=value5>SQ</span><span class=value6>YFGKIYL</span><span class=valuegap>------</span><span class=value6>G</span><span class=value5>T</span><span class=value4>P</span><span class=value5>PQE</span><span class=value6>FT</span><span class=valuegap>-</span><span class=value7>VL</span><span class=value8>F</span><span class=value7>DTGS</span><span class=value6>SDFWVPS</span><span class=value7>I</span><span class=value6>YCKS</span><span class=value5>NAC</span><span class=value6>KNH</span><span class=value5>Q</span><span class=value6>RF</span><span class=value5>DPRK</span><span class=value4>SS</span><span class=valuegap>---</span><span class=value4>TFQ</span><span class=valuegap>-</span><span class=value4>N</span><span class=value5>LG</span><span class=value6>K</span><span class=valuegap>---</span><span class=value6>P</span><span class=value7>LSIHYGTG</span><span class=value5>S</span><span class=valuegap>-</span><span class=value5>M</span><span class=value6>Q</span><span class=value7>G</span><span class=value8>ILGYDTVTV</span><span class=value7>SNIVD</span><span class=value8>I</span><span class=value7>QQT</span><span class=value6>V</span><span class=value7>GLS</span><span class=value6>TQEPGD</span><span class=value5>VFTYA</span><span class=value4>E</span><span class=value5>F</span><span class=value6>DG</span><span class=value7>IL</span><span class=value6>GMAY</span><span class=value5>PSLA</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value3>IGD</span><span class=value4>EPLEN</span><span class=value3>YL</span><span class=valuegap>-</span><span class=value4>D</span><span class=value5>TEYF</span><span class=value6>GTIGI</span><span class=valuegap>------</span><span class=value6>G</span><span class=value4>TP</span><span class=value5>AQ</span><span class=value6>DFT</span><span class=valuegap>-</span><span class=value7>VI</span><span class=value8>F</span><span class=value7>D</span><span class=value8>TG</span><span class=value7>S</span><span class=value6>SNLWVPSV</span><span class=value5>YCSS</span><span class=value4>LAC</span><span class=value5>SDHN</span><span class=value6>QF</span><span class=value5>N</span><span class=value6>P</span><span class=value5>DD</span><span class=value4>SS</span><span class=valuegap>---</span><span class=value3>T</span><span class=value4>FE</span><span class=valuegap>-</span><span class=value4>A</span><span class=value5>T</span><span class=value6>SQ</span><span class=valuegap>---</span><span class=value6>E</span><span class=value7>LSITYGTG</span><span class=value6>S</span><span class=valuegap>-</span><span class=value5>M</span><span class=value7>T</span><span class=value8>GILGYDT</span><span class=value7>VQ</span><span class=value8>V</span><span class=value7>GGISDTN</span><span class=value6>QIF</span><span class=value7>GLSETEPGS</span><span class=value6>FL</span><span class=value5>YYAPF</span><span class=value6>D</span><span class=value7>GILGLAYP</span><span class=value6>SIS</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value2>STGS</span><span class=value3>AT</span><span class=value4>TTPID</span><span class=value3>S</span><span class=valuegap>-</span><span class=value3>L</span><span class=valuegap>-</span><span class=value4>D</span><span class=value5>D</span><span class=value6>A</span><span class=value7>YITPVQI</span><span class=valuegap>------</span><span class=value7>G</span><span class=value5>T</span><span class=value4>P</span><span class=value5>AQ</span><span class=value6>T</span><span class=value7>LN</span><span class=valuegap>-</span><span class=value7>LD</span><span class=value8>FDTG</span><span class=value7>S</span><span class=value6>SDLWVFSS</span><span class=value5>ET</span><span class=value4>TASEV</span><span class=value5>D</span><span class=value6>GQTIYTP</span><span class=value5>SK</span><span class=value4>ST</span><span class=valuegap>---</span><span class=value4>T</span><span class=value3>A</span><span class=value4>K</span><span class=value1>L</span><span class=value4>L</span><span class=value5>S</span><span class=value6>GA</span><span class=valuegap>---</span><span class=value7>TWSI</span><span class=value8>SYGDG</span><span class=value7>S</span><span class=value4>S</span><span class=value6>S</span><span class=value7>S</span><span class=value8>GDVYTDTVSVGGLTVT</span><span class=value7>GQAVESA</span><span class=value6>KKVSSS</span><span class=value5>FTEDSTI</span><span class=value6>DGLLGLAF</span><span class=value5>STLN</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>AASGV</span><span class=value3>ATNT</span><span class=value4>P</span><span class=value3>TAN</span><span class=valuegap>---</span><span class=value4>D</span><span class=value5>E</span><span class=value6>EYI</span><span class=value7>TPVT</span><span class=value8>I</span><span class=valuegap>------</span><span class=value7>G</span><span class=valuegap>--</span><span class=value4>G</span><span class=value5>T</span><span class=value6>TLN</span><span class=valuegap>-</span><span class=value7>LN</span><span class=value8>FDT</span><span class=value7>GS</span><span class=value6>ADLWVFST</span><span class=value5>EL</span><span class=value4>PASQ</span><span class=value3>Q</span><span class=value4>SGH</span><span class=value5>SVYNP</span><span class=value4>S</span><span class=value3>ATG</span><span class=valuegap>---</span><span class=value2>K</span><span class=valuegap>-</span><span class=value4>E</span><span class=valuegap>-</span><span class=value4>L</span><span class=value5>S</span><span class=value6>GY</span><span class=valuegap>---</span><span class=value7>TWSISYGDG</span><span class=value6>S</span><span class=value4>S</span><span class=value6>A</span><span class=value7>S</span><span class=value8>GNV</span><span class=value7>F</span><span class=value8>TDSVTVG</span><span class=value7>G</span><span class=value8>VTAH</span><span class=value7>GQAVQAA</span><span class=value6>QQISA</span><span class=value5>QFQQDTN</span><span class=value6>N</span><span class=value7>D</span><span class=value6>G</span><span class=value7>LLGLA</span><span class=value6>FSSI</span><span class=value5>N</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value2>A</span><span class=value3>G</span><span class=valuegap>-</span><span class=value4>VGT</span><span class=value5>VPMT</span><span class=value4>DY</span><span class=value2>G</span><span class=value1>N</span><span class=value4>D</span><span class=value5>I</span><span class=value6>EY</span><span class=value7>YGQVT</span><span class=value6>I</span><span class=valuegap>------</span><span class=value6>G</span><span class=value5>T</span><span class=value4>P</span><span class=value5>G</span><span class=value6>KKFN</span><span class=valuegap>-</span><span class=value7>LD</span><span class=value8>FDTGS</span><span class=value7>SD</span><span class=value6>LWI</span><span class=value7>A</span><span class=value6>ST</span><span class=value5>L</span><span class=value4>CT</span><span class=value3>NCG</span><span class=valuegap>-</span><span class=value5>SGQ</span><span class=value6>TKY</span><span class=value5>DPN</span><span class=value4>QSS</span><span class=valuegap>---</span><span class=value4>TYQ</span><span class=valuegap>-</span><span class=value5>A</span><span class=value6>DGR</span><span class=valuegap>---</span><span class=value6>TWSI</span><span class=value7>SYGDG</span><span class=value6>S</span><span class=value4>S</span><span class=value5>A</span><span class=value6>S</span><span class=value7>GILAKDNV</span><span class=value8>NL</span><span class=value7>GGLL</span><span class=value8>IK</span><span class=value7>GQ</span><span class=value6>TIELAKRE</span><span class=value5>A</span><span class=value6>AS</span><span class=value5>FA</span><span class=value4>SG</span><span class=value3>PN</span><span class=valuegap>-</span><span class=value7>DGLLGLGF</span><span class=value6>DT</span><span class=value7>IT</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value2>YTGS</span><span class=value3>L</span><span class=value4>HWVPVT</span><span class=value3>VQQ</span><span class=value2>YWQFTVD</span><span class=value3>SVTISGVVV</span><span class=value4>AC</span><span class=value3>EGGCQA</span><span class=value2>I</span><span class=valuegap>---</span><span class=value8>L</span><span class=value7>D</span><span class=value8>TG</span><span class=value7>T</span><span class=value6>SKLVGPS</span><span class=value5>S</span><span class=value4>D</span><span class=valuegap>----------</span><span class=value2>ILNIQQ</span><span class=value3>A</span><span class=value2>I</span><span class=valuegap>---</span><span class=value2>GAT</span><span class=valuegap>---</span><span class=value2>QNQYGEF</span><span class=value3>DIDCDNLSYMPTV</span><span class=value2>VFE</span><span class=value3>IN</span><span class=value2>G</span><span class=value3>KMY</span><span class=value2>PLTPSAY</span><span class=value3>TS</span><span class=value5>Q</span><span class=value4>DQ</span><span class=value3>GFC</span><span class=value4>T</span><span class=value3>SGFQ</span><span class=value5>SE</span><span class=value4>NH</span><span class=value5>S</span><span class=value6>Q</span><span class=value5>KWI</span><span class=valuegap>------</span><span class=value5>L</span><span class=value4>G</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>.&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value0>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value0>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value0>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value3>&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------</span><span class=value3>at</span><span class=valuegap>--</span><span class=value3>akq</span><span class=value4>nyira</span><span class=value3>lq</span><span class=value4>e</span><span class=valuegap>---</span><span class=value3>ye</span><span class=value2>r</span><span class=value3>ng</span><span class=value1>g</span><span class=valuegap>-----------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------</span><span class=value3>kd</span><span class=valuegap>--</span><span class=value3>drirydnemks</span><span class=valuegap>---</span><span class=value3>wee</span><span class=value4>q</span><span class=value3>m</span><span class=value2>a</span><span class=value1>e</span><span class=valuegap>----------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------</span><span class=value3>nk</span><span class=valuegap>--</span><span class=value3>lkgeynka</span><span class=value2>i</span><span class=value3>aa</span><span class=valuegap>---</span><span class=value3>yn</span><span class=value2>k</span><span class=value3>ges</span><span class=value1>a</span><span class=valuegap>----------</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------</span><span class=value4>ek</span><span class=valuegap>--</span><span class=value3>d</span><span class=value4>kerykre</span><span class=value2>m</span><span class=valuegap>----------------------</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>S</span><span class=value3>EY</span><span class=valuegap>-</span><span class=value3>S</span><span class=valuegap>--</span><span class=value3>IP</span><span class=value4>VFDN</span><span class=value3>MMN</span><span class=value4>RH</span><span class=value5>LV</span><span class=value6>AQ</span><span class=value7>D</span><span class=value6>L</span><span class=value8>FSV</span><span class=value7>Y</span><span class=value6>M</span><span class=valuegap>-</span><span class=value5>D</span><span class=valuegap>---</span><span class=value3>RN</span><span class=value1>G</span><span class=value3>Q</span><span class=value4>E</span><span class=value5>S</span><span class=value6>M</span><span class=value7>L</span><span class=value6>T</span><span class=value8>LGA</span><span class=value7>I</span><span class=value8>D</span><span class=value9>PS</span><span class=value6>Y</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>A</span><span class=value4>S</span><span class=value3>G</span><span class=valuegap>-</span><span class=value3>A</span><span class=valuegap>--</span><span class=value3>T</span><span class=value4>PV</span><span class=value5>FDN</span><span class=value3>LWD</span><span class=value4>QGL</span><span class=value5>VS</span><span class=value6>Q</span><span class=value7>D</span><span class=value6>L</span><span class=value7>FSVYL</span><span class=valuegap>-</span><span class=value6>S</span><span class=valuegap>-</span><span class=value2>SNDD</span><span class=valuegap>-</span><span class=value3>SG</span><span class=value4>S</span><span class=value5>V</span><span class=value6>V</span><span class=value7>LL</span><span class=value8>G</span><span class=value7>GI</span><span class=value8>D</span><span class=value9>SS</span><span class=value6>Y</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>TV</span><span class=value3>SPT</span><span class=value2>QQ</span><span class=value3>KTF</span><span class=value4>FDN</span><span class=valuegap>--</span><span class=value2>A</span><span class=value3>KAS</span><span class=value4>LD</span><span class=value5>S</span><span class=value6>P</span><span class=value5>V</span><span class=value6>FTA</span><span class=value7>D</span><span class=value6>L</span><span class=valuegap>-</span><span class=value5>G</span><span class=valuegap>---</span><span class=value3>YH</span><span class=valuegap>-</span><span class=value3>A</span><span class=value4>PGT</span><span class=value6>YN</span><span class=value7>FG</span><span class=value8>FIDTT</span><span class=value6>A</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>T</span><span class=value4>VQ</span><span class=value3>PQ</span><span class=value2>SQ</span><span class=value3>T</span><span class=value4>TFFDT</span><span class=valuegap>--</span><span class=value3>V</span><span class=value4>KSS</span><span class=value5>L</span><span class=value6>AQ</span><span class=value7>PLFAVAL</span><span class=valuegap>-</span><span class=value5>K</span><span class=valuegap>---</span><span class=value3>HQ</span><span class=valuegap>-</span><span class=value3>Q</span><span class=value4>PG</span><span class=value5>V</span><span class=value6>Y</span><span class=value5>D</span><span class=value7>FG</span><span class=value8>FIDSS</span><span class=value6>K</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>T</span><span class=value4>VR</span><span class=value2>G</span><span class=value3>V</span><span class=valuegap>--</span><span class=value3>KT</span><span class=value4>PM</span><span class=value5>DN</span><span class=value3>LIS</span><span class=value4>QG</span><span class=value5>LI</span><span class=value6>SRP</span><span class=value5>I</span><span class=value7>FGVY</span><span class=value6>L</span><span class=valuegap>-</span><span class=value5>G</span><span class=value2>KAKNG</span><span class=valuegap>-</span><span class=value3>G</span><span class=value4>G</span><span class=value5>GE</span><span class=value6>YIF</span><span class=value8>GG</span><span class=value7>YDSTK</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>D</span><span class=value3>VF</span><span class=valuegap>-----------------</span><span class=value4>IREY</span><span class=value5>YS</span><span class=value4>VF</span><span class=value3>D</span><span class=valuegap>-</span><span class=value3>R</span><span class=valuegap>-</span><span class=value2>A</span><span class=valuegap>-</span><span class=value3>NN</span><span class=valuegap>-</span><span class=value3>LVGL</span><span class=valuegap>------</span><span class=value2>AKA</span><span class=value0>I</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value5>:&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/users/cn/cmagis/
+ORBIT_SOCKETDIR=/tmp/orbit-cmagis
+HOSTNAME=brasil
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+GIO_LAUNCHED_DESKTOP_FILE_PID=13637
+MCOFFEE_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//mcoffee/
+GPG_AGENT_INFO=/tmp/seahorse-3oGFZj/S.gpg-agent:13286:1;
+ROOT_TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/
+TERM=xterm
+SHELL=/bin/bash
+XDG_SESSION_COOKIE=78ca754cf49d9d17b2c0859500000020-1472467836.368722-1926617865
+HISTSIZE=1000
+PERL5LIB=:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/perl/lib/perl5
+GTK_RC_FILES=/etc/gtk/gtkrc:/users/cn/cmagis/.gtkrc-1.2-gnome2
+WINDOWID=33313398
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+METHODS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//methods/
+IMSETTINGS_MODULE=none
+http_proxy=
+HTTP_proxy=
+USER=cmagis
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-y1Hwrp/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-y1Hwrp/socket
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/13210,unix/unix:/tmp/.ICE-unix/13210
+USERNAME=cmagis
+ENV_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//.t_coffee_env
+GIO_LAUNCHED_DESKTOP_FILE=/users/cn/cmagis/Desktop/gnome-terminal.desktop
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+DESKTOP_SESSION=gnome
+MAIL=/var/spool/mail/cmagis
+PATH=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/users/cn/cmagis/bin:/users/cn/cmagis/bin
+_=/usr/bin/printenv
+ALN_LINE_LENGTH=160
+QT_IM_MODULE=xim
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/
+PWD=/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/users/cn/cmagis/.t_coffee/cache//
+XMODIFIERS=@im=none
+GDM_KEYBOARD_LAYOUT=us	intl
+GNOME_KEYRING_PID=13200
+LANG=en_US.UTF-8
+KDE_IS_PRELINKED=1
+GDM_LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+KDEDIRS=/usr
+GDMSESSION=gnome
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HISTCONTROL=ignoredups
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/
+SHLVL=4
+HOME=/users/cn/cmagis
+DUMP_4_TCOFFEE=t_coffee.28.WaC5Ir0DvY.dump
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+HTTP_PROXY=
+MAFFT_BINARIES=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/plugins/linux/
+LOGNAME=cmagis
+CVS_RSH=ssh
+EMAIL_4_TCOFFEE=cedrik.magis@crg.es
+QTLIB=/usr/lib64/qt-3.3/lib
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-H13VKolxki,guid=b1ccb896c3103c0a8fe39b81000001d2
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+EMAIL=cedrik.magis@crg.es
+UPDATED_ENV_4_TCOFFEE=1
+WINDOWPATH=1
+DISPLAY=:0.0
+ALL_proxy=
+PROXY_4_TCOFFEE=cedrik.magis@crg.es
+LOCKDIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/lck//
+G_BROKEN_FILENAMES=1
+TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/tco/6373744/
+XAUTHORITY=/var/run/gdm/auth-for-cmagis-E59HTd/database
+COLORTERM=gnome-terminal
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.28.WaC5Ir0DvY.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_faq.rst</source>
+<line>448</line>
+</ref>

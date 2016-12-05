@@ -1,0 +1,1535 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -aln=sample_aln1.aln -out_lib=sample_lib1.tc_lib -lib_only -weight=1000</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[0] 
+-aln           	S	[1] 	sample_aln1.aln
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[1] 	sample_lib1.tc_lib
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[1] 	1 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[1] 	1000
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln1.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+cal_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (A) sample_aln1.aln  Format clustal_aln
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 10 SEQUENCES  [PROTEIN]
+  Input File sample_aln1.aln Seq 1cms       Length  175 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 1cms_1     Length  148 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 2apr       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 3app       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4ape       Length  178 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq 4pep       Length  174 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_aln1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Asample_aln1.aln
+	xxx Retrieved Asample_aln1.aln
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2204]
+
+	#### File Type= TCLIB           Format= tc_lib_format_01 Name= sample_lib1.tc_lib</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln1.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=993, Nseq=10, Len=216 
+
+hmgb_chite      ad---kpkrplsay---------------------mlwlnsaresi------------------krenpdf-kvtevak-kggelwr------------------------------glk--dksewe--------------------------------
+hmgt_mouse      k-----pkrprsay---------------------niyvsesfqea----------------------kdd-saqgklk-lvneawk------------------------------nlspeekqayi--------------------------------
+hmgl_wheat      dp--nkpkrapsaf---------------------fvfmgefreef------------------kqknpknksvaavgk-aagerwk------------------------------slsesekapyv--------------------------------
+hmgl_trybr      kkdsnapkramtsf---------------------mffssdfrskh----------------------sdl-sivemsk-aagaawk------------------------------elgpeerkvye--------------------------------
+1cms            GE---VASVPLTNY------LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGKPLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLASEY---S
+4pep            -----IGDEPLENY------LDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISASG---A
+4ape            STG-SATTTPIDS-------LDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNTVSPTQQ
+3app            AASGVATNTPTA--------NDEEYITPVTIGG--TTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSA-----TGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINTVQPQSQ
+2apr            AG---VGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTN-CGSGQTKYDPNQSS---TYQ-ADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFDTITTVRG--V
+1cms_1          YTG-SLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLVGPSS------------------------------------------------------DILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAY---T
+                         .                                                                                                                                                      
+
+hmgb_chite      -------------aka--at------akqnyiralqeyer--ngg-----------
+hmgt_mouse      -------------qla--kd------drirydnemkswee--qmae----------
+hmgl_wheat      -------------aka--nk------lkgeynkaiaaynk--gesa----------
+hmgl_trybr      -------------ema--ek------dkerykrem---------------------
+1cms            I---------PVFDNMMNRH----LVAQDLFSVYM-DRNG--QESMLTLGAIDPSY
+4pep            T---------PVFDNLWDQG----LVSQDLFSVYL-SSNDD-SGSVVLLGGIDSSY
+4ape            K---------TFFDNA--KA----SLDSPVFTADL-GYH---APGTYNFGFIDTTA
+3app            T---------TFFDTV--KS----SLAQPLFAVAL-KHQ---QPGVYDFGFIDSSK
+2apr            K---------TPMDNLISQG----LISRPIFGVYL-GKAKNGGGGEYIFGGYDSTK
+1cms_1          SQDQGFCTSGFQSENHSQKWILGDVFIREYYSVFD-RANN--LVGLA--KAI----
+                                              :                         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_lib1.tc_lib</name>
+<content>
+! TC_LIB_FORMAT_01
+10
+1cms 175 GEVASVPLTNYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSSTFQNLGKPLSIHYGTGSMQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFDGILGMAYPSLASEYSIPVFDNMMNRHLVAQDLFSVYMDRNGQESMLTLGAIDPSY
+1cms_1 148 YTGSLHWVPVTVQQYWQFTVDSVTISGVVVACEGGCQAILDTGTSKLVGPSSDILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTSQDQGFCTSGFQSENHSQKWILGDVFIREYYSVFDRANNLVGLAKAI
+2apr 178 AGVGTVPMTDYGNDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTNCGSGQTKYDPNQSSTYQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASGPNDGLLGLGFDTITTVRGVKTPMDNLISQGLISRPIFGVYLGKAKNGGGGEYIFGGYDSTK
+3app 174 AASGVATNTPTANDEEYITPVTIGGTTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSATGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNNDGLLGLAFSSINTVQPQSQTTFFDTVKSSLAQPLFAVALKHQQPGVYDFGFIDSSK
+4ape 178 STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTIDGLLGLAFSTLNTVSPTQQKTFFDNAKASLDSPVFTADLGYHAPGTYNFGFIDTTA
+4pep 174 IGDEPLENYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSSTFEATSQELSITYGTGSMTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFDGILGLAYPSISASGATPVFDNLWDQGLVSQDLFSVYLSSNDDSGSVVLLGGIDSSY
+hmgb_chite 74 adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkseweakaatakqnyiralqeyerngg
+hmgl_trybr 67 kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerkvyeemaekdkerykrem
+hmgl_wheat 79 dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslsesekapyvakanklkgeynkaiaaynkgesa
+hmgt_mouse 71 kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiqlakddrirydnemksweeqmae
+#1 2
+   12    20 10000000     1     0
+   13    21 10000000     1     0
+   14    22 10000000     1     0
+   15    23 10000000     1     0
+   16    24 10000000     1     0
+   17    25 10000000     1     0
+   18    26 10000000     1     0
+   19    27 10000000     1     0
+   20    28 10000000     1     0
+   21    29 10000000     1     0
+   22    30 10000000     1     0
+   23    31 10000000     1     0
+   24    32 10000000     1     0
+   25    33 10000000     1     0
+   26    34 10000000     1     0
+   38    45 10000000     1     0
+   39    46 10000000     1     0
+   40    47 10000000     1     0
+   41    48 10000000     1     0
+   42    49 10000000     1     0
+   43    50 10000000     1     0
+   44    51 10000000     1     0
+   45    52 10000000     1     0
+   95    53 10000000     1     0
+   96    54 10000000     1     0
+   97    55 10000000     1     0
+   98    56 10000000     1     0
+   99    57 10000000     1     0
+  100    58 10000000     1     0
+  101    59 10000000     1     0
+  102    60 10000000     1     0
+  103    61 10000000     1     0
+  115    73 10000000     1     0
+  116    74 10000000     1     0
+  117    75 10000000     1     0
+  118    76 10000000     1     0
+  119    77 10000000     1     0
+  120    78 10000000     1     0
+  121    87 10000000     1     0
+  122    88 10000000     1     0
+  123    89 10000000     1     0
+  124    90 10000000     1     0
+  125    91 10000000     1     0
+  126    92 10000000     1     0
+  127    93 10000000     1     0
+  128    94 10000000     1     0
+  129    95 10000000     1     0
+  130    96 10000000     1     0
+  131    97 10000000     1     0
+  132    98 10000000     1     0
+  133    99 10000000     1     0
+  134   100 10000000     1     0
+  135   101 10000000     1     0
+  136   102 10000000     1     0
+  137   112 10000000     1     0
+  138   113 10000000     1     0
+  139   114 10000000     1     0
+  143   118 10000000     1     0
+  144   119 10000000     1     0
+  147   126 10000000     1     0
+  148   127 10000000     1     0
+  166   145 10000000     1     0
+  169   146 10000000     1     0
+  170   147 10000000     1     0
+  171   148 10000000     1     0
+#1 3
+   12    13 10000000     1     0
+   13    14 10000000     1     0
+   14    15 10000000     1     0
+   15    16 10000000     1     0
+   16    17 10000000     1     0
+   17    18 10000000     1     0
+   18    19 10000000     1     0
+   19    20 10000000     1     0
+   20    21 10000000     1     0
+   21    22 10000000     1     0
+   22    23 10000000     1     0
+   23    24 10000000     1     0
+   24    25 10000000     1     0
+   25    26 10000000     1     0
+   26    27 10000000     1     0
+   38    39 10000000     1     0
+   39    40 10000000     1     0
+   40    41 10000000     1     0
+   41    42 10000000     1     0
+   42    43 10000000     1     0
+   43    44 10000000     1     0
+   44    45 10000000     1     0
+   45    46 10000000     1     0
+   46    47 10000000     1     0
+   47    48 10000000     1     0
+   48    49 10000000     1     0
+   49    50 10000000     1     0
+   51    51 10000000     1     0
+   52    52 10000000     1     0
+   53    53 10000000     1     0
+   54    54 10000000     1     0
+   55    55 10000000     1     0
+   75    75 10000000     1     0
+   76    76 10000000     1     0
+   77    77 10000000     1     0
+   78    78 10000000     1     0
+   79    79 10000000     1     0
+   80    80 10000000     1     0
+   81    81 10000000     1     0
+   82    83 10000000     1     0
+   83    84 10000000     1     0
+   84    85 10000000     1     0
+   85    86 10000000     1     0
+   86    87 10000000     1     0
+   87    88 10000000     1     0
+   88    89 10000000     1     0
+   89    90 10000000     1     0
+   90    91 10000000     1     0
+   91    92 10000000     1     0
+   92    93 10000000     1     0
+   93    94 10000000     1     0
+   94    95 10000000     1     0
+   95    96 10000000     1     0
+   96    97 10000000     1     0
+   97    98 10000000     1     0
+   98    99 10000000     1     0
+   99   100 10000000     1     0
+  100   101 10000000     1     0
+  101   102 10000000     1     0
+  102   103 10000000     1     0
+  103   104 10000000     1     0
+  115   116 10000000     1     0
+  117   117 10000000     1     0
+  118   118 10000000     1     0
+  119   119 10000000     1     0
+  120   120 10000000     1     0
+  121   121 10000000     1     0
+  122   122 10000000     1     0
+  123   123 10000000     1     0
+  124   124 10000000     1     0
+  125   125 10000000     1     0
+  126   126 10000000     1     0
+  127   127 10000000     1     0
+  128   128 10000000     1     0
+  129   129 10000000     1     0
+  130   130 10000000     1     0
+  131   131 10000000     1     0
+  132   132 10000000     1     0
+  133   133 10000000     1     0
+  134   134 10000000     1     0
+  135   136 10000000     1     0
+  136   137 10000000     1     0
+  137   138 10000000     1     0
+  138   139 10000000     1     0
+  139   140 10000000     1     0
+  143   144 10000000     1     0
+  144   145 10000000     1     0
+  147   148 10000000     1     0
+  148   149 10000000     1     0
+  166   169 10000000     1     0
+  167   170 10000000     1     0
+  168   171 10000000     1     0
+  169   172 10000000     1     0
+  170   173 10000000     1     0
+  171   174 10000000     1     0
+  172   175 10000000     1     0
+  173   176 10000000     1     0
+  174   177 10000000     1     0
+  175   178 10000000     1     0
+#1 4
+   12    13 10000000     1     0
+   13    14 10000000     1     0
+   14    15 10000000     1     0
+   15    16 10000000     1     0
+   16    17 10000000     1     0
+   17    18 10000000     1     0
+   18    19 10000000     1     0
+   19    20 10000000     1     0
+   20    21 10000000     1     0
+   21    22 10000000     1     0
+   22    23 10000000     1     0
+   23    24 10000000     1     0
+   24    25 10000000     1     0
+   38    37 10000000     1     0
+   39    38 10000000     1     0
+   40    39 10000000     1     0
+   41    40 10000000     1     0
+   42    41 10000000     1     0
+   43    42 10000000     1     0
+   44    43 10000000     1     0
+   45    44 10000000     1     0
+   46    45 10000000     1     0
+   47    46 10000000     1     0
+   48    47 10000000     1     0
+   49    48 10000000     1     0
+   50    49 10000000     1     0
+   51    50 10000000     1     0
+   52    51 10000000     1     0
+   53    52 10000000     1     0
+   54    53 10000000     1     0
+   55    54 10000000     1     0
+   75    73 10000000     1     0
+   76    74 10000000     1     0
+   77    75 10000000     1     0
+   78    76 10000000     1     0
+   79    77 10000000     1     0
+   80    78 10000000     1     0
+   81    79 10000000     1     0
+   82    81 10000000     1     0
+   83    82 10000000     1     0
+   84    83 10000000     1     0
+   85    84 10000000     1     0
+   86    85 10000000     1     0
+   87    86 10000000     1     0
+   88    87 10000000     1     0
+   89    88 10000000     1     0
+   90    89 10000000     1     0
+   91    90 10000000     1     0
+   92    91 10000000     1     0
+   93    92 10000000     1     0
+   94    93 10000000     1     0
+   95    94 10000000     1     0
+   96    95 10000000     1     0
+   97    96 10000000     1     0
+   98    97 10000000     1     0
+   99    98 10000000     1     0
+  100    99 10000000     1     0
+  101   100 10000000     1     0
+  102   101 10000000     1     0
+  103   102 10000000     1     0
+  115   114 10000000     1     0
+  116   115 10000000     1     0
+  117   116 10000000     1     0
+  118   117 10000000     1     0
+  119   118 10000000     1     0
+  120   119 10000000     1     0
+  121   120 10000000     1     0
+  122   121 10000000     1     0
+  123   122 10000000     1     0
+  124   123 10000000     1     0
+  125   124 10000000     1     0
+  126   125 10000000     1     0
+  127   126 10000000     1     0
+  128   127 10000000     1     0
+  129   128 10000000     1     0
+  130   129 10000000     1     0
+  131   130 10000000     1     0
+  132   131 10000000     1     0
+  133   132 10000000     1     0
+  134   133 10000000     1     0
+  135   137 10000000     1     0
+  136   138 10000000     1     0
+  137   139 10000000     1     0
+  138   140 10000000     1     0
+  139   141 10000000     1     0
+  147   147 10000000     1     0
+  148   148 10000000     1     0
+  166   165 10000000     1     0
+  167   166 10000000     1     0
+  168   167 10000000     1     0
+  169   168 10000000     1     0
+  170   169 10000000     1     0
+  171   170 10000000     1     0
+  172   171 10000000     1     0
+  173   172 10000000     1     0
+  174   173 10000000     1     0
+  175   174 10000000     1     0
+#1 5
+   12    13 10000000     1     0
+   13    14 10000000     1     0
+   14    15 10000000     1     0
+   15    16 10000000     1     0
+   16    17 10000000     1     0
+   17    18 10000000     1     0
+   18    19 10000000     1     0
+   19    20 10000000     1     0
+   20    21 10000000     1     0
+   21    22 10000000     1     0
+   22    23 10000000     1     0
+   23    24 10000000     1     0
+   24    25 10000000     1     0
+   25    26 10000000     1     0
+   26    27 10000000     1     0
+   38    39 10000000     1     0
+   39    40 10000000     1     0
+   40    41 10000000     1     0
+   41    42 10000000     1     0
+   42    43 10000000     1     0
+   43    44 10000000     1     0
+   44    45 10000000     1     0
+   45    46 10000000     1     0
+   46    47 10000000     1     0
+   47    48 10000000     1     0
+   48    49 10000000     1     0
+   49    50 10000000     1     0
+   50    51 10000000     1     0
+   51    52 10000000     1     0
+   52    53 10000000     1     0
+   53    54 10000000     1     0
+   54    55 10000000     1     0
+   55    56 10000000     1     0
+   75    77 10000000     1     0
+   76    78 10000000     1     0
+   77    79 10000000     1     0
+   78    80 10000000     1     0
+   79    81 10000000     1     0
+   80    82 10000000     1     0
+   81    83 10000000     1     0
+   82    85 10000000     1     0
+   83    86 10000000     1     0
+   84    87 10000000     1     0
+   85    88 10000000     1     0
+   86    89 10000000     1     0
+   87    90 10000000     1     0
+   88    91 10000000     1     0
+   89    92 10000000     1     0
+   90    93 10000000     1     0
+   91    94 10000000     1     0
+   92    95 10000000     1     0
+   93    96 10000000     1     0
+   94    97 10000000     1     0
+   95    98 10000000     1     0
+   96    99 10000000     1     0
+   97   100 10000000     1     0
+   98   101 10000000     1     0
+   99   102 10000000     1     0
+  100   103 10000000     1     0
+  101   104 10000000     1     0
+  102   105 10000000     1     0
+  103   106 10000000     1     0
+  115   118 10000000     1     0
+  116   119 10000000     1     0
+  117   120 10000000     1     0
+  118   121 10000000     1     0
+  119   122 10000000     1     0
+  120   123 10000000     1     0
+  121   124 10000000     1     0
+  122   125 10000000     1     0
+  123   126 10000000     1     0
+  124   127 10000000     1     0
+  125   128 10000000     1     0
+  126   129 10000000     1     0
+  127   130 10000000     1     0
+  128   131 10000000     1     0
+  129   132 10000000     1     0
+  130   133 10000000     1     0
+  131   134 10000000     1     0
+  132   135 10000000     1     0
+  133   136 10000000     1     0
+  134   137 10000000     1     0
+  135   141 10000000     1     0
+  136   142 10000000     1     0
+  137   143 10000000     1     0
+  138   144 10000000     1     0
+  139   145 10000000     1     0
+  147   151 10000000     1     0
+  148   152 10000000     1     0
+  166   169 10000000     1     0
+  167   170 10000000     1     0
+  168   171 10000000     1     0
+  169   172 10000000     1     0
+  170   173 10000000     1     0
+  171   174 10000000     1     0
+  172   175 10000000     1     0
+  173   176 10000000     1     0
+  174   177 10000000     1     0
+  175   178 10000000     1     0
+#1 6
+   12    10 10000000     1     0
+   13    11 10000000     1     0
+   14    12 10000000     1     0
+   15    13 10000000     1     0
+   16    14 10000000     1     0
+   17    15 10000000     1     0
+   18    16 10000000     1     0
+   19    17 10000000     1     0
+   20    18 10000000     1     0
+   21    19 10000000     1     0
+   22    20 10000000     1     0
+   23    21 10000000     1     0
+   24    22 10000000     1     0
+   25    23 10000000     1     0
+   26    24 10000000     1     0
+   38    36 10000000     1     0
+   39    37 10000000     1     0
+   40    38 10000000     1     0
+   41    39 10000000     1     0
+   42    40 10000000     1     0
+   43    41 10000000     1     0
+   44    42 10000000     1     0
+   45    43 10000000     1     0
+   46    44 10000000     1     0
+   47    45 10000000     1     0
+   48    46 10000000     1     0
+   49    47 10000000     1     0
+   50    48 10000000     1     0
+   51    49 10000000     1     0
+   52    50 10000000     1     0
+   53    51 10000000     1     0
+   54    52 10000000     1     0
+   55    53 10000000     1     0
+   75    73 10000000     1     0
+   76    74 10000000     1     0
+   77    75 10000000     1     0
+   78    76 10000000     1     0
+   79    77 10000000     1     0
+   80    78 10000000     1     0
+   81    79 10000000     1     0
+   82    80 10000000     1     0
+   83    81 10000000     1     0
+   84    82 10000000     1     0
+   85    83 10000000     1     0
+   86    84 10000000     1     0
+   87    85 10000000     1     0
+   88    86 10000000     1     0
+   89    87 10000000     1     0
+   90    88 10000000     1     0
+   91    89 10000000     1     0
+   92    90 10000000     1     0
+   93    91 10000000     1     0
+   94    92 10000000     1     0
+   95    93 10000000     1     0
+   96    94 10000000     1     0
+   97    95 10000000     1     0
+   98    96 10000000     1     0
+   99    97 10000000     1     0
+  100    98 10000000     1     0
+  101    99 10000000     1     0
+  102   100 10000000     1     0
+  103   101 10000000     1     0
+  115   113 10000000     1     0
+  116   114 10000000     1     0
+  117   115 10000000     1     0
+  118   116 10000000     1     0
+  119   117 10000000     1     0
+  120   118 10000000     1     0
+  121   119 10000000     1     0
+  122   120 10000000     1     0
+  123   121 10000000     1     0
+  124   122 10000000     1     0
+  125   123 10000000     1     0
+  126   124 10000000     1     0
+  127   125 10000000     1     0
+  128   126 10000000     1     0
+  129   127 10000000     1     0
+  130   128 10000000     1     0
+  131   129 10000000     1     0
+  132   130 10000000     1     0
+  133   131 10000000     1     0
+  134   132 10000000     1     0
+  135   133 10000000     1     0
+  136   134 10000000     1     0
+  137   135 10000000     1     0
+  138   136 10000000     1     0
+  139   137 10000000     1     0
+  143   141 10000000     1     0
+  144   142 10000000     1     0
+  147   145 10000000     1     0
+  148   146 10000000     1     0
+  166   165 10000000     1     0
+  167   166 10000000     1     0
+  168   167 10000000     1     0
+  169   168 10000000     1     0
+  170   169 10000000     1     0
+  171   170 10000000     1     0
+  172   171 10000000     1     0
+  173   172 10000000     1     0
+  174   173 10000000     1     0
+  175   174 10000000     1     0
+#1 7
+    1     1 10000000     1     0
+    2     2 10000000     1     0
+    3     3 10000000     1     0
+    4     4 10000000     1     0
+    5     5 10000000     1     0
+    6     6 10000000     1     0
+    7     7 10000000     1     0
+    8     8 10000000     1     0
+    9     9 10000000     1     0
+   10    10 10000000     1     0
+   11    11 10000000     1     0
+   27    12 10000000     1     0
+   28    13 10000000     1     0
+   29    14 10000000     1     0
+   30    15 10000000     1     0
+   31    16 10000000     1     0
+   32    17 10000000     1     0
+   33    18 10000000     1     0
+   34    19 10000000     1     0
+   35    20 10000000     1     0
+   36    21 10000000     1     0
+   37    22 10000000     1     0
+   56    23 10000000     1     0
+   57    24 10000000     1     0
+   58    25 10000000     1     0
+   59    26 10000000     1     0
+   60    27 10000000     1     0
+   61    28 10000000     1     0
+   62    29 10000000     1     0
+   64    30 10000000     1     0
+   65    34 10000000     1     0
+   66    35 10000000     1     0
+   67    36 10000000     1     0
+   68    37 10000000     1     0
+   69    38 10000000     1     0
+   70    39 10000000     1     0
+   71    40 10000000     1     0
+   72    41 10000000     1     0
+   73    42 10000000     1     0
+   74    43 10000000     1     0
+  104    44 10000000     1     0
+  105    45 10000000     1     0
+  106    46 10000000     1     0
+  109    47 10000000     1     0
+  110    48 10000000     1     0
+  111    49 10000000     1     0
+  112    50 10000000     1     0
+  113    51 10000000     1     0
+  114    52 10000000     1     0
+  140    53 10000000     1     0
+  141    54 10000000     1     0
+  142    55 10000000     1     0
+  145    56 10000000     1     0
+  146    57 10000000     1     0
+  149    58 10000000     1     0
+  150    59 10000000     1     0
+  151    60 10000000     1     0
+  152    61 10000000     1     0
+  153    62 10000000     1     0
+  154    63 10000000     1     0
+  155    64 10000000     1     0
+  156    65 10000000     1     0
+  157    66 10000000     1     0
+  158    68 10000000     1     0
+  159    69 10000000     1     0
+  160    70 10000000     1     0
+  161    71 10000000     1     0
+  162    72 10000000     1     0
+  163    73 10000000     1     0
+  164    74 10000000     1     0
+#1 9
+   63    31 10000000     1     0
+#1 10
+  107    41 10000000     1     0
+  108    42 10000000     1     0
+  165    71 10000000     1     0
+#2 3
+   14    12 10000000     1     0
+#2 7
+    1     1 10000000     1     0
+    2     2 10000000     1     0
+    5     3 10000000     1     0
+    6     4 10000000     1     0
+    7     5 10000000     1     0
+    8     6 10000000     1     0
+    9     7 10000000     1     0
+   10     8 10000000     1     0
+   11     9 10000000     1     0
+   12    10 10000000     1     0
+   13    11 10000000     1     0
+   35    13 10000000     1     0
+   36    14 10000000     1     0
+   37    15 10000000     1     0
+   38    16 10000000     1     0
+   39    17 10000000     1     0
+   40    18 10000000     1     0
+   41    19 10000000     1     0
+   42    20 10000000     1     0
+   43    21 10000000     1     0
+   44    22 10000000     1     0
+   62    44 10000000     1     0
+   63    45 10000000     1     0
+   64    46 10000000     1     0
+   67    47 10000000     1     0
+   68    48 10000000     1     0
+   69    49 10000000     1     0
+   70    50 10000000     1     0
+   71    51 10000000     1     0
+   72    52 10000000     1     0
+  115    53 10000000     1     0
+  116    54 10000000     1     0
+  117    55 10000000     1     0
+  120    56 10000000     1     0
+  121    57 10000000     1     0
+  128    58 10000000     1     0
+  129    59 10000000     1     0
+  130    60 10000000     1     0
+  131    61 10000000     1     0
+  132    62 10000000     1     0
+  133    63 10000000     1     0
+  134    64 10000000     1     0
+  135    65 10000000     1     0
+  136    66 10000000     1     0
+  137    68 10000000     1     0
+  138    69 10000000     1     0
+  139    70 10000000     1     0
+  140    71 10000000     1     0
+  141    72 10000000     1     0
+  142    73 10000000     1     0
+  143    74 10000000     1     0
+#2 8
+    3     3 10000000     1     0
+#2 9
+    4     3 10000000     1     0
+#2 10
+   65    41 10000000     1     0
+   66    42 10000000     1     0
+  144    71 10000000     1     0
+#3 5
+   82    84 10000000     1     0
+  135   138 10000000     1     0
+#3 6
+  163   160 10000000     1     0
+#3 7
+    1     1 10000000     1     0
+    2     2 10000000     1     0
+    3     3 10000000     1     0
+    4     4 10000000     1     0
+    5     5 10000000     1     0
+    6     6 10000000     1     0
+    7     7 10000000     1     0
+    8     8 10000000     1     0
+    9     9 10000000     1     0
+   10    10 10000000     1     0
+   11    11 10000000     1     0
+   28    12 10000000     1     0
+   29    13 10000000     1     0
+   30    14 10000000     1     0
+   31    15 10000000     1     0
+   32    16 10000000     1     0
+   33    17 10000000     1     0
+   34    18 10000000     1     0
+   35    19 10000000     1     0
+   36    20 10000000     1     0
+   37    21 10000000     1     0
+   38    22 10000000     1     0
+   56    23 10000000     1     0
+   57    24 10000000     1     0
+   58    25 10000000     1     0
+   59    26 10000000     1     0
+   60    27 10000000     1     0
+   61    28 10000000     1     0
+   62    29 10000000     1     0
+   64    30 10000000     1     0
+   65    34 10000000     1     0
+   66    35 10000000     1     0
+   67    36 10000000     1     0
+   68    37 10000000     1     0
+   69    38 10000000     1     0
+   70    39 10000000     1     0
+   71    40 10000000     1     0
+   72    41 10000000     1     0
+   73    42 10000000     1     0
+   74    43 10000000     1     0
+  105    44 10000000     1     0
+  106    45 10000000     1     0
+  107    46 10000000     1     0
+  110    47 10000000     1     0
+  111    48 10000000     1     0
+  112    49 10000000     1     0
+  113    50 10000000     1     0
+  114    51 10000000     1     0
+  115    52 10000000     1     0
+  141    53 10000000     1     0
+  142    54 10000000     1     0
+  143    55 10000000     1     0
+  146    56 10000000     1     0
+  147    57 10000000     1     0
+  150    58 10000000     1     0
+  151    59 10000000     1     0
+  152    60 10000000     1     0
+  153    61 10000000     1     0
+  154    62 10000000     1     0
+  155    63 10000000     1     0
+  156    64 10000000     1     0
+  157    65 10000000     1     0
+  158    66 10000000     1     0
+  159    68 10000000     1     0
+  160    69 10000000     1     0
+  161    70 10000000     1     0
+  162    71 10000000     1     0
+  165    72 10000000     1     0
+  166    73 10000000     1     0
+  167    74 10000000     1     0
+#3 9
+   63    31 10000000     1     0
+#3 10
+  108    41 10000000     1     0
+  109    42 10000000     1     0
+  168    71 10000000     1     0
+#4 5
+   65    69 10000000     1     0
+   80    84 10000000     1     0
+  134   138 10000000     1     0
+  135   139 10000000     1     0
+  136   140 10000000     1     0
+#4 7
+    1     1 10000000     1     0
+    2     2 10000000     1     0
+    6     3 10000000     1     0
+    7     4 10000000     1     0
+    8     5 10000000     1     0
+    9     6 10000000     1     0
+   10     7 10000000     1     0
+   11     8 10000000     1     0
+   12     9 10000000     1     0
+   26    12 10000000     1     0
+   27    13 10000000     1     0
+   28    14 10000000     1     0
+   29    15 10000000     1     0
+   30    16 10000000     1     0
+   31    17 10000000     1     0
+   32    18 10000000     1     0
+   33    19 10000000     1     0
+   34    20 10000000     1     0
+   35    21 10000000     1     0
+   36    22 10000000     1     0
+   55    23 10000000     1     0
+   56    24 10000000     1     0
+   57    25 10000000     1     0
+   58    26 10000000     1     0
+   59    27 10000000     1     0
+   60    28 10000000     1     0
+   61    29 10000000     1     0
+   62    34 10000000     1     0
+   63    35 10000000     1     0
+   64    36 10000000     1     0
+   66    37 10000000     1     0
+   67    38 10000000     1     0
+   68    39 10000000     1     0
+   69    40 10000000     1     0
+   70    41 10000000     1     0
+   71    42 10000000     1     0
+   72    43 10000000     1     0
+  103    44 10000000     1     0
+  104    45 10000000     1     0
+  105    46 10000000     1     0
+  108    47 10000000     1     0
+  109    48 10000000     1     0
+  110    49 10000000     1     0
+  111    50 10000000     1     0
+  112    51 10000000     1     0
+  113    52 10000000     1     0
+  142    53 10000000     1     0
+  143    54 10000000     1     0
+  144    55 10000000     1     0
+  145    56 10000000     1     0
+  146    57 10000000     1     0
+  149    58 10000000     1     0
+  150    59 10000000     1     0
+  151    60 10000000     1     0
+  152    61 10000000     1     0
+  153    62 10000000     1     0
+  154    63 10000000     1     0
+  155    64 10000000     1     0
+  156    65 10000000     1     0
+  157    66 10000000     1     0
+  158    68 10000000     1     0
+  159    69 10000000     1     0
+  160    70 10000000     1     0
+  161    72 10000000     1     0
+  162    73 10000000     1     0
+  163    74 10000000     1     0
+#4 8
+    3     3 10000000     1     0
+    4     4 10000000     1     0
+#4 9
+    5     3 10000000     1     0
+#4 10
+  106    41 10000000     1     0
+  107    42 10000000     1     0
+  164    71 10000000     1     0
+#5 7
+    1     1 10000000     1     0
+    2     2 10000000     1     0
+    5     3 10000000     1     0
+    6     4 10000000     1     0
+    7     5 10000000     1     0
+    8     6 10000000     1     0
+    9     7 10000000     1     0
+   10     8 10000000     1     0
+   11     9 10000000     1     0
+   12    10 10000000     1     0
+   28    12 10000000     1     0
+   29    13 10000000     1     0
+   30    14 10000000     1     0
+   31    15 10000000     1     0
+   32    16 10000000     1     0
+   33    17 10000000     1     0
+   34    18 10000000     1     0
+   35    19 10000000     1     0
+   36    20 10000000     1     0
+   37    21 10000000     1     0
+   38    22 10000000     1     0
+   57    23 10000000     1     0
+   58    24 10000000     1     0
+   59    25 10000000     1     0
+   60    26 10000000     1     0
+   61    27 10000000     1     0
+   62    28 10000000     1     0
+   63    29 10000000     1     0
+   65    30 10000000     1     0
+   66    34 10000000     1     0
+   67    35 10000000     1     0
+   68    36 10000000     1     0
+   70    37 10000000     1     0
+   71    38 10000000     1     0
+   72    39 10000000     1     0
+   73    40 10000000     1     0
+   74    41 10000000     1     0
+   75    42 10000000     1     0
+   76    43 10000000     1     0
+  107    44 10000000     1     0
+  108    45 10000000     1     0
+  109    46 10000000     1     0
+  112    47 10000000     1     0
+  113    48 10000000     1     0
+  114    49 10000000     1     0
+  115    50 10000000     1     0
+  116    51 10000000     1     0
+  117    52 10000000     1     0
+  146    53 10000000     1     0
+  147    54 10000000     1     0
+  148    55 10000000     1     0
+  149    56 10000000     1     0
+  150    57 10000000     1     0
+  153    58 10000000     1     0
+  154    59 10000000     1     0
+  155    60 10000000     1     0
+  156    61 10000000     1     0
+  157    62 10000000     1     0
+  158    63 10000000     1     0
+  159    64 10000000     1     0
+  160    65 10000000     1     0
+  161    66 10000000     1     0
+  162    68 10000000     1     0
+  163    69 10000000     1     0
+  164    70 10000000     1     0
+  165    72 10000000     1     0
+  166    73 10000000     1     0
+  167    74 10000000     1     0
+#5 8
+    3     3 10000000     1     0
+#5 9
+    4     3 10000000     1     0
+   64    31 10000000     1     0
+#5 10
+  110    41 10000000     1     0
+  111    42 10000000     1     0
+  168    71 10000000     1     0
+#6 7
+    1     3 10000000     1     0
+    2     4 10000000     1     0
+    3     5 10000000     1     0
+    4     6 10000000     1     0
+    5     7 10000000     1     0
+    6     8 10000000     1     0
+    7     9 10000000     1     0
+    8    10 10000000     1     0
+    9    11 10000000     1     0
+   25    12 10000000     1     0
+   26    13 10000000     1     0
+   27    14 10000000     1     0
+   28    15 10000000     1     0
+   29    16 10000000     1     0
+   30    17 10000000     1     0
+   31    18 10000000     1     0
+   32    19 10000000     1     0
+   33    20 10000000     1     0
+   34    21 10000000     1     0
+   35    22 10000000     1     0
+   54    23 10000000     1     0
+   55    24 10000000     1     0
+   56    25 10000000     1     0
+   57    26 10000000     1     0
+   58    27 10000000     1     0
+   59    28 10000000     1     0
+   60    29 10000000     1     0
+   62    30 10000000     1     0
+   63    34 10000000     1     0
+   64    35 10000000     1     0
+   65    36 10000000     1     0
+   66    37 10000000     1     0
+   67    38 10000000     1     0
+   68    39 10000000     1     0
+   69    40 10000000     1     0
+   70    41 10000000     1     0
+   71    42 10000000     1     0
+   72    43 10000000     1     0
+  102    44 10000000     1     0
+  103    45 10000000     1     0
+  104    46 10000000     1     0
+  107    47 10000000     1     0
+  108    48 10000000     1     0
+  109    49 10000000     1     0
+  110    50 10000000     1     0
+  111    51 10000000     1     0
+  112    52 10000000     1     0
+  138    53 10000000     1     0
+  139    54 10000000     1     0
+  140    55 10000000     1     0
+  143    56 10000000     1     0
+  144    57 10000000     1     0
+  147    58 10000000     1     0
+  148    59 10000000     1     0
+  149    60 10000000     1     0
+  150    61 10000000     1     0
+  151    62 10000000     1     0
+  152    63 10000000     1     0
+  153    64 10000000     1     0
+  154    65 10000000     1     0
+  155    66 10000000     1     0
+  156    68 10000000     1     0
+  157    69 10000000     1     0
+  158    70 10000000     1     0
+  159    71 10000000     1     0
+  161    72 10000000     1     0
+  162    73 10000000     1     0
+  163    74 10000000     1     0
+#6 9
+   61    31 10000000     1     0
+#6 10
+  105    41 10000000     1     0
+  106    42 10000000     1     0
+  164    71 10000000     1     0
+#7 8
+    1     1 10000000     1     0
+    2     2 10000000     1     0
+    3     6 10000000     1     0
+    4     7 10000000     1     0
+    5     8 10000000     1     0
+    6     9 10000000     1     0
+    7    10 10000000     1     0
+    8    11 10000000     1     0
+    9    12 10000000     1     0
+   10    13 10000000     1     0
+   11    14 10000000     1     0
+   12    15 10000000     1     0
+   13    16 10000000     1     0
+   14    17 10000000     1     0
+   15    18 10000000     1     0
+   16    19 10000000     1     0
+   17    20 10000000     1     0
+   18    21 10000000     1     0
+   19    22 10000000     1     0
+   20    23 10000000     1     0
+   21    24 10000000     1     0
+   22    25 10000000     1     0
+   27    26 10000000     1     0
+   28    27 10000000     1     0
+   29    28 10000000     1     0
+   30    29 10000000     1     0
+   31    30 10000000     1     0
+   32    31 10000000     1     0
+   33    32 10000000     1     0
+   34    33 10000000     1     0
+   35    34 10000000     1     0
+   36    35 10000000     1     0
+   37    36 10000000     1     0
+   38    37 10000000     1     0
+   39    38 10000000     1     0
+   40    39 10000000     1     0
+   41    40 10000000     1     0
+   42    41 10000000     1     0
+   43    42 10000000     1     0
+   44    43 10000000     1     0
+   45    44 10000000     1     0
+   46    45 10000000     1     0
+   47    48 10000000     1     0
+   48    49 10000000     1     0
+   49    50 10000000     1     0
+   50    51 10000000     1     0
+   51    52 10000000     1     0
+   52    53 10000000     1     0
+   53    54 10000000     1     0
+   54    55 10000000     1     0
+   55    56 10000000     1     0
+   56    57 10000000     1     0
+   57    58 10000000     1     0
+   58    59 10000000     1     0
+   59    60 10000000     1     0
+   60    61 10000000     1     0
+   61    62 10000000     1     0
+   62    63 10000000     1     0
+   63    64 10000000     1     0
+   64    65 10000000     1     0
+   65    66 10000000     1     0
+   66    67 10000000     1     0
+#7 9
+    1     1 10000000     1     0
+    2     2 10000000     1     0
+    3     4 10000000     1     0
+    4     5 10000000     1     0
+    5     6 10000000     1     0
+    6     7 10000000     1     0
+    7     8 10000000     1     0
+    8     9 10000000     1     0
+    9    10 10000000     1     0
+   10    11 10000000     1     0
+   11    12 10000000     1     0
+   12    13 10000000     1     0
+   13    14 10000000     1     0
+   14    15 10000000     1     0
+   15    16 10000000     1     0
+   16    17 10000000     1     0
+   17    18 10000000     1     0
+   18    19 10000000     1     0
+   19    20 10000000     1     0
+   20    21 10000000     1     0
+   21    22 10000000     1     0
+   22    23 10000000     1     0
+   23    24 10000000     1     0
+   24    25 10000000     1     0
+   25    26 10000000     1     0
+   26    27 10000000     1     0
+   27    28 10000000     1     0
+   28    29 10000000     1     0
+   29    30 10000000     1     0
+   30    32 10000000     1     0
+   31    33 10000000     1     0
+   32    34 10000000     1     0
+   33    35 10000000     1     0
+   34    36 10000000     1     0
+   35    37 10000000     1     0
+   36    38 10000000     1     0
+   37    39 10000000     1     0
+   38    40 10000000     1     0
+   39    41 10000000     1     0
+   40    42 10000000     1     0
+   41    43 10000000     1     0
+   42    44 10000000     1     0
+   43    45 10000000     1     0
+   44    46 10000000     1     0
+   45    47 10000000     1     0
+   46    48 10000000     1     0
+   47    51 10000000     1     0
+   48    52 10000000     1     0
+   49    53 10000000     1     0
+   50    54 10000000     1     0
+   51    55 10000000     1     0
+   52    56 10000000     1     0
+   53    57 10000000     1     0
+   54    58 10000000     1     0
+   55    59 10000000     1     0
+   56    60 10000000     1     0
+   57    61 10000000     1     0
+   58    62 10000000     1     0
+   59    63 10000000     1     0
+   60    64 10000000     1     0
+   61    65 10000000     1     0
+   62    66 10000000     1     0
+   63    67 10000000     1     0
+   64    68 10000000     1     0
+   65    69 10000000     1     0
+   66    70 10000000     1     0
+   67    71 10000000     1     0
+   68    72 10000000     1     0
+   69    73 10000000     1     0
+   70    74 10000000     1     0
+   71    75 10000000     1     0
+   72    76 10000000     1     0
+   73    77 10000000     1     0
+   74    78 10000000     1     0
+#7 10
+    1     1 10000000     1     0
+    4     2 10000000     1     0
+    5     3 10000000     1     0
+    6     4 10000000     1     0
+    7     5 10000000     1     0
+    8     6 10000000     1     0
+    9     7 10000000     1     0
+   10     8 10000000     1     0
+   11     9 10000000     1     0
+   12    10 10000000     1     0
+   13    11 10000000     1     0
+   14    12 10000000     1     0
+   15    13 10000000     1     0
+   16    14 10000000     1     0
+   17    15 10000000     1     0
+   18    16 10000000     1     0
+   19    17 10000000     1     0
+   20    18 10000000     1     0
+   21    19 10000000     1     0
+   22    20 10000000     1     0
+   27    21 10000000     1     0
+   28    22 10000000     1     0
+   29    23 10000000     1     0
+   30    24 10000000     1     0
+   31    25 10000000     1     0
+   32    26 10000000     1     0
+   33    27 10000000     1     0
+   34    28 10000000     1     0
+   35    29 10000000     1     0
+   36    30 10000000     1     0
+   37    31 10000000     1     0
+   38    32 10000000     1     0
+   39    33 10000000     1     0
+   40    34 10000000     1     0
+   41    35 10000000     1     0
+   42    36 10000000     1     0
+   43    37 10000000     1     0
+   44    38 10000000     1     0
+   45    39 10000000     1     0
+   46    40 10000000     1     0
+   47    43 10000000     1     0
+   48    44 10000000     1     0
+   49    45 10000000     1     0
+   50    46 10000000     1     0
+   51    47 10000000     1     0
+   52    48 10000000     1     0
+   53    49 10000000     1     0
+   54    50 10000000     1     0
+   55    51 10000000     1     0
+   56    52 10000000     1     0
+   57    53 10000000     1     0
+   58    54 10000000     1     0
+   59    55 10000000     1     0
+   60    56 10000000     1     0
+   61    57 10000000     1     0
+   62    58 10000000     1     0
+   63    59 10000000     1     0
+   64    60 10000000     1     0
+   65    61 10000000     1     0
+   66    62 10000000     1     0
+   67    63 10000000     1     0
+   68    64 10000000     1     0
+   69    65 10000000     1     0
+   70    66 10000000     1     0
+   71    67 10000000     1     0
+   72    68 10000000     1     0
+   73    69 10000000     1     0
+   74    70 10000000     1     0
+#8 9
+    5     3 10000000     1     0
+#8 10
+   46    41 10000000     1     0
+   47    42 10000000     1     0
+#9 10
+   49    41 10000000     1     0
+   50    42 10000000     1     0
+   79    71 10000000     1     0
+! CPU 0
+! SEQ_1_TO_N
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/users/cn/cmagis/
+ORBIT_SOCKETDIR=/tmp/orbit-cmagis
+HOSTNAME=brasil
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+GIO_LAUNCHED_DESKTOP_FILE_PID=13637
+MCOFFEE_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//mcoffee/
+GPG_AGENT_INFO=/tmp/seahorse-3oGFZj/S.gpg-agent:13286:1;
+ROOT_TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/
+TERM=xterm
+SHELL=/bin/bash
+XDG_SESSION_COOKIE=78ca754cf49d9d17b2c0859500000020-1472467836.368722-1926617865
+HISTSIZE=1000
+PERL5LIB=:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/perl/lib/perl5
+GTK_RC_FILES=/etc/gtk/gtkrc:/users/cn/cmagis/.gtkrc-1.2-gnome2
+WINDOWID=33313398
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+METHODS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//methods/
+IMSETTINGS_MODULE=none
+http_proxy=
+HTTP_proxy=
+USER=cmagis
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-y1Hwrp/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-y1Hwrp/socket
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/13210,unix/unix:/tmp/.ICE-unix/13210
+USERNAME=cmagis
+ENV_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//.t_coffee_env
+GIO_LAUNCHED_DESKTOP_FILE=/users/cn/cmagis/Desktop/gnome-terminal.desktop
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+DESKTOP_SESSION=gnome
+MAIL=/var/spool/mail/cmagis
+PATH=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/users/cn/cmagis/bin:/users/cn/cmagis/bin
+_=/usr/bin/printenv
+ALN_LINE_LENGTH=160
+QT_IM_MODULE=xim
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/
+PWD=/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/users/cn/cmagis/.t_coffee/cache//
+XMODIFIERS=@im=none
+GDM_KEYBOARD_LAYOUT=us	intl
+GNOME_KEYRING_PID=13200
+LANG=en_US.UTF-8
+KDE_IS_PRELINKED=1
+GDM_LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+KDEDIRS=/usr
+GDMSESSION=gnome
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HISTCONTROL=ignoredups
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/
+SHLVL=4
+HOME=/users/cn/cmagis
+DUMP_4_TCOFFEE=t_coffee.7.8kcgKFyhpp.dump
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+HTTP_PROXY=
+MAFFT_BINARIES=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/plugins/linux/
+LOGNAME=cmagis
+CVS_RSH=ssh
+EMAIL_4_TCOFFEE=cedrik.magis@crg.es
+QTLIB=/usr/lib64/qt-3.3/lib
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-H13VKolxki,guid=b1ccb896c3103c0a8fe39b81000001d2
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+EMAIL=cedrik.magis@crg.es
+UPDATED_ENV_4_TCOFFEE=1
+WINDOWPATH=1
+DISPLAY=:0.0
+ALL_proxy=
+PROXY_4_TCOFFEE=cedrik.magis@crg.es
+LOCKDIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/lck//
+G_BROKEN_FILENAMES=1
+TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/tco/63727588/
+XAUTHORITY=/var/run/gdm/auth-for-cmagis-E59HTd/database
+COLORTERM=gnome-terminal
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.7.8kcgKFyhpp.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_faq.rst</source>
+<line>157</line>
+</ref>

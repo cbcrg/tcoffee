@@ -1,0 +1,3410 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -profile=sample_aln1.aln,sample_aln2.aln -outfile han_solo</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=953, Nseq=16, Len=217 
+
+hmgb_chite      ad---kpkrplsay------m---------------lwlnsaresi------------------krenpdf-kvtevak-kggelwr------------------------------glk--dksewe--------------------------------
+hmgt_mouse      k-----pkrprsay------n---------------iyvsesfqea----------------------kdd-saqgklk-lvneawk------------------------------nlspeekqayi--------------------------------
+hmgl_wheat      dp--nkpkrapsaf------f---------------vfmgefreef------------------kqknpknksvaavgk-aagerwk------------------------------slsesekapyv--------------------------------
+hmgl_trybr      kkdsnapkramtsf------m---------------ffssdfrskh----------------------sdl-sivemsk-aagaawk------------------------------elgpeerkvye--------------------------------
+1cms            GE---VASVPLTNY------LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGKPLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLASEY---S
+4pep            -----IGDEPLENY------LDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISASG---A
+4ape            STG-SATTTPIDS-------LDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNTVSPTQQ
+3app            AASGVATNTPTA--------NDEEYITPVTIGG--TTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSA-----TGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINTVQPQSQ
+2apr            AG---VGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTN-CGSGQTKYDPNQSS---TYQ-ADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFDTITTVRG--V
+1cms_1          YTG-SLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLVGPSS------------------------------------------------------DILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAY---T
+1cms            --GEVASVPLT-------NYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPR-KSS---TFQNLGKPLSIHYGTG-SMQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLASEY---S
+4pep            ----IGDEPLE-------NYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPD-DSS---TFEATSQELSITYGTG-SMTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISASG---A
+4ape            -STGSATTTPI-------DSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKSTT---AKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNTVSPTQQ
+3app            AASGVATNTPT-------AN-DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTELPASQQSGHSVYNP--SAT---GKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINTVQPQSQ
+2apr            AGVGTVPMTDY-------GN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTNCG-SGQTKYDPN-QSS---TYQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASGPN-D--------GLLGLGFDTITTVR--GV
+1cms_1          ------------------------YTGSLHWVPVTVQQYWQFTVDS---VTISGVVVACEGGCQAILDTG-TSK---LVGPSSDILNIQQAIG-ATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTS--------QDQGFCTSGFQSEN----
+                                                                                                                                                                                
+
+hmgb_chite      --------------aka--at------akqnyiralqeyer--ng-----------g
+hmgt_mouse      --------------qla--kd------drirydnemkswee--qm--a--------e
+hmgl_wheat      --------------aka--nk------lkgeynkaiaaynk--ge--s--------a
+hmgl_trybr      --------------ema--ek------dkerykrem---------------------
+1cms            IPV--------F--DNMMNRH----LVAQDLFSVYM-DRNG--QESMLTLGAIDPSY
+4pep            TPV--------F--DNLWDQG----LVSQDLFSVYL-SSNDD-SGSVVLLGGIDSSY
+4ape            KTF--------F--DNA--KA----SLDSPVFTADL-GYH---APGTYNFGFIDTTA
+3app            TTF--------F--DTV--KS----SLAQPLFAVAL-KHQ---QPGVYDFGFIDSSK
+2apr            KTP--------M--DNLISQG----LISRPIFGVYL-GKAKNGGGGEYIFGGYDSTK
+1cms_1          S-QDQGFCTSGFQSENHSQKWILGDVFIREYYSVFD-RANN--LVGLA--KAI----
+1cms            IPVFDNM--------------MNRHLVAQDLFSVYMDR-NGQE--SMLTLGAIDPSY
+4pep            TPVFDNL--------------WDQGLVSQDLFSVYLSS-NDDSG-SVVLLGGIDSSY
+4ape            KTFFDNA--------------KAS--LDSPVFTADLGY-HAPG---TYNFGFIDTTA
+3app            TTFFDTV--------------KSS--LAQPLFAVALKH-QQPG---VYDFGFIDSSK
+2apr            KTPMDNL--------------ISQGLISRPIFGVYLGK-AKNGGGGEYIFGGYDSTK
+1cms_1          --HSQKW--------------ILGDVFIREYYSVFDRA-NNLVG----LAKAI----
+                                               :                         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[1] 	sample_aln1.aln	sample_aln2.aln
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[1] 	han_solo
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.alnn_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.alnn_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.alnn_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+
+!		[Final Evaluation][TOT=    9][  0 %]!		[Final Evaluation][TOT=    9][ 22 %]!		[Final Evaluation][TOT=    9][ 33 %]!		[Final Evaluation][TOT=    9][ 44 %]!		[Final Evaluation][TOT=    9][ 55 %]!		[Final Evaluation][TOT=    9][ 66 %]!		[Final Evaluation][TOT=    9][ 77 %]!		[Final Evaluation][TOT=    9][ 88 %]!		[Final Evaluation][TOT=    9][100 %]
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+n_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (R) sample_aln1.aln  Format clustal_aln
+	Input File (R) sample_aln2.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 2 SEQUENCES  [PROTEIN]
+  Input File                 Seq sample_aln1.aln Length  217 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln1.aln, File=sample_aln1.aln
+  Input File                 Seq sample_aln2.aln Length  184 type PROTEIN Struct Unchecked
+	Profile: Template=sample_aln2.aln, File=sample_aln2.aln
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Rsample_aln1.aln
+	--- Process Method/Library/Aln Rsample_aln2.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Rsample_aln1.aln
+	xxx Retrieved Rsample_aln2.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [674]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [674]--->[526]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][---Two Sequences Only: Make Dummy Pair-Tree ---]
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sample_aln1.aln
+Group    2: sample_aln2.aln
+
+
+	Group    3: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  217][PID:13919]
+
+
+
+
+OUTPUT RESULTS
+	#### File Type= MSA             Format= aln             Name= han_solo
+	#### File Type= MSA             Format= html            Name= han_solo.html
+	#### File Type= Template Profile Format= fasta_aln       Name= sample_aln1.aln
+	#### File Type= Template Profile Format= fasta_aln       Name= sample_aln2.aln
+
+# Command Line: t_coffee -profile sample_aln1.aln sample_aln2.aln -outfile han_solo  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 32.298 Mb, Max= 33.268 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln1.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=500, Nseq=10, Len=217 
+
+hmgb_chite      ad---kpkrplsay------m---------------lwlnsaresi------------------krenpdf-kvtevak-kggelwr------------------------------glk--dksewe--------------------------------
+hmgt_mouse      k-----pkrprsay------n---------------iyvsesfqea----------------------kdd-saqgklk-lvneawk------------------------------nlspeekqayi--------------------------------
+hmgl_wheat      dp--nkpkrapsaf------f---------------vfmgefreef------------------kqknpknksvaavgk-aagerwk------------------------------slsesekapyv--------------------------------
+hmgl_trybr      kkdsnapkramtsf------m---------------ffssdfrskh----------------------sdl-sivemsk-aagaawk------------------------------elgpeerkvye--------------------------------
+1cms            GE---VASVPLTNY------LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGKPLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLASEY---S
+4pep            -----IGDEPLENY------LDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISASG---A
+4ape            STG-SATTTPIDS-------LDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNTVSPTQQ
+3app            AASGVATNTPTA--------NDEEYITPVTIGG--TTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSA-----TGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINTVQPQSQ
+2apr            AG---VGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTN-CGSGQTKYDPNQSS---TYQ-ADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFDTITTVRG--V
+1cms_1          YTG-SLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLVGPSS------------------------------------------------------DILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAY---T
+                         .                                                                                                                                                      
+
+hmgb_chite      --------------aka--at------akqnyiralqeyer--ng-----------g
+hmgt_mouse      --------------qla--kd------drirydnemkswee--qm--a--------e
+hmgl_wheat      --------------aka--nk------lkgeynkaiaaynk--ge--s--------a
+hmgl_trybr      --------------ema--ek------dkerykrem---------------------
+1cms            IPV--------F--DNMMNRH----LVAQDLFSVYM-DRNG--QESMLTLGAIDPSY
+4pep            TPV--------F--DNLWDQG----LVSQDLFSVYL-SSNDD-SGSVVLLGGIDSSY
+4ape            KTF--------F--DNA--KA----SLDSPVFTADL-GYH---APGTYNFGFIDTTA
+3app            TTF--------F--DTV--KS----SLAQPLFAVAL-KHQ---QPGVYDFGFIDSSK
+2apr            KTP--------M--DNLISQG----LISRPIFGVYL-GKAKNGGGGEYIFGGYDSTK
+1cms_1          S-QDQGFCTSGFQSENHSQKWILGDVFIREYYSVFD-RANN--LVGLA--KAI----
+                                               :                         
+
+
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_aln2.aln</name>
+<content>
+CLUSTAL W (1.83) multiple sequence alignment
+
+
+1cms            --GEVASVPLTNYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRF
+4pep            ----IGDEPLENYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQF
+4ape            -STGSATTTPIDSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIY
+3app            AASGVATNTPTAN-DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTELPASQQSGHSVY
+2apr            AGVGTVPMTDYGN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTNCG-SGQTKY
+1cms_1          -----------------YTGSLHWVPVTVQQYWQFTVDS---VTISGVVVACEGGCQAIL
+                                 *   :            * ..*      *          :   
+
+1cms            DPR-KSSTFQNLGKPLSIHYGTG-SMQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTY
+4pep            NPD-DSSTFEATSQELSITYGTG-SMTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYY
+4ape            TPSKSTTAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTED
+3app            NP--SATGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQD
+2apr            DPN-QSSTYQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASG
+1cms_1          DTG-TSKLVGPSSDILNIQQAIG-ATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPS
+                 .   :.     .   .*  . * :  .      :  ..:      .         .   
+
+1cms            AEFDGILGMAYPSLASEY---SIPVFDNMMNRHLVAQDLFSVYMDRNGQE--SMLTLGAI
+4pep            APFDGILGLAYPSISASG---ATPVFDNLWDQGLVSQDLFSVYLSSNDDSG-SVVLLGGI
+4ape            STIDGLLGLAFSTLNTVSPTQQKTFFDNAKAS--LDSPVFTADLGYHAPG---TYNFGFI
+3app            TNNDGLLGLAFSSINTVQPQSQTTFFDTVKSS--LAQPLFAVALKHQQPG---VYDFGFI
+2apr            PN-DGLLGLGFDTITTVR--GVKTPMDNLISQGLISRPIFGVYLGKAKNGGGGEYIFGGY
+1cms_1          AYTSQDQGFCTSGFQSEN------HSQKWILGDVFIREYYSVFDRANNLVG----LAKAI
+                .  .   *:    : :          :.      .    : .                  
+
+1cms            DPSY
+4pep            DSSY
+4ape            DTTA
+3app            DSSK
+2apr            DSTK
+1cms_1          ----
+                    
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>han_solo</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=953, Nseq=16, Len=217 
+
+hmgb_chite      ad---kpkrplsay------m---------------lwlnsaresi------------------krenpdf-kvtevak-kggelwr------------------------------glk--dksewe--------------------------------
+hmgt_mouse      k-----pkrprsay------n---------------iyvsesfqea----------------------kdd-saqgklk-lvneawk------------------------------nlspeekqayi--------------------------------
+hmgl_wheat      dp--nkpkrapsaf------f---------------vfmgefreef------------------kqknpknksvaavgk-aagerwk------------------------------slsesekapyv--------------------------------
+hmgl_trybr      kkdsnapkramtsf------m---------------ffssdfrskh----------------------sdl-sivemsk-aagaawk------------------------------elgpeerkvye--------------------------------
+1cms            GE---VASVPLTNY------LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS---TFQ-NLGKPLSIHYGTGS-MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLASEY---S
+4pep            -----IGDEPLENY------LDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS---TFE-ATSQELSITYGTGS-MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISASG---A
+4ape            STG-SATTTPIDS-------LDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST---TAKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNTVSPTQQ
+3app            AASGVATNTPTA--------NDEEYITPVTIGG--TTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSA-----TGKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINTVQPQSQ
+2apr            AG---VGTVPMTDYG-----NDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTN-CGSGQTKYDPNQSS---TYQ-ADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFAS-GPND--------GLLGLGFDTITTVRG--V
+1cms_1          YTG-SLHWVPVTVQQYWQFTVDSVTISGVVVACEG-GCQAILDTGTSKLVGPSS------------------------------------------------------DILNIQQAIGATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAY---T
+1cms            --GEVASVPLT-------NYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPR-KSS---TFQNLGKPLSIHYGTG-SMQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD--------GILGMAYPSLASEY---S
+4pep            ----IGDEPLE-------NYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPD-DSS---TFEATSQELSITYGTG-SMTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD--------GILGLAYPSISASG---A
+4ape            -STGSATTTPI-------DSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKSTT---AKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID--------GLLGLAFSTLNTVSPTQQ
+3app            AASGVATNTPT-------AN-DEEYITPVTIG--GTTLNLNFDTGSADLWVFSTELPASQQSGHSVYNP--SAT---GKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND--------GLLGLAFSSINTVQPQSQ
+2apr            AGVGTVPMTDY-------GN-DIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTNCG-SGQTKYDPN-QSS---TYQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASGPN-D--------GLLGLGFDTITTVR--GV
+1cms_1          ------------------------YTGSLHWVPVTVQQYWQFTVDS---VTISGVVVACEGGCQAILDTG-TSK---LVGPSSDILNIQQAIG-ATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTS--------QDQGFCTSGFQSEN----
+                                                                                                                                                                                
+
+hmgb_chite      --------------aka--at------akqnyiralqeyer--ng-----------g
+hmgt_mouse      --------------qla--kd------drirydnemkswee--qm--a--------e
+hmgl_wheat      --------------aka--nk------lkgeynkaiaaynk--ge--s--------a
+hmgl_trybr      --------------ema--ek------dkerykrem---------------------
+1cms            IPV--------F--DNMMNRH----LVAQDLFSVYM-DRNG--QESMLTLGAIDPSY
+4pep            TPV--------F--DNLWDQG----LVSQDLFSVYL-SSNDD-SGSVVLLGGIDSSY
+4ape            KTF--------F--DNA--KA----SLDSPVFTADL-GYH---APGTYNFGFIDTTA
+3app            TTF--------F--DTV--KS----SLAQPLFAVAL-KHQ---QPGVYDFGFIDSSK
+2apr            KTP--------M--DNLISQG----LISRPIFGVYL-GKAKNGGGGEYIFGGYDSTK
+1cms_1          S-QDQGFCTSGFQSENHSQKWILGDVFIREYYSVFD-RANN--LVGLA--KAI----
+1cms            IPVFDNM--------------MNRHLVAQDLFSVYMDR-NGQE--SMLTLGAIDPSY
+4pep            TPVFDNL--------------WDQGLVSQDLFSVYLSS-NDDSG-SVVLLGGIDSSY
+4ape            KTFFDNA--------------KAS--LDSPVFTADLGY-HAPG---TYNFGFIDTTA
+3app            TTFFDTV--------------KSS--LAQPLFAVALKH-QQPG---VYDFGFIDSSK
+2apr            KTPMDNL--------------ISQGLISRPIFGVYLGK-AKNGGGGEYIFGGYDSTK
+1cms_1          --HSQKW--------------ILGDVFIREYYSVFDRA-NNLVG----LAKAI----
+                                               :                         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>han_solo.html</name>
+<content>
+<html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=953</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=value9>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;97</span><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;95</span><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>ad</span><span class=valuegap>---</span><span class=value9>kpkrp</span><span class=value8>lsa</span><span class=value9>y</span><span class=valuegap>------</span><span class=value9>m</span><span class=valuegap>---------------</span><span class=value9>lwlnsaresi</span><span class=valuegap>------------------</span><span class=value9>krenpdf</span><span class=valuegap>-</span><span class=value9>kvtev</span><span class=value8>a</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>kggelwr</span><span class=valuegap>------------------------------</span><span class=value9>glk</span><span class=valuegap>--</span><span class=value9>dksewe</span><span class=valuegap>----------------------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value9>k</span><span class=valuegap>-----</span><span class=value9>pkrp</span><span class=value8>rsa</span><span class=value9>y</span><span class=valuegap>------</span><span class=value9>n</span><span class=valuegap>---------------</span><span class=value9>iyvsesfqea</span><span class=valuegap>----------------------</span><span class=value9>kdd</span><span class=valuegap>-</span><span class=value9>saqgk</span><span class=value8>l</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>lvneawk</span><span class=valuegap>------------------------------</span><span class=value9>nlspeekqayi</span><span class=valuegap>----------------------</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>dp</span><span class=valuegap>--</span><span class=value9>nkpkra</span><span class=value8>psa</span><span class=value9>f</span><span class=valuegap>------</span><span class=value9>f</span><span class=valuegap>---------------</span><span class=value9>vfmgefreef</span><span class=valuegap>------------------</span><span class=value9>kqknpknksvaav</span><span class=value8>g</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>aagerwk</span><span class=valuegap>------------------------------</span><span class=value9>slsesekapyv</span><span class=valuegap>----------------------</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>kkdsnapkra</span><span class=value8>mts</span><span class=value9>f</span><span class=valuegap>------</span><span class=value9>m</span><span class=valuegap>---------------</span><span class=value9>ffssdfrskh</span><span class=valuegap>----------------------</span><span class=value9>sdl</span><span class=valuegap>-</span><span class=value9>sivem</span><span class=value8>s</span><span class=value9>k</span><span class=valuegap>-</span><span class=value9>aagaawk</span><span class=valuegap>------------------------------</span><span class=value9>elgpeerkvye</span><span class=valuegap>----------------------</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GE</span><span class=valuegap>---</span><span class=value9>VASVP</span><span class=value8>LTN</span><span class=value9>Y</span><span class=valuegap>------</span><span class=value9>LDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPRKSS</span><span class=valuegap>---</span><span class=value9>T</span><span class=value8>F</span><span class=value9>Q</span><span class=valuegap>-</span><span class=value9>NLGKPLSIHYGTGS</span><span class=valuegap>-</span><span class=value9>MQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>ILGMAYP</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>IGDEP</span><span class=value8>LEN</span><span class=value9>Y</span><span class=valuegap>------</span><span class=value9>LDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPDDSS</span><span class=valuegap>---</span><span class=value9>T</span><span class=value8>F</span><span class=value9>E</span><span class=valuegap>-</span><span class=value9>ATSQELSITYGTGS</span><span class=valuegap>-</span><span class=value9>MTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>ILGLAYP</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>STG</span><span class=valuegap>-</span><span class=value9>SATTTP</span><span class=value8>IDS</span><span class=valuegap>-------</span><span class=value9>LDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKST</span><span class=valuegap>---</span><span class=value9>T</span><span class=value8>A</span><span class=value9>KLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>LLGLAFS</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AASGVATNTP</span><span class=value8>TA</span><span class=valuegap>--------</span><span class=value9>NDEEYITPVTIGG</span><span class=valuegap>--</span><span class=value9>TTLNLNFDTGSADLWVFSTELPASQQSGHSVYNPSA</span><span class=valuegap>-----</span><span class=value9>T</span><span class=value8>G</span><span class=value9>KELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>LLGLAFS</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AG</span><span class=valuegap>---</span><span class=value9>VGTVP</span><span class=value8>MTD</span><span class=value9>YG</span><span class=valuegap>-----</span><span class=value9>NDIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTN</span><span class=valuegap>-</span><span class=value9>CGSGQTKYDPNQSS</span><span class=valuegap>---</span><span class=value9>T</span><span class=value8>Y</span><span class=value9>Q</span><span class=valuegap>-</span><span class=value9>ADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFAS</span><span class=valuegap>-</span><span class=value9>GPND</span><span class=valuegap>--------</span><span class=value8>G</span><span class=value9>LLGLGFD</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>YTG</span><span class=valuegap>-</span><span class=value9>SLHWVP</span><span class=value8>VTV</span><span class=value9>QQYWQ</span><span class=value8>F</span><span class=value9>TVDSVTISGVVVACEG</span><span class=valuegap>-</span><span class=value9>GCQAILDTGTSKLVGPSS</span><span class=valuegap>------------------------------------------------------</span><span class=value9>DILNIQQAIGATQNQYGEFDIDCDNL</span><span class=value8>S</span><span class=value9>YMPTVV</span><span class=value8>FE</span><span class=value9>INGKMYP</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>GEVASVPLT</span><span class=valuegap>-------</span><span class=value9>NYLDSQYFGKIYLGTPPQEFTVLFDTGSSDFWVPSIYCKSNACKNHQRFDPR</span><span class=valuegap>-</span><span class=value9>KSS</span><span class=valuegap>---</span><span class=value9>TFQNLGKPLSIHYGTG</span><span class=valuegap>-</span><span class=value9>SMQGILGYDTVTVSNIVDIQQTVGLSTQEPGDVFTYAEFD</span><span class=valuegap>--------</span><span class=value9>GILGMAYP</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>IGDEPLE</span><span class=valuegap>-------</span><span class=value9>NYLDTEYFGTIGIGTPAQDFTVIFDTGSSNLWVPSVYCSSLACSDHNQFNPD</span><span class=valuegap>-</span><span class=value9>DSS</span><span class=valuegap>---</span><span class=value9>TFEATSQELSITYGTG</span><span class=valuegap>-</span><span class=value9>SMTGILGYDTVQVGGISDTNQIFGLSETEPGSFLYYAPFD</span><span class=valuegap>--------</span><span class=value9>GILGLAYP</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>STGSATTTPI</span><span class=valuegap>-------</span><span class=value9>DSLDDAYITPVQIGTPAQTLNLDFDTGSSDLWVFSSETTASEVDGQTIYTPSKSTT</span><span class=valuegap>---</span><span class=value9>AKLLSGATWSISYGDGSSSSGDVYTDTVSVGGLTVTGQAVESAKKVSSSFTEDSTID</span><span class=valuegap>--------</span><span class=value9>GLLGLAFS</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AASGVATNTPT</span><span class=valuegap>-------</span><span class=value9>AN</span><span class=valuegap>-</span><span class=value9>DEEYITPVTIG</span><span class=valuegap>--</span><span class=value9>GTTLNLNFDTGSADLWVFSTELPASQQSGHSVYNP</span><span class=valuegap>--</span><span class=value9>SAT</span><span class=valuegap>---</span><span class=value9>GKELSGYTWSISYGDGSSASGNVFTDSVTVGGVTAHGQAVQAAQQISAQFQQDTNND</span><span class=valuegap>--------</span><span class=value9>GLLGLAFS</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>AGVGTVPMTDY</span><span class=valuegap>-------</span><span class=value9>GN</span><span class=valuegap>-</span><span class=value9>DIEYYGQVTIGTPGKKFNLDFDTGSSDLWIASTLCTNCG</span><span class=valuegap>-</span><span class=value9>SGQTKYDPN</span><span class=valuegap>-</span><span class=value9>QSS</span><span class=valuegap>---</span><span class=value9>TYQADGRTWSISYGDGSSASGILAKDNVNLGGLLIKGQTIELAKREAASFASGPN</span><span class=valuegap>-</span><span class=value9>D</span><span class=valuegap>--------</span><span class=value9>GLLGLGFD</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------</span><span class=value9>YTGSLHWVPVTVQQYWQFTVDS</span><span class=valuegap>---</span><span class=value9>VTISGVVVACEGGCQAILDTG</span><span class=valuegap>-</span><span class=value9>TSK</span><span class=valuegap>---</span><span class=value9>LVGPSSDILNIQQAIG</span><span class=valuegap>-</span><span class=value9>ATQNQYGEFDIDCDNLSYMPTVVFEINGKMYPLTPSAYTS</span><span class=valuegap>--------</span><span class=value9>QDQGFCTS</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------</span><span class=value9>aka</span><span class=valuegap>--</span><span class=value8>at</span><span class=valuegap>------</span><span class=value9>akqnyiral</span><span class=value8>qe</span><span class=value7>yer</span><span class=valuegap>--</span><span class=value8>n</span><span class=value9>g</span><span class=valuegap>-----------</span><span class=value9>g</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------</span><span class=value9>qla</span><span class=valuegap>--</span><span class=value8>kd</span><span class=valuegap>------</span><span class=value9>drirydnem</span><span class=value8>ks</span><span class=value7>wee</span><span class=valuegap>--</span><span class=value8>q</span><span class=value9>m</span><span class=valuegap>--</span><span class=value9>a</span><span class=valuegap>--------</span><span class=value9>e</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------</span><span class=value9>aka</span><span class=valuegap>--</span><span class=value8>nk</span><span class=valuegap>------</span><span class=value9>lkgeynkai</span><span class=value8>aa</span><span class=value7>ynk</span><span class=valuegap>--</span><span class=value8>g</span><span class=value9>e</span><span class=valuegap>--</span><span class=value9>s</span><span class=valuegap>--------</span><span class=value9>a</span><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------</span><span class=value9>ema</span><span class=valuegap>--</span><span class=value8>ek</span><span class=valuegap>------</span><span class=value9>dkerykrem</span><span class=valuegap>---------------------</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SLASEY</span><span class=valuegap>---</span><span class=value9>SIPV</span><span class=valuegap>--------</span><span class=value8>F</span><span class=valuegap>--</span><span class=value9>DNM</span><span class=value8>MNRH</span><span class=valuegap>----</span><span class=value9>LVAQDLFSVYM</span><span class=valuegap>-</span><span class=value8>D</span><span class=value7>RNG</span><span class=valuegap>--</span><span class=value8>Q</span><span class=value9>ESMLTLGAIDPSY</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SISASG</span><span class=valuegap>---</span><span class=value9>ATPV</span><span class=valuegap>--------</span><span class=value8>F</span><span class=valuegap>--</span><span class=value9>DNL</span><span class=value8>WDQG</span><span class=valuegap>----</span><span class=value9>LVSQDLFSVYL</span><span class=valuegap>-</span><span class=value8>S</span><span class=value7>SND</span><span class=value8>D</span><span class=valuegap>-</span><span class=value8>S</span><span class=value9>GSVVLLGGIDSSY</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>TLNTVSPTQQKTF</span><span class=valuegap>--------</span><span class=value8>F</span><span class=valuegap>--</span><span class=value9>DNA</span><span class=valuegap>--</span><span class=value8>KA</span><span class=valuegap>----</span><span class=value9>SLDSPVFTADL</span><span class=valuegap>-</span><span class=value8>G</span><span class=value7>YH</span><span class=valuegap>---</span><span class=value8>A</span><span class=value9>PGTYNFGFIDTTA</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SINTVQPQSQTTF</span><span class=valuegap>--------</span><span class=value8>F</span><span class=valuegap>--</span><span class=value9>DTV</span><span class=valuegap>--</span><span class=value8>KS</span><span class=valuegap>----</span><span class=value9>SLAQPLFAVAL</span><span class=valuegap>-</span><span class=value8>K</span><span class=value7>HQ</span><span class=valuegap>---</span><span class=value8>Q</span><span class=value9>PGVYDFGFIDSSK</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>TITTVRG</span><span class=valuegap>--</span><span class=value9>VKTP</span><span class=valuegap>--------</span><span class=value8>M</span><span class=valuegap>--</span><span class=value9>DNL</span><span class=value8>ISQG</span><span class=valuegap>----</span><span class=value9>LISRPIFGVYL</span><span class=valuegap>-</span><span class=value8>G</span><span class=value7>KAK</span><span class=value8>NGG</span><span class=value9>GGEYIFGGYDSTK</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>LTPSAY</span><span class=valuegap>---</span><span class=value9>TS</span><span class=valuegap>-</span><span class=value9>Q</span><span class=value8>DQGFCTSGF</span><span class=value9>QSENH</span><span class=value8>SQKWILGD</span><span class=value9>VFIREYYSVFD</span><span class=valuegap>-</span><span class=value8>R</span><span class=value7>ANN</span><span class=valuegap>--</span><span class=value8>L</span><span class=value9>VGLA</span><span class=valuegap>--</span><span class=value9>KAI</span><span class=valuegap>----</span><br><span class=valuedefault>1cms&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SLASEY</span><span class=valuegap>---</span><span class=value9>SIPVFDNM</span><span class=valuegap>--------------</span><span class=value9>MNRHLVAQDLFSVYM</span><span class=value8>DR</span><span class=valuegap>-</span><span class=value7>NG</span><span class=value8>QE</span><span class=valuegap>--</span><span class=value9>SMLTLGAIDPSY</span><br><span class=valuedefault>4pep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SISASG</span><span class=valuegap>---</span><span class=value9>ATPVFDNL</span><span class=valuegap>--------------</span><span class=value9>WDQGLVSQDLFSVYL</span><span class=value8>SS</span><span class=valuegap>-</span><span class=value7>ND</span><span class=value8>DSG</span><span class=valuegap>-</span><span class=value9>SVVLLGGIDSSY</span><br><span class=valuedefault>4ape&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>TLNTVSPTQQKTFFDNA</span><span class=valuegap>--------------</span><span class=value9>KAS</span><span class=valuegap>--</span><span class=value9>LDSPVFTADL</span><span class=value8>GY</span><span class=valuegap>-</span><span class=value7>HA</span><span class=value8>PG</span><span class=valuegap>---</span><span class=value9>TYNFGFIDTTA</span><br><span class=valuedefault>3app&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>SINTVQPQSQTTFFDTV</span><span class=valuegap>--------------</span><span class=value9>KSS</span><span class=valuegap>--</span><span class=value9>LAQPLFAVAL</span><span class=value8>KH</span><span class=valuegap>-</span><span class=value7>QQ</span><span class=value8>PG</span><span class=valuegap>---</span><span class=value9>VYDFGFIDSSK</span><br><span class=valuedefault>2apr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>TITTVR</span><span class=valuegap>--</span><span class=value9>GVKTPMDNL</span><span class=valuegap>--------------</span><span class=value9>ISQGLISRPIFGVYL</span><span class=value8>GK</span><span class=valuegap>-</span><span class=value7>AK</span><span class=value8>NGG</span><span class=value9>GGEYIFGGYDSTK</span><br><span class=valuedefault>1cms_1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>GFQSEN</span><span class=valuegap>------</span><span class=value9>HSQKW</span><span class=valuegap>--------------</span><span class=value9>ILGDVFIREYYSVFD</span><span class=value8>RA</span><span class=valuegap>-</span><span class=value7>NN</span><span class=value8>LVG</span><span class=valuegap>----</span><span class=value9>LAKAI</span><span class=valuegap>----</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/users/cn/cmagis/
+ORBIT_SOCKETDIR=/tmp/orbit-cmagis
+HOSTNAME=brasil
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+GIO_LAUNCHED_DESKTOP_FILE_PID=13637
+MCOFFEE_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//mcoffee/
+GPG_AGENT_INFO=/tmp/seahorse-3oGFZj/S.gpg-agent:13286:1;
+ROOT_TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/
+TERM=xterm
+SHELL=/bin/bash
+XDG_SESSION_COOKIE=78ca754cf49d9d17b2c0859500000020-1472467836.368722-1926617865
+HISTSIZE=1000
+PERL5LIB=:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/perl/lib/perl5
+GTK_RC_FILES=/etc/gtk/gtkrc:/users/cn/cmagis/.gtkrc-1.2-gnome2
+WINDOWID=33313398
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+METHODS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//methods/
+IMSETTINGS_MODULE=none
+http_proxy=
+HTTP_proxy=
+USER=cmagis
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-y1Hwrp/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-y1Hwrp/socket
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/13210,unix/unix:/tmp/.ICE-unix/13210
+USERNAME=cmagis
+ENV_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//.t_coffee_env
+GIO_LAUNCHED_DESKTOP_FILE=/users/cn/cmagis/Desktop/gnome-terminal.desktop
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+DESKTOP_SESSION=gnome
+MAIL=/var/spool/mail/cmagis
+PATH=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/users/cn/cmagis/bin:/users/cn/cmagis/bin
+_=/usr/bin/printenv
+ALN_LINE_LENGTH=160
+QT_IM_MODULE=xim
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/
+PWD=/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/users/cn/cmagis/.t_coffee/cache//
+XMODIFIERS=@im=none
+GDM_KEYBOARD_LAYOUT=us	intl
+GNOME_KEYRING_PID=13200
+LANG=en_US.UTF-8
+KDE_IS_PRELINKED=1
+GDM_LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+KDEDIRS=/usr
+GDMSESSION=gnome
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HISTCONTROL=ignoredups
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/
+SHLVL=4
+HOME=/users/cn/cmagis
+DUMP_4_TCOFFEE=t_coffee.146.IoK6AxhlIj.dump
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+HTTP_PROXY=
+MAFFT_BINARIES=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/plugins/linux/
+LOGNAME=cmagis
+CVS_RSH=ssh
+EMAIL_4_TCOFFEE=cedrik.magis@crg.es
+QTLIB=/usr/lib64/qt-3.3/lib
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-H13VKolxki,guid=b1ccb896c3103c0a8fe39b81000001d2
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+EMAIL=cedrik.magis@crg.es
+UPDATED_ENV_4_TCOFFEE=1
+WINDOWPATH=1
+DISPLAY=:0.0
+ALL_proxy=
+PROXY_4_TCOFFEE=cedrik.magis@crg.es
+LOCKDIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/lck//
+G_BROKEN_FILENAMES=1
+TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/tco/63713919/
+XAUTHORITY=/var/run/gdm/auth-for-cmagis-E59HTd/database
+COLORTERM=gnome-terminal
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.146.IoK6AxhlIj.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_faq.rst</source>
+<line>348</line>
+</ref>
