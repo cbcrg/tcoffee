@@ -338,7 +338,7 @@ A: Yes, you simply need to indicate that your alignment is a profile with the R 
   $$: t_coffee sample_seq1.fasta -profile=sample_aln2.aln -outfile chewbacca
 
 
-Q: Can I align sequences two or more profiles? (under maintenance)
+Q: Can I align sequences two or more profiles? 
 ----------------------------------------------
 A: Yes, you, simply tag your profiles with the letter R and the program will treat them like standard sequences:
 
@@ -355,7 +355,7 @@ A: Yes, as long as the structure sequences are named according to their PDB iden
 
 ::
 
-  $$: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -special_mode=3dcoffee
+  $$: t_coffee -profile=sample_profile1.aln,sample_profile2.aln -mode=3dcoffee
 
 
 Q: T-Coffee becomes very slow when combining sequences and structures
