@@ -1,0 +1,35 @@
+#!/usr/bin/env perl
+
+$t_coffee="t_coffee";
+
+foreach $value ( @ARGV)
+  {
+    $seq_file=$seq_file." ".$value;
+  }
+
+$name=$ARGV[0];
+$name=~s/\.[^\.]*$//;
+$lib_name="$name.mocca_lib";
+$type=`t_coffee $seq_file -get_type -quiet`;
+chop ($type);
+
+if ( $type eq "PROTEIN"){$lib_mode="lalign_rs_s_pair -lalign_n_top 20";}
+elsif ( $type eq"DNA"){$lib_mode="lalign_rs_s_dna_pair -lalign_n_top 40";}
+
+if ( !(-e $lib_name))
+  {
+	  
+  $command="$t_coffee -mocca -seq_weight=no -cosmetic_penalty=0 -mocca_interactive -in $lib_mode -out_lib $lib_name -infile $seq_file";
+  
+  }
+elsif ( (-e $lib_name))
+  {
+  $command="$t_coffee -mocca -seq_weight=no -cosmetic_penalty=0 -mocca_interactive -in $lib_name -infile $seq_file";
+  
+  }
+
+system ($command);
+
+exit;
+
+

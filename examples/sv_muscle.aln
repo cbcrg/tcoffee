@@ -1,0 +1,62 @@
+MUSCLE (3.7) multiple sequence alignment
+
+
+Q8CAN2_MOUSE      MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAAAYLQRLGVNT
+Q9D630_MOUSE      MAAGGRGLIRALHSSPCPTWKRAQSGANGRLKPEYDAVVIGAGHNGLVAAAYLQRLGVNT
+CJ033_MOUSE       ----MKRLVLAI-------------------DPLLDAAPVDT--TAFHHGSLLQRLGA--
+CJ033_HUMAN       MAASGRGLCKAVAASPFPAWRRDNTEARGGLKPEYDAVVIGAGHNGLVAAAYLQRLGVNT
+                       . *  *:                   .*  **. :.:  ..:  .: *****.  
+
+Q8CAN2_MOUSE      AVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQICTDLELK---------------
+Q9D630_MOUSE      AVFERRHVIGGARVTEEIIPGFKFSRASYLLSLLRPQICTDLELKKHGLKLHLRDPYSFT
+CJ033_MOUSE       ------------------------------LSTLKPLLKA--------------------
+CJ033_HUMAN       AVFERRHVIGGAAVTEEIIPGFKFSRASYLLSLLRPQIYTDLELKKHGLRLHLRNPYSFT
+                                                ** *.* : :                    
+
+Q8CAN2_MOUSE      -------VDRLAWP----------------------------------------------
+Q9D630_MOUSE      PMLEEGTLNRLPRSLLLGTDMAANQKEISQFSRKDAQV----------------------
+CJ033_MOUSE       ------------------------------------------------------------
+CJ033_HUMAN       PMLEEGAGSKVPRCLLLGTDMAENQKQIAQFSQKDAQVFPKYEEFMHRLALAIDPLLDAA
+                                                                              
+
+Q8CAN2_MOUSE      ------------------------------------------------------------
+Q9D630_MOUSE      ----------------------------GKVSGD--------------------------
+CJ033_MOUSE       ----------------------------GRTLGAQLPQYCEVLTAPISKVLDQWFESEPL
+CJ033_HUMAN       PVDMAAFQHGSLLQRMRSLSTLKPLLKAGRILGAQLPRYYEVLTAPITKVLDQWFESEPL
+                                                                              
+
+Q8CAN2_MOUSE      -------------------------------------GGW--------------------
+Q9D630_MOUSE      ------------------------------------------------------------
+CJ033_MOUSE       KATLATDAVIGAMTSPHTPGSGYVLLHHVMGSLEGTQGAWSYVQGGMGALSDAIASSAAT
+CJ033_HUMAN       KATLATDAVIGAMTSPHTPGSGYVLLHHVMGGLEGMQGAWGYVQGGMGALSDAIASSATT
+                                                                              
+
+Q8CAN2_MOUSE      ------------------------------------------------------------
+Q9D630_MOUSE      ------------------------------------------------------------
+CJ033_MOUSE       RGASIFTEKTVAKVQVNSEGRVQGVTLQDGEEVRSRVVLSCASPQVTFLELTPQEWLPGA
+CJ033_HUMAN       HGASIFTEKTVAKVQVNSEGCVQGVVLEDGTEVRSKMVLSNTSPQITFLKLTPQEWLPEE
+                                                                              
+
+Q8CAN2_MOUSE      ------------------------------------------------------------
+Q9D630_MOUSE      ------------------------------------------------------------
+CJ033_MOUSE       FVKRISQLDTQSPVTKINVAVDRLPNFQAAPNAPGDQPQGHHQCSIHLNCEDTLLLHQAF
+CJ033_HUMAN       FLERISQLDTRSPVTKINVAVDRLPSFLAAPNAPRGQPLPHHQCSIHLNCEDTLLLHQAF
+                                                                              
+
+Q8CAN2_MOUSE      ------------------------------------------------------------
+Q9D630_MOUSE      ------------------------------------------------------------
+CJ033_MOUSE       EDAKGGLPSQKPMIELCIPSSLDPTLAPPGCHVVSLFTQYTPYTLAGGKVWNEQEKNTYA
+CJ033_HUMAN       EDAMDGLPSHRPVIELCIPSSLDPTLAPPGCHVVSLFTQYMPYTLAGGKAWDEQERDAYA
+                                                                              
+
+Q8CAN2_MOUSE      ------------------------------------------------------------
+Q9D630_MOUSE      ------------------------------------------------------------
+CJ033_MOUSE       DKVFDCIEAYAPGFKRSVLARDILTPPDLERIFRLPGGNIFHGAMSLDQLYFARPVPQHS
+CJ033_HUMAN       DRVFDCIEVYAPGFKDSVVGRDILTPPDLERIFGLPGGNIFHCAMSLDQLYFARPVPLHS
+                                                                              
+
+Q8CAN2_MOUSE      -----------------------------------------
+Q9D630_MOUSE      -----------------------------------------
+CJ033_MOUSE       DYRCPVQGLYLCGSGAHPGGGVMGAAGRNAAHVVFRDLKNM
+CJ033_HUMAN       GYRCPLQGLYLCGSGAHPGGGVMGAAGRNAAHVAFRDLKSM
+                                                           

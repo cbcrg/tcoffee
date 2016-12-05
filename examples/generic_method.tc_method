@@ -1,0 +1,138 @@
+#!/usr/bin/env perl
+*TC_METHOD_FORMAT_01
+******************generic_method.tc_method*************
+*
+*       Incorporating new methods in T-Coffee
+*       Cedric Notredame 26/08/08
+*
+*******************************************************
+*This file is a method file
+*Copy it and adapt it to your need so that the method 
+*you want to use can be incorporated within T-Coffee
+*******************************************************
+*                  USAGE                              *
+*******************************************************
+*This file is passed to t_coffee via -in:
+*
+*	t_coffee -in Mgeneric_method.method
+*
+*	The method is passed to the shell using the following
+*call:
+*<EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
+*
+*Conventions:
+*<FLAG_NAME> 	<TYPE>		<VALUE>
+*<VALUE>:	no_name 	<=> Replaced with a space
+*<VALUE>:	&nbsp	<=> Replaced with a space
+*
+*******************************************************
+*                  ALN_MODE                           *
+*******************************************************
+*pairwise   ->all Vs all (no self )[(n2-n)/2aln]
+*m_pairwise ->all Vs all (no self)[n^2-n]^2
+*s_pairwise ->all Vs all (self): [n^2-n]/2 + n
+*multiple   ->All the sequences in one go
+*
+ALN_MODE		pairwise
+*
+*******************************************************
+*                  OUT_MODE                           *
+*******************************************************
+* mode for the output:
+*External methods: 
+* aln -> alignmnent File (Fasta or ClustalW Format)
+* lib-> Lib file (TC_LIB_FORMAT_01)
+*Internal Methods:
+* fL -> Internal Function returning a List (Librairie)
+* fA -> Internal Function returning an Alignmnent
+*
+OUT_MODE		aln
+*******************************************************
+*                  SEQ_TYPE                           *
+*******************************************************
+*G: Genomic, S: Sequence, P: PDB, R: Profile
+*Examples:
+*SEQTYPE	S	sequences against sequences (default)
+*SEQTYPE	S_P	sequence against structure
+*SEQTYPE	P_P	structure against structure
+*SEQTYPE	PS	mix of sequences and structure	
+*
+SEQ_TYPE	S
+*
+
+*******************************************************
+*                COMMAND LINE                         *
+*EXECUTABLE PARAM1 IN_FLAG OUT_FLAG PARAM             *
+*******************************************************
+*******************************************************
+*                  EXECUTABLE                         *
+*******************************************************
+*name of the executable
+*passed to the shell: executable
+*	
+EXECUTABLE	tc_generic_method.pl
+*
+*******************************************************
+*                  IN_FLAG                             *
+*******************************************************
+*IN_FLAG
+*flag indicating the name of the in coming sequences
+*IN_FLAG S no_name ->no flag
+*IN_FLAG S &bnsp-in&bnsp -> " -in "
+*
+IN_FLAG		-infile=
+*
+*******************************************************
+*                  OUT_FLAG                           *
+*******************************************************
+*OUT_FLAG
+*flag indicating the name of the out-coming data
+*same conventions as IN_FLAG
+*OUT_FLAG	S no_name ->no flag
+*if you want to redirect, pass the parameters via PARAM1
+*set OUT_FLAG to >
+*
+OUT_FLAG		-outfile=
+*
+*******************************************************
+*                  PARAM_1                              *
+*******************************************************
+*<EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
+*Parameters sent to the EXECUTABLE and specified *before* IN_FLAG 
+*If there is more than 1 PARAM line, the lines are
+*concatenated
+*Command_line: @EP@PARAM@-gapopen%e10%s-gapext%e20
+*	%s white space
+*	%e equal sign
+*
+*PARAM1	
+*
+*
+*
+*******************************************************
+*                  PARAM_2                              *
+*******************************************************
+*<EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
+*Parameters sent to the EXECUTABLE and specified 
+*after* IN_FLAG and *before* OUT_FLAG
+*If there is more than 1 PARAM line, the lines are
+*concatenated
+*
+*PARAM1	
+*
+*
+*******************************************************
+*                  PARAM                              *
+*******************************************************
+*<EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
+*Parameters sent to the EXECUTABLE and specified *after* OUT_FLAG
+*If there is more than 1 PARAM line, the lines are
+*concatenated
+*
+PARAM	-mode=seq_msa -method=clustalw
+PARAM   -OUTORDER=INPUT -NEWTREE=core -align -gapopen=-15
+*
+*******************************************************
+*                  END                                *
+*******************************************************
+
