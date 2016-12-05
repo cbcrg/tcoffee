@@ -706,11 +706,16 @@ Forces T-Coffee to run **extract_from_pdb** to check the PDB status of each sequ
 
 Using/finding PDB templates for the sequences
 ---------------------------------------------
-- **-template_file** (usage:**-template_file =[<filename>,<SCRIPT_scriptname>,SELF_TAG_,SEQFILE_TAG_<filename>,PDB,no>**)
-This flag instructs T-Coffee on the templates that will be used when combining several types of information. For instance, when using structural information, this file will indicate the structural template that corresponds to your sequences. Each template will be used in place of the sequence with the appropriate method. The identifier T indicates that the file should be a FASTA-like file, formatted as follows. There are several ways to pass the templates, the format of the template file being as followed "<sequence name> <TAG> <template name>":
+- **-struc_to_use** (usage:**-struc_to_use=[struc1, struc2...]**/ Default:none)
+Restricts the 3D-Coffee to a set of predefined structures.
 
-  1) Using a "filename":
-  
+- **-template_file** (usage:**-template_file =[<filename>,<SCRIPT_scriptname>,SELF_TAG_,SEQFILE_TAG_<filename>,PDB,no>**)
+This flag instructs T-Coffee on the templates that will be used when combining several types of information. For instance, when using structural information, this file will indicate the structural template that corresponds to your sequences. Each template will be used in place of the sequence with the appropriate method. There are several ways to pass the templates, the format of the template file being as followed "<sequence name> <TAG> <template name>":
+
+**Using a "filename"**:
+
+You provide to T-Coffee an existing template file either created by Expresso or on your own. Different types of templates exist but all with the similar format and rules; the type of template on which a method works is declared with the SEQ_TYPE parameter in the method configuration file. 
+
 ::
 
   Template file format:
@@ -721,45 +726,36 @@ This flag instructs T-Coffee on the templates that will be used when combining s
   ><sequence name> _T_ <Transmembrane Secondary Structure>
   ><sequence name> _E_ <Protein Secondary Structure>
 
-
-Note the following rule:
-
+  Template file rules:
   - Each sequence can have one template of each type (structural, genomics...)
-  - Each sequence can only have one template of a given type*
-  - Several sequences can share the same template*
+  - Each sequence can only have one template of a given type
+  - Several sequences can share the same template
   - All the sequences do not need to have a template
 
-
-The type of template on which a method works is declared with the SEQ_TYPE parameter in the method configuration file:
-
+  Template based method types:
  - SEQ_TYPE S: a method that uses sequences
  - SEQ_TYPE PS: a pairwise method that aligns sequences and structures
  - SEQ_TYPE P: a method that aligns structures (SAP for instance)
 
 
-  2) Using "SCRIPT_<scriptname>"
-  
-Indicates that filename is a script that will be used to generate a valid template file. The script will run on a file containing all your sequences using the following syntax:
+**Using "SCRIPT_<scriptname>"**:
+ 
+Indicates that filename is a script that will be used to generate a valid template file. The script will run on a file containing all your sequences using the following syntax (See box 1.). It is also possible to pass some parameters, use @ as a separator and # in place of the = sign (See box 2.). For instance, if you want to call the a script named **blast.pl** with the following parameters. Bear in mind that the input/output flags will then be concatenated to this command line so that T-Coffee ends up calling the program using the following system call.
 
 ::
 
-  Running using a script:
+  1) Running using a script:
   ##: scriptname -infile=<your sequences> -outfile=<template_file>
 
-It is also possible to pass some parameters, use @ as a separator and # in place of the = sign. For instance, if you want to call the a script named **blast.pl** with the following parameters. Bear in mind that the input/output flags will then be concatenated to this command line so that T-Coffee ends up calling the program using the following system call.
-
-::
-
-  Running blast.pl:
+  2) Running blast.pl:
   ##: blast.pl -db=pdb -dir=/local/test
   ##: SCRIPT_blast.pl@db#pdb@dir#/local/test
   ##: blast.pl -db=pdb -dir=/local/test -infile=<some tmp file> -outfile=<another tmp file>
 
 
-
-  3) Using "SELF_TAG"
+**Using "SELF_TAG"**:
   
-TAG can take the value of any of the known TAGS (_S_, _G_, _P_). SELF indicates that the original name of the sequence will be used to fetch the template. The previous command will work because the sequences in 3d_sample3 are named...
+TAG can take the value of any of the known TAGS (_S_, _G_, _P_). **SELF** indicates that the original name of the sequence will be used to fetch the template.
 
 ::
 
@@ -767,12 +763,9 @@ TAG can take the value of any of the known TAGS (_S_, _G_, _P_). SELF indicates 
 
 
 
-  4) Using "SEQFILE_TAG_filename"
+**Using "SEQFILE_TAG_filename"**
   
 Use this flag if your templates are in filename, and are named according to the sequences. For instance, if your protein sequences have been recoded with Exon/Intron information, you should have the recoded sequences names according to the original ``SEQFILE_G_recodedprotein.fasta``.
-
-- **-struc_to_use** (usage:**-struc_to_use=[struc1, struc2...]**/ Default:none)
-Restricts the 3D-Coffee to a set of predefined structures.
 
 
 Using structure for MSA evaluation
@@ -1100,7 +1093,7 @@ prf2: profile containing one structure
 ::
 
 
-  $#: t_coffee -profile sample_profile1.aln,sample_profile2.aln -mode=3dcoffee
+  $$: t_coffee -profile sample_profile1.aln,sample_profile2.aln -mode=3dcoffee
 
 
 - **command line list**
