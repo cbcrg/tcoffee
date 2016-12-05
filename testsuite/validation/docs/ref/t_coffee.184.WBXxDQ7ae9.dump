@@ -1,0 +1,3705 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee sample_rnaseq1.fasta -mode rmcoffee</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+!	Process: >AL023594.2-7651_7766 _F_ AL_23594.2-7651_7766.rfold
+!	Process: >AC068303.10-12902_12788 _F_ AC_683_3.1_-129_2_12788.rfold
+!	Process: >X15934.1-3_121 _F_ X15934.1-3_121.rfold
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: rmcoffee ], CPU=0.00 sec, SCORE=278, Nseq=5, Len=126 
+
+AC068303.10-12902_12788  AACUCUU-GUUUCUCUUC-AG--AUCAUGUAAAUCUUUCGCCUUUUAUUAAAGAUUUCCAUGGGGAGGAAC--AGUUAUGAGUCUUUAUCCAAUUUCUGAGGCCUCGUGUUUCACCAG-----GCU
+AC097725.2-33800_33915   A-CUCUG-GUUUCUCUUC-AAUUGUCGAAUAAAUCUUUCGCCUUUUACUAAAGAUUUCCGUGGAGAGGAACACUCUAAUGAGUCUAAAAUAAUUUUUAGUAGUGCCCUGU--CGCAAG-----ACU
+X15934.1-3_121           AGCCGUGUGAU-GAUG---ACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGAAUACCGUGUCAGCG-UCACAAUUAGCGGCAUACGCUAGUUUUUGGAAGAGUUCUCAAUUUUGAGGGC--UCU
+AC000104.1-17376_17496   AGCCAUGUGGU-GAGC---ACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGAAUACCGUGUGCUCU-CCACGCUAAGUGGCAUACGCCUAUUUUUGGAGGGUUCCCACUUUACUGUGGGUCCCA
+AL023594.2-7651_7766     GUCAAAGCACU-UUGCAAAAGCUAACGUAUCUGUUUCUUGCCUUUUACCAGAAACAGCCGUUUGUAAG-GUGUGCUAAUUUGACUGUA-UAGUUUUUGUAAUCUUUUUCU--UGAAAC-----AUU
+                           *       *        *     *       * * * ********  * * *   ** *              * *   *  *        ***                              
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[1] 	rna2
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[1] 	RCOFFEE
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	Mprobcons_msa	Mmafft_msa	Mmuscle_msa
+-seq           	S	[1] 	sample_rnaseq1.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[1] 	0 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[1] 	dna2rna
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msano_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msano_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msano_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msano_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msano_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    6: [Group    5 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  121][PID:23360]no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    7: [Group    3 (   1 seq)] with [Group    2 (   1 seq)]-->[Len=  119][PID:23361]no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+
+!		[Final Evaluation][TOT=    5][  0 %]!		[Final Evaluation][TOT=    5][ 40 %]!		[Final Evaluation][TOT=    5][ 60 %]!		[Final Evaluation][TOT=    5][ 80 %]!		[Final Evaluation][TOT=    5][100 %]
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) probcons_msa 
+	Input File (M) mafft_msa 
+	Input File (M) muscle_msa 
+	Input File (S) sample_rnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [RCOFFEE] Mode Or File: [RCOFFEE] [Start
+	------ Fetch Templates [Multi Core Mode 24 CPUs]
+]
+INPUT SEQUENCES: 5 SEQUENCES  [RNA]
+  Input File sample_rnaseq1.fasta    Seq AC000104.1-17376_17496  Length  121 type RNA Struct Unchecked
+	RNA Fold: Template=AC___1_4.1-17376_17496.rfold, File=AC___1_4.1-17376_17496.rfold
+  Input File sample_rnaseq1.fasta    Seq AC068303.10-12902_12788 Length  115 type RNA Struct Unchecked
+	RNA Fold: Template=AC_683_3.1_-129_2_12788.rfold, File=AC_683_3.1_-129_2_12788.rfold
+  Input File sample_rnaseq1.fasta    Seq AC097725.2-33800_33915  Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AC_97725.2-338___33915.rfold, File=AC_97725.2-338___33915.rfold
+  Input File sample_rnaseq1.fasta    Seq AL023594.2-7651_7766    Length  116 type RNA Struct Unchecked
+	RNA Fold: Template=AL_23594.2-7651_7766.rfold, File=AL_23594.2-7651_7766.rfold
+  Input File sample_rnaseq1.fasta    Seq X15934.1-3_121          Length  119 type RNA Struct Unchecked
+	RNA Fold: Template=X15934.1-3_121.rfold, File=X15934.1-3_121.rfold
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mprobcons_msa
+	--- Process Method/Library/Aln Mmafft_msa
+	--- Process Method/Library/Aln Mmuscle_msa
+	--- Process Method/Library/Aln Ssample_rnaseq1.fasta
+	xxx Retrieved Ssample_rnaseq1.fasta
+	xxx Retrieved Mmuscle_msa
+	xxx Retrieved Mprobcons_msa
+	xxx Retrieved Mmafft_msa
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1856]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: AC000104.1-17376_17496
+Group    2: AC068303.10-12902_12788
+Group    3: AC097725.2-33800_33915
+Group    4: AL023594.2-7651_7766
+Group    5: X15934.1-3_121
+
+
+	Group    8: [Group    7 (   2 seq)] with [Group    6 (   2 seq)]-->[Len=  125][PID:23173][Forked]
+	Group    9: [Group    4 (   1 seq)] with [Group    8 (   4 seq)]-->[Len=  126][PID:23173]
+
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= sample_rnaseq1.dnd
+	#### File Type= MSA             Format= aln             Name= sample_rnaseq1.aln
+	#### File Type= MSA             Format= html            Name= sample_rnaseq1.html
+	#### File Type= Template_List   Format= fasta_seq       Name= sample_rnaseq1_rfold1.3.template_list
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= AC___1_4.1-17376_17496.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= AC_683_3.1_-129_2_12788.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= AC_97725.2-338___33915.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= AL_23594.2-7651_7766.rfold
+	#### File Type= Template RNA Fold Format= TCOFFEE_LIBRARY Name= X15934.1-3_121.rfold
+
+# Command Line: t_coffee sample_rnaseq1.fasta -mode rmcoffee  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 30.152 Mb, Max= 31.428 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_rnaseq1.fasta</name>
+<content>
+>AC068303.10-12902_12788
+AACUCUUGUUUCUCUUCAGAUCAUGUAAAUCUUUCGCCUUUUAUUAAAGA
+UUUCCAUGGGGAGGAACAGUUAUGAGUCUUUAUCCAAUUUCUGAGGCCUC
+GUGUUUCACCAGGCU
+>AC097725.2-33800_33915
+ACUCUGGUUUCUCUUCAAUUGUCGAAUAAAUCUUUCGCCUUUUACUAAAG
+AUUUCCGUGGAGAGGAACACUCUAAUGAGUCUAAAAUAAUUUUUAGUAGU
+GCCCUGUCGCAAGACU
+>X15934.1-3_121
+AGCCGUGUGAUGAUGACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGA
+AUACCGUGUCAGCGUCACAAUUAGCGGCAUACGCUAGUUUUUGGAAGAGU
+UCUCAAUUUUGAGGGCUCU
+>AC000104.1-17376_17496
+AGCCAUGUGGUGAGCACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGA
+AUACCGUGUGCUCUCCACGCUAAGUGGCAUACGCCUAUUUUUGGAGGGUU
+CCCACUUUACUGUGGGUCCCA
+>AL023594.2-7651_7766
+GUCAAAGCACUUUGCAAAAGCUAACGUAUCUGUUUCUUGCCUUUUACCAG
+AAACAGCCGUUUGUAAGGUGUGCUAAUUUGACUGUAUAGUUUUUGUAAUC
+UUUUUCUUGAAACAUU
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_rnaseq1_rfold1.3.template_list</name>
+<content>
+>AC000104.1-17376_17496  _F_ AC___1_4.1-17376_17496.rfold
+>AC068303.10-12902_12788  _F_ AC_683_3.1_-129_2_12788.rfold
+>AC097725.2-33800_33915  _F_ AC_97725.2-338___33915.rfold
+>AL023594.2-7651_7766  _F_ AL_23594.2-7651_7766.rfold
+>X15934.1-3_121  _F_ X15934.1-3_121.rfold
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_rnaseq1_rfold1.3.template_list</name>
+<content>
+>AC000104.1-17376_17496  _F_ AC___1_4.1-17376_17496.rfold
+>AC068303.10-12902_12788  _F_ AC_683_3.1_-129_2_12788.rfold
+>AC097725.2-33800_33915  _F_ AC_97725.2-338___33915.rfold
+>AL023594.2-7651_7766  _F_ AL_23594.2-7651_7766.rfold
+>X15934.1-3_121  _F_ X15934.1-3_121.rfold
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_rnaseq1.dnd</name>
+<content>
+(
+(
+AC000104.1-17376_17496:0.08500,
+X15934.1-3_121:0.08500)
+:0.04500,
+(
+AC068303.10-12902_12788:0.11500,
+AC097725.2-33800_33915:0.10500)
+:0.02000,
+AL023594.2-7651_7766:0.15000);
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_rnaseq1.dnd</name>
+<content>
+(
+(
+AC000104.1-17376_17496:0.08500,
+X15934.1-3_121:0.08500)
+:0.04500,
+(
+AC068303.10-12902_12788:0.11500,
+AC097725.2-33800_33915:0.10500)
+:0.02000,
+AL023594.2-7651_7766:0.15000);
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>AC___1_4.1-17376_17496.rfold</name>
+<content>
+! TC_LIB_FORMAT_01
+1
+AC000104.1-17376_17496 121 AGCCAUGUGGUGAGCACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGAAUACCGUGUGCUCUCCACGCUAAGUGGCAUACGCCUAUUUUUGGAGGGUUCCCACUUUACUGUGGGUCCCA
+!generated by 81923232232.pl on Mon Dec  5 18:54:45 2016
+#1 1
+6 69 100
+7 68 100
+8 67 100
+9 66 100
+10 65 100
+12 63 100
+13 62 100
+14 61 100
+15 60 100
+16 59 100
+17 58 100
+18 57 100
+19 56 100
+21 37 100
+22 36 100
+23 35 100
+24 34 100
+25 33 100
+36 99 100
+37 98 100
+38 49 100
+38 97 100
+39 48 100
+39 96 100
+40 47 100
+40 95 100
+41 46 100
+55 83 100
+56 82 100
+56 105 100
+57 81 100
+57 104 100
+58 80 100
+58 103 100
+59 79 100
+60 78 100
+60 99 100
+61 77 100
+61 98 100
+62 97 100
+63 96 100
+64 95 100
+65 94 100
+66 76 100
+66 93 100
+67 75 100
+67 92 100
+68 74 100
+76 85 100
+77 84 100
+78 83 100
+96 120 100
+97 119 100
+98 118 100
+101 116 100
+102 115 100
+103 114 100
+104 113 100
+105 112 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>AC_683_3.1_-129_2_12788.rfold</name>
+<content>
+! TC_LIB_FORMAT_01
+1
+AC068303.10-12902_12788 115 AACUCUUGUUUCUCUUCAGAUCAUGUAAAUCUUUCGCCUUUUAUUAAAGAUUUCCAUGGGGAGGAACAGUUAUGAGUCUUUAUCCAAUUUCUGAGGCCUCGUGUUUCACCAGGCU
+!generated by 60502232512.pl on Mon Dec  5 18:54:45 2016
+#1 1
+6 69 100
+7 68 100
+8 67 100
+9 66 100
+10 65 100
+11 64 100
+12 63 100
+13 62 100
+13 65 100
+14 61 100
+14 64 100
+15 60 100
+15 63 100
+16 62 100
+17 61 100
+21 59 100
+22 58 100
+23 57 100
+24 56 100
+25 55 100
+27 53 100
+28 52 100
+29 51 100
+30 50 100
+31 49 100
+32 48 100
+33 47 100
+34 46 100
+36 97 100
+37 96 100
+38 95 100
+39 94 100
+40 93 100
+54 113 100
+63 107 100
+64 106 100
+65 105 100
+66 104 100
+67 74 100
+67 103 100
+68 73 100
+73 101 100
+74 100 100
+75 99 100
+76 98 100
+95 115 100
+96 114 100
+97 113 100
+98 112 100
+99 111 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>AC_97725.2-338___33915.rfold</name>
+<content>
+! TC_LIB_FORMAT_01
+1
+AC097725.2-33800_33915 116 ACUCUGGUUUCUCUUCAAUUGUCGAAUAAAUCUUUCGCCUUUUACUAAAGAUUUCCGUGGAGAGGAACACUCUAAUGAGUCUAAAAUAAUUUUUAGUAGUGCCCUGUCGCAAGACU
+!generated by 54322232242.pl on Mon Dec  5 18:54:45 2016
+#1 1
+7 68 100
+8 67 100
+9 66 100
+10 65 100
+11 64 100
+12 63 100
+13 62 100
+14 61 100
+15 60 100
+16 59 100
+17 58 100
+23 37 100
+24 36 100
+25 35 100
+26 34 100
+29 53 100
+30 52 100
+31 51 100
+32 50 100
+33 49 100
+37 102 100
+38 101 100
+42 99 100
+43 98 100
+44 97 100
+45 96 100
+46 95 100
+47 94 100
+48 93 100
+49 92 100
+50 91 100
+51 90 100
+52 89 100
+69 80 100
+70 79 100
+71 78 100
+72 77 100
+101 110 100
+106 115 100
+107 114 100
+108 113 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>AL_23594.2-7651_7766.rfold</name>
+<content>
+! TC_LIB_FORMAT_01
+1
+AL023594.2-7651_7766 116 GUCAAAGCACUUUGCAAAAGCUAACGUAUCUGUUUCUUGCCUUUUACCAGAAACAGCCGUUUGUAAGGUGUGCUAAUUUGACUGUAUAGUUUUUGUAAUCUUUUUCUUGAAACAUU
+!generated by 47522232392.pl on Mon Dec  5 18:54:45 2016
+#1 1
+7 71 100
+8 70 100
+9 69 100
+10 68 100
+11 67 100
+12 66 100
+13 65 100
+14 64 100
+15 63 100
+16 62 100
+17 61 100
+18 60 100
+20 27 100
+21 26 100
+23 61 100
+24 60 100
+25 59 100
+26 58 100
+30 56 100
+31 55 100
+32 54 100
+33 53 100
+34 52 100
+35 51 100
+36 50 100
+37 49 100
+39 47 100
+44 98 100
+45 97 100
+46 96 100
+48 95 100
+49 94 100
+50 93 100
+51 92 100
+52 91 100
+53 90 100
+54 89 100
+56 69 100
+57 68 100
+58 67 100
+69 88 100
+70 87 100
+71 86 100
+72 85 100
+73 84 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>X15934.1-3_121.rfold</name>
+<content>
+! TC_LIB_FORMAT_01
+1
+X15934.1-3_121 119 AGCCGUGUGAUGAUGACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGAAUACCGUGUCAGCGUCACAAUUAGCGGCAUACGCUAGUUUUUGGAAGAGUUCUCAAUUUUGAGGGCUCU
+!generated by 49340232562.pl on Mon Dec  5 18:54:45 2016
+#1 1
+6 69 100
+7 68 100
+8 67 100
+9 66 100
+10 65 100
+11 64 100
+12 63 100
+14 61 100
+15 60 100
+16 59 100
+17 58 100
+18 57 100
+19 56 100
+19 86 100
+20 85 100
+21 37 100
+21 84 100
+22 36 100
+22 83 100
+23 35 100
+23 82 100
+24 34 100
+25 33 100
+27 53 100
+28 52 100
+29 51 100
+30 50 100
+30 98 100
+31 49 100
+31 97 100
+32 48 100
+32 96 100
+33 47 100
+33 95 100
+34 46 100
+38 49 100
+38 99 100
+39 48 100
+39 98 100
+40 47 100
+40 97 100
+41 46 100
+41 96 100
+42 95 100
+44 94 100
+45 93 100
+46 92 100
+47 91 100
+48 90 100
+54 94 100
+55 93 100
+56 68 100
+57 67 100
+58 66 100
+69 89 100
+70 88 100
+71 87 100
+72 86 100
+73 85 100
+74 84 100
+75 83 100
+76 82 100
+96 119 100
+97 118 100
+98 117 100
+99 116 100
+100 115 100
+101 114 100
+102 113 100
+103 112 100
+104 111 100
+105 110 100
+! SEQ_1_TO_N
+!CMT: [SOURCE] 2D contact library Generated by RNAPlfold (Vienna Package)
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_rnaseq1.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: rmcoffee ], CPU=0.00 sec, SCORE=278, Nseq=5, Len=126 
+
+AC068303.10-12902_12788  AACUCUU-GUUUCUCUUC-AG--AUCAUGUAAAUCUUUCGCCUUUUAUUAAAGAUUUCCAUGGGGAGGAAC--AGUUAUGAGUCUUUAUCCAAUUUCUGAGGCCUCGUGUUUCACCAG-----GCU
+AC097725.2-33800_33915   A-CUCUG-GUUUCUCUUC-AAUUGUCGAAUAAAUCUUUCGCCUUUUACUAAAGAUUUCCGUGGAGAGGAACACUCUAAUGAGUCUAAAAUAAUUUUUAGUAGUGCCCUGU--CGCAAG-----ACU
+X15934.1-3_121           AGCCGUGUGAU-GAUG---ACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGAAUACCGUGUCAGCG-UCACAAUUAGCGGCAUACGCUAGUUUUUGGAAGAGUUCUCAAUUUUGAGGGC--UCU
+AC000104.1-17376_17496   AGCCAUGUGGU-GAGC---ACAUAGCGAACUAUUCUUUCGCCUUUUACUAAAGAAUACCGUGUGCUCU-CCACGCUAAGUGGCAUACGCCUAUUUUUGGAGGGUUCCCACUUUACUGUGGGUCCCA
+AL023594.2-7651_7766     GUCAAAGCACU-UUGCAAAAGCUAACGUAUCUGUUUCUUGCCUUUUACCAGAAACAGCCGUUUGUAAG-GUGUGCUAAUUUGACUGUA-UAGUUUUUGUAAUCUUUUUCU--UGAAAC-----AUU
+                           *       *        *     *       * * * ********  * * *   ** *              * *   *  *        ***                              
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_rnaseq1.html</name>
+<content>
+<html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=278</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value2>AC068303.10-129&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;24</span><br><span class=value3>AC097725.2-3380&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;31</span><br><span class=value2>X15934.1-3_121&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;25</span><br><span class=value2>AC000104.1-1737&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;28</span><br><span class=value2>AL023594.2-7651&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;29</span><br><span class=value27>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;27</span><br><br><span class=valuedefault>AC068303.10-129&nbsp;&nbsp;&nbsp;</span><span class=value9>A</span><span class=value7>A</span><span class=value9>C</span><span class=value8>U</span><span class=value6>C</span><span class=value4>U</span><span class=value1>U</span><span class=valuegap>-</span><span class=value2>GU</span><span class=value1>UU</span><span class=value2>C</span><span class=value1>UC</span><span class=value2>U</span><span class=value1>UC</span><span class=valuegap>-</span><span class=value7>A</span><span class=value4>G</span><span class=valuegap>--</span><span class=value5>A</span><span class=value2>U</span><span class=value1>CA</span><span class=value2>UG</span><span class=value6>U</span><span class=value5>A</span><span class=value9>A</span><span class=value7>AU</span><span class=value4>CU</span><span class=value3>U</span><span class=value4>U</span><span class=value7>C</span><span class=value1>GCC</span><span class=value2>UU</span><span class=value3>U</span><span class=value5>U</span><span class=value6>AU</span><span class=value8>U</span><span class=value5>AA</span><span class=value7>AG</span><span class=value8>A</span><span class=value9>UU</span><span class=value5>U</span><span class=value2>C</span><span class=value3>C</span><span class=value4>A</span><span class=value3>UGG</span><span class=value2>G</span><span class=value1>G</span><span class=value2>AG</span><span class=value1>GA</span><span class=value2>AC</span><span class=valuegap>--</span><span class=value2>A</span><span class=value6>G</span><span class=value9>UUA</span><span class=value1>UG</span><span class=value3>A</span><span class=value2>G</span><span class=value5>U</span><span class=value6>CU</span><span class=value5>UU</span><span class=value4>A</span><span class=value3>UCC</span><span class=value5>AAUUU</span><span class=value3>C</span><span class=value2>UGAGG</span><span class=value1>C</span><span class=value2>CUC</span><span class=value3>GU</span><span class=value1>GUUUC</span><span class=value4>A</span><span class=value5>C</span><span class=value4>CA</span><span class=value2>G</span><span class=valuegap>-----</span><span class=value2>GCU</span><br><span class=valuedefault>AC097725.2-3380&nbsp;&nbsp;&nbsp;</span><span class=value7>A</span><span class=valuegap>-</span><span class=value7>C</span><span class=value6>UC</span><span class=value5>U</span><span class=value3>G</span><span class=valuegap>-</span><span class=value2>G</span><span class=value3>U</span><span class=value2>U</span><span class=value1>U</span><span class=value2>CU</span><span class=value3>CU</span><span class=value2>U</span><span class=value1>C</span><span class=valuegap>-</span><span class=value2>A</span><span class=value5>A</span><span class=value4>U</span><span class=value6>U</span><span class=value5>GU</span><span class=value3>C</span><span class=value6>G</span><span class=value5>AA</span><span class=value9>UAA</span><span class=value7>AU</span><span class=value4>CU</span><span class=value6>U</span><span class=value5>U</span><span class=value4>C</span><span class=value3>G</span><span class=value2>C</span><span class=value4>CUU</span><span class=value2>UUA</span><span class=value3>C</span><span class=value4>U</span><span class=value3>A</span><span class=value6>A</span><span class=value7>AG</span><span class=value8>A</span><span class=value9>UU</span><span class=value5>U</span><span class=value7>C</span><span class=value4>CG</span><span class=value3>U</span><span class=value2>G</span><span class=value3>G</span><span class=value2>AGAGGA</span><span class=value3>AC</span><span class=value1>A</span><span class=value2>C</span><span class=value3>UC</span><span class=value9>UAA</span><span class=value5>U</span><span class=value4>G</span><span class=value2>AG</span><span class=value1>U</span><span class=value7>C</span><span class=value6>U</span><span class=value5>AA</span><span class=value4>A</span><span class=value5>A</span><span class=value4>U</span><span class=value5>AAU</span><span class=value3>UUUU</span><span class=value4>AG</span><span class=value3>UAGU</span><span class=value2>G</span><span class=value3>CCCU</span><span class=value2>GU</span><span class=valuegap>--</span><span class=value2>C</span><span class=value3>G</span><span class=value2>C</span><span class=value4>A</span><span class=value6>A</span><span class=value3>G</span><span class=valuegap>-----</span><span class=value2>AC</span><span class=value8>U</span><br><span class=valuedefault>X15934.1-3_121&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>A</span><span class=value8>G</span><span class=value9>C</span><span class=value8>CG</span><span class=value4>U</span><span class=value2>G</span><span class=value1>U</span><span class=value2>G</span><span class=value3>A</span><span class=value2>U</span><span class=valuegap>-</span><span class=value2>G</span><span class=value4>A</span><span class=value3>UG</span><span class=valuegap>---</span><span class=value4>A</span><span class=value2>CAUAGC</span><span class=value3>G</span><span class=value5>AA</span><span class=value9>C</span><span class=value6>U</span><span class=value9>A</span><span class=value7>U</span><span class=value2>UCUU</span><span class=value4>UCG</span><span class=value3>C</span><span class=value1>CU</span><span class=value2>UU</span><span class=value3>U</span><span class=value6>A</span><span class=value3>C</span><span class=value4>U</span><span class=value3>AAAG</span><span class=value8>A</span><span class=value9>AU</span><span class=value5>A</span><span class=value3>C</span><span class=value2>CG</span><span class=value1>UG</span><span class=value6>U</span><span class=value3>CAGCG</span><span class=valuegap>-</span><span class=value3>U</span><span class=value1>CA</span><span class=value2>C</span><span class=value5>A</span><span class=value6>A</span><span class=value7>U</span><span class=value6>U</span><span class=value3>AG</span><span class=value2>CG</span><span class=value5>GC</span><span class=value6>A</span><span class=value5>UA</span><span class=value2>CGC</span><span class=value3>UA</span><span class=value7>G</span><span class=value5>U</span><span class=value3>UUUU</span><span class=value2>G</span><span class=value3>G</span><span class=value2>AA</span><span class=value1>G</span><span class=value2>AG</span><span class=value3>UU</span><span class=value2>CU</span><span class=value1>CA</span><span class=value2>A</span><span class=value3>U</span><span class=value4>UU</span><span class=value2>UGAGG</span><span class=value1>GC</span><span class=valuegap>--</span><span class=value2>U</span><span class=value1>CU</span><br><span class=valuedefault>AC000104.1-1737&nbsp;&nbsp;&nbsp;</span><span class=value9>A</span><span class=value7>G</span><span class=value8>C</span><span class=value7>C</span><span class=value6>A</span><span class=value3>U</span><span class=value2>GUGGU</span><span class=valuegap>-</span><span class=value2>GAGC</span><span class=valuegap>---</span><span class=value4>A</span><span class=value3>C</span><span class=value2>A</span><span class=value3>U</span><span class=value5>A</span><span class=value3>G</span><span class=value2>C</span><span class=value4>GAA</span><span class=value9>C</span><span class=value8>U</span><span class=value9>A</span><span class=value7>U</span><span class=value6>U</span><span class=value4>CUU</span><span class=value5>U</span><span class=value4>C</span><span class=value2>GCCUU</span><span class=value3>U</span><span class=value4>U</span><span class=value5>AC</span><span class=value7>U</span><span class=value4>AA</span><span class=value5>AG</span><span class=value8>A</span><span class=value9>AU</span><span class=value5>AC</span><span class=value3>CG</span><span class=value2>UG</span><span class=value6>U</span><span class=value2>GCUCU</span><span class=valuegap>-</span><span class=value3>CC</span><span class=value2>A</span><span class=value3>C</span><span class=value5>G</span><span class=value7>C</span><span class=value9>UA</span><span class=value8>A</span><span class=value2>GU</span><span class=value1>G</span><span class=value2>GC</span><span class=value4>A</span><span class=value3>U</span><span class=value2>A</span><span class=value3>CG</span><span class=value2>C</span><span class=value3>C</span><span class=value5>U</span><span class=value6>AU</span><span class=value5>UUU</span><span class=value2>U</span><span class=value1>G</span><span class=value2>GAGGGU</span><span class=value3>UCC</span><span class=value2>CACUU</span><span class=value3>U</span><span class=value4>AC</span><span class=value2>UGUGGGU</span><span class=value1>C</span><span class=value2>CC</span><span class=value4>A</span><br><span class=valuedefault>AL023594.2-7651&nbsp;&nbsp;&nbsp;</span><span class=value9>G</span><span class=value8>UC</span><span class=value7>AA</span><span class=value5>A</span><span class=value2>GCA</span><span class=value3>C</span><span class=value2>U</span><span class=valuegap>-</span><span class=value2>UUGCA</span><span class=value1>AA</span><span class=value5>A</span><span class=value4>G</span><span class=value3>C</span><span class=value4>U</span><span class=value2>AAC</span><span class=value3>GU</span><span class=value5>A</span><span class=value9>U</span><span class=value8>C</span><span class=value9>U</span><span class=value7>G</span><span class=value6>U</span><span class=value3>UUC</span><span class=value4>U</span><span class=value5>U</span><span class=value4>GC</span><span class=value3>CUU</span><span class=value1>U</span><span class=value2>UAC</span><span class=value4>CA</span><span class=value5>G</span><span class=value6>A</span><span class=value5>A</span><span class=value6>A</span><span class=value8>C</span><span class=value9>A</span><span class=value1>G</span><span class=value2>CC</span><span class=value3>G</span><span class=value2>UU</span><span class=value3>U</span><span class=value2>G</span><span class=value3>U</span><span class=value2>AAG</span><span class=valuegap>-</span><span class=value3>GU</span><span class=value2>GU</span><span class=value3>G</span><span class=value5>C</span><span class=value9>UA</span><span class=value8>A</span><span class=value4>U</span><span class=value3>UU</span><span class=value4>GA</span><span class=value7>C</span><span class=value6>U</span><span class=value5>G</span><span class=value3>U</span><span class=value2>A</span><span class=valuegap>-</span><span class=value2>U</span><span class=value1>A</span><span class=value6>G</span><span class=value5>U</span><span class=value3>UUUU</span><span class=value4>G</span><span class=value3>U</span><span class=value2>AA</span><span class=value3>U</span><span class=value2>CUU</span><span class=value3>UUU</span><span class=value2>CU</span><span class=valuegap>--</span><span class=value3>U</span><span class=value4>G</span><span class=value3>AA</span><span class=value4>A</span><span class=value3>C</span><span class=valuegap>-----</span><span class=value3>AUU</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value7>&nbsp;*&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>*&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value3>*&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;*&nbsp;</span><span class=value3>&nbsp;</span><span class=value4>&nbsp;</span><span class=value8>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;</span><span class=value7>&nbsp;</span><span class=value4>*</span><span class=value3>&nbsp;*&nbsp;</span><span class=value4>*&nbsp;</span><span class=value2>*******</span><span class=value3>*&nbsp;</span><span class=value4>&nbsp;</span><span class=value3>*</span><span class=value4>&nbsp;*&nbsp;</span><span class=value7>*</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>*</span><span class=value2>*&nbsp;*&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><span class=value5>&nbsp;</span><span class=value8>*&nbsp;</span><span class=value6>*</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;*&nbsp;</span><span class=value5>&nbsp;</span><span class=value4>*</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value3>***</span><span class=value2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/users/cn/cmagis/
+ORBIT_SOCKETDIR=/tmp/orbit-cmagis
+HOSTNAME=brasil
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+GIO_LAUNCHED_DESKTOP_FILE_PID=13637
+MCOFFEE_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//mcoffee/
+GPG_AGENT_INFO=/tmp/seahorse-3oGFZj/S.gpg-agent:13286:1;
+ROOT_TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/
+TERM=xterm
+SHELL=/bin/bash
+XDG_SESSION_COOKIE=78ca754cf49d9d17b2c0859500000020-1472467836.368722-1926617865
+HISTSIZE=1000
+PERL5LIB=:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/perl/lib/perl5
+GTK_RC_FILES=/etc/gtk/gtkrc:/users/cn/cmagis/.gtkrc-1.2-gnome2
+WINDOWID=33313398
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+METHODS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//methods/
+IMSETTINGS_MODULE=none
+http_proxy=
+HTTP_proxy=
+USER=cmagis
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-y1Hwrp/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-y1Hwrp/socket
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/13210,unix/unix:/tmp/.ICE-unix/13210
+USERNAME=cmagis
+ENV_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//.t_coffee_env
+GIO_LAUNCHED_DESKTOP_FILE=/users/cn/cmagis/Desktop/gnome-terminal.desktop
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+DESKTOP_SESSION=gnome
+MAIL=/var/spool/mail/cmagis
+PATH=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/users/cn/cmagis/bin:/users/cn/cmagis/bin
+_=/usr/bin/printenv
+ALN_LINE_LENGTH=160
+QT_IM_MODULE=xim
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/
+PWD=/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/users/cn/cmagis/.t_coffee/cache//
+XMODIFIERS=@im=none
+GDM_KEYBOARD_LAYOUT=us	intl
+GNOME_KEYRING_PID=13200
+LANG=en_US.UTF-8
+KDE_IS_PRELINKED=1
+GDM_LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+KDEDIRS=/usr
+GDMSESSION=gnome
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HISTCONTROL=ignoredups
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/
+SHLVL=4
+HOME=/users/cn/cmagis
+DUMP_4_TCOFFEE=t_coffee.184.WBXxDQ7ae9.dump
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+HTTP_PROXY=
+MAFFT_BINARIES=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/plugins/linux/
+LOGNAME=cmagis
+CVS_RSH=ssh
+EMAIL_4_TCOFFEE=cedrik.magis@crg.es
+QTLIB=/usr/lib64/qt-3.3/lib
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-H13VKolxki,guid=b1ccb896c3103c0a8fe39b81000001d2
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+EMAIL=cedrik.magis@crg.es
+UPDATED_ENV_4_TCOFFEE=1
+WINDOWPATH=1
+DISPLAY=:0.0
+ALL_proxy=
+PROXY_4_TCOFFEE=cedrik.magis@crg.es
+LOCKDIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/lck//
+G_BROKEN_FILENAMES=1
+TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/tco/63723173/
+XAUTHORITY=/var/run/gdm/auth-for-cmagis-E59HTd/database
+COLORTERM=gnome-terminal
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.184.WBXxDQ7ae9.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>1430</line>
+</ref>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_quickstart.rst</source>
+<line>109</line>
+</ref>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_quickstart.rst</source>
+<line>208</line>
+</ref>

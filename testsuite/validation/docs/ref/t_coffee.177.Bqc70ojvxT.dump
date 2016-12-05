@@ -1,0 +1,3409 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee sample_dnaseq1.fasta -in Mcdna_fast_pair@EP@MATRIX@idmat</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=926, Nseq=3, Len=850 
+
+sp|O35205|GRAK_MOUSE   -atg---agattctccagttgggcgctagtatctttagtggcaggg------gtgtatatgtcctcagaatgcttccacactgagatcataggcggtcgagaggtgcaacctcatagccgcccgtttatggcct---------c---------aatccag
+sp|P08884|GRAE_MOUSE   atgcccccagtgctcatactactga-ctcttcttttgcccctgggcgccggcg------------cagagg------------aaataataggagggcatgttgtgaagccgcactctaggccctatatggcctttgtaaaaagtgtagatatcgagggt
+sp|P21844|MCPT5_MOUSE  atgc---acttattgactctgcacc-ttctattattactcttggga------t---------cttcaa---ctaaagccggagaaatcataggcgggaccgagtgtattccgcacagtcgtccatacatggcttaccttgaaattgtgacttcggaaaac
+                                 *  *     *         *    **       **                    **                * ** ***** **    *        ** **     * ** *  ***** *                          
+
+sp|O35205|GRAK_MOUSE   tatcggtctaagcatatttgtggtggggttctaattcacccccaatgggttttgacggctgcgcactgttactcttggtttcctagaggacattcccccactgtggttttaggcgcgcattctctgtcgaaaaatgaaccgatgaagcagacatttgaga
+sp|P08884|GRAE_MOUSE   aatcgcc------gttattgcggcggttttctagtacaagacgactttgtcctgacggcagcacactgtc---------------ggaatcgaaccatgacggtcaccctcggtgcgcacaacatcaaagctaaagaggagacccaacagataatacctg
+sp|P21844|MCPT5_MOUSE  tatctga------gcgcgtgttctggttttttaatccgcagaaattttgtccttacggcggctcactgtg---------------ccggacgttctattacggttctccttggagcacacaataagacatctaaggaggatacgtggcaaaaactggaag
+                        ***              **    **  ** ** * *      * *  **  * ***** ** ******                     *   *    ** **     * ** ** **             ** **    *     ** * * *     
+
+sp|O35205|GRAK_MOUSE   taaagaagtttattcctttttccagactccaatcaggatcgg---ccagccacgacattatgttgatcaagctgcgaacggctgccgagctcaataagaacgtgcaattgcttcatctaggctcta---aaaactatctacgtgatggtacgaagtgtca
+sp|P08884|GRAE_MOUSE   tggcaaaagccattcctc-acccgg--actataacgcaactgcattcttttcagatatcatgttgcttaagcttgagagcaaagcaaagcgcacaaaagcggtaagacctctgaagctcccccgaccgaacgccagggtgaagcctggagatgtgtgctc
+sp|P21844|MCPT5_MOUSE  tcgaa-aagcaattcctacacccta--agtacgatgagaacctagtggtgcatgatatcatgttgttgaaattgaaagagaaagccaaattaacgttaggtgttggaacactgcctttgtccgctaacttcaatttcatcccacccgggcgtatgtgtag
+                       *     *    ******    **       *    *                 ** ** ****** * **  *          **  *    *        **   *   **     *   *                *       **      ***   
+
+sp|O35205|GRAK_MOUSE   agtaacaggatggggaa---cgacgaaaccagatttgctcacggcttcggacaccttgcgcgaagtgacagtgactatcatttcaaggaaacgctgcaattcacaat------cttactacaatcacaaacctgtcatcacgaaggatatgatctgtgca
+sp|P08884|GRAE_MOUSE   cgttgccggctggggatcgcgaagcatta---acgatactaaggcctctgcacggctgcgggaggcacaacttgtcatacaagaagacgaagagtgta------aaa------agcgttttagacattatactgagacgacgg------aaatttgtgcc
+sp|P21844|MCPT5_MOUSE  ggccgttggctggggca---gaacgaatg---tcaatgagcctgcaagcgataccctgcaagaggtgaaaatgcggctccaggaaccacaggcatgca------aacactttactagttttcgacata---------acagtc------aactttgcgtc
+                        *     ** *****       *  *                 **    *      ***  ** *    * *     *      *    *    ** *      **            *     **             *            * ** *  
+
+sp|O35205|GRAK_MOUSE   ggagatgcaagaggccaaaaggactcttgtaaaggtgattcaggaggcccgttgatctgtaaagggatatttcatgccctcgtctcacagggatacaagtgtggaattgccaaaaagccaggtatct---acacgctcc------taacaaagaagtatc
+sp|P08884|GRAE_MOUSE   ggcgatctgaagaagatcaagacccccttcaaaggtgacagtggaggcccgttagtgtgcgataacaaag------cctacggcctattagcgtacg------------caaaaaacagaacaataagttcgggggttttcaccaagatcgtgcactttc
+sp|P21844|MCPT5_MOUSE  ggcaatcccaagaaaatgcagaacgtatacaaaggggacagtgggggaccattgttgtgcgcgggcatcg------cccaaggaattgcctcttatgtccaccgtaatgcgaaaccccctgctgtct---tcacta---------gaatttcacactacc
+                       **  **   *         **  *   *  ***** **    ** ** ** **  * **       *         **   *           **              * ***          *                      *      * *  *
+
+sp|O35205|GRAK_MOUSE   agacttggattaagtctaagcttgctcctagtcgtgcgcat---------
+sp|P08884|GRAE_MOUSE   tgccctggataa------------------gccgcaacatgaagctgtta
+sp|P21844|MCPT5_MOUSE  gcccatggattaataagattctcagggaaaac------------------
+                          * ***** *                                      
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	Mcdna_fast_pair@EP@MATRIX@idmat
+-seq           	S	[1] 	sample_dnaseq1.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-dpa           	FL	[0] 	0
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniprot
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmatng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+
+!		[Final Evaluation][TOT=   35][  0 %]!		[Final Evaluation][TOT=   35][  5 %]!		[Final Evaluation][TOT=   35][  8 %]!		[Final Evaluation][TOT=   35][ 11 %]!		[Final Evaluation][TOT=   35][ 14 %]!		[Final Evaluation][TOT=   35][ 17 %]!		[Final Evaluation][TOT=   35][ 20 %]!		[Final Evaluation][TOT=   35][ 22 %]!		[Final Evaluation][TOT=   35][ 25 %]!		[Final Evaluation][TOT=   35][ 28 %]!		[Final Evaluation][TOT=   35][ 31 %]!		[Final Evaluation][TOT=   35][ 34 %]!		[Final Evaluation][TOT=   35][ 37 %]!		[Final Evaluation][TOT=   35][ 40 %]!		[Final Evaluation][TOT=   35][ 42 %]!		[Final Evaluation][TOT=   35][ 45 %]!		[Final Evaluation][TOT=   35][ 48 %]!		[Final Evaluation][TOT=   35][ 51 %]!		[Final Evaluation][TOT=   35][ 54 %]!		[Final Evaluation][TOT=   35][ 57 %]!		[Final Evaluation][TOT=   35][ 60 %]!		[Final Evaluation][TOT=   35][ 62 %]!		[Final Evaluation][TOT=   35][ 65 %]!		[Final Evaluation][TOT=   35][ 68 %]!		[Final Evaluation][TOT=   35][ 71 %]!		[Final Evaluation][TOT=   35][ 74 %]!		[Final Evaluation][TOT=   35][ 77 %]!		[Final Evaluation][TOT=   35][ 80 %]!		[Final Evaluation][TOT=   35][ 82 %]!		[Final Evaluation][TOT=   35][ 85 %]!		[Final Evaluation][TOT=   35][ 88 %]!		[Final Evaluation][TOT=   35][ 91 %]!		[Final Evaluation][TOT=   35][ 94 %]!		[Final Evaluation][TOT=   35][ 97 %]!		[Final Evaluation][TOT=   35][100 %]
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+ng    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) cdna_fast_pair@EP@MATRIX@idmat 
+	Input File (S) sample_dnaseq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 3 SEQUENCES  [DNA]
+  Input File sample_dnaseq1.fasta  Seq sp|O35205|GRAK_MOUSE  Length  789 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P08884|GRAE_MOUSE  Length  744 type DNA Struct Unchecked
+  Input File sample_dnaseq1.fasta  Seq sp|P21844|MCPT5_MOUSE Length  741 type DNA Struct Unchecked
+
+	Multi Core Mode: 24 processors:
+
+	--- Process Method/Library/Aln Mcdna_fast_pair@EP@MATRIX@idmat
+	--- Process Method/Library/Aln Ssample_dnaseq1.fasta
+	xxx Retrieved Ssample_dnaseq1.fasta
+	xxx Retrieved Mcdna_fast_pair@EP@MATRIX@idmat
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [4086]
+
+Library Relaxation: Multi_proc [24]
+ 
+Relaxation Summary: [4086]--->[4086]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: sp|O35205|GRAK_MOUSE
+Group    2: sp|P08884|GRAE_MOUSE
+Group    3: sp|P21844|MCPT5_MOUSE
+
+
+	Group    4: [Group    2 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=  844][PID:22347]
+	Group    5: [Group    3 (   1 seq)] with [Group    4 (   2 seq)]-->[Len=  850][PID:22347]
+
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= sample_dnaseq1.dnd
+	#### File Type= MSA             Format= aln             Name= sample_dnaseq1.aln
+	#### File Type= MSA             Format= html            Name= sample_dnaseq1.html
+
+# Command Line: t_coffee sample_dnaseq1.fasta -in Mcdna_fast_pair@EP@MATRIX@idmat  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 30.472 Mb, Max= 31.627 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_dnaseq1.fasta</name>
+<content>
+>sp|O35205|GRAK_MOUSE
+atgagattctccagttgggcgctagtatctttagtggcaggggtgtatat
+gtcctcagaatgcttccacactgagatcataggcggtcgagaggtgcaac
+ctcatagccgcccgtttatggcctcaatccagtatcggtctaagcatatt
+tgtggtggggttctaattcacccccaatgggttttgacggctgcgcactg
+ttactcttggtttcctagaggacattcccccactgtggttttaggcgcgc
+attctctgtcgaaaaatgaaccgatgaagcagacatttgagataaagaag
+tttattcctttttccagactccaatcaggatcggccagccacgacattat
+gttgatcaagctgcgaacggctgccgagctcaataagaacgtgcaattgc
+ttcatctaggctctaaaaactatctacgtgatggtacgaagtgtcaagta
+acaggatggggaacgacgaaaccagatttgctcacggcttcggacacctt
+gcgcgaagtgacagtgactatcatttcaaggaaacgctgcaattcacaat
+cttactacaatcacaaacctgtcatcacgaaggatatgatctgtgcagga
+gatgcaagaggccaaaaggactcttgtaaaggtgattcaggaggcccgtt
+gatctgtaaagggatatttcatgccctcgtctcacagggatacaagtgtg
+gaattgccaaaaagccaggtatctacacgctcctaacaaagaagtatcag
+acttggattaagtctaagcttgctcctagtcgtgcgcat
+>sp|P08884|GRAE_MOUSE
+atgcccccagtgctcatactactgactcttcttttgcccctgggcgccgg
+cgcagaggaaataataggagggcatgttgtgaagccgcactctaggccct
+atatggcctttgtaaaaagtgtagatatcgagggtaatcgccgttattgc
+ggcggttttctagtacaagacgactttgtcctgacggcagcacactgtcg
+gaatcgaaccatgacggtcaccctcggtgcgcacaacatcaaagctaaag
+aggagacccaacagataatacctgtggcaaaagccattcctcacccggac
+tataacgcaactgcattcttttcagatatcatgttgcttaagcttgagag
+caaagcaaagcgcacaaaagcggtaagacctctgaagctcccccgaccga
+acgccagggtgaagcctggagatgtgtgctccgttgccggctggggatcg
+cgaagcattaacgatactaaggcctctgcacggctgcgggaggcacaact
+tgtcatacaagaagacgaagagtgtaaaaagcgttttagacattatactg
+agacgacggaaatttgtgccggcgatctgaagaagatcaagacccccttc
+aaaggtgacagtggaggcccgttagtgtgcgataacaaagcctacggcct
+attagcgtacgcaaaaaacagaacaataagttcgggggttttcaccaaga
+tcgtgcactttctgccctggataagccgcaacatgaagctgtta
+>sp|P21844|MCPT5_MOUSE
+atgcacttattgactctgcaccttctattattactcttgggatcttcaac
+taaagccggagaaatcataggcgggaccgagtgtattccgcacagtcgtc
+catacatggcttaccttgaaattgtgacttcggaaaactatctgagcgcg
+tgttctggttttttaatccgcagaaattttgtccttacggcggctcactg
+tgccggacgttctattacggttctccttggagcacacaataagacatcta
+aggaggatacgtggcaaaaactggaagtcgaaaagcaattcctacaccct
+aagtacgatgagaacctagtggtgcatgatatcatgttgttgaaattgaa
+agagaaagccaaattaacgttaggtgttggaacactgcctttgtccgcta
+acttcaatttcatcccacccgggcgtatgtgtagggccgttggctggggc
+agaacgaatgtcaatgagcctgcaagcgataccctgcaagaggtgaaaat
+gcggctccaggaaccacaggcatgcaaacactttactagttttcgacata
+acagtcaactttgcgtcggcaatcccaagaaaatgcagaacgtatacaaa
+ggggacagtgggggaccattgttgtgcgcgggcatcgcccaaggaattgc
+ctcttatgtccaccgtaatgcgaaaccccctgctgtcttcactagaattt
+cacactaccgcccatggattaataagattctcagggaaaac
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_dnaseq1.dnd</name>
+<content>
+(
+sp|O35205|GRAK_MOUSE:0.12000,
+sp|P08884|GRAE_MOUSE:0.12000,
+sp|P21844|MCPT5_MOUSE:0.13000);
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_dnaseq1.dnd</name>
+<content>
+(
+sp|O35205|GRAK_MOUSE:0.12000,
+sp|P08884|GRAE_MOUSE:0.12000,
+sp|P21844|MCPT5_MOUSE:0.13000);
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_dnaseq1.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.01 sec, SCORE=926, Nseq=3, Len=850 
+
+sp|O35205|GRAK_MOUSE   -atg---agattctccagttgggcgctagtatctttagtggcaggg------gtgtatatgtcctcagaatgcttccacactgagatcataggcggtcgagaggtgcaacctcatagccgcccgtttatggcct---------c---------aatccag
+sp|P08884|GRAE_MOUSE   atgcccccagtgctcatactactga-ctcttcttttgcccctgggcgccggcg------------cagagg------------aaataataggagggcatgttgtgaagccgcactctaggccctatatggcctttgtaaaaagtgtagatatcgagggt
+sp|P21844|MCPT5_MOUSE  atgc---acttattgactctgcacc-ttctattattactcttggga------t---------cttcaa---ctaaagccggagaaatcataggcgggaccgagtgtattccgcacagtcgtccatacatggcttaccttgaaattgtgacttcggaaaac
+                                 *  *     *         *    **       **                    **                * ** ***** **    *        ** **     * ** *  ***** *                          
+
+sp|O35205|GRAK_MOUSE   tatcggtctaagcatatttgtggtggggttctaattcacccccaatgggttttgacggctgcgcactgttactcttggtttcctagaggacattcccccactgtggttttaggcgcgcattctctgtcgaaaaatgaaccgatgaagcagacatttgaga
+sp|P08884|GRAE_MOUSE   aatcgcc------gttattgcggcggttttctagtacaagacgactttgtcctgacggcagcacactgtc---------------ggaatcgaaccatgacggtcaccctcggtgcgcacaacatcaaagctaaagaggagacccaacagataatacctg
+sp|P21844|MCPT5_MOUSE  tatctga------gcgcgtgttctggttttttaatccgcagaaattttgtccttacggcggctcactgtg---------------ccggacgttctattacggttctccttggagcacacaataagacatctaaggaggatacgtggcaaaaactggaag
+                        ***              **    **  ** ** * *      * *  **  * ***** ** ******                     *   *    ** **     * ** ** **             ** **    *     ** * * *     
+
+sp|O35205|GRAK_MOUSE   taaagaagtttattcctttttccagactccaatcaggatcgg---ccagccacgacattatgttgatcaagctgcgaacggctgccgagctcaataagaacgtgcaattgcttcatctaggctcta---aaaactatctacgtgatggtacgaagtgtca
+sp|P08884|GRAE_MOUSE   tggcaaaagccattcctc-acccgg--actataacgcaactgcattcttttcagatatcatgttgcttaagcttgagagcaaagcaaagcgcacaaaagcggtaagacctctgaagctcccccgaccgaacgccagggtgaagcctggagatgtgtgctc
+sp|P21844|MCPT5_MOUSE  tcgaa-aagcaattcctacacccta--agtacgatgagaacctagtggtgcatgatatcatgttgttgaaattgaaagagaaagccaaattaacgttaggtgttggaacactgcctttgtccgctaacttcaatttcatcccacccgggcgtatgtgtag
+                       *     *    ******    **       *    *                 ** ** ****** * **  *          **  *    *        **   *   **     *   *                *       **      ***   
+
+sp|O35205|GRAK_MOUSE   agtaacaggatggggaa---cgacgaaaccagatttgctcacggcttcggacaccttgcgcgaagtgacagtgactatcatttcaaggaaacgctgcaattcacaat------cttactacaatcacaaacctgtcatcacgaaggatatgatctgtgca
+sp|P08884|GRAE_MOUSE   cgttgccggctggggatcgcgaagcatta---acgatactaaggcctctgcacggctgcgggaggcacaacttgtcatacaagaagacgaagagtgta------aaa------agcgttttagacattatactgagacgacgg------aaatttgtgcc
+sp|P21844|MCPT5_MOUSE  ggccgttggctggggca---gaacgaatg---tcaatgagcctgcaagcgataccctgcaagaggtgaaaatgcggctccaggaaccacaggcatgca------aacactttactagttttcgacata---------acagtc------aactttgcgtc
+                        *     ** *****       *  *                 **    *      ***  ** *    * *     *      *    *    ** *      **            *     **             *            * ** *  
+
+sp|O35205|GRAK_MOUSE   ggagatgcaagaggccaaaaggactcttgtaaaggtgattcaggaggcccgttgatctgtaaagggatatttcatgccctcgtctcacagggatacaagtgtggaattgccaaaaagccaggtatct---acacgctcc------taacaaagaagtatc
+sp|P08884|GRAE_MOUSE   ggcgatctgaagaagatcaagacccccttcaaaggtgacagtggaggcccgttagtgtgcgataacaaag------cctacggcctattagcgtacg------------caaaaaacagaacaataagttcgggggttttcaccaagatcgtgcactttc
+sp|P21844|MCPT5_MOUSE  ggcaatcccaagaaaatgcagaacgtatacaaaggggacagtgggggaccattgttgtgcgcgggcatcg------cccaaggaattgcctcttatgtccaccgtaatgcgaaaccccctgctgtct---tcacta---------gaatttcacactacc
+                       **  **   *         **  *   *  ***** **    ** ** ** **  * **       *         **   *           **              * ***          *                      *      * *  *
+
+sp|O35205|GRAK_MOUSE   agacttggattaagtctaagcttgctcctagtcgtgcgcat---------
+sp|P08884|GRAE_MOUSE   tgccctggataa------------------gccgcaacatgaagctgtta
+sp|P21844|MCPT5_MOUSE  gcccatggattaataagattctcagggaaaac------------------
+                          * ***** *                                      
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_dnaseq1.html</name>
+<content>
+<html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=926</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;93</span><br><span class=value9>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;91</span><br><span class=value9>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;92</span><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;92</span><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>atg</span><span class=valuegap>---</span><span class=value8>agattctccagttgggcg</span><span class=value9>c</span><span class=value8>tagtatctttagtggcaggg</span><span class=valuegap>------</span><span class=value7>g</span><span class=value9>tgtatatgtcctcagaatgcttcc</span><span class=value8>acactg</span><span class=value9>agatcataggcggtcgagaggtgcaacctcatagccgcccgtttatggcct</span><span class=valuegap>---------</span><span class=value8>c</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>atgcccccagtgc</span><span class=value8>tcatactactga</span><span class=valuegap>-</span><span class=value8>ctcttcttttgcccctgggc</span><span class=value7>gccggc</span><span class=value8>g</span><span class=valuegap>------------</span><span class=value9>cagagg</span><span class=valuegap>------------</span><span class=value9>aaataataggagggcatgttgtgaagccgcactctaggccctatatggcctttgtaaaaa</span><span class=value8>g</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>atgc</span><span class=valuegap>---</span><span class=value8>acttat</span><span class=value7>tgactctgcacc</span><span class=valuegap>-</span><span class=value7>ttctattattactcttggga</span><span class=valuegap>------</span><span class=value8>t</span><span class=valuegap>---------</span><span class=value9>cttcaa</span><span class=valuegap>---</span><span class=value9>ctaaag</span><span class=value8>ccggag</span><span class=value9>aaatcataggcgggaccgagtgtattccgcacagtcgtccatacatggcttaccttgaaat</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value6>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>*&nbsp;**&nbsp;*****&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**&nbsp;*&nbsp;&nbsp;*****&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------</span><span class=value8>aatcc</span><span class=value9>agtatcggt</span><span class=value8>cta</span><span class=value9>agcatatttgtggtggggttctaattcacccccaatgggttttgacggctgcgcactgttactcttggtttcctagaggacattcccccactgtggttttaggcgcgcatt</span><span class=value8>ctctgtc</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value8>tg</span><span class=value9>tagata</span><span class=value7>t</span><span class=value8>cg</span><span class=value9>agggtaatcgcc</span><span class=valuegap>------</span><span class=value8>gtt</span><span class=value9>attgcggcggttttctagtacaagacgactttgtcctgacggcagcacactgtc</span><span class=valuegap>---------------</span><span class=value9>ggaatcgaaccatgacggtcaccctcggtgcgcaca</span><span class=value8>aca</span><span class=value7>tcaa</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>tg</span><span class=value9>tgactt</span><span class=value7>cgg</span><span class=value8>aaa</span><span class=value9>actatctga</span><span class=valuegap>------</span><span class=value9>gcgcgtgttctggttttttaatccgcagaaattttgtccttacggcggctcactgtg</span><span class=valuegap>---------------</span><span class=value9>ccggacgttctattacggttctccttggagcacacaata</span><span class=value8>agac</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;***&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;**&nbsp;**&nbsp;*&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*&nbsp;&nbsp;**&nbsp;&nbsp;*&nbsp;*****&nbsp;**&nbsp;******&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;**&nbsp;**&nbsp;**&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>gaaaa</span><span class=value9>atgaaccgatgaagcagacatttgagataaag</span><span class=value8>aagttta</span><span class=value9>ttccttttt</span><span class=value8>ccag</span><span class=value7>ac</span><span class=value8>tccaatcagg</span><span class=value9>atcgg</span><span class=valuegap>---</span><span class=value8>ccagcc</span><span class=value9>acgacattatgttgatcaagctgcgaacggctgccgagctcaataagaacgtgcaattgct</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value7>agcta</span><span class=value8>aag</span><span class=value9>aggagacccaacagataatacctgtggca</span><span class=value8>a</span><span class=value7>aagcca</span><span class=value8>t</span><span class=value9>tcctc</span><span class=valuegap>-</span><span class=value8>acccgg</span><span class=valuegap>--</span><span class=value8>actata</span><span class=value7>acgc</span><span class=value8>aactg</span><span class=value7>cat</span><span class=value9>tctttt</span><span class=value8>cag</span><span class=value9>atatcatgttgcttaagcttgagagcaaagcaaagcgcacaaaagcggtaagacctct</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>atctaagg</span><span class=value9>aggatacgtggcaaaaactggaagtcgaa</span><span class=valuegap>-</span><span class=value8>aagcaat</span><span class=value9>tcctac</span><span class=value8>ac</span><span class=value7>ccta</span><span class=valuegap>--</span><span class=value9>agtacg</span><span class=value8>atgagaacc</span><span class=value7>tag</span><span class=value8>tggtgcatg</span><span class=value9>atatcatgttgttgaaattgaaagagaaagccaaattaacgttaggtgttggaacact</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value8>*&nbsp;*</span><span class=value9>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;*&nbsp;*&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value6>*&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value8>*</span><span class=value9>****&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;</span><span class=value6>**&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;*&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value9>*&nbsp;**&nbsp;******&nbsp;*&nbsp;**&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;**</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>tcatctaggct</span><span class=value8>cta</span><span class=valuegap>---</span><span class=value8>aaaact</span><span class=value9>atc</span><span class=value8>tacgtg</span><span class=value9>atggtacgaagtgtcaagtaacaggatggggaa</span><span class=valuegap>---</span><span class=value9>cgacgaaac</span><span class=value7>cag</span><span class=value8>att</span><span class=value9>tgctca</span><span class=value8>cgg</span><span class=value9>cttcggacaccttgcgcgaagtgacagtgactatcatttcaaggaa</span><span class=value8>acgctg</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>gaagctcc</span><span class=value8>cccgaccgaacgccaggg</span><span class=value9>tgaagcctggagatgtgtgctccgttgccggctggggatcgcgaagca</span><span class=value8>tta</span><span class=valuegap>---</span><span class=value8>acgatacta</span><span class=value9>aggcctctgcacggctgcgggaggcacaa</span><span class=value8>cttgtcatacaagaagacga</span><span class=value7>a</span><span class=value8>gagtg</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>gcctttgt</span><span class=value8>ccg</span><span class=value9>cta</span><span class=value8>act</span><span class=value7>tcaatt</span><span class=value8>tcatcccac</span><span class=value9>ccgggcgtatgtgtagggccgttggctggggca</span><span class=valuegap>---</span><span class=value9>gaacga</span><span class=value8>atg</span><span class=valuegap>---</span><span class=value7>tca</span><span class=value8>atgagcctg</span><span class=value9>caagcgataccctgcaagaggtgaaa</span><span class=value8>atgcggct</span><span class=value9>c</span><span class=value8>caggaaccacag</span><span class=value9>gcatg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value8>&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;*****&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;*</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value9>*&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***&nbsp;&nbsp;**&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value8>&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value9>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;**</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value8>caa</span><span class=value9>ttcaca</span><span class=value8>at</span><span class=valuegap>------</span><span class=value8>cttactacaatcac</span><span class=value9>aaacctgt</span><span class=value8>catcacgaaggatat</span><span class=value9>gat</span><span class=value8>ctg</span><span class=value9>tgc</span><span class=value8>aggaga</span><span class=value9>tgcaag</span><span class=value8>aggccaaaaggactct</span><span class=value9>tgtaaaggtgattcaggaggcccgttgatctgta</span><span class=value8>aag</span><span class=value9>ggatatttcatgccct</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value8>t</span><span class=value7>a</span><span class=valuegap>------</span><span class=value8>a</span><span class=value7>aa</span><span class=valuegap>------</span><span class=value8>agcgtttt</span><span class=value7>aga</span><span class=value8>catt</span><span class=value7>a</span><span class=value9>tac</span><span class=value7>tga</span><span class=value8>gacgacg</span><span class=value7>g</span><span class=valuegap>------</span><span class=value7>a</span><span class=value8>a</span><span class=value9>at</span><span class=value8>ttg</span><span class=value9>t</span><span class=value8>gc</span><span class=value7>cggcga</span><span class=value8>tctgaa</span><span class=value7>gaagatcaagaccccc</span><span class=value8>ttca</span><span class=value9>aaggtgacagtggaggcccgttagtgtgcgataaca</span><span class=value8>aag</span><span class=valuegap>------</span><span class=value9>cct</span><span class=value8>a</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>c</span><span class=value8>a</span><span class=valuegap>------</span><span class=value8>aaca</span><span class=value7>cttt</span><span class=value9>actagtttt</span><span class=value8>cga</span><span class=value9>cata</span><span class=valuegap>---------</span><span class=value9>acagt</span><span class=value8>c</span><span class=valuegap>------</span><span class=value8>aa</span><span class=value9>ctttgc</span><span class=value8>gt</span><span class=value9>cggcaa</span><span class=value8>tcccaagaaaatgcagaacgtataca</span><span class=value9>aaggggacagtgggggaccattgttgtgcg</span><span class=value8>cgg</span><span class=value9>gca</span><span class=value8>tcg</span><span class=valuegap>------</span><span class=value9>ccc</span><span class=value8>a</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value6>*&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*</span><span class=value6>*&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;</span><span class=value8>**&nbsp;</span><span class=value9>&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;*</span><span class=value8>&nbsp;**</span><span class=value9>&nbsp;</span><span class=value8>*&nbsp;</span><span class=value7>&nbsp;**&nbsp;&nbsp;*</span><span class=value8>*&nbsp;&nbsp;&nbsp;*&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;</span><span class=value8>*&nbsp;&nbsp;*</span><span class=value9>****&nbsp;**&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;**&nbsp;**&nbsp;**&nbsp;&nbsp;*&nbsp;**&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;*</span><span class=value8>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>cgtctcac</span><span class=value8>agggat</span><span class=value9>acaagtgtggaattgccaaaa</span><span class=value8>agccaggtatct</span><span class=valuegap>---</span><span class=value7>acacgc</span><span class=value8>tcc</span><span class=valuegap>------</span><span class=value8>taacaaaga</span><span class=value9>agtatcagacttgga</span><span class=value8>tta</span><span class=value7>agtctaagctt</span><span class=value8>g</span><span class=value9>ctc</span><span class=value8>cta</span><span class=value9>gtcgtg</span><span class=value8>cgc</span><span class=value9>at</span><span class=valuegap>---------</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value8>cggcc</span><span class=value9>tat</span><span class=value8>tagcgt</span><span class=value9>acg</span><span class=valuegap>------------</span><span class=value9>caaaaaacagaacaataa</span><span class=value8>gttcgggggttt</span><span class=value7>tcacca</span><span class=value8>agatcgtgcactttctgccct</span><span class=value9>ggataa</span><span class=valuegap>------------------</span><span class=value9>gccgca</span><span class=value8>aca</span><span class=value9>tga</span><span class=value8>agctgtta</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value8>aggaa</span><span class=value9>ttgcctcttatgtccaccgtaatgcgaaacccc</span><span class=value8>ctgctgtct</span><span class=valuegap>---</span><span class=value8>tcacta</span><span class=valuegap>---------</span><span class=value7>gaatttcac</span><span class=value8>actaccgcccat</span><span class=value9>gga</span><span class=value8>tta</span><span class=value7>ata</span><span class=value8>agattctca</span><span class=value9>ggg</span><span class=value8>aaa</span><span class=value9>ac</span><span class=valuegap>------------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;*&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</span><span class=value9>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;***&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value8>*&nbsp;*&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;*&nbsp;*</span><span class=value9>***</span><span class=value8>*&nbsp;*</span><span class=value5>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value7>&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/users/cn/cmagis/
+ORBIT_SOCKETDIR=/tmp/orbit-cmagis
+HOSTNAME=brasil
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+GIO_LAUNCHED_DESKTOP_FILE_PID=13637
+MCOFFEE_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//mcoffee/
+GPG_AGENT_INFO=/tmp/seahorse-3oGFZj/S.gpg-agent:13286:1;
+ROOT_TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/
+TERM=xterm
+SHELL=/bin/bash
+XDG_SESSION_COOKIE=78ca754cf49d9d17b2c0859500000020-1472467836.368722-1926617865
+HISTSIZE=1000
+PERL5LIB=:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/perl/lib/perl5
+GTK_RC_FILES=/etc/gtk/gtkrc:/users/cn/cmagis/.gtkrc-1.2-gnome2
+WINDOWID=33313398
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+METHODS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//methods/
+IMSETTINGS_MODULE=none
+http_proxy=
+HTTP_proxy=
+USER=cmagis
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-y1Hwrp/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-y1Hwrp/socket
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/13210,unix/unix:/tmp/.ICE-unix/13210
+USERNAME=cmagis
+ENV_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//.t_coffee_env
+GIO_LAUNCHED_DESKTOP_FILE=/users/cn/cmagis/Desktop/gnome-terminal.desktop
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+DESKTOP_SESSION=gnome
+MAIL=/var/spool/mail/cmagis
+PATH=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/users/cn/cmagis/bin:/users/cn/cmagis/bin
+_=/usr/bin/printenv
+ALN_LINE_LENGTH=160
+QT_IM_MODULE=xim
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/
+PWD=/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/users/cn/cmagis/.t_coffee/cache//
+XMODIFIERS=@im=none
+GDM_KEYBOARD_LAYOUT=us	intl
+GNOME_KEYRING_PID=13200
+LANG=en_US.UTF-8
+KDE_IS_PRELINKED=1
+GDM_LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+KDEDIRS=/usr
+GDMSESSION=gnome
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HISTCONTROL=ignoredups
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/
+SHLVL=4
+HOME=/users/cn/cmagis
+DUMP_4_TCOFFEE=t_coffee.177.Bqc70ojvxT.dump
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+HTTP_PROXY=
+MAFFT_BINARIES=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/plugins/linux/
+LOGNAME=cmagis
+CVS_RSH=ssh
+EMAIL_4_TCOFFEE=cedrik.magis@crg.es
+QTLIB=/usr/lib64/qt-3.3/lib
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-H13VKolxki,guid=b1ccb896c3103c0a8fe39b81000001d2
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+EMAIL=cedrik.magis@crg.es
+UPDATED_ENV_4_TCOFFEE=1
+WINDOWPATH=1
+DISPLAY=:0.0
+ALL_proxy=
+PROXY_4_TCOFFEE=cedrik.magis@crg.es
+LOCKDIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/lck//
+G_BROKEN_FILENAMES=1
+TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/tco/63722347/
+XAUTHORITY=/var/run/gdm/auth-for-cmagis-E59HTd/database
+COLORTERM=gnome-terminal
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.177.Bqc70ojvxT.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>1501</line>
+</ref>

@@ -1,0 +1,283 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -other_pg seq_reformat -in sample_rnaseq2.aln -in2 sample_rnaseq2.alifold -input2 alifold -action +add_alifold -output stockholm_aln</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>
+# STOCKHOLM 1.0
+
+OTTHUMT00000006707  uacGGAAGCU.UUAGGGAGGUGCUCUGAGACCCGAAACUAGACUCGACUU
+OTTHUMT00000043281  .aucccagcuacucgggagg....cugaggcaggagaau.cacuugaacc
+OTTHUMT00000007987  ................GAGGUGCUCUGAGACCCGAAACUAGACUCGACUU
+#=GC SS_cons        ................(((.......................))).....
+
+OTTHUMT00000006707  UAACAGACACAGACGACCCUGAA.....G.....................
+OTTHUMT00000043281  cgggaggcagagguugcaguga.gccgag.....................
+OTTHUMT00000007987  UAACAGACACAGACGACCCUGAAGGCGAGACugucugcuggugggaugcu
+#=GC SS_cons        ..((((.....((((((.................................
+
+OTTHUMT00000006707  ..AUGGAAAUGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
+OTTHUMT00000043281  ..aucgcaccccugcacuccagccugggugacagagcaagacuccaucuc
+OTTHUMT00000007987  ggAUGGAAACGUUUUCUUCCAAAUUGUGC.....UGCACGUUUU.....U
+#=GC SS_cons        ....((((....)))).((((...(((((......)))))..........
+
+OTTHUMT00000006707  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
+OTTHUMT00000043281  aaaaaaaauaaaggaaaUAUGCGUCGUUGGAUGCUGUAUGACAAUCAAGC
+OTTHUMT00000007987  GGCGAG.AGCAUGGGGCUGUGCGGCGUCCC...CUCCCUGGCGC.....C
+#=GC SS_cons        .((.....))...(((((((((((((((...........))))).....)
+
+OTTHUMT00000006707  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
+OTTHUMT00000043281  UACUUAUAACAAACAAAAUUGAGAAUGAAGgauuaugauccaaacucAGC
+OTTHUMT00000007987  CACCUGUGCCCUGCACACU.G.GCCUGCACUGUGGUGAU.....CUC.GC
+#=GC SS_cons        ((((.((((...((........))..))))...)))).............
+
+OTTHUMT00000006707  UUGGCCC....CCACCUGA.......UUCC....UGACA....UACAGCA
+OTTHUMT00000043281  UGGGCCUCCCCUC.CCUGCCCCAGGAUUGUGGAGUGAGAACGUUGCAGCA
+OTTHUMT00000007987  UUGGCCC....CCACCUGA.......UUCC....CGACA....UACAGCA
+#=GC SS_cons        ...............................................)))
+
+OTTHUMT00000006707  GA..GGAAG....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
+OTTHUMT00000043281  GGAGAGAACAACGCAGCAAAGCACAGCAGGGGAACCGgaaaugcucaccu
+OTTHUMT00000007987  GA..GGAAC....C..UUAGGCUCAGGUGG..AACA.....GCCUCAACU
+#=GC SS_cons        ....(((((.......(((((..(.(((.............)))((....
+
+OTTHUMT00000006707  ...GAUUCAGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
+OTTHUMT00000043281  uuugacaggguacuuuuaguucuggggccuuaucuuaaggauauuccaac
+OTTHUMT00000007987  ...GAUUCUGUCCCUGAACUUCCGUACA..CAGCCCUGGAGUCGUCU...
+#=GC SS_cons        ...))....)..))))).))))).......))))))))))))))))....
+
+OTTHUMT00000006707  .UAGAgc.caugauuuauuua......acuguucuuucauuuuacagaac
+OTTHUMT00000043281  auauacaaaaagauucaugcacagagauauguacuuuaguauuauuuacc
+OTTHUMT00000007987  .UAGAGc.caugauuuauuua......acuguucuuucauuuuacagaac
+#=GC SS_cons        ............((((((((........((((...........))))...
+
+OTTHUMT00000006707  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
+OTTHUMT00000043281  auaggaaaaaaguuggaaacaauacauuuuauguucuguaaaaugaaaga
+OTTHUMT00000007987  aua..aaauguauuguuuccaa..cuuu.uuuccuaugguaa.....aua
+#=GC SS_cons        .........((((((((((((...............))).)).....)))
+
+OTTHUMT00000006707  auacuaaaguaaau.aucucugug.caugaaucuu....uuuguau..au
+OTTHUMT00000043281  acaguuaaauaaaucauggCUCUAAGACGACUCCAGGGCUGUGUACGGAA
+OTTHUMT00000007987  auacuaaaguaaau.aucucug............................
+#=GC SS_cons        ))))..)))))))).....))))...........................
+
+OTTHUMT00000006707  guu..ggaauauccuuaagauaagg......ccccagaacuaaaaguacc
+OTTHUMT00000043281  GUUCAGGGACAGAAUC.AGUUGAGGCUGUUCCACCUGAGCCUAAGCUUCC
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ((((((((((((((((.....)))))))))...))))))).....(((((
+
+OTTHUMT00000006707  .cugucaaa.g...ggug.......a..gcauuuCCG.............
+OTTHUMT00000043281  UCUGCUGUAUGUCGGGAAUCAGGUGGGGGCCAAGCGAGAUCACCACAGUG
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        .(((((((((((..((.........((((((.((((.(....((......
+
+OTTHUMT00000006707  ...GUUC.CCCUGCUGUGCUUUGCUGCGUUGUUCUCCC............
+OTTHUMT00000043281  CAGGC.CAGUGUGC.....AGGGCACAGGUGGGCACCAGGGAGGGGACGC
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        ...((.((.(((((........)))).).)).)).........))....)
+
+OTTHUMT00000006707  .CUGCUGCAACGUUCUCACUCCACAAUCCUGGGGCAGG.UAGGGG.A...
+OTTHUMT00000043281  CGCACAGCCCCAUGCUCUCGCCAAAAACGUGCAGCACAAUUU.GGAAGAA
+OTTHUMT00000007987  ..................................................
+#=GC SS_cons        )))).)))))).........))....)))))))))))......)))))..
+
+OTTHUMT00000006707  ....GGCCCAGCug..aguuuggaucauaauccu...gaaagacaca
+OTTHUMT00000043281  AACAUUUCCAUCUGUUAAUAAAGAGCAAGGGCCUCUGGUCAUAAGUG
+OTTHUMT00000007987  .....................................ugcau..gaa
+#=GC SS_cons        ...............................................
+
+//
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_rnaseq2.aln</name>
+<content>
+CLUSTAL FORMAT for T-COFFEE Version_7.84 [http://www.tcoffee.org] [MODE: rcoffee ], CPU=0.79 sec, SCORE=20, Nseq=3, Len=797 
+
+OTTHUMT00000006707  uacGGAAGCU-UUAGGGAGGUGCUCUGAGACCCGAAACUAGACUCGACUUUAACAGACAC
+OTTHUMT00000043281  -aucccagcuacucgggagg----cugaggcaggagaau-cacuugaacccgggaggcag
+OTTHUMT00000007987  ----------------GAGGUGCUCUGAGACCCGAAACUAGACUCGACUUUAACAGACAC
+                                    ****    ***** *  ** * *  *** **       ** ** 
+
+OTTHUMT00000006707  AGACGACCCUGAA-----G-----------------------AUGGAAAUGUUUUCUUCC
+OTTHUMT00000043281  agguugcaguga-gccgag-----------------------aucgcaccccugcacucc
+OTTHUMT00000007987  AGACGACCCUGAAGGCGAGACugucugcuggugggaugcuggAUGGAAACGUUUUCUUCC
+                    **    *  ***      *                       ** * *    *    ***
+
+OTTHUMT00000006707  AAAUUGUGC-----UGCACGUUUU-----UGGCGAG-AGCAUGGGGCUGUGCGGCGUCCC
+OTTHUMT00000043281  agccugggugacagagcaagacuccaucucaaaaaaaauaaaggaaaUAUGCGUCGUUGG
+OTTHUMT00000007987  AAAUUGUGC-----UGCACGUUUU-----UGGCGAG-AGCAUGGGGCUGUGCGGCGUCCC
+                    *   ** *       *** *  *           *  *  * **   * **** ***   
+
+OTTHUMT00000006707  ---CUCCCUGGCGC-----CCACCUGUGCCCUGCACACU-G-GCCUGCACUGUGGUGAU-
+OTTHUMT00000043281  AUGCUGUAUGACAAUCAAGCUACUUAUAACAAACAAAAUUGAGAAUGAAGgauuaugauc
+OTTHUMT00000007987  ---CUCCCUGGCGC-----CCACCUGUGCCCUGCACACU-G-GCCUGCACUGUGGUGAU-
+                       **   ** *       * ** * *  *   ** * * * *  ** *   *  **** 
+
+OTTHUMT00000006707  ----CUC-GCUUGGCCC----CCACCUGA-------UUCC----UGACA----UACAGCA
+OTTHUMT00000043281  caaacucAGCUGGGCCUCCCCUC-CCUGCCCCAGGAUUGUGGAGUGAGAACGUUGCAGCA
+OTTHUMT00000007987  ----CUC-GCUUGGCCC----CCACCUGA-------UUCC----CGACA----UACAGCA
+                        *** *** ****      * ****        **       ** *    * *****
+
+OTTHUMT00000006707  GA--GGAAG----C--UUAGGCUCAGGUGG--AACA-----GCCUCAACU---GAUUCAG
+OTTHUMT00000043281  GGAGAGAACAACGCAGCAAAGCACAGCAGGGGAACCGgaaaugcucaccuuuugacaggg
+OTTHUMT00000007987  GA--GGAAC----C--UUAGGCUCAGGUGG--AACA-----GCCUCAACU---GAUUCUG
+                    *    ***     *    * ** ***  **  ***        **** **   **    *
+
+OTTHUMT00000006707  UCCCUGAACUUCCGUACA--CAGCCCUGGAGUCGUCU----UAGAgc-caugauuuauuu
+OTTHUMT00000043281  uacuuuuaguucuggggccuuaucuuaaggauauuccaacauauacaaaaagauucaugc
+OTTHUMT00000007987  UCCCUGAACUUCCGUACA--CAGCCCUGGAGUCGUCU----UAGAGc-caugauuuauuu
+                    * * *  * *** *       * *    *  *  **     ** *    * **** **  
+
+OTTHUMT00000006707  a------acuguucuuucauuuuacagaacaua--aaauguauuguuuccaa--cuuu-u
+OTTHUMT00000043281  acagagauauguacuuuaguauuauuuaccauaggaaaaaaguuggaaacaauacauuuu
+OTTHUMT00000007987  a------acuguucuuucauuuuacagaacaua--aaauguauuguuuccaa--cuuu-u
+                    *        *** ****  * ***   * ****  ***    ***    ***  * ** *
+
+OTTHUMT00000006707  uuccuaugguaa-----auaauacuaaaguaaau-aucucugug-caugaaucuu----u
+OTTHUMT00000043281  auguucuguaaaaugaaagaacaguuaaauaaaucauggCUCUAAGACGACUCCAGGGCU
+OTTHUMT00000007987  uuccuaugguaa-----auaauacuaaaguaaau-aucucug------------------
+                     *  * **  **     * ** * * ** ***** **  **                   
+
+OTTHUMT00000006707  uuguau--auguu--ggaauauccuuaagauaagg------ccccagaacuaaaaguacc
+OTTHUMT00000043281  GUGUACGGAAGUUCAGGGACAGAAUC-AGUUGAGGCUGUUCCACCUGAGCCUAAGCUUCC
+OTTHUMT00000007987  ------------------------------------------------------------
+                                                                                
+
+OTTHUMT00000006707  -cugucaaa-g---ggug-------a--gcauuuCCG----------------GUUC-CC
+OTTHUMT00000043281  UCUGCUGUAUGUCGGGAAUCAGGUGGGGGCCAAGCGAGAUCACCACAGUGCAGGC-CAGU
+OTTHUMT00000007987  ------------------------------------------------------------
+                                                                                
+
+OTTHUMT00000006707  CUGCUGUGCUUUGCUGCGUUGUUCUCCC-------------CUGCUGCAACGUUCUCACU
+OTTHUMT00000043281  GUGC-----AGGGCACAGGUGGGCACCAGGGAGGGGACGCCGCACAGCCCCAUGCUCUCG
+OTTHUMT00000007987  ------------------------------------------------------------
+                                                                                
+
+OTTHUMT00000006707  CCACAAUCCUGGGGCAGG-UAGGGG-A-------GGCCCAGCug--aguuuggaucauaa
+OTTHUMT00000043281  CCAAAAACGUGCAGCACAAUUU-GGAAGAAAACAUUUCCAUCUGUUAAUAAAGAGCAAGG
+OTTHUMT00000007987  ------------------------------------------------------------
+                                                                                
+
+OTTHUMT00000006707  uccu---gaaagacaca
+OTTHUMT00000043281  GCCUCUGGUCAUAAGUG
+OTTHUMT00000007987  -------ugcau--gaa
+                              *      
+
+
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_rnaseq2.alifold</name>
+<content>
+________________GAGGUGCUCUGAGACCCGAAACUAGACUCGACUUUAACAGACACAGACGACCCUGAA_____G_______________________AUGGAAA_GUUUUCUUCCAAAUUGUGC_____UGCACGUUUU_____UGGCGAG_AGCAUGGGGCUGUGCGGCGUCCC___CUCCCUGGCGC_____CCACCUGUGCCCUGCACACU_G_GCCUGCACUGUGGUGAU_____CUC_GCUUGGCCC____CCACCUGA_______UUCC____UGACA____UACAGCAGA__GGAAC____C__UUAGGCUCAGGUGG__AACA_____GCCUCAACU___GAUUC_GUCCCUGAACUUCCGUACA__CAGCCCUGGAGUCGUCU____UAGA_____________________________________________________________________________________________________________________________________________________________________________________________________________________________________C__________________G__C____UGC________GC___G_UG__C_CC_________________C_GC__C_U_CUC_C_CCA_AA_C_UG__GCA___U___GG_A__________CCA_C___________________________________
+................(((.......................))).......((((.....((((((.....................................((((....)))).((((...(((((......)))))...........((.....))...(((((((((((((((...........))))).....)((((.((((...((........))..))))...))))............................................................)))....(((((.......(((((..(.(((.............)))((.......))....)..))))).))))).......))))))))))))))))................((((((((........((((...........))))............((((((((((((...............))).)).....)))))))..)))))))).....))))...........................((((((((((((((((.....)))))))))...))))))).....(((((.(((((((((((..((.........((((((.((((.(....((.........((.((.(((((........)))).).)).)).........))....))))).)))))).........))....)))))))))))......)))))................................................. (-51.57 = -64.10 +  12.53) 
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/users/cn/cmagis/
+ORBIT_SOCKETDIR=/tmp/orbit-cmagis
+HOSTNAME=brasil
+IMSETTINGS_INTEGRATE_DESKTOP=yes
+GIO_LAUNCHED_DESKTOP_FILE_PID=13637
+MCOFFEE_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//mcoffee/
+GPG_AGENT_INFO=/tmp/seahorse-3oGFZj/S.gpg-agent:13286:1;
+ROOT_TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/
+TERM=xterm
+SHELL=/bin/bash
+XDG_SESSION_COOKIE=78ca754cf49d9d17b2c0859500000020-1472467836.368722-1926617865
+HISTSIZE=1000
+PERL5LIB=:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/perl/lib/perl5:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/perl/lib/perl5
+GTK_RC_FILES=/etc/gtk/gtkrc:/users/cn/cmagis/.gtkrc-1.2-gnome2
+WINDOWID=33313398
+QTDIR=/usr/lib64/qt-3.3
+QTINC=/usr/lib64/qt-3.3/include
+METHODS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//methods/
+IMSETTINGS_MODULE=none
+http_proxy=
+HTTP_proxy=
+USER=cmagis
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.lz=01;31:*.xz=01;31:*.bz2=01;31:*.tbz=01;31:*.tbz2=01;31:*.bz=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.axv=01;35:*.anx=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.axa=01;36:*.oga=01;36:*.spx=01;36:*.xspf=01;36:
+SSH_AUTH_SOCK=/tmp/keyring-y1Hwrp/socket.ssh
+GNOME_KEYRING_SOCKET=/tmp/keyring-y1Hwrp/socket
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/13210,unix/unix:/tmp/.ICE-unix/13210
+USERNAME=cmagis
+ENV_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//.t_coffee_env
+GIO_LAUNCHED_DESKTOP_FILE=/users/cn/cmagis/Desktop/gnome-terminal.desktop
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+DESKTOP_SESSION=gnome
+MAIL=/var/spool/mail/cmagis
+PATH=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/nfs/users/cn/cmagis/tcoffee/Version_11.00.9980205/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/users/cn/cmagis/bin:/users/cn/cmagis/bin
+_=/usr/bin/printenv
+ALN_LINE_LENGTH=160
+QT_IM_MODULE=xim
+DIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/
+PWD=/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/users/cn/cmagis/.t_coffee/cache//
+XMODIFIERS=@im=none
+GDM_KEYBOARD_LAYOUT=us	intl
+GNOME_KEYRING_PID=13200
+LANG=en_US.UTF-8
+KDE_IS_PRELINKED=1
+GDM_LANG=en_US.UTF-8
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles
+LOADEDMODULES=
+KDEDIRS=/usr
+GDMSESSION=gnome
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+HISTCONTROL=ignoredups
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3//plugins/linux/
+SHLVL=4
+HOME=/users/cn/cmagis
+DUMP_4_TCOFFEE=t_coffee.105.1eFIXTY2TF.dump
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+HTTP_PROXY=
+MAFFT_BINARIES=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/plugins/linux/
+LOGNAME=cmagis
+CVS_RSH=ssh
+EMAIL_4_TCOFFEE=cedrik.magis@crg.es
+QTLIB=/usr/lib64/qt-3.3/lib
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-H13VKolxki,guid=b1ccb896c3103c0a8fe39b81000001d2
+MODULESHOME=/usr/share/Modules
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+EMAIL=cedrik.magis@crg.es
+UPDATED_ENV_4_TCOFFEE=1
+WINDOWPATH=1
+DISPLAY=:0.0
+ALL_proxy=
+PROXY_4_TCOFFEE=cedrik.magis@crg.es
+LOCKDIR_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/lck//
+G_BROKEN_FILENAMES=1
+TMP_4_TCOFFEE=/users/cn/cmagis/tcoffee/Version_11.00.0c7a5d3/tmp/tco/63715395/
+XAUTHORITY=/var/run/gdm/auth-for-cmagis-E59HTd/database
+COLORTERM=gnome-terminal
+BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
+}
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.105.1eFIXTY2TF.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/users/cn/cmagis/00_SOFT/TCOFFEE/04_GITHUB/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>695</line>
+</ref>
