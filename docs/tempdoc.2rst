@@ -1,0 +1,73 @@
+
+
+
+
+-extraction of contact form a pdb file
+
+seq_reformat -in a.fa -in2 all.template.fa -action +pdb2contacts all contacts -output contact_lib
+will extract all the intra and inter molecular contacts
+
+seq_reformat -in a.fa -in2 all.template.fa -action +pdb2contacts intra contacts -output contact_lib
+will extract all the intra  molecular contacts
+
+seq_reformat -in a.fa -in2 all.template.fa -action +pdb2contacts inter contacts -output contact_lib
+will extract all the inter  molecular contacts
+
+seq_reformat -in a.fa -in2 all.template.fa -action +pdb2contacts intra contacts 3 -output contact_lib
+will extract all the intra and  molecular contacts within 3 Angstroms
+
+
+seq_reformat -in a.fa -in2 all.template.fa -action +pdb2contacts intra distances 20 -output contact_lib
+will extract all the pairs within 20 Angstrom (CA distances) 
+
+seq_reformat -in 3V2U.fa -in2 3V2U.template -action +pdb2contacts inter best -output contact_lib 
+reports only tze best (closest) contact for each residue
+
+
+seq_reformat -in all.fa -in2 all.template.fa -action +pdb2contacts all  -output contact_list
+will extract all the inter molecular contacts between every pair of chain and all the intra molecular contacts
+
+Tuto to get inter strike score:
+
+1-extract each chain:
+738  extract_from_pdb  3v2u.pdb -chain C > 3V2UC.pdb 
+740  extract_from_pdb  3v2u.pdb -chain D > 3V2UD.pdb 
+741  extract_from_pdb  3v2u.pdb -chain B > 3V2UB.pdb 
+742  extract_from_pdb  3v2u.pdb -chain A > 3V2UA.pdb 
+
+2-Extract the fasta sequences
+
+745  extract_from_pdb  3v2u.pdb -chain A -fasta > 3V2UA.fa
+746  extract_from_pdb  3v2u.pdb -chain B -fasta > 3V2UB.fa
+747  extract_from_pdb  3v2u.pdb -chain C -fasta > 3V2UC.fa
+748  extract_from_pdb  3v2u.pdb -chain D -fasta > 3V2UD.fa
+cat 3V2U*.fa > 3V2U.fa
+
+3-make the template 
+
+3V2U.template
+	>3V2UA _P_ 3V2UA
+	>3V2UB _P_ 3V2UB
+	>3V2UC _P_ 3V2UC
+	>3V2UD _P_ 3V2UD
+4-Make the species file
+3V2U.species
+	>SC1
+	>SC2
+	>SACCK
+	>SACEU
+	>KLULA
+
+5-extract the intra molecular contacts
+
+seq_reformat -in 3V2U.fa -in2 3V2U.template -action +pdb2contacts inter contacts -output contact_list > 3V2U.inter.contacts
+
+6-produce one MSA for each template and turn it into a template file
+3V2U.aln.list 
+	>3V2UA.aln
+	>3V2UB.aln
+	>3V2UC.aln
+	>3V2UD.aln
+
+7-run the analysis
+t_coffee -other_pg   seq_reformat -in 3V2U.species -in2 3V2U.aln.list -struc_in 3V2U.contact_lib.list -action +evaluate3DM strike -output score_html -out x.html

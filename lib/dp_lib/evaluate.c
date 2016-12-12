@@ -1150,7 +1150,7 @@ Alignment *msa_list2struc_evaluate4tcoffee (Sequence *SP,Sequence *AF, Sequence 
     }
   vfclose (fp);
   NA=main_read_aln (tmp, NULL);
-  printf_system ("cp %s cedric.aln", tmp);
+
   NS=main_read_seq (tmp);
   ungap_seq(NS);
   
