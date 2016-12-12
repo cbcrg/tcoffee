@@ -567,13 +567,63 @@ Ca_trace * hasch_ca_trace_bubble ( Ca_trace *TRACE)
     }
 
 int get_best_contact (Ca_trace *T,int enb, int *used, int *x, int *y, int *s);
+float   **traces2best_contacts (Ca_trace *T1,Ca_trace*T2, float probe)
+{
+  int a, b, ba, bb;
+  float **dist, bd,d;
+  Atom *A, *B;
+  //returns a non overlapping set of the best contacting pairs
+  dist=declare_float (T1->len, T2->len);
+  
+
+  bd=0;
+  for (a=0; a<T1->len; a++)
+    for (b=0; b<T2->len; b++)
+      {
+	 A=T1->ca[a];
+	 B=T2->ca[b];
+	 d=dist[a][b]=residues2contacts(A,B, probe);
+	 if (d>bd){bd=d;ba=a;bb=b;}
+      }
+  
+  if (bd==0);
+  else 
+    {
+      int   * used =(int*)vcalloc (T1->len, sizeof (int));
+      float** bdist=declare_float (T1->len, T2->len);
+      
+      
+      bdist[ba][bb]=bdist[bb][ba]=bd;
+      used[ba]=used[bb]=1;
+      
+      while (bd>0)
+	{
+	  bd=0;
+	  for (a=0; a<T1->len;a++)
+	    {
+	      if (used[a])continue;
+	      for (b=0; b<T2->len; b++)
+		{
+		  if (used[b])continue;
+		  d=dist[a][b];
+		  if (d>bd){bd=d; ba=a; bb=b;}
+		}
+	    }
+	  if (bd>0){used[ba]=1; used[bb]=1; bdist[ba][bb]=dist[ba][bb];}
+	}
+      free_float (dist,-1);
+      vfree (used);
+      dist=bdist;
+    }
+  return dist;
+}
 float   **trace2best_contacts (Ca_trace *T, float probe)
 {
   int a, b, ba, bb;
   int enb=3;
   float **dist, bd,d;
   Atom *A, *B;
-  //returns a non overlapping set of the best conntacting pairs
+  //returns a non overlapping set of the best contacting pairs
   dist=declare_float (T->len, T->len);
   
 
@@ -610,6 +660,58 @@ float   **trace2best_contacts (Ca_trace *T, float probe)
 		}
 	    }
 	  if (bd>0){used[ba]=1; used[bb]=1; bdist[ba][bb]=bdist[bb][ba]=dist[ba][bb];}
+	}
+      free_float (dist,-1);
+      vfree (used);
+      dist=bdist;
+    }
+  return dist;
+}
+float   **traces2closest_contacts (Ca_trace *T1,Ca_trace *T2, float probe)
+{
+  int a, b, ba, bb;
+  float **dist, bd,d;
+  Atom *A, *B;
+  dist=declare_float (T1->len, T2->len);
+  
+
+  bd=99;
+  for (a=0; a<T1->len; a++)
+    for (b=0; b<T2->len; b++)
+      {
+	 A=T1->ca[a];
+	 B=T2->ca[b];
+	 d=dist[a][b]=dist[b][a]=get_closest_vdw_contact (A,B);
+	 if (d<bd && d>UNDEFINED){bd=d;ba=a;bb=b;}
+      }
+
+  
+  if (bd>=99);
+  else 
+    {
+      int   * used =(int*)vcalloc (T1->len, sizeof (int));
+      float** bdist=declare_float (T1->len, T2->len);
+      
+      bdist[ba][bb]=bdist[bb][ba]=bd;
+      used[ba]=used[bb]=1;
+      
+      while (bd!=99)
+	{
+	  bd=99;
+	  for (a=0; a<T1->len;a++)
+	    {
+	      if (used[a])continue;
+	      for (b=0; b<T2->len; b++)
+		{
+		  if (used[b])continue;
+		  d=dist[a][b];
+		  if (d<bd && d>UNDEFINED){bd=d; ba=a; bb=b;}
+		}
+	    }
+	  if (bd!=99)
+	    {
+	      used[ba]=1; used[bb]=1; bdist[ba][bb]=(dist[ba][bb]<0)?0.01:dist[ba][bb];
+	    }
 	}
       free_float (dist,-1);
       vfree (used);
@@ -670,6 +772,27 @@ float   **trace2closest_contacts (Ca_trace *T, float probe)
     }
   return dist;
 }
+float   **traces2count_contacts (Ca_trace *T1, Ca_trace*T2, float probe)
+{
+  int a, b;
+  Atom *A, *B;
+  float **dist,d;
+
+  
+  dist=declare_float ( T1->len, T2->len);
+  for (a=0; a< T1->len; a++)
+    {
+      for ( b=0; b< T2->len; b++)
+	{
+	  
+	  A=T1->ca[a];
+	  B=T2->ca[b];
+	  dist[a][b]=residues2contacts (A,B,probe);
+	}
+    }
+  return dist;
+}
+
 float   **trace2count_contacts (Ca_trace *T, float probe)
 {
   int a, b;
@@ -690,14 +813,61 @@ float   **trace2count_contacts (Ca_trace *T, float probe)
     }
   return dist;
 }
+float   **traces2contacts (Ca_trace *T1,Ca_trace *T2, float probe)
+{
+  //identifies contacts betwee AA through ANY atom
+  int a, b;
+  Atom *A, *B;
+  float **dist,d;
+  
+  float MaxD=50;
+  //Hard coded maximum that corrsponds to the largest possible distance between the Ca of two contacting AA
+  //just a trck to make things run faster, should not impact results
 
+  dist=declare_float ( T1->len, T2->len);
+  for (a=0; a< T1->len; a++)
+    {
+      for ( b=0; b< T2->len; b++)
+	{
+	  
+	  A=T1->ca[a];
+	  B=T2->ca[b];
+	  d=get_atomic_distance (A,B);
+	  
+	  if (d>=UNDEFINED && d<=MaxD)
+	    {
+	      while (A)
+		{
+		  Atom *CB=B;
+		  while (CB)
+		    {
+		      float max=A->r+CB->r+probe;
+		      float cd;
+		      
+		      d=get_atomic_distance (A,CB);
+		      cd=d-(CB->r+A->r);
+		      if (cd<0)cd=0.01;
+		      if (d<max && d>=UNDEFINED){dist[a][b]=cd; A=CB=NULL;}
+		      else CB=CB->N;
+		    }
+		  A=(A)?A->N:NULL;
+		}
+	    }
+	}
+    }
+  return dist;
+}
 float   **trace2contacts (Ca_trace *T, float probe)
 {
+  //identifies contacts betwee AA through ANY atom
   int a, b;
   Atom *A, *B;
   float **dist,d;
   int enb=3;
-  
+  float MaxD=50;
+  //Hard coded maximum that corrsponds to the largest possible distance between the Ca of two contacting AA
+  //just a trck to make things run faster, should not impact results
+
   dist=declare_float ( T->len, T->len);
   for (a=0; a< T->len-enb; a++)
     {
@@ -708,7 +878,7 @@ float   **trace2contacts (Ca_trace *T, float probe)
 	  B=T->ca[b];
 	  d=get_atomic_distance (A,B);
 	  
-	  if (d>=UNDEFINED && d<=30)
+	  if (d>=UNDEFINED && d<=MaxD)
 	    {
 	      while (A)
 		{
@@ -717,9 +887,10 @@ float   **trace2contacts (Ca_trace *T, float probe)
 		    {
 		      float max=A->r+CB->r+probe;
 		      float cd;
-		      if (cd<0)cd=0.01;
+		      
 		      d=get_atomic_distance (A,CB);
 		      cd=d-(CB->r+A->r);
+		      if (cd<0)cd=0.01;
 		      if (d<max && d>=UNDEFINED){dist[a][b]=dist[b][a]=cd; A=CB=NULL;}
 		      else CB=CB->N;
 		    }
@@ -731,10 +902,33 @@ float   **trace2contacts (Ca_trace *T, float probe)
   return dist;
 }
 
-  
-       
+float ** traces2ca_distances(Ca_trace *T1,Ca_trace *T2, float max)
+   {
+     //Measures Ca distances
+     int a, b;
+     Atom *A, *B;
+     float **dist;
+     
+     dist=declare_float ( T1->len, T2->len);
+     
+     for (a=0; a< T1->len; a++)
+       {
+	 for ( b=0; b< T2->len; b++)
+	   {
+	     float d;
+	     dist[a][b]=UNDEFINED;
+	     A=T1->ca[a];
+	     B=T2->ca[b];
+	     d=get_atomic_distance ( A,      B);
+	     if (d<max || max<=0.000001)dist[a][b]=d;
+	   }
+       }
+     return dist;
+   }  
+
 float ** trace2ca_distances(Ca_trace *T, float max)
    {
+     //Measures Ca distances
        int a, b;
        Atom *A, *B;
        float **dist;
@@ -865,7 +1059,137 @@ float    get_atomic_distance ( Atom *A, Atom*B)
        d=(float) sqrt ( (double) ( dx*dx +dy*dy +dz*dz));
        return d;
    }
+
 float atom2radius (char *t)
+{
+  //radius taken from rasmol: http://www.rasmol.org/software/RasMol_2.7.3/src/abstree.h 
+  //converted from rasmol units as detailed in https://www.umass.edu/microbio/rasmol/rasbonds.htm
+  //07/12/16
+
+  char a, b;
+  static float **lu;
+  if (!t)return 0;
+  a=t[0]; b=t[1];
+  if (!lu)
+    {
+      int x, y;
+      lu=(float **)declare_float (257, 257);
+      for (x=0; x<256; x++)
+	for (y=0; y<256; y++)
+	  lu[x][y]=-1;
+     
+      lu['A']['c']=2.12;
+      lu['A']['g']=1.548;
+      lu['A']['l']=1.5;
+      lu['A']['m']=1.66;
+      lu['A']['r']=2.768;
+      lu['A']['s']=0.828;
+      lu['A']['t']=1.12;
+      lu['A']['u']=1.448;
+      lu['B'][' ']=1.548;
+      lu['B']['a']=2.408;
+      lu['B']['e']=0.628;
+      lu['B']['i']=1.728;
+      lu['B']['k']=1.64;
+      lu['B']['r']=1.748;
+      lu['C'][' ']=1.548;
+      lu['C']['a']=1.948;
+      lu['C']['d']=1.748;
+      lu['C']['e']=1.86;
+      lu['C']['f']=1.628;
+      lu['C']['l']=1.748;
+      lu['C']['m']=1.648;
+      lu['C']['o']=1.128;
+      lu['C']['r']=1.128;
+      lu['C']['s']=3.008;
+      lu['C']['u']=1.148;
+      lu['D']['y']=1.628;
+      lu['E']['r']=1.588;
+      lu['E']['s']=1.62;
+      lu['E']['u']=1.96;
+      lu['F'][' ']=1.3;
+      lu['F']['e']=1.948;
+      lu['F']['m']=1.608;
+      lu['F']['r']=3.24;
+      lu['G']['a']=1.548;
+      lu['G']['d']=1.688;
+      lu['G']['e']=3.996;
+      lu['H'][' ']=1.1;
+      lu['H']['e']=2.2;
+      lu['H']['f']=1.4;
+      lu['H']['g']=1.98;
+      lu['H']['o']=1.608;
+      lu['I'][' ']=1.748;
+      lu['I']['n']=1.448;
+      lu['I']['r']=1.22;
+      lu['K'][' ']=2.388;
+      lu['K']['r']=1.9;
+      lu['L']['a']=1.828;
+      lu['L']['i']=1.22;
+      lu['L']['r']=1.58;
+      lu['L']['u']=1.528;
+      lu['M']['d']=1.6;
+      lu['M']['g']=1.5;
+      lu['M']['n']=1.188;
+      lu['M']['o']=1.748;
+      lu['N'][' ']=1.4;
+      lu['N']['a']=2.2;
+      lu['N']['b']=1.328;
+      lu['N']['d']=1.788;
+      lu['N']['e']=2.02;
+      lu['N']['i']=1.24;
+      lu['N']['o']=1.588;
+      lu['N']['p']=1.708;
+      lu['O'][' ']=1.348;
+      lu['O']['s']=1.58;
+      lu['P'][' ']=1.88;
+      lu['P']['a']=1.6;
+      lu['P']['b']=2.16;
+      lu['P']['d']=1.44;
+      lu['P']['m']=1.76;
+      lu['P']['o']=1.208;
+      lu['P']['r']=1.62;
+      lu['P']['t']=1.548;
+      lu['P']['u']=1.668;
+      lu['R']['a']=2.568;
+      lu['R']['b']=2.648;
+      lu['R']['e']=1.3;
+      lu['R']['h']=1.22;
+      lu['R']['n']=2.3;
+      lu['R']['u']=1.2;
+      lu['S'][' ']=1.808;
+      lu['S']['b']=1.12;
+      lu['S']['c']=1.32;
+      lu['S']['e']=0.9;
+      lu['S']['i']=2.2;
+      lu['S']['m']=1.74;
+      lu['S']['n']=1.668;
+      lu['S']['r']=2.02;
+      lu['T']['a']=1.22;
+      lu['T']['b']=1.66;
+      lu['T']['c']=1.8;
+      lu['T']['e']=1.26;
+      lu['T']['h']=1.84;
+      lu['T']['i']=1.948;
+      lu['T']['l']=1.708;
+      lu['T']['m']=1.568;
+      lu['U'][' ']=1.748;
+      lu['V'][' ']=1.06;
+      lu['W'][' ']=1.26;
+      lu['X']['e']=2.1;
+      lu['Y'][' ']=1.608;
+      lu['Y']['b']=1.54;
+      lu['Z']['n']=1.148;
+      lu['Z']['r']=1.42;
+    }
+  if (!b)b=' ';
+  else if (b>='A' && b<='Z')b=' ';
+
+  if (lu[a][b]<0)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Atom [%s] is unknown[FATAL]",t);
+  return lu[a][b];
+}
+    
+float atom2radius_old (char *t)
 {
   char a, b;
   
@@ -882,6 +1206,7 @@ float atom2radius (char *t)
   else if (a=='F')return 1.948;
   else if (a=='Z')return 1.148;
   else if (a=='I')return 1.748;
+  else if (a=='H')return 1.100;
   else return 2;
   
 }

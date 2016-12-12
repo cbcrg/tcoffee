@@ -1,5 +1,6 @@
 #!/usr/bin/env perl
 use File::Copy::Recursive qw(fcopy rcopy dircopy fmove rmove dirmove);
+use File::Path qw(make_path remove_tree);
 use Cwd;
 use File::Copy;
 
@@ -467,84 +468,6 @@ elsif       ($action eq "-dirsync")
   {
     dirsync();
     die;
-    #first use: create .looup.tx in the $to_dir that contains the list of the files to ignore
-    #Every file or dir in this list will not be synced
-    my $press_dir="/Users/cnotredame/Dropbox/presse";
-    if (!$from_dir){$from_dir="/Volumes/Movies2/movies/Download2.raw/";}
-    if (!$to_dir)   {$to_dir  ="/Volumes/Movies3/Download/download.raw/";}
-    my $ignore="$to_dir/.sync.ignore.txt";
-    
-    my $dh1=new DirHandle;
-    my (%hd1, %hd2);
-    opendir ($dh1, "$from_dir");
-    my @l1=readdir($dh1);
-    
-    if ( -e $ignore)
-      {
-	open F,"$ignore";
-	while (<F>)
-	  {
-	    my $l=$_;
-	    chomp ($l);
-	    $hd2{$l}=1;
-	  }
-	close F;
-      }
-    
-    foreach my $f (@l1)
-      {
-	if (-d "$from_dir/$f" && ($f=~/(^j\d+.*)/ || $f=~/(^J\d+.*)/))
-	  {
-	    
-	    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
-	    $year+=1900;
-	    my $date;
-	    my $press=new DirHandle;
-	    opendir ($press, "$from_dir/$f");
-	    my @pl=readdir($press);
-	    foreach my $a (@pl)
-	      {
-		my ($m,$mn,$d, $day);
-		if ($a=~/.*\s(\d+)\s+(\S+)\s+($year).*/)
-		  {
-		    $d=$1;$d++;$d--;
-		    $m=$2;
-		    $day=($d<10)?"0$d":"$d";
-		    print "$a\n";
-		    lc($m);
-		    if    ($m =~/janvier/)  {$mn="01";}
-		    elsif ($m =~/vrier/)    {$mn="02";}
-		    elsif ($m =~/mars/)     {$mn="03";}
-		    elsif ($m =~/avril/)    {$mn="04";}
-		    elsif ($m =~/mai/)      {$mn="05";}
-		    elsif ($m =~/juin/)     {$mn="06";}
-		    elsif ($m =~/juillet/)  {$mn="07";}
-		    elsif ($m =~/ut/)       {$mn="08";}
-		    elsif ($m =~/septembre/){$mn="09";}
-		    elsif ($m =~/octobre/)  {$mn="10";}
-		    elsif ($m =~/novembre/) {$mn="11";}
-		    elsif ($m =~/cembre/)   {$mn="12";}
-		  }
-		if ($mn)
-		  {
-		    $date="$year\_$mn\_$day";
-		    rcopy ("$from_dir/$f", "$press_dir/$date");
-		    if ($f && -d "$from_dir/$f" && $f ne "." && $f ne "..")
-		      {system "rm -r $from_dir/$f";}
-		    last;
-		  }
-	      }
-	  }
-      	elsif ($f ne "." && $f ne ".." && !$hd2{$f})
-	  {
-	    $hd2{$f}=1;
-	    print "rcopy (\"$from_dir/$f\", \"$to_dir\")\n";
-	    rcopy ("$from_dir/$f", "$to_dir/$f");
-	    open F,">>$ignore";
-	    print F "$f\n";
-	    close (F);
-	  }
-      }
   }
 elsif       ($action eq "-addbefore" || $action eq "-addafter")
       {
@@ -825,8 +748,16 @@ elsif    ($action eq "-fix_movie_names")
 		  $t=~s/\_/ /g;
 		  $t=~s/  / /g;
 		  
-		  print "$f\n";
-		  my $f2="$t ($y).$ext";
+		  
+
+		  $lcf=lc ($f);
+		  if ($lcf=~/cd1/){$cdext=" - cd1";}
+		  elsif ($lcf=~/cd2/){$cdext=" - cd2";}
+		  else 
+		    {$cdext="";}
+		  
+		  print "$f\n$lcf\n";
+		  my $f2="$t ($y)$cdext\.$ext";
 		  $f2=~s/  / /g;
 		  print "$f2\n\n";
 		  my $input;
@@ -847,10 +778,82 @@ elsif    ($action eq "-fix_movie_names")
 		    }
 		}
 	  }
-	
+	elsif (!($f=~/\(\d\d\d\d\)/))
+	  {
+	    $lcf=lc ($f);
+	    if ($lcf=~/cd1/)
+	      {
+		$lcf=~s/cd1//;
+		$cdext=" - cd1";
+	      }
+	    elsif ($lcf=~/cd2/)
+	      {
+		$lcf=~s/cd2//;
+		$cdext=" - cd2";
+	      }
+	    else
+	      {
+		$cdext="";
+	      }
+	    $lcf=~/(.*)\.([^.]*)/;
+	    
+	    $title=$1;
+	    $ext=$2;
+	    $year=$done{$title};
+	    
+	    $title=~s/\./ /g;
+	    $title=~s/\_/ /g;
+	    $title=~s/french//g;
+	    $title=~s/dvdrip//g;
+	    $title=~s/xvid//g;
+	    $title=~s/bivx//g;
+	    $title=~s/ vo / /g;
+	    $title=~s/ vf / /g;
+	    
+	    $title=~s/-/ /g;
+	    $title=~s/  / /g;
+	    
+	    
+	    
+	    if ($year!=-1)
+	      {
+		if (!$year)
+		  {
+		    print "$title IMDB\n";
+		    my $input;
+		    while (<STDIN>)
+		      {
+			$input=$_;
+			print "[$input]\n";
+			last;
+		      }
+		    $year=$input;
+		    chomp ($year);
+		  }
+		my $nf="$title ($year)$cdext.$ext";
+		$nf=ucfirst ($nf);
+		print "$nf\n";
+		while (<STDIN>)
+		  {
+		    $input=$_;
+		    print "[$input]\n";
+		    last;
+		  }
+		if ($input eq "y\n")
+		  {
+		    $done{$title}=$year;
+		    print "##copy $f $nf\n\n";
+		    rename $f, $nf;
+		  }
+		else
+		  {
+		    $done{$title}{year}=-1;
+		    print "skip\n";
+		  }
+	      }
+	  }
       }
   }
-
 elsif ($action eq "-sync")##for the sony reader
   {
     
@@ -1663,14 +1666,14 @@ sub dirsync
     my $press_dir="/Users/cnotredame/Dropbox/presse";
     if (!$from_dir){$from_dir="/Volumes/Movies2/movies/Download2.raw/";}
     if (!$to_dir)   {$to_dir  ="/Volumes/Movies3/Download/download.raw/";}
-    my $ignore="$to_dir/.sync.ignore.txt";
+    my $ignore="/Volumes/Movies3/Download/.sync.ignore.txt";
     
     opendir (DIR, "$from_dir");
     my @l1=readdir(DIR);
     closedir (DIR);
     if ( -e $ignore)
       {
-	open F,"$ignore";
+	open F,"$ignore" || die;
 	while (<F>)
 	  {
 	    my $l=$_;
@@ -1679,70 +1682,53 @@ sub dirsync
 	  }
 	close F;
       }
+    else
+      {
+	die;
+      }
     
+    
+    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+    $mon++;
+    $year+=1900;
+    if ($mday<10){$mday="0$mday";}
+    if ($mon<10){$month="0$mon";}
+    
+    my $ddir="$year\_$mon\_$mday";
+
     foreach my $f (@l1)
       {
-	
+	print "--- check $f [$hd2{$f}]\n";
 	my $from="$from_dir/$f";
-	if (-d "$from" && ($f=~/(^j\d+)/ || $f=~/(^J\d+)/))
+	if ($f=~/Dropbox/ || $f=~/dropbox/ || $f eq "." || $f eq ".." || $hd2{$f})
+	  {;}
+	elsif (-d "$from" && is_french_press($from))
 	  {
-	    my ($d, $m, $year);
+	    
+	    
 	    opendir (DIR, "$from");
 	    my @pl=readdir(DIR);
 	    closedir (DIR);
-	    my $mn;
 	    
-	    foreach my $j (@pl)
+	    my $to="$press_dir/$ddir";
+	    
+	    if (!-d $to){system ("mkdir $to");}
+	    print "##Sync: $f  $from => $to\n";
+	    opendir (DIR, $from);
+	    my @jl=readdir(DIR);
+	    closedir (DIR);
+	    foreach my $j (@jl)
 	      {
-		if ($j=~/.*\s(\d+)\s+(\S+)\s+(\d+).*/)
+		if ($j ne "." && $j ne "..")
 		  {
-		    
-		    $d=$1;
-		    $m=$2;
-		    $year=$3;
-		    
-		    $m=($m<10)?"0$m":"$m";
-		    $year=($year<100)?"20$year":$year;
-		    $day=($d<10)?"0$d":"$d";
-		    
-
-		    lc($m);
-		    if    ($m =~/janvier/)  {$mn="01";}
-		    elsif ($m =~/vrier/)    {$mn="02";}
-		    elsif ($m =~/mars/)     {$mn="03";}
-		    elsif ($m =~/avril/)    {$mn="04";}
-		    elsif ($m =~/mai/)      {$mn="05";}
-		    elsif ($m =~/juin/)     {$mn="06";}
-		    elsif ($m =~/juillet/)  {$mn="07";}
-		    elsif ($m =~/ao/)       {$mn="08";}
-		    elsif ($m =~/septembre/){$mn="09";}
-		    elsif ($m =~/octobre/)  {$mn="10";}
-		    elsif ($m =~/novembre/) {$mn="11";}
-		    elsif ($m =~/cembre/)   {$mn="12";}
+		    print " --- sync $j => $to\n";
+		    copy ("$from/$j", "$to");
 		  }
-	      }
-	    if ($mn)
-	      {
-		my $to="$press_dir/$year\_$mn\_$day";
 		
-		if (!-d $to){system ("mkdir $to");}
-		print "##Sync: $f  $from => $to\n";
-		opendir (DIR, $from);
-		my @jl=readdir(DIR);
-		closedir (DIR);
-		foreach my $j (@jl)
-		  {
-		    if ($j ne "." && $j ne "..")
-		      {
-			print " --- sync $j => $to\n";
-			copy ("$from/$j", "$to");
-		      }
-		    
-		  }
-		if ($f && -d "$from" && $f ne "." && $f ne "..")
-		  {
-		    system "rm -r $from";
-		  }
+	      }
+	    if ($f && -d "$from" && $f ne "." && $f ne "..")
+	      {
+		remove_tree ($from);
 	      }
 	  }
 	elsif (-d "$from" && ($f=~/^EN(\d\d\d\d)(\d\d)(\d\d)/))
@@ -1777,11 +1763,54 @@ sub dirsync
       	elsif ($f ne "." && $f ne ".." && !$hd2{$f})
 	  {
 	    $hd2{$f}=1;
-	    print "rcopy (\"$from_dir/$f\", \"$to_dir\")\n";
-	    rcopy ("$from_dir/$f", "$to_dir/$f");
-	    open F,">>$ignore";
+	    open F,">>$ignore" || die;
+	    flock(F,2) || die;
 	    print F "$f\n";
 	    close (F);
+	    
+	    
+	    print "rcopy (\"$from_dir/$f\", \"$to_dir\")\n";
+	    rcopy ("$from_dir/$f", "$to_dir/$f");
+	    
 	  }
       }
   }
+
+sub is_french_press
+    {
+      my $dir=shift;
+      my @list=dir2file_list($dir);
+      foreach my $f (@list)
+	{
+	  if ($f=~/\.pdf/)
+	    {
+	      $f=lc($f);
+	      if ( $f=~/le.*monde.*\d\d\d\d\.pdf/){return 1;}
+	    }
+	}
+      return 0;
+    }
+
+sub dir2file_list
+     {
+       my ($cd, $pattern)=@_;
+       my (@l, @nl);
+
+       if (!-d $cd){return;}
+       opendir (DIR, $cd);
+       @l=readdir (DIR);
+       closedir (DIR);
+       
+       foreach my $f (@l)
+	 {
+	   if ($f ne "." && $f ne "..")
+	     {
+	       if ($pattern)
+		 {
+		   if ($f=~/$pattern/){push (@nl,$f);}
+		 }
+	       else {{push (@nl,$f);}}
+	     }
+	 }
+       return @nl;
+     }

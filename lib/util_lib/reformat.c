@@ -307,7 +307,7 @@ int seq_reformat ( int argc, char **in_argv)
 		fprintf ( stdout, "\n     +tree..gap <F|def=0.5> replicates<D|column|def=1> mode <nj|upgma|def=nj>");
 		
 		fprintf ( stdout, "\n     +remove_nuc.x........Remove Position 1, 2 or 3 of every codon");
-		fprintf ( stdout, "\n     +evaluate3D..........strike|distances|contacts|Def=strike");
+		fprintf ( stdout, "\n     +evaluate3D..........strike|distances|contacts");
 		fprintf ( stdout, "\n     .....................Uses the -in2 contact_lib or the +pdb2contacts +seq2contacts ");
 		fprintf ( stdout, "\n     .....................If none, uses +seq2contacts ");
 		fprintf ( stdout, "\n     .....................-output score_ascii, score, score_html,fasta_tree ");
@@ -3216,7 +3216,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    vienna2template_file (out_file, D1->S,D2->S);
 	    
 	  }
-	else if ( strm2 (out_format, "contact_lib","c_lib"))
+	else if ( strm3 (out_format, "contact_list","contact_lib","c_lib"))
 	  {
 	    save_contact_constraint_list (D1->CL, out_file);
 	  }
@@ -11150,15 +11150,57 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   myexit (EXIT_SUCCESS);
 	 }
+       
        else if ( strm (action, "pdb2contacts"))
 	 {
-	   	   
-	   //param1: mode 
-	   //param2: max distance, in Angstrom
 	   float D=0;
+	   char mode[100];
+	   char type[100];
+	   Sequence *T=D2?(D2->S):NULL;
+	   
+	   
+	   
+	   if (!ACTION (1))
+	     {
+	       fprintf ( stderr, "+pdb_contact <contact mode> <contact type> <D> -output contact_lib\n");
+	       fprintf ( stderr, "+pdb2contacts def => <all contacts 1.2> => reports all contacts less than 1.2 A appart\n");
+	       fprintf ( stderr, "    mode: intra       => Residues less than D appart with chain\n");
+	       fprintf ( stderr, "    mode: inter       => Residues less than D appart between chains\n");
+	       fprintf ( stderr, "    mode: all         => intra+inter\n\n");
+	       
+	       fprintf ( stderr, "    type: distances   => report CA distances between residue less than D appart\n");
+	       fprintf ( stderr, "    type: contacts    => reports all AA with ATOMS less than D appart\n");
+	       fprintf ( stderr, "    type: closest     => report only closest contact less than D appart\n");
+	       fprintf ( stderr, "    type: count       => report the contact count\n");
+	       fprintf ( stderr, "    type: best        => report the best contact for each AA pair\n");
+	       fprintf ( stderr, "    type: find_pair   => RNA PDB\n");
+	       fprintf ( stderr, "    type: find_pair-p => RNA PDB\n");
+	       fprintf ( stderr, "    type: x3dna-ssr   => RNA PDB\n");
+	       fprintf ( stderr, "    type: RNAplfold   => RNA sequence\\nn");
+	       fprintf ( stderr, "    D   : distance in Angstrom (optional)\n");
+	       
+	       myexit (EXIT_SUCCESS);
+	     }
+	   else if (ACTION (1) && strm (ACTION(1), "def"))
+	     {
+	       sprintf (mode, "all");
+	       sprintf (type, "contacts");
+	       D=1.2;
+	     }
+	   else
+	     {
+	       sprintf (mode, "%s", ACTION(1));
+	       sprintf (type, "%s", ACTION (2));
+	       if (ACTION (3))D=atof (ACTION(3));
+	     }
+	   if (!T && !strm (type, "RNAplfold"))
+	     {
+	       printf_exit (EXIT_FAILURE,stderr, "+pdb2contact %s %s requires a template:  -in2 <template_file> [FATAL]", mode, type);
+	     }
+	   
+	   
 	   ungap_seq(D1->S);
-	   if (ACTION(2))D=atof (ACTION(2));
-	   D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, ACTION (1), D);
+	   D1->CL=pdb2contacts (D1->S,T,D1->CL,mode,type,D);
 	 }
        else if ( strm (action, "seq2contacts"))
 	 {
@@ -11517,6 +11559,64 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: -evaluateTree requires a sequence list in FASTA formal [FATAL]") ;
 	 }
+       else if ( strm(action, "evaluate3DM"))
+	 {
+	   int enb;
+	   float max=0;
+	   char *strikem=NULL;
+	   Constraint_list *CL;
+	   Alignment *A;
+	   int na=1;
+	   char *ev3d;
+
+	   if (ACTION(na) && strm (ACTION(na), "group"))
+	     {
+	        cputenv ("SGROUP_4_TCOFFEE=%s" ,ACTION(na+1));
+		cputenv ("REPLICATES_4_TCOFFEE=columns");
+		na+=2;
+	     }
+	   if (strm (ACTION(na), "strike"))
+	     {
+	       //no param or: <max> <enb> <strikeMatrixFile>, values can be feft to "def"
+	       ev3d="strike";
+	       enb=3;
+	       max=1.2;
+	       strikem=(char*)vcalloc (100, sizeof (char));
+	       sprintf (strikem, "strike");
+	       if (ACTION (na+1))
+		 {
+		   if (strm (ACTION(na+1), "def"));
+		   else max=atof(ACTION(na+1));
+		   
+		   if (strm (ACTION(na+2), "def") );
+		   else enb=atoi(ACTION(na+2));
+		   		   
+		   if (strm (ACTION(na+3), "def" ));
+		   else sprintf (strikem, "%s", ACTION(na+3));
+		 }
+	     }
+	   else if (strm (ACTION(na), "distances"))
+	     {
+	       ev3d="distances";
+	       enb=3;
+	       max=15;//Angstrom
+	       
+	       if (ACTION(na+1)&& !strm (ACTION(na+1), "def"))max=atof(ACTION(na+1));
+	       if (ACTION(na+2)&& !strm (ACTION(na+2), "def"))enb=atoi(ACTION(na+2));
+	     }
+	   else if (strm (ACTION(na), "contacts"))
+	     {
+	       ev3d="contacts";
+	       enb=3;
+	       max=1.2;
+		   
+	       if (ACTION(na+1) && !strm (ACTION(na+1), "def"))max=atof(ACTION(na+1));
+	       if (ACTION(na+2) && !strm (ACTION(na+2), "def"))enb=atoi(ACTION(na+2));
+	     }
+	   DST->A=msa_list2struc_evaluate4tcoffee (D1->S,D2->S,DST->S,ev3d,max,enb, strikem);
+	   D1->A=(DST->A)->A;
+	   (DST->A)->A=NULL;
+	 }
        else if ( strm(action, "evaluate3D"))
 	 {
 	   int enb;
@@ -11528,19 +11628,32 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   DST->A=copy_aln (D1->A, NULL);
 	   DST->S=aln2seq(DST->A);
 	   char *ev3d;
+
 	   if (ACTION(na) && strm (ACTION(na), "group"))
 	     {
 	        cputenv ("SGROUP_4_TCOFFEE=%s" ,ACTION(na+1));
 		cputenv ("REPLICATES_4_TCOFFEE=columns");
 		na+=2;
 	     }
-	   if ( !ACTION(na) || strm (ACTION(na), "strike"))
+	   if (strm (ACTION(na), "strike"))
 	     {
+	       //no param or: <max> <enb> <strikeMatrixFile>, values can be feft to "def"
 	       ev3d="strike";
-	       strikem=(char*)vcalloc (100, sizeof (char));
-	       if (!ACTION(na)||!ACTION(na+1))sprintf (strikem, "strike");
-	       else sprintf (strikem, "%s", ACTION(na+1));
 	       enb=3;
+	       max=1.2;
+	       strikem=(char*)vcalloc (100, sizeof (char));
+	       sprintf (strikem, "strike");
+	       if (ACTION (na+1))
+		 {
+		   if (strm (ACTION(na+1), "def"));
+		   else max=atof(ACTION(na+1));
+		   
+		   if (strm (ACTION(na+2), "def") );
+		   else enb=atoi(ACTION(na+2));
+		   		   
+		   if (strm (ACTION(na+3), "def" ));
+		   else sprintf (strikem, "%s", ACTION(na+3));
+		 }
 	     }
 	   else if (strm (ACTION(na), "distances"))
 	     {
@@ -11548,8 +11661,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       enb=3;
 	       max=15;//Angstrom
 	       
-	       if (ACTION(na+1))max=atof(ACTION(na+1));
-	       if (ACTION(na+2))enb=atoi(ACTION(na+2));
+	       if (ACTION(na+1)&& !strm (ACTION(na+1), "def"))max=atof(ACTION(na+1));
+	       if (ACTION(na+2)&& !strm (ACTION(na+2), "def"))enb=atoi(ACTION(na+2));
 	     }
 	   else if (strm (ACTION(na), "contacts"))
 	     {
@@ -11557,8 +11670,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       enb=3;
 	       max=1.2;
 		   
-	       if (ACTION(na+1))max=atof(ACTION(na+1));
-	       if (ACTION(na+2))enb=atoi(ACTION(na+2));
+	       if (ACTION(na+1) && !strm (ACTION(na+1), "def"))max=atof(ACTION(na+1));
+	       if (ACTION(na+2) && !strm (ACTION(na+2), "def"))enb=atoi(ACTION(na+2));
 	     }
 	   
 	   if (!D2)CL=D1->CL;
@@ -11569,12 +11682,13 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       
 	       ungap_seq(D1->S);
 	       if (strm (ev3d, "distances"))
-		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "distances",2*max);
+		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","distances",2*max);
 	       else if (strm (ev3d, "contacts"))
-		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "all",0);
+		 D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","contacts",0);
 	       else
 		 {
-		   D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "all",0);
+
+		   D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL,"intra", "contacts",0);
 		   D1->CL=seq2contacts (D1->S, D2?(D2->S):NULL,D1->CL, NULL);
 		 }
 	       CL=D1->CL;

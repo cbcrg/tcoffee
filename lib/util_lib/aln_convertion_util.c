@@ -15,6 +15,8 @@
  */
 Constraint_list * seq2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode)
 {
+  //Turns an RNA into a 2D maps (CL) using either Zuker or bona fide PDB
+  //Does nothing for proteins
 
   if (!S || !S->nseq) return CL;
   S=fast_get_sequence_type(S);
@@ -36,20 +38,18 @@ Constraint_list * seq2contacts (Sequence *S, Sequence *T,Constraint_list *CL, ch
   
   return read_contact_lib (S,NULL,CL); 
 }
-Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode, float maxD)
+Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *contact_mode, char *contact_type, float maxD)
 {
   char *template_file=vtmpnam(NULL);
   char *lib_name=NULL;
  
-
-  if (mode && strm (mode, "RNAplfold"));
-  else
+  
+  if (!T && strm (contact_type, "RNAplfold"));
+  else if (!T)
     {
-      if (!T)printf_exit (EXIT_FAILURE,stderr, "+pdb2contact requires a template:  -in2 <template_file> [FATAL]");
-      
-      
+      if (!T)printf_exit (EXIT_FAILURE,stderr, "pdb2contact requires a PDB template  [FATAL]");
     }
-  if (T)
+  else
     {
       output_fasta_seqS (template_file,T);
       S=seq2template_seq(S,template_file,NULL);
@@ -57,82 +57,36 @@ Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, ch
   
   S=fast_get_sequence_type(S);
   
-  if (mode)
+  if (contact_type)
     {
       cputenv ("SEQ2TEMPLATE4_F_=no");
-      cputenv ("PDB2TEMPLATE4_F_=%s", mode);
+      cputenv ("PDB2TEMPLATE4_F_=%s", contact_type);
     }
   
-  
-  if (strm (mode, "all")||strm (mode, "best")|| strm (mode, "count") || strm (mode,"closest") || strm (mode, "distances"))
+
+  if (strm5 (contact_type, "contacts", "best", "count", "closest", "distances") || !contact_type)
     {
+      
       lib_name=vtmpnam(NULL);
-      if (maxD==0 && strm (mode, "distances"))maxD=20;
-      else if (maxD==0)maxD=1.2;
-      pdb2lib(S,mode,maxD,lib_name);
+      pdb2contacts2lib(S,contact_type,maxD,lib_name, contact_mode);
     }
-  else if ((strm(S->type, "RNA")) &&(!mode || strm (mode, "find_pair")|| strm (mode,"RNAplfold") || strm (mode, "find_pair-p") || strm(mode, "x3dna-ssr")))
+  else if (strm(S->type, "RNA") && strm4 (contact_type, "find_pair","RNAplfold","find_pair-p","x3dna-ssr"))
     {
       S=seq2template_seq (S,"RNA", NULL);
       lib_name=NULL;
     }
+  else if (strm4 (contact_type, "find_pair","RNAplfold","find_pair-p","x3dna-ssr"))
+    {
+      printf_exit (EXIT_FAILURE,stderr, "+pdb2contact %s: is only compatible with RNA [FATAL]", contact_type);
+    }
   else
     {
-      printf_exit (EXIT_FAILURE,stderr, "+pdb2contact %s: unknown mode [FATAL]", mode);
+      printf_exit (EXIT_FAILURE,stderr, "+pdb2contact %s: unknown contact_type [FATAL]",contact_type );
     }
-  
   return read_contact_lib (S,lib_name,CL); 
 }
   
   
-Constraint_list * seq2distance_list_old (Sequence *S, Sequence *T, char *mode, float maxD)
-{
-  char *template_file=vtmpnam(NULL);
-  Constraint_list *CL;
-  
-  if (T)
-    {
-      output_fasta_seqS (template_file,T);
-      S=seq2template_seq(S,template_file,NULL);
-    }
-  
-  if (!mode || mode[0]=='\0')
-    {
-      HERE ("+seq2contacts <X3DNA|PFOLD|contacts|contacts_best> <Max Distance|probe in Angstrom>");
-      exit (0);
-    }
-  
-  if ( strm (mode, "find_pair"))
-    {
-      if (!T)printf_exit (EXIT_FAILURE,stderr, "+seq2contact X3DNA requires a template file provides via -in2 [FATAL]");
-      output_fasta_seqS (template_file,T);
-      S=seq2template_seq(S,template_file,NULL);
-      S=seq2template_seq (S,"RNA", NULL);
-      CL=read_contact_lib (S,NULL,NULL);
-    }
-  else if (strm (mode, "RNAplfold"))
-    {
-      
-      S=seq2template_seq (S,"RNA", NULL);
-      CL=read_contact_lib (S,NULL, NULL);
-    }
-  else if (strm (mode, "all")||strm (mode, "best")|| strm (mode, "count") || strm (mode,"closest") || strm (mode, "distances"))
-    {
-      if (!T)printf_exit (EXIT_FAILURE,stderr, "+seq2contact %s requires a template file provides via -in2 [FATAL]",mode);
-      output_fasta_seqS (template_file,T);
-      S=seq2template_seq(S,template_file,NULL);
-      if (maxD==0 && strm (mode, "distances"))maxD=20;
-      else if (maxD==0)maxD=1.2;
-      
-      CL=read_contact_lib (S,pdb2lib(S,mode,maxD,NULL), NULL);
-    }
-  else
-    printf_exit (EXIT_FAILURE,stderr, "+seq2contact %s: unknown mode [FATAL]", mode);
-  return CL;
-}
-  
-
-
 int vienna2template_file (char *outfile, Sequence *R, Sequence *ST)
 {
   int a;

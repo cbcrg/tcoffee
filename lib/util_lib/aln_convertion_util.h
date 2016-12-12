@@ -13,7 +13,7 @@ OveralnP;
 
 //RNA
 Constraint_list * seq2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode);
-Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode, float maxD);
+Constraint_list * pdb2contacts (Sequence *S, Sequence *T,Constraint_list *CL, char *mode, char *type,float maxD);
 int vienna2template_file (char *outfile, Sequence *R, Sequence *ST);
 Constraint_list * vienna2tc_lib (char *outfile, Sequence *R, Sequence *ST);
 

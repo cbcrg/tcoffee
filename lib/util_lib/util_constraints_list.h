@@ -526,6 +526,7 @@ Constraint_list * read_constraint_list_raw_file(Constraint_list *CL, char *fname
 
 int        read_cpu_in_n_list(char **fname, int n);
 Sequence *precompute_blast_db (Sequence *S, char **ml, int n);
+Sequence *constraint_list2seq (char *fname);
 int read_seq_in_list ( char *fname,  int *nseq, char ***sequences, char ***seq_name, Genomic_info **genome_co);
 
 Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode);

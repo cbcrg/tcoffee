@@ -19,6 +19,12 @@ float ** trace2closest_contacts (Ca_trace *T, float probe);
 float ** trace2count_contacts(Ca_trace *T, float probe);
 
 
+float ** traces2ca_distances    (Ca_trace *T1,Ca_trace *T2, float max);
+float ** traces2contacts        (Ca_trace *T1,Ca_trace *T2, float max);
+float ** traces2best_contacts   (Ca_trace *T1,Ca_trace *T2, float max);
+float ** traces2closest_contacts(Ca_trace *T1,Ca_trace *T2, float max);
+float ** traces2count_contacts  (Ca_trace *T1,Ca_trace *T2, float max);
+
 float** print_contacts ( char  *file1, char *file2, float T);
 char *  map_contacts ( char  *file1, char *file2, float T);
 int * identify_contacts (Ca_trace *ST1,Ca_trace *ST2, float T);

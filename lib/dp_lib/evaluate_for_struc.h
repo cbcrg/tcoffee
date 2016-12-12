@@ -1,5 +1,6 @@
-char * pdb2lib (Sequence *S, char *mode,float max, char *name);
-
+float get_default_pdb_probe();
+float get_default_pdb_maxd();
+char * pdb2contacts2lib (Sequence *S, char *mode,float max, char *name, char * scope);
 int apdb (int argc, char *argv[]);
 
 Constraint_list * set_constraint_list4align_pdb (Constraint_list *inCL,int seq, char *dp_mode, char *hasch_mode, char *param_file);

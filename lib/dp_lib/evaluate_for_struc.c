@@ -15,61 +15,239 @@ float drmsd ( Alignment *A,  float max_distance, float delta);
 
 float **** quantile_apdb_filtration ( Alignment *A, float ****residues, Constraint_list *CL,Pdb_param *PP, FILE *fp);
 float **** irmsdmin_apdb_filtration ( Alignment *A, float ****residues, Constraint_list *CL,Pdb_param *PP, FILE *fp);
+float get_default_pdb_probe()
+{
+  static float probe;
+  static int set;
 
-char * pdb2lib (Sequence *S, char *mode,float max, char *name)
+  if (!set)
+    {
+      if (getenv ("PDB_PROBE"))
+	{
+	  probe=atof (getenv ("PDB_PROBE"));
+	}
+      else
+	{
+	  probe=1.2;
+	}
+      set=1;
+    }
+  return probe;
+}
+float get_default_pdb_max()
+{
+  static float probe;
+  static int set;
+
+  if (!set)
+    {
+      if (getenv ("PDB_MAXD"))
+	{
+	  probe=atof (getenv ("PDB_MAXD"));
+	}
+      else
+	{
+	  probe=15;
+	}
+      set=1;
+    }
+  return probe;
+}
+
+
+char * pdb2contacts2lib (Sequence *S, char *mode,float max, char *name, char * iscope)
 {
   //if max==0 returns contacts
   //if max >0 returns all pairs of CA within Max
   Ca_trace **T;
   FILE *fp;
-  int a;
   int keptD=0, totD=0;
-
-
+  int intra=1;
+  int inter=2;
+  int all=3;
+  int scope;
+  int s1;
+  int ***strikeS;
+  int ***strikeB;
+  static int **matrix;
+  
+  if (!iscope)scope=all;
+  else if (strm (iscope, "inter"))scope=inter;
+  else if (strm (iscope, "intra"))scope=intra;
+  else if (strm (iscope, "all"  ))scope=all;
+  else scope=all;
+  
+  
+  
+  if (!max)
+    {
+      if (strm (mode, "distances"))max=get_default_pdb_max();
+      else max=get_default_pdb_probe();
+    }
+  
   if (!name)name=vtmpnam (NULL);
   fp=vfopen (name, "w");
   fprintf ( fp, "! TC_LIB_FORMAT_01\n");
   fprintf ( fp, "!CMT: [SOURCE] +seq2contacts %s %.2f (Angstrom)\n",mode,max);
     
   fprintf ( fp, "%d\n", S->nseq);
-  for (a=0; a<S->nseq; a++)fprintf ( fp, "%s %d %s\n",S->name[a], S->len[a], S->seq[a]);
+  for (s1=0; s1<S->nseq; s1++)fprintf ( fp, "%s %d %s\n",S->name[s1], S->len[s1], S->seq[s1]);
   
+
+  //Collect All the Traces
   T=(Ca_trace**)vcalloc (S->nseq,sizeof (Ca_trace*));
-  for (a=0; a<S->nseq; a++)
+  for (s1=0; s1<S->nseq; s1++)
     {
-      char *p=seq2T_value (S, a, "template_file", "_P_");
+      char *p=seq2T_value (S, s1, "template_file", "_P_");
       if ( !p || !is_pdb_file (p));
       else
 	{
-	  int b,c;
-	  int l=S->len[a];
-	  float **d;
 	  
-	  T[a]=read_ca_trace    (p, "ATOM");
-	  T[a]=trim_ca_trace    (T[a], S->seq[a]);
-	  
-	  
-	  if (strm (mode, "distances"))     d=trace2ca_distances      (T[a], max);
-	  else if ( strm (mode, "closest")) d=trace2closest_contacts  (T[a], max);
-	  else if ( strm (mode, "best"))    d=trace2best_contacts     (T[a], max);
-	  else if ( strm (mode, "count"))   d=trace2count_contacts    (T[a], max);
-	  else if ( strm (mode, "all"))     d=trace2contacts          (T[a], max);
-	  else {HERE ("unknown mode"); exit (0);}
-	  fprintf ( fp, "#%d %d\n", a+1, a+1);
-	  for (b=0; b<l-1; b++)
-	    for (c=b+1; c<l; c++)
-	      {
-		totD++;
-		if ((d[b][c])>=UNDEFINED && d[b][c]>0)
-		  {
-		    keptD++;
-		    fprintf (fp, "%d %d %d\n", b+1, c+1,(int)(d[b][c]*100)); 
-		  }
-	      }
-	  free_float (d,-1);
+	   T[s1]=read_ca_trace    (p, "ATOM");
+	   T[s1]=trim_ca_trace    (T[s1], S->seq[s1]);
 	}
     }
-  fprintf ( fp, "!CMT: [INFO] Size: %d", keptD);
+  
+  
+  strikeS=(int***)declare_arrayN(3,sizeof (int), S->nseq, S->nseq, 2);
+  strikeB=(int***)declare_arrayN(3,sizeof (int), S->nseq, S->nseq, 2);
+  S=fast_get_sequence_type(S);
+  
+  if (!matrix)
+    {
+      if (strm (S->type, "RNA"))matrix=read_matrice ("strikeR");
+      else matrix=read_matrice ("strikeP");;
+    }
+  
+  //Measure the Strike Background
+  if (!strm (mode, "distances")) 
+    {
+      int s1, s2;
+      for (s1=0; s1<S->nseq; s1++)
+	{
+	  for (s2=0; s2<S->nseq; s2++)
+	    {
+	      int i, j;
+	      int l1=S->len[s1];
+	      int l2=S->len[s1];
+	      
+	      for (i=0; i<l1; i++)
+		{
+		  for (j=0; j<l2; j++)
+		    {
+		      strikeB[s1][s2][0]+=matrix[tolower(S->seq[s1][i])][tolower(S->seq [s2][j])];
+		      strikeB[s1][s2][1]++;
+		    }
+		}
+	    }
+	}
+    }
+  
+  //Run Self and Intra depending on Scope
+  for (s1=0; s1<S->nseq; s1++)
+    {
+      if ( T[s1])
+	{
+	  
+	  int l1=S->len[s1];
+	  if (scope == intra || scope == all)
+	    {
+	      int i, j;
+	      float **d;
+	      
+	      if (strm (mode, "distances"))     d=trace2ca_distances      (T[s1], max);
+	      else if ( strm (mode, "closest")) d=trace2closest_contacts  (T[s1], max);
+	      else if ( strm (mode, "best"))    d=trace2best_contacts     (T[s1], max);
+	      else if ( strm (mode, "count"))   d=trace2count_contacts    (T[s1], max);
+	      else if ( strm (mode, "contacts"))d=trace2contacts          (T[s1], max);
+	      else 
+		{
+		  printf_exit (EXIT_FAILURE,stderr, "pdb2contacts2lib: %s is an unknown mode", mode);
+		}
+	      fprintf ( fp, "#%d %d\n", s1+1, s1+1);
+	      for (i=0; i<l1-1; i++)
+		for (j=i+1; j<l1; j++)
+		  {
+		    totD++;
+		    if ((d[i][j])>=UNDEFINED && d[i][j]>0)
+		      {
+			keptD++;
+			fprintf (fp, "%d %d %d\n", i+1, j+1,(int)(d[i][j]*100)); 
+			strikeS[s1][s1][0]+=matrix[tolower(S->seq[s1][i])][tolower(S->seq [s1][j])];
+			strikeS[s1][s1][1]++;
+		      }
+		  }
+	      free_float (d,-1);
+	    }
+	  if ( scope == inter || scope == all)
+	    {
+	      int s2;
+	      
+	      for (s2=s1+1;s2<S->nseq; s2++)
+		{
+		  if ( T[s2])
+		    {
+		      int i, j;
+		      int l2=S->len[s2];
+		      float **d;
+		      
+		      if (strm (mode, "distances"))     d=traces2ca_distances      (T[s1],T[s2], max);
+		      else if ( strm (mode, "closest")) d=traces2closest_contacts  (T[s1],T[s2], max);
+		      else if ( strm (mode, "best"))    d=traces2best_contacts     (T[s1],T[s2], max);
+		      else if ( strm (mode, "count"))   d=traces2count_contacts    (T[s1],T[s2], max);
+		      else if ( strm (mode, "contacts"))d=traces2contacts          (T[s1],T[s2], max);
+		      else 
+			{
+			  printf_exit (EXIT_FAILURE,stderr, "pdb2contacts2lib: %s is an unknown mode", mode);
+			}
+		      
+		      fprintf ( fp, "#%d %d\n", s1+1, s2+1);
+		      for (i=0; i<l1; i++)
+			for (j=0; j<l2; j++)
+			  {
+			    totD++;
+			    
+			    if ((d[i][j])>=UNDEFINED && d[i][j]>0)
+			      {
+				//HERE ("%d %d %.3f",i,j, d[i][j]);
+				keptD++;
+				fprintf (fp, "%d %d %d\n", i+1, j+1,(int)(d[i][j]*100)); 
+				strikeS[s1][s2][0]+=matrix[tolower(S->seq[s1][i])][tolower(S->seq [s2][j])];
+				strikeS[s1][s2][1]++;
+			      }
+			  }
+		      free_float (d,-1);
+		    }
+		}
+	    }
+	}
+    }
+  if (!strm (mode, "distances"))
+    {
+      int s1, s2;
+      if (scope== intra || scope == all)
+	for (s1=0; s1<S->nseq; s1++)
+	  {
+	    float rs=(strikeS[s1][s1][1]>0)?strikeS[s1][s1][0]/strikeS[s1][s1][1]:0;
+	    float bg=(strikeB[s1][s1][1]>0)?strikeB[s1][s1][0]/strikeB[s1][s1][1]:0;
+	    fprintf ( fp, "!CMT: [INFO] %s Strike Contact Score: RS: %6.2f BG: %6.2f Ratio: %4.2f NContacts: %d\n",S->name[s1], rs, bg, (bg>0)?rs/bg:0,strikeS[s1][s1][1]);
+	  }
+      
+      if (scope == inter || scope == all)
+	for (s1=0; s1<S->nseq; s1++)
+	  for (s2=s1+1; s2<S->nseq; s2++)
+	    {
+	      float rs=(strikeS[s1][s2][1]>0)?strikeS[s1][s2][0]/strikeS[s1][s2][1]:0;
+	      float bg=(strikeB[s1][s2][1]>0)?strikeB[s1][s2][0]/strikeB[s1][s2][1]:0;
+	      fprintf ( fp, "!CMT: [INFO] %s vs %s Strike Contact Score: RS: %6.2f BG: %6.2f Ratio: %4.2f NContacts: %d\n",S->name[s1], S->name[s2],rs, bg, (bg>0)?rs/bg:0, strikeS[s1][s2][1]);
+	    }
+    }
+  
+  free_arrayN((void**)strikeS, 3);
+  free_arrayN((void**)strikeB, 3);
+  
+
+  fprintf ( fp, "!CMT: [INFO] Size: %d\n", keptD);
   fprintf ( fp, "!CMT: [INFO] KEPT %d pairs out of %d -- %.2f%%\n", keptD, totD, (float)(keptD*100)/(float)totD);
   fprintf ( fp, "! SEQ_1_TO_N\n");
   vfclose (fp);
