@@ -18,7 +18,7 @@ int distance_tree;
 int rooted_tree;
 int tot_nseq;
 static NT_node compute_fj_tree (NT_node T, Alignment *A, int limit, char *mode);
-static NT_node compute_cw_tree (Alignment *A);
+
 static NT_node compute_std_tree (Alignment *A, int n, char **arg);
 static NT_node tree2fj_tree (NT_node T);
 int tree_contains_duplicates (NT_node T);
@@ -1907,7 +1907,17 @@ NT_node aln2phyml_tree (Alignment *A)
   vfree (name);
   return RT;
 }
-
+NT_node seq2cw_tree (Sequence *S)
+{
+  static char *seq=vtmpnam (NULL);
+  static char *aln=vtmpnam (NULL);
+  static char *tree=vtmpnam (NULL);
+  
+  output_fasta_seqS(seq,S);
+  printf_system ("clustalw -infile=%s -outfile=%s %s", seq,aln, TO_NULL_DEVICE);
+  printf_system ("clustalw -infile=%s -tree -newtree=%s %s",aln,tree, TO_NULL_DEVICE);
+  return main_read_tree(tree);
+}
 NT_node compute_cw_tree (Alignment *A)
 {
   char *tmp1, *tmp2, tmp3[1000];
@@ -2200,6 +2210,21 @@ NT_node   rename_seq_in_tree ( NT_node R, char ***list)
 	}
     }
   return R;
+}
+char * node2seq_file (NT_node N, Sequence *S, int cache, char *file)
+{
+  int a;
+  FILE *fp;
+  //cache==0: above, ==1: below
+  if (!file) file=vtmpnam(NULL);
+  fp=vfopen (file, "w");
+  for (a=0; a<S->nseq; a++)
+    {
+      if (N->lseq2[a]==cache)
+	fprintf (fp, ">%s\n%s\n", S->name[a],S->seq[a]);
+    }
+  vfclose (fp);
+  return file;
 }
 Sequence * tree2seq    (NT_node R, Sequence *S)
 {

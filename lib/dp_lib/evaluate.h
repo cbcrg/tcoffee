@@ -23,6 +23,15 @@ Alignment * distance_evaluate4tcoffee (Alignment *A, Constraint_list *CL, float 
 Alignment * strike_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *matrix);
 Alignment * struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *mode,float max, int enb,char *in_matrix_name);
 Alignment * msa_list2struc_evaluate4tcoffee (Sequence *Species, Sequence *MSAs, Sequence *CL,char *mode,float max, int enb,char *in_matrix_name);
+
+
+char *shuffle_seq_file(char *file);
+int realign_node4hot (Sequence *S, NT_node T,char *pg, int shuffle, char *name, int n);
+int hot (Sequence *S,NT_node T, char *pg, int shuffle, char *name, int n);
+
+float hotshot (Sequence *S,NT_node T, char *pg, float *tot, float *n);
+float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle);
+
 Alignment * evaluate_tree_group (Alignment *T, Sequence *G);
 Alignment *treealn_evaluate4tcoffee (Alignment *A, Sequence *G);
 

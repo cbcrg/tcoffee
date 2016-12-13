@@ -1357,6 +1357,44 @@ int is_a_struc_format (char *format)
     if ( strcmp ( format, "aln")==0)return 1;
     return 0;
     }
+float aln_file2compare (char *aln1, char *aln2)
+{
+  Alignment *A, *B;
+  float sim;
+  A=main_read_aln ( aln1, NULL);
+  B=main_read_aln ( aln2, NULL);
+  sim=aln2compare (A, B);
+  free_aln (A);
+  free_aln (B);
+  return sim;
+}
+float aln2compare (Alignment *A, Alignment *B)
+{
+  Sequence *S;
+  Constraint_list *CL_A, *CL_B;
+  int tot=0;
+  int id=0;
+  int r, s;
+  
+  S=trim_aln_seq ( A, B);
+  CL_A=declare_constraint_list ( S, NULL, NULL, 0, NULL, NULL);
+  CL_B=declare_constraint_list ( S, NULL, NULL, 0, NULL, NULL);
+  
+  
+  CL_A=aln2constraint_list_full (A,CL_A, "sim");
+  CL_B=aln2constraint_list_full (B,CL_B, "sim");
+
+  S=CL_A->S;
+  for (s=0; s<S->nseq;s++)
+    for (r=1; r<=S->len[s]; r++)
+      compare_residues_between_clists (s, r, CL_A, CL_B, &id, &tot);
+  
+  free_constraint_list (CL_A);
+  free_constraint_list (CL_B);
+  free_sequence (S, -1);
+  
+  return (id>0)?(100*(float)id/(float)tot):0;
+}
 /************************************************************************************/
 /*                                                                                  */
 /*                            Informations                                          */

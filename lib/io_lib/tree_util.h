@@ -140,7 +140,8 @@ static NT_node compute_std_tree (Alignment *A, int n, char **arg_list);
 NT_node compute_std_tree_2 (Alignment *A, int **s, char *arg_list);
 NT_node aln2fj_tree(NT_node T, Alignment *A, int limit,char* mode);
 Alignment * filter_aln4tree (Alignment *A, int n,int fg,char* mode);
-
+NT_node compute_cw_tree (Alignment *A);
+NT_node seq2cw_tree (Sequence *S);
 /*********************************************************************/
 /*                                                                   */
 /*                                   Tree Filters and MAnipulation   */
@@ -157,6 +158,7 @@ NT_node free_tree  ( NT_node R);
 NT_node realloc_tree( NT_node R, int n);
 NT_node free_tree_node ( NT_node R);
 
+char * node2seq_file (NT_node N, Sequence *S, int cache, char *file);
 Sequence * tree2seq    (NT_node R, Sequence *S);
 NT_node  rename_seq_in_tree ( NT_node R, char ***list);
 int decode_seq_in_tree (NT_node R, char **name);

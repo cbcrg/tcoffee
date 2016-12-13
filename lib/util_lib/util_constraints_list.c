@@ -1969,7 +1969,49 @@ Constraint_list *update_entry (CLIST_TYPE *entry, Constraint_list *CL, int i)
 /*                                                                   */
 /*********************************************************************/
 
+int compare_residues_between_clists (int s1, int r1,Constraint_list *CL1, Constraint_list *CL2,int *id, int *tot)
+{
+  static int *lu;
+  static int nseq;
+  int n, a, s2, r2;
+  //Note: residues: 1->N
+  //Note Sequences: 0->N-1 !
+  if ((CL1->S)->nseq !=nseq)
+    {
+      if (lu) vfree (lu);
+      lu=(int*)vcalloc ((CL1->S)->nseq, sizeof (int));
+      nseq=(CL1->S)->nseq;
+    }
+  
+  
+  n=CL1->residue_index[s1][r1][0];
+  for (a=1; a<n; a+=ICHUNK)
+    {
+      s2=CL1->residue_index[s1][r1][a+SEQ2];
+      r2=CL1->residue_index[s1][r1][a+R2];
+      lu[s2]=r2;
+      tot[0]++;
+    }
+  n=CL2->residue_index[s1][r1][0];
+  for (a=1; a<n; a+=ICHUNK)
+    {
+      s2=CL2->residue_index[s1][r1][a+SEQ2];
+      r2=CL2->residue_index[s1][r1][a+R2];
+      if (lu[s2]==r2)id[0]++;
+    }
 
+  n=CL1->residue_index[s1][r1][0];
+  for (a=1; a<n; a+=ICHUNK)
+    {
+      s2=CL1->residue_index[s1][r1][a+SEQ2];
+      r2=CL1->residue_index[s1][r1][a+R2];
+      lu[s2]=0;
+      tot[0]++;
+    }
+  return id[0];
+}
+	
+  
 
 CLIST_TYPE *main_search_in_list_constraint ( int *key,int *p,int k_len,Constraint_list *CL)
 {

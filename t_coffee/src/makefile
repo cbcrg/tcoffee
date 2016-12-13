@@ -29,8 +29,8 @@ endif
 
 CC=g++ 
 ifndef CFLAGS
-#CFLAGS=-O3 -Wno-write-strings
-CFLAGS=-g -w
+CFLAGS=-O3 -Wno-write-strings
+#CFLAGS=-ggdb -w
 endif
 
 ifdef OPENMP

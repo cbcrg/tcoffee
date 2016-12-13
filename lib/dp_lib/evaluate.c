@@ -1213,8 +1213,236 @@ Alignment *msa_list2struc_evaluate4tcoffee (Sequence *SP,Sequence *AF, Sequence 
   
   return struc_evaluate4tcoffee (NA, NL, mode, imaxD, enb, in_matrix_name);
 }
-    
+static int recoded;
+static int max_hot=5;
+float hotshot (Sequence *S,NT_node T, char *pg, float *tot, float *n)
+{
+  float sim1, sim2,sim3, sim4;
+  int a, nshuffle=1;
   
+  if (!S) recoded=0;
+  if (!recoded)
+    {
+      T=seq2cw_tree (S);
+      T=recode_tree (T, S);
+      recoded=1;
+    }
+  
+  if (!T) return 0;
+  sim1=realign_node4hotshot(S,T,pg,0);
+  for (sim2=0,a=0; a<nshuffle; a++)
+    {
+      sim3=realign_node4hotshot(S,T,pg,1);
+      if (sim2==0 || sim2>sim3)sim2=sim3;
+    }
+  sim4=realign_node4hotshot(S,T,pg,2);
+  if ( sim1>0)
+    {
+      tot[0]+=sim1-sim2;
+      n[0]++;
+      fprintf ( stdout, "##HOTSHOT N: %d HotSim: %7.3f SHotSim: %7.3f SH: %7.3f Hot-SHot: %8.3f RunningAVG: %8.3f\n", (int)n[0],sim1, sim2, sim4, sim1-sim2, tot[0]/n[0]);
+    }
+  hotshot(S, T->left, pg, tot,n);
+  hotshot(S, T->right,pg, tot,n);
+  return tot[0];
+}
+
+
+int hot (Sequence *S,NT_node T, char *pg, int shuffle, char *name, int n)
+{
+  if (!S) recoded=0;
+  if (!recoded)
+    {
+      T=seq2cw_tree (S);
+      T=recode_tree (T, S);
+      recoded=1;
+    }
+  
+  if (!T) return n;
+  n=realign_node4hot(S,T,pg,shuffle,name,n);
+  n=hot(S, T->left, pg,shuffle,name,n);
+  n=hot(S, T->right,pg,shuffle,name,n);
+  return n;
+}
+float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle)
+{
+  int a, b, c, ali;
+  float sim=0;
+  Alignment **A;
+
+  A = (Alignment **) vcalloc (8,sizeof (Alignment *));
+  if (!T)return -1;
+  else if (!T->parent) return -1;
+  else if (T->nseq==1 || T->nseq==(S->nseq-1))return -1;
+  else 
+    {
+      
+      char aln[1000];
+      char seq0[100];
+      char seq1[100];
+      char aln0[100];
+      char aln1[100];
+      char aln2 [100];
+      int flip;
+      
+      sprintf (seq0, "seq0");
+      sprintf (seq1, "seq1");
+      sprintf (aln0, "aln0");
+      sprintf (aln1, "aln1");
+      sprintf (aln2, "aln2");
+      
+      for (a=0; a< S->nseq; a++)
+	fprintf (stderr, "%d", T->lseq2[a]);
+      fprintf (stderr, "\n");
+      
+      node2seq_file (T, S, 0, seq0);
+      node2seq_file (T, S, 1, seq1);
+
+      flip=(shuffle==2)?0:1;
+      
+      for (ali=0,a=0; a<2; a++)
+	{
+	  
+	  if (flip && a==0)invert_seq_file (seq0);
+	  if (shuffle)shuffle_seq_file(seq0);
+	  printf_system ("clustalw -infile=%s -outfile=%s %s", seq0, aln0, TO_NULL_DEVICE );
+	  if (flip && a==0)invert_seq_file (seq0);	  
+	  if (flip && a==0)invert_aln_file (aln0);
+	  
+	  for (b=0; b<2; b++)
+	    {
+	      if (flip && b==0)   invert_seq_file (seq1);
+	      if (shuffle)shuffle_seq_file(seq1);
+	      
+	      printf_system ("clustalw -infile=%s -outfile=%s %s", seq1, aln1, TO_NULL_DEVICE);
+
+	      if (flip && b==0)invert_seq_file (seq1);	      
+	      if (flip && b==0)invert_aln_file (aln1);
+	      
+	      for (c=0; c<2; c++, ali++)
+		{
+		  if (flip && c==0)
+		    {
+		      invert_aln_file(aln0);
+		      invert_aln_file(aln1);
+		    }
+		  printf_system ("clustalw -profile1=%s -profile2=%s -outfile=%s %s", aln0, aln1, aln2, TO_NULL_DEVICE);
+		  if (flip && c==0)
+		    {
+		      invert_aln_file (aln0);
+		      invert_aln_file (aln1);
+		      invert_aln_file (aln2);
+		    }
+		  A[ali]=main_read_aln(aln2, NULL);
+		  //if (n>max_hot)exit(0);
+		}
+	    }
+	}
+    }
+  
+  for (ali=0,a=0; a<7; a++)
+    for (b=a+1; b<8; b++, ali++)
+      {
+	sim+=aln2compare (A[a], A[b]);
+      }
+  for (a=0; a<8; a++)free_aln (A[a]);
+  vfree (A);
+  return sim/(float)ali;
+}
+int realign_node4hot (Sequence *S, NT_node T,char *pg, int shuffle, char *name, int n)
+{
+  if (!T);
+  else if (!T->parent);
+  else if (T->nseq==1 || T->nseq==(S->nseq-1));
+  else 
+    {
+      int a, b, c;
+      char aln[1000];
+      char seq0[100];
+      char seq1[100];
+      char aln0[100];
+      char aln1[100];
+      sprintf (seq0, "seq0");
+      sprintf (seq1, "seq1");
+      sprintf (aln0, "aln0");
+      sprintf (aln1, "aln1");
+      
+      for (a=0; a< S->nseq; a++)
+	fprintf (stderr, "%d", T->lseq2[a]);
+      fprintf (stderr, "\n");
+      
+      node2seq_file (T, S, 0, seq0);
+      node2seq_file (T, S, 1, seq1);
+
+      for (a=0; a<2; a++)
+	{
+	  if (a==0)invert_seq_file (seq0);
+	  if (shuffle)shuffle_seq_file(seq0);
+	  printf_system ("clustalw -infile=%s -outfile=%s %s", seq0, aln0, TO_NULL_DEVICE );
+	  if (a==0)invert_seq_file (seq0);	  
+	  if (a==0)invert_aln_file (aln0);
+	  
+	  for (b=0; b<2; b++)
+	    {
+	      if (b==0)   invert_seq_file (seq1);
+	      if (shuffle)shuffle_seq_file(seq1);
+	      
+	      printf_system ("clustalw -infile=%s -outfile=%s %s", seq1, aln1, TO_NULL_DEVICE);
+
+	      if (b==0)invert_seq_file (seq1);	      
+	      if (b==0)invert_aln_file (aln1);
+	      
+	      for (c=0; c<2; c++)
+		{
+		  sprintf (aln, "%s.%d.aln", name, n++);
+		  if (c==0)
+		    {
+		      invert_aln_file(aln0);
+		      invert_aln_file(aln1);
+		    }
+		  HERE ("-->produce %s", aln);
+		  printf_system ("clustalw -profile1=%s -profile2=%s -outfile=%s %s", aln0, aln1, aln, TO_NULL_DEVICE);
+		  if (c==0)
+		    {
+		      invert_aln_file (aln0);
+		      invert_aln_file (aln1);
+		      invert_aln_file (aln);
+		    }
+		  //if (n>max_hot)exit(0);
+		}
+	    }
+	}
+    }
+  return n;
+}
+
+char *shuffle_seq_file(char *file)
+{
+  Sequence *S;
+  int **order;
+  int a;
+  FILE *fp;
+  
+  S=main_read_seq (file);
+  order=declare_int (S->nseq, 2);
+  for (a=0; a<S->nseq; a++)
+    {
+      order[a][0]=a;
+      order[a][1]=rand()%10000;
+    }
+  sort_int (order,2,1, 0, S->nseq-1);
+  fp=vfopen (file, "w");
+  for (a=0; a<S->nseq;a++)
+    {
+        fprintf ( fp, ">%s\n%s\n", S->name [order[a][0]], S->seq[order[a][0]]);
+    }
+  free_sequence (S, S->nseq);
+  free_int (order, -1);
+  vfclose (fp);
+  
+  return file;
+}
+
 Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode, float imaxD, int enb,char *in_matrix_name)
 {
   double **max_pw_sc;

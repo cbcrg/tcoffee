@@ -506,6 +506,7 @@ int ** fill_pos_matrix (Constraint_list *CL, int beg, int end, int slen, int **p
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
+int compare_residues_between_clists (int s1, int r1,Constraint_list *CL1, Constraint_list *CL2,int *id, int *tot);
 FILE * compare_list (FILE *OUT, Constraint_list *CL1,Constraint_list *CL2);
 //CLIST_TYPE *search_in_list_constraint(int *key, int k_len, int **L, int ne, int ***start_index, int ***end_index);
 CLIST_TYPE *main_search_in_list_constraint ( int *key,int *p,int k_len,Constraint_list *CL);

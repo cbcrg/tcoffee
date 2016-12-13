@@ -11696,6 +11696,24 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   
 	   DST->A=struc_evaluate4tcoffee (D1->A,CL,ev3d,max,enb, strikem);
 	 }
+       else if ( strm(action, "hot"))
+	 {
+	   hot (D1->S, (D2)?D2->T:NULL, ACTION(1),0, ACTION(2),0);
+	   exit(0);
+	 }
+       else if ( strm(action, "shot"))
+	 {
+	   hot (D1->S, (D2)?D2->T:NULL, ACTION(1),1, ACTION(2),0);
+	   exit (0);
+	 }
+        else if ( strm(action, "hotshot"))
+	 {
+	   float tot=0;
+	   float n=n;
+	   hotshot (D1->S, (D2)?D2->T:NULL, ACTION(1),&tot, &n);
+	   fprintf ( stdout, "##HOTSHOT Global: %.3f\n",tot/n); 
+	   exit (0);
+	 }
        else if ( strm(action, "evaluate"))
 	 {
 	   Alignment *A;

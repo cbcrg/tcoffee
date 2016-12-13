@@ -72,7 +72,8 @@ int parse_category_list ( char *category_list, char ***category, int *sub_n_cate
 int struc_matches_pattern ( char *struc, char *pattern);
 float **get_aln_compare_sim ( Alignment *A, Structure *S, char **cat, int n_cat, char *matrix);
 float **analyse_sim ( Alignment *A, float **dis);
-
+float aln_file2compare (char *aln1, char *aln2);
+float aln2compare (Alignment *A, Alignment *B);
 /*Output*/
 FILE *output_format (char *iof, FILE *fp, Result *R);
 FILE *output_pair_wise_sequence_results (FILE *fp,  Result *R);
