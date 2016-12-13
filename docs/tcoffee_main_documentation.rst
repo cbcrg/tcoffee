@@ -1787,28 +1787,25 @@ Bg       Background Score  Average score of all-against-all contacts
 ======== ================= ===========================================
 
 
-It is also possible to use extra parameters, which can be passed to STRIKE as follow:
-
-:: 
-
-  Generic common line for STRIKE:
-  ##: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
-      +evaluate3D strike <max> <end> <strike matrix File> -output score_ascii
-
-  Generic common line for colored output:
-  ##: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
-      +evaluate3D strike <max> <end> <strike matrix File> -output score_html -out sample_3Dseq1.html
-
-
-The three parameters must be passed! Each one can be replaced with the string **"def"** if the default value is meant to be used. 
+It is also possible to use three extra parameters. The three parameters must be passed!!! Each one can be replaced with the string **"def"** if the default value is meant to be used. 
 
 ========== ======== =================================================
 Parameter  Default  Definition
 ========== ======== =================================================
 max        1.2      Max distance between two contacting AA (Angstrom)
 end	       3	       Number of excluded neighbours between contacts
-strike     strike   File containing the strike matrix 
+matrix     strike   File containing the STRIKE matrix 
 ========== ======== =================================================
+
+:: 
+
+  Generic common line for STRIKE:
+  ##: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +evaluate3D strike <max> <end> <matrix> -output score_ascii
+
+  Generic common line for colored output:
+  ##: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +evaluate3D strike <max> <end> <matrix> -output score_html -out sample_3Dseq1.html
 
 
 
