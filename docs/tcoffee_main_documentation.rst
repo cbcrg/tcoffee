@@ -1744,10 +1744,10 @@ Let us evaluate the alignment produced by Expresso using the template file it re
   $$: t_coffee -other_pg irmsd proteases_small.aln -template_file proteases_small.template
 
   Result of the iRMSD evaluation:
-  TOTAL     EVALUATED :  50.17 %  
- 	TOTAL     APDB      :  83.44 %  
- 	TOTAL     iRMSD     :  0.67 Angs
- 	TOTAL     NiRMSD    :  1.34 Angs
+  TOTAL     EVALUATED :  50.17 %
+  TOTAL     APDB      :  83.44 %
+  TOTAL     iRMSD     :  0.67 Angs
+  TOTAL     NiRMSD    :  1.34 Angs
 
 Evaluating alternative alignments
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1772,11 +1772,11 @@ STRIKE uses a contact matrix to evaluate an alignment using one or more structur
 
 ::
 
-  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-      -action +evaluate3D strike -output score_ascii -out sample_3D.score_ascii
+  $$: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +evaluate3D strike -output score_ascii -out sample_3D.score_ascii
 
 
-The first part of the output is the STRIKE RAW SCORE. It reports the score of each sequence when using either one structure as a template, or averaging over all the structures. The various fields are as follows:
+The first part of the output is the STRIKE RAW SCORE. It reports the score of each sequence when using either one structure as a template, or averaging over all the structures; the highest value in every column is marked with a star. The various fields are as follows:
 
 ======== ================= ===========================================
 Field    Name              Definition
@@ -1786,18 +1786,21 @@ Rn	      Random Score      Average score when scrambling contacts
 Bg       Background Score  Average score of all-against-all contacts
 ======== ================= ===========================================
 
-.. hint:: The highest value in every column is marked with a star.
 
-Extra parameters can be passed to STRIKE:
+It is also possible to use extra parameters, which can be passed to STRIKE as follow:
 
 :: 
 
-  Standard common line for STRIKE options:
-  ##: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-      -action +evaluate3D strike <max> <end> <strike matrix File> -output score_ascii
+  Generic common line for STRIKE:
+  ##: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +evaluate3D strike <max> <end> <strike matrix File> -output score_ascii
+
+  Generic common line for colored output:
+  ##: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template -action \
+      +evaluate3D strike <max> <end> <strike matrix File> -output score_html -out sample_3Dseq1.html
 
 
-The three parameters must be passed. Each one can be replaced with the string "def" if the default value is meant to be used. 
+The three parameters must be passed! Each one can be replaced with the string **"def"** if the default value is meant to be used. 
 
 ========== ======== =================================================
 Parameter  Default  Definition
@@ -1807,14 +1810,6 @@ end	       3	       Number of excluded neighbours between contacts
 strike     strike   File containing the strike matrix 
 ========== ======== =================================================
 
-
-A colored output can also be generated: 
-
-:: 
-
-  ##: t_coffee -other_pg seq_reformat -in sample_3Dseq1.aln -in2 sample_3Dseq1.template \
-      -action +evaluate3D strike <max> <end> <strike matrix File> -output score_html -out \
-      sample_3Dseq1.html
 
 
 Evaluating a MSA according to your own criterion
