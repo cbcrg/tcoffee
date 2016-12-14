@@ -1276,20 +1276,14 @@ float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle)
   else if (T->nseq==1 || T->nseq==(S->nseq-1))return -1;
   else 
     {
+
+      char *seq0=vtmpnamH();
+      char *seq1=vtmpnamH();
+      char *aln0=vtmpnamH();
+      char *aln1=vtmpnamH();
+      char *aln2=vtmpnamH();
       
-      char aln[1000];
-      char seq0[100];
-      char seq1[100];
-      char aln0[100];
-      char aln1[100];
-      char aln2 [100];
       int flip;
-      
-      sprintf (seq0, "seq0");
-      sprintf (seq1, "seq1");
-      sprintf (aln0, "aln0");
-      sprintf (aln1, "aln1");
-      sprintf (aln2, "aln2");
       
       for (a=0; a< S->nseq; a++)
 	fprintf (stderr, "%d", T->lseq2[a]);
@@ -1305,7 +1299,7 @@ float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle)
 	  
 	  if (flip && a==0)invert_seq_file (seq0);
 	  if (shuffle)shuffle_seq_file(seq0);
-	  printf_system ("clustalw -infile=%s -outfile=%s %s", seq0, aln0, TO_NULL_DEVICE );
+	  printf_system ("clustalw -infile=%s -outfile=%s  %s", seq0, aln0,TO_NULL_DEVICE );
 	  if (flip && a==0)invert_seq_file (seq0);	  
 	  if (flip && a==0)invert_aln_file (aln0);
 	  
@@ -1338,7 +1332,20 @@ float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle)
 		}
 	    }
 	}
+      vremove3 (seq0, "*");
+      vremove3 (seq1, "*");
+      vremove3 (aln0, "*");
+      vremove3 (aln1, "*");
+      vremove3 (aln2, "*");
+      
+      vremove (seq0);
+      vremove (seq1);
+      vremove (aln0);
+      vremove (aln1);
+      vremove (aln2);
+      
     }
+  
   
   for (ali=0,a=0; a<7; a++)
     for (b=a+1; b<8; b++, ali++)
@@ -1357,16 +1364,12 @@ int realign_node4hot (Sequence *S, NT_node T,char *pg, int shuffle, char *name, 
   else 
     {
       int a, b, c;
-      char aln[1000];
-      char seq0[100];
-      char seq1[100];
-      char aln0[100];
-      char aln1[100];
-      sprintf (seq0, "seq0");
-      sprintf (seq1, "seq1");
-      sprintf (aln0, "aln0");
-      sprintf (aln1, "aln1");
-      
+      char *seq0=vtmpnamH();
+      char *seq1=vtmpnamH();
+      char *aln0=vtmpnamH();
+      char *aln1=vtmpnamH();
+      char *aln2=vtmpnamH();
+      char *aln=(char*)vcalloc (strlen (name)+100, sizeof (char));
       for (a=0; a< S->nseq; a++)
 	fprintf (stderr, "%d", T->lseq2[a]);
       fprintf (stderr, "\n");
@@ -1400,19 +1403,34 @@ int realign_node4hot (Sequence *S, NT_node T,char *pg, int shuffle, char *name, 
 		      invert_aln_file(aln0);
 		      invert_aln_file(aln1);
 		    }
-		  HERE ("-->produce %s", aln);
-		  printf_system ("clustalw -profile1=%s -profile2=%s -outfile=%s %s", aln0, aln1, aln, TO_NULL_DEVICE);
+		  HERE ("-->produce %s", aln2);
+		  printf_system ("clustalw -profile1=%s -profile2=%s -outfile=%s %s", aln0, aln1, aln2, TO_NULL_DEVICE);
 		  if (c==0)
 		    {
 		      invert_aln_file (aln0);
 		      invert_aln_file (aln1);
-		      invert_aln_file (aln);
+		      invert_aln_file (aln2);
 		    }
 		  //if (n>max_hot)exit(0);
 		}
 	    }
 	}
+      
+      //      vremove (seq0);
+      //vremove (seq1);
+      //vremove (aln0);
+      //vremove (aln1);
+      //vremove (aln2);
+
+      vremove3 (seq0, "*");
+      vremove3 (seq1, "*");
+      vremove3 (aln0, "*");
+      vremove3 (aln1, "*");
+      vremove3 (aln2, "*");
+
+      
     }
+  
   return n;
 }
 

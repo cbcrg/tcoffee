@@ -644,10 +644,15 @@ FILE * vtmpfile();
 void initiate_vtmpnam (char *s);
 int     vtmpnam_size ();
 char *  vtmpnam ( char *s);
+char *  vtmpnamH( );
+char *alp2random_string (char*s);
+
 char *  tmpnam_2 (char *s);
 void    safe_remove(char*s);
 char *  vremove ( char *s);
 char *  vremove2 ( char *s);
+char *  vremove3 ( char *s, char *ext);
+
 void error_exit (int);
 void clean_exit();
 void signal_exit(int);

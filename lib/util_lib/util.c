@@ -6017,6 +6017,35 @@ void  initiate_vtmpnam (char *file)
   add2file2remove_list (NULL);
   tmpnam_2(NULL);
 }
+static int tmphL=15;
+char *random_string (char*s);
+char *vtmpnamH()
+{
+  
+  char *s=(char*)vcalloc (tmphL+5, sizeof (char));
+  char *s2;
+  
+  while (check_file_exists (s=alp2random_string(s)));
+  vfclose(vfopen (s, "w"));
+  
+  s2=add2file2remove_list (s);
+  if (s!=s2)vfree (s);
+  
+  return s2;
+  
+}
+char *alp2random_string (char*s)
+{
+  char alp[]="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
+  int l=strlen (alp);
+  int a;
+  sprintf (s, "tmp_");
+  for (a=4; a<tmphL+4; a++)s[a]=alp[rand()%l];
+  s[a]='\0';
+
+ 
+  return s;
+}
 char *vtmpnam ( char *s1)
 {
   char *s,*s2;
@@ -6212,7 +6241,12 @@ void safe_remove (char *s)//remove even if the file is partly unaccessible
       remove (s);
     }
 }
-
+char *vremove3(char *s, char *ext)
+{
+  char *file=(char *)vcalloc (((s)?strlen (s):0)+((ext)?strlen (ext):0)+1, sizeof (char));
+  sprintf (file, "%s%s", s, ext);
+  vremove (file);
+}
 char *vremove (char *s)
 {
 
