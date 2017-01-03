@@ -2006,7 +2006,6 @@ int compare_residues_between_clists (int s1, int r1,Constraint_list *CL1, Constr
       s2=CL1->residue_index[s1][r1][a+SEQ2];
       r2=CL1->residue_index[s1][r1][a+R2];
       lu[s2]=0;
-      tot[0]++;
     }
   return id[0];
 }

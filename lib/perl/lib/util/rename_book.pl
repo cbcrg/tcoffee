@@ -1694,7 +1694,7 @@ sub dirsync
     if ($mday<10){$mday="0$mday";}
     if ($mon<10){$month="0$mon";}
     
-    my $ddir="$year\_$mon\_$mday";
+    my $ddir="$year\_$month\_$mday";
     
     foreach my $f (@l1)
       {
@@ -1734,7 +1734,7 @@ sub dirsync
 	  }
 	elsif (-f "$from" && $lcf =~/monde/ && $lcf=~/pdf/)
 	  {
-	    my $to="$press_dir/$ddir\LeMonde.pdf";
+	    my $to="$press_dir/$ddir\_LeMonde.pdf";
 	    print " --- sync $from => $to\n";
 	    copy ("$from", "$to");
 	  }

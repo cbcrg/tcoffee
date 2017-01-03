@@ -11716,12 +11716,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   fprintf ( stdout, "##HOTSHOT Global: %.3f\n",tot/nf); 
 	   exit (0);
 	 }
-       else if ( strm(action, "hotshotmax"))
+       else if ( strm(action, "hotshot2"))
 	 {
-	   float tot=0;
-	   float nf=0;
-	   hotshotmax (D1->S, (D2)?D2->T:NULL, ACTION(1),&tot, &nf);
-	   fprintf ( stdout, "##HOTSHOTMAX Global: %.3f\n",tot/nf); 
+	   float *results=(float*)vcalloc (100, sizeof (float));
+	   hotshot2 (D1->S, (D2)?D2->T:NULL, ACTION(1),results);
+	   if (results[0]>0)
+	     {
+	       float t=results[0];
+	       fprintf (stdout,"##GLOBAL HOT: %7.3f SHOT: %7.3f HOT-SHOT: %7.3f HOT>SHOT %7.3f SHOT>HOT %7.3f\n", results[2]/t,results[4]/t, results[6]/t, results[8]/t, results[10]/t);
+	     }
+	   
 	   exit (0);
 	 }
        else if ( strm(action, "evaluate"))
