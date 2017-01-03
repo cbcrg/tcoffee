@@ -1254,6 +1254,7 @@ Alignment * main_read_aln ( char *name, Alignment *A)
        format=identify_seq_format (name);
 
        IN_SEQ=A->S;
+
        if      ((format && strm(format, "saga_aln" )) ||strm(format, "clustal_aln")||strm(format, "t_coffee_aln" ) )
 	 {
 
@@ -1300,8 +1301,8 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	      return NULL;
 	  }
 
-
-	 if ( check_list_for_dup( A->name, A->nseq))
+       
+       if ( check_list_for_dup( A->name, A->nseq))
           {
 	      fprintf ( stderr, "\nWARNING (main_read_aln): %s is duplicated in File %s ", check_list_for_dup( A->name, A->nseq), A->file[0]);
 	      A=aln2unique_name_aln(A);
@@ -1382,6 +1383,7 @@ char * identify_seq_format ( char *file)
 	     ;
 	   }
        // 	 printf("DETERMINED FORMAT: %s\n", format);
+       
        return format;
        }
 char **identify_list_format ( char **list, int n)
@@ -5368,12 +5370,10 @@ void dump_msa ( char *file,Alignment *A, int nseq, int *lseq)
 
 void read_aln (char *file_name, Alignment *A)
 {
-  char *tmp_name;
+  static char *tmp_name=vtmpnam (NULL);
   Sequence *S;
 
-
-  tmp_name=vtmpnam (NULL);
-
+  
   if (printf_system ( "clustalw_aln2fasta_aln.pl %s > %s",file_name, tmp_name)!=EXIT_SUCCESS)
     {
       printf_exit ( EXIT_FAILURE, stderr, "Could Not Read File %s [FATAL:%s]\n", file_name, PROGRAM);
@@ -5382,6 +5382,7 @@ void read_aln (char *file_name, Alignment *A)
     {
       S=get_fasta_sequence ( tmp_name,NULL);
       A=seq2aln (S,A, 0);
+      vremove (tmp_name);
     }
   return;
 }
@@ -11708,10 +11709,19 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
         else if ( strm(action, "hotshot"))
 	 {
+	   
 	   float tot=0;
-	   float n=n;
-	   hotshot (D1->S, (D2)?D2->T:NULL, ACTION(1),&tot, &n);
-	   fprintf ( stdout, "##HOTSHOT Global: %.3f\n",tot/n); 
+	   float nf=0;
+	   hotshot (D1->S, (D2)?D2->T:NULL, ACTION(1),&tot, &nf);
+	   fprintf ( stdout, "##HOTSHOT Global: %.3f\n",tot/nf); 
+	   exit (0);
+	 }
+       else if ( strm(action, "hotshotmax"))
+	 {
+	   float tot=0;
+	   float nf=0;
+	   hotshotmax (D1->S, (D2)?D2->T:NULL, ACTION(1),&tot, &nf);
+	   fprintf ( stdout, "##HOTSHOTMAX Global: %.3f\n",tot/nf); 
 	   exit (0);
 	 }
        else if ( strm(action, "evaluate"))

@@ -2362,7 +2362,33 @@ int tree2nleaf (NT_node R)
       return n;
     }
 }
+NT_node tree2deepest_nodeR(NT_node T, NT_node *DN, int *depth);
+NT_node tree2deepest_node(NT_node T)
+{
+  NT_node DN;
+  int depth=0;
 
+  return tree2deepest_nodeR(T, &DN, &depth);
+}
+NT_node tree2deepest_nodeR(NT_node T, NT_node *DN, int *depth)
+{
+  //tree must be recoded
+  if (!T)return NULL;
+  int a;
+  int n1, n2, n;
+  
+  n1=n2=n=0;
+  for (a=0; a<T->nseq; a++)
+    {
+      if (T->lseq2[a])n1++;
+      else n2++;
+    }
+  n=MIN(n1, n2);
+  if (n>depth[0]){depth[0]=n; DN[0]=T;}
+  tree2deepest_nodeR(T->left , DN, depth);
+  tree2deepest_nodeR(T->right, DN, depth);
+  return DN[0];
+}
 int tree2nseq ( NT_node R)
 {
  return tree2nleaf(R);

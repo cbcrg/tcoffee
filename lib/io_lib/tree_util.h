@@ -165,6 +165,7 @@ int decode_seq_in_tree (NT_node R, char **name);
   
 NT_node balance_tree (NT_node);
 int tree2nseq ( NT_node R);
+NT_node tree2deepest_node(NT_node T);
 int tree_file2nseq ( char *file);
 
 int tree2nleaf ( NT_node R);

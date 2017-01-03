@@ -67,24 +67,94 @@ NT_node Rredundate (NT_node T, Sequence* S, char *seq)
 }
       
       
-	
- 
-NT_node ** seq2cw_tree ( Sequence *S, char *tree)
+char* seq2cw_aln_file (char *in, char *out)
 {
   Alignment *A;
-  char *aln,command[1000];
-  int tot_node;
+  int tot_node=0;
+  NT_node **T;
+  static char *dir;
+  char *cdir=get_pwd (NULL);
+  
+  if (!file_exists (NULL,in))
+      printf_exit ( EXIT_FAILURE, stderr, "Could not run seq2cw_aln_file:: missing input [FATAL]");
+  if (!dir)
+    {
+      dir =vtmpnam (NULL);
+      my_mkdir (dir);
+    }
+  
+  printf_system_direct ("cp %s %s", in, dir);
+  chdir (dir);
+  printf_system_direct ("clustalw -infile=%s -outfile=out.txt %s",in,TO_NULL_DEVICE);
+  chdir    (cdir);
+  vfree (cdir);
+  
+  
 
+  printf_system_direct ("mv %s/out.txt %s", dir,out);
+  printf_system_direct ("rm %s/*", dir);
+    
+  if (!file_exists (NULL,out))
+    printf_exit ( EXIT_FAILURE, stderr, "Could not run seq2cw_aln_file:: missing output [FATAL]");
 
+  return out;
+}	
+char* prf_pair2cw_aln_file (char *prf1,char *prf2, char *out)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node **T;
+  static char *dir;
+  char *cdir=get_pwd (NULL);
+  
+
+  if (!file_exists (NULL,prf1) || !file_exists (NULL,prf2))
+    printf_exit ( EXIT_FAILURE, stderr, "Could not run prf_pair2cw_aln_file:: missing input [FATAL]");
+  if (!dir)
+    {
+      dir=vtmpnam (NULL);
+      my_mkdir (dir);
+    }
+  printf_system_direct ("cp %s %s",prf1, dir);
+  printf_system_direct ("cp %s %s",prf2, dir);
+  chdir (dir);
+  printf_system_direct ("clustalw -profile1=%s -profile2=%s -outfile=out.txt %s", prf1, prf2, TO_NULL_DEVICE);
+  
+  chdir    (cdir);
+  vfree (cdir);
+  printf_system_direct ("mv %s/out.txt %s",dir, out);
+  printf_system_direct ("rm %s/*", dir);
+  
+  
+  if (!file_exists (NULL,out) )
+    printf_exit ( EXIT_FAILURE, stderr, "Could not run prf_pair2cw_aln_file:: missing output [FATAL]");
+  
+  
+  return out;
+}
+NT_node seq2cw_dnd ( Sequence *S)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node T;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+
+  my_mkdir (dir);
+  chdir (dir);
   
   A=seq2clustalw_aln (S);
-  aln=vtmpnam (NULL); if (!tree)tree=vtmpnam (NULL);
+  output_fasta_aln ("aln", A);
   
-  output_fasta_aln (aln, A);
+  printf_system_direct ("clustalw -infile=aln -newtree=tree -tree %s",TO_NULL_DEVICE);
+  T=main_read_tree ("tree");
+
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
   
-  sprintf ( command, "clustalw -infile=%s -newtree=%s -tree %s", aln, tree, TO_NULL_DEVICE);
-  my_system (command);
-  return read_tree (tree, &tot_node, S->nseq, S->name);
+  vfree (cdir);
+  return T;
 }
 
 NT_node ** make_upgma_tree (  Alignment *A,int **distances,int gop, int gep, char **out_seq, char **out_seq_name, int out_nseq, char *tree_file, char *tree_mode)

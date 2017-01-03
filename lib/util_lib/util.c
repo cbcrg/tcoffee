@@ -1821,13 +1821,11 @@ char *get_pwd ( char *name)
 
 int pg_is_installed ( char *pg)
         {
-	char *fname;
+	static char *fname=vtmpnam(NULL);
 	FILE *fp;
 	int r=0;
 
 	return 1;
-
-	fname= vtmpnam(NULL);
 
 	printf_system_direct("which %s > %s", pg, fname);
 
@@ -1870,7 +1868,7 @@ char *num2plot (int value, int max, int line_len)
 
 int   perl_strstr ( char *string, char *pattern)
 {
-  char *tmp;
+  static char *tmp=vtmpnam (NULL);
   FILE *fp;
   int r;
 
@@ -1886,7 +1884,7 @@ int   perl_strstr ( char *string, char *pattern)
   string2=substitute (string2, "(", " ");
   string2=substitute (string2, ")", " ");
   string2=substitute (string2, "'", " ");
-  tmp=vtmpnam(NULL);
+  
   printf_system_direct("perl -e '$s=\"%s\";$x=($s=~/%s/);$x=($x==1)?1:0;print $x;'>%s", string2, pattern,tmp);
 
   if (check_file_exists(tmp))
@@ -6061,7 +6059,11 @@ char *vtmpnam ( char *s1)
 
   s2=add2file2remove_list (s);
   if (s!=s2)vfree (s);
-  if (s1){sprintf (s1, "%s",s2);return s1;}
+  
+  if (s1)
+    {
+      sprintf (s1, "%s",s2);return s1;
+    }
   else return s2;
 }
 
@@ -7233,7 +7235,7 @@ FILE * find_token_in_file_nlines ( char *fname, FILE * fp, char *token, int n_li
 	    It returns NULL if not found or the position of the fp
 	  */
 
-	  char *tmp_name=NULL;
+	  static char *tmp_name=vtmpnam (NULL);
 	  FILE *fp1;
 	  FILE *fp2;
 	  char buffer[10001];
@@ -7241,8 +7243,7 @@ FILE * find_token_in_file_nlines ( char *fname, FILE * fp, char *token, int n_li
 	  if ( !fp && !file_exists(NULL,fname))return NULL;
 	  if ( fp==NULL)
 	    {
-	      tmp_name=vtmpnam ( NULL);
-
+	      
 	      fp1=vfopen (fname, "r");
 	      fp2=vfopen (tmp_name, "w");
 
@@ -9333,6 +9334,7 @@ void clean_exit ()
     {
       if (!debug)
 	{
+	  
 	  if (isdir(start->name))rrmdir (start->name);
 	  else
 	    {

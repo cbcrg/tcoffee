@@ -1215,21 +1215,60 @@ Alignment *msa_list2struc_evaluate4tcoffee (Sequence *SP,Sequence *AF, Sequence 
 }
 static int recoded;
 static int max_hot=5;
+
+float hotshotmax (Sequence *S,NT_node T, char *pg, float *tot, float *n)
+{
+  float sim1, sim2,sim3, sim4;
+  int a, nshuffle=1;
+  
+  if (!S) recoded=0;
+  
+  if (!recoded)
+    {
+      T=seq2cw_dnd (S);
+      T=recode_tree (T, S);
+      recoded=1;
+    }
+  
+  if (!T) return 0;
+  T=tree2deepest_node (T);
+  sim1=realign_node4hotshot(S,T,pg,0);
+  
+  for (sim2=0,a=0; a<nshuffle; a++)
+    {
+      sim3=realign_node4hotshot(S,T,pg,1);
+      if (sim2==0 || sim2>sim3)sim2=sim3;
+    }
+  sim4=realign_node4hotshot(S,T,pg,2);
+  if ( sim1>0)
+    {
+      tot[0]+=sim1-sim2;
+      n[0]++;
+      fprintf ( stdout, "##HOTSHOTMAX N: %d HotSim: %7.3f SHotSim: %7.3f SH: %7.3f Hot-SHot: %8.3f RunningAVG: %8.3f\n", (int)n[0],sim1, sim2, sim4, sim1-sim2, tot[0]/n[0]);
+      exit (0);
+    }
+  hotshotmax(S, T->left, pg, tot,n);
+  hotshotmax(S, T->right,pg, tot,n);
+  return tot[0];
+}
+
 float hotshot (Sequence *S,NT_node T, char *pg, float *tot, float *n)
 {
   float sim1, sim2,sim3, sim4;
   int a, nshuffle=1;
   
   if (!S) recoded=0;
+  
   if (!recoded)
     {
-      T=seq2cw_tree (S);
+      T=seq2cw_dnd (S);
       T=recode_tree (T, S);
       recoded=1;
     }
   
   if (!T) return 0;
   sim1=realign_node4hotshot(S,T,pg,0);
+  
   for (sim2=0,a=0; a<nshuffle; a++)
     {
       sim3=realign_node4hotshot(S,T,pg,1);
@@ -1242,6 +1281,7 @@ float hotshot (Sequence *S,NT_node T, char *pg, float *tot, float *n)
       n[0]++;
       fprintf ( stdout, "##HOTSHOT N: %d HotSim: %7.3f SHotSim: %7.3f SH: %7.3f Hot-SHot: %8.3f RunningAVG: %8.3f\n", (int)n[0],sim1, sim2, sim4, sim1-sim2, tot[0]/n[0]);
     }
+  
   hotshot(S, T->left, pg, tot,n);
   hotshot(S, T->right,pg, tot,n);
   return tot[0];
@@ -1253,7 +1293,7 @@ int hot (Sequence *S,NT_node T, char *pg, int shuffle, char *name, int n)
   if (!S) recoded=0;
   if (!recoded)
     {
-      T=seq2cw_tree (S);
+      T=seq2cw_dnd (S);
       T=recode_tree (T, S);
       recoded=1;
     }
@@ -1261,7 +1301,7 @@ int hot (Sequence *S,NT_node T, char *pg, int shuffle, char *name, int n)
   if (!T) return n;
   n=realign_node4hot(S,T,pg,shuffle,name,n);
   n=hot(S, T->left, pg,shuffle,name,n);
-  n=hot(S, T->right,pg,shuffle,name,n);
+  n=hot(S, T->right ,pg,shuffle,name,n);
   return n;
 }
 float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle)
@@ -1289,30 +1329,31 @@ float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle)
 	fprintf (stderr, "%d", T->lseq2[a]);
       fprintf (stderr, "\n");
       
-      node2seq_file (T, S, 0, seq0);
-      node2seq_file (T, S, 1, seq1);
-
       flip=(shuffle==2)?0:1;
       
       for (ali=0,a=0; a<2; a++)
 	{
-	  
+
+	  node2seq_file (T, S, 0, seq0);
 	  if (flip && a==0)invert_seq_file (seq0);
-	  if (shuffle)shuffle_seq_file(seq0);
-	  printf_system ("clustalw -infile=%s -outfile=%s  %s", seq0, aln0,TO_NULL_DEVICE );
-	  if (flip && a==0)invert_seq_file (seq0);	  
+	  if (shuffle     )shuffle_seq_file(seq0);
+	  
+	  seq2cw_aln_file (seq0, aln0);
 	  if (flip && a==0)invert_aln_file (aln0);
 	  
 	  for (b=0; b<2; b++)
 	    {
-	      if (flip && b==0)   invert_seq_file (seq1);
-	      if (shuffle)shuffle_seq_file(seq1);
-	      
-	      printf_system ("clustalw -infile=%s -outfile=%s %s", seq1, aln1, TO_NULL_DEVICE);
-
-	      if (flip && b==0)invert_seq_file (seq1);	      
+	      node2seq_file (T, S, 1, seq1);
+	      if (flip && b==0)
+		{
+		  invert_seq_file (seq1);
+		}
+	      if (shuffle     )
+		{
+		  shuffle_seq_file(seq1);
+		}
+	      seq2cw_aln_file (seq1, aln1);
 	      if (flip && b==0)invert_aln_file (aln1);
-	      
 	      for (c=0; c<2; c++, ali++)
 		{
 		  if (flip && c==0)
@@ -1320,7 +1361,8 @@ float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle)
 		      invert_aln_file(aln0);
 		      invert_aln_file(aln1);
 		    }
-		  printf_system ("clustalw -profile1=%s -profile2=%s -outfile=%s %s", aln0, aln1, aln2, TO_NULL_DEVICE);
+		  prf_pair2cw_aln_file (aln0, aln1,aln2);
+		
 		  if (flip && c==0)
 		    {
 		      invert_aln_file (aln0);
@@ -1328,16 +1370,9 @@ float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle)
 		      invert_aln_file (aln2);
 		    }
 		  A[ali]=main_read_aln(aln2, NULL);
-		  //if (n>max_hot)exit(0);
 		}
 	    }
 	}
-      vremove3 (seq0, "*");
-      vremove3 (seq1, "*");
-      vremove3 (aln0, "*");
-      vremove3 (aln1, "*");
-      vremove3 (aln2, "*");
-      
       vremove (seq0);
       vremove (seq1);
       vremove (aln0);
@@ -1403,7 +1438,6 @@ int realign_node4hot (Sequence *S, NT_node T,char *pg, int shuffle, char *name, 
 		      invert_aln_file(aln0);
 		      invert_aln_file(aln1);
 		    }
-		  HERE ("-->produce %s", aln2);
 		  printf_system ("clustalw -profile1=%s -profile2=%s -outfile=%s %s", aln0, aln1, aln2, TO_NULL_DEVICE);
 		  if (c==0)
 		    {

@@ -30,6 +30,7 @@ int realign_node4hot (Sequence *S, NT_node T,char *pg, int shuffle, char *name, 
 int hot (Sequence *S,NT_node T, char *pg, int shuffle, char *name, int n);
 
 float hotshot (Sequence *S,NT_node T, char *pg, float *tot, float *n);
+float hotshotmax (Sequence *S,NT_node T, char *pg, float *tot, float *n);
 float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle);
 
 Alignment * evaluate_tree_group (Alignment *T, Sequence *G);

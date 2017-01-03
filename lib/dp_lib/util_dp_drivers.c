@@ -2684,10 +2684,7 @@ NT_node ** make_tree ( Alignment *A,Constraint_list *CL,int gop, int gep,Sequenc
 
 	    return T;
 	  }
-	else if ( strm (CL->tree_mode, "cwph"))
-	  {
-	    return  seq2cw_tree ( S, tree_file);
-	  }
+	
 	else if (strm (CL->tree_mode, "kmeans"))
 	  {
 	    return seq2km_tree (S, tree_file);

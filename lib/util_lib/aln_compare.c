@@ -1387,8 +1387,10 @@ float aln2compare (Alignment *A, Alignment *B)
   S=CL_A->S;
   for (s=0; s<S->nseq;s++)
     for (r=1; r<=S->len[s]; r++)
-      compare_residues_between_clists (s, r, CL_A, CL_B, &id, &tot);
-  
+      {
+	compare_residues_between_clists (s, r, CL_A, CL_B, &id, &tot);
+	compare_residues_between_clists (s, r, CL_B, CL_A, &id, &tot);
+      }
   free_constraint_list (CL_A);
   free_constraint_list (CL_B);
   free_sequence (S, -1);

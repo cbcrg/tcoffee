@@ -1695,9 +1695,10 @@ sub dirsync
     if ($mon<10){$month="0$mon";}
     
     my $ddir="$year\_$mon\_$mday";
-
+    
     foreach my $f (@l1)
       {
+	my $lcf=lc($f);
 	print "--- check $f [$hd2{$f}]\n";
 	my $from="$from_dir/$f";
 	if ($f=~/Dropbox/ || $f=~/dropbox/ || $f eq "." || $f eq ".." || $hd2{$f})
@@ -1730,6 +1731,12 @@ sub dirsync
 	      {
 		remove_tree ($from);
 	      }
+	  }
+	elsif (-f "$from" && $lcf =~/monde/ && $lcf=~/pdf/)
+	  {
+	    my $to="$press_dir/$ddir\LeMonde.pdf";
+	    print " --- sync $from => $to\n";
+	    copy ("$from", "$to");
 	  }
 	elsif (-d "$from" && ($f=~/^EN(\d\d\d\d)(\d\d)(\d\d)/))
 	  {
