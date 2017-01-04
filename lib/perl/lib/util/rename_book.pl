@@ -1734,9 +1734,16 @@ sub dirsync
 	  }
 	elsif (-f "$from" && $lcf =~/monde/ && $lcf=~/pdf/)
 	  {
+	    my $n;
 	    my $to="$press_dir/$ddir\_LeMonde.pdf";
+	    while (-e $to)
+	      {
+		$n++;
+		$to="$press_dir/$ddir\_LeMonde.$n.pdf";
+	      }
 	    print " --- sync $from => $to\n";
 	    copy ("$from", "$to");
+	    unlink ($from);
 	  }
 	elsif (-d "$from" && ($f=~/^EN(\d\d\d\d)(\d\d)(\d\d)/))
 	  {

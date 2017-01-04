@@ -1219,6 +1219,7 @@ float* hotshot2 (Sequence *S,NT_node T, char *pg, float *results)
 {
   float *sim;
   int a, nshuffle=1;
+  int deepest_only=1;
   //results[0]->tot n
   //results[1]->cur n
   //results[2]->tot HOT
@@ -1250,14 +1251,14 @@ float* hotshot2 (Sequence *S,NT_node T, char *pg, float *results)
     }
   
   if (!T) return 0;
-  
+  if ( deepest_only)T=tree2deepest_node(T);
   results=realign_node4hotshot2(S,T,pg,results);
   if (results[1]>0)
     {
       float t=results[1];
       fprintf (stdout,"##NODE: %d HOT: %7.3f SHOT: %7.3f HOT-SHOT: %7.3f HOT>SHOT %7.3f SHOT>HOT %7.3f Depth %.2f\n", (int) results[12], results[3]/t,results[5]/t, results[7]/t, results[9]/t, results[11]/t, results[13]);
     }
-  
+  if (deepest_only)return results;
   hotshot2(S, T->left, pg,results);
   hotshot2(S, T->right,pg,results);
   return results;
@@ -1321,6 +1322,7 @@ float * realign_node4hotshot2 (Sequence *S, NT_node T,char *pg, float *results)
 {
   static Alignment *R;  
   int a;
+  int max=10;
   for (a=1; a<12; a+=2)results[a]=0;
   results[12]+=1;
 
@@ -1332,8 +1334,9 @@ float * realign_node4hotshot2 (Sequence *S, NT_node T,char *pg, float *results)
       
       char **flipseq=declare_char (8, 4);
       int a,b,n1;
-      Alignment **HOT= (Alignment **)vcalloc (8, sizeof (Alignment *));
-      Alignment **SHOT=(Alignment **)vcalloc (8, sizeof (Alignment *));
+      Alignment *HOT;
+      Alignment *SHOT;
+      Alignment *R;
       float sim=0;
             
       n1=0;
@@ -1350,17 +1353,26 @@ float * realign_node4hotshot2 (Sequence *S, NT_node T,char *pg, float *results)
       sprintf (flipseq[n1++], "011");
       sprintf (flipseq[n1++], "101");
       sprintf (flipseq[n1++], "111");
-      
-      for (a=0; a<n1; a++)
-	{
-	  HOT [a]=hotnode2aln (S, T, pg, 0, flipseq[a]);
-	  SHOT[a]=hotnode2aln (S, T, pg, 1, flipseq[a]);
-	}
-      
+     
+      R=hotnode2aln (S, T, pg, 0, flipseq[0]);
       for (a=1; a<n1;a++)
 	{
-	  float hot  =aln2compare ( HOT[a], HOT[0]);
-	  float shot =aln2compare (SHOT[a], HOT[0]);
+	  float hot;
+	  float shot;
+	  float minshot=101;
+	  
+	  HOT=hotnode2aln (S, T, pg, 0, flipseq[a]);
+	  hot  =aln2compare ( HOT, R);
+	  free_aln (HOT);
+	  for (b=0; b<max; b++)
+	    {
+	      SHOT=hotnode2aln (S, T, pg, 1, flipseq[a]);
+	      shot=aln2compare (SHOT, R);
+	      if (shot<minshot)minshot=shot;
+	      free_aln (SHOT);
+	    }
+	  shot=minshot;
+	  
 	  results[0]+=1;
 	  results[1]+=1;
 	  
@@ -1380,14 +1392,7 @@ float * realign_node4hotshot2 (Sequence *S, NT_node T,char *pg, float *results)
 	  results[11]+=(hot<shot)?1:0;
 	  fprintf (stdout, "##MSA HOT: %7.3f SHOT: %7.3f HOT-SHOT: %7.3f\n", hot, shot, hot-shot);  
 	}
-      
-      for (a=0; a<n1; a++)
-	{
-	  free_aln (HOT[a]);
-	  free_aln (SHOT[a]);
-	}
-      vfree (HOT);
-      vfree (SHOT);
+      free_aln (R);
       free_char (flipseq, -1);
     }
   return results;
