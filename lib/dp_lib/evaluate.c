@@ -1251,15 +1251,19 @@ float* hotshot2 (Sequence *S,NT_node T, char *pg, float *results)
     }
   
   if (!T) return 0;
-  if ( deepest_only)T=tree2deepest_node(T);
+  if ( deepest_only)
+    {
+      T=tree2deepest_node(T);
+    }
   results=realign_node4hotshot2(S,T,pg,results);
   if (results[1]>0)
     {
       float t=results[1];
       fprintf (stdout,"##NODE: %d HOT: %7.3f SHOT: %7.3f HOT-SHOT: %7.3f HOT>SHOT %7.3f SHOT>HOT %7.3f Depth %.2f\n", (int) results[12], results[3]/t,results[5]/t, results[7]/t, results[9]/t, results[11]/t, results[13]);
     }
-  if (deepest_only)return results;
+  if (deepest_only && results[1]>0)return results;
   hotshot2(S, T->left, pg,results);
+  if (deepest_only && results[1]>0)return results;
   hotshot2(S, T->right,pg,results);
   return results;
 }
@@ -1325,7 +1329,7 @@ float * realign_node4hotshot2 (Sequence *S, NT_node T,char *pg, float *results)
   float best_hot;
   float best_shot;
   int a;
-  int max=10;
+  int max=15;
   for (a=1; a<12; a+=2)results[a]=0;
   results[12]+=1;
 
