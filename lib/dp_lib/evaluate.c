@@ -1321,6 +1321,9 @@ Alignment * hotnode2aln  (Sequence *S, NT_node T,char *pg, int shuffle, char *fl
 float * realign_node4hotshot2 (Sequence *S, NT_node T,char *pg, float *results)
 {
   static Alignment *R;  
+  float best_delta=-100;
+  float best_hot;
+  float best_shot;
   int a;
   int max=10;
   for (a=1; a<12; a+=2)results[a]=0;
@@ -1372,7 +1375,12 @@ float * realign_node4hotshot2 (Sequence *S, NT_node T,char *pg, float *results)
 	      free_aln (SHOT);
 	    }
 	  shot=minshot;
-	  
+	  if ((hot-shot)>best_delta)
+	    {
+	      best_delta=hot-shot;
+	      best_hot=hot;
+	      best_shot=shot;
+	    }
 	  results[0]+=1;
 	  results[1]+=1;
 	  
@@ -1392,6 +1400,7 @@ float * realign_node4hotshot2 (Sequence *S, NT_node T,char *pg, float *results)
 	  results[11]+=(hot<shot)?1:0;
 	  fprintf (stdout, "##MSA HOT: %7.3f SHOT: %7.3f HOT-SHOT: %7.3f\n", hot, shot, hot-shot);  
 	}
+      fprintf (stdout, "##BMSA HOT: %7.3f SHOT: %7.3f HOT-SHOT: %7.3f\n", best_hot, best_shot, best_hot-best_shot);  
       free_aln (R);
       free_char (flipseq, -1);
     }
