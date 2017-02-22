@@ -1784,7 +1784,7 @@ The second fraction summarizes the fate of each residue. Note that the radius pa
 
 ::
 
-  ##DECRES s1:               <seq name> aa: <amino acid> c1: <msa column> r1:  <residue index 1..N> avg_stdev: <average stdev across radius AA> -Zscore:  <average zscores of the averaged stdev> Neighborhood:  <# of AA within radius> Radius:  <size in Angstrom>
+  ##DECRES s1:               <seq name> aa: <amino acid> c1: <msa column> r1:  <residue index 1..N> avg_stdev: <average stdev across radius AA> -Zscore:  <average zscores of the averaged stdev> normZ: <normalized zscore 0..100> Neighborhood:  <# of AA within radius> Radius:  <size in Angstrom>
 
 STRIKE: Contact based evaluations 
 ---------------------------------

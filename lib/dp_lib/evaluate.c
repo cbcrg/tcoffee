@@ -2400,7 +2400,8 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
   float avg_std2=0;
   float std_std=0;
   float nstd=0;
-  
+  float max_z;
+  float min_z;
   float dec_max;
   S=CL->S;
   
@@ -2564,24 +2565,37 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
 		res[s1][p1][3]=pos[s1][p1];
 		
 		res[s1][p2][0]+=stdA[p1][p2];
-		res[s1][p1][1]+=(avg_std-stdA[p1][p2])/std_std;
+		res[s1][p1][1]+=(avg_std-stdA[p1][p2])/std_std;//Z sign inverted on purpose
 		res[s1][p2][2]++;
 		res[s1][p2][3]=pos[s1][p2];
 	      }
 	  }
       }
-  for (s1=0;s1<A->nseq; s1++)
-    for (p1=0; p1<=A->len_aln-1; p1++)
-      {
-	if (res[s1][p1][2] && res[s1][p1][2]>0.01)
-	  {
-	    float dec;
-	    res[s1][p1][0]/=res[s1][p1][2];
-	    res[s1][p1][1]/=res[s1][p1][2];
-	    fprintf ( stdout , "##DECRES s1: %20s aa: %c c1: %3d r1: %3d avg_stdev: %5.3f -Zscore: %6.3f Neighborhood: %3d Radius: %6.2f Angstrom\n", A->name[s1],A->seq_al[s1][p1], p1,(int)res[s1][p1][3],res[s1][p1][0],res[s1][p1][1],(int)res[s1][p1][2], radius);
-	  }
-      }
   
+  for (s1=0;s1<A->nseq; s1++)
+    {
+      max_z=-100000;
+      min_z =100000;
+      for (p1=0; p1<=A->len_aln-1; p1++)
+	{
+	  if (res[s1][p1][2] && res[s1][p1][2]>0.01)
+	    {
+	      float dec=res[s1][p1][0]/=res[s1][p1][2];
+	      float z=res[s1][p1][1]/=res[s1][p1][2];
+	      if (z<min_z)min_z=z;
+	      if (z>max_z)max_z=z;
+	    }
+	}
+      
+      for (p1=0; p1<=A->len_aln-1; p1++)
+	{
+	  if (res[s1][p1][2] && res[s1][p1][2]>0.01)
+	    {
+	      float normZ= (res[s1][p1][1]-min_z)/(max_z-min_z);
+	      fprintf ( stdout , "##DECRES s1: %20s aa: %c c1: %3d r1: %3d avg_stdev: %5.3f -Zscore: %6.3f NormZ: %5.3f Neighborhood: %3d Radius: %6.2f Angstrom\n", A->name[s1],A->seq_al[s1][p1], p1,(int)res[s1][p1][3],res[s1][p1][0],res[s1][p1][1],normZ,(int)res[s1][p1][2], radius);
+	    }
+	}
+    }
   free_arrayN((void***) dm , 3);
   
   free_arrayN((void***) res, 3);	    
