@@ -11560,6 +11560,7 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	     }
 	   else printf_exit ( EXIT_FAILURE,stderr, "\nERROR: -evaluateTree requires a sequence list in FASTA formal [FATAL]") ;
 	 }
+       
        else if ( strm(action, "evaluate3DM"))
 	 {
 	   int enb;
@@ -11617,6 +11618,34 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   DST->A=msa_list2struc_evaluate4tcoffee (D1->S,D2->S,DST->S,ev3d,max,enb, strikem);
 	   D1->A=(DST->A)->A;
 	   (DST->A)->A=NULL;
+	 }
+       else if ( strm(action, "msa2distances"))
+	 {
+	   float radius;
+	   Constraint_list *CL;
+	   Alignment *A;
+	   int na=1;
+	   DST->A=copy_aln (D1->A, NULL);
+	   DST->S=aln2seq(DST->A);
+	   	  
+	  
+	   	   
+	   if (!D2)CL=D1->CL;
+	   else if (!D2->CL)CL=D1->CL;
+	   else CL=D2->CL;
+	   if (!CL)//do a default contact based evaluation
+	     {
+	       
+	       ungap_seq(D1->S);
+	       D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","distances",-1);
+	       CL=D1->CL;
+	     }
+	   if (ACTION(1))
+	     radius=atof(ACTION(1));
+	   else 
+	     radius=20;
+	   
+	   DST->A=msa2distances (D1->A,CL,radius);
 	 }
        else if ( strm(action, "evaluate3D"))
 	 {
@@ -11716,7 +11745,14 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   fprintf ( stdout, "##HOTSHOT Global: %.3f\n",tot/nf); 
 	   exit (0);
 	 }
-       else if ( strm(action, "hotshot2"))
+       else if ( strm(action, "sh"))
+	 {
+	   //method clustalw, clustalo, mafft
+	   
+	   float results=shuff (D1->S, ACTION (1),ATOI_ACTION(2));
+	   exit (0);
+	 }
+	else if ( strm(action, "hotshot2"))
 	 {
 	   float *results=(float*)vcalloc (100, sizeof (float));
 	   hotshot2 (D1->S, (D2)?D2->T:NULL, ACTION(1),results);

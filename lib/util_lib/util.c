@@ -825,6 +825,427 @@ FILE *get_number_list_in_file ( FILE *fp, int *list, int *n, int *max_len)
 	}
 /*********************************************************************/
 /*                                                                   */
+/*                         Non Cherry Pick                           */
+/*                                                                   */
+/*                                                                   */
+/*********************************************************************/
+float* list2rr2_simple (float **list, int n, float **lines, int nl,int np, int nrep, float *rr2, float *stdev);
+float* list2rr2_hard (float **list, int n, float **lines, int nl,int np, int nrep, float *rr2, float *stdev);
+float list2best_r2 (float **list, int n, float **lines, int nl, int np, float *mean, float *stdev, float *z);
+int list2marked_list (float **list, int n, int np, float xA, float yA, float xB, float yB);
+float list2r2(float **list, int n);
+float **list2lines  (float **list, int n, int *nl);
+
+int cherry (int argc, char *argv[])
+{
+  int a,b,c,n, nl;
+  char ***  table;
+  char *name;
+  int ba, bb, bnp;
+  float bz=0;
+  float br2;
+  float brr2, bstdev;
+  int ncol;
+  int nrep=10000;
+  float br2mean, br2stdev,br2z;
+  char bg[100];
+  int *rlist;
+  if ( argc<2)
+    {
+
+      fprintf (stderr, "\nAutomated Cherry Pick");
+      fprintf (stderr, "\nPicks the subset of points having the correlation with the best Z-score (1000 simulations)");
+      fprintf (stderr, "Tries each filed against each field --- except first column that contains sample name");
+      
+      fprintf (stderr, "\nInput:");
+      fprintf (stderr, "\n<field name1> <field name2> <field name 3> <field name4> ...\n");
+      fprintf (stderr, "\n<v1> <v2> <v3> <v4> ...");
+      fprintf (stderr, "\nValue can either be integer or float");
+      
+      
+      myexit (EXIT_FAILURE);
+    }
+  
+  if (strm (argv[1], "stdin"))
+    {
+      name=capture_stdin();
+    }
+  else
+    name=argv[1];
+  
+  table=file2list (name, " ");
+  n=0;
+  while (table[n])n++;
+  n--;
+  ncol=atoi(table[0][0])-1;
+  rlist=(int*)vcalloc (n, sizeof (int));
+  
+  
+  for (a=1; a<ncol-1; a++)
+    {
+      for (b=a+1; b<ncol; b++)
+	{
+	  float **list;
+	  float **lines;
+	  int np;
+	  
+	  list=(float**)declare_float (n, 4);
+	  c=0;
+	  while (table[c+1])
+	    {
+	      list[c][0]=atof(table[c+1][a+1]);
+	      list[c][1]=atof(table[c+1][b+1]);
+	      list[c][2]=c+1; //mark line
+	      
+	      c++;
+	    }
+	  
+	  lines=list2lines (list,n, &nl);
+	  for (np=3; np<n; np++)
+	    {
+	      int bgmode=1;
+	      float rr2, stdev, r2, z;
+	      
+	      r2=list2best_r2(list,n,lines, nl, np, &rr2, &stdev, &z);
+	      for ( c=0; c<np; c++)rlist[c]=(int)list[c][2];
+	      
+	      if (bgmode==1)
+		{
+		  nrep=10;
+		  sprintf (bg, "linear re-sampling [%d]", nrep);
+		  //estimate z-score against the best possible correlation drawn from random projections
+		  //What is the probability that a cloud of n points yields np points with r2 or better
+		  //pro: very stringent con: ignore the original background
+		  list2rr2_hard (list,n,lines, nl, np, nrep,&rr2, &stdev);//re distribute the points 
+		  z=(r2-rr2)/stdev;
+		}
+	      else if (bgmode ==2)
+		{
+		  nrep=1000000;
+		  sprintf (bg, "original re-sampling [%d]", nrep);
+		  //estimate z-score against the r2 meanured on Nrep samples on N points drawn in the origina
+		  //What is the probability that np points drawn out n give r2 or better
+		  //pro: uses the orginal background con: maybe a bit loose
+		  list2rr2_simple (list,n,lines, nl, np, nrep,&rr2, &stdev);//re sample the points 
+		  z=(r2-rr2)/stdev;
+		}
+	      else if (bgmode ==3)
+		{
+		  sprintf (bg, "linear bg");
+		  //estimate z-score against all the selcted set of points in the original dataset
+		  //What is the probability that np points selected to be aligned out the n originals give r2 or better
+		  //pro: uses the orginal background and a fair sampling con: maybe a bit add-hoc on the selection criteria;
+		}
+	      
+	      fprintf (stdout, "### %10s --- %10s  N: %3d r2: %6.3f rr2: %6.3f +/- %6.3f Zscore: %6.3f [%s]", table[0][a+1], table[0][b+1], np, r2, rr2, stdev, z, bg);
+	      fprintf (stdout, " --- ");
+	      for ( c=0; c<np; c++)fprintf ( stdout,"%s ", table[rlist[c]][1]);
+	      fprintf ( stdout, "\n");
+	      if (z>=bz)
+		{
+		  ba=a;
+		  bb=b;
+		  bz=z;
+		  br2=r2;
+		  brr2=rr2;
+		  bstdev=stdev;
+		  bnp=np;
+		}
+	    }
+	  free_float (list, -1);
+	  free_float (lines, -1);
+	}
+    }
+  
+  float **list;
+  float **lines;
+ 
+  
+  list=(float**)declare_float (n, 4);
+  c=0;
+  while (table[c+1])
+    {
+      list[c][0]=atof(table[c+1][ba+1]);
+      list[c][1]=atof(table[c+1][bb+1]);
+      list[c][2]=c+1; //mark line
+      c++;
+    }
+  lines=list2lines (list,n, &nl);
+  list2best_r2(list,n,lines, nl, bnp, &br2mean, &br2stdev, &br2z);
+  fprintf (stdout, "#best## %10s --- %10s  N: %3d r2: %6.3f rr2: %6.3f +/- %6.3f Zscore: %6.3f [%s]\n", table[0][ba], table[0][bb], bnp, br2, brr2, bstdev, bz, bg);
+  fprintf (stdout, "%s %s %s\n",table[0][1],table[0][ba], table[0][bb]);
+  for (a=0; a<bnp;a++)
+    {
+      int i=(int)list[a][2];
+      fprintf (stdout,"%10s %6.3f %6.3f\n",table[i][1],list[a][0], list[a][1]);
+    }
+  
+}
+
+float* list2rr2_simple (float **list, int n, float **lines, int nl, int np, int nrep, float *rr2, float *stdev)
+{
+  float sum, sum2;
+  float **rlist;
+  float minx, miny;
+  float maxx, maxy;
+  int a, b;
+  float *r2list=(float*)vcalloc (nrep, sizeof (float));
+  float r2;
+  rr2[0]=0;
+  for (a=0; a<nrep; a++)
+    {
+      for(b=0; b<n; b++)
+	{
+	  list[b][3]=rand()%1000;
+	}
+      sort_float ( list,4,3, 0, n-1);
+      r2=list2r2(list,np);
+      
+      rlist=(float**)declare_float (n, 4);
+      rr2[0]+=r2;
+      r2list[a]=r2;
+    }
+  stdev[0]=0;
+  rr2[0]/=nrep;
+  for (a=0; a<nrep; a++)
+    stdev[0]+=(r2list[a]-rr2[0])*(r2list[a]-rr2[0]);
+  stdev[0]/=nrep;
+  
+  stdev[0]=sqrt(stdev[0]);
+  vfree (r2list);
+  return rr2;
+  
+}
+
+float* list2rr2_hard (float **list, int n, float **lines, int nl, int np, int nrep, float *rr2, float *stdev)
+{
+  float sum, sum2;
+  float **rlist;
+  float minx, miny;
+  float maxx, maxy;
+  int a, b;
+  float br2mean, br2stdev, br2z;
+  float *r2list=(float*)vcalloc (nrep, sizeof (float));
+  minx=maxx=list[0][0];
+  miny=maxy=list[0][1];
+  
+  for (a=0; a<n; a++)
+    {
+      float x=list[a][0];
+      float y=list[a][1];
+      
+      if (x<minx)minx=x;
+      if (x>maxx)maxx=x;
+      if (y<miny)miny=y;
+      if (y>maxy)maxy=y;
+    }
+  
+  rlist=(float**)declare_float (n, 4);
+  
+  rr2[0]=0;
+  for (a=0; a<nrep; a++)
+    {
+      float r2;
+      for (b=0; b<n; b++)
+	{
+	  rlist[b][0]=(((float)rand()/(float)(RAND_MAX)) *(maxx-minx))+minx;
+	  rlist[b][1]=(((float)rand()/(float)(RAND_MAX)) *(maxy-miny))+miny;
+	  //fprintf ( stdout, "%.3f,%.3f\n", rlist[b][0], rlist[b][1]);
+	}
+      r2=list2best_r2(rlist, n,lines, nl, np, &br2mean,&br2stdev, &br2z);
+      //HERE ("Random: Mean=%f stdev=%f Z=%f", br2mean, br2stdev,br2z);
+      
+      rr2[0]+=r2;
+      r2list[a]=r2;
+    }
+  stdev[0]=0;
+  rr2[0]/=nrep;
+  for (a=0; a<nrep; a++)
+    stdev[0]+=(r2list[a]-rr2[0])*(r2list[a]-rr2[0]);
+  stdev[0]/=nrep;
+  stdev[0]=sqrt(stdev[0]);
+  vfree (r2list);
+  return rr2;
+  
+}
+float **list2lines  (float **list, int n, int *nl)
+{
+  float minx, miny;
+  float maxx, maxy;
+  float stepx, stepy;
+  float x, y;
+  int a, b;
+  float **lines;
+  int nlines=0;
+  
+  int nsteps=sqrt(n)*5;
+  
+  minx=maxx=list[0][0];
+  miny=maxy=list[0][1];
+  
+  for (a=0; a<n; a++)
+    {
+      float x=list[a][0];
+      float y=list[a][1];
+      
+      if (x<minx)minx=x;
+      if (x>maxx)maxx=x;
+      if (y<miny)miny=y;
+      if (y>maxy)maxy=y;
+    }
+  stepx=(maxx-minx)/nsteps;
+  stepy=(maxy-miny)/nsteps;
+  
+
+  nlines=0;
+  lines=(float**)declare_float ((nsteps*4)+12,2);
+  for (x=minx; x<maxx; x+=stepx)
+    {
+      lines[nlines][0]=x;
+      lines[nlines][1]=miny;
+      nlines++;
+      lines[nlines][0]=x;
+      lines[nlines][1]=maxy;
+      nlines++;
+    }
+  for (y=miny; y<maxy; y+=stepy)
+    {
+      lines[nlines][0]=minx;
+      lines[nlines][1]=y;
+      nlines++;
+      lines[nlines][0]=maxx;
+      lines[nlines][1]=y;
+      nlines++;
+    }
+
+  nl[0]=nlines;
+  return lines;
+}
+float list2best_r2 (float **list,int n, float **lines, int nl, int np, float *mean, float *stdev, float *z)
+{
+  int a, b;
+  int blineA, blineB;
+  float br2;
+  float *vlist=(float*)vcalloc (nl*nl, sizeof (float));
+  int nv=0;
+  br2=0;
+  mean[0]=stdev[0]=z[0]=0;
+  for (a=0; a<nl;a++)
+    for (b=0;b<nl; b++)
+      {
+	if (list2marked_list(list,n,np,lines[a][0], lines[a][1], lines[b][0], lines[b][1]))
+	  {
+	    float r2=list2r2(list, np);
+	    vlist[nv++]=r2;
+	    mean[0]+=r2;
+	    
+	    if (r2>br2)
+	      {
+		br2=r2;
+		blineA=a;
+		blineB=b;
+	      }
+	  }
+      }
+  mean[0]/=nv;
+  for (a=0; a<nv; a++)
+    stdev[0]+=(vlist[a]-mean[0])*(vlist[a]-mean[0]);
+  stdev[0]/=nv;
+  stdev[0] =sqrt(stdev[0]);
+  z[0]=(br2-mean[0])/stdev[0];
+  vfree (vlist);
+  list2marked_list(list,n, np,lines[blineA][0], lines[blineA][1], lines[blineB][0], lines[blineB][1]);
+  return br2;
+}
+    
+int list2marked_list (float **list, int n, int np, float xA, float yA, float xB, float yB)
+{
+  float dX=xA-xB;
+  float dY=yA-yB;
+  float m,p, r;
+  int a;
+  
+    
+  if (fabs(dX)<0.000000001 || fabs(dY)<0.000000001)return 0;
+  m=dY/dX;
+  p=yA-m*xA;
+  
+    
+  for (a=0; a<n; a++)
+    {
+      float x=list[a][0];
+      float y=list[a][1];
+      list[a][3]=fabs((m*x-y+p))/(sqrt((1+m*m)));
+     
+    }
+  
+  sort_float ( list,4,3, 0, n-1);
+  for (a=0; a<n; a++)
+    {
+      list[a][3]=(a<np)?1:0;
+    }
+
+  return 1;
+}
+float list2r2(float **list, int n)
+{
+  float aX, aY, top, bot1, bot2, r;
+  int a;
+
+  if (n==0) return 0;
+  
+  aX=aY=top=bot1=bot2=0;
+  
+  for (a=0; a<n; a++)
+    {
+      aX+=list[a][0];
+      aY+=list[a][1];
+    }
+  aX/=n;
+  aY/=n;
+  
+  for (a=0; a<n; a++)
+    {
+      float x=list[a][0];
+      float y=list[a][1];
+      top +=(x-aX)*(y-aY);
+      bot1+=(x-aX)*(x-aX);
+      bot2+=(y-aY)*(y-aY);
+    }
+  r=top/(sqrt(bot1)*sqrt(bot2));
+  r*=r;
+  return r;
+}
+float list2spearman (float **list, int n)
+{
+  float **v, **ranked;
+  int a;
+  float r2;
+  v=declare_float      (n, 3);
+  ranked=declare_float (n, 3);
+  for ( a=0; a<n; a++)
+    {
+      v[a][0]=list[a][0];
+      v[a][1]=list[a][1];
+      v[a][2]=a;
+    }
+  sort_float (v,3,0,0,n-1);
+  for (a=0; a<n; a++)
+    {
+      ranked[(int)v[a][2]][0]=a;
+    }
+  sort_float (v,3,1,0,n-1);
+  for (a=0; a<n; a++)
+    {
+      ranked[(int)v[a][2]][1]=a;
+    }
+  r2=list2r2(ranked, n);
+  free_float (ranked, -1);
+  free_float (v, -1);
+  return r2;
+}
+/*********************************************************************/
+/*                                                                   */
 /*                         QUANTILE                                  */
 /*                                                                   */
 /*                                                                   */

@@ -1,4 +1,8 @@
+char* seq2aln_file (char *pg,char *in, char *out);
 char* seq2cw_aln_file (char *in, char *out);
+char* seq2co_aln_file (char *in, char *out);
+char* seq2mafft_aln_file (char *in, char *out);
+
 char* prf_pair2cw_aln_file (char *prf1,char *prf2, char *out);
 NT_node   seq2cw_dnd ( Sequence *S);
 

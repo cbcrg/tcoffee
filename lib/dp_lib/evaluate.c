@@ -1215,6 +1215,37 @@ Alignment *msa_list2struc_evaluate4tcoffee (Sequence *SP,Sequence *AF, Sequence 
 }
 static int recoded;
 static int max_hot=5;
+float shuff (Sequence *S,  char *pg, int n)
+{
+  static char *seq=vtmpnam(NULL);
+  static char *aln=vtmpnam(NULL);
+  Alignment **A=(Alignment **)vcalloc (n, sizeof (Alignment *));
+  float sim=0;
+  int n2, a, b;
+  
+  for (a=0; a<n; a++)
+    {
+      output_fasta_seqS(seq, S);
+      shuffle_seq_file(seq);
+      seq2aln_file (pg,seq,aln);
+      A[a]=main_read_aln (aln, NULL);
+      HERE (" -- computed %d", a+1);
+    }
+  for (n2=0,a=0; a<n-1; a++)
+    for (b=a+1; b<n; b++, n2++)
+      {
+	float cs=aln2compare (A[a], A[b]);
+	HERE (" csim=%.3f", cs);
+	sim+=aln2compare (A[a], A[b]);
+      }
+  sim/=n2;
+  fprintf (stdout, "Shuffle PG: %s Sim: %.4f - %d replicates\n", pg, sim, n);
+  for (a=0; a<n; a++)free_aln (A[a]);
+  vfree (A);
+  
+  return sim;
+}
+
 float* hotshot2 (Sequence *S,NT_node T, char *pg, float *results)
 {
   float *sim;
@@ -1991,7 +2022,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 		//Scan the pairs of contact for S1 vs S2
 		
 		//Both sequences must have a contact when comparing distances
-		//Fine if S2 has no structire for strike
+		//Fine if S2 has no structure for strike
 		if (modeM!=strikeM && !s2_has_contacts)continue;
 
 		//Now do the all against all
@@ -2008,7 +2039,7 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
 			
 			double sc=0;
 			double in=0;
-			double bin=0; //bacground in => non contact evaluation for strike;
+			double bin=0; //background in => non contact evaluation for strike;
 			
 			double w1=(double)dm1[c1][c2];
 			
@@ -2352,6 +2383,217 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   OUT->A=A;
   return OUT;
 }   	
+
+Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
+{
+  
+  int *rseq;
+  int NseqWithC;
+  int **pos, **lu;
+  float ***dm;
+  float **stdA;
+  float ***res;
+  
+  int p1, p2, s1, r1;
+  Sequence *S;
+  float avg_std=0;
+  float avg_std2=0;
+  float std_std=0;
+  float nstd=0;
+  
+  float dec_max;
+  S=CL->S;
+  
+  //identify sequences with contact information
+  //1-make sure the sequence is in the lib
+  //2-make sure the contact library is not empty
+  rseq=(int*)vcalloc (A->nseq, sizeof (int));
+  for (NseqWithC=0,s1=0; s1<A->nseq; s1++)
+    {
+      rseq[s1]=name_is_in_list (A->name[s1], S->name, S->nseq, MAXNAMES);
+      if (rseq[s1]==-1);
+      else
+	{
+	  int ls1=rseq[s1];
+	  rseq[s1]=-1;
+	  for (r1=1;r1<=S->len[ls1]; r1++)
+	    {
+	      if (CL->residue_index[ls1][r1][0]>1){rseq[s1]=ls1;r1=S->len[ls1]+1;}
+	    }
+	  if (rseq[s1]!=-1)NseqWithC++;
+	}      
+    }
+  
+  //Trim out sequences without contact information or exit if no a single contact information
+  if (!NseqWithC)
+    printf_exit ( EXIT_FAILURE,stderr, "\nERROR: No contact information could be gathered for any sequence  [FATAL]");
+  else if (NseqWithC!=A->nseq)
+    {
+      int ns=0;
+      for (s1=0; s1<A->nseq; s1++)
+	{
+	  if (rseq[s1]==-1);
+	  else
+	    {
+	      sprintf (A->name[ns], "%s", A->name[s1]);
+	      sprintf (A->seq_al[ns], "%s", A->seq_al[s1]);
+	      rseq[ns]=rseq[s1];
+	      ns++;
+	    }
+	}
+      A->nseq=ns;
+    }
+  
+
+  //Prepare the look up
+  pos=aln2pos_simple (A, A->nseq);
+  lu=declare_int (A->nseq, A->len_aln);
+  for (s1=0; s1<A->nseq; s1++)
+    {
+      int c,c1;
+      for (c=0,c1=0; c1<A->len_aln; c1++)
+	{
+	  if (!is_gap(A->seq_al[s1][c1]))lu[s1][c++]=c1;
+	}
+      if (rseq[s1]!=-1 && c!=S->len[rseq[s1]])
+	{printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s differs in MSA/contact-lib[FATAL]", A->name[s1]);}
+    }
+  
+  dm =(float***)declare_arrayN (3,sizeof (float),A->nseq, A->len_aln+1,A->len_aln+1);
+  res=(float***)declare_arrayN (3,sizeof (float),A->nseq, A->len_aln+1,3);
+  stdA=(float**)declare_arrayN (2,sizeof (float),A->len_aln, A->len_aln+1,5);
+
+  for (s1=0; s1<A->nseq; s1++)
+    {
+      int ls1=rseq[s1];
+      int s2_has_contacts=0;
+	    
+      if (ls1==-1)continue;
+      dm[s1]=declare_float (A->len_aln+1, A->len_aln+1);
+      for (p1=0;p1<=A->len_aln; p1++)
+	for (p2=0;p2<=A->len_aln; p2++)
+	  dm[s1][p1][p2]=(float)-1;
+      
+      //Get contacts from template sequence
+      for (r1=1;r1<=S->len[ls1]; r1++)
+	{
+	  int b;
+	  for (b=1; b<CL->residue_index[ls1][r1][0]; b+=ICHUNK)
+	    {
+	      int r2 =CL->residue_index[ls1][r1][b+R2];
+	      int we =CL->residue_index[ls1][r1][b+WE];
+	      int ss2=CL->residue_index[ls1][r1][b+SEQ2];
+	      
+	      if (ss2!=ls1){HERE ("Warning: Contact library contains inter-sequence data contacts: %d %d",ls1, ss2);}
+	      p1=lu[s1][r1-1];
+	      p2=lu[s1][r2-1];
+	      dm[s1][p1][p2]=dm[s1][p2][p1]=(float)we;
+	      
+	    }
+	}
+    }
+ 
+  for (p1=0; p1<=A->len_aln-1; p1++)
+    for (p2=p1+1; p2<=A->len_aln; p2++)
+      {
+	stdA[p1][p2]=-1;
+	int n=0;
+	float avg=0;
+	float avg2=0;
+	float std=0;
+	
+	for (s1=0;s1<A->nseq; s1++)
+	  {
+	    if (rseq[s1]<0 || dm[s1][p1][p2]<0)continue;
+	    avg+=dm[s1][p1][p2];
+	    avg2+=dm[s1][p1][p2]*dm[s1][p1][p2];
+	    n++;
+	  }
+      	
+	if (n>0)
+	  {
+	    avg/=(float)n;
+	    std=(float)sqrt((double)((avg2/(float)n)-(avg*avg)));
+	    avg/=(float)100;
+	    std/=(float)100;
+	    stdA[p1][p2]=std;
+	    avg_std+=std;
+	    avg_std2+=std*std;
+	    nstd++;
+	  }
+	
+	for (s1=0;s1<A->nseq; s1++)
+	  {
+	    int rs1=pos[s1][p1]-1;
+	    int rs2=pos[s1][p2]-1;
+	    if (rseq[s1]<0 || dm[s1][p1][p2]<0 || rs1<0 || rs2<0)continue;
+	    float d=(float)dm[s1][p1][p2]/100;
+	    
+	    fprintf ( stdout, "##DECPAIR s1: %20s c1: %3d c2: %3d r1: %3d r2: %3d d: %7.3f avg_d: %7.3f stdev_d: %7.3f N: %3d F: %4.2f\n", A->name[s1], p1,p2, rs1,rs2, d, avg, std, n, (float)((float)n/(float)A->nseq));
+	  }
+      }
+  
+  if (nstd>0.001)
+    {
+      avg_std/=nstd;
+      avg_std2/=nstd;
+      std_std=sqrt(avg_std2-(avg_std*avg_std));
+    }
+  
+  for (p1=0; p1<=A->len_aln-1; p1++)
+    for (p2=p1+1; p2<=A->len_aln; p2++)
+      {
+	int n=0;
+	float avg=0;
+	float avg2=0;
+	float std=0;
+	
+	for (s1=0;s1<A->nseq; s1++)
+	  {
+	    float d;
+	    int rs1=pos[s1][p1]-1;
+	    int rs2=pos[s1][p2]-1;
+	    
+	    if (rseq[s1]<0 || dm[s1][p1][p2]<0 || stdA[p1][p2]<0)continue;
+	    d=(float)dm[s1][p1][p2]/100;
+	    if ( d<radius)
+	      {
+		res[s1][p1][0]+=stdA[p1][p2];
+		res[s1][p1][1]+=(avg_std-stdA[p1][p2])/std_std;
+		res[s1][p1][2]++;
+		res[s1][p1][3]=pos[s1][p1];
+		
+		res[s1][p2][0]+=stdA[p1][p2];
+		res[s1][p1][1]+=(avg_std-stdA[p1][p2])/std_std;
+		res[s1][p2][2]++;
+		res[s1][p2][3]=pos[s1][p2];
+	      }
+	  }
+      }
+  for (s1=0;s1<A->nseq; s1++)
+    for (p1=0; p1<=A->len_aln-1; p1++)
+      {
+	if (res[s1][p1][2] && res[s1][p1][2]>0.01)
+	  {
+	    float dec;
+	    res[s1][p1][0]/=res[s1][p1][2];
+	    res[s1][p1][1]/=res[s1][p1][2];
+	    fprintf ( stdout , "##DECRES s1: %20s aa: %c c1: %3d r1: %3d avg_stdev: %5.3f -Zscore: %6.3f Neighborhood: %3d Radius: %6.2f Angstrom\n", A->name[s1],A->seq_al[s1][p1], p1,(int)res[s1][p1][3],res[s1][p1][0],res[s1][p1][1],(int)res[s1][p1][2], radius);
+	  }
+      }
+  
+  free_arrayN((void***) dm , 3);
+  
+  free_arrayN((void***) res, 3);	    
+  free_arrayN((void**) stdA, 2);
+  
+  free_arrayN((void** ) lu , 2);
+  
+  exit(EXIT_SUCCESS);
+  return A;
+}   
+
+
 Alignment *treealn_evaluate4tcoffee (Alignment *A, Sequence *G)
 {
   int a,b,c;

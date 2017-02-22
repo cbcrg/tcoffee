@@ -171,12 +171,14 @@ T-RMSD (structural clustering)
       -multi_core=4 -quiet=stdout; t_coffee -other_pg trmsd result.aln -template_file \
       result_pdb1.template_list -output color_html 2>&1; [ -e result.struc_tree.consensus ]
 
-STRIKE (MSA evaluation with single structure) (under maintenance...)
+STRIKE (MSA evaluation with single structure) 
 =============================================
 
 ::
+  $#: wget 	ftp://ftp.rcsb.org/pub/pdb/derived_data/pdb_seqres.txt
+  $#: install   ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST
 
-  $#: t_coffee -other_pg strike data_c13dc0db.in -template_file PDB
+  $#: t_coffee -other_pg strike <sequence file> -template_file PDB  -pdb_db <pdb_seqres> -blast_server LOCAL
 
 
 

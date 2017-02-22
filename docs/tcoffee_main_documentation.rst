@@ -1765,9 +1765,29 @@ Kalign     82.42    0.69     1.38      50.02
 ClustalW   80.62    0.73     1.47      49.55
 ======== ======== ======== ========= =========
 
+DEC - Distance Evolutionnary Conservation with msa2distances
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Using a similar approach it is possible to estimate the variation of intra-molecular distances across a multiple structural MSA for every pair of residue of every sequence. The following command also returns the average variation (stdev) for every residue and its neighbours withing <radius>
 
-Evaluating alternative alignments with STRIKE 
----------------------------------------------
+::
+
+  $$: t_coffee -other_pg seq_reformat  -in proteases_small.aln -in2 proteases_small.template -action +msa2distances  20
+
+The output comes in two setions that can be grepped with the first keyword:
+
+::
+
+  ##DECPAIR s1:               <seq name>  c1:  <msa column1> c2:  <msa column 2> r1:  <first residue index 1..N> r2:  <second residue> d:   <distance Angs> avg_d:   <avg dist across MSA> stdev_d:   <corresponding stdev> N:  <number of pairs> F: <fraction of the MSA> %
+
+
+The second fraction summarizes the fate of each residue. Note that the radius parameter potentially makes each residue in a column resulting having different levels of conservation
+
+::
+
+  ##DECRES s1:               <seq name> aa: <amino acid> c1: <msa column> r1:  <residue index 1..N> avg_stdev: <average stdev across radius AA> -Zscore:  <average zscores of the averaged stdev> Neighborhood:  <# of AA within radius> Radius:  <size in Angstrom>
+
+STRIKE: Contact based evaluations 
+---------------------------------
 STRIKE uses a contact matrix to evaluate an alignment using one or more structures. When doing so, the contacts are extracted from the sequences with known structures and are tnen projected onto the other sequences. Each sequence is then evaluated for the quality of its predicted contacts. When more than one structure is available, the results are provided using each structure as a template. The following Command line will carry this analysis. It takes as input an MSA containing at least one sequence with one of the templates defiend in the template file. The PDB files must be within the current directory.
 
 ::

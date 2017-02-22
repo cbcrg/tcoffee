@@ -1937,7 +1937,7 @@ int ** aln2pos_simple (Alignment *A, int n_nseq, ...)
 
 ####with two parameter only: Alignment *A, int n_nseq
 
-    this function turns A into pos, a matrix where each residue is replace by its index according to the complete sequence.
+    this function turns A into pos, a matrix where each residue is replaced by its index according to the complete sequence.
     the indices in pos are computed using A->order[x][1] that contains the indice of the first residue of seq x of A
 
     n_nseq MUST not be null
@@ -1953,9 +1953,13 @@ int ** aln2pos_simple (Alignment *A, int n_nseq, ...)
 
 ####IMPORTANT
       in pos, the numbering of the residues goes from 1 to L:
-        pos[0][0]=3, means that the first position of the first sequence
-	in the alignmnet contains residue #3 from sequence A->order[0][0];
-
+        pos[seq=0][col=0]=1, means that the position #1  sequence #1
+	in the alignmnet contains residue #1 from sequence A->order[0][0];
+	gaps are negative values:
+	in other words
+	
+	r=pos[seq][col]-1;
+	if (r>0) the index is correct
     function documentation: end
     */
 

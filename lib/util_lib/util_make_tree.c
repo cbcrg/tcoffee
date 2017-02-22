@@ -66,7 +66,83 @@ NT_node Rredundate (NT_node T, Sequence* S, char *seq)
   return T;
 }
       
-      
+char* seq2aln_file (char *pg,char *in, char *out)
+{
+  if    (strm (pg, "clustalw"))seq2cw_aln_file (in, out);
+  else if (strm (pg, "clustalo"))seq2co_aln_file (in, out);
+  else if (strm (pg, "mafft"))seq2co_aln_file (in, out);
+  
+  else
+    {
+      printf_exit ( EXIT_FAILURE, stderr, "%s is un unknown MSA method:: missing input [FATAL]");
+    }
+  return out;
+}
+char* seq2co_aln_file (char *in, char *out)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node **T;
+  static char *dir;
+  char *cdir=get_pwd (NULL);
+  
+  if (!file_exists (NULL,in))
+      printf_exit ( EXIT_FAILURE, stderr, "Could not run seq2cw_aln_file:: missing input [FATAL]");
+  if (!dir)
+    {
+      dir =vtmpnam (NULL);
+      my_mkdir (dir);
+    }
+  
+  printf_system_direct ("cp %s %s", in, dir);
+  chdir (dir);
+  //printf_system_direct ("clustalo --infile=%s --outfile=out.txt %s",in,TO_NULL_DEVICE);
+  printf_system_direct ("clustalo --infile=%s --outfile=out.txt",in);
+  chdir    (cdir);
+  vfree (cdir);
+  
+  
+  
+  printf_system_direct ("mv %s/out.txt %s", dir,out);
+  printf_system_direct ("rm %s/*", dir);
+  
+  if (!file_exists (NULL,out))
+    printf_exit ( EXIT_FAILURE, stderr, "Could not run seq2co_aln_file:: missing output [FATAL]");
+  
+  return out;
+}	
+char* seq2mafft_aln_file (char *in, char *out)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node **T;
+  static char *dir;
+  char *cdir=get_pwd (NULL);
+  
+  if (!file_exists (NULL,in))
+      printf_exit ( EXIT_FAILURE, stderr, "Could not run seq2cw_aln_file:: missing input [FATAL]");
+  if (!dir)
+    {
+      dir =vtmpnam (NULL);
+      my_mkdir (dir);
+    }
+  
+  printf_system_direct ("cp %s %s", in, dir);
+  chdir (dir);
+  printf_system_direct ("mafft %s >out.txt %s",in,TO_NULL_DEVICE);
+  chdir    (cdir);
+  vfree (cdir);
+  
+  
+  
+  printf_system_direct ("mv %s/out.txt %s", dir,out);
+  printf_system_direct ("rm %s/*", dir);
+  
+  if (!file_exists (NULL,out))
+    printf_exit ( EXIT_FAILURE, stderr, "Could not run seq2co_aln_file:: missing output [FATAL]");
+  
+  return out;
+}	
 char* seq2cw_aln_file (char *in, char *out)
 {
   Alignment *A;

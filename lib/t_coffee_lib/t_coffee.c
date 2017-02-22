@@ -6022,6 +6022,10 @@ int run_other_pg ( int argc, char *argv[])
     {
       return quantile ( argc, argv);
     }
+  else if ( strm (argv[0], "cherry"))
+    {
+      return cherry ( argc, argv);
+    }
   else if ( strstr ( argv[0], "unpack_"))
     {
       unpack_all_perl_script (argv[0]+strlen ("unpack_"));

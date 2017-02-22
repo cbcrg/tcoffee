@@ -22,13 +22,14 @@ Alignment * sp3_evaluate4tcoffee (Alignment *RNA, Constraint_list *CLin);
 Alignment * distance_evaluate4tcoffee (Alignment *A, Constraint_list *CL, float max, float delta, int enb);
 Alignment * strike_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *matrix);
 Alignment * struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL,char *mode,float max, int enb,char *in_matrix_name);
+Alignment * msa2distances (Alignment *A, Constraint_list *CL, float radius);
 Alignment * msa_list2struc_evaluate4tcoffee (Sequence *Species, Sequence *MSAs, Sequence *CL,char *mode,float max, int enb,char *in_matrix_name);
 
 
 char *shuffle_seq_file(char *file);
 int realign_node4hot (Sequence *S, NT_node T,char *pg, int shuffle, char *name, int n);
 int hot (Sequence *S,NT_node T, char *pg, int shuffle, char *name, int n);
-
+float shuff (Sequence *S,char *pg,int n);
 float hotshot (Sequence *S,NT_node T, char *pg, float *tot, float *n);
 float* hotshot2 (Sequence *S,NT_node T, char *pg, float *results);
 float realign_node4hotshot (Sequence *S, NT_node T,char *pg, int shuffle);

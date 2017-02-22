@@ -74,6 +74,11 @@ for ($a=0; $a<@ARGV; $a++)
       {
 	$action=$v;
       }
+    elsif ($v eq "-year2series")
+      {
+	$action=$v;
+	$firstyear=$ARGV[++$a];
+      }
     elsif ($v eq "-addbefore")
       {
 	$action=$v;
@@ -469,6 +474,36 @@ elsif       ($action eq "-dirsync")
     dirsync();
     die;
   }
+elsif       ($action eq "-year2series")
+      {
+	print "\n";
+	my $cyear=$firstyear;
+	my $serie=1;
+	my $episode=1;
+	foreach my $f (sort @file1)
+	  {
+	    if ($f=~/.*(\d\d\d\d)-(\d\d)-(\d\d).*/)
+	      {
+		my $year=$1;
+		if ($year==$cyear){$episode++;}
+		else
+		  {
+		    $cyear=$year;
+		    $serie++;
+		    $episode=1;
+		  }
+		$pserie=$serie;
+		$pepisode=$episode;
+		if ($serie<10){$pserie="0$serie";}
+		if ($episode<10){$pepisode="0$episode";}
+		
+		print "$year\n$f\n";
+		my $to="LDDC - "."S$pserie"."E$pepisode - $f";
+		print "$to\n\n";
+		&my_rename ($f,$to);
+	      }
+	  }
+      }
 elsif       ($action eq "-addbefore" || $action eq "-addafter")
       {
 	print "\n";
@@ -1658,13 +1693,12 @@ sub rec_flac2mp3
       }
     return ;
   }
+
 sub dirsync
   {
     my ($from_dir, $to_dir)=@_;
-    #first use: create .looup.tx in the $to_dir that contains the list of the files to ignore
-    #Every file or dir in this list will not be synced
     my $press_dir="/Users/cnotredame/Dropbox/presse";
-    if (!$from_dir){$from_dir="/Volumes/Movies2/movies/Download2.raw/";}
+    if (!$from_dir){$from_dir="/Volumes/backup/download/";}
     if (!$to_dir)   {$to_dir  ="/Volumes/Movies3/Download/download.raw/";}
     my $ignore="/Volumes/Movies3/Download/.sync.ignore.txt";
     
@@ -1687,109 +1721,167 @@ sub dirsync
 	die;
       }
     
-    
-    my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
-    $mon++;
-    $year+=1900;
-    if ($mday<10){$mday="0$mday";}
-    if ($mon<10){$month="0$mon";}
-    
-    my $ddir="$year\_$month\_$mday";
-    
     foreach my $f (@l1)
       {
 	my $lcf=lc($f);
-	print "--- check $f [$hd2{$f}]\n";
 	my $from="$from_dir/$f";
+
+	my $cour=($lcf =~/courrier/ && $lcf=~/pdf/); 
+	#print "--- check $f [$hd2{$f}]\n";
+	
 	if ($f=~/Dropbox/ || $f=~/dropbox/ || $f eq "." || $f eq ".." || $hd2{$f})
-	  {;}
-	elsif (-d "$from" && is_french_press($from))
 	  {
-	    
-	    
-	    opendir (DIR, "$from");
-	    my @pl=readdir(DIR);
-	    closedir (DIR);
-	    
-	    my $to="$press_dir/$ddir";
-	    
-	    if (!-d $to){system ("mkdir $to");}
-	    print "##Sync: $f  $from => $to\n";
-	    opendir (DIR, $from);
-	    my @jl=readdir(DIR);
-	    closedir (DIR);
-	    foreach my $j (@jl)
-	      {
-		if ($j ne "." && $j ne "..")
-		  {
-		    print " --- sync $j => $to\n";
-		    copy ("$from/$j", "$to");
-		  }
-		
-	      }
-	    if ($f && -d "$from" && $f ne "." && $f ne "..")
-	      {
-		remove_tree ($from);
-	      }
+	    ;
 	  }
-	elsif (-f "$from" && $lcf =~/monde/ && $lcf=~/pdf/)
-	  {
-	    my $n;
-	    my $to="$press_dir/$ddir\_LeMonde.pdf";
-	    while (-e $to)
-	      {
-		$n++;
-		$to="$press_dir/$ddir\_LeMonde.$n.pdf";
-	      }
-	    print " --- sync $from => $to\n";
-	    copy ("$from", "$to");
-	    unlink ($from);
-	  }
-	elsif (-d "$from" && ($f=~/^EN(\d\d\d\d)(\d\d)(\d\d)/))
-	  {
-	    my $year=$1;
-	    my $mn=$2;
-	    my $day=$3;
-	    
-	    my ($year,$mn,$day)=($1,$2,$3);
-	    my $date="$year\_$mn\_$day";
-	    my $from="$from_dir/$f";
-	    my $to="$press_dir/$date";
-	    if (!-d $to){system ("mkdir $to");}
-	    opendir (DIR, "$from");
-	    my @jl=readdir(DIR);
-	    closedir (DIR);
-	    print "##Sync: $f $from => $to\n";
-	    if (!-d $to){system ("mkdir $to");}
-	    foreach my $j (@jl)
-	      {
-		if ($j ne "." && $j ne "..")
-		   {
-		     print " --- sync $j => $to\n";
-		     copy ("$from/$j", "$to");
-		   }
-	      }
-	    if ($f && -d "$from" && $f ne "." && $f ne "..")
-	      {
-		system "rm -r $from";
-	      }
-	  }
-      	elsif ($f ne "." && $f ne ".." && !$hd2{$f})
+	else
 	  {
 	    $hd2{$f}=1;
 	    open F,">>$ignore" || die;
 	    flock(F,2) || die;
 	    print F "$f\n";
 	    close (F);
-	    
-	    
-	    print "rcopy (\"$from_dir/$f\", \"$to_dir\")\n";
-	    rcopy ("$from_dir/$f", "$to_dir/$f");
-	    
+	    if (!process_press($from_dir,$press_dir, $f))
+	      {
+		print "rcopy (\"$from_dir/$f\", \"$to_dir\")\n";
+		rcopy ("$from_dir/$f", "$to_dir/$f");
+	      }
 	  }
       }
   }
+sub process_press
+    {
+      my ($from,$to, $f)=@_;
+      my %qu;
+      my $returnV;
+      if ($f eq "." || $f eq ".."){return;}
+      my $lcf=lc($f);
+      my %maglist;
+      my $title;
+      
+      $title="alternatives_economiques";
+      $maglist{$title}{key}="alternatives";
+      $maglist{$title}{type}="magazines";
 
+      $title="que_choisir";
+      $maglist{$title}{key}="choisir";
+      $maglist{$title}{type}="magazines";
+
+      $title="01Net";
+      $maglist{$title}{key}="01net";
+      $maglist{$title}{type}="magazines";
+      
+      $title="Chasseur_d_images";
+      $maglist{$title}{key}="chasseur";
+      $maglist{$title}{type}="magazines";
+
+      $title="premiere";
+      $maglist{$title}{key}="premi";
+      $maglist{$title}{type}="magazines";
+      
+      $title="geo";
+      $maglist{$title}{key}="geo_";
+      $maglist{$title}{type}="magazines";
+      
+      $title="historia";
+      $maglist{$title}{key}="historia";
+      $maglist{$title}{type}="magazines";
+      
+      $title="geographic";
+      $maglist{$title}{key}="geographic";
+      $maglist{$title}{type}="magazines";
+      
+      $title="sciences_et_vie";
+      $maglist{$title}{key}="sciences";
+      $maglist{$title}{type}="magazines";
+      
+      $title="courrier_international";
+      $maglist{$title}{key}="courrier";
+      $maglist{$title}{type}="magazines";
+      
+      $title="the_economist";
+      $maglist{$title}{key}="economist";
+      $maglist{$title}{type}="magazines";
+      
+      $title="le_monde";
+      $maglist{$title}{key}="monde";
+      $maglist{$title}{type}="quotidiens";
+      
+      $title="liberation";
+      $maglist{$title}{key}="lib";
+      $maglist{$title}{type}="quotidiens";
+      
+      $title="new_york_times";
+      $maglist{$title}{key}="york";
+      $maglist{$title}{type}="quotidiens";
+      
+      
+      $title="wall_street_journal";
+      $maglist{$title}{key}="wall";
+      $maglist{$title}{type}="quotidiens";
+
+      $title="new_scientist";
+      $maglist{$title}{key}="nsc";
+      $maglist{$title}{type}="magazines";
+      
+      $title="the_scientist";
+      $maglist{$title}{key}="scts";
+      $maglist{$title}{type}="magazines";
+      
+      $title="scientific_american";
+      $maglist{$title}{key}="scientific";
+      $maglist{$title}{type}="magazines";
+      
+      #my @maglist=("alternatives", "chasseur", "geo", "historia","histoire", "geographic","scientist","premi", "choisir", "sciences", "courrier", "economist", "monde", "lib","york", "wall", "nsc", "scts");
+      my @quotidiens=("monde","lib","york","wall"); 
+      
+      #foreach my $h (@quotidiens){$qu{$h}=1;}
+      
+      if (-d "$from/$f/" && (($f=~/EN/) || ($f=~/Scientist/)))
+	{
+	  my $returnV=0;
+	  opendir (DIR,"$from/$f");
+	  my @lf=readdir (DIR);
+	  close (DIR);
+	  foreach my $df (@lf)
+	    {
+	      if (process_press ("$from/$f", $to,$df))
+		{
+		  $returnV=1;
+		}
+	    }
+	  return $returnV;
+	}
+      elsif (!($lcf=~/pdf/)){return 0;}
+    
+      print "\npassed\n";
+      
+
+      foreach $title (sort (keys (%maglist)))
+	{
+	  my $key=$maglist{$title}{key};
+	  my $type=$maglist{$title}{type};
+	  my $today ="$to/recents/$type/";
+	  my $sorted="$to/sorted/$title/";
+	  my $tag=daytag();
+	  if ($lcf =~/$key/)
+	    {
+	      
+	      opendir(DIR,$today);
+	      my @l=readdir (DIR);
+	      close(DIR);
+	      foreach my $ff (@l)
+		{
+		  if ($ff=~/$key/){unlink ("$today/$ff");}
+		}
+	      copy ("$from/$f", $today);
+	      if (!-d $sorted){mkdir ($sorted);}
+	      copy ("$from/$f", "$sorted/"."$tag"."_$f");
+	      return 1;
+	    }
+	}
+      return 0;
+    }
+    
 sub is_french_press
     {
       my $dir=shift;
@@ -1828,3 +1920,15 @@ sub dir2file_list
 	 }
        return @nl;
      }
+
+sub daytag
+       {
+	 my ($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+	 $mon++;
+	 $year+=1900;
+	 if ($mday<10){$mday="0$mday";}
+	 if ($mon<10){$month="0$mon";}
+	 
+	 my $tag="$year"."$month"."$mday";
+	 return $tag;
+       }

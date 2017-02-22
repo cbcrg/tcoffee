@@ -66,6 +66,14 @@ foreach $value ( @ARGV)
 	    $interval= $ARGV[++$np];
 	    $np++;
     	    }
+	elsif ($value eq "-r2")
+	    {
+	      $r2=1;
+	      
+	      $np  = $ARGV[++$np];
+	      $nsim= $ARGV[++$np];
+	      $np++;
+    	    }
 	elsif ($value eq "-r")
 	    {
 	    $min= $ARGV[++$np];
