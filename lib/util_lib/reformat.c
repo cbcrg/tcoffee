@@ -2745,6 +2745,7 @@ int main_output  (Sequence_data_struc *D1, Sequence_data_struc *D2, Sequence_dat
 	    return EXIT_SUCCESS;
 
 	  }
+
 	else if      ( strncmp (out_format, "color",5)==0)
 	 {
 	   Alignment *BUF;
@@ -4004,8 +4005,38 @@ char ***read_group ( char *file)
   return list;
 }
 
+int *pdb2atom_pos_list(char *pdb)
+{
+  char **ll=file2lines (pdb);
+  int n, nn,li, ci;
+  int *pos;
+  
+  nn=1;
+  while (ll[nn])nn++;
+  pos=(int*)vcalloc (nn+2, sizeof (int));
+  
+  nn=1;n=0;li=-1;
+  while (ll[nn])
+    {
+      char **lw=string2list (ll[nn]);
+      if (strm (lw[1], "ATOM"))
+	{
+	  ci=atoi (lw[6]);
+	  if (ci!=li)
+	    {
+	      pos[n++]=ci;
+	    }
+	  li=ci;
+	}	
+      free_char (lw, -1);
+      nn++;
+    }
+  pos[n]=-1;
+  free_char (ll, -2);
+  return pos;
+}  
 
-static Sequence* get_pdb_sequence_from_field   (char *fname, char *field);
+
 
 Sequence* get_pdb_sequence   (char *fname)
 {
@@ -4025,7 +4056,7 @@ Sequence* get_pdb_sequence   (char *fname)
 }
 
 
-static Sequence* get_pdb_sequence_from_field   (char *fname, char *field)
+Sequence* get_pdb_sequence_from_field   (char *fname, char *field)
 {
 	char *tp_name;
 	char *command;
@@ -10952,6 +10983,24 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	  (D1->A)->output_res_num=1;
 	 }
+       else if      ( strm (action, "pdb2color"))
+	  {
+	    int nn=1;
+	    int sl=strlen ((D1->S)->seq[0]);
+	    char  *file=(D1->S)->file[0];
+	    float *v=(float*)vcalloc (count_n_line_in_file(file), sizeof (float));
+	    
+	    nn=1;
+	    while (ACTION(nn))
+	      {
+		int coor=atoi (action_list[nn++]);
+		v[coor]=99.99;
+			       
+	      }
+	    
+	    bfactor2x_in_pdb (file, "stdout", v);
+	    exit (0);
+	  }
        else if ( strm (action,"aln2bootstrap"))
 	 {
 	   (D1->A)=aln2bootstrap (D1->A, ATOI_ACTION (1));
@@ -11622,13 +11671,16 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
        else if ( strm(action, "msa2distances"))
 	 {
 	   float radius;
+	   float threshold;
+	   int min;
+	   
 	   Constraint_list *CL;
 	   Alignment *A;
 	   int na=1;
 	   DST->A=copy_aln (D1->A, NULL);
 	   DST->S=aln2seq(DST->A);
 	   	  
-	  
+	   
 	   	   
 	   if (!D2)CL=D1->CL;
 	   else if (!D2->CL)CL=D1->CL;
@@ -11640,12 +11692,31 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	       D1->CL=pdb2contacts (D1->S, D2?(D2->S):NULL,D1->CL, "intra","distances",-1);
 	       CL=D1->CL;
 	     }
-	   if (ACTION(1))
-	     radius=atof(ACTION(1));
-	   else 
-	     radius=20;
 	   
-	   DST->A=msa2distances (D1->A,CL,radius);
+
+	   if (ACTION(1))
+	     {
+	       radius=atof(ACTION(1));
+	     }
+	   else
+	     {
+	       radius=20;
+	     }
+	   if (ACTION(2))
+	     {
+	       threshold=atof(ACTION(2));
+	     }
+	   else 
+	     threshold=0.5;
+	   
+	   if (ACTION(3))
+	     {
+	       min=atoi(ACTION(3));
+	     }
+	   else 
+	     min=4;
+	   
+	   DST->A=msa2distances (D1->A,CL,radius,threshold, min);
 	 }
        else if ( strm(action, "evaluate3D"))
 	 {

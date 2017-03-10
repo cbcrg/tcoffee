@@ -77,9 +77,53 @@ char * process_repeat (char *aln, char *seq, char *pdb)
   vfclose (fp);
   return tf;
 }
-  
-  
-  
+
+void bfactor2x_in_pdb (char *infile, char *outfile, float *v)
+{
+  char **ll=file2lines (infile);
+  int nn=1;
+  int i, ci;
+  FILE *out;
+  out=vfopen (outfile, "w");
+  i=-1;
+  while (ll[nn])
+    {
+      int b;
+      char **lw=string2list (ll[nn]);
+      if (strm (lw[1], "ATOM"))
+	{
+	  
+	  ci=atoi (lw[6]);
+	  //if (i==-1)i=ci;
+	  //ci-=i;
+	  fprintf (out, "ATOM  ", lw[1]);//ATOM
+	  fprintf (out, "%5s ",lw[2]);//ATOM NUmber
+	  fprintf (out, "%-4s", lw[3]);//ATOM Name
+	  fprintf (out, " "   );//alt locator -17 -
+	  fprintf (out, "%3s ", lw[4]);//Res Name
+	  fprintf (out, "%s", lw[5]);//Chain
+	  fprintf (out, "%4s", lw[6]);//Residue Sequence Number
+	  fprintf (out, " "   );//code for res insertion
+	  fprintf (out, "   "   );//space before XYZ
+	  fprintf (out, "%8s", lw[7]);//X
+	  fprintf (out, "%8s", lw[8]);//Y
+	  fprintf (out, "%8s", lw[9]);//Z
+	  fprintf (out, "%6s", lw[10]);//Occupancy
+	  
+	  if (v[ci]<100)fprintf (out,"%6.2f\n", v[ci]);
+	  else
+	    fprintf (out," 99.99\n");
+	}
+      else
+	{
+	  fprintf (out, "%s\n", ll[nn]);
+	}
+      free_char (lw, -1);
+      nn++;
+    }
+  vfclose (out);
+  free_char (ll, -2);
+}  
 char *     normalize_pdb_file  (char *name_in, char *seq, char *out_file)
 {
   char command[1000];
@@ -1069,6 +1113,13 @@ float atom2radius (char *t)
   char a, b;
   static float **lu;
   if (!t)return 0;
+  else if ( strm (t, "O1P"))return atom2radius ("O"); //NMR
+  else if ( strm (t, "O2P"))return atom2radius ("O"); //NMR
+  else if ( strm (t, "O3P"))return atom2radius ("O"); //NMR
+  else if ( strm (t, "O4P"))return atom2radius ("O"); //NMR
+  else if ( strm (t, "O5P"))return atom2radius ("O"); //NMR
+  else if ( strm (t, "AS"))return atom2radius ("As"); 
+
   a=t[0]; b=t[1];
   if (!lu)
     {
@@ -1141,6 +1192,8 @@ float atom2radius (char *t)
       lu['N']['o']=1.588;
       lu['N']['p']=1.708;
       lu['O'][' ']=1.348;
+      
+
       lu['O']['s']=1.58;
       lu['P'][' ']=1.88;
       lu['P']['a']=1.6;
@@ -1181,11 +1234,12 @@ float atom2radius (char *t)
       lu['Y']['b']=1.54;
       lu['Z']['n']=1.148;
       lu['Z']['r']=1.42;
+      
     }
   if (!b)b=' ';
   else if (b>='A' && b<='Z')b=' ';
 
-  if (lu[a][b]<0)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Atom [%s] is unknown[FATAL]",t);
+  if (lu[a][b]<0)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Atom [%s] is unknown[FATAL] (a=[%c] b=[%c]",t, a, b);
   return lu[a][b];
 }
     

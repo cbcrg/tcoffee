@@ -743,6 +743,25 @@ elsif    ($action eq "-file2dir")
 	  }
       }
   }
+
+elsif    ($action eq "-cvid")
+  {
+    print "\n";
+    foreach my $f (@file1)
+      {
+	my $from=$f;
+	print "$from\n";
+	if (-e $from &&  $from=~/.*(\d\d\d\d)\.pdf/)
+	  {
+	    my $to=$1."__".$from;
+	    if ($from ne $to && $from ne "." && $from ne "..")
+	      {
+		print "---- mv $from --> $to\n";
+		&my_rename ($from,$to);
+	      }
+	  }
+      }
+  }
 elsif    ($action eq "-replace")
   {
     print "\n";

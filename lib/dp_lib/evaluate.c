@@ -2384,16 +2384,16 @@ Alignment *struc_evaluate4tcoffee (Alignment *A, Constraint_list *CL, char *mode
   return OUT;
 }   	
 
-Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
+Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius, float clus_th, int clus_min)
 {
   
   int *rseq;
   int NseqWithC;
   int **pos, **lu;
   float ***dm;
-  float **stdA;
+  double **stdA;
   float ***res;
-  
+  int a,b;
   int p1, p2, s1, r1;
   Sequence *S;
   float avg_std=0;
@@ -2403,11 +2403,42 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
   float max_z;
   float min_z;
   float dec_max;
+  double *e;
+  float **z;
+  float **normZP;
+  float **entropy;
+  float *ungapF;
+  int   *ungapN;
+  char *outfile;
+  int **seq2pdb0;
+  int **seq2pdb;
+  int prs1, prs2;
+  int rs1, rs2;
+  char *tree;
+  char *seq;
+  char **res_list;
+  int nc;
+  int **cl;
+  float *paint1;
+  float *paint2;
+  NT_node T;
+  FILE*fp;
+  Sequence *RS;
+  int print_dm=0;
+  float *aa;
+  float min_aa=0.5;
   S=CL->S;
-  
+
+ 
   //identify sequences with contact information
   //1-make sure the sequence is in the lib
   //2-make sure the contact library is not empty
+  
+  
+    
+
+
+
   rseq=(int*)vcalloc (A->nseq, sizeof (int));
   for (NseqWithC=0,s1=0; s1<A->nseq; s1++)
     {
@@ -2424,6 +2455,10 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
 	  if (rseq[s1]!=-1)NseqWithC++;
 	}      
     }
+
+  seq2pdb0=seq2pdb_index (S);
+  seq2pdb=declare_int (A->nseq,A->len_aln);
+ 
   
   //Trim out sequences without contact information or exit if no a single contact information
   if (!NseqWithC)
@@ -2444,11 +2479,48 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
 	}
       A->nseq=ns;
     }
+  pos=aln2pos_simple (A, A->nseq);
+  for (a=0; a<A->nseq; a++)
+    {
+      int b, l;
+      for (b=0; b<A->len_aln; b++)seq2pdb[a][b]=-1;
+      int ps=rseq[a];
+      if (ps>-1)
+	{
+	  l=strlen (S->seq[ps]);
+	  for (b=0; b<l; b++)
+	    {
+	     
+	    seq2pdb[a][b]=seq2pdb0[ps][b];
+	    }
+	}
+    }
+  ungapF=(float*)vcalloc (A->len_aln+1, sizeof (float));
+  ungapN=(int*)vcalloc (A->len_aln+1, sizeof (int));
+  for (b=0; b<A->len_aln; b++)
+    {
+      for (a=0; a<A->nseq; a++)
+	{
+	  ungapN[b]+=1-is_gap (A->seq_al[a][b]);
+	}
+      ungapF[b]=(float)ungapN[b]/(float)A->nseq;
+    }
   
+  /*
+   for (a=0; a<A->nseq; a++)
+     for (b=0; b<A->len_aln; b++)
+       {
+	 rs1=pos[a][b]-1;
+	 if (rs1>=0)
+	   HERE ("%s %d %d", A->name[a], rs1, seq2pdb[a][rs1]);
+       }
+   exit (0);
+  */
 
   //Prepare the look up
-  pos=aln2pos_simple (A, A->nseq);
+  
   lu=declare_int (A->nseq, A->len_aln);
+  //lu 0..N
   for (s1=0; s1<A->nseq; s1++)
     {
       int c,c1;
@@ -2461,19 +2533,24 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
     }
   
   dm =(float***)declare_arrayN (3,sizeof (float),A->nseq, A->len_aln+1,A->len_aln+1);
-  res=(float***)declare_arrayN (3,sizeof (float),A->nseq, A->len_aln+1,3);
-  stdA=(float**)declare_arrayN (2,sizeof (float),A->len_aln, A->len_aln+1,5);
-
+  res=(float***)declare_arrayN (3,sizeof (float),A->nseq, A->len_aln+1,4);
+  stdA=(double**)declare_arrayN (2,sizeof (double),A->len_aln, A->len_aln+1);
+  
+  
   for (s1=0; s1<A->nseq; s1++)
     {
       int ls1=rseq[s1];
       int s2_has_contacts=0;
-	    
+      int print;
       if (ls1==-1)continue;
       dm[s1]=declare_float (A->len_aln+1, A->len_aln+1);
       for (p1=0;p1<=A->len_aln; p1++)
 	for (p2=0;p2<=A->len_aln; p2++)
 	  dm[s1][p1][p2]=(float)-1;
+      if (strstr (A->name[s1], "CDK12"))
+	  print=1;
+      else
+	print=0;
       
       //Get contacts from template sequence
       for (r1=1;r1<=S->len[ls1]; r1++)
@@ -2489,48 +2566,73 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
 	      p1=lu[s1][r1-1];
 	      p2=lu[s1][r2-1];
 	      dm[s1][p1][p2]=dm[s1][p2][p1]=(float)we;
-	      
 	    }
 	}
     }
- 
-  for (p1=0; p1<=A->len_aln-1; p1++)
-    for (p2=p1+1; p2<=A->len_aln; p2++)
+  if ( print_dm)
+    {
+      for (a=0; a<A->nseq; a++)
+	{
+	  fprintf (stdout, "Seq=%d\n", a);
+	  
+	  for (p1=0; p1<A->len_aln;p1++)
+	    {
+	      fprintf (stdout, "[%3d]", p1);
+	      for (p2=0; p2<A->len_aln; p2++)
+		fprintf ( stdout, "%5.0f ",dm[a][p1][p2]); 
+	      fprintf (stdout, "\n");
+	    }
+	}
+    }
+  e=aln2column_normalized_entropy(A);
+  for (p1=0; p1<A->len_aln-1; p1++)
+    for (p2=p1+1; p2<A->len_aln; p2++)
       {
-	stdA[p1][p2]=-1;
-	int n=0;
-	float avg=0;
-	float avg2=0;
-	float std=0;
+	stdA[p1][p2]=stdA[p2][p1]=-1;
+	double n=0;
+	double avg=0;
+	double avg2=0;
+	double std=0;
 	
 	for (s1=0;s1<A->nseq; s1++)
 	  {
 	    if (rseq[s1]<0 || dm[s1][p1][p2]<0)continue;
-	    avg+=dm[s1][p1][p2];
-	    avg2+=dm[s1][p1][p2]*dm[s1][p1][p2];
-	    n++;
+	    avg+=(double)dm[s1][p1][p2];
+	    avg2+=(double)dm[s1][p1][p2]*dm[s1][p1][p2];
+	    n+=(double)1;
 	  }
       	
-	if (n>0)
+	if ((int)n>0)
 	  {
-	    avg/=(float)n;
-	    std=(float)sqrt((double)((avg2/(float)n)-(avg*avg)));
-	    avg/=(float)100;
-	    std/=(float)100;
-	    stdA[p1][p2]=std;
+	    avg/=n;
+	    std=sqrt(((avg2/n)-(avg*avg)));
+	    avg/=(double)100;
+	    std/=(double)100;
+
+	    stdA[p1][p2]=stdA[p2][p1]=std;
 	    avg_std+=std;
 	    avg_std2+=std*std;
 	    nstd++;
+	    
 	  }
-	
+		
 	for (s1=0;s1<A->nseq; s1++)
 	  {
-	    int rs1=pos[s1][p1]-1;
-	    int rs2=pos[s1][p2]-1;
-	    if (rseq[s1]<0 || dm[s1][p1][p2]<0 || rs1<0 || rs2<0)continue;
-	    float d=(float)dm[s1][p1][p2]/100;
 	    
-	    fprintf ( stdout, "##DECPAIR s1: %20s c1: %3d c2: %3d r1: %3d r2: %3d d: %7.3f avg_d: %7.3f stdev_d: %7.3f N: %3d F: %4.2f\n", A->name[s1], p1,p2, rs1,rs2, d, avg, std, n, (float)((float)n/(float)A->nseq));
+	    prs1=rs1=pos[s1][p1]-1;
+	    prs2=rs2=pos[s1][p2]-1;
+	    char aa1=A->seq_al[s1][p1];
+	    char aa2=A->seq_al[s1][p2];
+	    
+	    if (rs1>=0 && rs2>=0)
+	      {
+		prs1=seq2pdb[s1][rs1];
+		prs2=seq2pdb[s1][rs2];
+	      }
+
+	    if (prs1<0 || prs2<0 || rseq[s1]<0 || dm[s1][p1][p2]<0 || rs1<0 || rs2<0)continue;
+	    float d=(float)dm[s1][p1][p2]/100;
+	    fprintf ( stdout, "##DECPAIR s1: %20s c1: %3d c2: %3d r1: %3d r2: %3d pdbr1: %3d pdbr2: %3d aa1: %c aa2: %c d: %7.3f avg_d: %7.3f stdev_d: %8.4f Normalized_score: %.4f N: %3d F: %4.2f ent1: %6.3f ent2: %6.3f PDB_Template: %s\n", A->name[s1], p1+1,p2+1, rs1+1,rs2+1,prs1, prs2, aa1, aa2, d, avg, (float)std, std/avg,(int)n, (float)((float)n/(float)A->nseq), e[p1], e[p2], seq2P_template_file (S,s1));
 	  }
       }
   
@@ -2541,21 +2643,20 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
       std_std=sqrt(avg_std2-(avg_std*avg_std));
     }
   
-  for (p1=0; p1<=A->len_aln-1; p1++)
-    for (p2=p1+1; p2<=A->len_aln; p2++)
+  for (p1=0; p1<A->len_aln-1; p1++)
+    for (p2=p1+1; p2<A->len_aln; p2++)
       {
 	int n=0;
-	float avg=0;
-	float avg2=0;
-	float std=0;
+	double avg=0;
+	double avg2=0;
+	double std=0;
 	
 	for (s1=0;s1<A->nseq; s1++)
 	  {
 	    float d;
-	    int rs1=pos[s1][p1]-1;
-	    int rs2=pos[s1][p2]-1;
-	    
-	    if (rseq[s1]<0 || dm[s1][p1][p2]<0 || stdA[p1][p2]<0)continue;
+	    prs1=rs1 =pos[s1][p1]-1;
+	    if (rs1>=0)prs1=seq2pdb [s1][rs1];
+	    if (prs1<0 || rs1<0 || rseq[s1]<0 || dm[s1][p1][p2]<0 || stdA[p1][p2]<0)continue;
 	    d=(float)dm[s1][p1][p2]/100;
 	    if ( d<radius)
 	      {
@@ -2571,38 +2672,210 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius)
 	      }
 	  }
       }
+   
   
+  z=declare_float (A->len_aln+1,1);
+  normZP =declare_float (A->nseq, A->len_aln+1);
+  entropy=declare_float (A->nseq, A->len_aln+1);
+  
+
   for (s1=0;s1<A->nseq; s1++)
     {
-      max_z=-100000;
-      min_z =100000;
-      for (p1=0; p1<=A->len_aln-1; p1++)
+      
+      int x=0;
+      float *depth=(float*)vcalloc (A->len_aln+1, sizeof (float));
+      int maxN;
+      
+      for (p1=0; p1<A->len_aln; p1++)
 	{
-	  if (res[s1][p1][2] && res[s1][p1][2]>0.01)
+	  prs1=rs1=pos[s1][p1]-1;
+	  if (rs1>=0)prs1=seq2pdb [s1][rs1];
+	  if (prs1>=0 && rs1>=0 && res[s1][p1][2]>0.00001)
 	    {
-	      float dec=res[s1][p1][0]/=res[s1][p1][2];
-	      float z=res[s1][p1][1]/=res[s1][p1][2];
-	      if (z<min_z)min_z=z;
-	      if (z>max_z)max_z=z;
+	      maxN=(maxN<res[s1][p1][2])?res[s1][p1][2]:maxN;
+	      
+	      if (ungapF[p1]>0.5)//filter out columns having less than 50% occupancy
+		{
+		  res[s1][p1][0]/=res[s1][p1][2];
+		  res[s1][p1][1] =z[x++][0]=res[s1][p1][0];
+		}
+	      else
+		{
+		  res[s1][p1][0]/=res[s1][p1][2];
+		  res[s1][p1][1]=100000;
+		}
+	      x++;
 	    }
 	}
       
-      for (p1=0; p1<=A->len_aln-1; p1++)
+      for (p1=0; p1<A->len_aln; p1++)
 	{
-	  if (res[s1][p1][2] && res[s1][p1][2]>0.01)
+	  depth[p1]=res[s1][p1][2]/maxN;
+	}
+
+
+      sort_float (z, 1, 0, 0, x-1);
+      //filter out the lower decile
+      //min_z=z[(int)(A->len_aln/10)][0];
+      min_z=z[0][0];
+      //max_z=z[x-(x/2)][0];
+      max_z=z[x-1][0];
+
+      for (p1=0; p1<A->len_aln; p1++)
+	{
+	  prs1=rs1=pos[s1][p1]-1;
+	  if (rs1>=0)prs1=seq2pdb [s1][rs1];
+	  if (rs1>=0 && prs1>=0)
 	    {
-	      float normZ= (res[s1][p1][1]-min_z)/(max_z-min_z);
-	      fprintf ( stdout , "##DECRES s1: %20s aa: %c c1: %3d r1: %3d avg_stdev: %5.3f -Zscore: %6.3f NormZ: %5.3f Neighborhood: %3d Radius: %6.2f Angstrom\n", A->name[s1],A->seq_al[s1][p1], p1,(int)res[s1][p1][3],res[s1][p1][0],res[s1][p1][1],normZ,(int)res[s1][p1][2], radius);
+	      float normZ=(res[s1][p1][1]>=max_z)?0:100*(1-((res[s1][p1][1]-min_z)/(max_z-min_z)));
+	      fprintf ( stdout , "##DECRES s1: %20s aa: %c c1: %3d r1: %3d pdbr1: %3d avg_stdev: %7.3f Norm_stdev: %7.3f Ngb: %3d Depth: %4.3f Radius: %6.2f Entropy: %6.3f N: %4d F: %4.3f PDB_Template: %s\n", A->name[s1],A->seq_al[s1][p1],p1+1,rs1+1,prs1,res[s1][p1][0],normZ,(int)res[s1][p1][2], depth[p1],radius, e[p1], ungapN [p1], ungapF[p1],seq2P_template_file (S,s1));
+	      normZP [s1][prs1]=normZ;
+	      entropy[s1][prs1]=e[p1];
+	    }
+	}
+      vfree (depth);
+    }
+  outfile=(char*)vcalloc (1000, sizeof (char));
+  for (s1=0; s1<A->nseq; s1++)
+    {
+      
+      char *file;
+      if ((a=rseq[s1])<0)continue;
+      if ((file=seq2P_template_file (S, a)))
+	{
+	  sprintf (outfile, "%s.bfactor2decres.pdb", seq2T_value (S,a, "template_name", "_P_"));
+	  bfactor2x_in_pdb (file, outfile,normZP[s1]);
+	  sprintf (outfile, "%s.bfactor2entropy.pdb", seq2T_value(S,a, "template_name", "_P_"));
+	  bfactor2x_in_pdb (file, outfile,entropy[s1]);
+	}
+    }
+   
+  res_list=declare_char (A->len_aln,10);
+  
+  if (print_dm)
+    {
+      for (p1=0; p1<A->len_aln;p1++)
+	{
+	  fprintf (stdout,"\n[%3d]", p1);
+	  for (p2=0; p2<A->len_aln; p2++) 
+	    {
+	      fprintf ( stdout, "%5.2f ", stdA[p1][p2]);
 	    }
 	}
     }
+  aa=(float*)vcalloc (A->len_aln, sizeof (float));
+  for (a=0; a<A->len_aln; a++)
+    {
+      for (b=0; b<A->nseq; b++)
+	aa[a]+=1-is_gap (A->seq_al[b][a]);
+      aa[a]/=A->nseq;
+    }
+  
+  for (p1=0; p1<A->len_aln; p1++)sprintf (res_list[p1], "%d", p1);
+  for (p1=0; p1<A->len_aln;p1++)
+    {
+      for (p2=0; p2<A->len_aln; p2++) 
+	{
+	  if (p1==p2)stdA[p1][p2]=0;
+	  else if (aa[p1]<min_aa || aa[p2]<min_aa)stdA[p1][p2]=1000;
+	  else if (stdA[p1][p2]==-1)stdA[p1][p2]=1000;
+	}
+      
+    }
+  
+  tree=vtmpnam (NULL);
+  seq=vtmpnam (NULL);
+  dist2upgma_tree (stdA,res_list,A->len_aln,tree);
+  T=main_read_tree (tree);
+  fp=vfopen (seq, "w");
+  for ( a=0; a<A->len_aln; a++)fprintf (fp, ">%d\nxxx\n", a);
+  vfclose (fp);
+  RS=read_sequences(seq); 
+  recode_tree (T,RS);
+  
+  
+  nc=0;
+  cl=declare_int (A->len_aln, A->len_aln+1);
+  tree2clusters (T, &nc,cl,stdA,clus_th, clus_min);
+  paint1=(float*)vcalloc (A->len_aln, sizeof (float));
+  paint2=(float*)vcalloc (A->len_aln, sizeof (float));
+  for (a=0; a<nc; a++)
+    {
+      for (b=1; b<=cl[a][0]; b++)
+	{
+	  float bfactor= ((float)100/((float)nc+2))*(float)(a+1);
+	  paint1[cl[a][b]]=bfactor;
+	}
+    }
+  
+  for (s1=0; s1<A->nseq; s1++)
+    {
+      if (rseq[s1]>-1)
+	{
+	  for (a=0; a<nc; a++)
+	    {
+	      int gsize=0;
+	      for (b=1;  b<=cl[a][0]; b++)
+		{
+		  int rs1=-1;
+		  int prs1=-1;
+		  
+		  rs1=pos[s1][cl[a][b]]-1;
+		  if ( rs1>=0)prs1=seq2pdb[s1][rs1];
+		  if (prs1>=0)gsize++;
+		}
+	      if (gsize>1)
+		{
+		  fprintf (stdout, "##Groups s1: %20s std_th: %3.2f min_size: %3d min_aa %.3f GroupIndex: %3d GroupSize: %3d pdbr: ", A->name[s1], a+1,clus_th, clus_min, min_aa, gsize);
+		  for ( b=1; b<=cl[a][0]; b++)
+		    {
+		      int rs1=-1;
+		      int prs1=-1;
+		      
+		      rs1=pos[s1][cl[a][b]]-1;
+		      if ( rs1>=0)prs1=seq2pdb[s1][rs1];
+		      if (prs1>=0)
+			fprintf (stdout, "%3d ", prs1+1);
+		    }
+		  fprintf ( stdout, "\n");
+		  
+		}
+	    }
+	}
+    }
+  
+  for (s1=0; s1<A->nseq; s1++)
+    {
+      
+      char *file;
+      if ((a=rseq[s1])<0)continue;
+      if ((file=seq2P_template_file (S, a)))
+	{
+	  for (b=0;b<A->len_aln; b++)
+	    {
+	      rs1=pos[s1][b]-1;
+	      if (rs1>=0)
+		{
+		  prs1=seq2pdb[s1][rs1];
+		  if (prs1>=0)
+		    {
+		      paint2[prs1]=paint1[b];
+		    }
+		}
+	    }
+	  sprintf (outfile, "%s.bfactor2deccluster.pdb", seq2T_value (S,a, "template_name", "_P_"));
+	  bfactor2x_in_pdb (file, outfile,paint2);
+	}
+    }
+  exit (0);
+
   free_arrayN((void***) dm , 3);
   
   free_arrayN((void***) res, 3);	    
   free_arrayN((void**) stdA, 2);
   
   free_arrayN((void** ) lu , 2);
-  
+  vfree (e);
   exit(EXIT_SUCCESS);
   return A;
 }   

@@ -3330,7 +3330,7 @@ char **  string2list2 ( char *string, char *separators)
     
   if ( n==0){vfree(buf); return NULL;}
 
-  list=(char**)declare_arrayN (2, sizeof (char), n+2, max_len+1);
+  list=(char**)declare_arrayN (2, sizeof (char), n+3, max_len+1);
 
   n=1;
   sprintf ( buf, "%s", string);
@@ -3340,7 +3340,7 @@ char **  string2list2 ( char *string, char *separators)
 	    sprintf (list[n++], "%s",s);
 	    s=strtok (NULL, separators);
 	  }
-  
+  list[n]=NULL;
   sprintf (list[0], "%d", n);
 
   vfree (buf);

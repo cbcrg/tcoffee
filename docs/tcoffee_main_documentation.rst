@@ -1772,19 +1772,33 @@ Using a similar approach it is possible to estimate the variation of intra-molec
 ::
 
   $$: t_coffee -other_pg seq_reformat  -in proteases_small.aln -in2 proteases_small.template -action +msa2distances  20
+  #$: t_coffee -other_pg seq_reformat  -in proteases_small.aln -in2 proteases_small.template -action +msa2distances  <radius: 20A> <threshold: 0.5 A> <min cluster: 4>	
 
-The output comes in two setions that can be grepped with the first keyword:
+The output comes in two sections that can be grepped with the first keyword:
 
 ::
 
-  ##DECPAIR s1:               <seq name>  c1:  <msa column1> c2:  <msa column 2> r1:  <first residue index 1..N> r2:  <second residue> d:   <distance Angs> avg_d:   <avg dist across MSA> stdev_d:   <corresponding stdev> N:  <number of pairs> F: <fraction of the MSA> %
-
+  ##DECPAIR s1:               ##DECPAIR s1:   <seq_name> c1:  <column 1> c2: <column 2> r1:  <residue 1> r2:  <residue 2> pdbr1:  <pos filed on ATOM line> pdbr2:  pos filed on ATOM line> aa1: <amino acid 1> aa2: <amino acid 2> d:  <distance> avg_d:  <average distance in the column> stdev_d:  <standard deviation> Normalized_score: <standard_deviation/average_distance> N: <number of residue pairs> F: <number residue pairs/number sequences> ent1: <shannon entropy col 1> ent2: <shannon entropy col2>
 
 The second fraction summarizes the fate of each residue. Note that the radius parameter potentially makes each residue in a column resulting having different levels of conservation
 
 ::
 
-  ##DECRES s1:               <seq name> aa: <amino acid> c1: <msa column> r1:  <residue index 1..N> avg_stdev: <average stdev across radius AA> -Zscore:  <average zscores of the averaged stdev> normZ: <normalized zscore 0..100> Neighborhood:  <# of AA within radius> Radius:  <size in Angstrom>
+  ##DECRES s1:               <seq name> aa: <amino acid> c1: <msa column> r1:  <residue index 1..N> avg_stdev: <average stdev across radius AA> -Zscore:  <average zscores of the averaged stdev> normZ: <normalized zscore 0..100> Neighborhood:  <# of AA within radius> Radius:  <radius size in Angstrom as specified in the command line, 20 A by default>
+
+This function also outputs colorized versions of the input PDBs using the PDB Bfactor filed. The output files are the following:
+
+====================  ===================================================================
+ File                 APDB(%) iRMSD(A) NiRMSD(A) Eval. (%)
+====================  ===================================================================
+*.bfactor2entropy.pdb replace thee Bfactor with the entropy measured on the MSA
+*.bfactor2decres      replace the  Bfactor with the normalized average stdev of 
+                      every residue within a sphere of radius <radius>
+*.bfactor2deccluster  uses UPGMA to paint in the same shade all groups of residues larger 
+                      than <min> with a pairwise stdev lower than <threshold> 
+====================  ===================================================================
+
+
 
 STRIKE: Contact based evaluations 
 ---------------------------------

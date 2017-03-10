@@ -126,6 +126,8 @@ Weights *read_seq_weight (char **name, int nseq, char* seq_weight);
 /*                                                                                         */
 /***************************************************************************************** */
 char ***read_group ( char *file);
+int *pdb2atom_pos_list(char *pdb);
+Sequence* get_pdb_sequence_from_field   (char *fname, char *field);
 Sequence* get_pdb_sequence           ( char *fname);
 Sequence* get_struc_gor              ( char *fname);
 Sequence* get_dialign_sequence       ( char *fname);

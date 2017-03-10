@@ -250,6 +250,7 @@ FILE * display_X_template (struct X_template *X, FILE *io);
 struct X_template* free_X_template ( struct X_template *X);
 
 struct X_template *fill_P_template (char *name, char *p, Sequence *S);
+int **seq2pdb_index (Sequence *S);
 struct X_template *fill_F_template (char *name, char *p, Sequence *S);
 struct X_template *fill_S_template ( char *name,char *p, Sequence *S);
 struct X_template *fill_R_template (char *name, char *p, Sequence *S);
@@ -341,6 +342,8 @@ int **normalize_array (int **p, int max, int norm);
 int aln2most_similar_sequence ( Alignment *A, char *mode);
 int aln2coverage ( Alignment *A, int ref_seq);
 
+double* aln2column_normalized_entropy (Alignment *A);
+double* aln2column_entropy (Alignment *A);
 double aln2entropy (Alignment *A, int *in_ls, int in_ns, float gap_threshold);
 int sub_aln2sim ( Alignment *A, int *ns, int **ls, char *mode);
 int sub_aln2max_sim ( Alignment *A, int *ns, int **ls, char *mode);

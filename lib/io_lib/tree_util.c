@@ -4242,6 +4242,51 @@ NT_node recode_tree (NT_node T, Sequence *S)
     }
   return T;
 }
+
+int tree2clusters   (NT_node T, int *nc,int **cl, double **dist, double Thr, int min)
+{
+  if (!T) return nc[0];
+  int a,b;
+  double td=0;
+  double n=0;
+
+
+  
+  
+  for (a=0; a<T->nseq-1; a++)
+    {
+      for (b=a+1; b<T->nseq; b++)
+	{
+	  int s1=T->lseq[a];
+	  int s2=T->lseq[b];
+	  td+=dist [s1][s2];
+	  //fprintf ( stdout, "\n\t %d %d ---> %f", s1, s2,dist[s1][s2]);
+	  n++;
+	}
+    }
+  
+  if (n>0.00001)td/=n;
+
+  //fprintf (stdout, "\nTest Cluster => %f\n", td);
+  //for (a=0; a<T->nseq; a++)
+  //  fprintf ( stdout, "%d ", T->lseq[a]);
+
+  
+  if (td<Thr && T->nseq>=min)
+    {
+      for (a=0; a<T->nseq; a++)
+	cl[nc[0]][a+1]=T->lseq[a];
+      cl[nc[0]][0]=T->nseq;
+      nc[0]++;
+    }
+  else
+    {
+      tree2clusters (T->left, nc,cl,dist, Thr,min);
+      tree2clusters (T->right, nc,cl,dist, Thr, min);
+    }
+  return nc[0];
+}
+  
 int tree2split_list (NT_node T, int ns,int **sl, int* n)
 {
   if (!T) return 0;

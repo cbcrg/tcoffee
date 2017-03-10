@@ -180,6 +180,8 @@ int display_leaf ( NT_node T, FILE *fp);
 int display_leaf_below_node ( NT_node T, FILE *fp);
 NT_node display_leaf_nb (NT_node T, int n, FILE *fp, char *name);
 NT_node display_splits (NT_node T,Sequence *S, FILE *fp, char *name);
+int tree2clusters   (NT_node T, int *nc,int **cl, double **dist, double Thr, int min);
+
 int tree2split_list (NT_node T, int nseq, int **split_list, int *n);
 
 NT_node reroot_tree ( NT_node TREE, NT_node T);

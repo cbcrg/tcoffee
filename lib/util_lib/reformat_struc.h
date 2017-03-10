@@ -1,7 +1,8 @@
 char * process_repeat (char *aln, char *seq, char *pdb);
+
 char     * normalize_pdb_file  (char *name, char *seq,char *out_file);
 Ca_trace * trim_ca_trace (Ca_trace *st, char *seq );
-
+void bfactor2x_in_pdb (char *infile, char *outfile, float *v);
 Ca_trace * read_ca_trace (char *file, char *seq_field );
 Ca_trace * simple_read_ca_trace (char *file );
 Ca_trace * hasch_ca_trace             ( Ca_trace *T);

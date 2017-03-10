@@ -6504,6 +6504,49 @@ struct X_template *fill_P_template ( char *name,char *p, Sequence *S)
   return P;
 }
 
+int **seq2pdb_index (Sequence *S)
+{
+  //index contains for each residue of S, the Pos value of the ATOM lines in the original PDB file
+  int a, b;
+  int **index=(int**)vcalloc (S->nseq, sizeof (int*));
+  for (a=0; a<S->nseq; a++)
+    {
+      char *file=seq2P_template_file (S, a);
+      if (file)
+	{
+	  int *plist;
+	  int l=strlen (S->seq[a]);
+	  Sequence  *PS=get_pdb_sequence_from_field(file, "ATOM");
+	  plist=pdb2atom_pos_list(file);
+	  Alignment *A=align_two_sequences (S->seq[a], PS->seq[0],"idmat",-3,0, "fasta_pair_wise");
+	  int seq=0;
+	  int pdb=0;
+	  //print_aln (A);
+	  index[a]=(int*)vcalloc(l, sizeof (int));
+	  for (b=0; b<l; b++)index[a][b]=-1;
+	  
+	  
+	  for (b=0; b<A->len_aln; b++)
+	    {
+	      
+	      int seq_r=1-is_gap(A->seq_al[0][b]);
+	      int pdb_r=1-is_gap(A->seq_al[1][b]);
+	      seq+=seq_r;
+	      pdb+=pdb_r;
+	      if (seq_r)
+		{
+		  if (pdb_r)index[a][seq-1]=plist[pdb-1];
+		  else index[a][seq-1]=-1;
+		}
+	    }
+	  free_aln(A);
+	  free_sequence (PS, -1);
+	  vfree (plist);
+	}
+    }
+  return index;
+}			     
+
 struct X_template *fill_S_template ( char *name,char *p, Sequence *Seq)
 {
   struct X_template *S;
@@ -8151,7 +8194,57 @@ int sub_aln2max_sim ( Alignment *A, int *ns, int **ls, char *mode)
     }
   return avg;
 }
+double* aln2column_normalized_entropy (Alignment *A)
+{
+  int a;
+  double max=0;
+  double *e=aln2column_entropy (A);
+  for (a=0; a<A->len_aln; a++)
+    if (e[a]>max) max=e[a];
+  for (a=0; a<A->len_aln; a++)
+    {
+      e[a]=(double)100-((double)100*(e[a]/max));
+    }
+  return e;
+}
+double* aln2column_entropy (Alignment *A)
+{
+  double*e, *p;
+  double n;
+  int a, b;
+  
+  if (!A || A->len_aln==0) return NULL;
 
+  e=(double*)vcalloc (A->len_aln, sizeof (double));
+  p=(double*)vcalloc (256, sizeof (double));
+
+
+  for (a=0; a<A->len_aln; a++)
+    {
+      n=0;
+      for (b=0; b<A->nseq; b++)
+	{
+	  char r=A->seq_al[b][a];
+	  if ( !is_gap(r))
+	    {
+	      r=tolower(r);
+	      p[r]++;
+	      n++;
+	    }
+	}
+      for (b=0; b<256; b++)
+	{
+	  if (n<0.00000001 || p[b]<0.0000001)continue;
+	  p[b]/=n;
+	  e[a]+=p[b]*(log(p[b])/log(2));
+	  p[b]=0;
+	}
+      e[a]*=(double)-1;
+      if (e[a]<0.0000001)e[a]=0;
+    }
+  vfree (p);
+  return e;
+}
 
 double aln2entropy (Alignment *A, int *in_ls, int in_ns, float gap_threshold)
 {
