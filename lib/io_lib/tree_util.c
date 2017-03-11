@@ -4243,6 +4243,92 @@ NT_node recode_tree (NT_node T, Sequence *S)
   return T;
 }
 
+NT_node node2master(NT_node T, Sequence *S)
+{
+  if (!T)return T;
+  else if (!T->left && !T->right)
+    {
+      int i=name_is_in_list (T->name, S->name, S->nseq, MAXNAMES);
+      HERE ("%s", T->name);
+      T->seq=i;
+      
+      T->isseq=1;
+      T->nseq=1;
+      T->leaf=1;
+    }
+  else 
+    {
+      NT_node L=node2master(T->left,S);
+      NT_node R=node2master(T->right,S);
+      
+      T->isseq=T->leaf=0;
+      T->nseq=L->nseq+R->nseq;
+      if      (R->seq==-1 && L->seq==-1)T->seq=-1;
+      else if (L->seq==-1)L=R;
+      else
+	{
+	  int ll=strlen (S->seq[L->seq]);
+	  int lr=strlen (S->seq[R->seq]);
+	  if (ll>lr)R=L;
+	}
+      T->seq=R->seq;
+      T->name=R->name;
+    }
+  return T;
+}
+      
+int tree2bucket (NT_node T, Sequence *S,char *name, int N)
+{
+  int terminal=0;
+  NT_node *CL, *NL;
+  int left, right, cn,nn, a;
+  FILE *fp;
+  CL=(NT_node*)vcalloc (1, sizeof (NT_node));
+  cn=0;CL[cn++]=T;
+  
+  while (cn<N && !terminal)
+    {
+      
+      nn=0;
+      terminal=1;
+      NL=(NT_node*)vcalloc (cn*2, sizeof (NT_node));
+      
+      for (right=cn-1,left=0; left<cn &&& right>=0 && nn<N; left++, right--)
+	{
+	  NT_node N1=CL[right];
+	  NT_node N2=CL[left];
+	  if (N1->leaf)NL[nn++]=N1;
+	  else if (N1->left){NL[nn++]=N1->left;terminal=0;}
+	  if (N2->leaf)NL[nn++]=N2;
+	  else if (N2->right){NL[nn++]=N2->right;terminal=0;}
+	}
+      vfree (CL);
+      CL=NL;
+      cn=nn;
+    }
+  fprintf ( stderr, "Output File %s that Contain %d Sequences -- FASTA\n", name,nn);
+  fp=vfopen (name, "w");
+  for (a=0; a<nn; a++)
+    {
+      int s=CL[a]->seq;
+      fprintf (fp, ">%s\n%s\n", S->name[a],S->seq[a]);
+    }
+  vfclose (fp);
+  
+  if (!terminal)
+    {
+      char *nname=(char*)vcalloc (strlen (name) +1000, sizeof (char));
+      for (a=0; a< nn; a++)
+	{
+	  sprintf (nname, "%s.%d",name, a); 
+	  tree2bucket (CL[a],S,nname, N);
+	}
+      vfree (nname);
+    }
+  vfree (CL);
+  return 0;
+}
+
 int tree2clusters   (NT_node T, int *nc,int **cl, double **dist, double Thr, int min)
 {
   if (!T) return nc[0];

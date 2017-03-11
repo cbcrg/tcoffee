@@ -11440,6 +11440,14 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	   D1->S=tree2seq(D1->T, NULL);
 	   D1->A=seq2aln (D1->S, NULL, RM_GAP);
 	 }
+       else if ( strm(action, "tree2bucket") )
+	 {
+	   
+	   node2master (D2->T, D1->S);
+	   
+	   tree2bucket (D2->T, D1->S, "0", ATOI_ACTION(1));
+	   myexit (EXIT_SUCCESS);
+	 }
        else if ( strm(action, "tree2node") )
 	 {
 	   print_node_list ( D1->T,(DST)?DST->S:NULL);
