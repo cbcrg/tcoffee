@@ -4249,7 +4249,6 @@ NT_node node2master(NT_node T, Sequence *S)
   else if (!T->left && !T->right)
     {
       int i=name_is_in_list (T->name, S->name, S->nseq, MAXNAMES);
-      HERE ("%s", T->name);
       T->seq=i;
       
       T->isseq=1;
@@ -4276,16 +4275,38 @@ NT_node node2master(NT_node T, Sequence *S)
     }
   return T;
 }
+int test_tree2bucket(NT_node T, Sequence *S,char *name, int N);
+
+int test_tree2bucket(NT_node T, Sequence *S,char *name, int N)
+{
+  if (T->leaf)
+    {
+      fprintf (stdout,"%s\n", T->name);
+    }
+  else
+    {
       
+      test_tree2bucket (T->left, S, name, N);
+      test_tree2bucket (T->right, S, name, N);
+    }
+  return 0;
+}
+
+static int *lu;
+static int lun;		    
 int tree2bucket (NT_node T, Sequence *S,char *name, int N)
 {
   int terminal=0;
   NT_node *CL, *NL;
   int left, right, cn,nn, a;
   FILE *fp;
+
+  if (!lu)lu=(int*)vcalloc (S->nseq,sizeof (int));
+  
+  if (T->leaf)return 0;
+  
   CL=(NT_node*)vcalloc (1, sizeof (NT_node));
   cn=0;CL[cn++]=T;
-  
   while (cn<N && !terminal)
     {
       
@@ -4293,32 +4314,37 @@ int tree2bucket (NT_node T, Sequence *S,char *name, int N)
       terminal=1;
       NL=(NT_node*)vcalloc (cn*2, sizeof (NT_node));
       
-      for (right=cn-1,left=0; left<cn &&& right>=0 && nn<N; left++, right--)
+      for (left=0; left<cn; left++)
 	{
-	  NT_node N1=CL[right];
-	  NT_node N2=CL[left];
-	  if (N1->leaf)NL[nn++]=N1;
-	  else if (N1->left){NL[nn++]=N1->left;terminal=0;}
-	  if (N2->leaf)NL[nn++]=N2;
-	  else if (N2->right){NL[nn++]=N2->right;terminal=0;}
+	  
+	  NT_node N=CL[left];
+	  if (N->leaf){NL[nn++]=N;}
+	  else
+	    {
+	      NL[nn++]=N->left;
+	      NL[nn++]=N->right;
+	      terminal=0;
+	    }
 	}
       vfree (CL);
       CL=NL;
       cn=nn;
     }
-  fprintf ( stderr, "Output File %s that Contain %d Sequences -- FASTA\n", name,nn);
+
   fp=vfopen (name, "w");
-  for (a=0; a<nn; a++)
+  for (a=0; a<cn; a++)
     {
       int s=CL[a]->seq;
-      fprintf (fp, ">%s\n%s\n", S->name[a],S->seq[a]);
+      if (!lu[s] && CL[a]->leaf){lu[s]=1;lun++;}
+      fprintf (fp, ">%s leaf:%d\n%s\n", S->name[s],CL[a]->leaf,S->seq[s]);
+      
     }
   vfclose (fp);
-  
+  fprintf ( stderr, "Output File %s that Contain %d Sequences -- FASTA [LUN=%d]\n", name,nn,lun);
   if (!terminal)
     {
       char *nname=(char*)vcalloc (strlen (name) +1000, sizeof (char));
-      for (a=0; a< nn; a++)
+      for (a=0; a< cn; a++)
 	{
 	  sprintf (nname, "%s.%d",name, a); 
 	  tree2bucket (CL[a],S,nname, N);
