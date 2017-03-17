@@ -4291,19 +4291,38 @@ int test_tree2bucket(NT_node T, Sequence *S,char *name, int N)
     }
   return 0;
 }
+char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name);
+char* tree2bucket (NT_node T, Sequence *S, int N, char *method)
+{
+  char *name;
+  if (!method || strm (method, "seq"))
+    {
+      name=(char*)vcalloc (100, sizeof (char));
+      sprintf ( name, "1");
+    }
+  else
+    {
+      name=vtmpnam (NULL);
+    }
+  tree2bucketR(T, S, N, method, name);
+  if (method && !strm (method, "seq"))display_file_content (stdout, name);
+  return name;
+}      
 
-static int *lu;
-static int lun;		    
-int tree2bucket (NT_node T, Sequence *S,char *name, int N)
+char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
 {
   int terminal=0;
   NT_node *CL, *NL;
   int left, right, cn,nn, a;
   FILE *fp;
-
-  if (!lu)lu=(int*)vcalloc (S->nseq,sizeof (int));
+  char *seq;
+  int do_aln;
   
-  if (T->leaf)return 0;
+
+  if (!method || strm (method, "seq"))do_aln=0;
+  else do_aln=1;
+  
+  if (T->leaf)return NULL;
   
   CL=(NT_node*)vcalloc (1, sizeof (NT_node));
   cn=0;CL[cn++]=T;
@@ -4330,31 +4349,53 @@ int tree2bucket (NT_node T, Sequence *S,char *name, int N)
       CL=NL;
       cn=nn;
     }
-
-  fp=vfopen (name, "w");
+  
+  seq=vtmpnam(NULL);
+  fp=vfopen (seq, "w");
   for (a=0; a<cn; a++)
     {
       int s=CL[a]->seq;
-      if (!lu[s] && CL[a]->leaf){lu[s]=1;lun++;}
       fprintf (fp, ">%s leaf:%d\n%s\n", S->name[s],CL[a]->leaf,S->seq[s]);
-      
+  
     }
   vfclose (fp);
-  fprintf ( stderr, "Output File %s that Contain %d Sequences -- FASTA [LUN=%d]\n", name,nn,lun);
+  if (!do_aln)
+    {
+      fprintf ( stderr, "Output File %s that Contain %d Sequences -- FASTA\n", name,nn);
+      printf_system_direct ("mv %s %s", seq, name);
+    }
+  else
+    {
+      seq_file2msa_file (method,seq, name);
+      //seq2cw_aln_file (seq,name);
+    }
+    
+  
   if (!terminal)
     {
-      char *nname=(char*)vcalloc (strlen (name) +1000, sizeof (char));
+      char *nname;
+
+      if (!do_aln)
+	nname=(char*)vcalloc (strlen (name) +1000, sizeof (char));
+      else
+	nname=vtmpnam (NULL);
+      
       for (a=0; a< cn; a++)
 	{
-	  sprintf (nname, "%s.%d",name, a); 
-	  tree2bucket (CL[a],S,nname, N);
+	  if (!do_aln)sprintf (nname, "%s.%d",name, a+1);
+	  
+	  if (tree2bucketR (CL[a],S,N,method, nname) && !strm (method, "seq"))
+	    {
+	      fprintf ( stderr, "\nMERGE %s using %s", (CL[a])->name, method);
+	      thread_msa2msa (nname,name,(CL[a])->name);
+	    }
 	}
-      vfree (nname);
+      if (!do_aln)vfree (nname);
     }
   vfree (CL);
-  return 0;
+  return name;
 }
-
+  
 int tree2clusters   (NT_node T, int *nc,int **cl, double **dist, double Thr, int min)
 {
   if (!T) return nc[0];

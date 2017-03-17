@@ -905,8 +905,60 @@ Alignment * realign_block ( Alignment *A, int col1, int col2, char *pg)
 
   return A;
 }
+Alignment *seq2msa (char *method,Sequence *S)
+{
+  char *seq=vtmpnam (NULL);
+  char *aln=vtmpnam (NULL);
+  Alignment *A;
+  
+  output_fasta_seqS (seq,S);
+  aln=seq_file2msa_file(method,seq, aln);
+  A=main_read_aln (aln, NULL);
+  return A;
+}
+char *seq_file2msa_file (char *file, char *seq, char *aln)
+{
+  TC_method *method;
 
-
+  if (!aln)aln=vtmpnam (NULL);
+  if ( !check_file_exists (file))
+    {
+      char *m=method_name2method_file(file);
+      if (!m)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is an unknown method [FATAL]", file);
+      
+      method=method_file2TC_method(m);
+      //vfree (m);
+    }
+  else
+    method=method_file2TC_method(file);
+  
+  
+  if (method)
+    {
+      char * command=make_aln_command (method,"seq", "aln");
+      char *dir =vtmpnam (NULL);
+      char *cdir=get_pwd (NULL);
+      my_mkdir (dir);
+      
+      //HERE ("%s", command);
+      chdir (dir);
+      printf_system ("cp %s seq", seq);
+      printf_system ("%s >/dev/null 2>/dev/null", command);
+      
+      
+      printf_system ("cp aln %s",aln);
+      vfree (command);
+      chdir    (cdir);
+      printf_system_direct ("rm %s/*", dir);
+      my_rmdir (dir);
+    }
+  else
+    {
+      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is an unknown method [FATAL]", file);
+    }
+  //vfree (method);
+  return aln;
+}
 
 
 

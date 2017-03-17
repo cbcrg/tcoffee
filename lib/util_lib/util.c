@@ -6967,6 +6967,7 @@ int   file_cat ( char *from, char *to)
   return 1;
 }
 
+  
 FILE* display_file_content (FILE *output, char *name)
 {
   FILE *fp;

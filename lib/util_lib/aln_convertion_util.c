@@ -13820,3 +13820,90 @@ static int trimseq2_getnext (int *gl,int g,int n,int *used, int ***sim,int minsi
     }
   return bseq+1;
 }
+void add_msa (Alignment *A,int seq, char *lu, char *file, char *mode);
+char *msa2master_seq (Alignment *A, int seq);
+
+char *msa2master_seq (Alignment *A, int seq)
+{
+  char *master=(char *) vcalloc (A->len_aln+1, sizeof (char));
+  static int *aa=(int*)vcalloc(256, sizeof (int));
+  int c, s,a;
+  
+  sprintf (master, "%s", A->seq_al[seq]);
+  
+  for ( c=0; c<A->len_aln; c++)
+    {
+      if ( is_gap (A->seq_al[seq][c]))
+	{
+	  int best_naa=0;
+	  char best_aa=0;
+	  for (a=0; a<256; a++)aa[a]=0;
+	  for (s=0; s<A->nseq; s++)
+	    {
+	      char r=A->seq_al[s][c];
+	      if (!is_gap (r))
+		{
+		  aa[r]++;
+		  if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}
+		}
+	    }
+	  master[c]=best_aa;
+	}
+    }
+  
+  return master;
+}
+int thread_msa2msa(char *small, char *big, char *seq)
+{
+  //incorporate small into Big
+  Alignment *S=main_read_aln (small, NULL);
+  Alignment *B=main_read_aln (big, NULL);
+  Alignment *M;
+  char *sseq, *bseq;
+  int Si, Bi;
+  
+  if ((Si=name_is_in_list (seq, S->name, S->nseq, MAXNAMES))==-1)
+    {
+      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, small );
+    }
+  if ((Bi=name_is_in_list (seq, B->name, B->nseq, MAXNAMES))==-1)
+    {
+      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, big );
+    }
+  
+  sseq=msa2master_seq (S, Si);
+  bseq=msa2master_seq (B, Bi);
+  
+  M=align_two_sequences (sseq,bseq,"blosum62mt",-4,-1, "myers_miller_pair_wise");
+    
+  add_msa (S,-1,M->seq_al[0],big, "w");
+  add_msa (B,Bi,M->seq_al[1],big, "a");
+    
+  vfree (sseq);vfree (bseq);
+  return 1;
+}
+void add_msa (Alignment *A,int seq, char *lu, char *file, char *mode)
+{
+  FILE *fp=vfopen(file,mode);
+  int s, c,col;
+  int len=strlen (lu);
+  
+  for (s=0; s<A->nseq; s++)
+    {
+      if ( s!=seq)
+	{
+	  fprintf ( fp, ">%s\n", A->name [s]);
+	  
+	  for (col=0,c=0; c<len; c++)
+	    {
+	      char r=lu[c];
+	      if (r!='-')fprintf (fp, "%c",A->seq_al[s][col++]);
+	      else fprintf (fp, "-");
+	    }
+	  fprintf ( fp, "\n");
+	}
+    }
+  vfclose (fp);
+  return;
+}
+

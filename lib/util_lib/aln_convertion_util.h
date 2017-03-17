@@ -1,3 +1,17 @@
+typedef struct tnode *NT_node;
+
+/**
+* Node of a tree
+*/
+typedef struct aanode *LAA;
+typedef struct aanode{
+  int aa;
+  LAA bef;
+  LAA col;
+}Aanode;
+
+
+
 typedef struct
     {
       int   p1;
@@ -464,3 +478,4 @@ Alignment * mark_exon_boundaries  (Alignment *A, Alignment *E);
 //In each cluser there is a path between every pair of sequence
 //A path is made of edges connecting tow nodes with w>min_sim
 int ** simple_trimseq2 (int n, int **sim, int min_sim);
+int thread_msa2msa(char *small, char *big, char *seq);

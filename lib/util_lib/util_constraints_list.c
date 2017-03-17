@@ -587,6 +587,7 @@ Job_TC *submit_lib_job ( Job_TC *job)
 }
 
 
+      
 
 Job_TC* method2job_list ( char *method_name,Sequence *S, char *weight, char *lib_list, Distance_matrix *DM, Constraint_list *CL)
 {
@@ -1160,6 +1161,7 @@ struct TC_method * method_file2TC_method( char *method)
 	m->maxid=100;
 
 	fp=vfopen (method, "r");
+	
 	while ( (c=fgetc (fp))!=EOF)
 	{
 		ungetc ( c, fp);
@@ -1218,7 +1220,7 @@ struct TC_method * method_file2TC_method( char *method)
 	
 	
 	vfclose ( fp);
-
+	if ( !m-> executable && ! m->executable2)return NULL;
 	return m;
 }
 
