@@ -922,6 +922,8 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
   char *command;
   int free=0;
   
+  
+  
   if (!aln)aln=vtmpnam (NULL);
   if (!file) return NULL;
   else if (file[0]=='#')

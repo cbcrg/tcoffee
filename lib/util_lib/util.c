@@ -9626,8 +9626,8 @@ char ** standard_initialisation  (char **in_argv, int *in_argc)
 
 
   //set special Variables
-  if (getenv ("MAFFT_BINARIES") || isdir4path ("/usr/local/lib/mafft"));
-  else cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
+  //if (getenv ("MAFFT_BINARIES") || isdir4path ("/usr/local/lib/mafft"));
+  //else cputenv ( "MAFFT_BINARIES=%s",get_plugins_4_tcoffee());
 
   //set proxy
   set_proxy(get_proxy_from_env());
