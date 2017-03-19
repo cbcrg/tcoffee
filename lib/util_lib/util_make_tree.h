@@ -4,7 +4,7 @@ char* seq2co_aln_file (char *in, char *out);
 char* seq2mafft_aln_file (char *in, char *out);
 
 char* prf_pair2cw_aln_file (char *prf1,char *prf2, char *out);
-NT_node   seq2cw_dnd ( Sequence *S);
+
 
 NT_node ** make_nj_tree (  Alignment *A,int **distances,int gop, int gep, char **out_seq, char **out_seq_name, int out_nseq, char *tree_file, char *tree_mode);
 NT_node ** make_upgma_tree (  Alignment *A,int **distances,int gop, int gep, char **out_seq, char **out_seq_name, int out_nseq, char *tree_file, char *tree_mode);
@@ -20,9 +20,15 @@ NT_node ** dist2nj_tree (double **distances, char **out_seq_name, int out_nseq, 
 ///////////////////////////////////////////////////////////////////////////////
 
 double **aln2km_vector (Alignment *A, char *mode, int *dim);
-NT_node ** seq2km_tree (Sequence *S, char *file);
-NT_node ** seq2co_tree (Sequence *S, char *file);
 
+NT_node ** seq2km_tree_old (Sequence *S, char *file);
+NT_node seq2km_tree (Sequence *S);
+NT_node seq2co_tree (Sequence *S);
+NT_node   seq2cw_dnd ( Sequence *S);
+NT_node   seq2cw_tree ( Sequence *S);
+
+NT_node compute_cw_tree (Alignment *A);
+NT_node aln2cw_tree     (Alignment *A);
 NT_node aln2km_tree (Alignment *A, char *mode, int nboot);
 NT_node rec_km_tree (char **name,int n,int dim,double **V, int nboot);
   

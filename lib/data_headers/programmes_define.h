@@ -46,6 +46,11 @@
 #define PROBCONS_ADDRESS  "http://probcons.stanford.edu/"
 
 
+#define MSAPROBS_4_TCOFFEE "probcons"
+#define MSAPROBS_4_TCOFFEE "probconsRNA"
+#define MSAPROBS_ADDRESS   "http://msaprobs.sourceforge.net/homepage.htm#latest"
+
+
 
 
 #define DIALIGNT_4_TCOFFEE "dialign-t"

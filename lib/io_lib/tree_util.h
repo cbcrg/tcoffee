@@ -143,8 +143,6 @@ static NT_node compute_std_tree (Alignment *A, int n, char **arg_list);
 NT_node compute_std_tree_2 (Alignment *A, int **s, char *arg_list);
 NT_node aln2fj_tree(NT_node T, Alignment *A, int limit,char* mode);
 Alignment * filter_aln4tree (Alignment *A, int n,int fg,char* mode);
-NT_node compute_cw_tree (Alignment *A);
-NT_node seq2cw_tree (Sequence *S);
 /*********************************************************************/
 /*                                                                   */
 /*                                   Tree Filters and MAnipulation   */

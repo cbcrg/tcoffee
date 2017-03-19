@@ -6148,7 +6148,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    %sINFILE=\n", CWF);
 	fprintf ( fp, "OUT_FLAG   %sOUTFILE=\n", CWF);
-	fprintf ( fp, "PARAM      %sOUTORDER=INPUT %sNEWTREE=SCRATCH_FILE %salign\n",CWF,CWF,CWF);
+	fprintf ( fp, "PARAM      %sOUTORDER=INPUT %sNEWTREE=SCRATCH_FILE %salign  >/dev/null&bnsp2>/dev/null\n\n",CWF,CWF,CWF);
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", CLUSTALW_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", CLUSTALW_4_TCOFFEE);
@@ -6402,6 +6402,38 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n",POA_4_TCOFFEE);
 	vfclose (fp);}
 
+	sprintf (list[n][0], "msaprobs_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "DOC probcons [%s]\n", PROBCONS_ADDRESS);
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   aln\n");
+	fprintf ( fp, "IN_FLAG    &bnsp\n");
+	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	if ( strm (retrieve_seq_type(), "DNA") || strm (retrieve_seq_type(), "RNA"))fprintf ( fp, "EXECUTABLE probconsRNA\n");
+	else fprintf ( fp, "EXECUTABLE msaprobs\n");
+	fprintf ( fp, "ADDRESS    %s\n", PROBCONS_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n",PROBCONS_4_TCOFFEE);
+	vfclose (fp);}
+
+	sprintf (list[n][0], "msaprobs_msa");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "DOC probcons [%s]\n", PROBCONS_ADDRESS);
+	fprintf ( fp, "ALN_MODE   multiple\n");
+	fprintf ( fp, "OUT_MODE   aln\n");
+	fprintf ( fp, "IN_FLAG    &bnsp\n");
+	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	if ( strm (retrieve_seq_type(), "DNA") || strm (retrieve_seq_type(), "RNA"))fprintf ( fp, "EXECUTABLE probconsRNA\n");
+	else fprintf ( fp, "EXECUTABLE msaprobs\n");
+	fprintf ( fp, "ADDRESS    %s\n", PROBCONS_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n",PROBCONS_4_TCOFFEE);
+	vfclose (fp);}
+	
 	sprintf (list[n][0], "probcons_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");

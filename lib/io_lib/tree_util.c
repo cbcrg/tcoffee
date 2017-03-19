@@ -1907,32 +1907,8 @@ NT_node aln2phyml_tree (Alignment *A)
   vfree (name);
   return RT;
 }
-NT_node seq2cw_tree (Sequence *S)
-{
-  static char *seq=vtmpnam (NULL);
-  static char *aln=vtmpnam (NULL);
-  static char *tree=vtmpnam (NULL);
-  
-  output_fasta_seqS(seq,S);
-  printf_system ("clustalw -infile=%s -outfile=%s %s", seq,aln, TO_NULL_DEVICE);
-  printf_system ("clustalw -infile=%s -tree -newtree=%s %s",aln,tree, TO_NULL_DEVICE);
-  return main_read_tree(tree);
-}
-NT_node compute_cw_tree (Alignment *A)
-{
-  char *tmp1, *tmp2, tmp3[1000];
 
-  tmp1=vtmpnam (NULL);
-  tmp2=vtmpnam (NULL);
 
-  sprintf ( tmp3, "%s.ph", tmp1);
-  output_clustal_aln (tmp1, A);
-  //printf_system ("clustalw -infile=%s -tree -newtree=%s %s ", tmp1,tmp3, TO_NULL_DEVICE);
-  printf_system ("clustalw -infile=%s -tree -newtree=%s ", tmp1,tmp3, TO_NULL_DEVICE);
-  printf_system("mv %s %s", tmp3, tmp2);
-
-  return main_read_tree(tmp2);
-}
 
 NT_node compute_fj_tree (NT_node T, Alignment *A, int limit, char *mode)
 {
@@ -4245,6 +4221,7 @@ NT_node recode_tree (NT_node T, Sequence *S)
 
 NT_node node2master(NT_node T, Sequence *S)
 {
+  //select the one with a PDB template OR select the longuest
   if (!T)return T;
   else if (!T->left && !T->right)
     {
@@ -4253,33 +4230,42 @@ NT_node node2master(NT_node T, Sequence *S)
       
       T->isseq=1;
       T->nseq=1;
-      T->leaf=1;
+      
     }
   else 
     {
       NT_node L=node2master(T->left,S);
       NT_node R=node2master(T->right,S);
       
-      T->isseq=T->leaf=0;
-      T->nseq=L->nseq+R->nseq;
+      T->isseq=0;
+      T->leaf=T->nseq=L->nseq+R->nseq;
       if      (R->seq==-1 && L->seq==-1)T->seq=-1;
       else if (L->seq==-1)L=R;
       else
 	{
+	  int pl=(seq2P_template_file(S, L->seq))?1:0;
+	  int pr=(seq2P_template_file(S, L->seq))?1:0;
+	  
 	  int ll=strlen (S->seq[L->seq]);
 	  int lr=strlen (S->seq[R->seq]);
-	  if (ll>lr)R=L;
+	  if ((!pl &&!pr) || (pl && pr))
+	    {
+	      if (ll>lr)R=L;
+	    }
+	  else if (pl) 
+	    R=L;
 	}
       T->seq=R->seq;
       T->name=R->name;
     }
+  
   return T;
 }
 int test_tree2bucket(NT_node T, Sequence *S,char *name, int N);
 
 int test_tree2bucket(NT_node T, Sequence *S,char *name, int N)
 {
-  if (T->leaf)
+  if (T->isseq)
     {
       fprintf (stdout,"%s\n", T->name);
     }
@@ -4292,6 +4278,8 @@ int test_tree2bucket(NT_node T, Sequence *S,char *name, int N)
   return 0;
 }
 char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name);
+static int *lu4t2b;
+static int lun4t2b;
 char* tree2bucket (NT_node T, Sequence *S, int N, char *method)
 {
   char *name;
@@ -4304,8 +4292,12 @@ char* tree2bucket (NT_node T, Sequence *S, int N, char *method)
     {
       name=vtmpnam (NULL);
     }
+  lu4t2b=(int*)vcalloc (S->nseq, sizeof (int));
+  lun4t2b=0;
+  
   tree2bucketR(T, S, N, method, name);
   if (method && !strm (method, "seq"))display_file_content (stdout, name);
+  vfree (lu4t2b);
   return name;
 }      
 
@@ -4318,11 +4310,11 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
   char *seq;
   int do_aln;
   
-
   if (!method || strm (method, "seq"))do_aln=0;
   else do_aln=1;
   
-  if (T->leaf)return NULL;
+  T->leaf=0;
+  if (!T || T->isseq)return NULL;
   
   CL=(NT_node*)vcalloc (1, sizeof (NT_node));
   cn=0;CL[cn++]=T;
@@ -4337,13 +4329,14 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
 	{
 	  
 	  NT_node N=CL[left];
-	  if (N->leaf){NL[nn++]=N;}
+	  if (N->isseq){NL[nn++]=N;}
 	  else
 	    {
 	      NL[nn++]=N->left;
 	      NL[nn++]=N->right;
 	      terminal=0;
 	    }
+	  T->leaf++;
 	}
       vfree (CL);
       CL=NL;
@@ -4355,19 +4348,22 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
   for (a=0; a<cn; a++)
     {
       int s=CL[a]->seq;
-      fprintf (fp, ">%s leaf:%d\n%s\n", S->name[s],CL[a]->leaf,S->seq[s]);
-  
+      if (!lu4t2b[s])
+	{
+	  lu4t2b[s]=1;
+	  lun4t2b++;
+	}
+      fprintf (fp, ">%s leaf:%d\n%s\n", S->name[s],CL[a]->isseq,S->seq[s]);
     }
   vfclose (fp);
   if (!do_aln)
     {
-      fprintf ( stderr, "Output File %s that Contain %d Sequences -- FASTA\n", name,nn);
+      fprintf ( stderr, "Output File %20s containing %5d Sequences -- FASTA\n", name,nn);
       printf_system_direct ("mv %s %s", seq, name);
     }
   else
     {
       seq_file2msa_file (method,seq, name);
-      //seq2cw_aln_file (seq,name);
     }
     
   
@@ -4386,9 +4382,12 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
 	  
 	  if (tree2bucketR (CL[a],S,N,method, nname) && !strm (method, "seq"))
 	    {
-	      fprintf ( stderr, "\nMERGE %s using %s", (CL[a])->name, method);
+	      T->leaf+=(CL[a])->leaf-1;
+	      
+	      fprintf ( stderr, "\n## T-Coffee dpa -- %4d %% Complete -- MERGE %30s using %s",(lun4t2b*100)/S->nseq, (CL[a])->name, method);
 	      thread_msa2msa (nname,name,(CL[a])->name);
 	    }
+	  
 	}
       if (!do_aln)vfree (nname);
     }

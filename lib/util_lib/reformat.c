@@ -969,6 +969,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	  {
 	   
 	    D->T=main_read_tree (in_file);
+
 	    D->S=tree2seq(D->T, NULL);
 	    D->A=seq2aln (D->S,D->A, 0);
 	  }

@@ -113,7 +113,7 @@ static int run_other_pg (int argc, char *argv[]);
 
 static Sequence* prepare_master (char *seq,Sequence *S,Constraint_list *CL, char *dmode);
 char ** km_coffee (int argc, char **argv);
-
+Alignment * t_coffee_dpa (int argc, char **argv);
 Alignment *kmir(Alignment *A);
 int fastal_main(int argc, char **argv); //this function was declared in fastal.c
 
@@ -684,17 +684,42 @@ int batch_main ( int argc, char **argv)
 			    /*Min_value*/ "any"          ,		\
 			    /*Max Value*/ "any"				\
 					  );
+	       /*PARAMETER PROTOTYPE:    INFILE    */
+	       declare_name (type);
+	       get_cl_param(					\
+			    /*argc*/      argc           ,	\
+			    /*argv*/      argv           ,	\
+			    /*output*/    &le            ,	\
+			    /*Name*/      "-dpa"        ,	\
+			    /*Flag*/      &dpa       ,	\
+			    /*TYPE*/      "FL"            ,	\
+			    /*OPTIONAL?*/ OPTIONAL       ,	\
+			    /*MAX Nval*/  1              ,		\
+			    /*DOC*/       "Run DPA mode"           , \
+			    /*Parameter*/ &dpa          ,		\
+			    /*Def 1*/    "0"              ,		\
+			    /*Def 2*/    "1"              ,		\
+			    /*Min_value*/ "any"          ,		\
+			    /*Max Value*/ "any"				\
+					  );
+	       
+	       
+	       /**
+		* Load T-Coffee default parameters.
+		* Next, decide whether a special mode of T_Coffee has been called and load the
+		* corresponing parameters from a function. Here's an example:
+		* \code
+		* else if ( strm (special_mode, "psicoffee")) new_arg = get_psicoffee_defaults( NULL,lseq_type );
+		* \endcode
+		*
+		*/
+	       
+	       
+if (dpa)t_coffee_dpa (argc, argv);
 
 
-	   /**
-		  * Load T-Coffee default parameters.
-		  * Next, decide whether a special mode of T_Coffee has been called and load the
-		  * corresponing parameters from a function. Here's an example:
-		  * \code
-		  * else if ( strm (special_mode, "psicoffee")) new_arg = get_psicoffee_defaults( NULL,lseq_type );
-		  * \endcode
-		  *
-		 */
+
+
 
 /* extra>prompt>special>parameters>defaults*/
  argv=break_list ( argv, &argc, "=;, \n");
@@ -738,7 +763,8 @@ if (t_coffee_defaults_flag)
 
  if ( parameters && parameters[0])argv=push_string (file2string (parameters), argv, &argc, 1);
 
-
+ 
+ 
  if (n_special_mode && !type_only)
    {
      char *special_mode;
@@ -759,6 +785,7 @@ if (t_coffee_defaults_flag)
 
 
 	 if (special_mode && !special_mode[0]);
+	 
 	 else if ( strm (special_mode, "genepredx"))new_arg=get_genepredx_defaults(NULL,lseq_type);
 	 else if ( strm (special_mode, "genepredpx"))new_arg=get_genepredpx_defaults(NULL,lseq_type);
 
@@ -6366,57 +6393,57 @@ char** km_coffee (int argc, char **argv)
 	for (a=0; a<argc; a++)
 	{
 		if ( strm (argv[a], "-seq"))
-		{
-			seq_f=argv[++a];
-	    }
-
+		  {
+		    seq_f=argv[++a];
+		  }
+		
 		else if ( strm (argv[a], "-mode"))
-			{++a;}
+		  {++a;}
 		else if ( strm (argv[a], "-km_mode"))
-			{km_mode=argv[++a];}
+		  {km_mode=argv[++a];}
 		else if ( strm (argv[a], "-km_k"))
-			{k=atoi (argv[++a]);}
+		  {k=atoi (argv[++a]);}
 		else if ( strm (argv[a], "-km_tree"))
-			{km_tree=argv[++a];}
+		  {km_tree=argv[++a];}
 		else if ( strm (argv[a], "-km_nit"))
-			{nit=atoi (argv[++a]);}
+		  {nit=atoi (argv[++a]);}
 		else if ( strm (argv[a], "-km_kl"))
-			{k_leaf=atoi (argv[++a]);}
+		  {k_leaf=atoi (argv[++a]);}
 		else if ( strm (argv[a], "-gapopen"))
-			{gapopen=atoi (argv[++a]);
-		new_argv[new_argc++]=argv[a-1];
-		new_argv[new_argc++]=argv[a];
-			}
+		  {gapopen=atoi (argv[++a]);
+		    new_argv[new_argc++]=argv[a-1];
+		    new_argv[new_argc++]=argv[a];
+		  }
 		else if ( strm (argv[a], "-gapext"))
-			{gapext=atoi (argv[++a]);
-		new_argv[new_argc++]=argv[a-1];
-		new_argv[new_argc++]=argv[a];
-			}
+		  {gapext=atoi (argv[++a]);
+		    new_argv[new_argc++]=argv[a-1];
+		    new_argv[new_argc++]=argv[a];
+		  }
 		else if ( strm (argv[a], "-tree_mode"))
-			{tm=argv[++a];}
+		  {tm=argv[++a];}
 		else if ( strm (argv[a], "-km_method"))
-			{method=argv[++a];}
+		  {method=argv[++a];}
 		else if ( strm (argv[a], "-km_init"))
-			{km_init=argv[++a];}
+		  {km_init=argv[++a];}
 		else if ( strm (argv[a], "-n_core"))
-		{
-			n_core =atoi (argv[++a]);
-			new_argv[new_argc++]=argv[a-1];
-			new_argv[new_argc++]=argv[a];
-		}
+		  {
+		    n_core =atoi (argv[++a]);
+		    new_argv[new_argc++]=argv[a-1];
+		    new_argv[new_argc++]=argv[a];
+		  }
 		else if ( strm (argv[a], "-outfile"))
-		{
-			out_f=argv[++a];
-			new_argv[new_argc++]=argv[a-1];
-			new_argv[new_argc++]=argv[a];
-		}
-	  else
-	    {
-	      new_argv[new_argc++]=argv[a];
-	    }
-
+		  {
+		    out_f=argv[++a];
+		    new_argv[new_argc++]=argv[a-1];
+		    new_argv[new_argc++]=argv[a];
+		  }
+		else
+		  {
+		    new_argv[new_argc++]=argv[a];
+		  }
+		
 	}
-
+	
 	
 	//Set the default values
 	if (!out_f){declare_name(out_f);sprintf (out_f, "%s.aln", seq_f);}
@@ -6851,12 +6878,10 @@ Alignment * km_coffee_align2 (Sequence *S, char *km_tree, int k, int argc, char 
 	char *km_tree2=vtmpnam (NULL);
 	NT_node T;
 	if (strm (km_tree, "kmeans")){
-		seq2km_tree (S, km_tree2);}
-	else if (strm (km_tree, "cotree"))
-		seq2co_tree (S, km_tree2);
+		seq2km_tree_old (S, km_tree2);}
 	else if (!km_tree)
 	{
-		seq2km_tree (S, km_tree2);
+		seq2km_tree_old (S, km_tree2);
 	}
 	T=main_read_tree (km_tree2);
 	tree_aln_N(T,S, k, argc, argv);
@@ -6886,12 +6911,10 @@ Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, in
   
 
   if (strm (km_tree, "kmeans")){
-    seq2km_tree (S, km_tree2);}
-  else if (strm (km_tree, "cotree"))
-    seq2co_tree (S, km_tree2);
+    seq2km_tree_old (S, km_tree2);}
   else if (!km_tree)
     {
-      seq2km_tree (S, km_tree2);
+      seq2km_tree_old (S, km_tree2);
     }
   else if (check_file_exists (km_tree))
     {
@@ -6910,6 +6933,159 @@ Alignment * km_coffee_align3 (Sequence *S, char *km_tree, int k, char *out_f, in
   printf_system ("mv %s %s", T->alfile, out_f);
   display_output_filename(stdout,"MSA","ALN",out_f, CHECK);
   fprintf (stdout, "\n\n");
+  myexit (EXIT_SUCCESS);
+  return NULL;
+}
+
+Alignment * t_coffee_dpa (int argc, char **argv)
+{
+  NT_node T;
+  Sequence *S;
+  char *seqfile=NULL;
+  char *dpa_tree=NULL;
+  char *usetree=NULL;
+  char *newtree=NULL;
+  char *outfile=NULL;
+  char *alnfile=NULL;
+  int dpa_nseq=0;
+  char *dpa_aligner=NULL;
+  char *command;
+  char *run_name=NULL;
+  Fname *F=NULL;
+  int a;
+  
+  command=(char*)vcalloc (10000, sizeof (char));
+  sprintf ( command, "#");
+  
+  for (a=0; a<argc; a++)
+    {
+      if      (strm (argv[a], "-seq" ))
+	{
+	  seqfile=argv[++a];
+	  S=main_read_seq (seqfile);
+	}
+      
+      else if (strm (argv[a],"-dpa_tree"))
+	{
+	  dpa_tree=argv[++a];
+	}
+      else if (strm (argv[a],"-dpa"));
+      else if (strm (argv[a],"-usetree"))
+	{
+	  usetree=argv[++a];
+	}
+      else if (strm (argv[a],"-newtree"))
+	{
+	  newtree=argv[++a];
+	}
+      else if (strm (argv[a],"-run_name"))
+	{
+	  run_name=argv[++a];
+	}
+      else if (strm (argv[a],"-outfile"))
+	{
+	  outfile=argv[++a];
+	}
+      else if (strm (argv[a],"-dpa_nseq"))
+	{
+	  dpa_nseq=atoi(argv[++a]);
+	}
+      else if ( strm (argv[a], "-dpa_method"))
+	{
+	  dpa_aligner=argv[++a];
+	}
+      else if (strm (argv[a],"-output") || strm (argv[a],"-in") || strm (argv[a],"-infile"))
+	{
+	  myexit (fprintf_error (stderr, "%s is not supported when using -dpa [FATAL:%s]", argv[a],PROGRAM));
+	}
+      
+      else
+	command=strcatf (command,"%s ", argv[a]);
+    }
+  
+  
+  //prepare the aligner CL
+  if (dpa_aligner)sprintf ( command, "%s", dpa_aligner);
+  
+  
+  //check Sequences are here
+  if (!S)
+    myexit (fprintf_error ( stderr, "\nERROR: When using dpa, sequences must be provided via -seq [FATAL:%s]", PROGRAM));
+  
+  //prepare the guide tree
+  if (dpa_tree)
+    {
+      
+      if (strm (dpa_tree, "kmeans"))
+	{
+	  T=seq2km_tree (S);
+	}
+      else if (strm (dpa_tree, "cotree"))
+	{
+	  T=seq2co_tree (S);
+	}
+      else if (strm (dpa_tree, "cwtree"))
+	{
+	  T=seq2cw_dnd (S);
+	}
+      
+      else if (check_file_exists (dpa_tree))
+	{
+	  T=main_read_tree (dpa_tree);
+	}
+      else
+	myexit (fprintf_error (stderr, "%s is neither a guide tree nor a valid dpa_tree mode [FATAL:%s]", dpa_tree,PROGRAM));
+      
+    }
+  else if (usetree)
+    {
+      if (!check_file_exists (usetree))myexit (fprintf_error (stderr, "%s is not a valid file [FATAL:%s]",usetree,PROGRAM));
+      T=main_read_tree (usetree);
+      
+    }
+  else
+    {
+      T=seq2km_tree (S);
+    }
+     
+  
+  //decide on bucket sizes
+  if (dpa_nseq==0)dpa_nseq=30;
+  
+  //prepare the tree
+  
+  //run the alignment
+  T=node2master (T, S);
+  alnfile=tree2bucket (T,S,dpa_nseq,command);
+  
+  //figure out the name
+  F=parse_fname(seqfile);
+  if (run_name){vfree(F->name); F->name=run_name;F->path[0]='\0';}
+  
+  //output the MSA
+  if (!outfile)
+    {
+      outfile=(char*)vcalloc ( 1000, sizeof (char));
+      sprintf (outfile, "%s.aln", F->name);
+    }
+  printf_system ("mv %s %s", alnfile, outfile);
+  display_output_filename (stderr, "MSA","fasta",outfile, CHECK);
+ 
+  
+  //output The tree
+  if (!newtree)
+    {
+      newtree=(char*)vcalloc ( 1000, sizeof (char));
+      sprintf (newtree, "%s.dnd", F->name);
+    }
+  print_newick_tree (T,newtree);
+  display_output_filename (stderr, "TREE","newick",newtree, CHECK);
+
+  //terminate
+  fprintf (stderr,"\n\n");
+  print_command_line (stderr);
+  print_program_information (stderr, NULL);
+  fprintf ( stderr, "\n");
   myexit (EXIT_SUCCESS);
   return NULL;
 }

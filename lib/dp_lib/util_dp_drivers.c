@@ -919,31 +919,43 @@ Alignment *seq2msa (char *method,Sequence *S)
 char *seq_file2msa_file (char *file, char *seq, char *aln)
 {
   TC_method *method;
-
+  char *command;
+  int free=0;
+  
   if (!aln)aln=vtmpnam (NULL);
-  if ( !check_file_exists (file))
+  if (!file) return NULL;
+  else if (file[0]=='#')
+    {
+      //will run the T-Coffee master command
+      command=(char*)vcalloc ( strlen (file)+1000, sizeof (char));
+      sprintf (command, "%s -seq seq -outfile aln -output fasta_aln -quiet", file+1);
+      free=1;
+    }
+  else if ( !check_file_exists (file))
     {
       char *m=method_name2method_file(file);
       if (!m)printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is an unknown method [FATAL]", file);
       
       method=method_file2TC_method(m);
-      //vfree (m);
+      command=make_aln_command (method,"seq", "aln");
+      
     }
   else
-    method=method_file2TC_method(file);
-  
+    {
+      method=method_file2TC_method(file);
+      command=make_aln_command (method,"seq", "aln");
+    }
   
   if (method)
     {
-      char * command=make_aln_command (method,"seq", "aln");
       char *dir =vtmpnam (NULL);
       char *cdir=get_pwd (NULL);
       my_mkdir (dir);
       
-      //HERE ("%s", command);
       chdir (dir);
       printf_system ("cp %s seq", seq);
-      printf_system ("%s >/dev/null 2>/dev/null", command);
+      
+      printf_system ("%s", command);
       
       
       printf_system ("cp aln %s",aln);
@@ -956,7 +968,7 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
     {
       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is an unknown method [FATAL]", file);
     }
-  //vfree (method);
+  if (free)vfree (command);
   return aln;
 }
 
@@ -2739,7 +2751,7 @@ NT_node ** make_tree ( Alignment *A,Constraint_list *CL,int gop, int gep,Sequenc
 	
 	else if (strm (CL->tree_mode, "kmeans"))
 	  {
-	    return seq2km_tree (S, tree_file);
+	    return seq2km_tree_old (S, tree_file);
 	  }
 	else if (strm ( CL->tree_mode, "upgma") || strm ( CL->tree_mode, "nj"))
 	  {

@@ -208,30 +208,7 @@ char* prf_pair2cw_aln_file (char *prf1,char *prf2, char *out)
   
   return out;
 }
-NT_node seq2cw_dnd ( Sequence *S)
-{
-  Alignment *A;
-  int tot_node=0;
-  NT_node T;
-  char *dir =vtmpnam (NULL);
-  char *cdir=get_pwd (NULL);
 
-  my_mkdir (dir);
-  chdir (dir);
-  
-  A=seq2clustalw_aln (S);
-  output_fasta_aln ("aln", A);
-  
-  printf_system_direct ("clustalw -infile=aln -newtree=tree -tree %s",TO_NULL_DEVICE);
-  T=main_read_tree ("tree");
-
-  chdir    (cdir);
-  printf_system_direct ("rm %s/*", dir);
-  my_rmdir (dir);
-  
-  vfree (cdir);
-  return T;
-}
 
 NT_node ** make_upgma_tree (  Alignment *A,int **distances,int gop, int gep, char **out_seq, char **out_seq_name, int out_nseq, char *tree_file, char *tree_mode)
   {
@@ -1607,25 +1584,90 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
   
   return v;
 }
-
-NT_node ** seq2co_tree (Sequence *S, char *tree)
+NT_node seq2cw_dnd ( Sequence *S)
 {
-  static char *seq;
-  int tot_node;
-  char buf[1000000];
+  Alignment *A;
+  int tot_node=0;
+  NT_node T;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+
+  my_mkdir (dir);
+  chdir (dir);
+  output_fasta_seqS ("seq",S);
+  printf_system_direct ("clustalw -infile=seq %s",TO_NULL_DEVICE);
+  T=main_read_tree ("seq.dnd");
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  
+  vfree (cdir);
+  return T;
+}
+
+NT_node compute_cw_tree (Alignment *A)
+{
+  return aln2cw_tree (A);
+}
+NT_node aln2cw_tree (Alignment *A)
+{
+  NT_node T;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+
+  my_mkdir (dir);
+  chdir (dir);
+  output_fasta_aln ("aln", A);
+  printf_system_direct ("clustalw -infile=aln -newtree=tree -tree %s",TO_NULL_DEVICE);
+  T=main_read_tree ("tree");
+
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  
+  vfree (cdir);
+  return T;
+}
+NT_node seq2cw_tree ( Sequence *S)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node T;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+
+  my_mkdir (dir);
+  chdir (dir);
+  
+  A=seq2clustalw_aln (S);
+  output_fasta_aln ("aln", A);
+  
+  printf_system_direct ("clustalw -infile=aln -newtree=tree -tree %s",TO_NULL_DEVICE);
+  T=main_read_tree ("tree");
+
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  
+  vfree (cdir);
+  return T;
+}
+
+NT_node seq2co_tree (Sequence *S)
+{
+  char *seq=vtmpnam  (NULL);
+  char *tree=vtmpnam (NULL);
   
   fprintf ( stderr, "\n-----Compute ClustalOmega Tree: [Start----");
   if (!tree)tree=vtmpnam (NULL);
   if (!seq)seq=vtmpnam (NULL);
   output_fasta_simple (seq, S);
   
-  //sprintf (buf, "clustalo --in %s --guidetree-out %s --force>/dev/null 2>/dev/null", seq,tree);
-  //system (buf);
-  
   printf_system ("clustalo --in %s --guidetree-out %s --force>/dev/null 2>/dev/null", seq,tree);
   fprintf ( stderr, "Done]\n");
-  return read_tree (tree, &tot_node, S->nseq, S->name);
+  return main_read_tree(tree);
 }
+
 
 static float tid;
 static float tpairs;
@@ -1633,8 +1675,18 @@ static int tprint;
 static int km_node;
 static float km_tbootstrap;
 static float km_tnode;
-
-NT_node ** seq2km_tree (Sequence *S, char *file)
+NT_node seq2km_tree (Sequence *S)
+{
+  int tot_node;
+  NT_node T;
+  
+  Alignment *A;
+  A=seq2aln(S,NULL,RM_GAP);
+  T=aln2km_tree (A, "triaa", 1);
+  free_aln (A);
+  return T;
+  }
+NT_node ** seq2km_tree_old (Sequence *S, char *file)
 {
   int tot_node;
   NT_node T;
@@ -1642,10 +1694,11 @@ NT_node ** seq2km_tree (Sequence *S, char *file)
   Alignment *A;
   A=seq2aln(S,NULL,RM_GAP);
   T=aln2km_tree (A, "triaa", 1);
+  
   free_aln (A);
   if (!file)file=vtmpnam (NULL);
   vfclose (print_tree (T, "newick", vfopen (file, "w")));
-  
+  exit (0);
   
   return read_tree (file, &tot_node, S->nseq, S->name);
 }

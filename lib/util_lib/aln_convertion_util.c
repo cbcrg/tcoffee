@@ -13841,13 +13841,10 @@ char *msa2master_seq (Alignment *A, int seq)
 	  for (s=0; s<A->nseq; s++)
 	    {
 	      char r=A->seq_al[s][c];
-	      if (!is_gap (r))
-		{
-		  aa[r]++;
-		  if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}
-		}
+	      aa[r]++;
+	      if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}
 	    }
-	  master[c]=best_aa;
+	  master[c]=(best_aa=='-')?'x':best_aa;
 	}
     }
   
