@@ -13842,12 +13842,13 @@ char *msa2master_seq (Alignment *A, int seq)
 	    {
 	      
 	      char r=A->seq_al[s][c];
-	      if (r!='1')
+	      if (r!='1')//allow gaps in the cinsensus -> they get turned into X
 		{
 		  aa[r]++;
 		  if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}
 		}
 	    }
+
 	  master[c]=(best_aa=='-')?'x':best_aa;
 	}
     }
@@ -13876,6 +13877,7 @@ int thread_msa2msa(char *small, char *big, char *seq)
   bseq=msa2master_seq (B, Bi);
   
   M=align_two_sequences4dpa (sseq,S->seq_al[Si],bseq,B->seq_al[Bi],"blosum62mt",-4,-1, "myers_miller_pair_wise");
+  
     
   add_msa (S,-1,M->seq_al[0],big, "w");
   add_msa (B,Bi,M->seq_al[2],big, "a");

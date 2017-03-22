@@ -4357,7 +4357,7 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, cha
 	  lun4t2b++;
 	}
       if ( debug==0)fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
-      else fprintf (fp, ">%sLeaf %d\n%s\n", S->name[s],a+1,S->seq[s]);
+      else fprintf (fp, ">%s Leaf %d\n%s\n", S->name[s],a+1,S->seq[s]);
     }
   vfclose (fp);
   if (!do_aln)
