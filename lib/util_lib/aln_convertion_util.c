@@ -13840,9 +13840,13 @@ char *msa2master_seq (Alignment *A, int seq)
 	  for (a=0; a<256; a++)aa[a]=0;
 	  for (s=0; s<A->nseq; s++)
 	    {
+	      
 	      char r=A->seq_al[s][c];
-	      aa[r]++;
-	      if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}
+	      if (r!='1')
+		{
+		  aa[r]++;
+		  if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}
+		}
 	    }
 	  master[c]=(best_aa=='-')?'x':best_aa;
 	}
@@ -13871,10 +13875,10 @@ int thread_msa2msa(char *small, char *big, char *seq)
   sseq=msa2master_seq (S, Si);
   bseq=msa2master_seq (B, Bi);
   
-  M=align_two_sequences (sseq,bseq,"blosum62mt",-4,-1, "myers_miller_pair_wise");
+  M=align_two_sequences4dpa (sseq,S->seq_al[Si],bseq,B->seq_al[Bi],"blosum62mt",-4,-1, "myers_miller_pair_wise");
     
   add_msa (S,-1,M->seq_al[0],big, "w");
-  add_msa (B,Bi,M->seq_al[1],big, "a");
+  add_msa (B,Bi,M->seq_al[2],big, "a");
     
   vfree (sseq);vfree (bseq);
   return 1;

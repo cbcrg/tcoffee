@@ -7005,8 +7005,11 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   
   
   //prepare the aligner CL
-  if (dpa_aligner)sprintf ( command, "%s", dpa_aligner);
-  
+  if (dpa_aligner)
+    {
+      command=(char*)vcalloc (10000, sizeof (char));
+      sprintf ( command, "%s", dpa_aligner);
+    }
   
   //check Sequences are here
   if (!S)

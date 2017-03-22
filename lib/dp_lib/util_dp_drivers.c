@@ -2604,6 +2604,106 @@ void toggle_case_in_align_two_sequences(int value)
   align_two_seq_keep_case=value;
 }
 
+Alignment * align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2, char *gapped2, char *in_matrix, int gop, int gep, char *in_align_mode)
+{
+	static Alignment *A;
+	Constraint_list *CL;
+	Sequence *S;
+
+	int *ns;
+	int **l_s;
+
+	char       **seq_array;
+	char       **name_array;
+	static char *matrix;
+	static int  **M;
+
+	static char *align_mode;
+	int a;
+
+	if (!matrix)matrix=(char*)vcalloc ( 100, sizeof (char));
+	if (!align_mode)align_mode=(char*)vcalloc ( 100, sizeof (char));
+	sprintf ( align_mode, "%s", in_align_mode);
+
+	CL=(Constraint_list*)vcalloc ( 1, sizeof (Constraint_list));
+
+	CL->pw_parameters_set=1;
+
+	CL->matrices_list=declare_char (10, 10);
+
+
+	if ( !strm (matrix, in_matrix))
+	  {
+	    sprintf ( matrix,"%s", in_matrix);
+	    M=CL->M=read_matrice (matrix);
+
+	  }
+	else
+	  {
+	    CL->M=M;
+	  }
+
+	if (strstr (in_align_mode, "cdna"))
+	  CL->evaluate_residue_pair=evaluate_cdna_matrix_score;
+	else
+	  CL->evaluate_residue_pair=evaluate_matrix_score;
+
+	CL->get_dp_cost=get_dp_cost4dpa;
+	CL->extend_jit=0;
+	CL->maximise=1;
+	CL->gop=gop;
+	CL->gep=gep;
+	CL->TG_MODE=2;
+	sprintf (CL->matrix_for_aa_group, "vasiliky");
+	CL->use_fragments=0;
+	CL->ktup=3;
+	if ( !CL->use_fragments)CL->diagonal_threshold=0;
+	else CL->diagonal_threshold=6;
+
+	sprintf (CL->dp_mode, "%s", align_mode);
+
+	seq_array=declare_char ( 4, MAX(strlen(gapped1), strlen (gapped2))+1);
+	sprintf (seq_array[0], "%s",padded1);
+	sprintf (seq_array[1], "%s",gapped1);
+	
+	sprintf (seq_array[2],"%s", padded2);
+	sprintf (seq_array[3], "%s",gapped2);
+	string_array_lower(seq_array,4);
+
+	name_array=declare_char (4, STRING);
+	sprintf ( name_array[0], "paddedA");
+	sprintf ( name_array[1], "gappedA");
+	
+	sprintf ( name_array[2], "paddedB");
+	sprintf ( name_array[3], "gappedB");
+
+	ns=(int*)vcalloc ( 2, sizeof(int));
+	l_s=declare_int ( 2, 2);
+	ns[0]=ns[1]=2;
+	l_s[0][0]=0;
+	l_s[0][1]=1;
+	
+	l_s[1][0]=2;
+	l_s[1][1]=3;
+	
+
+	
+	CL->S=fill_sequence_struc(4, seq_array, name_array, NULL);
+	
+	A=seq2aln(CL->S, NULL, 1);
+	for (a=0; a<4; a++)sprintf (A->seq_al[a], "%s", seq_array[a]);
+	A->score_aln=pair_wise (A, ns, l_s,CL);
+
+	vfree (ns);
+	free_int (l_s, -1);
+	free_char (name_array, -1);free_char ( seq_array,-1);
+
+	CL->M=NULL;
+        S=free_constraint_list (CL);
+	free_sequence (S,-1);
+	A->S=NULL;
+	return A;
+}
 
 
 

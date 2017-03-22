@@ -4031,6 +4031,7 @@ int evaluate_monoaa_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, 
 	    else return 0;
 	    }
       return 0;}
+
 int evaluate_matrix_score ( Constraint_list *CL, int s1, int r1, int s2, int r2)
     {
 
@@ -5394,6 +5395,38 @@ int get_dp_cost_quadruplet ( Alignment *A, int**pos1, int ns1, int*list1, int co
 	 
 	  return (score==UNDEFINED)?UNDEFINED:(score-SCORE_K*CL->nomatch);
 	}  
+
+int get_dp_cost4dpa ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
+        {
+	  //0- >filled master1 
+	  //1 ->gapped master 1
+	  //2 ->filled master 2
+	  //3 ->gapped master 2
+	  int r1, r2, r11, r22;
+	  
+	  if (A==NULL)return 0;
+	  
+	  r1 =pos1[0][col1]-1;
+	  r11=pos1[1][col1]-1;
+	  
+	  r2 =pos2[2][col2]-1;
+	  r22=pos2[3][col2]-1;
+	  
+	  
+	  if ( r11>=0 || r22>=0)
+	    {
+	      if (r11==r22)return 1000*SCORE_K;
+	      else return -1000*SCORE_K;
+	    }
+	  else 
+	    {
+	      char res1=tolower(A->seq_al[0][col1]);
+	      char res2=tolower(A->seq_al[2][col2]);
+	      if (res1=='x' || res2 =='x') return 0; 
+	      else return  CL->M[res1-'A'][res2-'A']*SCORE_K;
+	    }
+	}
+
 int get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**pos2, int ns2, int*list2, int col2, Constraint_list *CL)
         {
 	int MODE=0;
@@ -5414,6 +5447,7 @@ int get_dp_cost ( Alignment *A, int**pos1, int ns1, int*list1, int col1, int**po
 
 	return (score==UNDEFINED)?UNDEFINED:(score-SCORE_K*CL->nomatch);
 	}
+
 int ***make_cw_lu (int **cons, int l, Constraint_list *CL);
 int ***make_cw_lu (int **cons, int l, Constraint_list *CL)
 {

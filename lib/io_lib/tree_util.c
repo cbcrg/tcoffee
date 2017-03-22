@@ -4248,6 +4248,7 @@ NT_node node2master(NT_node T, Sequence *S)
 	  
 	  int ll=strlen (S->seq[L->seq]);
 	  int lr=strlen (S->seq[R->seq]);
+	  
 	  if ((!pl &&!pr) || (pl && pr))
 	    {
 	      if (ll>lr)R=L;
@@ -4277,7 +4278,7 @@ int test_tree2bucket(NT_node T, Sequence *S,char *name, int N)
     }
   return 0;
 }
-char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name);
+char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, char *name2);
 static int *lu4t2b;
 static int lun4t2b;
 char* tree2bucket (NT_node T, Sequence *S, int N, char *method)
@@ -4295,13 +4296,13 @@ char* tree2bucket (NT_node T, Sequence *S, int N, char *method)
   lu4t2b=(int*)vcalloc (S->nseq, sizeof (int));
   lun4t2b=0;
   
-  tree2bucketR(T, S, N, method, name);
+  tree2bucketR(T, S, N, method, name, "1");
   if (method && !strm (method, "seq"))display_file_content (stdout, name);
   vfree (lu4t2b);
   return name;
 }      
 
-char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
+char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, char *name2)
 {
   int terminal=0;
   NT_node *CL, *NL;
@@ -4309,7 +4310,9 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
   FILE *fp;
   char *seq;
   int do_aln;
+  int debug=0;
   
+  if (getenv ("DEBUG_DPA"))debug=1;
   if (!method || strm (method, "seq"))do_aln=0;
   else do_aln=1;
   
@@ -4353,7 +4356,8 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
 	  lu4t2b[s]=1;
 	  lun4t2b++;
 	}
-      fprintf (fp, ">%s leaf:%d\n%s\n", S->name[s],CL[a]->isseq,S->seq[s]);
+      if ( debug==0)fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+      else fprintf (fp, ">%sLeaf %d\n%s\n", S->name[s],a+1,S->seq[s]);
     }
   vfclose (fp);
   if (!do_aln)
@@ -4364,13 +4368,18 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
   else
     {
       seq_file2msa_file (method,seq, name);
+      if (debug)
+	{
+	  HERE ("\n------> %s\n", name2);
+	  printf_system ("cp %s %s", name, name2);
+	}
     }
     
   
   if (!terminal)
     {
       char *nname;
-
+      char *nname2=(char*)vcalloc (strlen (name) +1000, sizeof (char));
       if (!do_aln)
 	nname=(char*)vcalloc (strlen (name) +1000, sizeof (char));
       else
@@ -4379,8 +4388,8 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
       for (a=0; a< cn; a++)
 	{
 	  if (!do_aln)sprintf (nname, "%s.%d",name, a+1);
-	  
-	  if (tree2bucketR (CL[a],S,N,method, nname) && !strm (method, "seq"))
+	  sprintf (nname2, "%s.%d",name2, a+1);
+	  if (tree2bucketR (CL[a],S,N,method, nname, nname2) && !strm (method, "seq"))
 	    {
 	      T->leaf+=(CL[a])->leaf-1;
 	      
@@ -4389,6 +4398,7 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name)
 	    }
 	  
 	}
+      vfree (nname2);
       if (!do_aln)vfree (nname);
     }
   vfree (CL);

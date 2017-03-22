@@ -331,16 +331,3 @@ int diff (Alignment *A, int *ns, int **ls, int s1, int M,int s2, int N , int tb,
   }       
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
