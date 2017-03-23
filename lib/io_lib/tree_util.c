@@ -4266,10 +4266,15 @@ float *seq2dpa_weight (Sequence *S, char *mode)
 	}
     }
   
-  else if (strm (mode, "diaa") || strm (mode, "triaa"))
+  else if (strm (mode, "diaa") || strm (mode, "triaa")||strm (mode, "idiaa") || strm (mode, "itriaa") )
     {
       int mdim=26*26;
       double **v;
+      int invert;
+      
+      if (mode[0]=='i'){mode++;invert=1;}
+      else invert=-1;
+      
       if (strm (mode, "triaa"))mdim*=26;
       
       v=declare_double (S->nseq+1,mdim+4);
@@ -4295,7 +4300,7 @@ float *seq2dpa_weight (Sequence *S, char *mode)
 	      
 	      d+=(v[a][b]-v[S->nseq][b])*(v[a][b]-v[S->nseq][b]);
 	    }
-	  w[a]=-(float)sqrt(d);
+	  w[a]=(float)invert*(float)sqrt(d);
 	  
 	}
       free_double (v, -1);
