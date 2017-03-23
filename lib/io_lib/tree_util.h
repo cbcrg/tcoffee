@@ -124,7 +124,8 @@ void display_node (NT_node N, char *string,int nseq);
 NT_node index_tree_node    (NT_node T);
 NT_node simple_recode_tree (NT_node T, int nseq);
 NT_node recode_tree ( NT_node T, Sequence *S);
-NT_node node2master(NT_node T, Sequence *S);
+float *seq2dpa_weight (Sequence *S, char *mode);
+NT_node node2master(NT_node T, Sequence *S, float *weight);
 char *tree2bucket (NT_node T, Sequence *S, int N, char *method);
 
 int compare_branch2 ( int *b1, int *b2, int n);

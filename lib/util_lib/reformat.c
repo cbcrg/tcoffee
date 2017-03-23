@@ -11443,8 +11443,8 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 }
        else if ( strm(action, "tree2bucket") )
 	 {
-	   
-	   node2master (D2->T, D1->S);
+	   float *weight=seq2dpa_weight (D1->S, NULL);
+	   node2master (D2->T, D1->S, weight);
 	   
 	   tree2bucket (D2->T, D1->S,ATOI_ACTION(1), ACTION(2));
 	   myexit (EXIT_SUCCESS);

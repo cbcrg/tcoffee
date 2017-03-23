@@ -13842,7 +13842,7 @@ char *msa2master_seq (Alignment *A, int seq)
 	    {
 	      
 	      char r=A->seq_al[s][c];
-	      if (r!='1')//allow gaps in the cinsensus -> they get turned into X
+	      if (r!='1')//allow gaps in the consensus -> they get turned into X
 		{
 		  aa[r]++;
 		  if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}

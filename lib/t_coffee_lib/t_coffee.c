@@ -6947,11 +6947,13 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   char *newtree=NULL;
   char *outfile=NULL;
   char *alnfile=NULL;
+  char *dpa_weight=NULL;
   int dpa_nseq=0;
   char *dpa_aligner=NULL;
   char *command;
   char *run_name=NULL;
   Fname *F=NULL;
+  float *w;
   int a;
   
   command=(char*)vcalloc (10000, sizeof (char));
@@ -6968,6 +6970,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       else if (strm (argv[a],"-dpa_tree"))
 	{
 	  dpa_tree=argv[++a];
+	}
+      else if (strm (argv[a],"-dpa_weight"))
+	{
+	  dpa_weight=argv[++a];
 	}
       else if (strm (argv[a],"-dpa"));
       else if (strm (argv[a],"-usetree"))
@@ -7055,10 +7061,12 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //decide on bucket sizes
   if (dpa_nseq==0)dpa_nseq=30;
   
-  //prepare the tree
+  //get the weight
+  HERE ("%s",dpa_weight);
+  w=seq2dpa_weight (S, dpa_weight);
   
   //run the alignment
-  T=node2master (T, S);
+  T=node2master (T, S, w);
   alnfile=tree2bucket (T,S,dpa_nseq,command);
   
   //figure out the name
