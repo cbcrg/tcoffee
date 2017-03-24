@@ -1375,8 +1375,64 @@ static Alignment *KA;
 NT_node expand_km_node (NT_node T,int n, char **name, int dim, double **V);
 
 
-  
-    
+double **vector2strip_vector (double**v, int n, int *dim, float frac)
+{
+  int mdim=dim[0];
+  dim[0]=0;
+  HERE ("Mdim=%d", mdim);
+  if (!v || !n || !mdim || frac<0.0000001);
+  else
+    {
+      int a, b;
+      double **v2, tsd,tsdmax;
+      double  **sd;
+      sd=declare_double    (mdim,2);
+      tsd=0;
+      HERE ("declared");
+      
+      //get the sd of each component
+      for (a=0; a<mdim; a++)
+	{
+	  double sum, sum2;
+	  double avg, diff;
+	  sum=sum2=0;
+	  
+	  for (b=0; b<n; b++)
+	    {
+	      sum+=v[b][a];
+	      sum2+=v[b][a]*v[b][a];
+	    }
+	  
+	  avg=sum/n;
+	  sd[a][0]=a;
+	  diff=(sum2/n)-(avg*avg);
+	  
+	  sd[a][1]=(diff<=0)?0:sqrt (diff);
+	  tsd+=sd[a][1];
+	}
+      sort_double_inv (sd,2,1, 0,mdim-1);
+      tsdmax=tsd*(double)frac;
+      
+      for (tsd=0,a=0, dim[0]=0; a<mdim && tsd<tsdmax; a++, dim[0]++) tsd+=sd[a][1];
+      
+      HERE ("declare new_v");
+      v2=declare_double (n+1, dim[0]+4);
+      for (a=0; a<dim[0]; a++)
+	{
+	  for (b=0; b<n; b++)
+	    v2[b][a]=v[b][(int)sd[a][0]];
+	}
+      HERE ("done");
+      free_double (v, -1);
+      free_double (sd, -1);
+      v=v2;
+      
+    }
+			
+        
+  return v;
+}
+
 
 double **aln2km_vector (Alignment *A, char *mode, int *dim)
 {
@@ -1584,6 +1640,93 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
   
   return v;
 }
+NT_node seq2parttree_dnd ( Sequence *S)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node T;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+  FILE*fp;
+  
+  my_mkdir (dir);
+  chdir (dir);
+  output_fasta_seqS ("seq",S);
+  printf_system_direct ("mafft --retree 0 --treeout --parttree --reorder seq > aln %s ",TO_NULL_DEVICE);
+  printf_system ("cp seq.tree %s/cedric", cdir);
+  fp=vfopen ("seq.tree", "a");
+  fprintf (fp, ";");
+  vfclose (fp);
+  
+  T=main_read_tree ("seq.tree");
+  
+  HERE ("Done");
+  T=indextree2nametree (S, T);
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  
+  vfree (cdir);
+  return T;
+}
+NT_node seq2dpparttree_dnd ( Sequence *S)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node T;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+  FILE*fp;
+  
+  my_mkdir (dir);
+  chdir (dir);
+  output_fasta_seqS ("seq",S);
+  printf_system_direct ("mafft --retree 0 --treeout --dpparttree --reorder seq > aln %s",TO_NULL_DEVICE);
+  printf_system ("cp seq.tree %s/cedric", cdir);
+  fp=vfopen ("seq.tree", "a");
+  fprintf (fp, ";");
+  vfclose (fp);
+  
+  T=main_read_tree ("seq.tree");
+  
+  HERE ("Done");
+  T=indextree2nametree (S, T);
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  
+  vfree (cdir);
+  return T;
+}
+
+NT_node seq2fastparttree_dnd ( Sequence *S)
+{
+  Alignment *A;
+  int tot_node=0;
+  NT_node T;
+  char *dir =vtmpnam (NULL);
+  char *cdir=get_pwd (NULL);
+  FILE*fp;
+  
+  my_mkdir (dir);
+  chdir (dir);
+  output_fasta_seqS ("seq",S);
+  printf_system_direct ("mafft --retree 0 --treeout --fastparttree --reorder seq > aln %s",TO_NULL_DEVICE);
+  printf_system ("cp seq.tree %s/cedric", cdir);
+  fp=vfopen ("seq.tree", "a");
+  fprintf (fp, ";");
+  vfclose (fp);
+  
+  T=main_read_tree ("seq.tree");
+  T=indextree2nametree (S, T);
+  chdir    (cdir);
+  printf_system_direct ("rm %s/*", dir);
+  my_rmdir (dir);
+  
+  vfree (cdir);
+  return T;
+}
+
 NT_node seq2cw_dnd ( Sequence *S)
 {
   Alignment *A;
@@ -1653,18 +1796,17 @@ NT_node seq2cw_tree ( Sequence *S)
   return T;
 }
 
-NT_node seq2co_tree (Sequence *S)
+NT_node seq2co_dnd (Sequence *S)
 {
   char *seq=vtmpnam  (NULL);
   char *tree=vtmpnam (NULL);
   
-  fprintf ( stderr, "\n-----Compute ClustalOmega Tree: [Start----");
   if (!tree)tree=vtmpnam (NULL);
   if (!seq)seq=vtmpnam (NULL);
   output_fasta_simple (seq, S);
   
   printf_system ("clustalo --in %s --guidetree-out %s --force>/dev/null 2>/dev/null", seq,tree);
-  fprintf ( stderr, "Done]\n");
+  
   return main_read_tree(tree);
 }
 
@@ -1675,7 +1817,7 @@ static int tprint;
 static int km_node;
 static float km_tbootstrap;
 static float km_tnode;
-NT_node seq2km_tree (Sequence *S)
+NT_node seq2km_dnd (Sequence *S)
 {
   int tot_node;
   NT_node T;

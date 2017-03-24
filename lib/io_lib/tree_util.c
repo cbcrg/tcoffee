@@ -4246,7 +4246,7 @@ float *seq2dpa_weight (Sequence *S, char *mode)
       char *seqf=vtmpnam (NULL);
       char *wf=vtmpnam (NULL);
       output_fasta_seqS (seqf,S);
-      HERE ("%s %s > %s", mode+1,seqf, wf);
+      vfree (w);
       printf_system ("%s %s > %s", seqf, wf);
       return seq2dpa_weight (S, wf);
     }
@@ -4265,9 +4265,41 @@ float *seq2dpa_weight (Sequence *S, char *mode)
 	  n++;
 	}
     }
-  
-  else if (strm (mode, "diaa") || strm (mode, "triaa")||strm (mode, "idiaa") || strm (mode, "itriaa") )
+  else if ( strm (mode, "kmeans"))
     {
+      int mdim=26*26*26;
+      int nk=S->nseq/100;
+      int *size;
+      
+      
+      double **v=declare_double (S->nseq+1,mdim+4);
+      
+      size=(int*)vcalloc (nk+1, sizeof (char));
+      for (a=0; a<S->nseq; a++)
+	{
+	  v[a]=seq2triaa(S->seq[a], v[a]);
+	}
+      
+      v=vector2strip_vector (v, S->nseq, &mdim,0.80);
+      
+      km_kmeans (v, S->nseq, mdim,100,0.0001, NULL);
+      
+      for (a=0; a<S->nseq; a++)
+	{
+	  int c=(int)v[a][mdim+1];
+	  size[c]++;
+	}
+      
+      for (a=0; a<S->nseq; a++)
+	{
+	  int c=(int)v[a][mdim+1];
+	  w[a]=(float)size[c];
+	}
+      free_double (v, -1);
+      vfree (size);
+    }
+  else if (strm (mode, "diaa") || strm (mode, "triaa")||strm (mode, "idiaa") || strm (mode, "itriaa") )
+	{
       int mdim=26*26;
       double **v;
       int invert;
@@ -4311,7 +4343,33 @@ float *seq2dpa_weight (Sequence *S, char *mode)
     }
   return w;
 }
-      
+
+NT_node indextree2nametree (Sequence*S, NT_node T)
+{
+  if (!T )return T;
+  else if (!T->left && !T->right)
+    {
+      if (T->name)
+	{
+	  int i=atoi (T->name)-1;
+	  T->seq=i;
+	  vfree (T->name );
+	  T->name=(char*)vcalloc ( strlen (S->name[i])+1, sizeof (char));
+	  sprintf (T->name, "%s", S->name[i]);
+	  T->seq=i;
+	  T->isseq=1;
+	  T->nseq=1;
+	}
+    }
+  else 
+    {
+      indextree2nametree (S, T->left);
+      indextree2nametree (S, T->right);
+    }
+  
+  return T;
+} 
+
 NT_node node2master(NT_node T, Sequence *S, float *w)
 {
   //select the one with a PDB template OR select the longuest
@@ -4339,14 +4397,18 @@ NT_node node2master(NT_node T, Sequence *S, float *w)
 	  int pl=(seq2P_template_file(S, L->seq))?1:0;
 	  int pr=(seq2P_template_file(S, L->seq))?1:0;
 	  
-	  //int ll=strlen (S->seq[L->seq]);
-	  //int lr=strlen (S->seq[R->seq]);
-	  int ll=w[L->seq];
-	  int lr=w[R->seq];
+	  int ll=strlen (S->seq[L->seq]);
+	  int lr=strlen (S->seq[R->seq]);
+	  float wl=w[L->seq];
+	  float wr=w[R->seq];
 	  
 	  if ((!pl &&!pr) || (pl && pr))
 	    {
-	      if (ll>lr)R=L;
+	      if (abs((wr-wl))<0.0001)
+		{
+		  if (ll<lr)R=L;
+		}
+	      else if (wl>wr)R=L;
 	    }
 	  else if (pl) 
 	    R=L;
@@ -4415,8 +4477,8 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, cha
 	  if (N->isseq){NL[nn++]=N;}
 	  else
 	    {
-	      NL[nn++]=N->left;
 	      NL[nn++]=N->right;
+	      NL[nn++]=N->left;
 	      terminal=0;
 	    }
 	  T->leaf++;
