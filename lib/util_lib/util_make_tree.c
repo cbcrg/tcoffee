@@ -1369,17 +1369,18 @@ int upgma_pair_wise (Alignment *A, int *ls0, int ns0, int *ls1, int ns1, Constra
 //
 //                              km
 ///////////////////////////////////////////////////////////////////////////////
+
+
+
 static int count;
 static Sequence *KS;
 static Alignment *KA;
 NT_node expand_km_node (NT_node T,int n, char **name, int dim, double **V);
-
-
 double **vector2strip_vector (double**v, int n, int *dim, float frac)
 {
   int mdim=dim[0];
   dim[0]=0;
-  HERE ("Mdim=%d", mdim);
+  
   if (!v || !n || !mdim || frac<0.0000001);
   else
     {
@@ -1388,7 +1389,7 @@ double **vector2strip_vector (double**v, int n, int *dim, float frac)
       double  **sd;
       sd=declare_double    (mdim,2);
       tsd=0;
-      HERE ("declared");
+      
       
       //get the sd of each component
       for (a=0; a<mdim; a++)
@@ -1465,7 +1466,37 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
       for (a=0; a<A->nseq; a++) v[a]=seq2tetraa(S->seq[a], v[a]);
       use_len=1;
     }
-  
+  else if (strstr   (mode, "swl"))
+    {
+      char **seql;
+      int step,a, n;
+      int **order;
+      mdim=get_int_variable ("swlN");
+      if (!mdim)mdim=100;
+      if (mdim>S->nseq)mdim=S->nseq;
+      
+      seql=(char**)vcalloc (mdim, sizeof (char *));
+      step=(S->nseq/mdim>0)?S->nseq/mdim:1;
+      v=(double **)vcalloc (S->nseq, sizeof (double**));
+      
+      order=declare_int (S->nseq, 2);
+      for (a=0; a<S->nseq; a++){order[a][0]=a; order[a][1]=strlen (S->seq[a]);}
+      sort_int_inv (order, 2, 1, 0, S->nseq-1);
+      
+
+      for (n=0,a=0; a<S->nseq && n<mdim; a+=step, n++)
+	{
+	  seql[n]=S->seq[order[a][0]];
+	}
+      for (a=0; a<S->nseq; a++)
+	{
+	  output_completion (stderr,a,S->nseq, 100, "swt");
+	  v[a]=seq2swv(S->seq[a], seql, n);
+	}
+      free_int (order, -1);
+      vfree (seql);
+    }
+	
   else if (strstr (mode, "msar"))
     {
       int start=rand()%(A->len_aln-110);
@@ -1479,6 +1510,7 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
 	  for (b=0,c=start; c<end;b++,c++)
 	    {
 	      v[a][b]=(A->seq_al[a][c]=='-')?1:0;
+	      
 	    }
 	}
     }
@@ -1640,6 +1672,78 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
   
   return v;
 }
+//////////////////////////////////////////////////////////////////////////////
+//
+//                              km
+///////////////////////////////////////////////////////////////////////////////
+NT_node seq2dnd (Sequence *S, char *dpa_tree)
+{
+  NT_node T=NULL;
+  
+  if (!dpa_tree) return T;
+  
+  if (strm (dpa_tree, "kmdnd"))
+    {
+      T=seq2km_dnd (S);
+    }
+  else if ( strm(dpa_tree, "swlcatdnd"))
+    {
+      T=seq2cat_dnd(S, "swl");
+    }
+  else if ( strm(dpa_tree, "iswlcatdnd"))
+    {
+      T=seq2cat_dnd(S, "iswl");
+    }
+  else if ( strm(dpa_tree, "longcatdnd"))
+    {
+      T=seq2cat_dnd(S, "longuest");
+    }
+  else if ( strm(dpa_tree, "shortcatdnd"))
+    {
+      T=seq2cat_dnd(S, "shortest");
+    }
+  
+  else if ( strm (dpa_tree, "swldnd"))
+    {
+      T=seq2swl_dnd (S);
+    }
+  else if (strm (dpa_tree, "codnd") )
+    {
+      T=seq2co_dnd (S);
+    }
+  else if (strm (dpa_tree, "clustalwdnd") )
+    {
+      T=seq2cw_dnd (S);
+    }
+  else if (strm (dpa_tree, "parttree"))
+    {
+      T=seq2parttree_dnd (S);
+    }
+  else if (strm (dpa_tree, "dpparttree"))
+    {
+      T=seq2dpparttree_dnd (S);
+    }
+  else if (strm (dpa_tree, "fastparttree"))
+    {
+      T=seq2dpparttree_dnd (S);
+    }
+  else if ( dpa_tree[0]=='#')
+    {
+      char *seqf=vtmpnam (NULL);
+      char *tf=vtmpnam (NULL);
+      printf_system ("%s %s >%s", dpa_tree+1, seqf, tf);
+      return seq2dnd(S,tf);
+    }
+  else if (!(T=file2tree (dpa_tree)))
+    myexit (fprintf_error (stderr, "%s is neither a file nor a valid dpa_tree mode [FATAL:%s]", dpa_tree,PROGRAM));
+  //else if (!(T=main_read_tree (dpa_tree)))
+  //myexit (fprintf_error (stderr, "%s is neither a file nor a valid dpa_tree mode [FATAL:%s]", dpa_tree,PROGRAM));
+  
+  return T;
+}
+
+
+
 NT_node seq2parttree_dnd ( Sequence *S)
 {
   Alignment *A;
@@ -1660,7 +1764,7 @@ NT_node seq2parttree_dnd ( Sequence *S)
   
   T=main_read_tree ("seq.tree");
   
-  HERE ("Done");
+ 
   T=indextree2nametree (S, T);
   chdir    (cdir);
   printf_system_direct ("rm %s/*", dir);
@@ -1689,7 +1793,7 @@ NT_node seq2dpparttree_dnd ( Sequence *S)
   
   T=main_read_tree ("seq.tree");
   
-  HERE ("Done");
+
   T=indextree2nametree (S, T);
   chdir    (cdir);
   printf_system_direct ("rm %s/*", dir);
@@ -1806,7 +1910,7 @@ NT_node seq2co_dnd (Sequence *S)
   output_fasta_simple (seq, S);
   
   printf_system ("clustalo --in %s --guidetree-out %s --force>/dev/null 2>/dev/null", seq,tree);
-  
+  //printf_system ("clustalo --in %s --guidetree-out %s --force>/dev/null", seq,tree);
   return main_read_tree(tree);
 }
 
@@ -1817,6 +1921,52 @@ static int tprint;
 static int km_node;
 static float km_tbootstrap;
 static float km_tnode;
+NT_node seq2cat_dnd (Sequence *S, char *mode)
+{
+  int tot_node;
+  NT_node T, CT;
+  float *w;
+  float **sw;
+  int a, b;
+  
+  w=seq2dpa_weight (S, mode);
+  sw=declare_float (S->nseq, 2);
+  for (a=0; a<S->nseq; a++)
+    {
+      sw[a][0]=a;
+      sw[a][1]=w[a];
+    }
+  sort_float (sw, 2, 1, 0, S->nseq-1);
+  T=CT=new_declare_tree_node();
+  
+  for (a=0; a<S->nseq-1; a++)
+    {
+      NT_node L=CT->left=new_declare_tree_node();
+      NT_node R=CT->right=new_declare_tree_node();
+      R->dist=L->dist=1;
+      sprintf (R->name, "%s", S->name[(int)sw[a][0]]);
+      R->parent=L->parent=CT;
+      CT=L;
+    }
+  CT->isseq=1;
+  sprintf (CT->name, "%s", S->name[(int)sw[S->nseq-1][0]]);
+  vfree (w);
+  free_float (sw, -1);
+  return T;
+  }
+
+NT_node seq2swl_dnd (Sequence *S)
+{
+  int tot_node;
+  NT_node T;
+  
+  Alignment *A;
+  A=seq2aln(S,NULL,RM_GAP);
+  T=aln2km_tree (A, "swl", 1);
+  free_aln (A);
+  return T;
+  }
+
 NT_node seq2km_dnd (Sequence *S)
 {
   int tot_node;

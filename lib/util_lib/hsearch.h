@@ -55,5 +55,5 @@ Hasch_entry * allocate_hasch_entry (Hasch_entry *e, int action,struct Hasch_data
 int string2key (char *s, Char_node *n);
 Char_node * declare_char_node (int action);
 
-
+int name_is_in_hlist (char *name, char **list, int n);
  

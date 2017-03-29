@@ -1458,7 +1458,32 @@ double *seq2tetraa (char *seq, double *v)
 
   return v;
 }
-
+double *seq2swv   (char *seq, char **seql, int n)
+{
+  double *v=(double*)vcalloc (n+10, sizeof (double));
+  int a;
+  static int **matrix=read_matrice ("blosum62mt");
+  for (a=0; a<n; a++)
+    {
+      int l=strlen (seql[a]);
+      int s =seq2swl (seq, seql[a], -4, -1, matrix);
+      v[a]=(double)s/(double)l;
+    }
+  return v;
+}
+double *seq2swr   (char *seq, char **seql, int n)
+{
+  double *v=(double*)vcalloc (n+10, sizeof (double));
+  int l1=strlen (seq);
+  int a,l;
+  static int **matrix=read_matrice ("blosum62mt");
+  for (a=0; a<n; a++)
+    {
+      v[a]=(double)seq2swl (seq, seql[a], -4, -1, matrix);
+    }
+  return v;
+}
+            
 double *seq2triaa (char *seq, double *v)
 {
   static int ***diaa;
@@ -13858,17 +13883,21 @@ char *msa2master_seq (Alignment *A, int seq)
 int thread_msa2msa(char *small, char *big, char *seq)
 {
   //incorporate small into Big
-  Alignment *S=main_read_aln (small, NULL);
-  Alignment *B=main_read_aln (big, NULL);
+    
+  Alignment *S=quick_read_aln (small);
+  Alignment *B=quick_read_aln (big);
+  
+  
+
   Alignment *M;
   char *sseq, *bseq;
   int Si, Bi;
   
-  if ((Si=name_is_in_list (seq, S->name, S->nseq, MAXNAMES))==-1)
+  if ((Si=name_is_in_list (seq, S->name, S->nseq, MAXNAMES+1))==-1)
     {
       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, small );
     }
-  if ((Bi=name_is_in_list (seq, B->name, B->nseq, MAXNAMES))==-1)
+  if ((Bi=name_is_in_list (seq, B->name, B->nseq, MAXNAMES+1))==-1)
     {
       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, big );
     }
@@ -13876,12 +13905,18 @@ int thread_msa2msa(char *small, char *big, char *seq)
   sseq=msa2master_seq (S, Si);
   bseq=msa2master_seq (B, Bi);
   
+  
   M=align_two_sequences4dpa (sseq,S->seq_al[Si],bseq,B->seq_al[Bi],"blosum62mt",-4,-1, "myers_miller_pair_wise");
   
-    
+
+  
   add_msa (S,-1,M->seq_al[0],big, "w");
-  add_msa (B,Bi,M->seq_al[2],big, "a");
-    
+  add_msa (B,Bi,M->seq_al[1],big, "a");
+  
+  
+  free_aln (M);
+  free_aln (S);
+  free_aln (B);
   vfree (sseq);vfree (bseq);
   return 1;
 }

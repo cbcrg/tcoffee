@@ -590,21 +590,51 @@ When **-profile_comparison=profile**, this flag selects a profile scoring functi
 
 Large scale aligment computation [Unsupported]
 ----------------------------------------------
-- **-dpa_master_aln** (usage:**-dpa_master_aln=[file, method]**/default:**-dpa_master_aln=NO**) [Unsupported]
- When using DPA, T-Coffee needs a seed alignment that can be computed using any appropriate method. By default, T-Coffee computes a fast approximate alignment. 
+- **-dpa** (usage:**-dpa**/default:**unset**) [Unsupported]
+ This flag triggers the dpa mode. This mode involves computing the <-dpa_tree> that is then resolved into an alignment on buckets of <-dpa_nseq> sequences using <-dpa_method> as an aligner. If no <-dpa_method> is provided the T-Coffee aligner is used and all the parameters (including modes) are passed to T-Coffee. Note that all the output parameters are not supported. Note tha sequences should be input using the -seq flag.
 
-- **-dpa_maxnseq** (usage:**-dpa_maxnseq=[integer]**/default:**-dpa_maxnseq=30**) [Unsupported]
-Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than **-dpa_maxnseq** OR if it controls a pair of sequences having less than **-dpa_min_score2** percent ID.
+- **-dpa_nseq** (usage:**-dpa_nseq=[ineger]**/default:**-dpa_nseq=30**) 
+ Specifies the maximum bucket size when using the dpa mode. The buckets are provided to the <dpa_method> or to the remainder of the command line
 
-- **-dpa_min_score1** (usage:**-dpa_min_score1=[integer]**/default:**-dpa_min_score1=95**) [Unsupported]
-Threshold for not realigning the sequences within the master alignment. Given this alignment and the associated tree, sequences below a node are not realigned if none of them has less than -dpa_min_score1 % identity.*
+- **-dpa_tree** (usage:**-dpa_tree=[file, method]**/default:**-dpa_tree=kmtree**) 
+ Specifies the dpa tree
 
-- **-dpa_min_score2** (usage:**-dpa_min_score2**/default:**-dpa_min_score2**) [Unsupported]
-Maximum number of sequences aligned simultaneously when DPA is ran. Given the tree computed from the master alignment, a node is sent to computation if it controls more than **-dpa_maxnseq** OR if it controls a pair of sequences having less than **-dpa_min_score2** percent ID.
+::
 
-- **-dpa_tree** (usage:**-dpa_tree=<filename>**) [Not implemented]
-Guide tree used in DPA; this is a newick tree where the distance associated with each node is set to the minimum pairwise distance among all considered sequences.
+  dpa_tree modes
+  ##: catswl       --- caterpilar tree with sequences ordered according to their distance from the average swl vector
+  ##:                  the swl vector of a sequence is defined as the SMith and Waterman Length against the -swlN N sequences
+  ##: catlong      --- caterpilar tree with sequences ordered according to their length (longuest on root)
+  ##: catshort     --- caterpilar tree with sequences ordered according to their length (shortest on root)	
+  ##: swldnd       --- Kmeans ran on the <-swlN> dimention vector where each component is the SW length of a sequence against a swlN seed
+  ##: kmdnd        --- use kmeans based on triaa vectors (fast)
+  ##: codnd        --- clustalo guide tree, obtainned by running clustalo externaly
+  ##: cwdnd        --- clustalw guide tree, obtainned by running clustalw externaly
+  ##: #<pg>        --- runs pg <seq> > stdout that outputs the tree on the stdou
+  ##: parttree     --- MAFFT parttree (external)
+  ##: dpparttree   --- MAFFT dpparttree (external)
+  ##: fastparttree --- MAFFT fastparttree (external)
+ 
 
+- **-dpa_swlN** (usage:**-dpa_swlN=[integer]**/default:**-dpa_swlN=10**) 
+ When computing sw vetcors, specifies the number of N seed sequences to do an all-against-N. The sequences are selected evenly among the full sequences set sorted by size.
+
+- **-dpa_weight** (usage:**-dpa_weight=[file, method]**/default:**-dpa_weight=longuest**). Weight used to push sequences from buckets to buckets. Sequence with the highest weight gets pushed one lebel up. 
+ 
+::
+
+  dpa_weight modes
+  ##: longuest     --- push the longuest sequence
+  ##: shortest     --- push the shortest sequence
+  ##: name         --- push the sequence with the shorttes name (debug purpose)
+  ##: #<pg>        --- runs pg <seq> > stdout that outputs a two column file <seqname> <float weight value> (fasta w/o sequences can be read)
+  ##: <file>       --- reads weights from two column file <seqname> <float weight value> (fasta w/o sequences can be read)
+  ##: kmeans       --- assign to each sequence the size of its kmeans cluster, as computed using triaa vectors and requesting 100 groups
+  ##: swa,iswa     --- assigns to each sequence the average length of its SW alignment (matched residues) against the -dpa_swlN seed sequences, iswa for invert
+  ##: swl,iswl     --- assign each sequence a weight equal to its distance from the average sequence using a swlN component vector, iswl for invert
+  ##: diaa,idiaa   --- assign each sequence a weight equal to its distance from the average sequence using a diaa component vector, idiaa fro invert
+  ##: triaa,itriaa --- assign each sequence a weight equal to its distance from the average sequence using a triaa component vector, itriaa fro invert
+  
 
 Local alignments computation [Unsupported]
 ------------------------------------------

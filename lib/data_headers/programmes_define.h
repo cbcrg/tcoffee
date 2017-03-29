@@ -61,6 +61,12 @@
 #define DIALIGNTX_ADDRESS  "http://dialign-tx.gobics.de/"
 #define DIALIGNTX_DIR "/usr/share/dialign-tx/"
 
+#define MSA_4_TCOFFEE "msa.pl"
+#define MSA_ADDRESS "https://www.ncbi.nlm.nih.gov/CBBresearch/Schaffer/msa.html"
+
+#define DCA_4_TCOFFEE "dca.pl"
+#define DCA_ADDRESS "https://bibiserv2.cebitec.uni-bielefeld.de/applications/dca/resources/downloads/dca-1.1-src.tar.gz"
+
 #define MAFFT_4_TCOFFEE "mafft"
 #define MAFFT_ADDRESS "http://align.bmr.kyushu-u.ac.jp/mafft/online/server/"
 

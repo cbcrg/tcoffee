@@ -263,6 +263,7 @@ FILTER_LIB_OBJECTS=\
 	fasta_seq2hmmtop_fasta.pl\
 	fasta_seq2consan_aln.pl\
 	clustalw_aln2fasta_aln.pl\
+	fasta_seq2name_seq.pl\
 	msf_aln2fasta_aln.pl\
 	blast_aln2fasta_aln.pl\
 	blast_xml2fasta_aln.pl\
@@ -303,6 +304,10 @@ fasta_aln2fasta_aln_unique_name.pl:\
 	$(FILTER_LIB)/fasta_aln2fasta_aln_unique_name.pl
 	cp $(FILTER_LIB)/fasta_aln2fasta_aln_unique_name.pl .
 	echo "# `date`" >> fasta_aln2fasta_aln_unique_name.pl
+fasta_seq2name_seq.pl:\
+	$(FILTER_LIB)/fasta_seq2name_seq.pl
+	cp $(FILTER_LIB)/fasta_seq2name_seq.pl .
+	echo "# `date`" >> fasta_seq2name_seq.pl
 clustalw_aln2fasta_aln.pl:\
 	$(FILTER_LIB)/clustalw_aln2fasta_aln.pl
 	cp $(FILTER_LIB)/clustalw_aln2fasta_aln.pl .

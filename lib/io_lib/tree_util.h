@@ -222,7 +222,7 @@ void output_treelist (char *fname, Alignment*A);
 NT_node main_read_tree(char *treefile);
 NT_node quick_read_tree(char *treefile);
 
-NT_node new_read_tree ( char *teefile);
+NT_node file2tree (char *treefile);
 NT_node new_get_node (NT_node T, FILE *fp);
 
 

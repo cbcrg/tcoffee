@@ -4021,16 +4021,21 @@ NT_node quick_read_tree(char *treefile)
 }
 NT_node main_read_tree (char *treefile)
 {
+  return file2tree(treefile);
+}
+NT_node main_read_tree_old2 (char *treefile)
+{
   FILE *fp;
   Sequence *S;
 
   NT_node T;
 
-
+  if (!treefile || !check_file_exists (treefile))return NULL;
 
 
   fp=vfopen (remove_charset_from_file (treefile, " \t\n\r"), "r");
   T=new_get_node (NULL,fp);
+  
   vfclose (fp);
   
   S=tree2seq(T, NULL);
@@ -4298,7 +4303,81 @@ float *seq2dpa_weight (Sequence *S, char *mode)
       free_double (v, -1);
       vfree (size);
     }
-  else if (strm (mode, "diaa") || strm (mode, "triaa")||strm (mode, "idiaa") || strm (mode, "itriaa") )
+  else if (strm (mode, "swl") ||strm (mode, "iswl") || strm (mode, "swa"))
+    {
+      char **seql;
+      int step,a,b, n;
+      int **order;
+      int invert;
+      int mdim;
+      double **v;
+      float *aw;
+      
+      invert=(strm (mode, "iswl"))?-1:1;
+      mdim=get_int_variable ("swlN");
+      if (!mdim)mdim=100;
+      if (mdim>S->nseq)mdim=S->nseq;
+      aw=(float*)vcalloc (S->nseq, sizeof (float));
+      seql=(char**)vcalloc (mdim, sizeof (char *));
+      step=(S->nseq/mdim>0)?S->nseq/mdim:1;
+      v=(double **)vcalloc (S->nseq+1, sizeof (double**));
+      v[S->nseq]=(double*)vcalloc (mdim, sizeof (double));
+      
+      order=declare_int (S->nseq, 2);
+      for (a=0; a<S->nseq; a++){order[a][0]=a; order[a][1]=strlen (S->seq[a]);}
+      sort_int_inv (order, 2, 1, 0, S->nseq-1);
+      
+
+      for (n=0,a=0; a<S->nseq && n<mdim; a+=step, n++)
+	{
+	  seql[n]=S->seq[order[a][0]];
+	}
+      for (a=0; a<S->nseq; a++)
+	{
+	  output_completion (stderr,a,S->nseq, 100, "swl");
+	  v[a]=seq2swr(S->seq[a], seql,mdim);
+	  for (b=0; b<mdim; b++)
+	    {
+	      aw[a]+=(float)v[a][b];
+	      v[S->nseq][b]+=v[a][b];
+	    }
+	}
+      for (a=0; a<S->nseq; a++)
+	{
+	  
+	  aw[a]/=(float)mdim;
+	  HERE ("%s %.2f", S->name[a], aw[a]);
+	}
+      if (strm (mode, "swa"))
+	{
+	  w=aw;
+	  vfree (w);
+	}
+      else
+	{
+	  vfree (aw);
+	  for (b=0; b<mdim; b++)
+	    {
+	      v[S->nseq][b]/=(double)S->nseq;
+	    }
+	  
+	  for (a=0; a<S->nseq; a++)
+	    {
+	      
+	      double d=0;
+	      for (b=0; b<mdim; b++)
+		{
+		  d+=(v[a][b]-v[S->nseq][b])*(v[a][b]-v[S->nseq][b]);
+		}
+	      w[a]=(float)invert*(float)sqrt(d);
+	      
+	    }
+	}
+      free_double (v, -1);
+      free_int (order, -1);
+      vfree (seql);
+    }
+  else if (strm (mode, "diaa") || strm (mode, "triaa")||strm (mode, "idiaa") || strm (mode, "itriaa"))
 	{
       int mdim=26*26;
       double **v;
@@ -4376,12 +4455,20 @@ NT_node node2master(NT_node T, Sequence *S, float *w)
   if (!T)return T;
   else if (!T->left && !T->right)
     {
-      int i=name_is_in_list (T->name, S->name, S->nseq, MAXNAMES);
-      T->seq=i;
+      //int i=name_is_in_list (T->name, S->name, S->nseq, MAXNAMES);
+      int i=name_is_in_hlist (T->name, S->name, S->nseq);
       
+            
+      T->seq=i;
+      T->score=w[i];
       T->isseq=1;
       T->nseq=1;
       
+    }
+  else if (!T->left || !T->right)
+    {
+      HERE ("incorrectly parsed tree Root: %d", T->parent?1:0);
+      exit (0);
     }
   else 
     {
@@ -4413,6 +4500,7 @@ NT_node node2master(NT_node T, Sequence *S, float *w)
 	  else if (pl) 
 	    R=L;
 	}
+      T->score=R->score;
       T->seq=R->seq;
       T->name=R->name;
     }
@@ -4443,8 +4531,140 @@ char* tree2bucket (NT_node T, Sequence *S, int N, char *method)
   vfree (lu4t2b);
   return name;
 }      
+NT_node * sort_nodelist4dpa (NT_node *L, int n);
+NT_node * sort_nodelist4dpa (NT_node *L, int n)
+{
+  int a;
+  float **lu=declare_float ( n, 2);
+  NT_node *NL=(NT_node*)vcalloc (n, sizeof (NT_node));
+  
+  for (a=0; a<n; a++)
+    {
+      lu[a][0]=a;
+      lu[a][1]=(L[a])->score*-1;
+    }
+  sort_float (lu, 2, 1, 0, n-1);
+  for (a=0; a<n; a++)
+    {
+      NL[a]=L[(int)lu[a][0]];
+    }
+  vfree (L);
+  free_float (lu, -1);
+  return NL;
+}
 
 char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, char *name2)
+{
+  int terminal=0;
+  NT_node *CL, *NL;
+  int left, right, cn,nn, a;
+  FILE *fp;
+  char *seq;
+  int do_aln;
+  int debug=0;
+  
+  if (getenv ("DEBUG_DPA"))debug=1;
+  if (!method || strm (method, "seq"))do_aln=0;
+  else do_aln=1;
+  
+  T->leaf=0;
+  if (!T || T->isseq)return NULL;
+  
+  CL=(NT_node*)vcalloc (1, sizeof (NT_node));
+  cn=0;CL[cn++]=T;
+  while (cn<N && !terminal)
+    {
+      
+      nn=0;
+      terminal=1;
+      NL=(NT_node*)vcalloc (cn*2, sizeof (NT_node));
+      CL=sort_nodelist4dpa (CL, cn);
+
+      for (left=0; left<cn && (nn+(cn-left))<N; left++)
+	{
+	  
+	  NT_node N=CL[left];
+	  if (N->isseq){NL[nn++]=N; T->leaf++;}
+	  else
+	    {
+	      NL[nn++]=N->right;
+	      NL[nn++]=N->left;
+	      terminal=0;
+	      T->leaf+=2;
+	    }
+	}
+      for (a=left; a<cn; a++)
+	{
+	  NL[nn++]=CL[a];
+	  if (!CL[a]->isseq)terminal=0;
+	  T->leaf++;
+	}
+      
+      vfree (CL);
+      CL=NL;
+      cn=nn;
+    }
+  
+  seq=vtmpnam(NULL);
+  fp=vfopen (seq, "w");
+  for (a=0; a<cn; a++)
+    {
+      int s=CL[a]->seq;
+      if (!lu4t2b[s])
+	{
+	  lu4t2b[s]=1;
+	  lun4t2b++;
+	}
+      if ( debug==0)fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+      else fprintf (fp, ">%s Leaf %d\n%s\n", S->name[s],a+1,S->seq[s]);
+    }
+  vfclose (fp);
+  if (!do_aln)
+    {
+      fprintf ( stderr, "Output File %20s containing %5d Sequences -- FASTA\n", name,nn);
+      printf_system_direct ("mv %s %s", seq, name);
+    }
+  else
+    {
+      seq_file2msa_file (method,seq, name);
+      if (debug)
+	{
+	  HERE ("\n------> %s\n", name2);
+	  printf_system ("cp %s %s", name, name2);
+	}
+    }
+    
+  
+  if (!terminal)
+    {
+      char *nname;
+      char *nname2=(char*)vcalloc (strlen (name) +1000, sizeof (char));
+      if (!do_aln)
+	nname=(char*)vcalloc (strlen (name) +1000, sizeof (char));
+      else
+	nname=vtmpnam (NULL);
+      
+      for (a=0; a< cn; a++)
+	{
+	  if (!do_aln)sprintf (nname, "%s.%d",name, a+1);
+	  sprintf (nname2, "%s.%d",name2, a+1);
+	  if (tree2bucketR (CL[a],S,N,method, nname, nname2) && !strm (method, "seq"))
+	    {
+	      T->leaf+=(CL[a])->leaf-1;
+	      
+	      fprintf ( stderr, "\n## T-Coffee dpa -- %4d %% Complete -- MERGE %30s using %s",(lun4t2b*100)/S->nseq, (CL[a])->name, method);
+	      thread_msa2msa (nname,name,(CL[a])->name);
+	    }
+	  
+	}
+      vfree (nname2);
+      if (!do_aln)vfree (nname);
+    }
+  vfree (CL);
+  return name;
+}
+
+char* tree2bucketR_unfixed (NT_node T, Sequence *S, int N, char *method, char *name, char *name2)
 {
   int terminal=0;
   NT_node *CL, *NL;
@@ -4546,6 +4766,7 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, cha
   vfree (CL);
   return name;
 }
+  
   
 int tree2clusters   (NT_node T, int *nc,int **cl, double **dist, double Thr, int min)
 {
@@ -4752,18 +4973,107 @@ NT_node new_reroot_tree( NT_node T)
   T=unroot_tree (T);
   return T;
 }
+
+NT_node file2tree (char *fname)
+{
+  FILE *fp, *fp1, *fp2;
+  
+  NT_node R,T,N;
+  int c, lastc; 
+  char *tmp=vtmpnam (NULL);
+  
+  if (!fname || !check_file_exists (fname))return NULL;
+  fp=vfopen (remove_charset_from_file (fname, " \t\n\r"), "r");
+  
+  if (!fp)return NULL;
+  R=T=new_declare_tree_node ();
+  
+  while ((c=fgetc(fp))!=';' && c!=EOF)
+    {
+      if (c=='(')
+	{
+	  N=new_declare_tree_node ();
+	  N->parent=T;
+	  if     (!T->right)T->right=N;
+	  else if(!T->left)T->left=N;
+	  else
+	    {
+	      HERE ("Non Binary Tree!!!!!");
+	      exit (0);
+	    }
+	  
+	  T=N;
+	  
+	  lastc=0;
+	}
+      else if (c==')')
+	{
+	  T=T->parent;
+	  scan_name_and_dist (fp, T->name, &T->dist);
+	  if (T->name && T->name [0])T->bootstrap=atof (T->name);
+	  
+	  lastc=0;
+	}
+      else if (c==',')
+	{
+	  T=T->parent;
+	  lastc++;
+	}
+      else
+	{
+	  N=new_declare_tree_node ();
+	  N->parent=T;
+	  if      (!T->right)T->right=N;
+	  else if (!T->left)T->left=N;
+	  else 
+	    {
+	      HERE ("Non Binary Tree!!!!!");
+	      exit (0);
+	    }
+	  
+	  T=N;
+	  	  
+	  ungetc (c, fp);
+	  scan_name_and_dist (fp, T->name, &T->dist);
+	  T->leaf=1;
+	  T->isseq=1;
+	  lastc=0;
+	}
+    }
+  T=T->parent;
+  vfclose (fp);
+  if (R!=T)
+    {
+      HERE ("Parsing Error\n");
+    }
+  
+  if (!T->right && T->left)T=T->left;
+  else if (T->right && !T->left)T=T->right;
+  T->parent=NULL;
+      
+  return T;
+}
+
+
 NT_node new_get_node (NT_node T, FILE *fp)
 {
-  NT_node NN;
+  NT_node NN=NULL;
   int c;
   static int n;
+  static int depth;
+
+  depth++;
+  
+
 
   c=fgetc (fp);
-  if (!T)T=declare_tree_node (100);
-
+  
+  if (!T)T=declare_tree_node (0);
+  
 
   if ( c==';')
     {
+      
       if (!T->right)T=T->left;
       else if (!T->left)T=T->right;
       vfree (T->parent);T->parent=NULL;
@@ -4772,8 +5082,12 @@ NT_node new_get_node (NT_node T, FILE *fp)
   else if ( c==')')
     {
       --n;
+      
+      
       scan_name_and_dist (fp, T->name, &T->dist);
+      
       if (T->name && T->name [0])T->bootstrap=atof (T->name);
+      
       return new_get_node (T->parent, fp);
     }
   else if ( c==',')
@@ -4782,18 +5096,23 @@ NT_node new_get_node (NT_node T, FILE *fp)
     }
   else
     {
+      
       NN=new_insert_node (T);
-
+      
       if ( c=='(')
 	{
+	  
 	  ++n;
+	  
 	  return new_get_node (NN, fp);
 	}
       else
 	{
+	  
 	  ungetc (c, fp);
+	  
 	  scan_name_and_dist (fp, NN->name, &NN->dist);
-
+	  
 	  NN->leaf=1;
 	  NN->isseq=1;
 	  return new_get_node (T, fp);
@@ -4838,11 +5157,13 @@ int scan_name_and_dist ( FILE *fp, char *name, float *dist)
 }
 NT_node new_insert_node (NT_node T)
 {
-  NT_node NN;
-
+  NT_node NN=NULL;
+  
 
   NN=new_declare_tree_node ();
+  if (!NN)HERE ("Could Not Declare Node");
   NN->parent=T;
+  
   if (!T)
     {
       return NN;
@@ -4904,9 +5225,13 @@ NT_node new_insert_node (NT_node T)
 
 NT_node new_declare_tree_node ()
 {
-	NT_node p;
+	NT_node p=NULL;
 	static int node_index;
+	
 	p= (NT_node)vcalloc (1, sizeof ( Treenode));
+	if (!p)HERE ("Could Not Allocate Node");
+	
+	
 	p->left = NULL;
    	p->right = NULL;
    	p->parent = NULL;
@@ -4916,7 +5241,10 @@ NT_node new_declare_tree_node ()
 	p->index=++node_index;
 	p->maxnseq=1000;
    	p->name=(char*)vcalloc (MAXNAMES+1,sizeof (char));
+	
    	p->name[0]='\0';
+	
+	
    	return p;
 
 	}

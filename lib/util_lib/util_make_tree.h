@@ -21,7 +21,10 @@ NT_node ** dist2nj_tree (double **distances, char **out_seq_name, int out_nseq, 
 double **vector2strip_vector (double**v, int n, int *dim, float frac);
 double **aln2km_vector (Alignment *A, char *mode, int *dim);
 
-NT_node ** seq2km_tree_old (Sequence *S, char *file);
+NT_node   seq2dnd (Sequence *S, char *mode);
+NT_node **seq2km_tree_old (Sequence *S, char *file);
+NT_node   seq2cat_dnd (Sequence *S, char *mode);
+NT_node   seq2swl_dnd (Sequence *S);
 NT_node   seq2km_dnd (Sequence *S);
 NT_node   seq2co_dnd (Sequence *S);
 NT_node   seq2cw_dnd ( Sequence *S);

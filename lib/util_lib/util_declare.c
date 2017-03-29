@@ -1253,6 +1253,7 @@ Sequence* free_Alignment ( Alignment *LA)
 	{
 	  /* Does not free the A->S field (sequences of A)*/
 
+	  if (!LA) return NULL;
 	  Sequence *S;
 	  //aln_stack checks the alignment has not already been freed
 	  if ( LA==NULL || !aln_stack(LA,FREE_ALN)){return NULL;}

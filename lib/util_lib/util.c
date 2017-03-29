@@ -2445,7 +2445,7 @@ char *vcat ( char *st1, char *st2)
   if ( st2) l+=strlen (st2);
   l++;
 
-  ns=(char*)vcalloc ( l, sizeof (char));
+  ns=(char*)vcalloc (read_array_size_new (st1)+1, sizeof (char));
   sprintf ( ns, "%s%s", (st1)?st1:"", (st2)?st2:"");
   return ns;
 }
@@ -10215,16 +10215,25 @@ float km_make_kmeans (double **data, int n, int dim, int k,double t, double **ce
 double** km_shuffle_data (double **d, double **sd, int n, int r)
 {
   int a,b, sn;
-
-
+  double **i;
+  
+  
   if (!sd)sd=(double**)calloc( n, sizeof (double*));
+  i=(double**)vcalloc( n, sizeof (double*));
+  for (b=0; b<n; b++)
+    {
+      sd[b]=d[b];
+      i[b]=d[b];
+    }
   for (a=0; a<r; a++)
     {
       int p=rand()%n;
       sn=0;
-      for (b=p; b<n; b++)sd[sn++]=d[b];
-      for (b=0; b<p; b++)sd[sn++]=d[b];
+      for (b=p; b<n; b++)sd[sn++]=i[b];
+      for (b=0; b<p; b++)sd[sn++]=i[b];
+      for (b=0; b<n; b++)i[b]=sd[b];
     }
+  vfree (i);
   return sd;
 }
 
@@ -10488,11 +10497,11 @@ double km_kmeans_bs (double **data, int n, int dim, int k,double t, double **cen
   B=declare_int (nrounds, 2);
   R=declare_double(n, nrounds);
   S=(double**)vcalloc ( n, sizeof (double*));
-
+  
   for (a=0; a<nrounds; a++)
     {
       B[a][0]=a;
-      S=km_shuffle_data (data,S, n,10);
+      S=km_shuffle_data (data,S, n,(a==0)?0:10);
       km_kmeans (S,n,dim, k, t, centroids);
       for (b=0; b<n; b++)R[b][a]=data[b][dim+1];
     }

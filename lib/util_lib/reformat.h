@@ -35,7 +35,9 @@ int seq_reformat (int argc, char **argv);
 
 Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,Action_data_struc *RAD);
 Alignment * read_fasta_aln_noceck ( char *name, Alignment *A);
+
 Alignment * main_read_aln ( char *name, Alignment *A);
+Alignment * quick_read_aln( char *name);//reads onléy fasta and clustalw
 Sequence  * read_sequences ( char *name);
 Sequence  * read_alifold   ( char *name);
 Alignment *alifold2aln     ( char *name);

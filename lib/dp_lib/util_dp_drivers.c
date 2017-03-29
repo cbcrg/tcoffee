@@ -2603,8 +2603,105 @@ void toggle_case_in_align_two_sequences(int value)
 {
   align_two_seq_keep_case=value;
 }
+Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop, int gep, char *in_align_mode);
+Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2, char *gapped2, char *in_matrix, int gop, int gep, char *in_align_mode)
+{
+  int ll,nr,n1, n2, a;
+  char r1, r2;
+  int l1=strlen (padded1);
+  int l2=strlen (padded2);
+  Alignment *R=declare_aln2(2,l1+l2+1);
+  Alignment *A;
+  char *s1, *s2;
+  
+  for (ll=0,a=0; a<l1; a++)ll+=(gapped1[a]!='-')?1:0;
+  
+  for (a=0; a<l1; a++)if (gapped1[a]!='-')padded1[a]='\0';
+  for (a=0; a<l2; a++)if (gapped2[a]!='-')padded2[a]='\0';
+  
+  
+  nr=n1=n2=0;
+  while (nr<ll)
+    {
+      s1=padded1+n1;
+      s2=padded2+n2;
+      
+      
+      n1+=strlen (s1)+1;
+      n2+=strlen (s2)+1;
+      
+      r1=gapped1[n1-1];
+      r2=gapped2[n2-1];
+      nr++;
+      
+      if (r1!=r2)
+	{
+	  HERE ("Oups %c %c ", r1, r2);
+	  exit (0);
+	}
+      
+      
+      A=align_two_streches4dpa (s1, s2, in_matrix, gop,gep, in_align_mode);
+            
+      R->seq_al[0]=strcatf  (R->seq_al[0], "%s%c", (A)?A->seq_al[0]:"", r1);
+      R->seq_al[1]=strcatf  (R->seq_al[1], "%s%c", (A)?A->seq_al[1]:"", r2);
 
-Alignment * align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2, char *gapped2, char *in_matrix, int gop, int gep, char *in_align_mode)
+      
+      if ( strlen (R->seq_al[0])!=strlen (R->seq_al[1]))
+	{
+	HERE ("%d %d",strlen (R->seq_al[0]),strlen (R->seq_al[1]),R->seq_al[0], R->seq_al[1]); exit (0);
+	}
+      
+      free_aln (A);
+    }
+  s1=padded1+n1;
+  s2=padded2+n2;
+  
+  A=align_two_streches4dpa (s1, s2, in_matrix, gop,gep, in_align_mode);
+  if (A)
+    {
+      R->seq_al[0]=strcatf  (R->seq_al[0], "%s", (A)?A->seq_al[0]:"");
+      R->seq_al[1]=strcatf  (R->seq_al[1], "%s", (A)?A->seq_al[1]:"");
+    }
+  
+  free_aln (A);
+  if ( strlen (R->seq_al[0])!=strlen (R->seq_al[1]))
+    {
+      HERE ("%d %d\n\n[%s]\n[%s]", strlen (R->seq_al[0]),strlen (R->seq_al[1]),R->seq_al[0], R->seq_al[1]);
+      exit (0);
+    }
+  return R;
+}
+Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop, int gep, char *in_align_mode)
+{
+  int ls0=strlen (s0);
+  int ls1=strlen (s1);
+  int a;
+  
+  if (!ls0 && !ls1)return NULL;
+  else if (ls0 && ls1)
+    {
+      return align_two_sequences (s0, s1,"blosum62mt",-4,-1, "myers_miller_pair_wise");
+    }
+  else if (ls0)
+    {
+      Alignment *A=declare_aln2 (2,ls0+1);
+      sprintf  (A->seq_al[0], "%s", s0);
+      for (a=0; a<ls0; a++)A->seq_al[1][a]='-';
+      A->seq_al[0][ls0]=A->seq_al[1][ls0]='\0';
+      return A;
+    }
+  else
+    {
+      Alignment *A=declare_aln2 (2,ls1+1);
+      sprintf ( A->seq_al[1], "%s", s1);
+      for (a=0; a<ls1; a++)A->seq_al[0][a]='-';
+      A->seq_al[0][ls1]=A->seq_al[1][ls1]='\0';
+      return A;
+    }
+}
+  
+Alignment * align_two_sequences4dpa_old ( char *padded1,char *gapped1, char *padded2, char *gapped2, char *in_matrix, int gop, int gep, char *in_align_mode)
 {
 	static Alignment *A;
 	Constraint_list *CL;

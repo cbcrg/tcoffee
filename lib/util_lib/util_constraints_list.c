@@ -6154,6 +6154,73 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", CLUSTALW_4_TCOFFEE);
 	vfclose (fp);}
 
+
+	sprintf (list[n][0], "msa_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE msa.pl\n");
+	fprintf ( fp, "DOC Mafft [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   aln\n");
+	fprintf ( fp, "IN_FLAG    &bnsp\n");
+	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", MSA_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", MSA_4_TCOFFEE);
+	vfclose (fp);}
+
+	sprintf (list[n][0], "msa_msa");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE msa.pl\n");
+	fprintf ( fp, "DOC Mafft [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "ALN_MODE   multiple\n");
+	fprintf ( fp, "OUT_MODE   aln\n");
+	fprintf ( fp, "IN_FLAG    &bnsp\n");
+	fprintf ( fp, "OUT_FLAG   \n");
+	//fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
+	fprintf ( fp, "PARAM      &bnsp2");
+	fprintf ( fp, "PARAM      \n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", MSA_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", MSA_4_TCOFFEE);
+	vfclose (fp);}
+
+	
+		sprintf (list[n][0], "dca_pair");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE dca.pl\n");
+	fprintf ( fp, "DOC Mafft [%s]\n", DCA_ADDRESS);
+	fprintf ( fp, "ALN_MODE   pairwise\n");
+	fprintf ( fp, "OUT_MODE   aln\n");
+	fprintf ( fp, "IN_FLAG    &bnsp\n");
+	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", DCA_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", DCA_4_TCOFFEE);
+	vfclose (fp);}
+
+	sprintf (list[n][0], "dca_msa");
+	sprintf (list[n][1], "%s", vtmpnam(NULL));
+	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
+	fprintf ( fp, "EXECUTABLE dca.pl\n");
+	fprintf ( fp, "DOC Mafft [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "ALN_MODE   multiple\n");
+	fprintf ( fp, "OUT_MODE   aln\n");
+	fprintf ( fp, "IN_FLAG    &bnsp\n");
+	fprintf ( fp, "OUT_FLAG   \n");
+	//fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
+	fprintf ( fp, "PARAM      &bnsp2");
+	fprintf ( fp, "PARAM      \n");
+	fprintf ( fp, "SEQ_TYPE   S\n");
+	fprintf ( fp, "ADDRESS    %s\n", MSA_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", MSA_4_TCOFFEE);
+	vfclose (fp);}
+
+
 	
 	sprintf (list[n][0], "mafft_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));

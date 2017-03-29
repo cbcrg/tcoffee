@@ -74,6 +74,9 @@ int ** get_nol_seq( Constraint_list *CL,int **coor, int nseq, Sequence *S);
 
 int compare_pos_column( int **pos1,int p1, int **pos2,int p2, int nseq);
 char  * seq2alphabet (Sequence *S);
+
+double *seq2swv   (char *seq, char **seql, int n);
+double *seq2swr   (char *seq, char **seql, int n);
 double* seq2diaa (char *buf, double *v);
 double* seq2triaa(char *buf, double *v);
 double* seq2tetraa(char *buf, double *v);

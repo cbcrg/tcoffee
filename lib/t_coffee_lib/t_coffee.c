@@ -6955,9 +6955,13 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   Fname *F=NULL;
   float *w;
   int a;
+  int output_dpa_tree=1;
   
   command=(char*)vcalloc (10000, sizeof (char));
   sprintf ( command, "#");
+  
+  //default values
+  set_int_variable ("swlN",50);
   
   for (a=0; a<argc; a++)
     {
@@ -6970,6 +6974,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       else if (strm (argv[a],"-dpa_tree"))
 	{
 	  dpa_tree=argv[++a];
+	}
+      else if (strm (argv[a],"-dpa_swlN"))
+	{
+	  set_int_variable ("swlN",atoi (argv[++a]));
 	}
       else if (strm (argv[a],"-dpa_weight"))
 	{
@@ -7013,6 +7021,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //prepare the aligner CL
   if (dpa_aligner)
     {
+      add_warning (stderr, "-dpa_method flag used -- [%s] Will be used instead of [%s]",dpa_aligner, command+1);
       command=(char*)vcalloc (10000, sizeof (char));
       sprintf ( command, "%s", dpa_aligner);
     }
@@ -7023,77 +7032,31 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   
   //prepare the guide tree
   fprintf ( stderr, "Compute Guide Tree -- ");
-  if (dpa_tree)
-    {
-      fprintf (stderr, "Mode=%s -- start\n", dpa_tree);
-      if (strm (dpa_tree, "kmeans"))
-	{
-	  T=seq2km_dnd (S);
-	}
-      else if (strm (dpa_tree, "clustalo") ||strm (dpa_tree, "co") )
-	{
-	  T=seq2co_dnd (S);
-	}
-      else if (strm (dpa_tree, "cwtree") ||strm (dpa_tree, "clustalw") )
-	{
-	  T=seq2cw_dnd (S);
-	}
-      else if (strm (dpa_tree, "parttree"))
-	{
-	  T=seq2parttree_dnd (S);
-	}
-      else if (strm (dpa_tree, "dpparttree"))
-	{
-	  T=seq2dpparttree_dnd (S);
-	}
-      else if (strm (dpa_tree, "fastparttree"))
-	{
-	  T=seq2dpparttree_dnd (S);
-	}
-      else if ( dpa_tree[0]=='#')
-	{
-	  char *seqf=vtmpnam (NULL);
-	  char *tf=vtmpnam (NULL);
-	  printf_system ("%s %s >%s", dpa_tree+1, seqf, tf);
-	  T=main_read_tree (tf);
-	}
-      else if (check_file_exists (dpa_tree))
-	{
-	  T=main_read_tree (dpa_tree);
-	}
-      
-      else
-	myexit (fprintf_error (stderr, "%s is neither a guide tree nor a valid dpa_tree mode [FATAL:%s]", dpa_tree,PROGRAM));
-      
-    }
-  else if (usetree)
-    {
-      fprintf (stderr, "usetree=%s  -- start\n", usetree);
-      if (!check_file_exists (usetree))myexit (fprintf_error (stderr, "%s is not a valid file [FATAL:%s]",usetree,PROGRAM));
-      T=main_read_tree (usetree);
-      
-    }
-  else
-    {
-      fprintf (stderr, "default: kmeans  -- start\n");
-      T=seq2km_dnd (S);
-    }
+  if (usetree){dpa_tree=usetree;}
+  if (dpa_tree){T=seq2dnd (S, dpa_tree);fprintf ( stderr, " dpa_tree %s\n", dpa_tree);}
+  else {T=seq2dnd (S, "kmdnd");fprintf ( stderr, " default kmdnd\n");}
+  
+  if (dpa_tree && check_file_exists (dpa_tree))output_dpa_tree=0;
+  else output_dpa_tree=1;
+  
   fprintf ( stderr, "Compute Guide Tree -- done\n");
   
   //decide on bucket sizes
   if (dpa_nseq==0)dpa_nseq=30;
   
+  
   //get the weight
-  fprintf (stderr, "Compute Weights -- mode %s -- start\n", (dpa_weight)?dpa_weight:"longuest");
-  w=seq2dpa_weight (S, dpa_weight);
+  fprintf (stderr, "Compute Weights --");
+  if (dpa_weight){w=seq2dpa_weight (S, dpa_weight); fprintf ( stderr, "%s\n", dpa_weight);}
+  else { w=seq2dpa_weight (S, "longuest");fprintf ( stderr, "default longuest\n", dpa_weight);}
   fprintf ( stderr, "Compute Weights -- done\n");
   
   //run the alignment
-  
   fprintf (stderr, "Compute MSA -- dp_method %s -- dpa_n %d -- start\n", command, dpa_nseq);
   T=node2master (T, S, w);
   alnfile=tree2bucket (T,S,dpa_nseq,command);
   fprintf ( stderr, "Compute MSA --- done\n");
+  
   //figure out the name
   F=parse_fname(seqfile);
   if (run_name){vfree(F->name); F->name=run_name;F->path[0]='\0';}
@@ -7109,14 +7072,17 @@ Alignment * t_coffee_dpa (int argc, char **argv)
  
   
   //output The tree
-  if (!newtree)
+  if (output_dpa_tree)
     {
-      newtree=(char*)vcalloc ( 1000, sizeof (char));
-      sprintf (newtree, "%s.dnd", F->name);
+      if (!newtree)
+	{
+	  newtree=(char*)vcalloc ( 1000, sizeof (char));
+	  sprintf (newtree, "%s.%s", F->name, dpa_tree);
+	}
+      print_newick_tree (T,newtree);
+      display_output_filename (stderr, "TREE","newick",newtree, CHECK);
     }
-  print_newick_tree (T,newtree);
-  display_output_filename (stderr, "TREE","newick",newtree, CHECK);
-
+  
   //terminate
   fprintf (stderr,"\n\n");
   print_command_line (stderr);

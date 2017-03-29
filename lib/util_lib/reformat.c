@@ -1231,6 +1231,46 @@ Sequence  * main_read_seq ( char *name)
        return S;
        }
 
+Alignment * quick_read_aln ( char *file)
+{
+  if (get_first_non_white_char (file)=='>')
+    {
+      static char *tmp_name=vtmpnam (NULL);
+      if (printf_system ( "fasta_seq2name_seq.pl %s > %s",file, tmp_name)!=EXIT_SUCCESS)
+	{
+	  printf_exit ( EXIT_FAILURE, stderr, "Could Not Read File %s [FATAL:%s]\n", file, PROGRAM);
+	}
+      else
+	{
+	  int nseq, len;
+	  char c;
+	  FILE *fp=vfopen (tmp_name, "r");
+	  Alignment *A;
+	  fscanf (fp, "%d %d\n", &nseq, &len);
+	  A=declare_aln2(nseq, len+1);
+	  A->nseq=0;
+	  A->len_aln=len;
+	  while (fscanf (fp, "%s %s\n", A->name[A->nseq], A->seq_al[A->nseq])==2)
+	    {
+	      A->nseq++;
+	    }
+	  vfclose (fp);
+	  return A;
+	}
+    }
+  else
+    {
+      static char *tmp_name=vtmpnam (NULL);
+      if (printf_system ( "clustalw_aln2fasta_aln.pl %s > %s",file, tmp_name)!=EXIT_SUCCESS)
+	{
+	  printf_exit ( EXIT_FAILURE, stderr, "Could Not Read File %s [FATAL:%s]\n", file, PROGRAM);
+	}
+      else
+	{
+	  return quick_read_aln (tmp_name);
+	}
+    }
+}
 Alignment * main_read_aln ( char *name, Alignment *A)
        {
        int a;
