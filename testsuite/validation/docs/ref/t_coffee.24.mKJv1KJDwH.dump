@@ -1,0 +1,2762 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -infile sample_seq1.aln -evaluate -output tcs_weighted, tcs_replicate_100</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=808, Nseq=4, Len=85 
+
+hmgl_trybr      kkdsnapkramtsfmffs----sdfrskhs-----dlsivemskaagaaw
+hmgt_mouse      -----kpkrprsayniyv----sesfqeak-----ddsaqgklklvneaw
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenp-----dfkvtevakkggelw
+hmgl_wheat      --dpnkpkrapsaffvfm----gefreefkqknpknksvaavgkaagerw
+                      ***. ::: .:      .   :       : .     *  .  *
+
+hmgl_trybr      kelgpeerkvyeemaekdkerykrem---------
+hmgt_mouse      knlspeekqayiqlakddrirydnemksweeqmae
+hmgb_chite      r--glkdkseweakaatakqnyiralqeyerngg-
+hmgl_wheat      kslsesekapyvakanklkgeynkaiaaynkgesa
+                :  . .::  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[1] 	tcs_weighted	tcs_replicate_100
+-len           	D	[0] 	0 
+-infile        	R_F	[1] 	sample_seq1.aln
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+!		[Final Evaluation][TOT=   10][  0 %]!		[Final Evaluation][TOT=   10][ 20 %]!		[Final Evaluation][TOT=   10][ 30 %]!		[Final Evaluation][TOT=   10][ 40 %]!		[Final Evaluation][TOT=   10][ 50 %]!		[Final Evaluation][TOT=   10][ 60 %]!		[Final Evaluation][TOT=   10][ 70 %]!		[Final Evaluation][TOT=   10][ 80 %]!		[Final Evaluation][TOT=   10][ 90 %]!		[Final Evaluation][TOT=   10][100 %]
+0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) sample_seq1.aln  Format clustal_aln
+	Input File (M) proba_pair 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.aln Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+  Input File sample_seq1.aln Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Ssample_seq1.aln
+	--- Process Method/Library/Aln Mproba_pair
+	xxx Retrieved Ssample_seq1.aln
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1904]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1904]--->[1461]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+
+
+OUTPUT RESULTS
+	#### File Type= MSA             Format= tcs_weighted    Name= sample_seq1.tcs_weighted
+	#### File Type= MSA             Format= tcs_replicate_100 Name= sample_seq1.tcs_replicate_100
+
+# Command Line: t_coffee -infile sample_seq1.aln -evaluate -output tcs_weighted tcs_replicate_100  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.184 Mb, Max= 30.547 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=386, Nseq=4, Len=85 
+
+hmgl_trybr      kkdsnapkramtsfmffs----sdfrskhs-----dlsivemskaagaaw
+hmgt_mouse      -----kpkrprsayniyv----sesfqeak-----ddsaqgklklvneaw
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenp-----dfkvtevakkggelw
+hmgl_wheat      --dpnkpkrapsaffvfm----gefreefkqknpknksvaavgkaagerw
+                      ***. ::: .:      .   :       : .     *  .  *
+
+hmgl_trybr      kelgpeerkvyeemaekdkerykrem---------
+hmgt_mouse      knlspeekqayiqlakddrirydnemksweeqmae
+hmgb_chite      r--glkdkseweakaatakqnyiralqeyerngg-
+hmgl_wheat      kslsesekapyvakanklkgeynkaiaaynkgesa
+                :  . .::  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.tcs_weighted</name>
+<content>    4  630
+hmgl_trybr kkkkkkdddd dssssssssn nnnnnnnnaa aaaaaaaapp ppppppppkk kkkkkkkkrr
+hmgt_mouse ---------- ---------- --------kk kkkkkkkkpp ppppppppkk kkkkkkkkrr
+hmgb_chite ---------- -aaaaaaaad ddddddddkk kkkkkkkkpp ppppppppkk kkkkkkkkrr
+hmgl_wheat ------dddd dppppppppn nnnnnnnnkk kkkkkkkkpp ppppppppkk kkkkkkkkrr
+
+           rrrrrrrraa aaaaaaaamm mmmmmmmmtt ttttttttss ssssssssff ffffffffmm
+           rrrrrrrrpp pppppppprr rrrrrrrrss ssssssssaa aaaaaaaayy yyyyyyyynn
+           rrrrrrrrpp ppppppppll llllllllss ssssssssaa aaaaaaaayy yyyyyyyymm
+           rrrrrrrraa aaaaaaaapp ppppppppss ssssssssaa aaaaaaaaff ffffffffff
+
+           mmmmmmmmff ffffffffff ffffffffss ssssssss-- ---------- ssssssdddd
+           nnnnnnnnii iiiiiiiiyy yyyyyyyyvv vvvvvvvv-- ---------- sssssseeee
+           mmmmmmmmll llllllllww wwwwwwwwll llllllllnn nsssaaarrr eeeeeessss
+           ffffffffvv vvvvvvvvff ffffffffmm mmmmmmmm-- ---------- ggggggeeee
+
+           ddfffffrrr rrssssskkk kkhhhhhsss ss-------- --dddddlll llssssssii
+           eesssssfff ffqqqqqeee eeaaaaakkk kk-------- --dddddddd ddssssssaa
+           ssiiiiikkk kkrrrrreee eennnnnppp pp-------- --dddddfff ffkkkkkkvv
+           eefffffrrr rreeeeeeee eefffffkkk kkqqkknnpp kknnnnnkkk kkssssssvv
+
+           iiiivvvvvv veeeeeeemm mmmmmsssss sssskkkkkk kkkaaaaaaa aaaaaaaaaa
+           aaaaqqqqqq qgggggggkk kkkkklllll llllkkkkkk kkklllllll lllvvvvvvv
+           vvvvtttttt teeeeeeevv vvvvvaaaaa aaaakkkkkk kkkkkkkkkk kkkggggggg
+           vvvvaaaaaa aaaaaaaavv vvvvvggggg ggggkkkkkk kkkaaaaaaa aaaaaaaaaa
+
+           aaaggggggg gggaaaaaaa aaaaaaaaaa aaawwwwwww wwwkkkkkkk kkkeeeeeee
+           vvvnnnnnnn nnneeeeeee eeeaaaaaaa aaawwwwwww wwwkkkkkkk kkknnnnnnn
+           gggggggggg gggeeeeeee eeelllllll lllwwwwwww wwwrrrrrrr rrr-------
+           aaaggggggg gggeeeeeee eeerrrrrrr rrrwwwwwww wwwkkkkkkk kkksssssss
+
+           ellllllllg gggggppppp peeeeeeeee eeeeerrrrr rrrkkkkkkk kvvvvvvvvv
+           nlllllllls sssssppppp peeeeeeeee eeeeekkkkk kkkqqqqqqq qaaaaaaaaa
+           ---------g ggggglllll lkkkkkkkdd dddddkkkkk kkksssssss seeeeeeeee
+           slllllllls ssssseeeee esssssssee eeeeekkkkk kkkaaaaaaa appppppppp
+
+           yyyyyyyyye eeeeeeeeee eeeeeeeemm mmmmmmmmaa aaaaaaaaee eeeeeeeekk
+           yyyyyyyyyi iiiiiiiiqq qqqqqqqqll llllllllaa aaaaaaaakk kkkkkkkkdd
+           wwwwwwwwwe eeeeeeeeaa aaaaaaaakk kkkkkkkkaa aaaaaaaaaa aaaaaaaatt
+           yyyyyyyyyv vvvvvvvvaa aaaaaaaakk kkkkkkkkaa aaaaaaaann nnnnnnnnkk
+
+           kkkkkkkkdd ddddddddkk kkkkkkkkee eeeeeeeerr rrrrrrrryy yyyyyyyykk
+           dddddddddd ddddddddrr rrrrrrrrii iiiiiiiirr rrrrrrrryy yyyyyyyydd
+           ttttttttaa aaaaaaaakk kkkkkkkkqq qqqqqqqqnn nnnnnnnnyy yyyyyyyyii
+           kkkkkkkkll llllllllkk kkkkkkkkgg ggggggggee eeeeeeeeyy yyyyyyyynn
+
+           kkkkkkkkrr rrrrrrrree eeeeeeeemm mmmmmmmm-- ---------- ----------
+           ddddddddnn nnnnnnnnee eeeeeeeemm mmmmmmmmkk kkkkkkksss ssssswwwww
+           iiiiiiiirr rrrrrrrraa aaaaaaaall llllllllqq qqqqqqqeee eeeeeyyyyy
+           nnnnnnnnkk kkkkkkkkaa aaaaaaaaii iiiiiiiiaa aaaaaaaaaa aaaaayyyyy
+
+           ---------- ---------- ----------
+           wwweeeeeee eeeeqqqqmm mmaaaaeeee
+           yyyeeeeeer rrrrnnnngg gggggg----
+           yyynnnnnnk kkkkggggee eessssaaaa
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.tcs_replicate_100</name>
+<content>    4  85
+hmgl_trybr fer-dakgfs m-vfdmvsrt sdkk-vess- ksfr-eer-m faesek-vk- nes-aldghk
+hmgt_mouse yenwdernya rkqidraans veqdaqisvs d-ir-igr-l yaeaekeqkk -esqvddnak
+hmgb_chite wkryaekgya lqtlalears lsstgtqkle ialnrqerrk yaaakk-trq dakngfagnr
+hmgl_wheat fskylekgfa paavlppaks meaksagsma npve-gar-k faaaskaaka nasgaklgfk
+
+           r--irrg-sm mdsvaeeerk d--pk
+           n--arkskan nekaveinrk dekpk
+           raavnkgqam mspegde-nk deqpr
+           k--veksaaf fekpaevsek nnapk
+
+
+
+    4  85
+hmgl_trybr aaes-aksdm skame-rdkf plvkereafa sekledvprf md-veressg yrasmnadvs
+hmgt_mouse pkesaakldk sdpnq-rdky plakknkeiv ankdqeqpry rdqqnrgkks ynalr-vdav
+hmgb_chite pkdkglkaav etpmannakw p-ekaraelg a-kfastpny ldnt-reppg wraaldgael
+hmgl_wheat akessrkglv gkafa-elkf plpknkneva askkaeapef pngasrakks ykagpnalpm
+
+           vtgwn--l-r mmg-mddmfi ekaav
+           qsnw-e-lsk kls-kddrya edlka
+           tsgwdrn-ek vkgrvdalyv aikke
+           asgwnk-lak vks-vnlpfv anakp
+
+
+
+    4  85
+hmgl_trybr rfe-kepved esmmsmeemm smvkk-amai gaslyah-la tkaaswas-t spseeeapke
+hmgt_mouse rygmrgpqke ealnskegml slqkkwpnaa svvdypawll seapvwp--s kpaieqppdi
+hmgb_chite rwegkeltas kakmkvaelk kktkkypmlv gglfwpny-k seaplwpa-s plaeaapliq
+hmgl_wheat rfaekaeane sakfsvaaik skakkyafrv samkyafyla seaamwapks keavaaaeng
+
+           -yn-r-eg-e kapikmrmer mrsmk
+           ky--n-es-g kppaekrrnr rrvnk
+           qyd-rrdgre kppvevrl-n lnlmr
+           aynkk-es-a kapvevrpse pemfk
+
+
+
+    4  85
+hmgl_trybr nrfkamk-es hifkaes-ia rtv-e-ffks mefnnr-es- pkvfpkkyef fka-kyeks-
+hmgt_mouse -rsdkneegl aasdeg-eak nsqwgssyds lqy--rkqqq pkqipdryei ikeeqye-le
+hmgb_chite dritkmerea nviieeaevk rstyeeiytk kayddnqarn pktlpikyal lkeesya-a-
+hmgl_wheat nrfkkfekag fvfneapnvk ksayaaffks kafnneaaeg pkavpnkyav vkenaya-ga
+
+           ss-emrgpk- kakvkeenea plsds
+           slqinrnpk- qkdakgk-il pdqev
+           eanemngprr skiekeadqk lfrsl
+           gggvfegpk- aknpkannga ekeem
+
+
+
+    4  85
+hmgl_trybr -eerraea-f aekkkgkek- -krlsmkske kkvs-efhhr -kdfarrapa aee-kydksn
+hmgt_mouse eqefkagpky vnkkqsqqk- edndamr--e r-qs-eyaar -qeylfnppv aqqqkyedl-
+hmgb_chite -aakkaepqw g-krsgsakr rirfalka-d k-tk-kwnnn assykkrppg aaankysiad
+hmgl_wheat aaarkaaaaf askkasaak- knkkaikp-e k-asnsfffe -aefarkapa aaagkyengn
+
+           s-mi-vessf -kk-akmm-m mkesd
+           smraeaesvi ekqkvkmrer rqevd
+           eglvredell rrsqgrll-l lsdla
+           gepvkpegmv kkaaakipap paeml
+
+
+
+    4  85
+hmgl_trybr smtm-kivnr kwkfm-kyde sara-rs--e -aaa-fkeee kskdyfmsmk -vaervtkam
+hmgt_mouse krsr-kaa-k kwkinekydk kenaerl-aq -aleeykigk dl-dyimlkd qqpnnasqkl
+hmgb_chite plsl-kvedk kwrlm-ryaa peraenarga -akerwkeea ta-awllavi ntp-resskk
+hmgl_wheat kpspkkvpnk kwkvfakyln kekaneg-sa naaekfkvan kg-lyvigvn gaaskpsakk
+
+           sef-rmekap mkfdm-a-dy dy-ff
+           vnyarkedkp k-i-rek--y eyesy
+           l-wgrvkikl v-l-lrkn-y syriw
+           msfsrvsnke v-vdpkk-dy eykff
+
+
+
+    4  85
+hmgl_trybr spkpkshy-- wf-akhdr-- dakggykeef eanvgrkvaf -kdmdpa-ar -aa-f-k--e
+hmgt_mouse lpkpkvayea wy-kradnk- -adnnydeki iv-asrkaey q--rdppear -lawseks-n
+hmgb_chite apkprlnwrg ww-kkndrqr -liggwtkal egdegrkeew n--ldlprlr sklyirre--
+hmgl_wheat gpkpkmfyks wfpkkfnka- drnggyksnv vanpsrkpef g-dpneakrr -aryfkkaks
+
+           eraervks-e kefd-g-atm -ses-
+           qnairak-wn resdasepsn kvnaw
+           arlenekay- kkiaggepsm ql-ay
+           akrvepkpys ksflssnasf amsay
+
+
+
+    4  85
+hmgl_trybr fsffyvayyk m-ra-g-rem ekeeakak-f gphsppayhf efke-nakfy -spakkpeir
+hmgt_mouse isssyakyyq lsnpsnekel edqkervksy spaqppayay eydek-ekyy q-pvkdpgar
+hmgb_chite lkiiwekyys kerpeg-kak ataaekgkey gpnrplaynw dwiaqdekyw nalgktlevn
+hmgl_wheat vsffypkyya kakaagakak akanekakaf spfepeayff efnaanekfy gpeakkeave
+
+           mhkykykfar dmmakeeiee n-yka
+           nadydykiar dlkprngaiq -wykk
+           mntyiwrllr akvpk-evea dyyrk
+           ffkynykvrr lkvaksavva nyykk
+
+
+
+    4  85
+hmgl_trybr wapfgmaa-l semedkksea swepv-em-y eaee-v-was favffmmae- kkfevssr-k
+hmgt_mouse wkpynnaaql -kke-kdlne vwnpq-el-y nviisa-wls ikasirmkqq k-yiqasnwr
+hmgb_chite wkpygmaln- aavd-kia-e lw-ptrak-y -gqqeenwke lkeilllkan k-yqtaeryk
+hmgl_wheat wkpfgfargl pnvedkngse mwspa-akky saggap-wag vkpfvpikag k-fgaagkyk
+
+           kse--nersf rkfkeafkmw fk-me
+           dve-w-knvy keyrieiknw iemrg
+           tlarydarly kewkeelrmw legle
+           kma-ynnkmf kefkvevkfw veepa
+
+
+
+    4  85
+hmgl_trybr p--ksrsees akilfklkss k-mrlrare- -ksaemtaka dakf-vskmd kkfwskk-ma
+hmgt_mouse pekkqkkik- vkalsddds- rsrrdrkrqe aqsvensekv dvki-avkld kdswldkwmk
+hmgb_chite leqkrkpqaa grv-itfika kelnfrknae gsegdmsekg agkl-elrkd riiwatrylk
+hmgl_wheat enakekkgnp akvlfkknsp kapekrkean sagaefseka lakvqpmkkn knfwgkkyik
+
+           kevayi-ksa es-k-lgtee -as-a
+           enqvyakdaa ksqkslssnk kaawv
+           e-tgwvqiaa aenke-gs-a qaayg
+           esaayvanaa nggkalsssn aaaya
+
+
+
+    4  85
+hmgl_trybr ekdtmfrwms rafgmv-em- ypkf-asas- -ma-td-gtm -e--eerdnv mry-kmpas-
+hmgt_mouse ekdslyfwla rasnkasqle yp-i-kke-e wrvksd-ssl ee--kire-q lry-dkpvae
+hmgb_chite kkaskykwka nligveeak- yl-lskpear ylgqsaagsk -arraqnsdt krystvlgae
+hmgl_wheat sklskfrwka erfgvpaaka ye-v-kkepk ypaasl-ssk aa--ngeena kry-kveaan
+
+           ffflvkrwa- spkaevme-m eehfs
+           siilqknwlw speknqme-n keass
+           ill-tkrwky kpek-tla-m adnik
+           fvvlakkway speksaiakf neffs
+
+
+
+    4  85
+hmgl_trybr kg-ve-gkrp ses-yr-kgf -dthgk-kas gsrsgi-arr srkfekeem- rsas-sarkk
+hmgt_mouse kneqnksdnp veseynsksy kesane-kl- nlrsna-afr krkyqkegns rvasm-krkk
+hmgb_chite rgrt-qgirl lke-wrergw qssngerkka gankgv-lkn pnryakdeme nllkgakrkk
+hmgl_wheat kgkasasnke msgaykaksf aesfge-kap ggesgvqrre kekfakeafa emrsepkrkk
+
+           afhrrlv--m kn-ls-hdrf mgfkr
+           pyakkdqssr k--ls-adry lnskr
+           pynkkfteel kds-esndry kgirr
+           affkkkaaap kn-lg-fnrf kgfkr
+
+
+
+    4  85
+hmgl_trybr -eeayffeep kfvaefkkkr kneraeeead ksfrs-k-em ksaekkk-nk ksr-vafsme
+hmgt_mouse -gelyyieqp ryavkidr-k q-iraieia- dvinssq-qr k-akdd---r rsr-aayvle
+hmgb_chite aekkwwlaap kyegaltk-k sdqnlqaea- illreesnal kaaatt--dk kkn-eaylkk
+hmgl_wheat -asayfvaap kfpanvkk-k angergavad nmvkgaa-ap kpankk-qnk kseqpafmks
+
+           e-kaafkr-r as-famkyra pkaam
+           emdaaykrmr a-ssalkynv pqall
+           kgtlaykngr laeilkkwrg pslkk
+           sekrafkeer rpafrkkyka parak
+
+
+
+    4  85
+hmgl_trybr rakkmlk-sa sesrsmef-k armlmervkk ratdegnekk trgfr-rmfa rmeas-saei
+hmgt_mouse nkqklldkaa vnvfsmii-r pkklkgrade rasdis-qkk snsyrwkmye fmgvqsqpna
+hmgb_chite rkskk-tqaa l-lkklelak pkv-verete rlsaegdakk srgwnyklwe klegrerp-v
+hmgl_wheat kkakklkaaa msmrsivv-k akvlvarpke rrslvsnakk sksfeykife riaaeaeasv
+
+           he-k-gvsae gkfyk-sies rfrkk
+           akedwnqlvq ndyy-qvail kyrq-
+           nartygtaga gtww-nlvea kyns-
+           fnkkygagaa gkfy-gmvvg kfea-
+
+
+
+    4  85
+hmgl_trybr fe-sdra-kl eaeee-sal- ywararsvdm ak-ddavmsr rrka---amr ye-emeardr
+hmgt_mouse yimldreskd eeikqk-alm ywaranaqdm pdw-daqraf rrkaeq-elr ynsikevrdn
+hmgb_chite wegadreerf aeeaaqaa-g wwlnaratal pty-datlak rnkaen-ekn w-eqvdgndr
+hmgl_wheat fvegnreakk aevnaapale ywreakaali akydnaapar rekangkeke ysagveaenk
+
+           rams-iefwe frkskka-ey pkyet
+           rpkvsanswe ikqvddk-ey pdyns
+           npvlev-iwa lkslitkndw pty-s
+           eavmavsfwa vkamnkk-ey pkyss
+
+
+
+    4  85
+hmgl_trybr mysdaaaege ansnw-ears -ymaksfn-a -ah--ggfav -sk-eykme- yrkrpa-rms
+hmgt_mouse ryadaakkni a-s-w-ilkl kynaevy-ql eaaeensilq eskkeyklks ynerpp-nl-
+hmgb_chite lyaalakage ldkdw-qkka qymlelydnk -lne-gglkt -kkqaykkae yrerlp-rka
+hmgl_wheat pyalrakngv rnsnwkgakg ayfremfnga arfnagsvaa askaaykkna ykereapkkp
+
+           evfeakkg-r lskeseam-r m-kaf
+           gqigkrdn-k lqkeskvrek rerls
+           etlekktgak -rraeagl-k l-kki
+           aavakkkg-k lekagnapak pakaf
+
+
+
+    4  85
+hmgl_trybr sniadvapaa sersr-pirr eke-kmemd- -amrr-yase dmaslnessk eavekwaeea
+hmgt_mouse --apdqepkl sikskapank ekkwrlekd- -vlrrqypak -kall-kvqq iaai-wkqia
+hmgb_chite advpdtepkk kekekglvrk dkaykkava- rgknnnypaa -vaa-dalrs elee-wkael
+hmgl_wheat pnvanaepka svkgksevkk eknykkavlk -akeegyaan dvaglnnmea vrpv-wkavr
+
+           eekeksk-ry akrekeeefg pisfe
+           ikknr-dkry a-rieqeesn pasye
+           eak-kaiqry l-nqeadkig lvkya
+           vnkskpnary r-egeaesfg evsfa
+
+
+
+    4  85
+hmgl_trybr lynfa-kvsm yadlerdkdt wamhmnkks- snnkm-rmav -rnm--erkm pk-snvnkkm
+hmgt_mouse ly-sk-kqll ykdlkfdkds wpkar-qkke a--rkekraa -k-lw-ifen pkek-q-qrr
+hmgb_chite -ydik-ktak ykd-akdkds wpvnldskpe addkv-klae skdkyrqkem lrrpdtdskl
+hmgl_wheat lynfkqkagk yknlnrnkns wavfpnakkn annkvakpap -knky-gref ekkknanakp
+
+           p-me---w-m dwigmkfn-- kfrsr
+           pqlk-wewel ewasmdy-m- dynkr
+           pnkany-wek swvgliydga twrpr
+           pgkn-yawnk ewvsinfne- kfkkr
+
+
+
+    4  85
+hmgl_trybr ff-peaghkf kpesprafkw rskef-ehvg fssyda-e-s aaadpaaa-a aaeftav--r
+hmgt_mouse ysepeenaky rpespnkidw fa-qyegaan yv-yev-qqs akldpall-a lvkisvaear
+hmgb_chite yi-laegnrw klaelrkliw ka-aweeneg wlaysgrank lkkdllkk-l kgalsgeegn
+hmgl_wheat ffaeaegfkf keagekkvnw ra-afnafpg fmpyea-ags rkaneraaqr aanvsapnse
+
+           -k-m-kmkvk kfafymmg-k -vkmy
+           edemakrdak dylyykms-k kqqly
+           ei-lgkltek tykyyvlg-r qtsky
+           nnaiskpkpk kfafyviskk aaaky
+
+
+
+    4  85
+hmgl_trybr rdakkregky kf-s-a-hky -vpmemdkmv aaetvyeke- -psessfw-r ew-arake-m
+hmgt_mouse r-kkqrinky rye-qvwaky saprgmdkma llgsaye-i- -p-qkaswer nwmpnlrgen
+hmgb_chite n-kksrqgkw kyrangynry eeplelakle kkeseya-en -paapaiwer -wgprkkeem
+hmgl_wheat edkkarggky kfkpgayfky apppailkip aaaspya-v- kppakafwnr sweakakanf
+
+           smsfek-lfm srkasvffam -gmle
+           srsykdelik snrasqyyln -slle
+           klkwai--lv erkaktwwkm -gk-d
+           spsfnnalvv gkkasaffaf qskle
+
+
+
+    4  85
+hmgl_trybr ksymvimyl- atlk-ffpvi mstnpem-ar dkrerwmemr vwweeeysm- eklraa-eka
+hmgt_mouse d-ymaalylk lsdk-iypqa nas-pinelk -krknwmnkr qwwngiyal- qrlrla-e-a
+hmgb_chite iawlevky-q ksfk-lyptv masdlqmekk -knarwl-vn tww-eeyak- ak-rka-k-l
+hmgl_wheat npyipvkyla askkqvfpav fasnegfnak dkenkwisve awwsavyakk aklraaks-r
+
+           dgpredeyhm rkyksfhrty -sf-k
+           dsprqdeyar rkyk-iaksy essak
+           aglnaddwnl rkwkalnksw eeigk
+           lseeaneyfp rkykpvfksy ngfsk
+
+
+
+    4  85
+hmgl_trybr ---lkspsem k-skrayssk erypemee-a kk-mgkseme kd-af-emep -seaytkd-a
+hmgt_mouse -k-leapler ksvqreyl-r kfypnkiima drwksdsqme kdkkyeikkp aqgkysddka
+hmgb_chite -q--eapadl kelsneyaak akwp-vqqga ikyvgieala kdqkyreval grekystaqa
+hmgl_wheat nanleapgep kamaeeygpk nrypsvggea nkyvsngaia knakfkvvne seakysklaa
+
+           -ekyaes-dk ekekrekier -mkmi
+           eq-yans-dk iqiqrekaer ekqna
+           ea-ya-erdk qsqsrakvdn evsmv
+           na-yasg-nk gagarakvee nvafv
+
+
+
+    4  85
+hmgl_trybr darsfgsdik arlw--kvkg asmskskeek vaskegsegf ekeeekkdsm edkhpe-kml
+hmgt_mouse denlynadad anlwsqraks vsrqrlkekd aasrks-nns eqeiq-ddan ierapeqkmd
+hmgb_chite aerawgaavt ar-wenkekg gelrkardai eakkaga-gi asaea-tdam qsknpdnrlf
+hmgl_wheat lekgfgalvk aklwagkpks agpekgkenn pasknspsgf aaava-knaf gekfpegkik
+
+           ef-grspask srrsksemsm -fsfd
+           eysnflplq- srn-daqrsr milyd
+           ayegkapkr- krraiaalkl glaya
+           afagrgpae- srkpnaapsp evgfl
+
+
+
+    4  85
+hmgl_trybr aaefeamskk e-pwa-enkk yakrwkeaas --m-skefka kfkvr-kwma skaey--pls
+hmgt_mouse algyganlk- kspwlqq-kk yekkwrivll kkm-vkky-p dyean-dwrv kkpeyswpls
+hmgb_chite lkeyelmak- aelwknadrk wekkwkegka qql-lkaw-p iweer-twlg pkpaweyp-k
+hmgl_wheat raafarfgk- naewagankk yekkwkvaag aaikmknf-a nfepknkwpa kkaayaypls
+
+           rrskawymye akaekmseas alhkg
+           rrvdlwymye eqpikrleas adakn
+           nrltkwylya espeklaklk afnrg
+           ermkawyiya eaavkpgsrs akfkg
+
+
+
+    4  85
+hmgl_trybr eelyekraya esreakl-ga fnypgkfe-m yeeasek-a- r--srlmerf eaamfktwmk
+hmgt_mouse eidykefvyk evrelklqne s-ypskskql yeipqireaa n--sndrgrs ieklykswnd
+hmgb_chite kefwaekgyk alrkkk-nge idwpgkiank ydeprekeag rnaerfleni qekkykswmt
+hmgl_wheat svkynerayk amrsaklgge fnypskfngk yevaevknas k--gkkpaef gekkfkswfk
+
+           tgel-efrka mw-eteskws rfsae
+           sngl-isnqp rwseseakw- rivke
+           sge-aqirsp lweaskakwa nllka
+           sgal-gfkaa pwaassakwp evmka
+
+
+
+    4  85
+hmgl_trybr eem-ed-afa -i-vrresye vaayk-pnra dradm-aaam tsareddkey -fkre-pwsa
+hmgt_mouse nqm-eeapiv easqrrkqye aely-wp-nv -radmwalan ssafnd-eiy ssqrkepwsp
+hmgb_chite -al-dsgplg rvetnrarwk eekw-ypdrg -nlalylkam sklk-a-eqy eisna-lwep
+hmgl_wheat saipeesava kvaaerneys peay-ypnka derliyraaf ssrrsldegy afaenaewga
+
+           mkeanaaaa- kp--meedwl vemag
+           lqil-paape rpeenei-wd qkkln
+           ksekdplap- kpeemae-wf tavkg
+           kavanaraaa kpnnfavdwk anvag
+
+
+
+    4  85
+hmgl_trybr pkse-ep-mk gdakmfdyaa -e-lr-easm fsaaasa-fk amsansvwek vsarndkksi
+hmgt_mouse peai-qp-kq ndk-kydyll sielrqipal ilavvkpki- ansp-sawek aser-dkdla
+hmgb_chite leaqnapsvs gdk-vydykk eqe-nnepak lalggppql- amkpdeewdr eeenddkiav
+hmgl_wheat eeag-ap-va gnk-vfnyaa agnlegvaak vgraakaav- afsangpwek pgeennkngv
+
+           -e-yekakas knss-ksak- mlmtk
+           kieykdkrpv d-ka-ksare mlksk
+           qq-yatkkpl tdpa-relkr l-vsr
+           agaynkkkam knkakkgrkk ilvsk
+
+
+
+    4  85
+hmgl_trybr sk-yskse-d eke-ksaeee ggaamfaigr vredam-mrt mek-selpnf tderm-se-f
+hmgt_mouse vr-ylk-i-d qrgaqsleqi nneenyaanr qfeekk-mks mqd--edp-y seqkl--eei
+hmgb_chite lkawakaend akegsekdae ggeemwlvgn tkaskv-lks lai-adfldw ssakknadrl
+hmgl_wheat mk-ygkpv-n akasagaeav ggeeffrvge araekvkiks ianppekenf seakk-pekv
+
+           ekm-stpgms am-aavaakg sseke
+           nkkkaspnmq arkkvaekdn lankn
+           -rvqaspglr llqkgeektg aa-k-
+           skvaaspgie rpakapekkg gasks
+
+
+
+    4  85
+hmgl_trybr r-k-mke-se m--ekrrfkm nmm-de--sd whdklssrag eaak-nkeem rtedsaay-r
+hmgt_mouse r-kwldeq-i mkeikrrydr -mksde-sad waedlavran nvpdk-kqgl ksedsaly-r
+hmgb_chite r-kykidnae lqeeknryil dlvedd-eaa wnst-alnlg -gpiqdraek ksadeakw-n
+hmgl_wheat rkkyknegpv ianvkerfnp nivanenaal wfeklamerg saanankaak ksangaaype
+
+           frmksmksae kkaskwfs-m -rmpf
+           yfnk-rrvak dkaqewysek erlpy
+           wkmkalklla tkarewwe-v -rklw
+           frfkppkmrn kkaeewfgav arkef
+
+
+
+    4  85
+hmgl_trybr esmelfske- lskfegadsk ref-germe- kapmwaa-mk hmk-elmk-s egkd--pvle
+hmgt_mouse iqmqlilke- lsdiinkdsk nesenqrmek qaplwek-rd ank-edle-- enqd-epalk
+hmgb_chite erla-lakas -kilegkdkk rdiegarlaq slpkwek-lt nmr-afkesa dgsdrrpe-a
+hmgl_wheat veialvgka- lsnvvgknsk kefngariaa arpkwekqpk ffknakke-p egan-kppln
+
+           k-skmamrta t-lgsiedds n-ysm
+           kw-rnanrsa smdn-aedd- --ylk
+           kyakmlmnsa sgfgavaaaa dnwav
+           kypkfrfesa sekgpvallp n-ygv
+
+
+
+    4  85
+hmgl_trybr karsdkk-ak mamdae-emr yssekkmw-g e-gake-kka ssarseeeme --ee-kktes
+hmgt_mouse -ars-eq-vd nvk-agqirr yv-qrdrwsn ianlenqkqe qsakleqemn eakekkksgs
+hmgb_chite -are-es-gi mgv-lenqln wlaaktlweg qggke-nrse reakaaakl- -gadqkksee
+hmgl_wheat -argdeapan favdraggpe ympakkpwag gsgaesgkae egakgaasis asneakksag
+
+           esadeygrdr erppsvakra lk-am
+           eaa-iysrdk erppqqkkra dk-al
+           kal-eygnak arplrtkrrl fknak
+           sardvyselk arpeeakkrr kk-ak
+
+
+
+    4  85
+hmgl_trybr efadkgrrek -keekg-fha dekedmfdfs anakkfsynm mtswifd-fk gaymsrvkke
+hmgt_mouse gyvd-srrqr edendn-yal dkkndnidiv l-lkdyvy-l nsawaydai- seyrvkaeke
+hmgb_chite ewgd-gnrak -td-tgrynk dak-dmlall kdkktylwdk msawvyagl- gewllkeerd
+hmgl_wheat afan-serak akeskg-ffa nnksnfvlvm anakkfmynk fsawvflsv- seypmkpeke
+
+           kknakm-pad -nas--giav gspsf
+           rk-kdrepa- a-eaqesaea nqpvy
+           kkdktl-pl- gdeanrgvee grply
+           kknkkpaprd sneagksvep gepmf
+
+
+
+    4  85
+hmgl_trybr ass-efe-ak fkaervters kasra-kpkr mksvsk-k-- emfgaekedr tys-l-wems
+hmgt_mouse kas-kyieer ydkinasinl -aaklekpkr lq-aqqq--e qmsnpiridf sy--dwwirk
+hmgb_chite kaksayqeek ytkqresqra -aakkerprr ksaersn-re aligpqkqdk swa-fywelp
+hmgl_wheat kas-nfgnek fkkgkpsgkg -aakankpkr kappeag--n aifgagkgnr sypkkywvpk
+
+           sfasa-eykm mear-veray mrdya
+           ailalwkykn nepr-qekvy mfdyk
+           alkakyawkm mkpn-tdkgw lkdwk
+           avaaaynykf fsaepaekay irnyk
+
+
+
+    4  85
+hmgl_trybr s-mes-vaae ryaggsakds sfkmatreme -aa-a-amvk ead-a-r-ke -kmlyre-py
+hmgt_mouse s-ri-kakvk ryvsnlpqdv -yrkesnerq -vkmk-prak eke-ekrskn kkkdyke-py
+hmgb_chite k-leaqekga nwgggapsal aykvesrala -gkgkrpler kksreqrek- qrvfwkanly
+hmgl_wheat sppvpapkan eyasggaalm pfkveskapa nakek-appk ske-earaks akvkyka-ey
+
+           me-k-tan-e da-kdaflea hrafs
+           nkmk-sk-ei dasd-aylkk areiv
+           magk-skdre daet-aw-ak nrell
+           fnekqsknkv naakdaflnk frevm
+
+
+
+    4  85
+hmgl_trybr aekemmrkek krweamaase -peaavafky keeps-keee rrankvasev v-s-yvkras
+hmgt_mouse keqgmrrqkq drwienkali spekvqayey knkpa-dkgn rrp-rqeqia aqskyaqral
+hmgb_chite kdsellnsas irwqemklaq elakgtlwey k-ala-tae- nnpdkterqe eneqyesrla
+hmgl_wheat keaaipeana nrwgefkrgg aeakaarfey ksneakknas eeankaeegp pggayparrg
+
+           keksnfnaa- eswyafk--d fdm-e
+           eqda-y-eam eswylik-ed ydrme
+           eaiadydeag akwyklr-ra walga
+           eananfneae aswyavkpkl flpea
+
+
+
+    4  85
+hmgl_trybr asksarsfyd dpeae-awma gattmepmek egeksfrvs- sh-nsrma-k kya-rsrmem
+hmgt_mouse pkklprkyye dpeeeskwkv sessreplne enedkykavq sae-lrlk-k dyleksnnqn
+hmgb_chite ppkaprpyys dpaekekwvg gesslalk-e agktpykeln en-darkk-k iykekermam
+hmgl_wheat akkgarkfye npaesakwva sesspaekse agskkfkpmg gfangrkkpk nyankgkfaf
+
+           k-es-aakfe gmgl-erssk khamf
+           --ilepp-ye nknd-gn-lk daars
+           --qa-pp-yk gvgf-eraak inlli
+           -kggaaa-fs gvgkqakpgk nfrpf
+
+
+
+    4  85
+hmgl_trybr fwsfa-mtsm sefaygavy- mskraeared efspsemgdf kk--kevmdk aeefaska-e
+hmgt_mouse ywvypkrsvn -gypysaqy- lvknkiafie kyap-nnsdy er-wkeqr-d kkeyv-kp-i
+hmgb_chite ywlwpqlslm aeypwgltyr klkrkqakes awapa-mgaw ek-yrktl-t kaaygarpaq
+hmgl_wheat fwmfaapsmf pafaysray- kmkkkgarve nfappsfslf eknyksapdk knafapka-g
+
+           eysrmsr-lk mrefaasnfk mrdak
+           eyanmsr-lq nnqyeek-sd nfda-
+           dyarlen--s mraweepdii mkdl-
+           eyakigeqla fkafeeknfn frnr-
+
+
+
+    4  85
+hmgl_trybr rgsfe-esee -afavrkfsr kg-kmev-ka e-aayydhik aklmv-tpfs aa-kkfr-sg
+hmgt_mouse fsvinkevni qeipqrei-r ks-krgqeqp gevayydaad aklrqwspsq kvqkrirqss
+hmgb_chite kgll-qal-e nelptrelar kgnrletrsp e-glwwdnvi ak-ltyslir kgnkklrneg
+hmgl_wheat rsmvsaamsv gevaarevpr ks-kpaakaa aaaryynfvn aklpaysefe kagkkvrggs
+
+           mmmtmamaae -eerearefk eakse
+           knlslpnaae enqkivkqyd kekke
+           vmkskpmlaa r-akqgkayt aekpk
+           vfkskafraa ksakgakafk nekks
+
+
+
+    4  85
+hmgl_trybr dempmkatwe e-sav---ra eefsf-tmrr slnakeliga ektrt-skka e-ldsdghas
+hmgt_mouse -ikplkaswi nwaaqa--rl nnyaywsrkr ql-ekedask iksnswsrkv isddsdsapl
+hmgb_chite -qvpkklswe -yaatg--nk --wayyslkn r-derdfvgk eksrsykkrg qefakagnpa
+hmgl_wheat dgvpkkrswv syaaasqnea ssfafyspke elnekekvsk vksksyskka gaklslsfag
+
+           akag-mfema a-pkkegpdf sradm
+           aqaskkiekv espekisp-y anadl
+           aslgqvldvg eepekegl-w arldk
+           aarsavveva eapekvsedf akrnk
+
+
+
+    4  85
+hmgl_trybr -ge-keamfr sawe-lfdsf -ky--d-svk awkesska-t kldeserm-m erkankfias
+hmgt_mouse wnisdiamif vewesly-ay -kye-desar awdik-kkqs kldelerl-r erke-kiap-
+hmgb_chite ygeeieallk lewae-y-aw akwenarkek lwiepakkns k-aaaknkrl arredklvpa
+hmgl_wheat ygvanvaivr mewaalfdaf -kyn-lkspk rwnvkpkkgs kllagsek-p arkenkvvap
+
+           aaerahlfk- -fafgsgwsf aaee-
+           vlnnaalik- -ykyslnwqy lpeis
+           gk-ran-lkn -wkygagwrw kpdee
+           aaskaflvk- nfkfsggwef aaeva
+
+
+
+    4  85
+hmgl_trybr y-mkeafkyy l-fw--e-a- ---spwenre sdnd-sad-f mmskfesfee eefsgargai
+hmgt_mouse yqmkklseyy deywqwg-ks eesvpwg-re sd-d-vad-i lm-eiq-yei nky-nkrsla
+hmgb_chite ynlkakiewy f-ywnyeake eeelpwedra kadd-lad-l klaelaaykq -awagkngkv
+hmgl_wheat ygiknafeyy kafwgya-ka nnampwanra slnnqmanqv kipevapfsg snfpgkesav
+
+           aakfrers-y rgkrds-mls rp-kn
+           eekikiraey knqrd--mll fp-k-
+           eerlkeraey kgsraa-l-a kpskd
+           eekvkvrany kgarlpkilg rp-kn
+
+
+
+    4  85
+hmgl_trybr aner-erkeg krra-d-fae --mhvke-f- vydrgfiela eetaa--paa kkfahyee-i
+hmgt_mouse a-ikkirkkn qnfesd-yag -elaqkqsyk aydrnyaell eisvpe-pav rqyaaykewa
+hmgb_chite ldekqenkag srkeeaayae aekntkaewq ewangwvk-k desgpr-lag ksyanyaayv
+hmgl_wheat rnvkavekng akreal-faa -nkfakaafa pylegfvsla evsaakqeaa kafafynayv
+
+           f-vafkkap- semgsmw-mp nednm
+           yeqvyddvpq lqnsvlw-np -g--m
+           y-tgytigpn aamglkw-ml de-dl
+           faaafknapg gafsmkwqfe nadni
+
+
+
+    4  85
+hmgl_trybr tedaskmafs vref-ikalk sffemraay- gpfime-m-k evd-mvn-sr msfemk-rk-
+hmgt_mouse sgdpkknaya arnswakllr vsyqrrpayw spiamnqrw- na--ka-esr msykkkkrk-
+hmgb_chite seapprmlya en-iyvkk-k liyalrpayy gplvl-nly- -e--vedekr leyavrqrrr
+hmgl_wheat salakkfrfa pesfyvkalk mffapraayy spvvisgpy- spdkvpnnsr igfnvkark-
+
+           atkiheetmt myvskfdshs efwt-
+           vsqaaeksls nyasqydqas eywsm
+           gssvndasks myekswarnk awwsg
+           asavfensks fypsaflefs afwse
+
+
+
+    4  85
+hmgl_trybr smaarresae ke-samaekk rmsanarkes -ayekmsfam eeed-mkak- mmnrfepied
+hmgt_mouse snklnrivak dns-pmledk kmqa-akres epyidrkyll kiqe-lead- kk-rsnpake
+hmgb_chite emkkrrella i-eaplkdik klradlkkdk epyqilpwkk aqasskeatr vvdri-lvas
+hmgl_wheat gfkakrvmrn nsapaiaenk kieanrkkes naygnpkfak ngae-keak- vvnrfsevne
+
+           alwkeakm-e yf-afdveee si-ee
+           llwkeldksi yysaydqieq aaeke
+           k-wrkktvee yweayatqaa avrad
+           alwksakvav yfaaflagaa avkne
+
+
+
+    4  85
+hmgl_trybr afkefiwmse anrmws-lel gnsse-eses sktr-ag-ke y-aaedkvaa -k-ffaksmk
+hmgt_mouse ayegiawm-i e-rrwq-did n-lln-eaes q-sr-ks-ri ykvvedrqal wdwysaeqmk
+hmgb_chite lweelvwlae edrlwr-fqf gdaa-aaaae r-snakg-kq yqggaaktak ytyyilerlr
+hmgl_wheat rfeavvwipv enrpwenkgk gnggs-aaag e-se-ksnkg yaaaalkaaa ykyffreeik
+
+           dkkfedrdsp s--amedena mrw-a
+           ddqyiendvp --mpnidk-e krw-v
+           atswesralp aagpmeaade vrwag
+           lkafveklmp p-eafvlnne vrw-a
+
+
+
+    4  85
+hmgl_trybr vkkkfesmda kpesagfef- afempkkfaf aykksaaaff es-mg-ytka maae-ssgty
+hmgt_mouse qqkkielmdp kpeapsyky- kyqrprkily eyqkaavvyi gvwkswysdv kapekvansy
+hmgb_chite tskrldaldp rpkapgyawn kwalpkklky ewsraaggwl elyvgywstg vapkqlagsy
+hmgl_wheat aakkvegina kpsaasfnf- kfappkkvaf eyakaaaafv amyvsyyska vaasamagsy
+
+           sps-r-r-mp d-f-elrmme kffk-
+           lpq-f-nekp --iaednmri ksyk-
+           alrnkarrvl --lgdfrllq riyr-
+           gee-r-kkve dpvsekkipg kffkq
+
+
+
+    4  85
+hmgl_trybr aaaeerdrrk ars-hmpfvr wefmp-lk-a mskd-fgsem krsfearaaw yyafak-ksa
+hmgt_mouse eeanirenrk akakarpiar wgykpkddwa lakd-ysaqr -rlseerlkw yykylded-k
+hmgb_chite eea-qnsrnr akaqnlpler weyvpqftya kaka-wgaal -raiaenkkw yykwkiriak
+hmgl_wheat eeasgeekek akaafppvpr wafvpakkya kaklkfsaap -rgfaeeakw yykfanknpk
+
+           d-m-y--fpp ee-srrsaka mvss-
+           dwr-ywsypp en-arnvvde nallk
+           aylryyewlp d-ranrlgie meaaq
+           lyp-yyafep es-aekmane fpgga
+
+
+
+    4  85
+hmgl_trybr kepmees-n- i-kdkereea sftf-sk-sk efaam-tpak -sdefvsk-l s-ks-eam-f
+hmgt_mouse egpkikle-m aqkekerkek sysie-deqk iykemwsppr -sdnsq-ekl s-rv-qarqi
+hmgb_chite eepveaardg vnkskknaak ewsleaierk qykelysppk rka-itaeq- e-klnallnl
+hmgl_wheat eapvvngkne vgkeksenak gfsvnpnnek gfkeiyspak -slsfapeal gkkm-arpgv
+
+           fpryefpkya syer-kkews kkeef
+           ipryeypkya qygrkkdew- rkegy
+           lprwdylkwl ryerqktkwa krkew
+           vpryefekyr eyarakkswp kksaf
+
+
+
+    4  85
+hmgl_trybr krkl-kmp-m ksmy-frmpd mgmsmkvatg kynsakysfl krkerkekka -dsvmrears
+hmgt_mouse krddednpam rvkywyfmpd rsl-reavss ky-lldyayl kfrnrkedqv edqarnqvrq
+hmgb_chite krtfetmlgl klvwywklpa lgkaleegsg kwdaktwaw- rkk-nkaisg edrelragnr
+hmgl_wheat krkknkfesi kmvyyfripl pskppepass kyngakyafl krksekanaa nneppkaaee
+
+           -ffk-se-ft e-kkkgskt- dek-k
+           eyyqsviays e-kdrnlkse dqksd
+           ryyselegys a-rikgaksr aaket
+           kffaamvsfs akknkggksk lakak
+
+
+
+    4  85
+hmgl_trybr gd-fmmk-sp pkpprvs-nd ksmrvmeamt yydrk--s-e sametliefa aaakkkls-m
+hmgt_mouse sdssmnkkap pkppralq-e kllnamklrs yydrk-wsqq lareslakyk ealrkrdqkl
+hmgb_chite gdeilmkqap lklpneands kakrelakls wwanknyena allas-vayk elkkkkfrqk
+hmgl_wheat snafifkaap ekepepggne kgkkpinaps yylek-ygga grpaslvnfk erakkkkeak
+
+           fl-kk--mkk ekmrrsfssh ksak-
+           ydsdde-k-k g-nknvis-a davkq
+           yfeti-rv-r e-mkrllean tagkn
+           fkakna-v-k a-fkkmvgpf kaakg
+
+
+
+    4  85
+hmgl_trybr ymmkskh-se mskmyeatdk -smakektrg lsidke-mms esfvgkakre vk-erprves
+hmgt_mouse ylkdv-assi lsemyeaser alnpkqksnn lla-kgqnlk i-yqndldfi qr-inpnqiv
+hmgb_chite ykvtl-neeq kkelydlssk gampkarsrg -av-kenmkp eawtgiktke tkrqrlrtql
+hmgl_wheat ykvkm-fagg kseiyersek sgfakakskg lgvdkagfkk vpfagnakrv ak-gkekagm
+
+           kykvr-akse meefrverva sedk-
+           kyqarkpkle rkiiraerqa led-a
+           kysenqpkaa laqlnednta aka-g
+           kyapeaakga pngvepeeaa gsl-s
+
+
+
+    4  85
+hmgl_trybr askpamkkek vswskem-a- smd-tffgk- attkrksrwk rshkpaskka mavynepws-
+hmgt_mouse kadpamekik aswaeen-v- vldksyysqw essdfklkwk fkaeplakqa neay-kpwvk
+hmgb_chite katlllerer ekwaeam-g- lkaqswygsy esstkkakwk kpnepkarsa meewdapwlq
+hmgl_wheat kakeriekvk pswaeafpak mklasffsay esskrkgkwk rkfepaakaa fepynnpwma
+
+           fskasam-ma -s-ydre-kp fkirv
+           ylklvakkma kaeydrqkdp y-aka
+           warklavqla qarydnaqtl y-vke
+           fgkamavaia aakyneaake f-vkp
+
+
+
+    4  85
+hmgl_trybr l--aksdfmr esisfssyfa d-gysvkdmk sdd-eh-rat kvgepfs-t- asefassegm
+hmgt_mouse lseeevdirf evaailvyyl -snykaker- l--sna-kvs -ankpyass- vviyasqgnl
+hmgb_chite -ereelallk alvalalywk -egypeksl- a--e-n-kgs -egalyaesa glqyaeregk
+hmgl_wheat lakeemlvpr amvavgmyfa dagykpkep- gddasfkkas -pgnefaas- amgfageagk
+
+           ymemasedew ervkes-dps -eer-
+           yrirlkieew eraenv-dpv qeenk
+           ylqlkpqsaw aree-l-dll nkarq
+           ypgpakgeaw arpesmknem gsaka
+
+
+
+    4  85
+hmgl_trybr m-nkrlpwrv p-alrkdks- p-rsskaskh i-aagpfk-k aeskewaddk meep-pnyir
+hmgt_mouse rk-drdpwra p-adkddrlw pensskpvka akeaspydsq ekldnwadee mnepep-yar
+hmgb_chite lqdtrflwne lrafktakay p-rkkrplkn vqelgpwtes eaai-wlase l-apeldwvn
+hmgl_wheat pankrkewep e-akkklkgy paksskamkf vaerspfkaa engnswrlee isapnenyve
+
+           dlf-a-dfpa rk-fdskryr apkee
+           ddy-lwdype rrwy-skryr apkee
+           afynkyawpe nkyw-ekryn alkda
+           lkf-aylfpe ekyfdgkrye aekea
+
+
+
+    4  85
+hmgl_trybr f-yafadstm egfds-dkks msssmmkkke apk-kkimpt aerkdk--rp rakaawkae-
+hmgt_mouse ssyaiadksl enyekeeeds la-anlkeqq kpr-kdanps lkkkddwsrp rkrllweeee
+hmgb_chite ieyllaapsk agysprseik kaaamkkesa kpk-kivmps kakratyenl rkkkkweek-
+hmgl_wheat fayrvalksk agfekkeens kapafkkeaa kpkqknvfps ankklkyaee rkkaaweesa
+
+           mekpsma-aw mkst-keerk w--ms
+           ne-psnpeaw mkssmkgekk w--ra
+           ma-lempelw lkesgkeakk wsala
+           fa-egfanrw ikgsekaakk w--pa
+
+
+
+    4  85
+hmgl_trybr km-aralka- ek--rkmmie pgevlkmsma --kerpysk- sie-ryskys setamreff-
+hmgt_mouse -nwkkelel- nrwsnrmrai psiqlklske swkinpyl-e sagwnylryk sisakreyye
+hmgb_chite -mykke-eks -kyerkllvq pget-rkeve eykqrpwa-e eveyrwakwp kesavrayy-
+hmgl_wheat -fykkelea- skyakkipvg psvalkkgve aykgkpyg-n gvaykygkyk svsavraffa
+
+           aepgsdkymf fmaedr--ap rspa-
+           akpsq-rymy yrakdrakpp rkpak
+           aapgr-kwlw wlaaargqpp rpllq
+           anpsedkyif fpanlrsaap rkera
+
+
+
+    4  85
+hmgl_trybr kpefamfdi- skprsmryak kvg-kgeske deeareefpm kssagkr-s- vkara-----
+hmgt_mouse kpeyamyda- skpfknryvk kankknqkre dqkvfieipl kv-asdr--s adenvs--w-
+hmgb_chite klayllyav- krpkpmrygk regqkgapkk daagkedllk klalgtr-ae etergenry-
+hmgl_wheat keafriflvn skprkfryak kpgakgakks nanarvevek kmprskrkpa pkekaa--yp
+
+           -dpvr-alae mmrv-karm- e-se-
+           -dpqkqpdke rmra-rkrr- imvqs
+           -aptknpfkk llreskkrls qglae
+           klpakgakks pirp-kkrp- gemaa
+
+
+
+    4  85
+hmgl_trybr eml-atpmsn kmkw-vsaka nfkwmmemek -m-dkkalds yeske-pe-l dteayiakmf
+hmgt_mouse nmdmlspls- dndweasvde -skwrmelid eledkkkldl ynakewpewd dsiayakkry
+hmgb_chite -lfgkspkkd imtweeegte dikwllkkqi ekeakrk-aa y-akaylayf dsqlwvkklw
+hmgl_wheat sikeaspksn nfkwnpgake nfkwpiskgn nknlkkkllg ysakayeayk nsgryvkkpf
+
+           tdfdadfnef eagrne-ne- mnive
+           seidles-gy kesf-ke-ie l-aae
+           ssldksidey aegkdaedee kdvea
+           sevnaefnaf nesrnnnnvn knvpa
+
+
+
+    4  85
+hmgl_trybr -myvly-rlf ehldmr-rfe me-eserkkl sklefwaask e-n--ffe-l i-ek-ekmip
+hmgt_mouse qryqdyekly gaddkr-ryk kkeqqgkq-l aqlkiwlv-k ie-saiynel akidsidlap
+hmgb_chite nlytfy-k-y enfdvn-nya vaeareks-- as-alwkgar qedeglw--- vqeieqtkvp
+hmgl_wheat gpyakyaklf afknveqefn vnnaeaka-l aalnvwaapk gnnasvfsal vavnagkkvp
+
+           dmkf-k-edr k---mvkker nmsve
+           drqyedmq-r dw--nqrdqn -mqag
+           alsyeiga-r tynsmtkiar dlree
+           lpafnneadr ky--faknak niepa
+
+
+
+    4  85
+hmgl_trybr mekkfykdmk s-edeksker kmfademrpk sp-aemkrlg -egm-skmke vrf-aseedl
+hmgt_mouse nekriyddrk ssgeidskqn elyedelnpk ap-pnndnds eqnk-adrke akyweaiidl
+hmgb_chite makklytdlk eeeseikrar ekweadkrpr alap-mtrfg ragv-ailkk ekwyeaqea-
+hmgl_wheat fakkvyknpk gaaevnskak ekfelekkpk ae-asfkkks kagvpanpks pkfyeagvll
+
+           k-drkse-f- maagerrkve mde--
+           d--rklkeye lkpnknneqe l-ie-
+           t--rraaeye kkpgarretd k-qea
+           kkdrkgnnfn kkagnkkeae kdgn-
+
+
+
+    4  85
+hmgl_trybr sm-fnerswk lkas-re-lf etk-nea-gr psmmreeelk lme-pdkks- fkgmkfeea-
+hmgt_mouse ll-i-nrvwd ldlsakiedi esem-ivwnk pamlnieelq dmiepddkvw ydnn-yinvw
+hmgb_chite ak-ld-nlwi -tkkgkerfl ksegdegygk palkrqaa-s flqrpdtrly ytgm-ye-gy
+hmgl_wheat gkkvnsemwn lkasskvkkv sseenvaygk paikkgaala kigkpnkkmy fkgf-fvsay
+
+           we-na-edvl yks-ekaarf kfeym
+           wke-v-q-al yrvkgkpvki dyeym
+           wardgaa-e- yklqekpgkl iwayl
+           wnkna-adpl ykmaakaakv nfayi
+
+
+
+    4  85
+hmgl_trybr fyrre-waea d-egaf-srn sdaawsseka e-aergy-kk sast-mkr-k lrpameepd-
+hmgt_mouse iynfgswlkk esespyk-r- sepewlsekv ekpinsy-e- slqsqmkf-k lnplmiepe-
+hmgb_chite lwrkeewkak seagpwqard espewaedrg kqpergyne- kkrsnlkk-r -rpklqklsn
+hmgl_wheat vykraawank eaasafaprn geaewggeka saavksy-e- saesgikrqk lkpaigsee-
+
+           tewstdlgfa rfakevppsa ekgam
+           sewvsdlsyp ryaqiappva gknln
+           skwlsd-gyp nwlseeppla ekgkm
+           sswmsnlsfa efravpppma akgaf
+
+
+
+    4  85
+hmgl_trybr dasyee-eka -k-renyren asekre--ek shyyrm-mgd -rrgeak-ra spkvamlyrf
+hmgt_mouse dpvygkwike mk-ri-yfk- llk-ni-kqq aayyfmqnsd eknsilq-na spkqallyny
+hmgb_chite aplweayqke gk-redykad kaa-rqsqas anwwklnmga ekrgeks-rl elktak-yry
+hmgl_wheat lamyanygke ekkrvnyrnn agn-kg-aaa afyyrigfsl nkksvaakkr gekaaklykf
+
+           -kseesmkme asfakkasfg ev-df
+           -dliq-rklg lksaddpqys eq-ds
+           -iaqaalkke kpiatipryg ktadi
+           qnggappkka akfaknaefs sa-nf
+
+
+
+    4  85
+hmgl_trybr vevavkks-a kdegaaeady aset-grdat -aemk-evk- gdefffy-ki wlefakeges
+hmgt_mouse akaaqk-vkk d-inkeeldy esqsknreps waerrqiqka n-esyiyk-a wlnykeene-
+hmgb_chite eaeltk-lqk t-egkedkaw ekasqgrsps ylklknqtrg g-aiylwq-v w--ykekgka
+hmgl_wheat pnprak-mak kdvgkeealy esasagreas yrspkggaks gdaffvya-v wlsfkesgsp
+
+           ne-aky-ese -ffrsmrmrg fktm-
+           -q-edy-eli -yynvrrmrn srsme
+           daretwsaaq -wwrllrlng iksle
+           na-eky-agg qffkmprieg fksin
+
+
+
+    4  85
+hmgl_trybr emaykass-a aeaeakmmkp hsetk-ryfv ek-krfee-f a-sfk-afkr gfsksv-aaf
+hmgt_mouse ervykkklep keaiadnk-p aaes-skyya kqqdkyei-y vs-y-epykn syvd-qseei
+hmgb_chite klgykkpaep kdlelimv-p nads-ekwye asntkyae-y geaw-rpwkr gwltateeel
+hmgl_wheat spaykkkgna kervrnfv-p faes-akyfp nagkkfavkf aapf-kafkk sfmkpaaeev
+
+           fkmmvp--le yysamvgss- lswsa
+           sqlnap-edg yylpkqn-vw d-wvl
+           iskmepaefe yyapvtgaly fawlk
+           fakfpp-nka yygavagpmy kpwma
+
+
+
+    4  85
+hmgl_trybr mrmvkileke eesysmekfh eegeswr-m- wpkm-kkagy e-vy-ravam skrveasksk
+hmgt_mouse nrnqkadeke egvyamqdya kknk-wf-l- wperaedeny e-ay-nkqln aknqeeqq--
+hmgb_chite mrmtkvfdkd aelwalaiwn aagaawk-ks wpelgetegw anewnrktkm arrtkersa-
+hmgl_wheat frfakvkeke aamyaianff nngnpwrnk- wpepsekegy a-py-kkaaf akkaseeap-
+
+           kaekmyyfwi s-yswtekme enkwk
+           -aeqmyyywa skyvwskdlk g--wd
+           -aaslywwwv eqwlwsatka ed-wi
+           -aaaiyyfwv gaymwsnkkn an-wn
+
+
+
+    4  85
+hmgl_trybr m-fgkk-ykf kkeakgeegm w-nv-regsm dsgkane-pa -ykkedsrpr ekmtea-saa
+hmgt_mouse rqysqkwyds qrikrniksr wk-aqnnnan evnrl-e-pa wydredakpr ekrsevwskv
+hmgb_chite lnwgskywti skekkgeagl wqdenr-gam slgkkdk-ll yytkdaakpr aklsdgyekg
+hmgl_wheat pgfsakyykf akvkkgvnsp wanpgksgaf emgkansqer yykkelakpr akpseaygka
+
+           krkir-esmk sseasm-aea smksh
+           rndan-evnk sqeaqneeql lnd-a
+           krivr-almr kralrmeeak amian
+           kknvkpamfk searefneaa gfnpf
+
+
+
+    4  85
+hmgl_trybr dff-ekkeea mremtwgek- sseswywmmd mrmekna-md eekaas-tre mvptvarwee
+hmgt_mouse dyy-ikkqil mnenswsida saivwywknd lklik-vsld ie-eelqsrk mapsaarwei
+hmgb_chite awyrqkkaek lrkmswgqig kaqlwywvmd kkkqkdgeka ea-eeansra lepseanwke
+hmgl_wheat lff-gkkava iksfswsgns sagmwywvfn kkkgknaakl va-eeggsrn ippspaewsv
+
+           saesryk--r erstsamkd- s-ak-
+           aaeskydw-r inasqankde akvq-
+           aadkkwtyar erasramrae aqgsa
+           aaeskyky-r vkaseafkln aaaa-
+
+
+
+    4  85
+hmgl_trybr keskrsgam- fsetkke-ka eff-aemymd ea-ap-mekr skfmkesed- asmkmkn-ee
+hmgt_mouse eeadflsvme y-iskdk-ra qsswkekymd qvwkpenidn veyrreagd- pqldnd-see
+hmgb_chite edatkagglr yaqsrtankl aiiykkvwld agykpemetr lewlkaaed- prkimtdekk
+hmgl_wheat eeakrgsaik fpgskkn-kr affyksvyin aaykpnfvkk mefpkaaann aeknfknass
+
+           pdkf-svdar feskgakask -mval
+           peky-aaeak yivqskdvqd -ravd
+           lskysaeslk wqlsgkigri -legf
+           eekf-aperk fgmasknaen kppak
+
+
+
+    4  85
+hmgl_trybr eekheavatk d-sppsknre edknsfwemn ks-rkaegdf aam-krdkkk y-rrsddrs-
+hmgt_mouse eedaelaasq d-kppsk-re idd-lywgn- rskrdkis-i vkksdreqdk ykrrsd-nve
+hmgb_chite kdinakeass drpppkrdna qatdaywemd kkqrtkeg-l gkvetnsstk wqrrea-rl-
+hmgl_wheat senfaapasa n-kppsknea glkngfwafn ksarkkvsdv akvakeeakk yarrgldkma
+
+           gsyam-kssr -krmrtkkfy kmkme
+           nsypmsr-qr mdnmkskqiy knkri
+           gewplekarn girlksrsly rmrlq
+           ggyaiakpee enkikskavy kfkpg
+
+
+
+    4  85
+hmgl_trybr vgyfdftfek dkakkeakl- r-amglk-as dveakayklr kk-kmfataa ss-np-rm-e
+hmgt_mouse asyi-ysiik ede-kka-dw rsamsd-ma- daklevykdk krekrylsll -am-psrrme
+hmgb_chite egyl-yslqk sie-kaa-fy rellgf-gaa aeakegyrfk rkrklykskk aagdpenlgd
+hmgl_wheat psyvdfsvgk ene-kna-ky rarisk-eap lpnaeaykkk kkkkpfasaa paenpaepee
+
+           akgvawyr-w kkagessepy meska
+           ednakwyk-w k-vnqvsipy mivqe
+           etgekwykrw k-ggalkepy lelse
+           ekgpkwyk-w k-agamsvpy ivmae
+
+
+
+    4  85
+hmgl_trybr kg-mwea-dk kraiw-asfl s-amfdksfk snkamdasln lfera-sfam smdraihdaa
+hmgt_mouse rn-rwgawdd rnaawepsyl --amiddsyd a-damdv-d- dskrveaykl -m-kpaadpl
+hmgb_chite kgslwelyat kravw-pew- anallatkyi adtllagafd fiarg-aykk al-kpvnapk
+hmgl_wheat kg-pwarylk kkavwaagfl p-aivlksfn ankrilapkn kfnraaafkk pidkavflaa
+
+           yakpsage-e mlnysemeea pfr-f
+           ykrpqkni-g kd-ysengia pyk-s
+           wkkprkgene vfdyeameea lyk-i
+           ykkpekgv-a vknygafava efkpf
+
+
+
+    4  85
+hmgl_trybr mk-eekmkhe fff-kdr-re k-rpekykyk -k-k-a-rag ek-sh-a-hk amls-e-skg
+hmgt_mouse rd-inkldai yiime-rare d-rpikydy- -kwkeaerln nk-sa-vkaq ellaae-lds
+hmgb_chite lt-e-kkinq wllge-ngra tnnlqrytw- -rykrlrrkg -k-en-gqns ek-agaraig
+hmgl_wheat pkqvskknfg fvveedesra k-eegkyky- kkykkrkrag skkgfnaafa eklasa-gns
+
+           dka--yeefs kmkktv-ayk mwskt
+           dqv--yeeil knkdsqwayr mwves
+           asgs-ykkla kmrtstyawk lwles
+           laa-nyssvg kfkksayayk iwmes
+
+
+
+    4  85
+hmgl_trybr maseakrssy syypeeyksy -v--eg-ddr mkrmgs-kmn krmrspf-wk pgmaerrkaa
+hmgt_mouse reaea-r-ky vyypeiydvy eq-enssddr mdknnvekl- drlrspywwk pnmaqrfraa
+hmgb_chite leaal-rapw lywpkeyily -tsr-geaar likmglerkd trkrepyywk lglaankkaa
+hmgl_wheat peaar-rpky myypsvynmy aa-kssallr inkfgmnkkn krkrgpfywk egiaaerkaa
+
+           lgermmsaem wifnpeeaky f-kvf
+           lnerrkaker wai-pieeky ykqqy
+           -ganlvakkl wvldpqkekw yqstw
+           lgaepvaksp wvvnpgseky faaaf
+
+
+
+    4  85
+hmgl_trybr dvkskksekd daeamsfkke akps-srval arnknkas-a mk-grvaere pkrr-lekke
+hmgt_mouse eaearkviqd dpianqyqki vrp-s-fapd pf-r-kkswp kdwskqeqkk p-rfkle-ke
+hmgb_chite seeakrlqsa apeamrysrq gkpaeakepf pkdkdkkeyp viygkteaka l-rkq-a-ka
+hmgl_wheat epeakkmgal lavafefakg akppaprpak arnknkkgya vnyskaeakn e-rrala-ka
+
+           -tarkmyksk k-easdfafm kreea
+           -serelyrqd --na-eyair qriea
+           sserekykri ---lasylll srqaa
+           -serekyken -nsrpefrvp argaa
+
+
+
+    4  85
+hmgl_trybr -ssikiayes sam-l-emyf peelfssiga de-aeaysga -adeskesfd kamkrkammg
+hmgt_mouse -saaralyna vvl-lqenys pqnlivsank ekqlgvylsa kkdnl-iasd kvlrfqvnrs
+hmgb_chite reavkvky-a lgka-namwi pa--llkvgk sankegwagl qka-a-qaia kgkkksgmlg
+hmgl_wheat -gavkvaysa mak-lgafyf paslvmsvgk engaaaygsr aklsg-gafl kakkraafps
+
+           kessfeseaw yaegkkrser aedsa
+           kealyelqew yainkdfsqr enevk
+           kdaawdaaew ylqgrtkkan e-slk
+           keagfegaew yrggkkrsae esemk
+
+
+
+    4  85
+hmgl_trybr aapmssmemy y-lfemlk-m aflawakk-g stkmkaradi eeme-ssreg a-aeeks--t
+hmgt_mouse aapnaslkmy ykdikmlkal eylpweqdsn ss-rkaneda nekneasnqs a-kngkasss
+hmgb_chite alpmakkaly yqflal-rgk ey-pwesieg es-lrlreav -kv-eakrag a-k-ekaees
+hmgl_wheat arpfaskniy yakvnilksk eflaweanag gs-pkrkelv ssvsnaskas anksakaaas
+
+           efslrmsfms eeameiptwr kkesa
+           kyvlrlayls eepmeapswr dqevp
+           awl-rkaykk adplavpswr isdlp
+           nfmlrkafks aeaiavpswr naema
+
+
+
+    4  85
+hmgl_trybr s-s-essvfw -a-aasfmia e-ad-sksps sagkfmkkg- pykkkadaea aasaf---as
+hmgt_mouse lwvqis-aiw -l-paqinae kead-vdsp- svnryldenk pyk-da-eik veqai-esps
+hmgb_chite aylnekaelw -krparlmve arldnlikpa kggkyktegq pwk-ta-eqk geralneepk
+hmgl_wheat gymgvsppvw ka-aaevfve nkrn-mnspp sagkfkkega pyk-kadegk aeeav-naas
+
+           emysdk--rs regl-am--s kipig
+           glyvddamna fnndwpmkmv dapan
+           ekwlatggra k-gfyplqgl ivpvg
+           akymlkseka rsgkyaiaem nvpvg
+
+
+
+    4  85
+hmgl_trybr m-awfsaapd hmtknetska rakgmekeir difekkkaev stgngshaek rk-mfmksa-
+hmgt_mouse nskwivekp- amsd-isvel nekske-iar daiikkkveq -sn-ssaked rdmmyn-sae
+hmgb_chite mekwllekl- nlstdqslek rekgva-evn avlqkrkgdt asgdgenkat niglym-kae
+hmgl_wheat fakwvmeked fiskngsmea keksva-vve lvvgkkkaea psgnsgfkak eneiff-san
+
+           pdt-faaams skvefsrraa vkkkk
+           pds-yeaakv sdakiqnkek a-ke-
+           pds-wealvl ktealrrkek e-re-
+           pnskfearvm skpnvekkek p-ke-
+
+
+
+    4  85
+hmgl_trybr kammdsdsem lhslaramla s-fdpapamp -rdp-afmks -ml-ra-fkn -egkakynar
+hmgt_mouse dplre-dkek davlkkpmde k-sdpeparp srdpmpykkv mllknekyk- eesdaky-ar
+hmgb_chite tpklsadpkv fnl-kkplfe p-ialellll enalgpyvkl gk-qreqykd ragtakydan
+hmgl_wheat kakpepnksv kfmlkkaike kkfleeerpe aeleeafvkm eklakeafkn kaskakynae
+
+           -f-dvfamky se-er-ekfd k-f-w
+           -s-daiplry aiwir-kqyd keyew
+           niadelpkkw aeyqr-aswa kryew
+           -f-npvakky avygrknafl kkfnw
+
+
+
+    4  85
+hmgl_trybr m-kerkefar kft-sgreaa as--sys--- leem--g-ae mss-vaayrk ewakk-ykia
+hmgt_mouse rwdirkeyak -ys--srnae aa-qlyaesm leilesn-vg msakqapynk kweddkykaa
+hmgb_chite lyienkawlk -ysragn-ae aannawareg -kqkreg-ge lkaqtlpyrk aweiiqyrva
+hmgl_wheat pynvekafrk -fs-psesae aa-ggyakae lsgkkagnaa isaaaraykk nwennaykva
+
+           mkmkramkma esskitdgrm w-eak
+           rkkeflm-ra esaqasdsfr wmekq
+           lkvekkl-ll akasvsagkl wgkks
+           pkverai-pr asaavslsrp weska
+
+
+
+    4  85
+hmgl_trybr raaakagrve kswy-fpsrv -efetkefek sndepapdef aasysmeakp sgts-wkad-
+hmgt_mouse kppkkenfai dkwykyp-na eeyeseiyir s--ipkpdqy kalyvkqarp vnsawwrad-
+hmgb_chite kppkkegkeq ipwyqwpare eawdseeyek ed-elkpaaw klawlvalkp lgsaywkld-
+hmgl_wheat kaakkegrpg nkwyafppkp nafesevfvk gndvekplaf krgymvarkp mgsaywkrnp
+
+           reklsiempm rse-yesaae f-lte
+           keklkaerpl nqqayevvli yklsi
+           kar-pvalpk rragyklgkq yq-sq
+           kaklkvappk keasysmaag falsg
+
+
+
+    4  85
+hmgl_trybr ssevtavmm- el-emkkfdm efykrkagei ffra-vgkrm vynprkdiys ke-lv-srk-
+hmgt_mouse kqiaseakk- kl-qlkkidr eiyefreska syre-ankkl ay-prddayl kqslasvf--
+hmgb_chite prqeseevv- a-aakrklal klyekkegav iyne-egrkk ewdlntavwa kae-eelk-s
+hmgl_wheat kegpsepvvq nl-akkkvlp svyerkesnv ffeekpgkkk pyneeklvyg kaalpamr--
+
+           yfyrfkmfsk ya-nandfpk g-fay
+           yyykieliae yl--a--ipk nwyly
+           ywwkleklae yksdad-llr gywky
+           yfykvekvae ya-nandvek gyfay
+
+
+
+    4  85
+hmgl_trybr mseseks-ed dafeakserk ssss-eskfw dkkskhkkey ea-sm-gks- kpfav--mea
+hmgt_mouse kknaqqv-e- dvyepkkgnq alksenadyw -kkadakeqy qkslmknq-w dpyaaskrgv
+hmgb_chite vp-aaslna- agyapkpers aapk--aiyw -kkainkeay akealqgsay tlyleeqleg
+hmgl_wheat vksaaam-ad lafaakkaka agksasanfw dkkanfkeay akagiagapy kefrpaapaa
+
+           napwkkgsga afaskskrrs kseym
+           -ppwqknqne eyksdldrks klqym
+           dppwskgrge ewkktatnkk kaawl
+           napwakgege efkskgkeks kgayi
+
+
+
+    4  85
+hmgl_trybr keesk-vaga rfm--sr-ee meemlnd-gy knk-mamkks mssspkkgmr kl-et-lkkk
+hmgt_mouse keeaqsqasa rsl-w-n-ng mkerl-dany k-kklemkev n--vprdnkn kleeseldre
+hmgb_chite kkkasetlga riknyarn-e ladl-daggy kdkqkelkel maallktgvr k-eas--ike
+hmgl_wheat kssaaaarsa rfk-ypk-sa ineplnlsgy knkakeikem fppmekkgvk klnasalnke
+
+           pkkemsdeev maefeeffts kfkne
+           pkdekl-nqa nleyiiyssv dyk-q
+           lkiava--ae mkawqewisl twkda
+           eknavgdsap faafgvffsm kfkna
+
+
+
+    4  85
+hmgl_trybr -eema-aemg mmpgmmmyia ekffmgsied henmrln-ef sseelfk-ae rsyaskamde
+hmgt_mouse qielp-aeln mmpnrrkyaa gkyyms-aqd ag-lkd-kgi qlgelsk-ae rqykvdvrde
+hmgb_chite nqdkp-lakg lllgllvwvl ekwylgavaa nedkkfdqel raed-iksad rrykliglda
+hmgl_wheat ggekaqrakg iiegppvyvr akffispval fankkknaav egaelfk-ae reykmnapna
+
+           es-k-arkl- -ndsekf-yk -sskm
+           gssk-vkkdw --dsekiayk -sskr
+           eeek-gkkfy adaedklgwk -ekkl
+           agakkakkky -nlgekvsyk ngskp
+
+
+
+    4  85
+hmgl_trybr mls-ewstke ems-keeekr msl-smpfkr mtkylaayyk -asa-avmre klemars-fe
+hmgt_mouse ndvwnwsski erveqkgekr mvd-krpikn mseylpayyk -ela-kqlri klilvrveyi
+hmgb_chite mfly-wksrq allesaeakn llf-plplrr lsew-plwwk -eaa-ktkre k-qkgrlrwq
+hmgl_wheat fkmyswsskg apmnanaake imkkkppvkk iseylaryyk qegaqkakrv klgkarmkfg
+
+           iedky-aeke ehykkra--y srkse
+           ai-qy-pike iaykkrawey lrklk
+           vq-sy-pekk qnyrrnayey anraa
+           vgdaypavks gfykkeayny gekgn
+
+
+
+    4  85
+hmgl_trybr vesek-emks mmeevaygse ra-sekmlsk fskssksls- emgmremman rerpmasaem
+hmgt_mouse qisiqwgrds krekapynln kaevn-mlkr yvkvle-ds- gmnlrillk- ferpmpaeem
+hmgb_chite tqkqsyelik vldaepyga- klel--l-pk wlklaeafkn elgknqkkkd kanllpaeal
+hmgl_wheat agsgayapns vpenpayggs krnms-ilkk fmkmgepks- aigkegkkkn raeeiaaeai
+
+           eip-fresps wyrkeskkks -keee
+           napeireapv wyrdn-kdd- sdgeg
+           -vp-lnkapl wyri-aktta eieae
+           svpavesapm wyrnspkkkp anaaa
+
+
+
+    4  85
+hmgl_trybr ersieskdgl -ayger-k-s -kaeditffd kefeaeleak -skmaskkee ea-ym-esav
+hmgt_mouse efkaqvddnd -vysiredas -keedasyyd diseeilivd evqka-kkeq gpkyksivkq
+hmgb_chite akpvaliagf ngwgerrtgk nkedavswwa teikeq-qgi elsvlakkka epqwveqlkt
+hmgl_wheat arkvamnlgk -aysvrkkss -keelvsffl kvfseglgan nmavrpkksa aaayvagmka
+
+           hkekmaarel deeakkm-ef rfkss
+           aqiknplrid enkadkl-ky nykak
+           nsqrmpknqf s-altkkray ryrap
+           fagkfaaegk esnrkkk-nf kfkak
+
+
+
+    4  85
+hmgl_trybr rnshdkflpw -apwvgmkek kaaeppmgdk srsfe-s-dk rysmymwf-a kkdkesyeak
+hmgt_mouse f-qadeslpw qapwqnrdg- -kaqppmnek ar-yg-s-ed ryalymwywa rkdegayiad
+hmgb_chite kdrnaei-pw nllwtglte- -klalllgsk anaye-enst nwakylwwyl krdeeawqlt
+hmgl_wheat rnefleflpw grewagpka- -kraeeigek aepfakg-ek eyakyiwfyr kkneaaygrk
+
+           syv-emaeme -eseeaekks vlkes
+           aya-iranli qevqeaekdv alkkk
+           ayeaqll-ke nalaalkrtl e-kap
+           ayp-gprskv gamaarskkm plknk
+
+
+
+    4  85
+hmgl_trybr -hkkaesvkf y-amtra--e mdeaaevpkk kekkaameer -ea--kk-fe s-gk-se-ak
+hmgt_mouse -akeekka-y yqalsfv-qi kdkpaeaped kkdklvmiik ekkkeqkkye s-sk--eel-
+hmgb_chite -nkeeape-y wnlkskgrne vdapaaepet raikkglqqk eakqrskqwd e-gkaadek-
+hmgl_wheat kfkeenkp-f ygrksra-gv vnnaaappek knnkaaiggk nnkakakafe gksk-pena-
+
+           msehaaakea kmesd-mamd eaa-v
+           lkgavvakke kmiv-ervld eaakq
+           kpengglkae klql-elgka kalqt
+           kkafaarkne kigmdnpakl saraa
+
+
+
+    4  85
+hmgl_trybr rm-ksarkhs eefmpves-l amswdkegme edpesarag- sm-ysssaai -ieadks--e
+hmgt_mouse nk-kqpkkas qkympaia-d amlw-dinne edpilprvn- -k-yllveva eaieddskeq
+hmgb_chite rv-krpkkne aawlleqaaf alaw-iqgma adpqapnggr avrwaalegv eveedikqea
+hmgl_wheat kvpkeakkfg anfiepga-k aigwdnggfa anpggaeag- pv-yggmeav nvvennsana
+
+           rkknariryy kaasn-eaef fykak
+           rkk-akakyy kala-wgaky yydar
+           rrrdlkvkyy kakadyelaw yytak
+           rkknrkvkyy kaaanyarnf fykak
+
+
+
+    4  85
+hmgl_trybr -fhf-wepdr sskpy-emkk kk-naisge- afyae-kdpd kiafrakafs f-ekkkavrm
+hmgt_mouse eiaysweper svqpyskld- -kw-eaanee lyype-k-pe kakyneklys y-qe-dlakl
+hmgb_chite -lnwewdpsn klspyeaki- -kydevaga- kyypanr-ps rvkyrerkyk wsae-ikekk
+hmgl_wheat avffawepee smapyankn- -kynevagaa afyaa-kdpe kvkfkekafs f-ae-napkk
+
+           kntpwkdakf ee-anrdftk rfyev
+           q-spwddaqi kn-l-f-ysd ryyiq
+           sdslwiaasl a-skdk-wsi nywet
+           ansewnlaav ns-anrdfsn efyva
+
+
+
+    4  85
+hmgl_trybr kvvegsfg-d -fkdfekmss yeyeaaerr- rgkksayamr -edss-edkg mfvaegdefa
+hmgt_mouse raannqised sykeyiems- yiyialirre nnrrvlyarr qeelseidds riqenndiia
+hmgb_chite kee-grlged ewksweelea yewelkqrr- rgkklkwlln nasakeqdig llte-gdela
+hmgl_wheat kppsgevsnn afkefveigp yvyvragrra kgkkmayrpe gaegsngnns pvaesgnvva
+
+           -e-ameayea -eea-ee-vw saiha
+           -qwkmgkyea enia-en-aw slaap
+           -ayklekyda e-qa-a-sew ekvnp
+           naykiakyea nsganas-pw gavfa
+
+
+
+    4  85
+hmgl_trybr keeg-krem- tesi-msra- mkwfddrrem ftktymdnrd ra-dksgem- akaskadar-
+hmgt_mouse dgqnwqnnle siqawlqkek m-wi-drfnr ysdsyld-nd nlseqvnime ekla-kevre
+hmgb_chite ieagysr-k- sqrvykrkeq l-wl-drk-l ysiswkddra rkesslgqlr ekka-ksgn-
+hmgl_wheat naagyakska sgevykekea i-wvdnrrsp fsnsyknnkl kaaeamggik ekaa-keaea
+
+           kmesmegner ya-rmk-spe kekse
+           dnilrkn-ik ypkrmqwvpn dkrsk
+           imqalagdqk wpqnlsylp- iakka
+           nfggpngngk yaaeiaymps nnksn
+
+
+
+    4  85
+hmgl_trybr vdamkvavne raaaswsmig efsflmykdy ar-feemems ir--afkkfs a-aagfsakm
+hmgt_mouse qeen-alq-n naeavwklas iiaydmyqdy ekeseengll af-evyrkya aeaksisedk
+hmgb_chite tsem-ektd- rlealwpkvg elawflwsdw ekriddmeka vk-egwkrwa arakglkeiv
+hmgl_wheat aeef-paans kreamwkkvs vvafkiyany ekkfeefakg vrnnafkkfa akaksvsenv
+
+           akskrrekke fms-iasa-g aknm-
+           lkqkrrndqn imkwav-ass ek-kw
+           kkrrrn-ts- llpyvgaaeg erdvy
+           akekreskas vikyvapaas eknvy
+
+
+
+    4  85
+hmgl_trybr -fderdf-fe seds-ma-ys kkmkaaasyg -eakamdgfm da-knlskea amk-fwsa-m
+hmgt_mouse mydqrdswyq viesalaeya -kldkpk-yn -ikdardsym dlak-lskkp enk-yw-lwl
+hmgb_chite gyaanaiywa lesegkleya -kktkpkayg -ektalagwl dkgkd-ekap emk-wwakyk
+hmgl_wheat eflaelfyfa mvegskrnya -kkkkakpyg nvkkaplsfi nasknlgkna efknfwpayk
+
+           -mkrp-m-ap dee-efrymm p-fkn
+           -rdkp-lelp dieegirynk peir-
+           -likpskekp aqd-elnwmv lrlkd
+           kpnkp-knap lgeaaveyfv ekvkn
+
+
+
+    4  85
+hmgl_trybr kr-arekdya fklkeme-as smktmdekdr pye-w--vpe -nr-kmaskm -ask-amsvr
+hmgt_mouse kkevniedya yqdknmimel qlqskdkddf pyekw-eape --rkqmaqem -kqesarsan
+hmgb_chite rkegreeayl ysfk-legea rkssvaaiak lykqws-epa -drqslarel akreellker
+hmgl_wheat kknakvelyr fakksiveeg ekasvlnnlr eysaw-appa knraaiaeei -keearpspk
+
+           afwalpagls -rpd-dssvw srgee
+           aywedplnls srpdweslqw vnsin
+           lwweflkg-k enpayskatw lrge-
+           rfwekeagls aeplyesgaw mksvs
+
+
+
+    4  85
+hmgl_trybr easy-emlea rsr-ddrkka aripermver aes-teekmd kkmkekr-sm efae--kyye
+hmgt_mouse eksyeellia ksre-dfqqe afapekkqir pnaqsieqle rrl-ekf-lm nyles-kyyi
+hmgb_chite kkkyeak-el kknr-aksse lkvlakvten p-ansqksks kkk-ark-al -wkaeakwye
+hmgl_wheat sksynaklvr ksekdlraae rrveakvave asagsgsake kkk-akrkgi sfaaa-kyyv
+
+           -pdap-kspa meseeeake- eyrap
+           -pdppqelpa rnsekqpdes iynap
+           nlappneapl l-eaaaptae eyrlp
+           -elapgegpr psganaakaa vykrp
+
+
+
+    4  85
+hmgl_trybr ykremaafrr ---ae-eahg wpkyeasdvs kekkaelndk mkfeekrrel fvsrvyfrev
+hmgt_mouse ydnemlairr e-ekksikan wpkyeaaea- -qe-ped-dk lkyqn-rnel yasnayifka
+hmgb_chite ytrdlkllnr e-rkaeekng wprydlasea -ae-pafdar kkya--nrd- wekrewlkae
+hmgl_wheat ykkeiarver nkkknavkfg wpkyeraepp -ae-aaknlk kkfas-ekel fpskpyvrnp
+
+           sm-fm-dkme ekngrdp-er aagym
+           vlqin--kre id-nkepwnr avnyk
+           lknlm--kla qtdgksly-r aggyv
+           mkgvfkdkpa gkngkeeysr aagyv
+
+
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
+ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.wnPgfm7LhC/Render
+TERM_PROGRAM_VERSION=388
+OSNAME=macosx
+PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=10AF935E-E014-4AC9-828D-65F557EE7931
+METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.yle5RwOYrI/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+ALN_LINE_LENGTH=60
+_=/usr/bin/printenv
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.bQMyejpONS/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=t_coffee.24.mKJv1KJDwH.dump
+HTTP_PROXY=
+PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.TbcafQ0492/org.macosforge.xquartz:0
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a5
+PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
+LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94799673/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.24.mKJv1KJDwH.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/Users/cnotredame/Dropbox/projects/git/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>1640</line>
+</ref>

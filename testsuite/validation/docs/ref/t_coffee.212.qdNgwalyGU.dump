@@ -1,0 +1,2563 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee sample_seq1.fasta -mode psicoffee</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>!	Process: >hmgb_chite _R_ hmgb_chite.prf [231 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >hmgt_mouse _R_ hmgt_mouse.prf [52 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >hmgl_trybr _R_ hmgl_trybr.prf [208 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+!	Process: >hmgl_wheat _R_ hmgl_wheat.prf [324 Seq.] [EBI/blast/uniref50][COMPUTE CACHE]
+CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.07 sec, SCORE=915, Nseq=4, Len=81 
+
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhsdl-----sivemskaagaawkelg
+hmgt_mouse      -----kpkrprsayniyvsesfqeakdd-----saqgklklvneawknls
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk
+hmgl_wheat      d--pnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+                      ***. ::: .: ..  .. .       .     *  .  *: * 
+
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgb_chite      --dkseweakaatakqnyiralqeyerng-g
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+                  ::  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[1] 	BLAST
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[1] 	Mproba_pair
+-seq           	S	[1] 	sample_seq1.fasta
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[0] 
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[0] 	aln	html
+-len           	D	[0] 	0 
+-infile        	R_F	[0] 
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 HERE: ****fasta_aln******
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+HERE: ****fasta_aln******
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+HERE: ****fasta_aln******
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+HERE: ****fasta_aln******
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    5: [Group    2 (   1 seq)] with [Group    4 (   1 seq)]-->[Len=   76][PID:43630]
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    6: [Group    3 (   1 seq)] with [Group    1 (   1 seq)]-->[Len=   79][PID:43631]
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:43437][Forked]
+
+
+!		[Final Evaluation][TOT=   10][  0 %]!		[Final Evaluation][TOT=   10][ 20 %]!		[Final Evaluation][TOT=   10][ 30 %]!		[Final Evaluation][TOT=   10][ 40 %]!		[Final Evaluation][TOT=   10][ 50 %]!		[Final Evaluation][TOT=   10][ 60 %]!		[Final Evaluation][TOT=   10][ 70 %]!		[Final Evaluation][TOT=   10][ 80 %]!		[Final Evaluation][TOT=   10][ 90 %]!		[Final Evaluation][TOT=   10][100 %]
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:43437][Forked]
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:43437][Forked]
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:43437][Forked]
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:43437][Forked]
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:43437][Forked]
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:43437][Forked]
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:43437][Forked]
+
+
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (M) proba_pair 
+	Input File (S) sample_seq1.fasta  Format fasta_seq
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+Looking For Sequence Templates:
+
+	Template Type: [BLAST] Mode Or File: [BLAST] [Start
+	------ Fetch Templates [Multi Core Mode 8 CPUs]
+]
+INPUT SEQUENCES: 4 SEQUENCES  [PROTEIN]
+  Input File sample_seq1.fasta Seq hmgb_chite Length   74 type PROTEIN Struct Unchecked
+	Profile: Template=hmgb_chite.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437124
+  Input File sample_seq1.fasta Seq hmgl_trybr Length   67 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_trybr.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437125
+  Input File sample_seq1.fasta Seq hmgl_wheat Length   79 type PROTEIN Struct Unchecked
+	Profile: Template=hmgl_wheat.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437126
+  Input File sample_seq1.fasta Seq hmgt_mouse Length   71 type PROTEIN Struct Unchecked
+	Profile: Template=hmgt_mouse.prf, File=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437//4242143437127
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Mproba_pair
+	--- Process Method/Library/Aln Ssample_seq1.fasta
+	xxx Retrieved Ssample_seq1.fasta
+	xxx Retrieved Mproba_pair
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [1494]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [1494]--->[1218]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+MAKE GUIDE TREE 
+	[MODE=nj][DONE]
+
+PROGRESSIVE_ALIGNMENT [Tree Based]
+Group    1: hmgb_chite
+Group    2: hmgl_trybr
+Group    3: hmgl_wheat
+Group    4: hmgt_mouse
+
+
+	Group    7: [Group    6 (   2 seq)] with [Group    5 (   2 seq)]-->[Len=   81][PID:43437][Forked]
+
+
+
+
+OUTPUT RESULTS
+	#### File Type= GUIDE_TREE      Format= newick          Name= sample_seq1.dnd
+	#### File Type= MSA             Format= aln             Name= sample_seq1.aln
+	#### File Type= MSA             Format= html            Name= sample_seq1.html
+	#### File Type= Template_List   Format= fasta_seq       Name= sample_seq1_prf1.1.template_list
+	#### File Type= Template Profile Format= fasta_aln       Name= hmgb_chite.prf
+	#### File Type= Template Profile Format= fasta_aln       Name= hmgl_trybr.prf
+	#### File Type= Template Profile Format= fasta_aln       Name= hmgl_wheat.prf
+	#### File Type= Template Profile Format= fasta_aln       Name= hmgt_mouse.prf
+
+# Command Line: t_coffee sample_seq1.fasta -mode psicoffee  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 31.850 Mb, Max= 32.866 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.fasta</name>
+<content>>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1_prf1.1.template_list</name>
+<content>>hmgb_chite  _R_ hmgb_chite.prf
+>hmgl_trybr  _R_ hmgl_trybr.prf
+>hmgl_wheat  _R_ hmgl_wheat.prf
+>hmgt_mouse  _R_ hmgt_mouse.prf
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgb_chite.prf</name>
+<content>>hmgb_chite
+adkpkrplsaymlwlnsaresikrenpdfkvtevakkggelwrglkdkse
+weakaatakqnyiralqeyerngg
+>hmgb_chite_51  UR050|UniRef50_UPI0007E74946 [Eval=6.0E-13][id=47.2%][start=9 end=80]
+----kkpmssflmwlnsgreqiktenpdlsvrevcvkggevwrgieeksy
+wqaneamgkykevkklqksqr---
+>hmgb_chite_53  UR050|UniRef50_B3LZZ3 [Eval=9.2E-13][id=44.9%][start=8 end=76]
+---pkkpmgsfmiwmstcrkkikaehpdykvtevaslggkiwhqmedkfv
+wkkkaalarsdyssqlqly-----
+>hmgb_chite_59  UR050|UniRef50_A0A0L7KV35 [Eval=9.4E-12][id=46.7%][start=1 end=59]
+------------mwlnaersnikaqysglkiteiarkggdlwrsl-dktp
+weqkakaameiynrqmevydan--
+>hmgb_chite_86  UR050|UniRef50_O01683 [Eval=6.4E-10][id=40.0%][start=559 end=631]
+-nepkrattayiiwfnanrnsmkedgdt--lgdvakkagakwksmsdkke
+wndkaaqdkaryeaemkeykkngg
+>hmgb_chite_88  UR050|UniRef50_UPI0007116DF8 [Eval=1.1E-9][id=40.0%][start=104 end=173]
+-drpkkpltaymlftnskraeikqahpdysitdvskeigklwkeveekea
+lekqyreakvkydeemkiy-----
+>hmgb_chite_97  UR050|UniRef50_A0A0D2UQ19 [Eval=2.4E-9][id=41.4%][start=686 end=755]
+---pkkpmssymlwanenraafkaknpdanvmelgsilgnawkgesekns
+waekatearkayeitlaeyeq---
+>hmgb_chite_110  UR050|UniRef50_Q5DCD6 [Eval=4.8E-9][id=44.4%][start=129 end=200]
+---ptrplsayflwfnenrekikslsgqnsvaevakaggelwrnmetkst
+yqsrvdelkkkyqedlrvyqsn--
+>hmgb_chite_114  UR050|UniRef50_A0A0V0ZEK1 [Eval=7.2E-9][id=40.8%][start=594 end=662]
+---pkrnksaymfylmenrskfkk--pgmsfadvskaaaeqwkklkdksk
+wenlaavdrkryldelkefkkkgg
+>hmgb_chite_137  UR050|UniRef50_A0A1I8AQK9 [Eval=4.8E-8][id=42.9%][start=92 end=158]
+---pkrgqsaymfwl--aenrarltepgkpvtevtkkagaewrvltertk
+weemarkdkerydremaef-kng-
+>hmgb_chite_154  UR050|UniRef50_L1IQS6 [Eval=1.3E-7][id=41.4%][start=119 end=176]
+----kksisaywlwshqareeirkenpkmpmkevmqrmgerwkkieekhe
+wedkarsene--------------
+>hmgb_chite_157  UR050|UniRef50_E1Z8L4 [Eval=1.6E-7][id=40.6%][start=306 end=374]
+apkvkrplnaymqyvnanrgqvkadhpelgnkeltsklgelyrgleekkk
+yedaaaadkqryveeve-------
+>hmgb_chite_167  UR050|UniRef50_A0A0L0DGI8 [Eval=0.0023][id=40.0%][start=96 end=160]
+atgpkrplnayqvyskrhrdrvtaanpdakhtemfgllseew---knase
+tereackaeaarlra--eye----
+>hmgb_chite_168  UR050|UniRef50_A7TDN3 [Eval=2.7E-7][id=40.3%][start=53 end=114]
+---pkrpipsfmlfvksirgnltqeyphykpteiaklcgerwral---se
+yekrpfv--eeyekaledyk----
+>hmgb_chite_172  UR050|UniRef50_A0A1I7STW3 [Eval=3.2E-7][id=41.5%][start=67 end=131]
+----krplnaymiwtrharddilkknphlkmnevsktmgemwkklddkkp
+fflmarkaaakhkkale-------
+>hmgb_chite_190  UR050|UniRef50_M7BCL4 [Eval=1.2E-6][id=41.4%][start=39 end=96]
+----krplsafflfmaahrsalkrsnpgwtmveiakklgtmwhqqkdkek
+ykqqaaqlrq--------------
+>hmgb_chite_200  UR050|UniRef50_UPI0008708468 [Eval=2.9E-6][id=40.9%][start=14 end=79]
+sdddvrptsayfywmlqhrqrlieenpglsvtelaevagetwrqlpnkdr
+weakakwdkkh-------------
+>hmgb_chite_205  UR050|UniRef50_S2JFE4 [Eval=3.5E-6][id=40.0%][start=122 end=189]
+---pikppsayimfsndaraqlkghnmtf--veiakivgdqwkgisqkqq
+yertamrakdeyidalneyrk---
+>hmgb_chite_216  UR050|UniRef50_M7X3H6 [Eval=7.2E-6][id=41.1%][start=1462 end=1517]
+-nkpirpasaylsyqneiraavkannpdlppteinkrigemwralpaeeq
+etrksrt-----------------
+>hmgb_chite_227  UR050|UniRef50_L7FK00 [Eval=1.7E-5][id=41.1%][start=30 end=82]
+-nkpkkpasayllycqevrpsvkeknpemkqkdilgvigkmw---kdlse
+sekkkyt-----------------
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgl_trybr.prf</name>
+<content>>hmgl_trybr
+kkdsnapkramtsfmffssdfrskhsdlsivemskaagaawkelgpeerk
+vyeemaekdkerykrem
+>hmgl_trybr_42  UR050|UniRef50_A0A0J9XI96 [Eval=2.4E-11][id=41.5%][start=67 end=131]
+-kdplkpkgrvtaysfflkayakehnitkvtelgkavgaawksmspqert
+kyeqldredkvryere-
+>hmgl_trybr_53  UR050|UniRef50_K7J2T8 [Eval=4.2E-7][id=41.4%][start=237 end=306]
+---stkprgrmtayaffrqehkkkhpdenivefskkcalrwktmsdkekk
+rfhemaekdkkrydtem
+>hmgl_trybr_62  UR050|UniRef50_A0A168SC01 [Eval=6.3E-11][id=40.8%][start=50 end=120]
+krdanapkknvtsylhysnmhrdrhpdlpqteiarllgtewraltpeekq
+vyvkmavddkarfdkem
+>hmgl_trybr_116  UR050|UniRef50_A0A1I8CH36 [Eval=1.2E-9][id=41.4%][start=92 end=161]
+-kdpnepkkaltsyfiwlsanreknpgasatdiaraagkewkelgpddkk
+twelkaaedkiryskam
+>hmgl_trybr_133  UR050|UniRef50_W4GM76 [Eval=2.9E-9][id=40.0%][start=35 end=104]
+kkdpnapkraltpfmffgkecreempklgflevsseigrrwaqideqgkk
+kyeklsqsdkdrylde-
+>hmgl_trybr_143  UR050|UniRef50_B8LC25 [Eval=4.6E-9][id=40.8%][start=5 end=75]
+kkdpnapkrnqsafflyssdvkaaqpdlafgqvaqeisknfkalpdeerk
+ywdekaaadkdryqrem
+>hmgl_trybr_161  UR050|UniRef50_A0A0K2THW5 [Eval=1.7E-8][id=40.6%][start=109 end=177]
+-kdinapkrivqpfmwfakesrqknpdfsyaeitkevarrwseldpaeke
+kytvlhkkdkvryaqe-
+>hmgl_trybr_163  UR050|UniRef50_L1JE76 [Eval=2.0E-8][id=41.2%][start=6 end=73]
+kkekegpkralsaymlfsedkrqehkdagnttplkmaaamwkelgdeakk
+pwvdraeelkaqykeq-
+>hmgl_trybr_171  UR050|UniRef50_A0A1C7MZB3 [Eval=5.1E-8][id=40.6%][start=261 end=329]
+kpdkhapikpssayimfsndarskhknmsfvemaklvgdrwkslsneqkq
+dyertamkakdeylnam
+>hmgl_trybr_173  UR050|UniRef50_E7FB41 [Eval=6.6E-8][id=40.0%][start=538 end=607]
+-kdsgapkrpmsaymlwlnssrsenpgisiteiskkagemwkqlgkdkke
+ewdgkaeeakkeydram
+>hmgl_trybr_174  UR050|UniRef50_K0SGR4 [Eval=7.6E-8][id=40.0%][start=47 end=111]
+------pkraraayhyfydatraehpdctlsemsklvsaawkdtpdeeke
+ayramaapdqerygrdl
+>hmgl_trybr_185  UR050|UniRef50_G9NDA0 [Eval=1.9E-7][id=40.0%][start=114 end=183]
+kpdenaperpmsayvlfsnklretdrslsfteiaklvgehwqslplsere
+vyeaqaraskdryyrei
+>hmgl_trybr_186  UR050|UniRef50_A0A0J1B1R2 [Eval=2.2E-7][id=44.6%][start=1 end=56]
+--------------mffvqdwrsenqdaafadigrllgakwkemspaerk
+pyeekahadkdraare-
+>hmgl_trybr_190  UR050|UniRef50_W9RN13 [Eval=3.1E-7][id=40.8%][start=190 end=257]
+--dpnypkpnrsgynff---faekhyklkaleftkmigeswsnlspeerm
+vyqniglkdkeryrrel
+>hmgl_trybr_193  UR050|UniRef50_A0A196SN87 [Eval=6.9E-7][id=43.5%][start=90 end=151]
+------pkrvrsaynffsrdyfsrhstnttnqgtlqnsaewkalseeerq
+kfellaekdkerykadl
+>hmgl_trybr_198  UR050|UniRef50_A0A087TBR6 [Eval=1.3E-6][id=40.0%][start=50 end=119]
+kkqtnhvkrpmnafmvwsqmerrkqpdmhnaeiskklgkawkelppedkk
+lyieeadrlremhskq-
+>hmgl_trybr_201  UR050|UniRef50_A0A0D6DQD6 [Eval=1.5E-6][id=40.0%][start=319 end=388]
+rkdpahpkpnrsgynfffgeqrarlkslnqvdisrvigdlwnklnepera
+vyqeraakdkeryktem
+>hmgl_trybr_205  UR050|UniRef50_A0A163JG73 [Eval=2.9E-6][id=40.3%][start=92 end=163]
+kkdpnapkgpgnvfflfcrlqrdkikdrslgevtkllsakwkeldkdekk
+vyqdmyqkeledyevam
+>hmgl_trybr_206  UR050|UniRef50_A0A194S8P3 [Eval=2.9E-6][id=40.3%][start=269 end=335]
+------pkkavtaflrfatdvrargvdtsileqskliaqawraltdnekk
+tyvdaytadkerylre-
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgl_wheat.prf</name>
+<content>>hmgl_wheat
+dpnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwkslses
+ekapyvakanklkgeynkaiaaynkgesa
+>hmgl_wheat_91  UR050|UniRef50_Q1XCD9 [Eval=3.4E-6][id=42.4%][start=5 end=70]
+dpkkpkgkmsayayfvqtcreehkkknpepvnfaefskkcserwrsmsgk
+ekskflakadkvr----------------
+>hmgl_wheat_147  UR050|UniRef50_A0A0E0LQB4 [Eval=1.8E-5][id=44.7%][start=59 end=105]
+-------spsafflfmddfrkdyeekhpadkqvyeigmagdeawksmsdd
+vsa--------------------------
+>hmgl_wheat_150  UR050|UniRef50_A0A0M3IYC0 [Eval=8.0E-12][id=40.3%][start=54 end=130]
+denapkrppsaytlfmtdqrrtgekkdpkefsmsalmieighkwaamtdd
+ekrpfvekaevlrldyekkmeayskte--
+>hmgl_wheat_164  UR050|UniRef50_V3YWG6 [Eval=2.6E-11][id=41.3%][start=105 end=176]
+denkpkrpqsayflfladfrkkmkgkdienrell---kqagvewgklskd
+qkkpfeklsevekgkydaamaiynk----
+>hmgl_wheat_199  UR050|UniRef50_UPI0007BFE83F [Eval=2.4E-10][id=52.8%][start=4 end=56]
+--------------------------npknkfetavnragaekwkklsaa
+ekgpymaeakrrmeeyhksnaaynkrvaa
+>hmgl_wheat_200  UR050|UniRef50_UPI00064C3FF5 [Eval=2.4E-10][id=42.7%][start=86 end=159]
+dphvskrppsgfflfisefchkikstnpri-smgdaakklgemwnnlsdg
+eknlyiikvaklkekyxkdvaskek----
+>hmgl_wheat_202  UR050|UniRef50_UPI000719E288 [Eval=1.3E-8][id=42.5%][start=110 end=186]
+dpnkpkrplsayfrfmaefr---kqvadkgmsvtdiaklggatwtamtes
+ekkpylevdmkifnevnntpgvgkrge--
+>hmgl_wheat_257  UR050|UniRef50_A0A078CU98 [Eval=5.7E-9][id=43.1%][start=49 end=112]
+-----kkpptafyffmndfretyeeen-ryvnlkdvpklggemwksfted
+eknvyrdkaaqlmeeynksl---------
+>hmgl_wheat_268  UR050|UniRef50_L7FK00 [Eval=1.3E-8][id=40.3%][start=28 end=98]
+dpnkpkkpasayllycqevrpsvkeknpemkqkdilg-vigkmwkdlses
+ekkkytdmydankkvyeeqvka-------
+>hmgl_wheat_272  UR050|UniRef50_UPI000901B557 [Eval=1.8E-8][id=49.0%][start=6 end=54]
+dpksatvqeilywqyreqfrkeykkkhpknksvaavgktagdkwkfmse-
+-----------------------------
+>hmgl_wheat_275  UR050|UniRef50_A0A094FF08 [Eval=2.0E-8][id=41.7%][start=87 end=157]
+--naptrglsaylffaneqrdyvrnenp-gisfgqvgkvlgdrwkalnek
+qrapyeakaaldtkryedekasyn-----
+>hmgl_wheat_293  UR050|UniRef50_A0A162XTX7 [Eval=3.9E-8][id=42.9%][start=102 end=163]
+eptrvtrppnafllfnkemrkqlkdqnptmk-vaeiskeiggrwkclnqv
+dkdryvaeaerlk----------------
+>hmgl_wheat_300  UR050|UniRef50_A0A1I8D1Q1 [Eval=7.3E-8][id=40.0%][start=575 end=646]
+dpnapkkpltaffiwlgenrprikeyssapnevli---nagkewkelsss
+dkkdfedrakvlkeeynvvfaeykk----
+>hmgl_wheat_302  UR050|UniRef50_I7CDV8 [Eval=7.8E-8][id=41.2%][start=8 end=74]
+-----krpmnafmvwsreerkqfaqenpkmhn-seistklgekwkrltee
+erapyvdkarsirtehmkkfpdy------
+>hmgl_wheat_306  UR050|UniRef50_UPI0008DDA3EF [Eval=8.6E-8][id=43.5%][start=66 end=134]
+-pkppptkgnvalrfngiiqeqinkdhpdsnlvfvvgkvagakwkslsev
+ekapcvamdnkrkanyekwi---------
+>hmgl_wheat_308  UR050|UniRef50_A0A068S5T9 [Eval=1.3E-7][id=42.5%][start=178 end=247]
+dknapikppsayvmfcnylraelknen---lsfpafakiagvrwksldtp
+ekqvyerqaqqakdeykaalaqy------
+>hmgl_wheat_319  UR050|UniRef50_A0A078BAY3 [Eval=3.5E-7][id=41.9%][start=340 end=412]
+--nkpkkplsayiyfsqefreiirqkfp-tmtvaqvmkavshrwskltke
+qkqpfeqianedklrydreiydcrkg---
+>hmgl_wheat_320  UR050|UniRef50_A0A1B0AUW3 [Eval=4.0E-7][id=42.6%][start=40 end=107]
+-------apsaffvflyefrrlvaksclknltqveisrnagkrwrqmtda
+ekqpysarsnklrgtmikqia--------
+>hmgl_wheat_322  UR050|UniRef50_A0A183SKN2 [Eval=5.2E-7][id=43.1%][start=97 end=160]
+dptqpkrawsaffffcdefrgkikeehpdwk-vadiakelgrrwedcsdk
+pkyealaqqdkqrye--------------
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>hmgt_mouse.prf</name>
+<content>>hmgt_mouse
+kpkrprsayniyvsesfqeakddsaqgklklvneawknlspeekqayiql
+akddrirydnemksweeqmae
+>hmgt_mouse_16  UR050|UniRef50_UPI00085465D5 [Eval=1.4E-20][id=56.3%][start=168 end=238]
+rpkqprsaynifmsehyheakgnyaheklkavandwqnmhnskkqvymql
+aqddkvrylnevkaweeqmme
+>hmgt_mouse_28  UR050|UniRef50_UPI0006B33F8F [Eval=7.8E-18][id=53.5%][start=155 end=225]
+kpkgtrsafnffmsaqfleakgdnipaklmslmedwknlsshdkkvytql
+aeddkirykndmelwedymae
+>hmgt_mouse_31  UR050|UniRef50_A0A1A6GI08 [Eval=4.1E-13][id=72.1%][start=114 end=156]
+--------------ksgknakdesaqgklrtinqawknlssderqayiql
+akddrir--------------
+>hmgt_mouse_33  UR050|UniRef50_S4RPM2 [Eval=5.3E-13][id=43.7%][start=146 end=216]
+kpkrpsvpfnifmadnfkrmtgssqpeklirlrdewsglddmqkqkyqql
+aeddrvrytremaawreqmre
+>hmgt_mouse_35  UR050|UniRef50_B5X652 [Eval=8.6E-10][id=47.9%][start=150 end=197]
+kpkrprssfnifmaehfeeskgtttqgkmkmlredwtklstsqqqvyv--
+---------------------
+>hmgt_mouse_36  UR050|UniRef50_V5I0N7 [Eval=0.22][id=43.2%][start=25 end=61]
+---------------------------rvklaamewkaadaetkqkyvql
+aredaaryareykn-------
+>hmgt_mouse_37  UR050|UniRef50_UPI0003BD8EA2 [Eval=9.4E-9][id=40.8%][start=271 end=341]
+kpkgkppayaffvadfykehkkkhpeakvklcsekwksmspeekakfkem
+akndkrrydqemksy------
+>hmgt_mouse_38  UR050|UniRef50_C4YPQ4 [Eval=1.3E-8][id=42.0%][start=154 end=222]
+-pkrptnaylifcemekerikqdnasdlsksmteawknlseerrrpyykl
+yeddriryqremaeynqk---
+>hmgt_mouse_39  UR050|UniRef50_A0A0G4J3E4 [Eval=2.3E-8][id=42.4%][start=35 end=100]
+kpkrplsafmlwskdarpkvkedaafgqlkllgamwkdlsdedkapyvkm
+agedrarydtel---------
+>hmgt_mouse_40  UR050|UniRef50_L8H1E8 [Eval=1.2E-7][id=45.3%][start=167 end=230]
+-pkrarsayiyftsdkraevkaqnpelkfkklaeawkalspedkqkyeem
+arqdrerfdde----------
+>hmgt_mouse_41  UR050|UniRef50_A0A0G4FGY8 [Eval=1.4E-7][id=40.8%][start=32 end=102]
+-pkrprtaylyfsmerrpevkeknafgeikllgaewkemsdidkqpykdq
+aaedkeryeqekaeweeq---
+>hmgt_mouse_42  UR050|UniRef50_S9XXD4 [Eval=6.3E-7][id=42.9%][start=106 end=170]
+-pkkpmtsyvrfskeqlplfkaqnpetllfs-----pplymhnskvyiql
+akddkiryynemksweeqmve
+>hmgt_mouse_43  UR050|UniRef50_UPI0003C1B473 [Eval=9.8E-7][id=50.0%][start=177 end=220]
+kpkrprsafnifmaehfeeakgatmqakmktlfedwnnfhtsqk------
+---------------------
+>hmgt_mouse_44  UR050|UniRef50_H2MH07 [Eval=6.4E-6][id=57.1%][start=28 end=62]
+------------------------------------krkairkkrvyiql
+aeddkvryknemkswedhmle
+>hmgt_mouse_45  UR050|UniRef50_A0A077WUB3 [Eval=6.8E-6][id=41.5%][start=59 end=123]
+-pklpksaylifsmehrreakqetdrgkvtllaqkwqalspeekepytvk
+amqekeryirem---------
+>hmgt_mouse_46  UR050|UniRef50_UPI000698EEB3 [Eval=1.7E-5][id=42.3%][start=31 end=101]
+-pkrpttayfyylaeqfqegkhvsnvgafkevskqwrelsasekkpfeal
+sdddrkrydremnmyrk----
+>hmgt_mouse_48  UR050|UniRef50_D2VH76 [Eval=5.0E-4][id=49.0%][start=365 end=411]
+epkrppsaynifvaekkkeskdlsvadagkl----wktlsedekkpynek
+a--------------------
+>hmgt_mouse_49  UR050|UniRef50_A0A1A8SPA2 [Eval=0.0017][id=41.1%][start=41 end=96]
+kpkkprsayllyvhqtmqtatpnmpqsevkriseswrrlsvaekrhyler
+ak-------------------
+>hmgt_mouse_50  UR050|UniRef50_L9L6G0 [Eval=0.0031][id=44.4%][start=44 end=79]
+-----------------------------kkcserwktvsekekskfdkm
+akadkvrydremkdy------
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1_prf1.1.template_list</name>
+<content>>hmgb_chite  _R_ hmgb_chite.prf
+>hmgl_trybr  _R_ hmgl_trybr.prf
+>hmgl_wheat  _R_ hmgl_wheat.prf
+>hmgt_mouse  _R_ hmgt_mouse.prf
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.dnd</name>
+<content>(
+(
+hmgb_chite:0.14250,
+hmgl_wheat:0.14750)
+:0.00750,
+hmgl_trybr:0.13250,
+hmgt_mouse:0.14750);
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>sample_seq1.dnd</name>
+<content>(
+(
+hmgb_chite:0.14250,
+hmgl_wheat:0.14750)
+:0.00750,
+hmgl_trybr:0.13250,
+hmgt_mouse:0.14750);
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: psicoffee ], CPU=0.07 sec, SCORE=915, Nseq=4, Len=81 
+
+hmgl_trybr      kkdsnapkramtsfmffssdfrskhsdl-----sivemskaagaawkelg
+hmgt_mouse      -----kpkrprsayniyvsesfqeakdd-----saqgklklvneawknls
+hmgb_chite      ---adkpkrplsaymlwlnsaresikrenpd-fkvtevakkggelwrglk
+hmgl_wheat      d--pnkpkrapsaffvfmgefreefkqknpknksvaavgkaagerwksls
+                      ***. ::: .: ..  .. .       .     *  .  *: * 
+
+hmgl_trybr      peerkvyeemaekdkerykrem---------
+hmgt_mouse      peekqayiqlakddrirydnemksweeqmae
+hmgb_chite      --dkseweakaatakqnyiralqeyerng-g
+hmgl_wheat      esekapyvakanklkgeynkaiaaynkgesa
+                  ::  :   *   : .* . :         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>sample_seq1.html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=915</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value9>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;92</span><br><span class=value9>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;92</span><br><span class=value9>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;91</span><br><span class=value9>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;90</span><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;91</span><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value5>k</span><span class=value7>k</span><span class=value5>d</span><span class=value8>s</span><span class=value9>napkramtsfmffssdfr</span><span class=value8>sk</span><span class=value7>h</span><span class=value6>sd</span><span class=value5>l</span><span class=valuegap>-----</span><span class=value6>si</span><span class=value7>ve</span><span class=value8>ms</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value8>k</span><span class=value9>pkrprsayniyvsesf</span><span class=value8>qea</span><span class=value7>k</span><span class=value6>dd</span><span class=valuegap>-----</span><span class=value6>saqgk</span><span class=value7>l</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value7>a</span><span class=value8>d</span><span class=value9>kpkrplsaymlwlnsares</span><span class=value8>i</span><span class=value7>k</span><span class=value6>re</span><span class=value4>npd</span><span class=valuegap>-</span><span class=value4>f</span><span class=value5>k</span><span class=value6>v</span><span class=value7>te</span><span class=value8>va</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value6>d</span><span class=valuegap>--</span><span class=value7>p</span><span class=value8>n</span><span class=value9>kpkrapsaffvfmgefree</span><span class=value8>f</span><span class=value7>kq</span><span class=value6>k</span><span class=value4>npk</span><span class=value3>nk</span><span class=value5>s</span><span class=value6>v</span><span class=value7>aa</span><span class=value8>vg</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value3>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value6>&nbsp;</span><span class=value8>&nbsp;</span><span class=value9>&nbsp;***.&nbsp;:::&nbsp;.:&nbsp;..&nbsp;&nbsp;</span><span class=value8>..</span><span class=value7>&nbsp;</span><span class=value6>.</span><span class=value5>&nbsp;&nbsp;</span><span class=value3>&nbsp;&nbsp;</span><span class=value2>&nbsp;</span><span class=value1>&nbsp;</span><span class=value2>&nbsp;</span><span class=value4>.</span><span class=value5>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>&nbsp;</span><span class=value8>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagaawkel</span><span class=value8>g</span><span class=value7>p</span><span class=value6>e</span><span class=value7>e</span><span class=value8>r</span><span class=value9>kvyeemaekdkerykrem</span><span class=valuegap>------</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value8>k</span><span class=value9>lvneawknl</span><span class=value8>s</span><span class=value7>p</span><span class=value6>e</span><span class=value7>e</span><span class=value8>k</span><span class=value9>qayiqlakddrirydnemkswee</span><span class=value8>q</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value9>kkggelwrg</span><span class=value8>l</span><span class=value7>k</span><span class=valuegap>--</span><span class=value6>d</span><span class=value7>k</span><span class=value8>se</span><span class=value9>weakaatakqnyiralqeyer</span><span class=value8>n</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value9>kaagerwksl</span><span class=value8>s</span><span class=value7>e</span><span class=value6>s</span><span class=value7>e</span><span class=value8>k</span><span class=value9>apyvakanklkgeynkaiaaynk</span><span class=value8>g</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>*&nbsp;&nbsp;.&nbsp;&nbsp;*:&nbsp;*</span><span class=value7>&nbsp;</span><span class=value6>&nbsp;&nbsp;</span><span class=value7>:</span><span class=value8>:&nbsp;</span><span class=value9>&nbsp;:&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;:&nbsp;.*&nbsp;.&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><br><br><br><span class=valuedefault>hmgl_trybr&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><br><span class=valuedefault>hmgt_mouse&nbsp;&nbsp;&nbsp;</span><span class=value7>m</span><span class=value6>a</span><span class=value7>e</span><br><span class=valuedefault>hmgb_chite&nbsp;&nbsp;&nbsp;</span><span class=value7>g</span><span class=valuegap>-</span><span class=value6>g</span><br><span class=valuedefault>hmgl_wheat&nbsp;&nbsp;&nbsp;</span><span class=value7>e</span><span class=value6>s</span><span class=value7>a</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value6>&nbsp;</span><span class=value4>&nbsp;</span><span class=value5>&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
+ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.wnPgfm7LhC/Render
+TERM_PROGRAM_VERSION=388
+OSNAME=macosx
+PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=10AF935E-E014-4AC9-828D-65F557EE7931
+METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.yle5RwOYrI/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.bQMyejpONS/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=t_coffee.212.qdNgwalyGU.dump
+HTTP_PROXY=
+PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.TbcafQ0492/org.macosforge.xquartz:0
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a5
+PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
+LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94743437/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.212.qdNgwalyGU.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/Users/cnotredame/Dropbox/projects/git/tcoffee/docs//tcoffee_quickstart.rst</source>
+<line>48</line>
+</ref>

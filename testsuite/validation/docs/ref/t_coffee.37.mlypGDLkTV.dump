@@ -1,0 +1,264 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln -output_aln_threshold 50 -output_aln_modif x</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>*****************************************************
+seq1       seq2          Sim   [ALL]           Tot  
+b30           19         32.6    91.8 [100.0]   [80834]
+CLUSTAL W (1.83) multiple sequence alignment
+
+sp|Q06606|GRZ2_RAT     Mxxx------x-xx------xxx-xx--x---xx----------------
+sp|P08884|GRAE_MOUSE   Mxxx------x-xx------xxx-xx--x---xx----------------
+sp|P21844|MCPT5_MOUSE  MHxx------x-xx------xxxxxx--x---xx-x--------------
+sp|O35205|GRAK_MOUSE   MRxx------x-xx------xxxxxx--xVYMxx-xx-x-----------
+sp|Q9Y5K2|KLK4_HUMAN   MAxxGNxWxWxLxx------x---x--xx---xx-xxLx-----------
+sp|Q7YRZ7|GRAA_BOVIN   MNxx------x-xxSFPPAIxxxxxx--x----x----------------
+sp|Q00871|CTRB1_PENVA  Mxxx------x-xx------xxxxxxVxx---xx-xxxxx----xxxxxx
+sp|P08246|ELNE_HUMAN   MTxx--x-xxx-xx------xxxxxx--x---xx-xxGxx----------
+sp|P03953|CFAD_MOUSE   MHxx------x-xx------xxxxxx--x---xx-xx-x-----------
+sp|Q91VE3|KLK7_MOUSE   MGx------WxLxx------xxx-x--xx---xx--xEx-----------
+sp|Q6H321|KLK2_HORSE   Mxx--------Lxx------xxxxx--xx---xx-xx-x-----------
+sp|Q03238|GRAM_RAT     xxxx------x-xx------x-x-xx--x---xx-x--------------
+sp|P20160|CAP7_HUMAN   Mxxx------x-xx------xxxxxx--x---xx-xxAxx----------
+sp|P07338|CTRB1_RAT    MAxx------x-xx------xxxxxx--x---xxxxx-x-----------
+sp|P00757|KLKB4_MOUSE  Mxx--------Lxx------xxx---------------------------
+sp|P80015|CAP7_PIG     --------------------------------------------------
+sp|P29786|TRY3_AEDAE   MNxx------x-xx------xxxxxx--x---xxxxx-x-----------
+sp|P35037|TRY3_ANOGA   MIxx------x-xx------xxxxxx--x---xxxxx-xxARVAxxxxxx
+sp|P00773|ELA1_RAT     Mxxx------x-xx------xxxxxx--x---xx-xx-x-----------
+                                                                         
+
+sp|Q06606|GRZ2_RAT     -----------------TEGGEIIWGTESKP---------HSRPYMAFIK
+sp|P08884|GRAE_MOUSE   -----------------AGAEEIIGGHVVKP---------HSRPYMAFVK
+sp|P21844|MCPT5_MOUSE  ------------------KAGEIIGGTECIP---------HSRPYMAYLE
+sp|O35205|GRAK_MOUSE   -------------------HTEIIGGREVQP---------HSRPFMASIQ
+sp|Q9Y5K2|KLK4_HUMAN   ------x----------GSCSQIINGEDCSP---------HSQPWQAALV
+sp|Q7YRZ7|GRAA_BOVIN   -----xx----------xxxEGIIGGNEVAP---------HTRRYMALIK
+sp|Q00871|CTRB1_PENVA  xxPLVxx------xxHVNATPRIVGGVEATP---------HSWPHQAALF
+sp|P08246|ELNE_HUMAN   -----------------ALASEIVGGRRARP---------HAWPFMVSLQ
+sp|P03953|CFAD_MOUSE   -----x-----------QPRGRILGGQEAAA---------HARPYMASVQ
+sp|Q91VE3|KLK7_MOUSE   ------x----------GQGERIIDGYKCKE---------GSHPWQVALL
+sp|Q6H321|KLK2_HORSE   ------x----------PIQSRIIGGWECEK---------HSKPWQVAVY
+sp|Q03238|GRAM_RAT     -----------------RFEAQIIGGREAVP---------HSRPYMVSLQ
+sp|P20160|CAP7_HUMAN   -----------------SPLLDIVGGRKARP---------RQFPFLASIQ
+sp|P07338|CTRB1_RAT    -----xxxx--QPVL--TGLSRIVNGEDAIP---------GSWPWQVSLQ
+sp|P00757|KLKB4_MOUSE  ---------------------xxxxxxxxxxPVQSQVDCENSQPWHVAVY
+sp|P80015|CAP7_PIG     ----------------------IVGGRRAQP---------QEFPFLASIQ
+sp|P29786|TRY3_AEDAE   -----------xx----LSSGRIVGGFQIDI---------AEVPHQVSLQ
+sp|P35037|TRY3_ANOGA   xx---xxxxLPRPKY--DVGHRIVGGFEIDV---------SETPYQVSLQ
+sp|P00773|ELA1_RAT     -----xx----------ETNARVVGGAEARR---------NSWPSQISLQ
+                                                                       : 
+
+sp|Q06606|GRZ2_RAT     F-YDSNSEPHHCGGFLVAKDIVMTAAHCNGxx-----IKVTLGAHNIKKQ
+sp|P08884|GRAE_MOUSE   S-VDIEGNRRYCGGFLVQDDFVLTAAHCRNxx-----MTVTLGAHNIKAK
+sp|P21844|MCPT5_MOUSE  I-VTSENYLSACSGFLIRRNFVLTAAHCAGx-----SITVLLGAHNKTSK
+sp|O35205|GRAK_MOUSE   Y-R----SKHICGGVLIHPQWVLTAAHCYSWFxRGHSPTVVLGAHSLSKN
+sp|Q9Y5K2|KLK4_HUMAN   M-E----NELFCSGVLVHPQWVLSAAHCFQx-----SYTIGLGLHSLEAD
+sp|Q7YRZ7|GRAA_BOVIN   -------GLKLCAGALIKENWVLTAAHCDxxx----NPQVILGAHSTSHK
+sp|Q00871|CTRB1_PENVA  I-x----DMYFCGGSLISSEWVLTAAHCMDGA---GFVEVVLGAHNIRQN
+sp|P08246|ELNE_HUMAN   L-x----GGHFCGATLIAPNFVMSAAHCVANVN-VRAVRVVLGAHNLSRR
+sp|P03953|CFAD_MOUSE   V-N----GTHVCGGTLLDEQWVLSAAHCMDGVxDDDSVQVLLGAHSLSAP
+sp|Q91VE3|KLK7_MOUSE   K-G----NQLHCGGVLVDKYWVLTAAHCKMx-----QYQVQLGSDKIG--
+sp|Q6H321|KLK2_HORSE   H-Q----GHFQCGGVLVHPQWVLTAAHCMSx-----DYQIWLGRHNLSED
+sp|Q03238|GRAM_RAT     N-----xKSHMCGGVLVHQKWVLTAAHCLSEP--LQQLKLVFGLHSLHDP
+sp|P20160|CAP7_HUMAN   N-x----GRHFCGGALIHARFVMTAASCFQSQN-PGVSTVVLGAYDLRRR
+sp|P07338|CTRB1_RAT    DKx----xxHFCGGSLISEDWVVTAAHCGVKTx----DVVVAGEFDQGSD
+sp|P00757|KLKB4_MOUSE  R-F----NKYQCGGVLLDRNWVLTAAHCYNx-----KYQVWLGKNNFLED
+sp|P80015|CAP7_PIG     K-x----GRPFCAGALVHPRFVLTAASCFRGKN-SGSASVVLGAYDLRQQ
+sp|P29786|TRY3_AEDAE   R-S----GRHFCGGSIISPRWVLTRAHCTTNTD-PAAYTIRAGSxx---x
+sp|P35037|TRY3_ANOGA   Y-F----NSHRCGGSVLNSKWILTAAHCTVNLQ-PSSLAVRLGSxx---x
+sp|P00773|ELA1_RAT     Y-LSxxxxxHTCGGTLIRRNWVMTAAHCVSS---xMTFRVVVGDHNLSQN
+                                  *.. ::    ::: * *           :  *       
+
+sp|Q06606|GRZ2_RAT     -EN--xQVISVVKAKPHENYDRD-----------SHF--NDIMLLKLERK
+sp|P08884|GRAE_MOUSE   -EE-TQQIIPVAKAIPHPDYNAT-----------AFF--SDIMLLKLESK
+sp|P21844|MCPT5_MOUSE  -ED-TWQKLEVEKQFLHPKYDEN-----------LVV--HDIMLLKLKEK
+sp|O35205|GRAK_MOUSE   -EP-MKQTFEIKKFIPFSRLQSG-----------SAS--HDIMLIKLRTA
+sp|Q9Y5K2|KLK4_HUMAN   xEP-GSQMVEASLSVRHPEYNRP-----------LLA--NDLMLIKLDES
+sp|Q7YRZ7|GRAA_BOVIN   -EK-LDQVFSIKKAIPYPCFDPQ-----------TFE--GDLQLLQLEGK
+sp|Q00871|CTRB1_PENVA  -EA-SQVSITSTDFFTHENWNSW-----------LLT--NDIALIRLPSP
+sp|P08246|ELNE_HUMAN   -EP-TRQVFAVQRIx-ENGYDPV-----------NLL--NDIVILQLNGS
+sp|P03953|CFAD_MOUSE   -EP-YKRWYDVQSVVPHPGSRPD-----------SLE--DDLILFKLSQN
+sp|Q91VE3|KLK7_MOUSE   xx--SAQKIKATKSFRHPGYSTK-----------THV--NDIMLVRLDEP
+sp|Q6H321|KLK2_HORSE   -ED-TAQFHQVSDSFLDPQFDLSLLKKKYLRPYDxIS--HDLMLLRLAQP
+sp|Q03238|GRAM_RAT     -QD-PGLTFYIKQAIKHPGYNLK------------YE--NDLALLKLDGR
+sp|P20160|CAP7_HUMAN   -ERQxRQTFSISSMx-ENGYDPQ-----------QNL--NDLMLLQLDRE
+sp|P07338|CTRB1_RAT    -EE-NIQVLKIAQVFKNPKFNMF-----------TVR--NDITLLKLATP
+sp|P00757|KLKB4_MOUSE  -EP-SDQHRLVSKAIPHPDFNMSLLNEHTPQPEDxYS--NDLMLLRLSKP
+sp|P80015|CAP7_PIG     -EQ-SRQTFSIRSIx-QNGYDPR-----------QNL--NDVLLLQLDRE
+sp|P29786|TRY3_AEDAE   -TN-GGIIVKVKSVIPHPQYNGD-----------TYN--YDFSLLELDES
+sp|P35037|TRY3_ANOGA   -AS-GGTVVRVARVLEHPNYDDS-----------TID--YDFSLMELESE
+sp|P00773|ELA1_RAT     -DG-TEQYVSVQKIMVHPTWNSN-----------NVAAGYDIALLRLAQS
+                                                               *. :..*   
+
+sp|Q06606|GRZ2_RAT     AQLNGVVKTIALPRSQ-DWVKPGQVCTVAGWGRLAx--CTSSNTLQEVNL
+sp|P08884|GRAE_MOUSE   AKRTKAVRPLKLPRPN-ARVKPGDVCSVAGWGSRSINDTKASARLREAQL
+sp|P21844|MCPT5_MOUSE  AKLTLGVGTLPLSANF-NFIPPGRMCRAVGWGRTNVN-EPASDTLQEVKM
+sp|O35205|GRAK_MOUSE   AELNKNVQLLHLGSKN--YLRDGTKCQVTGWGTTKPDLLTASDTLREVTV
+sp|Q9Y5K2|KLK4_HUMAN   VSESDTIRSISIASQC-P--xAGNSCLVSGWGLLAN--xRMPTVLQCVNV
+sp|Q7YRZ7|GRAA_BOVIN   ATMTKAVGILQLPRTE-DDVKPHTKCHVAGWGSTKKDACQMSNALREANV
+sp|Q00871|CTRB1_PENVA  VSLNSNIKTVKLPSSD-V--SVGTTVTPTGWGRPSDSASGISDVLRQVNV
+sp|P08246|ELNE_HUMAN   ATINANVQVAQLPAQG-RRLGNGVQCLAMGWGLLGRN-RGIASVLQELNV
+sp|P03953|CFAD_MOUSE   ASLGPHVRPLPLQYED-KEVEPGTLCDVAGWGVVTHA-GRRPDVLHQLRV
+sp|Q91VE3|KLK7_MOUSE   VKMSSKVEAVQLPEHC-E--xPGTSCTVSGWGTTTSPDVTFPSDLMCSDV
+sp|Q6H321|KLK2_HORSE   ARITDAVKILDLPTQE-P--xLGSTCYTSGWGLISTFTNRGSGTLQCVEL
+sp|Q03238|GRAM_RAT     VKPSKNVKPLALPRKPRDKPAEGSRCSTAGWGITHQR-GQLAKSLQELDL
+sp|P20160|CAP7_HUMAN   ANLTSSVTILPLPLQN-ATVEAGTRCQVAGWGSQRSG-GRLSRFPRFVNV
+sp|P07338|CTRB1_RAT    AQFSETVSAVCLPNVD-DDFPPGTVCATTGWGKTKYNALKTPEKLQQAAL
+sp|P00757|KLKB4_MOUSE  ADITDVVKPITLPTEE-P--xLGSTCLASGWGSTTPIKFKYPDDLQCVNL
+sp|P80015|CAP7_PIG     ARLTPSVALVPLPPQN-ATVEAGTNCQVAGWGTQRLR-RLFSRFPRVLNV
+sp|P29786|TRY3_AEDAE   IGFSRSIEAIALPDAS-ETVADGAMCTVSGWGDTKNV-FEMNTLLRAVNV
+sp|P35037|TRY3_ANOGA   LTFSDVVQPVSLPDQD-EAVEDGTMTIVSGWGNTQSA-AESNAILRAANV
+sp|P00773|ELA1_RAT     VTLNNYVQLAVLPQEG-TILANNNPCYITGWGRTRTN-GQLSQTLQQAYL
+                             :    :                 ***                 :
+
+sp|Q06606|GRZ2_RAT     EVQKGQKCQDM--S--ED--YNDSIQLCVGNPSEGKATGKGDSGGPFVCD
+sp|P08884|GRAE_MOUSE   VIQEDEECKKR--F--RH--YTETTEICAGDLKKIKTPFKGDSGGPLVCD
+sp|P21844|MCPT5_MOUSE  RLQEPQACKHx-----TS--FRHNSQLCVGNPKKMQNVYKGDSGGPLLCA
+sp|O35205|GRAK_MOUSE   TIISRKRCNSQSYxNHKP--VITKDMICAGDARGQKDSCKGDSGGPLICK
+sp|Q9Y5K2|KLK4_HUMAN   SVVSEEVCSKL--Y--DP--LYHPSMFCAGGGQDQKDSCNGDSGGPLICN
+sp|Q7YRZ7|GRAA_BOVIN   TVIDRKICNDAQHxNFNP--VIDLSMICAGGRKGEDDSCEGDSGSPLICD
+sp|Q00871|CTRB1_PENVA  PVMTNADCDSV--x--x---IVGDGVVCIDG-TGGKSTCNGDSGGPLNLN
+sp|P08246|ELNE_HUMAN   TVVT-SLCR--------------xSNVCTLVRGRQAGVCFGDSGSPLVCN
+sp|P03953|CFAD_MOUSE   SIMNRTTCNLRTY--HDG--VVTINMMCAES--NRRDTCRGDSGSPLVCG
+sp|Q91VE3|KLK7_MOUSE   KLISSRECKKV--Y--KD--LLGKTMLCAGIPDSKTNTCNGDSGGPLVCN
+sp|Q6H321|KLK2_HORSE   RLQSNEKCARA--Y--PE--KMTEFVLCATHRDDSGSICLGDSGGALICD
+sp|Q03238|GRAM_RAT     RLLDTRMCNNSRFx--xG--VLTDSMLCLKAGAKGQAPCKGDSGGPLVCG
+sp|P20160|CAP7_HUMAN   TVTPEDQCR--------------xNNVCTGVLTRRGGICNGDGGTPLVCE
+sp|P07338|CTRB1_RAT    PIVSEADCKKS--W--GS--KITDVMTCAGA--SGVSSCMGDSGGPLVCx
+sp|P00757|KLKB4_MOUSE  KLLPNEDCDKA--H--EM--KVTDAMLCAGEMDGGSYTCEHDSGGPLICD
+sp|P80015|CAP7_PIG     TVTx-NPCL--------------xRDMCIGVFSRRGRISQGDRGTPLVCN
+sp|P29786|TRY3_AEDAE   PSYNQAECAAA--L--xxVVPVTEQMICAGYAAGGKDSCQGDSGGPLVSG
+sp|P35037|TRY3_ANOGA   PTVNQKECTIA--Y--xxSGGITDRMLCAGYKRGGKDACQGDSGGPLVVD
+sp|P00773|ELA1_RAT     PSVDYSICSSSSYx--xS--TVKTTMVCAGGx-GVRSGCQGDSGGPLHCx
+                              *                   *             * * .:   
+
+sp|Q06606|GRZ2_RAT     --G----VAQGIVSYR---xxx-GTLPRVFTRIS-SFIPWIQKTMKVL--
+sp|P08884|GRAE_MOUSE   --N----KAYGLLAYA---xxx-TISSGVFTKIV-HFLPWISRNMKL---
+sp|P21844|MCPT5_MOUSE  --G----IAQGIASYVH-R---NAKPPAVFTRIS-HYRPWINKILRE---
+sp|O35205|GRAK_MOUSE   --G----IFHALVSQGY--xCGIAKKPGIYTLLTKxYQTWIKSKLAPS--
+sp|Q9Y5K2|KLK4_HUMAN   --G----YLQGLVSFGK-APCGQVGVPGVYTNLC-KFTEWIEKTVQA-x-
+sp|Q7YRZ7|GRAA_BOVIN   --N----VFRGVTSFG---xCGNPQKPGIYILLTKxHLNWIKKTIAGA--
+sp|Q00871|CTRB1_PENVA  --G----MTYGITSFGSSxxCEx-GYPAAFTRVY-YYLDWIQQKTGV---
+sp|P08246|ELNE_HUMAN   --G----LIHGIASFVRG-GCASGLYPDAFAPVA-QFVNWIDSIIQRSED
+sp|P03953|CFAD_MOUSE   --D----AVEGVVTWGS-RVCGNGKKPGVYTRVS-SYRMWIENITNGN--
+sp|Q91VE3|KLK7_MOUSE   --D----TLQGLVSWGT-YPCGQPNDPGVYTQVC-KYKRWVMETMKTHR-
+sp|Q6H321|KLK2_HORSE   --G----VFQGITSWGY-SECADFNDNFVFTKVM-PHLKWIKETIEKNS-
+sp|Q03238|GRAM_RAT     x-G----KVDGILSFSS-KNCTDIFKPTVATAVA-PYSSWIRKVIGRW--
+sp|P20160|CAP7_HUMAN   --G----LAHGVASFSLG-PCGR--GPDFFTRVA-LFRDWIDGVLNN---
+sp|P07338|CTRB1_RAT    --xDGVWTLAGIVSWGS-GVCST-STPAVYSRVT-ALMPWVQQILEAN--
+sp|P00757|KLKB4_MOUSE  --G----ILQGITSWGP-EPCGEPTEPSVYTKLI-KFSSWIRETMANNP-
+sp|P80015|CAP7_PIG     --G----LAQGVASFLRR-RFRR--SSGFFTRVA-LFRNWIDSVLNN---
+sp|P29786|TRY3_AEDAE   --D----KLVGVVSWGK--xCALPNLPGVYARVS-TVRQWIREVSE-x--
+sp|P35037|TRY3_ANOGA   --G----KLVGVVSWGF--xCAMPGYPGVYARVA-VVRDWVRENSG-x--
+sp|P00773|ELA1_RAT     xNG--QYSVHGVTSFVSSxxCNVSKKPTVFTRVS-AYISWMNNVIAY---
+                                 .: :                  :      *:         
+
+sp|Q06606|GRZ2_RAT     Q--Q---x--------
+sp|P08884|GRAE_MOUSE   -------x--------
+sp|P21844|MCPT5_MOUSE  -------x--------
+sp|O35205|GRAK_MOUSE   R--A---x--------
+sp|Q9Y5K2|KLK4_HUMAN   ----------------
+sp|Q7YRZ7|GRAA_BOVIN   I---------------
+sp|Q00871|CTRB1_PENVA  -TP-------------
+sp|P08246|ELNE_HUMAN   xxxxxxxxPDPASRTH
+sp|P03953|CFAD_MOUSE   M--T---x--------
+sp|Q91VE3|KLK7_MOUSE   ----------------
+sp|Q6H321|KLK2_HORSE   ----------------
+sp|Q03238|GRAM_RAT     S--PQPxx--------
+sp|P20160|CAP7_HUMAN   -PGPGP---------A
+sp|P07338|CTRB1_RAT    ----------------
+sp|P00757|KLKB4_MOUSE  ----------------
+sp|P80015|CAP7_PIG     -P-------------x
+sp|P29786|TRY3_AEDAE   ----------------
+sp|P35037|TRY3_ANOGA   ----------------
+sp|P00773|ELA1_RAT     -------x--------
+                                       
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content></content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
+ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.wnPgfm7LhC/Render
+TERM_PROGRAM_VERSION=388
+OSNAME=macosx
+PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=10AF935E-E014-4AC9-828D-65F557EE7931
+METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.yle5RwOYrI/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.bQMyejpONS/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=t_coffee.37.mlypGDLkTV.dump
+HTTP_PROXY=
+PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.TbcafQ0492/org.macosforge.xquartz:0
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a5
+PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
+LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/947942/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.37.mlypGDLkTV.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/Users/cnotredame/Dropbox/projects/git/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>1074</line>
+</ref>

@@ -263,8 +263,11 @@ FILTER_LIB_OBJECTS=\
 	fasta_seq2hmmtop_fasta.pl\
 	fasta_seq2consan_aln.pl\
 	clustalw_aln2fasta_aln.pl\
-	fasta_seq2name_seq.pl\
+	seq2name_seq.pl\
+	seq2intersection.pl\
 	msf_aln2fasta_aln.pl\
+	msa.pl\
+	dca.pl\
 	blast_aln2fasta_aln.pl\
 	blast_xml2fasta_aln.pl\
 	fasta_aln2fasta_aln_unique_name.pl\
@@ -281,6 +284,14 @@ fasta_seq2consan_aln.pl:\
 	$(FILTER_LIB)/fasta_seq2consan_aln.pl
 	cp $(FILTER_LIB)/fasta_seq2consan_aln.pl .
 	echo "# `date`" >> fasta_seq2consan_aln.pl
+msa.pl:\
+	$(FILTER_LIB)/msa.pl
+	cp $(FILTER_LIB)/msa.pl .
+	echo "# `date`" >> msa.pl
+dca.pl:\
+	$(FILTER_LIB)/dca.pl
+	cp $(FILTER_LIB)/dca.pl .
+	echo "# `date`" >> dca.pl
 
 fasta_seq2RNAplfold_templatefile.pl:\
 	$(FILTER_LIB)/fasta_seq2RNAplfold_templatefile.pl
@@ -304,10 +315,14 @@ fasta_aln2fasta_aln_unique_name.pl:\
 	$(FILTER_LIB)/fasta_aln2fasta_aln_unique_name.pl
 	cp $(FILTER_LIB)/fasta_aln2fasta_aln_unique_name.pl .
 	echo "# `date`" >> fasta_aln2fasta_aln_unique_name.pl
-fasta_seq2name_seq.pl:\
-	$(FILTER_LIB)/fasta_seq2name_seq.pl
-	cp $(FILTER_LIB)/fasta_seq2name_seq.pl .
-	echo "# `date`" >> fasta_seq2name_seq.pl
+seq2name_seq.pl:\
+	$(FILTER_LIB)/seq2name_seq.pl
+	cp $(FILTER_LIB)/seq2name_seq.pl .
+	echo "# `date`" >> seq2name_seq.pl
+seq2intersection.pl:\
+	$(FILTER_LIB)/seq2intersection.pl
+	cp $(FILTER_LIB)/seq2intersection.pl .
+	echo "# `date`" >> seq2intersection.pl
 clustalw_aln2fasta_aln.pl:\
 	$(FILTER_LIB)/clustalw_aln2fasta_aln.pl
 	cp $(FILTER_LIB)/clustalw_aln2fasta_aln.pl .

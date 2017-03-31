@@ -347,6 +347,8 @@ int ** make_recursive_combination_table ( int tot_n_param, int *n_param, int *nc
 char *strnrchr ( char *s,char x, int n);
 int intlen (int n);
 char * update_string (char *string1, char *string2);
+
+char* csprintf (char *string1,char *string2, ...);
 char* strcatf  (char *string1,char *string2, ...);
 char *vcat (char *v1, char *v2);
 
@@ -686,6 +688,7 @@ int token_is_in_file_n ( char *fname, char *token, int nlines);
 int token_is_in_file (char *fname, char *token);
 
 int    check_file_for_token      ( char *file , char *token);
+int token_is_in_n_lines ( char *fname, char *token, int n_line);
 FILE * find_token_in_file_nlines ( char *fname, FILE * fp, char *token, int n_line);
 FILE * find_token_in_file ( char *fname, FILE * fp, char *token);
 FILE * quick_find_token_in_file  (FILE *fp, char *token);

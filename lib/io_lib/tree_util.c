@@ -4652,7 +4652,7 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, cha
 	    {
 	      T->leaf+=(CL[a])->leaf-1;
 	      
-	      fprintf ( stderr, "\n## T-Coffee dpa -- %4d %% Complete -- MERGE %30s using %s",(lun4t2b*100)/S->nseq, (CL[a])->name, method);
+	      fprintf ( stderr, "\n## T-Coffee dpa -- %5.2f %% Complete -- MERGE %30s using %s",(float)((float)lun4t2b*(float)100)/(float)S->nseq, (CL[a])->name, method);
 	      thread_msa2msa (nname,name,(CL[a])->name);
 	    }
 	  

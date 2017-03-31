@@ -37,7 +37,10 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,Action
 Alignment * read_fasta_aln_noceck ( char *name, Alignment *A);
 
 Alignment * main_read_aln ( char *name, Alignment *A);
+Sequence  * quick_read_seq ( char *file);
 Alignment * quick_read_aln( char *name);//reads onléy fasta and clustalw
+int read_nameseq (char *file,char ***nam, char ***seq, char ***com);
+
 Sequence  * read_sequences ( char *name);
 Sequence  * read_alifold   ( char *name);
 Alignment *alifold2aln     ( char *name);
@@ -92,7 +95,7 @@ int is_single_seq_weight_file (char *fname);
 int is_treelist(char *name);
 int is_newick  (char *name);
 int is_nexus (char *file);
-
+int is_nameseq (char *file);
 int is_method ( char *file);
 
 char *format_name2aln_format_name (char *name);

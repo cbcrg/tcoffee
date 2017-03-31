@@ -41,7 +41,7 @@ if(1)\
     n=vsnprintf (buf2,1, string, ap)+3;		\
     va_end (ap);				\
     va_start (ap, string);			\
-    buf=(char*)vcalloc (n, sizeof (char));		\
+    buf=(char*)vcalloc (n+1, sizeof (char));		\
     vsnprintf (buf, n,string, ap);		\
     va_end(ap);}
 
@@ -2419,6 +2419,24 @@ char * update_string (char string1[], char string2[])
     }
   return string1;
 }
+char* csprintf (char *string1,char *string2, ...)
+{
+  va_list ap;
+  char *buf;
+  int l1, l2;
+  va_start (ap, string2);
+  cvsprintf (buf, string2);
+  va_end (ap);
+  
+  l1=read_array_size_new (string1);
+  l2=read_array_size_new (buf);
+  
+  if (l1<l2)string1=(char*)vrealloc (string1,sizeof(char)*l2);
+  sprintf (string1, "%s", buf);
+  
+  vfree (buf);
+  return string1;
+}
 
 char* strcatf  (char *string1,char *string2, ...)
 {
@@ -2426,14 +2444,14 @@ char* strcatf  (char *string1,char *string2, ...)
   va_list ap;
   char *buf;
 
-  buf=(char*)vcalloc ( read_array_size_new (string1)+1, sizeof (char));
   va_start (ap, string2);
-  vsprintf (buf, string2, ap);
+  cvsprintf (buf, string2);
   va_end (ap);
   string1=vcat (string1, buf);
   vfree (buf);
   return string1;
 }
+
 
 char *vcat ( char *st1, char *st2)
 {
@@ -2445,7 +2463,7 @@ char *vcat ( char *st1, char *st2)
   if ( st2) l+=strlen (st2);
   l++;
 
-  ns=(char*)vcalloc (read_array_size_new (st1)+1, sizeof (char));
+  ns=(char*)vcalloc (l, sizeof (char));
   sprintf ( ns, "%s%s", (st1)?st1:"", (st2)?st2:"");
   return ns;
 }
@@ -7650,7 +7668,41 @@ int    check_file_for_token      ( char *file , char *token)
   vfclose (fp);
   return 0;
 }
-FILE * find_token_in_file_nlines ( char *fname, FILE * fp, char *token, int n_line)
+
+int token_is_in_n_lines ( char *fname, char *token, int n_line)
+{
+  FILE *fp;
+  char *buf;
+  int c;
+  int l, nl;
+  if (!fname || !token)return 0;
+  
+  
+  l=nl=0;
+  fp=vfopen (fname, "r");
+  while ((c=fgetc(fp))!=EOF && nl<n_line)
+    {
+      l++;
+      if (c=='\n')nl++;
+    }
+  vfclose (fp);
+  fp=vfopen (fname, "r");
+  buf=(char *)vcalloc (l+1, sizeof (char));
+  nl=l=0;
+  while ((c=fgetc(fp))!=EOF && nl<n_line)
+    {
+      buf[l++]=c;
+      if (c=='\n')nl++;
+    }
+  vfclose (fp);
+  
+  if (strstr (buf, token)){vfree (buf); return 1;}
+  vfree(buf);
+  
+  return 0;
+}
+    
+FILE * find_token_in_file_nlines_old ( char *fname, FILE * fp, char *token, int n_line)
 
         {
 	  /*This function finds the string TOKEN (as a single word) in the n_line first lines of fname.
@@ -7795,8 +7847,6 @@ FILE * find_token_in_file ( char *fname, FILE * fp, char *token)
 	else only_start=0;
 
 	token_len=strlen (token);
-
-
 
 
 

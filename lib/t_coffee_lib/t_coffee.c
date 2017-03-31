@@ -131,7 +131,11 @@ int main (int argc, char *argv[])
 {
 // printf("RUNNING DEBUG\n");
   int r, a;
+  
 
+  if (argv[0][0]=='\0'){argv[0]="t_coffee";}
+      
+  
   if (argc>=2 && strcmp (argv[1], "-batch")==0)
     {
       char **list;
@@ -509,7 +513,9 @@ int batch_main ( int argc, char **argv)
 	 *        If so, redirect to ::run_other_pg.
 	 *        (In case of kmcoffee, load the kmcoffee arguments from ::km_coffee)
 	 */
+	
 	argv=standard_initialisation (argv, &argc);
+
 	set_string_variable ("t_coffee", argv[0]);
 
 	if (argc>=3 && strm (argv[1], "-other_pg"))
@@ -523,7 +529,7 @@ int batch_main ( int argc, char **argv)
 	    argv=km_coffee(argc, argv); 
 	  }
 
-
+	
 	 /**
 	  * Read all the parameters of T_Coffee using ::get_cl_param
 	  *
@@ -546,6 +552,7 @@ int batch_main ( int argc, char **argv)
 			    /*Min_value*/ "any"            ,\
 			    /*Max Value*/ "any"             \
 					  );
+		 
 
 /*PARAMETER PROTOTYPE:    READ PARAMETER FILE     */
 	       declare_name (parameters);
@@ -691,11 +698,11 @@ int batch_main ( int argc, char **argv)
 			    /*argv*/      argv           ,	\
 			    /*output*/    &le            ,	\
 			    /*Name*/      "-dpa"        ,	\
-			    /*Flag*/      &dpa       ,	\
-			    /*TYPE*/      "FL"            ,	\
+			    /*Flag*/      &garbage       ,	\
+			    /*TYPE*/      "D"            ,	\
 			    /*OPTIONAL?*/ OPTIONAL       ,	\
 			    /*MAX Nval*/  1              ,		\
-			    /*DOC*/       "Run DPA mode"           , \
+			    /*DOC*/       "Run DPA mode"           ,	\
 			    /*Parameter*/ &dpa          ,		\
 			    /*Def 1*/    "0"              ,		\
 			    /*Def 2*/    "1"              ,		\
@@ -724,6 +731,8 @@ if (dpa)t_coffee_dpa (argc, argv);
 /* extra>prompt>special>parameters>defaults*/
  argv=break_list ( argv, &argc, "=;, \n");
  argv=merge_list ( argv, &argc);
+
+
  if (argc>1 && argv[1][0]!='-')argv=push_string ("-seq ", argv, &argc, 1);
 
  if ( name_is_in_list ("-method",argv, argc,100)==-1)
@@ -870,7 +879,7 @@ argv=merge_list ( argv, &argc);
 			    /*Max Value*/ "1"             \
 		   );
 
-
+	       
 
 /*PARAMETER PROTOTYPE:    DO EVALUATE      */
 	       get_cl_param(\
@@ -1474,6 +1483,7 @@ if ( !do_evaluate)
 				/*Max Value*/ "any"			\
 					      );
 
+
 	aln_file_list=declare_char (1000, STRING);
 	n_aln_file_list=get_cl_param(				\
 				/*argc*/      argc          ,	\
@@ -1743,25 +1753,8 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"         ,\
 			    /*Max Value*/ "any"          \
 		   );
-	       /*PARAMETER PROTOTYPE:    DPA    */
-	       get_cl_param(\
-			    /*argc*/      argc          ,\
-			    /*argv*/      argv          ,\
- 			    /*output*/    &le           ,\
-	 		    /*Name*/      "-dpa"  ,\
-		 	    /*Flag*/      &dpa    ,\
-			    /*TYPE*/      "FL"          ,\
-			    /*OPTIONAL?*/ OPTIONAL      ,\
-			    /*MAX Nval*/  0             ,\
-			    /*DOC*/       "Use DPA mode"          ,\
-			    /*Parameter*/ &dpa    ,\
-			    /*Def 1*/    "0"            ,\
-			    /*Def 2*/    "1"            ,\
-			    /*Min_value*/ "any"         ,\
-			    /*Max Value*/ "any"          \
-		   );
-
-/*PARAMETER PROTOTYPE:    SEQ TO ALIGN     */
+	
+	       /*PARAMETER PROTOTYPE:    SEQ TO ALIGN     */
 	       declare_name (seq_source);
 	       get_cl_param(\
 			    /*argc*/      argc           ,\
@@ -2102,7 +2095,9 @@ if ( !do_evaluate)
 			    /*Min_value*/ "any"          ,\
 			    /*Max Value*/ "any"           \
 		   );
-
+	       //HERE ("REMOVE THIS");
+	       //sprintf (infile, "proteases_small.aln");
+	       
 /*PARAMETER PROTOTYPE:    INFILE    */
 	       declare_name (matrix);
 	       get_cl_param(\
@@ -4270,16 +4265,22 @@ get_cl_param(\
 		 }
 	      
 	       /*Check That Enough Methods/Libraries/Alignments Have been Chiped in*/
-
+	       
 	       if (list_file)
 		 {
 		   int *nn;
 		   nn=(int*)vcalloc ( 256, sizeof (int));
 		   for (a=0; a<n_list; a++)
 		     {
-		       if ( !check_file_exists(list_file[a]))nn[(int)list_file[a][0]]++;
+		       
+		       if ( !check_file_exists(list_file[a]))
+			 {
+			   nn[(int)list_file[a][0]]++;
+			   
+			 }
 		       else
 			 {
+
 			   if (is_seq (list_file[a]))nn['S']++;
 			   else if ( is_aln (list_file[a]))nn['A']++;
 			   else if ( is_lib (list_file[a]))nn['L']++;
@@ -4288,8 +4289,8 @@ get_cl_param(\
 			     add_warning (stderr, "\nWARNING: File %s was not properly tagged. Potential ambiguity\n",list_file[a]);
 			 }
 		     }
-
-
+		   
+		   
 		   /**
 		    * If no alignment A, library L or method M is in the list of infiles (that means in \c list_files[]),
 		    * T-Coffee will add a default method here. The default method is currently \b Mproba_pair.

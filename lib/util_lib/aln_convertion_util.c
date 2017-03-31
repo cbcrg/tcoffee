@@ -1745,6 +1745,7 @@ Alignment * seq2blast ( Sequence *S)
 Sequence * seq2unique_name_seq ( Sequence *S)
 {
   int a;
+ 
   if ((a=name_list2unique_name_list (S->nseq, S->name)))
     {
       add_warning ( stderr, "\nWarning: Sequence %s is duplicated in file %s. The sequence will be renamed", S->name[a-1], S->file[a-1]);
@@ -2978,6 +2979,7 @@ Alignment *seq2aln (Sequence *S, Alignment *A,int rm_gap)
 	{
 	int a;
 
+	
 	A=realloc_alignment2(A, S->nseq, S->max_len+1);
 	for ( a=0; a< S->nseq; a++)sprintf ( A->file[a], "%s", S->file[a]);
 	A->nseq=S->nseq;
@@ -3136,28 +3138,28 @@ Sequence * aln2seq_main (Alignment *A, int mode)
 	Sequence *LS;
 	int a;
 	int maxlen;
-
+	
 	if ( !A) return NULL;
-	else if ( A->nseq==0)return NULL;
+	
 	for (maxlen=0,a=0; a<A->nseq; a++)maxlen=MAX(maxlen, strlen (A->seq_al[a]));
-
-
+	
 	LS=declare_sequence ( maxlen+1, maxlen+1, A->nseq);
 	LS->nseq=A->nseq;
 	for ( a=0; a< LS->nseq; a++)
-		{
-		  sprintf (LS->file[a],"%s", A->file[a]);
-
-		  sprintf ( LS->seq[a], "%s", A->seq_al[a]);
-
-		  if (mode==RM_GAP)ungap ( LS->seq[a]);
-
-		LS->len[a]=strlen ( LS->seq[a]);
-
-		sprintf ( LS->seq_comment[a], "%s",A->seq_comment[a]);
-		sprintf ( LS->aln_comment[a], "%s",A->aln_comment[a]);
-		sprintf ( LS->name[a], "%s", A->name[a]);
-		}
+	  {
+	    sprintf (LS->file[a],"%s", A->file[a]);
+	    
+	    sprintf ( LS->seq[a], "%s", A->seq_al[a]);
+	    
+	    if (mode==RM_GAP)ungap ( LS->seq[a]);
+	    
+	    LS->len[a]=strlen ( LS->seq[a]);
+	    
+	    sprintf ( LS->seq_comment[a], "%s",A->seq_comment[a]);
+	    sprintf ( LS->aln_comment[a], "%s",A->aln_comment[a]);
+	    sprintf ( LS->name[a], "%s", A->name[a]);
+	    
+	  }
 	return LS;
 	}
 

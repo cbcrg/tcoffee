@@ -2704,7 +2704,6 @@ Alignment *msa2distances (Alignment *A, Constraint_list *CL, float radius, float
 		  res[s1][p1][0]/=res[s1][p1][2];
 		  res[s1][p1][1]=100000;
 		}
-	      x++;
 	    }
 	}
       

@@ -1,0 +1,5 @@
+<DumpIO><cl>t_coffee -other_pg seq_reformat -in sample_seq1.aln -action +aln2tree -output newick -out sample_seq1_tree_nj.nwk</cl><stack>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</stack><file><stream>output</stream><name>stderr</name><content>#FAILURE -- SHELL ERROR -- Check the Command Line Syntax</content></file></DumpIO>
+<ref>
+<source>/Users/cnotredame/Dropbox/projects/git/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>760</line>
+</ref>

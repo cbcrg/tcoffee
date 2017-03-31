@@ -1,0 +1,234 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -other_pg unpack_generic_method.tc_method</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content></content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+Unpack Script generic_method.tc_method
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>generic_method.tc_method</name>
+<content>#!/usr/bin/env perl
+*TC_METHOD_FORMAT_01
+******************generic_method.tc_method*************
+*
+*       Incorporating new methods in T-Coffee
+*       Cedric Notredame 26/08/08
+*
+*******************************************************
+*This file is a method file
+*Copy it and adapt it to your need so that the method 
+*you want to use can be incorporated within T-Coffee
+*******************************************************
+*                  USAGE                              *
+*******************************************************
+*This file is passed to t_coffee via -in:
+*
+*	t_coffee -in Mgeneric_method.method
+*
+*	The method is passed to the shell using the following
+*call:
+*<EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
+*
+*Conventions:
+*<FLAG_NAME> 	<TYPE>		<VALUE>
+*<VALUE>:	no_name 	<=> Replaced with a space
+*<VALUE>:	&nbsp	<=> Replaced with a space
+*
+*******************************************************
+*                  ALN_MODE                           *
+*******************************************************
+*pairwise   ->all Vs all (no self )[(n2-n)/2aln]
+*m_pairwise ->all Vs all (no self)[n^2-n]^2
+*s_pairwise ->all Vs all (self): [n^2-n]/2 + n
+*multiple   ->All the sequences in one go
+*
+ALN_MODE		pairwise
+*
+*******************************************************
+*                  OUT_MODE                           *
+*******************************************************
+* mode for the output:
+*External methods: 
+* aln -> alignmnent File (Fasta or ClustalW Format)
+* lib-> Lib file (TC_LIB_FORMAT_01)
+*Internal Methods:
+* fL -> Internal Function returning a List (Librairie)
+* fA -> Internal Function returning an Alignmnent
+*
+OUT_MODE		aln
+*******************************************************
+*                  SEQ_TYPE                           *
+*******************************************************
+*G: Genomic, S: Sequence, P: PDB, R: Profile
+*Examples:
+*SEQTYPE	S	sequences against sequences (default)
+*SEQTYPE	S_P	sequence against structure
+*SEQTYPE	P_P	structure against structure
+*SEQTYPE	PS	mix of sequences and structure	
+*
+SEQ_TYPE	S
+*
+
+*******************************************************
+*                COMMAND LINE                         *
+*EXECUTABLE PARAM1 IN_FLAG OUT_FLAG PARAM             *
+*******************************************************
+*******************************************************
+*                  EXECUTABLE                         *
+*******************************************************
+*name of the executable
+*passed to the shell: executable
+*	
+EXECUTABLE	tc_generic_method.pl
+*
+*******************************************************
+*                  IN_FLAG                             *
+*******************************************************
+*IN_FLAG
+*flag indicating the name of the in coming sequences
+*IN_FLAG S no_name ->no flag
+*IN_FLAG S &bnsp-in&bnsp -> " -in "
+*
+IN_FLAG		-infile=
+*
+*******************************************************
+*                  OUT_FLAG                           *
+*******************************************************
+*OUT_FLAG
+*flag indicating the name of the out-coming data
+*same conventions as IN_FLAG
+*OUT_FLAG	S no_name ->no flag
+*if you want to redirect, pass the parameters via PARAM1
+*set OUT_FLAG to >
+*
+OUT_FLAG		-outfile=
+*
+*******************************************************
+*                  PARAM_1                              *
+*******************************************************
+*<EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
+*Parameters sent to the EXECUTABLE and specified *before* IN_FLAG 
+*If there is more than 1 PARAM line, the lines are
+*concatenated
+*Command_line: @EP@PARAM@-gapopen%e10%s-gapext%e20
+*	%s white space
+*	%e equal sign
+*
+*PARAM1	
+*
+*
+*
+*******************************************************
+*                  PARAM_2                              *
+*******************************************************
+*<EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
+*Parameters sent to the EXECUTABLE and specified 
+*after* IN_FLAG and *before* OUT_FLAG
+*If there is more than 1 PARAM line, the lines are
+*concatenated
+*
+*PARAM1	
+*
+*
+*******************************************************
+*                  PARAM                              *
+*******************************************************
+*<EXECUTABLE><PARAM1><IN_FLAG><seq_file><PARAM2><OUT_FLAG><outname><PARAM>
+*Parameters sent to the EXECUTABLE and specified *after* OUT_FLAG
+*If there is more than 1 PARAM line, the lines are
+*concatenated
+*
+PARAM	-mode=seq_msa -method=clustalw
+PARAM   -OUTORDER=INPUT -NEWTREE=core -align -gapopen=-15
+*
+*******************************************************
+*                  END                                *
+*******************************************************
+
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
+ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.wnPgfm7LhC/Render
+TERM_PROGRAM_VERSION=388
+OSNAME=macosx
+PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=10AF935E-E014-4AC9-828D-65F557EE7931
+METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.yle5RwOYrI/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.bQMyejpONS/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=t_coffee.ErrorReport
+PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=t_coffee.137.ESj51T2HIB.dump
+HTTP_PROXY=
+PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.TbcafQ0492/org.macosforge.xquartz:0
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a5
+PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
+LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94732521/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.137.ESj51T2HIB.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/Users/cnotredame/Dropbox/projects/git/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>2134</line>
+</ref>

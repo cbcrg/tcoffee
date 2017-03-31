@@ -139,7 +139,10 @@ int aln_compare ( int argc, char *argv[])
     char compare_mode[STRING];
     char sim_aln[STRING];
     char *alignment1_file;
+    char *alignment1_file_original;
+    
     char *alignment2_file;
+    char *alignment2_file_original;
     //---Maria added this---
     char *lib_file; //---
     
@@ -218,6 +221,11 @@ int aln_compare ( int argc, char *argv[])
     /*Declarations and Initializations*/
     alignment1_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
     alignment2_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
+
+    alignment1_file_original=(char*)vcalloc ( LONG_STRING, sizeof (char));
+    alignment2_file_original=(char*)vcalloc ( LONG_STRING, sizeof (char));
+
+    
     //---Maria added this---//
     lib_file=(char*)vcalloc ( LONG_STRING, sizeof (char));
     
@@ -337,14 +345,16 @@ int aln_compare ( int argc, char *argv[])
 	//-----END of changes-----
 	else if ( strcmp ( argv[a], "-al1")==0)
     		{
-    		
-    		sprintf ( alignment1_file, "%s", argv[++a]);
+		  ++a;
+		  sprintf ( alignment1_file, "%s", argv[a]);
+		  sprintf ( alignment1_file_original, "%s", argv[a]);
 		
 		}	
 	else if ( strcmp ( argv[a], "-al2")==0)
 		{
-    		
-    		sprintf ( alignment2_file, "%s", argv[++a]);
+		  ++a;
+    		sprintf ( alignment2_file, "%s", argv[a]);
+		sprintf ( alignment2_file_original, "%s", argv[a]);
 		
 		}
 	else if (  strcmp ( argv[a], "-pep1")==0)
@@ -447,7 +457,37 @@ int aln_compare ( int argc, char *argv[])
 		myexit (EXIT_FAILURE);
 		}
 	}
- 
+    
+    if (alignment1_file[0] && check_file_exists ( alignment1_file) && alignment2_file[0] && check_file_exists ( alignment2_file))
+      {
+	char *tmp1=vtmpnam (NULL);
+	char *tmp2=vtmpnam (NULL);
+	char *aln1=vtmpnam (NULL);
+	char *aln2=vtmpnam (NULL);
+	
+	printf_system ("seq2name_seq.pl %s > %s", alignment1_file, tmp1);
+	printf_system ("seq2name_seq.pl %s > %s", alignment2_file, tmp2);
+	printf_system ("seq2intersection.pl %s %s -fasta> %s", tmp1, tmp2, aln1);
+	printf_system ("seq2intersection.pl %s %s -fasta> %s", tmp2, tmp1, aln2);
+	alignment1_file=aln1;
+	alignment2_file=aln2;
+      }
+     if (pep1_file[0] && check_file_exists ( pep1_file) && pep2_file[0] && check_file_exists ( pep2_file))
+      {
+	char *ptmp1=vtmpnam (NULL);
+	char *ptmp2=vtmpnam (NULL);
+	char *pep1=vtmpnam (NULL);
+	char *pep2=vtmpnam (NULL);
+	
+	printf_system ("seq2name_seq.pl %s > %s", pep1_file, ptmp1);
+	printf_system ("seq2name_seq.pl %s > %s", pep2_file, ptmp2);
+	printf_system ("seq2intersection.pl %s %s -fasta > %s", ptmp1, ptmp2, pep1);
+	printf_system ("seq2intersection.pl %s %s -fasta > %s", ptmp2, ptmp1, pep2);
+	pep1_file=pep1;
+	pep1_file=pep2;
+      }
+
+
 /*PARAMETER PROCESSING*/
  //---Maria added this---//
        CL=NULL;
@@ -495,8 +535,8 @@ if ( aln_compare==1)pep_compare=0;
 	  printf("%s  %s\n",lib_file, alignment2_file);
 	  
 	  TOT_SEQ=read_seq_in_n_list ( seq_list, n_seq_file, NULL, NULL);
-	  B=declare_aln (TOT_SEQ);
-	  main_read_aln ( alignment2_file, B);
+	  
+	  B=main_read_aln ( alignment2_file, NULL);
 	  
 	  tmp_pos= (char **) malloc ( CL->S->nseq * sizeof(char *) );
 	  for (i=0; i< B->nseq; i++){
@@ -540,31 +580,26 @@ if ( aln_compare==1)pep_compare=0;
        
        TOT_SEQ=read_seq_in_n_list ( seq_list, n_seq_file, NULL, NULL);
              
-       A=declare_aln (TOT_SEQ);
-       B=declare_aln (TOT_SEQ);
-
+       
 /*1 COMPARISON OF THE SEQUENCES*/
+       
+       /*New Input*/
+
     if ( pep_compare==1 || count==1)
        {
        f=0; 
 
-       if ( pep1_file[0]!='\0')SA=main_read_seq (pep1_file);
+       if ( pep1_file[0]!='\0')SA=quick_read_seq (pep1_file);
        else if (alignment1_file[0]!='\0')  
            {	       
-	   main_read_aln ( alignment1_file, A);
-	   SA=aln2seq ( A);
+	     A=main_read_aln (alignment1_file, NULL);
+	     SA=aln2seq ( A);
 	   }
-       else 
-	   {
-	   main_read_aln ("stdin", A);
-	   sprintf ( alignment1_file, "stdin");
-	   SA=aln2seq ( A);
-	   }
-       if ( pep2_file[0]!='\0')SB=main_read_seq (pep2_file);
+       
+       if ( pep2_file[0]!='\0')SB=quick_read_seq (pep2_file);
        else if (alignment2_file[0]!='\0') 
-           {
-	   main_read_aln ( alignment2_file, B);
-	   
+	 {
+	   B=main_read_aln ( alignment2_file, NULL);
 	   SB=aln2seq (B);
 	   }
        else 
@@ -633,8 +668,8 @@ if ( aln_compare==1)pep_compare=0;
        n_categories=parse_category_list ( category_list, category, n_sub_categories);
        sim_n_categories=parse_category_list ( sim_category_list, sim_category, sim_n_sub_categories);
        
-       main_read_aln ( alignment1_file, A);
-       main_read_aln ( alignment2_file, B);
+       A=main_read_aln ( alignment1_file, NULL);
+       B=main_read_aln ( alignment2_file, NULL);
        CLS=trim_aln_seq ( A, B);
        
        
@@ -860,8 +895,8 @@ if ( aln_compare==1)pep_compare=0;
        R->S=S;
        R->ST=ST;
        R->sim_aln=sim_aln;
-       R->alignment1_file=alignment1_file;
-       R->alignment2_file=alignment2_file;
+       R->alignment1_file=alignment1_file_original;
+       R->alignment2_file=alignment2_file_original;
        R->io_format=io_format;
        R->n_structure=n_structure;
        R->struct_file=struct_file;
@@ -1298,13 +1333,13 @@ Structure * read_structure (char *fname, char *format, Alignment *A,Alignment *B
 	StrucAln=declare_Alignment(NULL); 
         if (strm ( format, "pep"))
                         {
-                        SEQ=main_read_seq ( fname);
-			StrucAln=seq2aln(SEQ,StrucAln,0);
+			  SEQ=quick_read_seq (fname);
+			  StrucAln=seq2aln(SEQ,StrucAln,0);
 			}
         
         else if ( strcmp ( format, "aln")==0)
                         {
-			StrucAln=main_read_aln (fname, StrucAln);
+			  StrucAln=main_read_aln (fname, NULL);
 			}
 
 	reorder_aln(StrucAln, A->name, A->nseq);

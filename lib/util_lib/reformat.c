@@ -501,7 +501,7 @@ int seq_reformat ( int argc, char **in_argv)
  		fprintf ( stdout, "\n     fasta_seq      dali_seq       pir_seq");
  		fprintf ( stdout, "\n     barton_list_tc amps_sd_scores EST_fasta");
  		fprintf ( stdout, "\n     gor_seq        gor_struc      number_fasta[*]");
-		fprintf ( stdout, "\n     swissprot      tc_lib         pdb_struc");
+		fprintf ( stdout, "\n     tc_lib         pdb_struc");
 		fprintf ( stdout, "\n");
 		fprintf ( stdout, "\n***********  INPUT FORMATS: Structures   *****************");
  		fprintf ( stdout, "\n    rna_number");
@@ -917,12 +917,12 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	
 	sprintf ( D->file, "%s", in_file);
 	
-
+	HERE ("****%s******", in_format);
 
 
 	if ( strm2(in_format,"saga_aln","clustal_aln"))
 		{
-		read_aln (in_file, D->A);
+		main_read_aln (in_file, D->A);
 		D->S=aln2seq(D->A);
 
 		}
@@ -1116,11 +1116,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 		  free_char (seq_name, -1);
 		
 		}
-	else if ( strm( in_format,"swissprot_seq"))
-	        {
-		  D->S=get_swissprot_sequence ( in_file,NULL);
-		  seq2aln (D->S, D->A, RAD->rm_gap);
-		}
+
 	else if  (strm (in_format, "alifold"))
 	  {
 	    D->S=read_alifold ( in_file);
@@ -1200,7 +1196,7 @@ Sequence  * main_read_seq ( char *name)
 	   S= get_fasta_sequence ( name, NULL);
 	 }
        else if (format &&strm(format, "pir_seq"))     S= get_pir_sequence ( name, NULL);
-       else if (format &&strm(format,"swissprot_seq"))S= get_swissprot_sequence (name, NULL);
+       
        else if (format && strstr (format, "aln"))
 	 {
 	   A=main_read_aln ( name, NULL);
@@ -1231,46 +1227,121 @@ Sequence  * main_read_seq ( char *name)
        return S;
        }
 
-Alignment * quick_read_aln ( char *file)
+Sequence  * quick_read_seq ( char *file)
 {
-  if (get_first_non_white_char (file)=='>')
-    {
-      static char *tmp_name=vtmpnam (NULL);
-      if (printf_system ( "fasta_seq2name_seq.pl %s > %s",file, tmp_name)!=EXIT_SUCCESS)
+  static char *tmp_name=vtmpnam (NULL);
+  
+  if (!file || !check_file_exists (file))return NULL;
+  if (printf_system ( "seq2name_seq.pl %s > %s",file, tmp_name)!=EXIT_SUCCESS)
 	{
 	  printf_exit ( EXIT_FAILURE, stderr, "Could Not Read File %s [FATAL:%s]\n", file, PROGRAM);
 	}
-      else
-	{
-	  int nseq, len;
-	  char c;
-	  FILE *fp=vfopen (tmp_name, "r");
-	  Alignment *A;
-	  fscanf (fp, "%d %d\n", &nseq, &len);
-	  A=declare_aln2(nseq, len+1);
-	  A->nseq=0;
-	  A->len_aln=len;
-	  while (fscanf (fp, "%s %s\n", A->name[A->nseq], A->seq_al[A->nseq])==2)
-	    {
-	      A->nseq++;
-	    }
-	  vfclose (fp);
-	  return A;
-	}
-    }
-  else
+  file=tmp_name;
+  
+  if (file)
     {
-      static char *tmp_name=vtmpnam (NULL);
-      if (printf_system ( "clustalw_aln2fasta_aln.pl %s > %s",file, tmp_name)!=EXIT_SUCCESS)
+      char **seq;
+      char **comment;
+      char **name;
+      int a;
+      int nseq=read_nameseq(file, &name, &seq, &comment);
+      Sequence *S=declare_sequence(1,1,nseq);
+      free_char (S->name, -1);
+      free_char (S->seq_comment, -1);
+      free_char (S->seq, -1);
+      S->name=name;
+      S->seq=seq;
+      S->seq_comment=comment;
+      S->max_len=S->min_len=-1;
+      for (a=0; a<S->nseq; a++)
 	{
-	  printf_exit ( EXIT_FAILURE, stderr, "Could Not Read File %s [FATAL:%s]\n", file, PROGRAM);
-	}
-      else
-	{
-	  return quick_read_aln (tmp_name);
+	  S->len[a]=strlen (S->seq[a]);
+	  if (S->min_len==-1 || S->min_len <S->len[a])S->min_len=S->len[a];
+	  if (S->max_len==-1 || S->min_len >S->len[a])S->max_len=S->len[a];
 	}
     }
 }
+Alignment * quick_read_aln ( char *file)
+{
+  //only reads FASTA, Clustal, MSF, and Phylips
+  //turns 
+  
+  static char *tmp_name=vtmpnam (NULL);
+
+  if (!file || !check_file_exists (file))return NULL;
+  else if (printf_system ( "seq2name_seq.pl %s > %s",file, tmp_name)!=EXIT_SUCCESS)
+    {
+      printf_exit ( EXIT_FAILURE, stderr, "Could Not Read File %s [FATAL:%s]\n", file, PROGRAM);
+    }
+  file=tmp_name;
+  if (file)
+    {
+      char **seq;
+      char **comment;
+      char **name;
+      int a;
+      int nseq=read_nameseq(file, &name, &seq, &comment);
+      
+      Alignment *A=declare_aln2(nseq,1);
+      free_char (A->seq_al, -1);
+      free_char (A->name, -1);
+      free_char (A->aln_comment, -1);
+      A->name=name;
+      A->seq_al=seq;
+      A->aln_comment=comment;
+      A->max_n_seq=A->nseq=nseq;
+      A->nseq=nseq;
+      
+      A->declared_len=A->len_aln=strlen (A->seq_al[0]);
+      
+      return A;
+    }
+}
+int read_nameseq (char *file,char ***nam, char ***seq, char ***com)
+{
+  if (!file || !check_file_exists (file))return 0;
+  else
+    {
+      int nseq, len, l1, l2;
+      char c;
+      FILE *fp=vfopen (file, "r");
+      char buf[100];
+      Sequence *A;
+      int a;
+      nseq=0;
+      fscanf (fp, "#NAMESEQ_01\n");
+      fscanf (fp, "# %d\n", &nseq);
+      
+      seq[0]=(char **)vcalloc (nseq, sizeof (char*));
+      nam[0]=(char **)vcalloc (nseq, sizeof (char*));
+      com[0]=(char **)vcalloc (nseq, sizeof (char*));
+      nseq=0;
+      while ((c=fgetc(fp))!=EOF)
+	{
+	  if (c=='>')
+	    {
+	      fscanf (fp, "%d %d ", &l1, &l2);
+	      nam[0][nseq]=(char*)vcalloc  (l1+1, sizeof (char));
+	      seq[0][nseq]=(char*)vcalloc(l2+1, sizeof (char));
+	      fscanf (fp, "%s %s\n", nam[0][nseq], seq[0][nseq]);
+	      nseq++;
+	    }
+	  else if (c=='#')
+	    {
+	       fscanf (fp, "%d ", &l1);
+	       com[0][nseq]=(char*)vcalloc  (l1+1, sizeof (char));
+	       fgets (com[0][nseq],l1, fp);
+	       c=fgetc(fp);
+	    }
+	}
+      vfclose (fp);
+      return nseq;
+    }
+  
+}
+
+
+
 Alignment * main_read_aln ( char *name, Alignment *A)
        {
        int a;
@@ -1296,10 +1367,23 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 
        IN_SEQ=A->S;
 
-       if      ((format && strm(format, "saga_aln" )) ||strm(format, "clustal_aln")||strm(format, "t_coffee_aln" ) )
+       if (format && strm (format, "nameseq"))
 	 {
-
-	   read_aln ( name, A);
+	   free_aln (A);
+	   A=quick_read_aln (name);
+	   IN_SEQ=A->S;
+	 }
+       else if      (format && (strm(format, "saga_aln" ) ||strm(format, "clustal_aln")||strm(format, "t_coffee_aln" ) || strm (format, "msf_aln")))
+	 {
+	   static char*tmp_name1=vtmpnam (NULL);
+	   static char*tmp_name2=vtmpnam (NULL);
+	   
+	   printf_system ( "seq2name_seq.pl %s > %s",name, tmp_name1);
+	   printf_system ( "nameseq2fasta.pl %s > %s",tmp_name1, tmp_name2);
+	   S=get_fasta_sequence (tmp_name2, NULL);
+	   S->contains_gap=0;
+	   A=seq2aln (S, A, 0);
+	   //read_aln ( name, A);
 
 	 }
        
@@ -1387,7 +1471,9 @@ char * identify_seq_format ( char *file)
 	 // 	if ( format_is_fasta_seq(file))sprintf ( format, "fasta_seq");
 	 // 	else if ( format_is_fasta_aln(file,1))
 	 // 	sprintf ( format, "fasta_aln");
-	 if ( is_stockholm_aln (file))sprintf (format, "stockholm_aln");
+	 if (is_nameseq (file)){sprintf (format, "nameseq");}
+	 else if ( is_stockholm_aln (file))sprintf (format, "stockholm_aln");
+         else if (format_is_msf (file))sprintf (format, "msf_aln");
 	 else if ( is_blast_file (file))sprintf ( format, "blast_aln");
 	 else if ( is_pdb_file(file))sprintf ( format, "pdb_struc");
 	 else if (format_val = fast_format_determination(file))
@@ -1408,7 +1494,7 @@ char * identify_seq_format ( char *file)
        //        else if ( format_is_pir_aln  (file))sprintf ( format, "pir_aln");
        //        else if ( format_is_pir_seq  (file))sprintf ( format, "pir_seq");
 	 else if ( format_is_oligo    (file))sprintf ( format, "oligo_aln");
-	 else if ( format_is_swissprot     (file))sprintf ( format, "swissprot_seq");
+	
 	 else if ( format_is_saga     (file))sprintf ( format, "clustal_aln");
 	 else if ( format_is_conc_aln (file))sprintf ( format, "conc_aln");
 	 else if ( is_lib (file))sprintf ( format, "tc_lib");
@@ -2007,30 +2093,23 @@ int is_blast_matrix ( char *name)
 int is_single_seq_weight_file ( char *name)
 {
 
-
+  
   return token_is_in_file ( name, "SINGLE_SEQ_WEIGHT_FORMAT_01");
 
 }
+int is_nameseq (char *file)
+{
+  return token_is_in_n_lines (file,"#NAMESEQ_01",2);
+}
 int is_nexus (char *file)
 {
-  FILE *fp;
-  if ((fp=find_token_in_file_nlines (file, NULL, "#NEXUS",10)))
-    {
-      vfclose (fp);
-      return 1;
-    }
-  return 0;
+  return token_is_in_n_lines (file,"#NEXUS",10);
+  
 }
 int is_stockholm_aln (char *file)
 {
-  FILE *fp;
-
-  if ((fp=find_token_in_file_nlines (file, NULL, "STOCKHOLM",2)))
-    {
-      vfclose (fp);
-      return 1;
-    }
-  return 0;
+  
+  return token_is_in_n_lines (file,"STOCKHOLM",2);
 }
 
 int is_lib ( char *name)
@@ -2118,23 +2197,8 @@ int format_is_oligo(char *file)
     }
 int format_is_msf ( char *file)
     {
-    char buf[1000];
-    FILE *fp;
+      return token_is_in_n_lines (file,"MSF",5);
 
-
-
-    if ( (fp=find_token_in_file_nlines (file,NULL,"MSF:", 30))!=NULL){vfclose (fp);return 1;}
-    else
-      {
-       return 0;
-      }
-
-    fp=vfopen ( file, "r");
-    fscanf (fp , "%s", buf);
-    vfclose ( fp);
-
-    if ( strm (buf, "MSF:"))return 1;
-    return 0;
     }
 
 //Fasta and PIR
@@ -2410,26 +2474,6 @@ int format_is_saga ( char *file)
     }
 
 
-int format_is_swissprot (char *name)
-    {
-      FILE *fp;
-
-      if ( !check_file_exists(name))return 0;
-
-
-
-
-      if (   (fp=find_token_in_file_nlines (name,NULL,"\nID ",10))!=NULL\
-	   &&(fp=find_token_in_file (name,NULL,"\nSQ "))!=NULL  )
-	{
-
-	  vfclose (fp);return 1;
-	}
-      else
-	{
-	  return 0;
-	}
-    }
 
 /*******************************************************************************************/
 /*                                                                                         */
@@ -5333,53 +5377,6 @@ Sequence* get_gor_sequence (char *fname, char *comment_out)
 
     return LS;
     }
-Sequence* get_swissprot_sequence (char *fname, char *comment_out)
-    {
-    Sequence *LS;
-    FILE *fp;
-    int c;
-    char *buf;
-    int nseq=0;
-    int len, max_len_seq=0, min_len_seq=0;
-
-    if ( !check_file_exists(fname))
-      {printf ( "\nCOULDN'T OPEN %s",fname);
-	  myexit(EXIT_FAILURE);
-      }
-
-    buf=(char*)vcalloc (LONG_STRING+1, sizeof (char));
-    fp=NULL;
-    while ( (fp=find_token_in_file(fname,fp,"\nSQ")))
-      {
-	nseq++;
-	fgets (buf, LONG_STRING, fp);
-	len=0;
-	while ((c=fgetc(fp))!='/')if(isalpha(c))len++;
-	if ( max_len_seq==0)max_len_seq=min_len_seq=len;
-	else
-	  {
-	    max_len_seq=MAX(len, max_len_seq);
-	    min_len_seq=MIN(len, min_len_seq);
-	  }
-      }
-
-    LS=declare_sequence (  min_len_seq,  max_len_seq,nseq);
-    LS->nseq=0;
-
-    fp=NULL;
-    while ( (fp=find_token_in_file(fname,fp,"\nID")))
-      {
-	fscanf_seq_name (fp, LS->name[LS->nseq]);
-	fp=find_token_in_file(fname,fp,"\nSQ");
-	fgets (buf, LONG_STRING, fp);
-	while ((c=fgetc(fp))!='/')if (isalpha(c))LS->seq[LS->nseq][LS->len[LS->nseq]++]=c;
-	LS->seq[LS->nseq][LS->len[LS->nseq]]='\0';
-	LS->nseq++;
-      }
-
-
-    return LS;
-    }
 
 
 
@@ -5444,7 +5441,8 @@ void read_aln (char *file_name, Alignment *A)
 {
   static char *tmp_name=vtmpnam (NULL);
   Sequence *S;
-
+  
+  main_read_aln (file_name, A);
   
   if (printf_system ( "clustalw_aln2fasta_aln.pl %s > %s",file_name, tmp_name)!=EXIT_SUCCESS)
     {
@@ -5463,7 +5461,7 @@ void read_stockholm_aln (char *file_name, Alignment *A)
   char *tmp_name;
   Sequence *S;
 
-
+  
   tmp_name=vtmpnam (NULL);
   if (printf_system ( "clustalw_aln2fasta_aln.pl %s > %s",file_name, tmp_name)!=EXIT_SUCCESS)
     {
@@ -8915,7 +8913,6 @@ Sequence *rna_seq2dna_seq (Sequence *S)
 	  if ( S->seq[a][b]=='u') S->seq[a][b]='t';
 	  if ( S->seq[a][b]=='U') S->seq[a][b]='T';
 	}
-      HERE ("%s", S->seq[a]);
     }
   return S;
 }

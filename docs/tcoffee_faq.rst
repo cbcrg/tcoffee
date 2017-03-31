@@ -185,7 +185,7 @@ A: This is a problem that has to do with your browser. Instead of requesting the
   $$: t_coffee sample_seq1.fasta -output=score_ps
    
   PDF only if you have ps2pdf installed
-  $$: t_coffee sample_seq1.fasta -output=score_pdf
+  $*: t_coffee sample_seq1.fasta -output=score_pdf
 
 
 Q: I want to output an html file and a regular file

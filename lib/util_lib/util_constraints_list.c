@@ -2437,8 +2437,9 @@ Sequence * read_seq_in_n_list(char **fname, int n, char *type, char *SeqMode)
 
 
 				A=main_read_aln (lname,NULL);
-
+			
 				S1=aln2seq(A);
+				
 				S1=seq2unique_name_seq (S1);
 				if ((S=merge_seq ( S1, S))==NULL){fprintf ( stderr, "\nERROR: Sequence Error in %s [FATAL:%s]\n",lname, PROGRAM); myexit(EXIT_FAILURE);}
 				free_aln (A);
@@ -6072,7 +6073,7 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "OUT_MODE   aln\n");
     fprintf ( fp, "IN_FLAG    -i&bnsp\n");
     fprintf ( fp, "OUT_FLAG   -o&bnsp\n");
-    fprintf ( fp, "PARAM      --force\n");
+    fprintf ( fp, "PARAM      --force --threads=2 \n");
     fprintf ( fp, "SEQ_TYPE   S\n");
     fprintf ( fp, "ADDRESS    %s\n", CLUSTALO_ADDRESS);
     fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);
@@ -6087,7 +6088,7 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "OUT_MODE   aln\n");
     fprintf ( fp, "IN_FLAG    -i&bnsp\n");
     fprintf ( fp, "OUT_FLAG   -o&bnsp\n");
-    fprintf ( fp, "PARAM      --force\n");
+    fprintf ( fp, "PARAM      --force --threads=2 \n");
     fprintf ( fp, "SEQ_TYPE   S\n");
     fprintf ( fp, "ADDRESS    %s\n", CLUSTALO_ADDRESS);
     fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);

@@ -1,0 +1,1739 @@
+<DumpIO>
+<nature>standard dump</nature>
+<program>T-COFFEE</program>
+<version>Version_11.00</version>
+<build>Version_11.00</build>
+<cl>t_coffee -infile proteases_small.aln -lib charge_relay_lib.tc_lib -score -output html</cl>
+<stack>
+</stack>
+<warning>
+</warning>
+<file>
+<stream>output</stream>
+<name>stdout</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE:  ], CPU=0.00 sec, SCORE=1000, Nseq=19, Len=402 
+
+sp|Q06606|GRZ2_RAT     -------------------------------------------MFLFLFF
+sp|P08884|GRAE_MOUSE   -------------------------M--------PPVLILLTLLLPLGAG
+sp|P21844|MCPT5_MOUSE  ------------------------MH--------LLTLHLLLLLLGSSTK
+sp|O35205|GRAK_MOUSE   --------------------MRFSSW--------ALVSLVAGVYMSSECF
+sp|Q9Y5K2|KLK4_HUMAN   ---------------MATAGNPWGWF--------LGYLILGVAGSLVSGS
+sp|Q7YRZ7|GRAA_BOVIN   -----------------MNIPFPFSF--------PPAICLLLIPGVFPVS
+sp|Q00871|CTRB1_PENVA  MIGKLSLLLVCVAVASGNPAAGKPWH--------WKSPKPLVDPRIHVNA
+sp|P08246|ELNE_HUMAN   ----------------MTLGRRLACL--------FLACVLPALLLGGTAL
+sp|P03953|CFAD_MOUSE   --------------------MHSSVY--------FVALVILGAAVCAAQP
+sp|Q91VE3|KLK7_MOUSE   --------------------MGVWLL--------SLITVLLSLALETAGQ
+sp|Q6H321|KLK2_HORSE   ---------------------MWFLV--------LCLDLSLGETGALPPI
+sp|Q03238|GRAM_RAT     -------------------------L--------LLLLALKTLWAVGNRF
+sp|P20160|CAP7_HUMAN   -------------------MTRLTVL--------ALLAGLLASSRAGSSP
+sp|P07338|CTRB1_RAT    --------------------MAFLWLVSCFALVGATFGCGVPTIQPVLTG
+sp|P00757|KLKB4_MOUSE  ----------------------------------MWFLILFLALSLGGID
+sp|P80015|CAP7_PIG     --------------------------------------------------
+sp|P29786|TRY3_AEDAE   ------MNQFLFVSFCALLDSAKVSA--------------------ATLS
+sp|P35037|TRY3_ANOGA   -----MISNKIAILLAVLVVAVACAQARVAQQHRSVQALPRFLPRPKYDV
+sp|P00773|ELA1_RAT     -------------------MLRFLVF--------ASLVLYGHSTQDFPET
+                                                                         
+
+sp|Q06606|GRZ2_RAT     LVAILPVNTEGGEIIWGTESKPHSRPYMAFIK---FY----DSNSEPHHC
+sp|P08884|GRAE_MOUSE   AEEII-----GGH-----VVKPHSRPYMAFVK---SVDIEGNR----RYC
+sp|P21844|MCPT5_MOUSE  AGEII-----GGT-----ECIPHSRPYMAYLEIVTSE----NY-L--SAC
+sp|O35205|GRAK_MOUSE   HTEII-----GGR-----EVQPHSRPFMASIQ---YR----SK----HIC
+sp|Q9Y5K2|KLK4_HUMAN   CSQII-----NGE-----DCSPHSQPWQAALV---ME----NE----LFC
+sp|Q7YRZ7|GRAA_BOVIN   CEGII-----GGN-----EVAPHTRRYMALIK--GL------K-----LC
+sp|Q00871|CTRB1_PENVA  TPRIV-----GGV-----EATPHSWPHQAALF---ID----DM----YFC
+sp|P08246|ELNE_HUMAN   ASEIV-----GGR-----RARPHAWPFMVSLQ---LR----GG----HFC
+sp|P03953|CFAD_MOUSE   RGRIL-----GGQ-----EAAAHARPYMASVQ---VN----GT----HVC
+sp|Q91VE3|KLK7_MOUSE   GERII-----DGY-----KCKEGSHPWQVALL---KG----NQ----LHC
+sp|Q6H321|KLK2_HORSE   QSRII-----GGW-----ECEKHSKPWQVAVY---HQ----GH----FQC
+sp|Q03238|GRAM_RAT     EAQII-----GGR-----EAVPHSRPYMVSLQ---NT----KS----HMC
+sp|P20160|CAP7_HUMAN   LLDIV-----GGR-----KARPRQFPFLASIQ---NQ----GR----HFC
+sp|P07338|CTRB1_RAT    LSRIV-----NGE-----DAIPGSWPWQVSLQ---DK---TGF----HFC
+sp|P00757|KLKB4_MOUSE  AAPPV-----QSQ-----VDCENSQPWHVAVY---RF----NK----YQC
+sp|P80015|CAP7_PIG     ---IV-----GGR-----RAQPQEFPFLASIQ---KQ----GR----PFC
+sp|P29786|TRY3_AEDAE   SGRIV-----GGF-----QIDIAEVPHQVSLQ--RSG-----R----HFC
+sp|P35037|TRY3_ANOGA   GHRIV-----GGF-----EIDVSETPYQVSLQ--YFN-----S----HRC
+sp|P00773|ELA1_RAT     NARVV-----GGA-----EARRNSWPSQISLQ---YLSGGSWY----HTC
+                           :      .                  :                  *
+
+sp|Q06606|GRZ2_RAT     GGFLVAKDIVMTAAHC----NG-------R----NIK---VTLGAHNI--
+sp|P08884|GRAE_MOUSE   GGFLVQDDFVLTAAHC----RN-------R----TMT---VTLGAHNI--
+sp|P21844|MCPT5_MOUSE  SGFLIRRNFVLTAAHC----AG-------R----SIT---VLLGAHNK--
+sp|O35205|GRAK_MOUSE   GGVLIHPQWVLTAAHC----Y-SWFPRG-H----SPT---VVLGAHSL--
+sp|Q9Y5K2|KLK4_HUMAN   SGVLVHPQWVLSAAHC----FQ-------N----SYT---IGLGLHSL-E
+sp|Q7YRZ7|GRAA_BOVIN   AGALIKENWVLTAAHC----DLK------G----NPQ---VILGAHST--
+sp|Q00871|CTRB1_PENVA  GGSLISSEWVLTAAHC----MD-------G--AGFV---EVVLGAHNI--
+sp|P08246|ELNE_HUMAN   GATLIAPNFVMSAAHC----VAN------V----NVRAVRVVLGAHNL--
+sp|P03953|CFAD_MOUSE   GGTLLDEQWVLSAAHC----MDGVTDDD------SVQ---VLLGAHSL--
+sp|Q91VE3|KLK7_MOUSE   GGVLVDKYWVLTAAHC----KM-------G----QYQ---VQLGSDKI--
+sp|Q6H321|KLK2_HORSE   GGVLVHPQWVLTAAHC----MS-------D----DYQ---IWLGRHNL--
+sp|Q03238|GRAM_RAT     GGVLVHQKWVLTAAHC----LSE----PLQ----QLK---LVFGLHSLHD
+sp|P20160|CAP7_HUMAN   GGALIHARFVMTAASC----FQS---QNPG----VS---TVVLGAYDL--
+sp|P07338|CTRB1_RAT    GGSLISEDWVVTAAHC----GVK------TS----DV---VVAGEFDQ--
+sp|P00757|KLKB4_MOUSE  GGVLLDRNWVLTAAHC----YN-------D----KYQ---VWLGKNNF--
+sp|P80015|CAP7_PIG     AGALVHPRFVLTAASC----FRG---KNSG----SA---SVVLGAYDL--
+sp|P29786|TRY3_AEDAE   GGSIISPRWVLTRAHC----TT-------NTDPAAYT---IRAGSTD---
+sp|P35037|TRY3_ANOGA   GGSVLNSKWILTAAHCTVNLQP-------SS----LA---VRLGSSR---
+sp|P00773|ELA1_RAT     GGTLIRRNWVMTAAHC----VSS------Q----MTF--RVVVGDHNL--
+                       .. ::    ::: * *                        :  *      
+
+sp|Q06606|GRZ2_RAT     -KKQE-NTQ-VISVVKAKPHENYDR-----------DSH-----FNDIML
+sp|P08884|GRAE_MOUSE   -KAKE-ETQQIIPVAKAIPHPDYNA-----------TAF-----FSDIML
+sp|P21844|MCPT5_MOUSE  -TSKE-DTWQKLEVEKQFLHPKYDE-----------NLV-----VHDIML
+sp|O35205|GRAK_MOUSE   -SKNE-PMKQTFEIKKFIPFSRLQS-----------GSA-----SHDIML
+sp|Q9Y5K2|KLK4_HUMAN   AD-QE-PGSQMVEASLSVRHPEYN-----------RPLL-----ANDLML
+sp|Q7YRZ7|GRAA_BOVIN   -SHKE-KLDQVFSIKKAIPYPCFDP-----------QTF-----EGDLQL
+sp|Q00871|CTRB1_PENVA  -RQNEA-SQVSITSTDFFTHENWNS-----------WLL-----TNDIAL
+sp|P08246|ELNE_HUMAN   -SRRE-PTRQVFAVQRIFEN-GYDP-----------VNL-----LNDIVI
+sp|P03953|CFAD_MOUSE   -SAPE-PYKRWYDVQSVVPHPGSRP-----------DSL-----EDDLIL
+sp|Q91VE3|KLK7_MOUSE   -GDQ---SAQKIKATKSFRHPGYS-----------TKTH-----VNDIML
+sp|Q6H321|KLK2_HORSE   -SEDE-DTAQFHQVSDSFLDPQFDLSLLKKKYLRPYDDI-----SHDLML
+sp|Q03238|GRAM_RAT     PQDP----GLTFYIKQAIKHPGYNL------------KY-----ENDLAL
+sp|P20160|CAP7_HUMAN   -RRRERQSRQTFSISSMSEN-GYDP-----------QQN-----LNDLML
+sp|P07338|CTRB1_RAT    -GSDE-ENIQVLKIAQVFKNPKF----------------NMFTVRNDITL
+sp|P00757|KLKB4_MOUSE  -LEDE-PSDQHRLVSKAIPHPDFNMSLLNEHTPQPEDDY-----SNDLML
+sp|P80015|CAP7_PIG     -RQQE-QSRQTFSIRSISQN-GYDP-----------RQN-----LNDVLL
+sp|P29786|TRY3_AEDAE   -RTNG-GI--IVKVKSVIPHPQYN---------GDTYNY-------DFSL
+sp|P35037|TRY3_ANOGA   -HASG-GT--VVRVARVLEHPNYD-----------DSTID-----YDFSL
+sp|P00773|ELA1_RAT     -SQND-GTEQYVSVQKIMVHPTWNS-----------NNV---AAGYDIAL
+                                                                     *. :
+
+sp|Q06606|GRZ2_RAT     LKLERKAQLNGVVKTIA-LP--RSQ-DW-VKPGQVCTVAGWGR-----LA
+sp|P08884|GRAE_MOUSE   LKLESKAKRTKAVRPLK-LP--RPN-AR-VKPGDVCSVAGWGSRSINDT-
+sp|P21844|MCPT5_MOUSE  LKLKEKAKLTLGVGTLP-LS--AN-FNF-IPPGRMCRAVGWGR-----TN
+sp|O35205|GRAK_MOUSE   IKLRTAAELNKNVQLLH-LG--S--KNY-LRDGTKCQVTGWGT-----TK
+sp|Q9Y5K2|KLK4_HUMAN   IKLDESVSESDTIRSIS-IA--S---QC-PTAGNSCLVSGWGL-----LA
+sp|Q7YRZ7|GRAA_BOVIN   LQLEGKATMTKAVGILQ-LP--RT-EDD-VKPHTKCHVAGWGS-----TK
+sp|Q00871|CTRB1_PENVA  IRLPSPVSLNSNIKTVK-LP--S---SD-VSVGTTVTPTGWGR-----PS
+sp|P08246|ELNE_HUMAN   LQLNGSATINANVQVAQ-LP--AQ-GRR-LGNGVQCLAMGWGL-----LG
+sp|P03953|CFAD_MOUSE   FKLSQNASLGPHVRPLPLQY-----EDKEVEPGTLCDVAGWGV-----VT
+sp|Q91VE3|KLK7_MOUSE   VRLDEPVKMSSKVEAVQ-LP--E---HC-EPPGTSCTVSGWGT-----TT
+sp|Q6H321|KLK2_HORSE   LRLAQPARITDAVKILD-LP--T---QE-PKLGSTCYTSGWGL-----IS
+sp|Q03238|GRAM_RAT     LKLDGRVKPSKNVKPLA-LP--RKPRDK-PAEGSRCSTAGWGI-----TH
+sp|P20160|CAP7_HUMAN   LQLDREANLTSSVTILP-LP--LQ-NAT-VEAGTRCQVAGWGS-----QR
+sp|P07338|CTRB1_RAT    LKLATPAQFSETVSAVC-LP--NVD-DD-FPPGTVCATTGWGK-----TK
+sp|P00757|KLKB4_MOUSE  LRLSKPADITDVVKPIT-LP--T---EE-PKLGSTCLASGWGS-----TT
+sp|P80015|CAP7_PIG     LQLDREARLTPSVALVP-LP--PQ-NAT-VEAGTNCQVAGWGT-----QR
+sp|P29786|TRY3_AEDAE   LELDESIGFSRSIEAIA-LPDASE---T-VADGAMCTVSGWGD-----T-
+sp|P35037|TRY3_ANOGA   MELESELTFSDVVQPVS-LP--DQD-EA-VEDGTMTIVSGWGN-----TQ
+sp|P00773|ELA1_RAT     LRLAQSVTLNNYVQLAV-LP--QE-GTI-LANNNPCYITGWGR-----TR
+                       ..*         :                          ***        
+
+sp|Q06606|GRZ2_RAT     N-C-T--S-SNT---LQEVNLEVQKGQKCQD----MSE--DYND-SIQLC
+sp|P08884|GRAE_MOUSE   ----------KASARLREAQLVIQEDEECKK----RFR--HY-TETTEIC
+sp|P21844|MCPT5_MOUSE  VNE-P--A-SDT---LQEVKMRLQEPQACKH-----FT--SFRH-NSQLC
+sp|O35205|GRAK_MOUSE   PDLLT--A-SDT---LREVTVTIISRKRCNS--QSYYNHKPVIT-KDMIC
+sp|Q9Y5K2|KLK4_HUMAN   --NGR--M-PTV---LQCVNVSVVSEEVCSK----LYD--PLYH-PSMFC
+sp|Q7YRZ7|GRAA_BOVIN   KDACQ--M-SNA---LREANVTVIDRKICND--AQHYNFNPVID-LSMIC
+sp|Q00871|CTRB1_PENVA  DSASG--I-SDV---LRQVNVPVMTNADCDS----VYG---IVG-DGVVC
+sp|P08246|ELNE_HUMAN   RNR-G--I-ASV---LQELNVTVVT-SLC--------------R-RSNVC
+sp|P03953|CFAD_MOUSE   HAG-R--R-PDV---LHQLRVSIMNRTTCNL--RTYHD--GVVT-INMMC
+sp|Q91VE3|KLK7_MOUSE   SPDVT--F-PSD---LMCSDVKLISSRECKK----VYK--DLLG-KTMLC
+sp|Q6H321|KLK2_HORSE   TFTNR--G-SGT---LQCVELRLQSNEKCAR----AYP--EKMT-EFVLC
+sp|Q03238|GRAM_RAT     QRG-Q--L-AKS---LQELDLRLLDTRMCNN--SRFWN--GVLT-DSMLC
+sp|P20160|CAP7_HUMAN   SGG-R--L-SRF---PRFVNVTVTPEDQC--------------R-PNNVC
+sp|P07338|CTRB1_RAT    Y---NALKTPEK---LQQAALPIVSEADCK----KSWG--SKIT-DVMTC
+sp|P00757|KLKB4_MOUSE  PIKFK--Y-PDD---LQCVNLKLLPNEDCDK----AHE--MKVT-DAMLC
+sp|P80015|CAP7_PIG     LR--R--LFSRF---PRVLNVTVT-SNPC--------------L-PRDMC
+sp|P29786|TRY3_AEDAE   KNV-F---EMNT--LLRAVNVPSYNQAECAAALVNVVP----VT-EQMIC
+sp|P35037|TRY3_ANOGA   SA--A---ESNA--ILRAANVPTVNQKECT----IAYSSSGGIT-DRMLC
+sp|P00773|ELA1_RAT     TNG-Q--L-SQT---LQQAYLPSVDYSICSS--SSYWG--STVK-TTMVC
+                                           :       *                    *
+
+sp|Q06606|GRZ2_RAT     VG--NPSE--G--K--ATGKGDSGGPFVCD----G--VAQGIVSYRL-C-
+sp|P08884|GRAE_MOUSE   AG--DLKK--I--K--TPFKGDSGGPLVCD----N--KAYGLLAYAK-N-
+sp|P21844|MCPT5_MOUSE  VG--NPKK--M--Q--NVYKGDSGGPLLCA----G--IAQGIASYVH-R-
+sp|O35205|GRAK_MOUSE   AG--D--A--R--GQKDSCKGDSGGPLICK----G--IFHALVSQGY-K-
+sp|Q9Y5K2|KLK4_HUMAN   AG--G--G--QDQK--DSCNGDSGGPLICN------GYLQGLVSFGK--A
+sp|Q7YRZ7|GRAA_BOVIN   AG--G--R--K--GEDDSCEGDSGSPLICD------NVFRGVTSFG----
+sp|Q00871|CTRB1_PENVA  ID--G--T--G--G-KSTCNGDSGGPLNLN------GMTYGITSFGS-SA
+sp|P08246|ELNE_HUMAN   TL--V--RGRQ--A--GVCFGDSGSPLVCN------GLIHGIASFVR-G-
+sp|P03953|CFAD_MOUSE   AE--S--N--R--R--DTCRGDSGSPLVCG----D--AVEGVVTWGS-R-
+sp|Q91VE3|KLK7_MOUSE   AG--I--P--DSKT--NTCNGDSGGPLVCN------DTLQGLVSWGT--Y
+sp|Q6H321|KLK2_HORSE   ATHRD--D----SG--SICLGDSGGALICD------GVFQGITSWGY--S
+sp|Q03238|GRAM_RAT     LK--AGAK--G--Q--APCKGDSGGPLVCG----K-GKVDGILSFSS-K-
+sp|P20160|CAP7_HUMAN   TG--V--LTRR--G--GICNGDGGTPLVCE------GLAHGVASFSL-G-
+sp|P07338|CTRB1_RAT    AG--A--S--G--V--SSCMGDSGGPLVCQKD--GVWTLAGIVSWGS-G-
+sp|P00757|KLKB4_MOUSE  AG--E--M--DGGS--YTCEHDSGGPLICD------GILQGITSWGP--E
+sp|P80015|CAP7_PIG     IG--V--FSRR--G--RISQGDRGTPLVCN------GLAQGVASFLR-R-
+sp|P29786|TRY3_AEDAE   AG--Y--AA-G--G-KDSCQGDSGGPLVSG------DKLVGVVSWGK-G-
+sp|P35037|TRY3_ANOGA   AG--Y--KRGG--K--DACQGDSGGPLVVD------GKLVGVVSWGF-G-
+sp|P00773|ELA1_RAT     AG--G--D-GV--R--SGCQGDSGGPLHCLVNGQY--SVHGVTSFVSSM-
+                                            * * .:             .: :      
+
+sp|Q06606|GRZ2_RAT     TG-T----L-P-RVFTRISS-FIPWIQKTMK--VLQQS------------
+sp|P08884|GRAE_MOUSE   ---RTI-SS-G--VFTKIVH-FLPWISRNMKL-L----------------
+sp|P21844|MCPT5_MOUSE  NA-K------PPAVFTRISH-YRPWINKILREN-----------------
+sp|O35205|GRAK_MOUSE   -C-G-I-AKKP-GIYTLLTKKYQTWIKSKLAPSRAH--------------
+sp|Q9Y5K2|KLK4_HUMAN   PCGQ-V-GV-P-GVYTNLCK-FTEWIEKTVQA-S----------------
+sp|Q7YRZ7|GRAA_BOVIN   KC-G-N-PQKP-GIYILLTKKHLNWIKKTIAGAI----------------
+sp|Q00871|CTRB1_PENVA  GC-E-K-GY-P-AAFTRVYY-YLDWIQQKTGVTP----------------
+sp|P08246|ELNE_HUMAN   GCAS-G-LY-P-DAFAPVAQ-FVNWIDSIIQ-RSEDNPCPHPRDPDPASR
+sp|P03953|CFAD_MOUSE   VC-G-N-GKKP-GVYTRVSS-YRMWIENITNGNMTS--------------
+sp|Q91VE3|KLK7_MOUSE   PCGQ-P-ND-P-GVYTQVCK-YKRWVMETMKTHR----------------
+sp|Q6H321|KLK2_HORSE   EC-A-D-FNDN-FVFTKVMP-HLKWIKETIEKNS----------------
+sp|Q03238|GRAM_RAT     NC-TDI-FK-P-TVATAVAP-YSSWIRKVIGR-WSPQPLT----------
+sp|P20160|CAP7_HUMAN   PC-G-R--G-P-DFFTRVAL-FRDWIDGVLNNPGPGPA------------
+sp|P07338|CTRB1_RAT    VC-S-T-ST-P-AVYSRVTA-LMPWVQQILEAN-----------------
+sp|P00757|KLKB4_MOUSE  PC-G-EPTE-P-SVYTKLIK-FSSWIRETMANNP----------------
+sp|P80015|CAP7_PIG     RF-R-R--S-S-GFFTRVAL-FRNWIDSVLNNPP----------------
+sp|P29786|TRY3_AEDAE   -C-A-L-PNLP-GVYARVST-VRQWIREVSEV------------------
+sp|P35037|TRY3_ANOGA   CA-M-P-GY-P-GVYARVAV-VRDWVRENSGA------------------
+sp|P00773|ELA1_RAT     GC-NVS-KK-P-TVFTRVSA-YISWMNNVIAYT-----------------
+                                        :      *:                        
+
+sp|Q06606|GRZ2_RAT     --
+sp|P08884|GRAE_MOUSE   --
+sp|P21844|MCPT5_MOUSE  --
+sp|O35205|GRAK_MOUSE   --
+sp|Q9Y5K2|KLK4_HUMAN   --
+sp|Q7YRZ7|GRAA_BOVIN   --
+sp|Q00871|CTRB1_PENVA  --
+sp|P08246|ELNE_HUMAN   TH
+sp|P03953|CFAD_MOUSE   --
+sp|Q91VE3|KLK7_MOUSE   --
+sp|Q6H321|KLK2_HORSE   --
+sp|Q03238|GRAM_RAT     --
+sp|P20160|CAP7_HUMAN   --
+sp|P07338|CTRB1_RAT    --
+sp|P00757|KLKB4_MOUSE  --
+sp|P80015|CAP7_PIG     --
+sp|P29786|TRY3_AEDAE   --
+sp|P35037|TRY3_ANOGA   --
+sp|P00773|ELA1_RAT     --
+                         
+
+
+
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>stderr</name>
+<content>
+PROGRAM: T-COFFEE Version_11.00 (Version_11.00)
+-full_log      	S	[0] 
+-genepred_score	S	[0] 	nsd
+-run_name      	S	[0] 
+-mem_mode      	S	[0] 	mem
+-extend        	D	[1] 	1 
+-extend_mode   	S	[0] 	very_fast_triplet
+-max_n_pair    	D	[0] 	10 
+-seq_name_for_quadruplet	S	[0] 	all
+-compact       	S	[0] 	default
+-clean         	S	[0] 	no
+-do_self       	FL	[0] 	0
+-do_normalise  	D	[0] 	1000 
+-template_file 	S	[0] 
+-setenv        	S	[0] 	0
+-export        	S	[0] 	0
+-template_mode 	S	[0] 
+-flip          	D	[0] 	0 
+-remove_template_file	D	[0] 	0 
+-profile_template_file	S	[0] 
+-in            	S	[0] 
+-seq           	S	[0] 
+-aln           	S	[0] 
+-method_limits 	S	[0] 
+-method        	S	[0] 
+-lib           	S	[1] 	charge_relay_lib.tc_lib
+-profile       	S	[0] 
+-profile1      	S	[0] 
+-profile2      	S	[0] 
+-pdb           	S	[0] 
+-relax_lib     	D	[0] 	1 
+-filter_lib    	D	[0] 	0 
+-shrink_lib    	D	[0] 	0 
+-out_lib       	W_F	[0] 	no
+-out_lib_mode  	S	[0] 	primary
+-lib_only      	D	[0] 	0 
+-outseqweight  	W_F	[0] 	no
+-seq_source    	S	[0] 	ANY
+-cosmetic_penalty	D	[0] 	0 
+-gapopen       	D	[0] 	0 
+-gapext        	D	[0] 	0 
+-fgapopen      	D	[0] 	0 
+-fgapext       	D	[0] 	0 
+-nomatch       	D	[0] 	0 
+-newtree       	W_F	[0] 	default
+-tree          	W_F	[0] 	NO
+-usetree       	R_F	[0] 
+-tree_mode     	S	[0] 	nj
+-distance_matrix_mode	S	[0] 	ktup
+-distance_matrix_sim_mode	S	[0] 	idmat_sim1
+-quicktree     	FL	[0] 	0
+-outfile       	W_F	[0] 	default
+-maximise      	FL	[1] 	1
+-output        	S	[1] 	html
+-len           	D	[0] 	0 
+-infile        	R_F	[1] 	proteases_small.aln
+-matrix        	S	[0] 	default
+-tg_mode       	D	[0] 	1 
+-profile_mode  	S	[0] 	cw_profile_profile
+-profile_comparison	S	[0] 	profile
+-dp_mode       	S	[0] 	linked_pair_wise
+-ktuple        	D	[0] 	1 
+-ndiag         	D	[0] 	0 
+-diag_threshold	D	[0] 	0 
+-diag_mode     	D	[0] 	0 
+-sim_matrix    	S	[0] 	vasiliky
+-transform     	S	[0] 
+-extend_seq    	FL	[0] 	0
+-outorder      	S	[0] 	input
+-inorder       	S	[0] 	aligned
+-seqnos        	S	[0] 	off
+-case          	S	[0] 	keep
+-cpu           	D	[0] 	0 
+-ulimit        	D	[0] 	-1 
+-maxnseq       	D	[0] 	-1 
+-maxlen        	D	[0] 	-1 
+-sample_dp     	D	[0] 	0 
+-weight        	S	[0] 	default
+-seq_weight    	S	[0] 	no
+-align         	FL	[1] 	1
+-mocca         	FL	[0] 	0
+-domain        	FL	[0] 	0
+-start         	D	[0] 	0 
+-len           	D	[0] 	0 
+-scale         	D	[0] 	0 
+-mocca_interactive	FL	[0] 	0
+-method_evaluate_mode	S	[0] 	default
+-color_mode    	S	[0] 	new
+-aln_line_length	D	[0] 	0 
+-evaluate_mode 	S	[0] 	triplet
+-get_type      	FL	[0] 	0
+-clean_aln     	D	[0] 	0 
+-clean_threshold	D	[1] 	1 
+-clean_iteration	D	[1] 	1 
+-clean_evaluate_mode	S	[0] 	t_coffee_fast
+-extend_matrix 	FL	[0] 	0
+-prot_min_sim  	D	[40] 	40 
+-prot_max_sim  	D	[90] 	90 
+-prot_trim     	D	[20] 	20 
+-prot_min_cov  	D	[40] 	40 
+-pdb_type      	S	[0] 	d
+-pdb_min_sim   	D	[35] 	35 
+-pdb_max_sim   	D	[100] 	100 
+-pdb_min_cov   	D	[50] 	50 
+-pdb_blast_server	W_F	[0] 	EBI
+-blast         	W_F	[0] 
+-blast_server  	W_F	[0] 	EBI
+-pdb_db        	W_F	[0] 	pdb
+-protein_db    	W_F	[0] 	uniref50
+-method_log    	W_F	[0] 	no
+-struc_to_use  	S	[0] 
+-cache         	W_F	[0] 	use
+-print_cache   	FL	[0] 	0
+-align_pdb_param_file	W_F	[0] 	no
+-align_pdb_hasch_mode	W_F	[0] 	hasch_ca_trace_bubble
+-external_aligner	S	[0] 	NO
+-msa_mode      	S	[0] 	tree
+-et_mode       	S	[0] 	et
+-master        	S	[0] 	no
+-blast_nseq    	D	[0] 	0 
+-lalign_n_top  	D	[0] 	10 
+-iterate       	D	[0] 	0 
+-trim          	D	[0] 	0 
+-split         	D	[0] 	0 
+-trimfile      	S	[0] 	default
+-split         	D	[0] 	0 
+-split_nseq_thres	D	[0] 	0 
+-split_score_thres	D	[0] 	0 
+-check_pdb_status	D	[0] 	0 
+-clean_seq_name	D	[0] 	0 
+-seq_to_keep   	S	[0] 
+-dpa_master_aln	S	[0] 
+-dpa_maxnseq   	D	[0] 	0 
+-dpa_min_score1	D	[0] 
+-dpa_min_score2	D	[0] 
+-dpa_keep_tmpfile	FL	[0] 	0
+-dpa_debug     	D	[0] 	0 
+-multi_core    	S	[0] 	templates_jobs_relax_msa_evaluate
+-n_core        	D	[0] 	0 
+-max_n_proc    	D	[0] 	0 
+-lib_list      	S	[0] 
+-prune_lib_mode	S	[0] 	5
+-tip           	S	[0] 	none
+-rna_lib       	S	[0] 
+-no_warning    	D	[0] 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+!		[Relax Library][TOT=    2][  0 %]!		[Relax Library][TOT=    2][100 %]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+  	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+  	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+  	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+  	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+  	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+  	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+  	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [2]--->[2]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+!		[Final Evaluation][TOT=   50][  0 %]!		[Final Evaluation][TOT=   50][  4 %]!		[Final Evaluation][TOT=   50][  6 %]!		[Final Evaluation][TOT=   50][  8 %]!		[Final Evaluation][TOT=   50][ 10 %]!		[Final Evaluation][TOT=   50][ 12 %]!		[Final Evaluation][TOT=   50][ 14 %]!		[Final Evaluation][TOT=   50][ 16 %]!		[Final Evaluation][TOT=   50][ 18 %]!		[Final Evaluation][TOT=   50][ 20 %]!		[Final Evaluation][TOT=   50][ 22 %]!		[Final Evaluation][TOT=   50][ 24 %]!		[Final Evaluation][TOT=   50][ 26 %]!		[Final Evaluation][TOT=   50][ 28 %]!		[Final Evaluation][TOT=   50][ 30 %]!		[Final Evaluation][TOT=   50][ 32 %]!		[Final Evaluation][TOT=   50][ 34 %]!		[Final Evaluation][TOT=   50][ 36 %]!		[Final Evaluation][TOT=   50][ 38 %]!		[Final Evaluation][TOT=   50][ 40 %]!		[Final Evaluation][TOT=   50][ 42 %]!		[Final Evaluation][TOT=   50][ 44 %]!		[Final Evaluation][TOT=   50][ 46 %]!		[Final Evaluation][TOT=   50][ 48 %]!		[Final Evaluation][TOT=   50][ 50 %]!		[Final Evaluation][TOT=   50][ 52 %]!		[Final Evaluation][TOT=   50][ 54 %]!		[Final Evaluation][TOT=   50][ 56 %]!		[Final Evaluation][TOT=   50][ 58 %]!		[Final Evaluation][TOT=   50][ 60 %]!		[Final Evaluation][TOT=   50][ 62 %]!		[Final Evaluation][TOT=   50][ 64 %]!		[Final Evaluation][TOT=   50][ 66 %]!		[Final Evaluation][TOT=   50][ 68 %]!		[Final Evaluation][TOT=   50][ 70 %]!		[Final Evaluation][TOT=   50][ 72 %]!		[Final Evaluation][TOT=   50][ 74 %]!		[Final Evaluation][TOT=   50][ 76 %]!		[Final Evaluation][TOT=   50][ 78 %]!		[Final Evaluation][TOT=   50][ 80 %]!		[Final Evaluation][TOT=   50][ 82 %]!		[Final Evaluation][TOT=   50][ 84 %]!		[Final Evaluation][TOT=   50][ 86 %]!		[Final Evaluation][TOT=   50][ 88 %]!		[Final Evaluation][TOT=   50][ 90 %]!		[Final Evaluation][TOT=   50][ 92 %]!		[Final Evaluation][TOT=   50][ 94 %]!		[Final Evaluation][TOT=   50][ 96 %]!		[Final Evaluation][TOT=   50][ 98 %]!		[Final Evaluation][TOT=   50][100 %]
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [2]--->[2]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [2]--->[2]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [2]--->[2]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [2]--->[2]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [2]--->[2]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [2]--->[2]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [2]--->[2]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+ 	0 
+-run_local_script	D	[0] 	0 
+-plugins       	S	[0] 	default
+-proxy         	S	[0] 	unset
+-email         	S	[0] 
+-clean_overaln 	D	[0] 	0 
+-overaln_param 	S	[0] 
+-overaln_mode  	S	[0] 
+-overaln_model 	S	[0] 
+-overaln_threshold	D	[0] 	0 
+-overaln_target	D	[0] 	0 
+-overaln_P1    	D	[0] 	0 
+-overaln_P2    	D	[0] 	0 
+-overaln_P3    	D	[0] 	0 
+-overaln_P4    	D	[0] 	0 
+-exon_boundaries	S	[0] 
+-dump          	S	[0] 	no
+-display       	D	[0] 	100 
+
+INPUT FILES
+	Input File (S) proteases_small.aln  Format clustal_aln
+	Input File (L) charge_relay_lib.tc_lib 
+
+Identify Master Sequences [no]:
+
+Master Sequences Identified
+INPUT SEQUENCES: 19 SEQUENCES  [PROTEIN]
+  Input File proteases_small.aln   Seq sp|O35205|GRAK_MOUSE  Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00757|KLKB4_MOUSE Length  256 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P00773|ELA1_RAT    Length  266 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P03953|CFAD_MOUSE  Length  259 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P07338|CTRB1_RAT   Length  263 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08246|ELNE_HUMAN  Length  267 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P08884|GRAE_MOUSE  Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P20160|CAP7_HUMAN  Length  251 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P21844|MCPT5_MOUSE Length  247 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P29786|TRY3_AEDAE  Length  254 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P35037|TRY3_ANOGA  Length  275 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|P80015|CAP7_PIG    Length  219 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q00871|CTRB1_PENVA Length  271 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q03238|GRAM_RAT    Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q06606|GRZ2_RAT    Length  248 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q6H321|KLK2_HORSE  Length  261 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q7YRZ7|GRAA_BOVIN  Length  258 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q91VE3|KLK7_MOUSE  Length  249 type PROTEIN Struct Unchecked
+  Input File proteases_small.aln   Seq sp|Q9Y5K2|KLK4_HUMAN  Length  254 type PROTEIN Struct Unchecked
+
+	Multi Core Mode: 8 processors:
+
+	--- Process Method/Library/Aln Sproteases_small.aln
+	--- Process Method/Library/Aln Lcharge_relay_lib.tc_lib
+	xxx Retrieved Sproteases_small.aln
+	xxx Retrieved Lcharge_relay_lib.tc_lib
+
+	All Methods Retrieved
+
+MANUAL PENALTIES: gapopen=0 gapext=0
+
+	Library Total Size: [2]
+
+Library Relaxation: Multi_proc [8]
+ 
+Relaxation Summary: [2]--->[2]
+
+
+
+UN-WEIGHTED MODE: EVERY SEQUENCE WEIGHTS 1
+
+
+
+OUTPUT RESULTS
+	#### File Type= MSA             Format= html            Name= proteases_small.html
+
+# Command Line: t_coffee -infile proteases_small.aln -lib charge_relay_lib.tc_lib -score -output html  [PROGRAM:T-COFFEE]
+# T-COFFEE Memory Usage: Current= 29.544 Mb, Max= 31.343 Mb
+# Results Produced with T-COFFEE Version_11.00 (Version_11.00)
+# T-COFFEE is available from http://www.tcoffee.org
+# Register on: https://groups.google.com/group/tcoffee/
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>proteases_small.aln</name>
+<content>CLUSTAL FORMAT for T-COFFEE Version_11.00 [http://www.tcoffee.org] [MODE: accurate ], CPU=1.13 sec, SCORE=970, Nseq=19, Len=402 
+
+sp|Q06606|GRZ2_RAT     -------------------------------------------MFLFLFFLVAILPVNTEGGEIIWGTESKPHSRPYMAFIK---FY----DSNSEPHHCGGFLVAKDIVMTAAHC----NG-------R----NIK---VTLGAHNI---KKQE-NTQ-
+sp|P08884|GRAE_MOUSE   -------------------------M--------PPVLILLTLLLPLGAGAEEII-----GGH-----VVKPHSRPYMAFVK---SVDIEGNR----RYCGGFLVQDDFVLTAAHC----RN-------R----TMT---VTLGAHNI---KAKE-ETQQ
+sp|P21844|MCPT5_MOUSE  ------------------------MH--------LLTLHLLLLLLGSSTKAGEII-----GGT-----ECIPHSRPYMAYLEIVTSE----NY-L--SACSGFLIRRNFVLTAAHC----AG-------R----SIT---VLLGAHNK---TSKE-DTWQ
+sp|O35205|GRAK_MOUSE   --------------------MRFSSW--------ALVSLVAGVYMSSECFHTEII-----GGR-----EVQPHSRPFMASIQ---YR----SK----HICGGVLIHPQWVLTAAHC----Y-SWFPRG-H----SPT---VVLGAHSL---SKNE-PMKQ
+sp|Q9Y5K2|KLK4_HUMAN   ---------------MATAGNPWGWF--------LGYLILGVAGSLVSGSCSQII-----NGE-----DCSPHSQPWQAALV---ME----NE----LFCSGVLVHPQWVLSAAHC----FQ-------N----SYT---IGLGLHSL-EAD-QE-PGSQ
+sp|Q7YRZ7|GRAA_BOVIN   -----------------MNIPFPFSF--------PPAICLLLIPGVFPVSCEGII-----GGN-----EVAPHTRRYMALIK--GL------K-----LCAGALIKENWVLTAAHC----DLK------G----NPQ---VILGAHST---SHKE-KLDQ
+sp|Q00871|CTRB1_PENVA  MIGKLSLLLVCVAVASGNPAAGKPWH--------WKSPKPLVDPRIHVNATPRIV-----GGV-----EATPHSWPHQAALF---ID----DM----YFCGGSLISSEWVLTAAHC----MD-------G--AGFV---EVVLGAHNI---RQNEA-SQV
+sp|P08246|ELNE_HUMAN   ----------------MTLGRRLACL--------FLACVLPALLLGGTALASEIV-----GGR-----RARPHAWPFMVSLQ---LR----GG----HFCGATLIAPNFVMSAAHC----VAN------V----NVRAVRVVLGAHNL---SRRE-PTRQ
+sp|P03953|CFAD_MOUSE   --------------------MHSSVY--------FVALVILGAAVCAAQPRGRIL-----GGQ-----EAAAHARPYMASVQ---VN----GT----HVCGGTLLDEQWVLSAAHC----MDGVTDDD------SVQ---VLLGAHSL---SAPE-PYKR
+sp|Q91VE3|KLK7_MOUSE   --------------------MGVWLL--------SLITVLLSLALETAGQGERII-----DGY-----KCKEGSHPWQVALL---KG----NQ----LHCGGVLVDKYWVLTAAHC----KM-------G----QYQ---VQLGSDKI---GDQ---SAQ
+sp|Q6H321|KLK2_HORSE   ---------------------MWFLV--------LCLDLSLGETGALPPIQSRII-----GGW-----ECEKHSKPWQVAVY---HQ----GH----FQCGGVLVHPQWVLTAAHC----MS-------D----DYQ---IWLGRHNL---SEDE-DTAQ
+sp|Q03238|GRAM_RAT     -------------------------L--------LLLLALKTLWAVGNRFEAQII-----GGR-----EAVPHSRPYMVSLQ---NT----KS----HMCGGVLVHQKWVLTAAHC----LSE----PLQ----QLK---LVFGLHSLHDPQDP----GL
+sp|P20160|CAP7_HUMAN   -------------------MTRLTVL--------ALLAGLLASSRAGSSPLLDIV-----GGR-----KARPRQFPFLASIQ---NQ----GR----HFCGGALIHARFVMTAASC----FQS---QNPG----VS---TVVLGAYDL---RRRERQSRQ
+sp|P07338|CTRB1_RAT    --------------------MAFLWLVSCFALVGATFGCGVPTIQPVLTGLSRIV-----NGE-----DAIPGSWPWQVSLQ---DK---TGF----HFCGGSLISEDWVVTAAHC----GVK------TS----DV---VVAGEFDQ---GSDE-ENIQ
+sp|P00757|KLKB4_MOUSE  ----------------------------------MWFLILFLALSLGGIDAAPPV-----QSQ-----VDCENSQPWHVAVY---RF----NK----YQCGGVLLDRNWVLTAAHC----YN-------D----KYQ---VWLGKNNF---LEDE-PSDQ
+sp|P80015|CAP7_PIG     -----------------------------------------------------IV-----GGR-----RAQPQEFPFLASIQ---KQ----GR----PFCAGALVHPRFVLTAASC----FRG---KNSG----SA---SVVLGAYDL---RQQE-QSRQ
+sp|P29786|TRY3_AEDAE   ------MNQFLFVSFCALLDSAKVSA--------------------ATLSSGRIV-----GGF-----QIDIAEVPHQVSLQ--RSG-----R----HFCGGSIISPRWVLTRAHC----TT-------NTDPAAYT---IRAGSTD----RTNG-GI--
+sp|P35037|TRY3_ANOGA   -----MISNKIAILLAVLVVAVACAQARVAQQHRSVQALPRFLPRPKYDVGHRIV-----GGF-----EIDVSETPYQVSLQ--YFN-----S----HRCGGSVLNSKWILTAAHCTVNLQP-------SS----LA---VRLGSSR----HASG-GT--
+sp|P00773|ELA1_RAT     -------------------MLRFLVF--------ASLVLYGHSTQDFPETNARVV-----GGA-----EARRNSWPSQISLQ---YLSGGSWY----HTCGGTLIRRNWVMTAAHC----VSS------Q----MTF--RVVVGDHNL---SQND-GTEQ
+                                                                             :      .                  :                  *.. ::    ::: * *                        :  *                
+
+sp|Q06606|GRZ2_RAT     VISVVKAKPHENYDR-----------DSH-----FNDIMLLKLERKAQLNGVVKTIA-LP--RSQ-DW-VKPGQVCTVAGWGR-----LAN-C-T--S-SNT---LQEVNLEVQKGQKCQD----MSE--DYND-SIQLCVG--NPSE--G--K--ATGK
+sp|P08884|GRAE_MOUSE   IIPVAKAIPHPDYNA-----------TAF-----FSDIMLLKLESKAKRTKAVRPLK-LP--RPN-AR-VKPGDVCSVAGWGSRSINDT-----------KASARLREAQLVIQEDEECKK----RFR--HY-TETTEICAG--DLKK--I--K--TPFK
+sp|P21844|MCPT5_MOUSE  KLEVEKQFLHPKYDE-----------NLV-----VHDIMLLKLKEKAKLTLGVGTLP-LS--AN-FNF-IPPGRMCRAVGWGR-----TNVNE-P--A-SDT---LQEVKMRLQEPQACKH-----FT--SFRH-NSQLCVG--NPKK--M--Q--NVYK
+sp|O35205|GRAK_MOUSE   TFEIKKFIPFSRLQS-----------GSA-----SHDIMLIKLRTAAELNKNVQLLH-LG--S--KNY-LRDGTKCQVTGWGT-----TKPDLLT--A-SDT---LREVTVTIISRKRCNS--QSYYNHKPVIT-KDMICAG--D--A--R--GQKDSCK
+sp|Q9Y5K2|KLK4_HUMAN   MVEASLSVRHPEYN-----------RPLL-----ANDLMLIKLDESVSESDTIRSIS-IA--S---QC-PTAGNSCLVSGWGL-----LA--NGR--M-PTV---LQCVNVSVVSEEVCSK----LYD--PLYH-PSMFCAG--G--G--QDQK--DSCN
+sp|Q7YRZ7|GRAA_BOVIN   VFSIKKAIPYPCFDP-----------QTF-----EGDLQLLQLEGKATMTKAVGILQ-LP--RT-EDD-VKPHTKCHVAGWGS-----TKKDACQ--M-SNA---LREANVTVIDRKICND--AQHYNFNPVID-LSMICAG--G--R--K--GEDDSCE
+sp|Q00871|CTRB1_PENVA  SITSTDFFTHENWNS-----------WLL-----TNDIALIRLPSPVSLNSNIKTVK-LP--S---SD-VSVGTTVTPTGWGR-----PSDSASG--I-SDV---LRQVNVPVMTNADCDS----VYG---IVG-DGVVCID--G--T--G--G-KSTCN
+sp|P08246|ELNE_HUMAN   VFAVQRIFEN-GYDP-----------VNL-----LNDIVILQLNGSATINANVQVAQ-LP--AQ-GRR-LGNGVQCLAMGWGL-----LGRNR-G--I-ASV---LQELNVTVVT-SLC--------------R-RSNVCTL--V--RGRQ--A--GVCF
+sp|P03953|CFAD_MOUSE   WYDVQSVVPHPGSRP-----------DSL-----EDDLILFKLSQNASLGPHVRPLPLQY-----EDKEVEPGTLCDVAGWGV-----VTHAG-R--R-PDV---LHQLRVSIMNRTTCNL--RTYHD--GVVT-INMMCAE--S--N--R--R--DTCR
+sp|Q91VE3|KLK7_MOUSE   KIKATKSFRHPGYS-----------TKTH-----VNDIMLVRLDEPVKMSSKVEAVQ-LP--E---HC-EPPGTSCTVSGWGT-----TTSPDVT--F-PSD---LMCSDVKLISSRECKK----VYK--DLLG-KTMLCAG--I--P--DSKT--NTCN
+sp|Q6H321|KLK2_HORSE   FHQVSDSFLDPQFDLSLLKKKYLRPYDDI-----SHDLMLLRLAQPARITDAVKILD-LP--T---QE-PKLGSTCYTSGWGL-----ISTFTNR--G-SGT---LQCVELRLQSNEKCAR----AYP--EKMT-EFVLCATHRD--D----SG--SICL
+sp|Q03238|GRAM_RAT     TFYIKQAIKHPGYNL------------KY-----ENDLALLKLDGRVKPSKNVKPLA-LP--RKPRDK-PAEGSRCSTAGWGI-----THQRG-Q--L-AKS---LQELDLRLLDTRMCNN--SRFWN--GVLT-DSMLCLK--AGAK--G--Q--APCK
+sp|P20160|CAP7_HUMAN   TFSISSMSEN-GYDP-----------QQN-----LNDLMLLQLDREANLTSSVTILP-LP--LQ-NAT-VEAGTRCQVAGWGS-----QRSGG-R--L-SRF---PRFVNVTVTPEDQC--------------R-PNNVCTG--V--LTRR--G--GICN
+sp|P07338|CTRB1_RAT    VLKIAQVFKNPKF----------------NMFTVRNDITLLKLATPAQFSETVSAVC-LP--NVD-DD-FPPGTVCATTGWGK-----TKY---NALKTPEK---LQQAALPIVSEADCK----KSWG--SKIT-DVMTCAG--A--S--G--V--SSCM
+sp|P00757|KLKB4_MOUSE  HRLVSKAIPHPDFNMSLLNEHTPQPEDDY-----SNDLMLLRLSKPADITDVVKPIT-LP--T---EE-PKLGSTCLASGWGS-----TTPIKFK--Y-PDD---LQCVNLKLLPNEDCDK----AHE--MKVT-DAMLCAG--E--M--DGGS--YTCE
+sp|P80015|CAP7_PIG     TFSIRSISQN-GYDP-----------RQN-----LNDVLLLQLDREARLTPSVALVP-LP--PQ-NAT-VEAGTNCQVAGWGT-----QRLR--R--LFSRF---PRVLNVTVT-SNPC--------------L-PRDMCIG--V--FSRR--G--RISQ
+sp|P29786|TRY3_AEDAE   IVKVKSVIPHPQYN---------GDTYNY-------DFSLLELDESIGFSRSIEAIA-LPDASE---T-VADGAMCTVSGWGD-----T-KNV-F---EMNT--LLRAVNVPSYNQAECAAALVNVVP----VT-EQMICAG--Y--AA-G--G-KDSCQ
+sp|P35037|TRY3_ANOGA   VVRVARVLEHPNYD-----------DSTID-----YDFSLMELESELTFSDVVQPVS-LP--DQD-EA-VEDGTMTIVSGWGN-----TQSA--A---ESNA--ILRAANVPTVNQKECT----IAYSSSGGIT-DRMLCAG--Y--KRGG--K--DACQ
+sp|P00773|ELA1_RAT     YVSVQKIMVHPTWNS-----------NNV---AAGYDIALLRLAQSVTLNNYVQLAV-LP--QE-GTI-LANNNPCYITGWGR-----TRTNG-Q--L-SQT---LQQAYLPSVDYSICSS--SSYWG--STVK-TTMVCAG--G--D-GV--R--SGCQ
+                                                           *. :..*         :                          ***                            :       *                    *                    
+
+sp|Q06606|GRZ2_RAT     GDSGGPFVCD----G--VAQGIVSYRL-C-TG-T----L-P-RVFTRISS-FIPWIQKTMK--VLQQS--------------
+sp|P08884|GRAE_MOUSE   GDSGGPLVCD----N--KAYGLLAYAK-N----RTI-SS-G--VFTKIVH-FLPWISRNMKL-L------------------
+sp|P21844|MCPT5_MOUSE  GDSGGPLLCA----G--IAQGIASYVH-R-NA-K------PPAVFTRISH-YRPWINKILREN-------------------
+sp|O35205|GRAK_MOUSE   GDSGGPLICK----G--IFHALVSQGY-K--C-G-I-AKKP-GIYTLLTKKYQTWIKSKLAPSRAH----------------
+sp|Q9Y5K2|KLK4_HUMAN   GDSGGPLICN------GYLQGLVSFGK--APCGQ-V-GV-P-GVYTNLCK-FTEWIEKTVQA-S------------------
+sp|Q7YRZ7|GRAA_BOVIN   GDSGSPLICD------NVFRGVTSFG----KC-G-N-PQKP-GIYILLTKKHLNWIKKTIAGAI------------------
+sp|Q00871|CTRB1_PENVA  GDSGGPLNLN------GMTYGITSFGS-SAGC-E-K-GY-P-AAFTRVYY-YLDWIQQKTGVTP------------------
+sp|P08246|ELNE_HUMAN   GDSGSPLVCN------GLIHGIASFVR-G-GCAS-G-LY-P-DAFAPVAQ-FVNWIDSIIQ-RSEDNPCPHPRDPDPASRTH
+sp|P03953|CFAD_MOUSE   GDSGSPLVCG----D--AVEGVVTWGS-R-VC-G-N-GKKP-GVYTRVSS-YRMWIENITNGNMTS----------------
+sp|Q91VE3|KLK7_MOUSE   GDSGGPLVCN------DTLQGLVSWGT--YPCGQ-P-ND-P-GVYTQVCK-YKRWVMETMKTHR------------------
+sp|Q6H321|KLK2_HORSE   GDSGGALICD------GVFQGITSWGY--SEC-A-D-FNDN-FVFTKVMP-HLKWIKETIEKNS------------------
+sp|Q03238|GRAM_RAT     GDSGGPLVCG----K-GKVDGILSFSS-K-NC-TDI-FK-P-TVATAVAP-YSSWIRKVIGR-WSPQPLT------------
+sp|P20160|CAP7_HUMAN   GDGGTPLVCE------GLAHGVASFSL-G-PC-G-R--G-P-DFFTRVAL-FRDWIDGVLNNPGPGPA--------------
+sp|P07338|CTRB1_RAT    GDSGGPLVCQKD--GVWTLAGIVSWGS-G-VC-S-T-ST-P-AVYSRVTA-LMPWVQQILEAN-------------------
+sp|P00757|KLKB4_MOUSE  HDSGGPLICD------GILQGITSWGP--EPC-G-EPTE-P-SVYTKLIK-FSSWIRETMANNP------------------
+sp|P80015|CAP7_PIG     GDRGTPLVCN------GLAQGVASFLR-R-RF-R-R--S-S-GFFTRVAL-FRNWIDSVLNNPP------------------
+sp|P29786|TRY3_AEDAE   GDSGGPLVSG------DKLVGVVSWGK-G--C-A-L-PNLP-GVYARVST-VRQWIREVSEV--------------------
+sp|P35037|TRY3_ANOGA   GDSGGPLVVD------GKLVGVVSWGF-G-CA-M-P-GY-P-GVYARVAV-VRDWVRENSGA--------------------
+sp|P00773|ELA1_RAT     GDSGGPLHCLVNGQY--SVHGVTSFVSSM-GC-NVS-KK-P-TVFTRVSA-YISWMNNVIAYT-------------------
+                        * * .:             .: :                       :      *:                          
+
+
+
+</content>
+</file>
+<file>
+<stream>input</stream>
+<name>charge_relay_lib.tc_lib</name>
+<content>! TC_LIB_FORMAT_01
+2
+sp|P21844|MCPT5_MOUSE 247 MHLLTLHLLLLLLGSSTKAGEIIGGTECIPHSRPYMAYLEIVTSENYLSACSGFLIRRNFVLTAAHCAGRSITVLLGAHNKTSKEDTWQKLEVEKQFLHPKYDENLVVHDIMLLKLKEKAKLTLGVGTLPLSANFNFIPPGRMCRAVGWGRTNVNEPASDTLQEVKMRLQEPQACKHFTSFRHNSQLCVGNPKKMQNVYKGDSGGPLLCAGIAQGIASYVHRNAKPPAVFTRISHYRPWINKILREN
+sp|P29786|TRY3_AEDAE 254 MNQFLFVSFCALLDSAKVSAATLSSGRIVGGFQIDIAEVPHQVSLQRSGRHFCGGSIISPRWVLTRAHCTTNTDPAAYTIRAGSTDRTNGGIIVKVKSVIPHPQYNGDTYNYDFSLLELDESIGFSRSIEAIALPDASETVADGAMCTVSGWGDTKNVFEMNTLLRAVNVPSYNQAECAAALVNVVPVTEQMICAGYAAGGKDSCQGDSGGPLVSGDKLVGVVSWGKGCALPNLPGVYARVSTVRQWIREVSEV
+#1 2
+    66  68     100
+! SEQ_1_TO_N
+</content>
+</file>
+<file>
+<stream>output</stream>
+<name>proteases_small.html</name>
+<content><html>
+<style>
+SPAN { font-family: courier new, courier-new, courier, monospace; font-weight: bold; font-size: 11pt;}
+SPAN { line-height:100%}
+SPAN {	white-space: pre}
+SPAN.value0 {background: #9B92FF}
+SPAN.value1 {background: #B4FFB4}
+SPAN.value2 {background: #BEFFBE}
+SPAN.value3 {background: #C8FFC8}
+SPAN.value4 {background: #FFFFB7}
+SPAN.value5 {background: #FFFFAD}
+SPAN.value6 {background: #FFFFAD}
+SPAN.value7 {background: #FFE6E6}
+SPAN.value8 {background: #FFDCDC}
+SPAN.value9 {background: #FFC8C8}
+SPAN.valuedefault {}
+SPAN.valuegap {}
+SPAN.valueink {background: 000000}
+</style><body><span class=valuedefault>T-COFFEE,&nbsp;Version_11.00&nbsp;(Version_11.00)</span><br><span class=valuedefault>Cedric&nbsp;Notredame&nbsp;</span><br><span class=valuedefault>CPU&nbsp;TIME:0&nbsp;sec.</span><br><span class=valuedefault>SCORE=1000</span><br><span class=valuedefault>*</span><br><span class=valuedefault>&nbsp;</span><span class=value0>B</span><span class=value1>A</span><span class=value2>D</span><span class=value3>&nbsp;</span><span class=value4>A</span><span class=value5>V</span><span class=value6>G</span><span class=value7>&nbsp;</span><span class=value8>G</span><span class=value9>OOD</span><br><span class=valuedefault>*</span><br><span class=value0>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value9>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value0>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value9>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><span class=value0>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=value0>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;&nbsp;&nbsp;0</span><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=valuedefault>:&nbsp;100</span><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------------</span><span class=value9>M</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------------------------</span><span class=value9>MH</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value9>MRFSSW</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------</span><span class=value9>MATAGNPWGWF</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----------------</span><span class=value9>MNIPFPFSF</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>MIGKLSLLLVCVAVASGNPAAGKPWH</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------------</span><span class=value9>MTLGRRLACL</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value9>MHSSVY</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value9>MGVWLL</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------</span><span class=value9>MWFLV</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------------</span><span class=value9>L</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------</span><span class=value9>MTRLTVL</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value9>MAFLWLVSCFALV</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---------------------------------</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>MNQFLFVSFCALLDSAKVSA</span><span class=valuegap>-------</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-----</span><span class=value9>MISNKIAILLAVLVVAVACAQARVAQQH</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------------</span><span class=value9>MLRFLVF</span><span class=valuegap>-------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----------</span><span class=value9>MFLFLFFLVAILPVNTEGGEIIW</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>PPVLILLTLLLPLGAGAEEII</span><span class=valuegap>-----</span><span class=value9>GGH</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LLTLHLLLLLLGSSTKAGEII</span><span class=valuegap>-----</span><span class=value9>GGT</span><span class=valuegap>---</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>ALVSLVAGVYMSSECFHTEII</span><span class=valuegap>-----</span><span class=value9>GGR</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LGYLILGVAGSLVSGSCSQII</span><span class=valuegap>-----</span><span class=value9>NGE</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>PPAICLLLIPGVFPVSCEGII</span><span class=valuegap>-----</span><span class=value9>GGN</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>WKSPKPLVDPRIHVNATPRIV</span><span class=valuegap>-----</span><span class=value9>GGV</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>FLACVLPALLLGGTALASEIV</span><span class=valuegap>-----</span><span class=value9>GGR</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>FVALVILGAAVCAAQPRGRIL</span><span class=valuegap>-----</span><span class=value9>GGQ</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>SLITVLLSLALETAGQGERII</span><span class=valuegap>-----</span><span class=value9>DGY</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LCLDLSLGETGALPPIQSRII</span><span class=valuegap>-----</span><span class=value9>GGW</span><span class=valuegap>---</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LLLLALKTLWAVGNRFEAQII</span><span class=valuegap>-----</span><span class=value9>GGR</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>ALLAGLLASSRAGSSPLLDIV</span><span class=valuegap>-----</span><span class=value9>GGR</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>GATFGCGVPTIQPVLTGLSRIV</span><span class=valuegap>-----</span><span class=value9>NGE</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>MWFLILFLALSLGGIDAAPPV</span><span class=valuegap>-----</span><span class=value9>QSQ</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--------------------</span><span class=value9>IV</span><span class=valuegap>-----</span><span class=value9>GGR</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-------------</span><span class=value9>ATLSSGRIV</span><span class=valuegap>-----</span><span class=value9>GGF</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>RSVQALPRFLPRPKYDVGHRIV</span><span class=valuegap>-----</span><span class=value9>GGF</span><span class=valuegap>---</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>ASLVLYGHSTQDFPETNARVV</span><span class=valuegap>-----</span><span class=value9>GGA</span><span class=valuegap>---</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>GTESKPHSRPYMAFIK</span><span class=valuegap>---</span><span class=value9>FY</span><span class=valuegap>----</span><span class=value9>DSNSEPHH</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>VVKPHSRPYMAFVK</span><span class=valuegap>---</span><span class=value9>SVDIEGNR</span><span class=valuegap>----</span><span class=value9>RY</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>ECIPHSRPYMAYLEIVTSE</span><span class=valuegap>----</span><span class=value9>NY</span><span class=valuegap>-</span><span class=value9>L</span><span class=valuegap>--</span><span class=value9>SA</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>EVQPHSRPFMASIQ</span><span class=valuegap>---</span><span class=value9>YR</span><span class=valuegap>----</span><span class=value9>SK</span><span class=valuegap>----</span><span class=value9>HI</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>DCSPHSQPWQAALV</span><span class=valuegap>---</span><span class=value9>ME</span><span class=valuegap>----</span><span class=value9>NE</span><span class=valuegap>----</span><span class=value9>LF</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>EVAPHTRRYMALIK</span><span class=valuegap>--</span><span class=value9>GL</span><span class=valuegap>------</span><span class=value9>K</span><span class=valuegap>-----</span><span class=value9>L</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>EATPHSWPHQAALF</span><span class=valuegap>---</span><span class=value9>ID</span><span class=valuegap>----</span><span class=value9>DM</span><span class=valuegap>----</span><span class=value9>YF</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>RARPHAWPFMVSLQ</span><span class=valuegap>---</span><span class=value9>LR</span><span class=valuegap>----</span><span class=value9>GG</span><span class=valuegap>----</span><span class=value9>HF</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>EAAAHARPYMASVQ</span><span class=valuegap>---</span><span class=value9>VN</span><span class=valuegap>----</span><span class=value9>GT</span><span class=valuegap>----</span><span class=value9>HV</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>KCKEGSHPWQVALL</span><span class=valuegap>---</span><span class=value9>KG</span><span class=valuegap>----</span><span class=value9>NQ</span><span class=valuegap>----</span><span class=value9>LH</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>ECEKHSKPWQVAVY</span><span class=valuegap>---</span><span class=value9>HQ</span><span class=valuegap>----</span><span class=value9>GH</span><span class=valuegap>----</span><span class=value9>FQ</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>EAVPHSRPYMVSLQ</span><span class=valuegap>---</span><span class=value9>NT</span><span class=valuegap>----</span><span class=value9>KS</span><span class=valuegap>----</span><span class=value9>HM</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>KARPRQFPFLASIQ</span><span class=valuegap>---</span><span class=value9>NQ</span><span class=valuegap>----</span><span class=value9>GR</span><span class=valuegap>----</span><span class=value9>HF</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>DAIPGSWPWQVSLQ</span><span class=valuegap>---</span><span class=value9>DK</span><span class=valuegap>---</span><span class=value9>TGF</span><span class=valuegap>----</span><span class=value9>HF</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>VDCENSQPWHVAVY</span><span class=valuegap>---</span><span class=value9>RF</span><span class=valuegap>----</span><span class=value9>NK</span><span class=valuegap>----</span><span class=value9>YQ</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>RAQPQEFPFLASIQ</span><span class=valuegap>---</span><span class=value9>KQ</span><span class=valuegap>----</span><span class=value9>GR</span><span class=valuegap>----</span><span class=value9>PF</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>QIDIAEVPHQVSLQ</span><span class=valuegap>--</span><span class=value9>RSG</span><span class=valuegap>-----</span><span class=value9>R</span><span class=valuegap>----</span><span class=value9>HF</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>EIDVSETPYQVSLQ</span><span class=valuegap>--</span><span class=value9>YFN</span><span class=valuegap>-----</span><span class=value9>S</span><span class=valuegap>----</span><span class=value9>HR</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>EARRNSWPSQISLQ</span><span class=valuegap>---</span><span class=value9>YLSGGSWY</span><span class=valuegap>----</span><span class=value9>HT</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGFLVAKDIVMTAAHC</span><span class=valuegap>----</span><span class=value9>NG</span><span class=valuegap>-------</span><span class=value9>R</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGFLVQDDFVLTAAHC</span><span class=valuegap>----</span><span class=value9>RN</span><span class=valuegap>-------</span><span class=value9>R</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>CSGFLIRRNFVLTAAHC</span><span class=valuegap>----</span><span class=value9>AG</span><span class=valuegap>-------</span><span class=value9>R</span><span class=valuegap>--</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGVLIHPQWVLTAAHC</span><span class=valuegap>----</span><span class=value9>Y</span><span class=valuegap>-</span><span class=value9>SWFPRG</span><span class=valuegap>-</span><span class=value9>H</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value9>CSGVLVHPQWVLSAAHC</span><span class=valuegap>----</span><span class=value9>FQ</span><span class=valuegap>-------</span><span class=value9>N</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>CAGALIKENWVLTAAHC</span><span class=valuegap>----</span><span class=value9>DLK</span><span class=valuegap>------</span><span class=value9>G</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGSLISSEWVLTAAHC</span><span class=valuegap>----</span><span class=value9>MD</span><span class=valuegap>-------</span><span class=value9>G</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGATLIAPNFVMSAAHC</span><span class=valuegap>----</span><span class=value9>VAN</span><span class=valuegap>------</span><span class=value9>V</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGTLLDEQWVLSAAHC</span><span class=valuegap>----</span><span class=value9>MDGVTDDD</span><span class=valuegap>----</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGVLVDKYWVLTAAHC</span><span class=valuegap>----</span><span class=value9>KM</span><span class=valuegap>-------</span><span class=value9>G</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGVLVHPQWVLTAAHC</span><span class=valuegap>----</span><span class=value9>MS</span><span class=valuegap>-------</span><span class=value9>D</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGVLVHQKWVLTAAHC</span><span class=valuegap>----</span><span class=value9>LSE</span><span class=valuegap>----</span><span class=value9>PLQ</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGALIHARFVMTAASC</span><span class=valuegap>----</span><span class=value9>FQS</span><span class=valuegap>---</span><span class=value9>QNPG</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGSLISEDWVVTAAHC</span><span class=valuegap>----</span><span class=value9>GVK</span><span class=valuegap>------</span><span class=value9>TS</span><span class=valuegap>-</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGVLLDRNWVLTAAHC</span><span class=valuegap>----</span><span class=value9>YN</span><span class=valuegap>-------</span><span class=value9>D</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>CAGALVHPRFVLTAASC</span><span class=valuegap>----</span><span class=value9>FRG</span><span class=valuegap>---</span><span class=value9>KNSG</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGSIISPRWVLTRAHC</span><span class=valuegap>----</span><span class=value9>TT</span><span class=valuegap>-------</span><span class=value9>NTD</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGSVLNSKWILTAAHCTVNLQP</span><span class=valuegap>-------</span><span class=value9>SS</span><span class=valuegap>-</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>CGGTLIRRNWVMTAAHC</span><span class=valuegap>----</span><span class=value9>VSS</span><span class=valuegap>------</span><span class=value9>Q</span><span class=valuegap>--</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>*..&nbsp;::&nbsp;&nbsp;&nbsp;&nbsp;:::&nbsp;*&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>NIK</span><span class=valuegap>---</span><span class=value9>VTLGAHNI</span><span class=valuegap>---</span><span class=value9>KKQE</span><span class=valuegap>-</span><span class=value9>NTQ</span><span class=valuegap>-</span><span class=value9>VISVV</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>TMT</span><span class=valuegap>---</span><span class=value9>VTLGAHNI</span><span class=valuegap>---</span><span class=value9>KAKE</span><span class=valuegap>-</span><span class=value9>ETQQIIPVA</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>SIT</span><span class=valuegap>---</span><span class=value9>VLLGAHNK</span><span class=valuegap>---</span><span class=value9>TSKE</span><span class=valuegap>-</span><span class=value9>DTWQKLEVE</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>SPT</span><span class=valuegap>---</span><span class=value9>VVLGAHSL</span><span class=valuegap>---</span><span class=value9>SKNE</span><span class=valuegap>-</span><span class=value9>PMKQTFEIK</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>SYT</span><span class=valuegap>---</span><span class=value9>IGLGLHSL</span><span class=valuegap>-</span><span class=value9>EAD</span><span class=valuegap>-</span><span class=value9>QE</span><span class=valuegap>-</span><span class=value9>PGSQMVEAS</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>NPQ</span><span class=valuegap>---</span><span class=value9>VILGAHST</span><span class=valuegap>---</span><span class=value9>SHKE</span><span class=valuegap>-</span><span class=value9>KLDQVFSIK</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>AGFV</span><span class=valuegap>---</span><span class=value9>EVVLGAHNI</span><span class=valuegap>---</span><span class=value9>RQNEA</span><span class=valuegap>-</span><span class=value9>SQVSITST</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>NVRAVRVVLGAHNL</span><span class=valuegap>---</span><span class=value9>SRRE</span><span class=valuegap>-</span><span class=value9>PTRQVFAVQ</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>SVQ</span><span class=valuegap>---</span><span class=value9>VLLGAHSL</span><span class=valuegap>---</span><span class=value9>SAPE</span><span class=valuegap>-</span><span class=value9>PYKRWYDVQ</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>QYQ</span><span class=valuegap>---</span><span class=value9>VQLGSDKI</span><span class=valuegap>---</span><span class=value9>GDQ</span><span class=valuegap>---</span><span class=value9>SAQKIKAT</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>DYQ</span><span class=valuegap>---</span><span class=value9>IWLGRHNL</span><span class=valuegap>---</span><span class=value9>SEDE</span><span class=valuegap>-</span><span class=value9>DTAQFHQVS</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>QLK</span><span class=valuegap>---</span><span class=value9>LVFGLHSLHDPQDP</span><span class=valuegap>----</span><span class=value9>GLTFYIK</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>VS</span><span class=valuegap>---</span><span class=value9>TVVLGAYDL</span><span class=valuegap>---</span><span class=value9>RRRERQSRQTFSIS</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>DV</span><span class=valuegap>---</span><span class=value9>VVAGEFDQ</span><span class=valuegap>---</span><span class=value9>GSDE</span><span class=valuegap>-</span><span class=value9>ENIQVLKIA</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>KYQ</span><span class=valuegap>---</span><span class=value9>VWLGKNNF</span><span class=valuegap>---</span><span class=value9>LEDE</span><span class=valuegap>-</span><span class=value9>PSDQHRLVS</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>SA</span><span class=valuegap>---</span><span class=value9>SVVLGAYDL</span><span class=valuegap>---</span><span class=value9>RQQE</span><span class=valuegap>-</span><span class=value9>QSRQTFSIR</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>PAAYT</span><span class=valuegap>---</span><span class=value9>IRAGSTD</span><span class=valuegap>----</span><span class=value9>RTNG</span><span class=valuegap>-</span><span class=value9>GI</span><span class=valuegap>--</span><span class=value9>IVKVK</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>---</span><span class=value9>LA</span><span class=valuegap>---</span><span class=value9>VRLGSSR</span><span class=valuegap>----</span><span class=value9>HASG</span><span class=valuegap>-</span><span class=value9>GT</span><span class=valuegap>--</span><span class=value9>VVRVA</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>--</span><span class=value9>MTF</span><span class=valuegap>--</span><span class=value9>RVVVGDHNL</span><span class=valuegap>---</span><span class=value9>SQND</span><span class=valuegap>-</span><span class=value9>GTEQYVSVQ</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>KAKPHENYDR</span><span class=valuegap>-----------</span><span class=value9>DSH</span><span class=valuegap>-----</span><span class=value9>FNDI</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>KAIPHPDYNA</span><span class=valuegap>-----------</span><span class=value9>TAF</span><span class=valuegap>-----</span><span class=value9>FSDI</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>KQFLHPKYDE</span><span class=valuegap>-----------</span><span class=value9>NLV</span><span class=valuegap>-----</span><span class=value9>VHDI</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>KFIPFSRLQS</span><span class=valuegap>-----------</span><span class=value9>GSA</span><span class=valuegap>-----</span><span class=value9>SHDI</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value9>LSVRHPEYN</span><span class=valuegap>-----------</span><span class=value9>RPLL</span><span class=valuegap>-----</span><span class=value9>ANDL</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>KAIPYPCFDP</span><span class=valuegap>-----------</span><span class=value9>QTF</span><span class=valuegap>-----</span><span class=value9>EGDL</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>DFFTHENWNS</span><span class=valuegap>-----------</span><span class=value9>WLL</span><span class=valuegap>-----</span><span class=value9>TNDI</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>RIFEN</span><span class=valuegap>-</span><span class=value9>GYDP</span><span class=valuegap>-----------</span><span class=value9>VNL</span><span class=valuegap>-----</span><span class=value9>LNDI</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value9>SVVPHPGSRP</span><span class=valuegap>-----------</span><span class=value9>DSL</span><span class=valuegap>-----</span><span class=value9>EDDL</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value9>KSFRHPGYS</span><span class=valuegap>-----------</span><span class=value9>TKTH</span><span class=valuegap>-----</span><span class=value9>VNDI</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value9>DSFLDPQFDLSLLKKKYLRPYDDI</span><span class=valuegap>-----</span><span class=value9>SHDL</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value9>QAIKHPGYNL</span><span class=valuegap>------------</span><span class=value9>KY</span><span class=valuegap>-----</span><span class=value9>ENDL</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>SMSEN</span><span class=valuegap>-</span><span class=value9>GYDP</span><span class=valuegap>-----------</span><span class=value9>QQN</span><span class=valuegap>-----</span><span class=value9>LNDL</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>QVFKNPKF</span><span class=valuegap>----------------</span><span class=value9>NMFTVRNDI</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value9>KAIPHPDFNMSLLNEHTPQPEDDY</span><span class=valuegap>-----</span><span class=value9>SNDL</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>SISQN</span><span class=valuegap>-</span><span class=value9>GYDP</span><span class=valuegap>-----------</span><span class=value9>RQN</span><span class=valuegap>-----</span><span class=value9>LNDV</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>SVIPHPQYN</span><span class=valuegap>---------</span><span class=value9>GDTYNY</span><span class=valuegap>-------</span><span class=value9>DF</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>RVLEHPNYD</span><span class=valuegap>-----------</span><span class=value9>DSTID</span><span class=valuegap>-----</span><span class=value9>YDF</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>KIMVHPTWNS</span><span class=valuegap>-----------</span><span class=value9>NNV</span><span class=valuegap>---</span><span class=value9>AAGYDI</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*.</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLLKLERKAQLNGVVKTIA</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>RSQ</span><span class=valuegap>-</span><span class=value9>DW</span><span class=valuegap>-</span><span class=value9>VK</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLLKLESKAKRTKAVRPLK</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>RPN</span><span class=valuegap>-</span><span class=value9>AR</span><span class=valuegap>-</span><span class=value9>VK</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>MLLKLKEKAKLTLGVGTLP</span><span class=valuegap>-</span><span class=value9>LS</span><span class=valuegap>--</span><span class=value9>AN</span><span class=valuegap>-</span><span class=value9>FNF</span><span class=valuegap>-</span><span class=value9>IP</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLIKLRTAAELNKNVQLLH</span><span class=valuegap>-</span><span class=value9>LG</span><span class=valuegap>--</span><span class=value9>S</span><span class=valuegap>--</span><span class=value9>KNY</span><span class=valuegap>-</span><span class=value9>LR</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLIKLDESVSESDTIRSIS</span><span class=valuegap>-</span><span class=value9>IA</span><span class=valuegap>--</span><span class=value9>S</span><span class=valuegap>---</span><span class=value9>QC</span><span class=valuegap>-</span><span class=value9>PT</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>QLLQLEGKATMTKAVGILQ</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>RT</span><span class=valuegap>-</span><span class=value9>EDD</span><span class=valuegap>-</span><span class=value9>VK</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>ALIRLPSPVSLNSNIKTVK</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>S</span><span class=valuegap>---</span><span class=value9>SD</span><span class=valuegap>-</span><span class=value9>VS</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>VILQLNGSATINANVQVAQ</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>AQ</span><span class=valuegap>-</span><span class=value9>GRR</span><span class=valuegap>-</span><span class=value9>LG</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value9>ILFKLSQNASLGPHVRPLPLQY</span><span class=valuegap>-----</span><span class=value9>EDKEVE</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLVRLDEPVKMSSKVEAVQ</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>E</span><span class=valuegap>---</span><span class=value9>HC</span><span class=valuegap>-</span><span class=value9>EP</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLLRLAQPARITDAVKILD</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>T</span><span class=valuegap>---</span><span class=value9>QE</span><span class=valuegap>-</span><span class=value9>PK</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value9>ALLKLDGRVKPSKNVKPLA</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>RKPRDK</span><span class=valuegap>-</span><span class=value9>PA</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLLQLDREANLTSSVTILP</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>LQ</span><span class=valuegap>-</span><span class=value9>NAT</span><span class=valuegap>-</span><span class=value9>VE</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>TLLKLATPAQFSETVSAVC</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>NVD</span><span class=valuegap>-</span><span class=value9>DD</span><span class=valuegap>-</span><span class=value9>FP</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value9>MLLRLSKPADITDVVKPIT</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>T</span><span class=valuegap>---</span><span class=value9>EE</span><span class=valuegap>-</span><span class=value9>PK</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>LLLQLDREARLTPSVALVP</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>PQ</span><span class=valuegap>-</span><span class=value9>NAT</span><span class=valuegap>-</span><span class=value9>VE</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>SLLELDESIGFSRSIEAIA</span><span class=valuegap>-</span><span class=value9>LPDASE</span><span class=valuegap>---</span><span class=value9>T</span><span class=valuegap>-</span><span class=value9>VA</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>SLMELESELTFSDVVQPVS</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>DQD</span><span class=valuegap>-</span><span class=value9>EA</span><span class=valuegap>-</span><span class=value9>VE</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>ALLRLAQSVTLNNYVQLAV</span><span class=valuegap>-</span><span class=value9>LP</span><span class=valuegap>--</span><span class=value9>QE</span><span class=valuegap>-</span><span class=value9>GTI</span><span class=valuegap>-</span><span class=value9>LA</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;:..*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>PGQVCTVAGWGR</span><span class=valuegap>-----</span><span class=value9>LAN</span><span class=valuegap>-</span><span class=value9>C</span><span class=valuegap>-</span><span class=value9>T</span><span class=valuegap>--</span><span class=value9>S</span><span class=valuegap>-</span><span class=value9>SNT</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>PGDVCSVAGWGSRSINDT</span><span class=valuegap>-----------</span><span class=value9>KASA</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>PGRMCRAVGWGR</span><span class=valuegap>-----</span><span class=value9>TNVNE</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>--</span><span class=value9>A</span><span class=valuegap>-</span><span class=value9>SDT</span><span class=valuegap>--</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>DGTKCQVTGWGT</span><span class=valuegap>-----</span><span class=value9>TKPDLLT</span><span class=valuegap>--</span><span class=value9>A</span><span class=valuegap>-</span><span class=value9>SDT</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value9>AGNSCLVSGWGL</span><span class=valuegap>-----</span><span class=value9>LA</span><span class=valuegap>--</span><span class=value9>NGR</span><span class=valuegap>--</span><span class=value9>M</span><span class=valuegap>-</span><span class=value9>PTV</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>PHTKCHVAGWGS</span><span class=valuegap>-----</span><span class=value9>TKKDACQ</span><span class=valuegap>--</span><span class=value9>M</span><span class=valuegap>-</span><span class=value9>SNA</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>VGTTVTPTGWGR</span><span class=valuegap>-----</span><span class=value9>PSDSASG</span><span class=valuegap>--</span><span class=value9>I</span><span class=valuegap>-</span><span class=value9>SDV</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>NGVQCLAMGWGL</span><span class=valuegap>-----</span><span class=value9>LGRNR</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>I</span><span class=valuegap>-</span><span class=value9>ASV</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value9>PGTLCDVAGWGV</span><span class=valuegap>-----</span><span class=value9>VTHAG</span><span class=valuegap>-</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>R</span><span class=valuegap>-</span><span class=value9>PDV</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value9>PGTSCTVSGWGT</span><span class=valuegap>-----</span><span class=value9>TTSPDVT</span><span class=valuegap>--</span><span class=value9>F</span><span class=valuegap>-</span><span class=value9>PSD</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value9>LGSTCYTSGWGL</span><span class=valuegap>-----</span><span class=value9>ISTFTNR</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>SGT</span><span class=valuegap>--</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value9>EGSRCSTAGWGI</span><span class=valuegap>-----</span><span class=value9>THQRG</span><span class=valuegap>-</span><span class=value9>Q</span><span class=valuegap>--</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>AKS</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>AGTRCQVAGWGS</span><span class=valuegap>-----</span><span class=value9>QRSGG</span><span class=valuegap>-</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>SRF</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>PGTVCATTGWGK</span><span class=valuegap>-----</span><span class=value9>TKY</span><span class=valuegap>---</span><span class=value9>NALKTPEK</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value9>LGSTCLASGWGS</span><span class=valuegap>-----</span><span class=value9>TTPIKFK</span><span class=valuegap>--</span><span class=value9>Y</span><span class=valuegap>-</span><span class=value9>PDD</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>AGTNCQVAGWGT</span><span class=valuegap>-----</span><span class=value9>QRLR</span><span class=valuegap>--</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>LFSRF</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>DGAMCTVSGWGD</span><span class=valuegap>-----</span><span class=value9>T</span><span class=valuegap>-</span><span class=value9>KNV</span><span class=valuegap>-</span><span class=value9>F</span><span class=valuegap>---</span><span class=value9>EMNT</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>DGTMTIVSGWGN</span><span class=valuegap>-----</span><span class=value9>TQSA</span><span class=valuegap>--</span><span class=value9>A</span><span class=valuegap>---</span><span class=value9>ESNA</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>NNNPCYITGWGR</span><span class=valuegap>-----</span><span class=value9>TRTNG</span><span class=valuegap>-</span><span class=value9>Q</span><span class=valuegap>--</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>SQT</span><span class=valuegap>--</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LQEVNLEVQKGQKCQD</span><span class=valuegap>----</span><span class=value9>MSE</span><span class=valuegap>--</span><span class=value9>DYND</span><span class=valuegap>-</span><span class=value9>SI</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>RLREAQLVIQEDEECKK</span><span class=valuegap>----</span><span class=value9>RFR</span><span class=valuegap>--</span><span class=value9>HY</span><span class=valuegap>-</span><span class=value9>TETT</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LQEVKMRLQEPQACKH</span><span class=valuegap>-----</span><span class=value9>FT</span><span class=valuegap>--</span><span class=value9>SFRH</span><span class=valuegap>-</span><span class=value9>NS</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LREVTVTIISRKRCNS</span><span class=valuegap>--</span><span class=value9>QSYYNHKPVIT</span><span class=valuegap>-</span><span class=value9>KD</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LQCVNVSVVSEEVCSK</span><span class=valuegap>----</span><span class=value9>LYD</span><span class=valuegap>--</span><span class=value9>PLYH</span><span class=valuegap>-</span><span class=value9>PS</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LREANVTVIDRKICND</span><span class=valuegap>--</span><span class=value9>AQHYNFNPVID</span><span class=valuegap>-</span><span class=value9>LS</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LRQVNVPVMTNADCDS</span><span class=valuegap>----</span><span class=value9>VYG</span><span class=valuegap>---</span><span class=value9>IVG</span><span class=valuegap>-</span><span class=value9>DG</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LQELNVTVVT</span><span class=valuegap>-</span><span class=value9>SLC</span><span class=valuegap>--------------</span><span class=value9>R</span><span class=valuegap>-</span><span class=value9>RS</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LHQLRVSIMNRTTCNL</span><span class=valuegap>--</span><span class=value9>RTYHD</span><span class=valuegap>--</span><span class=value9>GVVT</span><span class=valuegap>-</span><span class=value9>IN</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LMCSDVKLISSRECKK</span><span class=valuegap>----</span><span class=value9>VYK</span><span class=valuegap>--</span><span class=value9>DLLG</span><span class=valuegap>-</span><span class=value9>KT</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LQCVELRLQSNEKCAR</span><span class=valuegap>----</span><span class=value9>AYP</span><span class=valuegap>--</span><span class=value9>EKMT</span><span class=valuegap>-</span><span class=value9>EF</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LQELDLRLLDTRMCNN</span><span class=valuegap>--</span><span class=value9>SRFWN</span><span class=valuegap>--</span><span class=value9>GVLT</span><span class=valuegap>-</span><span class=value9>DS</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>PRFVNVTVTPEDQC</span><span class=valuegap>--------------</span><span class=value9>R</span><span class=valuegap>-</span><span class=value9>PN</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LQQAALPIVSEADCK</span><span class=valuegap>----</span><span class=value9>KSWG</span><span class=valuegap>--</span><span class=value9>SKIT</span><span class=valuegap>-</span><span class=value9>DV</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LQCVNLKLLPNEDCDK</span><span class=valuegap>----</span><span class=value9>AHE</span><span class=valuegap>--</span><span class=value9>MKVT</span><span class=valuegap>-</span><span class=value9>DA</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>PRVLNVTVT</span><span class=valuegap>-</span><span class=value9>SNPC</span><span class=valuegap>--------------</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>PR</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>LLRAVNVPSYNQAECAAALVNVVP</span><span class=valuegap>----</span><span class=value9>VT</span><span class=valuegap>-</span><span class=value9>EQ</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>ILRAANVPTVNQKECT</span><span class=valuegap>----</span><span class=value9>IAYSSSGGIT</span><span class=valuegap>-</span><span class=value9>DR</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>-</span><span class=value9>LQQAYLPSVDYSICSS</span><span class=valuegap>--</span><span class=value9>SSYWG</span><span class=valuegap>--</span><span class=value9>STVK</span><span class=valuegap>-</span><span class=value9>TT</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>QLCVG</span><span class=valuegap>--</span><span class=value9>NPSE</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>K</span><span class=valuegap>--</span><span class=value9>ATGKGDSGGPFVCD</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>EICAG</span><span class=valuegap>--</span><span class=value9>DLKK</span><span class=valuegap>--</span><span class=value9>I</span><span class=valuegap>--</span><span class=value9>K</span><span class=valuegap>--</span><span class=value9>TPFKGDSGGPLVCD</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>QLCVG</span><span class=valuegap>--</span><span class=value9>NPKK</span><span class=valuegap>--</span><span class=value9>M</span><span class=valuegap>--</span><span class=value9>Q</span><span class=valuegap>--</span><span class=value9>NVYKGDSGGPLLCA</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>MICAG</span><span class=valuegap>--</span><span class=value9>D</span><span class=valuegap>--</span><span class=value9>A</span><span class=valuegap>--</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>GQKDSCKGDSGGPLICK</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value9>MFCAG</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>QDQK</span><span class=valuegap>--</span><span class=value9>DSCNGDSGGPLICN</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>MICAG</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>K</span><span class=valuegap>--</span><span class=value9>GEDDSCEGDSGSPLICD</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>VVCID</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>T</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>KSTCNGDSGGPLNLN</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>NVCTL</span><span class=valuegap>--</span><span class=value9>V</span><span class=valuegap>--</span><span class=value9>RGRQ</span><span class=valuegap>--</span><span class=value9>A</span><span class=valuegap>--</span><span class=value9>GVCFGDSGSPLVCN</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value9>MMCAE</span><span class=valuegap>--</span><span class=value9>S</span><span class=valuegap>--</span><span class=value9>N</span><span class=valuegap>--</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>DTCRGDSGSPLVCG</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLCAG</span><span class=valuegap>--</span><span class=value9>I</span><span class=valuegap>--</span><span class=value9>P</span><span class=valuegap>--</span><span class=value9>DSKT</span><span class=valuegap>--</span><span class=value9>NTCNGDSGGPLVCN</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value9>VLCATHRD</span><span class=valuegap>--</span><span class=value9>D</span><span class=valuegap>----</span><span class=value9>SG</span><span class=valuegap>--</span><span class=value9>SICLGDSGGALICD</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLCLK</span><span class=valuegap>--</span><span class=value9>AGAK</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>Q</span><span class=valuegap>--</span><span class=value9>APCKGDSGGPLVCG</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>NVCTG</span><span class=valuegap>--</span><span class=value9>V</span><span class=valuegap>--</span><span class=value9>LTRR</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>GICNGDGGTPLVCE</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>MTCAG</span><span class=valuegap>--</span><span class=value9>A</span><span class=valuegap>--</span><span class=value9>S</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>V</span><span class=valuegap>--</span><span class=value9>SSCMGDSGGPLVCQ</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value9>MLCAG</span><span class=valuegap>--</span><span class=value9>E</span><span class=valuegap>--</span><span class=value9>M</span><span class=valuegap>--</span><span class=value9>DGGS</span><span class=valuegap>--</span><span class=value9>YTCEHDSGGPLICD</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>DMCIG</span><span class=valuegap>--</span><span class=value9>V</span><span class=valuegap>--</span><span class=value9>FSRR</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>RISQGDRGTPLVCN</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>MICAG</span><span class=valuegap>--</span><span class=value9>Y</span><span class=valuegap>--</span><span class=value9>AA</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>KDSCQGDSGGPLVSG</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>MLCAG</span><span class=valuegap>--</span><span class=value9>Y</span><span class=valuegap>--</span><span class=value9>KRGG</span><span class=valuegap>--</span><span class=value9>K</span><span class=valuegap>--</span><span class=value9>DACQGDSGGPLVVD</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>MVCAG</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>D</span><span class=valuegap>-</span><span class=value9>GV</span><span class=valuegap>--</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>SGCQGDSGGPLHCL</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*&nbsp;.:&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>VAQGIVSYRL</span><span class=valuegap>-</span><span class=value9>C</span><span class=valuegap>-</span><span class=value9>TG</span><span class=valuegap>-</span><span class=value9>T</span><span class=valuegap>----</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>R</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>N</span><span class=valuegap>--</span><span class=value9>KAYGLLAYAK</span><span class=valuegap>-</span><span class=value9>N</span><span class=valuegap>----</span><span class=value9>RTI</span><span class=valuegap>-</span><span class=value9>SS</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>--</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>IAQGIASYVH</span><span class=valuegap>-</span><span class=value9>R</span><span class=valuegap>-</span><span class=value9>NA</span><span class=valuegap>-</span><span class=value9>K</span><span class=valuegap>------</span><span class=value9>PPA</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>IFHALVSQGY</span><span class=valuegap>-</span><span class=value9>K</span><span class=valuegap>--</span><span class=value9>C</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>I</span><span class=valuegap>-</span><span class=value9>AKKP</span><span class=valuegap>-</span><span class=value9>G</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>GYLQGLVSFGK</span><span class=valuegap>--</span><span class=value9>APCGQ</span><span class=valuegap>-</span><span class=value9>V</span><span class=valuegap>-</span><span class=value9>GV</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>G</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>NVFRGVTSFG</span><span class=valuegap>----</span><span class=value9>KC</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>N</span><span class=valuegap>-</span><span class=value9>PQKP</span><span class=valuegap>-</span><span class=value9>G</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>GMTYGITSFGS</span><span class=valuegap>-</span><span class=value9>SAGC</span><span class=valuegap>-</span><span class=value9>E</span><span class=valuegap>-</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>GY</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>A</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>GLIHGIASFVR</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>GCAS</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>LY</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>D</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>D</span><span class=valuegap>--</span><span class=value9>AVEGVVTWGS</span><span class=valuegap>-</span><span class=value9>R</span><span class=valuegap>-</span><span class=value9>VC</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>N</span><span class=valuegap>-</span><span class=value9>GKKP</span><span class=valuegap>-</span><span class=value9>G</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>DTLQGLVSWGT</span><span class=valuegap>--</span><span class=value9>YPCGQ</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>ND</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>G</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>GVFQGITSWGY</span><span class=valuegap>--</span><span class=value9>SEC</span><span class=valuegap>-</span><span class=value9>A</span><span class=valuegap>-</span><span class=value9>D</span><span class=valuegap>-</span><span class=value9>FNDN</span><span class=valuegap>-</span><span class=value9>F</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>----</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>GKVDGILSFSS</span><span class=valuegap>-</span><span class=value9>K</span><span class=valuegap>-</span><span class=value9>NC</span><span class=valuegap>-</span><span class=value9>TDI</span><span class=valuegap>-</span><span class=value9>FK</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>T</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>GLAHGVASFSL</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>PC</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>D</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>KD</span><span class=valuegap>--</span><span class=value9>GVWTLAGIVSWGS</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>VC</span><span class=valuegap>-</span><span class=value9>S</span><span class=valuegap>-</span><span class=value9>T</span><span class=valuegap>-</span><span class=value9>ST</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>A</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>GILQGITSWGP</span><span class=valuegap>--</span><span class=value9>EPC</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>EPTE</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>S</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>GLAQGVASFLR</span><span class=valuegap>-</span><span class=value9>R</span><span class=valuegap>-</span><span class=value9>RF</span><span class=valuegap>-</span><span class=value9>R</span><span class=valuegap>-</span><span class=value9>R</span><span class=valuegap>--</span><span class=value9>S</span><span class=valuegap>-</span><span class=value9>S</span><span class=valuegap>-</span><span class=value9>G</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>DKLVGVVSWGK</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>--</span><span class=value9>C</span><span class=valuegap>-</span><span class=value9>A</span><span class=valuegap>-</span><span class=value9>L</span><span class=valuegap>-</span><span class=value9>PNLP</span><span class=valuegap>-</span><span class=value9>G</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><span class=value9>GKLVGVVSWGF</span><span class=valuegap>-</span><span class=value9>G</span><span class=valuegap>-</span><span class=value9>CA</span><span class=valuegap>-</span><span class=value9>M</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>GY</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>G</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>VNGQY</span><span class=valuegap>--</span><span class=value9>SVHGVTSFVSSM</span><span class=valuegap>-</span><span class=value9>GC</span><span class=valuegap>-</span><span class=value9>NVS</span><span class=valuegap>-</span><span class=value9>KK</span><span class=valuegap>-</span><span class=value9>P</span><span class=valuegap>-</span><span class=value9>T</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.:&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=value9>VFTRISS</span><span class=valuegap>-</span><span class=value9>FIPWIQKTMK</span><span class=valuegap>--</span><span class=value9>VLQQS</span><span class=valuegap>--------</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=value9>VFTKIVH</span><span class=valuegap>-</span><span class=value9>FLPWISRNMKL</span><span class=valuegap>-</span><span class=value9>L</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=value9>VFTRISH</span><span class=valuegap>-</span><span class=value9>YRPWINKILREN</span><span class=valuegap>-------------</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=value9>IYTLLTKKYQTWIKSKLAPSRAH</span><span class=valuegap>----------</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=value9>VYTNLCK</span><span class=valuegap>-</span><span class=value9>FTEWIEKTVQA</span><span class=valuegap>-</span><span class=value9>S</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=value9>IYILLTKKHLNWIKKTIAGAI</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>AFTRVYY</span><span class=valuegap>-</span><span class=value9>YLDWIQQKTGVTP</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>AFAPVAQ</span><span class=valuegap>-</span><span class=value9>FVNWIDSIIQ</span><span class=valuegap>-</span><span class=value9>RSEDNPCPHPRDPD</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=value9>VYTRVSS</span><span class=valuegap>-</span><span class=value9>YRMWIENITNGNMTS</span><span class=valuegap>----------</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=value9>VYTQVCK</span><span class=valuegap>-</span><span class=value9>YKRWVMETMKTHR</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=value9>VFTKVMP</span><span class=valuegap>-</span><span class=value9>HLKWIKETIEKNS</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=value9>VATAVAP</span><span class=valuegap>-</span><span class=value9>YSSWIRKVIGR</span><span class=valuegap>-</span><span class=value9>WSPQPLT</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>FFTRVAL</span><span class=valuegap>-</span><span class=value9>FRDWIDGVLNNPGPGPA</span><span class=valuegap>--------</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=value9>VYSRVTA</span><span class=valuegap>-</span><span class=value9>LMPWVQQILEAN</span><span class=valuegap>-------------</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=value9>VYTKLIK</span><span class=valuegap>-</span><span class=value9>FSSWIRETMANNP</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=value9>FFTRVAL</span><span class=valuegap>-</span><span class=value9>FRNWIDSVLNNPP</span><span class=valuegap>------------</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>VYARVST</span><span class=valuegap>-</span><span class=value9>VRQWIREVSEV</span><span class=valuegap>--------------</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=value9>VYARVAV</span><span class=valuegap>-</span><span class=value9>VRDWVRENSGA</span><span class=valuegap>--------------</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=value9>VFTRVSA</span><span class=valuegap>-</span><span class=value9>YISWMNNVIAYT</span><span class=valuegap>-------------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><span class=valuedefault>sp|Q06606|GRZ2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P08884|GRAE_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P21844|MCPT5&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|O35205|GRAK_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|Q9Y5K2|KLK4_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|Q7YRZ7|GRAA_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|Q00871|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P08246|ELNE_&nbsp;&nbsp;&nbsp;</span><span class=value9>PASRTH</span><br><span class=valuedefault>sp|P03953|CFAD_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|Q91VE3|KLK7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|Q6H321|KLK2_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|Q03238|GRAM_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P20160|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P07338|CTRB1&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P00757|KLKB4&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P80015|CAP7_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P29786|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P35037|TRY3_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><span class=valuedefault>sp|P00773|ELA1_&nbsp;&nbsp;&nbsp;</span><span class=valuegap>------</span><br><br><span class=valuedefault>cons&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class=value9>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br><br><br><br><br><br></body></html>
+</content>
+</file>
+<environement>
+HOME_4_TCOFFEE=/Users/cnotredame/
+MANPATH=/sw/share/man:/Users/cnotredame/perl5/man:/opt/local/share/man:/usr/local/share/man:/usr/share/man:/opt/X11/share/man:/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/share/man:/Applications/Xcode.app/Contents/Developer/usr/share/man:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/sw/lib/perl5/5.18.2/man
+TERM_PROGRAM=Apple_Terminal
+MCOFFEE_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//mcoffee/
+ROOT_TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/
+SHELL=/bin/bash
+TERM=xterm-256color
+TMPDIR=/var/folders/42/7kdsjftx00g91b_dwj3f82nw0000gp/T/
+PERL5LIB=/sw/lib/perl5:/sw/lib/perl5/darwin:/Users/cnotredame/perl5/lib/perl5::/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/perl/lib/perl5
+Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.wnPgfm7LhC/Render
+TERM_PROGRAM_VERSION=388
+OSNAME=macosx
+PERL_MB_OPT=--install_base "/Users/cnotredame/perl5"
+PERL_BIN=/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices
+TERM_SESSION_ID=10AF935E-E014-4AC9-828D-65F557EE7931
+METHODS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//methods/
+VERSIONER_PERL_VERSION=5.18
+XAPPLRESDIR=/sw/etc/app-defaults/
+http_proxy=
+HTTP_proxy=
+USER=cnotredame
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.yle5RwOYrI/Listeners
+__CF_USER_TEXT_ENCODING=0x1F6:0x0:0x0
+ENV_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//.t_coffee_env
+all_proxy=
+ALL_PROXY=
+HTTP_proxy_4_TCOFFEE=
+PATH=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/:/Users/cnotredame/.t_coffee/plugins:/opt/local/bin:/opt/local/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/sw/sbin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/perl5/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/tcoffee/Version_11.00.8cbe486/bin:/Users/cnotredame/Dropbox/packages/x3dna-v2.1/bin:/Users/cnotredame/bin/macosx://Users/cnotredame/.t_coffee/plugins/macosx:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/algorithms::/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/debug:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4data_process:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/filters:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/perl4makefile:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/util:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/benchmark:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/scripts:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/stat:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/droit:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/phecomp:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/hmm:/Users/cnotredame/Dropbox/projects/git/tcoffee/lib/perl/lib/webservices:/Users/cnotredame/bin/Scripts/:/Users/cnotredame/Library/Haskell/ghc-7.4.2/lib/epub-tools-2.0.0/bin/:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin
+_=/usr/bin/printenv
+COLOR_4_TCOFFEE=new
+DIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/
+PWD=/Users/cnotredame/Dropbox/projects/git/tcoffee/testsuite/validation/docs/tmp
+CACHE_4_TCOFFEE=/Users/cnotredame/.t_coffee/cache//
+X3DNA=/Users/cnotredame/Dropbox/packages/x3dna-v2.1
+DBUS_LAUNCHD_SESSION_BUS_SOCKET=/private/tmp/com.apple.launchd.bQMyejpONS/unix_domain_listener
+XPC_FLAGS=0x0
+VERSIONER_PERL_PREFER_32_BIT=no
+XPC_SERVICE_NAME=0
+ERRORFILE_4_TCOFFEE=NO
+PLUGINS_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486//plugins/macosx/
+SHLVL=3
+HOME=/Users/cnotredame
+DUMP_4_TCOFFEE=t_coffee.18.R98Dhag7Dj.dump
+HTTP_PROXY=
+PERL_LOCAL_LIB_ROOT=/Users/cnotredame/perl5
+BIN=/Users/cnotredame/bin/macosx
+LOGNAME=cnotredame
+EMAIL_4_TCOFFEE=cedric.notredame@gmail.com
+LC_CTYPE=UTF-8
+EMAIL=cedric.notredame@gmail.com
+UPDATED_ENV_4_TCOFFEE=1
+INFOPATH=/sw/share/info:/sw/info:/usr/share/info
+DISPLAY=/private/tmp/com.apple.launchd.TbcafQ0492/org.macosforge.xquartz:0
+NUMBER_OF_PROCESSORS=8
+ALL_proxy=
+SECURITYSESSIONID=186a5
+PERL_MM_OPT=INSTALL_BASE=/Users/cnotredame/perl5
+LOCKDIR_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/lck//
+TMP_4_TCOFFEE=/Users/cnotredame/tcoffee/Version_11.00.8cbe486/tmp/tco/94799201/
+USER_BIN=/Users/cnotredame/bin/macosx
+SCRIPT_BIN=/Users/cnotredame/bin/Scripts/
+</environement>
+<DumpStatus>OK</DumpStatus>
+<DumpFile>t_coffee.18.R98Dhag7Dj.dump</DumpFile>
+</DumpIO>
+<ref>
+<source>/Users/cnotredame/Dropbox/projects/git/tcoffee/docs//tcoffee_main_documentation.rst</source>
+<line>1872</line>
+</ref>
