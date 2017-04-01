@@ -169,6 +169,12 @@ int    ** copy_int   ( int    **array1, int    **array2, int len, int number_fie
 float  ** copy_float ( float  **array1, float  **array2, int len, int number_field);
 double ** copy_double( double **array1, double **array2, int len, int number_field);
 
+
+short  ** copy_short_new ( short  **array1);
+char   ** copy_char_new  ( char   **array1);
+int    ** copy_int_new   ( int    **array1);
+float  ** copy_float_new ( float  **array1);
+double ** copy_double_new( double **array1);
 /*********************************************************************/
 /*                                                                   */
 /*                        CONCATENATION                              */

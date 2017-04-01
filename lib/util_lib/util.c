@@ -1503,6 +1503,134 @@ double ** duplicate_double ( double **array , int len, int field)
 /*                                                                   */
 /*                                                                   */
 /*********************************************************************/
+short ** copy_short_new (short **array1)
+{
+  short **array2;
+  int a,b,l1,l2 ;
+  if (!array1)return NULL;
+  
+  l1=read_array_size_new (array1);
+  array2=(short **)vcalloc (l1, sizeof (short*));
+  for (a=0; a<l1; a++)
+    {
+      if (array1[a])
+	{
+	  
+	  l2=read_array_size_new (array1[a]);
+	  array2[a]=(short*)vcalloc (l2, sizeof (short));
+	  for (b=0; b<l2; b++)
+	    array2[a][b]=array1[a][b];
+	}
+    }
+  return array2;
+}
+
+char ** copy_char_new (char **array1)
+{
+  char **array2;
+  int a,b,l1,l2 ;
+  if (!array1)return NULL;
+  
+  l1=read_array_size_new (array1);
+  array2=(char **)vcalloc (l1, sizeof (char*));
+  for (a=0; a<l1; a++)
+    {
+      if (array1[a])
+	{
+	  
+	  l2=read_array_size_new (array1[a]);
+	  array2[a]=(char*)vcalloc (l2, sizeof (char));
+	  for (b=0; b<l2; b++)
+	    array2[a][b]=array1[a][b];
+	}
+    }
+  return array2;
+}
+
+char ** shrink_char_new (char **array1)
+{
+  char **array2;
+  int a, l1, l2;
+  if (!array1)return NULL;
+  
+  l1=read_array_size_new (array1);
+  array2=(char **)vcalloc (l1, sizeof (char*));
+  for (a=0; a<l1; a++)
+    {
+      if (array1[a])
+	{
+	  
+	  l2=strlen(array1[a])+1;
+	  array2[a]=(char*)vcalloc (l2, sizeof (char));
+	  sprintf (array2[a], "%s", array1[a]);
+	}
+    }
+  return array2;
+}
+float ** copy_float_new (float **array1)
+{
+  float **array2;
+  int a,b,l1,l2 ;
+  if (!array1)return NULL;
+  
+  l1=read_array_size_new (array1);
+  array2=(float **)vcalloc (l1, sizeof (float*));
+  for (a=0; a<l1; a++)
+    {
+      if (array1[a])
+	{
+	  
+	  l2=read_array_size_new (array1[a]);
+	  array2[a]=(float*)vcalloc (l2, sizeof (float));
+	  ga_memcpy_float( array1[a],array2[a],l2);
+
+	}
+    }
+  return array2;
+}
+
+int ** copy_int_new (int **array1)
+{
+  int **array2;
+  int a,b,l1,l2 ;
+  if (!array1)return NULL;
+  
+  l1=read_array_size_new (array1);
+  array2=(int **)vcalloc (l1, sizeof (int*));
+  for (a=0; a<l1; a++)
+    {
+      if (array1[a])
+	{
+	  
+	  l2=read_array_size_new (array1[a]);
+	  array2[a]=(int*)vcalloc (l2, sizeof (int));
+	  ga_memcpy_int( array1[a],array2[a],l2);
+	}
+    }
+  return array2;
+}
+
+double ** copy_double_new (double **array1)
+{
+  double **array2;
+  int a,l1,l2 ;
+  if (!array1)return NULL;
+  
+  l1=read_array_size_new (array1);
+  array2=(double **)vcalloc (l1, sizeof (double*));
+  for (a=0; a<l1; a++)
+    {
+      if (array1[a])
+	{
+	  
+	  l2=read_array_size_new (array1[a]);
+	  array2[a]=(double*)vcalloc (l2, sizeof (double));
+	  ga_memcpy_double( array1[a],array2[a],l2);
+	}
+    }
+  return array2;
+}
+
 short ** copy_short( short **array1, short  **array2, int len, int number_field)
     {
     int a;

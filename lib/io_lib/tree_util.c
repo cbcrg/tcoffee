@@ -4998,8 +4998,11 @@ NT_node file2tree (char *fname)
 	  else if(!T->left)T->left=N;
 	  else
 	    {
-	      HERE ("Non Binary Tree!!!!!");
-	      exit (0);
+	      N->right=T->right; (T->right)->parent=N;
+	      N->left=T->left; (T->left)->parent=N;
+	      T->right=N;
+	      N=T->left=new_declare_tree_node ();
+	      N->parent=T;
 	    }
 	  
 	  T=N;
@@ -5027,8 +5030,11 @@ NT_node file2tree (char *fname)
 	  else if (!T->left)T->left=N;
 	  else 
 	    {
-	      HERE ("Non Binary Tree!!!!!");
-	      exit (0);
+	      N->right=T->right; (T->right)->parent=N;
+	      N->left=T->left; (T->left)->parent=N;
+	      T->right=N;
+	      N=T->left=new_declare_tree_node ();
+	      N->parent=T;
 	    }
 	  
 	  T=N;

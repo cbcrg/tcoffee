@@ -917,7 +917,7 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	
 	sprintf ( D->file, "%s", in_file);
 	
-	HERE ("****%s******", in_format);
+	
 
 
 	if ( strm2(in_format,"saga_aln","clustal_aln"))
@@ -1457,8 +1457,9 @@ char * identify_seq_format ( char *file)
 
        if ( format==NULL)format=(char*)vcalloc ( 100, sizeof (char));
        else format[0]='\0';
-
-
+       
+      
+       
        int format_val  = 0;
        if ( !check_file_exists(file))
 	 {
@@ -1491,9 +1492,7 @@ char * identify_seq_format ( char *file)
 	       }
 	   }
 	 else if ( format_is_msf      (file))sprintf ( format, "msf_aln");
-       //        else if ( format_is_pir_aln  (file))sprintf ( format, "pir_aln");
-       //        else if ( format_is_pir_seq  (file))sprintf ( format, "pir_seq");
-	 else if ( format_is_oligo    (file))sprintf ( format, "oligo_aln");
+       	 else if ( format_is_oligo    (file))sprintf ( format, "oligo_aln");
 	
 	 else if ( format_is_saga     (file))sprintf ( format, "clustal_aln");
 	 else if ( format_is_conc_aln (file))sprintf ( format, "conc_aln");
@@ -2033,16 +2032,11 @@ int is_newick (char *name)
      int c;
      FILE *fp;
 
-
+     
      fp=vfopen (name, "r");
-     if ( (c=fgetc(fp))!='('){vfclose (fp); return 0;}
-
-
-     while ( (c=fgetc(fp))!=EOF)
-       {
-	 if ( c==';'){vfclose (fp); return 1;}
-       }
+     c=fgetc(fp);
      vfclose (fp);
+     if (c=='(')return 1;
      return 0;
    }
 
