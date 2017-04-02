@@ -2986,21 +2986,23 @@ Alignment *seq2aln (Sequence *S, Alignment *A,int rm_gap)
 	A->max_len=S->max_len;
 	A->min_len=S->min_len;
 
+	
 	for ( a=0; a< S->nseq; a++)
 		{
 		A->order[a][0]=a;
 		A->order[a][1]=0;
 
-		sprintf ( A->seq_comment[a], "%s", S->seq_comment[a]);
-		sprintf ( A->aln_comment[a], "%s", S->aln_comment[a]);
+		A->seq_comment[a]=csprintf ( A->seq_comment[a], "%s", S->seq_comment[a]);
+		A->aln_comment[a]=csprintf ( A->aln_comment[a], "%s", S->aln_comment[a]);
 
-		sprintf ( A->name[a], "%s", S->name[a]);
-		sprintf ( A->seq_al[a], "%s", S->seq[a]);
+		A->name[a]=csprintf ( A->name[a], "%s", S->name[a]);
+		A->seq_al[a]=csprintf ( A->seq_al[a], "%s", S->seq[a]);
+
 
 		ungap ( A->seq_al[a]);
 		A->len[a]=strlen ( A->seq_al[a]);
 
-		if ( rm_gap==0 || rm_gap==NO_PAD)sprintf ( A->seq_al[a], "%s", S->seq[a]);
+		if ( rm_gap==0 || rm_gap==NO_PAD)A->seq_al[a]=csprintf ( A->seq_al[a], "%s", S->seq[a]);
 
 		}
 	if (rm_gap!=NO_PAD)padd_aln (A);
@@ -3026,7 +3028,7 @@ char **padd_string ( char **string, int n,char pad)
   for (a=0; a<n; a++)
 	    {
 	    buf=generate_null (max_len-strlen (string[a]));
-	    strcat ( string[a], buf);
+	    string[a]=vcat ( string[a], buf);
 	    vfree (buf);
 	    }
   return string;

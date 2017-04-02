@@ -3240,7 +3240,7 @@ Alignment *realign_kmeans (Alignment *A, Constraint_list *CL)
       if (g[a])ls[0][ns[0]++]=a;
       else ls[1][ns[1]++]=a;
     }
-  HERE ("%d %d", ns[0], ns[1]);
+  //HERE ("%d %d", ns[0], ns[1]);
   if (ns[0] && ns[1])
     {
       ungap_sub_aln ( A, ns[0], ls[0]);

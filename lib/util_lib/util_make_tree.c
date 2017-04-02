@@ -1717,10 +1717,12 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     }
   else if (strm (dpa_tree, "parttree"))
     {
+     
       T=seq2parttree_dnd (S);
     }
   else if (strm (dpa_tree, "dpparttree"))
     {
+      exit (0);
       T=seq2dpparttree_dnd (S);
     }
   else if (strm (dpa_tree, "fastparttree"))
@@ -1739,6 +1741,10 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
   //else if (!(T=main_read_tree (dpa_tree)))
   //myexit (fprintf_error (stderr, "%s is neither a file nor a valid dpa_tree mode [FATAL:%s]", dpa_tree,PROGRAM));
   
+  if (!T)
+    myexit (fprintf_error ( stderr, "\nCould not produce %s tree [FATAL:%s]", dpa_tree, PROGRAM));
+
+  
   return T;
 }
 
@@ -1748,7 +1754,7 @@ NT_node seq2parttree_dnd ( Sequence *S)
 {
   Alignment *A;
   int tot_node=0;
-  NT_node T;
+  NT_node T=NULL;
   char *dir =vtmpnam (NULL);
   char *cdir=get_pwd (NULL);
   FILE*fp;
@@ -1756,20 +1762,21 @@ NT_node seq2parttree_dnd ( Sequence *S)
   my_mkdir (dir);
   chdir (dir);
   output_fasta_seqS ("seq",S);
-  printf_system_direct ("mafft --retree 0 --treeout --parttree --reorder seq > aln %s ",TO_NULL_DEVICE);
-  printf_system ("cp seq.tree %s/cedric", cdir);
-  fp=vfopen ("seq.tree", "a");
-  fprintf (fp, ";");
-  vfclose (fp);
+  printf_system_direct ("mafft --anysymbol --retree 0 --treeout --parttree --reorder seq > aln %s ",TO_NULL_DEVICE);
   
-  T=main_read_tree ("seq.tree");
-  
- 
-  T=indextree2nametree (S, T);
+  if (check_file_exists ("seq.tree"))
+    {
+    
+      fp=vfopen ("seq.tree", "a");
+      fprintf (fp, ";");
+      vfclose (fp);
+      T=main_read_tree ("seq.tree");
+      
+      T=indextree2nametree (S, T);
+    }
   chdir    (cdir);
   printf_system_direct ("rm %s/*", dir);
   my_rmdir (dir);
-  
   vfree (cdir);
   return T;
 }
@@ -1777,37 +1784,41 @@ NT_node seq2dpparttree_dnd ( Sequence *S)
 {
   Alignment *A;
   int tot_node=0;
-  NT_node T;
+  NT_node T=NULL;
   char *dir =vtmpnam (NULL);
   char *cdir=get_pwd (NULL);
   FILE*fp;
   
+  
   my_mkdir (dir);
   chdir (dir);
   output_fasta_seqS ("seq",S);
-  printf_system_direct ("mafft --retree 0 --treeout --dpparttree --reorder seq > aln %s",TO_NULL_DEVICE);
-  printf_system ("cp seq.tree %s/cedric", cdir);
-  fp=vfopen ("seq.tree", "a");
-  fprintf (fp, ";");
-  vfclose (fp);
-  
-  T=main_read_tree ("seq.tree");
-  
-
-  T=indextree2nametree (S, T);
+  //printf_system_direct ("mafft --anysymbol --retree 0 --treeout --dpparttree --reorder seq > aln %s",TO_NULL_DEVICE);
+  printf_system_direct ("mafft --anysymbol --retree 0 --treeout --dpparttree --reorder seq > aln");
+  if (check_file_exists ("seq.tree"))
+    {
+    
+      
+      fp=vfopen ("seq.tree", "a");
+      fprintf (fp, ";");
+      vfclose (fp);
+      T=main_read_tree ("seq.tree");
+      
+      T=indextree2nametree (S, T);
+    }
   chdir    (cdir);
   printf_system_direct ("rm %s/*", dir);
   my_rmdir (dir);
-  
   vfree (cdir);
   return T;
+  
 }
 
 NT_node seq2fastparttree_dnd ( Sequence *S)
 {
   Alignment *A;
   int tot_node=0;
-  NT_node T;
+  NT_node T=NULL;
   char *dir =vtmpnam (NULL);
   char *cdir=get_pwd (NULL);
   FILE*fp;
@@ -1815,27 +1826,30 @@ NT_node seq2fastparttree_dnd ( Sequence *S)
   my_mkdir (dir);
   chdir (dir);
   output_fasta_seqS ("seq",S);
-  printf_system_direct ("mafft --retree 0 --treeout --fastparttree --reorder seq > aln %s",TO_NULL_DEVICE);
-  printf_system ("cp seq.tree %s/cedric", cdir);
-  fp=vfopen ("seq.tree", "a");
-  fprintf (fp, ";");
-  vfclose (fp);
-  
-  T=main_read_tree ("seq.tree");
-  T=indextree2nametree (S, T);
+  printf_system_direct ("mafft --anysymbol --retree 0 --treeout --fastparttree --reorder seq > aln %s",TO_NULL_DEVICE);
+  if (check_file_exists ("seq.tree"))
+    {
+    
+      fp=vfopen ("seq.tree", "a");
+      fprintf (fp, ";");
+      vfclose (fp);
+      T=main_read_tree ("seq.tree");
+      
+      T=indextree2nametree (S, T);
+    }
   chdir    (cdir);
   printf_system_direct ("rm %s/*", dir);
   my_rmdir (dir);
-  
   vfree (cdir);
   return T;
+  
 }
 
 NT_node seq2cw_dnd ( Sequence *S)
 {
   Alignment *A;
   int tot_node=0;
-  NT_node T;
+  NT_node T=NULL;
   char *dir =vtmpnam (NULL);
   char *cdir=get_pwd (NULL);
 
@@ -1843,13 +1857,19 @@ NT_node seq2cw_dnd ( Sequence *S)
   chdir (dir);
   output_fasta_seqS ("seq",S);
   printf_system_direct ("clustalw -infile=seq %s",TO_NULL_DEVICE);
-  T=main_read_tree ("seq.dnd");
+  if (check_file_exists ("seq.tree"))
+    {
+    
+      
+      T=main_read_tree ("seq.tree");
+    }
   chdir    (cdir);
   printf_system_direct ("rm %s/*", dir);
   my_rmdir (dir);
-  
   vfree (cdir);
   return T;
+
+
 }
 
 NT_node compute_cw_tree (Alignment *A)
@@ -1858,7 +1878,7 @@ NT_node compute_cw_tree (Alignment *A)
 }
 NT_node aln2cw_tree (Alignment *A)
 {
-  NT_node T;
+  NT_node T=NULL;
   char *dir =vtmpnam (NULL);
   char *cdir=get_pwd (NULL);
 
@@ -1866,12 +1886,13 @@ NT_node aln2cw_tree (Alignment *A)
   chdir (dir);
   output_fasta_aln ("aln", A);
   printf_system_direct ("clustalw -infile=aln -newtree=tree -tree %s",TO_NULL_DEVICE);
-  T=main_read_tree ("tree");
-
+  if (check_file_exists ("tree"))
+    {
+      T=main_read_tree ("tree");
+    }
   chdir    (cdir);
   printf_system_direct ("rm %s/*", dir);
   my_rmdir (dir);
-  
   vfree (cdir);
   return T;
 }

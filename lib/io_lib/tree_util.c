@@ -4458,6 +4458,7 @@ NT_node node2master(NT_node T, Sequence *S, float *w)
       //int i=name_is_in_list (T->name, S->name, S->nseq, MAXNAMES);
       int i=name_is_in_hlist (T->name, S->name, S->nseq);
       
+      if (i==-1)HERE ("Could Not Find %s in Tree", T->name);
             
       T->seq=i;
       T->score=w[i];

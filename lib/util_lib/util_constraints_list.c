@@ -6160,7 +6160,7 @@ char *** produce_method_file ( char *method)
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE msa.pl\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "DOC MSA [%s]\n", MSA_ADDRESS);
 	fprintf ( fp, "ALN_MODE   pairwise\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
@@ -6175,7 +6175,7 @@ char *** produce_method_file ( char *method)
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE msa.pl\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "DOC MSA [%s]\n", MSA_ADDRESS);
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
@@ -6193,7 +6193,7 @@ char *** produce_method_file ( char *method)
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE dca.pl\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", DCA_ADDRESS);
+	fprintf ( fp, "DOC DCA [%s]\n", DCA_ADDRESS);
 	fprintf ( fp, "ALN_MODE   pairwise\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
@@ -6208,7 +6208,7 @@ char *** produce_method_file ( char *method)
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE dca.pl\n");
-	fprintf ( fp, "DOC Mafft [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "DOC DCA [%s]\n", MSA_ADDRESS);
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
@@ -6232,6 +6232,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6248,6 +6249,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      \n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6265,6 +6267,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PARAM1 --parttree \n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6281,8 +6284,8 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PARAM1 --parttree \n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "PARAM      \n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6298,6 +6301,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6313,8 +6317,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "PARAM      \n");
+	
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6330,6 +6335,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6345,8 +6351,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "PARAM      \n");
+	
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6362,7 +6369,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
+	
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6377,8 +6386,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "PARAM      \n");
+	
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6394,7 +6404,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
+	
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6409,8 +6421,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "PARAM      \n");
+	
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6427,6 +6440,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6442,8 +6456,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "PARAM      \n");
+	
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6459,6 +6474,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6474,8 +6490,9 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
-	fprintf ( fp, "PARAM      \n");
+	
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
@@ -6491,6 +6508,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6506,6 +6524,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
+	fprintf ( fp, "PARAM1 --anysymbol \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "PARAM      \n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
@@ -6530,7 +6549,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --jtt 250 --localpair --maxiterate 1000 \n");
+	fprintf ( fp, "PARAM1 --anysymbol --jtt 250 --localpair --maxiterate 1000 \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6547,7 +6566,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
-	fprintf ( fp, "PARAM1 --jtt 250 --localpair --maxiterate 1000 \n");
+	fprintf ( fp, "PARAM1 --anysymbol --jtt 250 --localpair --maxiterate 1000 \n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
@@ -6561,7 +6580,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
 	fprintf ( fp, "ALN_MODE   pairwise\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "PARAM1 --globalpair --maxiterate 1000 \n");
+	fprintf ( fp, "PARAM1 --anysymbol --globalpair --maxiterate 1000 \n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
@@ -6577,7 +6596,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
-	fprintf ( fp, "PARAM1 --globalpair --maxiterate 1000 \n");
+	fprintf ( fp, "PARAM1 --anysymbol --globalpair --maxiterate 1000 \n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
