@@ -2636,7 +2636,7 @@ Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2,
       
       if (r1!=r2)
 	{
-	  HERE ("Oups %c %c ", r1, r2);
+	  HERE ("Oups %c %c should be the same ...", r1, r2);
 	  exit (0);
 	}
       
@@ -2649,7 +2649,7 @@ Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2,
       
       if ( strlen (R->seq_al[0])!=strlen (R->seq_al[1]))
 	{
-	HERE ("%d %d",strlen (R->seq_al[0]),strlen (R->seq_al[1]),R->seq_al[0], R->seq_al[1]); exit (0);
+	HERE ("oups these two length [%d %d] should be identical",strlen (R->seq_al[0]),strlen (R->seq_al[1]),R->seq_al[0], R->seq_al[1]); exit (0);
 	}
       
       free_aln (A);
@@ -2672,13 +2672,60 @@ Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2,
     }
   return R;
 }
+int strech_is_only_x (char *s);
+int strech_is_only_x (char *s)
+{
+  int ls, a;
+  if (!s)return 0;
+  
+  ls=strlen (s);
+  for (a=0; a<ls; a++)
+    {
+      if (s[a]=='x' || s[a]=='X');
+      else return 0;
+    }
+  return 1;
+}
 Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop, int gep, char *in_align_mode)
 {
   int ls0=strlen (s0);
   int ls1=strlen (s1);
+  int g;
+   int x0=strech_is_only_x(s0);
+  int x1=strech_is_only_x(s1);
   int a;
   
+  
+  
   if (!ls0 && !ls1)return NULL;
+  else if (x0 && x1 && ls0>ls1)
+    {
+      Alignment *A=declare_aln2 (2,ls0+1);
+      char *gap=generate_null (ls0-ls1);
+      A->seq_al[0]=csprintf  (A->seq_al[0], "%s", s0);
+      A->seq_al[1]=csprintf  (A->seq_al[1], "%s%s", s1,gap);
+      vfree (gap);
+      A->len_aln=ls0; A->nseq=2;
+      return A;
+    }
+  else if (x1 && x0 && ls0<ls1)
+    {
+      Alignment *A=declare_aln2 (2,ls1+1);
+      char *gap=generate_null (ls1-ls0);
+      A->seq_al[0]=csprintf  (A->seq_al[0], "%s%s", s0,gap);
+      A->seq_al[1]=csprintf  (A->seq_al[1], "%s", s1);
+      vfree (gap);
+      A->len_aln=ls1; A->nseq=2;
+      return A;
+    }
+  else if (x1 && x0 && ls0==ls1)
+    {
+      Alignment *A=declare_aln2 (2,ls1+1);
+      A->seq_al[0]=csprintf  (A->seq_al[0], "%s", s0);
+      A->seq_al[1]=csprintf  (A->seq_al[1], "%s", s1);
+      A->len_aln=ls0; A->nseq=2;
+      return A;
+    }
   else if (ls0 && ls1)
     {
       return align_two_sequences (s0, s1,"blosum62mt",-4,-1, "myers_miller_pair_wise");
@@ -2689,6 +2736,7 @@ Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop
       sprintf  (A->seq_al[0], "%s", s0);
       for (a=0; a<ls0; a++)A->seq_al[1][a]='-';
       A->seq_al[0][ls0]=A->seq_al[1][ls0]='\0';
+      A->len_aln=ls0; A->nseq=2;
       return A;
     }
   else
@@ -2697,6 +2745,7 @@ Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop
       sprintf ( A->seq_al[1], "%s", s1);
       for (a=0; a<ls1; a++)A->seq_al[0][a]='-';
       A->seq_al[0][ls1]=A->seq_al[1][ls1]='\0';
+      A->len_aln=ls1; A->nseq=2;
       return A;
     }
 }

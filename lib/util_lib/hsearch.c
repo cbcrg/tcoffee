@@ -19,9 +19,11 @@ HaschT * hcreate ( int n_elements,struct Hasch_data * declare_data(struct Hasch_
 	 
 	 T=(HaschT*)vcalloc ( 1, sizeof (HaschT));
 	 T->ne=n_elements;	 
+	
 	 T->p=(Hasch_entry**)vcalloc (n_elements,sizeof ( Hasch_entry*));
 	 for ( a=0; a<n_elements; a++)
 	   {
+	     HERE ("%d", a);
 	     T->p[a]=allocate_hasch_entry(NULL,DECLARE,declare_data, free_data);
 	   }
 	 return T;
@@ -323,7 +325,7 @@ hashtable_t *ht_create( int size ) {
 int ht_hash (hashtable_t *hashtable, char *key )
 {
   size_t i = 0;
-  uint32_t hash = 0;
+  unsigned long hash = 0;
   int length=strlen (key);
   while (i != length) {
     hash += key[i++];
@@ -471,7 +473,33 @@ int name_is_in_hlist (char *name, char **list, int n)
   else
     return -1;
 }
-
+char *check_hlist_for_dup (char **name, int n)
+{
+  hashtable_t *ht;
+  char *r;
+  char index[100];
+  int a;
+  char *dup=NULL;
+  
+  ht=ht_create (n);
+  
+  for (a=0;a<n; a++)
+    {
+      
+      if ((r=ht_get(ht, name[a]))!=NULL)
+	{
+	  dup=strcatf (dup, " --- Duplicated Sequence: %s\n", name[a]);
+	}
+      else
+	{
+	  sprintf (index, "%d", a);
+	  ht_set (ht,name[a], index);
+	}
+    }
+  ht_destroy(ht);
+  return dup;
+}
+  
 
 int old_main( int argc, char **argv ) {
 

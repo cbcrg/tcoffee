@@ -1243,6 +1243,7 @@ Sequence  * quick_read_seq ( char *file)
       char **seq;
       char **comment;
       char **name;
+      char *dup;
       int a;
       int nseq=read_nameseq(file, &name, &seq, &comment);
       Sequence *S=declare_sequence(1,1,nseq);
@@ -1259,6 +1260,14 @@ Sequence  * quick_read_seq ( char *file)
 	  if (S->min_len==-1 || S->min_len <S->len[a])S->min_len=S->len[a];
 	  if (S->max_len==-1 || S->min_len >S->len[a])S->max_len=S->len[a];
 	}
+      
+      if ( (dup=check_hlist_for_dup( S->name, S->nseq)))
+	{
+	  fprintf ( stderr, "ERROR -- Duplicated Sequences %s", dup);
+	  myexit(fprintf_error (stderr,"ERROR - quick_read_seq: duplicated sequence in %s  ", file));
+	}
+      
+      return S;
     }
 }
 Alignment * quick_read_aln ( char *file)
@@ -1280,6 +1289,7 @@ Alignment * quick_read_aln ( char *file)
       char **comment;
       char **name;
       int a;
+      char *dup;
       int nseq=read_nameseq(file, &name, &seq, &comment);
       
       Alignment *A=declare_aln2(nseq,1);
@@ -1294,6 +1304,11 @@ Alignment * quick_read_aln ( char *file)
       
       A->declared_len=A->len_aln=strlen (A->seq_al[0]);
       
+      if ( (dup=check_hlist_for_dup( A->name, A->nseq)))
+	{
+	  fprintf ( stderr, "ERROR -- Duplicated Sequences %s", dup);
+	  myexit(fprintf_error (stderr,"ERROR - quick_read_aln: duplicated sequence in File %s  ", file));
+	}
       return A;
     }
 }
@@ -1345,7 +1360,7 @@ int read_nameseq (char *file,char ***nam, char ***seq, char ***com)
 Alignment * main_read_aln ( char *name, Alignment *A)
        {
        int a;
-       
+       char *dup;
        static char *format;
        Sequence *S=NULL;
        Sequence *IN_SEQ;
@@ -1427,10 +1442,10 @@ Alignment * main_read_aln ( char *name, Alignment *A)
 	  }
 
        
-       if ( check_list_for_dup( A->name, A->nseq))
+       if ( (dup=check_hlist_for_dup( A->name, A->nseq)))
           {
-	      fprintf ( stderr, "\nWARNING (main_read_aln): %s is duplicated in File %s ", check_list_for_dup( A->name, A->nseq), A->file[0]);
-	      A=aln2unique_name_aln(A);
+	    fprintf ( stderr, "ERROR -- Duplicated Sequences %s", dup);
+	    myexit(fprintf_error (stderr,"ERROR - (main_read_aln): duplicated sequence in File %s ", A->file[0]));
 	  }
 	 if (IN_SEQ)A->S=IN_SEQ;
 	 else if (!A->S){A->S=aln2seq(A);}

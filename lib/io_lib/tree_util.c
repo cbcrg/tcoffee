@@ -4981,6 +4981,9 @@ NT_node file2tree (char *fname)
   NT_node R,T,N;
   int c, lastc; 
   char *tmp=vtmpnam (NULL);
+  char **nl=NULL;
+  int  nn=0;
+  char *dup=NULL;
   
   if (!fname || !check_file_exists (fname))return NULL;
   fp=vfopen (remove_charset_from_file (fname, " \t\n\r"), "r");
@@ -5041,6 +5044,9 @@ NT_node file2tree (char *fname)
 	  	  
 	  ungetc (c, fp);
 	  scan_name_and_dist (fp, T->name, &T->dist);
+	  nl=(char**)vrealloc (nl, (nn+1)*sizeof (char*));
+	  
+	  nl[nn++]=T->name;
 	  T->leaf=1;
 	  T->isseq=1;
 	  lastc=0;
@@ -5048,12 +5054,24 @@ NT_node file2tree (char *fname)
     }
   T=T->parent;
   vfclose (fp);
+  
   if (R!=T)
     {
       HERE ("Parsing Error\n");
     }
   
-  if (!T->right && T->left)T=T->left;
+  if ( (dup=check_hlist_for_dup(nl,nn)))
+	{
+	  fprintf ( stderr, "ERROR -- Duplicated Sequences %s", dup);
+	  myexit(fprintf_error (stderr,"ERROR - file2tree: %s is duplicated in %s  ", fname));
+	}
+ 
+  else
+    {
+      vfree (nl);
+    }
+  
+ if (!T->right && T->left)T=T->left;
   else if (T->right && !T->left)T=T->right;
   T->parent=NULL;
       

@@ -795,7 +795,7 @@ int name_is_in_list ( const char name_in[], char **name_list, int n_name, int le
 char * check_list_for_dup ( char **list, int ne)
         {
 	int a, b;
-
+	
 	for ( a=0; a< ne-1; a++)
 	    for ( b=a+1; b< ne; b++)if (strm ( list[a], list[b]))return list[a];
 	return NULL;

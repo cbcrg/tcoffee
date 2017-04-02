@@ -4907,9 +4907,10 @@ Sequence * merge_seq( Sequence *IN, Sequence *OUT)
 	  }
 	else
 	  {
-	    if ( IN && check_list_for_dup( IN->name, IN->nseq))
+	    char *dup;
+	    if ( IN && (dup=check_hlist_for_dup( IN->name, IN->nseq)))
 	      {
-		fprintf ( stderr, "\nERROR: %s is duplicated in file %s[FATAL]\n", check_list_for_dup( IN->name, IN->nseq), IN->file[0]);
+		fprintf ( stderr, "\nERROR: %s is duplicated in file %s[FATAL]\n", dup, IN->file[0]);
 		myexit (EXIT_FAILURE);
 	      }
 	    for ( a=0; a< IN->nseq; a++)

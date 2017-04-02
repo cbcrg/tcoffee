@@ -6969,7 +6969,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
       if      (strm (argv[a], "-seq" ))
 	{
 	  seqfile=argv[++a];
-	  S=main_read_seq (seqfile);
+	  S=quick_read_seq (seqfile);
 	}
       
       else if (strm (argv[a],"-dpa_tree"))
