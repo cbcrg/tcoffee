@@ -29,6 +29,8 @@ NT_node   seq2km_dnd (Sequence *S);
 NT_node   seq2co_dnd (Sequence *S);
 NT_node   seq2cw_dnd ( Sequence *S);
 NT_node   seq2parttree_dnd ( Sequence *S);
+NT_node   seq2mafft_dnd ( Sequence *S);
+
 NT_node   seq2dpparttree_dnd ( Sequence *S);
 NT_node   seq2fastparttree_dnd ( Sequence *S);
 NT_node   seq2cw_tree ( Sequence *S);
