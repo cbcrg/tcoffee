@@ -240,6 +240,8 @@ NT_node ** make_nj_tree (  Alignment *A,int **distances,int gop, int gep, char *
     return int_dist2nj_tree (distances,out_seq_name, out_nseq,tree_file);
   }
 
+
+
 NT_node ** int_dist2nj_tree (int **distances, char **out_seq_name, int out_nseq,  char *tree_file) 
         {
 	  int a, b;
@@ -1721,7 +1723,6 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     }
   else if (strm (dpa_tree, "dpparttree"))
     {
-      exit (0);
       T=seq2dpparttree_dnd (S);
     }
   else if (strm (dpa_tree, "fastparttree"))
@@ -1732,7 +1733,21 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
     {
       T=seq2mafft_dnd (S);
     }
-  
+  else if ( strm (dpa_tree, "upgma"))
+    {
+      
+      int **s=array2sim(S->seq, S->nseq, "ktup3");
+      T=int_dist2upgma_tree_new(s, S->name,S->nseq);
+      free_int (s, -1);
+    }
+  else if ( strm (dpa_tree, "nj"))
+    {
+      char *tfile=vtmpnam (NULL);
+      int **s=array2sim(S->seq, S->nseq, "ktup3");
+      int_dist2nj_tree (s, S->name, S->nseq, tfile);
+      free_int (s, -1);
+      T=main_read_tree (tfile);
+    }
   else if ( dpa_tree[0]=='#')
     {
       char *seqf=vtmpnam (NULL);
@@ -2240,6 +2255,38 @@ NT_node **     dist2upgma_tree (double **imat, char **name, int nseq, char *fnam
   free_int (mat, -1);
   
   return read_tree (fname,&tot_node,nseq, name);
+}
+
+NT_node int_dist2upgma_tree_new (int    **mat,char **name, int nseq)
+{
+  NT_node *NL, T;
+  int a, n, *used;
+  int tot_node;
+  if (upgma_node_heap (NULL))
+    {
+      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: non empty heap in upgma [FATAL]");
+    }
+  NL=(NT_node*)vcalloc (nseq, sizeof (NT_node));
+  
+  for (a=0; a<nseq; a++)
+    {
+      NL[a]=new_declare_tree_node ();
+      upgma_node_heap (NL[a]);
+      sprintf (NL[a]->name, "%s", name[a]);
+      NL[a]->isseq=1;
+      NL[a]->leaf=1;
+    }
+    
+  used=(int*)vcalloc (nseq, sizeof (int));
+  n=nseq;
+  while (n>1)
+    {
+      T=upgma_merge (mat, NL,used, &n,nseq);
+    }    
+  
+  vfree (used);
+  upgma_node_heap (NULL);
+  return T;
 }
 NT_node ** int_dist2upgma_tree (int    **mat, Alignment *A, int nseq, char *fname)
 {

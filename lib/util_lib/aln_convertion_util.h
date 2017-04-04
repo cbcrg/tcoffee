@@ -397,6 +397,7 @@ int ** aln2sim_mat    (Alignment *A, char *mode);
 int **aln2cov (Alignment *A);
 int ** get_dist_aln_array ( Alignment *A, char *mode);
 int ** get_raw_sim_aln_array ( Alignment *A, char *mode);
+int ** array2sim (char **array, int n, char *mode);
 int ** get_sim_aln_array ( Alignment *A, char *mode);
 int generic_get_seq_sim  ( char *seq1, char *seq2, int *cache, char *mode);
 Alignment * grep_seq (Alignment *S,char *field, char *mode, char *string);

@@ -9345,6 +9345,24 @@ int ** get_raw_sim_aln_array (Alignment *A, char *mode)
   free_int (M, -1);
   return w;
 }
+int ** array2sim (char **seq_al,int nseq, char *mode)
+	{
+	int **w;
+	int a, b;
+
+	
+	w=declare_int ( nseq, nseq);
+	
+	for ( a=0; a<nseq-1; a++)
+	  {
+	    for ( b=a+1; b<nseq; b++)
+	      {
+
+		w[a][b]=w[b][a]=generic_get_seq_sim ( seq_al[a], seq_al[b],NULL, mode);
+	      }
+	  }
+	return w;
+	}
 int ** get_sim_aln_array ( Alignment *A, char *mode)
 	{
 	int **w;

@@ -11601,7 +11601,10 @@ void modify_data  (Sequence_data_struc *D1in, Sequence_data_struc *D2in, Sequenc
 	 {
 	   D1->T=reset_dist_tree ( D1->T, (n_actions>=2)?atof(action_list[1]):0.00);
 	 }
-
+       else if ( strm(action, "seq2dnd"))
+	 {
+	   D1->T=seq2dnd (D1->S, ACTION(1));
+	 }
        else if ( strm(action, "aln2tree"))
 	 {
 	   D1->T=tree_compute (D1->A, n_actions-1, action_list+1);
