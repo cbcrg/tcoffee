@@ -1070,7 +1070,7 @@ char* method_name2method_file (char *method)
 
 	if ( (p=strstr (method, "@"))!=NULL && !strstr (method, "em@"))p[0]='\0';
 	mlist=produce_method_file (method);
-
+	
 
 
 	a=0;
@@ -5318,10 +5318,12 @@ char *** produce_method_file ( char *method)
 	int n=0, a;
 	FILE *fp;
 
+	
+	
 	if (!list)
 
 	  {
-	    list=(char***)declare_arrayN(3, sizeof (char),1000,2,vtmpnam_size());
+	    list=(char***)declare_arrayN(3, sizeof (char),1000,2,vtmpnam_size()+1);
 	  }
 
 	/*
@@ -6357,6 +6359,7 @@ char *** produce_method_file ( char *method)
 	vfclose (fp);}
 
 	//ginsi
+	
 	sprintf (list[n][0], "mafftginsi_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
@@ -6372,9 +6375,11 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
 	vfclose (fp);}
+	
 
-	sprintf (list[n][0], "maffginsi_msa");
+	sprintf (list[n][0], "mafftginsi_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
+
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE mafft-ginsi\n");
 	fprintf ( fp, "DOC Mafft [%s]\n", MAFFT_ADDRESS);
@@ -6408,7 +6413,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
 	vfclose (fp);}
 
-	sprintf (list[n][0], "maffeinsi_msa");
+	sprintf (list[n][0], "maffteinsi_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE mafft-einsi\n");
@@ -6603,6 +6608,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
 	vfclose (fp);}
+	
 
 	sprintf (list[n][0], "mafftgins_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
@@ -6635,6 +6641,7 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "ADDRESS    %s\n", MAFFT_ADDRESS);
 	fprintf ( fp, "PROGRAM    %s\n", MAFFT_4_TCOFFEE);
 	vfclose (fp);}
+
 
 	sprintf (list[n][0], "dialigntx_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
