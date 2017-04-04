@@ -1773,6 +1773,7 @@ NT_node seq2mafft_dnd ( Sequence *S)
       fprintf (fp, ";");
       vfclose (fp);
       T=main_read_tree ("seq.tree");
+      T=indextree2nametree (S, T);
     }
   chdir    (cdir);
   printf_system_direct ("rm %s/*", dir);

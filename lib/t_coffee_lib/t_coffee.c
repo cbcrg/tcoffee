@@ -7034,9 +7034,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //prepare the guide tree
   fprintf ( stderr, "Compute Guide Tree -- ");
   if (usetree){dpa_tree=usetree;}
-  if (dpa_tree){T=seq2dnd (S, dpa_tree);fprintf ( stderr, " dpa_tree %s\n", dpa_tree);}
-  else {T=seq2dnd (S, "kmdnd");fprintf ( stderr, " default kmdnd\n");}
+  if (!dpa_tree)dpa_tree="kmdnd";
+  T=seq2dnd (S, dpa_tree);fprintf ( stderr, " dpa_tree %s\n", dpa_tree);
   
+
   if (dpa_tree && check_file_exists (dpa_tree))output_dpa_tree=0;
   else output_dpa_tree=1;
   
