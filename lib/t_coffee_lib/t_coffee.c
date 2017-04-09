@@ -6984,6 +6984,10 @@ Alignment * t_coffee_dpa (int argc, char **argv)
 	{
 	  dpa_weight=argv[++a];
 	}
+      else if (strm (argv[a],"-dpa_thread"))
+	{
+	  set_nproc (atoi (argv[++a]));
+	}
       else if (strm (argv[a],"-dpa"));
       else if (strm (argv[a],"-usetree"))
 	{
@@ -7022,7 +7026,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //prepare the aligner CL
   if (dpa_aligner)
     {
-      add_warning (stderr, "-dpa_method flag used -- [%s] Will be used instead of [%s]",dpa_aligner, command+1);
+      //add_warning (stderr, "-dpa_method flag used -- [%s] Will be used instead of [%s]",dpa_aligner, command+1);
       command=(char*)vcalloc (10000, sizeof (char));
       sprintf ( command, "%s", dpa_aligner);
     }
@@ -7056,7 +7060,8 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //run the alignment
   fprintf (stderr, "Compute MSA -- dp_method %s -- dpa_n %d -- start\n", command, dpa_nseq);
   T=node2master (T, S, w);
-  alnfile=tree2bucket (T,S,dpa_nseq,command);
+  //alnfile=tree2bucket (T,S,dpa_nseq,command);
+  alnfile=tree2msa4dpa(T, S, dpa_nseq, command);
   fprintf ( stderr, "Compute MSA --- done\n");
   
   //figure out the name

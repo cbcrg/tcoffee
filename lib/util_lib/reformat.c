@@ -965,6 +965,14 @@ Sequence_data_struc *read_data_structure ( char *in_format, char *in_file,	Actio
 	  {
 	    D->T=quick_read_tree (in_file);
 	  }
+	else if (strm (in_format, "mafft_newick_tree"))
+	  {
+	   
+	    D->T=main_read_tree (in_file);
+	    D->T=indextree2nametree (D->S, D->T);
+	    //D->S=tree2seq(D->T, NULL);
+	    D->A=seq2aln (D->S,D->A, 0);
+	  }
 	else if (strm4 (in_format, "newick_tree", "newick", "nh", "new_hampshire"))
 	  {
 	   
@@ -1240,9 +1248,9 @@ Sequence  * quick_read_seq ( char *file)
   
   if (file)
     {
-      char **seq;
-      char **comment;
-      char **name;
+      char **seq=NULL;
+      char **comment=NULL;
+      char **name=NULL;
       char *dup;
       int a;
       int nseq=read_nameseq(file, &name, &seq, &comment);
@@ -1285,9 +1293,9 @@ Alignment * quick_read_aln ( char *file)
   file=tmp_name;
   if (file)
     {
-      char **seq;
-      char **comment;
-      char **name;
+      char **seq=NULL;
+      char **comment=NULL;
+      char **name=NULL;
       int a;
       char *dup;
       int nseq=read_nameseq(file, &name, &seq, &comment);
@@ -1312,6 +1320,7 @@ Alignment * quick_read_aln ( char *file)
       return A;
     }
 }
+
 int read_nameseq (char *file,char ***nam, char ***seq, char ***com)
 {
   if (!file || !check_file_exists (file))return 0;
@@ -1327,24 +1336,69 @@ int read_nameseq (char *file,char ***nam, char ***seq, char ***com)
       fscanf (fp, "#NAMESEQ_01\n");
       fscanf (fp, "# %d\n", &nseq);
       
-      seq[0]=(char **)vcalloc (nseq, sizeof (char*));
-      nam[0]=(char **)vcalloc (nseq, sizeof (char*));
-      com[0]=(char **)vcalloc (nseq, sizeof (char*));
+      seq[0]=(char **)vrealloc (seq[0],nseq*sizeof (char*));
+      nam[0]=(char **)vrealloc (nam[0],nseq*sizeof (char*));
+      com[0]=(char **)vrealloc (com[0],nseq*sizeof (char*));
       nseq=0;
       while ((c=fgetc(fp))!=EOF)
 	{
 	  if (c=='>')
 	    {
 	      fscanf (fp, "%d %d ", &l1, &l2);
-	      nam[0][nseq]=(char*)vcalloc  (l1+1, sizeof (char));
-	      seq[0][nseq]=(char*)vcalloc(l2+1, sizeof (char));
+	      nam[0][nseq]=(char*)vrealloc_nomemset  (nam [0][nseq],(l1+1)* sizeof (char));
+	      seq[0][nseq]=(char*)vrealloc_nomemset  (seq [0][nseq],(l2+1)* sizeof (char));
 	      fscanf (fp, "%s %s\n", nam[0][nseq], seq[0][nseq]);
 	      nseq++;
 	    }
 	  else if (c=='#')
 	    {
 	       fscanf (fp, "%d ", &l1);
-	       com[0][nseq]=(char*)vcalloc  (l1+1, sizeof (char));
+	       com[0][nseq]=(char*)vrealloc_nomemset  (com[0][nseq], (l1+1)*sizeof (char));
+	       fgets (com[0][nseq],l1, fp);
+	       c=fgetc(fp);
+	    }
+	}
+      vfclose (fp);
+      return nseq;
+    }
+  
+}
+
+
+
+int read_nameseq_old (char *file,char ***nam, char ***seq, char ***com)
+{
+  if (!file || !check_file_exists (file))return 0;
+  else
+    {
+      int nseq, len, l1, l2;
+      char c;
+      FILE *fp=vfopen (file, "r");
+      char buf[100];
+      Sequence *A;
+      int a;
+      nseq=0;
+      fscanf (fp, "#NAMESEQ_01\n");
+      fscanf (fp, "# %d\n", &nseq);
+      
+      seq[0]=(char **)vmalloc (nseq*sizeof (char*));
+      nam[0]=(char **)vmalloc (nseq*sizeof (char*));
+      com[0]=(char **)vmalloc (nseq*sizeof (char*));
+      nseq=0;
+      while ((c=fgetc(fp))!=EOF)
+	{
+	  if (c=='>')
+	    {
+	      fscanf (fp, "%d %d ", &l1, &l2);
+	      nam[0][nseq]=(char*)vmalloc  ((l1+1)*sizeof (char));
+	      seq[0][nseq]=(char*)vmalloc((l2+1)*sizeof (char));
+	      fscanf (fp, "%s %s\n", nam[0][nseq], seq[0][nseq]);
+	      nseq++;
+	    }
+	  else if (c=='#')
+	    {
+	       fscanf (fp, "%d ", &l1);
+	       com[0][nseq]=(char*)vmalloc  ((l1+1)* sizeof (char));
 	       fgets (com[0][nseq],l1, fp);
 	       c=fgetc(fp);
 	    }
@@ -1515,6 +1569,7 @@ char * identify_seq_format ( char *file)
 	 else if ( is_lib_02 (file))sprintf ( format, "tc_lib_02");
 	 else if ( is_treelist (file))sprintf ( format, "treelist");
 	 else if ( is_newick(file))sprintf ( format, "newick_tree");
+	 else if ( is_mafft_newick(file))sprintf ( format, "mafft_newick_tree");
          else if ( is_nexus (file))sprintf ( format, "nexus");
        
        
@@ -2042,7 +2097,44 @@ int is_treelist (char *name)
   if (n>1) return 1;
   return 0;
 }
+ int is_mafft_newick (char *name)
+   {
+     int c, pc;
+     FILE *fp;
+
+     
+     fp=vfopen (name, "r");
+     c=fgetc(fp);
+     if (c!='('){vfclose (fp); return 0;}
+     while ((c=fgetc(fp))!=EOF)
+       {
+	 
+	 pc=(c=='\n' || c==' ' || c== '\t')?pc:c;
+       }
+     vfclose (fp);
+     HERE ("PC=%c", pc);
+     if (pc==';')return 0;
+     else return 1;
+   }
 int is_newick (char *name)
+   {
+     int c, pc;
+     FILE *fp;
+
+     
+     fp=vfopen (name, "r");
+     c=fgetc(fp);
+     if (c!='('){vfclose (fp); return 0;}
+     while ((c=fgetc(fp))!=EOF)
+       {
+	 pc=(c=='\n' || c==' ' || c== '\t')?pc:c;
+       }
+     vfclose (fp);
+     if (pc==';')return 1;
+     else return 0;
+   }
+
+int is_newick_old (char *name)
    {
      int c;
      FILE *fp;

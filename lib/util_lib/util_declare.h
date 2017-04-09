@@ -87,6 +87,7 @@ void * vcalloc_nomemset ( size_t nobj, size_t size);
 void * sub_vcalloc ( size_t nobj, size_t size, int MODE);
 
 void * vrealloc ( void *p, size_t size);
+void * vrealloc_nomemset ( void *p, size_t size);
 void   vfree2 ( void **p);
 void   vfree ( void *p);
 void * free_arrayN (void *p, int ndim);

@@ -13903,7 +13903,7 @@ char *msa2master_seq (Alignment *A, int seq)
   
   return master;
 }
-int thread_msa2msa(char *small, char *big, char *seq)
+int thread_msa2msa_old(char *small, char *big, char *seq)
 {
   //incorporate small into Big
     
@@ -13915,6 +13915,9 @@ int thread_msa2msa(char *small, char *big, char *seq)
   Alignment *M;
   char *sseq, *bseq;
   int Si, Bi;
+  
+  if (!S) printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Could not Read %s [FATAL]",small);
+  if (!B) printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Could not Read %s [FATAL]",big);
   
   if ((Si=name_is_in_list (seq, S->name, S->nseq, MAXNAMES+1))==-1)
     {
@@ -13968,3 +13971,63 @@ void add_msa (Alignment *A,int seq, char *lu, char *file, char *mode)
   return;
 }
 
+int thread_msa2msa(char *small, char *big, char *seq)
+{
+  //incorporate small into Big
+  Alignment *M;
+  char *sseq, *bseq;
+  int Si, Bi;
+  static char **name0=NULL;
+  static char **seq0=NULL;
+  static char **com0=NULL;
+
+  static char **name1=NULL;
+  static char **seq1=NULL;
+  static char **com1=NULL;
+  
+  static char *smallT=vtmpnam (NULL);
+  static char *bigT=vtmpnam (NULL);
+  
+  static Alignment *S=declare_aln2 (1,1);
+  static Alignment *B=declare_aln2 (1,1);
+    
+
+  printf_system ( "seq2name_seq.pl %s > %s",small, smallT);
+  S->nseq=read_nameseq(smallT, &name0, &seq0, &com0);
+  S->name=name0;
+  S->seq_al=seq0;
+  S->len_aln=strlen (S->seq_al[0]);
+  
+  printf_system ( "seq2name_seq.pl %s > %s",big, bigT);
+  B->nseq=read_nameseq(bigT, &name1, &seq1, &com1);
+  B->name=name1;
+  B->seq_al=seq1;
+  B->len_aln=strlen (B->seq_al[0]);
+    
+
+
+  if ((Si=name_is_in_list (seq, S->name, S->nseq, MAXNAMES+1))==-1)
+    {
+      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, small );
+    }
+  if ((Bi=name_is_in_list (seq, B->name, B->nseq, MAXNAMES+1))==-1)
+    {
+      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, big );
+    }
+  
+  sseq=msa2master_seq (S, Si);
+  bseq=msa2master_seq (B, Bi);
+  
+  
+  M=align_two_sequences4dpa (sseq,S->seq_al[Si],bseq,B->seq_al[Bi],"blosum62mt",-4,-1, "myers_miller_pair_wise");
+  
+
+  
+  add_msa (S,-1,M->seq_al[0],big, "w");
+  add_msa (B,Bi,M->seq_al[1],big, "a");
+  
+  
+  free_aln (M);
+  vfree (sseq);vfree (bseq);
+  return 1;
+}

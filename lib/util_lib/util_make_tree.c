@@ -1755,13 +1755,16 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
       printf_system ("%s %s >%s", dpa_tree+1, seqf, tf);
       return seq2dnd(S,tf);
     }
-  else if (!(T=file2tree (dpa_tree)))
+  else if ((T=file2tree (dpa_tree)))
+    {
+      if (is_mafft_newick (dpa_tree))
+	T=indextree2nametree (S, T);
+    }
+  else
     myexit (fprintf_error (stderr, "%s is neither a file nor a valid dpa_tree mode [FATAL:%s]", dpa_tree,PROGRAM));
-  //else if (!(T=main_read_tree (dpa_tree)))
-  //myexit (fprintf_error (stderr, "%s is neither a file nor a valid dpa_tree mode [FATAL:%s]", dpa_tree,PROGRAM));
-  
+    
   if (!T)
-    myexit (fprintf_error ( stderr, "\nCould not produce %s tree [FATAL:%s]", dpa_tree, PROGRAM));
+    myexit (fprintf_error ( stderr, "\nCould not produce/read %s tree [FATAL:%s]", dpa_tree, PROGRAM));
 
   
   return T;

@@ -94,6 +94,8 @@ int is_lib_list ( char *name);
 int is_single_seq_weight_file (char *fname);
 int is_treelist(char *name);
 int is_newick  (char *name);
+int is_mafft_newick  (char *name);
+int is_mafft_newick  (char *name);
 int is_nexus (char *file);
 int is_nameseq (char *file);
 int is_method ( char *file);

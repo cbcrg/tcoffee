@@ -4509,6 +4509,8 @@ NT_node node2master(NT_node T, Sequence *S, float *w)
   return T;
 }
 
+
+
 char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, char *name2);
 static int *lu4t2b;
 static int lun4t2b;
@@ -4553,6 +4555,7 @@ NT_node * sort_nodelist4dpa (NT_node *L, int n)
   free_float (lu, -1);
   return NL;
 }
+
 
 char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, char *name2)
 {
@@ -4628,6 +4631,7 @@ char* tree2bucketR (NT_node T, Sequence *S, int N, char *method, char *name, cha
   else
     {
       seq_file2msa_file (method,seq, name);
+      
       if (debug)
 	{
 	  HERE ("\n------> %s\n", name2);
@@ -7324,5 +7328,258 @@ NT_node nni (NT_node S, int n)
 
   return S;
 }
+////////////////////////////////////// Paralel DPA
 
+char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
+{
+  int n=0;
+  int cn=0;
+  KT_node K =tree2ktree  (T, S, N);
+  KT_node*KL=(KT_node*)vcalloc (K->tot, sizeof (KT_node));
+  n=ktree2klist(K,KL,&n);
+  kseq2kmsa(KL,n, method);
+
+  kmsa2msa (K,n,&cn);
   
+  return K->msaF;
+  
+}
+
+
+    
+int ktree2klist (KT_node K, KT_node *KL, int *n)
+{
+  int a;
+  if (!K) return n[0];
+  KL[n[0]++]=K;
+  for (a=0; a<K->nc; a++)
+    {
+      ktree2klist (K->child[a],KL,n);
+    }
+  return n[0];
+}
+  
+KT_node tree2ktree (NT_node T,Sequence *S, int N)
+{
+  NT_node *CL, *NL;
+  KT_node K;
+  int left, right, nc,nn, a,terminal;
+  FILE *fp;
+  
+  
+  if (!T)return NULL;
+  T->leaf=0;
+  //Make sure the node content is declared
+  K=(KT_node)vcalloc (1, sizeof (KTreenode));
+  
+  CL=(NT_node*)vcalloc (1, sizeof (NT_node));
+  nc=0;CL[nc++]=T;
+  
+  terminal=0;
+  while (nc<N && !terminal)
+    {
+      
+      nn=0;
+      terminal=1;
+      NL=(NT_node*)vcalloc (nc*2, sizeof (NT_node));
+      CL=sort_nodelist4dpa (CL, nc);
+
+      for (left=0; left<nc && (nn+(nc-left))<N; left++)
+	{
+	  
+	  NT_node N=CL[left];
+	  if (N->isseq){NL[nn++]=N; T->leaf++;}
+	  else
+	    {
+	      NL[nn++]=N->right;
+	      NL[nn++]=N->left;
+	      terminal=0;
+	      T->leaf+=2;
+	    }
+	}
+      for (a=left; a<nc; a++)
+	{
+	  NL[nn++]=CL[a];
+	  if (!CL[a]->isseq)terminal=0;
+	  T->leaf++;
+	}
+      
+      vfree (CL);
+      CL=NL;
+      nc=nn;
+    }
+  K->nseq =nc;
+  K->seqF =vtmpnam(NULL);
+  K->msaF =vtmpnam(NULL);
+
+  fp=vfopen (K->seqF, "w");
+  for (a=0; a<nc; a++)
+    {
+      int s=CL[a]->seq;
+      fprintf (fp, ">%s\n%s\n", S->name[s],S->seq[s]);
+    }
+  vfclose (fp);
+  
+  
+  K->child=(KT_node*)vcalloc (nc, sizeof (KT_node));
+  K->tot=0;
+  
+  for (a=0; a<nc; a++)
+    {
+      if (!CL[a]->isseq)
+	{
+	  K->child[K->nc]=tree2ktree (CL[a],S, N);
+	  (K->child[K->nc])->name=(CL[a])->name;
+	  K->tot+=(K->child[K->nc])->tot;
+	  K->nc++;
+	}
+      else
+	{
+	  K->tot++;
+	}
+    }
+  vfree (CL);
+  return K;
+}
+
+
+int kseq2kmsa_serial   (KT_node *K, int n, char *method)
+{
+  int a;
+
+  for (a=0; a<n; a++)
+    {
+      if (K[a]->nseq==1)
+	{
+	  printf_system ("cp %s %s", K[a]->seqF, K[a]->msaF);
+	}
+      else
+	{
+	  seq_file2msa_file (method,K[a]->seqF, K[a]->msaF);
+	}
+    }
+  return 1;
+}
+
+int kseq2kmsa   (KT_node *K, int n, char *method)
+{
+  int nproc=get_nproc();
+  
+  int * njobs;
+  KT_node **KL;
+  int npid;
+  int failed=0;
+  int a, b;
+  
+  //split the jobs
+  KL=(KT_node**)vcalloc(nproc+1, sizeof (KT_node*));
+  for (b=0; b<nproc; b++)
+    KL[b]=(KT_node*)vcalloc ((n/nproc)+5,sizeof (KT_node)); 
+  
+  njobs=(int*)vcalloc (nproc, sizeof (int));
+  for (a=0, b=0; a<n; a++, b++)
+    {
+      if (b==nproc)b=0;
+      KL[b][njobs[b]++]=K[a];
+    }
+  
+  //deploy the jobs
+  a=0;
+  while (KL[a]) 
+    {
+      if (vvfork(NULL)==0)//child process
+	{
+	  int b=0;
+	  
+	  while (KL[a][b])
+	    {
+	      KT_node K=KL[a][b];
+	      initiate_vtmpnam(NULL);//make sure existing tmp are not deleted when exiting.
+	      if (K->nseq==1)
+		{
+		  printf_system ("cp %s %s", K->seqF, K->msaF);
+		}
+	      else
+		{
+		  seq_file2msa_file (method,K->seqF, K->msaF);
+		}
+	      if ( a==0)
+		output_completion (stderr, b, njobs[0], 100, method);
+	      b++;
+	    }
+	  myexit (EXIT_SUCCESS);
+	}
+      else
+	{
+	  a++;
+	}
+    }
+  
+  //collect the jobs
+  for (a=0; a<nproc; a++)
+    {
+      vwait(NULL);
+      output_completion (stderr, a, nproc, 100, "collecting Threads");
+    }
+  
+  for ( a=0; a<n; a++)failed+=(check_file_exists (K[a]->msaF))?0:1;
+  if (failed>0)
+    printf_exit ( EXIT_FAILURE,stderr, "\nERROR: method %s failed to produce %d out of %d node alignments [FATAL]", method, failed, n);
+  else
+    fprintf (stderr, "\n! All Jobs collected\n");
+  
+  vfree (njobs);
+  for (a=0; a<nproc; a++)vfree (KL[a]);
+  vfree (KL);
+  
+  return n;
+}
+char* kmsa2msa_serial (KT_node K, int max, int *cn);
+char* kmsa2msa_serial (KT_node K, int max, int *cn)
+{
+  int a;
+  if (!K) return NULL;
+  
+  for (a=0; a<K->nc; a++)
+    {
+      
+      kmsa2msa_serial (K->child[a], max, cn);
+      cn[0]++;
+      //output_completion (stderr,cn[0],max, 100, "thread\n");
+      
+      thread_msa2msa ((K->child[a])->msaF, K->msaF, (K->child[a])->name);
+    }
+return K->msaF;
+}
+char * kmsa2msa   (KT_node K, int max, int *cn)
+{
+  int nproc=get_nproc();
+  int a, b, c;
+  for (a=0; a<K->nc;)
+    {
+      for (b=0; b<nproc && a<K->nc;)
+	{
+	  output_completion (stderr,a,K->nc, 100, "thread the MSAs");
+	  if (vvfork(NULL)==0)//child process
+	    {
+	      initiate_vtmpnam(NULL);
+	      kmsa2msa_serial (K->child[a], max, cn);
+	      myexit (EXIT_SUCCESS);
+	    }
+	  else
+	    {
+	      a++;
+	      b++;
+	    }
+	  
+	}
+      for (c=0; c<b; c++)vwait(NULL);
+    }
+  for (a=0; a<K->nc;a++)
+    {
+      output_completion (stderr,a,K->nc, 100, "thread the final MSA");
+      thread_msa2msa ((K->child[a])->msaF, K->msaF, (K->child[a])->name);
+    }
+    
+  return K->msaF;
+}

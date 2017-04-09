@@ -1,7 +1,19 @@
 #ifndef TREE_UTIL_H
 #define TREE_UTIL_H
 
-
+typedef struct ktnode *KT_node;
+typedef struct ktnode
+{
+  int nc; //number child
+  int tot;//number of descendent
+  KT_node *child;
+  int nseq;
+  char *name;//master sequence
+  char *seqF;//sequence File
+  char *msaF;//msa File
+  
+  KT_node parent;
+}KTreenode;
 
 typedef struct treesim{
   float w;
@@ -309,4 +321,10 @@ NT_node nni (NT_node S, int n);
 NT_node nni (NT_node S, int n);
 int has_nni (NT_node N);
 NT_node tree2nni (NT_node T, NT_node S);
+
+char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method);
+int kseq2kmsa   (KT_node *K, int n, char *method);
+char* kmsa2msa  (KT_node K, int n, int *cn);
+int ktree2klist (KT_node K, KT_node *KL, int *n);
+KT_node tree2ktree (NT_node T,Sequence *S, int N);
 #endif

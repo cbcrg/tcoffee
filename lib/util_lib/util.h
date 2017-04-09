@@ -550,6 +550,7 @@ cache: idem
 methods: idem
 mcoffee: idem
 */
+int set_nproc (int nproc);
 int get_nproc ();
 char *get_os();
 char *get_lockdir_4_tcoffee ();

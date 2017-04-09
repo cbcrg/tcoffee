@@ -924,7 +924,10 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
   
   
   
-  if (!aln)aln=vtmpnam (NULL);
+  if (!aln)
+    {
+      aln=vtmpnam (NULL);
+    }
   if (!file) return NULL;
   else if (file[0]=='#')
     {
@@ -950,9 +953,14 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
   
   if (method)
     {
-      char *dir =vtmpnam (NULL);
+      static char *dir;
       char *cdir=get_pwd (NULL);
-      my_mkdir (dir);
+      
+      if (!dir)
+	{
+	  dir =vtmpnam (NULL);
+	  my_mkdir (dir);
+	}
       
       chdir (dir);
       printf_system ("cp %s seq", seq);
@@ -964,7 +972,7 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
       vfree (command);
       chdir    (cdir);
       printf_system_direct ("rm %s/*", dir);
-      my_rmdir (dir);
+      
     }
   else
     {

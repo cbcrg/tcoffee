@@ -1523,6 +1523,43 @@ void *vrealloc ( void *p, size_t size)
 	  }
 	return NULL;
 	}
+void *vrealloc_nomemset ( void *p, size_t size)
+	{
+	void *x;
+	Memcontrol *M;
+	size_t i_size;
+	int a;
+
+
+	if ( p==NULL)
+	  {
+	    x=vmalloc (size);
+	    return x;
+	  }
+	else
+	  {
+	    M=(Memcontrol*)p;
+	    M-=2;
+	    i_size=M[0].size;
+	    p=M;
+
+
+	    if ( size<=0){return NULL;vfree (p);return NULL;}
+	    else
+	      {
+		verify_memory (size - i_size);
+		x=realloc ( p, size+2*sizeof(Memcontrol));
+
+		if ( x==NULL){crash ( "\nFAILED TO ALLOCATE REQUIRED MEMORY (realloc)\n");return NULL;}
+		M=(Memcontrol*)x;
+		M[0].size=size;
+		M+=2;
+		x=M;
+		return x;
+	      }
+	  }
+	return NULL;
+	}
 void vfree ( void *p)
      {
        Memcontrol *M;

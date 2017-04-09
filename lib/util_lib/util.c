@@ -5386,11 +5386,19 @@ int getNumCores() {
 #endif
 }
 
+static int nproc;
+
+int set_nproc(int np)
+{
+  //set to 0 if to be reset by environement
+  nproc=np;
+}
+
 int get_nproc ()
 {
-  static int nproc;
+  
 
-  if (nproc) { return nproc; }
+  if (nproc>0) { return nproc; }
 
   if ( get_int_variable ("n_core"))
     {
