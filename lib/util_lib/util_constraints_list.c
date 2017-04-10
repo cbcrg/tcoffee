@@ -6075,7 +6075,7 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "OUT_MODE   aln\n");
     fprintf ( fp, "IN_FLAG    -i&bnsp\n");
     fprintf ( fp, "OUT_FLAG   -o&bnsp\n");
-    fprintf ( fp, "PARAM      --force --threads=2 \n");
+    fprintf ( fp, "PARAM      --force --threads=1 \n");
     fprintf ( fp, "SEQ_TYPE   S\n");
     fprintf ( fp, "ADDRESS    %s\n", CLUSTALO_ADDRESS);
     fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);
@@ -6090,7 +6090,7 @@ char *** produce_method_file ( char *method)
     fprintf ( fp, "OUT_MODE   aln\n");
     fprintf ( fp, "IN_FLAG    -i&bnsp\n");
     fprintf ( fp, "OUT_FLAG   -o&bnsp\n");
-    fprintf ( fp, "PARAM      --force --threads=2 \n");
+    fprintf ( fp, "PARAM      --force --threads=1 &bnsp2>/dev/null\n");
     fprintf ( fp, "SEQ_TYPE   S\n");
     fprintf ( fp, "ADDRESS    %s\n", CLUSTALO_ADDRESS);
     fprintf ( fp, "PROGRAM    %s\n", CLUSTALO_4_TCOFFEE);

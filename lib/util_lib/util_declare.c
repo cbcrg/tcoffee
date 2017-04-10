@@ -1482,6 +1482,47 @@ void *sub_vcalloc ( size_t nobj, size_t size, int MODE)
 	    return x;
 	  }
 	}
+void *vreallocg ( void *p, size_t size, int set, int resize)
+	{
+	  //makes it possiblée to realloc w/o reintilaizing and w/o freeing left over: MEMSET or NOMEMSET and RESIZE or NORESIZE
+	void *x;
+	Memcontrol *M;
+	size_t i_size;
+	int a;
+	void *ip=p;
+	
+	if ( p==NULL)
+	  {
+	    x=vmalloc (size);
+	    if (set==MEMSET)memset (x, 0, size);
+	    return x;
+	  }
+	else
+	  {
+	    M=(Memcontrol*)p;
+	    M-=2;
+	    i_size=M[0].size;
+	    p=M;
+
+
+	    if ( size<=0){return NULL;vfree (p);return NULL;}
+	    else if (resize==NORESIZE && size<=i_size)return ip;
+	    else
+	      {
+		verify_memory (size - i_size);
+		x=realloc ( p, size+2*sizeof(Memcontrol));
+
+		if ( x==NULL){crash ( "\nFAILED TO ALLOCATE REQUIRED MEMORY (realloc)\n");return NULL;}
+		M=(Memcontrol*)x;
+		M[0].size=size;
+		M+=2;
+		x=M;
+		if (set==MEMSET)for ( a=i_size; a< size; a++)((char*)x)[a]=0;
+		return x;
+	      }
+	  }
+	return NULL;
+	}
 
 void *vrealloc ( void *p, size_t size)
 	{
@@ -1523,43 +1564,7 @@ void *vrealloc ( void *p, size_t size)
 	  }
 	return NULL;
 	}
-void *vrealloc_nomemset ( void *p, size_t size)
-	{
-	void *x;
-	Memcontrol *M;
-	size_t i_size;
-	int a;
 
-
-	if ( p==NULL)
-	  {
-	    x=vmalloc (size);
-	    return x;
-	  }
-	else
-	  {
-	    M=(Memcontrol*)p;
-	    M-=2;
-	    i_size=M[0].size;
-	    p=M;
-
-
-	    if ( size<=0){return NULL;vfree (p);return NULL;}
-	    else
-	      {
-		verify_memory (size - i_size);
-		x=realloc ( p, size+2*sizeof(Memcontrol));
-
-		if ( x==NULL){crash ( "\nFAILED TO ALLOCATE REQUIRED MEMORY (realloc)\n");return NULL;}
-		M=(Memcontrol*)x;
-		M[0].size=size;
-		M+=2;
-		x=M;
-		return x;
-	      }
-	  }
-	return NULL;
-	}
 void vfree ( void *p)
      {
        Memcontrol *M;

@@ -465,7 +465,7 @@ int array_is_in_set (char *array, char *set);
 char * generate_void ( int x);
 char * generate_null ( int x);
 char * generate_string ( int x, char y);
-
+char *string2null (char *string, int len);
 
 char * translate_string (char *string, char *in, char*out);
 int get_longest_string  (char **array,int n, int *len, int *index);

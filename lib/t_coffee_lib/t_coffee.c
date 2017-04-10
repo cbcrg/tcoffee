@@ -7036,7 +7036,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
     myexit (fprintf_error ( stderr, "\nERROR: When using dpa, sequences must be provided via -seq [FATAL:%s]", PROGRAM));
   
   //prepare the guide tree
-  fprintf ( stderr, "Compute Guide Tree -- ");
+  fprintf ( stderr, "!Compute Guide Tree --- ");
   if (usetree){dpa_tree=usetree;}
   if (!dpa_tree)dpa_tree="kmdnd";
   T=seq2dnd (S, dpa_tree);fprintf ( stderr, " dpa_tree %s\n", dpa_tree);
@@ -7045,24 +7045,24 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   if (dpa_tree && check_file_exists (dpa_tree))output_dpa_tree=0;
   else output_dpa_tree=1;
   
-  fprintf ( stderr, "Compute Guide Tree -- done\n");
+  fprintf ( stderr, "!Compute Guide Tree ---  done\n");
   
   //decide on bucket sizes
   if (dpa_nseq==0)dpa_nseq=30;
   
   
   //get the weight
-  fprintf (stderr, "Compute Weights --");
+  fprintf (stderr, "!Compute Weights --- ");
   if (dpa_weight){w=seq2dpa_weight (S, dpa_weight); fprintf ( stderr, "%s\n", dpa_weight);}
   else { w=seq2dpa_weight (S, "longuest");fprintf ( stderr, "default longuest\n", dpa_weight);}
-  fprintf ( stderr, "Compute Weights -- done\n");
+  fprintf ( stderr, "!Compute Weights --- done\n");
   
   //run the alignment
-  fprintf (stderr, "Compute MSA -- dp_method %s -- dpa_n %d -- start\n", command, dpa_nseq);
+  fprintf (stderr, "!Compute MSA --- dp_method %s -- dpa_n %d -- start\n", command, dpa_nseq);
   T=node2master (T, S, w);
   //alnfile=tree2bucket (T,S,dpa_nseq,command);
   alnfile=tree2msa4dpa(T, S, dpa_nseq, command);
-  fprintf ( stderr, "Compute MSA --- done\n");
+  fprintf ( stderr, "!Compute MSA --- done\n");
   
   //figure out the name
   F=parse_fname(seqfile);

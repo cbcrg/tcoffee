@@ -7411,7 +7411,7 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
   K->nseq =nc;
   K->seqF =vtmpnam(NULL);
   K->msaF =vtmpnam(NULL);
-
+  
   fp=vfopen (K->seqF, "w");
   for (a=0; a<nc; a++)
     {
@@ -7422,8 +7422,8 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
   
   
   K->child=(KT_node*)vcalloc (nc, sizeof (KT_node));
-  K->tot=0;
-  
+  K->tot=1;
+    
   for (a=0; a<nc; a++)
     {
       if (!CL[a]->isseq)
@@ -7470,7 +7470,7 @@ int kseq2kmsa   (KT_node *K, int n, char *method)
   int npid;
   int failed=0;
   int a, b;
-  
+  int nt=0;
   //split the jobs
   KL=(KT_node**)vcalloc(nproc+1, sizeof (KT_node*));
   for (b=0; b<nproc; b++)
@@ -7482,30 +7482,37 @@ int kseq2kmsa   (KT_node *K, int n, char *method)
       if (b==nproc)b=0;
       KL[b][njobs[b]++]=K[a];
     }
-  
+  for (a=0; a<nproc; a++)
+    {
+      if (!njobs[a]){vfree(KL[a]); KL[a]=NULL;}
+    }
   //deploy the jobs
   a=0;
+
   while (KL[a]) 
     {
+      nt++;
       if (vvfork(NULL)==0)//child process
 	{
 	  int b=0;
-	  
 	  while (KL[a][b])
 	    {
-	      KT_node K=KL[a][b];
+	      KT_node LK=KL[a][b];
 	      initiate_vtmpnam(NULL);//make sure existing tmp are not deleted when exiting.
-	      if (K->nseq==1)
+	      	      
+	      if (LK->nseq==1)
 		{
-		  printf_system ("cp %s %s", K->seqF, K->msaF);
+		  printf_system ("cp %s %s", LK->seqF, LK->msaF);
 		}
 	      else
 		{
-		  seq_file2msa_file (method,K->seqF, K->msaF);
+		  seq_file2msa_file (method,LK->seqF, LK->msaF);
+		  
 		}
+	      b++;
 	      if ( a==0)
 		output_completion (stderr, b, njobs[0], 100, method);
-	      b++;
+	     
 	    }
 	  myexit (EXIT_SUCCESS);
 	}
@@ -7516,17 +7523,18 @@ int kseq2kmsa   (KT_node *K, int n, char *method)
     }
   
   //collect the jobs
-  for (a=0; a<nproc; a++)
+  a=0;
+  while (KL[a++])
     {
       vwait(NULL);
-      output_completion (stderr, a, nproc, 100, "collecting Threads");
+      output_completion (stderr, a, nt, 100, "collecting Threads");
     }
   
   for ( a=0; a<n; a++)failed+=(check_file_exists (K[a]->msaF))?0:1;
   if (failed>0)
     printf_exit ( EXIT_FAILURE,stderr, "\nERROR: method %s failed to produce %d out of %d node alignments [FATAL]", method, failed, n);
   else
-    fprintf (stderr, "\n! All Jobs collected\n");
+    fprintf (stderr, "\n!All Jobs collected\n");
   
   vfree (njobs);
   for (a=0; a<nproc; a++)vfree (KL[a]);
@@ -7545,8 +7553,6 @@ char* kmsa2msa_serial (KT_node K, int max, int *cn)
       
       kmsa2msa_serial (K->child[a], max, cn);
       cn[0]++;
-      //output_completion (stderr,cn[0],max, 100, "thread\n");
-      
       thread_msa2msa ((K->child[a])->msaF, K->msaF, (K->child[a])->name);
     }
 return K->msaF;
@@ -7555,6 +7561,7 @@ char * kmsa2msa   (KT_node K, int max, int *cn)
 {
   int nproc=get_nproc();
   int a, b, c;
+  
   for (a=0; a<K->nc;)
     {
       for (b=0; b<nproc && a<K->nc;)
@@ -7580,6 +7587,7 @@ char * kmsa2msa   (KT_node K, int max, int *cn)
       output_completion (stderr,a,K->nc, 100, "thread the final MSA");
       thread_msa2msa ((K->child[a])->msaF, K->msaF, (K->child[a])->name);
     }
-    
+  //HERE ("K->nc: %d %d %d", check_file_exists (K->seqF), check_file_exists (K->msaF));
+   
   return K->msaF;
 }

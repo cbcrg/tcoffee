@@ -1336,24 +1336,24 @@ int read_nameseq (char *file,char ***nam, char ***seq, char ***com)
       fscanf (fp, "#NAMESEQ_01\n");
       fscanf (fp, "# %d\n", &nseq);
       
-      seq[0]=(char **)vrealloc (seq[0],nseq*sizeof (char*));
-      nam[0]=(char **)vrealloc (nam[0],nseq*sizeof (char*));
-      com[0]=(char **)vrealloc (com[0],nseq*sizeof (char*));
+      seq[0]=(char **)vreallocg (seq[0],nseq*sizeof (char*), MEMSET,NORESIZE);
+      nam[0]=(char **)vreallocg (nam[0],nseq*sizeof (char*), MEMSET,NORESIZE);
+      com[0]=(char **)vreallocg (com[0],nseq*sizeof (char*), MEMSET,NORESIZE);
       nseq=0;
       while ((c=fgetc(fp))!=EOF)
 	{
 	  if (c=='>')
 	    {
 	      fscanf (fp, "%d %d ", &l1, &l2);
-	      nam[0][nseq]=(char*)vrealloc_nomemset  (nam [0][nseq],(l1+1)* sizeof (char));
-	      seq[0][nseq]=(char*)vrealloc_nomemset  (seq [0][nseq],(l2+1)* sizeof (char));
+	      nam[0][nseq]=(char*)vreallocg(nam [0][nseq],(l1+1)* sizeof (char), NOMEMSET, NORESIZE);
+	      seq[0][nseq]=(char*)vreallocg(seq [0][nseq],(l2+1)* sizeof (char), NOMEMSET, NORESIZE);
 	      fscanf (fp, "%s %s\n", nam[0][nseq], seq[0][nseq]);
 	      nseq++;
 	    }
 	  else if (c=='#')
 	    {
 	       fscanf (fp, "%d ", &l1);
-	       com[0][nseq]=(char*)vrealloc_nomemset  (com[0][nseq], (l1+1)*sizeof (char));
+	       com[0][nseq]=(char*)vreallocg (com[0][nseq], (l1+1)*sizeof (char), NOMEMSET, NORESIZE);
 	       fgets (com[0][nseq],l1, fp);
 	       c=fgetc(fp);
 	    }
@@ -2112,7 +2112,7 @@ int is_treelist (char *name)
 	 pc=(c=='\n' || c==' ' || c== '\t')?pc:c;
        }
      vfclose (fp);
-     HERE ("PC=%c", pc);
+     
      if (pc==';')return 0;
      else return 1;
    }

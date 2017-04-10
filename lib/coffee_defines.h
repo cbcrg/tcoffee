@@ -33,6 +33,11 @@
 #define GIVE_MEMORY_BACK 0
 #define MEMSET0   1
 #define NO_MEMSET0 0
+#define MEMSET 1
+#define NOMEMSET -1
+#define RESIZE 1
+#define NORESIZE -1
+
 /*OUTPUT DEFINITIONS*/
 #define  NO_COLOR_RESIDUE 127
 #define  NO_COLOR_GAP 126
@@ -56,7 +61,7 @@
 #define NOTEMPLATES 0
 
 #define EXTEND 1
-#define RESIZE 2
+
 
 #define SEN                0 
 #define SPE                1 

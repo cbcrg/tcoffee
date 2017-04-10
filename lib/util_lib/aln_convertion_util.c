@@ -13869,14 +13869,14 @@ static int trimseq2_getnext (int *gl,int g,int n,int *used, int ***sim,int minsi
   return bseq+1;
 }
 void add_msa (Alignment *A,int seq, char *lu, char *file, char *mode);
-char *msa2master_seq (Alignment *A, int seq);
+char *msa2master_seq (Alignment *A, int seq, char *master);
 
-char *msa2master_seq (Alignment *A, int seq)
+char *msa2master_seq (Alignment *A, int seq, char *master)
 {
-  char *master=(char *) vcalloc (A->len_aln+1, sizeof (char));
+  
   static int *aa=(int*)vcalloc(256, sizeof (int));
   int c, s,a;
-  
+  master=(char *) vreallocg (master,(A->len_aln+1)*sizeof (char),NOMEMSET,NORESIZE);
   sprintf (master, "%s", A->seq_al[seq]);
   
   for ( c=0; c<A->len_aln; c++)
@@ -13903,49 +13903,8 @@ char *msa2master_seq (Alignment *A, int seq)
   
   return master;
 }
-int thread_msa2msa_old(char *small, char *big, char *seq)
-{
-  //incorporate small into Big
-    
-  Alignment *S=quick_read_aln (small);
-  Alignment *B=quick_read_aln (big);
-  
-  
 
-  Alignment *M;
-  char *sseq, *bseq;
-  int Si, Bi;
-  
-  if (!S) printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Could not Read %s [FATAL]",small);
-  if (!B) printf_exit ( EXIT_FAILURE,stderr, "\nERROR: Could not Read %s [FATAL]",big);
-  
-  if ((Si=name_is_in_list (seq, S->name, S->nseq, MAXNAMES+1))==-1)
-    {
-      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, small );
-    }
-  if ((Bi=name_is_in_list (seq, B->name, B->nseq, MAXNAMES+1))==-1)
-    {
-      printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, big );
-    }
-  
-  sseq=msa2master_seq (S, Si);
-  bseq=msa2master_seq (B, Bi);
-  
-  
-  M=align_two_sequences4dpa (sseq,S->seq_al[Si],bseq,B->seq_al[Bi],"blosum62mt",-4,-1, "myers_miller_pair_wise");
-  
 
-  
-  add_msa (S,-1,M->seq_al[0],big, "w");
-  add_msa (B,Bi,M->seq_al[1],big, "a");
-  
-  
-  free_aln (M);
-  free_aln (S);
-  free_aln (B);
-  vfree (sseq);vfree (bseq);
-  return 1;
-}
 void add_msa (Alignment *A,int seq, char *lu, char *file, char *mode)
 {
   FILE *fp=vfopen(file,mode);
@@ -13974,8 +13933,9 @@ void add_msa (Alignment *A,int seq, char *lu, char *file, char *mode)
 int thread_msa2msa(char *small, char *big, char *seq)
 {
   //incorporate small into Big
-  Alignment *M;
-  char *sseq, *bseq;
+  static Alignment *M;
+  static char *sseq;
+  static char *bseq;
   int Si, Bi;
   static char **name0=NULL;
   static char **seq0=NULL;
@@ -14015,19 +13975,16 @@ int thread_msa2msa(char *small, char *big, char *seq)
       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is NOT in %s [FATAL]",seq, big );
     }
   
-  sseq=msa2master_seq (S, Si);
-  bseq=msa2master_seq (B, Bi);
+  sseq=msa2master_seq (S, Si, sseq);
+  bseq=msa2master_seq (B, Bi, bseq);
   
   
-  M=align_two_sequences4dpa (sseq,S->seq_al[Si],bseq,B->seq_al[Bi],"blosum62mt",-4,-1, "myers_miller_pair_wise");
+  M=align_two_sequences4dpa (sseq,S->seq_al[Si],bseq,B->seq_al[Bi],"blosum62mt",-4,-1, "myers_miller_pair_wise", M);
   
 
   
   add_msa (S,-1,M->seq_al[0],big, "w");
   add_msa (B,Bi,M->seq_al[1],big, "a");
   
-  
-  free_aln (M);
-  vfree (sseq);vfree (bseq);
   return 1;
 }

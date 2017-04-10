@@ -3975,7 +3975,15 @@ char * generate_void ( int x)
     {
     return generate_string (x, ' ');
     }
-
+char * string2null (char *string, int n)
+{
+  int a;
+  string=(char*)vreallocg(string, (n+1)*sizeof (char), NOMEMSET, NORESIZE);
+  for (a=0; a<n; a++)
+    string[a]='-';
+  string[a]='\0';
+  return string;
+}
 char * generate_null ( int x)
     {
     return generate_string ( x, '-');

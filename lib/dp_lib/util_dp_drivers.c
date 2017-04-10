@@ -2611,17 +2611,27 @@ void toggle_case_in_align_two_sequences(int value)
 {
   align_two_seq_keep_case=value;
 }
-Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop, int gep, char *in_align_mode);
-Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2, char *gapped2, char *in_matrix, int gop, int gep, char *in_align_mode)
+Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop, int gep, char *in_align_mode, Alignment *A);
+Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2, char *gapped2, char *in_matrix, int gop, int gep, char *in_align_mode, Alignment *R)
 {
   int ll,nr,n1, n2, a;
   char r1, r2;
   int l1=strlen (padded1);
   int l2=strlen (padded2);
-  Alignment *R=declare_aln2(2,l1+l2+1);
-  Alignment *A;
+  static Alignment *A;
   char *s1, *s2;
   
+  if (!padded1)
+    {
+      free_aln (A);
+      A=NULL;
+      return R;
+    }
+  
+  if (!R)R=declare_aln2(2,1);
+  else R->seq_al[0][0]=R->seq_al[1][0]='\0';
+  
+
   for (ll=0,a=0; a<l1; a++)ll+=(gapped1[a]!='-')?1:0;
   
   for (a=0; a<l1; a++)if (gapped1[a]!='-')padded1[a]='\0';
@@ -2649,7 +2659,7 @@ Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2,
 	}
       
       
-      A=align_two_streches4dpa (s1, s2, in_matrix, gop,gep, in_align_mode);
+      A=align_two_streches4dpa (s1, s2, in_matrix, gop,gep, in_align_mode,A);
             
       R->seq_al[0]=strcatf  (R->seq_al[0], "%s%c", (A)?A->seq_al[0]:"", r1);
       R->seq_al[1]=strcatf  (R->seq_al[1], "%s%c", (A)?A->seq_al[1]:"", r2);
@@ -2660,19 +2670,19 @@ Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2,
 	HERE ("oups these two length [%d %d] should be identical",strlen (R->seq_al[0]),strlen (R->seq_al[1]),R->seq_al[0], R->seq_al[1]); exit (0);
 	}
       
-      free_aln (A);
+      //free_aln (A);
     }
   s1=padded1+n1;
   s2=padded2+n2;
   
-  A=align_two_streches4dpa (s1, s2, in_matrix, gop,gep, in_align_mode);
+  A=align_two_streches4dpa (s1, s2, in_matrix, gop,gep, in_align_mode,A);
   if (A)
     {
       R->seq_al[0]=strcatf  (R->seq_al[0], "%s", (A)?A->seq_al[0]:"");
       R->seq_al[1]=strcatf  (R->seq_al[1], "%s", (A)?A->seq_al[1]:"");
     }
   
-  free_aln (A);
+  //free_aln (A);
   if ( strlen (R->seq_al[0])!=strlen (R->seq_al[1]))
     {
       HERE ("%d %d\n\n[%s]\n[%s]", strlen (R->seq_al[0]),strlen (R->seq_al[1]),R->seq_al[0], R->seq_al[1]);
@@ -2694,41 +2704,39 @@ int strech_is_only_x (char *s)
     }
   return 1;
 }
-Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop, int gep, char *in_align_mode)
+Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop, int gep, char *in_align_mode, Alignment *A)
 {
   int ls0=strlen (s0);
   int ls1=strlen (s1);
   int g;
-   int x0=strech_is_only_x(s0);
+  int x0=strech_is_only_x(s0);
   int x1=strech_is_only_x(s1);
   int a;
-  
+  static char *gap;
+  if (!A)A=declare_aln2 (2,1);
   
   
   if (!ls0 && !ls1)return NULL;
   else if (x0 && x1 && ls0>ls1)
     {
-      Alignment *A=declare_aln2 (2,ls0+1);
-      char *gap=generate_null (ls0-ls1);
+      
+      gap=string2null (gap,ls0-ls1);
       A->seq_al[0]=csprintf  (A->seq_al[0], "%s", s0);
       A->seq_al[1]=csprintf  (A->seq_al[1], "%s%s", s1,gap);
-      vfree (gap);
       A->len_aln=ls0; A->nseq=2;
       return A;
     }
   else if (x1 && x0 && ls0<ls1)
     {
-      Alignment *A=declare_aln2 (2,ls1+1);
-      char *gap=generate_null (ls1-ls0);
+      gap=string2null (gap,ls1-ls0);
       A->seq_al[0]=csprintf  (A->seq_al[0], "%s%s", s0,gap);
       A->seq_al[1]=csprintf  (A->seq_al[1], "%s", s1);
-      vfree (gap);
       A->len_aln=ls1; A->nseq=2;
       return A;
     }
   else if (x1 && x0 && ls0==ls1)
     {
-      Alignment *A=declare_aln2 (2,ls1+1);
+      
       A->seq_al[0]=csprintf  (A->seq_al[0], "%s", s0);
       A->seq_al[1]=csprintf  (A->seq_al[1], "%s", s1);
       A->len_aln=ls0; A->nseq=2;
@@ -2740,124 +2748,24 @@ Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop
     }
   else if (ls0)
     {
-      Alignment *A=declare_aln2 (2,ls0+1);
-      sprintf  (A->seq_al[0], "%s", s0);
-      for (a=0; a<ls0; a++)A->seq_al[1][a]='-';
-      A->seq_al[0][ls0]=A->seq_al[1][ls0]='\0';
+      gap=string2null (gap,ls0);
+      
+      A->seq_al[0]=csprintf  (A->seq_al[0], "%s", s0);
+      A->seq_al[1]=csprintf  (A->seq_al[1], "%s", gap);
       A->len_aln=ls0; A->nseq=2;
       return A;
     }
   else
     {
-      Alignment *A=declare_aln2 (2,ls1+1);
-      sprintf ( A->seq_al[1], "%s", s1);
-      for (a=0; a<ls1; a++)A->seq_al[0][a]='-';
-      A->seq_al[0][ls1]=A->seq_al[1][ls1]='\0';
+      gap=string2null (gap,ls1);
+      A->seq_al[0]=csprintf  (A->seq_al[0], "%s", gap);
+      A->seq_al[1]=csprintf  (A->seq_al[1], "%s", s1);
       A->len_aln=ls1; A->nseq=2;
       return A;
     }
 }
   
-Alignment * align_two_sequences4dpa_old ( char *padded1,char *gapped1, char *padded2, char *gapped2, char *in_matrix, int gop, int gep, char *in_align_mode)
-{
-	static Alignment *A;
-	Constraint_list *CL;
-	Sequence *S;
 
-	int *ns;
-	int **l_s;
-
-	char       **seq_array;
-	char       **name_array;
-	static char *matrix;
-	static int  **M;
-
-	static char *align_mode;
-	int a;
-
-	if (!matrix)matrix=(char*)vcalloc ( 100, sizeof (char));
-	if (!align_mode)align_mode=(char*)vcalloc ( 100, sizeof (char));
-	sprintf ( align_mode, "%s", in_align_mode);
-
-	CL=(Constraint_list*)vcalloc ( 1, sizeof (Constraint_list));
-
-	CL->pw_parameters_set=1;
-
-	CL->matrices_list=declare_char (10, 10);
-
-
-	if ( !strm (matrix, in_matrix))
-	  {
-	    sprintf ( matrix,"%s", in_matrix);
-	    M=CL->M=read_matrice (matrix);
-
-	  }
-	else
-	  {
-	    CL->M=M;
-	  }
-
-	if (strstr (in_align_mode, "cdna"))
-	  CL->evaluate_residue_pair=evaluate_cdna_matrix_score;
-	else
-	  CL->evaluate_residue_pair=evaluate_matrix_score;
-
-	CL->get_dp_cost=get_dp_cost4dpa;
-	CL->extend_jit=0;
-	CL->maximise=1;
-	CL->gop=gop;
-	CL->gep=gep;
-	CL->TG_MODE=2;
-	sprintf (CL->matrix_for_aa_group, "vasiliky");
-	CL->use_fragments=0;
-	CL->ktup=3;
-	if ( !CL->use_fragments)CL->diagonal_threshold=0;
-	else CL->diagonal_threshold=6;
-
-	sprintf (CL->dp_mode, "%s", align_mode);
-
-	seq_array=declare_char ( 4, MAX(strlen(gapped1), strlen (gapped2))+1);
-	sprintf (seq_array[0], "%s",padded1);
-	sprintf (seq_array[1], "%s",gapped1);
-	
-	sprintf (seq_array[2],"%s", padded2);
-	sprintf (seq_array[3], "%s",gapped2);
-	string_array_lower(seq_array,4);
-
-	name_array=declare_char (4, STRING);
-	sprintf ( name_array[0], "paddedA");
-	sprintf ( name_array[1], "gappedA");
-	
-	sprintf ( name_array[2], "paddedB");
-	sprintf ( name_array[3], "gappedB");
-
-	ns=(int*)vcalloc ( 2, sizeof(int));
-	l_s=declare_int ( 2, 2);
-	ns[0]=ns[1]=2;
-	l_s[0][0]=0;
-	l_s[0][1]=1;
-	
-	l_s[1][0]=2;
-	l_s[1][1]=3;
-	
-
-	
-	CL->S=fill_sequence_struc(4, seq_array, name_array, NULL);
-	
-	A=seq2aln(CL->S, NULL, 1);
-	for (a=0; a<4; a++)sprintf (A->seq_al[a], "%s", seq_array[a]);
-	A->score_aln=pair_wise (A, ns, l_s,CL);
-
-	vfree (ns);
-	free_int (l_s, -1);
-	free_char (name_array, -1);free_char ( seq_array,-1);
-
-	CL->M=NULL;
-        S=free_constraint_list (CL);
-	free_sequence (S,-1);
-	A->S=NULL;
-	return A;
-}
 
 
 
