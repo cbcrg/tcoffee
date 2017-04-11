@@ -1074,7 +1074,15 @@ The interpretation of this output is as follow: b80 is the reference MSA, it con
   $$: t_coffee -other_pg aln_compare -al1 b30.aln -al2 p350.aln -output_aln \
       -output_aln_threshold 50 -output_aln_modif x
 
-It is also possible to restrict the comparison to a specific subset of residues within the target alignment. This requires a cache alignment that can be produced as follows
+
+.. note:: It is importnat to take into account that the comparison between -al1 and -al2 is not symetrical. It returns the fraction of -al1 residues pairs -by index - that are recovered in -al2. If -al1 is the reference alignment, this number is more or less the equivalent of a sensistivity measure (i.e. how much True positives are recovered). If -al1 is the tartget alignment, this measure becomes the equivalent of a specificity measure (i.e. what is the fraction of residue pairs in the target that are part of the reference). 
+
+.. tip:: aln_compare is particularly interesting if you are modifying the default parameters of T-Coffee and want to monitor the effects of your modifications. 
+
+Comparing subsets of alternative alignments
+-------------------------------------------
+
+It is also possible to restrict the comparison to a specific subset of residues within the target alignment (for instance the core residues if using a structural reference, or the catalytic residues if using functional annotation alignment). This requires a cache in which residues are annotated as being part of the core or not. The cache is a plain text ascii file that can be produced in any way convenient to you. We show below how to produce a cache based on the consistency score and how to use this cache for further comparisons.
 
 ::
 
@@ -1085,11 +1093,11 @@ This command generates two output files
  - ``b11.aln``: the alignment in ClustalW format
  - ``b11.score_ascii``: a local reliability score with every residue having a score between 0 and 9
 
-The target file must then be reformated so as to decide which residues will be part of the evaluation (c=> core) and which ones will be ignored. In this exemple we will set the threshild at 7 which means that the comparison will ignore all residues that do not have 70% or more support from the T-Coffee library:
+The target file must then be reformatted so as to decide which residues will be part of the evaluation (c=> core) and which ones will be ignored. In this example we will set the threshild at 7 which means that the comparison will ignore all residues that do not have 70% or more support from the T-Coffee library:
 
 ::
 
-	$$: t_coffee -other_pg seq_reformat -in b11.score_asci -input number_aln -action +convert 0123456i 789c > b11.cache
+	$$: t_coffee -other_pg seq_reformat -in b11.score_ascii -input number_aln -action +convert 0123456i 789c -output fasta_seq > b11.cache
 
 
 One can then produce a target file with another method
@@ -1100,7 +1108,7 @@ One can then produce a target file with another method
 With the cache, it is then possible to compare the original alignment (b11.aln) while only considering pairs of core residues
 ::
 
-	$$: t_coffee -other_pg aln_compare -al1 b11.aln -al2 b11.tcmafft -st b11.cache aln -io_cat '[c][c]=[core]'
+	$$: t_coffee -other_pg aln_compare -al1 b11.aln -al2 b11.tcmafft -st b11.cache pep -io_cat '[c][c]=[core]'
 
 This comparison will return the following result:
 
@@ -1114,12 +1122,10 @@ The output can be interpreted as follows: the core residues - defined as c-c pai
 
 ::
 
-	$$: t_coffee -other_pg aln_compare -al1 b11.aln -al2 b11.tcmafft -st b11.cache aln\
+	$$: t_coffee -other_pg aln_compare -al1 b11.aln -al2 b11.tcmafft -st b11.cache pep\
              -io_cat '[c][c]=[core];[c][i]=[mixed];[ci][ci]=[all1];[*][*]=[all2]'
 	
-.. note:: It is importnat to take into account that the comparison between -al1 and -al2 is not symetrical. It returns the fraction of -al1 residues pairs -by index - that are recovered in -al2. If -al1 is the reference alignment, this number is more or less the equivalent of a sensistivity measure (i.e. how much True positives are recovered). If -al1 is the tartget alignment, this measure becomes the equivalent of a specificity measure (i.e. what is the fraction of residue pairs in the target that are part of the reference). 
 
-.. tip:: aln_compare is particularly interesting if you are modifying the default parameters of T-Coffee and want to monitor the effects of your modifications. 
 
 Modifying the default parameters of T-Coffee
 --------------------------------------------
