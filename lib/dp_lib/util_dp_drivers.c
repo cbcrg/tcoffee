@@ -2611,7 +2611,7 @@ void toggle_case_in_align_two_sequences(int value)
 {
   align_two_seq_keep_case=value;
 }
-Alignment *align_two_streches4dpa ( char *s0, char *s1, char *in_matrix, int gop, int gep, char *in_align_mode, Alignment *A);
+
 Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2, char *gapped2, char *in_matrix, int gop, int gep, char *in_align_mode, Alignment *R)
 {
   int ll,nr,n1, n2, a;
@@ -2681,7 +2681,8 @@ Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2,
       R->seq_al[0]=strcatf  (R->seq_al[0], "%s", (A)?A->seq_al[0]:"");
       R->seq_al[1]=strcatf  (R->seq_al[1], "%s", (A)?A->seq_al[1]:"");
     }
-  
+  R->len_aln=strlen (R->seq_al[0]);
+  R->nseq=2;
   //free_aln (A);
   if ( strlen (R->seq_al[0])!=strlen (R->seq_al[1]))
     {

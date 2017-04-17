@@ -7346,7 +7346,7 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 
   //new: graph implementation: very fast but memory hungry
   //old: parrallel: lots of i/o
-  outname=kmsa2msa_new (S,K,n,&cn);
+  outname=kmsa2msa_new  (S,K,n,&cn);
   
   //free all the nodes declared when merging the MSAs
   declare_aln_node (-1);
@@ -7612,9 +7612,12 @@ int node2gap_len2 (ALN_node n);
 ALN_node ** msa2graph2 (Sequence *S, Alignment *A, ALN_node**lu);
 ALN_node insert_gap_in_graph2 (ALN_node start);
 int link_nodes2 (ALN_node s, ALN_node m);
-
-
+int align_graph (ALN_node m, int lm, ALN_node s, int ls);
+char *graph2cons (ALN_node m, int len);
+char **graph2master_seq (ALN_node n, char **seq);
 ALN_node n2FirstSeq (ALN_node n);
+ALN_node n2FirstAA (ALN_node n);
+
 ALN_node n2top (ALN_node n);
 ALN_node n2bot (ALN_node n);
 ALN_node n2end (ALN_node n);
@@ -7627,6 +7630,7 @@ int node2nseq     (ALN_node n);
 int check_graph_integrity (ALN_node g);;
 void display_graph_top   (ALN_node n, char *text);
 ALN_node insert_gap_in_graph (ALN_node start);
+int check_node(ALN_node n, char *txt);
 
 void display_right   (ALN_node n, char *text);
 void display_parent   (ALN_node n, char *text);
@@ -7741,8 +7745,9 @@ ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu)
 		}
 	    }
 	}
+      
     }
-
+    
   aln-=2;
   for (s=0; s<A->nseq+4; s++)
     {
@@ -7752,8 +7757,22 @@ ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu)
   vfree (cc);
   return lu;
 }
-
+ALN_node* kmsa2graph_stretch (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
+ALN_node* kmsa2graph_seq (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
 ALN_node* kmsa2graph (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
+{
+  int mode=2;
+  if (mode==1)
+    {
+      return kmsa2graph_seq(S,K, A0, lu0, list, ns, done, max);
+    }
+  else
+    {
+      return kmsa2graph_stretch(S,K, A0, lu0, list, ns, done, max);
+    }
+}
+  
+ALN_node* kmsa2graph_stretch (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
 {
   int a,b,c, n;
   Alignment *A1;
@@ -7775,25 +7794,41 @@ ALN_node* kmsa2graph (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_n
       int i1=name_is_in_list ((K->child[a])->name,A1->name, A1->nseq,MAXNAMES);
       
       for (b=0; b<A1->nseq; b++)list[ns[0]++]=lu1[b][0];
-      
-      
-
+            
       n=0;
       while (lu0[i0][n])
 	{
 	  int g;
+	  
 	  m=lu0[i0][n];
 	  s=lu1[i1][n];
 	  
 	  int lm=node2gap_len (m->r);
 	  int ls=node2gap_len (s->r);
-	  
-	  for (g=lm; g<ls; g++)insert_gap_in_graph (n2top(m));
-	  for (g=ls; g<lm; g++)insert_gap_in_graph (n2top(s));
-	  
-	  	  
+	  if (lm>0 || ls>0)
+	    {
+	      int c;
+	      char *master=graph2cons(m->r, lm);
+	      char *slave =graph2cons(s->r, ls);
+	      ALN_node tm=n2top(m);
+	      ALN_node ts=n2top(s);
+	      static Alignment *A;
+	      ALN_node buf;
+	      
+	      
+	      A=align_two_streches4dpa (master, slave, "blosum62mt",-4,-1, "myers_miller_pair_wise", A);
+	      for (c=0; c<A->len_aln; c++)
+		{
+		  if (A->seq_al[0][c]=='-')tm=insert_gap_in_graph (tm);
+		  else tm=tm->r;
+		  if (A->seq_al[1][c]=='-')ts=insert_gap_in_graph (ts);
+		  else ts=ts->r;
+		}
+	      vfree (master); vfree (slave);
+	    }
 	  n++;
 	}
+      
       done[0]+=1;
       output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
       insert_msa_in_msa (lu1[i1][0],lu0[i0][0]);
@@ -7807,6 +7842,137 @@ ALN_node* kmsa2graph (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_n
   return list;
 }
 
+
+ALN_node* kmsa2graph_seq (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
+{
+  int a,b,c, n;
+  Alignment *A1;
+  
+  if (!A0)
+    {
+      A0=quick_read_aln (K->msaF);
+      lu0=msa2graph (S,A0, NULL);
+      for (a=0; a<A0->nseq; a++)list[ns[0]++]=lu0[a][0];
+      reset_output_completion ();
+    }  
+  
+  for (a=0; a<K->nc; a++)
+    {
+      static Alignment *A;
+      static char **seq0;
+      static char **seq1;
+      
+      ALN_node m, s, t;
+      A1 =quick_read_aln ((K->child[a])->msaF);
+      ALN_node **lu1=msa2graph (S,A1, NULL);
+      int i0=name_is_in_list ((K->child[a])->name,A0->name, A0->nseq,MAXNAMES);
+      int i1=name_is_in_list ((K->child[a])->name,A1->name, A1->nseq,MAXNAMES);
+      
+      for (b=0; b<A1->nseq; b++)list[ns[0]++]=lu1[b][0];
+
+      seq0=graph2master_seq (lu0[i0][0], seq0);
+      seq1=graph2master_seq (lu1[i1][0], seq1);
+      
+      A=align_two_sequences4dpa (seq0[0],seq0[1],seq1[0], seq1[1],"blosum62mt",-4,-1, "myers_miller_pair_wise", A);
+      
+      
+      m=n2top(lu0[i0][0]);
+      s=n2top(lu1[i1][0]);
+      
+      for (b=0; b<A->len_aln; b++)
+	{
+	  if (A->seq_al[0][b]=='-')m=insert_gap_in_graph (m);
+	  else m=m->r;
+	  
+	  if (A->seq_al[1][b]=='-')s=insert_gap_in_graph (s);
+	  else
+	    s=s->r;
+	}
+                  
+      done[0]+=1;
+      output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
+      insert_msa_in_msa (lu1[i1][0],lu0[i0][0]);
+      list=kmsa2graph(S,K->child[a], A1, lu1, list, ns, done, max);
+      
+      for (b=0; b<A1->nseq; b++)vfree(lu1[b]);
+      vfree (lu1);
+      free_aln (A1);
+    }
+  
+  return list;
+}
+
+char **graph2master_seq (ALN_node n, char **seq)
+  {
+    int l=node2len (n);
+    static int *aa=(int*)vcalloc(256, sizeof (int));
+    ALN_node t;
+
+    if (!seq) seq=(char**)vcalloc (2, sizeof (char*));
+    seq[0]=(char*)vrealloc(seq[0], (l+2)*sizeof (char));
+    seq[1]=(char*)vrealloc(seq[1], (l+2)*sizeof (char));
+    
+    t=n2FirstAA(n);
+    n=n->r;
+    
+    l=0;
+    while (t->r)
+      {
+	seq[0][l]=seq[1][l]=n->aa;
+	if (n->aa=='-')
+	  {
+	    int a;
+	    ALN_node s=t;
+	    int best_naa=0;
+	    char best_aa=0;
+	    for (a=0; a<256; a++)aa[a]=0;
+	    while (s->c)
+	      {
+		char r=s->aa;
+		aa[r]++;
+		
+		if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}
+		s=s->c;
+	      }
+	    seq[0][l]=(best_aa=='-')?'X':best_aa;
+	  }
+	t=t->r;
+	n=n->r;
+	l++;
+      }
+    seq[0][l]=seq[1][l]='\0';
+    return seq;
+  }
+    
+char *graph2cons (ALN_node m, int len)
+{
+  char *master=(char*)vcalloc (len+1, sizeof (char));
+  static int *aa=(int*)vcalloc(256, sizeof (int));
+  int a;
+  int l=0;
+  m=n2top(m);
+  m=m->c;
+  while (l<len)
+    {
+      ALN_node s=m;
+      int best_naa=0;
+      char best_aa=0;
+      for (a=0; a<256; a++)aa[a]=0;
+      
+      while (s->c)
+	{
+	  char r=tolower(s->aa);
+	  aa[r]++;
+	  
+	  if (aa[r]>best_naa){best_naa=aa[r]; best_aa=r;}
+	  s=s->c;
+	}
+      master[l++]=(best_aa=='-')?'x':best_aa;
+      m=m->r;
+    }
+  master[l]='\0';
+  return master;
+}
 int insert_msa_in_msa (ALN_node s, ALN_node m)
 {
   int n=0;
@@ -7839,6 +8005,14 @@ int insert_msa_in_msa (ALN_node s, ALN_node m)
 }
 
 //Node navigation
+ALN_node n2FirstAA (ALN_node n)
+{
+  n=n2top(n);
+  n=n2start(n);
+  n=n->c;
+  n=n->r;
+  return n;
+}
 ALN_node n2FirstSeq (ALN_node n)
 {
   n=n2top(n);
@@ -7900,54 +8074,46 @@ int node2gap_len (ALN_node n)
   while (n && n->aa=='-'){len++, n=n->r;}
   return len;
 }
-  
+
 ALN_node insert_gap_in_graph (ALN_node start)
 {
-  ALN_node botM, topM, botS, topS,lastM, firstM, lastS, firstS;
-  ALN_node top, bot;
-  ALN_node istart=start;
-  
-  
-  top=insert_node (start, start->r,NULL, (start->c)->r, '[');
-  top->p=NULL;
-  
-  
-  start=start->c;
-  while (start->c)
+  ALN_node pn=NULL;
+  ALN_node n, top;
+  if (!start) return NULL;
+
+  while (start)
     {
-      top=insert_node (start, start->r,top, (start->c)->r, '-');
+      n=declare_aln_node(1);
+      
+      //parent
+      n->p=pn;
+      if (pn)pn->c=n;
+      else top=n;
+      
+      //chilren
+      n->c=NULL;
+      
+      //right
+      n->r=start->r;
+      if (n->r)(n->r)->l=n;
+      
+      //left
+      n->l=start;
+      start->r=n;
+
+      if      (!start->p)n->aa='[';
+      else if (!start->c)n->aa=']';
+      else n->aa='-';
+      
+      pn=n;
       start=start->c;
     }
-  
-  bot=top=insert_node (start, start->r, top,NULL,']');
-  
-  
   return top;
-  
 }
-ALN_node insert_node (ALN_node left, ALN_node right, ALN_node parent, ALN_node child, char value)
-{
-  ALN_node n=declare_aln_node(1);
-   
-  n->aa=value;
-    
-  if (right){n->seqN=right->seqN;}
-  else if (left) {n->seqN=left->seqN;}
+
       
-  n->l=left;
-  if (left)left->r=n;
-  
-  n->r=right;
-  if (right)right->l=n;
 
-  n->p=parent;
-  if (parent)parent->c=n;
 
-  n->c=child;
-  if (child)child->p=n;
-  
-  return n;
-}
   
 
 ALN_node declare_aln_node (int mode)
@@ -7959,6 +8125,7 @@ ALN_node declare_aln_node (int mode)
   static int bb;
   static int available;
   static ALN_node buf;
+
 
   
   if (mode==-1)
@@ -7993,7 +8160,43 @@ ALN_node declare_aln_node (int mode)
     
   
 //checking Function
-
+int check_node(ALN_node n, char *txt)
+{
+  ALN_node b;
+  b=n;
+  int count;
+  
+  while (b)
+    {
+      if (b->p)
+	if ((b->p)->c!=b){HERE ("pb1: %s", txt); exit (0);}
+      b=b->p;
+    }
+  b=n;
+  count=0;
+  while (b)
+    {
+      count ++;
+      if (b->c)
+	if ((b->c)->p!=b){HERE ("pb2 (%d): %s [] ", count,txt); exit (0);}
+      b=b->c;
+    }
+  b=n;
+  while (b)
+    {
+      if (b->r)
+	if ((b->r)->l!=b){HERE ("pb3: %s", txt); exit (0);}
+      b=b->r;
+    }
+  b=n;
+  while (b)
+    {
+      if (b->l)
+	if ((b->l)->r!=b){HERE ("pb4: %s", txt); exit (0);}
+      b=b->r;
+    }
+}
+  
 int check_node_integrity (ALN_node n, char *txt)
 {
   while (n)
