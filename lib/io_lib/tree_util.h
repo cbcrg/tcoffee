@@ -12,10 +12,6 @@ typedef struct alnnode
   ALN_node r;
   ALN_node l;
   ALN_node c;
-  ALN_node top;
-  ALN_node bot;
-  ALN_node start;
-  ALN_node end;
 }ALNnode;
 
 typedef struct ktnode *KT_node;

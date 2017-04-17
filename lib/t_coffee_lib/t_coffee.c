@@ -7093,6 +7093,7 @@ Alignment * t_coffee_dpa (int argc, char **argv)
   //terminate
   fprintf (stderr,"\n\n");
   print_command_line (stderr);
+  print_mem_usage (stdout, "DPA memory Usage");
   print_program_information (stderr, NULL);
   fprintf ( stderr, "\n");
   myexit (EXIT_SUCCESS);

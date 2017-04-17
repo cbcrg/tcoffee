@@ -7329,6 +7329,7 @@ NT_node nni (NT_node S, int n)
   return S;
 }
 ////////////////////////////////////// Paralel DPA
+ALN_node declare_aln_node(int mode);
 char * kmsa2msa_old   (Sequence *S,KT_node K, int max, int *cn);
 char * kmsa2msa_new   (Sequence *S,KT_node K, int max, int *cn);
 char * kmsa2msa_new2 (Sequence *S,KT_node K, int max, int *cn);
@@ -7336,6 +7337,7 @@ char * kmsa2msa_serial   (Sequence *S,KT_node K, int max, int *cn);
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 {
   int n=0;
+  char *outname;
   int cn=0;
   KT_node K =tree2ktree  (T, S, N);
   KT_node*KL=(KT_node*)vcalloc (K->tot, sizeof (KT_node));
@@ -7344,8 +7346,12 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 
   //new: graph implementation: very fast but memory hungry
   //old: parrallel: lots of i/o
-  return kmsa2msa_new (S,K,n,&cn);
+  outname=kmsa2msa_new (S,K,n,&cn);
   
+  //free all the nodes declared when merging the MSAs
+  declare_aln_node (-1);
+  
+  return outname;
 }
 
 
@@ -7606,8 +7612,9 @@ int node2gap_len2 (ALN_node n);
 ALN_node ** msa2graph2 (Sequence *S, Alignment *A, ALN_node**lu);
 ALN_node insert_gap_in_graph2 (ALN_node start);
 int link_nodes2 (ALN_node s, ALN_node m);
-ALN_node get_aln_node2();
 
+
+ALN_node n2FirstSeq (ALN_node n);
 ALN_node n2top (ALN_node n);
 ALN_node n2bot (ALN_node n);
 ALN_node n2end (ALN_node n);
@@ -7620,7 +7627,7 @@ int node2nseq     (ALN_node n);
 int check_graph_integrity (ALN_node g);;
 void display_graph_top   (ALN_node n, char *text);
 ALN_node insert_gap_in_graph (ALN_node start);
-ALN_node get_aln_node ();
+
 void display_right   (ALN_node n, char *text);
 void display_parent   (ALN_node n, char *text);
 void display_child   (ALN_node n, char *text);
@@ -7703,7 +7710,7 @@ ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu)
   aln+=2;
   for (s=-1; s<=A->nseq; s++)
     for (c=-1; c<=A->len_aln; c++)
-      aln[s][c]=get_aln_node();
+      aln[s][c]=declare_aln_node(1);
 
   
   for (s=-1; s<=A->nseq; s++)
@@ -7719,10 +7726,6 @@ ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu)
 	  n->c    =aln[s+1    ][c  ];
 	  n->l    =aln[s      ][c-1];
 	  n->r    =aln[s      ][c+1];
-	  n->top  =aln[-1     ][c  ];
-	  n->bot  =aln[A->nseq][c  ];
-	  n->start=aln[s      ][-1 ];
-	  n->end  =aln[s      ][A->len_aln];
 	  
 	  if      (s==-1      ){n->aa='[';}
 	  else if (s== A->nseq){n->aa=']';}
@@ -7785,8 +7788,8 @@ ALN_node* kmsa2graph (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_n
 	  int lm=node2gap_len (m->r);
 	  int ls=node2gap_len (s->r);
 	  
-	  for (g=lm; g<ls; g++)insert_gap_in_graph (m->top);
-	  for (g=ls; g<lm; g++)insert_gap_in_graph (s->top);
+	  for (g=lm; g<ls; g++)insert_gap_in_graph (n2top(m));
+	  for (g=ls; g<lm; g++)insert_gap_in_graph (n2top(s));
 	  
 	  	  
 	  n++;
@@ -7810,36 +7813,24 @@ int insert_msa_in_msa (ALN_node s, ALN_node m)
   ALN_node botM, topM, botS, topS,lastM, firstM, lastS, firstS, is, im, aln;
   
 
-  m=((m->top)->c)->start;
-  s=((s->top)->c)->start;  
+  m=n2FirstSeq(m);
+  s=n2FirstSeq(s);
+  
+  lastM=n2bot(m);lastM=lastM->p;
+  firstS=n2top(s); firstS=firstS->c;
+  lastS=n2bot (s); lastS=lastS->p;
     
-  lastM =(m->bot)->p;
-  firstS=(s->top)->c;
-  lastS =(s->bot)->p;
-  
-  //display_right (lastM, "\nLastM");
-  //display_right (firstS, "\nfirstS");
-  //display_right (lastS, "\nLastS");
-  
   while (lastM)
     {
       ALN_node bot=lastM->c;
       ALN_node newn=firstS;
-      ALN_node old_top, old_bot;
-
+      
       lastM->c=firstS;
       firstS->p=lastM;
       
       lastS->c=bot;
       bot->p=lastS;
-      
-      while (newn)
-	{
-	  newn->top=lastM->top;
-	  newn->bot=lastM->bot;
-	  newn=newn->c;
-	}
-      
+            
       lastM=lastM->r;
       firstS=firstS->r;
       lastS=lastS->r;
@@ -7847,6 +7838,13 @@ int insert_msa_in_msa (ALN_node s, ALN_node m)
   return n;
 }
 
+//Node navigation
+ALN_node n2FirstSeq (ALN_node n)
+{
+  n=n2top(n);
+  n=n->c;
+  return n2start(n);
+}
 ALN_node n2top (ALN_node n)
 {
   while (n->p)n=n->p;
@@ -7868,11 +7866,12 @@ ALN_node n2start (ALN_node n)
   while (n->l)n=n->l;
   return n;
 }
-
 int node2nseq     (ALN_node n)
 {
   int nseq=0;
-  n=(n->top)->c;
+  n=n2top(n);
+  n=n->c;
+  
   while (n->c)
     {
       nseq++;
@@ -7922,36 +7921,19 @@ ALN_node insert_gap_in_graph (ALN_node start)
   
   bot=top=insert_node (start, start->r, top,NULL,']');
   
-  while (top)
-    {
-      top->bot=bot;
-      top=top->p;
-    }
+  
   return top;
   
 }
 ALN_node insert_node (ALN_node left, ALN_node right, ALN_node parent, ALN_node child, char value)
 {
-  ALN_node n=get_aln_node();
-  ALN_node temp;
-  
-  
-  
+  ALN_node n=declare_aln_node(1);
+   
   n->aa=value;
     
-  if (right){n->end=right->end;n->seqN=right->seqN;}
-  else n->end=n;
-
-  if (left){n->start=left->start;n->seqN=left->seqN;}
-  else n->start=n;
-  
-  
-  if  (parent)n->top=parent->top;
-  else n->top=n;
-  
-  if (child)n->bot=child->bot;
-  else n->bot=n;
-    
+  if (right){n->seqN=right->seqN;}
+  else if (left) {n->seqN=left->seqN;}
+      
   n->l=left;
   if (left)left->r=n;
   
@@ -7968,36 +7950,46 @@ ALN_node insert_node (ALN_node left, ALN_node right, ALN_node parent, ALN_node c
 }
   
 
-ALN_node get_aln_node_old ()
+ALN_node declare_aln_node (int mode)
 {
-  static int available;
-  static ALN_node *list;
+
+  ALN_node r;
   int chunk=10000;
+  static ALN_node *bufbuf;
+  static int bb;
+  static int available;
+  static ALN_node buf;
+
   
-  if (available==0)
+  if (mode==-1)
     {
-      list=(ALN_node*)vmalloc (sizeof (alnnode)*chunk);
+      int a;
+      for (a=0; a<bb; a++)
+	{
+	  vfree (bufbuf[a]);
+	}
+      vfree (bufbuf);
+      bufbuf=NULL;
+      available=0;
+      buf=NULL;
+      return NULL;
+    }
+  
+  if (!available)
+    {
+      int s;
+
+      buf=(ALN_node)vmalloc (sizeof (alnnode)*chunk);
       available=chunk;
+      
+      bufbuf=(ALN_node*)vrealloc (bufbuf,(bb+1)*sizeof (ALN_node));
+      bufbuf[bb++]=buf;
     }
   available--;
-  return (ALN_node)list[available];
-}
-      
-      
-ALN_node get_aln_node ()
-{
-  static int available;
-  static ALN_node *buf;
-  static ALN_node r;
-  int chunk=10000;
-  
-  
-
-
-  r=(ALN_node)vmalloc (sizeof (alnnode));
-  r->aa='*';
+  r=buf++;
   return r;
-}
+}   
+
     
   
 //checking Function
@@ -8007,8 +7999,8 @@ int check_node_integrity (ALN_node n, char *txt)
   while (n)
     {
       int l1=node2len (n);
-      int l2=node2len (n->top);
-      int l3=node2len (n->bot);
+      int l2=node2len (n2top(n));
+      int l3=node2len (n2bot(n));
       
       if (l1!= l2){HERE ("top %d %d", l1, l2);HERE ("%s", txt);exit (0);}
       if (l1!= l3){HERE ("bot %d %d", l1, l3);HERE ("%s", txt);exit (0);}
@@ -8023,7 +8015,7 @@ int check_graph_integrity (ALN_node g)
   ALN_node t, top, bot, col;
   int l;
   // check all the sequences have the same length
-  t=g->top;
+  t=n2top(g);
   l=node2len (g);
   while (t)
     {
@@ -8032,18 +8024,18 @@ int check_graph_integrity (ALN_node g)
       t=t->c;
     }
   // check the top/bottom
-  top=t=g->top;
-  bot=g->bot;
+  top=t=n2top(g);
+  bot=n2bot(g);
   l=node2len (g);
   while (t)
     {
       col=t;
-      bot=t->bot;
-      top=t->top;
+      bot=n2bot(t);
+      top=n2top(t);
       while (col)
 	{
-	  if      (col->top!=top){HERE ("column pb with top");exit (0);}
-	  else if (col->bot!=bot){HERE ("column pb with bot");exit (0);}
+	  if      (n2top(col)!=top){HERE ("column pb with top");exit (0);}
+	  else if (n2bot(col)!=bot){HERE ("column pb with bot");exit (0);}
 	  col=col->c;
 	}
       t=t->r;
@@ -8055,8 +8047,8 @@ int check_graph_integrity (ALN_node g)
 void display_graph_top   (ALN_node n, char *text)
 {
   if (text)fprintf (stdout, "\n%s\n", text);
-  n=n->start;
-  n=n->top;
+  n=n2start(n);
+  n=n2top(n);
   while (n)
     {
       ALN_node s=n;
