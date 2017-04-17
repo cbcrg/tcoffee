@@ -737,6 +737,7 @@ void create_file ( char *name);
 void delete_file ( char *fname);
 int  util_rename ( char* from, char *to);
 int  util_copy   ( char* from, char *to);
+void reset_output_completion ();
 FILE * output_completion4halfmat ( FILE *fp,int n, int tot, int n_eports, char *s);
 FILE * output_completion ( FILE *fp,int n, int tot, int n_eports, char *s);
 void * null_function (int a, ...);

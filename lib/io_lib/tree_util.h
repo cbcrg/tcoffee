@@ -1,6 +1,23 @@
 #ifndef TREE_UTIL_H
 #define TREE_UTIL_H
 
+
+typedef struct alnnode *ALN_node;
+typedef struct alnnode
+{
+  char aa;
+  int seqN;
+    
+  ALN_node p;
+  ALN_node r;
+  ALN_node l;
+  ALN_node c;
+  ALN_node top;
+  ALN_node bot;
+  ALN_node start;
+  ALN_node end;
+}ALNnode;
+
 typedef struct ktnode *KT_node;
 typedef struct ktnode
 {
@@ -324,7 +341,7 @@ NT_node tree2nni (NT_node T, NT_node S);
 
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method);
 int kseq2kmsa   (KT_node *K, int n, char *method);
-char* kmsa2msa  (KT_node K, int n, int *cn);
+char* kmsa2msa  (Sequence *S,KT_node K, int n, int *cn);
 int ktree2klist (KT_node K, KT_node *KL, int *n);
 KT_node tree2ktree (NT_node T,Sequence *S, int N);
 #endif

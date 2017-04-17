@@ -6836,8 +6836,10 @@ char *vremove (char *s)
 {
 
 
-  if ( s && strstr (s, "*"))return vremove2(s);
-  else if ( !s || !file_exists(NULL,s) ) return NULL;
+  if (!s)return NULL;
+  else if ( s && strstr (s, "*"))return vremove2(s);
+  else if ( remove (s)==0)return NULL;
+  else if ( !file_exists(NULL,s) ) return NULL;
   else if ( isdir (s))
     {
       rmdir (s);
@@ -8798,7 +8800,10 @@ FILE * output_completion4halfmat ( FILE *fp,int n, int tot, int n_reports, char 
   return output_completion (fp,achieved, max, n_reports, s);
 }
 
-
+void reset_output_completion ()
+{
+  output_completion (NULL,0,0,0,NULL);
+}
 FILE * output_completion ( FILE *fp,int n, int tot, int n_reports, char *string)
         {
 
@@ -8808,10 +8813,15 @@ FILE * output_completion ( FILE *fp,int n, int tot, int n_reports, char *string)
 	  int t, elapsed;
 	  n++;
 
-	  if ( n==1)
+	  if ( n==1 || !fp)
 	    {
 	      ref_val=flag=0;
 	      ref_time=get_time()/1000;
+	    }
+	  if (!fp)
+	    {
+	      flag=0;
+	      return NULL;
 	    }
 	  t=get_time()/1000;
 	  elapsed=t-ref_time;

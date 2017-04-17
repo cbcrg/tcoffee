@@ -7329,7 +7329,10 @@ NT_node nni (NT_node S, int n)
   return S;
 }
 ////////////////////////////////////// Paralel DPA
-
+char * kmsa2msa_old   (Sequence *S,KT_node K, int max, int *cn);
+char * kmsa2msa_new   (Sequence *S,KT_node K, int max, int *cn);
+char * kmsa2msa_new2 (Sequence *S,KT_node K, int max, int *cn);
+char * kmsa2msa_serial   (Sequence *S,KT_node K, int max, int *cn);
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 {
   int n=0;
@@ -7339,9 +7342,9 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   n=ktree2klist(K,KL,&n);
   kseq2kmsa(KL,n, method);
 
-  kmsa2msa (K,n,&cn);
-  
-  return K->msaF;
+  //new: graph implementation: very fast but memory hungry
+  //old: parrallel: lots of i/o
+  return kmsa2msa_new (S,K,n,&cn);
   
 }
 
@@ -7527,7 +7530,6 @@ int kseq2kmsa   (KT_node *K, int n, char *method)
   while (KL[a++])
     {
       vwait(NULL);
-      output_completion (stderr, a, nt, 100, "collecting Threads");
     }
   
   for ( a=0; a<n; a++)failed+=(check_file_exists (K[a]->msaF))?0:1;
@@ -7557,11 +7559,11 @@ char* kmsa2msa_serial (KT_node K, int max, int *cn)
     }
 return K->msaF;
 }
-char * kmsa2msa   (KT_node K, int max, int *cn)
+char * kmsa2msa_old   (Sequence *S,KT_node K, int max, int *cn)
 {
   int nproc=get_nproc();
   int a, b, c;
-  
+  reset_output_completion ();
   for (a=0; a<K->nc;)
     {
       for (b=0; b<nproc && a<K->nc;)
@@ -7582,6 +7584,7 @@ char * kmsa2msa   (KT_node K, int max, int *cn)
 	}
       for (c=0; c<b; c++)vwait(NULL);
     }
+  reset_output_completion ();
   for (a=0; a<K->nc;a++)
     {
       output_completion (stderr,a,K->nc, 100, "thread the final MSA");
@@ -7591,3 +7594,564 @@ char * kmsa2msa   (KT_node K, int max, int *cn)
    
   return K->msaF;
 }
+
+//
+//
+//
+//
+//
+
+ALN_node* kmsa2graph2 (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
+int node2gap_len2 (ALN_node n);
+ALN_node ** msa2graph2 (Sequence *S, Alignment *A, ALN_node**lu);
+ALN_node insert_gap_in_graph2 (ALN_node start);
+int link_nodes2 (ALN_node s, ALN_node m);
+ALN_node get_aln_node2();
+
+ALN_node n2top (ALN_node n);
+ALN_node n2bot (ALN_node n);
+ALN_node n2end (ALN_node n);
+ALN_node n2start (ALN_node n);
+
+int node2gap_len (ALN_node n);
+int node2len (ALN_node n);
+int node2len_left (ALN_node n);
+int node2nseq     (ALN_node n);
+int check_graph_integrity (ALN_node g);;
+void display_graph_top   (ALN_node n, char *text);
+ALN_node insert_gap_in_graph (ALN_node start);
+ALN_node get_aln_node ();
+void display_right   (ALN_node n, char *text);
+void display_parent   (ALN_node n, char *text);
+void display_child   (ALN_node n, char *text);
+void display_left   (ALN_node n, char *text);
+
+
+int insert_msa_in_msa (ALN_node s, ALN_node m);
+ALN_node insert_node (ALN_node left, ALN_node right, ALN_node parent, ALN_node child, char value);
+
+ALN_node* kmsa2graph (Sequence *S, KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
+ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu);
+void check_seq_graph (Sequence *S, ALN_node iseq);
+
+void check_aln_graph (Sequence *S, ALN_node *aln, int nseq);
+
+
+
+char * kmsa2msa_new (Sequence *S,KT_node K, int max, int *cn)
+{
+  char *out=vtmpnam (NULL);
+  int  a;
+  int nseq=0;
+  FILE*fp;
+  ALN_node *aln;
+  short *lu;
+  int done=1;
+  aln=(ALN_node*)vcalloc ((2*S->nseq)+1, sizeof (ALN_node));
+  lu=(short*)vcalloc (S->nseq, sizeof (short));
+  aln=kmsa2graph (S,K, NULL, NULL,aln,&nseq,&done,max);
+  
+  
+  fp=vfopen (out, "w");
+  for (a=0; a<nseq; a++)
+    {
+      ALN_node seq=aln[a];
+      
+      if (lu[seq->seqN]);
+      else
+	{
+	  lu[seq->seqN]=1;
+	  fprintf (fp, ">%s\n", S->name[seq->seqN]);
+	  while (seq->aa!=')')
+	    {
+	      ALN_node pseq=seq;
+	      
+	      if (seq->aa!='(')fprintf (fp, "%c", seq->aa);
+	      seq=seq->r;
+	    }
+	  fprintf (fp, "\n");
+	}
+    }
+  
+  vfclose (fp);
+  vfree (aln);
+  vfree (lu);
+  return out;
+}
+
+ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu)
+{
+  int *cc=(int*)vcalloc (A->nseq, sizeof (int));
+  ALN_node **aln;
+  int s, c;
+  
+  if (!lu)
+    {
+      lu=(ALN_node**)vcalloc (A->nseq, sizeof (ALN_node*));
+      for (s=0; s<A->nseq; s++)
+	{
+	  lu[s]=(ALN_node*)vcalloc (A->len_aln+2, sizeof (ALN_node));
+	}
+    }
+  
+  aln=(ALN_node**)vcalloc (A->nseq+4,sizeof (ALN_node*));
+  for (s=0;s<A->nseq+4; s++)
+    {
+      aln[s]=(ALN_node*)vcalloc ( A->len_aln+4, sizeof (ALN_node));
+      aln[s]+=2;
+    }
+  aln+=2;
+  for (s=-1; s<=A->nseq; s++)
+    for (c=-1; c<=A->len_aln; c++)
+      aln[s][c]=get_aln_node();
+
+  
+  for (s=-1; s<=A->nseq; s++)
+    {
+      int seqN=(s<0 || s==A->nseq)?-1:name_is_in_hlist2 (A->name[s], S->name, S->nseq);
+      
+      for (c=-1; c<=A->len_aln; c++)
+	{
+	  ALN_node n=aln[s][c];
+	  
+	  n->seqN =seqN;
+	  n->p    =aln[s-1    ][c  ];
+	  n->c    =aln[s+1    ][c  ];
+	  n->l    =aln[s      ][c-1];
+	  n->r    =aln[s      ][c+1];
+	  n->top  =aln[-1     ][c  ];
+	  n->bot  =aln[A->nseq][c  ];
+	  n->start=aln[s      ][-1 ];
+	  n->end  =aln[s      ][A->len_aln];
+	  
+	  if      (s==-1      ){n->aa='[';}
+	  else if (s== A->nseq){n->aa=']';}
+	  else if (c==-1      ){n->aa='(';if (n->seqN!=-1)lu[s][0]=n;}
+	  else if (c== A->len_aln){n->aa=')';}
+	  else
+	    {
+	      n->aa=A->seq_al[s][c];
+	      if (n->aa!='-')
+		{
+		  cc[s]++;
+		  lu[s][cc[s]]=n;
+		}
+	    }
+	}
+    }
+
+  aln-=2;
+  for (s=0; s<A->nseq+4; s++)
+    {
+      vfree (aln[s]-2);
+    }
+  vfree (aln);
+  vfree (cc);
+  return lu;
+}
+
+ALN_node* kmsa2graph (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
+{
+  int a,b,c, n;
+  Alignment *A1;
+  
+  if (!A0)
+    {
+      A0=quick_read_aln (K->msaF);
+      lu0=msa2graph (S,A0, NULL);
+      for (a=0; a<A0->nseq; a++)list[ns[0]++]=lu0[a][0];
+      reset_output_completion ();
+    }  
+  
+  for (a=0; a<K->nc; a++)
+    {
+      ALN_node m, s, t;
+      A1 =quick_read_aln ((K->child[a])->msaF);
+      ALN_node **lu1=msa2graph (S,A1, NULL);
+      int i0=name_is_in_list ((K->child[a])->name,A0->name, A0->nseq,MAXNAMES);
+      int i1=name_is_in_list ((K->child[a])->name,A1->name, A1->nseq,MAXNAMES);
+      
+      for (b=0; b<A1->nseq; b++)list[ns[0]++]=lu1[b][0];
+      
+      
+
+      n=0;
+      while (lu0[i0][n])
+	{
+	  int g;
+	  m=lu0[i0][n];
+	  s=lu1[i1][n];
+	  
+	  int lm=node2gap_len (m->r);
+	  int ls=node2gap_len (s->r);
+	  
+	  for (g=lm; g<ls; g++)insert_gap_in_graph (m->top);
+	  for (g=ls; g<lm; g++)insert_gap_in_graph (s->top);
+	  
+	  	  
+	  n++;
+	}
+      done[0]+=1;
+      output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
+      insert_msa_in_msa (lu1[i1][0],lu0[i0][0]);
+      list=kmsa2graph(S,K->child[a], A1, lu1, list, ns, done, max);
+      
+      for (b=0; b<A1->nseq; b++)vfree(lu1[b]);
+      vfree (lu1);
+      free_aln (A1);
+    }
+  
+  return list;
+}
+
+int insert_msa_in_msa (ALN_node s, ALN_node m)
+{
+  int n=0;
+  ALN_node botM, topM, botS, topS,lastM, firstM, lastS, firstS, is, im, aln;
+  
+
+  m=((m->top)->c)->start;
+  s=((s->top)->c)->start;  
+    
+  lastM =(m->bot)->p;
+  firstS=(s->top)->c;
+  lastS =(s->bot)->p;
+  
+  //display_right (lastM, "\nLastM");
+  //display_right (firstS, "\nfirstS");
+  //display_right (lastS, "\nLastS");
+  
+  while (lastM)
+    {
+      ALN_node bot=lastM->c;
+      ALN_node newn=firstS;
+      ALN_node old_top, old_bot;
+
+      lastM->c=firstS;
+      firstS->p=lastM;
+      
+      lastS->c=bot;
+      bot->p=lastS;
+      
+      while (newn)
+	{
+	  newn->top=lastM->top;
+	  newn->bot=lastM->bot;
+	  newn=newn->c;
+	}
+      
+      lastM=lastM->r;
+      firstS=firstS->r;
+      lastS=lastS->r;
+    }
+  return n;
+}
+
+ALN_node n2top (ALN_node n)
+{
+  while (n->p)n=n->p;
+  return n;
+}
+
+ALN_node n2bot (ALN_node n)
+{
+  while (n->c)n=n->c;
+  return n;
+}
+ALN_node n2end (ALN_node n)
+{
+  while (n->r)n=n->r;
+  return n;
+}
+ALN_node n2start (ALN_node n)
+{
+  while (n->l)n=n->l;
+  return n;
+}
+
+int node2nseq     (ALN_node n)
+{
+  int nseq=0;
+  n=(n->top)->c;
+  while (n->c)
+    {
+      nseq++;
+      n=n->c;
+    }
+  return nseq;
+}
+int node2len (ALN_node n)
+{
+  int len=0;
+  
+  while (n){len++, n=n->r;}
+  return len;
+}
+int node2len_left (ALN_node n)
+{
+  int len=0;
+  
+  while (n){len++, n=n->l;}
+  return len;
+}
+int node2gap_len (ALN_node n)
+{
+  int len=0;
+  
+  while (n && n->aa=='-'){len++, n=n->r;}
+  return len;
+}
+  
+ALN_node insert_gap_in_graph (ALN_node start)
+{
+  ALN_node botM, topM, botS, topS,lastM, firstM, lastS, firstS;
+  ALN_node top, bot;
+  ALN_node istart=start;
+  
+  
+  top=insert_node (start, start->r,NULL, (start->c)->r, '[');
+  top->p=NULL;
+  
+  
+  start=start->c;
+  while (start->c)
+    {
+      top=insert_node (start, start->r,top, (start->c)->r, '-');
+      start=start->c;
+    }
+  
+  bot=top=insert_node (start, start->r, top,NULL,']');
+  
+  while (top)
+    {
+      top->bot=bot;
+      top=top->p;
+    }
+  return top;
+  
+}
+ALN_node insert_node (ALN_node left, ALN_node right, ALN_node parent, ALN_node child, char value)
+{
+  ALN_node n=get_aln_node();
+  ALN_node temp;
+  
+  
+  
+  n->aa=value;
+    
+  if (right){n->end=right->end;n->seqN=right->seqN;}
+  else n->end=n;
+
+  if (left){n->start=left->start;n->seqN=left->seqN;}
+  else n->start=n;
+  
+  
+  if  (parent)n->top=parent->top;
+  else n->top=n;
+  
+  if (child)n->bot=child->bot;
+  else n->bot=n;
+    
+  n->l=left;
+  if (left)left->r=n;
+  
+  n->r=right;
+  if (right)right->l=n;
+
+  n->p=parent;
+  if (parent)parent->c=n;
+
+  n->c=child;
+  if (child)child->p=n;
+  
+  return n;
+}
+  
+
+ALN_node get_aln_node_old ()
+{
+  static int available;
+  static ALN_node *list;
+  int chunk=10000;
+  
+  if (available==0)
+    {
+      list=(ALN_node*)vmalloc (sizeof (alnnode)*chunk);
+      available=chunk;
+    }
+  available--;
+  return (ALN_node)list[available];
+}
+      
+      
+ALN_node get_aln_node ()
+{
+  static int available;
+  static ALN_node *buf;
+  static ALN_node r;
+  int chunk=10000;
+  
+  
+
+
+  r=(ALN_node)vmalloc (sizeof (alnnode));
+  r->aa='*';
+  return r;
+}
+    
+  
+//checking Function
+
+int check_node_integrity (ALN_node n, char *txt)
+{
+  while (n)
+    {
+      int l1=node2len (n);
+      int l2=node2len (n->top);
+      int l3=node2len (n->bot);
+      
+      if (l1!= l2){HERE ("top %d %d", l1, l2);HERE ("%s", txt);exit (0);}
+      if (l1!= l3){HERE ("bot %d %d", l1, l3);HERE ("%s", txt);exit (0);}
+      n=n->r;
+    }
+  return 1;
+}
+
+
+int check_graph_integrity (ALN_node g)
+{
+  ALN_node t, top, bot, col;
+  int l;
+  // check all the sequences have the same length
+  t=g->top;
+  l=node2len (g);
+  while (t)
+    {
+      int l2=node2len (g);
+      if (l2!=l){HERE ("different length"); exit (0);}
+      t=t->c;
+    }
+  // check the top/bottom
+  top=t=g->top;
+  bot=g->bot;
+  l=node2len (g);
+  while (t)
+    {
+      col=t;
+      bot=t->bot;
+      top=t->top;
+      while (col)
+	{
+	  if      (col->top!=top){HERE ("column pb with top");exit (0);}
+	  else if (col->bot!=bot){HERE ("column pb with bot");exit (0);}
+	  col=col->c;
+	}
+      t=t->r;
+    }
+  return 1;
+}
+
+
+void display_graph_top   (ALN_node n, char *text)
+{
+  if (text)fprintf (stdout, "\n%s\n", text);
+  n=n->start;
+  n=n->top;
+  while (n)
+    {
+      ALN_node s=n;
+      while (s)
+	{
+	  fprintf (stdout, "%c", s->aa);
+	  s=s->c;
+	}
+      fprintf (stdout, "\n");
+      n=n->r;
+    }
+}
+
+
+void display_right   (ALN_node n, char *text)
+{
+
+  while (n)
+    {
+      fprintf (stdout, "%c", n->aa);
+      n=n->r;
+    }
+  fprintf ( stdout, " ::: %s\n",text);
+}
+
+
+void display_parent   (ALN_node n, char *text)
+{
+  if (text)fprintf (stdout, "\n%s\n", text);
+  while (n)
+    {
+      fprintf (stdout, "%c", n->aa);
+      n=n->p;
+    }
+  fprintf ( stdout, "\n");
+}
+
+
+void display_child   (ALN_node n, char *text)
+{
+  if (text)fprintf (stdout, "\n%s\n", text);
+  while (n)
+    {
+      fprintf (stdout, "%c", n->aa);
+      n=n->c;
+    }
+  fprintf ( stdout, "\n");
+}
+
+void display_left   (ALN_node n, char *text)
+{
+  if (text)fprintf (stdout, "\n%s\n", text);
+  while (n)
+    {
+      fprintf (stdout, "%c", n->aa);
+      n=n->l;
+    }
+  fprintf ( stdout, "\n");
+}
+      
+void check_aln_graph (Sequence *S, ALN_node *aln, int nseq)
+{
+  int a; 
+  for (a =0; a<nseq; a++)check_seq_graph (S, aln[a]);
+}
+
+
+void check_seq_graph (Sequence *S, ALN_node iseq)
+{
+  ALN_node seq=iseq;
+  while (seq->aa!=')')
+    {
+      fprintf ( stdout, "%c", seq->aa);
+      seq=seq->r;
+    }
+  fprintf (stdout, " %s\n",S->name[seq->seqN]);
+  
+  seq=iseq;
+  while (seq->aa!=')')
+    {
+      if      (!seq->p      )fprintf (stdout, "*");
+      else fprintf (stdout, "p");
+      seq=seq->r;
+    }
+  fprintf (stdout, " %s\n",S->name[seq->seqN]);
+  
+  seq=iseq;
+  while (seq->aa!=')')
+    {
+      if      (!seq->c     )fprintf (stdout, "?");
+      else fprintf (stdout, "1");
+      seq=seq->r;
+    }
+  fprintf (stdout, " %s\n\n",S->name[seq->seqN]);
+}
+
+
+

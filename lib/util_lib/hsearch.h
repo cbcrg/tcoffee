@@ -56,4 +56,6 @@ int string2key (char *s, Char_node *n);
 Char_node * declare_char_node (int action);
 
 int name_is_in_hlist (char *name, char **list, int n);
+int name_is_in_hlist2 (char *name, char **list, int n);
+int name_is_in_hlist3 (char *name, char **list, int n);
 char *check_hlist_for_dup(char **name, int n);
