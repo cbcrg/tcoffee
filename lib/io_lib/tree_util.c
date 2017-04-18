@@ -7648,6 +7648,72 @@ void check_seq_graph (Sequence *S, ALN_node iseq);
 void check_aln_graph (Sequence *S, ALN_node *aln, int nseq);
 
 
+char* graph2aln (Sequence *S, ALN_node *aln, int nseq,char *out);
+ALN_node* kmsa2graph_multi (Sequence *S, KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
+ALN_node* kmsa2graph_multi (Sequence *S, KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
+{
+  int nproc=get_nproc();
+  int a, b, c;
+  reset_output_completion ();
+  for (a=0; a<K->nc;)
+    {
+      for (b=0; b<nproc && a<K->nc;)
+	{
+	  output_completion (stderr,a,K->nc, 100, "Incorporating the MSAs - [Multi Thread]");
+	  if (vvfork(NULL)==0)//child process
+	    {
+	      ALN_node *aln;
+	      initiate_vtmpnam(NULL);
+	      aln=kmsa2graph (S,K->child[a],A0,lu0,list,ns,done, max);
+	      graph2aln (S,aln,ns[0],(K->child[a])->msaF);
+	      myexit (EXIT_SUCCESS);
+	    }
+	  else
+	    {
+	      a++;
+	      b++;
+	    }
+	  
+	}
+      for (c=0; c<b; c++)vwait(NULL);
+    }
+  reset_output_completion ();
+  for (a=0; a<K->nc;a++)(K->child[a])->nc=0;
+  return kmsa2graph (S,K,A0,lu0,list,ns,done, max);
+}
+char* graph2aln (Sequence *S, ALN_node *aln, int nseq,char *out)
+{
+  FILE *fp=vfopen (out, "w");
+  short*lu=(short*)vcalloc (S->nseq, sizeof (short));
+  int a;
+  
+  
+  fp=vfopen (out, "w");
+  for (a=0; a<nseq; a++)
+    {
+      ALN_node seq=aln[a];
+      
+      if (lu[seq->seqN]);
+      else
+	{
+	  lu[seq->seqN]=1;
+	  fprintf (fp, ">%s\n", S->name[seq->seqN]);
+	  while (seq->aa!=')')
+	    {
+	      ALN_node pseq=seq;
+	      
+	      if (seq->aa!='(')fprintf (fp, "%c", seq->aa);
+	      seq=seq->r;
+	    }
+	  fprintf (fp, "\n");
+	}
+    }
+  
+  vfclose (fp);
+  vfree (lu);
+  return out;
+}
+
 
 char * kmsa2msa_new (Sequence *S,KT_node K, int max, int *cn)
 {
@@ -7660,7 +7726,7 @@ char * kmsa2msa_new (Sequence *S,KT_node K, int max, int *cn)
   int done=1;
   aln=(ALN_node*)vcalloc ((2*S->nseq)+1, sizeof (ALN_node));
   lu=(short*)vcalloc (S->nseq, sizeof (short));
-  aln=kmsa2graph (S,K, NULL, NULL,aln,&nseq,&done,max);
+  aln=kmsa2graph_multi (S,K, NULL, NULL,aln,&nseq,&done,max);
   
   
   fp=vfopen (out, "w");
@@ -7830,7 +7896,7 @@ ALN_node* kmsa2graph_stretch (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu
 	}
       
       done[0]+=1;
-      output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
+      //output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
       insert_msa_in_msa (lu1[i1][0],lu0[i0][0]);
       list=kmsa2graph(S,K->child[a], A1, lu1, list, ns, done, max);
       
@@ -7890,7 +7956,7 @@ ALN_node* kmsa2graph_seq (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, A
 	}
                   
       done[0]+=1;
-      output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
+      //output_completion (stderr,done[0],max, 100, "Incorporating MSAs");
       insert_msa_in_msa (lu1[i1][0],lu0[i0][0]);
       list=kmsa2graph(S,K->child[a], A1, lu1, list, ns, done, max);
       
