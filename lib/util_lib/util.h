@@ -728,6 +728,7 @@ int my_rmdir ( char *dir);
 int file_is_empty(char *fname);
 int file_exists (char *path,char *fname);
 int isexec (char *fname);
+int istmp  (char *name);
 int isdir  (char *fname);
 int isdir4path (char *fname);
 int rrmdir (char *fname);

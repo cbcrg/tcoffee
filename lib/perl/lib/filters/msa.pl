@@ -53,13 +53,17 @@ while (<F>)
   }
 close (F);
 
-if ($tot<1)
+if ($tot<1 && $run_anyway)
   {
     print STDERR "\nWarning: MSA returned a NULL file -- Use T-Coffee instead\n";
     open (F,$err);
     while (<F>){print "$_";}
       
     system ("t_coffee -seq $msaf -outfile $ARGV[1]  -quiet");
+  }
+elsif ($tot<1)
+  {
+    exit (EXIT_FAILURE);
   }
 else
   {

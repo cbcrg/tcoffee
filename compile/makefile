@@ -267,6 +267,7 @@ FILTER_LIB_OBJECTS=\
 	seq2intersection.pl\
 	msf_aln2fasta_aln.pl\
 	msa.pl\
+	upp.pl\
 	dca.pl\
 	blast_aln2fasta_aln.pl\
 	blast_xml2fasta_aln.pl\
@@ -284,6 +285,10 @@ fasta_seq2consan_aln.pl:\
 	$(FILTER_LIB)/fasta_seq2consan_aln.pl
 	cp $(FILTER_LIB)/fasta_seq2consan_aln.pl .
 	echo "# `date`" >> fasta_seq2consan_aln.pl
+upp.pl:\
+	$(FILTER_LIB)/upp.pl
+	cp $(FILTER_LIB)/upp.pl .
+	echo "# `date`" >> upp.pl
 msa.pl:\
 	$(FILTER_LIB)/msa.pl
 	cp $(FILTER_LIB)/msa.pl .

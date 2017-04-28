@@ -918,11 +918,9 @@ Alignment *seq2msa (char *method,Sequence *S)
 }
 char *seq_file2msa_file (char *file, char *seq, char *aln)
 {
-  TC_method *method;
-  char *command;
+  TC_method *method=NULL;
+  static char *command=NULL;
   int free=0;
-  
-  
   
   if (!aln)
     {
@@ -932,9 +930,7 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
   else if (file[0]=='#')
     {
       //will run the T-Coffee master command
-      command=(char*)vcalloc ( strlen (file)+1000, sizeof (char));
-      sprintf (command, "%s -seq seq -outfile aln -output fasta_aln -quiet", file+1);
-      free=1;
+      command=csprintf (command, "%s -seq seq -outfile aln -output fasta_aln -quiet >/dev/null 2>/dev/null", file+1);
     }
   else if ( !check_file_exists (file))
     {
@@ -951,7 +947,7 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
       command=make_aln_command (method,"seq", "aln");
     }
   
-  if (method)
+  if (command)
     {
       static char *dir;
       char *cdir=get_pwd (NULL);
@@ -967,9 +963,12 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
       
       printf_system ("%s", command);
       
+      if ( !check_file_exists ("aln"))
+	{
+	  printf_exit (EXIT_FAILURE, stderr, "ERROR: Impossible to run %s [FATAL:%s]\n",file, PROGRAM);
+	}
       
       printf_system ("cp aln %s",aln);
-      vfree (command);
       chdir    (cdir);
       printf_system_direct ("rm %s/*", dir);
       
@@ -978,7 +977,7 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
     {
       printf_exit ( EXIT_FAILURE,stderr, "\nERROR: %s is an unknown method [FATAL]", file);
     }
-  if (free)vfree (command);
+
   return aln;
 }
 
@@ -2683,6 +2682,7 @@ Alignment *align_two_sequences4dpa ( char *padded1,char *gapped1, char *padded2,
     }
   R->len_aln=strlen (R->seq_al[0]);
   R->nseq=2;
+  
   //free_aln (A);
   if ( strlen (R->seq_al[0])!=strlen (R->seq_al[1]))
     {

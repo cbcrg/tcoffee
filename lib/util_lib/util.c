@@ -5236,31 +5236,59 @@ char *get_dir_4_tcoffee()
     }
   return dir_4_tcoffee;
 }
+char*generate_unique_string (int len);
+char *get_tmp_4_tcoffee_new_notworking()
+{
+  static char *tmp_4_tcoffee;
+  
+  if (tmp_4_tcoffee);
+  else
+    {
+      char *tco=NULL;
+      tco=csprintf (tco, "%s_%d", generate_unique_string(10), (int)getpid());
+  
+      if (getenv("TMP_4_TCOFFEE"))
+	{
+	  if (!isdir(getenv("TMP_4_TCOFFEE")))my_mkdir(getenv("TMP_4_TCOFFEE"));
+	  tmp_4_tcoffee=csprintf (tmp_4_tcoffee, "%s/%s/", tco);
+	}
+      else
+	{
+	  if (!isdir ("/tmp/tco"))my_mkdir ("/tmp/tco");
+	  tmp_4_tcoffee=csprintf (tmp_4_tcoffee, "/tmp/tco/%s/",tco);
+	}
+      if (!isdir (tmp_4_tcoffee))my_mkdir (tmp_4_tcoffee);
+    }
+  return tmp_4_tcoffee;
+  
+}
+char*generate_unique_string (int len)
+{
+  char alp[]="abcdefghijklmnopqrstuvwxyz0123456789_";
+  int a, l;
+  char *string=(char*)vcalloc (len+1, sizeof (char));;
+  vsrand(0);
+  l=strlen (alp);
+  
+  for (a=0; a<len; a++)
+    string[a]=alp [(int)rand()%l];
+  string[a]='\0';
+  return string;
+}
+  
+
 char *get_tmp_4_tcoffee ()
 {
   static char *tmp_4_tcoffee;
-  if (!tmp_4_tcoffee)
+  
+  if ( tmp_4_tcoffee)
     {
-      tmp_4_tcoffee=(char*)vcalloc ( 1000, sizeof (char));
-
-    }
-
-  if ( tmp_4_tcoffee[0])
-    {
-
       return tmp_4_tcoffee;
     }
   else
     {
+      tmp_4_tcoffee=(char*)vcalloc (1000, sizeof (char));
       char *v=getenv("TMP_4_TCOFFEE");
-
-      char buf[1000];
-      char host[1024];
-      int hn=0;
-      int a;
-      gethostname(host, 1023);
-      for (a=0; a<strlen (host); a++)hn+=host[a];
-      
       if (getenv ("UNIQUE_DIR_4_TCOFFEE"))
 	  {
 		  printf("UNIQUE_DIR_4_TCOFFEE\n");
@@ -5276,14 +5304,12 @@ char *get_tmp_4_tcoffee ()
 
       //now that rough location is decided, create the subdir structure
 
-// 	if (getppid() != getsid())
+      
    if (is_rootpid())
 	{
 	  cputenv ("ROOT_TMP_4_TCOFFEE=%s",  tmp_4_tcoffee);
-	  sprintf (buf, "%s/tco/%d%d/", tmp_4_tcoffee,hn,getpid());
+	  tmp_4_tcoffee=csprintf (tmp_4_tcoffee, "%s/tco/tco%s%d/", tmp_4_tcoffee,generate_unique_string(8),getpid());
 	  
-	  sprintf (tmp_4_tcoffee, "%s", buf);
-
 	  my_mkdir(tmp_4_tcoffee);
 	  my_rmdir(tmp_4_tcoffee);
 	  my_mkdir(tmp_4_tcoffee);
@@ -5352,25 +5378,24 @@ char *get_plugins_4_tcoffee ()
 }
 char *get_lockdir_4_tcoffee ()
 {
-  static char lockdir_4_tcoffee [1000];
-  char *v;
+  static char *lockdir;
+  
 
-  if ( lockdir_4_tcoffee[0] )return lockdir_4_tcoffee;
+  if ( lockdir)return lockdir;
   else
     {
-      char buf[1000];
-      v=getenv ("LOCKDIR_4_TCOFFEE");
-      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))sprintf (lockdir_4_tcoffee, "%s/", get_tmp_4_tcoffee());
-      else if (v)sprintf (lockdir_4_tcoffee, "%s/", v);
-      else sprintf (lockdir_4_tcoffee, "%s/", get_tmp_4_tcoffee());
+      char *s=generate_unique_string (10);
+      if (getenv ("UNIQUE_DIR_4_TCOFFEE"))lockdir=csprintf (lockdir, "%s/%s/", getenv ("UNIQUE_DIR_4_TCOFFEE"),s);
+      else if (getenv ("LOCKDIR_4_TCOFFEE"))lockdir=csprintf (lockdir, "%s/%s/", getenv ("LOCKDIR_4_TCOFFEE"), s);
+      else lockdir=csprintf (lockdir,"%s/lck/%s/",  get_tmp_4_tcoffee(),s); 
     }
 
   if (is_rootpid())
 	{
-	  my_mkdir(lockdir_4_tcoffee);
+	  my_mkdir(lockdir);
 	}
 
-  return lockdir_4_tcoffee;
+  return lockdir;
 }
 
 
@@ -8522,7 +8547,16 @@ int file_exists (char *path, char *fname)
     return S_ISREG(s.st_mode);
   else return 0;
 }
-
+int istmp  (char *file)
+{
+  char tmp[10];
+  int a;
+  for (a=0; a<5; a++)tmp[a]=file[a];
+  tmp[a]='\0';
+  if      ( strm (tmp, "/tmp/"))return 1;
+  
+  return 0;
+}
 int isdir  (char *file)
 {
   struct stat s;
@@ -9892,8 +9926,9 @@ void clean_exit ()
   char *tmp;
   
   Tmpname *start;
-  int debug;
-
+  int debug=0;
+  char *scratch=NULL;
+  
   clean_exit_started=1;//prevent new locks
   start=tmpname;
   //1-start killing all the children
@@ -9956,40 +9991,69 @@ void clean_exit ()
 
   //Remove all temporary files
   debug=(atoigetenv ("DEBUG_TMP_FILE"));
-
-
+  scratch=getenv ("TMP2SCRATCH");
+  
+  if      (istmp(get_tmp_4_tcoffee()))
+    {
+      return;
+    }
+  else if (scratch && !is_rootpid());
+  else if (scratch && is_rootpid())
+    {
+      printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), scratch);
+      return;
+    }
+  
   
   while ( start && start->name)
     {
-      if (!debug)
+      if (scratch)
 	{
-	  
-	  if (isdir(start->name))rrmdir (start->name);
-	  else
-	    {
-	      char test[1000];
-	      vremove (start->name);
-
-	      if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
-	      if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
-	    }
+	  struct stat s;
+	  if (stat(start->name,& s)!=-1)
+	    printf_system_direct ("mv %s %s", start->name,  scratch);
 	}
-      else
+      else if (debug)
 	{
-	  /*
+	   /*
 	  if (isdir(start->name))
 	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : Dir  %s not removed (%d)\n", start->name, getpid());}
 	  else
 	    {fprintf ( stderr, "DEBUG_TMP_FILE SET : File %s not removed (%d)\n", start->name, getpid());}
-	  */
+	   */
 	}
+      else 
+	{
+	  
+	  if (isdir(start->name))
+	    {
+	      rrmdir (start->name);
+	    }
+	  else
+	    {
+	      char test[10000];
+	      vremove (start->name);
+	      if (start->name)sprintf (test, "%s.dnd", start->name);vremove (test);
+	      if (start->name)sprintf (test, "%s.html",start->name);vremove (test);
+	      
+	    }
+	      
+	}
+      
       b=start;
       start=start->next;
-      //vfree(b->name);vfree(b);
+    }
+  if (debug);
+  else if (!is_rootpid());
+  else if (scratch)
+    {
+      printf_system_direct ("mv %s %s", get_tmp_4_tcoffee(), scratch);
+    }
+  else
+    {
+      my_rmdir (get_tmp_4_tcoffee());
     }
   
-  if (!debug && is_rootpid())my_rmdir (get_tmp_4_tcoffee());
-
   
   //Remove the lock
   //lock (getpid(), LLOCK, LRELEASE,NULL); Now keep the lock unless it is a parent process

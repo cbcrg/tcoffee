@@ -7330,9 +7330,9 @@ NT_node nni (NT_node S, int n)
 }
 ////////////////////////////////////// Paralel DPA
 ALN_node declare_aln_node(int mode);
-char * kmsa2msa_old   (Sequence *S,KT_node K, int max, int *cn);
-char * kmsa2msa_new   (Sequence *S,KT_node K, int max, int *cn);
-char * kmsa2msa_new2 (Sequence *S,KT_node K, int max, int *cn);
+
+char * kmsa2msa   (Sequence *S,KT_node K, int max, int *cn);
+char * kmsa2msa_file   (Sequence *S,KT_node K, int max, int *cn);
 char * kmsa2msa_serial   (Sequence *S,KT_node K, int max, int *cn);
 char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
 {
@@ -7344,12 +7344,9 @@ char* tree2msa4dpa (NT_node T, Sequence *S, int N, char *method)
   n=ktree2klist(K,KL,&n);
   kseq2kmsa(KL,n, method);
 
-  //new: graph implementation: very fast but memory hungry
-  //old: parrallel: lots of i/o
-  outname=kmsa2msa_new  (S,K,n,&cn);
+  outname=kmsa2msa  (S,K,n,&cn);
   
-  //free all the nodes declared when merging the MSAs
-  declare_aln_node (-1);
+  declare_aln_node (-1);//Free all the nodes declared
   
   return outname;
 }
@@ -7450,8 +7447,20 @@ KT_node tree2ktree (NT_node T,Sequence *S, int N)
   vfree (CL);
   return K;
 }
+int kseq2kmsa_serial   (KT_node *K, int n, char *method);
+int kseq2kmsa_nextflow   (KT_node *K, int n, char *method);
+int kseq2kmsa_thread   (KT_node *K, int n, char *method);
 
+int kseq2kmsa   (KT_node *K, int n, char *method)
+{
+  int nproc=get_nproc();
 
+  if ( strstr (method, "NF_"))
+    return kseq2kmsa_nextflow(K, n, method);
+  else if (nproc==-1) return  kseq2kmsa_serial (K, n, method);
+  else return kseq2kmsa_thread (K, n, method);
+}
+  
 int kseq2kmsa_serial   (KT_node *K, int n, char *method)
 {
   int a;
@@ -7469,8 +7478,34 @@ int kseq2kmsa_serial   (KT_node *K, int n, char *method)
     }
   return 1;
 }
+int kseq2kmsa_nextflow   (KT_node *K, int n, char *met)
+{
+  int a;
+  static char *list=vtmpnam (NULL);
+  TC_method *method=method_file2TC_method(method_name2method_file(met));
+  char *command=NULL;
+  FILE *fp=vfopen (list, "w");
+  
+  for (a=0; a<n; a++)
+    {
+      if (K[a]->nseq==1)
+	{
+	  printf_system ("cp %s %s", K[a]->seqF, K[a]->msaF);
+	}
+      else
+	{
+	  fprintf (fp, "%s %s\n", K[a]->seqF, K[a]->msaF);
+	}
+    }
+  vfclose (fp);
+  
+  command=make_aln_command (method,list, list);
+  printf_system ("%s", command);
+  vfree (command);
+  return 1;
+}
 
-int kseq2kmsa   (KT_node *K, int n, char *method)
+int kseq2kmsa_thread   (KT_node *K, int n, char *method)
 {
   int nproc=get_nproc();
   
@@ -7550,7 +7585,6 @@ int kseq2kmsa   (KT_node *K, int n, char *method)
   
   return n;
 }
-char* kmsa2msa_serial (KT_node K, int max, int *cn);
 char* kmsa2msa_serial (KT_node K, int max, int *cn)
 {
   int a;
@@ -7565,7 +7599,7 @@ char* kmsa2msa_serial (KT_node K, int max, int *cn)
     }
 return K->msaF;
 }
-char * kmsa2msa_old   (Sequence *S,KT_node K, int max, int *cn)
+char * kmsa2msa_file   (Sequence *S,KT_node K, int max, int *cn)
 {
   int nproc=get_nproc();
   int a, b, c;
@@ -7641,7 +7675,10 @@ void display_left   (ALN_node n, char *text);
 int insert_msa_in_msa (ALN_node s, ALN_node m);
 ALN_node insert_node (ALN_node left, ALN_node right, ALN_node parent, ALN_node child, char value);
 
+ALN_node* kmsa2graph_multi (Sequence *S, KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
 ALN_node* kmsa2graph (Sequence *S, KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
+ALN_node* kmsa2graph_seq (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
+
 ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu);
 void check_seq_graph (Sequence *S, ALN_node iseq);
 
@@ -7649,7 +7686,7 @@ void check_aln_graph (Sequence *S, ALN_node *aln, int nseq);
 
 
 char* graph2aln (Sequence *S, ALN_node *aln, int nseq,char *out);
-ALN_node* kmsa2graph_multi (Sequence *S, KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
+
 ALN_node* kmsa2graph_multi (Sequence *S, KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
 {
   int nproc=get_nproc();
@@ -7715,7 +7752,7 @@ char* graph2aln (Sequence *S, ALN_node *aln, int nseq,char *out)
 }
 
 
-char * kmsa2msa_new (Sequence *S,KT_node K, int max, int *cn)
+char * kmsa2msa (Sequence *S,KT_node K, int max, int *cn)
 {
   char *out=vtmpnam (NULL);
   int  a;
@@ -7823,22 +7860,8 @@ ALN_node ** msa2graph (Sequence *S, Alignment *A, ALN_node**lu)
   vfree (cc);
   return lu;
 }
-ALN_node* kmsa2graph_stretch (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
-ALN_node* kmsa2graph_seq (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max);
-ALN_node* kmsa2graph (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
-{
-  int mode=2;
-  if (mode==1)
-    {
-      return kmsa2graph_seq(S,K, A0, lu0, list, ns, done, max);
-    }
-  else
-    {
-      return kmsa2graph_stretch(S,K, A0, lu0, list, ns, done, max);
-    }
-}
   
-ALN_node* kmsa2graph_stretch (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
+ALN_node* kmsa2graph (Sequence *S,KT_node K,Alignment *A0, ALN_node **lu0, ALN_node *list, int *ns, int *done, int max)
 {
   int a,b,c, n;
   Alignment *A1;
