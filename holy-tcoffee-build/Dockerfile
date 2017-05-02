@@ -1,4 +1,4 @@
-FROM phusion/holy-build-box-64
+FROM cbcrg/dkrbase:1.2
 MAINTAINER Paolo Di Tommaso <paolo.ditommaso@gmail.com>
 
 ENV HOME /root 
@@ -7,16 +7,12 @@ WORKDIR /root
 #
 # Install deps
 # 
-RUN curl -fsSL http://packages.sw.be/rpmforge-release/rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm -o rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm &&\
-  rpm --import http://apt.sw.be/RPM-GPG-KEY.dag.txt &&\
-  rpm -K rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm &&\
-  rpm -i rpmforge-release-0.5.2-2.el5.rf.x86_64.rpm &&\ 
-  yum install -y antiword curl wget make automake gcc gcc-c++ gcc-gfortran kernel-devel expat-devel perl-CPAN perl-Net-SSLeay perl-IO-Socket-SSL openssl-devel java-1.7.0-openjdk.x86_64 git ghostscript unzip
+RUN apt-get update --fix-missing && \
+  apt-get install -y antiword curl wget build-essential automake openjdk-7-jre-headless git ghostscript unzip
 
 #
 # Perl modules
 #
-RUN wget -q --no-check-certificate cpanmin.us -O /usr/local/bin/cpanm && chmod +x /usr/local/bin/cpanm  
 RUN cpanm -n Net::SSLeay XML::Simple SOAP::Lite
 
 #
