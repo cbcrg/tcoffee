@@ -1063,6 +1063,24 @@ This comparison will return the following result:
 
 
 The interpretation of this output is as follow: b80 is the reference MSA, it contains 19 sequences with an average identity of 33.6%, and is 94.2% identical to the second MSA b30.aln (79686 pairs to be precise). Of course, this does not tell you where are the good bits, but you can get this information for instance residues that have lost more than 50% of their pairing partner between the two alignments are in lower case (command 1) or converted in any character you want (command 2).
+The sp score is defined as the number of aligned residue pairs (i.e. not gaps) that are common between the reference (-al1) and the test (-al2) divided by the total numbers of pairs in the reference, while excluding gaps. 
+
+Other modes of comparison are available including the TC score
+
+::
+
+  $$: t_coffee -other_pg aln_compare -al1 b80.aln -al2 b30.aln -compare_mode tc
+
+The tc score is defined as the number of columns in the test MSA (-al2)  that are common between the reference and the test, divided by the total number of columns in the reference. This measure, originally reported in Balibase can be problematic as it treats equaly highly and sparcely populated columns. For this reason the 
+
+
+::
+
+  $$: t_coffee -other_pg aln_compare -al1 b80.aln -al2 b30.aln -compare_mode column
+
+The column score is defined as the total number pairs occuring in columns entirely identical between the reference (-al1) and the test (-al2) divided by the total number of pairs in the reference (excluding gaps). This makes the column score the equivalent of a weighted TC score.
+
+It is also possible to print out the conserved positions between MSAs using the following commands. 
 
 :: 
 
@@ -1075,7 +1093,7 @@ The interpretation of this output is as follow: b80 is the reference MSA, it con
       -output_aln_threshold 50 -output_aln_modif x
 
 
-.. note:: It is importnat to take into account that the comparison between -al1 and -al2 is not symetrical. It returns the fraction of -al1 residues pairs -by index - that are recovered in -al2. If -al1 is the reference alignment, this number is more or less the equivalent of a sensistivity measure (i.e. how much True positives are recovered). If -al1 is the tartget alignment, this measure becomes the equivalent of a specificity measure (i.e. what is the fraction of residue pairs in the target that are part of the reference). 
+.. note:: It is important to take into account that the comparison between -al1 and -al2 is not symetrical. It returns the fraction of -al1 residues pairs - by index - that are recovered in -al2. If -al1 is the reference alignment, this number is more or less the equivalent of a sensistivity measure (i.e. how much True positives are recovered). If -al1 is the tartget alignment, this measure becomes the equivalent of a specificity measure (i.e. what is the fraction of residue pairs in the target that are part of the reference). 
 
 .. tip:: aln_compare is particularly interesting if you are modifying the default parameters of T-Coffee and want to monitor the effects of your modifications. 
 

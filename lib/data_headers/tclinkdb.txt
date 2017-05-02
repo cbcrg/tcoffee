@@ -98,25 +98,25 @@ PG mafft mode			mcoffee,rcoffee
 PG mafft binary			mafft.tar.gz
 PG mafft version		6.603
 
-PG mafft 4_TCOFFEE		MSA
-PG mafft type			sequence_multiple_aligner		
-PG mafft ADDRESS		https://www.ncbi.nlm.nih.gov/CBBresearch/Schaffer/msa.html
-PG mafft language		C
-PG mafft language		C				
-PG mafft source			ftp://ftp.ncbi.nih.gov/pub/msa/msa.tar.Z		
-PG mafft mode			mcoffee	
-PG mafft binary			msa.pl
-PG mafft version		1.0
+PG msa 4_TCOFFEE		MSA
+PG msa type			sequence_multiple_aligner		
+PG msa ADDRESS			https://www.ncbi.nlm.nih.gov/CBBresearch/Schaffer/msa.html
+PG msa language			C
+PG msa language			C
+PG msa source			ftp://ftp.ncbi.nih.gov/pub/msa/msa.tar.Z		
+PG msa mode			mcoffee	
+PG msa binary			msa.pl
+PG msa version			1.0
 
-PG mafft 4_TCOFFEE		DCA
-PG mafft type			sequence_multiple_aligner		
-PG mafft ADDRESS		https://bibiserv2.cebitec.uni-bielefeld.de/dca
-PG mafft language		C
-PG mafft language		C				
-PG mafft source			https://bibiserv2.cebitec.uni-bielefeld.de/applications/dca/resources/downloads/dca-1.1-src.tar.gz
-PG mafft mode			mcoffee	
-PG mafft binary			dca.pl
-PG mafft version		1.1
+PG dca 4_TCOFFEE		DCA
+PG dca type			sequence_multiple_aligner		
+PG dca ADDRESS			https://bibiserv2.cebitec.uni-bielefeld.de/dca
+PG dca language			C
+PG dca language			C				
+PG dca source			https://bibiserv2.cebitec.uni-bielefeld.de/applications/dca/resources/downloads/dca-1.1-src.tar.gz
+PG dca mode			mcoffee	
+PG dca binary			dca.pl
+PG dca version			1.1
 
 
 PG muscle 4_TCOFFEE		MUSCLE
