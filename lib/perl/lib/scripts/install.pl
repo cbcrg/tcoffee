@@ -800,6 +800,7 @@ sub install_source_package
     #
     elsif ($pg eq "clustalw2")
       {
+	if ($OS eq "macosx"){ &flush_command ("sed -i '' \$'s/#include <exception>/#include <exception>\\\n#include <string>\\\n/' src/general/VectorOutOfRange.h"); }
 	&flush_command("./configure");
 	&flush_command("make $arguments");
 	&check_cp ("./src/$pg", "$BIN");
@@ -846,6 +847,7 @@ sub install_source_package
     #
     elsif ($pg eq "clustalw")
       {
+	if ($OS eq "macosx"){&flush_command ("sed -i '' 's/if(args\\[0\\]==NULL) return/if(args[0]==NULL) return NULL/g' interface.c");}
 	&flush_command("make $arguments clustalw");
 	`$CP $pg $BIN $SILENT`;
 	repo_store($pg);
@@ -991,6 +993,12 @@ sub install_source_package
      #
      elsif (  $pg eq "mus4")
       {
+	if ($OS eq "macosx")
+	  {
+	    `sed -i '' \$'s/#include <vector>/#include <vector>\\\n#include <random>/' seqdb.h`;
+	    `sed -i '' \$'s/#include "mx.h"/#include "mx.h"\\\n#include <stdlib.h>/' substmx.cpp`;
+	    `sed -i '' \$'s/#include <list>/#include <list>\\\n#include <stdlib.h>/' tree.h`;
+	  }
 	`rm *.o muscle muscle.exe $SILENT`;
 	&flush_command ("./mk");
 	&check_cp("$pg", "$BIN");
@@ -1005,6 +1013,9 @@ sub install_source_package
 	if ($OS eq "macosx")
 	  {
 	    &replace_line_in_file ("./alcomp2.c", "malloc.h",  "");
+	    &flush_command ("sed -i '' 's/if(args\\[0\\]==NULL) return/if(args[0]==NULL) return NULL/g' interface.c");
+	    &flush_command ("sed -i '' 's/coverage1 = coverage2 = accuracy1 = accuracy2 = 0.0; return;/coverage1 = coverage2 = accuracy1 = accuracy2 = 0.0; return NULL;/g' alcomp2.c");
+	    &flush_command ("sed -i '' 's/if (flag_errread==1) return;/if (flag_errread==1) return NULL;/g' alcomp2.c");
 	  }
 	&flush_command ("make $arguments pcma");
 	&check_cp("$pg", "$BIN");
@@ -1039,6 +1050,7 @@ sub install_source_package
     #
     elsif ( $pg eq "proda")
       {
+	`sed -i '' 's/int errno = 0;/int errno; errno = 0;/' Main.cc`;
 	&add_C_libraries("AlignedFragment.h", "vector", "iostream", "cstring","cstdlib");
 	&add_C_libraries("Main.cc", "vector", "climits");	
 	&add_C_libraries("Sequence.cc", "stdlib.h", "cstdio");	
