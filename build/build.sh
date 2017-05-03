@@ -134,7 +134,7 @@ DIST_BASE=$SANDBOX/distributions/Beta/
 fi
 
 # Distribution package file name
-DIST_DIR=$DIST_BASE/$VERSION/$OSNAME
+DIST_DIR=$DIST_BASE/$VERSION
 DIST_NAME=T-COFFEE_distribution_$VERSION.tar.gz
 DIST_HOST='tcoffeeo@tcoffee.org:~/public_html/Packages/'
 
