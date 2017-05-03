@@ -3,7 +3,7 @@ machine:
         - docker
 dependencies:
   pre:
-    - mkdir ~/repo 
+    - mkdir -p ~/repo 
     - docker pull cbcrg/holy-tcoffee-build-box:1.1
   cache_directories:
     - ~/repo
