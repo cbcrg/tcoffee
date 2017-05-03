@@ -16,7 +16,6 @@ export PATH=${tcoffee.home}/bin:/usr/local/bin:$PATH
 
 before: mkdir -p ${run.path}/.lck
 
-assert: directory "${run.path}/.lck" isEmpty
 assert: file t_coffee.ErrorReport not exists
 
 

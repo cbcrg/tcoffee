@@ -290,7 +290,7 @@ function build_binaries()
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-	./install t_coffee -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin
+        ./install t_coffee -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin
 	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
     
 	# Check that the binary has successfully compiled 
@@ -453,13 +453,14 @@ function tcoffee() {
 
 	build_dist
 	build_and_pack_stable
-	build_and_pack_debug
 
 	if [ $DO_TEST == 1 ]; then
 	doc_test 
 	fi
 
-} 
+        mv $SANDBOX/distributions /publish
+        cp $SANDBOX/test-results/index.html /publish
+}
 
 
 #

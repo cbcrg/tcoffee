@@ -6,9 +6,10 @@ dependencies:
     - /home/ubuntu/repo
 test:
   override:
-    - docker run -v $HOME/tcoffee:/root/tcoffee -v $HOME/repo:/root/repo -v $HOME/sandbox:/root/sandbox -e DO_TEST=1 cbcrg/holy-tcoffee-build-box:1.0 tcoffee/build/build.sh env tcoffee
+    - mkdir $HOME/publish
+    - docker run -v $HOME/tcoffee:/root/tcoffee -v $HOME/repo:/root/repo -v $HOME/publish:/publish -e DO_TEST=1 cbcrg/holy-tcoffee-build-box:1.1 tcoffee/build/build.sh env tcoffee
   post:
-    - rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/ 
-    - rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/sandbox/test-results/index.html  ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/tests/test-results-linux-x64-$(date +"%Y-%m-%d").html
+    - rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/publish/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/ 
+    - rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/publish/index.html  ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/tests/test-results-linux-x64-$(date +"%Y-%m-%d").html
                   
             

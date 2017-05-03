@@ -8,7 +8,7 @@ DATE=$(shell date '+%d %b %Y - %H:%M')
 DISTRIBUTION_ADDRESS=www.tcoffee.org/Packages
 INSTITUTE=Centro de Regulacio Genomica
 EMAIL=cedric.notredame@gmail.com
-
+SHELL := /bin/bash
 
 #
 # make it possibile to define HOME2 externally using environment
