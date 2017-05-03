@@ -457,9 +457,6 @@ function tcoffee() {
 	if [ $DO_TEST == 1 ]; then
 	doc_test 
 	fi
-
-        mv $SANDBOX/distributions /publish
-        cp $SANDBOX/test-results/index.html /publish
 }
 
 
