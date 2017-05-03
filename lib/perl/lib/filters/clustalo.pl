@@ -4,7 +4,7 @@ use Cwd;
 use File::Basename;
 
 
-my $tmpdir="/tmp/tco/aligners/upp/";
+my $tmpdir="/tmp/tco/aligners/clustalo/";
 mymkdir ($tmpdir);
 
 
@@ -160,7 +160,7 @@ sub dump_nf
     print F "\t.map{ tuple(it.baseName, it) }\n";
     
     print F "\t.set{ file_names_1 }\n";
-    print F "process upp_align{\n";
+    print F "process clustalo_align{\n";
     print F "\tpublishDir params.out_dir, mode: \"copy\"\n";
     print F "tag \"\${name}\"";
     print F "\n";
@@ -170,8 +170,7 @@ sub dump_nf
     print F "\tfile \"\${name}.aln\"\n";
     print F "\n";
     print F " \"\"\"\n";
-    print F " run_upp.py -s \$seq_file -m amino --cpu \${task.cpus} -d outdir -o \${name}.aln\n";
-    print F " mv outdir/\${name}.aln_alignment.fasta \${name}.aln\n";
+    print F " clustalo -i \$seq_file -o \${name}.aln\n";
     print F "\"\"\"\n\n";
     print F "}\n";
     close (F);

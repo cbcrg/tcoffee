@@ -7,23 +7,23 @@ PG t_coffee source		http://www.tcoffee.org/Packages/T-COFFEE_distribution.tar.gz
 PG t_coffee update_action	always
 PG t_coffee mode		tcoffee,mcoffee,rcoffee,expresso,3dcoffee
 
-PG clustalo 4_TCOFFEE 	CLUSTALO
-PG clustalo type        sequence_multiple_aligner
-PG clustalo ADDRESS     http://www.clustal.org/omega/
-PG clustalo language    C++
-PG clustalo language2   C++
-PG clustalo source		http://www.clustal.org/omega/clustal-omega-1.1.0.tar.gz
-PG clustalo mode        mcoffee
-PG clustalo version     1.1.0
+PG clustalo 4_TCOFFEE		CLUSTALO
+PG clustalo type		sequence_multiple_aligner
+PG clustalo ADDRESS		http://www.clustal.org/omega/
+PG clustalo language		C++
+PG clustalo language2		C++
+PG clustalo source		http://www.clustal.org/omega/clustal-omega-1.2.4.tar.gz
+PG clustalo mode		mcoffee
+PG clustalo version		1.2.4
 
 PG strike 4_TCOFFEE		STRIKE
-PG strike type		sequence_alignment_scoring		
+PG strike type			sequence_alignment_scoring		
 PG strike ADDRESS		http://www.tcoffee.org/Projects/strike/index.html
 PG strike language		C++
 PG strike language2		CXX
 PG strike source		http://www.tcoffee.org/Projects/strike/strike_v1.2.tar.bz2
-PG strike mode		tcoffee,expresso
-PG strike version	1.2
+PG strike mode			tcoffee,expresso
+PG strike version		1.2
      
 PG clustalw2 4_TCOFFEE		CLUSTALW2
 PG clustalw2 type		sequence_multiple_aligner		
@@ -32,7 +32,7 @@ PG clustalw2 language		C++
 PG clustalw2 language2		CXX
 PG clustalw2 source		http://www.clustal.org/download/2.0.10/clustalw-2.0.10-src.tar.gz
 PG clustalw2 mode		mcoffee,rcoffee
-PG clustalw2 version	2.0.10
+PG clustalw2 version		2.0.10
 
 PG clustalw 4_TCOFFEE		CLUSTALW
 PG clustalw type		sequence_multiple_aligner		
@@ -52,7 +52,7 @@ PG dialign-t language2		C
 PG dialign-t source		http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz	
 PG dialign-t mode		mcoffee
 PG dialign-t binary		dialign-t
-PG dialign-t version	1.0.2
+PG dialign-t version		1.0.2
 	 
 PG dialign-tx 4_TCOFFEE		DIALIGNTX		
 PG dialign-tx type		sequence_multiple_aligner		
@@ -63,7 +63,7 @@ PG dialign-tx language2		C
 PG dialign-tx source		http://dialign-tx.gobics.de/DIALIGN-TX_1.0.2.tar.gz	
 PG dialign-tx mode		mcoffee
 PG dialign-tx binary		dialign-tx
-PG dialign-tx version	1.0.2
+PG dialign-tx version		1.0.2
 
 PG poa 4_TCOFFEE		POA	
 PG poa type			sequence_multiple_aligner		
@@ -87,16 +87,40 @@ PG probcons mode		mcoffee
 PG probcons binary		probcons
 PG probcons version		1.12
 
+
+PG msaprobs 4_TCOFFEE		MSAPROBS		
+PG msaprobs type		sequence_multiple_aligner		
+PG msaprobs ADDRESS		http://msaprobs.sourceforge.net/homepage.htm#latest
+PG msaprobs language2		CXX
+PG msaprobs language		C++
+PG msaprobs source		https://sourceforge.net/projects/msaprobs/files/MSAProbs-MPI/MSAProbs-MPI_rel1.0.5.tar.gz
+PG msaprobs mode		mcoffee
+PG msaprobs binary		msaprobs
+PG msaprobs version		1.05
+
+PG upp 4_TCOFFEE		UPP		
+PG upp type			sequence_multiple_aligner		
+PG upp ADDRESS			http://www.cs.utexas.edu/users/phylo/software/upp/
+PG upp language2		CXX
+PG upp language			C++
+PG upp source			https://github.com/smirarab/sepp/archive/master.zipsepp-master
+PG upp mode			mcoffee
+PG upp binary			upp
+PG upp version			1
+PG upp update_action		never
+
+
+
+
 PG mafft 4_TCOFFEE		MAFFT
 PG mafft type			sequence_multiple_aligner		
 PG mafft ADDRESS		http://align.bmr.kyushu-u.ac.jp/mafft/online/server/
 PG mafft language		C
 PG mafft language		C				
-PG mafft source			http://align.bmr.kyushu-u.ac.jp/mafft/software/mafft-6.603-with-extensions-src.tgz
-PG mafft windows		http://align.bmr.kyushu-u.ac.jp/mafft/software/mafft-6.603-mingw.tar
+PG mafft source			http://mafft.cbrc.jp/alignment/software/mafft-7.310-with-extensions-src.tgz
 PG mafft mode			mcoffee,rcoffee	
-PG mafft binary			mafft.tar.gz
-PG mafft version		6.603
+PG mafft binary			mafft
+PG mafft version		7.310
 
 PG msa 4_TCOFFEE		MSA
 PG msa type			sequence_multiple_aligner		
@@ -290,14 +314,14 @@ PG RNAplfold source		http://www.tbi.univie.ac.at/~ivo/RNA/ViennaRNA-1.7.2.tar.gz
 PG RNAplfold mode		rcoffee, seq_reformat
 PG RNAplfold version		1.7.2
 
-PG retree 4_TCOFFEE	PHYLIP
-PG retree type		RNA_secondarystructure_predictor
-PG retree ADDRESS	http://evolution.gs.washington.edu/phylip/
-PG retree language	C
-PG retree language2	C
-PG retree source	http://evolution.gs.washington.edu/phylip/download/phylip-3.69.tar.gz
-PG retree  mode		trmsd, seq_reformat
-PG retree  version	3.69
+PG retree 4_TCOFFEE		PHYLIP
+PG retree type			Phylogeny Reconstruction
+PG retree ADDRESS		http://evolution.gs.washington.edu/phylip/
+PG retree language		C
+PG retree language2		C
+PG retree source		http://evolution.gs.washington.edu/phylip/download/phylip-3.69.tar.gz
+PG retree  mode			trmsd, seq_reformat
+PG retree  version		3.69
 
 
 PG hmmtop 4_TCOFFEE		HMMTOP
@@ -340,14 +364,14 @@ PG blastpgp.pl source		empty
 PG blastpgp.pl update_action	never
 PG blastpgp.pl mode		psicoffee,expresso,accurate
 
-PG blastall 4_TCOFFEE	 blastall
-PG blastall type		 protein_homology_predictor
-PG blastall ADDRESS	 ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
-PG blastall language	 C
-PG blastall language2	 C
-PG blastall source	 empty
-PG blastall update_action never
-PG blastall mode		 psicoffee,expresso,3dcoffee
+PG blastall 4_TCOFFEE		blastall
+PG blastall type		protein_homology_predictor
+PG blastall ADDRESS		ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
+PG blastall language		C
+PG blastall language2		C
+PG blastall source		empty
+PG blastall update_action	never
+PG blastall mode		psicoffee,expresso,3dcoffee
 
 PG legacy_blast.pl 4_TCOFFEE	 NCBIBLAST
 PG legacy_blast.pl type		 protein_homology_predictor
@@ -364,7 +388,7 @@ PG SOAP::Lite ADDRESS		http://cpansearch.perl.org/src/MKUTTER/SOAP-Lite-0.710.08
 PG SOAP::Lite language		Perl
 PG SOAP::Lite language2		Perl
 PG SOAP::Lite source		empty
-PG blastpgp update_action	never
+PG SOAP::Lite update_action	never
 PG SOAP::Lite mode		none	   
 
 PG XML::Simple 4_TCOFFEE	XMLSIMPLE

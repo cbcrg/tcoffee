@@ -268,13 +268,20 @@ FILTER_LIB_OBJECTS=\
 	msf_aln2fasta_aln.pl\
 	msa.pl\
 	upp.pl\
+	clustalo.pl\
 	dca.pl\
 	blast_aln2fasta_aln.pl\
 	blast_xml2fasta_aln.pl\
 	fasta_aln2fasta_aln_unique_name.pl\
 	newick2name_list.pl\
-    excel2fasta.pl\
+	excel2fasta.pl\
+	nameseq2fasta.pl\
 	any_file2unix_file.pl
+
+nameseq2fasta.pl:\
+	$(FILTER_LIB)/nameseq2fasta.pl
+	cp $(FILTER_LIB)/nameseq2fasta.pl .
+	echo "# `date`" >> nameseq2fasta.pl
 
 fasta_seq2hmmtop_fasta.pl:\
 	$(FILTER_LIB)/fasta_seq2hmmtop_fasta.pl
@@ -289,6 +296,10 @@ upp.pl:\
 	$(FILTER_LIB)/upp.pl
 	cp $(FILTER_LIB)/upp.pl .
 	echo "# `date`" >> upp.pl
+clustalo.pl:\
+	$(FILTER_LIB)/clustalo.pl
+	cp $(FILTER_LIB)/clustalo.pl .
+	echo "# `date`" >> clustalo.pl
 msa.pl:\
 	$(FILTER_LIB)/msa.pl
 	cp $(FILTER_LIB)/msa.pl .

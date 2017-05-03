@@ -6117,6 +6117,7 @@ char *** produce_method_file ( char *method)
     sprintf (list[n][1], "%s", vtmpnam(NULL));
     n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
     fprintf ( fp, "DOC: clustalo.pl [%s]\n", CLUSTALO_ADDRESS);
+    fprintf ( fp, "EXECUTABLE clustalo.pl\n");
     fprintf ( fp, "ALN_MODE   multiple\n");
     fprintf ( fp, "OUT_MODE   aln\n");
     fprintf ( fp, "IN_FLAG    &bnsp\n");
@@ -6203,15 +6204,15 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_FLAG   >\n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MSA_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MSA_4_TCOFFEE);
+	fprintf ( fp, "ADDRESS    %s\n", UPP_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", UPP_4_TCOFFEE);
 	vfclose (fp);}
 
 	sprintf (list[n][0], "uppNF_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE upp.pl\n");
-	fprintf ( fp, "DOC UPP [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "DOC UPP [%s]\n", UPP_ADDRESS);
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
@@ -6221,15 +6222,15 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PARAM      &bnsp2");
 	fprintf ( fp, "PARAM      \n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MSA_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MSA_4_TCOFFEE);
+	fprintf ( fp, "ADDRESS    %s\n", UPP_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", UPP_4_TCOFFEE);
 	vfclose (fp);}
 
 	sprintf (list[n][0], "upp_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE upp.pl\n");
-	fprintf ( fp, "DOC MSA [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "DOC MSA [%s]\n", UPP_ADDRESS);
 	fprintf ( fp, "ALN_MODE   pairwise\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "PARAM1 one \n");
@@ -6237,15 +6238,15 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "OUT_FLAG   >\n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MSA_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MSA_4_TCOFFEE);
+	fprintf ( fp, "ADDRESS    %s\n", UPP_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", UPP_4_TCOFFEE);
 	vfclose (fp);}
 
 	sprintf (list[n][0], "upp_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE upp.pl\n");
-	fprintf ( fp, "DOC MSA [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "DOC MSA [%s]\n", UPP_ADDRESS);
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "PARAM1 one \n");
@@ -6255,8 +6256,8 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PARAM      &bnsp2");
 	fprintf ( fp, "PARAM      \n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MSA_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MSA_4_TCOFFEE);
+	fprintf ( fp, "ADDRESS    %s\n", UPP_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", UPP_4_TCOFFEE);
 	vfclose (fp);}
 
 	sprintf (list[n][0], "msa_pair");
@@ -6311,7 +6312,7 @@ char *** produce_method_file ( char *method)
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
 	fprintf ( fp, "EXECUTABLE dca.pl\n");
-	fprintf ( fp, "DOC DCA [%s]\n", MSA_ADDRESS);
+	fprintf ( fp, "DOC DCA [%s]\n", DCA_ADDRESS);
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
@@ -6320,8 +6321,8 @@ char *** produce_method_file ( char *method)
 	fprintf ( fp, "PARAM      &bnsp2");
 	fprintf ( fp, "PARAM      \n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
-	fprintf ( fp, "ADDRESS    %s\n", MSA_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n", MSA_4_TCOFFEE);
+	fprintf ( fp, "ADDRESS    %s\n", DCA_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n", DCA_4_TCOFFEE);
 	vfclose (fp);}
 
 
@@ -6864,33 +6865,31 @@ char *** produce_method_file ( char *method)
 	sprintf (list[n][0], "msaprobs_pair");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "DOC probcons [%s]\n", PROBCONS_ADDRESS);
+	fprintf ( fp, "DOC probcons [%s]\n", MSAPROBS_ADDRESS);
 	fprintf ( fp, "ALN_MODE   pairwise\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
-	if ( strm (retrieve_seq_type(), "DNA") || strm (retrieve_seq_type(), "RNA"))fprintf ( fp, "EXECUTABLE probconsRNA\n");
-	else fprintf ( fp, "EXECUTABLE msaprobs\n");
-	fprintf ( fp, "ADDRESS    %s\n", PROBCONS_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n",PROBCONS_4_TCOFFEE);
+	fprintf ( fp, "EXECUTABLE msaprobs\n");
+	fprintf ( fp, "ADDRESS    %s\n",MSAPROBS_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n",MSAPROBS_4_TCOFFEE);
 	vfclose (fp);}
 
 	sprintf (list[n][0], "msaprobs_msa");
 	sprintf (list[n][1], "%s", vtmpnam(NULL));
 	n++;if (method==NULL || strm (method, list[n-1][0])){fp=vfopen (list[n-1][1], "w");
-	fprintf ( fp, "DOC probcons [%s]\n", PROBCONS_ADDRESS);
+	fprintf ( fp, "DOC probcons [%s]\n", MSAPROBS_ADDRESS);
 	fprintf ( fp, "ALN_MODE   multiple\n");
 	fprintf ( fp, "OUT_MODE   aln\n");
 	fprintf ( fp, "IN_FLAG    &bnsp\n");
 	fprintf ( fp, "OUT_FLAG   >\n");
 	fprintf ( fp, "PARAM      &bnsp2>/dev/null\n");
 	fprintf ( fp, "SEQ_TYPE   S\n");
-	if ( strm (retrieve_seq_type(), "DNA") || strm (retrieve_seq_type(), "RNA"))fprintf ( fp, "EXECUTABLE probconsRNA\n");
-	else fprintf ( fp, "EXECUTABLE msaprobs\n");
-	fprintf ( fp, "ADDRESS    %s\n", PROBCONS_ADDRESS);
-	fprintf ( fp, "PROGRAM    %s\n",PROBCONS_4_TCOFFEE);
+	fprintf ( fp, "EXECUTABLE msaprobs\n");
+	fprintf ( fp, "ADDRESS    %s\n",MSAPROBS_ADDRESS);
+	fprintf ( fp, "PROGRAM    %s\n",MSAPROBS_4_TCOFFEE);
 	vfclose (fp);}
 	
 	sprintf (list[n][0], "probcons_pair");
