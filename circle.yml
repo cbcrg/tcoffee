@@ -13,7 +13,14 @@ dependencies:
     - sudo chown -R $(id -u):$(id -g) ~/repo ~/publish 
 test: 
   override:
+    - mv ~/publish/sandbox/build docker/tcoffee
+    - cd docker/ && docker build -t cbcrg/tcoffee:latest . 
     - rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/ 
     - rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/publish/sandbox/test-results/index.html ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/tests/test-results-linux-x64-$(date +"%Y-%m-%d").html
                   
             
+deployment:
+  hub:
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push cbcrg/tcoffee:latest

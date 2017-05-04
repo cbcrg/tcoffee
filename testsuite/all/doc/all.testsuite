@@ -11,7 +11,6 @@ assert: stderr not contains 'ERROR'
 assert: stderr not contains 'FATAL'
 assert: stderr not contains 'FAILURE'
 assert: file t_coffee.ErrorReport !exists
-assert: directory ${run.path}/.tmp/t_coffee.tmp isEmpty
 
 
 #

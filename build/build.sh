@@ -302,10 +302,10 @@ function build_binaries()
     
     
 	# add perl modules 
-	#cp -r $PERLM/lib/perl5/ $TCDIR/perl
-	mkdir -p $TCDIR/perl
-	cp $WORKSPACE/tcoffee/build/cpanm  $TCDIR/perl	
-        chmod +x $TCDIR/perl/cpanm
+	cp -r $PERLM $TCDIR
+	#mkdir -p $TCDIR/perl
+	#cp $WORKSPACE/tcoffee/build/cpanm  $TCDIR/perl	
+    #chmod +x $TCDIR/perl/cpanm
 
 	# add gfortran libraries
 	if [ $OSNAME == "macosx" ] 
@@ -406,6 +406,7 @@ function build_and_pack_stable() {
 	export CFLAGS="-O3"
 	export INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 	
+	build_perlm
 	build_binaries	
 	pack_binaries
 	pack_tarball
