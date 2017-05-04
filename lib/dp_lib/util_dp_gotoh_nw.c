@@ -2578,7 +2578,7 @@ int list2linked_pair_wise( Alignment *A, int *ns, int **l_s, Constraint_list *CL
   invert_list_char ( al[1], LEN);
 
 
-  if ( A->declared_len<=LEN)A=realloc_aln  ( A,2*LEN+1);
+  //if ( A->declared_len<=LEN)A=realloc_aln  ( A,2*LEN+1);
   aln=A->seq_al;
   char_buf=(char*)vcalloc (LEN+1, sizeof (char));
 
@@ -2595,7 +2595,7 @@ int list2linked_pair_wise( Alignment *A, int *ns, int **l_s, Constraint_list *CL
 		char_buf[b]='-';
 	    }
 	  char_buf[b]='\0';
-	  sprintf (aln[l_s[c][a]],"%s", char_buf);
+	  aln[l_s[c][a]]=csprintf (aln[l_s[c][a]],"%s", char_buf);
 	}
     }
 

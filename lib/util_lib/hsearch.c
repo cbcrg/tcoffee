@@ -23,7 +23,6 @@ HaschT * hcreate ( int n_elements,struct Hasch_data * declare_data(struct Hasch_
 	 T->p=(Hasch_entry**)vcalloc (n_elements,sizeof ( Hasch_entry*));
 	 for ( a=0; a<n_elements; a++)
 	   {
-	     HERE ("%d", a);
 	     T->p[a]=allocate_hasch_entry(NULL,DECLARE,declare_data, free_data);
 	   }
 	 return T;
