@@ -4398,9 +4398,22 @@ int printf_system_direct_check  (char *string, ...)
       return r;
     }
 }
+int dump_nfc (char *file, char *container)
+{
+  FILE *fp=vfopen (file, "w");
+  fprintf ( fp, "docker.enabled = true\n");
+  if (!container)fprintf ( fp, "process.container = 'cbcrg/benchfam_large_scale'\n");
+  else fprintf ( fp, "process.container = '%s'\n", container);
+  vfclose (fp);
+  
+}
+
+
+
+
 int printf_system_direct  (char *string, ...)
 {
-  char *buf;
+  char *buf=NULL;
   int r;
 
   cvsprintf (buf, string);

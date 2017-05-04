@@ -188,9 +188,10 @@ PG amap type			sequence_multiple_aligner
 PG amap ADDRESS			http://bio.math.berkeley.edu/amap/
 PG amap language		C++
 PG amap language2		CXX	
-PG amap source			http://amap-align.googlecode.com/files/amap.2.0.tar.gz
+PG amap source			https://github.com/mes5k/amap-align/archive/master.zip
 PG amap mode			mcoffee	    
-PG amap version			2.0	    
+PG amap version			2.0
+PG amap update_action		never
 
 
 PG proda 4_TCOFFEE		PRODA
@@ -222,12 +223,14 @@ PG prank version		100303
 
 PG sap 4_TCOFFEE		SAP
 PG sap type			structure_pairwise_aligner		
-PG sap ADDRESS			http://mathbio.nimr.mrc.ac.uk/wiki/Software
+PG sap ADDRESS			https://mathbio.crick.ac.uk/wiki/Software
 PG sap language			C
 PG sap language2		C	
 PG sap source			http://mathbio.nimr.mrc.ac.uk/download/SAP/sap-1.1.3.tar.gz
 PG sap mode			expresso,3dcoffee
 PG sap version			1.1.3
+PG sap update_action		never
+
 
 PG TMalign 4_TCOFFEE		TMALIGN
 PG TMalign type			structure_pairwise_aligner		
@@ -319,9 +322,9 @@ PG retree type			Phylogeny Reconstruction
 PG retree ADDRESS		http://evolution.gs.washington.edu/phylip/
 PG retree language		C
 PG retree language2		C
-PG retree source		http://evolution.gs.washington.edu/phylip/download/phylip-3.69.tar.gz
+PG retree source		http://www.tcoffee.org/Packages/mirrors/phylip-3.66.tar.gz
 PG retree  mode			trmsd, seq_reformat
-PG retree  version		3.69
+PG retree  version		3.66
 
 
 PG hmmtop 4_TCOFFEE		HMMTOP
