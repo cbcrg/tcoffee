@@ -2,7 +2,9 @@ FROM debian:jessie
 MAINTAINER Paolo Di Tommaso <paolo.ditommaso@gmail.com>
 
 RUN apt-get update --fix-missing && \
-  apt-get install -q -y bc vim procps ghostscript unzip curl wget && \
+  apt-get install -q -y bc vim procps ghostscript unzip curl wget libgfortran3 && \
+  apt-get install -q -y perl-modules libnet-ssleay-perl libcrypt-ssleay-perl libssl-dev libexpat1 libexpat1-dev liblwp-protocol-https-perl && \
+  apt-get install -q -y libglib2.0-0  && \
   apt-get clean  
   
 RUN mkdir -p /root
