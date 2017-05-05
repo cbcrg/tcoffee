@@ -15,6 +15,8 @@ test:
   override:
     - mv ~/publish/sandbox/build docker/tcoffee
     - cd docker/ && docker build -t cbcrg/tcoffee:latest . 
+    - mkdir -p ~/publish/sandbox/test-results
+    - docker run -v ~/tcoffee:/root/tcoffee -v ~/publish/sandbox/test-results:/test-results cbcrg/tcoffee:latest bash run-tests.sh
     - rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/ 
     - rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" $HOME/publish/sandbox/test-results/index.html ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/tests/test-results-linux-x64-$(date +"%Y-%m-%d").html
                   
