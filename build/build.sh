@@ -452,6 +452,8 @@ function copy_to_dropbox() {
 function tcoffee() {
 	echo "[ tcoffee ]"
 
+    mkdir -p $SANDBOX && echo -n $VERSION > $SANDBOX/.version 
+    
 	build_dist
 	build_and_pack_stable
 

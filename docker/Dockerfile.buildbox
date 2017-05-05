@@ -22,10 +22,6 @@ WORKDIR /root
 RUN apt-get update --fix-missing && \
   apt-get install -y antiword curl wget build-essential automake openjdk-7-jre-headless git ghostscript unzip
 
-#
-# Perl modules
-#
-RUN cpanm -n Net::SSLeay XML::Simple SOAP::Lite
 
 #
 # Installbuilder 
@@ -33,14 +29,7 @@ RUN cpanm -n Net::SSLeay XML::Simple SOAP::Lite
 RUN curl -s  https://s3-eu-west-1.amazonaws.com/cbcrg-eu/tcoffee-ci/installbuilder-8.6.0.tar.gz | tar xz &&\
   ln -s $HOME/installbuilder-8.6.0 $HOME/installbuilder
 
-#
-# Blast+
-# 
-RUN curl -s ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.2.28/ncbi-blast-2.2.28+-x64-linux.tar.gz | tar xz &&\
-  ln -s $HOME/ncbi-blast-2.2.28+ $HOME/ncbi-blast 
-  
-ENV PATH=$HOME/ncbi-blast/bin:$PATH  
-
+ 
 
 #
 # Install argtable2
