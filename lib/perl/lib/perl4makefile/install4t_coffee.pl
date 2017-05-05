@@ -106,7 +106,7 @@ if (($cl=~/-h/) ||($cl=~/-H/) )
 	print "!!!!!!!       ./install $m\n";
       }
     print "\n!!!!!!! advanced mode\n";
-    print "!!!!!!! ./install [target:package|mode|] [-update|-force|-no_question|-path=dir|-dis=dir|-email=your@email|-no_root|-tclinkdb=file] [CC=|FCC=|CXX=|CFLAGS=|CXXFLAGS=]\n";
+    print "!!!!!!! ./install [target:package|mode|download] [-update|-force|-no_question|-path=dir|-dis=dir|-email=your@email|-no_root|-tclinkdb=file] [CC=|FCC=|CXX=|CFLAGS=|CXXFLAGS=]\n";
     print "!!!!!!! ./install clean    [removes all executables]\n";
     print "!!!!!!! ./install [optional:target] -update               [updates package already installed]\n";
     print "!!!!!!! ./install [optional:target] -force                [Forces recompilation over everything]\n";
@@ -182,6 +182,17 @@ foreach $c (keys(%PG))
 	  }
 	$PG{$c}{arguments}=$arguments;
       }
+  }
+
+# If target download: download all the packages
+if ($target eq "download")
+  {
+    foreach my $pg (keys(%PG))
+      {
+	my $download=$PG{$pg}{source};
+	my ($address,$name,$ext)=http2download($download);
+      }
+    exit (0);
   }
 
 # select the list of packages to update
@@ -708,68 +719,37 @@ sub install_perl_package
 sub install_source_package
   {
     my ($pg)=(@_);
-    my $report, $download, $arguments, $language;
+    my ($report, $download, $arguments, $language);
     
     if ( -e "$BIN/$pg" || -e "$BIN/$pg.exe"){return 1;}
-    
     if ($pg eq "t_coffee"){return install_t_coffee ($pg);}
     elsif ($pg eq "TMalign"){return install_TMalign ($pg);}
     
     chdir $DISTRIBUTIONS;
-    
-    $download=$PG{$pg}{source};
-    print "$download\n";
-    if (($download =~/tgz/))
-      {
-	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tgz)/);
-      }
-    elsif (($download=~/tar\.gz/))
-      {
-	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar\.gz)/);
-      }
-    elsif (($download=~/tar/))
-      {
-	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar)/);
-      }
-    else
-      {
-	($address,$name)=($download=~/(.+\/)([^\/]+)/);
-	$ext="";
-      }
-    $distrib="$name$ext";
-    
     if ( !-d $pg){mkdir $pg;}
     chdir $pg;
-    #get the distribution if available
-    if ( -e "$DOWNLOADS/$distrib")
-      {
-	`cp $DOWNLOADS/$distrib .`;
-      }
+    $download=$PG{$pg}{source};
+    
+    
+    
     #UNTAR and Prepare everything
     if (!-e "$name.tar" && !-e "$name")
       {
-	
-	
 	`rm x $SILENT`;
 	print "\n------- Downloading/Installing $pg\n";
 	print "\n------- Download $pg from  $download\n";
-	if (!-e $distrib && system ("wget $download -Ox")==EXIT_SUCCESS)
-	  {
-	    `mv x $distrib`;
-	    `cp $distrib $DOWNLOADS/`;
-	  }
+	print "$download\n";
 	
-	if (!-e $distrib)
-	  {
-	    print "!!!!!!! Download of $pg distribution failed\n";
-	    print "!!!!!!! Check Address: $PG{$pg}{source}\n";
-	    return 0;
-	  }
+	my ($address,$name,$ext)=http2download($download);
+	if (!$address){return 0;}
+	
+	$distrib="$name$ext";
+	
 	print "\n------- unzipping/untaring $name\n";
 	
 	
 	if (($ext =~/z/))
-	  { 
+	  {
 	    flush_command ("gunzip $name$ext");
 	  }
 	if (($ext =~/tar/) || ($ext =~/tgz/))
@@ -777,7 +757,7 @@ sub install_source_package
 	    &flush_command("tar -xvf $name.tar");
 	  }
       }
-    #Guess a^nd enter the distribution directory
+    #Guess and enter the distribution directory
     @fl=ls($p);
     foreach $f (@fl)
       {
@@ -1126,7 +1106,58 @@ sub old_install_binary_package
 #                                                                               #
 #                                                                               #
 #################################################################################
-
+sub http2download
+    {
+      my $download=shift;
+      my ($address,$name,$ext);
+      
+      if (($download =~/tgz/))
+	{
+	  ($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tgz)/);
+	}
+      elsif (($download=~/tar\.gz/))
+	{
+	  ($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar\.gz)/);
+	}
+      elsif (($download=~/tar/))
+	{
+	  ($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar)/);
+	}
+      elsif (($download=~/zip/))
+	{
+	  ($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.zip)/);
+	}
+      else
+	{
+	  ($address,$name)=($download=~/(.+\/)([^\/]+)/);
+	  $ext="";
+	}
+      
+      $distrib="$name$ext";
+      if ( -e $distrib)
+	{;}
+      elsif ( -e "$DOWNLOADS/$distrib")
+	{
+	  `cp $DOWNLOADS/$distrib .`;
+	}
+      elsif (!-e $distrib && system ("wget $download -Ox")==EXIT_SUCCESS)
+	 {
+	   `mv x $distrib`;
+	   `cp $distrib $DOWNLOADS/`;
+	  }
+      elsif (!-e $distrib && system ("wget $MIRROR/$distrib -Ox")==EXIT_SUCCESS)
+	{
+	  print "!!!!!!! Warning Download from Mirror: $MIRROR\n";
+	   `mv x $distrib`;
+	   `cp $distrib $DOWNLOADS/`;
+	 }
+      else
+	{
+	  print "!!!!!!! Download of $pg distribution failed\n";
+	  print "!!!!!!! Check Address: $PG{$pg}{source}\n";
+	  return 0;
+	}
+    }
 sub check_cp
   {
     my ($from, $to)=(@_);

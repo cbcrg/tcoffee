@@ -5,7 +5,8 @@ use File::Path;
 use FileHandle;
 #$CP="cp -d "; was causing mac osx to fail
 $CP="cp ";
-
+$INTERNET=0;
+$MIRROR="http://www.tcoffee.org/Packages/mirrors/source/";
 $SILENT=">/dev/null 2>/dev/null";
 $WEB_BASE="http://www.tcoffee.org";
 $TCLINKDB_ADDRESS="$WEB_BASE/Resources/tclinkdb.txt";
@@ -57,7 +58,7 @@ if (($cl=~/-h/) ||($cl=~/-H/) )
 	print "!!!!!!!       ./install $m\n";
       }
     
-    print "!!!!!!! ./install [target:package|mode|] [-update|-force|-no_question|-path=dir|-dis=dir|-email=your@email|-no_root|-tclinkdb=file] [CC=|FCC=|CXX=|CFLAGS=|CXXFLAGS=]\n";
+    print "!!!!!!! ./install [target:package|mode|download_only] [-update|-force|-no_question|-path=dir|-dis=dir|-email=your@email|-no_root|-tclinkdb=file] [CC=|FCC=|CXX=|CFLAGS=|CXXFLAGS=]\n";
     print "!!!!!!! ./install clean    [removes all executables]\n";
     print "!!!!!!! ./install [optional:target] -update               [updates package already installed]\n";
     print "!!!!!!! ./install [optional:target] -force                [Forces recompilation over everything]\n";
@@ -127,7 +128,10 @@ if    (!$INSTALL_DIR && !$ROOT_INSTALL){$INSTALL_DIR="$HOME/bin/";mkpath ($insta
 elsif (!$INSTALL_DIR &&  $ROOT_INSTALL){$INSTALL_DIR="/usr/local/bin/";}
 
 #prepare mcoffee files
-`cp mcoffee/* $TCM`;
+if (-d "./mcoffee")
+  {
+    `$CP mcoffee/* $TCM`;
+  }
 
 #prepare the environement
 $ENV_FILE="$TCDIR/t_coffee_env";
@@ -137,10 +141,18 @@ $ENV_FILE="$TCDIR/t_coffee_env";
 #&set_proxy($proxy);
 #$email=&get_email($ENV_FILE, $email);
 
-$target="";
-foreach $p (  ((keys (%PG)),(keys(%MODE)),(@smode)) )
+#set the target mode
+if ( $ARGV[0] eq "download_only")
   {
-    if ($ARGV[0] eq $p && $target eq ""){$target=$p;}
+    $target="download_only";
+  }
+else
+  {
+    $target="";
+    foreach $p (  ((keys (%PG)),(keys(%MODE)),(@smode)) )
+      {
+	if ($ARGV[0] eq $p && $target eq ""){$target=$p;}
+      }
   }
 if ($target eq ""){exit (EXIT_FAILURE);}
 
@@ -194,11 +206,30 @@ foreach $c (keys(%PG))
       }
   }
 
+# If target download: download all the packages
+if ($target eq "download_only")
+  {
+    foreach my $pg (sort (keys(%PG)))
+      {
+	
+	my $download=$PG{$pg}{source};
+	
+	if ($download ne "" && $download ne "empty")
+	  {
+	    print "!!!!!! Download : [$download]\n";
+	    my ($address,$name,$ext)=download_pkg($download);
+	    if (!$address){die;}
+	  }
+      }
+    die;
+  }
+
+
 # select the list of packages to update
 if ($PG{$target}){$PG{$target}{install}=1;}
 else
   {
-    foreach my $pg (keys(%PG))
+    foreach my $pg (sort (keys(%PG)))
       {
 	if ( $target eq "all" || ($PG{$pg}{mode}=~/$target/))
 	  {
@@ -207,7 +238,7 @@ else
       }
   }
 
-foreach my $pg (keys(%PG))
+foreach my $pg (sort (keys(%PG)))
   {
     if (!$PG{$pg}{update_action}){$PG{$pg}{update_action}=$default_update_action;}
     elsif ($PG{$pg}{update_action} eq "never"){$PG{$pg}{install}=0;}
@@ -232,12 +263,12 @@ if (($target=~/clean/))
 if ( !$PG{$target}){print "------- Installing T-Coffee Modes\n";}
 
 #1 - Installing various modes
-foreach $m (keys(%MODE))
+foreach $m (sort (keys(%MODE)))
   {
     if ( $target eq "all" || $target eq $m)
       {
 	print "\n------- The installer will now install the $m components $MODE{$m}{description}\n";
-	foreach $pg (keys(%PG))
+	foreach $pg (sort (keys(%PG)))
 	  {
 	    if ( $PG{$pg}{mode} =~/$m/ && $PG{$pg}{install})
 	      {
@@ -250,7 +281,7 @@ foreach $m (keys(%MODE))
 
 #2 - Installing Various Packages
 if ( $PG{$target}){print "------- Installing Individual Package\n";}
-foreach $pg (keys (%PG))
+foreach $pg (sort (keys (%PG)))
   {
     if ( $PG{$pg}{install} && !$PG{$pg}{touched}){$PG{$pg}{success}=&install_pg($pg);$PG{$pg}{touched}=1;}
   }
@@ -262,7 +293,7 @@ print "*********************************************************************\n";
 print "********              INSTALLATION SUMMARY          *****************\n";
 print "*********************************************************************\n";
 print "------- SUMMARY package Installation:\n";
-foreach $pg (keys(%PG))
+foreach $pg (sort (keys(%PG)))
   {
     if ( $PG{$pg}{install})
       {
@@ -276,12 +307,12 @@ foreach $pg (keys(%PG))
   }
 
 if ( !$PG{$target}){print "*------ SUMMARY mode Installation:\n";}
-foreach $m (keys(%MODE))
+foreach $m (sort (keys(%MODE)))
   {
     if ( $target eq "all" || $target eq $m)
       {
 	my $succesful=1;
-	foreach $pg (keys(%PG))
+	foreach $pg (sort (keys(%PG)))
 	  {
 	    if (($PG{$pg}{mode}=~/$m/) && $PG{$pg}{install} && $PG{$pg}{status}==0)
 	      {
@@ -306,7 +337,7 @@ print "\n\n";
 print "*------ You can now try to run the following commands:\n";
 print "*------         t_coffee <foo.seq>\n";
 
-foreach $m (keys (%MODE))
+foreach $m (sort (keys (%MODE)))
   {
     if ( $MODE {$m}{status})
       {
@@ -315,7 +346,7 @@ foreach $m (keys (%MODE))
   }
 
 #failure if one program was not well installed
-foreach $pg (keys(%PG)){if ( $PG{$pg}{status}==0){exit (EXIT_FAILURE);}}
+foreach $pg (sort (keys(%PG))){if ( $PG{$pg}{status}==0){exit (EXIT_FAILURE);}}
 exit (EXIT_SUCCESS);  
 
 #################################################################################
@@ -393,13 +424,13 @@ sub my_wget
 	$PROXY=&get_proxy($ENV_FILE,$ENV{"http_proxy_4_TCOFFEE"});
 	&set_proxy($PROXY);
       }
-    if (!$file){$exit=system ("wget $cmd");}
+    if (!$file){$exit=system ("wget $cmd --no-check-certificate >/dev/null 2>/dev/null");}
     else 
       {
 	my $n;
 	
 	if (-e $file){unlink($file);}
-	$exit=system "wget $cmd -O$file";
+	$exit=system "wget $cmd -O$file --no-check-certificate >/dev/null 2>/dev/null";
       }
     return $exit;
   }
@@ -598,12 +629,14 @@ sub get_proxy
   {
     my ($env_file, $proxy)=(@_);
     
-    if (&check_internet())
+    if ($INTERNET){return "";}
+    elsif (&check_internet())
       {
-	print "Internet access OK\n";
+	print "!!!!!!! Internet access OK\n";
 	if ( $proxy eq "") {print "------- Default Proxy: No Proxy (Direct Access)\n";}
 	else {print "------- Default Proxy: [$proxy]\n";}
 	print "------- Edit the file $env_file to change this setting\n";
+	$INTERNET=1;
 	return "";
       }
     else
@@ -642,7 +675,66 @@ sub get_proxy
 #                                                                               #
 #                                                                               #
 #################################################################################
-
+sub download_pkg
+    {
+      my $download=shift;
+      my ($address,$name,$ext);
+      my $wget_tmp="$TMP/wget.tmp";
+      
+      
+      if (($download =~/tgz/))
+	{
+	  ($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tgz)/);
+	}
+      elsif (($download=~/tar\.gz/))
+	{
+	  ($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar\.gz)/);
+	}
+      elsif (($download=~/tar/))
+	{
+	  ($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar)/);
+	}
+      elsif (($download=~/zip/))
+	{
+	  ($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.zip)/);
+	}
+      else
+	{
+	  ($address,$name)=($download=~/(.+\/)([^\/]+)/);
+	  $ext="";
+	}
+      if ($download=~/github/){$download="$address/master.zip";}
+      
+      $distrib="$name$ext";
+      if ( -e $distrib)
+	{;}
+      elsif ( -e "$DOWNLOAD_DIR/$distrib")
+	{
+	  `$CP $DOWNLOAD_DIR/$distrib .`;
+	}
+      else
+	{
+	  check_rm ($wget_tmp);
+	  if (my_wget ("$download", "$wget_tmp")==EXIT_SUCCESS)
+	    {
+	      `mv $wget_tmp $distrib`;
+	    }
+	  elsif (my_wget ("$MIRROR/$distrib", "$wget_tmp")==EXIT_SUCCESS)
+	    {
+	      print "!!!!!!! Warning Download from Mirror: $MIRROR\n";
+	      `mv $wget_tmp $distrib`;
+	    }
+	  else
+	    {
+	      
+	      print "!!!!!!! Download of $pg distribution failed\n";
+	      print "!!!!!!! Check Address: $PG{$pg}{source}\n";
+	      return 0;
+	    }
+	}
+      
+      return ($address,$name,$ext)
+    }
 sub install_pg
   {
     my ($pg)=(@_);
@@ -705,8 +797,8 @@ sub install_perl_package
 sub install_source_package
   {
     my ($pg)=(@_);
-    my $report, $download, $arguments, $language;
-    my $wget_tmp="$TMP/wget.tmp";
+    my ($report, $download, $arguments, $language);
+    
     
     if ( -e "$BIN/$pg" || -e "$BIN/$pg.exe"){return 1;}
     
@@ -714,60 +806,27 @@ sub install_source_package
     elsif ($pg eq "TMalign"){return   &install_TMalign ($pg);}
     
     chdir $DISTRIBUTIONS;
-    
-    $download=$PG{$pg}{source};
-    
-    if (($download =~/tgz/))
-      {
-	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tgz)/);
-      }
-    elsif (($download=~/tar\.gz/))
-      {
-	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar\.gz)/);
-      }
-    elsif (($download=~/tar/))
-      {
-	($address,$name,$ext)=($download=~/(.+\/)([^\/]+)(\.tar)/);
-      }
-    else
-      {
-	($address,$name)=($download=~/(.+\/)([^\/]+)/);
-	$ext="";
-      }
-    $distrib="$name$ext";
-    
     if ( !-d $pg){mkdir $pg;}
     chdir $pg;
-   
-    #get the distribution if available
-    if ( -e "$DOWNLOAD_DIR/$distrib")
-      {
-	`$CP $DOWNLOAD_DIR/$distrib .`;
-      }
+    
+    print "\n------- Downloading/Installing $pg\n";
+    my $download=$PG{$pg}{source};
+    my ($address, $name, $ext)=download_pkg($download);
+    if (!$address){return 0;}
+    
+    $distrib="$name$ext";
+    `$CP $distrib $DOWNLOAD_DIR/`;
+    
     #UNTAR and Prepare everything
     if (!-e "$name.tar" && !-e "$name")
       {
-	&check_rm ($wget_tmp);
-	print "\n------- Downloading/Installing $pg\n";
-	if (!-e $distrib && &my_wget ("$download", "$wget_tmp")==EXIT_SUCCESS)
-	  {
-	    
-	    `mv $wget_tmp $distrib`;
-	    `$CP $distrib $DOWNLOAD_DIR/`;
-	  }
-
-	if (!-e $distrib)
-	  {
-	    print "!!!!!!! Download of $pg distribution failed\n";
-	    print "!!!!!!! Check Address: $PG{$pg}{source}\n";
-	    return 0;
-	  }
+	
 	print "\n------- unzipping/untaring $name\n";
 	if (($ext =~/z/))
 	  { 
 	    &flush_command ("gunzip $name$ext");
-	    
 	  }
+	
 	if (($ext =~/tar/) || ($ext =~/tgz/))
 	  {
 	    &flush_command("tar -xvf $name.tar");
@@ -1424,7 +1483,7 @@ sub post_process_PG
     
     %PG=&name2dname (%PG);
     %MODE=&name2dname(%MODE);
-    foreach $p (keys(%PG)){if ( $PG{$p}{type} eq "compiler"){$PG{$p}{update_action}="never";}}
+    foreach $p (sort (keys(%PG))){if ( $PG{$p}{type} eq "compiler"){$PG{$p}{update_action}="never";}}
     
   }
 
@@ -1433,13 +1492,13 @@ sub name2dname
     my (%L)=(@_);
     my $l, $ml;
     
-    foreach $pg (keys(%L))
+    foreach $pg (sort (keys(%L)))
       {
 	$l=length ($pg);
 	if ( $l>$ml){$ml=$l;}
       }
     $ml+=1;
-    foreach $pg (keys(%L))
+    foreach $pg (sort (keys(%L)))
       {
 	my $name;
 	$l=$ml-length ($pg);

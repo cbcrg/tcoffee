@@ -3,7 +3,7 @@ PG t_coffee type		sequence_multiple_aligner
 PG t_coffee ADDRESS		http://www.tcoffee.org
 PG t_coffee language		C++
 PG t_coffee language2		CXX
-PG t_coffee source		http://www.tcoffee.org/Packages/T-COFFEE_distribution.tar.gz
+PG t_coffee source		http://www.tcoffee.org/Packages/Stable/Latest/T-COFFEE_distribution.tar.gz
 PG t_coffee update_action	always
 PG t_coffee mode		tcoffee,mcoffee,rcoffee,expresso,3dcoffee
 
@@ -97,13 +97,14 @@ PG msaprobs source		https://sourceforge.net/projects/msaprobs/files/MSAProbs-MPI
 PG msaprobs mode		mcoffee
 PG msaprobs binary		msaprobs
 PG msaprobs version		1.05
+PG msaprobs update_action		never
 
 PG upp 4_TCOFFEE		UPP		
 PG upp type			sequence_multiple_aligner		
 PG upp ADDRESS			http://www.cs.utexas.edu/users/phylo/software/upp/
 PG upp language2		CXX
 PG upp language			C++
-PG upp source			https://github.com/smirarab/sepp/archive/master.zipsepp-master
+PG upp source			https://github.com/smirarab/pasta/archive/upp.zip
 PG upp mode			mcoffee
 PG upp binary			upp
 PG upp version			1
@@ -131,6 +132,7 @@ PG msa source			ftp://ftp.ncbi.nih.gov/pub/msa/msa.tar.Z
 PG msa mode			mcoffee	
 PG msa binary			msa.pl
 PG msa version			1.0
+PG msa update_action		never
 
 PG dca 4_TCOFFEE		DCA
 PG dca type			sequence_multiple_aligner		
@@ -141,7 +143,7 @@ PG dca source			https://bibiserv2.cebitec.uni-bielefeld.de/applications/dca/reso
 PG dca mode			mcoffee	
 PG dca binary			dca.pl
 PG dca version			1.1
-
+PG dca update_action		never
 
 PG muscle 4_TCOFFEE		MUSCLE
 PG muscle type			sequence_multiple_aligner		
@@ -169,7 +171,7 @@ PG pcma type			sequence_multiple_aligner
 PG pcma ADDRESS			ftp://iole.swmed.edu/pub/PCMA/
 PG pcma language		C
 PG pcma language2		C	
-PG pcma source			ftp://iole.swmed.edu/pub/PCMA/pcma.tar.gz
+PG pcma source			http://prodata.swmed.edu/download/pub/PCMA/pcma.tar.gz
 PG pcma mode			mcoffee	
 PG pcma version			1.0	
      
@@ -188,7 +190,7 @@ PG amap type			sequence_multiple_aligner
 PG amap ADDRESS			http://bio.math.berkeley.edu/amap/
 PG amap language		C++
 PG amap language2		CXX	
-PG amap source			https://github.com/mes5k/amap-align/archive/master.zip
+PG amap source			https://github.com/mes5k/amap-align/archive/amap.zip
 PG amap mode			mcoffee	    
 PG amap version			2.0
 PG amap update_action		never
@@ -226,7 +228,7 @@ PG sap type			structure_pairwise_aligner
 PG sap ADDRESS			https://mathbio.crick.ac.uk/wiki/Software
 PG sap language			C
 PG sap language2		C	
-PG sap source			http://mathbio.nimr.mrc.ac.uk/download/SAP/sap-1.1.3.tar.gz
+PG sap source			https://github.com/jkleinj/SAP/archive/v.1.1.3.tar.gz
 PG sap mode			expresso,3dcoffee
 PG sap version			1.1.3
 PG sap update_action		never
@@ -236,7 +238,7 @@ PG TMalign 4_TCOFFEE		TMALIGN
 PG TMalign type			structure_pairwise_aligner		
 PG TMalign ADDRESS		http://zhanglab.ccmb.med.umich.edu/TM-align/TMalign.f
 PG TMalign language		Fortran
-PG TMalign language2	Fortran
+PG TMalign language2		Fortran
 PG TMalign source		http://zhanglab.ccmb.med.umich.edu/TM-align/TMalign.f	
 PG TMalign linux		http://zhanglab.ccmb.med.umich.edu/TM-align/TMalign_32.gz				
 PG TMalign mode			expresso,3dcoffee	    
@@ -248,9 +250,9 @@ PG mustang type			structure_pairwise_aligner
 PG mustang ADDRESS		http://www.cs.mu.oz.au/~arun/mustang
 PG mustang language		C++
 PG mustang language2		CXX
-PG mustang source		http://ww2.cs.mu.oz.au/~arun/mustang/mustang_v3.2.1.tgz
+PG mustang source		http://lcb.infotech.monash.edu.au/mustang/mustang_v3.2.3.tgz
 PG mustang mode			expresso,3dcoffee	  
-PG mustang version		3.2.1  
+PG mustang version		3.2.3  
 
 PG lsqman 4_TCOFFEE		LSQMAN
 PG lsqman type			structure_pairwise_aligner		
@@ -313,9 +315,9 @@ PG RNAplfold type		RNA_secondarystructure_predictor
 PG RNAplfold ADDRESS		http://www.tbi.univie.ac.at/~ivo/RNA/
 PG RNAplfold language		C
 PG RNAplfold language2		C
-PG RNAplfold source		http://www.tbi.univie.ac.at/~ivo/RNA/ViennaRNA-1.7.2.tar.gz	
+PG RNAplfold source		https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_3_x/ViennaRNA-2.3.5.tar.gz
 PG RNAplfold mode		rcoffee, seq_reformat
-PG RNAplfold version		1.7.2
+PG RNAplfold version		2.3.5
 
 PG retree 4_TCOFFEE		PHYLIP
 PG retree type			Phylogeny Reconstruction
@@ -332,7 +334,7 @@ PG hmmtop type			protein_secondarystructure_predictor
 PG hmmtop ADDRESS		www.enzim.hu/hmmtop/
 PG hmmtop language		C
 PG hmmtop language2		C
-PG hmmtop source		empty
+PG hmmtop source		http://www.tcoffee.org/Packages/mirrors/hmmtop2.1.tgz
 PG hmmtop binary		hmmtop
 PG hmmtop update_action		never
 PG hmmtop mode			tcoffee
@@ -343,7 +345,7 @@ PG gorIV type			protein_secondarystructure_predictor
 PG gorIV ADDRESS		http://mig.jouy.inra.fr/logiciels/gorIV/
 PG gorIV language		C
 PG gorIV language2		C
-PG gorIV source			http://mig.jouy.inra.fr/logiciels/gorIV/GOR_IV.tar.gz
+PG gorIV source			http://www.tcoffee.org/Packages/mirrors/GOR_IV.tar.gz
 PG gorIV update_action		never
 PG gorIV mode			tcoffee
 
@@ -372,7 +374,7 @@ PG blastall type		protein_homology_predictor
 PG blastall ADDRESS		ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
 PG blastall language		C
 PG blastall language2		C
-PG blastall source		empty
+PG blastall source		ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/ncbi-blast-2.6.0+-src.tar.gz
 PG blastall update_action	never
 PG blastall mode		psicoffee,expresso,3dcoffee
 
@@ -381,7 +383,7 @@ PG legacy_blast.pl type		 protein_homology_predictor
 PG legacy_blast.pl ADDRESS	 ftp://ftp.ncbi.nih.gov/blast/executables/LATEST
 PG legacy_blast.pl language	 C
 PG legacy_blast.pl language2	 C
-PG legacy_blast.pl source	 empty
+PG legacy_blast.pl source	 ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/ncbi-blast-2.6.0+-src.tar.gz
 PG legacy_blast.pl update_action never
 PG legacy_blast.pl mode		 psicoffee,expresso,3dcoffee
 
@@ -402,7 +404,12 @@ PG XML::Simple language2	Perl
 PG XML::Simple source		empty
 PG XML::Simple mode		psicoffee,expresso,accurate
 
-
+PG x3dna       4_TCOFFEE	x3dna-ssr
+PG x3dna       type		RNA_secondarystructure_predictor
+PG x3dna       ADDRESS		http://x3dna.bio.columbia.edu/
+PG x3dna       source		http://www.tcoffee.org/Packages/mirrors/source/x3dna-v2.3-linux-64bit.tar.gz
+PG x3dna       mode		saracoffee
+PG x3dna       update_action	never
 
 MODE tcoffee  name tcoffee
 MODE rcoffee  name rcoffee
