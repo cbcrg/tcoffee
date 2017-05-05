@@ -15,8 +15,11 @@ test:
   override:
     - mv ~/publish/sandbox/build docker/tcoffee
     - cd docker/ && docker build -t cbcrg/tcoffee:latest . 
-    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-    - docker push cbcrg/tcoffee:$(~/publish/sandbox/.version)
+    - > 
+      version=$(cat ~/publish/sandbox/.version)
+      docker tag cbcrg/tcoffee:latest cbcrg/tcoffee:$version
+      docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      docker push cbcrg/tcoffee:$version
     - mkdir -p ~/publish/sandbox/test-results
     - docker run -v ~/tcoffee:/root/tcoffee -v ~/publish/sandbox/test-results:/test-results cbcrg/tcoffee:latest bash /root/tcoffee/docker/run-tests.sh :
         timeout: 2700
