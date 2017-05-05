@@ -4,12 +4,12 @@ machine:
 dependencies:
   pre:
     - mkdir -p ~/repo 
-    - docker pull cbcrg/holy-tcoffee-build-box:1.1
+    - docker pull cbcrg/tcoffee-build-box:1.2
   cache_directories:
     - ~/repo
   override:
     - mkdir $HOME/publish
-    - docker run -v $HOME/tcoffee:/root/tcoffee -v $HOME/repo:/root/repo -v $HOME/publish:/publish cbcrg/holy-tcoffee-build-box:1.1 bash -c 'tcoffee/build/build.sh env tcoffee; mv /root/sandbox /publish'
+    - docker run -v $HOME/tcoffee:/root/tcoffee -v $HOME/repo:/root/repo -v $HOME/publish:/publish cbcrg/tcoffee-build-box:1.2 bash -c 'tcoffee/build/build.sh env tcoffee; mv /root/sandbox /publish'
     - sudo chown -R $(id -u):$(id -g) ~/repo ~/publish 
 test: 
   override:
