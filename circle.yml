@@ -13,13 +13,12 @@ dependencies:
     - sudo chown -R $(id -u):$(id -g) ~/repo ~/publish 
 test: 
   override:
-    - mv ~/publish/sandbox/build docker/tcoffee
-    - cd docker/ && docker build -t cbcrg/tcoffee:latest . 
     - > 
-      version=$(cat ~/publish/sandbox/.version)
-      docker tag cbcrg/tcoffee:latest cbcrg/tcoffee:$version
-      docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      docker push cbcrg/tcoffee:$version
+      mv ~/publish/sandbox/build docker/tcoffee
+      export version=$(cat ~/publish/sandbox/.version)
+      cd docker/ 
+      docker build -t cbcrg/tcoffee:latest . 
+      docker tag cbcrg/tcoffee:latest cbcrg/tcoffee:$version 
     - mkdir -p ~/publish/sandbox/test-results
     - docker run -v ~/tcoffee:/root/tcoffee -v ~/publish/sandbox/test-results:/test-results cbcrg/tcoffee:latest bash /root/tcoffee/docker/run-tests.sh :
         timeout: 2700
@@ -29,4 +28,6 @@ deployment:
   hub:
     commands:
       - rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/ 
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push cbcrg/tcoffee:latest
+      - docker push cbcrg/tcoffee:$version
