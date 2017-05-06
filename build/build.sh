@@ -82,10 +82,10 @@ fi
 # default install builder location 
 #
 if [ -z $INSTALLER ]; then 
-	INSTALLER=~/installbuilder/bin/builder
+	INSTALLER=$HOME/installbuilder/bin/builder
 	if [ $OSNAME == "macosx" ]
 	then
-	INSTALLER=~/installbuilder/bin/Builder.app/Contents/MacOS/installbuilder.sh
+	INSTALLER=$HOME/installbuilder/bin/Builder.app/Contents/MacOS/installbuilder.sh
 	fi
 fi
 
@@ -134,7 +134,7 @@ DIST_BASE=$SANDBOX/distributions/Beta/
 fi
 
 # Distribution package file name
-DIST_DIR=$DIST_BASE/$VERSION/$OSNAME
+DIST_DIR=$DIST_BASE/$VERSION
 DIST_NAME=T-COFFEE_distribution_$VERSION.tar.gz
 DIST_HOST='tcoffeeo@tcoffee.org:~/public_html/Packages/'
 
@@ -157,6 +157,9 @@ function env()
 {
   echo "[ env ]"
 
+  echo "- PWD         : $PWD" 
+  echo "- PATH        : $PATH"
+  echo "- HOME        : $HOME"
   echo "- WORKSPACE   : $WORKSPACE"
   echo "- OSNAME      : $OSNAME"
   echo "- OSARCH      : $OSARCH"
@@ -179,7 +182,6 @@ function env()
   echo ". DIST_HOST   : $DIST_HOST"
   echo ". INST_NAME   : $INST_NAME"
   echo ". DO_TEST     : $DO_TEST"
-
 }
 
 #
@@ -188,7 +190,7 @@ function env()
 function clean() 
 {
 	echo "[ clean ]"
-	rm -rf $SANDBOX
+	rm -rf $SANDBOX/*
 
 }
 
@@ -202,8 +204,8 @@ function doc_test() {
 	if [ -z $TEST_HTML_PREFIX ]; 	then TEST_HTML_PREFIX="all"; fi
 	if [ -z $TEST_STOP ]; 			then TEST_STOP="error"; fi
 	if [ -z $TEST_DELETE ]; 		then TEST_DELETE="never"; fi
-	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX="$WORKSPACE/test-results/all"; fi
-	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT="$WORKSPACE/test-results/index.html"; fi
+	if [ -z $TEST_SANDBOX ];		then TEST_SANDBOX="$SANDBOX/test-results/all"; fi
+	if [ -z $TEST_OUTPUT ]; 		then TEST_OUTPUT="$SANDBOX/test-results/index.html"; fi
 	if [ -z $TEST_FILES ];			then TEST_FILES="-R ./all"; fi
 
 	TEST_CMDLINE="--var tcoffee.home=$TCDIR --stop $TEST_STOP --delete $TEST_DELETE --sandbox-dir \"$TEST_SANDBOX\" --html-path-prefix \"$TEST_HTML_PREFIX\" -o \"$TEST_OUTPUT\" $TEST_ARGS $TEST_FILES"
@@ -288,7 +290,8 @@ function build_binaries()
 
 	# create t-coffee binaries installation
 	cd $UNTARED
-	./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
+    ./install t_coffee -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin
+    ./install all -tclinkdb=./tclinkdb.txt -repo=$BUILD_REPO -tcdir=$TCDIR -exec=$TCDIR/bin || true
     
 	# Check that the binary has successfully compiled 
 	if [ ! -f $TCDIR/bin/t_coffee ] 
@@ -299,10 +302,10 @@ function build_binaries()
     
     
 	# add perl modules 
-	#cp -r $PERLM/lib/perl5/ $TCDIR/perl
-	mkdir -p $TCDIR/perl
-	cp $WORKSPACE/tcoffee/build/cpanm  $TCDIR/perl	
-        chmod +x $TCDIR/perl/cpanm
+	cp -r $PERLM $TCDIR
+	#mkdir -p $TCDIR/perl
+	#cp $WORKSPACE/tcoffee/build/cpanm  $TCDIR/perl	
+    #chmod +x $TCDIR/perl/cpanm
 
 	# add gfortran libraries
 	if [ $OSNAME == "macosx" ] 
@@ -317,7 +320,7 @@ function build_binaries()
 	# add extra pack packages 
 	#
 	# + hmmtop
-	cp $BUILD_REPO/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
+	cp $WORKSPACE/tcoffee/build/extra/hmmtop/2.1/$OSNAME-$OSARCH/* $TCDIR/plugins/$OSNAME
 
 	# + secondary_struc.py (by Carsten)
 	cp $WORKSPACE/tcoffee/build/extra/secondary_struc.py $TCDIR/plugins/$OSNAME/secondary_struc.py
@@ -403,6 +406,7 @@ function build_and_pack_stable() {
 	export CFLAGS="-O3"
 	export INST_NAME=T-COFFEE_installer_"$VERSION"_"$OSNAME"_"$OSARCH"
 	
+	build_perlm
 	build_binaries	
 	pack_binaries
 	pack_tarball
@@ -448,19 +452,15 @@ function copy_to_dropbox() {
 function tcoffee() {
 	echo "[ tcoffee ]"
 
-	env
-	clean
+    mkdir -p $SANDBOX && echo -n $VERSION > $SANDBOX/.version 
+    
 	build_dist
-	
 	build_and_pack_stable
-	build_and_pack_debug
 
 	if [ $DO_TEST == 1 ]; then
 	doc_test 
 	fi
-	
-	copy_to_dropbox
-} 
+}
 
 
 #

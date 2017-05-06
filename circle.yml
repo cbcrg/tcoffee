@@ -1,0 +1,40 @@
+machine:
+    services:
+        - docker
+dependencies:
+  pre:
+    - mkdir -p ~/repo 
+    - docker pull cbcrg/tcoffee-build-box:1.2
+  cache_directories:
+    - ~/repo
+  override:
+    - mkdir $HOME/publish
+    - > 
+      docker run -e BUILD_NUMBER=$CIRCLE_BUILD_NUM 
+      -v $HOME/tcoffee:/root/tcoffee 
+      -v $HOME/repo:/root/repo 
+      -v $HOME/publish:/publish 
+      cbcrg/tcoffee-build-box:1.2 
+      bash -c 'tcoffee/build/build.sh env tcoffee; mv /root/sandbox /publish'
+    - sudo chown -R $(id -u):$(id -g) ~/repo ~/publish 
+test: 
+  override:
+    - mv ~/publish/sandbox/build ~/tcoffee/docker/tcoffee 
+    - cd ~/tcoffee/docker/ && docker build -t xcoffee . 
+    - mkdir -p ~/publish/sandbox/test-results
+    - docker run -v ~/tcoffee:/root/tcoffee -v ~/publish/sandbox/test-results:/test-results xcoffee bash /root/tcoffee/docker/run-tests.sh :
+        timeout: 2700
+    - rsync -avz -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/test-results/index.html ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/tests/test-results-linux-x64-$(date +"%Y-%m-%d").html
+                              
+deployment:
+  hub:
+    commands:
+      - rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/CircleCI/ 
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - > 
+        docker tag xcoffee cbcrg/tcoffee:latest;
+        docker push cbcrg/tcoffee:latest
+      - > 
+        version=$(cat ~/publish/sandbox/.version);
+        docker tag xcoffee cbcrg/tcoffee:$version;
+        docker push cbcrg/tcoffee:$version

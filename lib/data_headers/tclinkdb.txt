@@ -168,7 +168,7 @@ PG mus4 version			4.0
 
 PG pcma 4_TCOFFEE		PCMA
 PG pcma type			sequence_multiple_aligner		
-PG pcma ADDRESS			ftp://iole.swmed.edu/pub/PCMA/
+PG pcma ADDRESS			http://prodata.swmed.edu/pcma/pcma.php
 PG pcma language		C
 PG pcma language2		C	
 PG pcma source			http://prodata.swmed.edu/download/pub/PCMA/pcma.tar.gz
@@ -224,17 +224,17 @@ PG prank mode			mcoffee
 PG prank version		100303	    
 
 PG sap 4_TCOFFEE		SAP
-PG sap type			structure_pairwise_aligner		
+PG sap type			    structure_pairwise_aligner		
 PG sap ADDRESS			https://mathbio.crick.ac.uk/wiki/Software
 PG sap language			C
 PG sap language2		C	
 PG sap source			https://github.com/jkleinj/SAP/archive/v.1.1.3.tar.gz
-PG sap mode			expresso,3dcoffee
+PG sap mode			    expresso,3dcoffee
 PG sap version			1.1.3
-PG sap update_action		never
+PG sap update_action	never
 
 
-PG TMalign 4_TCOFFEE		TMALIGN
+PG TMalign 4_TCOFFEE	TMALIGN
 PG TMalign type			structure_pairwise_aligner		
 PG TMalign ADDRESS		http://zhanglab.ccmb.med.umich.edu/TM-align/TMalign.f
 PG TMalign language		Fortran
@@ -307,10 +307,10 @@ PG sfold ADDRESS		http://selab.janelia.org/software/consan/
 PG sfold language		empty
 PG sfold language2		empty
 PG sfold source			empty
-PG sfold update_action		never
+PG sfold update_action	never
 PG sfold mode			rcoffee
 
-PG RNAplfold 4_TCOFFEE		RNAPLFOLD
+PG RNAplfold 4_TCOFFEE	RNAPLFOLD
 PG RNAplfold type		RNA_secondarystructure_predictor
 PG RNAplfold ADDRESS		http://www.tbi.univie.ac.at/~ivo/RNA/
 PG RNAplfold language		C
@@ -327,7 +327,6 @@ PG retree language2		C
 PG retree source		http://www.tcoffee.org/Packages/mirrors/phylip-3.66.tar.gz
 PG retree  mode			trmsd, seq_reformat
 PG retree  version		3.66
-
 
 PG hmmtop 4_TCOFFEE		HMMTOP
 PG hmmtop type			protein_secondarystructure_predictor

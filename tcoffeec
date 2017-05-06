@@ -1,0 +1,2 @@
+#!/bin/bash 
+docker run -v $HOME:$HOME -w $PWD cbcrg/tcoffee:latest t_coffee "$@"

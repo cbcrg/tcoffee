@@ -1039,6 +1039,7 @@ sub install_source_package
     #
     elsif ( $pg eq "proda")
       {
+	`sed -i '' 's/int errno = 0;/int errno; errno = 0;/' Main.cc`;
 	&add_C_libraries("AlignedFragment.h", "vector", "iostream", "cstring","cstdlib");
 	&add_C_libraries("Main.cc", "vector", "climits");	
 	&add_C_libraries("Sequence.cc", "stdlib.h", "cstdio");	
@@ -1091,6 +1092,7 @@ sub install_source_package
     elsif ( $pg eq "retree")
       {
 	chdir "src";
+	&flush_command ("cp Makefile.unx Makefile");
 	&flush_command ("make $arguments all");
 	&flush_command ("make put");
 	system "cp ../exe/* $BIN";

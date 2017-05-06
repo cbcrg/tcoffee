@@ -89,15 +89,6 @@
             <value>$PERL5LIB:$DIR_4_TCOFFEE/perl/lib/perl5</value>
         </addEnvironmentVariable>
 
-	<!-- Append DYLD_LIBRARY_PATH if already exists (only on OSX) -->
-	<addEnvironmentVariable>
-            <name>DYLD_LIBRARY_PATH</name>
-            <scope>user</scope>
-            <value>$DYLD_LIBRARY_PATH:$DIR_4_TCOFFEE/gfortran</value>
-            <ruleList>
-                <platformTest type="osx"/>
-            </ruleList>
-        </addEnvironmentVariable>
 
 	<!--  Add EMAIL_4_TCOFFEE environment variable -->
 	<addEnvironmentVariable>
@@ -123,12 +114,6 @@
         <createDirectory>
             <path>${installdir}/tmp</path>
         </createDirectory>
-
-        <runProgram>
-            <abortOnError>0</abortOnError>
-            <program>${installdir}/perl/cpanm</program>
-            <programArguments>-q -n -l ${installdir}/perl SOAP::Lite XML::Simple</programArguments>
-        </runProgram>
 
     </postInstallationActionList>
     <enableRollback>1</enableRollback>
