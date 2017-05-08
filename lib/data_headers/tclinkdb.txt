@@ -312,12 +312,12 @@ PG sfold mode			rcoffee
 
 PG RNAplfold 4_TCOFFEE	RNAPLFOLD
 PG RNAplfold type		RNA_secondarystructure_predictor
-PG RNAplfold ADDRESS		http://www.tbi.univie.ac.at/~ivo/RNA/
-PG RNAplfold language		C
-PG RNAplfold language2		C
-PG RNAplfold source		https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_3_x/ViennaRNA-2.3.5.tar.gz
+PG RNAplfold ADDRESS	http://www.tbi.univie.ac.at/RNA/
+PG RNAplfold language	C
+PG RNAplfold language2	C
+PG RNAplfold source		http://www.tbi.univie.ac.at/RNA/packages/source/ViennaRNA-2.1.9.tar.gz	
 PG RNAplfold mode		rcoffee, seq_reformat
-PG RNAplfold version		2.3.5
+PG RNAplfold version	2.1.9
 
 PG retree 4_TCOFFEE		PHYLIP
 PG retree type			Phylogeny Reconstruction
