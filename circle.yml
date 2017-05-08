@@ -30,7 +30,10 @@ deployment:
   tcoffeeweb:
     branch: master
     commands:
-      - rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/ 
+      - > 
+        version=$(cat ~/publish/sandbox/.version);
+        rsync -avzr -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ~/publish/sandbox/distributions/* ec2-user@tcoffee.org:~/Dropbox/Public/public_html/Packages/;
+        ssh ec2-user@tcoffee.org "rm -rf ~/Dropbox/Public/public_html/Packages/Beta/Latest; cp -r ~/Dropbox/Public/public_html/Packages/Beta/$version ~/Dropbox/Public/public_html/Packages/Beta/Latest"  
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - > 
         docker tag xcoffee cbcrg/tcoffee:latest;
