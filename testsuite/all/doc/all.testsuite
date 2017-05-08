@@ -241,7 +241,7 @@ test: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_fast -output score_asci
 test: t_coffee sample_seq1.fasta -evaluate_mode t_coffee_non_extended -output score_ascii, score_html    
 test: t_coffee -other_pg seq_reformat -in 3d_sample4.aln -action +upper -output clustalw > 3d_sample4.cw_aln   
 test: t_coffee -other_pg apdb -aln 3d_sample4.aln    
-test: t_coffee  Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln    
+test: t_coffee -in Rsample_profile1.aln,Rsample_profile2.aln -mode=3dcoffee -outfile=aligned_prf.aln    
 test: t_coffee sample_seq1.fasta -in=Mclustalw_pair,Mclustalw_msa,Mslow_pair -outfile=clustal_text  
 
 # Missing Program fugueali
