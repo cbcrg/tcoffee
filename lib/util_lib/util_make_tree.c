@@ -1770,7 +1770,7 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
   
   tree2file (T, tmptree, "w");
   free_tree(T);
-  T=main_read_tree (tmptree); 
+  T=main_read_tree (tmptree);  
   
   return T;
 }
