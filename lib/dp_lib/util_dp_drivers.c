@@ -929,8 +929,10 @@ char *seq_file2msa_file (char *file, char *seq, char *aln)
   if (!file) return NULL;
   else if (file[0]=='#')
     {
+      char *lcom=NULL;
       //will run the T-Coffee master command
-      command=csprintf (command, "%s -seq seq -outfile aln -output fasta_aln -quiet >/dev/null 2>/dev/null", file+1);
+      lcom=csprintf (lcom, "%s -seq seq -outfile aln -output fasta_aln -quiet >/dev/null 2>/dev/null", file+1);
+      command=lcom;
     }
   else if ( !check_file_exists (file))
     {

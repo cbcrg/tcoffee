@@ -1634,7 +1634,10 @@ int read_array_size (void *array, size_t size)
     p-=2;
     if ( p[0].size_element ==0 && size==0)
       {
-	fprintf ( stderr, "\nERROR in read_array_size: trying to read the size of a malloced block");
+	int *x;
+	fprintf ( stderr, "\nERROR in read_array_size: trying to read the size of a malloced block [FATAL]");
+	x[1000]=1;
+	exit (0);
       }
     else if ( size ==0) return (int)p[0].size/p[0].size_element;
 

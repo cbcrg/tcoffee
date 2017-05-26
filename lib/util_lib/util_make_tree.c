@@ -1681,7 +1681,7 @@ double **aln2km_vector (Alignment *A, char *mode, int *dim)
 NT_node seq2dnd (Sequence *S, char *dpa_tree)
 {
   NT_node T=NULL;
-  
+  static char *tmptree=vtmpnam (NULL);
   if (!dpa_tree) return T;
   
   if (strm (dpa_tree, "kmdnd"))
@@ -1766,6 +1766,11 @@ NT_node seq2dnd (Sequence *S, char *dpa_tree)
   if (!T)
     myexit (fprintf_error ( stderr, "\nCould not produce/read %s tree [FATAL:%s]", dpa_tree, PROGRAM));
 
+  //make sure the internal tree is identical to a cached tree
+  
+  tree2file (T, tmptree, "w");
+  free_tree(T);
+  T=main_read_tree (tmptree); 
   
   return T;
 }
