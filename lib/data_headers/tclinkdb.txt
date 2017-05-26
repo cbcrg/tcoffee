@@ -324,7 +324,7 @@ PG retree type			Phylogeny Reconstruction
 PG retree ADDRESS		http://evolution.gs.washington.edu/phylip/
 PG retree language		C
 PG retree language2		C
-PG retree source		http://www.tcoffee.org/Packages/mirrors/phylip-3.66.tar.gz
+PG retree source		http://www.tcoffee.org/Packages/mirrors/source/phylip-3.66.tar.gz
 PG retree  mode			trmsd, seq_reformat
 PG retree  version		3.66
 
